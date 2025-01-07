@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bu27egwyvlthm"]
+
+[ext_resource type="PackedScene" uid="uid://c3vks6k40no5w" path="res://Scenes/Prefabs/FightingArea.tscn" id="1_gsc4f"]
+[ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Scenes/Prefabs/Player.tscn" id="2_bgxg2"]
+
+[node name="BasicLevel" type="Node2D"]
+
+[node name="FightingArea" parent="." instance=ExtResource("1_gsc4f")]
+
+[node name="Player" parent="." instance=ExtResource("2_bgxg2")]
+position = Vector2(46, 99)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(134, 120)
+zoom = Vector2(2, 2)
