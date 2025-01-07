@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://bbnioyc6ti8wn"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_gjax4"]
+[ext_resource type="Texture2D" uid="uid://d3g1up274niat" path="res://Data/Texture/TX Player.png" id="1_iynxk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cwyy0"]
+atlas = ExtResource("1_iynxk")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0jwqc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cwyy0")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pag6j"]
+size = Vector2(21, 44)
+
+[node name="Player" type="StaticBody2D"]
+script = ExtResource("1_gjax4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -25)
+sprite_frames = SubResource("SpriteFrames_0jwqc")
+animation = &"Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -21)
+shape = SubResource("RectangleShape2D_pag6j")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

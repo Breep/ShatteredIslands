@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bta6xc8u4s1gc"]
+
+[ext_resource type="PackedScene" uid="uid://u86kcfn8nx7u" path="res://Scenes/Prefabs/buying_area.tscn" id="1_b75sn"]
+[ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Scenes/Prefabs/Player.tscn" id="2_2ekh1"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="BuyingArea" parent="." instance=ExtResource("1_b75sn")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("2_2ekh1")]
+position = Vector2(-16, -553)
+scale = Vector2(4.75108, 4.75108)
