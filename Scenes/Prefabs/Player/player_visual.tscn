@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://ft2ivrvgsi2v"]
+
+[ext_resource type="Texture2D" uid="uid://d3g1up274niat" path="res://Data/Texture/TX Player.png" id="1_a8e6o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cwyy0"]
+atlas = ExtResource("1_a8e6o")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1360b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cwyy0")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[node name="PlayerVisual" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -25)
+sprite_frames = SubResource("SpriteFrames_1360b")
+animation = &"Idle"

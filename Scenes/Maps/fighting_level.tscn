@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bu27egwyvlthm"]
 
 [ext_resource type="PackedScene" uid="uid://c3vks6k40no5w" path="res://Scenes/Prefabs/FightingArea.tscn" id="1_gsc4f"]
-[ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Scenes/Prefabs/Player.tscn" id="2_bgxg2"]
+[ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Scenes/Prefabs/Player/player_fighting.tscn" id="2_bgxg2"]
 
 [node name="BasicLevel" type="Node2D"]
 
