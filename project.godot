@@ -14,6 +14,15 @@ config/name="ProjectA"
 run/main_scene="res://Scenes/Maps/fighting_level.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 
+[file_customization]
+
+folder_colors={
+"res://Data/": "red",
+"res://Resources/": "green",
+"res://Scenes/": "pink",
+"res://Scripts/": "purple"
+}
+
 [input]
 
 Select={
