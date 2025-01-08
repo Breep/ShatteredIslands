@@ -1,7 +1,7 @@
 extends Node2D
 class_name FightingArea
 
-# ============================== Scene nodes ==============================
+# ============================== Local scene nodes ==============================
 
 @onready var selectionSquareSprite: Sprite2D = $SelectionSquare/SquareSprite
 @onready var tileMap: TileMapLayer = $Map
@@ -16,7 +16,7 @@ var _selectionCellOld: Vector2 = Vector2.ZERO
 
 var isSelectionActive: bool = false
 
-@export var selectionCell: Vector2:
+var selectionCell: Vector2:
 	get:
 		return _selectionCell
 	set(value):
@@ -24,7 +24,7 @@ var isSelectionActive: bool = false
 		_selectionCell = value
 		_drawSelectionCell(_selectionCell)
 
-# ============================== Base functions ==============================
+# ============================== Node base functions ==============================
 
 func _ready() -> void:
 	pass
