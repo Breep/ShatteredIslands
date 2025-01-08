@@ -1,49 +1,61 @@
 extends Node2D
+class_name FightingArea
 
 # ==============================================================================
 
-@export var mapSize : Vector2
-@export var cellSize : int
-# coucou
+@onready var selectionSquareSprite: Sprite2D = $SelectionSquare/SquareSprite
+@onready var tileMap: TileMapLayer = $Map
+@onready var selectionMap: TileMapLayer = $Map/SelectionLayer
+
 # ==============================================================================
 
-@onready var selectionSquare : Node2D = $SelectionSquare
-@onready var selectionSquareSprite : Sprite2D = $SelectionSquare/SquareSprite
-@onready var tileMap : TileMapLayer = $TileMapLayer # Must be at local position (0,0)
+var _selectionCell: Vector2 = Vector2.ZERO
+var _selectionCellOld: Vector2 = Vector2.ZERO
+
+# ==============================================================================
+
+var isSelectionActive: bool = false
+
+@export var selectionCell: Vector2:
+	get:
+		return _selectionCell
+	set(value):
+		_selectionCellOld = _selectionCell
+		_selectionCell = value
+		drawSelectionCell(_selectionCell)
 
 # ==============================================================================
 
 func _ready() -> void:
-	_setSelectionSquareSpriteScale()
-	printSelectionSquareAtCell(Vector2(0, 0))
+	pass
 
 func _process(_delta: float) -> void:
 	pass
 
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("Select"):
-		printSelectionSquareAtCell(_getMouseOveringCell())
+		updateSelection(_getMouseOveringCell())
 
 # ==============================================================================
 
-func getActiveCell() -> Vector2:
-	return (selectionSquare.position/cellSize).floor()
-
-func printSelectionSquareAtCell(cell : Vector2) -> void:
-	if cell == getActiveCell() && selectionSquare.visible == true:
-		selectionSquare.visible = false
+func updateSelection(cell: Vector2) -> void:
+	print(cell, _selectionCell, _selectionCellOld, isSelectionActive)
+	if cell == _selectionCell and isSelectionActive == true:
+		isSelectionActive = false
+		selectionMap.erase_cell(_selectionCell)
 	else:
-		selectionSquare.visible = true
-	selectionSquare.position = cell * cellSize
+		isSelectionActive = true
+		selectionCell = cell
+
+func drawSelectionCell(cell: Vector2) -> void:
+	if isSelectionActive:
+		selectionMap.erase_cell(_selectionCellOld)
+		selectionMap.set_cell(cell, 0, Vector2(0,0), 0)
+
+func getGlobalCellPosition(cell: Vector2) -> Vector2:
+	return to_global(tileMap.map_to_local(cell))
 
 # ==============================================================================
-
-func _setSelectionSquareSpriteScale():
-	var textureSize = selectionSquareSprite.texture.get_size()
-	selectionSquareSprite.scale.x = cellSize / textureSize.x
-	selectionSquareSprite.scale.y = cellSize / textureSize.y
-	selectionSquareSprite.position.x = cellSize / 2
-	selectionSquareSprite.position.y = cellSize / 2
 
 func _getMouseOveringCell() -> Vector2:
-	return (get_local_mouse_position()/cellSize).floor()
+	return tileMap.local_to_map(tileMap.get_local_mouse_position())

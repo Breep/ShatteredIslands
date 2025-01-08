@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bbnioyc6ti8wn"]
 
-[ext_resource type="Script" path="res://Scripts/player.gd" id="1_gjax4"]
+[ext_resource type="Script" path="res://Scripts/player_fighting.gd" id="1_gjax4"]
 [ext_resource type="PackedScene" uid="uid://ft2ivrvgsi2v" path="res://Scenes/Prefabs/Player/player_visual.tscn" id="2_iwmy3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lk7gr"]

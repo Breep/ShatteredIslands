@@ -2,12 +2,12 @@ extends StaticBody2D
 
 # ==============================================================================
 
-var fightingAreaNode: Node2D
+@onready var fightingArea: FightingArea = get_tree().get_root().find_child("FightingArea", true, false)
 
 # ==============================================================================
 
 func _ready() -> void:
-	fightingAreaNode = get_tree().get_root().find_child("FightingArea", true, false)
+	moveToCell(Vector2(0,0))
 
 func _physics_process(delta: float) -> void:
 	pass
@@ -20,10 +20,11 @@ func _input(_event: InputEvent) -> void:
 # ==============================================================================
 
 func moveToCell(cell : Vector2):
-	position = (cell + 0.5*Vector2(1,1)) * fightingAreaNode.cellSize
+	position = fightingArea.getGlobalCellPosition(cell)
 	print("Moving to " + str(cell))
 
 # ==============================================================================
 
 func _on_timer_timeout() -> void:
-	moveToCell(fightingAreaNode.getActiveCell())
+	if fightingArea.isSelectionActive:
+		moveToCell(fightingArea.selectionCell)
