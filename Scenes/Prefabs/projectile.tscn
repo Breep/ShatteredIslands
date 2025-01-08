@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://mpgkfdwmx4n0"]
+
+[ext_resource type="Script" path="res://Scripts/projectile.gd" id="1_jv0hn"]
+[ext_resource type="Texture2D" uid="uid://cwu8bmw22x36k" path="res://Data/Assets/Fantasy Items/TTRPG-Art-Asset_04.png" id="1_udey6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_212ii"]
+size = Vector2(547, 202)
+
+[node name="Projectile" type="Area2D"]
+scale = Vector2(0.05, 0.05)
+script = ExtResource("1_jv0hn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2.5, 22)
+shape = SubResource("RectangleShape2D_212ii")
+
+[node name="Ttrpg-art-asset04" type="Sprite2D" parent="."]
+rotation = 0.71733
+texture = ExtResource("1_udey6")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
