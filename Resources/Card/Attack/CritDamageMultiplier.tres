@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Card" load_steps=4 format=3 uid="uid://dmi455hihafaq"]
+
+[ext_resource type="Texture2D" uid="uid://bxd1jnaci6olo" path="res://Data/Assets/Card/ICONS/ATTACK color.png" id="1_3dv3e"]
+[ext_resource type="Texture2D" uid="uid://biqtkdk6s182x" path="res://Data/Assets/Fantasy Items/TTRPG-Art-Asset_09.png" id="2_hwh4i"]
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/Card.gd" id="3_xmnj8"]
+
+[resource]
+script = ExtResource("3_xmnj8")
+name = "Crit Multiplier"
+image = ExtResource("2_hwh4i")
+famille = ExtResource("1_3dv3e")
+cost = 0
+description = "+25 Crit Damage Multiplier"
+lvl = 0
+attack_speed_increase = 0.0
+attack_damage = 0.0
+double_attack_chance = 0.0
+lifesteal = 0.0
+crit_chance = 0.0
+crit__damage_multiplier = 25.0
+health = 0.0
+armor = 0.0
+regen_health = 0.0

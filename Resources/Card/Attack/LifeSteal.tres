@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Card" load_steps=4 format=3 uid="uid://blocjp720wkiu"]
+
+[ext_resource type="Texture2D" uid="uid://bxd1jnaci6olo" path="res://Data/Assets/Card/ICONS/ATTACK color.png" id="1_4xtx2"]
+[ext_resource type="Texture2D" uid="uid://cn2rrw4akiw5e" path="res://Data/Assets/Fantasy Items/TTRPG-Art-Asset_10.png" id="2_gdl2r"]
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/Card.gd" id="3_jypew"]
+
+[resource]
+script = ExtResource("3_jypew")
+name = "Lifesteal"
+image = ExtResource("2_gdl2r")
+famille = ExtResource("1_4xtx2")
+cost = 0
+description = "+10% LifeSteal"
+lvl = 0
+attack_speed_increase = 0.0
+attack_damage = 0.0
+double_attack_chance = 0.0
+lifesteal = 10.0
+health = 0.0
+armor = 0.0
+regen_health = 0.0

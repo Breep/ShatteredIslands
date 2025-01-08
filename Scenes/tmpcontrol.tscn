@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvoqgnwbwgfvc"]
+
+[ext_resource type="Script" path="res://tmpcontrol.gd" id="1_iqdu4"]
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/Family.gd" id="2_a3yff"]
+[ext_resource type="Resource" uid="uid://t5dw23oxbdir" path="res://Resources/Families/Attack.tres" id="3_sjnoj"]
+[ext_resource type="Resource" uid="uid://d25t1layox48r" path="res://Resources/RulesGame/NormalGameCardRules.tres" id="4_2ccrn"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_iqdu4")
+family_array = Array[ExtResource("2_a3yff")]([ExtResource("3_sjnoj")])
+cardnumberrules = ExtResource("4_2ccrn")

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Card" load_steps=4 format=3 uid="uid://dgxkqk2g0iv7w"]
+
+[ext_resource type="Texture2D" uid="uid://cia42t0jcdkfg" path="res://Data/Assets/Card/ICONS/HP color.png" id="1_vnpsd"]
+[ext_resource type="Texture2D" uid="uid://47gwbjsdtwph" path="res://Data/Assets/Card/pngegg (1).png" id="2_x2m3x"]
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/Card.gd" id="3_pwcvm"]
+
+[resource]
+script = ExtResource("3_pwcvm")
+name = "Default"
+image = ExtResource("2_x2m3x")
+famille = ExtResource("1_vnpsd")
+cost = 0
+description = "TEST TEST TEST"
+lvl = 17

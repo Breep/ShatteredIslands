@@ -1,10 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://dhtfiyt1qvdre"]
+[gd_scene load_steps=9 format=3 uid="uid://dhtfiyt1qvdre"]
 
 [ext_resource type="Texture2D" uid="uid://cwht2t4m2e2v8" path="res://Data/Assets/Card/pngegg.png" id="1_0eokx"]
+[ext_resource type="Texture2D" uid="uid://s0h8lcs7kd5o" path="res://Data/Assets/Card/FRONT-retag.png" id="1_td0wn"]
+[ext_resource type="Script" path="res://Scripts/CardUI.gd" id="1_vvwj2"]
+[ext_resource type="Texture2D" uid="uid://bxd1jnaci6olo" path="res://Data/Assets/Card/ICONS/ATTACK color.png" id="2_wdn81"]
+[ext_resource type="Texture2D" uid="uid://dye8b1hhcuh2h" path="res://Data/Assets/Fantasy Items/TTRPG-Art-Asset_02.png" id="3_a4s8g"]
+[ext_resource type="Texture2D" uid="uid://nxj6jw2phtcp" path="res://Data/Assets/Card/ICONS/MANA color.png" id="5_3jyi8"]
+[ext_resource type="Texture2D" uid="uid://y0t815fi2pdf" path="res://Data/Assets/Card/ICONS/MANA.png" id="5_4mhlr"]
+[ext_resource type="Texture2D" uid="uid://ba6cllpcqe1xc" path="res://Data/Assets/Card/ICONS/star.png" id="7_e6leq"]
 
-[node name="Card" type="Control"]
+[node name="CardUI" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+script = ExtResource("1_vvwj2")
 
 [node name="Card" type="Panel" parent="."]
 custom_minimum_size = Vector2(600, 1200)
@@ -13,37 +21,167 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -300.0
-offset_top = -600.0
+offset_top = -428.0
 offset_right = 300.0
 offset_bottom = 772.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="Card"]
-custom_minimum_size = Vector2(600, 1200)
-layout_mode = 2
-offset_right = 600.0
-offset_bottom = 1200.0
-texture = ExtResource("1_0eokx")
-expand_mode = 1
+[node name="Card" type="TextureRect" parent="Card"]
+layout_mode = 0
+offset_left = 611.0
+offset_top = 334.0
+offset_right = 1010.0
+offset_bottom = 1152.0
+texture = ExtResource("1_td0wn")
+expand_mode = 4
 stretch_mode = 5
 
-[node name="Name" type="RichTextLabel" parent="Card"]
+[node name="Fond" type="NinePatchRect" parent="Card/Card"]
+z_index = -1
+layout_mode = 0
+offset_left = 12.0
+offset_top = 146.0
+offset_right = 382.0
+offset_bottom = 444.0
+texture = ExtResource("1_0eokx")
+region_rect = Rect2(149.186, 747.624, 464.28, 220.468)
+
+[node name="Type" type="TextureRect" parent="Card/Card"]
+layout_mode = 0
+offset_left = 145.0
+offset_top = 490.0
+offset_right = 230.0
+offset_bottom = 575.0
+texture = ExtResource("2_wdn81")
+expand_mode = 1
+
+[node name="Title" type="RichTextLabel" parent="Card/Card"]
 custom_minimum_size = Vector2(120, 60)
-layout_mode = 2
-offset_left = 153.0
-offset_top = 619.0
-offset_right = 511.0
-offset_bottom = 679.0
+layout_mode = 0
+offset_left = 87.0
+offset_top = 460.0
+offset_right = 334.0
+offset_bottom = 520.0
 size_flags_vertical = 8
-theme_override_font_sizes/normal_font_size = 35
+theme_override_font_sizes/normal_font_size = 25
 text = "JINTO LE MAGICIEN
 "
 
-[node name="Buy" type="TextureButton" parent="Card"]
-custom_minimum_size = Vector2(200, 100)
+[node name="Image" type="TextureRect" parent="Card/Card"]
+z_index = -1
+layout_mode = 0
+offset_left = 35.0
+offset_top = 131.0
+offset_right = 377.0
+offset_bottom = 473.0
+texture = ExtResource("3_a4s8g")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Description" type="Label" parent="Card/Card"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 570.0
+offset_right = 371.0
+offset_bottom = 644.0
+theme_override_font_sizes/font_size = 35
+text = "+10 % Attack Speed"
+
+[node name="Rarity" type="Control" parent="Card/Card"]
+anchors_preset = 0
+offset_left = 182.0
+offset_top = 631.0
+offset_right = 228.0
+offset_bottom = 677.0
+
+[node name="Common" type="TextureRect" parent="Card/Card/Rarity"]
+visible = false
+layout_mode = 0
+offset_right = 46.0
+offset_bottom = 46.0
+texture = ExtResource("5_4mhlr")
+expand_mode = 1
+
+[node name="Rare" type="TextureRect" parent="Card/Card/Rarity"]
+visible = false
+layout_mode = 0
+offset_right = 46.0
+offset_bottom = 46.0
+texture = ExtResource("5_3jyi8")
+expand_mode = 1
+
+[node name="Epic" type="TextureRect" parent="Card/Card/Rarity"]
+visible = false
+modulate = Color(18.379, 0, 27.568, 1)
+layout_mode = 0
+offset_right = 46.0
+offset_bottom = 46.0
+texture = ExtResource("5_3jyi8")
+expand_mode = 1
+
+[node name="Level" type="Label" parent="Card/Card"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 156.0
+offset_right = 72.0
+offset_bottom = 190.0
+theme_override_font_sizes/font_size = 24
+text = "1/5
+"
+
+[node name="Control" type="Control" parent="Card/Card"]
+custom_minimum_size = Vector2(200, 50)
+anchors_preset = 0
+offset_left = 32.0
+offset_top = 156.0
+offset_right = 72.0
+offset_bottom = 196.0
+
+[node name="lvlcontainer" type="VBoxContainer" parent="Card/Card/Control"]
+custom_minimum_size = Vector2(100, 200)
+layout_mode = 0
+offset_left = -89.0
+offset_top = 60.0
+offset_right = 99.0
+offset_bottom = 276.0
+
+[node name="0" type="TextureRect" parent="Card/Card/Control/lvlcontainer"]
+visible = false
+custom_minimum_size = Vector2(50, 30)
 layout_mode = 2
-offset_top = 1268.0
-offset_right = 600.0
-offset_bottom = 1368.0
-size_flags_vertical = 8
+texture = ExtResource("7_e6leq")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="1" type="TextureRect" parent="Card/Card/Control/lvlcontainer"]
+visible = false
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+texture = ExtResource("7_e6leq")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="2" type="TextureRect" parent="Card/Card/Control/lvlcontainer"]
+visible = false
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+texture = ExtResource("7_e6leq")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="3" type="TextureRect" parent="Card/Card/Control/lvlcontainer"]
+visible = false
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+texture = ExtResource("7_e6leq")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="4" type="TextureRect" parent="Card/Card/Control/lvlcontainer"]
+visible = false
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+texture = ExtResource("7_e6leq")
+expand_mode = 3
+stretch_mode = 5

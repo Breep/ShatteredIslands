@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Card" load_steps=4 format=3 uid="uid://be5mafyro835u"]
+
+[ext_resource type="Texture2D" uid="uid://bxd1jnaci6olo" path="res://Data/Assets/Card/ICONS/ATTACK color.png" id="1_l5nnr"]
+[ext_resource type="Texture2D" uid="uid://btjlaglqy6ngn" path="res://Data/Assets/Fantasy Items/TTRPG-Art-Asset_05.png" id="2_07v6v"]
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/Card.gd" id="3_euvmj"]
+
+[resource]
+script = ExtResource("3_euvmj")
+name = "Attack Damage"
+image = ExtResource("2_07v6v")
+famille = ExtResource("1_l5nnr")
+cost = 0
+description = "+10 Attack Damage"
+lvl = 1
+rarity = 2
+attack_speed_increase = 0.0
+attack_damage = 10.0
+double_attack_chance = 0.0
+lifesteal = 0.0
+crit_chance = 0.0
+crit__damage_multiplier = 0.0
+health = 0.0
+armor = 0.0
+regen_health = 0.0
