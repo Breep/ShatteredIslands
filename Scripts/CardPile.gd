@@ -68,7 +68,7 @@ func shuffle() -> void:
 	
 	
 # Construire et afficher le deck
-func construct_pile_deck(families: Array[Family], gamerules: CardNumberRules) -> void:
+func construct_pile_deck(families: Array[Family], gamerules: CardRules) -> void:
 	deck_pile.clear()
 	
 	# Parcourt chaque famille

@@ -1,22 +1,20 @@
 extends Control
+class_name CardUI
 
-var card : Card
-@onready var cardTextureRect : TextureRect = $Card/Card
-@onready var descriptionLabel : Label = $Card/Card/Description
-@onready var image : TextureRect = $Card/Card/Image
-@onready var title : RichTextLabel = $Card/Card/Title
-@onready var type : TextureRect = $Card/Card/Type
-@onready var level : Label = $Card/Card/Level
-@onready var rarity : Control = $Card/Card/Rarity
-@onready var lvlcontainer : VBoxContainer = $Card/Card/Control/lvlcontainer
+@onready var descriptionLabel : Label = $Card/Description
+@onready var image : TextureRect = $Card/Image
+@onready var title : RichTextLabel = $Card/Title
+@onready var type : TextureRect = $Card/Type
+@onready var level : Label = $Card/Level
+@onready var rarity : Control = $Card/Rarity
+@onready var lvlcontainer : VBoxContainer = $Card/Control/lvlcontainer
 
 
 func _ready() -> void:
-	card = load("res://Resources/Card/Attack/AttackDamage.tres")
-	update_visual_card()
+	pass
 	
 	
-func update_visual_card() :
+func update_visual_card(card: Card) :
 	descriptionLabel.text = card.description
 	image.texture = card.image
 	type.texture = card.famille
@@ -25,13 +23,13 @@ func update_visual_card() :
 	match card.rarity :
 		Card.Rarity.COMMON:
 			print("Carte Commune")
-			$Card/Card/Rarity/Common.show()
+			$Card/Rarity/Common.show()
 		Card.Rarity.RARE:
 			print("Carte Rare")
-			$Card/Card/Rarity/Rare.show()
+			$Card/Rarity/Rare.show()
 		Card.Rarity.EPIC:
 			print("Carte Epic")
-			$Card/Card/Rarity/Epic.show()
+			$Card/Rarity/Epic.show()
 	for i in card.lvl:
 		var hbox_node = lvlcontainer.get_node(str(i))
 		if hbox_node:

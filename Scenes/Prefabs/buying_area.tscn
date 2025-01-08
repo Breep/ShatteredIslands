@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=4 uid="uid://u86kcfn8nx7u"]
+[gd_scene load_steps=7 format=4 uid="uid://u86kcfn8nx7u"]
 
 [ext_resource type="Texture2D" uid="uid://b3b4rk02h1kbh" path="res://Data/Assets/deqc368-97acf8e2-85c4-4cb6-a909-c2755fcf2fc7.jpg" id="1_u2cot"]
 [ext_resource type="Texture2D" uid="uid://bed1g7i3vu0ah" path="res://Data/Assets/Table and chairs/Table.png" id="2_31a3a"]
+[ext_resource type="PackedScene" uid="uid://cjkk5t7dhm46i" path="res://Scenes/Card/card_shop.tscn" id="2_osxc1"]
 [ext_resource type="Texture2D" uid="uid://5ach8onuusti" path="res://Data/Assets/Table and chairs/Chair.png" id="3_6orla"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vim1a"]
@@ -19,62 +20,11 @@ sources/0 = SubResource("TileSetAtlasSource_vim1a")
 tile_map_data = PackedByteArray("AAD/////AAAAAAAAAAAAAP//AAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAP//AAAAAAAAAAABAAAAAAAAAAAAAAD+////AAAAAAAAAAD+/wAAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_se2fp")
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 337.0
-offset_top = 733.0
-offset_right = 377.0
-offset_bottom = 773.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
-layout_mode = 0
-offset_left = -584.0
-offset_top = -1249.0
-offset_right = 238.0
-offset_bottom = -899.0
-scale = Vector2(2.88, 2.84)
-alignment = 1
-
-[node name="ColorRect" type="ColorRect" parent="Control/HBoxContainer"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-color = Color(0.244776, 0.244776, 0.244776, 1)
-
-[node name="Label" type="Label" parent="Control/HBoxContainer/ColorRect"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "Fake CARD"
-
-[node name="ColorRect2" type="ColorRect" parent="Control/HBoxContainer"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-color = Color(0.244776, 0.244776, 0.244776, 1)
-
-[node name="Label" type="Label" parent="Control/HBoxContainer/ColorRect2"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "Fake CARD"
-
-[node name="ColorRect3" type="ColorRect" parent="Control/HBoxContainer"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-color = Color(0.244776, 0.244776, 0.244776, 1)
-
-[node name="Label" type="Label" parent="Control/HBoxContainer/ColorRect3"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "Fake CARD"
-
-[node name="HBoxContainer2" type="VBoxContainer" parent="Control"]
-layout_mode = 0
-offset_left = -2494.0
-offset_top = -1813.0
-offset_right = -2023.0
-offset_bottom = 343.0
+[node name="CardShop" parent="." instance=ExtResource("2_osxc1")]
+offset_left = 89.0
+offset_top = -761.0
+offset_right = 1725.0
+offset_bottom = 4.0
 
 [node name="TablePlace" type="Node2D" parent="."]
 position = Vector2(-770, 9.99999)

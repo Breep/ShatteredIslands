@@ -6,9 +6,11 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="BuyingArea" parent="." instance=ExtResource("1_b75sn")]
-position = Vector2(36, 5)
+position = Vector2(-9, -4)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(6, 0)
+zoom = Vector2(0.3, 0.3)
 
 [node name="PlayerBuying" parent="." instance=ExtResource("2_jcs3y")]
 position = Vector2(-749, -430)
