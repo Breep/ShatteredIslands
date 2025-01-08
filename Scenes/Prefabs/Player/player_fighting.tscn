@@ -6,12 +6,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lk7gr"]
 size = Vector2(21, 44)
 
-[node name="Player" type="StaticBody2D"]
+[node name="Player" type="StaticBody2D" groups=["PLAYERS"]]
 script = ExtResource("1_gjax4")
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
-autostart = true
 
 [node name="PlayerVisual" parent="." instance=ExtResource("2_iwmy3")]
 
@@ -19,4 +15,13 @@ autostart = true
 position = Vector2(0.5, -21)
 shape = SubResource("RectangleShape2D_lk7gr")
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="Timers" type="Node" parent="."]
+
+[node name="MovingTimer" type="Timer" parent="Timers"]
+wait_time = 3.0
+autostart = true
+
+[node name="AutoAttackTimer" type="Timer" parent="Timers"]
+
+[connection signal="timeout" from="Timers/MovingTimer" to="." method="_on_moving_timer_timeout"]
+[connection signal="timeout" from="Timers/AutoAttackTimer" to="." method="_on_auto_attack_timer_timeout"]

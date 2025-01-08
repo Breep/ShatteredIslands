@@ -1,18 +1,18 @@
 extends Node2D
 class_name FightingArea
 
-# ==============================================================================
+# ============================== Scene nodes ==============================
 
 @onready var selectionSquareSprite: Sprite2D = $SelectionSquare/SquareSprite
 @onready var tileMap: TileMapLayer = $Map
 @onready var selectionMap: TileMapLayer = $Map/SelectionLayer
 
-# ==============================================================================
+# ============================== Private ==============================
 
 var _selectionCell: Vector2 = Vector2.ZERO
 var _selectionCellOld: Vector2 = Vector2.ZERO
 
-# ==============================================================================
+# ============================== Public ==============================
 
 var isSelectionActive: bool = false
 
@@ -22,9 +22,9 @@ var isSelectionActive: bool = false
 	set(value):
 		_selectionCellOld = _selectionCell
 		_selectionCell = value
-		drawSelectionCell(_selectionCell)
+		_drawSelectionCell(_selectionCell)
 
-# ==============================================================================
+# ============================== Base functions ==============================
 
 func _ready() -> void:
 	pass
@@ -34,12 +34,11 @@ func _process(_delta: float) -> void:
 
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("Select"):
-		updateSelection(_getMouseOveringCell())
+		_updateSelection(_getMouseOveringCell())
 
-# ==============================================================================
+# ============================== Private functions ==============================
 
-func updateSelection(cell: Vector2) -> void:
-	print(cell, _selectionCell, _selectionCellOld, isSelectionActive)
+func _updateSelection(cell: Vector2) -> void:
 	if cell == _selectionCell and isSelectionActive == true:
 		isSelectionActive = false
 		selectionMap.erase_cell(_selectionCell)
@@ -47,15 +46,15 @@ func updateSelection(cell: Vector2) -> void:
 		isSelectionActive = true
 		selectionCell = cell
 
-func drawSelectionCell(cell: Vector2) -> void:
+func _drawSelectionCell(cell: Vector2) -> void:
 	if isSelectionActive:
 		selectionMap.erase_cell(_selectionCellOld)
 		selectionMap.set_cell(cell, 0, Vector2(0,0), 0)
 
-func getGlobalCellPosition(cell: Vector2) -> Vector2:
-	return to_global(tileMap.map_to_local(cell))
-
-# ==============================================================================
-
 func _getMouseOveringCell() -> Vector2:
 	return tileMap.local_to_map(tileMap.get_local_mouse_position())
+
+# ============================== public functions ==============================
+
+func getGlobalCellPosition(cell: Vector2) -> Vector2:
+	return to_global(tileMap.map_to_local(cell))
