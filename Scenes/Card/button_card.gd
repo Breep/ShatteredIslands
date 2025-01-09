@@ -1,15 +1,16 @@
 extends Button
-#
-#@export var angle_x_max: float = 15.0
-#@export var angle_y_max: float = 15.0
+
+
+@export var angle_x_max: float = 15.0
+@export var angle_y_max: float = 15.0
 #@export var max_offset_shadow: float = 50.0
-#
+
 #var tween_rot: Tween
 #var tween_hover: Tween
 #var tween_handle: Tween
 #
-#
-#@onready var card_texture = $"."
+
+@onready var card_texture = $SubViewportContainer
 #
 #var following_mouse: bool = false
 #@onready var collision_shape = $Area2D/CollisionShape2D
@@ -19,8 +20,8 @@ extends Button
 		#tween_hover.kill()
 		#tween_hover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
 		#tween_hover.tween_property(self, "scale", Vector2(1.2, 1.2), 0.5)
-#
-#
+
+
 #func _on_mouse_exited() -> void:
 	## Reset rotation
 	#if tween_rot and tween_rot.is_running():
@@ -54,31 +55,23 @@ extends Button
 		#tween_handle = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 		#tween_handle.tween_property(self, "rotation", 0.0, 0.3)
 #
-#func _on_gui_input(event: InputEvent) -> void:
-	#
-	#
+func _on_gui_input(event: InputEvent) -> void:
+	print("coucou")
+	
 	#handle_mouse_click(event)
-	#
-	## Don't compute rotation when moving the card
-	#if following_mouse: return
-	#if not event is InputEventMouseMotion: return
-	#
-	## Handles rotation
-	## Get local mouse pos
-	#var mouse_pos: Vector2 = get_local_mouse_position()
-	##print("Mouse: ", mouse_pos)
-	##print("Card: ", position + size)
-	#var diff: Vector2 = (position + size) - mouse_pos
-#
-	#var lerp_val_x: float = remap(mouse_pos.x, 0.0, size.x, 0, 1)
-	#var lerp_val_y: float = remap(mouse_pos.y, 0.0, size.y, 0, 1)
-	##print("Lerp val x: ", lerp_val_x)
-	##print("lerp val y: ", lerp_val_y)
-#
-	#var rot_x: float = rad_to_deg(lerp_angle(-angle_x_max, angle_x_max, lerp_val_x))
-	#var rot_y: float = rad_to_deg(lerp_angle(angle_y_max, -angle_y_max, lerp_val_y))
-	##print("Rot x: ", rot_x)
-	##print("Rot y: ", rot_y)
-	#
-	#card_texture.material.set_shader_parameter("x_rot", rot_y)
-	#card_texture.material.set_shader_parameter("y_rot", rot_x)
+	if not event is InputEventMouseMotion: return
+	
+	print("coucou")
+	var mouse_pos: Vector2 = get_local_mouse_position()
+	var lerp_val_x: float = remap(mouse_pos.x, 0.0, size.x, 0, 1)
+	var lerp_val_y: float = remap(mouse_pos.y, 0.0, size.y, 0, 1)
+
+	var rot_x: float = rad_to_deg(lerp_angle(-angle_x_max, angle_x_max, lerp_val_x))
+	var rot_y: float = rad_to_deg(lerp_angle(angle_y_max, -angle_y_max, lerp_val_y))
+	
+	card_texture.material.set_shader_parameter("x_rot", rot_y)
+	card_texture.material.set_shader_parameter("y_rot", rot_x)
+
+
+func _on_pressed() -> void:
+	print("coucou")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dhtfiyt1qvdre"]
+[gd_scene load_steps=10 format=3 uid="uid://dhtfiyt1qvdre"]
 
 [ext_resource type="Texture2D" uid="uid://cwht2t4m2e2v8" path="res://Data/Assets/Card/pngegg.png" id="1_0eokx"]
 [ext_resource type="Texture2D" uid="uid://s0h8lcs7kd5o" path="res://Data/Assets/Card/FRONT-retag.png" id="1_td0wn"]
@@ -10,9 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://ba6cllpcqe1xc" path="res://Data/Assets/Card/ICONS/star.png" id="7_e6leq"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_k8idf"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ihiqh"]
-size = Vector2(398, 557)
 
 [node name="CardUI" type="Control"]
 layout_mode = 3
@@ -201,11 +198,3 @@ layout_mode = 2
 texture = ExtResource("7_e6leq")
 expand_mode = 3
 stretch_mode = 5
-
-[node name="Area2D" type="Area2D" parent="Card"]
-visible = false
-position = Vector2(195.5, 405)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Card/Area2D"]
-position = Vector2(5, 4.5)
-shape = SubResource("RectangleShape2D_ihiqh")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://0m4gt8l0iuta"]
 
-[ext_resource type="Texture2D" uid="uid://b3miu7xrncypm" path="res://Data/Assets/UI_fantasy/france-flag-round-circle-icon.png" id="1_i0055"]
+[ext_resource type="Texture2D" uid="uid://b3miu7xrncypm" path="res://Data/Assets/UI/france-flag-round-circle-icon.png" id="1_i0055"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oq1gf"]
 bg_color = Color(0.14, 0.14, 0.14, 0.7)

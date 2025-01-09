@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3miu7xrncypm"
-path="res://.godot/imported/france-flag-round-circle-icon.png-b6670be17b3e49ae64909ee1ec731d4f.ctex"
+uid="uid://rbfouv5lyrlu"
+path="res://.godot/imported/cadre hexagone 2.png-fdc6805bfd9922b61dc21f9260f6af84.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Data/Assets/UI_fantasy/france-flag-round-circle-icon.png"
-dest_files=["res://.godot/imported/france-flag-round-circle-icon.png-b6670be17b3e49ae64909ee1ec731d4f.ctex"]
+source_file="res://Data/Assets/UI/cadre hexagone 2.png"
+dest_files=["res://.godot/imported/cadre hexagone 2.png-fdc6805bfd9922b61dc21f9260f6af84.ctex"]
 
 [params]
 
