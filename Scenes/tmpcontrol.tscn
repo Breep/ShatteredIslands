@@ -1,10 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://cotsv1nuqk1eu"]
+[gd_scene load_steps=5 format=3 uid="uid://bjt4dktb15eng"]
 
-[ext_resource type="Script" path="res://tmpcontrol.gd" id="1_iqdu4"]
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/Family.gd" id="2_a3yff"]
 [ext_resource type="Resource" uid="uid://t5dw23oxbdir" path="res://Resources/Families/Attack.tres" id="3_sjnoj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sfmdp"]
+
+[sub_resource type="GDScript" id="GDScript_h3y5g"]
+script/source = "extends Control
+
+@export var family_array: Array[Family]
+@export var CardRules: CardRules
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	var deck: CardPile = CardPile.new()
+	deck.construct_pile_deck(family_array, CardRules)
+	deck.shuffle()
+	
+"
 
 [node name="Control" type="Control"]
 material = SubResource("ShaderMaterial_sfmdp")
@@ -14,5 +27,5 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_iqdu4")
+script = SubResource("GDScript_h3y5g")
 family_array = Array[ExtResource("2_a3yff")]([ExtResource("3_sjnoj")])
