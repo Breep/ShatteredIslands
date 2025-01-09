@@ -1,15 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://cjkk5t7dhm46i"]
+[gd_scene load_steps=10 format=3 uid="uid://cjkk5t7dhm46i"]
 
 [ext_resource type="Script" path="res://Scripts/card_shop.gd" id="1_mweij"]
 [ext_resource type="Texture2D" uid="uid://cwht2t4m2e2v8" path="res://Data/Assets/Card/pngegg.png" id="2_jg1n2"]
 [ext_resource type="Resource" uid="uid://d25t1layox48r" path="res://Resources/RulesGame/NormalGameCardRules.tres" id="2_t0tfq"]
 [ext_resource type="PackedScene" uid="uid://dhtfiyt1qvdre" path="res://Scenes/Card/card.tscn" id="3_2iv8r"]
-[ext_resource type="Texture2D" uid="uid://cw11wrtvh4kr7" path="res://Data/Assets/UI_fantasy/Default/Transparent border/panel-transparent-border-015.png" id="3_haaal"]
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/Family.gd" id="3_yah5a"]
 [ext_resource type="Resource" uid="uid://t5dw23oxbdir" path="res://Resources/Families/Attack.tres" id="4_5o2dl"]
-[ext_resource type="Texture2D" uid="uid://blkjjc6cyldow" path="res://Data/Assets/UI_fantasy/Default/Transparent border/panel-transparent-border-016.png" id="4_npeby"]
 [ext_resource type="Resource" uid="uid://dvxs8qyw4mhi5" path="res://Resources/Families/Defense.tres" id="5_1accq"]
-[ext_resource type="Texture2D" uid="uid://c0skpnciunhrd" path="res://Data/Assets/UI_fantasy/Default/Panel/panel-015.png" id="5_y8uoy"]
+[ext_resource type="Theme" uid="uid://1sn42nvock67" path="res://Data/font/Buy.tres" id="8_bkd53"]
+[ext_resource type="Theme" uid="uid://bhj5xnratn4tl" path="res://Data/font/OpenCardShop.tres" id="9_m1sk4"]
 
 [node name="CardShop" type="Control"]
 custom_minimum_size = Vector2(1000, 600)
@@ -61,63 +60,81 @@ layout_mode = 2
 
 [node name="ButtonContainer" type="GridContainer" parent="."]
 layout_mode = 0
-offset_left = 84.0
-offset_top = 674.0
-offset_right = 1704.0
-offset_bottom = 774.0
+offset_left = 9.0
+offset_top = 593.0
+offset_right = 1629.0
+offset_bottom = 693.0
+scale = Vector2(1.45, 1.45)
+theme_override_constants/h_separation = 30
+theme_override_constants/v_separation = 0
 columns = 4
 
-[node name="1" type="TextureButton" parent="ButtonContainer"]
-self_modulate = Color(0.6, 0.462745, 0.298039, 1)
-custom_minimum_size = Vector2(402, 70)
+[node name="Buy" type="Button" parent="ButtonContainer"]
 layout_mode = 2
-tooltip_text = "100 GOLDdddddddddddddddddddddddddddddd"
-texture_normal = ExtResource("3_haaal")
-texture_hover = ExtResource("4_npeby")
-stretch_mode = 0
+size_flags_horizontal = 4
+theme = ExtResource("8_bkd53")
+theme_override_font_sizes/font_size = 34
+text = "BUY 100 GOLDS"
 
-[node name="2" type="TextureButton" parent="ButtonContainer"]
-self_modulate = Color(0.6, 0.462745, 0.298039, 1)
-custom_minimum_size = Vector2(402, 70)
+[node name="Buy2" type="Button" parent="ButtonContainer"]
 layout_mode = 2
-texture_normal = ExtResource("3_haaal")
-texture_hover = ExtResource("4_npeby")
-stretch_mode = 0
+theme = ExtResource("8_bkd53")
+theme_override_font_sizes/font_size = 34
+text = "BUY 100 GOLDS"
 
-[node name="3" type="TextureButton" parent="ButtonContainer"]
-self_modulate = Color(0.6, 0.462745, 0.298039, 1)
-custom_minimum_size = Vector2(402, 70)
+[node name="Buy3" type="Button" parent="ButtonContainer"]
 layout_mode = 2
-texture_normal = ExtResource("3_haaal")
-texture_hover = ExtResource("4_npeby")
-stretch_mode = 0
+theme = ExtResource("8_bkd53")
+theme_override_font_sizes/font_size = 34
+text = "BUY 100 GOLDS"
 
-[node name="4" type="TextureButton" parent="ButtonContainer"]
-self_modulate = Color(0.6, 0.462745, 0.298039, 1)
-custom_minimum_size = Vector2(402, 70)
+[node name="Buy4" type="Button" parent="ButtonContainer"]
 layout_mode = 2
-texture_normal = ExtResource("3_haaal")
-texture_hover = ExtResource("4_npeby")
-stretch_mode = 0
+theme = ExtResource("8_bkd53")
+theme_override_font_sizes/font_size = 34
+text = "BUY 100 GOLDS"
 
 [node name="PlayerStats" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 6.0
+offset_top = 779.0
+offset_right = 439.0
+offset_bottom = 853.0
 
 [node name="GoldLabel" type="Label" parent="PlayerStats"]
 layout_mode = 2
-text = "Gold : 500"
+theme_override_font_sizes/font_size = 54
+text = "Gold Player : 500"
 
 [node name="Back" type="Button" parent="."]
-self_modulate = Color(0.6, 0.462745, 0.298039, 1)
 layout_mode = 0
-offset_left = 1159.0
-offset_top = 800.0
-offset_right = 1686.0
-offset_bottom = 927.0
-theme_override_font_sizes/font_size = 75
-text = "Back "
-icon = ExtResource("5_y8uoy")
+offset_left = 995.0
+offset_top = 783.0
+offset_right = 1614.0
+offset_bottom = 911.0
+theme = ExtResource("9_m1sk4")
+theme_override_font_sizes/font_size = 64
+text = "Back"
+
+[node name="HeroTalent" type="Button" parent="."]
+layout_mode = 0
+offset_left = 326.0
+offset_top = 992.0
+offset_right = 945.0
+offset_bottom = 1120.0
+theme = ExtResource("9_m1sk4")
+theme_override_font_sizes/font_size = 64
+text = "Open Heroes Talent"
+
+[node name="CardShopButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1002.0
+offset_top = 992.0
+offset_right = 1621.0
+offset_bottom = 1120.0
+theme = ExtResource("9_m1sk4")
+theme_override_font_sizes/font_size = 64
+text = "Open Card Shop"
 
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="CardShopButton" to="." method="_on_card_shop_button_pressed"]

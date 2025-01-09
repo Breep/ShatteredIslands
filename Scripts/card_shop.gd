@@ -32,3 +32,7 @@ func _on_card_selected(card: Card) -> void:
 func _on_back_pressed() -> void:
 	print("Achat annulé.")
 	$".".hide()
+	$CardShopButton.show()
+
+func _on_card_shop_button_pressed() -> void:
+	$".".show()
