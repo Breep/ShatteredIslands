@@ -1,23 +1,36 @@
-[gd_scene load_steps=7 format=4 uid="uid://u86kcfn8nx7u"]
+[gd_scene load_steps=13 format=4 uid="uid://u86kcfn8nx7u"]
 
 [ext_resource type="Texture2D" uid="uid://b3b4rk02h1kbh" path="res://Data/Assets/deqc368-97acf8e2-85c4-4cb6-a909-c2755fcf2fc7.jpg" id="1_u2cot"]
 [ext_resource type="Texture2D" uid="uid://bed1g7i3vu0ah" path="res://Data/Assets/Table and chairs/Table.png" id="2_31a3a"]
 [ext_resource type="PackedScene" uid="uid://cjkk5t7dhm46i" path="res://Scenes/Card/card_shop.tscn" id="2_osxc1"]
+[ext_resource type="Texture2D" uid="uid://cjrtgqc6mjoj2" path="res://Data/Assets/TileSet/fullTiles.png" id="2_vt4l1"]
 [ext_resource type="Texture2D" uid="uid://5ach8onuusti" path="res://Data/Assets/Table and chairs/Chair.png" id="3_6orla"]
+[ext_resource type="Texture2D" uid="uid://dakikx8em1ut3" path="res://Data/Assets/TileSet/landscape_sheet.png" id="3_y42re"]
+[ext_resource type="Texture2D" uid="uid://cg61v871c3lx8" path="res://Data/Assets/tableandchair.png" id="6_vj3my"]
+[ext_resource type="Texture2D" uid="uid://w18hx3kvdm3m" path="res://Data/Assets/campfire.png" id="8_wawtu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vim1a"]
 texture = ExtResource("1_u2cot")
 texture_region_size = Vector2i(1080, 1080)
 0:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_goplx"]
+texture = ExtResource("2_vt4l1")
+texture_region_size = Vector2i(1080, 1080)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dh85r"]
+texture = ExtResource("3_y42re")
+
 [sub_resource type="TileSet" id="TileSet_se2fp"]
 tile_size = Vector2i(1080, 1080)
 sources/0 = SubResource("TileSetAtlasSource_vim1a")
+sources/1 = SubResource("TileSetAtlasSource_goplx")
+sources/3 = SubResource("TileSetAtlasSource_dh85r")
 
 [node name="BuyingArea" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAD/////AAAAAAAAAAAAAP//AAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAP//AAAAAAAAAAABAAAAAAAAAAAAAAD+////AAAAAAAAAAD+/wAAAAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAD/////AAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAAAAAAAAAABAP//AAAAAAAAAAD+////AAAAAAAAAAD//wAAAAAAAAAAAAD+/wAAAAAAAAAAAAABAAAAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_se2fp")
 
 [node name="CardShop" parent="." instance=ExtResource("2_osxc1")]
@@ -27,6 +40,7 @@ offset_right = 1725.0
 offset_bottom = 4.0
 
 [node name="TablePlace" type="Node2D" parent="."]
+visible = false
 position = Vector2(-770, 9.99999)
 scale = Vector2(0.8, 0.8)
 
@@ -74,3 +88,16 @@ texture = ExtResource("3_6orla")
 position = Vector2(-381, -445)
 rotation = -0.740857
 texture = ExtResource("3_6orla")
+
+[node name="TablePlace2" type="Node2D" parent="."]
+position = Vector2(-770, 9.99999)
+scale = Vector2(0.8, 0.8)
+
+[node name="Table" type="Sprite2D" parent="TablePlace2"]
+scale = Vector2(2, 2)
+texture = ExtResource("6_vj3my")
+
+[node name="Fire camp" type="Sprite2D" parent="TablePlace2"]
+position = Vector2(1997.5, 882.5)
+scale = Vector2(2, 2)
+texture = ExtResource("8_wawtu")
