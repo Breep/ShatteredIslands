@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://nk54d5o8pex"]
 
-[ext_resource type="Texture2D" uid="uid://b5hh6533cs3cu" path="res://Data/Assets/UI_fantasy/cadre hexagonal.png" id="1_uc6b5"]
+[ext_resource type="Texture2D" uid="uid://rbfouv5lyrlu" path="res://Data/Assets/UI/cadre hexagone 2.png" id="1_bx0xl"]
 [ext_resource type="Texture2D" uid="uid://bxd1jnaci6olo" path="res://Data/Assets/Card/ICONS/ATTACK color.png" id="2_wkbf4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kbndo"]
@@ -33,18 +33,18 @@ custom_minimum_size = Vector2(300, 245)
 layout_mode = 2
 theme = SubResource("Theme_iy2f2")
 
-[node name="Family1" type="TextureRect" parent="FamilyContainer/Button Family1"]
+[node name="Family" type="TextureRect" parent="FamilyContainer/Button Family1"]
 layout_mode = 2
 offset_top = 12.0
 offset_right = 191.0
 offset_bottom = 233.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_uc6b5")
+texture = ExtResource("1_bx0xl")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="IconFamily" type="TextureRect" parent="FamilyContainer/Button Family1/Family1"]
+[node name="IconFamily" type="TextureRect" parent="FamilyContainer/Button Family1/Family"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -61,7 +61,7 @@ texture = ExtResource("2_wkbf4")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="LevelFamily" type="Label" parent="FamilyContainer/Button Family1/Family1"]
+[node name="LevelFamily" type="Label" parent="FamilyContainer/Button Family1/Family"]
 layout_mode = 0
 offset_left = 138.0
 offset_top = 67.0
@@ -77,18 +77,18 @@ custom_minimum_size = Vector2(300, 245)
 layout_mode = 2
 theme = SubResource("Theme_iy2f2")
 
-[node name="Family1" type="TextureRect" parent="FamilyContainer/Button Family2"]
+[node name="Family" type="TextureRect" parent="FamilyContainer/Button Family2"]
 layout_mode = 2
 offset_top = 12.0
 offset_right = 191.0
 offset_bottom = 233.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_uc6b5")
+texture = ExtResource("1_bx0xl")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="IconFamily" type="TextureRect" parent="FamilyContainer/Button Family2/Family1"]
+[node name="IconFamily" type="TextureRect" parent="FamilyContainer/Button Family2/Family"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -105,7 +105,7 @@ texture = ExtResource("2_wkbf4")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="LevelFamily" type="Label" parent="FamilyContainer/Button Family2/Family1"]
+[node name="LevelFamily" type="Label" parent="FamilyContainer/Button Family2/Family"]
 layout_mode = 0
 offset_left = 138.0
 offset_top = 67.0
@@ -121,18 +121,18 @@ custom_minimum_size = Vector2(300, 245)
 layout_mode = 2
 theme = SubResource("Theme_iy2f2")
 
-[node name="Family1" type="TextureRect" parent="FamilyContainer/Button Family3"]
+[node name="Family" type="TextureRect" parent="FamilyContainer/Button Family3"]
 layout_mode = 2
 offset_top = 12.0
 offset_right = 191.0
 offset_bottom = 233.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_uc6b5")
+texture = ExtResource("1_bx0xl")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="IconFamily" type="TextureRect" parent="FamilyContainer/Button Family3/Family1"]
+[node name="IconFamily" type="TextureRect" parent="FamilyContainer/Button Family3/Family"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -149,7 +149,7 @@ texture = ExtResource("2_wkbf4")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="LevelFamily" type="Label" parent="FamilyContainer/Button Family3/Family1"]
+[node name="LevelFamily" type="Label" parent="FamilyContainer/Button Family3/Family"]
 layout_mode = 0
 offset_left = 138.0
 offset_top = 67.0
@@ -165,18 +165,18 @@ custom_minimum_size = Vector2(300, 245)
 layout_mode = 2
 theme = SubResource("Theme_iy2f2")
 
-[node name="Family1" type="TextureRect" parent="FamilyContainer/Button Family4"]
+[node name="Family" type="TextureRect" parent="FamilyContainer/Button Family4"]
 layout_mode = 2
 offset_top = 12.0
 offset_right = 191.0
 offset_bottom = 233.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_uc6b5")
+texture = ExtResource("1_bx0xl")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="IconFamily" type="TextureRect" parent="FamilyContainer/Button Family4/Family1"]
+[node name="IconFamily" type="TextureRect" parent="FamilyContainer/Button Family4/Family"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -193,7 +193,7 @@ texture = ExtResource("2_wkbf4")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="LevelFamily" type="Label" parent="FamilyContainer/Button Family4/Family1"]
+[node name="LevelFamily" type="Label" parent="FamilyContainer/Button Family4/Family"]
 layout_mode = 0
 offset_left = 138.0
 offset_top = 67.0
@@ -209,18 +209,18 @@ custom_minimum_size = Vector2(300, 245)
 layout_mode = 2
 theme = SubResource("Theme_iy2f2")
 
-[node name="Family1" type="TextureRect" parent="FamilyContainer/Button Family5"]
+[node name="Family" type="TextureRect" parent="FamilyContainer/Button Family5"]
 layout_mode = 2
 offset_top = 12.0
 offset_right = 191.0
 offset_bottom = 233.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_uc6b5")
+texture = ExtResource("1_bx0xl")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="IconFamily" type="TextureRect" parent="FamilyContainer/Button Family5/Family1"]
+[node name="IconFamily" type="TextureRect" parent="FamilyContainer/Button Family5/Family"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -237,7 +237,7 @@ texture = ExtResource("2_wkbf4")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="LevelFamily" type="Label" parent="FamilyContainer/Button Family5/Family1"]
+[node name="LevelFamily" type="Label" parent="FamilyContainer/Button Family5/Family"]
 layout_mode = 0
 offset_left = 138.0
 offset_top = 67.0
@@ -253,18 +253,18 @@ custom_minimum_size = Vector2(300, 245)
 layout_mode = 2
 theme = SubResource("Theme_iy2f2")
 
-[node name="Family1" type="TextureRect" parent="FamilyContainer/Button Family6"]
+[node name="Family" type="TextureRect" parent="FamilyContainer/Button Family6"]
 layout_mode = 2
 offset_top = 12.0
 offset_right = 191.0
 offset_bottom = 233.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_uc6b5")
+texture = ExtResource("1_bx0xl")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="IconFamily" type="TextureRect" parent="FamilyContainer/Button Family6/Family1"]
+[node name="IconFamily" type="TextureRect" parent="FamilyContainer/Button Family6/Family"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -281,7 +281,7 @@ texture = ExtResource("2_wkbf4")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="LevelFamily" type="Label" parent="FamilyContainer/Button Family6/Family1"]
+[node name="LevelFamily" type="Label" parent="FamilyContainer/Button Family6/Family"]
 layout_mode = 0
 offset_left = 138.0
 offset_top = 67.0
@@ -297,18 +297,18 @@ custom_minimum_size = Vector2(300, 245)
 layout_mode = 2
 theme = SubResource("Theme_iy2f2")
 
-[node name="Family1" type="TextureRect" parent="FamilyContainer/Button Family7"]
+[node name="Family" type="TextureRect" parent="FamilyContainer/Button Family7"]
 layout_mode = 2
 offset_top = 12.0
 offset_right = 191.0
 offset_bottom = 233.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_uc6b5")
+texture = ExtResource("1_bx0xl")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="IconFamily" type="TextureRect" parent="FamilyContainer/Button Family7/Family1"]
+[node name="IconFamily" type="TextureRect" parent="FamilyContainer/Button Family7/Family"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -325,7 +325,7 @@ texture = ExtResource("2_wkbf4")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="LevelFamily" type="Label" parent="FamilyContainer/Button Family7/Family1"]
+[node name="LevelFamily" type="Label" parent="FamilyContainer/Button Family7/Family"]
 layout_mode = 0
 offset_left = 138.0
 offset_top = 67.0
@@ -341,18 +341,18 @@ custom_minimum_size = Vector2(300, 245)
 layout_mode = 2
 theme = SubResource("Theme_iy2f2")
 
-[node name="Family1" type="TextureRect" parent="FamilyContainer/Button Family8"]
+[node name="Family" type="TextureRect" parent="FamilyContainer/Button Family8"]
 layout_mode = 2
 offset_top = 12.0
 offset_right = 191.0
 offset_bottom = 233.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_uc6b5")
+texture = ExtResource("1_bx0xl")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="IconFamily" type="TextureRect" parent="FamilyContainer/Button Family8/Family1"]
+[node name="IconFamily" type="TextureRect" parent="FamilyContainer/Button Family8/Family"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -369,7 +369,7 @@ texture = ExtResource("2_wkbf4")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="LevelFamily" type="Label" parent="FamilyContainer/Button Family8/Family1"]
+[node name="LevelFamily" type="Label" parent="FamilyContainer/Button Family8/Family"]
 layout_mode = 0
 offset_left = 138.0
 offset_top = 67.0

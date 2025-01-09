@@ -36,4 +36,3 @@ func update_visual_card(card: Card) :
 			hbox_node.show()
 		else:
 			print("Node not found:")
-		
