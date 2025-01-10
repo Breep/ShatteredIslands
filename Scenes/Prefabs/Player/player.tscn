@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bbnioyc6ti8wn"]
 
-[ext_resource type="Script" path="res://Scripts/player_fighting.gd" id="1_gjax4"]
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_gjax4"]
 [ext_resource type="PackedScene" uid="uid://ft2ivrvgsi2v" path="res://Scenes/Prefabs/Player/player_visual.tscn" id="2_iwmy3"]
 [ext_resource type="PackedScene" uid="uid://mpgkfdwmx4n0" path="res://Scenes/Prefabs/projectile.tscn" id="3_cgh4r"]
 
@@ -24,7 +24,6 @@ wait_time = 3.0
 autostart = true
 
 [node name="AutoAttackTimer" type="Timer" parent="Timers"]
-wait_time = 0.1
 autostart = true
 
 [node name="ProjectileSpawn" type="Node2D" parent="."]

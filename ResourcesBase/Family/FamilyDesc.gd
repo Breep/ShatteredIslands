@@ -1,7 +1,5 @@
 extends Resource
-
-class_name Family
+class_name FamilyDesc
 
 @export var icon: Texture2D
-@export var cards: Array[Card]
 @export var familyName: String

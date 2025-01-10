@@ -3,9 +3,11 @@ class_name Projectile
 
 # ============================== Private ==============================
 
-var _target: PlayerFighting
+var _target: Player
 var _speed: float = 1
 const _SPEED_MIN: float = 0.3
+var _dammage: int
+const _DAMMAGE_MIN: int = 1
 
 # ============================== Public ==============================
 
@@ -18,7 +20,7 @@ var speed: float:
 		else:
 			_speed = value
 
-var target: PlayerFighting:
+var target: Player:
 	get:
 		return _target
 	set(value):
@@ -26,6 +28,15 @@ var target: PlayerFighting:
 			printerr("Trying to instantiate a projectile with no target !")
 		else:
 			_target = value
+
+var dammage: int:
+	get:
+		return _speed
+	set(value):
+		if value < _DAMMAGE_MIN:
+			_dammage = _DAMMAGE_MIN
+		else:
+			_dammage = value
 
 # ============================== Node base functions ==============================
 
@@ -51,6 +62,5 @@ func _moveTowardTarget(delta: float):
 # ============================== Collision functions ==============================
 
 func _on_body_entered(body: Node2D) -> void:
-	if body is PlayerFighting and body == _target:
-		print("Bim! ", _target.playerName, " has been hit")
+	if body is Player and body == _target:
 		queue_free()
