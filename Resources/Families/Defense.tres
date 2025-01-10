@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://bufhber02x555" path="res://Resources/Card/Defense/Health.tres" id="3_hfink"]
 [ext_resource type="Resource" uid="uid://b2jxvfdj4lokl" path="res://Resources/Card/Defense/RegenHealth.tres" id="4_d8hyj"]
 [ext_resource type="Texture2D" uid="uid://cnp4ioj5qvrv4" path="res://Data/Assets/Card/ICONS/DEFENSE color.png" id="5_tkibi"]
-[ext_resource type="Script" path="res://ResourcesBase/CardBase/Family.gd" id="6_f7722"]
+[ext_resource type="Script" path="res://ResourcesBase/Family/Family.gd" id="6_f7722"]
 
 [resource]
 script = ExtResource("6_f7722")

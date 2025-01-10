@@ -1,6 +1,5 @@
 extends Control
 
-@export var available_cards: CardPile
 @export var player_gold: int = 100  # Or du joueur
 @export var rules: CardRules
 @export var families: Array[Family]
@@ -23,7 +22,7 @@ func _on_card_selected(card: Card) -> void:
 		player_gold -= card.cost
 		print("Carte achetée :", card.name)
 		# Ajouter la carte au deck du joueur
-		available_cards.remove_card(card)
+
 		_ready()  # Rafraîchir l'interface
 	else:
 		print("Pas assez d'or pour acheter cette carte.")

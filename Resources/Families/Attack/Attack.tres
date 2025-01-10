@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Family" load_steps=7 format=3 uid="uid://t5dw23oxbdir"]
+
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/Card.gd" id="1_lnl3k"]
+[ext_resource type="Resource" uid="uid://cus8i4ny6vl5t" path="res://Resources/Card/Attack/AttackDammage.tres" id="2_8282w"]
+[ext_resource type="Resource" uid="uid://b3r48cltkodmm" path="res://Resources/Card/Attack/AttackSpeed.tres" id="3_g0bo8"]
+[ext_resource type="Resource" uid="uid://bnbf415gqc7cm" path="res://Resources/Card/Attack/CritChance.tres" id="4_w2vtr"]
+[ext_resource type="Resource" uid="uid://dmi455hihafaq" path="res://Resources/Card/Attack/CritDamageMultiplier.tres" id="5_w4qes"]
+[ext_resource type="Script" path="res://ResourcesBase/Family/Family.gd" id="6_b6cyx"]
+
+[resource]
+script = ExtResource("6_b6cyx")
+cards = Array[ExtResource("1_lnl3k")]([ExtResource("2_8282w"), ExtResource("3_g0bo8"), ExtResource("4_w2vtr"), ExtResource("5_w4qes")])

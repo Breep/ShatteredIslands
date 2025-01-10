@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://cotsv1nuqk1eu"]
 
 [ext_resource type="Script" path="res://tmpcontrol.gd" id="1_iqdu4"]
-[ext_resource type="Script" path="res://ResourcesBase/CardBase/Family.gd" id="2_a3yff"]
-[ext_resource type="Resource" uid="uid://t5dw23oxbdir" path="res://Resources/Families/Attack.tres" id="3_sjnoj"]
+[ext_resource type="Script" path="res://ResourcesBase/Family/Family.gd" id="2_a3yff"]
+[ext_resource type="Resource" uid="uid://t5dw23oxbdir" path="res://Resources/Families/Attack/Attack.tres" id="3_sjnoj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sfmdp"]
 

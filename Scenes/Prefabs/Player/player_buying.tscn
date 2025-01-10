@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dk1j0t4uwn2bt"]
-
-[ext_resource type="PackedScene" uid="uid://ft2ivrvgsi2v" path="res://Scenes/Prefabs/Player/player_visual.tscn" id="1_s14ru"]
-
-[node name="PlayerBuying" type="Node2D"]
-
-[node name="PlayerVisual" parent="." instance=ExtResource("1_s14ru")]
