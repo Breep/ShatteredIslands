@@ -12,7 +12,7 @@ func shuffle() -> void:
 			_cardPile[i] = _cardPile[random_index]
 			_cardPile[random_index] = temp
 
-func construct_cardPile(families: Array[Family], gameRules: CardRules) -> void:
+func construct_shopDeck(families: Array[Family], gameRules: CardRules) -> void:
 	_cardPile.clear()
 	for family in families:
 		for card in family.cards:

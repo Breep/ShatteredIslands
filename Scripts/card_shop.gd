@@ -5,8 +5,8 @@ extends Control
 @export var families: Array[Family]
 
 func _ready() -> void:
-	var deck: CardPile = CardPile.new()
-	deck.construct_pile_deck(families, rules)
+	var deck: ShopDeck = ShopDeck.new()
+	deck.construct_shopDeck(families, rules)
 	deck.shuffle()
 	var shopCards : Array[Card] = deck.draw_n_random_card(4)
 	print(shopCards)

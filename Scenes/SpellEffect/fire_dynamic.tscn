@@ -1,0 +1,86 @@
+[gd_scene load_steps=14 format=3 uid="uid://xs11mxqucjwf"]
+
+[ext_resource type="Material" uid="uid://dobiblwgkketm" path="res://Shaders/fire_dynamic.tres" id="1_7g03x"]
+[ext_resource type="Material" uid="uid://bem0rvqh0jmq6" path="res://Particle/fire_dynamic_particle.tres" id="2_ely1l"]
+[ext_resource type="Texture2D" uid="uid://dmpy3jjabbmm7" path="res://Data/Texture/2D Fire/T_1_pixel.jpg" id="3_xxxtx"]
+[ext_resource type="Material" uid="uid://cbenrvhfodwl" path="res://Shaders/Electric_spark_shader.tres" id="4_n1uhn"]
+[ext_resource type="Material" uid="uid://by3yqqq5kql60" path="res://Particle/Electric_spark_particle.tres" id="5_kjupg"]
+
+[sub_resource type="Curve" id="Curve_eur3w"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_kb4dl"]
+texture_mode = 1
+curve = SubResource("Curve_eur3w")
+
+[sub_resource type="Gradient" id="Gradient_ofqlg"]
+offsets = PackedFloat32Array(0, 0.132353, 0.345588, 0.602941)
+colors = PackedColorArray(1, 0.761, 0.42, 1, 5, 0.5, 0, 1, 0.637352, 0.160118, 0.103295, 1, 0.400836, 0.0528732, 4.81308e-08, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3ldec"]
+gradient = SubResource("Gradient_ofqlg")
+
+[sub_resource type="Curve" id="Curve_as1sl"]
+_data = [Vector2(0.012, 0.1), 0.0, 0.0, 0, 0, Vector2(0.22, 0.393), 0.0, 0.0, 0, 0, Vector2(0.451219, 0.659341), 0.0, 0.0, 0, 0, Vector2(0.597561, 0.692308), 0.0, 0.0, 0, 0, Vector2(0.835366, 0.67033), 0.0, 0.0, 0, 0, Vector2(1, 0.615385), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="CurveTexture" id="CurveTexture_0rwau"]
+curve = SubResource("Curve_as1sl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_blrrw"]
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = -77.3
+inherit_velocity_ratio = 0.429
+direction = Vector3(0, -1, 0)
+spread = 0.0
+initial_velocity_min = 486.15
+initial_velocity_max = 486.15
+gravity = Vector3(0, 0, 0)
+scale_min = 80.0
+scale_max = 145.0
+scale_curve = SubResource("CurveTexture_0rwau")
+color_ramp = SubResource("GradientTexture1D_3ldec")
+alpha_curve = SubResource("CurveTexture_kb4dl")
+hue_variation_min = -0.1
+hue_variation_max = 0.00999998
+collision_mode = 1
+collision_friction = 0.6
+collision_bounce = 0.1
+collision_use_scale = true
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_esbyw"]
+polygon = PackedVector2Array(841, 128, 730, 370, 987, 373)
+
+[node name="FireDynamic" type="Node2D"]
+
+[node name="VFX_Dynamix_Fire" type="GPUParticles2D" parent="."]
+material = ExtResource("1_7g03x")
+position = Vector2(615, 210)
+amount = 60
+process_material = ExtResource("2_ely1l")
+texture = ExtResource("3_xxxtx")
+fixed_fps = 60
+
+[node name="VFX_Flame_Thrower" type="GPUParticles2D" parent="."]
+material = ExtResource("1_7g03x")
+position = Vector2(1127, 225)
+amount = 200
+process_material = SubResource("ParticleProcessMaterial_blrrw")
+texture = ExtResource("3_xxxtx")
+fixed_fps = 60
+
+[node name="VFX_Electric_sparks" type="GPUParticles2D" parent="."]
+material = ExtResource("4_n1uhn")
+position = Vector2(341, 211)
+amount = 12
+process_material = ExtResource("5_kjupg")
+texture = ExtResource("3_xxxtx")
+lifetime = 0.3
+fixed_fps = 60
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2(-57, -322)
+occluder = SubResource("OccluderPolygon2D_esbyw")

@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://c84bcu56soo2o"]
+
+[ext_resource type="Texture2D" uid="uid://b2ji4jfpv7uqd" path="res://Data/Assets/BackGround/2D_Background_Elemental/All Assets/2DBackground_40.png" id="1_hbbbx"]
+[ext_resource type="Texture2D" uid="uid://dmpy3jjabbmm7" path="res://Data/Texture/2D Fire/T_1_pixel.jpg" id="1_q425r"]
+[ext_resource type="Material" uid="uid://sfgvxf8wp81x" path="res://Shaders/Fire_Ball.tres" id="2_n280a"]
+[ext_resource type="Material" uid="uid://cx37wrmb8u4rl" path="res://Shaders/Test_storm.tres" id="4_1ncav"]
+[ext_resource type="Material" uid="uid://dqm51ysejlh7b" path="res://Shaders/ShadowBoltMain.tres" id="5_wge7a"]
+
+[node name="Fire" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+offset_right = 1456.0
+offset_bottom = 816.0
+texture = ExtResource("1_hbbbx")
+
+[node name="StaticFire" type="Sprite2D" parent="."]
+material = ExtResource("2_n280a")
+position = Vector2(636, 182)
+scale = Vector2(98.5, 96.75)
+texture = ExtResource("1_q425r")
+
+[node name="FireBall" type="Sprite2D" parent="."]
+material = ExtResource("2_n280a")
+position = Vector2(992, 134)
+rotation = -1.76602
+scale = Vector2(98.5, 178.43)
+texture = ExtResource("1_q425r")
+
+[node name="Trainée" type="Sprite2D" parent="FireBall"]
+material = ExtResource("4_1ncav")
+position = Vector2(-0.130371, -0.24275)
+rotation = 1.51951
+scale = Vector2(1.70555, 1)
+texture = ExtResource("1_q425r")
+
+[node name="Shadowbolt" type="Sprite2D" parent="."]
+material = ExtResource("5_wge7a")
+position = Vector2(902.064, 310.078)
+rotation = -1.76602
+scale = Vector2(98.5, 178.43)
+texture = ExtResource("1_q425r")
+
+[node name="Trainée" type="Sprite2D" parent="Shadowbolt"]
+visible = false
+material = ExtResource("4_1ncav")
+position = Vector2(-0.0180853, -0.352309)
+rotation = 1.51951
+scale = Vector2(1.70555, 1)
+texture = ExtResource("1_q425r")

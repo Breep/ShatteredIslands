@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scenes/Card/button_card.gd" id="1_ugais"]
 [ext_resource type="Shader" path="res://Shaders/3dcard.gdshader" id="1_x5c7l"]
 [ext_resource type="PackedScene" uid="uid://dhtfiyt1qvdre" path="res://Scenes/Card/card.tscn" id="2_o7tfb"]
-[ext_resource type="Texture2D" uid="uid://cdxhgy5y1xue5" path="res://Data/Texture/TX Plant.png" id="4_og0sp"]
+[ext_resource type="Texture2D" uid="uid://cdxhgy5y1xue5" path="res://Data/Texture/Textrure_misc/TX Plant.png" id="4_og0sp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6i0k8"]
 shader = ExtResource("1_x5c7l")

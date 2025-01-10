@@ -15,7 +15,6 @@ zoom = Vector2(2, 2)
 
 [node name="Player" parent="." instance=ExtResource("2_bgxg2")]
 position = Vector2(-1, 2)
-team = 0
 hero = ExtResource("3_bvbwr")
 tmp_card1 = ExtResource("3_lh3m0")
 
