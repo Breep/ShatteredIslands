@@ -3,7 +3,6 @@ class_name FightingArea
 
 # ============================== Local scene nodes ==============================
 
-@onready var selectionSquareSprite: Sprite2D = $SelectionSquare/SquareSprite
 @onready var tileMap: TileMapLayer = $Map
 @onready var selectionMap: TileMapLayer = $Map/SelectionLayer
 

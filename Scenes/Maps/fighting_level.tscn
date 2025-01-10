@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://bu27egwyvlthm"]
+[gd_scene load_steps=8 format=3 uid="uid://bu27egwyvlthm"]
 
 [ext_resource type="PackedScene" uid="uid://c3vks6k40no5w" path="res://Scenes/Prefabs/FightingArea.tscn" id="1_gsc4f"]
 [ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Scenes/Prefabs/Player/player.tscn" id="2_bgxg2"]
 [ext_resource type="Resource" uid="uid://cjq2aor74kdvw" path="res://Resources/Heros/JohnnyDefault/JohnnyDefault.tres" id="3_bvbwr"]
-[ext_resource type="Resource" uid="uid://cus8i4ny6vl5t" path="res://Resources/Card/Attack/AttackDammage.tres" id="3_lh3m0"]
+[ext_resource type="Resource" uid="uid://cus8i4ny6vl5t" path="res://Resources/Card/Attack/AttackDamage.tres" id="3_lh3m0"]
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/Card.gd" id="4_db7nm"]
+[ext_resource type="Resource" uid="uid://b3r48cltkodmm" path="res://Resources/Card/Attack/AttackSpeed.tres" id="6_ay5ic"]
+[ext_resource type="Resource" uid="uid://c0c5k2i5875wc" path="res://Resources/Card/Attack/AttackCriticalChance.tres" id="7_qpeu4"]
 
 [node name="BasicLevel" type="Node2D"]
 
@@ -16,7 +19,7 @@ zoom = Vector2(2, 2)
 [node name="Player" parent="." instance=ExtResource("2_bgxg2")]
 position = Vector2(-1, 2)
 hero = ExtResource("3_bvbwr")
-tmp_card1 = ExtResource("3_lh3m0")
+tmp_cards = Array[ExtResource("4_db7nm")]([ExtResource("3_lh3m0"), ExtResource("6_ay5ic"), ExtResource("7_qpeu4")])
 
 [node name="Player2" parent="." instance=ExtResource("2_bgxg2")]
 position = Vector2(89, 261)

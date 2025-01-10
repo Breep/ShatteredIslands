@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Card" load_steps=6 format=3 uid="uid://c0c5k2i5875wc"]
+
+[ext_resource type="Script" path="res://ResourcesBase/Family/FamilyDesc.gd" id="1_mgu82"]
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/Card.gd" id="2_egul4"]
+[ext_resource type="Resource" uid="uid://5b3so5uho4c6" path="res://Resources/Families/Attack/AttackDesc.tres" id="2_jqg2q"]
+[ext_resource type="Texture2D" uid="uid://dye8b1hhcuh2h" path="res://Data/Assets/Fantasy Items/TTRPG-Art-Asset_02.png" id="3_04ijh"]
+[ext_resource type="Resource" uid="uid://bpk4pp2ctafuo" path="res://Resources/Upgrades/Player/Attack/AttackCriticalChance.tres" id="4_8l7eq"]
+
+[resource]
+script = ExtResource("2_egul4")
+name = "Attack critical chance"
+image = ExtResource("3_04ijh")
+families = Array[ExtResource("1_mgu82")]([ExtResource("2_jqg2q")])
+lvl = 5
+rarity = 0
+playerUpgrade = ExtResource("4_8l7eq")

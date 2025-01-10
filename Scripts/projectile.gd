@@ -4,10 +4,12 @@ class_name Projectile
 # ============================== Private ==============================
 
 var _target: Player
-var _speed: float = 1
+var _speed: float = 50
 const _SPEED_MIN: float = 0.3
 var _dammage: int
 const _DAMMAGE_MIN: int = 1
+
+var _isCritic: bool
 
 # ============================== Public ==============================
 
@@ -29,9 +31,9 @@ var target: Player:
 		else:
 			_target = value
 
-var dammage: int:
+var damage: int:
 	get:
-		return _speed
+		return _dammage
 	set(value):
 		if value < _DAMMAGE_MIN:
 			_dammage = _DAMMAGE_MIN
@@ -57,7 +59,20 @@ func _moveTowardTarget(delta: float):
 	position += direction * _speed * delta
 	look_at(_target.global_position)
 
+func _isRandomizeModifierActive(chance: float) -> bool:
+	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+	rng.randomize()
+	return rng.randf_range(0, 100) <= chance
+
 # ============================== public functions ==============================
+
+func setStatFromPlayerStats(playerStats: CharacterStats) -> void:
+	damage = playerStats.autoAttack.damage
+	_isCritic = _isRandomizeModifierActive(playerStats.autoAttack.critical_chance)
+	if _isCritic:
+		var criticalMultiplierNormalized = remap(playerStats.autoAttack.critical_multiplier, 0, 100, 1, 2)
+		damage *= criticalMultiplierNormalized
+		scale *= criticalMultiplierNormalized
 
 # ============================== Collision functions ==============================
 
