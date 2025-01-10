@@ -23,13 +23,13 @@ var _deck: PlayerDeck = PlayerDeck.new()
 var stats: CharacterStats # Needs to be public for easier upgrades access
 
 @export var _aa_projectile: PackedScene # tmp
-@export var tmp_card1: Card
+@export var tmp_cards: Array[Card]
 
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
 	fightingArea = get_tree().get_root().find_child("FightingArea", true, false)
-	stats = hero.baseStats
+	stats = hero.baseStats.duplicate(true) # Copy all hero base stats into a new stat resource
 	_moveToCell(Vector2(0,0))
 	_players = _getAllScenePlayers()
 	_enemies = _getEnemiesFromPlayers()
@@ -39,12 +39,18 @@ func _ready() -> void:
 		return
 
 	print("I'm ", hero.name)
-	print("AttackDamage: ", stats.autoAttack.dammage)
-	_deck.add_card(tmp_card1)
-	tmp_card1.lvl = 2
-	_deck.add_card(tmp_card1)
+	print("Player AttackDamage: ", stats.autoAttack.damage)
+	print("Player AttackSpeed: ", stats.autoAttack.speed)
+	print("Player CriticalChance: ", stats.autoAttack.critical_chance)
+	print("Player CriticalMultiplier: ", stats.autoAttack.critical_multiplier)
+	for card in tmp_cards:
+		_deck.add_card(card)
 	_applyAllCardsUpgrades()
-	print("AttackDamage: ", stats.autoAttack.dammage)
+	print("")
+	print("AttackDamage: ", stats.autoAttack.damage)
+	print("AttackSpeed: ", stats.autoAttack.speed)
+	print("Player CriticalChance: ", stats.autoAttack.critical_chance)
+	print("Player CriticalMultiplier: ", stats.autoAttack.critical_multiplier)
 
 # ============================== Private functions ==============================
 
@@ -65,7 +71,7 @@ func _getClosestEnemy() -> Player:
 
 func _auto_attack(target: Player):
 	var projectile: Projectile = _aa_projectile.instantiate()
-	projectile.speed = 100
+	projectile.setStatFromPlayerStats(self.stats)
 	projectile.target = target
 	projectile.global_position = $ProjectileSpawn.global_position
 	projectile.global_rotation = $ProjectileSpawn.global_rotation
@@ -94,6 +100,7 @@ func _getAlliesFromPlayers() -> Array[Player]:
 func _applyAllCardsUpgrades() -> void:
 	for card in _deck.cardPile:
 		card.playerUpgrade.apply(self, card.lvl)
+	$Timers/AutoAttackTimer.wait_time = 1.0 / stats.autoAttack.speed
 
 # ============================== Timer Callback ==============================
 
