@@ -1,11 +1,11 @@
 [gd_scene load_steps=5 format=3 uid="uid://dhtfiyt1qvdre"]
 
 [ext_resource type="Texture2D" uid="uid://s0h8lcs7kd5o" path="res://Data/Assets/Card/FRONT-retag.png" id="1_td0wn"]
-[ext_resource type="Script" path="res://Scenes/Card/CardUI.gd" id="1_vvwj2"]
+[ext_resource type="Script" path="res://Scenes/Card/CardButton.gd" id="1_vvwj2"]
 [ext_resource type="Texture2D" uid="uid://bxd1jnaci6olo" path="res://Data/Assets/Card/ICONS/ATTACK color.png" id="2_wdn81"]
 [ext_resource type="Texture2D" uid="uid://dye8b1hhcuh2h" path="res://Data/Assets/Fantasy Items/TTRPG-Art-Asset_02.png" id="3_a4s8g"]
 
-[node name="CardUI" type="Control"]
+[node name="CardButton" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_vvwj2")

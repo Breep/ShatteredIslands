@@ -9,7 +9,7 @@
 [resource]
 script = ExtResource("5_lwbsm")
 name = "Attack Dammage"
-image = ExtResource("3_dqwyn")
+picture = ExtResource("3_dqwyn")
 families = Array[ExtResource("1_bdpoa")]([ExtResource("2_p3qkx")])
 lvl = 1
 rarity = 0

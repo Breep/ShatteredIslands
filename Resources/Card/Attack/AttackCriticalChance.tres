@@ -9,7 +9,7 @@
 [resource]
 script = ExtResource("2_egul4")
 name = "Attack critical chance"
-image = ExtResource("3_04ijh")
+picture = ExtResource("3_04ijh")
 families = Array[ExtResource("1_mgu82")]([ExtResource("2_jqg2q")])
 lvl = 5
 rarity = 0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://u86kcfn8nx7u"]
+[gd_scene load_steps=15 format=4 uid="uid://u86kcfn8nx7u"]
 
 [ext_resource type="Texture2D" uid="uid://b3b4rk02h1kbh" path="res://Data/Assets/Misc/deqc368-97acf8e2-85c4-4cb6-a909-c2755fcf2fc7.jpg" id="1_u2cot"]
 [ext_resource type="Texture2D" uid="uid://bed1g7i3vu0ah" path="res://Data/Assets/Table and chairs/Table.png" id="2_31a3a"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://cjrtgqc6mjoj2" path="res://Data/Assets/TileSet/fullTiles.png" id="2_vt4l1"]
 [ext_resource type="Texture2D" uid="uid://5ach8onuusti" path="res://Data/Assets/Table and chairs/Chair.png" id="3_6orla"]
 [ext_resource type="Texture2D" uid="uid://dakikx8em1ut3" path="res://Data/Assets/TileSet/landscape_sheet.png" id="3_y42re"]
+[ext_resource type="Script" path="res://ResourcesBase/Family/Family.gd" id="5_bicha"]
+[ext_resource type="Resource" uid="uid://t5dw23oxbdir" path="res://Resources/Families/Attack/Attack.tres" id="6_u8x0m"]
 [ext_resource type="Texture2D" uid="uid://cg61v871c3lx8" path="res://Data/Assets/Misc/tableandchair.png" id="6_vj3my"]
 [ext_resource type="Texture2D" uid="uid://w18hx3kvdm3m" path="res://Data/Assets/Misc/campfire.png" id="8_wawtu"]
 
@@ -34,10 +36,11 @@ tile_map_data = PackedByteArray("AAD/////AAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAAAAAA
 tile_set = SubResource("TileSet_se2fp")
 
 [node name="CardShop" parent="." instance=ExtResource("2_osxc1")]
-offset_left = 89.0
-offset_top = -761.0
-offset_right = 1725.0
-offset_bottom = 4.0
+offset_left = -157.0
+offset_top = -769.0
+offset_right = 1479.0
+offset_bottom = -4.0
+families = Array[ExtResource("5_bicha")]([ExtResource("6_u8x0m")])
 
 [node name="TablePlace" type="Node2D" parent="."]
 visible = false

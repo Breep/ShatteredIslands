@@ -2,11 +2,12 @@
 
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/Card.gd" id="1_lnl3k"]
 [ext_resource type="Resource" uid="uid://cus8i4ny6vl5t" path="res://Resources/Card/Attack/AttackDamage.tres" id="2_8282w"]
+[ext_resource type="Resource" uid="uid://c0c5k2i5875wc" path="res://Resources/Card/Attack/AttackCriticalChance.tres" id="2_mhhkf"]
 [ext_resource type="Resource" uid="uid://b3r48cltkodmm" path="res://Resources/Card/Attack/AttackSpeed.tres" id="3_g0bo8"]
-[ext_resource type="Resource" path="res://Resources/Card/Attack/CritChance.tres" id="4_w2vtr"]
-[ext_resource type="Resource" path="res://Resources/Card/Attack/CritDamageMultiplier.tres" id="5_w4qes"]
+[ext_resource type="Resource" uid="uid://5b3so5uho4c6" path="res://Resources/Families/Attack/AttackDesc.tres" id="5_ca806"]
 [ext_resource type="Script" path="res://ResourcesBase/Family/Family.gd" id="6_b6cyx"]
 
 [resource]
 script = ExtResource("6_b6cyx")
-cards = Array[ExtResource("1_lnl3k")]([ExtResource("2_8282w"), ExtResource("3_g0bo8"), ExtResource("4_w2vtr"), ExtResource("5_w4qes")])
+desc = ExtResource("5_ca806")
+cards = Array[ExtResource("1_lnl3k")]([ExtResource("2_mhhkf"), ExtResource("2_8282w"), ExtResource("3_g0bo8")])
