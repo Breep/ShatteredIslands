@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="PlayUp_aaChanceToStun" load_steps=2 format=3 uid="uid://cqw3mq7tim8a8"]
+
+[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/PlayUp_aaChanceToStun.gd" id="1_d8aeq"]
+
+[resource]
+script = ExtResource("1_d8aeq")
+ChanceToStun = Array[int]([5, 10, 15, 20, 30])

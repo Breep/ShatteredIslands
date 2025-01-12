@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Card" load_steps=6 format=3 uid="uid://drmy4t2f0tiuq"]
+
+[ext_resource type="Script" path="res://ResourcesBase/Family/FamilyDesc.gd" id="1_x3erw"]
+[ext_resource type="Resource" uid="uid://5b3so5uho4c6" path="res://Resources/Families/Attack/AttackDesc.tres" id="2_s341r"]
+[ext_resource type="Texture2D" uid="uid://1sco473qrm2m" path="res://Data/Assets/Fantasy Items/TTRPG-Art-Asset_31.png" id="3_kb7mx"]
+[ext_resource type="Resource" uid="uid://cqw3mq7tim8a8" path="res://Resources/Upgrades/Player/Attack/AttackChanceToStun.tres" id="4_p0q40"]
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/Card.gd" id="5_7b1oo"]
+
+[resource]
+script = ExtResource("5_7b1oo")
+name = "Iron Fist"
+picture = ExtResource("3_kb7mx")
+families = Array[ExtResource("1_x3erw")]([ExtResource("2_s341r")])
+lvl = 1
+rarity = 0
+playerUpgrade = ExtResource("4_p0q40")

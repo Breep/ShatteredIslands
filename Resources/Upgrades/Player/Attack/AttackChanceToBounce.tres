@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="PlayUp_aaChanceToBounce" load_steps=2 format=3 uid="uid://bp6bib4yxxu0w"]
+
+[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/PlayUp_aaChanceToBounce.gd" id="1_dt23n"]
+
+[resource]
+script = ExtResource("1_dt23n")
+ChanceToBounce = Array[int]([5, 10, 15, 20, 30])
