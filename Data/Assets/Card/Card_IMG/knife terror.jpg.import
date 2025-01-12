@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://s0h8lcs7kd5o"
-path="res://.godot/imported/FRONT-retag.png-de9b9f3a57a9a240ccfeb7ad153eb46d.ctex"
+uid="uid://ljrda5geyfek"
+path="res://.godot/imported/knife terror.jpg-b99ab64029cd52a1be768b15d1e5967d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Data/Assets/Card/FRONT-retag.png"
-dest_files=["res://.godot/imported/FRONT-retag.png-de9b9f3a57a9a240ccfeb7ad153eb46d.ctex"]
+source_file="res://Data/Assets/Card/Card_IMG/knife terror.jpg"
+dest_files=["res://.godot/imported/knife terror.jpg-b99ab64029cd52a1be768b15d1e5967d.ctex"]
 
 [params]
 

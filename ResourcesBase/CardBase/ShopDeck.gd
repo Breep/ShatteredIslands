@@ -26,3 +26,4 @@ func construct_shopDeck(families: Array[Family], gameRules: CardRules) -> void:
 				Card.Rarity.EPIC:
 					for i in gameRules.epic_number:
 						add_card(card)
+	print(_cardPile.size())

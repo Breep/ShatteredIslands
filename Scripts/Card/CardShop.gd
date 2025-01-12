@@ -41,7 +41,7 @@ func _on_back_pressed() -> void:
 	$".".hide()
 
 func _on_card_shop_button_pressed() -> void:
-	print("COUCOU")
+	print("COUCOU TOI")
 	updateShopCardsDisplayed()
 
 # ============================== Public functions ==============================

@@ -1,13 +1,20 @@
-[gd_resource type="Resource" script_class="Family" load_steps=7 format=3 uid="uid://t5dw23oxbdir"]
+[gd_resource type="Resource" script_class="Family" load_steps=14 format=3 uid="uid://t5dw23oxbdir"]
 
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/Card.gd" id="1_lnl3k"]
 [ext_resource type="Resource" uid="uid://cus8i4ny6vl5t" path="res://Resources/Card/Attack/AttackDamage.tres" id="2_8282w"]
 [ext_resource type="Resource" uid="uid://c0c5k2i5875wc" path="res://Resources/Card/Attack/AttackCriticalChance.tres" id="2_mhhkf"]
 [ext_resource type="Resource" uid="uid://b3r48cltkodmm" path="res://Resources/Card/Attack/AttackSpeed.tres" id="3_g0bo8"]
 [ext_resource type="Resource" uid="uid://5b3so5uho4c6" path="res://Resources/Families/Attack/AttackDesc.tres" id="5_ca806"]
+[ext_resource type="Resource" uid="uid://di7w5mu1v41vg" path="res://Resources/Card/Attack/AttackChanceToPoison.tres" id="5_ejymp"]
+[ext_resource type="Resource" uid="uid://bg0ap6wj77ffv" path="res://Resources/Card/Attack/AttackChanceToIgnite.tres" id="6_4w8qj"]
 [ext_resource type="Script" path="res://ResourcesBase/Family/Family.gd" id="6_b6cyx"]
+[ext_resource type="Resource" uid="uid://ddwhb17ku08gj" path="res://Resources/Card/Attack/AttackChanceToPacify.tres" id="7_6r1c7"]
+[ext_resource type="Resource" uid="uid://d3ply88ho4i8g" path="res://Resources/Card/Attack/AttackChanceToNecrosis.tres" id="8_n3l82"]
+[ext_resource type="Resource" uid="uid://27g6tfnl5083" path="res://Resources/Card/Attack/AttackChanceToStaticCharge.tres" id="9_oup27"]
+[ext_resource type="Resource" uid="uid://dpi2kp35ehp1t" path="res://Resources/Card/Attack/AttackChanceToVulnerability.tres" id="10_58wyy"]
+[ext_resource type="Resource" uid="uid://6oxwbil1w57l" path="res://Resources/Card/Attack/AttackDrainLife.tres" id="11_sl5ei"]
 
 [resource]
 script = ExtResource("6_b6cyx")
 desc = ExtResource("5_ca806")
-cards = Array[ExtResource("1_lnl3k")]([ExtResource("2_mhhkf"), ExtResource("2_8282w"), ExtResource("3_g0bo8")])
+cards = Array[ExtResource("1_lnl3k")]([ExtResource("2_mhhkf"), ExtResource("2_8282w"), ExtResource("3_g0bo8"), ExtResource("5_ejymp"), ExtResource("6_4w8qj"), ExtResource("7_6r1c7"), ExtResource("8_n3l82"), ExtResource("9_oup27"), ExtResource("10_58wyy"), ExtResource("11_sl5ei")])

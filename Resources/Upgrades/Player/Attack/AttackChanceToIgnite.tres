@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="PlayUp_aaChanceToIgnite" load_steps=2 format=3 uid="uid://csuq20fvh1rta"]
+
+[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/PlayUp_aaChanceToIgnite.gd" id="1_rs3ap"]
+
+[resource]
+script = ExtResource("1_rs3ap")
+chanceToIgnite = Array[int]([10, 15, 20, 25, 40])

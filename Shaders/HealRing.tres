@@ -30,21 +30,21 @@ source = 5
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_v1q26"]
-size = Vector2(373.824, 576.824)
+size = Vector2(249.824, 304.824)
 title = "Texture 2"
 tint_color_enabled = true
 tint_color = Color(0.727487, 0.566315, 0.941406, 0.75)
 attached_nodes = PackedInt32Array(12, 11)
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_bq8vt"]
-size = Vector2(373.972, 597.403)
+size = Vector2(249.973, 325.402)
 title = "Texture 3"
 tint_color_enabled = true
 tint_color = Color(0.727487, 0.566315, 0.941406, 0.75)
 attached_nodes = PackedInt32Array(10, 9)
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_c6rvi"]
-size = Vector2(376.208, 627.22)
+size = Vector2(252.208, 355.22)
 title = "Texture 4"
 tint_color_enabled = true
 tint_color = Color(0.727487, 0.566315, 0.941406, 0.75)
@@ -56,7 +56,7 @@ parameter_name = "Texture_Substract"
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_0aps0"]
-size = Vector2(373, 617.937)
+size = Vector2(332.28, 345.937)
 title = "Texture 5"
 tint_color_enabled = true
 tint_color = Color(0.727487, 0.566315, 0.941406, 0.75)
@@ -100,7 +100,7 @@ texture_type = 1
 [sub_resource type="VisualShaderNodeClamp" id="VisualShaderNodeClamp_m5vpu"]
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_6rp06"]
-size = Vector2(373.452, 634.873)
+size = Vector2(244.452, 362.874)
 title = "Texture 1"
 tint_color_enabled = true
 tint_color = Color(0.727487, 0.566315, 0.941406, 0.75)
@@ -218,7 +218,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-241.983, -286.613)
 mode = 1
 flags/unshaded = true
 flags/light_only = false
