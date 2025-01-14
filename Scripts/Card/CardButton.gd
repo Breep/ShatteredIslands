@@ -9,7 +9,11 @@ class_name CardButton
 
 # ============================== Public ==============================
 
-signal leftClick
+signal leftClick(card)
+
+var card: Card:
+	get: return _card
+	set(_value): pass
 
 # ============================== Private ==============================
 
@@ -17,6 +21,7 @@ var _angle_x_max: float = 15.0
 var _angle_y_max: float = 15.0
 var _tween_rot: Tween
 var _tween_hover: Tween
+var _card: Card
 
 const LAYER_FRONT = 1
 const LAYER_BACK = 0
@@ -39,15 +44,17 @@ func _on_sub_viewport_container_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		_animation_3dRotate()
 	if event is InputEventMouseButton and event.is_pressed():
-		leftClick.emit()
+		leftClick.emit(_card)
  
 # ============================== Public functions ==============================
 
 func updateVisual(card: Card) -> void:
+	_card = card
 	if card == null:
 		printerr("Can't update button visual: card is null")
 		return
 	_cardLayout.updateCardLayout(card)
+
 
 # ============================== Private functions ==============================
 

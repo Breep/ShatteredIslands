@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Card" load_steps=6 format=3 uid="uid://d3ply88ho4i8g"]
+
+[ext_resource type="Script" path="res://ResourcesBase/Family/FamilyDesc.gd" id="1_3j47t"]
+[ext_resource type="Resource" uid="uid://5b3so5uho4c6" path="res://Resources/Families/Attack/AttackDesc.tres" id="2_1k6kv"]
+[ext_resource type="Texture2D" uid="uid://bd2ymqw3mfvrg" path="res://Data/Assets/Card/Card_IMG/necrosis knife.jpg" id="3_4s5uw"]
+[ext_resource type="Resource" uid="uid://c0f2add07ve1o" path="res://Resources/Upgrades/Player/Attack/AttackChanceToNecrosis.tres" id="4_02omi"]
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/Card.gd" id="5_06g1c"]
+
+[resource]
+script = ExtResource("5_06g1c")
+name = "Necrosis Scythe"
+picture = ExtResource("3_4s5uw")
+families = Array[ExtResource("1_3j47t")]([ExtResource("2_1k6kv")])
+lvl = 1
+rarity = 0
+playerUpgrade = ExtResource("4_02omi")

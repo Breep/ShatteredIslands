@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://ResourcesBase/Family/FamilyDesc.gd" id="1_34nr2"]
 [ext_resource type="Resource" uid="uid://5b3so5uho4c6" path="res://Resources/Families/Attack/AttackDesc.tres" id="2_6ciff"]
-[ext_resource type="Texture2D" uid="uid://47gwbjsdtwph" path="res://Data/Assets/Card/pngegg (1).png" id="2_x2m3x"]
+[ext_resource type="Texture2D" uid="uid://47gwbjsdtwph" path="res://Data/Assets/Card/GENERAL/pngegg (1).png" id="2_x2m3x"]
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/Card.gd" id="3_pwcvm"]
 [ext_resource type="Resource" uid="uid://dtwloby3ab7bw" path="res://Resources/Upgrades/Player/Attack/AttackDamage.tres" id="4_miyav"]
 

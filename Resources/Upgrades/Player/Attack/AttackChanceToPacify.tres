@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="PlayUp_aaChanceToPacify" load_steps=2 format=3 uid="uid://b1qd1lohnjt3d"]
+
+[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/PlayUp_aaChanceToPacify.gd" id="1_x4js6"]
+
+[resource]
+script = ExtResource("1_x4js6")
+chanceToPacify = Array[int]([10, 15, 20, 25, 40])

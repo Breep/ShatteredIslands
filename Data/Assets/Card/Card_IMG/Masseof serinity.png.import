@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chlyo8oq14s7r"
-path="res://.godot/imported/FRONT.png-a7ab226804a3c88e6934882b0b399025.ctex"
+uid="uid://crea2ylff1emw"
+path="res://.godot/imported/Masseof serinity.png-d0e3ea15519b199bb528244a516b192e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Data/Assets/Card/FRONT.png"
-dest_files=["res://.godot/imported/FRONT.png-a7ab226804a3c88e6934882b0b399025.ctex"]
+source_file="res://Data/Assets/Card/Card_IMG/Masseof serinity.png"
+dest_files=["res://.godot/imported/Masseof serinity.png-d0e3ea15519b199bb528244a516b192e.ctex"]
 
 [params]
 

@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="PlayUp_aaChanceToNecrosis" load_steps=2 format=3 uid="uid://c0f2add07ve1o"]
+
+[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/PlayUp_aaChanceToNecrosis.gd" id="1_ji3xh"]
+
+[resource]
+script = ExtResource("1_ji3xh")
+ChanceToNecrosis = Array[int]([10, 15, 20, 25, 40])

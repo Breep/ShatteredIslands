@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://s0h8lcs7kd5o"
-path="res://.godot/imported/FRONT-retag.png-de9b9f3a57a9a240ccfeb7ad153eb46d.ctex"
+uid="uid://bo534sbxmu3jh"
+path="res://.godot/imported/bounce attack.jpg-f56df070fe9450a2c27b5eeb96a91afe.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Data/Assets/Card/FRONT-retag.png"
-dest_files=["res://.godot/imported/FRONT-retag.png-de9b9f3a57a9a240ccfeb7ad153eb46d.ctex"]
+source_file="res://Data/Assets/Card/Card_IMG/bounce attack.jpg"
+dest_files=["res://.godot/imported/bounce attack.jpg-f56df070fe9450a2c27b5eeb96a91afe.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csebxot4tboo4"
-path="res://.godot/imported/BACK.png-089422651a63fa74f207c1ba8a7b6a6a.ctex"
+uid="uid://clx0jjxv145r5"
+path="res://.godot/imported/thunder weapon.jpg-9c3fb02d0555ee02efda30bf570e7fea.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Data/Assets/Card/BACK.png"
-dest_files=["res://.godot/imported/BACK.png-089422651a63fa74f207c1ba8a7b6a6a.ctex"]
+source_file="res://Data/Assets/Card/Card_IMG/thunder weapon.jpg"
+dest_files=["res://.godot/imported/thunder weapon.jpg-9c3fb02d0555ee02efda30bf570e7fea.ctex"]
 
 [params]
 

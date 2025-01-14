@@ -47,7 +47,25 @@ func draw_random_card() -> Card:
 	return draw_card(random_index)
 
 func draw_n_random_card(number :int) -> Array[Card]:
-	var random_card_array : Array[Card]
-	for i in number:
-		random_card_array.append(draw_random_card())
+	
+	if _cardPile.is_empty():
+		printerr("The cardPile is empty. Cannot draw cards.")
+		return []
+		
+	if number > _cardPile.size():
+		printerr("Requested number of cards exceeds the available cards.")
+		number = _cardPile.size()
+		
+	var random_card_array: Array[Card] = []
+	while random_card_array.size() < number:
+		var random_card = draw_random_card()
+		if random_card not in random_card_array:
+			random_card_array.append(random_card)
+			print("ajouté")
+		else:
+			add_card(random_card)
+			print("remise")
 	return random_card_array
+	
+func size():
+	return _cardPile.size()
