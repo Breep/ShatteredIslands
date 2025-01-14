@@ -1,6 +1,11 @@
 extends StaticBody2D
 class_name Player
 
+# ============================== Local scene nodes ==============================
+
+@onready var aaTimer: Timer = $Timers/AutoAttackTimer
+@onready var playerVisual: PlayerVisual = $PlayerVisual
+
 # ============================== Global scene nodes ==============================
 
 var fightingArea: FightingArea
@@ -34,6 +39,7 @@ func _ready() -> void:
 	_players = _getAllScenePlayers()
 	_enemies = _getEnemiesFromPlayers()
 	_allies = _getAlliesFromPlayers()
+	playerVisual.updateHealthBar(stats.health, hero.baseStats.health)
 	
 	if team == 1:# TMP
 		return
@@ -51,6 +57,11 @@ func _ready() -> void:
 	print("AttackSpeed: ", stats.autoAttack.speed)
 	print("Player CriticalChance: ", stats.autoAttack.critical_chance)
 	print("Player CriticalMultiplier: ", stats.autoAttack.critical_multiplier)
+
+# ============================== Public functions ==============================
+func hitByAutoAttack(src: Player, aaStats: AutoAttackProjectileStats):
+	print(src.name, " hit me :(")
+	stats.health -= aaStats.damage
 
 # ============================== Private functions ==============================
 
@@ -71,8 +82,9 @@ func _getClosestEnemy() -> Player:
 
 func _auto_attack(target: Player):
 	var projectile: Projectile = _aa_projectile.instantiate()
-	projectile.setStatFromPlayerStats(self.stats)
+	projectile.setStatFromPlayerStats(stats)
 	projectile.target = target
+	projectile.source = self
 	projectile.global_position = $ProjectileSpawn.global_position
 	projectile.global_rotation = $ProjectileSpawn.global_rotation
 	get_tree().root.add_child(projectile)
@@ -100,7 +112,7 @@ func _getAlliesFromPlayers() -> Array[Player]:
 func _applyAllCardsUpgrades() -> void:
 	for card in _deck.cardPile:
 		card.playerUpgrade.apply(self, card.lvl)
-	$Timers/AutoAttackTimer.wait_time = 1.0 / stats.autoAttack.speed
+	aaTimer.wait_time = 1.0 / stats.autoAttack.speed
 
 # ============================== Timer Callback ==============================
 

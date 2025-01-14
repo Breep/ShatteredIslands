@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://bbnioyc6ti8wn"]
+
+[ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_gjax4"]
+[ext_resource type="PackedScene" uid="uid://ft2ivrvgsi2v" path="res://Scenes/Player/PlayerVisual.tscn" id="2_iwmy3"]
+[ext_resource type="PackedScene" uid="uid://ngho1k3k5sa3" path="res://Scenes/Prefabs/projectile.tscn" id="3_cgh4r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lk7gr"]
+size = Vector2(21, 44)
+
+[node name="Player" type="StaticBody2D" groups=["PLAYERS"]]
+script = ExtResource("1_gjax4")
+_aa_projectile = ExtResource("3_cgh4r")
+
+[node name="PlayerVisual" parent="." instance=ExtResource("2_iwmy3")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -21)
+shape = SubResource("RectangleShape2D_lk7gr")
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="MovingTimer" type="Timer" parent="Timers"]
+wait_time = 3.0
+autostart = true
+
+[node name="AutoAttackTimer" type="Timer" parent="Timers"]
+autostart = true
+
+[node name="ProjectileSpawn" type="Node2D" parent="."]
+position = Vector2(13, -23)
+
+[connection signal="timeout" from="Timers/MovingTimer" to="." method="_on_moving_timer_timeout"]
+[connection signal="timeout" from="Timers/AutoAttackTimer" to="." method="_on_auto_attack_timer_timeout"]

@@ -17,7 +17,7 @@ shape = SubResource("RectangleShape2D_212ii")
 
 [node name="Ttrpg-art-asset04" type="Sprite2D" parent="."]
 material = ExtResource("2_7rwi4")
-rotation = 0.71733
+rotation = -1.57079
 texture = ExtResource("1_udey6")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

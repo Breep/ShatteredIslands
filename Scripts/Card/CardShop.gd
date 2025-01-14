@@ -45,7 +45,6 @@ func _on_card_shop_button_pressed() -> void:
 	updateShopCardsDisplayed()
 
 # ============================== Public functions ==============================
-
 func updateShopCardsDisplayed():
 	var cardsNumber = 3 # For the moment there is no way to get more cards each time you buy, maybe in the futur
 	var shopCards : Array[Card] = shopDeck.draw_n_random_card(cardsNumber)

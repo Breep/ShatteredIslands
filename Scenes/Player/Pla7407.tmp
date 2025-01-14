@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bbnioyc6ti8wn"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_gjax4"]
-[ext_resource type="PackedScene" uid="uid://ft2ivrvgsi2v" path="res://Scenes/Prefabs/Player/player_visual.tscn" id="2_iwmy3"]
+[ext_resource type="PackedScene" uid="uid://ft2ivrvgsi2v" path="res://Scenes/Player/PlayerVisual.tscn" id="2_iwmy3"]
 [ext_resource type="PackedScene" uid="uid://ngho1k3k5sa3" path="res://Scenes/Prefabs/projectile.tscn" id="3_cgh4r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lk7gr"]
@@ -29,6 +29,7 @@ autostart = true
 autostart = true
 
 [node name="ProjectileSpawn" type="Node2D" parent="."]
+position = Vector2(13, -23)
 
 [connection signal="timeout" from="Timers/MovingTimer" to="." method="_on_moving_timer_timeout"]
 [connection signal="timeout" from="Timers/AutoAttackTimer" to="." method="_on_auto_attack_timer_timeout"]

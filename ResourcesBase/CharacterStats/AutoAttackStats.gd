@@ -1,5 +1,5 @@
 extends Resource
-class_name AutoAttackStats
+class_name AutoAttackCharacterStats
 
 @export var damage: int # Damage of auto attack
 @export var speed: float # Attack per second

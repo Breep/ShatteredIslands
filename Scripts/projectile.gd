@@ -3,6 +3,7 @@ class_name Projectile
 
 # ============================== Private ==============================
 
+var _source: Player
 var _target: Player
 var _speed: float = 50
 const _SPEED_MIN: float = 0.3
@@ -10,6 +11,8 @@ var _dammage: int
 const _DAMMAGE_MIN: int = 1
 
 var _isCritic: bool
+
+var stats: AutoAttackProjectileStats
 
 # ============================== Public ==============================
 
@@ -40,10 +43,19 @@ var damage: int:
 		else:
 			_dammage = value
 
+var source: Player:
+	get:
+		return _source
+	set(value):
+		if value == null:
+			printerr("Trying to instantiate a projectile with no source !")
+		else:
+			_source = value
+
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	pass # Replace with function body.
+	stats = AutoAttackProjectileStats.new()
 
 func _process(delta: float) -> void:
 	_moveTowardTarget(delta)
@@ -64,18 +76,22 @@ func _isRandomizeModifierActive(chance: float) -> bool:
 	rng.randomize()
 	return rng.randf_range(0, 100) <= chance
 
-# ============================== public functions ==============================
+# ============================== Public functions ==============================
 
 func setStatFromPlayerStats(playerStats: CharacterStats) -> void:
-	damage = playerStats.autoAttack.damage
-	_isCritic = _isRandomizeModifierActive(playerStats.autoAttack.critical_chance)
-	if _isCritic:
+	if stats == null:
+		stats = AutoAttackProjectileStats.new()
+	stats.damage = playerStats.autoAttack.damage
+	stats.isCritic = _isRandomizeModifierActive(playerStats.autoAttack.critical_chance)
+	if stats.isCritic:
 		var criticalMultiplierNormalized = remap(playerStats.autoAttack.critical_multiplier, 0, 100, 1, 2)
-		damage *= criticalMultiplierNormalized
+		stats.damage *= criticalMultiplierNormalized
 		scale *= criticalMultiplierNormalized
 
 # ============================== Collision functions ==============================
 
 func _on_body_entered(body: Node2D) -> void:
+	print(_source)
 	if body is Player and body == _target:
+		_target.hitByAutoAttack(_source, stats)
 		queue_free()
