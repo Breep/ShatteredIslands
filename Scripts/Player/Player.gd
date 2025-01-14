@@ -21,7 +21,7 @@ var _players: Array[Player]
 var _enemies: Array[Player]
 var _allies: Array[Player]
 
-var _deck: PlayerDeck = PlayerDeck.new()
+var deck: PlayerDeck = PlayerDeck.new()
 
 # ============================== Public ==============================
 
@@ -50,7 +50,7 @@ func _ready() -> void:
 	print("Player CriticalChance: ", stats.autoAttack.critical_chance)
 	print("Player CriticalMultiplier: ", stats.autoAttack.critical_multiplier)
 	for card in tmp_cards:
-		_deck.add_card(card)
+		deck.add_card(card)
 	_applyAllCardsUpgrades()
 	print("")
 	print("AttackDamage: ", stats.autoAttack.damage)
@@ -66,6 +66,7 @@ func hitByAutoAttack(src: Player, aaStats: AutoAttackProjectileStats):
 # ============================== Private functions ==============================
 
 func _moveToCell(cell : Vector2):
+	return
 	if team == 1: # TMP Dev
 		return
 	position = fightingArea.getGlobalCellPosition(cell)
@@ -110,16 +111,18 @@ func _getAlliesFromPlayers() -> Array[Player]:
 	return ret
 
 func _applyAllCardsUpgrades() -> void:
-	for card in _deck.cardPile:
+	for card in deck.cardPile:
 		card.playerUpgrade.apply(self, card.lvl)
 	aaTimer.wait_time = 1.0 / stats.autoAttack.speed
 
 # ============================== Timer Callback ==============================
 
 func _on_auto_attack_timer_timeout() -> void:
+	return
 	_auto_attack(_getClosestEnemy())
 
 func _on_moving_timer_timeout() -> void:
+	return
 	if team == 1:# TMP
 		return
 	

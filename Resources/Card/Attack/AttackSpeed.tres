@@ -11,6 +11,6 @@ script = ExtResource("1_r8ooc")
 name = "Attack Speed"
 picture = ExtResource("3_7qqfq")
 families = Array[ExtResource("1_f3hor")]([ExtResource("2_vheu1")])
-lvl = 5
+lvl = 1
 rarity = 0
 playerUpgrade = ExtResource("4_clm0r")

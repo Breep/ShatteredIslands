@@ -17,6 +17,11 @@ staticCharge_chance = 0
 ignite_chance = 0
 necrosis_chance = 0
 vulnerability_chance = 0
+bounce_chance = 0
+doubleAttack_chance = 0
+heal_ally = 0
+cleanse = 0
+drain_life = 0
 
 [sub_resource type="Resource" id="Resource_gmmqc"]
 script = ExtResource("2_3eu75")

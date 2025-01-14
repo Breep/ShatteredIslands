@@ -27,3 +27,14 @@ func construct_shopDeck(families: Array[Family], gameRules: CardRules) -> void:
 					for i in gameRules.epic_number:
 						add_card(card)
 	print(_cardPile.size())
+
+func draw_smart(cardsToRemove: Array[Card], ncardtodraw: int):
+	var cardPileCopy = _cardPile
+	for card in cardsToRemove:
+		_remove_all_same_card_in_array(card, cardPileCopy)
+		# supprimer les cartes en trop de cardPileCopy
+	var cardsToDraw: Array[Card] = _draw_n_random_card_in_array(ncardtodraw, cardPileCopy)
+	for drawcard in cardsToDraw:
+		remove_card(drawcard)
+		
+	return cardsToDraw

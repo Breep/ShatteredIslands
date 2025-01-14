@@ -14,9 +14,18 @@ extends Control
 
 var shopDeck: ShopDeck = ShopDeck.new()
 
+var playerDeck: PlayerDeck
+var playerGold: int
+
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
+	var player = get_tree().get_root().find_child("Player", true, false) as Player
+	if player == null:
+		print("Pas de player")
+	else:
+		print("player found")
+		playerDeck = player.deck
 	shopDeck.construct_shopDeck(families, rules)
 	shopDeck.shuffle()
 	updateShopCardsDisplayed()
@@ -40,9 +49,8 @@ func card_selected(card: Card) -> void:
 	if player_gold >= 100:
 		player_gold -= 0
 		print("Carte achetée :", card.name)
-		
-		deck_to_player(card)
-		print(str(shopDeck.size()) + " avant")
+		playerDeck.add_card(card)
+		print(playerDeck.size(), " deck player")
 		var remaining_cards = []
 		for i in 3:
 			var cardButton = $CardContainer.get_node(str(i)) as CardButton
@@ -52,8 +60,6 @@ func card_selected(card: Card) -> void:
 		print(str(remaining_cards) + " le tableau de card a remettre")
 		for remaining_card in remaining_cards:
 			shopDeck.add_card(remaining_card)
-			
-		print(str(shopDeck.size()) + " aprés")
 		updateShopCardsDisplayed()
 		
 	else: 
@@ -63,6 +69,7 @@ func card_selected(card: Card) -> void:
 
 
 func deck_to_player(card: Card):
+	
 	pass
 
 
@@ -76,9 +83,10 @@ func _on_card_shop_button_pressed(card: Card) -> void:
 # ============================== Public functions ==============================
 func updateShopCardsDisplayed():
 	var cardsNumber = 3 # For the moment there is no way to get more cards each time you buy, maybe in the futur
-	var shopCards : Array[Card] = shopDeck.draw_n_random_card(cardsNumber)
+	var shopCards : Array[Card] = shopDeck.draw_smart(playerDeck.get_max_lvl_cards(),cardsNumber)
 	print(shopCards)
 	for i in shopCards.size():
+		shopCards[i].lvl = playerDeck.get_card_lvl(shopCards[i])+1
 		var cardButton = $CardContainer.get_node(str(i)) as CardButton
 		cardButton.updateVisual(shopCards[i])
 	pass

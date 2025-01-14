@@ -24,6 +24,11 @@ func updateCardLayout(card: Card) :
 			$Rarity/Rare.show()
 		Card.Rarity.EPIC:
 			$Rarity/Epic.show()
+			
+	for i in 5:
+		var hbox_node = _lvlcontainer.get_node(str(i))
+		hbox_node.hide()
+		
 	for i in card.lvl:
 		var hbox_node = _lvlcontainer.get_node(str(i))
 		if hbox_node:
