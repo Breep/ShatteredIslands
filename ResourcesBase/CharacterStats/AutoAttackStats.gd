@@ -12,3 +12,8 @@ class_name AutoAttackStats
 @export var ignite_chance: int # in %
 @export var necrosis_chance: int # in %
 @export var vulnerability_chance: int # in %
+@export var bounce_chance: int # in %
+@export var doubleAttack_chance: int # in %
+@export var heal_ally: int # amount
+@export var cleanse: int # amount
+@export var drain_life: int  # amount

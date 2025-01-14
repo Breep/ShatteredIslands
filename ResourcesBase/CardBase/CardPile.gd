@@ -61,8 +61,11 @@ func draw_n_random_card(number :int) -> Array[Card]:
 		var random_card = draw_random_card()
 		if random_card not in random_card_array:
 			random_card_array.append(random_card)
-			print("a était ajouté")
+			print("ajouté")
 		else:
 			add_card(random_card)
-			print("a était remise")
+			print("remise")
 	return random_card_array
+	
+func size():
+	return _cardPile.size()

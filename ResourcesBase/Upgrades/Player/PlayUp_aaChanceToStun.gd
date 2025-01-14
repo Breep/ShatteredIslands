@@ -11,7 +11,7 @@ func apply(player: Player, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > ChanceToStun.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
-	player.stats.autoAttack.damage += ChanceToStun[cardlvl-1]
+	player.stats.autoAttack.stun_chance += ChanceToStun[cardlvl-1]
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > ChanceToStun.size():
