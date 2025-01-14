@@ -67,6 +67,7 @@ func _ready() -> void:
 	print("Player CriticalMultiplier: ", stats.autoAttack.critical_multiplier)
 
 # ============================== Public functions ==============================
+
 func hitByAutoAttack(src: Player, aaStats: AutoAttackProjectileStats):
 	stats.health -= aaStats.damage
 	playerVisual.updateHealthBar(stats.health, hero.baseStats.health)
@@ -122,6 +123,7 @@ func _getAlliesFromPlayers() -> Array[Player]:
 	return ret
  
 func _applyAllCardsUpgrades() -> void:
+	stats = hero.baseStats.duplicate(true) # Reset stats
 	for card in _deck.cardPile:
 		card.playerUpgrade.apply(self, card.lvl)
 	aaTimer.wait_time = 1.0 / stats.autoAttack.speed
