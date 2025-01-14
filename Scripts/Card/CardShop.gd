@@ -14,9 +14,13 @@ extends Control
 
 var shopDeck: ShopDeck = ShopDeck.new()
 
+var playerDeck: PlayerDeck
+var playerGold: int
+
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
+	var player = get_tree().get_root().find_child("Player", true, false)
 	shopDeck.construct_shopDeck(families, rules)
 	shopDeck.shuffle()
 	updateShopCardsDisplayed()
@@ -35,13 +39,13 @@ func _ready() -> void:
 		#_ready()  # Rafraîchir l'interface
 	#else:
 		#print("Pas assez d'or pour acheter cette carte.")
-		
+
 func card_selected(card: Card) -> void:
 	if player_gold >= 100:
 		player_gold -= 0
 		print("Carte achetée :", card.name)
 		
-		deck_to_player(card)
+		playerDeck.add(card)
 		print(str(shopDeck.size()) + " avant")
 		var remaining_cards = []
 		for i in 3:
@@ -59,12 +63,9 @@ func card_selected(card: Card) -> void:
 	else: 
 		print("Pas assez d'or pour acheter cette carte.")
 
-
-
-
 func deck_to_player(card: Card):
+	# fire a signal: carte acheté(cart)
 	pass
-
 
 func _on_back_pressed() -> void:
 	print("Card shop closed")

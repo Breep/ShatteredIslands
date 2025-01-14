@@ -23,12 +23,16 @@ var _allies: Array[Player]
 
 var _deck: PlayerDeck = PlayerDeck.new()
 
+var _is_dead: bool = false
+
 # ============================== Public ==============================
 
 var stats: CharacterStats # Needs to be public for easier upgrades access
 
 @export var _aa_projectile: PackedScene # tmp
 @export var tmp_cards: Array[Card]
+
+signal dead(deadPlayer)
 
 # ============================== Node base functions ==============================
 
@@ -40,6 +44,10 @@ func _ready() -> void:
 	_enemies = _getEnemiesFromPlayers()
 	_allies = _getAlliesFromPlayers()
 	playerVisual.updateHealthBar(stats.health, hero.baseStats.health)
+	
+	#connect to all dead signals
+	for player in _players:
+		player.dead.connect(_on_dead)
 	
 	if team == 1:# TMP
 		return
@@ -60,19 +68,22 @@ func _ready() -> void:
 
 # ============================== Public functions ==============================
 func hitByAutoAttack(src: Player, aaStats: AutoAttackProjectileStats):
-	print(src.name, " hit me :(")
 	stats.health -= aaStats.damage
+	playerVisual.updateHealthBar(stats.health, hero.baseStats.health)
+	if stats.health <= 0 and !_is_dead:
+		dead.emit(self)
+		_is_dead = true
 
 # ============================== Private functions ==============================
 
 func _moveToCell(cell : Vector2):
+	if _is_dead: return
 	if team == 1: # TMP Dev
 		return
 	position = fightingArea.getGlobalCellPosition(cell)
 
 func _getClosestEnemy() -> Player:
 	if _enemies.is_empty():
-		print("No enemies")
 		return null
 	var closestEnemy: Player = _enemies[0]
 	for enemy in _enemies:
@@ -81,6 +92,7 @@ func _getClosestEnemy() -> Player:
 	return closestEnemy
 
 func _auto_attack(target: Player):
+	if target == null: return # No enemies, nothing to do
 	var projectile: Projectile = _aa_projectile.instantiate()
 	projectile.setStatFromPlayerStats(stats)
 	projectile.target = target
@@ -108,20 +120,27 @@ func _getAlliesFromPlayers() -> Array[Player]:
 		if player.team != team:
 			ret.append(player)
 	return ret
-
+ 
 func _applyAllCardsUpgrades() -> void:
 	for card in _deck.cardPile:
 		card.playerUpgrade.apply(self, card.lvl)
 	aaTimer.wait_time = 1.0 / stats.autoAttack.speed
 
-# ============================== Timer Callback ==============================
+# ============================== Signals callback ==============================
 
 func _on_auto_attack_timer_timeout() -> void:
+	if _is_dead: return
 	_auto_attack(_getClosestEnemy())
 
 func _on_moving_timer_timeout() -> void:
+	if _is_dead: return
 	if team == 1:# TMP
-		return
-	
+		return	
 	if fightingArea.isSelectionActive:
 		_moveToCell(fightingArea.selectionCell)
+
+func _on_dead(deadPlayer: Player):
+	print("Oh no! ", deadPlayer.name, " is dead :(")
+	_players.erase(deadPlayer)
+	_enemies.erase(deadPlayer)
+	_allies.erase(deadPlayer)

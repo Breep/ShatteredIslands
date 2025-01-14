@@ -55,7 +55,8 @@ var source: Player:
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	stats = AutoAttackProjectileStats.new()
+	if (stats == null):
+		stats = AutoAttackProjectileStats.new()
 
 func _process(delta: float) -> void:
 	_moveTowardTarget(delta)
@@ -91,7 +92,7 @@ func setStatFromPlayerStats(playerStats: CharacterStats) -> void:
 # ============================== Collision functions ==============================
 
 func _on_body_entered(body: Node2D) -> void:
-	print(_source)
 	if body is Player and body == _target:
-		_target.hitByAutoAttack(_source, stats)
+		if _target != null:
+			_target.hitByAutoAttack(_source, stats)
 		queue_free()

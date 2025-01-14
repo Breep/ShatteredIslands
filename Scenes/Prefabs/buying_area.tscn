@@ -28,6 +28,8 @@ sources/1 = SubResource("TileSetAtlasSource_goplx")
 sources/3 = SubResource("TileSetAtlasSource_dh85r")
 
 [node name="BuyingArea" type="Node2D"]
+position = Vector2(549, 305)
+scale = Vector2(0.3, 0.3)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAD/////AAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAAAAAAAAAABAP//AAAAAAAAAAD+////AAAAAAAAAAD//wAAAAAAAAAAAAD+/wAAAAAAAAAAAAABAAAAAAAAAAAAAAA=")
