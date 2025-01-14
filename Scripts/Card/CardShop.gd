@@ -44,7 +44,7 @@ func _ready() -> void:
 		#_ready()  # Rafraîchir l'interface
 	#else:
 		#print("Pas assez d'or pour acheter cette carte.")
-		
+
 func card_selected(card: Card) -> void:
 	if player_gold >= 100:
 		player_gold -= 0
@@ -65,13 +65,9 @@ func card_selected(card: Card) -> void:
 	else: 
 		print("Pas assez d'or pour acheter cette carte.")
 
-
-
-
 func deck_to_player(card: Card):
 	
 	pass
-
 
 func _on_back_pressed() -> void:
 	print("Card shop closed")
