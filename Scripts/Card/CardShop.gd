@@ -65,9 +65,6 @@ func card_selected(card: Card) -> void:
 	else: 
 		print("Pas assez d'or pour acheter cette carte.")
 
-func deck_to_player(card: Card):
-	
-	pass
 
 func _on_back_pressed() -> void:
 	print("Card shop closed")
@@ -86,3 +83,8 @@ func updateShopCardsDisplayed():
 		var cardButton = $CardContainer.get_node(str(i)) as CardButton
 		cardButton.updateVisual(shopCards[i])
 	pass
+
+
+func _on_player_deck_pressed() -> void:
+	var playerDeckUI = get_node("res://Scenes/UI/player_deck_ui.tscn")
+	playerDeckUI.show_player_cards(playerDeck)

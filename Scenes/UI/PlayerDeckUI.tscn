@@ -1,0 +1,131 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0hbe4art2ggl"]
+
+[ext_resource type="Script" path="res://Scripts/Tool/control_visualizer.gd" id="1_o81wg"]
+[ext_resource type="Texture2D" uid="uid://dk6ivjt88kll8" path="res://Data/Assets/BackGround/5fe29d9d-fd8c-481c-9627-de2563f86086.webp" id="2_rtv0p"]
+[ext_resource type="PackedScene" uid="uid://nk54d5o8pex" path="res://Scenes/UI/family_bonus.tscn" id="3_8bu4v"]
+
+[node name="PlayerDeckUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = -32.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o81wg")
+show_growth_direction = true
+show_anchor_offsets = true
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_rtv0p")
+region_rect = Rect2(352, 168, 400, 632)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.642339, 0.795654, 1, 1)
+
+[node name="DescriptionControl" type="Control" parent="."]
+layout_mode = 1
+anchor_right = 0.2
+anchor_bottom = 1.0
+grow_vertical = 2
+
+[node name="FamilyBonus" parent="DescriptionControl" instance=ExtResource("3_8bu4v")]
+layout_mode = 1
+anchor_top = 0.084
+anchor_right = 0.158
+offset_right = 0.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DescriptionControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_right = 61.4
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="DescriptionControl/VBoxContainer"]
+layout_mode = 2
+size_flags_stretch_ratio = 2.4
+theme_override_font_sizes/font_size = 35
+text = "FAMILLE"
+horizontal_alignment = 1
+
+[node name="InventoryControl" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.2
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="InventoryControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="InventoryControl/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Card Inventory"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="InventoryControl/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 4
+
+[node name="ColorRect" type="ColorRect" parent="InventoryControl/VBoxContainer2/GridContainer"]
+custom_minimum_size = Vector2(150, 240)
+layout_mode = 2
+
+[node name="ColorRect2" type="ColorRect" parent="InventoryControl/VBoxContainer2/GridContainer"]
+custom_minimum_size = Vector2(150, 240)
+layout_mode = 2
+
+[node name="ColorRect3" type="ColorRect" parent="InventoryControl/VBoxContainer2/GridContainer"]
+custom_minimum_size = Vector2(150, 240)
+layout_mode = 2
+
+[node name="ColorRect4" type="ColorRect" parent="InventoryControl/VBoxContainer2/GridContainer"]
+custom_minimum_size = Vector2(150, 240)
+layout_mode = 2
+
+[node name="ColorRect5" type="ColorRect" parent="InventoryControl/VBoxContainer2/GridContainer"]
+custom_minimum_size = Vector2(150, 240)
+layout_mode = 2
+
+[node name="ColorRect6" type="ColorRect" parent="InventoryControl/VBoxContainer2/GridContainer"]
+custom_minimum_size = Vector2(150, 240)
+layout_mode = 2
+
+[node name="ColorRect7" type="ColorRect" parent="InventoryControl/VBoxContainer2/GridContainer"]
+custom_minimum_size = Vector2(150, 240)
+layout_mode = 2
+
+[node name="ColorRect8" type="ColorRect" parent="InventoryControl/VBoxContainer2/GridContainer"]
+custom_minimum_size = Vector2(150, 240)
+layout_mode = 2

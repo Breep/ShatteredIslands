@@ -1,0 +1,38 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://bpo76n2lvfxb6"]
+
+[ext_resource type="FontFile" uid="uid://dgaako73a24kh" path="res://Data/font/rimouski sb.ttf" id="1_arr7y"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s41s8"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.521569)
+shadow_size = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_exuw3"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.2)
+shadow_size = 1
+
+[resource]
+default_font = ExtResource("1_arr7y")
+Button/font_sizes/font_size = 38
+Button/fonts/font = ExtResource("1_arr7y")
+Button/styles/hover = SubResource("StyleBoxFlat_s41s8")
+Button/styles/normal = SubResource("StyleBoxFlat_exuw3")

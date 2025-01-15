@@ -55,6 +55,7 @@ collision_use_scale = true
 polygon = PackedVector2Array(841, 128, 730, 370, 987, 373)
 
 [node name="FireDynamic" type="Node2D"]
+position = Vector2(205, 26)
 
 [node name="VFX_Dynamix_Fire" type="GPUParticles2D" parent="."]
 material = ExtResource("1_7g03x")

@@ -124,7 +124,7 @@ func _getAlliesFromPlayers() -> Array[Player]:
  
 func _applyAllCardsUpgrades() -> void:
 	stats = hero.baseStats.duplicate(true) # Reset stats
-	for card in _deck.cardPile:
+	for card in deck.cardPile:
 		card.playerUpgrade.apply(self, card.lvl)
 	aaTimer.wait_time = 1.0 / stats.autoAttack.speed
 

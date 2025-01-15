@@ -1,381 +1,550 @@
-[gd_scene load_steps=6 format=3 uid="uid://nk54d5o8pex"]
+[gd_scene load_steps=13 format=3 uid="uid://nk54d5o8pex"]
 
 [ext_resource type="Texture2D" uid="uid://rbfouv5lyrlu" path="res://Data/Assets/UI/cadre hexagone 2.png" id="1_bx0xl"]
 [ext_resource type="Texture2D" uid="uid://bxd1jnaci6olo" path="res://Data/Assets/Card/ICONS/ATTACK color.png" id="2_wkbf4"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kbndo"]
-bg_color = Color(0.158472, 0.158472, 0.158472, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7v85a"]
+bg_color = Color(0.10748, 0.10748, 0.10748, 0.784314)
+corner_radius_top_right = 200
+corner_radius_bottom_right = 200
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4vgcm"]
-bg_color = Color(0.162, 0.162, 0.162, 0.632)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ohqbq"]
+bg_color = Color(0.69656, 0.587045, 0.247249, 1)
 corner_radius_top_right = 200
 corner_radius_bottom_right = 200
 
 [sub_resource type="Theme" id="Theme_iy2f2"]
-Button/styles/hover = SubResource("StyleBoxFlat_kbndo")
-Button/styles/normal = SubResource("StyleBoxFlat_4vgcm")
+Button/styles/hover = SubResource("StyleBoxFlat_7v85a")
+Button/styles/normal = SubResource("StyleBoxFlat_ohqbq")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ihypd"]
+bg_color = Color(0.94902, 0.772549, 0.0117647, 1)
+skew = Vector2(1, 0)
+border_width_top = 1
+border_width_bottom = 1
+shadow_size = 1
+shadow_offset = Vector2(2, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wsltf"]
+bg_color = Color(0.10748, 0.10748, 0.10748, 0.784314)
+corner_radius_top_right = 200
+corner_radius_bottom_right = 200
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m1nhw"]
+bg_color = Color(0.133166, 0.368433, 0.786597, 1)
+corner_radius_top_right = 200
+corner_radius_bottom_right = 200
+
+[sub_resource type="Theme" id="Theme_f7m5h"]
+Button/styles/hover = SubResource("StyleBoxFlat_wsltf")
+Button/styles/normal = SubResource("StyleBoxFlat_m1nhw")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nafln"]
+bg_color = Color(0.10748, 0.10748, 0.10748, 0.784314)
+corner_radius_top_right = 200
+corner_radius_bottom_right = 200
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ybh87"]
+bg_color = Color(0.809908, 0, 0.163496, 1)
+corner_radius_top_right = 200
+corner_radius_bottom_right = 200
+
+[sub_resource type="Theme" id="Theme_e7uvh"]
+Button/styles/hover = SubResource("StyleBoxFlat_nafln")
+Button/styles/normal = SubResource("StyleBoxFlat_ybh87")
 
 [node name="FamilyBonus" type="Control"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
+anchor_right = 0.087
 anchor_bottom = 1.0
-grow_horizontal = 2
+offset_right = -100.224
 grow_vertical = 2
 
 [node name="FamilyContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_right = 300.0
+offset_bottom = 1988.0
+scale = Vector2(0.4, 0.4)
+theme_override_constants/separation = 40
+
+[node name="Attack" type="Button" parent="FamilyContainer"]
+custom_minimum_size = Vector2(200, 150)
+layout_mode = 2
+theme = SubResource("Theme_iy2f2")
+
+[node name="Family" type="TextureRect" parent="FamilyContainer/Attack"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -67.5
+offset_right = 140.0
+offset_bottom = 67.5
+grow_vertical = 2
+texture = ExtResource("1_bx0xl")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IconFamily" type="TextureRect" parent="FamilyContainer/Attack/Family"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -44.5
+offset_right = 42.5
+offset_bottom = 44.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_wkbf4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LevelFamily" type="Label" parent="FamilyContainer/Attack/Family"]
 layout_mode = 0
+offset_left = 106.667
+offset_top = 45.8333
+offset_right = 295.667
+offset_bottom = 94.8333
+theme_override_font_sizes/font_size = 30
+text = "ATTACK"
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="FamilyContainer/Attack"]
+custom_minimum_size = Vector2(400, 10)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
 offset_right = 400.0
-offset_bottom = 1500.0
+offset_bottom = 17.0
+grow_vertical = 0
+theme_override_styles/fill = SubResource("StyleBoxFlat_ihypd")
+max_value = 8.0
+step = 1.0
+value = 6.0
+show_percentage = false
 
-[node name="Button Family1" type="Button" parent="FamilyContainer"]
-custom_minimum_size = Vector2(300, 245)
-layout_mode = 2
-theme = SubResource("Theme_iy2f2")
-
-[node name="Family" type="TextureRect" parent="FamilyContainer/Button Family1"]
-layout_mode = 2
-offset_top = 12.0
-offset_right = 191.0
-offset_bottom = 233.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_bx0xl")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="IconFamily" type="TextureRect" parent="FamilyContainer/Button Family1/Family"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -68.5
-offset_top = -64.0
-offset_right = 68.5
-offset_bottom = 64.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_wkbf4")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="LevelFamily" type="Label" parent="FamilyContainer/Button Family1/Family"]
+[node name="Label" type="Label" parent="FamilyContainer/Attack"]
 layout_mode = 0
-offset_left = 138.0
-offset_top = 67.0
-offset_right = 453.0
-offset_bottom = 208.0
-theme_override_font_sizes/font_size = 30
-text = "1/8 
-Attack Speed"
+offset_left = 142.5
+offset_top = 147.5
+offset_right = 237.5
+offset_bottom = 170.5
+text = "1/8"
 horizontal_alignment = 1
 
-[node name="Button Family2" type="Button" parent="FamilyContainer"]
-custom_minimum_size = Vector2(300, 245)
+[node name="Storm" type="Button" parent="FamilyContainer"]
+custom_minimum_size = Vector2(200, 150)
 layout_mode = 2
-theme = SubResource("Theme_iy2f2")
+theme = SubResource("Theme_f7m5h")
 
-[node name="Family" type="TextureRect" parent="FamilyContainer/Button Family2"]
-layout_mode = 2
-offset_top = 12.0
-offset_right = 191.0
-offset_bottom = 233.0
-grow_horizontal = 2
+[node name="Family" type="TextureRect" parent="FamilyContainer/Storm"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -67.5
+offset_right = 140.0
+offset_bottom = 67.5
 grow_vertical = 2
 texture = ExtResource("1_bx0xl")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="IconFamily" type="TextureRect" parent="FamilyContainer/Button Family2/Family"]
+[node name="IconFamily" type="TextureRect" parent="FamilyContainer/Storm/Family"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -68.5
-offset_top = -64.0
-offset_right = 68.5
-offset_bottom = 64.0
+offset_left = -42.5
+offset_top = -44.5
+offset_right = 42.5
+offset_bottom = 44.5
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_wkbf4")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="LevelFamily" type="Label" parent="FamilyContainer/Button Family2/Family"]
+[node name="LevelFamily" type="Label" parent="FamilyContainer/Storm/Family"]
 layout_mode = 0
-offset_left = 138.0
-offset_top = 67.0
-offset_right = 453.0
-offset_bottom = 208.0
+offset_left = 106.667
+offset_top = 45.8333
+offset_right = 295.667
+offset_bottom = 94.8333
 theme_override_font_sizes/font_size = 30
-text = "1/8 
-Attack Speed"
+text = "STORM"
 horizontal_alignment = 1
 
-[node name="Button Family3" type="Button" parent="FamilyContainer"]
-custom_minimum_size = Vector2(300, 245)
-layout_mode = 2
-theme = SubResource("Theme_iy2f2")
-
-[node name="Family" type="TextureRect" parent="FamilyContainer/Button Family3"]
-layout_mode = 2
-offset_top = 12.0
-offset_right = 191.0
-offset_bottom = 233.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_bx0xl")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="IconFamily" type="TextureRect" parent="FamilyContainer/Button Family3/Family"]
+[node name="ProgressBar" type="ProgressBar" parent="FamilyContainer/Storm"]
+custom_minimum_size = Vector2(400, 10)
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -68.5
-offset_top = -64.0
-offset_right = 68.5
-offset_bottom = 64.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_wkbf4")
-expand_mode = 1
-stretch_mode = 5
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_right = 400.0
+offset_bottom = 17.0
+grow_vertical = 0
+theme_override_styles/fill = SubResource("StyleBoxFlat_ihypd")
+max_value = 8.0
+step = 1.0
+value = 3.0
+show_percentage = false
 
-[node name="LevelFamily" type="Label" parent="FamilyContainer/Button Family3/Family"]
+[node name="Label" type="Label" parent="FamilyContainer/Storm"]
 layout_mode = 0
-offset_left = 138.0
-offset_top = 67.0
-offset_right = 453.0
-offset_bottom = 208.0
-theme_override_font_sizes/font_size = 30
-text = "1/8 
-Attack Speed"
+offset_left = 142.5
+offset_top = 147.5
+offset_right = 237.5
+offset_bottom = 170.5
+text = "1/8"
 horizontal_alignment = 1
 
-[node name="Button Family4" type="Button" parent="FamilyContainer"]
-custom_minimum_size = Vector2(300, 245)
+[node name="Fire" type="Button" parent="FamilyContainer"]
+custom_minimum_size = Vector2(200, 150)
 layout_mode = 2
-theme = SubResource("Theme_iy2f2")
+theme = SubResource("Theme_e7uvh")
 
-[node name="Family" type="TextureRect" parent="FamilyContainer/Button Family4"]
-layout_mode = 2
-offset_top = 12.0
-offset_right = 191.0
-offset_bottom = 233.0
-grow_horizontal = 2
+[node name="Family" type="TextureRect" parent="FamilyContainer/Fire"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -67.5
+offset_right = 140.0
+offset_bottom = 67.5
 grow_vertical = 2
 texture = ExtResource("1_bx0xl")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="IconFamily" type="TextureRect" parent="FamilyContainer/Button Family4/Family"]
+[node name="IconFamily" type="TextureRect" parent="FamilyContainer/Fire/Family"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -68.5
-offset_top = -64.0
-offset_right = 68.5
-offset_bottom = 64.0
+offset_left = -42.5
+offset_top = -44.5
+offset_right = 42.5
+offset_bottom = 44.5
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_wkbf4")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="LevelFamily" type="Label" parent="FamilyContainer/Button Family4/Family"]
+[node name="LevelFamily" type="Label" parent="FamilyContainer/Fire/Family"]
 layout_mode = 0
-offset_left = 138.0
-offset_top = 67.0
-offset_right = 453.0
-offset_bottom = 208.0
+offset_left = 106.667
+offset_top = 45.8333
+offset_right = 295.667
+offset_bottom = 94.8333
 theme_override_font_sizes/font_size = 30
-text = "1/8 
-Attack Speed"
+text = "FIRE"
 horizontal_alignment = 1
 
-[node name="Button Family5" type="Button" parent="FamilyContainer"]
-custom_minimum_size = Vector2(300, 245)
-layout_mode = 2
-theme = SubResource("Theme_iy2f2")
-
-[node name="Family" type="TextureRect" parent="FamilyContainer/Button Family5"]
-layout_mode = 2
-offset_top = 12.0
-offset_right = 191.0
-offset_bottom = 233.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_bx0xl")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="IconFamily" type="TextureRect" parent="FamilyContainer/Button Family5/Family"]
+[node name="ProgressBar" type="ProgressBar" parent="FamilyContainer/Fire"]
+custom_minimum_size = Vector2(400, 10)
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -68.5
-offset_top = -64.0
-offset_right = 68.5
-offset_bottom = 64.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_wkbf4")
-expand_mode = 1
-stretch_mode = 5
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_right = 400.0
+offset_bottom = 17.0
+grow_vertical = 0
+theme_override_styles/fill = SubResource("StyleBoxFlat_ihypd")
+max_value = 8.0
+step = 1.0
+value = 1.0
+show_percentage = false
 
-[node name="LevelFamily" type="Label" parent="FamilyContainer/Button Family5/Family"]
+[node name="Label" type="Label" parent="FamilyContainer/Fire"]
 layout_mode = 0
-offset_left = 138.0
-offset_top = 67.0
-offset_right = 453.0
-offset_bottom = 208.0
-theme_override_font_sizes/font_size = 30
-text = "1/8 
-Attack Speed"
+offset_left = 142.5
+offset_top = 147.5
+offset_right = 237.5
+offset_bottom = 170.5
+text = "1/8"
 horizontal_alignment = 1
 
-[node name="Button Family6" type="Button" parent="FamilyContainer"]
-custom_minimum_size = Vector2(300, 245)
+[node name="Attack4" type="Button" parent="FamilyContainer"]
+custom_minimum_size = Vector2(200, 150)
 layout_mode = 2
 theme = SubResource("Theme_iy2f2")
 
-[node name="Family" type="TextureRect" parent="FamilyContainer/Button Family6"]
-layout_mode = 2
-offset_top = 12.0
-offset_right = 191.0
-offset_bottom = 233.0
-grow_horizontal = 2
+[node name="Family" type="TextureRect" parent="FamilyContainer/Attack4"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -67.5
+offset_right = 140.0
+offset_bottom = 67.5
 grow_vertical = 2
 texture = ExtResource("1_bx0xl")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="IconFamily" type="TextureRect" parent="FamilyContainer/Button Family6/Family"]
+[node name="IconFamily" type="TextureRect" parent="FamilyContainer/Attack4/Family"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -68.5
-offset_top = -64.0
-offset_right = 68.5
-offset_bottom = 64.0
+offset_left = -42.5
+offset_top = -44.5
+offset_right = 42.5
+offset_bottom = 44.5
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_wkbf4")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="LevelFamily" type="Label" parent="FamilyContainer/Button Family6/Family"]
+[node name="LevelFamily" type="Label" parent="FamilyContainer/Attack4/Family"]
 layout_mode = 0
-offset_left = 138.0
-offset_top = 67.0
-offset_right = 453.0
-offset_bottom = 208.0
+offset_left = 106.667
+offset_top = 45.8333
+offset_right = 295.667
+offset_bottom = 94.8333
 theme_override_font_sizes/font_size = 30
-text = "1/8 
-Attack Speed"
+text = "ATTACK"
 horizontal_alignment = 1
 
-[node name="Button Family7" type="Button" parent="FamilyContainer"]
-custom_minimum_size = Vector2(300, 245)
-layout_mode = 2
-theme = SubResource("Theme_iy2f2")
-
-[node name="Family" type="TextureRect" parent="FamilyContainer/Button Family7"]
-layout_mode = 2
-offset_top = 12.0
-offset_right = 191.0
-offset_bottom = 233.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_bx0xl")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="IconFamily" type="TextureRect" parent="FamilyContainer/Button Family7/Family"]
+[node name="ProgressBar" type="ProgressBar" parent="FamilyContainer/Attack4"]
+custom_minimum_size = Vector2(400, 10)
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -68.5
-offset_top = -64.0
-offset_right = 68.5
-offset_bottom = 64.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_wkbf4")
-expand_mode = 1
-stretch_mode = 5
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_right = 400.0
+offset_bottom = 17.0
+grow_vertical = 0
+theme_override_styles/fill = SubResource("StyleBoxFlat_ihypd")
+max_value = 8.0
+step = 1.0
+value = 1.0
+show_percentage = false
 
-[node name="LevelFamily" type="Label" parent="FamilyContainer/Button Family7/Family"]
+[node name="Label" type="Label" parent="FamilyContainer/Attack4"]
 layout_mode = 0
-offset_left = 138.0
-offset_top = 67.0
-offset_right = 453.0
-offset_bottom = 208.0
-theme_override_font_sizes/font_size = 30
-text = "1/8 
-Attack Speed"
+offset_left = 142.5
+offset_top = 147.5
+offset_right = 237.5
+offset_bottom = 170.5
+text = "1/8"
 horizontal_alignment = 1
 
-[node name="Button Family8" type="Button" parent="FamilyContainer"]
-custom_minimum_size = Vector2(300, 245)
+[node name="Attack5" type="Button" parent="FamilyContainer"]
+custom_minimum_size = Vector2(200, 150)
 layout_mode = 2
 theme = SubResource("Theme_iy2f2")
 
-[node name="Family" type="TextureRect" parent="FamilyContainer/Button Family8"]
-layout_mode = 2
-offset_top = 12.0
-offset_right = 191.0
-offset_bottom = 233.0
-grow_horizontal = 2
+[node name="Family" type="TextureRect" parent="FamilyContainer/Attack5"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -67.5
+offset_right = 140.0
+offset_bottom = 67.5
 grow_vertical = 2
 texture = ExtResource("1_bx0xl")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="IconFamily" type="TextureRect" parent="FamilyContainer/Button Family8/Family"]
+[node name="IconFamily" type="TextureRect" parent="FamilyContainer/Attack5/Family"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -68.5
-offset_top = -64.0
-offset_right = 68.5
-offset_bottom = 64.0
+offset_left = -42.5
+offset_top = -44.5
+offset_right = 42.5
+offset_bottom = 44.5
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_wkbf4")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="LevelFamily" type="Label" parent="FamilyContainer/Button Family8/Family"]
+[node name="LevelFamily" type="Label" parent="FamilyContainer/Attack5/Family"]
 layout_mode = 0
-offset_left = 138.0
-offset_top = 67.0
-offset_right = 453.0
-offset_bottom = 208.0
+offset_left = 106.667
+offset_top = 45.8333
+offset_right = 295.667
+offset_bottom = 94.8333
 theme_override_font_sizes/font_size = 30
-text = "1/8 
-Attack Speed"
+text = "ATTACK"
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="FamilyContainer/Attack5"]
+custom_minimum_size = Vector2(400, 10)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_right = 400.0
+offset_bottom = 17.0
+grow_vertical = 0
+theme_override_styles/fill = SubResource("StyleBoxFlat_ihypd")
+max_value = 8.0
+step = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="FamilyContainer/Attack5"]
+layout_mode = 0
+offset_left = 142.5
+offset_top = 147.5
+offset_right = 237.5
+offset_bottom = 170.5
+text = "1/8"
+horizontal_alignment = 1
+
+[node name="Attack6" type="Button" parent="FamilyContainer"]
+custom_minimum_size = Vector2(200, 150)
+layout_mode = 2
+theme = SubResource("Theme_iy2f2")
+
+[node name="Family" type="TextureRect" parent="FamilyContainer/Attack6"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -67.5
+offset_right = 140.0
+offset_bottom = 67.5
+grow_vertical = 2
+texture = ExtResource("1_bx0xl")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IconFamily" type="TextureRect" parent="FamilyContainer/Attack6/Family"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -44.5
+offset_right = 42.5
+offset_bottom = 44.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_wkbf4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LevelFamily" type="Label" parent="FamilyContainer/Attack6/Family"]
+layout_mode = 0
+offset_left = 106.667
+offset_top = 45.8333
+offset_right = 295.667
+offset_bottom = 94.8333
+theme_override_font_sizes/font_size = 30
+text = "ATTACK"
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="FamilyContainer/Attack6"]
+custom_minimum_size = Vector2(400, 10)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_right = 400.0
+offset_bottom = 17.0
+grow_vertical = 0
+theme_override_styles/fill = SubResource("StyleBoxFlat_ihypd")
+max_value = 8.0
+step = 1.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="FamilyContainer/Attack6"]
+layout_mode = 0
+offset_left = 142.5
+offset_top = 147.5
+offset_right = 237.5
+offset_bottom = 170.5
+text = "1/8"
+horizontal_alignment = 1
+
+[node name="Attack7" type="Button" parent="FamilyContainer"]
+custom_minimum_size = Vector2(200, 150)
+layout_mode = 2
+theme = SubResource("Theme_iy2f2")
+
+[node name="Family" type="TextureRect" parent="FamilyContainer/Attack7"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -67.5
+offset_right = 140.0
+offset_bottom = 67.5
+grow_vertical = 2
+texture = ExtResource("1_bx0xl")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IconFamily" type="TextureRect" parent="FamilyContainer/Attack7/Family"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -44.5
+offset_right = 42.5
+offset_bottom = 44.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_wkbf4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LevelFamily" type="Label" parent="FamilyContainer/Attack7/Family"]
+layout_mode = 0
+offset_left = 106.667
+offset_top = 45.8333
+offset_right = 295.667
+offset_bottom = 94.8333
+theme_override_font_sizes/font_size = 30
+text = "ATTACK"
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="FamilyContainer/Attack7"]
+custom_minimum_size = Vector2(400, 10)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_right = 400.0
+offset_bottom = 17.0
+grow_vertical = 0
+theme_override_styles/fill = SubResource("StyleBoxFlat_ihypd")
+max_value = 8.0
+step = 1.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="FamilyContainer/Attack7"]
+layout_mode = 0
+offset_left = 142.5
+offset_top = 147.5
+offset_right = 237.5
+offset_bottom = 170.5
+text = "1/8"
 horizontal_alignment = 1

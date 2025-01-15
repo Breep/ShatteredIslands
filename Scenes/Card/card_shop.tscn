@@ -29,6 +29,14 @@ grow_vertical = 2
 texture = ExtResource("2_jg1n2")
 region_rect = Rect2(149.186, 747.624, 464.28, 220.468)
 
+[node name="PlayerDeck" type="Button" parent="."]
+layout_mode = 0
+offset_left = 390.0
+offset_top = 545.0
+offset_right = 569.0
+offset_bottom = 607.0
+text = "Player DEck"
+
 [node name="PlayerStats" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 2
@@ -89,4 +97,5 @@ layout_mode = 2
 custom_minimum_size = Vector2(630, 0)
 layout_mode = 2
 
+[connection signal="pressed" from="PlayerDeck" to="." method="_on_player_deck_pressed"]
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
