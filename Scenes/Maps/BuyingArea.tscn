@@ -53,10 +53,10 @@ texture = ExtResource("7_mrf05")
 
 [node name="CardShop" parent="." instance=ExtResource("10_uysvx")]
 layout_mode = 0
-offset_left = 653.0
-offset_top = 38.0
-offset_right = 2653.0
-offset_bottom = 1138.0
+offset_left = 614.0
+offset_top = 120.0
+offset_right = 2614.0
+offset_bottom = 1220.0
 scale = Vector2(0.6, 0.6)
 
 [node name="Timer" type="Timer" parent="."]

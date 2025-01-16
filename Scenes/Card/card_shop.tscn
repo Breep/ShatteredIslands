@@ -1,11 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://cjkk5t7dhm46i"]
+[gd_scene load_steps=7 format=3 uid="uid://cjkk5t7dhm46i"]
 
 [ext_resource type="Script" path="res://Scripts/Card/CardShop.gd" id="1_mweij"]
 [ext_resource type="Texture2D" uid="uid://cwht2t4m2e2v8" path="res://Data/Assets/Card/GENERAL/pngegg.png" id="2_jg1n2"]
-[ext_resource type="Resource" uid="uid://d25t1layox48r" path="res://Resources/RulesGame/NormalGameCardRules.tres" id="2_t0tfq"]
 [ext_resource type="PackedScene" uid="uid://dhtfiyt1qvdre" path="res://Scenes/Card/CardButton.tscn" id="3_2iv8r"]
-[ext_resource type="Script" path="res://ResourcesBase/Family/Family.gd" id="3_yah5a"]
-[ext_resource type="Resource" uid="uid://t5dw23oxbdir" path="res://Resources/Families/Attack/Attack.tres" id="4_5o2dl"]
 [ext_resource type="Texture2D" uid="uid://bffhy01a31isu" path="res://Data/Assets/Misc/GoldPouchBag.png" id="7_sd34f"]
 [ext_resource type="PackedScene" uid="uid://b0hbe4art2ggl" path="res://Scenes/UI/PlayerDeckUI.tscn" id="9_e2no4"]
 [ext_resource type="Theme" uid="uid://bhj5xnratn4tl" path="res://Data/font/OpenCardShop.tres" id="9_m1sk4"]
@@ -17,8 +14,6 @@ anchors_preset = 0
 offset_right = 1151.0
 offset_bottom = 650.0
 script = ExtResource("1_mweij")
-rules = ExtResource("2_t0tfq")
-families = Array[ExtResource("3_yah5a")]([ExtResource("4_5o2dl")])
 
 [node name="Background" type="NinePatchRect" parent="."]
 layout_mode = 1
