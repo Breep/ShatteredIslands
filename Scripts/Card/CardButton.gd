@@ -50,12 +50,10 @@ func _on_sub_viewport_container_gui_input(event: InputEvent) -> void:
 
 func updateVisual(card: Card) -> void:
 	_card = card
-	print(card.lvl)
 	if card == null:
 		printerr("Can't update button visual: card is null")
 		return
 	_cardLayout.updateCardLayout(card)
-
 
 # ============================== Private functions ==============================
 

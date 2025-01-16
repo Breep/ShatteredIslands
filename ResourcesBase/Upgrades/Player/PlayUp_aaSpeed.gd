@@ -7,7 +7,7 @@ class_name PlayUp_aaSpeed
 
 @export var speeds: Array[int] # Auto attack speed increase per card lvl in %
 
-func apply(player: Player, cardlvl: int) -> void: # override
+func apply(player: Character, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > speeds.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return

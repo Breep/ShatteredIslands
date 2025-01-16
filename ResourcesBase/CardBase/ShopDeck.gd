@@ -1,16 +1,18 @@
 extends CardPile
 class_name ShopDeck
 
+# ============================== Public function ==============================
+
 func shuffle() -> void:
 	if _cardPile.is_empty(): 
 		return
 	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 	rng.randomize()
 	for i in _cardPile.size():
-			var random_index = rng.randi_range(0, _cardPile.size() - 1)
-			var temp = _cardPile[i]
-			_cardPile[i] = _cardPile[random_index]
-			_cardPile[random_index] = temp
+		var random_index = rng.randi_range(0, _cardPile.size() - 1)
+		var temp = _cardPile[i]
+		_cardPile[i] = _cardPile[random_index]
+		_cardPile[random_index] = temp
 
 func construct_shopDeck(families: Array[Family], gameRules: CardRules) -> void:
 	_cardPile.clear()
@@ -19,22 +21,20 @@ func construct_shopDeck(families: Array[Family], gameRules: CardRules) -> void:
 			match card.rarity:
 				Card.Rarity.COMMON:
 					for i in gameRules.common_number:
-						add_card(card)
+						add_card(card.duplicate())
 				Card.Rarity.RARE:
 					for i in gameRules.rare_number:
-						add_card(card)
+						add_card(card.duplicate())
 				Card.Rarity.EPIC:
 					for i in gameRules.epic_number:
-						add_card(card)
+						add_card(card.duplicate())
 	print(_cardPile.size())
 
 func draw_smart(cardsToRemove: Array[Card], ncardtodraw: int):
-	var cardPileCopy = _cardPile
-	for card in cardsToRemove:
-		_remove_all_same_card_in_array(card, cardPileCopy)
-		# supprimer les cartes en trop de cardPileCopy
+	var cardPileCopy = _cardPile.duplicate()
+	for cardToRemove in cardsToRemove:
+		_remove_all_same_card_in_array(cardToRemove, cardPileCopy)
 	var cardsToDraw: Array[Card] = _draw_n_random_card_in_array(ncardtodraw, cardPileCopy)
 	for drawcard in cardsToDraw:
 		remove_card(drawcard)
-		
 	return cardsToDraw

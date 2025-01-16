@@ -7,7 +7,7 @@ class_name PlayUp_aaChanceToDoubleAttack
 
 @export var ChanceToDoubleAttack: Array[int] # Auto attack damage increase per card lvl
 
-func apply(player: Player, cardlvl: int) -> void: # override
+func apply(player: Character, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > ChanceToDoubleAttack.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return

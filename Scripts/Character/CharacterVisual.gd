@@ -1,5 +1,5 @@
 extends Node2D
-class_name PlayerVisual
+class_name CharacterVisual
 
 # ============================== Local scene nodes ==============================
 

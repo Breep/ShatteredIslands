@@ -20,5 +20,5 @@ var _lifeTime: float
 func get_description():
 	pass
 
-func apply_effect(player: Player):
+func apply_effect(player: Character):
 	pass
