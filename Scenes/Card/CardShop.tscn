@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cjkk5t7dhm46i"]
 
 [ext_resource type="Script" path="res://Scripts/Card/CardShop.gd" id="1_wplsh"]
-[ext_resource type="Script" path="res://Scenes/Card/CardShopVisual.gd" id="2_wwspx"]
+[ext_resource type="Script" path="res://Scripts/Card/CardShopVisual.gd" id="2_wwspx"]
 [ext_resource type="Texture2D" uid="uid://cwht2t4m2e2v8" path="res://Data/Assets/Card/GENERAL/pngegg.png" id="5_ptr3c"]
 [ext_resource type="Texture2D" uid="uid://bffhy01a31isu" path="res://Data/Assets/Misc/GoldPouchBag.png" id="6_yw5no"]
 [ext_resource type="Theme" uid="uid://bhj5xnratn4tl" path="res://Data/font/OpenCardShop.tres" id="7_im4ff"]
@@ -14,6 +14,7 @@ offset_bottom = 1100.0
 script = ExtResource("1_wplsh")
 
 [node name="CardShopVisual" type="Panel" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

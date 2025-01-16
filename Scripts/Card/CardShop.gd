@@ -19,7 +19,7 @@ var playerGold: int
 
 var playerDeckUI = preload("res://Scenes/UI/PlayerDeckUI.tscn")
 var _cardsDisplayed: Array[Card]
-@onready var _cardShopVisual: CardShopVisual = $CardShopVisual
+@onready var _cardShopVisual: CardShopVisual = %CardShopVisual
 
 # ===== Local scene nodes =====
 
