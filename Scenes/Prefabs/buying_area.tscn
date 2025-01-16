@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://u86kcfn8nx7u"]
+[gd_scene load_steps=16 format=4 uid="uid://u86kcfn8nx7u"]
 
 [ext_resource type="Texture2D" uid="uid://b3b4rk02h1kbh" path="res://Data/Assets/Misc/deqc368-97acf8e2-85c4-4cb6-a909-c2755fcf2fc7.jpg" id="1_u2cot"]
 [ext_resource type="Texture2D" uid="uid://bed1g7i3vu0ah" path="res://Data/Assets/Table and chairs/Table.png" id="2_31a3a"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://w18hx3kvdm3m" path="res://Data/Assets/Misc/campfire.png" id="8_wawtu"]
 [ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Scenes/Player/Player.tscn" id="9_b1jau"]
 [ext_resource type="Resource" uid="uid://cjq2aor74kdvw" path="res://Resources/Heros/JohnnyDefault/JohnnyDefault.tres" id="10_a5nl6"]
+[ext_resource type="PackedScene" uid="uid://b0hbe4art2ggl" path="res://Scenes/UI/PlayerDeckUI.tscn" id="11_2skhn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vim1a"]
 texture = ExtResource("1_u2cot")
@@ -109,3 +110,10 @@ offset_top = -733.333
 offset_right = 1427.67
 offset_bottom = -83.3334
 scale = Vector2(1.4, 1.4)
+
+[node name="PlayerDeckUI" parent="." instance=ExtResource("11_2skhn")]
+visible = false
+offset_left = -1703.33
+offset_top = 380.0
+offset_right = -1703.33
+offset_bottom = 380.0

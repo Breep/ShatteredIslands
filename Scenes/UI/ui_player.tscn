@@ -386,7 +386,7 @@ offset_top = -592.0
 offset_right = 58.0
 offset_bottom = -534.0
 rotation = 0.784959
-color = Color(0.376327, 0.427365, 0.999977, 1)
+color = Color(0.376471, 0.427451, 1, 1)
 
 [node name="Label" type="Label" parent="CharacterUI/MarginContainer/Sections/CharacterDetails/Level/ColorRect"]
 layout_mode = 1

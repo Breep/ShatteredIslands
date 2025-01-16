@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0hbe4art2ggl"]
+[gd_scene load_steps=5 format=3 uid="uid://b0hbe4art2ggl"]
 
 [ext_resource type="Script" path="res://Scripts/Tool/control_visualizer.gd" id="1_o81wg"]
 [ext_resource type="Texture2D" uid="uid://dk6ivjt88kll8" path="res://Data/Assets/BackGround/5fe29d9d-fd8c-481c-9627-de2563f86086.webp" id="2_rtv0p"]
 [ext_resource type="PackedScene" uid="uid://nk54d5o8pex" path="res://Scenes/UI/family_bonus.tscn" id="3_8bu4v"]
+[ext_resource type="Texture2D" uid="uid://bo534sbxmu3jh" path="res://Data/Assets/Card/Card_IMG/bounce attack.jpg" id="4_32prx"]
 
 [node name="PlayerDeckUI" type="Control"]
 layout_mode = 3
@@ -98,34 +99,50 @@ theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 8
 columns = 4
 
-[node name="ColorRect" type="ColorRect" parent="InventoryControl/VBoxContainer2/GridContainer"]
-custom_minimum_size = Vector2(150, 240)
+[node name="TextureRect" type="TextureRect" parent="InventoryControl/VBoxContainer2/GridContainer"]
+custom_minimum_size = Vector2(150, 200)
 layout_mode = 2
+texture = ExtResource("4_32prx")
+expand_mode = 1
 
-[node name="ColorRect2" type="ColorRect" parent="InventoryControl/VBoxContainer2/GridContainer"]
-custom_minimum_size = Vector2(150, 240)
+[node name="TextureRect2" type="TextureRect" parent="InventoryControl/VBoxContainer2/GridContainer"]
+custom_minimum_size = Vector2(150, 200)
 layout_mode = 2
+texture = ExtResource("4_32prx")
+expand_mode = 1
 
-[node name="ColorRect3" type="ColorRect" parent="InventoryControl/VBoxContainer2/GridContainer"]
-custom_minimum_size = Vector2(150, 240)
+[node name="TextureRect3" type="TextureRect" parent="InventoryControl/VBoxContainer2/GridContainer"]
+custom_minimum_size = Vector2(150, 200)
 layout_mode = 2
+texture = ExtResource("4_32prx")
+expand_mode = 1
 
-[node name="ColorRect4" type="ColorRect" parent="InventoryControl/VBoxContainer2/GridContainer"]
-custom_minimum_size = Vector2(150, 240)
+[node name="TextureRect4" type="TextureRect" parent="InventoryControl/VBoxContainer2/GridContainer"]
+custom_minimum_size = Vector2(150, 200)
 layout_mode = 2
+texture = ExtResource("4_32prx")
+expand_mode = 1
 
-[node name="ColorRect5" type="ColorRect" parent="InventoryControl/VBoxContainer2/GridContainer"]
-custom_minimum_size = Vector2(150, 240)
+[node name="TextureRect5" type="TextureRect" parent="InventoryControl/VBoxContainer2/GridContainer"]
+custom_minimum_size = Vector2(150, 200)
 layout_mode = 2
+texture = ExtResource("4_32prx")
+expand_mode = 1
 
-[node name="ColorRect6" type="ColorRect" parent="InventoryControl/VBoxContainer2/GridContainer"]
-custom_minimum_size = Vector2(150, 240)
+[node name="TextureRect6" type="TextureRect" parent="InventoryControl/VBoxContainer2/GridContainer"]
+custom_minimum_size = Vector2(150, 200)
 layout_mode = 2
+texture = ExtResource("4_32prx")
+expand_mode = 1
 
-[node name="ColorRect7" type="ColorRect" parent="InventoryControl/VBoxContainer2/GridContainer"]
-custom_minimum_size = Vector2(150, 240)
+[node name="TextureRect7" type="TextureRect" parent="InventoryControl/VBoxContainer2/GridContainer"]
+custom_minimum_size = Vector2(150, 200)
 layout_mode = 2
+texture = ExtResource("4_32prx")
+expand_mode = 1
 
-[node name="ColorRect8" type="ColorRect" parent="InventoryControl/VBoxContainer2/GridContainer"]
-custom_minimum_size = Vector2(150, 240)
+[node name="TextureRect8" type="TextureRect" parent="InventoryControl/VBoxContainer2/GridContainer"]
+custom_minimum_size = Vector2(150, 200)
 layout_mode = 2
+texture = ExtResource("4_32prx")
+expand_mode = 1

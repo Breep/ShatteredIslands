@@ -16,6 +16,9 @@ var shopDeck: ShopDeck = ShopDeck.new()
 
 var playerDeck: PlayerDeck
 var playerGold: int
+# ============================== Public ==============================
+
+var playerDeckUI = preload("res://Scenes/UI/PlayerDeckUI.tscn")
 
 # ============================== Node base functions ==============================
 
@@ -86,5 +89,5 @@ func updateShopCardsDisplayed():
 
 
 func _on_player_deck_pressed() -> void:
-	var playerDeckUI = get_node("res://Scenes/UI/player_deck_ui.tscn")
+	$PlayerDeckUI.show()
 	playerDeckUI.show_player_cards(playerDeck)
