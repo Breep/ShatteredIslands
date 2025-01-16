@@ -3,8 +3,8 @@ class_name Projectile
 
 # ============================== Private ==============================
 
-var _source: Player
-var _target: Player
+var _source: Character
+var _target: Character
 var _speed: float = 50
 const _SPEED_MIN: float = 0.3
 var _dammage: int
@@ -25,7 +25,7 @@ var speed: float:
 		else:
 			_speed = value
 
-var target: Player:
+var target: Character:
 	get:
 		return _target
 	set(value):
@@ -43,7 +43,7 @@ var damage: int:
 		else:
 			_dammage = value
 
-var source: Player:
+var source: Character:
 	get:
 		return _source
 	set(value):
@@ -85,14 +85,15 @@ func setStatFromPlayerStats(playerStats: CharacterStats) -> void:
 	stats.damage = playerStats.autoAttack.damage
 	stats.isCritic = _isRandomizeModifierActive(playerStats.autoAttack.critical_chance)
 	if stats.isCritic:
-		var criticalMultiplierNormalized = remap(playerStats.autoAttack.critical_multiplier, 0, 100, 1, 2)
+		_isCritic = true
+		var criticalMultiplierNormalized = remap(playerStats.autoAttack.critical_multiplier, 0, 100, 1, 2) as int
 		stats.damage *= criticalMultiplierNormalized
 		scale *= criticalMultiplierNormalized
 
 # ============================== Collision functions ==============================
 
 func _on_body_entered(body: Node2D) -> void:
-	if body is Player and body == _target:
+	if body is Character and body == _target:
 		if _target != null:
 			_target.hitByAutoAttack(_source, stats)
 		queue_free()

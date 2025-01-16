@@ -7,7 +7,7 @@ class_name PlayUp_aaCritChance
 
 @export var critChances: Array[int] # Critical chance increase per card lvl in %
 
-func apply(player: Player, cardlvl: int) -> void: # override
+func apply(player: Character, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > critChances.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return

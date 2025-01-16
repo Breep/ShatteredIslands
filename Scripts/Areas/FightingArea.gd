@@ -3,8 +3,8 @@ class_name FightingArea
 
 # ============================== Local scene nodes ==============================
 
-@onready var tileMap: TileMapLayer = $Map
-@onready var selectionMap: TileMapLayer = $Map/SelectionLayer
+@onready var tileMap: TileMapLayer = %Map
+@onready var selectionMap: TileMapLayer = %SelectionLayer
 
 # ============================== Private ==============================
 
@@ -26,6 +26,8 @@ var selectionCell: Vector2:
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
+	print("Fighting Area ready !")
+	print(tileMap, " ", selectionMap)
 	pass
 
 func _process(_delta: float) -> void:
@@ -57,3 +59,6 @@ func _getMouseOveringCell() -> Vector2:
 
 func getGlobalCellPosition(cell: Vector2) -> Vector2:
 	return to_global(tileMap.map_to_local(cell))
+
+func _on_timer_timeout() -> void:
+	GameManager.gameSwitchTo(GameManager.GameState.Buying)

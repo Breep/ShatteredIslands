@@ -7,7 +7,7 @@ class_name PlayUp_aaChanceToIgnite
 
 @export var chanceToIgnite: Array[int] # Auto attack damage increase per card lvl
 
-func apply(player: Player, cardlvl: int) -> void: # override
+func apply(player: Character, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > chanceToIgnite.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
