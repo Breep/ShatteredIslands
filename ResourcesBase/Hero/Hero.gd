@@ -1,6 +1,6 @@
-extends Resource
 class_name Hero
+extends Resource
 
 @export var name: String
 @export var description: String
-@export var baseStats: CharacterStats
+@export var stats: CharacterStats

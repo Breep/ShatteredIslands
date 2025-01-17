@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cc4dn71gcygto"]
+
+[ext_resource type="FontFile" uid="uid://dgaako73a24kh" path="res://Data/font/rimouski sb.ttf" id="1_hw7ic"]
+[ext_resource type="Script" path="res://Scripts/Character/damage_popup.gd" id="1_pak6f"]
+
+[node name="Control" type="Label"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.85187, 0, 0.160848, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("1_hw7ic")
+theme_override_font_sizes/font_size = 24
+text = "0"
+script = ExtResource("1_pak6f")

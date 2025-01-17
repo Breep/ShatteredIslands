@@ -8,9 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://dakikx8em1ut3" path="res://Data/Assets/TileSet/landscape_sheet.png" id="3_y42re"]
 [ext_resource type="Texture2D" uid="uid://cg61v871c3lx8" path="res://Data/Assets/Misc/tableandchair.png" id="6_vj3my"]
 [ext_resource type="Texture2D" uid="uid://w18hx3kvdm3m" path="res://Data/Assets/Misc/campfire.png" id="8_wawtu"]
-[ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Scenes/Player/Player.tscn" id="9_b1jau"]
-[ext_resource type="Resource" uid="uid://cjq2aor74kdvw" path="res://Resources/Heros/JohnnyDefault/JohnnyDefault.tres" id="10_a5nl6"]
-[ext_resource type="PackedScene" uid="uid://b0hbe4art2ggl" path="res://Scenes/UI/PlayerDeckUI.tscn" id="11_2skhn"]
+[ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Scenes/Character/character.tscn" id="9_b1jau"]
+[ext_resource type="Resource" uid="uid://cjq2aor74kdvw" path="res://Resources/Heros/JohnnyDefault/johnny_default.tres" id="10_a5nl6"]
+[ext_resource type="PackedScene" uid="uid://b0hbe4art2ggl" path="res://Scenes/UI/player_deck_ui.tscn" id="11_2skhn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vim1a"]
 texture = ExtResource("1_u2cot")
