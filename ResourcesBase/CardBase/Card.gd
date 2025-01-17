@@ -1,5 +1,5 @@
-extends Resource
 class_name Card
+extends Resource
 
 enum Rarity {COMMON, RARE, EPIC}
 
@@ -8,4 +8,4 @@ enum Rarity {COMMON, RARE, EPIC}
 @export var families: Array[FamilyDesc]
 @export var lvl : int
 @export var rarity : Rarity
-@export var playerUpgrade: PlayerUpgrade
+@export var player_upgrade: PlayerUpgrade

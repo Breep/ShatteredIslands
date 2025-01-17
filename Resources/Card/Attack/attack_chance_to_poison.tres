@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://di7w5mu1v41vg"]
+
+[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_anhfv"]
+[ext_resource type="Resource" uid="uid://5b3so5uho4c6" path="res://Resources/Families/Attack/AttackDesc.tres" id="2_oo6iw"]
+[ext_resource type="Texture2D" uid="uid://srj0oauy5vod" path="res://Data/Assets/Card/Card_IMG/attack_poison.webp" id="3_tmn85"]
+[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Attack/aa_chance_to_poison.gd" id="4_siy7o"]
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_1kirh"]
+
+[sub_resource type="Resource" id="Resource_x0da1"]
+script = ExtResource("4_siy7o")
+chance_to_poison = Array[int]([10, 15, 20, 25, 40])
+
+[resource]
+script = ExtResource("5_1kirh")
+name = "Poison bolt"
+picture = ExtResource("3_tmn85")
+families = Array[ExtResource("1_anhfv")]([ExtResource("2_oo6iw")])
+lvl = 1
+rarity = 0
+player_upgrade = SubResource("Resource_x0da1")

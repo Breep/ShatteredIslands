@@ -1,7 +1,0 @@
-[gd_resource type="Resource" script_class="PlayUp_aaCritChance" load_steps=2 format=3 uid="uid://bpk4pp2ctafuo"]
-
-[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/PlayUp_aaCritChance.gd" id="1_t3srt"]
-
-[resource]
-script = ExtResource("1_t3srt")
-critChances = Array[int]([3, 6, 9, 12, 15])

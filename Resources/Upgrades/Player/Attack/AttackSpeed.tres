@@ -1,7 +1,0 @@
-[gd_resource type="Resource" script_class="PlayUp_aaSpeed" load_steps=2 format=3 uid="uid://c2fjkdcwonv87"]
-
-[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/PlayUp_aaSpeed.gd" id="1_4ei0n"]
-
-[resource]
-script = ExtResource("1_4ei0n")
-speeds = Array[int]([100, 200, 300, 400, 500])

@@ -1,29 +1,12 @@
-extends Area2D
 class_name Projectile
+extends Area2D
 
-# ============================== Private ==============================
+# ============================== Constants ==============================
 
-var _source: Character
-var _target: Character
-var _speed: float = 50
 const _SPEED_MIN: float = 0.3
-var _dammage: int
 const _DAMMAGE_MIN: int = 1
 
-var _isCritic: bool
-
-var stats: AutoAttackProjectileStats
-
 # ============================== Public ==============================
-
-var speed: float:
-	get:
-		return _speed
-	set(value):
-		if value < _SPEED_MIN:
-			_speed = _SPEED_MIN
-		else:
-			_speed = value
 
 var target: Character:
 	get:
@@ -34,15 +17,6 @@ var target: Character:
 		else:
 			_target = value
 
-var damage: int:
-	get:
-		return _dammage
-	set(value):
-		if value < _DAMMAGE_MIN:
-			_dammage = _DAMMAGE_MIN
-		else:
-			_dammage = value
-
 var source: Character:
 	get:
 		return _source
@@ -52,48 +26,59 @@ var source: Character:
 		else:
 			_source = value
 
+# ============================== Private ==============================
+
+var _source: Character
+var _target: Character
+var _isCritic: bool
+
+var _stats: AutoAttackProjectileStats
+
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	if (stats == null):
-		stats = AutoAttackProjectileStats.new()
+	if (_stats == null):
+		_stats = AutoAttackProjectileStats.new()
+
 
 func _process(delta: float) -> void:
-	_moveTowardTarget(delta)
+	_move_toward_target(delta)
+
+
+func _on_body_entered(body: Node2D) -> void:
+	if body is Character and body == _target:
+		if _target != null:
+			_target.hit_by_auto_attack(_source, _stats)
+		
+		queue_free()
+
 
 # ============================== Private functions ==============================
 
-func _moveTowardTarget(delta: float):
+func _move_toward_target(delta: float):
 	if _target == null:
 		printerr("Projectile [", name, "] is alive but with no target")
 		return
 	
 	var direction: Vector2 = (_target.global_position - global_position).normalized()
-	position += direction * _speed * delta
+	position += direction * _stats.speed * delta
 	look_at(_target.global_position)
 
-func _isRandomizeModifierActive(chance: float) -> bool:
+func _is_randomize_modifier_active(chance: float) -> bool:
 	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 	rng.randomize()
 	return rng.randf_range(0, 100) <= chance
 
 # ============================== Public functions ==============================
 
-func setStatFromPlayerStats(playerStats: CharacterStats) -> void:
-	if stats == null:
-		stats = AutoAttackProjectileStats.new()
-	stats.damage = playerStats.autoAttack.damage
-	stats.isCritic = _isRandomizeModifierActive(playerStats.autoAttack.critical_chance)
-	if stats.isCritic:
+func set_stats_from_player_stats(playerStats: CharacterStats) -> void:
+	if _stats == null:
+		_stats = AutoAttackProjectileStats.new()
+	_stats.speed = 50
+	_stats.damage = playerStats.auto_attack.damage
+	_stats.isCritic = _is_randomize_modifier_active(playerStats.auto_attack.critical_chance)
+	if _stats.isCritic:
 		_isCritic = true
-		var criticalMultiplierNormalized = remap(playerStats.autoAttack.critical_multiplier, 0, 100, 1, 2) as int
-		stats.damage *= criticalMultiplierNormalized
+		var criticalMultiplierNormalized = remap(playerStats.auto_attack.critical_multiplier, 0, 100, 1, 2) as int
+		_stats.damage *= criticalMultiplierNormalized
 		scale *= criticalMultiplierNormalized
-
-# ============================== Collision functions ==============================
-
-func _on_body_entered(body: Node2D) -> void:
-	if body is Character and body == _target:
-		if _target != null:
-			_target.hitByAutoAttack(_source, stats)
-		queue_free()

@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="Hero" load_steps=6 format=3 uid="uid://cjq2aor74kdvw"]
+
+[ext_resource type="Script" path="res://ResourcesBase/Hero/hero.gd" id="1_rwq1b"]
+[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/auto_attack_stats.gd" id="2_eh1pu"]
+[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/character_stats.gd" id="3_x2gh1"]
+
+[sub_resource type="Resource" id="Resource_x6ot6"]
+script = ExtResource("2_eh1pu")
+damage = 10
+speed = 1.0
+critical_chance = 10
+critical_multiplier = 100
+poison_chance = 0
+stun_chance = 0
+pacify_chance = 0
+static_charge_chance = 0
+ignite_chance = 0
+necrosis_chance = 0
+vulnerability_chance = 0
+bounce_chance = 0
+doubleAttack_chance = 0
+heal_ally = 0
+cleanse = 0
+drain_life = 0
+
+[sub_resource type="Resource" id="Resource_gvftt"]
+script = ExtResource("3_x2gh1")
+health = 300
+auto_attack = SubResource("Resource_x6ot6")
+
+[resource]
+script = ExtResource("1_rwq1b")
+name = "Johnny Default"
+description = "Johnny has always been a good test subject"
+stats = SubResource("Resource_gvftt")
