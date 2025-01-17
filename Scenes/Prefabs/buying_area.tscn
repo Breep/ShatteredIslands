@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cjrtgqc6mjoj2" path="res://Data/Assets/TileSet/fullTiles.png" id="2_vt4l1"]
 [ext_resource type="Texture2D" uid="uid://5ach8onuusti" path="res://Data/Assets/Table and chairs/Chair.png" id="3_6orla"]
 [ext_resource type="Texture2D" uid="uid://dakikx8em1ut3" path="res://Data/Assets/TileSet/landscape_sheet.png" id="3_y42re"]
+[ext_resource type="Texture2D" uid="uid://x4bf3gxnyyd0" path="res://Data/Assets/BackGround/empty room2.png" id="4_4btf6"]
 [ext_resource type="Texture2D" uid="uid://cg61v871c3lx8" path="res://Data/Assets/Misc/tableandchair.png" id="6_vj3my"]
 [ext_resource type="Texture2D" uid="uid://w18hx3kvdm3m" path="res://Data/Assets/Misc/campfire.png" id="8_wawtu"]
 [ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Scenes/Character/character.tscn" id="9_b1jau"]
@@ -37,6 +38,19 @@ scale = Vector2(0.3, 0.3)
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAD/////AAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAAAAAAAAAABAP//AAAAAAAAAAD+////AAAAAAAAAAD//wAAAAAAAAAAAAD+/wAAAAAAAAAAAAABAAAAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_se2fp")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2390.0
+offset_top = -1020.0
+offset_right = 1715.0
+offset_bottom = 1593.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_4btf6")
 
 [node name="TablePlace" type="Node2D" parent="."]
 visible = false
@@ -89,6 +103,7 @@ rotation = -0.740857
 texture = ExtResource("3_6orla")
 
 [node name="TablePlace2" type="Node2D" parent="."]
+visible = false
 position = Vector2(-770, 9.99999)
 scale = Vector2(0.8, 0.8)
 
@@ -113,8 +128,7 @@ scale = Vector2(1.4, 1.4)
 script = null
 
 [node name="PlayerDeckUI" parent="." instance=ExtResource("11_2skhn")]
-visible = false
-offset_left = -1703.33
-offset_top = 380.0
-offset_right = -1703.33
-offset_bottom = 380.0
+offset_left = -806.667
+offset_top = 233.333
+offset_right = -806.667
+offset_bottom = 233.333
