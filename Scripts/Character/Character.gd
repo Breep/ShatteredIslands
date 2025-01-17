@@ -5,6 +5,7 @@ class_name Character
 
 @onready var aaTimer: Timer = $Timers/AutoAttackTimer
 @onready var characterVisual: CharacterVisual = $CharacterVisual
+@onready var damage_popup_node = preload("res://Scenes/Character/DamagePopUp.tscn")
 
 # ============================== Global scene nodes ==============================
 
@@ -45,11 +46,23 @@ func _ready() -> void:
 
 func hitByAutoAttack(src: Character, aaStats: AutoAttackProjectileStats):
 	stats.health -= aaStats.damage
+	damage_popup(aaStats.damage,1)
 	characterVisual.updateHealthBar(stats.health, hero.baseStats.health)
 	if stats.health <= 0 and !_is_dead:
 		death.emit(self)
 		_is_dead = true
 
+func damage_popup(amount: float, modifier: int = 1):
+	var popup = damage_popup_node.instantiate()
+	var target_position = Vector2(randf_range(10,30), randf_range(10,-30)) 
+	popup.text = str(amount)
+	popup.position = position + target_position
+	popup.z_index = 1
+	#popup.position = position + Vector2(20,-20)
+	#if modifier == 1:
+	#ParticleFXSingleton.add_effect("poison", position)
+	#popup.set("theme_override_colors/font_color", Color.AQUAMARINE)
+	get_tree().current_scene.add_child(popup)
 
 # ============================== Private ==============================
 
