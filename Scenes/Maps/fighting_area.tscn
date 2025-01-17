@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=4 uid="uid://c3vks6k40no5w"]
+[gd_scene load_steps=13 format=4 uid="uid://bohooo4bbgxnh"]
 
 [ext_resource type="Script" path="res://Scripts/Areas/fighting_area.gd" id="1_7hx7c"]
 [ext_resource type="Texture2D" uid="uid://c8ikarjiy15wj" path="res://Data/Assets/TileSet/HexTilesetv3.png" id="2_tp2pc"]
-[ext_resource type="PackedScene" uid="uid://d3qosb2ppcabe" path="res://Scenes/Prefabs/spawn_manager.tscn" id="3_0skvm"]
+[ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://Scenes/Prefabs/spawn_manager.tscn" id="3_0skvm"]
 [ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Scenes/Character/character.tscn" id="4_ndbmo"]
-[ext_resource type="Resource" uid="uid://cjq2aor74kdvw" path="res://Resources/Heros/JohnnyDefault/johnny_default.tres" id="5_mtft7"]
+[ext_resource type="Resource" uid="uid://cbcy0wbqkel1q" path="res://Resources/Heros/JohnnyDefault/johnny_default.tres" id="5_mtft7"]
+[ext_resource type="PackedScene" uid="uid://c210b1bxn3s4" path="res://Scenes/UI/ui_fight.tscn" id="6_pcn0a"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4qyjf"]
 texture = ExtResource("2_tp2pc")
@@ -238,6 +239,7 @@ tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_tdlov")
 
 [node name="FightingArea" type="Node2D"]
+position = Vector2(297, 129)
 script = ExtResource("1_7hx7c")
 
 [node name="Map" type="TileMapLayer" parent="."]
@@ -254,11 +256,12 @@ unique_name_in_owner = true
 tile_set = SubResource("TileSet_c1v38")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+visible = false
 position = Vector2(241, 155)
 zoom = Vector2(1.7, 1.7)
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 30.0
+wait_time = 10.0
 one_shot = true
 autostart = true
 
@@ -277,13 +280,13 @@ team = 1
 hero = ExtResource("5_mtft7")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-offset_left = -47.0
-offset_top = -35.0
-offset_right = 727.0
-offset_bottom = 489.0
+offset_left = -297.0
+offset_top = -127.0
+offset_right = 1350.0
+offset_bottom = 782.0
 scale = Vector2(0.7, 0.7)
 
-[node name="UIFight" parent="MarginContainer" instance=ExtResource("6_0q2p1")]
+[node name="UIFight" parent="MarginContainer" instance=ExtResource("6_pcn0a")]
 layout_mode = 2
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

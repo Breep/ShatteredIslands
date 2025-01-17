@@ -17,7 +17,7 @@ var stats: CharacterStats # Needs to be public for easier upgrades access
 
 # ============================== Private variables ==============================
 
-@onready var damage_popup_node = preload("res://Scenes/Character/DamagePopUp.tscn")
+@onready var damage_popup_node = preload("res://Scenes/Character/damage_pop_up.tscn")
 var _aa_projectile = load("res://Scenes/Prefabs/projectile.tscn")
 var _fighting_area: FightingArea
 var _characters: Array[Character]
@@ -64,13 +64,13 @@ func damage_popup(amount: float, modifier: int = 1):
 	var popup = damage_popup_node.instantiate()
 	var target_position = Vector2(randf_range(10,30), randf_range(10,-30)) 
 	popup.text = str(amount)
-	popup.position = position + target_position
+	get_tree().current_scene.add_child(popup)
+	popup.global_position = global_position + target_position
 	popup.z_index = 1
 	#popup.position = position + Vector2(20,-20)
 	#if modifier == 1:
 	#ParticleFXSingleton.add_effect("poison", position)
 	#popup.set("theme_override_colors/font_color", Color.AQUAMARINE)
-	get_tree().current_scene.add_child(popup)
 
 # ============================== Private functions ==============================
 
@@ -101,9 +101,9 @@ func _auto_attack(target: Character):
 	projectile.set_stats_from_player_stats(stats)
 	projectile.target = target
 	projectile.source = self
+	_fighting_area.add_child(projectile)
 	projectile.global_position = $ProjectileSpawn.global_position
 	projectile.global_rotation = $ProjectileSpawn.global_rotation
-	_fighting_area.add_child(projectile)
 
 
 func _get_all_scene_characters() -> Array[Character]:

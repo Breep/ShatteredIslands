@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ciuaoxv321uoq"]
+[gd_scene load_steps=7 format=3 uid="uid://dwm2xg4jnd3m3"]
 
 [ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_lpyfl"]
 [ext_resource type="Shader" path="res://Shaders/UI/balatroBackgroundShader.gdshader" id="2_5j6rg"]

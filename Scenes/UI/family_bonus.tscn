@@ -1,7 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://nk54d5o8pex"]
+[gd_scene load_steps=13 format=3 uid="uid://c4qxlk6c31peq"]
 
-[ext_resource type="Texture2D" uid="uid://rbfouv5lyrlu" path="res://Data/Assets/UI/cadre hexagone 2.png" id="1_jy7h2"]
-[ext_resource type="Texture2D" uid="uid://bxd1jnaci6olo" path="res://Data/Assets/Card/ICONS/ATTACK color.png" id="2_dfae6"]
+[ext_resource type="Texture2D" uid="uid://rbfouv5lyrlu" path="res://Data/Assets/UI/cadre hexagone 2.png" id="1_83rnn"]
+[ext_resource type="Texture2D" uid="uid://bxd1jnaci6olo" path="res://Data/Assets/Card/ICONS/ATTACK color.png" id="2_v8g52"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7v85a"]
 bg_color = Color(0.10748, 0.10748, 0.10748, 0.784314)
@@ -87,7 +87,7 @@ offset_top = -67.5
 offset_right = 140.0
 offset_bottom = 67.5
 grow_vertical = 2
-texture = ExtResource("1_jy7h2")
+texture = ExtResource("1_83rnn")
 expand_mode = 1
 stretch_mode = 5
 
@@ -104,7 +104,7 @@ offset_right = 42.5
 offset_bottom = 44.5
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_dfae6")
+texture = ExtResource("2_v8g52")
 expand_mode = 1
 stretch_mode = 5
 
@@ -156,7 +156,7 @@ offset_top = -67.5
 offset_right = 140.0
 offset_bottom = 67.5
 grow_vertical = 2
-texture = ExtResource("1_jy7h2")
+texture = ExtResource("1_83rnn")
 expand_mode = 1
 stretch_mode = 5
 
@@ -173,7 +173,7 @@ offset_right = 42.5
 offset_bottom = 44.5
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_dfae6")
+texture = ExtResource("2_v8g52")
 expand_mode = 1
 stretch_mode = 5
 
@@ -225,7 +225,7 @@ offset_top = -67.5
 offset_right = 140.0
 offset_bottom = 67.5
 grow_vertical = 2
-texture = ExtResource("1_jy7h2")
+texture = ExtResource("1_83rnn")
 expand_mode = 1
 stretch_mode = 5
 
@@ -242,7 +242,7 @@ offset_right = 42.5
 offset_bottom = 44.5
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_dfae6")
+texture = ExtResource("2_v8g52")
 expand_mode = 1
 stretch_mode = 5
 
@@ -294,7 +294,7 @@ offset_top = -67.5
 offset_right = 140.0
 offset_bottom = 67.5
 grow_vertical = 2
-texture = ExtResource("1_jy7h2")
+texture = ExtResource("1_83rnn")
 expand_mode = 1
 stretch_mode = 5
 
@@ -311,7 +311,7 @@ offset_right = 42.5
 offset_bottom = 44.5
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_dfae6")
+texture = ExtResource("2_v8g52")
 expand_mode = 1
 stretch_mode = 5
 
@@ -363,7 +363,7 @@ offset_top = -67.5
 offset_right = 140.0
 offset_bottom = 67.5
 grow_vertical = 2
-texture = ExtResource("1_jy7h2")
+texture = ExtResource("1_83rnn")
 expand_mode = 1
 stretch_mode = 5
 
@@ -380,7 +380,7 @@ offset_right = 42.5
 offset_bottom = 44.5
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_dfae6")
+texture = ExtResource("2_v8g52")
 expand_mode = 1
 stretch_mode = 5
 
@@ -432,7 +432,7 @@ offset_top = -67.5
 offset_right = 140.0
 offset_bottom = 67.5
 grow_vertical = 2
-texture = ExtResource("1_jy7h2")
+texture = ExtResource("1_83rnn")
 expand_mode = 1
 stretch_mode = 5
 
@@ -449,7 +449,7 @@ offset_right = 42.5
 offset_bottom = 44.5
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_dfae6")
+texture = ExtResource("2_v8g52")
 expand_mode = 1
 stretch_mode = 5
 
@@ -500,7 +500,7 @@ offset_top = -67.5
 offset_right = 140.0
 offset_bottom = 67.5
 grow_vertical = 2
-texture = ExtResource("1_jy7h2")
+texture = ExtResource("1_83rnn")
 expand_mode = 1
 stretch_mode = 5
 
@@ -517,7 +517,7 @@ offset_right = 42.5
 offset_bottom = 44.5
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_dfae6")
+texture = ExtResource("2_v8g52")
 expand_mode = 1
 stretch_mode = 5
 

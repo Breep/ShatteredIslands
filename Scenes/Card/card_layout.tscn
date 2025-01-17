@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bmyepo6jaxntr"]
+[gd_scene load_steps=10 format=3 uid="uid://l4hi6dgs8lvg"]
 
 [ext_resource type="Script" path="res://Scripts/Card/card_layout.gd" id="1_2an10"]
 [ext_resource type="Texture2D" uid="uid://cwht2t4m2e2v8" path="res://Data/Assets/Card/GENERAL/pngegg.png" id="1_a0cwy"]

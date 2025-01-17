@@ -48,7 +48,7 @@ func _ready() -> void:
 	%"2".pivot_offset = Vector2(315, 440)
 	#_tween_hover = create_tween()
 	#_tween_rot = create_tween()
-	_cardTexture.material = _cardTexture.material.duplicate() # Make the material unique
+	_card_texture.material = _card_texture.material.duplicate() # Make the material unique
 
 func _on_mouse_entered() -> void:
 	_animation_pop_out()

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Hero" load_steps=6 format=3 uid="uid://cjq2aor74kdvw"]
+[gd_resource type="Resource" script_class="Hero" load_steps=6 format=3 uid="uid://cbcy0wbqkel1q"]
 
 [ext_resource type="Script" path="res://ResourcesBase/Hero/hero.gd" id="1_rwq1b"]
 [ext_resource type="Script" path="res://ResourcesBase/CharacterStats/auto_attack_stats.gd" id="2_eh1pu"]
@@ -18,7 +18,7 @@ ignite_chance = 0
 necrosis_chance = 0
 vulnerability_chance = 0
 bounce_chance = 0
-doubleAttack_chance = 0
+double_attack_chance = 0
 heal_ally = 0
 cleanse = 0
 drain_life = 0

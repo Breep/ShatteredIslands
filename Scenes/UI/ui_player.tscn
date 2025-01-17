@@ -1,20 +1,20 @@
-[gd_scene load_steps=22 format=3 uid="uid://bwiva4ydvcd"]
+[gd_scene load_steps=22 format=3 uid="uid://bskueqquqfhhp"]
 
-[ext_resource type="Script" path="res://Scripts/Tool/control_visualizer.gd" id="1_2nh5x"]
-[ext_resource type="Shader" path="res://Shaders/UI/colorRect_roundangle.gdshader" id="2_wn7vj"]
-[ext_resource type="Texture2D" uid="uid://bxd1jnaci6olo" path="res://Data/Assets/Card/ICONS/ATTACK color.png" id="3_kkbs8"]
-[ext_resource type="Texture2D" uid="uid://cbqxuvk76xjrw" path="res://Data/Assets/Card/ICONS/ATTACK.png" id="4_fdnw5"]
-[ext_resource type="Texture2D" uid="uid://ba6cllpcqe1xc" path="res://Data/Assets/Card/ICONS/star.png" id="5_ssq68"]
-[ext_resource type="Texture2D" uid="uid://cnp4ioj5qvrv4" path="res://Data/Assets/Card/ICONS/DEFENSE color.png" id="6_4xl40"]
-[ext_resource type="Texture2D" uid="uid://cia42t0jcdkfg" path="res://Data/Assets/Card/ICONS/HP color.png" id="7_gxkey"]
-[ext_resource type="Texture2D" uid="uid://nxj6jw2phtcp" path="res://Data/Assets/Card/ICONS/MANA color.png" id="8_5lvff"]
-[ext_resource type="Texture2D" uid="uid://d34qpfx40d4ox" path="res://Data/Assets/BackGround/472616789_28403690705911652_2688862136642980928_n-removebg-preview.png" id="9_vru7t"]
-[ext_resource type="Texture2D" uid="uid://dhvnlvdnbrxvl" path="res://Data/Assets/Card/Card_IMG/cleanse.jpg" id="10_ft0wh"]
-[ext_resource type="Texture2D" uid="uid://bo534sbxmu3jh" path="res://Data/Assets/Card/Card_IMG/bounce attack.jpg" id="11_h7a4w"]
-[ext_resource type="Texture2D" uid="uid://dn4tg0i7odbd8" path="res://Data/Assets/Card/Card_IMG/ignite on aa.png" id="12_omjhs"]
-[ext_resource type="Texture2D" uid="uid://ljrda5geyfek" path="res://Data/Assets/Card/Card_IMG/knife terror.jpg" id="13_jpxdy"]
-[ext_resource type="Texture2D" uid="uid://berioty2oweos" path="res://Data/Assets/Card/Card_IMG/soul drain.jpg" id="14_ux6t2"]
-[ext_resource type="Texture2D" uid="uid://clx0jjxv145r5" path="res://Data/Assets/Card/Card_IMG/thunder weapon.jpg" id="15_j1sls"]
+[ext_resource type="Script" path="res://Scripts/Tool/control_visualizer.gd" id="1_jwn1d"]
+[ext_resource type="Texture2D" uid="uid://bxd1jnaci6olo" path="res://Data/Assets/Card/ICONS/ATTACK color.png" id="2_ay2ej"]
+[ext_resource type="Shader" path="res://Shaders/UI/colorRect_roundangle.gdshader" id="2_gulvd"]
+[ext_resource type="Texture2D" uid="uid://cnp4ioj5qvrv4" path="res://Data/Assets/Card/ICONS/DEFENSE color.png" id="3_aaqkt"]
+[ext_resource type="Texture2D" uid="uid://d34qpfx40d4ox" path="res://Data/Assets/BackGround/472616789_28403690705911652_2688862136642980928_n-removebg-preview.png" id="3_noy4j"]
+[ext_resource type="Texture2D" uid="uid://cbqxuvk76xjrw" path="res://Data/Assets/Card/ICONS/ATTACK.png" id="3_qoay4"]
+[ext_resource type="Texture2D" uid="uid://cia42t0jcdkfg" path="res://Data/Assets/Card/ICONS/HP color.png" id="4_lfj3v"]
+[ext_resource type="Texture2D" uid="uid://nxj6jw2phtcp" path="res://Data/Assets/Card/ICONS/MANA color.png" id="5_ts515"]
+[ext_resource type="Texture2D" uid="uid://ba6cllpcqe1xc" path="res://Data/Assets/Card/ICONS/star.png" id="6_qcym3"]
+[ext_resource type="Texture2D" uid="uid://dhvnlvdnbrxvl" path="res://Data/Assets/Card/Card_IMG/cleanse.jpg" id="8_05agw"]
+[ext_resource type="Texture2D" uid="uid://bo534sbxmu3jh" path="res://Data/Assets/Card/Card_IMG/bounce attack.jpg" id="9_bkggr"]
+[ext_resource type="Texture2D" uid="uid://dn4tg0i7odbd8" path="res://Data/Assets/Card/Card_IMG/ignite on aa.png" id="10_6bxc4"]
+[ext_resource type="Texture2D" uid="uid://ljrda5geyfek" path="res://Data/Assets/Card/Card_IMG/knife terror.jpg" id="11_ba0ao"]
+[ext_resource type="Texture2D" uid="uid://berioty2oweos" path="res://Data/Assets/Card/Card_IMG/soul drain.jpg" id="12_oe1kk"]
+[ext_resource type="Texture2D" uid="uid://clx0jjxv145r5" path="res://Data/Assets/Card/Card_IMG/thunder weapon.jpg" id="13_ildox"]
 
 [sub_resource type="Gradient" id="Gradient_dhf5d"]
 offsets = PackedFloat32Array(0, 0.982143, 1)
@@ -32,7 +32,7 @@ height = 648
 noise = SubResource("FastNoiseLite_q7drc")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i5moe"]
-shader = ExtResource("2_wn7vj")
+shader = ExtResource("2_gulvd")
 
 [sub_resource type="Theme" id="Theme_48i0b"]
 default_font_size = 0
@@ -46,7 +46,7 @@ offset_left = -0.0720062
 offset_right = -0.504089
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_2nh5x")
+script = ExtResource("1_jwn1d")
 
 [node name="BG" type="TextureRect" parent="."]
 visible = false
@@ -186,7 +186,7 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="CharacterUI/MarginContainer/Sections/CharacterDetails/MarginContainer/Details/Stats/AttackStats/MarginContainer/VBoxContainer/Damage"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("3_kkbs8")
+texture = ExtResource("2_ay2ej")
 expand_mode = 1
 
 [node name="Label" type="Label" parent="CharacterUI/MarginContainer/Sections/CharacterDetails/MarginContainer/Details/Stats/AttackStats/MarginContainer/VBoxContainer/Damage"]
@@ -201,7 +201,7 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="CharacterUI/MarginContainer/Sections/CharacterDetails/MarginContainer/Details/Stats/AttackStats/MarginContainer/VBoxContainer/Damage2"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("4_fdnw5")
+texture = ExtResource("3_qoay4")
 expand_mode = 1
 
 [node name="Label" type="Label" parent="CharacterUI/MarginContainer/Sections/CharacterDetails/MarginContainer/Details/Stats/AttackStats/MarginContainer/VBoxContainer/Damage2"]
@@ -216,7 +216,7 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="CharacterUI/MarginContainer/Sections/CharacterDetails/MarginContainer/Details/Stats/AttackStats/MarginContainer/VBoxContainer/Damage3"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("5_ssq68")
+texture = ExtResource("6_qcym3")
 expand_mode = 1
 
 [node name="Label" type="Label" parent="CharacterUI/MarginContainer/Sections/CharacterDetails/MarginContainer/Details/Stats/AttackStats/MarginContainer/VBoxContainer/Damage3"]
@@ -231,7 +231,7 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="CharacterUI/MarginContainer/Sections/CharacterDetails/MarginContainer/Details/Stats/AttackStats/MarginContainer/VBoxContainer/Damage4"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("3_kkbs8")
+texture = ExtResource("2_ay2ej")
 expand_mode = 1
 
 [node name="Label" type="Label" parent="CharacterUI/MarginContainer/Sections/CharacterDetails/MarginContainer/Details/Stats/AttackStats/MarginContainer/VBoxContainer/Damage4"]
@@ -274,7 +274,7 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="CharacterUI/MarginContainer/Sections/CharacterDetails/MarginContainer/Details/Stats/DefensiveStats/MarginContainer/VBoxContainer/Damage"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("6_4xl40")
+texture = ExtResource("3_aaqkt")
 expand_mode = 1
 
 [node name="Label" type="Label" parent="CharacterUI/MarginContainer/Sections/CharacterDetails/MarginContainer/Details/Stats/DefensiveStats/MarginContainer/VBoxContainer/Damage"]
@@ -289,7 +289,7 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="CharacterUI/MarginContainer/Sections/CharacterDetails/MarginContainer/Details/Stats/DefensiveStats/MarginContainer/VBoxContainer/Damage2"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("7_gxkey")
+texture = ExtResource("4_lfj3v")
 expand_mode = 1
 
 [node name="Label" type="Label" parent="CharacterUI/MarginContainer/Sections/CharacterDetails/MarginContainer/Details/Stats/DefensiveStats/MarginContainer/VBoxContainer/Damage2"]
@@ -304,7 +304,7 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="CharacterUI/MarginContainer/Sections/CharacterDetails/MarginContainer/Details/Stats/DefensiveStats/MarginContainer/VBoxContainer/Damage3"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("8_5lvff")
+texture = ExtResource("5_ts515")
 expand_mode = 1
 
 [node name="Label" type="Label" parent="CharacterUI/MarginContainer/Sections/CharacterDetails/MarginContainer/Details/Stats/DefensiveStats/MarginContainer/VBoxContainer/Damage3"]
@@ -319,7 +319,7 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="CharacterUI/MarginContainer/Sections/CharacterDetails/MarginContainer/Details/Stats/DefensiveStats/MarginContainer/VBoxContainer/Damage4"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("5_ssq68")
+texture = ExtResource("6_qcym3")
 expand_mode = 1
 
 [node name="Label" type="Label" parent="CharacterUI/MarginContainer/Sections/CharacterDetails/MarginContainer/Details/Stats/DefensiveStats/MarginContainer/VBoxContainer/Damage4"]
@@ -339,7 +339,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("9_vru7t")
+texture = ExtResource("3_noy4j")
 expand_mode = 1
 stretch_mode = 5
 
@@ -361,13 +361,13 @@ layout_mode = 2
 [node name="Famille1" type="TextureRect" parent="CharacterUI/MarginContainer/Sections/CharacterDetails/MarginContainer/Details/Character/FamilleV/FamilleH"]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
-texture = ExtResource("3_kkbs8")
+texture = ExtResource("2_ay2ej")
 expand_mode = 1
 
 [node name="Famille2" type="TextureRect" parent="CharacterUI/MarginContainer/Sections/CharacterDetails/MarginContainer/Details/Character/FamilleV/FamilleH"]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
-texture = ExtResource("6_4xl40")
+texture = ExtResource("3_aaqkt")
 expand_mode = 1
 
 [node name="Level" type="Control" parent="CharacterUI/MarginContainer/Sections/CharacterDetails"]
@@ -470,13 +470,13 @@ horizontal_alignment = 1
 [node name="Talent1" type="TextureRect" parent="CharacterUI/MarginContainer/Sections/HeroTalents/MarginContainer/VBoxContainer/Control/MarginContainer/Talent"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("10_ft0wh")
+texture = ExtResource("8_05agw")
 expand_mode = 1
 
 [node name="Talent2" type="TextureRect" parent="CharacterUI/MarginContainer/Sections/HeroTalents/MarginContainer/VBoxContainer/Control/MarginContainer/Talent"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("11_h7a4w")
+texture = ExtResource("9_bkggr")
 expand_mode = 1
 
 [node name="Control2" type="Control" parent="CharacterUI/MarginContainer/Sections/HeroTalents/MarginContainer/VBoxContainer"]
@@ -523,13 +523,13 @@ horizontal_alignment = 1
 [node name="Talent1" type="TextureRect" parent="CharacterUI/MarginContainer/Sections/HeroTalents/MarginContainer/VBoxContainer/Control2/MarginContainer/Talent"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("12_omjhs")
+texture = ExtResource("10_6bxc4")
 expand_mode = 1
 
 [node name="Talent2" type="TextureRect" parent="CharacterUI/MarginContainer/Sections/HeroTalents/MarginContainer/VBoxContainer/Control2/MarginContainer/Talent"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("13_jpxdy")
+texture = ExtResource("11_ba0ao")
 expand_mode = 1
 
 [node name="Control3" type="Control" parent="CharacterUI/MarginContainer/Sections/HeroTalents/MarginContainer/VBoxContainer"]
@@ -576,11 +576,11 @@ horizontal_alignment = 1
 [node name="Talent1" type="TextureRect" parent="CharacterUI/MarginContainer/Sections/HeroTalents/MarginContainer/VBoxContainer/Control3/MarginContainer/Talent"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("14_ux6t2")
+texture = ExtResource("12_oe1kk")
 expand_mode = 1
 
 [node name="Talent2" type="TextureRect" parent="CharacterUI/MarginContainer/Sections/HeroTalents/MarginContainer/VBoxContainer/Control3/MarginContainer/Talent"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("15_j1sls")
+texture = ExtResource("13_ildox")
 expand_mode = 1

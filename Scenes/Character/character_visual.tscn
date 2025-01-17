@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://ft2ivrvgsi2v"]
+[gd_scene load_steps=5 format=3 uid="uid://br1wrpaxa7qjk"]
 
 [ext_resource type="Script" path="res://Scripts/Character/character_visual.gd" id="1_8fkrf"]
 [ext_resource type="Texture2D" uid="uid://d3g1up274niat" path="res://Data/Texture/Textrure_misc/TX Player.png" id="2_ehlfh"]
@@ -18,7 +18,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="PlayerVisual" type="Node2D"]
+[node name="CharacterVisual" type="Node2D"]
 script = ExtResource("1_8fkrf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

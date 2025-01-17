@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cmp0kcapyoui8"]
+[gd_scene load_steps=11 format=3 uid="uid://bq8jcgdyr42i6"]
 
 [ext_resource type="Script" path="res://Scripts/talent_tree.gd" id="1_3lbyp"]
 [ext_resource type="FontFile" uid="uid://dgaako73a24kh" path="res://Data/font/rimouski sb.ttf" id="2_qiv10"]
