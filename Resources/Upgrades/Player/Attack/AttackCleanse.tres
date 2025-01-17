@@ -1,7 +1,0 @@
-[gd_resource type="Resource" script_class="PlayUp_aaCleanse" load_steps=2 format=3 uid="uid://bv265bvlwyfgj"]
-
-[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/PlayUp_aaCleanse.gd" id="1_05f7h"]
-
-[resource]
-script = ExtResource("1_05f7h")
-cleanse = Array[int]([1, 2, 3, 4, 5])

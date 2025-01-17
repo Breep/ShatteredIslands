@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://ddwhb17ku08gj"]
+
+[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_4wq8w"]
+[ext_resource type="Resource" uid="uid://5b3so5uho4c6" path="res://Resources/Families/Attack/AttackDesc.tres" id="2_1r1of"]
+[ext_resource type="Texture2D" uid="uid://crea2ylff1emw" path="res://Data/Assets/Card/Card_IMG/Masseof serinity.png" id="3_tpv7t"]
+[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Attack/aa_chance_to_pacify.gd" id="4_miokw"]
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_grq28"]
+
+[sub_resource type="Resource" id="Resource_o5p0l"]
+script = ExtResource("4_miokw")
+chance_to_pacify = Array[int]([10, 15, 20, 25, 40])
+
+[resource]
+script = ExtResource("5_grq28")
+name = "Mace of Serinity"
+picture = ExtResource("3_tpv7t")
+families = Array[ExtResource("1_4wq8w")]([ExtResource("2_1r1of")])
+lvl = 1
+rarity = 0
+player_upgrade = SubResource("Resource_o5p0l")

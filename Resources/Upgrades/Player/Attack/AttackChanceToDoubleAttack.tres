@@ -1,7 +1,0 @@
-[gd_resource type="Resource" script_class="PlayUp_aaChanceToDoubleAttack" load_steps=2 format=3 uid="uid://blfk783s8vo3q"]
-
-[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/PlayUp_aaChanceToDoubleAttack.gd" id="1_5qgfa"]
-
-[resource]
-script = ExtResource("1_5qgfa")
-ChanceToDoubleAttack = Array[int]([3, 6, 9, 12, 20])

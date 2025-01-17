@@ -1,7 +1,0 @@
-[gd_resource type="Resource" script_class="PlayUp_aaDamage" load_steps=2 format=3 uid="uid://dtwloby3ab7bw"]
-
-[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/PlayUp_aaDamage.gd" id="1_6f4gl"]
-
-[resource]
-script = ExtResource("1_6f4gl")
-damages = Array[int]([5, 10, 15, 20, 30])

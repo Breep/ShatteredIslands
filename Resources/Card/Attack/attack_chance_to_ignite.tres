@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://bg0ap6wj77ffv"]
+
+[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_vpbl7"]
+[ext_resource type="Resource" uid="uid://5b3so5uho4c6" path="res://Resources/Families/Attack/AttackDesc.tres" id="2_ba4pa"]
+[ext_resource type="Texture2D" uid="uid://dn4tg0i7odbd8" path="res://Data/Assets/Card/Card_IMG/ignite on aa.png" id="3_k400o"]
+[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Attack/aa_chance_to_ignite.gd" id="4_x4c77"]
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_8bp5r"]
+
+[sub_resource type="Resource" id="Resource_rq26m"]
+script = ExtResource("4_x4c77")
+chance_to_ignite = Array[int]([10, 15, 20, 25, 40])
+
+[resource]
+script = ExtResource("5_8bp5r")
+name = "Fire Sword"
+picture = ExtResource("3_k400o")
+families = Array[ExtResource("1_vpbl7")]([ExtResource("2_ba4pa")])
+lvl = 1
+rarity = 0
+player_upgrade = SubResource("Resource_rq26m")

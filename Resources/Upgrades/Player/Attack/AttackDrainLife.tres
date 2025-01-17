@@ -1,7 +1,0 @@
-[gd_resource type="Resource" script_class="PlayUp_aaDrainLife" load_steps=2 format=3 uid="uid://con0nxbt7ph66"]
-
-[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/PlayUp_aaDrainLife.gd" id="1_ow7hh"]
-
-[resource]
-script = ExtResource("1_ow7hh")
-DrainLife = Array[int]([5, 10, 15, 20, 30])

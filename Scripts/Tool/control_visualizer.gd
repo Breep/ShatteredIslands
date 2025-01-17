@@ -35,10 +35,6 @@ func _ready() -> void:
 ## The drawing behavior for the debug information.
 func _draw() -> void:
 	if show_anchor_offsets:
-		var x1 = anchor_rect.position.x
-		var x2 = anchor_rect.position.x + offset_left
-		var y1 = anchor_rect.position.y + offset_top
-		var y2 = anchor_rect.position.y + anchor_rect.size.y
 		#Left Offset
 		draw_line(Vector2(0, size.y / 2), Vector2(-offset_left, size.y / 2), Color.BLUE)
 		draw_string(get_theme_default_font(),Vector2(-offset_left / 2, size.y / 2), \
