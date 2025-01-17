@@ -47,8 +47,6 @@ offset_right = -0.504089
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jwn1d")
-show_growth_direction = true
-show_anchor_offsets = true
 
 [node name="BG" type="TextureRect" parent="."]
 visible = false

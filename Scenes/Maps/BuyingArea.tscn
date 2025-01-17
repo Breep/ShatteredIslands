@@ -1,11 +1,16 @@
-[gd_scene load_steps=12 format=4 uid="uid://u86kcfn8nx7u"]
+[gd_scene load_steps=20 format=4 uid="uid://u86kcfn8nx7u"]
 
 [ext_resource type="Script" path="res://Scripts/Areas/BuyingArea.gd" id="1_gyf3x"]
 [ext_resource type="Texture2D" uid="uid://b3b4rk02h1kbh" path="res://Data/Assets/Misc/deqc368-97acf8e2-85c4-4cb6-a909-c2755fcf2fc7.jpg" id="1_r2oy8"]
 [ext_resource type="Texture2D" uid="uid://cjrtgqc6mjoj2" path="res://Data/Assets/TileSet/fullTiles.png" id="2_7muj7"]
 [ext_resource type="Texture2D" uid="uid://dakikx8em1ut3" path="res://Data/Assets/TileSet/landscape_sheet.png" id="3_dqy2f"]
 [ext_resource type="Texture2D" uid="uid://cg61v871c3lx8" path="res://Data/Assets/Misc/tableandchair.png" id="6_ub54q"]
+[ext_resource type="PackedScene" uid="uid://nk54d5o8pex" path="res://Scenes/UI/FamilyBonus.tscn" id="7_8eea1"]
 [ext_resource type="Texture2D" uid="uid://w18hx3kvdm3m" path="res://Data/Assets/Misc/campfire.png" id="7_mrf05"]
+[ext_resource type="Texture2D" uid="uid://d34qpfx40d4ox" path="res://Data/Assets/BackGround/472616789_28403690705911652_2688862136642980928_n-removebg-preview.png" id="7_sdogc"]
+[ext_resource type="PackedScene" uid="uid://b0hbe4art2ggl" path="res://Scenes/UI/PlayerDeckUI.tscn" id="8_l05wk"]
+[ext_resource type="Theme" uid="uid://bpo76n2lvfxb6" path="res://Data/font/main_menu_button.tres" id="9_8uo0y"]
+[ext_resource type="PackedScene" uid="uid://bwiva4ydvcd" path="res://Scenes/UI/UiPlayer.tscn" id="9_qn47q"]
 [ext_resource type="PackedScene" uid="uid://cjkk5t7dhm46i" path="res://Scenes/Card/CardShop.tscn" id="10_uysvx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vim1a"]
@@ -26,7 +31,25 @@ sources/0 = SubResource("TileSetAtlasSource_vim1a")
 sources/1 = SubResource("TileSetAtlasSource_goplx")
 sources/3 = SubResource("TileSetAtlasSource_dh85r")
 
-[node name="BuyingArea" type="Panel"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fbnbn"]
+bg_color = Color(0.593264, 0.100061, 0.183969, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fryu7"]
+bg_color = Color(0.737914, 0.143035, 0.240708, 1)
+
+[sub_resource type="Theme" id="Theme_icaya"]
+Button/styles/hover = SubResource("StyleBoxFlat_fbnbn")
+Button/styles/normal = SubResource("StyleBoxFlat_fryu7")
+
+[node name="BuyingArea" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_gyf3x")
 metadata/_edit_horizontal_guides_ = [0.0, 1080.0]
 metadata/_edit_vertical_guides_ = [0.0, 1920.0]
@@ -34,39 +57,132 @@ metadata/_edit_vertical_guides_ = [0.0, 1920.0]
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(1080, 540)
 scale = Vector2(0.5, 0.5)
-tile_map_data = PackedByteArray("AAD/////AAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAAAAAAAAAABAP//AAAAAAAAAAD+////AAAAAAAAAAD//wAAAAAAAAAAAAD+/wAAAAAAAAAAAAABAAAAAAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAD/////AAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAAAAAAAAAABAP//AAAAAAAAAAD+////AAAAAAAAAAD//wAAAAAAAAAAAAD+/wAAAAAAAAAAAAABAAAAAAAAAAAAAAD9/wAAAAAAAAAAAAD9////AAAAAAAAAAD9//7/AAAAAAAAAAD+//7/AAAAAAAAAAD///7/AAAAAAAAAAAAAP7/AAAAAAAAAAABAP7/AAAAAAAAAAACAP7/AAAAAAAAAAACAP//AAAAAAAAAAACAAAAAAAAAAAAAAACAAEAAAAAAAAAAAABAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAD//wEAAAAAAAAAAAD+/wEAAAAAAAAAAAD9/wEAAAAAAAAAAAD8//3/AAAAAAAAAAD9//3/AAAAAAAAAAD+//3/AAAAAAAAAAD///3/AAAAAAAAAAAAAP3/AAAAAAAAAAABAP3/AAAAAAAAAAACAP3/AAAAAAAAAAADAP7/AAAAAAAAAAADAP//AAAAAAAAAAADAAAAAAAAAAAAAAADAAEAAAAAAAAAAAADAAIAAAAAAAAAAAACAAIAAAAAAAAAAAABAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAD//wIAAAAAAAAAAAD+/wIAAAAAAAAAAAD9/wIAAAAAAAAAAAD8/wIAAAAAAAAAAAD8/wEAAAAAAAAAAAD8/wAAAAAAAAAAAAD8////AAAAAAAAAAD8//7/AAAAAAAAAAADAP3/AAAAAAAAAAA=")
 tile_set = SubResource("TileSet_se2fp")
 
-[node name="TablePlace2" type="Node2D" parent="."]
-position = Vector2(559, 554)
-scale = Vector2(0.2, 0.2)
-
-[node name="Table" type="Sprite2D" parent="TablePlace2"]
-position = Vector2(-1060, 900)
-scale = Vector2(2, 2)
-texture = ExtResource("6_ub54q")
-
-[node name="Fire camp" type="Sprite2D" parent="TablePlace2"]
-position = Vector2(-1150, -1450)
-scale = Vector2(2, 2)
-texture = ExtResource("7_mrf05")
-
-[node name="CardShop" parent="." instance=ExtResource("10_uysvx")]
-layout_mode = 0
-offset_left = 766.0
-offset_top = 124.0
-offset_right = 2766.0
-offset_bottom = 1224.0
-scale = Vector2(0.5, 0.5)
-
 [node name="Timer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 40.0
 one_shot = true
 autostart = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
+visible = false
 position = Vector2(960, 540)
 zoom = Vector2(0.6, 0.6)
 
 [node name="Spawn" type="Node2D" parent="."]
 position = Vector2(347, 565)
+
+[node name="Management" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Management"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 766.0
+offset_bottom = 431.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Management/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Management/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="TextureRect" type="TextureRect" parent="Management/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+texture = ExtResource("7_sdogc")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="PlayerDeckButton" type="Button" parent="Management/MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme = SubResource("Theme_icaya")
+text = "Player DEck"
+
+[node name="FamilyBonus" parent="Management/MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("7_8eea1")]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.8
+
+[node name="TextureButton" type="TextureButton" parent="Management/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Management/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.15
+
+[node name="TablePlace2" type="Node2D" parent="Management/MarginContainer/HBoxContainer/VBoxContainer3"]
+position = Vector2(664, 565)
+scale = Vector2(0.2, 0.2)
+
+[node name="Table" type="Sprite2D" parent="Management/MarginContainer/HBoxContainer/VBoxContainer3/TablePlace2"]
+position = Vector2(-1060, 900)
+scale = Vector2(2, 2)
+texture = ExtResource("6_ub54q")
+
+[node name="Fire camp" type="Sprite2D" parent="Management/MarginContainer/HBoxContainer/VBoxContainer3/TablePlace2"]
+position = Vector2(-1150, -1450)
+scale = Vector2(2, 2)
+texture = ExtResource("7_mrf05")
+
+[node name="StatsCharacter" type="Button" parent="Management/MarginContainer/HBoxContainer/VBoxContainer3"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme = ExtResource("9_8uo0y")
+text = "Character STATS"
+
+[node name="CloseStatsCharacter" type="Button" parent="Management/MarginContainer/HBoxContainer/VBoxContainer3"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme = ExtResource("9_8uo0y")
+text = "Close Character STATS"
+
+[node name="UIPlayer" parent="Management/MarginContainer/HBoxContainer/VBoxContainer3" instance=ExtResource("9_qn47q")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Management/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.6
+
+[node name="CardShop" parent="." instance=ExtResource("10_uysvx")]
+layout_mode = 2
+offset_left = 893.0
+offset_top = 135.0
+offset_right = 2893.0
+offset_bottom = 1235.0
+scale = Vector2(0.45, 0.45)
+
+[node name="PlayerDeckUI" parent="." instance=ExtResource("8_l05wk")]
+visible = false
+layout_mode = 1
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[connection signal="pressed" from="Management/MarginContainer/HBoxContainer/VBoxContainer/PlayerDeckButton" to="." method="_on_player_deck_button_pressed"]
+[connection signal="pressed" from="Management/MarginContainer/HBoxContainer/VBoxContainer3/StatsCharacter" to="." method="_on_stats_character_pressed"]
+[connection signal="pressed" from="Management/MarginContainer/HBoxContainer/VBoxContainer3/CloseStatsCharacter" to="." method="_on_close_stats_character_pressed"]
