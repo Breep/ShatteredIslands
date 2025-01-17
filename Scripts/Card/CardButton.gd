@@ -29,8 +29,11 @@ const LAYER_BACK = 0
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	_tween_hover = create_tween()
-	_tween_rot = create_tween()
+	%"0".pivot_offset = Vector2(315, 440)
+	%"1".pivot_offset = Vector2(315, 440)
+	%"2".pivot_offset = Vector2(315, 440)
+	#_tween_hover = create_tween()
+	#_tween_rot = create_tween()
 	_cardTexture.material = _cardTexture.material.duplicate() # Make the material unique
 
 func _on_mouse_entered() -> void:
@@ -70,20 +73,20 @@ func _animation_3dRotate() -> void:
 func _animation_popOut() -> void:
 	if _tween_hover:
 		_tween_hover.kill()
-		_tween_hover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
-		_tween_hover.tween_property(self, "scale", Vector2(1.2, 1.2), 0.5)
-		z_index = LAYER_FRONT
+	_tween_hover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
+	_tween_hover.tween_property(self, "scale", Vector2(1.2, 1.2), 0.5)
+	z_index = LAYER_FRONT
 
 func _animation_popIn() -> void:
 	if _tween_hover:
 		_tween_hover.kill()
-		_tween_hover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
-		_tween_hover.tween_property(self, "scale", Vector2.ONE, 0.55)
-		z_index = LAYER_BACK
+	_tween_hover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
+	_tween_hover.tween_property(self, "scale", Vector2.ONE, 0.55)
+	z_index = LAYER_BACK
 
 func _animation_reset3dRotation() -> void:
 	if _tween_rot:
 		_tween_rot.kill()
-		_tween_rot = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK).set_parallel(true)
-		_tween_rot.tween_property(_cardTexture.material, "shader_parameter/x_rot", 0.0, 0.5)
-		_tween_rot.tween_property(_cardTexture.material, "shader_parameter/y_rot", 0.0, 0.5)
+	_tween_rot = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK).set_parallel(true)
+	_tween_rot.tween_property(_cardTexture.material, "shader_parameter/x_rot", 0.0, 0.5)
+	_tween_rot.tween_property(_cardTexture.material, "shader_parameter/y_rot", 0.0, 0.5)
