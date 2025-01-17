@@ -17,6 +17,10 @@ config/features=PackedStringArray("4.3", "Forward Plus")
 
 GameManager="*res://Scripts/Managers/GameManager.gd"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [file_customization]
 
 folder_colors={

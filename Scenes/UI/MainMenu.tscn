@@ -1,13 +1,13 @@
 [gd_scene load_steps=7 format=3 uid="uid://ciuaoxv321uoq"]
 
-[ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_kuasv"]
-[ext_resource type="Texture2D" uid="uid://but1w5bhakuqv" path="res://Data/Assets/BackGround/background.png" id="1_tiup7"]
-[ext_resource type="Shader" path="res://Shaders/UI/balatroBackgroundShader.gdshader" id="2_7dt1g"]
-[ext_resource type="Texture2D" uid="uid://2lnjwrncfj8w" path="res://Data/Assets/BackGround/DALL·E-2025-01-15-11.40.png" id="2_8s2v6"]
-[ext_resource type="Theme" uid="uid://bpo76n2lvfxb6" path="res://Data/font/main_menu_button.tres" id="4_6bolw"]
+[ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_lpyfl"]
+[ext_resource type="Shader" path="res://Shaders/UI/balatroBackgroundShader.gdshader" id="2_5j6rg"]
+[ext_resource type="Texture2D" uid="uid://but1w5bhakuqv" path="res://Data/Assets/BackGround/background.png" id="3_rhlxk"]
+[ext_resource type="Texture2D" uid="uid://2lnjwrncfj8w" path="res://Data/Assets/BackGround/DALL·E-2025-01-15-11.40.png" id="4_et4d2"]
+[ext_resource type="Theme" uid="uid://bpo76n2lvfxb6" path="res://Data/font/main_menu_button.tres" id="5_tgm71"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_puxr3"]
-shader = ExtResource("2_7dt1g")
+shader = ExtResource("2_5j6rg")
 shader_parameter/polar_coordinates = true
 shader_parameter/polar_center = Vector2(0.5, 0.5)
 shader_parameter/polar_zoom = 1.0
@@ -29,7 +29,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_kuasv")
+script = ExtResource("1_lpyfl")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(914, 326)
@@ -43,7 +43,7 @@ offset_left = -1.0
 offset_top = -186.0
 offset_right = 1830.0
 offset_bottom = 845.0
-texture = ExtResource("1_tiup7")
+texture = ExtResource("3_rhlxk")
 region_rect = Rect2(0, 16, 1008, 992)
 patch_margin_top = 101
 
@@ -54,7 +54,7 @@ offset_left = 41.0
 offset_top = -185.0
 offset_right = 1833.0
 offset_bottom = 839.0
-texture = ExtResource("2_8s2v6")
+texture = ExtResource("4_et4d2")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 visible = false
@@ -66,7 +66,7 @@ offset_top = -188.0
 offset_bottom = 188.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_tiup7")
+texture = ExtResource("3_rhlxk")
 expand_mode = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -86,17 +86,17 @@ theme_override_constants/separation = 25
 [node name="Play" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(70, 150)
 layout_mode = 2
-theme = ExtResource("4_6bolw")
+theme = ExtResource("5_tgm71")
 text = "JOUER"
 
 [node name="Lobby" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(70, 150)
 layout_mode = 2
-theme = ExtResource("4_6bolw")
+theme = ExtResource("5_tgm71")
 text = "LOBBY"
 
 [node name="Options" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(70, 150)
 layout_mode = 2
-theme = ExtResource("4_6bolw")
+theme = ExtResource("5_tgm71")
 text = "OPTIONS"

@@ -17,7 +17,6 @@ var playerDeck: PlayerDeck
 var playerGold: int
 # ============================== Public ==============================
 
-var playerDeckUI = preload("res://Scenes/UI/PlayerDeckUI.tscn")
 var _cardsDisplayed: Array[Card]
 @onready var _cardShopVisual: CardShopVisual = %CardShopVisual
 
@@ -72,9 +71,6 @@ func _on_card_shop_button_pressed(card: Card) -> void:
 	print(card.lvl)
 	_addCardToPlayerDeck(card)
 
-func _on_player_deck_pressed() -> void:
-	$PlayerDeckUI.show()
-	playerDeckUI.show_player_cards(playerDeck)
 
 func _updateShopCardsDisplayed() -> void:
 	if GameManager.players[0].deck == null:
