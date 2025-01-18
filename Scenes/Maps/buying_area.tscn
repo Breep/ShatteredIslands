@@ -1,7 +1,8 @@
-[gd_scene load_steps=20 format=4 uid="uid://u86kcfn8nx7u"]
+[gd_scene load_steps=23 format=4 uid="uid://u86kcfn8nx7u"]
 
 [ext_resource type="Script" path="res://Scripts/Areas/buying_area.gd" id="1_2hie4"]
 [ext_resource type="Texture2D" uid="uid://b3b4rk02h1kbh" path="res://Data/Assets/Misc/deqc368-97acf8e2-85c4-4cb6-a909-c2755fcf2fc7.jpg" id="2_k3opf"]
+[ext_resource type="Texture2D" uid="uid://cwe303gitkgl7" path="res://Data/Misc_IMG/cadre perso.png" id="2_lx08d"]
 [ext_resource type="Texture2D" uid="uid://cjrtgqc6mjoj2" path="res://Data/Assets/TileSet/fullTiles.png" id="3_vrhrp"]
 [ext_resource type="Texture2D" uid="uid://dakikx8em1ut3" path="res://Data/Assets/TileSet/landscape_sheet.png" id="4_pbrxv"]
 [ext_resource type="Texture2D" uid="uid://d34qpfx40d4ox" path="res://Data/Assets/BackGround/472616789_28403690705911652_2688862136642980928_n-removebg-preview.png" id="5_32xbl"]
@@ -12,6 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://bskueqquqfhhp" path="res://Scenes/UI/ui_player.tscn" id="10_m6udf"]
 [ext_resource type="PackedScene" uid="uid://d1oxnd1g75rqh" path="res://Scenes/Card/card_shop.tscn" id="11_skuwb"]
 [ext_resource type="PackedScene" uid="uid://c4e7oobnpcje8" path="res://Scenes/UI/ui_player_deck.tscn" id="12_a6ggj"]
+[ext_resource type="PackedScene" uid="uid://cxalabhvxw1pd" path="res://Scenes/UI/ui_timer.tscn" id="13_35vgj"]
+[ext_resource type="PackedScene" uid="uid://prbqeqgdl2ay" path="res://Scenes/UI/ui_xp.tscn" id="13_mb3hy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vim1a"]
 texture = ExtResource("2_k3opf")
@@ -54,14 +57,28 @@ script = ExtResource("1_2hie4")
 metadata/_edit_horizontal_guides_ = [0.0, 1080.0]
 metadata/_edit_vertical_guides_ = [0.0, 1920.0]
 
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+modulate = Color(0.121999, 0.413963, 0.547728, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 773.0
+offset_bottom = 428.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_lx08d")
+region_rect = Rect2(504, 1504, 1384, 912)
+
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
+visible = false
 position = Vector2(1080, 540)
 scale = Vector2(0.5, 0.5)
 tile_map_data = PackedByteArray("AAD/////AAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAAAAAAAAAABAP//AAAAAAAAAAD+////AAAAAAAAAAD//wAAAAAAAAAAAAD+/wAAAAAAAAAAAAABAAAAAAAAAAAAAAD9/wAAAAAAAAAAAAD9////AAAAAAAAAAD9//7/AAAAAAAAAAD+//7/AAAAAAAAAAD///7/AAAAAAAAAAAAAP7/AAAAAAAAAAABAP7/AAAAAAAAAAACAP7/AAAAAAAAAAACAP//AAAAAAAAAAACAAAAAAAAAAAAAAACAAEAAAAAAAAAAAABAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAD//wEAAAAAAAAAAAD+/wEAAAAAAAAAAAD9/wEAAAAAAAAAAAD8//3/AAAAAAAAAAD9//3/AAAAAAAAAAD+//3/AAAAAAAAAAD///3/AAAAAAAAAAAAAP3/AAAAAAAAAAABAP3/AAAAAAAAAAACAP3/AAAAAAAAAAADAP7/AAAAAAAAAAADAP//AAAAAAAAAAADAAAAAAAAAAAAAAADAAEAAAAAAAAAAAADAAIAAAAAAAAAAAACAAIAAAAAAAAAAAABAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAD//wIAAAAAAAAAAAD+/wIAAAAAAAAAAAD9/wIAAAAAAAAAAAD8/wIAAAAAAAAAAAD8/wEAAAAAAAAAAAD8/wAAAAAAAAAAAAD8////AAAAAAAAAAD8//7/AAAAAAAAAAADAP3/AAAAAAAAAAA=")
 tile_set = SubResource("TileSet_se2fp")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 30.0
 one_shot = true
 autostart = true
 
@@ -169,10 +186,10 @@ size_flags_stretch_ratio = 3.6
 
 [node name="CardShop" parent="." instance=ExtResource("11_skuwb")]
 layout_mode = 1
-offset_left = 1003.0
-offset_top = 121.0
-offset_right = 713.0
-offset_bottom = -8.0
+offset_left = 1043.0
+offset_top = 230.0
+offset_right = 753.0
+offset_bottom = 101.0
 
 [node name="PlayerDeckUI" parent="." instance=ExtResource("12_a6ggj")]
 visible = false
@@ -181,6 +198,25 @@ offset_left = 0.0
 offset_top = 0.0
 offset_right = 0.0
 offset_bottom = 0.0
+
+[node name="Uitimer" parent="." instance=ExtResource("13_35vgj")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_left = 234.0
+offset_top = -19.0
+offset_right = 498.0
+offset_bottom = 222.0
+grow_vertical = 1
+
+[node name="UIXp" parent="." instance=ExtResource("13_mb3hy")]
+layout_mode = 1
+offset_left = 1023.0
+offset_top = 775.0
+offset_right = 1023.0
+offset_bottom = 775.0
 
 [connection signal="pressed" from="Management/MarginContainer/HBoxContainer/VBoxContainer/PlayerDeckButton" to="." method="_on_player_deck_button_pressed"]
 [connection signal="pressed" from="Management/MarginContainer/HBoxContainer/VBoxContainer3/StatsCharacter" to="." method="_on_stats_character_pressed"]

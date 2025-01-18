@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxalabhvxw1pd"]
+
+[ext_resource type="Script" path="res://Scripts/ui/ui_timer.gd" id="1_ima6g"]
+[ext_resource type="Texture2D" uid="uid://bcq8p2t5mali7" path="res://Data/Misc_IMG/1_DC-HzVwxf7jUhlQ0BiRgQA.png" id="2_mo022"]
+
+[node name="Uitimer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -956.0
+offset_bottom = -481.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ima6g")
+
+[node name="texturetime" type="TextureProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -91.0
+offset_top = -87.0
+offset_right = 91.0
+offset_bottom = 87.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 30.0
+value = 30.0
+fill_mode = 5
+nine_patch_stretch = true
+texture_progress = ExtResource("2_mo022")
+
+[node name="timer" type="RichTextLabel" parent="texturetime"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -38.0
+offset_right = 79.0
+offset_bottom = 54.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 54
+bbcode_enabled = true
+text = "[pulse freq=1.0 color=#FFD700 ease=-2.0]30
+[/pulse]"

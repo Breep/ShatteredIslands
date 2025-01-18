@@ -1,0 +1,78 @@
+[gd_scene load_steps=5 format=3 uid="uid://prbqeqgdl2ay"]
+
+[ext_resource type="Script" path="res://Scripts/ui_xp.gd" id="1_a51j4"]
+[ext_resource type="Texture2D" uid="uid://0v460ljf3til" path="res://Data/Misc_IMG/blue cadre horizontal.png" id="1_dttnm"]
+[ext_resource type="Texture2D" uid="uid://kia5183xjme4" path="res://Data/Misc_IMG/xpbafull.png" id="2_cs5de"]
+[ext_resource type="Texture2D" uid="uid://deqdy7afk8a67" path="res://Data/Misc_IMG/xpbarempty.png" id="3_c1hyy"]
+
+[node name="UIXp" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_a51j4")
+
+[node name="Xpbutton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 542.0
+offset_right = -350.0
+offset_bottom = -458.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.997599, 1)
+texture_normal = ExtResource("1_dttnm")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Xpbutton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -91.5
+offset_top = -18.0
+offset_right = 91.5
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[center][pulse freq=1.0 color=#00BFFF ease=-2.0]BUY XP[/pulse][/center]
+"
+
+[node name="XPbar" type="TextureProgressBar" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 492.0
+offset_bottom = 244.0
+nine_patch_stretch = true
+texture_under = ExtResource("2_cs5de")
+texture_progress = ExtResource("3_c1hyy")
+
+[node name="Xplabel" type="RichTextLabel" parent="XPbar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.0
+offset_top = -23.0
+offset_right = 108.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[pulse freq=1.0 color=#00BFFF ease=-2.0]0/100 XP[/pulse]
+"
+
+[connection signal="pressed" from="Xpbutton" to="." method="_on_xpbutton_pressed"]
