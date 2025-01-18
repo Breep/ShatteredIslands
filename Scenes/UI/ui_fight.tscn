@@ -1,8 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://c210b1bxn3s4"]
+[gd_scene load_steps=14 format=3 uid="uid://c210b1bxn3s4"]
 
 [ext_resource type="Script" path="res://Scripts/ui_fight.gd" id="1_card7"]
 [ext_resource type="Texture2D" uid="uid://digbaq8kid6eq" path="res://Data/Misc_IMG/cadre_blue2-removebg-preview.png" id="2_o210i"]
 [ext_resource type="Texture2D" uid="uid://bxoivuh1eq4l0" path="res://Data/Misc_IMG/png-clipart-versus-logo-youtube-internet-online-shopping-rapper-youtube-monochrome-silhouette-thumbnail-removebg-preview.png" id="3_kamb7"]
+[ext_resource type="Texture2D" uid="uid://cw28jnnutj8u1" path="res://Data/Misc_IMG/emptybar-removebg-preview.png" id="3_yvj8n"]
+[ext_resource type="Texture2D" uid="uid://brbe4qqx0m5sv" path="res://Data/Misc_IMG/redbar-removebg-preview.png" id="4_kiitn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8f3ei"]
 bg_color = Color(0.052, 0.116, 0.02, 0.176)
@@ -130,6 +132,7 @@ size_flags_horizontal = 4
 text = "Josette"
 
 [node name="HealthBar" type="ProgressBar" parent="MarginContainer/HBoxContainer2/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(400, 50)
 layout_mode = 2
 tooltip_text = "Health"
@@ -261,3 +264,41 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 15
 text = "MANA"
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -298.0
+offset_right = 443.0
+grow_vertical = 0
+size_flags_stretch_ratio = 0.0
+value = 22.0
+nine_patch_stretch = true
+stretch_margin_top = 48
+stretch_margin_right = 39
+stretch_margin_bottom = 84
+texture_under = ExtResource("3_yvj8n")
+texture_progress = ExtResource("4_kiitn")
+
+[node name="TextureProgressBar2" type="TextureProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -443.0
+offset_top = -298.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_stretch_ratio = 0.0
+value = 45.0
+fill_mode = 1
+nine_patch_stretch = true
+stretch_margin_top = 48
+stretch_margin_right = 39
+stretch_margin_bottom = 84
+texture_under = ExtResource("3_yvj8n")
+texture_progress = ExtResource("4_kiitn")
