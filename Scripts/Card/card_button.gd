@@ -23,12 +23,12 @@ var _angle_y_max: float = 15.0
 var _tween_rot: Tween
 var _tween_hover: Tween
 var _card: Card
+var _middle_offset: Vector2 = Vector2(125,175)
 
 # ============================== Local scene nodes ==============================
 
 @onready var _card_layout : CardLayout = $SubViewportContainer/SubViewport/CardLayout
 @onready var _card_texture: SubViewportContainer = $SubViewportContainer
-@onready var _canvas_layer: CanvasLayer = $CanvasLayer
 
 # ============================== Public functions ==============================
 
@@ -43,11 +43,9 @@ func update_visual(card: Card) -> void:
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	%"0".pivot_offset = Vector2(315, 440)
-	%"1".pivot_offset = Vector2(315, 440)
-	%"2".pivot_offset = Vector2(315, 440)
-	#_tween_hover = create_tween()
-	#_tween_rot = create_tween()
+	%"0".pivot_offset = _middle_offset
+	%"1".pivot_offset = _middle_offset
+	%"2".pivot_offset = _middle_offset
 	_card_texture.material = _card_texture.material.duplicate() # Make the material unique
 
 func _on_mouse_entered() -> void:

@@ -168,12 +168,11 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.6
 
 [node name="CardShop" parent="." instance=ExtResource("11_skuwb")]
-layout_mode = 2
-offset_left = 893.0
-offset_top = 135.0
-offset_right = 2893.0
-offset_bottom = 1235.0
-scale = Vector2(0.45, 0.45)
+layout_mode = 1
+offset_left = 1003.0
+offset_top = 121.0
+offset_right = 713.0
+offset_bottom = -8.0
 
 [node name="PlayerDeckUI" parent="." instance=ExtResource("12_a6ggj")]
 visible = false

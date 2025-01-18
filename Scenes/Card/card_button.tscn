@@ -15,28 +15,28 @@ shader_parameter/x_rot = 0.0
 shader_parameter/inset = 0.0
 
 [node name="CardButton" type="Button"]
-modulate = Color(1, 1, 1, 0.011)
+self_modulate = Color(1, 1, 1, 0)
 anchors_preset = -1
-anchor_left = 0.273
-anchor_top = 0.679
-anchor_right = 0.273
-anchor_bottom = 0.679
-offset_left = -314.496
-offset_top = -439.992
-offset_right = 315.504
-offset_bottom = 440.008
-grow_horizontal = 2
-grow_vertical = 2
+anchor_left = 0.109
+anchor_top = 0.282
+anchor_right = 0.109
+anchor_bottom = 0.282
+offset_left = -125.568
+offset_top = -182.736
+offset_right = 124.432
+offset_bottom = 166.264
 script = ExtResource("1_l6wd5")
 
 [node name="Shadow" type="TextureRect" parent="."]
-visible = false
-modulate = Color(0.14, 0.14, 0.14, 0.676)
-custom_minimum_size = Vector2(300, 500)
+modulate = Color(0.14, 0.14, 0.14, 0.594)
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 2.0
+offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("CanvasTexture_k8idf")
@@ -53,7 +53,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(630, 880)
+size = Vector2i(250, 349)
 render_target_update_mode = 4
 
 [node name="CardLayout" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_cgxxr")]

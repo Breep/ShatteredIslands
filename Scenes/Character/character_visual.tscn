@@ -23,7 +23,6 @@ script = ExtResource("1_8fkrf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(0, -25)
 sprite_frames = SubResource("SpriteFrames_1360b")
 animation = &"Idle"
 

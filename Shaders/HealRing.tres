@@ -30,14 +30,14 @@ source = 5
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_v1q26"]
-size = Vector2(250, 304.824)
+size = Vector2(249.824, 304.824)
 title = "Texture 2"
 tint_color_enabled = true
 tint_color = Color(0.727487, 0.566315, 0.941406, 0.75)
 attached_nodes = PackedInt32Array(12, 11)
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_bq8vt"]
-size = Vector2(250, 325.402)
+size = Vector2(249.973, 325.402)
 title = "Texture 3"
 tint_color_enabled = true
 tint_color = Color(0.727487, 0.566315, 0.941406, 0.75)
@@ -100,7 +100,7 @@ texture_type = 1
 [sub_resource type="VisualShaderNodeClamp" id="VisualShaderNodeClamp_m5vpu"]
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_6rp06"]
-size = Vector2(250.452, 362.874)
+size = Vector2(244.452, 362.874)
 title = "Texture 1"
 tint_color_enabled = true
 tint_color = Color(0.727487, 0.566315, 0.941406, 0.75)

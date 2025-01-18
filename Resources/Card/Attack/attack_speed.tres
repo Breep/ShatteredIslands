@@ -1,8 +1,8 @@
-[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://b3r48cltkodmm"]
+[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://d1r7xbs3kyppp"]
 
 [ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_2tok1"]
 [ext_resource type="Resource" uid="uid://5b3so5uho4c6" path="res://Resources/Families/Attack/AttackDesc.tres" id="2_ng00d"]
-[ext_resource type="Texture2D" uid="uid://cn2rrw4akiw5e" path="res://Data/Assets/Fantasy Items/TTRPG-Art-Asset_10.png" id="3_sy57w"]
+[ext_resource type="Texture2D" uid="uid://bdx3448wfsg1e" path="res://Data/Assets/Card/Card_IMG/a-magic-long-bow-with-prismatic-power-no-background.jpg" id="3_64dhm"]
 [ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Attack/aa_speed.gd" id="4_204hv"]
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_1ciij"]
 
@@ -13,7 +13,7 @@ speeds = Array[int]([10, 20, 30, 40, 75])
 [resource]
 script = ExtResource("5_1ciij")
 name = "Attack Speed"
-picture = ExtResource("3_sy57w")
+picture = ExtResource("3_64dhm")
 families = Array[ExtResource("1_2tok1")]([ExtResource("2_ng00d")])
 lvl = 1
 rarity = 0

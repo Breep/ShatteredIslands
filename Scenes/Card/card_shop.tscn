@@ -10,10 +10,13 @@
 [node name="CardShop" type="Control"]
 layout_direction = 2
 layout_mode = 3
-anchors_preset = 0
-offset_right = 2000.0
-offset_bottom = 1100.0
-scale = Vector2(0.4, 0.4)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -290.0
+offset_bottom = -129.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_wplsh")
 
 [node name="CardShopVisual" type="Control" parent="."]
@@ -37,13 +40,14 @@ texture = ExtResource("5_ptr3c")
 region_rect = Rect2(149.186, 747.624, 464.28, 220.468)
 
 [node name="MarginContainer" type="MarginContainer" parent="CardShopVisual"]
-layout_mode = 0
-offset_right = 1970.0
-offset_bottom = 1070.0
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = -15
-theme_override_constants/margin_bottom = -15
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CardShopVisual/MarginContainer"]
 layout_mode = 2
@@ -71,7 +75,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="BottomRow" type="HBoxContainer" parent="CardShopVisual/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 150)
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_constants/separation = 40
 
@@ -91,6 +95,7 @@ custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 texture = ExtResource("6_yw5no")
 expand_mode = 1
+stretch_mode = 5
 
 [node name="Control" type="Control" parent="CardShopVisual/MarginContainer/VBoxContainer/BottomRow"]
 layout_mode = 2
