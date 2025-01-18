@@ -1,0 +1,154 @@
+[gd_scene load_steps=6 format=3 uid="uid://cgxxjptkqav2m"]
+
+[ext_resource type="Script" path="res://Scripts/ui/ui_charactere_selection.gd" id="1_nqx23"]
+[ext_resource type="Texture2D" uid="uid://cwe303gitkgl7" path="res://Data/Misc_IMG/cadre perso.png" id="1_wx6d8"]
+[ext_resource type="Texture2D" uid="uid://cc2hc26u7i5c" path="res://Data/Misc_IMG/red cadre horizontal full black.png" id="2_0344y"]
+[ext_resource type="PackedScene" uid="uid://dubiqq2hle53a" path="res://Scenes/UI/hero_button.tscn" id="4_q67ow"]
+[ext_resource type="Texture2D" uid="uid://dfuxjc1ipyesb" path="res://Data/Misc_IMG/axe_man-removebg-preview.png" id="5_53op3"]
+
+[node name="CharactereSelection" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nqx23")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_wx6d8")
+region_rect = Rect2(400, 1008, 1720, 1288)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.576
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.448
+grow_horizontal = 0
+grow_vertical = 2
+rotation = 0.00231398
+texture = ExtResource("1_wx6d8")
+expand_mode = 1
+
+[node name="TextureButton" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -534.0
+offset_top = -8.0
+offset_right = -23.0
+offset_bottom = 189.0
+grow_horizontal = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+tooltip_text = "TEST"
+texture = ExtResource("2_0344y")
+expand_mode = 1
+
+[node name="charselect" type="RichTextLabel" parent="TextureButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -197.0
+offset_top = -74.0
+offset_right = 208.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 35
+bbcode_enabled = true
+text = "
+[center][pulse freq=1.0 color=#FF4500 ease=-2.0]SELECT CHAMPION[/pulse][/center]
+"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.572549, 0.643137, 1, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.294
+anchor_right = 0.558
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 40
+theme_override_constants/v_separation = 30
+columns = 2
+
+[node name="HeroButton" parent="MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("4_q67ow")]
+layout_mode = 2
+
+[node name="HeroButton2" parent="MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("4_q67ow")]
+layout_mode = 2
+
+[node name="HeroButton3" parent="MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("4_q67ow")]
+layout_mode = 2
+
+[node name="HeroButton4" parent="MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("4_q67ow")]
+layout_mode = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+scale = Vector2(0.5, 0.5)
+transform = Transform2D(0.5, 0, 0, 0.5, 0, 0)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
+offset_left = 1552.0
+offset_top = 450.0
+offset_right = 2152.0
+offset_bottom = 1050.0
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(600, 600)
+render_target_update_mode = 4
+
+[node name="SubHeroIMG" type="TextureRect" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_53op3")
+expand_mode = 1
+stretch_mode = 5
