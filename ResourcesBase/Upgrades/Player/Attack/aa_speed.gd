@@ -16,5 +16,4 @@ func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > speeds.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
-	
-	return "Increase auto attack speed by " + str(speeds[cardlvl-1]) + "%"
+	return "[center]Increase auto attack speed by" + str(speeds[cardlvl-1]) + "%[/center]"

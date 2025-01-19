@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://bc6r03hdibhp1"]
+
+[ext_resource type="PackedScene" uid="uid://l4hi6dgs8lvg" path="res://Scenes/Card/card_layout.tscn" id="1_7voqq"]
+[ext_resource type="Material" uid="uid://bvlwmqk08myum" path="res://Particle/vortex.tres" id="2_ifsvy"]
+[ext_resource type="Texture2D" uid="uid://dv6pofsb702la" path="res://Data/Texture/textures/256/effect_4.png" id="2_o7j02"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_j0pfp"]
+blend_mode = 1
+
+[node name="Particle" type="Node2D"]
+
+[node name="CardLayout" parent="." instance=ExtResource("1_7voqq")]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="CardLayout"]
+modulate = Color(0.66133, 0.138283, 0.679649, 1)
+material = SubResource("CanvasItemMaterial_j0pfp")
+position = Vector2(416, 216)
+amount = 20
+process_material = ExtResource("2_ifsvy")
+texture = ExtResource("2_o7j02")

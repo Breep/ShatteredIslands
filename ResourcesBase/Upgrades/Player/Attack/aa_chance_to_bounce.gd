@@ -15,5 +15,4 @@ func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > chance_to_bounce.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
-	
-	return str(chance_to_bounce[cardlvl - 1]) + "% Chance for auto attack projectile to bounce on an other target"
+	return "[center]" + str(chance_to_bounce[cardlvl - 1]) + "% Chance for auto attack projectile to bounce on an other target[/center]"

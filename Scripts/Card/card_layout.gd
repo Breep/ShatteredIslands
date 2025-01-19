@@ -3,7 +3,7 @@ extends Control
 
 # ============================== Local scene nodes ==============================
 
-@onready var _description_label : Label = $Description
+@onready var _description_label : RichTextLabel = %Description
 @onready var _picture : TextureRect = $Picture
 @onready var _card_name : Label = $CardName
 @onready var _family_icon : TextureRect = $FamilyIcon

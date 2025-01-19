@@ -15,5 +15,4 @@ func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > chance_to_poison.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
-	
-	return str(chance_to_poison[cardlvl - 1]) + "% Chance to Poison on Attack"
+	return "[center]" + str(chance_to_poison[cardlvl - 1]) + "% Chance to [color=#006400][wave freq=2.0 amp=5.0]Poison[/wave][/color] on Attack[/center]"
