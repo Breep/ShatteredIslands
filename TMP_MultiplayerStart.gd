@@ -47,7 +47,7 @@ func _on_host_button_pressed() -> void:
 
 
 func _on_start_button_pressed() -> void:
-	pass
+	GameManager.game_switch_to.rpc(GameManager.GameState.Buying)
 
 
 func _on_join_button_pressed() -> void:

@@ -47,6 +47,7 @@ func _ready() -> void:
 
 # ============================== Public function ==============================
 
+@rpc("any_peer", "call_local")
 func game_switch_to(new_game_state: GameState) -> void:
 	if new_game_state != _game_state:
 		_game_state = new_game_state
@@ -82,6 +83,15 @@ func add_player(name: String, id: int) -> void:
 	if multiplayer.is_server():
 		for player in players:
 			add_player.rpc(player.name, player.id)
+
+
+func get_local_player() -> Player:
+	for player in players:
+		if player.id == multiplayer.get_unique_id():
+			return player
+
+	printerr("No local player registered in the GameManager !")
+	return null
 
 # ============================== Private function ==============================
 

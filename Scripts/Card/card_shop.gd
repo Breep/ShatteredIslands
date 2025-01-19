@@ -4,6 +4,7 @@ extends Control
 # ============================== Private variables ==============================
 
 var _card_displayed: Array[Card]
+var _local_player: Player
 
 # ============================== Local scene nodes ==============================
 
@@ -13,12 +14,7 @@ var _card_displayed: Array[Card]
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	var player: Player = GameManager.players[0]
-	if player == null:
-		printerr("No player !")
-		return
-	else:
-		print("player found: ", player.name)
+	_local_player = GameManager.get_local_player()
 
 	_update_shop_cards_displayed()
 	# tmp connect button signals
@@ -45,15 +41,15 @@ func _on_card_shop_button_pressed(card: Card) -> void:
 # ============================== Private functions ==============================
 
 func _add_card_to_player_deck(card: Card) -> void:
-	if GameManager.players[0].deck == null:
+	if _local_player.deck == null:
 		printerr("Can't update shop cards, there is no player_deck")
 		return
 	
-	if GameManager.players[0].gold < 100:
+	if _local_player.gold < 100:
 		return
 	
-	GameManager.players[0].gold -= 100
-	GameManager.players[0].deck.add_card(card)
+	_local_player.gold -= 100
+	_local_player.deck.add_card(card)
 	var remaining_cards = []
 	for i in 3:
 		var cardButton = _card_container.get_node(str(i)) as CardButton
@@ -67,16 +63,16 @@ func _add_card_to_player_deck(card: Card) -> void:
 
 
 func _update_shop_cards_displayed() -> void:
-	if GameManager.players[0].deck == null:
+	if _local_player.deck == null:
 		printerr("Can't update shop cards, there is no player_deck")
 		return
 	
 	var cardsNumber = 3 # TODO For the moment there is no way to get more cards each time you buy, maybe in the futur
-	_card_displayed = GameManager.shop_deck.draw_smart(GameManager.players[0].deck.get_max_lvl_cards(), cardsNumber)
+	_card_displayed = GameManager.shop_deck.draw_smart(_local_player.deck.get_max_lvl_cards(), cardsNumber)
 	_adapt_cards_lvl_to_player()
 	_card_shop_visual.update_shop_cards_displayed_visual(_card_displayed)
 
 
 func _adapt_cards_lvl_to_player() -> void:
 	for i in _card_displayed.size():
-		_card_displayed[i].lvl = GameManager.players[0].deck.get_card_lvl(_card_displayed[i]) + 1
+		_card_displayed[i].lvl = _local_player.deck.get_card_lvl(_card_displayed[i]) + 1
