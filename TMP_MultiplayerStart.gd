@@ -1,58 +1,72 @@
 extends Control
 
+enum PeerType {
+	SERVER,
+	CLIENT,
+}
+
 @export var address = "127.0.0.1"
 @export var port = 4242
 
+@onready var name_edit: LineEdit = %NameEdit
+
+# ============================================
+
 func _ready() -> void:
-	multiplayer.peer_connected.connect(_peer_connected_cb)
-	multiplayer.peer_disconnected.connect(_peer_disconnected_cb)
-	multiplayer.connected_to_server.connect(_connect_to_server_cb)
-	multiplayer.connection_failed.connect(_connection_failed_cb)
+	multiplayer.peer_connected.connect(_on_peer_connected)
+	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
+	multiplayer.connected_to_server.connect(_on_connected_to_server)
+	multiplayer.connection_failed.connect(_on_connection_failed)
+	name_edit.text = "Nobody"
 	pass
 
 # ============================================
 
-func _peer_connected_cb(id):
+func _on_peer_connected(id):
 	print("Player", id, " connected !")
 
-func _peer_disconnected_cb(id):
+
+func _on_peer_disconnected(id):
 	print("Player", id, " disconnected !")
 
-func _connect_to_server_cb():
+
+func _on_connected_to_server():
+	GameManager.add_player.rpc_id(1, name_edit.text, multiplayer.get_unique_id())
 	print("Connected to server !")
 
-func _connection_failed_cb():
+
+func _on_connection_failed():
 	printerr("Connection failed !")
+
 
 # ============================================
 
 func _on_host_button_pressed() -> void:
-	_hostGame()
+	GameManager.add_player(name_edit.text, multiplayer.get_unique_id())
+	_addPeer(PeerType.SERVER)
+
 
 func _on_start_button_pressed() -> void:
-	pass # Replace with function body.
+	pass
+
 
 func _on_join_button_pressed() -> void:
-	_joinGame()
+	_addPeer(PeerType.CLIENT)
 
 # ============================================
 
-func _hostGame():
-	var peer: ENetMultiplayerPeer = ENetMultiplayerPeer.new()
-	var error = peer.create_server(port, 8)
+func _addPeer(peerType: PeerType):
+	var peer := ENetMultiplayerPeer.new()
+	var error = ERR_BUG
+	if peerType == PeerType.SERVER:
+		error = peer.create_server(port, 8)
+	elif peerType == PeerType.CLIENT:
+		error = peer.create_client(address, port)
+	
 	if error != OK:
 		printerr("Cannot host: ", str(error))
 		return
+	
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.set_multiplayer_peer(peer)
-	print("Waiting for players")
-
-func _joinGame():
-	var peer: ENetMultiplayerPeer = ENetMultiplayerPeer.new()
-	var error = peer.create_client(address, port)
-	if error != OK:
-		printerr("Cannot host: ", str(error))
-		return
-	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
-	multiplayer.set_multiplayer_peer(peer)
-	print("Server joined")
+	

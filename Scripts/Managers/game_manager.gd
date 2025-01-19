@@ -15,6 +15,10 @@ enum GameState {
 	Fighting
 }
 
+# ============================== Constants ==============================
+
+const MAX_PLAYERS: int = 8
+
 # ============================== Public ==============================
 
 var players: Array[Player]
@@ -33,15 +37,6 @@ var _rules: GameRules
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	print("GameManager ready !")
-	players.append(Player.new())
-	players[0].name = "Breep"
-	players[0].deck = PlayerDeck.new()
-	players[0].health = 30
-	players[0].id = 0
-	players[0].hero = load("res://Resources/Heros/JohnnyDefault/johnny_default.tres").duplicate(true)
-	players[0].gold = 10000
-	
 	_rules = load("res://Resources/GameRules/NormalGameRules.tres")
 	_families.append(load("res://Resources/Families/Attack/attack_family.tres"))
 	
@@ -59,6 +54,35 @@ func game_switch_to(new_game_state: GameState) -> void:
 	else:
 		printerr("Game is already on ", _game_state, " state !")
 
+
+@rpc("any_peer", "call_remote")
+func add_player(name: String, id: int) -> void:
+	print("Adding player: ", name, " of multiplayer id:", id, " in my players list (I am player id ", multiplayer.get_unique_id(), ")")
+	
+	if _is_player_registered(id):
+		printerr("Player already registered")
+		return
+	
+	if players.size() >= MAX_PLAYERS:
+		printerr("Too many players")
+		return
+	
+	var new_player := Player.new()
+	new_player.deck = PlayerDeck.new()
+	new_player.name = name
+	new_player.id = id
+	
+	# TMP
+	new_player.hero = load("res://Resources/Heros/JohnnyDefault/johnny_default.tres").duplicate(true)
+	new_player.gold = 10000
+	new_player.health = 30
+	
+	players.append(new_player)
+	
+	if multiplayer.is_server():
+		for player in players:
+			add_player.rpc(player.name, player.id)
+
 # ============================== Private function ==============================
 
 func _game_switch_to(new_game_state: GameState) -> void:
@@ -72,3 +96,39 @@ func _game_switch_to(new_game_state: GameState) -> void:
 		return
 	
 	get_tree().change_scene_to_packed(new_scene)
+
+
+func _is_player_registered(id: int) -> bool:
+	if players == null:
+		return false
+	
+	for player in players:
+		if player.id == id:
+			return true
+	
+	return false
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
