@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_vpbl7"]
 [ext_resource type="Resource" uid="uid://5b3so5uho4c6" path="res://Resources/Families/Attack/AttackDesc.tres" id="2_ba4pa"]
-[ext_resource type="Texture2D" uid="uid://dn4tg0i7odbd8" path="res://Data/Assets/Card/Card_IMG/ignite on aa.png" id="3_k400o"]
+[ext_resource type="Texture2D" uid="uid://btjgqupi22y8o" path="res://Data/Assets/Card/Card_IMG/attack_ignite.webp" id="3_5wwfa"]
 [ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Attack/aa_chance_to_ignite.gd" id="4_x4c77"]
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_8bp5r"]
 
@@ -13,7 +13,7 @@ chance_to_ignite = Array[int]([10, 15, 20, 25, 40])
 [resource]
 script = ExtResource("5_8bp5r")
 name = "Fire Sword"
-picture = ExtResource("3_k400o")
+picture = ExtResource("3_5wwfa")
 families = Array[ExtResource("1_vpbl7")]([ExtResource("2_ba4pa")])
 lvl = 1
 rarity = 0
