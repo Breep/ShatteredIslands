@@ -8,3 +8,5 @@ var health: int
 var hero: Hero
 var deck: PlayerDeck
 var gold: int
+
+var ready: bool

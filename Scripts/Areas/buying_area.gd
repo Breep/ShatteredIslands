@@ -18,7 +18,7 @@ func _on_timer_timeout() -> void:
 
 func _on_player_deck_button_pressed() -> void:
 	playerDeckUI.show()
-	playerDeckUI.show_player_cards(GameManager.players[0].deck.cardPile)
+	playerDeckUI.show_player_cards(GameManager.get_local_player().deck.cardPile)
 
 
 func _on_stats_character_pressed() -> void:

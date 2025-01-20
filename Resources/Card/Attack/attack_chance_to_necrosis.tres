@@ -16,5 +16,5 @@ name = "Necrosis Scythe"
 picture = ExtResource("3_1d2gy")
 families = Array[ExtResource("1_lg5f2")]([ExtResource("2_fhnxy")])
 lvl = 1
-rarity = 1
+rarity = 0
 player_upgrade = SubResource("Resource_aujnj")

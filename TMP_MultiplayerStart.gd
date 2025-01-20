@@ -47,11 +47,18 @@ func _on_host_button_pressed() -> void:
 
 
 func _on_start_button_pressed() -> void:
-	GameManager.game_switch_to.rpc(GameManager.GameState.Buying)
+	GameManager.start_game.rpc()
 
 
 func _on_join_button_pressed() -> void:
 	_addPeer(PeerType.CLIENT)
+
+
+
+
+func _on_ready_button_toggled(toggled_on: bool) -> void:
+	GameManager.set_ready.rpc(multiplayer.get_unique_id(), toggled_on)
+
 
 # ============================================
 
@@ -70,3 +77,8 @@ func _addPeer(peerType: PeerType):
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.set_multiplayer_peer(peer)
 	
+
+
+func _on_breakpoint_pressed() -> void:
+	print("Breakpoint here")
+	pass # Replace with function body.

@@ -11,7 +11,7 @@
 [ext_resource type="Resource" uid="uid://b0cmganf48sgp" path="res://Resources/Card/Attack/attack_chance_to_poison.tres" id="7_ydbl8"]
 [ext_resource type="Resource" uid="uid://bh36aymfdpkvc" path="res://Resources/Card/Attack/attack_chance_to_static_charge.tres" id="8_6mbtj"]
 [ext_resource type="Resource" uid="uid://bwdrxts64wwp8" path="res://Resources/Card/Attack/attack_chance_to_stun.tres" id="9_0hqkg"]
-[ext_resource type="Resource" path="res://Resources/Card/Attack/attack_chance_to_vulnerability.tres" id="10_d84pe"]
+[ext_resource type="Resource" uid="uid://d330nvebnef6f" path="res://Resources/Card/Attack/attack_chance_to_vulnerability.tres" id="10_d84pe"]
 [ext_resource type="Resource" uid="uid://csf5h7jnxxg2c" path="res://Resources/Card/Attack/attack_dammage.tres" id="11_gp3v2"]
 [ext_resource type="Resource" uid="uid://d1r7xbs3kyppp" path="res://Resources/Card/Attack/attack_speed.tres" id="12_xnad5"]
 

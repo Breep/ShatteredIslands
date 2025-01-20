@@ -77,8 +77,18 @@ func set_stats_from_player_stats(playerStats: CharacterStats) -> void:
 	_stats.speed = 50
 	_stats.damage = playerStats.auto_attack.damage
 	_stats.isCritic = _is_randomize_modifier_active(playerStats.auto_attack.critical_chance)
+	_stats.poison_stacks = _is_randomize_modifier_active(playerStats.auto_attack.poison_chance) as int * 5
+	_stats.poison_stacks = _is_randomize_modifier_active(playerStats.auto_attack.poison_chance)
+	_stats.poison_stacks = _is_randomize_modifier_active(playerStats.auto_attack.poison_chance)
+	_stats.poison_stacks = _is_randomize_modifier_active(playerStats.auto_attack.poison_chance)
+	_stats.poison_stacks = _is_randomize_modifier_active(playerStats.auto_attack.poison_chance)
+	_stats.poison_stacks = _is_randomize_modifier_active(playerStats.auto_attack.poison_chance)
+	_stats.poison_stacks = _is_randomize_modifier_active(playerStats.auto_attack.poison_chance)
+	_stats.poison_stacks = _is_randomize_modifier_active(playerStats.auto_attack.poison_chance)
+	
 	if _stats.isCritic:
 		_isCritic = true
 		var criticalMultiplierNormalized = remap(playerStats.auto_attack.critical_multiplier, 0, 100, 1, 2) as int
 		_stats.damage *= criticalMultiplierNormalized
 		scale *= criticalMultiplierNormalized
+	
