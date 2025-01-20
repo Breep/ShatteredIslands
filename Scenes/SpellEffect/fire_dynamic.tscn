@@ -67,7 +67,7 @@ fixed_fps = 60
 
 [node name="VFX_Flame_Thrower" type="GPUParticles2D" parent="."]
 material = ExtResource("1_7g03x")
-position = Vector2(806, 244)
+position = Vector2(809, 293)
 amount = 200
 process_material = SubResource("ParticleProcessMaterial_blrrw")
 texture = ExtResource("3_xxxtx")
