@@ -4,13 +4,14 @@ extends Deck
 # ============================== Public function ==============================
 
 func shuffle() -> void:
-	if _cardPile.is_empty(): 
+	if _cardPile.is_empty():
+		printerr("Trying to shuffle an empty card pile")
 		return
-	
+
 	var rng := RandomNumberGenerator.new()
 	rng.randomize()
 	for i in _cardPile.size():
-		var random_index = rng.randi_range(0, _cardPile.size() - 1)
+		var random_index =  rng.randi_range(0, _cardPile.size() - 1)
 		var temp = _cardPile[i]
 		_cardPile[i] = _cardPile[random_index]
 		_cardPile[random_index] = temp
@@ -32,7 +33,7 @@ func construct_shop_deck(families: Array[Family], game_rules: GameRules) -> void
 						add_card(card.duplicate())
 
 
-func draw_smart(cards_to_remove: Array[Card], number_of_cards_to_draw: int):
+func smart_draw_n_cards(cards_to_remove: Array[Card], number_of_cards_to_draw: int):
 	var card_pile_copy = _cardPile.duplicate()
 	for card_to_remove in cards_to_remove:
 		_remove_all_same_card_in_array(card_to_remove, card_pile_copy)

@@ -22,7 +22,6 @@ const MAX_PLAYERS: int = 8
 # ============================== Public ==============================
 
 var players: Array[Player]
-var shop_deck: ShopDeck
 
 # ============================== Private ==============================
 
@@ -39,11 +38,6 @@ var _rules: GameRules
 func _ready() -> void:
 	_rules = load("res://Resources/GameRules/NormalGameRules.tres")
 	_families.append(load("res://Resources/Families/Attack/attack_family.tres"))
-	
-	shop_deck = ShopDeck.new()
-	shop_deck.construct_shop_deck(_families, _rules)
-	shop_deck.shuffle()
-	pass
 
 # ============================== Public function ==============================
 
@@ -58,7 +52,7 @@ func game_switch_to(new_game_state: GameState) -> void:
 
 @rpc("any_peer", "call_remote")
 func add_player(name: String, id: int) -> void:
-	print("Adding player: ", name, " of multiplayer id:", id, " in my players list (I am player id ", multiplayer.get_unique_id(), ")")
+	print("[id:", multiplayer.get_unique_id(),"] Adding player: ", name, " of multiplayer id:", id, " in my players list")
 	
 	if _is_player_registered(id):
 		printerr("Player already registered")
@@ -72,6 +66,7 @@ func add_player(name: String, id: int) -> void:
 	new_player.deck = PlayerDeck.new()
 	new_player.name = name
 	new_player.id = id
+	new_player.ready = false
 	
 	# TMP
 	new_player.hero = load("res://Resources/Heros/JohnnyDefault/johnny_default.tres").duplicate(true)
@@ -85,6 +80,14 @@ func add_player(name: String, id: int) -> void:
 			add_player.rpc(player.name, player.id)
 
 
+@rpc("any_peer", "call_local")
+func set_ready(peer_id: int , is_ready: bool) -> void:
+	print("[id:", multiplayer.get_unique_id(),"] player ", peer_id, " is telling me that he is ready ? ", is_ready)
+	for player in players:
+		if player.id == peer_id:
+			player.ready = is_ready
+
+
 func get_local_player() -> Player:
 	for player in players:
 		if player.id == multiplayer.get_unique_id():
@@ -92,6 +95,21 @@ func get_local_player() -> Player:
 
 	printerr("No local player registered in the GameManager !")
 	return null
+
+
+@rpc("any_peer", "call_local")
+func start_game() -> void:
+	if not _all_player_are_ready():
+		printerr("Not all player are ready !")
+		return
+	
+	MultiplayerDeckManager.init_cards_ref(_families, _rules)
+	if multiplayer.is_server():
+		MultiplayerDeckManager.construct_shop_deck(_families, _rules)
+	
+	game_switch_to(GameState.Buying)
+	
+	print("[id:", multiplayer.get_unique_id(),"] Start game !")
 
 # ============================== Private function ==============================
 
@@ -117,11 +135,15 @@ func _is_player_registered(id: int) -> bool:
 			return true
 	
 	return false
-	
-	
-	
-	
-	
+
+
+func _all_player_are_ready() -> bool:
+	for player in players:
+		if player.ready == false:
+			return false
+
+	return true
+
 	
 	
 	

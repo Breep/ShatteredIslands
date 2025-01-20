@@ -5,6 +5,7 @@ extends Control
 
 var _card_displayed: Array[Card]
 var _local_player: Player
+var _waiting_for_new_cards: bool = false
 
 # ============================== Local scene nodes ==============================
 
@@ -26,7 +27,7 @@ func _ready() -> void:
 
 func _exit_tree() -> void:
 	for card in _card_displayed:
-		GameManager.shop_deck.add_card(card)
+		MultiplayerDeckManager.add_card(card)
 
 
 func _on_back_pressed() -> void:
@@ -35,7 +36,8 @@ func _on_back_pressed() -> void:
 
 
 func _on_card_shop_button_pressed(card: Card) -> void:
-	print(card.lvl)
+	if _waiting_for_new_cards:
+		return
 	_add_card_to_player_deck(card)
 
 # ============================== Private functions ==============================
@@ -47,7 +49,10 @@ func _add_card_to_player_deck(card: Card) -> void:
 	
 	if _local_player.gold < 100:
 		return
+	print("Adding ", card.name, " ", card.lvl, " | ", card)
 	
+	_waiting_for_new_cards = true
+	#print("waiting for new cards")
 	_local_player.gold -= 100
 	_local_player.deck.add_card(card)
 	var remaining_cards = []
@@ -57,9 +62,11 @@ func _add_card_to_player_deck(card: Card) -> void:
 			remaining_cards.append(cardButton.card)
 	
 	for remaining_card in remaining_cards:
-		GameManager.shop_deck.add_card(remaining_card)
+		MultiplayerDeckManager.add_card(remaining_card)
 	
 	_update_shop_cards_displayed()
+	_waiting_for_new_cards = false
+	#print("got new cards")
 
 
 func _update_shop_cards_displayed() -> void:
@@ -68,11 +75,14 @@ func _update_shop_cards_displayed() -> void:
 		return
 	
 	var cardsNumber = 3 # TODO For the moment there is no way to get more cards each time you buy, maybe in the futur
-	_card_displayed = GameManager.shop_deck.draw_smart(_local_player.deck.get_max_lvl_cards(), cardsNumber)
+	_card_displayed = await MultiplayerDeckManager.smart_draw_n_cards(_local_player.deck.get_max_lvl_cards(), cardsNumber)
+	
 	_adapt_cards_lvl_to_player()
 	_card_shop_visual.update_shop_cards_displayed_visual(_card_displayed)
 
 
 func _adapt_cards_lvl_to_player() -> void:
-	for i in _card_displayed.size():
-		_card_displayed[i].lvl = _local_player.deck.get_card_lvl(_card_displayed[i]) + 1
+	for card in _card_displayed:
+		print("[DEBUG] ", card.name, " ", card.lvl)
+		card.lvl = _local_player.deck.get_card_lvl(card) + 1
+		print("[DEBUG] ", card.name, " ", card.lvl)
