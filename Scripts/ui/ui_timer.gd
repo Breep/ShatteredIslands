@@ -9,7 +9,7 @@ func _ready() -> void:
 	update_timer_text()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# Met à jour le texte et la barre de progression en fonction du temps restant
 	if timer.time_left > 0:
 		update_timer_text()

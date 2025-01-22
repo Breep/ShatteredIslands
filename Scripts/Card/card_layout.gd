@@ -7,7 +7,6 @@ extends Control
 @onready var _picture : TextureRect = $Picture
 @onready var _card_name : Label = $CardName
 @onready var _family_icon : TextureRect = $FamilyIcon
-@onready var _rarity : Control = $Rarity
 @onready var _lvlcontainer : VBoxContainer = $currentLvlContainer
 
 # ============================== Public functions ==============================

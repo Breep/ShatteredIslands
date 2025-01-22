@@ -32,12 +32,12 @@ var _middle_offset: Vector2 = Vector2(125,175)
 
 # ============================== Public functions ==============================
 
-func update_visual(card: Card) -> void:
-	_card = card
-	if card == null:
+func update_visual(new_card: Card) -> void:
+	_card = new_card
+	if new_card == null:
 		printerr("Can't update button visual: card is null")
 		return
-	_card_layout.update_card_layout(card)
+	_card_layout.update_card_layout(new_card)
 
 
 # ============================== Node base functions ==============================

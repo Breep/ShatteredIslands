@@ -51,8 +51,8 @@ func game_switch_to(new_game_state: GameState) -> void:
 
 
 @rpc("any_peer", "call_remote")
-func add_player(name: String, id: int) -> void:
-	print("[id:", multiplayer.get_unique_id(),"] Adding player: ", name, " of multiplayer id:", id, " in my players list")
+func add_player(player_name: String, id: int) -> void:
+	print("[id:", multiplayer.get_unique_id(),"] Adding player: ", player_name, " of multiplayer id:", id, " in my players list")
 	
 	if _is_player_registered(id):
 		printerr("Player already registered")
@@ -64,7 +64,7 @@ func add_player(name: String, id: int) -> void:
 	
 	var new_player := Player.new()
 	new_player.deck = PlayerDeck.new()
-	new_player.name = name
+	new_player.name = player_name
 	new_player.id = id
 	new_player.ready = false
 	

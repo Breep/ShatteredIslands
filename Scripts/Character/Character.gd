@@ -60,7 +60,7 @@ func hit_by_auto_attack(_src: Character, aaStats: AutoAttackProjectileStats):
 		_is_dead = true
 
 
-func damage_popup(amount: float, modifier: int = 1):
+func damage_popup(amount: float, _modifier: int = 1):
 	var popup = damage_popup_node.instantiate()
 	var target_position = Vector2(randf_range(10,30), randf_range(10,-30)) 
 	popup.text = str(amount)

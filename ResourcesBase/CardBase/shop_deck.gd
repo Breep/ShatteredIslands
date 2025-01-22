@@ -34,6 +34,7 @@ func construct_shop_deck(families: Array[Family], game_rules: GameRules) -> void
 
 
 func smart_draw_n_cards(cards_to_remove: Array[Card], number_of_cards_to_draw: int):
+	#print("Remaining cards in shop deck: ", size())
 	var card_pile_copy = _cardPile.duplicate()
 	for card_to_remove in cards_to_remove:
 		_remove_all_same_card_in_array(card_to_remove, card_pile_copy)
@@ -41,3 +42,15 @@ func smart_draw_n_cards(cards_to_remove: Array[Card], number_of_cards_to_draw: i
 	for drawcard in cardsToDraw:
 		remove_card(drawcard)
 	return cardsToDraw
+
+
+func debug_print() -> void:
+	var card_types_number_dictionary: Dictionary
+	for card in _cardPile:
+		if card_types_number_dictionary.has(card.name):
+			card_types_number_dictionary[card.name] += 1
+		else:
+			card_types_number_dictionary[card.name] = 1
+	
+	for card_name in card_types_number_dictionary.keys():
+		print(card_name, " : ", card_types_number_dictionary[card_name])

@@ -5,7 +5,6 @@ extends Control
 
 var _card_displayed: Array[Card]
 var _local_player: Player
-var _waiting_for_new_cards: bool = false
 
 # ============================== Local scene nodes ==============================
 
@@ -22,7 +21,7 @@ func _ready() -> void:
 	# TODO make it in a separate function that can handle a custom number of button
 	for i in 3:
 		var cardButton = _card_container.get_node(str(i)) as CardButton
-		cardButton.connect("leftClick", _on_card_shop_button_pressed)
+		cardButton.connect("leftClick", _on_card_shop_button_pressed, CONNECT_ONE_SHOT)
 
 
 func _exit_tree() -> void:
@@ -36,37 +35,35 @@ func _on_back_pressed() -> void:
 
 
 func _on_card_shop_button_pressed(card: Card) -> void:
-	if _waiting_for_new_cards:
-		return
 	_add_card_to_player_deck(card)
 
 # ============================== Private functions ==============================
 
 func _add_card_to_player_deck(card: Card) -> void:
+	var cardButton_clicked: CardButton
 	if _local_player.deck == null:
 		printerr("Can't update shop cards, there is no player_deck")
 		return
 	
 	if _local_player.gold < 100:
 		return
-	print("Adding ", card.name, " ", card.lvl, " | ", card)
 	
-	_waiting_for_new_cards = true
-	#print("waiting for new cards")
 	_local_player.gold -= 100
 	_local_player.deck.add_card(card)
 	var remaining_cards = []
 	for i in 3:
 		var cardButton = _card_container.get_node(str(i)) as CardButton
-		if cardButton.card.name != card.name:
-			remaining_cards.append(cardButton.card)
+		if cardButton.visible:
+			if cardButton.card.name != card.name:
+				remaining_cards.append(cardButton.card)
+			else:
+				cardButton_clicked = cardButton
 	
 	for remaining_card in remaining_cards:
 		MultiplayerDeckManager.add_card(remaining_card)
 	
-	_update_shop_cards_displayed()
-	_waiting_for_new_cards = false
-	#print("got new cards")
+	await _update_shop_cards_displayed()
+	_reconnect_to_card_signal(cardButton_clicked)
 
 
 func _update_shop_cards_displayed() -> void:
@@ -83,6 +80,8 @@ func _update_shop_cards_displayed() -> void:
 
 func _adapt_cards_lvl_to_player() -> void:
 	for card in _card_displayed:
-		print("[DEBUG] ", card.name, " ", card.lvl)
 		card.lvl = _local_player.deck.get_card_lvl(card) + 1
-		print("[DEBUG] ", card.name, " ", card.lvl)
+
+
+func _reconnect_to_card_signal(cardButton: CardButton) -> void:
+	cardButton.connect("leftClick", _on_card_shop_button_pressed, CONNECT_ONE_SHOT)

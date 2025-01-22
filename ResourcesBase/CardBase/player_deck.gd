@@ -4,7 +4,7 @@ extends Deck
 # ============================== Public function ==============================
 
 func add_card(card_to_add: Card) -> void: #override
-	_find_same_lower_card_and_replace(card_to_add)
+	_add_or_improve_card(card_to_add)
 
 
 func get_max_lvl_cards() -> Array[Card]:
@@ -25,15 +25,23 @@ func get_card_lvl(card_to_get_lvl: Card) -> int:
 			return card.lvl
 	return 0
 
+
+func debug_print() -> void:
+	print("Player deck:")
+	for card in _cardPile:
+		print(card.name, "->lvl[", card.lvl, "]")
+
 # ============================== Private function ==============================
 
-func _find_same_lower_card_and_replace(new_card: Card) -> void:
+func _add_or_improve_card(new_card: Card) -> void:
 	for card in _cardPile:
 		if card.name == new_card.name:
+			#print("UPGRADING ", new_card.name)
 			if new_card.lvl > card.lvl:
-				remove_card(card)
-				_cardPile.append(new_card)
+				card.lvl += 1
 			else:
-				printerr("Trying to add a same card but with a lower lvl")
+				printerr("Trying to upgrade a card but with a lower lvl")
 			return
-	_cardPile.append(new_card)
+
+	#print("ADDING NEW CARD ", new_card.name)
+	_cardPile.append(new_card.duplicate())

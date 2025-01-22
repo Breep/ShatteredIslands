@@ -8,7 +8,7 @@
 
 [sub_resource type="Resource" id="Resource_2xvct"]
 script = ExtResource("4_6i8fu")
-chance_to_bounce = Array[int]([])
+chance_to_bounce = Array[int]([10, 20, 30])
 
 [resource]
 script = ExtResource("5_xhkri")
