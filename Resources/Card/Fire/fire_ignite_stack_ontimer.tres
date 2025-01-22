@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://ckett0ta5lvew"]
+
+[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_cyu78"]
+[ext_resource type="Resource" uid="uid://ce8bwdfkqwriu" path="res://Resources/Families/Fire/fire_desc.tres" id="2_3y724"]
+[ext_resource type="Texture2D" uid="uid://cbu6coooasc0d" path="res://Data/Assets/Card/Card_IMG/fire/fire orb.png" id="3_dtspe"]
+[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/fire/fire_ignite_stack_per_second.gd" id="4_n8f1v"]
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_mtlme"]
+
+[sub_resource type="Resource" id="Resource_mrjx3"]
+script = ExtResource("4_n8f1v")
+fire_igniteStack_ontimer = Array[int]([5, 10, 15, 20, 30])
+
+[resource]
+script = ExtResource("5_mtlme")
+name = "Ignition"
+picture = ExtResource("3_dtspe")
+families = Array[ExtResource("1_cyu78")]([ExtResource("2_3y724")])
+lvl = 1
+rarity = 0
+player_upgrade = SubResource("Resource_mrjx3")

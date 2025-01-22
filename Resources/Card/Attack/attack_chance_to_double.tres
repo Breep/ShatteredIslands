@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_1cfd8"]
 [ext_resource type="Resource" uid="uid://5b3so5uho4c6" path="res://Resources/Families/Attack/AttackDesc.tres" id="2_ptvg6"]
-[ext_resource type="Texture2D" uid="uid://ccpo2xnxtocfq" path="res://Data/Assets/Card/Card_IMG/double attack.jpg" id="3_qu3r6"]
+[ext_resource type="Texture2D" uid="uid://ccpo2xnxtocfq" path="res://Data/Assets/Card/Card_IMG/storm/double attack.jpg" id="3_qu3r6"]
 [ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Attack/aa_chance_to_double_attack.gd" id="4_b4xcd"]
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_fo3sg"]
 

@@ -4,12 +4,12 @@
 [ext_resource type="FontFile" uid="uid://dgaako73a24kh" path="res://Data/font/rimouski sb.ttf" id="2_qiv10"]
 [ext_resource type="Texture2D" uid="uid://haeo8pgy071v" path="res://Data/Assets/BackGround/effet-bang-explosion-fleche-dessin-anime-icone-souffle-feu_81894-6614-removebg-preview.png" id="3_igl0i"]
 [ext_resource type="Texture2D" uid="uid://d34qpfx40d4ox" path="res://Data/Assets/BackGround/472616789_28403690705911652_2688862136642980928_n-removebg-preview.png" id="4_hrd11"]
-[ext_resource type="Texture2D" uid="uid://dhvnlvdnbrxvl" path="res://Data/Assets/Card/Card_IMG/cleanse.jpg" id="5_nce0c"]
-[ext_resource type="Texture2D" uid="uid://bo534sbxmu3jh" path="res://Data/Assets/Card/Card_IMG/bounce attack.jpg" id="6_8eu7i"]
-[ext_resource type="Texture2D" uid="uid://dmhnxnqse56fy" path="res://Data/Assets/Card/Card_IMG/white-light-monolith.jpg" id="7_nkift"]
-[ext_resource type="Texture2D" uid="uid://bd2ymqw3mfvrg" path="res://Data/Assets/Card/Card_IMG/necrosis knife.jpg" id="8_jm1h0"]
-[ext_resource type="Texture2D" uid="uid://berioty2oweos" path="res://Data/Assets/Card/Card_IMG/soul drain.jpg" id="9_1sblj"]
-[ext_resource type="Texture2D" uid="uid://clx0jjxv145r5" path="res://Data/Assets/Card/Card_IMG/thunder weapon.jpg" id="10_cxqh0"]
+[ext_resource type="Texture2D" uid="uid://dhvnlvdnbrxvl" path="res://Data/Assets/Card/Card_IMG/heal/cleanse.jpg" id="5_nce0c"]
+[ext_resource type="Texture2D" uid="uid://bo534sbxmu3jh" path="res://Data/Assets/Card/Card_IMG/Attack/bounce attack.jpg" id="6_8eu7i"]
+[ext_resource type="Texture2D" uid="uid://dmhnxnqse56fy" path="res://Data/Assets/Card/Card_IMG/heal/white-light-monolith.jpg" id="7_nkift"]
+[ext_resource type="Texture2D" uid="uid://bd2ymqw3mfvrg" path="res://Data/Assets/Card/Card_IMG/Necro/necrosis knife.jpg" id="8_jm1h0"]
+[ext_resource type="Texture2D" uid="uid://berioty2oweos" path="res://Data/Assets/Card/Card_IMG/Necro/soul drain.jpg" id="9_1sblj"]
+[ext_resource type="Texture2D" uid="uid://clx0jjxv145r5" path="res://Data/Assets/Card/Card_IMG/storm/thunder weapon.jpg" id="10_cxqh0"]
 
 [node name="TalentTree" type="Control"]
 layout_mode = 3

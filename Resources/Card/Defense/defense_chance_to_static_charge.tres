@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://bt5u1wofd40pi"]
+
+[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_n8ktx"]
+[ext_resource type="Resource" uid="uid://ds0ifali812hu" path="res://Resources/Families/Defense/defense_desc.tres" id="2_dy8g7"]
+[ext_resource type="Texture2D" uid="uid://jndf37g8kc74" path="res://Data/Assets/Card/Card_IMG/defense/storm cape.png" id="3_mckjj"]
+[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Defense/defense_chance_to_static_charge.gd" id="4_32we7"]
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_ydy84"]
+
+[sub_resource type="Resource" id="Resource_uy2aw"]
+script = ExtResource("4_32we7")
+ChanceToStaticCharge = Array[int]([10, 15, 20, 25, 40])
+
+[resource]
+script = ExtResource("5_ydy84")
+name = "Storm Back"
+picture = ExtResource("3_mckjj")
+families = Array[ExtResource("1_n8ktx")]([ExtResource("2_dy8g7")])
+lvl = 1
+rarity = 0
+player_upgrade = SubResource("Resource_uy2aw")

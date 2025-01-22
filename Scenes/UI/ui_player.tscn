@@ -8,12 +8,12 @@
 [ext_resource type="Texture2D" uid="uid://cia42t0jcdkfg" path="res://Data/Assets/Card/ICONS/HP color.png" id="4_lfj3v"]
 [ext_resource type="Texture2D" uid="uid://nxj6jw2phtcp" path="res://Data/Assets/Card/ICONS/MANA color.png" id="5_ts515"]
 [ext_resource type="Texture2D" uid="uid://ba6cllpcqe1xc" path="res://Data/Assets/Card/ICONS/star.png" id="6_qcym3"]
-[ext_resource type="Texture2D" uid="uid://dhvnlvdnbrxvl" path="res://Data/Assets/Card/Card_IMG/cleanse.jpg" id="8_05agw"]
-[ext_resource type="Texture2D" uid="uid://bo534sbxmu3jh" path="res://Data/Assets/Card/Card_IMG/bounce attack.jpg" id="9_bkggr"]
-[ext_resource type="Texture2D" uid="uid://dn4tg0i7odbd8" path="res://Data/Assets/Card/Card_IMG/ignite on aa.png" id="10_6bxc4"]
-[ext_resource type="Texture2D" uid="uid://ljrda5geyfek" path="res://Data/Assets/Card/Card_IMG/knife terror.jpg" id="11_ba0ao"]
-[ext_resource type="Texture2D" uid="uid://berioty2oweos" path="res://Data/Assets/Card/Card_IMG/soul drain.jpg" id="12_oe1kk"]
-[ext_resource type="Texture2D" uid="uid://clx0jjxv145r5" path="res://Data/Assets/Card/Card_IMG/thunder weapon.jpg" id="13_ildox"]
+[ext_resource type="Texture2D" uid="uid://dhvnlvdnbrxvl" path="res://Data/Assets/Card/Card_IMG/heal/cleanse.jpg" id="8_05agw"]
+[ext_resource type="Texture2D" uid="uid://bo534sbxmu3jh" path="res://Data/Assets/Card/Card_IMG/Attack/bounce attack.jpg" id="9_bkggr"]
+[ext_resource type="Texture2D" uid="uid://dn4tg0i7odbd8" path="res://Data/Assets/Card/Card_IMG/fire/ignite on aa.png" id="10_6bxc4"]
+[ext_resource type="Texture2D" uid="uid://ljrda5geyfek" path="res://Data/Assets/Card/Card_IMG/shadow/knife terror.jpg" id="11_ba0ao"]
+[ext_resource type="Texture2D" uid="uid://berioty2oweos" path="res://Data/Assets/Card/Card_IMG/Necro/soul drain.jpg" id="12_oe1kk"]
+[ext_resource type="Texture2D" uid="uid://clx0jjxv145r5" path="res://Data/Assets/Card/Card_IMG/storm/thunder weapon.jpg" id="13_ildox"]
 
 [sub_resource type="Gradient" id="Gradient_dhf5d"]
 offsets = PackedFloat32Array(0, 0.982143, 1)

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_anhfv"]
 [ext_resource type="Resource" uid="uid://5b3so5uho4c6" path="res://Resources/Families/Attack/AttackDesc.tres" id="2_oo6iw"]
-[ext_resource type="Texture2D" uid="uid://srj0oauy5vod" path="res://Data/Assets/Card/Card_IMG/attack_poison.webp" id="3_tmn85"]
+[ext_resource type="Texture2D" uid="uid://srj0oauy5vod" path="res://Data/Assets/Card/Card_IMG/Attack/attack_poison.webp" id="3_tmn85"]
 [ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Attack/aa_chance_to_poison.gd" id="4_siy7o"]
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_1kirh"]
 

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Family" load_steps=14 format=3 uid="uid://dw66lnwee8ruk"]
+
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="1_yud7m"]
+[ext_resource type="Resource" uid="uid://ds0ifali812hu" path="res://Resources/Families/Defense/defense_desc.tres" id="2_bcp8f"]
+[ext_resource type="Resource" uid="uid://d4hfbm8yo1hwl" path="res://Resources/Card/Defense/defense_chance_to_poison.tres" id="2_t4mod"]
+[ext_resource type="Resource" uid="uid://dou6s03516igc" path="res://Resources/Card/Defense/defense_gain_amor.tres" id="3_odkxp"]
+[ext_resource type="Script" path="res://ResourcesBase/Family/family.gd" id="3_p2pe3"]
+[ext_resource type="Resource" uid="uid://krram84tawar" path="res://Resources/Card/Defense/defense_chance_to_ignite.tres" id="4_ffn0d"]
+[ext_resource type="Resource" uid="uid://cnv51t0txv5qx" path="res://Resources/Card/Defense/defense_chance_to_pacify.tres" id="5_573bp"]
+[ext_resource type="Resource" uid="uid://dqbwrt8fqwukv" path="res://Resources/Card/Defense/defense_chance_to_necrosis.tres" id="6_2jtam"]
+[ext_resource type="Resource" uid="uid://ickky3gdsc6q" path="res://Resources/Card/Defense/defense_chance_to_vulnerability.tres" id="7_lept4"]
+[ext_resource type="Resource" uid="uid://cxrt1tgesdgaa" path="res://Resources/Card/Defense/defense_chance_to_gain_armor.tres" id="8_rr5ef"]
+[ext_resource type="Resource" uid="uid://c4ycdjr3m3gkx" path="res://Resources/Card/Defense/defense_chance_to_stun_closest_enemy.tres" id="9_ya5wl"]
+[ext_resource type="Resource" uid="uid://bt5u1wofd40pi" path="res://Resources/Card/Defense/defense_chance_to_static_charge.tres" id="10_curht"]
+[ext_resource type="Resource" uid="uid://s4203g63v1bj" path="res://Resources/Card/Defense/defense_damage_received_reduce.tres" id="11_rr4bq"]
+
+[resource]
+script = ExtResource("3_p2pe3")
+desc = ExtResource("2_bcp8f")
+cards = Array[ExtResource("1_yud7m")]([ExtResource("2_t4mod"), ExtResource("3_odkxp"), ExtResource("4_ffn0d"), ExtResource("5_573bp"), ExtResource("6_2jtam"), ExtResource("7_lept4"), ExtResource("8_rr5ef"), ExtResource("9_ya5wl"), ExtResource("10_curht"), ExtResource("11_rr4bq")])

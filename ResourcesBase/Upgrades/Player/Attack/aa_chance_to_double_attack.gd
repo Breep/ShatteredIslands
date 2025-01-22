@@ -16,4 +16,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return str(chance_to_double_attack[cardlvl - 1]) + "% Chance to Double Attack"
+	return "[center]" + str(chance_to_double_attack[cardlvl - 1]) + "% Chance to Double Attack[/center]"

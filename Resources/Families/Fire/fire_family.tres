@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Family" load_steps=11 format=3 uid="uid://jlexh0hoftmd"]
+
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="1_ldcbf"]
+[ext_resource type="Resource" uid="uid://byfcfwbqe01co" path="res://Resources/Card/Fire/fire_ignite_lightning_bolt.tres" id="2_nxbhr"]
+[ext_resource type="Resource" uid="uid://ce8bwdfkqwriu" path="res://Resources/Families/Fire/fire_desc.tres" id="2_ta5bc"]
+[ext_resource type="Script" path="res://ResourcesBase/Family/family.gd" id="3_4jh4b"]
+[ext_resource type="Resource" uid="uid://ga4r0xida5no" path="res://Resources/Card/Fire/fire_heal_lost_hp.tres" id="3_ox75q"]
+[ext_resource type="Resource" uid="uid://ckett0ta5lvew" path="res://Resources/Card/Fire/fire_ignite_stack_ontimer.tres" id="4_k3a6q"]
+[ext_resource type="Resource" uid="uid://bn8rifooy7lej" path="res://Resources/Card/Fire/fire_invocation_explosion.tres" id="5_trbks"]
+[ext_resource type="Resource" uid="uid://ckwyslwdu8yet" path="res://Resources/Card/Fire/fire_poison_increase_fire_damage.tres" id="6_bp4mr"]
+[ext_resource type="Resource" uid="uid://chuumatgd0adm" path="res://Resources/Card/Fire/fire_increase_damage_onlowlife_enemies.tres" id="7_4jo6b"]
+[ext_resource type="Resource" uid="uid://c8lgo17h8qfps" path="res://Resources/Card/Fire/fire_ignite_explosion.tres" id="8_pti00"]
+
+[resource]
+script = ExtResource("3_4jh4b")
+desc = ExtResource("2_ta5bc")
+cards = Array[ExtResource("1_ldcbf")]([ExtResource("2_nxbhr"), ExtResource("3_ox75q"), ExtResource("4_k3a6q"), ExtResource("5_trbks"), ExtResource("6_bp4mr"), ExtResource("7_4jo6b"), ExtResource("8_pti00")])

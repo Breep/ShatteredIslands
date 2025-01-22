@@ -17,3 +17,4 @@ extends Resource
 @export var heal_ally: int # amount
 @export var cleanse: int # amount
 @export var drain_life: int  # amount
+@export var armor_onattack: int  # amount
