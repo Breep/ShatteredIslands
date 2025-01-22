@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_lg5f2"]
 [ext_resource type="Resource" uid="uid://5b3so5uho4c6" path="res://Resources/Families/Attack/AttackDesc.tres" id="2_fhnxy"]
-[ext_resource type="Texture2D" uid="uid://bd2ymqw3mfvrg" path="res://Data/Assets/Card/Card_IMG/necrosis knife.jpg" id="3_1d2gy"]
+[ext_resource type="Texture2D" uid="uid://bd2ymqw3mfvrg" path="res://Data/Assets/Card/Card_IMG/Necro/necrosis knife.jpg" id="3_1d2gy"]
 [ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Attack/aa_chance_to_necrosis.gd" id="4_mt3up"]
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_sr583"]
 

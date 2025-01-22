@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="FamilyDesc" load_steps=3 format=3 uid="uid://ce8bwdfkqwriu"]
+
+[ext_resource type="Texture2D" uid="uid://bd6cc2c6etfc2" path="res://Data/Assets/Card/Card_IMG/fire/icon flame.png" id="1_nos7h"]
+[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="2_5al4y"]
+
+[resource]
+script = ExtResource("2_5al4y")
+icon = ExtResource("1_nos7h")
+familyName = "Fire"

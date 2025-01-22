@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://c8lgo17h8qfps"]
+
+[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_xf53u"]
+[ext_resource type="Resource" uid="uid://ce8bwdfkqwriu" path="res://Resources/Families/Fire/fire_desc.tres" id="2_ltg3x"]
+[ext_resource type="Texture2D" uid="uid://bdfa8r87j5fvh" path="res://Data/Assets/Card/Card_IMG/fire/fire explosion.png" id="3_ntow8"]
+[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/fire/fire_ignite_explosion.gd" id="4_ayvqs"]
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_glp3c"]
+
+[sub_resource type="Resource" id="Resource_avd1h"]
+script = ExtResource("4_ayvqs")
+fire_ignite_explosion = Array[int]([20])
+
+[resource]
+script = ExtResource("5_glp3c")
+name = "EX-plooosiiiioooooon"
+picture = ExtResource("3_ntow8")
+families = Array[ExtResource("1_xf53u")]([ExtResource("2_ltg3x")])
+lvl = 1
+rarity = 0
+player_upgrade = SubResource("Resource_avd1h")

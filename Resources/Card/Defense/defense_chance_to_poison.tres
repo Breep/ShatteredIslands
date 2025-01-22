@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://d4hfbm8yo1hwl"]
+
+[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_f8v38"]
+[ext_resource type="Texture2D" uid="uid://chi5j1kuvpqkq" path="res://Data/Assets/Card/Card_IMG/poison/poison boots.jpg" id="2_dsecd"]
+[ext_resource type="Resource" uid="uid://ds0ifali812hu" path="res://Resources/Families/Defense/defense_desc.tres" id="2_jho2p"]
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="3_fi4ny"]
+[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Defense/defense_chance_to_poison.gd" id="4_gxv66"]
+
+[sub_resource type="Resource" id="Resource_c3rbj"]
+script = ExtResource("4_gxv66")
+being_hit_chance_to_poison = Array[int]([10, 15, 20, 25, 40])
+
+[resource]
+script = ExtResource("3_fi4ny")
+name = "Poisonous Boots"
+picture = ExtResource("2_dsecd")
+families = Array[ExtResource("1_f8v38")]([ExtResource("2_jho2p")])
+lvl = 1
+rarity = 0
+player_upgrade = SubResource("Resource_c3rbj")

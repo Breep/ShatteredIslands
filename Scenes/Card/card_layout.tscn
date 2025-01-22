@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Card/card_layout.gd" id="1_2an10"]
 [ext_resource type="Texture2D" uid="uid://cwht2t4m2e2v8" path="res://Data/Assets/Card/GENERAL/pngegg.png" id="1_a0cwy"]
 [ext_resource type="Texture2D" uid="uid://s0h8lcs7kd5o" path="res://Data/Assets/Card/GENERAL/FRONT-retag.png" id="2_ghe4c"]
-[ext_resource type="Texture2D" uid="uid://ljrda5geyfek" path="res://Data/Assets/Card/Card_IMG/knife terror.jpg" id="3_gjfba"]
+[ext_resource type="Texture2D" uid="uid://ljrda5geyfek" path="res://Data/Assets/Card/Card_IMG/shadow/knife terror.jpg" id="3_gjfba"]
 [ext_resource type="Texture2D" uid="uid://bxd1jnaci6olo" path="res://Data/Assets/Card/ICONS/ATTACK color.png" id="3_qt50n"]
 [ext_resource type="Texture2D" uid="uid://y0t815fi2pdf" path="res://Data/Assets/Card/ICONS/MANA.png" id="5_mnjh7"]
 [ext_resource type="Texture2D" uid="uid://nxj6jw2phtcp" path="res://Data/Assets/Card/ICONS/MANA color.png" id="6_4njnx"]

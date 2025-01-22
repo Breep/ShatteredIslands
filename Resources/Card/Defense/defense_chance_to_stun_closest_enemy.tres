@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://c4ycdjr3m3gkx"]
+
+[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_br7bq"]
+[ext_resource type="Resource" uid="uid://ds0ifali812hu" path="res://Resources/Families/Defense/defense_desc.tres" id="2_ca7m6"]
+[ext_resource type="Texture2D" uid="uid://b86bcx5q7y4i6" path="res://Data/Assets/Card/Card_IMG/defense/orc shoulder.png" id="3_2ykig"]
+[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Defense/defense_stun_closest_enemy.gd" id="4_bfbqn"]
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_almxd"]
+
+[sub_resource type="Resource" id="Resource_5252i"]
+script = ExtResource("4_bfbqn")
+stun_closest_enemy = Array[int]([5, 10, 15])
+
+[resource]
+script = ExtResource("5_almxd")
+name = "Spike armor"
+picture = ExtResource("3_2ykig")
+families = Array[ExtResource("1_br7bq")]([ExtResource("2_ca7m6")])
+lvl = 1
+rarity = 0
+player_upgrade = SubResource("Resource_5252i")

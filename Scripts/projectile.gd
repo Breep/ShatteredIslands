@@ -63,32 +63,79 @@ func _move_toward_target(delta: float):
 	var direction: Vector2 = (_target.global_position - global_position).normalized()
 	position += direction * _stats.speed * delta
 	look_at(_target.global_position)
-
+	
 func _is_randomize_modifier_active(chance: float) -> bool:
 	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 	rng.randomize()
 	return rng.randf_range(0, 100) <= chance
 
 # ============================== Public functions ==============================
+var effects: Array = [
+	PoisonEffect.new(),
+	StaticChargeEffect.new(),
+	IgniteEffect.new(),
+	StunEffect.new(),
+	VulnerabilityEffect.new(),
+	NecrosisEffect.new(),
+	DoubleAttackEffect.new()
+]
 
 func set_stats_from_player_stats(playerStats: CharacterStats) -> void:
 	if _stats == null:
 		_stats = AutoAttackProjectileStats.new()
 	_stats.speed = 50
 	_stats.damage = playerStats.auto_attack.damage
-	_stats.isCritic = _is_randomize_modifier_active(playerStats.auto_attack.critical_chance)
-	_stats.poison_stacks = _is_randomize_modifier_active(playerStats.auto_attack.poison_chance) as int * 5
-	_stats.poison_stacks = _is_randomize_modifier_active(playerStats.auto_attack.poison_chance)
-	_stats.poison_stacks = _is_randomize_modifier_active(playerStats.auto_attack.poison_chance)
-	_stats.poison_stacks = _is_randomize_modifier_active(playerStats.auto_attack.poison_chance)
-	_stats.poison_stacks = _is_randomize_modifier_active(playerStats.auto_attack.poison_chance)
-	_stats.poison_stacks = _is_randomize_modifier_active(playerStats.auto_attack.poison_chance)
-	_stats.poison_stacks = _is_randomize_modifier_active(playerStats.auto_attack.poison_chance)
-	_stats.poison_stacks = _is_randomize_modifier_active(playerStats.auto_attack.poison_chance)
 	
-	if _stats.isCritic:
-		_isCritic = true
-		var criticalMultiplierNormalized = remap(playerStats.auto_attack.critical_multiplier, 0, 100, 1, 2) as int
-		_stats.damage *= criticalMultiplierNormalized
-		scale *= criticalMultiplierNormalized
+	for effect in effects:
+		effect.apply_effect(_stats, playerStats)
 	
+	
+	
+	
+=================================== TEST 1 ================================
+
+
+	var applied_effects = apply_effects_from_randomization(playerStats)
+	for effect_name in applied_effects.keys():
+		if applied_effects[effect_name]:
+			match effect_name:
+				"is_poison": _stats.poison_stacks += 1
+				"is_static_charge": _stats.staticCharge_stacks += 1
+				"is_vulnerability": _stats.vulnerability_stacks += 1
+				"is_necrosis": _stats.necrosis_stacks += 1
+				"is_ignite": _stats.ignite_stacks += 1
+				"is_crit": _stats.isCritic = true
+				"is_double_attack": _stats.double_attack = true
+				"is_stun": _stats.stun_stacks += 1
+				"is_pacify": _stats.pacify_stacks += 1
+			print(applied_effects)
+
+
+func apply_effects_from_randomization(player_stats: CharacterStats) -> Dictionary:
+	var effects: Dictionary = {
+		"is_poison": false,
+		"is_static_charge": false,
+		"is_vulnerability": false,
+		"is_necrosis": false,
+		"is_ignite": false,
+		"is_crit": false,
+		"is_double_attack": false,
+		"is_stun": false,
+		"is_pacify": false
+		}
+	
+	var effect_mapping: Dictionary = {
+		"is_poison": player_stats.auto_attack.poison_chance,
+		"is_static_charge": player_stats.auto_attack.static_charge_chance,
+		"is_vulnerability": player_stats.auto_attack.vulnerability_chance,
+		"is_necrosis": player_stats.auto_attack.necrosi_chance,
+		"is_ignite": player_stats.auto_attack.ignite_chance,
+		"is_crit": player_stats.auto_attack.critical_chance,
+		"is_double_attack": player_stats.auto_attack.double_attack_chance,
+		"is_stun": player_stats.auto_attack.stun_chance,
+		"is_pacify": player_stats.auto_attack.pacify_chance
+		}
+		
+	for effect_name in effect_mapping.keys():
+		effects[effect_name] = _is_randomize_modifier_active(effect_mapping[effect_name])
+	return effects

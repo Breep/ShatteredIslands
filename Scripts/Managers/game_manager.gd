@@ -38,6 +38,8 @@ var _rules: GameRules
 func _ready() -> void:
 	_rules = load("res://Resources/GameRules/NormalGameRules.tres")
 	_families.append(load("res://Resources/Families/Attack/attack_family.tres"))
+	_families.append(load("res://Resources/Families/Defense/defense_family.tres"))
+	_families.append(load("res://Resources/Families/Fire/fire_family.tres"))
 
 # ============================== Public function ==============================
 

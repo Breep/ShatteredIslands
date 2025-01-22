@@ -14,4 +14,4 @@ func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > chance_to_necrosis.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
-	return "[center]" + str(chance_to_necrosis[cardlvl-1]) + "% Chance to [color=#8B00FF][wave freq=2.0 amp=5.0]Necrosis[/wave][/color] on Attack[/center]"
+	return "[center]" + str(chance_to_necrosis[cardlvl-1]) + "% Chance to [color=#8B00FF][wave freq=2.0 amp=5.0][hint=-1% Heal/Stack]Necrosis[/hint][/wave][/color] on Attack [/center]"
