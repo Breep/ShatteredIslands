@@ -1,6 +1,6 @@
 extends PlayerUpgrade
 
-class_name Defense_ChanceToGainArmor
+class_name Defense_ChanceToGainArmor_whenhit
 
 @export var being_hit_ChanceToGainArmor: Array[int]
 
@@ -10,7 +10,7 @@ func apply(player: Character, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.defense.chance_to_gain_armor += being_hit_ChanceToGainArmor[cardlvl-1]
+	player.stats.defense.armor_chancetogain_onhit += being_hit_ChanceToGainArmor[cardlvl-1]
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > being_hit_ChanceToGainArmor.size():

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://u6joadjshso2"]
+
+[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_0jg2n"]
+[ext_resource type="Resource" uid="uid://5b3so5uho4c6" path="res://Resources/Families/Attack/AttackDesc.tres" id="2_tn1mj"]
+[ext_resource type="Texture2D" uid="uid://ccpo2xnxtocfq" path="res://Data/Assets/Card/Card_IMG/storm/double attack.jpg" id="3_mmb1u"]
+[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Attack/aa_attack_speed_flat.gd" id="4_wfs23"]
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_e81jr"]
+
+[sub_resource type="Resource" id="Resource_qmdlv"]
+script = ExtResource("4_wfs23")
+aa_attackspeed_flat = Array[int]([10, 20, 30, 40, 75])
+
+[resource]
+script = ExtResource("5_e81jr")
+name = "Twin Blade"
+picture = ExtResource("3_mmb1u")
+families = Array[ExtResource("1_0jg2n")]([ExtResource("2_tn1mj")])
+lvl = 1
+rarity = 0
+player_upgrade = SubResource("Resource_qmdlv")

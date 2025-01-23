@@ -233,7 +233,7 @@ scale = Vector2(3.27083, 3.73152)
 sprite_frames = SubResource("SpriteFrames_chcx0")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.923914
+frame_progress = 0.849687
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(915, 236)
@@ -245,4 +245,4 @@ position = Vector2(222, 120)
 sprite_frames = SubResource("SpriteFrames_xkdpv")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.00399212
+frame_progress = 0.138415

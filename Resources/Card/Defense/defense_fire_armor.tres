@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://krram84tawar"]
+
+[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_0ump1"]
+[ext_resource type="Resource" uid="uid://ds0ifali812hu" path="res://Resources/Families/Defense/defense_desc.tres" id="2_tycl7"]
+[ext_resource type="Texture2D" uid="uid://c13cofjuxvnl3" path="res://Data/Assets/Card/Card_IMG/fire/fire helmet.png" id="3_rcke4"]
+[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Defense/defense_fire_armor.gd" id="4_alt2f"]
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_hra2n"]
+
+[sub_resource type="Resource" id="Resource_lpbkt"]
+script = ExtResource("4_alt2f")
+damage_fire_armor = Array[int]([10, 15, 20, 25, 40])
+
+[resource]
+script = ExtResource("5_hra2n")
+name = "Burned Helmet "
+picture = ExtResource("3_rcke4")
+families = Array[ExtResource("1_0ump1")]([ExtResource("2_tycl7")])
+lvl = 1
+rarity = 0
+player_upgrade = SubResource("Resource_lpbkt")

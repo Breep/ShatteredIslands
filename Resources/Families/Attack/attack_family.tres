@@ -2,20 +2,20 @@
 
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="1_lnl3k"]
 [ext_resource type="Resource" uid="uid://detmbv5f044hp" path="res://Resources/Card/Attack/attack_chance_to_bounce.tres" id="2_i7log"]
-[ext_resource type="Resource" uid="uid://u6joadjshso2" path="res://Resources/Card/Attack/attack_chance_to_double.tres" id="3_eg1li"]
-[ext_resource type="Resource" uid="uid://uthphbt7l2bk" path="res://Resources/Card/Attack/attack_chance_to_ignite.tres" id="4_vn7tf"]
-[ext_resource type="Resource" uid="uid://so8wc3ugrufc" path="res://Resources/Card/Attack/attack_chance_to_necrosis.tres" id="5_14hj5"]
+[ext_resource type="Resource" uid="uid://u6joadjshso2" path="res://Resources/Card/Attack/attack_speed_flat.tres" id="3_eg1li"]
+[ext_resource type="Resource" uid="uid://uthphbt7l2bk" path="res://Resources/Card/Attack/attack_fire_damage.tres" id="4_si84x"]
 [ext_resource type="Resource" uid="uid://5b3so5uho4c6" path="res://Resources/Families/Attack/AttackDesc.tres" id="5_ca806"]
+[ext_resource type="Resource" uid="uid://so8wc3ugrufc" path="res://Resources/Card/Attack/attack_increase_max_hp.tres" id="5_h4bng"]
 [ext_resource type="Script" path="res://ResourcesBase/Family/family.gd" id="6_b6cyx"]
-[ext_resource type="Resource" uid="uid://diwk60vorueb0" path="res://Resources/Card/Attack/attack_chance_to_pacify.tres" id="6_elef2"]
+[ext_resource type="Resource" uid="uid://diwk60vorueb0" path="res://Resources/Card/Attack/attack_heal_allies.tres" id="6_elef2"]
 [ext_resource type="Resource" uid="uid://b0cmganf48sgp" path="res://Resources/Card/Attack/attack_chance_to_poison.tres" id="7_ydbl8"]
-[ext_resource type="Resource" uid="uid://bh36aymfdpkvc" path="res://Resources/Card/Attack/attack_chance_to_static_charge.tres" id="8_6mbtj"]
+[ext_resource type="Resource" uid="uid://bh36aymfdpkvc" path="res://Resources/Card/Attack/attack_increase_on_moove.tres" id="8_erx8f"]
 [ext_resource type="Resource" uid="uid://bwdrxts64wwp8" path="res://Resources/Card/Attack/attack_chance_to_gainarmor_onattack.tres" id="9_0hqkg"]
 [ext_resource type="Resource" uid="uid://d330nvebnef6f" path="res://Resources/Card/Attack/attack_chance_to_vulnerability.tres" id="10_d84pe"]
 [ext_resource type="Resource" uid="uid://csf5h7jnxxg2c" path="res://Resources/Card/Attack/attack_dammage.tres" id="11_gp3v2"]
-[ext_resource type="Resource" uid="uid://d1r7xbs3kyppp" path="res://Resources/Card/Attack/attack_speed.tres" id="12_xnad5"]
+[ext_resource type="Resource" uid="uid://d1r7xbs3kyppp" path="res://Resources/Card/Attack/attack_speed_overtime.tres" id="12_xnad5"]
 
 [resource]
 script = ExtResource("6_b6cyx")
 desc = ExtResource("5_ca806")
-cards = Array[ExtResource("1_lnl3k")]([ExtResource("2_i7log"), ExtResource("3_eg1li"), ExtResource("4_vn7tf"), ExtResource("5_14hj5"), ExtResource("6_elef2"), ExtResource("7_ydbl8"), ExtResource("8_6mbtj"), ExtResource("9_0hqkg"), ExtResource("10_d84pe"), ExtResource("11_gp3v2"), ExtResource("12_xnad5")])
+cards = Array[ExtResource("1_lnl3k")]([ExtResource("2_i7log"), ExtResource("3_eg1li"), ExtResource("4_si84x"), ExtResource("5_h4bng"), ExtResource("6_elef2"), ExtResource("7_ydbl8"), ExtResource("8_erx8f"), ExtResource("9_0hqkg"), ExtResource("10_d84pe"), ExtResource("11_gp3v2"), ExtResource("12_xnad5")])

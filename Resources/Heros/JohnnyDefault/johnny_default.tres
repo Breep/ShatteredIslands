@@ -22,6 +22,7 @@ double_attack_chance = 0
 heal_ally = 0
 cleanse = 0
 drain_life = 0
+armor_onattack = 0
 
 [sub_resource type="Resource" id="Resource_gvftt"]
 script = ExtResource("3_x2gh1")

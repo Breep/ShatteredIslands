@@ -70,15 +70,6 @@ func _is_randomize_modifier_active(chance: float) -> bool:
 	return rng.randf_range(0, 100) <= chance
 
 # ============================== Public functions ==============================
-var effects: Array = [
-	PoisonEffect.new(),
-	StaticChargeEffect.new(),
-	IgniteEffect.new(),
-	StunEffect.new(),
-	VulnerabilityEffect.new(),
-	NecrosisEffect.new(),
-	DoubleAttackEffect.new()
-]
 
 func set_stats_from_player_stats(playerStats: CharacterStats) -> void:
 	if _stats == null:
@@ -86,28 +77,20 @@ func set_stats_from_player_stats(playerStats: CharacterStats) -> void:
 	_stats.speed = 50
 	_stats.damage = playerStats.auto_attack.damage
 	
-	for effect in effects:
-		effect.apply_effect(_stats, playerStats)
-	
-	
-	
-	
-=================================== TEST 1 ================================
 
-
+#=================================== TEST 1 ================================
+#
+#
 	var applied_effects = apply_effects_from_randomization(playerStats)
 	for effect_name in applied_effects.keys():
 		if applied_effects[effect_name]:
 			match effect_name:
 				"is_poison": _stats.poison_stacks += 1
-				"is_static_charge": _stats.staticCharge_stacks += 1
 				"is_vulnerability": _stats.vulnerability_stacks += 1
-				"is_necrosis": _stats.necrosis_stacks += 1
-				"is_ignite": _stats.ignite_stacks += 1
 				"is_crit": _stats.isCritic = true
 				"is_double_attack": _stats.double_attack = true
-				"is_stun": _stats.stun_stacks += 1
-				"is_pacify": _stats.pacify_stacks += 1
+				
+				"is_bounce": _stats.bounce += 1
 			print(applied_effects)
 
 
@@ -128,7 +111,6 @@ func apply_effects_from_randomization(player_stats: CharacterStats) -> Dictionar
 		"is_poison": player_stats.auto_attack.poison_chance,
 		"is_static_charge": player_stats.auto_attack.static_charge_chance,
 		"is_vulnerability": player_stats.auto_attack.vulnerability_chance,
-		"is_necrosis": player_stats.auto_attack.necrosi_chance,
 		"is_ignite": player_stats.auto_attack.ignite_chance,
 		"is_crit": player_stats.auto_attack.critical_chance,
 		"is_double_attack": player_stats.auto_attack.double_attack_chance,
