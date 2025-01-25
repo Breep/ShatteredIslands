@@ -76,46 +76,35 @@ func set_stats_from_player_stats(playerStats: CharacterStats) -> void:
 		_stats = AutoAttackProjectileStats.new()
 	_stats.speed = 50
 	_stats.damage = playerStats.auto_attack.damage
-	
 
-#=================================== TEST 1 ================================
-#
-#
 	var applied_effects = apply_effects_from_randomization(playerStats)
+	
 	for effect_name in applied_effects.keys():
 		if applied_effects[effect_name]:
 			match effect_name:
 				"is_poison": _stats.poison_stacks += 1
 				"is_vulnerability": _stats.vulnerability_stacks += 1
 				"is_crit": _stats.isCritic = true
-				"is_double_attack": _stats.double_attack = true
-				
-				"is_bounce": _stats.bounce += 1
+				"is_double_attack": _stats.isDoubleAttack = true
+				"is_bounce": _stats.isBouncing = true
 			print(applied_effects)
 
 
 func apply_effects_from_randomization(player_stats: CharacterStats) -> Dictionary:
 	var effects: Dictionary = {
 		"is_poison": false,
-		"is_static_charge": false,
 		"is_vulnerability": false,
-		"is_necrosis": false,
-		"is_ignite": false,
 		"is_crit": false,
 		"is_double_attack": false,
-		"is_stun": false,
-		"is_pacify": false
+		"is_bounce_attack": false
 		}
 	
 	var effect_mapping: Dictionary = {
 		"is_poison": player_stats.auto_attack.poison_chance,
-		"is_static_charge": player_stats.auto_attack.static_charge_chance,
 		"is_vulnerability": player_stats.auto_attack.vulnerability_chance,
-		"is_ignite": player_stats.auto_attack.ignite_chance,
 		"is_crit": player_stats.auto_attack.critical_chance,
 		"is_double_attack": player_stats.auto_attack.double_attack_chance,
-		"is_stun": player_stats.auto_attack.stun_chance,
-		"is_pacify": player_stats.auto_attack.pacify_chance
+		"is_bounce_attack": player_stats.auto_attack.bounce_chance
 		}
 		
 	for effect_name in effect_mapping.keys():
