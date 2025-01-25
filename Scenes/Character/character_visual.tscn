@@ -33,3 +33,11 @@ offset_right = 19.0
 offset_bottom = -45.0
 step = 1.0
 show_percentage = false
+
+[node name="NameDisplayed" type="Label" parent="."]
+offset_left = -52.0
+offset_top = -43.0
+offset_right = 52.0
+offset_bottom = -20.0
+text = "Name"
+horizontal_alignment = 1

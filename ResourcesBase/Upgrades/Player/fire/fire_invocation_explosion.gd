@@ -12,6 +12,7 @@ func apply(player: Character, cardlvl: int) -> void: # override
 	
 	player.stats.fire.invocation_explosion += fire_invocation_explosion[cardlvl-1]
 
+
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > fire_invocation_explosion.size():
 		printerr("Wrong cardlvl: ", cardlvl)

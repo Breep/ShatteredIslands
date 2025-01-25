@@ -10,7 +10,7 @@ func apply(player: Character, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.defense.poison_chance += being_hit_chance_to_poison[cardlvl-1]
+	#player.stats.defense.poison_chance += being_hit_chance_to_poison[cardlvl-1]
 
 
 func get_description(cardlvl: int) -> String:

@@ -1,10 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://bbnioyc6ti8wn"]
+[gd_scene load_steps=5 format=3 uid="uid://bbnioyc6ti8wn"]
 
 [ext_resource type="Script" path="res://Scripts/Character/character.gd" id="1_gjax4"]
 [ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Scenes/Character/character_visual.tscn" id="2_c48md"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lk7gr"]
 size = Vector2(21, 44)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_747th"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 2
 
 [node name="Character" type="StaticBody2D" groups=["PLAYERS"]]
 script = ExtResource("1_gjax4")
@@ -13,7 +18,7 @@ script = ExtResource("1_gjax4")
 unique_name_in_owner = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, -21)
+position = Vector2(1, 4)
 shape = SubResource("RectangleShape2D_lk7gr")
 
 [node name="Timers" type="Node" parent="."]
@@ -27,6 +32,10 @@ autostart = true
 
 [node name="ProjectileSpawn" type="Node2D" parent="."]
 position = Vector2(13, -23)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+unique_name_in_owner = true
+replication_config = SubResource("SceneReplicationConfig_747th")
 
 [connection signal="timeout" from="Timers/MovingTimer" to="." method="_on_moving_timer_timeout"]
 [connection signal="timeout" from="Timers/AutoAttackTimer" to="." method="_on_auto_attack_timer_timeout"]

@@ -1,0 +1,261 @@
+[gd_scene load_steps=30 format=4 uid="uid://cq7o2fy21dvla"]
+
+[ext_resource type="Script" path="res://Scripts/Areas/buying_area.gd" id="1_ttfli"]
+[ext_resource type="Texture2D" uid="uid://b3b4rk02h1kbh" path="res://Data/Assets/Misc/deqc368-97acf8e2-85c4-4cb6-a909-c2755fcf2fc7.jpg" id="3_5c4ya"]
+[ext_resource type="Texture2D" uid="uid://cjrtgqc6mjoj2" path="res://Data/Assets/TileSet/fullTiles.png" id="4_d7yiu"]
+[ext_resource type="Texture2D" uid="uid://dakikx8em1ut3" path="res://Data/Assets/TileSet/landscape_sheet.png" id="5_wmqhp"]
+[ext_resource type="PackedScene" uid="uid://bjht6hx4bid0a" path="res://Scenes/buying_zone/table.tscn" id="13_b562q"]
+[ext_resource type="Texture2D" uid="uid://d266noc7fcnsh" path="res://Data/Assets/Buying_area/Bar_pixel_art/barrel_horizontal_open.png" id="13_ybjr3"]
+[ext_resource type="Texture2D" uid="uid://des1sj4wfink2" path="res://Data/Assets/Buying_area/Bar_pixel_art/bar_counter.png" id="14_y3kuy"]
+[ext_resource type="Texture2D" uid="uid://e50ikq3wn57u" path="res://Data/Assets/Buying_area/Bar_pixel_art/bench_2.png" id="15_0knk0"]
+[ext_resource type="Texture2D" uid="uid://dkpisabq1uu3p" path="res://Data/Assets/Buying_area/Bar_pixel_art/barrel_vertical_2.png" id="16_c2acy"]
+[ext_resource type="Texture2D" uid="uid://8irjx785t3pb" path="res://Data/Assets/Buying_area/Bar_pixel_art/beer_1.png" id="17_6fwnx"]
+[ext_resource type="Texture2D" uid="uid://dt31jmi7vfrb6" path="res://Data/Assets/Buying_area/Bar_pixel_art/bench_1.png" id="19_o0iar"]
+[ext_resource type="Texture2D" uid="uid://doe1ur32iyvcx" path="res://Data/Assets/Buying_area/Bar_pixel_art/bookcase_cabinet.png" id="20_x7v4r"]
+[ext_resource type="Texture2D" uid="uid://diokyg6pc5kit" path="res://Data/Assets/Buying_area/Bar_pixel_art/bottles.png" id="21_e8h28"]
+[ext_resource type="Texture2D" uid="uid://iv1cow3i6ntk" path="res://Data/Assets/Buying_area/Bar_pixel_art/bookcase_cabinet_empty.png" id="22_vw7yj"]
+[ext_resource type="Texture2D" uid="uid://f20u873l407l" path="res://Data/Assets/Buying_area/Bar_pixel_art/barrel_vertical_3.png" id="23_75ppn"]
+[ext_resource type="Texture2D" uid="uid://cxifubsqx8row" path="res://Data/Assets/Buying_area/Bar_pixel_art/barrel_vertical_4.png" id="24_tnivt"]
+[ext_resource type="Texture2D" uid="uid://b64tkfn0wsmia" path="res://Data/Assets/Buying_area/Bar_pixel_art/broom.png" id="25_2ibja"]
+[ext_resource type="Texture2D" uid="uid://ds4xm8atqudkb" path="res://Data/Assets/Buying_area/Bar_pixel_art/carafe_1.png" id="26_fiujr"]
+[ext_resource type="Texture2D" uid="uid://cxxvefxg0g66d" path="res://Data/Assets/Buying_area/Bar_pixel_art/food_plank.png" id="27_5nrba"]
+[ext_resource type="Texture2D" uid="uid://dl82n5tdo04ko" path="res://Data/Assets/Buying_area/Bar_pixel_art/garlic.png" id="28_1i0ar"]
+[ext_resource type="Texture2D" uid="uid://r5muqw4afm0a" path="res://Data/Assets/Buying_area/Bar_pixel_art/knife.png" id="29_k6y3l"]
+[ext_resource type="Texture2D" uid="uid://d3v3c81h5yhlv" path="res://Data/Assets/Buying_area/Bar_pixel_art/bowl.png" id="30_no5m5"]
+[ext_resource type="Texture2D" uid="uid://ca4hkbbvbjv0y" path="res://Data/Assets/Buying_area/Bar_pixel_art/beer_2.png" id="31_kym8m"]
+[ext_resource type="Texture2D" uid="uid://6amj46vv68pk" path="res://Data/Assets/Buying_area/Bar_pixel_art/beer_2_empty.png" id="32_qyirm"]
+[ext_resource type="Texture2D" uid="uid://o5lpocrfq8np" path="res://Data/Assets/Buying_area/Bar_pixel_art/beer_1_empty.png" id="33_7auog"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vim1a"]
+texture = ExtResource("3_5c4ya")
+texture_region_size = Vector2i(1080, 1080)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_goplx"]
+texture = ExtResource("4_d7yiu")
+texture_region_size = Vector2i(1080, 1080)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dh85r"]
+texture = ExtResource("5_wmqhp")
+
+[sub_resource type="TileSet" id="TileSet_se2fp"]
+tile_size = Vector2i(1080, 1080)
+sources/0 = SubResource("TileSetAtlasSource_vim1a")
+sources/1 = SubResource("TileSetAtlasSource_goplx")
+sources/3 = SubResource("TileSetAtlasSource_dh85r")
+
+[node name="BuyingArea" type="Node2D"]
+script = ExtResource("1_ttfli")
+metadata/_edit_horizontal_guides_ = [0.0, 1080.0]
+metadata/_edit_vertical_guides_ = [0.0, 1920.0]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+position = Vector2(1080, 540)
+scale = Vector2(0.5, 0.5)
+tile_map_data = PackedByteArray("AAD/////AAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAAAAAAAAAABAP//AAAAAAAAAAD+////AAAAAAAAAAD//wAAAAAAAAAAAAD+/wAAAAAAAAAAAAABAAAAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_se2fp")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(960, 540)
+zoom = Vector2(0.6, 0.6)
+
+[node name="Spawn" type="Node2D" parent="."]
+visible = false
+position = Vector2(347, 565)
+
+[node name="Table1" parent="." instance=ExtResource("13_b562q")]
+position = Vector2(427, 190)
+
+[node name="Table4" parent="." instance=ExtResource("13_b562q")]
+position = Vector2(1367, 402)
+
+[node name="Table2" parent="." instance=ExtResource("13_b562q")]
+position = Vector2(58, 580)
+
+[node name="Table3" parent="." instance=ExtResource("13_b562q")]
+position = Vector2(850, 588)
+
+[node name="BarAssets" type="Node2D" parent="."]
+
+[node name="BarrelHorizontalOpen" type="Sprite2D" parent="BarAssets"]
+position = Vector2(484, 102)
+scale = Vector2(2, 2)
+texture = ExtResource("13_ybjr3")
+
+[node name="BarCounter" type="Sprite2D" parent="BarAssets"]
+position = Vector2(1556, 185)
+scale = Vector2(2, 2)
+texture = ExtResource("14_y3kuy")
+
+[node name="Bench2" type="Sprite2D" parent="BarAssets"]
+position = Vector2(75, 466)
+rotation = -1.53943
+scale = Vector2(2, 2)
+texture = ExtResource("15_0knk0")
+
+[node name="Bench3" type="Sprite2D" parent="BarAssets"]
+position = Vector2(67, 792)
+rotation = -1.69225
+scale = Vector2(2, 2)
+texture = ExtResource("15_0knk0")
+
+[node name="BarrelVertical2" type="Sprite2D" parent="BarAssets"]
+position = Vector2(82, 23)
+scale = Vector2(2, 2)
+texture = ExtResource("16_c2acy")
+
+[node name="BarrelVertical3" type="Sprite2D" parent="BarAssets"]
+z_index = 1
+position = Vector2(167, 156)
+scale = Vector2(2, 2)
+texture = ExtResource("16_c2acy")
+
+[node name="BarrelVertical4" type="Sprite2D" parent="BarAssets"]
+position = Vector2(279, 5)
+scale = Vector2(2, 2)
+texture = ExtResource("16_c2acy")
+
+[node name="Beer1" type="Sprite2D" parent="BarAssets"]
+position = Vector2(1709, 189)
+texture = ExtResource("17_6fwnx")
+
+[node name="Bench1" type="Sprite2D" parent="BarAssets"]
+position = Vector2(2102, 389)
+rotation = 1.48981
+scale = Vector2(2, 2)
+texture = ExtResource("19_o0iar")
+
+[node name="Bench4" type="Sprite2D" parent="BarAssets"]
+position = Vector2(2102, 642)
+rotation = 1.6111
+scale = Vector2(2, 2)
+texture = ExtResource("15_0knk0")
+
+[node name="BookcaseCabinet" type="Sprite2D" parent="BarAssets"]
+position = Vector2(748, -76)
+scale = Vector2(2, 2)
+texture = ExtResource("20_x7v4r")
+
+[node name="BookcaseCabinet2" type="Sprite2D" parent="BarAssets"]
+position = Vector2(924, -76)
+scale = Vector2(2, 2)
+texture = ExtResource("20_x7v4r")
+
+[node name="Bottles" type="Sprite2D" parent="BarAssets"]
+position = Vector2(1341, 3)
+texture = ExtResource("21_e8h28")
+
+[node name="Bottles2" type="Sprite2D" parent="BarAssets"]
+position = Vector2(1347, 26)
+texture = ExtResource("21_e8h28")
+
+[node name="BookcaseCabinetEmpty" type="Sprite2D" parent="BarAssets"]
+position = Vector2(2229, 896)
+rotation = 1.57446
+scale = Vector2(2, 2)
+texture = ExtResource("22_vw7yj")
+
+[node name="BarrelVertical5" type="Sprite2D" parent="BarAssets"]
+position = Vector2(2120, 30)
+scale = Vector2(2, 2)
+texture = ExtResource("23_75ppn")
+
+[node name="BarrelVertical12" type="Sprite2D" parent="BarAssets"]
+z_index = 1
+position = Vector2(2052, -60)
+scale = Vector2(2, 2)
+texture = ExtResource("23_75ppn")
+
+[node name="BarrelVertical6" type="Sprite2D" parent="BarAssets"]
+position = Vector2(2035, 60)
+scale = Vector2(2, 2)
+texture = ExtResource("24_tnivt")
+
+[node name="BarrelVertical7" type="Sprite2D" parent="BarAssets"]
+position = Vector2(2101, 160)
+scale = Vector2(2, 2)
+texture = ExtResource("24_tnivt")
+
+[node name="BarrelVertical8" type="Sprite2D" parent="BarAssets"]
+position = Vector2(2097, 52)
+scale = Vector2(2, 2)
+texture = ExtResource("24_tnivt")
+
+[node name="BarrelVertical9" type="Sprite2D" parent="BarAssets"]
+position = Vector2(2014, -40)
+scale = Vector2(2, 2)
+texture = ExtResource("24_tnivt")
+
+[node name="BarrelVertical10" type="Sprite2D" parent="BarAssets"]
+position = Vector2(1986, 129)
+scale = Vector2(2, 2)
+texture = ExtResource("24_tnivt")
+
+[node name="BarrelVertical11" type="Sprite2D" parent="BarAssets"]
+position = Vector2(1999, 36)
+scale = Vector2(2, 2)
+texture = ExtResource("24_tnivt")
+
+[node name="Broom" type="Sprite2D" parent="BarAssets"]
+position = Vector2(1611, -42)
+scale = Vector2(2, 2)
+texture = ExtResource("25_2ibja")
+
+[node name="Carafe1" type="Sprite2D" parent="BarAssets"]
+position = Vector2(1269, 203)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("26_fiujr")
+
+[node name="FoodPlank" type="Sprite2D" parent="BarAssets"]
+position = Vector2(1408, 197)
+texture = ExtResource("27_5nrba")
+
+[node name="Garlic" type="Sprite2D" parent="BarAssets"]
+position = Vector2(991, -103)
+texture = ExtResource("28_1i0ar")
+
+[node name="Knife" type="Sprite2D" parent="BarAssets"]
+position = Vector2(1456, 195)
+texture = ExtResource("29_k6y3l")
+
+[node name="Bowl" type="Sprite2D" parent="BarAssets"]
+z_index = 2
+position = Vector2(1115, 776)
+texture = ExtResource("30_no5m5")
+
+[node name="Beer2" type="Sprite2D" parent="BarAssets"]
+position = Vector2(1637, 155)
+texture = ExtResource("31_kym8m")
+
+[node name="Beer2Empty" type="Sprite2D" parent="BarAssets"]
+position = Vector2(1559, 224)
+texture = ExtResource("32_qyirm")
+
+[node name="Beer3" type="Sprite2D" parent="BarAssets"]
+position = Vector2(1340, 262)
+texture = ExtResource("31_kym8m")
+
+[node name="Beer4" type="Sprite2D" parent="BarAssets"]
+position = Vector2(1896, 71)
+texture = ExtResource("17_6fwnx")
+
+[node name="Beer1Empty" type="Sprite2D" parent="BarAssets"]
+position = Vector2(1835, 186)
+texture = ExtResource("33_7auog")
+
+[node name="Beer5" type="Sprite2D" parent="BarAssets"]
+position = Vector2(1215, 139)
+texture = ExtResource("31_kym8m")
+
+[node name="Beer6" type="Sprite2D" parent="BarAssets"]
+position = Vector2(1639, 268)
+texture = ExtResource("17_6fwnx")
+
+[node name="Beer2Empty2" type="Sprite2D" parent="BarAssets"]
+position = Vector2(1504, 259)
+texture = ExtResource("32_qyirm")

@@ -107,17 +107,17 @@ func apply_effects_from_randomization(player_stats: CharacterStats) -> Dictionar
 		"is_pacify": false
 		}
 	
-	var effect_mapping: Dictionary = {
-		"is_poison": player_stats.auto_attack.poison_chance,
-		"is_static_charge": player_stats.auto_attack.static_charge_chance,
-		"is_vulnerability": player_stats.auto_attack.vulnerability_chance,
-		"is_ignite": player_stats.auto_attack.ignite_chance,
-		"is_crit": player_stats.auto_attack.critical_chance,
-		"is_double_attack": player_stats.auto_attack.double_attack_chance,
-		"is_stun": player_stats.auto_attack.stun_chance,
-		"is_pacify": player_stats.auto_attack.pacify_chance
-		}
+	#var effect_mapping: Dictionary = {
+		#"is_poison": player_stats.auto_attack.poison_chance,
+		#"is_static_charge": player_stats.auto_attack.static_charge_chance,
+		#"is_vulnerability": player_stats.auto_attack.vulnerability_chance,
+		#"is_ignite": player_stats.auto_attack.ignite_chance,
+		#"is_crit": player_stats.auto_attack.critical_chance,
+		#"is_double_attack": player_stats.auto_attack.double_attack_chance,
+		#"is_stun": player_stats.auto_attack.stun_chance,
+		#"is_pacify": player_stats.auto_attack.pacify_chance
+		#}
 		
-	for effect_name in effect_mapping.keys():
-		effects[effect_name] = _is_randomize_modifier_active(effect_mapping[effect_name])
+	#for effect_name in effect_mapping.keys():
+		#effects[effect_name] = _is_randomize_modifier_active(effect_mapping[effect_name])
 	return effects
