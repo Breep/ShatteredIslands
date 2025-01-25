@@ -1,10 +1,16 @@
-[gd_resource type="Resource" script_class="Family" load_steps=4 format=3 uid="uid://cxs83q5l14d1m"]
+[gd_resource type="Resource" script_class="Family" load_steps=10 format=3 uid="uid://cxs83q5l14d1m"]
 
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="1_mfwj6"]
 [ext_resource type="Resource" uid="uid://3iouwv2bu8kx" path="res://Resources/Families/Hp/hp_desc.tres" id="2_7p6hg"]
+[ext_resource type="Resource" uid="uid://d2ts2cxyj8orv" path="res://Resources/Card/Hp/hp_epic_revive_treshold.tres" id="2_svxvv"]
+[ext_resource type="Resource" uid="uid://3eydg3f0m5i4" path="res://Resources/Card/Hp/hp_increase_damage.tres" id="3_fm732"]
 [ext_resource type="Script" path="res://ResourcesBase/Family/family.gd" id="3_gum03"]
+[ext_resource type="Resource" uid="uid://6ogbf2rbcg4s" path="res://Resources/Card/Hp/hp_increase_hp.tres" id="4_eom31"]
+[ext_resource type="Resource" uid="uid://babi1gwg7llq1" path="res://Resources/Card/Hp/hp_increase_hp_onmoove.tres" id="5_04bsq"]
+[ext_resource type="Resource" uid="uid://dgriv7nxh3pvp" path="res://Resources/Card/Hp/hp_poison_onlosthp.tres" id="6_vtjik"]
+[ext_resource type="Resource" uid="uid://dakp7xw32rkql" path="res://Resources/Card/Hp/hp_reduce_damage_treshold.tres" id="7_a4e4t"]
 
 [resource]
 script = ExtResource("3_gum03")
 desc = ExtResource("2_7p6hg")
-cards = Array[ExtResource("1_mfwj6")]([])
+cards = Array[ExtResource("1_mfwj6")]([ExtResource("2_svxvv"), ExtResource("3_fm732"), ExtResource("4_eom31"), ExtResource("5_04bsq"), ExtResource("6_vtjik"), ExtResource("7_a4e4t")])

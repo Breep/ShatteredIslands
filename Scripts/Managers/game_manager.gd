@@ -42,6 +42,9 @@ func _ready() -> void:
 	_families.append(load("res://Resources/Families/Fire/fire_family.tres"))
 	_families.append(load("res://Resources/Families/Storm/storm_family.tres"))
 	_families.append(load("res://Resources/Families/Heal/heal_family.tres"))
+	_families.append(load("res://Resources/Families/Hp/hp_family.tres"))
+	_families.append(load("res://Resources/Families/Poison/poison_desc.tres"))
+	_families.append(load("res://Resources/Families/Shadow/shadow_family.tres"))
 	
 
 # ============================== Public function ==============================

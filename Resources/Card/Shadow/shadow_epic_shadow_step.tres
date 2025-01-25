@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://cukweo0sp64c7"]
+
+[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_i54ek"]
+[ext_resource type="Resource" uid="uid://b2x8fwls1avnl" path="res://Resources/Families/Shadow/shadow_desc.tres" id="2_87egi"]
+[ext_resource type="Texture2D" uid="uid://bvevcmg3aetrs" path="res://Data/Assets/Card/Card_IMG/shadow/shadow4.png" id="3_0kdha"]
+[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Shadow/shadow_epic shadow_step.gd" id="4_1v5gy"]
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_brpmy"]
+
+[sub_resource type="Resource" id="Resource_cac3o"]
+script = ExtResource("4_1v5gy")
+shadow_epic_shadow_step = Array[int]([5])
+
+[resource]
+script = ExtResource("5_brpmy")
+name = "Shadow Step"
+picture = ExtResource("3_0kdha")
+families = Array[ExtResource("1_i54ek")]([ExtResource("2_87egi")])
+lvl = 1
+rarity = 2
+player_upgrade = SubResource("Resource_cac3o")

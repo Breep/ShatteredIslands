@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://2s8jgk5ckqn4"]
+
+[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_ackt3"]
+[ext_resource type="Resource" uid="uid://ttmuosdbq61" path="res://Resources/Families/Poison/poison_desc.tres" id="2_rfsh1"]
+[ext_resource type="Texture2D" uid="uid://ck0oadk7dosb0" path="res://Data/Assets/Card/Card_IMG/poison/poison1.png" id="3_3i2rc"]
+[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Poison/poison_poison_resist.gd" id="3_yocvu"]
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="4_4bt36"]
+
+[sub_resource type="Resource" id="Resource_y1ptq"]
+script = ExtResource("3_yocvu")
+poison_poison_resist = Array[int]([10, 20, 30, 40, 60])
+
+[resource]
+script = ExtResource("4_4bt36")
+name = "Antidot"
+picture = ExtResource("3_3i2rc")
+families = Array[ExtResource("1_ackt3")]([ExtResource("2_rfsh1")])
+lvl = 1
+rarity = 0
+player_upgrade = SubResource("Resource_y1ptq")

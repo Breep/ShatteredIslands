@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://b4e3te3brrch"]
+
+[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_80ase"]
+[ext_resource type="Resource" uid="uid://ttmuosdbq61" path="res://Resources/Families/Poison/poison_desc.tres" id="2_6u2n1"]
+[ext_resource type="Texture2D" uid="uid://b33q0b5o540sk" path="res://Data/Assets/Card/Card_IMG/poison/poison3.png" id="2_huqdi"]
+[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Poison/poison_poison_cloud.gd" id="3_78a6f"]
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="4_j5brq"]
+
+[sub_resource type="Resource" id="Resource_n6882"]
+script = ExtResource("3_78a6f")
+poison_poison_cloud = Array[int]([5, 10, 20])
+
+[resource]
+script = ExtResource("4_j5brq")
+name = "Poison cloud"
+picture = ExtResource("2_huqdi")
+families = Array[ExtResource("1_80ase")]([ExtResource("2_6u2n1")])
+lvl = 1
+rarity = 1
+player_upgrade = SubResource("Resource_n6882")

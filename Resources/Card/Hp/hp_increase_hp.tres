@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://6ogbf2rbcg4s"]
+
+[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_rcowt"]
+[ext_resource type="Resource" uid="uid://3iouwv2bu8kx" path="res://Resources/Families/Hp/hp_desc.tres" id="2_g772j"]
+[ext_resource type="Texture2D" uid="uid://6gftr8loa2ll" path="res://Data/Assets/Card/Card_IMG/Hp/hp1.png" id="3_qoacq"]
+[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Hp/hp_increase_hp.gd" id="4_iqy2v"]
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_5ckwg"]
+
+[sub_resource type="Resource" id="Resource_ov7qb"]
+script = ExtResource("4_iqy2v")
+hp_increase_hp = Array[int]([100, 200, 300, 400, 700])
+
+[resource]
+script = ExtResource("5_5ckwg")
+name = "Hearth steel"
+picture = ExtResource("3_qoacq")
+families = Array[ExtResource("1_rcowt")]([ExtResource("2_g772j")])
+lvl = 1
+rarity = 0
+player_upgrade = SubResource("Resource_ov7qb")
