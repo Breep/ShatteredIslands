@@ -1,10 +1,14 @@
-[gd_resource type="Resource" script_class="Family" load_steps=4 format=3 uid="uid://dw5jbc2njjf1k"]
+[gd_resource type="Resource" script_class="Family" load_steps=8 format=3 uid="uid://dw5jbc2njjf1k"]
 
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="1_rypu2"]
+[ext_resource type="Resource" uid="uid://cukweo0sp64c7" path="res://Resources/Card/Shadow/shadow_epic_shadow_step.tres" id="2_gucxx"]
 [ext_resource type="Resource" uid="uid://b2x8fwls1avnl" path="res://Resources/Families/Shadow/shadow_desc.tres" id="2_kqcr6"]
+[ext_resource type="Resource" uid="uid://hx0le13ykyma" path="res://Resources/Card/Shadow/shadow_shadow_bolt.tres" id="3_h8fjb"]
 [ext_resource type="Script" path="res://ResourcesBase/Family/family.gd" id="3_pd454"]
+[ext_resource type="Resource" uid="uid://bhd5e5q0gu6km" path="res://Resources/Card/Shadow/shadow_shadow_invincible.tres" id="4_ji31j"]
+[ext_resource type="Resource" uid="uid://berwb7f042aoa" path="res://Resources/Card/Shadow/shadow_shadow_regen_moove.tres" id="5_pdkts"]
 
 [resource]
 script = ExtResource("3_pd454")
 desc = ExtResource("2_kqcr6")
-cards = Array[ExtResource("1_rypu2")]([])
+cards = Array[ExtResource("1_rypu2")]([ExtResource("2_gucxx"), ExtResource("3_h8fjb"), ExtResource("4_ji31j"), ExtResource("5_pdkts")])

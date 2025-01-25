@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://hx0le13ykyma"]
+
+[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_ad0bj"]
+[ext_resource type="Resource" uid="uid://b2x8fwls1avnl" path="res://Resources/Families/Shadow/shadow_desc.tres" id="2_40u1j"]
+[ext_resource type="Texture2D" uid="uid://cw1k1i6bvbtoi" path="res://Data/Assets/Card/Card_IMG/shadow/shadow2.png" id="3_81ydm"]
+[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Shadow/shadow_shadow_bolt.gd" id="4_3dkjh"]
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_k8at3"]
+
+[sub_resource type="Resource" id="Resource_n2jh5"]
+script = ExtResource("4_3dkjh")
+shadow_shadow_bolt = Array[int]([5, 10, 15, 20, 30])
+
+[resource]
+script = ExtResource("5_k8at3")
+name = "Shadow bolt"
+picture = ExtResource("3_81ydm")
+families = Array[ExtResource("1_ad0bj")]([ExtResource("2_40u1j")])
+lvl = 1
+rarity = 0
+player_upgrade = SubResource("Resource_n2jh5")

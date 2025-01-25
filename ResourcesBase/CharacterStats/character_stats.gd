@@ -7,3 +7,6 @@ extends Resource
 @export var fire: FireCharacterStats
 @export var storm: StormCharacterStats
 @export var heal: HealCharacterStats
+@export var hp: HpCharacterStats
+@export var poison: PoisonCharacterStats
+@export var shadow: ShadowCharacterStats

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://bhd5e5q0gu6km"]
+
+[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_o475x"]
+[ext_resource type="Resource" uid="uid://b2x8fwls1avnl" path="res://Resources/Families/Shadow/shadow_desc.tres" id="2_w030n"]
+[ext_resource type="Texture2D" uid="uid://crhym7t1fm48y" path="res://Data/Assets/Card/Card_IMG/shadow/shadow3.png" id="3_yibwf"]
+[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Shadow/shadow_shadow_invincible.gd" id="4_rvo8m"]
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_7e812"]
+
+[sub_resource type="Resource" id="Resource_bglwt"]
+script = ExtResource("4_rvo8m")
+shadow_shadow_invincible = Array[int]([1, 2, 3])
+
+[resource]
+script = ExtResource("5_7e812")
+name = "In the shadow"
+picture = ExtResource("3_yibwf")
+families = Array[ExtResource("1_o475x")]([ExtResource("2_w030n")])
+lvl = 0
+rarity = 1
+player_upgrade = SubResource("Resource_bglwt")
