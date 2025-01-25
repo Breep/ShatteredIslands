@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://cnkp0wrx8ch23"]
+
+[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_c0r8p"]
+[ext_resource type="Resource" uid="uid://ce8bwdfkqwriu" path="res://Resources/Families/Fire/fire_desc.tres" id="2_4hf0t"]
+[ext_resource type="Texture2D" uid="uid://dio7lnr1icfan" path="res://Data/Assets/Card/Card_IMG/fire/trail of fire.png" id="3_av71y"]
+[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/fire/fire_trail_onmoove.gd" id="4_c47fp"]
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_u0b0k"]
+
+[sub_resource type="Resource" id="Resource_x0but"]
+script = ExtResource("4_c47fp")
+fire_trail_onmoove = Array[float]([0.5, 1.0, 1.5, 2.0, 3.0])
+
+[resource]
+script = ExtResource("5_u0b0k")
+name = "Trail of fire"
+picture = ExtResource("3_av71y")
+families = Array[ExtResource("1_c0r8p")]([ExtResource("2_4hf0t")])
+lvl = 1
+rarity = 0
+player_upgrade = SubResource("Resource_x0but")

@@ -16,5 +16,5 @@ name = "Protector"
 picture = ExtResource("2_hwtud")
 families = Array[ExtResource("1_mx2a4")]([ExtResource("2_yrqm4")])
 lvl = 1
-rarity = 0
+rarity = 2
 player_upgrade = SubResource("Resource_qk10j")

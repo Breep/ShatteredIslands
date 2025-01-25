@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="FamilyDesc" load_steps=3 format=3 uid="uid://ttmuosdbq61"]
+
+[ext_resource type="Texture2D" uid="uid://c48pomq83nro2" path="res://Data/Assets/Card/Card_IMG/poison/poison.png" id="1_rfmgc"]
+[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="2_1yr71"]
+
+[resource]
+script = ExtResource("2_1yr71")
+icon = ExtResource("1_rfmgc")
+familyName = "Poison"

@@ -8,7 +8,7 @@
 
 [sub_resource type="Resource" id="Resource_1ng51"]
 script = ExtResource("4_qb4j5")
-chance_to_armor = null
+chance_to_armor = Array[int]([10, 15, 20, 25, 40])
 
 [resource]
 script = ExtResource("5_ly662")

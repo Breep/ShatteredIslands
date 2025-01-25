@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Family" load_steps=4 format=3 uid="uid://cr4wdhrstj2ju"]
+
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="1_mxc05"]
+[ext_resource type="Resource" uid="uid://ttmuosdbq61" path="res://Resources/Families/Poison/poison_desc.tres" id="2_chcmf"]
+[ext_resource type="Script" path="res://ResourcesBase/Family/family.gd" id="3_kx1px"]
+
+[resource]
+script = ExtResource("3_kx1px")
+desc = ExtResource("2_chcmf")
+cards = Array[ExtResource("1_mxc05")]([])

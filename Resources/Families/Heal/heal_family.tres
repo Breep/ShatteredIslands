@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Family" load_steps=11 format=3 uid="uid://42q0uuwcox03"]
+
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="1_23q5h"]
+[ext_resource type="Resource" uid="uid://bdo5am3u8k50w" path="res://Resources/Card/Heal/heal_epic_heal_area.tres" id="2_cclj3"]
+[ext_resource type="Resource" uid="uid://c82p5o8340bvq" path="res://Resources/Families/Heal/heal_desc.tres" id="2_o0ed2"]
+[ext_resource type="Script" path="res://ResourcesBase/Family/family.gd" id="3_1uvcs"]
+[ext_resource type="Resource" uid="uid://d03puij6ur6ow" path="res://Resources/Card/Heal/heal_heal_flat.tres" id="3_ij0rn"]
+[ext_resource type="Resource" uid="uid://dal1rtga84w2q" path="res://Resources/Card/Heal/heal_lost_hp.tres" id="4_lytbb"]
+[ext_resource type="Resource" uid="uid://k3r84rocvpjl" path="res://Resources/Card/Heal/heal_magic_projectile.tres" id="5_8kbjj"]
+[ext_resource type="Resource" uid="uid://c3f377qpv0owx" path="res://Resources/Card/Heal/heal_pacify.tres" id="6_htr3i"]
+[ext_resource type="Resource" uid="uid://8yytxghumx8t" path="res://Resources/Card/Heal/heal_poison.tres" id="7_iumu8"]
+[ext_resource type="Resource" uid="uid://bdtr6was58h06" path="res://Resources/Card/Heal/heal_onmoove.tres" id="8_kohyy"]
+
+[resource]
+script = ExtResource("3_1uvcs")
+desc = ExtResource("2_o0ed2")
+cards = Array[ExtResource("1_23q5h")]([ExtResource("2_cclj3"), ExtResource("3_ij0rn"), ExtResource("4_lytbb"), ExtResource("5_8kbjj"), ExtResource("6_htr3i"), ExtResource("7_iumu8"), ExtResource("8_kohyy")])

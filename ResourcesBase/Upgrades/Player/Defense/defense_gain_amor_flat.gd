@@ -17,4 +17,4 @@ func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > gain_armor_sec.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
-	return "[center]Gain" + str(gain_armor_sec[cardlvl - 1]) + " [color=#8B4513][wave freq=2.0 amp=5.0[hint=Absorb 1 damage]armor[/hint]]Stun[/wave][/color] /sec[/center]"
+	return "[center]Gain" + str(gain_armor_sec[cardlvl - 1]) + " [color=#8B4513][wave freq=2.0 amp=5.0[hint=Absorb 1 damage][hint] Armor[/wave][/color] /sec[/center]"

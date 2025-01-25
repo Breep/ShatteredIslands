@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Family" load_steps=4 format=3 uid="uid://dw5jbc2njjf1k"]
+
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="1_rypu2"]
+[ext_resource type="Resource" uid="uid://b2x8fwls1avnl" path="res://Resources/Families/Shadow/shadow_desc.tres" id="2_kqcr6"]
+[ext_resource type="Script" path="res://ResourcesBase/Family/family.gd" id="3_pd454"]
+
+[resource]
+script = ExtResource("3_pd454")
+desc = ExtResource("2_kqcr6")
+cards = Array[ExtResource("1_rypu2")]([])

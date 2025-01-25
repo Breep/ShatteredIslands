@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="FamilyDesc" load_steps=3 format=3 uid="uid://3iouwv2bu8kx"]
+
+[ext_resource type="Texture2D" uid="uid://cia42t0jcdkfg" path="res://Data/Assets/Card/ICONS/HP color.png" id="1_662o2"]
+[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="2_d7xgd"]
+
+[resource]
+script = ExtResource("2_d7xgd")
+icon = ExtResource("1_662o2")
+familyName = "Hp"

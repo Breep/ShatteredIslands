@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="FamilyDesc" load_steps=3 format=3 uid="uid://b2x8fwls1avnl"]
+
+[ext_resource type="Texture2D" uid="uid://csfafgbgft15h" path="res://Data/Assets/Card/Card_IMG/shadow/icon speed.png" id="1_8ylb6"]
+[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="2_1ka5q"]
+
+[resource]
+script = ExtResource("2_1ka5q")
+icon = ExtResource("1_8ylb6")
+familyName = "Shadow"
