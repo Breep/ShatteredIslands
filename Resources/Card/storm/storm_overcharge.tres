@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://c80iouxl0atlq"]
+
+[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_iged7"]
+[ext_resource type="Texture2D" uid="uid://dovm34ldulvv7" path="res://Data/Assets/Card/Card_IMG/storm/storm3.png" id="2_8upil"]
+[ext_resource type="Resource" uid="uid://g5xyh7ee538f" path="res://Resources/Families/Storm/storm_desc.tres" id="2_uus5h"]
+[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Storm/storm_overcharge.gd" id="3_rrn2l"]
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="4_702sq"]
+
+[sub_resource type="Resource" id="Resource_2bf61"]
+script = ExtResource("3_rrn2l")
+overcharge_critic_link = Array[int]([50])
+
+[resource]
+script = ExtResource("4_702sq")
+name = "Overcharge"
+picture = ExtResource("2_8upil")
+families = Array[ExtResource("1_iged7")]([ExtResource("2_uus5h")])
+lvl = 1
+rarity = 2
+player_upgrade = SubResource("Resource_2bf61")

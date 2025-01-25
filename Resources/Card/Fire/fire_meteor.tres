@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://ckett0ta5lvew"]
+
+[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_eqr8l"]
+[ext_resource type="Resource" uid="uid://ce8bwdfkqwriu" path="res://Resources/Families/Fire/fire_desc.tres" id="2_bbb58"]
+[ext_resource type="Texture2D" uid="uid://cbu6coooasc0d" path="res://Data/Assets/Card/Card_IMG/fire/fire orb.png" id="3_br8tl"]
+[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/fire/fire_meteor.gd" id="4_apji1"]
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_a17m1"]
+
+[sub_resource type="Resource" id="Resource_mrjx3"]
+script = ExtResource("4_apji1")
+fire_meteor_onenemies = Array[int]([4, 3, 2])
+
+[resource]
+script = ExtResource("5_a17m1")
+name = "Meteor"
+picture = ExtResource("3_br8tl")
+families = Array[ExtResource("1_eqr8l")]([ExtResource("2_bbb58")])
+lvl = 1
+rarity = 1
+player_upgrade = SubResource("Resource_mrjx3")

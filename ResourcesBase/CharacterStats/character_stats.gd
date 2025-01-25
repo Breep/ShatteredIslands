@@ -5,3 +5,5 @@ extends Resource
 @export var auto_attack: AutoAttackCharacterStats
 @export var defense: DefenseCharacterStats
 @export var fire: FireCharacterStats
+@export var storm: StormCharacterStats
+@export var heal: HealCharacterStats

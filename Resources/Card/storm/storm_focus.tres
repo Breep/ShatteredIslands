@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://dapf7u05w6jjq"]
+
+[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_70nk4"]
+[ext_resource type="Resource" uid="uid://g5xyh7ee538f" path="res://Resources/Families/Storm/storm_desc.tres" id="2_5ls7r"]
+[ext_resource type="Texture2D" uid="uid://dt10vj1nwqv5n" path="res://Data/Assets/Card/Card_IMG/storm/storm5.png" id="3_brr0q"]
+[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Storm/storm_focus_target.gd" id="4_hdh4n"]
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_cuxrp"]
+
+[sub_resource type="Resource" id="Resource_w7qbq"]
+script = ExtResource("4_hdh4n")
+crit_onfocus_target = Array[int]([2, 3, 5])
+
+[resource]
+script = ExtResource("5_cuxrp")
+name = "Focus"
+picture = ExtResource("3_brr0q")
+families = Array[ExtResource("1_70nk4")]([ExtResource("2_5ls7r")])
+lvl = 1
+rarity = 1
+player_upgrade = SubResource("Resource_w7qbq")

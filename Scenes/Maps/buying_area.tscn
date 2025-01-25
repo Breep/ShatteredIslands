@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://u86kcfn8nx7u"]
+[gd_scene load_steps=23 format=4 uid="uid://u86kcfn8nx7u"]
 
 [ext_resource type="Script" path="res://Scripts/Areas/buying_area.gd" id="1_2hie4"]
 [ext_resource type="Texture2D" uid="uid://b3b4rk02h1kbh" path="res://Data/Assets/Misc/deqc368-97acf8e2-85c4-4cb6-a909-c2755fcf2fc7.jpg" id="2_k3opf"]
@@ -15,7 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://c4e7oobnpcje8" path="res://Scenes/UI/ui_player_deck.tscn" id="12_a6ggj"]
 [ext_resource type="PackedScene" uid="uid://cxalabhvxw1pd" path="res://Scenes/UI/ui_timer.tscn" id="13_35vgj"]
 [ext_resource type="PackedScene" uid="uid://prbqeqgdl2ay" path="res://Scenes/UI/ui_xp.tscn" id="13_mb3hy"]
-[ext_resource type="Texture2D" uid="uid://wfwglamlrjqj" path="res://Data/Misc_IMG/assasin wow.png" id="16_t38rw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vim1a"]
 texture = ExtResource("2_k3opf")
@@ -218,11 +217,6 @@ offset_left = 1023.0
 offset_top = 775.0
 offset_right = 1023.0
 offset_bottom = 775.0
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(686, 495)
-scale = Vector2(0.224609, 0.224609)
-texture = ExtResource("16_t38rw")
 
 [connection signal="pressed" from="Management/MarginContainer/HBoxContainer/VBoxContainer/PlayerDeckButton" to="." method="_on_player_deck_button_pressed"]
 [connection signal="pressed" from="Management/MarginContainer/HBoxContainer/VBoxContainer3/StatsCharacter" to="." method="_on_stats_character_pressed"]
