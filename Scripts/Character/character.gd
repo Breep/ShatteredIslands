@@ -12,7 +12,7 @@ signal death(deadPlayer)
 
 # ============================== Public variables ==============================
 
-var player_deck: PlayerDeck
+var player: Player
 var stats: CharacterStats # Needs to be public for easier upgrades access
 
 # ============================== Private variables ==============================
@@ -24,30 +24,29 @@ var _characters: Array[Character]
 var _enemies: Array[Character]
 var _allies: Array[Character]
 var _is_dead: bool = false
+var _is_player_character: bool = false
 
 # ============================== Local scene nodes ==============================
 
 @onready var _aa_timer: Timer = $Timers/AutoAttackTimer
 @onready var _character_visual: CharacterVisual = $CharacterVisual
+@onready var _multiplayerSynchroniser: MultiplayerSynchronizer = %MultiplayerSynchronizer
 
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
 	_fighting_area = get_tree().get_root().find_child("FightingArea", true, false)
 	stats = hero.stats.duplicate(true) # Copy all hero base stats into a new stat resource
-	_characters = _get_all_scene_characters()
-	_enemies = _get_enemies_from_characters()
-	_allies = _get_allies_from_characters()
 	_character_visual.update_health_bar(stats.health, hero.stats.health)
+	_multiplayerSynchroniser.set_multiplayer_authority(player.id)
+	_is_player_character = _multiplayerSynchroniser.get_multiplayer_authority() == multiplayer.get_unique_id()
+	_character_visual.update_name_displayed(player.name)
 	
 	#connect to all death signals
 	for character in _characters:
 		character.death.connect(_on_death)
 	
 	_apply_all_cards_upgrades()
-
-	if team == 1:# TMP
-		return
 
 # ============================== Public functions ==============================
 
@@ -72,12 +71,15 @@ func damage_popup(amount: float, _modifier: int = 1):
 	#ParticleFXSingleton.add_effect("poison", position)
 	#popup.set("theme_override_colors/font_color", Color.AQUAMARINE)
 
+
+func connect_all_players_spawned_signal(node: Node, signal_name: String) -> void:
+	node.connect(signal_name, _on_all_players_spawned, CONNECT_ONE_SHOT)
+
+
 # ============================== Private functions ==============================
 
 func _move_to_cell(cell : Vector2):
 	if _is_dead: return
-	if team == 1: # TMP Dev
-		return
 	position = _fighting_area.get_global_cell_position(cell)
 
 
@@ -95,6 +97,7 @@ func _get_closest_enemy() -> Character:
 
 func _auto_attack(target: Character):
 	if target == null: 
+		print("[", multiplayer.get_unique_id(), "] noone to attack")
 		return
 	
 	var projectile: Projectile = _aa_projectile.instantiate()
@@ -132,16 +135,22 @@ func _get_allies_from_characters() -> Array[Character]:
  
 
 func _apply_all_cards_upgrades() -> void:
-	if player_deck == null:
+	if player.deck == null:
+		printerr("No deck on the player")
 		return
 	
 	stats = hero.stats.duplicate(true) # Reset stats
-	for card in player_deck.cardPile:
+	for card in player.deck.cardPile:
 		card.player_upgrade.apply(self, card.lvl)
 	
-	_aa_timer.wait_time = 1.0 / stats.auto_attack.speed
+	_aa_timer.wait_time = 1.0 / stats.auto_attack.attack_speed_flat
 
 # ============================== Signals callback ==============================
+
+func _on_all_players_spawned() -> void:
+	_characters = _get_all_scene_characters()
+	_enemies = _get_enemies_from_characters()
+	_allies = _get_allies_from_characters()
 
 func _on_auto_attack_timer_timeout() -> void:
 	if _is_dead:
@@ -151,10 +160,7 @@ func _on_auto_attack_timer_timeout() -> void:
 
 
 func _on_moving_timer_timeout() -> void:
-	if _is_dead:
-		return
-	
-	if team == 1:# TMP
+	if _is_dead or not _is_player_character:
 		return
 	
 	if _fighting_area.is_selection_active:

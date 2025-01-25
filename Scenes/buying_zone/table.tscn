@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=3 uid="uid://bjht6hx4bid0a"]
+
+[ext_resource type="Texture2D" uid="uid://b45avjtrtflx7" path="res://Data/Assets/Buying_area/Bar_pixel_art/table.png" id="1_pomyg"]
+[ext_resource type="Texture2D" uid="uid://b0ceqo4baal5f" path="res://Data/Assets/Buying_area/Bar_pixel_art/chair.png" id="2_qlj8v"]
+[ext_resource type="Texture2D" uid="uid://8irjx785t3pb" path="res://Data/Assets/Buying_area/Bar_pixel_art/beer_1.png" id="3_8foy7"]
+[ext_resource type="Texture2D" uid="uid://c56h0syvk6dj2" path="res://Data/Assets/Buying_area/Bar_pixel_art/cards_1.png" id="4_xj3mx"]
+[ext_resource type="Texture2D" uid="uid://ct2dcl2rxvxfp" path="res://Data/Assets/Buying_area/Bar_pixel_art/glass.png" id="5_8m506"]
+[ext_resource type="Texture2D" uid="uid://cyv0n5byat3ku" path="res://Data/Assets/Buying_area/Bar_pixel_art/glass_metal.png" id="6_m0gl6"]
+
+[node name="Table" type="Node2D"]
+
+[node name="Table" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(380, 213)
+scale = Vector2(2, 2)
+texture = ExtResource("1_pomyg")
+
+[node name="Chair" type="Sprite2D" parent="."]
+position = Vector2(205, 104)
+scale = Vector2(2, 2)
+texture = ExtResource("2_qlj8v")
+
+[node name="Chair2" type="Sprite2D" parent="."]
+position = Vector2(585, 131)
+scale = Vector2(2, 2)
+texture = ExtResource("2_qlj8v")
+
+[node name="Chair3" type="Sprite2D" parent="."]
+position = Vector2(384, 386)
+scale = Vector2(2, 2)
+texture = ExtResource("2_qlj8v")
+
+[node name="Beer1" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(344, 122)
+texture = ExtResource("3_8foy7")
+
+[node name="Cards1" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(288, 151)
+rotation = 0.731046
+scale = Vector2(1, 1)
+texture = ExtResource("4_xj3mx")
+
+[node name="Cards2" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(378, 248)
+rotation = -1.62455
+texture = ExtResource("4_xj3mx")
+
+[node name="Cards3" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(487, 159)
+rotation = 2.46311
+texture = ExtResource("4_xj3mx")
+
+[node name="Glass" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(503, 194)
+texture = ExtResource("5_8m506")
+
+[node name="GlassMetal" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(327, 216)
+texture = ExtResource("6_m0gl6")
