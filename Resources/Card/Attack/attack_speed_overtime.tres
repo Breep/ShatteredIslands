@@ -1,14 +1,16 @@
-[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://d1r7xbs3kyppp"]
+[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://cqpagw775rgha"]
 
 [ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_efngw"]
 [ext_resource type="Resource" uid="uid://5b3so5uho4c6" path="res://Resources/Families/Attack/AttackDesc.tres" id="2_8qmdg"]
 [ext_resource type="Texture2D" uid="uid://cpc81faqawhyo" path="res://Data/Assets/Card/Card_IMG/Attack/arbalate.png" id="3_7bjdv"]
-[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Attack/aa_attack_speed_overtime.gd" id="4_r1cab"]
+[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Attack/attack_speed_overtime.gd" id="4_ey1c4"]
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_l5a0f"]
 
-[sub_resource type="Resource" id="Resource_7xf0p"]
-script = ExtResource("4_r1cab")
-aa_attackspeed_overtime = Array[int]([15, 30, 60])
+[sub_resource type="Resource" id="Resource_scck7"]
+script = ExtResource("4_ey1c4")
+attack_speed_overtime_min = Array[int]([15, 30, 50])
+attack_speed_overtime_max = Array[int]([150, 300, 500])
+attack_speed_overtime_duration = 45.0
 
 [resource]
 script = ExtResource("5_l5a0f")
@@ -17,4 +19,4 @@ picture = ExtResource("3_7bjdv")
 families = Array[ExtResource("1_efngw")]([ExtResource("2_8qmdg")])
 lvl = 1
 rarity = 1
-player_upgrade = SubResource("Resource_7xf0p")
+player_upgrade = SubResource("Resource_scck7")

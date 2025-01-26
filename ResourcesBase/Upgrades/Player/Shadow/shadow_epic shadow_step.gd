@@ -1,19 +1,19 @@
+class_name ShadowEpicShadowStep
 extends PlayerUpgrade
 
-class_name Shadow_epic_shadow_step
-
-@export var shadow_epic_shadow_step: Array[int]
-
+@export var shadow_step_period: int # time between 2 shadow steps
 
 func apply(player: Character, cardlvl: int) -> void: # override
-	if cardlvl < 1 or cardlvl > shadow_epic_shadow_step.size():
+	if cardlvl != 1:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.shadow.shadow_epic_shadow_step += shadow_epic_shadow_step[cardlvl-1]
+	player.stats.shadow.shadow_step_activated = true
+
 
 func get_description(cardlvl: int) -> String:
-	if cardlvl < 1 or cardlvl > shadow_epic_shadow_step.size():
+	if cardlvl != 1:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
-	return "[center]Every " + str(shadow_epic_shadow_step[cardlvl - 1]) +" sec,teleport to the furthest enemy[/center]"
+	return "[center]Every " + str(shadow_step_period) + \
+			" sec, teleport to the furthest enemy[/center]"

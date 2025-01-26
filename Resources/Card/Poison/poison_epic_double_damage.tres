@@ -8,7 +8,7 @@
 
 [sub_resource type="Resource" id="Resource_qt3h3"]
 script = ExtResource("3_n0awy")
-poison_epic_poison_double_damage = Array[int]([2])
+multiply_damage = 2.0
 
 [resource]
 script = ExtResource("4_0ckow")

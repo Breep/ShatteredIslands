@@ -8,7 +8,8 @@
 
 [sub_resource type="Resource" id="Resource_opqht"]
 script = ExtResource("3_8y2xp")
-heal_epic_area = Array[int]([4])
+heal_area_percentage = 3
+heal_area_period = 1.0
 
 [resource]
 script = ExtResource("4_28tts")

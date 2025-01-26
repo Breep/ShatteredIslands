@@ -8,7 +8,9 @@
 
 [sub_resource type="Resource" id="Resource_cmooc"]
 script = ExtResource("4_idr7x")
-hp_poison_onlosthp = Array[int]([1, 2, 3, 4, 6])
+poison_by_lost_hp_stacks = Array[int]([1, 2, 3, 4, 6])
+poison_by_lost_hp_period = 1.5
+poison_by_lost_hp_hp_number = 100
 
 [resource]
 script = ExtResource("5_3mxwv")

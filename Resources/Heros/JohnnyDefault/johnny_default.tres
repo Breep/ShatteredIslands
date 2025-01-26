@@ -1,30 +1,176 @@
-[gd_resource type="Resource" script_class="Hero" load_steps=6 format=3 uid="uid://cbcy0wbqkel1q"]
+[gd_resource type="Resource" script_class="Hero" load_steps=20 format=3 uid="uid://cbcy0wbqkel1q"]
 
 [ext_resource type="Script" path="res://ResourcesBase/Hero/hero.gd" id="1_rwq1b"]
 [ext_resource type="Script" path="res://ResourcesBase/CharacterStats/auto_attack_stats.gd" id="2_eh1pu"]
+[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/defense_character_stats.gd" id="3_wyimy"]
 [ext_resource type="Script" path="res://ResourcesBase/CharacterStats/character_stats.gd" id="3_x2gh1"]
+[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/fire_character_stats.gd" id="4_mu5uk"]
+[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/heal_character_stats.gd" id="5_obul4"]
+[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/hp_character_stats.gd" id="6_i6ku2"]
+[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/poison_character_stats.gd" id="7_awyhu"]
+[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/shadow_character_stats.gd" id="9_kfxgl"]
+[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/storm_character_stats.gd" id="10_8s82d"]
 
 [sub_resource type="Resource" id="Resource_x6ot6"]
 script = ExtResource("2_eh1pu")
 damage = 10
-attack_speed_flat = 0.0
-attack_speed_overtime = 0.0
+attack_speed = 1.0
+attack_speed_boost = 0
+attack_speed_overtime_min = 0.0
+attack_speed_overtime_max = 0.0
+attack_speed_overtime_duration = 0.0
 critical_chance = 10
 critical_multiplier = 100
-poison_chance = 0
-vulnerability_chance = 0
+poison_stacks_amount = 0
+poison_stacks_chance = 0
+vulnerability_stacks_amount = 0
+vulnerability_stacks_chance = 0
 bounce_chance = 0
 double_attack_chance = 0
-heal_ally = 0
-armor_onattack = 0
-aa_fire_damage = 0
-gain_max_hp = 0
-attack_onmoove = 0
+healing_attack_heal_amount = 0
+healing_attack_chance = 0
+armor_stacks_amount = 0
+armor_stacks_chance = 0
+fire_attack_activated = false
+fire_attack_damage = 0
+fire_attack_period = 0
+increase_max_hp_activated = false
+increase_max_hp_amount = 0
+increase_max_hp_period = 0
+movement_increase_damage_amount = 0
+movement_increase_damage_distance = 0
+
+[sub_resource type="Resource" id="Resource_20vgn"]
+script = ExtResource("3_wyimy")
+periodic_armor_stacks_amount = 0
+periodic_armor_stacks_period = 0.0
+backfire_poison_stacks = 0
+backfire_poison_chance = 0
+backfire_armor_gain_stacks = 0
+backfire_armor_gain_chance = 0
+shield_strike_damage_percent = 0.0
+shield_strike_period = 0.0
+backfire_fire_shield_damage = 0.0
+backfire_fire_shield_chance = 0
+healing_armor_percent = 0
+backfire_vulnerability_stacks = 0
+backfire_vulnerability_chance = 0
+lost_hp_armor_gain_percent = 0
+lost_hp_armor_gain_period = 0.0
+movement_armor_stacks_amount = 0
+movement_armor_stacks_distance = 0
+reduce_damage_received = 0
+reduce_damage_done = 0
+
+[sub_resource type="Resource" id="Resource_e8lue"]
+script = ExtResource("4_mu5uk")
+firebolt_damage = 0.0
+firebolt_period = 0.0
+magic_resist_percent = 0
+meteor_damage = 0
+meteor_cooldown = 0.0
+meteor_deploy_time = 0.0
+meteor_area_range = 0
+nuke_damage = 0.0
+nuke_period = 0.0
+healing_fire_area_damage = 0.0
+healing_fire_area_heal = 0.0
+healing_fire_area_range = 0
+healing_fire_area_period = 0.0
+damage_increase_on_low_life_enemy_percent = 0
+damage_increase_on_low_life_enemy_threshold = 0
+hp_fire_damage = 0
+hp_fire_period = 0.0
+poison_fire_stacks_lost = 0
+poison_fire_damage = 0
+trail_damage = 0
+trail_life_time = 0.0
+trail_period = 0.0
+
+[sub_resource type="Resource" id="Resource_0ypjv"]
+script = ExtResource("5_obul4")
+periodic_heal_amount = 0
+periodic_heal_period = 0
+heal_projectile_damage = 0
+heal_projectile_chance = 0
+pacify_enemy_attack_number = 0
+pacify_enemy_chance = 0
+heal_area_activated = 0
+heal_area_percentage = 0
+heal_area_period = 0.0
+lost_hp_regen_percentage = 0.0
+lost_hp_regen_period = 0.0
+poison_stacks_number = 0
+poison_stacks_chance = 0
+movement_heal_amount = 0
+movement_heal_distance = 0
+
+[sub_resource type="Resource" id="Resource_kt5om"]
+script = ExtResource("6_i6ku2")
+increase_hp = 0
+damage_increased_by_hp_lost_percentage = 0
+damage_increased_by_hp_lost_hp_number = 0
+damage_taken_reduced_below_treshold_percentage = 0
+damage_taken_reduced_below_treshold_threshold = 0
+revive_after_death = false
+revive_after_death_percentage_life = 0
+revive_after_death_percentage_damage = 0
+revive_after_death_time = 0.0
+poison_by_lost_hp_stacks = 0
+poison_by_lost_hp_hp_number = 0
+poison_by_lost_hp_period = 0
+hp_increased_on_move_hp = 0
+hp_increased_on_move_distance = 0
+
+[sub_resource type="Resource" id="Resource_w1rkx"]
+script = ExtResource("7_awyhu")
+periodic_stacks_number = 0
+periodic_stacks_period = 0.0
+poison_resist = 0
+poison_cloud_stacks_number = 0
+poison_cloud_stacks_period = 0.0
+poison_cloud_range = 0
+movement_stacks_number = 0
+movement_stacks_distance = 0
+multiply_damage = 0.0
+
+[sub_resource type="Resource" id="Resource_4k0le"]
+script = ExtResource("9_kfxgl")
+shadow_bolt_damage = 0
+regen_move = 0
+invincibility_time = 0.0
+distance_for_invincibility = 0
+shadow_step_activated = false
+
+[sub_resource type="Resource" id="Resource_8mqdx"]
+script = ExtResource("10_8s82d")
+periodic_vulnerability_amount = 0
+periodic_vulnerability_period = 0
+healing_crit_amount = 0
+crit_vulnerability_amount = 0
+focus_target_time_before = 0
+focus_target_crit_min = 0.0
+focus_target_crit_max = 0.0
+focus_target_duration = 0
+overcharge_activated = false
+overcharge_percent = false
+lost_hp_crit_multiplier_amount = 0
+lost_hp_crit_multiplier_hp_number = 0
+crit_poison_amount = 0
+crit_move_speed_amount = 0
+crit_move_speed_duration = 0.0
 
 [sub_resource type="Resource" id="Resource_gvftt"]
 script = ExtResource("3_x2gh1")
 health = 300
 auto_attack = SubResource("Resource_x6ot6")
+defense = SubResource("Resource_20vgn")
+fire = SubResource("Resource_e8lue")
+storm = SubResource("Resource_8mqdx")
+heal = SubResource("Resource_0ypjv")
+hp = SubResource("Resource_kt5om")
+poison = SubResource("Resource_w1rkx")
+shadow = SubResource("Resource_4k0le")
 
 [resource]
 script = ExtResource("1_rwq1b")

@@ -8,7 +8,8 @@
 
 [sub_resource type="Resource" id="Resource_fvcoj"]
 script = ExtResource("4_rb1ll")
-fire_fireboltontarget = Array[int]([1, 2, 3, 4, 6])
+firebolt_damage = Array[float]([1.0, 2.0, 3.0, 4.0, 6.0])
+firebolt_period = 2.0
 
 [resource]
 script = ExtResource("5_naa47")

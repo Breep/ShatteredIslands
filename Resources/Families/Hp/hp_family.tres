@@ -6,7 +6,7 @@
 [ext_resource type="Resource" uid="uid://3eydg3f0m5i4" path="res://Resources/Card/Hp/hp_increase_damage.tres" id="3_fm732"]
 [ext_resource type="Script" path="res://ResourcesBase/Family/family.gd" id="3_gum03"]
 [ext_resource type="Resource" uid="uid://6ogbf2rbcg4s" path="res://Resources/Card/Hp/hp_increase_hp.tres" id="4_eom31"]
-[ext_resource type="Resource" uid="uid://babi1gwg7llq1" path="res://Resources/Card/Hp/hp_increase_hp_onmoove.tres" id="5_04bsq"]
+[ext_resource type="Resource" uid="uid://babi1gwg7llq1" path="res://Resources/Card/Hp/hp_increase_hp_on_move.tres" id="5_04bsq"]
 [ext_resource type="Resource" uid="uid://dgriv7nxh3pvp" path="res://Resources/Card/Hp/hp_poison_onlosthp.tres" id="6_vtjik"]
 [ext_resource type="Resource" uid="uid://dakp7xw32rkql" path="res://Resources/Card/Hp/hp_reduce_damage_treshold.tres" id="7_a4e4t"]
 

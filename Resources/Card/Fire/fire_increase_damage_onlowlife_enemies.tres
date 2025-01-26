@@ -8,7 +8,8 @@
 
 [sub_resource type="Resource" id="Resource_e4btn"]
 script = ExtResource("4_yirwm")
-fire_damage_increase_on_low_life_enemy = Array[int]([10, 15, 20, 25, 40])
+damage_increase_on_low_life_enemy_percent = Array[int]([10, 15, 20, 25, 40])
+damage_increase_on_low_life_enemy_threshold = 50
 
 [resource]
 script = ExtResource("5_uurst")

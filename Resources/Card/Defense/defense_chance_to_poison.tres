@@ -8,7 +8,8 @@
 
 [sub_resource type="Resource" id="Resource_c3rbj"]
 script = ExtResource("4_gxv66")
-being_hit_chance_to_poison = Array[int]([10, 15, 20, 25, 40])
+backfire_poison_chance = Array[int]([10, 15, 20, 25, 40])
+backfire_poison_stacks = 5
 
 [resource]
 script = ExtResource("3_fi4ny")

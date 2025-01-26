@@ -9,6 +9,7 @@
 [sub_resource type="Resource" id="Resource_5y5c0"]
 script = ExtResource("4_yym3n")
 hp_damage_reduce_below_treshold = Array[int]([10, 20, 30])
+damage_taken_reduced_below_treshold_threshold = 35
 
 [resource]
 script = ExtResource("5_68kmo")

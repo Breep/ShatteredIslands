@@ -1,19 +1,19 @@
+class_name PoisonEpicMultiplyDamage
 extends PlayerUpgrade
 
-class_name Poison_epic_poison_double_damage
-
-@export var poison_epic_poison_double_damage: Array[int]
-
+@export var multiply_damage: float
 
 func apply(player: Character, cardlvl: int) -> void: # override
-	if cardlvl < 1 or cardlvl > poison_epic_poison_double_damage.size():
+	if cardlvl != 1:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.poison.poison_epic_double_damage += poison_epic_poison_double_damage[cardlvl-1]
+	player.stats.poison.multiply_damage = multiply_damage
+
 
 func get_description(cardlvl: int) -> String:
-	if cardlvl < 1 or cardlvl > poison_epic_poison_double_damage.size():
+	if cardlvl != 1:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
-	return "[center]Poison inflict damage X" + str(poison_epic_poison_double_damage[cardlvl - 1]) +"[/center]"
+	
+	return "[center]Multiply poison damage by " + str(multiply_damage) +"[/center]"

@@ -8,7 +8,8 @@
 
 [sub_resource type="Resource" id="Resource_fumiv"]
 script = ExtResource("4_lhghf")
-epic_nuke = Array[int]([20])
+nuke_damage = 10.0
+nuke_period = 10.0
 
 [resource]
 script = ExtResource("5_3chae")

@@ -1,19 +1,27 @@
+class_name FireMeteor
 extends PlayerUpgrade
 
-class_name Fire_meteor
-
-@export var fire_meteor_onenemies: Array[int]
-
+@export var meteor_damage: Array[int]
+@export var meteor_area_range: int
+@export var meteor_cooldown: float
+@export var meteor_deploy_time: Array[float]
 
 func apply(player: Character, cardlvl: int) -> void: # override
-	if cardlvl < 1 or cardlvl > fire_meteor_onenemies.size():
+	if cardlvl < 1 or cardlvl > meteor_damage.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.fire.fire_meteor += fire_meteor_onenemies[cardlvl-1]
+	player.stats.fire.meteor_area_range = meteor_area_range
+	player.stats.fire.meteor_cooldown = meteor_cooldown
+	player.stats.fire.meteor_damage = meteor_damage[cardlvl - 1]
+	player.stats.fire.meteor_deploy_time = meteor_deploy_time[cardlvl - 1]
 
 func get_description(cardlvl: int) -> String:
-	if cardlvl < 1 or cardlvl > fire_meteor_onenemies.size():
+	if cardlvl < 1 or cardlvl > meteor_damage.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
-	return "[center] Spawn meteor at enemy position that takes" + str(fire_meteor_onenemies[cardlvl - 1]) + "s to come down. Meteor deal 5% of enemies max hp in 2m area around [/center]"
+	
+	return "[center] Spawn meteor at enemy position that takes" +  str(meteor_deploy_time[cardlvl - 1]) + \
+			"s to come down. Meteor deals " + str(meteor_damage) + "% of enemies max hp \
+			in " + str(meteor_area_range) + "m area around. A new meteor spawn after " + \
+			str(meteor_cooldown) + "s.[/center]"

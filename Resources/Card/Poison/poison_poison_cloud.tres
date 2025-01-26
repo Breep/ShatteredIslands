@@ -8,7 +8,9 @@
 
 [sub_resource type="Resource" id="Resource_n6882"]
 script = ExtResource("3_78a6f")
-poison_poison_cloud = Array[int]([5, 10, 20])
+poison_cloud_stacks_number = Array[int]([5, 10, 15])
+poison_cloud_stacks_period = 3.0
+poison_cloud_range = 4
 
 [resource]
 script = ExtResource("4_j5brq")

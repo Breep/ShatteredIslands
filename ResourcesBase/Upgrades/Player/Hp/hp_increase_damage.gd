@@ -1,19 +1,23 @@
+class_name HpIncreaseDamage
 extends PlayerUpgrade
 
-class_name Hp_increase_damage
-
-@export var hp_increase_damage: Array[int]
-
+@export var damage_increased_by_hp_lost_percentage: Array[int]
+@export var damage_increased_by_hp_lost_hp_number: int
 
 func apply(player: Character, cardlvl: int) -> void: # override
-	if cardlvl < 1 or cardlvl > hp_increase_damage.size():
+	if cardlvl < 1 or cardlvl > damage_increased_by_hp_lost_percentage.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.hp.hp_increase_damage += hp_increase_damage[cardlvl-1]
+	player.stats.hp.damage_increased_by_hp_lost_percentage = damage_increased_by_hp_lost_percentage[cardlvl - 1]
+	player.stats.hp.damage_increased_by_hp_lost_hp_number = damage_increased_by_hp_lost_hp_number
+
 
 func get_description(cardlvl: int) -> String:
-	if cardlvl < 1 or cardlvl > hp_increase_damage.size():
+	if cardlvl < 1 or cardlvl > damage_increased_by_hp_lost_percentage.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
-	return "[center]Every 200hp, increase physical damage by " + str(hp_increase_damage[cardlvl - 1]) +"[/center]"
+	
+	return "[center]Every " + str(damage_increased_by_hp_lost_hp_number) + \
+			"hp, increase physical damage by " + \
+			str(damage_increased_by_hp_lost_percentage[cardlvl - 1]) + "[/center]"

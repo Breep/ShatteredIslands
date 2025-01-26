@@ -8,7 +8,7 @@
 
 [sub_resource type="Resource" id="Resource_qx18j"]
 script = ExtResource("4_o6eyt")
-storm_crit_heal_allies = Array[int]([2, 4, 6, 8, 12])
+healing_crit_amount = Array[int]([2, 4, 6, 8, 12])
 
 [resource]
 script = ExtResource("5_jqdkp")

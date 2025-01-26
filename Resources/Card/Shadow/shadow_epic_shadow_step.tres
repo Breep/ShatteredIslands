@@ -8,7 +8,7 @@
 
 [sub_resource type="Resource" id="Resource_cac3o"]
 script = ExtResource("4_1v5gy")
-shadow_epic_shadow_step = Array[int]([5])
+shadow_step_period = 5
 
 [resource]
 script = ExtResource("5_brpmy")

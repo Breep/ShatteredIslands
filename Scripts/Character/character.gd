@@ -1,5 +1,5 @@
-extends StaticBody2D
 class_name Character
+extends StaticBody2D
 
 # ============================== Signals ==============================
 
@@ -143,7 +143,7 @@ func _apply_all_cards_upgrades() -> void:
 	for card in player.deck.cardPile:
 		card.player_upgrade.apply(self, card.lvl)
 	
-	_aa_timer.wait_time = 1.0 / stats.auto_attack.attack_speed_flat
+	_aa_timer.wait_time = 1.0 / stats.auto_attack.attack_speed
 
 # ============================== Signals callback ==============================
 
@@ -151,6 +151,7 @@ func _on_all_players_spawned() -> void:
 	_characters = _get_all_scene_characters()
 	_enemies = _get_enemies_from_characters()
 	_allies = _get_allies_from_characters()
+
 
 func _on_auto_attack_timer_timeout() -> void:
 	if _is_dead:

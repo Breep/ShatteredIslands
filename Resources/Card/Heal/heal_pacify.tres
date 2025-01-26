@@ -8,7 +8,8 @@
 
 [sub_resource type="Resource" id="Resource_v73es"]
 script = ExtResource("4_whlf3")
-heal_pacify = Array[int]([1, 2, 3])
+pacify_enemy_attack_number = Array[int]([1, 2, 3])
+pacify_enemy_chance = 40
 
 [resource]
 script = ExtResource("5_w82mn")

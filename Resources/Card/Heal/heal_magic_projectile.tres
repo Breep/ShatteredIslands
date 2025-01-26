@@ -8,7 +8,8 @@
 
 [sub_resource type="Resource" id="Resource_2wu53"]
 script = ExtResource("4_nu5a5")
-heal_damage_projectile = Array[int]([5, 10, 15, 20, 30])
+heal_projectile_damage = Array[int]([10, 15, 20, 30, 50])
+heal_projectile_chance = 40
 
 [resource]
 script = ExtResource("5_q1dgv")

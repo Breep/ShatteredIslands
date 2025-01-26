@@ -1,14 +1,15 @@
-[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://uthphbt7l2bk"]
+[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://bvfu161ocmc6a"]
 
 [ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_o6hva"]
 [ext_resource type="Resource" uid="uid://5b3so5uho4c6" path="res://Resources/Families/Attack/AttackDesc.tres" id="2_gthig"]
 [ext_resource type="Texture2D" uid="uid://btjgqupi22y8o" path="res://Data/Assets/Card/Card_IMG/Attack/attack_ignite.webp" id="3_c7c6r"]
-[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Attack/aa_fire_damage.gd" id="4_b6dtq"]
+[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Attack/attack_fire_damage.gd" id="4_gfmcs"]
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_q0og3"]
 
-[sub_resource type="Resource" id="Resource_rq26m"]
-script = ExtResource("4_b6dtq")
-aa_fire_damage_ = Array[int]([1, 2, 3, 4, 7])
+[sub_resource type="Resource" id="Resource_pgwyv"]
+script = ExtResource("4_gfmcs")
+fire_attack_damage = Array[int]([1, 2, 3, 4, 7])
+fire_attack_period = 5
 
 [resource]
 script = ExtResource("5_q0og3")
@@ -17,4 +18,4 @@ picture = ExtResource("3_c7c6r")
 families = Array[ExtResource("1_o6hva")]([ExtResource("2_gthig")])
 lvl = 1
 rarity = 0
-player_upgrade = SubResource("Resource_rq26m")
+player_upgrade = SubResource("Resource_pgwyv")

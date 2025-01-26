@@ -6,7 +6,7 @@
 [ext_resource type="Resource" uid="uid://hx0le13ykyma" path="res://Resources/Card/Shadow/shadow_shadow_bolt.tres" id="3_h8fjb"]
 [ext_resource type="Script" path="res://ResourcesBase/Family/family.gd" id="3_pd454"]
 [ext_resource type="Resource" uid="uid://bhd5e5q0gu6km" path="res://Resources/Card/Shadow/shadow_shadow_invincible.tres" id="4_ji31j"]
-[ext_resource type="Resource" uid="uid://berwb7f042aoa" path="res://Resources/Card/Shadow/shadow_shadow_regen_moove.tres" id="5_pdkts"]
+[ext_resource type="Resource" uid="uid://berwb7f042aoa" path="res://Resources/Card/Shadow/shadow_shadow_regen_move.tres" id="5_pdkts"]
 
 [resource]
 script = ExtResource("3_pd454")

@@ -1,19 +1,24 @@
+class_name PoisonCloud
 extends PlayerUpgrade
 
-class_name Poison_poison_cloud
-
-@export var poison_poison_cloud: Array[int]
-
+@export var poison_cloud_stacks_number: Array[int]
+@export var poison_cloud_stacks_period: float # period of time between aplying each stacks
+@export var poison_cloud_range: int
 
 func apply(player: Character, cardlvl: int) -> void: # override
-	if cardlvl < 1 or cardlvl > poison_poison_cloud.size():
+	if cardlvl < 1 or cardlvl > poison_cloud_stacks_number.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.poison.poison_poison_cloud += poison_poison_cloud[cardlvl-1]
+	player.stats.poison.poison_cloud_stacks_number = poison_cloud_stacks_number[cardlvl - 1]
+	player.stats.poison.poison_cloud_stacks_period = poison_cloud_stacks_period
+	player.stats.poison.poison_cloud_range = poison_cloud_range
+
 
 func get_description(cardlvl: int) -> String:
-	if cardlvl < 1 or cardlvl > poison_poison_cloud.size():
+	if cardlvl < 1 or cardlvl > poison_cloud_stacks_number.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
-	return "[center]Create a poison cloud that inflict " + str(poison_poison_cloud[cardlvl - 1]) +" stacks of poison to close enemies every 3sec[/center]"
+	
+	return "[center]Create a poison cloud that inflict " + str(poison_cloud_stacks_number[cardlvl - 1]) \
+			 + " stacks of poison to nearby enemies every " + str(poison_cloud_stacks_period) + "sec[/center]"

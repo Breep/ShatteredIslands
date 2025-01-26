@@ -1,6 +1,5 @@
-[gd_scene load_steps=30 format=4 uid="uid://cq7o2fy21dvla"]
+[gd_scene load_steps=29 format=4 uid="uid://cq7o2fy21dvla"]
 
-[ext_resource type="Script" path="res://Scripts/Areas/buying_area.gd" id="1_ttfli"]
 [ext_resource type="Texture2D" uid="uid://b3b4rk02h1kbh" path="res://Data/Assets/Misc/deqc368-97acf8e2-85c4-4cb6-a909-c2755fcf2fc7.jpg" id="3_5c4ya"]
 [ext_resource type="Texture2D" uid="uid://cjrtgqc6mjoj2" path="res://Data/Assets/TileSet/fullTiles.png" id="4_d7yiu"]
 [ext_resource type="Texture2D" uid="uid://dakikx8em1ut3" path="res://Data/Assets/TileSet/landscape_sheet.png" id="5_wmqhp"]
@@ -45,7 +44,6 @@ sources/1 = SubResource("TileSetAtlasSource_goplx")
 sources/3 = SubResource("TileSetAtlasSource_dh85r")
 
 [node name="BuyingArea" type="Node2D"]
-script = ExtResource("1_ttfli")
 metadata/_edit_horizontal_guides_ = [0.0, 1080.0]
 metadata/_edit_vertical_guides_ = [0.0, 1920.0]
 

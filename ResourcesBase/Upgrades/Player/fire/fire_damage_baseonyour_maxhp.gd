@@ -1,19 +1,22 @@
+class_name FireHpDamage
 extends PlayerUpgrade
 
-class_name Fire_damage_onyour_maxhp
-
-@export var fire_damage_onyour_maxhp: Array[float]
-
+@export var hp_fire_damage: Array[float]
+@export var hp_fire_period: float
 
 func apply(player: Character, cardlvl: int) -> void: # override
-	if cardlvl < 1 or cardlvl > fire_damage_onyour_maxhp.size():
+	if cardlvl < 1 or cardlvl > hp_fire_damage.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.fire.fire_damage_onmaxhp += fire_damage_onyour_maxhp[cardlvl-1]
+	player.stats.fire.hp_fire_damage = hp_fire_damage[cardlvl - 1]
+	player.stats.fire.hp_fire_period = hp_fire_period
+
 
 func get_description(cardlvl: int) -> String:
-	if cardlvl < 1 or cardlvl > fire_damage_onyour_maxhp.size():
+	if cardlvl < 1 or cardlvl > hp_fire_damage.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
-	return "[center]Deal damage to the target for " + str(fire_damage_onyour_maxhp[cardlvl - 1]) + "% of your max life every 2sec[/center]"
+	
+	return "[center]Deal damage to the target for " + str(hp_fire_damage[cardlvl - 1]) + \
+			"% of your max life every " + str(hp_fire_period) + "s[/center]"

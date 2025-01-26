@@ -1,19 +1,22 @@
+class_name DefenseDamageReduce
 extends PlayerUpgrade
 
-class_name Defense_DamageReduce
-
-@export var Damage_received_Reduce: Array[int]
-
+@export var reduce_damage_done: int
+@export var reduce_damage_received: int
 
 func apply(player: Character, cardlvl: int) -> void: # override
-	if cardlvl < 1 or cardlvl > Damage_received_Reduce.size():
+	if cardlvl != 1:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.defense.reduce_damage_received += Damage_received_Reduce[cardlvl-1]
+	player.stats.defense.reduce_damage_done = reduce_damage_done
+	player.stats.defense.reduce_damage_received = reduce_damage_received
+
 
 func get_description(cardlvl: int) -> String:
-	if cardlvl < 1 or cardlvl > Damage_received_Reduce.size():
+	if cardlvl != 1:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
-	return "[center]" + str(Damage_received_Reduce[cardlvl - 1]) + "-20% dammage deal reduced BUT 30% dammage received reduced[/center]"
+	
+	return "[center]" + str(reduce_damage_received) + "% dammage received reduced BUT " \
+			+ str(reduce_damage_done) + "% dammage done reduced[/center]"

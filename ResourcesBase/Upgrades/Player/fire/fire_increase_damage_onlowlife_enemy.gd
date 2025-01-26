@@ -1,19 +1,23 @@
+class_name FireDamageIncreaseOnLowLife
 extends PlayerUpgrade
 
-class_name Fire_damage_increase_on_low_life_enemy
-
-@export var fire_damage_increase_on_low_life_enemy: Array[int]
-
+@export var damage_increase_on_low_life_enemy_percent: Array[int]
+@export var damage_increase_on_low_life_enemy_threshold: int
 
 func apply(player: Character, cardlvl: int) -> void: # override
-	if cardlvl < 1 or cardlvl > fire_damage_increase_on_low_life_enemy.size():
+	if cardlvl < 1 or cardlvl > damage_increase_on_low_life_enemy_percent.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.fire.damage_increase_on_low_life_enemy += fire_damage_increase_on_low_life_enemy[cardlvl-1]
+	player.stats.fire.damage_increase_on_low_life_enemy_percent = damage_increase_on_low_life_enemy_percent[cardlvl - 1]
+	player.stats.fire.damage_increase_on_low_life_enemy_threshold = damage_increase_on_low_life_enemy_threshold
+
 
 func get_description(cardlvl: int) -> String:
-	if cardlvl < 1 or cardlvl > fire_damage_increase_on_low_life_enemy.size():
+	if cardlvl < 1 or cardlvl > damage_increase_on_low_life_enemy_percent.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
-	return "[center]Deal" + str(fire_damage_increase_on_low_life_enemy[cardlvl - 1]) + "% more damage to enemies below 50%[/center]"
+	
+	return "[center]Deal" + str(damage_increase_on_low_life_enemy_percent[cardlvl - 1]) + \
+			"% more damage to enemies below " + str(damage_increase_on_low_life_enemy_threshold) + \
+			"%[/center]"

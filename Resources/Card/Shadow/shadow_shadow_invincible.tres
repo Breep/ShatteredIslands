@@ -8,7 +8,8 @@
 
 [sub_resource type="Resource" id="Resource_bglwt"]
 script = ExtResource("4_rvo8m")
-shadow_shadow_invincible = Array[int]([1, 2, 3])
+distance_to_activate = 5
+invincibility_time = Array[float]([0.5, 1.0, 2.0])
 
 [resource]
 script = ExtResource("5_7e812")

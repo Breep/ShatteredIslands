@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://b1217geciyxu0"]
+
+[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_gchu5"]
+[ext_resource type="Resource" uid="uid://g5xyh7ee538f" path="res://Resources/Families/Storm/storm_desc.tres" id="2_xdn5f"]
+[ext_resource type="Texture2D" uid="uid://cm4j62yrig28r" path="res://Data/Assets/Card/Card_IMG/storm/storm9.png" id="3_hojdw"]
+[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Storm/storm_crit_multiplier_lost_hp.gd" id="4_ldxdp"]
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_jodrr"]
+
+[sub_resource type="Resource" id="Resource_jncwr"]
+script = ExtResource("4_ldxdp")
+lost_hp_crit_multiplier_amount = Array[int]([10, 15, 20, 25, 40])
+lost_hp_crit_multiplier_hp_number = 2
+
+[resource]
+script = ExtResource("5_jodrr")
+name = "Lightning Speed"
+picture = ExtResource("3_hojdw")
+families = Array[ExtResource("1_gchu5")]([ExtResource("2_xdn5f")])
+lvl = 1
+rarity = 0
+player_upgrade = SubResource("Resource_jncwr")

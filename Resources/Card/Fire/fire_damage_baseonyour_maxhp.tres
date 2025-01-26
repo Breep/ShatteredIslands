@@ -8,7 +8,8 @@
 
 [sub_resource type="Resource" id="Resource_p58c1"]
 script = ExtResource("4_rgldn")
-fire_damage_onyour_maxhp = Array[float]([1.0, 2.0, 3.0, 4.0, 6.0])
+hp_fire_damage = Array[float]([1.0, 2.0, 4.0, 6.0, 10.0])
+hp_fire_period = 2.0
 
 [resource]
 script = ExtResource("5_y1hlw")

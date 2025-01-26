@@ -1,14 +1,15 @@
-[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://diwk60vorueb0"]
+[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://b107jh0lcr1sr"]
 
 [ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_hgy3o"]
 [ext_resource type="Resource" uid="uid://5b3so5uho4c6" path="res://Resources/Families/Attack/AttackDesc.tres" id="2_nmm8f"]
 [ext_resource type="Texture2D" uid="uid://clupy6lxq6tfs" path="res://Data/Assets/Card/Card_IMG/heal/heal orb.png" id="3_5cwhi"]
-[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Attack/aa_chance_to_heal_allies.gd" id="4_novpf"]
+[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Attack/attack_chance_to_heal_allies.gd" id="4_poff0"]
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_0n80f"]
 
-[sub_resource type="Resource" id="Resource_o5p0l"]
-script = ExtResource("4_novpf")
-aa_heal_allies = Array[int]([10, 15, 20, 25, 40])
+[sub_resource type="Resource" id="Resource_d37nq"]
+script = ExtResource("4_poff0")
+healing_attack_chance = Array[int]([10, 15, 20, 25, 40])
+healing_attack_heal_amount = 20
 
 [resource]
 script = ExtResource("5_0n80f")
@@ -17,4 +18,4 @@ picture = ExtResource("3_5cwhi")
 families = Array[ExtResource("1_hgy3o")]([ExtResource("2_nmm8f")])
 lvl = 1
 rarity = 0
-player_upgrade = SubResource("Resource_o5p0l")
+player_upgrade = SubResource("Resource_d37nq")

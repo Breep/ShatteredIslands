@@ -8,7 +8,9 @@
 
 [sub_resource type="Resource" id="Resource_qun1w"]
 script = ExtResource("4_phfkw")
-hp_epic_revive = Array[int]([20])
+revive_after_death_percentage_life = 35
+revive_after_death_percentage_damage = 20
+revive_after_death_time = 3.0
 
 [resource]
 script = ExtResource("5_5g2oi")

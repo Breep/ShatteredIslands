@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://cxrt1tgesdgaa"]
+[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://c50orsf0vjp14"]
 
 [ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_sqwld"]
 [ext_resource type="Resource" uid="uid://ds0ifali812hu" path="res://Resources/Families/Defense/defense_desc.tres" id="2_bxpi4"]
@@ -8,7 +8,8 @@
 
 [sub_resource type="Resource" id="Resource_sec0v"]
 script = ExtResource("4_ripai")
-gain_armor_on_lost_hp = Array[int]([1, 2, 3, 4, 6])
+lost_hp_armor_gain_percent = Array[int]([1, 2, 3, 4, 6])
+lost_hp_armor_gain_period = 2.0
 
 [resource]
 script = ExtResource("5_qiibp")

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://dou6s03516igc"]
+
+[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_vc1gg"]
+[ext_resource type="Resource" uid="uid://ds0ifali812hu" path="res://Resources/Families/Defense/defense_desc.tres" id="2_ekhyp"]
+[ext_resource type="Texture2D" uid="uid://b3a37nfukidu" path="res://Data/Assets/Card/Card_IMG/defense/shield.png" id="3_mvxjq"]
+[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Defense/defense_gain_amor_periodic.gd" id="4_50tfl"]
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_fceuj"]
+
+[sub_resource type="Resource" id="Resource_oorsc"]
+script = ExtResource("4_50tfl")
+periodic_armor_stacks_amount = Array[int]([5, 10, 15, 20, 30])
+periodic_armor_stacks_period = 1
+
+[resource]
+script = ExtResource("5_fceuj")
+name = "Shield Yourself"
+picture = ExtResource("3_mvxjq")
+families = Array[ExtResource("1_vc1gg")]([ExtResource("2_ekhyp")])
+lvl = 1
+rarity = 0
+player_upgrade = SubResource("Resource_oorsc")

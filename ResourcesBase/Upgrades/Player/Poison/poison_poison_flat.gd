@@ -1,19 +1,22 @@
+class_name PoisonPeriodic
 extends PlayerUpgrade
 
-class_name Poison_poison_flat
-
-@export var poison_poison_flat: Array[int]
-
+@export var periodic_stacks_number: Array[int]
+@export var periodic_stacks_period: float
 
 func apply(player: Character, cardlvl: int) -> void: # override
-	if cardlvl < 1 or cardlvl > poison_poison_flat.size():
+	if cardlvl < 1 or cardlvl > periodic_stacks_number.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.poison.poison_poison_flat += poison_poison_flat[cardlvl-1]
+	player.stats.poison.periodic_stacks_number += periodic_stacks_number[cardlvl - 1]
+	player.stats.poison.periodic_stacks_period += periodic_stacks_period
+
 
 func get_description(cardlvl: int) -> String:
-	if cardlvl < 1 or cardlvl > poison_poison_flat.size():
+	if cardlvl < 1 or cardlvl > periodic_stacks_number.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
-	return "[center]Inflict " + str(poison_poison_flat[cardlvl - 1]) +" Stacks of poison to a random enemy every 2sec[/center]"
+	
+	return "[center]Inflict " + str(periodic_stacks_number[cardlvl - 1]) + \
+			" Stacks of poison to a random enemy every " + str(periodic_stacks_period) + "[/center]"

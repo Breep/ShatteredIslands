@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://bdm4mg5oiho7e"]
+
+[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_no8ak"]
+[ext_resource type="Resource" uid="uid://ttmuosdbq61" path="res://Resources/Families/Poison/poison_desc.tres" id="2_ytgvn"]
+[ext_resource type="Texture2D" uid="uid://cubhux4oqrmb3" path="res://Data/Assets/Card/Card_IMG/poison/poison2.png" id="3_x2g4o"]
+[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Poison/poison_poison_flat.gd" id="4_ffmrk"]
+[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_e1vh8"]
+
+[sub_resource type="Resource" id="Resource_ge1yw"]
+script = ExtResource("4_ffmrk")
+periodic_stacks_number = Array[int]([5, 10, 15, 20, 30])
+periodic_stacks_period = 2.0
+
+[resource]
+script = ExtResource("5_e1vh8")
+name = "Death flask"
+picture = ExtResource("3_x2g4o")
+families = Array[ExtResource("1_no8ak")]([ExtResource("2_ytgvn")])
+lvl = 1
+rarity = 0
+player_upgrade = SubResource("Resource_ge1yw")

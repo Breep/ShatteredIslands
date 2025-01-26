@@ -43,12 +43,15 @@ func _add_card_to_player_deck(card: Card) -> void:
 	var cardButton_clicked: CardButton
 	if _local_player.deck == null:
 		printerr("Can't update shop cards, there is no player_deck")
+		_reconnect_to_card_signal(cardButton_clicked)
 		return
 	
-	if _local_player.gold < 100:
+	if _local_player.gold < 1:
+		print("Can't pay the card")
+		_reconnect_to_card_signal(cardButton_clicked)
 		return
 	
-	_local_player.gold -= 100
+	_local_player.gold -= 1
 	_local_player.deck.add_card(card)
 	var remaining_cards = []
 	for i in 3:

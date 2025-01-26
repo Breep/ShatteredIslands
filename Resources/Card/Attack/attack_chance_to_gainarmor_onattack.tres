@@ -3,12 +3,13 @@
 [ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_xkbr6"]
 [ext_resource type="Resource" uid="uid://5b3so5uho4c6" path="res://Resources/Families/Attack/AttackDesc.tres" id="2_enlrh"]
 [ext_resource type="Texture2D" uid="uid://8d8n5v4ycv7o" path="res://Data/Assets/Card/Card_IMG/Attack/attack_armor.webp" id="3_brmti"]
-[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Attack/aa_chance_to_gain_armor.gd" id="4_qb4j5"]
+[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Attack/attack_chance_to_gain_armor.gd" id="4_qb4j5"]
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_ly662"]
 
 [sub_resource type="Resource" id="Resource_1ng51"]
 script = ExtResource("4_qb4j5")
-chance_to_armor = Array[int]([10, 15, 20, 25, 40])
+armor_stacks_chance = Array[int]([10, 15, 20, 25, 40])
+armor_stacks_amount = 5
 
 [resource]
 script = ExtResource("5_ly662")

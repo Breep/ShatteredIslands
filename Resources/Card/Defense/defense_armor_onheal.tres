@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://cnv51t0txv5qx"]
+[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://c0wwv0p83pnqi"]
 
 [ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_3n7ow"]
 [ext_resource type="Resource" uid="uid://ds0ifali812hu" path="res://Resources/Families/Defense/defense_desc.tres" id="2_c6gkk"]
@@ -8,7 +8,7 @@
 
 [sub_resource type="Resource" id="Resource_7qlxk"]
 script = ExtResource("4_p38vc")
-armor_on_heal = Array[int]([5, 10, 15, 20, 30])
+healing_armor_percent = Array[int]([5, 10, 15, 20, 30])
 
 [resource]
 script = ExtResource("5_g2ecj")

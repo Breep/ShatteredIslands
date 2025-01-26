@@ -6,9 +6,12 @@
 [ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Storm/storm_focus_target.gd" id="4_hdh4n"]
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_cuxrp"]
 
-[sub_resource type="Resource" id="Resource_w7qbq"]
+[sub_resource type="Resource" id="Resource_cynp3"]
 script = ExtResource("4_hdh4n")
-crit_onfocus_target = Array[int]([2, 3, 5])
+crit_onfocus_target_min = Array[float]([1.5, 3.0, 5.0])
+crit_onfocus_target_max = Array[float]([15.0, 30.0, 50.0])
+time_before_activating = 5
+duration_of_focus = 10
 
 [resource]
 script = ExtResource("5_cuxrp")
@@ -17,4 +20,4 @@ picture = ExtResource("3_brr0q")
 families = Array[ExtResource("1_70nk4")]([ExtResource("2_5ls7r")])
 lvl = 1
 rarity = 1
-player_upgrade = SubResource("Resource_w7qbq")
+player_upgrade = SubResource("Resource_cynp3")

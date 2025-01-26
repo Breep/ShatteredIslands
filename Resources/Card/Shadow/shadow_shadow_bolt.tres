@@ -8,7 +8,7 @@
 
 [sub_resource type="Resource" id="Resource_n2jh5"]
 script = ExtResource("4_3dkjh")
-shadow_shadow_bolt = Array[int]([5, 10, 15, 20, 30])
+shadow_bolt_damage = Array[int]([5, 10, 15, 20, 30])
 
 [resource]
 script = ExtResource("5_k8at3")

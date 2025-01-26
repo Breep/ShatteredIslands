@@ -39,7 +39,6 @@ texture = ExtResource("3_8foy7")
 z_index = 2
 position = Vector2(288, 151)
 rotation = 0.731046
-scale = Vector2(1, 1)
 texture = ExtResource("4_xj3mx")
 
 [node name="Cards2" type="Sprite2D" parent="."]
