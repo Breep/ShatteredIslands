@@ -8,7 +8,7 @@
 
 [sub_resource type="Resource" id="Resource_2xvct"]
 script = ExtResource("4_6i8fu")
-chance_to_bounce = Array[int]([10, 20, 30])
+chance_to_bounce = 30
 
 [resource]
 script = ExtResource("5_xhkri")
@@ -16,5 +16,5 @@ name = "Storm Hammer"
 picture = ExtResource("3_myuuv")
 families = Array[ExtResource("1_33q58")]([ExtResource("2_s0pv2")])
 lvl = 1
-rarity = 1
+rarity = 2
 player_upgrade = SubResource("Resource_2xvct")

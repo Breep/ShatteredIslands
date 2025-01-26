@@ -5,6 +5,15 @@ extends StaticBody2D
 
 signal death(deadPlayer)
 
+# ============================== Enums ==============================
+
+enum DamageType {
+	NORMAL,
+	CRITIC,
+	POISON,
+	MAGIC,
+}
+
 # ============================== Export variables ==============================
 
 @export var team: int
@@ -17,7 +26,6 @@ var stats: CharacterStats # Needs to be public for easier upgrades access
 
 # ============================== Private variables ==============================
 
-@onready var damage_popup_node = preload("res://Scenes/Character/damage_pop_up.tscn")
 var _aa_projectile = load("res://Scenes/Prefabs/projectile.tscn")
 var _fighting_area: FightingArea
 var _characters: Array[Character]
@@ -26,8 +34,11 @@ var _allies: Array[Character]
 var _is_dead: bool = false
 var _is_player_character: bool = false
 
+var _poison_effects: Array[CharacterEffect]
+
 # ============================== Local scene nodes ==============================
 
+@onready var _timers_holder: Node = $Timers
 @onready var _aa_timer: Timer = $Timers/AutoAttackTimer
 @onready var _character_visual: CharacterVisual = $CharacterVisual
 @onready var _multiplayerSynchroniser: MultiplayerSynchronizer = %MultiplayerSynchronizer
@@ -38,6 +49,13 @@ func _ready() -> void:
 	_fighting_area = get_tree().get_root().find_child("FightingArea", true, false)
 	stats = hero.stats.duplicate(true) # Copy all hero base stats into a new stat resource
 	_character_visual.update_health_bar(stats.health, hero.stats.health)
+	# TMP !!!!!!!!!!!!!!!!!!!!!!!!!!!
+	if team == 42: 
+		_character_visual.update_name_displayed("Spide Ren'heure")
+		return
+	if team == 43: 
+		_character_visual.update_name_displayed("Alex_Supertramp")
+		return
 	_multiplayerSynchroniser.set_multiplayer_authority(player.id)
 	_is_player_character = _multiplayerSynchroniser.get_multiplayer_authority() == multiplayer.get_unique_id()
 	_character_visual.update_name_displayed(player.name)
@@ -50,26 +68,38 @@ func _ready() -> void:
 
 # ============================== Public functions ==============================
 
-func hit_by_auto_attack(_src: Character, aaStats: AutoAttackProjectileStats):
-	stats.health -= aaStats.damage
-	damage_popup(aaStats.damage,1)
+func get_closest_enemy_from(from_character: Character) -> Character:
+	if _enemies.is_empty():
+		return null
+	
+	var closest_enemy: Character = _enemies[0]
+	for enemy in _enemies:
+		if enemy != from_character:
+			var enemy_distance = (enemy.position - from_character.position).length_squared()
+			var closest_enemy_distance = (closest_enemy.position - from_character.position).length_squared()
+			if enemy_distance < closest_enemy_distance:
+				closest_enemy = enemy
+	
+	return closest_enemy
+
+
+func hit_by_auto_attack(src: Character, aa_stats: AutoAttackProjectileStats):
+	stats.health -= aa_stats.damage
+	if aa_stats.isCritic:
+		_character_visual.damage_popup(aa_stats.damage, DamageType.CRITIC)
+	else:
+		_character_visual.damage_popup(aa_stats.damage, DamageType.NORMAL)
+	
 	_character_visual.update_health_bar(stats.health, hero.stats.health)
+	
+	if aa_stats.isBouncing:
+		_create_aa_projectile(src.stats, src, src.get_closest_enemy_from(self))
+	
+	_add_to_effects_buffer(aa_stats, src)
+	
 	if stats.health <= 0 and !_is_dead:
 		death.emit(self)
 		_is_dead = true
-
-
-func damage_popup(amount: float, _modifier: int = 1):
-	var popup = damage_popup_node.instantiate()
-	var target_position = Vector2(randf_range(10,30), randf_range(10,-30)) 
-	popup.text = str(amount)
-	get_tree().current_scene.add_child(popup)
-	popup.global_position = global_position + target_position
-	popup.z_index = 1
-	#popup.position = position + Vector2(20,-20)
-	#if modifier == 1:
-	#ParticleFXSingleton.add_effect("poison", position)
-	#popup.set("theme_override_colors/font_color", Color.AQUAMARINE)
 
 
 func connect_all_players_spawned_signal(node: Node, signal_name: String) -> void:
@@ -87,25 +117,49 @@ func _get_closest_enemy() -> Character:
 	if _enemies.is_empty():
 		return null
 	
-	var closestEnemy: Character = _enemies[0]
+	var closest_enemy: Character = _enemies[0]
 	for enemy in _enemies:
-		if (enemy.position - position).length_squared() < (closestEnemy.position - position).length_squared():
-			closestEnemy = enemy
+		if (enemy.position - position).length_squared() < (closest_enemy.position - position).length_squared():
+			closest_enemy = enemy
 	
-	return closestEnemy
+	return closest_enemy
 
 
-func _auto_attack(target: Character):
-	if target == null: 
-		print("[", multiplayer.get_unique_id(), "] noone to attack")
+func _get_closest_ally() -> Character:
+	if _allies.is_empty():
+		return null
+	
+	var closestAlly: Character = _allies[0]
+	for ally in _allies:
+		if (ally.position - position).length_squared() < (closestAlly.position - position).length_squared():
+			closestAlly = ally
+	
+	return closestAlly
+
+
+func _auto_attack():
+	if _enemies.is_empty(): 
+		#print("[", multiplayer.get_unique_id(), "] no one to attack")
+		return
+	
+	_create_aa_projectile(stats, self, _get_closest_enemy())
+
+
+func _create_aa_projectile(character_stats: CharacterStats, source: Character, target: Character) -> void:
+	if source == null:
+		printerr("Can't create a projectile with no source character")
+		return
+	
+	if target == null:
+		printerr("Can't create a projectile with no target character")
 		return
 	
 	var projectile: Projectile = _aa_projectile.instantiate()
-	projectile.set_stats_from_player_stats(stats)
+	projectile.set_stats_from_character_stats(character_stats)
 	projectile.target = target
-	projectile.source = self
+	projectile.source = source
 	_fighting_area.add_child(projectile)
-	projectile.global_position = $ProjectileSpawn.global_position
+	projectile.global_position = $ProjectileSpawn.global_position + Vector2(randf_range(-5,5), randf_range(-5,5))
 	projectile.global_rotation = $ProjectileSpawn.global_rotation
 
 
@@ -143,9 +197,54 @@ func _apply_all_cards_upgrades() -> void:
 	for card in player.deck.cardPile:
 		card.player_upgrade.apply(self, card.lvl)
 	
-	_aa_timer.wait_time = 1.0 / stats.auto_attack.attack_speed
+	_update_auto_attack_speed()
+	_create_optional_timers()
 
-# ============================== Signals callback ==============================
+
+func _update_auto_attack_speed() -> void:
+	stats.auto_attack.attack_speed = hero.stats.auto_attack.attack_speed # Get default hero attack speed
+	var attack_speed_boost: float = stats.auto_attack.attack_speed_boost + stats.auto_attack.attack_speed_overtime_current
+	var multiply_boost: float = remap(attack_speed_boost, 0, 100, 1, 2) # Convert % in proportional multiple (100% = x2 | 150% = x2.5)
+	stats.auto_attack.attack_speed *= multiply_boost
+	
+	if stats.auto_attack.attack_speed == 0:
+		printerr("attack speed is equal to 0 !")
+		_aa_timer.wait_time = 1.0
+	else:
+		_aa_timer.wait_time = 1.0 / stats.auto_attack.attack_speed
+
+
+func _create_optional_timers() -> void:
+	# Gatling Gun
+	if stats.auto_attack.attack_speed_overtime_min != 0:
+		_create_auto_attack_speed_overtime_timer()
+
+
+func _create_auto_attack_speed_overtime_timer() -> void:
+	var timer := Timer.new()
+	timer.wait_time = 1
+	timer.one_shot = false
+	_timers_holder.add_child(timer)
+	timer.connect("timeout", _on_aa_speed_overtime_timer)
+	timer.start()
+
+
+# TODO Améliorer cette immonde fonction
+func _add_to_effects_buffer(aa_stats: AutoAttackProjectileStats, src: Character) -> void:
+	if aa_stats.poison_stacks != 0:
+		for effect in _poison_effects:
+			if (effect.type == CharacterEffect.EffectType.POISON and effect.source == src) and effect.ticks_left == aa_stats.poison_duration:
+				effect.number += aa_stats.poison_stacks
+				return
+		
+		var new_effect := CharacterEffect.new()
+		new_effect.type = CharacterEffect.EffectType.POISON
+		new_effect.number = aa_stats.poison_stacks
+		new_effect.ticks_left = aa_stats.poison_duration
+		new_effect.source = src
+		_poison_effects.append(new_effect)
+
+# ============================== Signals callbacks ==============================
 
 func _on_all_players_spawned() -> void:
 	_characters = _get_all_scene_characters()
@@ -157,19 +256,53 @@ func _on_auto_attack_timer_timeout() -> void:
 	if _is_dead:
 		return
 	
-	_auto_attack(_get_closest_enemy())
+	_auto_attack()
 
 
 func _on_moving_timer_timeout() -> void:
 	if _is_dead or not _is_player_character:
 		return
 	
+	# TMP !!!!!!!!!!!!!!!!!!!!!!!!!!!
+	if team == 42: return
+	# TMP !!!!!!!!!!!!!!!!!!!!!!!!!!!
+	if team == 43: return
+	
 	if _fighting_area.is_selection_active:
 		_move_to_cell(_fighting_area.selection_cell)
 
 
-func _on_death(deadPlayer: Character):
+func _on_poison_tick_timer_timeout() -> void:
+	var poison_damage: int = 0
+	for effect in _poison_effects:
+		if effect.ticks_left > 0:
+			print("Taking ", effect.number, " poison damage (", effect.ticks_left, ")")
+			effect.ticks_left -= 1
+			poison_damage += effect.number
+		else:
+			_poison_effects.erase(effect)
+	
+	print("  Taking ", poison_damage, " poison damage in total")
+	if poison_damage > 0:
+		stats.health -= poison_damage
+		_character_visual.damage_popup(poison_damage, DamageType.POISON)
+
+
+func _on_death(deadPlayer: Character) -> void:
 	print("Oh no! ", deadPlayer.name, " is dead :(")
 	_characters.erase(deadPlayer)
 	_enemies.erase(deadPlayer)
 	_allies.erase(deadPlayer)
+
+# ============================== Optional callbacks ==============================
+
+var __aa_speed_overtime_ticks: int = 0 # static variable for _on_aa_speed_overtime_timer()
+func _on_aa_speed_overtime_timer() -> void:
+	print("Update attack speed")
+	var attack_speed_overtime_current = remap(__aa_speed_overtime_ticks, \
+			0, stats.auto_attack.attack_speed_overtime_duration, \
+			stats.auto_attack.attack_speed_overtime_min, stats.auto_attack.attack_speed_overtime_max)
+	stats.auto_attack.attack_speed_overtime_current = clampf(attack_speed_overtime_current, \
+			stats.auto_attack.attack_speed_overtime_min, stats.auto_attack.attack_speed_overtime_max)
+	_update_auto_attack_speed()
+	__aa_speed_overtime_ticks += 1
