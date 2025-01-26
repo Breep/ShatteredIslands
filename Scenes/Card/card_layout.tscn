@@ -115,6 +115,7 @@ grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 14
 bbcode_enabled = true
 text = "[center] % Chance to [color=#00008B][wave freq=2.0 amp=5.0]Static Charge[/wave] and many other effect that we cant read all the card ect ect ect"
+scroll_active = false
 autowrap_mode = 2
 
 [node name="Rarity" type="Control" parent="."]

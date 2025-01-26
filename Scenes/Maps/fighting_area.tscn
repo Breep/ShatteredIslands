@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Areas/fighting_area.gd" id="1_7hx7c"]
 [ext_resource type="Texture2D" uid="uid://c8ikarjiy15wj" path="res://Data/Assets/TileSet/HexTilesetv3.png" id="2_tp2pc"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://Scenes/Prefabs/spawn_manager.tscn" id="3_0skvm"]
-[ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Scenes/Character/Character.tscn" id="4_ndbmo"]
+[ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Scenes/Character/character.tscn" id="4_ndbmo"]
 [ext_resource type="PackedScene" uid="uid://c210b1bxn3s4" path="res://Scenes/UI/ui_fight.tscn" id="6_pcn0a"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4qyjf"]

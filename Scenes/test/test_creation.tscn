@@ -1,10 +1,17 @@
-[gd_scene load_steps=20 format=3 uid="uid://cr6mw5f6jrq0c"]
+[gd_scene load_steps=27 format=3 uid="uid://cr6mw5f6jrq0c"]
 
 [ext_resource type="Shader" path="res://Shaders/ElectricBallShader.gdshader" id="1_d12tl"]
 [ext_resource type="Texture2D" uid="uid://rnfr7iqctlfy" path="res://Data/Assets/Misc/oeil blanc.png" id="1_gxjql"]
 [ext_resource type="Texture2D" uid="uid://bci6hw24u6mmy" path="res://Data/Assets/spritesheet/creature-sheet (1).png" id="3_yeedu"]
 [ext_resource type="Texture2D" uid="uid://bhukbiigvbkku" path="res://Data/Assets/spritesheet/creature-sheet.png" id="4_onkew"]
 [ext_resource type="Texture2D" uid="uid://pe0vdk3gkv63" path="res://Data/Assets/Misc/shield magma.png" id="5_haaba"]
+[ext_resource type="Material" uid="uid://bllnfgr3vkfc4" path="res://Shaders/blotchyaura.tres" id="6_ncgqy"]
+[ext_resource type="Texture2D" uid="uid://dot1wrh4guixs" path="res://Data/Assets/Misc/chiffre 5 magma.png" id="7_3tlll"]
+[ext_resource type="Material" uid="uid://blo6nwqmvfy0a" path="res://Shaders/shader_ui_objet_ouf_mettre_texture_image.tres" id="8_7fljl"]
+[ext_resource type="Texture2D" uid="uid://kbwcchgw6r7x" path="res://Data/Texture/Kenney2/circle_03.png" id="9_nkoid"]
+[ext_resource type="Material" uid="uid://bscvi3qy0qpax" path="res://Shaders/outline_gradient.tres" id="10_uphuk"]
+[ext_resource type="Material" uid="uid://bqjlc8pi3afii" path="res://Shaders/all_in_one_scrolling_texture_outline.tres" id="11_wt6ev"]
+[ext_resource type="Material" uid="uid://bg75jp30jlyfh" path="res://Shaders/wavy_texture.tres" id="12_26qs1"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_80n3f"]
 load_path = "res://.godot/imported/light_02.png-aacc48df99c965398e579f64bfa274d4.ctex"
@@ -125,3 +132,59 @@ amount = 10
 process_material = SubResource("ParticleProcessMaterial_dti0e")
 texture = ExtResource("5_haaba")
 lifetime = 3.0
+
+[node name="TextureRect" type="Sprite2D" parent="."]
+material = ExtResource("6_ncgqy")
+position = Vector2(477, 62)
+scale = Vector2(0.0484824, 0.0484824)
+texture = ExtResource("7_3tlll")
+
+[node name="halo" type="Sprite2D" parent="TextureRect"]
+visible = false
+modulate = Color(0.545751, 0.146085, 4.81308e-08, 1)
+material = ExtResource("8_7fljl")
+position = Vector2(41.2518, -41.2521)
+scale = Vector2(4.31565, 4.73464)
+texture = ExtResource("9_nkoid")
+
+[node name="TextureRect2" type="Sprite2D" parent="."]
+material = ExtResource("10_uphuk")
+position = Vector2(623, 61)
+scale = Vector2(0.0484824, 0.0484824)
+texture = ExtResource("7_3tlll")
+
+[node name="halo" type="Sprite2D" parent="TextureRect2"]
+visible = false
+modulate = Color(0.545751, 0.146085, 4.81308e-08, 1)
+material = ExtResource("8_7fljl")
+position = Vector2(41.2518, -41.2521)
+scale = Vector2(4.31565, 4.73464)
+texture = ExtResource("9_nkoid")
+
+[node name="TextureRect3" type="Sprite2D" parent="."]
+material = ExtResource("11_wt6ev")
+position = Vector2(725, 62)
+scale = Vector2(0.0484824, 0.0484824)
+texture = ExtResource("7_3tlll")
+
+[node name="halo" type="Sprite2D" parent="TextureRect3"]
+visible = false
+modulate = Color(0.545751, 0.146085, 4.81308e-08, 1)
+material = ExtResource("8_7fljl")
+position = Vector2(41.2518, -41.2521)
+scale = Vector2(4.31565, 4.73464)
+texture = ExtResource("9_nkoid")
+
+[node name="TextureRect4" type="Sprite2D" parent="."]
+material = ExtResource("12_26qs1")
+position = Vector2(834, 63)
+scale = Vector2(0.0484824, 0.0484824)
+texture = ExtResource("7_3tlll")
+
+[node name="halo" type="Sprite2D" parent="TextureRect4"]
+visible = false
+modulate = Color(0.545751, 0.146085, 4.81308e-08, 1)
+material = ExtResource("8_7fljl")
+position = Vector2(41.2518, -41.2521)
+scale = Vector2(4.31565, 4.73464)
+texture = ExtResource("9_nkoid")
