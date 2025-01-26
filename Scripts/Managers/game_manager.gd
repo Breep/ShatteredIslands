@@ -38,13 +38,13 @@ var _rules: GameRules
 func _ready() -> void:
 	_rules = load("res://Resources/GameRules/NormalGameRules.tres")
 	_families.append(load("res://Resources/Families/Attack/attack_family.tres"))
-	_families.append(load("res://Resources/Families/Defense/defense_family.tres"))
-	_families.append(load("res://Resources/Families/Fire/fire_family.tres"))
-	_families.append(load("res://Resources/Families/Storm/storm_family.tres"))
-	_families.append(load("res://Resources/Families/Heal/heal_family.tres"))
-	_families.append(load("res://Resources/Families/Hp/hp_family.tres"))
-	_families.append(load("res://Resources/Families/Poison/poison_family.tres"))
-	_families.append(load("res://Resources/Families/Shadow/shadow_family.tres"))
+	#_families.append(load("res://Resources/Families/Defense/defense_family.tres"))
+	#_families.append(load("res://Resources/Families/Fire/fire_family.tres"))
+	#_families.append(load("res://Resources/Families/Storm/storm_family.tres"))
+	#_families.append(load("res://Resources/Families/Heal/heal_family.tres"))
+	#_families.append(load("res://Resources/Families/Hp/hp_family.tres"))
+	#_families.append(load("res://Resources/Families/Poison/poison_family.tres"))
+	#_families.append(load("res://Resources/Families/Shadow/shadow_family.tres"))
 	
 
 # ============================== Public function ==============================

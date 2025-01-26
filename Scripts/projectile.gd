@@ -1,6 +1,17 @@
 class_name Projectile
 extends Area2D
 
+# ============================== Enums ==============================
+
+enum ProjectileEffect {
+	POISON,
+	VULNERABILTY,
+	CRITIC,
+	BOUNCE
+}
+
+#TODO Rajouter un projectile_visual
+
 # ============================== Constants ==============================
 
 const _SPEED_MIN: float = 0.3
@@ -71,42 +82,56 @@ func _is_randomize_modifier_active(chance: float) -> bool:
 
 # ============================== Public functions ==============================
 
-func set_stats_from_player_stats(playerStats: CharacterStats) -> void:
+func set_stats_from_character_stats(character_stats: CharacterStats) -> void:
 	if _stats == null:
 		_stats = AutoAttackProjectileStats.new()
+	
 	_stats.speed = 50
-	_stats.damage = playerStats.auto_attack.damage
-
-	var applied_effects = apply_effects_from_randomization(playerStats)
+	_stats.damage = character_stats.auto_attack.damage
 	
-	for effect_name in applied_effects.keys():
-		if applied_effects[effect_name]:
+	var effects = get_effects_from_randomization(character_stats)
+	
+	for effect_name in effects.keys():
+		if effects[effect_name]["is_active"]:
 			match effect_name:
-				"is_poison": _stats.poison_stacks += 1
-				"is_vulnerability": _stats.vulnerability_stacks += 1
-				"is_crit": _stats.isCritic = true
-				"is_double_attack": _stats.isDoubleAttack = true
-				"is_bounce": _stats.isBouncing = true
-			print(applied_effects)
+				ProjectileEffect.POISON:
+					_stats.poison_stacks += effects[effect_name]["stacks"]
+					_stats.poison_duration = 15 # TODO Specify this duration thanks to the family lvl
+				ProjectileEffect.VULNERABILTY:
+					_stats.vulnerability_stacks += effects[effect_name]["stacks"]
+					_stats.vulnerability_duration = 5 # TODO Should be a global constant
+				ProjectileEffect.CRITIC:
+					_stats.isCritic = true
+					_stats.damage *= effects[effect_name]["multiplier"]
+					scale *= 2
+				ProjectileEffect.BOUNCE:
+					_stats.isBouncing = true
 
 
-func apply_effects_from_randomization(player_stats: CharacterStats) -> Dictionary:
+func get_effects_from_randomization(character_stats: CharacterStats) -> Dictionary:
 	var effects: Dictionary = {
-		"is_poison": false,
-		"is_vulnerability": false,
-		"is_crit": false,
-		"is_double_attack": false,
-		"is_bounce_attack": false
-		}
+		ProjectileEffect.POISON: {
+			"is_active": false,
+			"stacks": character_stats.auto_attack.poison_stacks_amount,
+			"chance": character_stats.auto_attack.poison_stacks_chance,
+		},
+		ProjectileEffect.VULNERABILTY: {
+			"is_active": false,
+			"stacks": character_stats.auto_attack.vulnerability_stacks_amount,
+			"chance": character_stats.auto_attack.vulnerability_stacks_chance,
+		},
+		ProjectileEffect.CRITIC: {
+			"is_active": false,
+			"multiplier": character_stats.auto_attack.critical_multiplier,
+			"chance": character_stats.auto_attack.critical_chance,
+		},
+		ProjectileEffect.BOUNCE: {
+			"is_active": false,
+			"chance": character_stats.auto_attack.bounce_chance,
+		},
+	}
 	
-	var effect_mapping: Dictionary = {
-		"is_poison": player_stats.auto_attack.poison_chance,
-		"is_vulnerability": player_stats.auto_attack.vulnerability_chance,
-		"is_crit": player_stats.auto_attack.critical_chance,
-		"is_double_attack": player_stats.auto_attack.double_attack_chance,
-		"is_bounce_attack": player_stats.auto_attack.bounce_chance
-		}
-		
-	for effect_name in effect_mapping.keys():
-		effects[effect_name] = _is_randomize_modifier_active(effect_mapping[effect_name])
+	for effect_name in effects.keys():
+		effects[effect_name]["is_active"] = _is_randomize_modifier_active(effects[effect_name]["chance"])
+	
 	return effects

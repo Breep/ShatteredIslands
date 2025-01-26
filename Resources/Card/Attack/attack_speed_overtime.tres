@@ -14,7 +14,7 @@ attack_speed_overtime_duration = 45.0
 
 [resource]
 script = ExtResource("5_l5a0f")
-name = "Attack Speed"
+name = "Gatling gun"
 picture = ExtResource("3_7bjdv")
 families = Array[ExtResource("1_efngw")]([ExtResource("2_8qmdg")])
 lvl = 1

@@ -1,7 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://br1wrpaxa7qjk"]
+[gd_scene load_steps=9 format=3 uid="uid://br1wrpaxa7qjk"]
 
 [ext_resource type="Script" path="res://Scripts/Character/character_visual.gd" id="1_8fkrf"]
 [ext_resource type="Texture2D" uid="uid://d3g1up274niat" path="res://Data/Texture/Textrure_misc/TX Player.png" id="2_ehlfh"]
+[ext_resource type="Theme" uid="uid://duu3l81c6tmkh" path="res://Themes/Labels/popup_damage_normal.tres" id="2_hmo4h"]
+[ext_resource type="Theme" uid="uid://ca12i6ea2frl4" path="res://Themes/Labels/popup_damage_critic.tres" id="3_82kld"]
+[ext_resource type="Theme" uid="uid://b4n71r60crct6" path="res://Themes/Labels/popup_damage_magic.tres" id="4_00g0e"]
+[ext_resource type="Theme" uid="uid://46ac5avxmvtb" path="res://Themes/Labels/popup_damage_poison.tres" id="5_8l6b4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cwyy0"]
 atlas = ExtResource("2_ehlfh")
@@ -20,6 +24,10 @@ animations = [{
 
 [node name="CharacterVisual" type="Node2D"]
 script = ExtResource("1_8fkrf")
+normal_popup_theme = ExtResource("2_hmo4h")
+critic_popup_theme = ExtResource("3_82kld")
+magic_popup_theme = ExtResource("4_00g0e")
+poison_popup_theme = ExtResource("5_8l6b4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

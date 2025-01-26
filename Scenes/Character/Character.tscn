@@ -30,6 +30,9 @@ autostart = true
 [node name="AutoAttackTimer" type="Timer" parent="Timers"]
 autostart = true
 
+[node name="PoisonTickTimer" type="Timer" parent="Timers"]
+autostart = true
+
 [node name="ProjectileSpawn" type="Node2D" parent="."]
 position = Vector2(13, -23)
 
@@ -39,3 +42,4 @@ replication_config = SubResource("SceneReplicationConfig_747th")
 
 [connection signal="timeout" from="Timers/MovingTimer" to="." method="_on_moving_timer_timeout"]
 [connection signal="timeout" from="Timers/AutoAttackTimer" to="." method="_on_auto_attack_timer_timeout"]
+[connection signal="timeout" from="Timers/PoisonTickTimer" to="." method="_on_poison_tick_timer_timeout"]

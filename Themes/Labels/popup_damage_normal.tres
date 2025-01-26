@@ -1,0 +1,12 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://duu3l81c6tmkh"]
+
+[ext_resource type="FontFile" uid="uid://dgaako73a24kh" path="res://Data/font/rimouski sb.ttf" id="1_o7j27"]
+
+[resource]
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/colors/font_shadow_color = Color(0.184314, 0.184314, 0.184314, 0.8)
+Label/constants/outline_size = 5
+Label/constants/shadow_offset_x = 2
+Label/constants/shadow_offset_y = 1
+Label/fonts/font = ExtResource("1_o7j27")
