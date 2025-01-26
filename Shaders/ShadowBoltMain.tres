@@ -11,8 +11,8 @@ gradient = SubResource("Gradient_07cds")
 fill_to = Vector2(0, 1)
 
 [sub_resource type="Gradient" id="Gradient_n4nss"]
-offsets = PackedFloat32Array(0, 0.477941, 0.566176, 1)
-colors = PackedColorArray(0, 0, 0, 0, 0.369614, 0.142941, 0.684282, 1, 0.489088, 0.250099, 0.647028, 1, 1.2, 0.54, 7.567, 1)
+offsets = PackedFloat32Array(0, 0.477941, 0.566176, 0.794118, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.369614, 0.142941, 0.684282, 1, 0.489088, 0.250099, 0.647028, 1, 0.862618, 0.40242, 4.28295, 1, 1.2, 0.54, 7.567, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_bx7mj"]
 gradient = SubResource("Gradient_n4nss")

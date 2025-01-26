@@ -17,6 +17,7 @@ light_mode = 1
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_s4q53"]
 blend_mode = 1
+light_mode = 1
 
 [node name="CardLayout" type="Control"]
 layout_mode = 3
