@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cxalabhvxw1pd"]
 
 [ext_resource type="Script" path="res://Scripts/ui/ui_timer.gd" id="1_ima6g"]
-[ext_resource type="Texture2D" uid="uid://bcq8p2t5mali7" path="res://Data/Misc_IMG/1_DC-HzVwxf7jUhlQ0BiRgQA.png" id="2_mo022"]
+[ext_resource type="Texture2D" uid="uid://bcq8p2t5mali7" path="res://Data/Assets/Misc/Misc_IMG/1_DC-HzVwxf7jUhlQ0BiRgQA.png" id="2_mo022"]
 
 [node name="Uitimer" type="Control"]
 layout_mode = 3

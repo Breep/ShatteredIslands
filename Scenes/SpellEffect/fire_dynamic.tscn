@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://br6ejew7ctdi6" path="res://Data/Texture/Kenney2/magic_05.png" id="5_3nu38"]
 [ext_resource type="Material" uid="uid://by3yqqq5kql60" path="res://Particle/Electric_spark_particle.tres" id="5_kjupg"]
 [ext_resource type="Shader" path="res://Shaders/ElectricBallShader.gdshader" id="6_p6b8p"]
-[ext_resource type="Texture2D" uid="uid://dpwnqjbgkqurv" path="res://Data/Misc_IMG/test meteor.png" id="7_lnscj"]
+[ext_resource type="Texture2D" uid="uid://dpwnqjbgkqurv" path="res://Data/Assets/Misc/Misc_IMG/test meteor.png" id="7_lnscj"]
 [ext_resource type="Texture2D" uid="uid://cs7u2i0f7ysn7" path="res://Data/Texture/Kenney2/fire_02.png" id="9_55b0y"]
 
 [sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_n2yet"]

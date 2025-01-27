@@ -1,10 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://c210b1bxn3s4"]
+[gd_scene load_steps=15 format=3 uid="uid://c210b1bxn3s4"]
 
 [ext_resource type="Script" path="res://Scripts/ui/ui_fight.gd" id="1_card7"]
-[ext_resource type="Texture2D" uid="uid://digbaq8kid6eq" path="res://Data/Misc_IMG/cadre_blue2-removebg-preview.png" id="2_o210i"]
-[ext_resource type="Texture2D" uid="uid://bxoivuh1eq4l0" path="res://Data/Misc_IMG/png-clipart-versus-logo-youtube-internet-online-shopping-rapper-youtube-monochrome-silhouette-thumbnail-removebg-preview.png" id="3_kamb7"]
-[ext_resource type="Texture2D" uid="uid://cw28jnnutj8u1" path="res://Data/Misc_IMG/emptybar-removebg-preview.png" id="3_yvj8n"]
-[ext_resource type="Texture2D" uid="uid://brbe4qqx0m5sv" path="res://Data/Misc_IMG/redbar-removebg-preview.png" id="4_kiitn"]
+[ext_resource type="Texture2D" uid="uid://digbaq8kid6eq" path="res://Data/Assets/Misc/Misc_IMG/cadre_blue2-removebg-preview.png" id="2_o210i"]
+[ext_resource type="Texture2D" uid="uid://bxoivuh1eq4l0" path="res://Data/Assets/Misc/Misc_IMG/png-clipart-versus-logo-youtube-internet-online-shopping-rapper-youtube-monochrome-silhouette-thumbnail-removebg-preview.png" id="3_kamb7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8f3ei"]
 bg_color = Color(0.052, 0.116, 0.02, 0.176)
@@ -32,6 +30,14 @@ corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gc7ul"]
 bg_color = Color(0.0814678, 0.668248, 0.788601, 1)
+skew = Vector2(1, 0)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t5lbh"]
+bg_color = Color(0.751925, 0.567321, 0.135916, 1)
 skew = Vector2(1, 0)
 corner_radius_top_left = 2
 corner_radius_top_right = 2
@@ -70,16 +76,35 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tx0c2"]
+bg_color = Color(0.052, 0.116, 0.02, 0.176)
+skew = Vector2(-1, 0)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ksf6"]
+bg_color = Color(0.752941, 0.568627, 0.137255, 1)
+skew = Vector2(-1, 0)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
 [node name="UIFight" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
+anchor_left = 0.15
+anchor_right = 0.85
 anchor_bottom = 1.0
+offset_right = 1.0
+offset_bottom = -547.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_card7")
 
 [node name="TextureRect" type="TextureRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -109,13 +134,11 @@ text = "ROUND 2"
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.02
-anchor_top = 0.9
-anchor_right = 0.98
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -131,10 +154,11 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Josette"
 
-[node name="HealthBar" type="ProgressBar" parent="MarginContainer/HBoxContainer2/VBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(400, 50)
+[node name="HealthBar1" type="ProgressBar" parent="MarginContainer/HBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 25)
 layout_mode = 2
+size_flags_horizontal = 0
 tooltip_text = "Health"
 theme_override_styles/background = SubResource("StyleBoxFlat_8f3ei")
 theme_override_styles/fill = SubResource("StyleBoxFlat_qihhf")
@@ -143,7 +167,8 @@ value = 50.0
 rounded = true
 show_percentage = false
 
-[node name="Health" type="Label" parent="MarginContainer/HBoxContainer2/VBoxContainer/HealthBar"]
+[node name="Health1" type="Label" parent="MarginContainer/HBoxContainer2/VBoxContainer/HealthBar1"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -158,9 +183,11 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "HEALTH "
 
-[node name="ManaBAr" type="ProgressBar" parent="MarginContainer/HBoxContainer2/VBoxContainer"]
-custom_minimum_size = Vector2(400, 20)
+[node name="ManaBAr1" type="ProgressBar" parent="MarginContainer/HBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 20)
 layout_mode = 2
+size_flags_horizontal = 0
 tooltip_text = "Mana"
 theme_override_styles/background = SubResource("StyleBoxFlat_bjsda")
 theme_override_styles/fill = SubResource("StyleBoxFlat_gc7ul")
@@ -169,7 +196,8 @@ value = 20.0
 rounded = true
 show_percentage = false
 
-[node name="Mana" type="Label" parent="MarginContainer/HBoxContainer2/VBoxContainer/ManaBAr"]
+[node name="Mana1" type="Label" parent="MarginContainer/HBoxContainer2/VBoxContainer/ManaBAr1"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -185,10 +213,40 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 15
 text = "MANA"
 
+[node name="MoveBar1" type="ProgressBar" parent="MarginContainer/HBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 20)
+layout_mode = 2
+size_flags_horizontal = 0
+tooltip_text = "Mana"
+theme_override_styles/background = SubResource("StyleBoxFlat_bjsda")
+theme_override_styles/fill = SubResource("StyleBoxFlat_t5lbh")
+max_value = 10.0
+step = 0.1
+value = 8.0
+rounded = true
+show_percentage = false
+
+[node name="move1" type="Label" parent="MarginContainer/HBoxContainer2/VBoxContainer/MoveBar1"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.0
+offset_top = -11.5
+offset_right = 23.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 15
+text = "m/s"
+
 [node name="VBoxContainer3" type="VBoxContainer" parent="MarginContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.4
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer2/VBoxContainer3"]
 layout_mode = 2
@@ -211,7 +269,7 @@ size_flags_horizontal = 4
 text = "Breep"
 
 [node name="HealthBar" type="ProgressBar" parent="MarginContainer/HBoxContainer2/VBoxContainer2"]
-custom_minimum_size = Vector2(400, 50)
+custom_minimum_size = Vector2(250, 25)
 layout_mode = 2
 tooltip_text = "Health"
 theme_override_styles/background = SubResource("StyleBoxFlat_1xms1")
@@ -238,7 +296,7 @@ grow_vertical = 2
 text = "HEALTH "
 
 [node name="ManaBAr" type="ProgressBar" parent="MarginContainer/HBoxContainer2/VBoxContainer2"]
-custom_minimum_size = Vector2(400, 20)
+custom_minimum_size = Vector2(250, 20)
 layout_mode = 2
 tooltip_text = "Mana"
 theme_override_styles/background = SubResource("StyleBoxFlat_h4auy")
@@ -265,40 +323,32 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 15
 text = "MANA"
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -298.0
-offset_right = 443.0
-grow_vertical = 0
-size_flags_stretch_ratio = 0.0
-value = 22.0
-nine_patch_stretch = true
-stretch_margin_top = 48
-stretch_margin_right = 39
-stretch_margin_bottom = 84
-texture_under = ExtResource("3_yvj8n")
-texture_progress = ExtResource("4_kiitn")
-
-[node name="TextureProgressBar2" type="TextureProgressBar" parent="."]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -443.0
-offset_top = -298.0
-grow_horizontal = 0
-grow_vertical = 0
-size_flags_stretch_ratio = 0.0
-value = 45.0
+[node name="MoveBar" type="ProgressBar" parent="MarginContainer/HBoxContainer2/VBoxContainer2"]
+custom_minimum_size = Vector2(250, 20)
+layout_mode = 2
+tooltip_text = "Mana"
+theme_override_styles/background = SubResource("StyleBoxFlat_tx0c2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_3ksf6")
+max_value = 10.0
+step = 0.1
+page = 6.2
+value = 3.8
+rounded = true
 fill_mode = 1
-nine_patch_stretch = true
-stretch_margin_top = 48
-stretch_margin_right = 39
-stretch_margin_bottom = 84
-texture_under = ExtResource("3_yvj8n")
-texture_progress = ExtResource("4_kiitn")
+show_percentage = false
+
+[node name="move" type="Label" parent="MarginContainer/HBoxContainer2/VBoxContainer2/MoveBar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.0
+offset_top = -11.5
+offset_right = 23.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 15
+text = "m/s"

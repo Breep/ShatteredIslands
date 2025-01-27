@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://nxj6jw2phtcp" path="res://Data/Assets/Card/ICONS/MANA color.png" id="6_4njnx"]
 [ext_resource type="Texture2D" uid="uid://ba6cllpcqe1xc" path="res://Data/Assets/Card/ICONS/star.png" id="7_6jij0"]
 [ext_resource type="Material" uid="uid://bvlwmqk08myum" path="res://Particle/vortex.tres" id="8_gjei0"]
-[ext_resource type="Texture2D" uid="uid://dnfnguqmq1txb" path="res://Data/Texture/textures/64/spotlight_3.png" id="9_8uewl"]
+[ext_resource type="Texture2D" uid="uid://dnfnguqmq1txb" path="res://Data/Texture/textures 64 256 1024/64/spotlight_3.png" id="9_8uewl"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rsbs3"]
 blend_mode = 1

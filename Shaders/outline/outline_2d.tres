@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bcc6fdbkfgqti"]
+
+[ext_resource type="Shader" path="res://Shaders/outline/2d_outline.gdshader" id="1_xqko7"]
+
+[resource]
+shader = ExtResource("1_xqko7")
+shader_parameter/color = Color(0.921569, 0.909804, 0.0745098, 1)
+shader_parameter/direction = -1.0
+shader_parameter/frequency = 15.0
+shader_parameter/speed = 10.5
+shader_parameter/radius = 1.0
+shader_parameter/line_thickness = 0.03

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://bohooo4bbgxnh"]
+[gd_scene load_steps=12 format=4 uid="uid://bohooo4bbgxnh"]
 
 [ext_resource type="Script" path="res://Scripts/Areas/fighting_area.gd" id="1_7hx7c"]
 [ext_resource type="Texture2D" uid="uid://c8ikarjiy15wj" path="res://Data/Assets/TileSet/HexTilesetv3.png" id="2_tp2pc"]
@@ -289,17 +289,5 @@ scale = Vector2(0.7, 0.7)
 
 [node name="UIFight" parent="MarginContainer" instance=ExtResource("6_pcn0a")]
 layout_mode = 2
-
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
-
-[node name="SpeedRunner" parent="." instance=ExtResource("4_ndbmo")]
-position = Vector2(412, 70)
-team = 42
-hero = ExtResource("6_frqh1")
-
-[node name="Nonar" parent="." instance=ExtResource("4_ndbmo")]
-position = Vector2(334, 198)
-team = 43
-hero = ExtResource("6_frqh1")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

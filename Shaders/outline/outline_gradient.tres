@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bscvi3qy0qpax"]
+
+[ext_resource type="Shader" path="res://Shaders/outline/outline_gradient.gdshader" id="1_g53gu"]
+
+[resource]
+shader = ExtResource("1_g53gu")
+shader_parameter/gradientResolution = 17
+shader_parameter/thickness = 12.458
+shader_parameter/tolerance = 0.0
+shader_parameter/diagonals = true
+shader_parameter/rounded = true

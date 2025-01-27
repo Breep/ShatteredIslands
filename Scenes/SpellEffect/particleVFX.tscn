@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://l4hi6dgs8lvg" path="res://Scenes/Card/card_layout.tscn" id="1_7voqq"]
 [ext_resource type="Material" uid="uid://bvlwmqk08myum" path="res://Particle/vortex.tres" id="2_ifsvy"]
-[ext_resource type="Texture2D" uid="uid://dv6pofsb702la" path="res://Data/Texture/textures/256/effect_4.png" id="2_o7j02"]
+[ext_resource type="Texture2D" uid="uid://dv6pofsb702la" path="res://Data/Texture/textures 64 256 1024/256/effect_4.png" id="2_o7j02"]
 [ext_resource type="Material" uid="uid://lm68b0bt8c1u" path="res://Particle/poison_cloud.tres" id="4_nkt6m"]
 [ext_resource type="Texture2D" uid="uid://ciaq2n0pd4afb" path="res://Data/Texture/Kenney2/flame_02.png" id="5_itokh"]
 [ext_resource type="Texture2D" uid="uid://ctdqpobaoq0d6" path="res://Data/Texture/Kenney2/light_03.png" id="6_bk6q7"]
