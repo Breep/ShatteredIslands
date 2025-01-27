@@ -99,6 +99,7 @@ position = Vector2(-33, -39)
 position = Vector2(32, 31)
 scale = Vector2(2.60417, 2.60417)
 sprite_frames = SubResource("SpriteFrames_q3hgw")
+autoplay = "default"
 frame_progress = 0.330458
 
 [node name="HealthBar" type="ProgressBar" parent="AnimatedSprite2D"]

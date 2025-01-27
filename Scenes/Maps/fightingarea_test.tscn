@@ -845,6 +845,7 @@ tile_map_data = PackedByteArray("AAAAAAAAAAARAAQAAAAAAAEAAAARAAUAAAAAAAIAAAARAAY
 tile_set = SubResource("TileSet_klp2h")
 
 [node name="UI" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -852,7 +853,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Uitimer" parent="UI" instance=ExtResource("13_pv7nd")]
+[node name="Uitimer" parent="UI" node_paths=PackedStringArray("timer") instance=ExtResource("13_pv7nd")]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -864,6 +865,7 @@ offset_right = 572.0
 offset_bottom = 53.0
 grow_vertical = 1
 scale = Vector2(0.5, 0.5)
+timer = NodePath("../BattleTimer")
 
 [node name="UIFight" parent="UI" instance=ExtResource("13_enily")]
 layout_mode = 1
@@ -885,13 +887,12 @@ position = Vector2(75, 601)
 [node name="CanvasGroup" type="CanvasGroup" parent="SpawnBlue"]
 unique_name_in_owner = true
 material = ExtResource("3_6tdrj")
-position = Vector2(32, 559)
 
 [node name="ColorRect" type="ColorRect" parent="SpawnBlue/CanvasGroup"]
-offset_left = -64.0
-offset_top = -601.0
-offset_right = 10.0
-offset_bottom = -525.0
+offset_left = -32.0
+offset_top = -43.0
+offset_right = 42.0
+offset_bottom = 33.0
 mouse_filter = 2
 
 [node name="SpawnBlue" type="CollisionShape2D" parent="SpawnBlue"]
@@ -927,6 +928,7 @@ position = Vector2(32, 31)
 scale = Vector2(2.60417, 2.60417)
 sprite_frames = SubResource("SpriteFrames_q3hgw")
 animation = &"new_animation"
+autoplay = "new_animation"
 frame_progress = 0.86693
 
 [node name="HealthBar" type="ProgressBar" parent="Red Unit/AnimatedSprite2D"]
@@ -963,7 +965,6 @@ rotation_multiplier = 80
 [node name="Blue" type="CollisionShape2D" parent="BlueTeamArea"]
 position = Vector2(285.875, 272.5)
 shape = SubResource("RectangleShape2D_1tg6q")
-metadata/_edit_group_ = true
 
 [node name="RedTeamArea" type="Area2D" parent="."]
 

@@ -63,6 +63,9 @@ func _on_sub_viewport_container_gui_input(event: InputEvent) -> void:
 
 	if event is InputEventMouseButton and event.is_pressed():
 		leftClick.emit(_card)
+		var animation_player = $SubViewportContainer/SubViewport/CardLayout.get_node("AnimationPlayer")
+		if animation_player:
+			animation_player.play("flip_card")
  
 # ============================== Private functions ==============================
 

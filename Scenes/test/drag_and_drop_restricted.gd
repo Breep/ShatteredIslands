@@ -34,6 +34,8 @@ func _process(_delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if dragging and event.is_action_pressed("Cancel_drag"):
 		_cancel_dragging()
+		target.global_position = spawn_area.global_position + offset
+		spawn_blue.show()
 	elif dragging and event.is_action_released("Select"):
 		_drop()
 
@@ -65,7 +67,7 @@ func _start_dragging() -> void:
 func _drop() -> void:
 	_end_dragging()
 	if not _is_within_restriction_area():
-		target.global_position = spawn_area.global_position
+		target.global_position = spawn_area.global_position + offset
 		spawn_blue.show()
 	dropped.emit(starting_position)
 	

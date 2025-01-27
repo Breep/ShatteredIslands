@@ -1,6 +1,5 @@
-[gd_scene load_steps=88 format=3 uid="uid://c84bcu56soo2o"]
+[gd_scene load_steps=87 format=3 uid="uid://c84bcu56soo2o"]
 
-[ext_resource type="Texture2D" uid="uid://b2ji4jfpv7uqd" path="res://Data/Assets/BackGround/2D_Background_Elemental/All Assets/2DBackground_40.png" id="1_hbbbx"]
 [ext_resource type="Texture2D" uid="uid://dmpy3jjabbmm7" path="res://Data/Texture/2D Fire/T_1_pixel.jpg" id="1_q425r"]
 [ext_resource type="Material" uid="uid://sfgvxf8wp81x" path="res://Shaders/Fire_Ball.tres" id="2_n280a"]
 [ext_resource type="Material" uid="uid://cx37wrmb8u4rl" path="res://Shaders/Test_storm.tres" id="4_1ncav"]
@@ -20,7 +19,10 @@
 [ext_resource type="Material" uid="uid://bmovupsp7v8lw" path="res://Particle/auto_attack_inflict_vulnerability.tres" id="18_7hoou"]
 [ext_resource type="Texture2D" uid="uid://c2p64lhrqeglf" path="res://Data/Texture/Kenney2/spark_05.png" id="19_i3278"]
 [ext_resource type="Texture2D" uid="uid://2kgei4p2q45w" path="res://Data/Assets/spritesheet/Ball of ice.png" id="20_740la"]
-[ext_resource type="Shader" path="res://Scenes/SpellEffect/lightning.gdshader" id="21_hycyo"]
+[ext_resource type="Material" uid="uid://cpukwmrm0x4d8" path="res://Shaders/lightning_random.tres" id="20_i8tlp"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ynj2u"]
+load_path = "res://.godot/imported/2DBackground_40.png-a46777926f158291b581b1ec0fa7042c.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_hu3r3"]
 expanded_output_ports = [0]
@@ -537,32 +539,13 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fuy4a"]
-shader = ExtResource("21_hycyo")
-shader_parameter/lightning_number = 1
-shader_parameter/amplitude = Vector2(2, 1)
-shader_parameter/offset = 0.45
-shader_parameter/thickness = 0.02
-shader_parameter/speed = 0.5
-shader_parameter/base_color = Color(0.202605, 0.369272, 0.937028, 1)
-shader_parameter/glow_thickness = 0.08
-shader_parameter/glow_color = Color(0.271, 0.432, 0.864, 0.168)
-shader_parameter/alpha = 1.0
-shader_parameter/noise_frequency = 1.0
-shader_parameter/noise_intensity = 1.0
-shader_parameter/use_random_colors = true
-shader_parameter/color_variation_range = Vector2(0.8, 1.2)
-shader_parameter/modulate_alpha_over_time = false
-shader_parameter/y_start = 0.2
-shader_parameter/y_end = 0.2
-
 [node name="fire shader projectile" type="Node2D"]
 
 [node name="TextureRect" type="TextureRect" parent="."]
 visible = false
 offset_right = 1456.0
 offset_bottom = 816.0
-texture = ExtResource("1_hbbbx")
+texture = SubResource("CompressedTexture2D_ynj2u")
 
 [node name="StaticFire" type="Sprite2D" parent="."]
 material = ExtResource("2_n280a")
@@ -671,7 +654,7 @@ process_material = ExtResource("15_tvdsq")
 texture = ExtResource("16_ax72b")
 
 [node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="."]
-position = Vector2(505, 439)
+position = Vector2(504, 431)
 scale = Vector2(0.486328, 0.433594)
 sprite_frames = SubResource("SpriteFrames_kl003")
 frame_progress = 0.0596115
@@ -691,7 +674,7 @@ sprite_frames = SubResource("SpriteFrames_rfs48")
 frame_progress = 0.146202
 
 [node name="ColorRect" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_fuy4a")
+material = ExtResource("20_i8tlp")
 offset_left = -98.0
 offset_top = 123.0
 offset_right = 106.0

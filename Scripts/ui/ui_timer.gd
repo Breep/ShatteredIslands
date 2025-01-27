@@ -2,7 +2,8 @@ extends Control
 
 @onready var timer_text : RichTextLabel = $texturetime/timer
 @onready var time_texture : TextureProgressBar = $texturetime
-@onready var timer = %BattleTimer
+
+@export var timer : Timer
 
 
 func _ready() -> void:
