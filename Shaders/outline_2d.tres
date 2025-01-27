@@ -4,7 +4,7 @@
 
 [resource]
 shader = ExtResource("1_xqko7")
-shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/color = Color(0.014, 0.014, 0.014, 1)
 shader_parameter/direction = -1.0
 shader_parameter/frequency = 15.0
 shader_parameter/speed = 10.5
