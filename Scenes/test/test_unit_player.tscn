@@ -121,7 +121,6 @@ show_percentage = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(33.25, 38.5)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_4h5fk")
 
 [node name="DragAndDrop" type="Node" parent="."]

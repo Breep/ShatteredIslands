@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dwm2xg4jnd3m3"]
 
-[ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_lpyfl"]
+[ext_resource type="Script" path="res://Scripts/ui/main_menu.gd" id="1_lpyfl"]
 [ext_resource type="Shader" path="res://Shaders/UI/balatroBackgroundShader.gdshader" id="2_5j6rg"]
 [ext_resource type="Texture2D" uid="uid://but1w5bhakuqv" path="res://Data/Assets/BackGround/background.png" id="3_rhlxk"]
 [ext_resource type="Texture2D" uid="uid://2lnjwrncfj8w" path="res://Data/Assets/BackGround/DALL·E-2025-01-15-11.40.png" id="4_et4d2"]

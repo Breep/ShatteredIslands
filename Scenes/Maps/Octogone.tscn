@@ -1,6 +1,6 @@
 [gd_scene load_steps=29 format=3 uid="uid://6w6d6kvfd0w7"]
 
-[ext_resource type="Script" path="res://Scripts/octogone.gd" id="1_2cy7n"]
+[ext_resource type="Script" path="res://Scripts/Test/octogone.gd" id="1_2cy7n"]
 [ext_resource type="Texture2D" uid="uid://cc2hc26u7i5c" path="res://Data/Misc_IMG/red cadre horizontal full black.png" id="1_jne38"]
 [ext_resource type="Texture2D" uid="uid://2rphxsekt16i" path="res://Data/Misc_IMG/pentagram.png" id="2_rg3ux"]
 [ext_resource type="Texture2D" uid="uid://df2qjvmhg7ptb" path="res://Data/Misc_IMG/rune1.png" id="3_ixxgi"]

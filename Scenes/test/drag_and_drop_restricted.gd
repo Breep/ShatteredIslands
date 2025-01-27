@@ -12,10 +12,13 @@ signal dropped(starting_position: Vector2)
 @export var default_color: Color = Color.WHITE
 @export var spawn_area: Area2D
 
+@onready var spawn_blue: Area2D = %SpawnBlue
+@onready var highlight_blue: TextureRect = %Blue_hightlight
 
 var starting_position: Vector2
-var offset := Vector2.ZERO
-var dragging := false
+var offset :Vector2 = Vector2.ZERO
+var dragging : bool = false
+var mouse_hand = load("res://Data/Cursor/hand_thin_open.png")
 
 
 func _ready() -> void:
@@ -29,7 +32,7 @@ func _process(_delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if dragging and event.is_action_pressed("cancel_drag"):
+	if dragging and event.is_action_pressed("Cancel_drag"):
 		_cancel_dragging()
 	elif dragging and event.is_action_released("Select"):
 		_drop()
@@ -39,6 +42,8 @@ func _end_dragging() -> void:
 	dragging = false
 	target.remove_from_group("dragging")
 	target.z_index = 0
+	highlight_blue.hide()
+	Input.set_custom_mouse_cursor(null)
 
 
 func _cancel_dragging() -> void:
@@ -53,13 +58,15 @@ func _start_dragging() -> void:
 	target.z_index = 99
 	offset = target.global_position - target.get_global_mouse_position()
 	drag_started.emit()
+	highlight_blue.show()
+	
 
 
 func _drop() -> void:
 	_end_dragging()
 	if not _is_within_restriction_area():
-		$"../Camera2D".apply_shake()
 		target.global_position = spawn_area.global_position
+		spawn_blue.show()
 	dropped.emit(starting_position)
 	
 
@@ -92,6 +99,11 @@ func _on_blue_team_area_area_entered(area: Area2D) -> void:
 
 
 func _on_spawn_area_exited(area: Area2D) -> void:
-	var area_outline = %CanvasGroup
-	if area_outline.material and area_outline.material is ShaderMaterial:
-		area_outline.material.set_shader_parameter("line_thickness", 0)
+	spawn_blue.hide()
+	#var area_outline = %CanvasGroup
+	#if area_outline.material and area_outline.material is ShaderMaterial:
+		#area_outline.material.set_shader_parameter("line_thickness", 0)
+
+
+func _on_spawn_blue_mouse_entered() -> void:
+	Input.set_custom_mouse_cursor(mouse_hand, 0, Vector2(32, 32))
