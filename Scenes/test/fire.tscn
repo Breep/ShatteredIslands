@@ -643,7 +643,7 @@ texture = ExtResource("13_735w2")
 lifetime = 2.0
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
-position = Vector2(439, 430)
+position = Vector2(432, 435)
 sprite_frames = SubResource("SpriteFrames_tia4h")
 frame_progress = 0.608084
 

@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://c78rmhr8j4cgu"]
+
+[ext_resource type="Shader" path="res://Shaders/test_lightning2.gdshader" id="1_0dfhy"]
+[ext_resource type="Script" path="res://Scripts/Test/test_lightning_ray.gd" id="1_q66x5"]
+[ext_resource type="Texture2D" uid="uid://0m1g3llf1fj5" path="res://Data/Texture/kenney_particle_pack/rotated/spark_06_rotated.png" id="2_mmxjk"]
+[ext_resource type="Texture2D" uid="uid://bx08xmbg7q3vs" path="res://Data/Texture/kenney_particle_pack/spark_01.png" id="3_ijvbo"]
+[ext_resource type="Shader" path="res://Shaders/test_spark_explo.gdshader" id="4_b7ise"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i3oln"]
+shader = ExtResource("1_0dfhy")
+shader_parameter/time_speed_1 = 80.0
+shader_parameter/time_speed_2 = 50.0
+shader_parameter/uv_offset_1 = 0.1
+shader_parameter/uv_offset_2 = 0.02
+shader_parameter/custom_color = Vector4(0.4, 0.5, 3, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8cicf"]
+shader = ExtResource("4_b7ise")
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_p252l"]
+polygon = PackedVector2Array(221, -69, 183, 11, 289, 26)
+
+[node name="RayCast2D" type="RayCast2D"]
+target_position = Vector2(100, 0)
+collide_with_areas = true
+script = ExtResource("1_q66x5")
+
+[node name="lightningray" type="Line2D" parent="."]
+unique_name_in_owner = true
+texture_repeat = 2
+material = SubResource("ShaderMaterial_i3oln")
+points = PackedVector2Array(0, 0, 100, 0)
+width = 50.0
+texture = ExtResource("2_mmxjk")
+texture_mode = 1
+
+[node name="endray" type="Node2D" parent="."]
+unique_name_in_owner = true
+visible = false
+modulate = Color(0.315172, 0.526478, 0.985292, 1)
+position = Vector2(93, 1)
+scale = Vector2(0.5, 0.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="endray"]
+material = SubResource("ShaderMaterial_8cicf")
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_ijvbo")
+
+[node name="Sprite2D2" type="Sprite2D" parent="endray"]
+material = SubResource("ShaderMaterial_8cicf")
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_ijvbo")
+flip_v = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2(-3, 15)
+occluder = SubResource("OccluderPolygon2D_p252l")

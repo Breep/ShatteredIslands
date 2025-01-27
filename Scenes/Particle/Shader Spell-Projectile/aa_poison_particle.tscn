@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://drtmsdhvbpdqv"]
+
+[ext_resource type="Material" uid="uid://bewj84vid617f" path="res://Particle/auto_attack_inflict_poison.tres" id="1_bicsc"]
+[ext_resource type="Texture2D" uid="uid://cmsehlhc5t0p0" path="res://Data/Texture/Kenney2/smoke_04.png" id="2_ukosc"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6ayn4"]
+blend_mode = 1
+
+[node name="PoisonNode" type="Node2D"]
+
+[node name="PoisonParticle" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_6ayn4")
+amount = 12
+process_material = ExtResource("1_bicsc")
+texture = ExtResource("2_ukosc")

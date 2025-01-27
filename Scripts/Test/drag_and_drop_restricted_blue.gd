@@ -1,4 +1,4 @@
-class_name DragAndDropRestricted
+class_name DragAndDropRestricted_Blue
 extends Node
 
 signal drag_canceled(starting_position: Vector2)
@@ -12,13 +12,13 @@ signal dropped(starting_position: Vector2)
 @export var default_color: Color = Color.WHITE
 @export var spawn_area: Area2D
 
-@onready var spawn_blue: Area2D = %SpawnBlue
+@onready var spawn_blue: Area2D = spawn_area
 @onready var highlight_blue: TextureRect = %Blue_hightlight
 
 var starting_position: Vector2
 var offset :Vector2 = Vector2.ZERO
 var dragging : bool = false
-var mouse_hand = load("res://Data/Cursor/hand_thin_open.png")
+var mouse_hand = load("res://Data/Assets/Cursor/hand_thin_open.png")
 
 
 func _ready() -> void:
@@ -92,20 +92,19 @@ func _apply_visual_feedback(is_out_of_bounds: bool) -> void:
 func _is_within_restriction_area() -> bool:
 	return restriction_area.overlaps_area(target)
 
-func _on_blue_team_area_exited(area: Area2D) -> void:
+func _on_blue_team_area_area_exited(area: Area2D) -> void:
 	_apply_visual_feedback(true)
-
 
 func _on_blue_team_area_area_entered(area: Area2D) -> void:
 	_apply_visual_feedback(false)
 
 
-func _on_spawn_area_exited(area: Area2D) -> void:
-	spawn_blue.hide()
+func _on_spawn_blue_mouse_entered() -> void:
+	Input.set_custom_mouse_cursor(mouse_hand, 0, Vector2(16, 16))
+
+
+func _on_spawn_blue_area_exited(area: Area2D) -> void:
+		spawn_blue.hide()
 	#var area_outline = %CanvasGroup
 	#if area_outline.material and area_outline.material is ShaderMaterial:
 		#area_outline.material.set_shader_parameter("line_thickness", 0)
-
-
-func _on_spawn_blue_mouse_entered() -> void:
-	Input.set_custom_mouse_cursor(mouse_hand, 0, Vector2(32, 32))

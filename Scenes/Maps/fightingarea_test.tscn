@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://t87pgmdq36ob"]
+[gd_scene load_steps=34 format=4 uid="uid://t87pgmdq36ob"]
 
 [ext_resource type="Script" path="res://Scripts/Test/fightingarea_test.gd" id="1_6myyk"]
 [ext_resource type="Texture2D" uid="uid://c02tsd0osc358" path="res://Data/Assets/TileSet/rollingBall_sheet.png" id="1_h1860"]
@@ -7,11 +7,12 @@
 [ext_resource type="Texture2D" uid="uid://drlr03555g1qu" path="res://Data/Assets/TileSet/background_brown.png" id="3_135vb"]
 [ext_resource type="PackedScene" uid="uid://dqp6g6id7n2pw" path="res://Scenes/test/test_unit_player.tscn" id="3_div1p"]
 [ext_resource type="Texture2D" uid="uid://bhukbiigvbkku" path="res://Data/Assets/spritesheet/creature-sheet.png" id="3_qilot"]
-[ext_resource type="Script" path="res://Scenes/test/drag_and_drop_restricted.gd" id="4_medpe"]
 [ext_resource type="Script" path="res://Scripts/Test/drag_and_drop_velocity_rotationgd.gd" id="5_roy1w"]
-[ext_resource type="Theme" uid="uid://2r6c5i57eti8" path="res://Data/font/health_bar.tres" id="7_2wb6n"]
+[ext_resource type="Theme" uid="uid://2r6c5i57eti8" path="res://Themes/health_bar.tres" id="7_2wb6n"]
 [ext_resource type="Script" path="res://Scripts/Test/camera_shake.gd" id="8_u8jpi"]
+[ext_resource type="Script" path="res://Scripts/Test/drag_and_drop_restricted_blue.gd" id="12_f3mwm"]
 [ext_resource type="Texture2D" uid="uid://ie37bs6tdmh6" path="res://Data/Assets/Misc/contour jaune.png" id="12_odtrx"]
+[ext_resource type="Script" path="res://Scripts/Test/drag_and_drop_restricted_red.gd" id="13_3jext"]
 [ext_resource type="PackedScene" uid="uid://c210b1bxn3s4" path="res://Scenes/UI/ui_fight.tscn" id="13_enily"]
 [ext_resource type="PackedScene" uid="uid://cxalabhvxw1pd" path="res://Scenes/UI/ui_timer.tscn" id="13_pv7nd"]
 
@@ -845,7 +846,6 @@ tile_map_data = PackedByteArray("AAAAAAAAAAARAAQAAAAAAAEAAAARAAUAAAAAAAIAAAARAAY
 tile_set = SubResource("TileSet_klp2h")
 
 [node name="UI" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -900,6 +900,7 @@ position = Vector2(5, -5)
 shape = SubResource("RectangleShape2D_6uegm")
 
 [node name="SpawnRed" type="Area2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(1084, 601)
 
 [node name="CanvasGroup" type="CanvasGroup" parent="SpawnRed"]
@@ -918,9 +919,11 @@ position = Vector2(5, -5)
 shape = SubResource("RectangleShape2D_6uegm")
 
 [node name="Blue Unit" parent="." instance=ExtResource("3_div1p")]
+unique_name_in_owner = true
 position = Vector2(47, 573)
 
 [node name="Red Unit" type="Area2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(1057, 573)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Red Unit"]
@@ -973,16 +976,16 @@ position = Vector2(864.25, 272.5)
 shape = SubResource("RectangleShape2D_1tg6q")
 
 [node name="DragAndDropBlue" type="Node" parent="." node_paths=PackedStringArray("target", "restriction_area", "spawn_area")]
-script = ExtResource("4_medpe")
+script = ExtResource("12_f3mwm")
 target = NodePath("../Blue Unit")
 restriction_area = NodePath("../BlueTeamArea")
 spawn_area = NodePath("../SpawnBlue")
 
 [node name="DragAndDropRed" type="Node" parent="." node_paths=PackedStringArray("target", "restriction_area", "spawn_area")]
-script = ExtResource("4_medpe")
+script = ExtResource("13_3jext")
 target = NodePath("../Red Unit")
 restriction_area = NodePath("../RedTeamArea")
-spawn_area = NodePath("../SpawnBlue")
+spawn_area = NodePath("../SpawnRed")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 visible = false
@@ -1000,10 +1003,22 @@ offset_bottom = 536.0
 texture = ExtResource("12_odtrx")
 expand_mode = 1
 
-[connection signal="area_exited" from="SpawnBlue" to="DragAndDropBlue" method="_on_spawn_area_exited"]
+[node name="Red_hightlight" type="TextureRect" parent="."]
+unique_name_in_owner = true
+visible = false
+material = ExtResource("3_6tdrj")
+offset_left = 581.0
+offset_top = 3.0
+offset_right = 1149.0
+offset_bottom = 536.0
+texture = ExtResource("12_odtrx")
+expand_mode = 1
+
+[connection signal="area_exited" from="SpawnBlue" to="DragAndDropBlue" method="_on_spawn_blue_area_exited"]
 [connection signal="mouse_entered" from="SpawnBlue" to="DragAndDropBlue" method="_on_spawn_blue_mouse_entered"]
-[connection signal="area_exited" from="SpawnRed" to="DragAndDropBlue" method="_on_spawn_area_exited"]
+[connection signal="area_exited" from="SpawnRed" to="DragAndDropRed" method="_on_spawn_red_area_exited"]
+[connection signal="mouse_entered" from="SpawnRed" to="DragAndDropRed" method="_on_spawn_red_mouse_entered"]
 [connection signal="area_entered" from="BlueTeamArea" to="DragAndDropBlue" method="_on_blue_team_area_area_entered"]
-[connection signal="area_exited" from="BlueTeamArea" to="DragAndDropBlue" method="_on_blue_team_area_exited"]
+[connection signal="area_exited" from="BlueTeamArea" to="DragAndDropBlue" method="_on_blue_team_area_area_exited"]
 [connection signal="area_entered" from="RedTeamArea" to="DragAndDropRed" method="_on_red_team_area_area_entered"]
 [connection signal="area_exited" from="RedTeamArea" to="DragAndDropRed" method="_on_red_team_area_area_exited"]

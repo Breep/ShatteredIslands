@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cpukwmrm0x4d8"]
 
-[ext_resource type="Shader" path="res://Scenes/SpellEffect/lightning.gdshader" id="1_60euq"]
+[ext_resource type="Shader" path="res://Shaders/lightning.gdshader" id="1_60euq"]
 
 [resource]
 shader = ExtResource("1_60euq")
