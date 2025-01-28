@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://bqa4yxqnd8cg6"]
+
+[ext_resource type="Shader" uid="uid://d234dicgygv43" path="res://Shaders/Spell/Electric/thunder.tres" id="1_y3wu1"]
+[ext_resource type="Texture2D" uid="uid://dcuaomx5cc00d" path="res://Data/Texture/Kenney/spark_05_rotated.png" id="2_iu7fi"]
+
+[resource]
+shader = ExtResource("1_y3wu1")
+shader_parameter/Vanishin_Value = 0.0
+shader_parameter/Speed = Vector2(-2, 0)
+shader_parameter/basic_texture = ExtResource("2_iu7fi")

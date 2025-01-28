@@ -56,7 +56,7 @@ parameter_name = "Texture_Substract"
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_0aps0"]
-size = Vector2(373, 617.937)
+size = Vector2(360.28, 617.937)
 title = "Texture 5"
 tint_color_enabled = true
 tint_color = Color(0.727487, 0.566315, 0.941406, 0.75)
@@ -100,7 +100,7 @@ texture_type = 1
 [sub_resource type="VisualShaderNodeClamp" id="VisualShaderNodeClamp_m5vpu"]
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_6rp06"]
-size = Vector2(373.452, 634.874)
+size = Vector2(349.452, 634.874)
 title = "Texture 1"
 tint_color_enabled = true
 tint_color = Color(0.727487, 0.566315, 0.941406, 0.75)

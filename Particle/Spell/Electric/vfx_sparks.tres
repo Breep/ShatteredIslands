@@ -1,0 +1,38 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=5 format=3 uid="uid://ud51332wuyfo"]
+
+[sub_resource type="Curve" id="Curve_nmgot"]
+_data = [Vector2(0, 0.494505), 0.0, 0.0, 0, 0, Vector2(1, 0.0879121), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_hd2cs"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_jsa2d"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_6lki0"]
+curve_x = SubResource("Curve_nmgot")
+curve_y = SubResource("Curve_hd2cs")
+curve_z = SubResource("Curve_jsa2d")
+
+[resource]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 50.0
+emission_ring_radius = 50.0
+emission_ring_inner_radius = 0.0
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = -500.0
+initial_velocity_max = -400.0
+radial_velocity_min = 500.0
+radial_velocity_max = 700.0
+gravity = Vector3(0, 98, 0)
+scale_min = 0.05
+scale_max = 0.2
+scale_curve = SubResource("CurveXYZTexture_6lki0")
+color = Color(2.2, 1.3, 0.5, 1)
