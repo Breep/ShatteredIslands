@@ -1,7 +1,5 @@
-[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://bh36aymfdpkvc"]
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://bh36aymfdpkvc"]
 
-[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_fsxdj"]
-[ext_resource type="Resource" uid="uid://5b3so5uho4c6" path="res://Resources/Families/Attack/AttackDesc.tres" id="2_suuuu"]
 [ext_resource type="Texture2D" uid="uid://clx0jjxv145r5" path="res://Data/Assets/Card/Card_IMG/storm/thunder weapon.jpg" id="3_8w4re"]
 [ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Attack/attack_increase_attack_on_move.gd" id="4_n0inc"]
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_cl1f0"]
@@ -15,7 +13,6 @@ movement_increase_damage_distance = 5
 script = ExtResource("5_cl1f0")
 name = "Storm Caller"
 picture = ExtResource("3_8w4re")
-families = Array[ExtResource("1_fsxdj")]([ExtResource("2_suuuu")])
-lvl = 1
+families = Array[int]([0, 7])
 rarity = 0
 player_upgrade = SubResource("Resource_e2ikp")

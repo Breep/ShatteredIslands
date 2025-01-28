@@ -1,7 +1,5 @@
-[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://k3r84rocvpjl"]
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://k3r84rocvpjl"]
 
-[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_pr8r8"]
-[ext_resource type="Resource" uid="uid://c82p5o8340bvq" path="res://Resources/Families/Heal/heal_desc.tres" id="2_nkx48"]
 [ext_resource type="Texture2D" uid="uid://cimvugits0vas" path="res://Data/Assets/Card/Card_IMG/heal/heal2.png" id="3_d6ols"]
 [ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Heal/heal_damage_projectile.gd" id="4_nu5a5"]
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_q1dgv"]
@@ -15,7 +13,6 @@ heal_projectile_chance = 40
 script = ExtResource("5_q1dgv")
 name = "Magic Heal"
 picture = ExtResource("3_d6ols")
-families = Array[ExtResource("1_pr8r8")]([ExtResource("2_nkx48")])
-lvl = 1
+families = [4]
 rarity = 0
 player_upgrade = SubResource("Resource_2wu53")

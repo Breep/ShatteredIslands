@@ -1,7 +1,5 @@
-[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://7pb4nkpsp7dv"]
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://7pb4nkpsp7dv"]
 
-[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_4owq6"]
-[ext_resource type="Resource" uid="uid://5b3so5uho4c6" path="res://Resources/Families/Attack/AttackDesc.tres" id="2_0j6k6"]
 [ext_resource type="Texture2D" uid="uid://bd2ymqw3mfvrg" path="res://Data/Assets/Card/Card_IMG/Necro/necrosis knife.jpg" id="3_5rdt0"]
 [ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Attack/attack_max_hp.gd" id="4_yno48"]
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_40w34"]
@@ -15,7 +13,6 @@ increase_max_hp_period = 5
 script = ExtResource("5_40w34")
 name = "Necrosis Scythe"
 picture = ExtResource("3_5rdt0")
-families = Array[ExtResource("1_4owq6")]([ExtResource("2_0j6k6")])
-lvl = 1
+families = Array[int]([0, 5])
 rarity = 0
 player_upgrade = SubResource("Resource_l28uu")

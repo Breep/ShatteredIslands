@@ -1,7 +1,5 @@
-[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://bwjtvg51ch3ct"]
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://bwjtvg51ch3ct"]
 
-[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_aalyh"]
-[ext_resource type="Resource" uid="uid://g5xyh7ee538f" path="res://Resources/Families/Storm/storm_desc.tres" id="2_7dkdr"]
 [ext_resource type="Texture2D" uid="uid://br7dymjb23ux7" path="res://Data/Assets/Card/Card_IMG/storm/storm6.png" id="3_1yrog"]
 [ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Storm/storm_crit_heal_allies.gd" id="4_o6eyt"]
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_jqdkp"]
@@ -14,7 +12,6 @@ healing_crit_amount = Array[int]([2, 4, 6, 8, 12])
 script = ExtResource("5_jqdkp")
 name = "Thunder Priest"
 picture = ExtResource("3_1yrog")
-families = Array[ExtResource("1_aalyh")]([ExtResource("2_7dkdr")])
-lvl = 1
+families = [3, 4]
 rarity = 0
 player_upgrade = SubResource("Resource_qx18j")

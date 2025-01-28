@@ -1,8 +1,6 @@
-[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://s4203g63v1bj"]
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://s4203g63v1bj"]
 
-[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_mx2a4"]
 [ext_resource type="Texture2D" uid="uid://cdm54x3nfe7nj" path="res://Data/Assets/Card/Card_IMG/defense/armor epic.png" id="2_hwtud"]
-[ext_resource type="Resource" uid="uid://ds0ifali812hu" path="res://Resources/Families/Defense/defense_desc.tres" id="2_yrqm4"]
 [ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Defense/defense_damage_reduce.gd" id="3_54wh4"]
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="4_m12om"]
 
@@ -15,7 +13,6 @@ reduce_damage_received = 30
 script = ExtResource("4_m12om")
 name = "Protector"
 picture = ExtResource("2_hwtud")
-families = Array[ExtResource("1_mx2a4")]([ExtResource("2_yrqm4")])
-lvl = 1
+families = [1]
 rarity = 2
 player_upgrade = SubResource("Resource_qk10j")

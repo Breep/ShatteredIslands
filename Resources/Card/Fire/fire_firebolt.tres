@@ -1,7 +1,5 @@
-[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://ga4r0xida5no"]
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://ga4r0xida5no"]
 
-[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_w7s5s"]
-[ext_resource type="Resource" uid="uid://ce8bwdfkqwriu" path="res://Resources/Families/Fire/fire_desc.tres" id="2_4kno4"]
 [ext_resource type="Texture2D" uid="uid://dtppegohvctot" path="res://Data/Assets/Card/Card_IMG/fire/fire dagger.png" id="3_mb42k"]
 [ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/fire/fire_firebolt.gd" id="4_rb1ll"]
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_naa47"]
@@ -15,7 +13,6 @@ firebolt_period = 2.0
 script = ExtResource("5_naa47")
 name = "Fire dagger bolt"
 picture = ExtResource("3_mb42k")
-families = Array[ExtResource("1_w7s5s")]([ExtResource("2_4kno4")])
-lvl = 1
+families = [2]
 rarity = 0
 player_upgrade = SubResource("Resource_fvcoj")

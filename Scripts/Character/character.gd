@@ -93,7 +93,8 @@ func hit_by_auto_attack(src: Character, aa_stats: AutoAttackProjectileStats):
 	_character_visual.update_health_bar(stats.health, hero.stats.health)
 	
 	if aa_stats.isBouncing:
-		_create_aa_projectile(src.stats, src, src.get_closest_enemy_from(self))
+		aa_stats.isBouncing = false
+		_create_aa_projectile_from_projectile(aa_stats, src, src.get_closest_enemy_from(self))
 	
 	_add_to_effects_buffer(aa_stats, src)
 	
@@ -142,10 +143,22 @@ func _auto_attack():
 		#print("[", multiplayer.get_unique_id(), "] no one to attack")
 		return
 	
-	_create_aa_projectile(stats, self, _get_closest_enemy())
+	_create_aa_projectile_from_character(stats, self, _get_closest_enemy())
 
 
-func _create_aa_projectile(character_stats: CharacterStats, source: Character, target: Character) -> void:
+func _create_aa_projectile_from_character(character_stats: CharacterStats, source: Character, target: Character) -> void:
+	var projectile: Projectile = _aa_projectile.instantiate()
+	projectile.set_stats_from_character_stats(character_stats)
+	_fire_projectile(projectile, source, target)
+
+
+func _create_aa_projectile_from_projectile(projectile_stats: AutoAttackProjectileStats, source: Character, target: Character) -> void:
+	var projectile: Projectile = _aa_projectile.instantiate()
+	projectile.stats = projectile_stats
+	_fire_projectile(projectile, source, target)
+
+
+func _fire_projectile(projectile: Projectile, source: Character, target: Character) -> void:
 	if source == null:
 		printerr("Can't create a projectile with no source character")
 		return
@@ -154,12 +167,10 @@ func _create_aa_projectile(character_stats: CharacterStats, source: Character, t
 		printerr("Can't create a projectile with no target character")
 		return
 	
-	var projectile: Projectile = _aa_projectile.instantiate()
-	projectile.set_stats_from_character_stats(character_stats)
 	projectile.target = target
 	projectile.source = source
 	_fighting_area.add_child(projectile)
-	projectile.global_position = $ProjectileSpawn.global_position + Vector2(randf_range(-5,5), randf_range(-5,5))
+	projectile.global_position = $ProjectileSpawn.global_position + Vector2(randf_range(-10,10), randf_range(-10,10))
 	projectile.global_rotation = $ProjectileSpawn.global_rotation
 
 
@@ -276,13 +287,11 @@ func _on_poison_tick_timer_timeout() -> void:
 	var poison_damage: int = 0
 	for effect in _poison_effects:
 		if effect.ticks_left > 0:
-			print("Taking ", effect.number, " poison damage (", effect.ticks_left, ")")
 			effect.ticks_left -= 1
 			poison_damage += effect.number
 		else:
 			_poison_effects.erase(effect)
 	
-	print("  Taking ", poison_damage, " poison damage in total")
 	if poison_damage > 0:
 		stats.health -= poison_damage
 		_character_visual.damage_popup(poison_damage, DamageType.POISON)
@@ -298,7 +307,6 @@ func _on_death(deadPlayer: Character) -> void:
 
 var __aa_speed_overtime_ticks: int = 0 # static variable for _on_aa_speed_overtime_timer()
 func _on_aa_speed_overtime_timer() -> void:
-	print("Update attack speed")
 	var attack_speed_overtime_current = remap(__aa_speed_overtime_ticks, \
 			0, stats.auto_attack.attack_speed_overtime_duration, \
 			stats.auto_attack.attack_speed_overtime_min, stats.auto_attack.attack_speed_overtime_max)

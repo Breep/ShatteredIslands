@@ -37,6 +37,15 @@ var source: Character:
 		else:
 			_source = value
 
+var stats: AutoAttackProjectileStats:
+	get:
+		return _stats
+	set(value):
+		if value == null:
+			printerr("Trying to set a projectile stats to null")
+		else:
+			_stats = value
+
 # ============================== Private ==============================
 
 var _source: Character
@@ -63,7 +72,6 @@ func _on_body_entered(body: Node2D) -> void:
 		
 		queue_free()
 
-
 # ============================== Private functions ==============================
 
 func _move_toward_target(delta: float):
@@ -86,10 +94,11 @@ func set_stats_from_character_stats(character_stats: CharacterStats) -> void:
 	if _stats == null:
 		_stats = AutoAttackProjectileStats.new()
 	
-	_stats.speed = 50
+	_stats.speed = 150
 	_stats.damage = character_stats.auto_attack.damage
 	
 	var effects = get_effects_from_randomization(character_stats)
+	_stats.isBouncing = true
 	
 	for effect_name in effects.keys():
 		if effects[effect_name]["is_active"]:

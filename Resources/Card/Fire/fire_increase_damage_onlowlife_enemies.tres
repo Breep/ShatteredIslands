@@ -1,7 +1,5 @@
-[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://chuumatgd0adm"]
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://chuumatgd0adm"]
 
-[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_x3cp6"]
-[ext_resource type="Resource" uid="uid://ce8bwdfkqwriu" path="res://Resources/Families/Fire/fire_desc.tres" id="2_7vsfy"]
 [ext_resource type="Texture2D" uid="uid://cbqbwikdph172" path="res://Data/Assets/Card/Card_IMG/fire/fire_lightning.webp" id="3_xpge5"]
 [ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/fire/fire_increase_damage_onlowlife_enemy.gd" id="4_yirwm"]
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_uurst"]
@@ -15,7 +13,6 @@ damage_increase_on_low_life_enemy_threshold = 50
 script = ExtResource("5_uurst")
 name = "Storm of fire"
 picture = ExtResource("3_xpge5")
-families = Array[ExtResource("1_x3cp6")]([ExtResource("2_7vsfy")])
-lvl = 1
+families = [2, 3]
 rarity = 0
 player_upgrade = SubResource("Resource_e4btn")

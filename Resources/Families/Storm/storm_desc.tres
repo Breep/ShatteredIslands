@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="FamilyDesc" load_steps=3 format=3 uid="uid://g5xyh7ee538f"]
-
-[ext_resource type="Texture2D" uid="uid://dgn2f8xle3qop" path="res://Data/Assets/Card/Card_IMG/storm/storm icon.png" id="1_sasjt"]
-[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="2_uddca"]
-
-[resource]
-script = ExtResource("2_uddca")
-icon = ExtResource("1_sasjt")
-familyName = "Storm"

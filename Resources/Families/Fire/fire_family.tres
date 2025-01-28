@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="1_ldcbf"]
 [ext_resource type="Resource" uid="uid://dkxgpd1kl23wm" path="res://Resources/Card/Fire/fire_damage_baseonyour_maxhp.tres" id="2_mfgj3"]
-[ext_resource type="Resource" uid="uid://ce8bwdfkqwriu" path="res://Resources/Families/Fire/fire_desc.tres" id="2_ta5bc"]
 [ext_resource type="Resource" uid="uid://c8lgo17h8qfps" path="res://Resources/Card/Fire/fire_epic_nuke.tres" id="3_2tlv3"]
 [ext_resource type="Script" path="res://ResourcesBase/Family/family.gd" id="3_4jh4b"]
 [ext_resource type="Resource" uid="uid://ga4r0xida5no" path="res://Resources/Card/Fire/fire_firebolt.tres" id="4_xfgd5"]
@@ -12,8 +11,11 @@
 [ext_resource type="Resource" uid="uid://bn8rifooy7lej" path="res://Resources/Card/Fire/fire_magic_resist.tres" id="8_wpaep"]
 [ext_resource type="Resource" uid="uid://ckett0ta5lvew" path="res://Resources/Card/Fire/fire_meteor.tres" id="9_l522s"]
 [ext_resource type="Resource" uid="uid://cnkp0wrx8ch23" path="res://Resources/Card/Fire/fire_trail_of_fire.tres" id="10_pfh36"]
+[ext_resource type="Texture2D" uid="uid://y0t815fi2pdf" path="res://Data/Assets/Card/ICONS/MANA.png" id="11_wybjy"]
 
 [resource]
 script = ExtResource("3_4jh4b")
-desc = ExtResource("2_ta5bc")
 cards = Array[ExtResource("1_ldcbf")]([ExtResource("2_mfgj3"), ExtResource("3_2tlv3"), ExtResource("4_xfgd5"), ExtResource("5_6aqvl"), ExtResource("6_tj55o"), ExtResource("7_4jo6b"), ExtResource("8_wpaep"), ExtResource("9_l522s"), ExtResource("10_pfh36")])
+icon = ExtResource("11_wybjy")
+family_name = "Fire"
+family_type = 2
