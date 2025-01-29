@@ -1,11 +1,10 @@
-[gd_scene load_steps=13 format=4 uid="uid://bohooo4bbgxnh"]
+[gd_scene load_steps=12 format=4 uid="uid://bohooo4bbgxnh"]
 
 [ext_resource type="Script" path="res://Scripts/Areas/fighting_area.gd" id="1_7hx7c"]
 [ext_resource type="Texture2D" uid="uid://c8ikarjiy15wj" path="res://Data/Assets/TileSet/HexTilesetv3.png" id="2_tp2pc"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://Scenes/Prefabs/spawn_manager.tscn" id="3_0skvm"]
 [ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Scenes/Character/Character.tscn" id="4_ndbmo"]
 [ext_resource type="Resource" uid="uid://cbcy0wbqkel1q" path="res://Resources/Heros/JohnnyDefault/johnny_default.tres" id="6_nqow8"]
-[ext_resource type="PackedScene" uid="uid://c210b1bxn3s4" path="res://Scenes/UI/ui_fight.tscn" id="6_pcn0a"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4qyjf"]
 texture = ExtResource("2_tp2pc")
@@ -280,16 +279,6 @@ position = Vector2(377, 193)
 [node name="SpawnManager" parent="." node_paths=PackedStringArray("spawns") instance=ExtResource("3_0skvm")]
 spawns = [NodePath("../Spawns/0"), NodePath("../Spawns/1"), NodePath("../Spawns/2"), NodePath("../Spawns/3")]
 character_scene = ExtResource("4_ndbmo")
-
-[node name="MarginContainer" type="MarginContainer" parent="."]
-offset_left = -297.0
-offset_top = -127.0
-offset_right = 1350.0
-offset_bottom = 782.0
-scale = Vector2(0.7, 0.7)
-
-[node name="UIFight" parent="MarginContainer" instance=ExtResource("6_pcn0a")]
-layout_mode = 2
 
 [node name="Character" parent="." instance=ExtResource("4_ndbmo")]
 position = Vector2(407, 62)
