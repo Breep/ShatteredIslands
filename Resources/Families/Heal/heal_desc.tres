@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="FamilyDesc" load_steps=3 format=3 uid="uid://c82p5o8340bvq"]
-
-[ext_resource type="Texture2D" uid="uid://jknfvpvc3whx" path="res://Data/Assets/Card/Card_IMG/heal/icon heal.png" id="1_aoffp"]
-[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="2_4513k"]
-
-[resource]
-script = ExtResource("2_4513k")
-icon = ExtResource("1_aoffp")
-familyName = "Heal"

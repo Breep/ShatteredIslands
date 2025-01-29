@@ -1,7 +1,5 @@
-[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://bwdrxts64wwp8"]
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://bwdrxts64wwp8"]
 
-[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_xkbr6"]
-[ext_resource type="Resource" uid="uid://5b3so5uho4c6" path="res://Resources/Families/Attack/AttackDesc.tres" id="2_enlrh"]
 [ext_resource type="Texture2D" uid="uid://8d8n5v4ycv7o" path="res://Data/Assets/Card/Card_IMG/Attack/attack_armor.webp" id="3_brmti"]
 [ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Attack/attack_chance_to_gain_armor.gd" id="4_qb4j5"]
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_ly662"]
@@ -15,7 +13,6 @@ armor_stacks_amount = 5
 script = ExtResource("5_ly662")
 name = "Sword armor"
 picture = ExtResource("3_brmti")
-families = Array[ExtResource("1_xkbr6")]([ExtResource("2_enlrh")])
-lvl = 1
+families = Array[int]([0, 1])
 rarity = 0
 player_upgrade = SubResource("Resource_1ng51")

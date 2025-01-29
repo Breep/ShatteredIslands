@@ -1,7 +1,5 @@
-[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://b4yjn2q1enybq"]
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://b4yjn2q1enybq"]
 
-[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_bfyb7"]
-[ext_resource type="Resource" uid="uid://ttmuosdbq61" path="res://Resources/Families/Poison/poison_desc.tres" id="2_fqwcj"]
 [ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Poison/poison_epic_double_damage.gd" id="3_n0awy"]
 [ext_resource type="Texture2D" uid="uid://cucbk833lj41o" path="res://Data/Assets/Card/Card_IMG/poison/poison4.png" id="3_ogg40"]
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="4_0ckow"]
@@ -14,7 +12,6 @@ multiply_damage = 2.0
 script = ExtResource("4_0ckow")
 name = "Venomous snake"
 picture = ExtResource("3_ogg40")
-families = Array[ExtResource("1_bfyb7")]([ExtResource("2_fqwcj")])
-lvl = 1
+families = [6]
 rarity = 2
 player_upgrade = SubResource("Resource_qt3h3")

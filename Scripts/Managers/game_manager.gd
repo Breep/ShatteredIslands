@@ -30,22 +30,16 @@ var _game_state: GameState = GameState.Starting
 var _buying_area: PackedScene = preload("res://Scenes/Maps/buying_area.tscn")
 var _fighting_area: PackedScene = preload("res://Scenes/Maps/fighting_area.tscn")
 
-var _families: Array[Family]
+var _families_ref: Dictionary # Reference Dictionary to all families
+var _active_families: Array[Family] # Array of all families activated for this game only
 var _rules: GameRules
 
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
 	_rules = load("res://Resources/GameRules/NormalGameRules.tres")
-	_families.append(load("res://Resources/Families/Attack/attack_family.tres"))
-	#_families.append(load("res://Resources/Families/Defense/defense_family.tres"))
-	#_families.append(load("res://Resources/Families/Fire/fire_family.tres"))
-	#_families.append(load("res://Resources/Families/Storm/storm_family.tres"))
-	#_families.append(load("res://Resources/Families/Heal/heal_family.tres"))
-	#_families.append(load("res://Resources/Families/Hp/hp_family.tres"))
-	#_families.append(load("res://Resources/Families/Poison/poison_family.tres"))
-	#_families.append(load("res://Resources/Families/Shadow/shadow_family.tres"))
-	
+	_init_families_ref()
+	_active_families.append(get_family_from_type(Family.FamilyType.Attack))
 
 # ============================== Public function ==============================
 
@@ -100,7 +94,7 @@ func get_local_player() -> Player:
 	for player in players:
 		if player.id == multiplayer.get_unique_id():
 			return player
-
+	
 	printerr("No local player registered in the GameManager !")
 	return null
 
@@ -111,13 +105,15 @@ func start_game() -> void:
 		printerr("Not all player are ready !")
 		return
 	
-	MultiplayerDeckManager.init_cards_ref(_families, _rules)
+	MultiplayerDeckManager.init_cards_ref(_active_families, _rules)
 	if multiplayer.is_server():
-		MultiplayerDeckManager.construct_shop_deck(_families, _rules)
+		MultiplayerDeckManager.construct_shop_deck(_active_families, _rules)
 	
 	game_switch_to(GameState.Buying)
-	
-	print("[id:", multiplayer.get_unique_id(),"] Start game !")
+
+
+func get_family_from_type(family_type: Family.FamilyType) -> Family:
+	return _families_ref[family_type]
 
 # ============================== Private function ==============================
 
@@ -151,6 +147,18 @@ func _all_player_are_ready() -> bool:
 			return false
 
 	return true
+
+
+func _init_families_ref() -> void:
+	_families_ref[Family.FamilyType.Attack] = load("res://Resources/Families/Attack/attack_family.tres")
+	_families_ref[Family.FamilyType.Rock] = load("res://Resources/Families/Defense/defense_family.tres") as Family
+	_families_ref[Family.FamilyType.Fire] = load("res://Resources/Families/Fire/fire_family.tres") as Family
+	_families_ref[Family.FamilyType.Storm] = load("res://Resources/Families/Storm/storm_family.tres") as Family
+	_families_ref[Family.FamilyType.Serinity] = load("res://Resources/Families/Heal/heal_family.tres") as Family
+	_families_ref[Family.FamilyType.Life] = load("res://Resources/Families/Hp/hp_family.tres") as Family
+	_families_ref[Family.FamilyType.Poison] = load("res://Resources/Families/Poison/poison_family.tres") as Family
+	_families_ref[Family.FamilyType.Shadow] = load("res://Resources/Families/Shadow/shadow_family.tres") as Family
+	
 
 	
 	

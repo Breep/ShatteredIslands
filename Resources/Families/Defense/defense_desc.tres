@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="FamilyDesc" load_steps=3 format=3 uid="uid://ds0ifali812hu"]
-
-[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_rbuxc"]
-[ext_resource type="Texture2D" uid="uid://cnp4ioj5qvrv4" path="res://Data/Assets/Card/ICONS/DEFENSE color.png" id="1_xw8ce"]
-
-[resource]
-script = ExtResource("1_rbuxc")
-icon = ExtResource("1_xw8ce")
-familyName = "Defense"

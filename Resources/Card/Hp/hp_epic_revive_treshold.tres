@@ -1,7 +1,5 @@
-[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://d2ts2cxyj8orv"]
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://d2ts2cxyj8orv"]
 
-[ext_resource type="Script" path="res://ResourcesBase/Family/family_desc.gd" id="1_7ncwh"]
-[ext_resource type="Resource" uid="uid://3iouwv2bu8kx" path="res://Resources/Families/Hp/hp_desc.tres" id="2_7hpdn"]
 [ext_resource type="Texture2D" uid="uid://lxxvlqaply8m" path="res://Data/Assets/Card/Card_IMG/Hp/hp4.png" id="3_f53ts"]
 [ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Hp/hp_epic_revive.gd" id="4_phfkw"]
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_5g2oi"]
@@ -16,7 +14,6 @@ revive_after_death_time = 3.0
 script = ExtResource("5_5g2oi")
 name = "Revive"
 picture = ExtResource("3_f53ts")
-families = Array[ExtResource("1_7ncwh")]([ExtResource("2_7hpdn")])
-lvl = 1
+families = [5]
 rarity = 2
 player_upgrade = SubResource("Resource_qun1w")

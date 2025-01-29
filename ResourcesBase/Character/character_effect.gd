@@ -3,11 +3,13 @@ extends Resource
 
 # ============================== Enums ==============================
 
+# TODO Make this CharacterEffect just a PoisonEffect
+
 enum EffectType {
 	POISON,
-	VULNERABILTY,
-	ARMOR,
-	PACIFY
+	VULNERABILTY, # Don't need to be like poison, it decreases by x% each second with minimum of y
+	ARMOR, # Useless for the moment, armor can be handled easily with just a var in CharacterStats
+	PACIFY # Same don't need to be that complicated, can just be like armor
 }
 
 # ============================== Public variables ==============================
