@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://bohooo4bbgxnh"]
+[gd_scene load_steps=13 format=4 uid="uid://bohooo4bbgxnh"]
 
 [ext_resource type="Script" path="res://Scripts/Areas/fighting_area.gd" id="1_7hx7c"]
 [ext_resource type="Texture2D" uid="uid://c8ikarjiy15wj" path="res://Data/Assets/TileSet/HexTilesetv3.png" id="2_tp2pc"]

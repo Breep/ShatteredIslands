@@ -150,7 +150,7 @@ func _all_player_are_ready() -> bool:
 
 
 func _init_families_ref() -> void:
-	_families_ref[Family.FamilyType.Attack] = load("res://Resources/Families/Attack/attack_family.tres")
+	_families_ref[Family.FamilyType.Attack] = load("res://Resources/Families/Attack/attack_family.tres") as Family
 	_families_ref[Family.FamilyType.Rock] = load("res://Resources/Families/Defense/defense_family.tres") as Family
 	_families_ref[Family.FamilyType.Fire] = load("res://Resources/Families/Fire/fire_family.tres") as Family
 	_families_ref[Family.FamilyType.Storm] = load("res://Resources/Families/Storm/storm_family.tres") as Family
