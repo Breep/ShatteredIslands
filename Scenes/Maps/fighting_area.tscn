@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Areas/fighting_area.gd" id="1_7hx7c"]
 [ext_resource type="Texture2D" uid="uid://c8ikarjiy15wj" path="res://Data/Assets/TileSet/HexTilesetv3.png" id="2_tp2pc"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://Scenes/Prefabs/spawn_manager.tscn" id="3_0skvm"]
-[ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Scenes/Character/ccharacter.tscn" id="4_ndbmo"]
+[ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Scenes/Character/character.tscn" id="4_ndbmo"]
 [ext_resource type="Resource" uid="uid://cbcy0wbqkel1q" path="res://Resources/Heros/JohnnyDefault/johnny_default.tres" id="6_nqow8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4qyjf"]
