@@ -76,14 +76,14 @@ func _on_body_entered(body: Node2D) -> void:
 
 # ============================== Public functions ==============================
 
-func set_stats_from_character_stats(character_stats: CharacterStats) -> void:
+func set_stats_from_character_aa_stats(aa_stats: CharacterAutoAttackStats) -> void:
 	if _stats == null:
 		_stats = AutoAttackProjectileStats.new()
 	
 	_stats.speed = 150
-	_stats.damage = character_stats.auto_attack.damage
+	_stats.damage = aa_stats.damage
 	
-	var effects = _get_effects_from_randomization(character_stats)
+	var effects = _get_effects_from_randomization(aa_stats)
 	_stats.is_bouncing = true
 	
 	for effect_name in effects.keys():
@@ -127,9 +127,9 @@ func _is_randomize_modifier_active(chance: float) -> bool:
 	return rng.randf_range(0, 100) <= chance
 
 
-func _get_effects_from_randomization(character_stats: CharacterStats) -> Dictionary:
+func _get_effects_from_randomization(aa_stats: CharacterAutoAttackStats) -> Dictionary:
 	# Adapt critical chance with target vulnerability stacks
-	var critical_chance : float = character_stats.auto_attack.critical_multiplier
+	var critical_chance : float = aa_stats.critical_multiplier
 	critical_chance += get_crit_inc_from_vuln_stacks(_target.stats.vulnerability_stacks)
 	critical_chance = clampf(critical_chance, 0, 100)
 	
@@ -138,26 +138,26 @@ func _get_effects_from_randomization(character_stats: CharacterStats) -> Diction
 	var effects: Dictionary = {
 		ProjectileEffect.POISON: {
 			"is_active": false,
-			"stacks": character_stats.auto_attack.poison_stacks_amount,
-			"chance": character_stats.auto_attack.poison_stacks_chance,
+			"stacks": aa_stats.poison_stacks_amount,
+			"chance": aa_stats.poison_stacks_chance,
 		},
 		ProjectileEffect.VULNERABILTY: {
 			"is_active": false,
-			"stacks": character_stats.auto_attack.vulnerability_stacks_amount,
-			"chance": character_stats.auto_attack.vulnerability_stacks_chance,
+			"stacks": aa_stats.vulnerability_stacks_amount,
+			"chance": aa_stats.vulnerability_stacks_chance,
 		},
 		ProjectileEffect.CRITIC: {
 			"is_active": false,
-			"multiplier": character_stats.auto_attack.critical_multiplier,
+			"multiplier": aa_stats.critical_multiplier,
 			"chance": critical_chance,
 		},
 		ProjectileEffect.BOUNCE: {
 			"is_active": false,
-			"chance": character_stats.auto_attack.bounce_chance,
+			"chance": aa_stats.bounce_chance,
 		},
 		ProjectileEffect.FIRE: {
-			"is_active": character_stats.auto_attack.fire_attack_triggered,
-			"damage": character_stats.auto_attack.fire_attack_damage,
+			"is_active": aa_stats.fire_attack_triggered,
+			"damage": aa_stats.fire_attack_damage,
 		},
 	}
 	

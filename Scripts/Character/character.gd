@@ -42,6 +42,7 @@ var _poison_effects: Array[CharacterEffect]
 @onready var _aa_timer: Timer = $Timers/AutoAttackTimer
 @onready var _character_visual: CharacterVisual = $CharacterVisual
 @onready var _multiplayerSynchroniser: MultiplayerSynchronizer = %MultiplayerSynchronizer
+@onready var _auto_attack_manager: AutoAttackManager = %AutoAttackManager
 
 # ============================== Node base functions ==============================
 
@@ -65,6 +66,7 @@ func _ready() -> void:
 		character.death.connect(_on_death)
 	
 	_apply_all_cards_upgrades()
+	
 
 # ============================== Public functions ==============================
 
@@ -100,10 +102,10 @@ func hit_by_auto_attack(src: Character, aa_stats: AutoAttackProjectileStats):
 	
 	_character_visual.update_health_bar(stats.health, hero.stats.health)
 	
-	# Boucing effect
-	if aa_stats.is_bouncing:
-		aa_stats.is_bouncing = false
-		_create_aa_projectile_from_projectile(aa_stats, src, src.get_closest_enemy_from(self))
+	# Boucing effect TODO rework bounce pour que les projectiles ne soient pas détruits entre deux
+	#if aa_stats.is_bouncing:
+		#aa_stats.is_bouncing = false
+		#_auto_attack_manager.bounce_auto_attack(aa_stats, src, src.get_closest_enemy_from(self))
 	
 	# Poison stack
 	_add_to_effects_buffer(aa_stats, src)
@@ -148,63 +150,6 @@ func _get_closest_ally() -> Character:
 	return closest_ally
 
 
-var __aa_counter: int = 0
-func _auto_attack():
-	if _enemies.is_empty(): 
-		return
-	
-	__aa_counter += 1
-	if stats.auto_attack.fire_attack_activated:
-		if __aa_counter % stats.auto_attack.fire_attack_period == 0:
-			stats.auto_attack.fire_attack_triggered = true
-	
-	if stats.auto_attack.increase_max_hp_activated:
-		if __aa_counter % stats.auto_attack.increase_max_hp_period == 0:
-			stats.health_max += stats.auto_attack.increase_max_hp_amount
-			stats.health += stats.auto_attack.increase_max_hp_amount
-			print("Max hp = ", stats.health_max)
-	
-	if _is_randomize_modifier_active(stats.auto_attack.armor_stacks_chance):
-		stats.armor_stacks += stats.auto_attack.armor_stacks_amount
-		print("Current armor: ", stats.armor_stacks)
-	
-	if _is_randomize_modifier_active(stats.auto_attack.healing_attack_chance):
-		_heal_ally(stats.auto_attack.healing_attack_heal_amount)
-	
-	_create_aa_projectile_from_character(stats, self, _get_closest_enemy())
-	stats.auto_attack.fire_attack_triggered = false
-
-
-# TODO Rework ces 3 fonctions Dé gueu lasse
-func _create_aa_projectile_from_character(character_stats: CharacterStats, source: Character, target: Character) -> void:
-	var projectile: Projectile = _aa_projectile.instantiate()
-	projectile.target = target
-	projectile.set_stats_from_character_stats(character_stats)
-	_spawn_projectile(projectile, source, target)
-
-
-func _create_aa_projectile_from_projectile(projectile_stats: AutoAttackProjectileStats, source: Character, target: Character) -> void:
-	var projectile: Projectile = _aa_projectile.instantiate()
-	projectile.stats = projectile_stats
-	_spawn_projectile(projectile, source, target)
-
-
-func _spawn_projectile(projectile: Projectile, source: Character, target: Character) -> void:
-	if source == null:
-		printerr("Can't create a projectile with no source character")
-		return
-	
-	if target == null:
-		printerr("Can't create a projectile with no target character")
-		return
-	
-	projectile.target = target
-	projectile.source = source
-	_fighting_area.add_child(projectile)
-	projectile.global_position = $ProjectileSpawn.global_position + Vector2(randf_range(-10,10), randf_range(-10,10))
-	projectile.global_rotation = $ProjectileSpawn.global_rotation
- 
-
 func _get_all_scene_characters() -> Array[Character]:
 	var ret: Array[Character]
 	for node in get_tree().get_nodes_in_group("PLAYERS"):
@@ -248,12 +193,7 @@ func _update_auto_attack_speed() -> void:
 	var attack_speed_boost: float = stats.auto_attack.attack_speed_boost + stats.auto_attack.attack_speed_overtime_current
 	var multiply_boost: float = remap(attack_speed_boost, 0, 100, 1, 2) # Convert % in proportional multiple (100% = x2 | 150% = x2.5)
 	stats.auto_attack.attack_speed *= multiply_boost
-	
-	if stats.auto_attack.attack_speed == 0:
-		printerr("attack speed is equal to 0 !")
-		_aa_timer.wait_time = 1.0
-	else:
-		_aa_timer.wait_time = 1.0 / stats.auto_attack.attack_speed
+	_auto_attack_manager.set_auto_attack_speed(stats.auto_attack.attack_speed)
 
 
 func _create_optional_timers() -> void:
@@ -298,19 +238,26 @@ func _is_randomize_modifier_active(chance: float) -> bool:
 func _heal_ally(heal_amount: int) -> void:
 	print("Heal ally")
 
+
+func _start_auto_attack_manager() -> void:
+	if _auto_attack_manager == null:
+		printerr("No AutoAttackManager")
+		return
+	
+	_auto_attack_manager.source = self
+	_auto_attack_manager.projectile_scene = _aa_projectile # TODO Get projectile from hero
+	_auto_attack_manager.aa_stats = stats.auto_attack
+	_auto_attack_manager.enemies = _enemies
+	_auto_attack_manager.set_auto_attack_speed(stats.auto_attack.attack_speed)
+	_auto_attack_manager.start()
+
 # ============================== Signals callbacks ==============================
 
 func _on_all_players_spawned() -> void:
 	_characters = _get_all_scene_characters()
 	_enemies = _get_enemies_from_characters()
 	_allies = _get_allies_from_characters()
-
-
-func _on_auto_attack_timer_timeout() -> void:
-	if _is_dead:
-		return
-	
-	_auto_attack()
+	_start_auto_attack_manager()
 
 
 func _on_moving_timer_timeout() -> void:

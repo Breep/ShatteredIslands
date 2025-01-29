@@ -1,4 +1,4 @@
-class_name AutoAttackCharacterStats
+class_name CharacterAutoAttackStats
 extends Resource
 
 @export var damage: int # Damage of auto attack
