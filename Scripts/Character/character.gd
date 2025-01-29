@@ -3,7 +3,7 @@ extends StaticBody2D
 
 # ============================== Signals ==============================
 
-signal death(deadPlayer)
+signal death(dead_player)
 
 # ============================== Enums ==============================
 
@@ -84,18 +84,28 @@ func get_closest_enemy_from(from_character: Character) -> Character:
 
 
 func hit_by_auto_attack(src: Character, aa_stats: AutoAttackProjectileStats):
-	stats.health -= aa_stats.damage
+	stats.health -= aa_stats.damage # Normal Auto-Attack physical damage
 	if aa_stats.isCritic:
 		_character_visual.damage_popup(aa_stats.damage, DamageType.CRITIC)
 	else:
 		_character_visual.damage_popup(aa_stats.damage, DamageType.NORMAL)
 	
+	# Fire auto-attack magical damage
+	if aa_stats.fire_active:
+		var fire_damage: int = (aa_stats.fire_damage / 100) * stats.health
+		stats.health -= fire_damage
+		_character_visual.damage_popup(fire_damage, DamageType.MAGIC)
+	
+	stats.vulnerability_stacks += aa_stats.vulnerability_stacks
+	
 	_character_visual.update_health_bar(stats.health, hero.stats.health)
 	
-	if aa_stats.isBouncing:
-		aa_stats.isBouncing = false
+	# Boucing effect
+	if aa_stats.is_bouncing:
+		aa_stats.is_bouncing = false
 		_create_aa_projectile_from_projectile(aa_stats, src, src.get_closest_enemy_from(self))
 	
+	# Poison stack
 	_add_to_effects_buffer(aa_stats, src)
 	
 	if stats.health <= 0 and !_is_dead:
@@ -130,35 +140,56 @@ func _get_closest_ally() -> Character:
 	if _allies.is_empty():
 		return null
 	
-	var closestAlly: Character = _allies[0]
+	var closest_ally: Character = _allies[0]
 	for ally in _allies:
-		if (ally.position - position).length_squared() < (closestAlly.position - position).length_squared():
-			closestAlly = ally
+		if (ally.position - position).length_squared() < (closest_ally.position - position).length_squared():
+			closest_ally = ally
 	
-	return closestAlly
+	return closest_ally
 
 
+var __aa_counter: int = 0
 func _auto_attack():
 	if _enemies.is_empty(): 
-		#print("[", multiplayer.get_unique_id(), "] no one to attack")
 		return
 	
+	__aa_counter += 1
+	if stats.auto_attack.fire_attack_activated:
+		if __aa_counter % stats.auto_attack.fire_attack_period == 0:
+			stats.auto_attack.fire_attack_triggered = true
+	
+	if stats.auto_attack.increase_max_hp_activated:
+		if __aa_counter % stats.auto_attack.increase_max_hp_period == 0:
+			stats.health_max += stats.auto_attack.increase_max_hp_amount
+			stats.health += stats.auto_attack.increase_max_hp_amount
+			print("Max hp = ", stats.health_max)
+	
+	if _is_randomize_modifier_active(stats.auto_attack.armor_stacks_chance):
+		stats.armor_stacks += stats.auto_attack.armor_stacks_amount
+		print("Current armor: ", stats.armor_stacks)
+	
+	if _is_randomize_modifier_active(stats.auto_attack.healing_attack_chance):
+		_heal_ally(stats.auto_attack.healing_attack_heal_amount)
+	
 	_create_aa_projectile_from_character(stats, self, _get_closest_enemy())
+	stats.auto_attack.fire_attack_triggered = false
 
 
+# TODO Rework ces 3 fonctions Dé gueu lasse
 func _create_aa_projectile_from_character(character_stats: CharacterStats, source: Character, target: Character) -> void:
 	var projectile: Projectile = _aa_projectile.instantiate()
+	projectile.target = target
 	projectile.set_stats_from_character_stats(character_stats)
-	_fire_projectile(projectile, source, target)
+	_spawn_projectile(projectile, source, target)
 
 
 func _create_aa_projectile_from_projectile(projectile_stats: AutoAttackProjectileStats, source: Character, target: Character) -> void:
 	var projectile: Projectile = _aa_projectile.instantiate()
 	projectile.stats = projectile_stats
-	_fire_projectile(projectile, source, target)
+	_spawn_projectile(projectile, source, target)
 
 
-func _fire_projectile(projectile: Projectile, source: Character, target: Character) -> void:
+func _spawn_projectile(projectile: Projectile, source: Character, target: Character) -> void:
 	if source == null:
 		printerr("Can't create a projectile with no source character")
 		return
@@ -172,7 +203,7 @@ func _fire_projectile(projectile: Projectile, source: Character, target: Charact
 	_fighting_area.add_child(projectile)
 	projectile.global_position = $ProjectileSpawn.global_position + Vector2(randf_range(-10,10), randf_range(-10,10))
 	projectile.global_rotation = $ProjectileSpawn.global_rotation
-
+ 
 
 func _get_all_scene_characters() -> Array[Character]:
 	var ret: Array[Character]
@@ -193,7 +224,7 @@ func _get_enemies_from_characters() -> Array[Character]:
 func _get_allies_from_characters() -> Array[Character]:
 	var ret: Array[Character]
 	for character in _characters:
-		if character.team != team:
+		if character.team == team:
 			ret.append(character)
 	
 	return ret
@@ -255,6 +286,18 @@ func _add_to_effects_buffer(aa_stats: AutoAttackProjectileStats, src: Character)
 		new_effect.source = src
 		_poison_effects.append(new_effect)
 
+
+# TODO move to lib
+func _is_randomize_modifier_active(chance: float) -> bool:
+	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+	rng.randomize()
+	return rng.randf_range(0, 100) <= chance
+
+
+# TODO code heal function
+func _heal_ally(heal_amount: int) -> void:
+	print("Heal ally")
+
 # ============================== Signals callbacks ==============================
 
 func _on_all_players_spawned() -> void:
@@ -297,11 +340,15 @@ func _on_poison_tick_timer_timeout() -> void:
 		_character_visual.damage_popup(poison_damage, DamageType.POISON)
 
 
-func _on_death(deadPlayer: Character) -> void:
-	print("Oh no! ", deadPlayer.name, " is dead :(")
-	_characters.erase(deadPlayer)
-	_enemies.erase(deadPlayer)
-	_allies.erase(deadPlayer)
+func _on_vulnerability_tick_timer_timeout() -> void:
+	stats.vulnerability_stacks -= 0.1 * stats.vulnerability_stacks
+
+
+func _on_death(dead_player: Character) -> void:
+	print("Oh no! ", dead_player.name, " is dead :(")
+	_characters.erase(dead_player)
+	_enemies.erase(dead_player)
+	_allies.erase(dead_player)
 
 # ============================== Optional callbacks ==============================
 

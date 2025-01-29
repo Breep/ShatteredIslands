@@ -15,31 +15,6 @@
 script = ExtResource("2_eh1pu")
 damage = 10
 attack_speed = 1.0
-attack_speed_boost = 0.0
-attack_speed_overtime_current = 0.0
-attack_speed_overtime_min = 0.0
-attack_speed_overtime_max = 0.0
-attack_speed_overtime_duration = 0.0
-critical_chance = 10
-critical_multiplier = 2.0
-poison_stacks_amount = 0
-poison_stacks_chance = 0.0
-vulnerability_stacks_amount = 0
-vulnerability_stacks_chance = 0.0
-bounce_chance = 0.0
-double_attack_chance = 0.0
-healing_attack_heal_amount = 0
-healing_attack_chance = 0.0
-armor_stacks_amount = 0
-armor_stacks_chance = 0.0
-fire_attack_activated = false
-fire_attack_damage = 0.0
-fire_attack_period = 0
-increase_max_hp_activated = false
-increase_max_hp_amount = 0
-increase_max_hp_period = 0
-movement_increase_damage_amount = 0
-movement_increase_damage_distance = 0.0
 
 [sub_resource type="Resource" id="Resource_20vgn"]
 script = ExtResource("3_wyimy")
@@ -163,7 +138,7 @@ crit_move_speed_duration = 0.0
 
 [sub_resource type="Resource" id="Resource_gvftt"]
 script = ExtResource("3_x2gh1")
-health = 100000
+health_max = 1000
 auto_attack = SubResource("Resource_x6ot6")
 defense = SubResource("Resource_20vgn")
 fire = SubResource("Resource_e8lue")

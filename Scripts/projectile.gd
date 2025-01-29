@@ -4,10 +4,11 @@ extends Area2D
 # ============================== Enums ==============================
 
 enum ProjectileEffect {
-	POISON,
-	VULNERABILTY,
-	CRITIC,
-	BOUNCE
+	POISON,       # Add poinson stacks
+	VULNERABILTY, # Add vulnerability stacks
+	CRITIC,       # Do more physical damage
+	BOUNCE,       # Will bounce to an other target keeping all current stats
+	FIRE          # Do more damage bases on target current hp
 }
 
 #TODO Rajouter un projectile_visual
@@ -72,6 +73,43 @@ func _on_body_entered(body: Node2D) -> void:
 		
 		queue_free()
 
+
+# ============================== Public functions ==============================
+
+func set_stats_from_character_stats(character_stats: CharacterStats) -> void:
+	if _stats == null:
+		_stats = AutoAttackProjectileStats.new()
+	
+	_stats.speed = 150
+	_stats.damage = character_stats.auto_attack.damage
+	
+	var effects = _get_effects_from_randomization(character_stats)
+	_stats.is_bouncing = true
+	
+	for effect_name in effects.keys():
+		if effects[effect_name]["is_active"]:
+			match effect_name:
+				ProjectileEffect.POISON:
+					_stats.poison_stacks += effects[ProjectileEffect.POISON]["stacks"]
+					_stats.poison_duration = 15 # TODO Specify this duration thanks to the family lvl
+				ProjectileEffect.VULNERABILTY:
+					_stats.vulnerability_stacks += effects[ProjectileEffect.VULNERABILTY]["stacks"]
+				ProjectileEffect.CRITIC:
+					_stats.isCritic = true
+					_stats.damage *= effects[effect_name]["multiplier"]
+					scale *= 2
+				ProjectileEffect.BOUNCE:
+					_stats.is_bouncing = true
+				ProjectileEffect.FIRE:
+					_stats.fire_active = true
+					_stats.fire_damage = effects[ProjectileEffect.FIRE]["damage"]
+
+
+# TODO Trouver un meilleur endroit pour la fonction de calcul d'augmentation de chance de critic en fonction des stacks de vulnerabilitée
+func get_crit_inc_from_vuln_stacks(vuln_stacks: int) -> float:
+	var tau: float = 100
+	return 100 * (1 - exp(- vuln_stacks / tau))
+
 # ============================== Private functions ==============================
 
 func _move_toward_target(delta: float):
@@ -88,36 +126,15 @@ func _is_randomize_modifier_active(chance: float) -> bool:
 	rng.randomize()
 	return rng.randf_range(0, 100) <= chance
 
-# ============================== Public functions ==============================
 
-func set_stats_from_character_stats(character_stats: CharacterStats) -> void:
-	if _stats == null:
-		_stats = AutoAttackProjectileStats.new()
+func _get_effects_from_randomization(character_stats: CharacterStats) -> Dictionary:
+	# Adapt critical chance with target vulnerability stacks
+	var critical_chance : float = character_stats.auto_attack.critical_multiplier
+	critical_chance += get_crit_inc_from_vuln_stacks(_target.stats.vulnerability_stacks)
+	critical_chance = clampf(critical_chance, 0, 100)
 	
-	_stats.speed = 150
-	_stats.damage = character_stats.auto_attack.damage
+	print("CRIT CHANCE: ", critical_chance, " | Target vuln stacks: ", _target.stats.vulnerability_stacks)
 	
-	var effects = get_effects_from_randomization(character_stats)
-	_stats.isBouncing = true
-	
-	for effect_name in effects.keys():
-		if effects[effect_name]["is_active"]:
-			match effect_name:
-				ProjectileEffect.POISON:
-					_stats.poison_stacks += effects[effect_name]["stacks"]
-					_stats.poison_duration = 15 # TODO Specify this duration thanks to the family lvl
-				ProjectileEffect.VULNERABILTY:
-					_stats.vulnerability_stacks += effects[effect_name]["stacks"]
-					_stats.vulnerability_duration = 5 # TODO Should be a global constant
-				ProjectileEffect.CRITIC:
-					_stats.isCritic = true
-					_stats.damage *= effects[effect_name]["multiplier"]
-					scale *= 2
-				ProjectileEffect.BOUNCE:
-					_stats.isBouncing = true
-
-
-func get_effects_from_randomization(character_stats: CharacterStats) -> Dictionary:
 	var effects: Dictionary = {
 		ProjectileEffect.POISON: {
 			"is_active": false,
@@ -132,15 +149,20 @@ func get_effects_from_randomization(character_stats: CharacterStats) -> Dictiona
 		ProjectileEffect.CRITIC: {
 			"is_active": false,
 			"multiplier": character_stats.auto_attack.critical_multiplier,
-			"chance": character_stats.auto_attack.critical_chance,
+			"chance": critical_chance,
 		},
 		ProjectileEffect.BOUNCE: {
 			"is_active": false,
 			"chance": character_stats.auto_attack.bounce_chance,
 		},
+		ProjectileEffect.FIRE: {
+			"is_active": character_stats.auto_attack.fire_attack_triggered,
+			"damage": character_stats.auto_attack.fire_attack_damage,
+		},
 	}
 	
 	for effect_name in effects.keys():
-		effects[effect_name]["is_active"] = _is_randomize_modifier_active(effects[effect_name]["chance"])
+		if effects[effect_name].has("chance"):
+			effects[effect_name]["is_active"] = _is_randomize_modifier_active(effects[effect_name]["chance"])
 	
 	return effects
