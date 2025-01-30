@@ -13,6 +13,6 @@ backfire_fire_shield_chance = Array[int]([10, 15, 20, 25, 40])
 script = ExtResource("5_hra2n")
 name = "Burned Helmet "
 picture = ExtResource("3_rcke4")
-families = [1, 2]
+families = Array[int]([1, 2])
 rarity = 0
 player_upgrade = SubResource("Resource_lpbkt")

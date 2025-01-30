@@ -13,6 +13,6 @@ lost_hp_armor_gain_period = 2.0
 script = ExtResource("5_qiibp")
 name = "Armor"
 picture = ExtResource("3_ca142")
-families = [1, 5]
+families = Array[int]([1, 5])
 rarity = 0
 player_upgrade = SubResource("Resource_sec0v")

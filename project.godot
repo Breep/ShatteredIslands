@@ -18,6 +18,8 @@ config/features=PackedStringArray("4.3", "Forward Plus")
 
 GameManager="*res://Scripts/Managers/game_manager.gd"
 MultiplayerDeckManager="*res://Scripts/Managers/multiplayer_deck_manager.gd"
+Utils="*res://Scripts/Lib/utils.gd"
+Targetter="*res://Scripts/Lib/targetter.gd"
 
 [display]
 

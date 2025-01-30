@@ -1,5 +1,5 @@
 extends Resource
-class_name DefenseCharacterStats
+class_name CharacterDefenseStats
 
 @export var periodic_armor_stacks_amount: int # Stacks of armor gain every periodic_armor_stacks_period
 @export var periodic_armor_stacks_period: float # Time between 2 gain of stacks of periodic armor (in s)

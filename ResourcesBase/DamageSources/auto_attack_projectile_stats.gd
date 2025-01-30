@@ -5,7 +5,7 @@ var speed: int # Speed of the projectile
 
 var damage: int # Physicial dammage of the projectile
 
-var isCritic: bool # If the projectile is a critical
+var is_critic: bool # If the projectile is a critical
 
 var is_bouncing: bool # If the projectile should bounce on the enemy
 

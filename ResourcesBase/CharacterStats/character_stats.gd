@@ -5,7 +5,7 @@ extends Resource
 var health: int = health_max
 
 @export var auto_attack: CharacterAutoAttackStats
-@export var defense: DefenseCharacterStats
+@export var defense: CharacterDefenseStats
 @export var fire: FireCharacterStats
 @export var storm: StormCharacterStats
 @export var heal: HealCharacterStats

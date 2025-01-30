@@ -1,4 +1,4 @@
-class_name Projectile
+class_name AutoAttackProjectile
 extends Area2D
 
 # ============================== Enums ==============================
@@ -15,44 +15,15 @@ enum ProjectileEffect {
 
 # ============================== Constants ==============================
 
-const _SPEED_MIN: float = 0.3
+const _SPEED_MIN: float = 10
 const _DAMMAGE_MIN: int = 1
 
 # ============================== Public ==============================
-
-var target: Character:
-	get:
-		return _target
-	set(value):
-		if value == null:
-			printerr("Trying to instantiate a projectile with no target !")
-		else:
-			_target = value
-
-var source: Character:
-	get:
-		return _source
-	set(value):
-		if value == null:
-			printerr("Trying to instantiate a projectile with no source !")
-		else:
-			_source = value
-
-var stats: AutoAttackProjectileStats:
-	get:
-		return _stats
-	set(value):
-		if value == null:
-			printerr("Trying to set a projectile stats to null")
-		else:
-			_stats = value
 
 # ============================== Private ==============================
 
 var _source: Character
 var _target: Character
-var _isCritic: bool
-
 var _stats: AutoAttackProjectileStats
 
 # ============================== Node base functions ==============================
@@ -70,13 +41,24 @@ func _on_body_entered(body: Node2D) -> void:
 	if body is Character and body == _target:
 		if _target != null:
 			_target.hit_by_auto_attack(_source, _stats)
+			if _stats.is_bouncing:
+				_target = _source.get_closest_enemy_from(_target) # Set new target to the closest character enemy to the source
+				_stats.is_bouncing = false
+				return
 		
 		queue_free()
 
 
 # ============================== Public functions ==============================
 
-func set_stats_from_character_aa_stats(aa_stats: CharacterAutoAttackStats) -> void:
+func init(source: Character, target: Character, source_aa_stats: CharacterAutoAttackStats) -> void:
+	_source = source
+	_target = target
+	_set_stats_from_character_aa_stats(source_aa_stats)
+
+# ============================== Private functions ==============================
+
+func _set_stats_from_character_aa_stats(aa_stats: CharacterAutoAttackStats) -> void:
 	if _stats == null:
 		_stats = AutoAttackProjectileStats.new()
 	
@@ -95,7 +77,7 @@ func set_stats_from_character_aa_stats(aa_stats: CharacterAutoAttackStats) -> vo
 				ProjectileEffect.VULNERABILTY:
 					_stats.vulnerability_stacks += effects[ProjectileEffect.VULNERABILTY]["stacks"]
 				ProjectileEffect.CRITIC:
-					_stats.isCritic = true
+					_stats.is_critic = true
 					_stats.damage *= effects[effect_name]["multiplier"]
 					scale *= 2
 				ProjectileEffect.BOUNCE:
@@ -106,7 +88,7 @@ func set_stats_from_character_aa_stats(aa_stats: CharacterAutoAttackStats) -> vo
 
 
 # TODO Trouver un meilleur endroit pour la fonction de calcul d'augmentation de chance de critic en fonction des stacks de vulnerabilitée
-func get_crit_inc_from_vuln_stacks(vuln_stacks: int) -> float:
+func _get_crit_inc_from_vuln_stacks(vuln_stacks: int) -> float:
 	var tau: float = 100
 	return 100 * (1 - exp(- vuln_stacks / tau))
 
@@ -114,7 +96,7 @@ func get_crit_inc_from_vuln_stacks(vuln_stacks: int) -> float:
 
 func _move_toward_target(delta: float):
 	if _target == null:
-		printerr("Projectile [", name, "] is alive but with no target")
+		printerr("AutoAttackProjectile [", name, "] is alive but with no target")
 		return
 	
 	var direction: Vector2 = (_target.global_position - global_position).normalized()
@@ -130,10 +112,10 @@ func _is_randomize_modifier_active(chance: float) -> bool:
 func _get_effects_from_randomization(aa_stats: CharacterAutoAttackStats) -> Dictionary:
 	# Adapt critical chance with target vulnerability stacks
 	var critical_chance : float = aa_stats.critical_multiplier
-	critical_chance += get_crit_inc_from_vuln_stacks(_target.stats.vulnerability_stacks)
+	critical_chance += _get_crit_inc_from_vuln_stacks(_target.stats.vulnerability_stacks)
 	critical_chance = clampf(critical_chance, 0, 100)
 	
-	print("CRIT CHANCE: ", critical_chance, " | Target vuln stacks: ", _target.stats.vulnerability_stacks)
+	#print("CRIT CHANCE: ", critical_chance, " | Target vuln stacks: ", _target.stats.vulnerability_stacks)
 	
 	var effects: Dictionary = {
 		ProjectileEffect.POISON: {

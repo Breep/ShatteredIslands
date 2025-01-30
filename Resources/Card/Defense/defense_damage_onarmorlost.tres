@@ -11,8 +11,8 @@ shield_strike_period = 0.75
 
 [resource]
 script = ExtResource("5_o5w06")
-name = "Storm Back"
+name = "Shield strike"
 picture = ExtResource("3_ytbxp")
-families = [1]
+families = Array[int]([1])
 rarity = 1
 player_upgrade = SubResource("Resource_uy2aw")

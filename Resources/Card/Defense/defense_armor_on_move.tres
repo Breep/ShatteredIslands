@@ -13,6 +13,6 @@ movement_armor_stacks_distance = 5
 script = ExtResource("5_xjegs")
 name = "Chest of death"
 picture = ExtResource("3_xb1w0")
-families = [1, 7]
+families = Array[int]([1, 7])
 rarity = 0
 player_upgrade = SubResource("Resource_g7wfn")

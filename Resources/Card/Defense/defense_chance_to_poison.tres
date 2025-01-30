@@ -13,6 +13,6 @@ backfire_poison_stacks = 5
 script = ExtResource("3_fi4ny")
 name = "Poisonous Boots"
 picture = ExtResource("2_dsecd")
-families = [1, 6]
+families = Array[int]([1, 6])
 rarity = 0
 player_upgrade = SubResource("Resource_c3rbj")

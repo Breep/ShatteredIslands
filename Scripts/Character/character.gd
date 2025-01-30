@@ -87,7 +87,7 @@ func get_closest_enemy_from(from_character: Character) -> Character:
 
 func hit_by_auto_attack(src: Character, aa_stats: AutoAttackProjectileStats):
 	stats.health -= aa_stats.damage # Normal Auto-Attack physical damage
-	if aa_stats.isCritic:
+	if aa_stats.is_critic:
 		_character_visual.damage_popup(aa_stats.damage, DamageType.CRITIC)
 	else:
 		_character_visual.damage_popup(aa_stats.damage, DamageType.NORMAL)
@@ -102,11 +102,6 @@ func hit_by_auto_attack(src: Character, aa_stats: AutoAttackProjectileStats):
 	
 	_character_visual.update_health_bar(stats.health, hero.stats.health)
 	
-	# Boucing effect TODO rework bounce pour que les projectiles ne soient pas détruits entre deux
-	#if aa_stats.is_bouncing:
-		#aa_stats.is_bouncing = false
-		#_auto_attack_manager.bounce_auto_attack(aa_stats, src, src.get_closest_enemy_from(self))
-	
 	# Poison stack
 	_add_to_effects_buffer(aa_stats, src)
 	
@@ -115,6 +110,12 @@ func hit_by_auto_attack(src: Character, aa_stats: AutoAttackProjectileStats):
 		_is_dead = true
 
 
+func take_damage(src: Character, damage: int, damage_type: DamageType) -> void:
+	stats.health -= damage
+	_character_visual.damage_popup(damage, damage_type)
+	
+
+# So the SpawnManager can notify when all characters are spawned
 func connect_all_players_spawned_signal(node: Node, signal_name: String) -> void:
 	node.connect(signal_name, _on_all_players_spawned, CONNECT_ONE_SHOT)
 
@@ -124,30 +125,6 @@ func connect_all_players_spawned_signal(node: Node, signal_name: String) -> void
 func _move_to_cell(cell : Vector2):
 	if _is_dead: return
 	position = _fighting_area.get_global_cell_position(cell)
-
-
-func _get_closest_enemy() -> Character:
-	if _enemies.is_empty():
-		return null
-	
-	var closest_enemy: Character = _enemies[0]
-	for enemy in _enemies:
-		if (enemy.position - position).length_squared() < (closest_enemy.position - position).length_squared():
-			closest_enemy = enemy
-	
-	return closest_enemy
-
-
-func _get_closest_ally() -> Character:
-	if _allies.is_empty():
-		return null
-	
-	var closest_ally: Character = _allies[0]
-	for ally in _allies:
-		if (ally.position - position).length_squared() < (closest_ally.position - position).length_squared():
-			closest_ally = ally
-	
-	return closest_ally
 
 
 func _get_all_scene_characters() -> Array[Character]:
@@ -199,16 +176,7 @@ func _update_auto_attack_speed() -> void:
 func _create_optional_timers() -> void:
 	# Gatling Gun
 	if stats.auto_attack.attack_speed_overtime_min != 0:
-		_create_auto_attack_speed_overtime_timer()
-
-
-func _create_auto_attack_speed_overtime_timer() -> void:
-	var timer := Timer.new()
-	timer.wait_time = 1
-	timer.one_shot = false
-	_timers_holder.add_child(timer)
-	timer.connect("timeout", _on_aa_speed_overtime_timer)
-	timer.start()
+		Utils.create_optional_timer(_timers_holder, 1, _on_aa_speed_overtime_timer)
 
 
 # TODO Améliorer cette immonde fonction
@@ -239,17 +207,30 @@ func _heal_ally(heal_amount: int) -> void:
 	print("Heal ally")
 
 
+# ============================== AutoAttackManager ==============================
+
 func _start_auto_attack_manager() -> void:
 	if _auto_attack_manager == null:
 		printerr("No AutoAttackManager")
 		return
 	
-	_auto_attack_manager.source = self
-	_auto_attack_manager.projectile_scene = _aa_projectile # TODO Get projectile from hero
-	_auto_attack_manager.aa_stats = stats.auto_attack
-	_auto_attack_manager.enemies = _enemies
-	_auto_attack_manager.set_auto_attack_speed(stats.auto_attack.attack_speed)
-	_auto_attack_manager.start()
+	_auto_attack_manager.heal_ally_triggered.connect(_on_auto_attack_manager_heal_ally_triggered)
+	_auto_attack_manager.armor_gained.connect(_on_auto_attack_manager_armor_gained)
+	_auto_attack_manager.max_health_gained.connect(_on_auto_attack_manager_max_health_gained)
+	_auto_attack_manager.start(self, _aa_projectile, stats.auto_attack, _enemies)
+
+
+func _on_auto_attack_manager_heal_ally_triggered(heal_amount: int) -> void:
+	print("Heal ally")
+
+
+func _on_auto_attack_manager_armor_gained(armor_stacks: int) -> void:
+	stats.armor_stacks += armor_stacks
+
+
+func _on_auto_attack_manager_max_health_gained(health_amount: int) -> void:
+	stats.health_max += health_amount
+	stats.health += health_amount
 
 # ============================== Signals callbacks ==============================
 
@@ -257,6 +238,7 @@ func _on_all_players_spawned() -> void:
 	_characters = _get_all_scene_characters()
 	_enemies = _get_enemies_from_characters()
 	_allies = _get_allies_from_characters()
+	Targetter.init(self, _characters, _enemies, _allies)
 	_start_auto_attack_manager()
 
 

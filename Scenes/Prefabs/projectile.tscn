@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://ngho1k3k5sa3"]
 
-[ext_resource type="Script" path="res://Scripts/projectile.gd" id="1_jv0hn"]
+[ext_resource type="Script" path="res://Scripts/auto_attack_projectile.gd" id="1_jv0hn"]
 [ext_resource type="Texture2D" uid="uid://cwu8bmw22x36k" path="res://Data/Assets/Fantasy Items/TTRPG-Art-Asset_04.png" id="1_udey6"]
 [ext_resource type="Material" uid="uid://uhso4d51v8jp" path="res://Shaders/Fire_Static.tres" id="2_7rwi4"]
 

@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Hero" load_steps=20 format=3 uid="uid://cbcy0wbqkel1q"]
 
 [ext_resource type="Script" path="res://ResourcesBase/Hero/hero.gd" id="1_rwq1b"]
-[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/auto_attack_stats.gd" id="2_eh1pu"]
-[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/defense_character_stats.gd" id="3_wyimy"]
+[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/character_auto_attack_stats.gd" id="2_eh1pu"]
+[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/character_defense_stats.gd" id="3_wyimy"]
 [ext_resource type="Script" path="res://ResourcesBase/CharacterStats/character_stats.gd" id="3_x2gh1"]
 [ext_resource type="Script" path="res://ResourcesBase/CharacterStats/fire_character_stats.gd" id="4_mu5uk"]
 [ext_resource type="Script" path="res://ResourcesBase/CharacterStats/heal_character_stats.gd" id="5_obul4"]
