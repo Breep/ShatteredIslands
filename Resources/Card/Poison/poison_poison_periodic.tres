@@ -13,6 +13,6 @@ periodic_stacks_period = 2.0
 script = ExtResource("5_e1vh8")
 name = "Death flask"
 picture = ExtResource("3_x2g4o")
-families = [6]
+families = Array[int]([6])
 rarity = 0
 player_upgrade = SubResource("Resource_ge1yw")

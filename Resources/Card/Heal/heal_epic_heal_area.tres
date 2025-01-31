@@ -11,8 +11,8 @@ heal_area_period = 1.0
 
 [resource]
 script = ExtResource("4_28tts")
-name = ""
+name = "Pacific wave"
 picture = ExtResource("2_fqg7r")
-families = [4]
+families = Array[int]([4])
 rarity = 2
 player_upgrade = SubResource("Resource_opqht")

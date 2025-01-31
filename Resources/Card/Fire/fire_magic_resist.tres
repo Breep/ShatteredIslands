@@ -12,6 +12,6 @@ fire_magic_resist = Array[int]([10, 20, 30, 40, 60])
 script = ExtResource("5_mv2c7")
 name = "Magic resist"
 picture = ExtResource("3_gq4w6")
-families = [2]
+families = Array[int]([2])
 rarity = 0
 player_upgrade = SubResource("Resource_k4lqr")

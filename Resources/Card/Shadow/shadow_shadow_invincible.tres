@@ -13,6 +13,6 @@ invincibility_time = Array[float]([0.5, 1.0, 2.0])
 script = ExtResource("5_7e812")
 name = "In the shadow"
 picture = ExtResource("3_yibwf")
-families = [7]
+families = Array[int]([7])
 rarity = 1
 player_upgrade = SubResource("Resource_bglwt")

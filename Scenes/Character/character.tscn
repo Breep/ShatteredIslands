@@ -1,8 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://bbnioyc6ti8wn"]
+[gd_scene load_steps=14 format=3 uid="uid://bbnioyc6ti8wn"]
 
 [ext_resource type="Script" path="res://Scripts/Character/character.gd" id="1_gjax4"]
 [ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Scenes/Character/character_visual.tscn" id="2_c48md"]
 [ext_resource type="PackedScene" uid="uid://b6yg1bhhmnicr" path="res://Scenes/Character/Managers/auto_attack_manager.tscn" id="3_xqqnt"]
+[ext_resource type="PackedScene" uid="uid://bext8rh783yay" path="res://Scenes/Character/Managers/defense_manager.tscn" id="4_yswo2"]
+[ext_resource type="PackedScene" uid="uid://n30ifkjad344" path="res://Scenes/Character/Managers/target_manager.tscn" id="5_3dpx6"]
+[ext_resource type="PackedScene" uid="uid://cl10r3idwllx" path="res://Scenes/Character/Managers/fire_manager.tscn" id="6_7uynl"]
+[ext_resource type="PackedScene" uid="uid://6holmj326e1y" path="res://Scenes/Character/Managers/life_manager.tscn" id="7_m65i6"]
+[ext_resource type="PackedScene" uid="uid://cvihi4los882b" path="res://Scenes/Character/Managers/poison_manager.tscn" id="8_ye6d1"]
+[ext_resource type="PackedScene" uid="uid://bdl1xxjdbeugn" path="res://Scenes/Character/Managers/serenity_manager.tscn" id="9_s1kyf"]
+[ext_resource type="PackedScene" uid="uid://dhah05lihxk4p" path="res://Scenes/Character/Managers/shadow_manager.tscn" id="10_7fxxn"]
+[ext_resource type="PackedScene" uid="uid://bjbfnigvphbfc" path="res://Scenes/Character/Managers/storm_manager.tscn" id="11_u5xad"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lk7gr"]
 size = Vector2(21, 44)
@@ -41,9 +49,35 @@ position = Vector2(13, -23)
 unique_name_in_owner = true
 replication_config = SubResource("SceneReplicationConfig_747th")
 
-[node name="AutoAttackManager" parent="." node_paths=PackedStringArray("projectile_spawn") instance=ExtResource("3_xqqnt")]
+[node name="Managers" type="Node" parent="."]
+
+[node name="AutoAttackManager" parent="Managers" node_paths=PackedStringArray("projectile_spawn") instance=ExtResource("3_xqqnt")]
 unique_name_in_owner = true
-projectile_spawn = NodePath("../ProjectileSpawn")
+projectile_spawn = NodePath("../../ProjectileSpawn")
+
+[node name="DefenseManager" parent="Managers" instance=ExtResource("4_yswo2")]
+unique_name_in_owner = true
+
+[node name="TargetManager" parent="Managers" instance=ExtResource("5_3dpx6")]
+unique_name_in_owner = true
+
+[node name="FireManager" parent="Managers" instance=ExtResource("6_7uynl")]
+unique_name_in_owner = true
+
+[node name="LifeManager" parent="Managers" instance=ExtResource("7_m65i6")]
+unique_name_in_owner = true
+
+[node name="PoisonManager" parent="Managers" instance=ExtResource("8_ye6d1")]
+unique_name_in_owner = true
+
+[node name="SerenityManager" parent="Managers" instance=ExtResource("9_s1kyf")]
+unique_name_in_owner = true
+
+[node name="ShadowManager" parent="Managers" instance=ExtResource("10_7fxxn")]
+unique_name_in_owner = true
+
+[node name="StormManager" parent="Managers" instance=ExtResource("11_u5xad")]
+unique_name_in_owner = true
 
 [connection signal="timeout" from="Timers/MovingTimer" to="." method="_on_moving_timer_timeout"]
 [connection signal="timeout" from="Timers/PoisonTickTimer" to="." method="_on_poison_tick_timer_timeout"]

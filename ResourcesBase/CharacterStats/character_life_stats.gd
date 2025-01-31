@@ -1,4 +1,4 @@
-class_name HpCharacterStats
+class_name CharacterLifeStats
 extends Resource
 
 @export var increase_hp: int # Increase max character hp by this number

@@ -13,6 +13,6 @@ lost_hp_regen_period = 2.0
 script = ExtResource("5_65mes")
 name = "Survivor"
 picture = ExtResource("3_cv08y")
-families = [4, 5]
+families = Array[int]([4, 5])
 rarity = 0
 player_upgrade = SubResource("Resource_4hmnn")

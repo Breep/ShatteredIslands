@@ -1,4 +1,4 @@
-class_name StormCharacterStats
+class_name CharacterStormStats
 extends Resource
 
 @export var periodic_vulnerability_amount: int # amount of vulnerability stack inflicted every period

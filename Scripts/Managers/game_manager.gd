@@ -39,7 +39,7 @@ var _rules: GameRules
 func _ready() -> void:
 	_rules = load("res://Resources/GameRules/NormalGameRules.tres")
 	_init_families_ref()
-	_active_families.append(get_family_from_type(Family.FamilyType.Attack))
+	_active_families.append(get_family_from_type(Family.FamilyType.Fire))
 
 # ============================== Public function ==============================
 
@@ -150,14 +150,14 @@ func _all_player_are_ready() -> bool:
 
 
 func _init_families_ref() -> void:
-	_families_ref[Family.FamilyType.Attack] = load("res://Resources/Families/Attack/attack_family.tres") as Family
-	_families_ref[Family.FamilyType.Rock] = load("res://Resources/Families/Defense/defense_family.tres") as Family
-	_families_ref[Family.FamilyType.Fire] = load("res://Resources/Families/Fire/fire_family.tres") as Family
-	_families_ref[Family.FamilyType.Storm] = load("res://Resources/Families/Storm/storm_family.tres") as Family
-	_families_ref[Family.FamilyType.Serinity] = load("res://Resources/Families/Heal/heal_family.tres") as Family
-	_families_ref[Family.FamilyType.Life] = load("res://Resources/Families/Hp/hp_family.tres") as Family
-	_families_ref[Family.FamilyType.Poison] = load("res://Resources/Families/Poison/poison_family.tres") as Family
-	_families_ref[Family.FamilyType.Shadow] = load("res://Resources/Families/Shadow/shadow_family.tres") as Family
+	_families_ref[Family.FamilyType.Attack] = load("res://Resources/Families/attack_family.tres") as Family
+	_families_ref[Family.FamilyType.Defense] = load("res://Resources/Families/defense_family.tres") as Family
+	_families_ref[Family.FamilyType.Fire] = load("res://Resources/Families/fire_family.tres") as Family
+	_families_ref[Family.FamilyType.Storm] = load("res://Resources/Families/storm_family.tres") as Family
+	_families_ref[Family.FamilyType.Serinity] = load("res://Resources/Families/heal_family.tres") as Family
+	_families_ref[Family.FamilyType.Life] = load("res://Resources/Families/hp_family.tres") as Family
+	_families_ref[Family.FamilyType.Poison] = load("res://Resources/Families/poison_family.tres") as Family
+	_families_ref[Family.FamilyType.Shadow] = load("res://Resources/Families/shadow_family.tres") as Family
 	
 
 	

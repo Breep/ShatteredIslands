@@ -13,6 +13,6 @@ hp_increased_on_move_distance = 5
 script = ExtResource("5_6c776")
 name = "Hearth Speed"
 picture = ExtResource("3_i18qx")
-families = [5, 7]
+families = Array[int]([5, 7])
 rarity = 0
 player_upgrade = SubResource("Resource_k12q6")

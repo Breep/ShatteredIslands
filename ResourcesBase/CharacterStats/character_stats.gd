@@ -2,20 +2,16 @@ class_name CharacterStats
 extends Resource
 
 @export var health_max: int
-var health: int = health_max
+var health: int
 
 @export var auto_attack: CharacterAutoAttackStats
 @export var defense: CharacterDefenseStats
-@export var fire: FireCharacterStats
-@export var storm: StormCharacterStats
-@export var heal: HealCharacterStats
-@export var hp: HpCharacterStats
-@export var poison: PoisonCharacterStats
-@export var shadow: ShadowCharacterStats
-
-# Current armor on the character (like a shield, a second health bar)
-# Decreases by taking damage: 1 damage = 1 armor stack consumed
-var armor_stacks: int = 0 
+@export var fire: CharacterFireStats
+@export var storm: CharacterStormStats
+@export var heal: CharacterHealStats
+@export var hp: CharacterLifeStats
+@export var poison: CharacterPoisonStats
+@export var shadow: CharacterShadowStats
 
 # Current pacify stacks on the hero (reduce auto attack damage)
 # Decreases by attacking: 1 auto attack = 1 pacify stack consumed

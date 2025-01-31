@@ -12,6 +12,6 @@ healing_crit_amount = Array[int]([2, 4, 6, 8, 12])
 script = ExtResource("5_jqdkp")
 name = "Thunder Priest"
 picture = ExtResource("3_1yrog")
-families = [3, 4]
+families = Array[int]([3, 4])
 rarity = 0
 player_upgrade = SubResource("Resource_qx18j")

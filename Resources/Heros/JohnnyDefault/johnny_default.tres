@@ -4,12 +4,12 @@
 [ext_resource type="Script" path="res://ResourcesBase/CharacterStats/character_auto_attack_stats.gd" id="2_eh1pu"]
 [ext_resource type="Script" path="res://ResourcesBase/CharacterStats/character_defense_stats.gd" id="3_wyimy"]
 [ext_resource type="Script" path="res://ResourcesBase/CharacterStats/character_stats.gd" id="3_x2gh1"]
-[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/fire_character_stats.gd" id="4_mu5uk"]
-[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/heal_character_stats.gd" id="5_obul4"]
-[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/hp_character_stats.gd" id="6_i6ku2"]
-[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/poison_character_stats.gd" id="7_awyhu"]
-[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/shadow_character_stats.gd" id="9_kfxgl"]
-[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/storm_character_stats.gd" id="10_8s82d"]
+[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/character_fire_stats.gd" id="4_mu5uk"]
+[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/character_heal_stats.gd" id="5_obul4"]
+[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/character_life_stats.gd" id="6_i6ku2"]
+[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/character_poison_stats.gd" id="7_awyhu"]
+[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/character_shadow_stats.gd" id="9_kfxgl"]
+[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/character_storm_stats.gd" id="10_8s82d"]
 
 [sub_resource type="Resource" id="Resource_x6ot6"]
 script = ExtResource("2_eh1pu")
@@ -18,25 +18,6 @@ attack_speed = 1.0
 
 [sub_resource type="Resource" id="Resource_20vgn"]
 script = ExtResource("3_wyimy")
-periodic_armor_stacks_amount = 0
-periodic_armor_stacks_period = 0.0
-backfire_poison_stacks = 0
-backfire_poison_chance = 0
-backfire_armor_gain_stacks = 0
-backfire_armor_gain_chance = 0
-shield_strike_damage_percent = 0.0
-shield_strike_period = 0.0
-backfire_fire_shield_damage = 0.0
-backfire_fire_shield_chance = 0
-healing_armor_percent = 0
-backfire_vulnerability_stacks = 0
-backfire_vulnerability_chance = 0
-lost_hp_armor_gain_percent = 0
-lost_hp_armor_gain_period = 0.0
-movement_armor_stacks_amount = 0
-movement_armor_stacks_distance = 0
-reduce_damage_received = 0
-reduce_damage_done = 0
 
 [sub_resource type="Resource" id="Resource_e8lue"]
 script = ExtResource("4_mu5uk")
@@ -138,7 +119,7 @@ crit_move_speed_duration = 0.0
 
 [sub_resource type="Resource" id="Resource_gvftt"]
 script = ExtResource("3_x2gh1")
-health_max = 1000
+health_max = 10000
 auto_attack = SubResource("Resource_x6ot6")
 defense = SubResource("Resource_20vgn")
 fire = SubResource("Resource_e8lue")

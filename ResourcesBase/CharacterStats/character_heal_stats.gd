@@ -1,5 +1,5 @@
 extends Resource
-class_name HealCharacterStats
+class_name CharacterHealStats
 
 @export var periodic_heal_amount: int # Amount of heal done to an ally every periodic_heal_period
 @export var periodic_heal_period: int # time between 2 heal from periodic_heal_amount (in s)

@@ -13,6 +13,6 @@ movement_heal_distance = 5
 script = ExtResource("5_n3cvi")
 name = "Doctor Maboul"
 picture = ExtResource("3_hyffj")
-families = [4, 7]
+families = Array[int]([4, 7])
 rarity = 0
 player_upgrade = SubResource("Resource_vn76v")

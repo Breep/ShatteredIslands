@@ -17,7 +17,9 @@ func _ready() -> void:
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 	multiplayer.connected_to_server.connect(_on_connected_to_server)
 	multiplayer.connection_failed.connect(_on_connection_failed)
-	name_edit.text = "Breep"
+	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+	rng.randomize()
+	name_edit.text = "Breep" + str(rng.randi_range(0, 1000))
 	pass
 
 # ============================================

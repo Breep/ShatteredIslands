@@ -14,6 +14,6 @@ trail_period = 1.0
 script = ExtResource("5_u0b0k")
 name = "Trail of fire"
 picture = ExtResource("3_av71y")
-families = [2, 7]
+families = Array[int]([2, 7])
 rarity = 0
 player_upgrade = SubResource("Resource_x0but")

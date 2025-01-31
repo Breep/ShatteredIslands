@@ -12,6 +12,6 @@ hp_increase_hp = Array[int]([100, 200, 300, 400, 700])
 script = ExtResource("5_5ckwg")
 name = "Hearth steel"
 picture = ExtResource("3_qoacq")
-families = [5]
+families = Array[int]([5])
 rarity = 0
 player_upgrade = SubResource("Resource_ov7qb")

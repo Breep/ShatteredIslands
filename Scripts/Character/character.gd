@@ -3,117 +3,89 @@ extends StaticBody2D
 
 # ============================== Signals ==============================
 
-signal death(dead_player)
-
-# ============================== Enums ==============================
-
-enum DamageType {
-	NORMAL,
-	CRITIC,
-	POISON,
-	MAGIC,
-}
-
-# ============================== Export variables ==============================
-
-@export var team: int
-@export var hero: Hero
+signal dead(dead_character: Character)
 
 # ============================== Public variables ==============================
 
+var team: int
+var hero: Hero
 var player: Player
 var stats: CharacterStats # Needs to be public for easier upgrades access
 
+@onready var target_manager: TargetManager = %TargetManager # Needs to be public for easier access for other managers TODO Maybe rework ?
+
 # ============================== Private variables ==============================
 
-var _aa_projectile = load("res://Scenes/Prefabs/projectile.tscn")
-var _fighting_area: FightingArea
-var _characters: Array[Character]
-var _enemies: Array[Character]
-var _allies: Array[Character]
+var _aa_projectile = load("res://Scenes/Prefabs/projectile.tscn") # TODO move to hero
+var _fighting_area: FightingArea # TODO remove
 var _is_dead: bool = false
 var _is_player_character: bool = false
 
-var _poison_effects: Array[CharacterEffect]
+var _poison_effects: Array[PoisonEffect] # TODO move to stats.poison ?
 
 # ============================== Local scene nodes ==============================
 
-@onready var _timers_holder: Node = $Timers
-@onready var _aa_timer: Timer = $Timers/AutoAttackTimer
+@onready var _timers_holder: Node = $Timers # TODO remove
 @onready var _character_visual: CharacterVisual = $CharacterVisual
+
 @onready var _multiplayerSynchroniser: MultiplayerSynchronizer = %MultiplayerSynchronizer
+
+# TODO Instantiate the manager dynamically with the game rules 
 @onready var _auto_attack_manager: AutoAttackManager = %AutoAttackManager
+@onready var _defense_manager: DefenseManager = %DefenseManager
+@onready var _fire_manager: FireManager = %FireManager
 
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
 	_fighting_area = get_tree().get_root().find_child("FightingArea", true, false)
 	stats = hero.stats.duplicate(true) # Copy all hero base stats into a new stat resource
-	_character_visual.update_health_bar(stats.health, hero.stats.health)
-	# TMP !!!!!!!!!!!!!!!!!!!!!!!!!!!
-	if team == 42: 
-		_character_visual.update_name_displayed("Spide Ren'heure")
-		return
-	if team == 43: 
-		_character_visual.update_name_displayed("Alex_Supertramp")
-		return
+	stats.health = stats.health_max
+	_character_visual.update_health_bar(stats.health, stats.health_max)
 	_multiplayerSynchroniser.set_multiplayer_authority(player.id)
 	_is_player_character = _multiplayerSynchroniser.get_multiplayer_authority() == multiplayer.get_unique_id()
 	_character_visual.update_name_displayed(player.name)
-	
-	#connect to all death signals
-	for character in _characters:
-		character.death.connect(_on_death)
-	
+
 	_apply_all_cards_upgrades()
-	
 
 # ============================== Public functions ==============================
 
-func get_closest_enemy_from(from_character: Character) -> Character:
-	if _enemies.is_empty():
-		return null
-	
-	var closest_enemy: Character = _enemies[0]
-	for enemy in _enemies:
-		if enemy != from_character:
-			var enemy_distance = (enemy.position - from_character.position).length_squared()
-			var closest_enemy_distance = (closest_enemy.position - from_character.position).length_squared()
-			if enemy_distance < closest_enemy_distance:
-				closest_enemy = enemy
-	
-	return closest_enemy
+# TODO Ajouter un percent_type pour savoir si on calcule les dégat sur base de vie max/ vie actuelle ou vie perdu
+func take_damage_percent(source: Character, damage_percent: float, damage_type: Utils.DamageType) -> void:
+	var damage = stats.health * damage_percent  / 100.0
+	take_damage_flat(source, damage, damage_type)
 
 
-func hit_by_auto_attack(src: Character, aa_stats: AutoAttackProjectileStats):
-	stats.health -= aa_stats.damage # Normal Auto-Attack physical damage
-	if aa_stats.is_critic:
-		_character_visual.damage_popup(aa_stats.damage, DamageType.CRITIC)
-	else:
-		_character_visual.damage_popup(aa_stats.damage, DamageType.NORMAL)
+func take_damage_flat(source: Character, damage: int, damage_type: Utils.DamageType) -> void:
+	if _fire_manager != null:
+		damage = _fire_manager.get_reduced_damage_taken_from(source, damage, damage_type)
 	
-	# Fire auto-attack magical damage
-	if aa_stats.fire_active:
-		var fire_damage: int = (aa_stats.fire_damage / 100) * stats.health
-		stats.health -= fire_damage
-		_character_visual.damage_popup(fire_damage, DamageType.MAGIC)
+	if _defense_manager != null:
+		damage = _defense_manager.get_reduced_damage_taken_from(source, damage, damage_type)
 	
-	stats.vulnerability_stacks += aa_stats.vulnerability_stacks
-	
-	_character_visual.update_health_bar(stats.health, hero.stats.health)
-	
-	# Poison stack
-	_add_to_effects_buffer(aa_stats, src)
-	
-	if stats.health <= 0 and !_is_dead:
-		death.emit(self)
-		_is_dead = true
-
-
-func take_damage(src: Character, damage: int, damage_type: DamageType) -> void:
 	stats.health -= damage
 	_character_visual.damage_popup(damage, damage_type)
-	
+	_character_visual.update_health_bar(stats.health, stats.health_max)
+	print(stats.health)
+	if stats.health <= 0 and !_is_dead:
+		dead.emit(self)
+		_is_dead = true
+		_auto_attack_manager.stop()
+
+
+func take_poison_stacks(source: Character, poison_stacks: int, poison_duration: int) -> void:
+	_add_to_poison_effects(source, poison_stacks, poison_duration)
+
+
+func take_condition_stacks(source: Character, stacks_number: int, stack_type: Utils.StackType) -> void:
+	match stack_type:
+		Utils.StackType.POISON:
+			printerr("Should use take_poison_stacks()")
+			return
+		Utils.StackType.VULNERABILITY:
+			stats.vulnerability_stacks += stacks_number
+			return
+
 
 # So the SpawnManager can notify when all characters are spawned
 func connect_all_players_spawned_signal(node: Node, signal_name: String) -> void:
@@ -127,37 +99,13 @@ func _move_to_cell(cell : Vector2):
 	position = _fighting_area.get_global_cell_position(cell)
 
 
-func _get_all_scene_characters() -> Array[Character]:
-	var ret: Array[Character]
-	for node in get_tree().get_nodes_in_group("PLAYERS"):
-		ret.append(node as Character)
-	return ret
-
-
-func _get_enemies_from_characters() -> Array[Character]:
-	var ret: Array[Character]
-	for character in _characters:
-		if character.team != team:
-			ret.append(character)
-	
-	return ret
-
-
-func _get_allies_from_characters() -> Array[Character]:
-	var ret: Array[Character]
-	for character in _characters:
-		if character.team == team:
-			ret.append(character)
-	
-	return ret
- 
-
 func _apply_all_cards_upgrades() -> void:
 	if player.deck == null:
 		printerr("No deck on the player")
 		return
 	
 	stats = hero.stats.duplicate(true) # Reset stats
+	stats.health = stats.health_max
 	for card in player.deck.cardPile:
 		card.player_upgrade.apply(self, card.lvl)
 	
@@ -179,27 +127,20 @@ func _create_optional_timers() -> void:
 		Utils.create_optional_timer(_timers_holder, 1, _on_aa_speed_overtime_timer)
 
 
-# TODO Améliorer cette immonde fonction
-func _add_to_effects_buffer(aa_stats: AutoAttackProjectileStats, src: Character) -> void:
-	if aa_stats.poison_stacks != 0:
-		for effect in _poison_effects:
-			if (effect.type == CharacterEffect.EffectType.POISON and effect.source == src) and effect.ticks_left == aa_stats.poison_duration:
-				effect.number += aa_stats.poison_stacks
-				return
-		
-		var new_effect := CharacterEffect.new()
-		new_effect.type = CharacterEffect.EffectType.POISON
-		new_effect.number = aa_stats.poison_stacks
-		new_effect.ticks_left = aa_stats.poison_duration
-		new_effect.source = src
-		_poison_effects.append(new_effect)
-
-
-# TODO move to lib
-func _is_randomize_modifier_active(chance: float) -> bool:
-	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
-	rng.randomize()
-	return rng.randf_range(0, 100) <= chance
+func _add_to_poison_effects(source: Character, poison_stacks: int, poison_duration: int) -> void:
+	if poison_stacks == 0:
+		return
+	
+	for effect in _poison_effects:
+		if effect.source == source and effect.ticks_left == poison_duration:
+			effect.stacks_number += poison_stacks
+			return
+	
+	var new_effect := PoisonEffect.new()
+	new_effect.stacks_number = poison_stacks
+	new_effect.ticks_left = poison_duration
+	new_effect.source = source
+	_poison_effects.append(new_effect)
 
 
 # TODO code heal function
@@ -217,7 +158,7 @@ func _start_auto_attack_manager() -> void:
 	_auto_attack_manager.heal_ally_triggered.connect(_on_auto_attack_manager_heal_ally_triggered)
 	_auto_attack_manager.armor_gained.connect(_on_auto_attack_manager_armor_gained)
 	_auto_attack_manager.max_health_gained.connect(_on_auto_attack_manager_max_health_gained)
-	_auto_attack_manager.start(self, _aa_projectile, stats.auto_attack, _enemies)
+	_auto_attack_manager.start(self, _aa_projectile, stats.auto_attack)
 
 
 func _on_auto_attack_manager_heal_ally_triggered(heal_amount: int) -> void:
@@ -225,31 +166,53 @@ func _on_auto_attack_manager_heal_ally_triggered(heal_amount: int) -> void:
 
 
 func _on_auto_attack_manager_armor_gained(armor_stacks: int) -> void:
-	stats.armor_stacks += armor_stacks
+	stats.defense.armor_stacks += armor_stacks
 
 
 func _on_auto_attack_manager_max_health_gained(health_amount: int) -> void:
 	stats.health_max += health_amount
 	stats.health += health_amount
 
+# ============================== DefenseManager ==============================
+
+func _start_defense_manager() -> void:
+	if _defense_manager == null:
+		printerr("No DefenseManager")
+		return
+	
+	_defense_manager.armor_based_on_lost_hp_gained.connect(_on_defense_manager_armor_based_on_lost_hp_gained)
+	_defense_manager.start(self, stats.defense)
+
+
+func _on_defense_manager_armor_based_on_lost_hp_gained(percent_of_lost_hp: float) -> void:
+	var lost_hp: float = stats.health_max - stats.health
+	stats.defense.armor_stacks += (lost_hp * percent_of_lost_hp / 100.0) as int
+
+# ============================== FireManager ==============================
+
+func _start_fire_manager() -> void:
+	if _fire_manager == null:
+		printerr("No FireManager")
+		return
+	
+	_fire_manager.start(self, stats.fire)
+
 # ============================== Signals callbacks ==============================
 
 func _on_all_players_spawned() -> void:
-	_characters = _get_all_scene_characters()
-	_enemies = _get_enemies_from_characters()
-	_allies = _get_allies_from_characters()
-	Targetter.init(self, _characters, _enemies, _allies)
+	target_manager.init(self)
+	
+	for character in target_manager.get_all_characters():
+		character.dead.connect(_on_character_dead)
+	
 	_start_auto_attack_manager()
+	_start_defense_manager()
+	_start_fire_manager()
 
 
 func _on_moving_timer_timeout() -> void:
 	if _is_dead or not _is_player_character:
 		return
-	
-	# TMP !!!!!!!!!!!!!!!!!!!!!!!!!!!
-	if team == 42: return
-	# TMP !!!!!!!!!!!!!!!!!!!!!!!!!!!
-	if team == 43: return
 	
 	if _fighting_area.is_selection_active:
 		_move_to_cell(_fighting_area.selection_cell)
@@ -260,27 +223,25 @@ func _on_poison_tick_timer_timeout() -> void:
 	for effect in _poison_effects:
 		if effect.ticks_left > 0:
 			effect.ticks_left -= 1
-			poison_damage += effect.number
+			poison_damage += effect.stacks_number
 		else:
 			_poison_effects.erase(effect)
 	
 	if poison_damage > 0:
-		stats.health -= poison_damage
-		_character_visual.damage_popup(poison_damage, DamageType.POISON)
+		take_damage_flat(null, poison_damage, Utils.DamageType.POISON)
 
 
 func _on_vulnerability_tick_timer_timeout() -> void:
 	stats.vulnerability_stacks -= 0.1 * stats.vulnerability_stacks
 
 
-func _on_death(dead_player: Character) -> void:
-	print("Oh no! ", dead_player.name, " is dead :(")
-	_characters.erase(dead_player)
-	_enemies.erase(dead_player)
-	_allies.erase(dead_player)
+func _on_character_dead(dead_character: Character) -> void:
+	print("Oh no! ", dead_character.player.name, " is dead :(")
+	target_manager.remove_character(dead_character)
 
 # ============================== Optional callbacks ==============================
 
+# TODO Move this to the auto attack manager
 var __aa_speed_overtime_ticks: int = 0 # static variable for _on_aa_speed_overtime_timer()
 func _on_aa_speed_overtime_timer() -> void:
 	var attack_speed_overtime_current = remap(__aa_speed_overtime_ticks, \

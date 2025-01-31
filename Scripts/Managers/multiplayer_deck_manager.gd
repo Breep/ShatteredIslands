@@ -16,14 +16,19 @@ signal shop_deck_shuffled() # Server only
 
 # ============================== Public ==============================
 
-var shop_deck: ShopDeck # Server only
-var cards_given_to_players: Dictionary # { int, ShopDeck } # Server only
+# [Server only] All the cards of the shop
+# Only the server knows what is inside the shop deck, client can only ask to draw and/or put back cards in it
+# TODO Make the shopdeck more clever so it doesnt add more than it has given to clients
+var shop_deck: ShopDeck
 
 # ============================== Private ==============================
 
-var _cards_refs: Array[Card]
-var _cards_drawn: Array[Card] # Set by the server for all
-var _is_ready: bool = false # Server only
+var _cards_refs: Array[Card] # Array of ALL current game cards with no duplicate
+
+# Array of cards drawn by the server when the client ask for cards
+# Used to communicate between 2 async rpc
+var _cards_drawn: Array[Card]
+var _is_ready: bool = false # [Server only] Used to know if the server can start to answer clients
 
 # ============================== Node base functions ==============================
 

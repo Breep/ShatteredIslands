@@ -1,4 +1,4 @@
-class_name ShadowCharacterStats
+class_name CharacterShadowStats
 extends Resource
 
 @export var shadow_bolt_damage: int # Damage of the shadow bolt

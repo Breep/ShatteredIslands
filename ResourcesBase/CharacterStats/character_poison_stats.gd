@@ -1,4 +1,4 @@
-class_name PoisonCharacterStats
+class_name CharacterPoisonStats
 extends Resource
 
 @export var periodic_stacks_number: int # Number of stack applied each tick

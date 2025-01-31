@@ -24,7 +24,7 @@ func update_name_displayed(player_name: String) -> void:
 	_name_displayed.text = player_name
 
 
-func damage_popup(amount: float, damage_type: Character.DamageType):
+func damage_popup(amount: float, damage_type: Utils.DamageType):
 	var popup = damage_popup_scene.instantiate()
 	var target_position = Vector2(randf_range(10,30), randf_range(10,-30)) 
 	popup.text = str(amount)
@@ -32,11 +32,9 @@ func damage_popup(amount: float, damage_type: Character.DamageType):
 	popup.global_position = global_position + target_position
 	popup.z_index = 1
 	match damage_type:
-		Character.DamageType.POISON:
+		Utils.DamageType.POISON:
 			popup.set("theme", poison_popup_theme)
-		Character.DamageType.NORMAL:
+		Utils.DamageType.PHYSICAL:
 			popup.set("theme", normal_popup_theme)
-		Character.DamageType.CRITIC:
-			popup.set("theme", critic_popup_theme)
-		Character.DamageType.MAGIC:
+		Utils.DamageType.MAGIC:
 			popup.set("theme", magic_popup_theme)

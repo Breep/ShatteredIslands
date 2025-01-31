@@ -13,6 +13,6 @@ movement_stacks_distance = 5
 script = ExtResource("5_mjh4g")
 name = "Poison evade"
 picture = ExtResource("3_nv6o6")
-families = [6, 7]
+families = Array[int]([6, 7])
 rarity = 0
 player_upgrade = SubResource("Resource_fdr5c")

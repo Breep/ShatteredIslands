@@ -13,6 +13,6 @@ poison_fire_stacks_lost = 50
 script = ExtResource("5_an8pu")
 name = "Poison on fire"
 picture = ExtResource("3_bvqb7")
-families = [2, 6]
+families = Array[int]([2, 6])
 rarity = 0
 player_upgrade = SubResource("Resource_yvd5k")

@@ -12,6 +12,6 @@ crit_poison_amount = Array[int]([2, 4, 6, 8, 12])
 script = ExtResource("5_exef2")
 name = "Poisonous lightning"
 picture = ExtResource("3_6l3lh")
-families = [3, 6]
+families = Array[int]([3, 6])
 rarity = 0
 player_upgrade = SubResource("Resource_qfdgg")

@@ -3,7 +3,7 @@ extends Resource
 
 enum FamilyType {
 	Attack,
-	Rock,
+	Defense,
 	Fire,
 	Storm,
 	Serinity,

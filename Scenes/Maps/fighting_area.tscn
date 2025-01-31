@@ -1,10 +1,9 @@
-[gd_scene load_steps=12 format=4 uid="uid://bohooo4bbgxnh"]
+[gd_scene load_steps=11 format=4 uid="uid://bohooo4bbgxnh"]
 
 [ext_resource type="Script" path="res://Scripts/Areas/fighting_area.gd" id="1_7hx7c"]
 [ext_resource type="Texture2D" uid="uid://c8ikarjiy15wj" path="res://Data/Assets/TileSet/HexTilesetv3.png" id="2_tp2pc"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://Scenes/Prefabs/spawn_manager.tscn" id="3_0skvm"]
 [ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Scenes/Character/character.tscn" id="4_ndbmo"]
-[ext_resource type="Resource" uid="uid://cbcy0wbqkel1q" path="res://Resources/Heros/JohnnyDefault/johnny_default.tres" id="6_nqow8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4qyjf"]
 texture = ExtResource("2_tp2pc")
@@ -258,7 +257,7 @@ tile_set = SubResource("TileSet_c1v38")
 position = Vector2(279, 196)
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 60.0
+wait_time = 10.0
 one_shot = true
 autostart = true
 
@@ -279,15 +278,5 @@ position = Vector2(377, 193)
 [node name="SpawnManager" parent="." node_paths=PackedStringArray("spawns") instance=ExtResource("3_0skvm")]
 spawns = [NodePath("../Spawns/0"), NodePath("../Spawns/1"), NodePath("../Spawns/2"), NodePath("../Spawns/3")]
 character_scene = ExtResource("4_ndbmo")
-
-[node name="Character" parent="." instance=ExtResource("4_ndbmo")]
-position = Vector2(407, 62)
-team = 42
-hero = ExtResource("6_nqow8")
-
-[node name="Character2" parent="." instance=ExtResource("4_ndbmo")]
-position = Vector2(350, 179)
-team = 43
-hero = ExtResource("6_nqow8")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

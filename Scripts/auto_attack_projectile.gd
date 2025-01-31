@@ -18,8 +18,6 @@ enum ProjectileEffect {
 const _SPEED_MIN: float = 10
 const _DAMMAGE_MIN: int = 1
 
-# ============================== Public ==============================
-
 # ============================== Private ==============================
 
 var _source: Character
@@ -40,14 +38,24 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body is Character and body == _target:
 		if _target != null:
-			_target.hit_by_auto_attack(_source, _stats)
+			_target.take_damage_flat(_source, _stats.damage, Utils.DamageType.PHYSICAL)
+			if _stats.fire_active:
+				_target.take_damage_percent(_source, _stats.fire_damage, Utils.DamageType.MAGIC)
+			
+			if _stats.poison_stacks > 0:
+				_target.take_poison_stacks(_source, _stats.poison_stacks, _stats.poison_duration)
+			
+			if _stats.vulnerability_stacks > 0:
+				_target.take_condition_stacks(_source, _stats.vulnerability_stacks, Utils.StackType.VULNERABILITY)
+			
 			if _stats.is_bouncing:
-				_target = _source.get_closest_enemy_from(_target) # Set new target to the closest character enemy to the source
+				_target = _source.target_manager.get_closest_enemy_from(_target) # Set new target to the closest character enemy to the source
+				if _target == null:
+					queue_free()
 				_stats.is_bouncing = false
 				return
 		
 		queue_free()
-
 
 # ============================== Public functions ==============================
 
@@ -102,11 +110,6 @@ func _move_toward_target(delta: float):
 	var direction: Vector2 = (_target.global_position - global_position).normalized()
 	position += direction * _stats.speed * delta
 	look_at(_target.global_position)
-	
-func _is_randomize_modifier_active(chance: float) -> bool:
-	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
-	rng.randomize()
-	return rng.randf_range(0, 100) <= chance
 
 
 func _get_effects_from_randomization(aa_stats: CharacterAutoAttackStats) -> Dictionary:
@@ -145,6 +148,6 @@ func _get_effects_from_randomization(aa_stats: CharacterAutoAttackStats) -> Dict
 	
 	for effect_name in effects.keys():
 		if effects[effect_name].has("chance"):
-			effects[effect_name]["is_active"] = _is_randomize_modifier_active(effects[effect_name]["chance"])
+			effects[effect_name]["is_active"] = Utils.is_randomize_modifier_active(effects[effect_name]["chance"])
 	
 	return effects

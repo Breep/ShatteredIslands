@@ -13,6 +13,6 @@ lost_hp_crit_multiplier_hp_number = 100
 script = ExtResource("5_js5vy")
 name = "The last danse"
 picture = ExtResource("3_qmrw6")
-families = [3, 5]
+families = Array[int]([3, 5])
 rarity = 0
 player_upgrade = SubResource("Resource_wrpr1")

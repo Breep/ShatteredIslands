@@ -13,6 +13,6 @@ hp_fire_period = 2.0
 script = ExtResource("5_y1hlw")
 name = "Hearth of fire"
 picture = ExtResource("3_ed4i4")
-families = [2]
+families = Array[int]([2, 5])
 rarity = 0
 player_upgrade = SubResource("Resource_p58c1")

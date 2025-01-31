@@ -21,8 +21,7 @@ var _source: Character # Ref to character owner
 var _aa_stats: CharacterAutoAttackStats # Ref to the owner auto attack stats
 var _projectile_scene: PackedScene # Ref to the AutoAttackProjectile packed scene
 var _forced_target: Character # TODO Unused now, maybe for a futur hero that can taunt ?
-var _enemies: Array[Character] # Ref to all enemies of the owner in the battlefield
-var _attack_strategy: Targetter.TargettingStrategy = Targetter.TargettingStrategy.CLOSEST # The algo used to find the target
+var _attack_strategy: TargetManager.TargettingStrategy = TargetManager.TargettingStrategy.CLOSEST # The algo used to find the target
 
 # ============================== Local scene nodes ==============================
 
@@ -30,21 +29,16 @@ var _attack_strategy: Targetter.TargettingStrategy = Targetter.TargettingStrateg
 
 # ============================== Public functions ==============================
 
-func start(source: Character,
-		projectile_scene: PackedScene,
-		aa_stats: CharacterAutoAttackStats,
-		enemies: Array[Character]) -> void:
-	if aa_stats == null:
-		printerr("AutoAttackManager: aa_stats undef")
+func start(source: Character, projectile_scene: PackedScene, aa_stats: CharacterAutoAttackStats) -> void:
+	print("AutoAttackManager: Starting")
+	if source == null:
+		printerr("AutoAttackManager: source undef")
 		return
 	if projectile_scene == null:
 		printerr("AutoAttackManager: projectile_scene undef")
 		return
-	if enemies.is_empty():
-		push_warning("AutoAttackManager: no enemies")
-		return
-	if source == null:
-		printerr("AutoAttackManager: source undef")
+	if aa_stats == null:
+		printerr("AutoAttackManager: aa_stats undef")
 		return
 	if projectile_spawn == null:
 		printerr("AutoAttackManager: projectile_spawn undef")
@@ -53,9 +47,13 @@ func start(source: Character,
 	_source = source
 	_projectile_scene = projectile_scene
 	_aa_stats = aa_stats
-	_enemies = enemies
 	set_auto_attack_speed(_aa_stats.attack_speed)
 	_auto_attack_timer.start()
+
+
+func stop() -> void:
+	print("AutoAttackManager: Stopping")
+	_auto_attack_timer.stop()
 
 
 func set_auto_attack_speed(attack_speed: float) -> void:
@@ -67,7 +65,7 @@ func set_auto_attack_speed(attack_speed: float) -> void:
 
 # ============================== Private functions ==============================
 
-func _auto_attack():
+func _auto_attack(target: Character):
 	aa_counter += 1
 	
 	# Fire sword
@@ -81,33 +79,28 @@ func _auto_attack():
 			max_health_gained.emit(_aa_stats.increase_max_hp_amount)
 	
 	# Sword armor
-	if _is_randomize_modifier_active(_aa_stats.armor_stacks_chance):
+	if Utils.is_randomize_modifier_active(_aa_stats.armor_stacks_chance):
 		armor_gained.emit(_aa_stats.armor_stacks_amount)
 	
 	# Knife of terror
-	if _is_randomize_modifier_active(_aa_stats.healing_attack_chance):
+	if Utils.is_randomize_modifier_active(_aa_stats.healing_attack_chance):
 		heal_ally_triggered.emit(_aa_stats.healing_attack_heal_amount)
 	
-	_spawn_projectile()
+	_spawn_projectile(target)
 	_aa_stats.fire_attack_triggered = false
 
 
-func _spawn_projectile() -> void:
+func _spawn_projectile(target: Character) -> void:
 	var projectile: AutoAttackProjectile = _projectile_scene.instantiate()
-	projectile.init(_source, Targetter.get_target(_attack_strategy), _aa_stats)
-	get_tree().root.add_child(projectile)
+	projectile.init(_source, target, _aa_stats)
+	get_tree().current_scene.add_child(projectile)
 	projectile.global_position = projectile_spawn.global_position + Vector2(randf_range(-10,10), randf_range(-10,10))
-
-
-func _is_randomize_modifier_active(chance: float) -> bool: # TODO Move to lib
-	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
-	rng.randomize()
-	return rng.randf_range(0, 100) <= chance
-
-
-
 
 # ============================== Callbacks functions ==============================
 
 func _on_auto_attack_timer_timeout() -> void:
-	_auto_attack()
+	var target =  _source.target_manager.get_target(_attack_strategy)
+	if target == null:
+		return
+	
+	_auto_attack(target)

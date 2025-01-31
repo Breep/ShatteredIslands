@@ -14,6 +14,6 @@ poison_cloud_range = 4
 script = ExtResource("4_j5brq")
 name = "Poison cloud"
 picture = ExtResource("2_huqdi")
-families = [6]
+families = Array[int]([6])
 rarity = 1
 player_upgrade = SubResource("Resource_n6882")

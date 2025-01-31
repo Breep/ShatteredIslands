@@ -12,6 +12,6 @@ poison_resist = Array[int]([7, 14, 21, 28, 50])
 script = ExtResource("4_4bt36")
 name = "Antidot"
 picture = ExtResource("3_3i2rc")
-families = [6]
+families = Array[int]([6])
 rarity = 0
 player_upgrade = SubResource("Resource_y1ptq")
