@@ -33,15 +33,28 @@ func debug_print() -> void:
 
 # ============================== Private function ==============================
 
-func _add_or_improve_card(new_card: Card) -> void:
+func _add_or_improve_card(new_card_ref: Card) -> void:
 	for card in _cardPile:
-		if card.name == new_card.name:
+		if card.name == new_card_ref.name:
 			#print("UPGRADING ", new_card.name)
-			if new_card.lvl > card.lvl:
+			if card.lvl < _get_lvl_max_of_card_rarity(card.rarity):
 				card.lvl += 1
 			else:
-				printerr("Trying to upgrade a card but with a lower lvl")
+				printerr("Trying to upgrade an already maximized card")
 			return
 
-	#print("ADDING NEW CARD ", new_card.name)
-	_cardPile.append(new_card.duplicate())
+	print("ADDING NEW CARD ", new_card_ref.name)
+	var new_card = new_card_ref.duplicate()
+	new_card.lvl = 1
+	_cardPile.append(new_card)
+
+
+func _get_lvl_max_of_card_rarity(card_rarity: Card.Rarity) -> int:
+	match card_rarity:
+		Card.Rarity.COMMON:
+			return 5
+		Card.Rarity.RARE:
+			return 3
+		Card.Rarity.EPIC:
+			return 1
+	return 0

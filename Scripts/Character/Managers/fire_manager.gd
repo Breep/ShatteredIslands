@@ -25,6 +25,7 @@ func start(source: Character, fire_stats: CharacterFireStats) -> void:
 	_source = source
 	_fire_stats = fire_stats
 	_create_optional_timers()
+	_lanch_optional_spells()
 
 
 func stop() -> void:
@@ -43,8 +44,14 @@ func get_reduced_damage_taken_from(damage_source: Character, damage: int, damage
 
 func _create_optional_timers() -> void:
 	# Fire dagger bolt
-	if _fire_stats.firebolt_damage > 0:
+	if _fire_stats.firebolt_activated:
 		_optional_timers.append(Utils.create_optional_timer(self, _fire_stats.firebolt_period, _on_firebolt_timer_timeout))
+
+
+func _lanch_optional_spells() -> void:
+	# Ring of fire healing
+	if _fire_stats.healing_fire_area_activated:
+		pass
 
 # ============================== Callbacks functions ==============================
 

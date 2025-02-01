@@ -20,13 +20,13 @@ func _ready() -> void:
 	# tmp connect button signals
 	# TODO make it in a separate function that can handle a custom number of button
 	for i in 3:
-		var cardButton = _card_container.get_node(str(i)) as CardButton
-		cardButton.connect("leftClick", _on_card_shop_button_pressed, CONNECT_ONE_SHOT)
+		var card_button = _card_container.get_node(str(i)) as CardButton
+		card_button.connect("card_selected", _on_card_shop_button_pressed, CONNECT_ONE_SHOT)
 
 
 func _exit_tree() -> void:
 	for card in _card_displayed:
-		MultiplayerDeckManager.add_card(card)
+		MultiplayerDeckManager.put_card_back_in_cardshop(card)
 
 
 func _on_back_pressed() -> void:
@@ -34,39 +34,36 @@ func _on_back_pressed() -> void:
 	$".".hide()
 
 
-func _on_card_shop_button_pressed(card: Card) -> void:
-	_add_card_to_player_deck(card)
+func _on_card_shop_button_pressed(card_button_selected: CardButton, card: Card) -> void:
+	_try_buy_card(card_button_selected, card)
 
 # ============================== Private functions ==============================
 
-func _add_card_to_player_deck(card: Card) -> void:
-	var cardButton_clicked: CardButton
+# Rework du bouzin
+# L'idée c'est: on clique sur une carte, on prévient le serveur qu'on a cliqué sur la carte
+# Le serveur vérifie qu'on a de quoi payer la carte, si c'est ok le serveur prévient TOUS
+# les joueurs que le joueurA ajoute cette carte dans son deck, puis remet les 2 autres cartes dans
+# le deck du shop. ça implique que le serveur DOIT retenir quel joueur a quoi comme carte dans son shop
+
+# Try to buy a card for the local player
+# It will ask the server for permission, if granted, all other players will be notified
+func _try_buy_card(card_button_selected: CardButton, card: Card) -> void:
 	if _local_player.deck == null:
 		printerr("Can't update shop cards, there is no player_deck")
-		_reconnect_to_card_signal(cardButton_clicked)
+		_reconnect_to_card_signal(card_button_selected)
 		return
 	
-	if _local_player.gold < 1:
+	if _local_player.gold < 100:
 		print("Can't pay the card")
-		_reconnect_to_card_signal(cardButton_clicked)
+		_reconnect_to_card_signal(card_button_selected)
 		return
 	
-	_local_player.gold -= 1
-	_local_player.deck.add_card(card)
-	var remaining_cards = []
-	for i in 3:
-		var cardButton = _card_container.get_node(str(i)) as CardButton
-		if cardButton.visible:
-			if cardButton.card.name != card.name:
-				remaining_cards.append(cardButton.card)
-			else:
-				cardButton_clicked = cardButton
+	var buy_ok = await MultiplayerDeckManager.try_buy_card_for_local_player(card)
 	
-	for remaining_card in remaining_cards:
-		MultiplayerDeckManager.add_card(remaining_card)
+	if buy_ok:
+		await _update_shop_cards_displayed()
 	
-	await _update_shop_cards_displayed()
-	_reconnect_to_card_signal(cardButton_clicked)
+	_reconnect_to_card_signal(card_button_selected)
 
 
 func _update_shop_cards_displayed() -> void:
@@ -86,5 +83,5 @@ func _adapt_cards_lvl_to_player() -> void:
 		card.lvl = _local_player.deck.get_card_lvl(card) + 1
 
 
-func _reconnect_to_card_signal(cardButton: CardButton) -> void:
-	cardButton.connect("leftClick", _on_card_shop_button_pressed, CONNECT_ONE_SHOT)
+func _reconnect_to_card_signal(card_button: CardButton) -> void:
+	card_button.connect("card_selected", _on_card_shop_button_pressed, CONNECT_ONE_SHOT)

@@ -29,16 +29,16 @@ var _attack_strategy: TargetManager.TargettingStrategy = TargetManager.Targettin
 
 # ============================== Public functions ==============================
 
-func start(source: Character, projectile_scene: PackedScene, aa_stats: CharacterAutoAttackStats) -> void:
+func start(source: Character, aa_stats: CharacterAutoAttackStats, projectile_scene: PackedScene) -> void:
 	print("AutoAttackManager: Starting")
 	if source == null:
 		printerr("AutoAttackManager: source undef")
 		return
-	if projectile_scene == null:
-		printerr("AutoAttackManager: projectile_scene undef")
-		return
 	if aa_stats == null:
 		printerr("AutoAttackManager: aa_stats undef")
+		return
+	if projectile_scene == null:
+		printerr("AutoAttackManager: projectile_scene undef")
 		return
 	if projectile_spawn == null:
 		printerr("AutoAttackManager: projectile_spawn undef")

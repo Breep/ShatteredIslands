@@ -3,7 +3,7 @@ extends Control
 
 # ============================== Signals ==============================
 
-signal leftClick(card)
+signal card_selected(self_ref: CardButton, card: Card)
 
 # ============================== Constants ==============================
 
@@ -62,7 +62,7 @@ func _on_sub_viewport_container_gui_input(event: InputEvent) -> void:
 		_animation_3d_rotate()
 
 	if event is InputEventMouseButton and event.is_pressed():
-		leftClick.emit(_card)
+		card_selected.emit(self, _card)
 		var animation_player = $SubViewportContainer/SubViewport/CardLayout.get_node("AnimationPlayer")
 		if animation_player:
 			animation_player.play("flip_card_2")

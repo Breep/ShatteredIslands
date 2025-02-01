@@ -158,7 +158,7 @@ func _start_auto_attack_manager() -> void:
 	_auto_attack_manager.heal_ally_triggered.connect(_on_auto_attack_manager_heal_ally_triggered)
 	_auto_attack_manager.armor_gained.connect(_on_auto_attack_manager_armor_gained)
 	_auto_attack_manager.max_health_gained.connect(_on_auto_attack_manager_max_health_gained)
-	_auto_attack_manager.start(self, _aa_projectile, stats.auto_attack)
+	_auto_attack_manager.start(self, stats.auto_attack, _aa_projectile)
 
 
 func _on_auto_attack_manager_heal_ally_triggered(heal_amount: int) -> void:

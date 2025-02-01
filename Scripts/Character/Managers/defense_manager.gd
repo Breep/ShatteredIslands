@@ -65,19 +65,15 @@ func _create_optional_timers() -> void:
 func _handle_backfires(damage_source: Character) -> void:
 	if Utils.is_randomize_modifier_active(_defense_stats.backfire_armor_gain_chance):
 		_defense_stats.armor_stacks += _defense_stats.backfire_armor_gain_stacks
-		print("DefenseManager: GAIN ARMOR BACKFIRE")
 	
 	if Utils.is_randomize_modifier_active(_defense_stats.backfire_fire_shield_chance):
 		damage_source.take_damage_percent(_source, _defense_stats.backfire_fire_shield_damage, Utils.DamageType.MAGIC)
-		print("DefenseManager: BACKFIRE FIRE DAMAGE")
 	
 	if Utils.is_randomize_modifier_active(_defense_stats.backfire_poison_chance):
 		damage_source.take_poison_stacks(_source, _defense_stats.backfire_poison_stacks, 10) # TODO Surement envoyer ce truc au poison manager car il faut connaitre la durée du poison
-		print("DefenseManager: BACKFIRE POISON")
 	
 	if Utils.is_randomize_modifier_active(_defense_stats.backfire_vulnerability_chance):
 		damage_source.take_condition_stacks(_source, _defense_stats.backfire_vulnerability_stacks, Utils.StackType.VULNERABILITY)
-		print("DefenseManager: BACKFIRE VULNERABILITY")
 
 # ============================== Callbacks functions ==============================
 
@@ -87,10 +83,9 @@ func _on_periodic_armor_stacks_timer_timeout() -> void:
 
 func _on_shield_strike_timer_timeout() -> void:
 	if _armor_lost_since_last_shield_strike > 0:
-		var damage = _armor_lost_since_last_shield_strike * _defense_stats.shield_strike_damage_percent
+		var damage = _armor_lost_since_last_shield_strike * _defense_stats.shield_strike_damage_percent / 100.0
 		_source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST).take_damage_flat(_source, damage, Utils.DamageType.MAGIC)
-		_armor_lost_since_last_shield_strike -= damage
-		print("DefenseManager: SHIELD STRIKE")
+		_armor_lost_since_last_shield_strike = 0
 
 
 func _on_lost_hp_armor_gain_timer_timeout() -> void:
