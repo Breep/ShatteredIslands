@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cgxxjptkqav2m"]
+[gd_scene load_steps=7 format=3 uid="uid://cgxxjptkqav2m"]
 
 [ext_resource type="Script" path="res://Scripts/ui/ui_charactere_selection.gd" id="1_nqx23"]
 [ext_resource type="Texture2D" uid="uid://cwe303gitkgl7" path="res://Data/Assets/Misc/Misc_IMG/cadre perso.png" id="1_wx6d8"]
 [ext_resource type="Texture2D" uid="uid://cc2hc26u7i5c" path="res://Data/Assets/Misc/Misc_IMG/red cadre horizontal full black.png" id="2_0344y"]
+[ext_resource type="Resource" uid="uid://cbcy0wbqkel1q" path="res://Resources/Heros/JohnnyDefault/johnny_default.tres" id="2_a2cvv"]
 [ext_resource type="PackedScene" uid="uid://dubiqq2hle53a" path="res://Scenes/UI/hero_button.tscn" id="4_q67ow"]
 [ext_resource type="Texture2D" uid="uid://dfuxjc1ipyesb" path="res://Data/Assets/Misc/Misc_IMG/axe_man-removebg-preview.png" id="5_53op3"]
 
@@ -14,6 +15,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_nqx23")
+hero = ExtResource("2_a2cvv")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 1
@@ -130,23 +132,15 @@ layout_mode = 2
 scale = Vector2(0.5, 0.5)
 transform = Transform2D(0.5, 0, 0, 0.5, 0, 0)
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
-offset_left = 1552.0
-offset_top = 450.0
-offset_right = 2152.0
-offset_bottom = 1050.0
-
-[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
-transparent_bg = true
-handle_input_locally = false
-size = Vector2i(600, 600)
-render_target_update_mode = 4
-
-[node name="SubHeroIMG" type="TextureRect" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+[node name="SubHeroIMG" type="TextureRect" parent="CanvasLayer"]
 unique_name_in_owner = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 1420.0
+offset_top = 404.0
+offset_right = 1036.0
+offset_bottom = 404.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("5_53op3")

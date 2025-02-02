@@ -11,9 +11,9 @@ uniform vec4 custom_color = vec4(1.0, 1.0, 1.0, 1.0); // Couleur personnalisée,
 
 void fragment() {
     // Calcul des coordonnées UV avec les oscillations temporelles
-    vec2 uv = vec2(UV.x - sin(TIME * time_speed_1) * uv_offset_1, 
+    vec2 uv = vec2(UV.x - sin(TIME * time_speed_1) * uv_offset_1,
                    UV.y - sin(TIME * time_speed_2) * uv_offset_2);
-    
+
     // Applique la couleur personnalisée, en utilisant la texture comme influence
     COLOR = texture(TEXTURE, uv) * custom_color;
 }

@@ -4,6 +4,9 @@ extends Resource
 @export var damage: int # Damage of auto attack
 
 @export var attack_speed: float # Attack per second
+@export var critical_chance: float # % of chance for an auto attack to do critical damage
+@export var critical_multiplier: float # Critical damage multiplier (2 per default)
+
 var attack_speed_boost: float # Percentage of attack speed increased
 
 var attack_speed_overtime_current: float # Current value of percentage of attack speed increased overtime
@@ -11,8 +14,6 @@ var attack_speed_overtime_min: float # Min value of percentage of attack speed i
 var attack_speed_overtime_max: float # Max value of percentage of attack speed increased overtime
 var attack_speed_overtime_duration: float # Time needed to go from min to max attack speed increase
 
-var critical_chance: float # % of chance for an auto attack to do critical damage
-var critical_multiplier: float # Critical damage multiplier (2 per default)
 
 var poison_stacks_amount: int # Number of poison stacks applied for with an auto attack
 var poison_stacks_chance: float # % of chance to proc the poison stacks

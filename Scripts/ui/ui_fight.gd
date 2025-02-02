@@ -33,6 +33,7 @@ extends Control
 
 
 func _ready() -> void:
+	_update_ui_initialisation(_get_all_scene_characters().[0])
 	##_update_ui()
 	#player1_ui.health_changed.connect(_on_player1_health_changed)
 	#player1_ui.mana_changed.connect(_on_player1_mana_changed)
@@ -43,6 +44,17 @@ func _ready() -> void:
 	#player1_ui.max_move_changed.connect(_on_player1_max_move_changed)
 	pass
 
+#============ TODO remove a mettre dans une librairie ===
+
+func _get_all_scene_characters() -> Array[Character]:
+	var ret: Array[Character]
+	for node in get_tree().get_nodes_in_group("PLAYERS"):
+		ret.append(node as Character)
+	return ret
+	
+func _update_ui_initialisation(character: Character) -> void:
+	
+	
 func _update_ui() -> void:
 	healthbar1.max_value = player1_ui.max_health
 	healthbar1.value = player1_ui.current_health

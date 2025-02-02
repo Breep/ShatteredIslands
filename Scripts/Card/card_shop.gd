@@ -6,6 +6,8 @@ extends Control
 var _card_displayed: Array[Card]
 var _local_player: Player
 
+signal card_bought
+
 # ============================== Local scene nodes ==============================
 
 @onready var _card_shop_visual: CardShopVisual = %CardShopVisual
@@ -36,6 +38,7 @@ func _on_back_pressed() -> void:
 
 func _on_card_shop_button_pressed(card_button_selected: CardButton, card: Card) -> void:
 	_try_buy_card(card_button_selected, card)
+	card_bought.emit()
 
 # ============================== Private functions ==============================
 

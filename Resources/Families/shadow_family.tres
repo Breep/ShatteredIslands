@@ -6,11 +6,11 @@
 [ext_resource type="Script" path="res://ResourcesBase/Family/family.gd" id="3_pd454"]
 [ext_resource type="Resource" uid="uid://bhd5e5q0gu6km" path="res://Resources/Card/Shadow/shadow_shadow_invincible.tres" id="4_ji31j"]
 [ext_resource type="Resource" uid="uid://berwb7f042aoa" path="res://Resources/Card/Shadow/shadow_shadow_regen_move.tres" id="5_pdkts"]
-[ext_resource type="Texture2D" uid="uid://y0t815fi2pdf" path="res://Data/Assets/Card/ICONS/MANA.png" id="6_64y5h"]
+[ext_resource type="Texture2D" uid="uid://c504bhi6182oj" path="res://Data/Assets/Card/Card_IMG/shadow/shadow icon.png" id="6_n4ck2"]
 
 [resource]
 script = ExtResource("3_pd454")
 cards = Array[ExtResource("1_rypu2")]([ExtResource("2_gucxx"), ExtResource("3_h8fjb"), ExtResource("4_ji31j"), ExtResource("5_pdkts")])
-icon = ExtResource("6_64y5h")
+icon = ExtResource("6_n4ck2")
 family_name = "Shadow"
 family_type = 7
