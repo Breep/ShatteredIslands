@@ -9,6 +9,7 @@ func apply(player: Character, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
+	player.stats.heal.periodic_heal_activated = true
 	player.stats.heal.periodic_heal_amount = periodic_heal_amount[cardlvl-1]
 	player.stats.heal.periodic_heal_period = periodic_heal_period
 

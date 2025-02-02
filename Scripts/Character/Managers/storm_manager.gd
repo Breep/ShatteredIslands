@@ -39,7 +39,7 @@ func stop() -> void:
 func _create_optional_timers() -> void:
 	# Break armor
 	if _storm_stats.periodic_vulnerability_activated:
-		Utils.create_optional_timer(self, _storm_stats.periodic_vulnerability_period, _on_periodic_vulnerability_timer_timeout)
+		_optional_timers.append(Utils.create_optional_timer(self, _storm_stats.periodic_vulnerability_period, _on_periodic_vulnerability_timer_timeout))
 
 
 func _lanch_optional_spells() -> void:

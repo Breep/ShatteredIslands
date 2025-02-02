@@ -35,6 +35,7 @@ var _poison_effects: Array[PoisonEffect] # TODO move to stats.poison ?
 @onready var _defense_manager: DefenseManager = %DefenseManager
 @onready var _fire_manager: FireManager = %FireManager
 @onready var _storm_manager: StormManager = %StormManager
+@onready var _heal_manager: SerenityManager = %SerenityManager
 
 # ============================== Node base functions ==============================
 
@@ -83,7 +84,7 @@ func take_condition_stacks(source: Character, stacks_number: int, stack_type: Ut
 			printerr("Should use take_poison_stacks()")
 			return
 		Utils.StackType.VULNERABILITY:
-			stats.vulnerability_stacks += stacks_number
+			stats.storm.vulnerability_stacks += stacks_number
 			return
 
 
@@ -206,6 +207,15 @@ func _start_storm_manager() -> void:
 	
 	_storm_manager.start(self, stats.storm)
 
+# ============================== SerenityManager ==============================
+
+func _start_serenity_manager() -> void:
+	if _heal_manager == null:
+		printerr("No SerenityManager")
+		return
+	
+	_heal_manager.start(self, stats.heal)
+
 # ============================== Signals callbacks ==============================
 
 func _on_all_players_spawned() -> void:
@@ -218,6 +228,7 @@ func _on_all_players_spawned() -> void:
 	_start_defense_manager()
 	_start_fire_manager()
 	_start_storm_manager()
+	_start_serenity_manager()
 
 
 func _on_moving_timer_timeout() -> void:
@@ -242,7 +253,7 @@ func _on_poison_tick_timer_timeout() -> void:
 
 
 func _on_vulnerability_tick_timer_timeout() -> void:
-	stats.vulnerability_stacks -= 0.1 * stats.vulnerability_stacks
+	stats.storm.vulnerability_stacks -= 0.1 * stats.storm.vulnerability_stacks
 
 
 func _on_character_dead(dead_character: Character) -> void:

@@ -115,7 +115,7 @@ func _move_toward_target(delta: float):
 func _get_effects_from_randomization(aa_stats: CharacterAutoAttackStats) -> Dictionary:
 	# Adapt critical chance with target vulnerability stacks
 	var critical_chance : float = aa_stats.critical_multiplier
-	critical_chance += _get_crit_inc_from_vuln_stacks(_target.stats.vulnerability_stacks)
+	critical_chance += _get_crit_inc_from_vuln_stacks(_target.stats.storm.vulnerability_stacks)
 	critical_chance = clampf(critical_chance, 0, 100)
 	
 	#print("CRIT CHANCE: ", critical_chance, " | Target vuln stacks: ", _target.stats.vulnerability_stacks)
