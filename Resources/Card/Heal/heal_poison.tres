@@ -13,6 +13,6 @@ poison_stacks_chance = 40
 script = ExtResource("5_aa642")
 name = "Hazardous healing"
 picture = ExtResource("3_6ek2h")
-families = [4, 6]
+families = Array[int]([4, 6])
 rarity = 0
 player_upgrade = SubResource("Resource_oprip")

@@ -15,6 +15,6 @@ duration_of_focus = 10
 script = ExtResource("5_cuxrp")
 name = "Focus"
 picture = ExtResource("3_brr0q")
-families = [3]
+families = Array[int]([3])
 rarity = 1
 player_upgrade = SubResource("Resource_cynp3")

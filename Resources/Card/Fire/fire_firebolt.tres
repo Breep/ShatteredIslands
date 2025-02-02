@@ -13,6 +13,6 @@ firebolt_period = 2.0
 script = ExtResource("5_naa47")
 name = "Fire dagger bolt"
 picture = ExtResource("3_mb42k")
-families = [2]
+families = Array[int]([2])
 rarity = 0
 player_upgrade = SubResource("Resource_fvcoj")

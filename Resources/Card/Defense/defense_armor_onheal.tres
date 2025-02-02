@@ -12,6 +12,6 @@ healing_armor_percent = Array[int]([5, 10, 15, 20, 30])
 script = ExtResource("5_g2ecj")
 name = "Pacificator Gloves"
 picture = ExtResource("3_o33mf")
-families = [1, 4]
+families = Array[int]([1, 4])
 rarity = 0
 player_upgrade = SubResource("Resource_7qlxk")

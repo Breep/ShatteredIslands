@@ -14,6 +14,6 @@ poison_by_lost_hp_hp_number = 100
 script = ExtResource("5_3mxwv")
 name = "Poisonous Hearth"
 picture = ExtResource("3_ig1qs")
-families = [5, 6]
+families = Array[int]([5, 6])
 rarity = 0
 player_upgrade = SubResource("Resource_cmooc")

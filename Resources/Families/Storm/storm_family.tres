@@ -10,11 +10,11 @@
 [ext_resource type="Resource" uid="uid://iuogh835hmf1" path="res://Resources/Card/storm/storm_poison_oncrit.tres" id="7_7mwf3"]
 [ext_resource type="Resource" uid="uid://bbjf0gmenanr7" path="res://Resources/Card/storm/storm_vulnerability_periodic.tres" id="8_ny5s2"]
 [ext_resource type="Resource" uid="uid://dcco6e0sdhpy0" path="res://Resources/Card/storm/storm_vulnerability_oncrit.tres" id="9_w7wf0"]
-[ext_resource type="Texture2D" uid="uid://y0t815fi2pdf" path="res://Data/Assets/Card/ICONS/MANA.png" id="10_t213y"]
+[ext_resource type="Texture2D" uid="uid://0527dm4uf33k" path="res://Data/Assets/Card/Card_IMG/storm/storm icon 2.png" id="10_aa404"]
 
 [resource]
 script = ExtResource("3_x8ghl")
 cards = Array[ExtResource("1_0x72b")]([ExtResource("2_130ev"), ExtResource("3_cotei"), ExtResource("4_jv6jq"), ExtResource("5_qgfh8"), ExtResource("6_vidif"), ExtResource("7_7mwf3"), ExtResource("8_ny5s2"), ExtResource("9_w7wf0")])
-icon = ExtResource("10_t213y")
+icon = ExtResource("10_aa404")
 family_name = "Storm"
 family_type = 3

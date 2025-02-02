@@ -13,6 +13,6 @@ reduce_damage_received = 30
 script = ExtResource("4_m12om")
 name = "Protector"
 picture = ExtResource("2_hwtud")
-families = [1]
+families = Array[int]([1])
 rarity = 2
 player_upgrade = SubResource("Resource_qk10j")

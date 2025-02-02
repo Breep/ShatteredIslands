@@ -13,6 +13,6 @@ heal_projectile_chance = 40
 script = ExtResource("5_q1dgv")
 name = "Magic Heal"
 picture = ExtResource("3_d6ols")
-families = [4]
+families = Array[int]([4])
 rarity = 0
 player_upgrade = SubResource("Resource_2wu53")

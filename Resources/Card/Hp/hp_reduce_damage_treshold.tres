@@ -13,6 +13,6 @@ damage_taken_reduced_below_treshold_threshold = 35
 script = ExtResource("5_68kmo")
 name = ""
 picture = ExtResource("3_ihnlj")
-families = [5]
+families = Array[int]([5])
 rarity = 1
 player_upgrade = SubResource("Resource_5y5c0")

@@ -12,6 +12,6 @@ multiply_damage = 2.0
 script = ExtResource("4_0ckow")
 name = "Venomous snake"
 picture = ExtResource("3_ogg40")
-families = [6]
+families = Array[int]([6])
 rarity = 2
 player_upgrade = SubResource("Resource_qt3h3")

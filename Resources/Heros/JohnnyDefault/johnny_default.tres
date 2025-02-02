@@ -1,7 +1,11 @@
-[gd_resource type="Resource" script_class="Hero" load_steps=20 format=3 uid="uid://cbcy0wbqkel1q"]
+[gd_resource type="Resource" script_class="Hero" load_steps=31 format=3 uid="uid://cbcy0wbqkel1q"]
 
+[ext_resource type="Texture2D" uid="uid://40176qu2q6rw" path="res://Data/Assets/Card/Card_IMG/poison/poison5.png" id="1_fkyh8"]
+[ext_resource type="Resource" uid="uid://ba4admuapckro" path="res://Resources/Families/Attack/attack_family.tres" id="1_imkj7"]
 [ext_resource type="Script" path="res://ResourcesBase/Hero/hero.gd" id="1_rwq1b"]
+[ext_resource type="Resource" uid="uid://dw66lnwee8ruk" path="res://Resources/Families/Defense/defense_family.tres" id="2_3yfhs"]
 [ext_resource type="Script" path="res://ResourcesBase/CharacterStats/auto_attack_stats.gd" id="2_eh1pu"]
+[ext_resource type="Texture2D" uid="uid://wfwglamlrjqj" path="res://Data/Assets/Misc/Misc_IMG/assasin wow.png" id="2_tcrxw"]
 [ext_resource type="Script" path="res://ResourcesBase/CharacterStats/defense_character_stats.gd" id="3_wyimy"]
 [ext_resource type="Script" path="res://ResourcesBase/CharacterStats/character_stats.gd" id="3_x2gh1"]
 [ext_resource type="Script" path="res://ResourcesBase/CharacterStats/fire_character_stats.gd" id="4_mu5uk"]
@@ -10,11 +14,20 @@
 [ext_resource type="Script" path="res://ResourcesBase/CharacterStats/poison_character_stats.gd" id="7_awyhu"]
 [ext_resource type="Script" path="res://ResourcesBase/CharacterStats/shadow_character_stats.gd" id="9_kfxgl"]
 [ext_resource type="Script" path="res://ResourcesBase/CharacterStats/storm_character_stats.gd" id="10_8s82d"]
+[ext_resource type="Texture2D" uid="uid://clupy6lxq6tfs" path="res://Data/Assets/Card/Card_IMG/heal/heal orb.png" id="12_bcd7b"]
+[ext_resource type="Texture2D" uid="uid://bo534sbxmu3jh" path="res://Data/Assets/Card/Card_IMG/Attack/bounce attack.jpg" id="13_gsnfu"]
+[ext_resource type="Texture2D" uid="uid://btjgqupi22y8o" path="res://Data/Assets/Card/Card_IMG/Attack/attack_ignite.webp" id="14_sbmpq"]
+[ext_resource type="Texture2D" uid="uid://d1kprcm4gjhbm" path="res://Data/Assets/Card/Card_IMG/Attack/attack_damage.webp" id="15_51x5e"]
+[ext_resource type="Texture2D" uid="uid://dhvnlvdnbrxvl" path="res://Data/Assets/Card/Card_IMG/heal/cleanse.jpg" id="16_438m1"]
+[ext_resource type="Texture2D" uid="uid://dky1ew2n5kbgq" path="res://Data/Assets/Card/Card_IMG/Hp/gun_cartoon.png" id="17_p12cc"]
+[ext_resource type="Texture2D" uid="uid://tks3r4hprrq4" path="res://Data/Assets/Card/Card_IMG/storm/storm8.png" id="19_yo3i7"]
 
 [sub_resource type="Resource" id="Resource_x6ot6"]
 script = ExtResource("2_eh1pu")
 damage = 10
 attack_speed = 1.0
+critical_chance = 17.0
+critical_multiplier = 100.0
 
 [sub_resource type="Resource" id="Resource_20vgn"]
 script = ExtResource("3_wyimy")
@@ -153,3 +166,22 @@ script = ExtResource("1_rwq1b")
 name = "Johnny Default"
 description = "Johnny has always been a good test subject"
 stats = SubResource("Resource_gvftt")
+sprite = ExtResource("2_tcrxw")
+family_1 = ExtResource("1_imkj7")
+family_2 = ExtResource("2_3yfhs")
+passiv_talent = "passiv description"
+passiv_talent_image = ExtResource("1_fkyh8")
+ultimate = "Ultimate description"
+ultimate_image = ExtResource("19_yo3i7")
+talent_lvl1_1 = "Talent Description1"
+talent_lvl1_1_image = ExtResource("12_bcd7b")
+talent_lvl1_2 = "Talent Description2"
+talent_lvl1_2_image = ExtResource("13_gsnfu")
+talent_lvl3_1 = "Talent Description3"
+talent_lvl3_1_image = ExtResource("14_sbmpq")
+talent_lvl3_2 = "Talent Description4"
+talent_lvl3_2_image = ExtResource("15_51x5e")
+talent_lvl5_1 = "Talent Description5"
+talent_lvl5_1_image = ExtResource("16_438m1")
+talent_lvl5_2 = "Talent Description6"
+talent_lvl5_2_image = ExtResource("17_p12cc")

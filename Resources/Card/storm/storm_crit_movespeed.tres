@@ -13,6 +13,6 @@ lost_hp_crit_multiplier_hp_number = 2
 script = ExtResource("5_jodrr")
 name = "Lightning Speed"
 picture = ExtResource("3_hojdw")
-families = [3, 7]
+families = Array[int]([3, 7])
 rarity = 0
 player_upgrade = SubResource("Resource_jncwr")

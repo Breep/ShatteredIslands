@@ -13,6 +13,6 @@ backfire_armor_gain_stacks = 5
 script = ExtResource("5_0jjbh")
 name = "Spike armor"
 picture = ExtResource("3_68vya")
-families = [1]
+families = Array[int]([1])
 rarity = 0
 player_upgrade = SubResource("Resource_pts28")

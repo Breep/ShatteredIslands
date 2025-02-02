@@ -12,6 +12,6 @@ overcharge_percent = 50
 script = ExtResource("4_702sq")
 name = "Overcharge"
 picture = ExtResource("2_8upil")
-families = [3]
+families = Array[int]([3])
 rarity = 2
 player_upgrade = SubResource("Resource_8m4a4")

@@ -13,6 +13,6 @@ periodic_heal_period = 1.5
 script = ExtResource("5_js2lt")
 name = "Flash heal"
 picture = ExtResource("3_m0il3")
-families = [4]
+families = Array[int]([4])
 rarity = 0
 player_upgrade = SubResource("Resource_2dma4")

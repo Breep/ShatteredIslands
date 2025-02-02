@@ -9,11 +9,11 @@
 [ext_resource type="Resource" uid="uid://c3f377qpv0owx" path="res://Resources/Card/Heal/heal_pacify.tres" id="6_htr3i"]
 [ext_resource type="Resource" uid="uid://8yytxghumx8t" path="res://Resources/Card/Heal/heal_poison.tres" id="7_iumu8"]
 [ext_resource type="Resource" uid="uid://bdtr6was58h06" path="res://Resources/Card/Heal/heal_on move.tres" id="8_kohyy"]
-[ext_resource type="Texture2D" uid="uid://y0t815fi2pdf" path="res://Data/Assets/Card/ICONS/MANA.png" id="9_q5mwd"]
+[ext_resource type="Texture2D" uid="uid://jknfvpvc3whx" path="res://Data/Assets/Card/Card_IMG/heal/icon heal.png" id="9_ul0jp"]
 
 [resource]
 script = ExtResource("3_1uvcs")
 cards = Array[ExtResource("1_23q5h")]([ExtResource("2_cclj3"), ExtResource("3_ij0rn"), ExtResource("4_lytbb"), ExtResource("5_8kbjj"), ExtResource("6_htr3i"), ExtResource("7_iumu8"), ExtResource("8_kohyy")])
-icon = ExtResource("9_q5mwd")
+icon = ExtResource("9_ul0jp")
 family_name = "Serinity"
 family_type = 4

@@ -13,6 +13,6 @@ periodic_armor_stacks_period = 1
 script = ExtResource("5_fceuj")
 name = "Shield Yourself"
 picture = ExtResource("3_mvxjq")
-families = [1]
+families = Array[int]([1])
 rarity = 0
 player_upgrade = SubResource("Resource_oorsc")

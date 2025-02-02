@@ -12,6 +12,6 @@ shadow_shadow_regen_move = Array[int]([1, 2, 3, 4, 5])
 script = ExtResource("5_2s844")
 name = "Faster and faster"
 picture = ExtResource("3_62lrv")
-families = [7]
+families = Array[int]([7])
 rarity = 0
 player_upgrade = SubResource("Resource_xksat")

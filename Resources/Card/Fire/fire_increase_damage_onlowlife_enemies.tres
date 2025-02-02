@@ -13,6 +13,6 @@ damage_increase_on_low_life_enemy_threshold = 50
 script = ExtResource("5_uurst")
 name = "Storm of fire"
 picture = ExtResource("3_xpge5")
-families = [2, 3]
+families = Array[int]([2, 3])
 rarity = 0
 player_upgrade = SubResource("Resource_e4btn")

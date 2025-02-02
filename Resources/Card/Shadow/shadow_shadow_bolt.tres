@@ -12,6 +12,6 @@ shadow_bolt_damage = Array[int]([5, 10, 15, 20, 30])
 script = ExtResource("5_k8at3")
 name = "Shadow bolt"
 picture = ExtResource("3_81ydm")
-families = [7]
+families = Array[int]([7])
 rarity = 0
 player_upgrade = SubResource("Resource_n2jh5")

@@ -13,6 +13,6 @@ damage_increased_by_hp_lost_hp_number = 200
 script = ExtResource("5_kw33c")
 name = "Big boyz"
 picture = ExtResource("3_jd3ga")
-families = [5]
+families = Array[int]([5])
 rarity = 0
 player_upgrade = SubResource("Resource_rtppb")
