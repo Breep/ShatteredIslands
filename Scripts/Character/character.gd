@@ -21,8 +21,6 @@ var _fighting_area: FightingArea # TODO remove
 var _is_dead: bool = false
 var _is_player_character: bool = false
 
-var _poison_effects: Array[PoisonEffect] # TODO move to stats.poison ?
-
 # ============================== Local scene nodes ==============================
 
 @onready var _timers_holder: Node = $Timers # TODO remove
@@ -36,6 +34,7 @@ var _poison_effects: Array[PoisonEffect] # TODO move to stats.poison ?
 @onready var _fire_manager: FireManager = %FireManager
 @onready var _storm_manager: StormManager = %StormManager
 @onready var _heal_manager: SerenityManager = %SerenityManager
+@onready var _poison_manager: PoisonManager = %PoisonManager
 
 # ============================== Node base functions ==============================
 
@@ -132,7 +131,7 @@ func _add_to_poison_effects(source: Character, poison_stacks: int, poison_durati
 	if poison_stacks == 0:
 		return
 	
-	for effect in _poison_effects:
+	for effect in stats.poison.poison_effects:
 		if effect.source == source and effect.ticks_left == poison_duration:
 			effect.stacks_number += poison_stacks
 			return
@@ -141,7 +140,7 @@ func _add_to_poison_effects(source: Character, poison_stacks: int, poison_durati
 	new_effect.stacks_number = poison_stacks
 	new_effect.ticks_left = poison_duration
 	new_effect.source = source
-	_poison_effects.append(new_effect)
+	stats.poison.poison_effects.append(new_effect)
 
 
 # TODO code heal function
@@ -216,6 +215,15 @@ func _start_serenity_manager() -> void:
 	
 	_heal_manager.start(self, stats.heal)
 
+# ============================== PoisonManager ==============================
+
+func _start_poison_manager() -> void:
+	if _poison_manager == null:
+		printerr("No PoisonManager")
+		return
+	
+	_poison_manager.start(self, stats.poison)
+
 # ============================== Signals callbacks ==============================
 
 func _on_all_players_spawned() -> void:
@@ -229,6 +237,7 @@ func _on_all_players_spawned() -> void:
 	_start_fire_manager()
 	_start_storm_manager()
 	_start_serenity_manager()
+	_start_poison_manager()
 
 
 func _on_moving_timer_timeout() -> void:
@@ -241,15 +250,15 @@ func _on_moving_timer_timeout() -> void:
 
 func _on_poison_tick_timer_timeout() -> void:
 	var poison_damage: int = 0
-	for effect in _poison_effects:
+	for effect in stats.poison.poison_effects:
 		if effect.ticks_left > 0:
 			effect.ticks_left -= 1
 			poison_damage += effect.stacks_number
 		else:
-			_poison_effects.erase(effect)
+			stats.poison.poison_effects.erase(effect)
 	
 	if poison_damage > 0:
-		take_damage_flat(null, poison_damage, Utils.DamageType.POISON)
+		take_damage_flat(null, _poison_manager.get_reduced_damage_taken_from(poison_damage), Utils.DamageType.POISON)
 
 
 func _on_vulnerability_tick_timer_timeout() -> void:

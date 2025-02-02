@@ -7,7 +7,7 @@ enum TargettingStrategy {
 	CLOSEST, # Closest character except self (can be null)
 	CLOSEST_ENEMY, # Closest enemy (can be null)
 	CLOSEST_ALLY, # Closest ally except self (can be null)
-	FARTHEST, # Farthest character except self(can be null)
+	FARTHEST, # Farthest character except self (can be null)
 	FARTHEST_ENEMY, # Farthest enemy (can be null)
 	FARTHEST_ALLY, # Farthest ally except self (can be null)
 	RANDOM, # Random character except self (can be null)
@@ -168,7 +168,7 @@ func _get_random(characters: Array[Character], excluded_character: Character) ->
 	if characters_copy.is_empty():
 		return null
 	
-	return characters_copy[rng.randi_range(0, characters_copy.size())]
+	return characters_copy[rng.randi_range(0, characters_copy.size()-1)]
 
 
 func _get_lowest_hp(characters: Array[Character], excluded_character: Character) -> Character:
