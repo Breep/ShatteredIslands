@@ -1,17 +1,14 @@
-[gd_resource type="Resource" script_class="Family" load_steps=9 format=3 uid="uid://cr4wdhrstj2ju"]
+[gd_resource type="Resource" script_class="Family" load_steps=6 format=3 uid="uid://cr4wdhrstj2ju"]
 
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="1_mxc05"]
-[ext_resource type="Resource" uid="uid://b4yjn2q1enybq" path="res://Resources/Card/Poison/poison_epic_double_damage.tres" id="2_rks1i"]
-[ext_resource type="Resource" uid="uid://dge4oa1k6hd7a" path="res://Resources/Card/Poison/poison_on_move.tres" id="3_62ayk"]
 [ext_resource type="Script" path="res://ResourcesBase/Family/family.gd" id="3_kx1px"]
-[ext_resource type="Resource" uid="uid://b4e3te3brrch" path="res://Resources/Card/Poison/poison_poison_cloud.tres" id="4_tksl8"]
 [ext_resource type="Resource" uid="uid://bdm4mg5oiho7e" path="res://Resources/Card/Poison/poison_poison_periodic.tres" id="5_spvgs"]
 [ext_resource type="Resource" uid="uid://2s8jgk5ckqn4" path="res://Resources/Card/Poison/poison_poison_resistance.tres" id="6_qimwn"]
 [ext_resource type="Texture2D" uid="uid://boo73jw2y331p" path="res://Data/Assets/Card/Card_IMG/poison/icon poison.png" id="7_4ug15"]
 
 [resource]
 script = ExtResource("3_kx1px")
-cards = Array[ExtResource("1_mxc05")]([ExtResource("2_rks1i"), ExtResource("3_62ayk"), ExtResource("4_tksl8"), ExtResource("5_spvgs"), ExtResource("6_qimwn")])
-icon = ExtResource("7_4ug15")
+cards = Array[ExtResource("1_mxc05")]([ExtResource("5_spvgs"), ExtResource("6_qimwn")])
+icon = ExtResource("7_4no3h")
 family_name = "Poison"
 family_type = 6

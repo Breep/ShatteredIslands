@@ -9,6 +9,7 @@ func apply(player: Character, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
+	player.stats.poison.periodic_stacks_activated = true
 	player.stats.poison.periodic_stacks_number += periodic_stacks_number[cardlvl - 1]
 	player.stats.poison.periodic_stacks_period += periodic_stacks_period
 

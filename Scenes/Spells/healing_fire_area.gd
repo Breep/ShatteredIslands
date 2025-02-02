@@ -21,7 +21,7 @@ func init(source: Character, damage: float, heal: float, period: float, radius: 
 	_damage_percent = damage
 	_heal_percent = heal
 	_wait_time = period
-	_radius = radius * 20
+	_radius = radius * 20 # TODO work on metric sdystem
 
 
 func _enter_tree() -> void:
