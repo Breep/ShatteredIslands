@@ -84,7 +84,8 @@ func _on_periodic_armor_stacks_timer_timeout() -> void:
 func _on_shield_strike_timer_timeout() -> void:
 	if _armor_lost_since_last_shield_strike > 0:
 		var damage = _armor_lost_since_last_shield_strike * _defense_stats.shield_strike_damage_percent / 100.0
-		_source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST).take_damage_flat(_source, damage, Utils.DamageType.MAGIC)
+		var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST_ENEMY)
+		target.take_damage_flat(_source, damage, Utils.DamageType.MAGIC)
 		_armor_lost_since_last_shield_strike = 0
 
 

@@ -21,7 +21,7 @@ var _source: Character # Ref to character owner
 var _aa_stats: CharacterAutoAttackStats # Ref to the owner auto attack stats
 var _projectile_scene: PackedScene # Ref to the AutoAttackProjectile packed scene
 var _forced_target: Character # TODO Unused now, maybe for a futur hero that can taunt ?
-var _attack_strategy: TargetManager.TargettingStrategy = TargetManager.TargettingStrategy.CLOSEST # The algo used to find the target
+var _attack_strategy: TargetManager.TargettingStrategy = TargetManager.TargettingStrategy.CLOSEST_ENEMY # The algo used to find the target
 
 # ============================== Local scene nodes ==============================
 

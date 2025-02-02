@@ -4,9 +4,17 @@ extends Node
 # ============================== Enums ==============================
 
 enum TargettingStrategy {
-	CLOSEST,
-	FARTHEST,
-	RANDOM,
+	CLOSEST, # Closest character except self (can be null)
+	CLOSEST_ENEMY, # Closest enemy (can be null)
+	CLOSEST_ALLY, # Closest ally except self (can be null)
+	FARTHEST, # Farthest character except self(can be null)
+	FARTHEST_ENEMY, # Farthest enemy (can be null)
+	FARTHEST_ALLY, # Farthest ally except self (can be null)
+	RANDOM, # Random character except self (can be null)
+	RANDOM_ENEMY, # Random enemy (can be null)
+	RANDOM_ALLY, # Random ally except self (can be null)
+	RANDOM_ALLY_INCLUDING_SELF, # Random ally
+	LOWEST_HP_ALLY_INCLUDING_SELF, # Lowest hp ally (in % of max life)
 }
 
 # ============================== Private variables ==============================
@@ -30,38 +38,48 @@ func init(source: Character) -> void:
 func get_target(targetting_strategy: TargettingStrategy) -> Character:
 	match targetting_strategy:
 		TargettingStrategy.CLOSEST:
-			return _get_closest_enemy()
+			return _get_closest(_characters, _source)
+		TargettingStrategy.CLOSEST_ENEMY:
+			return _get_closest(_enemies, _source)
+		TargettingStrategy.CLOSEST_ALLY:
+			return _get_closest(_allies, _source)
 		TargettingStrategy.FARTHEST:
-			return _get_farthest_enemy()
+			return _get_farthest(_characters, _source)
+		TargettingStrategy.FARTHEST_ENEMY:
+			return _get_farthest(_enemies, _source)
+		TargettingStrategy.FARTHEST_ALLY:
+			return _get_farthest(_allies, _source)
 		TargettingStrategy.RANDOM:
-			return _get_random_enemy()
+			return _get_random(_characters, _source)
+		TargettingStrategy.RANDOM_ENEMY:
+			return _get_random(_enemies, _source)
+		TargettingStrategy.RANDOM_ALLY:
+			return _get_random(_allies, _source)
+		TargettingStrategy.RANDOM_ALLY_INCLUDING_SELF:
+			return _get_random(_allies, null)
+		TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF:
+			return _get_lowest_hp(_allies, null)
 	
 	printerr("TargetManager: Undef strategy for the TargetManager")
 	return null
 
 
-# Get closest enemy of the owned character from an other character
+# Get closest character of "from_character" who is an enemy of _source
 func get_closest_enemy_from(from_character: Character) -> Character:
 	if _enemies.is_empty():
 		return null
 	
-	var closest_enemy: Character
-	# Find the first not "from_character" character in the enemy list
-	for enemy in _enemies:
-		if enemy.player.id != from_character.player.id:
-			closest_enemy = enemy
-			break
-	
-	if closest_enemy == null:
+	var enemies_copy: Array[Character] = _enemies.duplicate()
+	enemies_copy.erase(from_character)
+	if enemies_copy.is_empty():
 		return null
 	
-	# There is at least one enemy who is not "from_character", find the closest to "from_character"
+	var closest_enemy = enemies_copy[0]
 	for enemy in _enemies:
-		if enemy.player.id != from_character.player.id:
-			var enemy_distance = (enemy.position - from_character.position).length_squared()
-			var closest_enemy_distance = (closest_enemy.position - from_character.position).length_squared()
-			if enemy_distance < closest_enemy_distance:
-				closest_enemy = enemy
+		var enemy_distance = (enemy.position - from_character.position).length_squared()
+		var closest_enemy_distance = (closest_enemy.position - from_character.position).length_squared()
+		if enemy_distance < closest_enemy_distance:
+			closest_enemy = enemy
 	
 	return closest_enemy
 
@@ -101,32 +119,73 @@ func _get_allies_from_characters() -> Array[Character]:
 	return ret
 
 
-func _get_closest_enemy() -> Character:
-	if _enemies.is_empty():
+# ============================== Target strategy functions ==============================
+
+func _get_closest(characters: Array[Character], excluded_character: Character) -> Character:
+	if characters.is_empty():
 		return null
 	
-	var closest_enemy: Character = _enemies[0]
-	for enemy in _enemies:
-		if (enemy.position - _source.position).length_squared() < (closest_enemy.position - _source.position).length_squared():
-			closest_enemy = enemy
-	return closest_enemy
-
-
-func _get_farthest_enemy() -> Character:
-	if _enemies.is_empty():
+	var characters_copy: Array[Character] = characters.duplicate()
+	characters_copy.erase(excluded_character)
+	if characters_copy.is_empty():
 		return null
 	
-	var farthest_enemy: Character = _enemies[0]
-	for enemy in _enemies:
-		if (enemy.position - _source.position).length_squared() > (farthest_enemy.position - _source.position).length_squared():
-			farthest_enemy = enemy
-	return farthest_enemy
+	var closest_character = characters_copy[0]
+	for character in characters:
+		if character != _source:
+			if (character.position - _source.position).length_squared() < (closest_character.position - _source.position).length_squared():
+				closest_character = character
+	
+	return closest_character
 
 
-func _get_random_enemy() -> Character:
-	if _enemies.is_empty():
+func _get_farthest(characters: Array[Character], excluded_character: Character) -> Character:
+	if characters.is_empty():
+		return null
+	
+	var characters_copy: Array[Character] = characters.duplicate()
+	characters_copy.erase(excluded_character)
+	if characters_copy.is_empty():
+		return null
+	
+	var farthest_character = characters_copy[0]
+	for character in characters:
+		if character != _source:
+			if (character.position - _source.position).length_squared() > (farthest_character.position - _source.position).length_squared():
+				farthest_character = character
+	
+	return farthest_character
+
+
+func _get_random(characters: Array[Character], excluded_character: Character) -> Character:
+	if characters.is_empty():
 		return null
 	
 	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 	rng.randomize()
-	return _enemies[rng.randi_range(0, _enemies.size())]
+	var characters_copy: Array[Character] = characters.duplicate()
+	characters_copy.erase(excluded_character)
+	if characters_copy.is_empty():
+		return null
+	
+	return characters_copy[rng.randi_range(0, characters_copy.size())]
+
+
+func _get_lowest_hp(characters: Array[Character], excluded_character: Character) -> Character:
+	if characters.is_empty():
+		return null
+	
+	var characters_copy: Array[Character] = characters.duplicate()
+	characters_copy.erase(excluded_character)
+	if characters_copy.is_empty():
+		return null
+	
+	var lowest_hp_character = characters_copy[0]
+	for character in characters:
+		var character_hp_percent: float = ((character.stats.health as float) / (character.stats.health_max as float)) * 100.0
+		var lowest_hp_character_hp_percent: float = ((lowest_hp_character.stats.health as float) / (lowest_hp_character.stats.health_max as float)) * 100.0
+		if character_hp_percent < lowest_hp_character_hp_percent:
+			lowest_hp_character = character
+	
+	return lowest_hp_character
+	

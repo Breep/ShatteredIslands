@@ -49,6 +49,6 @@ func _lanch_optional_spells() -> void:
 
 func _on_periodic_vulnerability_timer_timeout() -> void:
 	print("StormManager: Periodic vulnerability")
-	var target: Character = _source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST)
+	var target: Character = _source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST_ENEMY)
 	var vulnerability_stacks: int = _storm_stats.periodic_vulnerability_amount
 	target.take_condition_stacks(_source, vulnerability_stacks, Utils.StackType.VULNERABILITY)

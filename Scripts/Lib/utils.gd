@@ -2,6 +2,7 @@ extends Node
 
 # ============================== Enums ==============================
 
+# TODO Quand je vois ces enum ici, je trouve ça moche, mais je sais pas encore où les mettre
 enum DamageType {
 	PHYSICAL,
 	POISON,

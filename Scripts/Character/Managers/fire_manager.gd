@@ -64,5 +64,5 @@ func _lanch_optional_spells() -> void:
 
 func _on_firebolt_timer_timeout() -> void:
 	print("FireManager: FIREBOLT")
-	var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST)
+	var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST_ENEMY)
 	target.take_damage_percent(_source, _fire_stats.firebolt_damage, Utils.DamageType.MAGIC)
