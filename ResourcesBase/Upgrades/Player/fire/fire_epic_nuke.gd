@@ -9,6 +9,7 @@ func apply(player: Character, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
+	player.stats.fire.nuke_activated = true
 	player.stats.fire.nuke_damage = nuke_damage
 	player.stats.fire.nuke_period = nuke_period
 

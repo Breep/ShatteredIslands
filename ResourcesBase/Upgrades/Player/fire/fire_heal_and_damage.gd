@@ -11,6 +11,7 @@ func apply(player: Character, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
+	player.stats.fire.healing_fire_area_activated = true
 	player.stats.fire.healing_fire_area_damage = healing_fire_area_damage[cardlvl-1]
 	player.stats.fire.healing_fire_area_heal = healing_fire_area_heal[cardlvl-1]
 	player.stats.fire.healing_fire_area_period = healing_fire_area_period

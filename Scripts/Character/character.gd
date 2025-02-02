@@ -66,7 +66,6 @@ func take_damage_flat(source: Character, damage: int, damage_type: Utils.DamageT
 	stats.health -= damage
 	_character_visual.damage_popup(damage, damage_type)
 	_character_visual.update_health_bar(stats.health, stats.health_max)
-	print(stats.health)
 	if stats.health <= 0 and !_is_dead:
 		dead.emit(self)
 		_is_dead = true

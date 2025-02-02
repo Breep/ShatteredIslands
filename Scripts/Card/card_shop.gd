@@ -39,12 +39,6 @@ func _on_card_shop_button_pressed(card_button_selected: CardButton, card: Card) 
 
 # ============================== Private functions ==============================
 
-# Rework du bouzin
-# L'idée c'est: on clique sur une carte, on prévient le serveur qu'on a cliqué sur la carte
-# Le serveur vérifie qu'on a de quoi payer la carte, si c'est ok le serveur prévient TOUS
-# les joueurs que le joueurA ajoute cette carte dans son deck, puis remet les 2 autres cartes dans
-# le deck du shop. ça implique que le serveur DOIT retenir quel joueur a quoi comme carte dans son shop
-
 # Try to buy a card for the local player
 # It will ask the server for permission, if granted, all other players will be notified
 func _try_buy_card(card_button_selected: CardButton, card: Card) -> void:

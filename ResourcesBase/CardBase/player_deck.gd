@@ -42,7 +42,7 @@ func _add_or_improve_card(new_card_ref: Card) -> void:
 			else:
 				printerr("Trying to upgrade an already maximized card")
 			return
-
+	
 	print("ADDING NEW CARD ", new_card_ref.name)
 	var new_card = new_card_ref.duplicate()
 	new_card.lvl = 1

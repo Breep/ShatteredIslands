@@ -4,12 +4,17 @@ extends Node
 # ============================== Signals ==============================
 
 
+
 # ============================== Private variables ==============================
 
 var _source: Character # Ref to character owner
 var _fire_stats: CharacterFireStats # Ref to the owner auto attack stats
 
 var _optional_timers: Array[Timer]
+
+# ============================== Spells scenes ==============================
+
+@onready var _healing_fire_area_scene: PackedScene = preload("res://Scenes/Spells/healing_fire_area.tscn")
 
 # ============================== Public functions ==============================
 
@@ -51,7 +56,11 @@ func _create_optional_timers() -> void:
 func _lanch_optional_spells() -> void:
 	# Ring of fire healing
 	if _fire_stats.healing_fire_area_activated:
-		pass
+		var healing_fire_area: HealingFireArea = _healing_fire_area_scene.instantiate()
+		healing_fire_area.init(_source, _fire_stats.healing_fire_area_damage, _fire_stats.healing_fire_area_heal, 
+				_fire_stats.healing_fire_area_period, _fire_stats.healing_fire_area_range)
+		_source.add_child(healing_fire_area)
+		healing_fire_area.position = Vector2.ZERO
 
 # ============================== Callbacks functions ==============================
 

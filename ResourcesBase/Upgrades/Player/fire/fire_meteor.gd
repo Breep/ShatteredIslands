@@ -11,6 +11,7 @@ func apply(player: Character, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
+	player.stats.fire.meteor_activated = true
 	player.stats.fire.meteor_area_range = meteor_area_range
 	player.stats.fire.meteor_cooldown = meteor_cooldown
 	player.stats.fire.meteor_damage = meteor_damage[cardlvl - 1]
