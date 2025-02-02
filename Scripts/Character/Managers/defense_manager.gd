@@ -8,7 +8,7 @@ signal armor_based_on_lost_hp_gained(percent_of_lost_hp: float)
 # ============================== Private variables ==============================
 
 var _source: Character # Ref to character owner
-var _defense_stats: CharacterDefenseStats # Ref to the owner auto attack stats
+var _defense_stats: CharacterDefenseStats # Ref to the owner defense stats
 
 var _armor_lost_since_last_shield_strike: int = 0
 

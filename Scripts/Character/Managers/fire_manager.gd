@@ -3,12 +3,10 @@ extends Node
 
 # ============================== Signals ==============================
 
-
-
 # ============================== Private variables ==============================
 
 var _source: Character # Ref to character owner
-var _fire_stats: CharacterFireStats # Ref to the owner auto attack stats
+var _fire_stats: CharacterFireStats # Ref to the owner fire stats
 
 var _optional_timers: Array[Timer]
 

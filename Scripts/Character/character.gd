@@ -34,6 +34,7 @@ var _poison_effects: Array[PoisonEffect] # TODO move to stats.poison ?
 @onready var _auto_attack_manager: AutoAttackManager = %AutoAttackManager
 @onready var _defense_manager: DefenseManager = %DefenseManager
 @onready var _fire_manager: FireManager = %FireManager
+@onready var _storm_manager: StormManager = %StormManager
 
 # ============================== Node base functions ==============================
 
@@ -196,6 +197,15 @@ func _start_fire_manager() -> void:
 	
 	_fire_manager.start(self, stats.fire)
 
+# ============================== StormManager ==============================
+
+func _start_storm_manager() -> void:
+	if _storm_manager == null:
+		printerr("No StormManager")
+		return
+	
+	_storm_manager.start(self, stats.storm)
+
 # ============================== Signals callbacks ==============================
 
 func _on_all_players_spawned() -> void:
@@ -207,6 +217,7 @@ func _on_all_players_spawned() -> void:
 	_start_auto_attack_manager()
 	_start_defense_manager()
 	_start_fire_manager()
+	_start_storm_manager()
 
 
 func _on_moving_timer_timeout() -> void:

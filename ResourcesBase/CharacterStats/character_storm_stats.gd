@@ -1,6 +1,7 @@
 class_name CharacterStormStats
 extends Resource
 
+@export var periodic_vulnerability_activated: bool # True if the player has at least one of this card
 @export var periodic_vulnerability_amount: int # amount of vulnerability stack inflicted every period
 @export var periodic_vulnerability_period: int # Time between to applying of vulnerability stacks (in s)
 
