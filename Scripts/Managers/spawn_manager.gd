@@ -25,5 +25,4 @@ func _ready() -> void:
 		# TODO Learn about spawning on other tree branch
 		$".".add_child(character)
 		i += 1
-	
 	all_players_spawned.emit()

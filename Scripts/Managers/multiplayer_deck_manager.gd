@@ -224,8 +224,9 @@ func _notify_buying_error(error: ServerResponse) -> void:
 # ============================== Server RPC ==============================
 
 # Client call this rpc to ask the server to put back cards in the server shopdeck
+# TODO check if client is not sending bullshit cards
 @rpc("any_peer", "call_remote")
-func _ask_to_add_card(peer_id: int, card_ref_id: int) -> void:
+func _ask_to_add_card(_peer_id: int, card_ref_id: int) -> void:
 	#print("[id:", multiplayer.get_unique_id(),"] Asked to add card")
 	if card_ref_id < 0 or card_ref_id >= _cards_refs.size():
 		printerr("Invalid card ref id")

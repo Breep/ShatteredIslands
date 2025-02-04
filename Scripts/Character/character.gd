@@ -71,6 +71,7 @@ func take_damage_flat(source: Character, damage: int, damage_type: Utils.DamageT
 	stats.health -= damage
 	_character_visual.damage_popup(damage, damage_type)
 	_character_visual.update_health_bar(stats.health, stats.health_max)
+	print("[", player.name, "] Take ", damage, "damage | hp = ", stats.health, "/", stats.health_max)
 	if stats.health <= 0 and !_is_dead:
 		dead.emit(self)
 		_is_dead = true
@@ -81,7 +82,7 @@ func take_poison_stacks(source: Character, poison_stacks: int, poison_duration: 
 	_add_to_poison_effects(source, poison_stacks, poison_duration)
 
 
-func take_condition_stacks(source: Character, stacks_number: int, stack_type: Utils.StackType) -> void:
+func take_condition_stacks(_source: Character, stacks_number: int, stack_type: Utils.StackType) -> void:
 	match stack_type:
 		Utils.StackType.POISON:
 			printerr("Should use take_poison_stacks()")
@@ -97,11 +98,6 @@ func connect_all_players_spawned_signal(node: Node, signal_name: String) -> void
 
 
 # ============================== Private functions ==============================
-
-func _move_to_cell(cell : Vector2):
-	if _is_dead: return
-	
-
 
 func _apply_all_cards_upgrades() -> void:
 	if player.deck == null:
@@ -146,12 +142,6 @@ func _add_to_poison_effects(source: Character, poison_stacks: int, poison_durati
 	new_effect.source = source
 	stats.poison.poison_effects.append(new_effect)
 
-
-# TODO code heal function
-func _heal_ally(heal_amount: int) -> void:
-	print("Heal ally")
-
-
 # ============================== AutoAttackManager ==============================
 
 func _start_auto_attack_manager() -> void:
@@ -166,7 +156,7 @@ func _start_auto_attack_manager() -> void:
 
 
 func _on_auto_attack_manager_heal_ally_triggered(heal_amount: int) -> void:
-	print("Heal ally")
+	print("Heal ally for ", heal_amount)
 
 
 func _on_auto_attack_manager_armor_gained(armor_stacks: int) -> void:
@@ -267,7 +257,7 @@ func _on_poison_tick_timer_timeout() -> void:
 
 #TODO mettre dans le storm manager
 func _on_vulnerability_tick_timer_timeout() -> void:
-	stats.storm.vulnerability_stacks -= 0.1 * stats.storm.vulnerability_stacks
+	stats.storm.vulnerability_stacks -= (0.1 * stats.storm.vulnerability_stacks) as int
 
 
 func _on_character_dead(dead_character: Character) -> void:

@@ -7,7 +7,7 @@ var vulnerability_stacks: int = 0
 
 var periodic_vulnerability_activated: bool # True if the player has at least one of this card
 var periodic_vulnerability_amount: int # amount of vulnerability stack inflicted every period
-var periodic_vulnerability_period: int # Time between to applying of vulnerability stacks (in s)
+var periodic_vulnerability_period: float # Time between to applying of vulnerability stacks (in s)
 
 var healing_crit_amount: int # % of critical damage converted into heal
 

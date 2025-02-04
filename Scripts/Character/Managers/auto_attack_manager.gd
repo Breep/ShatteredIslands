@@ -20,7 +20,7 @@ var aa_counter: int = 0 # Counter of auto attacks
 var _source: Character # Ref to character owner
 var _aa_stats: CharacterAutoAttackStats # Ref to the owner auto attack stats
 var _projectile_scene: PackedScene # Ref to the AutoAttackProjectile packed scene
-var _forced_target: Character # TODO Unused now, maybe for a futur hero that can taunt ?
+#var _forced_target: Character # TODO Unused now, maybe for a futur hero that can taunt ?
 var _attack_strategy: TargetManager.TargettingStrategy = TargetManager.TargettingStrategy.CLOSEST_ENEMY # The algo used to find the target
 
 # ============================== Local scene nodes ==============================
@@ -94,7 +94,7 @@ func _spawn_projectile(target: Character) -> void:
 	var projectile: AutoAttackProjectile = _projectile_scene.instantiate()
 	projectile.init(_source, target, _aa_stats)
 	get_tree().current_scene.add_child(projectile)
-	projectile.global_position = projectile_spawn.global_position + Vector3(randf_range(-10,10), randf_range(-10,10), randf_range(-10,10))
+	projectile.global_position = projectile_spawn.global_position + Vector3(randf_range(-0.01, 0.01), randf_range(-0.01, 0.01), randf_range(-0.01, 0.01))
 
 # ============================== Callbacks functions ==============================
 

@@ -35,7 +35,7 @@ func stop() -> void:
 
 
 func get_reduced_damage_taken_from(damage: int) -> int:
-	return damage - damage * _poison_stats.poison_resist / 100.0
+	return (damage - damage * _poison_stats.poison_resist / 100.0) as int
 
 # ============================== Private functions ==============================
 

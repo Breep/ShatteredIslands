@@ -26,7 +26,7 @@ script = ExtResource("4_k6oqr")
 damage = 30
 attack_speed = 1.0
 critical_chance = 10.0
-critical_multiplier = 100.0
+critical_multiplier = 2.0
 
 [sub_resource type="Resource" id="Resource_yujo4"]
 script = ExtResource("5_4y8ra")
@@ -50,7 +50,7 @@ revive_after_death_percentage_damage = 0
 revive_after_death_time = 0.0
 poison_by_lost_hp_stacks = 0
 poison_by_lost_hp_hp_number = 0
-poison_by_lost_hp_period = 0
+poison_by_lost_hp_period = 0.0
 hp_increased_on_move_hp = 0
 hp_increased_on_move_distance = 0
 

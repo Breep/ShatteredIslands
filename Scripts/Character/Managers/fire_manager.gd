@@ -36,7 +36,7 @@ func stop() -> void:
 		timer.stop()
 
 
-func get_reduced_damage_taken_from(damage_source: Character, damage: int, damage_type: Utils.DamageType) -> int:
+func get_reduced_damage_taken_from(_damage_source: Character, damage: int, damage_type: Utils.DamageType) -> int:
 	if damage_type != Utils.DamageType.MAGIC:
 		return damage
 	

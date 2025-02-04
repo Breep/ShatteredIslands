@@ -70,7 +70,7 @@ func _set_stats_from_character_aa_stats(aa_stats: CharacterAutoAttackStats) -> v
 	if _stats == null:
 		_stats = AutoAttackProjectileStats.new()
 	
-	_stats.speed = 150
+	_stats.speed = 10
 	_stats.damage = aa_stats.damage
 	
 	var effects = _get_effects_from_randomization(aa_stats)
@@ -87,6 +87,7 @@ func _set_stats_from_character_aa_stats(aa_stats: CharacterAutoAttackStats) -> v
 				ProjectileEffect.CRITIC:
 					_stats.is_critic = true
 					_stats.damage *= effects[effect_name]["multiplier"]
+					print("CRITIC")
 					scale *= 2
 				ProjectileEffect.BOUNCE:
 					_stats.is_bouncing = true
@@ -109,12 +110,12 @@ func _move_toward_target(delta: float):
 	
 	var direction: Vector3 = (_target.global_position - global_position).normalized()
 	position += direction * _stats.speed * delta
-	look_at(_target.global_position)
+	#look_at(_target.global_position)
 
 
 func _get_effects_from_randomization(aa_stats: CharacterAutoAttackStats) -> Dictionary:
 	# Adapt critical chance with target vulnerability stacks
-	var critical_chance : float = aa_stats.critical_multiplier
+	var critical_chance : float = aa_stats.critical_chance
 	critical_chance += _get_crit_inc_from_vuln_stacks(_target.stats.storm.vulnerability_stacks)
 	critical_chance = clampf(critical_chance, 0, 100)
 	

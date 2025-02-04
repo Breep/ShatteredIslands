@@ -40,6 +40,7 @@ func _ready() -> void:
 	_rules = load("res://Resources/GameRules/NormalGameRules.tres")
 	_init_families_ref()
 	_active_families.append(get_family_from_type(Family.FamilyType.Poison))
+	_active_families.append(get_family_from_type(Family.FamilyType.Fire))
 
 # ============================== Public function ==============================
 
@@ -109,7 +110,7 @@ func start_game() -> void:
 	if multiplayer.is_server():
 		MultiplayerDeckManager.construct_shop_deck(_active_families, _rules)
 	
-	game_switch_to(GameState.Fighting)
+	game_switch_to(GameState.Buying)
 
 
 func get_family_from_type(family_type: Family.FamilyType) -> Family:

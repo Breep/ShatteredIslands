@@ -14,3 +14,5 @@ shape = SubResource("SphereShape3D_mxhml")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 texture = ExtResource("2_q50sh")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

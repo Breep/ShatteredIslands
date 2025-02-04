@@ -30,3 +30,7 @@ func select_object(screen_position):
 		print("Selected object: ", selected_object.name)
 		print("Position clicked: ", result.position)
 		map_clicked.emit(result.position)
+
+
+func _on_timer_timeout() -> void:
+	GameManager.game_switch_to(GameManager.GameState.Buying)

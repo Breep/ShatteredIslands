@@ -7,7 +7,7 @@ var pacify_stacks: int = 0
 
 var periodic_heal_activated: bool # True if the player has at least one of this card
 var periodic_heal_amount: int # Amount of heal done to an ally every periodic_heal_period
-var periodic_heal_period: int # time between 2 heal from periodic_heal_amount (in s)
+var periodic_heal_period: float # time between 2 heal from periodic_heal_amount (in s)
 
 var heal_projectile_damage: int # Damage done by the healing projectile
 var heal_projectile_chance: int # % of chance to send a heal_projectile every time the character heals someone

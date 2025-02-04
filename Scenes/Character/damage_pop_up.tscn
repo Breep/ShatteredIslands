@@ -1,14 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://b7uung05infs2"]
 
-[ext_resource type="Theme" uid="uid://duu3l81c6tmkh" path="res://Themes/Labels/popup_damage_normal.tres" id="1_602t2"]
+[ext_resource type="FontFile" uid="uid://dgaako73a24kh" path="res://Data/font/rimouski sb.ttf" id="1_mx5gu"]
 [ext_resource type="Script" path="res://Scripts/Character/damage_popup.gd" id="1_pak6f"]
 
-[node name="Control" type="Label"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("1_602t2")
-text = "0"
+[node name="PopUp" type="Label3D"]
+text = "42"
+font = ExtResource("1_mx5gu")
+font_size = 100
 script = ExtResource("1_pak6f")

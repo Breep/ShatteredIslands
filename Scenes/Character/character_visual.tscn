@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://Scripts/Character/character_visual.gd" id="1_8fkrf"]
 [ext_resource type="Theme" uid="uid://duu3l81c6tmkh" path="res://Themes/Labels/popup_damage_normal.tres" id="2_hmo4h"]
-[ext_resource type="Theme" uid="uid://ca12i6ea2frl4" path="res://Themes/Labels/popup_damage_critic.tres" id="3_82kld"]
 [ext_resource type="Theme" uid="uid://b4n71r60crct6" path="res://Themes/Labels/popup_damage_magic.tres" id="4_00g0e"]
 [ext_resource type="Theme" uid="uid://46ac5avxmvtb" path="res://Themes/Labels/popup_damage_poison.tres" id="5_8l6b4"]
 [ext_resource type="Texture2D" uid="uid://dhdk2bbljjwrm" path="res://Data/Assets/Character/PNG/Wraith_01/PNG Sequences/Idle/Wraith_01_Idle_000.png" id="6_82eq5"]
@@ -76,6 +75,7 @@
 [ext_resource type="Texture2D" uid="uid://c8o6188jee5ja" path="res://Data/Assets/Character/PNG/Wraith_01/PNG Sequences/Walking/Wraith_01_Moving Forward_009.png" id="72_tu3yr"]
 [ext_resource type="Texture2D" uid="uid://wdnnjasa3u0h" path="res://Data/Assets/Character/PNG/Wraith_01/PNG Sequences/Walking/Wraith_01_Moving Forward_010.png" id="73_tp4yf"]
 [ext_resource type="Texture2D" uid="uid://bf04mss1b2y7k" path="res://Data/Assets/Character/PNG/Wraith_01/PNG Sequences/Walking/Wraith_01_Moving Forward_011.png" id="74_kn5wn"]
+[ext_resource type="PackedScene" uid="uid://b7uung05infs2" path="res://Scenes/Character/damage_pop_up.tscn" id="76_u6p8r"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1360b"]
 animations = [{
@@ -325,7 +325,7 @@ resource_local_to_scene = true
 size = Vector2(1, 0.35)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_2bgvd"]
-viewport_path = NodePath("Node3D/SubViewport")
+viewport_path = NodePath("TopUI/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p3mll"]
 resource_local_to_scene = true
@@ -333,34 +333,38 @@ transparency = 1
 shading_mode = 0
 albedo_texture = SubResource("ViewportTexture_2bgvd")
 
-[node name="CharacterVisual" type="Node3D"]
+[node name="CharacterVisual" type="Node3D" node_paths=PackedStringArray("physical_popup_spawn", "magic_popup_spawn", "poison_popup_spawn")]
 script = ExtResource("1_8fkrf")
-normal_popup_theme = ExtResource("2_hmo4h")
-critic_popup_theme = ExtResource("3_82kld")
+physical_popup_theme = ExtResource("2_hmo4h")
 magic_popup_theme = ExtResource("4_00g0e")
 poison_popup_theme = ExtResource("5_8l6b4")
+physical_popup_spawn = NodePath("PopUpSpawns/PhysicalDamage")
+magic_popup_spawn = NodePath("PopUpSpawns/MagicDamage")
+poison_popup_spawn = NodePath("PopUpSpawns/PoisonDamage")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+unique_name_in_owner = true
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_1360b")
 animation = &"Idle"
+frame_progress = 0.99226
 
-[node name="Node3D" type="Node3D" parent="."]
+[node name="TopUI" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.09903, 0)
 
-[node name="SubViewport" type="SubViewport" parent="Node3D"]
+[node name="SubViewport" type="SubViewport" parent="TopUI"]
 transparent_bg = true
 gui_embed_subwindows = true
 size = Vector2i(1000, 350)
 render_target_update_mode = 4
 
-[node name="Control" type="Control" parent="Node3D/SubViewport"]
+[node name="Control" type="Control" parent="TopUI/SubViewport"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1000.0
 offset_bottom = 350.0
 
-[node name="Panel" type="Panel" parent="Node3D/SubViewport/Control"]
+[node name="Panel" type="Panel" parent="TopUI/SubViewport/Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -369,7 +373,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_mj886")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Node3D/SubViewport/Control/Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TopUI/SubViewport/Control/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -378,7 +382,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="NameDisplayed" type="Label" parent="Node3D/SubViewport/Control/Panel/VBoxContainer"]
+[node name="NameDisplayed" type="Label" parent="TopUI/SubViewport/Control/Panel/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 6
@@ -387,7 +391,7 @@ theme_override_font_sizes/font_size = 100
 text = "Jacky"
 horizontal_alignment = 1
 
-[node name="HealthBar" type="ProgressBar" parent="Node3D/SubViewport/Control/Panel/VBoxContainer"]
+[node name="HealthBar" type="ProgressBar" parent="TopUI/SubViewport/Control/Panel/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
@@ -397,7 +401,7 @@ step = 1.0
 value = 20.0
 show_percentage = false
 
-[node name="ManaBar" type="ProgressBar" parent="Node3D/SubViewport/Control/Panel/VBoxContainer"]
+[node name="ManaBar" type="ProgressBar" parent="TopUI/SubViewport/Control/Panel/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
@@ -407,7 +411,7 @@ step = 1.0
 value = 20.0
 show_percentage = false
 
-[node name="EnergyBar" type="ProgressBar" parent="Node3D/SubViewport/Control/Panel/VBoxContainer"]
+[node name="EnergyBar" type="ProgressBar" parent="TopUI/SubViewport/Control/Panel/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
@@ -419,8 +423,25 @@ step = 1.0
 value = 20.0
 show_percentage = false
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="TopUI3DPanel" type="MeshInstance3D" parent="."]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 2.3768, 0)
 mesh = SubResource("QuadMesh_75adc")
-skeleton = NodePath("../Node3D")
+skeleton = NodePath("../TopUI")
 surface_material_override/0 = SubResource("StandardMaterial3D_p3mll")
+
+[node name="PopUpSpawns" type="Node3D" parent="."]
+
+[node name="PhysicalDamage" type="Node3D" parent="PopUpSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 3, 0)
+
+[node name="PoisonDamage" type="Node3D" parent="PopUpSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, 0)
+
+[node name="MagicDamage" type="Node3D" parent="PopUpSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2, 0)
+
+[node name="Heal" type="Node3D" parent="PopUpSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, 0)
+
+[node name="PopUp" parent="." instance=ExtResource("76_u6p8r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.17052, 0.3652, 0)

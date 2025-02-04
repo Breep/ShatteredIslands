@@ -3,17 +3,25 @@ extends Node3D
 
 @onready var damage_popup_scene = preload("res://Scenes/Character/damage_pop_up.tscn")
 
-@export var normal_popup_theme: Theme
-@export var critic_popup_theme: Theme
+@export var physical_popup_theme: Theme
 @export var magic_popup_theme: Theme
 @export var poison_popup_theme: Theme
+
+@export var physical_popup_spawn: Node3D
+@export var magic_popup_spawn: Node3D
+@export var poison_popup_spawn: Node3D
 
 # ============================== Local scene nodes ==============================
 
 @onready var _health_bar: ProgressBar = %HealthBar
 @onready var _name_displayed: Label = %NameDisplayed
 
+@onready var _animated_sprite: AnimatedSprite3D = %AnimatedSprite3D
+
 # ============================== Public ==============================
+
+func _ready() -> void:
+	_animated_sprite.autoplay = "Idle"
 
 func update_health_bar(health: int, health_max: int) -> void:
 	_health_bar.max_value = health_max
@@ -25,16 +33,16 @@ func update_name_displayed(player_name: String) -> void:
 
 
 func damage_popup(amount: float, damage_type: Utils.DamageType):
-	var popup = damage_popup_scene.instantiate()
-	var target_position = Vector2(randf_range(10,30), randf_range(10,-30)) 
+	var popup: DamagePopUp = damage_popup_scene.instantiate()
+	var offset = Vector3(randf_range(-0.1, 0.1), randf_range(-0.1, 0.1), randf_range(-0.1, 0.1)) 
 	popup.text = str(amount)
 	get_tree().current_scene.add_child(popup)
-	popup.global_position = global_position + target_position
-	popup.z_index = 1
 	match damage_type:
 		Utils.DamageType.POISON:
-			popup.set("theme", poison_popup_theme)
+			popup.global_position = poison_popup_spawn.global_position + offset
+			popup.outline_modulate = Color(0, 255, 0, 1)
 		Utils.DamageType.PHYSICAL:
-			popup.set("theme", normal_popup_theme)
+			popup.global_position = physical_popup_spawn.global_position + offset
 		Utils.DamageType.MAGIC:
-			popup.set("theme", magic_popup_theme)
+			popup.global_position = magic_popup_spawn.global_position + offset
+			popup.outline_modulate = Color(0, 0, 255, 1)
