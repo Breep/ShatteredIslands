@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://c66yw4go2ykwa"]
 
-[ext_resource type="Script" path="res://Scenes/Maps/fighting_area_3d.gd" id="1_ejogh"]
+[ext_resource type="Script" path="res://Scripts/Areas/fighting_area_3d.gd" id="1_ejogh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iv60j"]
 albedo_color = Color(0.254202, 0.260607, 0.801323, 1)
@@ -34,6 +34,7 @@ size = Vector3(40, 1, 10)
 script = ExtResource("1_ejogh")
 
 [node name="BlueSide" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="BlueSide"]
 mesh = SubResource("BoxMesh_isa1e")
@@ -42,7 +43,7 @@ mesh = SubResource("BoxMesh_isa1e")
 shape = SubResource("BoxShape3D_8xrl2")
 
 [node name="RedSide" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -0.5, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RedSide"]
 mesh = SubResource("BoxMesh_lmosg")
@@ -51,6 +52,7 @@ mesh = SubResource("BoxMesh_lmosg")
 shape = SubResource("BoxShape3D_8xrl2")
 
 [node name="Outside" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Outside"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)

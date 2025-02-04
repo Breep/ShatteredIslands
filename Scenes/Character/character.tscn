@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bjbfnigvphbfc" path="res://Scenes/Character/Managers/storm_manager.tscn" id="11_u5xad"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_k8c50"]
-size = Vector3(1.95462, 2.80115, 0.195313)
+size = Vector3(1.38358, 1.9988, 0.195313)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_747th"]
 properties/0/path = NodePath(".:position")
@@ -25,9 +25,10 @@ script = ExtResource("1_gjax4")
 
 [node name="CharacterVisual" parent="." instance=ExtResource("2_c48md")]
 unique_name_in_owner = true
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.859336, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0953522, 0.357605, -0.000976563)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0834689, 1.02165, -0.000976563)
 shape = SubResource("BoxShape3D_k8c50")
 
 [node name="Timers" type="Node" parent="."]
@@ -43,7 +44,7 @@ autostart = true
 autostart = true
 
 [node name="ProjectileSpawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.942941, -0.531702, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.888041, 0.890776, 0)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 unique_name_in_owner = true

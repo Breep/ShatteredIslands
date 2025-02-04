@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://br1wrpaxa7qjk"]
+[gd_scene load_steps=27 format=3 uid="uid://br1wrpaxa7qjk"]
 
 [ext_resource type="Script" path="res://Scripts/Character/character_visual.gd" id="1_8fkrf"]
 [ext_resource type="Theme" uid="uid://duu3l81c6tmkh" path="res://Themes/Labels/popup_damage_normal.tres" id="2_hmo4h"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://38fvn6erqk1s" path="res://Data/Assets/Character/PNG/Wraith_01/PNG Sequences/Idle/Wraith_01_Idle_010.png" id="16_2hkjr"]
 [ext_resource type="Texture2D" uid="uid://c7sref2fri26s" path="res://Data/Assets/Character/PNG/Wraith_01/PNG Sequences/Idle/Wraith_01_Idle_011.png" id="17_eid1l"]
 [ext_resource type="Theme" uid="uid://uriahirynhrm" path="res://Themes/TMP_Themes/health_bar.tres" id="18_qehcj"]
+[ext_resource type="Theme" uid="uid://bxg2e5lw04pol" path="res://Themes/TMP_Themes/mana_bar.tres" id="19_3u6jw"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1360b"]
 animations = [{
@@ -63,19 +64,26 @@ animations = [{
 "speed": 20.0
 }]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_um86x"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mj886"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3hqhs"]
+bg_color = Color(0.833054, 0.748808, 0.429592, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jo15d"]
+bg_color = Color(0.537427, 0.472393, 0.216299, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_75adc"]
-size = Vector2(0.56, 0.15)
+resource_local_to_scene = true
+size = Vector2(1, 0.35)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_itsr3"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_2bgvd"]
 viewport_path = NodePath("Node3D/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p3mll"]
 resource_local_to_scene = true
 transparency = 1
 shading_mode = 0
-albedo_texture = SubResource("ViewportTexture_itsr3")
+albedo_texture = SubResource("ViewportTexture_2bgvd")
 
 [node name="CharacterVisual" type="Node3D"]
 script = ExtResource("1_8fkrf")
@@ -88,7 +96,7 @@ poison_popup_theme = ExtResource("5_8l6b4")
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_1360b")
 animation = &"Idle"
-frame_progress = 0.059797
+frame_progress = 0.440642
 
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.09903, 0)
@@ -96,20 +104,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.09903, 0)
 [node name="SubViewport" type="SubViewport" parent="Node3D"]
 transparent_bg = true
 gui_embed_subwindows = true
-size = Vector2i(560, 150)
+size = Vector2i(1000, 350)
 render_target_update_mode = 4
 
 [node name="Control" type="Control" parent="Node3D/SubViewport"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 560.0
-offset_bottom = 150.0
+offset_right = 1000.0
+offset_bottom = 350.0
 
 [node name="Panel" type="Panel" parent="Node3D/SubViewport/Control"]
-layout_mode = 0
-offset_right = 560.0
-offset_bottom = 150.0
-theme_override_styles/panel = SubResource("StyleBoxEmpty_um86x")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_mj886")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Node3D/SubViewport/Control/Panel"]
 layout_mode = 1
@@ -124,7 +135,7 @@ alignment = 1
 layout_mode = 2
 size_flags_vertical = 6
 theme = ExtResource("2_hmo4h")
-theme_override_font_sizes/font_size = 65
+theme_override_font_sizes/font_size = 100
 text = "Jacky"
 horizontal_alignment = 1
 
@@ -137,8 +148,28 @@ step = 1.0
 value = 20.0
 show_percentage = false
 
+[node name="ManaBar" type="ProgressBar" parent="Node3D/SubViewport/Control/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 2
+theme = ExtResource("19_3u6jw")
+step = 1.0
+value = 20.0
+show_percentage = false
+
+[node name="EnergyBar" type="ProgressBar" parent="Node3D/SubViewport/Control/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 2
+theme = ExtResource("18_qehcj")
+theme_override_styles/background = SubResource("StyleBoxFlat_3hqhs")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jo15d")
+step = 1.0
+value = 20.0
+show_percentage = false
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(3.5, 0, 0, 0, 3.5, 0, 0, 0, 3.5, 0, 2.13634, 0)
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 2.3768, 0)
 mesh = SubResource("QuadMesh_75adc")
 skeleton = NodePath("../Node3D")
 surface_material_override/0 = SubResource("StandardMaterial3D_p3mll")
