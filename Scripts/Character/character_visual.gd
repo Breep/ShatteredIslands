@@ -1,5 +1,5 @@
 class_name CharacterVisual
-extends Node2D
+extends Node3D
 
 @onready var damage_popup_scene = preload("res://Scenes/Character/damage_pop_up.tscn")
 
@@ -10,8 +10,8 @@ extends Node2D
 
 # ============================== Local scene nodes ==============================
 
-@onready var _health_bar: ProgressBar = $HealthBar
-@onready var _name_displayed: Label = $NameDisplayed
+@onready var _health_bar: ProgressBar = %HealthBar
+@onready var _name_displayed: Label = %NameDisplayed
 
 # ============================== Public ==============================
 

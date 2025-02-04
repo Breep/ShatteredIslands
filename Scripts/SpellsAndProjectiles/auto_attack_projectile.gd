@@ -1,5 +1,5 @@
 class_name AutoAttackProjectile
-extends Area2D
+extends Area3D
 
 # ============================== Enums ==============================
 
@@ -35,7 +35,7 @@ func _process(delta: float) -> void:
 	_move_toward_target(delta)
 
 
-func _on_body_entered(body: Node2D) -> void:
+func _on_body_entered(body: Node3D) -> void:
 	if body is Character and body == _target:
 		if _target != null:
 			_target.take_damage_flat(_source, _stats.damage, Utils.DamageType.PHYSICAL)
@@ -107,7 +107,7 @@ func _move_toward_target(delta: float):
 		printerr("AutoAttackProjectile [", name, "] is alive but with no target")
 		return
 	
-	var direction: Vector2 = (_target.global_position - global_position).normalized()
+	var direction: Vector3 = (_target.global_position - global_position).normalized()
 	position += direction * _stats.speed * delta
 	look_at(_target.global_position)
 

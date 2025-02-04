@@ -3,8 +3,12 @@ extends Resource
 
 @export var name: String
 @export var description: String
+
 @export var stats: CharacterStats
+@export var aa_projectile: PackedScene
+
 @export var sprite: CompressedTexture2D
+
 @export var family_1: Family
 @export var family_2: Family
 

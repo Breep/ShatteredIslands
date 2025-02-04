@@ -52,8 +52,9 @@ replication_config = SubResource("SceneReplicationConfig_747th")
 
 [node name="Managers" type="Node" parent="."]
 
-[node name="AutoAttackManager" parent="Managers" instance=ExtResource("3_xqqnt")]
+[node name="AutoAttackManager" parent="Managers" node_paths=PackedStringArray("projectile_spawn") instance=ExtResource("3_xqqnt")]
 unique_name_in_owner = true
+projectile_spawn = NodePath("../../ProjectileSpawn")
 
 [node name="DefenseManager" parent="Managers" instance=ExtResource("4_yswo2")]
 unique_name_in_owner = true

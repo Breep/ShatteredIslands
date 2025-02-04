@@ -1,6 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://c66yw4go2ykwa"]
+[gd_scene load_steps=12 format=3 uid="uid://c66yw4go2ykwa"]
 
 [ext_resource type="Script" path="res://Scripts/Areas/fighting_area_3d.gd" id="1_ejogh"]
+[ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://Scenes/Maps/spawn_manager.tscn" id="2_87yha"]
+[ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Scenes/Character/character.tscn" id="3_7oubw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iv60j"]
 albedo_color = Color(0.254202, 0.260607, 0.801323, 1)
@@ -83,3 +85,15 @@ size = 20.463
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.883038, -0.260635, 0.390274, 0, 0.831605, 0.555367, -0.469302, -0.49041, 0.734339, 0, 15.6227, 0)
 light_color = Color(0.707351, 0.647416, 0.866633, 1)
+
+[node name="SpawnManager" parent="." node_paths=PackedStringArray("spawns") instance=ExtResource("2_87yha")]
+spawns = [NodePath("../Spawns/0"), NodePath("../Spawns/1")]
+character_scene = ExtResource("3_7oubw")
+
+[node name="Spawns" type="Node3D" parent="."]
+
+[node name="0" type="Node3D" parent="Spawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00791693, 1.43051e-06, 0.0488944)
+
+[node name="1" type="Node3D" parent="Spawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.93962, -9.53674e-07, 0.0912552)

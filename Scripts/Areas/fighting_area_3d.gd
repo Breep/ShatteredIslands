@@ -1,4 +1,4 @@
-#class_name FightingArea
+class_name FightingArea
 extends Node3D
 
 signal map_clicked(position: Vector3)
@@ -29,3 +29,4 @@ func select_object(screen_position):
 		var selected_object = result.collider
 		print("Selected object: ", selected_object.name)
 		print("Position clicked: ", result.position)
+		map_clicked.emit(result.position)

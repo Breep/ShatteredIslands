@@ -12,7 +12,7 @@ var _optional_timers: Array[Timer]
 
 # ============================== Spells scenes ==============================
 
-@onready var _healing_fire_area_scene: PackedScene = preload("res://Scenes/Spells/healing_fire_area.tscn")
+@onready var _healing_fire_area_scene: PackedScene = preload("res://Scenes/SpellsAndProjectiles/healing_fire_area.tscn")
 
 # ============================== Public functions ==============================
 
@@ -58,7 +58,7 @@ func _lanch_optional_spells() -> void:
 		healing_fire_area.init(_source, _fire_stats.healing_fire_area_damage, _fire_stats.healing_fire_area_heal, 
 				_fire_stats.healing_fire_area_period, _fire_stats.healing_fire_area_range)
 		_source.add_child(healing_fire_area)
-		healing_fire_area.position = Vector2.ZERO
+		healing_fire_area.position = Vector3.ZERO
 
 # ============================== Callbacks functions ==============================
 

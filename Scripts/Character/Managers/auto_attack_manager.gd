@@ -9,7 +9,7 @@ signal heal_ally_triggered(heal_amount: int)
 
 # ============================== Export variables ==============================
 
-@export var projectile_spawn: Node2D
+@export var projectile_spawn: Node3D
 
 # ============================== Public variables ==============================
 
@@ -94,7 +94,7 @@ func _spawn_projectile(target: Character) -> void:
 	var projectile: AutoAttackProjectile = _projectile_scene.instantiate()
 	projectile.init(_source, target, _aa_stats)
 	get_tree().current_scene.add_child(projectile)
-	projectile.global_position = projectile_spawn.global_position + Vector2(randf_range(-10,10), randf_range(-10,10))
+	projectile.global_position = projectile_spawn.global_position + Vector3(randf_range(-10,10), randf_range(-10,10), randf_range(-10,10))
 
 # ============================== Callbacks functions ==============================
 

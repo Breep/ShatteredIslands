@@ -1,5 +1,5 @@
 class_name Character
-extends StaticBody2D
+extends CharacterBody3D
 
 # ============================== Signals ==============================
 
@@ -16,8 +16,7 @@ var stats: CharacterStats # Needs to be public for easier upgrades access
 
 # ============================== Private variables ==============================
 
-var _aa_projectile = load("res://Scenes/Prefabs/projectile.tscn") # TODO move to hero
-var _fighting_area: FightingArea # TODO remove
+var _fighting_area: FightingArea
 var _is_dead: bool = false
 var _is_player_character: bool = false
 
@@ -39,14 +38,19 @@ var _is_player_character: bool = false
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	_fighting_area = get_tree().get_root().find_child("FightingArea", true, false)
+	_fighting_area = get_tree().get_root().find_child("FightingArea3D", true, false)
+	if _fighting_area != null:
+		_fighting_area.connect("map_clicked", _on_fighting_area_map_clicked)
+	
 	stats = hero.stats.duplicate(true) # Copy all hero base stats into a new stat resource
 	stats.health = stats.health_max
+	
 	_character_visual.update_health_bar(stats.health, stats.health_max)
+	
 	_multiplayerSynchroniser.set_multiplayer_authority(player.id)
 	_is_player_character = _multiplayerSynchroniser.get_multiplayer_authority() == multiplayer.get_unique_id()
 	_character_visual.update_name_displayed(player.name)
-
+	
 	_apply_all_cards_upgrades()
 
 # ============================== Public functions ==============================
@@ -96,7 +100,7 @@ func connect_all_players_spawned_signal(node: Node, signal_name: String) -> void
 
 func _move_to_cell(cell : Vector2):
 	if _is_dead: return
-	position = _fighting_area.get_global_cell_position(cell)
+	
 
 
 func _apply_all_cards_upgrades() -> void:
@@ -158,7 +162,7 @@ func _start_auto_attack_manager() -> void:
 	_auto_attack_manager.heal_ally_triggered.connect(_on_auto_attack_manager_heal_ally_triggered)
 	_auto_attack_manager.armor_gained.connect(_on_auto_attack_manager_armor_gained)
 	_auto_attack_manager.max_health_gained.connect(_on_auto_attack_manager_max_health_gained)
-	_auto_attack_manager.start(self, stats.auto_attack, _aa_projectile)
+	_auto_attack_manager.start(self, stats.auto_attack, hero.aa_projectile)
 
 
 func _on_auto_attack_manager_heal_ally_triggered(heal_amount: int) -> void:
@@ -240,14 +244,14 @@ func _on_all_players_spawned() -> void:
 	_start_poison_manager()
 
 
-func _on_moving_timer_timeout() -> void:
+func _on_fighting_area_map_clicked(new_position: Vector3) -> void:
 	if _is_dead or not _is_player_character:
 		return
 	
-	if _fighting_area.is_selection_active:
-		_move_to_cell(_fighting_area.selection_cell)
+	global_position = new_position
 
 
+# TODO bouger dans le poison manager
 func _on_poison_tick_timer_timeout() -> void:
 	var poison_damage: int = 0
 	for effect in stats.poison.poison_effects:
@@ -261,6 +265,7 @@ func _on_poison_tick_timer_timeout() -> void:
 		take_damage_flat(null, _poison_manager.get_reduced_damage_taken_from(poison_damage), Utils.DamageType.POISON)
 
 
+#TODO mettre dans le storm manager
 func _on_vulnerability_tick_timer_timeout() -> void:
 	stats.storm.vulnerability_stacks -= 0.1 * stats.storm.vulnerability_stacks
 
