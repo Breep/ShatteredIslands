@@ -1,51 +1,144 @@
-[gd_scene load_steps=9 format=3 uid="uid://br1wrpaxa7qjk"]
+[gd_scene load_steps=24 format=3 uid="uid://br1wrpaxa7qjk"]
 
 [ext_resource type="Script" path="res://Scripts/Character/character_visual.gd" id="1_8fkrf"]
-[ext_resource type="Texture2D" uid="uid://d3g1up274niat" path="res://Data/Assets/Misc/Textrure_misc/TX Player.png" id="2_ehlfh"]
 [ext_resource type="Theme" uid="uid://duu3l81c6tmkh" path="res://Themes/Labels/popup_damage_normal.tres" id="2_hmo4h"]
 [ext_resource type="Theme" uid="uid://ca12i6ea2frl4" path="res://Themes/Labels/popup_damage_critic.tres" id="3_82kld"]
 [ext_resource type="Theme" uid="uid://b4n71r60crct6" path="res://Themes/Labels/popup_damage_magic.tres" id="4_00g0e"]
 [ext_resource type="Theme" uid="uid://46ac5avxmvtb" path="res://Themes/Labels/popup_damage_poison.tres" id="5_8l6b4"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cwyy0"]
-atlas = ExtResource("2_ehlfh")
-region = Rect2(0, 0, 32, 64)
+[ext_resource type="Texture2D" uid="uid://dhdk2bbljjwrm" path="res://Data/Assets/Character/PNG/Wraith_01/PNG Sequences/Idle/Wraith_01_Idle_000.png" id="6_82eq5"]
+[ext_resource type="Texture2D" uid="uid://m64orq5lb7lk" path="res://Data/Assets/Character/PNG/Wraith_01/PNG Sequences/Idle/Wraith_01_Idle_001.png" id="7_qbuo4"]
+[ext_resource type="Texture2D" uid="uid://bfsg8ogi70e7c" path="res://Data/Assets/Character/PNG/Wraith_01/PNG Sequences/Idle/Wraith_01_Idle_002.png" id="8_kgsmt"]
+[ext_resource type="Texture2D" uid="uid://hcdgune58sf6" path="res://Data/Assets/Character/PNG/Wraith_01/PNG Sequences/Idle/Wraith_01_Idle_003.png" id="9_2bxr2"]
+[ext_resource type="Texture2D" uid="uid://cgcbepotfic5" path="res://Data/Assets/Character/PNG/Wraith_01/PNG Sequences/Idle/Wraith_01_Idle_004.png" id="10_bpu8v"]
+[ext_resource type="Texture2D" uid="uid://crlltv3w8fyp1" path="res://Data/Assets/Character/PNG/Wraith_01/PNG Sequences/Idle/Wraith_01_Idle_005.png" id="11_qx21a"]
+[ext_resource type="Texture2D" uid="uid://b5ibifbks2c5p" path="res://Data/Assets/Character/PNG/Wraith_01/PNG Sequences/Idle/Wraith_01_Idle_006.png" id="12_3dv28"]
+[ext_resource type="Texture2D" uid="uid://dq7yl2h5fuaa3" path="res://Data/Assets/Character/PNG/Wraith_01/PNG Sequences/Idle/Wraith_01_Idle_007.png" id="13_da7m1"]
+[ext_resource type="Texture2D" uid="uid://dnooml7u2h4yc" path="res://Data/Assets/Character/PNG/Wraith_01/PNG Sequences/Idle/Wraith_01_Idle_008.png" id="14_g72t6"]
+[ext_resource type="Texture2D" uid="uid://cuf2iggpe756p" path="res://Data/Assets/Character/PNG/Wraith_01/PNG Sequences/Idle/Wraith_01_Idle_009.png" id="15_i5s0d"]
+[ext_resource type="Texture2D" uid="uid://38fvn6erqk1s" path="res://Data/Assets/Character/PNG/Wraith_01/PNG Sequences/Idle/Wraith_01_Idle_010.png" id="16_2hkjr"]
+[ext_resource type="Texture2D" uid="uid://c7sref2fri26s" path="res://Data/Assets/Character/PNG/Wraith_01/PNG Sequences/Idle/Wraith_01_Idle_011.png" id="17_eid1l"]
+[ext_resource type="Theme" uid="uid://uriahirynhrm" path="res://Themes/TMP_Themes/health_bar.tres" id="18_qehcj"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1360b"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cwyy0")
+"texture": ExtResource("6_82eq5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_qbuo4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_kgsmt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_2bxr2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_bpu8v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_qx21a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_3dv28")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_da7m1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_g72t6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_i5s0d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_2hkjr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_eid1l")
 }],
 "loop": true,
 "name": &"Idle",
-"speed": 5.0
+"speed": 20.0
 }]
 
-[node name="CharacterVisual" type="Node2D"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_um86x"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_75adc"]
+size = Vector2(0.56, 0.15)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_itsr3"]
+viewport_path = NodePath("Node3D/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p3mll"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_itsr3")
+
+[node name="CharacterVisual" type="Node3D"]
 script = ExtResource("1_8fkrf")
 normal_popup_theme = ExtResource("2_hmo4h")
 critic_popup_theme = ExtResource("3_82kld")
 magic_popup_theme = ExtResource("4_00g0e")
 poison_popup_theme = ExtResource("5_8l6b4")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_1360b")
 animation = &"Idle"
+frame_progress = 0.059797
 
-[node name="HealthBar" type="ProgressBar" parent="."]
-offset_left = -17.0
-offset_top = -49.0
-offset_right = 19.0
-offset_bottom = -45.0
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.09903, 0)
+
+[node name="SubViewport" type="SubViewport" parent="Node3D"]
+transparent_bg = true
+gui_embed_subwindows = true
+size = Vector2i(560, 150)
+render_target_update_mode = 4
+
+[node name="Control" type="Control" parent="Node3D/SubViewport"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 560.0
+offset_bottom = 150.0
+
+[node name="Panel" type="Panel" parent="Node3D/SubViewport/Control"]
+layout_mode = 0
+offset_right = 560.0
+offset_bottom = 150.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_um86x")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Node3D/SubViewport/Control/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="NameDisplayed" type="Label" parent="Node3D/SubViewport/Control/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("2_hmo4h")
+theme_override_font_sizes/font_size = 65
+text = "Jacky"
+horizontal_alignment = 1
+
+[node name="HealthBar" type="ProgressBar" parent="Node3D/SubViewport/Control/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 2
+theme = ExtResource("18_qehcj")
 step = 1.0
+value = 20.0
 show_percentage = false
 
-[node name="NameDisplayed" type="Label" parent="."]
-offset_left = -52.0
-offset_top = -43.0
-offset_right = 52.0
-offset_bottom = -20.0
-text = "Name"
-horizontal_alignment = 1
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(3.5, 0, 0, 0, 3.5, 0, 0, 0, 3.5, 0, 2.13634, 0)
+mesh = SubResource("QuadMesh_75adc")
+skeleton = NodePath("../Node3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_p3mll")

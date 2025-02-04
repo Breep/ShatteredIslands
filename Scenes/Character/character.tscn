@@ -12,23 +12,23 @@
 [ext_resource type="PackedScene" uid="uid://dhah05lihxk4p" path="res://Scenes/Character/Managers/shadow_manager.tscn" id="10_7fxxn"]
 [ext_resource type="PackedScene" uid="uid://bjbfnigvphbfc" path="res://Scenes/Character/Managers/storm_manager.tscn" id="11_u5xad"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lk7gr"]
-size = Vector2(21, 44)
+[sub_resource type="BoxShape3D" id="BoxShape3D_k8c50"]
+size = Vector3(1.95462, 2.80115, 0.195313)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_747th"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 2
 
-[node name="Character" type="StaticBody2D" groups=["PLAYERS"]]
+[node name="Character" type="CharacterBody3D" groups=["PLAYERS"]]
 script = ExtResource("1_gjax4")
 
 [node name="CharacterVisual" parent="." instance=ExtResource("2_c48md")]
 unique_name_in_owner = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 4)
-shape = SubResource("RectangleShape2D_lk7gr")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0953522, 0.357605, -0.000976563)
+shape = SubResource("BoxShape3D_k8c50")
 
 [node name="Timers" type="Node" parent="."]
 
@@ -42,8 +42,8 @@ autostart = true
 [node name="VulnerabilityTickTimer" type="Timer" parent="Timers"]
 autostart = true
 
-[node name="ProjectileSpawn" type="Node2D" parent="."]
-position = Vector2(13, -23)
+[node name="ProjectileSpawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.942941, -0.531702, 0)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 unique_name_in_owner = true
@@ -51,9 +51,8 @@ replication_config = SubResource("SceneReplicationConfig_747th")
 
 [node name="Managers" type="Node" parent="."]
 
-[node name="AutoAttackManager" parent="Managers" node_paths=PackedStringArray("projectile_spawn") instance=ExtResource("3_xqqnt")]
+[node name="AutoAttackManager" parent="Managers" instance=ExtResource("3_xqqnt")]
 unique_name_in_owner = true
-projectile_spawn = NodePath("../../ProjectileSpawn")
 
 [node name="DefenseManager" parent="Managers" instance=ExtResource("4_yswo2")]
 unique_name_in_owner = true
