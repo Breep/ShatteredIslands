@@ -52,5 +52,8 @@ func _lanch_optional_spells() -> void:
 
 func _on_periodic_stacks_timer_timeout() -> void:
 	var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.RANDOM_ENEMY)
+	if target == null:
+		return
+	
 	var poison_stacks = _poison_stats.periodic_stacks_number
 	target.take_poison_stacks(_source, poison_stacks, 10)

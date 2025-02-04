@@ -18,7 +18,7 @@ var charact_array : Array[Character]
 
 func _ready() -> void:
 	charact_array = _get_all_scene_characters()
-	update_player_stats(hero_test)
+		#update_player_stats(hero_test)
 	_shop = get_tree().root.find_child("CardShop", true, false) 
 	if _shop == null:
 		printerr("shop nul")
