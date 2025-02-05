@@ -1,0 +1,84 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmo0ff086abwu"]
+
+[ext_resource type="Script" path="res://Scenes/buying_zone/3d_card_table.gd" id="1_6gp85"]
+[ext_resource type="Texture2D" uid="uid://csebxot4tboo4" path="res://Data/Assets/Card/GENERAL/BACK.png" id="1_jn5n6"]
+
+[node name="CardPile" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.714123, 0, 0)
+script = ExtResource("1_6gp85")
+defense_level = 10
+poison_level = 1
+fire_level = 0
+
+[node name="1" type="Sprite3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.90528, 0.424816, 0, 1.85693e-08, -3.9571e-08, -1, -0.424816, 0.90528, -4.37114e-08, 1.06203, 0, 0)
+visible = false
+pixel_size = 0.0002
+texture = ExtResource("1_jn5n6")
+
+[node name="2" type="Sprite3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.920191, 0.39147, 0, 1.71117e-08, -4.02228e-08, -1, -0.39147, 0.920191, -4.37114e-08, 0.932681, -5.68859e-09, 0.13014)
+visible = false
+pixel_size = 0.0002
+texture = ExtResource("1_jn5n6")
+
+[node name="3" type="Sprite3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.944909, 0.327333, 0, 1.43082e-08, -4.13033e-08, -1, -0.327333, 0.944909, -4.37114e-08, 0.814226, -1.20009e-08, 0.274548)
+visible = false
+pixel_size = 0.0002
+texture = ExtResource("1_jn5n6")
+
+[node name="4" type="Sprite3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.972909, 0.231188, 0, 1.01055e-08, -4.25272e-08, -1, -0.231188, 0.972909, -4.37114e-08, 0.6318, -1.3629e-08, 0.311795)
+visible = false
+pixel_size = 0.0002
+texture = ExtResource("1_jn5n6")
+
+[node name="5" type="Sprite3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.406312, -1.46894e-08, 0.336055)
+visible = false
+pixel_size = 0.0002
+texture = ExtResource("1_jn5n6")
+
+[node name="6" type="Sprite3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.980022, -0.198889, 0, -8.69372e-09, -4.28381e-08, -1, 0.198889, 0.980022, -4.37114e-08, 0.190958, -1.36742e-08, 0.31283)
+visible = false
+pixel_size = 0.0002
+texture = ExtResource("1_jn5n6")
+
+[node name="7" type="Sprite3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.965622, -0.259948, 0, -1.13627e-08, -4.22087e-08, -1, 0.259948, 0.965622, -4.37114e-08, 0.0310437, -1.08219e-08, 0.247576)
+visible = false
+pixel_size = 0.0002
+texture = ExtResource("1_jn5n6")
+
+[node name="8" type="Sprite3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.908391, -0.418121, 0, -1.82766e-08, -3.97071e-08, -1, 0.418121, 0.908391, -4.37114e-08, -0.0771639, -7.44445e-09, 0.170309)
+visible = false
+pixel_size = 0.0002
+texture = ExtResource("1_jn5n6")
+
+[node name="9" type="Sprite3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.877439, -0.479688, 0, -2.09678e-08, -3.83541e-08, -1, 0.479688, 0.877439, -4.37114e-08, -0.198754, -3.58405e-09, 0.0819936)
+visible = false
+pixel_size = 0.0002
+texture = ExtResource("1_jn5n6")
+
+[node name="10" type="Sprite3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.918059, -0.396443, 0, -1.73291e-08, -4.01296e-08, -1, 0.396443, 0.918059, -4.37114e-08, -0.314303, 9.86935e-10, -0.0225784)
+visible = false
+pixel_size = 0.0002
+texture = ExtResource("1_jn5n6")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 2.3573, 4.08509)
