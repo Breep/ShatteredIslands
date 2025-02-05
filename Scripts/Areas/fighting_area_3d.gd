@@ -9,6 +9,7 @@ func _input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		select_object(event.position)
 
+
 func select_object(screen_position):
 	if not camera: return
 	print("Try select object")
@@ -29,7 +30,7 @@ func select_object(screen_position):
 		var selected_object = result.collider
 		print("Selected object: ", selected_object.name)
 		print("Position clicked: ", result.position)
-		map_clicked.emit(result.position)
+		map_clicked.emit(result.position) # TODO check group, improve raycast to go through characters and others spells
 
 
 func _on_timer_timeout() -> void:

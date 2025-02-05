@@ -10,7 +10,7 @@ signal dead(dead_character: Character)
 var team: int
 var hero: Hero
 var player: Player
-var stats: CharacterStats # Needs to be public for easier upgrades access
+var stats := CharacterStats.new() # Needs to be public for easier upgrades access
 
 @onready var target_manager: TargetManager = %TargetManager # Needs to be public for easier access for other managers TODO Maybe rework ?
 
@@ -42,16 +42,13 @@ func _ready() -> void:
 	if _fighting_area != null:
 		_fighting_area.connect("map_clicked", _on_fighting_area_map_clicked)
 	
-	stats = hero.stats.duplicate(true) # Copy all hero base stats into a new stat resource
-	stats.health = stats.health_max
-	
-	_character_visual.update_health_bar(stats.health, stats.health_max)
-	
 	_multiplayerSynchroniser.set_multiplayer_authority(player.id)
 	_is_player_character = _multiplayerSynchroniser.get_multiplayer_authority() == multiplayer.get_unique_id()
 	_character_visual.update_name_displayed(player.name)
 	
 	_apply_all_cards_upgrades()
+
+	_character_visual.update_health_bar(stats.health, stats.health_max)
 
 # ============================== Public functions ==============================
 
@@ -104,8 +101,7 @@ func _apply_all_cards_upgrades() -> void:
 		printerr("No deck on the player")
 		return
 	
-	stats = hero.stats.duplicate(true) # Reset stats
-	stats.health = stats.health_max
+	stats.init(hero.stats) # Reset stats
 	for card in player.deck.cardPile:
 		card.player_upgrade.apply(self, card.lvl)
 	
@@ -114,6 +110,7 @@ func _apply_all_cards_upgrades() -> void:
 
 
 func _update_auto_attack_speed() -> void:
+	return
 	stats.auto_attack.attack_speed = hero.stats.auto_attack.attack_speed # Get default hero attack speed
 	var attack_speed_boost: float = stats.auto_attack.attack_speed_boost + stats.auto_attack.attack_speed_overtime_current
 	var multiply_boost: float = remap(attack_speed_boost, 0, 100, 1, 2) # Convert % in proportional multiple (100% = x2 | 150% = x2.5)

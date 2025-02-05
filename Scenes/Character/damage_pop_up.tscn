@@ -6,5 +6,5 @@
 [node name="PopUp" type="Label3D"]
 text = "42"
 font = ExtResource("1_mx5gu")
-font_size = 100
+font_size = 150
 script = ExtResource("1_pak6f")

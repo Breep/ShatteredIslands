@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/SpellsAndProjectiles/healing_fire_area.gd" id="1_poi3c"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_yjd37"]
-height = 0.1
+height = 0.3
 radius = 3.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fgae4"]
@@ -27,3 +27,7 @@ mesh = SubResource("CylinderMesh_fs6qp")
 
 [node name="EffectTimer" type="Timer" parent="."]
 unique_name_in_owner = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="EffectTimer" to="." method="_on_effect_timer_timeout"]

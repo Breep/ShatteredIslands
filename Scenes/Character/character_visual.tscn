@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=3 uid="uid://br1wrpaxa7qjk"]
+[gd_scene load_steps=83 format=3 uid="uid://br1wrpaxa7qjk"]
 
 [ext_resource type="Script" path="res://Scripts/Character/character_visual.gd" id="1_8fkrf"]
 [ext_resource type="Theme" uid="uid://duu3l81c6tmkh" path="res://Themes/Labels/popup_damage_normal.tres" id="2_hmo4h"]
@@ -75,7 +75,6 @@
 [ext_resource type="Texture2D" uid="uid://c8o6188jee5ja" path="res://Data/Assets/Character/PNG/Wraith_01/PNG Sequences/Walking/Wraith_01_Moving Forward_009.png" id="72_tu3yr"]
 [ext_resource type="Texture2D" uid="uid://wdnnjasa3u0h" path="res://Data/Assets/Character/PNG/Wraith_01/PNG Sequences/Walking/Wraith_01_Moving Forward_010.png" id="73_tp4yf"]
 [ext_resource type="Texture2D" uid="uid://bf04mss1b2y7k" path="res://Data/Assets/Character/PNG/Wraith_01/PNG Sequences/Walking/Wraith_01_Moving Forward_011.png" id="74_kn5wn"]
-[ext_resource type="PackedScene" uid="uid://b7uung05infs2" path="res://Scenes/Character/damage_pop_up.tscn" id="76_u6p8r"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1360b"]
 animations = [{
@@ -438,10 +437,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 3, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, 0)
 
 [node name="MagicDamage" type="Node3D" parent="PopUpSpawns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2, 2, 0)
 
 [node name="Heal" type="Node3D" parent="PopUpSpawns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, 0)
-
-[node name="PopUp" parent="." instance=ExtResource("76_u6p8r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.17052, 0.3652, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2, 2, 0)

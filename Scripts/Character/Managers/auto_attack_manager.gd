@@ -47,7 +47,7 @@ func start(source: Character, aa_stats: CharacterAutoAttackStats, projectile_sce
 	_source = source
 	_projectile_scene = projectile_scene
 	_aa_stats = aa_stats
-	set_auto_attack_speed(_aa_stats.attack_speed)
+	set_auto_attack_speed(_source.stats.attack_speed)
 	_auto_attack_timer.start()
 
 
@@ -92,7 +92,7 @@ func _auto_attack(target: Character):
 
 func _spawn_projectile(target: Character) -> void:
 	var projectile: AutoAttackProjectile = _projectile_scene.instantiate()
-	projectile.init(_source, target, _aa_stats)
+	projectile.init(_source, target)
 	get_tree().current_scene.add_child(projectile)
 	projectile.global_position = projectile_spawn.global_position + Vector3(randf_range(-0.01, 0.01), randf_range(-0.01, 0.01), randf_range(-0.01, 0.01))
 
