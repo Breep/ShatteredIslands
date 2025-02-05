@@ -41,6 +41,7 @@ func _ready() -> void:
 	_init_families_ref()
 	_active_families.append(get_family_from_type(Family.FamilyType.Poison))
 	_active_families.append(get_family_from_type(Family.FamilyType.Fire))
+	_active_families.append(get_family_from_type(Family.FamilyType.Storm))
 
 # ============================== Public function ==============================
 

@@ -34,8 +34,24 @@ func stop() -> void:
 		timer.stop()
 
 
-func get_reduced_damage_taken_from(damage: int) -> int:
+func get_reduced_damage(damage: int) -> int:
 	return (damage - damage * _poison_stats.poison_resist / 100.0) as int
+
+
+func add_to_poison_effects(source: Character, poison_stacks: int, poison_duration: int) -> void:
+	if poison_stacks == 0:
+		return
+	
+	for effect in _poison_stats.poison_effects:
+		if effect.source == source and effect.ticks_left == poison_duration:
+			effect.stacks_number += poison_stacks
+			return
+	
+	var new_effect := PoisonEffect.new()
+	new_effect.stacks_number = poison_stacks
+	new_effect.ticks_left = poison_duration
+	new_effect.source = source
+	_poison_stats.poison_effects.append(new_effect)
 
 # ============================== Private functions ==============================
 
@@ -57,3 +73,16 @@ func _on_periodic_stacks_timer_timeout() -> void:
 	
 	var poison_stacks = _poison_stats.periodic_stacks_number
 	target.take_poison_stacks(_source, poison_stacks, 10)
+
+
+func _on_poison_tick_timer_timeout() -> void:
+	var poison_damage: int = 0
+	for effect in _poison_stats.poison_effects:
+		if effect.ticks_left > 0:
+			effect.ticks_left -= 1
+			poison_damage += effect.stacks_number
+		else:
+			_poison_stats.poison_effects.erase(effect)
+	
+	if poison_damage > 0:
+		_source.take_damage_flat(null, get_reduced_damage(poison_damage), Utils.DamageType.POISON)

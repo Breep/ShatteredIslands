@@ -31,18 +31,6 @@ transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.859336, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0834689, 1.02165, -0.000976563)
 shape = SubResource("BoxShape3D_k8c50")
 
-[node name="Timers" type="Node" parent="."]
-
-[node name="MovingTimer" type="Timer" parent="Timers"]
-wait_time = 3.0
-autostart = true
-
-[node name="PoisonTickTimer" type="Timer" parent="Timers"]
-autostart = true
-
-[node name="VulnerabilityTickTimer" type="Timer" parent="Timers"]
-autostart = true
-
 [node name="ProjectileSpawn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.888041, 0.890776, 0)
 
@@ -79,7 +67,5 @@ unique_name_in_owner = true
 
 [node name="StormManager" parent="Managers" instance=ExtResource("11_u5xad")]
 unique_name_in_owner = true
-
-[connection signal="timeout" from="Timers/MovingTimer" to="." method="_on_moving_timer_timeout"]
-[connection signal="timeout" from="Timers/PoisonTickTimer" to="." method="_on_poison_tick_timer_timeout"]
-[connection signal="timeout" from="Timers/VulnerabilityTickTimer" to="." method="_on_vulnerability_tick_timer_timeout"]
+_percent_decrease = 10.0
+_minimum_stacks_decrease_flat = 2.0

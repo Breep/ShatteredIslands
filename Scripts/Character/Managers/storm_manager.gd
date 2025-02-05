@@ -5,6 +5,9 @@ extends Node
 
 # ============================== Private variables ==============================
 
+@export var _percent_decrease: float # Percentage of vulnerability stacks removed per tick
+@export var _minimum_stacks_decrease_flat: float # Minimum stacks removed each tick
+
 var _source: Character # Ref to character owner
 var _storm_stats: CharacterStormStats # Ref to the owner storm stats
 
@@ -48,7 +51,22 @@ func _lanch_optional_spells() -> void:
 # ============================== Callbacks functions ==============================
 
 func _on_periodic_vulnerability_timer_timeout() -> void:
-	print("StormManager: Periodic vulnerability")
+	#print("StormManager: Periodic vulnerability")
 	var target: Character = _source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST_ENEMY)
+	if target == null:
+		return
+	
 	var vulnerability_stacks: int = _storm_stats.periodic_vulnerability_amount
 	target.take_condition_stacks(_source, vulnerability_stacks, Utils.StackType.VULNERABILITY)
+
+
+func _on_vulnerability_timer_timeout() -> void:
+	#print("StormManager: Vulnerability removal")
+	var vulnerability_stacks_removed: int = (0.1 * _storm_stats.vulnerability_stacks) as int
+	if vulnerability_stacks_removed < _minimum_stacks_decrease_flat:
+		vulnerability_stacks_removed = _minimum_stacks_decrease_flat
+	
+	_storm_stats.vulnerability_stacks -= vulnerability_stacks_removed
+	
+	if _storm_stats.vulnerability_stacks < 0:
+		_storm_stats.vulnerability_stacks = 0

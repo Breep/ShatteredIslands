@@ -22,7 +22,6 @@ var _is_player_character: bool = false
 
 # ============================== Local scene nodes ==============================
 
-@onready var _timers_holder: Node = $Timers # TODO remove
 @onready var _character_visual: CharacterVisual = $CharacterVisual
 
 @onready var _multiplayerSynchroniser: MultiplayerSynchronizer = %MultiplayerSynchronizer
@@ -76,7 +75,7 @@ func take_damage_flat(source: Character, damage: int, damage_type: Utils.DamageT
 
 
 func take_poison_stacks(source: Character, poison_stacks: int, poison_duration: int) -> void:
-	_add_to_poison_effects(source, poison_stacks, poison_duration)
+	_poison_manager.add_to_poison_effects(source, poison_stacks, poison_duration)
 
 
 func take_condition_stacks(_source: Character, stacks_number: int, stack_type: Utils.StackType) -> void:
@@ -104,40 +103,6 @@ func _apply_all_cards_upgrades() -> void:
 	stats.init(hero.stats) # Reset stats
 	for card in player.deck.cardPile:
 		card.player_upgrade.apply(self, card.lvl)
-	
-	_update_auto_attack_speed()
-	_create_optional_timers()
-
-
-func _update_auto_attack_speed() -> void:
-	return
-	stats.auto_attack.attack_speed = hero.stats.auto_attack.attack_speed # Get default hero attack speed
-	var attack_speed_boost: float = stats.auto_attack.attack_speed_boost + stats.auto_attack.attack_speed_overtime_current
-	var multiply_boost: float = remap(attack_speed_boost, 0, 100, 1, 2) # Convert % in proportional multiple (100% = x2 | 150% = x2.5)
-	stats.auto_attack.attack_speed *= multiply_boost
-	_auto_attack_manager.set_auto_attack_speed(stats.auto_attack.attack_speed)
-
-
-func _create_optional_timers() -> void:
-	# Gatling Gun
-	if stats.auto_attack.attack_speed_overtime_min != 0:
-		Utils.create_optional_timer(_timers_holder, 1, _on_aa_speed_overtime_timer)
-
-
-func _add_to_poison_effects(source: Character, poison_stacks: int, poison_duration: int) -> void:
-	if poison_stacks == 0:
-		return
-	
-	for effect in stats.poison.poison_effects:
-		if effect.source == source and effect.ticks_left == poison_duration:
-			effect.stacks_number += poison_stacks
-			return
-	
-	var new_effect := PoisonEffect.new()
-	new_effect.stacks_number = poison_stacks
-	new_effect.ticks_left = poison_duration
-	new_effect.source = source
-	stats.poison.poison_effects.append(new_effect)
 
 # ============================== AutoAttackManager ==============================
 
@@ -149,7 +114,7 @@ func _start_auto_attack_manager() -> void:
 	_auto_attack_manager.heal_ally_triggered.connect(_on_auto_attack_manager_heal_ally_triggered)
 	_auto_attack_manager.armor_gained.connect(_on_auto_attack_manager_armor_gained)
 	_auto_attack_manager.max_health_gained.connect(_on_auto_attack_manager_max_health_gained)
-	_auto_attack_manager.start(self, stats.auto_attack, hero.aa_projectile)
+	_auto_attack_manager.start(self, stats.auto_attack, hero.aa_projectile, hero)
 
 
 func _on_auto_attack_manager_heal_ally_triggered(heal_amount: int) -> void:
@@ -237,39 +202,6 @@ func _on_fighting_area_map_clicked(new_position: Vector3) -> void:
 	
 	global_position = new_position
 
-
-# TODO bouger dans le poison manager
-func _on_poison_tick_timer_timeout() -> void:
-	var poison_damage: int = 0
-	for effect in stats.poison.poison_effects:
-		if effect.ticks_left > 0:
-			effect.ticks_left -= 1
-			poison_damage += effect.stacks_number
-		else:
-			stats.poison.poison_effects.erase(effect)
-	
-	if poison_damage > 0:
-		take_damage_flat(null, _poison_manager.get_reduced_damage_taken_from(poison_damage), Utils.DamageType.POISON)
-
-
-#TODO mettre dans le storm manager
-func _on_vulnerability_tick_timer_timeout() -> void:
-	stats.storm.vulnerability_stacks -= (0.1 * stats.storm.vulnerability_stacks) as int
-
-
 func _on_character_dead(dead_character: Character) -> void:
 	print("Oh no! ", dead_character.player.name, " is dead :(")
 	target_manager.remove_character(dead_character)
-
-# ============================== Optional callbacks ==============================
-
-# TODO Move this to the auto attack manager
-var __aa_speed_overtime_ticks: int = 0 # static variable for _on_aa_speed_overtime_timer()
-func _on_aa_speed_overtime_timer() -> void:
-	var attack_speed_overtime_current = remap(__aa_speed_overtime_ticks, \
-			0, stats.auto_attack.attack_speed_overtime_duration, \
-			stats.auto_attack.attack_speed_overtime_min, stats.auto_attack.attack_speed_overtime_max)
-	stats.auto_attack.attack_speed_overtime_current = clampf(attack_speed_overtime_current, \
-			stats.auto_attack.attack_speed_overtime_min, stats.auto_attack.attack_speed_overtime_max)
-	_update_auto_attack_speed()
-	__aa_speed_overtime_ticks += 1
