@@ -31,5 +31,4 @@ var crit_move_speed_duration: float # Duration of the move speed increase (in s)
 
 
 func get_vulnerability_critical_multiplier() -> float:
-	print("Vulnerability stack = ", vulnerability_stacks)
 	return vulnerability_stacks / 10.0

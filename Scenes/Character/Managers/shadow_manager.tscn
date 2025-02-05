@@ -4,3 +4,9 @@
 
 [node name="ShadowManager" type="Node"]
 script = ExtResource("1_0yack")
+
+[node name="CheckDistanceTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="CheckDistanceTimer" to="." method="_on_check_distance_timer_timeout"]

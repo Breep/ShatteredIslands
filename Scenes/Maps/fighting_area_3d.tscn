@@ -87,9 +87,10 @@ transform = Transform3D(0.883038, -0.260635, 0.390274, 0, 0.831605, 0.555367, -0
 light_color = Color(0.707351, 0.647416, 0.866633, 1)
 
 [node name="Spawns" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
 
 [node name="0" type="Node3D" parent="Spawns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00791693, 1.43051e-06, 0.0488944)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0.049)
 
 [node name="1" type="Node3D" parent="Spawns"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.93962, -9.53674e-07, 0.0912552)

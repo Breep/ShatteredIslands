@@ -33,6 +33,8 @@ var _is_player_character: bool = false
 @onready var _storm_manager: StormManager = %StormManager
 @onready var _heal_manager: SerenityManager = %SerenityManager
 @onready var _poison_manager: PoisonManager = %PoisonManager
+@onready var _movement_manager: MovementManager = %MovementManager
+@onready var _shadow_manager: ShadowManager = %ShadowManager
 
 # ============================== Node base functions ==============================
 
@@ -48,6 +50,8 @@ func _ready() -> void:
 	_apply_all_cards_upgrades()
 
 	_character_visual.update_health_bar(stats.health, stats.health_max)
+	_character_visual.update_energy_bar(stats.energy, stats.energy_max)
+	_character_visual.update_mana_bar(stats.mana, stats.mana_max)
 
 # ============================== Public functions ==============================
 
@@ -67,7 +71,6 @@ func take_damage_flat(source: Character, damage: int, damage_type: Utils.DamageT
 	stats.health -= damage
 	_character_visual.damage_popup(damage, damage_type)
 	_character_visual.update_health_bar(stats.health, stats.health_max)
-	print("[", player.name, "] Take ", damage, "damage | hp = ", stats.health, "/", stats.health_max)
 	if stats.health <= 0 and !_is_dead:
 		dead.emit(self)
 		_is_dead = true
@@ -180,6 +183,29 @@ func _start_poison_manager() -> void:
 	
 	_poison_manager.start(self, stats.poison)
 
+# ============================== MovementManager ==============================
+
+func _start_movement_manager() -> void:
+	if _movement_manager == null:
+		printerr("No MovementManager")
+		return
+	
+	_movement_manager.connect("energy_changed", _on_movement_manager_energy_changed)
+	_movement_manager.start(self)
+
+
+func _on_movement_manager_energy_changed(energy: float) -> void:
+	_character_visual.update_energy_bar(energy, stats.energy_max)
+
+# ============================== ShadowManager ==============================
+
+func _start_shadow_manager() -> void:
+	if _movement_manager == null:
+		printerr("No ShadowManager")
+		return
+	
+	_shadow_manager.start(self, stats.shadow)
+
 # ============================== Signals callbacks ==============================
 
 func _on_all_players_spawned() -> void:
@@ -194,13 +220,16 @@ func _on_all_players_spawned() -> void:
 	_start_storm_manager()
 	_start_serenity_manager()
 	_start_poison_manager()
+	_start_movement_manager()
+	_start_shadow_manager()
 
 
 func _on_fighting_area_map_clicked(new_position: Vector3) -> void:
 	if _is_dead or not _is_player_character:
 		return
 	
-	global_position = new_position
+	_movement_manager.set_target_position(new_position)
+
 
 func _on_character_dead(dead_character: Character) -> void:
 	print("Oh no! ", dead_character.player.name, " is dead :(")

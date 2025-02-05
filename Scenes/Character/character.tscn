@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bbnioyc6ti8wn"]
+[gd_scene load_steps=15 format=3 uid="uid://bbnioyc6ti8wn"]
 
 [ext_resource type="Script" path="res://Scripts/Character/character.gd" id="1_gjax4"]
 [ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Scenes/Character/character_visual.tscn" id="2_c48md"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bdl1xxjdbeugn" path="res://Scenes/Character/Managers/serenity_manager.tscn" id="9_s1kyf"]
 [ext_resource type="PackedScene" uid="uid://dhah05lihxk4p" path="res://Scenes/Character/Managers/shadow_manager.tscn" id="10_7fxxn"]
 [ext_resource type="PackedScene" uid="uid://bjbfnigvphbfc" path="res://Scenes/Character/Managers/storm_manager.tscn" id="11_u5xad"]
+[ext_resource type="PackedScene" uid="uid://d0g0xkyr876lc" path="res://Scenes/Character/Managers/movement_manager.tscn" id="12_30foq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_k8c50"]
 size = Vector3(1.38358, 1.9988, 0.195313)
@@ -68,4 +69,6 @@ unique_name_in_owner = true
 [node name="StormManager" parent="Managers" instance=ExtResource("11_u5xad")]
 unique_name_in_owner = true
 _percent_decrease = 10.0
-_minimum_stacks_decrease_flat = 2.0
+
+[node name="MovementManager" parent="Managers" instance=ExtResource("12_30foq")]
+unique_name_in_owner = true

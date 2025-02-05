@@ -14,6 +14,8 @@ extends Node3D
 # ============================== Local scene nodes ==============================
 
 @onready var _health_bar: ProgressBar = %HealthBar
+@onready var _mana_bar: ProgressBar = %ManaBar
+@onready var _energy_bar: ProgressBar = %EnergyBar
 @onready var _name_displayed: Label = %NameDisplayed
 
 @onready var _animated_sprite: AnimatedSprite3D = %AnimatedSprite3D
@@ -23,9 +25,20 @@ extends Node3D
 func _ready() -> void:
 	_animated_sprite.play("Idle")
 
+
 func update_health_bar(health: int, health_max: int) -> void:
 	_health_bar.max_value = health_max
 	_health_bar.value = health
+
+
+func update_mana_bar(mana: float, mana_max: float) -> void:
+	_mana_bar.max_value = mana_max
+	_mana_bar.value = mana
+
+
+func update_energy_bar(energy: float, energy_max: float) -> void:
+	_energy_bar.max_value = energy_max * 100.0
+	_energy_bar.value = energy * 100.0
 
 
 func update_name_displayed(player_name: String) -> void:

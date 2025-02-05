@@ -56,6 +56,7 @@ func _copy_stats(hero_stats: CharacterStats) -> void:
 	energy_max = hero_stats.energy_max
 	energy = energy_max
 	energy_regen = hero_stats.energy_regen
+	move_speed = hero_stats.move_speed
 	attack_damage = hero_stats.attack_damage
 	attack_speed = hero_stats.attack_speed
 	attack_move_speed = hero_stats.attack_move_speed
