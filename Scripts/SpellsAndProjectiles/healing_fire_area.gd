@@ -1,5 +1,5 @@
 class_name HealingFireArea
-extends Area2D
+extends Area3D
 
 # ==========================================================================
 # === This is the healing fire area from the card "Ring of fire healing" ===
@@ -13,7 +13,8 @@ var _wait_time: float # period between two ticks of the healing fire area (in se
 var _radius: float # Radius of the healing fire area (in m)
 
 @onready var _effect_timer: Timer = %EffectTimer
-@onready var _collision_shape_2d: CollisionShape2D = %CollisionShape2D
+@onready var _collision_shape_3d: CollisionShape3D = %CollisionShape2D
+@onready var tmp_debug_mesh: MeshInstance3D = $MeshInstance3D
 
 func init(source: Character, damage: float, heal: float, period: float, radius: float) -> void:
 	print("HealingFireArea: Init")
@@ -21,7 +22,7 @@ func init(source: Character, damage: float, heal: float, period: float, radius: 
 	_damage_percent = damage
 	_heal_percent = heal
 	_wait_time = period
-	_radius = radius * 20 # TODO work on metric sdystem
+	_radius = radius
 
 
 func _enter_tree() -> void:
@@ -33,18 +34,20 @@ func _ready() -> void:
 	if _source == null:
 		printerr("HealingFireArea: No source character assigned to")
 
-	(_collision_shape_2d.shape as CircleShape2D).radius = _radius
+	(_collision_shape_3d.shape as CylinderShape3D).radius = _radius
+	(tmp_debug_mesh.mesh as CylinderMesh).top_radius = _radius
+	(tmp_debug_mesh.mesh as CylinderMesh).bottom_radius = _radius
 	_effect_timer.wait_time = _wait_time
 	_effect_timer.start()
 
 
-func _on_body_entered(body: Node2D) -> void:
+func _on_body_entered(body: Node3D) -> void:
 	if body is Character:
 		print("DEBUG - ", body.player.name, " entered the healing fire area")
 		_characters_inside.append(body)
 
 
-func _on_body_exited(body: Node2D) -> void:
+func _on_body_exited(body: Node3D) -> void:
 	if body is Character:
 		print("DEBUG - ", body.player.name, " left the healing fire area")
 		_characters_inside.erase(body)

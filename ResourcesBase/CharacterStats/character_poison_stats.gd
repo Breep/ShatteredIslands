@@ -1,7 +1,6 @@
 class_name CharacterPoisonStats
 extends Resource
 
-
 var poison_effects: Array[PoisonEffect]
 
 var poison_duration: int # Number of ticks the poison do before disapearing

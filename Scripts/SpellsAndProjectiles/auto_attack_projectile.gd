@@ -1,5 +1,5 @@
 class_name AutoAttackProjectile
-extends Area2D
+extends Area3D
 
 # ============================== Enums ==============================
 
@@ -35,7 +35,7 @@ func _process(delta: float) -> void:
 	_move_toward_target(delta)
 
 
-func _on_body_entered(body: Node2D) -> void:
+func _on_body_entered(body: Node3D) -> void:
 	if body is Character and body == _target:
 		if _target != null:
 			_target.take_damage_flat(_source, _stats.damage, Utils.DamageType.PHYSICAL)
@@ -59,22 +59,21 @@ func _on_body_entered(body: Node2D) -> void:
 
 # ============================== Public functions ==============================
 
-func init(source: Character, target: Character, source_aa_stats: CharacterAutoAttackStats) -> void:
+func init(source: Character, target: Character) -> void:
 	_source = source
 	_target = target
-	_set_stats_from_character_aa_stats(source_aa_stats)
+	_set_stats_from_character_stats(source.stats)
 
 # ============================== Private functions ==============================
 
-func _set_stats_from_character_aa_stats(aa_stats: CharacterAutoAttackStats) -> void:
+func _set_stats_from_character_stats(character_stats: CharacterStats) -> void:
 	if _stats == null:
 		_stats = AutoAttackProjectileStats.new()
 	
-	_stats.speed = 150
-	_stats.damage = aa_stats.damage
+	_stats.speed = character_stats.attack_move_speed
+	_stats.damage = character_stats.attack_damage
 	
-	var effects = _get_effects_from_randomization(aa_stats)
-	_stats.is_bouncing = true
+	var effects = _get_effects_from_randomization(character_stats)
 	
 	for effect_name in effects.keys():
 		if effects[effect_name]["is_active"]:
@@ -107,42 +106,40 @@ func _move_toward_target(delta: float):
 		printerr("AutoAttackProjectile [", name, "] is alive but with no target")
 		return
 	
-	var direction: Vector2 = (_target.global_position - global_position).normalized()
+	var direction: Vector3 = (_target.global_position - global_position).normalized()
 	position += direction * _stats.speed * delta
-	look_at(_target.global_position)
+	#look_at(_target.global_position)
 
 
-func _get_effects_from_randomization(aa_stats: CharacterAutoAttackStats) -> Dictionary:
-	# Adapt critical chance with target vulnerability stacks
-	var critical_chance : float = aa_stats.critical_multiplier
-	critical_chance += _get_crit_inc_from_vuln_stacks(_target.stats.storm.vulnerability_stacks)
-	critical_chance = clampf(critical_chance, 0, 100)
+func _get_effects_from_randomization(character_stats: CharacterStats) -> Dictionary:
+	var critical_multiplier : float = character_stats.physical_critical_multiplier
 	
-	#print("CRIT CHANCE: ", critical_chance, " | Target vuln stacks: ", _target.stats.vulnerability_stacks)
+	# TODO mettre un getter ?
+	critical_multiplier += _target.stats.storm.get_vulnerability_critical_multiplier()
 	
 	var effects: Dictionary = {
 		ProjectileEffect.POISON: {
 			"is_active": false,
-			"stacks": aa_stats.poison_stacks_amount,
-			"chance": aa_stats.poison_stacks_chance,
+			"stacks": character_stats.auto_attack.poison_stacks_amount,
+			"chance": character_stats.auto_attack.poison_stacks_chance,
 		},
 		ProjectileEffect.VULNERABILTY: {
 			"is_active": false,
-			"stacks": aa_stats.vulnerability_stacks_amount,
-			"chance": aa_stats.vulnerability_stacks_chance,
+			"stacks": character_stats.auto_attack.vulnerability_stacks_amount,
+			"chance": character_stats.auto_attack.vulnerability_stacks_chance,
 		},
 		ProjectileEffect.CRITIC: {
 			"is_active": false,
-			"multiplier": aa_stats.critical_multiplier,
-			"chance": critical_chance,
+			"multiplier": critical_multiplier,
+			"chance": character_stats.physical_critical_chance,
 		},
 		ProjectileEffect.BOUNCE: {
 			"is_active": false,
-			"chance": aa_stats.bounce_chance,
+			"chance": character_stats.auto_attack.bounce_chance,
 		},
 		ProjectileEffect.FIRE: {
-			"is_active": aa_stats.fire_attack_triggered,
-			"damage": aa_stats.fire_attack_damage,
+			"is_active": character_stats.auto_attack.fire_attack_triggered,
+			"damage": character_stats.auto_attack.fire_attack_damage,
 		},
 	}
 	

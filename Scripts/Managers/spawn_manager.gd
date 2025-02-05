@@ -7,7 +7,7 @@ signal all_players_spawned()
 
 # ============================== Export ==============================
 
-@export var spawns: Array[Node2D]
+@export var spawns: Array[Node3D]
 @export var character_scene: PackedScene
 
 # ============================== Node base functions ==============================
@@ -25,5 +25,4 @@ func _ready() -> void:
 		# TODO Learn about spawning on other tree branch
 		$".".add_child(character)
 		i += 1
-	
 	all_players_spawned.emit()

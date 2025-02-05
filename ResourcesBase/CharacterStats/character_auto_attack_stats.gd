@@ -1,11 +1,7 @@
 class_name CharacterAutoAttackStats
 extends Resource
 
-@export var damage: int # Damage of auto attack
-
-@export var attack_speed: float # Attack per second
-@export var critical_chance: float # % of chance for an auto attack to do critical damage
-@export var critical_multiplier: float # Critical damage multiplier (2 per default)
+var attack_damage_boost: int # flat damage increase of auto attack
 
 var attack_speed_boost: float # Percentage of attack speed increased
 

@@ -7,9 +7,11 @@ signal armor_gained(armor_stacks: int)
 signal max_health_gained(health_amount: int)
 signal heal_ally_triggered(heal_amount: int)
 
+const ATTACK_SPEED_BOOST_OVERTIME_PERIOD: float = 1
+
 # ============================== Export variables ==============================
 
-@export var projectile_spawn: Node2D
+@export var projectile_spawn: Node3D
 
 # ============================== Public variables ==============================
 
@@ -20,8 +22,11 @@ var aa_counter: int = 0 # Counter of auto attacks
 var _source: Character # Ref to character owner
 var _aa_stats: CharacterAutoAttackStats # Ref to the owner auto attack stats
 var _projectile_scene: PackedScene # Ref to the AutoAttackProjectile packed scene
-var _forced_target: Character # TODO Unused now, maybe for a futur hero that can taunt ?
+#var _forced_target: Character # TODO Unused now, maybe for a futur hero that can taunt ?
 var _attack_strategy: TargetManager.TargettingStrategy = TargetManager.TargettingStrategy.CLOSEST_ENEMY # The algo used to find the target
+var _default_attack_speed: float # Default attack speed of the hero
+
+var _optional_timers: Array[Timer]
 
 # ============================== Local scene nodes ==============================
 
@@ -29,7 +34,7 @@ var _attack_strategy: TargetManager.TargettingStrategy = TargetManager.Targettin
 
 # ============================== Public functions ==============================
 
-func start(source: Character, aa_stats: CharacterAutoAttackStats, projectile_scene: PackedScene) -> void:
+func start(source: Character, aa_stats: CharacterAutoAttackStats, projectile_scene: PackedScene, hero: Hero) -> void:
 	print("AutoAttackManager: Starting")
 	if source == null:
 		printerr("AutoAttackManager: source undef")
@@ -47,7 +52,8 @@ func start(source: Character, aa_stats: CharacterAutoAttackStats, projectile_sce
 	_source = source
 	_projectile_scene = projectile_scene
 	_aa_stats = aa_stats
-	set_auto_attack_speed(_aa_stats.attack_speed)
+	_default_attack_speed = hero.stats.attack_speed
+	_update_auto_attack_speed()
 	_auto_attack_timer.start()
 
 
@@ -64,6 +70,12 @@ func set_auto_attack_speed(attack_speed: float) -> void:
 		_auto_attack_timer.wait_time = 1.0 / attack_speed
 
 # ============================== Private functions ==============================
+
+func _create_optional_timers() -> void:
+	# Gatling
+	if _aa_stats.attack_speed_overtime_max > 0:
+		_optional_timers.append(Utils.create_optional_timer(self, ATTACK_SPEED_BOOST_OVERTIME_PERIOD, _on_aa_speed_overtime_timer_timeout))
+
 
 func _auto_attack(target: Character):
 	aa_counter += 1
@@ -92,9 +104,18 @@ func _auto_attack(target: Character):
 
 func _spawn_projectile(target: Character) -> void:
 	var projectile: AutoAttackProjectile = _projectile_scene.instantiate()
-	projectile.init(_source, target, _aa_stats)
+	projectile.init(_source, target)
 	get_tree().current_scene.add_child(projectile)
-	projectile.global_position = projectile_spawn.global_position + Vector2(randf_range(-10,10), randf_range(-10,10))
+	projectile.global_position = projectile_spawn.global_position + Vector3(randf_range(-0.01, 0.01), randf_range(-0.01, 0.01), randf_range(-0.01, 0.01))
+
+
+func _update_auto_attack_speed() -> void:
+	_source.stats.attack_speed = _default_attack_speed
+	var attack_speed_boost: float = _aa_stats.attack_speed_boost + _aa_stats.attack_speed_overtime_current
+	var multiply_boost: float = remap(attack_speed_boost, 0, 100, 1, 2) # Convert % in proportional multiple (100% = x2 | 150% = x2.5)
+	_source.stats.attack_speed *= multiply_boost
+	set_auto_attack_speed(_source.stats.attack_speed)
+
 
 # ============================== Callbacks functions ==============================
 
@@ -104,3 +125,14 @@ func _on_auto_attack_timer_timeout() -> void:
 		return
 	
 	_auto_attack(target)
+
+
+var __aa_speed_overtime_ticks: int = 0 # static variable for _on_aa_speed_overtime_timer()
+func _on_aa_speed_overtime_timer_timeout() -> void:
+	var attack_speed_overtime_current = remap(__aa_speed_overtime_ticks, \
+			0, _aa_stats.attack_speed_overtime_duration, \
+			_aa_stats.attack_speed_overtime_min, _aa_stats.attack_speed_overtime_max)
+	_aa_stats.attack_speed_overtime_current = clampf(attack_speed_overtime_current, \
+			_aa_stats.attack_speed_overtime_min, _aa_stats.attack_speed_overtime_max)
+	_update_auto_attack_speed()
+	__aa_speed_overtime_ticks += 1
