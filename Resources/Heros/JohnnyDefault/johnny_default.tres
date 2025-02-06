@@ -1,18 +1,11 @@
-[gd_resource type="Resource" script_class="Hero" load_steps=29 format=3 uid="uid://cbcy0wbqkel1q"]
+[gd_resource type="Resource" script_class="Hero" load_steps=14 format=3 uid="uid://cbcy0wbqkel1q"]
 
 [ext_resource type="Texture2D" uid="uid://40176qu2q6rw" path="res://Data/Assets/Card/Card_IMG/poison/poison5.png" id="1_fkyh8"]
+[ext_resource type="PackedScene" uid="uid://ceqjwbnxlllrw" path="res://Scenes/SpellsAndProjectiles/projectile.tscn" id="1_n8rh6"]
 [ext_resource type="Script" path="res://ResourcesBase/Hero/hero.gd" id="1_rwq1b"]
 [ext_resource type="Texture2D" uid="uid://wfwglamlrjqj" path="res://Data/Assets/Misc/Misc_IMG/assasin wow.png" id="2_tcrxw"]
 [ext_resource type="Script" path="res://ResourcesBase/CharacterStats/character_stats.gd" id="3_x2gh1"]
-[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/character_auto_attack_stats.gd" id="4_k6oqr"]
-[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/character_defense_stats.gd" id="5_4y8ra"]
-[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/character_fire_stats.gd" id="6_85xea"]
-[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/character_heal_stats.gd" id="7_dsnif"]
-[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/character_life_stats.gd" id="8_x5nua"]
-[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/character_poison_stats.gd" id="9_lu5s1"]
-[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/character_shadow_stats.gd" id="11_hwuhg"]
 [ext_resource type="Texture2D" uid="uid://clupy6lxq6tfs" path="res://Data/Assets/Card/Card_IMG/heal/heal orb.png" id="12_bcd7b"]
-[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/character_storm_stats.gd" id="12_hs5ya"]
 [ext_resource type="Texture2D" uid="uid://bo534sbxmu3jh" path="res://Data/Assets/Card/Card_IMG/Attack/bounce attack.jpg" id="13_gsnfu"]
 [ext_resource type="Texture2D" uid="uid://btjgqupi22y8o" path="res://Data/Assets/Card/Card_IMG/Attack/attack_ignite.webp" id="14_sbmpq"]
 [ext_resource type="Texture2D" uid="uid://d1kprcm4gjhbm" path="res://Data/Assets/Card/Card_IMG/Attack/attack_damage.webp" id="15_51x5e"]
@@ -20,70 +13,26 @@
 [ext_resource type="Texture2D" uid="uid://dky1ew2n5kbgq" path="res://Data/Assets/Card/Card_IMG/Hp/gun_cartoon.png" id="17_p12cc"]
 [ext_resource type="Texture2D" uid="uid://tks3r4hprrq4" path="res://Data/Assets/Card/Card_IMG/storm/storm8.png" id="19_yo3i7"]
 
-[sub_resource type="Resource" id="Resource_wt21v"]
-script = ExtResource("4_k6oqr")
-damage = 30
-attack_speed = 1.0
-critical_chance = 10.0
-critical_multiplier = 100.0
-
-[sub_resource type="Resource" id="Resource_yujo4"]
-script = ExtResource("5_4y8ra")
-
-[sub_resource type="Resource" id="Resource_f7mc7"]
-script = ExtResource("6_85xea")
-
-[sub_resource type="Resource" id="Resource_75lhv"]
-script = ExtResource("7_dsnif")
-
-[sub_resource type="Resource" id="Resource_a7j17"]
-script = ExtResource("8_x5nua")
-increase_hp = 0
-damage_increased_by_hp_lost_percentage = 0
-damage_increased_by_hp_lost_hp_number = 0
-damage_taken_reduced_below_treshold_percentage = 0
-damage_taken_reduced_below_treshold_threshold = 0
-revive_after_death = false
-revive_after_death_percentage_life = 0
-revive_after_death_percentage_damage = 0
-revive_after_death_time = 0.0
-poison_by_lost_hp_stacks = 0
-poison_by_lost_hp_hp_number = 0
-poison_by_lost_hp_period = 0
-hp_increased_on_move_hp = 0
-hp_increased_on_move_distance = 0
-
-[sub_resource type="Resource" id="Resource_g4xqg"]
-script = ExtResource("9_lu5s1")
-
-[sub_resource type="Resource" id="Resource_qdx4d"]
-script = ExtResource("11_hwuhg")
-shadow_bolt_damage = 0
-regen_move = 0
-invincibility_time = 0.0
-distance_for_invincibility = 0
-shadow_step_activated = false
-
-[sub_resource type="Resource" id="Resource_ensos"]
-script = ExtResource("12_hs5ya")
-
 [sub_resource type="Resource" id="Resource_gvftt"]
 script = ExtResource("3_x2gh1")
-health_max = 10000
-auto_attack = SubResource("Resource_wt21v")
-defense = SubResource("Resource_yujo4")
-fire = SubResource("Resource_f7mc7")
-storm = SubResource("Resource_ensos")
-heal = SubResource("Resource_75lhv")
-hp = SubResource("Resource_a7j17")
-poison = SubResource("Resource_g4xqg")
-shadow = SubResource("Resource_qdx4d")
+health_max = 1000
+mana_max = 120
+mana_regen = 2.0
+energy_max = 5
+energy_regen = 2.0
+move_speed = 4.0
+attack_damage = 30
+attack_speed = 1.2
+attack_move_speed = 10.0
+physical_critical_chance = 100.0
+physical_critical_multiplier = 2.0
 
 [resource]
 script = ExtResource("1_rwq1b")
 name = "Johnny Default"
 description = "Johnny has always been a good test subject"
 stats = SubResource("Resource_gvftt")
+aa_projectile = ExtResource("1_n8rh6")
 sprite = ExtResource("2_tcrxw")
 passiv_talent = "passiv description"
 passiv_talent_image = ExtResource("1_fkyh8")

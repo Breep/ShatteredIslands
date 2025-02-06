@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bbnioyc6ti8wn"]
+[gd_scene load_steps=15 format=3 uid="uid://bbnioyc6ti8wn"]
 
 [ext_resource type="Script" path="res://Scripts/Character/character.gd" id="1_gjax4"]
 [ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Scenes/Character/character_visual.tscn" id="2_c48md"]
@@ -11,39 +11,29 @@
 [ext_resource type="PackedScene" uid="uid://bdl1xxjdbeugn" path="res://Scenes/Character/Managers/serenity_manager.tscn" id="9_s1kyf"]
 [ext_resource type="PackedScene" uid="uid://dhah05lihxk4p" path="res://Scenes/Character/Managers/shadow_manager.tscn" id="10_7fxxn"]
 [ext_resource type="PackedScene" uid="uid://bjbfnigvphbfc" path="res://Scenes/Character/Managers/storm_manager.tscn" id="11_u5xad"]
+[ext_resource type="PackedScene" uid="uid://d0g0xkyr876lc" path="res://Scenes/Character/Managers/movement_manager.tscn" id="12_30foq"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lk7gr"]
-size = Vector2(21, 44)
+[sub_resource type="BoxShape3D" id="BoxShape3D_k8c50"]
+size = Vector3(1.38358, 1.9988, 0.195313)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_747th"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 2
 
-[node name="Character" type="StaticBody2D" groups=["PLAYERS"]]
+[node name="Character" type="CharacterBody3D" groups=["PLAYERS"]]
 script = ExtResource("1_gjax4")
 
 [node name="CharacterVisual" parent="." instance=ExtResource("2_c48md")]
 unique_name_in_owner = true
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.859336, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 4)
-shape = SubResource("RectangleShape2D_lk7gr")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0834689, 1.02165, -0.000976563)
+shape = SubResource("BoxShape3D_k8c50")
 
-[node name="Timers" type="Node" parent="."]
-
-[node name="MovingTimer" type="Timer" parent="Timers"]
-wait_time = 3.0
-autostart = true
-
-[node name="PoisonTickTimer" type="Timer" parent="Timers"]
-autostart = true
-
-[node name="VulnerabilityTickTimer" type="Timer" parent="Timers"]
-autostart = true
-
-[node name="ProjectileSpawn" type="Node2D" parent="."]
-position = Vector2(13, -23)
+[node name="ProjectileSpawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.888041, 0.890776, 0)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 unique_name_in_owner = true
@@ -78,7 +68,7 @@ unique_name_in_owner = true
 
 [node name="StormManager" parent="Managers" instance=ExtResource("11_u5xad")]
 unique_name_in_owner = true
+_percent_decrease = 10.0
 
-[connection signal="timeout" from="Timers/MovingTimer" to="." method="_on_moving_timer_timeout"]
-[connection signal="timeout" from="Timers/PoisonTickTimer" to="." method="_on_poison_tick_timer_timeout"]
-[connection signal="timeout" from="Timers/VulnerabilityTickTimer" to="." method="_on_vulnerability_tick_timer_timeout"]
+[node name="MovementManager" parent="Managers" instance=ExtResource("12_30foq")]
+unique_name_in_owner = true

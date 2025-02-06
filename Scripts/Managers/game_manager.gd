@@ -28,7 +28,7 @@ var players: Array[Player]
 var _game_state: GameState = GameState.Starting
 
 var _buying_area: PackedScene = preload("res://Scenes/Maps/buying_area.tscn")
-var _fighting_area: PackedScene = preload("res://Scenes/Maps/fighting_area.tscn")
+var _fighting_area: PackedScene = preload("res://Scenes/Maps/fighting_area_3d.tscn")
 
 var _families_ref: Dictionary # Reference Dictionary to all families
 var _active_families: Array[Family] # Array of all families activated for this game only
@@ -39,7 +39,9 @@ var _rules: GameRules
 func _ready() -> void:
 	_rules = load("res://Resources/GameRules/NormalGameRules.tres")
 	_init_families_ref()
-	_active_families.append(get_family_from_type(Family.FamilyType.Poison))
+	_active_families.append(get_family_from_type(Family.FamilyType.Shadow))
+	#_active_families.append(get_family_from_type(Family.FamilyType.Fire))
+	#_active_families.append(get_family_from_type(Family.FamilyType.Storm))
 
 # ============================== Public function ==============================
 
