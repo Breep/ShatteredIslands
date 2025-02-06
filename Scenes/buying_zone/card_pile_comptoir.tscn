@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdryp1jj4woix"]
+
+[ext_resource type="Script" path="res://Scenes/buying_zone/card_pile_comptoir.gd" id="1_3yykp"]
+
+[node name="CardPile_comptoir" type="Node3D"]
+script = ExtResource("1_3yykp")
+nb_card_aa = 10
+nb_card_fire = 12
+nb_card_defense = 20
+nb_card_heal = 2
+nb_card_storm = 4
+nb_card_shadow = 7
+nb_card_poison = 32
+nb_card_hp = 25

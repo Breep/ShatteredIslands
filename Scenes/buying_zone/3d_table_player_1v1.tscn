@@ -8,7 +8,7 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ygd1b"]
 albedo_texture = ExtResource("2_ihg3i")
 
-[node name="table_round_large2" instance=ExtResource("1_3wcpw")]
+[node name="Table_1v1" instance=ExtResource("1_3wcpw")]
 
 [node name="table_round_large" parent="." index="0"]
 material_override = SubResource("StandardMaterial3D_ygd1b")
@@ -20,9 +20,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.542828, 1.00816, -0.891626
 transform = Transform3D(-0.986564, 0, -0.163378, 0, 1, 0, 0.163378, 0, -0.986564, 0.540335, 1.00816, 0.948996)
 
 [node name="Coin_p1" parent="." index="3" instance=ExtResource("4_1ko7q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.981007, 1.03504, -0.726791)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.981007, 1.03504, -0.169885)
 
 [node name="Coin_p2" parent="." index="4" instance=ExtResource("4_1ko7q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.911833, 1.04674, 0.847535)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.911833, 1.04674, 0.437554)
 
 [node name="Random_Spawn" type="Node3D" parent="." index="5"]
