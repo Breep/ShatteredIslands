@@ -1,0 +1,75 @@
+extends Node3D
+
+# Nombre de cartes par famille
+@export var nb_card_aa: int
+@export var nb_card_fire: int
+@export var nb_card_defense: int
+@export var nb_card_heal: int
+@export var nb_card_storm: int
+@export var nb_card_shadow: int
+@export var nb_card_poison: int
+@export var nb_card_hp: int
+
+# Préchargement de la scène des cartes
+var card_scene: PackedScene = preload("res://Scenes/buying_zone/card_3d.tscn")
+
+# Dictionnaire des familles avec le nombre de cartes
+@onready var families = {
+	"AA": nb_card_aa,
+	"Fire": nb_card_fire,
+	"Defense": nb_card_defense,
+	"Heal": nb_card_heal,
+	"Storm": nb_card_storm,
+	"Shadow": nb_card_shadow,
+	"Poison": nb_card_poison,
+	"HP": nb_card_hp
+}
+
+# Dictionnaire des couleurs par famille
+var family_colors = {
+	"AA": Color(0.8, 0.6, 0.1),       # Jaune doré
+	"Fire": Color(1, 0, 0),           # Rouge
+	"Defense": Color(0.4, 0.26, 0.13),# Marron
+	"Heal": Color(1, 1, 1),       
+	"Storm": Color(0, 0.5, 1),        # Bleu ciel
+	"Shadow": Color(0.1, 0.1, 0.1),   # Gris foncé
+	"Poison": Color(0.022, 0.289, 0.021),   # Vert poison
+	"HP": Color(0.899, 0.516, 0.17)   # Orange
+}
+
+func _ready() -> void:
+	spawn_cards()
+
+func spawn_cards() -> void:
+	var family_index = 0  # Index pour le décalage sur l'axe X
+	
+	for family_name in families.keys():
+		var nb_cards = families[family_name]
+		var color = family_colors.get(family_name, Color(1, 1, 1))  # Couleur par défaut : blanc
+		
+		for i in range(nb_cards):
+			var card_instance = card_scene.instantiate()
+			add_child(card_instance)
+			
+			# Position de la carte
+			var position = Vector3(global_position.x + (family_index * 0.7), global_position.y + (i * 0.03), global_position.z)
+			card_instance.global_transform.origin = position
+			
+			# Cibler le nœud MeshInstance3D
+			var mesh = card_instance.get_node_or_null("Mesh")  
+			if mesh:
+				# Dupliquer le matériau existant ou en créer un nouveau
+				var material = mesh.get_surface_override_material(0)
+				if material:
+					material = material.duplicate()  # Duplication du matériau pour éviter les modifications globales
+				else:
+					material = StandardMaterial3D.new()  # Si aucun matériau, on en crée un
+				
+				# Application de la couleur
+				material.albedo_color = color
+				mesh.set_surface_override_material(0, material)
+				
+		# Attendre avant de créer la prochaine carte (0.1 seconde)
+			await get_tree().create_timer(0.1).timeout
+			
+		family_index += 1  # Décalage pour la famille suivante

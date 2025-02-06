@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://bp03dw7gruma8"]
+[gd_scene load_steps=6 format=4 uid="uid://bp03dw7gruma8"]
 
 [ext_resource type="Texture2D" uid="uid://mswbhaabiedm" path="res://Data/Assets/Tavern - 3D Asset Low poly/textures/dungeon_texture.png" id="1_0jkta"]
 
@@ -41,15 +41,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_8j1sp")
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_bwmji"]
-points = PackedVector3Array(0.0218044, -0.00235721, 0.169104, -0.00538611, -0.00773843, -0.173033, -0.00537581, 0.00844937, -0.172702, -0.173032, -0.00773996, 0.00538712, 0.146679, -0.0621298, 0.0108247, 0.145871, 0.0625, -0.00538257, -0.145871, 0.0625, 0.00538257, -0.147014, -0.0622725, 0.00542474, 0.108578, -0.062085, -0.103135, -0.010799, 0.0625, 0.145871, -0.108506, -0.0620433, 0.103067, -0.102641, 0.0625, -0.108058, -0.103067, -0.0620433, -0.108506, 0.108058, 0.0625, -0.102641, 0.125409, 0.00308263, 0.125375, -0.125376, 0.00308266, 0.12541, 0.00542061, -0.062225, 0.146902, 0.125733, -0.00236309, -0.125699, -0.125662, -0.00236229, -0.125696, 0.173034, -0.00774005, -0.00538718, 0.102641, 0.0625, 0.108058, 0.103135, -0.062085, 0.108578, 0.0108483, -0.0620697, -0.146538, 0.010799, 0.0625, -0.145871, -0.108058, 0.0625, 0.102641, -0.0107954, -0.00773039, 0.172861, -0.163585, -0.00235636, -0.038163, 0.172515, 0.00844219, 0.0107421, 0.168791, 0.00307872, -0.02173, -0.172695, 0.00845061, 0.00537663, 0.0380925, 0.00307788, -0.163283, -0.151538, 0.0517697, -0.0108169)
-
 [node name="coin" type="MeshInstance3D"]
 material_override = SubResource("StandardMaterial3D_c2asw")
 mesh = SubResource("ArrayMesh_xbh16")
 skeleton = NodePath("")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_bwmji")

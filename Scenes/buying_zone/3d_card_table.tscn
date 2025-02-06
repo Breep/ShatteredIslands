@@ -6,9 +6,8 @@
 [node name="CardPile" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.714123, 0, 0)
 script = ExtResource("1_6gp85")
-defense_level = 10
-poison_level = 1
-fire_level = 0
+defense_level = 1
+fire_level = 7
 
 [node name="1" type="Sprite3D" parent="."]
 unique_name_in_owner = true
@@ -79,6 +78,3 @@ transform = Transform3D(0.918059, -0.396443, 0, -1.73291e-08, -4.01296e-08, -1, 
 visible = false
 pixel_size = 0.0002
 texture = ExtResource("1_jn5n6")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 2.3573, 4.08509)

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7lx0mhcvnhjr"]
+
+[ext_resource type="PackedScene" uid="uid://3j4aw5m6lbb8" path="res://Scenes/buying_zone/mage.tscn" id="1_18n4f"]
+[ext_resource type="PackedScene" uid="uid://c8sikrcdptf51" path="res://Scenes/buying_zone/barbarian.tscn" id="2_avtp8"]
+
+[node name="Character" type="Node3D"]
+
+[node name="Mage" parent="." instance=ExtResource("1_18n4f")]
+transform = Transform3D(0.677634, 0, 0.7354, 0, 1, 0, -0.7354, 0, 0.677634, -2.18337, 0, -1.92571)
+
+[node name="Barbarian" parent="." instance=ExtResource("2_avtp8")]
+transform = Transform3D(-0.7907, 0, -0.612203, 0, 1, 0, 0.612203, 0, -0.7907, 2.12748, 0, 2.74778)

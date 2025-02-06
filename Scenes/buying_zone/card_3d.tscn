@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfhrsmc3bnsv5"]
+
+[ext_resource type="PackedScene" uid="uid://nxvhwgqggesd" path="res://Data/Assets/Card/3D Card/Autumn_Gem_Card_Back_0205231243_texture.glb" id="1_fiu7f"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_151yx"]
+
+[node name="Card3D" instance=ExtResource("1_fiu7f")]
+
+[node name="Mesh" parent="." index="0"]
+transform = Transform3D(0.3, 0, 0, 0, -1.31134e-08, -0.3, 0, 0.3, -1.31134e-08, 0, 0, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_151yx")
