@@ -1,17 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://gssru8asors0"]
+[gd_scene load_steps=13 format=3 uid="uid://gssru8asors0"]
 
 [ext_resource type="Texture2D" uid="uid://sex75jj3yj3x" path="res://Data/Assets/Buying_area/UI/empty_heart.png" id="1_8ba7i"]
 [ext_resource type="Texture2D" uid="uid://bx6nb7alldywa" path="res://Data/Assets/Buying_area/UI/red_hexa-removebg-preview.png" id="1_85wgf"]
 [ext_resource type="Script" path="res://player_life_info.gd" id="1_ikviq"]
 [ext_resource type="Texture2D" uid="uid://dl132mivg8ol4" path="res://Data/Assets/Card/ICONS/HP.png" id="2_5usst"]
+[ext_resource type="Texture2D" uid="uid://djv4k1n6htmv2" path="res://Data/Assets/Buying_area/UI/black label.png" id="2_f7vvn"]
 [ext_resource type="Texture2D" uid="uid://ct3wly5rc0ni" path="res://Data/Assets/Character/PNG/Wraith_01/PNG Sequences/Attacking/Wraith_01_Attack_000.png" id="2_y73pl"]
 [ext_resource type="FontFile" uid="uid://cl0jltnxq5gum" path="res://Data/font/GlacialIndifference-Bold.otf" id="3_bbaa8"]
 [ext_resource type="Texture2D" uid="uid://cia42t0jcdkfg" path="res://Data/Assets/Card/ICONS/HP color.png" id="7_cadi4"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m1der"]
-bg_color = Color(0.089, 0.089, 0.089, 0.308)
-corner_radius_top_left = 10
-corner_radius_bottom_left = 9
+[ext_resource type="Shader" path="res://Shaders/UI/hearth_liquid.gdshader" id="8_cmix8"]
 
 [sub_resource type="Theme" id="Theme_7h1j3"]
 Label/colors/font_color = Color(1, 1, 1, 1)
@@ -19,7 +16,24 @@ Label/colors/font_outline_color = Color(0, 0, 0, 1)
 Label/colors/font_shadow_color = Color(0, 0, 0, 0.373)
 Label/font_sizes/font_size = 12
 Label/fonts/font = ExtResource("3_bbaa8")
-Label/styles/normal = SubResource("StyleBoxFlat_m1der")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kkj66"]
+shader = ExtResource("8_cmix8")
+shader_parameter/bg_color = Color(0.920071, 0.934238, 0.924132, 1)
+shader_parameter/uv_scale = 0.1
+shader_parameter/percentage = 1.0
+shader_parameter/speed = 1.0
+shader_parameter/wave_1_speed = -1.0
+shader_parameter/wave_2_speed = 1.0
+shader_parameter/wave_1_freq = 1.2
+shader_parameter/wave_2_freq = 1.0
+shader_parameter/wave_1_amp = 0.015
+shader_parameter/wave_2_amp = 0.01
+shader_parameter/sun_dir = Vector3(-0.2, 0.4, 1)
+shader_parameter/water_colour = Color(0.477427, 0, 0.0902698, 1)
+shader_parameter/foam_colour = Color(0.0224705, 1.7673e-08, 0.00099498, 1)
+shader_parameter/sky_colour = Color(0.343277, 6.01634e-09, 0.053668, 1)
+shader_parameter/specular_colour = Color(0.336903, 1.56425e-07, 0.0519289, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j18wi"]
 size = Vector2(54, 56)
@@ -42,14 +56,24 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="PlayerName" type="Label" parent="Control"]
+[node name="BlackLabel" type="TextureRect" parent="Control"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 0
-offset_left = -37.0
-offset_top = 19.0
-offset_right = 28.0
-offset_bottom = 35.0
+offset_left = -59.0
+offset_top = 15.0
+offset_right = 42.0
+offset_bottom = 37.0
+texture = ExtResource("2_f7vvn")
+expand_mode = 1
+
+[node name="PlayerName" type="Label" parent="Control/BlackLabel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 22.0
+offset_top = 2.0
+offset_right = 87.0
+offset_bottom = 21.0
 theme = SubResource("Theme_7h1j3")
 text = "Twiins"
 horizontal_alignment = 1
@@ -98,6 +122,9 @@ texture_progress = ExtResource("2_5usst")
 
 [node name="Health" type="TextureProgressBar" parent="Control"]
 unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.692)
+clip_children = 2
+clip_contents = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -107,13 +134,32 @@ grow_vertical = 2
 size_flags_vertical = 3
 min_value = 1.0
 max_value = 30.0
-value = 28.0
+value = 29.0
 fill_mode = 3
 nine_patch_stretch = true
 texture_under = ExtResource("1_8ba7i")
 texture_progress = ExtResource("7_cadi4")
 
-[node name="HealthValue" type="Label" parent="Control/Health"]
+[node name="Health2" type="TextureProgressBar" parent="Control/Health"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_kkj66")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+mouse_filter = 2
+min_value = 1.0
+max_value = 30.0
+value = 27.0
+fill_mode = 3
+nine_patch_stretch = true
+texture_under = ExtResource("1_8ba7i")
+texture_progress = ExtResource("7_cadi4")
+
+[node name="HealthValue" type="Label" parent="."]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
@@ -121,10 +167,10 @@ anchor_left = 0.551
 anchor_top = 0.5
 anchor_right = 0.56
 anchor_bottom = 0.5
-offset_left = -23.876
-offset_top = -21.5
-offset_right = 15.44
-offset_bottom = 21.5
+offset_left = -21.652
+offset_top = -21.0
+offset_right = 15.88
+offset_bottom = 18.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
