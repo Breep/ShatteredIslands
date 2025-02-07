@@ -4,8 +4,8 @@ extends Resource
 var name: String
 var id: int
 
-var health: int
-var hero: Hero
+@export var health: int
+@export var hero: Hero
 var deck: PlayerDeck
 var gold: int
 

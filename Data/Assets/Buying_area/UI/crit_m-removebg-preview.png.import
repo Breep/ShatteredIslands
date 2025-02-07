@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3miu7xrncypm"
-path="res://.godot/imported/france-flag-round-circle-icon.png-7396a9900a7136552a5a5234777cebaa.ctex"
+uid="uid://b8qm87yfs40oc"
+path="res://.godot/imported/crit_m-removebg-preview.png-0887fb638ca22660828b13b49452e236.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Data/Assets/UI/france-flag-round-circle-icon.png"
-dest_files=["res://.godot/imported/france-flag-round-circle-icon.png-7396a9900a7136552a5a5234777cebaa.ctex"]
+source_file="res://Data/Assets/Buying_area/UI/crit_m-removebg-preview.png"
+dest_files=["res://.godot/imported/crit_m-removebg-preview.png-0887fb638ca22660828b13b49452e236.ctex"]
 
 [params]
 
