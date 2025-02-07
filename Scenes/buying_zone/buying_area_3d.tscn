@@ -1,4 +1,4 @@
-[gd_scene load_steps=171 format=4 uid="uid://ca8mcplp2va4s"]
+[gd_scene load_steps=172 format=4 uid="uid://ca8mcplp2va4s"]
 
 [ext_resource type="Script" path="res://Scenes/buying_zone/camera_3d.gd" id="1_3e5gf"]
 [ext_resource type="PackedScene" uid="uid://tmsh8w1pcy4p" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/bar_outercorner.gltf" id="1_jltbr"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://mswbhaabiedm" path="res://Data/Assets/Tavern - 3D Asset Low poly/textures/dungeon_texture.png" id="2_i4mdp"]
 [ext_resource type="PackedScene" uid="uid://byjejjl6rvsef" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/bar_straight_A.gltf" id="3_nj6q3"]
 [ext_resource type="PackedScene" uid="uid://ckltcqgnt0sqd" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Crate/crates_stacked.gltf" id="3_phlvk"]
+[ext_resource type="PackedScene" uid="uid://cmstx61h3h6ar" path="res://Scenes/buying_zone/3d_ui_buying_area.tscn" id="3_v4hk2"]
 [ext_resource type="PackedScene" uid="uid://cjeoy0rnleep0" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/bar_straight_B.gltf" id="4_h0lpo"]
 [ext_resource type="PackedScene" uid="uid://dku0i4bp7t23u" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Crate/crate_small.gltf" id="4_yv6jx"]
 [ext_resource type="PackedScene" uid="uid://bciww7p136c0f" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/bar_straight_C.gltf" id="5_x1tcb"]
@@ -722,6 +723,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="3d_UI_buying_area" parent="UI" instance=ExtResource("3_v4hk2")]
+layout_mode = 1
 
 [node name="Tavern" type="Node3D" parent="."]
 
@@ -1575,7 +1579,7 @@ shadow_enabled = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("67_2jfat")
-volume_db = -3.0
+volume_db = -5.0
 autoplay = true
 
 [editable path="Tavern/Bar/DeccoBar/barrel_small_stack2"]
