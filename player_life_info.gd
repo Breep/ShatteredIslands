@@ -4,7 +4,7 @@ extends Control
 
 @export var _self_ui_number: int
 @onready var _icon = %Icon
-@onready var _player_name = %PlayerName
+@onready var _player_name = %BlackLabel
 @onready var _health = %Health
 @onready var _health_value = %HealthValue
 
