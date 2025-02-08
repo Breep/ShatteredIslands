@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dmo0ff086abwu"]
 
-[ext_resource type="Script" path="res://Scenes/buying_zone/3d_card_table.gd" id="1_6gp85"]
+[ext_resource type="Script" path="res://Scripts/Buying_area3d/3d_card_table.gd" id="1_6gp85"]
 [ext_resource type="Texture2D" uid="uid://csebxot4tboo4" path="res://Data/Assets/Card/GENERAL/BACK.png" id="1_jn5n6"]
 
 [node name="CardPile" type="Node3D"]
