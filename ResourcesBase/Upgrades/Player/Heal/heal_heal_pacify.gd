@@ -4,13 +4,13 @@ extends PlayerUpgrade
 @export var pacify_enemy_attack_number: Array[int]
 @export var pacify_enemy_chance: int
 
-func apply(player: Character, cardlvl: int) -> void: # override
+func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > pacify_enemy_attack_number.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.heal.pacify_enemy_attack_number = pacify_enemy_attack_number[cardlvl-1]
-	player.stats.heal.pacify_enemy_chance = pacify_enemy_chance
+	stats.heal.pacify_enemy_attack_number = pacify_enemy_attack_number[cardlvl-1]
+	stats.heal.pacify_enemy_chance = pacify_enemy_chance
 
 
 func get_description(cardlvl: int) -> String:

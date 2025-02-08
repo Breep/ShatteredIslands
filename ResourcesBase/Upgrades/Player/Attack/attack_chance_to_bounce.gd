@@ -3,12 +3,12 @@ extends PlayerUpgrade
 
 @export var chance_to_bounce: int
 
-func apply(player: Character, cardlvl: int) -> void: # override
+func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 	if cardlvl != 1:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.auto_attack.bounce_chance += chance_to_bounce
+	stats.auto_attack.bounce_chance += chance_to_bounce
 
 
 func get_description(cardlvl: int) -> String:

@@ -128,7 +128,7 @@ func _apply_all_cards_upgrades() -> void:
 	
 	stats.init(hero.stats) # Reset stats
 	for card in player.deck.cardPile:
-		card.player_upgrade.apply(self, card.lvl)
+		card.player_upgrade.apply(self.stats, card.lvl)
 
 # ============================== AutoAttackManager ==============================
 

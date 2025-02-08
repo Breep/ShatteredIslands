@@ -3,12 +3,12 @@ extends PlayerUpgrade
 
 @export var multiply_damage: float
 
-func apply(player: Character, cardlvl: int) -> void: # override
+func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 	if cardlvl != 1:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.poison.multiply_damage = multiply_damage
+	stats.poison.multiply_damage = multiply_damage
 
 
 func get_description(cardlvl: int) -> String:

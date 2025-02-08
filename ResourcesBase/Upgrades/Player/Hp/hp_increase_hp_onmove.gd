@@ -4,13 +4,13 @@ extends PlayerUpgrade
 @export var hp_increased_on_move_hp: Array[int]
 @export var hp_increased_on_move_distance: int
 
-func apply(player: Character, cardlvl: int) -> void: # override
+func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > hp_increased_on_move_hp.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.hp.hp_increased_on_move_hp = hp_increased_on_move_hp[cardlvl - 1]
-	player.stats.hp.hp_increased_on_move_distance = hp_increased_on_move_distance
+	stats.hp.hp_increased_on_move_hp = hp_increased_on_move_hp[cardlvl - 1]
+	stats.hp.hp_increased_on_move_distance = hp_increased_on_move_distance
 
 
 func get_description(cardlvl: int) -> String:

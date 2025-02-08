@@ -4,13 +4,13 @@ extends PlayerUpgrade
 @export var backfire_fire_shield_damage: float
 @export var backfire_fire_shield_chance: Array[int]
 
-func apply(player: Character, cardlvl: int) -> void: # override
+func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > backfire_fire_shield_chance.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.defense.backfire_fire_shield_damage = backfire_fire_shield_damage
-	player.stats.defense.backfire_fire_shield_chance = backfire_fire_shield_chance[cardlvl-1]
+	stats.defense.backfire_fire_shield_damage = backfire_fire_shield_damage
+	stats.defense.backfire_fire_shield_chance = backfire_fire_shield_chance[cardlvl-1]
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > backfire_fire_shield_chance.size():

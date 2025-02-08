@@ -4,14 +4,14 @@ extends PlayerUpgrade
 @export var increase_max_hp_amount: Array[int] # Auto attack damage increase per card lvl
 @export var increase_max_hp_period: int
 
-func apply(player: Character, cardlvl: int) -> void: # override
+func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > increase_max_hp_amount.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.auto_attack.increase_max_hp_activated = true
-	player.stats.auto_attack.increase_max_hp_amount = increase_max_hp_amount[cardlvl-1]
-	player.stats.auto_attack.increase_max_hp_period = increase_max_hp_period
+	stats.auto_attack.increase_max_hp_activated = true
+	stats.auto_attack.increase_max_hp_amount = increase_max_hp_amount[cardlvl-1]
+	stats.auto_attack.increase_max_hp_period = increase_max_hp_period
 
 
 func get_description(cardlvl: int) -> String:

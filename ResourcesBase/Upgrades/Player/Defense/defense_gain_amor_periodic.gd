@@ -4,13 +4,13 @@ extends PlayerUpgrade
 @export var periodic_armor_stacks_amount: Array[int]
 @export var periodic_armor_stacks_period: int
 
-func apply(player: Character, cardlvl: int) -> void: # override
+func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > periodic_armor_stacks_amount.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.defense.periodic_armor_stacks_amount = periodic_armor_stacks_amount[cardlvl-1]
-	player.stats.defense.periodic_armor_stacks_period = periodic_armor_stacks_period
+	stats.defense.periodic_armor_stacks_amount = periodic_armor_stacks_amount[cardlvl-1]
+	stats.defense.periodic_armor_stacks_period = periodic_armor_stacks_period
 
 
 func get_description(cardlvl: int) -> String:

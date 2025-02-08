@@ -4,13 +4,13 @@ class_name AttackChanceToPoison
 @export var poison_stacks_chance: Array[int]
 @export var poison_stacks_amount: int
 
-func apply(player: Character, cardlvl: int) -> void: # override
+func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > poison_stacks_chance.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.auto_attack.poison_stacks_amount = poison_stacks_amount
-	player.stats.auto_attack.poison_stacks_chance = poison_stacks_chance[cardlvl - 1]
+	stats.auto_attack.poison_stacks_amount = poison_stacks_amount
+	stats.auto_attack.poison_stacks_chance = poison_stacks_chance[cardlvl - 1]
 
 
 func get_description(cardlvl: int) -> String:

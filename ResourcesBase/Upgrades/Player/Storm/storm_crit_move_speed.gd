@@ -4,13 +4,13 @@ extends PlayerUpgrade
 @export var crit_move_speed_amount: Array[int]
 @export var crit_move_speed_duration: float
 
-func apply(player: Character, cardlvl: int) -> void: # override
+func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > crit_move_speed_amount.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.storm.crit_move_speed_amount = crit_move_speed_amount[cardlvl-1]
-	player.stats.storm.crit_move_speed_duration = crit_move_speed_duration
+	stats.storm.crit_move_speed_amount = crit_move_speed_amount[cardlvl-1]
+	stats.storm.crit_move_speed_duration = crit_move_speed_duration
 
 
 func get_description(cardlvl: int) -> String:

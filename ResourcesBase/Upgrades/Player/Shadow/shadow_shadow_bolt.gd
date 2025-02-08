@@ -9,6 +9,7 @@ func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
+	stats.shadow.shadow_bolt_activated = true
 	stats.shadow.shadow_bolt_damage = shadow_bolt_damage[cardlvl - 1]
 	stats.shadow.shadow_bolt_distance = shadow_bolt_distance
 

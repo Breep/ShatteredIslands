@@ -4,14 +4,14 @@ extends PlayerUpgrade
 @export var nuke_damage: float
 @export var nuke_period: float
 
-func apply(player: Character, cardlvl: int) -> void: # override
+func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 	if cardlvl != 1:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.fire.nuke_activated = true
-	player.stats.fire.nuke_damage = nuke_damage
-	player.stats.fire.nuke_period = nuke_period
+	stats.fire.nuke_activated = true
+	stats.fire.nuke_damage = nuke_damage
+	stats.fire.nuke_period = nuke_period
 
 
 func get_description(cardlvl: int) -> String:

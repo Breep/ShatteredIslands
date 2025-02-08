@@ -4,13 +4,13 @@ extends PlayerUpgrade
 @export var heal_projectile_damage: Array[int]
 @export var heal_projectile_chance: int
 
-func apply(player: Character, cardlvl: int) -> void: # override
+func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > heal_projectile_damage.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.heal.heal_projectile_damage = heal_projectile_damage[cardlvl - 1]
-	player.stats.heal.heal_projectile_chance  = heal_projectile_chance
+	stats.heal.heal_projectile_damage = heal_projectile_damage[cardlvl - 1]
+	stats.heal.heal_projectile_chance  = heal_projectile_chance
 
 
 func get_description(cardlvl: int) -> String:

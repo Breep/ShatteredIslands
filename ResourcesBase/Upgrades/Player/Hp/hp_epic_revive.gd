@@ -5,15 +5,15 @@ extends PlayerUpgrade
 @export var revive_after_death_percentage_damage: int
 @export var revive_after_death_time: float
 
-func apply(player: Character, cardlvl: int) -> void: # override
+func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 	if cardlvl != 1:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.hp.revive_after_death = true
-	player.stats.hp.revive_after_death_percentage_life = revive_after_death_percentage_life
-	player.stats.hp.revive_after_death_percentage_damage = revive_after_death_percentage_life
-	player.stats.hp.revive_after_death_time = revive_after_death_time
+	stats.hp.revive_after_death = true
+	stats.hp.revive_after_death_percentage_life = revive_after_death_percentage_life
+	stats.hp.revive_after_death_percentage_damage = revive_after_death_percentage_life
+	stats.hp.revive_after_death_time = revive_after_death_time
 
 
 func get_description(cardlvl: int) -> String:

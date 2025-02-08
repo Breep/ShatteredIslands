@@ -5,14 +5,14 @@ extends PlayerUpgrade
 @export var poison_by_lost_hp_period: float
 @export var poison_by_lost_hp_hp_number: int
 
-func apply(player: Character, cardlvl: int) -> void: # override
+func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > poison_by_lost_hp_stacks.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.hp.poison_by_lost_hp_stacks = poison_by_lost_hp_stacks[cardlvl - 1]
-	player.stats.hp.poison_by_lost_hp_hp_number = poison_by_lost_hp_hp_number
-	player.stats.hp.poison_by_lost_hp_period = poison_by_lost_hp_period
+	stats.hp.poison_by_lost_hp_stacks = poison_by_lost_hp_stacks[cardlvl - 1]
+	stats.hp.poison_by_lost_hp_hp_number = poison_by_lost_hp_hp_number
+	stats.hp.poison_by_lost_hp_period = poison_by_lost_hp_period
 
 
 func get_description(cardlvl: int) -> String:

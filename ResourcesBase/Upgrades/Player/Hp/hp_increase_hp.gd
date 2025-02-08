@@ -3,12 +3,12 @@ extends PlayerUpgrade
 
 @export var hp_increase_hp: Array[int]
 
-func apply(player: Character, cardlvl: int) -> void: # override
+func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > hp_increase_hp.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.hp.increase_hp += hp_increase_hp[cardlvl - 1]
+	stats.hp.increase_hp += hp_increase_hp[cardlvl - 1]
 
 
 func get_description(cardlvl: int) -> String:

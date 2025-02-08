@@ -4,13 +4,13 @@ extends PlayerUpgrade
 @export var hp_damage_reduce_below_treshold: Array[int]
 @export var damage_taken_reduced_below_treshold_threshold: int
 
-func apply(player: Character, cardlvl: int) -> void: # override
+func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > hp_damage_reduce_below_treshold.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.hp.damage_taken_reduced_below_treshold_percentage = hp_damage_reduce_below_treshold[cardlvl - 1]
-	player.stats.hp.damage_taken_reduced_below_treshold_threshold = damage_taken_reduced_below_treshold_threshold
+	stats.hp.damage_taken_reduced_below_treshold_percentage = hp_damage_reduce_below_treshold[cardlvl - 1]
+	stats.hp.damage_taken_reduced_below_treshold_threshold = damage_taken_reduced_below_treshold_threshold
 
 
 func get_description(cardlvl: int) -> String:

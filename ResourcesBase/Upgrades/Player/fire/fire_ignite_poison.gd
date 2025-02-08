@@ -4,13 +4,13 @@ extends PlayerUpgrade
 @export var poison_fire_damage: Array[int]
 @export var poison_fire_stacks_lost: int
 
-func apply(player: Character, cardlvl: int) -> void: # override
+func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > poison_fire_damage.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.fire.poison_fire_damage = poison_fire_damage[cardlvl - 1]
-	player.stats.fire.poison_fire_stacks_lost = poison_fire_stacks_lost
+	stats.fire.poison_fire_damage = poison_fire_damage[cardlvl - 1]
+	stats.fire.poison_fire_stacks_lost = poison_fire_stacks_lost
 
 
 func get_description(cardlvl: int) -> String:
