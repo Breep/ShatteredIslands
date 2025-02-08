@@ -1,6 +1,6 @@
 [gd_scene load_steps=173 format=4 uid="uid://ca8mcplp2va4s"]
 
-[ext_resource type="Script" path="res://Scenes/buying_zone/camera_3d.gd" id="1_3e5gf"]
+[ext_resource type="Script" path="res://Scripts/Buying_area3d/camera_3d.gd" id="1_3e5gf"]
 [ext_resource type="PackedScene" uid="uid://tmsh8w1pcy4p" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/bar_outercorner.gltf" id="1_jltbr"]
 [ext_resource type="Shader" path="res://Shaders/Cam/Cam_outline_shader_pro.gdshader" id="1_p01h1"]
 [ext_resource type="Texture2D" uid="uid://mswbhaabiedm" path="res://Data/Assets/Tavern - 3D Asset Low poly/textures/dungeon_texture.png" id="2_i4mdp"]

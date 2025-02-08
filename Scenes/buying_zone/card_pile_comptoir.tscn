@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cdryp1jj4woix"]
 
-[ext_resource type="Script" path="res://Scenes/buying_zone/card_pile_comptoir.gd" id="1_3yykp"]
+[ext_resource type="Script" path="res://Scripts/Buying_area3d/card_pile_comptoir.gd" id="1_3yykp"]
 
 [node name="CardPile_comptoir" type="Node3D"]
 script = ExtResource("1_3yykp")
