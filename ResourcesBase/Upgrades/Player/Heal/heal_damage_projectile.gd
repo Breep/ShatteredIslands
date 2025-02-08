@@ -9,6 +9,7 @@ func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
+	stats.heal.heal_projectile_activated = true
 	stats.heal.heal_projectile_damage = heal_projectile_damage[cardlvl - 1]
 	stats.heal.heal_projectile_chance  = heal_projectile_chance
 

@@ -9,6 +9,7 @@ func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
+	stats.hp.damage_increased_by_hp_lost_activated = true
 	stats.hp.damage_increased_by_hp_lost_percentage = damage_increased_by_hp_lost_percentage[cardlvl - 1]
 	stats.hp.damage_increased_by_hp_lost_hp_number = damage_increased_by_hp_lost_hp_number
 

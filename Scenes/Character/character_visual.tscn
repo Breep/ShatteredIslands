@@ -1,9 +1,7 @@
-[gd_scene load_steps=83 format=3 uid="uid://br1wrpaxa7qjk"]
+[gd_scene load_steps=81 format=3 uid="uid://br1wrpaxa7qjk"]
 
 [ext_resource type="Script" path="res://Scripts/Character/character_visual.gd" id="1_8fkrf"]
 [ext_resource type="Theme" uid="uid://duu3l81c6tmkh" path="res://Themes/Labels/popup_damage_normal.tres" id="2_hmo4h"]
-[ext_resource type="Theme" uid="uid://b4n71r60crct6" path="res://Themes/Labels/popup_damage_magic.tres" id="4_00g0e"]
-[ext_resource type="Theme" uid="uid://46ac5avxmvtb" path="res://Themes/Labels/popup_damage_poison.tres" id="5_8l6b4"]
 [ext_resource type="Texture2D" uid="uid://dhdk2bbljjwrm" path="res://Data/Assets/Character/PNG/Wraith_01/PNG Sequences/Idle/Wraith_01_Idle_000.png" id="6_82eq5"]
 [ext_resource type="Texture2D" uid="uid://ct3wly5rc0ni" path="res://Data/Assets/Character/PNG/Wraith_01/PNG Sequences/Attacking/Wraith_01_Attack_000.png" id="6_pey61"]
 [ext_resource type="Texture2D" uid="uid://cl5lvrvwctfk4" path="res://Data/Assets/Character/PNG/Wraith_01/PNG Sequences/Attacking/Wraith_01_Attack_001.png" id="7_oguae"]
@@ -332,14 +330,12 @@ transparency = 1
 shading_mode = 0
 albedo_texture = SubResource("ViewportTexture_2bgvd")
 
-[node name="CharacterVisual" type="Node3D" node_paths=PackedStringArray("physical_popup_spawn", "magic_popup_spawn", "poison_popup_spawn")]
+[node name="CharacterVisual" type="Node3D" node_paths=PackedStringArray("physical_popup_spawn", "magic_popup_spawn", "poison_popup_spawn", "heal_popup_spawn")]
 script = ExtResource("1_8fkrf")
-physical_popup_theme = ExtResource("2_hmo4h")
-magic_popup_theme = ExtResource("4_00g0e")
-poison_popup_theme = ExtResource("5_8l6b4")
 physical_popup_spawn = NodePath("PopUpSpawns/PhysicalDamage")
 magic_popup_spawn = NodePath("PopUpSpawns/MagicDamage")
 poison_popup_spawn = NodePath("PopUpSpawns/PoisonDamage")
+heal_popup_spawn = NodePath("PopUpSpawns/Heal")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 unique_name_in_owner = true

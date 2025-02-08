@@ -8,6 +8,7 @@ func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
+	stats.poison.multiply_damage_activated = true
 	stats.poison.multiply_damage = multiply_damage
 
 

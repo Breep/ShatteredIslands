@@ -7,7 +7,7 @@
 [sub_resource type="Resource" id="Resource_rtppb"]
 script = ExtResource("4_arnqa")
 damage_increased_by_hp_lost_percentage = Array[int]([1, 2, 3, 4, 7])
-damage_increased_by_hp_lost_hp_number = 200
+damage_increased_by_hp_lost_hp_number = 100
 
 [resource]
 script = ExtResource("5_kw33c")

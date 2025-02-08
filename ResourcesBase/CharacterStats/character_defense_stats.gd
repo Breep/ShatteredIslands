@@ -20,6 +20,7 @@ var shield_strike_period: float # Time between 2 shield strike (in s)
 var backfire_fire_shield_damage: float # Damage done to enemy when being hit (in % of current enemy hp)
 var backfire_fire_shield_chance: int # % of chance to proc the backfire_fire_shield
 
+var healing_armor_activated: int # If this skill is activated
 var healing_armor_percent: int # % of heal done also apply armor
 
 var backfire_vulnerability_stacks: int # Stacks of vulnerability applied to enemy when being hit
@@ -28,5 +29,6 @@ var backfire_vulnerability_chance: int # % of chance to proc the backfire_vulner
 var lost_hp_armor_gain_percent : int # % of lost hp converted into armor stacks
 var lost_hp_armor_gain_period : float # Time between two lost_hp_armor_gain (in s)
 
-var reduce_damage_received: int # % of damage received reduced
-var reduce_damage_done: int # % of damage done reduced
+var protector_activated: bool # If this skill is activated
+var protector_reduce_damage_received: int # % of damage received reduced
+var protector_reduce_damage_done: int # % of damage done reduced

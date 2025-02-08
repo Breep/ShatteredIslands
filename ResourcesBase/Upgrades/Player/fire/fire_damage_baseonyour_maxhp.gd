@@ -9,8 +9,9 @@ func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	stats.fire.hp_fire_damage = hp_fire_damage[cardlvl - 1]
-	stats.fire.hp_fire_period = hp_fire_period
+	stats.hp.fire_damage_activated = true
+	stats.hp.fire_damage_percent = hp_fire_damage[cardlvl - 1]
+	stats.hp.fire_damage_period = hp_fire_period
 
 
 func get_description(cardlvl: int) -> String:

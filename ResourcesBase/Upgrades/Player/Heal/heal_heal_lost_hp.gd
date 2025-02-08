@@ -9,7 +9,8 @@ func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	stats.heal.lost_hp_regen_percentage = lost_hp_regen_percentage[cardlvl-1]
+	stats.heal.lost_hp_regen_activated = true
+	stats.heal.lost_hp_regen_percentage = lost_hp_regen_percentage[cardlvl - 1]
 	stats.heal.lost_hp_regen_period = lost_hp_regen_period
 
 

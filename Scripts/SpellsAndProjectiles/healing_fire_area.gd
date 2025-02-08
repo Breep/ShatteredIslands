@@ -57,8 +57,7 @@ func _on_effect_timer_timeout() -> void:
 	print("HEAL AND FIRE TRIGGERED")
 	for character in _characters_inside:
 		if character.team == _source.team:
-			#character.heal_percent(_source, _heal_percent)
-			print("HEAL ", character.player.name)
+			character.take_heal_percent(_source, _heal_percent, Utils.PercentModifier.MAX_HP)
 		else:
-			character.take_damage_percent(_source, _damage_percent, Utils.DamageType.MAGIC)
+			character.take_damage_percent(_source, _damage_percent, Utils.DamageType.MAGIC, Utils.PercentModifier.CURRENT_HP)
 			print("DAMAGE ", character.player.name)

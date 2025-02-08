@@ -26,9 +26,6 @@ var healing_fire_area_period: float # Time between 2 tick of damage/heal of the 
 var damage_increase_on_low_life_enemy_percent: int # Damage increase on enemies below a threshold (in %)
 var damage_increase_on_low_life_enemy_threshold: int # Threshold of the damage increase (in % of max hp)
 
-var hp_fire_damage: int # Damage of the hp fire (in % of self max hp)
-var hp_fire_period: float # Time between 2 hp fire (in s)
-
 var poison_fire_stacks_lost: int # Number of stack to be lost by the enemy to proc poison_fire
 var poison_fire_damage: int # Damage of the poison fire (in % of enemy max hp)
 

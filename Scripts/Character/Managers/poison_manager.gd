@@ -83,7 +83,7 @@ func _on_poison_tick_timer_timeout() -> void:
 	for effect in _poison_stats.poison_effects:
 		if effect.ticks_left > 0:
 			effect.ticks_left -= 1
-			if effect.source.stats.poison.multiply_damage > 0:
+			if effect.source.stats.poison.multiply_damage_activated:
 				poison_damage += effect.stacks_number * effect.source.stats.poison.multiply_damage
 			else:
 				poison_damage += effect.stacks_number

@@ -8,6 +8,7 @@ func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
+	stats.defense.healing_armor_activated = true
 	stats.defense.healing_armor_percent = healing_armor_percent[cardlvl-1]
 
 

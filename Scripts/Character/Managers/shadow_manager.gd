@@ -3,8 +3,8 @@ extends Node
 
 # ============================== Signals ==============================
 
-signal heal_ally_triggered(heal_amount: int)
 signal gain_max_hp_triggered(hp: int)
+signal heal_done()
 
 # ============================== Private variables ==============================
 
@@ -114,7 +114,9 @@ var __distance_since_last_heal: float = 0
 func _try_heal() -> void:
 	if __distance_since_last_heal > _shadow_stats.heal_ally_distance:
 		__distance_since_last_heal -= _shadow_stats.heal_ally_distance
-		heal_ally_triggered.emit(_shadow_stats.heal_ally_value)
+		var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
+		target.take_heal(_source, _shadow_stats.heal_ally_value)
+		heal_done.emit()
 
 
 var __distance_since_last_gain_max_hp: float = 0

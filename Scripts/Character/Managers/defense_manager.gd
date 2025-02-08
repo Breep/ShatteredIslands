@@ -35,8 +35,27 @@ func stop() -> void:
 		timer.stop()
 
 
-func get_reduced_damage_taken_from(damage_source: Character, damage: int, damage_type: Utils.DamageType) -> int:
-	if damage_type == Utils.DamageType.PHYSICAL:
+func get_reduced_damage_taken_from_target_protector(damage_source: Character, damage: int) -> int:
+	if not damage_source.stats.defense.protector_activated:
+		return damage
+	
+	var damage_reduction: int = ((damage as float * damage_source.stats.defense.protector_reduce_damage_done) / 100.0) as int
+	return damage - damage_reduction
+
+
+func get_reduced_damage_taken_from_own_protector(damage: int) -> int:
+	if not _defense_stats.protector_activated:
+		return damage
+	
+	var damage_reduction: int = ((damage as float * _defense_stats.protector_reduce_damage_received) / 100.0) as int
+	return damage - damage_reduction
+
+
+func get_reduced_damage_taken_from_armor(damage_source: Character, damage: int, damage_type: Utils.DamageType) -> int:
+	if damage_type == Utils.DamageType.POISON: # Armor doesn't work on poison
+		return damage
+	
+	if damage_type == Utils.DamageType.PHYSICAL: # Physical damage can trigger backfire
 		_handle_backfires(damage_source)
 	
 	var damage_reduction = min(damage, _defense_stats.armor_stacks)
@@ -44,6 +63,13 @@ func get_reduced_damage_taken_from(damage_source: Character, damage: int, damage
 	_defense_stats.armor_stacks -= damage_reduction
 	_armor_lost_since_last_shield_strike += damage_reduction
 	return damage_reduced
+
+
+func notify_heal_received(heal: int) -> void:
+	if not _defense_stats.healing_armor_activated:
+		return
+	
+	_defense_stats.armor_stacks += (heal * _defense_stats.healing_armor_percent as float / 100.0) as int
 
 # ============================== Private functions ==============================
 
@@ -66,7 +92,7 @@ func _handle_backfires(damage_source: Character) -> void:
 		_defense_stats.armor_stacks += _defense_stats.backfire_armor_gain_stacks
 	
 	if Utils.is_randomize_modifier_active(_defense_stats.backfire_fire_shield_chance):
-		damage_source.take_damage_percent(_source, _defense_stats.backfire_fire_shield_damage, Utils.DamageType.MAGIC)
+		damage_source.take_damage_percent(_source, _defense_stats.backfire_fire_shield_damage, Utils.DamageType.MAGIC, Utils.PercentModifier.CURRENT_HP)
 	
 	if Utils.is_randomize_modifier_active(_defense_stats.backfire_poison_chance):
 		damage_source.take_poison_stacks(_source, _defense_stats.backfire_poison_stacks, 10) # TODO Surement envoyer ce truc au poison manager car il faut connaitre la durée du poison

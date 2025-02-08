@@ -7,6 +7,13 @@ enum DamageType {
 	PHYSICAL,
 	POISON,
 	MAGIC,
+	HEAL,
+}
+
+enum PercentModifier {
+	MAX_HP,
+	CURRENT_HP,
+	LOST_HP,
 }
 
 enum StackType {

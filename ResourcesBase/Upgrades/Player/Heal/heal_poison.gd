@@ -9,8 +9,9 @@ func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
+	stats.heal.poison_stacks_activated = true
 	stats.heal.poison_stacks_number = poison_stacks_number[cardlvl-1]
-	stats.heal.poison_stacks_chance 
+	stats.heal.poison_stacks_chance = poison_stacks_chance
 
 
 func get_description(cardlvl: int) -> String:

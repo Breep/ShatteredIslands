@@ -5,13 +5,10 @@ extends Node3D
 
 @onready var damage_popup_scene = preload("res://Scenes/Character/damage_pop_up.tscn")
 
-@export var physical_popup_theme: Theme
-@export var magic_popup_theme: Theme
-@export var poison_popup_theme: Theme
-
 @export var physical_popup_spawn: Node3D
 @export var magic_popup_spawn: Node3D
 @export var poison_popup_spawn: Node3D
+@export var heal_popup_spawn: Node3D
 
 # ============================== Local scene nodes ==============================
 
@@ -49,15 +46,18 @@ func update_name_displayed(player_name: String) -> void:
 
 func damage_popup(amount: float, damage_type: Utils.DamageType):
 	var popup: DamagePopUp = damage_popup_scene.instantiate()
-	var offset = Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)) 
+	var offset = Vector3(randf_range(-0.5, 0.5), randf_range(-0.5, 0.5), 0) 
 	popup.text = str(amount)
 	get_tree().current_scene.add_child(popup)
 	match damage_type:
 		Utils.DamageType.POISON:
 			popup.global_position = poison_popup_spawn.global_position + offset
-			popup.outline_modulate = Color(0, 200, 0, 1)
+			popup.outline_modulate = Color8(20, 95, 28, 255)
 		Utils.DamageType.PHYSICAL:
 			popup.global_position = physical_popup_spawn.global_position + offset
 		Utils.DamageType.MAGIC:
 			popup.global_position = magic_popup_spawn.global_position + offset
-			popup.outline_modulate = Color(0, 0, 200, 1)
+			popup.outline_modulate = Color8(0, 0, 204, 255)
+		Utils.DamageType.HEAL:
+			popup.global_position = heal_popup_spawn.global_position + offset
+			popup.outline_modulate = Color8(51, 255, 153, 255)

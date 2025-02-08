@@ -35,7 +35,7 @@ func stop() -> void:
 		timer.stop()
 
 
-func get_reduced_damage_taken_from(_damage_source: Character, damage: int, damage_type: Utils.DamageType) -> int:
+func get_reduced_damage(damage: int, damage_type: Utils.DamageType) -> int:
 	if damage_type != Utils.DamageType.MAGIC:
 		return damage
 	
@@ -66,4 +66,4 @@ func _on_firebolt_timer_timeout() -> void:
 	if target == null:
 		return
 	
-	target.take_damage_percent(_source, _fire_stats.firebolt_damage, Utils.DamageType.MAGIC)
+	target.take_damage_percent(_source, _fire_stats.firebolt_damage, Utils.DamageType.MAGIC, Utils.PercentModifier.CURRENT_HP)

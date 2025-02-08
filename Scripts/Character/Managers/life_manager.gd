@@ -31,18 +31,27 @@ func stop() -> void:
 	for timer in _optional_timers:
 		timer.stop()
 
+func get_increased_damage_taken_from_lost_hp(_damage_source: Character, damage: int, damage_type: Utils.DamageType) -> int:
+	if damage_type != Utils.DamageType.PHYSICAL:
+		return damage
+	
+	if not _damage_source.stats.hp.damage_increased_by_hp_lost_activated:
+		return damage
+	
+	var lost_hp: int = _damage_source.stats.health_max - _damage_source.stats.health
+	var damage_inc_percent: int = _damage_source.stats.hp.damage_increased_by_hp_lost_percentage
+	var lost_hp_stacks: int = lost_hp / _damage_source.stats.hp.damage_increased_by_hp_lost_hp_number
+	var damage_multiplier: float = remap(damage_inc_percent * lost_hp_stacks, 0, 100, 1, 2)
 
-func get_reduced_damage_taken_from(_damage_source: Character, damage: int, damage_type: Utils.DamageType) -> int:
+	return damage * damage_multiplier
+
+func get_reduced_damage(damage: int) -> int:
 	if not _life_stats.damage_taken_reduced_below_treshold_activated:
 		return damage
 	
 	var life_ratio: float = (_source.stats.health as float / _source.stats.health_max as float) * 100.0
-	if multiplayer.get_unique_id() == 1:
-		print("life_ratio = ", life_ratio, " | Threshold = ", _life_stats.damage_taken_reduced_below_treshold_threshold)
 	if life_ratio <= _life_stats.damage_taken_reduced_below_treshold_threshold:
 		var damage_reduction = (damage as float) * _life_stats.damage_taken_reduced_below_treshold_percentage / 100.0
-		if multiplayer.get_unique_id() == 1:
-			print("Damage reduced by ", damage_reduction, " | damage = ", damage)
 		return damage - damage_reduction
 	
 	return damage
@@ -50,9 +59,13 @@ func get_reduced_damage_taken_from(_damage_source: Character, damage: int, damag
 # ============================== Private functions ==============================
 
 func _create_optional_timers() -> void:
+	# Poisonous hearth
 	if _life_stats.poison_by_lost_hp_activated:
 		_optional_timers.append(Utils.create_optional_timer(self, _life_stats.poison_by_lost_hp_period, _on_poison_by_lost_hp_timer_timeout))
-	pass
+	
+	# Hearth of fire
+	if _life_stats.fire_damage_activated:
+		_optional_timers.append(Utils.create_optional_timer(self, _life_stats.fire_damage_period, _on_fire_damage_timer_timeout))
 
 # ============================== Callbacks functions ==============================
 
@@ -65,3 +78,11 @@ func _on_poison_by_lost_hp_timer_timeout() -> void:
 	var poison_stacks: int = (lost_hp / _life_stats.poison_by_lost_hp_hp_number) * stack_multiplier
 	print("Inflict ", poison_stacks, " poison stacks ! - ", _source.stats.health_max - _source.stats.health)
 	target.take_poison_stacks(_source, poison_stacks, 5)
+
+
+func _on_fire_damage_timer_timeout() -> void:
+	var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST_ENEMY)
+	if target == null:
+		return
+	var damage = _source.stats.health_max * _life_stats.fire_damage_percent / 100.0
+	target.take_damage_flat(_source, damage, Utils.DamageType.MAGIC)

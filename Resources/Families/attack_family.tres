@@ -1,23 +1,13 @@
-[gd_resource type="Resource" script_class="Family" load_steps=15 format=3 uid="uid://ba4admuapckro"]
+[gd_resource type="Resource" script_class="Family" load_steps=5 format=3 uid="uid://ba4admuapckro"]
 
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="1_ppk5g"]
-[ext_resource type="Resource" uid="uid://detmbv5f044hp" path="res://Resources/Card/Attack/attack_chance_to_bounce.tres" id="2_i7log"]
-[ext_resource type="Resource" uid="uid://u6joadjshso2" path="res://Resources/Card/Attack/attack_speed.tres" id="3_eg1li"]
-[ext_resource type="Resource" uid="uid://bvfu161ocmc6a" path="res://Resources/Card/Attack/attack_fire_damage.tres" id="4_si84x"]
-[ext_resource type="Resource" uid="uid://7pb4nkpsp7dv" path="res://Resources/Card/Attack/attack_increase_max_hp.tres" id="5_h4bng"]
 [ext_resource type="Script" path="res://ResourcesBase/Family/family.gd" id="6_b6cyx"]
 [ext_resource type="Resource" uid="uid://b107jh0lcr1sr" path="res://Resources/Card/Attack/attack_heal_allies.tres" id="6_elef2"]
-[ext_resource type="Resource" uid="uid://b0cmganf48sgp" path="res://Resources/Card/Attack/attack_chance_to_poison.tres" id="7_ydbl8"]
-[ext_resource type="Resource" uid="uid://bh36aymfdpkvc" path="res://Resources/Card/Attack/attack_increase_on_move.tres" id="8_erx8f"]
-[ext_resource type="Resource" uid="uid://bwdrxts64wwp8" path="res://Resources/Card/Attack/attack_chance_to_gainarmor_onattack.tres" id="9_0hqkg"]
-[ext_resource type="Resource" uid="uid://d330nvebnef6f" path="res://Resources/Card/Attack/attack_chance_to_vulnerability.tres" id="10_d84pe"]
-[ext_resource type="Resource" uid="uid://csf5h7jnxxg2c" path="res://Resources/Card/Attack/attack_dammage.tres" id="11_gp3v2"]
-[ext_resource type="Resource" uid="uid://cqpagw775rgha" path="res://Resources/Card/Attack/attack_speed_overtime.tres" id="12_xnad5"]
 [ext_resource type="Texture2D" uid="uid://bxd1jnaci6olo" path="res://Data/Assets/Card/ICONS/ATTACK color.png" id="13_yun8f"]
 
 [resource]
 script = ExtResource("6_b6cyx")
-cards = Array[ExtResource("1_ppk5g")]([ExtResource("2_i7log"), ExtResource("9_0hqkg"), ExtResource("7_ydbl8"), ExtResource("10_d84pe"), ExtResource("11_gp3v2"), ExtResource("4_si84x"), ExtResource("6_elef2"), ExtResource("5_h4bng"), ExtResource("8_erx8f"), ExtResource("3_eg1li"), ExtResource("12_xnad5")])
+cards = Array[ExtResource("1_ppk5g")]([ExtResource("6_elef2")])
 icon = ExtResource("13_yun8f")
 family_name = "Attack"
 family_type = 0

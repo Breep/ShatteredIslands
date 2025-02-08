@@ -25,7 +25,6 @@ func start(source: Character, heal_stats: CharacterHealStats) -> void:
 	_source = source
 	_heal_stats = heal_stats
 	_create_optional_timers()
-	_lanch_optional_spells()
 
 
 func stop() -> void:
@@ -33,19 +32,39 @@ func stop() -> void:
 		timer.stop()
 
 
+func notify_heal() -> void:
+	# Magic heal
+	if _heal_stats.heal_projectile_activated and Utils.is_randomize_modifier_active(_heal_stats.heal_projectile_chance):
+		var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST_ENEMY)
+		if target == null:
+			return
+		target.take_damage_flat(_source, _heal_stats.heal_projectile_damage, Utils.DamageType.MAGIC)
+	
+	# Hazardous healing
+	if _heal_stats.poison_stacks_activated and Utils.is_randomize_modifier_active(_heal_stats.poison_stacks_chance):
+		var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.RANDOM_ENEMY)
+		if target == null:
+			return
+		target.take_poison_stacks(_source, _heal_stats.poison_stacks_number, 5) # TODO relier à la duration du poison
+
 # ============================== Private functions ==============================
 
 func _create_optional_timers() -> void:
-	# Break armor
+	# Flash heal
 	if _heal_stats.periodic_heal_activated:
 		_optional_timers.append(Utils.create_optional_timer(self, _heal_stats.periodic_heal_period, _on_periodic_heal_timer_timeout))
-
-
-func _lanch_optional_spells() -> void:
-	pass
+	
+	# Survivor
+	if _heal_stats.lost_hp_regen_activated:
+		_optional_timers.append(Utils.create_optional_timer(self, _heal_stats.lost_hp_regen_period, _on_lost_hp_regen_timer_timeout))
 
 # ============================== Callbacks functions ==============================
 
 func _on_periodic_heal_timer_timeout() -> void:
-	print("HealManager: Periodic heal")
-	
+	var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
+	target.take_heal(_source, _heal_stats.periodic_heal_amount)
+	notify_heal()
+
+func _on_lost_hp_regen_timer_timeout() -> void:
+	_source.take_heal_percent(_source, _heal_stats.lost_hp_regen_percentage, Utils.PercentModifier.LOST_HP)
+	notify_heal()

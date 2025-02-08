@@ -1,14 +1,14 @@
 [gd_resource type="Resource" script_class="Family" load_steps=6 format=3 uid="uid://cxs83q5l14d1m"]
 
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="1_mfwj6"]
+[ext_resource type="Resource" uid="uid://dkxgpd1kl23wm" path="res://Resources/Card/Fire/fire_damage_baseonyour_maxhp.tres" id="3_3o8d0"]
 [ext_resource type="Script" path="res://ResourcesBase/Family/family.gd" id="3_gum03"]
 [ext_resource type="Resource" uid="uid://6ogbf2rbcg4s" path="res://Resources/Card/Hp/hp_increase_hp.tres" id="4_eom31"]
-[ext_resource type="Resource" uid="uid://dakp7xw32rkql" path="res://Resources/Card/Hp/hp_reduce_damage_treshold.tres" id="7_a4e4t"]
 [ext_resource type="Texture2D" uid="uid://cia42t0jcdkfg" path="res://Data/Assets/Card/ICONS/HP color.png" id="8_it1s8"]
 
 [resource]
 script = ExtResource("3_gum03")
-cards = Array[ExtResource("1_mfwj6")]([ExtResource("4_eom31"), ExtResource("7_a4e4t")])
+cards = Array[ExtResource("1_mfwj6")]([ExtResource("4_eom31"), ExtResource("3_3o8d0")])
 icon = ExtResource("8_it1s8")
 family_name = "Life"
 family_type = 5

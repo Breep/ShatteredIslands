@@ -52,24 +52,33 @@ func _ready() -> void:
 	
 	_apply_all_cards_upgrades()
 	
-	print(player.name, ": ", stats.health, "/", stats.health_max)
-
 	_character_visual.update_health_bar(stats.health, stats.health_max)
 	_character_visual.update_energy_bar(stats.energy, stats.energy_max)
 	_character_visual.update_mana_bar(stats.mana, stats.mana_max)
 
 # ============================== Damage and effect functions ==============================
 
-# TODO Ajouter un percent_type pour savoir si on calcule les dégat sur base de vie max/ vie actuelle ou vie perdu
-func take_damage_percent(source: Character, damage_percent: float, damage_type: Utils.DamageType) -> void:
-	var damage = stats.health * damage_percent  / 100.0
+func take_damage_percent(source: Character, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier) -> void:
+	var hp: int
+	match percent_modifier:
+		Utils.PercentModifier.MAX_HP:
+			hp = stats.health_max
+		Utils.PercentModifier.CURRENT_HP:
+			hp = stats.health
+		Utils.PercentModifier.LOST_HP:
+			hp = stats.health_max - stats.health
+	var damage = hp * damage_percent  / 100.0
 	take_damage_flat(source, damage, damage_type)
 
 
 func take_damage_flat(source: Character, damage: int, damage_type: Utils.DamageType) -> void:
-	damage = _fire_manager.get_reduced_damage_taken_from(source, damage, damage_type) # Reduce % of MAGIC damage
-	damage = _life_manager.get_reduced_damage_taken_from(source, damage, damage_type) # Reduce % of ALL damage
-	damage = _defense_manager.get_reduced_damage_taken_from(source, damage, damage_type) # Reduce flat of PHYSIC AND MAGIC damage
+	damage = _life_manager.get_increased_damage_taken_from_lost_hp(source, damage, damage_type) # Increase % of PHYSICAL damage
+	damage = _defense_manager.get_reduced_damage_taken_from_target_protector(source, damage) # Reduce % of ALL damage
+	
+	damage = _defense_manager.get_reduced_damage_taken_from_own_protector(damage) # Reduce % of ALL damage
+	damage = _life_manager.get_reduced_damage(damage) # Reduce % of ALL damage
+	damage = _fire_manager.get_reduced_damage(damage, damage_type) # Reduce % of MAGIC damage
+	damage = _defense_manager.get_reduced_damage_taken_from_armor(source, damage, damage_type) # Reduce flat of PHYSIC AND MAGIC damage
 	
 	stats.health -= damage
 	_character_visual.damage_popup(damage, damage_type)
@@ -92,6 +101,29 @@ func take_condition_stacks(_source: Character, stacks_number: int, stack_type: U
 		Utils.StackType.VULNERABILITY:
 			stats.storm.vulnerability_stacks += stacks_number
 			return
+
+
+func take_heal(source: Character, heal: int) -> void:
+	_defense_manager.notify_heal_received(heal)
+	
+	stats.health = clamp(stats.health + heal, 0, stats.health_max)
+	
+	if heal != 0:
+		_character_visual.damage_popup(heal, Utils.DamageType.HEAL)
+		_character_visual.update_health_bar(stats.health, stats.health_max)
+
+
+func take_heal_percent(source: Character, heal_percent: float, percent_modifier: Utils.PercentModifier) -> void:
+	var hp: int
+	match percent_modifier:
+		Utils.PercentModifier.MAX_HP:
+			hp = stats.health_max
+		Utils.PercentModifier.CURRENT_HP:
+			hp = stats.health
+		Utils.PercentModifier.LOST_HP:
+			hp = stats.health_max - stats.health
+	var heal_amount: int = (heal_percent * hp) / 100
+	take_heal(source, heal_amount)
 
 # ============================== Fighting States ==============================
 
@@ -146,7 +178,9 @@ func _start_auto_attack_manager() -> void:
 
 
 func _on_auto_attack_manager_heal_ally_triggered(heal_amount: int) -> void:
-	print("Heal ally for ", heal_amount)
+	var target = target_manager.get_target(TargetManager.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
+	target.take_heal(self, heal_amount)
+	_heal_manager.notify_heal()
 
 
 func _on_auto_attack_manager_armor_gained(armor_stacks: int) -> void:
@@ -238,13 +272,13 @@ func _start_shadow_manager() -> void:
 		printerr("No ShadowManager")
 		return
 	
-	_shadow_manager.connect("heal_ally_triggered", _on_shadow_manager_heal_ally_triggered)
+	_shadow_manager.connect("heal_done", _on_shadow_manager_heal_done)
 	_shadow_manager.connect("gain_max_hp_triggered", _on_shadow_manager_gain_max_hp_triggered)
 	_shadow_manager.start(self, stats.shadow)
 
 
-func _on_shadow_manager_heal_ally_triggered(heal_amount: int) -> void:
-	print("Heal ally for", heal_amount)
+func _on_shadow_manager_heal_done() -> void:
+	_heal_manager.notify_heal()
 
 
 func _on_shadow_manager_gain_max_hp_triggered(hp: int) -> void:
