@@ -6,16 +6,16 @@ extends PlayerUpgrade
 @export var meteor_cooldown: float
 @export var meteor_deploy_time: Array[float]
 
-func apply(player: Character, cardlvl: int) -> void: # override
+func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > meteor_damage.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.fire.meteor_activated = true
-	player.stats.fire.meteor_area_range = meteor_area_range
-	player.stats.fire.meteor_cooldown = meteor_cooldown
-	player.stats.fire.meteor_damage = meteor_damage[cardlvl - 1]
-	player.stats.fire.meteor_deploy_time = meteor_deploy_time[cardlvl - 1]
+	stats.fire.meteor_activated = true
+	stats.fire.meteor_area_range = meteor_area_range
+	stats.fire.meteor_cooldown = meteor_cooldown
+	stats.fire.meteor_damage = meteor_damage[cardlvl - 1]
+	stats.fire.meteor_deploy_time = meteor_deploy_time[cardlvl - 1]
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > meteor_damage.size():

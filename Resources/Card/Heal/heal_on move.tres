@@ -7,7 +7,7 @@
 [sub_resource type="Resource" id="Resource_vn76v"]
 script = ExtResource("4_fs5pw")
 movement_heal_amount = Array[int]([5, 10, 15, 20, 30])
-movement_heal_distance = 5
+movement_heal_distance = 3
 
 [resource]
 script = ExtResource("5_n3cvi")

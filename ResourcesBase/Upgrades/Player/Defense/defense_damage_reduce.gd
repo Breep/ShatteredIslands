@@ -4,13 +4,13 @@ extends PlayerUpgrade
 @export var reduce_damage_done: int
 @export var reduce_damage_received: int
 
-func apply(player: Character, cardlvl: int) -> void: # override
+func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 	if cardlvl != 1:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.defense.reduce_damage_done = reduce_damage_done
-	player.stats.defense.reduce_damage_received = reduce_damage_received
+	stats.defense.reduce_damage_done = reduce_damage_done
+	stats.defense.reduce_damage_received = reduce_damage_received
 
 
 func get_description(cardlvl: int) -> String:

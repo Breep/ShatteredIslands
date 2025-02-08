@@ -4,13 +4,13 @@ extends PlayerUpgrade
 @export var damage_increase_on_low_life_enemy_percent: Array[int]
 @export var damage_increase_on_low_life_enemy_threshold: int
 
-func apply(player: Character, cardlvl: int) -> void: # override
+func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > damage_increase_on_low_life_enemy_percent.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.fire.damage_increase_on_low_life_enemy_percent = damage_increase_on_low_life_enemy_percent[cardlvl - 1]
-	player.stats.fire.damage_increase_on_low_life_enemy_threshold = damage_increase_on_low_life_enemy_threshold
+	stats.fire.damage_increase_on_low_life_enemy_percent = damage_increase_on_low_life_enemy_percent[cardlvl - 1]
+	stats.fire.damage_increase_on_low_life_enemy_threshold = damage_increase_on_low_life_enemy_threshold
 
 
 func get_description(cardlvl: int) -> String:

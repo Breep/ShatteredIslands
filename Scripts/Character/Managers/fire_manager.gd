@@ -17,7 +17,6 @@ var _optional_timers: Array[Timer]
 # ============================== Public functions ==============================
 
 func start(source: Character, fire_stats: CharacterFireStats) -> void:
-	print("FireManager: Starting")
 	if source == null:
 		printerr("FireManager: source undef")
 		return

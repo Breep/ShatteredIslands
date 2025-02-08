@@ -4,14 +4,14 @@ extends PlayerUpgrade
 @export var fire_attack_damage: Array[int]
 @export var fire_attack_period: int
 
-func apply(player: Character, cardlvl: int) -> void: # override
+func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > fire_attack_damage.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.auto_attack.fire_attack_activated = true
-	player.stats.auto_attack.fire_attack_damage = fire_attack_damage[cardlvl - 1]
-	player.stats.auto_attack.fire_attack_period = fire_attack_period
+	stats.auto_attack.fire_attack_activated = true
+	stats.auto_attack.fire_attack_damage = fire_attack_damage[cardlvl - 1]
+	stats.auto_attack.fire_attack_period = fire_attack_period
 
 
 func get_description(cardlvl: int) -> String:

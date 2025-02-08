@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://c66yw4go2ykwa"]
+[gd_scene load_steps=14 format=3 uid="uid://c66yw4go2ykwa"]
 
-[ext_resource type="Script" path="res://Scripts/Areas/fighting_area_3d.gd" id="1_ejogh"]
-[ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://Scenes/Maps/spawn_manager.tscn" id="2_87yha"]
-[ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Scenes/Character/character.tscn" id="3_7oubw"]
+[ext_resource type="Script" path="res://Scripts/FightingArea/fighting_area_3d.gd" id="1_ejogh"]
+[ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://Scenes/FightingArea/spawn_manager.tscn" id="2_87yha"]
+[ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Scenes/Character/ccharacter.tscn" id="3_7oubw"]
+[ext_resource type="PackedScene" uid="uid://c0l0roxttdtlp" path="res://Scenes/FightingArea/fighting_manager.tscn" id="4_ps2v2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iv60j"]
 albedo_color = Color(0.254202, 0.260607, 0.801323, 1)
@@ -32,11 +33,14 @@ size = Vector3(10, 1, 40)
 material = SubResource("StandardMaterial3D_3rqjt")
 size = Vector3(40, 1, 10)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_jo255"]
+size = Vector3(10, 1, 20)
+
 [node name="FightingArea3D" type="Node3D"]
 script = ExtResource("1_ejogh")
 
 [node name="BlueSide" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -0.5, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="BlueSide"]
 mesh = SubResource("BoxMesh_isa1e")
@@ -45,7 +49,7 @@ mesh = SubResource("BoxMesh_isa1e")
 shape = SubResource("BoxShape3D_8xrl2")
 
 [node name="RedSide" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -0.5, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RedSide"]
 mesh = SubResource("BoxMesh_lmosg")
@@ -54,7 +58,7 @@ mesh = SubResource("BoxMesh_lmosg")
 shape = SubResource("BoxShape3D_8xrl2")
 
 [node name="Outside" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -0.5, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Outside"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
@@ -78,7 +82,7 @@ skeleton = NodePath("../..")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 4.63176, 18.505, 28.791)
+transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 18.505, 28.791)
 projection = 1
 size = 20.463
 
@@ -86,22 +90,27 @@ size = 20.463
 transform = Transform3D(0.883038, -0.260635, 0.390274, 0, 0.831605, 0.555367, -0.469302, -0.49041, 0.734339, 0, 15.6227, 0)
 light_color = Color(0.707351, 0.647416, 0.866633, 1)
 
-[node name="Spawns" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+[node name="Managers" type="Node3D" parent="."]
 
-[node name="0" type="Node3D" parent="Spawns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0.049)
+[node name="FightingManager" parent="Managers" instance=ExtResource("4_ps2v2")]
+unique_name_in_owner = true
+starting_count_down_duration = 5
+fight_duration = 30
+fight_accelerated_duration = 10
+ending_duration = 2
 
-[node name="1" type="Node3D" parent="Spawns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.93962, -9.53674e-07, 0.0912552)
-
-[node name="SpawnManager" parent="." node_paths=PackedStringArray("spawns") instance=ExtResource("2_87yha")]
-spawns = [NodePath("../Spawns/0"), NodePath("../Spawns/1")]
+[node name="SpawnManager" parent="Managers" instance=ExtResource("2_87yha")]
+unique_name_in_owner = true
 character_scene = ExtResource("3_7oubw")
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 30.0
-one_shot = true
-autostart = true
+[node name="SpawnTeam1" type="Area3D" parent="Managers/SpawnManager" groups=["SPAWN_TEAM_1"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Managers/SpawnManager/SpawnTeam1"]
+shape = SubResource("BoxShape3D_jo255")
+
+[node name="SpawnTeam2" type="Area3D" parent="Managers/SpawnManager" groups=["SPAWN_TEAM_2"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Managers/SpawnManager/SpawnTeam2"]
+shape = SubResource("BoxShape3D_jo255")

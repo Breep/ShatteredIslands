@@ -4,14 +4,14 @@ extends PlayerUpgrade
 @export var firebolt_damage: Array[float]
 @export var firebolt_period: float
 
-func apply(player: Character, cardlvl: int) -> void: # override
+func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > firebolt_damage.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.fire.firebolt_activated = true
-	player.stats.fire.firebolt_damage = firebolt_damage[cardlvl-1]
-	player.stats.fire.firebolt_period = firebolt_period
+	stats.fire.firebolt_activated = true
+	stats.fire.firebolt_damage = firebolt_damage[cardlvl-1]
+	stats.fire.firebolt_period = firebolt_period
 
 
 func get_description(cardlvl: int) -> String:

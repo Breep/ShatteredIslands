@@ -1,6 +1,8 @@
 class_name CharacterVisual
 extends Node3D
 
+# ============================== TMP TODO improve this crapy code TMP ==============================
+
 @onready var damage_popup_scene = preload("res://Scenes/Character/damage_pop_up.tscn")
 
 @export var physical_popup_theme: Theme

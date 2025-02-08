@@ -3,12 +3,12 @@ extends PlayerUpgrade
 
 @export var healing_armor_percent: Array[int]
 
-func apply(player: Character, cardlvl: int) -> void: # override
+func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > healing_armor_percent.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.defense.healing_armor_percent = healing_armor_percent[cardlvl-1]
+	stats.defense.healing_armor_percent = healing_armor_percent[cardlvl-1]
 
 
 func get_description(cardlvl: int) -> String:

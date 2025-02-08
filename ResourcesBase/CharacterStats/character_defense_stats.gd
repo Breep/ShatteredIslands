@@ -28,8 +28,5 @@ var backfire_vulnerability_chance: int # % of chance to proc the backfire_vulner
 var lost_hp_armor_gain_percent : int # % of lost hp converted into armor stacks
 var lost_hp_armor_gain_period : float # Time between two lost_hp_armor_gain (in s)
 
-var movement_armor_stacks_amount: int # Stacks of armor gain every movement_armor_stacks_distance moved
-var movement_armor_stacks_distance: int # Distance to move to gain movement_armor_stacks (in m)
-
 var reduce_damage_received: int # % of damage received reduced
 var reduce_damage_done: int # % of damage done reduced

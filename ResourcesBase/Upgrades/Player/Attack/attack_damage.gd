@@ -3,13 +3,13 @@ extends PlayerUpgrade
 
 @export var damages: Array[int]
 
-func apply(player: Character, cardlvl: int) -> void: # override
+func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > damages.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.attack_damage += damages[cardlvl - 1]
-	player.stats.auto_attack.attack_damage_boost = damages[cardlvl - 1]
+	stats.attack_damage += damages[cardlvl - 1]
+	stats.auto_attack.attack_damage_boost = damages[cardlvl - 1]
 
 
 func get_description(cardlvl: int) -> String:

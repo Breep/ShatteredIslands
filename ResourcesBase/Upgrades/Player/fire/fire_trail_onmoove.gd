@@ -5,14 +5,14 @@ extends PlayerUpgrade
 @export var trail_life_time: float
 @export var trail_period: float
 
-func apply(player: Character, cardlvl: int) -> void: # override
+func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > trail_damage.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.fire.trail_damage = trail_damage[cardlvl-1]
-	player.stats.fire.trail_life_time = trail_life_time
-	player.stats.fire.trail_period = trail_period
+	stats.fire.trail_damage = trail_damage[cardlvl-1]
+	stats.fire.trail_life_time = trail_life_time
+	stats.fire.trail_period = trail_period
 
 
 func get_description(cardlvl: int) -> String:

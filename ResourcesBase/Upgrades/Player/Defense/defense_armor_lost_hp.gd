@@ -4,13 +4,13 @@ extends PlayerUpgrade
 @export var lost_hp_armor_gain_percent: Array[int]
 @export var lost_hp_armor_gain_period: float
 
-func apply(player: Character, cardlvl: int) -> void: # override
+func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > lost_hp_armor_gain_percent.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.defense.lost_hp_armor_gain_percent = lost_hp_armor_gain_percent[cardlvl - 1]
-	player.stats.defense.lost_hp_armor_gain_period = lost_hp_armor_gain_period
+	stats.defense.lost_hp_armor_gain_percent = lost_hp_armor_gain_percent[cardlvl - 1]
+	stats.defense.lost_hp_armor_gain_period = lost_hp_armor_gain_period
 
 
 func get_description(cardlvl: int) -> String:

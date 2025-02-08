@@ -18,7 +18,8 @@ var stats := CharacterStats.new() # Needs to be public for easier upgrades acces
 
 var _fighting_area: FightingArea
 var _is_dead: bool = false
-var _is_player_character: bool = false
+var _is_local: bool = false
+var _fighting_state: FightingManager.FightingState = FightingManager.FightingState.WAITING_FOR_PLAYERS
 
 # ============================== Local scene nodes ==============================
 
@@ -40,12 +41,13 @@ var _is_player_character: bool = false
 
 func _ready() -> void:
 	_fighting_area = get_tree().get_root().find_child("FightingArea3D", true, false)
-	if _fighting_area != null:
-		_fighting_area.connect("map_clicked", _on_fighting_area_map_clicked)
 	
 	_multiplayerSynchroniser.set_multiplayer_authority(player.id)
-	_is_player_character = _multiplayerSynchroniser.get_multiplayer_authority() == multiplayer.get_unique_id()
+	_is_local = _multiplayerSynchroniser.get_multiplayer_authority() == multiplayer.get_unique_id()
 	_character_visual.update_name_displayed(player.name)
+	
+	if _fighting_area != null and _is_local:
+		_fighting_area.connect("map_clicked", _on_fighting_area_map_clicked)
 	
 	_apply_all_cards_upgrades()
 
@@ -53,7 +55,7 @@ func _ready() -> void:
 	_character_visual.update_energy_bar(stats.energy, stats.energy_max)
 	_character_visual.update_mana_bar(stats.mana, stats.mana_max)
 
-# ============================== Public functions ==============================
+# ============================== Damage and effect functions ==============================
 
 # TODO Ajouter un percent_type pour savoir si on calcule les dégat sur base de vie max/ vie actuelle ou vie perdu
 func take_damage_percent(source: Character, damage_percent: float, damage_type: Utils.DamageType) -> void:
@@ -90,11 +92,32 @@ func take_condition_stacks(_source: Character, stacks_number: int, stack_type: U
 			stats.storm.vulnerability_stacks += stacks_number
 			return
 
+# ============================== Fighting States ==============================
 
-# So the SpawnManager can notify when all characters are spawned
-func connect_all_players_spawned_signal(node: Node, signal_name: String) -> void:
-	node.connect(signal_name, _on_all_players_spawned, CONNECT_ONE_SHOT)
-
+func set_state(new_state: FightingManager.FightingState) -> void:
+	match new_state:
+		FightingManager.FightingState.STARTING:
+			if _fighting_state != FightingManager.FightingState.WAITING_FOR_PLAYERS:
+				printerr("Character: Can't change to starting phase if i'm not in WaitingForPlayers state")
+				return
+			_fighting_state = FightingManager.FightingState.STARTING
+			target_manager.init(self)
+			_start_movement_manager(FightingManager.FightingState.STARTING)
+			for character in target_manager.get_all_characters():
+				character.dead.connect(_on_character_dead)
+		FightingManager.FightingState.FIGHT:
+			if _fighting_state != FightingManager.FightingState.STARTING:
+				printerr("Character: Can't change to fighting phase if i'm not in strating state")
+				return
+			_fighting_state = FightingManager.FightingState.FIGHT
+			_movement_manager.set_fighting_state(FightingManager.FightingState.FIGHT)
+			_start_auto_attack_manager()
+			_start_defense_manager()
+			_start_fire_manager()
+			_start_storm_manager()
+			_start_serenity_manager()
+			_start_poison_manager()
+			_start_shadow_manager()
 
 # ============================== Private functions ==============================
 
@@ -105,7 +128,7 @@ func _apply_all_cards_upgrades() -> void:
 	
 	stats.init(hero.stats) # Reset stats
 	for card in player.deck.cardPile:
-		card.player_upgrade.apply(self, card.lvl)
+		card.player_upgrade.apply(self.stats, card.lvl)
 
 # ============================== AutoAttackManager ==============================
 
@@ -185,13 +208,13 @@ func _start_poison_manager() -> void:
 
 # ============================== MovementManager ==============================
 
-func _start_movement_manager() -> void:
+func _start_movement_manager(fighting_state: FightingManager.FightingState) -> void:
 	if _movement_manager == null:
 		printerr("No MovementManager")
 		return
 	
 	_movement_manager.connect("energy_changed", _on_movement_manager_energy_changed)
-	_movement_manager.start(self)
+	_movement_manager.start(self, fighting_state)
 
 
 func _on_movement_manager_energy_changed(energy: float) -> void:
@@ -204,30 +227,25 @@ func _start_shadow_manager() -> void:
 		printerr("No ShadowManager")
 		return
 	
+	_shadow_manager.connect("heal_ally_triggered", _on_shadow_manager_heal_ally_triggered)
+	_shadow_manager.connect("gain_max_hp_triggered", _on_shadow_manager_gain_max_hp_triggered)
 	_shadow_manager.start(self, stats.shadow)
+
+
+func _on_shadow_manager_heal_ally_triggered(heal_amount: int) -> void:
+	print("Heal ally for", heal_amount)
+
+
+func _on_shadow_manager_gain_max_hp_triggered(hp: int) -> void:
+	stats.health_max += hp
+	stats.health += hp
+	_character_visual.update_health_bar(stats.health, stats.health_max)
 
 # ============================== Signals callbacks ==============================
 
-func _on_all_players_spawned() -> void:
-	target_manager.init(self)
-	
-	for character in target_manager.get_all_characters():
-		character.dead.connect(_on_character_dead)
-	
-	_start_auto_attack_manager()
-	_start_defense_manager()
-	_start_fire_manager()
-	_start_storm_manager()
-	_start_serenity_manager()
-	_start_poison_manager()
-	_start_movement_manager()
-	_start_shadow_manager()
-
-
 func _on_fighting_area_map_clicked(new_position: Vector3) -> void:
-	if _is_dead or not _is_player_character:
+	if _is_dead or not _is_local:
 		return
-	
 	_movement_manager.set_target_position(new_position)
 
 

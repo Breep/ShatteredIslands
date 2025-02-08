@@ -3,6 +3,9 @@ extends Node
 
 # ============================== Signals ==============================
 
+signal heal_ally_triggered(heal_amount: int)
+signal gain_max_hp_triggered(hp: int)
+
 # ============================== Private variables ==============================
 
 var _source: Character # Ref to character owner
@@ -11,15 +14,15 @@ var _shadow_stats: CharacterShadowStats # Ref to the owner shadow stats
 var _previous_global_position: Vector3
 var _total_distance: float = 0 # Total distance moved by the character
 
-var _optional_timers: Array[Timer]
 var _optional_distance_callbacks: Array[Callable]
 
-# ============================== Spells scenes ==============================
+# ============================== Local scenes ==============================
+
+@onready var _check_distance_timer: Timer = %CheckDistanceTimer
 
 # ============================== Public functions ==============================
 
 func start(source: Character, shadow_stats: CharacterShadowStats) -> void:
-	print("ShadowManager: Starting")
 	if source == null:
 		printerr("ShadowManager: source undef")
 		return
@@ -31,17 +34,33 @@ func start(source: Character, shadow_stats: CharacterShadowStats) -> void:
 	_shadow_stats = shadow_stats
 	_attach_optional_distance_callbacks()
 	_previous_global_position = _source.global_position
+	_check_distance_timer.start()
 
 
 func stop() -> void:
-	for timer in _optional_timers:
-		timer.stop()
+	for callback in _optional_distance_callbacks:
+		_optional_distance_callbacks.erase(callback)
 
 # ============================== Private functions ==============================
 
 func _attach_optional_distance_callbacks() -> void:
-	if _shadow_stats.shadow_bolt_damage > 0:
+	if _shadow_stats.shadow_bolt_activated:
 		_optional_distance_callbacks.append(_try_cast_shadow_bolt)
+	
+	if _shadow_stats.increase_aa_damage_activated:
+		_optional_distance_callbacks.append(_try_increase_aa_damage)
+	
+	if _shadow_stats.gain_armor_stacks_activated:
+		_optional_distance_callbacks.append(_try_gain_armor_stacks)
+	
+	if _shadow_stats.heal_ally_activated:
+		_optional_distance_callbacks.append(_try_heal)
+	
+	if _shadow_stats.gain_max_hp_activated:
+		_optional_distance_callbacks.append(_try_gain_max_hp)
+	
+	if _shadow_stats.inflict_poison_stacks_activated:
+		_optional_distance_callbacks.append(_try_inflict_poison_stacks)
 
 
 func _call_optional_distance_callbacks() -> void:
@@ -50,7 +69,6 @@ func _call_optional_distance_callbacks() -> void:
 
 # ============================== Timer function ==============================
 
-
 func _on_check_distance_timer_timeout() -> void:
 	if _previous_global_position == _source.global_position:
 		return
@@ -58,6 +76,11 @@ func _on_check_distance_timer_timeout() -> void:
 	var distance = _source.global_position.distance_to(_previous_global_position)
 	_total_distance += distance
 	__distance_since_last_shadow_bolt += distance
+	__distance_since_last_increase_aa_damage += distance
+	__distance_since_last_gain_armor_stacks += distance
+	__distance_since_last_heal += distance
+	__distance_since_last_gain_max_hp += distance
+	__distance_since_last_inflict_poison_stacks += distance
 	_previous_global_position = _source.global_position
 	_call_optional_distance_callbacks()
 
@@ -70,11 +93,58 @@ func _try_cast_shadow_bolt() -> void:
 		var target: Character = _source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST_ENEMY)
 		if target == null:
 			return
-		print("CASTING SHADOW BOLT ", __distance_since_last_shadow_bolt, " ", _shadow_stats.shadow_bolt_distance)
 		target.take_damage_flat(_source, _shadow_stats.shadow_bolt_damage, Utils.DamageType.MAGIC)
-		
-		
-		
+
+
+var __distance_since_last_increase_aa_damage: float = 0
+func _try_increase_aa_damage() -> void:
+	if __distance_since_last_increase_aa_damage > _shadow_stats.increase_aa_damage_distance:
+		__distance_since_last_increase_aa_damage -= _shadow_stats.increase_aa_damage_distance
+		_source.stats.attack_damage += _shadow_stats.increase_aa_damage_value
+
+
+var __distance_since_last_gain_armor_stacks: float = 0
+func _try_gain_armor_stacks() -> void:
+	if __distance_since_last_gain_armor_stacks > _shadow_stats.gain_armor_stacks_distance:
+		__distance_since_last_gain_armor_stacks -= _shadow_stats.gain_armor_stacks_distance
+		_source.stats.defense.armor_stacks += _shadow_stats.gain_armor_stacks_value
+
+
+var __distance_since_last_heal: float = 0
+func _try_heal() -> void:
+	if __distance_since_last_heal > _shadow_stats.heal_ally_distance:
+		__distance_since_last_heal -= _shadow_stats.heal_ally_distance
+		heal_ally_triggered.emit(_shadow_stats.heal_ally_value)
+
+
+var __distance_since_last_gain_max_hp: float = 0
+func _try_gain_max_hp() -> void:
+	if __distance_since_last_gain_max_hp > _shadow_stats.gain_max_hp_distance:
+		__distance_since_last_gain_max_hp -= _shadow_stats.gain_max_hp_distance
+		gain_max_hp_triggered.emit(_shadow_stats.gain_max_hp_value)
+
+
+var __distance_since_last_inflict_poison_stacks: float = 0
+func _try_inflict_poison_stacks() -> void:
+	if __distance_since_last_inflict_poison_stacks > _shadow_stats.inflict_poison_stacks_distance:
+		__distance_since_last_inflict_poison_stacks -= _shadow_stats.inflict_poison_stacks_distance
+		var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.RANDOM_ENEMY)
+		if target == null:
+			return
+		target.take_poison_stacks(_source, _shadow_stats.inflict_poison_stacks_value, 5) # TODO need a duration value in poison stats
+
+
+
+
+
+
+
+
+
+
+
+
+
 		
 		
 		

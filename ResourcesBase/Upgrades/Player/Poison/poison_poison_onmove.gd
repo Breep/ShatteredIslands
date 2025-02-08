@@ -4,13 +4,14 @@ extends PlayerUpgrade
 @export var movement_stacks_number: Array[int]
 @export var movement_stacks_distance: int
 
-func apply(player: Character, cardlvl: int) -> void: # override
+func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > movement_stacks_number.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.poison.movement_stacks_number = movement_stacks_number[cardlvl - 1]
-	player.stats.poison.movement_stacks_distance = movement_stacks_distance
+	stats.shadow.inflict_poison_stacks_activated = true
+	stats.shadow.inflict_poison_stacks_value = movement_stacks_number[cardlvl - 1]
+	stats.shadow.inflict_poison_stacks_distance = movement_stacks_distance
 
 
 func get_description(cardlvl: int) -> String:

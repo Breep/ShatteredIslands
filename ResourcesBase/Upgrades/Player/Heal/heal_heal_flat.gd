@@ -4,14 +4,14 @@ extends PlayerUpgrade
 @export var periodic_heal_amount: Array[int]
 @export var periodic_heal_period: float
 
-func apply(player: Character, cardlvl: int) -> void: # override
+func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > periodic_heal_amount.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.heal.periodic_heal_activated = true
-	player.stats.heal.periodic_heal_amount = periodic_heal_amount[cardlvl-1]
-	player.stats.heal.periodic_heal_period = periodic_heal_period
+	stats.heal.periodic_heal_activated = true
+	stats.heal.periodic_heal_amount = periodic_heal_amount[cardlvl-1]
+	stats.heal.periodic_heal_period = periodic_heal_period
 
 
 func get_description(cardlvl: int) -> String:

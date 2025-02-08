@@ -10,12 +10,13 @@ var _poison_stats: CharacterPoisonStats # Ref to the owner poison stats
 
 var _optional_timers: Array[Timer]
 
-# ============================== Spells scenes ==============================
+# ============================== Local scenes ==============================
+
+@onready var _poison_tick_timer:Timer = %PoisonTickTimer
 
 # ============================== Public functions ==============================
 
 func start(source: Character, poison_stats: CharacterPoisonStats) -> void:
-	print("PoisonManager: Starting")
 	if source == null:
 		printerr("PoisonManager: source undef")
 		return
@@ -25,6 +26,7 @@ func start(source: Character, poison_stats: CharacterPoisonStats) -> void:
 	
 	_source = source
 	_poison_stats = poison_stats
+	_poison_tick_timer.start()
 	_create_optional_timers()
 	_lanch_optional_spells()
 

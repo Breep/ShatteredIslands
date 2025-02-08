@@ -10,7 +10,6 @@ var attack_speed_overtime_min: float # Min value of percentage of attack speed i
 var attack_speed_overtime_max: float # Max value of percentage of attack speed increased overtime
 var attack_speed_overtime_duration: float # Time needed to go from min to max attack speed increase
 
-
 var poison_stacks_amount: int # Number of poison stacks applied for with an auto attack
 var poison_stacks_chance: float # % of chance to proc the poison stacks
 
@@ -35,6 +34,3 @@ var fire_attack_triggered: bool # Tell the projectile to activate its "FIRE" con
 var increase_max_hp_activated: bool  # If the increase max hp is activated
 var increase_max_hp_amount: int  # Amount of max hp increased every increase_max_hp_period auto attack
 var increase_max_hp_period: int  # Number of auto attacks between 2 increase_max_hp
-
-var movement_increase_damage_amount: int  # Amount of auto attack damage increase
-var movement_increase_damage_distance: float  # Distance needed to move to increase auto attack damage

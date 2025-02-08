@@ -98,7 +98,7 @@ func remove_character(character_to_remove: Character) -> void:
 
 func _get_all_scene_characters() -> Array[Character]:
 	var ret: Array[Character]
-	for node in get_tree().get_nodes_in_group("PLAYERS"):
+	for node in get_tree().get_nodes_in_group("CHARACTER"):
 		ret.append(node as Character)
 	return ret
 

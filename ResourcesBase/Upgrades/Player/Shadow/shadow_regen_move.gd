@@ -3,12 +3,12 @@ extends PlayerUpgrade
 
 @export var shadow_shadow_regen_move: Array[int]
 
-func apply(player: Character, cardlvl: int) -> void: # override
+func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > shadow_shadow_regen_move.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.shadow.regen_move += shadow_shadow_regen_move[cardlvl - 1]
+	stats.energy_regen += shadow_shadow_regen_move[cardlvl - 1]
 
 
 func get_description(cardlvl: int) -> String:

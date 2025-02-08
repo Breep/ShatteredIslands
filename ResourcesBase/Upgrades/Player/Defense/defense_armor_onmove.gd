@@ -4,13 +4,14 @@ extends PlayerUpgrade
 @export var movement_armor_stacks_amount: Array[int]
 @export var movement_armor_stacks_distance: int
 
-func apply(player: Character, cardlvl: int) -> void: # override
+func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > movement_armor_stacks_amount.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	player.stats.defense.movement_armor_stacks_amount = movement_armor_stacks_amount[cardlvl - 1]
-	player.stats.defense.movement_armor_stacks_distance = movement_armor_stacks_distance
+	stats.shadow.gain_armor_stacks_activated = true
+	stats.shadow.gain_armor_stacks_value = movement_armor_stacks_amount[cardlvl - 1]
+	stats.shadow.gain_armor_stacks_distance = movement_armor_stacks_distance
 
 
 func get_description(cardlvl: int) -> String:
