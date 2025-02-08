@@ -9,8 +9,10 @@ func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	stats.hp.damage_taken_reduced_below_treshold_percentage = hp_damage_reduce_below_treshold[cardlvl - 1]
-	stats.hp.damage_taken_reduced_below_treshold_threshold = damage_taken_reduced_below_treshold_threshold
+	
+	stats.hp.damage_taken_reduced_below_treshold_activated = true
+	stats.hp.damage_taken_reduced_below_treshold_threshold = hp_damage_reduce_below_treshold[cardlvl - 1]
+	stats.hp.damage_taken_reduced_below_treshold_percentage = damage_taken_reduced_below_treshold_threshold
 
 
 func get_description(cardlvl: int) -> String:

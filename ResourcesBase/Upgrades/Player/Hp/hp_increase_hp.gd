@@ -8,7 +8,8 @@ func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	stats.hp.increase_hp += hp_increase_hp[cardlvl - 1]
+	stats.health_max += hp_increase_hp[cardlvl - 1]
+	stats.health += hp_increase_hp[cardlvl - 1]
 
 
 func get_description(cardlvl: int) -> String:

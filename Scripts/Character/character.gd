@@ -36,6 +36,7 @@ var _fighting_state: FightingManager.FightingState = FightingManager.FightingSta
 @onready var _poison_manager: PoisonManager = %PoisonManager
 @onready var _movement_manager: MovementManager = %MovementManager
 @onready var _shadow_manager: ShadowManager = %ShadowManager
+@onready var _life_manager: LifeManager = %LifeManager
 
 # ============================== Node base functions ==============================
 
@@ -50,6 +51,8 @@ func _ready() -> void:
 		_fighting_area.connect("map_clicked", _on_fighting_area_map_clicked)
 	
 	_apply_all_cards_upgrades()
+	
+	print(player.name, ": ", stats.health, "/", stats.health_max)
 
 	_character_visual.update_health_bar(stats.health, stats.health_max)
 	_character_visual.update_energy_bar(stats.energy, stats.energy_max)
@@ -64,11 +67,9 @@ func take_damage_percent(source: Character, damage_percent: float, damage_type: 
 
 
 func take_damage_flat(source: Character, damage: int, damage_type: Utils.DamageType) -> void:
-	if _fire_manager != null:
-		damage = _fire_manager.get_reduced_damage_taken_from(source, damage, damage_type)
-	
-	if _defense_manager != null:
-		damage = _defense_manager.get_reduced_damage_taken_from(source, damage, damage_type)
+	damage = _fire_manager.get_reduced_damage_taken_from(source, damage, damage_type) # Reduce % of MAGIC damage
+	damage = _life_manager.get_reduced_damage_taken_from(source, damage, damage_type) # Reduce % of ALL damage
+	damage = _defense_manager.get_reduced_damage_taken_from(source, damage, damage_type) # Reduce flat of PHYSIC AND MAGIC damage
 	
 	stats.health -= damage
 	_character_visual.damage_popup(damage, damage_type)
@@ -118,6 +119,7 @@ func set_state(new_state: FightingManager.FightingState) -> void:
 			_start_serenity_manager()
 			_start_poison_manager()
 			_start_shadow_manager()
+			_start_life_manager()
 
 # ============================== Private functions ==============================
 
@@ -196,6 +198,15 @@ func _start_serenity_manager() -> void:
 		return
 	
 	_heal_manager.start(self, stats.heal)
+
+# ============================== LifeManager ==============================
+
+func _start_life_manager() -> void:
+	if _life_manager == null:
+		printerr("No LifeManager")
+		return
+	
+	_life_manager.start(self, stats.hp)
 
 # ============================== PoisonManager ==============================
 

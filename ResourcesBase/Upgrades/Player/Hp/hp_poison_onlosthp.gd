@@ -10,6 +10,7 @@ func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
+	stats.hp.poison_by_lost_hp_activated = true
 	stats.hp.poison_by_lost_hp_stacks = poison_by_lost_hp_stacks[cardlvl - 1]
 	stats.hp.poison_by_lost_hp_hp_number = poison_by_lost_hp_hp_number
 	stats.hp.poison_by_lost_hp_period = poison_by_lost_hp_period

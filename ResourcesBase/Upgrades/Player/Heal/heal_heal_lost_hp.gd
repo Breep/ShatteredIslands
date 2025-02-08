@@ -10,7 +10,7 @@ func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 		return
 	
 	stats.heal.lost_hp_regen_percentage = lost_hp_regen_percentage[cardlvl-1]
-	stats.heal.lost_hp_regen_period 
+	stats.heal.lost_hp_regen_period = lost_hp_regen_period
 
 
 func get_description(cardlvl: int) -> String:
