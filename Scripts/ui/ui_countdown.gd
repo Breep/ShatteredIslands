@@ -1,3 +1,4 @@
+class_name UICountdown
 extends Control
 
 @onready var _timer_label = %TimerLabel

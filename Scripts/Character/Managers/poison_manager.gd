@@ -77,12 +77,16 @@ func _on_periodic_stacks_timer_timeout() -> void:
 	target.take_poison_stacks(_source, poison_stacks, 10)
 
 
+# Handle poison stacks and damage on _source
 func _on_poison_tick_timer_timeout() -> void:
 	var poison_damage: int = 0
 	for effect in _poison_stats.poison_effects:
 		if effect.ticks_left > 0:
 			effect.ticks_left -= 1
-			poison_damage += effect.stacks_number
+			if effect.source.stats.poison.multiply_damage > 0:
+				poison_damage += effect.stacks_number * effect.source.stats.poison.multiply_damage
+			else:
+				poison_damage += effect.stacks_number
 		else:
 			_poison_stats.poison_effects.erase(effect)
 	

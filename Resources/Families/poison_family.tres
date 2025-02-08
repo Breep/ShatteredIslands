@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="1_mxc05"]
 [ext_resource type="Script" path="res://ResourcesBase/Family/family.gd" id="3_kx1px"]
+[ext_resource type="Resource" uid="uid://b4yjn2q1enybq" path="res://Resources/Card/Poison/poison_epic_double_damage.tres" id="4_41prl"]
 [ext_resource type="Texture2D" uid="uid://y0t815fi2pdf" path="res://Data/Assets/Card/ICONS/MANA.png" id="4_ysmbt"]
 [ext_resource type="Resource" uid="uid://bdm4mg5oiho7e" path="res://Resources/Card/Poison/poison_poison_periodic.tres" id="5_spvgs"]
-[ext_resource type="Resource" uid="uid://2s8jgk5ckqn4" path="res://Resources/Card/Poison/poison_poison_resistance.tres" id="6_qimwn"]
 
 [resource]
 script = ExtResource("3_kx1px")
-cards = Array[ExtResource("1_mxc05")]([ExtResource("5_spvgs"), ExtResource("6_qimwn")])
+cards = Array[ExtResource("1_mxc05")]([ExtResource("5_spvgs"), ExtResource("4_41prl")])
 icon = ExtResource("4_ysmbt")
 family_name = "Poison"
 family_type = 6

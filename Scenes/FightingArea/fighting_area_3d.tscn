@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://c66yw4go2ykwa"]
+[gd_scene load_steps=15 format=3 uid="uid://c66yw4go2ykwa"]
 
 [ext_resource type="Script" path="res://Scripts/FightingArea/fighting_area_3d.gd" id="1_ejogh"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://Scenes/FightingArea/spawn_manager.tscn" id="2_87yha"]
 [ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Scenes/Character/ccharacter.tscn" id="3_7oubw"]
 [ext_resource type="PackedScene" uid="uid://c0l0roxttdtlp" path="res://Scenes/FightingArea/fighting_manager.tscn" id="4_ps2v2"]
+[ext_resource type="PackedScene" uid="uid://dmfkigo1trjd0" path="res://Scenes/UI/ui_countdown.tscn" id="5_n5bvl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iv60j"]
 albedo_color = Color(0.254202, 0.260607, 0.801323, 1)
@@ -114,3 +115,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Managers/SpawnManager/SpawnTeam2"]
 shape = SubResource("BoxShape3D_jo255")
+
+[node name="Countdown" parent="." instance=ExtResource("5_n5bvl")]
+unique_name_in_owner = true
+anchor_left = 0.5
+anchor_top = 0.068
+anchor_right = 0.5
+anchor_bottom = 0.068
+offset_right = 0.0
+offset_bottom = 0.0
+grow_vertical = 1
