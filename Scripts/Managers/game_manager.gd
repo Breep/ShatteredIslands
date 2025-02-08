@@ -111,7 +111,7 @@ func start_game() -> void:
 	if multiplayer.is_server():
 		MultiplayerDeckManager.construct_shop_deck(_active_families, _rules)
 	
-	game_switch_to(GameState.Fighting)
+	game_switch_to(GameState.Buying)
 
 
 func get_family_from_type(family_type: Family.FamilyType) -> Family:

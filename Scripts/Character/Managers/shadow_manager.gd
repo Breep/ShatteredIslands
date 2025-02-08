@@ -11,7 +11,6 @@ var _shadow_stats: CharacterShadowStats # Ref to the owner shadow stats
 var _previous_global_position: Vector3
 var _total_distance: float = 0 # Total distance moved by the character
 
-var _optional_timers: Array[Timer]
 var _optional_distance_callbacks: Array[Callable]
 
 # ============================== Local scenes ==============================
@@ -36,14 +35,17 @@ func start(source: Character, shadow_stats: CharacterShadowStats) -> void:
 
 
 func stop() -> void:
-	for timer in _optional_timers:
-		timer.stop()
+	for callback in _optional_distance_callbacks:
+		_optional_distance_callbacks.erase(callback)
 
 # ============================== Private functions ==============================
 
 func _attach_optional_distance_callbacks() -> void:
-	if _shadow_stats.shadow_bolt_damage > 0:
+	if _shadow_stats.shadow_bolt_activated:
 		_optional_distance_callbacks.append(_try_cast_shadow_bolt)
+	
+	if _shadow_stats.increase_aa_damage_activated:
+		_optional_distance_callbacks.append(_try_increase_aa_damage)
 
 
 func _call_optional_distance_callbacks() -> void:
@@ -52,7 +54,6 @@ func _call_optional_distance_callbacks() -> void:
 
 # ============================== Timer function ==============================
 
-
 func _on_check_distance_timer_timeout() -> void:
 	if _previous_global_position == _source.global_position:
 		return
@@ -60,6 +61,7 @@ func _on_check_distance_timer_timeout() -> void:
 	var distance = _source.global_position.distance_to(_previous_global_position)
 	_total_distance += distance
 	__distance_since_last_shadow_bolt += distance
+	__distance_since_last_increase_aa_damage += distance
 	_previous_global_position = _source.global_position
 	_call_optional_distance_callbacks()
 
@@ -73,8 +75,15 @@ func _try_cast_shadow_bolt() -> void:
 		if target == null:
 			return
 		target.take_damage_flat(_source, _shadow_stats.shadow_bolt_damage, Utils.DamageType.MAGIC)
-		
-		
+
+
+var __distance_since_last_increase_aa_damage: float = 0
+func _try_increase_aa_damage() -> void:
+	if __distance_since_last_increase_aa_damage > _shadow_stats.increase_aa_damage_distance:
+		if multiplayer.get_unique_id() == 1:
+			print("INCREASE DAMAGE")
+		__distance_since_last_increase_aa_damage -= _shadow_stats.increase_aa_damage_distance
+		_source.stats.attack_damage += _shadow_stats.increase_aa_damage_value
 		
 		
 		
