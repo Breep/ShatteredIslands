@@ -92,7 +92,7 @@ func take_condition_stacks(_source: Character, stacks_number: int, stack_type: U
 			stats.storm.vulnerability_stacks += stacks_number
 			return
 
-# ============================== State ==============================
+# ============================== Fighting States ==============================
 
 func set_state(new_state: FightingManager.FightingState) -> void:
 	match new_state:
@@ -227,7 +227,19 @@ func _start_shadow_manager() -> void:
 		printerr("No ShadowManager")
 		return
 	
+	_shadow_manager.connect("heal_ally_triggered", _on_shadow_manager_heal_ally_triggered)
+	_shadow_manager.connect("gain_max_hp_triggered", _on_shadow_manager_gain_max_hp_triggered)
 	_shadow_manager.start(self, stats.shadow)
+
+
+func _on_shadow_manager_heal_ally_triggered(heal_amount: int) -> void:
+	print("Heal ally for", heal_amount)
+
+
+func _on_shadow_manager_gain_max_hp_triggered(hp: int) -> void:
+	stats.health_max += hp
+	stats.health += hp
+	_character_visual.update_health_bar(stats.health, stats.health_max)
 
 # ============================== Signals callbacks ==============================
 

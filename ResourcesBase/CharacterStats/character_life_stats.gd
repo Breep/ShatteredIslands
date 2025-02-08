@@ -17,6 +17,3 @@ var revive_after_death_time: float # time to wait before revival (in s)
 var poison_by_lost_hp_stacks: int # Number of poison stacks applied every tick
 var poison_by_lost_hp_hp_number: int # Number of hp to lose to improve poison_by_lost_hp_stacks
 var poison_by_lost_hp_period: float # Period of time between applying poison_by_lost_hp_stacks (in s)
-
-var hp_increased_on_move_hp: int # Number of hp increased every hp_increased_on_move_distance
-var hp_increased_on_move_distance: int # Number of meters needed to activate hp_increased_on_move_hp

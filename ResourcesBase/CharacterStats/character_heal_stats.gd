@@ -24,6 +24,3 @@ var lost_hp_regen_period: float # time between 2 heal from the lost_hp_regen_per
 
 var poison_stacks_number: int # Number of poison stack applied after a heal
 var poison_stacks_chance: int # % of chance to trigger poison_stacks_number
-
-var movement_heal_amount : int # Amount of heal done to an ally every movement_heal_distance moved
-var movement_heal_distance : int # Distance needed to activate movement_heal_amount (in m)

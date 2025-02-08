@@ -56,7 +56,6 @@ func _move_toward_target(delta: float):
 
 
 func set_target_position(target_position: Vector3) -> void:
-	print("target_position")
 	_target_position = target_position
 	_is_moving = true
 

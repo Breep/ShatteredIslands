@@ -9,8 +9,9 @@ func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	stats.hp.hp_increased_on_move_hp = hp_increased_on_move_hp[cardlvl - 1]
-	stats.hp.hp_increased_on_move_distance = hp_increased_on_move_distance
+	stats.shadow.gain_max_hp_activated = true
+	stats.shadow.gain_max_hp_value = hp_increased_on_move_hp[cardlvl - 1]
+	stats.shadow.gain_max_hp_distance = hp_increased_on_move_distance
 
 
 func get_description(cardlvl: int) -> String:

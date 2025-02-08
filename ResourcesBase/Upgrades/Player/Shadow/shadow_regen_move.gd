@@ -8,7 +8,7 @@ func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	stats.shadow.regen_move += shadow_shadow_regen_move[cardlvl - 1]
+	stats.energy_regen += shadow_shadow_regen_move[cardlvl - 1]
 
 
 func get_description(cardlvl: int) -> String:

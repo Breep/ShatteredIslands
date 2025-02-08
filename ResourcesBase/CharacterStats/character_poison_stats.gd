@@ -15,7 +15,4 @@ var poison_cloud_stacks_number: int # Number of stack applied each tick
 var poison_cloud_stacks_period: float # Time between applying 2 stacks (in s)
 var poison_cloud_range: int # Range of the poison cloud (in m)
 
-var movement_stacks_number: int # Number of stack applied each amount of distance moved
-var movement_stacks_distance: int # Distance needed for applying movement_stacks
-
 var multiply_damage: float # Poison damage is multiplied by this (modified with epic card)

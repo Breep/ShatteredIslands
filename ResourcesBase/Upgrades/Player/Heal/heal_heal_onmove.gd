@@ -9,8 +9,9 @@ func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	stats.heal.movement_heal_amount = movement_heal_amount[cardlvl-1]
-	stats.heal.movement_heal_distance = movement_heal_distance
+	stats.shadow.heal_ally_activated = true
+	stats.shadow.heal_ally_value = movement_heal_amount[cardlvl - 1]
+	stats.shadow.heal_ally_distance = movement_heal_distance
 
 
 func get_description(cardlvl: int) -> String:
