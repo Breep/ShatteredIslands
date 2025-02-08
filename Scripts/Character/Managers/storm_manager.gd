@@ -13,12 +13,13 @@ var _storm_stats: CharacterStormStats # Ref to the owner storm stats
 
 var _optional_timers: Array[Timer]
 
-# ============================== Spells scenes ==============================
+# ============================== Local nodes ==============================
+
+@onready var _vulnerability_timer: Timer = %VulnerabilityTimer
 
 # ============================== Public functions ==============================
 
 func start(source: Character, storm_stats: CharacterStormStats) -> void:
-	print("StormManager: Starting")
 	if source == null:
 		printerr("StormManager: source undef")
 		return
@@ -28,6 +29,8 @@ func start(source: Character, storm_stats: CharacterStormStats) -> void:
 	
 	_source = source
 	_storm_stats = storm_stats
+	
+	_vulnerability_timer.start()
 	_create_optional_timers()
 	_lanch_optional_spells()
 

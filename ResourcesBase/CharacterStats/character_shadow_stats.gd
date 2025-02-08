@@ -1,8 +1,13 @@
 class_name CharacterShadowStats
 extends Resource
 
+var shadow_bolt_activated: bool # If this skill is activated
 var shadow_bolt_damage: int # Damage of the shadow bolt
 var shadow_bolt_distance: float # Distance needed to trigger shadow bolt
+
+var increase_aa_damage_activated: bool # If this skill is activated
+var increase_aa_damage_value: int
+var increase_aa_damage_distance: float # DIstance needed to trigger increase_aa_damage
 
 var invincibility_time: float # Duration of invincibility when moving
 var invincibility_distance: float # Distance needed to trigger invincibility

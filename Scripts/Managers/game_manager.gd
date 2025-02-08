@@ -28,7 +28,7 @@ var players: Array[Player]
 var _game_state: GameState = GameState.Starting
 
 var _buying_area: PackedScene = preload("res://Scenes/Maps/buying_area.tscn")
-var _fighting_area: PackedScene = preload("res://Scenes/Maps/fighting_area_3d.tscn")
+var _fighting_area: PackedScene = preload("res://Scenes/FightingArea/fighting_area_3d.tscn")
 
 var _families_ref: Dictionary # Reference Dictionary to all families
 var _active_families: Array[Family] # Array of all families activated for this game only
@@ -111,7 +111,7 @@ func start_game() -> void:
 	if multiplayer.is_server():
 		MultiplayerDeckManager.construct_shop_deck(_active_families, _rules)
 	
-	game_switch_to(GameState.Buying)
+	game_switch_to(GameState.Fighting)
 
 
 func get_family_from_type(family_type: Family.FamilyType) -> Family:

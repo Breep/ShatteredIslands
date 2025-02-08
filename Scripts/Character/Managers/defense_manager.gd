@@ -17,7 +17,6 @@ var _optional_timers: Array[Timer]
 # ============================== Public functions ==============================
 
 func start(source: Character, defense_stats: CharacterDefenseStats) -> void:
-	print("DefenseManager: Starting")
 	if source == null:
 		printerr("DefenseManager: source undef")
 		return

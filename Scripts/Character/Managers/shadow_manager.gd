@@ -14,12 +14,13 @@ var _total_distance: float = 0 # Total distance moved by the character
 var _optional_timers: Array[Timer]
 var _optional_distance_callbacks: Array[Callable]
 
-# ============================== Spells scenes ==============================
+# ============================== Local scenes ==============================
+
+@onready var _check_distance_timer: Timer = %CheckDistanceTimer
 
 # ============================== Public functions ==============================
 
 func start(source: Character, shadow_stats: CharacterShadowStats) -> void:
-	print("ShadowManager: Starting")
 	if source == null:
 		printerr("ShadowManager: source undef")
 		return
@@ -31,6 +32,7 @@ func start(source: Character, shadow_stats: CharacterShadowStats) -> void:
 	_shadow_stats = shadow_stats
 	_attach_optional_distance_callbacks()
 	_previous_global_position = _source.global_position
+	_check_distance_timer.start()
 
 
 func stop() -> void:
@@ -70,7 +72,6 @@ func _try_cast_shadow_bolt() -> void:
 		var target: Character = _source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST_ENEMY)
 		if target == null:
 			return
-		print("CASTING SHADOW BOLT ", __distance_since_last_shadow_bolt, " ", _shadow_stats.shadow_bolt_distance)
 		target.take_damage_flat(_source, _shadow_stats.shadow_bolt_damage, Utils.DamageType.MAGIC)
 		
 		

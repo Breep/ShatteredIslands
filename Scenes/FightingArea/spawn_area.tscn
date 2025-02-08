@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dibux7uwcsatj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_osmcq"]
+
+[node name="SpawnArea" type="Area3D"]
+metadata/Team = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_osmcq")

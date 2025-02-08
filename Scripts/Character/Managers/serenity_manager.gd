@@ -15,7 +15,6 @@ var _optional_timers: Array[Timer]
 # ============================== Public functions ==============================
 
 func start(source: Character, heal_stats: CharacterHealStats) -> void:
-	print("HealManager: Starting")
 	if source == null:
 		printerr("HealManager: source undef")
 		return
