@@ -33,7 +33,7 @@ extends Control
 
 
 func _ready() -> void:
-	_update_ui_initialisation(_get_all_scene_characters().[0])
+	_update_ui_initialisation(_get_all_scene_characters()[0])
 	##_update_ui()
 	#player1_ui.health_changed.connect(_on_player1_health_changed)
 	#player1_ui.mana_changed.connect(_on_player1_mana_changed)
@@ -53,7 +53,7 @@ func _get_all_scene_characters() -> Array[Character]:
 	return ret
 	
 func _update_ui_initialisation(character: Character) -> void:
-	
+	pass
 	
 func _update_ui() -> void:
 	healthbar1.max_value = player1_ui.max_health

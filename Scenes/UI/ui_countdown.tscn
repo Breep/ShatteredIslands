@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dmfkigo1trjd0"]
 
 [ext_resource type="FontFile" uid="uid://3y3dvdvjwvmr" path="res://Data/font/airstrike.ttf" id="1_1snar"]
-[ext_resource type="Script" path="res://Scripts/Buying_area3d/countdown.gd" id="2_kl6s0"]
+[ext_resource type="Script" path="res://Scripts/ui/ui_countdown.gd" id="1_kdeao"]
 [ext_resource type="Shader" path="res://Shaders/countdown_gradient.gdshader" id="2_lahu3"]
 
 [sub_resource type="Gradient" id="Gradient_uft1f"]
@@ -23,7 +23,7 @@ Label/constants/outline_size = 2
 Label/constants/shadow_offset_x = 3
 Label/constants/shadow_offset_y = 3
 Label/font_sizes/font_size = 75
-Label/fonts/font = ExtResource("3_4fn2s")
+Label/fonts/font = ExtResource("1_1snar")
 
 [node name="Countdown" type="Control"]
 layout_mode = 3

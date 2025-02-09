@@ -6,4 +6,4 @@ func _ready() -> void:
 
 
 func _update_character_selection() -> void:
-	
+	pass
