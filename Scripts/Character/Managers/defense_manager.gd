@@ -92,7 +92,7 @@ func _handle_backfires(damage_source: Character) -> void:
 		_defense_stats.armor_stacks += _defense_stats.backfire_armor_gain_stacks
 	
 	if Utils.is_randomize_modifier_active(_defense_stats.backfire_fire_shield_chance):
-		damage_source.take_damage_percent(_source, _defense_stats.backfire_fire_shield_damage, Utils.DamageType.MAGIC, Utils.PercentModifier.CURRENT_HP)
+		_source.attack_percent(damage_source, _defense_stats.backfire_fire_shield_damage, Utils.DamageType.MAGIC, Utils.PercentModifier.CURRENT_HP)
 	
 	if Utils.is_randomize_modifier_active(_defense_stats.backfire_poison_chance):
 		damage_source.take_poison_stacks(_source, _defense_stats.backfire_poison_stacks, 10) # TODO Surement envoyer ce truc au poison manager car il faut connaitre la durée du poison
@@ -110,7 +110,9 @@ func _on_shield_strike_timer_timeout() -> void:
 	if _armor_lost_since_last_shield_strike > 0:
 		var damage = _armor_lost_since_last_shield_strike * _defense_stats.shield_strike_damage_percent / 100.0
 		var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST_ENEMY)
-		target.take_damage_flat(_source, damage, Utils.DamageType.MAGIC)
+		if target == null:
+			return
+		_source.attack(target, damage, Utils.DamageType.MAGIC)
 		_armor_lost_since_last_shield_strike = 0
 
 

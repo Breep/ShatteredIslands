@@ -56,26 +56,55 @@ func _ready() -> void:
 	_character_visual.update_energy_bar(stats.energy, stats.energy_max)
 	_character_visual.update_mana_bar(stats.mana, stats.mana_max)
 
-# ============================== Damage and effect functions ==============================
+# ============================== Heal/Attack ==============================
 
-func take_damage_percent(source: Character, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier) -> void:
+func heal(target: Character, heal_amount: int) -> void:
+	target.take_heal(self, heal_amount)
+	_heal_manager.notify_heal()
+
+
+func heal_percent(target: Character, heal_percent: float, percent_modifier: Utils.PercentModifier) -> void:
 	var hp: int
 	match percent_modifier:
 		Utils.PercentModifier.MAX_HP:
-			hp = stats.health_max
+			hp = target.stats.health_max
 		Utils.PercentModifier.CURRENT_HP:
-			hp = stats.health
+			hp = target.stats.health
 		Utils.PercentModifier.LOST_HP:
-			hp = stats.health_max - stats.health
-	var damage = hp * damage_percent  / 100.0
-	take_damage_flat(source, damage, damage_type)
+			hp = target.stats.health_max - stats.health
+	var heal_amount: int = (heal_percent * hp) / 100
+	heal(target, heal_amount)
 
 
-func take_damage_flat(source: Character, damage: int, damage_type: Utils.DamageType) -> void:
-	damage = _life_manager.get_increased_damage_taken_from_lost_hp(source, damage, damage_type) # Increase % of PHYSICAL damage
-	damage = _fire_manager.get_increased_damage(source, damage, damage_type) # Increase % of MAGICAL damage
-	damage = _defense_manager.get_reduced_damage_taken_from_target_protector(source, damage) # Reduce % of ALL damage
+func attack(target: Character, damage: int, damage_type: Utils.DamageType) -> void:
+	var is_critical: bool = false
+	if damage_type == Utils.DamageType.PHYSICAL:
+		if Utils.is_randomize_modifier_active(stats.physical_critical_chance):
+			is_critical = true
+			damage *= stats.physical_critical_multiplier
+		damage = _life_manager.get_increased_damage_taken_from_lost_hp(self, damage, damage_type) # Increase % of PHYSICAL damage
+	if damage_type == Utils.DamageType.MAGIC:
+		damage = _fire_manager.get_increased_damage(self, damage, damage_type) # Increase % of MAGICAL damage
 	
+	damage = _defense_manager.get_reduced_damage_taken_from_target_protector(self, damage) # Reduce % of ALL damage
+	target.take_damage(self, damage, damage_type, is_critical)
+
+
+func attack_percent(target: Character, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier) -> void:
+	var hp: int
+	match percent_modifier:
+		Utils.PercentModifier.MAX_HP:
+			hp = target.stats.health_max
+		Utils.PercentModifier.CURRENT_HP:
+			hp = target.stats.health
+		Utils.PercentModifier.LOST_HP:
+			hp = target.stats.health_max - stats.health
+	var damage = hp * damage_percent  / 100.0
+	attack(target, damage, damage_type)
+
+# ============================== Take damage / Be healed / Take condition stacks ==============================
+
+func take_damage(source: Character, damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
 	damage = _defense_manager.get_reduced_damage_taken_from_own_protector(damage) # Reduce % of ALL damage
 	damage = _life_manager.get_reduced_damage(damage) # Reduce % of ALL damage
 	damage = _fire_manager.get_reduced_damage(damage, damage_type) # Reduce % of MAGIC damage
@@ -112,19 +141,6 @@ func take_heal(source: Character, heal: int) -> void:
 	if heal != 0:
 		_character_visual.damage_popup(heal, Utils.DamageType.HEAL)
 		_character_visual.update_health_bar(stats.health, stats.health_max)
-
-
-func take_heal_percent(source: Character, heal_percent: float, percent_modifier: Utils.PercentModifier) -> void:
-	var hp: int
-	match percent_modifier:
-		Utils.PercentModifier.MAX_HP:
-			hp = stats.health_max
-		Utils.PercentModifier.CURRENT_HP:
-			hp = stats.health
-		Utils.PercentModifier.LOST_HP:
-			hp = stats.health_max - stats.health
-	var heal_amount: int = (heal_percent * hp) / 100
-	take_heal(source, heal_amount)
 
 # ============================== Fighting States ==============================
 
@@ -172,6 +188,7 @@ func _start_auto_attack_manager() -> void:
 		printerr("No AutoAttackManager")
 		return
 	
+	# TODO tout ça semble pouvoir retourner dans l'auto attack manager
 	_auto_attack_manager.heal_ally_triggered.connect(_on_auto_attack_manager_heal_ally_triggered)
 	_auto_attack_manager.armor_gained.connect(_on_auto_attack_manager_armor_gained)
 	_auto_attack_manager.max_health_gained.connect(_on_auto_attack_manager_max_health_gained)
@@ -180,8 +197,7 @@ func _start_auto_attack_manager() -> void:
 
 func _on_auto_attack_manager_heal_ally_triggered(heal_amount: int) -> void:
 	var target = target_manager.get_target(TargetManager.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
-	target.take_heal(self, heal_amount)
-	_heal_manager.notify_heal()
+	heal(target, heal_amount)
 
 
 func _on_auto_attack_manager_armor_gained(armor_stacks: int) -> void:
@@ -273,13 +289,8 @@ func _start_shadow_manager() -> void:
 		printerr("No ShadowManager")
 		return
 	
-	_shadow_manager.connect("heal_done", _on_shadow_manager_heal_done)
 	_shadow_manager.connect("gain_max_hp_triggered", _on_shadow_manager_gain_max_hp_triggered)
 	_shadow_manager.start(self, stats.shadow)
-
-
-func _on_shadow_manager_heal_done() -> void:
-	_heal_manager.notify_heal()
 
 
 func _on_shadow_manager_gain_max_hp_triggered(hp: int) -> void:

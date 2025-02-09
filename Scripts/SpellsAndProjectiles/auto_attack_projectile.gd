@@ -38,9 +38,9 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node3D) -> void:
 	if body is Character and body == _target:
 		if _target != null:
-			_target.take_damage_flat(_source, _stats.damage, Utils.DamageType.PHYSICAL)
+			_source.attack(_target, _stats.damage, Utils.DamageType.PHYSICAL)
 			if _stats.fire_active:
-				_target.take_damage_percent(_source, _stats.fire_damage, Utils.DamageType.MAGIC, Utils.PercentModifier.CURRENT_HP)
+				_source.attack_percent(_target, _stats.fire_damage, Utils.DamageType.MAGIC, Utils.PercentModifier.CURRENT_HP)
 			
 			if _stats.poison_stacks > 0:
 				_target.take_poison_stacks(_source, _stats.poison_stacks, _stats.poison_duration)
