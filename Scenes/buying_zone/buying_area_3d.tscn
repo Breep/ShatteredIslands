@@ -1,10 +1,11 @@
-[gd_scene load_steps=173 format=4 uid="uid://ca8mcplp2va4s"]
+[gd_scene load_steps=174 format=4 uid="uid://ca8mcplp2va4s"]
 
 [ext_resource type="Script" path="res://Scripts/Buying_area3d/camera_3d.gd" id="1_3e5gf"]
 [ext_resource type="PackedScene" uid="uid://tmsh8w1pcy4p" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/bar_outercorner.gltf" id="1_jltbr"]
 [ext_resource type="Shader" path="res://Shaders/Cam/Cam_outline_shader_pro.gdshader" id="1_p01h1"]
 [ext_resource type="Texture2D" uid="uid://mswbhaabiedm" path="res://Data/Assets/Tavern - 3D Asset Low poly/textures/dungeon_texture.png" id="2_i4mdp"]
 [ext_resource type="PackedScene" uid="uid://c54r3uqu67ser" path="res://Scenes/buying_zone/players_life_ui.tscn" id="3_aff6e"]
+[ext_resource type="PackedScene" uid="uid://d1oxnd1g75rqh" path="res://Scenes/Card/card_shop.tscn" id="3_l05v2"]
 [ext_resource type="PackedScene" uid="uid://byjejjl6rvsef" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/bar_straight_A.gltf" id="3_nj6q3"]
 [ext_resource type="PackedScene" uid="uid://ckltcqgnt0sqd" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Crate/crates_stacked.gltf" id="3_phlvk"]
 [ext_resource type="PackedScene" uid="uid://cmstx61h3h6ar" path="res://Scenes/buying_zone/3d_ui_buying_area.tscn" id="3_v4hk2"]
@@ -725,6 +726,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+
+[node name="CardShop" parent="UI" instance=ExtResource("3_l05v2")]
+layout_mode = 1
 
 [node name="players_life_ui" parent="UI" instance=ExtResource("3_aff6e")]
 layout_mode = 1

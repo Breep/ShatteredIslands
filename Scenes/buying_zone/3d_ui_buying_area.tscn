@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cmstx61h3h6ar"]
+[gd_scene load_steps=28 format=3 uid="uid://cmstx61h3h6ar"]
 
 [ext_resource type="Script" path="res://Scripts/Buying_area3d/3d_ui_buying_area.gd" id="1_3h3b0"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://Resources/Theme/UI_Panel_buying_area.tres" id="1_y63fp"]
@@ -7,18 +7,45 @@
 [ext_resource type="Texture2D" uid="uid://bxd1jnaci6olo" path="res://Data/Assets/Card/ICONS/ATTACK color.png" id="4_47wk0"]
 [ext_resource type="Texture2D" uid="uid://upsytg61ftqu" path="res://Data/Assets/Buying_area/UI/aaspeed-removebg-preview (1).png" id="5_mnvhr"]
 [ext_resource type="Texture2D" uid="uid://d3v87ioxyy0vi" path="res://Data/Assets/Buying_area/UI/Critical_strike_icon.webp" id="6_3jkbc"]
-[ext_resource type="Texture2D" uid="uid://b8qm87yfs40oc" path="res://Data/Assets/Buying_area/UI/crit_m-removebg-preview.png" id="7_pqjcp"]
-[ext_resource type="Texture2D" uid="uid://nxj6jw2phtcp" path="res://Data/Assets/Card/ICONS/MANA color.png" id="8_h22jo"]
 [ext_resource type="Texture2D" uid="uid://csfafgbgft15h" path="res://Data/Assets/Card/Card_IMG/shadow/icon speed.png" id="8_jqxrd"]
 [ext_resource type="FontFile" uid="uid://cl0jltnxq5gum" path="res://Data/font/GlacialIndifference-Bold.otf" id="9_g3jkx"]
-[ext_resource type="Texture2D" uid="uid://dt48b0r0dotl7" path="res://Data/Assets/Buying_area/UI/gold-removebg-preview.png" id="10_0fpq8"]
+[ext_resource type="Texture2D" uid="uid://b0d6hj2uhwbei" path="res://Data/Assets/Buying_area/UI/coin.png" id="10_7kkey"]
 [ext_resource type="Texture2D" uid="uid://cia42t0jcdkfg" path="res://Data/Assets/Card/ICONS/HP color.png" id="11_35rm1"]
+[ext_resource type="Texture2D" uid="uid://gv3yrii3hgee" path="res://Data/Assets/Buying_area/UI/lvl empty.png" id="13_b03uc"]
 [ext_resource type="Texture2D" uid="uid://dl132mivg8ol4" path="res://Data/Assets/Card/ICONS/HP.png" id="13_ffhmq"]
+[ext_resource type="Texture2D" uid="uid://dg8i22h8o2smp" path="res://Data/Assets/Buying_area/UI/lvlfull.png" id="14_3jnfq"]
 [ext_resource type="Texture2D" uid="uid://sex75jj3yj3x" path="res://Data/Assets/Buying_area/UI/empty_heart.png" id="14_j7scj"]
+[ext_resource type="Texture2D" uid="uid://bkfi3piqt33pc" path="res://Data/Assets/Buying_area/UI/reglage.png" id="14_mwm8n"]
+[ext_resource type="Texture2D" uid="uid://culf5vm2bfea7" path="res://Data/Assets/Buying_area/UI/parametres-curseurs.svg" id="15_5gm65"]
+[ext_resource type="Texture2D" uid="uid://cjipts58ev3hw" path="res://Data/Assets/Buying_area/UI/utilisateur.svg" id="16_6nvre"]
 
 [sub_resource type="Theme" id="Theme_4pu5u"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2y85p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4x1h2"]
+bg_color = Color(0.761, 0.404, 0.224, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Theme" id="Theme_8mvw3"]
+Panel/styles/panel = SubResource("StyleBoxFlat_4x1h2")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5kkf1"]
+bg_color = Color(0.761, 0.404, 0.224, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+
+[sub_resource type="Theme" id="Theme_bmpck"]
+Panel/styles/panel = SubResource("StyleBoxFlat_5kkf1")
 
 [sub_resource type="Shader" id="Shader_i24i8"]
 code = "shader_type canvas_item;
@@ -171,7 +198,7 @@ size = Vector2(462, 48)
 [node name="3d_UI_buying_area" type="Control" node_paths=PackedStringArray("area_click")]
 layout_mode = 3
 anchor_left = 0.3
-anchor_top = 0.93
+anchor_top = 0.95
 anchor_right = 0.7
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -182,23 +209,26 @@ area_click = NodePath("Click")
 [node name="Panel_High" type="Control" parent="."]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -2.0
+offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="Panel_High" type="Panel" parent="Panel_High"]
+[node name="Stats" type="Panel" parent="Panel_High"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -91.8
+offset_bottom = -0.400024
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_y63fp")
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel_High/Panel_High"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel_High/Stats"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -207,250 +237,187 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_4pu5u")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel_High/Panel_High/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel_High/Stats/MarginContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.2
-
-[node name="Label" type="Label" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-size_flags_vertical = 10
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(0.787759, 0.787759, 0.787759, 1)
-theme_override_fonts/font = ExtResource("9_g3jkx")
-theme_override_font_sizes/font_size = 30
-text = "280
-"
-horizontal_alignment = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel_High/Stats/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.6
 theme_override_constants/separation = -1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel_High/Stats/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Health_Hero" type="PanelContainer" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="Health_Hero" type="PanelContainer" parent="Panel_High/Stats/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_2y85p")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/Health_Hero"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel_High/Stats/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/Health_Hero"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/Health_Hero/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Panel_High/Stats/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/Health_Hero/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("2_yy7l0")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/Health_Hero/HBoxContainer"]
+[node name="Label" type="Label" parent="Panel_High/Stats/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/Health_Hero/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_oehci")
 text = "1600"
 horizontal_alignment = 1
 
-[node name="Attack" type="PanelContainer" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="Attack" type="PanelContainer" parent="Panel_High/Stats/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_2y85p")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/Attack"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel_High/Stats/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/Attack"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/Attack/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Panel_High/Stats/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/Attack/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("4_47wk0")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/Attack/HBoxContainer"]
+[node name="Label" type="Label" parent="Panel_High/Stats/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/Attack/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_oehci")
 text = "22"
 horizontal_alignment = 1
 
-[node name="Crit_Chance" type="PanelContainer" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="Attack_speed" type="PanelContainer" parent="Panel_High/Stats/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_2y85p")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/Crit_Chance"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel_High/Stats/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/Attack_speed"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/Crit_Chance/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("6_3jkbc")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Label" type="Label" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/Crit_Chance/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("3_oehci")
-text = "17"
-horizontal_alignment = 1
-
-[node name="Move_speed" type="PanelContainer" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxEmpty_2y85p")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/Move_speed"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/Move_speed/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("8_jqxrd")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Label" type="Label" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/Move_speed/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("3_oehci")
-text = "10"
-horizontal_alignment = 1
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Mana_regen" type="PanelContainer" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxEmpty_2y85p")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Mana_regen"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Mana_regen/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("8_h22jo")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Label" type="Label" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Mana_regen/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("3_oehci")
-text = "1.8"
-horizontal_alignment = 1
-
-[node name="Attack_speed" type="PanelContainer" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxEmpty_2y85p")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Attack_speed"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Attack_speed/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Panel_High/Stats/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/Attack_speed/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("5_mnvhr")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Attack_speed/HBoxContainer"]
+[node name="Label" type="Label" parent="Panel_High/Stats/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/Attack_speed/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_oehci")
 text = "1.5"
 horizontal_alignment = 1
 
-[node name="Crit_m" type="PanelContainer" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="Crit_Chance" type="PanelContainer" parent="Panel_High/Stats/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_2y85p")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Crit_m"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel_High/Stats/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/Crit_Chance"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Crit_m/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Panel_High/Stats/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/Crit_Chance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("7_pqjcp")
+texture = ExtResource("6_3jkbc")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Crit_m/HBoxContainer"]
+[node name="Label" type="Label" parent="Panel_High/Stats/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/Crit_Chance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_oehci")
-text = "150"
+text = "17"
+horizontal_alignment = 1
 
-[node name="Move_speed2" type="PanelContainer" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="Move_speed" type="PanelContainer" parent="Panel_High/Stats/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_2y85p")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Move_speed2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel_High/Stats/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/Move_speed"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Move_speed2/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Panel_High/Stats/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/Move_speed/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("8_jqxrd")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Move_speed2/HBoxContainer"]
+[node name="Label" type="Label" parent="Panel_High/Stats/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/Move_speed/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_oehci")
-text = "1.7"
+text = "10"
 horizontal_alignment = 1
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="Panel_High/Stats/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.2
+size_flags_stretch_ratio = 0.05
 
-[node name="Label" type="Label" parent="Panel_High/Panel_High/MarginContainer/HBoxContainer/VBoxContainer3"]
+[node name="lvl" type="Panel" parent="Panel_High"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -15.0
+offset_right = -351.8
+offset_bottom = -31.4
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_8mvw3")
+
+[node name="Gold" type="Panel" parent="Panel_High"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -39.0
+offset_right = -351.8
+offset_bottom = -46.4
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_bmpck")
+
+[node name="Gold" type="Label" parent="Panel_High/Gold"]
 layout_mode = 2
+anchor_top = -0.12
+anchor_right = 1.0
+anchor_bottom = 1.12
+size_flags_vertical = 10
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.787759, 0.787759, 0.787759, 1)
 theme_override_fonts/font = ExtResource("9_g3jkx")
-theme_override_font_sizes/font_size = 40
-text = "
+theme_override_font_sizes/font_size = 25
+text = "280
 "
 horizontal_alignment = 1
 
-[node name="Gold" type="TextureRect" parent="Panel_High"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.9
-anchor_top = 0.916
-anchor_right = 0.9
-anchor_bottom = 0.916
-offset_left = -408.32
-offset_top = -56.1898
-offset_right = -338.32
-offset_bottom = -26.1898
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("10_0fpq8")
+[node name="TextureRect" type="TextureRect" parent="Panel_High/Gold/Gold"]
+layout_mode = 0
+offset_left = 10.4
+offset_top = 8.40002
+offset_right = 26.4
+offset_bottom = 24.4
+texture = ExtResource("10_7kkey")
 expand_mode = 1
 
 [node name="Hearth" type="Control" parent="Panel_High"]
 anchors_preset = 0
-offset_left = 373.4
-offset_top = -26.64
-offset_right = 451.4
-offset_bottom = 51.36
+offset_left = 330.4
+offset_top = -38.6
+offset_right = 408.4
+offset_bottom = 39.4
 
 [node name="Health_background" type="TextureProgressBar" parent="Panel_High/Hearth"]
 unique_name_in_owner = true
@@ -531,6 +498,53 @@ text = "27
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel_High"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -65.8
+offset_top = -22.4
+offset_right = 0.200043
+offset_bottom = -0.400024
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Parametres" type="TextureButton" parent="Panel_High/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("14_mwm8n")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Historique" type="TextureButton" parent="Panel_High/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("15_5gm65")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Profil" type="TextureButton" parent="Panel_High/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("16_6nvre")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Lvl" type="TextureProgressBar" parent="Panel_High"]
+layout_mode = 0
+offset_left = 3.39999
+offset_top = -11.6
+offset_right = 106.4
+offset_bottom = -1.59998
+max_value = 5.0
+value = 2.0
+nine_patch_stretch = true
+texture_under = ExtResource("13_b03uc")
+texture_progress = ExtResource("14_3jnfq")
+
 [node name="Panel_low" type="Control" parent="."]
 unique_name_in_owner = true
 visible = false
@@ -552,6 +566,7 @@ grow_vertical = 2
 theme = ExtResource("1_y63fp")
 
 [node name="Click" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Click"]
 position = Vector2(229.4, 24.36)
