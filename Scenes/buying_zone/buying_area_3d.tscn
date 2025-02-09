@@ -1,4 +1,4 @@
-[gd_scene load_steps=174 format=4 uid="uid://ca8mcplp2va4s"]
+[gd_scene load_steps=175 format=4 uid="uid://ca8mcplp2va4s"]
 
 [ext_resource type="Script" path="res://Scripts/Buying_area3d/camera_3d.gd" id="1_3e5gf"]
 [ext_resource type="PackedScene" uid="uid://tmsh8w1pcy4p" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/bar_outercorner.gltf" id="1_jltbr"]
@@ -65,6 +65,7 @@
 [ext_resource type="PackedScene" uid="uid://d0p11udwcy85a" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/table_small_decorated_B.gltf" id="57_1w6iw"]
 [ext_resource type="PackedScene" uid="uid://dxn0gctm1pacd" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/table_small_decorated_A.gltf" id="58_31pce"]
 [ext_resource type="PackedScene" uid="uid://dj8t0w3l0w47q" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/table_long_tablecloth_decorated_A.gltf" id="60_v4gv6"]
+[ext_resource type="PackedScene" uid="uid://cd1l65basbin6" path="res://Scenes/VFX_3D/vfx_3d_portal.tscn" id="60_wmmk7"]
 [ext_resource type="PackedScene" uid="uid://br564e48coa2v" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/table_medium_decorated_A.gltf" id="61_2k0mj"]
 [ext_resource type="PackedScene" uid="uid://sd0a6lbbu4dl" path="res://Scenes/buying_zone/3d_table_and_character.tscn" id="64_hfgko"]
 [ext_resource type="PackedScene" uid="uid://ii8p0gh3lcv2" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Chest/chest.gltf" id="66_3efjm"]
@@ -728,6 +729,7 @@ grow_vertical = 2
 mouse_filter = 1
 
 [node name="CardShop" parent="UI" instance=ExtResource("3_l05v2")]
+visible = false
 layout_mode = 1
 
 [node name="players_life_ui" parent="UI" instance=ExtResource("3_aff6e")]
@@ -1368,6 +1370,9 @@ material_override = SubResource("StandardMaterial3D_xw1si")
 
 [node name="chest_large_gold_lid" parent="Tavern/Talent_select/chest_large_gold2/chest_large_gold" index="0"]
 material_override = SubResource("StandardMaterial3D_wdnbl")
+
+[node name="VFX3DPortal" parent="Tavern/Talent_select" instance=ExtResource("60_wmmk7")]
+transform = Transform3D(0.809263, 0, 0.587446, 0, 1, 0, -0.587446, 0, 0.809263, -18.2099, 1.85235, -0.385267)
 
 [node name="Table" type="Node3D" parent="Tavern"]
 
