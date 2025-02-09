@@ -42,6 +42,21 @@ func get_reduced_damage(damage: int, damage_type: Utils.DamageType) -> int:
 	var damage_reduced = damage - damage * _fire_stats.magic_resist_percent / 100.0
 	return damage_reduced
 
+
+# Storm of fire
+func get_increased_damage(damage_source: Character, damage: int, damage_type: Utils.DamageType) -> int:
+	if damage_type != Utils.DamageType.MAGIC:
+		return damage
+	
+	if not damage_source.stats.fire.damage_increase_on_low_life_enemy_activated:
+		return damage
+	
+	var health_ratio_percent: float = (_source.stats.health as float / _source.stats.health_max as float) * 100.0
+	if health_ratio_percent >= damage_source.stats.fire.damage_increase_on_low_life_enemy_threshold:
+		return damage
+	
+	return damage + damage * damage_source.stats.fire.damage_increase_on_low_life_enemy_percent / 100.0
+
 # ============================== Private functions ==============================
 
 func _create_optional_timers() -> void:

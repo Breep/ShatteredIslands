@@ -58,6 +58,10 @@ func _create_optional_timers() -> void:
 	if _heal_stats.lost_hp_regen_activated:
 		_optional_timers.append(Utils.create_optional_timer(self, _heal_stats.lost_hp_regen_period, _on_lost_hp_regen_timer_timeout))
 
+	# Pacific wave
+	if _heal_stats.epic_heal_area_activated:
+		_optional_timers.append(Utils.create_optional_timer(self, _heal_stats.epic_heal_area_period, _on_epic_heal_area_timer_timeout))
+
 # ============================== Callbacks functions ==============================
 
 func _on_periodic_heal_timer_timeout() -> void:
@@ -65,6 +69,27 @@ func _on_periodic_heal_timer_timeout() -> void:
 	target.take_heal(_source, _heal_stats.periodic_heal_amount)
 	notify_heal()
 
+
 func _on_lost_hp_regen_timer_timeout() -> void:
 	_source.take_heal_percent(_source, _heal_stats.lost_hp_regen_percentage, Utils.PercentModifier.LOST_HP)
 	notify_heal()
+
+
+func _on_epic_heal_area_timer_timeout() -> void:
+	var targets = _source.target_manager.get_targets(TargetManager.MultipleTargettingStrategy.ALLIES)
+	if targets.is_empty():
+		return
+	for target in targets:
+		target.take_heal_percent(_source, _heal_stats.epic_heal_area_percentage, Utils.PercentModifier.MAX_HP)
+		notify_heal()
+
+
+
+
+
+
+
+
+
+
+	

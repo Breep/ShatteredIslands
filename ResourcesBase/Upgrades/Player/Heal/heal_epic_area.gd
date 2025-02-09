@@ -9,9 +9,9 @@ func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	stats.heal.heal_area_activated = true
-	stats.heal.heal_area_percentage = heal_area_percentage
-	stats.heal.heal_area_period = heal_area_period
+	stats.heal.epic_heal_area_activated = true
+	stats.heal.epic_heal_area_percentage = heal_area_percentage
+	stats.heal.epic_heal_area_period = heal_area_period
 
 
 func get_description(cardlvl: int) -> String:

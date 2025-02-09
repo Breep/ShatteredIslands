@@ -1,17 +1,13 @@
-[gd_resource type="Resource" script_class="Family" load_steps=9 format=3 uid="uid://42q0uuwcox03"]
+[gd_resource type="Resource" script_class="Family" load_steps=5 format=3 uid="uid://42q0uuwcox03"]
 
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="1_23q5h"]
-[ext_resource type="Resource" uid="uid://dal1rtga84w2q" path="res://Resources/Card/Heal/heal_lost_hp.tres" id="2_3xoyf"]
+[ext_resource type="Resource" uid="uid://bdo5am3u8k50w" path="res://Resources/Card/Heal/heal_epic_heal_area.tres" id="2_ndbku"]
 [ext_resource type="Script" path="res://ResourcesBase/Family/family.gd" id="3_1uvcs"]
-[ext_resource type="Resource" uid="uid://d03puij6ur6ow" path="res://Resources/Card/Heal/heal_heal_periodic.tres" id="3_ij0rn"]
-[ext_resource type="Resource" uid="uid://c0wwv0p83pnqi" path="res://Resources/Card/Defense/defense_armor_onheal.tres" id="3_uom7n"]
-[ext_resource type="Resource" uid="uid://bdtr6was58h06" path="res://Resources/Card/Heal/heal_on move.tres" id="5_4y0wd"]
-[ext_resource type="Resource" uid="uid://b107jh0lcr1sr" path="res://Resources/Card/Attack/attack_heal_allies.tres" id="6_s6lgj"]
 [ext_resource type="Texture2D" uid="uid://y0t815fi2pdf" path="res://Data/Assets/Card/ICONS/MANA.png" id="9_q5mwd"]
 
 [resource]
 script = ExtResource("3_1uvcs")
-cards = Array[ExtResource("1_23q5h")]([ExtResource("3_ij0rn"), ExtResource("3_uom7n"), ExtResource("2_3xoyf"), ExtResource("5_4y0wd"), ExtResource("6_s6lgj")])
+cards = Array[ExtResource("1_23q5h")]([ExtResource("2_ndbku")])
 icon = ExtResource("9_q5mwd")
 family_name = "Serinity"
 family_type = 4

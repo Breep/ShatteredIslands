@@ -17,6 +17,12 @@ enum TargettingStrategy {
 	LOWEST_HP_ALLY_INCLUDING_SELF, # Lowest hp ally (in % of max life)
 }
 
+enum MultipleTargettingStrategy {
+	ALL,
+	ALLIES,
+	ENEMIES, # (can be empty)
+}
+
 # ============================== Private variables ==============================
 
 var _characters: Array[Character] # ALL character on the fighting scene
@@ -93,6 +99,20 @@ func remove_character(character_to_remove: Character) -> void:
 	_characters.erase(character_to_remove)
 	_enemies.erase(character_to_remove)
 	_allies.erase(character_to_remove)
+
+
+func get_targets(strategy: MultipleTargettingStrategy) -> Array[Character]:
+	match strategy:
+		MultipleTargettingStrategy.ALL:
+			return _characters.duplicate()
+		MultipleTargettingStrategy.ALLIES:
+			return _allies.duplicate()
+		MultipleTargettingStrategy.ENEMIES:
+			return _enemies.duplicate()
+	
+	printerr("TargetManager: Unknown strategy")
+	var empty: Array[Character]
+	return empty
 
 # ============================== Private functions ==============================
 

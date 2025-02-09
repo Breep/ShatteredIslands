@@ -73,6 +73,7 @@ func take_damage_percent(source: Character, damage_percent: float, damage_type: 
 
 func take_damage_flat(source: Character, damage: int, damage_type: Utils.DamageType) -> void:
 	damage = _life_manager.get_increased_damage_taken_from_lost_hp(source, damage, damage_type) # Increase % of PHYSICAL damage
+	damage = _fire_manager.get_increased_damage(source, damage, damage_type) # Increase % of MAGICAL damage
 	damage = _defense_manager.get_reduced_damage_taken_from_target_protector(source, damage) # Reduce % of ALL damage
 	
 	damage = _defense_manager.get_reduced_damage_taken_from_own_protector(damage) # Reduce % of ALL damage

@@ -9,6 +9,7 @@ func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
+	stats.fire.damage_increase_on_low_life_enemy_activated = true
 	stats.fire.damage_increase_on_low_life_enemy_percent = damage_increase_on_low_life_enemy_percent[cardlvl - 1]
 	stats.fire.damage_increase_on_low_life_enemy_threshold = damage_increase_on_low_life_enemy_threshold
 

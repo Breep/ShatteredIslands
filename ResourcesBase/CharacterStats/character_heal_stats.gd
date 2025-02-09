@@ -16,9 +16,9 @@ var heal_projectile_chance: int # % of chance to send a heal_projectile every ti
 var pacify_enemy_attack_number: int # Number of attacks pacified on the enemy
 var pacify_enemy_chance: int # % of chance to proc the pacify_enemy_attack_number after a heal
 
-var heal_area_activated: int # If the epic healing area is activated
-var heal_area_percentage: int # % of max life healed
-var heal_area_period: float # time between 2 heal from the epic area (in s)
+var epic_heal_area_activated: int # If the epic healing area is activated
+var epic_heal_area_percentage: int # % of max life healed
+var epic_heal_area_period: float # time between 2 heal from the epic area (in s)
 
 var lost_hp_regen_activated: bool # If the skill is activated
 var lost_hp_regen_percentage: float # % of lost hp healed each lost_hp_regen_period

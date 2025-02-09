@@ -23,6 +23,7 @@ var healing_fire_area_heal: float # Healing fire area heal (in % of allies curre
 var healing_fire_area_range: int # Healing fire area range
 var healing_fire_area_period: float # Time between 2 tick of damage/heal of the healing fire
 
+var damage_increase_on_low_life_enemy_activated: bool # If this skill is activated
 var damage_increase_on_low_life_enemy_percent: int # Damage increase on enemies below a threshold (in %)
 var damage_increase_on_low_life_enemy_threshold: int # Threshold of the damage increase (in % of max hp)
 
