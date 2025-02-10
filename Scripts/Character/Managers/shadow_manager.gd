@@ -79,6 +79,10 @@ func _create_optional_timers() -> void:
 	# In the Shadow
 	if _shadow_stats.untargetable_activated:
 		_optional_timers.append(Utils.create_optional_timer(self, UNTARGETABLE_CHECK_PERIOD, _on_untargetable_timer_timeout))
+	
+	# SHadow step
+	if _shadow_stats.shadow_step_activated:
+		_optional_timers.append(Utils.create_optional_timer(self, _shadow_stats.shadow_step_period, _on_shadow_step_timer_timeout))
 
 
 func _call_optional_distance_callbacks() -> void:
@@ -167,17 +171,18 @@ var __timer_untargetable: float = 0
 func _on_untargetable_timer_timeout() -> void:
 	if __timer_untargetable > 0:
 		__timer_untargetable -= UNTARGETABLE_CHECK_PERIOD
-	if multiplayer.get_unique_id() == 1 && _shadow_stats.untargetable:
-		print("UNTARGETABLE: ", __timer_untargetable)
-		
+	
 	if __timer_untargetable <= 0 && _shadow_stats.untargetable:
 		_shadow_stats.untargetable = false
 		__timer_untargetable = 0
-		if multiplayer.get_unique_id() == 1: print("BACK TO BUSINESS")
 
 
-
-
+func _on_shadow_step_timer_timeout() -> void:
+	var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.FARTHEST)
+	if target == null:
+		return
+	
+	_source.global_position = target.global_position
 
 
 

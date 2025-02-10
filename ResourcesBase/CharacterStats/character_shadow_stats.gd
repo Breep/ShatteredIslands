@@ -32,4 +32,4 @@ var untargetable_time: float # Duration of untargetable when moving
 var untargetable_distance: float # Distance needed to trigger untargetable
 
 var shadow_step_activated: bool # If the epic is activated
-var shadow_step_period: bool # Period of time between 2 shadow steps
+var shadow_step_period: float # Period of time between 2 shadow steps
