@@ -18,3 +18,7 @@ var poison_cloud_range: int # Range of the poison cloud (in m)
 
 var multiply_damage_activated: bool # If the skill is activated
 var multiply_damage: float # Poison damage is multiplied by this (modified with epic card)
+
+var fire_poison_activated: bool # If the skill is activated
+var fire_poison_stacks_lost: int # Number of stack to be lost by the enemy to proc poison_fire
+var fire_poison_damage: int # Damage of the poison fire (in % of enemy max hp)

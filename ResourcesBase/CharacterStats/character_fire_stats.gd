@@ -27,9 +27,6 @@ var damage_increase_on_low_life_enemy_activated: bool # If this skill is activat
 var damage_increase_on_low_life_enemy_percent: int # Damage increase on enemies below a threshold (in %)
 var damage_increase_on_low_life_enemy_threshold: int # Threshold of the damage increase (in % of max hp)
 
-var poison_fire_stacks_lost: int # Number of stack to be lost by the enemy to proc poison_fire
-var poison_fire_damage: int # Damage of the poison fire (in % of enemy max hp)
-
 var trail_damage : int # Fire trail damage (in % of enemy current hp)
 var trail_life_time : float # Fire trial life time (in s)
 var trail_period : float # Time between 2 tick of damage of fire trail

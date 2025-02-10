@@ -91,17 +91,37 @@ func _on_periodic_stacks_timer_timeout() -> void:
 
 
 # Handle poison stacks and damage on _source
+var __fire_poison_stacks_count: Dictionary # {Character: int}
 func _on_poison_tick_timer_timeout() -> void:
 	var poison_damage: int = 0
 	for effect in _poison_stats.poison_effects:
 		if effect.ticks_left > 0:
 			effect.ticks_left -= 1
 			if effect.source.stats.poison.multiply_damage_activated:
-				poison_damage += effect.stacks_number * effect.source.stats.poison.multiply_damage
+				poison_damage += effect.stacks_number * effect.source.stats.poison.multiply_damage # [Venomous snake]
 			else:
 				poison_damage += effect.stacks_number
 		else:
+			_handle_fire_poison(effect)
 			_poison_stats.poison_effects.erase(effect)
 	
 	if poison_damage > 0:
 		_source.take_damage(null, get_reduced_damage(poison_damage), Utils.DamageType.POISON, false)
+
+
+# [Poison of fire]
+func _handle_fire_poison(effect: PoisonEffect) -> void:
+	if not effect.source.stats.poison.fire_poison_activated:
+		return
+	
+	if __fire_poison_stacks_count.has(effect.source):
+		__fire_poison_stacks_count[effect.source] += effect.stacks_number
+	else:
+		__fire_poison_stacks_count[effect.source] = effect.stacks_number
+	
+	if multiplayer.get_unique_id() == 1: print("POISON/FIRE: ", __fire_poison_stacks_count[effect.source])
+	
+	if __fire_poison_stacks_count[effect.source] >= effect.source.stats.poison.fire_poison_stacks_lost:
+		if multiplayer.get_unique_id() == 1: print("POISON/FIRE: EXPLOSION")
+		effect.source.attack_percent(_source, effect.source.stats.poison.fire_poison_damage, Utils.DamageType.MAGIC, Utils.PercentModifier.MAX_HP)
+		__fire_poison_stacks_count[effect.source] -= effect.source.stats.poison.fire_poison_stacks_lost
