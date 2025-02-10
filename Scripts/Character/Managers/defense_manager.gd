@@ -16,7 +16,7 @@ var _optional_timers: Array[Timer]
 
 # ============================== Public functions ==============================
 
-func start(source: Character, defense_stats: CharacterDefenseStats) -> void:
+func init(source: Character, defense_stats: CharacterDefenseStats) -> void:
 	if source == null:
 		printerr("DefenseManager: source undef")
 		return
@@ -26,6 +26,9 @@ func start(source: Character, defense_stats: CharacterDefenseStats) -> void:
 	
 	_source = source
 	_defense_stats = defense_stats
+
+
+func start() -> void:
 	_create_optional_timers()
 
 
@@ -35,11 +38,11 @@ func stop() -> void:
 		timer.stop()
 
 
-func get_reduced_damage_taken_from_target_protector(damage_source: Character, damage: int) -> int:
-	if not damage_source.stats.defense.protector_activated:
+func get_reduced_damage_taken_from_protector(damage: int) -> int:
+	if not _defense_stats.protector_activated:
 		return damage
 	
-	var damage_reduction: int = ((damage as float * damage_source.stats.defense.protector_reduce_damage_done) / 100.0) as int
+	var damage_reduction: int = ((damage as float * _defense_stats.protector_reduce_damage_done) / 100.0) as int
 	return damage - damage_reduction
 
 

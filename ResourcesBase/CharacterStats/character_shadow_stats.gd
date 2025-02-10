@@ -1,6 +1,8 @@
 class_name CharacterShadowStats
 extends Resource
 
+var untargetable: bool # Tru if the target is untargetable (with the card In The Shadow)
+
 var shadow_bolt_activated: bool # If this skill is activated
 var shadow_bolt_damage: int # Damage of the shadow bolt
 var shadow_bolt_distance: float # Distance needed to trigger shadow bolt (in m)
@@ -25,9 +27,9 @@ var inflict_poison_stacks_activated: bool # If this skill is activated
 var inflict_poison_stacks_value: int # Stacks of poison inflicted
 var inflict_poison_stacks_distance: float # Distance needed to trigger inflict_poison_stacks (in m)
 
-var invincibility_time: float # Duration of invincibility when moving
-var invincibility_distance: float # Distance needed to trigger invincibility
-
-var distance_for_invincibility: int # Distance needed for activating invincibility
+var untargetable_activated: bool # If the skill is activated
+var untargetable_time: float # Duration of untargetable when moving
+var untargetable_distance: float # Distance needed to trigger untargetable
 
 var shadow_step_activated: bool # If the epic is activated
+var shadow_step_period: bool # Period of time between 2 shadow steps

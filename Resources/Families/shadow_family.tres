@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="Family" load_steps=5 format=3 uid="uid://dw5jbc2njjf1k"]
 
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="1_rypu2"]
-[ext_resource type="Resource" uid="uid://bdtr6was58h06" path="res://Resources/Card/Heal/heal_on move.tres" id="2_afxht"]
+[ext_resource type="Resource" uid="uid://bhd5e5q0gu6km" path="res://Resources/Card/Shadow/shadow_shadow_invincible.tres" id="2_karbv"]
 [ext_resource type="Script" path="res://ResourcesBase/Family/family.gd" id="3_pd454"]
 [ext_resource type="Texture2D" uid="uid://c504bhi6182oj" path="res://Data/Assets/Card/Card_IMG/shadow/shadow icon.png" id="6_n4ck2"]
 
 [resource]
 script = ExtResource("3_pd454")
-cards = Array[ExtResource("1_rypu2")]([ExtResource("2_afxht")])
+cards = Array[ExtResource("1_rypu2")]([ExtResource("2_karbv")])
 icon = ExtResource("6_n4ck2")
 family_name = "Shadow"
 family_type = 7

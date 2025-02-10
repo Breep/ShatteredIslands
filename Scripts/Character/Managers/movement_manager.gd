@@ -10,13 +10,16 @@ var _fighting_state: FightingManager.FightingState
 
 @onready var _energy_regen_timer: Timer = %EnergyRegenTimer
 
-func start(source: Character, fighting_state: FightingManager.FightingState) -> void:
+func init(source: Character, fighting_state: FightingManager.FightingState) -> void:
 	if source == null:
 		printerr("MovementManager: source undef")
 		return
 	
 	_source = source
 	_fighting_state = fighting_state
+
+
+func start() -> void:
 	_energy_regen_timer.start()
 
 

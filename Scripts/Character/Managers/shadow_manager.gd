@@ -5,6 +5,8 @@ extends Node
 
 signal gain_max_hp_triggered(hp: int)
 
+const UNTARGETABLE_CHECK_PERIOD: float = 0.1 # Check if the player is still untargetable
+
 # ============================== Private variables ==============================
 
 var _source: Character # Ref to character owner
@@ -14,6 +16,7 @@ var _previous_global_position: Vector3
 var _total_distance: float = 0 # Total distance moved by the character
 
 var _optional_distance_callbacks: Array[Callable]
+var _optional_timers: Array[Timer]
 
 # ============================== Local scenes ==============================
 
@@ -21,7 +24,7 @@ var _optional_distance_callbacks: Array[Callable]
 
 # ============================== Public functions ==============================
 
-func start(source: Character, shadow_stats: CharacterShadowStats) -> void:
+func init(source: Character, shadow_stats: CharacterShadowStats) -> void:
 	if source == null:
 		printerr("ShadowManager: source undef")
 		return
@@ -31,14 +34,21 @@ func start(source: Character, shadow_stats: CharacterShadowStats) -> void:
 	
 	_source = source
 	_shadow_stats = shadow_stats
+
+
+func start() -> void:
 	_attach_optional_distance_callbacks()
 	_previous_global_position = _source.global_position
 	_check_distance_timer.start()
+	_create_optional_timers()
 
 
 func stop() -> void:
 	for callback in _optional_distance_callbacks:
 		_optional_distance_callbacks.erase(callback)
+	
+	for timer in _optional_timers:
+		timer.stop()
 
 # ============================== Private functions ==============================
 
@@ -60,6 +70,15 @@ func _attach_optional_distance_callbacks() -> void:
 	
 	if _shadow_stats.inflict_poison_stacks_activated:
 		_optional_distance_callbacks.append(_try_inflict_poison_stacks)
+	
+	if _shadow_stats.untargetable_activated:
+		_optional_distance_callbacks.append(_try_untargetable)
+
+
+func _create_optional_timers() -> void:
+	# In the Shadow
+	if _shadow_stats.untargetable_activated:
+		_optional_timers.append(Utils.create_optional_timer(self, UNTARGETABLE_CHECK_PERIOD, _on_untargetable_timer_timeout))
 
 
 func _call_optional_distance_callbacks() -> void:
@@ -80,6 +99,7 @@ func _on_check_distance_timer_timeout() -> void:
 	__distance_since_last_heal += distance
 	__distance_since_last_gain_max_hp += distance
 	__distance_since_last_inflict_poison_stacks += distance
+	__distance_since_last_untargetable += distance
 	_previous_global_position = _source.global_position
 	_call_optional_distance_callbacks()
 
@@ -134,9 +154,26 @@ func _try_inflict_poison_stacks() -> void:
 		target.take_poison_stacks(_source, _shadow_stats.inflict_poison_stacks_value, 5) # TODO need a duration value in poison stats
 
 
+var __distance_since_last_untargetable: float = 0
+func _try_untargetable() -> void:
+	if __distance_since_last_untargetable > _shadow_stats.untargetable_distance:
+		__distance_since_last_untargetable -= _shadow_stats.untargetable_distance
+		__timer_untargetable += _shadow_stats.untargetable_time
+		_shadow_stats.untargetable = true
 
 
-
+# Put back the character targetable after a period of time
+var __timer_untargetable: float = 0
+func _on_untargetable_timer_timeout() -> void:
+	if __timer_untargetable > 0:
+		__timer_untargetable -= UNTARGETABLE_CHECK_PERIOD
+	if multiplayer.get_unique_id() == 1 && _shadow_stats.untargetable:
+		print("UNTARGETABLE: ", __timer_untargetable)
+		
+	if __timer_untargetable <= 0 && _shadow_stats.untargetable:
+		_shadow_stats.untargetable = false
+		__timer_untargetable = 0
+		if multiplayer.get_unique_id() == 1: print("BACK TO BUSINESS")
 
 
 

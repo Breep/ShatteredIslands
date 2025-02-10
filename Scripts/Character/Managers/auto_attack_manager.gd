@@ -34,8 +34,7 @@ var _optional_timers: Array[Timer]
 
 # ============================== Public functions ==============================
 
-func start(source: Character, aa_stats: CharacterAutoAttackStats, projectile_scene: PackedScene, hero: Hero) -> void:
-	print("AutoAttackManager: Starting")
+func init(source: Character, aa_stats: CharacterAutoAttackStats, projectile_scene: PackedScene, hero: Hero) -> void:
 	if source == null:
 		printerr("AutoAttackManager: source undef")
 		return
@@ -54,6 +53,9 @@ func start(source: Character, aa_stats: CharacterAutoAttackStats, projectile_sce
 	_aa_stats = aa_stats
 	_default_attack_speed = hero.stats.attack_speed
 	_update_auto_attack_speed()
+
+
+func start() -> void:
 	_auto_attack_timer.start()
 
 

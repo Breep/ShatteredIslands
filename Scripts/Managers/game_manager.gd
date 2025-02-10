@@ -39,8 +39,8 @@ var _rules: GameRules
 func _ready() -> void:
 	_rules = load("res://Resources/GameRules/NormalGameRules.tres")
 	_init_families_ref()
-	_active_families.append(get_family_from_type(Family.FamilyType.Serinity))
-	#_active_families.append(get_family_from_type(Family.FamilyType.Poison))
+	#_active_families.append(get_family_from_type(Family.FamilyType.Serinity))
+	_active_families.append(get_family_from_type(Family.FamilyType.Shadow))
 	#_active_families.append(get_family_from_type(Family.FamilyType.Fire))
 
 # ============================== Public function ==============================

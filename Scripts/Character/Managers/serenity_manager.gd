@@ -14,7 +14,7 @@ var _optional_timers: Array[Timer]
 
 # ============================== Public functions ==============================
 
-func start(source: Character, heal_stats: CharacterHealStats) -> void:
+func init(source: Character, heal_stats: CharacterHealStats) -> void:
 	if source == null:
 		printerr("HealManager: source undef")
 		return
@@ -24,6 +24,9 @@ func start(source: Character, heal_stats: CharacterHealStats) -> void:
 	
 	_source = source
 	_heal_stats = heal_stats
+
+
+func start() -> void:
 	_create_optional_timers()
 
 

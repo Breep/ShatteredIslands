@@ -16,7 +16,7 @@ var _optional_timers: Array[Timer]
 
 # ============================== Public functions ==============================
 
-func start(source: Character, poison_stats: CharacterPoisonStats) -> void:
+func init(source: Character, poison_stats: CharacterPoisonStats) -> void:
 	if source == null:
 		printerr("PoisonManager: source undef")
 		return
@@ -26,6 +26,9 @@ func start(source: Character, poison_stats: CharacterPoisonStats) -> void:
 	
 	_source = source
 	_poison_stats = poison_stats
+
+
+func start() -> void:
 	_poison_tick_timer.start()
 	_create_optional_timers()
 	_lanch_optional_spells()
@@ -34,6 +37,7 @@ func start(source: Character, poison_stats: CharacterPoisonStats) -> void:
 func stop() -> void:
 	for timer in _optional_timers:
 		timer.stop()
+	_poison_tick_timer.stop()
 
 
 func get_reduced_damage(damage: int) -> int:

@@ -9,8 +9,9 @@ func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	stats.shadow.invincibility_time += invincibility_time[cardlvl-1]
-	stats.shadow.distance_for_invincibility = distance_to_activate
+	stats.shadow.untargetable_activated = true
+	stats.shadow.untargetable_time += invincibility_time[cardlvl - 1]
+	stats.shadow.untargetable_distance = distance_to_activate
 
 
 func get_description(cardlvl: int) -> String:
@@ -18,5 +19,5 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	return "[center]After moving " + str(distance_to_activate) + \
-			"5m, you are invincible for " + \
-			str(invincibility_time[cardlvl - 1]) + " sec. Stackable[/center]"
+			"m, you are invincible for " + \
+			str(invincibility_time[cardlvl - 1]) + "s. Stackable[/center]"

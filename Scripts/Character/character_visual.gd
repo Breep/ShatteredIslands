@@ -44,11 +44,15 @@ func update_name_displayed(player_name: String) -> void:
 	_name_displayed.text = player_name
 
 
-func damage_popup(amount: float, damage_type: Utils.DamageType):
+func damage_popup(amount: float, damage_type: Utils.DamageType, is_critic: bool):
 	var popup: DamagePopUp = damage_popup_scene.instantiate()
 	var offset = Vector3(randf_range(-0.5, 0.5), randf_range(-0.5, 0.5), 0) 
 	popup.text = str(amount)
 	get_tree().current_scene.add_child(popup)
+	
+	if is_critic:
+		popup.modulate = Color8(95, 20, 28, 255)
+	
 	match damage_type:
 		Utils.DamageType.POISON:
 			popup.global_position = poison_popup_spawn.global_position + offset

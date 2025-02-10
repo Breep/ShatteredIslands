@@ -150,6 +150,10 @@ func _get_closest(characters: Array[Character], excluded_character: Character) -
 	if characters_copy.is_empty():
 		return null
 	
+	characters_copy = _get_array_whithout_untargetable_targets(characters_copy)
+	if characters_copy.is_empty():
+		return null
+	
 	var closest_character = characters_copy[0]
 	for character in characters:
 		if character != _source:
@@ -165,6 +169,10 @@ func _get_farthest(characters: Array[Character], excluded_character: Character) 
 	
 	var characters_copy: Array[Character] = characters.duplicate()
 	characters_copy.erase(excluded_character)
+	if characters_copy.is_empty():
+		return null
+	
+	characters_copy = _get_array_whithout_untargetable_targets(characters_copy)
 	if characters_copy.is_empty():
 		return null
 	
@@ -188,9 +196,18 @@ func _get_random(characters: Array[Character], excluded_character: Character) ->
 	if characters_copy.is_empty():
 		return null
 	
+	characters_copy = _get_array_whithout_untargetable_targets(characters_copy)
+	if characters_copy.is_empty():
+		return null
+	
+	characters_copy = _get_array_whithout_untargetable_targets(characters_copy)
+	if characters_copy.is_empty():
+		return null
+	
 	return characters_copy[rng.randi_range(0, characters_copy.size()-1)]
 
 
+# TODO améliorer cette fonction pour ne pas pouvoir heal une target untargetable autre que nous
 func _get_lowest_hp(characters: Array[Character], excluded_character: Character) -> Character:
 	if characters.is_empty():
 		return null
@@ -208,4 +225,27 @@ func _get_lowest_hp(characters: Array[Character], excluded_character: Character)
 			lowest_hp_character = character
 	
 	return lowest_hp_character
+
+
+func _get_array_whithout_untargetable_targets(characters: Array[Character]) -> Array[Character]:
+	var characters_copy: Array[Character] = characters.duplicate()
+	for character in  characters_copy:
+		if character.stats.shadow.untargetable:
+			characters_copy.erase(character)
+	return characters_copy
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	

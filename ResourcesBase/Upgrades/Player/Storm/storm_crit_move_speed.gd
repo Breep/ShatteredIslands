@@ -9,7 +9,8 @@ func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	stats.storm.crit_move_speed_amount = crit_move_speed_amount[cardlvl-1]
+	stats.storm.crit_move_speed_activated = true
+	stats.storm.crit_move_speed_amount = crit_move_speed_amount[cardlvl - 1]
 	stats.storm.crit_move_speed_duration = crit_move_speed_duration
 
 

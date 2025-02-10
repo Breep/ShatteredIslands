@@ -74,7 +74,7 @@ func _set_stats_from_character_stats(character_stats: CharacterStats) -> void:
 	_stats.damage = character_stats.attack_damage
 	
 	var effects = _get_effects_from_randomization(character_stats)
-	
+	   
 	for effect_name in effects.keys():
 		if effects[effect_name]["is_active"]:
 			match effect_name:
@@ -83,10 +83,6 @@ func _set_stats_from_character_stats(character_stats: CharacterStats) -> void:
 					_stats.poison_duration = 15 # TODO Specify this duration thanks to the family lvl
 				ProjectileEffect.VULNERABILTY:
 					_stats.vulnerability_stacks += effects[ProjectileEffect.VULNERABILTY]["stacks"]
-				ProjectileEffect.CRITIC:
-					_stats.is_critic = true
-					_stats.damage *= effects[effect_name]["multiplier"]
-					scale *= 2
 				ProjectileEffect.BOUNCE:
 					_stats.is_bouncing = true
 				ProjectileEffect.FIRE:
@@ -112,11 +108,6 @@ func _move_toward_target(delta: float):
 
 
 func _get_effects_from_randomization(character_stats: CharacterStats) -> Dictionary:
-	var critical_multiplier : float = character_stats.physical_critical_multiplier
-	
-	# TODO mettre un getter ?
-	critical_multiplier += _target.stats.storm.get_vulnerability_critical_multiplier()
-	
 	var effects: Dictionary = {
 		ProjectileEffect.POISON: {
 			"is_active": false,
@@ -127,11 +118,6 @@ func _get_effects_from_randomization(character_stats: CharacterStats) -> Diction
 			"is_active": false,
 			"stacks": character_stats.auto_attack.vulnerability_stacks_amount,
 			"chance": character_stats.auto_attack.vulnerability_stacks_chance,
-		},
-		ProjectileEffect.CRITIC: {
-			"is_active": false,
-			"multiplier": critical_multiplier,
-			"chance": character_stats.physical_critical_chance,
 		},
 		ProjectileEffect.BOUNCE: {
 			"is_active": false,

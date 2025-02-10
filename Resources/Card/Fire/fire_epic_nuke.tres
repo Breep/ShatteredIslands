@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_fumiv"]
 script = ExtResource("4_lhghf")
-nuke_damage = 10.0
+nuke_damage = 20.0
 nuke_period = 10.0
 
 [resource]

@@ -1,14 +1,13 @@
-[gd_resource type="Resource" script_class="Family" load_steps=6 format=3 uid="uid://jlexh0hoftmd"]
+[gd_resource type="Resource" script_class="Family" load_steps=5 format=3 uid="uid://jlexh0hoftmd"]
 
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="1_xfi0l"]
-[ext_resource type="Resource" uid="uid://dkxgpd1kl23wm" path="res://Resources/Card/Fire/fire_damage_baseonyour_maxhp.tres" id="2_a8yrr"]
+[ext_resource type="Resource" uid="uid://c8lgo17h8qfps" path="res://Resources/Card/Fire/fire_epic_nuke.tres" id="2_frqte"]
 [ext_resource type="Texture2D" uid="uid://y0t815fi2pdf" path="res://Data/Assets/Card/ICONS/MANA.png" id="3_1amgh"]
-[ext_resource type="Resource" uid="uid://chuumatgd0adm" path="res://Resources/Card/Fire/fire_increase_damage_onlowlife_enemies.tres" id="3_eetse"]
 [ext_resource type="Script" path="res://ResourcesBase/Family/family.gd" id="4_apkot"]
 
 [resource]
 script = ExtResource("4_apkot")
-cards = Array[ExtResource("1_xfi0l")]([ExtResource("2_a8yrr"), ExtResource("3_eetse")])
+cards = Array[ExtResource("1_xfi0l")]([ExtResource("2_frqte")])
 icon = ExtResource("3_1amgh")
 family_name = "Fire"
 family_type = 2

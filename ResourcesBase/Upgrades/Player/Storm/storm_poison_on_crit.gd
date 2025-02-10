@@ -8,7 +8,8 @@ func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	stats.storm.crit_poison_amount += crit_poison_amount[cardlvl - 1]
+	stats.storm.crit_poison_activated = true
+	stats.storm.crit_poison_amount = crit_poison_amount[cardlvl - 1]
 
 
 func get_description(cardlvl: int) -> String:

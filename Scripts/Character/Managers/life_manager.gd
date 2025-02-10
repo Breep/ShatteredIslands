@@ -14,7 +14,7 @@ var _optional_timers: Array[Timer]
 
 # ============================== Public functions ==============================
 
-func start(source: Character, life_stats: CharacterLifeStats) -> void:
+func init(source: Character, life_stats: CharacterLifeStats) -> void:
 	if source == null:
 		printerr("LifeManager: source undef")
 		return
@@ -24,6 +24,9 @@ func start(source: Character, life_stats: CharacterLifeStats) -> void:
 	
 	_source = source
 	_life_stats = life_stats
+
+
+func start() -> void:
 	_create_optional_timers()
 
 
@@ -31,16 +34,16 @@ func stop() -> void:
 	for timer in _optional_timers:
 		timer.stop()
 
-func get_increased_damage_taken_from_lost_hp(_damage_source: Character, damage: int, damage_type: Utils.DamageType) -> int:
+func get_increased_damage_taken_from_lost_hp(damage: int, damage_type: Utils.DamageType) -> int:
 	if damage_type != Utils.DamageType.PHYSICAL:
 		return damage
 	
-	if not _damage_source.stats.hp.damage_increased_by_hp_lost_activated:
+	if not _source.stats.hp.damage_increased_by_hp_lost_activated:
 		return damage
 	
-	var lost_hp: int = _damage_source.stats.health_max - _damage_source.stats.health
-	var damage_inc_percent: int = _damage_source.stats.hp.damage_increased_by_hp_lost_percentage
-	var lost_hp_stacks: int = lost_hp / _damage_source.stats.hp.damage_increased_by_hp_lost_hp_number
+	var lost_hp: int = _source.stats.health_max - _source.stats.health
+	var damage_inc_percent: int = _source.stats.hp.damage_increased_by_hp_lost_percentage
+	var lost_hp_stacks: int = lost_hp / _source.stats.hp.damage_increased_by_hp_lost_hp_number
 	var damage_multiplier: float = remap(damage_inc_percent * lost_hp_stacks, 0, 100, 1, 2)
 
 	return damage * damage_multiplier

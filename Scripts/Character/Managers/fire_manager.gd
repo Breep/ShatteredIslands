@@ -16,7 +16,7 @@ var _optional_timers: Array[Timer]
 
 # ============================== Public functions ==============================
 
-func start(source: Character, fire_stats: CharacterFireStats) -> void:
+func init(source: Character, fire_stats: CharacterFireStats) -> void:
 	if source == null:
 		printerr("FireManager: source undef")
 		return
@@ -26,6 +26,9 @@ func start(source: Character, fire_stats: CharacterFireStats) -> void:
 	
 	_source = source
 	_fire_stats = fire_stats
+
+
+func start() -> void:
 	_create_optional_timers()
 	_lanch_optional_spells()
 
@@ -44,18 +47,18 @@ func get_reduced_damage(damage: int, damage_type: Utils.DamageType) -> int:
 
 
 # Storm of fire
-func get_increased_damage(damage_source: Character, damage: int, damage_type: Utils.DamageType) -> int:
+func get_increased_damage(damage: int, damage_type: Utils.DamageType) -> int:
 	if damage_type != Utils.DamageType.MAGIC:
 		return damage
 	
-	if not damage_source.stats.fire.damage_increase_on_low_life_enemy_activated:
+	if not _fire_stats.damage_increase_on_low_life_enemy_activated:
 		return damage
 	
 	var health_ratio_percent: float = (_source.stats.health as float / _source.stats.health_max as float) * 100.0
-	if health_ratio_percent >= damage_source.stats.fire.damage_increase_on_low_life_enemy_threshold:
+	if health_ratio_percent >= _fire_stats.damage_increase_on_low_life_enemy_threshold:
 		return damage
 	
-	return damage + damage * damage_source.stats.fire.damage_increase_on_low_life_enemy_percent / 100.0
+	return damage + damage * _fire_stats.damage_increase_on_low_life_enemy_percent / 100.0
 
 # ============================== Private functions ==============================
 
@@ -63,6 +66,11 @@ func _create_optional_timers() -> void:
 	# Fire dagger bolt
 	if _fire_stats.firebolt_activated:
 		_optional_timers.append(Utils.create_optional_timer(self, _fire_stats.firebolt_period, _on_firebolt_timer_timeout))
+	
+	# Explosion
+	if _fire_stats.nuke_activated:
+		_on_nuke_timer_timeout()
+		_optional_timers.append(Utils.create_optional_timer(self, _fire_stats.nuke_period, _on_nuke_timer_timeout))
 
 
 func _lanch_optional_spells() -> void:
@@ -82,3 +90,30 @@ func _on_firebolt_timer_timeout() -> void:
 		return
 	
 	_source.attack_percent(target, _fire_stats.firebolt_damage, Utils.DamageType.MAGIC, Utils.PercentModifier.CURRENT_HP)
+
+
+func _on_nuke_timer_timeout() -> void:
+	var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST_ENEMY)
+	if target == null:
+		return
+	
+	_source.attack_percent(target, _fire_stats.nuke_damage, Utils.DamageType.MAGIC, Utils.PercentModifier.MAX_HP)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

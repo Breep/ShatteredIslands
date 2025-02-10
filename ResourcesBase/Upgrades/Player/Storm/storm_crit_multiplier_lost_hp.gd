@@ -9,6 +9,7 @@ func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
+	stats.storm.lost_hp_crit_multiplier_activated = true
 	stats.storm.lost_hp_crit_multiplier_amount = lost_hp_crit_multiplier_amount[cardlvl - 1]
 	stats.storm.lost_hp_crit_multiplier_hp_number = lost_hp_crit_multiplier_hp_number
 

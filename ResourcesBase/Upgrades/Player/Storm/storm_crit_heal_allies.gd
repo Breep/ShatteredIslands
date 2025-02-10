@@ -8,7 +8,8 @@ func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	stats.storm.healing_crit_amount = healing_crit_amount[cardlvl-1]
+	stats.storm.crit_heal_activated = true
+	stats.storm.crit_heal_amount = healing_crit_amount[cardlvl - 1]
 
 
 func get_description(cardlvl: int) -> String:
