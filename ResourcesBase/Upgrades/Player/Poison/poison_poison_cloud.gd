@@ -10,6 +10,7 @@ func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
+	stats.poison.poison_cloud_activated = true
 	stats.poison.poison_cloud_stacks_number = poison_cloud_stacks_number[cardlvl - 1]
 	stats.poison.poison_cloud_stacks_period = poison_cloud_stacks_period
 	stats.poison.poison_cloud_range = poison_cloud_range

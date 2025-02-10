@@ -11,6 +11,7 @@ var periodic_stacks_period: float # Time between applying 2 stacks (in s)
 
 var poison_resist: float # % of poison damage less taken
 
+var poison_cloud_activated # If this skill is activated
 var poison_cloud_stacks_number: int # Number of stack applied each tick
 var poison_cloud_stacks_period: float # Time between applying 2 stacks (in s)
 var poison_cloud_range: int # Range of the poison cloud (in m)

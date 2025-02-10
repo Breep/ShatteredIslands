@@ -10,6 +10,10 @@ var _poison_stats: CharacterPoisonStats # Ref to the owner poison stats
 
 var _optional_timers: Array[Timer]
 
+# ============================== Spells scenes ==============================
+
+@onready var _poison_cloud_area_scene: PackedScene = preload("res://Scenes/SpellsAndProjectiles/poison_cloud_area.tscn")
+
 # ============================== Local scenes ==============================
 
 @onready var _poison_tick_timer:Timer = %PoisonTickTimer
@@ -68,7 +72,12 @@ func _create_optional_timers() -> void:
 
 
 func _lanch_optional_spells() -> void:
-	pass
+	# [Poison cloud]
+	if _poison_stats.poison_cloud_activated:
+		var poison_cloud_area: PoisonCloudArea = _poison_cloud_area_scene.instantiate()
+		poison_cloud_area.init(_source, _poison_stats.poison_cloud_stacks_number, _poison_stats.poison_cloud_stacks_period, _poison_stats.poison_cloud_range)
+		_source.add_child(poison_cloud_area)
+		poison_cloud_area.position = Vector3.ZERO
 
 # ============================== Callbacks functions ==============================
 
