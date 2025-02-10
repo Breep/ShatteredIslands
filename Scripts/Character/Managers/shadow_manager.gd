@@ -4,7 +4,6 @@ extends Node
 # ============================== Signals ==============================
 
 signal gain_max_hp_triggered(hp: int)
-signal heal_done()
 
 # ============================== Private variables ==============================
 
@@ -93,7 +92,7 @@ func _try_cast_shadow_bolt() -> void:
 		var target: Character = _source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST_ENEMY)
 		if target == null:
 			return
-		target.take_damage_flat(_source, _shadow_stats.shadow_bolt_damage, Utils.DamageType.MAGIC)
+		_source.attack(target, _shadow_stats.shadow_bolt_damage, Utils.DamageType.MAGIC)
 
 
 var __distance_since_last_increase_aa_damage: float = 0
@@ -115,8 +114,7 @@ func _try_heal() -> void:
 	if __distance_since_last_heal > _shadow_stats.heal_ally_distance:
 		__distance_since_last_heal -= _shadow_stats.heal_ally_distance
 		var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
-		target.take_heal(_source, _shadow_stats.heal_ally_value)
-		heal_done.emit()
+		_source.heal(target, _shadow_stats.heal_ally_value)
 
 
 var __distance_since_last_gain_max_hp: float = 0

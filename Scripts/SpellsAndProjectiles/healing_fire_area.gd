@@ -24,13 +24,7 @@ func init(source: Character, damage: float, heal: float, period: float, radius: 
 	_wait_time = period
 	_radius = radius
 
-
-func _enter_tree() -> void:
-	print("HealingFireArea: Enter Tree")
-
-
 func _ready() -> void:
-	print("HealingFireArea: Ready")
 	if _source == null:
 		printerr("HealingFireArea: No source character assigned to")
 
@@ -43,21 +37,17 @@ func _ready() -> void:
 
 func _on_body_entered(body: Node3D) -> void:
 	if body is Character:
-		print("DEBUG - ", body.player.name, " entered the healing fire area")
 		_characters_inside.append(body)
 
 
 func _on_body_exited(body: Node3D) -> void:
 	if body is Character:
-		print("DEBUG - ", body.player.name, " left the healing fire area")
 		_characters_inside.erase(body)
 
 
 func _on_effect_timer_timeout() -> void:
-	print("HEAL AND FIRE TRIGGERED")
 	for character in _characters_inside:
 		if character.team == _source.team:
-			character.take_heal_percent(_source, _heal_percent, Utils.PercentModifier.MAX_HP)
+			_source.heal_percent(character, _heal_percent, Utils.PercentModifier.MAX_HP)
 		else:
-			character.take_damage_percent(_source, _damage_percent, Utils.DamageType.MAGIC, Utils.PercentModifier.CURRENT_HP)
-			print("DAMAGE ", character.player.name)
+			_source.attack_percent(character, _damage_percent, Utils.DamageType.MAGIC, Utils.PercentModifier.CURRENT_HP)

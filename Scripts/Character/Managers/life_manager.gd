@@ -85,4 +85,4 @@ func _on_fire_damage_timer_timeout() -> void:
 	if target == null:
 		return
 	var damage = _source.stats.health_max * _life_stats.fire_damage_percent / 100.0
-	target.take_damage_flat(_source, damage, Utils.DamageType.MAGIC)
+	_source.attack(target, damage, Utils.DamageType.MAGIC)

@@ -91,4 +91,4 @@ func _on_poison_tick_timer_timeout() -> void:
 			_poison_stats.poison_effects.erase(effect)
 	
 	if poison_damage > 0:
-		_source.take_damage_flat(null, get_reduced_damage(poison_damage), Utils.DamageType.POISON)
+		_source.take_damage(null, get_reduced_damage(poison_damage), Utils.DamageType.POISON, false)

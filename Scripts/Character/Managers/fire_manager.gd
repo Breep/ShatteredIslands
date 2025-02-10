@@ -81,4 +81,4 @@ func _on_firebolt_timer_timeout() -> void:
 	if target == null:
 		return
 	
-	target.take_damage_percent(_source, _fire_stats.firebolt_damage, Utils.DamageType.MAGIC, Utils.PercentModifier.CURRENT_HP)
+	_source.attack_percent(target, _fire_stats.firebolt_damage, Utils.DamageType.MAGIC, Utils.PercentModifier.CURRENT_HP)
