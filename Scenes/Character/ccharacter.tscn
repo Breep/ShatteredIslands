@@ -13,8 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bjbfnigvphbfc" path="res://Scenes/Character/Managers/storm_manager.tscn" id="11_ra6k1"]
 [ext_resource type="PackedScene" uid="uid://d0g0xkyr876lc" path="res://Scenes/Character/Managers/movement_manager.tscn" id="12_wmhuf"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_k8c50"]
-size = Vector3(1.38358, 1.9988, 0.195313)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rxegs"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_747th"]
 properties/0/path = NodePath(".:position")
@@ -30,7 +29,7 @@ transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.859336, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0834689, 1.02165, -0.000976563)
-shape = SubResource("BoxShape3D_k8c50")
+shape = SubResource("CapsuleShape3D_rxegs")
 
 [node name="ProjectileSpawn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.888041, 0.890776, 0)

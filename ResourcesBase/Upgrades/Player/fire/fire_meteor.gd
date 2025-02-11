@@ -2,7 +2,7 @@ class_name FireMeteor
 extends PlayerUpgrade
 
 @export var meteor_damage: Array[int]
-@export var meteor_area_range: int
+@export var meteor_area_range: float
 @export var meteor_cooldown: float
 @export var meteor_deploy_time: Array[float]
 

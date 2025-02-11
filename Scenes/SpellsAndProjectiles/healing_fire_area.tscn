@@ -7,7 +7,8 @@ height = 0.3
 radius = 3.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fgae4"]
-albedo_color = Color(0.933128, 0, 0.217309, 1)
+transparency = 1
+albedo_color = Color(0.933, 0, 0.217, 0.265)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_fs6qp"]
 material = SubResource("StandardMaterial3D_fgae4")
@@ -22,7 +23,7 @@ script = ExtResource("1_poi3c")
 unique_name_in_owner = true
 shape = SubResource("CylinderShape3D_yjd37")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="HealingFireVisual" type="MeshInstance3D" parent="."]
 mesh = SubResource("CylinderMesh_fs6qp")
 
 [node name="EffectTimer" type="Timer" parent="."]

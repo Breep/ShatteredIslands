@@ -13,6 +13,7 @@ var _optional_timers: Array[Timer]
 # ============================== Spells scenes ==============================
 
 @onready var _healing_fire_area_scene: PackedScene = preload("res://Scenes/SpellsAndProjectiles/healing_fire_area.tscn")
+@onready var _meteor_scene: PackedScene = preload("res://Scenes/SpellsAndProjectiles/meteor.tscn")
 
 # ============================== Public functions ==============================
 
@@ -71,6 +72,11 @@ func _create_optional_timers() -> void:
 	if _fire_stats.nuke_activated:
 		_on_nuke_timer_timeout()
 		_optional_timers.append(Utils.create_optional_timer(self, _fire_stats.nuke_period, _on_nuke_timer_timeout))
+	
+	# Meteor
+	if _fire_stats.meteor_activated:
+		var meteor_period = _fire_stats.meteor_deploy_time + _fire_stats.meteor_cooldown
+		_optional_timers.append(Utils.create_optional_timer(self, meteor_period, _on_meteor_timer_timeout))
 
 
 func _lanch_optional_spells() -> void:
@@ -100,7 +106,15 @@ func _on_nuke_timer_timeout() -> void:
 	_source.attack_percent(target, _fire_stats.nuke_damage, Utils.DamageType.MAGIC, Utils.PercentModifier.MAX_HP)
 
 
-
+func _on_meteor_timer_timeout() -> void:
+	var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST_ENEMY)
+	if target == null:
+		return
+	
+	var meteor: Meteor = _meteor_scene.instantiate()
+	meteor.init(_source, _fire_stats.meteor_damage, _fire_stats.meteor_deploy_time, _fire_stats.meteor_area_range)
+	get_tree().current_scene.add_child(meteor)
+	meteor.position = target.position
 
 
 

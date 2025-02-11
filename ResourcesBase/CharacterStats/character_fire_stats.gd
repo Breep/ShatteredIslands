@@ -11,7 +11,7 @@ var meteor_activated: bool # True if the player has at least one of this card
 var meteor_damage: int # Meteor damage (in % of enemy current hp)
 var meteor_cooldown: float # Time before a meteor is called after the last one landed (in s)
 var meteor_deploy_time: float # Time for the meteor to land (in s)
-var meteor_area_range: int # Range of the meteor impact
+var meteor_area_range: float # Range of the meteor impact
 
 var nuke_activated: bool # True if the player has at least one of this card
 var nuke_damage: float # Nuke damage (in % of enemy current hp)
