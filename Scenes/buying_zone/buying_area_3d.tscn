@@ -1,17 +1,19 @@
-[gd_scene load_steps=174 format=4 uid="uid://ca8mcplp2va4s"]
+[gd_scene load_steps=175 format=4 uid="uid://ca8mcplp2va4s"]
 
 [ext_resource type="Script" path="res://Scripts/Buying_area3d/camera_3d.gd" id="1_3e5gf"]
+[ext_resource type="Script" path="res://Scenes/test/test_buying_area_3d.gd" id="1_iyfsm"]
 [ext_resource type="PackedScene" uid="uid://tmsh8w1pcy4p" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/bar_outercorner.gltf" id="1_jltbr"]
 [ext_resource type="Shader" path="res://Shaders/Cam/Cam_outline_shader_pro.gdshader" id="1_p01h1"]
 [ext_resource type="Texture2D" uid="uid://mswbhaabiedm" path="res://Data/Assets/Tavern - 3D Asset Low poly/textures/dungeon_texture.png" id="2_i4mdp"]
 [ext_resource type="PackedScene" uid="uid://c54r3uqu67ser" path="res://Scenes/buying_zone/players_life_ui.tscn" id="3_aff6e"]
-[ext_resource type="PackedScene" uid="uid://d1oxnd1g75rqh" path="res://Scenes/Card/card_shop.tscn" id="3_l05v2"]
 [ext_resource type="PackedScene" uid="uid://byjejjl6rvsef" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/bar_straight_A.gltf" id="3_nj6q3"]
 [ext_resource type="PackedScene" uid="uid://ckltcqgnt0sqd" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Crate/crates_stacked.gltf" id="3_phlvk"]
 [ext_resource type="PackedScene" uid="uid://cmstx61h3h6ar" path="res://Scenes/buying_zone/3d_ui_buying_area.tscn" id="3_v4hk2"]
 [ext_resource type="PackedScene" uid="uid://cjeoy0rnleep0" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/bar_straight_B.gltf" id="4_h0lpo"]
 [ext_resource type="PackedScene" uid="uid://dku0i4bp7t23u" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Crate/crate_small.gltf" id="4_yv6jx"]
 [ext_resource type="PackedScene" uid="uid://bciww7p136c0f" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/bar_straight_C.gltf" id="5_x1tcb"]
+[ext_resource type="PackedScene" uid="uid://d1oxnd1g75rqh" path="res://Scenes/Card/card_shop.tscn" id="5_xsqxa"]
+[ext_resource type="PackedScene" uid="uid://cxalabhvxw1pd" path="res://Scenes/UI/ui_timer.tscn" id="7_1drue"]
 [ext_resource type="PackedScene" uid="uid://6bp40g4as5pp" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/bartop_A_medium.gltf" id="8_wtve5"]
 [ext_resource type="PackedScene" uid="uid://dgu4am47da560" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bottle/bottle_A_brown.gltf" id="10_4iuxi"]
 [ext_resource type="PackedScene" uid="uid://d3w377n68qlos" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/barrel_large_decorated.gltf" id="11_1jhy3"]
@@ -65,12 +67,13 @@
 [ext_resource type="PackedScene" uid="uid://d0p11udwcy85a" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/table_small_decorated_B.gltf" id="57_1w6iw"]
 [ext_resource type="PackedScene" uid="uid://dxn0gctm1pacd" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/table_small_decorated_A.gltf" id="58_31pce"]
 [ext_resource type="PackedScene" uid="uid://dj8t0w3l0w47q" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/table_long_tablecloth_decorated_A.gltf" id="60_v4gv6"]
+[ext_resource type="PackedScene" uid="uid://cd1l65basbin6" path="res://Scenes/VFX_3D/vfx_3d_portal.tscn" id="60_wmmk7"]
 [ext_resource type="PackedScene" uid="uid://br564e48coa2v" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/table_medium_decorated_A.gltf" id="61_2k0mj"]
 [ext_resource type="PackedScene" uid="uid://sd0a6lbbu4dl" path="res://Scenes/buying_zone/3d_table_and_character.tscn" id="64_hfgko"]
-[ext_resource type="PackedScene" uid="uid://ii8p0gh3lcv2" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Chest/chest.gltf" id="66_3efjm"]
 [ext_resource type="AudioStream" uid="uid://ck0xrpfygj0sw" path="res://Data/Assets/Sound/World of Warcraft - Taverns of Azeroth - 13 - Thunderbrew.wav" id="67_2jfat"]
 [ext_resource type="PackedScene" uid="uid://cvdsh4o4upr8q" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Banner/banner_patternC_white.gltf" id="68_3y306"]
 [ext_resource type="Texture2D" uid="uid://bnydnfwwar6cx" path="res://Data/Assets/Tavern - 3D Asset Low poly/textures/alt_texture_5_NightA.png" id="69_m53iv"]
+[ext_resource type="PackedScene" uid="uid://cvtcwgshvlnao" path="res://Scenes/Object_scene/mimic_chest.tscn" id="72_eq1su"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w8c5s"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -419,16 +422,12 @@ albedo_texture = ExtResource("2_i4mdp")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d3e3c"]
 albedo_texture = ExtResource("2_i4mdp")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_derm1"]
-albedo_texture = ExtResource("2_i4mdp")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sewhv"]
-albedo_texture = ExtResource("2_i4mdp")
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_47si7"]
+diffuse_mode = 3
 albedo_texture = ExtResource("2_i4mdp")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y57ng"]
+diffuse_mode = 3
 albedo_texture = ExtResource("25_ouvkh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2dlex"]
@@ -702,6 +701,7 @@ albedo_texture = ExtResource("2_i4mdp")
 albedo_texture = ExtResource("2_i4mdp")
 
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_iyfsm")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_pgie4")
@@ -727,15 +727,33 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="CardShop" parent="UI" instance=ExtResource("3_l05v2")]
-layout_mode = 1
-
 [node name="players_life_ui" parent="UI" instance=ExtResource("3_aff6e")]
 layout_mode = 1
 
 [node name="3d_UI_buying_area" parent="UI" instance=ExtResource("3_v4hk2")]
 layout_mode = 1
 mouse_filter = 1
+
+[node name="CardShop" parent="UI" instance=ExtResource("5_xsqxa")]
+layout_mode = 1
+offset_left = 336.0
+offset_top = 157.0
+offset_right = 46.0
+offset_bottom = 28.0
+scale = Vector2(0.5, 0.5)
+
+[node name="Uitimer" parent="UI" node_paths=PackedStringArray("timer") instance=ExtResource("7_1drue")]
+layout_mode = 1
+offset_left = 514.0
+offset_top = 22.0
+offset_right = -442.0
+offset_bottom = -459.0
+scale = Vector2(0.5, 0.5)
+timer = NodePath("../Timer")
+
+[node name="Timer" type="Timer" parent="UI"]
+wait_time = 10.0
+autostart = true
 
 [node name="Tavern" type="Node3D" parent="."]
 
@@ -1046,14 +1064,8 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.82669, 0, -5.32955)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.32874, 2.02921, -3.13592)
 material_override = SubResource("StandardMaterial3D_d3e3c")
 
-[node name="chest2" parent="Tavern/Decco" instance=ExtResource("66_3efjm")]
-transform = Transform3D(0.635917, 0, -0.771758, 0, 1, 0, 0.771758, 0, 0.635917, 4.86384, 0.977658, -5.07745)
-
-[node name="chest" parent="Tavern/Decco/chest2" index="0"]
-material_override = SubResource("StandardMaterial3D_derm1")
-
-[node name="chest_lid" parent="Tavern/Decco/chest2/chest" index="0"]
-material_override = SubResource("StandardMaterial3D_sewhv")
+[node name="ChestMimic" parent="Tavern/Decco" instance=ExtResource("72_eq1su")]
+transform = Transform3D(0.530214, -0.000808874, -0.847863, 0.000133426, 1, -0.000870578, 0.847863, 0.000348473, 0.530214, 4.70404, 1.00192, -5.32994)
 
 [node name="PNJ" type="Node3D" parent="Tavern"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.360003, 0, -15.755)
@@ -1253,6 +1265,7 @@ transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -4.20714, 0, -10.2399)
 material_override = SubResource("StandardMaterial3D_lkkx2")
 
 [node name="wall_doorway_door" parent="Tavern/Structure/Wall/wall_doorway2/wall_doorway" index="0"]
+transform = Transform3D(0.615194, 0, -0.788376, 0, 1, 0, 0.788376, 0, 0.615194, -0.820099, 0, 0)
 material_override = SubResource("StandardMaterial3D_nwx2h")
 
 [node name="wall_doorway_sides2" parent="Tavern/Structure/Wall" instance=ExtResource("32_padtx")]
@@ -1368,6 +1381,9 @@ material_override = SubResource("StandardMaterial3D_xw1si")
 
 [node name="chest_large_gold_lid" parent="Tavern/Talent_select/chest_large_gold2/chest_large_gold" index="0"]
 material_override = SubResource("StandardMaterial3D_wdnbl")
+
+[node name="VFX3DPortal" parent="Tavern/Talent_select" instance=ExtResource("60_wmmk7")]
+transform = Transform3D(0.809263, 0, 0.587446, 0, 1, 0, -0.587446, 0, 0.809263, -18.2099, 1.85235, -0.385267)
 
 [node name="Table" type="Node3D" parent="Tavern"]
 
@@ -1536,40 +1552,42 @@ material_override = SubResource("StandardMaterial3D_w8fn2")
 [node name="Dps_meter" type="Node3D" parent="Tavern"]
 transform = Transform3D(0.959516, 0, 0.281655, 0, 1, 0, -0.281655, 0, 0.959516, 1.49779, 0, -9.20105)
 
-[node name="bar_straight_A6" parent="Tavern/Dps_meter" instance=ExtResource("3_nj6q3")]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -17.581, 1.04435, -12.509)
+[node name="Portal" type="Node3D" parent="Tavern/Dps_meter"]
 
-[node name="bar_straight_A" parent="Tavern/Dps_meter/bar_straight_A6" index="0"]
+[node name="bar_straight_A6" parent="Tavern/Dps_meter/Portal" instance=ExtResource("3_nj6q3")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 8.88178e-16, 0, 1, -17.581, 1.04435, -12.509)
+
+[node name="bar_straight_A" parent="Tavern/Dps_meter/Portal/bar_straight_A6" index="0"]
 material_override = SubResource("StandardMaterial3D_v23vf")
 mesh = SubResource("ArrayMesh_n26hj")
 
-[node name="bar_straight_A2" type="MeshInstance3D" parent="Tavern/Dps_meter/bar_straight_A6"]
+[node name="bar_straight_A2" type="MeshInstance3D" parent="Tavern/Dps_meter/Portal/bar_straight_A6"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.96716, 0, 0)
 material_override = SubResource("StandardMaterial3D_v23vf")
 mesh = SubResource("ArrayMesh_n26hj")
 skeleton = NodePath("")
 
-[node name="bar_straight_A7" parent="Tavern/Dps_meter" instance=ExtResource("3_nj6q3")]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -14.6069, 1.03675, -12.5268)
+[node name="bar_straight_A7" parent="Tavern/Dps_meter/Portal" instance=ExtResource("3_nj6q3")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 8.88178e-16, 0, 1, -14.6069, 1.03675, -12.5268)
 
-[node name="bar_straight_A" parent="Tavern/Dps_meter/bar_straight_A7" index="0"]
+[node name="bar_straight_A" parent="Tavern/Dps_meter/Portal/bar_straight_A7" index="0"]
 material_override = SubResource("StandardMaterial3D_v23vf")
 mesh = SubResource("ArrayMesh_n26hj")
 
-[node name="bar_straight_A2" type="MeshInstance3D" parent="Tavern/Dps_meter/bar_straight_A7"]
+[node name="bar_straight_A2" type="MeshInstance3D" parent="Tavern/Dps_meter/Portal/bar_straight_A7"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.96716, 0, 0)
 material_override = SubResource("StandardMaterial3D_v23vf")
 mesh = SubResource("ArrayMesh_n26hj")
 skeleton = NodePath("")
 
-[node name="bar_straight_A8" parent="Tavern/Dps_meter" instance=ExtResource("3_nj6q3")]
-transform = Transform3D(1, 5.96046e-08, -4.37114e-08, 5.96046e-08, -1, 4.37114e-08, -4.37114e-08, -4.37114e-08, -1, -17.5799, 4.22679, -12.5065)
+[node name="bar_straight_A8" parent="Tavern/Dps_meter/Portal" instance=ExtResource("3_nj6q3")]
+transform = Transform3D(1, 5.96046e-08, -2.98023e-08, 5.96046e-08, -1, 4.37114e-08, -2.98023e-08, -4.37114e-08, -1, -17.5799, 4.22679, -12.5065)
 
-[node name="bar_straight_A" parent="Tavern/Dps_meter/bar_straight_A8" index="0"]
+[node name="bar_straight_A" parent="Tavern/Dps_meter/Portal/bar_straight_A8" index="0"]
 material_override = SubResource("StandardMaterial3D_v23vf")
 mesh = SubResource("ArrayMesh_n26hj")
 
-[node name="bar_straight_A2" type="MeshInstance3D" parent="Tavern/Dps_meter/bar_straight_A8"]
+[node name="bar_straight_A2" type="MeshInstance3D" parent="Tavern/Dps_meter/Portal/bar_straight_A8"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.96716, 0, 0)
 material_override = SubResource("StandardMaterial3D_v23vf")
 mesh = SubResource("ArrayMesh_n26hj")
@@ -1591,6 +1609,8 @@ shadow_enabled = true
 stream = ExtResource("67_2jfat")
 volume_db = -5.0
 autoplay = true
+
+[connection signal="timeout" from="UI/Timer" to="." method="_on_timer_timeout"]
 
 [editable path="Tavern/Bar/DeccoBar/barrel_small_stack2"]
 [editable path="Tavern/Bar/DeccoBar/crates_stacked2"]
@@ -1625,7 +1645,6 @@ autoplay = true
 [editable path="Tavern/Decco/Banner/banner_triple_yellow2"]
 [editable path="Tavern/Decco/Barrel/barrel_large_decorated2"]
 [editable path="Tavern/Decco/Candle/candle2"]
-[editable path="Tavern/Decco/chest2"]
 [editable path="Tavern/Ground/floor_tile_extralarge_grates_open2"]
 [editable path="Tavern/Ground/wood_big_tales"]
 [editable path="Tavern/Structure/scaffold_pillar_wall2"]
@@ -1662,6 +1681,6 @@ autoplay = true
 [editable path="Tavern/Table/Table_decco/table_small_decorated_A3"]
 [editable path="Tavern/Table/Table_decco/table_long_tablecloth_decorated_A2"]
 [editable path="Tavern/Table/Table_decco/table_medium_decorated_A2"]
-[editable path="Tavern/Dps_meter/bar_straight_A6"]
-[editable path="Tavern/Dps_meter/bar_straight_A7"]
-[editable path="Tavern/Dps_meter/bar_straight_A8"]
+[editable path="Tavern/Dps_meter/Portal/bar_straight_A6"]
+[editable path="Tavern/Dps_meter/Portal/bar_straight_A7"]
+[editable path="Tavern/Dps_meter/Portal/bar_straight_A8"]

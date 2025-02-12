@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Buying_area3d/3d_ui_buying_area.gd" id="1_3h3b0"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://Resources/Theme/UI_Panel_buying_area.tres" id="1_y63fp"]
 [ext_resource type="Texture2D" uid="uid://dc6tbpaib0lef" path="res://Data/Assets/Buying_area/UI/vie-removebg-preview.png" id="2_yy7l0"]
-[ext_resource type="Theme" uid="uid://e45umaj22fg7" path="res://Resources/Theme/UI_Label_buying_area.tres" id="3_oehci"]
+[ext_resource type="Theme" uid="uid://e45umaj22fg7" path="res://Resources/Theme/ui_label_buying_area.tres" id="3_oehci"]
 [ext_resource type="Texture2D" uid="uid://bxd1jnaci6olo" path="res://Data/Assets/Card/ICONS/ATTACK color.png" id="4_47wk0"]
 [ext_resource type="Texture2D" uid="uid://upsytg61ftqu" path="res://Data/Assets/Buying_area/UI/aaspeed-removebg-preview (1).png" id="5_mnvhr"]
 [ext_resource type="Texture2D" uid="uid://d3v87ioxyy0vi" path="res://Data/Assets/Buying_area/UI/Critical_strike_icon.webp" id="6_3jkbc"]
@@ -209,6 +209,7 @@ area_click = NodePath("Click")
 [node name="Panel_High" type="Control" parent="."]
 unique_name_in_owner = true
 layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -2.0

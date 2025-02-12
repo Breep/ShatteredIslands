@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Family" load_steps=5 format=3 uid="uid://gmf44fc8uh4x"]
+[gd_resource type="Resource" script_class="Family" load_steps=7 format=3 uid="uid://gmf44fc8uh4x"]
 
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="1_0x72b"]
 [ext_resource type="Resource" uid="uid://dcco6e0sdhpy0" path="res://Resources/Card/storm/storm_vulnerability_oncrit.tres" id="2_llnmk"]

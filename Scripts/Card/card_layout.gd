@@ -34,3 +34,7 @@ func update_card_layout(card: Card) :
 			hbox_node.show()
 		else:
 			print("Node not found:")
+
+
+func _on_description_meta_hover_started(meta: Variant) -> void:
+	TooltipManager.create_tooltip(meta)

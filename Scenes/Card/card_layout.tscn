@@ -113,6 +113,7 @@ anchors_preset = 0
 offset_right = 250.0
 offset_bottom = 349.0
 pivot_offset = Vector2(124, 193)
+mouse_filter = 1
 script = ExtResource("1_2an10")
 
 [node name="Background" type="TextureRect" parent="."]
@@ -201,9 +202,10 @@ offset_right = 102.0
 offset_bottom = 48.122
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 theme_override_font_sizes/normal_font_size = 14
 bbcode_enabled = true
-text = "[center] % Chance to [color=#00008B][wave freq=2.0 amp=5.0]Static Charge[/wave] and many other effect that we cant read all the card ect ect ect"
+text = "[url=fire]🔥[/url][center] % Chance to [color=#00008B][wave freq=2.0 amp=5.0]Static Charge[/wave] and many other effect that we cant read all the card ect ect ect"
 scroll_active = false
 autowrap_mode = 2
 
@@ -327,3 +329,5 @@ stretch_mode = 5
 libraries = {
 "": SubResource("AnimationLibrary_163dr")
 }
+
+[connection signal="meta_hover_started" from="Description" to="." method="_on_description_meta_hover_started"]

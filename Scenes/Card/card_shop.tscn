@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Card/card_shop.gd" id="1_wplsh"]
 [ext_resource type="Script" path="res://Scripts/Card/card_shop_visual.gd" id="2_wwspx"]
 [ext_resource type="Texture2D" uid="uid://cwe303gitkgl7" path="res://Data/Assets/Misc/Misc_IMG/cadre perso.png" id="3_1ateu"]
-[ext_resource type="Theme" uid="uid://bpo76n2lvfxb6" path="res://Themes/main_menu_button.tres" id="6_7moch"]
+[ext_resource type="Theme" uid="uid://bpo76n2lvfxb6" path="res://Scripts/Managers/Themes/main_menu_button.tres" id="6_7moch"]
 [ext_resource type="Texture2D" uid="uid://bffhy01a31isu" path="res://Data/Assets/Misc/GoldPouchBag.png" id="6_yw5no"]
 [ext_resource type="PackedScene" uid="uid://c2psjj8133op3" path="res://Scenes/Card/card_button.tscn" id="8_wtfdi"]
 

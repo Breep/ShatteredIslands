@@ -7,14 +7,18 @@
 
 [node name="PortraitFamily" type="Control"]
 layout_mode = 3
-anchors_preset = 0
+anchor_right = 0.05
+anchor_bottom = 0.1
 script = ExtResource("1_m28bp")
 
 [node name="LvlFamille" type="TextureRect" parent="."]
 unique_name_in_owner = true
-layout_mode = 0
-offset_right = 92.0
-offset_bottom = 95.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_yyyf5")
 
 [node name="ProgressFamille" type="TextureProgressBar" parent="LvlFamille"]

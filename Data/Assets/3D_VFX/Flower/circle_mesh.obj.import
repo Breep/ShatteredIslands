@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bwiqhjd8n7idx"
+path="res://.godot/imported/circle_mesh.obj-7a36c9d5c0eca108d5773090fae96148.mesh"
+
+[deps]
+
+files=["res://.godot/imported/circle_mesh.obj-7a36c9d5c0eca108d5773090fae96148.mesh"]
+
+source_file="res://Data/Assets/3D_VFX/Flower/circle_mesh.obj"
+dest_files=["res://.godot/imported/circle_mesh.obj-7a36c9d5c0eca108d5773090fae96148.mesh", "res://.godot/imported/circle_mesh.obj-7a36c9d5c0eca108d5773090fae96148.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

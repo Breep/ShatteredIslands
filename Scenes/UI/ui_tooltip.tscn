@@ -1,0 +1,107 @@
+[gd_scene load_steps=7 format=3 uid="uid://cum4bwnnvuilh"]
+
+[ext_resource type="Theme" uid="uid://c3afe8ow3fc6c" path="res://Resources/Theme/ui_panel_tooltip.tres" id="1_wqi74"]
+[ext_resource type="Texture2D" uid="uid://mbywgrya6a52" path="res://Data/Assets/Misc/Misc_IMG/timer circle.png" id="2_fbqj2"]
+[ext_resource type="FontFile" uid="uid://cl0jltnxq5gum" path="res://Data/font/GlacialIndifference-Bold.otf" id="3_l2bya"]
+[ext_resource type="Script" path="res://Scripts/Test/test_ui_tooltip.gd" id="3_tsmqo"]
+[ext_resource type="Texture2D" uid="uid://bd6cc2c6etfc2" path="res://Data/Assets/Card/Card_IMG/fire/icon flame.png" id="4_yipgy"]
+[ext_resource type="FontFile" uid="uid://dbqejd0leblna" path="res://Data/font/Nunito-Bold.ttf" id="5_6lpig"]
+
+[node name="Tooltip" type="Control"]
+z_index = 2
+custom_minimum_size = Vector2(450, 120)
+layout_mode = 3
+anchor_right = 0.4
+anchor_bottom = 0.2
+offset_right = -10.8
+offset_bottom = -9.60001
+grow_horizontal = 2
+mouse_filter = 1
+script = ExtResource("3_tsmqo")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource("1_wqi74")
+
+[node name="Loading" type="TextureProgressBar" parent="Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -18.8
+offset_top = 4.0
+offset_right = -6.80002
+offset_bottom = 16.0
+grow_horizontal = 0
+size_flags_horizontal = 3
+value = 100.0
+fill_mode = 4
+nine_patch_stretch = true
+texture_progress = ExtResource("2_fbqj2")
+
+[node name="Name" type="RichTextLabel" parent="Panel"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 52.0
+offset_top = 11.0
+offset_right = 266.0
+offset_bottom = 45.0
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_fonts/normal_font = ExtResource("3_l2bya")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[color=bl	ack]Fire Family[/color]"
+scroll_active = false
+
+[node name="Icon" type="TextureRect" parent="Panel"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 9.0
+offset_top = 3.0
+offset_right = 44.0
+offset_bottom = 37.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+texture = ExtResource("4_yipgy")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Description" type="RichTextLabel" parent="Panel"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 19.0
+offset_top = 47.0
+offset_right = 433.0
+offset_bottom = 119.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+mouse_filter = 1
+theme_override_fonts/normal_font = ExtResource("5_6lpig")
+bbcode_enabled = true
+text = "Une Famille qui permet de faire des dégats basé sur les % de points de vie.  [url=fire]🔥[/url]
+ 
+"
+scroll_active = false
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(430, 40, 20, 40)
+width = 2.0
+
+[node name="FreeTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="Panel" to="." method="_on_panel_mouse_entered"]
+[connection signal="meta_hover_ended" from="Panel/Description" to="." method="_on_description_meta_hover_ended"]
+[connection signal="meta_hover_started" from="Panel/Description" to="." method="_on_description_meta_hover_started"]
+[connection signal="timeout" from="FreeTimer" to="." method="_on_free_timer_timeout"]

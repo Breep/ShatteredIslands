@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://cmosol2ldhgyj"]
+[gd_scene load_steps=40 format=4 uid="uid://cmosol2ldhgyj"]
 
 [ext_resource type="PackedScene" uid="uid://ymer1a7cjs0b" path="res://Data/Assets/3D Frog Sanctuary/FBX/SM_Env_Grass_01.fbx" id="1_w3xk8"]
 [ext_resource type="Texture2D" uid="uid://fwg1gyvs5f3o" path="res://Data/Assets/3D Frog Sanctuary/Textures/Polygon_FrogShrine_Texture_01.png" id="2_vq6sx"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bc6o1vbq3boqp" path="res://Data/Assets/3D Frog Sanctuary/FBX/SM_Prop_Stand_01.fbx" id="8_ti5rq"]
 [ext_resource type="PackedScene" uid="uid://chu33osx0u3w8" path="res://Data/Assets/3D Frog Sanctuary/FBX/SM_Prop_Tree_01.fbx" id="9_muelb"]
 [ext_resource type="PackedScene" uid="uid://c7vmnvm3vvofj" path="res://Data/Assets/3D Frog Sanctuary/FBX/SM_Prop_Tree_02.fbx" id="10_moq4d"]
+[ext_resource type="PackedScene" uid="uid://flpuu5eu737y" path="res://Data/Assets/3D Frog Sanctuary/frog_canon.glb" id="11_26o6u"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4oudv"]
 albedo_texture = ExtResource("2_vq6sx")
@@ -267,6 +268,9 @@ shadow_mesh = SubResource("ArrayMesh_j3tkl")
 albedo_texture = ExtResource("2_vq6sx")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v60n3"]
+albedo_texture = ExtResource("2_vq6sx")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h3obd"]
 albedo_texture = ExtResource("2_vq6sx")
 
 [node name="Node3D" type="Node3D"]
@@ -545,6 +549,12 @@ light_size = 0.415
 spot_angle = 180.0
 spot_angle_attenuation = 0.482968
 
+[node name="frog_canon" parent="." instance=ExtResource("11_26o6u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.44328, 4.76837e-07, 3.08811)
+
+[node name="SM_Prop_Frog_01" parent="frog_canon" index="0"]
+material_override = SubResource("StandardMaterial3D_h3obd")
+
 [editable path="SM_Env_Grass_01"]
 [editable path="SM_Env_Base_01"]
 [editable path="SM_Prop_Frog_01"]
@@ -554,3 +564,4 @@ spot_angle_attenuation = 0.482968
 [editable path="SM_Prop_Shrine_Base_01/SM_Prop_Stand_01"]
 [editable path="SM_Prop_Shrine_Base_01/SM_Prop_Tree_01"]
 [editable path="SM_Prop_Shrine_Base_01/SM_Prop_Tree_02"]
+[editable path="frog_canon"]
