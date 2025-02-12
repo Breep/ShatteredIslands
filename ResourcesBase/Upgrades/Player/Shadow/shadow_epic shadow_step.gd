@@ -17,4 +17,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	return "[center]Every " + str(shadow_step_period) + \
-			" sec, teleport to the furthest enemy[/center]"
+			" sec, "  + PlayerUpgrade.TELEPORT + " to the furthest enemy[/center]"

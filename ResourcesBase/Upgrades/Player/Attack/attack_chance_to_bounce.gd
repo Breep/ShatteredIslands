@@ -16,5 +16,5 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]" + str(chance_to_bounce) + "% of chance for auto \
-			attack projectile to bounce on an second target[/center]"
+	return "[center]" + str(chance_to_bounce) + "% chance for auto \
+			attack projectile to "+ PlayerUpgrade.BOUNCE +" on an second target[/center]"

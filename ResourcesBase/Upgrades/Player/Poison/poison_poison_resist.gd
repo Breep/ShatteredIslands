@@ -16,4 +16,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]" + str(poison_resist[cardlvl - 1]) + " poison resistance[/center]"
+	return "[center]" + str(poison_resist[cardlvl - 1]) + "% "  + PlayerUpgrade.POISON_DAMAGE + " resistance[/center]"

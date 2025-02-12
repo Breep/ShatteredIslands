@@ -18,4 +18,4 @@ func get_description(cardlvl: int) -> String:
 		return "ERROR"
 	
 	return "[center]Critical strike inflict" + str(crit_poison_amount[cardlvl - 1]) + \
-			"% of damage as poison[/center]"
+			"% of damage as " + PlayerUpgrade.POISON + "[/center]"

@@ -17,6 +17,6 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]" + str(backfire_fire_shield_chance[cardlvl - 1]) + "% chance to inflict " + \
-			str(backfire_fire_shield_damage) + "% of enemy current hp as magic \
-			damage when being hit[/center]"
+	return "[center]" + str(backfire_fire_shield_chance[cardlvl - 1]) + "% chance to deal " + \
+			str(backfire_fire_shield_damage) + "% of enemy's current HP as " + PlayerUpgrade.MAGICAL_DAMAGE + \
+			" when hit[/center]"

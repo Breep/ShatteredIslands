@@ -19,5 +19,4 @@ func get_description(cardlvl: int) -> String:
 		return "ERROR"
 	
 	return "[center]" + str(backfire_poison_chance[cardlvl - 1]) + "% Chance to \
-			apply" + str(backfire_poison_stacks) + " stacks of [color=#006400]\
-			[wave freq=2.0 amp=5.0]poison[/wave][/color] when being attacked[/center]"
+			apply" + str(backfire_poison_stacks) + " stacks of "  + PlayerUpgrade.POISON + " when attacked[/center]"

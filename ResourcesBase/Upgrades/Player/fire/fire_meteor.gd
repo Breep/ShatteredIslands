@@ -22,7 +22,7 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center] Spawn meteor at enemy position that takes" +  str(meteor_deploy_time[cardlvl - 1]) + \
+	return "[center] Spawn meteor at enemy position that takes " +  str(meteor_deploy_time[cardlvl - 1]) + \
 			"s to come down. Meteor deals " + str(meteor_damage) + "% of enemies max hp \
-			in " + str(meteor_area_range) + "m area around. A new meteor spawn after " + \
-			str(meteor_cooldown) + "s.[/center]"
+			within " + str(meteor_area_range) + "m radius. A new meteor spawn after " + \
+			str(meteor_cooldown) + "s[/center]"

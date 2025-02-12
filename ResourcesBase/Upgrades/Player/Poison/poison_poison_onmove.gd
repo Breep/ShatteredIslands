@@ -19,5 +19,5 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]Inflict " + str(movement_stacks_number[cardlvl - 1]) + \
-	" stacks of poison for every" + str(movement_stacks_distance) + "m you move[/center]"
+	return "[center]Inflict " + str(movement_stacks_number[cardlvl - 1]) \
+	 + PlayerUpgrade.POISON + " stacks, for every" + str(movement_stacks_distance) + "m moved[/center]"

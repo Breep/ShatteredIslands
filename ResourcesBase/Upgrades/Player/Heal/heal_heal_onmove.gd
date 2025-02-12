@@ -19,5 +19,5 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]Heal ally for" + str(movement_heal_amount[cardlvl - 1]) + \
-	" every " + str(movement_heal_distance) + "m you move[/center]"
+	return "[center]" + PlayerUpgrade.HEAL + " for " + str(movement_heal_amount[cardlvl - 1]) + \
+			" every " + str(movement_heal_distance) + "m you moved[/center]"

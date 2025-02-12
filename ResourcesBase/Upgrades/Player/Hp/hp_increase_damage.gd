@@ -19,6 +19,6 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]Every " + str(damage_increased_by_hp_lost_hp_number) + \
-			"hp, increase physical damage by " + \
+	return "[center]For every " + str(damage_increased_by_hp_lost_hp_number) + \
+			" max HP, increase " + PlayerUpgrade.PHYSICAL_DAMAGE + " by " + \
 			str(damage_increased_by_hp_lost_percentage[cardlvl - 1]) + "[/center]"

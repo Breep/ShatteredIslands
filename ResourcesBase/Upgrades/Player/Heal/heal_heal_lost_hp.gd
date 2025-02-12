@@ -19,5 +19,5 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]Self heal for " + str(lost_hp_regen_percentage[cardlvl - 1]) + \
+	return "[center]Self "  + PlayerUpgrade.HEAL +  " for " + str(lost_hp_regen_percentage[cardlvl - 1]) + \
 			"% of your lost health every " + str(lost_hp_regen_period) + "[/center]"

@@ -19,5 +19,5 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center] [url=fire]Heal [/url] all allies every " + str(heal_area_period) + " for " \
-			+ str(heal_area_percentage) +"% of their max life[/center]"
+	return "[center]" + PlayerUpgrade.HEAL +  " allies every " + str(heal_area_period) + " for " \
+			+ str(heal_area_percentage) +"% of their max hp[/center]"

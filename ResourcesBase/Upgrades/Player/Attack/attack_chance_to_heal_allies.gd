@@ -18,6 +18,5 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]" + str(healing_attack_chance[cardlvl-1]) + "% of chance to [color=#FFFF00]\
-			[wave freq=2.0 amp=5.0]heal[/wave][/color] allies for " + \
-			str(healing_attack_heal_amount) + " hp on Attack[/center]"
+	return "[center]" + str(healing_attack_chance[cardlvl-1]) + "% chance to" + PlayerUpgrade.HEAL + " allies for " + \
+			str(healing_attack_heal_amount) + " hp on attack[/center]"

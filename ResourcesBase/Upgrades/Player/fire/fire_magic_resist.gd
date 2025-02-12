@@ -16,4 +16,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]" + str(fire_magic_resist[cardlvl - 1]) + "% magic damage reduction[/center]"
+	return "[center]" + str(fire_magic_resist[cardlvl - 1]) + "% " + PlayerUpgrade.MAGICAL_DAMAGE + " reduction[/center]"

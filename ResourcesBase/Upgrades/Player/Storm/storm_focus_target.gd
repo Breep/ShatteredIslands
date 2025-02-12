@@ -23,6 +23,6 @@ func get_description(cardlvl: int) -> String:
 		return "ERROR"
 	
 	return "[center]While attacking the same target for" + str(time_before_activating) \
-			+ " seconds, gain Focus. Focus increases critical hit chance by " \
-			+ str(crit_onfocus_target_min[cardlvl - 1]) + "% every second, \
+			+ " seconds, gain " + PlayerUpgrade.FOCUS + ". Focus increases critical hit chance by " \
+			+ str(crit_onfocus_target_min[cardlvl - 1]) + "% per second, \
 			up to " + str(crit_onfocus_target_max[cardlvl - 1]) + "%[/center]"

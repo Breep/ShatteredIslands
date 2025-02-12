@@ -22,4 +22,4 @@ func get_description(cardlvl: int) -> String:
 		return "ERROR"
 	
 	return "[center]Create a poison cloud that inflict " + str(poison_cloud_stacks_number[cardlvl - 1]) \
-			 + " stacks of poison to nearby enemies every " + str(poison_cloud_stacks_period) + "sec[/center]"
+			 + " stacks of " + PlayerUpgrade.POISON + " to nearby enemies every " + str(poison_cloud_stacks_period) + "s[/center]"

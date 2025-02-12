@@ -18,4 +18,5 @@ func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > shadow_bolt_damage.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
-	return "[center]For every 1m you move, lanch a shadowbolt to the furthest enemy dealing " + str(shadow_bolt_damage[cardlvl - 1]) +" damage[/center]"
+	return "[center]For every 1m you move, launch a Shadowbolt at the furthest enemy dealing "\
+			+ str(shadow_bolt_damage[cardlvl - 1]) + " " + PlayerUpgrade.MAGICAL_DAMAGE + "[/center]"

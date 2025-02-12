@@ -17,4 +17,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]Increase max Hp by " + str(hp_increase_hp[cardlvl - 1]) + "[/center]"
+	return "[center]Increase max HP by " + str(hp_increase_hp[cardlvl - 1]) + "[/center]"

@@ -23,4 +23,4 @@ func get_description(cardlvl: int) -> String:
 	
 	return "[center]When you reach 0 HP, revive after " + str(revive_after_death_time) + \
 			"s, " + str(revive_after_death_percentage_life) + "% of your max HP, and deal " + \
-			 str(revive_after_death_percentage_damage) + "% of your max health as damage[/center]"
+			 str(revive_after_death_percentage_damage) + "% of your max HP as " + PlayerUpgrade.PHYSICAL_DAMAGE + "[/center]"

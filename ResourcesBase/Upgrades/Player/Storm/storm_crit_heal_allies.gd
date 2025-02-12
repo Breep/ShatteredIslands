@@ -17,5 +17,5 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]Critical damage heal allies for " + \
-			str(healing_crit_amount[cardlvl - 1]) + "% damage dealt[/center]"
+	return "[center]Critical strike " + PlayerUpgrade.HEAL + " for " + \
+			str(healing_crit_amount[cardlvl - 1]) + "% of damage dealt[/center]"

@@ -19,5 +19,5 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]Deal damage to the target for " + str(hp_fire_damage[cardlvl - 1]) + \
-			"% of your max life every " + str(hp_fire_period) + "s[/center]"
+	return "[center]Deal " + PlayerUpgrade.MAGICAL_DAMAGE + " for " + str(hp_fire_damage[cardlvl - 1]) + \
+			"% of your max HP every " + str(hp_fire_period) + "s[/center]"

@@ -19,5 +19,5 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	return "[center]After moving " + str(distance_to_activate) + \
-			"m, you are invincible for " + \
+			"m, become " + PlayerUpgrade.INVINCIBLE + " for " + \
 			str(invincibility_time[cardlvl - 1]) + "s. Stackable[/center]"
