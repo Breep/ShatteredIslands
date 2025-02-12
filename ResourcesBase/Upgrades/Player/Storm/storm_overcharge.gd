@@ -1,7 +1,7 @@
 class_name StormOvercharge
 extends PlayerUpgrade
 
-@export var overcharge_percent: int # % of damage transmited to second target
+@export var overcharge_percent: float # % of damage transmited to second target
 
 func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 	if cardlvl != 1:

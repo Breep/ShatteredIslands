@@ -128,6 +128,7 @@ func take_damage(source: Character, damage: int, damage_type: Utils.DamageType, 
 	_character_visual.damage_popup(damage, damage_type, is_critical)
 	_character_visual.update_health_bar(stats.health, stats.health_max)
 	if stats.health <= 0 and !_is_dead:
+		_life_manager.source_is_dead()
 		dead.emit(self)
 		_is_dead = true
 		_auto_attack_manager.stop()

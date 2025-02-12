@@ -24,7 +24,7 @@ var focus_target_crit_current: float # current value of crit bonus
 var focus_target_duration: float # time needed to go from min to max bonus value (in s)
 
 var overcharge_activated: bool # if overcharge is activated or not
-var overcharge_percent: bool # % of damage transmited
+var overcharge_percent: float # % of damage transmited
 
 var lost_hp_crit_multiplier_activated: bool # If this skill is activated
 var lost_hp_crit_multiplier_amount: int # % of crit damage increase

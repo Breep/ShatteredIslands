@@ -53,7 +53,6 @@ func _construct_new_fire_trail_point() -> void:
 	new_dictionary_entry["area"] = fire_trail_area
 	new_dictionary_entry["time"] = Time.get_ticks_msec()
 	_areas_dictionaries.append(new_dictionary_entry)
-	print("New fire trail area constructed !", fire_trail_area)
 
 
 func _remove_outdated_fire_trail_points() -> void:
@@ -91,5 +90,4 @@ func _on_construction_timer_timeout() -> void:
 func _on_damage_timer_timeout() -> void:
 	for character in _characters_inside:
 		if character.team != _source.team:
-			print("FIRE TRAIL damage on ", character.player.name)
 			_source.attack_percent(character, _damage_percent, Utils.DamageType.MAGIC, Utils.PercentModifier.MAX_HP)

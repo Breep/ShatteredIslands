@@ -98,6 +98,14 @@ func notice_critical_damage(char_who_received_the_crit: Character, damage: int) 
 		if not _crit_move_speed_timer.is_stopped():
 			_crit_move_speed_timer.stop()
 		_crit_move_speed_timer.start()
+	
+	# [Overcharge]
+	if _storm_stats.overcharge_activated:
+		var target = _source.target_manager.get_closest_enemy_from(char_who_received_the_crit)
+		if target != null:
+			var overcharge_damage: int = (damage * _storm_stats.overcharge_percent / 100.0) as int
+			if multiplayer.get_unique_id() == 1: print(char_who_received_the_crit.player.name, " ", target.player.name)
+			_source.attack(target, overcharge_damage, Utils.DamageType.MAGIC)
 
 
 func focus_changed(focused: bool) -> void:

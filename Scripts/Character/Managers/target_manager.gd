@@ -81,7 +81,7 @@ func get_closest_enemy_from(from_character: Character) -> Character:
 		return null
 	
 	var closest_enemy = enemies_copy[0]
-	for enemy in _enemies:
+	for enemy in enemies_copy:
 		var enemy_distance = (enemy.position - from_character.position).length_squared()
 		var closest_enemy_distance = (closest_enemy.position - from_character.position).length_squared()
 		if enemy_distance < closest_enemy_distance:
