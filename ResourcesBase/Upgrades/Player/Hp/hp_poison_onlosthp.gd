@@ -22,5 +22,5 @@ func get_description(cardlvl: int) -> String:
 		return "ERROR"
 	
 	return "[center]Every " + str(poison_by_lost_hp_period) + "s, for every " + \
-			str(poison_by_lost_hp_hp_number) + "hp lost compare to max hp, inflict " + \
-			str(poison_by_lost_hp_stacks[cardlvl - 1]) + " stack of poison to a random enemy[/center]"
+			str(poison_by_lost_hp_hp_number) + "HP lost compared to max HP, inflict " + \
+			str(poison_by_lost_hp_stacks[cardlvl - 1]) + " stacks of " + PlayerUpgrade.POISON + "[/center]"

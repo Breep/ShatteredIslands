@@ -17,4 +17,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]Multiply poison damage by " + str(multiply_damage) +"[/center]"
+	return "[center]Multiply " + PlayerUpgrade.POISON + " damage by " + str(multiply_damage) +"[/center]"

@@ -99,6 +99,6 @@ func _animation_3d_rotate() -> void:
 func _animation_reset_3d_rotation() -> void:
 	if _tween_rot:
 		_tween_rot.kill()
-	_tween_rot = create_tween().set_ease(Tween.EASE_OUT_IN).set_trans(Tween.TRANS_BACK).set_parallel(true)
+	_tween_rot = create_tween().set_ease(Tween.EASE_OUT_IN).set_trans(Tween.TRANS_LINEAR).set_parallel(true)
 	_tween_rot.tween_property(_card_texture.material, "shader_parameter/x_rot", 0.0, 0.5)
 	_tween_rot.tween_property(_card_texture.material, "shader_parameter/y_rot", 0.0, 0.5)

@@ -16,6 +16,6 @@ func get_description(cardlvl: int) -> String:
 	if cardlvl != 1:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
-	
-	return "[center]Every critical strike create an electric arc to the closest \
-			enemy, dealing" + str(overcharge_percent) + "% of original damage[/center]"
+		
+	return "[center]Each critical strike triggers an electric arc to the nearest enemy,\
+	 		dealing " + str(overcharge_percent) + "% of the original damage[/center]"

@@ -19,6 +19,6 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]Every time you heal an ally, " + str(poison_stacks_chance) + \
+	return "[center]When you " + PlayerUpgrade.HEAL + ", " + str(poison_stacks_chance) + \
 	"% chance to apply " + str(poison_stacks_number[cardlvl - 1]) + \
-	" stacks of poison to a random enemy[/center]"
+	" stacks of " + PlayerUpgrade.POISON + "[/center]"

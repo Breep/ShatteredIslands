@@ -20,5 +20,5 @@ func get_description(cardlvl: int) -> String:
 		return "ERROR"
 	
 	return "[center]For every " + str(hp_increased_on_move_distance) + \
-			"m , hp max increased by " + \
+			"m moved, HP max increased by " + \
 			str(hp_increased_on_move_hp[cardlvl - 1]) +"[/center]"

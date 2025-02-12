@@ -21,6 +21,6 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]When moving, leave a trail of fire behind. Trail of fire deals " + \
-			str(trail_damage[cardlvl - 1]) + "% of enemy current hp damage every" + \
-			str(trail_period) + "sec and last " + str(trail_life_time) + "s.[/center]"
+	return "[center]While moving, leave a fire trail dealing " + \
+			str(trail_damage[cardlvl - 1]) + "% of enemy's current hp as " + PlayerUpgrade.MAGICAL_DAMAGE + " every " + \
+			str(trail_period) + "sec, lasting " + str(trail_life_time) + "s.[/center]"

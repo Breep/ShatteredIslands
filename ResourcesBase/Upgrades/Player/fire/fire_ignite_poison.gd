@@ -19,7 +19,5 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]For every " + str(poison_fire_stacks_lost) + " lost stack of \
-			[color=#006400][wave freq=2.0 amp=5.0][hint=inflict 1 damage over time/stack]Poison\
-			[/hint][/wave][/color], deals" + str(poison_fire_damage[cardlvl - 1]) + \
-			"% damage of their max health[/center]"
+	return "[center]For each " + str(poison_fire_stacks_lost) + " stack of " + PlayerUpgrade.POISON + " lost, deal " + \
+			str(poison_fire_damage[cardlvl - 1]) + "% of the target's max hp as " + PlayerUpgrade.MAGICAL_DAMAGE + "[/center]"

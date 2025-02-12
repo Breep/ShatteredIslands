@@ -19,5 +19,5 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]Send a firebolt every " + str(firebolt_period) + "s, that deals " + \
-			str(firebolt_damage[cardlvl - 1]) + "% current life of the target[/center]"
+	return "[center]Send a firebolt every " + str(firebolt_period) + "s, dealing " + \
+			str(firebolt_damage[cardlvl - 1]) + "% of the target's current HP as " + PlayerUpgrade.MAGICAL_DAMAGE + "[/center]"

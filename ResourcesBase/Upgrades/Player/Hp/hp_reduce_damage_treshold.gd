@@ -20,5 +20,5 @@ func get_description(cardlvl: int) -> String:
 		return "ERROR"
 	
 	return "[center]Reduce damage received below " + \
-			str(damage_taken_reduced_below_treshold_threshold) + "% by " + \
-			str(hp_damage_reduce_below_treshold[cardlvl - 1]) + "[/center]"
+			str(damage_taken_reduced_below_treshold_threshold) + "% HP by " + \
+			str(hp_damage_reduce_below_treshold[cardlvl - 1]) + "%[/center]"

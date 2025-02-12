@@ -19,5 +19,5 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]" + str(reduce_damage_received) + "% dammage received reduced BUT " \
-			+ str(reduce_damage_done) + "% dammage done reduced[/center]"
+	return "[center]" + str(reduce_damage_received) + "% dammage received reduced BUT dammage dealt also reduced by "  \
+			+ str(reduce_damage_done) + "%[/center]"

@@ -19,6 +19,6 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]For " + str(lost_hp_crit_multiplier_hp_number) + \
-			"hp lost compare to max hp, increase crit dammage by" + \
+	return "[center]For each " + str(lost_hp_crit_multiplier_hp_number) + \
+			"HP lost, increase " + PlayerUpgrade.CRITICAL_MULTIPLIER + " by" + \
 			str(lost_hp_crit_multiplier_amount[cardlvl - 1]) + "%[/center]"

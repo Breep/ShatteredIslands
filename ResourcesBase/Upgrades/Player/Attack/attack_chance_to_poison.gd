@@ -18,6 +18,5 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]" + str(poison_stacks_chance[cardlvl - 1]) + "% of chance to apply " + \
-			str(poison_stacks_amount) + "stacks of [color=#006400][wave freq=2.0 amp=5.0]poison\
-			[/wave][/color] on attack[/center]"
+	return "[center]" + str(poison_stacks_chance[cardlvl - 1]) + "% chance to apply " + \
+			str(poison_stacks_amount) + " stacks of " + PlayerUpgrade.BOUNCE + " on attack[/center]"

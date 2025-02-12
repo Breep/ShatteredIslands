@@ -19,6 +19,5 @@ func get_description(cardlvl: int) -> String:
 		return "ERROR"
 	
 	return "[center]" + str(backfire_armor_gain_chance[cardlvl - 1]) + "% chance to gain \
-			" + str(backfire_armor_gain_stacks) + " stacks of [color=#8B4513]\
-			[wave freq=2.0 amp=5.0][hint=Absorb 1 damage] armor[/hint][/wave][/color] \
-			when being attacked[/center]"
+			" + str(backfire_armor_gain_stacks) + " stacks of "  + PlayerUpgrade.ARMOR +  \
+			" when attacked[/center]"

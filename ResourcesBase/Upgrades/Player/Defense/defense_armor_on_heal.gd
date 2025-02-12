@@ -17,6 +17,5 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center] Heal apply [color=#8B4513][wave freq=2.0 amp=5.0][hint=Absorb 1 damage] 
-			armor[/hint][/wave][/color] to target for" + str(healing_armor_percent[cardlvl - 1]) + \
+	return "[center]" + PlayerUpgrade.HEAL + " grants " + PlayerUpgrade.ARMOR + " to target for " + str(healing_armor_percent[cardlvl - 1]) + \
 			"% of the heal amount[/center]"

@@ -15,4 +15,4 @@ func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > shadow_shadow_regen_move.size():
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
-	return "[center]Increase move regen by " + str(shadow_shadow_regen_move[cardlvl - 1]) +"[/center]"
+	return "[center]Increase " + PlayerUpgrade.ENERGY_REGEN + " by " + str(shadow_shadow_regen_move[cardlvl - 1]) +"[/center]"

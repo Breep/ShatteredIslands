@@ -19,6 +19,6 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]Everytime a heal is done by the player, " + \
-	str(heal_projectile_chance) + "% chance to launch a magic projectile to the \
-	closest enemy dealing " + str(heal_projectile_damage[cardlvl - 1]) + " damage[/center]"
+	return "[center]Each "  + PlayerUpgrade.HEAL +  " has a " + \
+			str(heal_projectile_chance) + "% chance to launch a projectile at the \
+			nearest enemy, dealing " + str(heal_projectile_damage[cardlvl - 1]) + " "  + PlayerUpgrade.MAGICAL_DAMAGE + "[/center]"

@@ -21,5 +21,5 @@ func get_description(cardlvl: int) -> String:
 		return "ERROR"
 	
 	return "[center]For " + str(attack_speed_overtime_duration) + "s, increase auto \
-			attack speed by" + str(attack_speed_overtime_min[cardlvl-1]) + \
+			attack speed by " + str(attack_speed_overtime_min[cardlvl-1]) + \
 			"% up to " + str(attack_speed_overtime_max[cardlvl - 1]) + "%[/center]"

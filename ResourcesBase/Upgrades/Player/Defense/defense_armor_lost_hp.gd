@@ -18,6 +18,5 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]Gain [color=#8B4513][wave freq=2.0 amp=5.0][hint=Absorb 1 damage] \
-			armor[/wave][/color] equal to " + str(lost_hp_armor_gain_percent[cardlvl - 1]) + \
-			"% of lost hp every " + str(lost_hp_armor_gain_period) + "[/center]"
+	return "[center]Gain" + PlayerUpgrade.ARMOR + "equal to " + str(lost_hp_armor_gain_percent[cardlvl - 1]) + \
+			"% of lost hp every " + str(lost_hp_armor_gain_period) + "s[/center]"

@@ -1,24 +1,24 @@
 [gd_scene load_steps=13 format=3 uid="uid://gssru8asors0"]
 
-[ext_resource type="Texture2D" uid="uid://sex75jj3yj3x" path="res://Data/Assets/Buying_area/UI/empty_heart.png" id="1_8ba7i"]
-[ext_resource type="Texture2D" uid="uid://bx6nb7alldywa" path="res://Data/Assets/Buying_area/UI/red_hexa-removebg-preview.png" id="1_85wgf"]
-[ext_resource type="Script" path="res://player_life_info.gd" id="1_ikviq"]
-[ext_resource type="Texture2D" uid="uid://dl132mivg8ol4" path="res://Data/Assets/Card/ICONS/HP.png" id="2_5usst"]
-[ext_resource type="Texture2D" uid="uid://djv4k1n6htmv2" path="res://Data/Assets/Buying_area/UI/black label.png" id="2_f7vvn"]
-[ext_resource type="Texture2D" uid="uid://ct3wly5rc0ni" path="res://Data/Assets/Character/PNG/Wraith_01/PNG Sequences/Attacking/Wraith_01_Attack_000.png" id="2_y73pl"]
-[ext_resource type="FontFile" uid="uid://cl0jltnxq5gum" path="res://Data/font/GlacialIndifference-Bold.otf" id="3_bbaa8"]
-[ext_resource type="Texture2D" uid="uid://cia42t0jcdkfg" path="res://Data/Assets/Card/ICONS/HP color.png" id="7_cadi4"]
-[ext_resource type="Shader" path="res://Shaders/UI/hearth_liquid.gdshader" id="8_cmix8"]
+[ext_resource type="Script" path="res://Scripts/Buying_area3d/player_life_info.gd" id="1_q03jn"]
+[ext_resource type="Texture2D" uid="uid://djv4k1n6htmv2" path="res://Data/Assets/Buying_area/UI/black label.png" id="2_6y72h"]
+[ext_resource type="FontFile" uid="uid://cl0jltnxq5gum" path="res://Data/font/GlacialIndifference-Bold.otf" id="3_4kuni"]
+[ext_resource type="Texture2D" uid="uid://bx6nb7alldywa" path="res://Data/Assets/Buying_area/UI/red_hexa-removebg-preview.png" id="4_qsio0"]
+[ext_resource type="Texture2D" uid="uid://ct3wly5rc0ni" path="res://Data/Assets/Character/PNG/Wraith_01/PNG Sequences/Attacking/Wraith_01_Attack_000.png" id="5_vvm77"]
+[ext_resource type="Texture2D" uid="uid://dl132mivg8ol4" path="res://Data/Assets/Card/ICONS/HP.png" id="6_trcdy"]
+[ext_resource type="Texture2D" uid="uid://sex75jj3yj3x" path="res://Data/Assets/Buying_area/UI/empty_heart.png" id="7_75qd8"]
+[ext_resource type="Texture2D" uid="uid://cia42t0jcdkfg" path="res://Data/Assets/Card/ICONS/HP color.png" id="8_nn0kl"]
+[ext_resource type="Shader" path="res://Shaders/UI/hearth_liquid.gdshader" id="9_35w5e"]
 
 [sub_resource type="Theme" id="Theme_7h1j3"]
 Label/colors/font_color = Color(1, 1, 1, 1)
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
 Label/colors/font_shadow_color = Color(0, 0, 0, 0.373)
 Label/font_sizes/font_size = 12
-Label/fonts/font = ExtResource("3_bbaa8")
+Label/fonts/font = ExtResource("3_4kuni")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kkj66"]
-shader = ExtResource("8_cmix8")
+shader = ExtResource("9_35w5e")
 shader_parameter/bg_color = Color(0.920071, 0.934238, 0.924132, 1)
 shader_parameter/uv_scale = 0.1
 shader_parameter/percentage = 1.0
@@ -45,7 +45,7 @@ anchor_bottom = 0.062
 offset_right = 11.68
 offset_bottom = 11.824
 mouse_filter = 2
-script = ExtResource("1_ikviq")
+script = ExtResource("1_q03jn")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 1
@@ -64,7 +64,7 @@ offset_left = -59.0
 offset_top = 15.0
 offset_right = 42.0
 offset_bottom = 37.0
-texture = ExtResource("2_f7vvn")
+texture = ExtResource("2_6y72h")
 expand_mode = 1
 
 [node name="PlayerName" type="Label" parent="Control/BlackLabel"]
@@ -89,7 +89,7 @@ offset_top = -15.0
 offset_bottom = -13.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_85wgf")
+texture = ExtResource("4_qsio0")
 expand_mode = 1
 stretch_mode = 5
 
@@ -101,7 +101,7 @@ anchor_bottom = 1.0
 offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_y73pl")
+texture = ExtResource("5_vvm77")
 expand_mode = 1
 
 [node name="Health_background" type="TextureProgressBar" parent="Control"]
@@ -118,7 +118,7 @@ max_value = 30.0
 value = 28.0
 fill_mode = 3
 nine_patch_stretch = true
-texture_progress = ExtResource("2_5usst")
+texture_progress = ExtResource("6_trcdy")
 
 [node name="Health" type="TextureProgressBar" parent="Control"]
 unique_name_in_owner = true
@@ -137,8 +137,8 @@ max_value = 30.0
 value = 29.0
 fill_mode = 3
 nine_patch_stretch = true
-texture_under = ExtResource("1_8ba7i")
-texture_progress = ExtResource("7_cadi4")
+texture_under = ExtResource("7_75qd8")
+texture_progress = ExtResource("8_nn0kl")
 
 [node name="Health2" type="TextureProgressBar" parent="Control/Health"]
 unique_name_in_owner = true
@@ -156,8 +156,8 @@ max_value = 30.0
 value = 27.0
 fill_mode = 3
 nine_patch_stretch = true
-texture_under = ExtResource("1_8ba7i")
-texture_progress = ExtResource("7_cadi4")
+texture_under = ExtResource("7_75qd8")
+texture_progress = ExtResource("8_nn0kl")
 
 [node name="HealthValue" type="Label" parent="."]
 unique_name_in_owner = true
@@ -176,7 +176,7 @@ grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_bbaa8")
+theme_override_fonts/font = ExtResource("3_4kuni")
 theme_override_font_sizes/font_size = 22
 text = "27
 "

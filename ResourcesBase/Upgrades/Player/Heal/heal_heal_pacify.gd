@@ -17,6 +17,5 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]After healing an ally, " + str(pacify_enemy_chance) + \
-			"% chance to pacify the next " + str(pacify_enemy_chance[cardlvl - 1]) + \
-			" attack of an enemy[/center]"
+	return "[center]When you " + PlayerUpgrade.HEAL + ", " + str(pacify_enemy_chance[cardlvl - 1]) + \
+			"% chance to " + PlayerUpgrade.PACIFY + " a random enemy[/center]"

@@ -18,6 +18,5 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]Gain" + str(periodic_armor_stacks_amount[cardlvl - 1]) + " [color=#8B4513]\
-			[wave freq=2.0 amp=5.0[hint=Absorb 1 damage][hint] armor[/wave][/color] every " + \
-			str(periodic_armor_stacks_period) + "s.[/center]"
+	return "[center]Gain " + str(periodic_armor_stacks_amount[cardlvl - 1]) + " stacks of " + PlayerUpgrade.ARMOR + " every " + \
+			str(periodic_armor_stacks_period) + "s[/center]"

@@ -21,4 +21,4 @@ func get_description(cardlvl: int) -> String:
 	
 	return "[center]Every " + str(fire_attack_period) + " attacks, also deal" + \
 			str(fire_attack_damage[cardlvl - 1]) + "% of the enemy current life \
-			as magic damage[/center]"
+			as "+ PlayerUpgrade.MAGICAL_DAMAGE + "[/center]"

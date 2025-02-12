@@ -20,5 +20,5 @@ func get_description(cardlvl: int) -> String:
 		return "ERROR"
 	
 	return "[center]Gain" + str(movement_armor_stacks_amount[cardlvl - 1]) + \
-			"[color=#8B4513][wave freq=2.0 amp=5.0][hint=Stun 1sec] armor[/hint][/wave][/color] \
+			" "+ PlayerUpgrade.ARMOR +" \
 			for every " + str(movement_armor_stacks_distance) + "m moved[/center]"

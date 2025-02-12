@@ -19,6 +19,6 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]Crit increase move speed by" + \
+	return "[center]Critical strike increase" +  PlayerUpgrade.MOVE_SPEED + " by" + \
 			str(crit_move_speed_amount[cardlvl - 1]) + "% for " + \
 			str(crit_move_speed_duration) + "s[/center]"

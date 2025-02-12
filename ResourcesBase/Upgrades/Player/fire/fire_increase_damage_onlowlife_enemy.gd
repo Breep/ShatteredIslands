@@ -21,4 +21,4 @@ func get_description(cardlvl: int) -> String:
 	
 	return "[center]Deal" + str(damage_increase_on_low_life_enemy_percent[cardlvl - 1]) + \
 			"% more damage to enemies below " + str(damage_increase_on_low_life_enemy_threshold) + \
-			"%[/center]"
+			"% of their hp[/center]"
