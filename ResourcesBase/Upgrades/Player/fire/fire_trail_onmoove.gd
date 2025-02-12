@@ -1,4 +1,4 @@
-class_name FireTrail
+class_name UpgradeFireTrail
 extends PlayerUpgrade
 
 @export var trail_damage: Array[float]
