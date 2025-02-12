@@ -1,7 +1,9 @@
 class_name SerenityManager
 extends Node
 
-# ============================== Signals ==============================
+# ============================== Constant ==============================
+
+const PACIFY_DAMAGE_REDUCTION_PERCENT: float = 50 # Percentage of damage reduction when pacified
 
 # ============================== Private variables ==============================
 
@@ -36,32 +38,50 @@ func stop() -> void:
 
 
 func notify_heal() -> void:
-	# Magic heal
+	# [Magic heal]
 	if _heal_stats.heal_projectile_activated and Utils.is_randomize_modifier_active(_heal_stats.heal_projectile_chance):
-		var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST_ENEMY)
+		var target: Character = _source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST_ENEMY)
 		if target == null:
 			return
 		_source.attack(target, _heal_stats.heal_projectile_damage, Utils.DamageType.MAGIC)
 	
-	# Hazardous healing
+	# [Hazardous healing]
 	if _heal_stats.poison_stacks_activated and Utils.is_randomize_modifier_active(_heal_stats.poison_stacks_chance):
-		var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.RANDOM_ENEMY)
+		var target: Character = _source.target_manager.get_target(TargetManager.TargettingStrategy.RANDOM_ENEMY)
 		if target == null:
 			return
 		target.take_poison_stacks(_source, _heal_stats.poison_stacks_number, 5) # TODO relier à la duration du poison
+	
+	# [Panda-cify]
+	if _heal_stats.pacify_enemy_activated and Utils.is_randomize_modifier_active(_heal_stats.pacify_enemy_chance):
+		var target: Character = _source.target_manager.get_target(TargetManager.TargettingStrategy.RANDOM_ENEMY)
+		if target == null:
+			return
+		target.stats.heal.pacified = true
+		if multiplayer.get_unique_id() == 1:
+			print("PACIFY MY ENEMY")
+
+
+func get_reduced_damage_dealed_from_pacify(damage: int) -> int:
+	if _heal_stats.pacified:
+		_heal_stats.pacified = false
+		var damage_reduction: int = (damage * PACIFY_DAMAGE_REDUCTION_PERCENT / 100.0) as int
+		if multiplayer.get_unique_id() == 1: print("Damage reduced: ", damage_reduction)
+		return damage - damage_reduction
+	return damage
 
 # ============================== Private functions ==============================
 
 func _create_optional_timers() -> void:
-	# Flash heal
+	# [Flash heal]
 	if _heal_stats.periodic_heal_activated:
 		_optional_timers.append(Utils.create_optional_timer(self, _heal_stats.periodic_heal_period, _on_periodic_heal_timer_timeout))
 	
-	# Survivor
+	# [Survivor]
 	if _heal_stats.lost_hp_regen_activated:
 		_optional_timers.append(Utils.create_optional_timer(self, _heal_stats.lost_hp_regen_period, _on_lost_hp_regen_timer_timeout))
 
-	# Pacific wave
+	# [Pacific wave]
 	if _heal_stats.epic_heal_area_activated:
 		_optional_timers.append(Utils.create_optional_timer(self, _heal_stats.epic_heal_area_period, _on_epic_heal_area_timer_timeout))
 

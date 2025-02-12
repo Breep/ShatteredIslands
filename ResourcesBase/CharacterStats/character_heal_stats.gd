@@ -13,7 +13,8 @@ var heal_projectile_activated: bool # If the skill is activated
 var heal_projectile_damage: int # Damage done by the healing projectile
 var heal_projectile_chance: int # % of chance to send a heal_projectile every time the character heals someone
 
-var pacify_enemy_attack_number: int # Number of attacks pacified on the enemy
+var pacified: bool # If the character is pacified (HealManager set this, Character attack use it)
+var pacify_enemy_activated: bool # If the skill is activated
 var pacify_enemy_chance: int # % of chance to proc the pacify_enemy_attack_number after a heal
 
 var epic_heal_area_activated: int # If the epic healing area is activated

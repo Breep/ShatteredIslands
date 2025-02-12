@@ -167,5 +167,3 @@ func _on_focus_timer_timeout() -> void:
 
 func _on_crit_move_speed_timer_timeout() -> void:
 	_storm_stats.speed_boosted = false
-	if multiplayer.get_unique_id() == 1 and _storm_stats.crit_move_speed_activated:
-		print("MOVE SPEED BOOST DISABLED")

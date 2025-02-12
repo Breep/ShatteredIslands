@@ -94,7 +94,8 @@ func attack(target: Character, damage: int, damage_type: Utils.DamageType) -> vo
 	if damage_type == Utils.DamageType.MAGIC:
 		damage = _fire_manager.get_increased_damage(damage, damage_type) # Increase % of MAGICAL damage
 	
-	damage = _defense_manager.get_reduced_damage_taken_from_protector(damage) # Reduce % of ALL damage
+	damage = _defense_manager.get_reduced_damage_dealed_from_protector(damage) # Reduce % of ALL damage
+	damage = _heal_manager.get_reduced_damage_dealed_from_pacify(damage) # Reduce % of ALL damage
 	target.take_damage(self, damage, damage_type, is_critical)
 
 
@@ -115,7 +116,7 @@ func attack_percent(target: Character, damage_percent: float, damage_type: Utils
 func take_damage(source: Character, damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
 	damage = _storm_manager.get_increased_critical_damage(damage, is_critical) # Increase ALL critical damage
 	
-	damage = _defense_manager.get_reduced_damage_taken_from_own_protector(damage) # Reduce % of ALL damage
+	damage = _defense_manager.get_reduced_damage_taken_from_protector(damage) # Reduce % of ALL damage
 	damage = _life_manager.get_reduced_damage(damage) # Reduce % of ALL damage
 	damage = _fire_manager.get_reduced_damage(damage, damage_type) # Reduce % of MAGIC damage
 	damage = _defense_manager.get_reduced_damage_taken_from_armor(source, damage, damage_type) # Reduce flat of PHYSIC AND MAGIC damage

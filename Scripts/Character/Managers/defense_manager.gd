@@ -38,7 +38,7 @@ func stop() -> void:
 		timer.stop()
 
 
-func get_reduced_damage_taken_from_protector(damage: int) -> int:
+func get_reduced_damage_dealed_from_protector(damage: int) -> int:
 	if not _defense_stats.protector_activated:
 		return damage
 	
@@ -46,7 +46,7 @@ func get_reduced_damage_taken_from_protector(damage: int) -> int:
 	return damage - damage_reduction
 
 
-func get_reduced_damage_taken_from_own_protector(damage: int) -> int:
+func get_reduced_damage_taken_from_protector(damage: int) -> int:
 	if not _defense_stats.protector_activated:
 		return damage
 	
