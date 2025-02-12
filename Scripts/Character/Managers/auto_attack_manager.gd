@@ -3,9 +3,9 @@ extends Node
 
 # ============================== Signals ==============================
 
-signal armor_gained(armor_stacks: int)
-signal max_health_gained(health_amount: int)
-signal heal_ally_triggered(heal_amount: int)
+signal focus_changed(focused: bool)
+
+# ============================== Constants ==============================
 
 const ATTACK_SPEED_BOOST_OVERTIME_PERIOD: float = 1
 
@@ -15,7 +15,7 @@ const ATTACK_SPEED_BOOST_OVERTIME_PERIOD: float = 1
 
 # ============================== Public variables ==============================
 
-var aa_counter: int = 0 # Counter of auto attacks
+var _aa_counter: int = 0 # Counter of auto attacks
 
 # ============================== Private variables ==============================
 
@@ -25,8 +25,12 @@ var _projectile_scene: PackedScene # Ref to the AutoAttackProjectile packed scen
 #var _forced_target: Character # TODO Unused now, maybe for a futur hero that can taunt ?
 var _attack_strategy: TargetManager.TargettingStrategy = TargetManager.TargettingStrategy.CLOSEST_ENEMY # The algo used to find the target
 var _default_attack_speed: float # Default attack speed of the hero
+var _previous_target: Character # Target of the previous auto attack
 
 var _optional_timers: Array[Timer]
+
+var _focus_timer: Timer
+var _focused: bool
 
 # ============================== Local scene nodes ==============================
 
@@ -56,12 +60,15 @@ func init(source: Character, aa_stats: CharacterAutoAttackStats, projectile_scen
 
 
 func start() -> void:
+	_create_optional_timers()
 	_auto_attack_timer.start()
 
 
 func stop() -> void:
 	print("AutoAttackManager: Stopping")
 	_auto_attack_timer.stop()
+	for timer in _optional_timers:
+		timer.stop()
 
 
 func set_auto_attack_speed(attack_speed: float) -> void:
@@ -74,32 +81,46 @@ func set_auto_attack_speed(attack_speed: float) -> void:
 # ============================== Private functions ==============================
 
 func _create_optional_timers() -> void:
-	# Gatling
+	# [Gatling]
 	if _aa_stats.attack_speed_overtime_max > 0:
 		_optional_timers.append(Utils.create_optional_timer(self, ATTACK_SPEED_BOOST_OVERTIME_PERIOD, _on_aa_speed_overtime_timer_timeout))
-
-
-func _auto_attack(target: Character):
-	aa_counter += 1
 	
-	# Fire sword
+	# [Focus]
+	if _source.stats.storm.focus_target_activated:
+		_focus_timer = Timer.new()
+		add_child(_focus_timer)
+		_focus_timer.connect("timeout", _on_focus_timer_timeout)
+		_focus_timer.wait_time = _source.stats.storm.focus_target_time_before
+		_focus_timer.one_shot = 1
+
+
+func _auto_attack(target: Character) -> void:
+	_aa_counter += 1
+	
+	# [Focus]
+	if _source.stats.storm.focus_target_activated:
+		_check_storm_focus(target)
+		_previous_target = target
+	
+	# [Fire sword]
 	if _aa_stats.fire_attack_activated:
-		if aa_counter % _aa_stats.fire_attack_period == 0:
+		if _aa_counter % _aa_stats.fire_attack_period == 0:
 			_aa_stats.fire_attack_triggered = true
 	
-	# Necrosis scythe
-	if _aa_stats.increase_max_hp_activated:
-		if aa_counter % _aa_stats.increase_max_hp_period == 0:
-			max_health_gained.emit(_aa_stats.increase_max_hp_amount)
+	# [Necrosis scythe]
+	if _aa_stats.increase_max_hp_activated and _aa_counter % _aa_stats.increase_max_hp_period == 0:
+		_source.stats.health_max += _aa_stats.increase_max_hp_amount
+		_source.stats.health += _aa_stats.increase_max_hp_amount
 	
-	# Sword armor
+	# [Sword armor]
 	if Utils.is_randomize_modifier_active(_aa_stats.armor_stacks_chance):
-		armor_gained.emit(_aa_stats.armor_stacks_amount)
+		_source.stats.defense.armor_stacks += _aa_stats.armor_stacks_amount
 	
-	# Knife of terror
+	# [Knife of terror]
 	if Utils.is_randomize_modifier_active(_aa_stats.healing_attack_chance):
-		heal_ally_triggered.emit(_aa_stats.healing_attack_heal_amount)
-	
+		var heal_target: Character = _source.target_manager.get_target(TargetManager.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
+		_source.heal(heal_target, _aa_stats.healing_attack_heal_amount)
+	 
 	_spawn_projectile(target)
 	_aa_stats.fire_attack_triggered = false
 
@@ -119,6 +140,17 @@ func _update_auto_attack_speed() -> void:
 	set_auto_attack_speed(_source.stats.attack_speed)
 
 
+func _check_storm_focus(target) -> void:
+	if target == _previous_target and _focus_timer.is_stopped() and not _focused:
+		_focus_timer.start()
+	elif target != _previous_target:
+		if not _focus_timer.is_stopped():
+			_focus_timer.stop()
+		if _focused:
+			focus_changed.emit(false)
+			_focused = false
+
+
 # ============================== Callbacks functions ==============================
 
 func _on_auto_attack_timer_timeout() -> void:
@@ -132,9 +164,14 @@ func _on_auto_attack_timer_timeout() -> void:
 var __aa_speed_overtime_ticks: int = 0 # static variable for _on_aa_speed_overtime_timer()
 func _on_aa_speed_overtime_timer_timeout() -> void:
 	var attack_speed_overtime_current = remap(__aa_speed_overtime_ticks, \
-			0, _aa_stats.attack_speed_overtime_duration, \
+			0, _aa_stats.attack_speed_overtime_duration / ATTACK_SPEED_BOOST_OVERTIME_PERIOD, \
 			_aa_stats.attack_speed_overtime_min, _aa_stats.attack_speed_overtime_max)
 	_aa_stats.attack_speed_overtime_current = clampf(attack_speed_overtime_current, \
 			_aa_stats.attack_speed_overtime_min, _aa_stats.attack_speed_overtime_max)
 	_update_auto_attack_speed()
 	__aa_speed_overtime_ticks += 1
+
+
+func _on_focus_timer_timeout() -> void:
+	_focused = true
+	focus_changed.emit(true)

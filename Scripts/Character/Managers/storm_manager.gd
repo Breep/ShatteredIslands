@@ -1,7 +1,9 @@
 class_name StormManager
 extends Node
 
-# ============================== Signals ==============================
+# ============================== Constants ==============================
+
+const FOCUS_INCREASE_CRIT_PERIOD: float = 0.5
 
 # ============================== Private variables ==============================
 
@@ -11,7 +13,12 @@ extends Node
 var _source: Character # Ref to character owner
 var _storm_stats: CharacterStormStats # Ref to the owner storm stats
 
+var _default_physical_critical_chance: float
+
 var _optional_timers: Array[Timer]
+
+var _focus_timer: Timer
+var _focus_timer_time_elapsed: float # Time elapsed since lanch of the timer
 
 # ============================== Local nodes ==============================
 
@@ -29,6 +36,7 @@ func init(source: Character, storm_stats: CharacterStormStats) -> void:
 	
 	_source = source
 	_storm_stats = storm_stats
+	_default_physical_critical_chance = source.hero.stats.physical_critical_chance
 
 
 func start() -> void:
@@ -47,6 +55,12 @@ func get_increased_critical_damage(damage: int, is_critical: bool) -> int:
 		return damage
 	var vulnerability_multiplier = remap(_storm_stats.vulnerability_stacks, 0, 100, 1, 2)
 	return damage * vulnerability_multiplier
+
+
+func get_critical_chance() -> float:
+	var crit_chance: float = _default_physical_critical_chance
+	crit_chance += _storm_stats.focus_target_crit_current
+	return crit_chance
 
 
 func get_critical_multiplier(damage_type: Utils.DamageType) -> float:
@@ -77,12 +91,28 @@ func notice_critical_damage(char_who_received_the_crit: Character, damage: int) 
 		if multiplayer.get_unique_id() == 1: print(vuln_stacks)
 		char_who_received_the_crit.take_condition_stacks(_source, vuln_stacks, Utils.StackType.VULNERABILITY)
 
+
+func focus_changed(focused: bool) -> void:
+	if focused:
+		_focus_timer_time_elapsed = 0
+		__previous_time = Time.get_ticks_msec()
+		_focus_timer.start()
+	else:
+		_focus_timer.stop()
+		_storm_stats.focus_target_crit_current = 0
+
 # ============================== Private functions ==============================
 
 func _create_optional_timers() -> void:
 	# Break armor
 	if _storm_stats.periodic_vulnerability_activated:
 		_optional_timers.append(Utils.create_optional_timer(self, _storm_stats.periodic_vulnerability_period, _on_periodic_vulnerability_timer_timeout))
+	
+	if _storm_stats.focus_target_activated:
+		_focus_timer = Timer.new()
+		add_child(_focus_timer)
+		_focus_timer.wait_time = FOCUS_INCREASE_CRIT_PERIOD
+		_focus_timer.connect("timeout", _on_focus_timer_timeout)
 
 # ============================== Callbacks functions ==============================
 
@@ -98,7 +128,7 @@ func _on_periodic_vulnerability_timer_timeout() -> void:
 
 func _on_vulnerability_timer_timeout() -> void:
 	#print("StormManager: Vulnerability removal")
-	var vulnerability_stacks_removed: int = (0.1 * _storm_stats.vulnerability_stacks) as int
+	var vulnerability_stacks_removed: int = (0.1 * _storm_stats.vulnerability_stacks as float) as int
 	if vulnerability_stacks_removed < _minimum_stacks_decrease_flat:
 		vulnerability_stacks_removed = _minimum_stacks_decrease_flat
 	
@@ -106,3 +136,16 @@ func _on_vulnerability_timer_timeout() -> void:
 	
 	if _storm_stats.vulnerability_stacks < 0:
 		_storm_stats.vulnerability_stacks = 0
+
+
+var __previous_time: float
+func _on_focus_timer_timeout() -> void:
+	var time = Time.get_ticks_msec()
+	_focus_timer_time_elapsed += time - __previous_time
+	var focus_timer_ticks_max: int = (_storm_stats.focus_target_duration / FOCUS_INCREASE_CRIT_PERIOD) as int
+	var physical_crit_inc: float = remap(_focus_timer_time_elapsed / 1000,                                  \
+									0, _storm_stats.focus_target_duration,                                  \
+									_storm_stats.focus_target_crit_min, _storm_stats.focus_target_crit_max)
+	physical_crit_inc = clampf(physical_crit_inc, _storm_stats.focus_target_crit_min, _storm_stats.focus_target_crit_max)
+	_storm_stats.focus_target_crit_current = physical_crit_inc
+	__previous_time = time

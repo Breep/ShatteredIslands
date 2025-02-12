@@ -24,7 +24,7 @@ move_speed = 4.0
 attack_damage = 50
 attack_speed = 1.2
 attack_move_speed = 10.0
-physical_critical_chance = 50.0
+physical_critical_chance = 10.0
 physical_critical_multiplier = 2.0
 
 [resource]

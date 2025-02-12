@@ -87,7 +87,7 @@ func heal_percent(target: Character, heal_percent: float, percent_modifier: Util
 func attack(target: Character, damage: int, damage_type: Utils.DamageType) -> void:
 	var is_critical: bool = false
 	if damage_type == Utils.DamageType.PHYSICAL:
-		if Utils.is_randomize_modifier_active(stats.physical_critical_chance):
+		if Utils.is_randomize_modifier_active(_storm_manager.get_critical_chance()):
 			is_critical = true
 			damage *= _storm_manager.get_critical_multiplier(Utils.DamageType.PHYSICAL)
 		damage = _life_manager.get_increased_damage_taken_from_lost_hp(damage, damage_type) # Increase % of PHYSICAL damage
@@ -211,25 +211,11 @@ func _init_auto_attack_manager() -> void:
 		printerr("No AutoAttackManager")
 		return
 	
-	# TODO tout ça semble pouvoir retourner dans l'auto attack manager
-	_auto_attack_manager.heal_ally_triggered.connect(_on_auto_attack_manager_heal_ally_triggered)
-	_auto_attack_manager.armor_gained.connect(_on_auto_attack_manager_armor_gained)
-	_auto_attack_manager.max_health_gained.connect(_on_auto_attack_manager_max_health_gained)
+	_auto_attack_manager.focus_changed.connect(_on_auto_attack_manager_focus_changed)
 	_auto_attack_manager.init(self, stats.auto_attack, hero.aa_projectile, hero)
 
-
-func _on_auto_attack_manager_heal_ally_triggered(heal_amount: int) -> void:
-	var target = target_manager.get_target(TargetManager.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
-	heal(target, heal_amount)
-
-
-func _on_auto_attack_manager_armor_gained(armor_stacks: int) -> void:
-	stats.defense.armor_stacks += armor_stacks
-
-
-func _on_auto_attack_manager_max_health_gained(health_amount: int) -> void:
-	stats.health_max += health_amount
-	stats.health += health_amount
+func _on_auto_attack_manager_focus_changed(focused: bool) -> void:
+	_storm_manager.focus_changed(focused)
 
 # ============================== DefenseManager ==============================
 
