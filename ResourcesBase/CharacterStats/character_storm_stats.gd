@@ -33,6 +33,7 @@ var lost_hp_crit_multiplier_hp_number: int # Number of hp needed to increase cri
 var crit_poison_activated: bool # If this skill is activated
 var crit_poison_amount: int # % of critical damage converted into poison
 
+var speed_boosted: bool # If the skill is triggered (StormManager set this, MovementManager read this)
 var crit_move_speed_activated: bool # If this skill is activated
 var crit_move_speed_amount: int # % of move speed increase after for each critical strike
 var crit_move_speed_duration: float # Duration of the move speed increase (in s)

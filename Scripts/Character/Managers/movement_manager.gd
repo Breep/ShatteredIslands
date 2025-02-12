@@ -27,6 +27,11 @@ func set_fighting_state(new_state: FightingManager.FightingState) -> void:
 	_fighting_state = new_state
 
 
+func set_target_position(target_position: Vector3) -> void:
+	_target_position = target_position
+	_is_moving = true
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	_move_toward_target(delta)
@@ -46,9 +51,9 @@ func _move_toward_target(delta: float):
 	var direction: Vector3 = (_target_position - _source.global_position).normalized()
 	
 	if _fighting_state == FightingManager.FightingState.STARTING:
-		_source.velocity = direction * _source.stats.move_speed * 2
+		_source.velocity = direction * _get_move_speed() * 2
 	else:
-		_source.velocity = direction * _source.stats.move_speed
+		_source.velocity = direction * _get_move_speed()
 	
 	_source.move_and_slide()
 	var distance_moved = _source.global_position.distance_to(previous_position)
@@ -58,9 +63,12 @@ func _move_toward_target(delta: float):
 		energy_changed.emit(_source.stats.energy)
 
 
-func set_target_position(target_position: Vector3) -> void:
-	_target_position = target_position
-	_is_moving = true
+func _get_move_speed() -> float:
+	var move_speed: float = _source.stats.move_speed
+	# [Lightning speed]
+	if _source.stats.storm.speed_boosted:
+		move_speed *= (1.0 + _source.stats.storm.crit_move_speed_amount / 100.0)
+	return move_speed
 
 
 func _on_energy_regen_timer_timeout() -> void:

@@ -16,8 +16,9 @@ var _storm_stats: CharacterStormStats # Ref to the owner storm stats
 var _default_physical_critical_chance: float
 
 var _optional_timers: Array[Timer]
-
 var _focus_timer: Timer
+var _crit_move_speed_timer: Timer
+
 var _focus_timer_time_elapsed: float # Time elapsed since lanch of the timer
 
 # ============================== Local nodes ==============================
@@ -75,21 +76,28 @@ func get_critical_multiplier(damage_type: Utils.DamageType) -> float:
 
 
 func notice_critical_damage(char_who_received_the_crit: Character, damage: int) -> void:
-	# Thunder priest
+	# [Thunder priest]
 	if _storm_stats.crit_heal_activated:
 		var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
 		_source.heal(target, damage * _storm_stats.crit_heal_amount as float / 100.0)
 	
-	# Poisonous lightning
+	# [Poisonous lightning]
 	if _storm_stats.crit_poison_activated:
 		var poison_stacks: int = (damage * _storm_stats.crit_poison_amount as float / 100.0) as int
 		char_who_received_the_crit.take_poison_stacks(_source, poison_stacks, 5)
 	
-	# Thunder break
+	# [Thunder break]
 	if _storm_stats.crit_vulnerability_activated:
 		var vuln_stacks: int = (damage * _storm_stats.crit_vulnerability_amount as float / 100.0) as int
 		if multiplayer.get_unique_id() == 1: print(vuln_stacks)
 		char_who_received_the_crit.take_condition_stacks(_source, vuln_stacks, Utils.StackType.VULNERABILITY)
+	
+	# [Lightning speed]
+	if _storm_stats.crit_move_speed_activated:
+		_storm_stats.speed_boosted = true
+		if not _crit_move_speed_timer.is_stopped():
+			_crit_move_speed_timer.stop()
+		_crit_move_speed_timer.start()
 
 
 func focus_changed(focused: bool) -> void:
@@ -113,6 +121,12 @@ func _create_optional_timers() -> void:
 		add_child(_focus_timer)
 		_focus_timer.wait_time = FOCUS_INCREASE_CRIT_PERIOD
 		_focus_timer.connect("timeout", _on_focus_timer_timeout)
+	
+	if _storm_stats.crit_move_speed_activated:
+		_crit_move_speed_timer = Timer.new()
+		add_child(_crit_move_speed_timer)
+		_crit_move_speed_timer.wait_time = _storm_stats.crit_move_speed_duration
+		_crit_move_speed_timer.connect("timeout", _on_crit_move_speed_timer_timeout)
 
 # ============================== Callbacks functions ==============================
 
@@ -149,3 +163,9 @@ func _on_focus_timer_timeout() -> void:
 	physical_crit_inc = clampf(physical_crit_inc, _storm_stats.focus_target_crit_min, _storm_stats.focus_target_crit_max)
 	_storm_stats.focus_target_crit_current = physical_crit_inc
 	__previous_time = time
+
+
+func _on_crit_move_speed_timer_timeout() -> void:
+	_storm_stats.speed_boosted = false
+	if multiplayer.get_unique_id() == 1 and _storm_stats.crit_move_speed_activated:
+		print("MOVE SPEED BOOST DISABLED")
