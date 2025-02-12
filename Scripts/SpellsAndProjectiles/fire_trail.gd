@@ -1,41 +1,95 @@
+class_name FireTrail
 extends Node3D
 
-@export var path: Path3D
-@export var area_scene: PackedScene
-@export var area_length: float  # Length of each Area3D segment
+# =========================================================
+# === This is the Fire trail from the card [Fire trail] ===
+# =========================================================
 
-@export var camera: Camera3D
+var _areas_dictionaries: Array[Dictionary] # { Area3D, Time }
 
-var _areas: Array[Area3D]
+var _source: Character # Owner of this poison cloud
+var _characters_inside: Dictionary # {Character, int} Dictionary of number reference of characters
+var _damage_percent: float = 0 # Stacks applied every tick
+var _life_time: float # Life time of each point of the fire trail
+var _damage_wait_time: float # period between two ticks of damage (in seconds)
 
-func _ready():
-	var curve = path.curve
-	var path_length = curve.get_baked_length()
-	print(path_length)
-	var distance = 0.0
+var _previous_source_position: Vector3 # Last position of the source when a trail point was added
+const MINIMUM_DISTANCE_FOR_NEW_POINT: float = 0.5 # Minimum distance between two point of the fire trail path (in m)
 
-	while distance < path_length:
-		var position = curve.sample_baked(distance)
-		var next_position = curve.sample_baked(min(distance + area_length, path_length))
-		print(position, " ", next_position)
-		var direction = (next_position - position).normalized()
+@onready var _construction_timer:Timer = %ConstructionTimer
+@onready var _damage_timer: Timer = %DamageTimer
 
-		var area_instance: Area3D = area_scene.instantiate()
-		add_child(area_instance)
-		area_instance.global_position = position
-		area_instance.look_at(next_position)
-		_areas.append(area_instance)
+@onready var _fire_trail_area_scene: PackedScene = preload("res://Scenes/SpellsAndProjectiles/fire_trail_area.tscn")
 
-		distance += area_length
+func init(source: Character, damage_percent: float, period: float, life_time: float) -> void:
+	_source = source
+	_damage_wait_time = period
+	_damage_percent = damage_percent
+	_life_time = life_time
+
+
+func _ready() -> void:
+	_previous_source_position = _source.global_position
+	_damage_timer.wait_time = _damage_wait_time
+	_damage_timer.start()
+
+
+
+
+
+
+func _construct_new_fire_trail_point() -> void:
+	var distance_with_previous_point = _source.global_position.distance_to(_previous_source_position)
+	if distance_with_previous_point < MINIMUM_DISTANCE_FOR_NEW_POINT:
+		return
 	
-	#await get_tree().process_frame
-	#_late_ready()
-#
-#func _late_ready() -> void:
-	#for area in _areas:
-		#area.look_at(camera.global_position)
-#
-#
-#func _process(delta: float) -> void:
-	#for area in _areas:
-		#area.look_at(camera.global_position)
+	_previous_source_position = _source.global_position
+	var fire_trail_area: Area3D = _fire_trail_area_scene.instantiate()
+	fire_trail_area.connect("body_entered", _on_fire_trail_area_body_entered)
+	fire_trail_area.connect("body_exited", _on_fire_trail_area_body_exited)
+	get_tree().current_scene.add_child(fire_trail_area)
+	fire_trail_area.global_position = _source.global_position
+	var new_dictionary_entry: Dictionary
+	new_dictionary_entry["area"] = fire_trail_area
+	new_dictionary_entry["time"] = Time.get_ticks_msec()
+	_areas_dictionaries.append(new_dictionary_entry)
+	print("New fire trail area constructed !", fire_trail_area)
+
+
+func _remove_outdated_fire_trail_points() -> void:
+	for area_dictionary in _areas_dictionaries.duplicate():
+		var current_life_time = (Time.get_ticks_msec() - area_dictionary["time"]) / 1000.0
+		if current_life_time <= _life_time: # No need to check other points as they are newest
+			return
+		get_tree().current_scene.remove_child(area_dictionary["area"])
+		_areas_dictionaries.erase(area_dictionary)
+
+# ===================================================================
+
+# Enemy take damage when entering the fire trail, then each damage_tick_period
+func _on_fire_trail_area_body_entered(body: Node3D) -> void:
+	if body is Character and body.team != _source.team:
+		if _characters_inside.has(body):
+			_characters_inside[body] += 1
+		else:
+			_characters_inside[body] = 1
+			_source.attack_percent(body, _damage_percent, Utils.DamageType.MAGIC, Utils.PercentModifier.MAX_HP)
+
+
+func _on_fire_trail_area_body_exited(body: Node3D) -> void:
+	if body is Character and body.team != _source.team:
+		_characters_inside[body] -= 1
+		if _characters_inside[body] == 0:
+			_characters_inside.erase(body)
+
+
+func _on_construction_timer_timeout() -> void:
+	_remove_outdated_fire_trail_points()
+	_construct_new_fire_trail_point()
+
+
+func _on_damage_timer_timeout() -> void:
+	for character in _characters_inside:
+		if character.team != _source.team:
+			print("FIRE TRAIL damage on ", character.player.name)
+			_source.attack_percent(character, _damage_percent, Utils.DamageType.MAGIC, Utils.PercentModifier.MAX_HP)

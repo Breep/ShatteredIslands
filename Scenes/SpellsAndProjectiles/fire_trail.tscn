@@ -1,41 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://xybrpjykuk8x"]
+[gd_scene load_steps=2 format=3 uid="uid://xybrpjykuk8x"]
 
 [ext_resource type="Script" path="res://Scripts/SpellsAndProjectiles/fire_trail.gd" id="1_goar4"]
-[ext_resource type="PackedScene" uid="uid://bivrik31as4hh" path="res://Scenes/SpellsAndProjectiles/Area_tmp.tscn" id="2_hd8u1"]
-[ext_resource type="Script" path="res://Scenes/SpellsAndProjectiles/camera_3d.gd" id="3_jtj4u"]
 
-[sub_resource type="Curve3D" id="Curve3D_6bfnt"]
-bake_interval = 5.0
-_data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -1.90564, 0, -5.68216, 0, 0, 0, 0, 0, 0, -0.00975198, 0, -5.99381, 0, 0, 0, 0, 0, 0, 0.879546, 0, -5.45632, 0, 0, 0, 0, 0, 0, 3.23271, 0, -4.72845, 0, 0, 0, 0, 0, 0, 5.86965, 0, -6.6698, 0, 0, 0, 0, 0, 0, 6.42702, 0, -4.43848, 0, 0, 0, 0, 0, 0, 7.91944, 0, 0.287511, 0, 0, 0, 0, 0, 0, 7.42196, 0, 4.06001, 0, 0, 0, 0, 0, 0, 3.15199, 0, 6.46446, 0, 0, 0, 0, 0, 0, -0.620506, 0, 6.67174, 0, 0, 0, 0, 0, 0, -5.18067, 0, 5.05496, 0, 0, 0, 0, 0, 0, -7.25347, 0, 2.02866, 0, 0, 0, 0, 0, 0, -7.04619, 0, -1.61947, 0, 0, 0, 0, 0, 0, -4.6832, 0, -7.17457, 0, 0, 0, 0, 0, 0, 0.498806, 0, -9.0401, 0, 0, 0, 0, 0, 0, 6.42702, 0, -8.16952, 0, 0, 0, 0, 0, 0, 10.0751, 0, -5.10177, 0, 0, 0, 0, 0, 0, 10.6555, 0, -1.53655, 0, 0, 0, 0, 0, 0, 10.3239, 0, 3.85273, 0, 0, 0, 0, 0, 0, 9.08021, 0, 7.00339, 0, 0, 0, 0, 0, 0, 5.5979, 0, 8.28852, 0, 0, 0, 0, 0, 0, 2.36062, 0, -6.39187, 0, 0, 0, 0, 0, 0, 1.45648, 0, -6.78366, 0, 0, 0, 0, 0, 0, 0.431792, 0, -6.8138, 0, 0, 0, 0, 0, 0, -0.351795, 0, -6.36173, 0, 0, 0, 0, 0, 0, -1.01483, 0, -5.21649, 0, 0, 0, 0, 0, 0, -1.25593, 0, -4.07125, 0, 0, 0, 0, 0, 0, -3.63683, 0, -3.64932),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-}
-point_count = 28
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_v7vm6"]
-
-[node name="FireTrail" type="Node3D" node_paths=PackedStringArray("path", "camera")]
+[node name="FireTrail" type="Node3D"]
 script = ExtResource("1_goar4")
-path = NodePath("Path3D")
-area_scene = ExtResource("2_hd8u1")
-area_length = 0.2
-camera = NodePath("Camera3D")
+
+[node name="ConstructionTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.1
+autostart = true
 
 [node name="DamageTimer" type="Timer" parent="."]
-
-[node name="Path3D" type="Path3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0301371, 0, -0.723311)
-curve = SubResource("Curve3D_6bfnt")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.798457, 0.24348, -0.550621, 0.285088, 0.652632, 0.701994, 0.530274, -0.717488, 0.451686, -1.17404, 7.94612, -0.0490341)
-
-[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("camera")]
-transform = Transform3D(0.192557, 0.696677, -0.691059, -0.186999, 0.717385, 0.671111, 0.963303, -3.09372e-08, 0.268415, -0.873057, 5.46695, 0)
-script = ExtResource("3_jtj4u")
-camera = NodePath(".")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.73782, -0.566296, 0)
-mesh = SubResource("CapsuleMesh_v7vm6")
+[connection signal="timeout" from="ConstructionTimer" to="." method="_on_construction_timer_timeout"]
+[connection signal="timeout" from="DamageTimer" to="." method="_on_damage_timer_timeout"]

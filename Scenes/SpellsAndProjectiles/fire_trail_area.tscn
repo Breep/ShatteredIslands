@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bivrik31as4hh"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_s2ery"]
+height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8a3qf"]
+transparency = 1
+albedo_color = Color(0.57642, 0.219518, 0.0641284, 0.719)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_dnj5t"]
+material = SubResource("StandardMaterial3D_8a3qf")
+height = 0.1
+
+[node name="FireTrailArea" type="Area3D"]
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_s2ery")
+
+[node name="Visual" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_dnj5t")

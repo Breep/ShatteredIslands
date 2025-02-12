@@ -10,7 +10,8 @@ func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	stats.fire.trail_damage = trail_damage[cardlvl-1]
+	stats.fire.trail_activated = true
+	stats.fire.trail_damage_percent = trail_damage[cardlvl-1]
 	stats.fire.trail_life_time = trail_life_time
 	stats.fire.trail_period = trail_period
 
