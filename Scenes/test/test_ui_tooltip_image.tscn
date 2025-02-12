@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://cy16o0ggme0qo"]
+
+[ext_resource type="Script" path="res://Scripts/Test/test_ui_tooltip_image.gd" id="1_bmmy2"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchor_right = 0.232
+anchor_bottom = 0.232
+offset_right = -17.264
+offset_bottom = -0.335999
+grow_vertical = 2
+script = ExtResource("1_bmmy2")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+expand_mode = 1
+
+[node name="Button" type="Button" parent="TextureRect"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+tooltip_text = "\"Dégâts de feu !\""
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

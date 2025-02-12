@@ -5,7 +5,7 @@
 
 [node name="UIFamily_lvl" type="Control"]
 layout_mode = 3
-anchors_preset = 9
+anchor_right = 0.1
 anchor_bottom = 1.0
 grow_vertical = 2
 script = ExtResource("1_phi7e")
@@ -24,43 +24,59 @@ layout_mode = 2
 
 [node name="Fire" type="Control" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="PortraitFamily" parent="MarginContainer/VBoxContainer/Fire" instance=ExtResource("2_hsjtl")]
+layout_mode = 1
 
 [node name="Storm" type="Control" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="PortraitFamily" parent="MarginContainer/VBoxContainer/Storm" instance=ExtResource("2_hsjtl")]
+layout_mode = 1
 
 [node name="Defense" type="Control" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="PortraitFamily" parent="MarginContainer/VBoxContainer/Defense" instance=ExtResource("2_hsjtl")]
+layout_mode = 1
 
 [node name="Serenity" type="Control" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="PortraitFamily" parent="MarginContainer/VBoxContainer/Serenity" instance=ExtResource("2_hsjtl")]
+layout_mode = 1
 
 [node name="Attack" type="Control" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="PortraitFamily" parent="MarginContainer/VBoxContainer/Attack" instance=ExtResource("2_hsjtl")]
+layout_mode = 1
 
 [node name="Shadow" type="Control" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="PortraitFamily" parent="MarginContainer/VBoxContainer/Shadow" instance=ExtResource("2_hsjtl")]
 layout_mode = 2
+anchors_preset = 0
 offset_top = -4.0
 offset_bottom = -4.0
 
 [node name="Poison" type="Control" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="PortraitFamily" parent="MarginContainer/VBoxContainer/Poison" instance=ExtResource("2_hsjtl")]
+layout_mode = 1
 
 [node name="HPFamily" type="Control" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="PortraitFamily" parent="MarginContainer/VBoxContainer/HPFamily" instance=ExtResource("2_hsjtl")]
+layout_mode = 1

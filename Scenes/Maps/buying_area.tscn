@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://c4qxlk6c31peq" path="res://Scenes/UI/family_bonus.tscn" id="6_y0hu0"]
 [ext_resource type="Texture2D" uid="uid://cg61v871c3lx8" path="res://Data/Assets/Misc/tableandchair.png" id="7_e5iqj"]
 [ext_resource type="Texture2D" uid="uid://w18hx3kvdm3m" path="res://Data/Assets/Misc/campfire.png" id="8_5cta4"]
-[ext_resource type="Theme" uid="uid://bpo76n2lvfxb6" path="res://Themes/main_menu_button.tres" id="9_5vn1f"]
+[ext_resource type="Theme" uid="uid://bpo76n2lvfxb6" path="res://Scripts/Managers/Themes/main_menu_button.tres" id="9_5vn1f"]
 [ext_resource type="PackedScene" uid="uid://bskueqquqfhhp" path="res://Scenes/UI/ui_player.tscn" id="10_m6udf"]
 [ext_resource type="PackedScene" uid="uid://d1oxnd1g75rqh" path="res://Scenes/Card/card_shop.tscn" id="11_skuwb"]
 [ext_resource type="PackedScene" uid="uid://c4e7oobnpcje8" path="res://Scenes/UI/ui_player_deck.tscn" id="12_a6ggj"]

@@ -1,0 +1,342 @@
+[gd_scene load_steps=19 format=3 uid="uid://dlpw4me2hx5ge"]
+
+[ext_resource type="ArrayMesh" uid="uid://86xe06sy2rsj" path="res://Data/Assets/3D_VFX/Flower/flower_reupload.res" id="1_oyb5b"]
+[ext_resource type="Shader" uid="uid://dp4uhk3cqouhr" path="res://Shaders/3D/flower_shader/circle_shader.tres" id="2_032gy"]
+[ext_resource type="ArrayMesh" uid="uid://bwiqhjd8n7idx" path="res://Data/Assets/3D_VFX/Flower/circle_mesh.obj" id="3_dl5ph"]
+[ext_resource type="Shader" uid="uid://3am0foaevhfj" path="res://Shaders/3D/flower_shader/simple_shader.tres" id="4_ywt2o"]
+[ext_resource type="Texture2D" uid="uid://bgbtpsfp1rxf7" path="res://Data/Texture/Kenney2/star_07.png" id="5_kr5cx"]
+[ext_resource type="Texture2D" uid="uid://dqxlk2w0b2tdb" path="res://Data/Texture/Kenney2/symbol_01.png" id="6_di372"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lwmrt"]
+render_priority = 0
+shader = ExtResource("2_032gy")
+shader_parameter/Circle_color = Color(0, 1.2, 0.8, 1)
+shader_parameter/Extraopacity = 0.1
+shader_parameter/speed = Vector2(0, -0.8)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ql4rh"]
+render_priority = 0
+shader = ExtResource("4_ywt2o")
+shader_parameter/Main_texture = ExtResource("5_kr5cx")
+
+[sub_resource type="Curve" id="Curve_247ok"]
+_data = [Vector2(0.00657895, 1), 0.0, 0.0, 0, 0, Vector2(0.506579, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_3asyi"]
+texture_mode = 1
+curve = SubResource("Curve_247ok")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2omod"]
+lifetime_randomness = 0.5
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.0
+emission_ring_radius = 4.0
+emission_ring_inner_radius = 0.0
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+gravity = Vector3(0, 0, 0)
+color = Color(0, 1, 0.8, 1)
+alpha_curve = SubResource("CurveTexture_3asyi")
+
+[sub_resource type="QuadMesh" id="QuadMesh_8ayct"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_087ch"]
+render_priority = 0
+shader = ExtResource("4_ywt2o")
+shader_parameter/Main_texture = ExtResource("6_di372")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pnd3r"]
+lifetime_randomness = 0.5
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.0
+emission_ring_radius = 4.0
+emission_ring_inner_radius = 0.0
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 0.5
+initial_velocity_max = 1.5
+gravity = Vector3(0, 0, 0)
+scale_max = 2.0
+color = Color(0, 1, 0.8, 1)
+alpha_curve = SubResource("CurveTexture_3asyi")
+
+[sub_resource type="Animation" id="Animation_s1lwx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles3D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles3D2:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CircleMesh:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Flower:blend_shapes/Shrinkwrap")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Flower:blend_shapes/Dissipation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Flower:mesh")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_oyb5b")]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Flower:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_ksfg7"]
+resource_name = "disapear"
+length = 0.84
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flower:blend_shapes/Shrinkwrap")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Flower:blend_shapes/Dissipation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.833333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GPUParticles3D:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GPUParticles3D2:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CircleMesh:visible")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.633333),
+"transitions": PackedFloat32Array(1, 0.517632),
+"update": 1,
+"values": [true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Flower:mesh")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.833333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("1_oyb5b"), ExtResource("1_oyb5b")]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Flower:visible")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.833333),
+"transitions": PackedFloat32Array(0.450625, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_23oyb"]
+resource_name = "eclosure"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles3D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles3D2:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CircleMesh:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Flower:blend_shapes/Shrinkwrap")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Flower:blend_shapes/Dissipation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ydap5"]
+_data = {
+"RESET": SubResource("Animation_s1lwx"),
+"disapear": SubResource("Animation_ksfg7"),
+"eclosure": SubResource("Animation_23oyb")
+}
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Flower" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_oyb5b")
+blend_shapes/Dissipation = 1.0
+blend_shapes/Shrinkwrap = 0.0
+
+[node name="CircleMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+material_override = SubResource("ShaderMaterial_lwmrt")
+mesh = ExtResource("3_dl5ph")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+material_override = SubResource("ShaderMaterial_ql4rh")
+amount = 40
+lifetime = 3.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_2omod")
+draw_pass_1 = SubResource("QuadMesh_8ayct")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="."]
+material_override = SubResource("ShaderMaterial_087ch")
+amount = 10
+lifetime = 3.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_pnd3r")
+draw_pass_1 = SubResource("QuadMesh_8ayct")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ydap5")
+}

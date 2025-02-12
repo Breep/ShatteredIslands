@@ -25,6 +25,8 @@ offset_left = -125.568
 offset_top = -182.736
 offset_right = 124.432
 offset_bottom = 166.264
+pivot_offset = Vector2(125, 179)
+mouse_filter = 1
 script = ExtResource("1_l6wd5")
 
 [node name="Shadow" type="TextureRect" parent="."]

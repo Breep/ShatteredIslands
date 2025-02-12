@@ -43,18 +43,18 @@ func update_visual(new_card: Card) -> void:
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	%"0".pivot_offset = _middle_offset
-	%"1".pivot_offset = _middle_offset
-	%"2".pivot_offset = _middle_offset
+	#%"0".pivot_offset = _middle_offset
+	#%"1".pivot_offset = _middle_offset
+	#%"2".pivot_offset = _middle_offset
 	_card_texture.material = _card_texture.material.duplicate() # Make the material unique
 
-func _on_mouse_entered() -> void:
-	_animation_pop_out()
+#func _on_mouse_entered() -> void:
+	#_animation_pop_out()
 
 
 func _on_mouse_exited() -> void:
 	_animation_reset_3d_rotation()
-	_animation_pop_in()
+	#_animation_pop_in()
 
 
 func _on_sub_viewport_container_gui_input(event: InputEvent) -> void:
@@ -80,25 +80,25 @@ func _animation_3d_rotate() -> void:
 
 
 # TODO Make the popout move the card slightly to the left so the popout seems centered
-func _animation_pop_out() -> void:
-	if _tween_hover:
-		_tween_hover.kill()
-	_tween_hover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
-	_tween_hover.tween_property(self, "scale", Vector2(1.2, 1.2), 0.5)
-	z_index = LAYER_FRONT
-
-
-func _animation_pop_in() -> void:
-	if _tween_hover:
-		_tween_hover.kill()
-	_tween_hover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
-	_tween_hover.tween_property(self, "scale", Vector2.ONE, 0.55)
-	z_index = LAYER_BACK
+#func _animation_pop_out() -> void:
+	#if _tween_hover:
+		#_tween_hover.kill()
+	#_tween_hover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
+	#_tween_hover.tween_property(self, "scale", Vector2(1.2, 1.2), 0.5)
+	#z_index = LAYER_FRONT
+#
+#
+#func _animation_pop_in() -> void:
+	#if _tween_hover:
+		#_tween_hover.kill()
+	#_tween_hover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
+	#_tween_hover.tween_property(self, "scale", Vector2.ONE, 0.55)
+	#z_index = LAYER_BACK
 
 
 func _animation_reset_3d_rotation() -> void:
 	if _tween_rot:
 		_tween_rot.kill()
-	_tween_rot = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK).set_parallel(true)
+	_tween_rot = create_tween().set_ease(Tween.EASE_OUT_IN).set_trans(Tween.TRANS_BACK).set_parallel(true)
 	_tween_rot.tween_property(_card_texture.material, "shader_parameter/x_rot", 0.0, 0.5)
 	_tween_rot.tween_property(_card_texture.material, "shader_parameter/y_rot", 0.0, 0.5)

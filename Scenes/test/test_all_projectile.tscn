@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bjqrm8w60tkxu" path="res://Data/Texture/kenney_particle_pack/muzzle_01.png" id="6_hnx57"]
 [ext_resource type="Texture2D" uid="uid://bci6hw24u6mmy" path="res://Data/Assets/spritesheet/creature-sheet (1).png" id="7_5i0cl"]
 [ext_resource type="Texture2D" uid="uid://bhukbiigvbkku" path="res://Data/Assets/spritesheet/creature-sheet.png" id="8_vvlnr"]
-[ext_resource type="Theme" uid="uid://2r6c5i57eti8" path="res://Themes/health_bar.tres" id="9_3il4v"]
+[ext_resource type="Theme" uid="uid://2r6c5i57eti8" path="res://Scripts/Managers/Themes/health_bar.tres" id="9_3il4v"]
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_1qmv6"]
 expanded_output_ports = [0]
