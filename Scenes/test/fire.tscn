@@ -1,6 +1,6 @@
 [gd_scene load_steps=87 format=3 uid="uid://c84bcu56soo2o"]
 
-[ext_resource type="Texture2D" uid="uid://dmpy3jjabbmm7" path="res://Data/Texture/2D Fire/T_1_pixel.jpg" id="1_q425r"]
+[ext_resource type="Texture2D" uid="uid://dmpy3jjabbmm7" path="res://Data/Texture/2D/T_1_pixel.jpg" id="1_q425r"]
 [ext_resource type="Material" uid="uid://sfgvxf8wp81x" path="res://Shaders/Fire_Ball.tres" id="2_n280a"]
 [ext_resource type="Material" uid="uid://cx37wrmb8u4rl" path="res://Shaders/Test_storm.tres" id="4_1ncav"]
 [ext_resource type="Material" uid="uid://dqm51ysejlh7b" path="res://Shaders/ShadowBoltMain.tres" id="5_wge7a"]

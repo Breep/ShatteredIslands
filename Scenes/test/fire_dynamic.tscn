@@ -2,8 +2,8 @@
 
 [ext_resource type="Material" uid="uid://dobiblwgkketm" path="res://Shaders/fire_dynamic.tres" id="1_7g03x"]
 [ext_resource type="Material" uid="uid://bem0rvqh0jmq6" path="res://Particle/fire_dynamic_particle.tres" id="2_ely1l"]
-[ext_resource type="Texture2D" uid="uid://dmpy3jjabbmm7" path="res://Data/Texture/2D Fire/T_1_pixel.jpg" id="3_xxxtx"]
-[ext_resource type="Texture2D" uid="uid://cox677fl8sgl" path="res://Data/Texture/2D Fire/T_VFX_Noise_2.PNG" id="4_lsfqp"]
+[ext_resource type="Texture2D" uid="uid://dmpy3jjabbmm7" path="res://Data/Texture/2D/T_1_pixel.jpg" id="3_xxxtx"]
+[ext_resource type="Texture2D" uid="uid://cox677fl8sgl" path="res://Data/Texture/2D/T_VFX_Noise_2.PNG" id="4_lsfqp"]
 [ext_resource type="Material" uid="uid://cbenrvhfodwl" path="res://Shaders/Electric_spark_shader.tres" id="4_n1uhn"]
 [ext_resource type="Texture2D" uid="uid://br6ejew7ctdi6" path="res://Data/Texture/Kenney2/magic_05.png" id="5_3nu38"]
 [ext_resource type="Material" uid="uid://by3yqqq5kql60" path="res://Particle/Electric_spark_particle.tres" id="5_kjupg"]

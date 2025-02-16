@@ -2,9 +2,9 @@
 
 [ext_resource type="Shader" uid="uid://cjoihy50op4ps" path="res://Shaders/3D/hits and impact/hit_marker1_notbillboarded.tres" id="1_16k8c"]
 [ext_resource type="Shader" uid="uid://bwywcfrni6xdf" path="res://Shaders/3D/hits and impact/hit_marker1_billboarded.tres" id="1_nax3f"]
-[ext_resource type="Texture2D" uid="uid://c0u5injp71ys0" path="res://Data/Texture/2D Fire/T_flare81.png" id="2_jmujb"]
-[ext_resource type="Texture2D" uid="uid://dfnid3c2l0ajl" path="res://Data/Texture/2D Fire/T_VFX_simple_1.png" id="2_n4rmq"]
-[ext_resource type="Texture2D" uid="uid://cplwkg0u1o2tp" path="res://Data/Texture/2D Fire/T_groundmark_color.png" id="5_11uuu"]
+[ext_resource type="Texture2D" uid="uid://c0u5injp71ys0" path="res://Data/Texture/2D/T_flare81.png" id="2_jmujb"]
+[ext_resource type="Texture2D" uid="uid://dfnid3c2l0ajl" path="res://Data/Texture/2D/T_VFX_simple_1.png" id="2_n4rmq"]
+[ext_resource type="Texture2D" uid="uid://cplwkg0u1o2tp" path="res://Data/Texture/2D/T_groundmark_color.png" id="5_11uuu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pjimn"]
 render_priority = 0

@@ -1,8 +1,8 @@
 [gd_scene load_steps=192 format=3 uid="uid://b1buhisccbi3g"]
 
-[ext_resource type="Texture2D" uid="uid://cox677fl8sgl" path="res://Data/Texture/2D Fire/T_VFX_Noise_2.PNG" id="1_3t4mf"]
+[ext_resource type="Texture2D" uid="uid://cox677fl8sgl" path="res://Data/Texture/2D/T_VFX_Noise_2.PNG" id="1_3t4mf"]
 [ext_resource type="Texture2D" uid="uid://cdbto3l1tubi3" path="res://Data/Texture/kenney_particle_pack/smoke_10.png" id="2_1a4g6"]
-[ext_resource type="Texture2D" uid="uid://dmpy3jjabbmm7" path="res://Data/Texture/2D Fire/T_1_pixel.jpg" id="3_g7ur4"]
+[ext_resource type="Texture2D" uid="uid://dmpy3jjabbmm7" path="res://Data/Texture/2D/T_1_pixel.jpg" id="3_g7ur4"]
 [ext_resource type="Texture2D" uid="uid://cqlwucdderdyo" path="res://Data/Texture/kenney_particle_pack/circle_05.png" id="4_m24gf"]
 [ext_resource type="Texture2D" uid="uid://c6nrnfhdcd33x" path="res://Data/Texture/kenney_particle_pack/smoke_04.png" id="5_0i0l6"]
 [ext_resource type="Texture2D" uid="uid://bjqrm8w60tkxu" path="res://Data/Texture/kenney_particle_pack/muzzle_01.png" id="6_hnx57"]

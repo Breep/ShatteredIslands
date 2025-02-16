@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Test/test_lightning_ray.gd" id="1_bketu"]
 [ext_resource type="Material" uid="uid://bqa4yxqnd8cg6" path="res://Shaders/Spell/Electric/vfx_thunder_light.tres" id="2_7w1x5"]
-[ext_resource type="Texture2D" uid="uid://bqnubx2u1t1" path="res://Data/Texture/2D Fire/T_VFX_Glo31.png" id="3_8h5co"]
+[ext_resource type="Texture2D" uid="uid://bqnubx2u1t1" path="res://Data/Texture/2D/T_VFX_Glo31.png" id="3_8h5co"]
 [ext_resource type="Material" uid="uid://ud51332wuyfo" path="res://Particle/Spell/Electric/vfx_sparks.tres" id="3_fgund"]
 [ext_resource type="Material" uid="uid://c8nvlu2wc60vw" path="res://Particle/Spell/Electric/vfx_flare_light.tres" id="5_coh0b"]
 
@@ -261,6 +261,7 @@ default_color = Color(1.8, 1.2, 0.22, 1)
 texture_mode = 2
 
 [node name="Sparks" type="GPUParticles2D" parent="."]
+visible = false
 material = SubResource("CanvasItemMaterial_lp58i")
 position = Vector2(2, -1)
 amount = 15
@@ -270,6 +271,7 @@ lifetime = 0.15
 fixed_fps = 60
 
 [node name="Flare" type="GPUParticles2D" parent="."]
+visible = false
 material = SubResource("CanvasItemMaterial_lhg54")
 position = Vector2(1, 1)
 amount = 1

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ct5ppocexx7mg" path="res://Data/Assets/BackGround/background_text_vfx_top.png" id="2_8d4k0"]
 [ext_resource type="Texture2D" uid="uid://cv3deg4obeqrt" path="res://Data/Assets/BackGround/cloud_grey.png" id="3_xfg3r"]
 [ext_resource type="PackedScene" uid="uid://b2x1gwlq6444i" path="res://Scenes/Particle/Shader Spell-Projectile/vfx_thunder_light.tscn" id="4_d7xxu"]
-[ext_resource type="Texture2D" uid="uid://bqnubx2u1t1" path="res://Data/Texture/2D Fire/T_VFX_Glo31.png" id="6_ewhjo"]
+[ext_resource type="Texture2D" uid="uid://bqnubx2u1t1" path="res://Data/Texture/2D/T_VFX_Glo31.png" id="6_ewhjo"]
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_ifqnu"]
 input_name = "color"

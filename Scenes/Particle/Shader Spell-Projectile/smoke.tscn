@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://t0eic3fm86xs"]
 
 [ext_resource type="Shader" uid="uid://dohr4h8kc67x2" path="res://Shaders/Spell/smoke_bomb.tres" id="1_wpf1u"]
-[ext_resource type="Texture2D" uid="uid://dmpy3jjabbmm7" path="res://Data/Texture/2D Fire/T_1_pixel.jpg" id="3_5bq04"]
+[ext_resource type="Texture2D" uid="uid://dmpy3jjabbmm7" path="res://Data/Texture/2D/T_1_pixel.jpg" id="3_5bq04"]
 [ext_resource type="Texture2D" uid="uid://c6nrnfhdcd33x" path="res://Data/Texture/kenney_particle_pack/smoke_04.png" id="5_j8r7n"]
 
 [sub_resource type="Gradient" id="Gradient_064kw"]
