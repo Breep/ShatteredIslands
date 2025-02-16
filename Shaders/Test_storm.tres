@@ -1,8 +1,8 @@
 [gd_resource type="ShaderMaterial" load_steps=10 format=3 uid="uid://cx37wrmb8u4rl"]
 
 [ext_resource type="Shader" uid="uid://dvhk67br387xv" path="res://Shaders/HealRing.tres" id="1_5l56b"]
-[ext_resource type="Texture2D" uid="uid://ctd8v0om4feje" path="res://Data/Texture/2D Fire/trail_texture.png" id="2_sp6p2"]
-[ext_resource type="Texture2D" uid="uid://bdn6w1dgmnmqp" path="res://Data/Texture/2D Fire/T_Gradient_circle22.jpg" id="3_3h2mx"]
+[ext_resource type="Texture2D" uid="uid://ctd8v0om4feje" path="res://Data/Texture/2D/trail_texture.png" id="2_sp6p2"]
+[ext_resource type="Texture2D" uid="uid://bdn6w1dgmnmqp" path="res://Data/Texture/2D/T_Gradient_circle22.jpg" id="3_3h2mx"]
 
 [sub_resource type="Gradient" id="Gradient_thicx"]
 

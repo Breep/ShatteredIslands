@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=35 format=3 uid="uid://21qcmga47g1m"]
 
-[ext_resource type="Texture2D" uid="uid://dknfkykqwklf7" path="res://Data/Texture/2D Fire/T_VFX_Noise_465.png" id="1_ip0rs"]
+[ext_resource type="Texture2D" uid="uid://dknfkykqwklf7" path="res://Data/Texture/2D/T_VFX_Noise_465.png" id="1_ip0rs"]
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_7ewfb"]
 expanded_output_ports = [0]

@@ -1,8 +1,8 @@
 [gd_resource type="ShaderMaterial" load_steps=10 format=3 uid="uid://dqm51ysejlh7b"]
 
 [ext_resource type="Shader" uid="uid://dvhk67br387xv" path="res://Shaders/HealRing.tres" id="1_1kyau"]
-[ext_resource type="Texture2D" uid="uid://dknfkykqwklf7" path="res://Data/Texture/2D Fire/T_VFX_Noise_465.png" id="2_pnhgo"]
-[ext_resource type="Texture2D" uid="uid://bdn6w1dgmnmqp" path="res://Data/Texture/2D Fire/T_Gradient_circle22.jpg" id="3_4xivl"]
+[ext_resource type="Texture2D" uid="uid://dknfkykqwklf7" path="res://Data/Texture/2D/T_VFX_Noise_465.png" id="2_pnhgo"]
+[ext_resource type="Texture2D" uid="uid://bdn6w1dgmnmqp" path="res://Data/Texture/2D/T_Gradient_circle22.jpg" id="3_4xivl"]
 
 [sub_resource type="Gradient" id="Gradient_07cds"]
 

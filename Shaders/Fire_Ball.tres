@@ -1,8 +1,8 @@
 [gd_resource type="ShaderMaterial" load_steps=10 format=3 uid="uid://sfgvxf8wp81x"]
 
 [ext_resource type="Shader" uid="uid://bm8n2ddrjislc" path="res://Shaders/fire_shader.tres" id="1_5hop7"]
-[ext_resource type="Texture2D" uid="uid://dknfkykqwklf7" path="res://Data/Texture/2D Fire/T_VFX_Noise_465.png" id="2_trx0u"]
-[ext_resource type="Texture2D" uid="uid://bdn6w1dgmnmqp" path="res://Data/Texture/2D Fire/T_Gradient_circle22.jpg" id="3_qcqi1"]
+[ext_resource type="Texture2D" uid="uid://dknfkykqwklf7" path="res://Data/Texture/2D/T_VFX_Noise_465.png" id="2_trx0u"]
+[ext_resource type="Texture2D" uid="uid://bdn6w1dgmnmqp" path="res://Data/Texture/2D/T_Gradient_circle22.jpg" id="3_qcqi1"]
 
 [sub_resource type="Gradient" id="Gradient_t20mg"]
 
