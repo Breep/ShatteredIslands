@@ -9,6 +9,7 @@ var _source: Character # Ref to character owner
 var _fire_stats: CharacterFireStats # Ref to the owner fire stats
 
 var _optional_timers: Array[Timer]
+var _optional_spells: Array[Node]
 
 # ============================== Spells scenes ==============================
 
@@ -28,16 +29,20 @@ func init(source: Character, fire_stats: CharacterFireStats) -> void:
 	
 	_source = source
 	_fire_stats = fire_stats
+	_create_optional_timers()
 
 
 func start() -> void:
-	_create_optional_timers()
 	_lanch_optional_spells()
+	for timer in _optional_timers:
+		timer.start()
 
 
 func stop() -> void:
 	for timer in _optional_timers:
 		timer.stop()
+	for spell in _optional_spells:
+		spell.queue_free()
 
 
 func get_reduced_damage(damage: int, damage_type: Utils.DamageType) -> int:
@@ -67,17 +72,17 @@ func get_increased_damage(damage: int, damage_type: Utils.DamageType) -> int:
 func _create_optional_timers() -> void:
 	# [Fire dagger bolt]
 	if _fire_stats.firebolt_activated:
-		_optional_timers.append(Utils.create_optional_timer(self, _fire_stats.firebolt_period, _on_firebolt_timer_timeout))
+		_optional_timers.append(Utils.create_perpetual_timer(self, _fire_stats.firebolt_period, _on_firebolt_timer_timeout))
 	
 	# [Explosion]
 	if _fire_stats.nuke_activated:
 		_on_nuke_timer_timeout()
-		_optional_timers.append(Utils.create_optional_timer(self, _fire_stats.nuke_period, _on_nuke_timer_timeout))
+		_optional_timers.append(Utils.create_perpetual_timer(self, _fire_stats.nuke_period, _on_nuke_timer_timeout))
 	
 	# [Meteor]
 	if _fire_stats.meteor_activated:
 		var meteor_period = _fire_stats.meteor_deploy_time + _fire_stats.meteor_cooldown
-		_optional_timers.append(Utils.create_optional_timer(self, meteor_period, _on_meteor_timer_timeout))
+		_optional_timers.append(Utils.create_perpetual_timer(self, meteor_period, _on_meteor_timer_timeout))
 
 
 func _lanch_optional_spells() -> void:

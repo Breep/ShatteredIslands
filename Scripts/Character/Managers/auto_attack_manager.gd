@@ -57,15 +57,17 @@ func init(source: Character, aa_stats: CharacterAutoAttackStats, projectile_scen
 	_aa_stats = aa_stats
 	_default_attack_speed = hero.stats.attack_speed
 	_update_auto_attack_speed()
+	_create_optional_timers()
 
 
 func start() -> void:
-	_create_optional_timers()
+	__aa_speed_overtime_ticks = 0
 	_auto_attack_timer.start()
+	for timer in _optional_timers:
+		timer.start()
 
 
 func stop() -> void:
-	print("AutoAttackManager: Stopping")
 	_auto_attack_timer.stop()
 	for timer in _optional_timers:
 		timer.stop()
@@ -83,15 +85,16 @@ func set_auto_attack_speed(attack_speed: float) -> void:
 func _create_optional_timers() -> void:
 	# [Gatling]
 	if _aa_stats.attack_speed_overtime_max > 0:
-		_optional_timers.append(Utils.create_optional_timer(self, ATTACK_SPEED_BOOST_OVERTIME_PERIOD, _on_aa_speed_overtime_timer_timeout))
+		_optional_timers.append(Utils.create_perpetual_timer(self, ATTACK_SPEED_BOOST_OVERTIME_PERIOD, _on_aa_speed_overtime_timer_timeout))
 	
 	# [Focus]
 	if _source.stats.storm.focus_target_activated:
 		_focus_timer = Timer.new()
 		add_child(_focus_timer)
-		_focus_timer.connect("timeout", _on_focus_timer_timeout)
+		_focus_timer.timeout.connect(_on_focus_timer_timeout)
 		_focus_timer.wait_time = _source.stats.storm.focus_target_time_before
-		_focus_timer.one_shot = 1
+		_focus_timer.one_shot = true
+		_optional_timers.append(_focus_timer)
 
 
 func _auto_attack(target: Character) -> void:
@@ -161,7 +164,7 @@ func _on_auto_attack_timer_timeout() -> void:
 	_auto_attack(target)
 
 
-var __aa_speed_overtime_ticks: int = 0 # static variable for _on_aa_speed_overtime_timer()
+var __aa_speed_overtime_ticks: int = 0 # static variable for _on_aa_speed_overtime_timer() # TODO refaire avec un calcul temporel wtf cette première idée de merde que j'avais
 func _on_aa_speed_overtime_timer_timeout() -> void:
 	var attack_speed_overtime_current = remap(__aa_speed_overtime_ticks, \
 			0, _aa_stats.attack_speed_overtime_duration / ATTACK_SPEED_BOOST_OVERTIME_PERIOD, \

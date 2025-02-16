@@ -34,21 +34,28 @@ func init(source: Character, shadow_stats: CharacterShadowStats) -> void:
 	
 	_source = source
 	_shadow_stats = shadow_stats
-
-
-func start() -> void:
 	_attach_optional_distance_callbacks()
-	_previous_global_position = _source.global_position
-	_check_distance_timer.start()
 	_create_optional_timers()
 
 
+func start() -> void:
+	_previous_global_position = _source.global_position
+	_check_distance_timer.start()
+	for timer in _optional_timers:
+		timer.start()
+
 func stop() -> void:
-	for callback in _optional_distance_callbacks:
-		_optional_distance_callbacks.erase(callback)
-	
 	for timer in _optional_timers:
 		timer.stop()
+	_check_distance_timer.stop()
+	_total_distance = 0
+	__distance_since_last_shadow_bolt = 0
+	__distance_since_last_increase_aa_damage = 0
+	__distance_since_last_gain_armor_stacks = 0
+	__distance_since_last_heal = 0
+	__distance_since_last_gain_max_hp = 0
+	__distance_since_last_inflict_poison_stacks = 0
+	__distance_since_last_untargetable = 0
 
 # ============================== Private functions ==============================
 
@@ -78,11 +85,11 @@ func _attach_optional_distance_callbacks() -> void:
 func _create_optional_timers() -> void:
 	# In the Shadow
 	if _shadow_stats.untargetable_activated:
-		_optional_timers.append(Utils.create_optional_timer(self, UNTARGETABLE_CHECK_PERIOD, _on_untargetable_timer_timeout))
+		_optional_timers.append(Utils.create_perpetual_timer(self, UNTARGETABLE_CHECK_PERIOD, _on_untargetable_timer_timeout))
 	
-	# SHadow step
+	# Shadow step
 	if _shadow_stats.shadow_step_activated:
-		_optional_timers.append(Utils.create_optional_timer(self, _shadow_stats.shadow_step_period, _on_shadow_step_timer_timeout))
+		_optional_timers.append(Utils.create_perpetual_timer(self, _shadow_stats.shadow_step_period, _on_shadow_step_timer_timeout))
 
 
 func _call_optional_distance_callbacks() -> void:
@@ -155,7 +162,7 @@ func _try_inflict_poison_stacks() -> void:
 		var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.RANDOM_ENEMY)
 		if target == null:
 			return
-		target.take_poison_stacks(_source, _shadow_stats.inflict_poison_stacks_value, 5) # TODO need a duration value in poison stats
+		target.take_condition_stacks(_shadow_stats.inflict_poison_stacks_value, Utils.StackType.POISON, _source, 5) # TODO need a duration value in poison stats
 
 
 var __distance_since_last_untargetable: float = 0

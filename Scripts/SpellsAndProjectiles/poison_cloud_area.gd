@@ -13,13 +13,14 @@ var _radius: float # Radius of the poison cloud area (in m)
 
 @onready var _effect_timer: Timer = %EffectTimer
 @onready var _collision_shape_3d: CollisionShape3D = %CollisionShape2D
-@onready var tmp_debug_mesh: MeshInstance3D = $MeshInstance3D
+@onready var tmp_debug_mesh: MeshInstance3D = $PoisonCloudVisual
 
 func init(source: Character, stacks: float, period: float, radius: float) -> void:
 	_source = source
 	_stacks = stacks
 	_wait_time = period
 	_radius = radius
+
 
 func _ready() -> void:
 	if _source == null:
@@ -45,4 +46,4 @@ func _on_body_exited(body: Node3D) -> void:
 func _on_effect_timer_timeout() -> void:
 	for character in _characters_inside:
 		if character.team != _source.team:
-			character.take_poison_stacks(_source, _stacks, 5)
+			character.take_condition_stacks(_stacks, Utils.StackType.POISON, _source, 5)

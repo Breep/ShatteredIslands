@@ -24,13 +24,14 @@ enum StackType {
 
 # ============================== Public ==============================
 
-func create_optional_timer(node: Node, wait_time: float, callback: Callable) -> Timer:
+func create_perpetual_timer(node: Node, wait_time: float, callback: Callable, autostart: bool = false) -> Timer:
 	var timer := Timer.new()
 	timer.wait_time = wait_time
 	timer.one_shot = false
 	node.add_child(timer)
-	timer.connect("timeout", callback)
-	timer.start()
+	timer.timeout.connect(callback)
+	if autostart:
+		timer.start()
 	return timer
 
 

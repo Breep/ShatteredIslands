@@ -128,24 +128,15 @@ func take_damage(source: Character, damage: int, damage_type: Utils.DamageType, 
 	_character_visual.damage_popup(damage, damage_type, is_critical)
 	_character_visual.update_health_bar(stats.health, stats.health_max)
 	if stats.health <= 0 and !_is_dead:
-		_life_manager.source_is_dead()
-		dead.emit(self)
-		_is_dead = true
-		_auto_attack_manager.stop()
+		_handle_death()
 
 
-func take_poison_stacks(source: Character, poison_stacks: int, poison_duration: int) -> void:
-	_poison_manager.add_to_poison_effects(source, poison_stacks, poison_duration)
-
-
-func take_condition_stacks(_source: Character, stacks_number: int, stack_type: Utils.StackType) -> void:
+func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, source: Character = null, poison_duration: int = 0) -> void:
 	match stack_type:
 		Utils.StackType.POISON:
-			printerr("Should use take_poison_stacks()")
-			return
+			_poison_manager.add_to_poison_effects(source, stacks_number, poison_duration)
 		Utils.StackType.VULNERABILITY:
 			stats.storm.vulnerability_stacks += stacks_number
-			return
 
 
 func take_heal(source: Character, heal: int) -> void:
@@ -167,31 +158,15 @@ func set_state(new_state: FightingManager.FightingState) -> void:
 				return
 			_fighting_state = FightingManager.FightingState.STARTING
 			target_manager.init(self)
-			_init_auto_attack_manager()
-			_init_defense_manager()
-			_init_fire_manager()
-			_init_storm_manager()
-			_init_serenity_manager()
-			_init_poison_manager()
-			_init_shadow_manager()
-			_init_life_manager()
+			_init_all_family_managers()
 			_init_movement_manager(FightingManager.FightingState.STARTING)
 			_movement_manager.start()
-			for character in target_manager.get_all_characters():
-				character.dead.connect(_on_character_dead)
 		FightingManager.FightingState.FIGHT:
 			if _fighting_state != FightingManager.FightingState.STARTING:
 				printerr("Character: Can't change to fighting phase if i'm not in strating state")
 				return
 			_fighting_state = FightingManager.FightingState.FIGHT
-			_auto_attack_manager.start()
-			_defense_manager.start()
-			_fire_manager.start()
-			_storm_manager.start()
-			_heal_manager.start()
-			_poison_manager.start()
-			_shadow_manager.start()
-			_life_manager.start()
+			_start_all_family_managers()
 			_movement_manager.set_fighting_state(FightingManager.FightingState.FIGHT)
 			
 
@@ -268,7 +243,17 @@ func _init_life_manager() -> void:
 		printerr("No LifeManager")
 		return
 	
+	_life_manager.revived.connect(_on_life_manager_revived)
 	_life_manager.init(self, stats.hp)
+
+
+func _on_life_manager_revived(life_after_revived: int) -> void:
+	stats.health = life_after_revived
+	_character_visual.update_health_bar(stats.health, stats.health_max)
+	_start_all_family_managers()
+	_movement_manager.start()
+	_is_dead = false
+	Events.character_is_spawned.emit(self)
 
 # ============================== PoisonManager ==============================
 
@@ -309,14 +294,52 @@ func _on_shadow_manager_gain_max_hp_triggered(hp: int) -> void:
 	stats.health += hp
 	_character_visual.update_health_bar(stats.health, stats.health_max)
 
+# ============================== Managers common ==============================
+
+func _init_all_family_managers() -> void:
+	_init_auto_attack_manager()
+	_init_defense_manager()
+	_init_fire_manager()
+	_init_storm_manager()
+	_init_serenity_manager()
+	_init_poison_manager()
+	_init_shadow_manager()
+	_init_life_manager()
+
+
+func _start_all_family_managers() -> void:
+	_auto_attack_manager.start()
+	_defense_manager.start()
+	_fire_manager.start()
+	_storm_manager.start()
+	_heal_manager.start()
+	_poison_manager.start()
+	_shadow_manager.start()
+	_life_manager.start()
+
+
+func _stop_all_family_managers() -> void:
+	_auto_attack_manager.stop()
+	_defense_manager.stop()
+	_fire_manager.stop()
+	_storm_manager.stop()
+	_heal_manager.stop()
+	_poison_manager.stop()
+	_shadow_manager.stop()
+	_life_manager.stop()
+
+# ============================== Private ==============================
+
+func _handle_death() -> void:
+	_stop_all_family_managers()
+	_life_manager.source_is_dead()
+	_movement_manager.stop()
+	dead.emit(self, false)
+	_is_dead = true
+
 # ============================== Signals callbacks ==============================
 
 func _on_fighting_area_map_clicked(new_position: Vector3) -> void:
 	if _is_dead or not _is_local:
 		return
 	_movement_manager.set_target_position(new_position)
-
-
-func _on_character_dead(dead_character: Character) -> void:
-	print("Oh no! ", dead_character.player.name, " is dead :(")
-	target_manager.remove_character(dead_character)

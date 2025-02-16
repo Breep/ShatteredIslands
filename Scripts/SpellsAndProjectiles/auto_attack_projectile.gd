@@ -27,8 +27,7 @@ var _stats: AutoAttackProjectileStats
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	if (_stats == null):
-		_stats = AutoAttackProjectileStats.new()
+	_target.dead.connect(_on_target_dead)
 
 
 func _process(delta: float) -> void:
@@ -43,10 +42,10 @@ func _on_body_entered(body: Node3D) -> void:
 				_source.attack_percent(_target, _stats.fire_damage, Utils.DamageType.MAGIC, Utils.PercentModifier.CURRENT_HP)
 			
 			if _stats.poison_stacks > 0:
-				_target.take_poison_stacks(_source, _stats.poison_stacks, _stats.poison_duration)
+				_target.take_condition_stacks(_stats.poison_stacks, Utils.StackType.POISON, _source, _stats.poison_duration)
 			
 			if _stats.vulnerability_stacks > 0:
-				_target.take_condition_stacks(_source, _stats.vulnerability_stacks, Utils.StackType.VULNERABILITY)
+				_target.take_condition_stacks(_stats.vulnerability_stacks, Utils.StackType.VULNERABILITY)
 			
 			if _stats.is_bouncing:
 				_target = _source.target_manager.get_closest_enemy_from(_target) # Set new target to the closest character enemy to the source
@@ -100,6 +99,7 @@ func _get_crit_inc_from_vuln_stacks(vuln_stacks: int) -> float:
 func _move_toward_target(delta: float):
 	if _target == null:
 		printerr("AutoAttackProjectile [", name, "] is alive but with no target")
+		queue_free()
 		return
 	
 	var direction: Vector3 = (_target.global_position - global_position).normalized()
@@ -134,3 +134,7 @@ func _get_effects_from_randomization(character_stats: CharacterStats) -> Diction
 			effects[effect_name]["is_active"] = Utils.is_randomize_modifier_active(effects[effect_name]["chance"])
 	
 	return effects
+
+
+func _on_target_dead(_who, _true_death) -> void:
+	queue_free()

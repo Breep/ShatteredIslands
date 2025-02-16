@@ -8,6 +8,8 @@ var _target_position: Vector3
 var _is_moving: bool = false
 var _fighting_state: FightingManager.FightingState
 
+var _is_stopped: bool = false
+
 @onready var _energy_regen_timer: Timer = %EnergyRegenTimer
 
 func init(source: Character, fighting_state: FightingManager.FightingState) -> void:
@@ -20,7 +22,14 @@ func init(source: Character, fighting_state: FightingManager.FightingState) -> v
 
 
 func start() -> void:
+	_source.stats.energy = _source.stats.energy_max
 	_energy_regen_timer.start()
+	_is_stopped = false
+
+
+func stop() -> void:
+	_is_stopped = true
+	_energy_regen_timer.stop()
 
 
 func set_fighting_state(new_state: FightingManager.FightingState) -> void:
@@ -32,8 +41,9 @@ func set_target_position(target_position: Vector3) -> void:
 	_is_moving = true
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if _is_stopped:
+		return
 	_move_toward_target(delta)
 
 

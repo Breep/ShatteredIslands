@@ -14,7 +14,7 @@ var _radius: float # Radius of the healing fire area (in m)
 
 @onready var _effect_timer: Timer = %EffectTimer
 @onready var _collision_shape_3d: CollisionShape3D = %CollisionShape2D
-@onready var tmp_debug_mesh: MeshInstance3D = $MeshInstance3D
+@onready var tmp_debug_mesh: MeshInstance3D = %HealingFireVisual
 
 func init(source: Character, damage: float, heal: float, period: float, radius: float) -> void:
 	print("HealingFireArea: Init")
@@ -23,6 +23,7 @@ func init(source: Character, damage: float, heal: float, period: float, radius: 
 	_heal_percent = heal
 	_wait_time = period
 	_radius = radius
+
 
 func _ready() -> void:
 	if _source == null:

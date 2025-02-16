@@ -9,6 +9,7 @@ var _source: Character # Ref to character owner
 var _poison_stats: CharacterPoisonStats # Ref to the owner poison stats
 
 var _optional_timers: Array[Timer]
+var _optional_spells: Array[Node]
 
 # ============================== Spells scenes ==============================
 
@@ -30,17 +31,23 @@ func init(source: Character, poison_stats: CharacterPoisonStats) -> void:
 	
 	_source = source
 	_poison_stats = poison_stats
+	_create_optional_timers()
 
 
 func start() -> void:
-	_poison_tick_timer.start()
-	_create_optional_timers()
+	for timer in _optional_timers:
+		timer.stop()
 	_lanch_optional_spells()
+	_poison_tick_timer.start()
 
 
 func stop() -> void:
 	for timer in _optional_timers:
 		timer.stop()
+	for spell in _optional_spells:
+		spell.queue_free()
+	for poison_effect in _poison_stats.poison_effects.duplicate():
+		_poison_stats.poison_effects.erase(poison_effect)
 	_poison_tick_timer.stop()
 
 
@@ -68,7 +75,7 @@ func add_to_poison_effects(source: Character, poison_stacks: int, poison_duratio
 func _create_optional_timers() -> void:
 	# Death flask
 	if _poison_stats.periodic_stacks_activated:
-		Utils.create_optional_timer(self, _poison_stats.periodic_stacks_period, _on_periodic_stacks_timer_timeout)
+		Utils.create_perpetual_timer(self, _poison_stats.periodic_stacks_period, _on_periodic_stacks_timer_timeout)
 
 
 func _lanch_optional_spells() -> void:
@@ -78,6 +85,7 @@ func _lanch_optional_spells() -> void:
 		poison_cloud_area.init(_source, _poison_stats.poison_cloud_stacks_number, _poison_stats.poison_cloud_stacks_period, _poison_stats.poison_cloud_range)
 		_source.add_child(poison_cloud_area)
 		poison_cloud_area.position = Vector3.ZERO
+		_optional_spells.append(poison_cloud_area)
 
 # ============================== Callbacks functions ==============================
 
@@ -87,7 +95,7 @@ func _on_periodic_stacks_timer_timeout() -> void:
 		return
 	
 	var poison_stacks = _poison_stats.periodic_stacks_number
-	target.take_poison_stacks(_source, poison_stacks, 10)
+	target.take_condition_stacks(poison_stacks, Utils.StackType.POISON, _source, 10)
 
 
 # Handle poison stacks and damage on _source

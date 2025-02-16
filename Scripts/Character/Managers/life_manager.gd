@@ -3,12 +3,15 @@ extends Node
 
 # ============================== Signals ==============================
 
+signal revived(life_after_revive: int)
+
 # ============================== Private variables ==============================
 
 var _source: Character # Ref to character owner
 var _life_stats: CharacterLifeStats # Ref to the owner life stats
 
 var _optional_timers: Array[Timer]
+var _revive_timer: Timer
 
 # ============================== Spells scenes ==============================
 
@@ -24,15 +27,18 @@ func init(source: Character, life_stats: CharacterLifeStats) -> void:
 	
 	_source = source
 	_life_stats = life_stats
+	_create_optional_timers()
 
 
 func start() -> void:
-	_create_optional_timers()
+	for timer in _optional_timers:
+		timer.start()
 
 
 func stop() -> void:
 	for timer in _optional_timers:
 		timer.stop()
+
 
 func get_increased_damage_taken_from_lost_hp(damage: int, damage_type: Utils.DamageType) -> int:
 	if damage_type != Utils.DamageType.PHYSICAL:
@@ -48,6 +54,7 @@ func get_increased_damage_taken_from_lost_hp(damage: int, damage_type: Utils.Dam
 
 	return damage * damage_multiplier
 
+
 func get_reduced_damage(damage: int) -> int:
 	if not _life_stats.damage_taken_reduced_below_treshold_activated:
 		return damage
@@ -59,16 +66,32 @@ func get_reduced_damage(damage: int) -> int:
 	
 	return damage
 
+
+# [Revive]
+func source_is_dead() -> void:
+	if not _life_stats.revive_after_death_activated or _life_stats.revive_after_death_triggered:
+		return
+	
+	_life_stats.revive_after_death_triggered = true
+	_revive_timer.start()
+
 # ============================== Private functions ==============================
 
 func _create_optional_timers() -> void:
 	# Poisonous hearth
 	if _life_stats.poison_by_lost_hp_activated:
-		_optional_timers.append(Utils.create_optional_timer(self, _life_stats.poison_by_lost_hp_period, _on_poison_by_lost_hp_timer_timeout))
+		_optional_timers.append(Utils.create_perpetual_timer(self, _life_stats.poison_by_lost_hp_period, _on_poison_by_lost_hp_timer_timeout))
 	
 	# Hearth of fire
 	if _life_stats.fire_damage_activated:
-		_optional_timers.append(Utils.create_optional_timer(self, _life_stats.fire_damage_period, _on_fire_damage_timer_timeout))
+		_optional_timers.append(Utils.create_perpetual_timer(self, _life_stats.fire_damage_period, _on_fire_damage_timer_timeout))
+	
+	if _life_stats.revive_after_death_activated:
+		_revive_timer = Timer.new()
+		_revive_timer.wait_time = _life_stats.revive_after_death_time
+		_revive_timer.one_shot = true
+		_revive_timer.timeout.connect(_on_revive_timer_timeout)
+		add_child(_revive_timer)
 
 # ============================== Callbacks functions ==============================
 
@@ -80,7 +103,7 @@ func _on_poison_by_lost_hp_timer_timeout() -> void:
 	var stack_multiplier: int = _life_stats.poison_by_lost_hp_stacks
 	var poison_stacks: int = (lost_hp / _life_stats.poison_by_lost_hp_hp_number) * stack_multiplier
 	print("Inflict ", poison_stacks, " poison stacks ! - ", _source.stats.health_max - _source.stats.health)
-	target.take_poison_stacks(_source, poison_stacks, 5)
+	target.take_condition_stacks(poison_stacks, Utils.StackType.POISON, _source, 5)
 
 
 func _on_fire_damage_timer_timeout() -> void:
@@ -89,3 +112,10 @@ func _on_fire_damage_timer_timeout() -> void:
 		return
 	var damage = _source.stats.health_max * _life_stats.fire_damage_percent / 100.0
 	_source.attack(target, damage, Utils.DamageType.MAGIC)
+
+
+func _on_revive_timer_timeout() -> void:
+	print("REVIVE")
+	print("Spawn revive bomb here")
+	var life_after_revive: int = ((_life_stats.revive_after_death_percentage_life * _source.stats.health_max) / 100.0) as int
+	revived.emit(life_after_revive)

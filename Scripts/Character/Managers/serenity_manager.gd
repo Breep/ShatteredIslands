@@ -26,10 +26,12 @@ func init(source: Character, heal_stats: CharacterHealStats) -> void:
 	
 	_source = source
 	_heal_stats = heal_stats
+	_create_optional_timers()
 
 
 func start() -> void:
-	_create_optional_timers()
+	for timer in _optional_timers:
+		timer.start()
 
 
 func stop() -> void:
@@ -50,7 +52,7 @@ func notify_heal() -> void:
 		var target: Character = _source.target_manager.get_target(TargetManager.TargettingStrategy.RANDOM_ENEMY)
 		if target == null:
 			return
-		target.take_poison_stacks(_source, _heal_stats.poison_stacks_number, 5) # TODO relier à la duration du poison
+		target.take_condition_stacks(_heal_stats.poison_stacks_number, Utils.StackType.POISON, _source, 5) # TODO relier à la duration du poison
 	
 	# [Panda-cify]
 	if _heal_stats.pacify_enemy_activated and Utils.is_randomize_modifier_active(_heal_stats.pacify_enemy_chance):
@@ -75,15 +77,15 @@ func get_reduced_damage_dealed_from_pacify(damage: int) -> int:
 func _create_optional_timers() -> void:
 	# [Flash heal]
 	if _heal_stats.periodic_heal_activated:
-		_optional_timers.append(Utils.create_optional_timer(self, _heal_stats.periodic_heal_period, _on_periodic_heal_timer_timeout))
+		_optional_timers.append(Utils.create_perpetual_timer(self, _heal_stats.periodic_heal_period, _on_periodic_heal_timer_timeout))
 	
 	# [Survivor]
 	if _heal_stats.lost_hp_regen_activated:
-		_optional_timers.append(Utils.create_optional_timer(self, _heal_stats.lost_hp_regen_period, _on_lost_hp_regen_timer_timeout))
+		_optional_timers.append(Utils.create_perpetual_timer(self, _heal_stats.lost_hp_regen_period, _on_lost_hp_regen_timer_timeout))
 
 	# [Pacific wave]
 	if _heal_stats.epic_heal_area_activated:
-		_optional_timers.append(Utils.create_optional_timer(self, _heal_stats.epic_heal_area_period, _on_epic_heal_area_timer_timeout))
+		_optional_timers.append(Utils.create_perpetual_timer(self, _heal_stats.epic_heal_area_period, _on_epic_heal_area_timer_timeout))
 
 # ============================== Callbacks functions ==============================
 
@@ -102,14 +104,3 @@ func _on_epic_heal_area_timer_timeout() -> void:
 		return
 	for target in targets:
 		_source.heal_percent(target, _heal_stats.epic_heal_area_percentage, Utils.PercentModifier.MAX_HP)
-
-
-
-
-
-
-
-
-
-
-	

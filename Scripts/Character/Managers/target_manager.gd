@@ -33,11 +33,19 @@ var _source: Character # Owned character
 
 # ============================== Public functions ==============================
 
+func _ready() -> void:
+	Events.connect("character_is_spawned", _on_events_character_is_spawned)
+	
+# ============================== Node base functions ==============================
+
 func init(source: Character) -> void:
 	_source = source
 	_characters = _get_all_scene_characters()
 	_enemies = _get_enemies_from_characters()
 	_allies = _get_allies_from_characters()
+	
+	for character in _characters:
+		character.dead.connect(_on_character_dead)
 
 
 # Get target of the owned character from a given strategy
@@ -90,17 +98,6 @@ func get_closest_enemy_from(from_character: Character) -> Character:
 	return closest_enemy
 
 
-# Return all characters ref. Duplicate to make sure the caller doesn't mess with the local characters array
-func get_all_characters() -> Array[Character]:
-	return _characters.duplicate()
-
-
-func remove_character(character_to_remove: Character) -> void:
-	_characters.erase(character_to_remove)
-	_enemies.erase(character_to_remove)
-	_allies.erase(character_to_remove)
-
-
 func get_targets(strategy: MultipleTargettingStrategy) -> Array[Character]:
 	match strategy:
 		MultipleTargettingStrategy.ALL:
@@ -138,6 +135,11 @@ func _get_allies_from_characters() -> Array[Character]:
 			ret.append(character)
 	return ret
 
+
+func _remove_character(character_to_remove: Character) -> void:
+	_characters.erase(character_to_remove)
+	_enemies.erase(character_to_remove)
+	_allies.erase(character_to_remove)
 
 # ============================== Target strategy functions ==============================
 
@@ -235,9 +237,25 @@ func _get_array_whithout_untargetable_targets(characters: Array[Character]) -> A
 	return characters_copy
 	
 	
-	
-	
-	
+
+
+# ============================== Events callback ==============================
+
+
+func _on_events_character_is_spawned(who: Character) -> void:
+	if who not in _characters:
+		_characters.append(who)
+		if who.team != _source.team:
+			_enemies.append(who)
+		else:
+			_allies.append(who)
+
+# ============================== Other callback ==============================
+
+func _on_character_dead(who: Character, true_death: bool):
+	print("OH NO ", who.player.name, " is dead :(")
+	_remove_character(who)
+
 	
 	
 	

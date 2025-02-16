@@ -38,11 +38,13 @@ func init(source: Character, storm_stats: CharacterStormStats) -> void:
 	_source = source
 	_storm_stats = storm_stats
 	_default_physical_critical_chance = source.hero.stats.physical_critical_chance
+	_create_optional_timers()
 
 
 func start() -> void:
+	for timer in _optional_timers:
+		timer.start()
 	_vulnerability_timer.start()
-	_create_optional_timers()
 
 
 func stop() -> void:
@@ -84,13 +86,13 @@ func notice_critical_damage(char_who_received_the_crit: Character, damage: int) 
 	# [Poisonous lightning]
 	if _storm_stats.crit_poison_activated:
 		var poison_stacks: int = (damage * _storm_stats.crit_poison_amount as float / 100.0) as int
-		char_who_received_the_crit.take_poison_stacks(_source, poison_stacks, 5)
+		char_who_received_the_crit.take_condition_stacks(poison_stacks, Utils.StackType.POISON, _source, 5)
 	
 	# [Thunder break]
 	if _storm_stats.crit_vulnerability_activated:
 		var vuln_stacks: int = (damage * _storm_stats.crit_vulnerability_amount as float / 100.0) as int
 		if multiplayer.get_unique_id() == 1: print(vuln_stacks)
-		char_who_received_the_crit.take_condition_stacks(_source, vuln_stacks, Utils.StackType.VULNERABILITY)
+		char_who_received_the_crit.take_condition_stacks(vuln_stacks, Utils.StackType.VULNERABILITY)
 	
 	# [Lightning speed]
 	if _storm_stats.crit_move_speed_activated:
@@ -122,30 +124,33 @@ func focus_changed(focused: bool) -> void:
 func _create_optional_timers() -> void:
 	# Break armor
 	if _storm_stats.periodic_vulnerability_activated:
-		_optional_timers.append(Utils.create_optional_timer(self, _storm_stats.periodic_vulnerability_period, _on_periodic_vulnerability_timer_timeout))
+		_optional_timers.append(Utils.create_perpetual_timer(self, _storm_stats.periodic_vulnerability_period, _on_periodic_vulnerability_timer_timeout))
 	
 	if _storm_stats.focus_target_activated:
 		_focus_timer = Timer.new()
 		add_child(_focus_timer)
+		_focus_timer.one_shot = true
 		_focus_timer.wait_time = FOCUS_INCREASE_CRIT_PERIOD
 		_focus_timer.connect("timeout", _on_focus_timer_timeout)
+		_optional_timers.append(_focus_timer)
 	
 	if _storm_stats.crit_move_speed_activated:
 		_crit_move_speed_timer = Timer.new()
 		add_child(_crit_move_speed_timer)
+		_crit_move_speed_timer.one_shot = true
 		_crit_move_speed_timer.wait_time = _storm_stats.crit_move_speed_duration
 		_crit_move_speed_timer.connect("timeout", _on_crit_move_speed_timer_timeout)
+		_optional_timers.append(_crit_move_speed_timer)
 
 # ============================== Callbacks functions ==============================
 
 func _on_periodic_vulnerability_timer_timeout() -> void:
-	#print("StormManager: Periodic vulnerability")
 	var target: Character = _source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST_ENEMY)
 	if target == null:
 		return
 	
 	var vulnerability_stacks: int = _storm_stats.periodic_vulnerability_amount
-	target.take_condition_stacks(_source, vulnerability_stacks, Utils.StackType.VULNERABILITY)
+	target.take_condition_stacks(vulnerability_stacks, Utils.StackType.VULNERABILITY)
 
 
 func _on_vulnerability_timer_timeout() -> void:

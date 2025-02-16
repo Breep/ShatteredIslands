@@ -45,7 +45,6 @@ func _on_impact_effect_area_body_exited(body: Node3D) -> void:
 
 
 func _on_deploy_timer_timeout() -> void:
-	print("BOOM METEOR")
 	for character in _characters_inside:
 		if character.team != _source.team:
 			_source.attack_percent(character, _damage_percent, Utils.DamageType.MAGIC, Utils.PercentModifier.MAX_HP)

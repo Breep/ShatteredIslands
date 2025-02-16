@@ -26,14 +26,15 @@ func init(source: Character, defense_stats: CharacterDefenseStats) -> void:
 	
 	_source = source
 	_defense_stats = defense_stats
-
-
-func start() -> void:
 	_create_optional_timers()
 
 
+func start() -> void:
+	for timer in _optional_timers:
+		timer.start()
+
+
 func stop() -> void:
-	print("DefenseManager: Stopping")
 	for timer in _optional_timers:
 		timer.stop()
 
@@ -79,15 +80,15 @@ func notify_heal_received(heal: int) -> void:
 func _create_optional_timers() -> void:
 	# Shield yourself
 	if _defense_stats.periodic_armor_stacks_amount > 0:
-		_optional_timers.append(Utils.create_optional_timer(self, _defense_stats.periodic_armor_stacks_period, _on_periodic_armor_stacks_timer_timeout))
+		_optional_timers.append(Utils.create_perpetual_timer(self, _defense_stats.periodic_armor_stacks_period, _on_periodic_armor_stacks_timer_timeout))
 	
 	# Shield strike
 	if _defense_stats.shield_strike_damage_percent > 0:
-		_optional_timers.append(Utils.create_optional_timer(self, _defense_stats.shield_strike_period, _on_shield_strike_timer_timeout))
+		_optional_timers.append(Utils.create_perpetual_timer(self, _defense_stats.shield_strike_period, _on_shield_strike_timer_timeout))
 	
 	# Armor
 	if _defense_stats.lost_hp_armor_gain_percent > 0:
-		_optional_timers.append(Utils.create_optional_timer(self, _defense_stats.lost_hp_armor_gain_period, _on_lost_hp_armor_gain_timer_timeout))
+		_optional_timers.append(Utils.create_perpetual_timer(self, _defense_stats.lost_hp_armor_gain_period, _on_lost_hp_armor_gain_timer_timeout))
 
 
 func _handle_backfires(damage_source: Character) -> void:
@@ -98,10 +99,10 @@ func _handle_backfires(damage_source: Character) -> void:
 		_source.attack_percent(damage_source, _defense_stats.backfire_fire_shield_damage, Utils.DamageType.MAGIC, Utils.PercentModifier.CURRENT_HP)
 	
 	if Utils.is_randomize_modifier_active(_defense_stats.backfire_poison_chance):
-		damage_source.take_poison_stacks(_source, _defense_stats.backfire_poison_stacks, 10) # TODO Surement envoyer ce truc au poison manager car il faut connaitre la durée du poison
+		damage_source.take_condition_stacks(_defense_stats.backfire_poison_stacks, Utils.StackType.POISON, _source, 10)
 	
 	if Utils.is_randomize_modifier_active(_defense_stats.backfire_vulnerability_chance):
-		damage_source.take_condition_stacks(_source, _defense_stats.backfire_vulnerability_stacks, Utils.StackType.VULNERABILITY)
+		damage_source.take_condition_stacks(_defense_stats.backfire_vulnerability_stacks, Utils.StackType.VULNERABILITY)
 
 # ============================== Callbacks functions ==============================
 

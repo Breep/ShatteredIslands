@@ -10,7 +10,7 @@ func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	stats.hp.revive_after_death = true
+	stats.hp.revive_after_death_activated = true
 	stats.hp.revive_after_death_percentage_life = revive_after_death_percentage_life
 	stats.hp.revive_after_death_percentage_damage = revive_after_death_percentage_life
 	stats.hp.revive_after_death_time = revive_after_death_time
