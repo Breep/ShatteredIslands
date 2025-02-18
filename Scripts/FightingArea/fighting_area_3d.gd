@@ -33,7 +33,7 @@ func _ready() -> void:
 	
 	# TMP TODO Faire en sorte que les team des joueurs soient choisi au début du round (Ajouter la notion de round)
 	var i:int = 0
-	for player in GameManager.players:
+	for player in GameManager.players.values():
 		player.team = (i%2)+1
 		i+=1
 	

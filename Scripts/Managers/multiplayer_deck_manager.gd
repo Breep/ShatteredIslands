@@ -70,8 +70,8 @@ func init_cards_ref(families: Array[Family], _rules: GameRules) -> void:
 				_cards_refs.append(card)
 	
 	# init dictionary
-	for player in GameManager.players:
-		_cards_refs_displayed_in_player_shop[player.id] = []
+	for player_id in GameManager.players.keys():
+		_cards_refs_displayed_in_player_shop[player_id] = []
 
 
 # Construct the shop deck
@@ -127,25 +127,7 @@ func smart_draw_n_cards(cards_to_remove: Array[Card], number_of_cards_to_draw: i
 
 func try_buy_card_for_local_player(card: Card) -> bool:
 	if multiplayer.is_server():
-		# Check if player can buy the card
-		for player in GameManager.players:
-			if player.id == 1:
-				if player.gold < 100:
-					print("[id:", multiplayer.get_unique_id(),"] Not enough gold")
-					return false
-				if _get_card_ref_id(card) not in _cards_refs_displayed_in_player_shop[SERVER_ID]:
-					print("[id:", multiplayer.get_unique_id(),"] Trying to buy a card not displayed in shop")
-					return false
-		
-		# Put back cards in shop
-		for card_ref_to_delete in _cards_refs_displayed_in_player_shop[SERVER_ID]:
-			if card_ref_to_delete != _get_card_ref_id(card):
-				_cards_refs_displayed_in_player_shop[SERVER_ID].erase(card_ref_to_delete)
-				put_card_back_in_cardshop(_cards_refs[card_ref_to_delete])
-		
-		# Notify ALL clients that SERVER bought a card
-		_cards_refs_displayed_in_player_shop[SERVER_ID].erase(_get_card_ref_id(card))
-		_add_card_in_playerdeck.rpc(SERVER_ID, _get_card_ref_id(card))
+		printerr("Server shouldn't be a player")
 		return true
 	
 	print("[id:", multiplayer.get_unique_id(),"] Asking the server permission to buy ", card.name)
@@ -163,7 +145,7 @@ func try_buy_card_for_local_player(card: Card) -> bool:
 			print("[id:", multiplayer.get_unique_id(),"] I can't buy this card")
 			return false
 	
-	# Should be unreachable
+	# Unreachable
 	return false
 
 # ============================== Private function ==============================
@@ -202,10 +184,8 @@ func draw_cards(cards_refs_ids: Array[int]) -> void:
 @rpc("authority", "call_local")
 func _add_card_in_playerdeck(player_id: int, card_ref_id: int) -> void:
 	print("[id:", multiplayer.get_unique_id(),"] Add ", _cards_refs[card_ref_id], " to ", player_id, " deck")
-	for player in GameManager.players:
-		if player.id == player_id:
-			player.deck.add_card(_cards_refs[card_ref_id])
-			player.gold -= 100
+	GameManager.players[player_id].deck.add_card(_cards_refs[card_ref_id])
+	GameManager.players[player_id].gold -= 100
 	
 	# If the local player is the one at the origin of the demand
 	if player_id == multiplayer.get_unique_id():
@@ -293,11 +273,10 @@ func _ask_to_buy_card(peer_id: int, card_ref_id: int) -> void:
 		return
 	
 	# Check player money
-	for player in GameManager.players:
-		if player.id == peer_id and player.gold < 100: # TODO check gamerules for card price
-			printerr("[id:", multiplayer.get_unique_id(),"]  Peer.", peer_id, " is not rich enough")
-			_notify_buying_error.rpc_id(peer_id, ServerResponse.NOT_ENOUGHT_MONEY)
-			return
+	if GameManager.players[peer_id].gold < 100: # TODO check gamerules for card price
+		printerr("[id:", multiplayer.get_unique_id(),"]  Peer.", peer_id, " is not rich enough")
+		_notify_buying_error.rpc_id(peer_id, ServerResponse.NOT_ENOUGHT_MONEY)
+		return
 	
 	# Put back the other cards in the shopdeck
 	for card_ref_to_delete in _cards_refs_displayed_in_player_shop[peer_id]:

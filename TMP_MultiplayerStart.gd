@@ -44,8 +44,10 @@ func _on_connection_failed():
 # ============================================
 
 func _on_host_button_pressed() -> void:
-	GameManager.add_player(name_edit.text, multiplayer.get_unique_id())
 	_addPeer(PeerType.SERVER)
+	$CenterContainer.hide()
+	$ReadyButton.hide()
+	$breakpoint.hide()
 
 
 func _on_start_button_pressed() -> void:
@@ -78,7 +80,6 @@ func _addPeer(peerType: PeerType):
 	
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.set_multiplayer_peer(peer)
-	
 
 
 func _on_breakpoint_pressed() -> void:

@@ -9,6 +9,8 @@ extends Node2D
 # =============================================================
 # =============================================================
 
+# ============================== Enum ==============================
+
 enum GameState {
 	Starting,
 	Buying,
@@ -21,7 +23,7 @@ const MAX_PLAYERS: int = 8
 
 # ============================== Public ==============================
 
-var players: Array[Player]
+var players: Dictionary # { player_id : Player }
 
 # ============================== Private ==============================
 
@@ -54,11 +56,13 @@ func game_switch_to(new_game_state: GameState) -> void:
 		printerr("Game is already on ", _game_state, " state !")
 
 
+# Add a player to the list of players
+# If this is called on the server, the server will transmit this to every other players
 @rpc("any_peer", "call_remote")
 func add_player(player_name: String, id: int) -> void:
 	print("[id:", multiplayer.get_unique_id(),"] Adding player: ", player_name, " of multiplayer id:", id, " in my players list")
 	
-	if _is_player_registered(id):
+	if players.has(id):
 		printerr("Player already registered")
 		return
 	
@@ -77,33 +81,30 @@ func add_player(player_name: String, id: int) -> void:
 	new_player.gold = 10000
 	new_player.health = 30
 	
-	players.append(new_player)
+	players[id] = new_player
 	
 	if multiplayer.is_server():
-		for player in players:
+		for player in players.values():
 			add_player.rpc(player.name, player.id)
 
 
 @rpc("any_peer", "call_local")
 func set_ready(peer_id: int , is_ready: bool) -> void:
 	print("[id:", multiplayer.get_unique_id(),"] player ", peer_id, " is telling me that he is ready ? ", is_ready)
-	for player in players:
-		if player.id == peer_id:
-			player.ready = is_ready
+	players[peer_id].ready = is_ready
 
 
 func get_local_player() -> Player:
-	for player in players:
-		if player.id == multiplayer.get_unique_id():
-			return player
+	if not players.has(multiplayer.get_unique_id()):
+		printerr(" No local player for player_id=", multiplayer.get_unique_id())
+		return null
 	
-	printerr("No local player registered in the GameManager !")
-	return null
+	return players[multiplayer.get_unique_id()]
 
 
 @rpc("any_peer", "call_local")
 func start_game() -> void:
-	if not _all_player_are_ready():
+	if not _all_players_are_ready():
 		printerr("Not all player are ready !")
 		return
 	
@@ -132,19 +133,8 @@ func _game_switch_to(new_game_state: GameState) -> void:
 	get_tree().change_scene_to_packed(new_scene)
 
 
-func _is_player_registered(id: int) -> bool:
-	if players == null:
-		return false
-	
-	for player in players:
-		if player.id == id:
-			return true
-	
-	return false
-
-
-func _all_player_are_ready() -> bool:
-	for player in players:
+func _all_players_are_ready() -> bool:
+	for player in players.values():
 		if player.ready == false:
 			return false
 
