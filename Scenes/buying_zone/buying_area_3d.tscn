@@ -1,4 +1,4 @@
-[gd_scene load_steps=175 format=4 uid="uid://ca8mcplp2va4s"]
+[gd_scene load_steps=174 format=4 uid="uid://ca8mcplp2va4s"]
 
 [ext_resource type="Script" path="res://Scripts/Buying_area3d/camera_3d.gd" id="1_3e5gf"]
 [ext_resource type="Script" path="res://Scenes/test/test_buying_area_3d.gd" id="1_iyfsm"]
@@ -12,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://cjeoy0rnleep0" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/bar_straight_B.gltf" id="4_h0lpo"]
 [ext_resource type="PackedScene" uid="uid://dku0i4bp7t23u" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Crate/crate_small.gltf" id="4_yv6jx"]
 [ext_resource type="PackedScene" uid="uid://bciww7p136c0f" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/bar_straight_C.gltf" id="5_x1tcb"]
-[ext_resource type="PackedScene" uid="uid://d1oxnd1g75rqh" path="res://Scenes/Card/card_shop.tscn" id="5_xsqxa"]
 [ext_resource type="PackedScene" uid="uid://cxalabhvxw1pd" path="res://Scenes/UI/ui_timer.tscn" id="7_1drue"]
 [ext_resource type="PackedScene" uid="uid://6bp40g4as5pp" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/bartop_A_medium.gltf" id="8_wtve5"]
 [ext_resource type="PackedScene" uid="uid://dgu4am47da560" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bottle/bottle_A_brown.gltf" id="10_4iuxi"]
@@ -733,14 +732,6 @@ layout_mode = 1
 [node name="3d_UI_buying_area" parent="UI" instance=ExtResource("3_v4hk2")]
 layout_mode = 1
 mouse_filter = 1
-
-[node name="CardShop" parent="UI" instance=ExtResource("5_xsqxa")]
-layout_mode = 1
-offset_left = 336.0
-offset_top = 157.0
-offset_right = 46.0
-offset_bottom = 28.0
-scale = Vector2(0.5, 0.5)
 
 [node name="Uitimer" parent="UI" node_paths=PackedStringArray("timer") instance=ExtResource("7_1drue")]
 layout_mode = 1

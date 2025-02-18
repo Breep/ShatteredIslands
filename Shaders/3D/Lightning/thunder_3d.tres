@@ -1,10 +1,10 @@
 [gd_resource type="VisualShader" load_steps=13 format=3 uid="uid://dkanllfjiel2y"]
 
-[ext_resource type="Texture2D" uid="uid://dkpqjqykw0kan" path="res://Data/Texture/kenney_particle_pack/spark_06.png" id="1_mb4b7"]
+[ext_resource type="Texture2D" uid="uid://b1k8nd0yo3rgj" path="res://Data/Texture/kenney_particle_pack/spark_05.png" id="1_4hq3i"]
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_fiv7e"]
 expanded_output_ports = [0]
-texture = ExtResource("1_mb4b7")
+texture = ExtResource("1_4hq3i")
 
 [sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_iu5ik"]
 default_input_values = [1, Vector2(0, 1), 2, Vector2(0, 0)]
