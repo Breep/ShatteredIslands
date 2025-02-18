@@ -1,10 +1,11 @@
-[gd_scene load_steps=36 format=3 uid="uid://b7kxtljteovd6"]
+[gd_scene load_steps=37 format=3 uid="uid://b7kxtljteovd6"]
 
 [ext_resource type="Shader" uid="uid://bcu1kjfpd6cri" path="res://Shaders/3D/Fire/fire_3d.tres" id="1_1r8wa"]
 [ext_resource type="Texture2D" uid="uid://byg7j5pbkqak" path="res://Data/Texture/2D/fire texture 2.png" id="2_h8jbn"]
 [ext_resource type="Texture2D" uid="uid://b87qfbv8yqlo1" path="res://Data/Texture/2D/fire texture 1.png" id="3_5hywm"]
 [ext_resource type="Texture2D" uid="uid://dfnid3c2l0ajl" path="res://Data/Texture/2D/T_VFX_simple_1.png" id="4_m38xo"]
 [ext_resource type="Shader" uid="uid://dxvrfcjpmkb2q" path="res://Shaders/3D/Fire/fire_embers.tres" id="5_3iodv"]
+[ext_resource type="Texture2D" uid="uid://dfd5051klfya0" path="res://Data/Texture/2D/deform.png" id="6_sy66p"]
 
 [sub_resource type="Gradient" id="Gradient_n3kmu"]
 
@@ -227,7 +228,7 @@ shader_parameter/Speed_divider = 15.0
 shader_parameter/Color_Fire = Color(4, 0.8, 0, 1)
 shader_parameter/Texture_move = ExtResource("2_h8jbn")
 shader_parameter/Gradient = ExtResource("2_h8jbn")
-shader_parameter/Texture_main = ExtResource("3_5hywm")
+shader_parameter/Texture_main = ExtResource("6_sy66p")
 
 [sub_resource type="QuadMesh" id="QuadMesh_f5jnx"]
 

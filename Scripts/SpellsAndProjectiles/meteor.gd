@@ -10,8 +10,8 @@ var _radius: float # Range of the meteor impact (in m)
 
 @onready var _effect_timer: Timer = %DeployTimer
 @onready var _collision_shape_3d: CollisionShape3D = %CollisionShape3D
-@onready var _impact_effect_area_visual: MeshInstance3D = %ImpactEffectAreaVisual
-@onready var _meteor_visual: MeshInstance3D = %MeteorVisual
+@onready var _impact_effect_area_visual: MeshInstance3D = %ImpactEffectAreaVisualBackground
+@onready var _meteor_visual: Node3D = %MeteorVisual
 
 func init(source: Character, damage_percent: float, deploy_time: float, radius: float) -> void:
 	_source = source
@@ -25,7 +25,7 @@ func _ready() -> void:
 		printerr("HealingFireArea: No source character assigned to")
 
 	(_collision_shape_3d.shape as CylinderShape3D).radius = _radius
-	(_impact_effect_area_visual.mesh as CylinderMesh).top_radius = _radius
+	#(_impact_effect_area_visual.mesh as CylinderMesh).top_radius = _radius #pourquoi top radius ?
 	(_impact_effect_area_visual.mesh as CylinderMesh).bottom_radius = _radius
 	_effect_timer.one_shot = true
 	_effect_timer.wait_time = _deploy_time
