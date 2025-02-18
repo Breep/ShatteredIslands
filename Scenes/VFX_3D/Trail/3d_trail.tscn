@@ -1,0 +1,68 @@
+[gd_scene load_steps=15 format=3 uid="uid://br2vxnmwxrlpm"]
+
+[ext_resource type="Shader" path="res://GPUTrail-main/shaders/trail.gdshader" id="1_bqhit"]
+[ext_resource type="Shader" path="res://GPUTrail-main/shaders/trail_draw_pass.gdshader" id="2_uwni0"]
+[ext_resource type="Texture2D" uid="uid://crk6pkb7e5rwc" path="res://GPUTrail-main/defaults/texture.tres" id="3_pxmqx"]
+[ext_resource type="Texture2D" uid="uid://ct31fhxvcragr" path="res://GPUTrail-main/defaults/curve.tres" id="4_jnyfo"]
+[ext_resource type="Texture2D" uid="uid://0d2qtqgbxtpp" path="res://Data/Texture/2D/T_VFX_Trail223.png" id="5_mbb8d"]
+[ext_resource type="Script" path="res://GPUTrail-main/GPUTrail3D.gd" id="6_lymv1"]
+[ext_resource type="Shader" uid="uid://bdpcioke7qi4l" path="res://Shaders/3D/Fire trail/simple_glow.tres" id="7_0avwc"]
+[ext_resource type="Texture2D" uid="uid://b87qfbv8yqlo1" path="res://Data/Texture/2D/fire texture 1.png" id="8_yr4hw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qfqw8"]
+shader = ExtResource("1_bqhit")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bdx55"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_uwni0")
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/emmission_transform = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
+shader_parameter/flags = 46
+shader_parameter/tex = ExtResource("5_mbb8d")
+shader_parameter/color_ramp = ExtResource("3_pxmqx")
+shader_parameter/curve = ExtResource("4_jnyfo")
+
+[sub_resource type="QuadMesh" id="QuadMesh_niebr"]
+material = SubResource("ShaderMaterial_bdx55")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pppff"]
+render_priority = 0
+shader = ExtResource("7_0avwc")
+shader_parameter/Texture = ExtResource("8_yr4hw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s0eqg"]
+emission_shape = 1
+emission_sphere_radius = 3.0
+gravity = Vector3(0, 5, 0)
+color = Color(4, 0.34, 0.133, 1)
+hue_variation_min = -2.23517e-08
+hue_variation_max = 0.05
+
+[sub_resource type="QuadMesh" id="QuadMesh_cvnfc"]
+size = Vector2(0.2, 0.2)
+
+[node name="Trail" type="Node3D"]
+
+[node name="GPUTrail3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0115433, 0, 0)
+amount = 300
+lifetime = 300.0
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ShaderMaterial_qfqw8")
+draw_pass_1 = SubResource("QuadMesh_niebr")
+script = ExtResource("6_lymv1")
+length = 300
+length_seconds = 5.0
+texture = ExtResource("5_mbb8d")
+color_ramp = ExtResource("3_pxmqx")
+curve = ExtResource("4_jnyfo")
+use_red_as_alpha = true
+billboard = true
+_defaults_have_been_set = true
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="GPUTrail3D"]
+material_override = SubResource("ShaderMaterial_pppff")
+process_material = SubResource("ParticleProcessMaterial_s0eqg")
+draw_pass_1 = SubResource("QuadMesh_cvnfc")
