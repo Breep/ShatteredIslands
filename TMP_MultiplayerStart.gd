@@ -25,7 +25,8 @@ func _ready() -> void:
 # ============================================
 
 func _on_peer_connected(id):
-	print("Player", id, " connected !")
+	if multiplayer.is_server():
+		print("Player", id, " connected !")
 
 
 func _on_peer_disconnected(id):

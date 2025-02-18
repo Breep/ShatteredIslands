@@ -44,30 +44,32 @@ replication_config = SubResource("SceneReplicationConfig_747th")
 unique_name_in_owner = true
 projectile_spawn = NodePath("../../ProjectileSpawn")
 
-[node name="DefenseManager" parent="Managers" instance=ExtResource("4_3lofc")]
-unique_name_in_owner = true
-
 [node name="TargetManager" parent="Managers" instance=ExtResource("5_8shkw")]
 unique_name_in_owner = true
 
-[node name="FireManager" parent="Managers" instance=ExtResource("6_vsopc")]
-unique_name_in_owner = true
-
-[node name="LifeManager" parent="Managers" instance=ExtResource("7_t7sfu")]
-unique_name_in_owner = true
-
-[node name="PoisonManager" parent="Managers" instance=ExtResource("8_ysftd")]
-unique_name_in_owner = true
-
-[node name="SerenityManager" parent="Managers" instance=ExtResource("9_poaka")]
-unique_name_in_owner = true
-
-[node name="ShadowManager" parent="Managers" instance=ExtResource("10_gbm6f")]
-unique_name_in_owner = true
-
-[node name="StormManager" parent="Managers" instance=ExtResource("11_ra6k1")]
-unique_name_in_owner = true
-_percent_decrease = 10.0
-
 [node name="MovementManager" parent="Managers" instance=ExtResource("12_wmhuf")]
 unique_name_in_owner = true
+
+[node name="FamiliesManagers" type="Node" parent="."]
+
+[node name="DefenseManager" parent="FamiliesManagers" instance=ExtResource("4_3lofc")]
+unique_name_in_owner = true
+
+[node name="FireManager" parent="FamiliesManagers" instance=ExtResource("6_vsopc")]
+unique_name_in_owner = true
+
+[node name="LifeManager" parent="FamiliesManagers" instance=ExtResource("7_t7sfu")]
+unique_name_in_owner = true
+
+[node name="PoisonManager" parent="FamiliesManagers" instance=ExtResource("8_ysftd")]
+unique_name_in_owner = true
+
+[node name="SerenityManager" parent="FamiliesManagers" instance=ExtResource("9_poaka")]
+unique_name_in_owner = true
+
+[node name="ShadowManager" parent="FamiliesManagers" instance=ExtResource("10_gbm6f")]
+unique_name_in_owner = true
+
+[node name="StormManager" parent="FamiliesManagers" instance=ExtResource("11_ra6k1")]
+unique_name_in_owner = true
+_percent_decrease = 10.0

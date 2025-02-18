@@ -64,14 +64,26 @@ func _ready() -> void:
 func notice_critical_damage(target: Character, damage: int) -> void:
 	_storm_manager.notice_critical_damage(target, damage)
 
+
+# ============================== Multiplayer Heal/Attack ==============================
+
 # ============================== Heal/Attack ==============================
 
+@rpc("authority", "call_local")
+func _heal(target_peer_id: int, heal_amount: int) -> void:
+	print("[", multiplayer.get_unique_id(), "] _heal()")
+	# Si animation de heal c'est ici
+
+# [Server only]
 func heal(target: Character, heal_amount: int) -> void:
+	if not multiplayer.is_server(): return
 	target.take_heal(self, heal_amount)
 	_heal_manager.notify_heal()
+	_heal.rpc(target.player.id, heal_amount)
 
 
 func heal_percent(target: Character, heal_percent: float, percent_modifier: Utils.PercentModifier) -> void:
+	if not multiplayer.is_server(): return
 	var hp: int
 	match percent_modifier:
 		Utils.PercentModifier.MAX_HP:
@@ -84,7 +96,16 @@ func heal_percent(target: Character, heal_percent: float, percent_modifier: Util
 	heal(target, heal_amount)
 
 
+# [All]
+@rpc("authority", "call_local")
+func _attack(target_peer_id: int, damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
+	print("[", multiplayer.get_unique_id(), "] _attack()")
+	# Placer signal pour animation ici ? GameManager.players[target_peer_id].character pour savoir la target
+
+
+# [Server only]
 func attack(target: Character, damage: int, damage_type: Utils.DamageType) -> void:
+	if not multiplayer.is_server(): return
 	var is_critical: bool = false
 	if damage_type == Utils.DamageType.PHYSICAL:
 		if Utils.is_randomize_modifier_active(_storm_manager.get_critical_chance()):
@@ -97,9 +118,11 @@ func attack(target: Character, damage: int, damage_type: Utils.DamageType) -> vo
 	damage = _defense_manager.get_reduced_damage_dealed_from_protector(damage) # Reduce % of ALL damage
 	damage = _heal_manager.get_reduced_damage_dealed_from_pacify(damage) # Reduce % of ALL damage
 	target.take_damage(self, damage, damage_type, is_critical)
+	_attack.rpc(target.player.id, damage, damage_type, is_critical)
 
 
 func attack_percent(target: Character, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier) -> void:
+	if not multiplayer.is_server(): return
 	var hp: int
 	match percent_modifier:
 		Utils.PercentModifier.MAX_HP:
@@ -113,7 +136,21 @@ func attack_percent(target: Character, damage_percent: float, damage_type: Utils
 
 # ============================== Take damage / Be healed / Take condition stacks ==============================
 
+# [All]
+@rpc("authority", "call_local")
+func _take_damage(peer_id: int, damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
+	print("[", multiplayer.get_unique_id(), "] take_damage_ex()")
+	stats.health = clamp(stats.health - damage, 0, stats.health_max)
+	_character_visual.damage_popup(damage, damage_type, is_critical)
+	_character_visual.update_health_bar(stats.health, stats.health_max)
+	print("[", multiplayer.get_unique_id(), "] take_damage_ex(): ", stats.health, "/", stats.health_max)
+	if stats.health <= 0 and !_is_dead:
+		_handle_death()
+
+
+# [Server only]
 func take_damage(source: Character, damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
+	if not multiplayer.is_server(): return
 	damage = _storm_manager.get_increased_critical_damage(damage, is_critical) # Increase ALL critical damage
 	
 	damage = _defense_manager.get_reduced_damage_taken_from_protector(damage) # Reduce % of ALL damage
@@ -124,29 +161,43 @@ func take_damage(source: Character, damage: int, damage_type: Utils.DamageType, 
 	if is_critical:
 		source.notice_critical_damage(self, damage)
 	
-	stats.health -= damage
-	_character_visual.damage_popup(damage, damage_type, is_critical)
-	_character_visual.update_health_bar(stats.health, stats.health_max)
-	if stats.health <= 0 and !_is_dead:
-		_handle_death()
+	_take_damage.rpc(source.player.id, damage, damage_type, is_critical)
 
 
+# [All]
+@rpc("authority", "call_local")
+func _take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, source_id: int = -1, poison_duration: int = 0) -> void:
+	print("[", multiplayer.get_unique_id(), "] _take_condition_stacks()")
+
+
+# [Server only]
 func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, source: Character = null, poison_duration: int = 0) -> void:
+	if not multiplayer.is_server(): return
 	match stack_type:
 		Utils.StackType.POISON:
 			_poison_manager.add_to_poison_effects(source, stacks_number, poison_duration)
 		Utils.StackType.VULNERABILITY:
 			stats.storm.vulnerability_stacks += stacks_number
+	
+	if source != null:
+		_take_condition_stacks(stacks_number, stack_type, source.player.id, )
+	
 
 
-func take_heal(source: Character, heal: int) -> void:
-	_defense_manager.notify_heal_received(heal)
-	
-	stats.health = clamp(stats.health + heal, 0, stats.health_max)
-	
-	if heal != 0:
-		_character_visual.damage_popup(heal, Utils.DamageType.HEAL, false)
+# [All]
+@rpc("authority", "call_local")
+func _take_heal(source_id: int, heal_amount: int) -> void:
+	print("[", multiplayer.get_unique_id(), "] _take_heal()")
+	stats.health = clamp(stats.health + heal_amount, 0, stats.health_max)
+	if heal_amount != 0:
+		_character_visual.damage_popup(heal_amount, Utils.DamageType.HEAL, false)
 		_character_visual.update_health_bar(stats.health, stats.health_max)
+
+# [Server only]
+func take_heal(source: Character, heal_amount: int) -> void:
+	if not multiplayer.is_server(): return
+	_defense_manager.notify_heal_received(heal_amount)
+	_take_heal.rpc(source.player.id, heal_amount)
 
 # ============================== Fighting States ==============================
 

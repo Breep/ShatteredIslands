@@ -41,8 +41,8 @@ var _rules: GameRules
 func _ready() -> void:
 	_rules = load("res://Resources/GameRules/NormalGameRules.tres")
 	_init_families_ref()
-	#_active_families.append(get_family_from_type(Family.FamilyType.Serinity))
-	_active_families.append(get_family_from_type(Family.FamilyType.Life))
+	_active_families.append(get_family_from_type(Family.FamilyType.Serinity))
+	#_active_families.append(get_family_from_type(Family.FamilyType.Life))
 	_active_families.append(get_family_from_type(Family.FamilyType.Fire))
 
 # ============================== Public function ==============================
@@ -63,11 +63,10 @@ func add_player(player_name: String, id: int) -> void:
 	print("[id:", multiplayer.get_unique_id(),"] Adding player: ", player_name, " of multiplayer id:", id, " in my players list")
 	
 	if players.has(id):
-		printerr("Player already registered")
 		return
 	
 	if players.size() >= MAX_PLAYERS:
-		printerr("Too many players")
+		printerr("[id:", multiplayer.get_unique_id(),"] Too many players")
 		return
 	
 	var new_player := Player.new()
@@ -105,7 +104,7 @@ func get_local_player() -> Player:
 @rpc("any_peer", "call_local")
 func start_game() -> void:
 	if not _all_players_are_ready():
-		printerr("Not all player are ready !")
+		printerr("[id:", multiplayer.get_unique_id(),"] Not all player are ready !")
 		return
 	
 	MultiplayerDeckManager.init_cards_ref(_active_families, _rules)

@@ -46,6 +46,7 @@ func _spawn_new_character(player: Player) -> bool:
 	character.team = player.team
 	character.hero = player.hero
 	character.player = player
+	player.character = character
 	# TODO Learn about spawning on other tree branch (Surement parceque le noeud principal n'est pas encore READY à ce moment)
 	#get_tree().current_scene.add_child(character)
 	add_child(character)
