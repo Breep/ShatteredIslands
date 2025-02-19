@@ -30,6 +30,7 @@ mouse_filter = 1
 script = ExtResource("1_l6wd5")
 
 [node name="Shadow" type="TextureRect" parent="."]
+visible = false
 modulate = Color(0.14, 0.14, 0.14, 0.594)
 layout_mode = 1
 anchors_preset = -1

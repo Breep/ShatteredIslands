@@ -1,7 +1,78 @@
-[gd_scene load_steps=11 format=3 uid="uid://dfvy6jfn4qd4k"]
+[gd_scene load_steps=30 format=3 uid="uid://dfvy6jfn4qd4k"]
 
 [ext_resource type="Script" path="res://Scripts/SpellsAndProjectiles/meteor.gd" id="1_kjd23"]
 [ext_resource type="PackedScene" uid="uid://cfmaiom8xymvq" path="res://Scenes/VFX_3D/Trail/3d_meteor_visual.tscn" id="2_bmmic"]
+[ext_resource type="Shader" uid="uid://cjoihy50op4ps" path="res://Shaders/3D/hits and impact/hit_marker1_notbillboarded.tres" id="3_8ubte"]
+[ext_resource type="Texture2D" uid="uid://dfnid3c2l0ajl" path="res://Data/Texture/2D/T_VFX_simple_1.png" id="4_i54da"]
+[ext_resource type="Shader" uid="uid://bwywcfrni6xdf" path="res://Shaders/3D/hits and impact/hit_marker1_billboarded.tres" id="5_76wn0"]
+[ext_resource type="Texture2D" uid="uid://bp0fnfsijfpdq" path="res://Data/Texture/Texture_new/masks for  particles/28.png" id="6_3yif7"]
+[ext_resource type="Texture2D" uid="uid://cplwkg0u1o2tp" path="res://Data/Texture/2D/T_groundmark_color.png" id="7_vys2t"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_towq5"]
+render_priority = 0
+shader = ExtResource("3_8ubte")
+shader_parameter/hit_texture = ExtResource("4_i54da")
+
+[sub_resource type="Curve" id="Curve_buu57"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_4yi08"]
+curve = SubResource("Curve_buu57")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kode7"]
+particle_flag_align_y = true
+direction = Vector3(0, 1, 0)
+spread = 180.0
+initial_velocity_min = 8.0
+initial_velocity_max = 12.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 4.0
+color = Color(2.5, 2, 0.5, 1)
+alpha_curve = SubResource("CurveTexture_4yi08")
+
+[sub_resource type="QuadMesh" id="QuadMesh_qt8f8"]
+size = Vector2(0.05, 0.3)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7tqec"]
+render_priority = 0
+shader = ExtResource("5_76wn0")
+shader_parameter/ColorParameter = null
+shader_parameter/hit_texture = ExtResource("6_3yif7")
+
+[sub_resource type="Curve" id="Curve_q74y5"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_8mkfs"]
+curve = SubResource("Curve_q74y5")
+
+[sub_resource type="Gradient" id="Gradient_sb6up"]
+colors = PackedColorArray(8, 0.8, 0, 1, 1, 0.5, 0.2, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_v1bn6"]
+gradient = SubResource("Gradient_sb6up")
+use_hdr = true
+
+[sub_resource type="Curve" id="Curve_4wgqi"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_vvblt"]
+curve = SubResource("Curve_4wgqi")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fsdhg"]
+angle_min = -180.0
+angle_max = 180.0
+gravity = Vector3(0, 0, 0)
+scale_min = 3.2
+scale_max = 6.0
+scale_curve = SubResource("CurveTexture_vvblt")
+color_ramp = SubResource("GradientTexture1D_v1bn6")
+alpha_curve = SubResource("CurveTexture_8mkfs")
+
+[sub_resource type="QuadMesh" id="QuadMesh_ses71"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_y4y4j"]
 height = 0.1
@@ -29,7 +100,7 @@ height = 0.1
 
 [sub_resource type="Animation" id="Animation_8ion4"]
 resource_name = "Area"
-length = 4.0
+length = 5.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -53,6 +124,66 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [3.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%MeteorVisual/VFXHit2/Spark:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(3.95),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%MeteorVisual/VFXHit2/HitEffect:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(3.95),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("%MeteorVisual/VFXHit2/Decal:albedo_mix")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 3.85, 3.9, 4.2, 4.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 1.0, 1.0, 0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("%ImpactEffectAreaVisualBackground:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_u702g"]
@@ -81,6 +212,66 @@ tracks/1/keys = {
 "update": 0,
 "values": [3.0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%MeteorVisual/VFXHit2/Spark:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%MeteorVisual/VFXHit2/HitEffect:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("%MeteorVisual/VFXHit2/Decal:albedo_mix")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("%ImpactEffectAreaVisualBackground:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fgblb"]
 _data = {
@@ -91,9 +282,46 @@ _data = {
 [node name="Meteor" type="Node3D"]
 script = ExtResource("1_kjd23")
 
-[node name="MeteorVisual" parent="." instance=ExtResource("2_bmmic")]
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="MeteorVisual" parent="Visual" instance=ExtResource("2_bmmic")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.03384, 11.2682, -8.00578)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.034, 8.463, -8.006)
+
+[node name="VFXHit2" type="Node3D" parent="Visual/MeteorVisual"]
+
+[node name="Spark" type="GPUParticles3D" parent="Visual/MeteorVisual/VFXHit2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.743883, 0)
+layers = 4
+material_override = SubResource("ShaderMaterial_towq5")
+emitting = false
+amount = 25
+lifetime = 0.25
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_kode7")
+draw_pass_1 = SubResource("QuadMesh_qt8f8")
+
+[node name="HitEffect" type="GPUParticles3D" parent="Visual/MeteorVisual/VFXHit2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.743883, 0)
+layers = 4
+material_override = SubResource("ShaderMaterial_7tqec")
+emitting = false
+amount = 1
+lifetime = 0.25
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_fsdhg")
+draw_pass_1 = SubResource("QuadMesh_ses71")
+
+[node name="Decal" type="Decal" parent="Visual/MeteorVisual/VFXHit2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11.791, 0)
+size = Vector3(3.5, 25.9, 3.5)
+texture_albedo = ExtResource("7_vys2t")
+albedo_mix = 0.0
+upper_fade = 0.00485281
+lower_fade = 0.00309259
+cull_mask = 1048571
 
 [node name="ImpactEffectArea" type="Area3D" parent="."]
 
@@ -104,6 +332,7 @@ shape = SubResource("CylinderShape3D_y4y4j")
 [node name="ImpactEffectAreaVisual" type="MeshInstance3D" parent="ImpactEffectArea"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+visible = false
 layers = 4
 mesh = SubResource("CylinderMesh_f8kpk")
 
@@ -126,4 +355,4 @@ autoplay = "Area"
 [connection signal="body_exited" from="ImpactEffectArea" to="." method="_on_impact_effect_area_body_exited"]
 [connection signal="timeout" from="DeployTimer" to="." method="_on_deploy_timer_timeout"]
 
-[editable path="MeteorVisual"]
+[editable path="Visual/MeteorVisual"]

@@ -37,6 +37,7 @@ size = Vector2(1.4, 1.4)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b1yc6"]
 render_priority = 0
 shader = ExtResource("10_8k4uh")
+shader_parameter/ColorParameter = null
 shader_parameter/Texture = ExtResource("2_aoea5")
 
 [sub_resource type="Curve" id="Curve_fe0hk"]

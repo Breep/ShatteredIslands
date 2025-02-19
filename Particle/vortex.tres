@@ -15,7 +15,6 @@ point_count = 2
 curve = SubResource("Curve_sigfr")
 
 [resource]
-particle_flag_disable_z = true
 angular_velocity_min = -100.0
 angular_velocity_max = -1.60933e-05
 gravity = Vector3(0, 0, 0)

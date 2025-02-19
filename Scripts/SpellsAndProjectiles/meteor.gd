@@ -27,6 +27,7 @@ func _ready() -> void:
 	(_collision_shape_3d.shape as CylinderShape3D).radius = _radius
 	#(_impact_effect_area_visual.mesh as CylinderMesh).top_radius = _radius #pourquoi top radius ?
 	(_impact_effect_area_visual.mesh as CylinderMesh).bottom_radius = _radius
+	_meteor_visual.position.z = randf_range(-10,10)
 	_effect_timer.one_shot = true
 	_effect_timer.wait_time = _deploy_time
 	_effect_timer.start()
