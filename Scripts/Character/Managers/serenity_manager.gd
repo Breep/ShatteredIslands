@@ -1,5 +1,5 @@
 class_name SerenityManager
-extends Node
+extends FamilyManager
 
 # ============================== Constant ==============================
 
@@ -7,25 +7,14 @@ const PACIFY_DAMAGE_REDUCTION_PERCENT: float = 50 # Percentage of damage reducti
 
 # ============================== Private variables ==============================
 
-var _source: Character # Ref to character owner
 var _heal_stats: CharacterHealStats # Ref to the owner heal stats
-
-var _optional_timers: Array[Timer]
 
 # ============================== Spells scenes ==============================
 
 # ============================== Public functions ==============================
 
-func init(source: Character, heal_stats: CharacterHealStats) -> void:
-	if source == null:
-		printerr("HealManager: source undef")
-		return
-	if heal_stats == null:
-		printerr("HealManager: storm_stats undef")
-		return
-	
-	_source = source
-	_heal_stats = heal_stats
+func _specific_init() -> void:
+	_heal_stats = _source.stats.heal
 	_create_optional_timers()
 
 

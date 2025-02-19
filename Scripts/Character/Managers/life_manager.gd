@@ -1,5 +1,5 @@
 class_name LifeManager
-extends Node
+extends FamilyManager
 
 # ============================== Signals ==============================
 
@@ -7,26 +7,16 @@ signal revived(life_after_revive: int)
 
 # ============================== Private variables ==============================
 
-var _source: Character # Ref to character owner
 var _life_stats: CharacterLifeStats # Ref to the owner life stats
 
-var _optional_timers: Array[Timer]
 var _revive_timer: Timer
 
 # ============================== Spells scenes ==============================
 
 # ============================== Public functions ==============================
 
-func init(source: Character, life_stats: CharacterLifeStats) -> void:
-	if source == null:
-		printerr("LifeManager: source undef")
-		return
-	if life_stats == null:
-		printerr("LifeManager: fire_stats undef")
-		return
-	
-	_source = source
-	_life_stats = life_stats
+func _specific_init() -> void:
+	_life_stats = _source.stats.hp
 	_create_optional_timers()
 
 
@@ -97,21 +87,18 @@ func _create_optional_timers() -> void:
 
 func _on_poison_by_lost_hp_timer_timeout() -> void:
 	var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.RANDOM_ENEMY)
-	if target == null:
-		return
+	if target == null: return
 	var lost_hp: int = _source.stats.health_max - _source.stats.health
 	var stack_multiplier: int = _life_stats.poison_by_lost_hp_stacks
 	var poison_stacks: int = (lost_hp / _life_stats.poison_by_lost_hp_hp_number) * stack_multiplier
-	print("Inflict ", poison_stacks, " poison stacks ! - ", _source.stats.health_max - _source.stats.health)
-	target.take_condition_stacks(poison_stacks, Utils.StackType.POISON, _source, 5)
+	_action_module.inflict_condition_stacks(target, poison_stacks, Utils.StackType.POISON, 5)
 
 
 func _on_fire_damage_timer_timeout() -> void:
 	var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST_ENEMY)
-	if target == null:
-		return
+	if target == null: return
 	var damage = _source.stats.health_max * _life_stats.fire_damage_percent / 100.0
-	_source.attack(target, damage, Utils.DamageType.MAGIC)
+	_action_module.attack(target, damage, Utils.DamageType.MAGIC)
 
 
 func _on_revive_timer_timeout() -> void:

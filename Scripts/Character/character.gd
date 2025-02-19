@@ -12,7 +12,6 @@ var hero: Hero
 var player: Player
 var stats := CharacterStats.new() # Needs to be public for easier upgrades access
 
-@onready var target_manager: TargetManager = %TargetManager # Needs to be public for easier access for other managers TODO Maybe rework ?
 
 # ============================== Private variables ==============================
 
@@ -27,16 +26,23 @@ var _fighting_state: FightingManager.FightingState = FightingManager.FightingSta
 
 @onready var _multiplayerSynchroniser: MultiplayerSynchronizer = %MultiplayerSynchronizer
 
-# TODO Instantiate the manager dynamically with the game rules 
+@onready var target_manager: TargetManager = %TargetManager # Needs to be public for easier access for other managers TODO Maybe rework ?
+
 @onready var _auto_attack_manager: AutoAttackManager = %AutoAttackManager
+@onready var _movement_manager: MovementManager = %MovementManager
+
 @onready var _defense_manager: DefenseManager = %DefenseManager
 @onready var _fire_manager: FireManager = %FireManager
 @onready var _storm_manager: StormManager = %StormManager
-@onready var _heal_manager: SerenityManager = %SerenityManager
+@onready var _serenity_manager: SerenityManager = %SerenityManager
 @onready var _poison_manager: PoisonManager = %PoisonManager
-@onready var _movement_manager: MovementManager = %MovementManager
 @onready var _shadow_manager: ShadowManager = %ShadowManager
 @onready var _life_manager: LifeManager = %LifeManager
+
+var _families_managers: Dictionary # { Family.FamilyType: FamilyManager }
+
+@onready var _action_module: ActionModule = %ActionModule
+@onready var _interact_module: InteractModule = %InteractModule
 
 # ============================== Node base functions ==============================
 
@@ -50,6 +56,7 @@ func _ready() -> void:
 	if _fighting_area != null and _is_local:
 		_fighting_area.connect("map_clicked", _on_fighting_area_map_clicked)
 	
+	_build_families_managers()
 	_apply_all_cards_upgrades()
 	
 	_character_visual.update_health_bar(stats.health, stats.health_max)
@@ -64,141 +71,6 @@ func _ready() -> void:
 func notice_critical_damage(target: Character, damage: int) -> void:
 	_storm_manager.notice_critical_damage(target, damage)
 
-
-# ============================== Multiplayer Heal/Attack ==============================
-
-# ============================== Heal/Attack ==============================
-
-@rpc("authority", "call_local")
-func _heal(target_peer_id: int, heal_amount: int) -> void:
-	print("[", multiplayer.get_unique_id(), "] _heal()")
-	# Si animation de heal c'est ici
-
-# [Server only]
-func heal(target: Character, heal_amount: int) -> void:
-	if not multiplayer.is_server(): return
-	target.take_heal(self, heal_amount)
-	_heal_manager.notify_heal()
-	_heal.rpc(target.player.id, heal_amount)
-
-
-func heal_percent(target: Character, heal_percent: float, percent_modifier: Utils.PercentModifier) -> void:
-	if not multiplayer.is_server(): return
-	var hp: int
-	match percent_modifier:
-		Utils.PercentModifier.MAX_HP:
-			hp = target.stats.health_max
-		Utils.PercentModifier.CURRENT_HP:
-			hp = target.stats.health
-		Utils.PercentModifier.LOST_HP:
-			hp = target.stats.health_max - stats.health
-	var heal_amount: int = (heal_percent * hp) / 100
-	heal(target, heal_amount)
-
-
-# [All]
-@rpc("authority", "call_local")
-func _attack(target_peer_id: int, damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
-	print("[", multiplayer.get_unique_id(), "] _attack()")
-	# Placer signal pour animation ici ? GameManager.players[target_peer_id].character pour savoir la target
-
-
-# [Server only]
-func attack(target: Character, damage: int, damage_type: Utils.DamageType) -> void:
-	if not multiplayer.is_server(): return
-	var is_critical: bool = false
-	if damage_type == Utils.DamageType.PHYSICAL:
-		if Utils.is_randomize_modifier_active(_storm_manager.get_critical_chance()):
-			is_critical = true
-			damage *= _storm_manager.get_critical_multiplier(Utils.DamageType.PHYSICAL)
-		damage = _life_manager.get_increased_damage_taken_from_lost_hp(damage, damage_type) # Increase % of PHYSICAL damage
-	if damage_type == Utils.DamageType.MAGIC:
-		damage = _fire_manager.get_increased_damage(damage, damage_type) # Increase % of MAGICAL damage
-	
-	damage = _defense_manager.get_reduced_damage_dealed_from_protector(damage) # Reduce % of ALL damage
-	damage = _heal_manager.get_reduced_damage_dealed_from_pacify(damage) # Reduce % of ALL damage
-	target.take_damage(self, damage, damage_type, is_critical)
-	_attack.rpc(target.player.id, damage, damage_type, is_critical)
-
-
-func attack_percent(target: Character, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier) -> void:
-	if not multiplayer.is_server(): return
-	var hp: int
-	match percent_modifier:
-		Utils.PercentModifier.MAX_HP:
-			hp = target.stats.health_max
-		Utils.PercentModifier.CURRENT_HP:
-			hp = target.stats.health
-		Utils.PercentModifier.LOST_HP:
-			hp = target.stats.health_max - stats.health
-	var damage = hp * damage_percent  / 100.0
-	attack(target, damage, damage_type)
-
-# ============================== Take damage / Be healed / Take condition stacks ==============================
-
-# [All]
-@rpc("authority", "call_local")
-func _take_damage(peer_id: int, damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
-	print("[", multiplayer.get_unique_id(), "] take_damage_ex()")
-	stats.health = clamp(stats.health - damage, 0, stats.health_max)
-	_character_visual.damage_popup(damage, damage_type, is_critical)
-	_character_visual.update_health_bar(stats.health, stats.health_max)
-	print("[", multiplayer.get_unique_id(), "] take_damage_ex(): ", stats.health, "/", stats.health_max)
-	if stats.health <= 0 and !_is_dead:
-		_handle_death()
-
-
-# [Server only]
-func take_damage(source: Character, damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
-	if not multiplayer.is_server(): return
-	damage = _storm_manager.get_increased_critical_damage(damage, is_critical) # Increase ALL critical damage
-	
-	damage = _defense_manager.get_reduced_damage_taken_from_protector(damage) # Reduce % of ALL damage
-	damage = _life_manager.get_reduced_damage(damage) # Reduce % of ALL damage
-	damage = _fire_manager.get_reduced_damage(damage, damage_type) # Reduce % of MAGIC damage
-	damage = _defense_manager.get_reduced_damage_taken_from_armor(source, damage, damage_type) # Reduce flat of PHYSIC AND MAGIC damage
-	
-	if is_critical:
-		source.notice_critical_damage(self, damage)
-	
-	_take_damage.rpc(source.player.id, damage, damage_type, is_critical)
-
-
-# [All]
-@rpc("authority", "call_local")
-func _take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, source_id: int = -1, poison_duration: int = 0) -> void:
-	print("[", multiplayer.get_unique_id(), "] _take_condition_stacks()")
-
-
-# [Server only]
-func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, source: Character = null, poison_duration: int = 0) -> void:
-	if not multiplayer.is_server(): return
-	match stack_type:
-		Utils.StackType.POISON:
-			_poison_manager.add_to_poison_effects(source, stacks_number, poison_duration)
-		Utils.StackType.VULNERABILITY:
-			stats.storm.vulnerability_stacks += stacks_number
-	
-	if source != null:
-		_take_condition_stacks(stacks_number, stack_type, source.player.id, )
-	
-
-
-# [All]
-@rpc("authority", "call_local")
-func _take_heal(source_id: int, heal_amount: int) -> void:
-	print("[", multiplayer.get_unique_id(), "] _take_heal()")
-	stats.health = clamp(stats.health + heal_amount, 0, stats.health_max)
-	if heal_amount != 0:
-		_character_visual.damage_popup(heal_amount, Utils.DamageType.HEAL, false)
-		_character_visual.update_health_bar(stats.health, stats.health_max)
-
-# [Server only]
-func take_heal(source: Character, heal_amount: int) -> void:
-	if not multiplayer.is_server(): return
-	_defense_manager.notify_heal_received(heal_amount)
-	_take_heal.rpc(source.player.id, heal_amount)
-
 # ============================== Fighting States ==============================
 
 func set_state(new_state: FightingManager.FightingState) -> void:
@@ -209,7 +81,7 @@ func set_state(new_state: FightingManager.FightingState) -> void:
 				return
 			_fighting_state = FightingManager.FightingState.STARTING
 			target_manager.init(self)
-			_init_all_family_managers()
+			_init_families_managers()
 			_init_movement_manager(FightingManager.FightingState.STARTING)
 			_movement_manager.start()
 		FightingManager.FightingState.FIGHT:
@@ -217,9 +89,8 @@ func set_state(new_state: FightingManager.FightingState) -> void:
 				printerr("Character: Can't change to fighting phase if i'm not in strating state")
 				return
 			_fighting_state = FightingManager.FightingState.FIGHT
-			_start_all_family_managers()
+			_start_families_managers()
 			_movement_manager.set_fighting_state(FightingManager.FightingState.FIGHT)
-			
 
 # ============================== Private functions ==============================
 
@@ -245,78 +116,7 @@ func _init_auto_attack_manager() -> void:
 func _on_auto_attack_manager_focus_changed(focused: bool) -> void:
 	_storm_manager.focus_changed(focused)
 
-# ============================== DefenseManager ==============================
-
-func _init_defense_manager() -> void:
-	if _defense_manager == null:
-		printerr("No DefenseManager")
-		return
-	
-	_defense_manager.armor_based_on_lost_hp_gained.connect(_on_defense_manager_armor_based_on_lost_hp_gained)
-	_defense_manager.init(self, stats.defense)
-
-
-func _on_defense_manager_armor_based_on_lost_hp_gained(percent_of_lost_hp: float) -> void:
-	var lost_hp: float = stats.health_max - stats.health
-	stats.defense.armor_stacks += (lost_hp * percent_of_lost_hp / 100.0) as int
-
-# ============================== FireManager ==============================
-
-func _init_fire_manager() -> void:
-	if _fire_manager == null:
-		printerr("No FireManager")
-		return
-	
-	_fire_manager.init(self, stats.fire)
-
-# ============================== StormManager ==============================
-
-func _init_storm_manager() -> void:
-	if _storm_manager == null:
-		printerr("No StormManager")
-		return
-	
-	_storm_manager.init(self, stats.storm)
-
-# ============================== SerenityManager ==============================
-
-func _init_serenity_manager() -> void:
-	if _heal_manager == null:
-		printerr("No SerenityManager")
-		return
-	
-	_heal_manager.init(self, stats.heal)
-
-# ============================== LifeManager ==============================
-
-func _init_life_manager() -> void:
-	if _life_manager == null:
-		printerr("No LifeManager")
-		return
-	
-	_life_manager.revived.connect(_on_life_manager_revived)
-	_life_manager.init(self, stats.hp)
-
-
-func _on_life_manager_revived(life_after_revived: int) -> void:
-	stats.health = life_after_revived
-	_character_visual.update_health_bar(stats.health, stats.health_max)
-	_start_all_family_managers()
-	_movement_manager.start()
-	_is_dead = false
-	Events.character_is_spawned.emit(self)
-
-# ============================== PoisonManager ==============================
-
-func _init_poison_manager() -> void:
-	if _poison_manager == null:
-		printerr("No PoisonManager")
-		return
-	
-	_poison_manager.init(self, stats.poison)
-
 # ============================== MovementManager ==============================
-
 func _init_movement_manager(fighting_state: FightingManager.FightingState) -> void:
 	if _movement_manager == null:
 		printerr("No MovementManager")
@@ -324,65 +124,45 @@ func _init_movement_manager(fighting_state: FightingManager.FightingState) -> vo
 	
 	_movement_manager.connect("energy_changed", _on_movement_manager_energy_changed)
 	_movement_manager.init(self, fighting_state)
-
+# ============================== MovementManager ==============================
 
 func _on_movement_manager_energy_changed(energy: float) -> void:
 	_character_visual.update_energy_bar(energy, stats.energy_max)
 
-# ============================== ShadowManager ==============================
-
-func _init_shadow_manager() -> void:
-	if _movement_manager == null:
-		printerr("No ShadowManager")
-		return
-	
-	_shadow_manager.connect("gain_max_hp_triggered", _on_shadow_manager_gain_max_hp_triggered)
-	_shadow_manager.init(self, stats.shadow)
-
-
-func _on_shadow_manager_gain_max_hp_triggered(hp: int) -> void:
-	stats.health_max += hp
-	stats.health += hp
-	_character_visual.update_health_bar(stats.health, stats.health_max)
-
 # ============================== Managers common ==============================
 
-func _init_all_family_managers() -> void:
-	_init_auto_attack_manager()
-	_init_defense_manager()
-	_init_fire_manager()
-	_init_storm_manager()
-	_init_serenity_manager()
-	_init_poison_manager()
-	_init_shadow_manager()
-	_init_life_manager()
+func _build_families_managers() -> void:
+	_families_managers[Family.FamilyType.Defense] = _defense_manager
+	_families_managers[Family.FamilyType.Fire] = _fire_manager
+	_families_managers[Family.FamilyType.Storm] = _storm_manager
+	_families_managers[Family.FamilyType.Serenity] = _serenity_manager
+	_families_managers[Family.FamilyType.Poison] = _poison_manager
+	_families_managers[Family.FamilyType.Life] = _life_manager
+	_families_managers[Family.FamilyType.Shadow] = _shadow_manager
 
 
-func _start_all_family_managers() -> void:
-	_auto_attack_manager.start()
-	_defense_manager.start()
-	_fire_manager.start()
-	_storm_manager.start()
-	_heal_manager.start()
-	_poison_manager.start()
-	_shadow_manager.start()
-	_life_manager.start()
+func _init_families_managers() -> void:
+	for family_manager in _families_managers.values():
+		family_manager.init(self)
+	
+	_defense_manager.armor_based_on_lost_hp_gained.connect(_on_defense_manager_armor_based_on_lost_hp_gained)
+	_life_manager.revived.connect(_on_life_manager_revived)
+	_shadow_manager.gain_max_hp_triggered.connect(_on_shadow_manager_gain_max_hp_triggered)
 
 
-func _stop_all_family_managers() -> void:
-	_auto_attack_manager.stop()
-	_defense_manager.stop()
-	_fire_manager.stop()
-	_storm_manager.stop()
-	_heal_manager.stop()
-	_poison_manager.stop()
-	_shadow_manager.stop()
-	_life_manager.stop()
+func _start_families_managers() -> void:
+	for family_manager in _families_managers.values():
+		family_manager.start()
+
+
+func _stop_families_managers() -> void:
+	for family_manager in _families_managers.values():
+		family_manager.stop()
 
 # ============================== Private ==============================
 
 func _handle_death() -> void:
-	_stop_all_family_managers()
+	_stop_families_managers()
 	_life_manager.source_is_dead()
 	_movement_manager.stop()
 	dead.emit(self, false)
@@ -394,3 +174,25 @@ func _on_fighting_area_map_clicked(new_position: Vector3) -> void:
 	if _is_dead or not _is_local:
 		return
 	_movement_manager.set_target_position(new_position)
+
+
+# ============================== Family callbacks ==============================
+
+func _on_defense_manager_armor_based_on_lost_hp_gained(percent_of_lost_hp: float) -> void:
+	var lost_hp: float = stats.health_max - stats.health
+	stats.defense.armor_stacks += (lost_hp * percent_of_lost_hp / 100.0) as int
+
+
+func _on_life_manager_revived(life_after_revived: int) -> void:
+	stats.health = life_after_revived
+	_character_visual.update_health_bar(stats.health, stats.health_max)
+	_start_families_managers()
+	_movement_manager.start()
+	_is_dead = false
+	Events.character_is_spawned.emit(self)
+
+
+func _on_shadow_manager_gain_max_hp_triggered(hp: int) -> void:
+	stats.health_max += hp
+	stats.health += hp
+	_character_visual.update_health_bar(stats.health, stats.health_max)

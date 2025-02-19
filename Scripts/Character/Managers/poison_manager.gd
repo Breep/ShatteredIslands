@@ -1,15 +1,11 @@
 class_name PoisonManager
-extends Node
+extends FamilyManager
 
 # ============================== Signals ==============================
 
 # ============================== Private variables ==============================
 
-var _source: Character # Ref to character owner
 var _poison_stats: CharacterPoisonStats # Ref to the owner poison stats
-
-var _optional_timers: Array[Timer]
-var _optional_spells: Array[Node]
 
 # ============================== Spells scenes ==============================
 
@@ -21,16 +17,8 @@ var _optional_spells: Array[Node]
 
 # ============================== Public functions ==============================
 
-func init(source: Character, poison_stats: CharacterPoisonStats) -> void:
-	if source == null:
-		printerr("PoisonManager: source undef")
-		return
-	if poison_stats == null:
-		printerr("PoisonManager: poison_stats undef")
-		return
-	
-	_source = source
-	_poison_stats = poison_stats
+func _specific_init() -> void:
+	_poison_stats = _source.stats.poison
 	_create_optional_timers()
 
 
@@ -91,11 +79,9 @@ func _lanch_optional_spells() -> void:
 
 func _on_periodic_stacks_timer_timeout() -> void:
 	var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.RANDOM_ENEMY)
-	if target == null:
-		return
-	
+	if target == null: return
 	var poison_stacks = _poison_stats.periodic_stacks_number
-	target.take_condition_stacks(poison_stacks, Utils.StackType.POISON, _source, 10)
+	_action_module.inflict_condition_stacks(target, poison_stacks, Utils.StackType.POISON, 10)
 
 
 # Handle poison stacks and damage on _source
@@ -114,22 +100,24 @@ func _on_poison_tick_timer_timeout() -> void:
 			_poison_stats.poison_effects.erase(effect)
 	
 	if poison_damage > 0:
-		_source.take_damage(null, get_reduced_damage(poison_damage), Utils.DamageType.POISON, false)
+		Events.attack_done.emit(null, _source, get_reduced_damage(poison_damage), Utils.DamageType.POISON, false)
 
 
 # [Poison of fire]
 func _handle_fire_poison(effect: PoisonEffect) -> void:
-	if not effect.source.stats.poison.fire_poison_activated:
-		return
+	if not effect.source.stats.poison.fire_poison_activated: return
 	
-	if __fire_poison_stacks_count.has(effect.source):
-		__fire_poison_stacks_count[effect.source] += effect.stacks_number
-	else:
-		__fire_poison_stacks_count[effect.source] = effect.stacks_number
+	# TODO: Rework cette partie avec un signal qui prévient de FireManager de la source comme
+	# ça il pourra utiliser le ActionModule de la source directement ça sera plus propre
 	
-	if multiplayer.get_unique_id() == 1: print("POISON/FIRE: ", __fire_poison_stacks_count[effect.source])
-	
-	if __fire_poison_stacks_count[effect.source] >= effect.source.stats.poison.fire_poison_stacks_lost:
-		if multiplayer.get_unique_id() == 1: print("POISON/FIRE: EXPLOSION")
-		effect.source.attack_percent(_source, effect.source.stats.poison.fire_poison_damage, Utils.DamageType.MAGIC, Utils.PercentModifier.MAX_HP)
-		__fire_poison_stacks_count[effect.source] -= effect.source.stats.poison.fire_poison_stacks_lost
+	#if __fire_poison_stacks_count.has(effect.source):
+		#__fire_poison_stacks_count[effect.source] += effect.stacks_number
+	#else:
+		#__fire_poison_stacks_count[effect.source] = effect.stacks_number
+	#
+	#if multiplayer.get_unique_id() == 1: print("POISON/FIRE: ", __fire_poison_stacks_count[effect.source])
+	#
+	#if __fire_poison_stacks_count[effect.source] >= effect.source.stats.poison.fire_poison_stacks_lost:
+		#if multiplayer.get_unique_id() == 1: print("POISON/FIRE: EXPLOSION")
+		#effect.source.attack_percent(_source, effect.source.stats.poison.fire_poison_damage, Utils.DamageType.MAGIC, Utils.PercentModifier.MAX_HP)
+		#__fire_poison_stacks_count[effect.source] -= effect.source.stats.poison.fire_poison_stacks_lost

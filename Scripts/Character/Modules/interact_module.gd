@@ -1,0 +1,109 @@
+class_name InteractModule
+extends Module
+
+signal heal_received()
+signal damage_taken()
+signal stacks_taken()
+
+# ============================== Node base functions ==============================
+
+func _ready() -> void:
+	Events.attack_done.connect(_on_events_attack_done)
+	Events.heal_done.connect(_on_events_heal_done)
+	Events.condition_stacks_done.connect(_on_events_condition_stacks_done)
+
+# ============================== Damage ==============================
+
+# [All]
+@rpc("authority", "call_local")
+func _net_take_damage(peer_id: int, damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
+	print("[", multiplayer.get_unique_id(), "] take_damage_ex()")
+	_source.stats.health = clamp(_source.stats.health - damage, 0, _source.stats.health_max)
+	damage_taken.emit()
+	#_character_visual.damage_popup(damage, damage_type, is_critical)
+	#_character_visual.update_health_bar(stats.health, stats.health_max)
+	#print("[", multiplayer.get_unique_id(), "] take_damage_ex(): ", stats.health, "/", stats.health_max)
+	#if stats.health <= 0 and !_is_dead:
+		#_handle_death()
+
+
+# [Server only]
+func _take_damage(source: Character, damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
+	if not multiplayer.is_server(): return
+	if _storm_manager != null:
+		damage = _storm_manager.get_increased_critical_damage(damage, is_critical) # Increase ALL critical damage
+	
+	if _defense_manager != null:
+		damage = _defense_manager.get_reduced_damage_taken_from_protector(damage) # Reduce % of ALL damage
+	
+	if _life_manager != null:
+		damage = _life_manager.get_reduced_damage(damage) # Reduce % of ALL damage
+	
+	if _fire_manager != null:
+		damage = _fire_manager.get_reduced_damage(damage, damage_type) # Reduce % of MAGIC damage
+	
+	if _defense_manager != null:
+		damage = _defense_manager.get_reduced_damage_taken_from_armor(source, damage, damage_type) # Reduce flat of PHYSIC AND MAGIC damage
+	
+	if is_critical:
+		Events.critical_damage_done.emit(source, _source, damage)
+	
+	if source != null:
+		_net_take_damage.rpc(source.player.id, damage, damage_type, is_critical)
+	else:
+		_net_take_damage.rpc(0, damage, damage_type, is_critical)
+
+# ============================== Condition stacks ==============================
+
+# [All]
+@rpc("authority", "call_local")
+func _net_take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, source_id: int = -1, poison_duration: int = 0) -> void:
+	print("[", multiplayer.get_unique_id(), "] _take_condition_stacks()")
+	stacks_taken.emit()
+
+
+# [Server only]
+func _take_condition_stacks(source: Character, stacks_number: int, stack_type: Utils.StackType, poison_duration: int = 0) -> void:
+	if not multiplayer.is_server(): return
+	match stack_type:
+		Utils.StackType.POISON:
+			_poison_manager.add_to_poison_effects(source, stacks_number, poison_duration)
+		Utils.StackType.VULNERABILITY:
+			_source.stats.storm.vulnerability_stacks += stacks_number
+	
+	if source != null:
+		_net_take_condition_stacks.rpc(stacks_number, stack_type, source.player.id)
+
+# ============================== Heal ==============================
+
+# [All]
+@rpc("authority", "call_local")
+func _net_take_heal(source_id: int, heal_amount: int) -> void:
+	print("[", multiplayer.get_unique_id(), "] _take_heal()")
+	_source.stats.health = clamp(_source.stats.health + heal_amount, 0, _source.stats.health_max)
+	heal_received.emit()
+	#if heal_amount != 0:
+		#_character_visual.damage_popup(heal_amount, Utils.DamageType.HEAL, false)
+		#_character_visual.update_health_bar(stats.health, stats.health_max)
+
+# [Server only]
+func _take_heal(source: Character, heal_amount: int) -> void:
+	if not multiplayer.is_server(): return
+	_defense_manager.notify_heal_received(heal_amount)
+	_net_take_heal.rpc(source.player.id, heal_amount)
+
+# ============================== Callback ==============================
+
+func _on_events_attack_done(source, target, damage, damage_type, is_critical) -> void:
+	if target != _source: return
+	_take_damage(source, damage, damage_type, is_critical)
+
+
+func _on_events_heal_done(source, target, heal_amount) -> void:
+	if target != _source: return
+	_take_heal(source, heal_amount)
+
+
+func _on_events_condition_stacks_done(source, target, stacks_number, stack_type, poison_duration) -> void:
+	if target != _source: return
+	_take_condition_stacks(source, stacks_number, stack_type, poison_duration)

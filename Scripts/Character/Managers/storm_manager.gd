@@ -1,5 +1,5 @@
 class_name StormManager
-extends Node
+extends FamilyManager
 
 # ============================== Constants ==============================
 
@@ -10,12 +10,10 @@ const FOCUS_INCREASE_CRIT_PERIOD: float = 0.5
 @export var _percent_decrease: float # Percentage of vulnerability stacks removed per tick
 @export var _minimum_stacks_decrease_flat: float # Minimum stacks removed each tick
 
-var _source: Character # Ref to character owner
 var _storm_stats: CharacterStormStats # Ref to the owner storm stats
 
 var _default_physical_critical_chance: float
 
-var _optional_timers: Array[Timer]
 var _focus_timer: Timer
 var _crit_move_speed_timer: Timer
 
@@ -27,17 +25,9 @@ var _focus_timer_time_elapsed: float # Time elapsed since lanch of the timer
 
 # ============================== Public functions ==============================
 
-func init(source: Character, storm_stats: CharacterStormStats) -> void:
-	if source == null:
-		printerr("StormManager: source undef")
-		return
-	if storm_stats == null:
-		printerr("StormManager: storm_stats undef")
-		return
-	
-	_source = source
-	_storm_stats = storm_stats
-	_default_physical_critical_chance = source.hero.stats.physical_critical_chance
+func _specific_init() -> void:
+	_storm_stats = _source.stats.storm
+	_default_physical_critical_chance = _source.hero.stats.physical_critical_chance
 	_create_optional_timers()
 
 
@@ -81,18 +71,17 @@ func notice_critical_damage(char_who_received_the_crit: Character, damage: int) 
 	# [Thunder priest]
 	if _storm_stats.crit_heal_activated:
 		var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
-		_source.heal(target, damage * _storm_stats.crit_heal_amount as float / 100.0)
+		_action_module.heal(target, damage * _storm_stats.crit_heal_amount as float / 100.0)
 	
 	# [Poisonous lightning]
 	if _storm_stats.crit_poison_activated:
 		var poison_stacks: int = (damage * _storm_stats.crit_poison_amount as float / 100.0) as int
-		char_who_received_the_crit.take_condition_stacks(poison_stacks, Utils.StackType.POISON, _source, 5)
+		_action_module.inflict_condition_stacks(char_who_received_the_crit, poison_stacks, Utils.StackType.POISON, 10)
 	
 	# [Thunder break]
 	if _storm_stats.crit_vulnerability_activated:
 		var vuln_stacks: int = (damage * _storm_stats.crit_vulnerability_amount as float / 100.0) as int
-		if multiplayer.get_unique_id() == 1: print(vuln_stacks)
-		char_who_received_the_crit.take_condition_stacks(vuln_stacks, Utils.StackType.VULNERABILITY)
+		_action_module.inflict_condition_stacks(char_who_received_the_crit, vuln_stacks, Utils.StackType.VULNERABILITY)
 	
 	# [Lightning speed]
 	if _storm_stats.crit_move_speed_activated:
@@ -150,7 +139,7 @@ func _on_periodic_vulnerability_timer_timeout() -> void:
 		return
 	
 	var vulnerability_stacks: int = _storm_stats.periodic_vulnerability_amount
-	target.take_condition_stacks(vulnerability_stacks, Utils.StackType.VULNERABILITY)
+	_action_module.inflict_condition_stacks(target, vulnerability_stacks, Utils.StackType.VULNERABILITY)
 
 
 func _on_vulnerability_timer_timeout() -> void:

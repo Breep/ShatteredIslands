@@ -1,5 +1,5 @@
 class_name ShadowManager
-extends Node
+extends FamilyManager
 
 # ============================== Signals ==============================
 
@@ -9,14 +9,12 @@ const UNTARGETABLE_CHECK_PERIOD: float = 0.1 # Check if the player is still unta
 
 # ============================== Private variables ==============================
 
-var _source: Character # Ref to character owner
 var _shadow_stats: CharacterShadowStats # Ref to the owner shadow stats
 
 var _previous_global_position: Vector3
 var _total_distance: float = 0 # Total distance moved by the character
 
 var _optional_distance_callbacks: Array[Callable]
-var _optional_timers: Array[Timer]
 
 # ============================== Local scenes ==============================
 
@@ -24,16 +22,8 @@ var _optional_timers: Array[Timer]
 
 # ============================== Public functions ==============================
 
-func init(source: Character, shadow_stats: CharacterShadowStats) -> void:
-	if source == null:
-		printerr("ShadowManager: source undef")
-		return
-	if shadow_stats == null:
-		printerr("ShadowManager: fire_stats undef")
-		return
-	
-	_source = source
-	_shadow_stats = shadow_stats
+func _specific_init() -> void:
+	_shadow_stats = _source.stats.shadow
 	_attach_optional_distance_callbacks()
 	_create_optional_timers()
 
@@ -123,7 +113,7 @@ func _try_cast_shadow_bolt() -> void:
 		var target: Character = _source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST_ENEMY)
 		if target == null:
 			return
-		_source.attack(target, _shadow_stats.shadow_bolt_damage, Utils.DamageType.MAGIC)
+		_action_module.attack(target, _shadow_stats.shadow_bolt_damage, Utils.DamageType.MAGIC)
 
 
 var __distance_since_last_increase_aa_damage: float = 0
@@ -145,7 +135,7 @@ func _try_heal() -> void:
 	if __distance_since_last_heal > _shadow_stats.heal_ally_distance:
 		__distance_since_last_heal -= _shadow_stats.heal_ally_distance
 		var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
-		_source.heal(target, _shadow_stats.heal_ally_value)
+		_action_module.heal(target, _shadow_stats.heal_ally_value)
 
 
 var __distance_since_last_gain_max_hp: float = 0
@@ -160,9 +150,8 @@ func _try_inflict_poison_stacks() -> void:
 	if __distance_since_last_inflict_poison_stacks > _shadow_stats.inflict_poison_stacks_distance:
 		__distance_since_last_inflict_poison_stacks -= _shadow_stats.inflict_poison_stacks_distance
 		var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.RANDOM_ENEMY)
-		if target == null:
-			return
-		target.take_condition_stacks(_shadow_stats.inflict_poison_stacks_value, Utils.StackType.POISON, _source, 5) # TODO need a duration value in poison stats
+		if target == null: return
+		_action_module.inflict_condition_stacks(target, _shadow_stats.inflict_poison_stacks_value, Utils.StackType.POISON, 5)
 
 
 var __distance_since_last_untargetable: float = 0

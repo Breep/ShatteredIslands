@@ -1,15 +1,11 @@
 class_name FireManager
-extends Node
+extends FamilyManager
 
 # ============================== Signals ==============================
 
 # ============================== Private variables ==============================
 
-var _source: Character # Ref to character owner
 var _fire_stats: CharacterFireStats # Ref to the owner fire stats
-
-var _optional_timers: Array[Timer]
-var _optional_spells: Array[Node]
 
 # ============================== Spells scenes ==============================
 
@@ -19,16 +15,8 @@ var _optional_spells: Array[Node]
 
 # ============================== Public functions ==============================
 
-func init(source: Character, fire_stats: CharacterFireStats) -> void:
-	if source == null:
-		printerr("FireManager: source undef")
-		return
-	if fire_stats == null:
-		printerr("FireManager: fire_stats undef")
-		return
-	
-	_source = source
-	_fire_stats = fire_stats
+func _specific_init() -> void:
+	_fire_stats = _source.stats.fire
 	_create_optional_timers()
 
 
@@ -108,7 +96,7 @@ func _on_firebolt_timer_timeout() -> void:
 	if target == null:
 		return
 	
-	_source.attack_percent(target, _fire_stats.firebolt_damage, Utils.DamageType.MAGIC, Utils.PercentModifier.CURRENT_HP)
+	_action_module.attack_percent(target, _fire_stats.firebolt_damage, Utils.DamageType.MAGIC, Utils.PercentModifier.CURRENT_HP)
 
 
 func _on_nuke_timer_timeout() -> void:
@@ -116,7 +104,7 @@ func _on_nuke_timer_timeout() -> void:
 	if target == null:
 		return
 	
-	_source.attack_percent(target, _fire_stats.nuke_damage, Utils.DamageType.MAGIC, Utils.PercentModifier.MAX_HP)
+	_action_module.attack_percent(target, _fire_stats.nuke_damage, Utils.DamageType.MAGIC, Utils.PercentModifier.MAX_HP)
 
 
 func _on_meteor_timer_timeout() -> void:

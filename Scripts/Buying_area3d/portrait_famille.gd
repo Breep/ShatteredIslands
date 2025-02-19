@@ -27,7 +27,7 @@ var _family_card_count = {
 	Family.FamilyType.Defense: 0, 
 	Family.FamilyType.Fire: 0, 
 	Family.FamilyType.Storm: 0,
-	Family.FamilyType.Serinity: 0, 
+	Family.FamilyType.Serenity: 0, 
 	Family.FamilyType.Life: 0, 
 	Family.FamilyType.Poison: 0, 
 	Family.FamilyType.Shadow: 0
