@@ -1,8 +1,8 @@
 class_name InteractModule
 extends Module
 
-signal heal_received()
-signal damage_taken()
+signal heal_received(heal_amount: int)
+signal damage_taken(damage: int, damage_type: Utils.DamageType, is_critical: bool)
 signal stacks_taken()
 
 # ============================== Node base functions ==============================
@@ -17,14 +17,8 @@ func _ready() -> void:
 # [All]
 @rpc("authority", "call_local")
 func _net_take_damage(peer_id: int, damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
-	print("[", multiplayer.get_unique_id(), "] take_damage_ex()")
 	_source.stats.health = clamp(_source.stats.health - damage, 0, _source.stats.health_max)
-	damage_taken.emit()
-	#_character_visual.damage_popup(damage, damage_type, is_critical)
-	#_character_visual.update_health_bar(stats.health, stats.health_max)
-	#print("[", multiplayer.get_unique_id(), "] take_damage_ex(): ", stats.health, "/", stats.health_max)
-	#if stats.health <= 0 and !_is_dead:
-		#_handle_death()
+	damage_taken.emit(damage, damage_type, is_critical)
 
 
 # [Server only]
@@ -58,7 +52,6 @@ func _take_damage(source: Character, damage: int, damage_type: Utils.DamageType,
 # [All]
 @rpc("authority", "call_local")
 func _net_take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, source_id: int = -1, poison_duration: int = 0) -> void:
-	print("[", multiplayer.get_unique_id(), "] _take_condition_stacks()")
 	stacks_taken.emit()
 
 
@@ -79,12 +72,9 @@ func _take_condition_stacks(source: Character, stacks_number: int, stack_type: U
 # [All]
 @rpc("authority", "call_local")
 func _net_take_heal(source_id: int, heal_amount: int) -> void:
-	print("[", multiplayer.get_unique_id(), "] _take_heal()")
 	_source.stats.health = clamp(_source.stats.health + heal_amount, 0, _source.stats.health_max)
-	heal_received.emit()
-	#if heal_amount != 0:
-		#_character_visual.damage_popup(heal_amount, Utils.DamageType.HEAL, false)
-		#_character_visual.update_health_bar(stats.health, stats.health_max)
+	heal_received.emit(heal_amount)
+
 
 # [Server only]
 func _take_heal(source: Character, heal_amount: int) -> void:

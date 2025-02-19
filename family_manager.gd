@@ -23,5 +23,9 @@ func init(source: Character) -> void:
 	_specific_init()
 
 
+func connect_external_signal(external_signal: Signal) -> void:
+	pass
+
+
 func _specific_init() -> void:
 	pass

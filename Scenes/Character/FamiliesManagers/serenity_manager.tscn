@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bdl1xxjdbeugn"]
 
-[ext_resource type="Script" path="res://Scripts/Character/Managers/serenity_manager.gd" id="1_mwu4l"]
+[ext_resource type="Script" path="res://Scripts/Character/FamiliesManagers/serenity_manager.gd" id="1_mwu4l"]
 
 [node name="SerenityManager" type="Node"]
 script = ExtResource("1_mwu4l")

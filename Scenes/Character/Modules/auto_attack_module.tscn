@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://b6yg1bhhmnicr"]
 
-[ext_resource type="Script" path="res://Scripts/Character/Managers/auto_attack_manager.gd" id="1_l15wc"]
+[ext_resource type="Script" path="res://Scripts/Character/Modules/auto_attack_module.gd" id="1_l15wc"]
 
-[node name="AutoAttackManager" type="Node"]
+[node name="AutoAttackModule" type="Node"]
 script = ExtResource("1_l15wc")
 
 [node name="AutoAttackTimer" type="Timer" parent="."]

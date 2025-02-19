@@ -28,9 +28,9 @@ var _fighting_state: FightingManager.FightingState = FightingManager.FightingSta
 
 @onready var target_manager: TargetManager = %TargetManager # Needs to be public for easier access for other managers TODO Maybe rework ?
 
-@onready var _auto_attack_manager: AutoAttackManager = %AutoAttackManager
 @onready var _movement_manager: MovementManager = %MovementManager
 
+@onready var _attack_manager: AttackManager = %AttackManager
 @onready var _defense_manager: DefenseManager = %DefenseManager
 @onready var _fire_manager: FireManager = %FireManager
 @onready var _storm_manager: StormManager = %StormManager
@@ -43,6 +43,7 @@ var _families_managers: Dictionary # { Family.FamilyType: FamilyManager }
 
 @onready var _action_module: ActionModule = %ActionModule
 @onready var _interact_module: InteractModule = %InteractModule
+@onready var _auto_attack_module: AutoAttackModule = %AutoAttackModule
 
 # ============================== Node base functions ==============================
 
@@ -82,6 +83,7 @@ func set_state(new_state: FightingManager.FightingState) -> void:
 			_fighting_state = FightingManager.FightingState.STARTING
 			target_manager.init(self)
 			_init_families_managers()
+			_init_modules()
 			_init_movement_manager(FightingManager.FightingState.STARTING)
 			_movement_manager.start()
 		FightingManager.FightingState.FIGHT:
@@ -90,6 +92,7 @@ func set_state(new_state: FightingManager.FightingState) -> void:
 				return
 			_fighting_state = FightingManager.FightingState.FIGHT
 			_start_families_managers()
+			_auto_attack_module.start()
 			_movement_manager.set_fighting_state(FightingManager.FightingState.FIGHT)
 
 # ============================== Private functions ==============================
@@ -103,20 +106,8 @@ func _apply_all_cards_upgrades() -> void:
 	for card in player.deck.cardPile:
 		card.player_upgrade.apply(self.stats, card.lvl)
 
-# ============================== AutoAttackManager ==============================
-
-func _init_auto_attack_manager() -> void:
-	if _auto_attack_manager == null:
-		printerr("No AutoAttackManager")
-		return
-	
-	_auto_attack_manager.focus_changed.connect(_on_auto_attack_manager_focus_changed)
-	_auto_attack_manager.init(self, stats.auto_attack, hero.aa_projectile, hero)
-
-func _on_auto_attack_manager_focus_changed(focused: bool) -> void:
-	_storm_manager.focus_changed(focused)
-
 # ============================== MovementManager ==============================
+
 func _init_movement_manager(fighting_state: FightingManager.FightingState) -> void:
 	if _movement_manager == null:
 		printerr("No MovementManager")
@@ -129,9 +120,10 @@ func _init_movement_manager(fighting_state: FightingManager.FightingState) -> vo
 func _on_movement_manager_energy_changed(energy: float) -> void:
 	_character_visual.update_energy_bar(energy, stats.energy_max)
 
-# ============================== Managers common ==============================
+# ============================== Families Managers ==============================
 
 func _build_families_managers() -> void:
+	_families_managers[Family.FamilyType.Attack] = _attack_manager
 	_families_managers[Family.FamilyType.Defense] = _defense_manager
 	_families_managers[Family.FamilyType.Fire] = _fire_manager
 	_families_managers[Family.FamilyType.Storm] = _storm_manager
@@ -148,6 +140,7 @@ func _init_families_managers() -> void:
 	_defense_manager.armor_based_on_lost_hp_gained.connect(_on_defense_manager_armor_based_on_lost_hp_gained)
 	_life_manager.revived.connect(_on_life_manager_revived)
 	_shadow_manager.gain_max_hp_triggered.connect(_on_shadow_manager_gain_max_hp_triggered)
+	_attack_manager.focus_changed.connect(_on_auto_attack_manager_focus_changed)
 
 
 func _start_families_managers() -> void:
@@ -158,6 +151,16 @@ func _start_families_managers() -> void:
 func _stop_families_managers() -> void:
 	for family_manager in _families_managers.values():
 		family_manager.stop()
+
+# ============================== Modules ==============================
+
+func _init_modules() -> void:
+	_auto_attack_module.init(self, _families_managers)
+	_action_module.init(self, _families_managers)
+	_interact_module.init(self, _families_managers)
+	
+	_interact_module.damage_taken.connect(_on_interact_module_damage_taken)
+	_interact_module.heal_received.connect(_on_interact_module_heal_received)
 
 # ============================== Private ==============================
 
@@ -196,3 +199,42 @@ func _on_shadow_manager_gain_max_hp_triggered(hp: int) -> void:
 	stats.health_max += hp
 	stats.health += hp
 	_character_visual.update_health_bar(stats.health, stats.health_max)
+
+
+func _on_auto_attack_manager_focus_changed(focused: bool) -> void:
+	_storm_manager.focus_changed(focused)
+
+# ============================== Module callbacks ==============================
+
+func _on_interact_module_damage_taken(damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
+	_character_visual.damage_popup(damage, damage_type, is_critical)
+	_character_visual.update_health_bar(stats.health, stats.health_max)
+	if stats.health <= 0 and !_is_dead:
+		_handle_death()
+
+
+func _on_interact_module_heal_received(heal_amount: int) -> void:
+	if heal_amount != 0:
+		_character_visual.damage_popup(heal_amount, Utils.DamageType.HEAL, false)
+		_character_visual.update_health_bar(stats.health, stats.health_max)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
