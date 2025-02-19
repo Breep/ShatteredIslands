@@ -1,5 +1,5 @@
 class_name DefenseManager
-extends Node
+extends FamilyManager
 
 # ============================== Signals ==============================
 
@@ -7,25 +7,14 @@ signal armor_based_on_lost_hp_gained(percent_of_lost_hp: float)
 
 # ============================== Private variables ==============================
 
-var _source: Character # Ref to character owner
 var _defense_stats: CharacterDefenseStats # Ref to the owner defense stats
 
 var _armor_lost_since_last_shield_strike: int = 0
 
-var _optional_timers: Array[Timer]
-
 # ============================== Public functions ==============================
 
-func init(source: Character, defense_stats: CharacterDefenseStats) -> void:
-	if source == null:
-		printerr("DefenseManager: source undef")
-		return
-	if defense_stats == null:
-		printerr("DefenseManager: defense_stats undef")
-		return
-	
-	_source = source
-	_defense_stats = defense_stats
+func _specific_init() -> void:
+	_defense_stats = _source.stats.defense
 	_create_optional_timers()
 
 
@@ -39,11 +28,11 @@ func stop() -> void:
 		timer.stop()
 
 
-func get_reduced_damage_dealed_from_protector(damage: int) -> int:
+func get_reduced_damage_dealed_from_protector(damage: float) -> float:
 	if not _defense_stats.protector_activated:
 		return damage
 	
-	var damage_reduction: int = ((damage as float * _defense_stats.protector_reduce_damage_done) / 100.0) as int
+	var damage_reduction = damage * _defense_stats.protector_reduce_damage_done / 100.0
 	return damage - damage_reduction
 
 
@@ -96,13 +85,13 @@ func _handle_backfires(damage_source: Character) -> void:
 		_defense_stats.armor_stacks += _defense_stats.backfire_armor_gain_stacks
 	
 	if Utils.is_randomize_modifier_active(_defense_stats.backfire_fire_shield_chance):
-		_source.attack_percent(damage_source, _defense_stats.backfire_fire_shield_damage, Utils.DamageType.MAGIC, Utils.PercentModifier.CURRENT_HP)
+		_action_module.attack_percent(damage_source, _defense_stats.backfire_fire_shield_damage, Utils.DamageType.MAGIC, Utils.PercentModifier.CURRENT_HP)
 	
 	if Utils.is_randomize_modifier_active(_defense_stats.backfire_poison_chance):
-		damage_source.take_condition_stacks(_defense_stats.backfire_poison_stacks, Utils.StackType.POISON, _source, 10)
+		_action_module.inflict_condition_stacks(damage_source, _defense_stats.backfire_poison_stacks, Utils.StackType.POISON, 10)
 	
 	if Utils.is_randomize_modifier_active(_defense_stats.backfire_vulnerability_chance):
-		damage_source.take_condition_stacks(_defense_stats.backfire_vulnerability_stacks, Utils.StackType.VULNERABILITY)
+		_action_module.inflict_condition_stacks(damage_source, _defense_stats.backfire_vulnerability_stacks, Utils.StackType.VULNERABILITY)
 
 # ============================== Callbacks functions ==============================
 
@@ -116,7 +105,7 @@ func _on_shield_strike_timer_timeout() -> void:
 		var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST_ENEMY)
 		if target == null:
 			return
-		_source.attack(target, damage, Utils.DamageType.MAGIC)
+		_action_module.attack(target, damage, Utils.DamageType.MAGIC)
 		_armor_lost_since_last_shield_strike = 0
 
 

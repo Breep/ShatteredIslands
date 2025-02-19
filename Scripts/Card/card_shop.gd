@@ -16,8 +16,11 @@ signal card_bought
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
+	if multiplayer.is_server():
+		hide()
+		return
+	
 	_local_player = GameManager.get_local_player()
-
 	_update_shop_cards_displayed()
 	# tmp connect button signals
 	# TODO make it in a separate function that can handle a custom number of button

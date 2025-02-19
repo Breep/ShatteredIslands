@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cl10r3idwllx"]
 
-[ext_resource type="Script" path="res://Scripts/Character/Managers/fire_manager.gd" id="1_7a5by"]
+[ext_resource type="Script" path="res://Scripts/Character/FamiliesManagers/fire_manager.gd" id="1_7a5by"]
 
 [node name="FireManager" type="Node"]
 script = ExtResource("1_7a5by")

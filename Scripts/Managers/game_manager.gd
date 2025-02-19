@@ -9,6 +9,8 @@ extends Node2D
 # =============================================================
 # =============================================================
 
+# ============================== Enum ==============================
+
 enum GameState {
 	Starting,
 	Buying,
@@ -21,7 +23,7 @@ const MAX_PLAYERS: int = 8
 
 # ============================== Public ==============================
 
-var players: Array[Player]
+var players: Dictionary # { player_id : Player }
 
 # ============================== Private ==============================
 
@@ -39,8 +41,8 @@ var _rules: GameRules
 func _ready() -> void:
 	_rules = load("res://Resources/GameRules/NormalGameRules.tres")
 	_init_families_ref()
-	#_active_families.append(get_family_from_type(Family.FamilyType.Serinity))
-	_active_families.append(get_family_from_type(Family.FamilyType.Life))
+	_active_families.append(get_family_from_type(Family.FamilyType.Serenity))
+	#_active_families.append(get_family_from_type(Family.FamilyType.Life))
 	_active_families.append(get_family_from_type(Family.FamilyType.Fire))
 
 # ============================== Public function ==============================
@@ -54,16 +56,17 @@ func game_switch_to(new_game_state: GameState) -> void:
 		printerr("Game is already on ", _game_state, " state !")
 
 
+# Add a player to the list of players
+# If this is called on the server, the server will transmit this to every other players
 @rpc("any_peer", "call_remote")
 func add_player(player_name: String, id: int) -> void:
 	print("[id:", multiplayer.get_unique_id(),"] Adding player: ", player_name, " of multiplayer id:", id, " in my players list")
 	
-	if _is_player_registered(id):
-		printerr("Player already registered")
+	if players.has(id):
 		return
 	
 	if players.size() >= MAX_PLAYERS:
-		printerr("Too many players")
+		printerr("[id:", multiplayer.get_unique_id(),"] Too many players")
 		return
 	
 	var new_player := Player.new()
@@ -77,34 +80,31 @@ func add_player(player_name: String, id: int) -> void:
 	new_player.gold = 10000
 	new_player.health = 30
 	
-	players.append(new_player)
+	players[id] = new_player
 	
 	if multiplayer.is_server():
-		for player in players:
+		for player in players.values():
 			add_player.rpc(player.name, player.id)
 
 
 @rpc("any_peer", "call_local")
 func set_ready(peer_id: int , is_ready: bool) -> void:
 	print("[id:", multiplayer.get_unique_id(),"] player ", peer_id, " is telling me that he is ready ? ", is_ready)
-	for player in players:
-		if player.id == peer_id:
-			player.ready = is_ready
+	players[peer_id].ready = is_ready
 
 
 func get_local_player() -> Player:
-	for player in players:
-		if player.id == multiplayer.get_unique_id():
-			return player
+	if not players.has(multiplayer.get_unique_id()):
+		printerr(" No local player for player_id=", multiplayer.get_unique_id())
+		return null
 	
-	printerr("No local player registered in the GameManager !")
-	return null
+	return players[multiplayer.get_unique_id()]
 
 
 @rpc("any_peer", "call_local")
 func start_game() -> void:
-	if not _all_player_are_ready():
-		printerr("Not all player are ready !")
+	if not _all_players_are_ready():
+		printerr("[id:", multiplayer.get_unique_id(),"] Not all player are ready !")
 		return
 	
 	MultiplayerDeckManager.init_cards_ref(_active_families, _rules)
@@ -132,19 +132,8 @@ func _game_switch_to(new_game_state: GameState) -> void:
 	get_tree().change_scene_to_packed(new_scene)
 
 
-func _is_player_registered(id: int) -> bool:
-	if players == null:
-		return false
-	
-	for player in players:
-		if player.id == id:
-			return true
-	
-	return false
-
-
-func _all_player_are_ready() -> bool:
-	for player in players:
+func _all_players_are_ready() -> bool:
+	for player in players.values():
 		if player.ready == false:
 			return false
 
@@ -156,7 +145,7 @@ func _init_families_ref() -> void:
 	_families_ref[Family.FamilyType.Defense] = load("res://Resources/Families/defense_family.tres") as Family
 	_families_ref[Family.FamilyType.Fire] = load("res://Resources/Families/fire_family.tres") as Family
 	_families_ref[Family.FamilyType.Storm] = load("res://Resources/Families/storm_family.tres") as Family
-	_families_ref[Family.FamilyType.Serinity] = load("res://Resources/Families/heal_family.tres") as Family
+	_families_ref[Family.FamilyType.Serenity] = load("res://Resources/Families/heal_family.tres") as Family
 	_families_ref[Family.FamilyType.Life] = load("res://Resources/Families/hp_family.tres") as Family
 	_families_ref[Family.FamilyType.Poison] = load("res://Resources/Families/poison_family.tres") as Family
 	_families_ref[Family.FamilyType.Shadow] = load("res://Resources/Families/shadow_family.tres") as Family

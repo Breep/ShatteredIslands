@@ -15,7 +15,7 @@
 
 [sub_resource type="Resource" id="Resource_gvftt"]
 script = ExtResource("3_x2gh1")
-health_max = 500
+health_max = 6666
 mana_max = 120
 mana_regen = 2.0
 energy_max = 20
@@ -24,7 +24,7 @@ move_speed = 4.0
 attack_damage = 50
 attack_speed = 1.2
 attack_move_speed = 10.0
-physical_critical_chance = 10.0
+physical_critical_chance = 13.0
 physical_critical_multiplier = 2.0
 
 [resource]

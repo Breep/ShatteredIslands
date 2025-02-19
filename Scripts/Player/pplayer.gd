@@ -12,3 +12,5 @@ var deck: PlayerDeck
 var gold: int
 
 var ready: bool
+
+var character: Character

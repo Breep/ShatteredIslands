@@ -6,7 +6,7 @@ enum FamilyType {
 	Defense,
 	Fire,
 	Storm,
-	Serinity,
+	Serenity,
 	Life,
 	Poison,
 	Shadow
