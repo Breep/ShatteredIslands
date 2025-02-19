@@ -42,7 +42,7 @@ func get_reduced_damage(damage: int, damage_type: Utils.DamageType) -> int:
 
 
 # Storm of fire
-func get_increased_damage(damage: int, damage_type: Utils.DamageType) -> int:
+func get_increased_damage(damage: float, damage_type: Utils.DamageType) -> float:
 	if damage_type != Utils.DamageType.MAGIC:
 		return damage
 	

@@ -53,13 +53,13 @@ func notify_heal() -> void:
 			print("PACIFY MY ENEMY")
 
 
-func get_reduced_damage_dealed_from_pacify(damage: int) -> int:
-	if _heal_stats.pacified:
-		_heal_stats.pacified = false
-		var damage_reduction: int = (damage * PACIFY_DAMAGE_REDUCTION_PERCENT / 100.0) as int
-		if multiplayer.get_unique_id() == 1: print("Damage reduced: ", damage_reduction)
-		return damage - damage_reduction
-	return damage
+func get_reduced_damage_dealed_from_pacify(damage: float) -> float:
+	if not _heal_stats.pacified:
+		return damage
+	
+	_heal_stats.pacified = false
+	var damage_reduction = damage * PACIFY_DAMAGE_REDUCTION_PERCENT / 100.0
+	return damage - damage_reduction
 
 # ============================== Private functions ==============================
 
@@ -80,11 +80,11 @@ func _create_optional_timers() -> void:
 
 func _on_periodic_heal_timer_timeout() -> void:
 	var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
-	_source.heal(target, _heal_stats.periodic_heal_amount)
+	_action_module.heal(target, _heal_stats.periodic_heal_amount)
 
 
 func _on_lost_hp_regen_timer_timeout() -> void:
-	_source.heal_percent(_source, _heal_stats.lost_hp_regen_percentage, Utils.PercentModifier.LOST_HP)
+	_action_module.heal_percent(_source, _heal_stats.lost_hp_regen_percentage, Utils.PercentModifier.LOST_HP)
 
 
 func _on_epic_heal_area_timer_timeout() -> void:
@@ -92,4 +92,4 @@ func _on_epic_heal_area_timer_timeout() -> void:
 	if targets.is_empty():
 		return
 	for target in targets:
-		_source.heal_percent(target, _heal_stats.epic_heal_area_percentage, Utils.PercentModifier.MAX_HP)
+		_action_module.heal_percent(target, _heal_stats.epic_heal_area_percentage, Utils.PercentModifier.MAX_HP)

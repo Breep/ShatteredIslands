@@ -30,7 +30,7 @@ func stop() -> void:
 		timer.stop()
 
 
-func get_increased_damage_taken_from_lost_hp(damage: int, damage_type: Utils.DamageType) -> int:
+func get_increased_damage_taken_from_lost_hp(damage: float, damage_type: Utils.DamageType) -> float:
 	if damage_type != Utils.DamageType.PHYSICAL:
 		return damage
 	

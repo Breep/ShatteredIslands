@@ -68,7 +68,8 @@ func _auto_attack(target: Character) -> void:
 	if _attack_manager != null:
 		_attack_manager.update_aa_projectile_stats(projectile_stats)
 	
-	_action_module.attack(target, _damage, Utils.DamageType.PHYSICAL, _projectile_scene, projectile_spawn, projectile_stats)
+	_action_module.projectile_attack(target, _projectile_scene, projectile_spawn, projectile_stats)
+	#_action_module.attack(target, projectile_stats.physical_damage_flat, Utils.DamageType.PHYSICAL)
 
 
 func _update_auto_attack_speed() -> void:

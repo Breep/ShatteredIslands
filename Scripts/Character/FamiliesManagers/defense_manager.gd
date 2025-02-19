@@ -28,11 +28,11 @@ func stop() -> void:
 		timer.stop()
 
 
-func get_reduced_damage_dealed_from_protector(damage: int) -> int:
+func get_reduced_damage_dealed_from_protector(damage: float) -> float:
 	if not _defense_stats.protector_activated:
 		return damage
 	
-	var damage_reduction: int = ((damage as float * _defense_stats.protector_reduce_damage_done) / 100.0) as int
+	var damage_reduction = damage * _defense_stats.protector_reduce_damage_done / 100.0
 	return damage - damage_reduction
 
 
