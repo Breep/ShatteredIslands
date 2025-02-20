@@ -12,6 +12,9 @@ var _fire_stats: CharacterFireStats # Ref to the owner fire stats
 @onready var _healing_fire_area_scene: PackedScene = preload("res://Scenes/SpellsAndProjectiles/healing_fire_area.tscn")
 @onready var _meteor_scene: PackedScene = preload("res://Scenes/SpellsAndProjectiles/meteor.tscn")
 @onready var _fire_trail_scene: PackedScene = preload("res://Scenes/SpellsAndProjectiles/fire_trail.tscn")
+@onready var _fire_bolt_scene: PackedScene = preload("res://Scenes/VFX_3D/Import/fireball.tscn")
+
+@export var _projectile_spawn : Node3D
 
 # ============================== Public functions ==============================
 
@@ -95,8 +98,12 @@ func _on_firebolt_timer_timeout() -> void:
 	var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST_ENEMY)
 	if target == null:
 		return
-	
-	_action_module.direct_attack_percent(target, _fire_stats.firebolt_damage, Utils.DamageType.MAGICAL, Utils.PercentModifier.CURRENT_HP)
+		
+	var projectile_stats := ProjectileStats.new()
+	projectile_stats.magical_damage_percent = _fire_stats.firebolt_damage
+	projectile_stats.magical_damage_percent_type = Utils.PercentModifier.CURRENT_HP
+	projectile_stats.speed = 2
+	_action_module.projectile_attack(target, _fire_bolt_scene, _projectile_spawn, projectile_stats)
 
 
 func _on_nuke_timer_timeout() -> void:

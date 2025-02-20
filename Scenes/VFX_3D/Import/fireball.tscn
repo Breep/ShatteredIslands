@@ -1,11 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://d37wg3mc76fs7"]
+[gd_scene load_steps=20 format=3 uid="uid://d37wg3mc76fs7"]
 
-[ext_resource type="Script" path="res://Scenes/VFX_3D/Import/fireball.gd" id="1_nfli8"]
-[ext_resource type="Material" path="res://Scenes/VFX_3D/Import/fireball_mat.tres" id="2_kub5u"]
+[ext_resource type="Script" path="res://Scripts/SpellsAndProjectiles/projectile.gd" id="1_6v1tt"]
+[ext_resource type="Material" uid="uid://can8t2u1j45tv" path="res://Scenes/VFX_3D/Import/fireball_mat.tres" id="2_kub5u"]
 [ext_resource type="ArrayMesh" uid="uid://d3ha0fhlgaamq" path="res://Scenes/VFX_3D/Import/fireball_shell_mesh.obj" id="3_e1dfy"]
-[ext_resource type="Material" path="res://Scenes/VFX_3D/Import/fireball_fire_particles_mat.tres" id="5_11yv5"]
+[ext_resource type="Material" uid="uid://dxpjm0adafggu" path="res://Scenes/VFX_3D/Import/fireball_fire_particles_mat.tres" id="5_11yv5"]
 [ext_resource type="Shader" path="res://Scenes/VFX_3D/Import/fireball_core.gdshader" id="6_lin42"]
-[ext_resource type="Material" path="res://Scenes/VFX_3D/Import/fireball_firetrail_particles_process.tres" id="6_obgtq"]
+[ext_resource type="Material" uid="uid://bysmw3siejjhv" path="res://Scenes/VFX_3D/Import/fireball_firetrail_particles_process.tres" id="6_obgtq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7vae4"]
 render_priority = 0
@@ -14,6 +14,9 @@ shader = ExtResource("6_lin42")
 [sub_resource type="SphereMesh" id="SphereMesh_77e4v"]
 radius = 0.4
 height = 0.8
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_88cb0"]
+points = PackedVector3Array(-0.000151396, -0.499307, 0.773261, -0.295952, -0.499307, 0.714373, -0.000151396, -4.35502, 0.173484, 0.295801, -0.499307, 0.714373, 0.29459, -0.0113473, 0.711497, -0.000151396, -0.0113473, 0.770082, -0.294741, -0.0113473, 0.711497, -0.546793, -0.499307, 0.546642, -0.122771, -4.35502, 0.12262, -0.0664569, -4.35502, 0.160163, -0.544674, -0.0113473, 0.544522, 0.0663055, -4.35502, 0.160163, 0.12262, -4.35502, 0.12262, 0.546642, -0.499307, 0.546642, 0.544522, -0.0113473, 0.544522, 0.237216, 0.348872, 0.572831, -0.000151396, 0.348872, 0.620062, -0.237368, 0.348872, 0.572831, -0.714525, -0.499307, 0.295801, -0.160465, -4.35502, 0.0663055, -0.711648, -0.0113473, 0.29459, -0.438555, 0.348872, 0.438403, -0.572982, 0.348872, 0.237216, 0.160163, -4.35502, 0.0663055, 0.714373, -0.499307, 0.295801, 0.711497, -0.0113473, 0.29459, 0.572831, 0.348872, 0.237216, 0.438403, 0.348872, 0.438403, 0.13246, 0.568625, 0.319871, -0.000151396, 0.568625, 0.346211, -0.132611, 0.568625, 0.319871, -0.773261, -0.499307, -0.000151396, -0.770233, -0.0113473, -0.000151396, -0.173636, -4.35502, -0.000151396, -0.620213, 0.348872, -0.000151396, -0.244937, 0.568625, 0.244785, -0.320022, 0.568625, 0.13246, 0.173484, -4.35502, -0.000151396, 0.773261, -0.499307, -0.000151396, 0.770082, -0.0113473, -0.000151396, 0.620062, 0.348872, -0.000151396, 0.319871, 0.568625, 0.13246, 0.244785, 0.568625, 0.244785, -0.000151396, 0.644976, -0.000151396, -0.714525, -0.499307, -0.295952, -0.711648, -0.0113473, -0.294741, -0.160465, -4.35502, -0.0664569, -0.346363, 0.568625, -0.000151396, -0.320022, 0.568625, -0.132611, -0.572982, 0.348872, -0.237368, 0.160163, -4.35502, -0.0664569, 0.714373, -0.499307, -0.295952, 0.711497, -0.0113473, -0.294741, 0.319871, 0.568625, -0.132611, 0.346211, 0.568625, -0.000151396, 0.572831, 0.348872, -0.237368, 0.244785, 0.568625, -0.244937, 0.13246, 0.568625, -0.320022, -0.000151396, 0.568625, -0.346363, -0.132611, 0.568625, -0.320022, -0.244937, 0.568625, -0.244937, -0.546793, -0.499307, -0.546793, -0.544674, -0.0113473, -0.544674, -0.122771, -4.35502, -0.122771, -0.438555, 0.348872, -0.438555, 0.12262, -4.35502, -0.122771, 0.546642, -0.499307, -0.546793, 0.544522, -0.0113473, -0.544674, 0.438403, 0.348872, -0.438555, 0.237216, 0.348872, -0.572982, -0.000151396, 0.348872, -0.620213, -0.237368, 0.348872, -0.572982, -0.295952, -0.499307, -0.714525, -0.0664569, -4.35502, -0.160465, -0.294741, -0.0113473, -0.711648, 0.0663055, -4.35502, -0.160465, 0.295801, -0.499307, -0.714525, 0.29459, -0.0113473, -0.711648, -0.000151396, -0.0113473, -0.770233, -0.000151396, -0.499307, -0.773261, -0.000151396, -4.35502, -0.173636)
 
 [sub_resource type="QuadMesh" id="QuadMesh_6lh4h"]
 size = Vector2(0.5, 0.5)
@@ -91,8 +94,8 @@ anim_speed_min = 0.01
 anim_speed_max = 0.02
 anim_offset_max = 1.0
 
-[node name="Fireball" type="Node3D"]
-script = ExtResource("1_nfli8")
+[node name="Fireball" type="Area3D"]
+script = ExtResource("1_6v1tt")
 
 [node name="FireballShellMesh" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
@@ -106,6 +109,10 @@ material_override = SubResource("ShaderMaterial_7vae4")
 cast_shadow = 0
 mesh = SubResource("SphereMesh_77e4v")
 skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, -8.74228e-09, -0.2, 0, 0.2, -8.74228e-09, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_88cb0")
 
 [node name="FireTrail" type="GPUParticles3D" parent="."]
 unique_name_in_owner = true
