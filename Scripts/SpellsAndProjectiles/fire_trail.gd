@@ -8,6 +8,7 @@ extends Node3D
 var _areas_dictionaries: Array[Dictionary] # { Area3D, Time }
 
 var _source: Character # Owner of this poison cloud
+var _action_module: ActionModule # Owner ActionModule ref
 var _characters_inside: Dictionary # {Character, int} Dictionary of number reference of characters
 var _damage_percent: float = 0 # Stacks applied every tick
 var _life_time: float # Life time of each point of the fire trail
@@ -26,16 +27,17 @@ func init(source: Character, damage_percent: float, period: float, life_time: fl
 	_damage_wait_time = period
 	_damage_percent = damage_percent
 	_life_time = life_time
+	var action_modules = _source.find_children("", "ActionModule", true, false)
+	if action_modules.is_empty():
+		printerr("Meteor: An ActionModule is mandatory on the owner")
+		return
+	_action_module = action_modules[0]
 
 
 func _ready() -> void:
 	_previous_source_position = _source.global_position
 	_damage_timer.wait_time = _damage_wait_time
 	_damage_timer.start()
-
-
-
-
 
 
 func _construct_new_fire_trail_point() -> void:
@@ -72,7 +74,7 @@ func _on_fire_trail_area_body_entered(body: Node3D) -> void:
 			_characters_inside[body] += 1
 		else:
 			_characters_inside[body] = 1
-			_source.attack_percent(body, _damage_percent, Utils.DamageType.MAGIC, Utils.PercentModifier.MAX_HP)
+			_action_module.direct_attack_percent(body, _damage_percent, Utils.DamageType.MAGICAL, Utils.PercentModifier.MAX_HP)
 
 
 func _on_fire_trail_area_body_exited(body: Node3D) -> void:
@@ -90,4 +92,4 @@ func _on_construction_timer_timeout() -> void:
 func _on_damage_timer_timeout() -> void:
 	for character in _characters_inside:
 		if character.team != _source.team:
-			_source.attack_percent(character, _damage_percent, Utils.DamageType.MAGIC, Utils.PercentModifier.MAX_HP)
+			_action_module.direct_attack_percent(character, _damage_percent, Utils.DamageType.MAGICAL, Utils.PercentModifier.MAX_HP)

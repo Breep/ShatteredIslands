@@ -100,7 +100,7 @@ func _on_poison_tick_timer_timeout() -> void:
 			_poison_stats.poison_effects.erase(effect)
 	
 	if poison_damage > 0:
-		Events.attack_done.emit(null, _source, get_reduced_damage(poison_damage), Utils.DamageType.POISON, false)
+		Events.damage_done.emit(null, _source, get_reduced_damage(poison_damage), Utils.DamageType.POISON, false)
 
 
 # [Poison of fire]
@@ -119,5 +119,5 @@ func _handle_fire_poison(effect: PoisonEffect) -> void:
 	#
 	#if __fire_poison_stacks_count[effect.source] >= effect.source.stats.poison.fire_poison_stacks_lost:
 		#if multiplayer.get_unique_id() == 1: print("POISON/FIRE: EXPLOSION")
-		#effect.source.attack_percent(_source, effect.source.stats.poison.fire_poison_damage, Utils.DamageType.MAGIC, Utils.PercentModifier.MAX_HP)
+		#effect.source.attack_percent(_source, effect.source.stats.poison.fire_poison_damage, Utils.DamageType.MAGICAL, Utils.PercentModifier.MAX_HP)
 		#__fire_poison_stacks_count[effect.source] -= effect.source.stats.poison.fire_poison_stacks_lost

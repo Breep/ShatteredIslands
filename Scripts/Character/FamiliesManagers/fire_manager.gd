@@ -34,7 +34,7 @@ func stop() -> void:
 
 
 func get_reduced_damage(damage: int, damage_type: Utils.DamageType) -> int:
-	if damage_type != Utils.DamageType.MAGIC:
+	if damage_type != Utils.DamageType.MAGICAL:
 		return damage
 	
 	var damage_reduced = damage - damage * _fire_stats.magic_resist_percent / 100.0
@@ -43,7 +43,7 @@ func get_reduced_damage(damage: int, damage_type: Utils.DamageType) -> int:
 
 # Storm of fire
 func get_increased_damage(damage: float, damage_type: Utils.DamageType) -> float:
-	if damage_type != Utils.DamageType.MAGIC:
+	if damage_type != Utils.DamageType.MAGICAL:
 		return damage
 	
 	if not _fire_stats.damage_increase_on_low_life_enemy_activated:
@@ -96,7 +96,7 @@ func _on_firebolt_timer_timeout() -> void:
 	if target == null:
 		return
 	
-	_action_module.attack_percent(target, _fire_stats.firebolt_damage, Utils.DamageType.MAGIC, Utils.PercentModifier.CURRENT_HP)
+	_action_module.direct_attack_percent(target, _fire_stats.firebolt_damage, Utils.DamageType.MAGICAL, Utils.PercentModifier.CURRENT_HP)
 
 
 func _on_nuke_timer_timeout() -> void:
@@ -104,7 +104,7 @@ func _on_nuke_timer_timeout() -> void:
 	if target == null:
 		return
 	
-	_action_module.attack_percent(target, _fire_stats.nuke_damage, Utils.DamageType.MAGIC, Utils.PercentModifier.MAX_HP)
+	_action_module.direct_attack_percent(target, _fire_stats.nuke_damage, Utils.DamageType.MAGICAL, Utils.PercentModifier.MAX_HP)
 
 
 func _on_meteor_timer_timeout() -> void:

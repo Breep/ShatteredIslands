@@ -34,7 +34,7 @@ func notify_heal() -> void:
 		var target: Character = _source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST_ENEMY)
 		if target == null:
 			return
-		_source.attack(target, _heal_stats.heal_projectile_damage, Utils.DamageType.MAGIC)
+		_source.attack(target, _heal_stats.heal_projectile_damage, Utils.DamageType.MAGICAL)
 	
 	# [Hazardous healing]
 	if _heal_stats.poison_stacks_activated and Utils.is_randomize_modifier_active(_heal_stats.poison_stacks_chance):

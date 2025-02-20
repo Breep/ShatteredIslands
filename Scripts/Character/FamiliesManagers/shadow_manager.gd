@@ -113,7 +113,7 @@ func _try_cast_shadow_bolt() -> void:
 		var target: Character = _source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST_ENEMY)
 		if target == null:
 			return
-		_action_module.attack(target, _shadow_stats.shadow_bolt_damage, Utils.DamageType.MAGIC)
+		_action_module.direct_attack(target, _shadow_stats.shadow_bolt_damage, Utils.DamageType.MAGICAL)
 
 
 var __distance_since_last_increase_aa_damage: float = 0

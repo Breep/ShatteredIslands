@@ -98,7 +98,7 @@ func _on_fire_damage_timer_timeout() -> void:
 	var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST_ENEMY)
 	if target == null: return
 	var damage = _source.stats.health_max * _life_stats.fire_damage_percent / 100.0
-	_action_module.attack(target, damage, Utils.DamageType.MAGIC)
+	_action_module.direct_attack(target, damage, Utils.DamageType.MAGICAL)
 
 
 func _on_revive_timer_timeout() -> void:

@@ -5,10 +5,11 @@ extends Area3D
 # === This is the healing fire area from the card "Ring of fire healing" ===
 # ==========================================================================
 
+var _source: Character # Owner of this healing fire area
+var _action_module: ActionModule # Owner ActionModule ref
 var _characters_inside: Array[Character] # Array of all character inside the area
 var _damage_percent: float = 0 # Damage done to enemies in percent of current hp
 var _heal_percent: float = 0 # heal done to allies in percent of max hp
-var _source: Character # Owner of this healing fire area
 var _wait_time: float # period between two ticks of the healing fire area (in seconds)
 var _radius: float # Radius of the healing fire area (in m)
 
@@ -17,12 +18,16 @@ var _radius: float # Radius of the healing fire area (in m)
 @onready var tmp_debug_mesh: MeshInstance3D = %HealingFireVisual
 
 func init(source: Character, damage: float, heal: float, period: float, radius: float) -> void:
-	print("HealingFireArea: Init")
 	_source = source
 	_damage_percent = damage
 	_heal_percent = heal
 	_wait_time = period
 	_radius = radius
+	var action_modules = _source.find_children("", "ActionModule", true, false)
+	if action_modules.is_empty():
+		printerr("Meteor: An ActionModule is mandatory on the owner")
+		return
+	_action_module = action_modules[0]
 
 
 func _ready() -> void:
@@ -49,6 +54,6 @@ func _on_body_exited(body: Node3D) -> void:
 func _on_effect_timer_timeout() -> void:
 	for character in _characters_inside:
 		if character.team == _source.team:
-			_source.heal_percent(character, _heal_percent, Utils.PercentModifier.MAX_HP)
+			_action_module.heal_percent(character, _heal_percent, Utils.PercentModifier.MAX_HP)
 		else:
-			_source.attack_percent(character, _damage_percent, Utils.DamageType.MAGIC, Utils.PercentModifier.CURRENT_HP)
+			_action_module.direct_attack_percent(character, _damage_percent, Utils.DamageType.MAGICAL, Utils.PercentModifier.CURRENT_HP)

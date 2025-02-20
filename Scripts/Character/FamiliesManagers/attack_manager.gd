@@ -38,6 +38,29 @@ func stop() -> void:
 		timer.stop()
 
 
+func notice_auto_attack_done(target: Character) -> void:
+	_aa_counter += 1
+	
+	# [Focus]
+	if _source.stats.storm.focus_target_activated:
+		_check_storm_focus(target)
+		_previous_target = target
+	
+	# [Necrosis scythe]
+	if _attack_stats.increase_max_hp_activated and _aa_counter % _attack_stats.increase_max_hp_period == 0:
+		_source.stats.health_max += _attack_stats.increase_max_hp_amount
+		_source.stats.health += _attack_stats.increase_max_hp_amount
+	
+	# [Sword armor]
+	if Utils.is_randomize_modifier_active(_attack_stats.armor_stacks_chance):
+		_source.stats.defense.armor_stacks += _attack_stats.armor_stacks_amount
+	
+	# [Knife of terror]
+	if Utils.is_randomize_modifier_active(_attack_stats.healing_attack_chance):
+		var heal_target: Character = _source.target_manager.get_target(TargetManager.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
+		_source.heal(heal_target, _attack_stats.healing_attack_heal_amount)
+
+
 func update_aa_projectile_stats(projectile_stats: ProjectileStats) -> void:
 	# [Poison bolt]
 	if Utils.is_randomize_modifier_active(_attack_stats.poison_stacks_chance):
@@ -75,36 +98,6 @@ func _create_optional_timers() -> void:
 		_optional_timers.append(_focus_timer)
 
 
-func _auto_attack_done(target: Character) -> void:
-	_aa_counter += 1
-	
-	# [Focus]
-	if _source.stats.storm.focus_target_activated:
-		_check_storm_focus(target)
-		_previous_target = target
-	
-	# [Fire sword]
-	if _attack_stats.fire_attack_activated:
-		if _aa_counter % _attack_stats.fire_attack_period == 0:
-			_attack_stats.fire_attack_triggered = true
-	
-	# [Necrosis scythe]
-	if _attack_stats.increase_max_hp_activated and _aa_counter % _attack_stats.increase_max_hp_period == 0:
-		_source.stats.health_max += _attack_stats.increase_max_hp_amount
-		_source.stats.health += _attack_stats.increase_max_hp_amount
-	
-	# [Sword armor]
-	if Utils.is_randomize_modifier_active(_attack_stats.armor_stacks_chance):
-		_source.stats.defense.armor_stacks += _attack_stats.armor_stacks_amount
-	
-	# [Knife of terror]
-	if Utils.is_randomize_modifier_active(_attack_stats.healing_attack_chance):
-		var heal_target: Character = _source.target_manager.get_target(TargetManager.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
-		_source.heal(heal_target, _attack_stats.healing_attack_heal_amount)
-	 
-	_attack_stats.fire_attack_triggered = false
-
-
 func _check_storm_focus(target) -> void:
 	if target == _previous_target and _focus_timer.is_stopped() and not _focused:
 		_focus_timer.start()
@@ -132,7 +125,3 @@ func _on_aa_speed_overtime_timer_timeout() -> void:
 func _on_focus_timer_timeout() -> void:
 	_focused = true
 	focus_changed.emit(true)
-
-
-func _on_BIDULE_auto_attack_done(target: Character) -> void:
-	_auto_attack_done(target)

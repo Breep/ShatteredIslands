@@ -59,7 +59,7 @@ func damage_popup(amount: float, damage_type: Utils.DamageType, is_critic: bool)
 			popup.outline_modulate = Color8(20, 95, 28, 255)
 		Utils.DamageType.PHYSICAL:
 			popup.global_position = physical_popup_spawn.global_position + offset
-		Utils.DamageType.MAGIC:
+		Utils.DamageType.MAGICAL:
 			popup.global_position = magic_popup_spawn.global_position + offset
 			popup.outline_modulate = Color8(0, 0, 204, 255)
 		Utils.DamageType.HEAL:

@@ -96,7 +96,7 @@ func notice_critical_damage(char_who_received_the_crit: Character, damage: int) 
 		if target != null:
 			var overcharge_damage: int = (damage * _storm_stats.overcharge_percent / 100.0) as int
 			if multiplayer.get_unique_id() == 1: print(char_who_received_the_crit.player.name, " ", target.player.name)
-			_source.attack(target, overcharge_damage, Utils.DamageType.MAGIC)
+			_source.attack(target, overcharge_damage, Utils.DamageType.MAGICAL)
 
 
 func focus_changed(focused: bool) -> void:

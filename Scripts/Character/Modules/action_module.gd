@@ -10,24 +10,35 @@ func _attack(target_peer_id: int, damage: int, damage_type: Utils.DamageType, is
 	# Placer signal pour animation ici ? GameManager.players[target_peer_id].character pour savoir la target
 
 
-# Lanch an attack on the target
-# If no projectile are defined, then the attack will affect immediately the target
-#     It means that it will trigger immediatly Events.attack_done signal
-# Otherwise a projectile will be spawned at the projectile_spawn location, the projectile
-#     will carry all information needed (damage, conditions stacks)
-#     The projectile will trigger itself Events.attack_done signal when it reach the target
-func attack(target: Character, damage: int, damage_type: Utils.DamageType) -> void:
+# Instantly attack the target - Apply cards damages multiplier if there are some
+func direct_attack(target: Character, damage: int, damage_type: Utils.DamageType) -> void:
 	if not multiplayer.is_server(): return
 	var multiplier = _get_damage_multipliers()
 	if damage_type == Utils.DamageType.PHYSICAL:
 		damage *= multiplier["physical"]
-	elif damage_type == Utils.DamageType.MAGIC:
+	elif damage_type == Utils.DamageType.MAGICAL:
 		damage *= multiplier["magical"]
 	
-	Events.attack_done.emit(_source, target, damage, damage_type, multiplier["is_critical"])
+	Events.damage_done.emit(_source, target, damage, damage_type, multiplier["is_critical"])
 	#_attack.rpc(target.player.id, damage, damage_type, is_critical)
 
 
+# Instantly attack the target - Apply cards damages multiplier if there are some
+func direct_attack_percent(target: Character, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier) -> void:
+	if not multiplayer.is_server(): return
+	var hp: int
+	match percent_modifier:
+		Utils.PercentModifier.MAX_HP:
+			hp = target.stats.health_max
+		Utils.PercentModifier.CURRENT_HP:
+			hp = target.stats.health
+		Utils.PercentModifier.LOST_HP:
+			hp = target.stats.health_max - _source.stats.health
+	var damage = hp * damage_percent  / 100.0
+	direct_attack(target, damage, damage_type)
+
+
+# Create a projectile to attack the target - Apply cards damages multiplier if there are some
 func projectile_attack(target: Character, projectile_scene: PackedScene, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	if not multiplayer.is_server(): return
 	var multiplier = _get_damage_multipliers()
@@ -41,11 +52,10 @@ func projectile_attack(target: Character, projectile_scene: PackedScene, project
 
 
 func _get_damage_multipliers() -> Dictionary:
-	var is_critical: bool
+	var is_critical: bool = false
 	var physical_multiplier: float = 1.0
 	var magical_multiplier: float = 1.0
 	
-	#if damage_type == Utils.DamageType.PHYSICAL:
 	var crit_chance = _source.stats.physical_critical_chance
 	if _storm_manager != null:
 		crit_chance = _storm_manager.get_critical_chance()
@@ -61,7 +71,7 @@ func _get_damage_multipliers() -> Dictionary:
 		physical_multiplier = _life_manager.get_increased_damage_taken_from_lost_hp(physical_multiplier, Utils.DamageType.PHYSICAL) # Increase % of PHYSICAL damage
 	
 	if _fire_manager != null:
-		magical_multiplier = _fire_manager.get_increased_damage(magical_multiplier, Utils.DamageType.MAGIC) # Increase % of MAGICAL damage
+		magical_multiplier = _fire_manager.get_increased_damage(magical_multiplier, Utils.DamageType.MAGICAL) # Increase % of MAGICAL damage
 	
 	if _defense_manager != null:
 		physical_multiplier = _defense_manager.get_reduced_damage_dealed_from_protector(physical_multiplier) # Reduce % of ALL damage
@@ -81,19 +91,6 @@ func _spawn_projectile(target: Character, projectile_scene: PackedScene, project
 	get_tree().current_scene.add_child(projectile)
 	projectile.global_position = projectile_spawn.global_position + Vector3(randf_range(-0.01, 0.01), randf_range(-0.01, 0.01), randf_range(-0.01, 0.01))
 
-
-func attack_percent(target: Character, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier) -> void:
-	if not multiplayer.is_server(): return
-	var hp: int
-	match percent_modifier:
-		Utils.PercentModifier.MAX_HP:
-			hp = target.stats.health_max
-		Utils.PercentModifier.CURRENT_HP:
-			hp = target.stats.health
-		Utils.PercentModifier.LOST_HP:
-			hp = target.stats.health_max - _source.stats.health
-	var damage = hp * damage_percent  / 100.0
-	attack(target, damage, damage_type)
 
 
 

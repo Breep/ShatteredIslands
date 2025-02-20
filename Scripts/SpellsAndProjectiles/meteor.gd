@@ -4,6 +4,7 @@ extends Node3D
 var _characters_inside: Array[Character] # Array of all character inside the area
 
 var _source: Character # Owner of this healing fire area
+var _action_module: ActionModule # Owner ActionModule ref (needed to deal damages accordingly to owner upgrades) # TODO probably rework this shit
 var _damage_percent: int # Meteor damage (in % of enemy current hp)
 var _deploy_time: float # Time for the metor to fall on the ground (in s)
 var _radius: float # Range of the meteor impact (in m)
@@ -18,6 +19,11 @@ func init(source: Character, damage_percent: float, deploy_time: float, radius: 
 	_damage_percent = damage_percent
 	_deploy_time = deploy_time
 	_radius = radius
+	var action_modules = _source.find_children("", "ActionModule", true, false)
+	if action_modules.is_empty():
+		printerr("Meteor: An ActionModule is mandatory on the owner")
+		return
+	_action_module = action_modules[0]
 
 
 func _ready() -> void:
@@ -47,5 +53,5 @@ func _on_impact_effect_area_body_exited(body: Node3D) -> void:
 func _on_deploy_timer_timeout() -> void:
 	for character in _characters_inside:
 		if character.team != _source.team:
-			_source.attack_percent(character, _damage_percent, Utils.DamageType.MAGIC, Utils.PercentModifier.MAX_HP)
+			_action_module.direct_attack_percent(character, _damage_percent, Utils.DamageType.MAGICAL, Utils.PercentModifier.MAX_HP)
 	queue_free()

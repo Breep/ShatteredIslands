@@ -85,7 +85,7 @@ func _handle_backfires(damage_source: Character) -> void:
 		_defense_stats.armor_stacks += _defense_stats.backfire_armor_gain_stacks
 	
 	if Utils.is_randomize_modifier_active(_defense_stats.backfire_fire_shield_chance):
-		_action_module.attack_percent(damage_source, _defense_stats.backfire_fire_shield_damage, Utils.DamageType.MAGIC, Utils.PercentModifier.CURRENT_HP)
+		_action_module.direct_attack_percent(damage_source, _defense_stats.backfire_fire_shield_damage, Utils.DamageType.MAGICAL, Utils.PercentModifier.CURRENT_HP)
 	
 	if Utils.is_randomize_modifier_active(_defense_stats.backfire_poison_chance):
 		_action_module.inflict_condition_stacks(damage_source, _defense_stats.backfire_poison_stacks, Utils.StackType.POISON, 10)
@@ -105,7 +105,7 @@ func _on_shield_strike_timer_timeout() -> void:
 		var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST_ENEMY)
 		if target == null:
 			return
-		_action_module.attack(target, damage, Utils.DamageType.MAGIC)
+		_action_module.direct_attack(target, damage, Utils.DamageType.MAGICAL)
 		_armor_lost_since_last_shield_strike = 0
 
 

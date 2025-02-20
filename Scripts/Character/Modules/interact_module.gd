@@ -8,7 +8,7 @@ signal stacks_taken()
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	Events.attack_done.connect(_on_events_attack_done)
+	Events.damage_done.connect(_on_events_attack_done)
 	Events.heal_done.connect(_on_events_heal_done)
 	Events.condition_stacks_done.connect(_on_events_condition_stacks_done)
 
