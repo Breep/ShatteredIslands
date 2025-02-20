@@ -23,7 +23,7 @@ shader_parameter/Main_texture = ExtResource("5_kr5cx")
 _data = [Vector2(0.00657895, 1), 0.0, 0.0, 0, 0, Vector2(0.506579, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_3asyi"]
+[sub_resource type="CurveTexture" id="CurveTexture_tbdlw"]
 texture_mode = 1
 curve = SubResource("Curve_247ok")
 
@@ -39,7 +39,7 @@ initial_velocity_min = 1.0
 initial_velocity_max = 2.0
 gravity = Vector3(0, 0, 0)
 color = Color(0, 1, 0.8, 1)
-alpha_curve = SubResource("CurveTexture_3asyi")
+alpha_curve = SubResource("CurveTexture_tbdlw")
 
 [sub_resource type="QuadMesh" id="QuadMesh_8ayct"]
 
@@ -61,7 +61,7 @@ initial_velocity_max = 1.5
 gravity = Vector3(0, 0, 0)
 scale_max = 2.0
 color = Color(0, 1, 0.8, 1)
-alpha_curve = SubResource("CurveTexture_3asyi")
+alpha_curve = SubResource("CurveTexture_tbdlw")
 
 [sub_resource type="Animation" id="Animation_s1lwx"]
 length = 0.001

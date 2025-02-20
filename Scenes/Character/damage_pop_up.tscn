@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/Character/damage_popup.gd" id="1_pak6f"]
 
 [node name="PopUp" type="Label3D"]
+layers = 4
 text = "42"
 font = ExtResource("1_mx5gu")
 font_size = 150

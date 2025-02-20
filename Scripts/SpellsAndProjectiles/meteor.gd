@@ -12,6 +12,8 @@ var _radius: float # Range of the meteor impact (in m)
 @onready var _collision_shape_3d: CollisionShape3D = %CollisionShape3D
 @onready var _impact_effect_area_visual: MeshInstance3D = %ImpactEffectAreaVisualBackground
 @onready var _meteor_visual: Node3D = %MeteorVisual
+@onready var anim_player = %AnimationPlayer
+@onready var hit_marker_scene = preload("res://Scenes/VFX_3D/Hit_marker/vfx_hit_meteor.tscn")
 
 func init(source: Character, damage_percent: float, deploy_time: float, radius: float) -> void:
 	_source = source
@@ -25,9 +27,15 @@ func _ready() -> void:
 		printerr("HealingFireArea: No source character assigned to")
 
 	(_collision_shape_3d.shape as CylinderShape3D).radius = _radius
-	#(_impact_effect_area_visual.mesh as CylinderMesh).top_radius = _radius #pourquoi top radius ?
+	(_impact_effect_area_visual.mesh as CylinderMesh).top_radius = _radius 
 	(_impact_effect_area_visual.mesh as CylinderMesh).bottom_radius = _radius
-	_meteor_visual.position.z = randf_range(-10,10)
+	var anim : Animation = anim_player.get_animation("Area")
+	var track_index = anim.find_track("ImpactEffectAreaVisualBackground:mesh:bottom_radius", Animation.TYPE_VALUE)
+	anim.track_set_key_value(track_index, 1, _radius)
+	print(_radius)
+	_meteor_visual.position.z = randf_range(-5,5)
+	_meteor_visual.position.x = randf_range(-5,5)
+	_meteor_visual.position.y += randf_range(0,3)
 	_effect_timer.one_shot = true
 	_effect_timer.wait_time = _deploy_time
 	_effect_timer.start()
@@ -49,4 +57,7 @@ func _on_deploy_timer_timeout() -> void:
 	for character in _characters_inside:
 		if character.team != _source.team:
 			_source.attack_percent(character, _damage_percent, Utils.DamageType.MAGIC, Utils.PercentModifier.MAX_HP)
+	var hit_marker : Node3D = hit_marker_scene.instantiate()
+	get_tree().current_scene.add_child(hit_marker)
+	hit_marker.global_position = global_position
 	queue_free()

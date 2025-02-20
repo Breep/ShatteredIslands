@@ -1,13 +1,12 @@
-[gd_scene load_steps=23 format=4 uid="uid://u86kcfn8nx7u"]
+[gd_scene load_steps=22 format=4 uid="uid://u86kcfn8nx7u"]
 
 [ext_resource type="Script" path="res://Scripts/Areas/buying_area.gd" id="1_2hie4"]
-[ext_resource type="Texture2D" uid="uid://b3b4rk02h1kbh" path="res://Data/Assets/Misc/deqc368-97acf8e2-85c4-4cb6-a909-c2755fcf2fc7.jpg" id="2_k3opf"]
 [ext_resource type="Texture2D" uid="uid://cwe303gitkgl7" path="res://Data/Assets/Misc/Misc_IMG/cadre perso.png" id="2_lx08d"]
 [ext_resource type="Texture2D" uid="uid://cjrtgqc6mjoj2" path="res://Data/Assets/TileSet/fullTiles.png" id="3_vrhrp"]
 [ext_resource type="Texture2D" uid="uid://dakikx8em1ut3" path="res://Data/Assets/TileSet/landscape_sheet.png" id="4_pbrxv"]
 [ext_resource type="Texture2D" uid="uid://d34qpfx40d4ox" path="res://Data/Assets/BackGround/472616789_28403690705911652_2688862136642980928_n-removebg-preview.png" id="5_32xbl"]
 [ext_resource type="PackedScene" uid="uid://c4qxlk6c31peq" path="res://Scenes/UI/family_bonus.tscn" id="6_y0hu0"]
-[ext_resource type="Texture2D" uid="uid://cg61v871c3lx8" path="res://Data/Assets/Misc/tableandchair.png" id="7_e5iqj"]
+[ext_resource type="Texture2D" uid="uid://pe0vdk3gkv63" path="res://Data/Assets/Misc/shield magma.png" id="7_e5iqj"]
 [ext_resource type="Texture2D" uid="uid://w18hx3kvdm3m" path="res://Data/Assets/Misc/campfire.png" id="8_5cta4"]
 [ext_resource type="Theme" uid="uid://bpo76n2lvfxb6" path="res://Scripts/Managers/Themes/main_menu_button.tres" id="9_5vn1f"]
 [ext_resource type="PackedScene" uid="uid://bskueqquqfhhp" path="res://Scenes/UI/ui_player.tscn" id="10_m6udf"]
@@ -17,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://prbqeqgdl2ay" path="res://Scenes/UI/ui_xp.tscn" id="13_mb3hy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vim1a"]
-texture = ExtResource("2_k3opf")
+texture = ExtResource("7_e5iqj")
 texture_region_size = Vector2i(1080, 1080)
 0:0/0 = 0
 
