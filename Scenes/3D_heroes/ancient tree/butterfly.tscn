@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://wbsmity6fpa7"]
+
+[ext_resource type="PackedScene" uid="uid://yxq3w2snii4d" path="res://Data/Assets/Character 3D/Tree/butterfly.glb" id="1_jjjew"]
+
+[node name="butterfly" instance=ExtResource("1_jjjew")]

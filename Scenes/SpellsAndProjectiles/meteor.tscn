@@ -23,13 +23,13 @@ albedo_color = Color(0.4, 0, 0.2, 0.4)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_t8y8o"]
 material = SubResource("StandardMaterial3D_pf6vn")
-top_radius = 0.0
+top_radius = 3.0
 bottom_radius = 3.0
 height = 0.1
 
 [sub_resource type="Animation" id="Animation_8ion4"]
 resource_name = "Area"
-length = 4.0
+length = 3.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -37,10 +37,10 @@ tracks/0/path = NodePath(".:mesh:bottom_radius")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 4),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 0.0358967),
 "update": 0,
-"values": [0.0, 1.5]
+"values": [0.0, 3.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -53,6 +53,30 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [3.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%ImpactEffectAreaVisualBackground:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_u702g"]
@@ -81,6 +105,30 @@ tracks/1/keys = {
 "update": 0,
 "values": [3.0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%ImpactEffectAreaVisualBackground:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fgblb"]
 _data = {
@@ -91,9 +139,11 @@ _data = {
 [node name="Meteor" type="Node3D"]
 script = ExtResource("1_kjd23")
 
-[node name="MeteorVisual" parent="." instance=ExtResource("2_bmmic")]
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="MeteorVisual" parent="Visual" instance=ExtResource("2_bmmic")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.03384, 11.2682, -8.00578)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 
 [node name="ImpactEffectArea" type="Area3D" parent="."]
 
@@ -104,6 +154,7 @@ shape = SubResource("CylinderShape3D_y4y4j")
 [node name="ImpactEffectAreaVisual" type="MeshInstance3D" parent="ImpactEffectArea"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+visible = false
 layers = 4
 mesh = SubResource("CylinderMesh_f8kpk")
 
@@ -116,6 +167,7 @@ mesh = SubResource("CylinderMesh_t8y8o")
 unique_name_in_owner = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
 root_node = NodePath("../ImpactEffectArea/ImpactEffectAreaVisual")
 libraries = {
 "": SubResource("AnimationLibrary_fgblb")
@@ -126,4 +178,4 @@ autoplay = "Area"
 [connection signal="body_exited" from="ImpactEffectArea" to="." method="_on_impact_effect_area_body_exited"]
 [connection signal="timeout" from="DeployTimer" to="." method="_on_deploy_timer_timeout"]
 
-[editable path="MeteorVisual"]
+[editable path="Visual/MeteorVisual"]

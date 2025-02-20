@@ -339,6 +339,8 @@ heal_popup_spawn = NodePath("PopUpSpawns/Heal")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 unique_name_in_owner = true
+layers = 4
+sorting_offset = 3.0
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_1360b")
 animation = &"Idle"
@@ -420,6 +422,7 @@ show_percentage = false
 
 [node name="TopUI3DPanel" type="MeshInstance3D" parent="."]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 2.3768, 0)
+layers = 4
 mesh = SubResource("QuadMesh_75adc")
 skeleton = NodePath("../TopUI")
 surface_material_override/0 = SubResource("StandardMaterial3D_p3mll")

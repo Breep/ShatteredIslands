@@ -15,7 +15,7 @@ var _radius: float # Radius of the healing fire area (in m)
 
 @onready var _effect_timer: Timer = %EffectTimer
 @onready var _collision_shape_3d: CollisionShape3D = %CollisionShape2D
-@onready var tmp_debug_mesh: MeshInstance3D = %HealingFireVisual
+#@onready var tmp_debug_mesh: MeshInstance3D = %HealingFireVisual
 
 func init(source: Character, damage: float, heal: float, period: float, radius: float) -> void:
 	_source = source
@@ -35,8 +35,8 @@ func _ready() -> void:
 		printerr("HealingFireArea: No source character assigned to")
 
 	(_collision_shape_3d.shape as CylinderShape3D).radius = _radius
-	(tmp_debug_mesh.mesh as CylinderMesh).top_radius = _radius
-	(tmp_debug_mesh.mesh as CylinderMesh).bottom_radius = _radius
+	#(tmp_debug_mesh.mesh as CylinderMesh).top_radius = _radius
+	#(tmp_debug_mesh.mesh as CylinderMesh).bottom_radius = _radius
 	_effect_timer.wait_time = _wait_time
 	_effect_timer.start()
 

@@ -7,9 +7,9 @@
 [sub_resource type="Resource" id="Resource_mrjx3"]
 script = ExtResource("4_apji1")
 meteor_damage = Array[int]([3, 6, 10])
-meteor_area_range = 3.0
-meteor_cooldown = 1.0
-meteor_deploy_time = Array[float]([4.0, 3.0, 2.0])
+meteor_area_range = Array[float]([3.0, 4.0, 5.0])
+meteor_cooldown = 5.0
+meteor_deploy_time = 2.0
 
 [resource]
 script = ExtResource("5_a17m1")

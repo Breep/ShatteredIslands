@@ -29,6 +29,7 @@ material = SubResource("ShaderMaterial_bdx55")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pppff"]
 render_priority = 0
 shader = ExtResource("7_0avwc")
+shader_parameter/ColorParameter = Color(4, 0.5, 0, 1)
 shader_parameter/Texture = ExtResource("8_yr4hw")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s0eqg"]
@@ -43,6 +44,7 @@ hue_variation_max = 0.05
 size = Vector2(0.2, 0.2)
 
 [node name="Trail" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.27451, 5.89004, -1.90735e-06)
 
 [node name="GPUTrail3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0115433, 0, 0)
