@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bb8kjfbnteutv" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/table_round_large.gltf" id="1_3wcpw"]
 [ext_resource type="Texture2D" uid="uid://mswbhaabiedm" path="res://Data/Assets/Tavern - 3D Asset Low poly/textures/dungeon_texture.png" id="2_ihg3i"]
-[ext_resource type="PackedScene" uid="uid://dmo0ff086abwu" path="res://Scenes/buying_zone/3d_card_table.tscn" id="3_51qti"]
+[ext_resource type="PackedScene" uid="uid://dmo0ff086abwu" path="res://Scenes/buying_zone/Tables/Common/card_fan.tscn" id="3_51qti"]
 [ext_resource type="PackedScene" uid="uid://birnnko0u17dy" path="res://Scenes/buying_zone/3d_coin_player_table.tscn" id="4_1ko7q"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ygd1b"]

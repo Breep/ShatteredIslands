@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://6tgw5r83mxdf"]
+[gd_scene load_steps=2 format=3 uid="uid://ds280emv7mtf3"]
 
 [ext_resource type="Script" path="res://Scripts/Managers/round_manager.gd" id="1_xv2r7"]
 

@@ -6,35 +6,27 @@
 
 [sub_resource type="Resource" id="Resource_o1upt"]
 script = ExtResource("2_cb8sh")
-health = 4
 
 [sub_resource type="Resource" id="Resource_wmlug"]
 script = ExtResource("2_cb8sh")
-health = 27
 
 [sub_resource type="Resource" id="Resource_s0odk"]
 script = ExtResource("2_cb8sh")
-health = 30
 
 [sub_resource type="Resource" id="Resource_q3w5s"]
 script = ExtResource("2_cb8sh")
-health = 7
 
 [sub_resource type="Resource" id="Resource_k86tw"]
 script = ExtResource("2_cb8sh")
-health = 2
 
 [sub_resource type="Resource" id="Resource_ykpka"]
 script = ExtResource("2_cb8sh")
-health = 13
 
 [sub_resource type="Resource" id="Resource_aja5d"]
 script = ExtResource("2_cb8sh")
-health = 27
 
 [sub_resource type="Resource" id="Resource_50r0y"]
 script = ExtResource("2_cb8sh")
-health = 22
 
 [node name="players_life_ui" type="Control"]
 layout_mode = 3

@@ -1,14 +1,14 @@
-[gd_scene load_steps=174 format=4 uid="uid://ca8mcplp2va4s"]
+[gd_scene load_steps=173 format=4 uid="uid://ca8mcplp2va4s"]
 
 [ext_resource type="Script" path="res://Scripts/Buying_area3d/camera_3d.gd" id="1_3e5gf"]
 [ext_resource type="Script" path="res://Scenes/test/test_buying_area_3d.gd" id="1_iyfsm"]
 [ext_resource type="PackedScene" uid="uid://tmsh8w1pcy4p" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/bar_outercorner.gltf" id="1_jltbr"]
 [ext_resource type="Shader" path="res://Shaders/Cam/Cam_outline_shader_pro.gdshader" id="1_p01h1"]
 [ext_resource type="Texture2D" uid="uid://mswbhaabiedm" path="res://Data/Assets/Tavern - 3D Asset Low poly/textures/dungeon_texture.png" id="2_i4mdp"]
-[ext_resource type="PackedScene" uid="uid://c54r3uqu67ser" path="res://Scenes/buying_zone/players_life_ui.tscn" id="3_aff6e"]
+[ext_resource type="PackedScene" uid="uid://c54r3uqu67ser" path="res://Scenes/UI/players_life_ui.tscn" id="3_aff6e"]
 [ext_resource type="PackedScene" uid="uid://byjejjl6rvsef" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/bar_straight_A.gltf" id="3_nj6q3"]
 [ext_resource type="PackedScene" uid="uid://ckltcqgnt0sqd" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Crate/crates_stacked.gltf" id="3_phlvk"]
-[ext_resource type="PackedScene" uid="uid://cmstx61h3h6ar" path="res://Scenes/buying_zone/3d_ui_buying_area.tscn" id="3_v4hk2"]
+[ext_resource type="PackedScene" uid="uid://cmstx61h3h6ar" path="res://Scenes/UI/3d_ui_buying_area.tscn" id="3_v4hk2"]
 [ext_resource type="PackedScene" uid="uid://cjeoy0rnleep0" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/bar_straight_B.gltf" id="4_h0lpo"]
 [ext_resource type="PackedScene" uid="uid://dku0i4bp7t23u" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Crate/crate_small.gltf" id="4_yv6jx"]
 [ext_resource type="PackedScene" uid="uid://bciww7p136c0f" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/bar_straight_C.gltf" id="5_x1tcb"]
@@ -43,9 +43,9 @@
 [ext_resource type="PackedScene" uid="uid://dc6lp1er1ykvq" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Wall/wall_cracked.gltf" id="30_v5b88"]
 [ext_resource type="PackedScene" uid="uid://ok1oeskl8psr" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Wall/wall_doorway.gltf" id="31_nc520"]
 [ext_resource type="PackedScene" uid="uid://dh4fwu36807gm" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Wall/wall_doorway_sides.gltf" id="32_padtx"]
-[ext_resource type="PackedScene" uid="uid://bb4esvsygn6h2" path="res://Scenes/buying_zone/knight.tscn" id="33_g3u1c"]
+[ext_resource type="PackedScene" uid="uid://bb4esvsygn6h2" path="res://Scenes/NPC/knight.tscn" id="33_g3u1c"]
 [ext_resource type="PackedScene" uid="uid://v4x4jhgrgov8" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Wall/wall_inset_shelves_decoratedA.gltf" id="33_g8k4j"]
-[ext_resource type="PackedScene" uid="uid://d4m8fv3pjumps" path="res://Scenes/buying_zone/rogue.tscn" id="34_j0s5c"]
+[ext_resource type="PackedScene" uid="uid://d4m8fv3pjumps" path="res://Scenes/NPC/rogue.tscn" id="34_j0s5c"]
 [ext_resource type="PackedScene" uid="uid://dnd8464qr6omf" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Wall/wall_inset_shelves_decoratedB.gltf" id="36_nq1kl"]
 [ext_resource type="PackedScene" uid="uid://dulv407e1bg2s" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Wall/wall_pillar.gltf" id="37_jrgb8"]
 [ext_resource type="PackedScene" uid="uid://dk15xlwgfpcrm" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Wall/wall_window_closed.gltf" id="39_3pr1j"]
@@ -68,7 +68,6 @@
 [ext_resource type="PackedScene" uid="uid://dj8t0w3l0w47q" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/table_long_tablecloth_decorated_A.gltf" id="60_v4gv6"]
 [ext_resource type="PackedScene" uid="uid://cd1l65basbin6" path="res://Scenes/VFX_3D/vfx_3d_portal.tscn" id="60_wmmk7"]
 [ext_resource type="PackedScene" uid="uid://br564e48coa2v" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/table_medium_decorated_A.gltf" id="61_2k0mj"]
-[ext_resource type="PackedScene" uid="uid://sd0a6lbbu4dl" path="res://Scenes/buying_zone/3d_table_and_character.tscn" id="64_hfgko"]
 [ext_resource type="AudioStream" uid="uid://ck0xrpfygj0sw" path="res://Data/Assets/Sound/World of Warcraft - Taverns of Azeroth - 13 - Thunderbrew.wav" id="67_2jfat"]
 [ext_resource type="PackedScene" uid="uid://cvdsh4o4upr8q" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Banner/banner_patternC_white.gltf" id="68_3y306"]
 [ext_resource type="Texture2D" uid="uid://bnydnfwwar6cx" path="res://Data/Assets/Tavern - 3D Asset Low poly/textures/alt_texture_5_NightA.png" id="69_m53iv"]
@@ -1088,7 +1087,7 @@ transform = Transform3D(0.810349, 0, -0.585948, 0, 1, 0, 0.585948, 0, 0.810349, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.1, -2.072)
 
 [node name="floor_tile_extralarge_grates_open" parent="Tavern/Ground/floor_tile_extralarge_grates_open2" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.87396)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.07825, 0, -3.87396)
 material_override = SubResource("StandardMaterial3D_47si7")
 
 [node name="wood_big_tales" parent="Tavern/Ground" instance=ExtResource("14_g7e54")]
@@ -1377,20 +1376,6 @@ material_override = SubResource("StandardMaterial3D_wdnbl")
 transform = Transform3D(0.809263, 0, 0.587446, 0, 1, 0, -0.587446, 0, 0.809263, -18.2099, 1.85235, -0.385267)
 
 [node name="Table" type="Node3D" parent="Tavern"]
-
-[node name="table_Player" type="Node3D" parent="Tavern/Table"]
-
-[node name="Table_and_character" parent="Tavern/Table/table_Player" instance=ExtResource("64_hfgko")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.2611, 4.76837e-07, -3.44956)
-
-[node name="Table_and_character2" parent="Tavern/Table/table_Player" instance=ExtResource("64_hfgko")]
-transform = Transform3D(-0.981873, 0, -0.189541, 0, 1, 0, 0.189541, 0, -0.981873, -10.515, 0, -10.6987)
-
-[node name="Table_and_character3" parent="Tavern/Table/table_Player" instance=ExtResource("64_hfgko")]
-transform = Transform3D(0.671798, 0, 0.740734, 0, 1, 0, -0.740734, 0, 0.671798, -1.99632, -9.53674e-07, -9.59173)
-
-[node name="Table_and_character4" parent="Tavern/Table/table_Player" instance=ExtResource("64_hfgko")]
-transform = Transform3D(0.961156, 0, 0.276006, 0, 1, 0, -0.276006, 0, 0.961156, -3.43807, 0, -2.96869)
 
 [node name="Table_decco" type="Node3D" parent="Tavern/Table"]
 
