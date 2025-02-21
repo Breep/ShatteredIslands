@@ -1,7 +1,7 @@
 [gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://dxpjm0adafggu"]
 
-[ext_resource type="Shader" path="res://Scenes/VFX_3D/Import/fireball_particles.gdshader" id="1_t548c"]
-[ext_resource type="Texture2D" uid="uid://ctsh8mkic2xte" path="res://Scenes/VFX_3D/Import/fire_particles_gradient.tres" id="2_mdlqx"]
+[ext_resource type="Shader" path="res://Scenes/VFX_3D/Import/Firebolt/fireball_particles.gdshader" id="1_t548c"]
+[ext_resource type="Texture2D" uid="uid://ctsh8mkic2xte" path="res://Scenes/VFX_3D/Import/Firebolt/fire_particles_gradient.tres" id="2_mdlqx"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_xkkqs"]
 noise_type = 2
