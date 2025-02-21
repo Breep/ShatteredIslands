@@ -25,7 +25,7 @@ func init(source: Character, damage: float, heal: float, period: float, radius: 
 	_radius = radius
 	var action_modules = _source.find_children("", "ActionModule", true, false)
 	if action_modules.is_empty():
-		printerr("Meteor: An ActionModule is mandatory on the owner")
+		printerr("HealingFireArea: An ActionModule is mandatory on the owner")
 		return
 	_action_module = action_modules[0]
 

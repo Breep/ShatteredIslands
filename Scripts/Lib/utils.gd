@@ -37,6 +37,6 @@ func create_perpetual_timer(node: Node, wait_time: float, callback: Callable, au
 
 # TODO move to other lib ?
 func is_randomize_modifier_active(chance: float) -> bool:
-	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+	var rng: = RandomNumberGenerator.new()
 	rng.randomize()
 	return rng.randf_range(0, 100) <= chance

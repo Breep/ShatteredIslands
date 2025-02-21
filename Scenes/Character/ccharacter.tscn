@@ -82,7 +82,6 @@ unique_name_in_owner = true
 [node name="StormManager" parent="FamiliesManagers" instance=ExtResource("11_ra6k1")]
 unique_name_in_owner = true
 _percent_decrease = 10.0
-_minimum_stacks_decrease_flat = null
 
 [node name="AttackManager" parent="FamiliesManagers" instance=ExtResource("14_wpntx")]
 unique_name_in_owner = true
