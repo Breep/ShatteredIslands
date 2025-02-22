@@ -3,10 +3,9 @@
 [ext_resource type="Script" path="res://Scripts/BuyingArea/Tables/Common/card_fan.gd" id="1_3tpvj"]
 [ext_resource type="PackedScene" uid="uid://dfhrsmc3bnsv5" path="res://Scenes/Card/card_3d_visual.tscn" id="2_swlwb"]
 
-[node name="CardFan" type="Node3D"]
+[node name="CardFan" type="Node3D" node_paths=PackedStringArray("_cards")]
 script = ExtResource("1_3tpvj")
-defense_level = 1
-fire_level = 7
+_cards = [NodePath("1"), NodePath("2"), NodePath("3"), NodePath("4"), NodePath("5"), NodePath("6"), NodePath("7"), NodePath("8"), NodePath("9"), NodePath("10")]
 
 [node name="1" parent="." instance=ExtResource("2_swlwb")]
 transform = Transform3D(0.93274, 0, 0.36055, 0, 1, 0, -0.36055, 0, 0.93274, -1.34552, 0, -0.0273958)

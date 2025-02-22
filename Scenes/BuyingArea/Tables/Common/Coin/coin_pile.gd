@@ -1,16 +1,25 @@
 class_name CoinPile
 extends Node3D
 
+# ============================== Constants ==============================
+
 const GOLD_PER_COIN: int = 50 # Number of gold that represent a 3d coin
 const MAX_TOWER_HEIGHT_DIFF: int = 5 # Max coin (or height) diff between the highest and lowest tower
 
+# ============================== Export ==============================
+
 @export var _coin_towers: Array[CoinTower]
 
+# ============================== Private variables ==============================
+
 var _old_player_gold: int 
+
+# ============================== Public functions ==============================
 
 func connect_to_player(player: Player) -> void:
 	player.gold_changed.connect(_on_player_gold_changed)
 
+# ============================== Private functions ==============================
 
 func _update_visual(new_player_gold: int) -> void:
 	var rng: = RandomNumberGenerator.new()
@@ -44,6 +53,7 @@ func _check_height_diff() -> void:
 		lowest_tower.coins_number += 1
 		_check_height_diff()
 
+# ============================== Callback functions ==============================
 
 func _on_player_gold_changed(new_player_gold: int) -> void:
 	_update_visual(new_player_gold)

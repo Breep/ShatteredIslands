@@ -1,65 +1,66 @@
 class_name CardFan
 extends Node3D
 
-# Nombre de cartes à afficher
-@export var player_nb_card: int = 10  
+# ============================== Constants ==============================
 
-# Niveaux des familles
-@export var defense_level: int = 2
-@export var poison_level: int = 2
-@export var fire_level: int = 6
+const NUMBER_OF_FAMILIES_TO_DISPLAY:int = 3 # Top families to show on the card fan
 
-var fire:Color = Color(1, 0, 0)     # Rouge
-var storm:Color = Color(0, 0, 1)   # Bleu
-var defense:Color = Color(0.4, 0.26, 0.13)  # Marron
-var aa:Color = Color(0.774, 0.644, 0.085)  # jaune
-var shadow:Color = Color(0, 0, 0)   #noir
-var poison:Color =Color(0.069, 0.332, 0.106) 
-var heal:Color =Color(1, 1, 1) 
-var hp:Color = Color(0.737, 0.379, 0.087) 
+# ============================== Export ==============================
 
-var family_colors = {
-	"Fire": Color(1, 0, 0),               # Rouge
-	"Defense": Color(0.4, 0.26, 0.13),    # Marron
-	"Poison": Color(0.069, 0.332, 0.106)  # Vert foncé
-}
+@export var _cards: Array[Node3D]
+
+# ============================== Node base functions ==============================
 
 func _ready() -> void:
-	_show_player_card_on_table()
+	for child in get_children():
+		child.hide()
 
-func _show_player_card_on_table():
-	var total_level = fire_level + defense_level + poison_level
+# ============================== Public functions ==============================
+
+func connect_to_player(player: Player) -> void:
+	player.deck_changed.connect(_on_player_deck_changed)
+
+# ============================== Private functions ==============================
+
+func _update_visual(deck: PlayerDeck):
+	var families_lvl_raw = deck.get_families_lvl_raw()
+	var cards_number = deck.cardPile.size()
+	for i in min(cards_number, _cards.size()):
+		_cards[i].show()
 	
-
-	var families = {
-		"Fire": fire_level,
-		"Defense": defense_level,
-		"Poison": poison_level
-	}
+	var families_sorted = _get_families_lvl_raw_sorted(families_lvl_raw)
+	var total_lvl = 0
+	for family_lvl in min(NUMBER_OF_FAMILIES_TO_DISPLAY, families_sorted.size()):
+		total_lvl += family_lvl
 	
-	for i in range(min(player_nb_card, 10)):
-		var card_node_name = str(i + 1)
-		var card_node = get_node_or_null("%" + card_node_name)
-		
-		if card_node:
-			card_node.show()
+	var card_index:int = 0
+	for i in min(NUMBER_OF_FAMILIES_TO_DISPLAY, families_sorted.size()):
+		var ratio = families_lvl_raw[families_sorted[i]] / (total_lvl as float)
+		var number_of_cards_to_color:int = round(ratio * _cards.size())
+		for j in number_of_cards_to_color:
+			_cards[card_index].modulate = Family.COLORS[families_sorted[i]]
+			card_index += 1
 
-	# Application des couleurs en fonction du ratio de chaque famille
-	var card_index = 0
-	for family_name in families.keys():
-		var ratio = round((families[family_name] / (total_level as float)) * player_nb_card)
-		print(ratio)
-		for j in range(ratio):
-			if card_index < player_nb_card:
-				var card_node = get_node_or_null("%" + str(card_index + 1))
-				if card_node:
-					card_node.modulate = family_colors[family_name]
-					card_node.show()
-				card_index += 1
 
-	## Si des cartes n'ont pas été colorées, les afficher par défaut
-	#for k in range(card_index, player_nb_card):
-		#var card_node = get_node_or_null("%" + str(k + 1))
-		#if card_node:
-			#card_node.modulate = Color(1, 1, 1)  # Blanc par défaut
-			#card_node.show()
+func _get_families_lvl_raw_sorted(families_lvl_raw: Dictionary) -> Array[Family.FamilyType]:
+	var families_lvl_raw_sorted: Array[Family.FamilyType]
+	var families_lvl_raw_duplicated = families_lvl_raw.duplicate()
+	while not families_lvl_raw_duplicated.is_empty():
+		var highest_family = _get_highest_family_lvl_raw(families_lvl_raw_duplicated)
+		families_lvl_raw_sorted.append(highest_family)
+		families_lvl_raw_duplicated.erase(highest_family)
+	return families_lvl_raw_sorted
+
+
+func _get_highest_family_lvl_raw(families_lvl_raw: Dictionary) -> Family.FamilyType:
+	var highest_family: Family.FamilyType = Family.FamilyType.Attack
+	var highest_lvl: int = 0
+	for family_type in families_lvl_raw.keys():
+		if families_lvl_raw[family_type] > highest_lvl:
+			highest_family = family_type
+	return highest_family
+
+# ============================== Callbacks ==============================
+
+func _on_player_deck_changed(deck: PlayerDeck) -> void:
+	pass

@@ -1,9 +1,11 @@
 class_name CoinTower
 extends Node3D
 
-@onready var coin_scene: PackedScene = preload("res://Scenes/BuyingArea/Tables/Common/Coin/coin.tscn")
+# ============================== Constants ==============================
 
 const MAX_RANDOM_DISTANCE:float = 0.01 # Random movement of the coin around the Y axis
+
+# ============================== Public variables ==============================
 
 var _coins_number: int # Number of coin in the tower
 var coins_number: int:
@@ -12,12 +14,22 @@ var coins_number: int:
 		_coins_number = value
 		_update_visual(value)
 
+# ============================== Private variables ==============================
+
 var _coins: Array[Coin]
+
+# ============================== Preload ==============================
+
+@onready var coin_scene: PackedScene = preload("res://Scenes/BuyingArea/Tables/Common/Coin/coin.tscn")
+
+# ============================== Node base functions ==============================
 
 func _ready() -> void:
 	for child in get_children():
 		child.queue_free()
-	
+
+# ============================== Private functions ==============================
+
 func _update_visual(new_coin_number) -> void:
 	var rng: = RandomNumberGenerator.new()
 	rng.randomize()

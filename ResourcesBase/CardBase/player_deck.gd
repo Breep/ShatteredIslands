@@ -31,6 +31,17 @@ func debug_print() -> void:
 	for card in _cardPile:
 		print(card.name, "->lvl[", card.lvl, "]")
 
+
+func get_families_lvl_raw() -> Dictionary:
+	var families_lvl_raw: Dictionary
+	for card in _cardPile:
+		for family in card.families:
+			if families_lvl_raw.has(family):
+				families_lvl_raw[family] += 1
+			else:
+				families_lvl_raw[family] = 1
+	return families_lvl_raw
+
 # ============================== Private function ==============================
 
 func _add_or_improve_card(new_card_ref: Card) -> void:
