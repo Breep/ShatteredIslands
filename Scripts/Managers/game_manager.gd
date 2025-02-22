@@ -117,6 +117,14 @@ func start_game() -> void:
 func get_family_from_type(family_type: Family.FamilyType) -> Family:
 	return _families_ref[family_type]
 
+
+func get_alive_players() -> Dictionary:
+	var alive_players: Dictionary
+	for player in players.values():
+		if player.health > 0:
+			alive_players[player.id] = player
+	return alive_players
+
 # ============================== Private function ==============================
 
 func _game_switch_to(new_game_state: GameState) -> void:

@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dr8xv1vshmvyq"]
+
+[ext_resource type="Script" path="res://Scripts/BuyingArea/TavernCenter/tavern_center.gd" id="1_aagnj"]
+[ext_resource type="PackedScene" uid="uid://dlqrg6ijwk3i8" path="res://Scenes/BuyingArea/Tables/table_1v1.tscn" id="2_3mctf"]
+
+[node name="TavernCenter" type="Node3D"]
+script = ExtResource("1_aagnj")
+
+[node name="1" type="Node3D" parent="."]
+
+[node name="Table_1v1" parent="1" instance=ExtResource("2_3mctf")]
+transform = Transform3D(0.530141, 0, 0.847909, 0, 1, 0, -0.847909, 0, 0.530141, 0, 0, 0)
+
+[node name="2" type="Node3D" parent="."]
+visible = false
+
+[node name="3" type="Node3D" parent="."]
+visible = false
+
+[node name="4" type="Node3D" parent="."]
+visible = false

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://birnnko0u17dy"]
+
+[ext_resource type="Script" path="res://Scripts/BuyingArea/Tables/Common/coin_tower.gd" id="1_8tl5o"]
+[ext_resource type="PackedScene" uid="uid://dreub5xd6b2kv" path="res://Scenes/BuyingArea/Tables/Common/Coin/coin.tscn" id="2_bbfck"]
+
+[node name="CoinTower" type="Node3D"]
+script = ExtResource("1_8tl5o")
+
+[node name="Coin" parent="." instance=ExtResource("2_bbfck")]

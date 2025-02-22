@@ -1,0 +1,116 @@
+[gd_scene load_steps=16 format=3 uid="uid://ca8mcplp2va4s"]
+
+[ext_resource type="Script" path="res://Scripts/BuyingArea/buying_area.gd" id="1_ed4aq"]
+[ext_resource type="Script" path="res://Scripts/BuyingArea/camera_3d.gd" id="2_vend1"]
+[ext_resource type="Shader" path="res://Shaders/Cam/Cam_outline_shader_pro.gdshader" id="3_qhbrd"]
+[ext_resource type="PackedScene" uid="uid://c54r3uqu67ser" path="res://Scenes/UI/players_life_ui.tscn" id="4_xhpcb"]
+[ext_resource type="Script" path="res://Scenes/UI/players_life_ui.gd" id="5_3sr6y"]
+[ext_resource type="PackedScene" uid="uid://cmstx61h3h6ar" path="res://Scenes/UI/3d_ui_buying_area.tscn" id="5_dvq4w"]
+[ext_resource type="PackedScene" uid="uid://cxalabhvxw1pd" path="res://Scenes/UI/ui_timer.tscn" id="6_58bhs"]
+[ext_resource type="PackedScene" uid="uid://b8clqslwo8t68" path="res://Scenes/BuyingArea/tavern.tscn" id="7_s1xub"]
+[ext_resource type="PackedScene" uid="uid://dr8xv1vshmvyq" path="res://Scenes/BuyingArea/TavernCenter/tavern_center.tscn" id="9_rty8q"]
+[ext_resource type="AudioStream" uid="uid://ck0xrpfygj0sw" path="res://Data/Assets/Sound/World of Warcraft - Taverns of Azeroth - 13 - Thunderbrew.wav" id="72_1sm7x"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w8c5s"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_tpdce"]
+sky_material = SubResource("ProceduralSkyMaterial_w8c5s")
+
+[sub_resource type="Environment" id="Environment_pgie4"]
+background_mode = 2
+background_energy_multiplier = 1.63
+sky = SubResource("Sky_tpdce")
+tonemap_mode = 3
+glow_enabled = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_ek2a5"]
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tmveb"]
+render_priority = 0
+shader = ExtResource("3_qhbrd")
+shader_parameter/outlineColor = Color(0, 0, 0, 0.78)
+shader_parameter/depth_threshold = 0.025
+shader_parameter/normal_threshold = 0.5
+shader_parameter/normal_smoothing = 0.25
+shader_parameter/max_thickness = 0.7
+shader_parameter/min_thickness = 0.5
+shader_parameter/max_distance = 75.0
+shader_parameter/min_distance = 2.0
+shader_parameter/grazing_fresnel_power = 5.0
+shader_parameter/grazing_angle_mask_power = 1.0
+shader_parameter/grazing_angle_modulation_factor = 50.0
+
+[node name="BuyingArea" type="Node3D"]
+script = ExtResource("1_ed4aq")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pgie4")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.819152, -0.32899, 0.469846, 0, 0.819152, 0.573576, -0.573576, -0.469846, 0.67101, 0, 10, 10)
+projection = 1
+size = 20.0
+far = 35.0
+script = ExtResource("2_vend1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D"]
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_ek2a5")
+surface_material_override/0 = SubResource("ShaderMaterial_tmveb")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="players_life_ui" parent="UI" instance=ExtResource("4_xhpcb")]
+layout_mode = 1
+script = ExtResource("5_3sr6y")
+
+[node name="3d_UI_buying_area" parent="UI" instance=ExtResource("5_dvq4w")]
+layout_mode = 1
+mouse_filter = 1
+
+[node name="Uitimer" parent="UI" node_paths=PackedStringArray("timer") instance=ExtResource("6_58bhs")]
+layout_mode = 1
+offset_left = 514.0
+offset_top = 22.0
+offset_right = -442.0
+offset_bottom = -459.0
+scale = Vector2(0.5, 0.5)
+timer = NodePath("../Timer")
+
+[node name="Timer" type="Timer" parent="UI"]
+wait_time = 10.0
+autostart = true
+
+[node name="Tavern" parent="." instance=ExtResource("7_s1xub")]
+
+[node name="Light" type="Node3D" parent="."]
+
+[node name="LightNight" type="DirectionalLight3D" parent="Light"]
+transform = Transform3D(0.375305, 0.140338, 0.916216, 0.181778, 0.958133, -0.22122, -0.908902, 0.249572, 0.334081, -3.25739, 17.7254, -45.0352)
+visible = false
+shadow_enabled = true
+
+[node name="LightDay" type="DirectionalLight3D" parent="Light"]
+transform = Transform3D(-0.98934, -0.0555546, 0.134609, 0.0529325, 0.723949, 0.68782, -0.135662, 0.687613, -0.713291, -2.81162, 34.4637, -25.1827)
+light_energy = 1.65
+shadow_enabled = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("72_1sm7x")
+volume_db = -5.0
+autoplay = true
+
+[node name="TavernCenter" parent="." instance=ExtResource("9_rty8q")]
+
+[connection signal="timeout" from="UI/Timer" to="." method="_on_timer_timeout"]

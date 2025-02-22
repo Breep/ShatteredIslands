@@ -22,6 +22,7 @@ MultiplayerDeckManager="*res://Scripts/Managers/multiplayer_deck_manager.gd"
 Utils="*res://Scripts/Lib/utils.gd"
 TooltipManager="*res://Scripts/Managers/tooltip_manager.gd"
 Events="*res://Scripts/Managers/events.gd"
+RoundManager="*res://Scripts/Managers/round_manager.gd"
 
 [display]
 

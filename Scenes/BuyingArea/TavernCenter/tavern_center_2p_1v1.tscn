@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dr8xv1vshmvyq"]
-
-[ext_resource type="PackedScene" uid="uid://dlqrg6ijwk3i8" path="res://Scenes/BuyingArea/Tables/table_1v1.tscn" id="1_dqk6s"]
-
-[node name="TavernCenter2p1v1" type="Node3D"]
-
-[node name="Table_1v1" parent="." instance=ExtResource("1_dqk6s")]
-transform = Transform3D(0.530141, 0, 0.847909, 0, 1, 0, -0.847909, 0, 0.530141, 0, 0, 0)

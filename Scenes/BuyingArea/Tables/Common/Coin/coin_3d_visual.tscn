@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=4 uid="uid://bp03dw7gruma8"]
 
-[ext_resource type="Texture2D" uid="uid://mswbhaabiedm" path="res://Data/Assets/Tavern - 3D Asset Low poly/textures/dungeon_texture.png" id="1_0jkta"]
+[ext_resource type="Texture2D" uid="uid://mswbhaabiedm" path="res://Data/Assets/Tavern - 3D Asset Low poly/textures/dungeon_texture.png" id="1_b62ac"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c2asw"]
-albedo_texture = ExtResource("1_0jkta")
+albedo_texture = ExtResource("1_b62ac")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q1thd"]
 resource_name = "texture"
@@ -41,7 +41,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_8j1sp")
 
-[node name="coin" type="MeshInstance3D"]
+[node name="CoinVisual" type="MeshInstance3D"]
 material_override = SubResource("StandardMaterial3D_c2asw")
 mesh = SubResource("ArrayMesh_xbh16")
 skeleton = NodePath("")

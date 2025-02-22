@@ -1,7 +1,6 @@
-class_name RoundManager
 extends Node
 
-var round_number: int
+var current_round: int
 
 # Calcul du gain du match précédent
 # Répartition des joueurs par équipe
@@ -95,6 +94,7 @@ var _battles_info_dic = {
 
 var _tmp_players: Dictionary
 var _battles: Array[Battle]
+
 
 
 # Get a random set of battles according to the alive players number

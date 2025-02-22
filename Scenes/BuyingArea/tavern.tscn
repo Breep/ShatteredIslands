@@ -1,152 +1,112 @@
-[gd_scene load_steps=173 format=4 uid="uid://ca8mcplp2va4s"]
+[gd_scene load_steps=161 format=4 uid="uid://b8clqslwo8t68"]
 
-[ext_resource type="Script" path="res://Scripts/BuyingArea/camera_3d.gd" id="1_3e5gf"]
-[ext_resource type="Script" path="res://Scenes/test/test_buying_area_3d.gd" id="1_iyfsm"]
-[ext_resource type="PackedScene" uid="uid://tmsh8w1pcy4p" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/bar_outercorner.gltf" id="1_jltbr"]
-[ext_resource type="Shader" path="res://Shaders/Cam/Cam_outline_shader_pro.gdshader" id="1_p01h1"]
-[ext_resource type="Texture2D" uid="uid://mswbhaabiedm" path="res://Data/Assets/Tavern - 3D Asset Low poly/textures/dungeon_texture.png" id="2_i4mdp"]
-[ext_resource type="PackedScene" uid="uid://c54r3uqu67ser" path="res://Scenes/UI/players_life_ui.tscn" id="3_aff6e"]
-[ext_resource type="PackedScene" uid="uid://byjejjl6rvsef" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/bar_straight_A.gltf" id="3_nj6q3"]
-[ext_resource type="PackedScene" uid="uid://ckltcqgnt0sqd" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Crate/crates_stacked.gltf" id="3_phlvk"]
-[ext_resource type="PackedScene" uid="uid://cmstx61h3h6ar" path="res://Scenes/UI/3d_ui_buying_area.tscn" id="3_v4hk2"]
-[ext_resource type="PackedScene" uid="uid://cjeoy0rnleep0" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/bar_straight_B.gltf" id="4_h0lpo"]
-[ext_resource type="PackedScene" uid="uid://dku0i4bp7t23u" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Crate/crate_small.gltf" id="4_yv6jx"]
-[ext_resource type="PackedScene" uid="uid://bciww7p136c0f" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/bar_straight_C.gltf" id="5_x1tcb"]
-[ext_resource type="PackedScene" uid="uid://cxalabhvxw1pd" path="res://Scenes/UI/ui_timer.tscn" id="7_1drue"]
-[ext_resource type="PackedScene" uid="uid://6bp40g4as5pp" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/bartop_A_medium.gltf" id="8_wtve5"]
-[ext_resource type="PackedScene" uid="uid://dgu4am47da560" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bottle/bottle_A_brown.gltf" id="10_4iuxi"]
-[ext_resource type="PackedScene" uid="uid://d3w377n68qlos" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/barrel_large_decorated.gltf" id="11_1jhy3"]
-[ext_resource type="PackedScene" uid="uid://dvebuw8ouwdku" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bottle/bottle_B_brown.gltf" id="11_v5awc"]
-[ext_resource type="PackedScene" uid="uid://c3ommbjkqidie" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bottle/bottle_C_green.gltf" id="12_d25o4"]
-[ext_resource type="PackedScene" uid="uid://b6nuored8nvqr" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/barrel_small_stack.gltf" id="12_t7ekh"]
-[ext_resource type="PackedScene" uid="uid://b18rq8nudpgxk" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Floor/floor_tile_extralarge_grates_open.gltf" id="13_85sgb"]
-[ext_resource type="PackedScene" uid="uid://phbse1ofikvg" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bottle/bottle_C_brown.gltf" id="13_rq3jx"]
-[ext_resource type="PackedScene" uid="uid://bv8ck6sh3mtkp" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Floor/wood_big_tales.glb" id="14_g7e54"]
-[ext_resource type="PackedScene" uid="uid://c82i3yr7o0h66" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bottle/bottle_A_green.gltf" id="14_uksrb"]
-[ext_resource type="PackedScene" uid="uid://dq203cm1pekfc" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Plate/plate_food_B.gltf" id="15_4rhdl"]
-[ext_resource type="PackedScene" uid="uid://lfqc7py36c86" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bottle/bottle_A_labeled_brown.gltf" id="15_holua"]
-[ext_resource type="PackedScene" uid="uid://btd66e0diuvjc" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Key/keyring.gltf" id="16_ehkhg"]
-[ext_resource type="PackedScene" uid="uid://cpj7nxxqjeo4r" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Plate/plate_food_A.gltf" id="17_6sqvy"]
-[ext_resource type="PackedScene" uid="uid://bnihlm6an3jfg" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Plate/plate_stack.gltf" id="18_8fk3c"]
-[ext_resource type="PackedScene" uid="uid://bg2ufspvqqk65" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/stool_round.gltf" id="22_eslmq"]
-[ext_resource type="PackedScene" uid="uid://cdryp1jj4woix" path="res://Scenes/BuyingArea/card_pile_comptoir.tscn" id="23_k887s"]
-[ext_resource type="PackedScene" uid="uid://bljg1ch6dfx2d" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Banner/banner_patternC_blue.gltf" id="24_b6w4i"]
-[ext_resource type="PackedScene" uid="uid://bm5ogrvpdoaae" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Wall/keg_decorated.gltf" id="25_4y7s4"]
-[ext_resource type="Texture2D" uid="uid://buj8bwpqhi1yu" path="res://Data/Assets/Tavern - 3D Asset Low poly/textures/alt_texture_3_SepiaA.png" id="25_ouvkh"]
-[ext_resource type="PackedScene" uid="uid://c53xdym5r332h" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Banner/banner_red.gltf" id="25_v5xk0"]
-[ext_resource type="PackedScene" uid="uid://cahfsuk0qx8rq" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Banner/banner_shield_brown.gltf" id="26_kp2p5"]
-[ext_resource type="PackedScene" uid="uid://qtrorp1dw0n2" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Pillar/scaffold_pillar_wall.gltf" id="26_m5ywv"]
-[ext_resource type="PackedScene" uid="uid://cige6714usxq2" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Wall/wall.gltf" id="27_sem2k"]
-[ext_resource type="PackedScene" uid="uid://dbrf7yn1vvqbm" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Banner/banner_thin_blue.gltf" id="27_x8njs"]
-[ext_resource type="PackedScene" uid="uid://c0i0ff30682df" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Banner/banner_triple_yellow.gltf" id="28_ismef"]
-[ext_resource type="PackedScene" uid="uid://d2rtojvlm5n3o" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Wall/wall_corner.gltf" id="29_1qv4b"]
-[ext_resource type="PackedScene" uid="uid://dc6lp1er1ykvq" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Wall/wall_cracked.gltf" id="30_v5b88"]
-[ext_resource type="PackedScene" uid="uid://ok1oeskl8psr" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Wall/wall_doorway.gltf" id="31_nc520"]
-[ext_resource type="PackedScene" uid="uid://dh4fwu36807gm" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Wall/wall_doorway_sides.gltf" id="32_padtx"]
-[ext_resource type="PackedScene" uid="uid://bb4esvsygn6h2" path="res://Scenes/NPC/knight.tscn" id="33_g3u1c"]
-[ext_resource type="PackedScene" uid="uid://v4x4jhgrgov8" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Wall/wall_inset_shelves_decoratedA.gltf" id="33_g8k4j"]
-[ext_resource type="PackedScene" uid="uid://d4m8fv3pjumps" path="res://Scenes/NPC/rogue.tscn" id="34_j0s5c"]
-[ext_resource type="PackedScene" uid="uid://dnd8464qr6omf" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Wall/wall_inset_shelves_decoratedB.gltf" id="36_nq1kl"]
-[ext_resource type="PackedScene" uid="uid://dulv407e1bg2s" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Wall/wall_pillar.gltf" id="37_jrgb8"]
-[ext_resource type="PackedScene" uid="uid://dk15xlwgfpcrm" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Wall/wall_window_closed.gltf" id="39_3pr1j"]
-[ext_resource type="PackedScene" uid="uid://bt0vd8u7k4yb3" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Wall/wall_window_open.gltf" id="40_05dxm"]
-[ext_resource type="PackedScene" uid="uid://rtorcr7o6mqu" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Wall/stairs_walled.gltf" id="42_4c33o"]
-[ext_resource type="PackedScene" uid="uid://b88w2cpjpgg3d" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/bar_innercorner.gltf" id="42_mq8yl"]
-[ext_resource type="Texture2D" uid="uid://cyu1r13ueopq2" path="res://Data/Assets/Tavern - 3D Asset Low poly/textures/alt_texture_1_Golden.png" id="43_jw1s1"]
-[ext_resource type="PackedScene" uid="uid://fk884ld08srx" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Candle/shelf_small_candles.gltf" id="45_6vbhg"]
-[ext_resource type="PackedScene" uid="uid://dl1nqy0t8dggg" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/chair.gltf" id="48_c3owh"]
-[ext_resource type="PackedScene" uid="uid://dcgod6bo72fy7" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/stool.gltf" id="49_uu58n"]
-[ext_resource type="PackedScene" uid="uid://41nrp5o72qdf" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Chest/chest_large_gold.gltf" id="50_aavw0"]
-[ext_resource type="PackedScene" uid="uid://du3hslhskabrs" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Candle/candle.gltf" id="50_bdmuv"]
-[ext_resource type="PackedScene" uid="uid://1n5ygeugau6y" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/table_long_decorated_A.gltf" id="51_jn42p"]
-[ext_resource type="PackedScene" uid="uid://cym5gmyqbhm1u" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Candle/candle_triple.gltf" id="51_vvaej"]
-[ext_resource type="PackedScene" uid="uid://b3vqu023yxis6" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/table_long_decorated_B.gltf" id="52_vlnsl"]
-[ext_resource type="PackedScene" uid="uid://dxj6f04tbq81p" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/table_long_decorated_C.gltf" id="53_qigmu"]
-[ext_resource type="PackedScene" uid="uid://d1661c0owgs2d" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/table_long_tablecloth.gltf" id="54_aql8s"]
-[ext_resource type="PackedScene" uid="uid://d0p11udwcy85a" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/table_small_decorated_B.gltf" id="57_1w6iw"]
-[ext_resource type="PackedScene" uid="uid://dxn0gctm1pacd" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/table_small_decorated_A.gltf" id="58_31pce"]
-[ext_resource type="PackedScene" uid="uid://dj8t0w3l0w47q" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/table_long_tablecloth_decorated_A.gltf" id="60_v4gv6"]
-[ext_resource type="PackedScene" uid="uid://cd1l65basbin6" path="res://Scenes/VFX_3D/vfx_3d_portal.tscn" id="60_wmmk7"]
-[ext_resource type="PackedScene" uid="uid://br564e48coa2v" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/table_medium_decorated_A.gltf" id="61_2k0mj"]
-[ext_resource type="AudioStream" uid="uid://ck0xrpfygj0sw" path="res://Data/Assets/Sound/World of Warcraft - Taverns of Azeroth - 13 - Thunderbrew.wav" id="67_2jfat"]
-[ext_resource type="PackedScene" uid="uid://cvdsh4o4upr8q" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Banner/banner_patternC_white.gltf" id="68_3y306"]
-[ext_resource type="Texture2D" uid="uid://bnydnfwwar6cx" path="res://Data/Assets/Tavern - 3D Asset Low poly/textures/alt_texture_5_NightA.png" id="69_m53iv"]
-[ext_resource type="PackedScene" uid="uid://cvtcwgshvlnao" path="res://Scenes/Object_scene/mimic_chest.tscn" id="72_eq1su"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w8c5s"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-
-[sub_resource type="Sky" id="Sky_tpdce"]
-sky_material = SubResource("ProceduralSkyMaterial_w8c5s")
-
-[sub_resource type="Environment" id="Environment_pgie4"]
-background_mode = 2
-background_energy_multiplier = 1.63
-sky = SubResource("Sky_tpdce")
-tonemap_mode = 3
-glow_enabled = true
-
-[sub_resource type="QuadMesh" id="QuadMesh_ek2a5"]
-flip_faces = true
-size = Vector2(2, 2)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tmveb"]
-render_priority = 0
-shader = ExtResource("1_p01h1")
-shader_parameter/outlineColor = Color(0, 0, 0, 0.78)
-shader_parameter/depth_threshold = 0.025
-shader_parameter/normal_threshold = 0.5
-shader_parameter/normal_smoothing = 0.25
-shader_parameter/max_thickness = 0.7
-shader_parameter/min_thickness = 0.5
-shader_parameter/max_distance = 75.0
-shader_parameter/min_distance = 2.0
-shader_parameter/grazing_fresnel_power = 5.0
-shader_parameter/grazing_angle_mask_power = 1.0
-shader_parameter/grazing_angle_modulation_factor = 50.0
+[ext_resource type="PackedScene" uid="uid://cdryp1jj4woix" path="res://Scenes/BuyingArea/card_pile_comptoir.tscn" id="1_j0agn"]
+[ext_resource type="PackedScene" uid="uid://b6nuored8nvqr" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/barrel_small_stack.gltf" id="2_h7d5p"]
+[ext_resource type="Texture2D" uid="uid://mswbhaabiedm" path="res://Data/Assets/Tavern - 3D Asset Low poly/textures/dungeon_texture.png" id="3_lhvrh"]
+[ext_resource type="PackedScene" uid="uid://ckltcqgnt0sqd" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Crate/crates_stacked.gltf" id="4_ka8mg"]
+[ext_resource type="PackedScene" uid="uid://dku0i4bp7t23u" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Crate/crate_small.gltf" id="5_2danq"]
+[ext_resource type="PackedScene" uid="uid://dgu4am47da560" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bottle/bottle_A_brown.gltf" id="6_0csjm"]
+[ext_resource type="PackedScene" uid="uid://dvebuw8ouwdku" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bottle/bottle_B_brown.gltf" id="7_0bsou"]
+[ext_resource type="PackedScene" uid="uid://c3ommbjkqidie" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bottle/bottle_C_green.gltf" id="8_082pu"]
+[ext_resource type="PackedScene" uid="uid://phbse1ofikvg" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bottle/bottle_C_brown.gltf" id="9_5gy7c"]
+[ext_resource type="PackedScene" uid="uid://c82i3yr7o0h66" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bottle/bottle_A_green.gltf" id="10_ipc5u"]
+[ext_resource type="PackedScene" uid="uid://lfqc7py36c86" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bottle/bottle_A_labeled_brown.gltf" id="11_600eb"]
+[ext_resource type="PackedScene" uid="uid://btd66e0diuvjc" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Key/keyring.gltf" id="12_tklb0"]
+[ext_resource type="PackedScene" uid="uid://bm5ogrvpdoaae" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Wall/keg_decorated.gltf" id="13_finor"]
+[ext_resource type="PackedScene" uid="uid://tmsh8w1pcy4p" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/bar_outercorner.gltf" id="14_fo83k"]
+[ext_resource type="PackedScene" uid="uid://byjejjl6rvsef" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/bar_straight_A.gltf" id="15_f26y1"]
+[ext_resource type="PackedScene" uid="uid://cjeoy0rnleep0" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/bar_straight_B.gltf" id="16_4ekk0"]
+[ext_resource type="PackedScene" uid="uid://dq203cm1pekfc" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Plate/plate_food_B.gltf" id="17_8v5nm"]
+[ext_resource type="PackedScene" uid="uid://bciww7p136c0f" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/bar_straight_C.gltf" id="18_f18gl"]
+[ext_resource type="PackedScene" uid="uid://cpj7nxxqjeo4r" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Plate/plate_food_A.gltf" id="19_l6156"]
+[ext_resource type="PackedScene" uid="uid://bnihlm6an3jfg" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Plate/plate_stack.gltf" id="20_mfp2l"]
+[ext_resource type="PackedScene" uid="uid://6bp40g4as5pp" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/bartop_A_medium.gltf" id="21_beht1"]
+[ext_resource type="PackedScene" uid="uid://bg2ufspvqqk65" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/stool_round.gltf" id="22_cq0qq"]
+[ext_resource type="PackedScene" uid="uid://cvdsh4o4upr8q" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Banner/banner_patternC_white.gltf" id="23_3ybkh"]
+[ext_resource type="Texture2D" uid="uid://bnydnfwwar6cx" path="res://Data/Assets/Tavern - 3D Asset Low poly/textures/alt_texture_5_NightA.png" id="24_6koya"]
+[ext_resource type="PackedScene" uid="uid://bljg1ch6dfx2d" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Banner/banner_patternC_blue.gltf" id="25_tw8g4"]
+[ext_resource type="PackedScene" uid="uid://cahfsuk0qx8rq" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Banner/banner_shield_brown.gltf" id="26_6m83d"]
+[ext_resource type="PackedScene" uid="uid://dbrf7yn1vvqbm" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Banner/banner_thin_blue.gltf" id="27_t6xnr"]
+[ext_resource type="PackedScene" uid="uid://c0i0ff30682df" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Banner/banner_triple_yellow.gltf" id="28_jmy5w"]
+[ext_resource type="PackedScene" uid="uid://d3w377n68qlos" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/barrel_large_decorated.gltf" id="29_818j4"]
+[ext_resource type="PackedScene" uid="uid://du3hslhskabrs" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Candle/candle.gltf" id="30_j02mn"]
+[ext_resource type="PackedScene" uid="uid://cvtcwgshvlnao" path="res://Scenes/Object_scene/mimic_chest.tscn" id="31_tsfal"]
+[ext_resource type="PackedScene" uid="uid://bb4esvsygn6h2" path="res://Scenes/NPC/knight.tscn" id="32_n3j8t"]
+[ext_resource type="PackedScene" uid="uid://d4m8fv3pjumps" path="res://Scenes/NPC/rogue.tscn" id="33_3ytuy"]
+[ext_resource type="PackedScene" uid="uid://b18rq8nudpgxk" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Floor/floor_tile_extralarge_grates_open.gltf" id="34_n1tou"]
+[ext_resource type="PackedScene" uid="uid://bv8ck6sh3mtkp" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Floor/wood_big_tales.glb" id="35_hjxl0"]
+[ext_resource type="Texture2D" uid="uid://buj8bwpqhi1yu" path="res://Data/Assets/Tavern - 3D Asset Low poly/textures/alt_texture_3_SepiaA.png" id="36_6v8xg"]
+[ext_resource type="PackedScene" uid="uid://qtrorp1dw0n2" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Pillar/scaffold_pillar_wall.gltf" id="37_56enl"]
+[ext_resource type="PackedScene" uid="uid://c53xdym5r332h" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Banner/banner_red.gltf" id="38_wa21u"]
+[ext_resource type="PackedScene" uid="uid://cige6714usxq2" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Wall/wall.gltf" id="39_f13nc"]
+[ext_resource type="PackedScene" uid="uid://d2rtojvlm5n3o" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Wall/wall_corner.gltf" id="40_l1jls"]
+[ext_resource type="PackedScene" uid="uid://dc6lp1er1ykvq" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Wall/wall_cracked.gltf" id="41_45hhq"]
+[ext_resource type="PackedScene" uid="uid://ok1oeskl8psr" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Wall/wall_doorway.gltf" id="42_35apy"]
+[ext_resource type="PackedScene" uid="uid://dh4fwu36807gm" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Wall/wall_doorway_sides.gltf" id="43_go0s1"]
+[ext_resource type="PackedScene" uid="uid://v4x4jhgrgov8" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Wall/wall_inset_shelves_decoratedA.gltf" id="44_pmjdc"]
+[ext_resource type="PackedScene" uid="uid://dnd8464qr6omf" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Wall/wall_inset_shelves_decoratedB.gltf" id="45_gokas"]
+[ext_resource type="PackedScene" uid="uid://dulv407e1bg2s" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Wall/wall_pillar.gltf" id="46_i340y"]
+[ext_resource type="PackedScene" uid="uid://dk15xlwgfpcrm" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Wall/wall_window_closed.gltf" id="47_32n2m"]
+[ext_resource type="PackedScene" uid="uid://bt0vd8u7k4yb3" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Wall/wall_window_open.gltf" id="48_veq06"]
+[ext_resource type="PackedScene" uid="uid://fk884ld08srx" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Candle/shelf_small_candles.gltf" id="49_8eq2s"]
+[ext_resource type="PackedScene" uid="uid://rtorcr7o6mqu" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Wall/stairs_walled.gltf" id="50_5p3hd"]
+[ext_resource type="PackedScene" uid="uid://cym5gmyqbhm1u" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Candle/candle_triple.gltf" id="51_8dyu7"]
+[ext_resource type="PackedScene" uid="uid://b88w2cpjpgg3d" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/bar_innercorner.gltf" id="52_sq4wl"]
+[ext_resource type="Texture2D" uid="uid://cyu1r13ueopq2" path="res://Data/Assets/Tavern - 3D Asset Low poly/textures/alt_texture_1_Golden.png" id="53_p3h85"]
+[ext_resource type="PackedScene" uid="uid://41nrp5o72qdf" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Chest/chest_large_gold.gltf" id="54_l5g6f"]
+[ext_resource type="PackedScene" uid="uid://cd1l65basbin6" path="res://Scenes/VFX_3D/vfx_3d_portal.tscn" id="55_gj236"]
+[ext_resource type="PackedScene" uid="uid://dxn0gctm1pacd" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/table_small_decorated_A.gltf" id="56_fc3kw"]
+[ext_resource type="PackedScene" uid="uid://d0p11udwcy85a" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/table_small_decorated_B.gltf" id="57_sdjn6"]
+[ext_resource type="PackedScene" uid="uid://1n5ygeugau6y" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/table_long_decorated_A.gltf" id="58_kcxcn"]
+[ext_resource type="PackedScene" uid="uid://b3vqu023yxis6" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/table_long_decorated_B.gltf" id="59_egs85"]
+[ext_resource type="PackedScene" uid="uid://dxj6f04tbq81p" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/table_long_decorated_C.gltf" id="60_7qv04"]
+[ext_resource type="PackedScene" uid="uid://d1661c0owgs2d" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/table_long_tablecloth.gltf" id="61_gthyu"]
+[ext_resource type="PackedScene" uid="uid://dl1nqy0t8dggg" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/chair.gltf" id="62_6uskp"]
+[ext_resource type="PackedScene" uid="uid://dcgod6bo72fy7" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/stool.gltf" id="63_t28go"]
+[ext_resource type="PackedScene" uid="uid://dj8t0w3l0w47q" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/table_long_tablecloth_decorated_A.gltf" id="64_6hjy6"]
+[ext_resource type="PackedScene" uid="uid://br564e48coa2v" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/table_medium_decorated_A.gltf" id="65_xhx61"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_us68o"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lbbem"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8da2g"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ixvn"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lyk6c"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vh6af"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x1hwc"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v102r"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qlrob"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_puwpd"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ynfjj"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fafnq"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ficar"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ux0xx"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_akrd7"]
 resource_name = "texture"
@@ -187,10 +147,10 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_nas14")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v23vf"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nj4jg"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5g2xc"]
 resource_name = "texture"
@@ -231,22 +191,22 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_fvbov")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7jmd0"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0gfem"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v2irf"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_njub2"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rix3e"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qgwrv"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c2car"]
 resource_name = "texture"
@@ -287,7 +247,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_y5p4l")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dbxgc"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d66fx"]
 resource_name = "texture"
@@ -328,13 +288,13 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_22x56")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vto0k"]
-albedo_texture = ExtResource("69_m53iv")
+albedo_texture = ExtResource("24_6koya")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rfm8m"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3b8nb"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_thgen"]
 resource_name = "texture"
@@ -373,7 +333,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_hdko2")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gpfju"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fkjb8"]
 resource_name = "texture"
@@ -412,30 +372,30 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_8mbhs")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7wnxm"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3bkyr"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d3e3c"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_47si7"]
 diffuse_mode = 3
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y57ng"]
 diffuse_mode = 3
-albedo_texture = ExtResource("25_ouvkh")
+albedo_texture = ExtResource("36_6v8xg")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2dlex"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a1dm7"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j7xky"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wrnqf"]
 resource_name = "texture"
@@ -474,7 +434,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ifkdp")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wyaxa"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qh25i"]
 resource_name = "texture"
@@ -513,25 +473,25 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_i4vy1")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bpvu4"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lkkx2"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nwx2h"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_if2ka"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_of8y6"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f7yjb"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v0t05"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2qrf"]
 resource_name = "texture"
@@ -570,49 +530,49 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_d2irr")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3vlal"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nfg8l"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oojxe"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3godj"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hmu6u"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_24rfq"]
-albedo_texture = ExtResource("43_jw1s1")
+albedo_texture = ExtResource("53_p3h85")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xw1si"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wdnbl"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uun87"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rhoxa"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aln8c"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xd8aq"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_att5w"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j6m6h"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7clcc"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dnix0"]
 resource_name = "texture"
@@ -651,7 +611,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_x07ij")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gtnky"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w17ng"]
 resource_name = "texture"
@@ -690,973 +650,907 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_s6f1m")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tie56"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d2xlk"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w8fn2"]
-albedo_texture = ExtResource("2_i4mdp")
+albedo_texture = ExtResource("3_lhvrh")
 
-[node name="Node3D" type="Node3D"]
-script = ExtResource("1_iyfsm")
+[node name="Tavern" type="Node3D"]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_pgie4")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.819152, -0.32899, 0.469846, 0, 0.819152, 0.573576, -0.573576, -0.469846, 0.67101, 0, 10, 10)
-projection = 1
-size = 20.0
-far = 35.0
-script = ExtResource("1_3e5gf")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D"]
-extra_cull_margin = 16384.0
-mesh = SubResource("QuadMesh_ek2a5")
-surface_material_override/0 = SubResource("ShaderMaterial_tmveb")
-
-[node name="UI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-
-[node name="players_life_ui" parent="UI" instance=ExtResource("3_aff6e")]
-layout_mode = 1
-
-[node name="3d_UI_buying_area" parent="UI" instance=ExtResource("3_v4hk2")]
-layout_mode = 1
-mouse_filter = 1
-
-[node name="Uitimer" parent="UI" node_paths=PackedStringArray("timer") instance=ExtResource("7_1drue")]
-layout_mode = 1
-offset_left = 514.0
-offset_top = 22.0
-offset_right = -442.0
-offset_bottom = -459.0
-scale = Vector2(0.5, 0.5)
-timer = NodePath("../Timer")
-
-[node name="Timer" type="Timer" parent="UI"]
-wait_time = 10.0
-autostart = true
-
-[node name="Tavern" type="Node3D" parent="."]
-
-[node name="Bar" type="Node3D" parent="Tavern"]
+[node name="Bar" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.360003, 0, -15.755)
 
-[node name="CardPile_comptoir" parent="Tavern/Bar" instance=ExtResource("23_k887s")]
+[node name="CardPile_comptoir" parent="Bar" instance=ExtResource("1_j0agn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.30577, 1.02792, 0.131407)
 
-[node name="DeccoBar" type="Node3D" parent="Tavern/Bar"]
+[node name="DeccoBar" type="Node3D" parent="Bar"]
 
-[node name="barrel_small_stack2" parent="Tavern/Bar/DeccoBar" instance=ExtResource("12_t7ekh")]
+[node name="barrel_small_stack2" parent="Bar/DeccoBar" instance=ExtResource("2_h7d5p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.2229, -4.76837e-07, -3.65658)
 
-[node name="barrel_small_stack" parent="Tavern/Bar/DeccoBar/barrel_small_stack2" index="0"]
+[node name="barrel_small_stack" parent="Bar/DeccoBar/barrel_small_stack2" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.99216, 0, 0)
 material_override = SubResource("StandardMaterial3D_us68o")
 
-[node name="crates_stacked2" parent="Tavern/Bar/DeccoBar" instance=ExtResource("3_phlvk")]
+[node name="crates_stacked2" parent="Bar/DeccoBar" instance=ExtResource("4_ka8mg")]
 transform = Transform3D(1, -1.08493e-11, 0, -1.22626e-11, 1, 0, 0, 0, 1, -10.4518, -1.09867e-09, -3.52981)
 
-[node name="crates_stacked" parent="Tavern/Bar/DeccoBar/crates_stacked2" index="0"]
+[node name="crates_stacked" parent="Bar/DeccoBar/crates_stacked2" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.72424, 1.06982e-10, 0)
 material_override = SubResource("StandardMaterial3D_lbbem")
 
-[node name="crate_small2" parent="Tavern/Bar/DeccoBar" instance=ExtResource("4_yv6jx")]
+[node name="crate_small2" parent="Bar/DeccoBar" instance=ExtResource("5_2danq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4178, 0, -3.69764)
 
-[node name="crate_small" parent="Tavern/Bar/DeccoBar/crate_small2" index="0"]
+[node name="crate_small" parent="Bar/DeccoBar/crate_small2" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.4798, 0, 0)
 material_override = SubResource("StandardMaterial3D_8da2g")
 
-[node name="bottle_A_brown2" parent="Tavern/Bar/DeccoBar" instance=ExtResource("10_4iuxi")]
+[node name="bottle_A_brown2" parent="Bar/DeccoBar" instance=ExtResource("6_0csjm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.0971, 1.01214, 0.137326)
 
-[node name="bottle_A_brown" parent="Tavern/Bar/DeccoBar/bottle_A_brown2" index="0"]
+[node name="bottle_A_brown" parent="Bar/DeccoBar/bottle_A_brown2" index="0"]
 material_override = SubResource("StandardMaterial3D_8ixvn")
 
-[node name="bottle_B_brown2" parent="Tavern/Bar/DeccoBar" instance=ExtResource("11_v5awc")]
+[node name="bottle_B_brown2" parent="Bar/DeccoBar" instance=ExtResource("7_0bsou")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5473, 1.02216, 0.491296)
 
-[node name="bottle_B_brown" parent="Tavern/Bar/DeccoBar/bottle_B_brown2" index="0"]
+[node name="bottle_B_brown" parent="Bar/DeccoBar/bottle_B_brown2" index="0"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.874266, 1.16318, -3.68057)
 material_override = SubResource("StandardMaterial3D_lyk6c")
 
-[node name="bottle_C_green2" parent="Tavern/Bar/DeccoBar" instance=ExtResource("12_d25o4")]
+[node name="bottle_C_green2" parent="Bar/DeccoBar" instance=ExtResource("8_082pu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.60918, 1.00632, -3.32847)
 
-[node name="bottle_C_green" parent="Tavern/Bar/DeccoBar/bottle_C_green2" index="0"]
+[node name="bottle_C_green" parent="Bar/DeccoBar/bottle_C_green2" index="0"]
 material_override = SubResource("StandardMaterial3D_vh6af")
 
-[node name="bottle_C_brown2" parent="Tavern/Bar/DeccoBar" instance=ExtResource("13_rq3jx")]
+[node name="bottle_C_brown2" parent="Bar/DeccoBar" instance=ExtResource("9_5gy7c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.49813, 2.04834, -3.46676)
 
-[node name="bottle_C_brown" parent="Tavern/Bar/DeccoBar/bottle_C_brown2" index="0"]
+[node name="bottle_C_brown" parent="Bar/DeccoBar/bottle_C_brown2" index="0"]
 material_override = SubResource("StandardMaterial3D_x1hwc")
 
-[node name="bottle_A_green2" parent="Tavern/Bar/DeccoBar" instance=ExtResource("14_uksrb")]
+[node name="bottle_A_green2" parent="Bar/DeccoBar" instance=ExtResource("10_ipc5u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.21473, 1.00027, -3.41149)
 
-[node name="bottle_A_green" parent="Tavern/Bar/DeccoBar/bottle_A_green2" index="0"]
+[node name="bottle_A_green" parent="Bar/DeccoBar/bottle_A_green2" index="0"]
 material_override = SubResource("StandardMaterial3D_v102r")
 
-[node name="bottle_A_labeled_brown2" parent="Tavern/Bar/DeccoBar" instance=ExtResource("15_holua")]
+[node name="bottle_A_labeled_brown2" parent="Bar/DeccoBar" instance=ExtResource("11_600eb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.18013, 2.04035, -3.37367)
 
-[node name="bottle_A_labeled_brown" parent="Tavern/Bar/DeccoBar/bottle_A_labeled_brown2" index="0"]
+[node name="bottle_A_labeled_brown" parent="Bar/DeccoBar/bottle_A_labeled_brown2" index="0"]
 material_override = SubResource("StandardMaterial3D_qlrob")
 
-[node name="bottle_B_brown3" parent="Tavern/Bar/DeccoBar" instance=ExtResource("11_v5awc")]
+[node name="bottle_B_brown3" parent="Bar/DeccoBar" instance=ExtResource("7_0bsou")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.68924, 0.997758, -3.43444)
 
-[node name="bottle_B_brown" parent="Tavern/Bar/DeccoBar/bottle_B_brown3" index="0"]
+[node name="bottle_B_brown" parent="Bar/DeccoBar/bottle_B_brown3" index="0"]
 material_override = SubResource("StandardMaterial3D_puwpd")
 
-[node name="bottle_A_labeled_brown3" parent="Tavern/Bar/DeccoBar" instance=ExtResource("15_holua")]
+[node name="bottle_A_labeled_brown3" parent="Bar/DeccoBar" instance=ExtResource("11_600eb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.64852, 1.00334, -0.00460434)
 
-[node name="bottle_A_labeled_brown" parent="Tavern/Bar/DeccoBar/bottle_A_labeled_brown3" index="0"]
+[node name="bottle_A_labeled_brown" parent="Bar/DeccoBar/bottle_A_labeled_brown3" index="0"]
 material_override = SubResource("StandardMaterial3D_ynfjj")
 
-[node name="keyring2" parent="Tavern/Bar/DeccoBar" instance=ExtResource("16_ehkhg")]
+[node name="keyring2" parent="Bar/DeccoBar" instance=ExtResource("12_tklb0")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -8.5119, 1.01276, -2.7982)
 
-[node name="keyring" parent="Tavern/Bar/DeccoBar/keyring2" index="0"]
+[node name="keyring" parent="Bar/DeccoBar/keyring2" index="0"]
 material_override = SubResource("StandardMaterial3D_fafnq")
 
-[node name="keg_decorated2" parent="Tavern/Bar/DeccoBar" instance=ExtResource("25_4y7s4")]
+[node name="keg_decorated2" parent="Bar/DeccoBar" instance=ExtResource("13_finor")]
 transform = Transform3D(1, -3.892e-10, 0, -3.90613e-10, 1, 0, 0, 0, 1, -15.8386, -1.57197e-08, 2.51599)
 
-[node name="keg_decorated" parent="Tavern/Bar/DeccoBar/keg_decorated2" index="0"]
+[node name="keg_decorated" parent="Bar/DeccoBar/keg_decorated2" index="0"]
 transform = Transform3D(0.999997, 0.00215999, -0.00089682, -0.00216, 0.999998, -1.05928e-05, 0.000896795, 1.25272e-05, 1, 2.88015, 3.53183e-11, -6.17473)
 material_override = SubResource("StandardMaterial3D_ficar")
 
-[node name="Bar_meuble" type="Node3D" parent="Tavern/Bar"]
+[node name="Bar_meuble" type="Node3D" parent="Bar"]
 
-[node name="bar_outercorner2" parent="Tavern/Bar/Bar_meuble" instance=ExtResource("1_jltbr")]
+[node name="bar_outercorner2" parent="Bar/Bar_meuble" instance=ExtResource("14_fo83k")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.29202, 0, 0)
 
-[node name="bar_outercorner" parent="Tavern/Bar/Bar_meuble/bar_outercorner2" index="0"]
+[node name="bar_outercorner" parent="Bar/Bar_meuble/bar_outercorner2" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.522429, 0, -0.302883)
 material_override = SubResource("StandardMaterial3D_ux0xx")
 
-[node name="bar_outercorner3" parent="Tavern/Bar/Bar_meuble" instance=ExtResource("1_jltbr")]
+[node name="bar_outercorner3" parent="Bar/Bar_meuble" instance=ExtResource("14_fo83k")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -3.59123, 0, -3.313)
 
-[node name="bar_outercorner" parent="Tavern/Bar/Bar_meuble/bar_outercorner3" index="0"]
+[node name="bar_outercorner" parent="Bar/Bar_meuble/bar_outercorner3" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.522429, 0, -0.302883)
 material_override = SubResource("StandardMaterial3D_ux0xx")
 
-[node name="bar_outercorner2" type="MeshInstance3D" parent="Tavern/Bar/Bar_meuble/bar_outercorner3"]
+[node name="bar_outercorner2" type="MeshInstance3D" parent="Bar/Bar_meuble/bar_outercorner3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.522429, 2.98605, -0.309131)
 material_override = SubResource("StandardMaterial3D_ux0xx")
 mesh = SubResource("ArrayMesh_o04w1")
 skeleton = NodePath("")
 
-[node name="bar_straight_A2" parent="Tavern/Bar/Bar_meuble" instance=ExtResource("3_nj6q3")]
+[node name="bar_straight_A2" parent="Bar/Bar_meuble" instance=ExtResource("15_f26y1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.927, 0, 0)
 
-[node name="bar_straight_A" parent="Tavern/Bar/Bar_meuble/bar_straight_A2" index="0"]
+[node name="bar_straight_A" parent="Bar/Bar_meuble/bar_straight_A2" index="0"]
 material_override = SubResource("StandardMaterial3D_v23vf")
 
-[node name="bar_straight_A2" type="MeshInstance3D" parent="Tavern/Bar/Bar_meuble/bar_straight_A2"]
+[node name="bar_straight_A2" type="MeshInstance3D" parent="Bar/Bar_meuble/bar_straight_A2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.91388, 0, 0)
 material_override = SubResource("StandardMaterial3D_nj4jg")
 mesh = SubResource("ArrayMesh_n26hj")
 skeleton = NodePath("")
 
-[node name="bar_straight_A3" parent="Tavern/Bar/Bar_meuble" instance=ExtResource("3_nj6q3")]
+[node name="bar_straight_A3" parent="Bar/Bar_meuble" instance=ExtResource("15_f26y1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0047, 0, 0)
 
-[node name="bar_straight_A" parent="Tavern/Bar/Bar_meuble/bar_straight_A3" index="0"]
+[node name="bar_straight_A" parent="Bar/Bar_meuble/bar_straight_A3" index="0"]
 material_override = SubResource("StandardMaterial3D_v23vf")
 
-[node name="bar_straight_A2" type="MeshInstance3D" parent="Tavern/Bar/Bar_meuble/bar_straight_A3"]
+[node name="bar_straight_A2" type="MeshInstance3D" parent="Bar/Bar_meuble/bar_straight_A3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.91388, 0, 0)
 material_override = SubResource("StandardMaterial3D_v23vf")
 mesh = SubResource("ArrayMesh_n26hj")
 skeleton = NodePath("")
 
-[node name="bar_straight_A4" parent="Tavern/Bar/Bar_meuble" instance=ExtResource("3_nj6q3")]
+[node name="bar_straight_A4" parent="Bar/Bar_meuble" instance=ExtResource("15_f26y1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.07624, 2.99779, -3.19394)
 
-[node name="bar_straight_A" parent="Tavern/Bar/Bar_meuble/bar_straight_A4" index="0"]
+[node name="bar_straight_A" parent="Bar/Bar_meuble/bar_straight_A4" index="0"]
 material_override = SubResource("StandardMaterial3D_v23vf")
 mesh = SubResource("ArrayMesh_n26hj")
 
-[node name="bar_straight_A2" type="MeshInstance3D" parent="Tavern/Bar/Bar_meuble/bar_straight_A4"]
+[node name="bar_straight_A2" type="MeshInstance3D" parent="Bar/Bar_meuble/bar_straight_A4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.96716, 0, 0)
 material_override = SubResource("StandardMaterial3D_v23vf")
 mesh = SubResource("ArrayMesh_n26hj")
 skeleton = NodePath("")
 
-[node name="bar_straight_A5" parent="Tavern/Bar/Bar_meuble" instance=ExtResource("3_nj6q3")]
+[node name="bar_straight_A5" parent="Bar/Bar_meuble" instance=ExtResource("15_f26y1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.07624, 2.99779, -3.19394)
 
-[node name="bar_straight_A" parent="Tavern/Bar/Bar_meuble/bar_straight_A5" index="0"]
+[node name="bar_straight_A" parent="Bar/Bar_meuble/bar_straight_A5" index="0"]
 material_override = SubResource("StandardMaterial3D_v23vf")
 mesh = SubResource("ArrayMesh_n26hj")
 
-[node name="bar_straight_A2" type="MeshInstance3D" parent="Tavern/Bar/Bar_meuble/bar_straight_A5"]
+[node name="bar_straight_A2" type="MeshInstance3D" parent="Bar/Bar_meuble/bar_straight_A5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.96716, 0, 0)
 material_override = SubResource("StandardMaterial3D_v23vf")
 mesh = SubResource("ArrayMesh_n26hj")
 skeleton = NodePath("")
 
-[node name="bar_straight_B2" parent="Tavern/Bar/Bar_meuble" instance=ExtResource("4_h0lpo")]
+[node name="bar_straight_B2" parent="Bar/Bar_meuble" instance=ExtResource("16_4ekk0")]
 transform = Transform3D(1, 0.00040144, -0.000412556, -0.000401431, 1, 1.93712e-05, 0.000412565, -1.91926e-05, 1, -9.982, 0, 0)
 
-[node name="bar_straight_B" parent="Tavern/Bar/Bar_meuble/bar_straight_B2" index="0"]
+[node name="bar_straight_B" parent="Bar/Bar_meuble/bar_straight_B2" index="0"]
 transform = Transform3D(1, -1.95666e-12, 0, 1.38217e-10, 1, 9.09495e-12, 1.45519e-10, -9.09495e-12, 1, 1.911, 0.000828334, -3.18404)
 material_override = SubResource("StandardMaterial3D_7jmd0")
 
-[node name="plate_food_B2" parent="Tavern/Bar/Bar_meuble" instance=ExtResource("15_4rhdl")]
+[node name="plate_food_B2" parent="Bar/Bar_meuble" instance=ExtResource("17_8v5nm")]
 transform = Transform3D(1, -2.51134e-09, 2.56114e-09, 2.53203e-09, 1, 2.91038e-10, -2.56114e-09, 4.65661e-10, 1, -3.53884, 0.990934, -1.52697)
 
-[node name="plate_food_B" parent="Tavern/Bar/Bar_meuble/plate_food_B2" index="0"]
+[node name="plate_food_B" parent="Bar/Bar_meuble/plate_food_B2" index="0"]
 material_override = SubResource("StandardMaterial3D_0gfem")
 
-[node name="bar_straight_C2" parent="Tavern/Bar/Bar_meuble" instance=ExtResource("5_x1tcb")]
+[node name="bar_straight_C2" parent="Bar/Bar_meuble" instance=ExtResource("18_f18gl")]
 transform = Transform3D(0.999991, -0.00291801, 0.00292305, 0.00292033, 0.999995, -0.000791601, -0.00292074, 0.000800107, 0.999995, -8.01395, 0, 0)
 
-[node name="bar_straight_C" parent="Tavern/Bar/Bar_meuble/bar_straight_C2" index="0"]
+[node name="bar_straight_C" parent="Bar/Bar_meuble/bar_straight_C2" index="0"]
 transform = Transform3D(1, 2.63753e-11, 0, -4.91127e-11, 1, 0, -1.16415e-09, 0, 1, 1.94132, -0.00818116, -3.17309)
 material_override = SubResource("StandardMaterial3D_v2irf")
 
-[node name="plate_food_A2" parent="Tavern/Bar/Bar_meuble" instance=ExtResource("17_6sqvy")]
+[node name="plate_food_A2" parent="Bar/Bar_meuble" instance=ExtResource("19_l6156")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.0051, 0.997262, 0.111807)
 
-[node name="plate_food_A" parent="Tavern/Bar/Bar_meuble/plate_food_A2" index="0"]
+[node name="plate_food_A" parent="Bar/Bar_meuble/plate_food_A2" index="0"]
 material_override = SubResource("StandardMaterial3D_njub2")
 
-[node name="plate_stack2" parent="Tavern/Bar/Bar_meuble" instance=ExtResource("18_8fk3c")]
+[node name="plate_stack2" parent="Bar/Bar_meuble" instance=ExtResource("20_mfp2l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.21417, 1.02391, -2.97546)
 
-[node name="plate_stack" parent="Tavern/Bar/Bar_meuble/plate_stack2" index="0"]
+[node name="plate_stack" parent="Bar/Bar_meuble/plate_stack2" index="0"]
 material_override = SubResource("StandardMaterial3D_rix3e")
 
-[node name="bartop_A_medium2" parent="Tavern/Bar/Bar_meuble" instance=ExtResource("8_wtve5")]
+[node name="bartop_A_medium2" parent="Bar/Bar_meuble" instance=ExtResource("21_beht1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.37347, 0, -2.83017)
 
-[node name="bartop_A_medium" parent="Tavern/Bar/Bar_meuble/bartop_A_medium2" index="0"]
+[node name="bartop_A_medium" parent="Bar/Bar_meuble/bartop_A_medium2" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.304406, 0.957171, -0.366617)
 material_override = SubResource("StandardMaterial3D_qgwrv")
 
-[node name="bartop_A_medium2" type="MeshInstance3D" parent="Tavern/Bar/Bar_meuble/bartop_A_medium2"]
+[node name="bartop_A_medium2" type="MeshInstance3D" parent="Bar/Bar_meuble/bartop_A_medium2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.21385, 0.957171, -0.366617)
 material_override = SubResource("StandardMaterial3D_qgwrv")
 mesh = SubResource("ArrayMesh_1gi0a")
 skeleton = NodePath("")
 
-[node name="stool_round3" parent="Tavern/Bar" instance=ExtResource("22_eslmq")]
+[node name="stool_round3" parent="Bar" instance=ExtResource("22_cq0qq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.0291, 0, 3.31597)
 
-[node name="stool_round" parent="Tavern/Bar/stool_round3" index="0"]
+[node name="stool_round" parent="Bar/stool_round3" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.459, 0, -2.05894)
 material_override = SubResource("StandardMaterial3D_dbxgc")
 
-[node name="stool_round2" type="MeshInstance3D" parent="Tavern/Bar/stool_round3"]
+[node name="stool_round2" type="MeshInstance3D" parent="Bar/stool_round3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.73653, 0, -2.07619)
 material_override = SubResource("StandardMaterial3D_dbxgc")
 mesh = SubResource("ArrayMesh_46qsm")
 skeleton = NodePath("")
 
-[node name="stool_round4" type="MeshInstance3D" parent="Tavern/Bar/stool_round3"]
+[node name="stool_round4" type="MeshInstance3D" parent="Bar/stool_round3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.52882, 0, -1.8359)
 material_override = SubResource("StandardMaterial3D_dbxgc")
 mesh = SubResource("ArrayMesh_46qsm")
 skeleton = NodePath("")
 
-[node name="stool_round5" type="MeshInstance3D" parent="Tavern/Bar/stool_round3"]
+[node name="stool_round5" type="MeshInstance3D" parent="Bar/stool_round3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.29459, 0, -1.84998)
 material_override = SubResource("StandardMaterial3D_dbxgc")
 mesh = SubResource("ArrayMesh_46qsm")
 skeleton = NodePath("")
 
-[node name="stool_round3" type="MeshInstance3D" parent="Tavern/Bar/stool_round3"]
+[node name="stool_round3" type="MeshInstance3D" parent="Bar/stool_round3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.97802, 0, -1.91308)
 material_override = SubResource("StandardMaterial3D_dbxgc")
 mesh = SubResource("ArrayMesh_46qsm")
 skeleton = NodePath("")
 
-[node name="Decco" type="Node3D" parent="Tavern"]
+[node name="Decco" type="Node3D" parent="."]
 
-[node name="Banner" type="Node3D" parent="Tavern/Decco"]
+[node name="Banner" type="Node3D" parent="Decco"]
 
-[node name="banner_patternC_white2" parent="Tavern/Decco/Banner" instance=ExtResource("68_3y306")]
+[node name="banner_patternC_white2" parent="Decco/Banner" instance=ExtResource("23_3ybkh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.59985, 0, -20.7835)
 
-[node name="banner_patternC_white" parent="Tavern/Decco/Banner/banner_patternC_white2" index="0"]
+[node name="banner_patternC_white" parent="Decco/Banner/banner_patternC_white2" index="0"]
 material_override = SubResource("StandardMaterial3D_vto0k")
 
-[node name="banner_patternC_blue2" parent="Tavern/Decco/Banner" instance=ExtResource("24_b6w4i")]
+[node name="banner_patternC_blue2" parent="Decco/Banner" instance=ExtResource("25_tw8g4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.29765, 0, -11.7138)
 
-[node name="banner_patternC_blue" parent="Tavern/Decco/Banner/banner_patternC_blue2" index="0"]
+[node name="banner_patternC_blue" parent="Decco/Banner/banner_patternC_blue2" index="0"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -14.52, -0.386934, 8.86661)
 material_override = SubResource("StandardMaterial3D_rfm8m")
 
-[node name="banner_shield_brown2" parent="Tavern/Decco/Banner" instance=ExtResource("26_kp2p5")]
+[node name="banner_shield_brown2" parent="Decco/Banner" instance=ExtResource("26_6m83d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5974, 0, -9.84976)
 
-[node name="banner_shield_brown" parent="Tavern/Decco/Banner/banner_shield_brown2" index="0"]
+[node name="banner_shield_brown" parent="Decco/Banner/banner_shield_brown2" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3227, 0, -10.6631)
 material_override = SubResource("StandardMaterial3D_3b8nb")
 
-[node name="banner_shield_brown2" type="MeshInstance3D" parent="Tavern/Decco/Banner/banner_shield_brown2"]
+[node name="banner_shield_brown2" type="MeshInstance3D" parent="Decco/Banner/banner_shield_brown2"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 22.4352, 0, 0.874877)
 material_override = SubResource("StandardMaterial3D_3b8nb")
 mesh = SubResource("ArrayMesh_orb2b")
 skeleton = NodePath("")
 
-[node name="banner_thin_blue2" parent="Tavern/Decco/Banner" instance=ExtResource("27_x8njs")]
+[node name="banner_thin_blue2" parent="Decco/Banner" instance=ExtResource("27_t6xnr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.41644, 0, -10.1995)
 
-[node name="banner_thin_blue" parent="Tavern/Decco/Banner/banner_thin_blue2" index="0"]
+[node name="banner_thin_blue" parent="Decco/Banner/banner_thin_blue2" index="0"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.24886, 0.185631, 18.5326)
 material_override = SubResource("StandardMaterial3D_gpfju")
 
-[node name="banner_thin_blue2" type="MeshInstance3D" parent="Tavern/Decco/Banner/banner_thin_blue2"]
+[node name="banner_thin_blue2" type="MeshInstance3D" parent="Decco/Banner/banner_thin_blue2"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 18.2132, -0.544035, -1.25384)
 material_override = SubResource("StandardMaterial3D_gpfju")
 mesh = SubResource("ArrayMesh_cvlhn")
 skeleton = NodePath("")
 
-[node name="banner_triple_yellow2" parent="Tavern/Decco/Banner" instance=ExtResource("28_ismef")]
+[node name="banner_triple_yellow2" parent="Decco/Banner" instance=ExtResource("28_jmy5w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.58685, 0, -2.83556)
 
-[node name="banner_triple_yellow" parent="Tavern/Decco/Banner/banner_triple_yellow2" index="0"]
+[node name="banner_triple_yellow" parent="Decco/Banner/banner_triple_yellow2" index="0"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 14.3448, 0, 1.96536)
 material_override = SubResource("StandardMaterial3D_7wnxm")
 
-[node name="Barrel" type="Node3D" parent="Tavern/Decco"]
+[node name="Barrel" type="Node3D" parent="Decco"]
 
-[node name="barrel_large_decorated2" parent="Tavern/Decco/Barrel" instance=ExtResource("11_1jhy3")]
+[node name="barrel_large_decorated2" parent="Decco/Barrel" instance=ExtResource("29_818j4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.09237, 0, -1.32795)
 
-[node name="barrel_large_decorated" parent="Tavern/Decco/Barrel/barrel_large_decorated2" index="0"]
+[node name="barrel_large_decorated" parent="Decco/Barrel/barrel_large_decorated2" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5452, 0, -17.8425)
 material_override = SubResource("StandardMaterial3D_3bkyr")
 
-[node name="Candle" type="Node3D" parent="Tavern/Decco"]
+[node name="Candle" type="Node3D" parent="Decco"]
 
-[node name="candle2" parent="Tavern/Decco/Candle" instance=ExtResource("50_bdmuv")]
+[node name="candle2" parent="Decco/Candle" instance=ExtResource("30_j02mn")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.82669, 0, -5.32955)
 
-[node name="candle" parent="Tavern/Decco/Candle/candle2" index="0"]
+[node name="candle" parent="Decco/Candle/candle2" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.32874, 2.02921, -3.13592)
 material_override = SubResource("StandardMaterial3D_d3e3c")
 
-[node name="ChestMimic" parent="Tavern/Decco" instance=ExtResource("72_eq1su")]
+[node name="ChestMimic" parent="Decco" instance=ExtResource("31_tsfal")]
 transform = Transform3D(0.530214, -0.000808874, -0.847863, 0.000133426, 1, -0.000870578, 0.847863, 0.000348473, 0.530214, 4.70404, 1.00192, -5.32994)
 
-[node name="PNJ" type="Node3D" parent="Tavern"]
+[node name="PNJ" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.360003, 0, -15.755)
 
-[node name="Knight3" parent="Tavern/PNJ" instance=ExtResource("33_g3u1c")]
+[node name="Knight3" parent="PNJ" instance=ExtResource("32_n3j8t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.44375, -4.76837e-07, 19.5985)
 
-[node name="Rogue3" parent="Tavern/PNJ" instance=ExtResource("34_j0s5c")]
+[node name="Rogue3" parent="PNJ" instance=ExtResource("33_3ytuy")]
 transform = Transform3D(-0.987375, 0, 0.158399, 0, 1, 0, -0.158399, 0, -0.987375, 6.68231, 4.76837e-07, 22.4128)
 
-[node name="Rogue4" parent="Tavern/PNJ" instance=ExtResource("34_j0s5c")]
+[node name="Rogue4" parent="PNJ" instance=ExtResource("33_3ytuy")]
 transform = Transform3D(-0.511623, 0, -0.85921, 0, 1, 0, 0.85921, 0, -0.511623, -14.5461, 0, 24.352)
 
-[node name="Knight" parent="Tavern/PNJ" instance=ExtResource("33_g3u1c")]
+[node name="Knight" parent="PNJ" instance=ExtResource("32_n3j8t")]
 transform = Transform3D(0.868147, 0, 0.496307, 0, 1, 0, -0.496307, 0, 0.868147, -17.191, 0, 0.925239)
 
-[node name="Rogue" parent="Tavern/PNJ" instance=ExtResource("34_j0s5c")]
+[node name="Rogue" parent="PNJ" instance=ExtResource("33_3ytuy")]
 transform = Transform3D(0.983369, 0, -0.181618, 0, 1, 0, 0.181618, 0, 0.983369, -5.51097, 0, -1.98013)
 
-[node name="Rogue2" parent="Tavern/PNJ" instance=ExtResource("34_j0s5c")]
+[node name="Rogue2" parent="PNJ" instance=ExtResource("33_3ytuy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.87923, 0, -1.60982)
 
-[node name="Knight2" parent="Tavern/PNJ" instance=ExtResource("33_g3u1c")]
+[node name="Knight2" parent="PNJ" instance=ExtResource("32_n3j8t")]
 transform = Transform3D(0.810349, 0, -0.585948, 0, 1, 0, 0.585948, 0, 0.810349, 5.59581, 0, -0.640927)
 
-[node name="Ground" type="Node3D" parent="Tavern"]
+[node name="Ground" type="Node3D" parent="."]
 
-[node name="floor_tile_extralarge_grates_open2" parent="Tavern/Ground" instance=ExtResource("13_85sgb")]
+[node name="floor_tile_extralarge_grates_open2" parent="Ground" instance=ExtResource("34_n1tou")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.1, -2.072)
 
-[node name="floor_tile_extralarge_grates_open" parent="Tavern/Ground/floor_tile_extralarge_grates_open2" index="0"]
+[node name="floor_tile_extralarge_grates_open" parent="Ground/floor_tile_extralarge_grates_open2" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.07825, 0, -3.87396)
 material_override = SubResource("StandardMaterial3D_47si7")
 
-[node name="wood_big_tales" parent="Tavern/Ground" instance=ExtResource("14_g7e54")]
+[node name="wood_big_tales" parent="Ground" instance=ExtResource("35_hjxl0")]
 transform = Transform3D(1, 0.000482964, -0.000373981, -0.000482962, 1, 6.41039e-06, 0.000373984, -6.22977e-06, 1, 0, 0, 0)
 
-[node name="floor_wood_large_dark_001" parent="Tavern/Ground/wood_big_tales" index="0"]
+[node name="floor_wood_large_dark_001" parent="Ground/wood_big_tales" index="0"]
 material_override = SubResource("StandardMaterial3D_y57ng")
 
-[node name="Structure" type="Node3D" parent="Tavern"]
+[node name="Structure" type="Node3D" parent="."]
 
-[node name="scaffold_pillar_wall2" parent="Tavern/Structure" instance=ExtResource("26_m5ywv")]
+[node name="scaffold_pillar_wall2" parent="Structure" instance=ExtResource("37_56enl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.929011, 0, -9.12149)
 
-[node name="scaffold_pillar_wall" parent="Tavern/Structure/scaffold_pillar_wall2" index="0"]
+[node name="scaffold_pillar_wall" parent="Structure/scaffold_pillar_wall2" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.463781, 0, -7.40554)
 material_override = SubResource("StandardMaterial3D_2dlex")
 
-[node name="banner_red2" parent="Tavern/Structure/scaffold_pillar_wall2/scaffold_pillar_wall" index="0" instance=ExtResource("25_v5xk0")]
+[node name="banner_red2" parent="Structure/scaffold_pillar_wall2/scaffold_pillar_wall" index="0" instance=ExtResource("38_wa21u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.0964, 0, 0.470649)
 
-[node name="banner_red" parent="Tavern/Structure/scaffold_pillar_wall2/scaffold_pillar_wall/banner_red2" index="0"]
+[node name="banner_red" parent="Structure/scaffold_pillar_wall2/scaffold_pillar_wall/banner_red2" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.0691, 0, 0)
 material_override = SubResource("StandardMaterial3D_a1dm7")
 
-[node name="Wall" type="Node3D" parent="Tavern/Structure"]
+[node name="Wall" type="Node3D" parent="Structure"]
 
-[node name="wall2" parent="Tavern/Structure/Wall" instance=ExtResource("27_sem2k")]
+[node name="wall2" parent="Structure/Wall" instance=ExtResource("39_f13nc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.3462, 0, -0.9245)
 
-[node name="wall" parent="Tavern/Structure/Wall/wall2" index="0"]
+[node name="wall" parent="Structure/Wall/wall2" index="0"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.42197, 0, 3.87561)
 material_override = SubResource("StandardMaterial3D_j7xky")
 
-[node name="wall5" type="MeshInstance3D" parent="Tavern/Structure/Wall/wall2"]
+[node name="wall5" type="MeshInstance3D" parent="Structure/Wall/wall2"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.42197, 0, -15.896)
 material_override = SubResource("StandardMaterial3D_j7xky")
 mesh = SubResource("ArrayMesh_fj0ve")
 skeleton = NodePath("")
 
-[node name="wall3" parent="Tavern/Structure/Wall" instance=ExtResource("27_sem2k")]
+[node name="wall3" parent="Structure/Wall" instance=ExtResource("39_f13nc")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -17.7904, 0, -14.3557)
 
-[node name="wall" parent="Tavern/Structure/Wall/wall3" index="0"]
+[node name="wall" parent="Structure/Wall/wall3" index="0"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.42197, 0, -2.63473e-07)
 material_override = SubResource("StandardMaterial3D_j7xky")
 
-[node name="wall3" type="MeshInstance3D" parent="Tavern/Structure/Wall/wall3"]
+[node name="wall3" type="MeshInstance3D" parent="Structure/Wall/wall3"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.42197, 0, -7.93168)
 material_override = SubResource("StandardMaterial3D_j7xky")
 mesh = SubResource("ArrayMesh_fj0ve")
 skeleton = NodePath("")
 
-[node name="wall4" type="MeshInstance3D" parent="Tavern/Structure/Wall/wall3"]
+[node name="wall4" type="MeshInstance3D" parent="Structure/Wall/wall3"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.42197, 0, -11.9042)
 material_override = SubResource("StandardMaterial3D_j7xky")
 mesh = SubResource("ArrayMesh_fj0ve")
 skeleton = NodePath("")
 
-[node name="wall6" type="MeshInstance3D" parent="Tavern/Structure/Wall/wall3"]
+[node name="wall6" type="MeshInstance3D" parent="Structure/Wall/wall3"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.42197, 0, -15.8672)
 material_override = SubResource("StandardMaterial3D_j7xky")
 mesh = SubResource("ArrayMesh_fj0ve")
 skeleton = NodePath("")
 
-[node name="wall7" type="MeshInstance3D" parent="Tavern/Structure/Wall/wall3"]
+[node name="wall7" type="MeshInstance3D" parent="Structure/Wall/wall3"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.42197, 0, -23.8121)
 material_override = SubResource("StandardMaterial3D_j7xky")
 mesh = SubResource("ArrayMesh_fj0ve")
 skeleton = NodePath("")
 
-[node name="SouthWall" parent="Tavern/Structure/Wall" instance=ExtResource("27_sem2k")]
+[node name="SouthWall" parent="Structure/Wall" instance=ExtResource("39_f13nc")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -17.7904, 0, 15.9377)
 visible = false
 
-[node name="wall" parent="Tavern/Structure/Wall/SouthWall" index="0"]
+[node name="wall" parent="Structure/Wall/SouthWall" index="0"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.42197, 0, -2.63473e-07)
 material_override = SubResource("StandardMaterial3D_j7xky")
 
-[node name="wall2" type="MeshInstance3D" parent="Tavern/Structure/Wall/SouthWall"]
+[node name="wall2" type="MeshInstance3D" parent="Structure/Wall/SouthWall"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.42197, 0, -3.96315)
 material_override = SubResource("StandardMaterial3D_j7xky")
 mesh = SubResource("ArrayMesh_fj0ve")
 skeleton = NodePath("")
 
-[node name="wall3" type="MeshInstance3D" parent="Tavern/Structure/Wall/SouthWall"]
+[node name="wall3" type="MeshInstance3D" parent="Structure/Wall/SouthWall"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.42197, 0, -7.93168)
 material_override = SubResource("StandardMaterial3D_j7xky")
 mesh = SubResource("ArrayMesh_fj0ve")
 skeleton = NodePath("")
 
-[node name="wall4" type="MeshInstance3D" parent="Tavern/Structure/Wall/SouthWall"]
+[node name="wall4" type="MeshInstance3D" parent="Structure/Wall/SouthWall"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.42197, 0, -11.9042)
 material_override = SubResource("StandardMaterial3D_j7xky")
 mesh = SubResource("ArrayMesh_fj0ve")
 skeleton = NodePath("")
 
-[node name="wall5" type="MeshInstance3D" parent="Tavern/Structure/Wall/SouthWall"]
+[node name="wall5" type="MeshInstance3D" parent="Structure/Wall/SouthWall"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.42197, 0, -15.896)
 material_override = SubResource("StandardMaterial3D_j7xky")
 mesh = SubResource("ArrayMesh_fj0ve")
 skeleton = NodePath("")
 
-[node name="wall6" type="MeshInstance3D" parent="Tavern/Structure/Wall/SouthWall"]
+[node name="wall6" type="MeshInstance3D" parent="Structure/Wall/SouthWall"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.42197, 0, -19.8613)
 material_override = SubResource("StandardMaterial3D_j7xky")
 mesh = SubResource("ArrayMesh_fj0ve")
 skeleton = NodePath("")
 
-[node name="wall7" type="MeshInstance3D" parent="Tavern/Structure/Wall/SouthWall"]
+[node name="wall7" type="MeshInstance3D" parent="Structure/Wall/SouthWall"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.42197, 0, -23.8121)
 material_override = SubResource("StandardMaterial3D_j7xky")
 mesh = SubResource("ArrayMesh_fj0ve")
 skeleton = NodePath("")
 
-[node name="wall4" parent="Tavern/Structure/Wall" instance=ExtResource("27_sem2k")]
+[node name="wall4" parent="Structure/Wall" instance=ExtResource("39_f13nc")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 3.42245, 0, -16.7954)
 
-[node name="wall" parent="Tavern/Structure/Wall/wall4" index="0"]
+[node name="wall" parent="Structure/Wall/wall4" index="0"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.42466, 0, -7.94261)
 material_override = SubResource("StandardMaterial3D_j7xky")
 
-[node name="wall6" type="MeshInstance3D" parent="Tavern/Structure/Wall/wall4"]
+[node name="wall6" type="MeshInstance3D" parent="Structure/Wall/wall4"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.42197, 0, -19.8613)
 material_override = SubResource("StandardMaterial3D_j7xky")
 mesh = SubResource("ArrayMesh_fj0ve")
 skeleton = NodePath("")
 
-[node name="wall_corner2" parent="Tavern/Structure/Wall" instance=ExtResource("29_1qv4b")]
+[node name="wall_corner2" parent="Structure/Wall" instance=ExtResource("40_l1jls")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.07044, 0, 3.24009)
 
-[node name="wall_corner" parent="Tavern/Structure/Wall/wall_corner2" index="0"]
+[node name="wall_corner" parent="Structure/Wall/wall_corner2" index="0"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 18.911, 0, 6.28908)
 material_override = SubResource("StandardMaterial3D_wyaxa")
 
-[node name="wall_corner2" type="MeshInstance3D" parent="Tavern/Structure/Wall/wall_corner2"]
+[node name="wall_corner2" type="MeshInstance3D" parent="Structure/Wall/wall_corner2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.9131, 0, -24.0072)
 material_override = SubResource("StandardMaterial3D_wyaxa")
 mesh = SubResource("ArrayMesh_7qemw")
 skeleton = NodePath("")
 
-[node name="wall_corner3" type="MeshInstance3D" parent="Tavern/Structure/Wall/wall_corner2"]
+[node name="wall_corner3" type="MeshInstance3D" parent="Structure/Wall/wall_corner2"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12.6836, 0, 6.27272)
 material_override = SubResource("StandardMaterial3D_wyaxa")
 mesh = SubResource("ArrayMesh_7qemw")
 skeleton = NodePath("")
 
-[node name="wall_corner4" type="MeshInstance3D" parent="Tavern/Structure/Wall/wall_corner2"]
+[node name="wall_corner4" type="MeshInstance3D" parent="Structure/Wall/wall_corner2"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12.6969, 0, -24.0129)
 material_override = SubResource("StandardMaterial3D_wyaxa")
 mesh = SubResource("ArrayMesh_7qemw")
 skeleton = NodePath("")
 
-[node name="wall_cracked2" parent="Tavern/Structure/Wall" instance=ExtResource("30_v5b88")]
+[node name="wall_cracked2" parent="Structure/Wall" instance=ExtResource("41_45hhq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.31328, 0, 4.9562)
 
-[node name="wall_cracked" parent="Tavern/Structure/Wall/wall_cracked2" index="0"]
+[node name="wall_cracked" parent="Structure/Wall/wall_cracked2" index="0"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 13.159, 0, -5.87514)
 material_override = SubResource("StandardMaterial3D_bpvu4")
 
-[node name="wall_doorway2" parent="Tavern/Structure/Wall" instance=ExtResource("31_nc520")]
+[node name="wall_doorway2" parent="Structure/Wall" instance=ExtResource("42_35apy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.56, 0, 5.299)
 
-[node name="wall_doorway" parent="Tavern/Structure/Wall/wall_doorway2" index="0"]
+[node name="wall_doorway" parent="Structure/Wall/wall_doorway2" index="0"]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -4.20714, 0, -10.2399)
 material_override = SubResource("StandardMaterial3D_lkkx2")
 
-[node name="wall_doorway_door" parent="Tavern/Structure/Wall/wall_doorway2/wall_doorway" index="0"]
+[node name="wall_doorway_door" parent="Structure/Wall/wall_doorway2/wall_doorway" index="0"]
 transform = Transform3D(0.615194, 0, -0.788376, 0, 1, 0, 0.788376, 0, 0.615194, -0.820099, 0, 0)
 material_override = SubResource("StandardMaterial3D_nwx2h")
 
-[node name="wall_doorway_sides2" parent="Tavern/Structure/Wall" instance=ExtResource("32_padtx")]
+[node name="wall_doorway_sides2" parent="Structure/Wall" instance=ExtResource("43_go0s1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.84845, -0.47692, -0.509035)
 
-[node name="wall_doorway_sides" parent="Tavern/Structure/Wall/wall_doorway_sides2" index="0"]
+[node name="wall_doorway_sides" parent="Structure/Wall/wall_doorway_sides2" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.9174, 0.480725, 4.73852)
 material_override = SubResource("StandardMaterial3D_if2ka")
 
-[node name="wall_inset_shelves_decoratedA2" parent="Tavern/Structure/Wall" instance=ExtResource("33_g8k4j")]
+[node name="wall_inset_shelves_decoratedA2" parent="Structure/Wall" instance=ExtResource("44_pmjdc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.72906, 0, -4.35104)
 
-[node name="wall_inset_shelves_decoratedA" parent="Tavern/Structure/Wall/wall_inset_shelves_decoratedA2" index="0"]
+[node name="wall_inset_shelves_decoratedA" parent="Structure/Wall/wall_inset_shelves_decoratedA2" index="0"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12.0427, 0, -4.51491)
 material_override = SubResource("StandardMaterial3D_of8y6")
 
-[node name="wall_inset_shelves_decoratedA3" parent="Tavern/Structure/Wall" instance=ExtResource("33_g8k4j")]
+[node name="wall_inset_shelves_decoratedA3" parent="Structure/Wall" instance=ExtResource("44_pmjdc")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2.39845, 0, -4.35104)
 
-[node name="wall_inset_shelves_decoratedA" parent="Tavern/Structure/Wall/wall_inset_shelves_decoratedA3" index="0"]
+[node name="wall_inset_shelves_decoratedA" parent="Structure/Wall/wall_inset_shelves_decoratedA3" index="0"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12.2429, 0, 8.45628)
 material_override = SubResource("StandardMaterial3D_of8y6")
 
-[node name="wall_inset_shelves_decoratedB2" parent="Tavern/Structure/Wall" instance=ExtResource("36_nq1kl")]
+[node name="wall_inset_shelves_decoratedB2" parent="Structure/Wall" instance=ExtResource("45_gokas")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.4289, 0, -4.1181)
 
-[node name="wall_inset_shelves_decoratedB" parent="Tavern/Structure/Wall/wall_inset_shelves_decoratedB2" index="0"]
+[node name="wall_inset_shelves_decoratedB" parent="Structure/Wall/wall_inset_shelves_decoratedB2" index="0"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.34277, 0, -8.70926)
 material_override = SubResource("StandardMaterial3D_f7yjb")
 
-[node name="wall_pillar2" parent="Tavern/Structure/Wall" instance=ExtResource("37_jrgb8")]
+[node name="wall_pillar2" parent="Structure/Wall" instance=ExtResource("46_i340y")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.4985, 0, 1.31899)
 
-[node name="wall_pillar" parent="Tavern/Structure/Wall/wall_pillar2" index="0"]
+[node name="wall_pillar" parent="Structure/Wall/wall_pillar2" index="0"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.26924, 0, -2.26614)
 material_override = SubResource("StandardMaterial3D_v0t05")
 
-[node name="wall_pillar2" type="MeshInstance3D" parent="Tavern/Structure/Wall/wall_pillar2"]
+[node name="wall_pillar2" type="MeshInstance3D" parent="Structure/Wall/wall_pillar2"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 23.3409, 0, -18.0851)
 material_override = SubResource("StandardMaterial3D_v0t05")
 mesh = SubResource("ArrayMesh_yujk8")
 skeleton = NodePath("")
 
-[node name="wall_pillar3" type="MeshInstance3D" parent="Tavern/Structure/Wall/wall_pillar2"]
+[node name="wall_pillar3" type="MeshInstance3D" parent="Structure/Wall/wall_pillar2"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 23.3409, 0, 4.27035)
 material_override = SubResource("StandardMaterial3D_v0t05")
 mesh = SubResource("ArrayMesh_yujk8")
 skeleton = NodePath("")
 
-[node name="wall_window_closed2" parent="Tavern/Structure/Wall" instance=ExtResource("39_3pr1j")]
+[node name="wall_window_closed2" parent="Structure/Wall" instance=ExtResource("47_32n2m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.38707, 0, 7.07756)
 
-[node name="wall_window_closed" parent="Tavern/Structure/Wall/wall_window_closed2" index="0"]
+[node name="wall_window_closed" parent="Structure/Wall/wall_window_closed2" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.41813, 0, -27.8585)
 material_override = SubResource("StandardMaterial3D_3vlal")
 
-[node name="wall_window_closed3" parent="Tavern/Structure/Wall" instance=ExtResource("39_3pr1j")]
+[node name="wall_window_closed3" parent="Structure/Wall" instance=ExtResource("47_32n2m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.33483, 0, -15.2862)
 
-[node name="wall_window_closed" parent="Tavern/Structure/Wall/wall_window_closed3" index="0"]
+[node name="wall_window_closed" parent="Structure/Wall/wall_window_closed3" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.27601, 0, -5.49106)
 material_override = SubResource("StandardMaterial3D_3vlal")
 
-[node name="wall_window_open2" parent="Tavern/Structure/Wall" instance=ExtResource("40_05dxm")]
+[node name="wall_window_open2" parent="Structure/Wall" instance=ExtResource("48_veq06")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.143003, 0, 8.12012)
 
-[node name="wall_window_open" parent="Tavern/Structure/Wall/wall_window_open2" index="0"]
+[node name="wall_window_open" parent="Structure/Wall/wall_window_open2" index="0"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 9.70447, 0, -13.0164)
 material_override = SubResource("StandardMaterial3D_nfg8l")
 
-[node name="shelf_small_candles2" parent="Tavern/Structure/Wall/wall_window_open2/wall_window_open" index="0" instance=ExtResource("45_6vbhg")]
+[node name="shelf_small_candles2" parent="Structure/Wall/wall_window_open2/wall_window_open" index="0" instance=ExtResource("49_8eq2s")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.029848, 1.26092, 0.255003)
 
-[node name="shelf_small_candles" parent="Tavern/Structure/Wall/wall_window_open2/wall_window_open/shelf_small_candles2" index="0"]
+[node name="shelf_small_candles" parent="Structure/Wall/wall_window_open2/wall_window_open/shelf_small_candles2" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0328836)
 material_override = SubResource("StandardMaterial3D_oojxe")
 
-[node name="stairs_walled2" parent="Tavern/Structure/Wall" instance=ExtResource("42_4c33o")]
+[node name="stairs_walled2" parent="Structure/Wall" instance=ExtResource("50_5p3hd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.058, 0, 6.733)
 
-[node name="stairs_walled" parent="Tavern/Structure/Wall/stairs_walled2" index="0"]
+[node name="stairs_walled" parent="Structure/Wall/stairs_walled2" index="0"]
 transform = Transform3D(-0.999997, -0.000214697, 0.00245143, -0.000217544, 0.999999, -0.00116469, -0.00245118, -0.00116522, -0.999996, -2.72181, -1.36555e-05, 2.31474)
 material_override = SubResource("StandardMaterial3D_3godj")
 
-[node name="Talent_select" type="Node3D" parent="Tavern"]
+[node name="Talent_select" type="Node3D" parent="."]
 transform = Transform3D(0.948727, 0, -0.316096, 0, 1, 0, 0.316096, 0, 0.948727, -0.67666, 0, -9.87243)
 
-[node name="candle_triple2" parent="Tavern/Talent_select" instance=ExtResource("51_vvaej")]
+[node name="candle_triple2" parent="Talent_select" instance=ExtResource("51_8dyu7")]
 transform = Transform3D(0.758982, 0, 0.252877, 0, 0.8, 0, -0.252877, 0, 0.758982, 9.30191, 0, 7.65974)
 
-[node name="candle_triple" parent="Tavern/Talent_select/candle_triple2" index="0"]
+[node name="candle_triple" parent="Talent_select/candle_triple2" index="0"]
 transform = Transform3D(0.999521, 0, 0.0309398, 0, 1, 0, -0.0309398, 0, 0.999521, -3.58047, 1.22457, -20.1679)
 material_override = SubResource("StandardMaterial3D_hmu6u")
 
-[node name="bar_innercorner2" parent="Tavern/Talent_select" instance=ExtResource("42_mq8yl")]
+[node name="bar_innercorner2" parent="Talent_select" instance=ExtResource("52_sq4wl")]
 transform = Transform3D(-0.281655, 0, -0.959516, 0, 1, 0, 0.959516, 0, -0.281655, 4.3993, 0, -6.2816)
 
-[node name="bar_innercorner" parent="Tavern/Talent_select/bar_innercorner2" index="0"]
+[node name="bar_innercorner" parent="Talent_select/bar_innercorner2" index="0"]
 material_override = SubResource("StandardMaterial3D_24rfq")
 
-[node name="bar_innercorner3" parent="Tavern/Talent_select" instance=ExtResource("42_mq8yl")]
+[node name="bar_innercorner3" parent="Talent_select" instance=ExtResource("52_sq4wl")]
 transform = Transform3D(-0.959516, 0, 0.281655, 0, 1, 0, -0.281655, 0, -0.959516, 2.2103, 0, -6.92416)
 
-[node name="bar_innercorner" parent="Tavern/Talent_select/bar_innercorner3" index="0"]
+[node name="bar_innercorner" parent="Talent_select/bar_innercorner3" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.135004, 0, -0.497639)
 material_override = SubResource("StandardMaterial3D_24rfq")
 
-[node name="chest_large_gold2" parent="Tavern/Talent_select" instance=ExtResource("50_aavw0")]
+[node name="chest_large_gold2" parent="Talent_select" instance=ExtResource("54_l5g6f")]
 transform = Transform3D(0.948727, 0, 0.316096, 0, 1, 0, -0.316096, 0, 0.948727, 3.49867, 0, -10.1108)
 
-[node name="chest_large_gold" parent="Tavern/Talent_select/chest_large_gold2" index="0"]
+[node name="chest_large_gold" parent="Talent_select/chest_large_gold2" index="0"]
 material_override = SubResource("StandardMaterial3D_xw1si")
 
-[node name="chest_large_gold_lid" parent="Tavern/Talent_select/chest_large_gold2/chest_large_gold" index="0"]
+[node name="chest_large_gold_lid" parent="Talent_select/chest_large_gold2/chest_large_gold" index="0"]
 material_override = SubResource("StandardMaterial3D_wdnbl")
 
-[node name="VFX3DPortal" parent="Tavern/Talent_select" instance=ExtResource("60_wmmk7")]
+[node name="VFX3DPortal" parent="Talent_select" instance=ExtResource("55_gj236")]
 transform = Transform3D(0.809263, 0, 0.587446, 0, 1, 0, -0.587446, 0, 0.809263, -18.2099, 1.85235, -0.385267)
 
-[node name="Table" type="Node3D" parent="Tavern"]
+[node name="Table" type="Node3D" parent="."]
 
-[node name="Table_decco" type="Node3D" parent="Tavern/Table"]
+[node name="Table_decco" type="Node3D" parent="Table"]
 
-[node name="table_small_decorated_A2" parent="Tavern/Table/Table_decco" instance=ExtResource("58_31pce")]
+[node name="table_small_decorated_A2" parent="Table/Table_decco" instance=ExtResource("56_fc3kw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.8776, 4.76837e-07, -7.46225)
 
-[node name="table_small_decorated_A" parent="Tavern/Table/Table_decco/table_small_decorated_A2" index="0"]
+[node name="table_small_decorated_A" parent="Table/Table_decco/table_small_decorated_A2" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.87543, 0, 7.58934)
 material_override = SubResource("StandardMaterial3D_uun87")
 
-[node name="table_small_decorated_B2" parent="Tavern/Table/Table_decco" instance=ExtResource("57_1w6iw")]
+[node name="table_small_decorated_B2" parent="Table/Table_decco" instance=ExtResource("57_sdjn6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.2605, 0, 1.53967)
 
-[node name="table_small_decorated_B" parent="Tavern/Table/Table_decco/table_small_decorated_B2" index="0"]
+[node name="table_small_decorated_B" parent="Table/Table_decco/table_small_decorated_B2" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.378372, 0, -17.3181)
 material_override = SubResource("StandardMaterial3D_rhoxa")
 
-[node name="table_long_decorated_A2" parent="Tavern/Table/Table_decco" instance=ExtResource("51_jn42p")]
+[node name="table_long_decorated_A2" parent="Table/Table_decco" instance=ExtResource("58_kcxcn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.55178, 0, 2.84229)
 
-[node name="table_long_decorated_A" parent="Tavern/Table/Table_decco/table_long_decorated_A2" index="0"]
+[node name="table_long_decorated_A" parent="Table/Table_decco/table_long_decorated_A2" index="0"]
 transform = Transform3D(0.907719, 0, 0.419579, 0, 1, 0, -0.419579, 0, 0.907719, -9.42999, 0, -4.68942)
 material_override = SubResource("StandardMaterial3D_aln8c")
 
-[node name="table_long_decorated_B2" parent="Tavern/Table/Table_decco" instance=ExtResource("52_vlnsl")]
+[node name="table_long_decorated_B2" parent="Table/Table_decco" instance=ExtResource("59_egs85")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.97379, 0, 3.33923)
 
-[node name="table_long_decorated_B" parent="Tavern/Table/Table_decco/table_long_decorated_B2" index="0"]
+[node name="table_long_decorated_B" parent="Table/Table_decco/table_long_decorated_B2" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3975, 0, 3.32504)
 material_override = SubResource("StandardMaterial3D_xd8aq")
 
-[node name="table_long_decorated_C2" parent="Tavern/Table/Table_decco" instance=ExtResource("53_qigmu")]
+[node name="table_long_decorated_C2" parent="Table/Table_decco" instance=ExtResource("60_7qv04")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5545, 0, -1.17627)
 
-[node name="table_long_decorated_C" parent="Tavern/Table/Table_decco/table_long_decorated_C2" index="0"]
+[node name="table_long_decorated_C" parent="Table/Table_decco/table_long_decorated_C2" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.8678, 0, 6.79884)
 material_override = SubResource("StandardMaterial3D_att5w")
 
-[node name="table_long_tablecloth2" parent="Tavern/Table/Table_decco" instance=ExtResource("54_aql8s")]
+[node name="table_long_tablecloth2" parent="Table/Table_decco" instance=ExtResource("61_gthyu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.74242, 0, -2.22976)
 
-[node name="table_long_tablecloth" parent="Tavern/Table/Table_decco/table_long_tablecloth2" index="0"]
+[node name="table_long_tablecloth" parent="Table/Table_decco/table_long_tablecloth2" index="0"]
 transform = Transform3D(0.850802, 0, 0.525487, 0, 1, 0, -0.525487, 0, 0.850802, 1.84868, 0, -3.20051)
 material_override = SubResource("StandardMaterial3D_j6m6h")
 
-[node name="chair2" parent="Tavern/Table/Table_decco" instance=ExtResource("48_c3owh")]
+[node name="chair2" parent="Table/Table_decco" instance=ExtResource("62_6uskp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4624, 0, 3.07246)
 
-[node name="chair" parent="Tavern/Table/Table_decco/chair2" index="0"]
+[node name="chair" parent="Table/Table_decco/chair2" index="0"]
 transform = Transform3D(0.99242, 0, -0.122891, 0, 1, 0, 0.122891, 0, 0.99242, 20.9909, 0, 5.25771)
 material_override = SubResource("StandardMaterial3D_7clcc")
 
-[node name="chair2" type="MeshInstance3D" parent="Tavern/Table/Table_decco/chair2"]
+[node name="chair2" type="MeshInstance3D" parent="Table/Table_decco/chair2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4996, 0, 2.85278)
 material_override = SubResource("StandardMaterial3D_7clcc")
 mesh = SubResource("ArrayMesh_1soqd")
 skeleton = NodePath("")
 
-[node name="chair6" type="MeshInstance3D" parent="Tavern/Table/Table_decco/chair2"]
+[node name="chair6" type="MeshInstance3D" parent="Table/Table_decco/chair2"]
 transform = Transform3D(0.779119, 0, -0.626876, 0, 1, 0, 0.626876, 0, 0.779119, 5.00832, 0, 4.06384)
 material_override = SubResource("StandardMaterial3D_7clcc")
 mesh = SubResource("ArrayMesh_1soqd")
 skeleton = NodePath("")
 
-[node name="chair10" type="MeshInstance3D" parent="Tavern/Table/Table_decco/chair2"]
+[node name="chair10" type="MeshInstance3D" parent="Table/Table_decco/chair2"]
 transform = Transform3D(-0.678044, 0, -0.735021, 0, 1, 0, 0.735021, 0, -0.678044, 2.49391, 0, 4.60154)
 material_override = SubResource("StandardMaterial3D_7clcc")
 mesh = SubResource("ArrayMesh_1soqd")
 skeleton = NodePath("")
 
-[node name="chair7" type="MeshInstance3D" parent="Tavern/Table/Table_decco/chair2"]
+[node name="chair7" type="MeshInstance3D" parent="Table/Table_decco/chair2"]
 transform = Transform3D(-0.123307, 0, -0.992369, 0, 1, 0, 0.992369, 0, -0.123307, 9.73816, 0, 5.03288)
 material_override = SubResource("StandardMaterial3D_7clcc")
 mesh = SubResource("ArrayMesh_1soqd")
 skeleton = NodePath("")
 
-[node name="chair8" type="MeshInstance3D" parent="Tavern/Table/Table_decco/chair2"]
+[node name="chair8" type="MeshInstance3D" parent="Table/Table_decco/chair2"]
 transform = Transform3D(-0.123307, 0, -0.992369, 0, 1, 0, 0.992369, 0, -0.123307, 11.3692, 0, 5.23554)
 material_override = SubResource("StandardMaterial3D_7clcc")
 mesh = SubResource("ArrayMesh_1soqd")
 skeleton = NodePath("")
 
-[node name="chair9" type="MeshInstance3D" parent="Tavern/Table/Table_decco/chair2"]
+[node name="chair9" type="MeshInstance3D" parent="Table/Table_decco/chair2"]
 transform = Transform3D(0.454675, 0, 0.890658, 0, 1, 0, -0.890658, 0, 0.454675, 11.5919, 0, 1.7886)
 material_override = SubResource("StandardMaterial3D_7clcc")
 mesh = SubResource("ArrayMesh_1soqd")
 skeleton = NodePath("")
 
-[node name="chair3" type="MeshInstance3D" parent="Tavern/Table/Table_decco/chair2"]
+[node name="chair3" type="MeshInstance3D" parent="Table/Table_decco/chair2"]
 transform = Transform3D(0.885556, 0, 0.464533, 0, 1, 0, -0.464533, 0, 0.885556, 17.5623, 0, -10.0338)
 material_override = SubResource("StandardMaterial3D_7clcc")
 mesh = SubResource("ArrayMesh_1soqd")
 skeleton = NodePath("")
 
-[node name="chair4" type="MeshInstance3D" parent="Tavern/Table/Table_decco/chair2"]
+[node name="chair4" type="MeshInstance3D" parent="Table/Table_decco/chair2"]
 transform = Transform3D(0.885556, 0, 0.464533, 0, 1, 0, -0.464533, 0, 0.885556, 18.7167, 0, -8.44733)
 material_override = SubResource("StandardMaterial3D_7clcc")
 mesh = SubResource("ArrayMesh_1soqd")
 skeleton = NodePath("")
 
-[node name="chair5" type="MeshInstance3D" parent="Tavern/Table/Table_decco/chair2"]
+[node name="chair5" type="MeshInstance3D" parent="Table/Table_decco/chair2"]
 transform = Transform3D(-0.829242, 0, -0.558889, 0, 1, 0, 0.558889, 0, -0.829242, 15.8405, 0, -6.99597)
 material_override = SubResource("StandardMaterial3D_7clcc")
 mesh = SubResource("ArrayMesh_1soqd")
 skeleton = NodePath("")
 
-[node name="stool2" parent="Tavern/Table/Table_decco" instance=ExtResource("49_uu58n")]
+[node name="stool2" parent="Table/Table_decco" instance=ExtResource("63_t28go")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.8183, 0, 2.32619)
 
-[node name="stool" parent="Tavern/Table/Table_decco/stool2" index="0"]
+[node name="stool" parent="Table/Table_decco/stool2" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.84882, 0, 5.33894)
 material_override = SubResource("StandardMaterial3D_gtnky")
 
-[node name="stool2" type="MeshInstance3D" parent="Tavern/Table/Table_decco/stool2"]
+[node name="stool2" type="MeshInstance3D" parent="Table/Table_decco/stool2"]
 transform = Transform3D(0.926213, 0, 0.377, 0, 1, 0, -0.377, 0, 0.926213, -5.21535, 0, -1.81047)
 material_override = SubResource("StandardMaterial3D_gtnky")
 mesh = SubResource("ArrayMesh_tlbrc")
 skeleton = NodePath("")
 
-[node name="stool4" type="MeshInstance3D" parent="Tavern/Table/Table_decco/stool2"]
+[node name="stool4" type="MeshInstance3D" parent="Table/Table_decco/stool2"]
 transform = Transform3D(0.857796, 0, 0.51399, 0, 1, 0, -0.51399, 0, 0.857796, -8.50973, 0, -4.53802)
 material_override = SubResource("StandardMaterial3D_gtnky")
 mesh = SubResource("ArrayMesh_tlbrc")
 skeleton = NodePath("")
 
-[node name="stool3" type="MeshInstance3D" parent="Tavern/Table/Table_decco/stool2"]
+[node name="stool3" type="MeshInstance3D" parent="Table/Table_decco/stool2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.96817, 0, -2.41914)
 material_override = SubResource("StandardMaterial3D_gtnky")
 mesh = SubResource("ArrayMesh_tlbrc")
 skeleton = NodePath("")
 
-[node name="table_small_decorated_A3" parent="Tavern/Table/Table_decco" instance=ExtResource("58_31pce")]
+[node name="table_small_decorated_A3" parent="Table/Table_decco" instance=ExtResource("56_fc3kw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.62063, 0, 2.77814)
 
-[node name="table_small_decorated_A" parent="Tavern/Table/Table_decco/table_small_decorated_A3" index="0"]
+[node name="table_small_decorated_A" parent="Table/Table_decco/table_small_decorated_A3" index="0"]
 material_override = SubResource("StandardMaterial3D_tie56")
 
-[node name="table_long_tablecloth_decorated_A2" parent="Tavern/Table/Table_decco" instance=ExtResource("60_v4gv6")]
+[node name="table_long_tablecloth_decorated_A2" parent="Table/Table_decco" instance=ExtResource("64_6hjy6")]
 transform = Transform3D(0.0143636, 0, 0.999897, 0, 1, 0, -0.999897, 0, 0.0143636, -1.57793, 0, 6.37023)
 
-[node name="table_long_tablecloth_decorated_A" parent="Tavern/Table/Table_decco/table_long_tablecloth_decorated_A2" index="0"]
+[node name="table_long_tablecloth_decorated_A" parent="Table/Table_decco/table_long_tablecloth_decorated_A2" index="0"]
 material_override = SubResource("StandardMaterial3D_d2xlk")
 
-[node name="table_medium_decorated_A2" parent="Tavern/Table/Table_decco" instance=ExtResource("61_2k0mj")]
+[node name="table_medium_decorated_A2" parent="Table/Table_decco" instance=ExtResource("65_xhx61")]
 transform = Transform3D(0.805959, 0, -0.591971, 0, 1, 0, 0.591971, 0, 0.805959, -8.87182, 0, 6.15977)
 
-[node name="table_medium_decorated_A" parent="Tavern/Table/Table_decco/table_medium_decorated_A2" index="0"]
+[node name="table_medium_decorated_A" parent="Table/Table_decco/table_medium_decorated_A2" index="0"]
 material_override = SubResource("StandardMaterial3D_w8fn2")
 
-[node name="Dps_meter" type="Node3D" parent="Tavern"]
+[node name="Dps_meter" type="Node3D" parent="."]
 transform = Transform3D(0.959516, 0, 0.281655, 0, 1, 0, -0.281655, 0, 0.959516, 1.49779, 0, -9.20105)
 
-[node name="Portal" type="Node3D" parent="Tavern/Dps_meter"]
+[node name="Portal" type="Node3D" parent="Dps_meter"]
 
-[node name="bar_straight_A6" parent="Tavern/Dps_meter/Portal" instance=ExtResource("3_nj6q3")]
+[node name="bar_straight_A6" parent="Dps_meter/Portal" instance=ExtResource("15_f26y1")]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 8.88178e-16, 0, 1, -17.581, 1.04435, -12.509)
 
-[node name="bar_straight_A" parent="Tavern/Dps_meter/Portal/bar_straight_A6" index="0"]
+[node name="bar_straight_A" parent="Dps_meter/Portal/bar_straight_A6" index="0"]
 material_override = SubResource("StandardMaterial3D_v23vf")
 mesh = SubResource("ArrayMesh_n26hj")
 
-[node name="bar_straight_A2" type="MeshInstance3D" parent="Tavern/Dps_meter/Portal/bar_straight_A6"]
+[node name="bar_straight_A2" type="MeshInstance3D" parent="Dps_meter/Portal/bar_straight_A6"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.96716, 0, 0)
 material_override = SubResource("StandardMaterial3D_v23vf")
 mesh = SubResource("ArrayMesh_n26hj")
 skeleton = NodePath("")
 
-[node name="bar_straight_A7" parent="Tavern/Dps_meter/Portal" instance=ExtResource("3_nj6q3")]
+[node name="bar_straight_A7" parent="Dps_meter/Portal" instance=ExtResource("15_f26y1")]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 8.88178e-16, 0, 1, -14.6069, 1.03675, -12.5268)
 
-[node name="bar_straight_A" parent="Tavern/Dps_meter/Portal/bar_straight_A7" index="0"]
+[node name="bar_straight_A" parent="Dps_meter/Portal/bar_straight_A7" index="0"]
 material_override = SubResource("StandardMaterial3D_v23vf")
 mesh = SubResource("ArrayMesh_n26hj")
 
-[node name="bar_straight_A2" type="MeshInstance3D" parent="Tavern/Dps_meter/Portal/bar_straight_A7"]
+[node name="bar_straight_A2" type="MeshInstance3D" parent="Dps_meter/Portal/bar_straight_A7"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.96716, 0, 0)
 material_override = SubResource("StandardMaterial3D_v23vf")
 mesh = SubResource("ArrayMesh_n26hj")
 skeleton = NodePath("")
 
-[node name="bar_straight_A8" parent="Tavern/Dps_meter/Portal" instance=ExtResource("3_nj6q3")]
+[node name="bar_straight_A8" parent="Dps_meter/Portal" instance=ExtResource("15_f26y1")]
 transform = Transform3D(1, 5.96046e-08, -2.98023e-08, 5.96046e-08, -1, 4.37114e-08, -2.98023e-08, -4.37114e-08, -1, -17.5799, 4.22679, -12.5065)
 
-[node name="bar_straight_A" parent="Tavern/Dps_meter/Portal/bar_straight_A8" index="0"]
+[node name="bar_straight_A" parent="Dps_meter/Portal/bar_straight_A8" index="0"]
 material_override = SubResource("StandardMaterial3D_v23vf")
 mesh = SubResource("ArrayMesh_n26hj")
 
-[node name="bar_straight_A2" type="MeshInstance3D" parent="Tavern/Dps_meter/Portal/bar_straight_A8"]
+[node name="bar_straight_A2" type="MeshInstance3D" parent="Dps_meter/Portal/bar_straight_A8"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.96716, 0, 0)
 material_override = SubResource("StandardMaterial3D_v23vf")
 mesh = SubResource("ArrayMesh_n26hj")
 skeleton = NodePath("")
 
-[node name="Light" type="Node3D" parent="."]
-
-[node name="LightNight" type="DirectionalLight3D" parent="Light"]
-transform = Transform3D(0.375305, 0.140338, 0.916216, 0.181778, 0.958133, -0.22122, -0.908902, 0.249572, 0.334081, -3.25739, 17.7254, -45.0352)
-visible = false
-shadow_enabled = true
-
-[node name="LightDay" type="DirectionalLight3D" parent="Light"]
-transform = Transform3D(-0.98934, -0.0555546, 0.134609, 0.0529325, 0.723949, 0.68782, -0.135662, 0.687613, -0.713291, -2.81162, 34.4637, -25.1827)
-light_energy = 1.65
-shadow_enabled = true
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("67_2jfat")
-volume_db = -5.0
-autoplay = true
-
-[connection signal="timeout" from="UI/Timer" to="." method="_on_timer_timeout"]
-
-[editable path="Tavern/Bar/DeccoBar/barrel_small_stack2"]
-[editable path="Tavern/Bar/DeccoBar/crates_stacked2"]
-[editable path="Tavern/Bar/DeccoBar/crate_small2"]
-[editable path="Tavern/Bar/DeccoBar/bottle_A_brown2"]
-[editable path="Tavern/Bar/DeccoBar/bottle_B_brown2"]
-[editable path="Tavern/Bar/DeccoBar/bottle_C_green2"]
-[editable path="Tavern/Bar/DeccoBar/bottle_C_brown2"]
-[editable path="Tavern/Bar/DeccoBar/bottle_A_green2"]
-[editable path="Tavern/Bar/DeccoBar/bottle_A_labeled_brown2"]
-[editable path="Tavern/Bar/DeccoBar/bottle_B_brown3"]
-[editable path="Tavern/Bar/DeccoBar/bottle_A_labeled_brown3"]
-[editable path="Tavern/Bar/DeccoBar/keyring2"]
-[editable path="Tavern/Bar/DeccoBar/keg_decorated2"]
-[editable path="Tavern/Bar/Bar_meuble/bar_outercorner2"]
-[editable path="Tavern/Bar/Bar_meuble/bar_outercorner3"]
-[editable path="Tavern/Bar/Bar_meuble/bar_straight_A2"]
-[editable path="Tavern/Bar/Bar_meuble/bar_straight_A3"]
-[editable path="Tavern/Bar/Bar_meuble/bar_straight_A4"]
-[editable path="Tavern/Bar/Bar_meuble/bar_straight_A5"]
-[editable path="Tavern/Bar/Bar_meuble/bar_straight_B2"]
-[editable path="Tavern/Bar/Bar_meuble/plate_food_B2"]
-[editable path="Tavern/Bar/Bar_meuble/bar_straight_C2"]
-[editable path="Tavern/Bar/Bar_meuble/plate_food_A2"]
-[editable path="Tavern/Bar/Bar_meuble/plate_stack2"]
-[editable path="Tavern/Bar/Bar_meuble/bartop_A_medium2"]
-[editable path="Tavern/Bar/stool_round3"]
-[editable path="Tavern/Decco/Banner/banner_patternC_white2"]
-[editable path="Tavern/Decco/Banner/banner_patternC_blue2"]
-[editable path="Tavern/Decco/Banner/banner_shield_brown2"]
-[editable path="Tavern/Decco/Banner/banner_thin_blue2"]
-[editable path="Tavern/Decco/Banner/banner_triple_yellow2"]
-[editable path="Tavern/Decco/Barrel/barrel_large_decorated2"]
-[editable path="Tavern/Decco/Candle/candle2"]
-[editable path="Tavern/Ground/floor_tile_extralarge_grates_open2"]
-[editable path="Tavern/Ground/wood_big_tales"]
-[editable path="Tavern/Structure/scaffold_pillar_wall2"]
-[editable path="Tavern/Structure/scaffold_pillar_wall2/scaffold_pillar_wall/banner_red2"]
-[editable path="Tavern/Structure/Wall/wall2"]
-[editable path="Tavern/Structure/Wall/wall3"]
-[editable path="Tavern/Structure/Wall/SouthWall"]
-[editable path="Tavern/Structure/Wall/wall4"]
-[editable path="Tavern/Structure/Wall/wall_corner2"]
-[editable path="Tavern/Structure/Wall/wall_cracked2"]
-[editable path="Tavern/Structure/Wall/wall_doorway2"]
-[editable path="Tavern/Structure/Wall/wall_doorway_sides2"]
-[editable path="Tavern/Structure/Wall/wall_inset_shelves_decoratedA2"]
-[editable path="Tavern/Structure/Wall/wall_inset_shelves_decoratedA3"]
-[editable path="Tavern/Structure/Wall/wall_inset_shelves_decoratedB2"]
-[editable path="Tavern/Structure/Wall/wall_pillar2"]
-[editable path="Tavern/Structure/Wall/wall_window_closed2"]
-[editable path="Tavern/Structure/Wall/wall_window_closed3"]
-[editable path="Tavern/Structure/Wall/wall_window_open2"]
-[editable path="Tavern/Structure/Wall/wall_window_open2/wall_window_open/shelf_small_candles2"]
-[editable path="Tavern/Structure/Wall/stairs_walled2"]
-[editable path="Tavern/Talent_select/candle_triple2"]
-[editable path="Tavern/Talent_select/bar_innercorner2"]
-[editable path="Tavern/Talent_select/bar_innercorner3"]
-[editable path="Tavern/Talent_select/chest_large_gold2"]
-[editable path="Tavern/Table/Table_decco/table_small_decorated_A2"]
-[editable path="Tavern/Table/Table_decco/table_small_decorated_B2"]
-[editable path="Tavern/Table/Table_decco/table_long_decorated_A2"]
-[editable path="Tavern/Table/Table_decco/table_long_decorated_B2"]
-[editable path="Tavern/Table/Table_decco/table_long_decorated_C2"]
-[editable path="Tavern/Table/Table_decco/table_long_tablecloth2"]
-[editable path="Tavern/Table/Table_decco/chair2"]
-[editable path="Tavern/Table/Table_decco/stool2"]
-[editable path="Tavern/Table/Table_decco/table_small_decorated_A3"]
-[editable path="Tavern/Table/Table_decco/table_long_tablecloth_decorated_A2"]
-[editable path="Tavern/Table/Table_decco/table_medium_decorated_A2"]
-[editable path="Tavern/Dps_meter/Portal/bar_straight_A6"]
-[editable path="Tavern/Dps_meter/Portal/bar_straight_A7"]
-[editable path="Tavern/Dps_meter/Portal/bar_straight_A8"]
+[editable path="Bar/DeccoBar/barrel_small_stack2"]
+[editable path="Bar/DeccoBar/crates_stacked2"]
+[editable path="Bar/DeccoBar/crate_small2"]
+[editable path="Bar/DeccoBar/bottle_A_brown2"]
+[editable path="Bar/DeccoBar/bottle_B_brown2"]
+[editable path="Bar/DeccoBar/bottle_C_green2"]
+[editable path="Bar/DeccoBar/bottle_C_brown2"]
+[editable path="Bar/DeccoBar/bottle_A_green2"]
+[editable path="Bar/DeccoBar/bottle_A_labeled_brown2"]
+[editable path="Bar/DeccoBar/bottle_B_brown3"]
+[editable path="Bar/DeccoBar/bottle_A_labeled_brown3"]
+[editable path="Bar/DeccoBar/keyring2"]
+[editable path="Bar/DeccoBar/keg_decorated2"]
+[editable path="Bar/Bar_meuble/bar_outercorner2"]
+[editable path="Bar/Bar_meuble/bar_outercorner3"]
+[editable path="Bar/Bar_meuble/bar_straight_A2"]
+[editable path="Bar/Bar_meuble/bar_straight_A3"]
+[editable path="Bar/Bar_meuble/bar_straight_A4"]
+[editable path="Bar/Bar_meuble/bar_straight_A5"]
+[editable path="Bar/Bar_meuble/bar_straight_B2"]
+[editable path="Bar/Bar_meuble/plate_food_B2"]
+[editable path="Bar/Bar_meuble/bar_straight_C2"]
+[editable path="Bar/Bar_meuble/plate_food_A2"]
+[editable path="Bar/Bar_meuble/plate_stack2"]
+[editable path="Bar/Bar_meuble/bartop_A_medium2"]
+[editable path="Bar/stool_round3"]
+[editable path="Decco/Banner/banner_patternC_white2"]
+[editable path="Decco/Banner/banner_patternC_blue2"]
+[editable path="Decco/Banner/banner_shield_brown2"]
+[editable path="Decco/Banner/banner_thin_blue2"]
+[editable path="Decco/Banner/banner_triple_yellow2"]
+[editable path="Decco/Barrel/barrel_large_decorated2"]
+[editable path="Decco/Candle/candle2"]
+[editable path="Ground/floor_tile_extralarge_grates_open2"]
+[editable path="Ground/wood_big_tales"]
+[editable path="Structure/scaffold_pillar_wall2"]
+[editable path="Structure/scaffold_pillar_wall2/scaffold_pillar_wall/banner_red2"]
+[editable path="Structure/Wall/wall2"]
+[editable path="Structure/Wall/wall3"]
+[editable path="Structure/Wall/SouthWall"]
+[editable path="Structure/Wall/wall4"]
+[editable path="Structure/Wall/wall_corner2"]
+[editable path="Structure/Wall/wall_cracked2"]
+[editable path="Structure/Wall/wall_doorway2"]
+[editable path="Structure/Wall/wall_doorway_sides2"]
+[editable path="Structure/Wall/wall_inset_shelves_decoratedA2"]
+[editable path="Structure/Wall/wall_inset_shelves_decoratedA3"]
+[editable path="Structure/Wall/wall_inset_shelves_decoratedB2"]
+[editable path="Structure/Wall/wall_pillar2"]
+[editable path="Structure/Wall/wall_window_closed2"]
+[editable path="Structure/Wall/wall_window_closed3"]
+[editable path="Structure/Wall/wall_window_open2"]
+[editable path="Structure/Wall/wall_window_open2/wall_window_open/shelf_small_candles2"]
+[editable path="Structure/Wall/stairs_walled2"]
+[editable path="Talent_select/candle_triple2"]
+[editable path="Talent_select/bar_innercorner2"]
+[editable path="Talent_select/bar_innercorner3"]
+[editable path="Talent_select/chest_large_gold2"]
+[editable path="Table/Table_decco/table_small_decorated_A2"]
+[editable path="Table/Table_decco/table_small_decorated_B2"]
+[editable path="Table/Table_decco/table_long_decorated_A2"]
+[editable path="Table/Table_decco/table_long_decorated_B2"]
+[editable path="Table/Table_decco/table_long_decorated_C2"]
+[editable path="Table/Table_decco/table_long_tablecloth2"]
+[editable path="Table/Table_decco/chair2"]
+[editable path="Table/Table_decco/stool2"]
+[editable path="Table/Table_decco/table_small_decorated_A3"]
+[editable path="Table/Table_decco/table_long_tablecloth_decorated_A2"]
+[editable path="Table/Table_decco/table_medium_decorated_A2"]
+[editable path="Dps_meter/Portal/bar_straight_A6"]
+[editable path="Dps_meter/Portal/bar_straight_A7"]
+[editable path="Dps_meter/Portal/bar_straight_A8"]
