@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://gtilbo2y2g0n"]
 
-[ext_resource type="Script" path="res://Scripts/Buying_area3d/portrait_famille.gd" id="1_m28bp"]
+[ext_resource type="Script" path="res://Scripts/Buying_area/portrait_famille.gd" id="1_m28bp"]
 [ext_resource type="Texture2D" uid="uid://bfx0brvdrptx0" path="res://Data/Assets/Buying_area/UI/Family_ui/rond_diamond.png" id="2_yyyf5"]
 [ext_resource type="Texture2D" uid="uid://dbmn23pxi5r76" path="res://Data/Assets/Buying_area/UI/Family_ui/rond_progress.png" id="3_hm22q"]
 [ext_resource type="Texture2D" uid="uid://bxd1jnaci6olo" path="res://Data/Assets/Card/ICONS/ATTACK color.png" id="4_w8jb2"]

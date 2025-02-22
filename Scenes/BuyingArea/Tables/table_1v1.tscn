@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://dlqrg6ijwk3i8"]
+
+[ext_resource type="PackedScene" uid="uid://bb8kjfbnteutv" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/table_round_large.gltf" id="1_3wcpw"]
+[ext_resource type="Texture2D" uid="uid://mswbhaabiedm" path="res://Data/Assets/Tavern - 3D Asset Low poly/textures/dungeon_texture.png" id="2_ihg3i"]
+[ext_resource type="PackedScene" uid="uid://dmo0ff086abwu" path="res://Scenes/BuyingArea/Tables/Common/card_fan.tscn" id="3_51qti"]
+[ext_resource type="PackedScene" uid="uid://birnnko0u17dy" path="res://Scenes/BuyingArea/Tables/Common/coin_pile.tscn" id="4_1ko7q"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ygd1b"]
+albedo_texture = ExtResource("2_ihg3i")
+
+[node name="Table_1v1" instance=ExtResource("1_3wcpw")]
+
+[node name="table_round_large" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_ygd1b")
+
+[node name="Player1" type="Node3D" parent="." index="1"]
+
+[node name="CardFan" parent="Player1" index="0" instance=ExtResource("3_51qti")]
+transform = Transform3D(-0.43992, 0, -0.237636, 0, 0.5, 0, 0.237636, 0, -0.43992, -0.675409, 1.00816, -0.714258)
+
+[node name="CoinPile" parent="Player1" index="1" instance=ExtResource("4_1ko7q")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.468544, 1.03504, -0.94549)
+
+[node name="HeroSpawn" type="Node3D" parent="Player1" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.54425, 0, -1.51007)
+
+[node name="Player2" type="Node3D" parent="." index="2"]
+
+[node name="CardFan" parent="Player2" index="0" instance=ExtResource("3_51qti")]
+transform = Transform3D(0.418291, 0, 0.273921, 0, 0.5, 0, -0.273921, 0, 0.418291, 0.659961, 1.00816, 0.829369)
+
+[node name="CoinPile" parent="Player2" index="1" instance=ExtResource("4_1ko7q")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.39337, 1.04674, 1.19087)
+
+[node name="HeroSpawn" type="Node3D" parent="Player2" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.55516, 0, 1.52098)

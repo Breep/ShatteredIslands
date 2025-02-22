@@ -11,7 +11,7 @@ extends Node3D
 @export var nb_card_hp: int
 
 
-var card_scene: PackedScene = preload("res://Scenes/buying_zone/card_3d.tscn")
+var card_scene: PackedScene = preload("res://Scenes/Card/card_3d_visual.tscn")
 
 # Dictionnaire des familles avec le nombre de cartes
 @onready var families = {

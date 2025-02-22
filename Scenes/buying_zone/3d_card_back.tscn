@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://u0kln0t0te0e"]
-
-[ext_resource type="Texture2D" uid="uid://csebxot4tboo4" path="res://Data/Assets/Card/GENERAL/BACK.png" id="1_yhdqe"]
-
-[node name="Sprite3D" type="Sprite3D"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-pixel_size = 0.0002
-texture = ExtResource("1_yhdqe")
