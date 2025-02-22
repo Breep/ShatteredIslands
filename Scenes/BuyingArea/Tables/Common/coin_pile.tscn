@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://birnnko0u17dy"]
+
+[ext_resource type="Script" path="res://Scripts/BuyingArea/Tables/Common/3d_coin_player_table.gd" id="1_2ahx3"]
+[ext_resource type="PackedScene" uid="uid://bp03dw7gruma8" path="res://Scenes/BuyingArea/Tables/Common/3d_coin.tscn" id="2_td3eq"]
+
+[node name="CoinPile" type="Node3D"]
+script = ExtResource("1_2ahx3")
+
+[node name="coin" parent="." instance=ExtResource("2_td3eq")]
+unique_name_in_owner = true
+
+[node name="coin2" parent="." instance=ExtResource("2_td3eq")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.16005, 0, -0.277278)
+
+[node name="coin3" parent="." instance=ExtResource("2_td3eq")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.165475, 0, -0.262304)
+
+[node name="coin4" parent="." instance=ExtResource("2_td3eq")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.325764, 0, 0)
+
+[node name="coin5" parent="." instance=ExtResource("2_td3eq")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.313444, 0, 0.0225546)
+
+[node name="coin6" parent="." instance=ExtResource("2_td3eq")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0165063, 0, -0.531349)

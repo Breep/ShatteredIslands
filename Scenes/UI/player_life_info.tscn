@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://gssru8asors0"]
 
-[ext_resource type="Script" path="res://Scripts/Buying_area3d/player_life_info.gd" id="1_q03jn"]
+[ext_resource type="Script" path="res://Scripts/BuyingArea/player_life_info.gd" id="1_q03jn"]
 [ext_resource type="Texture2D" uid="uid://djv4k1n6htmv2" path="res://Data/Assets/Buying_area/UI/black label.png" id="2_6y72h"]
 [ext_resource type="FontFile" uid="uid://cl0jltnxq5gum" path="res://Data/font/GlacialIndifference-Bold.otf" id="3_4kuni"]
 [ext_resource type="Texture2D" uid="uid://bx6nb7alldywa" path="res://Data/Assets/Buying_area/UI/red_hexa-removebg-preview.png" id="4_qsio0"]

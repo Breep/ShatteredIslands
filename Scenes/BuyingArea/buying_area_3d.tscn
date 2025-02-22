@@ -1,6 +1,6 @@
 [gd_scene load_steps=173 format=4 uid="uid://ca8mcplp2va4s"]
 
-[ext_resource type="Script" path="res://Scripts/Buying_area3d/camera_3d.gd" id="1_3e5gf"]
+[ext_resource type="Script" path="res://Scripts/BuyingArea/camera_3d.gd" id="1_3e5gf"]
 [ext_resource type="Script" path="res://Scenes/test/test_buying_area_3d.gd" id="1_iyfsm"]
 [ext_resource type="PackedScene" uid="uid://tmsh8w1pcy4p" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/bar_outercorner.gltf" id="1_jltbr"]
 [ext_resource type="Shader" path="res://Shaders/Cam/Cam_outline_shader_pro.gdshader" id="1_p01h1"]
@@ -29,7 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://cpj7nxxqjeo4r" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Plate/plate_food_A.gltf" id="17_6sqvy"]
 [ext_resource type="PackedScene" uid="uid://bnihlm6an3jfg" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Plate/plate_stack.gltf" id="18_8fk3c"]
 [ext_resource type="PackedScene" uid="uid://bg2ufspvqqk65" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/stool_round.gltf" id="22_eslmq"]
-[ext_resource type="PackedScene" uid="uid://cdryp1jj4woix" path="res://Scenes/buying_zone/card_pile_comptoir.tscn" id="23_k887s"]
+[ext_resource type="PackedScene" uid="uid://cdryp1jj4woix" path="res://Scenes/BuyingArea/card_pile_comptoir.tscn" id="23_k887s"]
 [ext_resource type="PackedScene" uid="uid://bljg1ch6dfx2d" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Banner/banner_patternC_blue.gltf" id="24_b6w4i"]
 [ext_resource type="PackedScene" uid="uid://bm5ogrvpdoaae" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Wall/keg_decorated.gltf" id="25_4y7s4"]
 [ext_resource type="Texture2D" uid="uid://buj8bwpqhi1yu" path="res://Data/Assets/Tavern - 3D Asset Low poly/textures/alt_texture_3_SepiaA.png" id="25_ouvkh"]

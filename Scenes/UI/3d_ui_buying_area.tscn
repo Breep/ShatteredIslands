@@ -1,6 +1,6 @@
 [gd_scene load_steps=28 format=3 uid="uid://cmstx61h3h6ar"]
 
-[ext_resource type="Script" path="res://Scripts/Buying_area3d/3d_ui_buying_area.gd" id="1_3h3b0"]
+[ext_resource type="Script" path="res://Scripts/BuyingArea/3d_ui_buying_area.gd" id="1_3h3b0"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://Resources/Theme/UI_Panel_buying_area.tres" id="1_y63fp"]
 [ext_resource type="Texture2D" uid="uid://dc6tbpaib0lef" path="res://Data/Assets/Buying_area/UI/vie-removebg-preview.png" id="2_yy7l0"]
 [ext_resource type="Theme" uid="uid://e45umaj22fg7" path="res://Resources/Theme/UI_Label_buying_area.tres" id="3_oehci"]

@@ -1,3 +1,4 @@
+class_name CardFan
 extends Node3D
 
 # Nombre de cartes à afficher

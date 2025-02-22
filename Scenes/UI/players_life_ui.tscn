@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://c54r3uqu67ser"]
 
-[ext_resource type="Script" path="res://Scripts/Buying_area3d/player_life.gd" id="1_b7sqk"]
+[ext_resource type="Script" path="res://Scripts/Buying_area/player_life.gd" id="1_b7sqk"]
 [ext_resource type="Script" path="res://Scripts/Player/pplayer.gd" id="2_cb8sh"]
 [ext_resource type="PackedScene" uid="uid://gssru8asors0" path="res://Scenes/UI/player_life_info.tscn" id="3_k4muq"]
 
