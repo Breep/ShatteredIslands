@@ -1,6 +1,7 @@
 [gd_scene load_steps=161 format=4 uid="uid://b8clqslwo8t68"]
 
 [ext_resource type="PackedScene" uid="uid://cdryp1jj4woix" path="res://Scenes/BuyingArea/card_pile_comptoir.tscn" id="1_j0agn"]
+[ext_resource type="Script" path="res://Scripts/BuyingArea/tavern.gd" id="1_p0pfg"]
 [ext_resource type="PackedScene" uid="uid://b6nuored8nvqr" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Bar/barrel_small_stack.gltf" id="2_h7d5p"]
 [ext_resource type="Texture2D" uid="uid://mswbhaabiedm" path="res://Data/Assets/Tavern - 3D Asset Low poly/textures/dungeon_texture.png" id="3_lhvrh"]
 [ext_resource type="PackedScene" uid="uid://ckltcqgnt0sqd" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Crate/crates_stacked.gltf" id="4_ka8mg"]
@@ -33,7 +34,6 @@
 [ext_resource type="PackedScene" uid="uid://cvtcwgshvlnao" path="res://Scenes/Object_scene/mimic_chest.tscn" id="31_tsfal"]
 [ext_resource type="PackedScene" uid="uid://bb4esvsygn6h2" path="res://Scenes/NPC/knight.tscn" id="32_n3j8t"]
 [ext_resource type="PackedScene" uid="uid://d4m8fv3pjumps" path="res://Scenes/NPC/rogue.tscn" id="33_3ytuy"]
-[ext_resource type="PackedScene" uid="uid://b18rq8nudpgxk" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Floor/floor_tile_extralarge_grates_open.gltf" id="34_n1tou"]
 [ext_resource type="PackedScene" uid="uid://bv8ck6sh3mtkp" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Floor/wood_big_tales.glb" id="35_hjxl0"]
 [ext_resource type="Texture2D" uid="uid://buj8bwpqhi1yu" path="res://Data/Assets/Tavern - 3D Asset Low poly/textures/alt_texture_3_SepiaA.png" id="36_6v8xg"]
 [ext_resource type="PackedScene" uid="uid://qtrorp1dw0n2" path="res://Data/Assets/Tavern - 3D Asset Low poly/Structure/Pillar/scaffold_pillar_wall.gltf" id="37_56enl"]
@@ -64,6 +64,7 @@
 [ext_resource type="PackedScene" uid="uid://dl1nqy0t8dggg" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/chair.gltf" id="62_6uskp"]
 [ext_resource type="PackedScene" uid="uid://dcgod6bo72fy7" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/stool.gltf" id="63_t28go"]
 [ext_resource type="PackedScene" uid="uid://dj8t0w3l0w47q" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/table_long_tablecloth_decorated_A.gltf" id="64_6hjy6"]
+[ext_resource type="PackedScene" uid="uid://dr8xv1vshmvyq" path="res://Scenes/BuyingArea/TavernCenter/tavern_center.tscn" id="65_ndcoe"]
 [ext_resource type="PackedScene" uid="uid://br564e48coa2v" path="res://Data/Assets/Tavern - 3D Asset Low poly/Decco/Table/table_medium_decorated_A.gltf" id="65_xhx61"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_us68o"]
@@ -380,10 +381,6 @@ albedo_texture = ExtResource("3_lhvrh")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d3e3c"]
 albedo_texture = ExtResource("3_lhvrh")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_47si7"]
-diffuse_mode = 3
-albedo_texture = ExtResource("3_lhvrh")
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y57ng"]
 diffuse_mode = 3
 albedo_texture = ExtResource("36_6v8xg")
@@ -658,7 +655,9 @@ albedo_texture = ExtResource("3_lhvrh")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w8fn2"]
 albedo_texture = ExtResource("3_lhvrh")
 
-[node name="Tavern" type="Node3D"]
+[node name="Tavern" type="Node3D" node_paths=PackedStringArray("_tarven_center")]
+script = ExtResource("1_p0pfg")
+_tarven_center = NodePath("TavernCenter")
 
 [node name="Bar" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.360003, 0, -15.755)
@@ -995,13 +994,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.87923, 0, -1.60982)
 transform = Transform3D(0.810349, 0, -0.585948, 0, 1, 0, 0.585948, 0, 0.810349, 5.59581, 0, -0.640927)
 
 [node name="Ground" type="Node3D" parent="."]
-
-[node name="floor_tile_extralarge_grates_open2" parent="Ground" instance=ExtResource("34_n1tou")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.1, -2.072)
-
-[node name="floor_tile_extralarge_grates_open" parent="Ground/floor_tile_extralarge_grates_open2" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.07825, 0, -3.87396)
-material_override = SubResource("StandardMaterial3D_47si7")
 
 [node name="wood_big_tales" parent="Ground" instance=ExtResource("35_hjxl0")]
 transform = Transform3D(1, 0.000482964, -0.000373981, -0.000482962, 1, 6.41039e-06, 0.000373984, -6.22977e-06, 1, 0, 0, 0)
@@ -1482,6 +1474,9 @@ material_override = SubResource("StandardMaterial3D_v23vf")
 mesh = SubResource("ArrayMesh_n26hj")
 skeleton = NodePath("")
 
+[node name="TavernCenter" parent="." instance=ExtResource("65_ndcoe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.64318, 0, -7.15971)
+
 [editable path="Bar/DeccoBar/barrel_small_stack2"]
 [editable path="Bar/DeccoBar/crates_stacked2"]
 [editable path="Bar/DeccoBar/crate_small2"]
@@ -1515,7 +1510,6 @@ skeleton = NodePath("")
 [editable path="Decco/Banner/banner_triple_yellow2"]
 [editable path="Decco/Barrel/barrel_large_decorated2"]
 [editable path="Decco/Candle/candle2"]
-[editable path="Ground/floor_tile_extralarge_grates_open2"]
 [editable path="Ground/wood_big_tales"]
 [editable path="Structure/scaffold_pillar_wall2"]
 [editable path="Structure/scaffold_pillar_wall2/scaffold_pillar_wall/banner_red2"]

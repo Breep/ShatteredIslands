@@ -1,14 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://ca8mcplp2va4s"]
+[gd_scene load_steps=13 format=3 uid="uid://ca8mcplp2va4s"]
 
 [ext_resource type="Script" path="res://Scripts/BuyingArea/buying_area.gd" id="1_ed4aq"]
 [ext_resource type="Script" path="res://Scripts/BuyingArea/camera_3d.gd" id="2_vend1"]
 [ext_resource type="Shader" path="res://Shaders/Cam/Cam_outline_shader_pro.gdshader" id="3_qhbrd"]
-[ext_resource type="PackedScene" uid="uid://c54r3uqu67ser" path="res://Scenes/UI/players_life_ui.tscn" id="4_xhpcb"]
-[ext_resource type="Script" path="res://Scenes/UI/players_life_ui.gd" id="5_3sr6y"]
 [ext_resource type="PackedScene" uid="uid://cmstx61h3h6ar" path="res://Scenes/UI/3d_ui_buying_area.tscn" id="5_dvq4w"]
 [ext_resource type="PackedScene" uid="uid://cxalabhvxw1pd" path="res://Scenes/UI/ui_timer.tscn" id="6_58bhs"]
 [ext_resource type="PackedScene" uid="uid://b8clqslwo8t68" path="res://Scenes/BuyingArea/tavern.tscn" id="7_s1xub"]
-[ext_resource type="PackedScene" uid="uid://dr8xv1vshmvyq" path="res://Scenes/BuyingArea/TavernCenter/tavern_center.tscn" id="9_rty8q"]
 [ext_resource type="AudioStream" uid="uid://ck0xrpfygj0sw" path="res://Data/Assets/Sound/World of Warcraft - Taverns of Azeroth - 13 - Thunderbrew.wav" id="72_1sm7x"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w8c5s"]
@@ -63,6 +60,7 @@ mesh = SubResource("QuadMesh_ek2a5")
 surface_material_override/0 = SubResource("ShaderMaterial_tmveb")
 
 [node name="UI" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -70,10 +68,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
-
-[node name="players_life_ui" parent="UI" instance=ExtResource("4_xhpcb")]
-layout_mode = 1
-script = ExtResource("5_3sr6y")
 
 [node name="3d_UI_buying_area" parent="UI" instance=ExtResource("5_dvq4w")]
 layout_mode = 1
@@ -109,8 +103,5 @@ shadow_enabled = true
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("72_1sm7x")
 volume_db = -5.0
-autoplay = true
-
-[node name="TavernCenter" parent="." instance=ExtResource("9_rty8q")]
 
 [connection signal="timeout" from="UI/Timer" to="." method="_on_timer_timeout"]

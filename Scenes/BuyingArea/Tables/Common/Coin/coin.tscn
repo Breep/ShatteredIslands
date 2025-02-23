@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dreub5xd6b2kv"]
 
 [ext_resource type="PackedScene" uid="uid://bp03dw7gruma8" path="res://Scenes/BuyingArea/Tables/Common/Coin/coin_3d_visual.tscn" id="1_7x06n"]
-[ext_resource type="Script" path="res://Scenes/BuyingArea/Tables/Common/Coin/coin.gd" id="1_svdj2"]
+[ext_resource type="Script" path="res://Scripts/BuyingArea/Tables/Common/Coin/coin.gd" id="1_svdj2"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_05qmr"]
 height = 0.125935

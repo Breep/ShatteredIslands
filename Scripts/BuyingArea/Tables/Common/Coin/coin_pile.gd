@@ -3,7 +3,7 @@ extends Node3D
 
 # ============================== Constants ==============================
 
-const GOLD_PER_COIN: int = 50 # Number of gold that represent a 3d coin
+const GOLD_PER_COIN: int = 10 # Number of gold that represent a 3d coin
 const MAX_TOWER_HEIGHT_DIFF: int = 5 # Max coin (or height) diff between the highest and lowest tower
 
 # ============================== Export ==============================
@@ -18,6 +18,7 @@ var _old_player_gold: int
 
 func connect_to_player(player: Player) -> void:
 	player.gold_changed.connect(_on_player_gold_changed)
+	_update_visual(player.gold)
 
 # ============================== Private functions ==============================
 

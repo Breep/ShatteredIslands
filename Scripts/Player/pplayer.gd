@@ -18,7 +18,7 @@ var _gold: int
 var gold: int:
 	get: return _gold
 	set(value):
-		_gold = gold
+		_gold = value
 		gold_changed.emit(_gold)
 
 var ready: bool

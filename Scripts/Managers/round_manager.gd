@@ -11,7 +11,7 @@ var current_round: int
 var _battles_type_dic = {
 	2: [Battle.BattleType.VS_1],
 	3: [Battle.BattleType.FFA_SOLO_3],
-	4: [Battle.BattleType.VS_2, Battle.BattleType.FFA_SOLO_4], # A fight with 4 players can be done either with a 2v2 or a 1v1v1v1
+	4: [Battle.BattleType.VS_2], #, Battle.BattleType.FFA_SOLO_4], # A fight with 4 players can be done either with a 2v2 or a 1v1v1v1
 	5: [Battle.BattleType.FFA_SOLO_5],
 	6: [Battle.BattleType.VS_3, Battle.BattleType.FFA_SOLO_6, Battle.BattleType.FFA_DUO_6],
 	7: [Battle.BattleType.FFA_SOLO_7],
@@ -23,10 +23,10 @@ var _battles_combinations_dic = {
 	2: [[2]],
 	3: [[3]],
 	4: [[2, 2], [4]], # If there are 4 players alive, there are two ways of doing the next round: 2 fights of 2 players or 1 fight of 4 players
-	5: [[2, 3], [5]],
-	6: [[2, 2, 2], [3, 3], [2, 4], [6]],
-	7: [[2, 2, 3], [4, 3], [2, 5], [7]],
-	8: [[2, 2, 2, 2], [2, 3, 3], [2, 6], [3, 5], [4, 4], [8]]
+	5: [[2, 3]], #, [5]],
+	6: [[2, 2, 2], [3, 3], [2, 4]],#, [6]],
+	7: [[2, 2, 3], [4, 3]], #, [2, 5], [7]],
+	8: [[2, 2, 2, 2], [2, 3, 3], [4, 4]], #, [2, 6], [3, 5], [8]]
 }
 
 var _battles_info_dic = {
@@ -92,19 +92,14 @@ var _battles_info_dic = {
 	},
 }
 
-var _tmp_players: Dictionary
-var _battles: Array[Battle]
-
-
-
 # Get a random set of battles according to the alive players number
 # Fill the battle with random players and sort them in team randomly
-func get_current_round_battles(alive_players: Dictionary) -> Array[Battle]:
-	var players_duplicate = alive_players.duplicate()
+func get_current_round_battles() -> Array[Battle]:
+	var alive_players = GameManager.get_alive_players().duplicate()
 	var battles: Array[Battle] = []
 	
 	# Get a battle combination
-	var battle_combination = _get_battle_combination(_tmp_players.size())
+	var battle_combination = _get_battle_combination(alive_players.size())
 	
 	# Construct the _battles array with all battle, fill them with players, assigned team to players
 	for player_number in battle_combination:
@@ -115,7 +110,7 @@ func get_current_round_battles(alive_players: Dictionary) -> Array[Battle]:
 		battle.name = battle_info["name"]
 		battle.players_number = battle_info["players_number"]
 		battle.teams_number = battle_info["teams_number"]
-		battle.fill_with_players(players_duplicate)
+		battle.fill_with_players(alive_players)
 		battle.sort_players_in_team()
 		battles.append(battle)
 	
@@ -140,18 +135,18 @@ func _get_battle_type(number_of_players: int) -> Battle.BattleType:
 	return battle_types[battle_id]
 
 
-func _ready() -> void:
-	for i in 8:
-		var player = Player.new()
-		player.name = "Breep_" + str(i)
-		player.id = i * 10
-		player.health = 30
-		_tmp_players[player.id] = player
-
-	var battles = get_current_round_battles(_tmp_players)
-	
-	
-	print("coucou")
+#func _ready() -> void:
+	##for i in 8:
+		##var player = Player.new()
+		##player.name = "Breep_" + str(i)
+		##player.id = i * 10
+		##player.health = 30
+		##_tmp_players[player.id] = player
+#
+	##var battles = get_current_round_battles(_tmp_players)
+	#
+	#
+	#print("coucou")
 
 
 

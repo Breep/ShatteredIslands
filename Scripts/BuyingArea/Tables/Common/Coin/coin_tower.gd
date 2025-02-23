@@ -11,8 +11,8 @@ var _coins_number: int # Number of coin in the tower
 var coins_number: int:
 	get: return _coins_number
 	set(value):
-		_coins_number = value
 		_update_visual(value)
+		_coins_number = value
 
 # ============================== Private variables ==============================
 
@@ -40,9 +40,9 @@ func _update_visual(new_coin_number) -> void:
 			var coin: Coin = coin_scene.instantiate()
 			_coins.append(coin)
 			add_child(coin)
-			coin.global_position.x = rng.randf_range(0, MAX_RANDOM_DISTANCE)
-			coin.global_position.y = coin.get_height() * (_coins_number + i)
-			coin.global_position.z = rng.randf_range(0, MAX_RANDOM_DISTANCE)
+			coin.position.x = rng.randf_range(0, MAX_RANDOM_DISTANCE)
+			coin.position.y = coin.get_height() * (_coins_number + i)
+			coin.position.z = rng.randf_range(0, MAX_RANDOM_DISTANCE)
 			coin.rotate(Vector3.UP, rng.randf())
 	else:
 		var number_of_coins_to_remove: int = new_coin_number - _coins_number
