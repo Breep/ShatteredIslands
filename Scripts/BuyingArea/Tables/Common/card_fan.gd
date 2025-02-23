@@ -7,7 +7,7 @@ const NUMBER_OF_FAMILIES_TO_DISPLAY:int = 3 # Top families to show on the card f
 
 # ============================== Export ==============================
 
-@export var _cards: Array[Node3D]
+@export var _cards: Array[Card3dVisual]
 
 # ============================== Node base functions ==============================
 
@@ -30,15 +30,15 @@ func _update_visual(deck: PlayerDeck):
 	
 	var families_sorted = _get_families_lvl_raw_sorted(families_lvl_raw)
 	var total_lvl = 0
-	for family_lvl in min(NUMBER_OF_FAMILIES_TO_DISPLAY, families_sorted.size()):
-		total_lvl += family_lvl
+	for family_index in min(NUMBER_OF_FAMILIES_TO_DISPLAY, families_sorted.size()):
+		total_lvl += families_sorted[family_index]
 	
 	var card_index:int = 0
 	for i in min(NUMBER_OF_FAMILIES_TO_DISPLAY, families_sorted.size()):
 		var ratio = families_lvl_raw[families_sorted[i]] / (total_lvl as float)
 		var number_of_cards_to_color:int = round(ratio * _cards.size())
 		for j in number_of_cards_to_color:
-			_cards[card_index].modulate = Family.COLORS[families_sorted[i]]
+			_cards[card_index].set_color(Family.COLORS[families_sorted[i]])
 			card_index += 1
 
 
@@ -63,4 +63,4 @@ func _get_highest_family_lvl_raw(families_lvl_raw: Dictionary) -> Family.FamilyT
 # ============================== Callbacks ==============================
 
 func _on_player_deck_changed(deck: PlayerDeck) -> void:
-	pass
+	_update_visual(deck)

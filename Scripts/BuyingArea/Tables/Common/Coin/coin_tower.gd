@@ -31,6 +31,9 @@ func _ready() -> void:
 # ============================== Private functions ==============================
 
 func _update_visual(new_coin_number) -> void:
+	if new_coin_number < 0:
+		printerr("CoinTower: Can't have less than 0 coin in the tower")
+	
 	var rng: = RandomNumberGenerator.new()
 	rng.randomize()
 	
@@ -45,7 +48,7 @@ func _update_visual(new_coin_number) -> void:
 			coin.position.z = rng.randf_range(0, MAX_RANDOM_DISTANCE)
 			coin.rotate(Vector3.UP, rng.randf())
 	else:
-		var number_of_coins_to_remove: int = new_coin_number - _coins_number
+		var number_of_coins_to_remove: int = _coins_number - new_coin_number
 		for i in number_of_coins_to_remove:
 			_coins[_coins.size() - i - 1].queue_free()
 			_coins.remove_at(_coins.size() - i - 1)

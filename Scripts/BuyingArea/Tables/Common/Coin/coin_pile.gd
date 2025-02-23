@@ -4,7 +4,7 @@ extends Node3D
 # ============================== Constants ==============================
 
 const GOLD_PER_COIN: int = 10 # Number of gold that represent a 3d coin
-const MAX_TOWER_HEIGHT_DIFF: int = 5 # Max coin (or height) diff between the highest and lowest tower
+const MAX_TOWER_HEIGHT_DIFF: int = 10 # Max coin (or height) diff between the highest and lowest tower
 
 # ============================== Export ==============================
 
@@ -31,9 +31,14 @@ func _update_visual(new_player_gold: int) -> void:
 			var coin_tower = _coin_towers[rng.randi_range(0, _coin_towers.size() - 1)]
 			coin_tower.coins_number += 1
 	elif new_player_gold <= _old_player_gold - GOLD_PER_COIN:
-		var number_of_coin_to_remove: int = (new_player_gold - _old_player_gold) / GOLD_PER_COIN
+		var number_of_coin_to_remove: int = (_old_player_gold - new_player_gold) / GOLD_PER_COIN
 		for i in number_of_coin_to_remove:
-			var coin_tower = _coin_towers[rng.randi_range(0, _coin_towers.size() - 1)]
+			var coin_tower_index = rng.randi_range(0, _coin_towers.size() - 1)
+			var coin_tower = _coin_towers[coin_tower_index]
+			var j:int = 1
+			while coin_tower.coins_number <= 0:
+				coin_tower = _coin_towers[(coin_tower_index + j) % _coin_towers.size()]
+				j += 1
 			coin_tower.coins_number -= 1
 	
 	_old_player_gold = (new_player_gold / GOLD_PER_COIN) * GOLD_PER_COIN

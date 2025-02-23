@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://ca8mcplp2va4s"]
+[gd_scene load_steps=14 format=3 uid="uid://ca8mcplp2va4s"]
 
 [ext_resource type="Script" path="res://Scripts/BuyingArea/buying_area.gd" id="1_ed4aq"]
 [ext_resource type="Script" path="res://Scripts/BuyingArea/camera_3d.gd" id="2_vend1"]
 [ext_resource type="Shader" path="res://Shaders/Cam/Cam_outline_shader_pro.gdshader" id="3_qhbrd"]
 [ext_resource type="PackedScene" uid="uid://cmstx61h3h6ar" path="res://Scenes/UI/3d_ui_buying_area.tscn" id="5_dvq4w"]
 [ext_resource type="PackedScene" uid="uid://cxalabhvxw1pd" path="res://Scenes/UI/ui_timer.tscn" id="6_58bhs"]
+[ext_resource type="PackedScene" uid="uid://d1oxnd1g75rqh" path="res://Scenes/Card/card_shop.tscn" id="6_sjppt"]
 [ext_resource type="PackedScene" uid="uid://b8clqslwo8t68" path="res://Scenes/BuyingArea/tavern.tscn" id="7_s1xub"]
 [ext_resource type="AudioStream" uid="uid://ck0xrpfygj0sw" path="res://Data/Assets/Sound/World of Warcraft - Taverns of Azeroth - 13 - Thunderbrew.wav" id="72_1sm7x"]
 
@@ -50,7 +51,7 @@ environment = SubResource("Environment_pgie4")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.819152, -0.32899, 0.469846, 0, 0.819152, 0.573576, -0.573576, -0.469846, 0.67101, 0, 10, 10)
 projection = 1
-size = 20.0
+size = 8.517
 far = 35.0
 script = ExtResource("2_vend1")
 
@@ -60,7 +61,6 @@ mesh = SubResource("QuadMesh_ek2a5")
 surface_material_override/0 = SubResource("ShaderMaterial_tmveb")
 
 [node name="UI" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -85,6 +85,14 @@ timer = NodePath("../Timer")
 [node name="Timer" type="Timer" parent="UI"]
 wait_time = 10.0
 autostart = true
+
+[node name="CardShop" parent="UI" instance=ExtResource("6_sjppt")]
+layout_mode = 1
+offset_left = 229.0
+offset_top = 136.0
+offset_right = -61.0
+offset_bottom = 7.0
+scale = Vector2(0.8, 0.8)
 
 [node name="Tavern" parent="." instance=ExtResource("7_s1xub")]
 

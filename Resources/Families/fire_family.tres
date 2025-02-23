@@ -1,13 +1,16 @@
-[gd_resource type="Resource" script_class="Family" load_steps=5 format=3 uid="uid://jlexh0hoftmd"]
+[gd_resource type="Resource" script_class="Family" load_steps=8 format=3 uid="uid://jlexh0hoftmd"]
 
 [ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="1_xfi0l"]
 [ext_resource type="Resource" uid="uid://ga4r0xida5no" path="res://Resources/Card/Fire/fire_firebolt.tres" id="2_kd641"]
 [ext_resource type="Texture2D" uid="uid://y0t815fi2pdf" path="res://Data/Assets/Card/ICONS/MANA.png" id="3_1amgh"]
+[ext_resource type="Resource" uid="uid://cnkp0wrx8ch23" path="res://Resources/Card/Fire/fire_trail_of_fire.tres" id="3_lthr0"]
 [ext_resource type="Script" path="res://ResourcesBase/Family/family.gd" id="4_apkot"]
+[ext_resource type="Resource" uid="uid://ckett0ta5lvew" path="res://Resources/Card/Fire/fire_meteor.tres" id="4_ldf7j"]
+[ext_resource type="Resource" uid="uid://bn8rifooy7lej" path="res://Resources/Card/Fire/fire_magic_resist.tres" id="5_bgfra"]
 
 [resource]
 script = ExtResource("4_apkot")
-cards = Array[ExtResource("1_xfi0l")]([ExtResource("2_kd641")])
+cards = Array[ExtResource("1_xfi0l")]([ExtResource("2_kd641"), ExtResource("3_lthr0"), ExtResource("4_ldf7j"), ExtResource("5_bgfra")])
 icon = ExtResource("3_1amgh")
 family_name = "Fire"
 family_type = 2

@@ -35,8 +35,7 @@ func _exit_tree() -> void:
 
 
 func _on_back_pressed() -> void:
-	print("Card shop closed")
-	$".".hide()
+	hide()
 
 
 func _on_card_shop_button_pressed(card_button_selected: CardButton, card: Card) -> void:
@@ -49,16 +48,17 @@ func _on_card_shop_button_pressed(card_button_selected: CardButton, card: Card) 
 # It will ask the server for permission, if granted, all other players will be notified
 func _try_buy_card(card_button_selected: CardButton, card: Card) -> void:
 	if _local_player.deck == null:
-		printerr("Can't update shop cards, there is no player_deck")
+		printerr("CardShop: Can't update shop cards, there is no player_deck")
 		_reconnect_to_card_signal(card_button_selected)
 		return
 	
 	if _local_player.gold < 100:
-		print("Can't pay the card")
+		print("CardShop: Can't pay the card")
 		_reconnect_to_card_signal(card_button_selected)
 		return
 	
 	var buy_ok = await MultiplayerDeckManager.try_buy_card_for_local_player(card)
+	print("[DEBUG] CardShop: Gold:", _local_player.gold)
 	
 	if buy_ok:
 		await _update_shop_cards_displayed()
@@ -68,7 +68,7 @@ func _try_buy_card(card_button_selected: CardButton, card: Card) -> void:
 
 func _update_shop_cards_displayed() -> void:
 	if _local_player.deck == null:
-		printerr("Can't update shop cards, there is no player_deck")
+		printerr("CardShop: Can't update shop cards, there is no player_deck")
 		return
 	
 	var cardsNumber = 3 # TODO For the moment there is no way to get more cards each time you buy, maybe in the futur
@@ -84,4 +84,4 @@ func _adapt_cards_lvl_to_player() -> void:
 
 
 func _reconnect_to_card_signal(card_button: CardButton) -> void:
-	card_button.connect("card_selected", _on_card_shop_button_pressed, CONNECT_ONE_SHOT)
+	card_button.card_selected.connect(_on_card_shop_button_pressed, CONNECT_ONE_SHOT)

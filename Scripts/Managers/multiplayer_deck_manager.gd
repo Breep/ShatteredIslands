@@ -128,7 +128,7 @@ func smart_draw_n_cards(cards_to_remove: Array[Card], number_of_cards_to_draw: i
 func try_buy_card_for_local_player(card: Card) -> bool:
 	if multiplayer.is_server():
 		printerr("Server shouldn't be a player")
-		return true
+		return false
 	
 	print("[id:", multiplayer.get_unique_id(),"] Asking the server permission to buy ", card.name)
 	_ask_to_buy_card.rpc_id(SERVER_ID, multiplayer.get_unique_id(), _get_card_ref_id(card))
@@ -186,6 +186,7 @@ func _add_card_in_playerdeck(player_id: int, card_ref_id: int) -> void:
 	print("[id:", multiplayer.get_unique_id(),"] Add ", _cards_refs[card_ref_id], " to ", player_id, " deck")
 	GameManager.players[player_id].deck.add_card(_cards_refs[card_ref_id])
 	GameManager.players[player_id].gold -= 100
+	GameManager.players[player_id].deck_changed.emit(GameManager.players[player_id].deck)
 	
 	# If the local player is the one at the origin of the demand
 	if player_id == multiplayer.get_unique_id():
