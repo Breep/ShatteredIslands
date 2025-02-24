@@ -1,6 +1,8 @@
 class_name Family
 extends Resource
 
+# ============================== Enum ==============================
+
 enum FamilyType {
 	Attack,
 	Defense,
@@ -11,6 +13,8 @@ enum FamilyType {
 	Poison,
 	Shadow
 }
+
+# ============================== Constant ==============================
 
 const COLORS = {
 	FamilyType.Attack: Color(0.774, 0.644, 0.085),  # Yellow
@@ -23,12 +27,18 @@ const COLORS = {
 	FamilyType.Life: Color(0.737, 0.379, 0.087), # Orange
 }
 
+# ============================== Exports ==============================
+
 @export var cards: Array[Card] # ALL cards in this game of this family type
 @export var icon: Texture2D
 @export var family_name: String
 @export var family_type: FamilyType
 
+# ============================== Public variables ==============================
+
 var lvl: int # Current level of the family (number of cards in the player deck affiliated with this family)
+
+# ============================== Public functions ==============================
 
 func get_description() -> String: # Virtual
 	return "Virtual family shouldn't be instanciated"

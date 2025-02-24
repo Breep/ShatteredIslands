@@ -144,7 +144,7 @@ func _on_periodic_vulnerability_timer_timeout() -> void:
 
 func _on_vulnerability_timer_timeout() -> void:
 	#print("StormManager: Vulnerability removal")
-	var vulnerability_stacks_removed: int = (0.1 * _storm_stats.vulnerability_stacks as float) as int
+	var vulnerability_stacks_removed: int = ((_percent_decrease / 100.0) * _storm_stats.vulnerability_stacks as float) as int
 	if vulnerability_stacks_removed < _minimum_stacks_decrease_flat:
 		vulnerability_stacks_removed = _minimum_stacks_decrease_flat
 	

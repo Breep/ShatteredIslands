@@ -24,3 +24,12 @@ var gold: int:
 var ready: bool
 
 var character: Character
+
+func get_serialized_version() -> Dictionary:
+	var serialized_version = {
+		"name": name,
+		"id": id,
+		"team": team,
+		"health": health
+	}
+	return serialized_version

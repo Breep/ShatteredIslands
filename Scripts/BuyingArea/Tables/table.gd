@@ -22,5 +22,5 @@ func connect_to_players(players: Array[Player]) -> void:
 		printerr("Table: There are too many players for this table !")
 	
 	for i in players.size():
-		_card_fans[i].connect_to_player(players[i])
+		#_card_fans[i].connect_to_player(players[i])
 		_coin_piles[i].connect_to_player(players[i])

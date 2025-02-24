@@ -24,9 +24,9 @@ var _battles_combinations_dic = {
 	3: [[3]],
 	4: [[2, 2], [4]], # If there are 4 players alive, there are two ways of doing the next round: 2 fights of 2 players or 1 fight of 4 players
 	5: [[2, 3]], #, [5]],
-	6: [[2, 2, 2], [3, 3], [2, 4]],#, [6]],
+	6: [[2, 2, 2], [2, 4]],#, [6]], [3, 3],
 	7: [[2, 2, 3], [4, 3]], #, [2, 5], [7]],
-	8: [[2, 2, 2, 2], [2, 3, 3], [4, 4]], #, [2, 6], [3, 5], [8]]
+	8: [[2, 2, 2, 2], [4, 4]], #, [2, 6], [3, 5], [8]] , [2, 3, 3]
 }
 
 var _battles_info_dic = {
@@ -92,9 +92,55 @@ var _battles_info_dic = {
 	},
 }
 
+# [Server Only]
+var _battles: Array[Battle]
+var _is_ready: bool = false
+signal battles_chosen()
+
+
+# [Client only] Is emit when server has anwsered the local client request
+signal server_answered()
+
+
+
+func get_current_round_battles() -> Array[Battle]:
+	if multiplayer.is_server():
+		_get_current_round_battles()
+	else:
+		_ask_current_round_battles.rpc_id(1, multiplayer.get_unique_id())
+		await server_answered
+	
+	return _battles
+
+
+@rpc("any_peer", "call_remote")
+func _ask_current_round_battles(peer_id: int) -> void:
+	if not multiplayer.is_server():
+		printerr("Only the server can answer the current round battles")
+		return
+	
+	if not _is_ready:
+		await battles_chosen
+	
+	var serialized_battles: Array[Dictionary]
+	for battle in _battles:
+		serialized_battles.append(battle.get_serialized_battle())
+	_anwser_current_round_battles.rpc_id(peer_id, serialized_battles)
+
+
+@rpc("authority", "call_remote")
+func _anwser_current_round_battles(serialized_battles: Array[Dictionary]) -> void:
+	for serialized_battle in serialized_battles:
+		var battle := Battle.new()
+		battle.deserialize(serialized_battle)
+		_battles.append(battle)
+	server_answered.emit()
+
+
+
 # Get a random set of battles according to the alive players number
 # Fill the battle with random players and sort them in team randomly
-func get_current_round_battles() -> Array[Battle]:
+func _get_current_round_battles() -> Array[Battle]:
 	var alive_players = GameManager.get_alive_players().duplicate()
 	var battles: Array[Battle] = []
 	
@@ -114,6 +160,9 @@ func get_current_round_battles() -> Array[Battle]:
 		battle.sort_players_in_team()
 		battles.append(battle)
 	
+	_battles = battles
+	_is_ready = true
+	battles_chosen.emit()
 	return battles
 
 
@@ -133,20 +182,6 @@ func _get_battle_type(number_of_players: int) -> Battle.BattleType:
 	rng.randomize()
 	var battle_id = rng.randi_range(0, battle_types.size() - 1)
 	return battle_types[battle_id]
-
-
-#func _ready() -> void:
-	##for i in 8:
-		##var player = Player.new()
-		##player.name = "Breep_" + str(i)
-		##player.id = i * 10
-		##player.health = 30
-		##_tmp_players[player.id] = player
-#
-	##var battles = get_current_round_battles(_tmp_players)
-	#
-	#
-	#print("coucou")
 
 
 

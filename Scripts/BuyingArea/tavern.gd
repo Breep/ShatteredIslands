@@ -6,4 +6,4 @@ extends Node3D
 
 
 func _ready() -> void:
-	_tarven_center.put_tables_according_to_battles(RoundManager.get_current_round_battles())
+	_tarven_center.put_tables_according_to_battles(await RoundManager.get_current_round_battles())
