@@ -124,18 +124,15 @@ func _ask_current_round_battles(peer_id: int) -> void:
 	
 	var serialized_battles: Array[Dictionary]
 	for battle in _battles:
-		serialized_battles.append(battle.get_serialized_battle())
+		serialized_battles.append(battle.serialized())
 	_anwser_current_round_battles.rpc_id(peer_id, serialized_battles)
 
 
 @rpc("authority", "call_remote")
 func _anwser_current_round_battles(serialized_battles: Array[Dictionary]) -> void:
 	for serialized_battle in serialized_battles:
-		var battle := Battle.new()
-		battle.deserialize(serialized_battle)
-		_battles.append(battle)
+		_battles.append(Battle.new_from_serialized(serialized_battle))
 	server_answered.emit()
-
 
 
 # Get a random set of battles according to the alive players number

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/FightingArea/fighting_area_3d.gd" id="1_ejogh"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://Scenes/FightingArea/spawn_manager.tscn" id="2_87yha"]
-[ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Scenes/Character/ccharacter.tscn" id="3_7oubw"]
+[ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Scenes/Character/character.tscn" id="3_7oubw"]
 [ext_resource type="PackedScene" uid="uid://c0l0roxttdtlp" path="res://Scenes/FightingArea/fighting_manager.tscn" id="4_ps2v2"]
 [ext_resource type="PackedScene" uid="uid://dmfkigo1trjd0" path="res://Scenes/UI/ui_countdown.tscn" id="5_3asjo"]
 

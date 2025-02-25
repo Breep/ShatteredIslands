@@ -31,20 +31,22 @@ var teams_number: int
 var players: Array[Player]
 
 
-func deserialize(serialized_data: Dictionary) -> void:
-	id = serialized_data["id"]
-	battle_type = serialized_data["battle_type"]
-	name = serialized_data["name"]
-	players_number = serialized_data["players_number"]
-	teams_number = serialized_data["teams_number"]
+static func new_from_serialized(serialized_data: Dictionary) -> Battle:
+	var battle := Battle.new()
+	battle.id = serialized_data["id"]
+	battle.battle_type = serialized_data["battle_type"]
+	battle.name = serialized_data["name"]
+	battle.players_number = serialized_data["players_number"]
+	battle.teams_number = serialized_data["teams_number"]
 	for serialized_player in serialized_data["players"]:
-		players.append(GameManager.get_player_from_serialized_player(serialized_player))
+		battle.players.append(Player.get_from_serialized(serialized_player))
+	return battle
 
 
-func get_serialized_battle() -> Dictionary:
+func serialized() -> Dictionary:
 	var serialized_players: Array[Dictionary]
 	for player in players:
-		serialized_players.append(player.get_serialized_version())
+		serialized_players.append(player.serialized())
 	var serialized_version = {
 		"id": id,
 		"battle_type": battle_type,

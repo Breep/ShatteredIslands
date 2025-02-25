@@ -25,7 +25,17 @@ var ready: bool
 
 var character: Character
 
-func get_serialized_version() -> Dictionary:
+# Get the player conresponding of the serialized_data id in the GameManager
+# Update some values inside the player
+static func get_from_serialized(serialized_data: Dictionary) -> Player:
+	var player = GameManager.players[serialized_data["id"]]
+	player.team = serialized_data["team"]
+	player.health = serialized_data["health"]
+	player.name = serialized_data["name"]
+	return player
+
+
+func serialized() -> Dictionary:
 	var serialized_version = {
 		"name": name,
 		"id": id,
