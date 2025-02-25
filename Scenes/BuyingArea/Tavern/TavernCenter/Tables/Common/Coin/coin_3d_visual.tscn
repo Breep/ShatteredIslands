@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=4 uid="uid://bp03dw7gruma8"]
 
-[ext_resource type="Texture2D" uid="uid://mswbhaabiedm" path="res://Data/Assets/Tavern - 3D Asset Low poly/textures/dungeon_texture.png" id="1_b62ac"]
+[ext_resource type="Texture2D" uid="uid://mswbhaabiedm" path="res://Data/Assets/Tavern - 3D Asset Low poly/textures/dungeon_texture.png" id="1_nsqnm"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c2asw"]
-albedo_texture = ExtResource("1_b62ac")
+albedo_texture = ExtResource("1_nsqnm")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q1thd"]
 resource_name = "texture"

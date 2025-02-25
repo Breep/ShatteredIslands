@@ -20,9 +20,9 @@ var _coins: Array[Coin]
 
 # ============================== Preload ==============================
 
-@onready var coin_scene: PackedScene = preload("res://Scenes/BuyingArea/Tables/Common/Coin/coin.tscn")
+@onready var coin_scene: PackedScene = preload("res://Scenes/BuyingArea/Tavern/TavernCenter/Tables/Common/Coin/coin.tscn")
 
-# ============================== Node base functions ==============================
+# ============================== Node base functions ==============================$"PlayersLeft_3/1_ffa3/Table_ffa3"
 
 func _ready() -> void:
 	for child in get_children():

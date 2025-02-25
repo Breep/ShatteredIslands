@@ -18,14 +18,6 @@ enum BattleType {
 	#FFA_DUO_8, # 2v2v2v2
 }
 
-# Id of the battle (Can have up to 4 battles at the same time)
-enum BattleId {
-	B1,
-	B2,
-	B3,
-	B4,
-}
-
 enum BattleCategory {
 	C2_PLAYERS_BATTLE = 2, # 2 players battle
 	C3_PLAYERS_BATTLE = 3, # 3 players battle
@@ -111,7 +103,7 @@ const BATTLES_TYPE_DIC = {
 
 # ============================== Public variables ==============================
 
-var id: BattleId
+var id: int
 
 var battle_type: BattleType
 var name: String

@@ -85,9 +85,12 @@ func _init_current_round_battles() -> void:
 	var battle_categories = _get_battle_categories(alive_players.size())
 	
 	# Construct the _battles array with all battle, fill them with players, assigned team to players
+	var battle_id: int = 0
 	for battle_category in battle_categories:
 		var battle := Battle.new_from_category(battle_category)
 		battle.fill_with_players(alive_players)
+		battle.id = battle_id
+		battle_id += 1
 		_battles.append(battle)
 	
 	_is_ready = true

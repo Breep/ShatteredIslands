@@ -40,3 +40,15 @@ func is_randomize_modifier_active(chance: float) -> bool:
 	var rng: = RandomNumberGenerator.new()
 	rng.randomize()
 	return rng.randf_range(0, 100) <= chance
+
+
+func recursive_hide(node: Node3D):
+	for child in node.get_children():
+		recursive_hide(child)
+	node.hide()
+
+
+func recursive_show(node: Node3D):
+	for child in node.get_children():
+		recursive_show(child)
+	node.show()

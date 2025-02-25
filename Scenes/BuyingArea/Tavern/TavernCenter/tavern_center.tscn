@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dr8xv1vshmvyq"]
+[gd_scene load_steps=7 format=3 uid="uid://dr8xv1vshmvyq"]
 
-[ext_resource type="Script" path="res://Scripts/BuyingArea/TavernCenter/tavern_center.gd" id="1_aagnj"]
-[ext_resource type="PackedScene" uid="uid://dlqrg6ijwk3i8" path="res://Scenes/BuyingArea/Tables/table_1v1.tscn" id="2_3mctf"]
+[ext_resource type="Script" path="res://Scripts/BuyingArea/TavernCenter/tavern_center.gd" id="1_ha6dk"]
+[ext_resource type="PackedScene" uid="uid://dlqrg6ijwk3i8" path="res://Scenes/BuyingArea/Tavern/TavernCenter/Tables/table_1v1.tscn" id="2_are6m"]
+[ext_resource type="PackedScene" uid="uid://b4av14wu25x12" path="res://Scenes/BuyingArea/Tavern/TavernCenter/Tables/table_2v2.tscn" id="3_cjni8"]
+[ext_resource type="PackedScene" uid="uid://cqskpy33r7xoi" path="res://Scenes/BuyingArea/Tavern/TavernCenter/Tables/table_ffa_solo_3.tscn" id="3_vm0me"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6qeal"]
 transparency = 1
@@ -11,10 +13,9 @@ albedo_color = Color(0.787, 0, 0.617, 0.108)
 size = Vector3(15, 1, 10)
 
 [node name="TavernCenter" type="Node3D"]
-script = ExtResource("1_aagnj")
+script = ExtResource("1_ha6dk")
 
 [node name="DebugVisualPlace" type="MeshInstance3D" parent="."]
-visible = false
 material_override = SubResource("StandardMaterial3D_6qeal")
 mesh = SubResource("BoxMesh_r1qdr")
 skeleton = NodePath("")
@@ -26,11 +27,17 @@ visible = false
 [node name="1_1v1" type="Node3D" parent="PlayersLeft_2"]
 unique_name_in_owner = true
 
-[node name="Table_1v1" parent="PlayersLeft_2/1_1v1" instance=ExtResource("2_3mctf")]
+[node name="Table_1v1" parent="PlayersLeft_2/1_1v1" instance=ExtResource("2_are6m")]
 transform = Transform3D(0.675693, 0, 0.737183, 0, 1, 0, -0.737183, 0, 0.675693, 0, 0, 0)
+battle_id = 1
 
 [node name="PlayersLeft_3" type="Node3D" parent="."]
-visible = false
+unique_name_in_owner = true
+
+[node name="1_ffa3" type="Node3D" parent="PlayersLeft_3"]
+unique_name_in_owner = true
+
+[node name="Table_ffa3" parent="PlayersLeft_3/1_ffa3" instance=ExtResource("3_vm0me")]
 
 [node name="PlayersLeft_4" type="Node3D" parent="."]
 unique_name_in_owner = true
@@ -39,49 +46,62 @@ visible = false
 [node name="2_1v1" type="Node3D" parent="PlayersLeft_4"]
 unique_name_in_owner = true
 
-[node name="Table_1v1_1" parent="PlayersLeft_4/2_1v1" instance=ExtResource("2_3mctf")]
+[node name="Table_1v1_1" parent="PlayersLeft_4/2_1v1" instance=ExtResource("2_are6m")]
 transform = Transform3D(0.56035, 0, 0.828256, 0, 1, 0, -0.828256, 0, 0.56035, -2.76661, 0, -2.25426)
 
-[node name="Table_1v1_2" parent="PlayersLeft_4/2_1v1" instance=ExtResource("2_3mctf")]
+[node name="Table_1v1_2" parent="PlayersLeft_4/2_1v1" instance=ExtResource("2_are6m")]
 transform = Transform3D(0.625992, 0, 0.77983, 0, 1, 0, -0.77983, 0, 0.625992, 3.23481, 0, 2.5538)
+battle_id = 1
+
+[node name="1_2v2" type="Node3D" parent="PlayersLeft_4"]
+unique_name_in_owner = true
+
+[node name="table_2v2" parent="PlayersLeft_4/1_2v2" instance=ExtResource("3_cjni8")]
 
 [node name="PlayersLeft_5" type="Node3D" parent="."]
 visible = false
 
-[node name="Table_1v1" parent="PlayersLeft_5" instance=ExtResource("2_3mctf")]
+[node name="Table_1v1" parent="PlayersLeft_5" instance=ExtResource("2_are6m")]
 transform = Transform3D(0.807836, 0, 0.589408, 0, 1, 0, -0.589408, 0, 0.807836, 3.35443, -4.76837e-07, -1.67029)
 
 [node name="PlayersLeft_6" type="Node3D" parent="."]
 visible = false
 
-[node name="Table_1v1_1" parent="PlayersLeft_6" instance=ExtResource("2_3mctf")]
+[node name="Table_1v1_1" parent="PlayersLeft_6" instance=ExtResource("2_are6m")]
 transform = Transform3D(0.726431, 0, 0.68724, 0, 1, 0, -0.68724, 0, 0.726431, 1.95488, 0, 3.00608)
 
-[node name="Table_1v1_2" parent="PlayersLeft_6" instance=ExtResource("2_3mctf")]
+[node name="Table_1v1_2" parent="PlayersLeft_6" instance=ExtResource("2_are6m")]
 transform = Transform3D(-0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, -3.45064, 4.76837e-07, 0.0437185)
+battle_id = 1
 
-[node name="Table_1v1_3" parent="PlayersLeft_6" instance=ExtResource("2_3mctf")]
+[node name="Table_1v1_3" parent="PlayersLeft_6" instance=ExtResource("2_are6m")]
 transform = Transform3D(0.581342, 0, 0.813659, 0, 1, 0, -0.813659, 0, 0.581342, 4.06033, 0, -2.27696)
+battle_id = 2
 
 [node name="PlayersLeft_7" type="Node3D" parent="."]
 visible = false
 
-[node name="Table_1v1_1" parent="PlayersLeft_7" instance=ExtResource("2_3mctf")]
+[node name="Table_1v1_1" parent="PlayersLeft_7" instance=ExtResource("2_are6m")]
 transform = Transform3D(0.56035, 0, 0.828256, 0, 1, 0, -0.828256, 0, 0.56035, -2.33934, 0, -2.25879)
 
-[node name="Table_1v1_2" parent="PlayersLeft_7" instance=ExtResource("2_3mctf")]
+[node name="Table_1v1_2" parent="PlayersLeft_7" instance=ExtResource("2_are6m")]
 transform = Transform3D(0.625992, 0, 0.77983, 0, 1, 0, -0.77983, 0, 0.625992, -3.09912, -4.76837e-07, 2.35722)
+battle_id = 1
 
 [node name="PlayersLeft_8" type="Node3D" parent="."]
+visible = false
 
-[node name="Table_1v1_1" parent="PlayersLeft_8" instance=ExtResource("2_3mctf")]
+[node name="Table_1v1_1" parent="PlayersLeft_8" instance=ExtResource("2_are6m")]
 transform = Transform3D(0.508516, 0, 0.861053, 0, 1, 0, -0.861053, 0, 0.508516, -2.70871, 0, -2.13845)
 
-[node name="Table_1v1_2" parent="PlayersLeft_8" instance=ExtResource("2_3mctf")]
+[node name="Table_1v1_2" parent="PlayersLeft_8" instance=ExtResource("2_are6m")]
 transform = Transform3D(0.49212, 0, 0.870528, 0, 1, 0, -0.870528, 0, 0.49212, 3.75597, 0, 2.66961)
+battle_id = 1
 
-[node name="Table_1v1_3" parent="PlayersLeft_8" instance=ExtResource("2_3mctf")]
+[node name="Table_1v1_3" parent="PlayersLeft_8" instance=ExtResource("2_are6m")]
 transform = Transform3D(0.298474, 0, 0.954418, 0, 1, 0, -0.954418, 0, 0.298474, 4.21923, 0, -2.54201)
+battle_id = 2
 
-[node name="Table_1v1_4" parent="PlayersLeft_8" instance=ExtResource("2_3mctf")]
+[node name="Table_1v1_4" parent="PlayersLeft_8" instance=ExtResource("2_are6m")]
 transform = Transform3D(0.781673, 0, 0.623689, 0, 1, 0, -0.623689, 0, 0.781673, -3.94566, 0, 2.6117)
+battle_id = 3
