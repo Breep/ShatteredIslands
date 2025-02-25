@@ -1,0 +1,72 @@
+[gd_scene load_steps=9 format=3 uid="uid://b3467f7qtons1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iv60j"]
+albedo_color = Color(0.254202, 0.260607, 0.801323, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_isa1e"]
+material = SubResource("StandardMaterial3D_iv60j")
+size = Vector3(10, 1, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8xrl2"]
+size = Vector3(10, 1, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_klmnv"]
+albedo_color = Color(0.613506, 0.148562, 0.204745, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lmosg"]
+material = SubResource("StandardMaterial3D_klmnv")
+size = Vector3(10, 1, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3rqjt"]
+albedo_color = Color(0.401847, 0.62432, 0.358991, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cih6b"]
+material = SubResource("StandardMaterial3D_3rqjt")
+size = Vector3(10, 1, 40)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4qqqw"]
+material = SubResource("StandardMaterial3D_3rqjt")
+size = Vector3(40, 1, 10)
+
+[node name="Map" type="Node3D"]
+
+[node name="BlueSide" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -0.5, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BlueSide"]
+mesh = SubResource("BoxMesh_isa1e")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlueSide"]
+shape = SubResource("BoxShape3D_8xrl2")
+
+[node name="RedSide" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -0.5, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RedSide"]
+mesh = SubResource("BoxMesh_lmosg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RedSide"]
+shape = SubResource("BoxShape3D_8xrl2")
+
+[node name="Outside" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -0.5, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Outside"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
+mesh = SubResource("BoxMesh_cih6b")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Outside"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
+mesh = SubResource("BoxMesh_cih6b")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Outside"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -15)
+mesh = SubResource("BoxMesh_4qqqw")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Outside"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 15)
+mesh = SubResource("BoxMesh_4qqqw")
+skeleton = NodePath("../../..")

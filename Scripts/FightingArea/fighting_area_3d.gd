@@ -15,6 +15,7 @@ var _characters: Array[Character] # Array of all characters in the fight scene
 
 @onready var _spawn_manager: SpawnManager = %SpawnManager
 @onready var _fighting_manager: FightingManager = %FightingManager
+@onready var _map: Node3D
 
 @onready var _ui_countdown: UICountdown = %Countdown
 
@@ -30,12 +31,6 @@ func _ready() -> void:
 	if _camera == null:
 		printerr("FightingArea: Need a camera")
 		return
-	
-	# TMP TODO Faire en sorte que les team des joueurs soient choisi au début du round (Ajouter la notion de round)
-	var i:int = 0
-	for player in GameManager.players.values():
-		player.team = (i%2)+1
-		i+=1
 	
 	if not _spawn_manager.start(GameManager.players):
 		printerr("FightingArea: Can't start SpawnManager")
