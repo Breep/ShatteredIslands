@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ca8mcplp2va4s"]
+[gd_scene load_steps=15 format=3 uid="uid://ca8mcplp2va4s"]
 
 [ext_resource type="Script" path="res://Scripts/BuyingArea/buying_area.gd" id="1_ed4aq"]
 [ext_resource type="Script" path="res://Scripts/BuyingArea/camera_3d.gd" id="2_vend1"]
@@ -42,6 +42,8 @@ shader_parameter/grazing_fresnel_power = 5.0
 shader_parameter/grazing_angle_mask_power = 1.0
 shader_parameter/grazing_angle_modulation_factor = 50.0
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jhmrm"]
+
 [node name="BuyingArea" type="Node3D"]
 script = ExtResource("1_ed4aq")
 
@@ -49,9 +51,9 @@ script = ExtResource("1_ed4aq")
 environment = SubResource("Environment_pgie4")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.819152, -0.32899, 0.469846, 0, 0.819152, 0.573576, -0.573576, -0.469846, 0.67101, 0, 10, 10)
+transform = Transform3D(0.819152, -0.32899, 0.469846, 0, 0.819152, 0.573576, -0.573576, -0.469846, 0.67101, -0.640195, 10.1977, 4.70713)
 projection = 1
-size = 8.517
+size = 10.431
 far = 35.0
 script = ExtResource("2_vend1")
 
@@ -80,11 +82,7 @@ offset_top = 22.0
 offset_right = -442.0
 offset_bottom = -459.0
 scale = Vector2(0.5, 0.5)
-timer = NodePath("../Timer")
-
-[node name="Timer" type="Timer" parent="UI"]
-wait_time = 10.0
-autostart = true
+timer = NodePath("../../Timer")
 
 [node name="CardShop" parent="UI" instance=ExtResource("6_sjppt")]
 layout_mode = 1
@@ -112,4 +110,11 @@ shadow_enabled = true
 stream = ExtResource("72_1sm7x")
 volume_db = -5.0
 
-[connection signal="timeout" from="UI/Timer" to="." method="_on_timer_timeout"]
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_jhmrm")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
