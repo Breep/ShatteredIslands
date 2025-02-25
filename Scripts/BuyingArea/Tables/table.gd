@@ -8,6 +8,7 @@ extends Node3D
 @export var _hero_spawns: Array[Node3D]
 
 @export var battle_type: Battle.BattleType
+@export var battle_number: int
 
 # ============================== Node base functions ==============================
 

@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://ceqjwbnxlllrw" path="res://Scenes/SpellsAndProjectiles/projectile.tscn" id="1_n8rh6"]
 [ext_resource type="Texture2D" uid="uid://wfwglamlrjqj" path="res://Data/Assets/Misc/Misc_IMG/assasin wow.png" id="2_tcrxw"]
 [ext_resource type="Script" path="res://ResourcesBase/CharacterStats/character_stats.gd" id="3_x2gh1"]
-[ext_resource type="Script" path="res://ResourcesBase/Hero/hhero.gd" id="3_x8okn"]
+[ext_resource type="Script" path="res://ResourcesBase/Hero/hero.gd" id="3_x8okn"]
 [ext_resource type="Texture2D" uid="uid://clupy6lxq6tfs" path="res://Data/Assets/Card/Card_IMG/heal/heal orb.png" id="12_bcd7b"]
 [ext_resource type="Texture2D" uid="uid://bo534sbxmu3jh" path="res://Data/Assets/Card/Card_IMG/Attack/bounce attack.jpg" id="13_gsnfu"]
 [ext_resource type="Texture2D" uid="uid://btjgqupi22y8o" path="res://Data/Assets/Card/Card_IMG/Attack/attack_ignite.webp" id="14_sbmpq"]

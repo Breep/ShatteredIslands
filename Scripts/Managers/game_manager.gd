@@ -125,10 +125,6 @@ func get_alive_players() -> Dictionary:
 			alive_players[player.id] = player
 	return alive_players
 
-
-func get_player_from_serialized_player(serialized_player: Dictionary) -> Player:
-	return players[serialized_player["id"]]
-
 # ============================== Private function ==============================
 
 func _game_switch_to(new_game_state: GameState) -> void:

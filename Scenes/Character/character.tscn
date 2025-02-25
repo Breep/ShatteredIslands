@@ -1,20 +1,20 @@
 [gd_scene load_steps=18 format=3 uid="uid://bbnioyc6ti8wn"]
 
-[ext_resource type="Script" path="res://Scripts/Character/character.gd" id="1_khjtd"]
-[ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Scenes/Character/character_visual.tscn" id="2_q7res"]
-[ext_resource type="PackedScene" uid="uid://b6yg1bhhmnicr" path="res://Scenes/Character/Modules/auto_attack_module.tscn" id="3_aaim3"]
-[ext_resource type="PackedScene" uid="uid://bext8rh783yay" path="res://Scenes/Character/FamiliesManagers/defense_manager.tscn" id="4_3lofc"]
-[ext_resource type="PackedScene" uid="uid://n30ifkjad344" path="res://Scenes/Character/Modules/target_manager.tscn" id="5_8shkw"]
-[ext_resource type="PackedScene" uid="uid://617x5c1qrdpg" path="res://Scenes/Character/Modules/action_module.tscn" id="6_78aqt"]
-[ext_resource type="PackedScene" uid="uid://cl10r3idwllx" path="res://Scenes/Character/FamiliesManagers/fire_manager.tscn" id="6_vsopc"]
-[ext_resource type="PackedScene" uid="uid://bbwmtb5op8clu" path="res://Scenes/Character/Modules/interact_module.tscn" id="7_agyvk"]
-[ext_resource type="PackedScene" uid="uid://6holmj326e1y" path="res://Scenes/Character/FamiliesManagers/life_manager.tscn" id="7_t7sfu"]
-[ext_resource type="PackedScene" uid="uid://cvihi4los882b" path="res://Scenes/Character/FamiliesManagers/poison_manager.tscn" id="8_ysftd"]
-[ext_resource type="PackedScene" uid="uid://bdl1xxjdbeugn" path="res://Scenes/Character/FamiliesManagers/serenity_manager.tscn" id="9_poaka"]
-[ext_resource type="PackedScene" uid="uid://dhah05lihxk4p" path="res://Scenes/Character/FamiliesManagers/shadow_manager.tscn" id="10_gbm6f"]
-[ext_resource type="PackedScene" uid="uid://bjbfnigvphbfc" path="res://Scenes/Character/FamiliesManagers/storm_manager.tscn" id="11_ra6k1"]
-[ext_resource type="PackedScene" uid="uid://d0g0xkyr876lc" path="res://Scenes/Character/Modules/movement_manager.tscn" id="12_wmhuf"]
-[ext_resource type="PackedScene" uid="uid://crqesljjrouec" path="res://Scenes/Character/FamiliesManagers/attack_manager.tscn" id="14_wpntx"]
+[ext_resource type="Script" path="res://Scripts/Character/character.gd" id="1_2kqa6"]
+[ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Scenes/Character/character_visual.tscn" id="2_0rbv3"]
+[ext_resource type="PackedScene" uid="uid://n30ifkjad344" path="res://Scenes/Character/Modules/target_manager.tscn" id="3_6fvgd"]
+[ext_resource type="PackedScene" uid="uid://d0g0xkyr876lc" path="res://Scenes/Character/Modules/movement_manager.tscn" id="4_amllv"]
+[ext_resource type="PackedScene" uid="uid://617x5c1qrdpg" path="res://Scenes/Character/Modules/action_module.tscn" id="5_u25rd"]
+[ext_resource type="PackedScene" uid="uid://bbwmtb5op8clu" path="res://Scenes/Character/Modules/interact_module.tscn" id="6_to4gb"]
+[ext_resource type="PackedScene" uid="uid://b6yg1bhhmnicr" path="res://Scenes/Character/Modules/auto_attack_module.tscn" id="7_rqtjt"]
+[ext_resource type="PackedScene" uid="uid://bext8rh783yay" path="res://Scenes/Character/FamiliesManagers/defense_manager.tscn" id="8_nrem6"]
+[ext_resource type="PackedScene" uid="uid://cl10r3idwllx" path="res://Scenes/Character/FamiliesManagers/fire_manager.tscn" id="9_nht2m"]
+[ext_resource type="PackedScene" uid="uid://6holmj326e1y" path="res://Scenes/Character/FamiliesManagers/life_manager.tscn" id="10_62qwf"]
+[ext_resource type="PackedScene" uid="uid://cvihi4los882b" path="res://Scenes/Character/FamiliesManagers/poison_manager.tscn" id="11_q2ui6"]
+[ext_resource type="PackedScene" uid="uid://bdl1xxjdbeugn" path="res://Scenes/Character/FamiliesManagers/serenity_manager.tscn" id="12_ql7bv"]
+[ext_resource type="PackedScene" uid="uid://dhah05lihxk4p" path="res://Scenes/Character/FamiliesManagers/shadow_manager.tscn" id="13_bsyot"]
+[ext_resource type="PackedScene" uid="uid://bjbfnigvphbfc" path="res://Scenes/Character/FamiliesManagers/storm_manager.tscn" id="14_skvrh"]
+[ext_resource type="PackedScene" uid="uid://crqesljjrouec" path="res://Scenes/Character/FamiliesManagers/attack_manager.tscn" id="15_axqe6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rxegs"]
 
@@ -24,9 +24,9 @@ properties/0/spawn = true
 properties/0/replication_mode = 2
 
 [node name="Character" type="CharacterBody3D" groups=["CHARACTER"]]
-script = ExtResource("1_khjtd")
+script = ExtResource("1_2kqa6")
 
-[node name="CharacterVisual" parent="." instance=ExtResource("2_q7res")]
+[node name="CharacterVisual" parent="." instance=ExtResource("2_0rbv3")]
 unique_name_in_owner = true
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.859336, 0)
 
@@ -43,46 +43,46 @@ replication_config = SubResource("SceneReplicationConfig_747th")
 
 [node name="Modules" type="Node" parent="."]
 
-[node name="TargetManager" parent="Modules" instance=ExtResource("5_8shkw")]
+[node name="TargetManager" parent="Modules" instance=ExtResource("3_6fvgd")]
 unique_name_in_owner = true
 
-[node name="MovementManager" parent="Modules" instance=ExtResource("12_wmhuf")]
+[node name="MovementManager" parent="Modules" instance=ExtResource("4_amllv")]
 unique_name_in_owner = true
 
-[node name="ActionModule" parent="Modules" instance=ExtResource("6_78aqt")]
+[node name="ActionModule" parent="Modules" instance=ExtResource("5_u25rd")]
 unique_name_in_owner = true
 
-[node name="InteractModule" parent="Modules" instance=ExtResource("7_agyvk")]
+[node name="InteractModule" parent="Modules" instance=ExtResource("6_to4gb")]
 unique_name_in_owner = true
 
-[node name="AutoAttackModule" parent="Modules" node_paths=PackedStringArray("projectile_spawn") instance=ExtResource("3_aaim3")]
+[node name="AutoAttackModule" parent="Modules" node_paths=PackedStringArray("projectile_spawn") instance=ExtResource("7_rqtjt")]
 unique_name_in_owner = true
 projectile_spawn = NodePath("../../ProjectileSpawn")
 
 [node name="FamiliesManagers" type="Node" parent="."]
 
-[node name="DefenseManager" parent="FamiliesManagers" instance=ExtResource("4_3lofc")]
+[node name="DefenseManager" parent="FamiliesManagers" instance=ExtResource("8_nrem6")]
 unique_name_in_owner = true
 
-[node name="FireManager" parent="FamiliesManagers" node_paths=PackedStringArray("_projectile_spawn") instance=ExtResource("6_vsopc")]
+[node name="FireManager" parent="FamiliesManagers" node_paths=PackedStringArray("_projectile_spawn") instance=ExtResource("9_nht2m")]
 unique_name_in_owner = true
 _projectile_spawn = NodePath("../../ProjectileSpawn")
 
-[node name="LifeManager" parent="FamiliesManagers" instance=ExtResource("7_t7sfu")]
+[node name="LifeManager" parent="FamiliesManagers" instance=ExtResource("10_62qwf")]
 unique_name_in_owner = true
 
-[node name="PoisonManager" parent="FamiliesManagers" instance=ExtResource("8_ysftd")]
+[node name="PoisonManager" parent="FamiliesManagers" instance=ExtResource("11_q2ui6")]
 unique_name_in_owner = true
 
-[node name="SerenityManager" parent="FamiliesManagers" instance=ExtResource("9_poaka")]
+[node name="SerenityManager" parent="FamiliesManagers" instance=ExtResource("12_ql7bv")]
 unique_name_in_owner = true
 
-[node name="ShadowManager" parent="FamiliesManagers" instance=ExtResource("10_gbm6f")]
+[node name="ShadowManager" parent="FamiliesManagers" instance=ExtResource("13_bsyot")]
 unique_name_in_owner = true
 
-[node name="StormManager" parent="FamiliesManagers" instance=ExtResource("11_ra6k1")]
+[node name="StormManager" parent="FamiliesManagers" instance=ExtResource("14_skvrh")]
 unique_name_in_owner = true
 _percent_decrease = 10.0
 
-[node name="AttackManager" parent="FamiliesManagers" instance=ExtResource("14_wpntx")]
+[node name="AttackManager" parent="FamiliesManagers" instance=ExtResource("15_axqe6")]
 unique_name_in_owner = true
