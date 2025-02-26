@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnql4p04d81a0"]
+
+[ext_resource type="PackedScene" uid="uid://betfl3wx60fgk" path="res://Scenes/BuyingArea/3D Scenes inherited/Deco/chest_large_gold_2.tscn" id="1_xyjtn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7le0p"]
+size = Vector3(2.27148, 1.68457, 1.74902)
+
+[node name="chest_large_gold_2" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.853027, -0.0878906)
+shape = SubResource("BoxShape3D_7le0p")
+
+[node name="chest_large_gold" parent="." instance=ExtResource("1_xyjtn")]

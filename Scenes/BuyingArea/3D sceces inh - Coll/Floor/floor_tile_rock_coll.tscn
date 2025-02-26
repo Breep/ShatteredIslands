@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bi6jnpt48kdc7"]
+
+[ext_resource type="PackedScene" uid="uid://c6oy3gadkfjlc" path="res://Scenes/BuyingArea/3D Scenes inherited/Floor/floor_tile_rock.tscn" id="1_08u5w"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_d5r7j"]
+points = PackedVector3Array(-26.254, -2.25079, -0.303869, 6.25079, 30.254, 0.203869, 6.25079, 30.254, -0.303869, -26.254, 30.254, 0.203869, 6.25079, -2.25079, 0.203869, 6.25079, -2.25079, -0.303869, -26.254, 30.254, -0.303869, -26.254, -2.25079, 0.203869)
+
+[node name="Area3D" type="StaticBody3D"]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_d5r7j")
+
+[node name="floor_tile_large_rock" parent="." instance=ExtResource("1_08u5w")]

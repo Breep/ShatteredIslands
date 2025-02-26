@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7g5bsuk2h5dw"]
+
+[ext_resource type="PackedScene" uid="uid://cqnhxmgtmtbt5" path="res://Scenes/BuyingArea/3D Scenes inherited/Wall/wall_window_closed_2.tscn" id="1_jgw5s"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7deoe"]
+size = Vector3(3.99695, 4.00433, 1)
+
+[node name="Area3D" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000216842, 1.99789, 0)
+shape = SubResource("BoxShape3D_7deoe")
+
+[node name="wall_window_closed2" parent="." instance=ExtResource("1_jgw5s")]

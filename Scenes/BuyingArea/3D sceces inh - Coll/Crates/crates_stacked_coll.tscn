@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cywhywdkbmyqo"]
+
+[ext_resource type="PackedScene" uid="uid://cehmedh701mjm" path="res://Scenes/BuyingArea/3D Scenes inherited/Crates/crates_stacked_2.tscn" id="1_mid5f"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xhmte"]
+size = Vector3(1.98701, 2.14229, 2.02472)
+
+[node name="Area3D" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.106494, 1.02886, 0.106598)
+shape = SubResource("BoxShape3D_xhmte")
+
+[node name="crates_stacked2" parent="." instance=ExtResource("1_mid5f")]

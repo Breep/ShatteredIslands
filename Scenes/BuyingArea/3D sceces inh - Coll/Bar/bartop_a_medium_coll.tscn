@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://ptid5goi1psx"]
+
+[ext_resource type="PackedScene" uid="uid://bs48yr6f13ynv" path="res://Scenes/BuyingArea/3D Scenes inherited/Bar/bartop_a_medium_2.tscn" id="1_omv3e"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_d84wp"]
+points = PackedVector3Array(0.972256, 2.17788, -0.0028784, -0.949947, 0.0572414, -0.5, 0.940423, 0.0572414, -0.5, 0.972257, 0.0221217, -0.00287834, -0.97868, 2.17446, -0.00368016, 0.940423, 2.14276, -0.5, -0.97868, 0.0255421, -0.00368016, -0.949947, 2.14276, -0.5)
+
+[node name="bartop_A_medium" type="StaticBody3D"]
+
+[node name="bartop_A_medium" parent="." instance=ExtResource("1_omv3e")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_d84wp")

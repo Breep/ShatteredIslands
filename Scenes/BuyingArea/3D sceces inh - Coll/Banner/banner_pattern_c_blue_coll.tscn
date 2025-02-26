@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bibyw3elkqluk"]
+
+[ext_resource type="PackedScene" uid="uid://be6grovya7hpp" path="res://Scenes/BuyingArea/3D Scenes inherited/Banner/banner_pattern_c_blue_2.tscn" id="1_3n56w"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v5mq6"]
+size = Vector3(1.5813, 3.18569, 0.260083)
+
+[node name="Area3D" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00891113, 2.15579, 0.502817)
+shape = SubResource("BoxShape3D_v5mq6")
+
+[node name="banner_patternC_blue2" parent="." instance=ExtResource("1_3n56w")]

@@ -1,11 +1,10 @@
-[gd_scene load_steps=37 format=3 uid="uid://b7kxtljteovd6"]
+[gd_scene load_steps=34 format=3 uid="uid://b7kxtljteovd6"]
 
 [ext_resource type="Shader" uid="uid://bcu1kjfpd6cri" path="res://Shaders/3D/Fire/fire_3d.tres" id="1_1r8wa"]
 [ext_resource type="Texture2D" uid="uid://byg7j5pbkqak" path="res://Data/Texture/2D/fire texture 2.png" id="2_h8jbn"]
 [ext_resource type="Texture2D" uid="uid://b87qfbv8yqlo1" path="res://Data/Texture/2D/fire texture 1.png" id="3_5hywm"]
 [ext_resource type="Texture2D" uid="uid://dfnid3c2l0ajl" path="res://Data/Texture/2D/T_VFX_simple_1.png" id="4_m38xo"]
 [ext_resource type="Shader" uid="uid://dxvrfcjpmkb2q" path="res://Shaders/3D/Fire/fire_embers.tres" id="5_3iodv"]
-[ext_resource type="Texture2D" uid="uid://dfd5051klfya0" path="res://Data/Texture/2D/deform.png" id="6_sy66p"]
 
 [sub_resource type="Gradient" id="Gradient_n3kmu"]
 
@@ -220,18 +219,6 @@ color_ramp = SubResource("GradientTexture1D_2nwy5")
 glow_enabled = true
 glow_strength = 1.08
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4w71c"]
-render_priority = 0
-shader = ExtResource("1_1r8wa")
-shader_parameter/Speed = Vector2(1, 1)
-shader_parameter/Speed_divider = 15.0
-shader_parameter/Color_Fire = Color(4, 0.8, 0, 1)
-shader_parameter/Texture_move = ExtResource("2_h8jbn")
-shader_parameter/Gradient = ExtResource("2_h8jbn")
-shader_parameter/Texture_main = ExtResource("6_sy66p")
-
-[sub_resource type="QuadMesh" id="QuadMesh_f5jnx"]
-
 [node name="VFXFire3D" type="Node3D"]
 
 [node name="Fire" type="CPUParticles3D" parent="."]
@@ -259,23 +246,3 @@ draw_pass_1 = SubResource("QuadMesh_2qi40")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_pt2fe")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3, 0, 0)
-material_override = SubResource("ShaderMaterial_4w71c")
-mesh = SubResource("QuadMesh_f5jnx")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.15899, 0, 0)
-material_override = SubResource("ShaderMaterial_4w71c")
-mesh = SubResource("QuadMesh_f5jnx")
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.59204, 0, 0)
-material_override = SubResource("ShaderMaterial_4w71c")
-mesh = SubResource("QuadMesh_f5jnx")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.75425, 0, 0)
-material_override = SubResource("ShaderMaterial_4w71c")
-mesh = SubResource("QuadMesh_f5jnx")

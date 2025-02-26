@@ -116,7 +116,7 @@ _data = {
 "mimic_chest": SubResource("Animation_u6qm8")
 }
 
-[node name="ChestMimic" type="Area3D"]
+[node name="ChestMimic" type="StaticBody3D"]
 script = ExtResource("1_3d1qy")
 
 [node name="chest_mimic" type="MeshInstance3D" parent="."]

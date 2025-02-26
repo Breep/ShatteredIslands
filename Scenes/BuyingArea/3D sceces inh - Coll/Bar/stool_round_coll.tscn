@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://3wvjugdxyvfn"]
+
+[ext_resource type="PackedScene" uid="uid://cmk3rv5wuoy0c" path="res://Scenes/BuyingArea/3D Scenes inherited/Bar/stool_round_2.tscn" id="1_5xfxv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e403i"]
+size = Vector3(0.727722, 0.501083, 0.729156)
+
+[node name="stool_round" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00613403, 0.249458, -0.000106812)
+shape = SubResource("BoxShape3D_e403i")
+
+[node name="stool_round" parent="." instance=ExtResource("1_5xfxv")]

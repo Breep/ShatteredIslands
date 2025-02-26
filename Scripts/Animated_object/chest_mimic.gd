@@ -1,4 +1,4 @@
-extends Node3D
+extends StaticBody3D
 
 @onready var animation_player: AnimationPlayer = %AnimationPlayer 
 @onready var mimic_chest_animation = "mimic_chest"  # Nom de l'animation

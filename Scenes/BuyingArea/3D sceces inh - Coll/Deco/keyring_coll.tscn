@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://737q40i64b40"]
+
+[ext_resource type="PackedScene" uid="uid://ctgwcl7yktr76" path="res://Scenes/BuyingArea/3D Scenes inherited/Deco/keyring_2.tscn" id="1_r0yvu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dy5nd"]
+size = Vector3(0.917358, 0.250623, 1.20221)
+
+[node name="keyring_2" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.108093, 0.0955505, -0.0677795)
+shape = SubResource("BoxShape3D_dy5nd")
+
+[node name="keyring" parent="." instance=ExtResource("1_r0yvu")]

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnoc3aj6cy441"]
+
+[ext_resource type="PackedScene" uid="uid://d6ae8llq7gad" path="res://Scenes/BuyingArea/3D Scenes inherited/Table/table_long_tablecloth_decorated_a_2.tscn" id="1_s476d"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mwtb3"]
+size = Vector3(2.06812, 1.71336, 3.98999)
+
+[node name="table_long_tablecloth_decorated_a_2" type="StaticBody3D"]
+
+[node name="table_long_tablecloth_decorated_A" parent="." instance=ExtResource("1_s476d")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.861015, 0)
+shape = SubResource("BoxShape3D_mwtb3")

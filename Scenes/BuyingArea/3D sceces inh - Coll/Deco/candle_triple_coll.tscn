@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cai6nlcfhpqge"]
+
+[ext_resource type="PackedScene" uid="uid://yand2ent8y6r" path="res://Scenes/BuyingArea/3D Scenes inherited/Deco/candle_triple_2.tscn" id="1_oniv8"]
+
+[node name="candle_triple_2" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+
+[node name="candle_triple" parent="." instance=ExtResource("1_oniv8")]
