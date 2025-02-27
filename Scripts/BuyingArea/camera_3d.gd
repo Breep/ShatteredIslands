@@ -29,6 +29,7 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		_select_object(event.position)
 
+
 var _old_selected_object: Node3D
 func _select_object(screen_position):
 	# Convert screen position to a ray in 3D
@@ -38,7 +39,8 @@ func _select_object(screen_position):
 	# Define the ray end position (extend it far enough)
 	var ray_end = ray_origin + ray_dir * 1000  # 1000 units ahead
 	
-	debug_mesh.draw_line(ray_origin, ray_end)
+	if debug_mesh != null:
+		debug_mesh.draw_line(ray_origin, ray_end)
 	
 	# Perform the raycast
 	var space_state = get_world_3d().direct_space_state
