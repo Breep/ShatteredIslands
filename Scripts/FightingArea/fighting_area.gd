@@ -5,6 +5,12 @@ extends Node3D
 
 signal map_clicked(position: Vector3)
 
+# ============================== Constants ==============================
+
+const MAPS = {
+	Battle.BattleType.VS_1: preload("res://Scenes/FightingArea/Maps/test_map.tscn")
+}
+
 # ============================== Private variables ==============================
 
 var _characters: Array[Character] # Array of all characters in the fight scene
@@ -32,17 +38,17 @@ func _ready() -> void:
 		printerr("FightingArea: Need a camera")
 		return
 	
-	if not _spawn_manager.start(GameManager.players):
-		printerr("FightingArea: Can't start SpawnManager")
-		return
-	
-	_characters = _get_characters()
-	if _characters.is_empty():
-		printerr("FightingArea: There is no character on scene, there is probably something wrong with the SpawnManager")
-		return
-	
-	_fighting_manager.connect("state_changed", _on_fighting_manager_state_changed)
-	_fighting_manager.start()
+	#if not _spawn_manager.start(GameManager.players):
+		#printerr("FightingArea: Can't start SpawnManager")
+		#return
+	#
+	#_characters = _get_characters()
+	#if _characters.is_empty():
+		#printerr("FightingArea: There is no character on scene, there is probably something wrong with the SpawnManager")
+		#return
+	#
+	#_fighting_manager.connect("state_changed", _on_fighting_manager_state_changed)
+	#_fighting_manager.start()
 
 
 # Get all characters present on scene

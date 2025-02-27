@@ -29,8 +29,9 @@ var players: Dictionary # { player_id : Player }
 
 var _game_state: GameState = GameState.Starting
 
-var _buying_area: PackedScene = preload("res://Scenes/BuyingArea/buying_area.tscn")
-var _fighting_area: PackedScene = preload("res://Scenes/FightingArea/fighting_area_3d.tscn")
+var _game_scene: PackedScene = preload("res://Scenes/Game/game.tscn")
+var _buying_area_scene: PackedScene = preload("res://Scenes/BuyingArea/buying_area.tscn")
+var _fighting_area_scene: PackedScene = preload("res://Scenes/FightingArea/fighting_area.tscn")
 
 var _families_ref: Dictionary # Reference Dictionary to all families
 var _active_families: Array[Family] # Array of all families activated for this game only
@@ -111,7 +112,8 @@ func start_game() -> void:
 	if multiplayer.is_server():
 		MultiplayerDeckManager.construct_shop_deck(_active_families, _rules)
 	
-	game_switch_to(GameState.Buying)
+	get_tree().change_scene_to_packed(_game_scene)
+	#game_switch_to(GameState.Buying)
 
 
 func get_family_from_type(family_type: Family.FamilyType) -> Family:
@@ -125,14 +127,24 @@ func get_alive_players() -> Dictionary:
 			alive_players[player.id] = player
 	return alive_players
 
+
+func start_round() ->void:
+	# Start buying area + all battles area
+	pass
+
+
+# Start a fighting area linked to a battle
+func start_fighting_area(battle: Battle) -> void:
+	pass
+
 # ============================== Private function ==============================
 
 func _game_switch_to(new_game_state: GameState) -> void:
 	var new_scene: PackedScene
-	if new_game_state == GameState.Buying:
-		new_scene = _buying_area
+	if new_game_state == GameState.Buying: 
+		new_scene = _buying_area_scene
 	elif new_game_state == GameState.Fighting:
-		new_scene = _fighting_area
+		new_scene = _fighting_area_scene
 	else:
 		printerr("Unknown game state !")
 		return

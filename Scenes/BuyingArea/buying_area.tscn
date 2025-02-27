@@ -1,7 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://ca8mcplp2va4s"]
+[gd_scene load_steps=15 format=3 uid="uid://ca8mcplp2va4s"]
 
 [ext_resource type="Script" path="res://Scripts/BuyingArea/buying_area.gd" id="1_ed4aq"]
-[ext_resource type="Script" path="res://Scripts/BuyingArea/camera_3d.gd" id="2_vend1"]
 [ext_resource type="PackedScene" uid="uid://cmstx61h3h6ar" path="res://Scenes/UI/3d_ui_buying_area.tscn" id="5_dvq4w"]
 [ext_resource type="PackedScene" uid="uid://cxalabhvxw1pd" path="res://Scenes/UI/ui_timer.tscn" id="6_58bhs"]
 [ext_resource type="PackedScene" uid="uid://d1oxnd1g75rqh" path="res://Scenes/Card/card_shop.tscn" id="6_sjppt"]
@@ -36,14 +35,6 @@ script = ExtResource("1_ed4aq")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_pgie4")
 
-[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("debug_mesh")]
-transform = Transform3D(0.819152, -0.32899, 0.469846, 0, 0.819152, 0.573576, -0.573576, -0.469846, 0.67101, -0.640195, 10.1977, 4.70713)
-projection = 1
-size = 10.431
-far = 35.0
-script = ExtResource("2_vend1")
-debug_mesh = NodePath("../MeshInstance3D")
-
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
@@ -75,6 +66,7 @@ offset_bottom = 7.0
 scale = Vector2(0.8, 0.8)
 
 [node name="Tavern" parent="." instance=ExtResource("7_s1xub")]
+unique_name_in_owner = true
 
 [node name="Light" type="Node3D" parent="."]
 
