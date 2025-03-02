@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Hero" load_steps=6 format=3 uid="uid://doyohpm5j86u7"]
+
+[ext_resource type="Script" path="res://ResourcesBase/Hero/hero.gd" id="1_cktai"]
+[ext_resource type="PackedScene" uid="uid://pjdoj138r37h" path="res://Scenes/Heroes/Cyborg/projectile.tscn" id="1_jymct"]
+[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/character_stats.gd" id="2_1yek5"]
+[ext_resource type="PackedScene" uid="uid://d22s0rdi4c3gf" path="res://Scenes/Heroes/Cyborg/model.tscn" id="4_vvujf"]
+
+[sub_resource type="Resource" id="Resource_0r2fq"]
+script = ExtResource("2_1yek5")
+health_max = 2000
+mana_max = 100
+mana_regen = 1.0
+energy_max = 30
+energy_regen = 2.0
+move_speed = 2.0
+attack_damage = 40
+attack_speed = 1.5
+attack_move_speed = 10.0
+physical_critical_chance = 10.0
+physical_critical_multiplier = 2.0
+
+[resource]
+script = ExtResource("1_cktai")
+name = "Cyborg"
+description = "Bip bap boup"
+stats = SubResource("Resource_0r2fq")
+aa_projectile = ExtResource("1_jymct")
+visual = ExtResource("4_vvujf")

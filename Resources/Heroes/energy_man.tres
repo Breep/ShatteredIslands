@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Hero" load_steps=6 format=3 uid="uid://8apiweosoue6"]
+
+[ext_resource type="Script" path="res://ResourcesBase/Hero/hero.gd" id="1_imnjk"]
+[ext_resource type="PackedScene" uid="uid://bly2at60nuphy" path="res://Scenes/Heroes/EnergyMan/projectile.tscn" id="1_phmec"]
+[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/character_stats.gd" id="3_oa0xn"]
+[ext_resource type="PackedScene" uid="uid://bw3gc3j4xrf16" path="res://Scenes/Heroes/EnergyMan/model.tscn" id="4_vnsa7"]
+
+[sub_resource type="Resource" id="Resource_g3hwp"]
+script = ExtResource("3_oa0xn")
+health_max = 1000
+mana_max = 100
+mana_regen = 10.0
+energy_max = 100
+energy_regen = 2.0
+move_speed = 10.0
+attack_damage = 10
+attack_speed = 3.0
+attack_move_speed = 20.0
+physical_critical_chance = 10.0
+physical_critical_multiplier = 2.0
+
+[resource]
+script = ExtResource("1_imnjk")
+name = "Energy man"
+description = "Gotta go fast"
+stats = SubResource("Resource_g3hwp")
+aa_projectile = ExtResource("1_phmec")
+visual = ExtResource("4_vnsa7")

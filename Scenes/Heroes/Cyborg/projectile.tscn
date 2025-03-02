@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://pjdoj138r37h"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tptdu"]
+albedo_color = Color(0.321728, 0.321728, 0.321728, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_rkox7"]
+material = SubResource("StandardMaterial3D_tptdu")
+radius = 0.1
+height = 0.2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_a055b"]
+radius = 0.1
+
+[node name="Projectile" type="Area3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_rkox7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_a055b")

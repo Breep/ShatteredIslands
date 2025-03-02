@@ -1,7 +1,7 @@
 [gd_scene load_steps=23 format=3 uid="uid://bskueqquqfhhp"]
 
 [ext_resource type="Script" path="res://Scripts/Test/test_ui_player_stats.gd" id="1_i4kvd"]
-[ext_resource type="Resource" uid="uid://cbcy0wbqkel1q" path="res://Resources/Heros/JohnnyDefault/johnny_default.tres" id="2_41p2u"]
+[ext_resource type="Resource" uid="uid://cbcy0wbqkel1q" path="res://Resources/Heroes/johnny_default.tres" id="2_41p2u"]
 [ext_resource type="Texture2D" uid="uid://bxd1jnaci6olo" path="res://Data/Assets/Card/ICONS/ATTACK color.png" id="2_ay2ej"]
 [ext_resource type="Shader" path="res://Shaders/UI/colorRect_roundangle.gdshader" id="2_gulvd"]
 [ext_resource type="Texture2D" uid="uid://cnp4ioj5qvrv4" path="res://Data/Assets/Card/ICONS/DEFENSE color.png" id="3_aaqkt"]
