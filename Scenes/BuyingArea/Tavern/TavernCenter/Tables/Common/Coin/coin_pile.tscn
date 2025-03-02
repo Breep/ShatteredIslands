@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bs8lfftv32dp1"]
 
-[ext_resource type="Script" path="res://Scripts/BuyingArea/Tables/Common/Coin/coin_pile.gd" id="1_2nfwi"]
+[ext_resource type="Script" path="res://Scripts/BuyingArea/Tavern/TavernCenter/Tables/Common/Coin/coin_pile.gd" id="1_2nfwi"]
 [ext_resource type="PackedScene" uid="uid://birnnko0u17dy" path="res://Scenes/BuyingArea/Tavern/TavernCenter/Tables/Common/Coin/coin_tower.tscn" id="1_pk0pf"]
 
 [node name="CoinPile" type="Node3D" node_paths=PackedStringArray("_coin_towers")]

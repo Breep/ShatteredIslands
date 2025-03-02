@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://oimyi4iueoda"]
 
-[ext_resource type="Script" path="res://Scenes/Game/game.gd" id="1_7r6pw"]
+[ext_resource type="Script" path="res://Scripts/Game/game.gd" id="1_7r6pw"]
 [ext_resource type="PackedScene" uid="uid://ca8mcplp2va4s" path="res://Scenes/BuyingArea/buying_area.tscn" id="2_36puk"]
 [ext_resource type="PackedScene" uid="uid://di34xfy5cli15" path="res://Scenes/Tool/free_fly_camera.tscn" id="3_t03ty"]
 

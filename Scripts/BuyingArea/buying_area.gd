@@ -1,6 +1,8 @@
 class_name BuyingArea
 extends Node3D
 
+signal phase_ended()
+
 var _current_round: int
 var _battles: Array[Battle]
 
@@ -9,8 +11,9 @@ var _battles: Array[Battle]
 func _ready() -> void:
 	_current_round = RoundManager.current_round
 	#_battles = RoundManager.get_current_round_battles()
-	
+
 
 # Reload the tavern center
 func start_round(battles: Array[Battle]) -> void:
-	_tavern.start_round(battles)
+	CameraManager.camera_changed.emit(CameraManager.CameraType.BuyingArea)
+	_tavern.put_tables_according_to_battles(battles)

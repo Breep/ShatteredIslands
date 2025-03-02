@@ -1,6 +1,6 @@
-[gd_scene load_steps=66 format=3 uid="uid://b8clqslwo8t68"]
+[gd_scene load_steps=68 format=3 uid="uid://b8clqslwo8t68"]
 
-[ext_resource type="Script" path="res://Scripts/BuyingArea/tavern.gd" id="1_amkis"]
+[ext_resource type="Script" path="res://Scripts/BuyingArea/Tavern/tavern.gd" id="1_amkis"]
 [ext_resource type="PackedScene" uid="uid://cdryp1jj4woix" path="res://Scenes/BuyingArea/card_pile_comptoir.tscn" id="2_7m3y5"]
 [ext_resource type="PackedScene" uid="uid://ca4hq5vmo2led" path="res://Scenes/BuyingArea/3D sceces inh - Coll/Deco/bottle_b_brown_coll.tscn" id="3_7txpj"]
 [ext_resource type="PackedScene" uid="uid://bb1u6xo8ouv6t" path="res://Scenes/BuyingArea/3D sceces inh - Coll/Deco/bottle_a_brown_coll.tscn" id="3_8gbnn"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://1rofii7pievm" path="res://Scenes/BuyingArea/3D sceces inh - Coll/Bar/bar_straight_b_coll.tscn" id="16_8x7c4"]
 [ext_resource type="PackedScene" uid="uid://737q40i64b40" path="res://Scenes/BuyingArea/3D sceces inh - Coll/Deco/keyring_coll.tscn" id="16_nrh2s"]
 [ext_resource type="PackedScene" uid="uid://engqkn6ikktk" path="res://Scenes/BuyingArea/3D sceces inh - Coll/Bar/bar_straight_c_coll.tscn" id="17_iam8e"]
+[ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://Scenes/Components/interaction_component.tscn" id="23_03w0h"]
 [ext_resource type="PackedScene" uid="uid://3wvjugdxyvfn" path="res://Scenes/BuyingArea/3D sceces inh - Coll/Bar/stool_round_coll.tscn" id="23_gj6s6"]
 [ext_resource type="PackedScene" uid="uid://ccgffvm3dhetu" path="res://Scenes/BuyingArea/3D sceces inh - Coll/Banner/banner_pattern_c_white_coll.tscn" id="24_nbc4i"]
 [ext_resource type="PackedScene" uid="uid://ddpnam3agt3b" path="res://Scenes/BuyingArea/3D sceces inh - Coll/Banner/banner_shield_brown_coll.tscn" id="28_aguh0"]
@@ -66,11 +67,14 @@
 [ext_resource type="PackedScene" uid="uid://dj3wf5w1sy6y5" path="res://Scenes/BuyingArea/3D sceces inh - Coll/Light/torch_mounted_coll.tscn" id="65_hpaya"]
 [ext_resource type="PackedScene" uid="uid://dr8xv1vshmvyq" path="res://Scenes/BuyingArea/Tavern/TavernCenter/tavern_center.tscn" id="66_amm73"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_ee6hw"]
+size = Vector3(9.99387, 3.99359, 4.45267)
+
 [node name="Tavern" type="Node3D" node_paths=PackedStringArray("_tarven_center")]
 script = ExtResource("1_amkis")
 _tarven_center = NodePath("TavernCenter")
 
-[node name="Bar" type="Node3D" parent="."]
+[node name="Bar" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.360003, 0, -15.755)
 
 [node name="CardPile_comptoir" parent="Bar" instance=ExtResource("2_7m3y5")]
@@ -183,6 +187,12 @@ transform = Transform3D(-0.358449, 0, -0.933549, 0, 1, 0, 0.933549, 0, -0.358449
 
 [node name="stool_round3" parent="Bar/Stool_round" instance=ExtResource("23_gj6s6")]
 transform = Transform3D(0.943668, 0, 0.330893, 0, 1, 0, -0.330893, 0, 0.943668, -3.54794, 0, 1.19107)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bar"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.89352, 2.04605, -1.51286)
+shape = SubResource("BoxShape3D_ee6hw")
+
+[node name="InteractionComponent" parent="Bar" instance=ExtResource("23_03w0h")]
 
 [node name="Decco" type="Node3D" parent="."]
 

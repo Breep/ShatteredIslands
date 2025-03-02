@@ -1,12 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://ca8mcplp2va4s"]
+[gd_scene load_steps=12 format=3 uid="uid://ca8mcplp2va4s"]
 
 [ext_resource type="Script" path="res://Scripts/BuyingArea/buying_area.gd" id="1_ed4aq"]
+[ext_resource type="Script" path="res://Scripts/BuyingArea/camera_buying_area.gd" id="2_nery7"]
 [ext_resource type="PackedScene" uid="uid://cmstx61h3h6ar" path="res://Scenes/UI/3d_ui_buying_area.tscn" id="5_dvq4w"]
 [ext_resource type="PackedScene" uid="uid://cxalabhvxw1pd" path="res://Scenes/UI/ui_timer.tscn" id="6_58bhs"]
 [ext_resource type="PackedScene" uid="uid://d1oxnd1g75rqh" path="res://Scenes/Card/card_shop.tscn" id="6_sjppt"]
 [ext_resource type="PackedScene" uid="uid://b8clqslwo8t68" path="res://Scenes/BuyingArea/Tavern/tavern.tscn" id="7_s1xub"]
-[ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://Scenes/Components/interaction_component.tscn" id="10_3v11h"]
-[ext_resource type="Script" path="res://Scenes/BuyingArea/mesh_instance_3d.gd" id="10_x4nfl"]
 [ext_resource type="AudioStream" uid="uid://ck0xrpfygj0sw" path="res://Data/Assets/Sound/World of Warcraft - Taverns of Azeroth - 13 - Thunderbrew.wav" id="72_1sm7x"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w8c5s"]
@@ -25,15 +24,17 @@ glow_enabled = true
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jhmrm"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_jono4"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_b8dvq"]
-
 [node name="BuyingArea" type="Node3D"]
 script = ExtResource("1_ed4aq")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_pgie4")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.984808, -0.0868241, 0.150384, 0, 0.866025, 0.5, -0.173648, -0.492404, 0.852868, -4.72408, 7.83169, 0.56205)
+projection = 1
+size = 10.0
+script = ExtResource("2_nery7")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -90,20 +91,5 @@ autostart = true
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_jhmrm")
-
-[node name="TMP_OBJECT" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.775, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="TMP_OBJECT"]
-mesh = SubResource("BoxMesh_jono4")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TMP_OBJECT"]
-shape = SubResource("BoxShape3D_b8dvq")
-
-[node name="InteractionComponent" parent="TMP_OBJECT" node_paths=PackedStringArray("meshs") instance=ExtResource("10_3v11h")]
-meshs = [NodePath("../MeshInstance3D")]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-script = ExtResource("10_x4nfl")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

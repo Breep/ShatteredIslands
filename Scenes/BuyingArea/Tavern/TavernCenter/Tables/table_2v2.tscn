@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b4av14wu25x12"]
 
-[ext_resource type="Script" path="res://Scripts/BuyingArea/Tables/table.gd" id="2_8h1bl"]
+[ext_resource type="Script" path="res://Scripts/BuyingArea/Tavern/TavernCenter/Tables/table.gd" id="2_8h1bl"]
 [ext_resource type="PackedScene" uid="uid://di4wldkhwynkj" path="res://Scenes/Data/Tavern/TableLong/table_long.tscn" id="3_rul7h"]
 [ext_resource type="PackedScene" uid="uid://bs8lfftv32dp1" path="res://Scenes/BuyingArea/Tavern/TavernCenter/Tables/Common/Coin/coin_pile.tscn" id="5_lv2wc"]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dlqrg6ijwk3i8"]
 
 [ext_resource type="PackedScene" uid="uid://2w4h1fymlgm2" path="res://Scenes/Data/Tavern/table_medium_2.tscn" id="2_27ucn"]
-[ext_resource type="Script" path="res://Scripts/BuyingArea/Tables/table.gd" id="2_c334w"]
+[ext_resource type="Script" path="res://Scripts/BuyingArea/Tavern/TavernCenter/Tables/table.gd" id="2_c334w"]
 [ext_resource type="PackedScene" uid="uid://bs8lfftv32dp1" path="res://Scenes/BuyingArea/Tavern/TavernCenter/Tables/Common/Coin/coin_pile.tscn" id="4_f6syc"]
 
 [node name="Table_1v1" type="Node3D" node_paths=PackedStringArray("_coin_piles", "_hero_spawns")]

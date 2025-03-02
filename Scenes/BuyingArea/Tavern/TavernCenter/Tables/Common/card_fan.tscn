@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dmo0ff086abwu"]
 
-[ext_resource type="Script" path="res://Scripts/BuyingArea/Tables/Common/card_fan.gd" id="1_rf35n"]
+[ext_resource type="Script" path="res://Scripts/BuyingArea/Tavern/TavernCenter/Tables/Common/card_fan.gd" id="1_rf35n"]
 [ext_resource type="PackedScene" uid="uid://dfhrsmc3bnsv5" path="res://Scenes/Card/card_3d_visual.tscn" id="2_4oyo1"]
 
 [node name="CardFan" type="Node3D" node_paths=PackedStringArray("_cards")]
