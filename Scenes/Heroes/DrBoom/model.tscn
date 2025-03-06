@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cmq21hx4nihv4"]
+[gd_scene load_steps=4 format=3 uid="uid://cmq21hx4nihv4"]
+
+[ext_resource type="Script" path="res://Scenes/Heroes/hero_3d.gd" id="1_52dcc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n0ky3"]
 albedo_color = Color(0.73703, 0, 0.107023, 1)
@@ -7,6 +9,7 @@ albedo_color = Color(0.73703, 0, 0.107023, 1)
 material = SubResource("StandardMaterial3D_n0ky3")
 
 [node name="Visual" type="Node3D"]
+script = ExtResource("1_52dcc")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

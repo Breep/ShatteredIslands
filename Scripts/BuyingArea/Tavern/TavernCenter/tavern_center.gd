@@ -1,15 +1,31 @@
 class_name TavernCenter
 extends Node3D
 
+# ============================== Private variables ==============================
+
 var _battle_types_number = {
 	Battle.BattleType.VS_1: 0,
 	Battle.BattleType.VS_2: 0,
 	Battle.BattleType.FFA_SOLO_3: 0,
 }
 
+# ============================== Local nodes ==============================
+
+@onready var _hero_selection: Node3D = %HeroSelection
+
+# ============================== Node base functions ==============================
+
 func _ready() -> void:
 	Utils.recursive_hide(self)
+	
+	var heroes = _source.find_children("", "Hero3D", true, false)
+	if heroes.is_empty():
+		printerr("TavernCenter: There should be heroes inside the _hero_selection Node")
+		return
+	for hero in heroes:
+		(hero as Hero3D).queue_free()
 
+# ============================== Public functions ==============================
 
 func put_tables_according_to_battles(battles: Array[Battle]) -> void:
 	var battles_number = battles.size()
@@ -43,6 +59,11 @@ func put_tables_according_to_battles(battles: Array[Battle]) -> void:
 	Utils.recursive_show(tables_node)
 	show()
 
+
+func init_hero_selection(heroes: Array[Hero]) -> void:
+	var 
+
+# ============================== Private functions ==============================
 
 func _init_tables(tables_node: Node3D, battles: Array[Battle]) -> void:
 	var tables = tables_node.find_children("", "Table", true, false)
