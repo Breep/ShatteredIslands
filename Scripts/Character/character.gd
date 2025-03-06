@@ -52,6 +52,7 @@ func _ready() -> void:
 	
 	_multiplayerSynchroniser.set_multiplayer_authority(player.id)
 	_is_local = _multiplayerSynchroniser.get_multiplayer_authority() == multiplayer.get_unique_id()
+	_character_visual.load_hero_model(hero)
 	_character_visual.update_name_displayed(player.name)
 	
 	if _fighting_area != null and _is_local:
@@ -161,6 +162,8 @@ func _init_modules() -> void:
 	
 	_interact_module.damage_taken.connect(_on_interact_module_damage_taken)
 	_interact_module.heal_received.connect(_on_interact_module_heal_received)
+	
+	_auto_attack_module.set_projectile(hero.aa_projectile)
 
 # ============================== Private ==============================
 

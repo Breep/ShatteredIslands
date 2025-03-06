@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://c66yw4go2ykwa"]
 
 [ext_resource type="Script" path="res://Scripts/FightingArea/fighting_area.gd" id="1_qx4db"]
+[ext_resource type="Script" path="res://Scripts/FightingArea/camera_fighting_area.gd" id="2_48dto"]
 [ext_resource type="PackedScene" uid="uid://c0l0roxttdtlp" path="res://Scenes/FightingArea/fighting_manager.tscn" id="2_vrsql"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://Scenes/FightingArea/spawn_manager.tscn" id="3_vd45s"]
 [ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Scenes/Character/character.tscn" id="4_3pbvh"]
-[ext_resource type="PackedScene" uid="uid://dmfkigo1trjd0" path="res://Scenes/UI/ui_countdown.tscn" id="5_boxeu"]
 [ext_resource type="PackedScene" uid="uid://b3467f7qtons1" path="res://Scenes/FightingArea/Maps/test_map.tscn" id="6_12jqf"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jo255"]
@@ -16,6 +16,13 @@ script = ExtResource("1_qx4db")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.883038, -0.260635, 0.390274, 0, 0.831605, 0.555367, -0.469302, -0.49041, 0.734339, 0, 15.6227, 0)
 light_color = Color(0.707351, 0.647416, 0.866633, 1)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 35, 49.5331)
+projection = 1
+size = 15.015
+script = ExtResource("2_48dto")
 
 [node name="Managers" type="Node3D" parent="."]
 
@@ -41,21 +48,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Managers/SpawnManager/SpawnTeam2"]
 shape = SubResource("BoxShape3D_jo255")
-
-[node name="Countdown" parent="." instance=ExtResource("5_boxeu")]
-unique_name_in_owner = true
-anchor_left = 0.5
-anchor_top = 0.057
-anchor_right = 0.5
-anchor_bottom = 0.057
-offset_right = 0.0
-offset_bottom = 0.0
-grow_vertical = 1
-
-[node name="FightingManager" parent="." instance=ExtResource("2_vrsql")]
-starting_count_down_duration = 5
-fight_duration = 30
-fight_accelerated_duration = 15
-ending_duration = 5
 
 [node name="Map" parent="." instance=ExtResource("6_12jqf")]

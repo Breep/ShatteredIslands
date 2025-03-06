@@ -24,7 +24,7 @@ var _teams_data: Dictionary # {TeamsData.TEAM_NUMBER:int, TeamsData.TEAM_PLAYER_
 
 # ============================== Public function ==============================
 
-func start(players: Dictionary) -> bool:
+func spawn_characters(players: Array[Player]) -> bool:
 	if not _init_teams_data(players):
 		printerr("SpawnManager: Can't init teams data")
 		return false
@@ -33,7 +33,7 @@ func start(players: Dictionary) -> bool:
 		printerr("SpawnManager: Can't init spawns data")
 		return false
 	
-	for player in players.values():
+	for player in players:
 		_spawn_new_character(player)
 	
 	return true
@@ -77,11 +77,11 @@ func _init_spawns_data(number_of_teams: int, team_players_number: int) -> bool:
 
 # From the array of player passed to the SpawnManager, get teams number and player numbers of each team
 # Can return false if there is somethings wrong (Too many teams, not enough or not the same amount of player in each team)
-func _init_teams_data(players: Dictionary) -> bool:
+func _init_teams_data(players: Array[Player]) -> bool:
 	var teams_number_of_player: Dictionary
 	
 	# Get all number of players for each team
-	for player in players.values():
+	for player in players:
 		if teams_number_of_player.has(player.team):
 			teams_number_of_player[player.team] += 1
 		else:

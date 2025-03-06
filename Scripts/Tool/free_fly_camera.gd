@@ -41,7 +41,7 @@ func _process(delta):
 
 
 func _on_camera_manager_camera_changed(camera_type: CameraManager.CameraType) -> void:
-	if camera_type != CameraManager.CameraType.FreeFly:
+	if camera_type != CameraManager.CameraType.FREE_FLY:
 		_is_active = false
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		return

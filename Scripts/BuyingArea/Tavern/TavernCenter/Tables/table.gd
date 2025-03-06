@@ -26,4 +26,7 @@ func connect_to_players(players: Array[Player]) -> void:
 	
 	for i in players.size():
 		#_card_fans[i].connect_to_player(players[i])
+		var hero_model: Node3D = players[i].hero.model.instantiate()
+		add_child(hero_model)
+		hero_model.global_position = _hero_spawns[i].global_position
 		_coin_piles[i].connect_to_player(players[i])

@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="Hero" load_steps=6 format=3 uid="uid://ccww2pxgtqvfx"]
+[gd_resource type="Resource" script_class="Hero" load_steps=5 format=3 uid="uid://ccww2pxgtqvfx"]
 
-[ext_resource type="PackedScene" uid="uid://cjavtxv58hd1v" path="res://Scenes/Heroes/MrKrumb/projectile.tscn" id="1_7cqh1"]
 [ext_resource type="Script" path="res://ResourcesBase/Hero/hero.gd" id="1_x5ik6"]
 [ext_resource type="Script" path="res://ResourcesBase/CharacterStats/character_stats.gd" id="2_g7x07"]
 [ext_resource type="PackedScene" uid="uid://b4d230tklju1w" path="res://Scenes/Heroes/MrKrumb/model.tscn" id="4_4joxv"]
@@ -22,7 +21,8 @@ physical_critical_multiplier = 2.0
 [resource]
 script = ExtResource("1_x5ik6")
 name = "Mr Krumb"
+hero_type = 5
 description = "Change personality"
 stats = SubResource("Resource_yjtod")
-aa_projectile = ExtResource("1_7cqh1")
-visual = ExtResource("4_4joxv")
+aa_projectile_type = 0
+model = ExtResource("4_4joxv")

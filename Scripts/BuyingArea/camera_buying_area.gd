@@ -69,8 +69,7 @@ func _select_object(screen_position):
 
 
 func _on_camera_manager_camera_changed(camera_type: CameraManager.CameraType) -> void:
-	print("Should switch")
-	if camera_type != CameraManager.CameraType.BuyingArea:
+	if camera_type != CameraManager.CameraType.BUYING_AREA:
 		_is_active = false
 		return
 	

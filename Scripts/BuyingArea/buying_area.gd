@@ -15,5 +15,5 @@ func _ready() -> void:
 
 # Reload the tavern center
 func start_round(battles: Array[Battle]) -> void:
-	CameraManager.camera_changed.emit(CameraManager.CameraType.BuyingArea)
+	CameraManager.camera_changed.emit(CameraManager.CameraType.BUYING_AREA)
 	_tavern.put_tables_according_to_battles(battles)

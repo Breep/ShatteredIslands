@@ -1,9 +1,8 @@
-[gd_resource type="Resource" script_class="Hero" load_steps=6 format=3 uid="uid://bqjyvw4bxcnt7"]
+[gd_resource type="Resource" script_class="Hero" load_steps=5 format=3 uid="uid://bqjyvw4bxcnt7"]
 
-[ext_resource type="PackedScene" uid="uid://molh17lq8wed" path="res://Scenes/Heroes/SirReginaldVonGloriforthIII/projectile.tscn" id="1_cln1r"]
 [ext_resource type="Script" path="res://ResourcesBase/Hero/hero.gd" id="1_synja"]
 [ext_resource type="Script" path="res://ResourcesBase/CharacterStats/character_stats.gd" id="2_0fuq0"]
-[ext_resource type="PackedScene" uid="uid://dvtbjmadt2v8p" path="res://Scenes/Heroes/SirReginaldVonGloriforthIII/model.tscn" id="4_xqm0s"]
+[ext_resource type="PackedScene" uid="uid://dvtbjmadt2v8p" path="res://Scenes/Heroes/SirReginald/model.tscn" id="3_lvb6b"]
 
 [sub_resource type="Resource" id="Resource_gr18g"]
 script = ExtResource("2_0fuq0")
@@ -22,7 +21,8 @@ physical_critical_multiplier = 2.0
 [resource]
 script = ExtResource("1_synja")
 name = "Sir Reginald Von Gloriforth III"
+hero_type = 6
 description = "Very rich and glorious"
 stats = SubResource("Resource_gr18g")
-aa_projectile = ExtResource("1_cln1r")
-visual = ExtResource("4_xqm0s")
+aa_projectile_type = 0
+model = ExtResource("3_lvb6b")

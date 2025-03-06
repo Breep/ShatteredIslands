@@ -37,7 +37,6 @@ func _init_meshs() -> void:
 
 
 func _recursive_find_all_meshs(node: Node3D) -> void:
-	print("_recursive_find_all_meshs() - ", node.name)
 	for child in node.get_children():
 		if child is Node3D:
 			_recursive_find_all_meshs(child)
@@ -47,12 +46,10 @@ func _recursive_find_all_meshs(node: Node3D) -> void:
 # ============================== Callbacks ==============================
 
 func _on_parent_focused() -> void:
-	print("FOCUSED", _meshs)
 	for mesh in _meshs:
 		mesh.material_overlay = _material_overlay
 
 func _on_parent_unfocused() -> void:
-	print("UNFOCUSED")
 	for mesh in _meshs:
 		mesh.material_overlay = null
 

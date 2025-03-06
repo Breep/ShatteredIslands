@@ -1,10 +1,22 @@
 class_name Hero
 extends Resource
 
+enum HeroType {
+	ANCIENT_TREE,
+	CYBORG,
+	DR_BOOM,
+	ENERGY_MAN,
+	LAURENT_KROFT,
+	MR_KRUMB,
+	SIR_REGINALD,
+	TONY_LE_BARDE
+}
+
 @export var name: String
+@export var hero_type: HeroType
 @export var description: String
 
 @export var stats: CharacterStats
 
-@export var aa_projectile: PackedScene
-@export var visual: PackedScene
+@export var aa_projectile_type: Projectile.ProjectileType
+@export var model: PackedScene

@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="Hero" load_steps=6 format=3 uid="uid://5ww2u1ldoabr"]
+[gd_resource type="Resource" script_class="Hero" load_steps=5 format=3 uid="uid://5ww2u1ldoabr"]
 
-[ext_resource type="PackedScene" uid="uid://do075sg86kg25" path="res://Scenes/Heroes/DrBoom/projectile.tscn" id="1_ddkmi"]
 [ext_resource type="Script" path="res://ResourcesBase/Hero/hero.gd" id="1_t0hox"]
 [ext_resource type="Script" path="res://ResourcesBase/CharacterStats/character_stats.gd" id="2_sgt0q"]
 [ext_resource type="PackedScene" uid="uid://cmq21hx4nihv4" path="res://Scenes/Heroes/DrBoom/model.tscn" id="4_ud2x7"]
@@ -22,7 +21,8 @@ physical_critical_multiplier = 2.0
 [resource]
 script = ExtResource("1_t0hox")
 name = "Dr Boom"
+hero_type = 2
 description = "BOOM"
 stats = SubResource("Resource_u3dta")
-aa_projectile = ExtResource("1_ddkmi")
-visual = ExtResource("4_ud2x7")
+aa_projectile_type = 0
+model = ExtResource("4_ud2x7")

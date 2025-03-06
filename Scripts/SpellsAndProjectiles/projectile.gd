@@ -11,7 +11,18 @@ enum ProjectileEffect {
 	FIRE          # Do more damage bases on target current hp
 }
 
-#TODO Rajouter un projectile_visual
+enum ProjectileType {
+	AA_ANCIENT_TREE,
+	AA_CYBORG,
+	AA_DR_BOOM,
+	AA_ENERGY_MAN,
+	AA_LAURENT_KROFT,
+	AA_MR_KRUMB,
+	AA_SIR_REGINALD,
+	AA_TONY_LE_BARDE,
+	SPELL_FIRBOLT,
+	SPELL_SHADOW_BOLT
+}
 
 # ============================== Constants ==============================
 

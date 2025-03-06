@@ -77,7 +77,7 @@ func add_player(player_name: String, id: int) -> void:
 	new_player.ready = false
 	
 	# TMP
-	new_player.hero = load("res://Resources/Heros/JohnnyDefault/johnny_default.tres").duplicate(true)
+	new_player.hero = Shared.HEROES[Hero.HeroType.ANCIENT_TREE]
 	new_player.gold = 500
 	new_player.health = 30
 	

@@ -17,12 +17,13 @@ extends Node3D
 @onready var _energy_bar: ProgressBar = %EnergyBar
 @onready var _name_displayed: Label = %NameDisplayed
 
-@onready var _animated_sprite: AnimatedSprite3D = %AnimatedSprite3D
+var _hero_model: Node3D
 
 # ============================== Public ==============================
 
-func _ready() -> void:
-	_animated_sprite.play("Idle")
+func load_hero_model(hero: Hero) -> void:
+	var _hero_model: Node3D = hero.visual.instantiate()
+	add_child(_hero_model)
 
 
 func update_health_bar(health: int, health_max: int) -> void:
