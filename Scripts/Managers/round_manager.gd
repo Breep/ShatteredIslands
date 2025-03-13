@@ -34,13 +34,13 @@ const BATTLES_COMBINATION_DIC = {
 # ============================== Private variables ==============================
 
 # [Server Only]
-var _battles: Array[Battle]
 var _is_ready: bool = false
 signal _battles_chosen()
 
-
 # [Client only] Is emit when server has answered the local client request
 signal _server_answered()
+
+var _battles: Array[Battle]
 
 # ============================== Public functions ==============================
 

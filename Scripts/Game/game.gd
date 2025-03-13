@@ -42,7 +42,7 @@ func _start_game() -> void:
 
 
 func _start_hero_selection() -> void:
-	var heroes: Array[Hero] = Shared.get_n_random_heroes(8)
+	var heroes: Array[Hero] = await Shared.get_n_random_heroes(8)
 	_buying_area.start_hero_selection(heroes)
 
 

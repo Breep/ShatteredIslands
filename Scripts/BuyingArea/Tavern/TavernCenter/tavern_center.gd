@@ -23,7 +23,6 @@ func _ready() -> void:
 	for spawn in _hero_selection_spawns:
 		for child in spawn.get_children():
 			child.queue_free()
-			print("FREEING ", child.name)
 
 # ============================== Public functions ==============================
 
@@ -66,10 +65,8 @@ func init_hero_selection(heroes: Array[Hero]) -> void:
 		_hero_selection.add_child(hero3D)
 		hero3D.global_position = _hero_selection_spawns[i].global_position
 		hero3D.name = heroes[i].name
-		print("Spawning ", heroes[i].name)
 	_hero_selection.show()
 	show()
-	print(_hero_selection.get_tree_string_pretty())
 
 # ============================== Private functions ==============================
 
