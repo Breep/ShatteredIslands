@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://dfvy6jfn4qd4k"]
 
-[ext_resource type="Script" path="res://Scripts/SpellsAndProjectiles/meteor.gd" id="1_kjd23"]
+[ext_resource type="Script" uid="uid://b2ikvkm7dfsto" path="res://Scripts/SpellsAndProjectiles/meteor.gd" id="1_kjd23"]
 [ext_resource type="PackedScene" uid="uid://cfmaiom8xymvq" path="res://Scenes/VFX_3D/Trail/3d_meteor_visual.tscn" id="2_bmmic"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_y4y4j"]
@@ -132,8 +132,8 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fgblb"]
 _data = {
-"Area": SubResource("Animation_8ion4"),
-"RESET": SubResource("Animation_u702g")
+&"Area": SubResource("Animation_8ion4"),
+&"RESET": SubResource("Animation_u702g")
 }
 
 [node name="Meteor" type="Node3D"]

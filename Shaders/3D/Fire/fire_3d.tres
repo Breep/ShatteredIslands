@@ -84,7 +84,7 @@ render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_lambert, specul
 
 uniform vec2 Speed;
 uniform sampler2D Texture_move;
-uniform float Speed_divider = 10;
+uniform float Speed_divider = 10.0;
 uniform sampler2D Gradient;
 uniform sampler2D Texture_main;
 uniform vec4 Color_Fire : source_color = vec4(4.000000, 0.800000, 0.000000, 1.000000);

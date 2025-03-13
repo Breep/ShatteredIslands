@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bjbfnigvphbfc"]
 
-[ext_resource type="Script" path="res://Scripts/Character/FamiliesManagers/storm_manager.gd" id="1_dc83y"]
+[ext_resource type="Script" uid="uid://juhatfphbio2" path="res://Scripts/Character/FamiliesManagers/storm_manager.gd" id="1_dc83y"]
 
 [node name="StormManager" type="Node"]
 script = ExtResource("1_dc83y")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://b2x1gwlq6444i"]
 
-[ext_resource type="Script" path="res://Scripts/Test/test_lightning_ray.gd" id="1_bketu"]
+[ext_resource type="Script" uid="uid://blnom78ds4bfk" path="res://Scripts/Test/test_lightning_ray.gd" id="1_bketu"]
 [ext_resource type="Material" uid="uid://bqa4yxqnd8cg6" path="res://Shaders/Spell/Electric/vfx_thunder_light.tres" id="2_7w1x5"]
 [ext_resource type="Texture2D" uid="uid://bqnubx2u1t1" path="res://Data/Texture/2D/T_VFX_Glo31.png" id="3_8h5co"]
 [ext_resource type="Material" uid="uid://ud51332wuyfo" path="res://Particle/Spell/Electric/vfx_sparks.tres" id="3_fgund"]
@@ -243,9 +243,9 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_v20we"]
 _data = {
-"RESET": SubResource("Animation_lret2"),
-"end_animation": SubResource("Animation_ov3da"),
-"start_animation": SubResource("Animation_04tgk")
+&"RESET": SubResource("Animation_lret2"),
+&"end_animation": SubResource("Animation_ov3da"),
+&"start_animation": SubResource("Animation_04tgk")
 }
 
 [node name="VFX_Thunder" type="Node2D"]

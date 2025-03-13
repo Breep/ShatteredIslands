@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://ca8mcplp2va4s"]
 
-[ext_resource type="Script" path="res://Scripts/BuyingArea/buying_area.gd" id="1_ed4aq"]
-[ext_resource type="Script" path="res://Scripts/BuyingArea/camera_buying_area.gd" id="2_nery7"]
+[ext_resource type="Script" uid="uid://cvy50on4evfts" path="res://Scripts/BuyingArea/buying_area.gd" id="1_ed4aq"]
+[ext_resource type="Script" uid="uid://cnx8tutucwv0x" path="res://Scripts/BuyingArea/camera_buying_area.gd" id="2_nery7"]
 [ext_resource type="PackedScene" uid="uid://cmstx61h3h6ar" path="res://Scenes/UI/3d_ui_buying_area.tscn" id="5_dvq4w"]
 [ext_resource type="PackedScene" uid="uid://cxalabhvxw1pd" path="res://Scenes/UI/ui_timer.tscn" id="6_58bhs"]
 [ext_resource type="PackedScene" uid="uid://d1oxnd1g75rqh" path="res://Scenes/Card/card_shop.tscn" id="6_sjppt"]

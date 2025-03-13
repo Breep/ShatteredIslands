@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://bdm4mg5oiho7e"]
 
 [ext_resource type="Texture2D" uid="uid://cubhux4oqrmb3" path="res://Data/Assets/Card/Card_IMG/poison/poison2.png" id="3_x2g4o"]
-[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Poison/poison_poison_flat.gd" id="4_ffmrk"]
-[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_e1vh8"]
+[ext_resource type="Script" uid="uid://1k2khgqbc78a" path="res://ResourcesBase/Upgrades/Player/Poison/poison_poison_flat.gd" id="4_ffmrk"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://ResourcesBase/CardBase/card.gd" id="5_e1vh8"]
 
 [sub_resource type="Resource" id="Resource_ge1yw"]
 script = ExtResource("4_ffmrk")

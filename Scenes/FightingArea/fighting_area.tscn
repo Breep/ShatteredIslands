@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://c66yw4go2ykwa"]
 
-[ext_resource type="Script" path="res://Scripts/FightingArea/fighting_area.gd" id="1_qx4db"]
-[ext_resource type="Script" path="res://Scripts/FightingArea/camera_fighting_area.gd" id="2_48dto"]
+[ext_resource type="Script" uid="uid://cd8u3lm3xa8c4" path="res://Scripts/FightingArea/fighting_area.gd" id="1_qx4db"]
+[ext_resource type="Script" uid="uid://d2fihbt8u628f" path="res://Scripts/FightingArea/camera_fighting_area.gd" id="2_48dto"]
 [ext_resource type="PackedScene" uid="uid://c0l0roxttdtlp" path="res://Scenes/FightingArea/fighting_manager.tscn" id="2_vrsql"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://Scenes/FightingArea/spawn_manager.tscn" id="3_vd45s"]
 [ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Scenes/Character/character.tscn" id="4_3pbvh"]

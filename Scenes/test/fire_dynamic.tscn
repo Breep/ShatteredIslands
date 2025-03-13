@@ -7,7 +7,7 @@
 [ext_resource type="Material" uid="uid://cbenrvhfodwl" path="res://Shaders/Electric_spark_shader.tres" id="4_n1uhn"]
 [ext_resource type="Texture2D" uid="uid://br6ejew7ctdi6" path="res://Data/Texture/Kenney2/magic_05.png" id="5_3nu38"]
 [ext_resource type="Material" uid="uid://by3yqqq5kql60" path="res://Particle/Electric_spark_particle.tres" id="5_kjupg"]
-[ext_resource type="Shader" path="res://Shaders/ElectricBallShader.gdshader" id="6_p6b8p"]
+[ext_resource type="Shader" uid="uid://bu56j0q7cio8f" path="res://Shaders/ElectricBallShader.gdshader" id="6_p6b8p"]
 [ext_resource type="Texture2D" uid="uid://dpwnqjbgkqurv" path="res://Data/Assets/Misc/Misc_IMG/test meteor.png" id="7_lnscj"]
 [ext_resource type="Texture2D" uid="uid://cs7u2i0f7ysn7" path="res://Data/Texture/Kenney2/fire_02.png" id="9_55b0y"]
 
@@ -193,10 +193,10 @@ noise = SubResource("FastNoiseLite_n6i3y")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_alrwm"]
 shader = ExtResource("6_p6b8p")
-shader_parameter/brightness = 2.5
-shader_parameter/time_scale = 1.0
 shader_parameter/noise = SubResource("NoiseTexture2D_i32h5")
 shader_parameter/noise2 = ExtResource("9_55b0y")
+shader_parameter/brightness = 2.5
+shader_parameter/time_scale = 1.0
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_esbyw"]
 polygon = PackedVector2Array(841, 128, 730, 370, 987, 373)

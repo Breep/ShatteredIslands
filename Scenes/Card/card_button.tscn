@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://c2psjj8133op3"]
 
-[ext_resource type="Script" path="res://Scripts/Card/card_button.gd" id="1_l6wd5"]
-[ext_resource type="Shader" path="res://Shaders/3dcard.gdshader" id="2_042nd"]
+[ext_resource type="Script" uid="uid://wf6yt1v2e55m" path="res://Scripts/Card/card_button.gd" id="1_l6wd5"]
+[ext_resource type="Shader" uid="uid://h1sabcy25vtt" path="res://Shaders/3dcard.gdshader" id="2_042nd"]
 [ext_resource type="PackedScene" uid="uid://l4hi6dgs8lvg" path="res://Scenes/Card/card_layout.tscn" id="3_cgxxr"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_k8idf"]

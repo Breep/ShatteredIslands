@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b7uung05infs2"]
 
 [ext_resource type="FontFile" uid="uid://dgaako73a24kh" path="res://Data/font/rimouski sb.ttf" id="1_mx5gu"]
-[ext_resource type="Script" path="res://Scripts/Character/damage_popup.gd" id="1_pak6f"]
+[ext_resource type="Script" uid="uid://d1ikna8cew0nn" path="res://Scripts/Character/damage_popup.gd" id="1_pak6f"]
 
 [node name="PopUp" type="Label3D"]
 layers = 4

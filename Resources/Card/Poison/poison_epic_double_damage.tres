@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://b4yjn2q1enybq"]
 
-[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Poison/poison_epic_double_damage.gd" id="3_n0awy"]
+[ext_resource type="Script" uid="uid://bs1w7irv11yay" path="res://ResourcesBase/Upgrades/Player/Poison/poison_epic_double_damage.gd" id="3_n0awy"]
 [ext_resource type="Texture2D" uid="uid://cucbk833lj41o" path="res://Data/Assets/Card/Card_IMG/poison/poison4.png" id="3_ogg40"]
-[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="4_0ckow"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://ResourcesBase/CardBase/card.gd" id="4_0ckow"]
 
 [sub_resource type="Resource" id="Resource_qt3h3"]
 script = ExtResource("3_n0awy")

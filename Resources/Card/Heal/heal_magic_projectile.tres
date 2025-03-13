@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://k3r84rocvpjl"]
 
 [ext_resource type="Texture2D" uid="uid://cimvugits0vas" path="res://Data/Assets/Card/Card_IMG/heal/heal2.png" id="3_d6ols"]
-[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Heal/heal_damage_projectile.gd" id="4_nu5a5"]
-[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_q1dgv"]
+[ext_resource type="Script" uid="uid://bpmh3knenk0j0" path="res://ResourcesBase/Upgrades/Player/Heal/heal_damage_projectile.gd" id="4_nu5a5"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://ResourcesBase/CardBase/card.gd" id="5_q1dgv"]
 
 [sub_resource type="Resource" id="Resource_2wu53"]
 script = ExtResource("4_nu5a5")

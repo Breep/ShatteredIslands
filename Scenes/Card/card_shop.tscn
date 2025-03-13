@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://d1oxnd1g75rqh"]
 
-[ext_resource type="Script" path="res://Scripts/Card/card_shop.gd" id="1_wplsh"]
-[ext_resource type="Script" path="res://Scripts/Card/card_shop_visual.gd" id="2_wwspx"]
+[ext_resource type="Script" uid="uid://8tub4ube48p7" path="res://Scripts/Card/card_shop.gd" id="1_wplsh"]
+[ext_resource type="Script" uid="uid://d0vv2ero6ere2" path="res://Scripts/Card/card_shop_visual.gd" id="2_wwspx"]
 [ext_resource type="FontFile" uid="uid://cl0jltnxq5gum" path="res://Data/font/GlacialIndifference-Bold.otf" id="4_v2xw6"]
 [ext_resource type="Texture2D" uid="uid://b0d6hj2uhwbei" path="res://Data/Assets/Buying_area/UI/coin.png" id="5_r61pt"]
 [ext_resource type="Theme" uid="uid://bpo76n2lvfxb6" path="res://Scripts/Managers/Themes/main_menu_button.tres" id="6_7moch"]

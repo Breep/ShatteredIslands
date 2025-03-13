@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://yfeatddmkx4c"]
 
-[ext_resource type="Script" path="res://Scripts/FightingArea/spawn_manager.gd" id="1_qkh47"]
+[ext_resource type="Script" uid="uid://ddvqvwc47kc24" path="res://Scripts/FightingArea/spawn_manager.gd" id="1_qkh47"]
 
 [node name="SpawnManager" type="Node3D"]
 script = ExtResource("1_qkh47")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=4 uid="uid://cvtcwgshvlnao"]
 
-[ext_resource type="Script" path="res://Scripts/Animated_object/chest_mimic.gd" id="1_3d1qy"]
+[ext_resource type="Script" uid="uid://c7foawjdes3xj" path="res://Scripts/Animated_object/chest_mimic.gd" id="1_3d1qy"]
 [ext_resource type="Texture2D" uid="uid://mswbhaabiedm" path="res://Data/Assets/Tavern - 3D Asset Low poly/textures/dungeon_texture.png" id="3_70pow"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8btdg"]
@@ -112,8 +112,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5xwwl"]
 _data = {
-"RESET": SubResource("Animation_eofqr"),
-"mimic_chest": SubResource("Animation_u6qm8")
+&"RESET": SubResource("Animation_eofqr"),
+&"mimic_chest": SubResource("Animation_u6qm8")
 }
 
 [node name="ChestMimic" type="StaticBody3D"]

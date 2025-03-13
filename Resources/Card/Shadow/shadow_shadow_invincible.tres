@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://bhd5e5q0gu6km"]
 
 [ext_resource type="Texture2D" uid="uid://crhym7t1fm48y" path="res://Data/Assets/Card/Card_IMG/shadow/shadow3.png" id="3_yibwf"]
-[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Shadow/shadow_shadow_invincible.gd" id="4_rvo8m"]
-[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_7e812"]
+[ext_resource type="Script" uid="uid://5lvi3ebajr3i" path="res://ResourcesBase/Upgrades/Player/Shadow/shadow_shadow_invincible.gd" id="4_rvo8m"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://ResourcesBase/CardBase/card.gd" id="5_7e812"]
 
 [sub_resource type="Resource" id="Resource_bglwt"]
 script = ExtResource("4_rvo8m")

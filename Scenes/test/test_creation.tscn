@@ -1,9 +1,7 @@
-[gd_scene load_steps=27 format=3 uid="uid://cr6mw5f6jrq0c"]
+[gd_scene load_steps=25 format=3 uid="uid://cr6mw5f6jrq0c"]
 
-[ext_resource type="Shader" path="res://Shaders/ElectricBallShader.gdshader" id="1_d12tl"]
+[ext_resource type="Shader" uid="uid://bu56j0q7cio8f" path="res://Shaders/ElectricBallShader.gdshader" id="1_d12tl"]
 [ext_resource type="Texture2D" uid="uid://rnfr7iqctlfy" path="res://Data/Assets/Misc/oeil blanc.png" id="1_gxjql"]
-[ext_resource type="Texture2D" uid="uid://bci6hw24u6mmy" path="res://Data/Assets/spritesheet/creature-sheet (1).png" id="3_yeedu"]
-[ext_resource type="Texture2D" uid="uid://bhukbiigvbkku" path="res://Data/Assets/spritesheet/creature-sheet.png" id="4_onkew"]
 [ext_resource type="Texture2D" uid="uid://pe0vdk3gkv63" path="res://Data/Assets/Misc/shield magma.png" id="5_haaba"]
 [ext_resource type="Material" uid="uid://bllnfgr3vkfc4" path="res://Shaders/outline/blotchyaura.tres" id="6_ncgqy"]
 [ext_resource type="Texture2D" uid="uid://dot1wrh4guixs" path="res://Data/Assets/Misc/chiffre 5 magma.png" id="7_3tlll"]
@@ -21,41 +19,33 @@ load_path = "res://.godot/imported/light_03.png-68f04db66648df75f8f8e72d8356d45f
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y2k13"]
 shader = ExtResource("1_d12tl")
-shader_parameter/brightness = 4.5
-shader_parameter/time_scale = 1.0
 shader_parameter/noise = SubResource("CompressedTexture2D_80n3f")
 shader_parameter/noise2 = SubResource("CompressedTexture2D_vpacl")
+shader_parameter/brightness = 4.5
+shader_parameter/time_scale = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hp2ip"]
-atlas = ExtResource("3_yeedu")
 region = Rect2(0, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2x850"]
-atlas = ExtResource("3_yeedu")
 region = Rect2(24, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mb238"]
-atlas = ExtResource("3_yeedu")
 region = Rect2(48, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n1fkp"]
-atlas = ExtResource("3_yeedu")
 region = Rect2(72, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_71bh0"]
-atlas = ExtResource("4_onkew")
 region = Rect2(0, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qqrhp"]
-atlas = ExtResource("4_onkew")
 region = Rect2(24, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_17e08"]
-atlas = ExtResource("4_onkew")
 region = Rect2(48, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2a1gk"]
-atlas = ExtResource("4_onkew")
 region = Rect2(72, 0, 24, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5k7tv"]

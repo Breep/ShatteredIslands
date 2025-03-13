@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Hero" load_steps=5 format=3 uid="uid://ccww2pxgtqvfx"]
 
-[ext_resource type="Script" path="res://ResourcesBase/Hero/hero.gd" id="1_x5ik6"]
-[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/character_stats.gd" id="2_g7x07"]
+[ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://ResourcesBase/Hero/hero.gd" id="1_x5ik6"]
+[ext_resource type="Script" uid="uid://c76rxvnlcwltf" path="res://ResourcesBase/CharacterStats/character_stats.gd" id="2_g7x07"]
 [ext_resource type="PackedScene" uid="uid://b4d230tklju1w" path="res://Scenes/Heroes/MrKrumb/model.tscn" id="4_4joxv"]
 
 [sub_resource type="Resource" id="Resource_yjtod"]

@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://c3afe8ow3fc6c" path="res://Resources/Theme/ui_panel_tooltip.tres" id="1_wqi74"]
 [ext_resource type="Texture2D" uid="uid://mbywgrya6a52" path="res://Data/Assets/Misc/Misc_IMG/timer circle.png" id="2_fbqj2"]
 [ext_resource type="FontFile" uid="uid://cl0jltnxq5gum" path="res://Data/font/GlacialIndifference-Bold.otf" id="3_l2bya"]
-[ext_resource type="Script" path="res://Scripts/Test/test_ui_tooltip.gd" id="3_tsmqo"]
+[ext_resource type="Script" uid="uid://bgre5ftopmpca" path="res://Scripts/Test/test_ui_tooltip.gd" id="3_tsmqo"]
 [ext_resource type="Texture2D" uid="uid://bd6cc2c6etfc2" path="res://Data/Assets/Card/Card_IMG/fire/icon flame.png" id="4_yipgy"]
 [ext_resource type="FontFile" uid="uid://dbqejd0leblna" path="res://Data/font/Nunito-Bold.ttf" id="5_6lpig"]
 

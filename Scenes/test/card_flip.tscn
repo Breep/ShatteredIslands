@@ -122,9 +122,9 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7ryjt"]
 _data = {
-"RESET": SubResource("Animation_8uoxk"),
-"flip": SubResource("Animation_xx6qc"),
-"test ui card": SubResource("Animation_kwdbr")
+&"RESET": SubResource("Animation_8uoxk"),
+&"flip": SubResource("Animation_xx6qc"),
+&"test ui card": SubResource("Animation_kwdbr")
 }
 
 [node name="Node2D" type="Node2D"]

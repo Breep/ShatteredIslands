@@ -239,8 +239,8 @@ blend_shape_mode = 0
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ycpd7"]
 _data = {
-"Flying": ExtResource("2_js0co"),
-"Idle": ExtResource("3_44kvo")
+&"Flying": ExtResource("2_js0co"),
+&"Idle": ExtResource("3_44kvo")
 }
 
 [node name="butterfly" type="Node3D"]

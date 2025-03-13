@@ -1,40 +1,30 @@
-[gd_scene load_steps=18 format=3 uid="uid://dqp6g6id7n2pw"]
+[gd_scene load_steps=16 format=3 uid="uid://dqp6g6id7n2pw"]
 
-[ext_resource type="Texture2D" uid="uid://bci6hw24u6mmy" path="res://Data/Assets/spritesheet/creature-sheet (1).png" id="1_blj3k"]
-[ext_resource type="Texture2D" uid="uid://bhukbiigvbkku" path="res://Data/Assets/spritesheet/creature-sheet.png" id="2_atffh"]
-[ext_resource type="Script" path="res://Scripts/Test/drag_and_drop_velocity_rotationgd.gd" id="3_s7eu0"]
+[ext_resource type="Script" uid="uid://b0nd28av5jkl0" path="res://Scripts/Test/drag_and_drop_velocity_rotationgd.gd" id="3_s7eu0"]
 [ext_resource type="Theme" uid="uid://2r6c5i57eti8" path="res://Scripts/Managers/Themes/health_bar.tres" id="4_3tofc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hp2ip"]
-atlas = ExtResource("1_blj3k")
 region = Rect2(0, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2x850"]
-atlas = ExtResource("1_blj3k")
 region = Rect2(24, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mb238"]
-atlas = ExtResource("1_blj3k")
 region = Rect2(48, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n1fkp"]
-atlas = ExtResource("1_blj3k")
 region = Rect2(72, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_71bh0"]
-atlas = ExtResource("2_atffh")
 region = Rect2(0, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qqrhp"]
-atlas = ExtResource("2_atffh")
 region = Rect2(24, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_17e08"]
-atlas = ExtResource("2_atffh")
 region = Rect2(48, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2a1gk"]
-atlas = ExtResource("2_atffh")
 region = Rect2(72, 0, 24, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_q3hgw"]

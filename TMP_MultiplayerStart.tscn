@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cfy3wb4emhq5q"]
 
-[ext_resource type="Script" path="res://TMP_MultiplayerStart.gd" id="1_gbxea"]
+[ext_resource type="Script" uid="uid://ydc55iptm4fr" path="res://TMP_MultiplayerStart.gd" id="1_gbxea"]
 
 [node name="TMP_MultiplayerScene" type="Control"]
 layout_mode = 3

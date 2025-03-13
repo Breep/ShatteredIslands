@@ -13,7 +13,7 @@ config_version=5
 config/name="ProjectA"
 config/tags=PackedStringArray("3d", "autobattler")
 run/main_scene="res://TMP_MultiplayerStart.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.4", "Forward Plus")
 
 [autoload]
 

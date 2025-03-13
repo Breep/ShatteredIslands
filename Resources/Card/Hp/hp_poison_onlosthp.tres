@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://dgriv7nxh3pvp"]
 
 [ext_resource type="Texture2D" uid="uid://c2cusphfd34nc" path="res://Data/Assets/Card/Card_IMG/Hp/hp5.png" id="3_ig1qs"]
-[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Hp/hp_poison_onlosthp.gd" id="4_idr7x"]
-[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_3mxwv"]
+[ext_resource type="Script" uid="uid://bdx2xew0oot6" path="res://ResourcesBase/Upgrades/Player/Hp/hp_poison_onlosthp.gd" id="4_idr7x"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://ResourcesBase/CardBase/card.gd" id="5_3mxwv"]
 
 [sub_resource type="Resource" id="Resource_cmooc"]
 script = ExtResource("4_idr7x")

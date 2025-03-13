@@ -45,7 +45,7 @@ hint = 1
 code = "shader_type canvas_item;
 render_mode blend_add, unshaded;
 
-uniform float Vanishin_Value : hint_range(0, 1);
+uniform float Vanishin_Value : hint_range(0.0, 1.0);
 uniform vec2 Speed;
 uniform sampler2D basic_texture : source_color, repeat_enable;
 
@@ -163,6 +163,7 @@ emission_ring_axis = Vector3(0, 0, 1)
 emission_ring_height = 50.0
 emission_ring_radius = 50.0
 emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
 direction = Vector3(0, 1, 0)
 spread = 0.0
 initial_velocity_min = -500.0

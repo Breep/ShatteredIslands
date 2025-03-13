@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://stj7rtmt3raf"]
 
-[ext_resource type="Shader" path="res://Shaders/Cam/Cam_outline_shader_pro.gdshader" id="1_561oq"]
+[ext_resource type="Shader" uid="uid://c2lv8jvq06u7w" path="res://Shaders/Cam/Cam_outline_shader_pro.gdshader" id="1_561oq"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_0l8xf"]
 flip_faces = true

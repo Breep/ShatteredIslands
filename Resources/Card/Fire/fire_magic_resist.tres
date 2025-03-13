@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://bn8rifooy7lej"]
 
 [ext_resource type="Texture2D" uid="uid://phjcr8r47txo" path="res://Data/Assets/Card/Card_IMG/fire/fire explo.png" id="3_gq4w6"]
-[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/fire/fire_magic_resist.gd" id="4_1y7ym"]
-[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_mv2c7"]
+[ext_resource type="Script" uid="uid://dbspwuf703qi8" path="res://ResourcesBase/Upgrades/Player/fire/fire_magic_resist.gd" id="4_1y7ym"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://ResourcesBase/CardBase/card.gd" id="5_mv2c7"]
 
 [sub_resource type="Resource" id="Resource_k4lqr"]
 script = ExtResource("4_1y7ym")

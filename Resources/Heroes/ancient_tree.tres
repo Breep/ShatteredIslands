@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Hero" load_steps=5 format=3 uid="uid://qa70iekc67ac"]
 
-[ext_resource type="Script" path="res://ResourcesBase/Hero/hero.gd" id="1_atefr"]
-[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/character_stats.gd" id="3_8fiyi"]
+[ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://ResourcesBase/Hero/hero.gd" id="1_atefr"]
+[ext_resource type="Script" uid="uid://c76rxvnlcwltf" path="res://ResourcesBase/CharacterStats/character_stats.gd" id="3_8fiyi"]
 [ext_resource type="PackedScene" uid="uid://brxgxjopk41l1" path="res://Scenes/Heroes/AncientTree/model.tscn" id="4_8wut5"]
 
 [sub_resource type="Resource" id="Resource_vi0jq"]

@@ -18,7 +18,7 @@ var _battle_types_number = {
 func _ready() -> void:
 	Utils.recursive_hide(self)
 	
-	var heroes = _source.find_children("", "Hero3D", true, false)
+	var heroes = find_children("", "Hero3D", true, false)
 	if heroes.is_empty():
 		printerr("TavernCenter: There should be heroes inside the _hero_selection Node")
 		return
@@ -61,7 +61,7 @@ func put_tables_according_to_battles(battles: Array[Battle]) -> void:
 
 
 func init_hero_selection(heroes: Array[Hero]) -> void:
-	var 
+	pass
 
 # ============================== Private functions ==============================
 

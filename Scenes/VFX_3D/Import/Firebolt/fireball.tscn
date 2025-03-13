@@ -1,10 +1,10 @@
 [gd_scene load_steps=20 format=3 uid="uid://d37wg3mc76fs7"]
 
-[ext_resource type="Script" path="res://Scripts/SpellsAndProjectiles/projectile.gd" id="1_6v1tt"]
+[ext_resource type="Script" uid="uid://dv8w8kb4xsqp3" path="res://Scripts/SpellsAndProjectiles/projectile.gd" id="1_6v1tt"]
 [ext_resource type="Material" uid="uid://can8t2u1j45tv" path="res://Scenes/VFX_3D/Import/Firebolt/fireball_mat.tres" id="2_kub5u"]
 [ext_resource type="ArrayMesh" uid="uid://d3ha0fhlgaamq" path="res://Scenes/VFX_3D/Import/Firebolt/fireball_shell_mesh.obj" id="3_e1dfy"]
 [ext_resource type="Material" uid="uid://dxpjm0adafggu" path="res://Scenes/VFX_3D/Import/Firebolt/fireball_fire_particles_mat.tres" id="5_11yv5"]
-[ext_resource type="Shader" path="res://Scenes/VFX_3D/Import/Firebolt/fireball_core.gdshader" id="6_lin42"]
+[ext_resource type="Shader" uid="uid://dt4b4m7nnhusl" path="res://Scenes/VFX_3D/Import/Firebolt/fireball_core.gdshader" id="6_lin42"]
 [ext_resource type="Material" uid="uid://bysmw3siejjhv" path="res://Scenes/VFX_3D/Import/Firebolt/fireball_firetrail_particles_process.tres" id="6_obgtq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7vae4"]

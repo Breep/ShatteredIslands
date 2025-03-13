@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="Family" load_steps=6 format=3 uid="uid://gmf44fc8uh4x"]
 
-[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="1_0x72b"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://ResourcesBase/CardBase/card.gd" id="1_0x72b"]
 [ext_resource type="Resource" uid="uid://c80iouxl0atlq" path="res://Resources/Card/storm/storm_overcharge.tres" id="2_0lraa"]
 [ext_resource type="Resource" uid="uid://dapf7u05w6jjq" path="res://Resources/Card/storm/storm_focus.tres" id="3_q8san"]
-[ext_resource type="Script" path="res://ResourcesBase/Family/family.gd" id="3_x8ghl"]
+[ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://ResourcesBase/Family/family.gd" id="3_x8ghl"]
 [ext_resource type="Texture2D" uid="uid://y0t815fi2pdf" path="res://Data/Assets/Card/ICONS/MANA.png" id="10_t213y"]
 
 [resource]

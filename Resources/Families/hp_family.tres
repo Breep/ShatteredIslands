@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Family" load_steps=5 format=3 uid="uid://cxs83q5l14d1m"]
 
-[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="1_mfwj6"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://ResourcesBase/CardBase/card.gd" id="1_mfwj6"]
 [ext_resource type="Resource" uid="uid://d2ts2cxyj8orv" path="res://Resources/Card/Hp/hp_epic_revive_treshold.tres" id="2_y2w7u"]
-[ext_resource type="Script" path="res://ResourcesBase/Family/family.gd" id="3_gum03"]
+[ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://ResourcesBase/Family/family.gd" id="3_gum03"]
 [ext_resource type="Texture2D" uid="uid://cia42t0jcdkfg" path="res://Data/Assets/Card/ICONS/HP color.png" id="8_it1s8"]
 
 [resource]

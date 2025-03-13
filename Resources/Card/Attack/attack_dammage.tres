@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://csf5h7jnxxg2c"]
 
 [ext_resource type="Texture2D" uid="uid://d1kprcm4gjhbm" path="res://Data/Assets/Card/Card_IMG/Attack/attack_damage.webp" id="3_nvpnd"]
-[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Attack/attack_damage.gd" id="4_hc7uo"]
-[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_1nc2f"]
+[ext_resource type="Script" uid="uid://lgh72emywtxd" path="res://ResourcesBase/Upgrades/Player/Attack/attack_damage.gd" id="4_hc7uo"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://ResourcesBase/CardBase/card.gd" id="5_1nc2f"]
 
 [sub_resource type="Resource" id="Resource_e3qjd"]
 script = ExtResource("4_hc7uo")

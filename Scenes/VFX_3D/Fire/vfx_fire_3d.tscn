@@ -17,11 +17,11 @@ fill_to = Vector2(0, 0)
 render_priority = 0
 shader = ExtResource("1_1r8wa")
 shader_parameter/Speed = Vector2(0, 1)
-shader_parameter/Speed_divider = 4.0
-shader_parameter/Color_Fire = Color(4, 0.8, 0, 1)
 shader_parameter/Texture_move = ExtResource("2_h8jbn")
+shader_parameter/Speed_divider = 4.0
 shader_parameter/Gradient = SubResource("GradientTexture2D_sibqq")
 shader_parameter/Texture_main = ExtResource("3_5hywm")
+shader_parameter/Color_Fire = Color(4, 0.8, 0, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_aeuct"]
 lightmap_size_hint = Vector2i(7, 7)
@@ -152,7 +152,7 @@ point_count = 2
 curve = SubResource("Curve_feua7")
 
 [sub_resource type="Curve" id="Curve_pdlje"]
-max_value = 2.0
+_limits = [0.0, 2.0, 0.0, 1.0]
 _data = [Vector2(0, 1.38462), 0.0, 0.0, 0, 0, Vector2(0.394737, 0.285714), 0.0, 0.0, 0, 0, Vector2(0.664474, 1.20879), 0.0, 0.0, 0, 0, Vector2(0.947368, 0.505494), 0.0, 0.0, 0, 0]
 point_count = 4
 

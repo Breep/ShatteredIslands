@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dr8xv1vshmvyq"]
 
-[ext_resource type="Script" path="res://Scripts/BuyingArea/Tavern/TavernCenter/tavern_center.gd" id="1_ha6dk"]
+[ext_resource type="Script" uid="uid://83sm3r5y5ofy" path="res://Scripts/BuyingArea/Tavern/TavernCenter/tavern_center.gd" id="1_ha6dk"]
 [ext_resource type="PackedScene" uid="uid://dlqrg6ijwk3i8" path="res://Scenes/BuyingArea/Tavern/TavernCenter/Tables/table_1v1.tscn" id="2_are6m"]
 [ext_resource type="PackedScene" uid="uid://b4av14wu25x12" path="res://Scenes/BuyingArea/Tavern/TavernCenter/Tables/table_2v2.tscn" id="3_cjni8"]
 [ext_resource type="PackedScene" uid="uid://cqskpy33r7xoi" path="res://Scenes/BuyingArea/Tavern/TavernCenter/Tables/table_ffa_solo_3.tscn" id="3_vm0me"]

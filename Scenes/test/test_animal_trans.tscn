@@ -2732,11 +2732,11 @@ tracks/68/keys = PackedFloat32Array(0, 1, 7.63159e-09, -0.101083, 2.23188e-16, 0
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cvp1v"]
 _data = {
-"01_Run": SubResource("Animation_bircg"),
-"02_walk": SubResource("Animation_krc7o"),
-"03_creep": SubResource("Animation_2tkkm"),
-"04_Idle": SubResource("Animation_12pyk"),
-"05_site": SubResource("Animation_ucvdm")
+&"01_Run": SubResource("Animation_bircg"),
+&"02_walk": SubResource("Animation_krc7o"),
+&"03_creep": SubResource("Animation_2tkkm"),
+&"04_Idle": SubResource("Animation_12pyk"),
+&"05_site": SubResource("Animation_ucvdm")
 }
 
 [node name="Sketchfab_Scene" type="Node3D"]

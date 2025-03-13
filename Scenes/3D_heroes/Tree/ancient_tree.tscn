@@ -137,12 +137,12 @@ bind/32/pose = Transform3D(-99.7977, 5.86957, -2.33894, -2.6534, -5.33639, 99.82
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cg33c"]
 _data = {
-"Death": ExtResource("2_enhn4"),
-"attack": ExtResource("3_htcei"),
-"danse": ExtResource("4_ku1hr"),
-"idle": ExtResource("5_yxgff"),
-"run": ExtResource("6_48uh6"),
-"ultimate": ExtResource("7_eraeh")
+&"Death": ExtResource("2_enhn4"),
+&"attack": ExtResource("3_htcei"),
+&"danse": ExtResource("4_ku1hr"),
+&"idle": ExtResource("5_yxgff"),
+&"run": ExtResource("6_48uh6"),
+&"ultimate": ExtResource("7_eraeh")
 }
 
 [node name="AncientTree" type="Node3D"]

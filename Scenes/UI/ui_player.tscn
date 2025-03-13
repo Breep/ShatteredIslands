@@ -1,9 +1,8 @@
 [gd_scene load_steps=23 format=3 uid="uid://bskueqquqfhhp"]
 
-[ext_resource type="Script" path="res://Scripts/Test/test_ui_player_stats.gd" id="1_i4kvd"]
-[ext_resource type="Resource" uid="uid://cbcy0wbqkel1q" path="res://Resources/Heroes/johnny_default.tres" id="2_41p2u"]
+[ext_resource type="Script" uid="uid://d1cks4cs432y4" path="res://Scripts/Test/test_ui_player_stats.gd" id="1_i4kvd"]
 [ext_resource type="Texture2D" uid="uid://bxd1jnaci6olo" path="res://Data/Assets/Card/ICONS/ATTACK color.png" id="2_ay2ej"]
-[ext_resource type="Shader" path="res://Shaders/UI/colorRect_roundangle.gdshader" id="2_gulvd"]
+[ext_resource type="Shader" uid="uid://b67sjj4mbnm3p" path="res://Shaders/UI/colorRect_roundangle.gdshader" id="2_gulvd"]
 [ext_resource type="Texture2D" uid="uid://cnp4ioj5qvrv4" path="res://Data/Assets/Card/ICONS/DEFENSE color.png" id="3_aaqkt"]
 [ext_resource type="Texture2D" uid="uid://d34qpfx40d4ox" path="res://Data/Assets/BackGround/472616789_28403690705911652_2688862136642980928_n-removebg-preview.png" id="3_noy4j"]
 [ext_resource type="Texture2D" uid="uid://cbqxuvk76xjrw" path="res://Data/Assets/Card/ICONS/ATTACK.png" id="3_qoay4"]
@@ -16,6 +15,9 @@
 [ext_resource type="Texture2D" uid="uid://ljrda5geyfek" path="res://Data/Assets/Card/Card_IMG/shadow/knife terror.jpg" id="11_ba0ao"]
 [ext_resource type="Texture2D" uid="uid://berioty2oweos" path="res://Data/Assets/Card/Card_IMG/Necro/soul drain.jpg" id="12_oe1kk"]
 [ext_resource type="Texture2D" uid="uid://clx0jjxv145r5" path="res://Data/Assets/Card/Card_IMG/storm/thunder weapon.jpg" id="13_ildox"]
+
+[sub_resource type="Resource" id="Resource_8dnjq"]
+metadata/__load_path__ = "res://Resources/Heroes/johnny_default.tres"
 
 [sub_resource type="Gradient" id="Gradient_dhf5d"]
 offsets = PackedFloat32Array(0, 0.982143, 1)
@@ -48,7 +50,7 @@ offset_right = -0.504089
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_i4kvd")
-hero_test = ExtResource("2_41p2u")
+hero_test = SubResource("Resource_8dnjq")
 
 [node name="BG" type="TextureRect" parent="."]
 visible = false

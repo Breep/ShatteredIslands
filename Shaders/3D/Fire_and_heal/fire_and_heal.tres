@@ -51,7 +51,7 @@ code = "shader_type spatial;
 render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx, unshaded;
 
 uniform vec4 Circle_color : source_color;
-uniform float Extraopacity : hint_range(0, 1) = 1;
+uniform float Extraopacity : hint_range(0.0, 1.0) = 1.0;
 uniform vec2 speed;
 uniform sampler2D tex_frg_2 : source_color;
 uniform sampler2D tex_frg_10;

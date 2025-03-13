@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://cj7b67lp7dcsf"]
 
 [ext_resource type="Texture2D" uid="uid://b86bcx5q7y4i6" path="res://Data/Assets/Card/Card_IMG/defense/orc shoulder.png" id="3_68vya"]
-[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Defense/defense_chance_to_gain_armor_whenhit.gd" id="4_1mtrw"]
-[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_0jjbh"]
+[ext_resource type="Script" uid="uid://q13yxstqecjy" path="res://ResourcesBase/Upgrades/Player/Defense/defense_chance_to_gain_armor_whenhit.gd" id="4_1mtrw"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://ResourcesBase/CardBase/card.gd" id="5_0jjbh"]
 
 [sub_resource type="Resource" id="Resource_pts28"]
 script = ExtResource("4_1mtrw")

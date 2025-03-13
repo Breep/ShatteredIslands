@@ -1,4 +1,4 @@
-[gd_scene load_steps=192 format=3 uid="uid://b1buhisccbi3g"]
+[gd_scene load_steps=190 format=3 uid="uid://b1buhisccbi3g"]
 
 [ext_resource type="Texture2D" uid="uid://cox677fl8sgl" path="res://Data/Texture/2D/T_VFX_Noise_2.PNG" id="1_3t4mf"]
 [ext_resource type="Texture2D" uid="uid://cdbto3l1tubi3" path="res://Data/Texture/kenney_particle_pack/smoke_10.png" id="2_1a4g6"]
@@ -6,8 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://cqlwucdderdyo" path="res://Data/Texture/kenney_particle_pack/circle_05.png" id="4_m24gf"]
 [ext_resource type="Texture2D" uid="uid://c6nrnfhdcd33x" path="res://Data/Texture/kenney_particle_pack/smoke_04.png" id="5_0i0l6"]
 [ext_resource type="Texture2D" uid="uid://bjqrm8w60tkxu" path="res://Data/Texture/kenney_particle_pack/muzzle_01.png" id="6_hnx57"]
-[ext_resource type="Texture2D" uid="uid://bci6hw24u6mmy" path="res://Data/Assets/spritesheet/creature-sheet (1).png" id="7_5i0cl"]
-[ext_resource type="Texture2D" uid="uid://bhukbiigvbkku" path="res://Data/Assets/spritesheet/creature-sheet.png" id="8_vvlnr"]
 [ext_resource type="Theme" uid="uid://2r6c5i57eti8" path="res://Scripts/Managers/Themes/health_bar.tres" id="9_3il4v"]
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_1qmv6"]
@@ -1544,35 +1542,27 @@ shader_parameter/Texture_Substract = SubResource("GradientTexture2D_oxe41")
 shader_parameter/Texture_Color_1D = SubResource("GradientTexture1D_4vpxe")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hp2ip"]
-atlas = ExtResource("7_5i0cl")
 region = Rect2(0, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2x850"]
-atlas = ExtResource("7_5i0cl")
 region = Rect2(24, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mb238"]
-atlas = ExtResource("7_5i0cl")
 region = Rect2(48, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n1fkp"]
-atlas = ExtResource("7_5i0cl")
 region = Rect2(72, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_71bh0"]
-atlas = ExtResource("8_vvlnr")
 region = Rect2(0, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qqrhp"]
-atlas = ExtResource("8_vvlnr")
 region = Rect2(24, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_17e08"]
-atlas = ExtResource("8_vvlnr")
 region = Rect2(48, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2a1gk"]
-atlas = ExtResource("8_vvlnr")
 region = Rect2(72, 0, 24, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_f6rr3"]

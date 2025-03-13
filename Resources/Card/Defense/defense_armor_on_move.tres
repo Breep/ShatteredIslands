@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://dqbwrt8fqwukv"]
 
 [ext_resource type="Texture2D" uid="uid://cilvc63p2kxsc" path="res://Data/Assets/Card/Card_IMG/Necro/necro chest.png" id="3_xb1w0"]
-[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Defense/defense_armor_onmove.gd" id="4_awxsg"]
-[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_xjegs"]
+[ext_resource type="Script" uid="uid://dl7a7b1sxld8q" path="res://ResourcesBase/Upgrades/Player/Defense/defense_armor_onmove.gd" id="4_awxsg"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://ResourcesBase/CardBase/card.gd" id="5_xjegs"]
 
 [sub_resource type="Resource" id="Resource_g7wfn"]
 script = ExtResource("4_awxsg")

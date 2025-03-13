@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://6ogbf2rbcg4s"]
 
 [ext_resource type="Texture2D" uid="uid://6gftr8loa2ll" path="res://Data/Assets/Card/Card_IMG/Hp/hp1.png" id="3_qoacq"]
-[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Hp/hp_increase_hp.gd" id="4_iqy2v"]
-[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_5ckwg"]
+[ext_resource type="Script" uid="uid://dob16wmubfruo" path="res://ResourcesBase/Upgrades/Player/Hp/hp_increase_hp.gd" id="4_iqy2v"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://ResourcesBase/CardBase/card.gd" id="5_5ckwg"]
 
 [sub_resource type="Resource" id="Resource_ov7qb"]
 script = ExtResource("4_iqy2v")

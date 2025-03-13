@@ -43,7 +43,7 @@ render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_lambert, specul
 
 uniform sampler2D tex_frg_2 : source_color;
 uniform sampler2D tex_frg_3 : source_color;
-uniform float opacity : hint_range(0, 1) = 1;
+uniform float opacity : hint_range(0.0, 1.0) = 1.0;
 
 
 
@@ -301,8 +301,8 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yiyxl"]
 _data = {
-"RESET": SubResource("Animation_q77hj"),
-"meteor": SubResource("Animation_6s2ww")
+&"RESET": SubResource("Animation_q77hj"),
+&"meteor": SubResource("Animation_6s2ww")
 }
 
 [node name="MeteorVisual" type="Node3D"]

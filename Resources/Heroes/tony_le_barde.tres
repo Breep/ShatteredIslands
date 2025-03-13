@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Hero" load_steps=5 format=3 uid="uid://8hfga7o6w8xp"]
 
-[ext_resource type="Script" path="res://ResourcesBase/Hero/hero.gd" id="1_a5tni"]
-[ext_resource type="Script" path="res://ResourcesBase/CharacterStats/character_stats.gd" id="2_5n5m3"]
+[ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://ResourcesBase/Hero/hero.gd" id="1_a5tni"]
+[ext_resource type="Script" uid="uid://c76rxvnlcwltf" path="res://ResourcesBase/CharacterStats/character_stats.gd" id="2_5n5m3"]
 [ext_resource type="PackedScene" uid="uid://unr8ut4cx7db" path="res://Scenes/Heroes/TonyLeBarde/model.tscn" id="4_qcf1m"]
 
 [sub_resource type="Resource" id="Resource_uh6kp"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c0l0roxttdtlp"]
 
-[ext_resource type="Script" path="res://Scripts/FightingArea/fighting_manager.gd" id="1_at0pt"]
+[ext_resource type="Script" uid="uid://rjp0tlkxy8ho" path="res://Scripts/FightingArea/fighting_manager.gd" id="1_at0pt"]
 
 [node name="FightingManager" type="Node"]
 script = ExtResource("1_at0pt")

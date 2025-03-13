@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://d4hfbm8yo1hwl"]
 
 [ext_resource type="Texture2D" uid="uid://chi5j1kuvpqkq" path="res://Data/Assets/Card/Card_IMG/poison/poison boots.jpg" id="2_dsecd"]
-[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="3_fi4ny"]
-[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Defense/defense_chance_to_poison.gd" id="4_gxv66"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://ResourcesBase/CardBase/card.gd" id="3_fi4ny"]
+[ext_resource type="Script" uid="uid://n61u4sffurqj" path="res://ResourcesBase/Upgrades/Player/Defense/defense_chance_to_poison.gd" id="4_gxv66"]
 
 [sub_resource type="Resource" id="Resource_c3rbj"]
 script = ExtResource("4_gxv66")

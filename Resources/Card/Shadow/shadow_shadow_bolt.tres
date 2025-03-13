@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://hx0le13ykyma"]
 
 [ext_resource type="Texture2D" uid="uid://cw1k1i6bvbtoi" path="res://Data/Assets/Card/Card_IMG/shadow/shadow2.png" id="3_81ydm"]
-[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Shadow/shadow_shadow_bolt.gd" id="4_3dkjh"]
-[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_k8at3"]
+[ext_resource type="Script" uid="uid://i0yn1st71p6o" path="res://ResourcesBase/Upgrades/Player/Shadow/shadow_shadow_bolt.gd" id="4_3dkjh"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://ResourcesBase/CardBase/card.gd" id="5_k8at3"]
 
 [sub_resource type="Resource" id="Resource_n2jh5"]
 script = ExtResource("4_3dkjh")

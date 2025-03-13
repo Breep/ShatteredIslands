@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://c50orsf0vjp14"]
 
 [ext_resource type="Texture2D" uid="uid://d1l55kbcoqt3m" path="res://Data/Assets/Card/Card_IMG/defense/ring def 1.png" id="3_ca142"]
-[ext_resource type="Script" path="res://ResourcesBase/Upgrades/Player/Defense/defense_armor_lost_hp.gd" id="4_ripai"]
-[ext_resource type="Script" path="res://ResourcesBase/CardBase/card.gd" id="5_qiibp"]
+[ext_resource type="Script" uid="uid://lwdlysp6airt" path="res://ResourcesBase/Upgrades/Player/Defense/defense_armor_lost_hp.gd" id="4_ripai"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://ResourcesBase/CardBase/card.gd" id="5_qiibp"]
 
 [sub_resource type="Resource" id="Resource_sec0v"]
 script = ExtResource("4_ripai")
