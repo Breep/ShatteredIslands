@@ -11,19 +11,19 @@ var _battle_types_number = {
 
 # ============================== Local nodes ==============================
 
-@onready var _hero_selection: Node3D = %HeroSelection
+@onready var _hero_selection: Node3D = %HeroSelection # Main node of the Hero selection
+
+@export var _hero_selection_spawns: Array[Node3D]
 
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
 	Utils.recursive_hide(self)
 	
-	var heroes = find_children("", "Hero3D", true, false)
-	if heroes.is_empty():
-		printerr("TavernCenter: There should be heroes inside the _hero_selection Node")
-		return
-	for hero in heroes:
-		(hero as Hero3D).queue_free()
+	for spawn in _hero_selection_spawns:
+		for child in spawn.get_children():
+			child.queue_free()
+			print("FREEING ", child.name)
 
 # ============================== Public functions ==============================
 
@@ -61,7 +61,15 @@ func put_tables_according_to_battles(battles: Array[Battle]) -> void:
 
 
 func init_hero_selection(heroes: Array[Hero]) -> void:
-	pass
+	for i in heroes.size():
+		var hero3D: Hero3D = heroes[i].model.instantiate()
+		_hero_selection.add_child(hero3D)
+		hero3D.global_position = _hero_selection_spawns[i].global_position
+		hero3D.name = heroes[i].name
+		print("Spawning ", heroes[i].name)
+	_hero_selection.show()
+	show()
+	print(_hero_selection.get_tree_string_pretty())
 
 # ============================== Private functions ==============================
 

@@ -1,6 +1,8 @@
 class_name Hero
 extends Resource
 
+# ============================== Enum ==============================
+
 enum HeroType {
 	ANCIENT_TREE,
 	CYBORG,
@@ -12,6 +14,8 @@ enum HeroType {
 	TONY_LE_BARDE
 }
 
+# ============================== Export ==============================
+
 @export var name: String
 @export var hero_type: HeroType
 @export var description: String
@@ -20,3 +24,5 @@ enum HeroType {
 
 @export var aa_projectile_type: Projectile.ProjectileType
 @export var model: PackedScene
+
+# ============================== Public functions ==============================

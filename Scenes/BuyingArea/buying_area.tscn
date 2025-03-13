@@ -31,7 +31,7 @@ script = ExtResource("1_ed4aq")
 environment = SubResource("Environment_pgie4")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.984808, -0.0868241, 0.150384, 0, 0.866025, 0.5, -0.173648, -0.492404, 0.852868, -4.72408, 7.83169, 0.56205)
+transform = Transform3D(0.984808, -0.0868241, 0.150384, 0, 0.866025, 0.5, -0.173648, -0.492404, 0.852868, -1.83603, 17.4339, 16.9409)
 projection = 1
 size = 10.0
 script = ExtResource("2_nery7")

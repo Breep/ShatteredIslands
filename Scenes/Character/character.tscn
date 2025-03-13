@@ -28,10 +28,9 @@ script = ExtResource("1_2kqa6")
 
 [node name="CharacterVisual" parent="." instance=ExtResource("2_0rbv3")]
 unique_name_in_owner = true
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.859336, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0834689, 1.02165, -0.000976563)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_rxegs")
 
 [node name="ProjectileSpawn" type="Node3D" parent="."]

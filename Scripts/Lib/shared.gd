@@ -1,6 +1,6 @@
 extends Node
 
-const HEROES = {
+const HEROES: Dictionary [Hero.HeroType, Hero] = {
 	Hero.HeroType.ANCIENT_TREE: preload("res://Resources/Heroes/ancient_tree.tres"),
 	Hero.HeroType.CYBORG: preload("res://Resources/Heroes/cyborg.tres"),
 	Hero.HeroType.DR_BOOM: preload("res://Resources/Heroes/dr_boom.tres"),
@@ -23,3 +23,22 @@ const PROJECTILES = {
 	Projectile.ProjectileType.SPELL_FIRBOLT: preload("res://Scenes/SpellsAndProjectiles/default_projectile.tscn"),
 	Projectile.ProjectileType.SPELL_SHADOW_BOLT: preload("res://Scenes/SpellsAndProjectiles/default_projectile.tscn")
 }
+
+func get_n_random_heroes(heroes_number: int) -> Array[Hero]:
+	var random_heroes: Array[Hero]
+	if heroes_number <= 0 or heroes_number > HEROES.size():
+		printerr("Hero: Wrong heroes_number: ", heroes_number)
+		return random_heroes
+	
+	var heroes: Array[Hero]
+	for hero in HEROES.values():
+		heroes.append(hero)
+	
+	var rng := RandomNumberGenerator.new()
+	rng.randomize()
+	for i in heroes_number:
+		var random_index: int = rng.randi_range(0, heroes.size() - 1)
+		random_heroes.append(heroes.get(random_index))
+		heroes.remove_at(random_index)
+	
+	return random_heroes

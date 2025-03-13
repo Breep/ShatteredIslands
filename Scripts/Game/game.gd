@@ -17,6 +17,7 @@ var _families_ref: Dictionary # Reference Dictionary to all families
 var _active_families: Array[Family] # Array of all families activated for this game only
 var _rules: GameRules
 
+var _current_round_number: int
 var _current_round_battles: Array[Battle]
 
 @onready var _buying_area: BuyingArea = %BuyingArea
@@ -36,7 +37,13 @@ func _ready() -> void:
 func _start_game() -> void:
 	# Start hero selection
 	# Start first round
-	_start_new_round()
+	_start_hero_selection()
+	#_start_new_round()
+
+
+func _start_hero_selection() -> void:
+	var heroes: Array[Hero] = Shared.get_n_random_heroes(8)
+	_buying_area.start_hero_selection(heroes)
 
 
 func _start_new_round() ->void:

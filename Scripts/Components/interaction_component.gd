@@ -54,4 +54,5 @@ func _on_parent_unfocused() -> void:
 		mesh.material_overlay = null
 
 func _on_parent_interacted() -> void:
+	print("Interracted on: ", _parent.name)
 	pass

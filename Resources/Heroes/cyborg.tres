@@ -1,28 +1,30 @@
-[gd_resource type="Resource" script_class="Hero" load_steps=5 format=3 uid="uid://doyohpm5j86u7"]
+[gd_resource type="Resource" script_class="Hero" load_steps=5 format=3 uid="uid://fb28rdceanxm"]
 
 [ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://ResourcesBase/Hero/hero.gd" id="1_cktai"]
 [ext_resource type="Script" uid="uid://c76rxvnlcwltf" path="res://ResourcesBase/CharacterStats/character_stats.gd" id="2_1yek5"]
 [ext_resource type="PackedScene" uid="uid://d22s0rdi4c3gf" path="res://Scenes/Heroes/Cyborg/model.tscn" id="4_vvujf"]
 
-[sub_resource type="Resource" id="Resource_0r2fq"]
+[sub_resource type="Resource" id="Resource_ce5xo"]
 script = ExtResource("2_1yek5")
-health_max = 2000
-mana_max = 100
-mana_regen = 1.0
-energy_max = 30
-energy_regen = 2.0
-move_speed = 2.0
-attack_damage = 40
-attack_speed = 1.5
-attack_move_speed = 10.0
-physical_critical_chance = 10.0
-physical_critical_multiplier = 2.0
+health_max = 0
+mana_max = 0
+mana_regen = 0.0
+energy_max = 0
+energy_regen = 0.0
+move_speed = 0.0
+attack_damage = 0
+attack_speed = 0.0
+attack_move_speed = 0.0
+physical_critical_chance = 0.0
+physical_critical_multiplier = 0.0
+metadata/_custom_type_script = "uid://c76rxvnlcwltf"
 
 [resource]
 script = ExtResource("1_cktai")
 name = "Cyborg"
 hero_type = 1
 description = "Bip bap boup"
-stats = SubResource("Resource_0r2fq")
-aa_projectile_type = 0
+stats = SubResource("Resource_ce5xo")
+aa_projectile_type = 1
 model = ExtResource("4_vvujf")
+metadata/_custom_type_script = "uid://dtcjta70luxvr"

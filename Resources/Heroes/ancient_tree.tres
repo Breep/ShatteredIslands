@@ -21,8 +21,8 @@ physical_critical_multiplier = 2.0
 [resource]
 script = ExtResource("1_atefr")
 name = "Ancient tree"
-hero_type = 0
+hero_type = null
 description = "Un ancien arbre"
 stats = SubResource("Resource_vi0jq")
-aa_projectile_type = 0
+aa_projectile_type = null
 model = ExtResource("4_8wut5")

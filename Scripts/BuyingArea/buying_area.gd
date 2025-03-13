@@ -17,3 +17,7 @@ func _ready() -> void:
 func start_round(battles: Array[Battle]) -> void:
 	CameraManager.camera_changed.emit(CameraManager.CameraType.BUYING_AREA)
 	_tavern.put_tables_according_to_battles(battles)
+
+
+func start_hero_selection(heroes: Array[Hero]) -> void:
+	_tavern.init_hero_selection(heroes)

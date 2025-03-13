@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://d22s0rdi4c3gf"]
+[gd_scene load_steps=6 format=3 uid="uid://d22s0rdi4c3gf"]
 
 [ext_resource type="Script" uid="uid://boijjesl7u0r0" path="res://Scenes/Heroes/hero_3d.gd" id="1_us4v5"]
+[ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://Scenes/Components/interaction_component.tscn" id="2_bh6wa"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_btlsg"]
 albedo_color = Color(0.321728, 0.321728, 0.321728, 1)
@@ -8,9 +9,17 @@ albedo_color = Color(0.321728, 0.321728, 0.321728, 1)
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_e8xkk"]
 material = SubResource("StandardMaterial3D_btlsg")
 
-[node name="Model" type="Node3D"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_026v3"]
+
+[node name="Hero3D" type="StaticBody3D"]
 script = ExtResource("1_us4v5")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_e8xkk")
+
+[node name="InteractionComponent" parent="." instance=ExtResource("2_bh6wa")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_026v3")

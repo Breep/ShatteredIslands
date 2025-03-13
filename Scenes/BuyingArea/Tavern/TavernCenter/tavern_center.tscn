@@ -13,8 +13,9 @@ albedo_color = Color(0.787, 0, 0.617, 0.108)
 [sub_resource type="BoxMesh" id="BoxMesh_r1qdr"]
 size = Vector3(15, 1, 10)
 
-[node name="TavernCenter" type="Node3D"]
+[node name="TavernCenter" type="Node3D" node_paths=PackedStringArray("_hero_selection_spawns")]
 script = ExtResource("1_ha6dk")
+_hero_selection_spawns = [NodePath("HeroSelection/Spawn1"), NodePath("HeroSelection/Spawn2"), NodePath("HeroSelection/Spawn3"), NodePath("HeroSelection/Spawn4"), NodePath("HeroSelection/Spawn5"), NodePath("HeroSelection/Spawn6"), NodePath("HeroSelection/Spawn7"), NodePath("HeroSelection/Spawn8")]
 
 [node name="DebugVisualPlace" type="MeshInstance3D" parent="."]
 material_override = SubResource("StandardMaterial3D_6qeal")
