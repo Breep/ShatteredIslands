@@ -17,7 +17,6 @@ var _damage_wait_time: float # period between two ticks of damage (in seconds)
 var _previous_source_position: Vector3 # Last position of the source when a trail point was added
 const MINIMUM_DISTANCE_FOR_NEW_POINT: float = 0.5 # Minimum distance between two point of the fire trail path (in m)
 
-@onready var _construction_timer:Timer = %ConstructionTimer
 @onready var _damage_timer: Timer = %DamageTimer
 
 @onready var _fire_trail_area_scene: PackedScene = preload("res://Scenes/SpellsAndProjectiles/fire_trail_area.tscn")

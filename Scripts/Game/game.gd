@@ -53,7 +53,6 @@ func _start_new_round() ->void:
 
 func _spawn_all_fighting_areas(battles: Array[Battle]) -> void:
 	for i in battles.size():
-		print("INSTANTIATING a fighting area !", i)
 		var fighting_area: FightingArea = _fighting_area_scene.instantiate()
 		get_tree().current_scene.add_child(fighting_area)
 		fighting_area.position = _fighting_area_spawns[i].position

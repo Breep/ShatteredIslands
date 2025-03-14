@@ -14,7 +14,7 @@ var _fire_stats: CharacterFireStats # Ref to the owner fire stats
 @onready var _fire_trail_scene: PackedScene = preload("res://Scenes/SpellsAndProjectiles/fire_trail.tscn")
 #@onready var _fire_bolt_scene: PackedScene = preload("res://Scenes/VFX_3D/Import/fireball.tscn")
 
-@export var _projectile_spawn : Node3D
+#@export var _projectile_spawn : Node3D
 
 # ============================== Public functions ==============================
 

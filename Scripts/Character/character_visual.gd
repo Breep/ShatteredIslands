@@ -22,7 +22,7 @@ var _hero_model: Node3D
 # ============================== Public ==============================
 
 func load_hero_model(hero: Hero) -> void:
-	var _hero_model: Node3D = hero.visual.instantiate()
+	_hero_model = hero.model.instantiate()
 	add_child(_hero_model)
 
 

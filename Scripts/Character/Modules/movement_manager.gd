@@ -61,9 +61,9 @@ func _move_toward_target(delta: float):
 	var direction: Vector3 = (_target_position - _source.global_position).normalized()
 	
 	if _fighting_state == FightingManager.FightingState.STARTING:
-		_source.velocity = direction * _get_move_speed() * 2
+		_source.velocity = direction * _get_move_speed() * 2 * delta
 	else:
-		_source.velocity = direction * _get_move_speed()
+		_source.velocity = direction * _get_move_speed() * delta
 	
 	_source.move_and_slide()
 	var distance_moved = _source.global_position.distance_to(previous_position)

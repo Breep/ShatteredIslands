@@ -252,7 +252,7 @@ func _on_events_character_is_spawned(who: Character) -> void:
 
 # ============================== Other callback ==============================
 
-func _on_character_dead(who: Character, true_death: bool):
+func _on_character_dead(who: Character, _true_death: bool):
 	print("OH NO ", who.player.name, " is dead :(")
 	_remove_character(who)
 

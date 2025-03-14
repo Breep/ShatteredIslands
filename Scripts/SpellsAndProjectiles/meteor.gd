@@ -5,7 +5,7 @@ var _characters_inside: Array[Character] # Array of all character inside the are
 
 var _source: Character # Owner of this healing fire area
 var _action_module: ActionModule # Owner ActionModule ref (needed to deal damages accordingly to owner upgrades) # TODO probably rework this shit
-var _damage_percent: int # Meteor damage (in % of enemy current hp)
+var _damage_percent: float # Meteor damage (in % of enemy current hp)
 var _deploy_time: float # Time for the metor to fall on the ground (in s)
 var _radius: float # Range of the meteor impact (in m)
 
