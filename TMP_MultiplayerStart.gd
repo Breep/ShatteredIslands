@@ -5,14 +5,15 @@ enum PeerType {
 	CLIENT,
 }
 
-@export var address = "127.0.0.1"
-@export var port = 4242
+@export var _default_server_ip = "127.0.0.1"
+@export var _server_port = 4242
 
-@onready var name_edit: LineEdit = %NameEdit
+@onready var _player_name_edit: LineEdit = %PlayerNameEdit
+@onready var _server_ip_edit: LineEdit = %ServerIPEdit
 
 @onready var _first_selection: Control = %FirstSelection
 @onready var _server_panels: Control = %ServerPanels
-@onready var _client_message: Control = %ClientMessage
+@onready var _client_message: Label = %ClientMessage
 @onready var _players_list: Control = %PlayersList
 
 # ============================================
@@ -21,6 +22,11 @@ func _ready() -> void:
 	_first_selection.show()
 	_server_panels.hide()
 	_client_message.hide()
+	
+	_server_ip_edit.text = _default_server_ip
+	
+	PlayerManager.player_added.connect(_on_player_manager_player_added)
+	PlayerManager.player_removed.connect(_on_player_manager_player_removed)
 	
 	for child in _players_list.get_children():
 		child.queue_free()
@@ -31,31 +37,27 @@ func _ready() -> void:
 	multiplayer.connection_failed.connect(_on_connection_failed)
 	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 	rng.randomize()
-	name_edit.text = "Breep" + str(rng.randi_range(0, 1000))
+	_player_name_edit.text = "Breep" + str(rng.randi_range(0, 1000))
 	pass
 
 # ============================================
 
-func _on_peer_connected(id):
-	if not multiplayer.is_server():
-		return
-	var label := Label.new()
-	label.text = "Player" + str(id)
-	_players_list.add_child(label)
-	print("Player", id, " connected !")
-
-
-func _on_peer_disconnected(id):
-	print("Player", id, " disconnected !")
-
-
-func _on_connected_to_server():
-	PlayerManager.add_player.rpc_id(1, name_edit.text, multiplayer.get_unique_id())
-	print("Connected to server !")
-
-
-func _on_connection_failed():
-	printerr("Connection failed !")
+func _addPeer(peerType: PeerType) -> bool:
+	var peer := ENetMultiplayerPeer.new()
+	var error = ERR_BUG
+	if peerType == PeerType.SERVER:
+		error = peer.create_server(_server_port, 8)
+	elif peerType == PeerType.CLIENT:
+		var address: String = _server_ip_edit.text
+		error = peer.create_client(address, _server_port)
+	
+	if error != OK:
+		printerr("Cannot add peer: ", str(error))
+		return false
+	
+	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
+	multiplayer.set_multiplayer_peer(peer)
+	return true
 
 # ============================================
 
@@ -70,27 +72,61 @@ func _on_start_button_pressed() -> void:
 
 
 func _on_join_button_pressed() -> void:
-	_addPeer(PeerType.CLIENT)
-	_first_selection.hide()
-	_client_message.show()
+	if _addPeer(PeerType.CLIENT) == true:
+		_first_selection.hide()
+		_client_message.show()
 
 
-func _on_ready_button_toggled(toggled_on: bool) -> void:
-	PlayerManager.set_ready.rpc(multiplayer.get_unique_id(), toggled_on)
+func _on_add_bot_button_pressed() -> void:
+	pass # Replace with function body.
+
+
+func _on_remove_bot_button_pressed() -> void:
+	pass # Replace with function body.
 
 # ============================================
 
-func _addPeer(peerType: PeerType):
-	var peer := ENetMultiplayerPeer.new()
-	var error = ERR_BUG
-	if peerType == PeerType.SERVER:
-		error = peer.create_server(port, 8)
-	elif peerType == PeerType.CLIENT:
-		error = peer.create_client(address, port)
+func _on_peer_connected(id):
+	if multiplayer.is_server():
+		print("Player", id, " connected !")
+
+
+func _on_peer_disconnected(id):
+	print("Player", id, " disconnected !")
+
+
+func _on_connected_to_server():
+	print("[", multiplayer.get_unique_id(), "] Connected to server !")
+	_client_message.add_theme_color_override("font_color", Color(0, 0, 0))
+	_client_message.text = "Asking the SERVER to join the game"
 	
-	if error != OK:
-		printerr("Cannot add peer: ", str(error))
-		return
-	
-	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
-	multiplayer.set_multiplayer_peer(peer)
+	var res = await PlayerManager.join_game(multiplayer.get_unique_id(), _player_name_edit.text)
+	if res[PlayerManager.JoinGameKeys.RESPONSE] == true:
+		print("[", multiplayer.get_unique_id(), "] Join the game !")
+		_client_message.add_theme_color_override("font_color", Color(0, 0, 0))
+		_client_message.text = "Waiting for SERVER to start the game"
+	else:
+		printerr("[", multiplayer.get_unique_id(), "] Can't join the game ! -> ", res[PlayerManager.JoinGameKeys.REASON])
+		_client_message.add_theme_color_override("font_color", Color(1, 0, 0))
+		_client_message.text = res[PlayerManager.JoinGameKeys.REASON]
+		await get_tree().create_timer(3.0).timeout
+		_first_selection.show()
+		_client_message.hide()
+
+
+func _on_connection_failed():
+	printerr("Connection failed !")
+
+
+func _on_player_manager_player_added(peer_id: int) -> void:
+	if not multiplayer.is_server(): return
+	var label := Label.new()
+	label.text = PlayerManager.players[peer_id].name
+	_players_list.add_child(label)
+
+
+func _on_player_manager_player_removed(peer_id: int) -> void:
+	for child in _players_list.get_children():
+		if child.text == PlayerManager.players[peer_id].name:
+			child.queue_free()
+			return

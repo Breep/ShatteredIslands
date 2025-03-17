@@ -1,6 +1,6 @@
 extends Node
 
-const HEROES: Dictionary [Hero.HeroType, Hero] = {
+const HEROES: Dictionary[Hero.HeroType, Hero] = {
 	Hero.HeroType.ANCIENT_TREE: preload("res://Resources/Heroes/ancient_tree.tres"),
 	Hero.HeroType.CYBORG: preload("res://Resources/Heroes/cyborg.tres"),
 	Hero.HeroType.DR_BOOM: preload("res://Resources/Heroes/dr_boom.tres"),
