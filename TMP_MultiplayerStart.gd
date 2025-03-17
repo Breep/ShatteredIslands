@@ -34,7 +34,7 @@ func _on_peer_disconnected(id):
 
 
 func _on_connected_to_server():
-	GameManager.add_player.rpc_id(1, name_edit.text, multiplayer.get_unique_id())
+	PlayerManager.add_player.rpc_id(1, name_edit.text, multiplayer.get_unique_id())
 	print("Connected to server !")
 
 
@@ -62,7 +62,7 @@ func _on_join_button_pressed() -> void:
 
 
 func _on_ready_button_toggled(toggled_on: bool) -> void:
-	GameManager.set_ready.rpc(multiplayer.get_unique_id(), toggled_on)
+	PlayerManager.set_ready.rpc(multiplayer.get_unique_id(), toggled_on)
 
 
 # ============================================

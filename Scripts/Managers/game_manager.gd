@@ -17,25 +17,22 @@ enum GameState {
 	Fighting
 }
 
-# ============================== Constants ==============================
-
-const MAX_PLAYERS: int = 8
-
-# ============================== Public ==============================
-
-var players: Dictionary # { player_id : Player }
-
-# ============================== Private ==============================
-
-var _game_state: GameState = GameState.Starting
+# ============================== Private variables ==============================
 
 var _game_scene: PackedScene = preload("res://Scenes/Game/game.tscn")
-var _buying_area_scene: PackedScene = preload("res://Scenes/BuyingArea/buying_area.tscn")
-var _fighting_area_scene: PackedScene = preload("res://Scenes/FightingArea/fighting_area.tscn")
 
 var _families_ref: Dictionary # Reference Dictionary to all families
 var _active_families: Array[Family] # Array of all families activated for this game only
 var _rules: GameRules
+
+#[Server only]
+var _game_heroes_ready: bool = false
+signal _heroes_choosen()
+
+# [Client only] Is emit when server has answered the local client request
+signal _server_answered()
+
+var _random_heroes_ref: Array[Hero.HeroType]
 
 # ============================== Node base functions ==============================
 
@@ -48,63 +45,23 @@ func _ready() -> void:
 
 # ============================== Public function ==============================
 
-@rpc("any_peer", "call_local")
-func game_switch_to(new_game_state: GameState) -> void:
-	if new_game_state != _game_state:
-		_game_state = new_game_state
-		_game_switch_to(_game_state)
-	else:
-		printerr("Game is already on ", _game_state, " state !")
-
-
-# Add a player to the list of players
-# If this is called on the server, the server will transmit this to every other players
-@rpc("any_peer", "call_remote")
-func add_player(player_name: String, id: int) -> void:
-	print("[id:", multiplayer.get_unique_id(),"] Adding player: ", player_name, " of multiplayer id:", id, " in my players list")
-	
-	if players.has(id):
-		return
-	
-	if players.size() >= MAX_PLAYERS:
-		printerr("[id:", multiplayer.get_unique_id(),"] Too many players")
-		return
-	
-	var new_player := Player.new()
-	new_player.deck = PlayerDeck.new()
-	new_player.name = player_name
-	new_player.id = id
-	new_player.ready = false
-	
-	# TMP
-	new_player.hero = Shared.HEROES[Hero.HeroType.ANCIENT_TREE]
-	new_player.gold = 500
-	new_player.health = 30
-	
-	players[id] = new_player
-	
+func get_n_random_heroes(heroes_number: int) -> Array[Hero]:
 	if multiplayer.is_server():
-		for player in players.values():
-			add_player.rpc(player.name, player.id)
-
-
-@rpc("any_peer", "call_local")
-func set_ready(peer_id: int , is_ready: bool) -> void:
-	print("[id:", multiplayer.get_unique_id(),"] player ", peer_id, " is telling me that he is ready ? ", is_ready)
-	players[peer_id].ready = is_ready
-
-
-func get_local_player() -> Player:
-	if not players.has(multiplayer.get_unique_id()):
-		printerr(" No local player for player_id=", multiplayer.get_unique_id())
-		return null
+		_init_current_current_game_heroes(heroes_number)
+	else:
+		_ask_get_n_random_heroes.rpc_id(1, multiplayer.get_unique_id(), heroes_number)
+		await _server_answered
 	
-	return players[multiplayer.get_unique_id()]
+	var random_heroes: Array[Hero]
+	for hero_ref in _random_heroes_ref:
+		random_heroes.append(Shared.HEROES[hero_ref])
+	
+	return random_heroes
 
 
 @rpc("any_peer", "call_local")
 func start_game() -> void:
-	if not _all_players_are_ready():
+	if not PlayerManager.all_players_are_ready():
 		printerr("[id:", multiplayer.get_unique_id(),"] Not all player are ready !")
 		return
 	
@@ -113,52 +70,15 @@ func start_game() -> void:
 		MultiplayerDeckManager.construct_shop_deck(_active_families, _rules)
 	
 	get_tree().change_scene_to_packed(_game_scene)
-	#game_switch_to(GameState.Buying)
 
 
 func get_family_from_type(family_type: Family.FamilyType) -> Family:
 	return _families_ref[family_type]
 
 
-func get_alive_players() -> Dictionary:
-	var alive_players: Dictionary
-	for player in players.values():
-		if player.health > 0:
-			alive_players[player.id] = player
-	return alive_players
 
-
-func start_round() ->void:
-	# Start buying area + all battles area
-	pass
-
-
-# Start a fighting area linked to a battle
-func start_fighting_area(battle: Battle) -> void:
-	pass
 
 # ============================== Private function ==============================
-
-func _game_switch_to(new_game_state: GameState) -> void:
-	var new_scene: PackedScene
-	if new_game_state == GameState.Buying: 
-		new_scene = _buying_area_scene
-	elif new_game_state == GameState.Fighting:
-		new_scene = _fighting_area_scene
-	else:
-		printerr("Unknown game state !")
-		return
-	
-	get_tree().change_scene_to_packed(new_scene)
-
-
-func _all_players_are_ready() -> bool:
-	for player in players.values():
-		if player.ready == false:
-			return false
-
-	return true
-
 
 func _init_families_ref() -> void:
 	_families_ref[Family.FamilyType.Attack] = load("res://Resources/Families/attack_family.tres") as Family
@@ -169,7 +89,47 @@ func _init_families_ref() -> void:
 	_families_ref[Family.FamilyType.Life] = load("res://Resources/Families/hp_family.tres") as Family
 	_families_ref[Family.FamilyType.Poison] = load("res://Resources/Families/poison_family.tres") as Family
 	_families_ref[Family.FamilyType.Shadow] = load("res://Resources/Families/shadow_family.tres") as Family
+
+# ============================== RPC - Ask/Answer current round battle ==============================
+
+@rpc("any_peer", "call_remote")
+func _ask_get_n_random_heroes(peer_id: int, heroes_number: int) -> void:
+	if not multiplayer.is_server():
+		printerr("Only server should be asked for random heroes")
+		return
 	
+	if not _game_heroes_ready:
+		await _heroes_choosen
+	
+	_answer_get_n_random_heroes.rpc_id(peer_id, _random_heroes_ref)
+
+
+@rpc("authority", "call_remote")
+func _answer_get_n_random_heroes(heroes_ref: Array[Hero.HeroType]) -> void:
+	_random_heroes_ref = heroes_ref
+	_server_answered.emit()
+	pass
+
+# ============================== Private functions ==============================
+
+func _init_current_current_game_heroes(heroes_number: int) -> void:
+	if heroes_number <= 0 or heroes_number > Shared.HEROES.size():
+		printerr("Hero: Wrong heroes_number: ", heroes_number)
+		return
+	
+	var heroes_ref: Array[Hero.HeroType]
+	for hero_ref in Shared.HEROES.keys():
+		heroes_ref.append(hero_ref)
+	
+	var rng := RandomNumberGenerator.new()
+	rng.randomize()
+	for i in heroes_number:
+		var random_index: int = rng.randi_range(0, heroes_ref.size() - 1)
+		_random_heroes_ref.append(heroes_ref.get(random_index))
+		heroes_ref.remove_at(random_index)
+	
+	_heroes_choosen.emit()
+	_game_heroes_ready = true
 
 	
 	

@@ -63,9 +63,8 @@ projectile_spawn = NodePath("../../ProjectileSpawn")
 [node name="DefenseManager" parent="FamiliesManagers" instance=ExtResource("8_nrem6")]
 unique_name_in_owner = true
 
-[node name="FireManager" parent="FamiliesManagers" node_paths=PackedStringArray("_projectile_spawn") instance=ExtResource("9_nht2m")]
+[node name="FireManager" parent="FamiliesManagers" instance=ExtResource("9_nht2m")]
 unique_name_in_owner = true
-_projectile_spawn = NodePath("../../ProjectileSpawn")
 
 [node name="LifeManager" parent="FamiliesManagers" instance=ExtResource("10_62qwf")]
 unique_name_in_owner = true

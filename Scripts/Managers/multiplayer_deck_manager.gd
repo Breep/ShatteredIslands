@@ -70,7 +70,7 @@ func init_cards_ref(families: Array[Family], _rules: GameRules) -> void:
 				_cards_refs.append(card)
 	
 	# init dictionary
-	for player_id in GameManager.players.keys():
+	for player_id in PlayerManager.players.keys():
 		_cards_refs_displayed_in_player_shop[player_id] = []
 
 
@@ -184,9 +184,9 @@ func draw_cards(cards_refs_ids: Array[int]) -> void:
 @rpc("authority", "call_local")
 func _add_card_in_playerdeck(player_id: int, card_ref_id: int) -> void:
 	print("[id:", multiplayer.get_unique_id(),"] Add ", _cards_refs[card_ref_id], " to ", player_id, " deck")
-	GameManager.players[player_id].deck.add_card(_cards_refs[card_ref_id])
-	GameManager.players[player_id].gold -= 100
-	GameManager.players[player_id].deck_changed.emit(GameManager.players[player_id].deck)
+	PlayerManager.players[player_id].deck.add_card(_cards_refs[card_ref_id])
+	PlayerManager.players[player_id].gold -= 100
+	PlayerManager.players[player_id].deck_changed.emit(PlayerManager.players[player_id].deck)
 	
 	# If the local player is the one at the origin of the demand
 	if player_id == multiplayer.get_unique_id():
@@ -274,7 +274,7 @@ func _ask_to_buy_card(peer_id: int, card_ref_id: int) -> void:
 		return
 	
 	# Check player money
-	if GameManager.players[peer_id].gold < 100: # TODO check gamerules for card price
+	if PlayerManager.players[peer_id].gold < 100: # TODO check gamerules for card price
 		printerr("[id:", multiplayer.get_unique_id(),"]  Peer.", peer_id, " is not rich enough")
 		_notify_buying_error.rpc_id(peer_id, ServerResponse.NOT_ENOUGHT_MONEY)
 		return

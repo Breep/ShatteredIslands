@@ -20,7 +20,7 @@ func _ready() -> void:
 		hide()
 		return
 	
-	_local_player = GameManager.get_local_player()
+	_local_player = PlayerManager.get_local_player()
 	_update_shop_cards_displayed()
 	# tmp connect button signals
 	# TODO make it in a separate function that can handle a custom number of button
