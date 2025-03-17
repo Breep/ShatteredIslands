@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://cfy3wb4emhq5q"]
+[gd_scene load_steps=5 format=3 uid="uid://cfy3wb4emhq5q"]
 
 [ext_resource type="Script" uid="uid://ydc55iptm4fr" path="res://TMP_MultiplayerStart.gd" id="1_gbxea"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3th4t"]
+bg_color = Color(0.247123, 0.575418, 0.288043, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5p35a"]
+bg_color = Color(0.516289, 0.605179, 0.415503, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p35tt"]
+bg_color = Color(0.328211, 0.595477, 0.221919, 1)
 
 [node name="TMP_MultiplayerScene" type="Control"]
 layout_mode = 3
@@ -19,69 +28,148 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
+[node name="FirstSelection" type="HBoxContainer" parent="CenterContainer"]
+unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(600, 200)
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="HostButton" type="Button" parent="CenterContainer/HBoxContainer"]
+[node name="HostButton" type="Button" parent="CenterContainer/FirstSelection"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "START
 SERVER"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/FirstSelection"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/FirstSelection/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="CenterContainer/FirstSelection/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Player Name"
 
-[node name="NameEdit" type="LineEdit" parent="CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="NameEdit" type="LineEdit" parent="CenterContainer/FirstSelection/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="JoinButton" type="Button" parent="CenterContainer/HBoxContainer/VBoxContainer"]
+[node name="JoinButton" type="Button" parent="CenterContainer/FirstSelection/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 text = "JOIN"
 
-[node name="StartButton" type="Button" parent="CenterContainer/HBoxContainer"]
+[node name="ServerPanels" type="VBoxContainer" parent="CenterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(600, 600)
+layout_mode = 2
+
+[node name="TitlePanel" type="Panel" parent="CenterContainer/ServerPanels"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+theme_override_styles/panel = SubResource("StyleBoxFlat_3th4t")
+
+[node name="Label" type="Label" parent="CenterContainer/ServerPanels/TitlePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "SERVER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConnectedPlayersPanel" type="Panel" parent="CenterContainer/ServerPanels"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.9
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/ServerPanels/ConnectedPlayersPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 3
+
+[node name="PlayersList" type="VBoxContainer" parent="CenterContainer/ServerPanels/ConnectedPlayersPanel/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="CenterContainer/ServerPanels/ConnectedPlayersPanel/MarginContainer/PlayersList"]
+layout_mode = 2
+text = "Test"
+
+[node name="Label3" type="Label" parent="CenterContainer/ServerPanels/ConnectedPlayersPanel/MarginContainer/PlayersList"]
+layout_mode = 2
+text = "Test"
+
+[node name="Label4" type="Label" parent="CenterContainer/ServerPanels/ConnectedPlayersPanel/MarginContainer/PlayersList"]
+layout_mode = 2
+text = "Test"
+
+[node name="Label5" type="Label" parent="CenterContainer/ServerPanels/ConnectedPlayersPanel/MarginContainer/PlayersList"]
+layout_mode = 2
+text = "Test"
+
+[node name="Label6" type="Label" parent="CenterContainer/ServerPanels/ConnectedPlayersPanel/MarginContainer/PlayersList"]
+layout_mode = 2
+text = "Test"
+
+[node name="Label7" type="Label" parent="CenterContainer/ServerPanels/ConnectedPlayersPanel/MarginContainer/PlayersList"]
+layout_mode = 2
+text = "Test"
+
+[node name="Label8" type="Label" parent="CenterContainer/ServerPanels/ConnectedPlayersPanel/MarginContainer/PlayersList"]
+layout_mode = 2
+text = "Test"
+
+[node name="Label9" type="Label" parent="CenterContainer/ServerPanels/ConnectedPlayersPanel/MarginContainer/PlayersList"]
+layout_mode = 2
+text = "Test"
+
+[node name="StartButton" type="Button" parent="CenterContainer/ServerPanels"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 75
+theme_override_styles/hover = SubResource("StyleBoxFlat_5p35a")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_p35tt")
 text = "START
-"
+GAME"
+
+[node name="ClientMessage" type="Label" parent="CenterContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Waiting for HOST to start the game"
 
 [node name="ReadyButton" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 452.0
 offset_top = 130.0
 offset_right = 707.0
 offset_bottom = 193.0
-theme_override_colors/font_pressed_color = Color(0.239787, 0.459843, 0.257364, 1)
 theme_override_colors/icon_normal_color = Color(0.557183, 0.261261, 0.479662, 1)
+theme_override_colors/font_pressed_color = Color(0.239787, 0.459843, 0.257364, 1)
 toggle_mode = true
 text = "READY"
 
-[node name="breakpoint" type="Button" parent="."]
-layout_mode = 0
-offset_left = 882.0
-offset_top = 165.0
-offset_right = 941.0
-offset_bottom = 196.0
-text = "BREAK"
-
-[connection signal="pressed" from="CenterContainer/HBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
-[connection signal="pressed" from="CenterContainer/HBoxContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
-[connection signal="pressed" from="CenterContainer/HBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="CenterContainer/FirstSelection/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="CenterContainer/FirstSelection/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="CenterContainer/ServerPanels/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="toggled" from="ReadyButton" to="." method="_on_ready_button_toggled"]
-[connection signal="pressed" from="breakpoint" to="." method="_on_breakpoint_pressed"]

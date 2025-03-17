@@ -17,6 +17,10 @@ enum GameState {
 	Fighting
 }
 
+# ============================== Constants ==============================
+
+const HEROES_NUMBER: int = 8
+
 # ============================== Private variables ==============================
 
 var _game_scene: PackedScene = preload("res://Scenes/Game/game.tscn")
@@ -45,11 +49,11 @@ func _ready() -> void:
 
 # ============================== Public function ==============================
 
-func get_n_random_heroes(heroes_number: int) -> Array[Hero]:
+func get_current_game_heroes() -> Array[Hero]:
 	if multiplayer.is_server():
-		_init_current_current_game_heroes(heroes_number)
+		_init_current_current_game_heroes(HEROES_NUMBER)
 	else:
-		_ask_get_n_random_heroes.rpc_id(1, multiplayer.get_unique_id(), heroes_number)
+		_ask_get_n_random_heroes.rpc_id(1, multiplayer.get_unique_id(), HEROES_NUMBER)
 		await _server_answered
 	
 	var random_heroes: Array[Hero]
@@ -61,10 +65,6 @@ func get_n_random_heroes(heroes_number: int) -> Array[Hero]:
 
 @rpc("any_peer", "call_local")
 func start_game() -> void:
-	if not PlayerManager.all_players_are_ready():
-		printerr("[id:", multiplayer.get_unique_id(),"] Not all player are ready !")
-		return
-	
 	MultiplayerDeckManager.init_cards_ref(_active_families, _rules)
 	if multiplayer.is_server():
 		MultiplayerDeckManager.construct_shop_deck(_active_families, _rules)

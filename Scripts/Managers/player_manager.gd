@@ -35,7 +35,6 @@ func add_player(player_name: String, id: int) -> void:
 			add_player.rpc(player.name, player.id)
 
 
-
 @rpc("any_peer", "call_local")
 func set_ready(peer_id: int , is_ready: bool) -> void:
 	print("[id:", multiplayer.get_unique_id(),"] player ", peer_id, " is telling me that he is ready ? ", is_ready)
@@ -55,10 +54,3 @@ func get_alive_players() -> Dictionary:
 		if player.health > 0:
 			alive_players[player.id] = player
 	return alive_players
-
-
-func all_players_are_ready() -> bool:
-	for player in players.values():
-		if player.ready == false:
-			return false
-	return true

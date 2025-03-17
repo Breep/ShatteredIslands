@@ -10,9 +10,21 @@ enum PeerType {
 
 @onready var name_edit: LineEdit = %NameEdit
 
+@onready var _first_selection: Control = %FirstSelection
+@onready var _server_panels: Control = %ServerPanels
+@onready var _client_message: Control = %ClientMessage
+@onready var _players_list: Control = %PlayersList
+
 # ============================================
 
 func _ready() -> void:
+	_first_selection.show()
+	_server_panels.hide()
+	_client_message.hide()
+	
+	for child in _players_list.get_children():
+		child.queue_free()
+	
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 	multiplayer.connected_to_server.connect(_on_connected_to_server)
@@ -25,8 +37,12 @@ func _ready() -> void:
 # ============================================
 
 func _on_peer_connected(id):
-	if multiplayer.is_server():
-		print("Player", id, " connected !")
+	if not multiplayer.is_server():
+		return
+	var label := Label.new()
+	label.text = "Player" + str(id)
+	_players_list.add_child(label)
+	print("Player", id, " connected !")
 
 
 func _on_peer_disconnected(id):
@@ -41,14 +57,12 @@ func _on_connected_to_server():
 func _on_connection_failed():
 	printerr("Connection failed !")
 
-
 # ============================================
 
 func _on_host_button_pressed() -> void:
 	_addPeer(PeerType.SERVER)
-	$CenterContainer.hide()
-	$ReadyButton.hide()
-	$breakpoint.hide()
+	_first_selection.hide()
+	_server_panels.show()
 
 
 func _on_start_button_pressed() -> void:
@@ -57,13 +71,12 @@ func _on_start_button_pressed() -> void:
 
 func _on_join_button_pressed() -> void:
 	_addPeer(PeerType.CLIENT)
-
-
+	_first_selection.hide()
+	_client_message.show()
 
 
 func _on_ready_button_toggled(toggled_on: bool) -> void:
 	PlayerManager.set_ready.rpc(multiplayer.get_unique_id(), toggled_on)
-
 
 # ============================================
 
@@ -76,13 +89,8 @@ func _addPeer(peerType: PeerType):
 		error = peer.create_client(address, port)
 	
 	if error != OK:
-		printerr("Cannot host: ", str(error))
+		printerr("Cannot add peer: ", str(error))
 		return
 	
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.set_multiplayer_peer(peer)
-
-
-func _on_breakpoint_pressed() -> void:
-	print("Breakpoint here")
-	pass # Replace with function body.
