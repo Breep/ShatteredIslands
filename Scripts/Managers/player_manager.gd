@@ -1,5 +1,18 @@
 extends Node
 
+const BOT_NAMES: Array[String] = [
+	"Spide Ren'heure",
+	"Alex_Supertramp",
+	"Pwet",
+	"gooby",
+	"Meumeux",
+	"TheAFKKnight",
+	"CritsMcGee",
+	"Xx_Slayer_xX",
+	"GoldHoarder",
+	"Zorro"
+]
+
 enum JoinGameKeys {
 	RESPONSE,
 	REASON
@@ -10,7 +23,7 @@ const MAX_PLAYERS: int = 8
 var players: Dictionary[int, Player]
 
 signal player_added(peer_id: int)
-signal player_removed(peer_id: int)
+signal player_removed(peer_id: int, player_name: String)
 
 signal _join_server_answered()
 var _join_server_response: bool
@@ -36,16 +49,33 @@ func get_alive_players() -> Dictionary:
 func join_game(peer_id: int, player_name: String) -> Dictionary:
 	if multiplayer.is_server():
 		printerr("PlayerManager: Server can't be a player")
-		return {JoinGameKeys.RESPONSE: false, JoinGameKeys.REASON:"Server can't be a player"}
+		return {JoinGameKeys.RESPONSE: false, JoinGameKeys.REASON: "Server can't be a player"}
 	
 	_ask_join_game.rpc_id(1, peer_id, player_name)
 	await _join_server_answered
 	
 	if _join_server_response == true:
-		return {JoinGameKeys.RESPONSE: true, JoinGameKeys.REASON:"OK"}
+		return {JoinGameKeys.RESPONSE: true, JoinGameKeys.REASON: "OK"}
 	else:
 		printerr("PlayerManager: Can't join the game -> ", _join_server_reason)
 		return {JoinGameKeys.RESPONSE: false, JoinGameKeys.REASON: _join_server_reason}
+
+
+func kick_from_game(peer_id: int) -> void:
+	_remove_player.rpc(peer_id)
+
+
+func add_bot() -> void:
+	var bot_names = BOT_NAMES.duplicate()
+	for player in players.values():
+		if player.is_bot:
+			bot_names.erase(player.name)
+	
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	var index = rng.randi_range(0, bot_names.size() - 1)
+	var bot_name = bot_names[index]
+	_add_player(bot_name, -index, true, {})
 
 # ============================== RPC - Ask/Answer Join game ==============================
 
@@ -71,7 +101,7 @@ func _ask_join_game(peer_id: int, player_name: String) -> void:
 			return
 	
 	_answer_join_game.rpc_id(peer_id, true, "OK")
-	_add_player(player_name, peer_id)
+	_add_player(player_name, peer_id, false, {})
 
 
 @rpc("authority", "call_remote")
@@ -85,31 +115,62 @@ func _answer_join_game(response: int, reason: String) -> void:
 # Add a player to the list of players
 # If this is called on the server, the server will transmit this to every other players
 @rpc("authority", "call_remote")
-func _add_player(player_name: String, id: int) -> void:
+func _add_player(player_name: String, id: int, is_bot: bool, serialized_player: Dictionary) -> void:
 	print("[id:", multiplayer.get_unique_id(),"] Adding player: ", player_name, " of multiplayer id:", id, " in my players list")
 	
-	if players.has(id):
+	if players.has(id) or players.size() >= MAX_PLAYERS:
 		return
 	
-	if players.size() >= MAX_PLAYERS:
-		printerr("[id:", multiplayer.get_unique_id(),"] Too many players")
-		return
-	
-	var new_player := Player.new()
-	new_player.deck = PlayerDeck.new()
-	new_player.name = player_name
-	new_player.id = id
-	new_player.is_bot = false
-	
-	# TMP
-	new_player.hero = Shared.HEROES[Hero.HeroType.ANCIENT_TREE]
-	new_player.gold = 500
-	new_player.health = 30
-	
-	players[id] = new_player
+	if multiplayer.is_server():
+		var new_player := Player.new()
+		new_player.deck = PlayerDeck.new()
+		new_player.name = player_name
+		new_player.id = id
+		new_player.is_bot = is_bot
+		
+		# TMP
+		new_player.hero = Shared.HEROES[Hero.HeroType.ANCIENT_TREE]
+		new_player.gold = 500
+		new_player.health = 30
+		
+		players[id] = new_player
+	else:
+		players[id] = Player.new_from_serialized(serialized_player)
 	
 	player_added.emit(id)
 	
 	if multiplayer.is_server():
 		for player in players.values():
-			_add_player.rpc(player.name, player.id)
+			_add_player.rpc(player.name, player.id, player.serialized())
+
+
+@rpc("authority", "call_local")
+func _remove_player(peer_id: int) -> void:
+	player_removed.emit(peer_id, players[peer_id].name)
+	players.erase(peer_id)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

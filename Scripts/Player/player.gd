@@ -55,6 +55,7 @@ static func get_from_serialized(serialized_data: Dictionary) -> Player:
 
 static func new_from_serialized(serialized_data: Dictionary) -> Player:
 	var player := Player.new()
+	player.deck = PlayerDeck.new()
 	player.name = serialized_data[SerializedField.NAME]
 	player.team = serialized_data[SerializedField.TEAM]
 	player.health = serialized_data[SerializedField.HEALTH]
