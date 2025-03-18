@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cfy3wb4emhq5q"]
+[gd_scene load_steps=3 format=3 uid="uid://cfy3wb4emhq5q"]
 
 [ext_resource type="Script" uid="uid://ydc55iptm4fr" path="res://TMP_MultiplayerStart.gd" id="1_gbxea"]
+[ext_resource type="PackedScene" uid="uid://dqkyovx2krwgi" path="res://TMP_player_info_template.tscn" id="2_p35tt"]
 
 [node name="TMP_MultiplayerScene" type="Control"]
 layout_mode = 3
@@ -21,6 +22,7 @@ grow_vertical = 2
 
 [node name="FirstSelection" type="HBoxContainer" parent="CenterContainer"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(600, 200)
 layout_mode = 2
 theme_override_constants/separation = 10
@@ -79,7 +81,6 @@ text = "JOIN"
 
 [node name="ServerPanels" type="VBoxContainer" parent="CenterContainer"]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(600, 600)
 layout_mode = 2
 
@@ -124,37 +125,9 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label2" type="Label" parent="CenterContainer/ServerPanels/ConnectedPlayersPanel/MarginContainer/HBoxContainer/PlayersList"]
+[node name="PlayerInfoTemplate" parent="CenterContainer/ServerPanels/ConnectedPlayersPanel/MarginContainer/HBoxContainer/PlayersList" instance=ExtResource("2_p35tt")]
+unique_name_in_owner = true
 layout_mode = 2
-text = "Breep"
-
-[node name="Label3" type="Label" parent="CenterContainer/ServerPanels/ConnectedPlayersPanel/MarginContainer/HBoxContainer/PlayersList"]
-layout_mode = 2
-text = "Twiins"
-
-[node name="Label4" type="Label" parent="CenterContainer/ServerPanels/ConnectedPlayersPanel/MarginContainer/HBoxContainer/PlayersList"]
-layout_mode = 2
-text = "Jacky"
-
-[node name="Label5" type="Label" parent="CenterContainer/ServerPanels/ConnectedPlayersPanel/MarginContainer/HBoxContainer/PlayersList"]
-layout_mode = 2
-text = "Michel"
-
-[node name="Label6" type="Label" parent="CenterContainer/ServerPanels/ConnectedPlayersPanel/MarginContainer/HBoxContainer/PlayersList"]
-layout_mode = 2
-text = "Bot01"
-
-[node name="Label7" type="Label" parent="CenterContainer/ServerPanels/ConnectedPlayersPanel/MarginContainer/HBoxContainer/PlayersList"]
-layout_mode = 2
-text = "Bot02"
-
-[node name="Label8" type="Label" parent="CenterContainer/ServerPanels/ConnectedPlayersPanel/MarginContainer/HBoxContainer/PlayersList"]
-layout_mode = 2
-text = "Tartempion"
-
-[node name="Label9" type="Label" parent="CenterContainer/ServerPanels/ConnectedPlayersPanel/MarginContainer/HBoxContainer/PlayersList"]
-layout_mode = 2
-text = "Bidule"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/ServerPanels/ConnectedPlayersPanel/MarginContainer/HBoxContainer"]
 layout_mode = 2
@@ -168,16 +141,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
 text = "Add
-Bot"
-
-[node name="RemoveBotButton" type="Button" parent="CenterContainer/ServerPanels/ConnectedPlayersPanel/MarginContainer/HBoxContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.2
-text = "Remove
-Bot"
+Bots"
 
 [node name="StartButton" type="Button" parent="CenterContainer/ServerPanels"]
 layout_mode = 2
@@ -188,6 +152,7 @@ GAME"
 
 [node name="ClientMessage" type="Label" parent="CenterContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
@@ -196,5 +161,4 @@ text = "Asking the SERVER to join the game"
 [connection signal="pressed" from="CenterContainer/FirstSelection/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="CenterContainer/FirstSelection/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
 [connection signal="pressed" from="CenterContainer/ServerPanels/ConnectedPlayersPanel/MarginContainer/HBoxContainer/VBoxContainer/AddBotButton" to="." method="_on_add_bot_button_pressed"]
-[connection signal="pressed" from="CenterContainer/ServerPanels/ConnectedPlayersPanel/MarginContainer/HBoxContainer/VBoxContainer/RemoveBotButton" to="." method="_on_remove_bot_button_pressed"]
 [connection signal="pressed" from="CenterContainer/ServerPanels/StartButton" to="." method="_on_start_button_pressed"]

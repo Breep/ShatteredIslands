@@ -16,6 +16,8 @@ enum PeerType {
 @onready var _client_message: Label = %ClientMessage
 @onready var _players_list: Control = %PlayersList
 
+@onready var _player_info_template: HBoxContainer = %PlayerInfoTemplate
+
 # ============================================
 
 func _ready() -> void:
@@ -29,7 +31,7 @@ func _ready() -> void:
 	PlayerManager.player_removed.connect(_on_player_manager_player_removed)
 	
 	for child in _players_list.get_children():
-		child.queue_free()
+		child.hide()
 	
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
@@ -59,6 +61,19 @@ func _addPeer(peerType: PeerType) -> bool:
 	multiplayer.set_multiplayer_peer(peer)
 	return true
 
+
+func _add_connected_player_line(peer_id: int) -> void:
+	if not multiplayer.is_server(): return
+	var new_line: PlayerInfoTemplate = _player_info_template.duplicate()
+	new_line.update_info(peer_id, PlayerManager.players[peer_id].name)
+	new_line.show()
+	new_line.kick_button_pressed.connect(_on_new_line_kick_button_pressed)
+	_players_list.add_child(new_line)
+
+
+func _on_new_line_kick_button_pressed(peer_id: int) -> void:
+	PlayerManager.kick_from_game(peer_id)
+
 # ============================================
 
 func _on_host_button_pressed() -> void:
@@ -78,11 +93,7 @@ func _on_join_button_pressed() -> void:
 
 
 func _on_add_bot_button_pressed() -> void:
-	pass # Replace with function body.
-
-
-func _on_remove_bot_button_pressed() -> void:
-	pass # Replace with function body.
+	PlayerManager.add_bot()
 
 # ============================================
 
@@ -93,6 +104,8 @@ func _on_peer_connected(id):
 
 func _on_peer_disconnected(id):
 	print("Player", id, " disconnected !")
+	if multiplayer.is_server():
+		PlayerManager.kick_from_game(id)
 
 
 func _on_connected_to_server():
@@ -120,13 +133,8 @@ func _on_connection_failed():
 
 func _on_player_manager_player_added(peer_id: int) -> void:
 	if not multiplayer.is_server(): return
-	var label := Label.new()
-	label.text = PlayerManager.players[peer_id].name
-	_players_list.add_child(label)
+	_add_connected_player_line(peer_id)
 
 
-func _on_player_manager_player_removed(peer_id: int) -> void:
-	for child in _players_list.get_children():
-		if child.text == PlayerManager.players[peer_id].name:
-			child.queue_free()
-			return
+func _on_player_manager_player_removed(peer_id: int, player_name: String) -> void:
+	pass
