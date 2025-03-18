@@ -1,17 +1,18 @@
 extends Node
 
-const BOT_NAMES: Array[String] = [
-	"Spide Ren'heure",
-	"Alex_Supertramp",
-	"Pwet",
-	"gooby",
-	"Meumeux",
-	"TheAFKKnight",
-	"CritsMcGee",
-	"Xx_Slayer_xX",
-	"GoldHoarder",
-	"Zorro"
-]
+# Bot names and their fake peer_id
+const BOT_INFOS: Dictionary [int, String] = {
+	-1: "Spide Ren'heure",
+	-2: "Alex_Supertramp",
+	-3: "Pwet",
+	-4: "gooby",
+	-5: "Meumeux",
+	-6: "TheAFKKnight",
+	-7: "CritsMcGee",
+	-8: "Xx_Slayer_xX",
+	-9: "GoldHoarder",
+	-10: "Zorro"
+}
 
 enum JoinGameKeys {
 	RESPONSE,
@@ -23,7 +24,7 @@ const MAX_PLAYERS: int = 8
 var players: Dictionary[int, Player]
 
 signal player_added(peer_id: int)
-signal player_removed(peer_id: int, player_name: String)
+signal player_removed(peer_id: int)
 
 signal _join_server_answered()
 var _join_server_response: bool
@@ -66,16 +67,13 @@ func kick_from_game(peer_id: int) -> void:
 
 
 func add_bot() -> void:
-	var bot_names = BOT_NAMES.duplicate()
+	var bot_infos := BOT_INFOS.duplicate()
 	for player in players.values():
 		if player.is_bot:
-			bot_names.erase(player.name)
+			bot_infos.erase(player.id)
 	
-	var rng = RandomNumberGenerator.new()
-	rng.randomize()
-	var index = rng.randi_range(0, bot_names.size() - 1)
-	var bot_name = bot_names[index]
-	_add_player(bot_name, -index, true, {})
+	var bot_id = bot_infos.keys().pick_random()
+	_add_player(BOT_INFOS[bot_id], bot_id, true, {})
 
 # ============================== RPC - Ask/Answer Join game ==============================
 
@@ -141,12 +139,12 @@ func _add_player(player_name: String, id: int, is_bot: bool, serialized_player: 
 	
 	if multiplayer.is_server():
 		for player in players.values():
-			_add_player.rpc(player.name, player.id, player.serialized())
+			_add_player.rpc(player.name, player.id, player.is_bot, player.serialized())
 
 
 @rpc("authority", "call_local")
 func _remove_player(peer_id: int) -> void:
-	player_removed.emit(peer_id, players[peer_id].name)
+	player_removed.emit(peer_id)
 	players.erase(peer_id)
 
 

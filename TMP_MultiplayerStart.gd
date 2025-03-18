@@ -93,7 +93,8 @@ func _on_join_button_pressed() -> void:
 
 
 func _on_add_bot_button_pressed() -> void:
-	PlayerManager.add_bot()
+	while PlayerManager.players.size() < PlayerManager.MAX_PLAYERS:
+		PlayerManager.add_bot()
 
 # ============================================
 
