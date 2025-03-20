@@ -3,7 +3,7 @@ extends Resource
 
 # ============================== Enum ==============================
 
-enum HeroType {
+enum HeroId {
 	ANCIENT_TREE,
 	CYBORG,
 	DR_BOOM,
@@ -17,7 +17,10 @@ enum HeroType {
 # ============================== Export ==============================
 
 @export var name: String
-@export var hero_type: HeroType
+@export var id: HeroId
+
+@export var portrait: CompressedTexture2D
+
 @export var description: String
 
 @export var stats: CharacterStats

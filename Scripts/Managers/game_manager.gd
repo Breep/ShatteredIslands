@@ -36,7 +36,7 @@ signal _heroes_choosen()
 # [Client only] Is emit when server has answered the local client request
 signal _server_answered()
 
-var _random_heroes_ref: Array[Hero.HeroType]
+var _random_heroes_ref: Array[Hero.HeroId]
 
 # ============================== Node base functions ==============================
 
@@ -76,6 +76,57 @@ func get_family_from_type(family_type: Family.FamilyType) -> Family:
 	return _families_ref[family_type]
 
 
+# [Client only]
+signal _server_hero_pickup_order_answered
+
+# [Server only]
+signal _hero_pickup_order_choosen
+var _hero_pickup_order_ready: bool
+var _hero_pickup_order_players: Array[Player]
+
+func get_hero_pickup_order() -> Array[Player]:
+	if multiplayer.is_server():
+		_init_hero_pickup_order()
+		return _hero_pickup_order_players
+	else:
+		_ask_hero_pickup_order.rpc_id(1, multiplayer.get_unique_id())
+		await _server_hero_pickup_order_answered
+		return _hero_pickup_order_players
+
+
+func _init_hero_pickup_order() -> void:
+	var players_dup := PlayerManager.players.duplicate()
+	
+	for i in players_dup.size():
+		var random_player_id = players_dup.keys().pick_random()
+		_hero_pickup_order_players.append(players_dup[random_player_id])
+		players_dup.erase(random_player_id)
+	
+	_hero_pickup_order_ready = true
+	_hero_pickup_order_choosen.emit()
+
+
+@rpc("any_peer", "call_remote")
+func _ask_hero_pickup_order(peer_id: int) -> void:
+	if not multiplayer.is_server():
+		printerr("GameManager: Only the server can choose the hero pickup order")
+		return
+	
+	if not _hero_pickup_order_ready:
+		await _hero_pickup_order_choosen
+	
+	var _hero_pickup_order_player_ids: Array[int]
+	for player in _hero_pickup_order_players:
+		_hero_pickup_order_player_ids.append(player.id)
+	
+	_answer_hero_pickup_order.rpc_id(peer_id, _hero_pickup_order_player_ids)
+
+
+@rpc("authority", "call_remote")
+func _answer_hero_pickup_order(hero_pickup_order_player_ids: Array[int]) -> void:
+	for player_id in hero_pickup_order_player_ids:
+		_hero_pickup_order_players.append(PlayerManager.players[player_id])
+	_server_hero_pickup_order_answered.emit()
 
 
 # ============================== Private function ==============================
@@ -105,7 +156,7 @@ func _ask_get_n_random_heroes(peer_id: int, heroes_number: int) -> void:
 
 
 @rpc("authority", "call_remote")
-func _answer_get_n_random_heroes(heroes_ref: Array[Hero.HeroType]) -> void:
+func _answer_get_n_random_heroes(heroes_ref: Array[Hero.HeroId]) -> void:
 	_random_heroes_ref = heroes_ref
 	_server_answered.emit()
 	pass
@@ -117,7 +168,7 @@ func _init_current_current_game_heroes(heroes_number: int) -> void:
 		printerr("Hero: Wrong heroes_number: ", heroes_number)
 		return
 	
-	var heroes_ref: Array[Hero.HeroType]
+	var heroes_ref: Array[Hero.HeroId]
 	for hero_ref in Shared.HEROES.keys():
 		heroes_ref.append(hero_ref)
 	

@@ -112,6 +112,7 @@ func _answer_join_game(response: int, reason: String) -> void:
 
 # Add a player to the list of players
 # If this is called on the server, the server will transmit this to every other players
+# TODO Improve this so it only send not known players to players
 @rpc("authority", "call_remote")
 func _add_player(player_name: String, id: int, is_bot: bool, serialized_player: Dictionary) -> void:
 	print("[id:", multiplayer.get_unique_id(),"] Adding player: ", player_name, " of multiplayer id:", id, " in my players list")
@@ -127,7 +128,7 @@ func _add_player(player_name: String, id: int, is_bot: bool, serialized_player: 
 		new_player.is_bot = is_bot
 		
 		# TMP
-		new_player.hero = Shared.HEROES[Hero.HeroType.ANCIENT_TREE]
+		new_player.hero = Shared.HEROES[Hero.HeroId.ANCIENT_TREE]
 		new_player.gold = 500
 		new_player.health = 30
 		

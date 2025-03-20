@@ -72,7 +72,7 @@ func serialized() -> Dictionary:
 		SerializedField.ID: id,
 		SerializedField.TEAM: team,
 		SerializedField.HEALTH: health,
-		SerializedField.HERO: hero.hero_type,
+		SerializedField.HERO: hero.id,
 		SerializedField.GOLD: gold,
 		SerializedField.IS_BOT: is_bot
 	}

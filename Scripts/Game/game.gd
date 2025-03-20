@@ -46,6 +46,9 @@ func _start_hero_selection() -> void:
 	_buying_area.start_hero_selection(heroes)
 
 
+
+
+
 func _start_new_round() ->void:
 	_current_round_battles = await RoundManager.get_current_round_battles()
 	_start_buying_phase()

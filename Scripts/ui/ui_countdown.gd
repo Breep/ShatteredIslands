@@ -10,7 +10,7 @@ var _end_timer_word : String
 
 func _ready() -> void:
 	_timer_label.show()
-	start(5,"end")
+
 
 func start(countdown_sec: int, endword: String) -> void:
 	_sec_timer = countdown_sec
@@ -24,11 +24,13 @@ func start(countdown_sec: int, endword: String) -> void:
 func _update_label() -> void:
 	_timer_label.text = str(_sec_timer)  
 
+
 func _animate_label() -> void:
 	_tween.kill()  
 	_tween = get_tree().create_tween()  
 	_tween.tween_property(_timer_label, "scale", Vector2(1.5, 1.5), 0.2).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
 	_tween.tween_property(_timer_label, "scale", Vector2(1, 1), 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+
 
 func _animate_fight_effect() -> void:
 	_tween.kill()

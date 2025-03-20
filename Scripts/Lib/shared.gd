@@ -1,14 +1,14 @@
 extends Node
 
-const HEROES: Dictionary[Hero.HeroType, Hero] = {
-	Hero.HeroType.ANCIENT_TREE: preload("res://Resources/Heroes/ancient_tree.tres"),
-	Hero.HeroType.CYBORG: preload("res://Resources/Heroes/cyborg.tres"),
-	Hero.HeroType.DR_BOOM: preload("res://Resources/Heroes/dr_boom.tres"),
-	Hero.HeroType.ENERGY_MAN: preload("res://Resources/Heroes/energy_man.tres"),
-	Hero.HeroType.LAURENT_KROFT: preload("res://Resources/Heroes/laurent_kroft.tres"),
-	Hero.HeroType.MR_KRUMB: preload("res://Resources/Heroes/mr_krumb.tres"),
-	Hero.HeroType.SIR_REGINALD: preload("res://Resources/Heroes/sir_reginald.tres"),
-	Hero.HeroType.TONY_LE_BARDE: preload("res://Resources/Heroes/tony_le_barde.tres")
+const HEROES: Dictionary[Hero.HeroId, Hero] = {
+	Hero.HeroId.ANCIENT_TREE: preload("res://Resources/Heroes/ancient_tree.tres"),
+	Hero.HeroId.CYBORG: preload("res://Resources/Heroes/cyborg.tres"),
+	Hero.HeroId.DR_BOOM: preload("res://Resources/Heroes/dr_boom.tres"),
+	Hero.HeroId.ENERGY_MAN: preload("res://Resources/Heroes/energy_man.tres"),
+	Hero.HeroId.LAURENT_KROFT: preload("res://Resources/Heroes/laurent_kroft.tres"),
+	Hero.HeroId.MR_KRUMB: preload("res://Resources/Heroes/mr_krumb.tres"),
+	Hero.HeroId.SIR_REGINALD: preload("res://Resources/Heroes/sir_reginald.tres"),
+	Hero.HeroId.TONY_LE_BARDE: preload("res://Resources/Heroes/tony_le_barde.tres")
 }
 
 const PROJECTILES = {
