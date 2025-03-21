@@ -81,7 +81,7 @@ func _anwser_current_round_battles(serialized_battles: Array[Dictionary]) -> voi
 # Get a random set of battles according to the alive players number
 # Fill the battle with random players and sort them in team randomly
 func _init_current_round_battles() -> void:
-	var alive_players = GameManager.get_alive_players().duplicate()
+	var alive_players = PlayerManager.get_alive_players().duplicate()
 	var battle_categories = _get_battle_categories(alive_players.size())
 	
 	# Construct the _battles array with all battle, fill them with players, assigned team to players

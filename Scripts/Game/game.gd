@@ -29,6 +29,8 @@ var _fighting_areas: Array[FightingArea]
 
 func _ready() -> void:
 	_buying_area.phase_ended.connect(_on_buying_area_phase_ended)
+	_buying_area.all_heroes_picked.connect(_on_buying_area_all_heroes_picked)
+	
 	
 	_start_game()
 
@@ -74,3 +76,7 @@ func _start_fighting_phase() -> void:
 
 func _on_buying_area_phase_ended():
 	_start_fighting_phase()
+
+
+func _on_buying_area_all_heroes_picked() -> void:
+	_start_new_round()

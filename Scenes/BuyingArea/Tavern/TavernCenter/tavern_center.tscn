@@ -92,25 +92,39 @@ transform = Transform3D(0.625992, 0, 0.77983, 0, 1, 0, -0.77983, 0, 0.625992, -3
 battle_id = 1
 
 [node name="PlayersLeft_8" type="Node3D" parent="."]
-visible = false
+unique_name_in_owner = true
 
-[node name="Table_1v1_1" parent="PlayersLeft_8" instance=ExtResource("2_are6m")]
+[node name="4_1v1" type="Node3D" parent="PlayersLeft_8"]
+unique_name_in_owner = true
+
+[node name="Table_1v1_1" parent="PlayersLeft_8/4_1v1" instance=ExtResource("2_are6m")]
 transform = Transform3D(0.508516, 0, 0.861053, 0, 1, 0, -0.861053, 0, 0.508516, -2.70871, 0, -2.13845)
 
-[node name="Table_1v1_2" parent="PlayersLeft_8" instance=ExtResource("2_are6m")]
+[node name="Table_1v1_2" parent="PlayersLeft_8/4_1v1" instance=ExtResource("2_are6m")]
 transform = Transform3D(0.49212, 0, 0.870528, 0, 1, 0, -0.870528, 0, 0.49212, 3.75597, 0, 2.66961)
 battle_id = 1
 
-[node name="Table_1v1_3" parent="PlayersLeft_8" instance=ExtResource("2_are6m")]
+[node name="Table_1v1_3" parent="PlayersLeft_8/4_1v1" instance=ExtResource("2_are6m")]
 transform = Transform3D(0.298474, 0, 0.954418, 0, 1, 0, -0.954418, 0, 0.298474, 4.21923, 0, -2.54201)
 battle_id = 2
 
-[node name="Table_1v1_4" parent="PlayersLeft_8" instance=ExtResource("2_are6m")]
+[node name="Table_1v1_4" parent="PlayersLeft_8/4_1v1" instance=ExtResource("2_are6m")]
 transform = Transform3D(0.781673, 0, 0.623689, 0, 1, 0, -0.623689, 0, 0.781673, -3.94566, 0, 2.6117)
 battle_id = 3
 
+[node name="2_2v2" type="Node3D" parent="PlayersLeft_8"]
+unique_name_in_owner = true
+visible = false
+
+[node name="table_2v2_1" parent="PlayersLeft_8/2_2v2" instance=ExtResource("3_cjni8")]
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -3, 0, 1)
+
+[node name="table_2v2_2" parent="PlayersLeft_8/2_2v2" instance=ExtResource("3_cjni8")]
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 4, 0, 0)
+
 [node name="HeroSelection" type="Node3D" parent="."]
 unique_name_in_owner = true
+visible = false
 
 [node name="Spawn1" type="Node3D" parent="HeroSelection"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -3)

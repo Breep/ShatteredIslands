@@ -17,7 +17,7 @@ func init_hero(new_hero: Hero) -> void:
 
 func disable() -> void:
 	disabled = true
-	create_tween().tween_property(self, "modulate", Color.RED, 0.5)
+	create_tween().tween_property(self, "modulate", Color.RED, 0.2)
 
 
 func _ready() -> void:

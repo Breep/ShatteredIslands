@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjcqan1r76e4o"
-path="res://.godot/imported/Energy man.png-093916f2ac642ce5905c1462df6441f2.ctex"
+uid="uid://dula3wiwe4px4"
+path="res://.godot/imported/Ancient Tree.webp-c8e5399c851f19d1bcfaee0aae1ee037.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Data/Heroes/Portraits/Energy man.png"
-dest_files=["res://.godot/imported/Energy man.png-093916f2ac642ce5905c1462df6441f2.ctex"]
+source_file="res://Data/Heroes/Portraits/Ancient Tree.webp"
+dest_files=["res://.godot/imported/Ancient Tree.webp-c8e5399c851f19d1bcfaee0aae1ee037.ctex"]
 
 [params]
 

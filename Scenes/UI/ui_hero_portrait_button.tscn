@@ -13,7 +13,6 @@ offset_bottom = -0.0160217
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
 theme = ExtResource("1_xsowy")
 texture_normal = ExtResource("2_xsowy")
 ignore_texture_size = true

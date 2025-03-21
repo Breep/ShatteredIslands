@@ -1,12 +1,17 @@
 class_name BuyingArea
 extends Node3D
 
+signal all_heroes_picked()
 signal phase_ended()
+
+signal _player_hero_picked()
 
 var _current_round: int
 var _battles: Array[Battle]
 
 var _available_heroes: Array[Hero]
+
+var _heroes_ready: int
 
 @onready var _tavern: Tavern = %Tavern
 
@@ -15,16 +20,18 @@ var _available_heroes: Array[Hero]
 func _ready() -> void:
 	_current_round = RoundManager.current_round
 	_ui_hero_picking_screen.hero_locked.connect(_on_ui_hero_picking_screen_hero_locked)
+	_player_hero_picked.connect(_on_player_hero_picked)
 	#_battles = RoundManager.get_current_round_battles()
 
 
 # Reload the tavern center
 func start_round(battles: Array[Battle]) -> void:
 	CameraManager.camera_changed.emit(CameraManager.CameraType.BUYING_AREA)
+	_ui_hero_picking_screen.hide()
 	_tavern.put_tables_according_to_battles(battles)
 
 
-signal _player_hero_picked()
+
 
 func start_hero_selection(heroes: Array[Hero]) -> void:
 	_tavern.init_hero_selection(heroes)
@@ -61,14 +68,15 @@ func _start_player_turn_to_pick(player_id: int) -> void:
 func _get_random_hero_and_wait_random_duration(heroes: Array[Hero]) -> Hero:
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
-	await get_tree().create_timer(rng.randf_range(1.0, 6.0)).timeout
+	await get_tree().create_timer(rng.randf_range(1.0, 2.0)).timeout
 	var random_hero: Hero = _available_heroes.pick_random()
-	_available_heroes.erase(random_hero)
 	return random_hero
 
 
+# TODO check if the client is taking an available hero in the server
 @rpc("any_peer", "call_local")
 func _pick_hero(player_id: int, hero_id: Hero.HeroId) -> void:
+	_available_heroes.erase(Shared.HEROES[hero_id])
 	PlayerManager.players[player_id].hero = Shared.HEROES[hero_id]
 	_ui_hero_picking_screen.make_hero_unavailable(Shared.HEROES[hero_id])
 	_player_hero_picked.emit()
@@ -79,6 +87,10 @@ func _on_ui_hero_picking_screen_hero_locked(hero: Hero) -> void:
 	_pick_hero.rpc(multiplayer.get_unique_id(), hero.id)
 
 
+func _on_player_hero_picked() -> void:
+	_heroes_ready += 1
+	if _heroes_ready >= PlayerManager.MAX_PLAYERS:
+		all_heroes_picked.emit()
 
 
 

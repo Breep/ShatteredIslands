@@ -52,6 +52,13 @@ func put_tables_according_to_battles(battles: Array[Battle]) -> void:
 			if _battle_types_number[Battle.BattleType.VS_1] == 2:
 				player_left_node = %"PlayersLeft_4"
 				tables_node = %"2_1v1"
+			elif _battle_types_number[Battle.BattleType.VS_2] == 2:
+				player_left_node = %"PlayersLeft_8"
+				tables_node = %"2_2v2"
+		4:
+			if _battle_types_number[Battle.BattleType.VS_1] == 4:
+				player_left_node = %"PlayersLeft_8"
+				tables_node = %"4_1v1"
 	
 	_init_tables(tables_node, battles)
 	player_left_node.show()
@@ -60,6 +67,7 @@ func put_tables_according_to_battles(battles: Array[Battle]) -> void:
 
 
 func init_hero_selection(heroes: Array[Hero]) -> void:
+	return
 	for i in heroes.size():
 		var hero3D: Hero3D = heroes[i].model.instantiate()
 		_hero_selection.add_child(hero3D)
@@ -83,7 +91,7 @@ func _init_tables(tables_node: Node3D, battles: Array[Battle]) -> void:
 			if battle.battle_type == table.battle_type:
 				table.connect_to_players(battle.players)
 				battles_duplicate.erase(battle)
-				pass
+				break
 
 
 
