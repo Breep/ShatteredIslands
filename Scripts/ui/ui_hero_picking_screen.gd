@@ -5,7 +5,7 @@ signal hero_locked(hero: Hero)
 
 var _tween: Tween
 
-var _ui_hero_portrait_button: PackedScene = preload("res://Scenes/UI/ui_hero_portrait_button.tscn")
+var _ui_hero_portrait_button: PackedScene = preload("res://Scenes/UI/HeroSelection/ui_hero_portrait_button.tscn")
 
 @onready var _ui_countdown: UICountdown = %Countdown
 @onready var _player_turn_label: Label = %PlayerTurnLabel
