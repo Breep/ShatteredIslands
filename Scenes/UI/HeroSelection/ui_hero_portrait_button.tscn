@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6lyxftbneqy"]
+
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://Resources/Theme/main_theme.tres" id="1_fftwn"]
+[ext_resource type="Texture2D" uid="uid://dck1kflaybnjq" path="res://Data/Heroes/Portraits/Dr Boom.webp" id="2_p05cw"]
+[ext_resource type="Script" uid="uid://d0bm2pkkcp3db" path="res://Scripts/UI/HeroSelection/ui_hero_portrait_button.gd" id="3_uh3hr"]
+
+[node name="HeroPortraitButton" type="TextureButton"]
+custom_minimum_size = Vector2(0, 348)
+anchors_preset = -1
+anchor_right = 0.302
+anchor_bottom = 0.517
+offset_right = 0.0959778
+offset_bottom = -0.0160217
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_fftwn")
+texture_normal = ExtResource("2_p05cw")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("3_uh3hr")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
