@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cgxxjptkqav2m"]
 
-[ext_resource type="Script" uid="uid://cu7ggj3fg2uw" path="res://Scripts/ui/ui_charactere_selection.gd" id="1_nqx23"]
+[ext_resource type="Script" uid="uid://cu7ggj3fg2uw" path="res://Scripts/UI/ui_charactere_selection.gd" id="1_nqx23"]
 [ext_resource type="Texture2D" uid="uid://cwe303gitkgl7" path="res://Data/Assets/Misc/Misc_IMG/cadre perso.png" id="1_wx6d8"]
 [ext_resource type="Texture2D" uid="uid://cc2hc26u7i5c" path="res://Data/Assets/Misc/Misc_IMG/red cadre horizontal full black.png" id="2_0344y"]
 [ext_resource type="PackedScene" uid="uid://dubiqq2hle53a" path="res://Scenes/UI/hero_button.tscn" id="4_q67ow"]

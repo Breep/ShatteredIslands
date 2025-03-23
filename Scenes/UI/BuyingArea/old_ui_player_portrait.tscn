@@ -1,24 +1,24 @@
 [gd_scene load_steps=13 format=3 uid="uid://gssru8asors0"]
 
-[ext_resource type="Script" uid="uid://drvj2cupkfeyd" path="res://Scripts/BuyingArea/UI/player_life_info.gd" id="1_q03jn"]
-[ext_resource type="Texture2D" uid="uid://djv4k1n6htmv2" path="res://Data/Assets/Buying_area/UI/black label.png" id="2_6y72h"]
-[ext_resource type="FontFile" uid="uid://cl0jltnxq5gum" path="res://Data/font/GlacialIndifference-Bold.otf" id="3_4kuni"]
-[ext_resource type="Texture2D" uid="uid://bx6nb7alldywa" path="res://Data/Assets/Buying_area/UI/red_hexa-removebg-preview.png" id="4_qsio0"]
-[ext_resource type="Texture2D" uid="uid://ct3wly5rc0ni" path="res://Data/Assets/Character/PNG/Wraith_01/PNG Sequences/Attacking/Wraith_01_Attack_000.png" id="5_vvm77"]
-[ext_resource type="Texture2D" uid="uid://dl132mivg8ol4" path="res://Data/Assets/Card/ICONS/HP.png" id="6_trcdy"]
-[ext_resource type="Texture2D" uid="uid://sex75jj3yj3x" path="res://Data/Assets/Buying_area/UI/empty_heart.png" id="7_75qd8"]
-[ext_resource type="Texture2D" uid="uid://cia42t0jcdkfg" path="res://Data/Assets/Card/ICONS/HP color.png" id="8_nn0kl"]
-[ext_resource type="Shader" uid="uid://bfevd5ui3tdi0" path="res://Shaders/UI/hearth_liquid.gdshader" id="9_35w5e"]
+[ext_resource type="Script" uid="uid://drvj2cupkfeyd" path="res://Scripts/BuyingArea/UI/player_life_info.gd" id="1_lkdj3"]
+[ext_resource type="Texture2D" uid="uid://djv4k1n6htmv2" path="res://Data/Assets/Buying_area/UI/black label.png" id="2_7xp28"]
+[ext_resource type="FontFile" uid="uid://cl0jltnxq5gum" path="res://Data/font/GlacialIndifference-Bold.otf" id="3_dll8a"]
+[ext_resource type="Texture2D" uid="uid://bx6nb7alldywa" path="res://Data/Assets/Buying_area/UI/red_hexa-removebg-preview.png" id="4_mhx4g"]
+[ext_resource type="Texture2D" uid="uid://ct3wly5rc0ni" path="res://Data/Assets/Character/PNG/Wraith_01/PNG Sequences/Attacking/Wraith_01_Attack_000.png" id="5_ijh6j"]
+[ext_resource type="Texture2D" uid="uid://dl132mivg8ol4" path="res://Data/Assets/Card/ICONS/HP.png" id="6_iu8k4"]
+[ext_resource type="Texture2D" uid="uid://sex75jj3yj3x" path="res://Data/Assets/Buying_area/UI/empty_heart.png" id="7_vbp5k"]
+[ext_resource type="Texture2D" uid="uid://cia42t0jcdkfg" path="res://Data/Assets/Card/ICONS/HP color.png" id="8_ntlqd"]
+[ext_resource type="Shader" uid="uid://bfevd5ui3tdi0" path="res://Shaders/UI/hearth_liquid.gdshader" id="9_6baho"]
 
 [sub_resource type="Theme" id="Theme_7h1j3"]
 Label/colors/font_color = Color(1, 1, 1, 1)
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
 Label/colors/font_shadow_color = Color(0, 0, 0, 0.373)
 Label/font_sizes/font_size = 12
-Label/fonts/font = ExtResource("3_4kuni")
+Label/fonts/font = ExtResource("3_dll8a")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kkj66"]
-shader = ExtResource("9_35w5e")
+shader = ExtResource("9_6baho")
 shader_parameter/bg_color = Color(0.920071, 0.934238, 0.924132, 1)
 shader_parameter/uv_scale = 0.1
 shader_parameter/percentage = 1.0
@@ -38,14 +38,17 @@ shader_parameter/specular_colour = Color(0.336903, 1.56425e-07, 0.0519289, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j18wi"]
 size = Vector2(54, 56)
 
-[node name="Player_life_info" type="Control"]
+[node name="PlayerPortrait" type="Control"]
 layout_mode = 3
-anchor_right = 0.035
-anchor_bottom = 0.062
-offset_right = 11.68
-offset_bottom = 11.824
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -920.0
+offset_bottom = -443.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("1_q03jn")
+script = ExtResource("1_lkdj3")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 1
@@ -64,7 +67,7 @@ offset_left = -59.0
 offset_top = 15.0
 offset_right = 42.0
 offset_bottom = 37.0
-texture = ExtResource("2_6y72h")
+texture = ExtResource("2_7xp28")
 expand_mode = 1
 
 [node name="PlayerName" type="Label" parent="Control/BlackLabel"]
@@ -89,7 +92,7 @@ offset_top = -15.0
 offset_bottom = -13.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("4_qsio0")
+texture = ExtResource("4_mhx4g")
 expand_mode = 1
 stretch_mode = 5
 
@@ -101,7 +104,7 @@ anchor_bottom = 1.0
 offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("5_vvm77")
+texture = ExtResource("5_ijh6j")
 expand_mode = 1
 
 [node name="Health_background" type="TextureProgressBar" parent="Control"]
@@ -118,7 +121,7 @@ max_value = 30.0
 value = 28.0
 fill_mode = 3
 nine_patch_stretch = true
-texture_progress = ExtResource("6_trcdy")
+texture_progress = ExtResource("6_iu8k4")
 
 [node name="Health" type="TextureProgressBar" parent="Control"]
 unique_name_in_owner = true
@@ -134,11 +137,11 @@ grow_vertical = 2
 size_flags_vertical = 3
 min_value = 1.0
 max_value = 30.0
-value = 29.0
+value = 15.0
 fill_mode = 3
 nine_patch_stretch = true
-texture_under = ExtResource("7_75qd8")
-texture_progress = ExtResource("8_nn0kl")
+texture_under = ExtResource("7_vbp5k")
+texture_progress = ExtResource("8_ntlqd")
 
 [node name="Health2" type="TextureProgressBar" parent="Control/Health"]
 unique_name_in_owner = true
@@ -156,8 +159,8 @@ max_value = 30.0
 value = 27.0
 fill_mode = 3
 nine_patch_stretch = true
-texture_under = ExtResource("7_75qd8")
-texture_progress = ExtResource("8_nn0kl")
+texture_under = ExtResource("7_vbp5k")
+texture_progress = ExtResource("8_ntlqd")
 
 [node name="HealthValue" type="Label" parent="."]
 unique_name_in_owner = true
@@ -176,7 +179,7 @@ grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_4kuni")
+theme_override_fonts/font = ExtResource("3_dll8a")
 theme_override_font_sizes/font_size = 22
 text = "27
 "
@@ -189,6 +192,11 @@ position = Vector2(10, 12)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(17, 7)
 shape = SubResource("RectangleShape2D_j18wi")
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

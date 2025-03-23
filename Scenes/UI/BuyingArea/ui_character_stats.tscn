@@ -1,0 +1,221 @@
+[gd_scene load_steps=14 format=3 uid="uid://db2anika8bvj8"]
+
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://Resources/Theme/main_theme.tres" id="1_0k5gn"]
+[ext_resource type="Texture2D" uid="uid://bxd1jnaci6olo" path="res://Data/Assets/Card/ICONS/ATTACK color.png" id="2_xv57f"]
+[ext_resource type="Theme" uid="uid://e45umaj22fg7" path="res://Resources/Theme/UI_Label_buying_area.tres" id="3_op3jl"]
+[ext_resource type="Texture2D" uid="uid://upsytg61ftqu" path="res://Data/Assets/Buying_area/UI/aaspeed-removebg-preview (1).png" id="4_f1wmx"]
+[ext_resource type="Texture2D" uid="uid://d3v87ioxyy0vi" path="res://Data/Assets/Buying_area/UI/Critical_strike_icon.webp" id="5_g6iyk"]
+[ext_resource type="Texture2D" uid="uid://csfafgbgft15h" path="res://Data/Assets/Card/Card_IMG/shadow/icon speed.png" id="6_fn11v"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_avmc0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3kc6s"]
+bg_color = Color(0.0666667, 0.458824, 0.329412, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iykoh"]
+bg_color = Color(0.588235, 0.588235, 0.588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c6x3o"]
+bg_color = Color(0.0784314, 0.239216, 0.376471, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2y85p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u433j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r1og3"]
+bg_color = Color(1, 0.85098, 0.239216, 1)
+
+[node name="CharacterStats" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Stats" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_0k5gn")
+
+[node name="MarginContainer" type="MarginContainer" parent="Stats"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Stats/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Stats/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.6
+theme_override_constants/separation = 2
+
+[node name="HealthBar" type="ProgressBar" parent="Stats/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_avmc0")
+theme_override_styles/fill = SubResource("StyleBoxFlat_3kc6s")
+value = 80.0
+show_percentage = false
+
+[node name="CenterContainer" type="CenterContainer" parent="Stats/MarginContainer/HBoxContainer/VBoxContainer/HealthBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Stats/MarginContainer/HBoxContainer/VBoxContainer/HealthBar/CenterContainer"]
+layout_mode = 2
+text = "1000/1000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ManaBar" type="ProgressBar" parent="Stats/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_iykoh")
+theme_override_styles/fill = SubResource("StyleBoxFlat_c6x3o")
+value = 30.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="Stats/MarginContainer/HBoxContainer/VBoxContainer/ManaBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0/100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MultipleStats" type="HBoxContainer" parent="Stats/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Attack" type="PanelContainer" parent="Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_2y85p")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats/Attack"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats/Attack/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("2_xv57f")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats/Attack/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_op3jl")
+text = "22"
+horizontal_alignment = 1
+
+[node name="Attack_speed" type="PanelContainer" parent="Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_2y85p")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats/Attack_speed"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats/Attack_speed/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_f1wmx")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats/Attack_speed/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_op3jl")
+text = "1.5"
+horizontal_alignment = 1
+
+[node name="Crit_Chance" type="PanelContainer" parent="Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_2y85p")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats/Crit_Chance"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats/Crit_Chance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("5_g6iyk")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats/Crit_Chance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_op3jl")
+text = "17"
+horizontal_alignment = 1
+
+[node name="Move_speed" type="PanelContainer" parent="Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_2y85p")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats/Move_speed"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats/Move_speed/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("6_fn11v")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats/Move_speed/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_op3jl")
+text = "10"
+horizontal_alignment = 1
+
+[node name="EnergyBar" type="ProgressBar" parent="Stats/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 0.05
+theme_override_styles/background = SubResource("StyleBoxFlat_u433j")
+theme_override_styles/fill = SubResource("StyleBoxFlat_r1og3")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="Label" type="Label" parent="Stats/MarginContainer/HBoxContainer/EnergyBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "50/50"
+horizontal_alignment = 1
+vertical_alignment = 1

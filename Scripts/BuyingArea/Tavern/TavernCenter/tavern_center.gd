@@ -19,7 +19,6 @@ var _battle_types_number = {
 
 func _ready() -> void:
 	Utils.recursive_hide(self)
-	
 	for spawn in _hero_selection_spawns:
 		for child in spawn.get_children():
 			child.queue_free()

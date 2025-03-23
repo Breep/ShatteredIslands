@@ -16,6 +16,7 @@ var _heroes_ready: int
 @onready var _tavern: Tavern = %Tavern
 
 @onready var _ui_hero_picking_screen: UIHeroPickingScreen = %UIHeroPickingScreen
+@onready var _ui_buying_area: UIBuyingArea = %UIBuyingArea
 
 func _ready() -> void:
 	_current_round = RoundManager.current_round
@@ -28,14 +29,15 @@ func _ready() -> void:
 func start_round(battles: Array[Battle]) -> void:
 	CameraManager.camera_changed.emit(CameraManager.CameraType.BUYING_AREA)
 	_ui_hero_picking_screen.hide()
+	_ui_buying_area.show()
 	_tavern.put_tables_according_to_battles(battles)
-
-
 
 
 func start_hero_selection(heroes: Array[Hero]) -> void:
 	_tavern.init_hero_selection(heroes)
 	_available_heroes = heroes.duplicate()
+	_ui_hero_picking_screen.show()
+	_ui_buying_area.hide()
 	_ui_hero_picking_screen.update_heroes(heroes)
 	
 	if multiplayer.is_server():

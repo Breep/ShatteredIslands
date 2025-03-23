@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://c4e7oobnpcje8"]
 
-[ext_resource type="Script" uid="uid://bpsp0pnoguan5" path="res://Scripts/ui/player_deck_ui.gd" id="1_le47v"]
+[ext_resource type="Script" uid="uid://bpsp0pnoguan5" path="res://Scripts/UI/player_deck_ui.gd" id="1_le47v"]
 [ext_resource type="Texture2D" uid="uid://dk6ivjt88kll8" path="res://Data/Assets/BackGround/5fe29d9d-fd8c-481c-9627-de2563f86086.webp" id="2_rtv0p"]
 [ext_resource type="PackedScene" uid="uid://c4qxlk6c31peq" path="res://Scenes/UI/family_bonus.tscn" id="3_8bu4v"]
 [ext_resource type="Texture2D" uid="uid://dhvnlvdnbrxvl" path="res://Data/Assets/Card/Card_IMG/heal/cleanse.jpg" id="4_femkj"]

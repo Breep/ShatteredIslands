@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dubiqq2hle53a"]
 
 [ext_resource type="Texture2D" uid="uid://vwck76pe3cmd" path="res://Data/Assets/Misc/Misc_IMG/cadre cartebleu perso grids.png" id="1_44ylv"]
-[ext_resource type="Script" uid="uid://jbg4l658dfha" path="res://Scripts/ui/hero_button.gd" id="1_bvrxe"]
+[ext_resource type="Script" uid="uid://jbg4l658dfha" path="res://Scripts/UI/hero_button.gd" id="1_bvrxe"]
 [ext_resource type="Texture2D" uid="uid://delxst70t7yxv" path="res://Data/Assets/Misc/Misc_IMG/cadre vert perso grids.png" id="2_ogw3l"]
 [ext_resource type="Texture2D" uid="uid://cwe303gitkgl7" path="res://Data/Assets/Misc/Misc_IMG/cadre perso.png" id="3_ahhx8"]
 [ext_resource type="Texture2D" uid="uid://wfwglamlrjqj" path="res://Data/Assets/Misc/Misc_IMG/assasin wow.png" id="4_alskf"]

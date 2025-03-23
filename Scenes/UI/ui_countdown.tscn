@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dmfkigo1trjd0"]
 
 [ext_resource type="FontFile" uid="uid://3y3dvdvjwvmr" path="res://Data/font/airstrike.ttf" id="1_1snar"]
-[ext_resource type="Script" uid="uid://c3oixb8xu68w" path="res://Scripts/ui/ui_countdown.gd" id="1_kdeao"]
+[ext_resource type="Script" uid="uid://c3oixb8xu68w" path="res://Scripts/UI/ui_countdown.gd" id="1_kdeao"]
 [ext_resource type="Shader" uid="uid://or10r03jptmm" path="res://Shaders/countdown_gradient.gdshader" id="2_lahu3"]
 
 [sub_resource type="Gradient" id="Gradient_uft1f"]
