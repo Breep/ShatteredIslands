@@ -30,12 +30,44 @@ func _ready() -> void:
 		_self_character_stats.connect_character_stats(PlayerManager.get_local_player().character_stats)
 	
 	if not multiplayer.is_server():
-		Events.card_shop_opened.connect(_on_event_card_shop_opened)
+		Events.card_shop_opened.connect(_on_events_card_shop_opened)
+	
+	Events.hero_interacted.connect(_on_events_hero_interacted)
 
 # ============================== Callbacks ==============================
 
-func _on_event_card_shop_opened(is_opened: bool) -> void:
+func _on_events_card_shop_opened(is_opened: bool) -> void:
 	if is_opened:
 		_card_shop.show()
 	else:
 		_card_shop.hide()
+
+
+func _on_events_hero_interacted(hero_id: Hero.HeroId) -> void:
+	for player in PlayerManager.players.values():
+		if player.hero.id == hero_id:
+			_selected_player = player
+			break
+	connect_self_character_stats()
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

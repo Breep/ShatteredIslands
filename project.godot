@@ -26,10 +26,15 @@ RoundManager="*res://Scripts/Managers/round_manager.gd"
 CameraManager="*res://Scripts/Managers/camera_manager.gd"
 Shared="*res://Scripts/Lib/shared.gd"
 PlayerManager="*res://Scripts/Managers/player_manager.gd"
+SignalLens="*res://addons/signal_lens/autoload/signal_lens_autoload.gd"
 
 [display]
 
 window/stretch/mode="canvas_items"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/signal_lens/plugin.cfg")
 
 [file_customization]
 

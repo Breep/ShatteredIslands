@@ -55,4 +55,5 @@ func _on_parent_unfocused() -> void:
 
 func _on_parent_interacted() -> void:
 	print("Interracted on: ", _parent.name)
-	pass
+	if _parent.has_method("_on_interaction_component_interacted"):
+		_parent.call("_on_interaction_component_interacted")

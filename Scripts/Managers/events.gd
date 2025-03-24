@@ -20,3 +20,7 @@ signal condition_stacks_done(source, target, stacks_number, stack_type, poison_d
 
 # UI related events
 signal card_shop_opened(is_opened: bool)
+
+
+# Hero related events
+signal hero_interacted(hero_id: Hero.HeroId)
