@@ -22,14 +22,14 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	await get_tree().create_timer(0.05).timeout
-	if _timer and _timer.time_left > 0:
-		show()
-		_update_visual()
-	else:
-		hide()
+	_update_visual()
 
 # ============================== Private functions ==============================
 
 func _update_visual() -> void:
-	_timer_label.text = "[pulse freq=1.0 color=#FFD700 ease=-2.0]%d[/pulse]" % (_timer.time_left as int)
-	_timer_progress_bar.value = (_timer.time_left / _timer.wait_time) * _timer_progress_bar.max_value
+	if _timer and _timer.time_left > 0:
+		show()
+		_timer_label.text = "[pulse freq=1.0 color=#FFD700 ease=-2.0]%d[/pulse]" % (_timer.time_left as int)
+		_timer_progress_bar.value = (_timer.time_left / _timer.wait_time) * _timer_progress_bar.max_value
+	else:
+		hide()

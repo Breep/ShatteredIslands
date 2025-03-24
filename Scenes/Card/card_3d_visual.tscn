@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://nxvhwgqggesd" path="res://Data/Assets/Card/3D Card/Autumn_Gem_Card_Back_0205231243_texture.glb" id="1_fiu7f"]
 [ext_resource type="Texture2D" uid="uid://csebxot4tboo4" path="res://Data/Assets/Card/GENERAL/BACK.png" id="2_bpmbv"]
-[ext_resource type="Script" uid="uid://ctm232hlhg42j" path="res://Scenes/Card/card_3d_visual.gd" id="2_xf6vy"]
+[ext_resource type="Script" uid="uid://ctm232hlhg42j" path="res://Scripts/Card/card_3d_visual.gd" id="2_xf6vy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_151yx"]
 roughness = 0.5

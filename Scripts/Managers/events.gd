@@ -16,3 +16,7 @@ signal critical_damage_done(source: Character, target: Character, damage:int)
 signal damage_done(source, target, damage, damage_type, is_critical)
 signal heal_done(source, target, heal_amount)
 signal condition_stacks_done(source, target, stacks_number, stack_type, poison_duration)
+
+
+# UI related events
+signal card_shop_opened(is_opened: bool)

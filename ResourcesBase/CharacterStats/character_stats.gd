@@ -128,8 +128,7 @@ var shadow: CharacterShadowStats
 
 # ============================== Public function ==============================
 
-func init(hero_stats: CharacterStats) -> void:
-	print("Character stats initialization")
+func _init() -> void:
 	auto_attack = CharacterAutoAttackStats.new()
 	defense =  CharacterDefenseStats.new()
 	fire = CharacterFireStats.new()
@@ -138,20 +137,20 @@ func init(hero_stats: CharacterStats) -> void:
 	hp = CharacterLifeStats.new()
 	poison = CharacterPoisonStats.new()
 	shadow = CharacterShadowStats.new()
-	_copy_stats(hero_stats)
 
-func _copy_stats(hero_stats: CharacterStats) -> void:
-	health_max = hero_stats.health_max
-	health = health_max
-	mana_max = hero_stats.mana_max
-	mana_max = 0
-	mana_regen = hero_stats.mana_regen
-	energy_max = hero_stats.energy_max
-	energy = energy_max
-	energy_regen = hero_stats.energy_regen
-	move_speed = hero_stats.move_speed
-	attack_damage = hero_stats.attack_damage
-	attack_speed = hero_stats.attack_speed
-	attack_move_speed = hero_stats.attack_move_speed
-	physical_critical_chance = hero_stats.physical_critical_chance
-	physical_critical_multiplier = hero_stats.physical_critical_multiplier
+
+func reset_stats(default_stats: CharacterStats) -> void:
+	health_max = default_stats.health_max
+	health = default_stats.health_max
+	mana_max = default_stats.mana_max
+	mana = 0
+	mana_regen= default_stats.mana_regen
+	energy_max = default_stats.energy_max
+	energy = default_stats.energy_max
+	energy_regen = default_stats.energy_regen
+	move_speed = default_stats.move_speed
+	attack_damage = default_stats.attack_damage
+	attack_speed = default_stats.attack_speed
+	attack_move_speed = default_stats.attack_move_speed
+	physical_critical_chance = default_stats.physical_critical_chance
+	physical_critical_multiplier = default_stats.physical_critical_multiplier

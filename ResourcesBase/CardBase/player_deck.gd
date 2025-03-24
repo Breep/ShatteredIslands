@@ -1,10 +1,13 @@
 class_name PlayerDeck
 extends Deck
 
+signal has_changed()
+
 # ============================== Public function ==============================
 
 func add_card(card_to_add: Card) -> void: #override
 	_add_or_improve_card(card_to_add)
+	has_changed.emit()
 
 
 func get_max_lvl_cards() -> Array[Card]:

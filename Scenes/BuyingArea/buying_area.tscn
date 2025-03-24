@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://k4dc5j8ecdxo" path="res://Scenes/UI/HeroSelection/ui_hero_picking_screen.tscn" id="3_ye23v"]
 [ext_resource type="PackedScene" uid="uid://cmstx61h3h6ar" path="res://Scenes/UI/BuyingArea/ui_buying_area.tscn" id="5_dvq4w"]
 [ext_resource type="PackedScene" uid="uid://cxalabhvxw1pd" path="res://Scenes/UI/ui_timer.tscn" id="6_58bhs"]
-[ext_resource type="PackedScene" uid="uid://d1oxnd1g75rqh" path="res://Scenes/Card/card_shop.tscn" id="6_sjppt"]
+[ext_resource type="PackedScene" uid="uid://d1oxnd1g75rqh" path="res://Scenes/UI/BuyingArea/CardShop/ui_card_shop.tscn" id="6_sjppt"]
 [ext_resource type="PackedScene" uid="uid://b8clqslwo8t68" path="res://Scenes/BuyingArea/Tavern/tavern.tscn" id="7_s1xub"]
 [ext_resource type="AudioStream" uid="uid://ck0xrpfygj0sw" path="res://Data/Assets/Sound/World of Warcraft - Taverns of Azeroth - 13 - Thunderbrew.wav" id="72_1sm7x"]
 

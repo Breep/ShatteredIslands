@@ -19,8 +19,11 @@ enum SerializedField {
 var name: String # Nickname of the player
 var id: int # Multiplayer id
 var team: int # Current team of the player during this round
-var character: Character
 var is_bot: bool # If the player is a fake player (a bot controlled by the server)
+
+
+var character_stats: CharacterStats # Stats of the player's character
+var deck: PlayerDeck
 
 signal hero_changed(new_hero : Hero)
 var _hero: Hero
@@ -46,9 +49,6 @@ var health: int:
 		_health = value
 		health_changed.emit(_health)
 
-signal deck_changed(new_deck: PlayerDeck) # Faire en sorte que ça soit plus transparent
-var deck: PlayerDeck
-
 signal gold_changed(new_gold: int)
 var _gold: int
 var gold: int:
@@ -69,7 +69,6 @@ static func get_from_serialized(serialized_data: Dictionary) -> Player:
 
 static func new_from_serialized(serialized_data: Dictionary) -> Player:
 	var player := Player.new()
-	player.deck = PlayerDeck.new()
 	player.name = serialized_data[SerializedField.NAME]
 	player.team = serialized_data[SerializedField.TEAM]
 	player.health = serialized_data[SerializedField.HEALTH]
@@ -88,8 +87,48 @@ func serialized() -> Dictionary:
 		SerializedField.TEAM: team,
 		SerializedField.HEALTH: health,
 		SerializedField.MAX_HEALTH: max_health,
-		SerializedField.HERO: hero.id,
+		#SerializedField.HERO: hero.id,
 		SerializedField.GOLD: gold,
 		SerializedField.IS_BOT: is_bot
 	}
 	return serialized_version
+
+# ============================== Resource base functions ==============================
+
+func _init() -> void:
+	deck = PlayerDeck.new()
+	character_stats = CharacterStats.new()
+	deck.has_changed.connect(_on_deck_has_changed)
+
+# ============================== Private functions ==============================
+
+func _apply_all_cards_upgrades() -> void:
+	if deck == null or character_stats == null or hero == null:
+		printerr("Player: Can't apply cards upgrades")
+		return
+	character_stats.reset_stats(hero.stats)
+	for card in deck.cardPile:
+		card.player_upgrade.apply(character_stats, card.lvl)
+
+# ============================== Callbacks ==============================
+
+func _on_deck_has_changed() -> void:
+	print("Player: Deck has changed")
+	_apply_all_cards_upgrades()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

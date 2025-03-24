@@ -122,13 +122,10 @@ func _add_player(player_name: String, id: int, is_bot: bool, serialized_player: 
 	
 	if multiplayer.is_server():
 		var new_player := Player.new()
-		new_player.deck = PlayerDeck.new()
 		new_player.name = player_name
 		new_player.id = id
 		new_player.is_bot = is_bot
 		
-		# TMP
-		new_player.hero = Shared.HEROES[Hero.HeroId.ANCIENT_TREE]
 		new_player.gold = 500
 		new_player.health = 30
 		

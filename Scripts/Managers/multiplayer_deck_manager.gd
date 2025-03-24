@@ -186,7 +186,6 @@ func _add_card_in_playerdeck(player_id: int, card_ref_id: int) -> void:
 	print("[id:", multiplayer.get_unique_id(),"] Add ", _cards_refs[card_ref_id], " to ", player_id, " deck")
 	PlayerManager.players[player_id].deck.add_card(_cards_refs[card_ref_id])
 	PlayerManager.players[player_id].gold -= 100
-	PlayerManager.players[player_id].deck_changed.emit(PlayerManager.players[player_id].deck)
 	
 	# If the local player is the one at the origin of the demand
 	if player_id == multiplayer.get_unique_id():

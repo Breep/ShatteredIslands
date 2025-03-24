@@ -30,6 +30,7 @@ func start_round(battles: Array[Battle]) -> void:
 	CameraManager.camera_changed.emit(CameraManager.CameraType.BUYING_AREA)
 	_ui_hero_picking_screen.hide()
 	_ui_buying_area.show()
+	Events.card_shop_opened.emit(true)
 	_tavern.put_tables_according_to_battles(battles)
 
 
@@ -80,6 +81,7 @@ func _get_random_hero_and_wait_random_duration(heroes: Array[Hero]) -> Hero:
 func _pick_hero(player_id: int, hero_id: Hero.HeroId) -> void:
 	_available_heroes.erase(Shared.HEROES[hero_id])
 	PlayerManager.players[player_id].hero = Shared.HEROES[hero_id]
+	PlayerManager.players[player_id].character_stats.reset_stats(PlayerManager.players[player_id].hero.stats)
 	_ui_hero_picking_screen.make_hero_unavailable(Shared.HEROES[hero_id])
 	_player_hero_picked.emit()
 
@@ -93,6 +95,7 @@ func _on_player_hero_picked() -> void:
 	_heroes_ready += 1
 	if _heroes_ready >= PlayerManager.MAX_PLAYERS:
 		all_heroes_picked.emit()
+	_ui_buying_area.connect_self_character_stats()
 
 
 

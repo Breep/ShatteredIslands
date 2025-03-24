@@ -42,17 +42,17 @@ func _setup_local_nodes() -> void:
 
 func _update_local_nodes() -> void:
 	if not is_node_ready() or _character_stats == null: return
-	_health_bar.value = _character_stats.health
 	_health_bar.max_value = _character_stats.health_max
+	_health_bar.value = _character_stats.health
 	_health_label.text = str(_character_stats.health) + "/" + str(_character_stats.health_max)
 	
-	_mana_bar.value = _character_stats.mana
 	_mana_bar.max_value = _character_stats.mana_max
+	_mana_bar.value = _character_stats.mana
 	_mana_label.text = str(_character_stats.mana) + "/" + str(_character_stats.mana_max)
 	
-	_energy_bar.value = _character_stats.energy
 	_energy_bar.max_value = _character_stats.energy_max
-	_energy_label.text = str(_character_stats.energy) + "/" + str(_character_stats.energy_max)
+	_energy_bar.value = _character_stats.energy
+	_energy_label.text = str(_character_stats.energy as int) + "/" + str(_character_stats.energy_max)
 
 # ============================== Callbacks ==============================
 

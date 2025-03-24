@@ -10,14 +10,14 @@ signal card_bought
 
 # ============================== Local scene nodes ==============================
 
-@onready var _card_shop_visual: CardShopVisual = %CardShopVisual
+@onready var _card_shop_visual: CardShopVisual = %SubCardShop
 @onready var _card_container: HBoxContainer = %CardContainer
 
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	if multiplayer.is_server():
-		hide()
+	if multiplayer.is_server(): 
+		queue_free()
 		return
 	
 	_local_player = PlayerManager.get_local_player()

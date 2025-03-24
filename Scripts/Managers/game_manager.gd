@@ -43,9 +43,9 @@ var _random_heroes_ref: Array[Hero.HeroId]
 func _ready() -> void:
 	_rules = load("res://Resources/GameRules/NormalGameRules.tres")
 	_init_families_ref()
-	_active_families.append(get_family_from_type(Family.FamilyType.Serenity))
+	_active_families.append(get_family_from_type(Family.FamilyType.Life))
 	#_active_families.append(get_family_from_type(Family.FamilyType.Life))
-	_active_families.append(get_family_from_type(Family.FamilyType.Fire))
+	#_active_families.append(get_family_from_type(Family.FamilyType.Fire))
 
 # ============================== Public function ==============================
 
