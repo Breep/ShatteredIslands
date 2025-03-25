@@ -9,6 +9,8 @@ signal all_players_spawned()
 
 @export var character_scene: PackedScene
 
+@export var _spawn_areas: Array[Area3D]
+
 enum SpawnType {
 	SPAWN_AREA, # Big rectangle area where the character can be moved during the countdown
 	SPAWN_LOCATIONS, # Array of vecotr3 locations where the cchracter are first spawned at the beginning of the countdown
@@ -24,54 +26,59 @@ var _teams_data: Dictionary # {TeamsData.TEAM_NUMBER:int, TeamsData.TEAM_PLAYER_
 
 # ============================== Public function ==============================
 
-func spawn_characters(players: Array[Player]) -> bool:
+func spawn_characters(players: Array[Player]) -> Array[Character]:
+	var spawned_characters: Array[Character]
+	
 	if not _init_teams_data(players):
 		printerr("SpawnManager: Can't init teams data")
-		return false
+		return []
 	
 	if not _init_spawns_data(_teams_data[TeamsData.TEAMS_NUMBER], _teams_data[TeamsData.TEAMS_PLAYER_NUMBER]):
 		printerr("SpawnManager: Can't init spawns data")
-		return false
+		return []
 	
 	for player in players:
-		_spawn_new_character(player)
+		spawned_characters.append(_spawn_new_character(player))
 	
-	return true
+	return spawned_characters
 
 # ============================== Private functions ==============================
 
 # Instanciate and spawn a new character for the player
-func _spawn_new_character(player: Player) -> bool:
+func _spawn_new_character(player: Player) -> Character:
 	var character: Character = character_scene.instantiate()
 	character.team = player.team
 	character.hero = player.hero
 	character.player = player
-	player.character = character
+	#player.character = character
 	# TODO Learn about spawning on other tree branch (Surement parceque le noeud principal n'est pas encore READY à ce moment)
 	#get_tree().current_scene.add_child(character)
 	add_child(character)
-	character.position = _get_spawn_global_position(character.team)
-	return true
+	character.global_position = _get_spawn_global_position(character.team)
+	return character
 
 
 # Init spawns data: /!\ There should be only one spawn area for each team
 # All spawn areas must be a rectangle, spawns location are calculated along z axis
 func _init_spawns_data(number_of_teams: int, team_players_number: int) -> bool:
 	for team_number in range(1, number_of_teams + 1):
-		var spawn_team_group: String = "SPAWN_TEAM_" + str(team_number) 
-		var nodes = get_tree().get_nodes_in_group(spawn_team_group)
-		if nodes.is_empty():
+		var spawn_team_group_name: String = "SPAWN_TEAM_" + str(team_number) 
+		var team_spawn_areas: Array[Area3D]
+		for spawn_area in _spawn_areas:
+			if spawn_area.is_in_group(spawn_team_group_name):
+				team_spawn_areas.append(spawn_area)
+		if team_spawn_areas.is_empty():
 			printerr("SpawnManager: No spawn area for team ", team_number, " !")
 			return false
-		if nodes.size() > 1:
+		if team_spawn_areas.size() > 1:
 			printerr("SpawnManager: Too many spawn areas for team ", team_number, " !")
 			return false
-		for node in nodes:
+		for node in team_spawn_areas:
 			var spawn_data: Dictionary
 			spawn_data[SpawnType.SPAWN_AREA] = node
 			spawn_data[SpawnType.SPAWN_LOCATIONS] = _get_spawns_locations(node, team_players_number)
 			spawn_data[SpawnType.SPAWN_CHARACTER_NUMBER] = 0
-			_spawns_data[spawn_team_group] = spawn_data
+			_spawns_data[spawn_team_group_name] = spawn_data
 	return true
 
 

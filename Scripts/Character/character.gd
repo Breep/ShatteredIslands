@@ -10,7 +10,7 @@ signal dead(dead_character: Character)
 var team: int
 var hero: Hero
 var player: Player
-var stats := CharacterStats.new() # Needs to be public for easier upgrades access
+var stats: CharacterStats
 
 
 # ============================== Private variables ==============================
@@ -48,6 +48,7 @@ var _families_managers: Dictionary # { Family.FamilyType: FamilyManager }
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
+	print("Character: ", hero.name, " spawned")
 	_fighting_area = get_tree().get_root().find_child("FightingArea3D", true, false)
 	
 	_multiplayerSynchroniser.set_multiplayer_authority(player.id)
@@ -58,8 +59,8 @@ func _ready() -> void:
 	if _fighting_area != null and _is_local:
 		_fighting_area.connect("map_clicked", _on_fighting_area_map_clicked)
 	
+	stats = player.character_stats
 	_build_families_managers()
-	_apply_all_cards_upgrades()
 	
 	_character_visual.update_health_bar(stats.health, stats.health_max)
 	_character_visual.update_energy_bar(stats.energy, stats.energy_max)
@@ -76,6 +77,7 @@ func notice_critical_damage(target: Character, damage: int) -> void:
 # ============================== Fighting States ==============================
 
 func set_state(new_state: FightingManager.FightingState) -> void:
+	print("Character: ", hero.name, " states: ", _fighting_state, " ", new_state)
 	match new_state:
 		FightingManager.FightingState.STARTING:
 			if _fighting_state != FightingManager.FightingState.WAITING_FOR_PLAYERS:
@@ -89,23 +91,12 @@ func set_state(new_state: FightingManager.FightingState) -> void:
 			_movement_manager.start()
 		FightingManager.FightingState.FIGHT:
 			if _fighting_state != FightingManager.FightingState.STARTING:
-				printerr("Character: Can't change to fighting phase if i'm not in strating state")
+				printerr("Character: Can't change to fighting phase if i'm not in starting state")
 				return
 			_fighting_state = FightingManager.FightingState.FIGHT
 			_start_families_managers()
 			_auto_attack_module.start()
 			_movement_manager.set_fighting_state(FightingManager.FightingState.FIGHT)
-
-# ============================== Private functions ==============================
-
-func _apply_all_cards_upgrades() -> void:
-	if player.deck == null:
-		printerr("No deck on the player")
-		return
-	
-	stats.init(hero.stats) # Reset stats
-	for card in player.deck.cardPile:
-		card.player_upgrade.apply(self.stats, card.lvl)
 
 # ============================== MovementManager ==============================
 
@@ -163,7 +154,7 @@ func _init_modules() -> void:
 	_interact_module.damage_taken.connect(_on_interact_module_damage_taken)
 	_interact_module.heal_received.connect(_on_interact_module_heal_received)
 	
-	_auto_attack_module.set_projectile(hero.aa_projectile)
+	_auto_attack_module.set_projectile(hero.aa_projectile_type)
 
 # ============================== Private ==============================
 

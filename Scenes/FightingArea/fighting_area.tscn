@@ -33,9 +33,10 @@ fight_duration = 30
 fight_accelerated_duration = 10
 ending_duration = 2
 
-[node name="SpawnManager" parent="Managers" instance=ExtResource("3_vd45s")]
+[node name="SpawnManager" parent="Managers" node_paths=PackedStringArray("_spawn_areas") instance=ExtResource("3_vd45s")]
 unique_name_in_owner = true
 character_scene = ExtResource("4_3pbvh")
+_spawn_areas = [NodePath("SpawnTeam1"), NodePath("SpawnTeam2")]
 
 [node name="SpawnTeam1" type="Area3D" parent="Managers/SpawnManager" groups=["SPAWN_TEAM_1"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)

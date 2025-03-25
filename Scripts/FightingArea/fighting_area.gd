@@ -22,7 +22,7 @@ var _characters: Array[Character] # Array of all characters in the fight scene
 @onready var _fighting_manager: FightingManager = %FightingManager
 @onready var _map: Node3D
 
-@onready var _ui_countdown: UICountdown = %Countdown
+#@onready var _ui_countdown: UICountdown = %Countdown
 @onready var _camera: Camera3D = %Camera3D
 
 # ============================== Node base functions ==============================
@@ -51,28 +51,16 @@ func init(battle: Battle) -> void:
 
 
 func start_fight() -> void:
-	if not _spawn_manager.spawn_characters(_battle.players):
-		printerr("FightingArea: Can't start SpawnManager")
-		return
-	
-	_characters = _get_characters()
+	_characters = _spawn_manager.spawn_characters(_battle.players)
 	if _characters.is_empty():
-		printerr("FightingArea: There is no character on scene, there is probably something wrong with the SpawnManager")
+		printerr("FightingArea: Can't start SpawnManager")
 		return
 	
 	_fighting_manager.connect("state_changed", _on_fighting_manager_state_changed)
 	_fighting_manager.start()
-	print("Start fight")
+	print("FightingArea: Start fight")
 
 # ============================== Private functions ==============================
-
-# Get all characters present on scene
-func _get_characters() -> Array[Character]:
-	var ret: Array[Character]
-	for node in get_tree().get_nodes_in_group("CHARACTER"):
-		ret.append(node as Character)
-	return ret
-
 
 func _set_characters_state(state: FightingManager.FightingState) -> void:
 	for character in _characters:
@@ -80,6 +68,7 @@ func _set_characters_state(state: FightingManager.FightingState) -> void:
 
 
 func _on_fighting_manager_state_changed(state: FightingManager.FightingState) -> void:
+	print("FightingArea: _on_fighting_manager_state_changed() ", state)
 	_set_characters_state(state)
-	if state == FightingManager.FightingState.STARTING:
-		_ui_countdown.start(5, "FIGHT") # TODO remonter l'info de la durée du countdown depuis le fightmanager
+	#if state == FightingManager.FightingState.STARTING:
+		#_ui_countdown.start(5, "FIGHT") # TODO remonter l'info de la durée du countdown depuis le fightmanager

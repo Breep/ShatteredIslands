@@ -62,6 +62,7 @@ func _spawn_all_fighting_areas(battles: Array[Battle]) -> void:
 		get_tree().current_scene.add_child(fighting_area)
 		fighting_area.position = _fighting_area_spawns[i].position
 		fighting_area.init(battles[i])
+		_fighting_areas.append(fighting_area)
 
 
 func _start_buying_phase() -> void:
@@ -70,7 +71,9 @@ func _start_buying_phase() -> void:
 
 
 func _start_fighting_phase() -> void:
-	print("Start fights !")
+	print("[", multiplayer.get_unique_id(), "] Game: Start fights !")
+	for fighting_area in _fighting_areas:
+		fighting_area.start_fight()
 
 # ============================== Callbacks ==============================
 

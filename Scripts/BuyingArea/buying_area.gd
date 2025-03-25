@@ -1,10 +1,14 @@
 class_name BuyingArea
 extends Node3D
 
+# ============================== Signals ==============================
+
 signal all_heroes_picked()
 signal phase_ended()
 
 signal _player_hero_picked()
+
+# ============================== Private variables ==============================
 
 var _current_round: int
 var _battles: Array[Battle]
@@ -13,10 +17,14 @@ var _available_heroes: Array[Hero]
 
 var _heroes_ready: int
 
+# ============================== Local nodes ==============================
+
 @onready var _tavern: Tavern = %Tavern
 
 @onready var _ui_hero_picking_screen: UIHeroPickingScreen = %UIHeroPickingScreen
 @onready var _ui_buying_area: UIBuyingArea = %UIBuyingArea
+
+# ============================== Node base functions ==============================
 
 func _ready() -> void:
 	_current_round = RoundManager.current_round
@@ -24,6 +32,7 @@ func _ready() -> void:
 	_player_hero_picked.connect(_on_player_hero_picked)
 	#_battles = RoundManager.get_current_round_battles()
 
+# ============================== Public functions ==============================
 
 # Reload the tavern center
 func start_round(battles: Array[Battle]) -> void:
@@ -35,7 +44,6 @@ func start_round(battles: Array[Battle]) -> void:
 
 
 func start_hero_selection(heroes: Array[Hero]) -> void:
-	_tavern.init_hero_selection(heroes)
 	_available_heroes = heroes.duplicate()
 	_ui_hero_picking_screen.show()
 	_ui_buying_area.hide()
@@ -43,13 +51,11 @@ func start_hero_selection(heroes: Array[Hero]) -> void:
 	
 	if multiplayer.is_server():
 		var pickup_order_players = await GameManager.get_hero_pickup_order()
-		if not multiplayer.is_server():
-			print("break here")
-		
 		for player in pickup_order_players:
 			_start_player_turn_to_pick.rpc(player.id)
 			await _player_hero_picked
 
+# ============================== Private functions ==============================
 
 @rpc("authority", "call_local")
 func _start_player_turn_to_pick(player_id: int) -> void:
@@ -96,6 +102,42 @@ func _on_player_hero_picked() -> void:
 	if _heroes_ready >= PlayerManager.MAX_PLAYERS:
 		all_heroes_picked.emit()
 	_ui_buying_area.connect_self_character_stats()
+
+
+
+
+
+
+
+
+
+@rpc("authority", "call_local")
+func _end_buying_round() -> void:
+	phase_ended.emit()
+ 
+# ============================== Callbacks ==============================
+
+func _on_timer_timeout() -> void:
+	if multiplayer.is_server():
+		_end_buying_round.rpc()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

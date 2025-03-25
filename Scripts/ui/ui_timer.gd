@@ -20,6 +20,7 @@ func connect_timer(new_timer: Timer) -> void:
 func _ready() -> void:
 	_update_visual()
 
+
 func _process(_delta: float) -> void:
 	await get_tree().create_timer(0.05).timeout
 	_update_visual()
@@ -29,7 +30,7 @@ func _process(_delta: float) -> void:
 func _update_visual() -> void:
 	if _timer and _timer.time_left > 0:
 		show()
-		_timer_label.text = "[pulse freq=1.0 color=#FFD700 ease=-2.0]%d[/pulse]" % (_timer.time_left as int)
+		_timer_label.text = str(_timer.time_left as int)
 		_timer_progress_bar.value = (_timer.time_left / _timer.wait_time) * _timer_progress_bar.max_value
 	else:
 		hide()

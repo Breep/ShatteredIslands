@@ -17,6 +17,7 @@ var _character_stats: CharacterStats
 # ============================== Public functions ==============================
 
 func connect_character_stats(new_character_stats: CharacterStats):
+	_disconnect_all_character_stats_signals(_character_stats)
 	_character_stats = new_character_stats
 	_setup_local_nodes()
 
@@ -30,14 +31,7 @@ func _ready() -> void:
 func _setup_local_nodes() -> void:
 	if not is_node_ready() or _character_stats == null: return
 	_update_local_nodes()
-	_character_stats.health_max_changed.connect(_on_character_stats_health_max_changed)
-	_character_stats.health_changed.connect(_on_character_stats_health_changed)
-	
-	_character_stats.mana_max_changed.connect(_on_character_stats_mana_max_changed)
-	_character_stats.mana_changed.connect(_on_character_stats_mana_changed)
-	
-	_character_stats.energy_max_changed.connect(_on_character_stats_energy_max_changed)
-	_character_stats.energy_changed.connect(_on_character_stats_energy_changed)
+	_connect_all_character_stats_signals(_character_stats)
 
 
 func _update_local_nodes() -> void:
@@ -53,6 +47,29 @@ func _update_local_nodes() -> void:
 	_energy_bar.max_value = _character_stats.energy_max
 	_energy_bar.value = _character_stats.energy
 	_energy_label.text = str(_character_stats.energy as int) + "/" + str(_character_stats.energy_max)
+
+
+func _connect_all_character_stats_signals(character_stats: CharacterStats) -> void:
+	character_stats.health_max_changed.connect(_on_character_stats_health_max_changed)
+	character_stats.health_changed.connect(_on_character_stats_health_changed)
+	
+	character_stats.mana_max_changed.connect(_on_character_stats_mana_max_changed)
+	character_stats.mana_changed.connect(_on_character_stats_mana_changed)
+	
+	character_stats.energy_max_changed.connect(_on_character_stats_energy_max_changed)
+	character_stats.energy_changed.connect(_on_character_stats_energy_changed)
+
+
+func _disconnect_all_character_stats_signals(character_stats: CharacterStats) -> void:
+	if character_stats == null: return
+	character_stats.health_max_changed.disconnect(_on_character_stats_health_max_changed)
+	character_stats.health_changed.disconnect(_on_character_stats_health_changed)
+	
+	character_stats.mana_max_changed.disconnect(_on_character_stats_mana_max_changed)
+	character_stats.mana_changed.disconnect(_on_character_stats_mana_changed)
+	
+	character_stats.energy_max_changed.disconnect(_on_character_stats_energy_max_changed)
+	character_stats.energy_changed.disconnect(_on_character_stats_energy_changed)
 
 # ============================== Callbacks ==============================
 

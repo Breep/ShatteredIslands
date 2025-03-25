@@ -1,6 +1,8 @@
 class_name UIBuyingArea
 extends Control
 
+@export var _round_timer: Timer
+
 # ============================== Local nodes ==============================
 
 @onready var _all_families_portrait = %AllFamiliesPortrait
@@ -33,6 +35,8 @@ func _ready() -> void:
 		Events.card_shop_opened.connect(_on_events_card_shop_opened)
 	
 	Events.hero_interacted.connect(_on_events_hero_interacted)
+	
+	_continous_timer.connect_timer(_round_timer)
 
 # ============================== Callbacks ==============================
 
