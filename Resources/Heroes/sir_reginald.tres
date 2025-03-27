@@ -7,7 +7,7 @@
 
 [sub_resource type="Resource" id="Resource_gr18g"]
 script = ExtResource("2_0fuq0")
-health_max = 1500
+health_max = 2100
 mana_max = 100
 mana_regen = 1.0
 energy_max = 20
@@ -26,5 +26,5 @@ id = 6
 portrait = ExtResource("2_1xx0h")
 description = "Sir Reginald Von Gloriforth III"
 stats = SubResource("Resource_gr18g")
-aa_projectile_type = 0
+aa_projectile_type = 6
 model = ExtResource("3_lvb6b")
