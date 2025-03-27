@@ -2,7 +2,7 @@ extends Node
 
 # Emitted when a character is spawned (or revived)
 # who: Ref of the character
-signal character_is_spawned(who: Character)
+signal entity_is_spawned(who: Entity)
 
 
 # Emitted when a character receive a critical damage

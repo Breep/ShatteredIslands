@@ -1,5 +1,5 @@
 class_name Character
-extends CharacterBody3D
+extends Entity
 
 # ============================== Signals ==============================
 
@@ -48,7 +48,6 @@ var _families_managers: Dictionary # { Family.FamilyType: FamilyManager }
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	print("Character: ", hero.name, " spawned")
 	_fighting_area = get_tree().get_root().find_child("FightingArea3D", true, false)
 	
 	_multiplayerSynchroniser.set_multiplayer_authority(player.id)
@@ -61,10 +60,11 @@ func _ready() -> void:
 	
 	stats = player.character_stats
 	_build_families_managers()
-	
 	_character_visual.update_health_bar(stats.health, stats.health_max)
 	_character_visual.update_energy_bar(stats.energy, stats.energy_max)
 	_character_visual.update_mana_bar(stats.mana, stats.mana_max)
+
+	_recursive_propagate_spawn_signal(get_parent(), EntityManager.SIGNAL_NAME_ENTITY_SPAWNED)
 
 # ============================== Notice critic ==============================
 
@@ -77,14 +77,12 @@ func notice_critical_damage(target: Character, damage: int) -> void:
 # ============================== Fighting States ==============================
 
 func set_state(new_state: FightingManager.FightingState) -> void:
-	print("Character: ", hero.name, " states: ", _fighting_state, " ", new_state)
 	match new_state:
 		FightingManager.FightingState.STARTING:
 			if _fighting_state != FightingManager.FightingState.WAITING_FOR_PLAYERS:
 				printerr("Character: Can't change to starting phase if i'm not in WaitingForPlayers state")
 				return
 			_fighting_state = FightingManager.FightingState.STARTING
-			target_manager.init(self)
 			_init_families_managers()
 			_init_modules()
 			_init_movement_manager(FightingManager.FightingState.STARTING)

@@ -20,6 +20,7 @@ var _characters: Array[Character] # Array of all characters in the fight scene
 
 @onready var _spawn_manager: SpawnManager = %SpawnManager
 @onready var _fighting_manager: FightingManager = %FightingManager
+@onready var _entity_manager: EntityManager = %EntityManager
 @onready var _map: Node3D
 
 #@onready var _ui_countdown: UICountdown = %Countdown

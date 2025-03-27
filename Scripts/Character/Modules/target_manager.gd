@@ -25,46 +25,54 @@ enum MultipleTargettingStrategy {
 
 # ============================== Private variables ==============================
 
-var _characters: Array[Character] # ALL character on the fighting scene
-var _enemies: Array[Character] # All enemies of the owned character
-var _allies: Array[Character] # All allies of the owned character
+var _entities: Array[Entity] # All character on the fighting scene
+var _enemies: Array[Entity] # All enemies of the owned character
+var _allies: Array[Entity] # All allies of the owned character
 
-var _source: Character # Owned character
+var _source: Entity # Owner of the TargetManager
+var _entity_manager: EntityManager # The FightingScene EntityManager
 
-# ============================== Public functions ==============================
-
-func _ready() -> void:
-	Events.connect("character_is_spawned", _on_events_character_is_spawned)
-	
 # ============================== Node base functions ==============================
 
-func init(source: Character) -> void:
-	_source = source
-	_characters = _get_all_scene_characters()
-	_enemies = _get_enemies_from_characters()
-	_allies = _get_allies_from_characters()
+func _ready() -> void:
+	_source = get_parent() as Entity
+	if _source == null:
+		printerr("TargetManager: TargetManager must be directly attached to an Entity")
+		return
 	
-	for character in _characters:
+	_entity_manager = _get_entity_manager_in_node(get_parent().get_parent())
+	if _entity_manager == null:
+		printerr("TargetManager: There is no EntityManager on any parent nodes")
+		return
+	
+	_entities = _entity_manager.entities
+	_entity_manager.entity_spawned.connect(_on_entity_manager_entity_spawned)
+	_enemies = _get_enemies_from_entities()
+	_allies = _get_allies_from_entities()
+	
+	for character in _entities:
 		character.dead.connect(_on_character_dead)
 
 
+# ============================== Public functions ==============================
+
 # Get target of the owned character from a given strategy
-func get_target(targetting_strategy: TargettingStrategy) -> Character:
+func get_target(targetting_strategy: TargettingStrategy) -> Entity:
 	match targetting_strategy:
 		TargettingStrategy.CLOSEST:
-			return _get_closest(_characters, _source)
+			return _get_closest(_entities, _source)
 		TargettingStrategy.CLOSEST_ENEMY:
 			return _get_closest(_enemies, _source)
 		TargettingStrategy.CLOSEST_ALLY:
 			return _get_closest(_allies, _source)
 		TargettingStrategy.FARTHEST:
-			return _get_farthest(_characters, _source)
+			return _get_farthest(_entities, _source)
 		TargettingStrategy.FARTHEST_ENEMY:
 			return _get_farthest(_enemies, _source)
 		TargettingStrategy.FARTHEST_ALLY:
 			return _get_farthest(_allies, _source)
 		TargettingStrategy.RANDOM:
-			return _get_random(_characters, _source)
+			return _get_random(_entities, _source)
 		TargettingStrategy.RANDOM_ENEMY:
 			return _get_random(_enemies, _source)
 		TargettingStrategy.RANDOM_ALLY:
@@ -79,75 +87,78 @@ func get_target(targetting_strategy: TargettingStrategy) -> Character:
 
 
 # Get closest character of "from_character" who is an enemy of _source
-func get_closest_enemy_from(from_character: Character) -> Character:
+func get_closest_enemy_from(from_character: Entity) -> Entity:
 	if _enemies.is_empty():
 		return null
 	
-	var enemies_copy: Array[Character] = _enemies.duplicate()
+	var enemies_copy: Array[Entity] = _enemies.duplicate()
 	enemies_copy.erase(from_character)
 	if enemies_copy.is_empty():
 		return null
 	
 	var closest_enemy = enemies_copy[0]
 	for enemy in enemies_copy:
-		var enemy_distance = (enemy.position - from_character.position).length_squared()
-		var closest_enemy_distance = (closest_enemy.position - from_character.position).length_squared()
+		var enemy_distance = (enemy.global_position - from_character.global_position).length_squared()
+		var closest_enemy_distance = (closest_enemy.global_position - from_character.global_position).length_squared()
 		if enemy_distance < closest_enemy_distance:
 			closest_enemy = enemy
 	
 	return closest_enemy
 
 
-func get_targets(strategy: MultipleTargettingStrategy) -> Array[Character]:
+func get_targets(strategy: MultipleTargettingStrategy) -> Array[Entity]:
 	match strategy:
 		MultipleTargettingStrategy.ALL:
-			return _characters.duplicate()
+			return _entities.duplicate()
 		MultipleTargettingStrategy.ALLIES:
 			return _allies.duplicate()
 		MultipleTargettingStrategy.ENEMIES:
 			return _enemies.duplicate()
 	
 	printerr("TargetManager: Unknown strategy")
-	var empty: Array[Character]
+	var empty: Array[Entity]
 	return empty
 
 # ============================== Private functions ==============================
 
-func _get_all_scene_characters() -> Array[Character]:
-	var ret: Array[Character]
-	for node in get_tree().get_nodes_in_group("CHARACTER"):
-		ret.append(node as Character)
-	return ret
+func _get_entity_manager_in_node(node: Node) -> EntityManager:
+	if node == null:
+		return null
+	var entity_manager: EntityManager = node.get_node("EntityManager")
+	if entity_manager == null:
+		return _get_entity_manager_in_node(node.get_parent())
+	else:
+		return entity_manager
 
 
-func _get_enemies_from_characters() -> Array[Character]:
-	var ret: Array[Character]
-	for character in _characters:
+func _get_enemies_from_entities() -> Array[Entity]:
+	var ret: Array[Entity]
+	for character in _entities:
 		if character.team != _source.team:
 			ret.append(character)
 	return ret
 
 
-func _get_allies_from_characters() -> Array[Character]:
-	var ret: Array[Character]
-	for character in _characters:
+func _get_allies_from_entities() -> Array[Entity]:
+	var ret: Array[Entity]
+	for character in _entities:
 		if character.team == _source.team:
 			ret.append(character)
 	return ret
 
 
-func _remove_character(character_to_remove: Character) -> void:
-	_characters.erase(character_to_remove)
+func _remove_character(character_to_remove: Entity) -> void:
+	_entities.erase(character_to_remove)
 	_enemies.erase(character_to_remove)
 	_allies.erase(character_to_remove)
 
 # ============================== Target strategy functions ==============================
 
-func _get_closest(characters: Array[Character], excluded_character: Character) -> Character:
+func _get_closest(characters: Array[Entity], excluded_character: Entity) -> Entity:
 	if characters.is_empty():
 		return null
 	
-	var characters_copy: Array[Character] = characters.duplicate()
+	var characters_copy: Array[Entity] = characters.duplicate()
 	characters_copy.erase(excluded_character)
 	if characters_copy.is_empty():
 		return null
@@ -165,11 +176,11 @@ func _get_closest(characters: Array[Character], excluded_character: Character) -
 	return closest_character
 
 
-func _get_farthest(characters: Array[Character], excluded_character: Character) -> Character:
+func _get_farthest(characters: Array[Entity], excluded_character: Entity) -> Entity:
 	if characters.is_empty():
 		return null
 	
-	var characters_copy: Array[Character] = characters.duplicate()
+	var characters_copy: Array[Entity] = characters.duplicate()
 	characters_copy.erase(excluded_character)
 	if characters_copy.is_empty():
 		return null
@@ -181,19 +192,19 @@ func _get_farthest(characters: Array[Character], excluded_character: Character) 
 	var farthest_character = characters_copy[0]
 	for character in characters:
 		if character != _source:
-			if (character.position - _source.position).length_squared() > (farthest_character.position - _source.position).length_squared():
+			if (character.global_position - _source.global_position).length_squared() > (farthest_character.global_position - _source.global_position).length_squared():
 				farthest_character = character
 	
 	return farthest_character
 
 
-func _get_random(characters: Array[Character], excluded_character: Character) -> Character:
+func _get_random(characters: Array[Entity], excluded_character: Entity) -> Entity:
 	if characters.is_empty():
 		return null
 	
 	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 	rng.randomize()
-	var characters_copy: Array[Character] = characters.duplicate()
+	var characters_copy: Array[Entity] = characters.duplicate()
 	characters_copy.erase(excluded_character)
 	if characters_copy.is_empty():
 		return null
@@ -210,11 +221,11 @@ func _get_random(characters: Array[Character], excluded_character: Character) ->
 
 
 # TODO améliorer cette fonction pour ne pas pouvoir heal une target untargetable autre que nous
-func _get_lowest_hp(characters: Array[Character], excluded_character: Character) -> Character:
+func _get_lowest_hp(characters: Array[Entity], excluded_character: Entity) -> Entity:
 	if characters.is_empty():
 		return null
 	
-	var characters_copy: Array[Character] = characters.duplicate()
+	var characters_copy: Array[Entity] = characters.duplicate()
 	characters_copy.erase(excluded_character)
 	if characters_copy.is_empty():
 		return null
@@ -229,8 +240,8 @@ func _get_lowest_hp(characters: Array[Character], excluded_character: Character)
 	return lowest_hp_character
 
 
-func _get_array_whithout_untargetable_targets(characters: Array[Character]) -> Array[Character]:
-	var characters_copy: Array[Character] = characters.duplicate()
+func _get_array_whithout_untargetable_targets(characters: Array[Entity]) -> Array[Entity]:
+	var characters_copy: Array[Entity] = characters.duplicate()
 	for character in  characters_copy:
 		if character.stats.shadow.untargetable:
 			characters_copy.erase(character)
@@ -238,21 +249,17 @@ func _get_array_whithout_untargetable_targets(characters: Array[Character]) -> A
 	
 	
 
+# ============================== Callback ==============================
 
-# ============================== Events callback ==============================
+func _on_entity_manager_entity_spawned(who: Entity) -> void:
+	if who.team != _source.team:
+		_enemies.append(who)
+	else:
+		_allies.append(who)
 
 
-func _on_events_character_is_spawned(who: Character) -> void:
-	if who not in _characters:
-		_characters.append(who)
-		if who.team != _source.team:
-			_enemies.append(who)
-		else:
-			_allies.append(who)
-
-# ============================== Other callback ==============================
-
-func _on_character_dead(who: Character, _true_death: bool):
+func _on_character_dead(who: Entity, _true_death: bool):
+	return
 	print("OH NO ", who.player.name, " is dead :(")
 	_remove_character(who)
 

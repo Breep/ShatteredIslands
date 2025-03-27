@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://ca8mcplp2va4s"]
+[gd_scene load_steps=12 format=3 uid="uid://ca8mcplp2va4s"]
 
 [ext_resource type="Script" uid="uid://cvy50on4evfts" path="res://Scripts/BuyingArea/buying_area.gd" id="1_ed4aq"]
 [ext_resource type="Script" uid="uid://cnx8tutucwv0x" path="res://Scripts/BuyingArea/camera_buying_area.gd" id="2_nery7"]
 [ext_resource type="PackedScene" uid="uid://k4dc5j8ecdxo" path="res://Scenes/UI/HeroSelection/ui_hero_picking_screen.tscn" id="3_ye23v"]
 [ext_resource type="PackedScene" uid="uid://cmstx61h3h6ar" path="res://Scenes/UI/BuyingArea/ui_buying_area.tscn" id="5_dvq4w"]
+[ext_resource type="PackedScene" uid="uid://pyrw8lacvly2" path="res://Scenes/Managers/entity_manager.tscn" id="7_s0sy2"]
 [ext_resource type="PackedScene" uid="uid://b8clqslwo8t68" path="res://Scenes/BuyingArea/Tavern/tavern.tscn" id="7_s1xub"]
 [ext_resource type="AudioStream" uid="uid://ck0xrpfygj0sw" path="res://Data/Assets/Sound/World of Warcraft - Taverns of Azeroth - 13 - Thunderbrew.wav" id="72_1sm7x"]
 
@@ -80,5 +81,7 @@ autostart = true
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_jhmrm")
+
+[node name="EntityManager" parent="." instance=ExtResource("7_s0sy2")]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

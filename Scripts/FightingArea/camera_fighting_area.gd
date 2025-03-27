@@ -73,12 +73,10 @@ func _select_object(screen_position):
 
 
 func _on_camera_manager_camera_changed(new_camera_type: CameraManager.CameraType) -> void:
-	print("fighting camera: ", camera_type, " ", new_camera_type)
 	if camera_type != new_camera_type:
 		_is_active = false
 		return
 	
-	print("Switch to FIGHTING area camera")
 	_is_active = true
 	make_current()
 

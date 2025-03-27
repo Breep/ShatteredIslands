@@ -42,9 +42,6 @@ replication_config = SubResource("SceneReplicationConfig_747th")
 
 [node name="Modules" type="Node" parent="."]
 
-[node name="TargetManager" parent="Modules" instance=ExtResource("3_6fvgd")]
-unique_name_in_owner = true
-
 [node name="MovementManager" parent="Modules" instance=ExtResource("4_amllv")]
 unique_name_in_owner = true
 
@@ -83,4 +80,7 @@ unique_name_in_owner = true
 _percent_decrease = 10.0
 
 [node name="AttackManager" parent="FamiliesManagers" instance=ExtResource("15_axqe6")]
+unique_name_in_owner = true
+
+[node name="TargetManager" parent="." instance=ExtResource("3_6fvgd")]
 unique_name_in_owner = true

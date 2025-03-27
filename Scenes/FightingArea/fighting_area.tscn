@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c66yw4go2ykwa"]
+[gd_scene load_steps=9 format=3 uid="uid://c66yw4go2ykwa"]
 
 [ext_resource type="Script" uid="uid://cd8u3lm3xa8c4" path="res://Scripts/FightingArea/fighting_area.gd" id="1_qx4db"]
 [ext_resource type="Script" uid="uid://d2fihbt8u628f" path="res://Scripts/FightingArea/camera_fighting_area.gd" id="2_48dto"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://Scenes/FightingArea/spawn_manager.tscn" id="3_vd45s"]
 [ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Scenes/Character/character.tscn" id="4_3pbvh"]
 [ext_resource type="PackedScene" uid="uid://b3467f7qtons1" path="res://Scenes/FightingArea/Maps/test_map.tscn" id="6_12jqf"]
+[ext_resource type="PackedScene" uid="uid://pyrw8lacvly2" path="res://Scenes/Managers/entity_manager.tscn" id="6_yyfcp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jo255"]
 size = Vector3(10, 1, 20)
@@ -51,3 +52,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
 shape = SubResource("BoxShape3D_jo255")
 
 [node name="Map" parent="." instance=ExtResource("6_12jqf")]
+
+[node name="EntityManager" parent="." instance=ExtResource("6_yyfcp")]
+unique_name_in_owner = true
