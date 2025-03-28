@@ -2,10 +2,7 @@ class_name EntityManager
 extends Node
 
 signal entity_spawned(entity: Entity)
-
-# ============================== Constants ==============================
-
-const SIGNAL_NAME_ENTITY_SPAWNED: String = "entity_is_spawned"
+signal entity_dead(entity: Entity)
 
 # ============================== Private variables ==============================
 
@@ -16,17 +13,19 @@ var entities: Array[Entity]:
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	get_parent().add_user_signal(SIGNAL_NAME_ENTITY_SPAWNED, ["entity_ref"])
-	get_parent().connect(SIGNAL_NAME_ENTITY_SPAWNED, _on_parent_entity_is_spawned)
+	get_parent().add_user_signal(Entity.SIGNAL_NAME_SPAWNED, ["entity_ref"])
+	get_parent().connect(Entity.SIGNAL_NAME_SPAWNED, _on_parent_entity_is_spawned)
 
 # ============================== Private functions ==============================
 
 func _add_entity(who: Entity) -> void:
 	_entities.append(who)
 	entity_spawned.emit(who)
+	who.dead.connect(_on_entity_dead)
 
 # ============================== Callbacks ==============================
 
+# Attached to a custom user signals added my this module to the parent
 func _on_parent_entity_is_spawned(who: Entity) -> void:
 	print(" EntityManager(", self, "): ", who.name, " is spawned !")
 	if _entities.has(who):
@@ -36,6 +35,9 @@ func _on_parent_entity_is_spawned(who: Entity) -> void:
 	_add_entity(who)
 
 
+func _on_entity_dead(who: Entity) -> void:
+	_entities.erase(who)
+	entity_dead.emit(who)
 
 
 

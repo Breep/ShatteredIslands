@@ -34,6 +34,7 @@ var _attack_speed: float = 1 # Basic attack speed of the auto-attack module (att
 # ============================== Public functions ==============================
 
 func start() -> void:
+	attack_speed = _source.stats.attack_speed
 	_auto_attack_timer.start()
 
 
@@ -53,6 +54,7 @@ func _specific_init() -> void:
 		return
 	
 	_action_module = action_modules[0]
+	_source.stats.attack_speed_changed.connect(_on_source_stats_attack_speed_changed)
 
 
 func set_auto_attack_speed(attack_speed: float) -> void:
@@ -83,12 +85,33 @@ func _update_auto_attack_speed() -> void:
 	_source.stats.attack_speed *= multiply_boost
 	set_auto_attack_speed(_source.stats.attack_speed)
 
-
-
-
 # ============================== Callbacks functions ==============================
 
 func _on_auto_attack_timer_timeout() -> void:
 	var target = _source.target_manager.get_target(_attack_strategy)
 	if target == null: return
 	_auto_attack(target)
+
+
+func _on_source_stats_attack_speed_changed(new_attack_speed: float) -> void:
+	attack_speed = new_attack_speed
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

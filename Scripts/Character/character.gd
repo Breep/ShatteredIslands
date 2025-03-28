@@ -1,10 +1,6 @@
 class_name Character
 extends Entity
 
-# ============================== Signals ==============================
-
-signal dead(dead_character: Character)
-
 # ============================== Public variables ==============================
 
 var team: int
@@ -64,7 +60,7 @@ func _ready() -> void:
 	_character_visual.update_energy_bar(stats.energy, stats.energy_max)
 	_character_visual.update_mana_bar(stats.mana, stats.mana_max)
 
-	_recursive_propagate_spawn_signal(get_parent(), EntityManager.SIGNAL_NAME_ENTITY_SPAWNED)
+	_recursive_propagate_signal(get_parent(), Entity.SIGNAL_NAME_SPAWNED)
 
 # ============================== Notice critic ==============================
 
@@ -160,7 +156,8 @@ func _handle_death() -> void:
 	_stop_families_managers()
 	_life_manager.source_is_dead()
 	_movement_manager.stop()
-	dead.emit(self, false)
+	_auto_attack_module.stop()
+	dead.emit(self)
 	_is_dead = true
 
 # ============================== Signals callbacks ==============================

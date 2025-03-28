@@ -47,11 +47,9 @@ func _ready() -> void:
 	
 	_entities = _entity_manager.entities
 	_entity_manager.entity_spawned.connect(_on_entity_manager_entity_spawned)
+	_entity_manager.entity_dead.connect(_on_entity_manager_entity_dead)
 	_enemies = _get_enemies_from_entities()
 	_allies = _get_allies_from_entities()
-	
-	for character in _entities:
-		character.dead.connect(_on_character_dead)
 
 
 # ============================== Public functions ==============================
@@ -148,7 +146,6 @@ func _get_allies_from_entities() -> Array[Entity]:
 
 
 func _remove_character(character_to_remove: Entity) -> void:
-	_entities.erase(character_to_remove)
 	_enemies.erase(character_to_remove)
 	_allies.erase(character_to_remove)
 
@@ -246,8 +243,7 @@ func _get_array_whithout_untargetable_targets(characters: Array[Entity]) -> Arra
 		if character.stats.shadow.untargetable:
 			characters_copy.erase(character)
 	return characters_copy
-	
-	
+
 
 # ============================== Callback ==============================
 
@@ -258,8 +254,7 @@ func _on_entity_manager_entity_spawned(who: Entity) -> void:
 		_allies.append(who)
 
 
-func _on_character_dead(who: Entity, _true_death: bool):
-	return
+func _on_entity_manager_entity_dead(who: Entity):
 	print("OH NO ", who.player.name, " is dead :(")
 	_remove_character(who)
 
