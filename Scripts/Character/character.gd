@@ -39,8 +39,8 @@ var _fighting_state: FightingManager.FightingState = FightingManager.FightingSta
 @onready var _storm_manager: StormManager = %StormManager
 @onready var _serenity_manager: SerenityManager = %SerenityManager
 @onready var _poison_manager: PoisonManager = %PoisonManager
-@onready var _shadow_manager: ShadowManager = %ShadowManager
 @onready var _life_manager: LifeManager = %LifeManager
+@onready var _shadow_manager: ShadowManager = %ShadowManager
 
 var _families_managers: Dictionary # { Family.FamilyType: FamilyManager }
 

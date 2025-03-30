@@ -123,8 +123,8 @@ var fire: CharacterFireStats
 var storm: CharacterStormStats
 var heal: CharacterHealStats
 var hp: CharacterLifeStats
-var shadow: CharacterShadowStats
 var poison: CharacterPoisonStats
+var shadow: CharacterShadowStats
 
 # ============================== Public function ==============================
 

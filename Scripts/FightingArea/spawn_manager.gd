@@ -37,11 +37,6 @@ enum TeamsData {
 }
 var _teams_data: Dictionary # {TeamsData.TEAM_NUMBER:int, TeamsData.TEAM_PLAYER_NUMBER:int}
 
-# ============================== Node base functions ==============================
-
-func _ready() -> void:
-	Shared.spawn_managers_ref
-
 # ============================== Public function ==============================
 
 func spawn_characters(players: Array[Player]) -> Array[Character]:
