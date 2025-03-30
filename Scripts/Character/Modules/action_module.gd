@@ -39,7 +39,7 @@ func direct_attack_percent(target: Character, damage_percent: float, damage_type
 
 
 # Create a projectile to attack the target - Apply cards damages multiplier if there are some
-func projectile_attack(target: Character, projectile_scene: PackedScene, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
+func projectile_attack(target: Character, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	if not multiplayer.is_server(): return
 	var multiplier = _get_damage_multipliers()
 	projectile_stats.is_critic = multiplier["is_critical"]
@@ -47,8 +47,7 @@ func projectile_attack(target: Character, projectile_scene: PackedScene, project
 	projectile_stats.physical_damage_percent *= multiplier["physical"]
 	projectile_stats.magical_damage_flat *= multiplier["magical"]
 	projectile_stats.magical_damage_percent *= multiplier["magical"]
-	_spawn_projectile(target, projectile_scene, projectile_spawn, projectile_stats)
-	#_spawn_projectile.rpc(target, projectile_scene, projectile_spawn, projectile_stats)
+	_spawn_projectile(target, projectile_type, projectile_spawn, projectile_stats)
 
 
 func _get_damage_multipliers() -> Dictionary:
@@ -84,16 +83,8 @@ func _get_damage_multipliers() -> Dictionary:
 	return { "physical": physical_multiplier, "magical": magical_multiplier, "is_critical": is_critical }
 
 
-@rpc("authority", "call_local")
-func _spawn_projectile(target: Character, projectile_scene: PackedScene, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
-	var projectile: Projectile = projectile_scene.instantiate()
-	projectile.init(_source, target, projectile_stats)
-	get_tree().current_scene.add_child(projectile)
-	projectile.global_position = projectile_spawn.global_position + Vector3(randf_range(-0.01, 0.01), randf_range(-0.01, 0.01), randf_range(-0.01, 0.01))
-
-
-
-
+func _spawn_projectile(target: Character, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
+	Shared.spawn_managers_ref[target.battle_id].spawn_projectile(_source, target, projectile_type, projectile_spawn, projectile_stats)
 
 # ============================== Heal ==============================
 

@@ -40,7 +40,7 @@ signal _battles_chosen()
 # [Client only] Is emit when server has answered the local client request
 signal _server_answered()
 
-var _battles: Array[Battle]
+var battles: Dictionary[int, Battle]
 
 # ============================== Public functions ==============================
 
@@ -51,7 +51,7 @@ func get_current_round_battles() -> Array[Battle]:
 		_ask_current_round_battles.rpc_id(1, multiplayer.get_unique_id())
 		await _server_answered
 	
-	return _battles
+	return battles.values()
 
 # ============================== RPC - Ask/Answer current round battle ==============================
 
@@ -65,7 +65,7 @@ func _ask_current_round_battles(peer_id: int) -> void:
 		await _battles_chosen
 	
 	var serialized_battles: Array[Dictionary]
-	for battle in _battles:
+	for battle in battles.values():
 		serialized_battles.append(battle.serialized())
 	_anwser_current_round_battles.rpc_id(peer_id, serialized_battles)
 
@@ -73,7 +73,8 @@ func _ask_current_round_battles(peer_id: int) -> void:
 @rpc("authority", "call_remote")
 func _anwser_current_round_battles(serialized_battles: Array[Dictionary]) -> void:
 	for serialized_battle in serialized_battles:
-		_battles.append(Battle.new_from_serialized(serialized_battle))
+		var battle := Battle.new_from_serialized(serialized_battle)
+		battles[battle.id] = battle
 	_server_answered.emit()
 
 # ============================== Private functions ==============================
@@ -90,8 +91,8 @@ func _init_current_round_battles() -> void:
 		var battle := Battle.new_from_category(battle_category)
 		battle.fill_with_players(alive_players)
 		battle.id = battle_id
+		battles[battle.id] = battle
 		battle_id += 1
-		_battles.append(battle)
 	
 	_is_ready = true
 	_battles_chosen.emit()

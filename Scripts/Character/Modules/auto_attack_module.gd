@@ -15,7 +15,7 @@ var attack_speed: float:
 
 var _aa_stats: CharacterAutoAttackStats # Ref to the owner auto attack stats
 
-var _projectile_scene: PackedScene = preload("res://Scenes/SpellsAndProjectiles/default_projectile.tscn") # Ref to the AutoAttackProjectile packed scene
+var _projectile_type: Projectile.ProjectileType
 
 #var _forced_target: Character # TODO Unused now, maybe for a futur hero that can taunt ?
 var _attack_strategy: TargetManager.TargettingStrategy = TargetManager.TargettingStrategy.CLOSEST_ENEMY # The algo used to find the target
@@ -43,7 +43,7 @@ func stop() -> void:
 
 
 func set_projectile(projectile_type: Projectile.ProjectileType) -> void:
-	_projectile_scene = Shared.PROJECTILES[projectile_type]
+	_projectile_type = projectile_type
 
 # ============================== Private functions ==============================
 
@@ -75,7 +75,7 @@ func _auto_attack(target: Character) -> void:
 		_attack_manager.notice_auto_attack_done(target)
 		_attack_manager.update_aa_projectile_stats(projectile_stats)
 	
-	_action_module.projectile_attack(target, _projectile_scene, projectile_spawn, projectile_stats)
+	_action_module.projectile_attack(target, _projectile_type, projectile_spawn, projectile_stats)
 
 
 func _update_auto_attack_speed() -> void:

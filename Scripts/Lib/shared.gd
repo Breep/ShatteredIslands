@@ -11,23 +11,26 @@ const HEROES: Dictionary[Hero.HeroId, Hero] = {
 	Hero.HeroId.TONY_LE_BARDE: preload("res://Resources/Heroes/tony_le_barde.tres")
 }
 
-const PROJECTILES = {
-	Projectile.ProjectileType.AA_ANCIENT_TREE: preload("res://Scenes/Heroes/AncientTree/projectile.tscn"),
-	Projectile.ProjectileType.AA_CYBORG: preload("res://Scenes/Heroes/Cyborg/projectile.tscn"),
-	Projectile.ProjectileType.AA_DR_BOOM: preload("res://Scenes/Heroes/DrBoom/projectile.tscn"),
-	Projectile.ProjectileType.AA_ENERGY_MAN: preload("res://Scenes/Heroes/EnergyMan/projectile.tscn"),
-	Projectile.ProjectileType.AA_LAURENT_KROFT: preload("res://Scenes/Heroes/LaurentKroft/projectile.tscn"),
-	Projectile.ProjectileType.AA_MR_KRUMB: preload("res://Scenes/Heroes/MrKrumb/projectile.tscn"),
-	Projectile.ProjectileType.AA_SIR_REGINALD: preload("res://Scenes/Heroes/SirReginald/projectile.tscn"),
-	Projectile.ProjectileType.AA_TONY_LE_BARDE: preload("res://Scenes/Heroes/TonyLeBarde/projectile.tscn"),
-	Projectile.ProjectileType.SPELL_FIRBOLT: preload("res://Scenes/SpellsAndProjectiles/default_projectile.tscn"),
-	Projectile.ProjectileType.SPELL_SHADOW_BOLT: preload("res://Scenes/SpellsAndProjectiles/default_projectile.tscn")
-}
+#const PROJECTILES: Dictionary[Projectile.ProjectileType, PackedScene] = {
+	#Projectile.ProjectileType.AA_ANCIENT_TREE: preload("res://Scenes/Heroes/AncientTree/projectile.tscn"),
+	#Projectile.ProjectileType.AA_CYBORG: preload("res://Scenes/Heroes/Cyborg/projectile.tscn"),
+	#Projectile.ProjectileType.AA_DR_BOOM: preload("res://Scenes/Heroes/DrBoom/projectile.tscn"),
+	#Projectile.ProjectileType.AA_ENERGY_MAN: preload("res://Scenes/Heroes/EnergyMan/projectile.tscn"),
+	#Projectile.ProjectileType.AA_LAURENT_KROFT: preload("res://Scenes/Heroes/LaurentKroft/projectile.tscn"),
+	#Projectile.ProjectileType.AA_MR_KRUMB: preload("res://Scenes/Heroes/MrKrumb/projectile.tscn"),
+	#Projectile.ProjectileType.AA_SIR_REGINALD: preload("res://Scenes/Heroes/SirReginald/projectile.tscn"),
+	#Projectile.ProjectileType.AA_TONY_LE_BARDE: preload("res://Scenes/Heroes/TonyLeBarde/projectile.tscn"),
+	#Projectile.ProjectileType.SPELL_FIREBOLT: preload("res://Scenes/SpellsAndProjectiles/projectile.tscn"),
+	#Projectile.ProjectileType.SPELL_SHADOW_BOLT: preload("res://Scenes/SpellsAndProjectiles/projectile.tscn")
+#}
 
+#const ENTITIES: Dictionary[Entity.EntityType, PackedScene] = {
+	#Entity.EntityType.CHARACTER: preload("res://Scenes/Character/character.tscn")
+#}
 
-
-
-
+var fighting_areas_ref: Dictionary[int, FightingArea] # Key=battle_id
+var spawn_managers_ref: Dictionary[int, SpawnManager] # Key=battle_id
+var entity_managers_ref: Dictionary[int, EntityManager] # Key=battle_id
 
 
 

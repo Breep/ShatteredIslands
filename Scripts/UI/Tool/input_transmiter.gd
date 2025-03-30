@@ -18,7 +18,6 @@ func _input(event: InputEvent) -> void:
 	if not event is InputEventMouse or not is_visible_in_tree():
 		return
 	
-	print("Transmit event")
 	# Convert the event position from the TextureRect to Viewport space
 	var local_pos: Vector2 = get_local_mouse_position()
 	var texture_size: Vector2 = size

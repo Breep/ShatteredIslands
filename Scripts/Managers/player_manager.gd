@@ -75,6 +75,30 @@ func add_bot() -> void:
 	var bot_id = bot_infos.keys().pick_random()
 	_add_player(BOT_INFOS[bot_id], bot_id, true, {})
 
+
+signal __all_players_syncronized()
+var __number_of_players_syncronized: int
+func sync_point() -> void:
+	if not multiplayer.is_server():
+		_client_ready.rpc_id(1, multiplayer.get_unique_id())
+	
+	await __all_players_syncronized
+	__number_of_players_syncronized = 0
+
+
+@rpc("any_peer", "call_remote")
+func _client_ready(peer_id: int) -> void:
+	if not multiplayer.is_server():
+		return
+	__number_of_players_syncronized += 1
+	if __number_of_players_syncronized >= multiplayer.get_peers().size():
+		_all_clients_ready.rpc()
+
+
+@rpc("authority", "call_local")
+func _all_clients_ready() -> void:
+	__all_players_syncronized.emit()
+
 # ============================== RPC - Ask/Answer Join game ==============================
 
 @rpc("any_peer", "call_remote")

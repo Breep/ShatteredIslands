@@ -20,7 +20,7 @@ enum ProjectileType {
 	AA_MR_KRUMB,
 	AA_SIR_REGINALD,
 	AA_TONY_LE_BARDE,
-	SPELL_FIRBOLT,
+	SPELL_FIREBOLT,
 	SPELL_SHADOW_BOLT
 }
 
@@ -29,15 +29,24 @@ enum ProjectileType {
 const _SPEED_MIN: float = 10
 const _DAMMAGE_MIN: int = 1
 
+# ============================== Network Export ==============================
+
+@export var id: int
+@export var battle_id: int
+@export var source_id: int
+@export var target_id: int
+@export var stats: ProjectileStats
+
 # ============================== Private ==============================
 
 var _source: Character
 var _target: Character
-var _stats: ProjectileStats
 
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
+	_source = Shared.entity_managers_ref[battle_id].entities[source_id]
+	_target = Shared.entity_managers_ref[battle_id].entities[target_id]
 	_target.dead.connect(_on_target_dead)
 
 
@@ -46,25 +55,26 @@ func _process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node3D) -> void:
+	if not multiplayer.is_server(): return
 	if body is Character and body == _target:
 		if _target != null:
-			if _stats.physical_damage_flat > 0:
-				Events.damage_done.emit(_source, _target, _stats.physical_damage_flat, Utils.DamageType.PHYSICAL, _stats.is_critic)
-			if _stats.magical_damage_flat > 0:
-				Events.damage_done.emit(_source, _target, _stats.magical_damage_flat, Utils.DamageType.MAGICAL, _stats.is_critic)
-			if _stats.physical_damage_percent > 0:
-				_damage_percent(_target, _stats.physical_damage_percent, Utils.DamageType.PHYSICAL, _stats.physical_damage_percent_type, _stats.is_critic)
-			if _stats.magical_damage_percent > 0:
-				_damage_percent(_target, _stats.magical_damage_percent, Utils.DamageType.MAGICAL, _stats.magical_damage_percent_type, _stats.is_critic)
-			if _stats.poison_stacks > 0:
-				Events.condition_stacks_done.emit(_source, _target, _stats.poison_stacks, Utils.StackType.POISON, _stats.poison_duration)
-			if _stats.vulnerability_stacks > 0:
-				Events.condition_stacks_done.emit(_source, _target, _stats.vulnerability_stacks, Utils.StackType.VULNERABILITY, 0)
-			if _stats.is_bouncing:
+			if stats.physical_damage_flat > 0:
+				Events.damage_done.emit(_source, _target, stats.physical_damage_flat, Utils.DamageType.PHYSICAL, stats.is_critic)
+			if stats.magical_damage_flat > 0:
+				Events.damage_done.emit(_source, _target, stats.magical_damage_flat, Utils.DamageType.MAGICAL, stats.is_critic)
+			if stats.physical_damage_percent > 0:
+				_damage_percent(_target, stats.physical_damage_percent, Utils.DamageType.PHYSICAL, stats.physical_damage_percent_type, stats.is_critic)
+			if stats.magical_damage_percent > 0:
+				_damage_percent(_target, stats.magical_damage_percent, Utils.DamageType.MAGICAL, stats.magical_damage_percent_type, stats.is_critic)
+			if stats.poison_stacks > 0:
+				Events.condition_stacks_done.emit(_source, _target, stats.poison_stacks, Utils.StackType.POISON, stats.poison_duration)
+			if stats.vulnerability_stacks > 0:
+				Events.condition_stacks_done.emit(_source, _target, stats.vulnerability_stacks, Utils.StackType.VULNERABILITY, 0)
+			if stats.is_bouncing:
 				_target = _source.target_manager.get_closest_enemy_from(_target) # Set new target to the closest character enemy to the source
 				if _target == null:
 					queue_free()
-				_stats.is_bouncing = false
+				stats.is_bouncing = false
 				return
 		
 		queue_free()
@@ -74,9 +84,9 @@ func _on_body_entered(body: Node3D) -> void:
 func init(source: Character, target: Character, stats: ProjectileStats) -> void:
 	_source = source
 	_target = target
-	_stats = stats
+	stats = stats
 	
-	if _stats.is_critic:
+	if stats.is_critic:
 		scale *= 2
 
 # ============================== Private functions ==============================
@@ -88,7 +98,7 @@ func _move_toward_target(delta: float):
 		return
 	
 	var direction: Vector3 = (_target.global_position - global_position).normalized()
-	position += direction * _stats.speed * delta
+	position += direction * 3 * delta
 	#look_at(_target.global_position)
 
 

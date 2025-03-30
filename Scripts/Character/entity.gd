@@ -5,6 +5,18 @@ extends CharacterBody3D
 
 signal dead(self_ref: Entity)
 
+# ============================== Signals ==============================
+
+@export var id: int # Multiplayer ID of the entity
+@export var team: int # Team number of the entity
+@export var battle_id: int # The id of the battle the entity is in
+
+# ============================== Enums ==============================
+
+enum EntityType {
+	CHARACTER,
+}
+
 # ============================== Constants ==============================
 
 const SIGNAL_NAME_SPAWNED: String = "spawned"

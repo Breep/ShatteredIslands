@@ -84,4 +84,11 @@ replication_config = SubResource("SceneReplicationConfig_jhmrm")
 
 [node name="EntityManager" parent="." instance=ExtResource("7_s0sy2")]
 
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://crlik01dyi562")
+spawn_path = NodePath("../Cubes")
+
+[node name="Cubes" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.01887, 0, -10.9832)
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

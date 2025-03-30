@@ -27,3 +27,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -100, 0, 100)
 
 [node name="FreeFlyCamera" parent="." instance=ExtResource("3_t03ty")]
 transform = Transform3D(0.899588, -0.308751, 0.308891, 0, 0.707267, 0.706946, -0.436739, -0.635961, 0.636249, 0.0513108, 8.01942, 3.7451)
+
+[node name="FightingAreaSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://c66yw4go2ykwa")
+spawn_path = NodePath("../FightingAreas")
+
+[node name="FightingAreas" type="Node3D" parent="."]
+unique_name_in_owner = true

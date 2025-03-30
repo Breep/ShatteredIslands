@@ -1,26 +1,33 @@
 class_name Character
 extends Entity
 
+# ============================== Export variables ==============================
+
+@export var owner_player_id: int # ID of the player owner of this character
+
 # ============================== Public variables ==============================
 
-var team: int
 var hero: Hero
 var player: Player
 var stats: CharacterStats
-
 
 # ============================== Private variables ==============================
 
 var _fighting_area: FightingArea
 var _is_dead: bool = false
 var _is_local: bool = false
+
 var _fighting_state: FightingManager.FightingState = FightingManager.FightingState.WAITING_FOR_PLAYERS
+@export var fighting_state: FightingManager.FightingState:
+	get: return _fighting_state
+	set(value):
+		_set_state(value)
 
 # ============================== Local scene nodes ==============================
 
 @onready var _character_visual: CharacterVisual = $CharacterVisual
 
-@onready var _multiplayerSynchroniser: MultiplayerSynchronizer = %MultiplayerSynchronizer
+@onready var _server_synchronizer: MultiplayerSynchronizer = %ServerSynchronizer
 
 @onready var target_manager: TargetManager = %TargetManager # Needs to be public for easier access for other managers TODO Maybe rework ?
 
@@ -44,17 +51,21 @@ var _families_managers: Dictionary # { Family.FamilyType: FamilyManager }
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
+	player = PlayerManager.players[owner_player_id]
+	hero = player.hero
+	stats = player.character_stats
+	
+	_is_local = player.id == multiplayer.get_unique_id()
+	
 	_fighting_area = get_tree().get_root().find_child("FightingArea3D", true, false)
 	
-	_multiplayerSynchroniser.set_multiplayer_authority(player.id)
-	_is_local = _multiplayerSynchroniser.get_multiplayer_authority() == multiplayer.get_unique_id()
+	#_server_synchronizer.set_multiplayer_authority(player.id)
 	_character_visual.load_hero_model(hero)
 	_character_visual.update_name_displayed(player.name)
 	
 	if _fighting_area != null and _is_local:
 		_fighting_area.connect("map_clicked", _on_fighting_area_map_clicked)
 	
-	stats = player.character_stats
 	_build_families_managers()
 	_character_visual.update_health_bar(stats.health, stats.health_max)
 	_character_visual.update_energy_bar(stats.energy, stats.energy_max)
@@ -62,17 +73,10 @@ func _ready() -> void:
 
 	_recursive_propagate_signal(get_parent(), Entity.SIGNAL_NAME_SPAWNED)
 
-# ============================== Notice critic ==============================
-
-# The character needs to know how much damage he deals to the enemy for calculations with critical (mostly storm family)
-# So character needs to notice the source of damage that he dealt a critical damage and tells him how much he dealt
-# I don't like this solution, but I can't figure out something else
-func notice_critical_damage(target: Character, damage: int) -> void:
-	_storm_manager.notice_critical_damage(target, damage)
-
 # ============================== Fighting States ==============================
 
-func set_state(new_state: FightingManager.FightingState) -> void:
+func _set_state(new_state: FightingManager.FightingState) -> void:
+	#print("[", multiplayer.get_unique_id(), "] DEBUG : ", id, " - ", _fighting_state, " - ", new_state)
 	match new_state:
 		FightingManager.FightingState.STARTING:
 			if _fighting_state != FightingManager.FightingState.WAITING_FOR_PLAYERS:

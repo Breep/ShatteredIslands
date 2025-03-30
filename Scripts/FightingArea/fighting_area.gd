@@ -11,6 +11,10 @@ const MAPS = {
 	Battle.BattleType.VS_1: preload("res://Scenes/FightingArea/Maps/test_map.tscn")
 }
 
+# ============================== Export variables ==============================
+
+@export var battle_id: int
+
 # ============================== Private variables ==============================
 
 var _battle: Battle # Battle of the fighting area
@@ -37,36 +41,42 @@ func _ready() -> void:
 		printerr("FightingArea: No FightingManager")
 		return
 	
-	# TODO remove map
-
-# ============================== Public functions ==============================
-
-func init(battle: Battle) -> void:
-	# TODO Load map according to battle
-	_battle = battle
-	match battle.id:
+	_battle = RoundManager.battles[battle_id]
+	match battle_id:
 		0: _camera.camera_type = CameraManager.CameraType.FIGHTING_AREA_1
 		1: _camera.camera_type = CameraManager.CameraType.FIGHTING_AREA_2
 		2: _camera.camera_type = CameraManager.CameraType.FIGHTING_AREA_3
 		3: _camera.camera_type = CameraManager.CameraType.FIGHTING_AREA_4
+	
+	_register_self_in_shared()
 
+# ============================== Public functions ==============================
 
 func start_fight() -> void:
-	_characters = _spawn_manager.spawn_characters(_battle.players)
-	if _characters.is_empty():
-		printerr("FightingArea: Can't start SpawnManager")
-		return
-	
-	_fighting_manager.connect("state_changed", _on_fighting_manager_state_changed)
-	_fighting_manager.start()
-	print("FightingArea: Start fight")
+	if multiplayer.is_server():
+		_characters = _spawn_manager.spawn_characters(_battle.players)
+		if _characters.is_empty():
+			printerr("FightingArea: Can't start SpawnManager")
+			return
+		_fighting_manager.connect("state_changed", _on_fighting_manager_state_changed)
+		_fighting_manager.start()
+	else:
+		_fighting_manager.queue_free()
 
 # ============================== Private functions ==============================
 
-func _set_characters_state(state: FightingManager.FightingState) -> void:
+func _set_characters_state(fighting_state: FightingManager.FightingState) -> void:
 	for character in _characters:
-		character.set_state(state)
+		character.fighting_state = fighting_state
 
+
+func _register_self_in_shared() -> void:
+	Shared.fighting_areas_ref[battle_id] = self
+	Shared.spawn_managers_ref[battle_id] = _spawn_manager
+	Shared.entity_managers_ref[battle_id] = _entity_manager
+	_spawn_manager.battle_id = battle_id
+
+# ============================== Callbacks ==============================
 
 func _on_fighting_manager_state_changed(state: FightingManager.FightingState) -> void:
 	print("FightingArea: _on_fighting_manager_state_changed() ", state)

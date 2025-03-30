@@ -123,8 +123,8 @@ var fire: CharacterFireStats
 var storm: CharacterStormStats
 var heal: CharacterHealStats
 var hp: CharacterLifeStats
-var poison: CharacterPoisonStats
 var shadow: CharacterShadowStats
+var poison: CharacterPoisonStats
 
 # ============================== Public function ==============================
 
@@ -134,9 +134,9 @@ func _init() -> void:
 	fire = CharacterFireStats.new()
 	storm = CharacterStormStats.new()
 	heal = CharacterHealStats.new()
+	shadow = CharacterShadowStats.new()
 	hp = CharacterLifeStats.new()
 	poison = CharacterPoisonStats.new()
-	shadow = CharacterShadowStats.new()
 
 
 func reset_stats(default_stats: CharacterStats) -> void:

@@ -45,7 +45,7 @@ func _ready() -> void:
 		printerr("TargetManager: There is no EntityManager on any parent nodes")
 		return
 	
-	_entities = _entity_manager.entities
+	_entities = _entity_manager.entities.values()
 	_entity_manager.entity_spawned.connect(_on_entity_manager_entity_spawned)
 	_entity_manager.entity_dead.connect(_on_entity_manager_entity_dead)
 	_enemies = _get_enemies_from_entities()
@@ -122,7 +122,7 @@ func get_targets(strategy: MultipleTargettingStrategy) -> Array[Entity]:
 func _get_entity_manager_in_node(node: Node) -> EntityManager:
 	if node == null:
 		return null
-	var entity_manager: EntityManager = node.get_node("EntityManager")
+	var entity_manager: EntityManager = node.get_node("EntityManager") # TODO REWORK ça cause plein d'erreur dans la console
 	if entity_manager == null:
 		return _get_entity_manager_in_node(node.get_parent())
 	else:

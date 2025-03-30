@@ -5,11 +5,24 @@ class_name SpawnManager
 
 signal all_players_spawned()
 
-# ============================== Export ==============================
+# ============================== Public variables ==============================
+
+var battle_id: int = -1 # Set by the parent
+
+# ============================== Local Export ==============================
 
 @export var character_scene: PackedScene
-
 @export var _spawn_areas: Array[Area3D]
+
+# ============================== Local nodes ==============================
+
+@onready var _entities_node: Node3D = %Entities
+@onready var _projectiles_node: Node3D = %Projectiles
+
+# ============================== Private variables ==============================
+
+var _entity_counter: int = 0
+var _projectile_counter: int = 0
 
 enum SpawnType {
 	SPAWN_AREA, # Big rectangle area where the character can be moved during the countdown
@@ -23,6 +36,11 @@ enum TeamsData {
 	TEAMS_PLAYER_NUMBER, # Number of player in each team (can be 1, 2, 3 or 4)
 }
 var _teams_data: Dictionary # {TeamsData.TEAM_NUMBER:int, TeamsData.TEAM_PLAYER_NUMBER:int}
+
+# ============================== Node base functions ==============================
+
+func _ready() -> void:
+	Shared.spawn_managers_ref
 
 # ============================== Public function ==============================
 
@@ -42,19 +60,36 @@ func spawn_characters(players: Array[Player]) -> Array[Character]:
 	
 	return spawned_characters
 
+
+func spawn_projectile(source: Character, target: Character, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
+	var projectile: Projectile = preload("res://Scenes/SpellsAndProjectiles/projectile.tscn").instantiate()
+	projectile.name = "Projectile_" + str(_projectile_counter)
+	projectile.position = _projectiles_node.to_local(projectile_spawn.global_position)
+	projectile.stats = projectile_stats
+	projectile.source_id = Shared.entity_managers_ref[battle_id].reverse_entities[source as Entity]
+	projectile.target_id = Shared.entity_managers_ref[battle_id].reverse_entities[target as Entity]
+	projectile.battle_id = battle_id
+	projectile.id = _projectile_counter
+	_projectile_counter += 1
+	_projectiles_node.add_child(projectile)
+
 # ============================== Private functions ==============================
 
-# Instanciate and spawn a new character for the player
+# Instantiate and spawn a new character for the player
 func _spawn_new_character(player: Player) -> Character:
-	var character: Character = character_scene.instantiate()
+	if not multiplayer.is_server():
+		return
+	
+	#var character: Character = Shared.ENTITIES[Entity.EntityType.CHARACTER].instantiate()
+	var character: Character = preload("res://Scenes/Character/character.tscn").instantiate()
+	character.name = "Character_" + str(player.id)
+	character.id = _entity_counter
+	_entity_counter += 1
+	character.battle_id = battle_id
 	character.team = player.team
-	character.hero = player.hero
-	character.player = player
-	#player.character = character
-	# TODO Learn about spawning on other tree branch (Surement parceque le noeud principal n'est pas encore READY à ce moment)
-	#get_tree().current_scene.add_child(character)
-	add_child(character)
-	character.global_position = _get_spawn_global_position(character.team)
+	character.owner_player_id = player.id
+	character.position = to_local(_get_spawn_global_position(character.team))
+	_entities_node.add_child(character)
 	return character
 
 
@@ -73,10 +108,10 @@ func _init_spawns_data(number_of_teams: int, team_players_number: int) -> bool:
 		if team_spawn_areas.size() > 1:
 			printerr("SpawnManager: Too many spawn areas for team ", team_number, " !")
 			return false
-		for node in team_spawn_areas:
+		for area in team_spawn_areas:
 			var spawn_data: Dictionary
-			spawn_data[SpawnType.SPAWN_AREA] = node
-			spawn_data[SpawnType.SPAWN_LOCATIONS] = _get_spawns_locations(node, team_players_number)
+			spawn_data[SpawnType.SPAWN_AREA] = area
+			spawn_data[SpawnType.SPAWN_LOCATIONS] = _get_spawns_locations(area, team_players_number)
 			spawn_data[SpawnType.SPAWN_CHARACTER_NUMBER] = 0
 			_spawns_data[spawn_team_group_name] = spawn_data
 	return true
