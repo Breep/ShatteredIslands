@@ -152,7 +152,7 @@ func _add_player(player_name: String, id: int, is_bot: bool, serialized_player: 
 		new_player.name = player_name
 		new_player.id = id
 		new_player.is_bot = is_bot
-		
+		new_player.damage = 5
 		new_player.gold = 500
 		new_player.health = 30
 		

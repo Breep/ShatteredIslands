@@ -3,7 +3,7 @@ extends Control
 
 # ============================== Private variables ==============================
 
-var _player: Player
+var player: Player
 
 # ============================== Local nodes ==============================
 
@@ -14,8 +14,8 @@ var _player: Player
 # ============================== Public functions ==============================
 
 func connect_to_player(new_player: Player) -> void:
-	_player = new_player
-	_player.hero_changed.connect(_on_player_hero_changed)
+	player = new_player
+	player.hero_changed.connect(_on_player_hero_changed)
 	_setup_local_nodes()
 
 # ============================== Node base functions ==============================
@@ -26,15 +26,15 @@ func _ready() -> void:
 # ============================== Private functions ==============================
 
 func _setup_local_nodes() -> void:
-	if not is_node_ready() or _player == null: return
-	_player_name_label.text = _player.name
-	if _player.hero != null:
-		_hero_portrait.texture = _player.hero.portrait
-	_ui_player_life.connect_to_player_health_signal(_player.health_changed)
-	_ui_player_life.connect_to_player_max_health_signal(_player.max_health_changed)
-	_ui_player_life.update_player_life(_player.health, _player.max_health)
+	if not is_node_ready() or player == null: return
+	_player_name_label.text = player.name
+	if player.hero != null:
+		_hero_portrait.texture = player.hero.portrait
+	_ui_player_life.connect_to_player_health_signal(player.health_changed)
+	_ui_player_life.connect_to_player_max_health_signal(player.max_health_changed)
+	_ui_player_life.update_player_life(player.health, player.max_health)
 
 # ============================== Callbacks ==============================
 
 func _on_player_hero_changed(hero: Hero) -> void:
-	_hero_portrait.texture = _player.hero.portrait
+	_hero_portrait.texture = player.hero.portrait

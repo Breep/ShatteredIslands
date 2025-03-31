@@ -10,9 +10,9 @@ var _entities: Dictionary[int, Entity] # Key=Entity id, Value=Entity ref
 var entities: Dictionary[int, Entity]:
 	get: return _entities
 
-var _reverse_entities: Dictionary[Entity, int] # Key=Entity ref, Value=Entity id
-var reverse_entities: Dictionary[Entity, int]:
-	get: return _reverse_entities
+var _characters: Dictionary[int, Character] # Key=Entity id, Value=Character ref
+var characters: Dictionary[int, Character]:
+	get: return _characters
 
 # ============================== Node base functions ==============================
 
@@ -24,7 +24,9 @@ func _ready() -> void:
 
 func _register_entity(who: Entity) -> void:
 	_entities[who.id] = who
-	_reverse_entities[who] = who.id
+	if who is Character:
+		_characters[who.id] = who
+	
 	entity_spawned.emit(who)
 	who.dead.connect(_on_entity_dead)
 
@@ -32,7 +34,7 @@ func _register_entity(who: Entity) -> void:
 
 # Attached to a custom user signals added my this module to the parent
 func _on_parent_entity_is_spawned(who: Entity) -> void:
-	if _entities.has(who):
+	if _entities.has(who.id):
 		printerr("EntityManager: ", who, "-", who.name, " is spawned more than once")
 		return
 	_register_entity(who)
@@ -40,7 +42,6 @@ func _on_parent_entity_is_spawned(who: Entity) -> void:
 
 func _on_entity_dead(who: Entity) -> void:
 	_entities.erase(who)
-	_reverse_entities.erase(who.id)
 	entity_dead.emit(who)
 
 

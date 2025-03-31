@@ -1,12 +1,9 @@
 class_name UIPlayerLife
 extends Control
 
-# ============================== Public variables ==============================
-
-var player_health: int
-
 # ============================== Private variables ==============================
 
+var _player_health: int
 var _player_max_life: int
 
 # ============================== Local nodes ==============================
@@ -34,7 +31,7 @@ func _update_player_life(new_player_current_health: int, new_player_max_health: 
 	_health_value_label.text = str(new_player_current_health)
 	_health_progress_bar.max_value = new_player_max_health
 	_health_progress_bar.value = new_player_current_health
-	player_health = new_player_current_health
+	_player_health = new_player_current_health
 	_player_max_life = new_player_max_health
 
 # ============================== Callbacks ==============================
@@ -44,4 +41,4 @@ func _on_player_health_changed(new_health) -> void:
 
 
 func _on_player_max_health_changed(new_max_health) -> void:
-	_update_player_life(player_health, new_max_health)
+	_update_player_life(_player_health, new_max_health)

@@ -9,6 +9,7 @@ enum SerializedField {
 	TEAM,
 	HEALTH,
 	MAX_HEALTH,
+	DAMAGE,
 	HERO,
 	GOLD,
 	IS_BOT,
@@ -59,6 +60,14 @@ var gold: int:
 		_gold = value
 		gold_changed.emit(_gold)
 
+signal damage_changed(new_damage: int)
+var _damage: int
+var damage: int:
+	get: return _damage
+	set(value):
+		_damage = value
+		damage_changed.emit(_damage)
+
 # ============================== Static functions ==============================
 
 # Get the player conresponding of the serialized_data id in the GameManager
@@ -75,6 +84,7 @@ static func new_from_serialized(serialized_data: Dictionary) -> Player:
 	player.team = serialized_data[SerializedField.TEAM]
 	player.health = serialized_data[SerializedField.HEALTH]
 	player.max_health = serialized_data[SerializedField.MAX_HEALTH]
+	player.damage = serialized_data[SerializedField.DAMAGE]
 	#player.hero = Shared.HEROES[serialized_data[SerializedField.HERO]]
 	player.gold = serialized_data[SerializedField.GOLD]
 	player.is_bot = serialized_data[SerializedField.IS_BOT]
@@ -89,6 +99,7 @@ func serialized() -> Dictionary:
 		SerializedField.TEAM: team,
 		SerializedField.HEALTH: health,
 		SerializedField.MAX_HEALTH: max_health,
+		SerializedField.DAMAGE: damage,
 		#SerializedField.HERO: hero.id,
 		SerializedField.GOLD: gold,
 		SerializedField.IS_BOT: is_bot

@@ -13,10 +13,10 @@ mana_regen = 10.0
 energy_max = 20
 energy_regen = 0.5
 move_speed = 0.5
-attack_damage = 200
+attack_damage = 350
 attack_speed = 0.25
 attack_move_speed = 1.0
-physical_critical_chance = 0.0
+physical_critical_chance = 10.0
 physical_critical_multiplier = 2.0
 
 [resource]

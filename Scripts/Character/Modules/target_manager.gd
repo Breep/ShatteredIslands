@@ -255,17 +255,23 @@ func _on_entity_manager_entity_spawned(who: Entity) -> void:
 
 
 func _on_entity_manager_entity_dead(who: Entity):
-	print("OH NO ", who.player.name, " is dead :(")
 	_remove_character(who)
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

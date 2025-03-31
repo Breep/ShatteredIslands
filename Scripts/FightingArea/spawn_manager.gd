@@ -61,8 +61,8 @@ func spawn_projectile(source: Character, target: Character, projectile_type: Pro
 	projectile.name = "Projectile_" + str(_projectile_counter)
 	projectile.position = _projectiles_node.to_local(projectile_spawn.global_position)
 	projectile.stats = projectile_stats
-	projectile.source_id = Shared.entity_managers_ref[battle_id].reverse_entities[source as Entity]
-	projectile.target_id = Shared.entity_managers_ref[battle_id].reverse_entities[target as Entity]
+	projectile.source_id = source.id
+	projectile.target_id = target.id
 	projectile.battle_id = battle_id
 	projectile.id = _projectile_counter
 	_projectile_counter += 1

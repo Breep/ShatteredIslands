@@ -83,7 +83,7 @@ func _start_fighting_phase() -> void:
 
 # ============================== Callbacks ==============================
 
-func _on_buying_area_phase_ended():
+func _on_buying_area_phase_ended() -> void:
 	_start_fighting_phase()
 
 

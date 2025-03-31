@@ -10,7 +10,6 @@ func _ready() -> void:
 
 	for i in range(1,9):
 		players_life_info.append(get_node_or_null("%J" + str(i))) 
-		<
 	call_deferred("_late_ready") 
 	update_visual(_get_players_ordered_by_health())
 	

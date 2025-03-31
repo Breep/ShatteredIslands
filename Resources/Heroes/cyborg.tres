@@ -16,7 +16,7 @@ move_speed = 3.0
 attack_damage = 20
 attack_speed = 1.5
 attack_move_speed = 2.0
-physical_critical_chance = 10.0
+physical_critical_chance = 20.0
 physical_critical_multiplier = 2.0
 metadata/_custom_type_script = "uid://c76rxvnlcwltf"
 

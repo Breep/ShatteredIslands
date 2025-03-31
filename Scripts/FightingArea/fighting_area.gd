@@ -43,7 +43,11 @@ func _ready() -> void:
 		return
 	
 	_battle = RoundManager.battles[battle_id]
+	
 	_camera.battle_id = battle_id
+	_spawn_manager.battle_id = battle_id
+	_fighting_manager.battle_id = battle_id
+	
 	match battle_id:
 		0: _camera.camera_type = CameraManager.CameraType.FIGHTING_AREA_1
 		1: _camera.camera_type = CameraManager.CameraType.FIGHTING_AREA_2
@@ -59,15 +63,17 @@ func _exit_tree() -> void:
 # ============================== Public functions ==============================
 
 func start_fight() -> void:
-	if multiplayer.is_server():
-		_characters = _spawn_manager.spawn_characters(_battle.players)
-		if _characters.is_empty():
-			printerr("FightingArea: Can't start SpawnManager")
-			return
-		_fighting_manager.connect("state_changed", _on_fighting_manager_state_changed)
-		_fighting_manager.start()
-	else:
-		_fighting_manager.queue_free()
+	if not multiplayer.is_server():
+		return
+	
+	_characters = _spawn_manager.spawn_characters(_battle.players)
+	if _characters.is_empty():
+		printerr("FightingArea: Can't start SpawnManager")
+		return
+	
+	_fighting_manager.state_changed.connect(_on_fighting_manager_state_changed)
+	_fighting_manager.fight_is_over.connect(_on_fighting_manager_fight_is_over)
+	_fighting_manager.start()
 	
 	_net_start_fight.rpc()
 
@@ -86,7 +92,7 @@ func _register_self_in_shared() -> void:
 	Shared.fighting_areas_ref[battle_id] = self
 	Shared.spawn_managers_ref[battle_id] = _spawn_manager
 	Shared.entity_managers_ref[battle_id] = _entity_manager
-	_spawn_manager.battle_id = battle_id
+
 
 func _delete_self_in_shared() -> void:
 	Shared.fighting_areas_ref.erase(battle_id)
@@ -100,3 +106,42 @@ func _on_fighting_manager_state_changed(state: FightingManager.FightingState) ->
 	_set_characters_state(state)
 	#if state == FightingManager.FightingState.STARTING:
 		#_ui_countdown.start(5, "FIGHT") # TODO remonter l'info de la durée du countdown depuis le fightmanager
+
+
+func _on_fighting_manager_fight_is_over(winner_team: int) -> void:
+	var winner_players: Array[Player]
+	for player in _battle.players:
+		if player.team == winner_team:
+			winner_players.append(player)
+		else: # TODO calculate damage
+			player.health -= 5
+	
+	var winner_names: String = ""
+	for winner in winner_players:
+		winner_names += winner.name + " "
+	
+	print("FightingArea", battle_id, ": Congratulations to ", winner_names, " !")
+	
+	# Calculate damage (=average of the winners damage)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

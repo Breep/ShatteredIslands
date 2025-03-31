@@ -14,7 +14,6 @@ var _characters: Array[Character]
 # ============================== Public functions ==============================
 
 func start(battle_id: int) -> void:
-	print("[", multiplayer.get_unique_id(), "] UIFightingArea start ", battle_id)
 	Events.ui_fighting_area_opened.connect(_on_events_ui_fighting_area_opened)
 	_battle_id = battle_id
 	_characters = _get_fighting_characters()
@@ -43,7 +42,6 @@ func _get_fighting_characters() -> Array[Character]:
 # ============================== Callbacks ==============================
 
 func _on_events_ui_fighting_area_opened(is_opened: bool, battle_id: int) -> void:
-	print("[", multiplayer.get_unique_id(), "] _on_events_ui_fighting_area_opened ", is_opened, " ", battle_id)
 	if battle_id != -1 and battle_id != _battle_id:
 		return
 	
