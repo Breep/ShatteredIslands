@@ -64,12 +64,6 @@ unique_name_in_owner = true
 transform = Transform3D(0.375305, 0.140338, 0.916216, 0.181778, 0.958133, -0.22122, -0.908902, 0.249572, 0.334081, -3.25739, 17.7254, -45.0352)
 shadow_enabled = true
 
-[node name="LightDay" type="DirectionalLight3D" parent="Light"]
-transform = Transform3D(-0.98934, -0.0555546, 0.134609, 0.0529325, 0.723949, 0.68782, -0.135662, 0.687613, -0.713291, -2.81162, 34.4637, -25.1827)
-visible = false
-light_energy = 1.65
-shadow_enabled = true
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("72_1sm7x")
 volume_db = -5.0
@@ -83,12 +77,5 @@ autostart = true
 replication_config = SubResource("SceneReplicationConfig_jhmrm")
 
 [node name="EntityManager" parent="." instance=ExtResource("7_s0sy2")]
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://crlik01dyi562")
-spawn_path = NodePath("../Cubes")
-
-[node name="Cubes" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.01887, 0, -10.9832)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

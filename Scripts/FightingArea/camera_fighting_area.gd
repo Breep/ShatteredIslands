@@ -1,3 +1,4 @@
+class_name CameraFightingArea
 extends Camera3D
 
 @export var move_speed: float = 10.0  # Vitesse de déplacement de la caméra
@@ -5,6 +6,7 @@ extends Camera3D
 @export var debug_mesh: DebugMesh
 
 var camera_type: CameraManager.CameraType = CameraManager.CameraType.UNDEF
+var battle_id: int
 
 var _is_active: bool = false
 
@@ -78,6 +80,9 @@ func _on_camera_manager_camera_changed(new_camera_type: CameraManager.CameraType
 		return
 	
 	_is_active = true
+	Events.ui_buying_area_opened.emit(false)
+	Events.ui_fighting_area_opened.emit(false, -1)
+	Events.ui_fighting_area_opened.emit(true, battle_id)
 	make_current()
 
 

@@ -47,6 +47,8 @@ func _on_camera_manager_camera_changed(camera_type: CameraManager.CameraType) ->
 		return
 	
 	_is_active = true
+	Events.ui_buying_area_opened.emit(false)
+	Events.ui_fighting_area_opened.emit(false, -1)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	make_current()
 

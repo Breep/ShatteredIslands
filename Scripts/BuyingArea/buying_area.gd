@@ -27,12 +27,6 @@ var _heroes_ready: int
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	#if multiplayer.is_server():
-		#for i in 10:
-			#var cube = preload("res://Scenes/test/test_multi_cube.tscn").instantiate()
-			#cube.name = "Cube" + str(i)
-			#$Cubes.add_child(cube)
-	
 	_current_round = RoundManager.current_round
 	_ui_hero_picking_screen.hero_locked.connect(_on_ui_hero_picking_screen_hero_locked)
 	_player_hero_picked.connect(_on_player_hero_picked)
@@ -44,8 +38,6 @@ func _ready() -> void:
 func start_round(battles: Array[Battle]) -> void:
 	CameraManager.camera_changed.emit(CameraManager.CameraType.BUYING_AREA)
 	_ui_hero_picking_screen.hide()
-	#_ui_buying_area.show()
-	Events.card_shop_opened.emit(true)
 	_tavern.put_tables_according_to_battles(battles)
 
 

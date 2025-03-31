@@ -78,8 +78,9 @@ func _on_camera_manager_camera_changed(camera_type: CameraManager.CameraType) ->
 		_is_active = false
 		return
 	
-	print("Switch to buying area camera")
 	_is_active = true
+	Events.ui_buying_area_opened.emit(true)
+	Events.ui_fighting_area_opened.emit(false, -1)
 	make_current()
 
 

@@ -28,7 +28,8 @@ var _characters: Array[Character] # Array of all characters in the fight scene
 @onready var _map: Node3D
 
 #@onready var _ui_countdown: UICountdown = %Countdown
-@onready var _camera: Camera3D = %Camera3D
+@onready var _camera: CameraFightingArea = %Camera3D
+@onready var _ui_fighting_area: UIFightingArea = %UIFightingArea
 
 # ============================== Node base functions ==============================
 
@@ -42,6 +43,7 @@ func _ready() -> void:
 		return
 	
 	_battle = RoundManager.battles[battle_id]
+	_camera.battle_id = battle_id
 	match battle_id:
 		0: _camera.camera_type = CameraManager.CameraType.FIGHTING_AREA_1
 		1: _camera.camera_type = CameraManager.CameraType.FIGHTING_AREA_2
@@ -49,6 +51,10 @@ func _ready() -> void:
 		3: _camera.camera_type = CameraManager.CameraType.FIGHTING_AREA_4
 	
 	_register_self_in_shared()
+
+
+func _exit_tree() -> void:
+	_delete_self_in_shared()
 
 # ============================== Public functions ==============================
 
@@ -62,6 +68,12 @@ func start_fight() -> void:
 		_fighting_manager.start()
 	else:
 		_fighting_manager.queue_free()
+	
+	_net_start_fight.rpc()
+
+@rpc("authority", "call_local")
+func _net_start_fight() -> void:
+	_ui_fighting_area.start(battle_id)
 
 # ============================== Private functions ==============================
 
@@ -75,6 +87,11 @@ func _register_self_in_shared() -> void:
 	Shared.spawn_managers_ref[battle_id] = _spawn_manager
 	Shared.entity_managers_ref[battle_id] = _entity_manager
 	_spawn_manager.battle_id = battle_id
+
+func _delete_self_in_shared() -> void:
+	Shared.fighting_areas_ref.erase(battle_id)
+	Shared.spawn_managers_ref.erase(battle_id)
+	Shared.entity_managers_ref.erase(battle_id)
 
 # ============================== Callbacks ==============================
 

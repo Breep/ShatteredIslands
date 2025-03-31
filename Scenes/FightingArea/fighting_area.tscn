@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c66yw4go2ykwa"]
+[gd_scene load_steps=11 format=3 uid="uid://c66yw4go2ykwa"]
 
 [ext_resource type="Script" uid="uid://cd8u3lm3xa8c4" path="res://Scripts/FightingArea/fighting_area.gd" id="1_qx4db"]
 [ext_resource type="Script" uid="uid://d2fihbt8u628f" path="res://Scripts/FightingArea/camera_fighting_area.gd" id="2_48dto"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Scenes/Character/character.tscn" id="4_3pbvh"]
 [ext_resource type="PackedScene" uid="uid://b3467f7qtons1" path="res://Scenes/FightingArea/Maps/test_map.tscn" id="6_12jqf"]
 [ext_resource type="PackedScene" uid="uid://pyrw8lacvly2" path="res://Scenes/Managers/entity_manager.tscn" id="6_yyfcp"]
+[ext_resource type="PackedScene" uid="uid://bhxhqex1pbh2p" path="res://Scenes/UI/FightingArea/ui_fighting_area.tscn" id="8_hqxx4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jo255"]
 size = Vector3(10, 1, 20)
@@ -64,3 +65,15 @@ shape = SubResource("BoxShape3D_jo255")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_yyfcp")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UIFightingArea" parent="UI" instance=ExtResource("8_hqxx4")]
+unique_name_in_owner = true
+layout_mode = 1

@@ -78,7 +78,6 @@ func _start_buying_phase() -> void:
 
 func _start_fighting_phase() -> void:
 	print("[", multiplayer.get_unique_id(), "] Game: Start fights !")
-	Events.card_shop_opened.emit(false)
 	for fighting_area in _fighting_areas:
 		fighting_area.start_fight()
 
