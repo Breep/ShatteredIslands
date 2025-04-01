@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Hero" load_steps=5 format=3 uid="uid://bqjyvw4bxcnt7"]
 
 [ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://ResourcesBase/Hero/hero.gd" id="1_synja"]
-[ext_resource type="Script" uid="uid://c76rxvnlcwltf" path="res://ResourcesBase/CharacterStats/character_stats.gd" id="2_0fuq0"]
+[ext_resource type="Script" uid="uid://dvarcfrqqdx7s" path="res://ResourcesBase/CharacterStats/character_stats.gd" id="2_0fuq0"]
 [ext_resource type="PackedScene" uid="uid://dvtbjmadt2v8p" path="res://Scenes/Heroes/SirReginald/model.tscn" id="3_lvb6b"]
 
 [sub_resource type="Resource" id="Resource_gr18g"]
