@@ -7,7 +7,7 @@ texture = ExtResource("1_gwaem")
 texture_type = 1
 
 [sub_resource type="Gradient" id="Gradient_gxx4w"]
-colors = PackedColorArray(0, 4, 0.2, 1, 0, 0.5, 1.5, 1)
+colors = PackedColorArray(4, 0, 0.2, 1, 0, 0.5, 1.5, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_n2mq6"]
 gradient = SubResource("Gradient_gxx4w")
@@ -42,7 +42,7 @@ render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_lambert, specul
 
 uniform sampler2D tex_frg_2 : source_color;
 uniform sampler2D tex_frg_3 : source_color;
-uniform float opacity : hint_range(0, 1) = 1;
+uniform float opacity : hint_range(0.0, 1.0) = 1.0;
 
 
 
