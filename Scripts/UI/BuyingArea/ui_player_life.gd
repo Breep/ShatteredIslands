@@ -36,9 +36,9 @@ func _update_player_life(new_player_current_health: int, new_player_max_health: 
 
 # ============================== Callbacks ==============================
 
-func _on_player_health_changed(new_health) -> void:
+func _on_player_health_changed(_player: Player, new_health: int) -> void:
 	_update_player_life(new_health, _player_max_life)
 
 
-func _on_player_max_health_changed(new_max_health) -> void:
+func _on_player_max_health_changed(_player: Player, new_max_health: int) -> void:
 	_update_player_life(_player_health, new_max_health)

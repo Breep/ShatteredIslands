@@ -45,5 +45,5 @@ func _compare_player_health(player1: Player, player2: Player) -> bool:
 
 # ============================== Callbacks ==============================
 
-func _on_player_health_changed(_new_health: int) -> void:
+func _on_player_health_changed(_player: Player, _new_health: int) -> void:
 	_reorder_portraits()

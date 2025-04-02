@@ -123,7 +123,8 @@ static func new_from_serialized(serialized_data: Dictionary) -> Battle:
 	battle.players_number = serialized_data["players_number"]
 	battle.teams_number = serialized_data["teams_number"]
 	for serialized_player in serialized_data["players"]:
-		battle.players.append(Player.get_from_serialized(serialized_player))
+		var player_id: int = serialized_player[Player.SerializedField.ID]
+		battle.players.append(PlayerManager.players[player_id])
 	return battle
 
 

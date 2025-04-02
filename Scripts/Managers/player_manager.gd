@@ -155,6 +155,7 @@ func _add_player(player_name: String, id: int, is_bot: bool, serialized_player: 
 		new_player.damage = 5
 		new_player.gold = 500
 		new_player.health = 30
+		_connect_to_signals(new_player)
 		
 		players[id] = new_player
 	else:
@@ -173,10 +174,33 @@ func _remove_player(peer_id: int) -> void:
 	players.erase(peer_id)
 
 
+func _connect_to_signals(player: Player) -> void:
+	player.health_changed.connect(_on_player_health_changed)
+	player.max_health_changed.connect(_on_player_max_health_changed)
+	player.damage_changed.connect(_on_player_damage_changed)
+	player.hero_changed.connect(_on_player_hero_changed)
+	player.gold_changed.connect(_on_player_gold_changed)
 
 
+func _on_player_health_changed(player: Player, _unused) -> void:
+	_sync_player.rpc(player.serialized())
 
+func _on_player_max_health_changed(player: Player, _unused) -> void:
+	_sync_player.rpc(player.serialized())
 
+func _on_player_damage_changed(player: Player, _unused) -> void:
+	_sync_player.rpc(player.serialized())
+
+func _on_player_hero_changed(player: Player, _unused) -> void:
+	_sync_player.rpc(player.serialized())
+
+func _on_player_gold_changed(player: Player, _unused) -> void:
+	_sync_player.rpc(player.serialized())
+
+@rpc("authority", "call_remote")
+func _sync_player(serialized_player: Dictionary) -> void:
+	var player: Player = players[serialized_player[Player.SerializedField.ID]]
+	player.update_from_serialized(serialized_player)
 
 
 
