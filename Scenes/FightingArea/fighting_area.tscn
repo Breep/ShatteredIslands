@@ -41,10 +41,6 @@ unique_name_in_owner = true
 
 [node name="FightingManager" parent="." instance=ExtResource("2_vrsql")]
 unique_name_in_owner = true
-starting_count_down_duration = 5
-fight_duration = 30
-fight_accelerated_duration = 10
-ending_duration = 2
 
 [node name="SpawnManager" parent="." node_paths=PackedStringArray("_spawn_areas") instance=ExtResource("3_vd45s")]
 unique_name_in_owner = true

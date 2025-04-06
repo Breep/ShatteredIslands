@@ -1,9 +1,13 @@
 class_name Character
 extends Entity
 
-# ============================== Export variables ==============================
+# ============================== Export variables (Network) ==============================
 
 @export var owner_player_id: int # ID of the player owner of this character
+@export var fighting_state: GlobalFightingManager.FightingState:
+	get: return _fighting_state
+	set(value):
+		_set_state(value)
 
 # ============================== Public variables ==============================
 
@@ -17,11 +21,7 @@ var _fighting_area: FightingArea
 var _is_dead: bool = false
 var _is_local: bool = false
 
-var _fighting_state: FightingManager.FightingState = FightingManager.FightingState.WAITING_FOR_PLAYERS
-@export var fighting_state: FightingManager.FightingState:
-	get: return _fighting_state
-	set(value):
-		_set_state(value)
+var _fighting_state: GlobalFightingManager.FightingState = GlobalFightingManager.FightingState.UNDEF
 
 # ============================== Local scene nodes ==============================
 
@@ -70,41 +70,45 @@ func _ready() -> void:
 	_character_visual.update_health_bar(stats.health, stats.health_max)
 	_character_visual.update_energy_bar(stats.energy, stats.energy_max)
 	_character_visual.update_mana_bar(stats.mana, stats.mana_max)
-
+	
+	Shared.fighting_managers_ref[battle_id].fight_is_over.connect(_on_fighting_manager_fight_is_over)
+	GlobalFightingManager.state_changed.connect(_on_global_fighting_manager_state_changed)
+	
 	_recursive_propagate_signal(get_parent(), Entity.SIGNAL_NAME_SPAWNED)
 
 # ============================== Fighting States ==============================
-
-func _set_state(new_state: FightingManager.FightingState) -> void:
+   
+func _set_state(new_state: GlobalFightingManager.FightingState) -> void:
 	#print("[", multiplayer.get_unique_id(), "] DEBUG : ", id, " - ", _fighting_state, " - ", new_state)
 	match new_state:
-		FightingManager.FightingState.STARTING:
-			if _fighting_state != FightingManager.FightingState.WAITING_FOR_PLAYERS:
+		GlobalFightingManager.FightingState.STARTING:
+			if _fighting_state != GlobalFightingManager.FightingState.UNDEF:
 				printerr("Character: Can't change to starting phase if i'm not in WaitingForPlayers state")
 				return
-			_fighting_state = FightingManager.FightingState.STARTING
+			_fighting_state = GlobalFightingManager.FightingState.STARTING
 			_init_families_managers()
 			_init_modules()
-			_init_movement_manager(FightingManager.FightingState.STARTING)
+			_init_movement_manager(GlobalFightingManager.FightingState.STARTING)
 			_movement_manager.start()
-		FightingManager.FightingState.FIGHT:
-			if _fighting_state != FightingManager.FightingState.STARTING:
+		GlobalFightingManager.FightingState.FIGHT:
+			if _fighting_state != GlobalFightingManager.FightingState.STARTING:
 				printerr("Character: Can't change to fighting phase if i'm not in starting state")
 				return
-			_fighting_state = FightingManager.FightingState.FIGHT
+			_fighting_state = GlobalFightingManager.FightingState.FIGHT
 			_start_families_managers()
 			_auto_attack_module.start()
-			_movement_manager.set_fighting_state(FightingManager.FightingState.FIGHT)
+			_movement_manager.set_fighting_state(new_state)
 
 # ============================== MovementManager ==============================
 
-func _init_movement_manager(fighting_state: FightingManager.FightingState) -> void:
+func _init_movement_manager(fighting_state: GlobalFightingManager.FightingState) -> void:
 	if _movement_manager == null:
 		printerr("No MovementManager")
 		return
 	
-	_movement_manager.connect("energy_changed", _on_movement_manager_energy_changed)
+	_movement_manager.energy_changed.connect(_on_movement_manager_energy_changed)
 	_movement_manager.init(self, fighting_state)
+
 # ============================== MovementManager ==============================
 
 func _on_movement_manager_energy_changed(energy: float) -> void:
@@ -212,12 +216,16 @@ func _on_interact_module_heal_received(heal_amount: int) -> void:
 		_character_visual.update_health_bar(stats.health, stats.health_max)
 
 
+# ============================== Other callbacks ==============================
+
+func _on_fighting_manager_fight_is_over(_winner_team) -> void:
+	_stop_families_managers()
+	_movement_manager.stop()
+	_auto_attack_module.stop()
 
 
-
-
-
-
+func _on_global_fighting_manager_state_changed(new_state: GlobalFightingManager.FightingState) -> void:
+	fighting_state = new_state
 
 
 

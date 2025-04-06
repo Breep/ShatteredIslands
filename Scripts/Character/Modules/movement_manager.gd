@@ -6,13 +6,13 @@ signal energy_changed(energy: float)
 var _source: Character # Ref to character owner
 var _target_position: Vector3
 var _is_moving: bool = false
-var _fighting_state: FightingManager.FightingState
+var _fighting_state: GlobalFightingManager.FightingState
 
 var _is_stopped: bool = false
 
 @onready var _energy_regen_timer: Timer = %EnergyRegenTimer
 
-func init(source: Character, fighting_state: FightingManager.FightingState) -> void:
+func init(source: Character, fighting_state: GlobalFightingManager.FightingState) -> void:
 	if source == null:
 		printerr("MovementManager: source undef")
 		return
@@ -32,7 +32,7 @@ func stop() -> void:
 	_energy_regen_timer.stop()
 
 
-func set_fighting_state(new_state: FightingManager.FightingState) -> void:
+func set_fighting_state(new_state: GlobalFightingManager.FightingState) -> void:
 	_fighting_state = new_state
 
 
@@ -60,7 +60,7 @@ func _move_toward_target(delta: float):
 	var previous_position = _source.global_position
 	var direction: Vector3 = (_target_position - _source.global_position).normalized()
 	
-	if _fighting_state == FightingManager.FightingState.STARTING:
+	if _fighting_state == GlobalFightingManager.FightingState.STARTING:
 		_source.velocity = direction * _get_move_speed() * 2 * delta
 	else:
 		_source.velocity = direction * _get_move_speed() * delta
@@ -68,7 +68,7 @@ func _move_toward_target(delta: float):
 	_source.move_and_slide()
 	var distance_moved = _source.global_position.distance_to(previous_position)
 	
-	if _fighting_state != FightingManager.FightingState.STARTING:
+	if _fighting_state != GlobalFightingManager.FightingState.STARTING:
 		_source.stats.energy -= distance_moved
 		energy_changed.emit(_source.stats.energy)
 

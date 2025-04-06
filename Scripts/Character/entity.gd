@@ -5,11 +5,11 @@ extends CharacterBody3D
 
 signal dead(self_ref: Entity)
 
-# ============================== Signals ==============================
+# ============================== Export (Network) ==============================
 
-@export var id: int # Multiplayer ID of the entity
-@export var team: int # Team number of the entity
-@export var battle_id: int # The id of the battle the entity is in
+@export var id: int = -1 # Multiplayer ID of the entity
+@export var team: int = -1 # Team number of the entity
+@export var battle_id: int = -1 # The id of the battle the entity is in
 
 # ============================== Enums ==============================
 

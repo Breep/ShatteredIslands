@@ -50,6 +50,7 @@ var health: int:
 	get: return _health
 	set(value):
 		_health = value
+		print("Player: ", self.name, "new health: ", _health)
 		health_changed.emit(self, _health)
 
 signal gold_changed(self_ref: Player, new_gold: int)

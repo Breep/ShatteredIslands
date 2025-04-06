@@ -31,6 +31,7 @@ var _fighting_areas: Array[FightingArea]
 func _ready() -> void:
 	_buying_area.phase_ended.connect(_on_buying_area_phase_ended)
 	_buying_area.all_heroes_picked.connect(_on_buying_area_all_heroes_picked)
+	GlobalFightingManager.all_fights_are_over.connect(_on_global_fighting_manager_all_fights_are_over)
 	
 	
 	_start_game()
@@ -53,6 +54,7 @@ func _start_hero_selection() -> void:
 
 
 func _start_new_round() ->void:
+	print("Game: Start new round")
 	_current_round_battles = await RoundManager.get_current_round_battles()
 	await PlayerManager.sync_point()
 	_start_buying_phase()
@@ -80,12 +82,20 @@ func _start_fighting_phase() -> void:
 	print("[", multiplayer.get_unique_id(), "] Game: Start fights !")
 	for fighting_area in _fighting_areas:
 		fighting_area.start_fight()
+	GlobalFightingManager.start()
 
 # ============================== Callbacks ==============================
 
 func _on_buying_area_phase_ended() -> void:
+	print("Game: BUYING PHASE ENDED")
 	_start_fighting_phase()
 
 
 func _on_buying_area_all_heroes_picked() -> void:
+	print("Game: BUYING AREA ALL HEAROES PICKED")
+	_start_new_round()
+
+
+func _on_global_fighting_manager_all_fights_are_over() -> void:
+	print("Game: ALL FIGHTS ARE OVER")
 	_start_new_round()

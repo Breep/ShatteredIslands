@@ -40,11 +40,12 @@ signal _battles_chosen()
 # [Client only] Is emit when server has answered the local client request
 signal _server_answered()
 
-var battles: Dictionary[int, Battle]
+var battles: Dictionary[int, Battle] = {}
 
 # ============================== Public functions ==============================
 
 func get_current_round_battles() -> Array[Battle]:
+	battles.clear()
 	if multiplayer.is_server():
 		_init_current_round_battles()
 	else:

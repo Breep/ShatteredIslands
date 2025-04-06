@@ -20,12 +20,13 @@ config/features=PackedStringArray("4.4", "Forward Plus")
 GameManager="*res://Scripts/Managers/game_manager.gd"
 MultiplayerDeckManager="*res://Scripts/Managers/multiplayer_deck_manager.gd"
 Utils="*res://Scripts/Lib/utils.gd"
-TooltipManager="*res://Scripts/Managers/tooltip_manager.gd"
-Events="*res://Scripts/Managers/events.gd"
+TooltipManager="*res://Scripts/Managers/Global/tooltip_manager.gd"
+Events="*res://Scripts/Managers/Global/events.gd"
 RoundManager="*res://Scripts/Managers/round_manager.gd"
 CameraManager="*res://Scripts/Managers/camera_manager.gd"
 Shared="*res://Scripts/Lib/shared.gd"
-PlayerManager="*res://Scripts/Managers/player_manager.gd"
+PlayerManager="*res://Scripts/Managers/Global/player_manager.gd"
+GlobalFightingManager="*res://Scripts/Managers/Global/global_fighting_manager.gd"
 
 [display]
 

@@ -11,7 +11,6 @@ var battle_id: int
 var _is_active: bool = false
 
 func _ready() -> void:
-	print("Fighting camera connecting to signal")
 	CameraManager.camera_changed.connect(_on_camera_manager_camera_changed)
 
 

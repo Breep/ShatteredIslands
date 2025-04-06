@@ -35,6 +35,7 @@ poison_popup_spawn = NodePath("PopUpSpawns/PoisonDamage")
 heal_popup_spawn = NodePath("PopUpSpawns/Heal")
 
 [node name="Hero3D" parent="." instance=ExtResource("2_csaua")]
+unique_name_in_owner = true
 
 [node name="TopUI" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.09903, 0)

@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dr8xv1vshmvyq"]
+[gd_scene load_steps=7 format=3 uid="uid://dr8xv1vshmvyq"]
 
 [ext_resource type="Script" uid="uid://83sm3r5y5ofy" path="res://Scripts/BuyingArea/Tavern/TavernCenter/tavern_center.gd" id="1_ha6dk"]
 [ext_resource type="PackedScene" uid="uid://dlqrg6ijwk3i8" path="res://Scenes/BuyingArea/Tavern/TavernCenter/Tables/table_1v1.tscn" id="2_are6m"]
 [ext_resource type="PackedScene" uid="uid://b4av14wu25x12" path="res://Scenes/BuyingArea/Tavern/TavernCenter/Tables/table_2v2.tscn" id="3_cjni8"]
 [ext_resource type="PackedScene" uid="uid://cqskpy33r7xoi" path="res://Scenes/BuyingArea/Tavern/TavernCenter/Tables/table_ffa_solo_3.tscn" id="3_vm0me"]
-[ext_resource type="PackedScene" uid="uid://brxgxjopk41l1" path="res://Scenes/Heroes/AncientTree/model.tscn" id="5_o0gbw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6qeal"]
 transparency = 1
@@ -13,9 +12,8 @@ albedo_color = Color(0.787, 0, 0.617, 0.108)
 [sub_resource type="BoxMesh" id="BoxMesh_r1qdr"]
 size = Vector3(15, 1, 10)
 
-[node name="TavernCenter" type="Node3D" node_paths=PackedStringArray("_hero_selection_spawns")]
+[node name="TavernCenter" type="Node3D"]
 script = ExtResource("1_ha6dk")
-_hero_selection_spawns = [NodePath("HeroSelection/Spawn1"), NodePath("HeroSelection/Spawn2"), NodePath("HeroSelection/Spawn3"), NodePath("HeroSelection/Spawn4"), NodePath("HeroSelection/Spawn5"), NodePath("HeroSelection/Spawn6"), NodePath("HeroSelection/Spawn7"), NodePath("HeroSelection/Spawn8")]
 
 [node name="DebugVisualPlace" type="MeshInstance3D" parent="."]
 material_override = SubResource("StandardMaterial3D_6qeal")
@@ -121,49 +119,3 @@ transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 
 
 [node name="table_2v2_2" parent="PlayersLeft_8/2_2v2" instance=ExtResource("3_cjni8")]
 transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 4, 0, 0)
-
-[node name="HeroSelection" type="Node3D" parent="."]
-unique_name_in_owner = true
-visible = false
-
-[node name="Spawn1" type="Node3D" parent="HeroSelection"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -3)
-
-[node name="Visual" parent="HeroSelection/Spawn1" instance=ExtResource("5_o0gbw")]
-
-[node name="Spawn2" type="Node3D" parent="HeroSelection"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -1)
-
-[node name="Visual" parent="HeroSelection/Spawn2" instance=ExtResource("5_o0gbw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
-
-[node name="Spawn3" type="Node3D" parent="HeroSelection"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1)
-
-[node name="Visual" parent="HeroSelection/Spawn3" instance=ExtResource("5_o0gbw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
-
-[node name="Spawn4" type="Node3D" parent="HeroSelection"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -3)
-
-[node name="Visual" parent="HeroSelection/Spawn4" instance=ExtResource("5_o0gbw")]
-
-[node name="Spawn5" type="Node3D" parent="HeroSelection"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
-
-[node name="Visual" parent="HeroSelection/Spawn5" instance=ExtResource("5_o0gbw")]
-
-[node name="Spawn6" type="Node3D" parent="HeroSelection"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
-
-[node name="Visual" parent="HeroSelection/Spawn6" instance=ExtResource("5_o0gbw")]
-
-[node name="Spawn7" type="Node3D" parent="HeroSelection"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 3)
-
-[node name="Visual" parent="HeroSelection/Spawn7" instance=ExtResource("5_o0gbw")]
-
-[node name="Spawn8" type="Node3D" parent="HeroSelection"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 3)
-
-[node name="Visual" parent="HeroSelection/Spawn8" instance=ExtResource("5_o0gbw")]
