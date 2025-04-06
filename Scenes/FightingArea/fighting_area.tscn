@@ -23,10 +23,6 @@ properties/1/replication_mode = 0
 [node name="FightingArea" type="Node3D"]
 script = ExtResource("1_qx4db")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.883038, -0.260635, 0.390274, 0, 0.831605, 0.555367, -0.469302, -0.49041, 0.734339, 0, 15.6227, 0)
-light_color = Color(0.707351, 0.647416, 0.866633, 1)
-
 [node name="Camera3D" type="Camera3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 35, 49.5331)

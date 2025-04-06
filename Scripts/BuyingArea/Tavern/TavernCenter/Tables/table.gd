@@ -1,7 +1,11 @@
 class_name Table
 extends Node3D
 
-# ============================== Export ==============================
+# ============================== Local nodes ==============================
+
+@onready var entities_node: Node3D = %Entities
+
+# ============================== Export (Local) ==============================
 
 @export var _coin_piles: Array[CoinPile]
 @export var _hero_spawns: Array[Node3D]
@@ -19,12 +23,15 @@ func _ready() -> void:
 # ============================== Public functions ==============================
 
 func connect_to_players(players: Array[Player]) -> void:
+	for child in entities_node.get_children():
+		child.queue_free()
+	
 	if players.size() > _hero_spawns.size():
 		printerr("Table: There are too many players for this table !")
 		return
 	
 	for i in players.size():
 		var hero_model: Hero3D = players[i].hero.model.instantiate()
-		add_child(hero_model)
+		entities_node.add_child(hero_model)
 		hero_model.global_position = _hero_spawns[i].global_position
 		_coin_piles[i].connect_to_player(players[i])

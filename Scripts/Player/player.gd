@@ -110,6 +110,11 @@ func update_from_serialized(serialized_data: Dictionary) -> void:
 	gold = serialized_data[SerializedField.GOLD]
 	is_bot = serialized_data[SerializedField.IS_BOT]
 
+
+func reset_stats() -> void:
+	_apply_all_cards_upgrades()
+
+
 # ============================== Resource base functions ==============================
 
 func _init() -> void:

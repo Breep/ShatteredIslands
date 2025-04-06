@@ -47,3 +47,6 @@ transform = Transform3D(0.900956, 0, 0.433911, 0, 1, 0, -0.433911, 0, 0.900956, 
 transform = Transform3D(0.321093, 0, 0.383274, 0, 0.5, 0, -0.383274, 0, 0.321093, -0.268585, 1.03176, 0.246715)
 
 [node name="TableLong" parent="." instance=ExtResource("3_rul7h")]
+
+[node name="Entities" type="Node3D" parent="."]
+unique_name_in_owner = true
