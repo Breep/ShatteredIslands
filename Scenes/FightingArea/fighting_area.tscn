@@ -1,16 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://c66yw4go2ykwa"]
+[gd_scene load_steps=7 format=3 uid="uid://c66yw4go2ykwa"]
 
 [ext_resource type="Script" uid="uid://cd8u3lm3xa8c4" path="res://Scripts/FightingArea/fighting_area.gd" id="1_qx4db"]
-[ext_resource type="Script" uid="uid://d2fihbt8u628f" path="res://Scripts/FightingArea/camera_fighting_area.gd" id="2_48dto"]
 [ext_resource type="PackedScene" uid="uid://c0l0roxttdtlp" path="res://Scenes/FightingArea/fighting_manager.tscn" id="2_vrsql"]
-[ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://Scenes/Managers/spawn_manager.tscn" id="3_vd45s"]
-[ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Scenes/Character/character.tscn" id="4_3pbvh"]
-[ext_resource type="PackedScene" uid="uid://b3467f7qtons1" path="res://Scenes/FightingArea/Maps/test_map.tscn" id="6_12jqf"]
+[ext_resource type="PackedScene" uid="uid://b3467f7qtons1" path="res://Scenes/FightingArea/Maps/Visuals/nothing_blue_red_test.tscn" id="6_12jqf"]
 [ext_resource type="PackedScene" uid="uid://pyrw8lacvly2" path="res://Scenes/Managers/entity_manager.tscn" id="6_yyfcp"]
 [ext_resource type="PackedScene" uid="uid://bhxhqex1pbh2p" path="res://Scenes/UI/FightingArea/ui_fighting_area.tscn" id="8_hqxx4"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_jo255"]
-size = Vector3(10, 1, 20)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_yyfcp"]
 properties/0/path = NodePath(".:position")
@@ -23,13 +17,6 @@ properties/1/replication_mode = 0
 [node name="FightingArea" type="Node3D"]
 script = ExtResource("1_qx4db")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 35, 49.5331)
-projection = 1
-size = 15.015
-script = ExtResource("2_48dto")
-
 [node name="Map" parent="." instance=ExtResource("6_12jqf")]
 
 [node name="EntityManager" parent="." instance=ExtResource("6_yyfcp")]
@@ -37,23 +24,6 @@ unique_name_in_owner = true
 
 [node name="FightingManager" parent="." instance=ExtResource("2_vrsql")]
 unique_name_in_owner = true
-
-[node name="SpawnManager" parent="." node_paths=PackedStringArray("_spawn_areas") instance=ExtResource("3_vd45s")]
-unique_name_in_owner = true
-character_scene = ExtResource("4_3pbvh")
-_spawn_areas = [NodePath("SpawnTeam1"), NodePath("SpawnTeam2")]
-
-[node name="SpawnTeam1" type="Area3D" parent="SpawnManager" groups=["SPAWN_TEAM_1"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnManager/SpawnTeam1"]
-shape = SubResource("BoxShape3D_jo255")
-
-[node name="SpawnTeam2" type="Area3D" parent="SpawnManager" groups=["SPAWN_TEAM_2"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnManager/SpawnTeam2"]
-shape = SubResource("BoxShape3D_jo255")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_yyfcp")

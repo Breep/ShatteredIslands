@@ -48,6 +48,7 @@ folder_colors={
 SPAWN_TEAM_1=""
 SPAWN_TEAM_2=""
 CHARACTER=""
+SPAWN_TEAM_3=""
 
 [input]
 

@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3 uid="uid://et6t0jv4rmnl"]
+
+[ext_resource type="Script" uid="uid://wpx225alqcqi" path="res://Scripts/FightingArea/Maps/map.gd" id="1_07slc"]
+[ext_resource type="PackedScene" uid="uid://bhx575fxnmb7i" path="res://Scenes/FightingArea/Maps/Visuals/ile_flottante_v_3.tscn" id="1_bis3x"]
+[ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://Scenes/Managers/spawn_manager.tscn" id="2_mrpv3"]
+[ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Scenes/Character/character.tscn" id="3_07slc"]
+[ext_resource type="Script" uid="uid://d2fihbt8u628f" path="res://Scripts/FightingArea/camera_fighting_area.gd" id="3_k1k4b"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k1k4b"]
+size = Vector3(6.12793, 1, 5.34473)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_07slc"]
+size = Vector3(6.12793, 1, 4.49023)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fbwxg"]
+size = Vector3(6.12793, 1, 5.34473)
+
+[node name="MapTelescopeIsland" type="Node3D"]
+script = ExtResource("1_07slc")
+
+[node name="ile_flottante_V3" parent="." instance=ExtResource("1_bis3x")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.070169, 0.52786, -0.846428, -0.0436101, 0.849331, 0.526056, 0.996582, 1.25024e-09, 0.0826168, -17.7661, 27.424, 0.755738)
+projection = 1
+size = 20.205
+script = ExtResource("3_k1k4b")
+
+[node name="SpawnManager" parent="." node_paths=PackedStringArray("_spawn_areas") instance=ExtResource("2_mrpv3")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.025, 12.3937, 0)
+character_scene = ExtResource("3_07slc")
+_spawn_areas = [NodePath("SpawnTeam1"), NodePath("SpawnTeam2"), NodePath("SpawnTeam3")]
+
+[node name="SpawnTeam1" type="Area3D" parent="SpawnManager" groups=["SPAWN_TEAM_1"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.00819, 0, -7.51096)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnManager/SpawnTeam1"]
+shape = SubResource("BoxShape3D_k1k4b")
+
+[node name="SpawnTeam2" type="Area3D" parent="SpawnManager" groups=["SPAWN_TEAM_2"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.44613, 0, -0.933909)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnManager/SpawnTeam2"]
+shape = SubResource("BoxShape3D_07slc")
+
+[node name="SpawnTeam3" type="Area3D" parent="SpawnManager" groups=["SPAWN_TEAM_3"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.49806, 0, 7.22629)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnManager/SpawnTeam3"]
+shape = SubResource("BoxShape3D_fbwxg")

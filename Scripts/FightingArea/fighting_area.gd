@@ -5,12 +5,6 @@ extends Node3D
 
 signal map_clicked(position: Vector3)
 
-# ============================== Constants ==============================
-
-const MAPS = {
-	Battle.BattleType.VS_1: preload("res://Scenes/FightingArea/Maps/test_map.tscn")
-}
-
 # ============================== Export variables ==============================
 
 @export var battle_id: int
@@ -20,20 +14,24 @@ const MAPS = {
 var _battle: Battle # Battle of the fighting area
 var _characters: Array[Character] # Array of all characters in the fight scene
 
+var _spawn_manager: SpawnManager # Inside the map
+var _camera: CameraFightingArea
+var _map: Map
+
 # ============================== Local nodes ==============================
 
-@onready var _spawn_manager: SpawnManager = %SpawnManager
 @onready var _fighting_manager: FightingManager = %FightingManager
 @onready var _entity_manager: EntityManager = %EntityManager
-@onready var _map: Node3D
 
 #@onready var _ui_countdown: UICountdown = %Countdown
-@onready var _camera: CameraFightingArea = %Camera3D
 @onready var _ui_fighting_area: UIFightingArea = %UIFightingArea
 
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
+	_battle = RoundManager.battles[battle_id]
+	_load_map()
+	
 	if _spawn_manager == null:
 		printerr("FightingArea: No SpawnManager")
 		return
@@ -41,8 +39,6 @@ func _ready() -> void:
 	if _fighting_manager == null:
 		printerr("FightingArea: No FightingManager")
 		return
-	
-	_battle = RoundManager.battles[battle_id]
 	
 	_camera.battle_id = battle_id
 	_spawn_manager.battle_id = battle_id
@@ -94,6 +90,14 @@ func _delete_self_in_shared() -> void:
 	Shared.spawn_managers_ref.erase(battle_id)
 	Shared.entity_managers_ref.erase(battle_id)
 	Shared.fighting_managers_ref.erase(battle_id)
+
+
+func _load_map() -> void:
+	_map = Shared.MAPS[_battle.battle_type].instantiate()
+	add_child(_map)
+	_map.name = "MAP_" + _battle.name
+	_spawn_manager = _map.spawn_manager
+	_camera = _map.camera
 
 # ============================== Callbacks ==============================
 
