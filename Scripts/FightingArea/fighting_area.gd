@@ -71,8 +71,7 @@ func start_fight() -> void:
 		printerr("FightingArea: Can't start SpawnManager")
 		return
 	
-	_fighting_manager.state_changed.connect(_on_fighting_manager_state_changed)
-	_fighting_manager.fight_is_over.connect(_on_fighting_manager_fight_is_over)
+	_fighting_manager.fight_is_over.connect(_on_fighting_manager_fight_is_over, CONNECT_ONE_SHOT)
 	_fighting_manager.start()
 	
 	_net_start_fight.rpc()
@@ -83,30 +82,20 @@ func _net_start_fight() -> void:
 
 # ============================== Private functions ==============================
 
-func _set_characters_state(fighting_state: FightingManager.FightingState) -> void:
-	for character in _characters:
-		character.fighting_state = fighting_state
-
-
 func _register_self_in_shared() -> void:
 	Shared.fighting_areas_ref[battle_id] = self
 	Shared.spawn_managers_ref[battle_id] = _spawn_manager
 	Shared.entity_managers_ref[battle_id] = _entity_manager
+	Shared.fighting_managers_ref[battle_id] = _fighting_manager
 
 
 func _delete_self_in_shared() -> void:
 	Shared.fighting_areas_ref.erase(battle_id)
 	Shared.spawn_managers_ref.erase(battle_id)
 	Shared.entity_managers_ref.erase(battle_id)
+	Shared.fighting_managers_ref.erase(battle_id)
 
 # ============================== Callbacks ==============================
-
-func _on_fighting_manager_state_changed(state: FightingManager.FightingState) -> void:
-	print("FightingArea: _on_fighting_manager_state_changed() ", state)
-	_set_characters_state(state)
-	#if state == FightingManager.FightingState.STARTING:
-		#_ui_countdown.start(5, "FIGHT") # TODO remonter l'info de la durée du countdown depuis le fightmanager
-
 
 func _on_fighting_manager_fight_is_over(winner_team: int) -> void:
 	var winner_players: Array[Player]
@@ -114,6 +103,7 @@ func _on_fighting_manager_fight_is_over(winner_team: int) -> void:
 		if player.team == winner_team:
 			winner_players.append(player)
 		else: # TODO calculate damage
+			print("DEBUG player ", player.name, " takes 5 damage")
 			player.health -= 5
 	
 	var winner_names: String = ""
@@ -121,7 +111,7 @@ func _on_fighting_manager_fight_is_over(winner_team: int) -> void:
 		winner_names += winner.name + " "
 	
 	print("FightingArea", battle_id, ": Congratulations to ", winner_names, " !")
-	
+	queue_free()
 	# Calculate damage (=average of the winners damage)
 
 

@@ -19,10 +19,16 @@ extends Node3D
 
 var _hero_model: Node3D
 
+# ============================== Node base functions ==============================
+
+func _ready() -> void:
+	%Hero3D.queue_free()
+
 # ============================== Public ==============================
 
 func load_hero_model(hero: Hero) -> void:
 	_hero_model = hero.model.instantiate()
+	_hero_model.name = "MODEL_" + hero.name
 	add_child(_hero_model)
 
 

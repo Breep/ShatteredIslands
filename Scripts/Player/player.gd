@@ -28,55 +28,48 @@ var ready: bool # If this player is ready to continue the game flow (Used to syn
 var character_stats: CharacterStats # Stats of the player's character
 var deck: PlayerDeck
 
-signal hero_changed(new_hero : Hero)
+signal hero_changed(self_ref: Player, new_hero : Hero)
 var _hero: Hero
 var hero: Hero:
 	get: return _hero
 	set(value):
 		_hero = value
-		hero_changed.emit(_hero)
+		hero_changed.emit(self, _hero)
 
-signal max_health_changed(new_max_health: int)
+signal max_health_changed(self_ref: Player, new_max_health: int)
 var _max_health: int
 var max_health: int:
 	get: return _max_health
 	set(value):
 		_max_health = value
-		max_health_changed.emit(_max_health)
+		max_health_changed.emit(self, _max_health)
 
-signal health_changed(new_health: int)
+signal health_changed(self_ref: Player, new_health: int)
 var _health: int
 var health: int:
 	get: return _health
 	set(value):
 		_health = value
-		health_changed.emit(_health)
+		print("Player: ", self.name, "new health: ", _health)
+		health_changed.emit(self, _health)
 
-signal gold_changed(new_gold: int)
+signal gold_changed(self_ref: Player, new_gold: int)
 var _gold: int
 var gold: int:
 	get: return _gold
 	set(value):
 		_gold = value
-		gold_changed.emit(_gold)
+		gold_changed.emit(self, _gold)
 
-signal damage_changed(new_damage: int)
+signal damage_changed(self_ref: Player, new_damage: int)
 var _damage: int
 var damage: int:
 	get: return _damage
 	set(value):
 		_damage = value
-		damage_changed.emit(_damage)
+		damage_changed.emit(self, _damage)
 
 # ============================== Static functions ==============================
-
-# Get the player conresponding of the serialized_data id in the GameManager
-# Update some values inside the player TODO: C'est moche que cette fonciton modifie des valeurs de player, il faut en avoir une autre à côté qui fait ça
-static func get_from_serialized(serialized_data: Dictionary) -> Player:
-	var player = PlayerManager.players[serialized_data[SerializedField.ID]]
-	player.team = serialized_data[SerializedField.TEAM]
-	return player
-
 
 static func new_from_serialized(serialized_data: Dictionary) -> Player:
 	var player := Player.new()
@@ -105,6 +98,22 @@ func serialized() -> Dictionary:
 		SerializedField.IS_BOT: is_bot
 	}
 	return serialized_version
+
+
+func update_from_serialized(serialized_data: Dictionary) -> void:
+	name = serialized_data[SerializedField.NAME]
+	team = serialized_data[SerializedField.TEAM]
+	health = serialized_data[SerializedField.HEALTH]
+	max_health = serialized_data[SerializedField.MAX_HEALTH]
+	damage = serialized_data[SerializedField.DAMAGE]
+	#hero = Shared.HEROES[serialized_data[SerializedField.HERO]]
+	gold = serialized_data[SerializedField.GOLD]
+	is_bot = serialized_data[SerializedField.IS_BOT]
+
+
+func reset_stats() -> void:
+	_apply_all_cards_upgrades()
+
 
 # ============================== Resource base functions ==============================
 
