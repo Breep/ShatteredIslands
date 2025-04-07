@@ -17,6 +17,7 @@ func _ready() -> void:
 
 # ============================== Public functions ==============================
 
+# TODO Rework cette monstruosité: l'idée sera d'avoir des spawn de tables, de définir si une table a besoin d'un espace plus grand que d'autres etc etc
 func put_tables_according_to_battles(battles: Array[Battle]) -> void:
 	Utils.recursive_hide(self)
 	
@@ -54,6 +55,22 @@ func put_tables_according_to_battles(battles: Array[Battle]) -> void:
 			elif battle_types_number[Battle.BattleType.VS_2] == 2:
 				player_left_node = %"PlayersLeft_8"
 				tables_node = %"2_2v2"
+			elif battle_types_number[Battle.BattleType.VS_1] == 1 and battle_types_number[Battle.BattleType.VS_2] == 1:
+				player_left_node = %"PlayersLeft_6"
+				tables_node = %"1_2v2_1_1v1"
+			elif battle_types_number[Battle.BattleType.VS_2] == 1 and battle_types_number[Battle.BattleType.FFA_SOLO_3] == 1:
+				player_left_node = %"PlayersLeft_7"
+				tables_node = %"1_2v2_1_ffa3"
+			elif battle_types_number[Battle.BattleType.VS_1] == 1 and battle_types_number[Battle.BattleType.FFA_SOLO_3] == 1:
+				player_left_node = %"PlayersLeft_5"
+				tables_node = %"1_1v1_1_ffa3"
+		3:
+			if battle_types_number[Battle.BattleType.VS_1] == 3:
+				player_left_node = %"PlayersLeft_6"
+				tables_node = %"3_1v1"
+			elif battle_types_number[Battle.BattleType.VS_1] == 2 and battle_types_number[Battle.BattleType.FFA_SOLO_3] == 1:
+				player_left_node = %"PlayersLeft_7"
+				tables_node = %"2_1v1_1_ffa3"
 		4:
 			if battle_types_number[Battle.BattleType.VS_1] == 4:
 				player_left_node = %"PlayersLeft_8"

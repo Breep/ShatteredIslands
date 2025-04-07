@@ -42,7 +42,6 @@ unique_name_in_owner = true
 
 [node name="PlayersLeft_4" type="Node3D" parent="."]
 unique_name_in_owner = true
-visible = false
 
 [node name="2_1v1" type="Node3D" parent="PlayersLeft_4"]
 unique_name_in_owner = true
@@ -56,41 +55,83 @@ battle_id = 1
 
 [node name="1_2v2" type="Node3D" parent="PlayersLeft_4"]
 unique_name_in_owner = true
+visible = false
 
 [node name="table_2v2" parent="PlayersLeft_4/1_2v2" instance=ExtResource("3_cjni8")]
 
 [node name="PlayersLeft_5" type="Node3D" parent="."]
+unique_name_in_owner = true
 visible = false
 
-[node name="Table_1v1" parent="PlayersLeft_5" instance=ExtResource("2_are6m")]
-transform = Transform3D(0.807836, 0, 0.589408, 0, 1, 0, -0.589408, 0, 0.807836, 3.35443, -4.76837e-07, -1.67029)
+[node name="1_1v1_1_ffa3" type="Node3D" parent="PlayersLeft_5"]
+unique_name_in_owner = true
+
+[node name="Table_1v1" parent="PlayersLeft_5/1_1v1_1_ffa3" instance=ExtResource("2_are6m")]
+transform = Transform3D(0.968235, 0, -0.250042, 0, 1, 0, 0.250042, 0, 0.968235, -3.24403, 0, -0.33039)
+battle_id = 1
+
+[node name="Table_ffa3" parent="PlayersLeft_5/1_1v1_1_ffa3" instance=ExtResource("3_vm0me")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
 
 [node name="PlayersLeft_6" type="Node3D" parent="."]
+unique_name_in_owner = true
 visible = false
 
-[node name="Table_1v1_1" parent="PlayersLeft_6" instance=ExtResource("2_are6m")]
-transform = Transform3D(0.726431, 0, 0.68724, 0, 1, 0, -0.68724, 0, 0.726431, 1.95488, 0, 3.00608)
+[node name="3_1v1" type="Node3D" parent="PlayersLeft_6"]
+unique_name_in_owner = true
+visible = false
 
-[node name="Table_1v1_2" parent="PlayersLeft_6" instance=ExtResource("2_are6m")]
-transform = Transform3D(-0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, -3.45064, 4.76837e-07, 0.0437185)
+[node name="Table_1v1_1" parent="PlayersLeft_6/3_1v1" instance=ExtResource("2_are6m")]
+transform = Transform3D(0.963327, 0, -0.268332, 0, 1, 0, 0.268332, 0, 0.963327, -3.70871, 0, -0.13845)
+
+[node name="Table_1v1_2" parent="PlayersLeft_6/3_1v1" instance=ExtResource("2_are6m")]
+transform = Transform3D(0.49212, 0, 0.870528, 0, 1, 0, -0.870528, 0, 0.49212, 1.75597, 0, 2.66961)
 battle_id = 1
 
-[node name="Table_1v1_3" parent="PlayersLeft_6" instance=ExtResource("2_are6m")]
-transform = Transform3D(0.581342, 0, 0.813659, 0, 1, 0, -0.813659, 0, 0.581342, 4.06033, 0, -2.27696)
+[node name="Table_1v1_3" parent="PlayersLeft_6/3_1v1" instance=ExtResource("2_are6m")]
+transform = Transform3D(-0.218723, 0, 0.975787, 0, 1, 0, -0.975787, 0, -0.218723, 3.21923, 0, -2.54201)
 battle_id = 2
 
-[node name="PlayersLeft_7" type="Node3D" parent="."]
+[node name="1_2v2_1_1v1" type="Node3D" parent="PlayersLeft_6"]
+unique_name_in_owner = true
 visible = false
 
-[node name="Table_1v1_1" parent="PlayersLeft_7" instance=ExtResource("2_are6m")]
-transform = Transform3D(0.56035, 0, 0.828256, 0, 1, 0, -0.828256, 0, 0.56035, -2.33934, 0, -2.25879)
+[node name="table_2v2" parent="PlayersLeft_6/1_2v2_1_1v1" instance=ExtResource("3_cjni8")]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -3, 0, -1)
 
-[node name="Table_1v1_2" parent="PlayersLeft_7" instance=ExtResource("2_are6m")]
-transform = Transform3D(0.625992, 0, 0.77983, 0, 1, 0, -0.77983, 0, 0.625992, -3.09912, -4.76837e-07, 2.35722)
+[node name="Table_1v1" parent="PlayersLeft_6/1_2v2_1_1v1" instance=ExtResource("2_are6m")]
+transform = Transform3D(-0.249281, 0, 0.968432, 0, 1, 0, -0.968432, 0, -0.249281, 3.29129, 0, 0.86155)
+
+[node name="PlayersLeft_7" type="Node3D" parent="."]
+unique_name_in_owner = true
+visible = false
+
+[node name="2_1v1_1_ffa3" type="Node3D" parent="PlayersLeft_7"]
+unique_name_in_owner = true
+visible = false
+
+[node name="Table_1v1_1" parent="PlayersLeft_7/2_1v1_1_ffa3" instance=ExtResource("2_are6m")]
+transform = Transform3D(-0.249281, 0, 0.968432, 0, 1, 0, -0.968432, 0, -0.249281, -3.70871, 0, -1.13845)
+
+[node name="Table_1v1_2" parent="PlayersLeft_7/2_1v1_1_ffa3" instance=ExtResource("2_are6m")]
+transform = Transform3D(0.968235, 0, -0.250042, 0, 1, 0, 0.250042, 0, 0.968235, 0.75597, 0, 2.66961)
 battle_id = 1
+
+[node name="Table_ffa3" parent="PlayersLeft_7/2_1v1_1_ffa3" instance=ExtResource("3_vm0me")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -2)
+
+[node name="1_2v2_1_ffa3" type="Node3D" parent="PlayersLeft_7"]
+unique_name_in_owner = true
+
+[node name="table_2v2_1" parent="PlayersLeft_7/1_2v2_1_ffa3" instance=ExtResource("3_cjni8")]
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -3, 0, -1)
+
+[node name="Table_ffa3" parent="PlayersLeft_7/1_2v2_1_ffa3" instance=ExtResource("3_vm0me")]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 3, 0, 1)
 
 [node name="PlayersLeft_8" type="Node3D" parent="."]
 unique_name_in_owner = true
+visible = false
 
 [node name="4_1v1" type="Node3D" parent="PlayersLeft_8"]
 unique_name_in_owner = true
