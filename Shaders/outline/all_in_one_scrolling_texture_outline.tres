@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://bqjlc8pi3afii"]
 
-[ext_resource type="Shader" path="res://Shaders/outline/all_in_one_blotchy_outline.gdshader" id="1_m0cmp"]
+[ext_resource type="Shader" uid="uid://b576bm0t7sevt" path="res://Shaders/outline/all_in_one_blotchy_outline.gdshader" id="1_m0cmp"]
 [ext_resource type="Texture2D" uid="uid://sggpohfwseho" path="res://Data/Texture/2D/T_VFX_CloudNoise_Tiled.png" id="2_mc8gj"]
 
 [sub_resource type="Gradient" id="Gradient_bkid2"]
@@ -14,6 +14,7 @@ noise = SubResource("FastNoiseLite_pubh2")
 
 [resource]
 shader = ExtResource("1_m0cmp")
+shader_parameter/scrollingTexture = ExtResource("2_mc8gj")
 shader_parameter/textureScale = Vector2(1, 1)
 shader_parameter/angle = 45.0
 shader_parameter/textureSpeed = 0.1
@@ -22,7 +23,6 @@ shader_parameter/maxLineWidth = 18.333
 shader_parameter/minLineWidth = 13.334
 shader_parameter/speed = 2.979
 shader_parameter/blockSize = 20.0
+shader_parameter/color = SubResource("NoiseTexture2D_htm2m")
 shader_parameter/gradientResolution = 17
 shader_parameter/tolerance = 0.0
-shader_parameter/scrollingTexture = ExtResource("2_mc8gj")
-shader_parameter/color = SubResource("NoiseTexture2D_htm2m")
