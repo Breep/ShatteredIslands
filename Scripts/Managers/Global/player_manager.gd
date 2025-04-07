@@ -79,13 +79,14 @@ func add_bot() -> void:
 signal __all_players_syncronized()
 var __number_of_players_syncronized: int
 func sync_point() -> void:
-	print("       DEBUG sync_point() ", multiplayer.get_peers().size())
+	print("[", multiplayer.get_unique_id(), "] sync_point() ", multiplayer.get_peers().size())
 	if not multiplayer.is_server():
 		_client_ready.rpc_id(1, multiplayer.get_unique_id())
 	elif multiplayer.is_server() and multiplayer.get_peers().size() == 0:
 		return
 	
 	await __all_players_syncronized
+	print("[", multiplayer.get_unique_id(), "] sync_point() SYNC !")
 	__number_of_players_syncronized = 0
 
 

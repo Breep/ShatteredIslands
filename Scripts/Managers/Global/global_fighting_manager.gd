@@ -73,6 +73,14 @@ func register_fighting_manager(fighting_manager: FightingManager):
 	_fighting_managers.append(fighting_manager)
 	fighting_manager.fight_is_over.connect(_fighting_manager_fighting_is_over, CONNECT_ONE_SHOT)
 
+# ============================== Private functions ==============================
+
+@rpc("authority", "call_local")
+func _finish_all_fights() -> void:
+	Engine.time_scale = 1
+	timer.stop()
+	all_fights_are_over.emit()
+
 # ============================== Callbacks ==============================
 
 func _on_timer_timeout() -> void:
@@ -95,9 +103,7 @@ func _on_timer_timeout() -> void:
 
 func _on_state_changed(new_state) -> void:
 	if new_state == FightingState.FINISHED:
-		Engine.time_scale = 1
-		timer.stop()
-		all_fights_are_over.emit()
+		_finish_all_fights.rpc()
 
 
 func _fighting_manager_fighting_is_over(_winning_team) -> void:
