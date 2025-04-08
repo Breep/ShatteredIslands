@@ -24,9 +24,11 @@ var is_bot: bool # If the player is a fake player (a bot controlled by the serve
 
 var ready: bool # If this player is ready to continue the game flow (Used to sync players with server)
 
-
 var character_stats: CharacterStats # Stats of the player's character
 var deck: PlayerDeck
+
+var win_streak: int
+var health_lost_since_last_round: int
 
 signal hero_changed(self_ref: Player, new_hero : Hero)
 var _hero: Hero
@@ -50,7 +52,6 @@ var health: int:
 	get: return _health
 	set(value):
 		_health = value
-		print("Player: ", self.name, "new health: ", _health)
 		health_changed.emit(self, _health)
 
 signal gold_changed(self_ref: Player, new_gold: int)

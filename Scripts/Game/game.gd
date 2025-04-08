@@ -58,6 +58,7 @@ func _start_new_round() ->void:
 	_fighting_areas.clear()
 	_current_round_battles = await RoundManager.get_current_round_battles()
 	await PlayerManager.sync_point()
+	RoundManager.starting_round_player_changes()
 	_start_buying_phase()
 
 
@@ -99,6 +100,7 @@ func _on_buying_area_all_heroes_picked() -> void:
 
 func _on_global_fighting_manager_all_fights_are_over() -> void:
 	print("Game: ALL FIGHTS ARE OVER")
+	await RoundManager.ending_round_player_changes()
 	await get_tree().create_timer(1.0).timeout
 	await PlayerManager.sync_point()
 	_start_new_round()

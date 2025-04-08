@@ -101,20 +101,8 @@ func _load_map() -> void:
 
 # ============================== Callbacks ==============================
 
-func _on_fighting_manager_fight_is_over(winner_team: int) -> void:
-	var winner_players: Array[Player]
-	for player in _battle.players:
-		if player.team == winner_team:
-			winner_players.append(player)
-		else: # TODO calculate damage
-			print("DEBUG player ", player.name, " takes 5 damage")
-			player.health -= 5
-	
-	var winner_names: String = ""
-	for winner in winner_players:
-		winner_names += winner.name + " "
-	
-	print("FightingArea", battle_id, ": Congratulations to ", winner_names, " !")
+func _on_fighting_manager_fight_is_over(winner_teams_order: Array[int]) -> void:
+	RoundManager.register_battle_result(battle_id, winner_teams_order)
 	queue_free()
 	# Calculate damage (=average of the winners damage)
 

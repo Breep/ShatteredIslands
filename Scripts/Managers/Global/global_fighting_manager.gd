@@ -22,9 +22,9 @@ enum FightingState {
 
 # ============================== Fighting phase duration ==============================
 
-const STARTING_DURATION: int = 5 # in seconds
-const FIGHT_DURATION: int = 30 # in seconds
-const FIGHT_ACCELERATED_DURATION: int = 10 # in seconds
+const STARTING_DURATION: int = 1 # in seconds
+const FIGHT_DURATION: int = 5 # in seconds
+const FIGHT_ACCELERATED_DURATION: int = 5 # in seconds
 
 # ============================== Public variables ==============================
 
@@ -37,8 +37,9 @@ var fighting_state: FightingState:
 	get:
 		return _fighting_state
 	set(value):
-		_fighting_state = value
-		state_changed.emit(value)
+		if _fighting_state != value:
+			_fighting_state = value
+			state_changed.emit(value)
 
 var _fighting_managers: Array[FightingManager]
 var _fights_over: int = 0
