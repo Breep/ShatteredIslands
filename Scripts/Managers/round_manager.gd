@@ -95,6 +95,11 @@ func starting_round_player_changes() -> void:
 		var player_win_streak: int = clamp(player.win_streak, 0, game_rules.gold_earned_on_win_streak.size() - 1)
 		var gold_increase_win_streak: int = game_rules.gold_earned_on_win_streak[player_win_streak]
 		player.gold += game_rules.gold_earned_per_round + gold_increase_economy + gold_increase_hp_lost + gold_increase_win_streak
+		
+		var damage_min: int = 1 + current_round/game_rules.damage_min_round_divider
+		var damage_mod_win_lose: int = player.current_damage_win_lose_diff * game_rules.damage_on_win_lose_modifier
+		var damage_mod_lvl: int = 0 # TODO Add player level and xp
+		player.damage = clampi(damage_min + damage_mod_win_lose + damage_mod_lvl, damage_min, 30)
 
 
 # [Server Only]
@@ -115,10 +120,18 @@ func ending_round_player_changes() -> void:
 		for winner_ in winners:
 			var winner: Player = winner_
 			winner.win_streak += 1
+			winner.total_win_number += 1
+			winner.current_damage_win_lose_diff = clampi(winner.current_damage_win_lose_diff + 1,
+														-GameManager.game_rules.damage_max_diff_win_lose,
+														GameManager.game_rules.damage_max_diff_win_lose)
 			winner_team_damage += winner.damage
 		for looser_ in loosers:
 			var looser: Player = looser_
 			looser.win_streak = 0
+			looser.total_lose_number += 1
+			looser.current_damage_win_lose_diff = clampi(looser.current_damage_win_lose_diff - 1,
+														-GameManager.game_rules.damage_max_diff_win_lose,
+														GameManager.game_rules.damage_max_diff_win_lose)
 			print(looser.name, " takes ", winner_team_damage, "/", winners.size(), " damage !")
 			looser.health -= winner_team_damage / winners.size()
 

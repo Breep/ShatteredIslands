@@ -10,6 +10,7 @@ var player: Player
 @onready var _player_name_label: Label = %PlayerNameLabel
 @onready var _hero_portrait: TextureRect = %HeroPortrait
 @onready var _ui_player_life: UIPlayerLife = %PlayerLife
+@onready var _damage_label: Label = %DamageLabel
 
 # ============================== Public functions ==============================
 
@@ -33,8 +34,14 @@ func _setup_local_nodes() -> void:
 	_ui_player_life.connect_to_player_health_signal(player.health_changed)
 	_ui_player_life.connect_to_player_max_health_signal(player.max_health_changed)
 	_ui_player_life.update_player_life(player.health, player.max_health)
+	player.damage_changed.connect(_on_player_damage_changed)
+	_on_player_damage_changed(player, player.damage)
 
 # ============================== Callbacks ==============================
 
 func _on_player_hero_changed(_player: Player, hero: Hero) -> void:
 	_hero_portrait.texture = player.hero.portrait
+
+
+func _on_player_damage_changed(_player: Player, damage: int) -> void:
+	_damage_label.text = str(damage)

@@ -29,6 +29,9 @@ var deck: PlayerDeck
 
 var win_streak: int
 var health_lost_since_last_round: int
+var total_win_number: int
+var total_lose_number: int
+var current_damage_win_lose_diff: int # <win>-<lose> but can't go over what the rules indicate (used for damage modifier)
 
 signal hero_changed(self_ref: Player, new_hero : Hero)
 var _hero: Hero

@@ -10,7 +10,7 @@ extends Resource
 @export var epic_price : int
 
 # Player gold
-@export var gold_earned_on_win_streak: Array[int] # 0 50 60 70 80 Each consecutive win increase the gold earn after a win (Loose = 0, First win = 50, Second = 60, etc...)
+@export var gold_earned_on_win_streak: Array[int] # 0 50 60 70 80 Each consecutive win increase the gold earn after a win (Lose = 0, First win = 50, Second = 60, etc...)
 @export var gold_earned_per_hp_lost: int # 10
 @export var gold_earned_per_100_gold_stack: int # 10
 @export var gold_stack_max: int # 500
@@ -21,8 +21,8 @@ extends Resource
 @export var player_starting_health: int # Health of the player at the start of the game
 
 # Player damage:
-# <minimum damage (cf:round_modifer> + <lvl_mod (1 2 3 5 8)> + <victory_mod (+-3)> + <skill_mod> + <event_mod>
-@export var damage_increase_on_win_modifier: int # 1
-@export var damage_decrease_on_lose_modifier: int # 1
-@export var damage_level_modifier: Array[int] # Player damage increased
-@export var damage_round_modifier_threshold: int # round_modifier = 1 + current_round_number/damage_round_modifier_threshold
+# <minimum damage (cf:round_modifer> + <lvl_mod (1 2 3 5 8)> + <victory_mod (+-2)> + <skill_mod> + <event_mod>
+@export var damage_on_win_lose_modifier: int # (<win> - <lose>) * <this modifier> = the damage modifier
+@export var damage_max_diff_win_lose: int # if |<win> - <lose>| == damage_max_diff_win_lose then stop counting win lose diff for damage modifier
+@export var damage_player_level_modifier: Array[int] # Player damage increased by his hero level
+@export var damage_min_round_divider: int # round_modifier = 1 + current_round_id/damage_min_round_divider
