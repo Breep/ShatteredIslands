@@ -154,6 +154,7 @@ func _add_player(player_name: String, id: int, is_bot: bool, serialized_player: 
 		new_player.id = id
 		new_player.is_bot = is_bot
 		new_player.damage = 1
+		new_player.lvl = 1
 		new_player.gold = GameManager.game_rules.gold_starting_game
 		new_player.health = GameManager.game_rules.player_starting_health
 		_connect_to_signals(new_player)
@@ -181,6 +182,8 @@ func _connect_to_signals(player: Player) -> void:
 	player.damage_changed.connect(_on_player_damage_changed)
 	player.hero_changed.connect(_on_player_hero_changed)
 	player.gold_changed.connect(_on_player_gold_changed)
+	player.xp_changed.connect(_on_player_xp_changed)
+	player.lvl_changed.connect(_on_player_lvl_changed)
 
 
 func _on_player_health_changed(player: Player, _unused) -> void:
@@ -196,6 +199,12 @@ func _on_player_hero_changed(player: Player, _unused) -> void:
 	_sync_player.rpc(player.serialized())
 
 func _on_player_gold_changed(player: Player, _unused) -> void:
+	_sync_player.rpc(player.serialized())
+
+func _on_player_xp_changed(player: Player, _unused) -> void:
+	_sync_player.rpc(player.serialized())
+
+func _on_player_lvl_changed(player: Player, _unused) -> void:
 	_sync_player.rpc(player.serialized())
 
 @rpc("authority", "call_remote")

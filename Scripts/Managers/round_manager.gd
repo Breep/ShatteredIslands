@@ -84,8 +84,9 @@ func register_battle_result(battle_id: int, winner_teams_order: Array[int]) -> v
 # [Server Only]
 # Handle all changes affecting players at start of round: gold gain, change of damage, etc
 func starting_round_player_changes() -> void:
-	if current_round < 2 or not multiplayer.is_server():
+	if not multiplayer.is_server() or current_round < 2:
 		return
+	
 	var game_rules: GameRules = GameManager.game_rules
 	for player_ in PlayerManager.players.values():
 		var player: Player = player_
@@ -96,10 +97,12 @@ func starting_round_player_changes() -> void:
 		var gold_increase_win_streak: int = game_rules.gold_earned_on_win_streak[player_win_streak]
 		player.gold += game_rules.gold_earned_per_round + gold_increase_economy + gold_increase_hp_lost + gold_increase_win_streak
 		
-		var damage_min: int = 1 + current_round/game_rules.damage_min_round_divider
+		var damage_mod_lvl: int = game_rules.damage_player_level_modifier[player.lvl]
+		var damage_min: int = 1 + current_round/game_rules.damage_min_round_divider + damage_mod_lvl
 		var damage_mod_win_lose: int = player.current_damage_win_lose_diff * game_rules.damage_on_win_lose_modifier
-		var damage_mod_lvl: int = 0 # TODO Add player level and xp
-		player.damage = clampi(damage_min + damage_mod_win_lose + damage_mod_lvl, damage_min, 30)
+		player.damage = clampi(damage_min + damage_mod_win_lose, damage_min, 30)
+		
+		player.xp += game_rules.xp_per_round
 
 
 # [Server Only]
@@ -132,7 +135,6 @@ func ending_round_player_changes() -> void:
 			looser.current_damage_win_lose_diff = clampi(looser.current_damage_win_lose_diff - 1,
 														-GameManager.game_rules.damage_max_diff_win_lose,
 														GameManager.game_rules.damage_max_diff_win_lose)
-			print(looser.name, " takes ", winner_team_damage, "/", winners.size(), " damage !")
 			looser.health -= winner_team_damage / winners.size()
 
 # ============================== RPC - Ask/Answer current round battle ==============================

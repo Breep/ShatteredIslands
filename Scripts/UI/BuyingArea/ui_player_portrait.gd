@@ -11,6 +11,7 @@ var player: Player
 @onready var _hero_portrait: TextureRect = %HeroPortrait
 @onready var _ui_player_life: UIPlayerLife = %PlayerLife
 @onready var _damage_label: Label = %DamageLabel
+@onready var _level_label: Label = %LevelLabel
 
 # ============================== Public functions ==============================
 
@@ -36,6 +37,8 @@ func _setup_local_nodes() -> void:
 	_ui_player_life.update_player_life(player.health, player.max_health)
 	player.damage_changed.connect(_on_player_damage_changed)
 	_on_player_damage_changed(player, player.damage)
+	player.lvl_changed.connect(_on_player_lvl_changed)
+	_on_player_lvl_changed(player, player.lvl)
 
 # ============================== Callbacks ==============================
 
@@ -45,3 +48,7 @@ func _on_player_hero_changed(_player: Player, hero: Hero) -> void:
 
 func _on_player_damage_changed(_player: Player, damage: int) -> void:
 	_damage_label.text = str(damage)
+
+
+func _on_player_lvl_changed(_player: Player, lvl: int) -> void:
+	_level_label.text = str(lvl)

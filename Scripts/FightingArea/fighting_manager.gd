@@ -7,8 +7,6 @@ extends Node
 # On Start() call, will connect to all character on the local FightingArea death signals
 # Will notify that the fight is over (either one team is alive or the GlobalFightingManager say it's over)
 
-
-
 # ============================== Signals ==============================
 
 signal fight_is_over(winner_teams_order: Array[int]) # The Array is from Looser to Winner [4th, 3rd, 2nd, 1st]
