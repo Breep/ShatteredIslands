@@ -39,6 +39,7 @@ var _lvl: int
 var lvl: int:
 	get: return _lvl
 	set(value):
+		if _lvl == value: return
 		_lvl = clampi(value, 0, 5)
 		lvl_changed.emit(self, _lvl)
 
@@ -47,6 +48,7 @@ var _xp: int
 var xp: int:
 	get: return _xp
 	set(value):
+		if _xp == value: return
 		_xp = value
 		_check_lvl_up()
 		xp_changed.emit(self, _xp)
@@ -56,6 +58,7 @@ var _hero: Hero
 var hero: Hero:
 	get: return _hero
 	set(value):
+		if _hero == value: return
 		_hero = value
 		hero_changed.emit(self, _hero)
 
@@ -64,6 +67,7 @@ var _max_health: int
 var max_health: int:
 	get: return _max_health
 	set(value):
+		if _max_health == value: return
 		_max_health = clampi(value, 0, 100)
 		max_health_changed.emit(self, _max_health)
 
@@ -72,6 +76,7 @@ var _health: int
 var health: int:
 	get: return _health
 	set(value):
+		if _health == value: return
 		_health = clampi(value, 0, 100)
 		health_changed.emit(self, _health)
 
@@ -80,6 +85,7 @@ var _gold: int
 var gold: int:
 	get: return _gold
 	set(value):
+		if _gold == value: return
 		_gold = clampi(value, 0, 10000)
 		gold_changed.emit(self, _gold)
 
@@ -88,6 +94,7 @@ var _damage: int
 var damage: int:
 	get: return _damage
 	set(value):
+		if _damage == value: return
 		_damage = value
 		damage_changed.emit(self, _damage)
 
@@ -96,6 +103,7 @@ var damage: int:
 static func new_from_serialized(serialized_data: Dictionary) -> Player:
 	var player := Player.new()
 	player.name = serialized_data[SerializedField.NAME]
+	player.id = serialized_data[SerializedField.ID]
 	player.team = serialized_data[SerializedField.TEAM]
 	player.health = serialized_data[SerializedField.HEALTH]
 	player.max_health = serialized_data[SerializedField.MAX_HEALTH]
@@ -126,6 +134,7 @@ func serialized() -> Dictionary:
 
 func update_from_serialized(serialized_data: Dictionary) -> void:
 	name = serialized_data[SerializedField.NAME]
+	id = serialized_data[SerializedField.ID]
 	team = serialized_data[SerializedField.TEAM]
 	health = serialized_data[SerializedField.HEALTH]
 	max_health = serialized_data[SerializedField.MAX_HEALTH]
@@ -138,7 +147,6 @@ func update_from_serialized(serialized_data: Dictionary) -> void:
 
 func reset_stats() -> void:
 	_apply_all_cards_upgrades()
-
 
 # ============================== Resource base functions ==============================
 

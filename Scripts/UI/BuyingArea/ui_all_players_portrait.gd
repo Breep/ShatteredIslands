@@ -30,6 +30,7 @@ func connect_all_players(players: Array[Player]) -> void:
 func _reorder_portraits() -> void:
 	var players_sorted: Array[Player] = _get_players_ordered_by_health()
 	for i in players_sorted.size():
+		print("[", multiplayer.get_unique_id(), " REORDERING PORTRAITS !")
 		var player: Player = players_sorted[i]
 		vbox_container.move_child(_player_id_player_portrait_map[player.id], i)
 
@@ -37,6 +38,10 @@ func _reorder_portraits() -> void:
 func _get_players_ordered_by_health() -> Array[Player]:
 	var array_sorted: Array[Player] = PlayerManager.players.values().duplicate()
 	array_sorted.sort_custom(_compare_player_health)
+	var tmp_names: String = "array_sorted:"
+	for player in array_sorted:
+		tmp_names += player.name + " "
+	print("[", multiplayer.get_unique_id(), "] _get_players_ordered_by_health: ", tmp_names)
 	return array_sorted
 
 
