@@ -1,4 +1,4 @@
-class_name CardShop
+class_name UICardShop
 extends Control
 
 # ============================== Private variables ==============================
@@ -22,14 +22,12 @@ func _ready() -> void:
 	
 	_local_player = PlayerManager.get_local_player()
 	_update_shop_cards_displayed()
-	# tmp connect button signals
-	# TODO make it in a separate function that can handle a custom number of button
+
 	for i in 3:
 		var card_button = _card_container.get_node(str(i)) as CardButton
 		card_button.connect("card_selected", _on_card_shop_button_pressed, CONNECT_ONE_SHOT)
 	
-	if not multiplayer.is_server():
-		Events.ui_card_shop_opened.connect(_on_events_ui_card_shop_opened)
+	Events.ui_card_shop_opened.connect(_on_events_ui_card_shop_opened)
 
 
 func _exit_tree() -> void:
@@ -42,7 +40,7 @@ func _on_back_pressed() -> void:
 
 
 func _on_card_shop_button_pressed(card_button_selected: CardButton, card: Card) -> void:
-	_try_buy_card(card_button_selected, card)
+	await _try_buy_card(card_button_selected, card)
 	card_bought.emit()
 
 # ============================== Private functions ==============================
@@ -61,8 +59,6 @@ func _try_buy_card(card_button_selected: CardButton, card: Card) -> void:
 		return
 	
 	var buy_ok = await MultiplayerDeckManager.try_buy_card_for_local_player(card)
-	print("[DEBUG] CardShop: Gold:", _local_player.gold)
-	
 	if buy_ok:
 		await _update_shop_cards_displayed()
 	
@@ -91,7 +87,4 @@ func _reconnect_to_card_signal(card_button: CardButton) -> void:
 
 
 func _on_events_ui_card_shop_opened(is_opened: bool) -> void:
-	if is_opened:
-		show()
-	else:
-		hide()
+	show() if is_opened else hide()

@@ -87,12 +87,6 @@ func construct_shop_deck(families: Array[Family], rules: GameRules) -> void:
 	shop_deck_shuffled.emit()
 
 
-
-
-
-
-
-
 func put_card_back_in_cardshop(card: Card):
 	#print("Putting back to the shop deck: ", card.name, " | ", card)
 	if multiplayer.is_server():
@@ -130,7 +124,7 @@ func try_buy_card_for_local_player(card: Card) -> bool:
 		printerr("Server shouldn't be a player")
 		return false
 	
-	print("[id:", multiplayer.get_unique_id(),"] Asking the server permission to buy ", card.name)
+	#print("[id:", multiplayer.get_unique_id(),"] Asking the server permission to buy ", card.name)
 	_ask_to_buy_card.rpc_id(SERVER_ID, multiplayer.get_unique_id(), _get_card_ref_id(card))
 	await answer_for_buying_request_received
 	
@@ -147,6 +141,7 @@ func try_buy_card_for_local_player(card: Card) -> bool:
 	
 	# Unreachable
 	return false
+
 
 # ============================== Private function ==============================
 

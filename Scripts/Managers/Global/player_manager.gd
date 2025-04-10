@@ -30,6 +30,13 @@ signal _join_server_answered()
 var _join_server_response: bool
 var _join_server_reason: String
 
+var _game_state_changed_signal: Signal # Ref to game_state_changed signal
+
+# ============================== Node base functions ==============================
+
+func _ready() -> void:
+	Events.new_game_started.connect(_on_events_new_game_started)
+
 # ============================== Public functions ==============================
 
 func get_local_player() -> Player:
@@ -158,6 +165,10 @@ func _add_player(player_name: String, id: int, is_bot: bool, serialized_player: 
 		new_player.gold = GameManager.game_rules.gold_starting_game
 		new_player.health = GameManager.game_rules.player_starting_health
 		_connect_to_signals(new_player)
+		if is_bot:
+			var player_bot_ai: PlayerBotAI = load("res://Scenes/PlayerBotAI/player_bot_ai.tscn").instantiate()
+			player_bot_ai.player = new_player
+			add_child(player_bot_ai)
 		
 		players[id] = new_player
 	else:
@@ -186,35 +197,44 @@ func _connect_to_signals(player: Player) -> void:
 	player.lvl_changed.connect(_on_player_lvl_changed)
 
 
-func _on_player_health_changed(player: Player, _unused) -> void:
-	_sync_player.rpc(player.serialized())
-
-func _on_player_max_health_changed(player: Player, _unused) -> void:
-	_sync_player.rpc(player.serialized())
-
-func _on_player_damage_changed(player: Player, _unused) -> void:
-	_sync_player.rpc(player.serialized())
-
-func _on_player_hero_changed(player: Player, _unused) -> void:
-	_sync_player.rpc(player.serialized())
-
-func _on_player_gold_changed(player: Player, _unused) -> void:
-	_sync_player.rpc(player.serialized())
-
-func _on_player_xp_changed(player: Player, _unused) -> void:
-	_sync_player.rpc(player.serialized())
-
-func _on_player_lvl_changed(player: Player, _unused) -> void:
-	_sync_player.rpc(player.serialized())
-
 @rpc("authority", "call_remote")
 func _sync_player(serialized_player: Dictionary) -> void:
 	var player: Player = players[serialized_player[Player.SerializedField.ID]]
 	player.update_from_serialized(serialized_player)
 
 
+# ============================== Callbacks ==============================
+
+func _on_player_health_changed(player: Player, _unused) -> void:
+	_sync_player.rpc(player.serialized())
 
 
+func _on_player_max_health_changed(player: Player, _unused) -> void:
+	_sync_player.rpc(player.serialized())
+
+
+func _on_player_damage_changed(player: Player, _unused) -> void:
+	_sync_player.rpc(player.serialized())
+
+
+func _on_player_hero_changed(player: Player, _unused) -> void:
+	_sync_player.rpc(player.serialized())
+
+
+func _on_player_gold_changed(player: Player, _unused) -> void:
+	_sync_player.rpc(player.serialized())
+
+
+func _on_player_xp_changed(player: Player, _unused) -> void:
+	_sync_player.rpc(player.serialized())
+
+
+func _on_player_lvl_changed(player: Player, _unused) -> void:
+	_sync_player.rpc(player.serialized())
+
+
+func _on_events_new_game_started(game_node: Game) ->void:
+	_game_state_changed_signal = game_node.game_state_changed
 
 
 

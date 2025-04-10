@@ -22,7 +22,7 @@ extends Resource
 
 # Player damage
 # Minimum damage = <round_modifier> + <lvl_mod (1 2 3 5 8)>
-#  + <victory_mod (+-2)> + <skill_mod> + <event_mod>
+#  + <victory_mod*(+-2)> + <skill_mod> + <event_mod>
 @export var damage_on_win_lose_modifier: int # (<win> - <lose>) * <this modifier> = the damage modifier
 @export var damage_max_diff_win_lose: int # if |<win> - <lose>| == damage_max_diff_win_lose then stop counting win lose diff for damage modifier
 @export var damage_player_level_modifier: Array[int] # Player damage increased by his hero level

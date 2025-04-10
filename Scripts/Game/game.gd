@@ -4,12 +4,20 @@ extends Node3D
 # ============================== Enum ==============================
 
 enum GameState {
-	Starting,
-	Buying,
-	Fighting
+	STARTING,
+	BUYING,
+	FIGHTING,
+	UNDEF
 }
 
-var _game_state: GameState = GameState.Starting
+signal game_state_changed(new_game_state: GameState)
+var _game_state: GameState = GameState.UNDEF
+var game_state: GameState:
+	get: return _game_state
+	set(value):
+		if _game_state == value: return
+		_game_state = value
+		game_state_changed.emit()
 
 var _fighting_area_scene: PackedScene = preload("res://Scenes/FightingArea/fighting_area.tscn")
 
@@ -32,8 +40,6 @@ func _ready() -> void:
 	_buying_area.phase_ended.connect(_on_buying_area_phase_ended)
 	_buying_area.all_heroes_picked.connect(_on_buying_area_all_heroes_picked)
 	GlobalFightingManager.all_fights_are_over.connect(_on_global_fighting_manager_all_fights_are_over)
-	
-	
 	_start_game()
 
 # ============================== Private functions ==============================

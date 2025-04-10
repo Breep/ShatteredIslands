@@ -25,3 +25,8 @@ signal ui_fighting_area_opened(is_opened: bool, battle_id: int) # battle_id=-1 i
 
 # Hero related events
 signal hero_interacted(hero_id: Hero.HeroId)
+
+
+signal new_game_started(game_node: Game)
+
+signal game_state_changed(new_game_state: Game.GameState)

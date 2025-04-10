@@ -21,6 +21,7 @@ enum SerializedField {
 var name: String # Nickname of the player
 var id: int # Multiplayer id
 var team: int # Current team of the player during this round
+
 var is_bot: bool # If the player is a fake player (a bot controlled by the server)
 
 var ready: bool # If this player is ready to continue the game flow (Used to sync players with server)

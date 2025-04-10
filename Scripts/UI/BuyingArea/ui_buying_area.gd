@@ -9,7 +9,7 @@ extends Control
 @onready var _all_players_portrait: UIAllPlayersPortrait = %AllPlayersPortrait
 @onready var _self_character_stats: UICharacterStats = %SelfCharacterStats
 @onready var _continous_timer: UIContinousTimer = %ContinousTimer
-@onready var _card_shop: CardShop = %CardShop
+@onready var _card_shop: UICardShop = %CardShop
 
 # ============================== Private variables ==============================
 
