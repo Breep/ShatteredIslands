@@ -7,13 +7,13 @@
 
 [sub_resource type="Resource" id="Resource_g3hwp"]
 script = ExtResource("3_oa0xn")
-health_max = 1500000
+health_max = 600
 mana_max = 100
 mana_regen = 10.0
 energy_max = 100
 energy_regen = 2.0
 move_speed = 10.0
-attack_damage = 200
+attack_damage = 10
 attack_speed = 4.0
 attack_move_speed = 20.0
 physical_critical_chance = 10.0

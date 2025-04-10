@@ -49,15 +49,16 @@ func _ready() -> void:
 
 
 func _dumb_buying_area() -> void:
-	print("PlayerBotAI: ", player.name, " DUMB buying area AI started")
 	await get_tree().create_timer(1.0).timeout
 	_wake_up_timer.wait_time = _rng.randf_range(MIN_WAIT_TIME, MAX_WAIT_TIME)
 	_wake_up_timer.start()
 
 
 func _buy_a_card() -> void:
+	if _card_shop.cards_displayed.is_empty():
+		return
+	
 	var card: Card = _card_shop.cards_displayed[_rng.randi_range(0, _card_shop.cards_displayed.size() - 1)]
-	print("PlayerBotAI: ", player.name, " try to buy: ", card.name)
 	_card_shop.try_buy_card(card)
 
 
@@ -69,7 +70,6 @@ func _on_events_game_state_changed(new_game_state: Game.GameState) -> void:
 
 
 func _on_wake_up_timer_timeout() -> void:
-	print("PlayerBotAI: ", player.name, " wakes up")
 	if _economy_strategy == EconomyStrategy.KEEPER and player.gold >= 600:
 		_buy_a_card()
 	elif _economy_strategy == EconomyStrategy.WASTER and player.gold >= 100:
