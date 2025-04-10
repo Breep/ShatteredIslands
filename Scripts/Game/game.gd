@@ -10,14 +10,13 @@ enum GameState {
 	UNDEF
 }
 
-signal game_state_changed(new_game_state: GameState)
 var _game_state: GameState = GameState.UNDEF
 var game_state: GameState:
 	get: return _game_state
 	set(value):
 		if _game_state == value: return
 		_game_state = value
-		game_state_changed.emit()
+		Events.game_state_changed.emit(_game_state)
 
 var _fighting_area_scene: PackedScene = preload("res://Scenes/FightingArea/fighting_area.tscn")
 
@@ -52,6 +51,7 @@ func _start_game() -> void:
 
 
 func _start_hero_selection() -> void:
+	game_state = GameState.STARTING
 	var heroes: Array[Hero] = await GameManager.get_current_game_heroes()
 	_buying_area.start_hero_selection(heroes)
 
@@ -82,11 +82,13 @@ func _spawn_all_fighting_areas(battles: Array[Battle]) -> void:
 
 
 func _start_buying_phase() -> void:
+	game_state = GameState.BUYING
 	_buying_area.start_round(_current_round_battles)
 	_spawn_all_fighting_areas(_current_round_battles)
 
 
 func _start_fighting_phase() -> void:
+	game_state = GameState.FIGHTING
 	print("[", multiplayer.get_unique_id(), "] Game: Start fights !")
 	for fighting_area in _fighting_areas:
 		fighting_area.start_fight()

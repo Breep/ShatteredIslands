@@ -71,7 +71,7 @@ func _update_shop_cards_displayed() -> void:
 		return
 	
 	var cardsNumber = 3 # TODO For the moment there is no way to get more cards each time you buy, maybe in the futur
-	_card_displayed = await MultiplayerDeckManager.smart_draw_n_cards(_local_player.deck.get_max_lvl_cards(), cardsNumber)
+	_card_displayed = await MultiplayerDeckManager.smart_draw_n_cards(_local_player, _local_player.deck.get_max_lvl_cards(), cardsNumber)
 	
 	_adapt_cards_lvl_to_player()
 	_card_shop_visual.update_shop_cards_displayed_visual(_card_displayed)

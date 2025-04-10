@@ -150,7 +150,7 @@ func _answer_join_game(response: int, reason: String) -> void:
 # TODO Improve this so it only send not known players to players
 @rpc("authority", "call_remote")
 func _add_player(player_name: String, id: int, is_bot: bool, serialized_player: Dictionary) -> void:
-	print("[id:", multiplayer.get_unique_id(),"] Adding player: ", player_name, " of multiplayer id:", id, " in my players list")
+	#print("[id:", multiplayer.get_unique_id(),"] Adding player: ", player_name, " of multiplayer id:", id, " in my players list")
 	
 	if players.has(id) or players.size() >= MAX_PLAYERS:
 		return
@@ -168,6 +168,7 @@ func _add_player(player_name: String, id: int, is_bot: bool, serialized_player: 
 		if is_bot:
 			var player_bot_ai: PlayerBotAI = load("res://Scenes/PlayerBotAI/player_bot_ai.tscn").instantiate()
 			player_bot_ai.player = new_player
+			player_bot_ai.name = "PlayerBotAI_" + str(new_player.id)
 			add_child(player_bot_ai)
 		
 		players[id] = new_player
