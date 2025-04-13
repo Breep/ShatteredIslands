@@ -52,7 +52,22 @@ func get_reduced_damage_taken_from_armor(damage_source: Character, damage: int, 
 # ============================== Private functions ==============================
 
 func _create_optional_timers() -> void:
-	pass
+	if _defense_stats.hedgehog_armor_activated:
+		_optional_timers.append(Utils.create_perpetual_timer(self, _defense_stats.hedgehog_armor_period, _on_hedgehog_armor_period_timeout, true))
 
+
+func _gain_armor(armor_stacks: int) -> void:
+	if _defense_stats.dual_shield_activated:
+		var health_ratio: float = (_source.stats.health as float / _source.stats.health_max) * 100.0
+		if health_ratio >= _defense_stats.dual_shield_health_threshold:
+			armor_stacks *= 2
+	
+	_defense_stats.armor_stacks += armor_stacks
 
 # ============================== Callbacks functions ==============================
+
+func _on_hedgehog_armor_period_timeout() -> void:
+	var target: Entity = _source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST)
+	if target == null: return
+	var damage: int = (_armor_lost_since_last_hedgehog_armor * _defense_stats.hedgehog_armor_lost_armor_percent as float / 100.0) as int
+	_action_module.direct_attack(target, damage, Utils.DamageType.MAGICAL)

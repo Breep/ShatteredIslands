@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="DefenseEvadingPants" load_steps=2 format=3 uid="uid://cgjixukadiua5"]
-
-[ext_resource type="Script" uid="uid://dkgdt80bfilx7" path="res://ResourcesBase/Upgrades/Player/Defense/defense_evading_pants.gd" id="1_3rfj7"]
-
-[resource]
-script = ExtResource("1_3rfj7")
-_armor_stacks = Array[int]([5, 10, 15, 20, 35])
-metadata/_custom_type_script = "uid://dkgdt80bfilx7"

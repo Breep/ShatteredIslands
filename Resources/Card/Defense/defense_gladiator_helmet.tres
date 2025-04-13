@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="DefenseGladiatorHelmet" load_steps=2 format=3 uid="uid://dmvcoaaaevorq"]
-
-[ext_resource type="Script" uid="uid://deiehs802w30h" path="res://ResourcesBase/Upgrades/Player/Defense/defense_gladiator_helmet.gd" id="1_5mdi6"]
-
-[resource]
-script = ExtResource("1_5mdi6")
-_armor_stacks = Array[int]([5, 10, 15, 20, 35])
-_period = 0.0
-metadata/_custom_type_script = "uid://deiehs802w30h"
