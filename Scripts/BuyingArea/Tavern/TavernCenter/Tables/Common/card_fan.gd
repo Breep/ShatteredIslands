@@ -24,7 +24,7 @@ func connect_to_player(player: Player) -> void:
 
 func _update_visual(deck: PlayerDeck):
 	var families_lvl_raw = deck.get_families_lvl_raw()
-	var cards_number = deck.cardPile.size()
+	var cards_number = deck.card_pile.size()
 	for i in min(cards_number, _cards.size()):
 		_cards[i].show()
 	

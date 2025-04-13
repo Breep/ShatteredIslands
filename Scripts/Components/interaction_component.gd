@@ -4,6 +4,7 @@ extends Node
 # ============================== Export ==============================
 
 @export var _meshs: Array[MeshInstance3D]
+@export var _nodes_where_to_find_meshs: Array[Node3D]
 
 # ============================== Private variables ==============================
 
@@ -30,7 +31,12 @@ func _connect_parent() -> void:
 
 
 func _init_meshs() -> void:
-	if _meshs.size() > 0:
+	if not _meshs.is_empty():
+		return
+	
+	if not _nodes_where_to_find_meshs.is_empty():
+		for node in _nodes_where_to_find_meshs:
+			_recursive_find_all_meshs(node)
 		return
 	
 	_recursive_find_all_meshs(_parent)
@@ -49,9 +55,11 @@ func _on_parent_focused() -> void:
 	for mesh in _meshs:
 		mesh.material_overlay = _material_overlay
 
+
 func _on_parent_unfocused() -> void:
 	for mesh in _meshs:
 		mesh.material_overlay = null
+
 
 func _on_parent_interacted() -> void:
 	print("Interracted on: ", _parent.name)

@@ -56,9 +56,6 @@ func _start_hero_selection() -> void:
 	_buying_area.start_hero_selection(heroes)
 
 
-
-
-
 func _start_new_round() ->void:
 	print("Game: Start new round")
 	_fighting_areas.clear()

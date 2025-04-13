@@ -1,7 +1,7 @@
 [gd_scene load_steps=68 format=3 uid="uid://b8clqslwo8t68"]
 
 [ext_resource type="Script" uid="uid://bg27we47t814j" path="res://Scripts/BuyingArea/Tavern/tavern.gd" id="1_amkis"]
-[ext_resource type="PackedScene" uid="uid://cdryp1jj4woix" path="res://Scenes/BuyingArea/card_pile_comptoir.tscn" id="2_7m3y5"]
+[ext_resource type="PackedScene" uid="uid://cdryp1jj4woix" path="res://Scenes/BuyingArea/shop_deck_3d_visual.tscn" id="2_7m3y5"]
 [ext_resource type="PackedScene" uid="uid://ca4hq5vmo2led" path="res://Scenes/BuyingArea/3D sceces inh - Coll/Deco/bottle_b_brown_coll.tscn" id="3_7txpj"]
 [ext_resource type="PackedScene" uid="uid://bb1u6xo8ouv6t" path="res://Scenes/BuyingArea/3D sceces inh - Coll/Deco/bottle_a_brown_coll.tscn" id="3_8gbnn"]
 [ext_resource type="PackedScene" uid="uid://c7ka867rj0gkr" path="res://Scenes/BuyingArea/3D sceces inh - Coll/Deco/plate_food_b_coll.tscn" id="3_vx36f"]
@@ -77,8 +77,9 @@ _tarven_center = NodePath("TavernCenter")
 [node name="Bar" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.360003, 0, -15.755)
 
-[node name="CardPile_comptoir" parent="Bar" instance=ExtResource("2_7m3y5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.30577, 1.02792, 0.131407)
+[node name="ShopDeck3DVisual" parent="Bar" instance=ExtResource("2_7m3y5")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.8403, 1.02792, 0.131407)
 
 [node name="DecoBar_" type="Node3D" parent="Bar"]
 
@@ -192,7 +193,8 @@ transform = Transform3D(0.943668, 0, 0.330893, 0, 1, 0, -0.330893, 0, 0.943668, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.89352, 2.04605, -1.51286)
 shape = SubResource("BoxShape3D_ee6hw")
 
-[node name="InteractionComponent" parent="Bar" instance=ExtResource("23_03w0h")]
+[node name="InteractionComponent" parent="Bar" node_paths=PackedStringArray("_nodes_where_to_find_meshs") instance=ExtResource("23_03w0h")]
+_nodes_where_to_find_meshs = [NodePath("../DecoBar_"), NodePath("../BarMeuble"), NodePath("../Stool_round")]
 
 [node name="Decco" type="Node3D" parent="."]
 

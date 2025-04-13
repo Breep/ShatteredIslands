@@ -163,7 +163,7 @@ func _apply_all_cards_upgrades() -> void:
 		printerr("Player: Can't apply cards upgrades")
 		return
 	character_stats.reset_stats(hero.stats)
-	for card in deck.cardPile:
+	for card in deck.card_pile:
 		card.player_upgrade.apply(character_stats, card.lvl)
 
 
