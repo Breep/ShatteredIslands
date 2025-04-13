@@ -4,7 +4,7 @@ extends Node3D
 
 # ============================== Constants ==============================
 
-const CARDS_PER_CARDS3D: int = 10 # Number of cards that represent a 3d card
+const CARDS_PER_CARDS3D: int = 5 # Number of cards that represent a 3d card
 
 # ============================== Export ==============================
 
@@ -31,7 +31,7 @@ func connect_to_shop_deck() -> void:
 func _update_visual(available_cards_composition: Dictionary[Family.FamilyType, int]) -> void:
 	for family in available_cards_composition.keys():
 		_card_towers[family].card_family = family
-		_card_towers[family].cards_number = available_cards_composition[family]
+		_card_towers[family].cards_number = ceil(available_cards_composition[family] as float / CARDS_PER_CARDS3D)
 
 
 func _setup_card_towers(available_cards_composition: Dictionary[Family.FamilyType, int]) -> void:
@@ -39,7 +39,7 @@ func _setup_card_towers(available_cards_composition: Dictionary[Family.FamilyTyp
 	for family in available_cards_composition.keys():
 		_card_towers[family] = _card_towers[i]
 		_card_towers[family].card_family = family
-		_card_towers[family].cards_number = available_cards_composition[family]
+		_card_towers[family].cards_number = ceil(available_cards_composition[family] as float / CARDS_PER_CARDS3D)
 		i += 1
 
 # ============================== Callback functions ==============================
