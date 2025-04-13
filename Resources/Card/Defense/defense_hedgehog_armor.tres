@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DefenseHedgehogArmor" load_steps=2 format=3 uid="uid://c3c55i0n2uup7"]
+
+[ext_resource type="Script" uid="uid://yufyggkwfxe1" path="res://ResourcesBase/Upgrades/Player/Defense/defense_hedgehog_armor.gd" id="1_j426v"]
+
+[resource]
+script = ExtResource("1_j426v")
+_period = 1.5
+_lost_armor_percentages = Array[int]([10, 20, 40])
+metadata/_custom_type_script = "uid://yufyggkwfxe1"

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DefenseReflectoBelt" load_steps=2 format=3 uid="uid://s81hkvrtujj8"]
+
+[ext_resource type="Script" uid="uid://bmb03fcdh2kgs" path="res://ResourcesBase/Upgrades/Player/Defense/defense_reflecto_belt.gd" id="1_tuqjb"]
+
+[resource]
+script = ExtResource("1_tuqjb")
+_armor_stacks = 50
+_attack_increase_percent = Array[int]([10, 20, 30, 40, 75])
+metadata/_custom_type_script = "uid://bmb03fcdh2kgs"

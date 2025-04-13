@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="DefenseAdaptativeCloak" load_steps=2 format=3 uid="uid://bml2ef77msler"]
+
+[ext_resource type="Script" uid="uid://cx1dyyuyq6n3x" path="res://ResourcesBase/Upgrades/Player/Defense/defense_adaptative_cloak.gd" id="1_4phqe"]
+
+[resource]
+script = ExtResource("1_4phqe")
+_attack_percents = Array[int]([10, 15, 20, 25, 40])
+metadata/_custom_type_script = "uid://cx1dyyuyq6n3x"

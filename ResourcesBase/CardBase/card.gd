@@ -9,7 +9,7 @@ enum Rarity {
 
 @export var name : String
 @export var picture : Texture2D
-@export var families: Array[Family.FamilyType]
+@export var family: Family.FamilyType
 @export var rarity : Rarity
 @export var player_upgrade: PlayerUpgrade
 

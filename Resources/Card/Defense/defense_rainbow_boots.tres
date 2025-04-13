@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="DefenseRainbowBoots" load_steps=2 format=3 uid="uid://bysqckhpx5e1w"]
+
+[ext_resource type="Script" uid="uid://cwnuks6plleg5" path="res://ResourcesBase/Upgrades/Player/Defense/defense_rainbow_boots.gd" id="1_ifi48"]
+
+[resource]
+script = ExtResource("1_ifi48")
+_armor_stacks = Array[int]([30, 20, 10])
+metadata/_custom_type_script = "uid://cwnuks6plleg5"

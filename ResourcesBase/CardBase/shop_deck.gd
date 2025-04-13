@@ -74,12 +74,12 @@ func remove_from_available_cards(card_to_remove: Card) -> void:
 func _update_available_cards_composition(new_cards: Array[Card], removed_cards: Array[Card]) -> void:
 	print("_update_available_cards_composition")
 	for card in new_cards:
-		if available_cards_composition.has(card.families[0]):
-			available_cards_composition[card.families[0]] += 1
+		if available_cards_composition.has(card.family):
+			available_cards_composition[card.family] += 1
 		else:
-			available_cards_composition[card.families[0]] = 1
+			available_cards_composition[card.family] = 1
 	
 	for card in removed_cards:
-		available_cards_composition[card.families[0]] -= 1
+		available_cards_composition[card.family] -= 1
 	
 	available_cards_composition_changed.emit(available_cards_composition)

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DefenseTitanGloves" load_steps=2 format=3 uid="uid://dodao73ckm6yp"]
+
+[ext_resource type="Script" uid="uid://cw5afnioxhvvy" path="res://ResourcesBase/Upgrades/Player/Defense/defense_titan_gloves.gd" id="1_hgnv1"]
+
+[resource]
+script = ExtResource("1_hgnv1")
+_max_health_percents = Array[float]([1.0, 2.0, 3.0, 4.0, 7.0])
+_period = 2.0
+metadata/_custom_type_script = "uid://cw5afnioxhvvy"

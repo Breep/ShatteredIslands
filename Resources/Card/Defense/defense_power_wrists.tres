@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DefensePowerWrists" load_steps=2 format=3 uid="uid://b7xkttkmgwimi"]
+
+[ext_resource type="Script" uid="uid://bnnw3x8aenidt" path="res://ResourcesBase/Upgrades/Player/Defense/defense_power_wrists.gd" id="1_dlepx"]
+
+[resource]
+script = ExtResource("1_dlepx")
+_armor_stacks = 20
+_damage_increase_percent = Array[int]([1, 2, 4])
+metadata/_custom_type_script = "uid://bnnw3x8aenidt"

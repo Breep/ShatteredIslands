@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="DefenseDualShield" load_steps=2 format=3 uid="uid://cgap7cswu8uxw"]
+
+[ext_resource type="Script" uid="uid://ct5qmqssynisd" path="res://ResourcesBase/Upgrades/Player/Defense/defense_dual_shield.gd" id="1_rumoj"]
+
+[resource]
+script = ExtResource("1_rumoj")
+_health_threshold = 50
+metadata/_custom_type_script = "uid://ct5qmqssynisd"

@@ -38,9 +38,7 @@ var _random_heroes_ref: Array[Hero.HeroId]
 func _ready() -> void:
 	game_rules = load("res://Resources/GameRules/NormalGameRules.tres")
 	_init_families_ref()
-	_active_families.append(get_family_from_type(Family.FamilyType.Life))
-	_active_families.append(get_family_from_type(Family.FamilyType.Poison))
-	_active_families.append(get_family_from_type(Family.FamilyType.Fire))
+	_active_families.append(get_family_from_type(Family.FamilyType.Defense))
 
 # ============================== Public function ==============================
 
@@ -132,7 +130,7 @@ func _init_families_ref() -> void:
 	_families_ref[Family.FamilyType.Fire] = load("res://Resources/Families/fire_family.tres") as Family
 	_families_ref[Family.FamilyType.Storm] = load("res://Resources/Families/storm_family.tres") as Family
 	_families_ref[Family.FamilyType.Serenity] = load("res://Resources/Families/heal_family.tres") as Family
-	_families_ref[Family.FamilyType.Life] = load("res://Resources/Families/hp_family.tres") as Family
+	#_families_ref[Family.FamilyType.Life] = load("res://Resources/Families/hp_family.tres") as Family
 	_families_ref[Family.FamilyType.Poison] = load("res://Resources/Families/poison_family.tres") as Family
 	_families_ref[Family.FamilyType.Shadow] = load("res://Resources/Families/shadow_family.tres") as Family
 

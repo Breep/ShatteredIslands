@@ -43,6 +43,7 @@ func _update_visual(new_coin_number) -> void:
 		for i in number_of_coins_to_add:
 			var coin: Coin = coin_scene.instantiate()
 			_coins.append(coin)
+			coin.name = "Coin_" + str(_coins_number + i)
 			add_child(coin)
 			coin.position.x = rng.randf_range(0, MAX_RANDOM_DISTANCE)
 			coin.position.y = coin.get_height() * (_coins_number + i)
