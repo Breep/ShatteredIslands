@@ -61,5 +61,5 @@ func _check_height_diff() -> void:
 
 # ============================== Callback functions ==============================
 
-func _on_player_gold_changed(new_player_gold: int) -> void:
+func _on_player_gold_changed(_unused, new_player_gold: int) -> void:
 	_update_visual(new_player_gold)

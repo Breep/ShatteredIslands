@@ -1,0 +1,561 @@
+[gd_scene load_steps=93 format=3 uid="uid://bhx575fxnmb7i"]
+
+[ext_resource type="PackedScene" uid="uid://swkvlgltmupt" path="res://Data/Blender/ile_flottante_V3.blend" id="1_pa8bm"]
+[ext_resource type="Shader" uid="uid://do8mrhdd2775s" path="res://Shaders/3D/Map/Magiball.gdshader" id="2_h6ek7"]
+[ext_resource type="Texture2D" uid="uid://u4kayolln7un" path="res://Data/Blender/ile_flottante_V3_Wood_DockBoards_01_Diffuse.png" id="3_6a5dx"]
+[ext_resource type="Texture2D" uid="uid://cg6xwlr5kkwm" path="res://Data/Texture/Texture_new/masks for  particles/47.png" id="3_hxqkm"]
+[ext_resource type="Texture2D" uid="uid://cx3dbgmpv2u21" path="res://Data/Blender/ile_flottante_V3_PolygonElven_Texture_01_A.png" id="4_s711j"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nxnlb"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wt7pg"]
+albedo_texture = ExtResource("3_6a5dx")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fdjtm"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yjybg"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mfvhg"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7nwb1"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xu5h6"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qq0h2"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_46rne"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_74eis"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4v0xb"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u6qoa"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sibjn"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1vy23"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k5p6k"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jb70s"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4yyj2"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_68ckv"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6hwls"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_71sot"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rtdh3"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kyxg7"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aq4cq"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_exdx3"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_56ir2"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ansgq"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4lyjf"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dff2i"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uyqha"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xbb05"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xfowj"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_564g0"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_47byi"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uvndv"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ic115"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dmh46"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5bngl"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u6o8n"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5pka3"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lyjov"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a3460"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qpn1h"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l8b8j"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fy6ul"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dt11m"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0l46e"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kwykw"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v3eec"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u2ux6"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kq5ec"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jaywj"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_or3by"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8jks2"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4wcjt"]
+render_priority = 0
+shader = ExtResource("2_h6ek7")
+shader_parameter/tex_frg_2 = ExtResource("3_hxqkm")
+shader_parameter/opacity = 1.0
+shader_parameter/time_speed = 1.0
+shader_parameter/wave_amplitude = 0.1
+shader_parameter/wave_frequency = 2.0
+shader_parameter/rotation_speed = 0.5
+shader_parameter/halo_size = 0.578
+shader_parameter/halo_intensity = 3.028
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aukxj"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_37fb5"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0prmh"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3yx6u"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ug42j"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tatp7"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fmpln"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8as0x"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1kjdy"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jckae"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7syqb"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tbsag"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_48gkx"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y33bx"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xuhlk"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2a54a"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3wgyy"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ydk8j"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5fpt7"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lby2n"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pjvvc"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6a5dx"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ya3y"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ediu5"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ssaob"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8vgii"]
+albedo_texture = ExtResource("3_6a5dx")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6xl2n"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wu8u5"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hh12r"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uecc0"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w28dr"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u377k"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_reggx"]
+albedo_texture = ExtResource("4_s711j")
+
+[node name="TelescopeIsland" instance=ExtResource("1_pa8bm")]
+
+[node name="point rotation phare" parent="." index="4"]
+transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, 3.04169, 10.3947, 0.0792131)
+
+[node name="anneau" parent="." index="7"]
+transform = Transform3D(0.873279, 0.0527686, -0.00166787, -0.11872, 0.388153, -0.0122684, 4.10393e-10, 0.00717766, 0.675713, 2.50891, 4.81427, -0.0482452)
+
+[node name="anneau_002" parent="." index="8"]
+transform = Transform3D(1.82242, 0.0271643, -0.00351072, -0.247754, 0.199814, -0.025824, 8.56437e-10, 0.00369494, 1.42232, 2.50891, 4.81427, -0.0482452)
+
+[node name="SM_Bld_Arch_01" parent="." index="9"]
+material_override = SubResource("StandardMaterial3D_nxnlb")
+
+[node name="SM_Bld_Bridge_01" parent="." index="10"]
+material_override = SubResource("StandardMaterial3D_wt7pg")
+
+[node name="SM_Env_Tree_Glowing_01" parent="." index="11"]
+material_override = SubResource("StandardMaterial3D_fdjtm")
+
+[node name="SM_Env_Tree_Glowing_Canopy_01" parent="." index="12"]
+material_override = SubResource("StandardMaterial3D_yjybg")
+
+[node name="SM_Env_Bridge_Statue" parent="." index="13"]
+material_override = SubResource("StandardMaterial3D_mfvhg")
+
+[node name="SM_Env_Fern_01" parent="." index="14"]
+material_override = SubResource("StandardMaterial3D_7nwb1")
+
+[node name="SM_Env_Flowers_01" parent="." index="15"]
+material_override = SubResource("StandardMaterial3D_xu5h6")
+
+[node name="SM_Env_Flowers_04" parent="." index="16"]
+material_override = SubResource("StandardMaterial3D_qq0h2")
+
+[node name="SM_Env_Flowers_07" parent="." index="17"]
+material_override = SubResource("StandardMaterial3D_46rne")
+
+[node name="SM_Env_Flowers_08" parent="." index="18"]
+material_override = SubResource("StandardMaterial3D_74eis")
+
+[node name="SM_Env_Flowers_09" parent="." index="19"]
+material_override = SubResource("StandardMaterial3D_4v0xb")
+
+[node name="SM_Env_Flowers_10" parent="." index="20"]
+material_override = SubResource("StandardMaterial3D_u6qoa")
+
+[node name="SM_Env_Flowers_11" parent="." index="21"]
+material_override = SubResource("StandardMaterial3D_sibjn")
+
+[node name="SM_Env_Footpath_01" parent="." index="22"]
+material_override = SubResource("StandardMaterial3D_1vy23")
+
+[node name="SM_Env_Footpath_01_001" parent="." index="23"]
+material_override = SubResource("StandardMaterial3D_k5p6k")
+
+[node name="SM_Env_Footpath_01_002" parent="." index="24"]
+material_override = SubResource("StandardMaterial3D_jb70s")
+
+[node name="SM_Env_Footpath_01_003" parent="." index="25"]
+material_override = SubResource("StandardMaterial3D_4yyj2")
+
+[node name="SM_Env_Footpath_Corner_Large_01" parent="." index="26"]
+material_override = SubResource("StandardMaterial3D_68ckv")
+
+[node name="SM_Env_Hedge_Bush_02" parent="." index="27"]
+material_override = SubResource("StandardMaterial3D_6hwls")
+
+[node name="SM_Item_Instrument_Guitar_01" parent="." index="28"]
+material_override = SubResource("StandardMaterial3D_71sot")
+
+[node name="SM_Item_Instrument_Harp_01" parent="." index="29"]
+material_override = SubResource("StandardMaterial3D_rtdh3")
+
+[node name="SM_Env_Footpath_01_004" parent="." index="30"]
+material_override = SubResource("StandardMaterial3D_kyxg7")
+
+[node name="SM_Env_Footpath_01_005" parent="." index="31"]
+material_override = SubResource("StandardMaterial3D_aq4cq")
+
+[node name="SM_Env_Footpath_01_006" parent="." index="32"]
+material_override = SubResource("StandardMaterial3D_exdx3")
+
+[node name="SM_Prop_Lantern_Stand_02" parent="." index="33"]
+material_override = SubResource("StandardMaterial3D_56ir2")
+
+[node name="SM_Prop_Lantern_Stand_02_001" parent="." index="34"]
+material_override = SubResource("StandardMaterial3D_ansgq")
+
+[node name="SM_Prop_Fountain_01" parent="." index="35"]
+material_override = SubResource("StandardMaterial3D_4lyjf")
+
+[node name="SM_Prop_Lamp_Post_04" parent="." index="36"]
+material_override = SubResource("StandardMaterial3D_dff2i")
+
+[node name="SM_Prop_Jewellery_Box_01" parent="." index="37"]
+material_override = SubResource("StandardMaterial3D_uyqha")
+
+[node name="SM_Prop_Jewellery_Box_01_Lid_01" parent="SM_Prop_Jewellery_Box_01" index="0"]
+material_override = SubResource("StandardMaterial3D_xbb05")
+
+[node name="SM_Prop_Magic_Well_01" parent="." index="38"]
+material_override = SubResource("StandardMaterial3D_xfowj")
+
+[node name="SM_Prop_OfferingShrine_01" parent="." index="39"]
+material_override = SubResource("StandardMaterial3D_564g0")
+
+[node name="SM_Prop_Pedestal_01" parent="." index="40"]
+material_override = SubResource("StandardMaterial3D_47byi")
+
+[node name="SM_Prop_Potion_Stand_01" parent="." index="41"]
+material_override = SubResource("StandardMaterial3D_uvndv")
+
+[node name="SM_Prop_Potion_Stand_01_Bottle_01" parent="SM_Prop_Potion_Stand_01" index="0"]
+material_override = SubResource("StandardMaterial3D_ic115")
+
+[node name="SM_Prop_Quiver_02_Arrows_01" parent="." index="42"]
+material_override = SubResource("StandardMaterial3D_dmh46")
+
+[node name="SM_Prop_Potion_Tank_01" parent="." index="43"]
+material_override = SubResource("StandardMaterial3D_5bngl")
+
+[node name="SM_Prop_Potion_Tank_01_Tap" parent="SM_Prop_Potion_Tank_01" index="0"]
+material_override = SubResource("StandardMaterial3D_u6o8n")
+
+[node name="SM_Prop_Quiver_01" parent="." index="44"]
+material_override = SubResource("StandardMaterial3D_5pka3")
+
+[node name="SM_Prop_Sun_Dial_01" parent="." index="45"]
+material_override = SubResource("StandardMaterial3D_lyjov")
+
+[node name="SM_Prop_Sun_Dial_01_Moonplate_01" parent="SM_Prop_Sun_Dial_01" index="1"]
+material_override = SubResource("StandardMaterial3D_a3460")
+
+[node name="SM_Prop_Trellis_01" parent="." index="46"]
+material_override = SubResource("StandardMaterial3D_qpn1h")
+
+[node name="SM_Prop_Weather_Vane_01" parent="." index="47"]
+material_override = SubResource("StandardMaterial3D_l8b8j")
+
+[node name="SM_Prop_Weather_Vane_01_Top_01" parent="SM_Prop_Weather_Vane_01" index="0"]
+material_override = SubResource("StandardMaterial3D_fy6ul")
+
+[node name="SM_Prop_Telescope_Base_01" parent="." index="48"]
+material_override = SubResource("StandardMaterial3D_dt11m")
+
+[node name="SM_Prop_Telescope_01" parent="." index="49"]
+material_override = SubResource("StandardMaterial3D_0l46e")
+
+[node name="SM_Prop_Telescope_01_Scope_02" parent="SM_Prop_Telescope_01" index="0"]
+material_override = SubResource("StandardMaterial3D_kwykw")
+
+[node name="SM_Prop_Telescope_01_Lens_01" parent="SM_Prop_Telescope_01/SM_Prop_Telescope_01_Scope_02" index="2"]
+material_override = SubResource("StandardMaterial3D_v3eec")
+
+[node name="SM_Prop_Telescope_01_Lens_02" parent="SM_Prop_Telescope_01/SM_Prop_Telescope_01_Scope_02" index="3"]
+material_override = SubResource("StandardMaterial3D_u2ux6")
+
+[node name="SM_Prop_Telescope_01_Lens_03" parent="SM_Prop_Telescope_01/SM_Prop_Telescope_01_Scope_02" index="4"]
+material_override = SubResource("StandardMaterial3D_kq5ec")
+
+[node name="SM_Prop_Tent_01" parent="." index="50"]
+material_override = SubResource("StandardMaterial3D_jaywj")
+
+[node name="SM_Prop_Stool_01" parent="." index="51"]
+material_override = SubResource("StandardMaterial3D_or3by")
+
+[node name="SM_Prop_Rug_01" parent="." index="52"]
+material_override = SubResource("StandardMaterial3D_8jks2")
+
+[node name="magicball" parent="." index="55"]
+material_override = SubResource("ShaderMaterial_4wcjt")
+
+[node name="SM_Env_Vines_01_LOD0" parent="SM_Env_Vines_01" index="0"]
+material_override = SubResource("StandardMaterial3D_aukxj")
+
+[node name="SM_Env_Vines_01_LOD0_001" parent="SM_Env_Vines_01" index="1"]
+material_override = SubResource("StandardMaterial3D_37fb5")
+
+[node name="SM_Env_Hedge_Shrub_02" parent="." index="58"]
+material_override = SubResource("StandardMaterial3D_0prmh")
+
+[node name="SM_Env_Log_01" parent="." index="59"]
+material_override = SubResource("StandardMaterial3D_3yx6u")
+
+[node name="SM_Env_Moss_Lumps_01" parent="." index="60"]
+material_override = SubResource("StandardMaterial3D_ug42j")
+
+[node name="SM_Env_Mushroom_01_LOD1" parent="SM_Env_Mushroom_01" index="0"]
+material_override = SubResource("StandardMaterial3D_tatp7")
+
+[node name="SM_Env_Mushroom_Cap_01_LOD1" parent="SM_Env_Mushroom_Cap_01" index="0"]
+material_override = SubResource("StandardMaterial3D_fmpln")
+
+[node name="SM_Env_Mushroom_Cap_01_LOD1_001" parent="SM_Env_Mushroom_Cap_01" index="1"]
+material_override = SubResource("StandardMaterial3D_8as0x")
+
+[node name="SM_Env_Mushroom_Cap_01_LOD1_002" parent="SM_Env_Mushroom_Cap_01" index="2"]
+material_override = SubResource("StandardMaterial3D_1kjdy")
+
+[node name="SM_Env_Rock_Pebbles_06" parent="." index="65"]
+material_override = SubResource("StandardMaterial3D_jckae")
+
+[node name="SM_Env_Vines_03_Alt_LOD0" parent="SM_Env_Vines_03_Alt_001" index="0"]
+material_override = SubResource("StandardMaterial3D_7syqb")
+
+[node name="SM_Env_Vines_04_LOD0" parent="SM_Env_Vines_04" index="0"]
+material_override = SubResource("StandardMaterial3D_tbsag")
+
+[node name="SM_Prop_Desk_01" parent="." index="73"]
+material_override = SubResource("StandardMaterial3D_48gkx")
+
+[node name="SM_Prop_Desk_01_Drawer_l_01" parent="SM_Prop_Desk_01" index="0"]
+material_override = SubResource("StandardMaterial3D_y33bx")
+
+[node name="SM_Prop_Desk_01_Drawer_l_02" parent="SM_Prop_Desk_01" index="1"]
+material_override = SubResource("StandardMaterial3D_xuhlk")
+
+[node name="SM_Prop_Desk_01_Drawer_l_03" parent="SM_Prop_Desk_01" index="2"]
+material_override = SubResource("StandardMaterial3D_2a54a")
+
+[node name="SM_Prop_Desk_01_Drawer_r_01" parent="SM_Prop_Desk_01" index="3"]
+material_override = SubResource("StandardMaterial3D_3wgyy")
+
+[node name="SM_Prop_Desk_01_Drawer_r_02" parent="SM_Prop_Desk_01" index="4"]
+material_override = SubResource("StandardMaterial3D_ydk8j")
+
+[node name="SM_Prop_Desk_01_Drawer_r_03" parent="SM_Prop_Desk_01" index="5"]
+material_override = SubResource("StandardMaterial3D_5fpt7")
+
+[node name="SM_Prop_Dock_Pole_01" parent="." index="74"]
+material_override = SubResource("StandardMaterial3D_lby2n")
+
+[node name="SM_Prop_Dock_Rope_01" parent="." index="75"]
+material_override = SubResource("StandardMaterial3D_pjvvc")
+
+[node name="SM_Veh_Boat_01" parent="." index="76"]
+material_override = SubResource("StandardMaterial3D_6a5dx")
+
+[node name="SM_Veh_Boat_Canopy_01" parent="SM_Veh_Boat_01" index="0"]
+material_override = SubResource("StandardMaterial3D_8ya3y")
+
+[node name="SM_Veh_Boat_Handle_01" parent="SM_Veh_Boat_01" index="1"]
+material_override = SubResource("StandardMaterial3D_ediu5")
+
+[node name="SM_Veh_Boat_Mast_01" parent="SM_Veh_Boat_01" index="2"]
+material_override = SubResource("StandardMaterial3D_ssaob")
+
+[node name="SM_Veh_Cart_01" parent="." index="77"]
+material_override = SubResource("StandardMaterial3D_8vgii")
+
+[node name="SM_Veh_Cart_01_Lid_01" parent="SM_Veh_Cart_01" index="0"]
+material_override = SubResource("StandardMaterial3D_6xl2n")
+
+[node name="SM_Veh_Cart_01_Wheels_01" parent="SM_Veh_Cart_01" index="1"]
+material_override = SubResource("StandardMaterial3D_wu8u5")
+
+[node name="SM_Veh_Cart_01_Wheels_02" parent="SM_Veh_Cart_01" index="2"]
+material_override = SubResource("StandardMaterial3D_hh12r")
+
+[node name="SM_Veh_Cart_02" parent="." index="78"]
+material_override = SubResource("StandardMaterial3D_uecc0")
+
+[node name="SM_Veh_Cart_02_Door_01" parent="SM_Veh_Cart_02" index="0"]
+material_override = SubResource("StandardMaterial3D_w28dr")
+
+[node name="SM_Veh_Cart_02_Lock_01" parent="SM_Veh_Cart_02/SM_Veh_Cart_02_Door_01" index="0"]
+material_override = SubResource("StandardMaterial3D_u377k")
+
+[node name="SM_Veh_Cart_02_Wheels_01" parent="SM_Veh_Cart_02" index="1"]
+material_override = SubResource("StandardMaterial3D_reggx")
+
+[node name="FX_Aurora_Mesh_01" parent="." index="79"]
+visible = false
+
+[node name="FX_Aurora_Mesh_02" parent="." index="80"]
+visible = false
+
+[node name="SM_Generic_CloudRing_01" parent="." index="81"]
+visible = false
+
+[node name="aurora_math" parent="." index="82"]
+visible = false

@@ -12,6 +12,7 @@ enum SerializedField {
 	DAMAGE,
 	HERO,
 	GOLD,
+	XP,
 	IS_BOT,
 }
 
@@ -20,19 +21,45 @@ enum SerializedField {
 var name: String # Nickname of the player
 var id: int # Multiplayer id
 var team: int # Current team of the player during this round
+
 var is_bot: bool # If the player is a fake player (a bot controlled by the server)
 
 var ready: bool # If this player is ready to continue the game flow (Used to sync players with server)
 
-
 var character_stats: CharacterStats # Stats of the player's character
 var deck: PlayerDeck
 
-signal hero_changed(self_ref: Player, new_hero : Hero)
+var win_streak: int
+var health_lost_since_last_round: int
+var total_win_number: int
+var total_lose_number: int
+var current_damage_win_lose_diff: int # <win>-<lose> but can't go over what the rules indicate (used for damage modifier)
+
+signal lvl_changed(self_ref: Player, new_lvl)
+var _lvl: int
+var lvl: int:
+	get: return _lvl
+	set(value):
+		if _lvl == value: return
+		_lvl = clampi(value, 0, 5)
+		lvl_changed.emit(self, _lvl)
+
+signal xp_changed(self_ref: Player, new_xp: int)
+var _xp: int
+var xp: int:
+	get: return _xp
+	set(value):
+		if _xp == value: return
+		_xp = value
+		_check_lvl_up()
+		xp_changed.emit(self, _xp)
+
+signal hero_changed(self_ref: Player, new_hero: Hero)
 var _hero: Hero
 var hero: Hero:
 	get: return _hero
 	set(value):
+		if _hero == value: return
 		_hero = value
 		hero_changed.emit(self, _hero)
 
@@ -41,7 +68,8 @@ var _max_health: int
 var max_health: int:
 	get: return _max_health
 	set(value):
-		_max_health = value
+		if _max_health == value: return
+		_max_health = clampi(value, 0, 100)
 		max_health_changed.emit(self, _max_health)
 
 signal health_changed(self_ref: Player, new_health: int)
@@ -49,8 +77,8 @@ var _health: int
 var health: int:
 	get: return _health
 	set(value):
-		_health = value
-		print("Player: ", self.name, "new health: ", _health)
+		if _health == value: return
+		_health = clampi(value, 0, 100)
 		health_changed.emit(self, _health)
 
 signal gold_changed(self_ref: Player, new_gold: int)
@@ -58,7 +86,8 @@ var _gold: int
 var gold: int:
 	get: return _gold
 	set(value):
-		_gold = value
+		if _gold == value: return
+		_gold = clampi(value, 0, 10000)
 		gold_changed.emit(self, _gold)
 
 signal damage_changed(self_ref: Player, new_damage: int)
@@ -66,6 +95,7 @@ var _damage: int
 var damage: int:
 	get: return _damage
 	set(value):
+		if _damage == value: return
 		_damage = value
 		damage_changed.emit(self, _damage)
 
@@ -74,13 +104,15 @@ var damage: int:
 static func new_from_serialized(serialized_data: Dictionary) -> Player:
 	var player := Player.new()
 	player.name = serialized_data[SerializedField.NAME]
+	player.id = serialized_data[SerializedField.ID]
 	player.team = serialized_data[SerializedField.TEAM]
 	player.health = serialized_data[SerializedField.HEALTH]
 	player.max_health = serialized_data[SerializedField.MAX_HEALTH]
 	player.damage = serialized_data[SerializedField.DAMAGE]
-	#player.hero = Shared.HEROES[serialized_data[SerializedField.HERO]]
+	player.hero = Shared.HEROES[serialized_data[SerializedField.HERO]]
 	player.gold = serialized_data[SerializedField.GOLD]
 	player.is_bot = serialized_data[SerializedField.IS_BOT]
+	player.xp = serialized_data[SerializedField.XP]
 	return player
 
 # ============================== Public functions ==============================
@@ -93,27 +125,29 @@ func serialized() -> Dictionary:
 		SerializedField.HEALTH: health,
 		SerializedField.MAX_HEALTH: max_health,
 		SerializedField.DAMAGE: damage,
-		#SerializedField.HERO: hero.id,
+		SerializedField.HERO: 0 if hero == null else hero.id,
 		SerializedField.GOLD: gold,
-		SerializedField.IS_BOT: is_bot
+		SerializedField.IS_BOT: is_bot,
+		SerializedField.XP: xp,
 	}
 	return serialized_version
 
 
 func update_from_serialized(serialized_data: Dictionary) -> void:
 	name = serialized_data[SerializedField.NAME]
+	id = serialized_data[SerializedField.ID]
 	team = serialized_data[SerializedField.TEAM]
 	health = serialized_data[SerializedField.HEALTH]
 	max_health = serialized_data[SerializedField.MAX_HEALTH]
 	damage = serialized_data[SerializedField.DAMAGE]
-	#hero = Shared.HEROES[serialized_data[SerializedField.HERO]]
+	hero = Shared.HEROES[serialized_data[SerializedField.HERO]]
 	gold = serialized_data[SerializedField.GOLD]
 	is_bot = serialized_data[SerializedField.IS_BOT]
+	xp = serialized_data[SerializedField.XP]
 
 
 func reset_stats() -> void:
 	_apply_all_cards_upgrades()
-
 
 # ============================== Resource base functions ==============================
 
@@ -129,8 +163,15 @@ func _apply_all_cards_upgrades() -> void:
 		printerr("Player: Can't apply cards upgrades")
 		return
 	character_stats.reset_stats(hero.stats)
-	for card in deck.cardPile:
+	for card in deck.card_pile:
 		card.player_upgrade.apply(character_stats, card.lvl)
+
+
+func _check_lvl_up() -> void:
+	for i in range(5, 0, -1):
+		if xp >= GameManager.game_rules.xp_required_for_each_player_lvl[i]:
+			lvl = i
+			return
 
 # ============================== Callbacks ==============================
 

@@ -6,53 +6,53 @@ extends Resource
 
 # ============================== Public variables ==============================
 
-var cardPile: Array[Card]:
-	get: return _cardPile
+var card_pile: Array[Card]:
+	get: return _card_pile
 	set(_value): pass
 
 # ============================== Private variables ==============================
 
-var _cardPile: Array[Card] = []
+var _card_pile: Array[Card] = []
 
 # ============================== Private functions ==============================
 
 func add_card(card_to_add: Card) -> void:
 	if card_to_add == null:
-		printerr("Can't add a null card inside the cardPile")
+		printerr("Can't add a null card inside the card_pile")
 	else:
-		_cardPile.append(card_to_add)
+		_card_pile.append(card_to_add)
 
 
 func remove_card(card_to_remove: Card) -> void:
 	if card_to_remove == null:
 		printerr("Can't remove a null card")
 		return
-	if card_to_remove in _cardPile:
-		_cardPile.erase(card_to_remove)
+	if card_to_remove in _card_pile:
+		_card_pile.erase(card_to_remove)
 
 
 func size():
-	return _cardPile.size()
+	return _card_pile.size()
 
 
 func remove_all_same_card(card_to_remove: Card) -> void:
-	_remove_all_same_card_in_array(card_to_remove, _cardPile)
+	_remove_all_same_card_in_array(card_to_remove, _card_pile)
 
 
 func remove_card_at_pos(index: int) -> void:
-	_remove_card_at_pos_in_array(index, _cardPile)
+	_remove_card_at_pos_in_array(index, _card_pile)
 
 
 func draw_card(index: int) -> Card:
-	return _draw_card_in_array(index, _cardPile)
+	return _draw_card_in_array(index, _card_pile)
 
 
 func draw_random_card() -> Card:
-	return _draw_random_card_in_array(_cardPile)
+	return _draw_random_card_in_array(_card_pile)
 
 
 func draw_n_random_card(number :int) -> Array[Card]:
-	return _draw_n_random_card_in_array(number, _cardPile)
+	return _draw_n_random_card_in_array(number, _card_pile)
 
 # ============================== Private functions ==============================
 
@@ -61,7 +61,7 @@ func _remove_all_same_card_in_array(card_to_remove: Card, cards: Array[Card]) ->
 		printerr("Can't remove a null card")
 		return
 	
-	for card in _cardPile:
+	for card in _card_pile:
 		if card.name == card_to_remove.name:
 			cards.erase(card)
 
@@ -89,7 +89,7 @@ func _draw_card_in_array(index: int, cards: Array[Card]) -> Card:
 
 func _draw_random_card_in_array(cards: Array[Card]) -> Card:
 	if cards.is_empty():
-		printerr("The cardPile is empty. Cannot draw a card.")
+		printerr("The card_pile is empty. Cannot draw a card.")
 		return null
 	
 	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
@@ -101,7 +101,7 @@ func _draw_random_card_in_array(cards: Array[Card]) -> Card:
  #TODO Improve this function to accept a draw chance rule (like 50% chance common, 30% chance rare, 20% chance epic)
 func _draw_n_random_card_in_array(number_of_cards_to_draw :int, cards: Array[Card]) -> Array[Card]:
 	if cards.is_empty():
-		printerr("The cardPile is empty. Cannot draw cards.")
+		printerr("The card_pile is empty. Cannot draw cards.")
 		return []
 	
 	if number_of_cards_to_draw > _get_diffent_cards_number_in_array(cards):
@@ -117,23 +117,48 @@ func _draw_n_random_card_in_array(number_of_cards_to_draw :int, cards: Array[Car
 	return returned_cards
 
 
-func _getArrayWithNoDuplicate(cards: Array) -> Array:
+func _get_array_with_no_duplicate(cards: Array) -> Array:
 	var unique_cards: Array[Card] = []
 	for card in cards:
-		if not _isCardInArray(card, unique_cards):
+		if not _is_card_in_array(card, unique_cards):
 			unique_cards.append(card)
 	
 	return unique_cards
 
 
-# A cardPile with {A,A,A,B,C,C,C,C,C,D,E,E,E} will return 5
+# A card_pile with {A,A,A,B,C,C,C,C,C,D,E,E,E} will return 5
 func _get_diffent_cards_number_in_array(cards: Array[Card]) -> int:
-	return _getArrayWithNoDuplicate(cards).size()
+	return _get_array_with_no_duplicate(cards).size()
 
 
-func _isCardInArray(card_to_find: Card, cards: Array[Card]) -> bool:
+func _is_card_in_array(card_to_find: Card, cards: Array[Card]) -> bool:
 	for card in cards:
 		if card_to_find.name == card.name:
 			return true
 	
 	return false
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

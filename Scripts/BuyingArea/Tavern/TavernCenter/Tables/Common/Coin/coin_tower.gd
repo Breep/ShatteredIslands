@@ -3,6 +3,7 @@ extends Node3D
 
 # ============================== Constants ==============================
 
+# TODO Relier la drandom distance à la vie du joueur: Moins le joueur a de vie, plus il range mal ses pièces
 const MAX_RANDOM_DISTANCE:float = 0.01 # Random movement of the coin around the Y axis
 
 # ============================== Public variables ==============================
@@ -22,7 +23,7 @@ var _coins: Array[Coin]
 
 @onready var coin_scene: PackedScene = preload("res://Scenes/BuyingArea/Tavern/TavernCenter/Tables/Common/Coin/coin.tscn")
 
-# ============================== Node base functions ==============================$"PlayersLeft_3/1_ffa3/Table_ffa3"
+# ============================== Node base functions ==============================
 
 func _ready() -> void:
 	for child in get_children():

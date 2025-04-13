@@ -56,11 +56,3 @@ func recursive_show(node: Node3D):
 			recursive_show(child)
 	if node is Node3D:
 		node.show()
-
-# Find the first parent with a specific signal and emit it
-func recursive_propagate_signal(node: Node, signal_name: String) -> void:
-	if node.has_user_signal(signal_name):
-		print("Found a parent (", node.name, " with the corresponding signal !")
-		node.emit_signal(signal_name, self)
-	else:
-		recursive_propagate_signal(node.get_parent(), signal_name)

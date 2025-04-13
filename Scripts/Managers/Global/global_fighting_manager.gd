@@ -23,8 +23,8 @@ enum FightingState {
 # ============================== Fighting phase duration ==============================
 
 const STARTING_DURATION: int = 5 # in seconds
-const FIGHT_DURATION: int = 30 # in seconds
-const FIGHT_ACCELERATED_DURATION: int = 10 # in seconds
+const FIGHT_DURATION: int = 10 # in seconds
+const FIGHT_ACCELERATED_DURATION: int = 5 # in seconds
 
 # ============================== Public variables ==============================
 
@@ -37,8 +37,9 @@ var fighting_state: FightingState:
 	get:
 		return _fighting_state
 	set(value):
-		_fighting_state = value
-		state_changed.emit(value)
+		if _fighting_state != value:
+			_fighting_state = value
+			state_changed.emit(value)
 
 var _fighting_managers: Array[FightingManager]
 var _fights_over: int = 0
@@ -73,6 +74,14 @@ func register_fighting_manager(fighting_manager: FightingManager):
 	_fighting_managers.append(fighting_manager)
 	fighting_manager.fight_is_over.connect(_fighting_manager_fighting_is_over, CONNECT_ONE_SHOT)
 
+# ============================== Private functions ==============================
+
+@rpc("authority", "call_local")
+func _finish_all_fights() -> void:
+	Engine.time_scale = 1
+	timer.stop()
+	all_fights_are_over.emit()
+
 # ============================== Callbacks ==============================
 
 func _on_timer_timeout() -> void:
@@ -95,9 +104,7 @@ func _on_timer_timeout() -> void:
 
 func _on_state_changed(new_state) -> void:
 	if new_state == FightingState.FINISHED:
-		Engine.time_scale = 1
-		timer.stop()
-		all_fights_are_over.emit()
+		_finish_all_fights.rpc()
 
 
 func _fighting_manager_fighting_is_over(_winning_team) -> void:

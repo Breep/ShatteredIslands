@@ -107,14 +107,6 @@ func _on_player_hero_picked() -> void:
 		all_heroes_picked.emit()
 	_ui_buying_area.connect_self_character_stats()
 
-
-
-
-
-
-
-
-
 @rpc("authority", "call_local")
 func _end_buying_round() -> void:
 	phase_ended.emit()

@@ -37,6 +37,9 @@ func _reorder_portraits() -> void:
 func _get_players_ordered_by_health() -> Array[Player]:
 	var array_sorted: Array[Player] = PlayerManager.players.values().duplicate()
 	array_sorted.sort_custom(_compare_player_health)
+	var tmp_names: String = "array_sorted:"
+	for player in array_sorted:
+		tmp_names += player.name + " "
 	return array_sorted
 
 

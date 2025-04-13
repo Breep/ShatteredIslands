@@ -7,13 +7,13 @@
 
 [sub_resource type="Resource" id="Resource_mul21"]
 script = ExtResource("2_3y3xu")
-health_max = 2400
+health_max = 750
 mana_max = 100
 mana_regen = 10.0
 energy_max = 50
 energy_regen = 2.0
 move_speed = 4.0
-attack_damage = 60
+attack_damage = 18
 attack_speed = 0.5
 attack_move_speed = 10.0
 physical_critical_chance = 12.0

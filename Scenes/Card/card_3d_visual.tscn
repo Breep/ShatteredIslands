@@ -9,7 +9,7 @@ roughness = 0.5
 normal_enabled = true
 normal_texture = ExtResource("2_bpmbv")
 
-[node name="Card3D" instance=ExtResource("1_fiu7f")]
+[node name="Card3DVisual" instance=ExtResource("1_fiu7f")]
 script = ExtResource("2_xf6vy")
 
 [node name="Mesh" parent="." index="0"]

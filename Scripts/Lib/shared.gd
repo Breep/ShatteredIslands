@@ -11,6 +11,14 @@ var HEROES: Dictionary[Hero.HeroId, Hero] = {
 	Hero.HeroId.TONY_LE_BARDE: load("res://Resources/Heroes/tony_le_barde.tres")
 }
 
+
+var MAPS: Dictionary[Battle.BattleType, PackedScene] = {
+	Battle.BattleType.VS_1: load("res://Scenes/FightingArea/Maps/map_flat_test.tscn"),
+	Battle.BattleType.VS_2: load("res://Scenes/FightingArea/Maps/map_flat_test.tscn"),
+	Battle.BattleType.FFA_SOLO_3: load("res://Scenes/FightingArea/Maps/map_telescope_island.tscn")
+}
+
+
 var fighting_areas_ref: Dictionary[int, FightingArea] # Key=battle_id
 var spawn_managers_ref: Dictionary[int, SpawnManager] # Key=battle_id
 var entity_managers_ref: Dictionary[int, EntityManager] # Key=battle_id

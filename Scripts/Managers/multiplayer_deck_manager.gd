@@ -12,12 +12,12 @@ extends Node2D
 # ============================== Signals ==============================
 
 # [Client only] Is emit when server has anwsered the local client request to draw 3 cards
-signal answer_for_draw_received()
+signal _answer_for_draw_received()
 
-signal shop_deck_shuffled() # Server only
+signal _shop_deck_shuffled() # Server only
 
 # [Client only] Is emit when server has answered the local client request to buy a card
-signal answer_for_buying_request_received()
+signal _answer_for_buying_request_received()
 
 # ============================== Signals ==============================
 
@@ -36,7 +36,6 @@ var _server_response: ServerResponse
 
 # [Server only] All the cards of the shop
 # Only the server knows what is inside the shop deck, client can only ask to draw and/or put back cards in it
-# TODO Make the shopdeck more clever so it doesnt add more than it has given to clients
 var shop_deck: ShopDeck
 
 # ============================== Private ==============================
@@ -57,7 +56,7 @@ var _cards_drawn: Array[Card]
 var _is_ready: bool = false
 
 # [Server only] Dictionary of all cards distributed in all player shop
-var _cards_refs_displayed_in_player_shop: Dictionary # { int, Array[int] }
+var _cards_refs_displayed_in_player_shop: Dictionary[int, Array] # { player_id, Array[int] }
 
 # ============================== Public function ==============================
 
@@ -84,13 +83,7 @@ func construct_shop_deck(families: Array[Family], rules: GameRules) -> void:
 	shop_deck.construct_shop_deck(families, rules)
 	shop_deck.shuffle()
 	_is_ready = true
-	shop_deck_shuffled.emit()
-
-
-
-
-
-
+	_shop_deck_shuffled.emit()
 
 
 func put_card_back_in_cardshop(card: Card):
@@ -103,21 +96,49 @@ func put_card_back_in_cardshop(card: Card):
 
 
 # Draw n cards in the server shop deck
-func smart_draw_n_cards(cards_to_remove: Array[Card], number_of_cards_to_draw: int) -> Array[Card]:
+func smart_draw_n_cards(player: Player, cards_to_remove: Array[Card], number_of_cards_to_draw: int) -> Array[Card]:
+	if multiplayer.is_server():
+		return await _server_smart_draw_n_cards(player, cards_to_remove, number_of_cards_to_draw)
+	else:
+		return await _client_smart_draw_n_cards(cards_to_remove, number_of_cards_to_draw)
+
+
+func try_buy_card_for_player(player: Player, card: Card) -> bool:
+	if multiplayer.is_server():
+		return await _server_try_buy_card_for_player(player, card)
+	else:
+		return await _client_try_buy_card_for_player(card)
+
+
+# ============================== Private function ==============================
+
+func _server_smart_draw_n_cards(player: Player, cards_to_remove: Array[Card], number_of_cards_to_draw: int) -> Array[Card]:
+	if not _is_ready:
+		await _shop_deck_shuffled
+	
 	_cards_drawn.clear()
 	var cards_to_remove_refs: Array[int]
 	for card in cards_to_remove:
 		cards_to_remove_refs.append(_get_card_ref_id(card))
 	
-	if multiplayer.is_server():
-		var cards_drawn = shop_deck.smart_draw_n_cards(cards_to_remove, number_of_cards_to_draw)
-		for card in cards_drawn:
-			_cards_refs_displayed_in_player_shop[SERVER_ID].append(_get_card_ref_id(card))
-		return cards_drawn
+	var cards_drawn = shop_deck.smart_draw_n_cards(cards_to_remove, number_of_cards_to_draw)
+	var cards_drawn_refs: Array[int]
+	for card in cards_drawn:
+		cards_drawn_refs.append(_get_card_ref_id(card))
+	
+	_cards_refs_displayed_in_player_shop[player.id] = cards_drawn_refs.duplicate()
+	return cards_drawn
+
+
+func _client_smart_draw_n_cards(cards_to_remove: Array[Card], number_of_cards_to_draw: int) -> Array[Card]:
+	_cards_drawn.clear()
+	var cards_to_remove_refs: Array[int]
+	for card in cards_to_remove:
+		cards_to_remove_refs.append(_get_card_ref_id(card))
 	
 	#print("[id:", multiplayer.get_unique_id(),"] Asking the server for cards = ", _cards_drawn.size())
 	_ask_to_draw_n_random_card.rpc_id(SERVER_ID, multiplayer.get_unique_id(), cards_to_remove_refs, number_of_cards_to_draw)
-	await answer_for_draw_received
+	await _answer_for_draw_received
 	#print("[id:", multiplayer.get_unique_id(),"] Got ", _cards_drawn.size(), " cards")
 	#for card in _cards_drawn:
 		#print("[id:", multiplayer.get_unique_id(),"] ", card.name, " - ", card.lvl)
@@ -125,14 +146,36 @@ func smart_draw_n_cards(cards_to_remove: Array[Card], number_of_cards_to_draw: i
 	return _cards_drawn.duplicate()
 
 
-func try_buy_card_for_local_player(card: Card) -> bool:
-	if multiplayer.is_server():
-		printerr("Server shouldn't be a player")
+func _server_try_buy_card_for_player(player: Player, card: Card) -> bool:
+	var card_ref_id: int = _get_card_ref_id(card)
+	
+	# Check if card is in the player shop
+	if card_ref_id not in _cards_refs_displayed_in_player_shop[player.id]:
+		printerr("[", multiplayer.get_unique_id(),"] Peer.", player.id, " try to buy a card not displayed in his shop")
 		return false
 	
+	# Check player money
+	if player.gold < 100: # TODO check gamerules for card price
+		printerr("[", multiplayer.get_unique_id(),"]  Peer.", player.id, " is not rich enough")
+		return false
+	
+	# Put back the other cards in the shopdeck
+	for card_ref_to_delete in _cards_refs_displayed_in_player_shop[player.id]:
+		if card_ref_to_delete != card_ref_id:
+			put_card_back_in_cardshop(_cards_refs[card_ref_to_delete])
+	_cards_refs_displayed_in_player_shop[player.id].clear()
+	
+	PlayerManager.players[player.id].deck.add_card(_cards_refs[card_ref_id])
+	PlayerManager.players[player.id].gold -= 100
+	shop_deck.remove_from_available_cards(_cards_refs[card_ref_id])
+	return true
+
+
+func _client_try_buy_card_for_player(card: Card) -> bool:
 	print("[id:", multiplayer.get_unique_id(),"] Asking the server permission to buy ", card.name)
+	
 	_ask_to_buy_card.rpc_id(SERVER_ID, multiplayer.get_unique_id(), _get_card_ref_id(card))
-	await answer_for_buying_request_received
+	await _answer_for_buying_request_received
 	
 	match _server_response:
 		ServerResponse.OK:
@@ -148,7 +191,6 @@ func try_buy_card_for_local_player(card: Card) -> bool:
 	# Unreachable
 	return false
 
-# ============================== Private function ==============================
 
 func _isCardInArray(card_to_find: Card, cards: Array[Card]) -> bool:
 	for card in cards:
@@ -175,22 +217,19 @@ func draw_cards(cards_refs_ids: Array[int]) -> void:
 	for ref_id in cards_refs_ids:
 		_cards_drawn.append(_cards_refs[ref_id].duplicate())
 	
-	answer_for_draw_received.emit()
+	_answer_for_draw_received.emit()
 
 
 # Server call this rpc to notify client that a player bought a card
-# If the player who bought the card is us, emit a answer_for_buying_request_received signal
+# emit a _answer_for_buying_request_received signal
 # to unlock the async try_buy_card_for_local_player() function
 @rpc("authority", "call_local")
-func _add_card_in_playerdeck(player_id: int, card_ref_id: int) -> void:
-	print("[id:", multiplayer.get_unique_id(),"] Add ", _cards_refs[card_ref_id], " to ", player_id, " deck")
-	PlayerManager.players[player_id].deck.add_card(_cards_refs[card_ref_id])
-	PlayerManager.players[player_id].gold -= 100
-	
-	# If the local player is the one at the origin of the demand
-	if player_id == multiplayer.get_unique_id():
-		_server_response = ServerResponse.OK
-		answer_for_buying_request_received.emit()
+func _add_card_in_playerdeck(card_ref_id: int) -> void:
+	PlayerManager.get_local_player().deck.add_card(_cards_refs[card_ref_id])
+	PlayerManager.get_local_player().gold -= 100
+	shop_deck.remove_from_available_cards(_cards_refs[card_ref_id])
+	_server_response = ServerResponse.OK
+	_answer_for_buying_request_received.emit()
 
 
 # Server call this to notify a client that an error occured when the server received
@@ -199,7 +238,7 @@ func _add_card_in_playerdeck(player_id: int, card_ref_id: int) -> void:
 @rpc("authority", "call_remote")
 func _notify_buying_error(error: ServerResponse) -> void:
 	_server_response = error
-	answer_for_buying_request_received.emit()
+	_answer_for_buying_request_received.emit()
 
 # ============================== Server RPC ==============================
 
@@ -217,7 +256,7 @@ func _ask_to_add_card(_peer_id: int, card_ref_id: int) -> void:
 		return
 	
 	if not _is_ready:
-		await shop_deck_shuffled
+		await _shop_deck_shuffled
 	
 	shop_deck.add_card(_cards_refs[card_ref_id])
 
@@ -235,7 +274,7 @@ func _ask_to_draw_n_random_card(peer_id: int, cards_to_remove_refs: Array[int], 
 		return
 	
 	if not _is_ready:
-		await shop_deck_shuffled
+		await _shop_deck_shuffled
 	
 	var cards_to_remove: Array[Card]
 	for ref_id in cards_to_remove_refs:
@@ -255,26 +294,25 @@ func _ask_to_draw_n_random_card(peer_id: int, cards_to_remove_refs: Array[int], 
 
 # ClientA call this server rpc to ask the server the permission to buy a card.
 # The server check if the card is one of those previously drawn by clientA.
-# It will then check if ClientA has enougth money. If it's ok, the server notify ALL
-# clients that the player_id of ClientA has bought this card and that they should all add
-# this card to the player_deck associated to this id
+# It will then check if ClientA has enougth money.
 # If there is a problem with the buy the server notify only clientA
 @rpc("any_peer", "call_remote")
 func _ask_to_buy_card(peer_id: int, card_ref_id: int) -> void:
-	print("[id:", multiplayer.get_unique_id(),"] Asked to buy a card for peer ", peer_id)
+	print("[", multiplayer.get_unique_id(),"] Asked to buy a card for peer ", peer_id)
 	
 	if not multiplayer.is_server():
-		printerr("[id:", multiplayer.get_unique_id(),"] Can only ask cards to server")
+		printerr("[", multiplayer.get_unique_id(),"] Can only ask cards to server")
 		return
 	
+	# Check if card is in the player shop
 	if card_ref_id not in _cards_refs_displayed_in_player_shop[peer_id]:
-		printerr("[id:", multiplayer.get_unique_id(),"] Peer.", peer_id, " try to buy a card not displayed in his shop")
+		printerr("[", multiplayer.get_unique_id(),"] Peer.", peer_id, " try to buy a card not displayed in his shop")
 		_notify_buying_error.rpc_id(peer_id, ServerResponse.CARD_NOT_BUYABLE)
 		return
 	
 	# Check player money
 	if PlayerManager.players[peer_id].gold < 100: # TODO check gamerules for card price
-		printerr("[id:", multiplayer.get_unique_id(),"]  Peer.", peer_id, " is not rich enough")
+		printerr("[", multiplayer.get_unique_id(),"]  Peer.", peer_id, " is not rich enough")
 		_notify_buying_error.rpc_id(peer_id, ServerResponse.NOT_ENOUGHT_MONEY)
 		return
 	
@@ -284,6 +322,8 @@ func _ask_to_buy_card(peer_id: int, card_ref_id: int) -> void:
 			_cards_refs_displayed_in_player_shop[peer_id].erase(card_ref_to_delete)
 			put_card_back_in_cardshop(_cards_refs[card_ref_to_delete])
 	
-	# Notify ALL clients that peer_id bought a card
 	_cards_refs_displayed_in_player_shop[peer_id].erase(card_ref_id)
-	_add_card_in_playerdeck.rpc(peer_id, card_ref_id)
+	PlayerManager.players[peer_id].deck.add_card(_cards_refs[card_ref_id])
+	PlayerManager.players[peer_id].gold -= 100
+	shop_deck.remove_from_available_cards(_cards_refs[card_ref_id])
+	_add_card_in_playerdeck.rpc_id(peer_id, card_ref_id)

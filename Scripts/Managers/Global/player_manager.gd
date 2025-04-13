@@ -30,6 +30,13 @@ signal _join_server_answered()
 var _join_server_response: bool
 var _join_server_reason: String
 
+var _game_state_changed_signal: Signal # Ref to game_state_changed signal
+
+# ============================== Node base functions ==============================
+
+func _ready() -> void:
+	Events.new_game_started.connect(_on_events_new_game_started)
+
 # ============================== Public functions ==============================
 
 func get_local_player() -> Player:
@@ -79,13 +86,14 @@ func add_bot() -> void:
 signal __all_players_syncronized()
 var __number_of_players_syncronized: int
 func sync_point() -> void:
-	print("       DEBUG sync_point() ", multiplayer.get_peers().size())
+	print("[", multiplayer.get_unique_id(), "] sync_point() ", multiplayer.get_peers().size())
 	if not multiplayer.is_server():
 		_client_ready.rpc_id(1, multiplayer.get_unique_id())
 	elif multiplayer.is_server() and multiplayer.get_peers().size() == 0:
 		return
 	
 	await __all_players_syncronized
+	print("[", multiplayer.get_unique_id(), "] sync_point() SYNC !")
 	__number_of_players_syncronized = 0
 
 
@@ -142,7 +150,7 @@ func _answer_join_game(response: int, reason: String) -> void:
 # TODO Improve this so it only send not known players to players
 @rpc("authority", "call_remote")
 func _add_player(player_name: String, id: int, is_bot: bool, serialized_player: Dictionary) -> void:
-	print("[id:", multiplayer.get_unique_id(),"] Adding player: ", player_name, " of multiplayer id:", id, " in my players list")
+	#print("[id:", multiplayer.get_unique_id(),"] Adding player: ", player_name, " of multiplayer id:", id, " in my players list")
 	
 	if players.has(id) or players.size() >= MAX_PLAYERS:
 		return
@@ -152,10 +160,16 @@ func _add_player(player_name: String, id: int, is_bot: bool, serialized_player: 
 		new_player.name = player_name
 		new_player.id = id
 		new_player.is_bot = is_bot
-		new_player.damage = 5
-		new_player.gold = 500
-		new_player.health = 30
+		new_player.damage = 1
+		new_player.lvl = 1
+		new_player.gold = GameManager.game_rules.gold_starting_game
+		new_player.health = GameManager.game_rules.player_starting_health
 		_connect_to_signals(new_player)
+		if is_bot:
+			var player_bot_ai: PlayerBotAI = load("res://Scenes/PlayerBotAI/player_bot_ai.tscn").instantiate()
+			player_bot_ai.player = new_player
+			player_bot_ai.name = "PlayerBotAI_" + str(new_player.id)
+			add_child(player_bot_ai)
 		
 		players[id] = new_player
 	else:
@@ -180,22 +194,9 @@ func _connect_to_signals(player: Player) -> void:
 	player.damage_changed.connect(_on_player_damage_changed)
 	player.hero_changed.connect(_on_player_hero_changed)
 	player.gold_changed.connect(_on_player_gold_changed)
+	player.xp_changed.connect(_on_player_xp_changed)
+	player.lvl_changed.connect(_on_player_lvl_changed)
 
-
-func _on_player_health_changed(player: Player, _unused) -> void:
-	_sync_player.rpc(player.serialized())
-
-func _on_player_max_health_changed(player: Player, _unused) -> void:
-	_sync_player.rpc(player.serialized())
-
-func _on_player_damage_changed(player: Player, _unused) -> void:
-	_sync_player.rpc(player.serialized())
-
-func _on_player_hero_changed(player: Player, _unused) -> void:
-	_sync_player.rpc(player.serialized())
-
-func _on_player_gold_changed(player: Player, _unused) -> void:
-	_sync_player.rpc(player.serialized())
 
 @rpc("authority", "call_remote")
 func _sync_player(serialized_player: Dictionary) -> void:
@@ -203,8 +204,38 @@ func _sync_player(serialized_player: Dictionary) -> void:
 	player.update_from_serialized(serialized_player)
 
 
+# ============================== Callbacks ==============================
+
+func _on_player_health_changed(player: Player, _unused) -> void:
+	_sync_player.rpc(player.serialized())
 
 
+func _on_player_max_health_changed(player: Player, _unused) -> void:
+	_sync_player.rpc(player.serialized())
+
+
+func _on_player_damage_changed(player: Player, _unused) -> void:
+	_sync_player.rpc(player.serialized())
+
+
+func _on_player_hero_changed(player: Player, _unused) -> void:
+	_sync_player.rpc(player.serialized())
+
+
+func _on_player_gold_changed(player: Player, _unused) -> void:
+	_sync_player.rpc(player.serialized())
+
+
+func _on_player_xp_changed(player: Player, _unused) -> void:
+	_sync_player.rpc(player.serialized())
+
+
+func _on_player_lvl_changed(player: Player, _unused) -> void:
+	_sync_player.rpc(player.serialized())
+
+
+func _on_events_new_game_started(game_node: Game) ->void:
+	_game_state_changed_signal = game_node.game_state_changed
 
 
 

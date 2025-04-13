@@ -9,17 +9,13 @@ extends Node2D
 # =============================================================
 # =============================================================
 
-# ============================== Enum ==============================
-
-enum GameState {
-	Starting,
-	Buying,
-	Fighting
-}
-
 # ============================== Constants ==============================
 
 const HEROES_NUMBER: int = 8
+
+# ============================== Public variables ==============================
+
+var game_rules: GameRules
 
 # ============================== Private variables ==============================
 
@@ -27,7 +23,6 @@ var _game_scene: PackedScene = preload("res://Scenes/Game/game.tscn")
 
 var _families_ref: Dictionary # Reference Dictionary to all families
 var _active_families: Array[Family] # Array of all families activated for this game only
-var _rules: GameRules
 
 #[Server only]
 var _game_heroes_ready: bool = false
@@ -41,11 +36,11 @@ var _random_heroes_ref: Array[Hero.HeroId]
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	_rules = load("res://Resources/GameRules/NormalGameRules.tres")
+	game_rules = load("res://Resources/GameRules/NormalGameRules.tres")
 	_init_families_ref()
 	_active_families.append(get_family_from_type(Family.FamilyType.Life))
-	#_active_families.append(get_family_from_type(Family.FamilyType.Life))
-	#_active_families.append(get_family_from_type(Family.FamilyType.Fire))
+	_active_families.append(get_family_from_type(Family.FamilyType.Poison))
+	_active_families.append(get_family_from_type(Family.FamilyType.Fire))
 
 # ============================== Public function ==============================
 
@@ -65,9 +60,9 @@ func get_current_game_heroes() -> Array[Hero]:
 
 @rpc("any_peer", "call_local")
 func start_game() -> void:
-	MultiplayerDeckManager.init_cards_ref(_active_families, _rules)
+	MultiplayerDeckManager.init_cards_ref(_active_families, game_rules)
 	if multiplayer.is_server():
-		MultiplayerDeckManager.construct_shop_deck(_active_families, _rules)
+		MultiplayerDeckManager.construct_shop_deck(_active_families, game_rules)
 	
 	get_tree().change_scene_to_packed(_game_scene)
 
