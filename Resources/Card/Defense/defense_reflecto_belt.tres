@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Card" load_steps=4 format=3 uid="uid://by2fg3cyrvuja"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://ResourcesBase/CardBase/card.gd" id="1_tuqjb"]
+[ext_resource type="Script" uid="uid://bmb03fcdh2kgs" path="res://ResourcesBase/Upgrades/Player/Defense/defense_reflecto_belt.gd" id="1_u73hx"]
+
+[sub_resource type="Resource" id="Resource_rtxvx"]
+script = ExtResource("1_u73hx")
+_armor_stacks = 50
+_attack_increase_percent = Array[int]([10, 20, 30, 40, 70])
+metadata/_custom_type_script = "uid://bmb03fcdh2kgs"
+
+[resource]
+script = ExtResource("1_tuqjb")
+name = "Reflecto Belt"
+family = 1
+rarity = 0
+player_upgrade = SubResource("Resource_rtxvx")
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

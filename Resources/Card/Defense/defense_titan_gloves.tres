@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Card" load_steps=4 format=3 uid="uid://bkvgn5qvg04o2"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://ResourcesBase/CardBase/card.gd" id="1_hgnv1"]
+[ext_resource type="Script" uid="uid://cw5afnioxhvvy" path="res://ResourcesBase/Upgrades/Player/Defense/defense_titan_gloves.gd" id="1_yfkj3"]
+
+[sub_resource type="Resource" id="Resource_m5uam"]
+script = ExtResource("1_yfkj3")
+_max_health_percents = Array[float]([1.0, 2.0, 3.0, 4.0, 7.0])
+_period = 2.0
+metadata/_custom_type_script = "uid://cw5afnioxhvvy"
+
+[resource]
+script = ExtResource("1_hgnv1")
+name = "Titan Gloves"
+family = 1
+rarity = 0
+player_upgrade = SubResource("Resource_m5uam")
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"
