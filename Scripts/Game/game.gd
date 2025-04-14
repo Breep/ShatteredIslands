@@ -57,10 +57,10 @@ func _start_hero_selection() -> void:
 
 
 func _start_new_round() ->void:
-	print("Game: Start new round")
+	print("[", multiplayer.get_unique_id(), "] Game: Start new round")
 	_fighting_areas.clear()
 	_current_round_battles = await RoundManager.get_current_round_battles()
-	await PlayerManager.sync_point()
+	await PlayerManager.sync_point(PlayerManager.SyncID.STARTING_NEW_ROUND)
 	RoundManager.starting_round_player_changes()
 	_start_buying_phase()
 
@@ -94,18 +94,18 @@ func _start_fighting_phase() -> void:
 # ============================== Callbacks ==============================
 
 func _on_buying_area_phase_ended() -> void:
-	print("Game: BUYING PHASE ENDED")
+	print("[", multiplayer.get_unique_id(), "] Game: BUYING PHASE ENDED")
 	_start_fighting_phase()
 
 
 func _on_buying_area_all_heroes_picked() -> void:
-	print("Game: BUYING AREA ALL HEAROES PICKED")
+	print("[", multiplayer.get_unique_id(), "] Game: BUYING AREA ALL HEAROES PICKED")
 	_start_new_round()
 
 
 func _on_global_fighting_manager_all_fights_are_over() -> void:
-	print("Game: ALL FIGHTS ARE OVER")
+	print("[", multiplayer.get_unique_id(), "] Game: ALL FIGHTS ARE OVER")
 	await RoundManager.ending_round_player_changes()
 	await get_tree().create_timer(1.0).timeout
-	await PlayerManager.sync_point()
+	await PlayerManager.sync_point(PlayerManager.SyncID.ENDING_ROUND)
 	_start_new_round()

@@ -46,5 +46,4 @@ func _setup_card_towers(available_cards_composition: Dictionary[Family.FamilyTyp
 # ============================== Callback functions ==============================
 
 func _on_shop_deck_available_cards_composition_changed(available_cards_composition: Dictionary[Family.FamilyType, int]) -> void:
-	print("wolololo")
 	_update_visual(available_cards_composition)

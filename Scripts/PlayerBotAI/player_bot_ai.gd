@@ -9,7 +9,6 @@ const MAX_WAIT_TIME: float = 8
 
 var player: Player # Player Ref this BotAI is linked to
 
-var _game_state: Game.GameState = Game.GameState.UNDEF
 var _wake_up_timer: Timer # Every timer tick, bot wakes up, figure out what to do, then go to sleep again (wait_time is random)
 var _rng: RandomNumberGenerator
 var _economy_strategy: EconomyStrategy
@@ -28,26 +27,26 @@ func _ready() -> void:
 	
 	return # TMP TODO TO REMOVE (DEV)
 	
-	Events.game_state_changed.connect(_on_events_game_state_changed)
-	
-	_wake_up_timer = Timer.new()
-	_wake_up_timer.one_shot = true
-	_wake_up_timer.autostart = false
-	_wake_up_timer.timeout.connect(_on_wake_up_timer_timeout)
-	_wake_up_timer.name = "WakeUpTimer"
-	add_child(_wake_up_timer)
-	
-	_card_shop = CardShop.new()
-	_card_shop.player = player
-	_card_shop.name = "CardShop"
-	add_child(_card_shop)
-	
-	_rng = RandomNumberGenerator.new()
-	_rng.randomize()
-	
-	_economy_strategy = EconomyStrategy.KEEPER if _rng.randi() % 2 == 0 else EconomyStrategy.WASTER
-	var tmp_debug_strat_str: String = "KEEPER" if _economy_strategy == EconomyStrategy.KEEPER else "WASTER"
-	print("PlayerBotAI: Starting AI for ", player.name, "[", tmp_debug_strat_str, "]")
+	#Events.game_state_changed.connect(_on_events_game_state_changed)
+	#
+	#_wake_up_timer = Timer.new()
+	#_wake_up_timer.one_shot = true
+	#_wake_up_timer.autostart = false
+	#_wake_up_timer.timeout.connect(_on_wake_up_timer_timeout)
+	#_wake_up_timer.name = "WakeUpTimer"
+	#add_child(_wake_up_timer)
+	#
+	#_card_shop = CardShop.new()
+	#_card_shop.player = player
+	#_card_shop.name = "CardShop"
+	#add_child(_card_shop)
+	#
+	#_rng = RandomNumberGenerator.new()
+	#_rng.randomize()
+	#
+	#_economy_strategy = EconomyStrategy.KEEPER if _rng.randi() % 2 == 0 else EconomyStrategy.WASTER
+	#var tmp_debug_strat_str: String = "KEEPER" if _economy_strategy == EconomyStrategy.KEEPER else "WASTER"
+	#print("PlayerBotAI: Starting AI for ", player.name, "[", tmp_debug_strat_str, "]")
 
 
 func _dumb_buying_area() -> void:

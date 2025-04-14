@@ -96,7 +96,7 @@ func smart_draw_n_cards(player: Player, cards_to_remove: Array[Card], number_of_
 
 func try_buy_card_for_player(player: Player, card: Card) -> bool:
 	if multiplayer.is_server():
-		return await _server_try_buy_card_for_player(player, card)
+		return _server_try_buy_card_for_player(player, card)
 	else:
 		return await _client_try_buy_card_for_player(card)
 

@@ -1,5 +1,10 @@
 extends Node
 
+enum SyncID {
+	STARTING_NEW_ROUND,
+	ENDING_ROUND
+}
+
 # Bot names and their fake peer_id
 const BOT_INFOS: Dictionary [int, String] = {
 	-1: "Spide Ren'heure",
@@ -84,30 +89,34 @@ func add_bot() -> void:
 
 
 signal __all_players_syncronized()
-var __number_of_players_syncronized: int
-func sync_point() -> void:
-	print("[", multiplayer.get_unique_id(), "] sync_point() ", multiplayer.get_peers().size())
-	if not multiplayer.is_server():
-		_client_ready.rpc_id(1, multiplayer.get_unique_id())
-	elif multiplayer.is_server() and multiplayer.get_peers().size() == 0:
-		return
-	
-	await __all_players_syncronized
-	print("[", multiplayer.get_unique_id(), "] sync_point() SYNC !")
-	__number_of_players_syncronized = 0
+var __all_players_synchronized_for_sync_id: Dictionary[int, bool] # Key=SyncID, Value=<True if all players are synchronized>
+var __number_of_players_syncronized: Dictionary[int, int] # Key=SyncID, Value=<Number of players ready>
+func sync_point(sync_id: int) -> void:
+	_client_ready.rpc_id(1, sync_id)
+	if not __all_players_synchronized_for_sync_id.has(sync_id) or __all_players_synchronized_for_sync_id[sync_id] == false:
+		await __all_players_syncronized
+
+	__number_of_players_syncronized[sync_id] = 0
+	__all_players_synchronized_for_sync_id[sync_id] = false
 
 
-@rpc("any_peer", "call_remote")
-func _client_ready(peer_id: int) -> void:
+@rpc("any_peer", "call_local")
+func _client_ready(sync_id) -> void:
 	if not multiplayer.is_server():
 		return
-	__number_of_players_syncronized += 1
-	if __number_of_players_syncronized >= multiplayer.get_peers().size():
-		_all_clients_ready.rpc()
+
+	if __number_of_players_syncronized.has(sync_id):
+		__number_of_players_syncronized[sync_id] += 1
+	else:
+		__number_of_players_syncronized[sync_id] = 1
+
+	if __number_of_players_syncronized[sync_id] >= multiplayer.get_peers().size() + 1:
+		_all_clients_ready.rpc(sync_id)
 
 
 @rpc("authority", "call_local")
-func _all_clients_ready() -> void:
+func _all_clients_ready(sync_id: int) -> void:
+	__all_players_synchronized_for_sync_id[sync_id] = true
 	__all_players_syncronized.emit()
 
 # ============================== RPC - Ask/Answer Join game ==============================

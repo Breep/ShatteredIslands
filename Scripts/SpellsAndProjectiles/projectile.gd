@@ -81,13 +81,13 @@ func _on_body_entered(body: Node3D) -> void:
 
 # ============================== Public functions ==============================
 
-func init(source: Character, target: Character, stats: ProjectileStats) -> void:
-	_source = source
-	_target = target
-	stats = stats
-	
-	if stats.is_critic:
-		scale *= 2
+#func init(source: Character, target: Character, stats: ProjectileStats) -> void:
+	#_source = source
+	#_target = target
+	#stats = stats
+	#
+	#if stats.is_critic:
+		#scale *= 2
 
 # ============================== Private functions ==============================
 

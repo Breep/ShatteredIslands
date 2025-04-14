@@ -149,16 +149,16 @@ func _init_teams_data(players: Array[Player]) -> bool:
 func _get_spawns_locations(_spawns_area: Area3D, team_players_number: int) -> Array[Vector3]:
 	var positions: Array[Vector3]
 	for i in team_players_number:
-		var position: Vector3
+		var spawn_position: Vector3
 		var collision_shape_3d = (_spawns_area.get_child(0) as CollisionShape3D)
 		if collision_shape_3d == null:
 			printerr("SpawnManager: No collision shape 3d in the spawn area ! [", _spawns_area, "]")
 		var area_size_z = (collision_shape_3d.shape as BoxShape3D).size.z
-		position.x = _spawns_area.global_position.x
-		position.y = _spawns_area.global_position.y
+		spawn_position.x = _spawns_area.global_position.x
+		spawn_position.y = _spawns_area.global_position.y
 		var top_z = _spawns_area.global_position.z - area_size_z / 2
-		position.z =  top_z + (i + 1) * area_size_z / (team_players_number + 1)
-		positions.append(position)
+		spawn_position.z =  top_z + (i + 1) * area_size_z / (team_players_number + 1)
+		positions.append(spawn_position)
 	return positions
 
 
