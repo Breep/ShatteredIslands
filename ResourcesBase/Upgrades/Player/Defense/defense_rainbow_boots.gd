@@ -8,7 +8,7 @@ func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	stats.defense.rainbow_boots_armor_stacks = _armor_stacks[cardlvl]
+	stats.defense.rainbow_boots_armor_stacks = _armor_stacks[cardlvl - 1]
 	stats.defense.rainbow_boots_activated = true
 
 
@@ -17,4 +17,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]Every " + str(_armor_stacks[cardlvl]) + ARMOR + " lost, inflict 1 status effect to a random enemy[/center]"
+	return "[center]Every " + str(_armor_stacks[cardlvl - 1]) + " " + ARMOR + " lost, inflict 1 status effect to a random enemy[/center]"

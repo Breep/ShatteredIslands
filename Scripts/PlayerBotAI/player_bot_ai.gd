@@ -26,6 +26,8 @@ func _ready() -> void:
 		queue_free()
 		return
 	
+	return # TMP TODO TO REMOVE (DEV)
+	
 	Events.game_state_changed.connect(_on_events_game_state_changed)
 	
 	_wake_up_timer = Timer.new()

@@ -9,7 +9,7 @@ func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	stats.defense.smith_hammer_chance_percent = _chance_percents[cardlvl]
+	stats.defense.smith_hammer_chance_percent = _chance_percents[cardlvl - 1]
 	stats.defense.smith_hammer_armor_stacks = _armor_stacks
 	stats.defense.smith_hammer_activated = true
 
@@ -19,4 +19,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]" + str(_chance_percents[cardlvl]) + "% of chance to gain " + str(_armor_stacks) + ARMOR + " when being hit[/center]"
+	return "[center]" + str(_chance_percents[cardlvl - 1]) + "% of chance to gain " + str(_armor_stacks) + ARMOR + " when being hit[/center]"

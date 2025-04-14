@@ -163,6 +163,9 @@ func _add_player(player_name: String, id: int, is_bot: bool, serialized_player: 
 		new_player.damage = 1
 		new_player.lvl = 1
 		new_player.gold = GameManager.game_rules.gold_starting_game
+		# TMP TODO TO REMOVE
+		if not new_player.is_bot:
+			new_player.gold = 2000
 		new_player.health = GameManager.game_rules.player_starting_health
 		_connect_to_signals(new_player)
 		if is_bot:

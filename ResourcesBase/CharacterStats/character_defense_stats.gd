@@ -3,7 +3,13 @@ class_name CharacterDefenseStats
 
 # Current armor on the character (like a shield, a second health bar)
 # Decreases by taking damage: 1 damage = 1 armor stack consumed
-var armor_stacks: int = 0
+signal armor_stacks_changed(new_armor_stacks: int)
+var armor_stacks: int = 0:
+	get: return armor_stacks
+	set(value):
+		if value == armor_stacks: return
+		armor_stacks = value
+		armor_stacks_changed.emit(armor_stacks)
 
 var dual_shield_activated: bool # True if this skill is activated
 var dual_shield_health_threshold: int # % of hp minimum to trigger the dual shield effect

@@ -1,14 +1,18 @@
-[gd_resource type="Resource" script_class="Family" load_steps=6 format=3 uid="uid://dw66lnwee8ruk"]
+[gd_resource type="Resource" script_class="Family" load_steps=10 format=3 uid="uid://dw66lnwee8ruk"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://ResourcesBase/CardBase/card.gd" id="1_yud7m"]
 [ext_resource type="Resource" uid="uid://bcb0vm2460lsi" path="res://Resources/Card/Defense/defense_dual_shield.tres" id="2_e835t"]
 [ext_resource type="Resource" uid="uid://368b10i3yt4p" path="res://Resources/Card/Defense/defense_hedgehog_armor.tres" id="3_m1x30"]
 [ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://ResourcesBase/Family/family.gd" id="3_p2pe3"]
+[ext_resource type="Resource" uid="uid://cuqudlrmcu7sr" path="res://Resources/Card/Defense/defense_power_wrist.tres" id="4_4n4h6"]
+[ext_resource type="Resource" uid="uid://dh41jcfupq5at" path="res://Resources/Card/Defense/defense_rainbow_boots.tres" id="5_tyadv"]
+[ext_resource type="Resource" uid="uid://bt615e0tyxyls" path="res://Resources/Card/Defense/defense_gladiator_helmet.tres" id="6_08op5"]
+[ext_resource type="Resource" uid="uid://bkvgn5qvg04o2" path="res://Resources/Card/Defense/defense_titan_gloves.tres" id="7_dvmhl"]
 [ext_resource type="Texture2D" uid="uid://cnp4ioj5qvrv4" path="res://Data/Assets/Card/ICONS/DEFENSE color.png" id="12_sw8k8"]
 
 [resource]
 script = ExtResource("3_p2pe3")
-cards = Array[ExtResource("1_yud7m")]([ExtResource("2_e835t"), ExtResource("3_m1x30")])
+cards = Array[ExtResource("1_yud7m")]([ExtResource("2_e835t"), ExtResource("3_m1x30"), ExtResource("4_4n4h6"), ExtResource("5_tyadv"), ExtResource("6_08op5"), ExtResource("7_dvmhl")])
 icon = ExtResource("12_sw8k8")
 family_name = "Rock"
 family_type = 1

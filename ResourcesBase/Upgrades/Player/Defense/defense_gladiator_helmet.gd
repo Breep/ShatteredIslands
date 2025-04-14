@@ -10,7 +10,7 @@ func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 		return
 	
 	stats.defense.gladiator_helmet_period = _period
-	stats.defense.gladiator_helmet_armor_stacks = _armor_stacks[cardlvl]
+	stats.defense.gladiator_helmet_armor_stacks = _armor_stacks[cardlvl - 1]
 	stats.defense.gladiator_helmet_activated = true
 
 
@@ -19,4 +19,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]Every " + str(_period) + "s, gain " + str(_armor_stacks[cardlvl]) + ARMOR + "[/center]"
+	return "[center]Every " + str(_period) + "s, gain " + str(_armor_stacks[cardlvl - 1]) + ARMOR + "[/center]"

@@ -98,7 +98,7 @@ func _move_toward_target(delta: float):
 		return
 	
 	var direction: Vector3 = (_target.global_position - global_position).normalized()
-	position += direction * 3 * delta
+	position += direction * _SPEED_MIN * delta
 	#look_at(_target.global_position)
 
 

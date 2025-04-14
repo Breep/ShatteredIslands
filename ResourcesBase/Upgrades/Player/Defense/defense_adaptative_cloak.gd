@@ -8,7 +8,7 @@ func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	stats.defense.adaptative_cloak_attack_percent = _attack_percents[cardlvl]
+	stats.defense.adaptative_cloak_attack_percent = _attack_percents[cardlvl - 1]
 	stats.defense.adaptative_cloak_activated = true
 
 
@@ -17,4 +17,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]Convert " + str(_attack_percents[cardlvl]) + "% of auto-attack damage into " + ARMOR + "[/center]"
+	return "[center]Convert " + str(_attack_percents[cardlvl - 1]) + "% of auto-attack damage into " + ARMOR + "[/center]"

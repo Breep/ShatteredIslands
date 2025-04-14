@@ -10,7 +10,7 @@ func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 		return
 	
 	stats.defense.power_wrists_armor_stacks = _armor_stacks
-	stats.defense.power_wrists_damage_increase_percent = _damage_increase_percent[cardlvl]
+	stats.defense.power_wrists_damage_increase_percent = _damage_increase_percent[cardlvl - 1]
 	stats.defense.power_wrists_activated = true
 
 
@@ -19,4 +19,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]Increase damage by " + str(_damage_increase_percent[cardlvl]) + "% for each " + str(_armor_stacks) + " " + ARMOR + " lost[/center]"
+	return "[center]Increase damage by " + str(_damage_increase_percent[cardlvl - 1]) + "% for each " + str(_armor_stacks) + " " + ARMOR + " lost[/center]"

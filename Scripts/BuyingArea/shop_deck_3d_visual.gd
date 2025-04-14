@@ -4,7 +4,7 @@ extends Node3D
 
 # ============================== Constants ==============================
 
-const CARDS_PER_CARDS3D: int = 5 # Number of cards that represent a 3d card
+const CARDS_PER_CARDS3D: int = 1 # Number of cards that represent a 3d card
 
 # ============================== Export ==============================
 
@@ -23,6 +23,7 @@ var _card_tower_family_ref: Dictionary[Family.FamilyType, CardTower]
 # ============================== Public functions ==============================
 
 func connect_to_shop_deck() -> void:
+	if not multiplayer.is_server(): return
 	MultiplayerDeckManager.shop_deck.available_cards_composition_changed.connect(_on_shop_deck_available_cards_composition_changed)
 	_setup_card_towers(MultiplayerDeckManager.shop_deck.available_cards_composition)
 

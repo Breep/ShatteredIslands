@@ -30,11 +30,6 @@ func _ready() -> void:
 	Events.ui_card_shop_opened.connect(_on_events_ui_card_shop_opened)
 
 
-func _exit_tree() -> void:
-	for card in _card_displayed:
-		MultiplayerDeckManager.put_card_back_in_cardshop(card)
-
-
 func _on_back_pressed() -> void:
 	hide()
 
@@ -58,7 +53,7 @@ func _try_buy_card(card_button_selected: CardButton, card: Card) -> void:
 		_reconnect_to_card_signal(card_button_selected)
 		return
 	
-	var buy_ok = await MultiplayerDeckManager.try_buy_card_for_local_player(card)
+	var buy_ok = await MultiplayerDeckManager.try_buy_card_for_player(_local_player, card)
 	if buy_ok:
 		await _update_shop_cards_displayed()
 	

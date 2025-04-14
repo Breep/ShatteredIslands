@@ -35,13 +35,13 @@ func stop() -> void:
 		timer.stop()
 
 
-func get_increased_damage_done_from_power_wrist(damage: int) -> int:
+func get_increased_damage_done_from_power_wrist(damage: float) -> float:
 	if not _defense_stats.power_wrists_activated:
 		return damage
 	
 	var power_stacks: int = _defense_stats.armor_stacks / _defense_stats.power_wrists_armor_stacks
-	var damage_inc_percent: int = _defense_stats.power_wrists_damage_increase_percent * power_stacks
-	var damage_inc: int = ((damage as float * damage_inc_percent) / 100.0) as int
+	var damage_inc_percent: float = _defense_stats.power_wrists_damage_increase_percent * power_stacks
+	var damage_inc: float = (damage * damage_inc_percent) / 100.0
 	return damage + damage_inc
 
 
@@ -135,7 +135,7 @@ func _mystical_shoulders(magical_damage_blocked: int) -> void:
 # ============================== Callbacks functions ==============================
 
 func _on_hedgehog_armor_period_timeout() -> void:
-	var target: Entity = _source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST)
+	var target: Entity = _source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST_ENEMY)
 	if target == null: return
 	var damage: int = (_armor_lost_since_last_hedgehog_armor * _defense_stats.hedgehog_armor_lost_armor_percent as float / 100.0) as int
 	_action_module.direct_attack(target, damage, Utils.DamageType.MAGICAL)

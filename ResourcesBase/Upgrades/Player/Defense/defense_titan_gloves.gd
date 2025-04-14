@@ -9,7 +9,7 @@ func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	stats.defense.titan_gloves_max_health_percent = _max_health_percents[cardlvl]
+	stats.defense.titan_gloves_max_health_percent = _max_health_percents[cardlvl - 1]
 	stats.defense.titan_gloves_period = _period
 	stats.defense.titan_gloves_activated = true
 
@@ -19,4 +19,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]Gain " + ARMOR + " equal to " + str(_max_health_percents[cardlvl]) + "% of self max health every " + str(_period) + "s[/center]"
+	return "[center]Gain " + ARMOR + " equal to " + str(_max_health_percents[cardlvl - 1]) + "% of self max health every " + str(_period) + "s[/center]"

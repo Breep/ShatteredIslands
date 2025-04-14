@@ -8,7 +8,7 @@ func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	stats.defense.evading_pants_armor_stacks = _armor_stacks[cardlvl]
+	stats.defense.evading_pants_armor_stacks = _armor_stacks[cardlvl - 1]
 	stats.defense.mystical_shoulder_activated = true
 
 
@@ -17,4 +17,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]Gain " + str(_armor_stacks[cardlvl]) + " " + ARMOR + " each dodge[/center]"
+	return "[center]Gain " + str(_armor_stacks[cardlvl - 1]) + " " + ARMOR + " each dodge[/center]"

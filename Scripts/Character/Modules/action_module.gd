@@ -73,8 +73,8 @@ func _get_damage_multipliers() -> Dictionary:
 		magical_multiplier = _fire_manager.get_increased_damage(magical_multiplier, Utils.DamageType.MAGICAL) # Increase % of MAGICAL damage
 	
 	if _defense_manager != null:
-		physical_multiplier = _defense_manager.get_reduced_damage_dealed_from_protector(physical_multiplier) # Reduce % of ALL damage
-		magical_multiplier = _defense_manager.get_reduced_damage_dealed_from_protector(magical_multiplier) # Reduce % of ALL damage
+		physical_multiplier = _defense_manager.get_increased_damage_done_from_power_wrist(physical_multiplier)
+		magical_multiplier = _defense_manager.get_increased_damage_done_from_power_wrist(magical_multiplier)
 	
 	if _heal_manager != null:
 		physical_multiplier = _heal_manager.get_reduced_damage_dealed_from_pacify(physical_multiplier) # Reduce % of ALL damage

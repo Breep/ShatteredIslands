@@ -10,7 +10,7 @@ func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 		return
 	
 	stats.defense.hedgehog_armor_period = _period
-	stats.defense.hedgehog_armor_lost_armor_percent = _lost_armor_percentages[cardlvl]
+	stats.defense.hedgehog_armor_lost_armor_percent = _lost_armor_percentages[cardlvl - 1]
 	stats.defense.hedgehog_armor_activated = true
 
 
@@ -19,4 +19,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]Every " + str(_period) + "s, convert " + str(_lost_armor_percentages[cardlvl]) + "% of " + ARMOR + " lost[/center]"
+	return "[center]Every " + str(_period) + "s, convert " + str(_lost_armor_percentages[cardlvl - 1]) + "% of " + ARMOR + " lost[/center]"

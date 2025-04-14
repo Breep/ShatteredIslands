@@ -9,7 +9,7 @@ func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
-	stats.defense.reflecto_belt_attack_increase_percent = _attack_increase_percent[cardlvl]
+	stats.defense.reflecto_belt_attack_increase_percent = _attack_increase_percent[cardlvl - 1]
 	stats.defense.reflecto_belt_armor_stacks = _armor_stacks
 	stats.defense.reflecto_belt_activated = true
 
@@ -19,4 +19,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]After losing " + str(_armor_stacks) + ARMOR + ", increase next auto-attack by " + str(_attack_increase_percent[cardlvl]) + "%[/center]"
+	return "[center]After losing " + str(_armor_stacks) + ARMOR + ", increase next auto-attack by " + str(_attack_increase_percent[cardlvl - 1]) + "%[/center]"

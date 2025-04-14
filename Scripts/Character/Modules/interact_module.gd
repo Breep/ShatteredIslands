@@ -28,7 +28,7 @@ func _take_damage(source: Character, damage: int, damage_type: Utils.DamageType,
 		damage = _storm_manager.get_increased_critical_damage(damage, is_critical) # Increase ALL critical damage
 	
 	if _defense_manager != null:
-		damage = _defense_manager.get_reduced_damage_taken_from_protector(damage) # Reduce % of ALL damage
+		damage = _defense_manager.get_reduced_damage_taken_from_mystical_shoulder(damage) # Reduce % of MAGIC damage
 	
 	if _life_manager != null:
 		damage = _life_manager.get_reduced_damage(damage) # Reduce % of ALL damage

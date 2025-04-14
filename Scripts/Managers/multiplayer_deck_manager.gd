@@ -86,15 +86,6 @@ func construct_shop_deck(families: Array[Family], rules: GameRules) -> void:
 	_shop_deck_shuffled.emit()
 
 
-func put_card_back_in_cardshop(card: Card):
-	#print("Putting back to the shop deck: ", card.name, " | ", card)
-	if multiplayer.is_server():
-		shop_deck.add_card(card.duplicate())
-		return
-	
-	_ask_to_add_card.rpc_id(1, multiplayer.get_unique_id(), _get_card_ref_id(card))
-
-
 # Draw n cards in the server shop deck
 func smart_draw_n_cards(player: Player, cards_to_remove: Array[Card], number_of_cards_to_draw: int) -> Array[Card]:
 	if multiplayer.is_server():
@@ -162,7 +153,7 @@ func _server_try_buy_card_for_player(player: Player, card: Card) -> bool:
 	# Put back the other cards in the shopdeck
 	for card_ref_to_delete in _cards_refs_displayed_in_player_shop[player.id]:
 		if card_ref_to_delete != card_ref_id:
-			put_card_back_in_cardshop(_cards_refs[card_ref_to_delete])
+			_put_card_back_in_cardshop(_cards_refs[card_ref_to_delete])
 	_cards_refs_displayed_in_player_shop[player.id].clear()
 	
 	PlayerManager.players[player.id].deck.add_card(_cards_refs[card_ref_id])
@@ -208,6 +199,16 @@ func _get_card_ref_id(card: Card) -> int:
 	printerr("The card [", card.name, "] is not found inside the cards_ref")
 	return -1
 
+
+func _put_card_back_in_cardshop(card: Card):
+	#print("Putting back to the shop deck: ", card.name, " | ", card)
+	if multiplayer.is_server():
+		shop_deck.add_card(card.duplicate())
+		return
+	
+	_ask_to_add_card.rpc_id(1, multiplayer.get_unique_id(), _get_card_ref_id(card))
+
+
 # ============================== Client RPC ==============================
 
 @rpc("authority", "call_local")
@@ -227,7 +228,6 @@ func draw_cards(cards_refs_ids: Array[int]) -> void:
 func _add_card_in_playerdeck(card_ref_id: int) -> void:
 	PlayerManager.get_local_player().deck.add_card(_cards_refs[card_ref_id])
 	PlayerManager.get_local_player().gold -= 100
-	shop_deck.remove_from_available_cards(_cards_refs[card_ref_id])
 	_server_response = ServerResponse.OK
 	_answer_for_buying_request_received.emit()
 
@@ -320,7 +320,7 @@ func _ask_to_buy_card(peer_id: int, card_ref_id: int) -> void:
 	for card_ref_to_delete in _cards_refs_displayed_in_player_shop[peer_id]:
 		if card_ref_to_delete != card_ref_id:
 			_cards_refs_displayed_in_player_shop[peer_id].erase(card_ref_to_delete)
-			put_card_back_in_cardshop(_cards_refs[card_ref_to_delete])
+			_put_card_back_in_cardshop(_cards_refs[card_ref_to_delete])
 	
 	_cards_refs_displayed_in_player_shop[peer_id].erase(card_ref_id)
 	PlayerManager.players[peer_id].deck.add_card(_cards_refs[card_ref_id])
