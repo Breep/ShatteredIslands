@@ -13,6 +13,12 @@ var _character_stats: CharacterStats
 @onready var _mana_label: Label = %ManaLabel
 @onready var _energy_bar: ProgressBar = %EnergyBar
 @onready var _energy_label: Label = %EnergyLabel
+@onready var _attack_label: Label = %AttackLabel
+@onready var _attack_speed_label: Label = %AttackSpeedLabel
+@onready var _crit_chance_label: Label = %CritChanceLabel
+@onready var _move_speed_label: Label = %MoveSpeedLabel
+@onready var _poison_label: Label = %PoisonLabel
+@onready var _armor_label: Label = %ArmorLabel
 
 # ============================== Public functions ==============================
 
@@ -39,37 +45,46 @@ func _update_local_nodes() -> void:
 	_health_bar.max_value = _character_stats.health_max
 	_health_bar.value = _character_stats.health
 	_health_label.text = str(_character_stats.health) + "/" + str(_character_stats.health_max)
-	
 	_mana_bar.max_value = _character_stats.mana_max
 	_mana_bar.value = _character_stats.mana
 	_mana_label.text = str(_character_stats.mana) + "/" + str(_character_stats.mana_max)
-	
 	_energy_bar.max_value = _character_stats.energy_max
 	_energy_bar.value = _character_stats.energy
 	_energy_label.text = str(_character_stats.energy as int) + "/" + str(_character_stats.energy_max)
+	_attack_label.text = str(_character_stats.attack_damage)
+	_attack_speed_label.text = str(_character_stats.attack_speed)
+	_crit_chance_label.text = str(_character_stats.physical_critical_chance)
+	_move_speed_label.text = str(_character_stats.move_speed)
+	_armor_label.text = str(_character_stats.defense.armor_stacks)
 
 
 func _connect_all_character_stats_signals(character_stats: CharacterStats) -> void:
 	character_stats.health_max_changed.connect(_on_character_stats_health_max_changed)
 	character_stats.health_changed.connect(_on_character_stats_health_changed)
-	
 	character_stats.mana_max_changed.connect(_on_character_stats_mana_max_changed)
 	character_stats.mana_changed.connect(_on_character_stats_mana_changed)
-	
 	character_stats.energy_max_changed.connect(_on_character_stats_energy_max_changed)
 	character_stats.energy_changed.connect(_on_character_stats_energy_changed)
+	character_stats.attack_damage_changed.connect(_on_character_stats_attack_damage_changed)
+	character_stats.attack_speed_changed.connect(_on_character_stats_attack_speed_changed)
+	character_stats.physical_critical_chance_changed.connect(_on_character_stats_physical_critical_chance_changed)
+	character_stats.move_speed_changed.connect(_on_character_stats_move_speed_changed)
+	character_stats.defense.armor_stacks_changed.connect(_on_character_stats_defense_armor_stacks_changed)
 
 
 func _disconnect_all_character_stats_signals(character_stats: CharacterStats) -> void:
 	if character_stats == null: return
 	character_stats.health_max_changed.disconnect(_on_character_stats_health_max_changed)
 	character_stats.health_changed.disconnect(_on_character_stats_health_changed)
-	
 	character_stats.mana_max_changed.disconnect(_on_character_stats_mana_max_changed)
 	character_stats.mana_changed.disconnect(_on_character_stats_mana_changed)
-	
 	character_stats.energy_max_changed.disconnect(_on_character_stats_energy_max_changed)
 	character_stats.energy_changed.disconnect(_on_character_stats_energy_changed)
+	character_stats.attack_damage_changed.disconnect(_on_character_stats_attack_damage_changed)
+	character_stats.attack_speed_changed.disconnect(_on_character_stats_attack_speed_changed)
+	character_stats.physical_critical_chance_changed.disconnect(_on_character_stats_physical_critical_chance_changed)
+	character_stats.move_speed_changed.disconnect(_on_character_stats_move_speed_changed)
+	character_stats.defense.armor_stacks_changed.disconnect(_on_character_stats_defense_armor_stacks_changed)
 
 # ============================== Callbacks ==============================
 
@@ -103,15 +118,24 @@ func _on_character_stats_energy_changed(new_energy: int) -> void:
 	_energy_label.text = str(new_energy) + "/" + str(_character_stats.energy_max)
 
 
+func _on_character_stats_attack_damage_changed(new_attack_damage: int) -> void:
+	_attack_label.text = str(new_attack_damage)
 
 
+func _on_character_stats_attack_speed_changed(new_attack_speed: float) -> void:
+	_attack_speed_label.text = str(new_attack_speed)
 
 
+func _on_character_stats_physical_critical_chance_changed(new_physical_critical_chance: float) -> void:
+	_crit_chance_label.text = str(new_physical_critical_chance)
 
 
+func _on_character_stats_move_speed_changed(new_move_speed: float) -> void:
+	_move_speed_label.text = str(new_move_speed)
 
 
-
+func _on_character_stats_defense_armor_stacks_changed(new_armor_stacks: int) -> void:
+	_armor_label.text = str(new_armor_stacks)
 
 
 
