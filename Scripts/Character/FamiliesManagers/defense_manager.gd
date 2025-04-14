@@ -8,10 +8,9 @@ signal armor_based_on_lost_hp_gained(percent_of_lost_hp: float)
 # ============================== Private variables ==============================
 
 var _defense_stats: CharacterDefenseStats # Ref to the owner defense stats
-
 var _armor_lost_since_last_hedgehog_armor: int = 0
-
 var _mystical_shoulders_damage_reduced_percent: float
+var _rng: RandomNumberGenerator
 
 # ============================== Public functions ==============================
 
@@ -21,6 +20,8 @@ func _specific_init() -> void:
 
 
 func start() -> void:
+	_rng = RandomNumberGenerator.new()
+	_rng.randomize()
 	for timer in _optional_timers:
 		timer.start()
 
@@ -28,6 +29,16 @@ func start() -> void:
 func stop() -> void:
 	for timer in _optional_timers:
 		timer.stop()
+
+
+func get_increased_damage_done_from_power_wrist(damage: int) -> int:
+	if not _defense_stats.power_wrists_activated:
+		return damage
+	
+	var power_stacks: int = _defense_stats.armor_stacks / _defense_stats.power_wrists_armor_stacks
+	var damage_inc_percent: int = _defense_stats.power_wrists_damage_increase_percent * power_stacks
+	var damage_inc: int = ((damage as float * damage_inc_percent) / 100.0) as int
+	return damage + damage_inc
 
 
 func get_reduced_damage_taken_from_mystical_shoulder(damage: int) -> int:
@@ -46,6 +57,7 @@ func get_reduced_damage_taken_from_armor(damage_source: Character, damage: int, 
 	var damage_reduced = damage - damage_reduction
 	_defense_stats.armor_stacks -= damage_reduction
 	_armor_lost_since_last_hedgehog_armor += damage_reduction
+	_rainbow_boots_effect(damage_reduction)
 	return damage_reduced
 
 
@@ -63,6 +75,18 @@ func _gain_armor(armor_stacks: int) -> void:
 			armor_stacks *= 2
 	
 	_defense_stats.armor_stacks += armor_stacks
+
+
+func _rainbow_boots_effect(armor_lost: int) -> void:
+	if not _defense_stats.rainbow_boots_activated:
+		return
+	
+	var number_of_procs: int = armor_lost / _defense_stats.rainbow_boots_armor_stacks
+	for i in number_of_procs:
+		var effects: Array[Utils.StackType] = [Utils.StackType.POISON, Utils.StackType.VULNERABILITY]
+		var effect: Utils.StackType = effects[_rng.randi_range(0, effects.size() - 1)]
+		var target: Entity = _source.target_manager.get_target(TargetManager.TargettingStrategy.RANDOM_ENEMY)
+		_action_module.inflict_condition_stacks(target, 1, effect)
 
 # ============================== Callbacks functions ==============================
 
