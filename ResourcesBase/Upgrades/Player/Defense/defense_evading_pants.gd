@@ -9,7 +9,7 @@ func apply(stats: CharacterStats, cardlvl: int) -> void: # override
 		return
 	
 	stats.defense.evading_pants_armor_stacks = _armor_stacks[cardlvl - 1]
-	stats.defense.mystical_shoulder_activated = true
+	stats.defense.evading_pants_activated = true
 
 
 func get_description(cardlvl: int) -> String:

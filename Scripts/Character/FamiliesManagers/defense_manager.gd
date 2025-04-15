@@ -49,7 +49,7 @@ func get_reduced_damage_taken_from_mystical_shoulder(damage: int) -> int:
 	if not _defense_stats.mystical_shoulders_activated:
 		return damage
 	
-	var damage_reduction: int = ((damage as float * _defense_stats._mystical_shoulders_damage_reduced_percent) / 100.0) as int
+	var damage_reduction: int = ((damage as float * _mystical_shoulders_damage_reduced_percent) / 100.0) as int
 	return damage - damage_reduction
 
 

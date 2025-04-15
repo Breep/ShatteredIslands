@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://dx34m57gmurib"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://ResourcesBase/CardBase/card.gd" id="1_4phqe"]
+[ext_resource type="Texture2D" uid="uid://uxbtmvrarbbr" path="res://Data/Assets/Card/Portraits/Defense/card_portrait_defense_adaptative_cloak.png" id="1_r4fnh"]
+[ext_resource type="Script" uid="uid://cx1dyyuyq6n3x" path="res://ResourcesBase/Upgrades/Player/Defense/defense_adaptative_cloak.gd" id="2_b31s5"]
+
+[sub_resource type="Resource" id="Resource_v5u1o"]
+script = ExtResource("2_b31s5")
+_attack_percents = Array[int]([10, 15, 20, 25, 40])
+metadata/_custom_type_script = "uid://cx1dyyuyq6n3x"
+
+[resource]
+script = ExtResource("1_4phqe")
+name = "Adaptative Cloak"
+picture = ExtResource("1_r4fnh")
+family = 1
+rarity = 0
+player_upgrade = SubResource("Resource_v5u1o")
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

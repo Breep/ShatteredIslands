@@ -19,4 +19,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]Every " + str(_period) + "s, gain " + str(_armor_stacks[cardlvl - 1]) + ARMOR + "[/center]"
+	return "[center]Every " + str(_period) + "s, gain " + str(_armor_stacks[cardlvl - 1]) + " " + ARMOR + "[/center]"

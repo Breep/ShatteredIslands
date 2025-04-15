@@ -88,9 +88,6 @@ func _spawn_projectile(target: Character, projectile_type: Projectile.Projectile
 
 # ============================== Heal ==============================
 
-
-
-
 @rpc("authority", "call_local")
 func _heal(target_peer_id: int, heal_amount: int) -> void:
 	pass
@@ -119,13 +116,7 @@ func heal_percent(target: Character, heal_percent: float, percent_modifier: Util
 	var heal_amount: int = (heal_percent * hp) / 100
 	heal(target, heal_amount)
 
-
-
-
 # ============================== Condition stacks ==============================
-
-
-
 
 @rpc("authority", "call_local")
 func _inflict_condition_stacks(stacks_number: int, stack_type: Utils.StackType, source_id: int = -1, poison_duration: int = 0) -> void:
