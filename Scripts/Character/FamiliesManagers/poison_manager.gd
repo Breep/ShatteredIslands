@@ -34,8 +34,8 @@ func stop() -> void:
 		timer.stop()
 	for spell in _optional_spells:
 		spell.queue_free()
-	for poison_effect in _poison_stats.poison_effects.duplicate():
-		_poison_stats.poison_effects.erase(poison_effect)
+	_poison_stats.poison_stacks_ref.clear()
+	_poison_stats.poison_stacks = 0
 	_poison_tick_timer.stop()
 
 
@@ -43,27 +43,22 @@ func get_reduced_damage(damage: int) -> int:
 	return (damage - damage * _poison_stats.poison_resist / 100.0) as int
 
 
-func add_to_poison_effects(source: Character, poison_stacks: int, poison_duration: int) -> void:
+func add_to_poison_effects(source: Character, poison_stacks: int) -> void:
 	if poison_stacks == 0:
 		return
 	
-	for effect in _poison_stats.poison_effects:
-		if effect.source == source and effect.ticks_left == poison_duration:
-			effect.stacks_number += poison_stacks
-			return
-	
-	var new_effect := PoisonEffect.new()
-	new_effect.stacks_number = poison_stacks
-	new_effect.ticks_left = poison_duration
-	new_effect.source = source
-	_poison_stats.poison_effects.append(new_effect)
+	_poison_stats.poison_stacks += poison_stacks
+	if _poison_stats.poison_stacks_ref.has(source.id):
+		_poison_stats.poison_stacks_ref[source.id] += poison_stacks
+	else:
+		_poison_stats.poison_stacks_ref[source.id] = poison_stacks
 
 # ============================== Private functions ==============================
 
 func _create_optional_timers() -> void:
 	# Death flask
-	if _poison_stats.periodic_stacks_activated:
-		Utils.create_perpetual_timer(self, _poison_stats.periodic_stacks_period, _on_periodic_stacks_timer_timeout)
+	if _poison_stats.periodica_agaricus_activated:
+		Utils.create_perpetual_timer(self, _poison_stats.periodica_agaricus_period, _on_periodica_agaricus_timer_timeout, true)
 
 
 func _lanch_optional_spells() -> void:
@@ -77,47 +72,14 @@ func _lanch_optional_spells() -> void:
 
 # ============================== Callbacks functions ==============================
 
-func _on_periodic_stacks_timer_timeout() -> void:
+# Handle poison stacks and damage on _source
+func _on_poison_tick_timer_timeout() -> void:
+	if _poison_stats.poison_stacks > 0:
+		Events.damage_done.emit(null, _source, get_reduced_damage(_poison_stats.poison_stacks), Utils.DamageType.POISON, false)
+
+
+func _on_periodica_agaricus_timer_timeout() -> void:
 	var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.RANDOM_ENEMY)
 	if target == null: return
-	var poison_stacks = _poison_stats.periodic_stacks_number
-	_action_module.inflict_condition_stacks(target, poison_stacks, Utils.StackType.POISON, 10)
-
-
-# Handle poison stacks and damage on _source
-var __fire_poison_stacks_count: Dictionary # {Character: int}
-func _on_poison_tick_timer_timeout() -> void:
-	var poison_damage: int = 0
-	for effect in _poison_stats.poison_effects:
-		if effect.ticks_left > 0:
-			effect.ticks_left -= 1
-			if effect.source.stats.poison.multiply_damage_activated:
-				poison_damage += effect.stacks_number * effect.source.stats.poison.multiply_damage # [Venomous snake]
-			else:
-				poison_damage += effect.stacks_number
-		else:
-			_handle_fire_poison(effect)
-			_poison_stats.poison_effects.erase(effect)
-	
-	if poison_damage > 0:
-		Events.damage_done.emit(null, _source, get_reduced_damage(poison_damage), Utils.DamageType.POISON, false)
-
-
-# [Poison of fire]
-func _handle_fire_poison(effect: PoisonEffect) -> void:
-	if not effect.source.stats.poison.fire_poison_activated: return
-	
-	# TODO: Rework cette partie avec un signal qui prévient de FireManager de la source comme
-	# ça il pourra utiliser le ActionModule de la source directement ça sera plus propre
-	
-	#if __fire_poison_stacks_count.has(effect.source):
-		#__fire_poison_stacks_count[effect.source] += effect.stacks_number
-	#else:
-		#__fire_poison_stacks_count[effect.source] = effect.stacks_number
-	#
-	#if multiplayer.get_unique_id() == 1: print("POISON/FIRE: ", __fire_poison_stacks_count[effect.source])
-	#
-	#if __fire_poison_stacks_count[effect.source] >= effect.source.stats.poison.fire_poison_stacks_lost:
-		#if multiplayer.get_unique_id() == 1: print("POISON/FIRE: EXPLOSION")
-		#effect.source.attack_percent(_source, effect.source.stats.poison.fire_poison_damage, Utils.DamageType.MAGICAL, Utils.PercentModifier.MAX_HP)
-		#__fire_poison_stacks_count[effect.source] -= effect.source.stats.poison.fire_poison_stacks_lost
+	var poison_stacks = _poison_stats.periodica_agaricus_stacks
+	_action_module.inflict_condition_stacks(target, poison_stacks, Utils.StackType.POISON)

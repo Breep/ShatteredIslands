@@ -51,16 +51,16 @@ func _take_damage(source: Character, damage: int, damage_type: Utils.DamageType,
 
 # [All]
 @rpc("authority", "call_local")
-func _net_take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, source_id: int = -1, poison_duration: int = 0) -> void:
+func _net_take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, source_id: int = -1) -> void:
 	stacks_taken.emit()
 
 
 # [Server only]
-func _take_condition_stacks(source: Character, stacks_number: int, stack_type: Utils.StackType, poison_duration: int = 0) -> void:
+func _take_condition_stacks(source: Character, stacks_number: int, stack_type: Utils.StackType) -> void:
 	if not multiplayer.is_server(): return
 	match stack_type:
 		Utils.StackType.POISON:
-			_poison_manager.add_to_poison_effects(source, stacks_number, poison_duration)
+			_poison_manager.add_to_poison_effects(source, stacks_number)
 		Utils.StackType.VULNERABILITY:
 			_source.stats.storm.vulnerability_stacks += stacks_number
 	
@@ -94,6 +94,6 @@ func _on_events_heal_done(source, target, heal_amount) -> void:
 	_take_heal(source, heal_amount)
 
 
-func _on_events_condition_stacks_done(source, target, stacks_number, stack_type, poison_duration) -> void:
+func _on_events_condition_stacks_done(source, target, stacks_number, stack_type) -> void:
 	if target != _source: return
-	_take_condition_stacks(source, stacks_number, stack_type, poison_duration)
+	_take_condition_stacks(source, stacks_number, stack_type)

@@ -76,7 +76,7 @@ func notice_critical_damage(char_who_received_the_crit: Character, damage: int) 
 	# [Poisonous lightning]
 	if _storm_stats.crit_poison_activated:
 		var poison_stacks: int = (damage * _storm_stats.crit_poison_amount as float / 100.0) as int
-		_action_module.inflict_condition_stacks(char_who_received_the_crit, poison_stacks, Utils.StackType.POISON, 10)
+		_action_module.inflict_condition_stacks(char_who_received_the_crit, poison_stacks, Utils.StackType.POISON)
 	
 	# [Thunder break]
 	if _storm_stats.crit_vulnerability_activated:

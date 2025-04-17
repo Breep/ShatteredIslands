@@ -117,14 +117,14 @@ func _on_movement_manager_energy_changed(energy: float) -> void:
 # ============================== Families Managers ==============================
 
 func _build_families_managers() -> void:
-	_families_managers[Family.FamilyType.Attack] = _attack_manager
-	_families_managers[Family.FamilyType.Defense] = _defense_manager
-	_families_managers[Family.FamilyType.Fire] = _fire_manager
-	_families_managers[Family.FamilyType.Storm] = _storm_manager
-	_families_managers[Family.FamilyType.Serenity] = _serenity_manager
-	_families_managers[Family.FamilyType.Poison] = _poison_manager
-	_families_managers[Family.FamilyType.Life] = _life_manager
-	_families_managers[Family.FamilyType.Shadow] = _shadow_manager
+	_families_managers[Family.FamilyType.ATTACK] = _attack_manager
+	_families_managers[Family.FamilyType.DEFENSE] = _defense_manager
+	_families_managers[Family.FamilyType.FIRE] = _fire_manager
+	_families_managers[Family.FamilyType.STORM] = _storm_manager
+	_families_managers[Family.FamilyType.SERENITY] = _serenity_manager
+	_families_managers[Family.FamilyType.POISON] = _poison_manager
+	_families_managers[Family.FamilyType.LIFE] = _life_manager
+	_families_managers[Family.FamilyType.SHADOW] = _shadow_manager
 
 
 func _init_families_managers() -> void:

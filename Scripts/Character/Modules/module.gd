@@ -15,14 +15,14 @@ var _life_manager: LifeManager = null
 func init(source: Character, families_managers: Dictionary = {}) -> void:
 	_source = source
 	
-	_attack_manager = families_managers[Family.FamilyType.Attack]
-	_defense_manager = families_managers[Family.FamilyType.Defense]
-	_fire_manager = families_managers[Family.FamilyType.Fire]
-	_storm_manager = families_managers[Family.FamilyType.Storm]
-	_heal_manager = families_managers[Family.FamilyType.Serenity]
-	_poison_manager = families_managers[Family.FamilyType.Poison]
-	_shadow_manager = families_managers[Family.FamilyType.Shadow]
-	_life_manager = families_managers[Family.FamilyType.Life]
+	_attack_manager = families_managers[Family.FamilyType.ATTACK]
+	_defense_manager = families_managers[Family.FamilyType.DEFENSE]
+	_fire_manager = families_managers[Family.FamilyType.FIRE]
+	_storm_manager = families_managers[Family.FamilyType.STORM]
+	_heal_manager = families_managers[Family.FamilyType.SERENITY]
+	_poison_manager = families_managers[Family.FamilyType.POISON]
+	_shadow_manager = families_managers[Family.FamilyType.SHADOW]
+	_life_manager = families_managers[Family.FamilyType.LIFE]
 	
 	_specific_init()
 

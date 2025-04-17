@@ -119,11 +119,12 @@ func heal_percent(target: Character, heal_percent: float, percent_modifier: Util
 # ============================== Condition stacks ==============================
 
 @rpc("authority", "call_local")
-func _inflict_condition_stacks(stacks_number: int, stack_type: Utils.StackType, source_id: int = -1, poison_duration: int = 0) -> void:
+func _inflict_condition_stacks(stacks_number: int, stack_type: Utils.StackType, source_id: int = -1) -> void:
 	pass
 
 
 # [Server only]
-func inflict_condition_stacks(target: Character, stacks_number: int, stack_type: Utils.StackType, poison_duration: int = 0) -> void:
+func inflict_condition_stacks(target: Character, stacks_number: int, stack_type: Utils.StackType) -> void:
 	if not multiplayer.is_server(): return
-	Events.condition_stacks_done.emit(_source, target, stacks_number, stack_type, poison_duration)
+	print("Inflict POISON")
+	Events.condition_stacks_done.emit(_source, target, stacks_number, stack_type)

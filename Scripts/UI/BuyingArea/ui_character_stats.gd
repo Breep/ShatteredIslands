@@ -56,6 +56,7 @@ func _update_local_nodes() -> void:
 	_crit_chance_label.text = str(_character_stats.physical_critical_chance)
 	_move_speed_label.text = str(_character_stats.move_speed)
 	_armor_label.text = str(_character_stats.defense.armor_stacks)
+	_poison_label.text = str(_character_stats.poison.poison_stacks)
 
 
 func _connect_all_character_stats_signals(character_stats: CharacterStats) -> void:
@@ -70,6 +71,7 @@ func _connect_all_character_stats_signals(character_stats: CharacterStats) -> vo
 	character_stats.physical_critical_chance_changed.connect(_on_character_stats_physical_critical_chance_changed)
 	character_stats.move_speed_changed.connect(_on_character_stats_move_speed_changed)
 	character_stats.defense.armor_stacks_changed.connect(_on_character_stats_defense_armor_stacks_changed)
+	character_stats.poison.poison_stacks_changed.connect(_on_character_stats_poison_poison_stacks_changed)
 
 
 func _disconnect_all_character_stats_signals(character_stats: CharacterStats) -> void:
@@ -85,6 +87,7 @@ func _disconnect_all_character_stats_signals(character_stats: CharacterStats) ->
 	character_stats.physical_critical_chance_changed.disconnect(_on_character_stats_physical_critical_chance_changed)
 	character_stats.move_speed_changed.disconnect(_on_character_stats_move_speed_changed)
 	character_stats.defense.armor_stacks_changed.disconnect(_on_character_stats_defense_armor_stacks_changed)
+	character_stats.poison.poison_stacks_changed.disconnect(_on_character_stats_poison_poison_stacks_changed)
 
 # ============================== Callbacks ==============================
 
@@ -138,6 +141,8 @@ func _on_character_stats_defense_armor_stacks_changed(new_armor_stacks: int) -> 
 	_armor_label.text = str(new_armor_stacks)
 
 
+func _on_character_stats_poison_poison_stacks_changed(new_poison_stacks: int) -> void:
+	_poison_label.text = str(new_poison_stacks)
 
 
 

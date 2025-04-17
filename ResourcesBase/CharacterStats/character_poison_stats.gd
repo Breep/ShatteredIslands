@@ -1,13 +1,22 @@
 class_name CharacterPoisonStats
 extends Resource
 
-var poison_effects: Array[PoisonEffect]
+# Dictionary of all stacks on the entity sorted by entity source
+var poison_stacks_ref: Dictionary[int, int] #Key=<entity_id, Value=stacks of poison>
+
+signal poison_stacks_changed(new_poison_stacks: int)
+var poison_stacks: int:
+	get: return poison_stacks
+	set(value):
+		if value == poison_stacks: return
+		poison_stacks = value
+		poison_stacks_changed.emit(poison_stacks)
 
 var poison_duration: int # Number of ticks the poison do before disapearing
 
-var periodic_stacks_activated: bool # True if the player has at least one of this card
-var periodic_stacks_number: int # Number of stack applied each tick
-var periodic_stacks_period: float # Time between applying 2 stacks (in s)
+var periodica_agaricus_activated: bool # True if the player has at least one of this card
+var periodica_agaricus_stacks: int # Number of stack applied each tick
+var periodica_agaricus_period: float # Time between applying 2 stacks (in s)
 
 var poison_resist: float # % of poison damage less taken
 

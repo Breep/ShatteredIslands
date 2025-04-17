@@ -23,8 +23,8 @@ enum FightingState {
 # ============================== Fighting phase duration ==============================
 
 const STARTING_DURATION: int = 2 # in seconds
-const FIGHT_DURATION: int = 5 # in seconds
-const FIGHT_ACCELERATED_DURATION: int = 5 # in seconds
+const FIGHT_DURATION: int = 30 # in seconds
+const FIGHT_ACCELERATED_DURATION: int = 10 # in seconds
 
 # ============================== Public variables ==============================
 
