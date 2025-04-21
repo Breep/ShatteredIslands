@@ -34,6 +34,7 @@ func start() -> void:
 	for timer in _optional_timers:
 		timer.start()
 
+
 func stop() -> void:
 	for timer in _optional_timers:
 		timer.stop()
@@ -151,7 +152,7 @@ func _try_inflict_poison_stacks() -> void:
 		__distance_since_last_inflict_poison_stacks -= _shadow_stats.inflict_poison_stacks_distance
 		var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.RANDOM_ENEMY)
 		if target == null: return
-		_action_module.inflict_condition_stacks(target, _shadow_stats.inflict_poison_stacks_value, Utils.StackType.POISON, 5)
+		_action_module.inflict_condition_stacks(target, _shadow_stats.inflict_poison_stacks_value, Utils.StackType.POISON)
 
 
 var __distance_since_last_untargetable: float = 0

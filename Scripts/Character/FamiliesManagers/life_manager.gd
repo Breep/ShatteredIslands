@@ -91,7 +91,7 @@ func _on_poison_by_lost_hp_timer_timeout() -> void:
 	var lost_hp: int = _source.stats.health_max - _source.stats.health
 	var stack_multiplier: int = _life_stats.poison_by_lost_hp_stacks
 	var poison_stacks: int = (lost_hp / _life_stats.poison_by_lost_hp_hp_number) * stack_multiplier
-	_action_module.inflict_condition_stacks(target, poison_stacks, Utils.StackType.POISON, 5)
+	_action_module.inflict_condition_stacks(target, poison_stacks, Utils.StackType.POISON)
 
 
 func _on_fire_damage_timer_timeout() -> void:

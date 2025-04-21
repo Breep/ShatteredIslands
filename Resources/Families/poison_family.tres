@@ -1,15 +1,14 @@
-[gd_resource type="Resource" script_class="Family" load_steps=7 format=3 uid="uid://cr4wdhrstj2ju"]
+[gd_resource type="Resource" script_class="Family" load_steps=5 format=3 uid="uid://cqqln8j72uq1e"]
 
-[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://ResourcesBase/CardBase/card.gd" id="1_mxc05"]
-[ext_resource type="Resource" uid="uid://b4e3te3brrch" path="res://Resources/Card/Poison/poison_poison_cloud.tres" id="2_fwxyu"]
-[ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://ResourcesBase/Family/family.gd" id="3_kx1px"]
-[ext_resource type="Resource" uid="uid://ckwyslwdu8yet" path="res://Resources/Card/Fire/fire_fire_damage_onpoisonlost.tres" id="4_yeu73"]
-[ext_resource type="Texture2D" uid="uid://y0t815fi2pdf" path="res://Data/Assets/Card/ICONS/MANA.png" id="4_ysmbt"]
-[ext_resource type="Resource" uid="uid://bdm4mg5oiho7e" path="res://Resources/Card/Poison/poison_poison_periodic.tres" id="5_spvgs"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://ResourcesBase/CardBase/card.gd" id="1_aqx3a"]
+[ext_resource type="Resource" uid="uid://dvpdubk0btegx" path="res://Resources/Card/Poison/poison_periodica_agaricus.tres" id="2_nmeyg"]
+[ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://ResourcesBase/Family/family.gd" id="2_tp2df"]
+[ext_resource type="Texture2D" uid="uid://y0t815fi2pdf" path="res://Data/Assets/Card/ICONS/MANA.png" id="3_e76tj"]
 
 [resource]
-script = ExtResource("3_kx1px")
-cards = Array[ExtResource("1_mxc05")]([ExtResource("2_fwxyu"), ExtResource("5_spvgs"), ExtResource("4_yeu73")])
-icon = ExtResource("4_ysmbt")
+script = ExtResource("2_tp2df")
+cards = Array[ExtResource("1_aqx3a")]([ExtResource("2_nmeyg")])
+icon = ExtResource("3_e76tj")
 family_name = "Poison"
 family_type = 6
+metadata/_custom_type_script = "uid://d3wk3nm7f672j"

@@ -7,15 +7,15 @@
 
 [sub_resource type="Resource" id="Resource_u3dta"]
 script = ExtResource("2_sgt0q")
-health_max = 750
+health_max = 1000
 mana_max = 100
-mana_regen = 10.0
-energy_max = 15
+mana_regen = 5.0
+energy_max = 10
 energy_regen = 1.0
-move_speed = 3.0
-attack_damage = 21
-attack_speed = 1.2
-attack_move_speed = 10.0
+move_speed = 1.0
+attack_damage = 20
+attack_speed = 1.0
+attack_move_speed = 1.0
 physical_critical_chance = 10.0
 physical_critical_multiplier = 2.0
 

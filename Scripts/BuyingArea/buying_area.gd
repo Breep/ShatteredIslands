@@ -81,7 +81,7 @@ func _start_player_turn_to_pick(player_id: int) -> void:
 func _get_random_hero_and_wait_random_duration(heroes: Array[Hero]) -> Hero:
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
-	await get_tree().create_timer(rng.randf_range(1.0, 2.0)).timeout
+	await get_tree().create_timer(rng.randf_range(0.1, 0.5)).timeout
 	var random_hero: Hero = _available_heroes.pick_random()
 	return random_hero
 

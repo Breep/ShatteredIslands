@@ -117,21 +117,20 @@ func _on_movement_manager_energy_changed(energy: float) -> void:
 # ============================== Families Managers ==============================
 
 func _build_families_managers() -> void:
-	_families_managers[Family.FamilyType.Attack] = _attack_manager
-	_families_managers[Family.FamilyType.Defense] = _defense_manager
-	_families_managers[Family.FamilyType.Fire] = _fire_manager
-	_families_managers[Family.FamilyType.Storm] = _storm_manager
-	_families_managers[Family.FamilyType.Serenity] = _serenity_manager
-	_families_managers[Family.FamilyType.Poison] = _poison_manager
-	_families_managers[Family.FamilyType.Life] = _life_manager
-	_families_managers[Family.FamilyType.Shadow] = _shadow_manager
+	_families_managers[Family.FamilyType.ATTACK] = _attack_manager
+	_families_managers[Family.FamilyType.DEFENSE] = _defense_manager
+	_families_managers[Family.FamilyType.FIRE] = _fire_manager
+	_families_managers[Family.FamilyType.STORM] = _storm_manager
+	_families_managers[Family.FamilyType.SERENITY] = _serenity_manager
+	_families_managers[Family.FamilyType.POISON] = _poison_manager
+	_families_managers[Family.FamilyType.LIFE] = _life_manager
+	_families_managers[Family.FamilyType.SHADOW] = _shadow_manager
 
 
 func _init_families_managers() -> void:
 	for family_manager in _families_managers.values():
 		family_manager.init(self)
 	
-	_defense_manager.armor_based_on_lost_hp_gained.connect(_on_defense_manager_armor_based_on_lost_hp_gained)
 	_life_manager.revived.connect(_on_life_manager_revived)
 	_shadow_manager.gain_max_hp_triggered.connect(_on_shadow_manager_gain_max_hp_triggered)
 	_attack_manager.focus_changed.connect(_on_auto_attack_manager_focus_changed)
@@ -177,11 +176,6 @@ func _on_fighting_area_map_clicked(new_position: Vector3) -> void:
 
 
 # ============================== Family callbacks ==============================
-
-func _on_defense_manager_armor_based_on_lost_hp_gained(percent_of_lost_hp: float) -> void:
-	var lost_hp: float = stats.health_max - stats.health
-	stats.defense.armor_stacks += (lost_hp * percent_of_lost_hp / 100.0) as int
-
 
 func _on_life_manager_revived(life_after_revived: int) -> void:
 	stats.health = life_after_revived

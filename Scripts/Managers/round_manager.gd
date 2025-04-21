@@ -49,7 +49,7 @@ var battles: Dictionary[int, Battle] = {}
 
 func get_current_round_battles() -> Array[Battle]:
 	current_round += 1
-	print("STARTING A NEW ROUND: ", current_round)
+	print("[", multiplayer.get_unique_id(), "] STARTING A NEW ROUND: ", current_round)
 	battle_history[current_round] = BattleHistory.new()
 	battle_history[current_round].round_id = current_round
 	battles.clear()
@@ -63,7 +63,7 @@ func get_current_round_battles() -> Array[Battle]:
 
 
 func register_battle_result(battle_id: int, winner_teams_order: Array[int]) -> void:
-	print("register_battle_result()")
+	print("[", multiplayer.get_unique_id(), "] register_battle_result()")
 	var battle_result := BattleResult.new()
 	battle_result.battle_id = battle_id
 	battle_result.battle_type = battles[battle_id].battle_type

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://bfnu2x0m3qokk"]
+
+[ext_resource type="Texture2D" uid="uid://b15rldpng0yde" path="res://Data/Assets/Card/Portraits/Defense/card_portrait_defense_smith_hammer.png" id="1_0kpsx"]
+[ext_resource type="Script" uid="uid://cv87oaa0myc4q" path="res://ResourcesBase/Upgrades/Player/Defense/defense_smith_hammer.gd" id="1_dr132"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://ResourcesBase/CardBase/card.gd" id="1_s4jgh"]
+
+[sub_resource type="Resource" id="Resource_0kpsx"]
+script = ExtResource("1_dr132")
+_armor_stacks = 4
+_chance_percents = Array[int]([10, 15, 20, 25, 40])
+metadata/_custom_type_script = "uid://cv87oaa0myc4q"
+
+[resource]
+script = ExtResource("1_s4jgh")
+name = "Smith Hammer"
+picture = ExtResource("1_0kpsx")
+family = 1
+rarity = 0
+player_upgrade = SubResource("Resource_0kpsx")
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

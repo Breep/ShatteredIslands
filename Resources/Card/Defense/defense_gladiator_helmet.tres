@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://bt615e0tyxyls"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://ResourcesBase/CardBase/card.gd" id="1_5mdi6"]
+[ext_resource type="Texture2D" uid="uid://d0lpny6hyhcnr" path="res://Data/Assets/Card/Portraits/Defense/card_portrait_defense_gladiator_helmet.png" id="1_2346c"]
+[ext_resource type="Script" uid="uid://deiehs802w30h" path="res://ResourcesBase/Upgrades/Player/Defense/defense_gladiator_helmet.gd" id="1_m55fq"]
+
+[sub_resource type="Resource" id="Resource_2346c"]
+script = ExtResource("1_m55fq")
+_armor_stacks = Array[int]([5, 10, 15, 20, 35])
+_period = 1.0
+metadata/_custom_type_script = "uid://deiehs802w30h"
+
+[resource]
+script = ExtResource("1_5mdi6")
+name = "Gladiator Helmet"
+picture = ExtResource("1_2346c")
+family = 1
+rarity = 0
+player_upgrade = SubResource("Resource_2346c")
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

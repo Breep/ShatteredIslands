@@ -22,7 +22,17 @@ enum StackType {
 	VULNERABILITY,
 }
 
-# ============================== Public ==============================
+# ============================== Private variables ==============================
+
+var _rng: RandomNumberGenerator
+
+# ============================== Node base functions ==============================
+
+func _ready() -> void:
+	_rng = RandomNumberGenerator.new()
+	_rng.randomize()
+
+# ============================== Public functions ==============================
 
 func create_perpetual_timer(node: Node, wait_time: float, callback: Callable, autostart: bool = false) -> Timer:
 	var timer := Timer.new()
@@ -35,11 +45,8 @@ func create_perpetual_timer(node: Node, wait_time: float, callback: Callable, au
 	return timer
 
 
-# TODO move to other lib ?
-func is_randomize_modifier_active(chance: float) -> bool:
-	var rng: = RandomNumberGenerator.new()
-	rng.randomize()
-	return rng.randf_range(0, 100) <= chance
+func is_randomize_modifier_active(chance_in_percent: float) -> bool:
+	return _rng.randf_range(0, 100) <= chance_in_percent
 
 
 func recursive_hide(node: Node3D):

@@ -73,8 +73,8 @@ func _get_damage_multipliers() -> Dictionary:
 		magical_multiplier = _fire_manager.get_increased_damage(magical_multiplier, Utils.DamageType.MAGICAL) # Increase % of MAGICAL damage
 	
 	if _defense_manager != null:
-		physical_multiplier = _defense_manager.get_reduced_damage_dealed_from_protector(physical_multiplier) # Reduce % of ALL damage
-		magical_multiplier = _defense_manager.get_reduced_damage_dealed_from_protector(magical_multiplier) # Reduce % of ALL damage
+		physical_multiplier = _defense_manager.get_increased_damage_done_from_power_wrist(physical_multiplier)
+		magical_multiplier = _defense_manager.get_increased_damage_done_from_power_wrist(magical_multiplier)
 	
 	if _heal_manager != null:
 		physical_multiplier = _heal_manager.get_reduced_damage_dealed_from_pacify(physical_multiplier) # Reduce % of ALL damage
@@ -87,9 +87,6 @@ func _spawn_projectile(target: Character, projectile_type: Projectile.Projectile
 	Shared.spawn_managers_ref[target.battle_id].spawn_projectile(_source, target, projectile_type, projectile_spawn, projectile_stats)
 
 # ============================== Heal ==============================
-
-
-
 
 @rpc("authority", "call_local")
 func _heal(target_peer_id: int, heal_amount: int) -> void:
@@ -119,20 +116,15 @@ func heal_percent(target: Character, heal_percent: float, percent_modifier: Util
 	var heal_amount: int = (heal_percent * hp) / 100
 	heal(target, heal_amount)
 
-
-
-
 # ============================== Condition stacks ==============================
 
-
-
-
 @rpc("authority", "call_local")
-func _inflict_condition_stacks(stacks_number: int, stack_type: Utils.StackType, source_id: int = -1, poison_duration: int = 0) -> void:
+func _inflict_condition_stacks(stacks_number: int, stack_type: Utils.StackType, source_id: int = -1) -> void:
 	pass
 
 
 # [Server only]
-func inflict_condition_stacks(target: Character, stacks_number: int, stack_type: Utils.StackType, poison_duration: int = 0) -> void:
+func inflict_condition_stacks(target: Character, stacks_number: int, stack_type: Utils.StackType) -> void:
 	if not multiplayer.is_server(): return
-	Events.condition_stacks_done.emit(_source, target, stacks_number, stack_type, poison_duration)
+	print("Inflict POISON")
+	Events.condition_stacks_done.emit(_source, target, stacks_number, stack_type)

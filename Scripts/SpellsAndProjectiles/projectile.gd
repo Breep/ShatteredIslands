@@ -81,13 +81,13 @@ func _on_body_entered(body: Node3D) -> void:
 
 # ============================== Public functions ==============================
 
-func init(source: Character, target: Character, stats: ProjectileStats) -> void:
-	_source = source
-	_target = target
-	stats = stats
-	
-	if stats.is_critic:
-		scale *= 2
+#func init(source: Character, target: Character, stats: ProjectileStats) -> void:
+	#_source = source
+	#_target = target
+	#stats = stats
+	#
+	#if stats.is_critic:
+		#scale *= 2
 
 # ============================== Private functions ==============================
 
@@ -98,7 +98,7 @@ func _move_toward_target(delta: float):
 		return
 	
 	var direction: Vector3 = (_target.global_position - global_position).normalized()
-	position += direction * 3 * delta
+	position += direction * _SPEED_MIN * delta
 	#look_at(_target.global_position)
 
 
