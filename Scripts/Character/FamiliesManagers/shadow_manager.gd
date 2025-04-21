@@ -34,6 +34,7 @@ func start() -> void:
 	for timer in _optional_timers:
 		timer.start()
 
+
 func stop() -> void:
 	for timer in _optional_timers:
 		timer.stop()
