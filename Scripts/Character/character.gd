@@ -62,6 +62,7 @@ func _ready() -> void:
 	#_server_synchronizer.set_multiplayer_authority(player.id)
 	_character_visual.load_hero_model(hero)
 	_character_visual.update_name_displayed(player.name)
+	_character_visual.attach_to_attack_done_signal(_auto_attack_module.attack_done)
 	
 	if _fighting_area != null and _is_local:
 		_fighting_area.connect("map_clicked", _on_fighting_area_map_clicked)

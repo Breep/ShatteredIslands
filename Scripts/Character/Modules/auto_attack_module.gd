@@ -1,6 +1,10 @@
 class_name AutoAttackModule
 extends Module
 
+# ============================== Signals ==============================
+
+signal attack_done()
+
 # ============================== Export variables ==============================
 
 @export var projectile_spawn: Node3D
@@ -76,6 +80,7 @@ func _auto_attack(target: Character) -> void:
 		_attack_manager.update_aa_projectile_stats(projectile_stats)
 	
 	_action_module.projectile_attack(target, _projectile_type, projectile_spawn, projectile_stats)
+	attack_done.emit()
 
 
 func _update_auto_attack_speed() -> void:

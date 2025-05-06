@@ -1,14 +1,17 @@
 class_name CharacterAutoAttackStats
 extends Resource
 
-var attack_damage_boost: int # flat damage increase of auto attack
+var storm_hammer_activated: bool # True if this skill is activated
+var storm_hammer_chance: int # % of chance for an auto-attack to bounce
 
-var attack_speed_boost: float # Percentage of attack speed increased
+var gatling_gun_activated: bool # True if this skill is activated
+var gatling_gun_min: int # Min value of the attack speed increased overtime
+var gatling_gun_max: int # Max value of the attack speed increased overtime
+var gatling_gun_duration: int # Time needed to go from min to max attack speed increase
 
-var attack_speed_overtime_current: float # Current value of percentage of attack speed increased overtime
-var attack_speed_overtime_min: float # Min value of percentage of attack speed increased overtime
-var attack_speed_overtime_max: float # Max value of percentage of attack speed increased overtime
-var attack_speed_overtime_duration: float # Time needed to go from min to max attack speed increase
+var double_edge_sword_activated: bool # True if this skill is activated
+var double_edge_sword_damage_percent: int # % of damage increased
+var double_edge_sword_attacks_number: int # Number oof attacks boosted
 
 var poison_stacks_amount: int # Number of poison stacks applied for with an auto attack
 var poison_stacks_chance: float # % of chance to proc the poison stacks

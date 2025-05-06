@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://3vjmnbpyyjyk"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://ResourcesBase/CardBase/card.gd" id="1_rxnni"]
+[ext_resource type="Texture2D" uid="uid://dlblucvhjqc34" path="res://Data/Assets/Card/Portraits/Attack/attack_gattling_gun.png" id="1_simcp"]
+[ext_resource type="Script" uid="uid://huymddyommss" path="res://ResourcesBase/Upgrades/Player/Attack/attack_gatling_gun.gd" id="2_7uy84"]
+
+[sub_resource type="Resource" id="Resource_qhoma"]
+script = ExtResource("2_7uy84")
+_attack_speed_min = Array[int]([15, 30, 50])
+_attack_speed_max = Array[int]([150, 300, 500])
+_duration = 30.0
+metadata/_custom_type_script = "uid://huymddyommss"
+
+[resource]
+script = ExtResource("1_rxnni")
+name = "Gatling Gun"
+picture = ExtResource("1_simcp")
+family = 0
+rarity = 0
+player_upgrade = SubResource("Resource_qhoma")
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

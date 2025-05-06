@@ -15,7 +15,7 @@ _hero_spawns = [NodePath("Player1/HeroSpawn1"), NodePath("Player2/HeroSpawn2")]
 transform = Transform3D(0.435325, 0, 0.900273, 0, 1, 0, -0.900273, 0, 0.435325, 1.65438, 2.38419e-07, 0.0346966)
 
 [node name="HeroSpawn1" type="Node3D" parent="Player1"]
-transform = Transform3D(0.898135, 0, 0.43972, 0, 1, 0, -0.43972, 0, 0.898135, 0.126537, 0, 0.0703796)
+transform = Transform3D(-0.882874, 0, -0.46961, 0, 1, 0, 0.46961, 0, -0.882874, 0.126537, 0, 0.0703796)
 
 [node name="CoinPile1" parent="Player1" instance=ExtResource("4_f6syc")]
 transform = Transform3D(0.261577, 0, 0.426119, 0, 0.5, 0, -0.426119, 0, 0.261577, -0.945628, 1.03176, -0.751908)
@@ -24,7 +24,7 @@ transform = Transform3D(0.261577, 0, 0.426119, 0, 0.5, 0, -0.426119, 0, 0.261577
 transform = Transform3D(0.570886, 0, 0.82103, 0, 1, 0, -0.82103, 0, 0.570886, -1.71098, 2.38419e-07, -0.0211828)
 
 [node name="HeroSpawn2" type="Node3D" parent="Player2"]
-transform = Transform3D(-0.820391, 0, -0.571802, 0, 1, 0, 0.571802, 0, -0.820391, -0.00654829, 0, 0.0159407)
+transform = Transform3D(0.812582, 0, 0.582846, 0, 1, 0, -0.582846, 0, 0.812582, -0.00654829, 0, 0.0159407)
 
 [node name="CoinPile2" parent="Player2" instance=ExtResource("4_f6syc")]
 transform = Transform3D(-0.238917, 0, -0.439225, 0, 0.5, 0, 0.439225, 0, -0.238917, 1.15371, 1.03176, 0.689855)

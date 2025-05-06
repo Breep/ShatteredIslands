@@ -14,7 +14,7 @@ battle_type = 1
 transform = Transform3D(0.435325, 0, 0.900273, 0, 1, 0, -0.900273, 0, 0.435325, -0.498371, 2.38419e-07, -0.938134)
 
 [node name="HeroSpawn1" type="Node3D" parent="Player1"]
-transform = Transform3D(-0.896045, 0, -0.443963, 0, 1, 0, 0.443963, 0, -0.896045, -0.42594, 0, -1.02443)
+transform = Transform3D(-0.105691, 0, 0.994399, 0, 1, 0, -0.994399, 0, -0.105691, -0.42594, 0, -1.02443)
 
 [node name="CoinPile1" parent="Player1" instance=ExtResource("5_lv2wc")]
 transform = Transform3D(-0.238917, 0, -0.439225, 0, 0.5, 0, 0.439225, 0, -0.238917, 0.507982, 1.03176, -0.323678)
@@ -23,7 +23,7 @@ transform = Transform3D(-0.238917, 0, -0.439225, 0, 0.5, 0, 0.439225, 0, -0.2389
 transform = Transform3D(0.570886, 0, 0.82103, 0, 1, 0, -0.82103, 0, 0.570886, -0.464059, 2.38419e-07, 1.22574)
 
 [node name="HeroSpawn2" type="Node3D" parent="Player2"]
-transform = Transform3D(-0.820391, 0, -0.571802, 0, 1, 0, 0.571802, 0, -0.820391, -0.447659, 0, -1.01888)
+transform = Transform3D(0.633475, 0, 0.773763, 0, 1, 0, -0.773763, 0, 0.633475, -0.447659, 0, -1.01888)
 
 [node name="CoinPile2" parent="Player2" instance=ExtResource("5_lv2wc")]
 transform = Transform3D(-0.238917, 0, -0.439225, 0, 0.5, 0, 0.439225, 0, -0.238917, 0.450787, 1.03176, -0.466673)
@@ -32,7 +32,7 @@ transform = Transform3D(-0.238917, 0, -0.439225, 0, 0.5, 0, 0.439225, 0, -0.2389
 transform = Transform3D(0.435325, 0, 0.900273, 0, 1, 0, -0.900273, 0, 0.435325, 0.530935, 2.38419e-07, -0.949831)
 
 [node name="HeroSpawn3" type="Node3D" parent="Player3"]
-transform = Transform3D(0.890109, 0, 0.455747, 0, 1, 0, -0.455747, 0, 0.890109, 0.547296, 0, 0.934531)
+transform = Transform3D(-0.725602, 0, -0.688114, 0, 1, 0, 0.688114, 0, -0.725602, 0.547296, 0, 0.934531)
 
 [node name="CoinPile3" parent="Player3" instance=ExtResource("5_lv2wc")]
 transform = Transform3D(0.31613, 0, 0.387378, 0, 0.5, 0, -0.387378, 0, 0.31613, -0.489026, 1.03176, 0.30134)
@@ -41,7 +41,7 @@ transform = Transform3D(0.31613, 0, 0.387378, 0, 0.5, 0, -0.387378, 0, 0.31613, 
 transform = Transform3D(0.435325, 0, 0.900273, 0, 1, 0, -0.900273, 0, 0.435325, 0.495845, 2.38419e-07, 1.24914)
 
 [node name="HeroSpawn4" type="Node3D" parent="Player4"]
-transform = Transform3D(0.900956, 0, 0.433911, 0, 1, 0, -0.433911, 0, 0.900956, 0.662436, 0, 0.930825)
+transform = Transform3D(-0.880535, 0, -0.473981, 0, 1, 0, 0.473981, 0, -0.880535, 0.662436, 0, 0.930825)
 
 [node name="CoinPile4" parent="Player4" instance=ExtResource("5_lv2wc")]
 transform = Transform3D(0.321093, 0, 0.383274, 0, 0.5, 0, -0.383274, 0, 0.321093, -0.268585, 1.03176, 0.246715)

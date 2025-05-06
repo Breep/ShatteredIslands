@@ -11,7 +11,7 @@ const ATTACK_SPEED_BOOST_OVERTIME_PERIOD: float = 1
 
 # ============================== Private variables ==============================
 
-var _attack_stats: CharacterAutoAttackStats # Ref to the owner fire stats
+var _attack_stats: CharacterAutoAttackStats # Ref to the owner attack stats
 
 var _aa_speed_overtime_time_started: float = 0
 
@@ -62,40 +62,15 @@ func notice_auto_attack_done(target: Character) -> void:
 
 
 func update_aa_projectile_stats(projectile_stats: ProjectileStats) -> void:
-	# [Poison bolt]
-	if Utils.is_randomize_modifier_active(_attack_stats.poison_stacks_chance):
-		projectile_stats.poison_stacks += _attack_stats.poison_stacks_amount
-		projectile_stats.poison_duration = 10
-	
-	# [Knife of terror]
-	if Utils.is_randomize_modifier_active(_attack_stats.vulnerability_stacks_chance):
-		projectile_stats.vulnerability_stacks += _attack_stats.vulnerability_stacks_amount
-	
-	# [Storm hammer]
-	if Utils.is_randomize_modifier_active(_attack_stats.bounce_chance):
-		projectile_stats.is_bouncing = true
-	
-	# [Fire sword]
-	if _attack_stats.fire_attack_damage > 0 and _aa_counter % _attack_stats.fire_attack_period == 0:
-		projectile_stats.magical_damage_percent += _attack_stats.fire_attack_damage
-
+	pass
 
 # ============================== Private functions ==============================
 
 func _create_optional_timers() -> void:
 	# [Gatling]
-	if _attack_stats.attack_speed_overtime_max > 0:
+	if _attack_stats.gatling_gun_activated:
 		_optional_timers.append(Utils.create_perpetual_timer(self, ATTACK_SPEED_BOOST_OVERTIME_PERIOD, _on_aa_speed_overtime_timer_timeout))
 		_aa_speed_overtime_time_started = Time.get_ticks_msec()
-	
-	# [Focus]
-	if _source.stats.storm.focus_target_activated:
-		_focus_timer = Timer.new()
-		add_child(_focus_timer)
-		_focus_timer.timeout.connect(_on_focus_timer_timeout)
-		_focus_timer.wait_time = _source.stats.storm.focus_target_time_before
-		_focus_timer.one_shot = true
-		_optional_timers.append(_focus_timer)
 
 
 func _check_storm_focus(target) -> void:
@@ -114,11 +89,9 @@ func _check_storm_focus(target) -> void:
 
 func _on_aa_speed_overtime_timer_timeout() -> void:
 	var time_elapsed: float = Time.get_ticks_msec() - _aa_speed_overtime_time_started
-	var attack_speed_overtime_current = remap(time_elapsed,                                   \
-			0, _attack_stats.attack_speed_overtime_duration,                                  \
-			_attack_stats.attack_speed_overtime_min, _attack_stats.attack_speed_overtime_max)
-	attack_speed_overtime_current = clampf(attack_speed_overtime_current, \
-			_attack_stats.attack_speed_overtime_min, _attack_stats.attack_speed_overtime_max)
+	var attack_speed_boost = remap(time_elapsed, 0, _attack_stats.gatling_gun_duration, \
+			_attack_stats.gatling_gun_min, _attack_stats.gatling_gun_max)
+	attack_speed_boost = clampf(attack_speed_boost, _attack_stats.attack_speed_overtime_min, _attack_stats.attack_speed_overtime_max)
 	# _update_auto_attack_speed()
 
 

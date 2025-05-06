@@ -31,6 +31,7 @@ func start() -> void:
 
 
 func stop() -> void:
+	_defense_stats.armor_stacks = 0
 	for timer in _optional_timers:
 		timer.stop()
 
