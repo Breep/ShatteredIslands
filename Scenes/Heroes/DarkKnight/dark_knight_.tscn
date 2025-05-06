@@ -8111,7 +8111,7 @@ bones/55/rotation = Quaternion(-0.010522, 0.999845, 0.0139956, 0.00186089)
 material_override = SubResource("StandardMaterial3D_j3twh")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Armature/GeneralSkeleton" index="1"]
-transform = Transform3D(0.0722144, -0.028758, 0.996975, 0.913694, -0.398909, -0.0776886, 0.399936, 0.916539, -0.0025309, -0.267343, 0.866061, 0.68842)
+transform = Transform3D(0.0722139, -0.0287573, 0.996975, 0.913693, -0.39891, -0.0776882, 0.399937, 0.916539, -0.00253161, -0.267343, 0.86606, 0.688419)
 bone_name = "RightHand"
 bone_idx = 30
 
