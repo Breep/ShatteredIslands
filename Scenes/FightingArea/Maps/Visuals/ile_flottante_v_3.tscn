@@ -1,4 +1,4 @@
-[gd_scene load_steps=100 format=3 uid="uid://bhx575fxnmb7i"]
+[gd_scene load_steps=101 format=3 uid="uid://bhx575fxnmb7i"]
 
 [ext_resource type="PackedScene" uid="uid://swkvlgltmupt" path="res://Data/Blender/Map/ile_flottante_V3.blend" id="1_pa8bm"]
 [ext_resource type="Texture2D" uid="uid://u4kayolln7un" path="res://Data/Blender/Map/ile_flottante_V3_Wood_DockBoards_01_Diffuse.png" id="3_6a5dx"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://s03hbdebpt0q" path="res://VFEZ-godot-main/vfez_material_3d.gd" id="5_wt7pg"]
 [ext_resource type="Texture2D" uid="uid://cox677fl8sgl" path="res://Data/Texture/2D/T_VFX_Noise_2.PNG" id="6_fdjtm"]
 [ext_resource type="PackedScene" uid="uid://dwsu0wswqq2ny" path="res://Data/Blender/monster.blend" id="7_wt7pg"]
+[ext_resource type="PackedScene" uid="uid://rttk0xqwxb2b" path="res://Scenes/Heroes/cute lapinou.tscn" id="8_fdjtm"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nxnlb"]
 albedo_texture = ExtResource("4_s711j")
@@ -378,6 +379,57 @@ albedo_texture = ExtResource("4_s711j")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_reggx"]
 albedo_texture = ExtResource("4_s711j")
 
+[sub_resource type="Animation" id="Animation_qq0h2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("magicball:material_override:shader_parameter/vertex_expand_amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("magicball:material_override:shader_parameter/vertex_offset_amount")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("magicball:material_override:shader_parameter/rim_intensity")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("magicball:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_xu5h6"]
 resource_name = "balls"
 length = 5.0
@@ -429,57 +481,6 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 1.5708), Vector3(0, 6.28319, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_qq0h2"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("magicball:material_override:shader_parameter/vertex_expand_amount")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.5]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("magicball:material_override:shader_parameter/vertex_offset_amount")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("magicball:material_override:shader_parameter/rim_intensity")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("magicball:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_46rne"]
@@ -789,3 +790,6 @@ autoplay = "balls"
 
 [node name="monster" parent="." index="85" instance=ExtResource("7_wt7pg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.31225, 12.4514, -13.8908)
+
+[node name="cute lapinou" parent="." index="86" instance=ExtResource("8_fdjtm")]
+transform = Transform3D(-0.763457, 0.145306, -0.629301, 0.112125, 0.989387, 0.0924221, 0.636051, 0, -0.771647, 0.219751, 12.6104, 1.8065)

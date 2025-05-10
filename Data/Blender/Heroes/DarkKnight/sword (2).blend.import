@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://ckheabhpnd6yy"
-path="res://.godot/imported/sword.blend-c10e0b677d19b6d801dd7a7ca01ca2c8.scn"
+path="res://.godot/imported/sword (2).blend-0c81ff20519838fddcdba730102aab5e.scn"
 
 [deps]
 
-source_file="res://Data/Blender/sword.blend"
-dest_files=["res://.godot/imported/sword.blend-c10e0b677d19b6d801dd7a7ca01ca2c8.scn"]
+source_file="res://Data/Blender/Heroes/DarkKnight/sword (2).blend"
+dest_files=["res://.godot/imported/sword (2).blend-0c81ff20519838fddcdba730102aab5e.scn"]
 
 [params]
 

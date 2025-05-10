@@ -1,6 +1,6 @@
 [gd_scene load_steps=32 format=3 uid="uid://dsdxbwk2i351e"]
 
-[ext_resource type="PackedScene" uid="uid://bksvkun3m68pc" path="res://Data/Blender/Dark knight_weight_painted.blend" id="1_myu8c"]
+[ext_resource type="PackedScene" uid="uid://bksvkun3m68pc" path="res://Data/Blender/Heroes/DarkKnight/Dark knight_weight_painted (2).blend" id="1_myu8c"]
 [ext_resource type="Texture2D" uid="uid://da14e8k15p5np" path="res://Data/Blender/textures/Ucupaint Mesh1_low Color.png" id="2_2fpem"]
 [ext_resource type="Texture2D" uid="uid://fcutdexfkfgs" path="res://Data/Blender/textures/Ucupaint Mesh1_low Emission Color.exr" id="3_k6y24"]
 [ext_resource type="Texture2D" uid="uid://o7guyrnim437" path="res://Data/Blender/textures/Ucupaint Mesh1_low Metallic.png" id="4_rvjvy"]
