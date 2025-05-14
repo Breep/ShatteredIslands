@@ -31,7 +31,7 @@ var _fighting_state: GlobalFightingManager.FightingState = GlobalFightingManager
 
 @onready var target_manager: TargetManager = %TargetManager # Needs to be public for easier access for other managers TODO Maybe rework ?
 
-@onready var _movement_manager: MovementManager = %MovementManager
+@onready var _movement_module: MovementModule = %MovementManager
 
 @onready var _attack_manager: AttackManager = %AttackManager
 @onready var _defense_manager: DefenseManager = %DefenseManager
@@ -89,8 +89,8 @@ func _set_state(new_state: GlobalFightingManager.FightingState) -> void:
 			_fighting_state = GlobalFightingManager.FightingState.STARTING
 			_init_families_managers()
 			_init_modules()
-			_init_movement_manager(GlobalFightingManager.FightingState.STARTING)
-			_movement_manager.start()
+			_init_movement_module(GlobalFightingManager.FightingState.STARTING)
+			_movement_module.start()
 		GlobalFightingManager.FightingState.FIGHT:
 			if _fighting_state != GlobalFightingManager.FightingState.STARTING:
 				printerr("Character: Can't change to fighting phase if i'm not in starting state")
@@ -98,21 +98,21 @@ func _set_state(new_state: GlobalFightingManager.FightingState) -> void:
 			_fighting_state = GlobalFightingManager.FightingState.FIGHT
 			_start_families_managers()
 			_auto_attack_module.start()
-			_movement_manager.set_fighting_state(new_state)
+			_movement_module.set_fighting_state(new_state)
 
 # ============================== MovementManager ==============================
 
-func _init_movement_manager(fighting_state: GlobalFightingManager.FightingState) -> void:
-	if _movement_manager == null:
+func _init_movement_module(fighting_state: GlobalFightingManager.FightingState) -> void:
+	if _movement_module == null:
 		printerr("No MovementManager")
 		return
 	
-	_movement_manager.energy_changed.connect(_on_movement_manager_energy_changed)
-	_movement_manager.init(self, fighting_state)
+	_movement_module.energy_changed.connect(_on_movement_module_energy_changed)
+	_movement_module.init(self, fighting_state)
 
 # ============================== MovementManager ==============================
 
-func _on_movement_manager_energy_changed(energy: float) -> void:
+func _on_movement_module_energy_changed(energy: float) -> void:
 	_character_visual.update_energy_bar(energy, stats.energy_max)
 
 # ============================== Families Managers ==============================
@@ -163,7 +163,7 @@ func _init_modules() -> void:
 func _handle_death() -> void:
 	_stop_families_managers()
 	_life_manager.source_is_dead()
-	_movement_manager.stop()
+	_movement_module.stop()
 	_auto_attack_module.stop()
 	dead.emit(self)
 	_is_dead = true
@@ -173,7 +173,7 @@ func _handle_death() -> void:
 func _on_fighting_area_map_clicked(new_position: Vector3) -> void:
 	if _is_dead or not _is_local:
 		return
-	_movement_manager.set_target_position(new_position)
+	_movement_module.set_target_position(new_position)
 
 
 # ============================== Family callbacks ==============================
@@ -182,7 +182,7 @@ func _on_life_manager_revived(life_after_revived: int) -> void:
 	stats.health = life_after_revived
 	_character_visual.update_health_bar(stats.health, stats.health_max)
 	_start_families_managers()
-	_movement_manager.start()
+	_movement_module.start()
 	_is_dead = false
 	Events.character_is_spawned.emit(self)
 
@@ -215,7 +215,7 @@ func _on_interact_module_heal_received(heal_amount: int) -> void:
 
 func _on_fighting_manager_fight_is_over(_winner_team) -> void:
 	_stop_families_managers()
-	_movement_manager.stop()
+	_movement_module.stop()
 	_auto_attack_module.stop()
 
 

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dsiet7v8tbihn" path="res://Scripts/Character/character.gd" id="1_2kqa6"]
 [ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Scenes/Character/character_visual.tscn" id="2_0rbv3"]
 [ext_resource type="PackedScene" uid="uid://n30ifkjad344" path="res://Scenes/Character/Modules/target_manager.tscn" id="3_6fvgd"]
-[ext_resource type="PackedScene" uid="uid://d0g0xkyr876lc" path="res://Scenes/Character/Modules/movement_manager.tscn" id="4_amllv"]
+[ext_resource type="PackedScene" uid="uid://d0g0xkyr876lc" path="res://Scenes/Character/Modules/movement_module.tscn" id="4_amllv"]
 [ext_resource type="PackedScene" uid="uid://617x5c1qrdpg" path="res://Scenes/Character/Modules/action_module.tscn" id="5_u25rd"]
 [ext_resource type="PackedScene" uid="uid://bbwmtb5op8clu" path="res://Scenes/Character/Modules/interact_module.tscn" id="6_to4gb"]
 [ext_resource type="PackedScene" uid="uid://b6yg1bhhmnicr" path="res://Scenes/Character/Modules/auto_attack_module.tscn" id="7_rqtjt"]
@@ -39,6 +39,7 @@ properties/5/spawn = true
 properties/5/replication_mode = 2
 
 [node name="Character" type="CharacterBody3D" groups=["CHARACTER"]]
+motion_mode = 1
 script = ExtResource("1_2kqa6")
 
 [node name="CharacterVisual" parent="." instance=ExtResource("2_0rbv3")]

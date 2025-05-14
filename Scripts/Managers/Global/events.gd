@@ -12,6 +12,8 @@ signal damage_done(source, target, damage, damage_type, is_critical)
 signal heal_done(source, target, heal_amount)
 signal condition_stacks_done(source, target, stacks_number, stack_type)
 
+# MovementModule
+signal map_clicked(battle_id: int, clicked_position: Vector3)
 
 # UI related events
 signal ui_card_shop_opened(is_opened: bool)

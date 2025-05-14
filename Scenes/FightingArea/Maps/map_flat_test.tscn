@@ -1,13 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://ck4pcnahdueh1"]
+[gd_scene load_steps=9 format=3 uid="uid://ck4pcnahdueh1"]
 
 [ext_resource type="PackedScene" uid="uid://b3467f7qtons1" path="res://Scenes/FightingArea/Maps/Visuals/nothing_blue_red_test.tscn" id="1_ed2wo"]
 [ext_resource type="Script" uid="uid://wpx225alqcqi" path="res://Scripts/FightingArea/Maps/map.gd" id="1_mtm0e"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://Scenes/Managers/spawn_manager.tscn" id="2_ehh57"]
 [ext_resource type="Script" uid="uid://d2fihbt8u628f" path="res://Scripts/FightingArea/camera_fighting_area.gd" id="3_mdipu"]
 [ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Scenes/Character/character.tscn" id="3_mtm0e"]
+[ext_resource type="Script" uid="uid://s036n1p4wypx" path="res://Scenes/FightingArea/Maps/floor_ray_cast.gd" id="4_khw3f"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mdipu"]
 size = Vector3(10, 1, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_khw3f"]
+size = Vector3(20, 1, 20)
 
 [node name="MapFlatTest" type="Node3D"]
 script = ExtResource("1_mtm0e")
@@ -21,6 +25,12 @@ projection = 1
 size = 16.0
 script = ExtResource("3_mdipu")
 
+[node name="FloorRayCast" type="RayCast3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+target_position = Vector3(0, 100, 0)
+collision_mask = 8
+script = ExtResource("4_khw3f")
+
 [node name="SpawnManager" parent="." node_paths=PackedStringArray("_spawn_areas") instance=ExtResource("2_ehh57")]
 unique_name_in_owner = true
 character_scene = ExtResource("3_mtm0e")
@@ -31,9 +41,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnManager/SpawnTeam1"]
 shape = SubResource("BoxShape3D_mdipu")
+debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="SpawnTeam2" type="Area3D" parent="SpawnManager" groups=["SPAWN_TEAM_2"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnManager/SpawnTeam2"]
 shape = SubResource("BoxShape3D_mdipu")
+debug_color = Color(0, 0.6, 0.7, 0.42)
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_khw3f")

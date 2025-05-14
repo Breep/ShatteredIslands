@@ -1,10 +1,42 @@
-[gd_scene load_steps=93 format=3 uid="uid://bhx575fxnmb7i"]
+[gd_scene load_steps=107 format=3 uid="uid://bhx575fxnmb7i"]
 
-[ext_resource type="PackedScene" uid="uid://swkvlgltmupt" path="res://Data/Blender/ile_flottante_V3.blend" id="1_pa8bm"]
+[ext_resource type="PackedScene" uid="uid://swkvlgltmupt" path="res://Data/Blender/Map/ile_flottante_V3.blend" id="1_pa8bm"]
 [ext_resource type="Shader" uid="uid://do8mrhdd2775s" path="res://Shaders/3D/Map/Magiball.gdshader" id="2_h6ek7"]
-[ext_resource type="Texture2D" uid="uid://u4kayolln7un" path="res://Data/Blender/ile_flottante_V3_Wood_DockBoards_01_Diffuse.png" id="3_6a5dx"]
+[ext_resource type="Script" uid="uid://bliaa3ri6snc4" path="res://Scenes/FightingArea/Maps/Visuals/telescope_island.gd" id="2_rqqba"]
+[ext_resource type="Texture2D" uid="uid://u4kayolln7un" path="res://Data/Blender/Map/ile_flottante_V3_Wood_DockBoards_01_Diffuse.png" id="3_6a5dx"]
 [ext_resource type="Texture2D" uid="uid://cg6xwlr5kkwm" path="res://Data/Texture/Texture_new/masks for  particles/47.png" id="3_hxqkm"]
-[ext_resource type="Texture2D" uid="uid://cx3dbgmpv2u21" path="res://Data/Blender/ile_flottante_V3_PolygonElven_Texture_01_A.png" id="4_s711j"]
+[ext_resource type="Texture2D" uid="uid://cx3dbgmpv2u21" path="res://Data/Blender/Map/ile_flottante_V3_PolygonElven_Texture_01_A.png" id="4_s711j"]
+[ext_resource type="Texture2D" uid="uid://b0x8qk8vpptr7" path="res://Data/Blender/Map/ile_flottante_V3_PolygonNatureBiomesS2_Texture_01_B.png" id="6_qqxpw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rqqba"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bpxj"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tslu1"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3h6ah"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0i1cx"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fn605"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_573qx"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ghd7"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dldv1"]
+albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ccob4"]
+albedo_texture = ExtResource("4_s711j")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nxnlb"]
 albedo_texture = ExtResource("4_s711j")
@@ -183,6 +215,9 @@ albedo_texture = ExtResource("4_s711j")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_37fb5"]
 albedo_texture = ExtResource("4_s711j")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ngae3"]
+albedo_texture = ExtResource("6_qqxpw")
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0prmh"]
 albedo_texture = ExtResource("4_s711j")
 
@@ -192,7 +227,7 @@ albedo_texture = ExtResource("4_s711j")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ug42j"]
 albedo_texture = ExtResource("4_s711j")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tatp7"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b2qi5"]
 albedo_texture = ExtResource("4_s711j")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fmpln"]
@@ -212,6 +247,9 @@ albedo_texture = ExtResource("4_s711j")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tbsag"]
 albedo_texture = ExtResource("4_s711j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_67ax8"]
+albedo_texture = ExtResource("6_qqxpw")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_48gkx"]
 albedo_texture = ExtResource("4_s711j")
@@ -276,16 +314,48 @@ albedo_texture = ExtResource("4_s711j")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_reggx"]
 albedo_texture = ExtResource("4_s711j")
 
-[node name="TelescopeIsland" instance=ExtResource("1_pa8bm")]
+[node name="TelescopeIsland" node_paths=PackedStringArray("_animation_player") instance=ExtResource("1_pa8bm")]
+script = ExtResource("2_rqqba")
+_animation_player = NodePath("AnimationPlayer")
 
 [node name="point rotation phare" parent="." index="4"]
-transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, 3.04169, 10.3947, 0.0792131)
+transform = Transform3D(0.965928, 0, 0.258811, 0, 1, 0, -0.258811, 0, 0.965928, 3.04169, 10.3947, 0.0792131)
+
+[node name="SM_Env_Vines_02_LOD0" parent="point rotation phare/ile phare" index="0"]
+material_override = SubResource("StandardMaterial3D_rqqba")
+
+[node name="SM_Generic_Grass_Patch_01" parent="point rotation phare/ile phare" index="1"]
+material_override = SubResource("StandardMaterial3D_1bpxj")
+
+[node name="SM_Generic_Grass_Patch_01_002" parent="point rotation phare/ile phare" index="3"]
+material_override = SubResource("StandardMaterial3D_tslu1")
+
+[node name="SM_Generic_Grass_Patch_01_003" parent="point rotation phare/ile phare" index="4"]
+material_override = SubResource("StandardMaterial3D_3h6ah")
+
+[node name="SM_Generic_Grass_Patch_01_004" parent="point rotation phare/ile phare" index="5"]
+material_override = SubResource("StandardMaterial3D_0i1cx")
+
+[node name="SM_Generic_Grass_Patch_01_005" parent="point rotation phare/ile phare" index="6"]
+material_override = SubResource("StandardMaterial3D_fn605")
+
+[node name="SM_Generic_Grass_Patch_01_006" parent="point rotation phare/ile phare" index="7"]
+material_override = SubResource("StandardMaterial3D_573qx")
+
+[node name="SM_Generic_Grass_Patch_01_007" parent="point rotation phare/ile phare" index="8"]
+material_override = SubResource("StandardMaterial3D_2ghd7")
+
+[node name="SM_Generic_Grass_Patch_01_008" parent="point rotation phare/ile phare" index="9"]
+material_override = SubResource("StandardMaterial3D_dldv1")
+
+[node name="SM_Generic_Grass_Patch_01_009" parent="point rotation phare/ile phare" index="10"]
+material_override = SubResource("StandardMaterial3D_ccob4")
 
 [node name="anneau" parent="." index="7"]
 transform = Transform3D(0.873279, 0.0527686, -0.00166787, -0.11872, 0.388153, -0.0122684, 4.10393e-10, 0.00717766, 0.675713, 2.50891, 4.81427, -0.0482452)
 
 [node name="anneau_002" parent="." index="8"]
-transform = Transform3D(1.82242, 0.0271643, -0.00351072, -0.247754, 0.199814, -0.025824, 8.56437e-10, 0.00369494, 1.42232, 2.50891, 4.81427, -0.0482452)
+transform = Transform3D(1.82242, 0.0271643, -0.00351072, -0.247754, 0.199814, -0.025824, 8.56437e-10, 0.00369493, 1.42232, 2.50891, 4.81427, -0.0482452)
 
 [node name="SM_Bld_Arch_01" parent="." index="9"]
 material_override = SubResource("StandardMaterial3D_nxnlb")
@@ -455,6 +525,9 @@ material_override = SubResource("StandardMaterial3D_aukxj")
 [node name="SM_Env_Vines_01_LOD0_001" parent="SM_Env_Vines_01" index="1"]
 material_override = SubResource("StandardMaterial3D_37fb5")
 
+[node name="SM_Env_Vines_01_LOD0_002" parent="SM_Env_Vines_01" index="2"]
+material_override = SubResource("StandardMaterial3D_ngae3")
+
 [node name="SM_Env_Hedge_Shrub_02" parent="." index="58"]
 material_override = SubResource("StandardMaterial3D_0prmh")
 
@@ -465,7 +538,7 @@ material_override = SubResource("StandardMaterial3D_3yx6u")
 material_override = SubResource("StandardMaterial3D_ug42j")
 
 [node name="SM_Env_Mushroom_01_LOD1" parent="SM_Env_Mushroom_01" index="0"]
-material_override = SubResource("StandardMaterial3D_tatp7")
+material_override = SubResource("StandardMaterial3D_b2qi5")
 
 [node name="SM_Env_Mushroom_Cap_01_LOD1" parent="SM_Env_Mushroom_Cap_01" index="0"]
 material_override = SubResource("StandardMaterial3D_fmpln")
@@ -484,6 +557,9 @@ material_override = SubResource("StandardMaterial3D_7syqb")
 
 [node name="SM_Env_Vines_04_LOD0" parent="SM_Env_Vines_04" index="0"]
 material_override = SubResource("StandardMaterial3D_tbsag")
+
+[node name="SM_Env_Vines_04_LOD0_001" parent="SM_Env_Vines_04" index="1"]
+material_override = SubResource("StandardMaterial3D_67ax8")
 
 [node name="SM_Prop_Desk_01" parent="." index="73"]
 material_override = SubResource("StandardMaterial3D_48gkx")

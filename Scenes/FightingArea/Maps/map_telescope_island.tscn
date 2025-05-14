@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://et6t0jv4rmnl"]
 
 [ext_resource type="Script" uid="uid://wpx225alqcqi" path="res://Scripts/FightingArea/Maps/map.gd" id="1_07slc"]
-[ext_resource type="PackedScene" uid="uid://bhx575fxnmb7i" path="res://Scenes/FightingArea/Maps/Visuals/ile_flottante_v_3.tscn" id="1_bis3x"]
+[ext_resource type="PackedScene" uid="uid://bhx575fxnmb7i" path="res://Scenes/FightingArea/Maps/Visuals/telescope_island.tscn" id="1_bis3x"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://Scenes/Managers/spawn_manager.tscn" id="2_mrpv3"]
 [ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Scenes/Character/character.tscn" id="3_07slc"]
 [ext_resource type="Script" uid="uid://d2fihbt8u628f" path="res://Scripts/FightingArea/camera_fighting_area.gd" id="3_k1k4b"]

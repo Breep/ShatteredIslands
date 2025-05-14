@@ -1,4 +1,4 @@
-class_name MovementManager
+class_name MovementModule
 extends Node
 
 signal energy_changed(energy: float)
@@ -19,6 +19,9 @@ func init(source: Character, fighting_state: GlobalFightingManager.FightingState
 	
 	_source = source
 	_fighting_state = fighting_state
+	Events.map_clicked.connect(_on_events_map_clicked)
+	#if not _source.player.is_bot:
+		#Events.map_clicked.connect(_on_events_map_clicked)
 
 
 func start() -> void:
@@ -48,25 +51,25 @@ func _process(delta: float) -> void:
 
 
 func _move_toward_target(delta: float):
-	if not _is_moving or _source.stats.energy <= 0:
+	if _source.stats.energy <= 0:
 		_is_moving = false
 	
 	if not _is_moving:
 		return
 	
 	if _target_position == null or _source.global_position.distance_to(_target_position) < 0.1:
+		_is_moving = false
 		return
 	
 	var previous_position = _source.global_position
 	var direction: Vector3 = (_target_position - _source.global_position).normalized()
 	
-	if _fighting_state == GlobalFightingManager.FightingState.STARTING:
-		_source.velocity = direction * _get_move_speed() * 2 * delta
-	else:
-		_source.velocity = direction * _get_move_speed() * delta
 	
+	_source.velocity = direction * _get_move_speed() * delta
+	#print("DIRECTION ", direction)
 	_source.move_and_slide()
 	var distance_moved = _source.global_position.distance_to(previous_position)
+	print("POS= ", _source.global_position)
 	
 	if _fighting_state != GlobalFightingManager.FightingState.STARTING:
 		_source.stats.energy -= distance_moved
@@ -75,10 +78,10 @@ func _move_toward_target(delta: float):
 
 func _get_move_speed() -> float:
 	var move_speed: float = _source.stats.move_speed
-	# [Lightning speed]
-	if _source.stats.storm.speed_boosted:
-		move_speed *= (1.0 + _source.stats.storm.crit_move_speed_amount / 100.0)
-	return move_speed
+	if _fighting_state == GlobalFightingManager.FightingState.STARTING:
+		return move_speed * 2
+	else:
+		return move_speed
 
 
 func _on_energy_regen_timer_timeout() -> void:
@@ -86,3 +89,13 @@ func _on_energy_regen_timer_timeout() -> void:
 	_source.stats.energy += _source.stats.energy_regen * period
 	_source.stats.energy = clampf(_source.stats.energy, 0, _source.stats.energy_max)
 	energy_changed.emit(_source.stats.energy)
+
+
+func _on_events_map_clicked(battle_id: int, clicked_position: Vector3) -> void:
+	if not battle_id == _source.battle_id:
+		return
+	
+	clicked_position.y = 0
+	print("SHOULD MOVE to ", clicked_position, "/", _source.global_position)
+	_target_position = clicked_position
+	_is_moving = true
