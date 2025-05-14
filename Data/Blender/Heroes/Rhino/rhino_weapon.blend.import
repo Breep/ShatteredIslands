@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://ckheabhpnd6yy"
-path="res://.godot/imported/sword.blend-c10e0b677d19b6d801dd7a7ca01ca2c8.scn"
+uid="uid://cckjalm737p5y"
+path="res://.godot/imported/rhino_weapon.blend-f59583e345df90d5e71b3d44731e52ca.scn"
 
 [deps]
 
-source_file="res://Data/Blender/sword.blend"
-dest_files=["res://.godot/imported/sword.blend-c10e0b677d19b6d801dd7a7ca01ca2c8.scn"]
+source_file="res://Data/Blender/Heroes/Rhino/rhino_weapon.blend"
+dest_files=["res://.godot/imported/rhino_weapon.blend-f59583e345df90d5e71b3d44731e52ca.scn"]
 
 [params]
 

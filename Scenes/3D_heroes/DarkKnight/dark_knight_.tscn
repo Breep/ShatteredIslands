@@ -1,12 +1,12 @@
 [gd_scene load_steps=32 format=3 uid="uid://dsdxbwk2i351e"]
 
-[ext_resource type="PackedScene" uid="uid://bksvkun3m68pc" path="res://Data/Blender/Dark knight_weight_painted.blend" id="1_myu8c"]
+[ext_resource type="PackedScene" uid="uid://bksvkun3m68pc" path="res://Data/Blender/Heroes/DarkKnight/Dark knight_weight_painted.blend" id="1_myu8c"]
 [ext_resource type="Texture2D" uid="uid://da14e8k15p5np" path="res://Data/Blender/textures/Ucupaint Mesh1_low Color.png" id="2_2fpem"]
 [ext_resource type="Texture2D" uid="uid://fcutdexfkfgs" path="res://Data/Blender/textures/Ucupaint Mesh1_low Emission Color.exr" id="3_k6y24"]
 [ext_resource type="Texture2D" uid="uid://o7guyrnim437" path="res://Data/Blender/textures/Ucupaint Mesh1_low Metallic.png" id="4_rvjvy"]
 [ext_resource type="Texture2D" uid="uid://car2l6jvgjp1j" path="res://Data/Blender/textures/Ucupaint Mesh1_low Normal.png" id="5_ts04y"]
 [ext_resource type="Texture2D" uid="uid://hdqeqhngntiq" path="res://Data/Blender/textures/Ucupaint Mesh1_low Roughness.png" id="6_ilyh1"]
-[ext_resource type="PackedScene" uid="uid://dboy8d216ggmm" path="res://Scenes/Heroes/DarkKnight/sword_2h.tscn" id="8_2fpem"]
+[ext_resource type="PackedScene" uid="uid://dboy8d216ggmm" path="res://Scenes/3D_heroes/DarkKnight/sword_2h.tscn" id="8_2fpem"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j3twh"]
 albedo_texture = ExtResource("2_2fpem")
@@ -8111,7 +8111,7 @@ bones/55/rotation = Quaternion(-0.010522, 0.999845, 0.0139956, 0.00186089)
 material_override = SubResource("StandardMaterial3D_j3twh")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Armature/GeneralSkeleton" index="1"]
-transform = Transform3D(0.0722144, -0.028758, 0.996975, 0.913694, -0.398909, -0.0776886, 0.399936, 0.916539, -0.0025309, -0.267343, 0.866061, 0.68842)
+transform = Transform3D(0.0722139, -0.0287573, 0.996975, 0.913693, -0.39891, -0.0776882, 0.399937, 0.916539, -0.00253161, -0.267343, 0.86606, 0.688419)
 bone_name = "RightHand"
 bone_idx = 30
 

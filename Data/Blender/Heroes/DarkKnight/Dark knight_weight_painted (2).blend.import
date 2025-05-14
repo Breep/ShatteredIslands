@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bksvkun3m68pc"
-path="res://.godot/imported/Dark knight_weight_painted.blend-706e0d9a06220ebfb2fd8c6fc8520aa7.scn"
+path="res://.godot/imported/Dark knight_weight_painted (2).blend-9a82b7d0740663384462d200f3666e5a.scn"
 
 [deps]
 
-source_file="res://Data/Blender/Dark knight_weight_painted.blend"
-dest_files=["res://.godot/imported/Dark knight_weight_painted.blend-706e0d9a06220ebfb2fd8c6fc8520aa7.scn"]
+source_file="res://Data/Blender/Heroes/DarkKnight/Dark knight_weight_painted (2).blend"
+dest_files=["res://.godot/imported/Dark knight_weight_painted (2).blend-9a82b7d0740663384462d200f3666e5a.scn"]
 
 [params]
 

@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://dboy8d216ggmm"]
+
+[ext_resource type="PackedScene" uid="uid://ckheabhpnd6yy" path="res://Data/Blender/Heroes/DarkKnight/sword (2).blend" id="1_7tssf"]
+
+[node name="sword" instance=ExtResource("1_7tssf")]
