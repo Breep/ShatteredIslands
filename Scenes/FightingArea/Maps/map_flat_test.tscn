@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://wpx225alqcqi" path="res://Scripts/FightingArea/Maps/map.gd" id="1_mtm0e"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://Scenes/Managers/spawn_manager.tscn" id="2_ehh57"]
 [ext_resource type="Script" uid="uid://d2fihbt8u628f" path="res://Scripts/FightingArea/camera_fighting_area.gd" id="3_mdipu"]
-[ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Scenes/Character/character.tscn" id="3_mtm0e"]
+[ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Scenes/Character/character_template.tscn" id="3_mtm0e"]
 [ext_resource type="Script" uid="uid://s036n1p4wypx" path="res://Scenes/FightingArea/Maps/floor_ray_cast.gd" id="4_khw3f"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mdipu"]

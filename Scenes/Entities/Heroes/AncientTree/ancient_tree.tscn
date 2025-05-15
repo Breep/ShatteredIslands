@@ -1,0 +1,177 @@
+[gd_scene load_steps=24 format=3 uid="uid://2v270ywaa1vg"]
+
+[ext_resource type="Script" uid="uid://dsiet7v8tbihn" path="res://Scripts/Character/character.gd" id="1_hgo7m"]
+[ext_resource type="PackedScene" uid="uid://dfrrvt8lpo17x" path="res://Scenes/Entities/Heroes/AncientTree/ancient_tree_model.tscn" id="2_su5oi"]
+[ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Scenes/Character/character_visual.tscn" id="2_yqw0q"]
+[ext_resource type="PackedScene" uid="uid://d0g0xkyr876lc" path="res://Scenes/Character/Modules/movement_module.tscn" id="3_4xrs8"]
+[ext_resource type="PackedScene" uid="uid://617x5c1qrdpg" path="res://Scenes/Character/Modules/action_module.tscn" id="4_4cosg"]
+[ext_resource type="PackedScene" uid="uid://bbwmtb5op8clu" path="res://Scenes/Character/Modules/interact_module.tscn" id="5_3syst"]
+[ext_resource type="PackedScene" uid="uid://b6yg1bhhmnicr" path="res://Scenes/Character/Modules/auto_attack_module.tscn" id="6_dldbo"]
+[ext_resource type="PackedScene" uid="uid://bext8rh783yay" path="res://Scenes/Character/FamiliesManagers/defense_manager.tscn" id="7_wl025"]
+[ext_resource type="PackedScene" uid="uid://cl10r3idwllx" path="res://Scenes/Character/FamiliesManagers/fire_manager.tscn" id="8_hgy4y"]
+[ext_resource type="PackedScene" uid="uid://6holmj326e1y" path="res://Scenes/Character/FamiliesManagers/life_manager.tscn" id="9_fjnw8"]
+[ext_resource type="PackedScene" uid="uid://cvihi4los882b" path="res://Scenes/Character/FamiliesManagers/poison_manager.tscn" id="10_2nx23"]
+[ext_resource type="PackedScene" uid="uid://bdl1xxjdbeugn" path="res://Scenes/Character/FamiliesManagers/serenity_manager.tscn" id="11_qkuye"]
+[ext_resource type="PackedScene" uid="uid://dhah05lihxk4p" path="res://Scenes/Character/FamiliesManagers/shadow_manager.tscn" id="12_rdp3u"]
+[ext_resource type="PackedScene" uid="uid://bjbfnigvphbfc" path="res://Scenes/Character/FamiliesManagers/storm_manager.tscn" id="13_xmtn1"]
+[ext_resource type="PackedScene" uid="uid://crqesljjrouec" path="res://Scenes/Character/FamiliesManagers/attack_manager.tscn" id="14_vuhys"]
+[ext_resource type="PackedScene" uid="uid://n30ifkjad344" path="res://Scenes/Character/Modules/target_manager.tscn" id="15_0xcrt"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_su5oi"]
+animation = &"Ancient tree v2 /Tpose"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_61y0m"]
+animation = &"Ancient tree v2 /run"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_fsm3l"]
+input_0/name = "Idle"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Run"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_i08v8"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_su5oi"]
+graph_offset = Vector2(-513, -93)
+nodes/AnimIdle/node = SubResource("AnimationNodeAnimation_su5oi")
+nodes/AnimIdle/position = Vector2(-460, -20)
+nodes/AnimRun/node = SubResource("AnimationNodeAnimation_61y0m")
+nodes/AnimRun/position = Vector2(-600, 240)
+nodes/Transition/node = SubResource("AnimationNodeTransition_fsm3l")
+nodes/Transition/position = Vector2(0, 80)
+nodes/run_speed/node = SubResource("AnimationNodeTimeScale_i08v8")
+nodes/run_speed/position = Vector2(-320, 220)
+node_connections = [&"Transition", 0, &"AnimIdle", &"Transition", 1, &"run_speed", &"output", 0, &"Transition", &"run_speed", 0, &"AnimRun"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rxegs"]
+height = 3.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5ed6q"]
+properties/0/path = NodePath(".:owner_player_id")
+properties/0/spawn = true
+properties/0/replication_mode = 0
+properties/1/path = NodePath(".:id")
+properties/1/spawn = true
+properties/1/replication_mode = 0
+properties/2/path = NodePath(".:team")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath(".:position")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+properties/4/path = NodePath(".:fighting_state")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+properties/5/path = NodePath(".:battle_id")
+properties/5/spawn = true
+properties/5/replication_mode = 2
+
+[node name="AncientTree" type="CharacterBody3D" groups=["CHARACTER"]]
+motion_mode = 1
+script = ExtResource("1_hgo7m")
+
+[node name="AncientTreeModel" parent="." instance=ExtResource("2_su5oi")]
+transform = Transform3D(-1.82, 0, -1.59109e-07, 0, 1.82, 0, 1.59109e-07, 0, -1.82, 0, 0, 0)
+
+[node name="GeneralSkeleton" parent="AncientTreeModel/Armature_006" index="0"]
+bones/0/position = Vector3(-0.00303346, 0.498038, -0.00628455)
+bones/0/rotation = Quaternion(-0.0549047, 0.238051, 0.0111003, 0.969636)
+bones/1/rotation = Quaternion(-0.0278696, 0.11859, 0.987132, 0.103591)
+bones/2/rotation = Quaternion(-0.00779433, 0.984848, -0.170448, 0.0310108)
+bones/3/rotation = Quaternion(-0.00262835, 0.720946, -0.69207, -0.0356268)
+bones/4/rotation = Quaternion(0.00945541, 0.997108, 0.0754038, -0.00129649)
+bones/6/rotation = Quaternion(-0.15358, -0.0237357, 0.984586, -0.0802491)
+bones/7/rotation = Quaternion(-0.00566867, 0.991817, -0.12723, -0.00886103)
+bones/8/rotation = Quaternion(-0.027797, 0.648876, -0.759433, 0.0380594)
+bones/9/rotation = Quaternion(-0.0275041, 0.99539, 0.0917738, -0.00455307)
+bones/11/rotation = Quaternion(0.0768922, 0.039604, 0.0184799, 0.996081)
+bones/12/rotation = Quaternion(0.078111, 0.0083854, -0.0293496, 0.996477)
+bones/13/rotation = Quaternion(0.00240437, 0.00630338, 0.00516889, 0.999964)
+bones/14/rotation = Quaternion(0.457488, 0.562204, 0.535473, -0.433473)
+bones/15/rotation = Quaternion(0.26339, 0.902703, 0.199341, 0.275712)
+bones/16/rotation = Quaternion(-0.0067864, -0.683258, -0.164792, 0.711306)
+bones/17/rotation = Quaternion(0.0209837, 0.634248, -0.107101, 0.765388)
+bones/19/rotation = Quaternion(0.350431, -0.517447, -0.631261, -0.4593)
+bones/20/rotation = Quaternion(0.253245, 0.950086, -0.0626736, 0.171099)
+bones/21/rotation = Quaternion(-0.0057181, 0.684984, 0.16348, 0.709957)
+bones/22/rotation = Quaternion(-0.0023396, -0.826267, -0.073178, 0.558499)
+bones/24/rotation = Quaternion(-0.17033, 0.00528646, -0.0146706, 0.985264)
+bones/25/rotation = Quaternion(0.187597, 0.00584055, 0.0260491, 0.981883)
+bones/26/rotation = Quaternion(-0.0888231, 0.00143882, -0.00141216, 0.996045)
+bones/28/rotation = Quaternion(0.707107, 1.89652e-05, 8.05707e-06, 0.707106)
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+unique_name_in_owner = true
+root_node = NodePath("%AnimationTree/../AncientTreeModel")
+tree_root = SubResource("AnimationNodeBlendTree_su5oi")
+anim_player = NodePath("../AncientTreeModel/AnimationPlayer")
+parameters/Transition/current_state = "Idle"
+parameters/Transition/transition_request = ""
+parameters/Transition/current_index = 0
+parameters/run_speed/scale = 1.0
+
+[node name="CharacterVisual" parent="." instance=ExtResource("2_yqw0q")]
+unique_name_in_owner = true
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.884308, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("CapsuleShape3D_rxegs")
+
+[node name="ProjectileSpawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.888041, 0.890776, 0)
+
+[node name="Modules" type="Node" parent="."]
+
+[node name="MovementManager" parent="Modules" instance=ExtResource("3_4xrs8")]
+unique_name_in_owner = true
+
+[node name="ActionModule" parent="Modules" instance=ExtResource("4_4cosg")]
+unique_name_in_owner = true
+
+[node name="InteractModule" parent="Modules" instance=ExtResource("5_3syst")]
+unique_name_in_owner = true
+
+[node name="AutoAttackModule" parent="Modules" node_paths=PackedStringArray("projectile_spawn") instance=ExtResource("6_dldbo")]
+unique_name_in_owner = true
+projectile_spawn = NodePath("../../ProjectileSpawn")
+
+[node name="FamiliesManagers" type="Node" parent="."]
+
+[node name="DefenseManager" parent="FamiliesManagers" instance=ExtResource("7_wl025")]
+unique_name_in_owner = true
+
+[node name="FireManager" parent="FamiliesManagers" instance=ExtResource("8_hgy4y")]
+unique_name_in_owner = true
+
+[node name="LifeManager" parent="FamiliesManagers" instance=ExtResource("9_fjnw8")]
+unique_name_in_owner = true
+
+[node name="PoisonManager" parent="FamiliesManagers" instance=ExtResource("10_2nx23")]
+unique_name_in_owner = true
+
+[node name="SerenityManager" parent="FamiliesManagers" instance=ExtResource("11_qkuye")]
+unique_name_in_owner = true
+
+[node name="ShadowManager" parent="FamiliesManagers" instance=ExtResource("12_rdp3u")]
+unique_name_in_owner = true
+
+[node name="StormManager" parent="FamiliesManagers" instance=ExtResource("13_xmtn1")]
+unique_name_in_owner = true
+_percent_decrease = 10.0
+
+[node name="AttackManager" parent="FamiliesManagers" instance=ExtResource("14_vuhys")]
+unique_name_in_owner = true
+
+[node name="TargetManager" parent="." instance=ExtResource("15_0xcrt")]
+unique_name_in_owner = true
+
+[node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+unique_name_in_owner = true
+replication_config = SubResource("SceneReplicationConfig_5ed6q")
+
+[editable path="AncientTreeModel"]

@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://ixtw17uvelro"]
-
-[ext_resource type="Script" uid="uid://b0wv06gah5msg" path="res://Scripts/Test/auto_attack_projectile_visual.gd" id="1_77mqv"]
-[ext_resource type="PackedScene" uid="uid://drtmsdhvbpdqv" path="res://Scenes/Particle/Shader Spell-Projectile/aa_poison_particle.tscn" id="2_ljoi7"]
-
-[node name="Node2D" type="Node2D"]
-script = ExtResource("1_77mqv")
-
-[node name="PoisonNode" parent="." instance=ExtResource("2_ljoi7")]

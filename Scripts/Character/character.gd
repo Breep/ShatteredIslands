@@ -26,13 +26,9 @@ var _fighting_state: GlobalFightingManager.FightingState = GlobalFightingManager
 # ============================== Local scene nodes ==============================
 
 @onready var _character_visual: CharacterVisual = $CharacterVisual
-
 @onready var _server_synchronizer: MultiplayerSynchronizer = %ServerSynchronizer
 
-@onready var target_manager: TargetManager = %TargetManager # Needs to be public for easier access for other managers TODO Maybe rework ?
-
-@onready var _movement_module: MovementModule = %MovementManager
-
+var _families_managers: Dictionary # { Family.FamilyType: FamilyManager }
 @onready var _attack_manager: AttackManager = %AttackManager
 @onready var _defense_manager: DefenseManager = %DefenseManager
 @onready var _fire_manager: FireManager = %FireManager
@@ -42,8 +38,8 @@ var _fighting_state: GlobalFightingManager.FightingState = GlobalFightingManager
 @onready var _life_manager: LifeManager = %LifeManager
 @onready var _shadow_manager: ShadowManager = %ShadowManager
 
-var _families_managers: Dictionary # { Family.FamilyType: FamilyManager }
-
+@onready var target_manager: TargetManager = %TargetManager # Needs to be public for easier access for other managers TODO Maybe rework ?
+@onready var _movement_module: MovementModule = %MovementManager
 @onready var _action_module: ActionModule = %ActionModule
 @onready var _interact_module: InteractModule = %InteractModule
 @onready var _auto_attack_module: AutoAttackModule = %AutoAttackModule

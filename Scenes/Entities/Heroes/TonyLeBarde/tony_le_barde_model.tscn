@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://unr8ut4cx7db"]
+
+[ext_resource type="Script" uid="uid://boijjesl7u0r0" path="res://Scripts/hero_3d.gd" id="1_f3ao6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ul7y3"]
+albedo_color = Color(1, 0.65676, 0.4469, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_a215p"]
+material = SubResource("StandardMaterial3D_ul7y3")
+
+[node name="TonyLeBarde" type="Node3D"]
+script = ExtResource("1_f3ao6")
+hero_id = 7
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_a215p")

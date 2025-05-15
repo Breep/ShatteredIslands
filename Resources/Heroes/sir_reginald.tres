@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://ResourcesBase/Hero/hero.gd" id="1_synja"]
 [ext_resource type="Script" uid="uid://c76rxvnlcwltf" path="res://ResourcesBase/CharacterStats/character_stats.gd" id="2_0fuq0"]
 [ext_resource type="Texture2D" uid="uid://3wy134hag6ic" path="res://Data/Heroes/Portraits/Sir Reginald Von Glorifoth III.webp" id="2_1xx0h"]
-[ext_resource type="PackedScene" uid="uid://dvtbjmadt2v8p" path="res://Scenes/Heroes/SirReginald/model.tscn" id="3_lvb6b"]
+[ext_resource type="PackedScene" uid="uid://dvtbjmadt2v8p" path="res://Scenes/Entities/Heroes/SirReginald/sir_reginald_model.tscn" id="3_lvb6b"]
 
 [sub_resource type="Resource" id="Resource_gr18g"]
 script = ExtResource("2_0fuq0")

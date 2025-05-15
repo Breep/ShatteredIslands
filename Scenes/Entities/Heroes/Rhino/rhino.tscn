@@ -1,0 +1,112 @@
+[gd_scene load_steps=19 format=3 uid="uid://vut8b02xa34b"]
+
+[ext_resource type="Script" uid="uid://dsiet7v8tbihn" path="res://Scripts/Character/character.gd" id="1_mcrft"]
+[ext_resource type="PackedScene" uid="uid://da6itu0upcuqj" path="res://Scenes/Entities/Heroes/Rhino/rhino_model.tscn" id="2_6ou0q"]
+[ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Scenes/Character/character_visual.tscn" id="2_po5ng"]
+[ext_resource type="PackedScene" uid="uid://d0g0xkyr876lc" path="res://Scenes/Character/Modules/movement_module.tscn" id="3_r5g4h"]
+[ext_resource type="PackedScene" uid="uid://617x5c1qrdpg" path="res://Scenes/Character/Modules/action_module.tscn" id="4_3yxsw"]
+[ext_resource type="PackedScene" uid="uid://bbwmtb5op8clu" path="res://Scenes/Character/Modules/interact_module.tscn" id="5_xdrj8"]
+[ext_resource type="PackedScene" uid="uid://b6yg1bhhmnicr" path="res://Scenes/Character/Modules/auto_attack_module.tscn" id="6_firjp"]
+[ext_resource type="PackedScene" uid="uid://bext8rh783yay" path="res://Scenes/Character/FamiliesManagers/defense_manager.tscn" id="7_qam4w"]
+[ext_resource type="PackedScene" uid="uid://cl10r3idwllx" path="res://Scenes/Character/FamiliesManagers/fire_manager.tscn" id="8_yudqq"]
+[ext_resource type="PackedScene" uid="uid://6holmj326e1y" path="res://Scenes/Character/FamiliesManagers/life_manager.tscn" id="9_4ehge"]
+[ext_resource type="PackedScene" uid="uid://cvihi4los882b" path="res://Scenes/Character/FamiliesManagers/poison_manager.tscn" id="10_ub6pj"]
+[ext_resource type="PackedScene" uid="uid://bdl1xxjdbeugn" path="res://Scenes/Character/FamiliesManagers/serenity_manager.tscn" id="11_tc8hs"]
+[ext_resource type="PackedScene" uid="uid://dhah05lihxk4p" path="res://Scenes/Character/FamiliesManagers/shadow_manager.tscn" id="12_0xc4a"]
+[ext_resource type="PackedScene" uid="uid://bjbfnigvphbfc" path="res://Scenes/Character/FamiliesManagers/storm_manager.tscn" id="13_e0l2y"]
+[ext_resource type="PackedScene" uid="uid://crqesljjrouec" path="res://Scenes/Character/FamiliesManagers/attack_manager.tscn" id="14_hofbw"]
+[ext_resource type="PackedScene" uid="uid://n30ifkjad344" path="res://Scenes/Character/Modules/target_manager.tscn" id="15_l71nb"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rxegs"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5ed6q"]
+properties/0/path = NodePath(".:owner_player_id")
+properties/0/spawn = true
+properties/0/replication_mode = 0
+properties/1/path = NodePath(".:id")
+properties/1/spawn = true
+properties/1/replication_mode = 0
+properties/2/path = NodePath(".:team")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath(".:position")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+properties/4/path = NodePath(".:fighting_state")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+properties/5/path = NodePath(".:battle_id")
+properties/5/spawn = true
+properties/5/replication_mode = 2
+
+[node name="Rhino" type="CharacterBody3D" groups=["CHARACTER"]]
+motion_mode = 1
+script = ExtResource("1_mcrft")
+
+[node name="RhinoModel" parent="." instance=ExtResource("2_6ou0q")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="BoneAttachment3D" parent="RhinoModel/Rhino_armature/GeneralSkeleton" index="1"]
+transform = Transform3D(-0.176973, 0.705592, -0.686164, -0.916785, -0.371792, -0.145864, -0.358031, 0.60325, 0.712673, 0.534887, 0.570791, 0.312116)
+
+[node name="CharacterVisual" parent="." instance=ExtResource("2_po5ng")]
+unique_name_in_owner = true
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_rxegs")
+
+[node name="ProjectileSpawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.888041, 0.890776, 0)
+
+[node name="Modules" type="Node" parent="."]
+
+[node name="MovementManager" parent="Modules" instance=ExtResource("3_r5g4h")]
+unique_name_in_owner = true
+
+[node name="ActionModule" parent="Modules" instance=ExtResource("4_3yxsw")]
+unique_name_in_owner = true
+
+[node name="InteractModule" parent="Modules" instance=ExtResource("5_xdrj8")]
+unique_name_in_owner = true
+
+[node name="AutoAttackModule" parent="Modules" node_paths=PackedStringArray("projectile_spawn") instance=ExtResource("6_firjp")]
+unique_name_in_owner = true
+projectile_spawn = NodePath("../../ProjectileSpawn")
+
+[node name="FamiliesManagers" type="Node" parent="."]
+
+[node name="DefenseManager" parent="FamiliesManagers" instance=ExtResource("7_qam4w")]
+unique_name_in_owner = true
+
+[node name="FireManager" parent="FamiliesManagers" instance=ExtResource("8_yudqq")]
+unique_name_in_owner = true
+
+[node name="LifeManager" parent="FamiliesManagers" instance=ExtResource("9_4ehge")]
+unique_name_in_owner = true
+
+[node name="PoisonManager" parent="FamiliesManagers" instance=ExtResource("10_ub6pj")]
+unique_name_in_owner = true
+
+[node name="SerenityManager" parent="FamiliesManagers" instance=ExtResource("11_tc8hs")]
+unique_name_in_owner = true
+
+[node name="ShadowManager" parent="FamiliesManagers" instance=ExtResource("12_0xc4a")]
+unique_name_in_owner = true
+
+[node name="StormManager" parent="FamiliesManagers" instance=ExtResource("13_e0l2y")]
+unique_name_in_owner = true
+_percent_decrease = 10.0
+
+[node name="AttackManager" parent="FamiliesManagers" instance=ExtResource("14_hofbw")]
+unique_name_in_owner = true
+
+[node name="TargetManager" parent="." instance=ExtResource("15_l71nb")]
+unique_name_in_owner = true
+
+[node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+unique_name_in_owner = true
+replication_config = SubResource("SceneReplicationConfig_5ed6q")
+
+[editable path="RhinoModel"]

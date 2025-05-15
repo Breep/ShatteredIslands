@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://c5ji8s1iic5v8"]
+
+[ext_resource type="PackedScene" uid="uid://bd376tbdw5v7g" path="res://test_rhino.tscn" id="2_446ey"]
+[ext_resource type="Script" uid="uid://d2fihbt8u628f" path="res://Scripts/FightingArea/camera_fighting_area.gd" id="2_num78"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_num78"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="BoxMesh" id="BoxMesh_446ey"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_num78"]
+albedo_color = Color(0.960101, 0.000911019, 0.983579, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_446ey"]
+material = SubResource("StandardMaterial3D_num78")
+top_radius = 0.0
+height = 5.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_num78"]
+height = 2.49805
+radius = 0.258301
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+collision_layer = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_num78")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_446ey")
+
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("_character_test")]
+transform = Transform3D(1, 0, 0, 0, 0.930699, 0.365787, 0, -0.365787, 0.930699, 0, 13.2307, 32.0106)
+keep_aspect = 0
+projection = 1
+size = 23.725
+script = ExtResource("2_num78")
+_character_test = NodePath("../Rhino")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.316446, -0.799129, 0.511131, 0.420655, 0.60116, 0.679453, -0.850242, 0, 0.526392, 4.31345, 5.41816, 1.5576)
+
+[node name="Rhino" parent="." instance=ExtResource("2_446ey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.115197, 3.40271)
+collision_mask = 9
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("CylinderMesh_446ey")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.917969, 0)
+shape = SubResource("CylinderShape3D_num78")

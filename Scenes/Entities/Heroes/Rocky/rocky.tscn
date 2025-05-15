@@ -1,0 +1,127 @@
+[gd_scene load_steps=19 format=3 uid="uid://h726o6giwel8"]
+
+[ext_resource type="Script" uid="uid://dsiet7v8tbihn" path="res://Scripts/Character/character.gd" id="1_w8xt1"]
+[ext_resource type="PackedScene" uid="uid://d080glq1m1puv" path="res://Scenes/Entities/Heroes/Rocky/rocky_model.tscn" id="2_1t8nd"]
+[ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Scenes/Character/character_visual.tscn" id="2_vxmuk"]
+[ext_resource type="PackedScene" uid="uid://d0g0xkyr876lc" path="res://Scenes/Character/Modules/movement_module.tscn" id="3_1usal"]
+[ext_resource type="PackedScene" uid="uid://617x5c1qrdpg" path="res://Scenes/Character/Modules/action_module.tscn" id="4_svl5t"]
+[ext_resource type="PackedScene" uid="uid://bbwmtb5op8clu" path="res://Scenes/Character/Modules/interact_module.tscn" id="5_oofg7"]
+[ext_resource type="PackedScene" uid="uid://b6yg1bhhmnicr" path="res://Scenes/Character/Modules/auto_attack_module.tscn" id="6_1ax4j"]
+[ext_resource type="PackedScene" uid="uid://bext8rh783yay" path="res://Scenes/Character/FamiliesManagers/defense_manager.tscn" id="7_vpv01"]
+[ext_resource type="PackedScene" uid="uid://cl10r3idwllx" path="res://Scenes/Character/FamiliesManagers/fire_manager.tscn" id="8_xcv5n"]
+[ext_resource type="PackedScene" uid="uid://6holmj326e1y" path="res://Scenes/Character/FamiliesManagers/life_manager.tscn" id="9_iyia7"]
+[ext_resource type="PackedScene" uid="uid://cvihi4los882b" path="res://Scenes/Character/FamiliesManagers/poison_manager.tscn" id="10_eukmc"]
+[ext_resource type="PackedScene" uid="uid://bdl1xxjdbeugn" path="res://Scenes/Character/FamiliesManagers/serenity_manager.tscn" id="11_drx0u"]
+[ext_resource type="PackedScene" uid="uid://dhah05lihxk4p" path="res://Scenes/Character/FamiliesManagers/shadow_manager.tscn" id="12_trjvv"]
+[ext_resource type="PackedScene" uid="uid://bjbfnigvphbfc" path="res://Scenes/Character/FamiliesManagers/storm_manager.tscn" id="13_h6u87"]
+[ext_resource type="PackedScene" uid="uid://crqesljjrouec" path="res://Scenes/Character/FamiliesManagers/attack_manager.tscn" id="14_nlxtr"]
+[ext_resource type="PackedScene" uid="uid://n30ifkjad344" path="res://Scenes/Character/Modules/target_manager.tscn" id="15_2neru"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rxegs"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5ed6q"]
+properties/0/path = NodePath(".:owner_player_id")
+properties/0/spawn = true
+properties/0/replication_mode = 0
+properties/1/path = NodePath(".:id")
+properties/1/spawn = true
+properties/1/replication_mode = 0
+properties/2/path = NodePath(".:team")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath(".:position")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+properties/4/path = NodePath(".:fighting_state")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+properties/5/path = NodePath(".:battle_id")
+properties/5/spawn = true
+properties/5/replication_mode = 2
+
+[node name="Rocky" type="CharacterBody3D" groups=["CHARACTER"]]
+motion_mode = 1
+script = ExtResource("1_w8xt1")
+
+[node name="RockyModel" parent="." instance=ExtResource("2_1t8nd")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="GeneralSkeleton" parent="RockyModel/Armature" index="0"]
+bones/0/position = Vector3(-0.00276826, 0.49114, 0.0282227)
+bones/0/rotation = Quaternion(-0.00148714, -0.58362, -0.0156866, 0.811874)
+bones/1/rotation = Quaternion(0.120235, 0.292301, 0.907364, -0.277118)
+bones/2/rotation = Quaternion(0.00166789, 0.935067, -0.341386, 0.0954111)
+bones/3/rotation = Quaternion(-0.118603, 0.679128, -0.708558, 0.150545)
+bones/5/rotation = Quaternion(-0.0208699, 0.310718, 0.931791, 0.186505)
+bones/6/rotation = Quaternion(0.0206041, 0.941752, -0.33564, 0.00483552)
+bones/7/rotation = Quaternion(0.175914, 0.652314, -0.72332, -0.14265)
+bones/11/rotation = Quaternion(0.115968, -0.013001, -0.00559017, 0.993152)
+bones/12/rotation = Quaternion(0.427644, 0.442624, 0.63447, -0.467602)
+bones/13/rotation = Quaternion(0.506842, 0.747495, -0.256195, 0.344567)
+bones/14/rotation = Quaternion(0.259346, -0.768104, 0.260546, 0.524282)
+bones/16/rotation = Quaternion(0.439921, -0.428498, -0.636713, -0.46632)
+bones/17/rotation = Quaternion(-0.0125203, 0.898858, -0.35046, -0.262822)
+bones/18/rotation = Quaternion(0.43917, 0.720151, -0.440108, 0.307924)
+bones/21/rotation = Quaternion(0.0731245, 0.452549, -0.0373835, 0.88795)
+
+[node name="CharacterVisual" parent="." instance=ExtResource("2_vxmuk")]
+unique_name_in_owner = true
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_rxegs")
+
+[node name="ProjectileSpawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.888041, 0.890776, 0)
+
+[node name="Modules" type="Node" parent="."]
+
+[node name="MovementManager" parent="Modules" instance=ExtResource("3_1usal")]
+unique_name_in_owner = true
+
+[node name="ActionModule" parent="Modules" instance=ExtResource("4_svl5t")]
+unique_name_in_owner = true
+
+[node name="InteractModule" parent="Modules" instance=ExtResource("5_oofg7")]
+unique_name_in_owner = true
+
+[node name="AutoAttackModule" parent="Modules" node_paths=PackedStringArray("projectile_spawn") instance=ExtResource("6_1ax4j")]
+unique_name_in_owner = true
+projectile_spawn = NodePath("../../ProjectileSpawn")
+
+[node name="FamiliesManagers" type="Node" parent="."]
+
+[node name="DefenseManager" parent="FamiliesManagers" instance=ExtResource("7_vpv01")]
+unique_name_in_owner = true
+
+[node name="FireManager" parent="FamiliesManagers" instance=ExtResource("8_xcv5n")]
+unique_name_in_owner = true
+
+[node name="LifeManager" parent="FamiliesManagers" instance=ExtResource("9_iyia7")]
+unique_name_in_owner = true
+
+[node name="PoisonManager" parent="FamiliesManagers" instance=ExtResource("10_eukmc")]
+unique_name_in_owner = true
+
+[node name="SerenityManager" parent="FamiliesManagers" instance=ExtResource("11_drx0u")]
+unique_name_in_owner = true
+
+[node name="ShadowManager" parent="FamiliesManagers" instance=ExtResource("12_trjvv")]
+unique_name_in_owner = true
+
+[node name="StormManager" parent="FamiliesManagers" instance=ExtResource("13_h6u87")]
+unique_name_in_owner = true
+_percent_decrease = 10.0
+
+[node name="AttackManager" parent="FamiliesManagers" instance=ExtResource("14_nlxtr")]
+unique_name_in_owner = true
+
+[node name="TargetManager" parent="." instance=ExtResource("15_2neru")]
+unique_name_in_owner = true
+
+[node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+unique_name_in_owner = true
+replication_config = SubResource("SceneReplicationConfig_5ed6q")
+
+[editable path="RockyModel"]

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://ResourcesBase/Hero/hero.gd" id="1_t0hox"]
 [ext_resource type="Texture2D" uid="uid://dck1kflaybnjq" path="res://Data/Heroes/Portraits/Dr Boom.webp" id="2_blowq"]
 [ext_resource type="Script" uid="uid://c76rxvnlcwltf" path="res://ResourcesBase/CharacterStats/character_stats.gd" id="2_sgt0q"]
-[ext_resource type="PackedScene" uid="uid://cmq21hx4nihv4" path="res://Scenes/Heroes/DrBoom/model.tscn" id="4_ud2x7"]
+[ext_resource type="PackedScene" uid="uid://cmq21hx4nihv4" path="res://Scenes/Entities/Heroes/DrBoom/dr_boom_model.tscn" id="4_ud2x7"]
 
 [sub_resource type="Resource" id="Resource_u3dta"]
 script = ExtResource("2_sgt0q")
