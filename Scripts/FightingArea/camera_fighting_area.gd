@@ -3,8 +3,6 @@ extends Camera3D
 
 @export var move_speed: float = 10.0 # Camera move speed
 
-@export var _character_test: Hero3D
-
 var camera_type: CameraManager.CameraType = CameraManager.CameraType.UNDEF
 var battle_id: int
 
@@ -51,8 +49,6 @@ func _input(event: InputEvent) -> void:
 		if not result: return
 		var clicked_position = result.position
 		Events.map_clicked.emit(battle_id, clicked_position)
-		_character_test.target_location = clicked_position
-		_character_test._is_moving = true
 
 
 var _old_selected_object: Node3D

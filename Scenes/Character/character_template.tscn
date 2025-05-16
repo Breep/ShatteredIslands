@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bbnioyc6ti8wn"]
+[gd_scene load_steps=17 format=3 uid="uid://bbnioyc6ti8wn"]
 
 [ext_resource type="Script" uid="uid://dsiet7v8tbihn" path="res://Scripts/Character/character.gd" id="1_2kqa6"]
 [ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Scenes/Character/character_visual.tscn" id="2_0rbv3"]
@@ -12,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://6holmj326e1y" path="res://Scenes/Character/FamiliesManagers/life_manager.tscn" id="10_62qwf"]
 [ext_resource type="PackedScene" uid="uid://cvihi4los882b" path="res://Scenes/Character/FamiliesManagers/poison_manager.tscn" id="11_q2ui6"]
 [ext_resource type="PackedScene" uid="uid://bdl1xxjdbeugn" path="res://Scenes/Character/FamiliesManagers/serenity_manager.tscn" id="12_ql7bv"]
-[ext_resource type="PackedScene" uid="uid://dhah05lihxk4p" path="res://Scenes/Character/FamiliesManagers/shadow_manager.tscn" id="13_bsyot"]
 [ext_resource type="PackedScene" uid="uid://bjbfnigvphbfc" path="res://Scenes/Character/FamiliesManagers/storm_manager.tscn" id="14_skvrh"]
 [ext_resource type="PackedScene" uid="uid://crqesljjrouec" path="res://Scenes/Character/FamiliesManagers/attack_manager.tscn" id="15_axqe6"]
 
@@ -82,9 +81,6 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 
 [node name="SerenityManager" parent="FamiliesManagers" instance=ExtResource("12_ql7bv")]
-unique_name_in_owner = true
-
-[node name="ShadowManager" parent="FamiliesManagers" instance=ExtResource("13_bsyot")]
 unique_name_in_owner = true
 
 [node name="StormManager" parent="FamiliesManagers" instance=ExtResource("14_skvrh")]

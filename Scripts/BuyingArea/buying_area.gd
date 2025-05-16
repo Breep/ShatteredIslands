@@ -38,9 +38,6 @@ func _ready() -> void:
 
 # Reload the tavern center
 func start_round(battles: Array[Battle]) -> void:
-	for player in PlayerManager.players.values(): # TODO changer ça c'est MOCHE
-		player.reset_stats()
-	
 	_timer.start()
 	CameraManager.camera_changed.emit(CameraManager.CameraType.BUYING_AREA)
 	_ui_hero_picking_screen.hide()

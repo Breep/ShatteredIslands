@@ -16,7 +16,7 @@ var _revive_timer: Timer
 # ============================== Public functions ==============================
 
 func _specific_init() -> void:
-	_life_stats = _source.stats.hp
+	_life_stats = _source.stats.life
 	_create_optional_timers()
 
 
@@ -31,20 +31,17 @@ func stop() -> void:
 
 
 func get_increased_damage_taken_from_lost_hp(damage: float, damage_type: Utils.DamageType) -> float:
-	if damage_type != Utils.DamageType.PHYSICAL:
-		return damage
+	return damage
+	#if not _source.stats.hp.damage_increased_by_hp_lost_activated:
+		#return damage
+	#
+	#var lost_hp: int = _source.stats.health_max - _source.stats.health
+	#var damage_inc_percent: int = _source.stats.hp.damage_increased_by_hp_lost_percentage
+	#var lost_hp_stacks: int = lost_hp / _source.stats.hp.damage_increased_by_hp_lost_hp_number
+	#var damage_multiplier: float = remap(damage_inc_percent * lost_hp_stacks, 0, 100, 1, 2)
+#
+	#return damage * damage_multiplier
 	
-	if not _source.stats.hp.damage_increased_by_hp_lost_activated:
-		return damage
-	
-	var lost_hp: int = _source.stats.health_max - _source.stats.health
-	var damage_inc_percent: int = _source.stats.hp.damage_increased_by_hp_lost_percentage
-	var lost_hp_stacks: int = lost_hp / _source.stats.hp.damage_increased_by_hp_lost_hp_number
-	var damage_multiplier: float = remap(damage_inc_percent * lost_hp_stacks, 0, 100, 1, 2)
-
-	return damage * damage_multiplier
-
-
 func get_reduced_damage(damage: int) -> int:
 	if not _life_stats.damage_taken_reduced_below_treshold_activated:
 		return damage

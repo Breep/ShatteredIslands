@@ -1,16 +1,12 @@
 class_name MovementModule
 extends Node
 
-signal energy_changed(energy: float)
-
 var _source: Character # Ref to character owner
 var _target_position: Vector3
 var _is_moving: bool = false
 var _fighting_state: GlobalFightingManager.FightingState
 
 var _is_stopped: bool = false
-
-@onready var _energy_regen_timer: Timer = %EnergyRegenTimer
 
 func init(source: Character, fighting_state: GlobalFightingManager.FightingState) -> void:
 	if source == null:
@@ -25,14 +21,11 @@ func init(source: Character, fighting_state: GlobalFightingManager.FightingState
 
 
 func start() -> void:
-	_source.stats.energy = _source.stats.energy_max
-	_energy_regen_timer.start()
 	_is_stopped = false
 
 
 func stop() -> void:
 	_is_stopped = true
-	_energy_regen_timer.stop()
 
 
 func set_fighting_state(new_state: GlobalFightingManager.FightingState) -> void:
@@ -51,9 +44,6 @@ func _process(delta: float) -> void:
 
 
 func _move_toward_target(delta: float):
-	if _source.stats.energy <= 0:
-		_is_moving = false
-	
 	if not _is_moving:
 		return
 	
@@ -70,10 +60,6 @@ func _move_toward_target(delta: float):
 	_source.move_and_slide()
 	var distance_moved = _source.global_position.distance_to(previous_position)
 	print("POS= ", _source.global_position)
-	
-	if _fighting_state != GlobalFightingManager.FightingState.STARTING:
-		_source.stats.energy -= distance_moved
-		energy_changed.emit(_source.stats.energy)
 
 
 func _get_move_speed() -> float:
@@ -82,13 +68,6 @@ func _get_move_speed() -> float:
 		return move_speed * 2
 	else:
 		return move_speed
-
-
-func _on_energy_regen_timer_timeout() -> void:
-	var period: float  = _energy_regen_timer.wait_time
-	_source.stats.energy += _source.stats.energy_regen * period
-	_source.stats.energy = clampf(_source.stats.energy, 0, _source.stats.energy_max)
-	energy_changed.emit(_source.stats.energy)
 
 
 func _on_events_map_clicked(battle_id: int, clicked_position: Vector3) -> void:

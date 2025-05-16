@@ -1,0 +1,78 @@
+[gd_scene load_steps=13 format=3 uid="uid://c5ji8s1iic5v8"]
+
+[ext_resource type="Script" uid="uid://d2fihbt8u628f" path="res://Scripts/FightingArea/camera_fighting_area.gd" id="1_8nvor"]
+[ext_resource type="Script" uid="uid://bu48b2v401db2" path="res://Scenes/Prototyping/prototyping_map.gd" id="1_66i2r"]
+[ext_resource type="PackedScene" uid="uid://2v270ywaa1vg" path="res://Scenes/Entities/Heroes/AncientTree/ancient_tree.tscn" id="2_jb5pd"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://ResourcesBase/CardBase/card.gd" id="2_ovips"]
+[ext_resource type="PackedScene" uid="uid://g706yyhstscc" path="res://Scenes/Entities/Heroes/Cyborg/cyborg.tscn" id="3_4p440"]
+[ext_resource type="Resource" uid="uid://3vjmnbpyyjyk" path="res://Resources/Card/Attack/attack_gatling_gun.tres" id="3_08xy3"]
+[ext_resource type="Resource" uid="uid://cuqudlrmcu7sr" path="res://Resources/Card/Defense/defense_power_wrist.tres" id="4_k73x5"]
+[ext_resource type="PackedScene" uid="uid://pyrw8lacvly2" path="res://Scenes/Managers/entity_manager.tscn" id="5_yjquk"]
+[ext_resource type="PackedScene" uid="uid://bhxhqex1pbh2p" path="res://Scenes/UI/FightingArea/ui_fighting_area.tscn" id="6_xd7nd"]
+[ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://Scenes/Managers/spawn_manager.tscn" id="10_08xy3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_num78"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="BoxMesh" id="BoxMesh_446ey"]
+size = Vector3(50, 1, 50)
+
+[node name="PrototypingMap" type="Node3D" node_paths=PackedStringArray("_entity_manager", "_spawn_manager", "_character1", "_character2")]
+script = ExtResource("1_66i2r")
+_battle_id = 1
+_entity_manager = NodePath("EntityManager")
+_spawn_manager = NodePath("SpawnManager")
+_player1_cards = Array[ExtResource("2_ovips")]([ExtResource("3_08xy3"), ExtResource("4_k73x5")])
+_character1 = NodePath("AncientTree")
+_character2 = NodePath("Cyborg")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+collision_layer = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_num78")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_446ey")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.930699, 0.365787, 0, -0.365787, 0.930699, 0, 13.2307, 32.0106)
+keep_aspect = 0
+projection = 1
+size = 23.725
+script = ExtResource("1_8nvor")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.316446, -0.799129, 0.511131, 0.420655, 0.60116, 0.679453, -0.850242, 0, 0.526392, 4.31345, 5.41816, 1.5576)
+
+[node name="EntityManager" parent="." instance=ExtResource("5_yjquk")]
+unique_name_in_owner = true
+
+[node name="SpawnManager" parent="." instance=ExtResource("10_08xy3")]
+
+[node name="AncientTree" parent="." instance=ExtResource("2_jb5pd")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5.00241, 0, 0)
+_is_prototype = true
+id = 1
+team = 1
+battle_id = 1
+
+[node name="Cyborg" parent="." instance=ExtResource("3_4p440")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4.96764, 0, 0)
+_is_prototype = true
+id = 2
+team = 2
+battle_id = 1
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UIFightingArea" parent="UI" instance=ExtResource("6_xd7nd")]
+unique_name_in_owner = true
+layout_mode = 1

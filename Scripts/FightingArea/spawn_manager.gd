@@ -75,9 +75,7 @@ func _spawn_new_character(player: Player) -> Character:
 	if not multiplayer.is_server():
 		return
 	
-	#var character: Character = Shared.ENTITIES[Entity.EntityType.CHARACTER].instantiate()
-	var character: Character = preload("res://Scenes/Character/character.tscn").instantiate()
-	character.name = "Character_" + str(player.id)
+	var character: Character = Shared.CHARACTERS[player.hero.id].instantiate()
 	character.id = _entity_counter
 	_entity_counter += 1
 	character.battle_id = battle_id

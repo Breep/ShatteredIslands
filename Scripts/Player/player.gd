@@ -26,8 +26,8 @@ var is_bot: bool # If the player is a fake player (a bot controlled by the serve
 
 var ready: bool # If this player is ready to continue the game flow (Used to sync players with server)
 
-var character_stats: CharacterStats # Stats of the player's character
 var deck: PlayerDeck
+var character: Character
 
 var win_streak: int
 var health_lost_since_last_round: int
@@ -145,26 +145,19 @@ func update_from_serialized(serialized_data: Dictionary) -> void:
 	is_bot = serialized_data[SerializedField.IS_BOT]
 	xp = serialized_data[SerializedField.XP]
 
-
-func reset_stats() -> void:
-	_apply_all_cards_upgrades()
-
 # ============================== Resource base functions ==============================
 
 func _init() -> void:
 	deck = PlayerDeck.new()
-	character_stats = CharacterStats.new()
 	deck.has_changed.connect(_on_deck_has_changed)
 
 # ============================== Private functions ==============================
 
 func _apply_all_cards_upgrades() -> void:
-	if deck == null or character_stats == null or hero == null:
+	if deck == null or character == null or hero == null:
 		printerr("Player: Can't apply cards upgrades")
 		return
-	character_stats.reset_stats(hero.stats)
-	for card in deck.card_pile:
-		card.player_upgrade.apply(character_stats, card.lvl)
+	character.apply_cards_upgrade(deck)
 
 
 func _check_lvl_up() -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dq1pqesv0lptu"]
+[gd_scene load_steps=18 format=3 uid="uid://dq1pqesv0lptu"]
 
 [ext_resource type="Script" uid="uid://dsiet7v8tbihn" path="res://Scripts/Character/character.gd" id="1_74hki"]
 [ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Scenes/Character/character_visual.tscn" id="2_38dqm"]
@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://6holmj326e1y" path="res://Scenes/Character/FamiliesManagers/life_manager.tscn" id="9_0iuw2"]
 [ext_resource type="PackedScene" uid="uid://cvihi4los882b" path="res://Scenes/Character/FamiliesManagers/poison_manager.tscn" id="10_qiyhg"]
 [ext_resource type="PackedScene" uid="uid://bdl1xxjdbeugn" path="res://Scenes/Character/FamiliesManagers/serenity_manager.tscn" id="11_d6wte"]
-[ext_resource type="PackedScene" uid="uid://dhah05lihxk4p" path="res://Scenes/Character/FamiliesManagers/shadow_manager.tscn" id="12_spwna"]
 [ext_resource type="PackedScene" uid="uid://bjbfnigvphbfc" path="res://Scenes/Character/FamiliesManagers/storm_manager.tscn" id="13_0mgdd"]
 [ext_resource type="PackedScene" uid="uid://crqesljjrouec" path="res://Scenes/Character/FamiliesManagers/attack_manager.tscn" id="14_hgu1g"]
 [ext_resource type="PackedScene" uid="uid://n30ifkjad344" path="res://Scenes/Character/Modules/target_manager.tscn" id="15_5kuly"]
@@ -60,7 +59,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.888041, 0.890776, 0)
 
 [node name="Modules" type="Node" parent="."]
 
-[node name="MovementManager" parent="Modules" instance=ExtResource("3_1nm1s")]
+[node name="MovementModule" parent="Modules" instance=ExtResource("3_1nm1s")]
 unique_name_in_owner = true
 
 [node name="ActionModule" parent="Modules" instance=ExtResource("4_yxojf")]
@@ -88,9 +87,6 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 
 [node name="SerenityManager" parent="FamiliesManagers" instance=ExtResource("11_d6wte")]
-unique_name_in_owner = true
-
-[node name="ShadowManager" parent="FamiliesManagers" instance=ExtResource("12_spwna")]
 unique_name_in_owner = true
 
 [node name="StormManager" parent="FamiliesManagers" instance=ExtResource("13_0mgdd")]

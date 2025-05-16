@@ -23,24 +23,35 @@ enum MultipleTargettingStrategy {
 	ENEMIES, # (can be empty)
 }
 
+# ============================== Export variables ==============================
+
+@export var _source: Entity # Owner of the TargetManager
+
 # ============================== Private variables ==============================
 
 var _entities: Array[Entity] # All character on the fighting scene
 var _enemies: Array[Entity] # All enemies of the owned character
 var _allies: Array[Entity] # All allies of the owned character
 
-var _source: Entity # Owner of the TargetManager
 var _entity_manager: EntityManager # The FightingScene EntityManager
 
 # ============================== Node base functions ==============================
 
+func _init() -> void:
+	print("TargetManager init")
+
+func _enter_tree() -> void:
+	print("TargetManager enter tree")
+
+
 func _ready() -> void:
-	_source = get_parent() as Entity
+	print("TargetManager ready")
+	
 	if _source == null:
-		printerr("TargetManager: TargetManager must be directly attached to an Entity")
+		printerr("TargetManager: TargetManager need a ref to its owner")
 		return
 	
-	_entity_manager = _get_entity_manager_in_node(get_parent().get_parent())
+	_entity_manager = Shared.entity_managers_ref[_source.battle_id]
 	if _entity_manager == null:
 		printerr("TargetManager: There is no EntityManager on any parent nodes")
 		return
@@ -119,16 +130,6 @@ func get_targets(strategy: MultipleTargettingStrategy) -> Array[Entity]:
 
 # ============================== Private functions ==============================
 
-func _get_entity_manager_in_node(node: Node) -> EntityManager:
-	if node == null:
-		return null
-	var entity_manager: EntityManager = node.get_node("EntityManager") # TODO REWORK ça cause plein d'erreur dans la console
-	if entity_manager == null:
-		return _get_entity_manager_in_node(node.get_parent())
-	else:
-		return entity_manager
-
-
 func _get_enemies_from_entities() -> Array[Entity]:
 	var ret: Array[Entity]
 	for character in _entities:
@@ -160,7 +161,7 @@ func _get_closest(characters: Array[Entity], excluded_character: Entity) -> Enti
 	if characters_copy.is_empty():
 		return null
 	
-	characters_copy = _get_array_whithout_untargetable_targets(characters_copy)
+	characters_copy = _get_array_without_untargetable_targets(characters_copy)
 	if characters_copy.is_empty():
 		return null
 	
@@ -182,7 +183,7 @@ func _get_farthest(characters: Array[Entity], excluded_character: Entity) -> Ent
 	if characters_copy.is_empty():
 		return null
 	
-	characters_copy = _get_array_whithout_untargetable_targets(characters_copy)
+	characters_copy = _get_array_without_untargetable_targets(characters_copy)
 	if characters_copy.is_empty():
 		return null
 	
@@ -206,11 +207,11 @@ func _get_random(characters: Array[Entity], excluded_character: Entity) -> Entit
 	if characters_copy.is_empty():
 		return null
 	
-	characters_copy = _get_array_whithout_untargetable_targets(characters_copy)
+	characters_copy = _get_array_without_untargetable_targets(characters_copy)
 	if characters_copy.is_empty():
 		return null
 	
-	characters_copy = _get_array_whithout_untargetable_targets(characters_copy)
+	characters_copy = _get_array_without_untargetable_targets(characters_copy)
 	if characters_copy.is_empty():
 		return null
 	
@@ -237,11 +238,9 @@ func _get_lowest_hp(characters: Array[Entity], excluded_character: Entity) -> En
 	return lowest_hp_character
 
 
-func _get_array_whithout_untargetable_targets(characters: Array[Entity]) -> Array[Entity]:
+func _get_array_without_untargetable_targets(characters: Array[Entity]) -> Array[Entity]:
 	var characters_copy: Array[Entity] = characters.duplicate()
-	for character in  characters_copy:
-		if character.stats.shadow.untargetable:
-			characters_copy.erase(character)
+	# TODO Here it was for shadow untargetable. Maybe some heroes will have untargetable ultimate
 	return characters_copy
 
 

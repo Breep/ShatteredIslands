@@ -17,23 +17,10 @@ extends Node3D
 @onready var _energy_bar: ProgressBar = %EnergyBar
 @onready var _name_displayed: Label = %NameDisplayed
 
-var _hero_model: Hero3D
-
-# ============================== Node base functions ==============================
-
-func _ready() -> void:
-	%Hero3D.queue_free()
-
 # ============================== Public ==============================
 
-func attach_to_attack_done_signal(attack_done_signal: Signal) -> void:
-	_hero_model.attach_to_attack_done_signal(attack_done_signal)
-
-
-func load_hero_model(hero: Hero) -> void:
-	_hero_model = hero.model.instantiate()
-	_hero_model.name = "MODEL_" + hero.name
-	add_child(_hero_model)
+#func attach_to_attack_done_signal(attack_done_signal: Signal) -> void:
+	#_hero_model.attach_to_attack_done_signal(attack_done_signal)
 
 
 func update_health_bar(health: int, health_max: int) -> void:

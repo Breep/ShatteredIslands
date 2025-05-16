@@ -12,8 +12,6 @@ const FOCUS_INCREASE_CRIT_PERIOD: float = 0.5
 
 var _storm_stats: CharacterStormStats # Ref to the owner storm stats
 
-var _default_physical_critical_chance: float
-
 var _focus_timer: Timer
 var _crit_move_speed_timer: Timer
 
@@ -27,7 +25,6 @@ var _focus_timer_time_elapsed: float # Time elapsed since lanch of the timer
 
 func _specific_init() -> void:
 	_storm_stats = _source.stats.storm
-	_default_physical_critical_chance = _source.hero.stats.physical_critical_chance
 	_create_optional_timers()
 
 
@@ -51,9 +48,7 @@ func get_increased_critical_damage(damage: int, is_critical: bool) -> int:
 
 
 func get_critical_chance() -> float:
-	var crit_chance: float = _default_physical_critical_chance
-	crit_chance += _storm_stats.focus_target_crit_current
-	return crit_chance
+	return 10 # TODO A FAIRE
 
 
 func get_critical_multiplier(damage_type: Utils.DamageType) -> float:
