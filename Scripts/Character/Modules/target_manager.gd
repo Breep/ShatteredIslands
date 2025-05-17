@@ -43,10 +43,12 @@ func _init() -> void:
 func _enter_tree() -> void:
 	print("TargetManager enter tree")
 
-
 func _ready() -> void:
 	print("TargetManager ready")
-	
+
+# ============================== Public functions ==============================
+
+func init() -> void:
 	if _source == null:
 		printerr("TargetManager: TargetManager need a ref to its owner")
 		return
@@ -62,8 +64,6 @@ func _ready() -> void:
 	_enemies = _get_enemies_from_entities()
 	_allies = _get_allies_from_entities()
 
-
-# ============================== Public functions ==============================
 
 # Get target of the owned character from a given strategy
 func get_target(targetting_strategy: TargettingStrategy) -> Entity:

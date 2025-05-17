@@ -7,11 +7,11 @@ enum HeroId {
 	ANCIENT_TREE,
 	CYBORG,
 	DR_BOOM,
-	ENERGY_MAN,
 	LAURENT_KROFT,
 	MR_KRUMB,
 	SIR_REGINALD,
-	TONY_LE_BARDE
+	TONY_LE_BARDE,
+	RHINO
 }
 
 # ============================== Export ==============================

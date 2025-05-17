@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://btuch2oo5bxk4"]
+[gd_scene load_steps=19 format=3 uid="uid://btuch2oo5bxk4"]
 
-[ext_resource type="Script" uid="uid://dsiet7v8tbihn" path="res://Scripts/Character/character.gd" id="1_j365h"]
+[ext_resource type="Script" uid="uid://dyp7mmfduudai" path="res://Scenes/Entities/Heroes/MrKrumb/mr_krumb.gd" id="1_c4fri"]
 [ext_resource type="PackedScene" uid="uid://b4d230tklju1w" path="res://Scenes/Entities/Heroes/MrKrumb/mr_krumb_model.tscn" id="2_0vypu"]
+[ext_resource type="Resource" uid="uid://ccww2pxgtqvfx" path="res://Resources/Heroes/mr_krumb.tres" id="2_1mska"]
 [ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Scenes/Character/character_visual.tscn" id="2_iqdsy"]
 [ext_resource type="PackedScene" uid="uid://d0g0xkyr876lc" path="res://Scenes/Character/Modules/movement_module.tscn" id="3_wo72f"]
 [ext_resource type="PackedScene" uid="uid://617x5c1qrdpg" path="res://Scenes/Character/Modules/action_module.tscn" id="4_qf32i"]
@@ -38,9 +39,21 @@ properties/5/path = NodePath(".:battle_id")
 properties/5/spawn = true
 properties/5/replication_mode = 2
 
-[node name="MrKrumb" type="CharacterBody3D" groups=["CHARACTER"]]
+[node name="MrKrumb" type="CharacterBody3D" node_paths=PackedStringArray("_attack_manager", "_defense_manager", "_fire_manager", "_storm_manager", "_serenity_manager", "_poison_manager", "_life_manager", "_movement_module", "_action_module", "_interact_module", "_auto_attack_module") groups=["CHARACTER"]]
 motion_mode = 1
-script = ExtResource("1_j365h")
+script = ExtResource("1_c4fri")
+_hero = ExtResource("2_1mska")
+_attack_manager = NodePath("FamiliesManagers/AttackManager")
+_defense_manager = NodePath("FamiliesManagers/DefenseManager")
+_fire_manager = NodePath("FamiliesManagers/FireManager")
+_storm_manager = NodePath("FamiliesManagers/StormManager")
+_serenity_manager = NodePath("FamiliesManagers/SerenityManager")
+_poison_manager = NodePath("FamiliesManagers/PoisonManager")
+_life_manager = NodePath("FamiliesManagers/LifeManager")
+_movement_module = NodePath("Modules/MovementModule")
+_action_module = NodePath("Modules/ActionModule")
+_interact_module = NodePath("Modules/InteractModule")
+_auto_attack_module = NodePath("Modules/AutoAttackModule")
 
 [node name="MrKrumbModel" parent="." instance=ExtResource("2_0vypu")]
 

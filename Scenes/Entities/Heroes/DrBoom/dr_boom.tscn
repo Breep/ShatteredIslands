@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://dq1pqesv0lptu"]
+[gd_scene load_steps=19 format=3 uid="uid://dq1pqesv0lptu"]
 
-[ext_resource type="Script" uid="uid://dsiet7v8tbihn" path="res://Scripts/Character/character.gd" id="1_74hki"]
+[ext_resource type="Script" uid="uid://b8w7wec46hqv3" path="res://Scenes/Entities/Heroes/DrBoom/dr_boom.gd" id="1_2scy2"]
+[ext_resource type="Resource" uid="uid://5ww2u1ldoabr" path="res://Resources/Heroes/dr_boom.tres" id="2_1vhg0"]
 [ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Scenes/Character/character_visual.tscn" id="2_38dqm"]
 [ext_resource type="PackedScene" uid="uid://d0g0xkyr876lc" path="res://Scenes/Character/Modules/movement_module.tscn" id="3_1nm1s"]
 [ext_resource type="PackedScene" uid="uid://617x5c1qrdpg" path="res://Scenes/Character/Modules/action_module.tscn" id="4_yxojf"]
@@ -40,9 +41,21 @@ properties/5/path = NodePath(".:battle_id")
 properties/5/spawn = true
 properties/5/replication_mode = 2
 
-[node name="DrBoom" type="CharacterBody3D" groups=["CHARACTER"]]
+[node name="DrBoom" type="CharacterBody3D" node_paths=PackedStringArray("_attack_manager", "_defense_manager", "_fire_manager", "_storm_manager", "_serenity_manager", "_poison_manager", "_life_manager", "_movement_module", "_action_module", "_interact_module", "_auto_attack_module") groups=["CHARACTER"]]
 motion_mode = 1
-script = ExtResource("1_74hki")
+script = ExtResource("1_2scy2")
+_hero = ExtResource("2_1vhg0")
+_attack_manager = NodePath("FamiliesManagers/AttackManager")
+_defense_manager = NodePath("FamiliesManagers/DefenseManager")
+_fire_manager = NodePath("FamiliesManagers/FireManager")
+_storm_manager = NodePath("FamiliesManagers/StormManager")
+_serenity_manager = NodePath("FamiliesManagers/SerenityManager")
+_poison_manager = NodePath("FamiliesManagers/PoisonManager")
+_life_manager = NodePath("FamiliesManagers/LifeManager")
+_movement_module = NodePath("Modules/MovementModule")
+_action_module = NodePath("Modules/ActionModule")
+_interact_module = NodePath("Modules/InteractModule")
+_auto_attack_module = NodePath("Modules/AutoAttackModule")
 
 [node name="DrBoomModel" parent="." instance=ExtResource("16_1vhg0")]
 transform = Transform3D(0.52, 0, 0, 0, 0.52, 0, 0, 0, 0.52, 0, 0, 0)

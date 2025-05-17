@@ -79,6 +79,7 @@ func _get_random_hero_and_wait_random_duration(heroes: Array[Hero]) -> Hero:
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	await get_tree().create_timer(rng.randf_range(0.1, 0.5)).timeout
+	print(_available_heroes)
 	var random_hero: Hero = _available_heroes.pick_random()
 	return random_hero
 
@@ -88,7 +89,6 @@ func _get_random_hero_and_wait_random_duration(heroes: Array[Hero]) -> Hero:
 func _pick_hero(player_id: int, hero_id: Hero.HeroId) -> void:
 	_available_heroes.erase(Shared.HEROES[hero_id])
 	PlayerManager.players[player_id].hero = Shared.HEROES[hero_id]
-	PlayerManager.players[player_id].character_stats.reset_stats(PlayerManager.players[player_id].hero.stats)
 	_ui_hero_picking_screen.make_hero_unavailable(Shared.HEROES[hero_id])
 	_player_hero_picked.emit()
 

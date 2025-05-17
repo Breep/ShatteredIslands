@@ -6,10 +6,6 @@ extends Node3D
 
 # ============================== Local nodes ==============================
 
-@onready var _tables_layout_ref: Dictionary = {
-	
-}
-
 # ============================== Node base functions ==============================
 
 func _ready() -> void:

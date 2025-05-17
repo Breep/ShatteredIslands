@@ -11,7 +11,3 @@ func _ready() -> void:
 
 func put_tables_according_to_battles(battles: Array[Battle]) -> void:
 	_tarven_center.put_tables_according_to_battles(battles)
-
-
-func init_hero_selection(heroes: Array[Hero]) -> void:
-	_tarven_center.init_hero_selection(heroes)

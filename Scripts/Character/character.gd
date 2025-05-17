@@ -17,8 +17,8 @@ extends Entity
 # ============================== Public variables ==============================
 
 var player: Player
+var stats: CharacterStats
 
-@onready var stats := CharacterStats.new()
 @onready var target_manager: TargetManager = %TargetManager # Needs to be public for easier access for other managers TODO Maybe rework ?
 
 # ============================== Private variables ==============================
@@ -57,7 +57,7 @@ func apply_cards_upgrade(deck: PlayerDeck) -> void:
 # ============================== Node base functions ==============================
 
 func _init() -> void:
-	print("Character init")
+	stats = CharacterStats.new()
 
 
 func _enter_tree() -> void:
@@ -66,18 +66,21 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
-	print("Character ready - ", battle_id)
 	printerr("Character is a virtual class and shouldn't be instanciated")
 
 
 func _character_ready() -> void:
+	print("Character ready - ", battle_id)
+	stats.reset_stats(_hero.stats)
+	
 	if _is_prototype:
 		pass # Player is set by the main node for prototyping for easier use
 		fighting_state = GlobalFightingManager.FightingState.STARTING
 		fighting_state = GlobalFightingManager.FightingState.FIGHT
 	else:
 		player = PlayerManager.players[owner_player_id]
-		Shared.fighting_managers_ref[battle_id].fight_is_over.connect(_on_fighting_manager_fight_is_over)
+		if battle_id != -1:
+			Shared.fighting_managers_ref[battle_id].fight_is_over.connect(_on_fighting_manager_fight_is_over)
 	
 	_is_local = player.id == multiplayer.get_unique_id()
 	

@@ -1,10 +1,13 @@
-[gd_scene load_steps=18 format=3 uid="uid://vut8b02xa34b"]
+[gd_scene load_steps=26 format=3 uid="uid://vut8b02xa34b"]
 
-[ext_resource type="Script" uid="uid://dsiet7v8tbihn" path="res://Scripts/Character/character.gd" id="1_mcrft"]
+[ext_resource type="Script" uid="uid://bj7i5466wptqk" path="res://Scenes/Entities/Heroes/Rhino/rhino.gd" id="1_y4ny4"]
 [ext_resource type="PackedScene" uid="uid://da6itu0upcuqj" path="res://Scenes/Entities/Heroes/Rhino/rhino_model.tscn" id="2_6ou0q"]
 [ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Scenes/Character/character_visual.tscn" id="2_po5ng"]
+[ext_resource type="Resource" uid="uid://duxgec7vb67n5" path="res://Resources/Heroes/rhino.tres" id="2_tksyq"]
 [ext_resource type="PackedScene" uid="uid://d0g0xkyr876lc" path="res://Scenes/Character/Modules/movement_module.tscn" id="3_r5g4h"]
+[ext_resource type="AnimationLibrary" uid="uid://bmijhrm7py8vg" path="res://Data/Anim/lib_rig_no_mixamo.res" id="3_y4ny4"]
 [ext_resource type="PackedScene" uid="uid://617x5c1qrdpg" path="res://Scenes/Character/Modules/action_module.tscn" id="4_3yxsw"]
+[ext_resource type="AnimationLibrary" uid="uid://dtpdd3tf81vg5" path="res://Data/Anim/rhino_libv2.res" id="4_tksyq"]
 [ext_resource type="PackedScene" uid="uid://bbwmtb5op8clu" path="res://Scenes/Character/Modules/interact_module.tscn" id="5_xdrj8"]
 [ext_resource type="PackedScene" uid="uid://b6yg1bhhmnicr" path="res://Scenes/Character/Modules/auto_attack_module.tscn" id="6_firjp"]
 [ext_resource type="PackedScene" uid="uid://bext8rh783yay" path="res://Scenes/Character/FamiliesManagers/defense_manager.tscn" id="7_qam4w"]
@@ -16,7 +19,38 @@
 [ext_resource type="PackedScene" uid="uid://crqesljjrouec" path="res://Scenes/Character/FamiliesManagers/attack_manager.tscn" id="14_hofbw"]
 [ext_resource type="PackedScene" uid="uid://n30ifkjad344" path="res://Scenes/Character/Modules/target_manager.tscn" id="15_l71nb"]
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gqijh"]
+animation = &"rhino lib v2/idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_x4l8q"]
+animation = &"rhino lib v2/run"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_qpvcf"]
+input_0/name = "Idle"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Run"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_g72gk"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ixh3j"]
+graph_offset = Vector2(-384, -39)
+nodes/AnimIdle/node = SubResource("AnimationNodeAnimation_gqijh")
+nodes/AnimIdle/position = Vector2(-420, 60)
+nodes/AnimRun/node = SubResource("AnimationNodeAnimation_x4l8q")
+nodes/AnimRun/position = Vector2(-560, 360)
+nodes/Transition/node = SubResource("AnimationNodeTransition_qpvcf")
+nodes/Transition/position = Vector2(20, 120)
+nodes/run_speed/node = SubResource("AnimationNodeTimeScale_g72gk")
+nodes/run_speed/position = Vector2(-340, 340)
+node_connections = [&"Transition", 0, &"AnimIdle", &"Transition", 1, &"run_speed", &"output", 0, &"Transition", &"run_speed", 0, &"AnimRun"]
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rxegs"]
+height = 2.2
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5ed6q"]
 properties/0/path = NodePath(".:owner_player_id")
@@ -38,22 +72,76 @@ properties/5/path = NodePath(".:battle_id")
 properties/5/spawn = true
 properties/5/replication_mode = 2
 
-[node name="Rhino" type="CharacterBody3D" groups=["CHARACTER"]]
+[node name="Rhino" type="CharacterBody3D" node_paths=PackedStringArray("_attack_manager", "_defense_manager", "_fire_manager", "_storm_manager", "_serenity_manager", "_poison_manager", "_life_manager", "_movement_module", "_action_module", "_interact_module", "_auto_attack_module") groups=["CHARACTER"]]
 motion_mode = 1
-script = ExtResource("1_mcrft")
+script = ExtResource("1_y4ny4")
+_hero = ExtResource("2_tksyq")
+_attack_manager = NodePath("FamiliesManagers/AttackManager")
+_defense_manager = NodePath("FamiliesManagers/DefenseManager")
+_fire_manager = NodePath("FamiliesManagers/FireManager")
+_storm_manager = NodePath("FamiliesManagers/StormManager")
+_serenity_manager = NodePath("FamiliesManagers/SerenityManager")
+_poison_manager = NodePath("FamiliesManagers/PoisonManager")
+_life_manager = NodePath("FamiliesManagers/LifeManager")
+_movement_module = NodePath("Modules/MovementModule")
+_action_module = NodePath("Modules/ActionModule")
+_interact_module = NodePath("Modules/InteractModule")
+_auto_attack_module = NodePath("Modules/AutoAttackModule")
 
 [node name="RhinoModel" parent="." instance=ExtResource("2_6ou0q")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-1.43, 0, -2.15924e-07, 0, 1.43, 0, 2.15924e-07, 0, -1.43, 0, 0, 0)
+
+[node name="GeneralSkeleton" parent="RhinoModel/Rhino_armature" index="0"]
+bones/0/position = Vector3(0.0478186, 0.508154, 0.0311861)
+bones/0/rotation = Quaternion(0.000884891, -0.0200139, -0.0227014, 0.999542)
+bones/1/rotation = Quaternion(-0.0285283, 0.197104, 0.958488, -0.204053)
+bones/2/rotation = Quaternion(0.0863022, 0.94374, -0.311518, 0.0697328)
+bones/3/rotation = Quaternion(-0.125881, 0.597769, -0.788588, -0.0703939)
+bones/4/rotation = Quaternion(0.106818, 0.992979, 0.0173005, -0.0477866)
+bones/6/rotation = Quaternion(-0.0485851, 0.282508, 0.925452, 0.247723)
+bones/7/rotation = Quaternion(-0.0922955, 0.888195, -0.449672, 0.0196746)
+bones/8/rotation = Quaternion(0.139307, 0.551929, -0.820366, -0.0544784)
+bones/9/rotation = Quaternion(-0.10269, 0.989689, 0.0331713, -0.094179)
+bones/11/rotation = Quaternion(2.96277e-08, -6.51926e-09, -3.72529e-09, 1)
+bones/12/rotation = Quaternion(6.82121e-13, -2.03727e-10, -2.61934e-10, 1)
+bones/13/rotation = Quaternion(0.101759, 0.00715073, 0.00173866, 0.994782)
+bones/14/rotation = Quaternion(0.410533, 0.466073, 0.466934, -0.629454)
+bones/15/rotation = Quaternion(-0.505952, 0.751523, -0.0227589, 0.422739)
+bones/16/rotation = Quaternion(0.0292246, -0.864317, 0.236633, 0.44284)
+bones/17/rotation = Quaternion(-0.0329663, 0.302494, -0.203236, 0.930648)
+bones/19/rotation = Quaternion(0.426903, -0.475927, -0.382822, -0.666854)
+bones/20/rotation = Quaternion(0.41689, 0.86904, -0.229906, -0.134591)
+bones/21/rotation = Quaternion(0.0158677, 0.925402, -0.191143, 0.32687)
+bones/22/rotation = Quaternion(-0.142677, -0.271722, 0.378836, 0.873094)
+bones/24/rotation = Quaternion(3.25977e-08, -8.56744e-10, 5.43878e-10, 1)
+bones/25/rotation = Quaternion(0.0901945, 0.0772305, -0.0681495, 0.990584)
+bones/26/rotation = Quaternion(0.0509365, -0.0042404, 0.00424033, 0.998684)
 
 [node name="BoneAttachment3D" parent="RhinoModel/Rhino_armature/GeneralSkeleton" index="1"]
-transform = Transform3D(-0.176973, 0.705592, -0.686164, -0.916785, -0.371792, -0.145864, -0.358031, 0.60325, 0.712673, 0.534887, 0.570791, 0.312116)
+transform = Transform3D(0.511153, 0.689986, 0.512487, -0.804812, 0.174963, 0.567156, 0.301663, -0.702359, 0.644742, 0.782339, 0.964255, -0.0310761)
+
+[node name="AnimationPlayer" parent="RhinoModel" index="1"]
+libraries = {
+&"lib_rig_no_mixamo": ExtResource("3_y4ny4"),
+&"rhino lib v2": ExtResource("4_tksyq")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../RhinoModel")
+tree_root = SubResource("AnimationNodeBlendTree_ixh3j")
+anim_player = NodePath("../RhinoModel/AnimationPlayer")
+parameters/Transition/current_state = "Idle"
+parameters/Transition/transition_request = ""
+parameters/Transition/current_index = 0
+parameters/run_speed/scale = 1.0
 
 [node name="CharacterVisual" parent="." instance=ExtResource("2_po5ng")]
 unique_name_in_owner = true
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.0926411, 0)
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
 shape = SubResource("CapsuleShape3D_rxegs")
 
 [node name="ProjectileSpawn" type="Node3D" parent="."]

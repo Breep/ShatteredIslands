@@ -14,7 +14,7 @@ func _enter_tree() -> void:
 	Shared.entity_managers_ref[_battle_id] = _entity_manager
 	Shared.spawn_managers_ref[_battle_id] = _spawn_manager
 	_spawn_manager.battle_id = _battle_id
-
+	
 	var player1: Player = Player.new()
 	player1.name = "Player1"
 	player1.id = 1

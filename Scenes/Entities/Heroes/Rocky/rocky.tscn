@@ -1,6 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://h726o6giwel8"]
+[gd_scene load_steps=23 format=3 uid="uid://h726o6giwel8"]
 
-[ext_resource type="Script" uid="uid://dsiet7v8tbihn" path="res://Scripts/Character/character.gd" id="1_w8xt1"]
+[ext_resource type="Script" uid="uid://dqjjmiebmxpf4" path="res://Scenes/Entities/Heroes/Rocky/rocky.gd" id="1_e8asp"]
 [ext_resource type="PackedScene" uid="uid://d080glq1m1puv" path="res://Scenes/Entities/Heroes/Rocky/rocky_model.tscn" id="2_1t8nd"]
 [ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Scenes/Character/character_visual.tscn" id="2_vxmuk"]
 [ext_resource type="PackedScene" uid="uid://d0g0xkyr876lc" path="res://Scenes/Character/Modules/movement_module.tscn" id="3_1usal"]
@@ -16,7 +16,39 @@
 [ext_resource type="PackedScene" uid="uid://crqesljjrouec" path="res://Scenes/Character/FamiliesManagers/attack_manager.tscn" id="14_nlxtr"]
 [ext_resource type="PackedScene" uid="uid://n30ifkjad344" path="res://Scenes/Character/Modules/target_manager.tscn" id="15_2neru"]
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_e8asp"]
+animation = &"Rocky_lib/idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1t8nd"]
+animation = &"Rocky_lib/Slow Run"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_abyaq"]
+input_0/name = "Idle"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Run"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_jwgrf"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_cd1gv"]
+graph_offset = Vector2(-419.792, -67.2275)
+nodes/AnimIdle/node = SubResource("AnimationNodeAnimation_e8asp")
+nodes/AnimIdle/position = Vector2(-520, 0)
+nodes/AnimRun/node = SubResource("AnimationNodeAnimation_1t8nd")
+nodes/AnimRun/position = Vector2(-540, 340)
+nodes/Transition/node = SubResource("AnimationNodeTransition_abyaq")
+nodes/Transition/position = Vector2(-20, 120)
+nodes/output/position = Vector2(280, 140)
+nodes/run_speed/node = SubResource("AnimationNodeTimeScale_jwgrf")
+nodes/run_speed/position = Vector2(-320, 320)
+node_connections = [&"Transition", 0, &"AnimIdle", &"Transition", 1, &"run_speed", &"output", 0, &"Transition", &"run_speed", 0, &"AnimRun"]
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rxegs"]
+height = 2.2
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5ed6q"]
 properties/0/path = NodePath(".:owner_player_id")
@@ -40,17 +72,45 @@ properties/5/replication_mode = 2
 
 [node name="Rocky" type="CharacterBody3D" groups=["CHARACTER"]]
 motion_mode = 1
-script = ExtResource("1_w8xt1")
+script = ExtResource("1_e8asp")
 
 [node name="RockyModel" parent="." instance=ExtResource("2_1t8nd")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-1.505, 0, -2.27249e-07, 0, 1.505, 0, 2.27249e-07, 0, -1.505, 0, 0, 0)
+
+[node name="GeneralSkeleton" parent="RockyModel/Armature" index="0"]
+bones/0/position = Vector3(0.00767827, 0.505809, 0.0202194)
+bones/0/rotation = Quaternion(-0.0392084, -0.366961, -0.0122957, 0.929328)
+bones/1/rotation = Quaternion(-0.0227861, 0.324143, 0.938835, -0.114026)
+bones/2/rotation = Quaternion(0.0360207, 0.944994, -0.323555, -0.031646)
+bones/3/rotation = Quaternion(-0.0616891, 0.733643, -0.672528, 0.0752914)
+bones/5/rotation = Quaternion(-0.0997614, 0.0333198, 0.979392, 0.17242)
+bones/6/rotation = Quaternion(0.0222694, 0.961108, -0.238884, -0.136786)
+bones/7/rotation = Quaternion(0.123657, 0.567866, -0.799862, -0.149856)
+bones/11/rotation = Quaternion(0.0104475, 0.060307, 0.0154443, 0.998006)
+bones/12/rotation = Quaternion(0.46178, 0.234748, 0.595145, -0.614374)
+bones/13/rotation = Quaternion(-0.109122, 0.839254, -0.492766, 0.202304)
+bones/14/rotation = Quaternion(0.270861, -0.727702, 0.294864, 0.556901)
+bones/16/rotation = Quaternion(0.260645, -0.43991, -0.722608, -0.465168)
+bones/17/rotation = Quaternion(0.260446, 0.838979, -0.477322, -0.021111)
+bones/18/rotation = Quaternion(0.268104, 0.771621, -0.19176, 0.544013)
+bones/21/rotation = Quaternion(0.148813, 0.301723, -0.00465342, 0.941699)
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../RockyModel")
+tree_root = SubResource("AnimationNodeBlendTree_cd1gv")
+anim_player = NodePath("../RockyModel/AnimationPlayer")
+parameters/Transition/current_state = "Idle"
+parameters/Transition/transition_request = ""
+parameters/Transition/current_index = 0
+parameters/run_speed/scale = 1.0
 
 [node name="CharacterVisual" parent="." instance=ExtResource("2_vxmuk")]
 unique_name_in_owner = true
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
 shape = SubResource("CapsuleShape3D_rxegs")
 
 [node name="ProjectileSpawn" type="Node3D" parent="."]

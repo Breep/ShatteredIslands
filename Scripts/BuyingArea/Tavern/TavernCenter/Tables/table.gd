@@ -15,6 +15,11 @@ extends Node3D
 
 # ============================== Node base functions ==============================
 
+func _enter_tree() -> void:
+	for hero_spawn in _hero_spawns:
+		for child in hero_spawn.get_children():
+			child.queue_free()
+
 func _ready() -> void:
 	if _hero_spawns.size() != _coin_piles.size(): # or _card_fans.size() != _hero_spawns.size():
 		printerr("Table: There are not the same amount of CoinPile/HereSpawn")
@@ -31,7 +36,11 @@ func connect_to_players(players: Array[Player]) -> void:
 		return
 	
 	for i in players.size():
-		var hero_model: Hero3D = players[i].hero.model.instantiate()
-		entities_node.add_child(hero_model)
-		hero_model.global_position = _hero_spawns[i].global_position
+		var character: Character = Shared.CHARACTERS[players[i].hero.id].instantiate()
+		character.owner_player_id = players[i].id
+		print(character.owner_player_id, "   ", players[i].id)
+		character.apply_cards_upgrade(players[i].deck)
+		entities_node.add_child(character)
+		character.global_position = _hero_spawns[i].global_position
+		character.global_rotation = _hero_spawns[i].global_rotation
 		_coin_piles[i].connect_to_player(players[i])

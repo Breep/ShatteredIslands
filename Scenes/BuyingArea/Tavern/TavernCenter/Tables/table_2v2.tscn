@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://b4av14wu25x12"]
+[gd_scene load_steps=5 format=3 uid="uid://b4av14wu25x12"]
 
 [ext_resource type="Script" uid="uid://ccc0vnl2cv7lt" path="res://Scripts/BuyingArea/Tavern/TavernCenter/Tables/table.gd" id="2_8h1bl"]
+[ext_resource type="PackedScene" uid="uid://unr8ut4cx7db" path="res://Scenes/Entities/Heroes/TonyLeBarde/tony_le_barde_model.tscn" id="2_p1dib"]
 [ext_resource type="PackedScene" uid="uid://di4wldkhwynkj" path="res://Scenes/Data/Tavern/TableLong/table_long.tscn" id="3_rul7h"]
 [ext_resource type="PackedScene" uid="uid://bs8lfftv32dp1" path="res://Scenes/BuyingArea/Tavern/TavernCenter/Tables/Common/Coin/coin_pile.tscn" id="5_lv2wc"]
 
@@ -14,7 +15,9 @@ battle_type = 1
 transform = Transform3D(0.435325, 0, 0.900273, 0, 1, 0, -0.900273, 0, 0.435325, -0.498371, 2.38419e-07, -0.938134)
 
 [node name="HeroSpawn1" type="Node3D" parent="Player1"]
-transform = Transform3D(-0.105691, 0, 0.994399, 0, 1, 0, -0.994399, 0, -0.105691, -0.42594, 0, -1.02443)
+transform = Transform3D(-0.877289, 0, -0.479963, 0, 1, 0, 0.479963, 0, -0.877289, -0.598844, 0, -1.382)
+
+[node name="TonyLeBarde" parent="Player1/HeroSpawn1" instance=ExtResource("2_p1dib")]
 
 [node name="CoinPile1" parent="Player1" instance=ExtResource("5_lv2wc")]
 transform = Transform3D(-0.238917, 0, -0.439225, 0, 0.5, 0, 0.439225, 0, -0.238917, 0.507982, 1.03176, -0.323678)
@@ -23,7 +26,9 @@ transform = Transform3D(-0.238917, 0, -0.439225, 0, 0.5, 0, 0.439225, 0, -0.2389
 transform = Transform3D(0.570886, 0, 0.82103, 0, 1, 0, -0.82103, 0, 0.570886, -0.464059, 2.38419e-07, 1.22574)
 
 [node name="HeroSpawn2" type="Node3D" parent="Player2"]
-transform = Transform3D(0.633475, 0, 0.773763, 0, 1, 0, -0.773763, 0, 0.633475, -0.447659, 0, -1.01888)
+transform = Transform3D(-0.705872, 0, -0.70834, 0, 1, 0, 0.70834, 0, -0.705872, -0.746391, 0, -1.44851)
+
+[node name="TonyLeBarde" parent="Player2/HeroSpawn2" instance=ExtResource("2_p1dib")]
 
 [node name="CoinPile2" parent="Player2" instance=ExtResource("5_lv2wc")]
 transform = Transform3D(-0.238917, 0, -0.439225, 0, 0.5, 0, 0.439225, 0, -0.238917, 0.450787, 1.03176, -0.466673)
@@ -32,7 +37,9 @@ transform = Transform3D(-0.238917, 0, -0.439225, 0, 0.5, 0, 0.439225, 0, -0.2389
 transform = Transform3D(0.435325, 0, 0.900273, 0, 1, 0, -0.900273, 0, 0.435325, 0.530935, 2.38419e-07, -0.949831)
 
 [node name="HeroSpawn3" type="Node3D" parent="Player3"]
-transform = Transform3D(-0.725602, 0, -0.688114, 0, 1, 0, 0.688114, 0, -0.725602, 0.547296, 0, 0.934531)
+transform = Transform3D(0.93358, 0, 0.358368, 0, 1, 0, -0.358368, 0, 0.93358, 0.708705, 0, 1.26833)
+
+[node name="TonyLeBarde" parent="Player3/HeroSpawn3" instance=ExtResource("2_p1dib")]
 
 [node name="CoinPile3" parent="Player3" instance=ExtResource("5_lv2wc")]
 transform = Transform3D(0.31613, 0, 0.387378, 0, 0.5, 0, -0.387378, 0, 0.31613, -0.489026, 1.03176, 0.30134)
@@ -41,7 +48,9 @@ transform = Transform3D(0.31613, 0, 0.387378, 0, 0.5, 0, -0.387378, 0, 0.31613, 
 transform = Transform3D(0.435325, 0, 0.900273, 0, 1, 0, -0.900273, 0, 0.435325, 0.495845, 2.38419e-07, 1.24914)
 
 [node name="HeroSpawn4" type="Node3D" parent="Player4"]
-transform = Transform3D(-0.880535, 0, -0.473981, 0, 1, 0, 0.473981, 0, -0.880535, 0.662436, 0, 0.930825)
+transform = Transform3D(0.830012, 0, 0.557745, 0, 1, 0, -0.557745, 0, 0.830012, 0.734206, 0, 1.07925)
+
+[node name="TonyLeBarde" parent="Player4/HeroSpawn4" instance=ExtResource("2_p1dib")]
 
 [node name="CoinPile4" parent="Player4" instance=ExtResource("5_lv2wc")]
 transform = Transform3D(0.321093, 0, 0.383274, 0, 0.5, 0, -0.383274, 0, 0.321093, -0.268585, 1.03176, 0.246715)

@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://bjv2kwt6brxy4"]
+[gd_scene load_steps=19 format=3 uid="uid://bjv2kwt6brxy4"]
 
-[ext_resource type="Script" uid="uid://dsiet7v8tbihn" path="res://Scripts/Character/character.gd" id="1_i7aaq"]
+[ext_resource type="Script" uid="uid://d4g31ktyr1gqk" path="res://Scenes/Entities/Heroes/TonyLeBarde/tony_le_barde.gd" id="1_t7etg"]
 [ext_resource type="PackedScene" uid="uid://unr8ut4cx7db" path="res://Scenes/Entities/Heroes/TonyLeBarde/tony_le_barde_model.tscn" id="2_12jbj"]
 [ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Scenes/Character/character_visual.tscn" id="2_87chu"]
+[ext_resource type="Resource" uid="uid://8hfga7o6w8xp" path="res://Resources/Heroes/tony_le_barde.tres" id="2_tw8mw"]
 [ext_resource type="PackedScene" uid="uid://d0g0xkyr876lc" path="res://Scenes/Character/Modules/movement_module.tscn" id="3_ny4p8"]
 [ext_resource type="PackedScene" uid="uid://617x5c1qrdpg" path="res://Scenes/Character/Modules/action_module.tscn" id="4_7fl8y"]
 [ext_resource type="PackedScene" uid="uid://bbwmtb5op8clu" path="res://Scenes/Character/Modules/interact_module.tscn" id="5_xpnmb"]
@@ -38,9 +39,21 @@ properties/5/path = NodePath(".:battle_id")
 properties/5/spawn = true
 properties/5/replication_mode = 2
 
-[node name="TonyLeBarde" type="CharacterBody3D" groups=["CHARACTER"]]
+[node name="TonyLeBarde" type="CharacterBody3D" node_paths=PackedStringArray("_attack_manager", "_defense_manager", "_fire_manager", "_storm_manager", "_serenity_manager", "_poison_manager", "_life_manager", "_movement_module", "_action_module", "_interact_module", "_auto_attack_module") groups=["CHARACTER"]]
 motion_mode = 1
-script = ExtResource("1_i7aaq")
+script = ExtResource("1_t7etg")
+_hero = ExtResource("2_tw8mw")
+_attack_manager = NodePath("FamiliesManagers/AttackManager")
+_defense_manager = NodePath("FamiliesManagers/DefenseManager")
+_fire_manager = NodePath("FamiliesManagers/FireManager")
+_storm_manager = NodePath("FamiliesManagers/StormManager")
+_serenity_manager = NodePath("FamiliesManagers/SerenityManager")
+_poison_manager = NodePath("FamiliesManagers/PoisonManager")
+_life_manager = NodePath("FamiliesManagers/LifeManager")
+_movement_module = NodePath("Modules/MovementModule")
+_action_module = NodePath("Modules/ActionModule")
+_interact_module = NodePath("Modules/InteractModule")
+_auto_attack_module = NodePath("Modules/AutoAttackModule")
 
 [node name="TonyLeBarde" parent="." instance=ExtResource("2_12jbj")]
 

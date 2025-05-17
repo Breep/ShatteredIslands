@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://dry6jgn0h7srg"]
+[gd_scene load_steps=19 format=3 uid="uid://dry6jgn0h7srg"]
 
-[ext_resource type="Script" uid="uid://dsiet7v8tbihn" path="res://Scripts/Character/character.gd" id="1_04fg4"]
+[ext_resource type="Script" uid="uid://bvx6cyg3ybjvf" path="res://Scenes/Entities/Heroes/LaurentKroft/laurent_kroft.gd" id="1_p8n2g"]
+[ext_resource type="Resource" uid="uid://cnecvw18tqmuq" path="res://Resources/Heroes/laurent_kroft.tres" id="2_hk5ya"]
 [ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Scenes/Character/character_visual.tscn" id="2_u56hr"]
 [ext_resource type="PackedScene" uid="uid://cf0pc5jtr0651" path="res://Scenes/Entities/Heroes/LaurentKroft/laurent_kroft_model.tscn" id="2_w4ua8"]
 [ext_resource type="PackedScene" uid="uid://d0g0xkyr876lc" path="res://Scenes/Character/Modules/movement_module.tscn" id="3_25l8h"]
@@ -38,9 +39,21 @@ properties/5/path = NodePath(".:battle_id")
 properties/5/spawn = true
 properties/5/replication_mode = 2
 
-[node name="LaurentKroft" type="CharacterBody3D" groups=["CHARACTER"]]
+[node name="LaurentKroft" type="CharacterBody3D" node_paths=PackedStringArray("_attack_manager", "_defense_manager", "_fire_manager", "_storm_manager", "_serenity_manager", "_poison_manager", "_life_manager", "_movement_module", "_action_module", "_interact_module", "_auto_attack_module") groups=["CHARACTER"]]
 motion_mode = 1
-script = ExtResource("1_04fg4")
+script = ExtResource("1_p8n2g")
+_hero = ExtResource("2_hk5ya")
+_attack_manager = NodePath("FamiliesManagers/AttackManager")
+_defense_manager = NodePath("FamiliesManagers/DefenseManager")
+_fire_manager = NodePath("FamiliesManagers/FireManager")
+_storm_manager = NodePath("FamiliesManagers/StormManager")
+_serenity_manager = NodePath("FamiliesManagers/SerenityManager")
+_poison_manager = NodePath("FamiliesManagers/PoisonManager")
+_life_manager = NodePath("FamiliesManagers/LifeManager")
+_movement_module = NodePath("Modules/MovementModule")
+_action_module = NodePath("Modules/ActionModule")
+_interact_module = NodePath("Modules/InteractModule")
+_auto_attack_module = NodePath("Modules/AutoAttackModule")
 
 [node name="LaurentKroftModel" parent="." instance=ExtResource("2_w4ua8")]
 

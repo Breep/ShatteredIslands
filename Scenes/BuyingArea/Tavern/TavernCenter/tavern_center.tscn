@@ -16,6 +16,7 @@ size = Vector3(15, 1, 10)
 script = ExtResource("1_ha6dk")
 
 [node name="DebugVisualPlace" type="MeshInstance3D" parent="."]
+visible = false
 material_override = SubResource("StandardMaterial3D_6qeal")
 mesh = SubResource("BoxMesh_r1qdr")
 skeleton = NodePath("")
@@ -42,6 +43,7 @@ unique_name_in_owner = true
 
 [node name="PlayersLeft_4" type="Node3D" parent="."]
 unique_name_in_owner = true
+visible = false
 
 [node name="2_1v1" type="Node3D" parent="PlayersLeft_4"]
 unique_name_in_owner = true
@@ -131,10 +133,10 @@ transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 3, 0, 1)
 
 [node name="PlayersLeft_8" type="Node3D" parent="."]
 unique_name_in_owner = true
-visible = false
 
 [node name="4_1v1" type="Node3D" parent="PlayersLeft_8"]
 unique_name_in_owner = true
+visible = false
 
 [node name="Table_1v1_1" parent="PlayersLeft_8/4_1v1" instance=ExtResource("2_are6m")]
 transform = Transform3D(0.508516, 0, 0.861053, 0, 1, 0, -0.861053, 0, 0.508516, -2.70871, 0, -2.13845)
@@ -153,7 +155,6 @@ battle_id = 3
 
 [node name="2_2v2" type="Node3D" parent="PlayersLeft_8"]
 unique_name_in_owner = true
-visible = false
 
 [node name="table_2v2_1" parent="PlayersLeft_8/2_2v2" instance=ExtResource("3_cjni8")]
 transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -3, 0, 1)

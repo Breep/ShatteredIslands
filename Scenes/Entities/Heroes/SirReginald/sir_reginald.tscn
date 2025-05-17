@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://d3tlk3rg4dhpk"]
+[gd_scene load_steps=19 format=3 uid="uid://d3tlk3rg4dhpk"]
 
-[ext_resource type="Script" uid="uid://dsiet7v8tbihn" path="res://Scripts/Character/character.gd" id="1_i1qdq"]
+[ext_resource type="Script" uid="uid://juprec5foa1l" path="res://Scenes/Entities/Heroes/SirReginald/sir_reginald.gd" id="1_bmlym"]
 [ext_resource type="PackedScene" uid="uid://dvtbjmadt2v8p" path="res://Scenes/Entities/Heroes/SirReginald/sir_reginald_model.tscn" id="2_dpdl0"]
 [ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Scenes/Character/character_visual.tscn" id="2_m5fhr"]
+[ext_resource type="Resource" uid="uid://bqjyvw4bxcnt7" path="res://Resources/Heroes/sir_reginald.tres" id="2_sms4n"]
 [ext_resource type="PackedScene" uid="uid://d0g0xkyr876lc" path="res://Scenes/Character/Modules/movement_module.tscn" id="3_vkp8i"]
 [ext_resource type="PackedScene" uid="uid://617x5c1qrdpg" path="res://Scenes/Character/Modules/action_module.tscn" id="4_ax5m8"]
 [ext_resource type="PackedScene" uid="uid://bbwmtb5op8clu" path="res://Scenes/Character/Modules/interact_module.tscn" id="5_61mc0"]
@@ -38,9 +39,21 @@ properties/5/path = NodePath(".:battle_id")
 properties/5/spawn = true
 properties/5/replication_mode = 2
 
-[node name="SirReginald" type="CharacterBody3D" groups=["CHARACTER"]]
+[node name="SirReginald" type="CharacterBody3D" node_paths=PackedStringArray("_attack_manager", "_defense_manager", "_fire_manager", "_storm_manager", "_serenity_manager", "_poison_manager", "_life_manager", "_movement_module", "_action_module", "_interact_module", "_auto_attack_module") groups=["CHARACTER"]]
 motion_mode = 1
-script = ExtResource("1_i1qdq")
+script = ExtResource("1_bmlym")
+_hero = ExtResource("2_sms4n")
+_attack_manager = NodePath("FamiliesManagers/AttackManager")
+_defense_manager = NodePath("FamiliesManagers/DefenseManager")
+_fire_manager = NodePath("FamiliesManagers/FireManager")
+_storm_manager = NodePath("FamiliesManagers/StormManager")
+_serenity_manager = NodePath("FamiliesManagers/SerenityManager")
+_poison_manager = NodePath("FamiliesManagers/PoisonManager")
+_life_manager = NodePath("FamiliesManagers/LifeManager")
+_movement_module = NodePath("Modules/MovementModule")
+_action_module = NodePath("Modules/ActionModule")
+_interact_module = NodePath("Modules/InteractModule")
+_auto_attack_module = NodePath("Modules/AutoAttackModule")
 
 [node name="SirReginaldModel" parent="." instance=ExtResource("2_dpdl0")]
 
