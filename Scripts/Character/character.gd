@@ -81,19 +81,18 @@ func _character_ready() -> void:
 		player = PlayerManager.players[owner_player_id]
 		if battle_id != -1:
 			Shared.fighting_managers_ref[battle_id].fight_is_over.connect(_on_fighting_manager_fight_is_over)
+			_recursive_propagate_signal(get_parent(), Entity.SIGNAL_NAME_SPAWNED)
+			_character_visual.update_health_bar(stats.health, stats.health_max)
+			_character_visual.update_mana_bar(stats.mana, stats.mana_max)
+			_character_visual.update_name_displayed(player.name)
+		else:
+			_character_visual.queue_free()
 	
 	_is_local = player.id == multiplayer.get_unique_id()
 	
 	#_server_synchronizer.set_multiplayer_authority(player.id)
-	_character_visual.update_name_displayed(player.name)
-	#_character_visual.attach_to_attack_done_signal(_auto_attack_module.attack_done)
-	
-	_character_visual.update_health_bar(stats.health, stats.health_max)
-	_character_visual.update_mana_bar(stats.mana, stats.mana_max)
 	
 	GlobalFightingManager.state_changed.connect(_on_global_fighting_manager_state_changed)
-	
-	_recursive_propagate_signal(get_parent(), Entity.SIGNAL_NAME_SPAWNED)
 
 # ============================== Fighting States ==============================
 
