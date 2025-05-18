@@ -8,7 +8,8 @@ var HEROES: Dictionary[Hero.HeroId, Hero] = {
 	Hero.HeroId.MR_KRUMB: load("res://Resources/Heroes/mr_krumb.tres"),
 	Hero.HeroId.SIR_REGINALD: load("res://Resources/Heroes/sir_reginald.tres"),
 	Hero.HeroId.TONY_LE_BARDE: load("res://Resources/Heroes/tony_le_barde.tres"),
-	Hero.HeroId.RHINO: load("res://Resources/Heroes/rhino.tres")
+	Hero.HeroId.RHINO: load("res://Resources/Heroes/rhino.tres"),
+	Hero.HeroId.DARK_KNIGHT: load("res://Resources/Heroes/dark_knight.tres")
 }
 
 var CHARACTERS: Dictionary[Hero.HeroId, PackedScene] = {
@@ -19,7 +20,8 @@ var CHARACTERS: Dictionary[Hero.HeroId, PackedScene] = {
 	Hero.HeroId.MR_KRUMB: load("res://Scenes/Entities/Heroes/MrKrumb/mr_krumb.tscn"),
 	Hero.HeroId.SIR_REGINALD: load("res://Scenes/Entities/Heroes/SirReginald/sir_reginald.tscn"),
 	Hero.HeroId.TONY_LE_BARDE: load("res://Scenes/Entities/Heroes/TonyLeBarde/tony_le_barde.tscn"),
-	Hero.HeroId.RHINO: load("res://Scenes/Entities/Heroes/Rhino/rhino.tscn")
+	Hero.HeroId.RHINO: load("res://Scenes/Entities/Heroes/Rhino/rhino.tscn"),
+	Hero.HeroId.DARK_KNIGHT: load("res://Scenes/Entities/Heroes/DarkKnight/dark_knight.tscn")
 }
 
 

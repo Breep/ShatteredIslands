@@ -11,7 +11,8 @@ enum HeroId {
 	MR_KRUMB,
 	SIR_REGINALD,
 	TONY_LE_BARDE,
-	RHINO
+	RHINO,
+	DARK_KNIGHT
 }
 
 # ============================== Export ==============================
