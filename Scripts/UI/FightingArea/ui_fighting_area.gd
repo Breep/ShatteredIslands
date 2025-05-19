@@ -1,6 +1,22 @@
 class_name UIFightingArea
 extends Control
 
+var _left_character: Character
+@export var left_character: Character:
+	get: return _left_character
+	set(value):
+		if _left_character != value:
+			_left_character = value
+			_ui_selected_character_stats_1.connect_character_stats(_left_character.stats)
+
+var _right_character: Character
+@export var right_character: Character:
+	get: return _right_character
+	set(value):
+		if _right_character != value:
+			_right_character = value
+			_ui_selected_character_stats_2.connect_character_stats(_right_character.stats)
+
 # ============================== Private variables ==============================
 
 var _battle_id: int
@@ -8,8 +24,8 @@ var _characters: Array[Character]
 
 # ============================== Local nodes ==============================
 
-@onready var _ui_selected_character_stats_1: UICharacterStats = %SelectedCharacterStats_1
-@onready var _ui_selected_character_stats_2: UICharacterStats = %SelectedCharacterStats_2
+@export var _ui_selected_character_stats_1: UICharacterStats
+@export var _ui_selected_character_stats_2: UICharacterStats
 
 # ============================== Public functions ==============================
 
@@ -26,8 +42,8 @@ func start(battle_id: int) -> void:
 
 func _ready() -> void:
 	hide()
-	_ui_selected_character_stats_1.hide()
-	_ui_selected_character_stats_2.hide()
+	#_ui_selected_character_stats_1.hide()
+	#_ui_selected_character_stats_2.hide()
 
 # ============================== Private functions ==============================
 

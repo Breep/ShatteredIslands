@@ -11,8 +11,6 @@ var _character_stats: CharacterStats
 @onready var _health_label: Label = %HealthLabel
 @onready var _mana_bar: ProgressBar = %ManaBar
 @onready var _mana_label: Label = %ManaLabel
-@onready var _energy_bar: ProgressBar = %EnergyBar
-@onready var _energy_label: Label = %EnergyLabel
 @onready var _attack_label: Label = %AttackLabel
 @onready var _attack_speed_label: Label = %AttackSpeedLabel
 @onready var _crit_chance_label: Label = %CritChanceLabel

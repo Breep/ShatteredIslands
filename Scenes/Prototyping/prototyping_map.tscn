@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c5ji8s1iic5v8"]
+[gd_scene load_steps=14 format=3 uid="uid://c5ji8s1iic5v8"]
 
 [ext_resource type="Script" uid="uid://d2fihbt8u628f" path="res://Scripts/FightingArea/camera_fighting_area.gd" id="1_8nvor"]
 [ext_resource type="Script" uid="uid://bu48b2v401db2" path="res://Scenes/Prototyping/prototyping_map.gd" id="1_66i2r"]
@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://cuqudlrmcu7sr" path="res://Resources/Card/Defense/defense_power_wrist.tres" id="4_k73x5"]
 [ext_resource type="PackedScene" uid="uid://pyrw8lacvly2" path="res://Scenes/Managers/entity_manager.tscn" id="5_yjquk"]
 [ext_resource type="PackedScene" uid="uid://bhxhqex1pbh2p" path="res://Scenes/UI/FightingArea/ui_fighting_area.tscn" id="6_xd7nd"]
+[ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://Scenes/Tool/anim_rotating_module.tscn" id="10_1jn5f"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://Scenes/Managers/spawn_manager.tscn" id="10_08xy3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_num78"]
@@ -17,11 +18,12 @@ size = Vector3(50, 1, 50)
 [sub_resource type="BoxMesh" id="BoxMesh_446ey"]
 size = Vector3(50, 1, 50)
 
-[node name="PrototypingMap" type="Node3D" node_paths=PackedStringArray("_entity_manager", "_spawn_manager", "_character1", "_character2")]
+[node name="PrototypingMap" type="Node3D" node_paths=PackedStringArray("_entity_manager", "_spawn_manager", "_ui_fighting_area", "_character1", "_character2")]
 script = ExtResource("1_66i2r")
 _battle_id = 1
 _entity_manager = NodePath("EntityManager")
 _spawn_manager = NodePath("SpawnManager")
+_ui_fighting_area = NodePath("UI/UIFightingArea")
 _player1_cards = Array[ExtResource("2_ovips")]([ExtResource("3_08xy3"), ExtResource("4_k73x5")])
 _character1 = NodePath("AncientTree")
 _character2 = NodePath("Cyborg")
@@ -52,11 +54,18 @@ unique_name_in_owner = true
 [node name="SpawnManager" parent="." instance=ExtResource("10_08xy3")]
 
 [node name="AncientTree" parent="." instance=ExtResource("2_jb5pd")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5.00241, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5.002, 0, 0)
 _is_prototype = true
 id = 1
 team = 1
 battle_id = 1
+
+[node name="AnimRotatingModule" parent="AncientTree" node_paths=PackedStringArray("_owner") instance=ExtResource("10_1jn5f")]
+_owner = NodePath("..")
+_rot_axis = 1
+_rot_period = 2.0
+_rot_max = 360.0
+_rot_full = true
 
 [node name="Cyborg" parent="." instance=ExtResource("3_4p440")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4.96764, 0, 0)
@@ -73,6 +82,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="UIFightingArea" parent="UI" instance=ExtResource("6_xd7nd")]
+[node name="UIFightingArea" parent="UI" node_paths=PackedStringArray("left_character", "right_character") instance=ExtResource("6_xd7nd")]
 unique_name_in_owner = true
 layout_mode = 1
+left_character = NodePath("../../AncientTree")
+right_character = NodePath("../../Cyborg")
