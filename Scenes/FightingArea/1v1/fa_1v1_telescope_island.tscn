@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://d22h1k3fe1wxf"]
+[gd_scene load_steps=17 format=3 uid="uid://d22h1k3fe1wxf"]
 
 [ext_resource type="Script" uid="uid://cd8u3lm3xa8c4" path="res://Scripts/FightingArea/fighting_area.gd" id="1_2cr4k"]
 [ext_resource type="PackedScene" uid="uid://bhx575fxnmb7i" path="res://Scenes/FightingArea/_Maps/Visuals/telescope_island.tscn" id="2_36d18"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Scenes/FightingArea/spawn_point.tscn" id="4_57pjl"]
 [ext_resource type="PackedScene" uid="uid://dibux7uwcsatj" path="res://Scenes/FightingArea/spawn_area.tscn" id="5_kjuvg"]
 [ext_resource type="PackedScene" uid="uid://bhxhqex1pbh2p" path="res://Scenes/UI/FightingArea/ui_fighting_area.tscn" id="5_kkuwc"]
+[ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Scenes/Tool/anim_hovering_module.tscn" id="6_jxx87"]
 [ext_resource type="Script" uid="uid://d2fihbt8u628f" path="res://Scripts/FightingArea/camera_fighting_area.gd" id="9_57pjl"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_57pjl"]
@@ -92,6 +93,11 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.0533
 
 [node name="Projectiles" type="Node3D" parent="TelescopeIsland"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.05333, 0, -0.562456)
+
+[node name="AnimHoveringModule" parent="TelescopeIsland" node_paths=PackedStringArray("_owner") instance=ExtResource("6_jxx87")]
+_owner = NodePath("..")
+_hover_power = 0.2
+_hover_period = 5.0
 
 [node name="EntityManager" parent="." instance=ExtResource("3_2q8x0")]
 
