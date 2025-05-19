@@ -25,10 +25,10 @@ var CHARACTERS: Dictionary[Hero.HeroId, PackedScene] = {
 }
 
 
-var MAPS: Dictionary[Battle.BattleType, PackedScene] = {
-	Battle.BattleType.VS_1: load("res://Scenes/FightingArea/Maps/map_flat_test.tscn"),
-	Battle.BattleType.VS_2: load("res://Scenes/FightingArea/Maps/map_flat_test.tscn"),
-	Battle.BattleType.FFA_SOLO_3: load("res://Scenes/FightingArea/Maps/map_telescope_island.tscn")
+var FIGHTING_AREAS: Dictionary[Battle.BattleType, PackedScene] = {
+	Battle.BattleType.VS_1: load("res://Scenes/FightingArea/1v1/fa_1v1_telescope_island.tscn"),
+	Battle.BattleType.VS_2: load("res://Scenes/FightingArea/2v2/fa_2v2_telescope_island.tscn"),
+	Battle.BattleType.FFA_SOLO_3: load("res://Scenes/FightingArea/FFA13/fa_ffa13_telescope_island.tscn")
 }
 
 

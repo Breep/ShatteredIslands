@@ -13,6 +13,12 @@ const MAX_TOWER_HEIGHT_DIFF: int = 2 # Max coin (or height) diff between the hig
 # ============================== Private variables ==============================
 
 var _old_player_gold: int 
+var _rng := RandomNumberGenerator.new()
+
+# ============================== Node base functions ==============================
+
+func _ready() -> void:
+	_rng.randomize()
 
 # ============================== Public functions ==============================
 
@@ -23,17 +29,15 @@ func connect_to_player(player: Player) -> void:
 # ============================== Private functions ==============================
 
 func _update_visual(new_player_gold: int) -> void:
-	var rng: = RandomNumberGenerator.new()
-	rng.randomize()
 	if new_player_gold >= _old_player_gold + GOLD_PER_COIN:
 		var number_of_coin_to_add: int = (new_player_gold - _old_player_gold) / GOLD_PER_COIN
 		for i in number_of_coin_to_add:
-			var coin_tower = _coin_towers[rng.randi_range(0, _coin_towers.size() - 1)]
+			var coin_tower = _coin_towers[_rng.randi_range(0, _coin_towers.size() - 1)]
 			coin_tower.coins_number += 1
 	elif new_player_gold <= _old_player_gold - GOLD_PER_COIN:
 		var number_of_coin_to_remove: int = (_old_player_gold - new_player_gold) / GOLD_PER_COIN
 		for i in number_of_coin_to_remove:
-			var coin_tower_index = rng.randi_range(0, _coin_towers.size() - 1)
+			var coin_tower_index = _rng.randi_range(0, _coin_towers.size() - 1)
 			var coin_tower = _coin_towers[coin_tower_index]
 			var j:int = 1
 			while coin_tower.coins_number <= 0:

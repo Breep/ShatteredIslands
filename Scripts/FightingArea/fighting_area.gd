@@ -5,7 +5,7 @@ extends Node3D
 
 signal map_clicked(position: Vector3)
 
-# ============================== Export variables ==============================
+# ============================== Network Export variables ==============================
 
 @export var battle_id: int
 
@@ -14,30 +14,22 @@ signal map_clicked(position: Vector3)
 var _battle: Battle # Battle of the fighting area
 var _characters: Array[Character] # Array of all characters in the fight scene
 
-var _spawn_manager: SpawnManager # Inside the map
-var _camera: CameraFightingArea
-var _map: Map
+# ============================== Local nodes / Configuration ==============================
 
-# ============================== Local nodes ==============================
+@export var _battle_type: Battle.BattleType
 
-@onready var _fighting_manager: FightingManager = %FightingManager
-@onready var _entity_manager: EntityManager = %EntityManager
-
-#@onready var _ui_countdown: UICountdown = %Countdown
-@onready var _ui_fighting_area: UIFightingArea = %UIFightingArea
+@export var _fighting_manager: FightingManager
+@export var _entity_manager: EntityManager
+@export var _ui_fighting_area: UIFightingArea
+@export var _camera: CameraFightingArea
+@export var _spawn_manager: SpawnManager
 
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
 	_battle = RoundManager.battles[battle_id]
-	_load_map()
 	
-	if _spawn_manager == null:
-		printerr("FightingArea: No SpawnManager")
-		return
-	
-	if _fighting_manager == null:
-		printerr("FightingArea: No FightingManager")
+	if _ready_checks() != true:
 		return
 	
 	_camera.battle_id = battle_id
@@ -92,12 +84,28 @@ func _delete_self_in_shared() -> void:
 	Shared.fighting_managers_ref.erase(battle_id)
 
 
-func _load_map() -> void:
-	_map = Shared.MAPS[_battle.battle_type].instantiate()
-	add_child(_map)
-	_map.name = "MAP_" + _battle.name
-	_spawn_manager = _map.spawn_manager
-	_camera = _map.camera
+func _ready_checks() -> bool:
+	if _battle.battle_type != _battle_type:
+		printerr("This FightingArea doesn't match with the battle type [", _battle_type, "|", _battle.battle_type, "]")
+		return false
+	
+	if _spawn_manager == null:
+		printerr("FightingArea: No SpawnManager")
+		return false
+	
+	if _fighting_manager == null:
+		printerr("FightingArea: No FightingManager")
+		return false
+	
+	if _entity_manager == null:
+		printerr("FightingArea: No EntityManager")
+		return false
+	
+	if _camera == null:
+		printerr("FightingArea: No Camera")
+		return false
+	
+	return true
 
 # ============================== Callbacks ==============================
 

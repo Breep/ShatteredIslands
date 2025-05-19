@@ -15,11 +15,9 @@ func shuffle() -> void:
 	if _card_pile.is_empty():
 		printerr("Trying to shuffle an empty card pile")
 		return
-
-	var rng := RandomNumberGenerator.new()
-	rng.randomize()
+	
 	for i in _card_pile.size():
-		var random_index =  rng.randi_range(0, _card_pile.size() - 1)
+		var random_index =  Utils.rng.randi_range(0, _card_pile.size() - 1)
 		var temp = _card_pile[i]
 		_card_pile[i] = _card_pile[random_index]
 		_card_pile[random_index] = temp

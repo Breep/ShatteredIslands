@@ -18,8 +18,6 @@ var game_state: GameState:
 		_game_state = value
 		Events.game_state_changed.emit(_game_state)
 
-var _fighting_area_scene: PackedScene = preload("res://Scenes/FightingArea/fighting_area.tscn")
-
 var _families_ref: Dictionary # Reference Dictionary to all families
 var _active_families: Array[Family] # Array of all families activated for this game only
 var _rules: GameRules
@@ -31,7 +29,7 @@ var _current_round_battles: Array[Battle]
 @onready var _node_fighting_areas: Node3D = %FightingAreas
 
 var _fighting_areas: Array[FightingArea]
-@export var _fighting_area_spawns: Array[Node3D]
+@export var _fighting_area_spawns: Array[SpawnPoint]
 
 # ============================== Node base functions ==============================
 
@@ -70,7 +68,7 @@ func _spawn_all_fighting_areas(battles: Array[Battle]) -> void:
 		return
 	
 	for i in battles.size():
-		var fighting_area: FightingArea = _fighting_area_scene.instantiate()
+		var fighting_area: FightingArea = Shared.FIGHTING_AREAS[battles[i].battle_type].instantiate()
 		fighting_area.name = "FightingArea_" + str(i)
 		fighting_area.position = _fighting_area_spawns[i].position
 		fighting_area.battle_id = battles[i].id

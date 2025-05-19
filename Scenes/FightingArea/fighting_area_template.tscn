@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://c66yw4go2ykwa"]
+[gd_scene load_steps=6 format=3 uid="uid://c66yw4go2ykwa"]
 
 [ext_resource type="Script" uid="uid://cd8u3lm3xa8c4" path="res://Scripts/FightingArea/fighting_area.gd" id="1_qx4db"]
 [ext_resource type="PackedScene" uid="uid://c0l0roxttdtlp" path="res://Scenes/FightingArea/fighting_manager.tscn" id="2_vrsql"]
-[ext_resource type="PackedScene" uid="uid://b3467f7qtons1" path="res://Scenes/FightingArea/Maps/Visuals/nothing_blue_red_test.tscn" id="6_12jqf"]
 [ext_resource type="PackedScene" uid="uid://pyrw8lacvly2" path="res://Scenes/Managers/entity_manager.tscn" id="6_yyfcp"]
 [ext_resource type="PackedScene" uid="uid://bhxhqex1pbh2p" path="res://Scenes/UI/FightingArea/ui_fighting_area.tscn" id="8_hqxx4"]
 
@@ -16,8 +15,6 @@ properties/1/replication_mode = 0
 
 [node name="FightingArea" type="Node3D"]
 script = ExtResource("1_qx4db")
-
-[node name="Map" parent="." instance=ExtResource("6_12jqf")]
 
 [node name="EntityManager" parent="." instance=ExtResource("6_yyfcp")]
 unique_name_in_owner = true

@@ -17,20 +17,21 @@ var _selected_player: Player
 
 
 func connect_self_character_stats() -> void:
-	if multiplayer.is_server() and _selected_player != null:
-		_self_character_stats.connect_character_stats(_selected_player.character_stats)
-	elif not multiplayer.is_server():
-		_self_character_stats.connect_character_stats(PlayerManager.get_local_player().character_stats)
+	return
+	#if multiplayer.is_server() and _selected_player != null:
+		#_self_character_stats.connect_character_stats(_selected_player.character_stats)
+	#elif not multiplayer.is_server():
+		#_self_character_stats.connect_character_stats(PlayerManager.get_local_player().character_stats)
 
 
 func _ready() -> void:
 	_all_players_portrait.connect_all_players(PlayerManager.players.values())
 	
-	if multiplayer.is_server() and _selected_player != null:
-		_self_character_stats.connect_character_stats(_selected_player.character_stats)
-	elif not multiplayer.is_server():
-		_self_character_stats.connect_character_stats(PlayerManager.get_local_player().character_stats)
-	
+	#if multiplayer.is_server() and _selected_player != null:
+		#_self_character_stats.connect_character_stats(_selected_player.character_stats)
+	#elif not multiplayer.is_server():
+		#_self_character_stats.connect_character_stats(PlayerManager.get_local_player().character_stats)
+	#
 	Events.hero_interacted.connect(_on_events_hero_interacted)
 	Events.ui_buying_area_opened.connect(_on_events_ui_buying_area_opened)
 	

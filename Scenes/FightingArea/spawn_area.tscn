@@ -1,9 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://dibux7uwcsatj"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_osmcq"]
+[ext_resource type="Script" uid="uid://bbt7fd120caj5" path="res://Scenes/FightingArea/spawn_area.gd" id="1_on7ks"]
 
 [node name="SpawnArea" type="Area3D"]
+script = ExtResource("1_on7ks")
 metadata/Team = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_osmcq")

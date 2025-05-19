@@ -1,0 +1,138 @@
+[gd_scene load_steps=16 format=3 uid="uid://dk425rvwasjvx"]
+
+[ext_resource type="Script" uid="uid://cd8u3lm3xa8c4" path="res://Scripts/FightingArea/fighting_area.gd" id="1_7dq0e"]
+[ext_resource type="PackedScene" uid="uid://bhx575fxnmb7i" path="res://Scenes/FightingArea/_Maps/Visuals/telescope_island.tscn" id="2_qn43j"]
+[ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://Scenes/Managers/spawn_manager.tscn" id="3_2ceyr"]
+[ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Scenes/FightingArea/spawn_point.tscn" id="4_iadx1"]
+[ext_resource type="PackedScene" uid="uid://dibux7uwcsatj" path="res://Scenes/FightingArea/spawn_area.tscn" id="5_rlwy3"]
+[ext_resource type="PackedScene" uid="uid://pyrw8lacvly2" path="res://Scenes/Managers/entity_manager.tscn" id="6_g2a3y"]
+[ext_resource type="PackedScene" uid="uid://c0l0roxttdtlp" path="res://Scenes/FightingArea/fighting_manager.tscn" id="7_kymma"]
+[ext_resource type="PackedScene" uid="uid://bhxhqex1pbh2p" path="res://Scenes/UI/FightingArea/ui_fighting_area.tscn" id="8_f1v8u"]
+[ext_resource type="Script" uid="uid://d2fihbt8u628f" path="res://Scripts/FightingArea/camera_fighting_area.gd" id="9_2slkc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_57pjl"]
+size = Vector3(5, 1, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sk17l"]
+transparency = 1
+albedo_color = Color(0.823701, 0.0889347, 0.335772, 0.392157)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qkrr5"]
+material = SubResource("StandardMaterial3D_sk17l")
+size = Vector3(5, 1, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jxx87"]
+transparency = 1
+albedo_color = Color(0.368627, 0.529412, 1, 0.392157)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dhmms"]
+material = SubResource("StandardMaterial3D_jxx87")
+size = Vector3(5, 1, 10)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_yyfcp"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 0
+properties/1/path = NodePath(".:battle_id")
+properties/1/spawn = true
+properties/1/replication_mode = 0
+
+[node name="FightingArea2V2" type="Node3D" node_paths=PackedStringArray("_fighting_manager", "_entity_manager", "_ui_fighting_area", "_camera", "_spawn_manager")]
+script = ExtResource("1_7dq0e")
+_battle_type = 1
+_fighting_manager = NodePath("FightingManager")
+_entity_manager = NodePath("EntityManager")
+_ui_fighting_area = NodePath("UI/UIFightingArea")
+_camera = NodePath("Camera3D")
+_spawn_manager = NodePath("TelescopeIsland/SpawnManager")
+
+[node name="TelescopeIsland" parent="." instance=ExtResource("2_qn43j")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.562456, 0, 4.05333)
+
+[node name="SpawnManager" parent="TelescopeIsland" node_paths=PackedStringArray("_spawn_points", "_spawn_areas", "_entities_node", "_projectiles_node") instance=ExtResource("3_2ceyr")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.05333, 12.3937, 2.46254)
+_spawn_points = [NodePath("SpawnArea2/SpawnPoint3"), NodePath("SpawnArea2/SpawnPoint4"), NodePath("SpawnArea/SpawnPoint1"), NodePath("SpawnArea/SpawnPoint2")]
+_spawn_areas = [NodePath("SpawnArea"), NodePath("SpawnArea2")]
+_entities_node = NodePath("../Entities")
+_projectiles_node = NodePath("../Projectiles")
+
+[node name="SpawnArea2" parent="TelescopeIsland/SpawnManager" node_paths=PackedStringArray("_visual_to_be_destroyed") instance=ExtResource("5_rlwy3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.97454, 0, 0)
+team = 2
+_visual_to_be_destroyed = NodePath("MeshInstance3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TelescopeIsland/SpawnManager/SpawnArea2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_57pjl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TelescopeIsland/SpawnManager/SpawnArea2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_qkrr5")
+
+[node name="SpawnPoint3" parent="TelescopeIsland/SpawnManager/SpawnArea2" instance=ExtResource("4_iadx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.5)
+team = 2
+
+[node name="SpawnPoint4" parent="TelescopeIsland/SpawnManager/SpawnArea2" instance=ExtResource("4_iadx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.5)
+team = 2
+
+[node name="SpawnArea" parent="TelescopeIsland/SpawnManager" node_paths=PackedStringArray("_visual_to_be_destroyed") instance=ExtResource("5_rlwy3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.0872, 0, 0)
+team = 1
+_visual_to_be_destroyed = NodePath("MeshInstance3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TelescopeIsland/SpawnManager/SpawnArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_57pjl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TelescopeIsland/SpawnManager/SpawnArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_dhmms")
+
+[node name="SpawnPoint1" parent="TelescopeIsland/SpawnManager/SpawnArea" instance=ExtResource("4_iadx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.5)
+team = 1
+
+[node name="SpawnPoint2" parent="TelescopeIsland/SpawnManager/SpawnArea" instance=ExtResource("4_iadx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.5)
+team = 1
+
+[node name="Entities" type="Node3D" parent="TelescopeIsland"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.05333, 0, -0.562456)
+
+[node name="Projectiles" type="Node3D" parent="TelescopeIsland"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.05333, 0, -0.562456)
+
+[node name="EntityManager" parent="." instance=ExtResource("6_g2a3y")]
+
+[node name="FightingManager" parent="." instance=ExtResource("7_kymma")]
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_yyfcp")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UIFightingArea" parent="UI" instance=ExtResource("8_f1v8u")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://g706yyhstscc", "uid://2v270ywaa1vg", "uid://c48aqh8mlb7lc", "uid://dq1pqesv0lptu", "uid://dry6jgn0h7srg", "uid://btuch2oo5bxk4", "uid://vut8b02xa34b", "uid://h726o6giwel8", "uid://d3tlk3rg4dhpk", "uid://bjv2kwt6brxy4")
+spawn_path = NodePath("../TelescopeIsland/Entities")
+
+[node name="MultiplayerSpawner2" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://rrlv43pawkil")
+spawn_path = NodePath("../TelescopeIsland/Projectiles")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.84069, 0.541517, 0, -0.541517, 0.84069, 0.490664, 27.424, 19.179)
+projection = 1
+size = 20.205
+script = ExtResource("9_2slkc")

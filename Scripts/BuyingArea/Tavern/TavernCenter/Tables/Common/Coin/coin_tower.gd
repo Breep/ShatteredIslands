@@ -18,6 +18,7 @@ var coins_number: int:
 # ============================== Private variables ==============================
 
 var _coins: Array[Coin]
+var _rng := RandomNumberGenerator.new()
 
 # ============================== Preload ==============================
 
@@ -26,6 +27,7 @@ var _coins: Array[Coin]
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
+	_rng.randomize()
 	for child in get_children():
 		child.queue_free()
 
@@ -35,9 +37,6 @@ func _update_visual(new_coin_number) -> void:
 	if new_coin_number < 0:
 		printerr("CoinTower: Can't have less than 0 coin in the tower")
 	
-	var rng: = RandomNumberGenerator.new()
-	rng.randomize()
-	
 	if new_coin_number > _coins_number:
 		var number_of_coins_to_add: int = new_coin_number - _coins_number
 		for i in number_of_coins_to_add:
@@ -45,10 +44,10 @@ func _update_visual(new_coin_number) -> void:
 			_coins.append(coin)
 			coin.name = "Coin_" + str(_coins_number + i)
 			add_child(coin)
-			coin.position.x = rng.randf_range(0, MAX_RANDOM_DISTANCE)
+			coin.position.x = _rng.randf_range(0, MAX_RANDOM_DISTANCE)
 			coin.position.y = coin.get_height() * (_coins_number + i)
-			coin.position.z = rng.randf_range(0, MAX_RANDOM_DISTANCE)
-			coin.rotate(Vector3.UP, rng.randf())
+			coin.position.z = _rng.randf_range(0, MAX_RANDOM_DISTANCE)
+			coin.rotate(Vector3.UP, _rng.randf())
 	else:
 		var number_of_coins_to_remove: int = _coins_number - new_coin_number
 		for i in number_of_coins_to_remove:
