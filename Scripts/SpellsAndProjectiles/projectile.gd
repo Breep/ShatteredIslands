@@ -42,12 +42,16 @@ const _DAMMAGE_MIN: int = 1
 var _source: Character
 var _target: Character
 
+var _vertical_offset: float # A vertical offset to randomize the target location of the projectile
+var _vertical_spread: float = 0.5 # For knowing how much the projectiles spreads
+
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
 	_source = Shared.entity_managers_ref[battle_id].entities[source_id]
 	_target = Shared.entity_managers_ref[battle_id].entities[target_id]
 	_target.dead.connect(_on_target_dead)
+	_vertical_offset = 1 + Utils.rng.randf_range(- _vertical_spread, _vertical_spread)
 
 
 func _process(delta: float) -> void:
@@ -97,7 +101,8 @@ func _move_toward_target(delta: float):
 		queue_free()
 		return
 	
-	var direction: Vector3 = (_target.global_position - global_position).normalized()
+	var target_position: Vector3 = _target.global_position + _vertical_offset * Vector3.UP
+	var direction: Vector3 = (target_position - global_position).normalized()
 	position += direction * _SPEED_MIN * delta
 	#look_at(_target.global_position)
 

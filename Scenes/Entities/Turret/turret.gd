@@ -7,4 +7,4 @@ var target: Entity
 
 func _process(delta: float) -> void:
 	if target != null:
-		look_at(target.global_position)
+		look_at(target.global_position + 1 * Vector3.UP)
