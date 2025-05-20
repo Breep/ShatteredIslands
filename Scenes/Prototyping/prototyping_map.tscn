@@ -1,15 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://c5ji8s1iic5v8"]
+[gd_scene load_steps=12 format=3 uid="uid://c5ji8s1iic5v8"]
 
 [ext_resource type="Script" uid="uid://d2fihbt8u628f" path="res://Scripts/FightingArea/camera_fighting_area.gd" id="1_8nvor"]
 [ext_resource type="Script" uid="uid://bu48b2v401db2" path="res://Scenes/Prototyping/prototyping_map.gd" id="1_66i2r"]
 [ext_resource type="PackedScene" uid="uid://2v270ywaa1vg" path="res://Scenes/Entities/Heroes/AncientTree/ancient_tree.tscn" id="2_jb5pd"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://ResourcesBase/CardBase/card.gd" id="2_ovips"]
 [ext_resource type="PackedScene" uid="uid://g706yyhstscc" path="res://Scenes/Entities/Heroes/Cyborg/cyborg.tscn" id="3_4p440"]
-[ext_resource type="Resource" uid="uid://3vjmnbpyyjyk" path="res://Resources/Card/Attack/attack_gatling_gun.tres" id="3_08xy3"]
-[ext_resource type="Resource" uid="uid://cuqudlrmcu7sr" path="res://Resources/Card/Defense/defense_power_wrist.tres" id="4_k73x5"]
+[ext_resource type="Resource" uid="uid://dvpdubk0btegx" path="res://Resources/Card/Poison/poison_periodica_agaricus.tres" id="3_ovips"]
 [ext_resource type="PackedScene" uid="uid://pyrw8lacvly2" path="res://Scenes/Managers/entity_manager.tscn" id="5_yjquk"]
 [ext_resource type="PackedScene" uid="uid://bhxhqex1pbh2p" path="res://Scenes/UI/FightingArea/ui_fighting_area.tscn" id="6_xd7nd"]
-[ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://Scenes/Tool/anim_rotating_module.tscn" id="10_1jn5f"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://Scenes/Managers/spawn_manager.tscn" id="10_08xy3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_num78"]
@@ -24,7 +22,7 @@ _battle_id = 1
 _entity_manager = NodePath("EntityManager")
 _spawn_manager = NodePath("SpawnManager")
 _ui_fighting_area = NodePath("UI/UIFightingArea")
-_player1_cards = Array[ExtResource("2_ovips")]([ExtResource("3_08xy3"), ExtResource("4_k73x5")])
+_player1_cards = Array[ExtResource("2_ovips")]([ExtResource("3_ovips")])
 _character1 = NodePath("AncientTree")
 _character2 = NodePath("Cyborg")
 
@@ -51,7 +49,8 @@ transform = Transform3D(0.316446, -0.799129, 0.511131, 0.420655, 0.60116, 0.6794
 [node name="EntityManager" parent="." instance=ExtResource("5_yjquk")]
 unique_name_in_owner = true
 
-[node name="SpawnManager" parent="." instance=ExtResource("10_08xy3")]
+[node name="SpawnManager" parent="." node_paths=PackedStringArray("_projectiles_node") instance=ExtResource("10_08xy3")]
+_projectiles_node = NodePath("../Projectiles")
 
 [node name="AncientTree" parent="." instance=ExtResource("2_jb5pd")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5.002, 0, 0)
@@ -59,13 +58,6 @@ _is_prototype = true
 id = 1
 team = 1
 battle_id = 1
-
-[node name="AnimRotatingModule" parent="AncientTree" node_paths=PackedStringArray("_owner") instance=ExtResource("10_1jn5f")]
-_owner = NodePath("..")
-_rot_axis = 1
-_rot_period = 2.0
-_rot_max = 360.0
-_rot_full = true
 
 [node name="Cyborg" parent="." instance=ExtResource("3_4p440")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4.96764, 0, 0)
@@ -87,3 +79,5 @@ unique_name_in_owner = true
 layout_mode = 1
 left_character = NodePath("../../AncientTree")
 right_character = NodePath("../../Cyborg")
+
+[node name="Projectiles" type="Node3D" parent="."]

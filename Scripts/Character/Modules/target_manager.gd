@@ -35,17 +35,6 @@ var _allies: Array[Entity] # All allies of the owned character
 
 var _entity_manager: EntityManager # The FightingScene EntityManager
 
-# ============================== Node base functions ==============================
-
-func _init() -> void:
-	print("TargetManager init")
-
-func _enter_tree() -> void:
-	print("TargetManager enter tree")
-
-func _ready() -> void:
-	print("TargetManager ready")
-
 # ============================== Public functions ==============================
 
 func init() -> void:

@@ -1,9 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://oimyi4iueoda"]
+[gd_scene load_steps=8 format=3 uid="uid://oimyi4iueoda"]
 
 [ext_resource type="Script" uid="uid://blljr68c4u466" path="res://Scripts/Game/game.gd" id="1_7r6pw"]
 [ext_resource type="PackedScene" uid="uid://ca8mcplp2va4s" path="res://Scenes/BuyingArea/buying_area.tscn" id="2_36puk"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Scenes/FightingArea/spawn_point.tscn" id="3_i1e5p"]
 [ext_resource type="PackedScene" uid="uid://di34xfy5cli15" path="res://Scenes/Tool/free_fly_camera.tscn" id="3_t03ty"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i1e5p"]
+
+[sub_resource type="Sky" id="Sky_ciybh"]
+sky_material = SubResource("ProceduralSkyMaterial_i1e5p")
+
+[sub_resource type="Environment" id="Environment_flgk0"]
+background_mode = 2
+background_energy_multiplier = 1.63
+sky = SubResource("Sky_ciybh")
+tonemap_mode = 3
+glow_enabled = true
 
 [node name="Game" type="Node3D" node_paths=PackedStringArray("_fighting_area_spawns")]
 script = ExtResource("1_7r6pw")
@@ -35,3 +47,6 @@ spawn_path = NodePath("../FightingAreas")
 
 [node name="FightingAreas" type="Node3D" parent="."]
 unique_name_in_owner = true
+
+[node name="WorldEnvironment2" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_flgk0")
