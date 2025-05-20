@@ -90,35 +90,35 @@ _movement_module = NodePath("Modules/MovementModule")
 _action_module = NodePath("Modules/ActionModule")
 _interact_module = NodePath("Modules/InteractModule")
 _auto_attack_module = NodePath("Modules/AutoAttackModule")
-_turret = NodePath("Node3D/Turret")
+_turret = NodePath("TurretCenterPoint/Turret")
 
 [node name="AncientTreeModel" parent="." instance=ExtResource("2_su5oi")]
 transform = Transform3D(-1.82, 0, -1.59109e-07, 0, 1.82, 0, 1.59109e-07, 0, -1.82, 0, 0, 0)
 
 [node name="GeneralSkeleton" parent="AncientTreeModel/Armature_006" index="0"]
-bones/0/position = Vector3(0.00703479, 0.431968, 0.0183917)
-bones/0/rotation = Quaternion(-0.0407232, -0.36585, -0.0128818, 0.929693)
-bones/1/rotation = Quaternion(-0.021035, 0.319752, 0.940599, -0.112205)
-bones/2/rotation = Quaternion(0.0357588, 0.946031, -0.320377, -0.0332434)
-bones/3/rotation = Quaternion(-0.060417, 0.734263, -0.672128, 0.0738395)
+bones/0/position = Vector3(0.00677145, 0.429961, 0.0155835)
+bones/0/rotation = Quaternion(-0.0380911, -0.367124, -0.0118873, 0.929316)
+bones/1/rotation = Quaternion(-0.0244433, 0.327829, 0.937355, -0.115307)
+bones/2/rotation = Quaternion(0.0360966, 0.944564, -0.324858, -0.0310306)
+bones/3/rotation = Quaternion(-0.0625743, 0.734527, -0.671359, 0.0763575)
 bones/4/rotation = Quaternion(0, 1, 0, 0)
-bones/6/rotation = Quaternion(-0.102629, 0.0262035, 0.979155, 0.173311)
-bones/7/rotation = Quaternion(0.021132, 0.963793, -0.228975, -0.135009)
-bones/8/rotation = Quaternion(0.123951, 0.571924, -0.796864, -0.150156)
+bones/6/rotation = Quaternion(-0.0973611, 0.0406684, 0.979463, 0.171811)
+bones/7/rotation = Quaternion(0.0222814, 0.958578, -0.248026, -0.138258)
+bones/8/rotation = Quaternion(0.122818, 0.565208, -0.802052, -0.14889)
 bones/9/rotation = Quaternion(0, 1, 0, 0)
 bones/11/rotation = Quaternion(0, 0, 0, 1)
 bones/12/rotation = Quaternion(0, 0, 0, 1)
-bones/13/rotation = Quaternion(0.0105568, 0.0590107, 0.015697, 0.998078)
-bones/14/rotation = Quaternion(0.458061, 0.246771, 0.579088, -0.627648)
-bones/15/rotation = Quaternion(-0.106237, 0.835026, -0.50112, 0.200811)
-bones/16/rotation = Quaternion(0.277268, -0.725139, 0.297235, 0.555831)
+bones/13/rotation = Quaternion(0.0102814, 0.0597883, 0.0154694, 0.998038)
+bones/14/rotation = Quaternion(0.461866, 0.230081, 0.60242, -0.608961)
+bones/15/rotation = Quaternion(-0.111239, 0.842072, -0.486297, 0.205075)
+bones/16/rotation = Quaternion(0.263693, -0.730826, 0.290896, 0.558336)
 bones/17/rotation = Quaternion(0, 0.707107, 0, 0.707107)
-bones/19/rotation = Quaternion(0.262591, -0.456936, -0.70301, -0.477528)
-bones/20/rotation = Quaternion(0.253036, 0.832181, -0.493077, -0.0179832)
-bones/21/rotation = Quaternion(0.279941, 0.76212, -0.191708, 0.551412)
+bones/19/rotation = Quaternion(0.258702, -0.433193, -0.729258, -0.462169)
+bones/20/rotation = Quaternion(0.264316, 0.843965, -0.466001, -0.02652)
+bones/21/rotation = Quaternion(0.261343, 0.778655, -0.190355, 0.537737)
 bones/22/rotation = Quaternion(0, -0.707107, 0, 0.707107)
 bones/24/rotation = Quaternion(0, 0, 0, 1)
-bones/25/rotation = Quaternion(0.171063, 0.299217, -0.00504532, 0.938713)
+bones/25/rotation = Quaternion(0.166126, 0.300238, -0.0100346, 0.939233)
 bones/26/rotation = Quaternion(-0.0888237, 0.00143195, -0.00143195, 0.996045)
 bones/28/rotation = Quaternion(0.707107, -6.14608e-08, -5.01009e-08, 0.707107)
 
@@ -160,7 +160,7 @@ unique_name_in_owner = true
 
 [node name="AutoAttackModule" parent="Modules" node_paths=PackedStringArray("projectile_spawn") instance=ExtResource("6_dldbo")]
 unique_name_in_owner = true
-projectile_spawn = NodePath("../../Node3D/Turret/SpawnPoint")
+projectile_spawn = NodePath("../../TurretCenterPoint/Turret/SpawnPoint")
 
 [node name="FamiliesManagers" type="Node" parent="."]
 
@@ -194,18 +194,18 @@ _source = NodePath("..")
 unique_name_in_owner = true
 replication_config = SubResource("SceneReplicationConfig_5ed6q")
 
-[node name="Node3D" type="Node3D" parent="."]
+[node name="TurretCenterPoint" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.36537, 0)
 
-[node name="Turret" parent="Node3D" instance=ExtResource("19_i08v8")]
+[node name="Turret" parent="TurretCenterPoint" instance=ExtResource("19_i08v8")]
 transform = Transform3D(0.495, 0, 0, 0, 0.495, 0, 0, 0, 0.495, 3, 0, 0)
 
-[node name="AnimHoveringModule" parent="Node3D/Turret" node_paths=PackedStringArray("_owner") instance=ExtResource("20_6rj4w")]
+[node name="AnimHoveringModule" parent="TurretCenterPoint/Turret" node_paths=PackedStringArray("_owner") instance=ExtResource("20_6rj4w")]
 _owner = NodePath("..")
 _hover_power = 0.1
 _hover_period = 2.0
 
-[node name="AnimRotatingModule" parent="Node3D" node_paths=PackedStringArray("_owner") instance=ExtResource("21_50blj")]
+[node name="AnimRotatingModule" parent="TurretCenterPoint" node_paths=PackedStringArray("_owner") instance=ExtResource("21_50blj")]
 _owner = NodePath("..")
 _rot_axis = 1
 _rot_period = 10.0
@@ -213,4 +213,4 @@ _rot_max = 360.0
 _rot_full = true
 
 [editable path="AncientTreeModel"]
-[editable path="Node3D/Turret"]
+[editable path="TurretCenterPoint/Turret"]

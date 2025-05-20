@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dq1pqesv0lptu"]
+[gd_scene load_steps=22 format=3 uid="uid://dq1pqesv0lptu"]
 
 [ext_resource type="Script" uid="uid://b8w7wec46hqv3" path="res://Scenes/Entities/Heroes/DrBoom/dr_boom.gd" id="1_2scy2"]
 [ext_resource type="Resource" uid="uid://5ww2u1ldoabr" path="res://Resources/Heroes/dr_boom.tres" id="2_1vhg0"]
@@ -16,6 +16,9 @@
 [ext_resource type="PackedScene" uid="uid://crqesljjrouec" path="res://Scenes/Character/FamiliesManagers/attack_manager.tscn" id="14_hgu1g"]
 [ext_resource type="PackedScene" uid="uid://n30ifkjad344" path="res://Scenes/Character/Modules/target_manager.tscn" id="15_5kuly"]
 [ext_resource type="PackedScene" uid="uid://cmq21hx4nihv4" path="res://Scenes/Entities/Heroes/DrBoom/dr_boom_model.tscn" id="16_1vhg0"]
+[ext_resource type="PackedScene" uid="uid://dqrhym1sskng8" path="res://Scenes/Entities/Turret/turret.tscn" id="17_modjl"]
+[ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Scenes/Tool/anim_hovering_module.tscn" id="18_l7rtq"]
+[ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://Scenes/Tool/anim_rotating_module.tscn" id="19_q170r"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rxegs"]
 radius = 0.2
@@ -41,7 +44,7 @@ properties/5/path = NodePath(".:battle_id")
 properties/5/spawn = true
 properties/5/replication_mode = 2
 
-[node name="DrBoom" type="CharacterBody3D" node_paths=PackedStringArray("_attack_manager", "_defense_manager", "_fire_manager", "_storm_manager", "_serenity_manager", "_poison_manager", "_life_manager", "_movement_module", "_action_module", "_interact_module", "_auto_attack_module") groups=["CHARACTER"]]
+[node name="DrBoom" type="CharacterBody3D" node_paths=PackedStringArray("_attack_manager", "_defense_manager", "_fire_manager", "_storm_manager", "_serenity_manager", "_poison_manager", "_life_manager", "_movement_module", "_action_module", "_interact_module", "_auto_attack_module", "_turret") groups=["CHARACTER"]]
 motion_mode = 1
 script = ExtResource("1_2scy2")
 _hero = ExtResource("2_1vhg0")
@@ -56,6 +59,7 @@ _movement_module = NodePath("Modules/MovementModule")
 _action_module = NodePath("Modules/ActionModule")
 _interact_module = NodePath("Modules/InteractModule")
 _auto_attack_module = NodePath("Modules/AutoAttackModule")
+_turret = NodePath("TurretCenterPoint/Turret")
 
 [node name="DrBoomModel" parent="." instance=ExtResource("16_1vhg0")]
 transform = Transform3D(0.52, 0, 0, 0, 0.52, 0, 0, 0, 0.52, 0, 0, 0)
@@ -66,9 +70,6 @@ unique_name_in_owner = true
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CapsuleShape3D_rxegs")
-
-[node name="ProjectileSpawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.888041, 0.890776, 0)
 
 [node name="Modules" type="Node" parent="."]
 
@@ -83,7 +84,7 @@ unique_name_in_owner = true
 
 [node name="AutoAttackModule" parent="Modules" node_paths=PackedStringArray("projectile_spawn") instance=ExtResource("6_bs2nr")]
 unique_name_in_owner = true
-projectile_spawn = NodePath("../../ProjectileSpawn")
+projectile_spawn = NodePath("../../TurretCenterPoint/Turret/SpawnPoint")
 
 [node name="FamiliesManagers" type="Node" parent="."]
 
@@ -109,11 +110,31 @@ _percent_decrease = 10.0
 [node name="AttackManager" parent="FamiliesManagers" instance=ExtResource("14_hgu1g")]
 unique_name_in_owner = true
 
-[node name="TargetManager" parent="." instance=ExtResource("15_5kuly")]
+[node name="TargetManager" parent="." node_paths=PackedStringArray("_source") instance=ExtResource("15_5kuly")]
 unique_name_in_owner = true
+_source = NodePath("..")
 
 [node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 unique_name_in_owner = true
 replication_config = SubResource("SceneReplicationConfig_5ed6q")
 
+[node name="TurretCenterPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.36537, 0)
+
+[node name="Turret" parent="TurretCenterPoint" instance=ExtResource("17_modjl")]
+transform = Transform3D(0.495, 0, 0, 0, 0.495, 0, 0, 0, 0.495, 3, 0, 0)
+
+[node name="AnimHoveringModule" parent="TurretCenterPoint/Turret" node_paths=PackedStringArray("_owner") instance=ExtResource("18_l7rtq")]
+_owner = NodePath("..")
+_hover_power = 0.1
+_hover_period = 2.0
+
+[node name="AnimRotatingModule" parent="TurretCenterPoint" node_paths=PackedStringArray("_owner") instance=ExtResource("19_q170r")]
+_owner = NodePath("..")
+_rot_axis = 1
+_rot_period = 10.0
+_rot_max = 360.0
+_rot_full = true
+
 [editable path="DrBoomModel"]
+[editable path="TurretCenterPoint/Turret"]

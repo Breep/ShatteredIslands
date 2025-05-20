@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://c48aqh8mlb7lc"]
+[gd_scene load_steps=46 format=3 uid="uid://c48aqh8mlb7lc"]
 
 [ext_resource type="Script" uid="uid://cusafkpxrg6we" path="res://Scenes/Entities/Heroes/DarkKnight/dark_knight.gd" id="1_ufk4g"]
 [ext_resource type="Resource" uid="uid://by3bwbvf4ekcd" path="res://Resources/Heroes/dark_knight.tres" id="2_5qtoa"]
@@ -17,6 +17,9 @@
 [ext_resource type="PackedScene" uid="uid://bjbfnigvphbfc" path="res://Scenes/Character/FamiliesManagers/storm_manager.tscn" id="13_i0546"]
 [ext_resource type="PackedScene" uid="uid://crqesljjrouec" path="res://Scenes/Character/FamiliesManagers/attack_manager.tscn" id="14_mvp6i"]
 [ext_resource type="PackedScene" uid="uid://n30ifkjad344" path="res://Scenes/Character/Modules/target_manager.tscn" id="15_u1xol"]
+[ext_resource type="PackedScene" uid="uid://dqrhym1sskng8" path="res://Scenes/Entities/Turret/turret.tscn" id="18_bo24q"]
+[ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Scenes/Tool/anim_hovering_module.tscn" id="19_thqxc"]
+[ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://Scenes/Tool/anim_rotating_module.tscn" id="20_x3tde"]
 
 [sub_resource type="Animation" id="Animation_3ofa6"]
 resource_name = "1H Run"
@@ -6707,7 +6710,7 @@ properties/5/path = NodePath(".:battle_id")
 properties/5/spawn = true
 properties/5/replication_mode = 2
 
-[node name="DarkKnight" type="CharacterBody3D" node_paths=PackedStringArray("_attack_manager", "_defense_manager", "_fire_manager", "_storm_manager", "_serenity_manager", "_poison_manager", "_life_manager", "_movement_module", "_action_module", "_interact_module", "_auto_attack_module") groups=["CHARACTER"]]
+[node name="DarkKnight" type="CharacterBody3D" node_paths=PackedStringArray("_attack_manager", "_defense_manager", "_fire_manager", "_storm_manager", "_serenity_manager", "_poison_manager", "_life_manager", "_movement_module", "_action_module", "_interact_module", "_auto_attack_module", "_turret") groups=["CHARACTER"]]
 motion_mode = 1
 script = ExtResource("1_ufk4g")
 _hero = ExtResource("2_5qtoa")
@@ -6722,21 +6725,22 @@ _movement_module = NodePath("Modules/MovementModule")
 _action_module = NodePath("Modules/ActionModule")
 _interact_module = NodePath("Modules/InteractModule")
 _auto_attack_module = NodePath("Modules/AutoAttackModule")
+_turret = NodePath("TurretCenterPoint/Turret")
 
 [node name="DarkKnightModel" parent="." instance=ExtResource("2_ds2a6")]
 transform = Transform3D(-1.2, 0, -1.81195e-07, 0, 1.2, 0, 1.81195e-07, 0, -1.2, 0, 0.536197, 0)
 
 [node name="GeneralSkeleton" parent="DarkKnightModel/Armature" index="0"]
-bones/0/position = Vector3(-0.0018396, 0.132757, 0.00792798)
-bones/0/rotation = Quaternion(0.00558739, -0.582919, -0.0099782, 0.81245)
+bones/0/position = Vector3(4.67467e-05, 0.129138, 0.00678581)
+bones/0/rotation = Quaternion(-0.0165322, -0.584797, -0.0251606, 0.810621)
 bones/1/rotation = Quaternion(0, 0, 0, 1)
 bones/2/rotation = Quaternion(0, 0, 0, 1)
-bones/3/rotation = Quaternion(0.0986897, -0.01784, -0.00262105, 0.994955)
+bones/3/rotation = Quaternion(0.138495, -0.0088324, -0.0107324, 0.990266)
 bones/4/rotation = Quaternion(0, 0, 0, 1)
-bones/5/rotation = Quaternion(0.0972341, 0.465026, -0.0528633, 0.878352)
-bones/7/rotation = Quaternion(0.424561, 0.466717, 0.604516, -0.486296)
-bones/8/rotation = Quaternion(0.533913, 0.72832, -0.237825, 0.357667)
-bones/9/rotation = Quaternion(0.263146, -0.768005, 0.264363, 0.52061)
+bones/5/rotation = Quaternion(0.0408615, 0.442231, -0.0271136, 0.89556)
+bones/7/rotation = Quaternion(0.428625, 0.413585, 0.665836, -0.449323)
+bones/8/rotation = Quaternion(0.484882, 0.763711, -0.25546, 0.341139)
+bones/9/rotation = Quaternion(0.258486, -0.768122, 0.259682, 0.525108)
 bones/10/rotation = Quaternion(0, 0.707107, 0, 0.707107)
 bones/11/rotation = Quaternion(-0.214187, 0.673887, 0.214187, 0.673887)
 bones/12/rotation = Quaternion(-1.49012e-08, 0, 0, 1)
@@ -6752,9 +6756,9 @@ bones/21/rotation = Quaternion(0, 0, 0, 1)
 bones/23/rotation = Quaternion(0, 0, 0, 1)
 bones/24/rotation = Quaternion(0, 0, 0, 1)
 bones/25/rotation = Quaternion(0, 0, 0, 1)
-bones/27/rotation = Quaternion(0.450756, -0.437279, -0.604664, -0.489885)
-bones/28/rotation = Quaternion(-0.0668118, 0.900634, -0.335474, -0.268052)
-bones/29/rotation = Quaternion(0.439114, 0.720183, -0.440053, 0.308008)
+bones/27/rotation = Quaternion(0.425523, -0.416968, -0.662493, -0.454059)
+bones/28/rotation = Quaternion(0.0231104, 0.902122, -0.338282, -0.266846)
+bones/29/rotation = Quaternion(0.440427, 0.719424, -0.441368, 0.306018)
 bones/30/rotation = Quaternion(0, -0.707107, 0, 0.707107)
 bones/31/rotation = Quaternion(-0.214187, -0.673887, -0.214187, 0.673887)
 bones/32/rotation = Quaternion(-1.49012e-08, 0, 0, 1)
@@ -6770,17 +6774,17 @@ bones/41/rotation = Quaternion(0, 0, 0, 1)
 bones/43/rotation = Quaternion(0, 0, 0, 1)
 bones/44/rotation = Quaternion(0, 0, 0, 1)
 bones/45/rotation = Quaternion(0, 0, 0, 1)
-bones/47/rotation = Quaternion(0.110942, 0.277414, 0.916263, -0.266824)
-bones/48/rotation = Quaternion(-0.00904875, 0.943755, -0.312478, 0.107715)
-bones/49/rotation = Quaternion(-0.124106, 0.68366, -0.702033, 0.156066)
+bones/47/rotation = Quaternion(0.121254, 0.294175, 0.904057, -0.285378)
+bones/48/rotation = Quaternion(0.00171567, 0.925299, -0.368627, 0.0890624)
+bones/49/rotation = Quaternion(-0.119747, 0.672811, -0.714014, 0.152217)
 bones/50/rotation = Quaternion(0, 1, 0, 0)
-bones/52/rotation = Quaternion(-0.0235541, 0.300567, 0.935489, 0.184294)
-bones/53/rotation = Quaternion(0.0213439, 0.949728, -0.312199, 0.00959525)
-bones/54/rotation = Quaternion(0.17382, 0.65692, -0.718215, -0.149698)
+bones/52/rotation = Quaternion(-0.0159774, 0.315977, 0.929838, 0.187894)
+bones/53/rotation = Quaternion(0.0230806, 0.929667, -0.367674, -0.00125565)
+bones/54/rotation = Quaternion(0.177021, 0.642237, -0.733997, -0.13207)
 bones/55/rotation = Quaternion(0, 1, 0, 0)
 
 [node name="BoneAttachment3D" parent="DarkKnightModel/Armature/GeneralSkeleton" index="1"]
-transform = Transform3D(0.162297, -0.962518, -0.217301, 0.950073, 0.211906, -0.229034, 0.266496, -0.169281, 0.948854, -0.309435, 0.435852, -0.0834945)
+transform = Transform3D(-0.0423748, -0.970827, -0.236007, 0.965467, 0.0209867, -0.259678, 0.257055, -0.238861, 0.936412, -0.289116, 0.373086, -0.0900413)
 
 [node name="AnimationPlayer" parent="DarkKnightModel" index="1"]
 libraries = {
@@ -6806,9 +6810,6 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_rxegs")
 
-[node name="ProjectileSpawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.888041, 0.890776, 0)
-
 [node name="Modules" type="Node" parent="."]
 
 [node name="MovementModule" parent="Modules" instance=ExtResource("3_7vsrh")]
@@ -6822,7 +6823,7 @@ unique_name_in_owner = true
 
 [node name="AutoAttackModule" parent="Modules" node_paths=PackedStringArray("projectile_spawn") instance=ExtResource("6_6gj0w")]
 unique_name_in_owner = true
-projectile_spawn = NodePath("../../ProjectileSpawn")
+projectile_spawn = NodePath("../../TurretCenterPoint/Turret/SpawnPoint")
 
 [node name="FamiliesManagers" type="Node" parent="."]
 
@@ -6848,11 +6849,31 @@ _percent_decrease = 10.0
 [node name="AttackManager" parent="FamiliesManagers" instance=ExtResource("14_mvp6i")]
 unique_name_in_owner = true
 
-[node name="TargetManager" parent="." instance=ExtResource("15_u1xol")]
+[node name="TargetManager" parent="." node_paths=PackedStringArray("_source") instance=ExtResource("15_u1xol")]
 unique_name_in_owner = true
+_source = NodePath("..")
 
 [node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 unique_name_in_owner = true
 replication_config = SubResource("SceneReplicationConfig_5ed6q")
 
+[node name="TurretCenterPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.36537, 0)
+
+[node name="Turret" parent="TurretCenterPoint" instance=ExtResource("18_bo24q")]
+transform = Transform3D(0.495, 0, 0, 0, 0.495, 0, 0, 0, 0.495, 3, 0, 0)
+
+[node name="AnimHoveringModule" parent="TurretCenterPoint/Turret" node_paths=PackedStringArray("_owner") instance=ExtResource("19_thqxc")]
+_owner = NodePath("..")
+_hover_power = 0.1
+_hover_period = 2.0
+
+[node name="AnimRotatingModule" parent="TurretCenterPoint" node_paths=PackedStringArray("_owner") instance=ExtResource("20_x3tde")]
+_owner = NodePath("..")
+_rot_axis = 1
+_rot_period = 10.0
+_rot_max = 360.0
+_rot_full = true
+
 [editable path="DarkKnightModel"]
+[editable path="TurretCenterPoint/Turret"]

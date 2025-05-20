@@ -85,19 +85,19 @@ func _character_ready() -> void:
 			_character_visual.update_health_bar(stats.health, stats.health_max)
 			_character_visual.update_mana_bar(stats.mana, stats.mana_max)
 			_character_visual.update_name_displayed(player.name)
+			GlobalFightingManager.state_changed.connect(_on_global_fighting_manager_state_changed)
 		else:
 			_character_visual.queue_free()
+			if _turret != null: _turret.queue_free()
 	
 	_is_local = player.id == multiplayer.get_unique_id()
 	
 	#_server_synchronizer.set_multiplayer_authority(player.id)
-	
-	GlobalFightingManager.state_changed.connect(_on_global_fighting_manager_state_changed)
 
 # ============================== Fighting States ==============================
 
 func _set_state(new_state: GlobalFightingManager.FightingState) -> void:
-	#print("[", multiplayer.get_unique_id(), "] DEBUG : ", id, " - ", _fighting_state, " - ", new_state)
+	print("[", multiplayer.get_unique_id(), "] DEBUG : ", id, " - ", _fighting_state, " - ", new_state)
 	match new_state:
 		GlobalFightingManager.FightingState.STARTING:
 			if _fighting_state != GlobalFightingManager.FightingState.UNDEF:
@@ -237,7 +237,6 @@ func _on_fighting_manager_fight_is_over(_winner_team) -> void:
 
 
 func _on_global_fighting_manager_state_changed(new_state: GlobalFightingManager.FightingState) -> void:
-	return
 	fighting_state = new_state
 
 

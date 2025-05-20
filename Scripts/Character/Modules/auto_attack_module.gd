@@ -93,10 +93,8 @@ func _update_auto_attack_speed() -> void:
 # ============================== Callbacks functions ==============================
 
 func _on_auto_attack_timer_timeout() -> void:
-	print("ATTACK ?")
 	var target = _source.target_manager.get_target(_attack_strategy)
 	if target == null: return
-	print("    ATTACK !!!")
 	_auto_attack(target)
 
 
