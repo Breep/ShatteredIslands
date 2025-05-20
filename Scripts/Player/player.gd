@@ -154,7 +154,7 @@ func _init() -> void:
 # ============================== Private functions ==============================
 
 func _apply_all_cards_upgrades() -> void:
-	if deck == null or character == null or hero == null:
+	if deck == null or character == null:
 		printerr("Player: Can't apply cards upgrades")
 		return
 	character.apply_cards_upgrade(deck)

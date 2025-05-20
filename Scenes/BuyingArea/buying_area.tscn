@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ca8mcplp2va4s"]
+[gd_scene load_steps=9 format=3 uid="uid://ca8mcplp2va4s"]
 
 [ext_resource type="Script" uid="uid://cvy50on4evfts" path="res://Scripts/BuyingArea/buying_area.gd" id="1_ed4aq"]
 [ext_resource type="Script" uid="uid://cnx8tutucwv0x" path="res://Scripts/BuyingArea/camera_buying_area.gd" id="2_nery7"]
@@ -8,27 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://b8clqslwo8t68" path="res://Scenes/BuyingArea/Tavern/tavern.tscn" id="7_s1xub"]
 [ext_resource type="AudioStream" uid="uid://ck0xrpfygj0sw" path="res://Data/Assets/Sound/World of Warcraft - Taverns of Azeroth - 13 - Thunderbrew.wav" id="72_1sm7x"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w8c5s"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-
-[sub_resource type="Sky" id="Sky_tpdce"]
-sky_material = SubResource("ProceduralSkyMaterial_w8c5s")
-
-[sub_resource type="Environment" id="Environment_pgie4"]
-background_mode = 2
-background_energy_multiplier = 1.63
-sky = SubResource("Sky_tpdce")
-tonemap_mode = 3
-glow_enabled = true
-
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jhmrm"]
 
 [node name="BuyingArea" type="Node3D"]
 script = ExtResource("1_ed4aq")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_pgie4")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.984808, -0.0868241, 0.150384, 0, 0.866025, 0.5, -0.173648, -0.492404, 0.852868, -1.83603, 17.4339, 16.9409)

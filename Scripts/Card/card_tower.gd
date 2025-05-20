@@ -21,6 +21,7 @@ var cards_number: int:
 # ============================== Private variables ==============================
 
 var _cards3d: Array[Card3D]
+var _rng := RandomNumberGenerator.new()
 
 # ============================== Preload ==============================
 
@@ -29,6 +30,7 @@ var _cards3d: Array[Card3D]
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
+	_rng.randomize()
 	for child in get_children():
 		child.queue_free()
 
@@ -39,21 +41,18 @@ func _update_visual(new_cards_number) -> void:
 	if new_cards_number < 0:
 		printerr("CoinTower: Can't have less than 0 cards in the tower")
 	
-	var rng: = RandomNumberGenerator.new()
-	rng.randomize()
-	
 	if new_cards_number > _cards_number:
 		var number_of_coins_to_add: int = new_cards_number - _cards_number
 		for i in number_of_coins_to_add:
 			var card: Card3D = _card_scene.instantiate()
 			_cards3d.append(card)
 			add_child(card)
-			card.position.x = rng.randf_range(0, MAX_RANDOM_DISTANCE)
+			card.position.x = _rng.randf_range(0, MAX_RANDOM_DISTANCE)
 			card.position.y = card.get_height() * (_cards_number + i)
-			card.position.z = rng.randf_range(0, MAX_RANDOM_DISTANCE)
+			card.position.z = _rng.randf_range(0, MAX_RANDOM_DISTANCE)
 			card.name = "Card_" + str(_cards_number + i)
 			card.set_color(Family.COLORS[card_family])
-			card.rotate(Vector3.UP, rng.randf_range(-MAX_RANDOM_ROTATION, MAX_RANDOM_ROTATION))
+			card.rotate(Vector3.UP, _rng.randf_range(-MAX_RANDOM_ROTATION, MAX_RANDOM_ROTATION))
 	else:
 		var number_of_cards_to_remove: int = _cards_number - new_cards_number
 		for i in number_of_cards_to_remove:

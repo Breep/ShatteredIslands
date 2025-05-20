@@ -91,7 +91,7 @@ func _on_aa_speed_overtime_timer_timeout() -> void:
 	var time_elapsed: float = Time.get_ticks_msec() - _aa_speed_overtime_time_started
 	var attack_speed_boost = remap(time_elapsed, 0, _attack_stats.gatling_gun_duration, \
 			_attack_stats.gatling_gun_min, _attack_stats.gatling_gun_max)
-	attack_speed_boost = clampf(attack_speed_boost, _attack_stats.attack_speed_overtime_min, _attack_stats.attack_speed_overtime_max)
+	attack_speed_boost = clampf(attack_speed_boost, _attack_stats.gatling_gun_min, _attack_stats.gatling_gun_max)
 	# _update_auto_attack_speed()
 
 

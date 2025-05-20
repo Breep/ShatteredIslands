@@ -47,6 +47,8 @@ var _families_managers: Dictionary # { Family.FamilyType: FamilyManager }
 @export var _interact_module: InteractModule
 @export var _auto_attack_module: AutoAttackModule
 
+@export var _turret: Turret
+
 # ============================== Public functions ==============================
 
 func apply_cards_upgrade(deck: PlayerDeck) -> void:
@@ -61,7 +63,6 @@ func _init() -> void:
 
 
 func _enter_tree() -> void:
-	print("Character enter tree - ", battle_id)
 	_build_families_managers()
 
 
@@ -70,30 +71,28 @@ func _ready() -> void:
 
 
 func _character_ready() -> void:
-	print("Character ready - ", battle_id)
 	stats.reset_stats(_hero.stats)
 	
 	if _is_prototype:
-		pass # Player is set by the main node for prototyping for easier use
 		fighting_state = GlobalFightingManager.FightingState.STARTING
 		fighting_state = GlobalFightingManager.FightingState.FIGHT
+		_recursive_propagate_signal(get_parent(), Entity.SIGNAL_NAME_SPAWNED)
 	else:
 		player = PlayerManager.players[owner_player_id]
 		if battle_id != -1:
 			Shared.fighting_managers_ref[battle_id].fight_is_over.connect(_on_fighting_manager_fight_is_over)
+			_recursive_propagate_signal(get_parent(), Entity.SIGNAL_NAME_SPAWNED)
+			_character_visual.update_health_bar(stats.health, stats.health_max)
+			_character_visual.update_mana_bar(stats.mana, stats.mana_max)
+			_character_visual.update_name_displayed(player.name)
+		else:
+			_character_visual.queue_free()
 	
 	_is_local = player.id == multiplayer.get_unique_id()
 	
 	#_server_synchronizer.set_multiplayer_authority(player.id)
-	_character_visual.update_name_displayed(player.name)
-	#_character_visual.attach_to_attack_done_signal(_auto_attack_module.attack_done)
-	
-	_character_visual.update_health_bar(stats.health, stats.health_max)
-	_character_visual.update_mana_bar(stats.mana, stats.mana_max)
 	
 	GlobalFightingManager.state_changed.connect(_on_global_fighting_manager_state_changed)
-	
-	_recursive_propagate_signal(get_parent(), Entity.SIGNAL_NAME_SPAWNED)
 
 # ============================== Fighting States ==============================
 
@@ -126,9 +125,6 @@ func _init_movement_module(fighting_state: GlobalFightingManager.FightingState) 
 		return
 	
 	_movement_module.init(self, fighting_state)
-
-# ============================== MovementManager ==============================
-
 
 # ============================== Families Managers ==============================
 
@@ -165,6 +161,14 @@ func _init_modules() -> void:
 	_auto_attack_module.init(self, _families_managers)
 	_action_module.init(self, _families_managers)
 	_interact_module.init(self, _families_managers)
+	target_manager.init()
+	await get_tree().create_timer(1.0).timeout
+	var target: Entity = target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST_ENEMY)
+	if target != null:
+		if _turret != null:
+			_turret.target = target
+	else:
+		printerr("NO TARGET")
 	
 	_interact_module.damage_taken.connect(_on_interact_module_damage_taken)
 	_interact_module.heal_received.connect(_on_interact_module_heal_received)
@@ -233,6 +237,7 @@ func _on_fighting_manager_fight_is_over(_winner_team) -> void:
 
 
 func _on_global_fighting_manager_state_changed(new_state: GlobalFightingManager.FightingState) -> void:
+	return
 	fighting_state = new_state
 
 

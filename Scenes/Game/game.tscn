@@ -1,36 +1,52 @@
-[gd_scene load_steps=4 format=3 uid="uid://oimyi4iueoda"]
+[gd_scene load_steps=8 format=3 uid="uid://oimyi4iueoda"]
 
 [ext_resource type="Script" uid="uid://blljr68c4u466" path="res://Scripts/Game/game.gd" id="1_7r6pw"]
 [ext_resource type="PackedScene" uid="uid://ca8mcplp2va4s" path="res://Scenes/BuyingArea/buying_area.tscn" id="2_36puk"]
+[ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Scenes/FightingArea/spawn_point.tscn" id="3_i1e5p"]
 [ext_resource type="PackedScene" uid="uid://di34xfy5cli15" path="res://Scenes/Tool/free_fly_camera.tscn" id="3_t03ty"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i1e5p"]
+
+[sub_resource type="Sky" id="Sky_ciybh"]
+sky_material = SubResource("ProceduralSkyMaterial_i1e5p")
+
+[sub_resource type="Environment" id="Environment_flgk0"]
+background_mode = 2
+background_energy_multiplier = 1.63
+sky = SubResource("Sky_ciybh")
+tonemap_mode = 3
+glow_enabled = true
 
 [node name="Game" type="Node3D" node_paths=PackedStringArray("_fighting_area_spawns")]
 script = ExtResource("1_7r6pw")
-_fighting_area_spawns = [NodePath("FightingAreaSpawns/Spawn1"), NodePath("FightingAreaSpawns/Spawn2"), NodePath("FightingAreaSpawns/Spawn3"), NodePath("FightingAreaSpawns/Spawn4")]
+_fighting_area_spawns = [NodePath("FightingAreaSpawns/SpawnPoint1"), NodePath("FightingAreaSpawns/SpawnPoint2"), NodePath("FightingAreaSpawns/SpawnPoint3"), NodePath("FightingAreaSpawns/SpawnPoint4")]
 
 [node name="BuyingArea" parent="." instance=ExtResource("2_36puk")]
 unique_name_in_owner = true
 
 [node name="FightingAreaSpawns" type="Node3D" parent="."]
 
-[node name="Spawn1" type="Node3D" parent="FightingAreaSpawns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 100)
+[node name="SpawnPoint1" parent="FightingAreaSpawns" instance=ExtResource("3_i1e5p")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -100, 0, -100)
 
-[node name="Spawn2" type="Node3D" parent="FightingAreaSpawns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, -100)
+[node name="SpawnPoint2" parent="FightingAreaSpawns" instance=ExtResource("3_i1e5p")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 100, 0, -100)
 
-[node name="Spawn3" type="Node3D" parent="FightingAreaSpawns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -100, 0, -100)
+[node name="SpawnPoint3" parent="FightingAreaSpawns" instance=ExtResource("3_i1e5p")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 100, 0, 100)
 
-[node name="Spawn4" type="Node3D" parent="FightingAreaSpawns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -100, 0, 100)
+[node name="SpawnPoint4" parent="FightingAreaSpawns" instance=ExtResource("3_i1e5p")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -100, 0, 100)
 
 [node name="FreeFlyCamera" parent="." instance=ExtResource("3_t03ty")]
 transform = Transform3D(0.899588, -0.308751, 0.308891, 0, 0.707267, 0.706946, -0.436739, -0.635961, 0.636249, 0.0513108, 8.01942, 3.7451)
 
 [node name="FightingAreaSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://c66yw4go2ykwa")
+_spawnable_scenes = PackedStringArray("uid://d22h1k3fe1wxf", "uid://dk425rvwasjvx", "uid://cmv8dqyshrofi")
 spawn_path = NodePath("../FightingAreas")
 
 [node name="FightingAreas" type="Node3D" parent="."]
 unique_name_in_owner = true
+
+[node name="WorldEnvironment2" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_flgk0")

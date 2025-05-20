@@ -3,6 +3,7 @@ extends Node3D
 @export var _battle_id: int
 @export var _entity_manager: EntityManager
 @export var _spawn_manager: SpawnManager
+@export var _ui_fighting_area: UIFightingArea
 
 @export var _player1_cards: Array[Card]
 @export var _player2_cards: Array[Card]
@@ -30,3 +31,7 @@ func _enter_tree() -> void:
 	player2.character.player = player2
 	for card in _player2_cards:
 		player2.deck.add_card(card)
+
+
+func _ready() -> void:
+	_ui_fighting_area.show()

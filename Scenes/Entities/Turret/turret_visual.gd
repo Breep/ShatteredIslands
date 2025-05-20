@@ -1,0 +1,2 @@
+class_name TurretVisual
+extends Node3D
