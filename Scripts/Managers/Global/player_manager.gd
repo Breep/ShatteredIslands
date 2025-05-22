@@ -7,16 +7,16 @@ enum SyncID {
 
 # Bot names and their fake peer_id
 const BOT_INFOS: Dictionary [int, String] = {
-	-1: "Spide Ren'heure",
-	-2: "Alex_Supertramp",
-	-3: "Pwet",
-	-4: "gooby",
-	-5: "Meumeux",
-	-6: "TheAFKKnight",
-	-7: "CritsMcGee",
-	-8: "Xx_Slayer_xX",
-	-9: "GoldHoarder",
-	-10: "Zorro"
+	-10: "Spide Ren'heure",
+	-20: "Alex_Supertramp",
+	-30: "Pwet",
+	-40: "gooby",
+	-50: "Meumeux",
+	-60: "TheAFKKnight",
+	-70: "CritsMcGee",
+	-80: "Xx_Slayer_xX",
+	-90: "GoldHoarder",
+	-100: "Zorro"
 }
 
 enum JoinGameKeys {

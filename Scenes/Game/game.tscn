@@ -1,14 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://oimyi4iueoda"]
+[gd_scene load_steps=10 format=3 uid="uid://oimyi4iueoda"]
 
 [ext_resource type="Script" uid="uid://blljr68c4u466" path="res://Scripts/Game/game.gd" id="1_7r6pw"]
 [ext_resource type="PackedScene" uid="uid://ca8mcplp2va4s" path="res://Scenes/BuyingArea/buying_area.tscn" id="2_36puk"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Scenes/FightingArea/spawn_point.tscn" id="3_i1e5p"]
 [ext_resource type="PackedScene" uid="uid://di34xfy5cli15" path="res://Scenes/Tool/free_fly_camera.tscn" id="3_t03ty"]
+[ext_resource type="PackedScene" uid="uid://dupryy7gaobpv" path="res://Scenes/FloatingIsland/floating_island.tscn" id="4_flgk0"]
+[ext_resource type="Texture2D" uid="uid://capk6pfx3rt4k" path="res://Data/Misc/scrn2.jpg" id="5_ciybh"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i1e5p"]
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_flgk0"]
+panorama = ExtResource("5_ciybh")
+energy_multiplier = 0.2
 
 [sub_resource type="Sky" id="Sky_ciybh"]
-sky_material = SubResource("ProceduralSkyMaterial_i1e5p")
+sky_material = SubResource("PanoramaSkyMaterial_flgk0")
 
 [sub_resource type="Environment" id="Environment_flgk0"]
 background_mode = 2
@@ -17,32 +21,82 @@ sky = SubResource("Sky_ciybh")
 tonemap_mode = 3
 glow_enabled = true
 
-[node name="Game" type="Node3D" node_paths=PackedStringArray("_fighting_area_spawns")]
+[node name="Game" type="Node3D"]
 script = ExtResource("1_7r6pw")
-_fighting_area_spawns = [NodePath("FightingAreaSpawns/SpawnPoint1"), NodePath("FightingAreaSpawns/SpawnPoint2"), NodePath("FightingAreaSpawns/SpawnPoint3"), NodePath("FightingAreaSpawns/SpawnPoint4")]
 
 [node name="BuyingArea" parent="." instance=ExtResource("2_36puk")]
 unique_name_in_owner = true
 
-[node name="FightingAreaSpawns" type="Node3D" parent="."]
+[node name="IslandSpawns" type="Node3D" parent="."]
 
-[node name="SpawnPoint1" parent="FightingAreaSpawns" instance=ExtResource("3_i1e5p")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -100, 0, -100)
+[node name="CenterPoint1" type="Node3D" parent="IslandSpawns"]
 
-[node name="SpawnPoint2" parent="FightingAreaSpawns" instance=ExtResource("3_i1e5p")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 100, 0, -100)
+[node name="SpawnPoint1" parent="IslandSpawns/CenterPoint1" instance=ExtResource("3_i1e5p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 0)
 
-[node name="SpawnPoint3" parent="FightingAreaSpawns" instance=ExtResource("3_i1e5p")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 100, 0, 100)
+[node name="FloatingIsland" parent="IslandSpawns/CenterPoint1/SpawnPoint1" instance=ExtResource("4_flgk0")]
 
-[node name="SpawnPoint4" parent="FightingAreaSpawns" instance=ExtResource("3_i1e5p")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -100, 0, 100)
+[node name="CenterPoint2" type="Node3D" parent="IslandSpawns"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0)
+
+[node name="SpawnPoint2" parent="IslandSpawns/CenterPoint2" instance=ExtResource("3_i1e5p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 20, 0)
+
+[node name="FloatingIsland" parent="IslandSpawns/CenterPoint2/SpawnPoint2" instance=ExtResource("4_flgk0")]
+
+[node name="CenterPoint3" type="Node3D" parent="IslandSpawns"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="SpawnPoint3" parent="IslandSpawns/CenterPoint3" instance=ExtResource("3_i1e5p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 0)
+
+[node name="FloatingIsland" parent="IslandSpawns/CenterPoint3/SpawnPoint3" instance=ExtResource("4_flgk0")]
+
+[node name="CenterPoint4" type="Node3D" parent="IslandSpawns"]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 0, 0, 0)
+
+[node name="SpawnPoint4" parent="IslandSpawns/CenterPoint4" instance=ExtResource("3_i1e5p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, -20, 0)
+
+[node name="FloatingIsland" parent="IslandSpawns/CenterPoint4/SpawnPoint4" instance=ExtResource("4_flgk0")]
+
+[node name="CenterPoint5" type="Node3D" parent="IslandSpawns"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="SpawnPoint5" parent="IslandSpawns/CenterPoint5" instance=ExtResource("3_i1e5p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 0)
+
+[node name="FloatingIsland" parent="IslandSpawns/CenterPoint5/SpawnPoint5" instance=ExtResource("4_flgk0")]
+
+[node name="CenterPoint6" type="Node3D" parent="IslandSpawns"]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 0, 0, 0)
+
+[node name="SpawnPoint6" parent="IslandSpawns/CenterPoint6" instance=ExtResource("3_i1e5p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 20, 0)
+
+[node name="FloatingIsland" parent="IslandSpawns/CenterPoint6/SpawnPoint6" instance=ExtResource("4_flgk0")]
+
+[node name="CenterPoint7" type="Node3D" parent="IslandSpawns"]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0)
+
+[node name="SpawnPoint7" parent="IslandSpawns/CenterPoint7" instance=ExtResource("3_i1e5p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 0)
+
+[node name="FloatingIsland" parent="IslandSpawns/CenterPoint7/SpawnPoint7" instance=ExtResource("4_flgk0")]
+
+[node name="CenterPoint8" type="Node3D" parent="IslandSpawns"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0, 0)
+
+[node name="SpawnPoint8" parent="IslandSpawns/CenterPoint8" instance=ExtResource("3_i1e5p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, -20, 0)
+
+[node name="FloatingIsland" parent="IslandSpawns/CenterPoint8/SpawnPoint8" instance=ExtResource("4_flgk0")]
 
 [node name="FreeFlyCamera" parent="." instance=ExtResource("3_t03ty")]
 transform = Transform3D(0.899588, -0.308751, 0.308891, 0, 0.707267, 0.706946, -0.436739, -0.635961, 0.636249, 0.0513108, 8.01942, 3.7451)
+fov = 35.0
 
 [node name="FightingAreaSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://d22h1k3fe1wxf", "uid://dk425rvwasjvx", "uid://cmv8dqyshrofi")
 spawn_path = NodePath("../FightingAreas")
 
 [node name="FightingAreas" type="Node3D" parent="."]
@@ -50,3 +104,8 @@ unique_name_in_owner = true
 
 [node name="WorldEnvironment2" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_flgk0")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.72304, 0.426404, -0.543501, 0, 0.786763, 0.617256, 0.690807, -0.4463, 0.56886, 0, 11.082, 0)
+light_color = Color(0.806127, 0.544895, 0.445082, 1)
+shadow_enabled = true

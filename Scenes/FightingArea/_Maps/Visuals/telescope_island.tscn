@@ -559,6 +559,9 @@ _rot_full = true
 [node name="point rotation phare" parent="." index="4"]
 transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 3.04169, 10.3947, 0.0792131)
 
+[node name="lighthouse_light" parent="point rotation phare/phare" index="0"]
+transform = Transform3D(-0.990928, 0.0888636, -0.100823, -0.0653322, -0.974105, -0.21645, -0.117446, -0.2079, 0.971074, 0.169092, -13.4409, 0.0631752)
+
 [node name="AnimRotatingModule" parent="point rotation phare" index="2" node_paths=PackedStringArray("_owner") instance=ExtResource("2_i0t36")]
 _owner = NodePath("..")
 _rot_axis = 1

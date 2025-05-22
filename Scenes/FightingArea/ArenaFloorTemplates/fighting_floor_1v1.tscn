@@ -1,0 +1,83 @@
+[gd_scene load_steps=13 format=3 uid="uid://ctspehviccwd5"]
+
+[ext_resource type="Script" uid="uid://bhv0dmum15mp1" path="res://Scenes/FightingArea/ArenaFloorTemplates/fighting_floor.gd" id="1_i0b8l"]
+[ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://Scenes/Managers/spawn_manager.tscn" id="1_kcex7"]
+[ext_resource type="PackedScene" uid="uid://dibux7uwcsatj" path="res://Scenes/FightingArea/spawn_area.tscn" id="2_1l6d4"]
+[ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Scenes/FightingArea/spawn_point.tscn" id="3_8mse8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_57pjl"]
+size = Vector3(10, 0.1, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jxx87"]
+transparency = 1
+albedo_color = Color(0.368627, 0.529412, 1, 0.392157)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dhmms"]
+material = SubResource("StandardMaterial3D_jxx87")
+size = Vector3(10, 0.1, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sk17l"]
+transparency = 1
+albedo_color = Color(0.823701, 0.0889347, 0.335772, 0.392157)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qkrr5"]
+material = SubResource("StandardMaterial3D_sk17l")
+size = Vector3(10, 0.1, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i0b8l"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.392157)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fuiuu"]
+material = SubResource("StandardMaterial3D_i0b8l")
+size = Vector3(20, 1, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_go3o7"]
+size = Vector3(20, 1, 10)
+
+[node name="FightingFloor_1v1" type="Node3D" node_paths=PackedStringArray("_visual_to_be_destroyed")]
+script = ExtResource("1_i0b8l")
+_visual_to_be_destroyed = NodePath("Floor/FloorMesh3D")
+
+[node name="SpawnManager" parent="." node_paths=PackedStringArray("_spawn_points", "_spawn_areas") instance=ExtResource("1_kcex7")]
+_spawn_points = [NodePath("SpawnArea/SpawnPoint"), NodePath("SpawnArea2/SpawnPoint2")]
+_spawn_areas = [NodePath("SpawnArea"), NodePath("SpawnArea2")]
+
+[node name="SpawnArea" parent="SpawnManager" node_paths=PackedStringArray("_visual_to_be_destroyed") instance=ExtResource("2_1l6d4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+team = 1
+_visual_to_be_destroyed = NodePath("MeshInstance3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnManager/SpawnArea"]
+shape = SubResource("BoxShape3D_57pjl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SpawnManager/SpawnArea"]
+mesh = SubResource("BoxMesh_dhmms")
+
+[node name="SpawnPoint" parent="SpawnManager/SpawnArea" instance=ExtResource("3_8mse8")]
+team = 1
+
+[node name="SpawnArea2" parent="SpawnManager" node_paths=PackedStringArray("_visual_to_be_destroyed") instance=ExtResource("2_1l6d4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+team = 2
+_visual_to_be_destroyed = NodePath("MeshInstance3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnManager/SpawnArea2"]
+shape = SubResource("BoxShape3D_57pjl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SpawnManager/SpawnArea2"]
+mesh = SubResource("BoxMesh_qkrr5")
+
+[node name="SpawnPoint2" parent="SpawnManager/SpawnArea2" instance=ExtResource("3_8mse8")]
+team = 2
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+collision_layer = 4
+
+[node name="FloorMesh3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_fuiuu")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_go3o7")

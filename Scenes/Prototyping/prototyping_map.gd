@@ -1,9 +1,7 @@
 extends Node3D
 
 @export var _battle_id: int
-@export var _entity_manager: EntityManager
-@export var _spawn_manager: SpawnManager
-@export var _ui_fighting_area: UIFightingArea
+@export var _floating_island: FloatingIsland
 
 @export var _player1_cards: Array[Card]
 @export var _player2_cards: Array[Card]
@@ -12,10 +10,6 @@ extends Node3D
 @export var _character2: Character
 
 func _enter_tree() -> void:
-	Shared.entity_managers_ref[_battle_id] = _entity_manager
-	Shared.spawn_managers_ref[_battle_id] = _spawn_manager
-	_spawn_manager.battle_id = _battle_id
-	
 	var player1: Player = Player.new()
 	player1.name = "Player1"
 	player1.id = 1
@@ -34,4 +28,5 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
-	_ui_fighting_area.show()
+	_floating_island.start_fight([_character1, _character2], Battle.BattleType.VS_1)
+	#_ui_fighting_area.show()

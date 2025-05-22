@@ -21,30 +21,22 @@ var battle_id: int = -1 # Set by the parent
 var _characters_dictionary: Dictionary[int, Array] # [int, Array[Character]] Key=team_id, value=team members
 var _alive_characters_dictionary: Dictionary[int, Array] # [int, Array[Character]] Key=team_id, value=team members
 var _lowest_hp_teams_order: Array[int] # Array of teams in order of death [2, 3, 4] means team 2 died first, then 3 and then 4
-var _battle_result: BattleResult
 
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
 	GlobalFightingManager.register_fighting_manager(self)
 	GlobalFightingManager.state_changed.connect(_on_global_fighting_manager_state_changed)
-	_battle_result = BattleResult.new()
 
 # ============================== Public functions ==============================
 
-func start() -> void:
-	if not multiplayer.is_server():
-		return
-	
-	_setup_characters_dictionary()
+func start(characters: Array[Character]) -> void:
+	_setup_characters_dictionary(characters)
 	_connect_to_characters_signals()
-	_battle_result.battle_type = RoundManager.battles[battle_id].battle_type
-	_battle_result.battle_id = battle_id
 
 # ============================== Private functions ==============================
 
-func _setup_characters_dictionary() -> void:
-	var characters: Array[Character] = Shared.entity_managers_ref[battle_id].characters.values()
+func _setup_characters_dictionary(characters) -> void:
 	for character in characters:
 		if _characters_dictionary.has(character.team):
 			_characters_dictionary[character.team].append(character)

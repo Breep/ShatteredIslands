@@ -2,18 +2,10 @@
 
 [ext_resource type="Script" uid="uid://ddvqvwc47kc24" path="res://Scripts/FightingArea/spawn_manager.gd" id="1_qkh47"]
 
-[node name="SpawnManager" type="Node3D"]
+[node name="SpawnManager" type="Node3D" node_paths=PackedStringArray("_entities_node", "_projectiles_node")]
 script = ExtResource("1_qkh47")
-
-[node name="EntitySpawner" type="MultiplayerSpawner" parent="."]
-unique_name_in_owner = true
-_spawnable_scenes = PackedStringArray("uid://bbnioyc6ti8wn")
-spawn_path = NodePath("../Entities")
-spawn_limit = 8
-
-[node name="ProjectileSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://ceqjwbnxlllrw")
-spawn_path = NodePath("../Projectiles")
+_entities_node = NodePath("Entities")
+_projectiles_node = NodePath("Projectiles")
 
 [node name="Projectiles" type="Node3D" parent="."]
 unique_name_in_owner = true

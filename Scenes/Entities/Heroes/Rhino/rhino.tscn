@@ -96,33 +96,33 @@ _turret = NodePath("TurretCenterPoint/Turret")
 transform = Transform3D(-1.43, 0, -2.15924e-07, 0, 1.43, 0, 2.15924e-07, 0, -1.43, 0, 0, 0)
 
 [node name="GeneralSkeleton" parent="RhinoModel/Rhino_armature" index="0"]
-bones/0/position = Vector3(0.0467234, 0.504695, 0.0128502)
-bones/0/rotation = Quaternion(-0.0211143, -0.0108041, -0.0308716, 0.999242)
-bones/1/rotation = Quaternion(-0.0422618, 0.215347, 0.954694, -0.200996)
-bones/2/rotation = Quaternion(0.0758468, 0.944336, -0.311827, 0.0723963)
-bones/3/rotation = Quaternion(-0.123417, 0.628699, -0.764571, -0.0702647)
-bones/4/rotation = Quaternion(0.106379, 0.993045, 0.0169101, -0.0475417)
-bones/6/rotation = Quaternion(-0.0494436, 0.275535, 0.929615, 0.239693)
-bones/7/rotation = Quaternion(-0.0953162, 0.887222, -0.450931, 0.0203258)
-bones/8/rotation = Quaternion(0.123184, 0.564037, -0.814234, -0.0609223)
-bones/9/rotation = Quaternion(-0.102878, 0.989663, 0.033565, -0.0941075)
+bones/0/position = Vector3(0.0472554, 0.509584, 0.0141742)
+bones/0/rotation = Quaternion(-0.0142781, -0.00951184, -0.0294584, 0.999419)
+bones/1/rotation = Quaternion(-0.0414693, 0.215468, 0.956117, -0.194148)
+bones/2/rotation = Quaternion(0.0739933, 0.948417, -0.300521, 0.0686822)
+bones/3/rotation = Quaternion(-0.120937, 0.633521, -0.761419, -0.0653166)
+bones/4/rotation = Quaternion(0.106349, 0.993051, 0.0166941, -0.0475426)
+bones/6/rotation = Quaternion(-0.0509596, 0.275782, 0.92976, 0.238525)
+bones/7/rotation = Quaternion(-0.0921397, 0.893168, -0.439634, 0.0219799)
+bones/8/rotation = Quaternion(0.124309, 0.568165, -0.810841, -0.0653654)
+bones/9/rotation = Quaternion(-0.102611, 0.989733, 0.0319871, -0.0942202)
 bones/11/rotation = Quaternion(2.96277e-08, -6.51926e-09, -3.72529e-09, 1)
 bones/12/rotation = Quaternion(6.82121e-13, -2.03727e-10, -2.61934e-10, 1)
-bones/13/rotation = Quaternion(0.115982, 0.0048457, 0.00220448, 0.993237)
-bones/14/rotation = Quaternion(0.33478, 0.479011, 0.547024, -0.599363)
-bones/15/rotation = Quaternion(-0.424642, 0.836664, 0.0957668, 0.332417)
-bones/16/rotation = Quaternion(0.0477659, -0.832112, 0.244178, 0.495667)
-bones/17/rotation = Quaternion(-0.016536, 0.26837, -0.197912, 0.942621)
-bones/19/rotation = Quaternion(0.361886, -0.450452, -0.492226, -0.651034)
-bones/20/rotation = Quaternion(0.282399, 0.916, -0.0325856, -0.283078)
-bones/21/rotation = Quaternion(0.068937, 0.945526, -0.19436, 0.251898)
-bones/22/rotation = Quaternion(0.0379632, -0.36244, 0.178773, 0.913913)
+bones/13/rotation = Quaternion(0.108104, 0.00858118, -0.000844219, 0.994102)
+bones/14/rotation = Quaternion(0.386638, 0.47104, 0.488841, -0.624234)
+bones/15/rotation = Quaternion(-0.486413, 0.805245, 0.0424639, 0.336421)
+bones/16/rotation = Quaternion(0.0508749, -0.839124, 0.214943, 0.497073)
+bones/17/rotation = Quaternion(-0.0279205, 0.26646, -0.187174, 0.945085)
+bones/19/rotation = Quaternion(0.37689, -0.477989, -0.457715, -0.648056)
+bones/20/rotation = Quaternion(0.376163, 0.893235, -0.0696985, -0.236166)
+bones/21/rotation = Quaternion(0.0454209, 0.928386, -0.175439, 0.324434)
+bones/22/rotation = Quaternion(0.00637648, -0.362228, 0.247871, 0.898505)
 bones/24/rotation = Quaternion(3.25977e-08, -8.56744e-10, 5.43878e-10, 1)
-bones/25/rotation = Quaternion(-0.0556601, 0.035108, -0.0861188, 0.994109)
+bones/25/rotation = Quaternion(-0.048653, 0.0598974, -0.108043, 0.991147)
 bones/26/rotation = Quaternion(0.0509365, -0.0042404, 0.00424033, 0.998684)
 
 [node name="BoneAttachment3D" parent="RhinoModel/Rhino_armature/GeneralSkeleton" index="1"]
-transform = Transform3D(0.459068, 0.851433, 0.253611, -0.888401, 0.440024, 0.130854, -0.000181437, -0.285379, 0.958415, 0.837197, 0.959577, 0.0941844)
+transform = Transform3D(0.441748, 0.737572, 0.510731, -0.892533, 0.303695, 0.333399, 0.090799, -0.603122, 0.792464, 0.815672, 0.950984, -0.0525559)
 
 [node name="AnimationPlayer" parent="RhinoModel" index="1"]
 libraries = {
@@ -209,7 +209,7 @@ _hover_period = 2.0
 [node name="AnimRotatingModule" parent="TurretCenterPoint" node_paths=PackedStringArray("_owner") instance=ExtResource("21_ixh3j")]
 _owner = NodePath("..")
 _rot_axis = 1
-_rot_period = 10.0
+_rot_period = 15.0
 _rot_max = 360.0
 _rot_full = true
 

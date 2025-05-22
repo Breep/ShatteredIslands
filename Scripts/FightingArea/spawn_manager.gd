@@ -9,7 +9,6 @@ signal all_players_spawned()
 
 var battle_id: int = -1 # Set by the parent
 
-
 # ============================== External Export ==============================
 
 @export var _spawn_points: Array[SpawnPoint]
@@ -24,13 +23,10 @@ var _projectile_counter: int = 0
 
 # ============================== Public function ==============================
 
-func spawn_characters(players: Array[Player]) -> Array[Character]:
-	var spawned_characters: Array[Character]
-	
-	for player in players:
-		spawned_characters.append(_spawn_new_character(player))
-	
-	return spawned_characters
+func spawn_characters(characters: Array[Character]) -> void:
+	var _available_spawn_points: Array[SpawnPoint] = _spawn_points.duplicate()
+	for character in characters:
+		_spawn_character(character, _available_spawn_points)
 
 
 func spawn_projectile(source: Character, target: Character, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
@@ -47,26 +43,21 @@ func spawn_projectile(source: Character, target: Character, projectile_type: Pro
 
 # ============================== Private functions ==============================
 
-# Instantiate and spawn a new character for the player
-func _spawn_new_character(player: Player) -> Character:
-	if not multiplayer.is_server():
-		return
+# spawn an already instatiated character on the _entities_node at a spawn location available
+func _spawn_character(character: Character, available_spawn_locations: Array[SpawnPoint]) -> bool:
+	if character == null:
+		printerr("SpawnManager: Trying to spawn a <null> Character")
+		return false
 	
-	var character: Character = Shared.CHARACTERS[player.hero.id].instantiate()
-	character.id = _entity_counter
-	_entity_counter += 1
-	character.battle_id = battle_id
-	character.team = player.team
-	character.owner_player_id = player.id
-	
-	for spawn_point in _spawn_points:
+	for spawn_point in available_spawn_locations:
 		if spawn_point.team == character.team:
-			character.position = _entities_node.to_local(spawn_point.global_position)
-			_spawn_points.erase(spawn_point)
-			break
+			character.reparent(_entities_node)
+			character.global_position = spawn_point.global_position
+			available_spawn_locations.erase(spawn_point)
+			return true
 	
-	_entities_node.add_child(character)
-	return character
+	printerr("SpawnManager: No more available spawn point for ", character.name)
+	return false
 
 
 

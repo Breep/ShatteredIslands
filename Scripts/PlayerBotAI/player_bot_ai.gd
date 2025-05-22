@@ -25,28 +25,26 @@ func _ready() -> void:
 		queue_free()
 		return
 	
-	return # TMP TODO TO REMOVE (DEV)
+	Events.game_state_changed.connect(_on_events_game_state_changed)
 	
-	#Events.game_state_changed.connect(_on_events_game_state_changed)
-	#
-	#_wake_up_timer = Timer.new()
-	#_wake_up_timer.one_shot = true
-	#_wake_up_timer.autostart = false
-	#_wake_up_timer.timeout.connect(_on_wake_up_timer_timeout)
-	#_wake_up_timer.name = "WakeUpTimer"
-	#add_child(_wake_up_timer)
-	#
-	#_card_shop = CardShop.new()
-	#_card_shop.player = player
-	#_card_shop.name = "CardShop"
-	#add_child(_card_shop)
-	#
-	#_rng = RandomNumberGenerator.new()
-	#_rng.randomize()
-	#
-	#_economy_strategy = EconomyStrategy.KEEPER if _rng.randi() % 2 == 0 else EconomyStrategy.WASTER
-	#var tmp_debug_strat_str: String = "KEEPER" if _economy_strategy == EconomyStrategy.KEEPER else "WASTER"
-	#print("PlayerBotAI: Starting AI for ", player.name, "[", tmp_debug_strat_str, "]")
+	_wake_up_timer = Timer.new()
+	_wake_up_timer.one_shot = true
+	_wake_up_timer.autostart = false
+	_wake_up_timer.timeout.connect(_on_wake_up_timer_timeout)
+	_wake_up_timer.name = "WakeUpTimer"
+	add_child(_wake_up_timer)
+	
+	_card_shop = CardShop.new()
+	_card_shop.player = player
+	_card_shop.name = "CardShop"
+	add_child(_card_shop)
+	
+	_rng = RandomNumberGenerator.new()
+	_rng.randomize()
+	
+	_economy_strategy = EconomyStrategy.KEEPER if _rng.randi() % 2 == 0 else EconomyStrategy.WASTER
+	var tmp_debug_strat_str: String = "KEEPER" if _economy_strategy == EconomyStrategy.KEEPER else "WASTER"
+	print("PlayerBotAI: Starting AI for ", player.name, "[", tmp_debug_strat_str, "]")
 
 
 func _dumb_buying_area() -> void:

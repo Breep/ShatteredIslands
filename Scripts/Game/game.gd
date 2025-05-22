@@ -29,15 +29,15 @@ var _current_round_battles: Array[Battle]
 @onready var _node_fighting_areas: Node3D = %FightingAreas
 
 var _fighting_areas: Array[FightingArea]
-@export var _fighting_area_spawns: Array[SpawnPoint]
 
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	_buying_area.phase_ended.connect(_on_buying_area_phase_ended)
-	_buying_area.all_heroes_picked.connect(_on_buying_area_all_heroes_picked)
-	GlobalFightingManager.all_fights_are_over.connect(_on_global_fighting_manager_all_fights_are_over)
-	_start_game()
+	pass
+	#_buying_area.phase_ended.connect(_on_buying_area_phase_ended)
+	#_buying_area.all_heroes_picked.connect(_on_buying_area_all_heroes_picked)
+	#GlobalFightingManager.all_fights_are_over.connect(_on_global_fighting_manager_all_fights_are_over)
+	#_start_game()
 
 # ============================== Private functions ==============================
 
@@ -67,13 +67,13 @@ func _spawn_all_fighting_areas(battles: Array[Battle]) -> void:
 	if not multiplayer.is_server():
 		return
 	
-	for i in battles.size():
-		var fighting_area: FightingArea = Shared.FIGHTING_AREAS[battles[i].battle_type].instantiate()
-		fighting_area.name = "FightingArea_" + str(i)
-		fighting_area.position = _fighting_area_spawns[i].position
-		fighting_area.battle_id = battles[i].id
-		_node_fighting_areas.add_child(fighting_area)
-		_fighting_areas.append(fighting_area)
+	#for i in battles.size():
+		#var fighting_area: FightingArea = Shared.FIGHTING_AREAS[battles[i].battle_type].instantiate()
+		#fighting_area.name = "FightingArea_" + str(i)
+		#fighting_area.position = _fighting_area_spawns[i].position
+		#fighting_area.battle_id = battles[i].id
+		#_node_fighting_areas.add_child(fighting_area)
+		#_fighting_areas.append(fighting_area)
 
 
 func _start_buying_phase() -> void:
@@ -85,8 +85,8 @@ func _start_buying_phase() -> void:
 func _start_fighting_phase() -> void:
 	game_state = GameState.FIGHTING
 	print("[", multiplayer.get_unique_id(), "] Game: Start fights !")
-	for fighting_area in _fighting_areas:
-		fighting_area.start_fight()
+	#for fighting_area in _fighting_areas:
+		#fighting_area.start_fight()
 	GlobalFightingManager.start()
 
 # ============================== Callbacks ==============================

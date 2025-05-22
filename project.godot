@@ -140,4 +140,7 @@ character_movement={
 
 [layer_names]
 
+3d_physics/layer_1="Entities"
+3d_physics/layer_2="Projectiles"
+3d_physics/layer_3="SpawnAreas"
 3d_physics/layer_4="Floor"

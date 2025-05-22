@@ -97,7 +97,7 @@ func _character_ready() -> void:
 # ============================== Fighting States ==============================
 
 func _set_state(new_state: GlobalFightingManager.FightingState) -> void:
-	print("[", multiplayer.get_unique_id(), "] DEBUG : ", id, " - ", _fighting_state, " - ", new_state)
+	#print("[", multiplayer.get_unique_id(), "] DEBUG : ", id, " - ", _fighting_state, " - ", new_state)
 	match new_state:
 		GlobalFightingManager.FightingState.STARTING:
 			if _fighting_state != GlobalFightingManager.FightingState.UNDEF:
@@ -162,13 +162,12 @@ func _init_modules() -> void:
 	_action_module.init(self, _families_managers)
 	_interact_module.init(self, _families_managers)
 	target_manager.init()
-	await get_tree().create_timer(1.0).timeout
+	if _is_prototype:
+		await get_tree().create_timer(1.0).timeout
 	var target: Entity = target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST_ENEMY)
-	if target != null:
-		if _turret != null:
-			_turret.target = target
-	else:
-		printerr("NO TARGET")
+	if target != null and _turret != null:
+		_turret.target = target
+		_look_at_target_y_only(target.global_position)
 	
 	_interact_module.damage_taken.connect(_on_interact_module_damage_taken)
 	_interact_module.heal_received.connect(_on_interact_module_heal_received)
@@ -184,6 +183,14 @@ func _handle_death() -> void:
 	_auto_attack_module.stop()
 	dead.emit(self)
 	_is_dead = true
+
+
+func _look_at_target_y_only(target_position: Vector3):
+	var direction = target_position - global_transform.origin
+	direction.y = 0
+	if direction.length() > 0.1:
+		look_at(global_transform.origin + direction, Vector3.UP)
+
 
 # ============================== Signals callbacks ==============================
 

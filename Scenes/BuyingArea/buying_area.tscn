@@ -1,23 +1,17 @@
 [gd_scene load_steps=9 format=3 uid="uid://ca8mcplp2va4s"]
 
 [ext_resource type="Script" uid="uid://cvy50on4evfts" path="res://Scripts/BuyingArea/buying_area.gd" id="1_ed4aq"]
-[ext_resource type="Script" uid="uid://cnx8tutucwv0x" path="res://Scripts/BuyingArea/camera_buying_area.gd" id="2_nery7"]
 [ext_resource type="PackedScene" uid="uid://k4dc5j8ecdxo" path="res://Scenes/UI/HeroSelection/ui_hero_picking_screen.tscn" id="3_ye23v"]
 [ext_resource type="PackedScene" uid="uid://cmstx61h3h6ar" path="res://Scenes/UI/BuyingArea/ui_buying_area.tscn" id="5_dvq4w"]
 [ext_resource type="PackedScene" uid="uid://pyrw8lacvly2" path="res://Scenes/Managers/entity_manager.tscn" id="7_s0sy2"]
 [ext_resource type="PackedScene" uid="uid://b8clqslwo8t68" path="res://Scenes/BuyingArea/Tavern/tavern.tscn" id="7_s1xub"]
+[ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://Scenes/Tool/center_point_camera.tscn" id="7_ye23v"]
 [ext_resource type="AudioStream" uid="uid://ck0xrpfygj0sw" path="res://Data/Assets/Sound/World of Warcraft - Taverns of Azeroth - 13 - Thunderbrew.wav" id="72_1sm7x"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jhmrm"]
 
 [node name="BuyingArea" type="Node3D"]
 script = ExtResource("1_ed4aq")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.984808, -0.0868241, 0.150384, 0, 0.866025, 0.5, -0.173648, -0.492404, 0.852868, -1.83603, 17.4339, 16.9409)
-projection = 1
-size = 10.0
-script = ExtResource("2_nery7")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -41,12 +35,6 @@ _round_timer = NodePath("../../BuyingAreaTimer")
 [node name="Tavern" parent="." instance=ExtResource("7_s1xub")]
 unique_name_in_owner = true
 
-[node name="Light" type="Node3D" parent="."]
-
-[node name="LightNight" type="DirectionalLight3D" parent="Light"]
-transform = Transform3D(0.375305, 0.140338, 0.916216, 0.181778, 0.958133, -0.22122, -0.908902, 0.249572, 0.334081, -3.25739, 17.7254, -45.0352)
-shadow_enabled = true
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("72_1sm7x")
 volume_db = -5.0
@@ -61,4 +49,9 @@ replication_config = SubResource("SceneReplicationConfig_jhmrm")
 
 [node name="EntityManager" parent="." instance=ExtResource("7_s0sy2")]
 
+[node name="CenterPointCamera" parent="." instance=ExtResource("7_ye23v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.06433, 0, -6.52978)
+
 [connection signal="timeout" from="BuyingAreaTimer" to="." method="_on_timer_timeout"]
+
+[editable path="CenterPointCamera"]

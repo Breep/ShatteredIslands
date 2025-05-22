@@ -123,13 +123,13 @@ transform = Transform3D(0.495, 0, 0, 0, 0.495, 0, 0, 0, 0.495, 3, 0, 0)
 
 [node name="AnimHoveringModule" parent="TurretCenterPoint/Turret" node_paths=PackedStringArray("_owner") instance=ExtResource("18_uk7dm")]
 _owner = NodePath("..")
-_hover_power = 0.1
+_hover_power = 0.05
 _hover_period = 2.0
 
 [node name="AnimRotatingModule" parent="TurretCenterPoint" node_paths=PackedStringArray("_owner") instance=ExtResource("19_4b60l")]
 _owner = NodePath("..")
 _rot_axis = 1
-_rot_period = 10.0
+_rot_period = 7.0
 _rot_max = 360.0
 _rot_full = true
 

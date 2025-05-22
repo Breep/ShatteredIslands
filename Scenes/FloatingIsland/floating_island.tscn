@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://dupryy7gaobpv"]
+
+[ext_resource type="Script" uid="uid://d3ajiayle6l3r" path="res://Scenes/FloatingIsland/floating_island.gd" id="1_6tkdt"]
+[ext_resource type="PackedScene" uid="uid://c66yw4go2ykwa" path="res://Scenes/FightingArea/fighting_area.tscn" id="2_5v1le"]
+[ext_resource type="PackedScene" uid="uid://bhx575fxnmb7i" path="res://Scenes/FightingArea/_Maps/Visuals/telescope_island.tscn" id="3_yaqa4"]
+[ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://Scenes/Tool/center_point_camera.tscn" id="4_yaqa4"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_yaqa4"]
+properties/0/path = NodePath(".:_player_owner_id")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+
+[node name="FloatingIsland" type="Node3D" node_paths=PackedStringArray("_fighting_area", "_center_point_camera")]
+script = ExtResource("1_6tkdt")
+_fighting_area = NodePath("FightingArea")
+_center_point_camera = NodePath("CenterPointCamera")
+
+[node name="FightingArea" parent="." node_paths=PackedStringArray("_spawn_managers") instance=ExtResource("2_5v1le")]
+_spawn_managers = {
+0: NodePath("FightingFloorTemplates/FightingFloor_1v1/SpawnManager"),
+1: NodePath("FightingFloorTemplates/FightingFloor_2v2/SpawnManager"),
+2: NodePath("FightingFloorTemplates/FightingFloor_ffa13/SpawnManager")
+}
+
+[node name="TelescopeIsland" parent="." instance=ExtResource("3_yaqa4")]
+transform = Transform3D(-0.00106899, -0.000369877, 0.999999, -8.7162e-05, 1, 0.000369783, -0.999999, -8.67592e-05, -0.00106902, -0.245, -12.62, 3.018)
+
+[node name="CenterPointCamera" parent="." instance=ExtResource("4_yaqa4")]
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_yaqa4")
+
+[editable path="CenterPointCamera"]

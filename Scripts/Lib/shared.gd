@@ -32,10 +32,10 @@ var FIGHTING_AREAS: Dictionary[Battle.BattleType, PackedScene] = {
 }
 
 
-var fighting_areas_ref: Dictionary[int, FightingArea] # Key=battle_id
-var spawn_managers_ref: Dictionary[int, SpawnManager] # Key=battle_id
-var entity_managers_ref: Dictionary[int, EntityManager] # Key=battle_id
-var fighting_managers_ref: Dictionary[int, FightingManager] # Key=battle_id
+var fighting_areas_ref: Dictionary[int, FightingArea] # Key=player_id
+var spawn_managers_ref: Dictionary[int, SpawnManager] # Key=player_id
+var entity_managers_ref: Dictionary[int, EntityManager] # Key=player_id
+var fighting_managers_ref: Dictionary[int, FightingManager] # Key=player_id
 
 
 

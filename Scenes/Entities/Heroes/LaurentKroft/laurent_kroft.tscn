@@ -119,17 +119,17 @@ replication_config = SubResource("SceneReplicationConfig_5ed6q")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.36537, 0)
 
 [node name="Turret" parent="TurretCenterPoint" instance=ExtResource("17_wovto")]
-transform = Transform3D(0.495, 0, 0, 0, 0.495, 0, 0, 0, 0.495, 3, 0, 0)
+transform = Transform3D(0.395, 0, 0, 0, 0.395, 0, 0, 0, 0.395, 2, 0, 0)
 
 [node name="AnimHoveringModule" parent="TurretCenterPoint/Turret" node_paths=PackedStringArray("_owner") instance=ExtResource("18_pr4i5")]
 _owner = NodePath("..")
-_hover_power = 0.1
+_hover_power = 0.2
 _hover_period = 2.0
 
 [node name="AnimRotatingModule" parent="TurretCenterPoint" node_paths=PackedStringArray("_owner") instance=ExtResource("19_vq8b4")]
 _owner = NodePath("..")
 _rot_axis = 1
-_rot_period = 10.0
+_rot_period = 9.0
 _rot_max = 360.0
 _rot_full = true
 

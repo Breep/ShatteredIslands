@@ -14,6 +14,10 @@ signal map_clicked(position: Vector3)
 var _battle: Battle # Battle of the fighting area
 var _characters: Array[Character] # Array of all characters in the fight scene
 
+# ============================== Public variables ==============================
+
+var spawn_manager: SpawnManager
+
 # ============================== Local nodes / Configuration ==============================
 
 @export var _battle_type: Battle.BattleType
@@ -21,26 +25,19 @@ var _characters: Array[Character] # Array of all characters in the fight scene
 @export var _fighting_manager: FightingManager
 @export var _entity_manager: EntityManager
 @export var _ui_fighting_area: UIFightingArea
-@export var _camera: CameraFightingArea
-@export var _spawn_manager: SpawnManager
+
+
+@export var _spawn_managers: Dictionary[Battle.BattleType, SpawnManager]
 
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	_battle = RoundManager.battles[battle_id]
+	#_battle = RoundManager.battles[battle_id]
 	
 	if _ready_checks() != true:
 		return
 	
-	_camera.battle_id = battle_id
-	_spawn_manager.battle_id = battle_id
 	_fighting_manager.battle_id = battle_id
-	
-	match battle_id:
-		0: _camera.camera_type = CameraManager.CameraType.FIGHTING_AREA_1
-		1: _camera.camera_type = CameraManager.CameraType.FIGHTING_AREA_2
-		2: _camera.camera_type = CameraManager.CameraType.FIGHTING_AREA_3
-		3: _camera.camera_type = CameraManager.CameraType.FIGHTING_AREA_4
 	
 	_register_self_in_shared()
 
@@ -50,59 +47,37 @@ func _exit_tree() -> void:
 
 # ============================== Public functions ==============================
 
-func start_fight() -> void:
-	if not multiplayer.is_server():
-		return
+func start_fight(characters: Array[Character], battle_type: Battle.BattleType) -> void:
+	spawn_manager = _spawn_managers[battle_type]
+	if spawn_manager == null:
+		printerr("FightingArea: No SpawnManager for this battle type: ", battle_type)
 	
-	_characters = _spawn_manager.spawn_characters(_battle.players)
-	if _characters.is_empty():
-		printerr("FightingArea: Can't start SpawnManager")
-		return
+	spawn_manager.spawn_characters(characters)
 	
 	_fighting_manager.fight_is_over.connect(_on_fighting_manager_fight_is_over, CONNECT_ONE_SHOT)
-	_fighting_manager.start()
-	
-	_net_start_fight.rpc()
-
-@rpc("authority", "call_local")
-func _net_start_fight() -> void:
-	_ui_fighting_area.start(battle_id)
+	_fighting_manager.start(characters)
 
 # ============================== Private functions ==============================
 
 func _register_self_in_shared() -> void:
 	Shared.fighting_areas_ref[battle_id] = self
-	Shared.spawn_managers_ref[battle_id] = _spawn_manager
 	Shared.entity_managers_ref[battle_id] = _entity_manager
 	Shared.fighting_managers_ref[battle_id] = _fighting_manager
 
 
 func _delete_self_in_shared() -> void:
 	Shared.fighting_areas_ref.erase(battle_id)
-	Shared.spawn_managers_ref.erase(battle_id)
 	Shared.entity_managers_ref.erase(battle_id)
 	Shared.fighting_managers_ref.erase(battle_id)
 
 
 func _ready_checks() -> bool:
-	if _battle.battle_type != _battle_type:
-		printerr("This FightingArea doesn't match with the battle type [", _battle_type, "|", _battle.battle_type, "]")
-		return false
-	
-	if _spawn_manager == null:
-		printerr("FightingArea: No SpawnManager")
-		return false
-	
 	if _fighting_manager == null:
 		printerr("FightingArea: No FightingManager")
 		return false
 	
 	if _entity_manager == null:
 		printerr("FightingArea: No EntityManager")
-		return false
-	
-	if _camera == null:
-		printerr("FightingArea: No Camera")
 		return false
 	
 	return true
