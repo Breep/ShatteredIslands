@@ -42,17 +42,19 @@ properties/5/path = NodePath(".:battle_id")
 properties/5/spawn = true
 properties/5/replication_mode = 2
 
-[node name="MrKrumb" type="CharacterBody3D" node_paths=PackedStringArray("_attack_manager", "_defense_manager", "_fire_manager", "_storm_manager", "_serenity_manager", "_poison_manager", "_life_manager", "_movement_module", "_action_module", "_interact_module", "_auto_attack_module", "_turret") groups=["CHARACTER"]]
+[node name="MrKrumb" type="CharacterBody3D" node_paths=PackedStringArray("_families_managers", "_movement_module", "_action_module", "_interact_module", "_auto_attack_module", "_turret") groups=["CHARACTER"]]
 motion_mode = 1
 script = ExtResource("1_c4fri")
 _hero = ExtResource("2_1mska")
-_attack_manager = NodePath("FamiliesManagers/AttackManager")
-_defense_manager = NodePath("FamiliesManagers/DefenseManager")
-_fire_manager = NodePath("FamiliesManagers/FireManager")
-_storm_manager = NodePath("FamiliesManagers/StormManager")
-_serenity_manager = NodePath("FamiliesManagers/SerenityManager")
-_poison_manager = NodePath("FamiliesManagers/PoisonManager")
-_life_manager = NodePath("FamiliesManagers/LifeManager")
+_families_managers = {
+0: NodePath("FamiliesManagers/AttackManager"),
+1: NodePath("FamiliesManagers/DefenseManager"),
+2: NodePath("FamiliesManagers/FireManager"),
+3: NodePath("FamiliesManagers/StormManager"),
+4: NodePath("FamiliesManagers/SerenityManager"),
+5: NodePath("FamiliesManagers/LifeManager"),
+6: NodePath("FamiliesManagers/PoisonManager")
+}
 _movement_module = NodePath("Modules/MovementModule")
 _action_module = NodePath("Modules/ActionModule")
 _interact_module = NodePath("Modules/InteractModule")

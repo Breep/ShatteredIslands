@@ -75,17 +75,19 @@ properties/5/path = NodePath(".:battle_id")
 properties/5/spawn = true
 properties/5/replication_mode = 2
 
-[node name="Rhino" type="CharacterBody3D" node_paths=PackedStringArray("_attack_manager", "_defense_manager", "_fire_manager", "_storm_manager", "_serenity_manager", "_poison_manager", "_life_manager", "_movement_module", "_action_module", "_interact_module", "_auto_attack_module", "_turret") groups=["CHARACTER"]]
+[node name="Rhino" type="CharacterBody3D" node_paths=PackedStringArray("_families_managers", "_movement_module", "_action_module", "_interact_module", "_auto_attack_module", "_turret") groups=["CHARACTER"]]
 motion_mode = 1
 script = ExtResource("1_y4ny4")
 _hero = ExtResource("2_tksyq")
-_attack_manager = NodePath("FamiliesManagers/AttackManager")
-_defense_manager = NodePath("FamiliesManagers/DefenseManager")
-_fire_manager = NodePath("FamiliesManagers/FireManager")
-_storm_manager = NodePath("FamiliesManagers/StormManager")
-_serenity_manager = NodePath("FamiliesManagers/SerenityManager")
-_poison_manager = NodePath("FamiliesManagers/PoisonManager")
-_life_manager = NodePath("FamiliesManagers/LifeManager")
+_families_managers = {
+0: NodePath("FamiliesManagers/AttackManager"),
+1: NodePath("FamiliesManagers/DefenseManager"),
+2: NodePath("FamiliesManagers/FireManager"),
+3: NodePath("FamiliesManagers/StormManager"),
+4: NodePath("FamiliesManagers/SerenityManager"),
+5: NodePath("FamiliesManagers/LifeManager"),
+6: NodePath("FamiliesManagers/PoisonManager")
+}
 _movement_module = NodePath("Modules/MovementModule")
 _action_module = NodePath("Modules/ActionModule")
 _interact_module = NodePath("Modules/InteractModule")
@@ -96,33 +98,33 @@ _turret = NodePath("TurretCenterPoint/Turret")
 transform = Transform3D(-1.43, 0, -2.15924e-07, 0, 1.43, 0, 2.15924e-07, 0, -1.43, 0, 0, 0)
 
 [node name="GeneralSkeleton" parent="RhinoModel/Rhino_armature" index="0"]
-bones/0/position = Vector3(0.0472554, 0.509584, 0.0141742)
-bones/0/rotation = Quaternion(-0.0142781, -0.00951184, -0.0294584, 0.999419)
-bones/1/rotation = Quaternion(-0.0414693, 0.215468, 0.956117, -0.194148)
-bones/2/rotation = Quaternion(0.0739933, 0.948417, -0.300521, 0.0686822)
-bones/3/rotation = Quaternion(-0.120937, 0.633521, -0.761419, -0.0653166)
-bones/4/rotation = Quaternion(0.106349, 0.993051, 0.0166941, -0.0475426)
-bones/6/rotation = Quaternion(-0.0509596, 0.275782, 0.92976, 0.238525)
-bones/7/rotation = Quaternion(-0.0921397, 0.893168, -0.439634, 0.0219799)
-bones/8/rotation = Quaternion(0.124309, 0.568165, -0.810841, -0.0653654)
-bones/9/rotation = Quaternion(-0.102611, 0.989733, 0.0319871, -0.0942202)
+bones/0/position = Vector3(0.0467134, 0.501173, 0.0321706)
+bones/0/rotation = Quaternion(0.00389505, -0.0157911, -0.0262837, 0.999522)
+bones/1/rotation = Quaternion(-0.0327042, 0.211045, 0.954075, -0.210076)
+bones/2/rotation = Quaternion(0.0901859, 0.937066, -0.329037, 0.0742229)
+bones/3/rotation = Quaternion(-0.128085, 0.59119, -0.792216, -0.0805167)
+bones/4/rotation = Quaternion(0.10741, 0.992896, 0.0176285, -0.0480683)
+bones/6/rotation = Quaternion(-0.0486296, 0.285999, 0.923697, 0.250247)
+bones/7/rotation = Quaternion(-0.103416, 0.878646, -0.465852, 0.0163683)
+bones/8/rotation = Quaternion(0.1347, 0.539392, -0.829772, -0.0489058)
+bones/9/rotation = Quaternion(-0.104407, 0.989269, 0.0385122, -0.0946668)
 bones/11/rotation = Quaternion(2.96277e-08, -6.51926e-09, -3.72529e-09, 1)
 bones/12/rotation = Quaternion(6.82121e-13, -2.03727e-10, -2.61934e-10, 1)
-bones/13/rotation = Quaternion(0.108104, 0.00858118, -0.000844219, 0.994102)
-bones/14/rotation = Quaternion(0.386638, 0.47104, 0.488841, -0.624234)
-bones/15/rotation = Quaternion(-0.486413, 0.805245, 0.0424639, 0.336421)
-bones/16/rotation = Quaternion(0.0508749, -0.839124, 0.214943, 0.497073)
-bones/17/rotation = Quaternion(-0.0279205, 0.26646, -0.187174, 0.945085)
-bones/19/rotation = Quaternion(0.37689, -0.477989, -0.457715, -0.648056)
-bones/20/rotation = Quaternion(0.376163, 0.893235, -0.0696985, -0.236166)
-bones/21/rotation = Quaternion(0.0454209, 0.928386, -0.175439, 0.324434)
-bones/22/rotation = Quaternion(0.00637648, -0.362228, 0.247871, 0.898505)
+bones/13/rotation = Quaternion(0.10646, 0.00499451, 0.00247792, 0.994301)
+bones/14/rotation = Quaternion(0.348193, 0.468706, 0.551968, -0.595322)
+bones/15/rotation = Quaternion(-0.454481, 0.771468, -0.0166196, 0.44498)
+bones/16/rotation = Quaternion(0.0528799, -0.851722, 0.229078, 0.468292)
+bones/17/rotation = Quaternion(-0.0273255, 0.290557, -0.202728, 0.934736)
+bones/19/rotation = Quaternion(0.404987, -0.447153, -0.438827, -0.665937)
+bones/20/rotation = Quaternion(0.36078, 0.884258, -0.161688, -0.248561)
+bones/21/rotation = Quaternion(0.0418971, 0.923907, -0.168545, 0.340929)
+bones/22/rotation = Quaternion(-0.116227, -0.24216, 0.278283, 0.922176)
 bones/24/rotation = Quaternion(3.25977e-08, -8.56744e-10, 5.43878e-10, 1)
-bones/25/rotation = Quaternion(-0.048653, 0.0598974, -0.108043, 0.991147)
+bones/25/rotation = Quaternion(0.158968, 0.0583385, -0.0212961, 0.985329)
 bones/26/rotation = Quaternion(0.0509365, -0.0042404, 0.00424033, 0.998684)
 
 [node name="BoneAttachment3D" parent="RhinoModel/Rhino_armature/GeneralSkeleton" index="1"]
-transform = Transform3D(0.441748, 0.737572, 0.510731, -0.892533, 0.303695, 0.333399, 0.090799, -0.603122, 0.792464, 0.815672, 0.950984, -0.0525559)
+transform = Transform3D(0.308675, 0.88908, 0.33802, -0.906968, 0.168047, 0.386223, 0.28658, -0.425791, 0.858239, 0.812805, 0.881565, 0.133219)
 
 [node name="AnimationPlayer" parent="RhinoModel" index="1"]
 libraries = {

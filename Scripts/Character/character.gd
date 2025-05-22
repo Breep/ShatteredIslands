@@ -33,14 +33,7 @@ var _fighting_state: GlobalFightingManager.FightingState = GlobalFightingManager
 @onready var _character_visual: CharacterVisual = $CharacterVisual
 @onready var _server_synchronizer: MultiplayerSynchronizer = %ServerSynchronizer
 
-var _families_managers: Dictionary # { Family.FamilyType: FamilyManager }
-@export var _attack_manager: AttackManager
-@export var _defense_manager: DefenseManager
-@export var _fire_manager: FireManager
-@export var _storm_manager: StormManager
-@export var _serenity_manager: SerenityManager
-@export var _poison_manager: PoisonManager
-@export var _life_manager: LifeManager
+@export var _families_managers: Dictionary[Family.FamilyType, FamilyManager]
 
 @export var _movement_module: MovementModule
 @export var _action_module: ActionModule
@@ -60,10 +53,6 @@ func apply_cards_upgrade(deck: PlayerDeck) -> void:
 
 func _init() -> void:
 	stats = CharacterStats.new()
-
-
-func _enter_tree() -> void:
-	_build_families_managers()
 
 
 func _ready() -> void:
@@ -128,23 +117,9 @@ func _init_movement_module(fighting_state: GlobalFightingManager.FightingState) 
 
 # ============================== Families Managers ==============================
 
-func _build_families_managers() -> void:
-	_families_managers[Family.FamilyType.ATTACK] = _attack_manager
-	_families_managers[Family.FamilyType.DEFENSE] = _defense_manager
-	_families_managers[Family.FamilyType.FIRE] = _fire_manager
-	_families_managers[Family.FamilyType.STORM] = _storm_manager
-	_families_managers[Family.FamilyType.SERENITY] = _serenity_manager
-	_families_managers[Family.FamilyType.POISON] = _poison_manager
-	_families_managers[Family.FamilyType.LIFE] = _life_manager
-
-
 func _init_families_managers() -> void:
 	for family_manager in _families_managers.values():
 		family_manager.init(self)
-	
-	_life_manager.revived.connect(_on_life_manager_revived)
-	_attack_manager.focus_changed.connect(_on_auto_attack_manager_focus_changed)
-
 
 func _start_families_managers() -> void:
 	for family_manager in _families_managers.values():
@@ -178,7 +153,6 @@ func _init_modules() -> void:
 
 func _handle_death() -> void:
 	_stop_families_managers()
-	_life_manager.source_is_dead()
 	_movement_module.stop()
 	_auto_attack_module.stop()
 	dead.emit(self)
@@ -215,10 +189,6 @@ func _on_shadow_manager_gain_max_hp_triggered(hp: int) -> void:
 	stats.health_max += hp
 	stats.health += hp
 	_character_visual.update_health_bar(stats.health, stats.health_max)
-
-
-func _on_auto_attack_manager_focus_changed(focused: bool) -> void:
-	_storm_manager.focus_changed(focused)
 
 # ============================== Module callbacks ==============================
 

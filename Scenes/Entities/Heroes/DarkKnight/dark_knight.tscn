@@ -6710,17 +6710,19 @@ properties/5/path = NodePath(".:battle_id")
 properties/5/spawn = true
 properties/5/replication_mode = 2
 
-[node name="DarkKnight" type="CharacterBody3D" node_paths=PackedStringArray("_attack_manager", "_defense_manager", "_fire_manager", "_storm_manager", "_serenity_manager", "_poison_manager", "_life_manager", "_movement_module", "_action_module", "_interact_module", "_auto_attack_module", "_turret") groups=["CHARACTER"]]
+[node name="DarkKnight" type="CharacterBody3D" node_paths=PackedStringArray("_families_managers", "_movement_module", "_action_module", "_interact_module", "_auto_attack_module", "_turret") groups=["CHARACTER"]]
 motion_mode = 1
 script = ExtResource("1_ufk4g")
 _hero = ExtResource("2_5qtoa")
-_attack_manager = NodePath("FamiliesManagers/AttackManager")
-_defense_manager = NodePath("FamiliesManagers/DefenseManager")
-_fire_manager = NodePath("FamiliesManagers/FireManager")
-_storm_manager = NodePath("FamiliesManagers/StormManager")
-_serenity_manager = NodePath("FamiliesManagers/SerenityManager")
-_poison_manager = NodePath("FamiliesManagers/PoisonManager")
-_life_manager = NodePath("FamiliesManagers/LifeManager")
+_families_managers = {
+0: NodePath("FamiliesManagers/AttackManager"),
+1: NodePath("FamiliesManagers/DefenseManager"),
+2: NodePath("FamiliesManagers/FireManager"),
+3: NodePath("FamiliesManagers/StormManager"),
+4: NodePath("FamiliesManagers/SerenityManager"),
+5: NodePath("FamiliesManagers/LifeManager"),
+6: NodePath("FamiliesManagers/PoisonManager")
+}
 _movement_module = NodePath("Modules/MovementModule")
 _action_module = NodePath("Modules/ActionModule")
 _interact_module = NodePath("Modules/InteractModule")
@@ -6731,16 +6733,16 @@ _turret = NodePath("TurretCenterPoint/Turret")
 transform = Transform3D(-1.2, 0, -1.81195e-07, 0, 1.2, 0, 1.81195e-07, 0, -1.2, 0, 0.536197, 0)
 
 [node name="GeneralSkeleton" parent="DarkKnightModel/Armature" index="0"]
-bones/0/position = Vector3(-0.000109824, 0.12861, 0.00627789)
-bones/0/rotation = Quaternion(-0.0185831, -0.582937, -0.0221431, 0.812003)
+bones/0/position = Vector3(-0.000586052, 0.132554, 0.00796046)
+bones/0/rotation = Quaternion(0.00170756, -0.588306, -0.0175626, 0.808446)
 bones/1/rotation = Quaternion(0, 0, 0, 1)
 bones/2/rotation = Quaternion(0, 0, 0, 1)
-bones/3/rotation = Quaternion(0.152629, -0.0139068, -0.0185129, 0.988012)
+bones/3/rotation = Quaternion(0.116696, -0.015407, -0.0032367, 0.993043)
 bones/4/rotation = Quaternion(0, 0, 0, 1)
-bones/5/rotation = Quaternion(0.025764, 0.4536, -0.0471831, 0.889583)
-bones/7/rotation = Quaternion(0.418569, 0.406189, 0.682916, -0.439814)
-bones/8/rotation = Quaternion(0.456184, 0.783212, -0.234728, 0.351252)
-bones/9/rotation = Quaternion(0.259716, -0.768096, 0.260917, 0.523926)
+bones/5/rotation = Quaternion(0.064388, 0.452254, -0.038348, 0.888735)
+bones/7/rotation = Quaternion(0.417966, 0.451658, 0.638053, -0.462815)
+bones/8/rotation = Quaternion(0.472124, 0.757935, -0.283897, 0.349336)
+bones/9/rotation = Quaternion(0.268228, -0.76782, 0.269469, 0.515647)
 bones/10/rotation = Quaternion(0, 0.707107, 0, 0.707107)
 bones/11/rotation = Quaternion(-0.214187, 0.673887, 0.214187, 0.673887)
 bones/12/rotation = Quaternion(-1.49012e-08, 0, 0, 1)
@@ -6756,9 +6758,9 @@ bones/21/rotation = Quaternion(0, 0, 0, 1)
 bones/23/rotation = Quaternion(0, 0, 0, 1)
 bones/24/rotation = Quaternion(0, 0, 0, 1)
 bones/25/rotation = Quaternion(0, 0, 0, 1)
-bones/27/rotation = Quaternion(0.422121, -0.40263, -0.673451, -0.454055)
-bones/28/rotation = Quaternion(0.00288484, 0.903665, -0.306927, -0.298625)
-bones/29/rotation = Quaternion(0.438697, 0.720422, -0.439635, 0.308639)
+bones/27/rotation = Quaternion(0.430155, -0.438254, -0.640011, -0.461829)
+bones/28/rotation = Quaternion(0.00159072, 0.89945, -0.349393, -0.262511)
+bones/29/rotation = Quaternion(0.443292, 0.717742, -0.44424, 0.301646)
 bones/30/rotation = Quaternion(0, -0.707107, 0, 0.707107)
 bones/31/rotation = Quaternion(-0.214187, -0.673887, -0.214187, 0.673887)
 bones/32/rotation = Quaternion(-1.49012e-08, 0, 0, 1)
@@ -6774,17 +6776,17 @@ bones/41/rotation = Quaternion(0, 0, 0, 1)
 bones/43/rotation = Quaternion(0, 0, 0, 1)
 bones/44/rotation = Quaternion(0, 0, 0, 1)
 bones/45/rotation = Quaternion(0, 0, 0, 1)
-bones/47/rotation = Quaternion(0.12056, 0.297209, 0.903871, -0.283106)
-bones/48/rotation = Quaternion(0.00182621, 0.924655, -0.37084, 0.0865352)
-bones/49/rotation = Quaternion(-0.120396, 0.673558, -0.713055, 0.152894)
+bones/47/rotation = Quaternion(0.112813, 0.277152, 0.914488, -0.272344)
+bones/48/rotation = Quaternion(-0.0110937, 0.940326, -0.321697, 0.110343)
+bones/49/rotation = Quaternion(-0.123539, 0.68175, -0.704054, 0.155769)
 bones/50/rotation = Quaternion(0, 1, 0, 0)
-bones/52/rotation = Quaternion(-0.0155567, 0.32321, 0.926197, 0.193526)
-bones/53/rotation = Quaternion(0.0198059, 0.924696, -0.38018, -0.00294272)
-bones/54/rotation = Quaternion(0.177495, 0.640059, -0.735692, -0.132581)
+bones/52/rotation = Quaternion(-0.0214966, 0.298323, 0.937497, 0.177876)
+bones/53/rotation = Quaternion(0.0237232, 0.951012, -0.30803, 0.0114438)
+bones/54/rotation = Quaternion(0.173538, 0.662123, -0.714612, -0.144249)
 bones/55/rotation = Quaternion(0, 1, 0, 0)
 
 [node name="BoneAttachment3D" parent="DarkKnightModel/Armature/GeneralSkeleton" index="1"]
-transform = Transform3D(-0.0160953, -0.970778, -0.23944, 0.955963, 0.055244, -0.28824, 0.293045, -0.233535, 0.927139, -0.291376, 0.368446, -0.0971252)
+transform = Transform3D(0.0342811, -0.970287, -0.239515, 0.968653, 0.0912578, -0.231049, 0.246041, -0.224086, 0.943, -0.304188, 0.403653, -0.0826079)
 
 [node name="AnimationPlayer" parent="DarkKnightModel" index="1"]
 libraries = {

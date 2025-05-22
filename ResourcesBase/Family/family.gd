@@ -11,7 +11,6 @@ enum FamilyType {
 	SERENITY,
 	LIFE,
 	POISON,
-	SHADOW
 }
 
 # ============================== Constant ==============================
@@ -21,7 +20,6 @@ const COLORS = {
 	FamilyType.STORM: Color(0, 0, 1),   # Blue
 	FamilyType.DEFENSE: Color(0.4, 0.26, 0.13),  # Brown
 	FamilyType.FIRE: Color(1, 0, 0),     # Red
-	FamilyType.SHADOW: Color(0, 0, 0),   # Black
 	FamilyType.POISON: Color(0.069, 0.332, 0.106), # Green
 	FamilyType.SERENITY: Color(1, 1, 1), # White
 	FamilyType.LIFE: Color(0.737, 0.379, 0.087), # Orange

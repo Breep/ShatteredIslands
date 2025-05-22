@@ -73,16 +73,18 @@ properties/5/path = NodePath(".:battle_id")
 properties/5/spawn = true
 properties/5/replication_mode = 2
 
-[node name="Rocky" type="CharacterBody3D" node_paths=PackedStringArray("_attack_manager", "_defense_manager", "_fire_manager", "_storm_manager", "_serenity_manager", "_poison_manager", "_life_manager", "_movement_module", "_action_module", "_interact_module", "_auto_attack_module", "_turret") groups=["CHARACTER"]]
+[node name="Rocky" type="CharacterBody3D" node_paths=PackedStringArray("_families_managers", "_movement_module", "_action_module", "_interact_module", "_auto_attack_module", "_turret") groups=["CHARACTER"]]
 motion_mode = 1
 script = ExtResource("1_e8asp")
-_attack_manager = NodePath("FamiliesManagers/AttackManager")
-_defense_manager = NodePath("FamiliesManagers/DefenseManager")
-_fire_manager = NodePath("FamiliesManagers/FireManager")
-_storm_manager = NodePath("FamiliesManagers/StormManager")
-_serenity_manager = NodePath("FamiliesManagers/SerenityManager")
-_poison_manager = NodePath("FamiliesManagers/PoisonManager")
-_life_manager = NodePath("FamiliesManagers/LifeManager")
+_families_managers = {
+0: NodePath("FamiliesManagers/AttackManager"),
+1: NodePath("FamiliesManagers/DefenseManager"),
+2: NodePath("FamiliesManagers/FireManager"),
+3: NodePath("FamiliesManagers/StormManager"),
+4: NodePath("FamiliesManagers/SerenityManager"),
+5: NodePath("FamiliesManagers/LifeManager"),
+6: NodePath("FamiliesManagers/PoisonManager")
+}
 _movement_module = NodePath("Modules/MovementModule")
 _action_module = NodePath("Modules/ActionModule")
 _interact_module = NodePath("Modules/InteractModule")
@@ -93,22 +95,22 @@ _turret = NodePath("TurretCenterPoint/Turret")
 transform = Transform3D(-1.505, 0, -2.27249e-07, 0, 1.505, 0, 2.27249e-07, 0, -1.505, 0, 0, 0)
 
 [node name="GeneralSkeleton" parent="RockyModel/Armature" index="0"]
-bones/0/position = Vector3(0.00758529, 0.505112, 0.0191102)
-bones/0/rotation = Quaternion(-0.0385408, -0.367046, -0.0118818, 0.929328)
-bones/1/rotation = Quaternion(-0.0237972, 0.326288, 0.937972, -0.114798)
-bones/2/rotation = Quaternion(0.0359353, 0.944623, -0.324702, -0.0310525)
-bones/3/rotation = Quaternion(-0.062524, 0.733887, -0.672084, 0.0761857)
-bones/5/rotation = Quaternion(-0.0984637, 0.0375186, 0.979422, 0.172136)
-bones/6/rotation = Quaternion(0.0221183, 0.959518, -0.244718, -0.137659)
-bones/7/rotation = Quaternion(0.123066, 0.565924, -0.801452, -0.149194)
-bones/11/rotation = Quaternion(0.0104973, 0.0605116, 0.0154117, 0.997993)
-bones/12/rotation = Quaternion(0.462306, 0.231511, 0.599842, -0.610628)
-bones/13/rotation = Quaternion(-0.109793, 0.841645, -0.487955, 0.203666)
-bones/14/rotation = Quaternion(0.267475, -0.729226, 0.293086, 0.557483)
-bones/16/rotation = Quaternion(0.259446, -0.435664, -0.727173, -0.462714)
-bones/17/rotation = Quaternion(0.262741, 0.841505, -0.471466, -0.0235777)
-bones/18/rotation = Quaternion(0.263409, 0.775858, -0.191807, 0.54025)
-bones/21/rotation = Quaternion(0.152527, 0.301546, -0.00761901, 0.941142)
+bones/0/position = Vector3(0.00796126, 0.504783, 0.0183002)
+bones/0/rotation = Quaternion(-0.0381242, -0.367108, -0.0119107, 0.92932)
+bones/1/rotation = Quaternion(-0.0244062, 0.327756, 0.937388, -0.115259)
+bones/2/rotation = Quaternion(0.0361234, 0.944574, -0.324819, -0.0311178)
+bones/3/rotation = Quaternion(-0.0625619, 0.734549, -0.671339, 0.0763408)
+bones/5/rotation = Quaternion(-0.0974368, 0.0404354, 0.979465, 0.171813)
+bones/6/rotation = Quaternion(0.0222849, 0.958632, -0.247796, -0.138295)
+bones/7/rotation = Quaternion(0.122845, 0.565269, -0.802, -0.148921)
+bones/11/rotation = Quaternion(0.0102806, 0.0597452, 0.015474, 0.998041)
+bones/12/rotation = Quaternion(0.461752, 0.230325, 0.602156, -0.609216)
+bones/13/rotation = Quaternion(-0.111212, 0.841974, -0.486492, 0.205031)
+bones/14/rotation = Quaternion(0.263868, -0.730768, 0.290982, 0.558285)
+bones/16/rotation = Quaternion(0.258766, -0.433432, -0.728945, -0.462402)
+bones/17/rotation = Quaternion(0.264188, 0.843816, -0.466348, -0.0264307)
+bones/18/rotation = Quaternion(0.261711, 0.778412, -0.190449, 0.537877)
+bones/21/rotation = Quaternion(0.166844, 0.300156, -0.00987067, 0.939134)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../RockyModel")
