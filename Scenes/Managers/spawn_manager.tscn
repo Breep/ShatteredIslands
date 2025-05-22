@@ -2,13 +2,5 @@
 
 [ext_resource type="Script" uid="uid://ddvqvwc47kc24" path="res://Scripts/FightingArea/spawn_manager.gd" id="1_qkh47"]
 
-[node name="SpawnManager" type="Node3D" node_paths=PackedStringArray("_entities_node", "_projectiles_node")]
+[node name="SpawnManager" type="Node3D"]
 script = ExtResource("1_qkh47")
-_entities_node = NodePath("Entities")
-_projectiles_node = NodePath("Projectiles")
-
-[node name="Projectiles" type="Node3D" parent="."]
-unique_name_in_owner = true
-
-[node name="Entities" type="Node3D" parent="."]
-unique_name_in_owner = true

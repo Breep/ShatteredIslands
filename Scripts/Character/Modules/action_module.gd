@@ -1,6 +1,24 @@
 class_name ActionModule
 extends Module
 
+@export var _storm_manager: StormManager
+@export var _defense_manager: DefenseManager
+@export var _life_manager: LifeManager
+@export var _fire_manager: FireManager
+@export var _poison_manager: PoisonManager
+@export var _serenity_manager: SerenityManager
+
+var _spawn_manager: SpawnManager
+
+# ============================== Public functions ==============================
+
+func connect_to_spawn_manager(spawn_manager: SpawnManager) -> void:
+	if spawn_manager == null:
+		printerr("ActionModule: Trying to connect to a <null> SpawnManager")
+		return
+	
+	_spawn_manager = spawn_manager
+
 # ============================== Attack ==============================
 
 # [All]
@@ -19,7 +37,7 @@ func direct_attack(target: Character, damage: int, damage_type: Utils.DamageType
 	elif damage_type == Utils.DamageType.MAGICAL:
 		damage *= multiplier["magical"]
 	
-	Events.damage_done.emit(_source, target, damage, damage_type, multiplier["is_critical"])
+	Events.damage_done.emit(source, target, damage, damage_type, multiplier["is_critical"])
 	#_attack.rpc(target.player.id, damage, damage_type, is_critical)
 
 
@@ -33,7 +51,7 @@ func direct_attack_percent(target: Character, damage_percent: float, damage_type
 		Utils.PercentModifier.CURRENT_HP:
 			hp = target.stats.health
 		Utils.PercentModifier.LOST_HP:
-			hp = target.stats.health_max - _source.stats.health
+			hp = target.stats.health_max - source.stats.health
 	var damage = hp * damage_percent  / 100.0
 	direct_attack(target, damage, damage_type)
 
@@ -55,13 +73,13 @@ func _get_damage_multipliers() -> Dictionary:
 	var physical_multiplier: float = 1.0
 	var magical_multiplier: float = 1.0
 	
-	var crit_chance = _source.stats.physical_critical_chance
+	var crit_chance = source.stats.physical_critical_chance
 	if _storm_manager != null:
 		crit_chance = _storm_manager.get_critical_chance()
 	
 	if Utils.is_randomize_modifier_active(crit_chance):
 		is_critical = true
-		var crit_multiplier = _source.stats.physical_critical_multiplier
+		var crit_multiplier = source.stats.physical_critical_multiplier
 		if _storm_manager != null:
 			crit_multiplier = _storm_manager.get_critical_multiplier(Utils.DamageType.PHYSICAL)
 		physical_multiplier *= crit_multiplier
@@ -76,15 +94,15 @@ func _get_damage_multipliers() -> Dictionary:
 		physical_multiplier = _defense_manager.get_increased_damage_done_from_power_wrist(physical_multiplier)
 		magical_multiplier = _defense_manager.get_increased_damage_done_from_power_wrist(magical_multiplier)
 	
-	if _heal_manager != null:
-		physical_multiplier = _heal_manager.get_reduced_damage_dealed_from_pacify(physical_multiplier) # Reduce % of ALL damage
-		magical_multiplier = _heal_manager.get_reduced_damage_dealed_from_pacify(magical_multiplier) # Reduce % of ALL damage
+	if _serenity_manager != null:
+		physical_multiplier = _serenity_manager.get_reduced_damage_dealed_from_pacify(physical_multiplier) # Reduce % of ALL damage
+		magical_multiplier = _serenity_manager.get_reduced_damage_dealed_from_pacify(magical_multiplier) # Reduce % of ALL damage
 	
 	return { "physical": physical_multiplier, "magical": magical_multiplier, "is_critical": is_critical }
 
 
 func _spawn_projectile(target: Character, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
-	Shared.spawn_managers_ref[target.battle_id].spawn_projectile(_source, target, projectile_type, projectile_spawn, projectile_stats)
+	_spawn_manager.spawn_projectile(source, target, projectile_type, projectile_spawn, projectile_stats)
 
 # ============================== Heal ==============================
 
@@ -97,8 +115,8 @@ func _heal(target_peer_id: int, heal_amount: int) -> void:
 func heal(target: Character, heal_amount: int) -> void:
 	if not multiplayer.is_server(): return
 	#signal heal_done(source, target, heal_amount)
-	Events.heal_done.emit(_source, target, heal_amount)
-	#target.take_heal(_source, heal_amount)
+	Events.heal_done.emit(source, target, heal_amount)
+	#target.take_heal(source, heal_amount)
 	#_heal_manager.notify_heal()
 	_heal.rpc(target.player.id, heal_amount)
 
@@ -112,7 +130,7 @@ func heal_percent(target: Character, heal_percent: float, percent_modifier: Util
 		Utils.PercentModifier.CURRENT_HP:
 			hp = target.stats.health
 		Utils.PercentModifier.LOST_HP:
-			hp = target.stats.health_max - _source.stats.health
+			hp = target.stats.health_max - source.stats.health
 	var heal_amount: int = (heal_percent * hp) / 100
 	heal(target, heal_amount)
 
@@ -127,4 +145,4 @@ func _inflict_condition_stacks(stacks_number: int, stack_type: Utils.StackType, 
 func inflict_condition_stacks(target: Character, stacks_number: int, stack_type: Utils.StackType) -> void:
 	if not multiplayer.is_server(): return
 	print("Inflict POISON")
-	Events.condition_stacks_done.emit(_source, target, stacks_number, stack_type)
+	Events.condition_stacks_done.emit(source, target, stacks_number, stack_type)

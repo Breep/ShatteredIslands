@@ -23,7 +23,13 @@ var spawn_manager: SpawnManager
 @export var _battle_type: Battle.BattleType
 
 @export var _fighting_manager: FightingManager
+var fighting_manager: FightingManager:
+	get: return _fighting_manager
+
 @export var _entity_manager: EntityManager
+var entity_manager: EntityManager:
+	get: return _entity_manager
+
 @export var _ui_fighting_area: UIFightingArea
 
 
@@ -53,6 +59,8 @@ func start_fight(characters: Array[Character], battle_type: Battle.BattleType) -
 		printerr("FightingArea: No SpawnManager for this battle type: ", battle_type)
 	
 	spawn_manager.spawn_characters(characters)
+	for character in characters:
+		character.connect_to_fighting_area(self)
 	
 	_fighting_manager.fight_is_over.connect(_on_fighting_manager_fight_is_over, CONNECT_ONE_SHOT)
 	_fighting_manager.start(characters)

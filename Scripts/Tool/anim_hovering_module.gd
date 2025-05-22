@@ -11,7 +11,7 @@ extends Node
 
 func _ready():
 	if _owner == null:
-		printerr("AnimHoverModule: Owner isn't set ! ", get_path())
+		printerr("AnimHoverModule: Owner isn't set ! [", get_path(), "]")
 		return
 	
 	if _random_start:

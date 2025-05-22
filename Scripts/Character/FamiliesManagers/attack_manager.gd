@@ -23,8 +23,8 @@ var _previous_target: Character
 
 # ============================== Public functions ==============================
 
-func _specific_init() -> void:
-	_attack_stats = _source.stats.auto_attack
+func _ready() -> void:
+	_attack_stats = source.stats.auto_attack
 	_create_optional_timers()
 
 
@@ -42,23 +42,23 @@ func notice_auto_attack_done(target: Character) -> void:
 	_aa_counter += 1
 	
 	# [Focus]
-	if _source.stats.storm.focus_target_activated:
+	if source.stats.storm.focus_target_activated:
 		_check_storm_focus(target)
 		_previous_target = target
 	
 	# [Necrosis scythe]
 	if _attack_stats.increase_max_hp_activated and _aa_counter % _attack_stats.increase_max_hp_period == 0:
-		_source.stats.health_max += _attack_stats.increase_max_hp_amount
-		_source.stats.health += _attack_stats.increase_max_hp_amount
+		source.stats.health_max += _attack_stats.increase_max_hp_amount
+		source.stats.health += _attack_stats.increase_max_hp_amount
 	
 	# [Sword armor]
 	if Utils.is_randomize_modifier_active(_attack_stats.armor_stacks_chance):
-		_source.stats.defense.armor_stacks += _attack_stats.armor_stacks_amount
+		source.stats.defense.armor_stacks += _attack_stats.armor_stacks_amount
 	
 	# [Knife of terror]
 	if Utils.is_randomize_modifier_active(_attack_stats.healing_attack_chance):
-		var heal_target: Character = _source.target_manager.get_target(TargetManager.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
-		_source.heal(heal_target, _attack_stats.healing_attack_heal_amount)
+		var heal_target: Character = source.target_module.get_target(TargetModule.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
+		source.heal(heal_target, _attack_stats.healing_attack_heal_amount)
 
 
 func update_aa_projectile_stats(projectile_stats: ProjectileStats) -> void:

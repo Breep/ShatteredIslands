@@ -1,5 +1,5 @@
-class_name TargetManager
-extends Node
+class_name TargetModule
+extends Module
 
 # ============================== Enums ==============================
 
@@ -23,33 +23,29 @@ enum MultipleTargettingStrategy {
 	ENEMIES, # (can be empty)
 }
 
-# ============================== Export variables ==============================
-
-@export var _source: Entity # Owner of the TargetManager
-
 # ============================== Private variables ==============================
 
 var _entities: Array[Entity] # All character on the fighting scene
 var _enemies: Array[Entity] # All enemies of the owned character
 var _allies: Array[Entity] # All allies of the owned character
 
-var _entity_manager: EntityManager # The FightingScene EntityManager
+# ============================== Node base functions ==============================
+
+func _ready() -> void:
+	if source == null:
+		printerr("TargetModule: TargetModule need a ref to its owner")
+		return
 
 # ============================== Public functions ==============================
 
-func init() -> void:
-	if _source == null:
-		printerr("TargetManager: TargetManager need a ref to its owner")
+func connect_to_entity_manager(entity_manager: EntityManager) -> void:
+	if entity_manager == null:
+		printerr("TargetModule: entity_manager is null")
 		return
 	
-	_entity_manager = Shared.entity_managers_ref[_source.battle_id]
-	if _entity_manager == null:
-		printerr("TargetManager: There is no EntityManager on any parent nodes")
-		return
-	
-	_entities = _entity_manager.entities.values()
-	_entity_manager.entity_spawned.connect(_on_entity_manager_entity_spawned)
-	_entity_manager.entity_dead.connect(_on_entity_manager_entity_dead)
+	_entities = entity_manager.entities.values()
+	entity_manager.entity_spawned.connect(_on_entity_manager_entity_spawned)
+	entity_manager.entity_dead.connect(_on_entity_manager_entity_dead)
 	_enemies = _get_enemies_from_entities()
 	_allies = _get_allies_from_entities()
 
@@ -58,33 +54,33 @@ func init() -> void:
 func get_target(targetting_strategy: TargettingStrategy) -> Entity:
 	match targetting_strategy:
 		TargettingStrategy.CLOSEST:
-			return _get_closest(_entities, _source)
+			return _get_closest(_entities, source)
 		TargettingStrategy.CLOSEST_ENEMY:
-			return _get_closest(_enemies, _source)
+			return _get_closest(_enemies, source)
 		TargettingStrategy.CLOSEST_ALLY:
-			return _get_closest(_allies, _source)
+			return _get_closest(_allies, source)
 		TargettingStrategy.FARTHEST:
-			return _get_farthest(_entities, _source)
+			return _get_farthest(_entities, source)
 		TargettingStrategy.FARTHEST_ENEMY:
-			return _get_farthest(_enemies, _source)
+			return _get_farthest(_enemies, source)
 		TargettingStrategy.FARTHEST_ALLY:
-			return _get_farthest(_allies, _source)
+			return _get_farthest(_allies, source)
 		TargettingStrategy.RANDOM:
-			return _get_random(_entities, _source)
+			return _get_random(_entities, source)
 		TargettingStrategy.RANDOM_ENEMY:
-			return _get_random(_enemies, _source)
+			return _get_random(_enemies, source)
 		TargettingStrategy.RANDOM_ALLY:
-			return _get_random(_allies, _source)
+			return _get_random(_allies, source)
 		TargettingStrategy.RANDOM_ALLY_INCLUDING_SELF:
 			return _get_random(_allies, null)
 		TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF:
 			return _get_lowest_hp(_allies, null)
 	
-	printerr("TargetManager: Undef strategy for the TargetManager")
+	printerr("TargetModule: Undef strategy for the TargetModule")
 	return null
 
 
-# Get closest character of "from_character" who is an enemy of _source
+# Get closest character of "from_character" who is an enemy of source
 func get_closest_enemy_from(from_character: Entity) -> Entity:
 	if _enemies.is_empty():
 		return null
@@ -113,7 +109,7 @@ func get_targets(strategy: MultipleTargettingStrategy) -> Array[Entity]:
 		MultipleTargettingStrategy.ENEMIES:
 			return _enemies.duplicate()
 	
-	printerr("TargetManager: Unknown strategy")
+	printerr("TargetModule: Unknown strategy")
 	var empty: Array[Entity]
 	return empty
 
@@ -122,7 +118,7 @@ func get_targets(strategy: MultipleTargettingStrategy) -> Array[Entity]:
 func _get_enemies_from_entities() -> Array[Entity]:
 	var ret: Array[Entity]
 	for character in _entities:
-		if character.team != _source.team:
+		if character.team != source.team:
 			ret.append(character)
 	return ret
 
@@ -130,7 +126,7 @@ func _get_enemies_from_entities() -> Array[Entity]:
 func _get_allies_from_entities() -> Array[Entity]:
 	var ret: Array[Entity]
 	for character in _entities:
-		if character.team == _source.team:
+		if character.team == source.team:
 			ret.append(character)
 	return ret
 
@@ -156,8 +152,8 @@ func _get_closest(characters: Array[Entity], excluded_character: Entity) -> Enti
 	
 	var closest_character = characters_copy[0]
 	for character in characters:
-		if character != _source:
-			if (character.position - _source.position).length_squared() < (closest_character.position - _source.position).length_squared():
+		if character != source:
+			if (character.position - source.position).length_squared() < (closest_character.position - source.position).length_squared():
 				closest_character = character
 	
 	return closest_character
@@ -178,8 +174,8 @@ func _get_farthest(characters: Array[Entity], excluded_character: Entity) -> Ent
 	
 	var farthest_character = characters_copy[0]
 	for character in characters:
-		if character != _source:
-			if (character.global_position - _source.global_position).length_squared() > (farthest_character.global_position - _source.global_position).length_squared():
+		if character != source:
+			if (character.global_position - source.global_position).length_squared() > (farthest_character.global_position - source.global_position).length_squared():
 				farthest_character = character
 	
 	return farthest_character
@@ -236,7 +232,7 @@ func _get_array_without_untargetable_targets(characters: Array[Entity]) -> Array
 # ============================== Callback ==============================
 
 func _on_entity_manager_entity_spawned(who: Entity) -> void:
-	if who.team != _source.team:
+	if who.team != source.team:
 		_enemies.append(who)
 	else:
 		_allies.append(who)

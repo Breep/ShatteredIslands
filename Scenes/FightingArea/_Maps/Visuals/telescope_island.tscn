@@ -562,6 +562,21 @@ transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 
 [node name="lighthouse_light" parent="point rotation phare/phare" index="0"]
 transform = Transform3D(-0.990928, 0.0888636, -0.100823, -0.0653322, -0.974105, -0.21645, -0.117446, -0.2079, 0.971074, 0.169092, -13.4409, 0.0631752)
 
+[node name="Node3D" type="Node3D" parent="point rotation phare/phare" index="2"]
+transform = Transform3D(0.992319, -3.02703e-08, -0.123705, 3.02703e-08, 1, -1.87956e-09, 0.123705, -1.87952e-09, 0.992319, 0, -13.8531, 0.0101528)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="point rotation phare/phare/Node3D" index="0"]
+transform = Transform3D(1, 2.55488e-09, 1.52969e-08, 0, 0.986337, -0.164738, -1.55088e-08, 0.164738, 0.986337, -0.18452, 0, -0.966408)
+light_energy = 2.0
+shadow_enabled = true
+spot_range = 100.0
+spot_attenuation = 0.1
+spot_angle = 10.0
+
+[node name="AnimRotatingModule" parent="point rotation phare/phare/Node3D" index="1" node_paths=PackedStringArray("_owner") instance=ExtResource("2_i0t36")]
+_owner = NodePath("..")
+_rot_axis = 1
+
 [node name="AnimRotatingModule" parent="point rotation phare" index="2" node_paths=PackedStringArray("_owner") instance=ExtResource("2_i0t36")]
 _owner = NodePath("..")
 _rot_axis = 1

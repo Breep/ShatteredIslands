@@ -18,8 +18,8 @@ var _fire_stats: CharacterFireStats # Ref to the owner fire stats
 
 # ============================== Public functions ==============================
 
-func _specific_init() -> void:
-	_fire_stats = _source.stats.fire
+func _ready() -> void:
+	_fire_stats = source.stats.fire
 	_create_optional_timers()
 
 
@@ -52,7 +52,7 @@ func get_increased_damage(damage: float, damage_type: Utils.DamageType) -> float
 	if not _fire_stats.damage_increase_on_low_life_enemy_activated:
 		return damage
 	
-	var health_ratio_percent: float = (_source.stats.health as float / _source.stats.health_max as float) * 100.0
+	var health_ratio_percent: float = (source.stats.health as float / source.stats.health_max as float) * 100.0
 	if health_ratio_percent >= _fire_stats.damage_increase_on_low_life_enemy_threshold:
 		return damage
 	
@@ -80,22 +80,22 @@ func _lanch_optional_spells() -> void:
 	# [Ring of fire healing]
 	if _fire_stats.healing_fire_area_activated:
 		var healing_fire_area: HealingFireArea = _healing_fire_area_scene.instantiate()
-		healing_fire_area.init(_source, _fire_stats.healing_fire_area_damage, _fire_stats.healing_fire_area_heal, 
+		healing_fire_area.init(source, _fire_stats.healing_fire_area_damage, _fire_stats.healing_fire_area_heal, 
 				_fire_stats.healing_fire_area_period, _fire_stats.healing_fire_area_range)
-		_source.add_child(healing_fire_area)
+		source.add_child(healing_fire_area)
 		healing_fire_area.position = Vector3.ZERO
 	
 	# [Fire trail]
 	if _fire_stats.trail_activated:
 		var fire_trail: FireTrail = _fire_trail_scene.instantiate()
-		fire_trail.init(_source, _fire_stats.trail_damage_percent, _fire_stats.trail_period, _fire_stats.trail_life_time)
-		_source.add_child(fire_trail)
+		fire_trail.init(source, _fire_stats.trail_damage_percent, _fire_stats.trail_period, _fire_stats.trail_life_time)
+		source.add_child(fire_trail)
 		fire_trail.position = Vector3.ZERO
 
 # ============================== Callbacks functions ==============================
 
 func _on_firebolt_timer_timeout() -> void:
-	var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST_ENEMY)
+	var target = source.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
 	if target == null:
 		return
 		
@@ -107,7 +107,7 @@ func _on_firebolt_timer_timeout() -> void:
 
 
 func _on_nuke_timer_timeout() -> void:
-	var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST_ENEMY)
+	var target = source.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
 	if target == null:
 		return
 	
@@ -115,12 +115,12 @@ func _on_nuke_timer_timeout() -> void:
 
 
 func _on_meteor_timer_timeout() -> void:
-	var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST_ENEMY)
+	var target = source.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
 	if target == null:
 		return
 	
 	var meteor: Meteor = _meteor_scene.instantiate()
-	meteor.init(_source, _fire_stats.meteor_damage, _fire_stats.meteor_deploy_time, _fire_stats.meteor_area_range)
+	meteor.init(source, _fire_stats.meteor_damage, _fire_stats.meteor_deploy_time, _fire_stats.meteor_area_range)
 	get_tree().current_scene.add_child(meteor)
 	meteor.position = target.position
 

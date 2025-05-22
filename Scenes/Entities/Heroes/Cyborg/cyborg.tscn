@@ -1,20 +1,9 @@
-[gd_scene load_steps=29 format=3 uid="uid://g706yyhstscc"]
+[gd_scene load_steps=18 format=3 uid="uid://g706yyhstscc"]
 
 [ext_resource type="Script" uid="uid://bmtq7u6jxaxhj" path="res://Scenes/Entities/Heroes/Cyborg/cyborg.gd" id="1_t1mer"]
 [ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Scenes/Character/character_visual.tscn" id="2_1njov"]
 [ext_resource type="Resource" uid="uid://fb28rdceanxm" path="res://Resources/Heroes/cyborg.tres" id="2_frf0o"]
-[ext_resource type="PackedScene" uid="uid://d0g0xkyr876lc" path="res://Scenes/Character/Modules/movement_module.tscn" id="3_jcaoq"]
-[ext_resource type="PackedScene" uid="uid://617x5c1qrdpg" path="res://Scenes/Character/Modules/action_module.tscn" id="4_355xw"]
-[ext_resource type="PackedScene" uid="uid://bbwmtb5op8clu" path="res://Scenes/Character/Modules/interact_module.tscn" id="5_oxef2"]
-[ext_resource type="PackedScene" uid="uid://b6yg1bhhmnicr" path="res://Scenes/Character/Modules/auto_attack_module.tscn" id="6_uvhhj"]
-[ext_resource type="PackedScene" uid="uid://bext8rh783yay" path="res://Scenes/Character/FamiliesManagers/defense_manager.tscn" id="7_el656"]
-[ext_resource type="PackedScene" uid="uid://cl10r3idwllx" path="res://Scenes/Character/FamiliesManagers/fire_manager.tscn" id="8_io6re"]
-[ext_resource type="PackedScene" uid="uid://6holmj326e1y" path="res://Scenes/Character/FamiliesManagers/life_manager.tscn" id="9_8trms"]
-[ext_resource type="PackedScene" uid="uid://cvihi4los882b" path="res://Scenes/Character/FamiliesManagers/poison_manager.tscn" id="10_islo6"]
-[ext_resource type="PackedScene" uid="uid://bdl1xxjdbeugn" path="res://Scenes/Character/FamiliesManagers/serenity_manager.tscn" id="11_ytjn1"]
-[ext_resource type="PackedScene" uid="uid://bjbfnigvphbfc" path="res://Scenes/Character/FamiliesManagers/storm_manager.tscn" id="13_qlvt5"]
-[ext_resource type="PackedScene" uid="uid://crqesljjrouec" path="res://Scenes/Character/FamiliesManagers/attack_manager.tscn" id="14_4m78h"]
-[ext_resource type="PackedScene" uid="uid://n30ifkjad344" path="res://Scenes/Character/Modules/target_manager.tscn" id="15_xn65e"]
+[ext_resource type="PackedScene" uid="uid://qgjyscmtp6t3" path="res://Scenes/Character/character_logic.tscn" id="5_sriek"]
 [ext_resource type="PackedScene" uid="uid://5en73tnp30yw" path="res://Scenes/Entities/Heroes/Cyborg/cyborg_model.tscn" id="16_frf0o"]
 [ext_resource type="PackedScene" uid="uid://dqrhym1sskng8" path="res://Scenes/Entities/Turret/turret.tscn" id="17_lbjpi"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Scenes/Tool/anim_hovering_module.tscn" id="18_4bsoj"]
@@ -87,98 +76,85 @@ properties/5/path = NodePath(".:battle_id")
 properties/5/spawn = true
 properties/5/replication_mode = 2
 
-[node name="Cyborg" type="CharacterBody3D" node_paths=PackedStringArray("_families_managers", "_movement_module", "_action_module", "_interact_module", "_auto_attack_module", "_turret") groups=["CHARACTER"]]
-motion_mode = 1
+[node name="Cyborg" type="CharacterBody3D" node_paths=PackedStringArray("_character_logic", "_turret") groups=["CHARACTER"]]
 script = ExtResource("1_t1mer")
 _hero = ExtResource("2_frf0o")
-_families_managers = {
-0: NodePath("FamiliesManagers/AttackManager"),
-1: NodePath("FamiliesManagers/DefenseManager"),
-2: NodePath("FamiliesManagers/FireManager"),
-3: NodePath("FamiliesManagers/StormManager"),
-4: NodePath("FamiliesManagers/SerenityManager"),
-5: NodePath("FamiliesManagers/LifeManager"),
-6: NodePath("FamiliesManagers/PoisonManager")
-}
-_movement_module = NodePath("Modules/MovementModule")
-_action_module = NodePath("Modules/ActionModule")
-_interact_module = NodePath("Modules/InteractModule")
-_auto_attack_module = NodePath("Modules/AutoAttackModule")
+_character_logic = NodePath("CharacterLogic")
 _turret = NodePath("TurretCenterPoint/Turret")
 
 [node name="CyborgModel" parent="." instance=ExtResource("16_frf0o")]
 transform = Transform3D(0.76, 0, 0, 0, 0.76, 0, 0, 0, 0.76, 0, 0, 0)
 
 [node name="Skeleton3D" parent="CyborgModel/cyborg_animated/Idle_main" index="0"]
-bones/0/position = Vector3(0.532795, -0.995193, -66.4154)
-bones/0/rotation = Quaternion(-0.683852, -0.268354, 0.249965, 0.630754)
-bones/1/rotation = Quaternion(0.05803, 0.0396453, -0.00957986, 0.997481)
+bones/0/position = Vector3(0.507055, -0.682703, -66.5269)
+bones/0/rotation = Quaternion(-0.685126, -0.268173, 0.249102, 0.629789)
+bones/1/rotation = Quaternion(0.0568323, 0.03971, -0.00939372, 0.99755)
 bones/2/position = Vector3(1.78814e-07, 11.1428, 5.2154e-08)
-bones/2/rotation = Quaternion(0.0998016, 0.0802385, -0.0195183, 0.991575)
-bones/3/rotation = Quaternion(0.0998016, 0.0802386, -0.0195183, 0.991575)
+bones/2/rotation = Quaternion(0.0971255, 0.0802687, -0.01885, 0.991851)
+bones/3/rotation = Quaternion(0.0970933, 0.0802967, -0.0188635, 0.991852)
 bones/4/position = Vector3(2.38419e-07, 14.3264, 1.3199e-06)
-bones/4/rotation = Quaternion(-0.0417478, -0.0110563, 0.00208338, 0.999065)
+bones/4/rotation = Quaternion(-0.0346132, -0.0106201, 0.00223794, 0.999342)
 bones/5/position = Vector3(-7.15256e-07, 5.66684, 0.721662)
-bones/5/rotation = Quaternion(-0.0495492, 0.176413, -0.010475, 0.983013)
+bones/5/rotation = Quaternion(-0.0670283, 0.177946, -0.00606199, 0.981736)
 bones/7/position = Vector3(9.74145, 12.3086, 0.0875115)
-bones/7/rotation = Quaternion(0.606196, 0.383309, -0.584347, 0.379656)
+bones/7/rotation = Quaternion(0.598751, 0.392399, -0.584582, 0.381817)
 bones/8/position = Vector3(-1.67683e-06, 15.4673, 9.8134e-06)
-bones/8/rotation = Quaternion(0.3907, -0.103661, 0.0703138, 0.911956)
+bones/8/rotation = Quaternion(0.398148, -0.0978701, 0.0699403, 0.9094)
 bones/9/position = Vector3(1.15998e-06, 29.4579, 2.78081e-06)
-bones/9/rotation = Quaternion(-0.0197487, 0.0487477, 0.406164, 0.912285)
+bones/9/rotation = Quaternion(-0.0162683, 0.0533836, 0.41407, 0.908533)
 bones/10/position = Vector3(-4.71186e-06, 22.3492, -4.0286e-06)
-bones/10/rotation = Quaternion(-0.158064, 0.344658, -0.0211638, 0.925083)
+bones/10/rotation = Quaternion(-0.121933, 0.343768, -0.014766, 0.930988)
 bones/11/position = Vector3(-4.40956, 5.12982, -2.17557e-06)
-bones/11/rotation = Quaternion(0.179236, 0.0997279, 0.242057, 0.948334)
+bones/11/rotation = Quaternion(0.178901, 0.100268, 0.237856, 0.949402)
 bones/12/position = Vector3(-0.550369, 5.3836, -8.04969e-06)
-bones/12/rotation = Quaternion(-0.00342076, -0.0211213, -0.0430826, 0.998842)
+bones/12/rotation = Quaternion(-0.00362817, -0.0213846, -0.0434086, 0.998822)
 bones/13/position = Vector3(-1.04274, 5.68668, 2.77535e-06)
 bones/13/rotation = Quaternion(-0.00174596, -0.0160434, 0.285693, 0.958185)
 bones/14/position = Vector3(1.5931, 3.78706, 9.10555e-06)
 bones/15/position = Vector3(4.20351e-06, 10.8881, -1.10377e-05)
-bones/15/rotation = Quaternion(0.00486621, -0.0040053, 0.104589, 0.994496)
+bones/15/rotation = Quaternion(0.0161027, -0.00422298, 0.111371, 0.99364)
 bones/16/position = Vector3(0.474795, 6.82247, -7.41947e-06)
-bones/16/rotation = Quaternion(0.134549, -0.00383207, -0.0513977, 0.989566)
+bones/16/rotation = Quaternion(0.147501, -0.00372652, -0.0431472, 0.988113)
 bones/17/position = Vector3(-0.414468, 2.83215, -3.89755e-07)
 bones/17/rotation = Quaternion(-0.000860087, 0.0106412, 0.0646153, 0.997853)
 bones/18/position = Vector3(-0.0603305, 3.76892, -2.18859e-06)
-bones/19/rotation = Quaternion(0.652314, -0.348913, 0.54598, 0.393258)
+bones/19/rotation = Quaternion(0.64484, -0.358055, 0.546545, 0.396569)
 bones/20/position = Vector3(1.0376e-06, 15.4673, 2.48184e-06)
-bones/20/rotation = Quaternion(0.365696, 0.115879, 0.15877, 0.909742)
+bones/20/rotation = Quaternion(0.379264, 0.10471, 0.160796, 0.905174)
 bones/21/position = Vector3(3.1371e-06, 29.4396, 1.40583e-05)
-bones/21/rotation = Quaternion(0.0422243, 0.0330284, -0.36169, 0.930756)
+bones/21/rotation = Quaternion(0.049469, 0.0189617, -0.363602, 0.930047)
 bones/22/position = Vector3(1.02922e-06, 22.3403, -4.65205e-06)
-bones/22/rotation = Quaternion(0.0711005, -0.325013, -0.123105, 0.934964)
-bones/23/rotation = Quaternion(0.0692553, 0.0615596, -0.269343, 0.958576)
+bones/22/rotation = Quaternion(0.0823098, -0.319634, -0.127456, 0.935315)
+bones/23/rotation = Quaternion(0.0686448, 0.0587638, -0.276765, 0.95668)
 bones/24/position = Vector3(0.302023, 5.48551, -6.21536e-07)
-bones/24/rotation = Quaternion(0.0890237, 0.00251004, 0.141908, 0.985865)
+bones/24/rotation = Quaternion(0.0837208, 0.00305572, 0.139629, 0.986654)
 bones/25/position = Vector3(0.0644143, 5.8767, 2.55981e-06)
 bones/25/rotation = Quaternion(9.38624e-05, -0.0021126, -0.0553102, 0.998467)
 bones/26/position = Vector3(-0.366436, 3.66204, -1.38962e-06)
 bones/27/position = Vector3(1.69936e-07, 10.2104, -8.9313e-06)
-bones/27/rotation = Quaternion(0.0349962, 0.0169655, -0.0807732, 0.995974)
+bones/27/rotation = Quaternion(0.0381883, 0.0177259, -0.0844123, 0.995541)
 bones/28/position = Vector3(-1.15885, 8.16615, 6.80183e-06)
-bones/28/rotation = Quaternion(0.132219, 0.0107676, 0.122812, 0.983524)
+bones/28/rotation = Quaternion(0.132563, 0.0107552, 0.122595, 0.983505)
 bones/29/position = Vector3(0.601485, 2.47643, -1.87388e-06)
 bones/29/rotation = Quaternion(-0.00383413, -0.0202386, -0.0510233, 0.998485)
 bones/30/position = Vector3(0.557369, 4.06822, -7.88882e-07)
 bones/31/position = Vector3(11.1288, -5.30214, -0.0391559)
-bones/31/rotation = Quaternion(0.0786943, 0.216124, 0.96538, -0.123039)
+bones/31/rotation = Quaternion(0.0791939, 0.211838, 0.9665, -0.121371)
 bones/32/position = Vector3(-6.53908e-07, 30.2703, -1.77239e-06)
-bones/32/rotation = Quaternion(-0.303681, 0.123035, -0.0564538, 0.943108)
+bones/32/rotation = Quaternion(-0.302253, 0.123484, -0.0564648, 0.943508)
 bones/33/position = Vector3(2.40487e-06, 26.22, 3.88274e-07)
-bones/33/rotation = Quaternion(0.504372, 0.190608, -0.0777675, 0.838588)
+bones/33/rotation = Quaternion(0.505106, 0.191643, -0.0758379, 0.838087)
 bones/34/position = Vector3(2.0043e-06, 15.8882, 3.25184e-07)
-bones/34/rotation = Quaternion(0.333516, -0.176435, 0.0461391, 0.924937)
+bones/34/rotation = Quaternion(0.334319, -0.177361, 0.0457867, 0.924488)
 bones/35/position = Vector3(3.72781e-08, 6.21617, -2.38412e-07)
 bones/36/position = Vector3(-11.1288, -5.30213, 0.254128)
-bones/36/rotation = Quaternion(-0.12806, -0.0345785, 0.98161, 0.137281)
+bones/36/rotation = Quaternion(-0.12868, -0.0449226, 0.980954, 0.138393)
 bones/37/position = Vector3(-1.94744e-06, 30.2694, 9.64537e-07)
-bones/37/rotation = Quaternion(-0.281278, 0.0644412, -0.0148916, 0.957344)
+bones/37/rotation = Quaternion(-0.267536, 0.0660138, -0.0142414, 0.961178)
 bones/38/position = Vector3(-1.25501e-07, 26.2358, 7.67817e-07)
-bones/38/rotation = Quaternion(0.654695, -0.149017, 0.119468, 0.731366)
+bones/38/rotation = Quaternion(0.650164, -0.148308, 0.122155, 0.735098)
 bones/39/position = Vector3(-1.62714e-06, 15.6597, -8.55379e-07)
-bones/39/rotation = Quaternion(0.337542, 0.206187, -0.075705, 0.915326)
+bones/39/rotation = Quaternion(0.338069, 0.206695, -0.0760267, 0.91499)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 unique_name_in_owner = true
@@ -202,58 +178,38 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_rxegs")
 
-[node name="Modules" type="Node" parent="."]
-
-[node name="MovementModule" parent="Modules" instance=ExtResource("3_jcaoq")]
-unique_name_in_owner = true
-
-[node name="ActionModule" parent="Modules" instance=ExtResource("4_355xw")]
-unique_name_in_owner = true
-
-[node name="InteractModule" parent="Modules" instance=ExtResource("5_oxef2")]
-unique_name_in_owner = true
-
-[node name="AutoAttackModule" parent="Modules" node_paths=PackedStringArray("projectile_spawn") instance=ExtResource("6_uvhhj")]
-unique_name_in_owner = true
-projectile_spawn = NodePath("../../TurretCenterPoint/Turret/SpawnPoint")
-
-[node name="FamiliesManagers" type="Node" parent="."]
-
-[node name="DefenseManager" parent="FamiliesManagers" instance=ExtResource("7_el656")]
-unique_name_in_owner = true
-
-[node name="FireManager" parent="FamiliesManagers" instance=ExtResource("8_io6re")]
-unique_name_in_owner = true
-
-[node name="LifeManager" parent="FamiliesManagers" instance=ExtResource("9_8trms")]
-unique_name_in_owner = true
-
-[node name="PoisonManager" parent="FamiliesManagers" instance=ExtResource("10_islo6")]
-unique_name_in_owner = true
-
-[node name="SerenityManager" parent="FamiliesManagers" instance=ExtResource("11_ytjn1")]
-unique_name_in_owner = true
-
-[node name="StormManager" parent="FamiliesManagers" instance=ExtResource("13_qlvt5")]
-unique_name_in_owner = true
-_percent_decrease = 10.0
-
-[node name="AttackManager" parent="FamiliesManagers" instance=ExtResource("14_4m78h")]
-unique_name_in_owner = true
-
-[node name="TargetManager" parent="." node_paths=PackedStringArray("_source") instance=ExtResource("15_xn65e")]
-unique_name_in_owner = true
-_source = NodePath("..")
-
 [node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 unique_name_in_owner = true
 replication_config = SubResource("SceneReplicationConfig_5ed6q")
 
+[node name="CharacterLogic" parent="." node_paths=PackedStringArray("_source", "modules", "families_managers") instance=ExtResource("5_sriek")]
+_source = NodePath("..")
+modules = {
+0: NodePath("Modules/MovementModule"),
+1: NodePath("Modules/ActionModule"),
+2: NodePath("Modules/InteractModule"),
+3: NodePath("Modules/AutoAttackModule"),
+4: NodePath("Modules/TargetModule")
+}
+families_managers = {
+0: NodePath("FamiliesManagers/AttackManager"),
+1: NodePath("FamiliesManagers/DefenseManager"),
+2: NodePath("FamiliesManagers/FireManager"),
+3: NodePath("FamiliesManagers/StormManager"),
+4: NodePath("FamiliesManagers/SerenityManager"),
+5: NodePath("FamiliesManagers/LifeManager"),
+6: NodePath("FamiliesManagers/PoisonManager")
+}
+
+[node name="AutoAttackModule" parent="CharacterLogic/Modules" index="3" node_paths=PackedStringArray("projectile_spawn")]
+projectile_spawn = NodePath("../../../TurretCenterPoint/Turret/SpawnPoint")
+
 [node name="TurretCenterPoint" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.36537, 0)
 
-[node name="Turret" parent="TurretCenterPoint" instance=ExtResource("17_lbjpi")]
+[node name="Turret" parent="TurretCenterPoint" node_paths=PackedStringArray("_auto_attack_module") instance=ExtResource("17_lbjpi")]
 transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 1.42133, -0.890861, 0)
+_auto_attack_module = NodePath("../../CharacterLogic/Modules/AutoAttackModule")
 
 [node name="AnimHoveringModule" parent="TurretCenterPoint/Turret" node_paths=PackedStringArray("_owner") instance=ExtResource("18_4bsoj")]
 _owner = NodePath("..")
@@ -268,4 +224,5 @@ _rot_max = 360.0
 _rot_full = true
 
 [editable path="CyborgModel"]
+[editable path="CharacterLogic"]
 [editable path="TurretCenterPoint/Turret"]

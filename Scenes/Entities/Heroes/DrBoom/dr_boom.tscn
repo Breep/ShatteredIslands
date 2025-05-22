@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bdl1xxjdbeugn" path="res://Scenes/Character/FamiliesManagers/serenity_manager.tscn" id="11_d6wte"]
 [ext_resource type="PackedScene" uid="uid://bjbfnigvphbfc" path="res://Scenes/Character/FamiliesManagers/storm_manager.tscn" id="13_0mgdd"]
 [ext_resource type="PackedScene" uid="uid://crqesljjrouec" path="res://Scenes/Character/FamiliesManagers/attack_manager.tscn" id="14_hgu1g"]
-[ext_resource type="PackedScene" uid="uid://n30ifkjad344" path="res://Scenes/Character/Modules/target_manager.tscn" id="15_5kuly"]
+[ext_resource type="PackedScene" uid="uid://n30ifkjad344" path="res://Scenes/Character/Modules/target_module.tscn" id="15_5kuly"]
 [ext_resource type="PackedScene" uid="uid://cmq21hx4nihv4" path="res://Scenes/Entities/Heroes/DrBoom/dr_boom_model.tscn" id="16_1vhg0"]
 [ext_resource type="PackedScene" uid="uid://dqrhym1sskng8" path="res://Scenes/Entities/Turret/turret.tscn" id="17_modjl"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Scenes/Tool/anim_hovering_module.tscn" id="18_l7rtq"]

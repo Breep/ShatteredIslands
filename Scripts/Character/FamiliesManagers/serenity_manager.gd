@@ -13,8 +13,8 @@ var _heal_stats: CharacterHealStats # Ref to the owner heal stats
 
 # ============================== Public functions ==============================
 
-func _specific_init() -> void:
-	_heal_stats = _source.stats.heal
+func _ready() -> void:
+	_heal_stats = source.stats.heal
 	_create_optional_timers()
 
 
@@ -31,21 +31,21 @@ func stop() -> void:
 func notify_heal() -> void:
 	# [Magic heal]
 	if _heal_stats.heal_projectile_activated and Utils.is_randomize_modifier_active(_heal_stats.heal_projectile_chance):
-		var target: Character = _source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST_ENEMY)
+		var target: Character = source.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
 		if target == null:
 			return
-		_source.attack(target, _heal_stats.heal_projectile_damage, Utils.DamageType.MAGICAL)
+		source.attack(target, _heal_stats.heal_projectile_damage, Utils.DamageType.MAGICAL)
 	
 	# [Hazardous healing]
 	if _heal_stats.poison_stacks_activated and Utils.is_randomize_modifier_active(_heal_stats.poison_stacks_chance):
-		var target: Character = _source.target_manager.get_target(TargetManager.TargettingStrategy.RANDOM_ENEMY)
+		var target: Character = source.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
 		if target == null:
 			return
-		target.take_condition_stacks(_heal_stats.poison_stacks_number, Utils.StackType.POISON, _source, 5) # TODO relier à la duration du poison
+		target.take_condition_stacks(_heal_stats.poison_stacks_number, Utils.StackType.POISON, source, 5) # TODO relier à la duration du poison
 	
 	# [Panda-cify]
 	if _heal_stats.pacify_enemy_activated and Utils.is_randomize_modifier_active(_heal_stats.pacify_enemy_chance):
-		var target: Character = _source.target_manager.get_target(TargetManager.TargettingStrategy.RANDOM_ENEMY)
+		var target: Character = source.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
 		if target == null:
 			return
 		target.stats.heal.pacified = true
@@ -79,16 +79,16 @@ func _create_optional_timers() -> void:
 # ============================== Callbacks functions ==============================
 
 func _on_periodic_heal_timer_timeout() -> void:
-	var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
+	var target = source.target_module.get_target(TargetModule.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
 	_action_module.heal(target, _heal_stats.periodic_heal_amount)
 
 
 func _on_lost_hp_regen_timer_timeout() -> void:
-	_action_module.heal_percent(_source, _heal_stats.lost_hp_regen_percentage, Utils.PercentModifier.LOST_HP)
+	_action_module.heal_percent(source, _heal_stats.lost_hp_regen_percentage, Utils.PercentModifier.LOST_HP)
 
 
 func _on_epic_heal_area_timer_timeout() -> void:
-	var targets = _source.target_manager.get_targets(TargetManager.MultipleTargettingStrategy.ALLIES)
+	var targets = source.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES)
 	if targets.is_empty():
 		return
 	for target in targets:

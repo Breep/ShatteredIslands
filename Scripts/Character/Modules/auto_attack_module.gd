@@ -4,10 +4,15 @@ extends Module
 # ============================== Signals ==============================
 
 signal attack_done()
+signal target_changed(new_target: Entity)
 
 # ============================== Export variables ==============================
 
 @export var projectile_spawn: Node3D
+@export var _action_module: ActionModule
+@export var _attack_manager: AttackManager
+
+# ============================== OTHER variables ==============================
 
 var attack_speed: float:
 	get: return _attack_speed
@@ -22,14 +27,20 @@ var _aa_stats: CharacterAutoAttackStats # Ref to the owner auto attack stats
 var _projectile_type: Projectile.ProjectileType
 
 #var _forced_target: Character # TODO Unused now, maybe for a futur hero that can taunt ?
-var _attack_strategy: TargetManager.TargettingStrategy = TargetManager.TargettingStrategy.CLOSEST_ENEMY # The algo used to find the target
+var _attack_strategy: TargetModule.TargettingStrategy = TargetModule.TargettingStrategy.CLOSEST_ENEMY # The algo used to find the target
 
 var _default_attack_speed: float # Default attack speed of the hero
 
-var _action_module: ActionModule
-
 var _damage: int # Basic damage of the auto-attack module
 var _attack_speed: float = 1 # Basic attack speed of the auto-attack module (attacks/s)
+
+var _current_target: Entity
+var current_target: Entity:
+	get: return _current_target
+	set(value):
+		if current_target != value:
+			target_changed.emit(value)
+			_current_target = value
 
 # ============================== Local scene nodes ==============================
 
@@ -38,7 +49,7 @@ var _attack_speed: float = 1 # Basic attack speed of the auto-attack module (att
 # ============================== Public functions ==============================
 
 func start() -> void:
-	attack_speed = _source.stats.attack_speed
+	attack_speed = source.stats.attack_speed
 	_auto_attack_timer.start()
 
 
@@ -52,13 +63,7 @@ func set_projectile(projectile_type: Projectile.ProjectileType) -> void:
 # ============================== Private functions ==============================
 
 func _specific_init() -> void:
-	var action_modules = _source.find_children("", "ActionModule", true, false)
-	if action_modules.is_empty():
-		printerr("AutoAttackModule: An ActionModule is mandatory on the owner")
-		return
-	
-	_action_module = action_modules[0]
-	_source.stats.attack_speed_changed.connect(_on_source_stats_attack_speed_changed)
+	source.stats.attack_speed_changed.connect(_on_source_stats_attack_speed_changed)
 
 
 func set_auto_attack_speed(attack_speed: float) -> void:
@@ -72,7 +77,7 @@ func set_auto_attack_speed(attack_speed: float) -> void:
 func _auto_attack(target: Character) -> void:
 	var projectile_stats := ProjectileStats.new()
 	
-	projectile_stats.physical_damage_flat = _source.stats.attack_damage
+	projectile_stats.physical_damage_flat = source.stats.attack_damage
 	projectile_stats.speed = 10
 	
 	if _attack_manager != null:
@@ -84,16 +89,17 @@ func _auto_attack(target: Character) -> void:
 
 
 func _update_auto_attack_speed() -> void:
-	_source.stats.attack_speed = _default_attack_speed
+	source.stats.attack_speed = _default_attack_speed
 	var attack_speed_boost: float = _aa_stats.attack_speed_boost + _aa_stats.attack_speed_overtime_current
 	var multiply_boost: float = remap(attack_speed_boost, 0, 100, 1, 2) # Convert % in proportional multiple (100% = x2 | 150% = x2.5)
-	_source.stats.attack_speed *= multiply_boost
-	set_auto_attack_speed(_source.stats.attack_speed)
+	source.stats.attack_speed *= multiply_boost
+	set_auto_attack_speed(source.stats.attack_speed)
 
 # ============================== Callbacks functions ==============================
 
 func _on_auto_attack_timer_timeout() -> void:
-	var target = _source.target_manager.get_target(_attack_strategy)
+	var target = source.target_module.get_target(_attack_strategy)
+	current_target = target
 	if target == null: return
 	_auto_attack(target)
 

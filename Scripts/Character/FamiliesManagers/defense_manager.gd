@@ -18,8 +18,8 @@ var _total_magical_damage_blocked: int
 
 # ============================== Public functions ==============================
 
-func _specific_init() -> void:
-	_defense_stats = _source.stats.defense
+func _ready() -> void:
+	_defense_stats = source.stats.defense
 	_create_optional_timers()
 
 
@@ -82,7 +82,7 @@ func _create_optional_timers() -> void:
 
 func _gain_armor(armor_stacks: int) -> void:
 	if _defense_stats.dual_shield_activated:
-		var health_ratio: float = (_source.stats.health as float / _source.stats.health_max) * 100.0
+		var health_ratio: float = (source.stats.health as float / source.stats.health_max) * 100.0
 		if health_ratio >= _defense_stats.dual_shield_health_threshold:
 			armor_stacks *= 2
 	
@@ -102,7 +102,7 @@ func _rainbow_boots_effect(armor_lost: int) -> void:
 	for i in number_of_procs:
 		var effects: Array[Utils.StackType] = [Utils.StackType.POISON, Utils.StackType.VULNERABILITY]
 		var effect: Utils.StackType = effects[_rng.randi_range(0, effects.size() - 1)]
-		var target: Entity = _source.target_manager.get_target(TargetManager.TargettingStrategy.RANDOM_ENEMY)
+		var target: Entity = source.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
 		_action_module.inflict_condition_stacks(target, 1, effect)
 
 
@@ -136,7 +136,7 @@ func _mystical_shoulders(magical_damage_blocked: int) -> void:
 # ============================== Callbacks functions ==============================
 
 func _on_hedgehog_armor_period_timeout() -> void:
-	var target: Entity = _source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST_ENEMY)
+	var target: Entity = source.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
 	if target == null: return
 	var damage: int = (_armor_lost_since_last_hedgehog_armor * _defense_stats.hedgehog_armor_lost_armor_percent as float / 100.0) as int
 	_action_module.direct_attack(target, damage, Utils.DamageType.MAGICAL)
@@ -149,5 +149,5 @@ func _on_gladiator_helmet_period_timeout() -> void:
 
 func _on_titan_gloves_period_timeout() -> void:
 	var ratio: float = _defense_stats.titan_gloves_max_health_percent as float / 100.0
-	var armor_stacks: int = (_source.stats.health_max * ratio) as int
+	var armor_stacks: int = (source.stats.health_max * ratio) as int
 	_gain_armor(armor_stacks)

@@ -18,7 +18,7 @@ enum AXIS {
 
 func _ready():
 	if _owner == null:
-		printerr("AnimHoverModule: Owner isn't set !")
+		printerr("AnimRotatingModule: Owner isn't set ! [", get_path(), "]")
 		return
 	
 	if _rot_full:

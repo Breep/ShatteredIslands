@@ -23,8 +23,8 @@ var _focus_timer_time_elapsed: float # Time elapsed since lanch of the timer
 
 # ============================== Public functions ==============================
 
-func _specific_init() -> void:
-	_storm_stats = _source.stats.storm
+func _ready() -> void:
+	_storm_stats = source.stats.storm
 	_create_optional_timers()
 
 
@@ -55,9 +55,9 @@ func get_critical_multiplier(damage_type: Utils.DamageType) -> float:
 	if damage_type != Utils.DamageType.PHYSICAL:
 		return 1 
 	
-	var critical_multiplier = _source.stats.physical_critical_multiplier
+	var critical_multiplier = source.stats.physical_critical_multiplier
 	if _storm_stats.lost_hp_crit_multiplier_activated:
-		var lost_hp = _source.stats.health_max - _source.stats.health
+		var lost_hp = source.stats.health_max - source.stats.health
 		critical_multiplier += (lost_hp / _storm_stats.lost_hp_crit_multiplier_hp_number) * _storm_stats.lost_hp_crit_multiplier_amount / 100.0
 	return critical_multiplier
 
@@ -65,7 +65,7 @@ func get_critical_multiplier(damage_type: Utils.DamageType) -> float:
 func notice_critical_damage(char_who_received_the_crit: Character, damage: int) -> void:
 	# [Thunder priest]
 	if _storm_stats.crit_heal_activated:
-		var target = _source.target_manager.get_target(TargetManager.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
+		var target = source.target_module.get_target(TargetModule.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
 		_action_module.heal(target, damage * _storm_stats.crit_heal_amount as float / 100.0)
 	
 	# [Poisonous lightning]
@@ -87,11 +87,11 @@ func notice_critical_damage(char_who_received_the_crit: Character, damage: int) 
 	
 	# [Overcharge]
 	if _storm_stats.overcharge_activated:
-		var target = _source.target_manager.get_closest_enemy_from(char_who_received_the_crit)
+		var target = source.target_module.get_closest_enemy_from(char_who_received_the_crit)
 		if target != null:
 			var overcharge_damage: int = (damage * _storm_stats.overcharge_percent / 100.0) as int
 			if multiplayer.get_unique_id() == 1: print(char_who_received_the_crit.player.name, " ", target.player.name)
-			_source.attack(target, overcharge_damage, Utils.DamageType.MAGICAL)
+			source.attack(target, overcharge_damage, Utils.DamageType.MAGICAL)
 
 
 func focus_changed(focused: bool) -> void:
@@ -129,7 +129,7 @@ func _create_optional_timers() -> void:
 # ============================== Callbacks functions ==============================
 
 func _on_periodic_vulnerability_timer_timeout() -> void:
-	var target: Character = _source.target_manager.get_target(TargetManager.TargettingStrategy.CLOSEST_ENEMY)
+	var target: Character = source.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
 	if target == null:
 		return
 	

@@ -126,11 +126,11 @@ func _answer_hero_pickup_order(hero_pickup_order_player_ids: Array[int]) -> void
 # ============================== Private function ==============================
 
 func _init_families_ref() -> void:
-	_families_ref[Family.FamilyType.ATTACK] = load("res://Resources/Families/attack_family.tres") as Family
+	#_families_ref[Family.FamilyType.ATTACK] = load("res://Resources/Families/attack_family.tres") as Family
 	_families_ref[Family.FamilyType.DEFENSE] = load("res://Resources/Families/defense_family.tres") as Family
-	_families_ref[Family.FamilyType.FIRE] = load("res://Resources/Families/fire_family.tres") as Family
-	_families_ref[Family.FamilyType.STORM] = load("res://Resources/Families/storm_family.tres") as Family
-	_families_ref[Family.FamilyType.SERENITY] = load("res://Resources/Families/heal_family.tres") as Family
+	#_families_ref[Family.FamilyType.FIRE] = load("res://Resources/Families/fire_family.tres") as Family
+	#_families_ref[Family.FamilyType.STORM] = load("res://Resources/Families/storm_family.tres") as Family
+	#_families_ref[Family.FamilyType.SERENITY] = load("res://Resources/Families/heal_family.tres") as Family
 	#_families_ref[Family.FamilyType.Life] = load("res://Resources/Families/life_family.tres") as Family
 	_families_ref[Family.FamilyType.POISON] = load("res://Resources/Families/poison_family.tres") as Family
 

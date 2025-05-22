@@ -23,6 +23,7 @@ var _projectile_counter: int = 0
 
 # ============================== Public function ==============================
 
+# Reparent characters into the FightingArea/Entities node and teleport them on the FightingArea
 func spawn_characters(characters: Array[Character]) -> void:
 	var _available_spawn_points: Array[SpawnPoint] = _spawn_points.duplicate()
 	for character in characters:
@@ -34,8 +35,8 @@ func spawn_projectile(source: Character, target: Character, projectile_type: Pro
 	projectile.name = "Projectile_" + str(_projectile_counter)
 	projectile.position = _projectiles_node.to_local(projectile_spawn.global_position)
 	projectile.stats = projectile_stats
-	projectile.source_id = source.id
-	projectile.target_id = target.id
+	projectile.source = source
+	projectile.target = target
 	projectile.battle_id = battle_id
 	projectile.id = _projectile_counter
 	_projectile_counter += 1

@@ -52,11 +52,27 @@ layout_mode = 1
 
 [node name="FightingFloor_1v1" parent="FightingFloorTemplates" instance=ExtResource("5_2akj6")]
 
+[node name="SpawnManager" parent="FightingFloorTemplates/FightingFloor_1v1" index="0" node_paths=PackedStringArray("_entities_node", "_projectiles_node")]
+_entities_node = NodePath("../../../Entities")
+_projectiles_node = NodePath("../../../Projectiles")
+
 [node name="FightingFloor_2v2" parent="FightingFloorTemplates" instance=ExtResource("6_yyfcp")]
 visible = false
 
+[node name="SpawnManager" parent="FightingFloorTemplates/FightingFloor_2v2" index="0" node_paths=PackedStringArray("_entities_node", "_projectiles_node")]
+_entities_node = NodePath("../../../Entities")
+_projectiles_node = NodePath("../../../Projectiles")
+
 [node name="FightingFloor_ffa13" parent="FightingFloorTemplates" instance=ExtResource("7_hqxx4")]
 visible = false
+
+[node name="SpawnManager" parent="FightingFloorTemplates/FightingFloor_ffa13" index="1" node_paths=PackedStringArray("_entities_node", "_projectiles_node")]
+_entities_node = NodePath("../../../Entities")
+_projectiles_node = NodePath("../../../Projectiles")
+
+[node name="Entities" type="Node3D" parent="."]
+
+[node name="Projectiles" type="Node3D" parent="."]
 
 [editable path="FightingFloorTemplates/FightingFloor_1v1"]
 [editable path="FightingFloorTemplates/FightingFloor_2v2"]
