@@ -23,7 +23,7 @@ transform = Transform3D(-0.00259223, -0.000896951, 2.425, -0.000211368, 2.425, 0
 [node name="CenterPointCamera" parent="." instance=ExtResource("3_l1roj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.65533, 0, -5.94256)
 _zoom_start = 30.0
-_zoom_max = 60.0
+_zoom_max = 100.0
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_uio2g")

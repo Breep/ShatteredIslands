@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://oimyi4iueoda"]
+[gd_scene load_steps=11 format=3 uid="uid://oimyi4iueoda"]
 
 [ext_resource type="Script" uid="uid://blljr68c4u466" path="res://Scripts/Game/game.gd" id="1_7r6pw"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Scenes/FightingArea/spawn_point.tscn" id="3_i1e5p"]
 [ext_resource type="PackedScene" uid="uid://di34xfy5cli15" path="res://Scenes/Tool/free_fly_camera.tscn" id="3_t03ty"]
-[ext_resource type="PackedScene" uid="uid://dupryy7gaobpv" path="res://Scenes/FloatingIsland/floating_island.tscn" id="4_flgk0"]
+[ext_resource type="PackedScene" uid="uid://bbn7yt4y0lu6q" path="res://Scenes/Managers/scene_switcher.tscn" id="3_vifcx"]
 [ext_resource type="Texture2D" uid="uid://capk6pfx3rt4k" path="res://Data/Misc/scrn2.jpg" id="5_ciybh"]
+[ext_resource type="PackedScene" uid="uid://drcuyohos0doa" path="res://Scenes/FloatingIsland/fighting_island.tscn" id="5_vifcx"]
 [ext_resource type="PackedScene" uid="uid://7u3ksm0e4v61" path="res://Scenes/FloatingIsland/buying_island.tscn" id="6_flgk0"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_flgk0"]
@@ -21,13 +22,18 @@ sky = SubResource("Sky_ciybh")
 tonemap_mode = 3
 glow_enabled = true
 
-[node name="Game" type="Node3D" node_paths=PackedStringArray("_buying_island", "_node_floating_islands")]
+[node name="Game" type="Node3D" node_paths=PackedStringArray("_buying_island", "_node_floating_islands", "_scene_switcher")]
 script = ExtResource("1_7r6pw")
 _buying_island = NodePath("BuyingIsland")
 _node_floating_islands = NodePath("FloatingIslands")
+_scene_switcher = NodePath("SceneSwitcher")
 
 [node name="BuyingIsland" parent="." instance=ExtResource("6_flgk0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 56.0279, 0)
+
+[node name="SceneSwitcher" parent="." node_paths=PackedStringArray("buying_island", "fighting_islands") instance=ExtResource("3_vifcx")]
+buying_island = NodePath("../BuyingIsland")
+fighting_islands = [NodePath("../IslandSpawns/CenterPoint1/SpawnPoint1/FightingIsland"), NodePath("../IslandSpawns/CenterPoint2/SpawnPoint2/FightingIsland"), NodePath("../IslandSpawns/CenterPoint3/SpawnPoint3/FightingIsland"), NodePath("../IslandSpawns/CenterPoint4/SpawnPoint4/FightingIsland"), NodePath("../IslandSpawns/CenterPoint5/SpawnPoint5/FightingIsland"), NodePath("../IslandSpawns/CenterPoint6/SpawnPoint6/FightingIsland"), NodePath("../IslandSpawns/CenterPoint7/SpawnPoint7/FightingIsland"), NodePath("../IslandSpawns/CenterPoint8/SpawnPoint8/FightingIsland")]
 
 [node name="IslandSpawns" type="Node3D" parent="."]
 
@@ -36,7 +42,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 56.0279, 0)
 [node name="SpawnPoint1" parent="IslandSpawns/CenterPoint1" instance=ExtResource("3_i1e5p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 0)
 
-[node name="FloatingIsland" parent="IslandSpawns/CenterPoint1/SpawnPoint1" instance=ExtResource("4_flgk0")]
+[node name="FightingIsland" parent="IslandSpawns/CenterPoint1/SpawnPoint1" instance=ExtResource("5_vifcx")]
 
 [node name="CenterPoint2" type="Node3D" parent="IslandSpawns"]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0)
@@ -44,7 +50,7 @@ transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 
 [node name="SpawnPoint2" parent="IslandSpawns/CenterPoint2" instance=ExtResource("3_i1e5p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 20, 0)
 
-[node name="FloatingIsland" parent="IslandSpawns/CenterPoint2/SpawnPoint2" instance=ExtResource("4_flgk0")]
+[node name="FightingIsland" parent="IslandSpawns/CenterPoint2/SpawnPoint2" instance=ExtResource("5_vifcx")]
 
 [node name="CenterPoint3" type="Node3D" parent="IslandSpawns"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
@@ -52,7 +58,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 
 [node name="SpawnPoint3" parent="IslandSpawns/CenterPoint3" instance=ExtResource("3_i1e5p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 0)
 
-[node name="FloatingIsland" parent="IslandSpawns/CenterPoint3/SpawnPoint3" instance=ExtResource("4_flgk0")]
+[node name="FightingIsland" parent="IslandSpawns/CenterPoint3/SpawnPoint3" instance=ExtResource("5_vifcx")]
 
 [node name="CenterPoint4" type="Node3D" parent="IslandSpawns"]
 transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 0, 0, 0)
@@ -60,7 +66,7 @@ transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107
 [node name="SpawnPoint4" parent="IslandSpawns/CenterPoint4" instance=ExtResource("3_i1e5p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, -20, 0)
 
-[node name="FloatingIsland" parent="IslandSpawns/CenterPoint4/SpawnPoint4" instance=ExtResource("4_flgk0")]
+[node name="FightingIsland" parent="IslandSpawns/CenterPoint4/SpawnPoint4" instance=ExtResource("5_vifcx")]
 
 [node name="CenterPoint5" type="Node3D" parent="IslandSpawns"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
@@ -68,7 +74,7 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 
 [node name="SpawnPoint5" parent="IslandSpawns/CenterPoint5" instance=ExtResource("3_i1e5p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 0)
 
-[node name="FloatingIsland" parent="IslandSpawns/CenterPoint5/SpawnPoint5" instance=ExtResource("4_flgk0")]
+[node name="FightingIsland" parent="IslandSpawns/CenterPoint5/SpawnPoint5" instance=ExtResource("5_vifcx")]
 
 [node name="CenterPoint6" type="Node3D" parent="IslandSpawns"]
 transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 0, 0, 0)
@@ -76,7 +82,7 @@ transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107
 [node name="SpawnPoint6" parent="IslandSpawns/CenterPoint6" instance=ExtResource("3_i1e5p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 20, 0)
 
-[node name="FloatingIsland" parent="IslandSpawns/CenterPoint6/SpawnPoint6" instance=ExtResource("4_flgk0")]
+[node name="FightingIsland" parent="IslandSpawns/CenterPoint6/SpawnPoint6" instance=ExtResource("5_vifcx")]
 
 [node name="CenterPoint7" type="Node3D" parent="IslandSpawns"]
 transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0)
@@ -84,7 +90,7 @@ transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0)
 [node name="SpawnPoint7" parent="IslandSpawns/CenterPoint7" instance=ExtResource("3_i1e5p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 0)
 
-[node name="FloatingIsland" parent="IslandSpawns/CenterPoint7/SpawnPoint7" instance=ExtResource("4_flgk0")]
+[node name="FightingIsland" parent="IslandSpawns/CenterPoint7/SpawnPoint7" instance=ExtResource("5_vifcx")]
 
 [node name="CenterPoint8" type="Node3D" parent="IslandSpawns"]
 transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0, 0)
@@ -92,7 +98,7 @@ transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 
 [node name="SpawnPoint8" parent="IslandSpawns/CenterPoint8" instance=ExtResource("3_i1e5p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, -20, 0)
 
-[node name="FloatingIsland" parent="IslandSpawns/CenterPoint8/SpawnPoint8" instance=ExtResource("4_flgk0")]
+[node name="FightingIsland" parent="IslandSpawns/CenterPoint8/SpawnPoint8" instance=ExtResource("5_vifcx")]
 
 [node name="FreeFlyCamera" parent="." instance=ExtResource("3_t03ty")]
 transform = Transform3D(0.899588, -0.308751, 0.308891, 0, 0.707267, 0.706946, -0.436739, -0.635961, 0.636249, 0.0513108, 8.01942, 3.7451)

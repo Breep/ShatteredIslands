@@ -10,14 +10,16 @@ properties/0/path = NodePath(".:_player_owner_id")
 properties/0/spawn = true
 properties/0/replication_mode = 2
 
-[node name="FightingIsland" type="Node3D"]
+[node name="FightingIsland" type="Node3D" node_paths=PackedStringArray("_fighting_area", "_center_point_camera")]
 script = ExtResource("1_hqxtb")
+_fighting_area = NodePath("FightingArea")
+_center_point_camera = NodePath("CenterPointCamera")
 
 [node name="FightingArea" parent="." node_paths=PackedStringArray("_spawn_managers") instance=ExtResource("2_0nkjk")]
 _spawn_managers = {
-0: NodePath(""),
-1: NodePath(""),
-2: NodePath("")
+0: null,
+1: null,
+2: null
 }
 
 [node name="TelescopeIsland" parent="." instance=ExtResource("3_wy27a")]

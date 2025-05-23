@@ -19,11 +19,15 @@ func start_fight(characters: Array[Character], battle_type: Battle.BattleType) -
 
 
 func set_active() -> void:
+	if _is_active: return
+	_is_active = true
 	_fighting_area.set_active()
 	_center_point_camera.set_active()
 
 
 func set_inactive() -> void:
+	if not _is_active: return
+	_is_active = false
 	_fighting_area.set_inactive()
 	_center_point_camera.set_inactive()
 

@@ -12,9 +12,14 @@ extends Node3D
 
 # ============================== Private variables ==============================
 
+var _is_active: bool = false
+
+# ============================== Node base functions ==============================
+
 func _ready() -> void:
 	_register_self_in_shared()
 
+# ============================== Public functions ==============================
 
 # Spawn all characters on the FightingArea according to the battle
 # Connect all characters to the FightingArea of the FloatingIsland
@@ -29,6 +34,7 @@ func set_active() -> void:
 func set_inactive() -> void:
 	pass
 
+# ============================== Private functions ==============================
 
 func _register_self_in_shared() -> void:
 	pass

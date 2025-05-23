@@ -3,13 +3,10 @@ extends Camera3D
 
 @export var move_speed: float = 10.0 # Camera move speed
 
-var camera_type: CameraManager.CameraType = CameraManager.CameraType.UNDEF
 var battle_id: int
 
 var _is_active: bool = true
 
-func _ready() -> void:
-	CameraManager.camera_changed.connect(_on_camera_manager_camera_changed)
 
 
 func _process(delta: float) -> void:
@@ -78,20 +75,6 @@ func _select_object(screen_position):
 		if _old_selected_object.has_user_signal("unfocused"):
 			_old_selected_object.emit_signal("unfocused")
 		_old_selected_object = null
-
-
-func _on_camera_manager_camera_changed(new_camera_type: CameraManager.CameraType) -> void:
-	if camera_type != new_camera_type:
-		_is_active = false
-		return
-	
-	_is_active = true
-	Events.ui_buying_area_opened.emit(false)
-	Events.ui_fighting_area_opened.emit(false, -1)
-	Events.ui_fighting_area_opened.emit(true, battle_id)
-	make_current()
-
-
 
 
 

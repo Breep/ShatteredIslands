@@ -29,6 +29,7 @@ var _current_round_battles: Array[Battle]
 
 @export var _buying_island: BuyingIsland
 @export var _node_floating_islands: Node3D
+@export var _scene_switcher: SceneSwitcher
 
 # ============================== Node base functions ==============================
 

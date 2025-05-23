@@ -14,9 +14,12 @@ extends Node3D
 @export var _zoom_start: float = 20.0
 @export var _zoom_max: float = 40.0
 
+var _is_active: bool = false
+
 # ============================== Node base functions ==============================
 
 func _input(event: InputEvent) -> void:
+	if not _is_active: return
 	_handle_center_point_rotation(event)
 	_handle_camera_zoom(event)
 
@@ -27,10 +30,14 @@ func _ready() -> void:
 # ============================== Public functions ==============================
 
 func set_active() -> void:
+	if _is_active: return
+	_is_active = true
 	_camera.make_current()
 
 
 func set_inactive() -> void:
+	if not _is_active: return
+	_is_active = false
 	pass
 
 # ============================== Private functions ==============================
