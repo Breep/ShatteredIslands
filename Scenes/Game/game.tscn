@@ -1,11 +1,11 @@
 [gd_scene load_steps=10 format=3 uid="uid://oimyi4iueoda"]
 
 [ext_resource type="Script" uid="uid://blljr68c4u466" path="res://Scripts/Game/game.gd" id="1_7r6pw"]
-[ext_resource type="PackedScene" uid="uid://ca8mcplp2va4s" path="res://Scenes/BuyingArea/buying_area.tscn" id="2_36puk"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Scenes/FightingArea/spawn_point.tscn" id="3_i1e5p"]
 [ext_resource type="PackedScene" uid="uid://di34xfy5cli15" path="res://Scenes/Tool/free_fly_camera.tscn" id="3_t03ty"]
 [ext_resource type="PackedScene" uid="uid://dupryy7gaobpv" path="res://Scenes/FloatingIsland/floating_island.tscn" id="4_flgk0"]
 [ext_resource type="Texture2D" uid="uid://capk6pfx3rt4k" path="res://Data/Misc/scrn2.jpg" id="5_ciybh"]
+[ext_resource type="PackedScene" uid="uid://7u3ksm0e4v61" path="res://Scenes/FloatingIsland/buying_island.tscn" id="6_flgk0"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_flgk0"]
 panorama = ExtResource("5_ciybh")
@@ -21,13 +21,13 @@ sky = SubResource("Sky_ciybh")
 tonemap_mode = 3
 glow_enabled = true
 
-[node name="Game" type="Node3D" node_paths=PackedStringArray("_buying_area", "_node_floating_islands")]
+[node name="Game" type="Node3D" node_paths=PackedStringArray("_buying_island", "_node_floating_islands")]
 script = ExtResource("1_7r6pw")
-_buying_area = NodePath("BuyingArea")
+_buying_island = NodePath("BuyingIsland")
 _node_floating_islands = NodePath("FloatingIslands")
 
-[node name="BuyingArea" parent="." instance=ExtResource("2_36puk")]
-unique_name_in_owner = true
+[node name="BuyingIsland" parent="." instance=ExtResource("6_flgk0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 56.0279, 0)
 
 [node name="IslandSpawns" type="Node3D" parent="."]
 

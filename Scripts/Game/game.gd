@@ -27,7 +27,7 @@ var _current_round_battles: Array[Battle]
 
 # ============================== Local nodes ==============================
 
-@export var _buying_area: BuyingArea
+@export var _buying_island: BuyingIsland
 @export var _node_floating_islands: Node3D
 
 # ============================== Node base functions ==============================
@@ -51,7 +51,7 @@ func _start_game() -> void:
 func _start_hero_selection() -> void:
 	game_state = GameState.STARTING
 	var heroes: Array[Hero] = await GameManager.get_current_game_heroes()
-	_buying_area.start_hero_selection(heroes)
+	#_buying_area.start_hero_selection(heroes)
 
 
 func _start_new_round() ->void:
@@ -69,7 +69,7 @@ func _spawn_all_fighting_areas(battles: Array[Battle]) -> void:
 
 func _start_buying_phase() -> void:
 	game_state = GameState.BUYING
-	_buying_area.start_round(_current_round_battles)
+	#_buying_area.start_round(_current_round_battles)
 	_spawn_all_fighting_areas(_current_round_battles)
 
 
