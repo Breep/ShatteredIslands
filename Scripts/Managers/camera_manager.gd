@@ -12,6 +12,10 @@ enum CameraType {
 	FIGHTING_AREA_2,
 	FIGHTING_AREA_3,
 	FIGHTING_AREA_4,
+	FIGHTING_AREA_5,
+	FIGHTING_AREA_6,
+	FIGHTING_AREA_7,
+	FIGHTING_AREA_8,
 	FREE_FLY,
 	UNDEF
 }
@@ -29,6 +33,14 @@ func _input(event):
 		if Input.is_action_pressed("change_camera_fighting_area_3"):
 			camera_changed.emit(CameraType.FIGHTING_AREA_3)
 		if Input.is_action_pressed("change_camera_fighting_area_4"):
+			camera_changed.emit(CameraType.FIGHTING_AREA_4)
+		if Input.is_action_pressed("change_camera_fighting_area_5"):
+			camera_changed.emit(CameraType.FIGHTING_AREA_1)
+		if Input.is_action_pressed("change_camera_fighting_area_6"):
+			camera_changed.emit(CameraType.FIGHTING_AREA_2)
+		if Input.is_action_pressed("change_camera_fighting_area_7"):
+			camera_changed.emit(CameraType.FIGHTING_AREA_3)
+		if Input.is_action_pressed("change_camera_fighting_area_8"):
 			camera_changed.emit(CameraType.FIGHTING_AREA_4)
 		if Input.is_action_pressed("change_camera_free_fly"):
 			camera_changed.emit(CameraType.FREE_FLY)

@@ -51,9 +51,6 @@ _spawn_managers = {
 2: NodePath("FightingFloorTemplates/FightingFloor_ffa13/SpawnManager")
 }
 
-[node name="CenterPointCamera" parent="FloatingIsland" index="2"]
-_zoom_sensitivity = 0.5
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_k73x5")
 

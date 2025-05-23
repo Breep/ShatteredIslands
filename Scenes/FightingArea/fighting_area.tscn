@@ -28,10 +28,8 @@ _spawn_managers = {
 }
 
 [node name="EntityManager" parent="." instance=ExtResource("2_wtb7j")]
-unique_name_in_owner = true
 
 [node name="FightingManager" parent="." instance=ExtResource("3_yyfcp")]
-unique_name_in_owner = true
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_yyfcp")
@@ -45,7 +43,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="UIFightingArea" parent="UI" instance=ExtResource("4_hqxx4")]
-unique_name_in_owner = true
 layout_mode = 1
 
 [node name="FightingFloorTemplates" type="Node3D" parent="."]

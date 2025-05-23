@@ -53,6 +53,8 @@ func _exit_tree() -> void:
 
 # ============================== Public functions ==============================
 
+# Spawn all characters on the FightingArea according to the battle
+# Connect all characters to this FightingArea
 func start_fight(characters: Array[Character], battle_type: Battle.BattleType) -> void:
 	spawn_manager = _spawn_managers[battle_type]
 	if spawn_manager == null:
@@ -64,6 +66,17 @@ func start_fight(characters: Array[Character], battle_type: Battle.BattleType) -
 	
 	_fighting_manager.fight_is_over.connect(_on_fighting_manager_fight_is_over, CONNECT_ONE_SHOT)
 	_fighting_manager.start(characters)
+	
+	# TODO TMP Need to make the ui smarter in the character choice at start
+	_ui_fighting_area.left_character = characters[0]
+	_ui_fighting_area.right_character = characters[1]
+
+
+func set_active() -> void:
+	_ui_fighting_area.show()
+
+func set_inactive() -> void:
+	_ui_fighting_area.show()
 
 # ============================== Private functions ==============================
 

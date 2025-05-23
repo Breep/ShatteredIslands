@@ -11,8 +11,18 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if target != null:
-		look_at(target.global_position + 1 * Vector3.UP)
+		look_at(target.global_position + 1 * Vector3.UP) #, delta, 0.1)
 
 
 func _on_auto_attack_module_target_changed(new_target: Entity) -> void:
 	target = new_target
+
+
+#func _smooth_look_at(target_position: Vector3, delta: float, rotate_speed) -> void:
+	#var target_direction = (target_position - global_position).normalized()
+	#var target_basis = Basis().looking_at(target_direction)
+	#var current_scale = global_transform.basis.get_scale()
+	#var smoothed_basis = target_basis.orthonormalized().slerp(target_basis.orthonormalized(), delta * rotate_speed)
+	#smoothed_basis.scale(current_scale)
+	#global_transform.basis = smoothed_basis
+	

@@ -25,10 +25,10 @@ var _rules: GameRules
 var _current_round_number: int
 var _current_round_battles: Array[Battle]
 
-@onready var _buying_area: BuyingArea = %BuyingArea
-@onready var _node_fighting_areas: Node3D = %FightingAreas
+# ============================== Local nodes ==============================
 
-var _fighting_areas: Array[FightingArea]
+@export var _buying_area: BuyingArea
+@export var _node_floating_islands: Node3D
 
 # ============================== Node base functions ==============================
 
@@ -56,7 +56,6 @@ func _start_hero_selection() -> void:
 
 func _start_new_round() ->void:
 	print("[", multiplayer.get_unique_id(), "] Game: Start new round")
-	_fighting_areas.clear()
 	_current_round_battles = await RoundManager.get_current_round_battles()
 	await PlayerManager.sync_point(PlayerManager.SyncID.STARTING_NEW_ROUND)
 	RoundManager.starting_round_player_changes()
@@ -66,14 +65,6 @@ func _start_new_round() ->void:
 func _spawn_all_fighting_areas(battles: Array[Battle]) -> void:
 	if not multiplayer.is_server():
 		return
-	
-	#for i in battles.size():
-		#var fighting_area: FightingArea = Shared.FIGHTING_AREAS[battles[i].battle_type].instantiate()
-		#fighting_area.name = "FightingArea_" + str(i)
-		#fighting_area.position = _fighting_area_spawns[i].position
-		#fighting_area.battle_id = battles[i].id
-		#_node_fighting_areas.add_child(fighting_area)
-		#_fighting_areas.append(fighting_area)
 
 
 func _start_buying_phase() -> void:

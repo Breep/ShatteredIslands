@@ -1,32 +1,51 @@
 class_name CenterPointCamera
 extends Node3D
 
+# ============================== Local node ==============================
+
 @export var _camera: Camera3D
 
+# ============================== Configuration ==============================
+
 @export var _rotation_sensitivity: float = 0.3
-@export var _zoom_sensitivity: float = 0.3
+@export var _zoom_sensitivity: float = 0.5
 
 @export var _zoom_min: float = 10.0
+@export var _zoom_start: float = 20.0
 @export var _zoom_max: float = 40.0
 
-var rotating := false
-var last_mouse_position := Vector2.ZERO
+# ============================== Node base functions ==============================
 
 func _input(event: InputEvent) -> void:
 	_handle_center_point_rotation(event)
 	_handle_camera_zoom(event)
 
 
+func _ready() -> void:
+	_camera.position.x = _zoom_start
+
+# ============================== Public functions ==============================
+
+func set_active() -> void:
+	_camera.make_current()
+
+
+func set_inactive() -> void:
+	pass
+
+# ============================== Private functions ==============================
+
+var _rotating := false
 func _handle_center_point_rotation(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_MIDDLE:
-			rotating = event.pressed
-			if rotating:
+			_rotating = event.pressed
+			if _rotating:
 				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 			else:
 				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
-	elif event is InputEventMouseMotion and rotating:
+	elif event is InputEventMouseMotion and _rotating:
 		var delta = event.relative
 		rotate_y(deg_to_rad(-delta.x * _rotation_sensitivity))
 		var x_rotation = -delta.y * _rotation_sensitivity

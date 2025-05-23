@@ -21,8 +21,10 @@ sky = SubResource("Sky_ciybh")
 tonemap_mode = 3
 glow_enabled = true
 
-[node name="Game" type="Node3D"]
+[node name="Game" type="Node3D" node_paths=PackedStringArray("_buying_area", "_node_floating_islands")]
 script = ExtResource("1_7r6pw")
+_buying_area = NodePath("BuyingArea")
+_node_floating_islands = NodePath("FloatingIslands")
 
 [node name="BuyingArea" parent="." instance=ExtResource("2_36puk")]
 unique_name_in_owner = true
@@ -97,10 +99,10 @@ transform = Transform3D(0.899588, -0.308751, 0.308891, 0, 0.707267, 0.706946, -0
 fov = 35.0
 
 [node name="FightingAreaSpawner" type="MultiplayerSpawner" parent="."]
-spawn_path = NodePath("../FightingAreas")
+_spawnable_scenes = PackedStringArray("uid://dupryy7gaobpv")
+spawn_path = NodePath("../FloatingIslands")
 
-[node name="FightingAreas" type="Node3D" parent="."]
-unique_name_in_owner = true
+[node name="FloatingIslands" type="Node3D" parent="."]
 
 [node name="WorldEnvironment2" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_flgk0")

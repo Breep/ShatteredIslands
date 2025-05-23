@@ -7,20 +7,27 @@ extends Node3D
 
 # ============================== local node ==============================
 
-@export var _fighting_area: FightingArea
 @export var _map: Map
 @export var _center_point_camera: CenterPointCamera
 
 # ============================== Private variables ==============================
 
-var _characters: Array[Character]
-
 func _ready() -> void:
 	_register_self_in_shared()
 
 
+# Spawn all characters on the FightingArea according to the battle
+# Connect all characters to the FightingArea of the FloatingIsland
 func start_fight(characters: Array[Character], battle_type: Battle.BattleType) -> void:
-	_fighting_area.start_fight(characters, battle_type)
+	pass
+
+
+func set_active() -> void:
+	pass
+
+
+func set_inactive() -> void:
+	pass
 
 
 func _register_self_in_shared() -> void:
