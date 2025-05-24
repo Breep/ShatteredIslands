@@ -16,6 +16,7 @@ var _ui_hero_portrait_button: PackedScene = preload("res://Scenes/UI/HeroSelecti
 var _selected_hero: Hero
 
 func _ready() -> void:
+	hide()
 	for child in _grid_container.get_children():
 		child.queue_free()
 	_lock_hero_button.disabled = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://oimyi4iueoda"]
+[gd_scene load_steps=12 format=3 uid="uid://oimyi4iueoda"]
 
 [ext_resource type="Script" uid="uid://blljr68c4u466" path="res://Scripts/Game/game.gd" id="1_7r6pw"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Scenes/FightingArea/spawn_point.tscn" id="3_i1e5p"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://capk6pfx3rt4k" path="res://Data/Misc/scrn2.jpg" id="5_ciybh"]
 [ext_resource type="PackedScene" uid="uid://drcuyohos0doa" path="res://Scenes/FloatingIsland/fighting_island.tscn" id="5_vifcx"]
 [ext_resource type="PackedScene" uid="uid://7u3ksm0e4v61" path="res://Scenes/FloatingIsland/buying_island.tscn" id="6_flgk0"]
+[ext_resource type="PackedScene" uid="uid://cbd5jq0bp7fef" path="res://Scenes/Game/HeroSelector.tscn" id="8_xfil1"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_flgk0"]
 panorama = ExtResource("5_ciybh")
@@ -117,3 +118,5 @@ environment = SubResource("Environment_flgk0")
 transform = Transform3D(0.72304, 0.426404, -0.543501, 0, 0.786763, 0.617256, 0.690807, -0.4463, 0.56886, 0, 11.082, 0)
 light_color = Color(0.806127, 0.544895, 0.445082, 1)
 shadow_enabled = true
+
+[node name="HeroSelector" parent="." instance=ExtResource("8_xfil1")]
