@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dwsu0wswqq2ny"
-path="res://.godot/imported/monster.blend-505f7cd2460c703eb36c827ae8a14278.scn"
+path="res://.godot/imported/monster.blend-2f9c8659242565c0f59485883b79dff8.scn"
 
 [deps]
 
-source_file="res://Data/Blender/monster.blend"
-dest_files=["res://.godot/imported/monster.blend-505f7cd2460c703eb36c827ae8a14278.scn"]
+source_file="res://Data/Blender/Heroes/Golem/monster.blend"
+dest_files=["res://.godot/imported/monster.blend-2f9c8659242565c0f59485883b79dff8.scn"]
 
 [params]
 

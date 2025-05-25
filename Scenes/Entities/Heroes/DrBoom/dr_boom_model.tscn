@@ -1,17 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmq21hx4nihv4"]
+[gd_scene load_steps=3 format=3 uid="uid://cmq21hx4nihv4"]
 
 [ext_resource type="Script" uid="uid://boijjesl7u0r0" path="res://Scripts/hero_3d.gd" id="1_52dcc"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n0ky3"]
-albedo_color = Color(0.73703, 0, 0.107023, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_vmcag"]
-material = SubResource("StandardMaterial3D_n0ky3")
+[ext_resource type="PackedScene" uid="uid://cmojifbx1glt4" path="res://Scenes/3D_heroes/Drboom/drboom.tscn" id="2_ca8ky"]
 
 [node name="DrBoomModel" type="Node3D"]
 script = ExtResource("1_52dcc")
-hero_id = 2
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CapsuleMesh_vmcag")
+[node name="Drboom" parent="." instance=ExtResource("2_ca8ky")]

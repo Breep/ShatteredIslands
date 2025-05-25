@@ -2,20 +2,18 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bprwdb3dywte5"
-path.s3tc="res://.godot/imported/turretv1_0.jpg-a82eeadc687bca275b00c8967385f392.s3tc.ctex"
+uid="uid://ci78i8yrytnkx"
+path.s3tc="res://.godot/imported/shaded.png-902e48f85fb68ed73dcb8e6cc4228f95.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
-generator_parameters={
-"md5": "36688b6d4b5e81e03f3280e23df74e45"
-}
+generator_parameters={}
 
 [deps]
 
-source_file="res://Data/Blender/Turret/turretv1_0.jpg"
-dest_files=["res://.godot/imported/turretv1_0.jpg-a82eeadc687bca275b00c8967385f392.s3tc.ctex"]
+source_file="res://Data/Blender/Heroes/Golem/textures/shaded.png"
+dest_files=["res://.godot/imported/shaded.png-902e48f85fb68ed73dcb8e6cc4228f95.s3tc.ctex"]
 
 [params]
 
