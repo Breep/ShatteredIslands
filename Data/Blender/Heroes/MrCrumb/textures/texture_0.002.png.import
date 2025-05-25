@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chfc86k03htev"
-path="res://.godot/imported/Ucupaint DragonLord Displacement.png-8b23ab8cdc8f980501a01db556e4de2a.ctex"
+uid="uid://bnvm8tanufpyy"
+path="res://.godot/imported/texture_0.002.png-e462ed3315a61e0ab1411eb17182887f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Data/Blender/Heroes/DragonLord/textures/Ucupaint DragonLord Displacement.png"
-dest_files=["res://.godot/imported/Ucupaint DragonLord Displacement.png-8b23ab8cdc8f980501a01db556e4de2a.ctex"]
+source_file="res://Data/Blender/Heroes/MrCrumb/textures/texture_0.002.png"
+dest_files=["res://.godot/imported/texture_0.002.png-e462ed3315a61e0ab1411eb17182887f.ctex"]
 
 [params]
 

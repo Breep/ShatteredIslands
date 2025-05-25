@@ -1,13 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dvtbjmadt2v8p"]
+[gd_scene load_steps=5 format=3 uid="uid://dvtbjmadt2v8p"]
 
 [ext_resource type="Script" uid="uid://boijjesl7u0r0" path="res://Scenes/Heroes/hero_3d.gd" id="1_5efed"]
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://Scenes/Components/interaction_component.tscn" id="2_j3xar"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ygfc"]
-albedo_color = Color(0.701925, 0.480078, 0, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_vmcag"]
-material = SubResource("StandardMaterial3D_7ygfc")
+[ext_resource type="PackedScene" uid="uid://bmtp8uvuepsu5" path="res://Scenes/3D_heroes/Sir Reginald/sir_.tscn" id="2_uqs1p"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uqs1p"]
 
@@ -15,9 +10,7 @@ material = SubResource("StandardMaterial3D_7ygfc")
 script = ExtResource("1_5efed")
 hero_id = 6
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CapsuleMesh_vmcag")
+[node name="sir_rigged_animated" parent="." instance=ExtResource("2_uqs1p")]
 
 [node name="InteractionComponent" parent="." instance=ExtResource("2_j3xar")]
 

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gky8flc0lrwt"
-path.s3tc="res://.godot/imported/Ucupaint DragonLord Normal.png-5880459179cfe6cbb4aa4e56b8f4c562.s3tc.ctex"
+uid="uid://ddi7ha8j1nsk1"
+path.s3tc="res://.godot/imported/Image_0.jpg-9aa37192058bca2034ae7c95d0ddc59d.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Data/Blender/Heroes/DragonLord/textures/Ucupaint DragonLord Normal.png"
-dest_files=["res://.godot/imported/Ucupaint DragonLord Normal.png-5880459179cfe6cbb4aa4e56b8f4c562.s3tc.ctex"]
+source_file="res://Data/Blender/Heroes/DragonLord/textures/Image_0.jpg"
+dest_files=["res://.godot/imported/Image_0.jpg-9aa37192058bca2034ae7c95d0ddc59d.s3tc.ctex"]
 
 [params]
 
@@ -20,12 +20,12 @@ compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=1
+compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=1
-roughness/src_normal="res://Data/Blender/Heroes/DragonLord/textures/Ucupaint DragonLord Normal.png"
+roughness/mode=0
+roughness/src_normal=""
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false
