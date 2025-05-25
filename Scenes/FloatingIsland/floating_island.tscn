@@ -20,5 +20,3 @@ transform = Transform3D(-0.00106899, -0.000369877, 0.999999, -8.7162e-05, 1, 0.0
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_yaqa4")
-
-[editable path="CenterPointCamera"]

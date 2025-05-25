@@ -42,6 +42,8 @@ var _fighting_state: GlobalFightingManager.FightingState = GlobalFightingManager
 @export var _character_logic: CharacterLogic
 @export var _turret: Turret
 
+@export var _interact_module: InteractModule # TODO TMP
+
 # ============================== Public functions ==============================
 
 func apply_cards_upgrade(deck: PlayerDeck) -> void:
@@ -81,6 +83,9 @@ func _character_ready() -> void:
 	else:
 		_character_visual.hide()
 		if _turret != null: _turret.hide()
+	
+	#_interact_module.damage_taken.connect(_on_interact_module_damage_taken)
+	#_interact_module.heal_received.connect(_on_interact_module_heal_received)
 	
 	#_server_synchronizer.set_multiplayer_authority(player.id)
 

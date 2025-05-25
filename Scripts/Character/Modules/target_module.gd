@@ -32,7 +32,7 @@ var _allies: Array[Entity] # All allies of the owned character
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	if source == null:
+	if _owner == null:
 		printerr("TargetModule: TargetModule need a ref to its owner")
 		return
 
@@ -54,23 +54,23 @@ func connect_to_entity_manager(entity_manager: EntityManager) -> void:
 func get_target(targetting_strategy: TargettingStrategy) -> Entity:
 	match targetting_strategy:
 		TargettingStrategy.CLOSEST:
-			return _get_closest(_entities, source)
+			return _get_closest(_entities, _owner)
 		TargettingStrategy.CLOSEST_ENEMY:
-			return _get_closest(_enemies, source)
+			return _get_closest(_enemies, _owner)
 		TargettingStrategy.CLOSEST_ALLY:
-			return _get_closest(_allies, source)
+			return _get_closest(_allies, _owner)
 		TargettingStrategy.FARTHEST:
-			return _get_farthest(_entities, source)
+			return _get_farthest(_entities, _owner)
 		TargettingStrategy.FARTHEST_ENEMY:
-			return _get_farthest(_enemies, source)
+			return _get_farthest(_enemies, _owner)
 		TargettingStrategy.FARTHEST_ALLY:
-			return _get_farthest(_allies, source)
+			return _get_farthest(_allies, _owner)
 		TargettingStrategy.RANDOM:
-			return _get_random(_entities, source)
+			return _get_random(_entities, _owner)
 		TargettingStrategy.RANDOM_ENEMY:
-			return _get_random(_enemies, source)
+			return _get_random(_enemies, _owner)
 		TargettingStrategy.RANDOM_ALLY:
-			return _get_random(_allies, source)
+			return _get_random(_allies, _owner)
 		TargettingStrategy.RANDOM_ALLY_INCLUDING_SELF:
 			return _get_random(_allies, null)
 		TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF:
@@ -118,7 +118,7 @@ func get_targets(strategy: MultipleTargettingStrategy) -> Array[Entity]:
 func _get_enemies_from_entities() -> Array[Entity]:
 	var ret: Array[Entity]
 	for character in _entities:
-		if character.team != source.team:
+		if character.team != _owner.team:
 			ret.append(character)
 	return ret
 
@@ -126,7 +126,7 @@ func _get_enemies_from_entities() -> Array[Entity]:
 func _get_allies_from_entities() -> Array[Entity]:
 	var ret: Array[Entity]
 	for character in _entities:
-		if character.team == source.team:
+		if character.team == _owner.team:
 			ret.append(character)
 	return ret
 
@@ -152,8 +152,8 @@ func _get_closest(characters: Array[Entity], excluded_character: Entity) -> Enti
 	
 	var closest_character = characters_copy[0]
 	for character in characters:
-		if character != source:
-			if (character.position - source.position).length_squared() < (closest_character.position - source.position).length_squared():
+		if character != _owner:
+			if (character.position - _owner.position).length_squared() < (closest_character.position - _owner.position).length_squared():
 				closest_character = character
 	
 	return closest_character
@@ -174,8 +174,8 @@ func _get_farthest(characters: Array[Entity], excluded_character: Entity) -> Ent
 	
 	var farthest_character = characters_copy[0]
 	for character in characters:
-		if character != source:
-			if (character.global_position - source.global_position).length_squared() > (farthest_character.global_position - source.global_position).length_squared():
+		if character != _owner:
+			if (character.global_position - _owner.global_position).length_squared() > (farthest_character.global_position - _owner.global_position).length_squared():
 				farthest_character = character
 	
 	return farthest_character
@@ -232,7 +232,7 @@ func _get_array_without_untargetable_targets(characters: Array[Entity]) -> Array
 # ============================== Callback ==============================
 
 func _on_entity_manager_entity_spawned(who: Entity) -> void:
-	if who.team != source.team:
+	if who.team != _owner.team:
 		_enemies.append(who)
 	else:
 		_allies.append(who)

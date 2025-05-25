@@ -23,7 +23,7 @@ func _ready() -> void:
 # [All]
 @rpc("authority", "call_local")
 func _net_take_damage(peer_id: int, damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
-	source.stats.health = clamp(source.stats.health - damage, 0, source.stats.health_max)
+	_owner.stats.health = clamp(_owner.stats.health - damage, 0, _owner.stats.health_max)
 	damage_taken.emit(damage, damage_type, is_critical)
 
 
@@ -43,10 +43,7 @@ func _take_damage(source: Character, damage: int, damage_type: Utils.DamageType,
 		damage = _fire_manager.get_reduced_damage(damage, damage_type) # Reduce % of MAGIC damage
 	
 	if _defense_manager != null:
-		damage = _defense_manager.get_reduced_damage_taken_from_armor(source, damage, damage_type) # Reduce flat of PHYSIC AND MAGIC damage
-	
-	if is_critical:
-		Events.critical_damage_done.emit(source, source, damage)
+		damage = _defense_manager.get_reduced_damage_taken_from_armor(_owner, damage, damage_type) # Reduce flat of PHYSIC AND MAGIC damage
 	
 	if source != null:
 		_net_take_damage.rpc(source.player.id, damage, damage_type, is_critical)
@@ -68,9 +65,9 @@ func _take_condition_stacks(source: Character, stacks_number: int, stack_type: U
 		Utils.StackType.POISON:
 			_poison_manager.add_to_poison_effects(source, stacks_number)
 		Utils.StackType.VULNERABILITY:
-			source.stats.storm.vulnerability_stacks += stacks_number
+			_owner.stats.storm.vulnerability_stacks += stacks_number
 	
-	if source != null:
+	if _owner != null:
 		_net_take_condition_stacks.rpc(stacks_number, stack_type, source.player.id)
 
 # ============================== Heal ==============================
@@ -78,7 +75,7 @@ func _take_condition_stacks(source: Character, stacks_number: int, stack_type: U
 # [All]
 @rpc("authority", "call_local")
 func _net_take_heal(source_id: int, heal_amount: int) -> void:
-	source.stats.health = clamp(source.stats.health + heal_amount, 0, source.stats.health_max)
+	_owner.stats.health = clamp(_owner.stats.health + heal_amount, 0, _owner.stats.health_max)
 	heal_received.emit(heal_amount)
 
 
@@ -91,15 +88,17 @@ func _take_heal(source: Character, heal_amount: int) -> void:
 # ============================== Callback ==============================
 
 func _on_events_attack_done(source, target, damage, damage_type, is_critical) -> void:
-	if target != source: return
+	print("ATTACK_DONE")
+	if target != _owner: return
+	print("ATTACK_DONE  TAKE DAMAGE")
 	_take_damage(source, damage, damage_type, is_critical)
 
 
 func _on_events_heal_done(source, target, heal_amount) -> void:
-	if target != source: return
+	if target != _owner: return
 	_take_heal(source, heal_amount)
 
 
 func _on_events_condition_stacks_done(source, target, stacks_number, stack_type) -> void:
-	if target != source: return
+	if target != _owner: return
 	_take_condition_stacks(source, stacks_number, stack_type)

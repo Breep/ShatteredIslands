@@ -5,8 +5,8 @@
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://ResourcesBase/CardBase/card.gd" id="2_ovips"]
 [ext_resource type="PackedScene" uid="uid://g706yyhstscc" path="res://Scenes/Entities/Heroes/Cyborg/cyborg.tscn" id="3_4p440"]
 [ext_resource type="Resource" uid="uid://dvpdubk0btegx" path="res://Resources/Card/Poison/poison_periodica_agaricus.tres" id="3_ovips"]
-[ext_resource type="PackedScene" uid="uid://dupryy7gaobpv" path="res://Scenes/FloatingIsland/floating_island.tscn" id="6_yjquk"]
 [ext_resource type="Texture2D" uid="uid://dodc5quv2uysn" path="res://Data/Misc/skybox.jpg" id="7_xd7nd"]
+[ext_resource type="PackedScene" uid="uid://drcuyohos0doa" path="res://Scenes/FloatingIsland/fighting_island.tscn" id="7_yjquk"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ovips"]
 panorama = ExtResource("7_xd7nd")
@@ -21,35 +21,66 @@ sky = SubResource("Sky_08xy3")
 [node name="PrototypingMap" type="Node3D" node_paths=PackedStringArray("_floating_island", "_character1", "_character2")]
 script = ExtResource("1_66i2r")
 _battle_id = 1
-_floating_island = NodePath("FloatingIsland")
+_floating_island = NodePath("FightingIsland")
 _player1_cards = Array[ExtResource("2_ovips")]([ExtResource("3_ovips")])
 _character1 = NodePath("AncientTree")
 _character2 = NodePath("Cyborg")
 
 [node name="AncientTree" parent="." instance=ExtResource("2_jb5pd")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.6476, 0, 8.97634)
+transform = Transform3D(0.964391, 0, 0.264479, 0, 1, 0, -0.264479, 0, 0.964391, 1.6476, 0, 8.97634)
 _is_prototype = true
 id = 1
 team = 1
 battle_id = 1
 
+[node name="GeneralSkeleton" parent="AncientTree/AncientTreeModel/Armature_006" index="0"]
+bones/0/position = Vector3(0.00701692, 0.432284, 0.0189377)
+bones/0/rotation = Quaternion(-0.0406581, -0.366026, -0.0129437, 0.929626)
+bones/1/rotation = Quaternion(-0.0205012, 0.318922, 0.940962, -0.111619)
+bones/2/rotation = Quaternion(0.0357536, 0.946221, -0.319798, -0.0334191)
+bones/3/rotation = Quaternion(-0.0600722, 0.734134, -0.672344, 0.0734328)
+bones/6/rotation = Quaternion(-0.103482, 0.0239631, 0.979073, 0.173591)
+bones/7/rotation = Quaternion(0.0210837, 0.964556, -0.225928, -0.134698)
+bones/8/rotation = Quaternion(0.124209, 0.572843, -0.796109, -0.150444)
+bones/13/rotation = Quaternion(0.0104892, 0.0591843, 0.0156574, 0.998069)
+bones/14/rotation = Quaternion(0.457732, 0.248891, 0.575777, -0.630092)
+bones/15/rotation = Quaternion(-0.105794, 0.833893, -0.503239, 0.200451)
+bones/16/rotation = Quaternion(0.27863, -0.724544, 0.297874, 0.555583)
+bones/19/rotation = Quaternion(0.263742, -0.459241, -0.700015, -0.479079)
+bones/20/rotation = Quaternion(0.251811, 0.831158, -0.495453, -0.0171854)
+bones/21/rotation = Quaternion(0.281745, 0.760296, -0.191881, 0.552948)
+bones/25/rotation = Quaternion(0.161579, 0.299547, -0.00223199, 0.940297)
+
+[node name="CharacterVisual" parent="AncientTree" index="2"]
+transform = Transform3D(-0.00729547, 0, 0.999973, 0, 1, 0, -0.999973, 0, -0.00729547, 0, 0.884308, 0)
+
+[node name="CharacterLogic" parent="AncientTree" index="6" node_paths=PackedStringArray("modules", "families_managers")]
+modules = {
+0: NodePath("Modules/MovementModule"),
+1: NodePath("Modules/ActionModule"),
+2: NodePath("Modules/InteractModule"),
+3: NodePath("Modules/AutoAttackModule"),
+4: NodePath("Modules/TargetModule")
+}
+families_managers = {
+0: NodePath("FamiliesManagers/AttackManager"),
+1: NodePath("FamiliesManagers/DefenseManager"),
+2: NodePath("FamiliesManagers/FireManager"),
+3: NodePath("FamiliesManagers/StormManager"),
+4: NodePath("FamiliesManagers/SerenityManager"),
+5: NodePath("FamiliesManagers/LifeManager"),
+6: NodePath("FamiliesManagers/PoisonManager")
+}
+
 [node name="Cyborg" parent="." instance=ExtResource("3_4p440")]
-transform = Transform3D(0.266801, 0, -0.963752, 0, 1, 0, 0.963752, 0, 0.266801, 2.28313, 0, 6.83022)
+transform = Transform3D(-0.999428, 0, 0.0338182, 0, 1, 0, -0.0338182, 0, -0.999428, 2.28313, 0, 6.83022)
 _is_prototype = true
 id = 2
 team = 2
 battle_id = 1
 
-[node name="FloatingIsland" parent="." instance=ExtResource("6_yjquk")]
+[node name="FightingIsland" parent="." instance=ExtResource("7_yjquk")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
-
-[node name="FightingArea" parent="FloatingIsland" index="0" node_paths=PackedStringArray("_spawn_managers")]
-battle_id = 1
-_spawn_managers = {
-0: NodePath("FightingFloorTemplates/FightingFloor_1v1/SpawnManager"),
-1: NodePath("FightingFloorTemplates/FightingFloor_2v2/SpawnManager"),
-2: NodePath("FightingFloorTemplates/FightingFloor_ffa13/SpawnManager")
-}
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_k73x5")
@@ -58,5 +89,7 @@ environment = SubResource("Environment_k73x5")
 transform = Transform3D(0.320018, 0.689149, -0.650125, 0, 0.686212, 0.727402, 0.947412, -0.232781, 0.2196, 0, 52.8971, 0)
 shadow_enabled = true
 
-[editable path="FloatingIsland"]
-[editable path="FloatingIsland/CenterPointCamera"]
+[editable path="AncientTree"]
+[editable path="AncientTree/AncientTreeModel"]
+[editable path="AncientTree/TurretCenterPoint/Turret"]
+[editable path="AncientTree/CharacterLogic"]

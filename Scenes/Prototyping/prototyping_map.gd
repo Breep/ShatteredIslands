@@ -1,7 +1,7 @@
 extends Node3D
 
 @export var _battle_id: int
-@export var _floating_island: FloatingIsland
+@export var _floating_island: FightingIsland
 
 @export var _player1_cards: Array[Card]
 @export var _player2_cards: Array[Card]

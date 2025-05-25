@@ -17,9 +17,9 @@ _center_point_camera = NodePath("CenterPointCamera")
 
 [node name="FightingArea" parent="." node_paths=PackedStringArray("_spawn_managers") instance=ExtResource("2_0nkjk")]
 _spawn_managers = {
-0: null,
-1: null,
-2: null
+0: NodePath("FightingFloorTemplates/FightingFloor_1v1/SpawnManager"),
+1: NodePath("FightingFloorTemplates/FightingFloor_2v2/SpawnManager"),
+2: NodePath("FightingFloorTemplates/FightingFloor_ffa13/SpawnManager")
 }
 
 [node name="TelescopeIsland" parent="." instance=ExtResource("3_wy27a")]
@@ -29,5 +29,3 @@ transform = Transform3D(-0.00106899, -0.000369877, 0.999999, -8.7162e-05, 1, 0.0
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_622jh")
-
-[editable path="CenterPointCamera"]

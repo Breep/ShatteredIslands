@@ -64,24 +64,31 @@ _attack_manager = NodePath("../../FamiliesManagers/AttackManager")
 
 [node name="FamiliesManagers" type="Node" parent="."]
 
-[node name="DefenseManager" parent="FamiliesManagers" instance=ExtResource("5_140mw")]
+[node name="DefenseManager" parent="FamiliesManagers" node_paths=PackedStringArray("_action_module") instance=ExtResource("5_140mw")]
 unique_name_in_owner = true
+_action_module = NodePath("../../Modules/ActionModule")
 
-[node name="FireManager" parent="FamiliesManagers" instance=ExtResource("6_2r7uk")]
+[node name="FireManager" parent="FamiliesManagers" node_paths=PackedStringArray("_action_module") instance=ExtResource("6_2r7uk")]
 unique_name_in_owner = true
+_action_module = NodePath("../../Modules/ActionModule")
 
-[node name="LifeManager" parent="FamiliesManagers" instance=ExtResource("7_3fp6t")]
+[node name="LifeManager" parent="FamiliesManagers" node_paths=PackedStringArray("_action_module") instance=ExtResource("7_3fp6t")]
 unique_name_in_owner = true
+_action_module = NodePath("../../Modules/ActionModule")
 
-[node name="PoisonManager" parent="FamiliesManagers" instance=ExtResource("8_6f83j")]
+[node name="PoisonManager" parent="FamiliesManagers" node_paths=PackedStringArray("_action_module") instance=ExtResource("8_6f83j")]
 unique_name_in_owner = true
+_action_module = NodePath("../../Modules/ActionModule")
 
-[node name="SerenityManager" parent="FamiliesManagers" instance=ExtResource("9_5ysdc")]
+[node name="SerenityManager" parent="FamiliesManagers" node_paths=PackedStringArray("_action_module") instance=ExtResource("9_5ysdc")]
 unique_name_in_owner = true
+_action_module = NodePath("../../Modules/ActionModule")
 
-[node name="StormManager" parent="FamiliesManagers" instance=ExtResource("10_7a66c")]
+[node name="StormManager" parent="FamiliesManagers" node_paths=PackedStringArray("_action_module") instance=ExtResource("10_7a66c")]
 unique_name_in_owner = true
 _percent_decrease = 10.0
+_action_module = NodePath("../../Modules/ActionModule")
 
-[node name="AttackManager" parent="FamiliesManagers" instance=ExtResource("11_rmt4k")]
+[node name="AttackManager" parent="FamiliesManagers" node_paths=PackedStringArray("_action_module") instance=ExtResource("11_rmt4k")]
 unique_name_in_owner = true
+_action_module = NodePath("../../Modules/ActionModule")

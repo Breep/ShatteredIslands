@@ -34,31 +34,31 @@ func _move_toward_target(delta: float):
 	if not _is_moving:
 		return
 	
-	if _target_position == null or source.global_position.distance_to(_target_position) < 0.1:
+	if _target_position == null or _owner.global_position.distance_to(_target_position) < 0.1:
 		_is_moving = false
 		return
 	
-	var previous_position = source.global_position
-	var direction: Vector3 = (_target_position - source.global_position).normalized()
+	var previous_position = _owner.global_position
+	var direction: Vector3 = (_target_position - _owner.global_position).normalized()
 	
 	
-	source.velocity = direction * _get_move_speed() * delta
+	_owner.velocity = direction * _get_move_speed() * delta
 	#print("DIRECTION ", direction)
-	source.move_and_slide()
-	var distance_moved = source.global_position.distance_to(previous_position)
-	print("POS= ", source.global_position)
+	_owner.move_and_slide()
+	var distance_moved = _owner.global_position.distance_to(previous_position)
+	print("POS= ", _owner.global_position)
 
 
 func _get_move_speed() -> float:
-	var move_speed: float = source.stats.move_speed
+	var move_speed: float = _owner.stats.move_speed
 	return move_speed
 
 
 func _on_events_map_clicked(battle_id: int, clicked_position: Vector3) -> void:
-	if not battle_id == source.battle_id:
+	if not battle_id == _owner.battle_id:
 		return
 	
 	clicked_position.y = 0
-	print("SHOULD MOVE to ", clicked_position, "/", source.global_position)
+	print("SHOULD MOVE to ", clicked_position, "/", _owner.global_position)
 	_target_position = clicked_position
 	_is_moving = true

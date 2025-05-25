@@ -11,7 +11,7 @@ var target_module: TargetModule
 func _enter_tree() -> void:
 	if is_node_ready(): return # Only do it once
 	for module in modules.values():
-		module.source = _source
+		module._owner = _source
 	
 	for family_manager in families_managers.values():
 		family_manager.source = _source

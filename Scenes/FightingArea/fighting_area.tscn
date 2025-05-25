@@ -48,13 +48,13 @@ layout_mode = 1
 [node name="FightingFloorTemplates" type="Node3D" parent="."]
 
 [node name="FightingFloor_1v1" parent="FightingFloorTemplates" instance=ExtResource("5_2akj6")]
+visible = false
 
 [node name="SpawnManager" parent="FightingFloorTemplates/FightingFloor_1v1" index="0" node_paths=PackedStringArray("_entities_node", "_projectiles_node")]
 _entities_node = NodePath("../../../Entities")
 _projectiles_node = NodePath("../../../Projectiles")
 
 [node name="FightingFloor_2v2" parent="FightingFloorTemplates" instance=ExtResource("6_yyfcp")]
-visible = false
 
 [node name="SpawnManager" parent="FightingFloorTemplates/FightingFloor_2v2" index="0" node_paths=PackedStringArray("_entities_node", "_projectiles_node")]
 _entities_node = NodePath("../../../Entities")

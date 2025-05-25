@@ -49,7 +49,7 @@ var current_target: Entity:
 # ============================== Public functions ==============================
 
 func start() -> void:
-	attack_speed = source.stats.attack_speed
+	attack_speed = _owner.stats.attack_speed
 	_auto_attack_timer.start()
 
 
@@ -63,7 +63,7 @@ func set_projectile(projectile_type: Projectile.ProjectileType) -> void:
 # ============================== Private functions ==============================
 
 func _specific_init() -> void:
-	source.stats.attack_speed_changed.connect(_on_source_stats_attack_speed_changed)
+	_owner.stats.attack_speed_changed.connect(_on_source_stats_attack_speed_changed)
 
 
 func set_auto_attack_speed(attack_speed: float) -> void:
@@ -77,7 +77,7 @@ func set_auto_attack_speed(attack_speed: float) -> void:
 func _auto_attack(target: Character) -> void:
 	var projectile_stats := ProjectileStats.new()
 	
-	projectile_stats.physical_damage_flat = source.stats.attack_damage
+	projectile_stats.physical_damage_flat = _owner.stats.attack_damage
 	projectile_stats.speed = 10
 	
 	if _attack_manager != null:
@@ -89,16 +89,16 @@ func _auto_attack(target: Character) -> void:
 
 
 func _update_auto_attack_speed() -> void:
-	source.stats.attack_speed = _default_attack_speed
+	_owner.stats.attack_speed = _default_attack_speed
 	var attack_speed_boost: float = _aa_stats.attack_speed_boost + _aa_stats.attack_speed_overtime_current
 	var multiply_boost: float = remap(attack_speed_boost, 0, 100, 1, 2) # Convert % in proportional multiple (100% = x2 | 150% = x2.5)
-	source.stats.attack_speed *= multiply_boost
-	set_auto_attack_speed(source.stats.attack_speed)
+	_owner.stats.attack_speed *= multiply_boost
+	set_auto_attack_speed(_owner.stats.attack_speed)
 
 # ============================== Callbacks functions ==============================
 
 func _on_auto_attack_timer_timeout() -> void:
-	var target = source.target_module.get_target(_attack_strategy)
+	var target = _owner.target_module.get_target(_attack_strategy)
 	current_target = target
 	if target == null: return
 	_auto_attack(target)

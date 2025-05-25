@@ -9,8 +9,8 @@ enum ModuleType {
 	TARGET
 }
 
-@export var source: Entity # Owner of the module
+@export var _owner: Entity # Owner of the module
 
 func _ready() -> void:
-	if source == null:
+	if _owner == null:
 		printerr("Module: undef source [", get_path(), "]")
