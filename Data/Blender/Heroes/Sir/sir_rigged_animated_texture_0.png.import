@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://40clgsdqtndv"
-path.s3tc="res://.godot/imported/Ucupaint DragonLord Roughness.png-e7e1c64807c8e9bb9f47868b2052f032.s3tc.ctex"
+uid="uid://dy1a8rl30h7i5"
+path.s3tc="res://.godot/imported/sir_rigged_animated_texture_0.png-ca4620e16efeba8c721a32702b7d1543.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "81877364c2058459a71b25a1df7436b2"
+}
 
 [deps]
 
-source_file="res://Data/Blender/Heroes/DragonLord/textures/Ucupaint DragonLord Roughness.png"
-dest_files=["res://.godot/imported/Ucupaint DragonLord Roughness.png-e7e1c64807c8e9bb9f47868b2052f032.s3tc.ctex"]
+source_file="res://Data/Blender/Heroes/Sir/sir_rigged_animated_texture_0.png"
+dest_files=["res://.godot/imported/sir_rigged_animated_texture_0.png-ca4620e16efeba8c721a32702b7d1543.s3tc.ctex"]
 
 [params]
 

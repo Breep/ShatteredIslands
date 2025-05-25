@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lhk3k18gwvk0"
-path="res://.godot/imported/Ucupaint DragonLord Metallic.png-17353249cb078a9af05a7bf0e67251fb.ctex"
+uid="uid://8iiiy3n54ytn"
+path="res://.godot/imported/texture_0.004.png-9993f2ffbbb4a94c71664a9e8d64a0dc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Data/Blender/Heroes/DragonLord/textures/Ucupaint DragonLord Metallic.png"
-dest_files=["res://.godot/imported/Ucupaint DragonLord Metallic.png-17353249cb078a9af05a7bf0e67251fb.ctex"]
+source_file="res://Data/Blender/Heroes/MrCrumb/textures/texture_0.004.png"
+dest_files=["res://.godot/imported/texture_0.004.png-9993f2ffbbb4a94c71664a9e8d64a0dc.ctex"]
 
 [params]
 

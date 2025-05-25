@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blfaan53ajiie"
-path.s3tc="res://.godot/imported/Ucupaint DragonLord Color.png-450dd737d91e57dff14d2039451ea476.s3tc.ctex"
+uid="uid://c7mxmddaogrf3"
+path.s3tc="res://.godot/imported/texture_0.png-6522e0905269a37349c714c70db315d2.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Data/Blender/Heroes/DragonLord/textures/Ucupaint DragonLord Color.png"
-dest_files=["res://.godot/imported/Ucupaint DragonLord Color.png-450dd737d91e57dff14d2039451ea476.s3tc.ctex"]
+source_file="res://Data/Blender/Heroes/MrCrumb/textures/texture_0.png"
+dest_files=["res://.godot/imported/texture_0.png-6522e0905269a37349c714c70db315d2.s3tc.ctex"]
 
 [params]
 
