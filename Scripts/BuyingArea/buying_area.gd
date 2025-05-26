@@ -10,7 +10,6 @@ signal _player_hero_picked()
 
 # ============================== Private variables ==============================
 
-var _current_round: int
 var _battles: Array[Battle]
 
 var _available_heroes: Array[Hero]
@@ -28,8 +27,7 @@ var _heroes_ready: int
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	_current_round = RoundManager.current_round
-	#_battles = RoundManager.get_current_round_battles()
+	return
 
 # ============================== Public functions ==============================
 

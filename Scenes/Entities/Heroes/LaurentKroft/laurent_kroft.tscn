@@ -1,21 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://dry6jgn0h7srg"]
+[gd_scene load_steps=11 format=3 uid="uid://dry6jgn0h7srg"]
 
 [ext_resource type="Script" uid="uid://bvx6cyg3ybjvf" path="res://Scenes/Entities/Heroes/LaurentKroft/laurent_kroft.gd" id="1_p8n2g"]
 [ext_resource type="Resource" uid="uid://cnecvw18tqmuq" path="res://Resources/Heroes/laurent_kroft.tres" id="2_hk5ya"]
 [ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Scenes/Character/character_visual.tscn" id="2_u56hr"]
 [ext_resource type="PackedScene" uid="uid://cf0pc5jtr0651" path="res://Scenes/Entities/Heroes/LaurentKroft/laurent_kroft_model.tscn" id="2_w4ua8"]
-[ext_resource type="PackedScene" uid="uid://d0g0xkyr876lc" path="res://Scenes/Character/Modules/movement_module.tscn" id="3_25l8h"]
-[ext_resource type="PackedScene" uid="uid://617x5c1qrdpg" path="res://Scenes/Character/Modules/action_module.tscn" id="4_fksaq"]
-[ext_resource type="PackedScene" uid="uid://bbwmtb5op8clu" path="res://Scenes/Character/Modules/interact_module.tscn" id="5_lp7pr"]
-[ext_resource type="PackedScene" uid="uid://b6yg1bhhmnicr" path="res://Scenes/Character/Modules/auto_attack_module.tscn" id="6_s25rw"]
-[ext_resource type="PackedScene" uid="uid://bext8rh783yay" path="res://Scenes/Character/FamiliesManagers/defense_manager.tscn" id="7_qstf4"]
-[ext_resource type="PackedScene" uid="uid://cl10r3idwllx" path="res://Scenes/Character/FamiliesManagers/fire_manager.tscn" id="8_ae8vq"]
-[ext_resource type="PackedScene" uid="uid://6holmj326e1y" path="res://Scenes/Character/FamiliesManagers/life_manager.tscn" id="9_m5fkb"]
-[ext_resource type="PackedScene" uid="uid://cvihi4los882b" path="res://Scenes/Character/FamiliesManagers/poison_manager.tscn" id="10_x7kjt"]
-[ext_resource type="PackedScene" uid="uid://bdl1xxjdbeugn" path="res://Scenes/Character/FamiliesManagers/serenity_manager.tscn" id="11_mbvjr"]
-[ext_resource type="PackedScene" uid="uid://bjbfnigvphbfc" path="res://Scenes/Character/FamiliesManagers/storm_manager.tscn" id="13_mya11"]
-[ext_resource type="PackedScene" uid="uid://crqesljjrouec" path="res://Scenes/Character/FamiliesManagers/attack_manager.tscn" id="14_ulyxi"]
-[ext_resource type="PackedScene" uid="uid://n30ifkjad344" path="res://Scenes/Character/Modules/target_module.tscn" id="15_ymj50"]
+[ext_resource type="PackedScene" uid="uid://qgjyscmtp6t3" path="res://Scenes/Character/character_logic.tscn" id="8_0l62g"]
 [ext_resource type="PackedScene" uid="uid://dqrhym1sskng8" path="res://Scenes/Entities/Turret/turret.tscn" id="17_wovto"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Scenes/Tool/anim_hovering_module.tscn" id="18_pr4i5"]
 [ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://Scenes/Tool/anim_rotating_module.tscn" id="19_vq8b4"]
@@ -41,24 +30,15 @@ properties/4/replication_mode = 2
 properties/5/path = NodePath(".:battle_id")
 properties/5/spawn = true
 properties/5/replication_mode = 2
+properties/6/path = NodePath(".:rotation")
+properties/6/spawn = true
+properties/6/replication_mode = 2
 
-[node name="LaurentKroft" type="CharacterBody3D" node_paths=PackedStringArray("_families_managers", "_movement_module", "_action_module", "_interact_module", "_auto_attack_module", "_turret") groups=["CHARACTER"]]
+[node name="LaurentKroft" type="CharacterBody3D" node_paths=PackedStringArray("_character_logic", "_turret") groups=["CHARACTER"]]
 motion_mode = 1
 script = ExtResource("1_p8n2g")
 _hero = ExtResource("2_hk5ya")
-_families_managers = {
-0: NodePath("FamiliesManagers/AttackManager"),
-1: NodePath("FamiliesManagers/DefenseManager"),
-2: NodePath("FamiliesManagers/FireManager"),
-3: NodePath("FamiliesManagers/StormManager"),
-4: NodePath("FamiliesManagers/SerenityManager"),
-5: NodePath("FamiliesManagers/LifeManager"),
-6: NodePath("FamiliesManagers/PoisonManager")
-}
-_movement_module = NodePath("Modules/MovementModule")
-_action_module = NodePath("Modules/ActionModule")
-_interact_module = NodePath("Modules/InteractModule")
-_auto_attack_module = NodePath("Modules/AutoAttackModule")
+_character_logic = NodePath("CharacterLogic")
 _turret = NodePath("TurretCenterPoint/Turret")
 
 [node name="LaurentKroftModel" parent="." instance=ExtResource("2_w4ua8")]
@@ -70,49 +50,6 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_rxegs")
 
-[node name="Modules" type="Node" parent="."]
-
-[node name="MovementModule" parent="Modules" instance=ExtResource("3_25l8h")]
-unique_name_in_owner = true
-
-[node name="ActionModule" parent="Modules" instance=ExtResource("4_fksaq")]
-unique_name_in_owner = true
-
-[node name="InteractModule" parent="Modules" instance=ExtResource("5_lp7pr")]
-unique_name_in_owner = true
-
-[node name="AutoAttackModule" parent="Modules" node_paths=PackedStringArray("projectile_spawn") instance=ExtResource("6_s25rw")]
-unique_name_in_owner = true
-projectile_spawn = NodePath("../../TurretCenterPoint/Turret/SpawnPoint")
-
-[node name="FamiliesManagers" type="Node" parent="."]
-
-[node name="DefenseManager" parent="FamiliesManagers" instance=ExtResource("7_qstf4")]
-unique_name_in_owner = true
-
-[node name="FireManager" parent="FamiliesManagers" instance=ExtResource("8_ae8vq")]
-unique_name_in_owner = true
-
-[node name="LifeManager" parent="FamiliesManagers" instance=ExtResource("9_m5fkb")]
-unique_name_in_owner = true
-
-[node name="PoisonManager" parent="FamiliesManagers" instance=ExtResource("10_x7kjt")]
-unique_name_in_owner = true
-
-[node name="SerenityManager" parent="FamiliesManagers" instance=ExtResource("11_mbvjr")]
-unique_name_in_owner = true
-
-[node name="StormManager" parent="FamiliesManagers" instance=ExtResource("13_mya11")]
-unique_name_in_owner = true
-_percent_decrease = 10.0
-
-[node name="AttackManager" parent="FamiliesManagers" instance=ExtResource("14_ulyxi")]
-unique_name_in_owner = true
-
-[node name="TargetManager" parent="." node_paths=PackedStringArray("_source") instance=ExtResource("15_ymj50")]
-unique_name_in_owner = true
-_source = NodePath("..")
-
 [node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 unique_name_in_owner = true
 replication_config = SubResource("SceneReplicationConfig_5ed6q")
@@ -120,8 +57,9 @@ replication_config = SubResource("SceneReplicationConfig_5ed6q")
 [node name="TurretCenterPoint" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.36537, 0)
 
-[node name="Turret" parent="TurretCenterPoint" instance=ExtResource("17_wovto")]
+[node name="Turret" parent="TurretCenterPoint" node_paths=PackedStringArray("_auto_attack_module") instance=ExtResource("17_wovto")]
 transform = Transform3D(0.395, 0, 0, 0, 0.395, 0, 0, 0, 0.395, 2, 0, 0)
+_auto_attack_module = NodePath("../../CharacterLogic/Modules/AutoAttackModule")
 
 [node name="AnimHoveringModule" parent="TurretCenterPoint/Turret" node_paths=PackedStringArray("_owner") instance=ExtResource("18_pr4i5")]
 _owner = NodePath("..")
@@ -135,5 +73,28 @@ _rot_period = 9.0
 _rot_max = 360.0
 _rot_full = true
 
+[node name="CharacterLogic" parent="." node_paths=PackedStringArray("_source", "modules", "families_managers") instance=ExtResource("8_0l62g")]
+_source = NodePath("..")
+modules = {
+0: NodePath("Modules/MovementModule"),
+1: NodePath("Modules/ActionModule"),
+2: NodePath("Modules/InteractModule"),
+3: NodePath("Modules/AutoAttackModule"),
+4: NodePath("Modules/TargetModule")
+}
+families_managers = {
+0: NodePath("FamiliesManagers/AttackManager"),
+1: NodePath("FamiliesManagers/DefenseManager"),
+2: NodePath("FamiliesManagers/FireManager"),
+3: NodePath("FamiliesManagers/StormManager"),
+4: NodePath("FamiliesManagers/SerenityManager"),
+5: NodePath("FamiliesManagers/LifeManager"),
+6: NodePath("FamiliesManagers/PoisonManager")
+}
+
+[node name="AutoAttackModule" parent="CharacterLogic/Modules" index="3" node_paths=PackedStringArray("projectile_spawn")]
+projectile_spawn = NodePath("../../../TurretCenterPoint/Turret/SpawnPoint")
+
 [editable path="LaurentKroftModel"]
 [editable path="TurretCenterPoint/Turret"]
+[editable path="CharacterLogic"]

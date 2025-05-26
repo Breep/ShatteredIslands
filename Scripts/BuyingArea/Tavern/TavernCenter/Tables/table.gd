@@ -8,17 +8,12 @@ extends Node3D
 # ============================== Export (Local) ==============================
 
 @export var _coin_piles: Array[CoinPile]
-@export var _hero_spawns: Array[Node3D]
+@export var _hero_spawns: Array[SpawnPoint]
 
 @export var battle_type: Battle.BattleType
 @export var battle_id: int
 
 # ============================== Node base functions ==============================
-
-func _enter_tree() -> void:
-	for hero_spawn in _hero_spawns:
-		for child in hero_spawn.get_children():
-			child.queue_free()
 
 func _ready() -> void:
 	if _hero_spawns.size() != _coin_piles.size(): # or _card_fans.size() != _hero_spawns.size():
@@ -28,19 +23,34 @@ func _ready() -> void:
 # ============================== Public functions ==============================
 
 func connect_to_players(players: Array[Player]) -> void:
-	for child in entities_node.get_children():
-		child.queue_free()
-	
 	if players.size() > _hero_spawns.size():
 		printerr("Table: There are too many players for this table !")
 		return
-	
-	for i in players.size():
-		var character: Character = Shared.CHARACTERS[players[i].hero.id].instantiate()
-		character.owner_player_id = players[i].id
-		print(character.owner_player_id, "   ", players[i].id)
-		character.apply_cards_upgrade(players[i].deck)
-		entities_node.add_child(character)
-		character.global_position = _hero_spawns[i].global_position
-		character.global_rotation = _hero_spawns[i].global_rotation
-		_coin_piles[i].connect_to_player(players[i])
+		
+	print("DEBUG: CONNECT TO PLAYERS")
+	var avaible_spawns: Array[SpawnPoint] = _hero_spawns.duplicate()
+	for player in players:
+		_spawn_player_character(player, avaible_spawns)
+
+# ============================== Private functions ==============================
+
+func _spawn_player_character(player: Player, avaible_spawns: Array[SpawnPoint]) -> void:
+	var character: Character = player.character
+	print("  DEBUG: TRYING TO SPAWN PLAYER CHARACTER ", character.name, " ", player.team)
+	for spawn_point in avaible_spawns:
+		if spawn_point.team == player.team:
+			print("    DEBUG: SPAWN PLAYER CHARACTER ", character.name)
+			reparent_entity.rpc(character.get_path(), entities_node.get_path())
+			character.global_rotation = spawn_point.global_rotation
+			character.global_position = spawn_point.global_position
+			avaible_spawns.erase(spawn_point)
+			return
+			#_coin_piles[i].connect_to_player(players[i])
+
+
+@rpc("authority", "call_local")
+func reparent_entity(entity_path: NodePath, new_parent_path: NodePath):
+	var entity = get_node(entity_path)
+	var new_parent = get_node(new_parent_path)
+	if entity and new_parent:
+		entity.reparent(new_parent)

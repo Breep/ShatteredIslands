@@ -5,10 +5,9 @@ extends FloatingIsland
 
 # ============================== Public functions ==============================
 
-# Spawn all characters on the FightingArea according to the battle
-# Connect all characters to the FightingArea of the FloatingIsland
-func start_buying_phase(characters: Array[Character], battle_type: Battle.BattleType) -> void:
-	pass
+# Spawn all characters on the BuyingArea according to the battle
+func start_buying_phase(battles: Array[Battle]) -> void:
+	_buying_area.start_round(battles)
 
 
 func set_active() -> void:

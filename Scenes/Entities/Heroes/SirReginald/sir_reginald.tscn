@@ -1,24 +1,22 @@
-[gd_scene load_steps=22 format=3 uid="uid://d3tlk3rg4dhpk"]
+[gd_scene load_steps=13 format=3 uid="uid://d3tlk3rg4dhpk"]
 
 [ext_resource type="Script" uid="uid://juprec5foa1l" path="res://Scenes/Entities/Heroes/SirReginald/sir_reginald.gd" id="1_bmlym"]
 [ext_resource type="PackedScene" uid="uid://dvtbjmadt2v8p" path="res://Scenes/Entities/Heroes/SirReginald/sir_reginald_model.tscn" id="2_dpdl0"]
 [ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Scenes/Character/character_visual.tscn" id="2_m5fhr"]
 [ext_resource type="Resource" uid="uid://bqjyvw4bxcnt7" path="res://Resources/Heroes/sir_reginald.tres" id="2_sms4n"]
-[ext_resource type="PackedScene" uid="uid://d0g0xkyr876lc" path="res://Scenes/Character/Modules/movement_module.tscn" id="3_vkp8i"]
-[ext_resource type="PackedScene" uid="uid://617x5c1qrdpg" path="res://Scenes/Character/Modules/action_module.tscn" id="4_ax5m8"]
-[ext_resource type="PackedScene" uid="uid://bbwmtb5op8clu" path="res://Scenes/Character/Modules/interact_module.tscn" id="5_61mc0"]
-[ext_resource type="PackedScene" uid="uid://b6yg1bhhmnicr" path="res://Scenes/Character/Modules/auto_attack_module.tscn" id="6_o6sfh"]
-[ext_resource type="PackedScene" uid="uid://bext8rh783yay" path="res://Scenes/Character/FamiliesManagers/defense_manager.tscn" id="7_ccr65"]
-[ext_resource type="PackedScene" uid="uid://cl10r3idwllx" path="res://Scenes/Character/FamiliesManagers/fire_manager.tscn" id="8_74vpe"]
-[ext_resource type="PackedScene" uid="uid://6holmj326e1y" path="res://Scenes/Character/FamiliesManagers/life_manager.tscn" id="9_owi5s"]
-[ext_resource type="PackedScene" uid="uid://cvihi4los882b" path="res://Scenes/Character/FamiliesManagers/poison_manager.tscn" id="10_3u0aq"]
-[ext_resource type="PackedScene" uid="uid://bdl1xxjdbeugn" path="res://Scenes/Character/FamiliesManagers/serenity_manager.tscn" id="11_f1jff"]
-[ext_resource type="PackedScene" uid="uid://bjbfnigvphbfc" path="res://Scenes/Character/FamiliesManagers/storm_manager.tscn" id="13_1g1l8"]
-[ext_resource type="PackedScene" uid="uid://crqesljjrouec" path="res://Scenes/Character/FamiliesManagers/attack_manager.tscn" id="14_qn65r"]
-[ext_resource type="PackedScene" uid="uid://n30ifkjad344" path="res://Scenes/Character/Modules/target_module.tscn" id="15_t2fkt"]
+[ext_resource type="PackedScene" uid="uid://qgjyscmtp6t3" path="res://Scenes/Character/character_logic.tscn" id="8_qnymp"]
 [ext_resource type="PackedScene" uid="uid://dqrhym1sskng8" path="res://Scenes/Entities/Turret/turret.tscn" id="17_prs0y"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Scenes/Tool/anim_hovering_module.tscn" id="18_ul7oy"]
 [ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://Scenes/Tool/anim_rotating_module.tscn" id="19_txr2m"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qnymp"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_eo037"]
+graph_offset = Vector2(-167, 14)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_qnymp")
+nodes/Animation/position = Vector2(-20, 140)
+node_connections = [&"output", 0, &"Animation"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rxegs"]
 
@@ -41,16 +39,49 @@ properties/4/replication_mode = 2
 properties/5/path = NodePath(".:battle_id")
 properties/5/spawn = true
 properties/5/replication_mode = 2
+properties/6/path = NodePath(".:rotation")
+properties/6/spawn = true
+properties/6/replication_mode = 2
 
-[node name="SirReginald" type="CharacterBody3D" node_paths=PackedStringArray("_turret", "_interact_module") groups=["CHARACTER"]]
+[node name="SirReginald" type="CharacterBody3D" node_paths=PackedStringArray("_character_logic", "_turret") groups=["CHARACTER"]]
 motion_mode = 1
 script = ExtResource("1_bmlym")
 _hero = ExtResource("2_sms4n")
+_character_logic = NodePath("CharacterLogic")
 _turret = NodePath("TurretCenterPoint/Turret")
-_interact_module = NodePath("Modules/InteractModule")
 
 [node name="SirReginaldModel" parent="." instance=ExtResource("2_dpdl0")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-1.235, 0, -1.8648e-07, 0, 1.235, 0, 1.8648e-07, 0, -1.235, 0, 0, 0)
+
+[node name="GeneralSkeleton" parent="SirReginaldModel/sir_rigged_animated/Armature" index="0"]
+bones/0/position = Vector3(-0.000281801, 0.671473, 0.0323375)
+bones/0/rotation = Quaternion(0.0418585, -0.135736, -0.00516131, 0.989847)
+bones/1/rotation = Quaternion(-0.0298825, 0.343023, 0.937066, -0.0578791)
+bones/2/rotation = Quaternion(-0.015913, 0.983675, -0.154129, 0.0915171)
+bones/3/rotation = Quaternion(-0.0499878, 0.803232, -0.593376, 0.0150068)
+bones/4/rotation = Quaternion(0.0123486, 0.999909, 0.00190572, -0.00505867)
+bones/6/rotation = Quaternion(-0.0464544, 0.140567, 0.978867, 0.141075)
+bones/7/rotation = Quaternion(-0.0424611, 0.929253, -0.362575, -0.0567973)
+bones/8/rotation = Quaternion(0.0931416, 0.506924, -0.850073, -0.108297)
+bones/9/rotation = Quaternion(-0.0105053, 0.999877, 0.0115474, 0.0016393)
+bones/11/rotation = Quaternion(-4.09782e-08, 2.23517e-08, 9.68575e-08, 1)
+bones/12/rotation = Quaternion(-3.7212e-09, 1.41517e-09, 4.36557e-10, 1)
+bones/13/rotation = Quaternion(0.198696, 0.0342991, 0.00398069, 0.979453)
+bones/14/rotation = Quaternion(0.303414, 0.516936, 0.591123, -0.539714)
+bones/15/rotation = Quaternion(0.309367, 0.773217, -0.217166, 0.509182)
+bones/16/rotation = Quaternion(-0.0606575, -0.850791, 0.230036, 0.468571)
+bones/17/rotation = Quaternion(0.095156, 0.522194, -0.0319984, 0.846897)
+bones/19/rotation = Quaternion(0.154383, -0.60163, -0.540613, -0.567402)
+bones/20/rotation = Quaternion(-0.243857, 0.770105, -0.288808, -0.51387)
+bones/21/rotation = Quaternion(-0.0629519, 0.900385, -0.276317, 0.330141)
+bones/22/rotation = Quaternion(0.0596351, -0.470815, 0.049838, 0.878802)
+bones/24/rotation = Quaternion(-1.49048e-08, 8.73115e-10, -1.83354e-09, 1)
+bones/25/rotation = Quaternion(-0.161894, 0.0916068, -0.037983, 0.981813)
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../SirReginaldModel/sir_rigged_animated")
+tree_root = SubResource("AnimationNodeBlendTree_eo037")
+anim_player = NodePath("../SirReginaldModel/sir_rigged_animated/AnimationPlayer")
 
 [node name="CharacterVisual" parent="." instance=ExtResource("2_m5fhr")]
 unique_name_in_owner = true
@@ -59,48 +90,6 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_rxegs")
 
-[node name="Modules" type="Node" parent="."]
-
-[node name="MovementModule" parent="Modules" instance=ExtResource("3_vkp8i")]
-unique_name_in_owner = true
-
-[node name="ActionModule" parent="Modules" instance=ExtResource("4_ax5m8")]
-unique_name_in_owner = true
-
-[node name="InteractModule" parent="Modules" instance=ExtResource("5_61mc0")]
-unique_name_in_owner = true
-
-[node name="AutoAttackModule" parent="Modules" node_paths=PackedStringArray("projectile_spawn") instance=ExtResource("6_o6sfh")]
-unique_name_in_owner = true
-projectile_spawn = NodePath("../../TurretCenterPoint/Turret/SpawnPoint")
-
-[node name="FamiliesManagers" type="Node" parent="."]
-
-[node name="DefenseManager" parent="FamiliesManagers" instance=ExtResource("7_ccr65")]
-unique_name_in_owner = true
-
-[node name="FireManager" parent="FamiliesManagers" instance=ExtResource("8_74vpe")]
-unique_name_in_owner = true
-
-[node name="LifeManager" parent="FamiliesManagers" instance=ExtResource("9_owi5s")]
-unique_name_in_owner = true
-
-[node name="PoisonManager" parent="FamiliesManagers" instance=ExtResource("10_3u0aq")]
-unique_name_in_owner = true
-
-[node name="SerenityManager" parent="FamiliesManagers" instance=ExtResource("11_f1jff")]
-unique_name_in_owner = true
-
-[node name="StormManager" parent="FamiliesManagers" instance=ExtResource("13_1g1l8")]
-unique_name_in_owner = true
-_percent_decrease = 10.0
-
-[node name="AttackManager" parent="FamiliesManagers" instance=ExtResource("14_qn65r")]
-unique_name_in_owner = true
-
-[node name="TargetManager" parent="." instance=ExtResource("15_t2fkt")]
-unique_name_in_owner = true
-
 [node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 unique_name_in_owner = true
 replication_config = SubResource("SceneReplicationConfig_5ed6q")
@@ -108,8 +97,9 @@ replication_config = SubResource("SceneReplicationConfig_5ed6q")
 [node name="TurretCenterPoint" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.36537, 0)
 
-[node name="Turret" parent="TurretCenterPoint" instance=ExtResource("17_prs0y")]
+[node name="Turret" parent="TurretCenterPoint" node_paths=PackedStringArray("_auto_attack_module") instance=ExtResource("17_prs0y")]
 transform = Transform3D(0.495, 0, 0, 0, 0.495, 0, 0, 0, 0.495, 3, 0, 0)
+_auto_attack_module = NodePath("../../CharacterLogic/Modules/AutoAttackModule")
 
 [node name="AnimHoveringModule" parent="TurretCenterPoint/Turret" node_paths=PackedStringArray("_owner") instance=ExtResource("18_ul7oy")]
 _owner = NodePath("..")
@@ -123,5 +113,26 @@ _rot_period = 11.0
 _rot_max = 360.0
 _rot_full = true
 
+[node name="CharacterLogic" parent="." node_paths=PackedStringArray("_source", "modules", "families_managers") instance=ExtResource("8_qnymp")]
+_source = NodePath("..")
+modules = {
+0: NodePath("Modules/MovementModule"),
+1: NodePath("Modules/ActionModule"),
+2: NodePath("Modules/InteractModule"),
+3: NodePath("Modules/AutoAttackModule"),
+4: NodePath("Modules/TargetModule")
+}
+families_managers = {
+0: NodePath("FamiliesManagers/AttackManager"),
+1: NodePath("FamiliesManagers/DefenseManager"),
+2: NodePath("FamiliesManagers/FireManager"),
+3: NodePath("FamiliesManagers/StormManager"),
+4: NodePath("FamiliesManagers/SerenityManager"),
+5: NodePath("FamiliesManagers/LifeManager"),
+6: NodePath("FamiliesManagers/PoisonManager")
+}
+
 [editable path="SirReginaldModel"]
+[editable path="SirReginaldModel/sir_rigged_animated"]
 [editable path="TurretCenterPoint/Turret"]
+[editable path="CharacterLogic"]

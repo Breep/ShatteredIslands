@@ -73,6 +73,7 @@ func _character_ready() -> void:
 	
 	if owner_player_id != 0:
 		player = PlayerManager.players[owner_player_id]
+		player.character = self
 		_is_local = player.id == multiplayer.get_unique_id()
 	
 	if battle_id != -1:
