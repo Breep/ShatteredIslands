@@ -44,27 +44,15 @@ properties/5/path = NodePath(".:battle_id")
 properties/5/spawn = true
 properties/5/replication_mode = 2
 
-[node name="DrBoom" type="CharacterBody3D" node_paths=PackedStringArray("_families_managers", "_movement_module", "_action_module", "_interact_module", "_auto_attack_module", "_turret") groups=["CHARACTER"]]
+[node name="DrBoom" type="CharacterBody3D" node_paths=PackedStringArray("_turret", "_interact_module") groups=["CHARACTER"]]
 motion_mode = 1
 script = ExtResource("1_2scy2")
 _hero = ExtResource("2_1vhg0")
-_families_managers = {
-0: NodePath("FamiliesManagers/AttackManager"),
-1: NodePath("FamiliesManagers/DefenseManager"),
-2: NodePath("FamiliesManagers/FireManager"),
-3: NodePath("FamiliesManagers/StormManager"),
-4: NodePath("FamiliesManagers/SerenityManager"),
-5: NodePath("FamiliesManagers/LifeManager"),
-6: NodePath("FamiliesManagers/PoisonManager")
-}
-_movement_module = NodePath("Modules/MovementModule")
-_action_module = NodePath("Modules/ActionModule")
-_interact_module = NodePath("Modules/InteractModule")
-_auto_attack_module = NodePath("Modules/AutoAttackModule")
 _turret = NodePath("TurretCenterPoint/Turret")
+_interact_module = NodePath("Modules/InteractModule")
 
 [node name="DrBoomModel" parent="." instance=ExtResource("16_1vhg0")]
-transform = Transform3D(0.52, 0, 0, 0, 0.52, 0, 0, 0, 0.52, 0, 0, 0)
+transform = Transform3D(-0.52, 0, -4.54598e-08, 0, 0.52, 0, 4.54598e-08, 0, -0.52, 0, 0, 0)
 
 [node name="CharacterVisual" parent="." instance=ExtResource("2_38dqm")]
 unique_name_in_owner = true
@@ -112,9 +100,8 @@ _percent_decrease = 10.0
 [node name="AttackManager" parent="FamiliesManagers" instance=ExtResource("14_hgu1g")]
 unique_name_in_owner = true
 
-[node name="TargetManager" parent="." node_paths=PackedStringArray("_source") instance=ExtResource("15_5kuly")]
+[node name="TargetManager" parent="." instance=ExtResource("15_5kuly")]
 unique_name_in_owner = true
-_source = NodePath("..")
 
 [node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 unique_name_in_owner = true
