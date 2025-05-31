@@ -22,7 +22,8 @@ var _families_ref: Dictionary # Reference Dictionary to all families
 var _active_families: Array[Family] # Array of all families activated for this game only
 var _rules: GameRules
 
-var _current_round_number: int
+var _fighting_islands: Dictionary[int, FightingIsland]
+
 var _current_round_battles: Array[Battle]
 
 # ============================== Local nodes ==============================
@@ -31,25 +32,29 @@ var _current_round_battles: Array[Battle]
 @export var _scene_switcher: SceneSwitcher
 @export var _hero_selector: HeroSelector
 
-@export var _node_fighting_islands: Node3D # Network spawn of FloatingIslands
+@export var _node_fighting_islands: Node3D # Network spawn of FloatingIslands TODO (Spawn Island from the player Island)
 @export var _node_characters: Node3D # Network spawn of Characters
+
+@export var _islands_spawn_points: Array[SpawnPoint]
+
+@onready var _island_spawns_to_be_removed: Node3D = %IslandSpawns
 
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	#_buying_area.phase_ended.connect(_on_buying_area_phase_ended)
-	_hero_selector.all_heroes_picked.connect(_on_hero_selector_all_heroes_picked)
-	#GlobalFightingManager.all_fights_are_over.connect(_on_global_fighting_manager_all_fights_are_over)
+	if PlayerManager.players.size() < 2: return # Don't do anything if there is no player (for testing purpose)
 	
+	_hero_selector.all_heroes_picked.connect(_on_hero_selector_all_heroes_picked)
+	_buying_island.buying_phase_finished.connect(_on_buying_island_buying_phase_finished)
+	
+	#GlobalFightingManager.all_fights_are_over.connect(_on_global_fighting_manager_all_fights_are_over)
 	_start_game()
 
 # ============================== Private functions ==============================
 
 func _start_game() -> void:
-	# Start hero selection
-	# Start first round
+	_spawn_fighting_islands()
 	_start_hero_selection()
-	#_start_new_round()
 
 
 func _start_hero_selection() -> void:
@@ -63,26 +68,58 @@ func _start_new_round() ->void:
 	_current_round_battles = await RoundManager.get_current_round_battles()
 	await PlayerManager.sync_point(PlayerManager.SyncID.STARTING_NEW_ROUND)
 	RoundManager.starting_round_player_changes()
-	_start_buying_phase()
+	_start_buying_phase(_current_round_battles)
 
 
-func _spawn_all_fighting_areas(battles: Array[Battle]) -> void:
-	if not multiplayer.is_server():
-		return
-
-
-func _start_buying_phase() -> void:
+func _start_buying_phase(battles: Array[Battle]) -> void:
+	print("[", multiplayer.get_unique_id(), "] Game: Start BUYING !")
 	game_state = GameState.BUYING
-	_buying_island.start_buying_phase(_current_round_battles)
-	#_buying_area.start_round(_current_round_battles)
+	_buying_island.set_active()
+	_buying_island.start_buying_phase(battles)
 
 
-func _start_fighting_phase() -> void:
-	game_state = GameState.FIGHTING
+func _start_fighting_phase(battles: Array[Battle]) -> void:
 	print("[", multiplayer.get_unique_id(), "] Game: Start fights !")
-	#for fighting_area in _fighting_areas:
-		#fighting_area.start_fight()
+	game_state = GameState.FIGHTING
+	var fighting_islands_choosen: Array[FightingIsland] = _pickup_n_random_islands(battles.size())
+	for i in battles.size():
+		var characters: Array[Character]
+		for player in battles[i].players:
+			characters.append(player.character)
+		fighting_islands_choosen[i].start_fight(characters, battles[i].battle_type)
+	# Start fight on each island
 	GlobalFightingManager.start()
+
+
+# ============================== Private functions ==============================
+
+func _pickup_n_random_islands(islands_number: int) -> Array[FightingIsland]:
+	if not multiplayer.is_server(): return [] # TODO
+	var fighting_islands_choosen: Array[FightingIsland]
+	var alive_players: Array[Player] = PlayerManager.get_alive_players().values().duplicate()
+	for i in islands_number:
+		var random_player: Player = alive_players.pick_random()
+		fighting_islands_choosen.append(_fighting_islands[random_player.id])
+		alive_players.erase(random_player)
+	return fighting_islands_choosen
+
+# ============================== Spawn functions ==============================
+
+func _spawn_fighting_islands() -> void:
+	if multiplayer.is_server():
+		var i:int = 0
+		for player in PlayerManager.players.values():
+			var spawn_point: SpawnPoint = _islands_spawn_points[i]
+			var fighting_island: FightingIsland = preload("res://Scenes/FloatingIsland/fighting_island.tscn").instantiate()
+			fighting_island.player_owner_id = player.id
+			fighting_island.name = "FightingIsland_" + player.name
+			_node_fighting_islands.add_child(fighting_island)
+			fighting_island.global_position = spawn_point.global_position
+			fighting_island.global_rotation = spawn_point.global_rotation
+			_scene_switcher.fighting_islands[i] = fighting_island
+			_fighting_islands[player.id] = fighting_island
+			i = i + 1
+	_island_spawns_to_be_removed.queue_free()
 
 
 func _spawn_all_characters() -> void:
@@ -95,9 +132,9 @@ func _spawn_all_characters() -> void:
 
 # ============================== Callbacks ==============================
 
-func _on_buying_area_phase_ended() -> void:
+func _on_buying_island_buying_phase_finished() -> void:
 	print("[", multiplayer.get_unique_id(), "] Game: BUYING PHASE ENDED")
-	_start_fighting_phase()
+	_start_fighting_phase(_current_round_battles)
 
 
 func _on_hero_selector_all_heroes_picked() -> void:

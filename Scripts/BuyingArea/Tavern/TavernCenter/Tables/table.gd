@@ -27,7 +27,6 @@ func connect_to_players(players: Array[Player]) -> void:
 		printerr("Table: There are too many players for this table !")
 		return
 		
-	print("DEBUG: CONNECT TO PLAYERS")
 	var avaible_spawns: Array[SpawnPoint] = _hero_spawns.duplicate()
 	for player in players:
 		_spawn_player_character(player, avaible_spawns)
@@ -36,10 +35,8 @@ func connect_to_players(players: Array[Player]) -> void:
 
 func _spawn_player_character(player: Player, avaible_spawns: Array[SpawnPoint]) -> void:
 	var character: Character = player.character
-	print("  DEBUG: TRYING TO SPAWN PLAYER CHARACTER ", character.name, " ", player.team)
 	for spawn_point in avaible_spawns:
 		if spawn_point.team == player.team:
-			print("    DEBUG: SPAWN PLAYER CHARACTER ", character.name)
 			reparent_entity.rpc(character.get_path(), entities_node.get_path())
 			character.global_rotation = spawn_point.global_rotation
 			character.global_position = spawn_point.global_position

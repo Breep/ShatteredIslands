@@ -20,7 +20,6 @@ enum SerializedField {
 
 var name: String # Nickname of the player
 var id: int # Multiplayer id
-var team: int # Current team of the player during this round
 
 var is_bot: bool # If the player is a fake player (a bot controlled by the server)
 
@@ -34,6 +33,13 @@ var health_lost_since_last_round: int
 var total_win_number: int
 var total_lose_number: int
 var current_damage_win_lose_diff: int # <win>-<lose> but can't go over what the rules indicate (used for damage modifier)
+
+var _team: int # Current team of the player during this round
+var team: int:
+	get: return _team
+	set(value):
+		_team = value
+		if character != null: character.team = _team
 
 signal lvl_changed(self_ref: Player, new_lvl)
 var _lvl: int

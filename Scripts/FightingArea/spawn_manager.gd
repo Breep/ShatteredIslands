@@ -57,7 +57,7 @@ func _spawn_character(character: Character, available_spawn_locations: Array[Spa
 			available_spawn_locations.erase(spawn_point)
 			return true
 	
-	printerr("SpawnManager: No more available spawn point for ", character.name)
+	printerr("SpawnManager: No more available spawn point for ", character.name, " [Team#", character.team, "]")
 	return false
 
 

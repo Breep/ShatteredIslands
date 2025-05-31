@@ -10,7 +10,7 @@ var _focused_object: Node3D
 var _old_focused_object: Node3D
 
 func _ready() -> void:
-	CameraManager.camera_changed.connect(_on_camera_manager_camera_changed)
+	pass
 
 func _process(delta: float) -> void:
 	_handle_camera_movement(delta)
@@ -71,18 +71,6 @@ func _select_object(screen_position):
 		if _old_focused_object.has_user_signal("unfocused"):
 			_old_focused_object.emit_signal("unfocused")
 		_old_focused_object = null
-
-
-func _on_camera_manager_camera_changed(camera_type: CameraManager.CameraType) -> void:
-	if camera_type != CameraManager.CameraType.BUYING_AREA:
-		_is_active = false
-		return
-	
-	_is_active = true
-	Events.ui_buying_area_opened.emit(true)
-	Events.ui_fighting_area_opened.emit(false, -1)
-	make_current()
-
 
 
 

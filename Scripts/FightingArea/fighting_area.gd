@@ -32,14 +32,11 @@ var entity_manager: EntityManager:
 
 @export var _ui_fighting_area: UIFightingArea
 
-
-@export var _spawn_managers: Dictionary[Battle.BattleType, SpawnManager]
+@export var _fighting_floors: Dictionary[Battle.BattleType, FightingFloor]
 
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	#_battle = RoundManager.battles[battle_id]
-	
 	if _ready_checks() != true:
 		return
 	
@@ -56,7 +53,7 @@ func _exit_tree() -> void:
 # Spawn all characters on the FightingArea according to the battle
 # Connect all characters to this FightingArea
 func start_fight(characters: Array[Character], battle_type: Battle.BattleType) -> void:
-	spawn_manager = _spawn_managers[battle_type]
+	spawn_manager = _set_fighting_floor(battle_type)
 	if spawn_manager == null:
 		printerr("FightingArea: No SpawnManager for this battle type: ", battle_type)
 	
@@ -76,7 +73,7 @@ func set_active() -> void:
 	_ui_fighting_area.show()
 
 func set_inactive() -> void:
-	_ui_fighting_area.show()
+	_ui_fighting_area.hide()
 
 # ============================== Private functions ==============================
 
@@ -102,6 +99,12 @@ func _ready_checks() -> bool:
 		return false
 	
 	return true
+
+
+func _set_fighting_floor(battle_type: Battle.BattleType) -> SpawnManager:
+	for fighting_floor in _fighting_floors.values():
+		fighting_floor.set_inactive()
+	return _fighting_floors[battle_type].set_active()
 
 # ============================== Callbacks ==============================
 

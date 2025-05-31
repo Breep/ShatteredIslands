@@ -30,6 +30,8 @@ properties/4/spawn = true
 properties/4/replication_mode = 0
 
 [node name="Projectile" type="Area3D"]
+collision_layer = 2
+collision_mask = 16
 script = ExtResource("1_0wav7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

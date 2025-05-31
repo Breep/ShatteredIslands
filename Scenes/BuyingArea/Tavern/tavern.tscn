@@ -21,7 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://1rofii7pievm" path="res://Scenes/BuyingArea/3D sceces inh - Coll/Bar/bar_straight_b_coll.tscn" id="16_8x7c4"]
 [ext_resource type="PackedScene" uid="uid://737q40i64b40" path="res://Scenes/BuyingArea/3D sceces inh - Coll/Deco/keyring_coll.tscn" id="16_nrh2s"]
 [ext_resource type="PackedScene" uid="uid://engqkn6ikktk" path="res://Scenes/BuyingArea/3D sceces inh - Coll/Bar/bar_straight_c_coll.tscn" id="17_iam8e"]
-[ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://Scenes/Components/interaction_component.tscn" id="23_03w0h"]
+[ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://Scenes/Components/PickableClickable/pickable_module.tscn" id="23_03w0h"]
 [ext_resource type="PackedScene" uid="uid://3wvjugdxyvfn" path="res://Scenes/BuyingArea/3D sceces inh - Coll/Bar/stool_round_coll.tscn" id="23_gj6s6"]
 [ext_resource type="PackedScene" uid="uid://ccgffvm3dhetu" path="res://Scenes/BuyingArea/3D sceces inh - Coll/Banner/banner_pattern_c_white_coll.tscn" id="24_nbc4i"]
 [ext_resource type="PackedScene" uid="uid://ddpnam3agt3b" path="res://Scenes/BuyingArea/3D sceces inh - Coll/Banner/banner_shield_brown_coll.tscn" id="28_aguh0"]

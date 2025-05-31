@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://2v270ywaa1vg"]
+[gd_scene load_steps=21 format=3 uid="uid://2v270ywaa1vg"]
 
 [ext_resource type="Script" uid="uid://bfk1vk6iow70n" path="res://Scenes/Entities/Heroes/AncientTree/ancient_tree.gd" id="1_61y0m"]
 [ext_resource type="Resource" uid="uid://qa70iekc67ac" path="res://Resources/Heroes/ancient_tree.tres" id="2_fsm3l"]
@@ -7,6 +7,9 @@
 [ext_resource type="AnimationLibrary" uid="uid://bd8buex3pprwv" path="res://Data/Anim/Ancient tree v2 .res" id="3_61y0m"]
 [ext_resource type="AnimationLibrary" uid="uid://bmijhrm7py8vg" path="res://Data/Anim/lib_rig_no_mixamo.res" id="4_fsm3l"]
 [ext_resource type="PackedScene" uid="uid://qgjyscmtp6t3" path="res://Scenes/Character/character_logic.tscn" id="10_ieptw"]
+[ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://Scenes/Components/PickableClickable/pickable_module.tscn" id="11_tww0m"]
+[ext_resource type="PackedScene" uid="uid://c8630px7dwlvh" path="res://Scenes/Components/PickableClickable/pickable_collider.tscn" id="12_j737t"]
+[ext_resource type="PackedScene" uid="uid://dyyf8nhixlubs" path="res://Scenes/Components/PickableClickable/spawn_area_checker.tscn" id="13_l700e"]
 [ext_resource type="PackedScene" uid="uid://dqrhym1sskng8" path="res://Scenes/Entities/Turret/turret.tscn" id="19_i08v8"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Scenes/Tool/anim_hovering_module.tscn" id="20_6rj4w"]
 [ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://Scenes/Tool/anim_rotating_module.tscn" id="21_50blj"]
@@ -15,7 +18,7 @@
 animation = &"lib_rig_no_mixamo/idle"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_61y0m"]
-animation = &"lib_rig_no_mixamo/Dancing"
+animation = &"Ancient tree v2 /Death"
 
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_fsm3l"]
 xfade_time = 0.5
@@ -31,7 +34,7 @@ input_1/reset = true
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_i08v8"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_su5oi"]
-graph_offset = Vector2(-513, 0)
+graph_offset = Vector2(-509.449, 5.79698)
 nodes/AnimIdle/node = SubResource("AnimationNodeAnimation_su5oi")
 nodes/AnimIdle/position = Vector2(-460, -20)
 nodes/AnimRun/node = SubResource("AnimationNodeAnimation_61y0m")
@@ -75,6 +78,7 @@ properties/8/spawn = true
 properties/8/replication_mode = 2
 
 [node name="AncientTree" type="CharacterBody3D" node_paths=PackedStringArray("_character_logic", "_turret", "_interact_module") groups=["CHARACTER"]]
+collision_layer = 17
 script = ExtResource("1_61y0m")
 _hero = ExtResource("2_fsm3l")
 _character_logic = NodePath("CharacterLogic")
@@ -85,29 +89,29 @@ _interact_module = NodePath("CharacterLogic/Modules/InteractModule")
 transform = Transform3D(-1.82, 0, -1.59109e-07, 0, 1.82, 0, 1.59109e-07, 0, -1.82, 0, 0, 0)
 
 [node name="GeneralSkeleton" parent="AncientTreeModel/Armature_006" index="0"]
-bones/0/position = Vector3(0.00694722, 0.432253, 0.019085)
-bones/0/rotation = Quaternion(-0.0405513, -0.366314, -0.0130453, 0.929516)
-bones/1/rotation = Quaternion(-0.0199767, 0.318422, 0.941167, -0.111412)
-bones/2/rotation = Quaternion(0.0359962, 0.946084, -0.320199, -0.0332002)
-bones/3/rotation = Quaternion(-0.0596492, 0.733878, -0.67271, 0.0729826)
+bones/0/position = Vector3(0.00653313, 0.43081, 0.0171572)
+bones/0/rotation = Quaternion(-0.0391609, -0.367053, -0.0122622, 0.929295)
+bones/1/rotation = Quaternion(-0.0228338, 0.324219, 0.938799, -0.114093)
+bones/2/rotation = Quaternion(0.0359979, 0.944988, -0.32358, -0.031577)
+bones/3/rotation = Quaternion(-0.0617425, 0.733636, -0.672524, 0.0753516)
 bones/4/rotation = Quaternion(0, 1, 0, 0)
-bones/6/rotation = Quaternion(-0.103696, 0.0235128, 0.979039, 0.173715)
-bones/7/rotation = Quaternion(0.0211425, 0.965144, -0.223722, -0.134161)
-bones/8/rotation = Quaternion(0.124445, 0.573038, -0.795879, -0.150724)
+bones/6/rotation = Quaternion(-0.0996371, 0.0336477, 0.979399, 0.172388)
+bones/7/rotation = Quaternion(0.022287, 0.961009, -0.23928, -0.136785)
+bones/8/rotation = Quaternion(0.123606, 0.567735, -0.799974, -0.149799)
 bones/9/rotation = Quaternion(0, 1, 0, 0)
 bones/11/rotation = Quaternion(0, 0, 0, 1)
 bones/12/rotation = Quaternion(0, 0, 0, 1)
-bones/13/rotation = Quaternion(0.0103783, 0.0594689, 0.0155926, 0.998054)
-bones/14/rotation = Quaternion(0.459268, 0.248217, 0.575798, -0.62922)
-bones/15/rotation = Quaternion(-0.106002, 0.834175, -0.502752, 0.20039)
-bones/16/rotation = Quaternion(0.278625, -0.724658, 0.297855, 0.555448)
+bones/13/rotation = Quaternion(0.010451, 0.0603214, 0.0154421, 0.998005)
+bones/14/rotation = Quaternion(0.461808, 0.23454, 0.595456, -0.61413)
+bones/15/rotation = Quaternion(-0.109228, 0.839411, -0.492474, 0.202306)
+bones/16/rotation = Quaternion(0.270618, -0.727753, 0.294722, 0.557028)
 bones/17/rotation = Quaternion(0, 0.707107, 0, 0.707107)
-bones/19/rotation = Quaternion(0.264771, -0.4585, -0.70155, -0.476972)
-bones/20/rotation = Quaternion(0.252132, 0.831103, -0.495396, -0.0167569)
-bones/21/rotation = Quaternion(0.281631, 0.760196, -0.191858, 0.553152)
+bones/19/rotation = Quaternion(0.260525, -0.439651, -0.722936, -0.46497)
+bones/20/rotation = Quaternion(0.260615, 0.839134, -0.476951, -0.0212607)
+bones/21/rotation = Quaternion(0.267796, 0.771918, -0.191799, 0.543728)
 bones/22/rotation = Quaternion(0, -0.707107, 0, 0.707107)
 bones/24/rotation = Quaternion(0, 0, 0, 1)
-bones/25/rotation = Quaternion(0.146253, 0.300622, 0.00129306, 0.942462)
+bones/25/rotation = Quaternion(0.148997, 0.301747, -0.00492845, 0.94166)
 bones/26/rotation = Quaternion(-0.0888237, 0.00143195, -0.00143195, 0.996045)
 bones/28/rotation = Quaternion(0.707107, -6.14608e-08, -5.01009e-08, 0.707107)
 
@@ -180,6 +184,16 @@ families_managers = {
 
 [node name="AutoAttackModule" parent="CharacterLogic/Modules" index="3" node_paths=PackedStringArray("projectile_spawn")]
 projectile_spawn = NodePath("../../../TurretCenterPoint/Turret/SpawnPoint")
+
+[node name="PickableModule" parent="." node_paths=PackedStringArray("_nodes_where_to_find_meshs", "_owner", "_pickable_collider", "_spawn_area_checker") instance=ExtResource("11_tww0m")]
+_nodes_where_to_find_meshs = [NodePath("../AncientTreeModel")]
+_owner = NodePath("..")
+_pickable_collider = NodePath("../PickableCollider")
+_spawn_area_checker = NodePath("../SpawnAreaChecker")
+
+[node name="PickableCollider" parent="." instance=ExtResource("12_j737t")]
+
+[node name="SpawnAreaChecker" parent="." instance=ExtResource("13_l700e")]
 
 [editable path="AncientTreeModel"]
 [editable path="TurretCenterPoint/Turret"]

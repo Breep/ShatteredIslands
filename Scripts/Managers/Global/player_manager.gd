@@ -51,8 +51,8 @@ func get_local_player() -> Player:
 	return players[multiplayer.get_unique_id()]
 
 
-func get_alive_players() -> Dictionary:
-	var alive_players: Dictionary
+func get_alive_players() -> Dictionary[int, Player]:
+	var alive_players: Dictionary[int, Player]
 	for player in players.values():
 		if player.health > 0:
 			alive_players[player.id] = player
