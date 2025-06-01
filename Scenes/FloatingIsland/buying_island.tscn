@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://7u3ksm0e4v61"]
 
 [ext_resource type="Script" uid="uid://d1f3f8bl0pp3r" path="res://Scenes/FloatingIsland/buying_island.gd" id="1_275uc"]
-[ext_resource type="PackedScene" uid="uid://bhx575fxnmb7i" path="res://Scenes/FightingArea/_Maps/Visuals/telescope_island.tscn" id="2_lcr57"]
+[ext_resource type="PackedScene" uid="uid://bhx575fxnmb7i" path="res://Scenes/FightingArea/_Maps/Visuals/telescope_island_old.tscn" id="2_lcr57"]
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://Scenes/Tool/center_point_camera.tscn" id="3_l1roj"]
 [ext_resource type="PackedScene" uid="uid://ca8mcplp2va4s" path="res://Scenes/BuyingArea/buying_area.tscn" id="4_f5s3d"]
 

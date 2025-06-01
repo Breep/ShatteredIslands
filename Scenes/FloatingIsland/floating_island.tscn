@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dupryy7gaobpv"]
 
 [ext_resource type="Script" uid="uid://d3ajiayle6l3r" path="res://Scenes/FloatingIsland/floating_island.gd" id="1_6tkdt"]
-[ext_resource type="PackedScene" uid="uid://bhx575fxnmb7i" path="res://Scenes/FightingArea/_Maps/Visuals/telescope_island.tscn" id="3_yaqa4"]
+[ext_resource type="PackedScene" uid="uid://bhx575fxnmb7i" path="res://Scenes/FightingArea/_Maps/Visuals/telescope_island_old.tscn" id="3_yaqa4"]
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://Scenes/Tool/center_point_camera.tscn" id="4_yaqa4"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_yaqa4"]
