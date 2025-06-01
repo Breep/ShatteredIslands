@@ -6698,26 +6698,30 @@ properties/4/replication_mode = 2
 properties/5/path = NodePath(".:battle_id")
 properties/5/spawn = true
 properties/5/replication_mode = 2
+properties/6/path = NodePath(".:rotation")
+properties/6/spawn = true
+properties/6/replication_mode = 2
 
-[node name="DarkKnight" type="CharacterBody3D" node_paths=PackedStringArray("_turret") groups=["CHARACTER"]]
+[node name="DarkKnight" type="CharacterBody3D" node_paths=PackedStringArray("_character_logic", "_turret") groups=["CHARACTER"]]
 script = ExtResource("1_ufk4g")
 _hero = ExtResource("2_5qtoa")
+_character_logic = NodePath("CharacterLogic")
 _turret = NodePath("TurretCenterPoint/Turret")
 
 [node name="DarkKnightModel" parent="." instance=ExtResource("2_ds2a6")]
 transform = Transform3D(-1.2, 0, -1.81195e-07, 0, 1.2, 0, 1.81195e-07, 0, -1.2, 0, 0.536197, 0)
 
 [node name="GeneralSkeleton" parent="DarkKnightModel/Armature" index="0"]
-bones/0/position = Vector3(-0.00145845, 0.132332, 0.00792102)
-bones/0/rotation = Quaternion(0.00574225, -0.583824, -0.0107486, 0.811789)
+bones/0/position = Vector3(-0.00137717, 0.134174, 0.00803817)
+bones/0/rotation = Quaternion(0.00748451, -0.58646, -0.0146349, 0.809811)
 bones/1/rotation = Quaternion(0, 0, 0, 1)
 bones/2/rotation = Quaternion(0, 0, 0, 1)
-bones/3/rotation = Quaternion(0.101069, -0.0167227, -0.0023301, 0.994736)
+bones/3/rotation = Quaternion(0.0959582, -0.0161944, 0.000188775, 0.995254)
 bones/4/rotation = Quaternion(0, 0, 0, 1)
-bones/5/rotation = Quaternion(0.0886099, 0.461037, -0.0442653, 0.881836)
-bones/7/rotation = Quaternion(0.427824, 0.46033, 0.611629, -0.480596)
-bones/8/rotation = Quaternion(0.524611, 0.734583, -0.246504, 0.352713)
-bones/9/rotation = Quaternion(0.263068, -0.768007, 0.264285, 0.520685)
+bones/5/rotation = Quaternion(0.0686247, 0.443517, -0.0298918, 0.893135)
+bones/7/rotation = Quaternion(0.425355, 0.467241, 0.617929, -0.467893)
+bones/8/rotation = Quaternion(0.492488, 0.742374, -0.287282, 0.35186)
+bones/9/rotation = Quaternion(0.268151, -0.767824, 0.269392, 0.515723)
 bones/10/rotation = Quaternion(0, 0.707107, 0, 0.707107)
 bones/11/rotation = Quaternion(-0.214187, 0.673887, 0.214187, 0.673887)
 bones/12/rotation = Quaternion(-1.49012e-08, 0, 0, 1)
@@ -6733,9 +6737,9 @@ bones/21/rotation = Quaternion(0, 0, 0, 1)
 bones/23/rotation = Quaternion(0, 0, 0, 1)
 bones/24/rotation = Quaternion(0, 0, 0, 1)
 bones/25/rotation = Quaternion(0, 0, 0, 1)
-bones/27/rotation = Quaternion(0.449212, -0.435935, -0.615819, -0.478474)
-bones/28/rotation = Quaternion(-0.0469543, 0.900626, -0.341001, -0.265306)
-bones/29/rotation = Quaternion(0.440354, 0.719467, -0.441295, 0.306129)
+bones/27/rotation = Quaternion(0.437596, -0.454998, -0.61003, -0.478905)
+bones/28/rotation = Quaternion(-0.00847376, 0.888918, -0.37601, -0.261474)
+bones/29/rotation = Quaternion(0.440844, 0.719182, -0.441786, 0.305384)
 bones/30/rotation = Quaternion(0, -0.707107, 0, 0.707107)
 bones/31/rotation = Quaternion(-0.214187, -0.673887, -0.214187, 0.673887)
 bones/32/rotation = Quaternion(-1.49012e-08, 0, 0, 1)
@@ -6751,17 +6755,17 @@ bones/41/rotation = Quaternion(0, 0, 0, 1)
 bones/43/rotation = Quaternion(0, 0, 0, 1)
 bones/44/rotation = Quaternion(0, 0, 0, 1)
 bones/45/rotation = Quaternion(0, 0, 0, 1)
-bones/47/rotation = Quaternion(0.116878, 0.2855, 0.911625, -0.271604)
-bones/48/rotation = Quaternion(-0.00224295, 0.941015, -0.3225, 0.102367)
-bones/49/rotation = Quaternion(-0.120701, 0.682141, -0.704858, 0.152613)
+bones/47/rotation = Quaternion(0.104019, 0.262827, 0.921788, -0.265348)
+bones/48/rotation = Quaternion(-0.0155168, 0.948709, -0.293745, 0.115867)
+bones/49/rotation = Quaternion(-0.122028, 0.688089, -0.696645, 0.162262)
 bones/50/rotation = Quaternion(0, 1, 0, 0)
-bones/52/rotation = Quaternion(-0.021345, 0.305022, 0.93414, 0.184086)
-bones/53/rotation = Quaternion(0.0209154, 0.948248, -0.316725, 0.00858174)
-bones/54/rotation = Quaternion(0.174894, 0.656901, -0.718213, -0.148538)
+bones/52/rotation = Quaternion(-0.0261095, 0.285699, 0.942074, 0.173754)
+bones/53/rotation = Quaternion(0.0239296, 0.958547, -0.283459, 0.0163381)
+bones/54/rotation = Quaternion(0.168877, 0.667437, -0.709205, -0.151776)
 bones/55/rotation = Quaternion(0, 1, 0, 0)
 
 [node name="BoneAttachment3D" parent="DarkKnightModel/Armature/GeneralSkeleton" index="1"]
-transform = Transform3D(0.125169, -0.96611, -0.225754, 0.960941, 0.174663, -0.214673, 0.246829, -0.190066, 0.950237, -0.309776, 0.42688, -0.0814779)
+transform = Transform3D(0.0908957, -0.96031, -0.26371, 0.969659, 0.145688, -0.196307, 0.226935, -0.237865, 0.944416, -0.319449, 0.436088, -0.0847443)
 
 [node name="AnimationPlayer" parent="DarkKnightModel" index="1"]
 libraries = {
@@ -6794,8 +6798,9 @@ replication_config = SubResource("SceneReplicationConfig_5ed6q")
 [node name="TurretCenterPoint" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.36537, 0)
 
-[node name="Turret" parent="TurretCenterPoint" instance=ExtResource("18_bo24q")]
+[node name="Turret" parent="TurretCenterPoint" node_paths=PackedStringArray("_auto_attack_module") instance=ExtResource("18_bo24q")]
 transform = Transform3D(0.495, 0, 0, 0, 0.495, 0, 0, 0, 0.495, 3, 0, 0)
+_auto_attack_module = NodePath("../../CharacterLogic/Modules/AutoAttackModule")
 
 [node name="AnimHoveringModule" parent="TurretCenterPoint/Turret" node_paths=PackedStringArray("_owner") instance=ExtResource("19_thqxc")]
 _owner = NodePath("..")

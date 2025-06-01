@@ -4,6 +4,7 @@ extends Node3D
 # ============================== Local node ==============================
 
 @export var _camera: Camera3D
+@export var _clicker_module: ClickerModule
 
 # ============================== Configuration ==============================
 
@@ -33,26 +34,29 @@ func set_active() -> void:
 	if _is_active: return
 	_is_active = true
 	_camera.make_current()
+	_clicker_module.set_active()
 
 
 func set_inactive() -> void:
 	if not _is_active: return
 	_is_active = false
-	pass
+	_clicker_module.set_inactive()
 
 # ============================== Private functions ==============================
 
 var _rotating := false
 func _handle_center_point_rotation(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_MIDDLE:
-			_rotating = event.pressed
-			if _rotating:
-				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-			else:
-				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	if event.is_action_pressed("camera_rotate"):
+		_rotating = true
+	elif event.is_action_released("camera_rotate"):
+		_rotating = false
 	
-	elif event is InputEventMouseMotion and _rotating:
+	if _rotating:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
+	if event is InputEventMouseMotion and _rotating:
 		var delta = event.relative
 		rotate_y(deg_to_rad(-delta.x * _rotation_sensitivity))
 		var x_rotation = -delta.y * _rotation_sensitivity
@@ -63,9 +67,8 @@ func _handle_center_point_rotation(event: InputEvent) -> void:
 
 
 func _handle_camera_zoom(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			_camera.position.x -= _zoom_sensitivity
-		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			_camera.position.x += _zoom_sensitivity
-		_camera.position.x = clampf(_camera.position.x, _zoom_min, _zoom_max)
+	if event.is_action_pressed("camera_zoom_in"):
+		_camera.position.x -= _zoom_sensitivity
+	elif event.is_action_pressed("camera_zoom_out"):
+		_camera.position.x += _zoom_sensitivity
+	_camera.position.x = clampf(_camera.position.x, _zoom_min, _zoom_max)

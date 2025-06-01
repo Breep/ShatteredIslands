@@ -3,7 +3,7 @@ extends Node3D
 
 # ============================== Network export ==============================
 
-@export var _player_owner_id : int = -1
+@export var player_owner_id : int = -1
 
 # ============================== local node ==============================
 

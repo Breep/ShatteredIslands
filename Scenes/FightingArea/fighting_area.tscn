@@ -16,15 +16,15 @@ properties/1/path = NodePath(".:battle_id")
 properties/1/spawn = true
 properties/1/replication_mode = 0
 
-[node name="FightingArea" type="Node3D" node_paths=PackedStringArray("_fighting_manager", "_entity_manager", "_ui_fighting_area", "_spawn_managers")]
+[node name="FightingArea" type="Node3D" node_paths=PackedStringArray("_fighting_manager", "_entity_manager", "_ui_fighting_area", "_fighting_floors")]
 script = ExtResource("1_t74of")
 _fighting_manager = NodePath("FightingManager")
 _entity_manager = NodePath("EntityManager")
 _ui_fighting_area = NodePath("UI/UIFightingArea")
-_spawn_managers = {
-0: NodePath("FightingFloorTemplates/FightingFloor_1v1/SpawnManager"),
-1: NodePath("FightingFloorTemplates/FightingFloor_2v2/SpawnManager"),
-2: NodePath("FightingFloorTemplates/FightingFloor_ffa13/SpawnManager")
+_fighting_floors = {
+0: NodePath("FightingFloorTemplates/FightingFloor_1v1"),
+1: NodePath("FightingFloorTemplates/FightingFloor_2v2"),
+2: NodePath("FightingFloorTemplates/FightingFloor_ffa13")
 }
 
 [node name="EntityManager" parent="." instance=ExtResource("2_wtb7j")]
@@ -48,13 +48,13 @@ layout_mode = 1
 [node name="FightingFloorTemplates" type="Node3D" parent="."]
 
 [node name="FightingFloor_1v1" parent="FightingFloorTemplates" instance=ExtResource("5_2akj6")]
-visible = false
 
 [node name="SpawnManager" parent="FightingFloorTemplates/FightingFloor_1v1" index="0" node_paths=PackedStringArray("_entities_node", "_projectiles_node")]
 _entities_node = NodePath("../../../Entities")
 _projectiles_node = NodePath("../../../Projectiles")
 
 [node name="FightingFloor_2v2" parent="FightingFloorTemplates" instance=ExtResource("6_yyfcp")]
+visible = false
 
 [node name="SpawnManager" parent="FightingFloorTemplates/FightingFloor_2v2" index="0" node_paths=PackedStringArray("_entities_node", "_projectiles_node")]
 _entities_node = NodePath("../../../Entities")
@@ -63,7 +63,7 @@ _projectiles_node = NodePath("../../../Projectiles")
 [node name="FightingFloor_ffa13" parent="FightingFloorTemplates" instance=ExtResource("7_hqxx4")]
 visible = false
 
-[node name="SpawnManager" parent="FightingFloorTemplates/FightingFloor_ffa13" index="1" node_paths=PackedStringArray("_entities_node", "_projectiles_node")]
+[node name="SpawnManager" parent="FightingFloorTemplates/FightingFloor_ffa13" index="0" node_paths=PackedStringArray("_entities_node", "_projectiles_node")]
 _entities_node = NodePath("../../../Entities")
 _projectiles_node = NodePath("../../../Projectiles")
 

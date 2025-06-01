@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ctspehviccwd5"]
+[gd_scene load_steps=15 format=3 uid="uid://ctspehviccwd5"]
 
 [ext_resource type="Script" uid="uid://bhv0dmum15mp1" path="res://Scenes/FightingArea/ArenaFloorTemplates/fighting_floor.gd" id="1_i0b8l"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://Scenes/Managers/spawn_manager.tscn" id="1_kcex7"]
@@ -35,9 +35,19 @@ size = Vector3(20, 1, 10)
 [sub_resource type="BoxShape3D" id="BoxShape3D_go3o7"]
 size = Vector3(20, 1, 10)
 
-[node name="FightingFloor_1v1" type="Node3D" node_paths=PackedStringArray("_visual_to_be_destroyed")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_i0b8l"]
+size = Vector3(20, 5, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fuiuu"]
+size = Vector3(1, 5, 10)
+
+[node name="FightingFloor_1v1" type="Node3D" node_paths=PackedStringArray("_visual_to_be_destroyed", "_spawn_manager", "_spawn_areas", "_floor", "_walls")]
 script = ExtResource("1_i0b8l")
 _visual_to_be_destroyed = NodePath("Floor/FloorMesh3D")
+_spawn_manager = NodePath("SpawnManager")
+_spawn_areas = [NodePath("SpawnManager/SpawnArea"), NodePath("SpawnManager/SpawnArea2")]
+_floor = NodePath("Floor")
+_walls = [NodePath("Walls/Wall1"), NodePath("Walls/Wall2"), NodePath("Walls/Wall3"), NodePath("Walls/Wall4")]
 
 [node name="SpawnManager" parent="." node_paths=PackedStringArray("_spawn_points", "_spawn_areas") instance=ExtResource("1_kcex7")]
 _spawn_points = [NodePath("SpawnArea/SpawnPoint"), NodePath("SpawnArea2/SpawnPoint2")]
@@ -45,6 +55,9 @@ _spawn_areas = [NodePath("SpawnArea"), NodePath("SpawnArea2")]
 
 [node name="SpawnArea" parent="SpawnManager" node_paths=PackedStringArray("_visual_to_be_destroyed") instance=ExtResource("2_1l6d4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+collision_layer = 4
+monitoring = false
+monitorable = false
 team = 1
 _visual_to_be_destroyed = NodePath("MeshInstance3D")
 
@@ -59,6 +72,9 @@ team = 1
 
 [node name="SpawnArea2" parent="SpawnManager" node_paths=PackedStringArray("_visual_to_be_destroyed") instance=ExtResource("2_1l6d4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+collision_layer = 4
+monitoring = false
+monitorable = false
 team = 2
 _visual_to_be_destroyed = NodePath("MeshInstance3D")
 
@@ -73,7 +89,7 @@ team = 2
 
 [node name="Floor" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-collision_layer = 4
+collision_layer = 8
 
 [node name="FloorMesh3D" type="MeshInstance3D" parent="Floor"]
 mesh = SubResource("BoxMesh_fuiuu")
@@ -81,3 +97,37 @@ skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
 shape = SubResource("BoxShape3D_go3o7")
+
+[node name="Walls" type="Node3D" parent="."]
+
+[node name="Wall1" type="Area3D" parent="Walls" groups=["WALL"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.5)
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall1"]
+shape = SubResource("BoxShape3D_i0b8l")
+
+[node name="Wall2" type="Area3D" parent="Walls" groups=["WALL"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.5)
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall2"]
+shape = SubResource("BoxShape3D_i0b8l")
+
+[node name="Wall3" type="Area3D" parent="Walls" groups=["WALL"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, 0, 0)
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall3"]
+shape = SubResource("BoxShape3D_fuiuu")
+
+[node name="Wall4" type="Area3D" parent="Walls" groups=["WALL"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, 0)
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall4"]
+shape = SubResource("BoxShape3D_fuiuu")

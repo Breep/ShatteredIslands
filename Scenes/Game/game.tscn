@@ -23,20 +23,20 @@ sky = SubResource("Sky_ciybh")
 tonemap_mode = 3
 glow_enabled = true
 
-[node name="Game" type="Node3D" node_paths=PackedStringArray("_buying_island", "_node_floating_islands", "_scene_switcher")]
+[node name="Game" type="Node3D" node_paths=PackedStringArray("_buying_island", "_scene_switcher", "_hero_selector", "_node_fighting_islands", "_node_characters", "_islands_spawn_points")]
 script = ExtResource("1_7r6pw")
 _buying_island = NodePath("BuyingIsland")
-_node_floating_islands = NodePath("FloatingIslands")
 _scene_switcher = NodePath("SceneSwitcher")
+_hero_selector = NodePath("HeroSelector")
+_node_fighting_islands = NodePath("FightingIslands")
+_node_characters = NodePath("Characters")
+_islands_spawn_points = [NodePath("IslandSpawns/CenterPoint1/SpawnPoint1"), NodePath("IslandSpawns/CenterPoint2/SpawnPoint2"), NodePath("IslandSpawns/CenterPoint3/SpawnPoint3"), NodePath("IslandSpawns/CenterPoint4/SpawnPoint4"), NodePath("IslandSpawns/CenterPoint5/SpawnPoint5"), NodePath("IslandSpawns/CenterPoint6/SpawnPoint6"), NodePath("IslandSpawns/CenterPoint7/SpawnPoint7"), NodePath("IslandSpawns/CenterPoint8/SpawnPoint8")]
 
 [node name="BuyingIsland" parent="." instance=ExtResource("6_flgk0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 56.0279, 0)
 
-[node name="SceneSwitcher" parent="." node_paths=PackedStringArray("buying_island", "fighting_islands") instance=ExtResource("3_vifcx")]
-buying_island = NodePath("../BuyingIsland")
-fighting_islands = [NodePath("../IslandSpawns/CenterPoint1/SpawnPoint1/FightingIsland"), NodePath("../IslandSpawns/CenterPoint2/SpawnPoint2/FightingIsland"), NodePath("../IslandSpawns/CenterPoint3/SpawnPoint3/FightingIsland"), NodePath("../IslandSpawns/CenterPoint4/SpawnPoint4/FightingIsland"), NodePath("../IslandSpawns/CenterPoint5/SpawnPoint5/FightingIsland"), NodePath("../IslandSpawns/CenterPoint6/SpawnPoint6/FightingIsland"), NodePath("../IslandSpawns/CenterPoint7/SpawnPoint7/FightingIsland"), NodePath("../IslandSpawns/CenterPoint8/SpawnPoint8/FightingIsland")]
-
 [node name="IslandSpawns" type="Node3D" parent="."]
+unique_name_in_owner = true
 
 [node name="CenterPoint1" type="Node3D" parent="IslandSpawns"]
 
@@ -106,10 +106,16 @@ transform = Transform3D(0.899588, -0.308751, 0.308891, 0, 0.707267, 0.706946, -0
 fov = 35.0
 
 [node name="FightingAreaSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://dupryy7gaobpv")
-spawn_path = NodePath("../FloatingIslands")
+_spawnable_scenes = PackedStringArray("uid://drcuyohos0doa")
+spawn_path = NodePath("../FightingIslands")
 
-[node name="FloatingIslands" type="Node3D" parent="."]
+[node name="CharacterSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://2v270ywaa1vg", "uid://g706yyhstscc", "uid://c48aqh8mlb7lc", "uid://dq1pqesv0lptu", "uid://dry6jgn0h7srg", "uid://btuch2oo5bxk4", "uid://vut8b02xa34b", "uid://h726o6giwel8", "uid://d3tlk3rg4dhpk", "uid://bjv2kwt6brxy4")
+spawn_path = NodePath("../Characters")
+
+[node name="FightingIslands" type="Node3D" parent="."]
+
+[node name="Characters" type="Node3D" parent="."]
 
 [node name="WorldEnvironment2" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_flgk0")
@@ -118,5 +124,9 @@ environment = SubResource("Environment_flgk0")
 transform = Transform3D(0.72304, 0.426404, -0.543501, 0, 0.786763, 0.617256, 0.690807, -0.4463, 0.56886, 0, 11.082, 0)
 light_color = Color(0.806127, 0.544895, 0.445082, 1)
 shadow_enabled = true
+
+[node name="SceneSwitcher" parent="." node_paths=PackedStringArray("buying_island", "fighting_islands") instance=ExtResource("3_vifcx")]
+buying_island = NodePath("../BuyingIsland")
+fighting_islands = [NodePath("../IslandSpawns/CenterPoint1/SpawnPoint1/FightingIsland"), NodePath("../IslandSpawns/CenterPoint2/SpawnPoint2/FightingIsland"), NodePath("../IslandSpawns/CenterPoint3/SpawnPoint3/FightingIsland"), NodePath("../IslandSpawns/CenterPoint4/SpawnPoint4/FightingIsland"), NodePath("../IslandSpawns/CenterPoint5/SpawnPoint5/FightingIsland"), NodePath("../IslandSpawns/CenterPoint6/SpawnPoint6/FightingIsland"), NodePath("../IslandSpawns/CenterPoint7/SpawnPoint7/FightingIsland"), NodePath("../IslandSpawns/CenterPoint8/SpawnPoint8/FightingIsland")]
 
 [node name="HeroSelector" parent="." instance=ExtResource("8_xfil1")]

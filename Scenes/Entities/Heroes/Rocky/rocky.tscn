@@ -1,20 +1,9 @@
-[gd_scene load_steps=26 format=3 uid="uid://h726o6giwel8"]
+[gd_scene load_steps=15 format=3 uid="uid://h726o6giwel8"]
 
 [ext_resource type="Script" uid="uid://dqjjmiebmxpf4" path="res://Scenes/Entities/Heroes/Rocky/rocky.gd" id="1_e8asp"]
 [ext_resource type="PackedScene" uid="uid://d080glq1m1puv" path="res://Scenes/Entities/Heroes/Rocky/rocky_model.tscn" id="2_1t8nd"]
 [ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Scenes/Character/character_visual.tscn" id="2_vxmuk"]
-[ext_resource type="PackedScene" uid="uid://d0g0xkyr876lc" path="res://Scenes/Character/Modules/movement_module.tscn" id="3_1usal"]
-[ext_resource type="PackedScene" uid="uid://617x5c1qrdpg" path="res://Scenes/Character/Modules/action_module.tscn" id="4_svl5t"]
-[ext_resource type="PackedScene" uid="uid://bbwmtb5op8clu" path="res://Scenes/Character/Modules/interact_module.tscn" id="5_oofg7"]
-[ext_resource type="PackedScene" uid="uid://b6yg1bhhmnicr" path="res://Scenes/Character/Modules/auto_attack_module.tscn" id="6_1ax4j"]
-[ext_resource type="PackedScene" uid="uid://bext8rh783yay" path="res://Scenes/Character/FamiliesManagers/defense_manager.tscn" id="7_vpv01"]
-[ext_resource type="PackedScene" uid="uid://cl10r3idwllx" path="res://Scenes/Character/FamiliesManagers/fire_manager.tscn" id="8_xcv5n"]
-[ext_resource type="PackedScene" uid="uid://6holmj326e1y" path="res://Scenes/Character/FamiliesManagers/life_manager.tscn" id="9_iyia7"]
-[ext_resource type="PackedScene" uid="uid://cvihi4los882b" path="res://Scenes/Character/FamiliesManagers/poison_manager.tscn" id="10_eukmc"]
-[ext_resource type="PackedScene" uid="uid://bdl1xxjdbeugn" path="res://Scenes/Character/FamiliesManagers/serenity_manager.tscn" id="11_drx0u"]
-[ext_resource type="PackedScene" uid="uid://bjbfnigvphbfc" path="res://Scenes/Character/FamiliesManagers/storm_manager.tscn" id="13_h6u87"]
-[ext_resource type="PackedScene" uid="uid://crqesljjrouec" path="res://Scenes/Character/FamiliesManagers/attack_manager.tscn" id="14_nlxtr"]
-[ext_resource type="PackedScene" uid="uid://n30ifkjad344" path="res://Scenes/Character/Modules/target_module.tscn" id="15_2neru"]
+[ext_resource type="PackedScene" uid="uid://qgjyscmtp6t3" path="res://Scenes/Character/character_logic.tscn" id="7_0ei4b"]
 [ext_resource type="PackedScene" uid="uid://dqrhym1sskng8" path="res://Scenes/Entities/Turret/turret.tscn" id="16_abyaq"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Scenes/Tool/anim_hovering_module.tscn" id="17_cd1gv"]
 [ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://Scenes/Tool/anim_rotating_module.tscn" id="18_lro7s"]
@@ -72,45 +61,36 @@ properties/4/replication_mode = 2
 properties/5/path = NodePath(".:battle_id")
 properties/5/spawn = true
 properties/5/replication_mode = 2
+properties/6/path = NodePath(".:rotation")
+properties/6/spawn = true
+properties/6/replication_mode = 2
 
-[node name="Rocky" type="CharacterBody3D" node_paths=PackedStringArray("_families_managers", "_movement_module", "_action_module", "_interact_module", "_auto_attack_module", "_turret") groups=["CHARACTER"]]
+[node name="Rocky" type="CharacterBody3D" node_paths=PackedStringArray("_character_logic", "_turret") groups=["CHARACTER"]]
 motion_mode = 1
 script = ExtResource("1_e8asp")
-_families_managers = {
-0: NodePath("FamiliesManagers/AttackManager"),
-1: NodePath("FamiliesManagers/DefenseManager"),
-2: NodePath("FamiliesManagers/FireManager"),
-3: NodePath("FamiliesManagers/StormManager"),
-4: NodePath("FamiliesManagers/SerenityManager"),
-5: NodePath("FamiliesManagers/LifeManager"),
-6: NodePath("FamiliesManagers/PoisonManager")
-}
-_movement_module = NodePath("Modules/MovementModule")
-_action_module = NodePath("Modules/ActionModule")
-_interact_module = NodePath("Modules/InteractModule")
-_auto_attack_module = NodePath("Modules/AutoAttackModule")
+_character_logic = NodePath("CharacterLogic")
 _turret = NodePath("TurretCenterPoint/Turret")
 
 [node name="RockyModel" parent="." instance=ExtResource("2_1t8nd")]
 transform = Transform3D(-1.505, 0, -2.27249e-07, 0, 1.505, 0, 2.27249e-07, 0, -1.505, 0, 0, 0)
 
 [node name="GeneralSkeleton" parent="RockyModel/Armature" index="0"]
-bones/0/position = Vector3(0.00796126, 0.504783, 0.0183002)
-bones/0/rotation = Quaternion(-0.0381242, -0.367108, -0.0119107, 0.92932)
-bones/1/rotation = Quaternion(-0.0244062, 0.327756, 0.937388, -0.115259)
-bones/2/rotation = Quaternion(0.0361234, 0.944574, -0.324819, -0.0311178)
-bones/3/rotation = Quaternion(-0.0625619, 0.734549, -0.671339, 0.0763408)
-bones/5/rotation = Quaternion(-0.0974368, 0.0404354, 0.979465, 0.171813)
-bones/6/rotation = Quaternion(0.0222849, 0.958632, -0.247796, -0.138295)
-bones/7/rotation = Quaternion(0.122845, 0.565269, -0.802, -0.148921)
-bones/11/rotation = Quaternion(0.0102806, 0.0597452, 0.015474, 0.998041)
-bones/12/rotation = Quaternion(0.461752, 0.230325, 0.602156, -0.609216)
-bones/13/rotation = Quaternion(-0.111212, 0.841974, -0.486492, 0.205031)
-bones/14/rotation = Quaternion(0.263868, -0.730768, 0.290982, 0.558285)
-bones/16/rotation = Quaternion(0.258766, -0.433432, -0.728945, -0.462402)
-bones/17/rotation = Quaternion(0.264188, 0.843816, -0.466348, -0.0264307)
-bones/18/rotation = Quaternion(0.261711, 0.778412, -0.190449, 0.537877)
-bones/21/rotation = Quaternion(0.166844, 0.300156, -0.00987067, 0.939134)
+bones/0/position = Vector3(0.00826782, 0.506354, 0.0207244)
+bones/0/rotation = Quaternion(-0.0408141, -0.365604, -0.0127953, 0.929787)
+bones/1/rotation = Quaternion(-0.0219748, 0.322061, 0.939763, -0.112423)
+bones/2/rotation = Quaternion(0.0362517, 0.945452, -0.322048, -0.0330451)
+bones/3/rotation = Quaternion(-0.0608116, 0.734379, -0.67191, 0.0743361)
+bones/5/rotation = Quaternion(-0.101606, 0.029189, 0.979165, 0.17338)
+bones/6/rotation = Quaternion(0.0218402, 0.962206, -0.234581, -0.136582)
+bones/7/rotation = Quaternion(0.124024, 0.569642, -0.798474, -0.15022)
+bones/11/rotation = Quaternion(0.0106513, 0.0587683, 0.0157522, 0.998091)
+bones/12/rotation = Quaternion(0.458801, 0.24258, 0.585557, -0.622719)
+bones/13/rotation = Quaternion(-0.107543, 0.836924, -0.49733, 0.20163)
+bones/14/rotation = Quaternion(0.273752, -0.726469, 0.295283, 0.556876)
+bones/16/rotation = Quaternion(0.261345, -0.45091, -0.709616, -0.474156)
+bones/17/rotation = Quaternion(0.25631, 0.835693, -0.48532, -0.019656)
+bones/18/rotation = Quaternion(0.275388, 0.766182, -0.191048, 0.548296)
+bones/21/rotation = Quaternion(0.183108, 0.297968, -0.00651115, 0.936827)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../RockyModel")
@@ -130,49 +110,6 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
 shape = SubResource("CapsuleShape3D_rxegs")
 
-[node name="Modules" type="Node" parent="."]
-
-[node name="MovementModule" parent="Modules" instance=ExtResource("3_1usal")]
-unique_name_in_owner = true
-
-[node name="ActionModule" parent="Modules" instance=ExtResource("4_svl5t")]
-unique_name_in_owner = true
-
-[node name="InteractModule" parent="Modules" instance=ExtResource("5_oofg7")]
-unique_name_in_owner = true
-
-[node name="AutoAttackModule" parent="Modules" node_paths=PackedStringArray("projectile_spawn") instance=ExtResource("6_1ax4j")]
-unique_name_in_owner = true
-projectile_spawn = NodePath("../../TurretCenterPoint/Turret/SpawnPoint")
-
-[node name="FamiliesManagers" type="Node" parent="."]
-
-[node name="DefenseManager" parent="FamiliesManagers" instance=ExtResource("7_vpv01")]
-unique_name_in_owner = true
-
-[node name="FireManager" parent="FamiliesManagers" instance=ExtResource("8_xcv5n")]
-unique_name_in_owner = true
-
-[node name="LifeManager" parent="FamiliesManagers" instance=ExtResource("9_iyia7")]
-unique_name_in_owner = true
-
-[node name="PoisonManager" parent="FamiliesManagers" instance=ExtResource("10_eukmc")]
-unique_name_in_owner = true
-
-[node name="SerenityManager" parent="FamiliesManagers" instance=ExtResource("11_drx0u")]
-unique_name_in_owner = true
-
-[node name="StormManager" parent="FamiliesManagers" instance=ExtResource("13_h6u87")]
-unique_name_in_owner = true
-_percent_decrease = 10.0
-
-[node name="AttackManager" parent="FamiliesManagers" instance=ExtResource("14_nlxtr")]
-unique_name_in_owner = true
-
-[node name="TargetManager" parent="." node_paths=PackedStringArray("_source") instance=ExtResource("15_2neru")]
-unique_name_in_owner = true
-_source = NodePath("..")
-
 [node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 unique_name_in_owner = true
 replication_config = SubResource("SceneReplicationConfig_5ed6q")
@@ -180,8 +117,9 @@ replication_config = SubResource("SceneReplicationConfig_5ed6q")
 [node name="TurretCenterPoint" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.36537, 0)
 
-[node name="Turret" parent="TurretCenterPoint" instance=ExtResource("16_abyaq")]
+[node name="Turret" parent="TurretCenterPoint" node_paths=PackedStringArray("_auto_attack_module") instance=ExtResource("16_abyaq")]
 transform = Transform3D(0.495, 0, 0, 0, 0.495, 0, 0, 0, 0.495, 3, 0, 0)
+_auto_attack_module = NodePath("../../CharacterLogic/Modules/AutoAttackModule")
 
 [node name="AnimHoveringModule" parent="TurretCenterPoint/Turret" node_paths=PackedStringArray("_owner") instance=ExtResource("17_cd1gv")]
 _owner = NodePath("..")
@@ -195,5 +133,28 @@ _rot_period = 20.0
 _rot_max = 360.0
 _rot_full = true
 
+[node name="CharacterLogic" parent="." node_paths=PackedStringArray("_source", "modules", "families_managers") instance=ExtResource("7_0ei4b")]
+_source = NodePath("..")
+modules = {
+0: NodePath("Modules/MovementModule"),
+1: NodePath("Modules/ActionModule"),
+2: NodePath("Modules/InteractModule"),
+3: NodePath("Modules/AutoAttackModule"),
+4: NodePath("Modules/TargetModule")
+}
+families_managers = {
+0: NodePath("FamiliesManagers/AttackManager"),
+1: NodePath("FamiliesManagers/DefenseManager"),
+2: NodePath("FamiliesManagers/FireManager"),
+3: NodePath("FamiliesManagers/StormManager"),
+4: NodePath("FamiliesManagers/SerenityManager"),
+5: NodePath("FamiliesManagers/LifeManager"),
+6: NodePath("FamiliesManagers/PoisonManager")
+}
+
+[node name="AutoAttackModule" parent="CharacterLogic/Modules" index="3" node_paths=PackedStringArray("projectile_spawn")]
+projectile_spawn = NodePath("../../../TurretCenterPoint/Turret/SpawnPoint")
+
 [editable path="RockyModel"]
 [editable path="TurretCenterPoint/Turret"]
+[editable path="CharacterLogic"]

@@ -57,9 +57,7 @@ func _ready() -> void:
 # ============================== Public functions ==============================
 
 func start() -> void:
-	if not multiplayer.is_server():
-		return
-	
+	if not multiplayer.is_server(): return
 	_fights_over = 0
 	fighting_state = FightingState.STARTING
 	timer.wait_time = STARTING_DURATION

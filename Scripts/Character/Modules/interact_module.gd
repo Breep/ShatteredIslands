@@ -88,9 +88,7 @@ func _take_heal(source: Character, heal_amount: int) -> void:
 # ============================== Callback ==============================
 
 func _on_events_attack_done(source, target, damage, damage_type, is_critical) -> void:
-	print("ATTACK_DONE")
 	if target != _owner: return
-	print("ATTACK_DONE  TAKE DAMAGE")
 	_take_damage(source, damage, damage_type, is_critical)
 
 

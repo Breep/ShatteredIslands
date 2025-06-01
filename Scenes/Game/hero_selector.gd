@@ -11,6 +11,10 @@ var _available_heroes: Array[Hero]
 
 var _heroes_ready: int
 
+func _ready() -> void:
+	_player_hero_picked.connect(_on_player_hero_picked)
+	_ui_hero_picking_screen.hero_locked.connect(_on_ui_hero_picking_screen_hero_locked)
+
 func start() -> void:
 	var heroes: Array[Hero] = await GameManager.get_current_game_heroes()
 	
@@ -47,7 +51,6 @@ func _get_random_hero_and_wait_random_duration(heroes: Array[Hero]) -> Hero:
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	await get_tree().create_timer(rng.randf_range(0.1, 0.5)).timeout
-	print(_available_heroes)
 	var random_hero: Hero = _available_heroes.pick_random()
 	return random_hero
 
@@ -67,6 +70,8 @@ func _on_ui_hero_picking_screen_hero_locked(hero: Hero) -> void:
 
 
 func _on_player_hero_picked() -> void:
+	print("HERO PICKED")
 	_heroes_ready += 1
 	if _heroes_ready >= PlayerManager.MAX_PLAYERS:
+		_ui_hero_picking_screen.hide()
 		all_heroes_picked.emit()

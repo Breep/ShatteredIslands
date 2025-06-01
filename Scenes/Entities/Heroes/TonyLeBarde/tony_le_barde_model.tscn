@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://unr8ut4cx7db"]
 
-[ext_resource type="Script" uid="uid://boijjesl7u0r0" path="res://Scripts/hero_3d.gd" id="1_f3ao6"]
+[ext_resource type="Script" path="res://Scripts/hero_3d.gd" id="1_f3ao6"]
 [ext_resource type="PackedScene" uid="uid://0dsfddayqyc8" path="res://Scenes/3D_heroes/Dragonlord/dragon_lord.tscn" id="2_jakpk"]
 
 [node name="TonyLeBarde" type="Node3D"]
 script = ExtResource("1_f3ao6")
 
 [node name="dragon_lord" parent="." instance=ExtResource("2_jakpk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0.473)

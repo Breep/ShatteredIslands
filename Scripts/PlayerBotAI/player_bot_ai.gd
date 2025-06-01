@@ -9,10 +9,11 @@ const MAX_WAIT_TIME: float = 8
 
 var player: Player # Player Ref this BotAI is linked to
 
-var _wake_up_timer: Timer # Every timer tick, bot wakes up, figure out what to do, then go to sleep again (wait_time is random)
+@export var _wake_up_timer: Timer # Every timer tick, bot wakes up, figure out what to do, then go to sleep again (wait_time is random)
+@export var _card_shop: CardShop
+
 var _rng: RandomNumberGenerator
 var _economy_strategy: EconomyStrategy
-var _card_shop: CardShop
 
 enum EconomyStrategy {
 	KEEPER, # Stay always above 500gold if possible
@@ -27,17 +28,7 @@ func _ready() -> void:
 	
 	Events.game_state_changed.connect(_on_events_game_state_changed)
 	
-	_wake_up_timer = Timer.new()
-	_wake_up_timer.one_shot = true
-	_wake_up_timer.autostart = false
-	_wake_up_timer.timeout.connect(_on_wake_up_timer_timeout)
-	_wake_up_timer.name = "WakeUpTimer"
-	add_child(_wake_up_timer)
-	
-	_card_shop = CardShop.new()
 	_card_shop.player = player
-	_card_shop.name = "CardShop"
-	add_child(_card_shop)
 	
 	_rng = RandomNumberGenerator.new()
 	_rng.randomize()

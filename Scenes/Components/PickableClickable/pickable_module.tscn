@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://w0bgds2ebwen"]
+
+[ext_resource type="Script" uid="uid://ckdr6tlfjlaaw" path="res://Scripts/Components/pickable_module.gd" id="1_ntrpb"]
+
+[node name="PickableModule" type="Node"]
+script = ExtResource("1_ntrpb")
