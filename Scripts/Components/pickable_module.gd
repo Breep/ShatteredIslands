@@ -53,6 +53,8 @@ func _ready() -> void:
 		_spawn_area_checker.other_team_spawn_area_freed.connect(_on_spawn_area_checker_other_team_spawn_area_freed)
 	else:
 		_is_on_owner_spawn_area = true
+	
+	Events.game_state_changed.connect(_on_events_game_state_changed)
 
 # ============================== Public functions ==============================
 
@@ -198,6 +200,10 @@ func _on_spawn_area_checker_other_team_spawn_area_freed() -> void:
 	_is_on_other_spawn_area = false
 
 
+func _on_events_game_state_changed(game_state: Game.GameState) -> void:
+	if _spawn_area_checker == null: return
+	if game_state == Game.GameState.FIGHTING:
+		_spawn_area_checker.team = _owner.team
 
 
 

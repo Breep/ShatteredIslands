@@ -21,11 +21,11 @@ script = ExtResource("1_hqxtb")
 _fighting_area = NodePath("FightingArea")
 _center_point_camera = NodePath("CenterPointCamera")
 
-[node name="FightingArea" parent="." node_paths=PackedStringArray("_spawn_managers") instance=ExtResource("2_0nkjk")]
-_spawn_managers = {
-0: NodePath("FightingFloorTemplates/FightingFloor_1v1/SpawnManager"),
-1: NodePath("FightingFloorTemplates/FightingFloor_2v2/SpawnManager"),
-2: NodePath("FightingFloorTemplates/FightingFloor_ffa13/SpawnManager")
+[node name="FightingArea" parent="." node_paths=PackedStringArray("_fighting_floors") instance=ExtResource("2_0nkjk")]
+_fighting_floors = {
+0: NodePath("FightingFloorTemplates/FightingFloor_1v1"),
+1: NodePath("FightingFloorTemplates/FightingFloor_2v2"),
+2: NodePath("FightingFloorTemplates/FightingFloor_ffa13")
 }
 
 [node name="TelescopeIsland" parent="." instance=ExtResource("3_wy27a")]

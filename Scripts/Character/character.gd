@@ -136,11 +136,11 @@ func _on_interact_module_heal_received(heal_amount: int) -> void:
 		_character_visual.damage_popup(heal_amount, Utils.DamageType.HEAL, false)
 		_character_visual.update_health_bar(stats.health, stats.health_max)
 
-
 # ============================== Other callbacks ==============================
 
 func _on_fighting_manager_fight_is_over(_winner_team) -> void:
 	_character_logic.stop()
+
 
 func _on_global_fighting_manager_state_changed(new_state: GlobalFightingManager.FightingState) -> void:
 	fighting_state = new_state
