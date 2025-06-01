@@ -1,15 +1,15 @@
 [gd_scene load_steps=25 format=3 uid="uid://cr6mw5f6jrq0c"]
 
-[ext_resource type="Shader" uid="uid://bu56j0q7cio8f" path="res://Shaders/ElectricBallShader.gdshader" id="1_d12tl"]
+[ext_resource type="Shader" uid="uid://bu56j0q7cio8f" path="res://Shaders/Misc/ElectricBallShader.gdshader" id="1_d12tl"]
 [ext_resource type="Texture2D" uid="uid://rnfr7iqctlfy" path="res://Data/Assets/Misc/oeil blanc.png" id="1_gxjql"]
 [ext_resource type="Texture2D" uid="uid://pe0vdk3gkv63" path="res://Data/Assets/Misc/shield magma.png" id="5_haaba"]
 [ext_resource type="Material" uid="uid://bllnfgr3vkfc4" path="res://Shaders/outline/blotchyaura.tres" id="6_ncgqy"]
 [ext_resource type="Texture2D" uid="uid://dot1wrh4guixs" path="res://Data/Assets/Misc/chiffre 5 magma.png" id="7_3tlll"]
-[ext_resource type="Material" uid="uid://blo6nwqmvfy0a" path="res://Shaders/shader_ui_objet_ouf_mettre_texture_image.tres" id="8_7fljl"]
+[ext_resource type="Material" uid="uid://blo6nwqmvfy0a" path="res://Shaders/Misc/shader_ui_objet_ouf_mettre_texture_image.tres" id="8_7fljl"]
 [ext_resource type="Texture2D" uid="uid://kbwcchgw6r7x" path="res://Data/Texture/Kenney2/circle_03.png" id="9_nkoid"]
 [ext_resource type="Material" uid="uid://bscvi3qy0qpax" path="res://Shaders/outline/outline_gradient.tres" id="10_uphuk"]
 [ext_resource type="Material" uid="uid://bqjlc8pi3afii" path="res://Shaders/outline/all_in_one_scrolling_texture_outline.tres" id="11_wt6ev"]
-[ext_resource type="Material" uid="uid://bg75jp30jlyfh" path="res://Shaders/wavy_texture.tres" id="12_26qs1"]
+[ext_resource type="Material" uid="uid://bg75jp30jlyfh" path="res://Shaders/Misc/wavy_texture.tres" id="12_26qs1"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_80n3f"]
 load_path = "res://.godot/imported/light_02.png-aacc48df99c965398e579f64bfa274d4.ctex"

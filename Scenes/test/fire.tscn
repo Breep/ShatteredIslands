@@ -1,13 +1,13 @@
 [gd_scene load_steps=83 format=3 uid="uid://c84bcu56soo2o"]
 
 [ext_resource type="Texture2D" uid="uid://dmpy3jjabbmm7" path="res://Data/Texture/2D/T_1_pixel.jpg" id="1_q425r"]
-[ext_resource type="Material" uid="uid://sfgvxf8wp81x" path="res://Shaders/Fire_Ball.tres" id="2_n280a"]
-[ext_resource type="Material" uid="uid://cx37wrmb8u4rl" path="res://Shaders/Test_storm.tres" id="4_1ncav"]
-[ext_resource type="Material" uid="uid://dqm51ysejlh7b" path="res://Shaders/ShadowBoltMain.tres" id="5_wge7a"]
+[ext_resource type="Material" uid="uid://sfgvxf8wp81x" path="res://Shaders/Misc/Fire_Ball.tres" id="2_n280a"]
+[ext_resource type="Material" uid="uid://cx37wrmb8u4rl" path="res://Shaders/Misc/Test_storm.tres" id="4_1ncav"]
+[ext_resource type="Material" uid="uid://dqm51ysejlh7b" path="res://Shaders/Misc/ShadowBoltMain.tres" id="5_wge7a"]
 [ext_resource type="Material" uid="uid://21qcmga47g1m" path="res://Shaders/Spell/shadowbolt_black.tres" id="6_xfvkn"]
-[ext_resource type="Material" uid="uid://blo6nwqmvfy0a" path="res://Shaders/shader_ui_objet_ouf_mettre_texture_image.tres" id="7_jmgan"]
+[ext_resource type="Material" uid="uid://blo6nwqmvfy0a" path="res://Shaders/Misc/shader_ui_objet_ouf_mettre_texture_image.tres" id="7_jmgan"]
 [ext_resource type="Texture2D" uid="uid://kbwcchgw6r7x" path="res://Data/Texture/Kenney2/circle_03.png" id="7_r61ju"]
-[ext_resource type="Material" uid="uid://dobiblwgkketm" path="res://Shaders/fire_dynamic.tres" id="8_4bb7d"]
+[ext_resource type="Material" uid="uid://dobiblwgkketm" path="res://Shaders/Misc/fire_dynamic.tres" id="8_4bb7d"]
 [ext_resource type="Texture2D" uid="uid://bpokvkakjd1sy" path="res://Data/Assets/Misc/Misc_IMG/02.png" id="10_157fv"]
 [ext_resource type="Material" uid="uid://c4p62mwx5ydcd" path="res://Particle/colombe_pacify.tres" id="12_lq20s"]
 [ext_resource type="Texture2D" uid="uid://cko4oo71jqp2v" path="res://Data/Assets/Misc/peacemaker4x_87000.png" id="13_735w2"]
@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://cmsehlhc5t0p0" path="res://Data/Texture/Kenney2/smoke_04.png" id="16_ax72b"]
 [ext_resource type="Material" uid="uid://bmovupsp7v8lw" path="res://Particle/auto_attack_inflict_vulnerability.tres" id="18_7hoou"]
 [ext_resource type="Texture2D" uid="uid://c2p64lhrqeglf" path="res://Data/Texture/Kenney2/spark_05.png" id="19_i3278"]
-[ext_resource type="Material" uid="uid://cpukwmrm0x4d8" path="res://Shaders/lightning_random.tres" id="20_i8tlp"]
+[ext_resource type="Material" uid="uid://cpukwmrm0x4d8" path="res://Shaders/Misc/lightning_random.tres" id="20_i8tlp"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ynj2u"]
 load_path = "res://.godot/imported/2DBackground_40.png-a46777926f158291b581b1ec0fa7042c.ctex"

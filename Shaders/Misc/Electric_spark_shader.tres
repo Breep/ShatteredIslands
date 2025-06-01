@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cbenrvhfodwl"]
+
+[ext_resource type="Shader" uid="uid://cqj5mkhbo4fuj" path="res://Shaders/Misc/erosion_shader.tres" id="1_4oli5"]
+[ext_resource type="Texture2D" uid="uid://gri1snl6edrp" path="res://Data/Texture/Kenney2/spark_02.png" id="2_xhh4m"]
+
+[resource]
+shader = ExtResource("1_4oli5")
+shader_parameter/Dissolver_Texture = ExtResource("2_xhh4m")
+shader_parameter/flame_texture = ExtResource("2_xhh4m")

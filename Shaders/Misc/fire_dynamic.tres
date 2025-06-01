@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://dobiblwgkketm"]
+
+[ext_resource type="Shader" uid="uid://cqj5mkhbo4fuj" path="res://Shaders/Misc/erosion_shader.tres" id="1_euff5"]
+[ext_resource type="Texture2D" uid="uid://hyiv6el2cvuu" path="res://Data/Texture/2D/flame_3.png" id="2_l6xx2"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ompjk"]
+noise_type = 4
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_b45f0"]
+noise = SubResource("FastNoiseLite_ompjk")
+
+[resource]
+shader = ExtResource("1_euff5")
+shader_parameter/Dissolver_Texture = SubResource("NoiseTexture2D_b45f0")
+shader_parameter/flame_texture = ExtResource("2_l6xx2")
