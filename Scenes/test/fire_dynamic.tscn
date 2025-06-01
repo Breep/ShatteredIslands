@@ -1,13 +1,13 @@
 [gd_scene load_steps=41 format=3 uid="uid://xs11mxqucjwf"]
 
-[ext_resource type="Material" uid="uid://dobiblwgkketm" path="res://Shaders/fire_dynamic.tres" id="1_7g03x"]
+[ext_resource type="Material" uid="uid://dobiblwgkketm" path="res://Shaders/Misc/fire_dynamic.tres" id="1_7g03x"]
 [ext_resource type="Material" uid="uid://bem0rvqh0jmq6" path="res://Particle/fire_dynamic_particle.tres" id="2_ely1l"]
 [ext_resource type="Texture2D" uid="uid://dmpy3jjabbmm7" path="res://Data/Texture/2D/T_1_pixel.jpg" id="3_xxxtx"]
 [ext_resource type="Texture2D" uid="uid://cox677fl8sgl" path="res://Data/Texture/2D/T_VFX_Noise_2.PNG" id="4_lsfqp"]
-[ext_resource type="Material" uid="uid://cbenrvhfodwl" path="res://Shaders/Electric_spark_shader.tres" id="4_n1uhn"]
+[ext_resource type="Material" uid="uid://cbenrvhfodwl" path="res://Shaders/Misc/Electric_spark_shader.tres" id="4_n1uhn"]
 [ext_resource type="Texture2D" uid="uid://br6ejew7ctdi6" path="res://Data/Texture/Kenney2/magic_05.png" id="5_3nu38"]
 [ext_resource type="Material" uid="uid://by3yqqq5kql60" path="res://Particle/Electric_spark_particle.tres" id="5_kjupg"]
-[ext_resource type="Shader" uid="uid://bu56j0q7cio8f" path="res://Shaders/ElectricBallShader.gdshader" id="6_p6b8p"]
+[ext_resource type="Shader" uid="uid://bu56j0q7cio8f" path="res://Shaders/Misc/ElectricBallShader.gdshader" id="6_p6b8p"]
 [ext_resource type="Texture2D" uid="uid://dpwnqjbgkqurv" path="res://Data/Assets/Misc/Misc_IMG/test meteor.png" id="7_lnscj"]
 [ext_resource type="Texture2D" uid="uid://cs7u2i0f7ysn7" path="res://Data/Texture/Kenney2/fire_02.png" id="9_55b0y"]
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b6yyjft0aylpr" path="res://Scenes/FloatingIsland/fighting_island.gd" id="1_hqxtb"]
 [ext_resource type="PackedScene" uid="uid://c66yw4go2ykwa" path="res://Scenes/FightingArea/fighting_area.tscn" id="2_0nkjk"]
-[ext_resource type="PackedScene" uid="uid://bhx575fxnmb7i" path="res://Scenes/FightingArea/_Maps/Visuals/telescope_island.tscn" id="3_wy27a"]
+[ext_resource type="PackedScene" uid="uid://bhx575fxnmb7i" path="res://Scenes/FightingArea/_Maps/Visuals/telescope_island_old.tscn" id="3_wy27a"]
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://Scenes/Tool/center_point_camera.tscn" id="4_0ovsq"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_622jh"]
