@@ -17,3 +17,4 @@ fov = 35.0
 
 [node name="ClickerModule" parent="." node_paths=PackedStringArray("_camera") instance=ExtResource("2_vq7oo")]
 _camera = NodePath("../CenterPoint/Camera3D")
+_debug = true

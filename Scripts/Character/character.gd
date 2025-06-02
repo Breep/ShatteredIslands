@@ -76,14 +76,16 @@ func _character_ready() -> void:
 		player.character = self
 		_is_local = player.id == multiplayer.get_unique_id()
 	
-	if battle_id != -1:
-		_character_visual.update_health_bar(stats.health, stats.health_max)
-		_character_visual.update_mana_bar(stats.mana, stats.mana_max)
-		_character_visual.update_name_displayed(player.name)
-		GlobalFightingManager.state_changed.connect(_on_global_fighting_manager_state_changed)
-	else:
+	if battle_id == -1:
 		_character_visual.hide()
 		if _turret != null: _turret.hide()
+	
+	_character_visual.update_health_bar(stats.health, stats.health_max)
+	_character_visual.update_mana_bar(stats.mana, stats.mana_max)
+	_character_visual.update_name_displayed(player.name)
+	
+	GlobalFightingManager.state_changed.connect(_on_global_fighting_manager_state_changed)
+	Events.game_state_changed.connect(_on_events_game_state_changed)
 	
 	#_interact_module.damage_taken.connect(_on_interact_module_damage_taken)
 	#_interact_module.heal_received.connect(_on_interact_module_heal_received)
@@ -144,6 +146,16 @@ func _on_fighting_manager_fight_is_over(_winner_team) -> void:
 
 func _on_global_fighting_manager_state_changed(new_state: GlobalFightingManager.FightingState) -> void:
 	fighting_state = new_state
+
+
+func _on_events_game_state_changed(new_state: Game.GameState) -> void:
+	match new_state:
+		Game.GameState.BUYING:
+			_character_visual.hide()
+			if _turret != null: _turret.hide()
+		Game.GameState.FIGHTING:
+			_character_visual.show()
+			if _turret != null: _turret.show()
 
 
 

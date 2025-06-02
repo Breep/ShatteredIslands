@@ -203,7 +203,10 @@ func _on_spawn_area_checker_other_team_spawn_area_freed() -> void:
 func _on_events_game_state_changed(game_state: Game.GameState) -> void:
 	if _spawn_area_checker == null: return
 	if game_state == Game.GameState.FIGHTING:
+		pickable_locked = false
 		_spawn_area_checker.team = _owner.team
+	elif game_state == Game.GameState.BUYING:
+		pickable_locked = true
 
 
 

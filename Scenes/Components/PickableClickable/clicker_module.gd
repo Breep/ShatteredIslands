@@ -153,7 +153,7 @@ func _select_pickable(pickable: Node3D, is_selected: bool, event: InputEvent) ->
 		if _pickable_plane == null: return
 		var from: Vector3 = _camera.project_ray_origin(event.position)
 		var to: Vector3 = from + _camera.project_ray_normal(event.position) * 1000
-		_pickable_start_intersection = _pickable_plane.intersects_ray(from, to)
+		_pickable_start_intersection = _pickable_plane.intersects_ray(from, to) # TODO Move this inside the pickable module probably
 		_tween.tween_property(pickable, "global_position:y", 0.5, 0.2).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 	else:
 		if pickable_module.drop() == false: return

@@ -50,7 +50,6 @@ func _set_inactive() -> void:
 
 
 func _reset() ->void:
-	print("DEBUG ", get_path(), " RESET")
 	hide()
 	_owner_team_spawn_area_overlapping_counter = 0
 	_other_team_spawn_area_overlapping_counter = 0

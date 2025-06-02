@@ -25,14 +25,12 @@ func _ready() -> void:
 
 
 func _set_active() -> void:
-	print("ACTIVE")
 	monitorable = true
 	monitoring = true
 	_reset()
 
 
 func _set_inactive() -> void:
-	print("INACTIVE ", get_path())
 	monitorable = false
 	monitoring = false
 	_reset()

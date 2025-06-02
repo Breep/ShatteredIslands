@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dr8xv1vshmvyq"]
+[gd_scene load_steps=8 format=3 uid="uid://dr8xv1vshmvyq"]
 
 [ext_resource type="Script" uid="uid://83sm3r5y5ofy" path="res://Scripts/BuyingArea/Tavern/TavernCenter/tavern_center.gd" id="1_ha6dk"]
 [ext_resource type="PackedScene" uid="uid://dlqrg6ijwk3i8" path="res://Scenes/BuyingArea/Tavern/TavernCenter/Tables/table_1v1.tscn" id="2_are6m"]
 [ext_resource type="PackedScene" uid="uid://b4av14wu25x12" path="res://Scenes/BuyingArea/Tavern/TavernCenter/Tables/table_2v2.tscn" id="3_cjni8"]
 [ext_resource type="PackedScene" uid="uid://cqskpy33r7xoi" path="res://Scenes/BuyingArea/Tavern/TavernCenter/Tables/table_ffa_solo_3.tscn" id="3_vm0me"]
+[ext_resource type="Script" uid="uid://dac2bii21cgfw" path="res://Scenes/BuyingArea/Tavern/TavernCenter/Tables/table_layout.gd" id="5_tln4w"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6qeal"]
 transparency = 1
@@ -12,8 +13,9 @@ albedo_color = Color(0.787, 0, 0.617, 0.108)
 [sub_resource type="BoxMesh" id="BoxMesh_r1qdr"]
 size = Vector3(15, 1, 10)
 
-[node name="TavernCenter" type="Node3D"]
+[node name="TavernCenter" type="Node3D" node_paths=PackedStringArray("_table_layouts")]
 script = ExtResource("1_ha6dk")
+_table_layouts = [NodePath("PlayersLeft_8/4_1v1"), NodePath("PlayersLeft_8/2_2v2")]
 
 [node name="DebugVisualPlace" type="MeshInstance3D" parent="."]
 visible = false
@@ -134,9 +136,10 @@ transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 3, 0, 1)
 [node name="PlayersLeft_8" type="Node3D" parent="."]
 unique_name_in_owner = true
 
-[node name="4_1v1" type="Node3D" parent="PlayersLeft_8"]
+[node name="4_1v1" type="Node3D" parent="PlayersLeft_8" node_paths=PackedStringArray("_tables")]
 unique_name_in_owner = true
-visible = false
+script = ExtResource("5_tln4w")
+_tables = [NodePath("Table_1v1_1"), NodePath("Table_1v1_2"), NodePath("Table_1v1_3"), NodePath("Table_1v1_4")]
 
 [node name="Table_1v1_1" parent="PlayersLeft_8/4_1v1" instance=ExtResource("2_are6m")]
 transform = Transform3D(0.508516, 0, 0.861053, 0, 1, 0, -0.861053, 0, 0.508516, -2.70871, 0, -2.13845)
@@ -153,8 +156,11 @@ battle_id = 2
 transform = Transform3D(0.781673, 0, 0.623689, 0, 1, 0, -0.623689, 0, 0.781673, -3.94566, 0, 2.6117)
 battle_id = 3
 
-[node name="2_2v2" type="Node3D" parent="PlayersLeft_8"]
+[node name="2_2v2" type="Node3D" parent="PlayersLeft_8" node_paths=PackedStringArray("_tables")]
 unique_name_in_owner = true
+visible = false
+script = ExtResource("5_tln4w")
+_tables = [NodePath("table_2v2_1"), NodePath("table_2v2_2")]
 
 [node name="table_2v2_1" parent="PlayersLeft_8/2_2v2" instance=ExtResource("3_cjni8")]
 transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -3, 0, 1)

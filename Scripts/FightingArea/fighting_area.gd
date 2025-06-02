@@ -40,8 +40,6 @@ func _ready() -> void:
 	if _ready_checks() != true:
 		return
 	
-	_fighting_manager.battle_id = battle_id
-	
 	_register_self_in_shared()
 
 
@@ -71,6 +69,7 @@ func start_fight(characters: Array[Character], battle_type: Battle.BattleType) -
 
 func set_active() -> void:
 	_ui_fighting_area.show()
+
 
 func set_inactive() -> void:
 	_ui_fighting_area.hide()
