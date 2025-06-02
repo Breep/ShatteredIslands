@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://63jj5bu6xqml"
+path.s3tc="res://.godot/imported/lava_mapv1_PolygonNatureBiomesS2_AridDesert_Texture_01.png-758d76c20c0c3a3f96bbaa42fe7e90e8.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "b9732cde4817578244eea3ca56dd10cb"
+}
+
+[deps]
+
+source_file="res://Data/Blender/Map/Map/Lava map/lava_mapv1_PolygonNatureBiomesS2_AridDesert_Texture_01.png"
+dest_files=["res://.godot/imported/lava_mapv1_PolygonNatureBiomesS2_AridDesert_Texture_01.png-758d76c20c0c3a3f96bbaa42fe7e90e8.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0
