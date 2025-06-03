@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://ca8mcplp2va4s"]
 
 [ext_resource type="Script" uid="uid://cvy50on4evfts" path="res://Scripts/BuyingArea/buying_area.gd" id="1_ed4aq"]
-[ext_resource type="PackedScene" uid="uid://cmstx61h3h6ar" path="res://Scenes/UI/BuyingArea/ui_buying_area.tscn" id="5_dvq4w"]
-[ext_resource type="PackedScene" uid="uid://pyrw8lacvly2" path="res://Scenes/Managers/entity_manager.tscn" id="7_s0sy2"]
+[ext_resource type="PackedScene" uid="uid://cmstx61h3h6ar" path="res://UI/BuyingArea/ui_buying_area.tscn" id="5_dvq4w"]
+[ext_resource type="PackedScene" uid="uid://pyrw8lacvly2" path="res://Managers/entity_manager.tscn" id="7_s0sy2"]
 [ext_resource type="PackedScene" uid="uid://b8clqslwo8t68" path="res://Scenes/BuyingArea/Tavern/tavern.tscn" id="7_s1xub"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jhmrm"]

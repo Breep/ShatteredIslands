@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://ctspehviccwd5"]
 
 [ext_resource type="Script" uid="uid://bhv0dmum15mp1" path="res://Scenes/FightingArea/ArenaFloorTemplates/fighting_floor.gd" id="1_i0b8l"]
-[ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://Scenes/Managers/spawn_manager.tscn" id="1_kcex7"]
+[ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://Managers/spawn_manager.tscn" id="1_kcex7"]
 [ext_resource type="PackedScene" uid="uid://dibux7uwcsatj" path="res://Scenes/FightingArea/spawn_area.tscn" id="2_1l6d4"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Scenes/FightingArea/spawn_point.tscn" id="3_8mse8"]
 

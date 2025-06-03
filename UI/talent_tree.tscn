@@ -1,0 +1,325 @@
+[gd_scene load_steps=11 format=3 uid="uid://bq8jcgdyr42i6"]
+
+[ext_resource type="Script" uid="uid://dg18yevxh5mno" path="res://UI/talent_tree.gd" id="1_3lbyp"]
+[ext_resource type="FontFile" uid="uid://dgaako73a24kh" path="res://Data/font/rimouski sb.ttf" id="2_qiv10"]
+[ext_resource type="Texture2D" uid="uid://haeo8pgy071v" path="res://Data/Assets/BackGround/effet-bang-explosion-fleche-dessin-anime-icone-souffle-feu_81894-6614-removebg-preview.png" id="3_igl0i"]
+[ext_resource type="Texture2D" uid="uid://d34qpfx40d4ox" path="res://Data/Assets/BackGround/472616789_28403690705911652_2688862136642980928_n-removebg-preview.png" id="4_hrd11"]
+[ext_resource type="Texture2D" uid="uid://dhvnlvdnbrxvl" path="res://Data/Assets/Card/Card_IMG/heal/cleanse.jpg" id="5_nce0c"]
+[ext_resource type="Texture2D" uid="uid://bo534sbxmu3jh" path="res://Data/Assets/Card/Card_IMG/Attack/bounce attack.jpg" id="6_8eu7i"]
+[ext_resource type="Texture2D" uid="uid://dmhnxnqse56fy" path="res://Data/Assets/Card/Card_IMG/heal/white-light-monolith.jpg" id="7_nkift"]
+[ext_resource type="Texture2D" uid="uid://bd2ymqw3mfvrg" path="res://Data/Assets/Card/Card_IMG/Necro/necrosis knife.jpg" id="8_jm1h0"]
+[ext_resource type="Texture2D" uid="uid://berioty2oweos" path="res://Data/Assets/Card/Card_IMG/Necro/soul drain.jpg" id="9_1sblj"]
+[ext_resource type="Texture2D" uid="uid://clx0jjxv145r5" path="res://Data/Assets/Card/Card_IMG/storm/thunder weapon.jpg" id="10_cxqh0"]
+
+[node name="TalentTree" type="Control"]
+layout_mode = 3
+anchor_right = 0.459
+anchor_bottom = 1.0
+offset_right = 0.231995
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3lbyp")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.572549, 0.643137, 1, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+offset_left = -10.0
+offset_top = 98.0
+offset_right = 212.0
+offset_bottom = 163.0
+rotation = -0.496281
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.871433, 0.0933141, 0.204734, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_qiv10")
+theme_override_font_sizes/font_size = 54
+text = "BREEEEPP"
+
+[node name="Explo" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 426.0
+offset_top = 54.0
+offset_right = 582.0
+offset_bottom = 184.0
+texture = ExtResource("3_igl0i")
+expand_mode = 1
+
+[node name="TalentTreeCharacter" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TalentTreeCharacter"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TalentTreeCharacter/MarginContainer"]
+layout_mode = 2
+
+[node name="Char" type="Control" parent="TalentTreeCharacter/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.6
+
+[node name="MarginContainer" type="MarginContainer" parent="TalentTreeCharacter/MarginContainer/VBoxContainer/Char"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TalentTreeCharacter/MarginContainer/VBoxContainer/Char/MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="TalentTreeCharacter/MarginContainer/VBoxContainer/Char/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+
+[node name="TextureRect" type="TextureRect" parent="TalentTreeCharacter/MarginContainer/VBoxContainer/Char/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 7.0
+texture = ExtResource("4_hrd11")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Talentschoice" type="Label" parent="TalentTreeCharacter/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.871433, 0.0933141, 0.204734, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_qiv10")
+theme_override_font_sizes/font_size = 35
+text = "TALENTS "
+horizontal_alignment = 1
+
+[node name="HeroTalents" type="Control" parent="TalentTreeCharacter/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.8
+
+[node name="MarginContainer" type="MarginContainer" parent="TalentTreeCharacter/MarginContainer/VBoxContainer/HeroTalents"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="TalentTreeCharacter/MarginContainer/VBoxContainer/HeroTalents/MarginContainer"]
+layout_mode = 2
+color = Color(0.478431, 0.54902, 1, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TalentTreeCharacter/MarginContainer/VBoxContainer/HeroTalents/MarginContainer"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="TalentTreeCharacter/MarginContainer/VBoxContainer/HeroTalents/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="TalentTreeCharacter/MarginContainer/VBoxContainer/HeroTalents/MarginContainer/VBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Talent" type="HBoxContainer" parent="TalentTreeCharacter/MarginContainer/VBoxContainer/HeroTalents/MarginContainer/VBoxContainer/Control/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="Level" type="Panel" parent="TalentTreeCharacter/MarginContainer/VBoxContainer/HeroTalents/MarginContainer/VBoxContainer/Control/MarginContainer/Talent"]
+self_modulate = Color(1, 1, 1, 0.103)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Lvl" type="Label" parent="TalentTreeCharacter/MarginContainer/VBoxContainer/HeroTalents/MarginContainer/VBoxContainer/Control/MarginContainer/Talent/Level"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+text = "LVL 1
+"
+horizontal_alignment = 1
+
+[node name="TalentLvl1_1" type="TextureButton" parent="TalentTreeCharacter/MarginContainer/VBoxContainer/HeroTalents/MarginContainer/VBoxContainer/Control/MarginContainer/Talent"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("5_nce0c")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TalentLvl1_2" type="TextureButton" parent="TalentTreeCharacter/MarginContainer/VBoxContainer/HeroTalents/MarginContainer/VBoxContainer/Control/MarginContainer/Talent"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("6_8eu7i")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Control2" type="Control" parent="TalentTreeCharacter/MarginContainer/VBoxContainer/HeroTalents/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="TalentTreeCharacter/MarginContainer/VBoxContainer/HeroTalents/MarginContainer/VBoxContainer/Control2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Talent" type="HBoxContainer" parent="TalentTreeCharacter/MarginContainer/VBoxContainer/HeroTalents/MarginContainer/VBoxContainer/Control2/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="Level" type="Panel" parent="TalentTreeCharacter/MarginContainer/VBoxContainer/HeroTalents/MarginContainer/VBoxContainer/Control2/MarginContainer/Talent"]
+self_modulate = Color(1, 1, 1, 0.103)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Lvl" type="Label" parent="TalentTreeCharacter/MarginContainer/VBoxContainer/HeroTalents/MarginContainer/VBoxContainer/Control2/MarginContainer/Talent/Level"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+text = "LVL 3
+"
+horizontal_alignment = 1
+
+[node name="TalentLvl3_1" type="TextureButton" parent="TalentTreeCharacter/MarginContainer/VBoxContainer/HeroTalents/MarginContainer/VBoxContainer/Control2/MarginContainer/Talent"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("7_nkift")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TalentLvl3_2" type="TextureButton" parent="TalentTreeCharacter/MarginContainer/VBoxContainer/HeroTalents/MarginContainer/VBoxContainer/Control2/MarginContainer/Talent"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("8_jm1h0")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Control3" type="Control" parent="TalentTreeCharacter/MarginContainer/VBoxContainer/HeroTalents/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="TalentTreeCharacter/MarginContainer/VBoxContainer/HeroTalents/MarginContainer/VBoxContainer/Control3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Talent" type="HBoxContainer" parent="TalentTreeCharacter/MarginContainer/VBoxContainer/HeroTalents/MarginContainer/VBoxContainer/Control3/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="Level" type="Panel" parent="TalentTreeCharacter/MarginContainer/VBoxContainer/HeroTalents/MarginContainer/VBoxContainer/Control3/MarginContainer/Talent"]
+self_modulate = Color(1, 1, 1, 0.103)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Lvl" type="Label" parent="TalentTreeCharacter/MarginContainer/VBoxContainer/HeroTalents/MarginContainer/VBoxContainer/Control3/MarginContainer/Talent/Level"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+text = "LVL 5
+"
+horizontal_alignment = 1
+
+[node name="TalentLvl5_1" type="TextureButton" parent="TalentTreeCharacter/MarginContainer/VBoxContainer/HeroTalents/MarginContainer/VBoxContainer/Control3/MarginContainer/Talent"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+texture_normal = ExtResource("9_1sblj")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TalentLvl5_2" type="TextureButton" parent="TalentTreeCharacter/MarginContainer/VBoxContainer/HeroTalents/MarginContainer/VBoxContainer/Control3/MarginContainer/Talent"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+texture_normal = ExtResource("10_cxqh0")
+ignore_texture_size = true
+stretch_mode = 0
+
+[connection signal="pressed" from="TalentTreeCharacter/MarginContainer/VBoxContainer/HeroTalents/MarginContainer/VBoxContainer/Control/MarginContainer/Talent/TalentLvl1_1" to="." method="_on_talent_lvl_1_1_pressed"]
+[connection signal="pressed" from="TalentTreeCharacter/MarginContainer/VBoxContainer/HeroTalents/MarginContainer/VBoxContainer/Control/MarginContainer/Talent/TalentLvl1_2" to="." method="_on_talent_lvl_1_2_pressed"]
+[connection signal="pressed" from="TalentTreeCharacter/MarginContainer/VBoxContainer/HeroTalents/MarginContainer/VBoxContainer/Control2/MarginContainer/Talent/TalentLvl3_1" to="." method="_on_talent_lvl_3_1_pressed"]
+[connection signal="pressed" from="TalentTreeCharacter/MarginContainer/VBoxContainer/HeroTalents/MarginContainer/VBoxContainer/Control2/MarginContainer/Talent/TalentLvl3_2" to="." method="_on_talent_lvl_3_2_pressed"]
+[connection signal="pressed" from="TalentTreeCharacter/MarginContainer/VBoxContainer/HeroTalents/MarginContainer/VBoxContainer/Control3/MarginContainer/Talent/TalentLvl5_1" to="." method="_on_talent_lvl_5_1_pressed"]
+[connection signal="pressed" from="TalentTreeCharacter/MarginContainer/VBoxContainer/HeroTalents/MarginContainer/VBoxContainer/Control3/MarginContainer/Talent/TalentLvl5_2" to="." method="_on_talent_lvl_5_2_pressed"]

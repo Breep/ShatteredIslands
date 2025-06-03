@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://dmfkigo1trjd0"]
+
+[ext_resource type="FontFile" uid="uid://3y3dvdvjwvmr" path="res://Data/font/airstrike.ttf" id="1_1snar"]
+[ext_resource type="Script" uid="uid://c3oixb8xu68w" path="res://UI/ui_countdown.gd" id="1_kdeao"]
+[ext_resource type="Shader" uid="uid://or10r03jptmm" path="res://Shaders/countdown_gradient.gdshader" id="2_lahu3"]
+
+[sub_resource type="Gradient" id="Gradient_uft1f"]
+offsets = PackedFloat32Array(0, 0.985294)
+colors = PackedColorArray(0.624342, 0.301421, 0.0608716, 1, 0.35849, 1.20327e-08, 0.195046, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_j0oqv"]
+gradient = SubResource("Gradient_uft1f")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cpdrj"]
+shader = ExtResource("2_lahu3")
+shader_parameter/gradient = SubResource("GradientTexture1D_j0oqv")
+
+[sub_resource type="Theme" id="Theme_ol2a8"]
+Label/colors/font_color = Color(0.756686, 0.327541, 7.70092e-07, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 0.795)
+Label/constants/outline_size = 2
+Label/constants/shadow_offset_x = 3
+Label/constants/shadow_offset_y = 3
+Label/font_sizes/font_size = 75
+Label/fonts/font = ExtResource("1_1snar")
+
+[node name="Countdown" type="Control"]
+layout_mode = 3
+anchor_right = 0.3
+anchor_bottom = 0.2
+offset_right = -345.6
+offset_bottom = -129.6
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kdeao")
+
+[node name="TimerLabel" type="Label" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_cpdrj")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -26.5
+offset_top = -33.0
+offset_right = 26.5
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(32.5, 33)
+theme = SubResource("Theme_ol2a8")
+text = "8"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimerCountdown" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[connection signal="timeout" from="TimerCountdown" to="." method="_on_timer_countdown_timeout"]

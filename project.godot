@@ -18,15 +18,15 @@ config/icon="uid://hl4bi74ds0b0"
 
 [autoload]
 
-GameManager="*res://Scripts/Managers/game_manager.gd"
-MultiplayerDeckManager="*res://Scripts/Managers/multiplayer_deck_manager.gd"
+GameManager="*res://Managers/game_manager.gd"
+MultiplayerDeckManager="*res://Managers/multiplayer_deck_manager.gd"
 Utils="*res://Scripts/Lib/utils.gd"
-TooltipManager="*res://Scripts/Managers/Global/tooltip_manager.gd"
-Events="*res://Scripts/Managers/Global/events.gd"
-RoundManager="*res://Scripts/Managers/round_manager.gd"
+TooltipManager="*res://Managers/Global/tooltip_manager.gd"
+Events="*res://Managers/Global/events.gd"
+RoundManager="*res://Managers/round_manager.gd"
 Shared="*res://Scripts/Lib/shared.gd"
-PlayerManager="*res://Scripts/Managers/Global/player_manager.gd"
-GlobalFightingManager="*res://Scripts/Managers/Global/global_fighting_manager.gd"
+PlayerManager="*res://Managers/Global/player_manager.gd"
+GlobalFightingManager="*res://Managers/Global/global_fighting_manager.gd"
 
 [debug]
 
@@ -45,6 +45,7 @@ folder_colors={
 "res://Scenes/": "pink",
 "res://Scripts/": "purple",
 "res://Shaders/": "orange",
+"res://UI/": "blue",
 "res://VFEZ-godot-main/": "gray"
 }
 

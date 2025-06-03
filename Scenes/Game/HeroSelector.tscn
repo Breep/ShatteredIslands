@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cbd5jq0bp7fef"]
 
-[ext_resource type="PackedScene" uid="uid://k4dc5j8ecdxo" path="res://Scenes/UI/HeroSelection/ui_hero_picking_screen.tscn" id="1_72g3l"]
+[ext_resource type="PackedScene" uid="uid://k4dc5j8ecdxo" path="res://UI/HeroSelection/ui_hero_picking_screen.tscn" id="1_72g3l"]
 [ext_resource type="Script" uid="uid://cheqkh8k8emb0" path="res://Scenes/Game/hero_selector.gd" id="1_fiyb4"]
 
 [node name="HeroSelector" type="Node" node_paths=PackedStringArray("_ui_hero_picking_screen")]
