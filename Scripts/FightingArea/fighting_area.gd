@@ -40,10 +40,7 @@ func _ready() -> void:
 	if _ready_checks() != true:
 		return
 	
-	_fighting_manager.battle_id = battle_id
-	
 	_register_self_in_shared()
-
 
 func _exit_tree() -> void:
 	_delete_self_in_shared()
@@ -71,6 +68,7 @@ func start_fight(characters: Array[Character], battle_type: Battle.BattleType) -
 
 func set_active() -> void:
 	_ui_fighting_area.show()
+
 
 func set_inactive() -> void:
 	_ui_fighting_area.hide()
@@ -108,9 +106,9 @@ func _set_fighting_floor(battle_type: Battle.BattleType) -> SpawnManager:
 
 # ============================== Callbacks ==============================
 
-func _on_fighting_manager_fight_is_over(winner_teams_order: Array[int]) -> void:
+func _on_fighting_manager_fight_is_over(_fighting_manager: FightingManager, winner_teams_order: Array[int]) -> void:
+	print("Fight is over for the battle[", battle_id, "]")
 	RoundManager.register_battle_result(battle_id, winner_teams_order)
-	queue_free()
 	# Calculate damage (=average of the winners damage)
 
 

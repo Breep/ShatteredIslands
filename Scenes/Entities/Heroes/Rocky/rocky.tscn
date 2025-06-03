@@ -66,6 +66,8 @@ properties/6/spawn = true
 properties/6/replication_mode = 2
 
 [node name="Rocky" type="CharacterBody3D" node_paths=PackedStringArray("_character_logic", "_turret") groups=["CHARACTER"]]
+collision_layer = 16
+collision_mask = 9
 motion_mode = 1
 script = ExtResource("1_e8asp")
 _character_logic = NodePath("CharacterLogic")
@@ -75,22 +77,22 @@ _turret = NodePath("TurretCenterPoint/Turret")
 transform = Transform3D(-1.505, 0, -2.27249e-07, 0, 1.505, 0, 2.27249e-07, 0, -1.505, 0, 0, 0)
 
 [node name="GeneralSkeleton" parent="RockyModel/Armature" index="0"]
-bones/0/position = Vector3(0.00826782, 0.506354, 0.0207244)
-bones/0/rotation = Quaternion(-0.0408141, -0.365604, -0.0127953, 0.929787)
-bones/1/rotation = Quaternion(-0.0219748, 0.322061, 0.939763, -0.112423)
-bones/2/rotation = Quaternion(0.0362517, 0.945452, -0.322048, -0.0330451)
-bones/3/rotation = Quaternion(-0.0608116, 0.734379, -0.67191, 0.0743361)
-bones/5/rotation = Quaternion(-0.101606, 0.029189, 0.979165, 0.17338)
-bones/6/rotation = Quaternion(0.0218402, 0.962206, -0.234581, -0.136582)
-bones/7/rotation = Quaternion(0.124024, 0.569642, -0.798474, -0.15022)
-bones/11/rotation = Quaternion(0.0106513, 0.0587683, 0.0157522, 0.998091)
-bones/12/rotation = Quaternion(0.458801, 0.24258, 0.585557, -0.622719)
-bones/13/rotation = Quaternion(-0.107543, 0.836924, -0.49733, 0.20163)
-bones/14/rotation = Quaternion(0.273752, -0.726469, 0.295283, 0.556876)
-bones/16/rotation = Quaternion(0.261345, -0.45091, -0.709616, -0.474156)
-bones/17/rotation = Quaternion(0.25631, 0.835693, -0.48532, -0.019656)
-bones/18/rotation = Quaternion(0.275388, 0.766182, -0.191048, 0.548296)
-bones/21/rotation = Quaternion(0.183108, 0.297968, -0.00651115, 0.936827)
+bones/0/position = Vector3(0.00809982, 0.507319, 0.0223468)
+bones/0/rotation = Quaternion(-0.0404774, -0.366463, -0.0130892, 0.92946)
+bones/1/rotation = Quaternion(-0.0200715, 0.318811, 0.940994, -0.111748)
+bones/2/rotation = Quaternion(0.0361404, 0.945998, -0.320449, -0.0330664)
+bones/3/rotation = Quaternion(-0.0598284, 0.733869, -0.672682, 0.0731873)
+bones/5/rotation = Quaternion(-0.103598, 0.0238871, 0.979037, 0.173734)
+bones/6/rotation = Quaternion(0.0210317, 0.965049, -0.224212, -0.134044)
+bones/7/rotation = Quaternion(0.124356, 0.572661, -0.796184, -0.15062)
+bones/11/rotation = Quaternion(0.0103139, 0.0596341, 0.0155549, 0.998046)
+bones/12/rotation = Quaternion(0.459796, 0.246692, 0.578972, -0.626515)
+bones/13/rotation = Quaternion(-0.106168, 0.834465, -0.502268, 0.200306)
+bones/14/rotation = Quaternion(0.278273, -0.724815, 0.297647, 0.555529)
+bones/16/rotation = Quaternion(0.264361, -0.455971, -0.704634, -0.475074)
+bones/17/rotation = Quaternion(0.252469, 0.831301, -0.494888, -0.0168354)
+bones/18/rotation = Quaternion(0.281102, 0.760585, -0.191838, 0.552893)
+bones/21/rotation = Quaternion(0.142391, 0.30038, 0.00253393, 0.943128)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../RockyModel")

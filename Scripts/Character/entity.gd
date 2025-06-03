@@ -21,12 +21,21 @@ enum EntityType {
 
 const SIGNAL_NAME_SPAWNED: String = "spawned"
 
+# ============================== Static variables ==============================
+
+static var instance_count: int = 0
+
 # ============================== Node base functions ==============================
 
+func _entity_init() -> void:
+	print("Character: _init() [", get_path(), "] [", instance_count, "]")
+	id = instance_count
+	instance_count += 1
+
 func _enter_tree() -> void:
-	#print("Character: _enter_tree() [", get_path(), "]")
+	print("Character: _enter_tree() [", get_path(), "] [", battle_id, "]")
 	if is_node_ready() and battle_id != -1:
-		#print("Character: _enter_tree() signal")
+		print("Character:      _enter_tree() signal")
 		_recursive_propagate_signal(get_parent(), Entity.SIGNAL_NAME_SPAWNED)
 
 # ============================== Private functions ==============================

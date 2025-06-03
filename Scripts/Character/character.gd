@@ -61,6 +61,8 @@ func connect_to_fighting_area(fighting_area: FightingArea) -> void:
 
 func _init() -> void:
 	stats = CharacterStats.new()
+	stats.health_changed.connect(_on_stats_health_changed)
+	_entity_init()
 
 
 func _ready() -> void:
@@ -76,14 +78,16 @@ func _character_ready() -> void:
 		player.character = self
 		_is_local = player.id == multiplayer.get_unique_id()
 	
-	if battle_id != -1:
-		_character_visual.update_health_bar(stats.health, stats.health_max)
-		_character_visual.update_mana_bar(stats.mana, stats.mana_max)
-		_character_visual.update_name_displayed(player.name)
-		GlobalFightingManager.state_changed.connect(_on_global_fighting_manager_state_changed)
-	else:
+	if battle_id == -1:
 		_character_visual.hide()
 		if _turret != null: _turret.hide()
+	
+	_character_visual.update_health_bar(stats.health, stats.health_max)
+	_character_visual.update_mana_bar(stats.mana, stats.mana_max)
+	_character_visual.update_name_displayed(player.name)
+	
+	GlobalFightingManager.state_changed.connect(_on_global_fighting_manager_state_changed)
+	Events.game_state_changed.connect(_on_events_game_state_changed)
 	
 	#_interact_module.damage_taken.connect(_on_interact_module_damage_taken)
 	#_interact_module.heal_received.connect(_on_interact_module_heal_received)
@@ -136,17 +140,30 @@ func _on_interact_module_heal_received(heal_amount: int) -> void:
 		_character_visual.damage_popup(heal_amount, Utils.DamageType.HEAL, false)
 		_character_visual.update_health_bar(stats.health, stats.health_max)
 
-
 # ============================== Other callbacks ==============================
 
 func _on_fighting_manager_fight_is_over(_winner_team) -> void:
 	_character_logic.stop()
 
+
 func _on_global_fighting_manager_state_changed(new_state: GlobalFightingManager.FightingState) -> void:
 	fighting_state = new_state
 
 
+func _on_events_game_state_changed(new_state: Game.GameState) -> void:
+	match new_state:
+		Game.GameState.BUYING:
+			_character_visual.hide()
+			if _turret != null: _turret.hide()
+		Game.GameState.FIGHTING:
+			_character_visual.show()
+			if _turret != null: _turret.show()
 
+
+func _on_stats_health_changed(new_health: int) -> void:
+	if new_health <= 0:
+		print("DEBUG | ", name, " | DEAD")
+		dead.emit()
 
 
 

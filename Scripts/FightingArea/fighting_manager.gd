@@ -9,7 +9,8 @@ extends Node
 
 # ============================== Signals ==============================
 
-signal fight_is_over(winner_teams_order: Array[int]) # The Array is from Looser to Winner [4th, 3rd, 2nd, 1st]
+signal fight_is_over(self_ref: FightingManager, winner_teams_order: Array[int]) # The Array is from Looser to Winner [4th, 3rd, 2nd, 1st]
+signal fight_is_started(self_ref: FightingManager)
 
 # ============================== Public variables ==============================
 
@@ -21,16 +22,23 @@ var battle_id: int = -1 # Set by the parent
 var _characters_dictionary: Dictionary[int, Array] # [int, Array[Character]] Key=team_id, value=team members
 var _alive_characters_dictionary: Dictionary[int, Array] # [int, Array[Character]] Key=team_id, value=team members
 var _lowest_hp_teams_order: Array[int] # Array of teams in order of death [2, 3, 4] means team 2 died first, then 3 and then 4
+var _is_active: bool = false
 
 # ============================== Node base functions ==============================
 
-func _ready() -> void:
+func _enter_tree() -> void:
 	GlobalFightingManager.register_fighting_manager(self)
 	GlobalFightingManager.state_changed.connect(_on_global_fighting_manager_state_changed)
+
+
+func _exit_tree() -> void:
+	GlobalFightingManager.unregister_fighting_manager(self)
 
 # ============================== Public functions ==============================
 
 func start(characters: Array[Character]) -> void:
+	_is_active = true
+	fight_is_started.emit(self)
 	_setup_characters_dictionary(characters)
 	_connect_to_characters_signals()
 
@@ -99,10 +107,10 @@ func _get_winner_teams_order() -> Array[int]:
 
 
 func _stop_fighting_manager() -> void:
+	_is_active = false
 	_disconnect_from_characters_signals()
 	var winner_teams_order: Array[int] = _get_winner_teams_order()
-	fight_is_over.emit(winner_teams_order)
-	queue_free()
+	fight_is_over.emit(self, winner_teams_order)
 
 # ============================== Callbacks ==============================
 
@@ -115,6 +123,7 @@ func _on_character_dead(who: Character) -> void:
 
 
 func _on_global_fighting_manager_state_changed(new_state) -> void:
+	if not _is_active: return
 	if new_state == GlobalFightingManager.FightingState.FINISHED:
 		_stop_fighting_manager()
 

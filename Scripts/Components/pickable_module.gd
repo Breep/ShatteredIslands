@@ -53,6 +53,8 @@ func _ready() -> void:
 		_spawn_area_checker.other_team_spawn_area_freed.connect(_on_spawn_area_checker_other_team_spawn_area_freed)
 	else:
 		_is_on_owner_spawn_area = true
+	
+	Events.game_state_changed.connect(_on_events_game_state_changed)
 
 # ============================== Public functions ==============================
 
@@ -147,11 +149,13 @@ func _build_impact_mesh() -> void:
 	
 	sphere_mesh.material = material
 	_debug_impact.mesh = sphere_mesh
+	_debug_impact.name = "PickableModule_DebugImpact" + str(get_instance_id())
 
 
 func _build_raycast_mesh() -> void:
 	_debug_raycast = MeshInstance3D.new()
 	_debug_raycast.mesh = ImmediateMesh.new()
+	_debug_raycast.name = "PickableModule_DebugRaycast" + str(get_instance_id())
 
 
 func _update_debug_raycast(origin: Vector3, end: Vector3, hit: Dictionary) -> void:
@@ -198,6 +202,13 @@ func _on_spawn_area_checker_other_team_spawn_area_freed() -> void:
 	_is_on_other_spawn_area = false
 
 
+func _on_events_game_state_changed(game_state: Game.GameState) -> void:
+	if _spawn_area_checker == null: return
+	if game_state == Game.GameState.FIGHTING:
+		pickable_locked = false
+		_spawn_area_checker.team = _owner.team
+	elif game_state == Game.GameState.BUYING:
+		pickable_locked = true
 
 
 

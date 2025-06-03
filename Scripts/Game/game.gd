@@ -4,7 +4,7 @@ extends Node3D
 # ============================== Enum ==============================
 
 enum GameState {
-	STARTING,
+	POSITIONING,
 	BUYING,
 	FIGHTING,
 	UNDEF
@@ -47,7 +47,7 @@ func _ready() -> void:
 	_hero_selector.all_heroes_picked.connect(_on_hero_selector_all_heroes_picked)
 	_buying_island.buying_phase_finished.connect(_on_buying_island_buying_phase_finished)
 	
-	#GlobalFightingManager.all_fights_are_over.connect(_on_global_fighting_manager_all_fights_are_over)
+	GlobalFightingManager.all_fights_are_over.connect(_on_global_fighting_manager_all_fights_are_over)
 	_start_game()
 
 # ============================== Private functions ==============================
@@ -58,7 +58,7 @@ func _start_game() -> void:
 
 
 func _start_hero_selection() -> void:
-	game_state = GameState.STARTING
+	game_state = GameState.POSITIONING
 	_hero_selector.start()
 	#_buying_area.start_hero_selection(heroes)
 
@@ -85,6 +85,7 @@ func _start_fighting_phase(battles: Array[Battle]) -> void:
 	for i in battles.size():
 		var characters: Array[Character]
 		for player in battles[i].players:
+			player.character.battle_id = battles[i].id
 			characters.append(player.character)
 		fighting_islands_choosen[i].start_fight(characters, battles[i].battle_type)
 	# Start fight on each island
@@ -118,7 +119,7 @@ func _spawn_fighting_islands() -> void:
 			fighting_island.global_rotation = spawn_point.global_rotation
 			_scene_switcher.fighting_islands[i] = fighting_island
 			_fighting_islands[player.id] = fighting_island
-			i = i + 1
+			i += 1
 	_island_spawns_to_be_removed.queue_free()
 
 
@@ -142,9 +143,13 @@ func _on_hero_selector_all_heroes_picked() -> void:
 	_spawn_all_characters()
 	_start_new_round()
 
+
 func _on_global_fighting_manager_all_fights_are_over() -> void:
 	print("[", multiplayer.get_unique_id(), "] Game: ALL FIGHTS ARE OVER")
 	await RoundManager.ending_round_player_changes()
+	print("[", multiplayer.get_unique_id(), "] Game: ALL FIGHTS ARE OVER 1")
 	await get_tree().create_timer(1.0).timeout
+	print("[", multiplayer.get_unique_id(), "] Game: ALL FIGHTS ARE OVER 2")
 	await PlayerManager.sync_point(PlayerManager.SyncID.ENDING_ROUND)
+	print("[", multiplayer.get_unique_id(), "] Game: ALL FIGHTS ARE OVER 3")
 	_start_new_round()

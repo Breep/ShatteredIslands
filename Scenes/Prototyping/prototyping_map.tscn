@@ -52,45 +52,6 @@ id = 1
 team = 1
 battle_id = 1
 
-[node name="GeneralSkeleton" parent="AncientTree/AncientTreeModel/Armature_006" index="0"]
-bones/0/position = Vector3(0.00697127, 0.430972, 0.017101)
-bones/0/rotation = Quaternion(-0.0400571, -0.366338, -0.0124677, 0.929536)
-bones/1/rotation = Quaternion(-0.0226947, 0.323582, 0.939124, -0.11325)
-bones/2/rotation = Quaternion(0.0361081, 0.945317, -0.322513, -0.0325065)
-bones/3/rotation = Quaternion(-0.0613839, 0.734437, -0.671722, 0.074998)
-bones/6/rotation = Quaternion(-0.100247, 0.0329052, 0.979243, 0.173063)
-bones/7/rotation = Quaternion(0.0219562, 0.961202, -0.23863, -0.13662)
-bones/8/rotation = Quaternion(0.123646, 0.568422, -0.799477, -0.149813)
-bones/13/rotation = Quaternion(0.0105528, 0.05902, 0.0156789, 0.998078)
-bones/14/rotation = Quaternion(0.459437, 0.238847, 0.589854, -0.619631)
-bones/15/rotation = Quaternion(-0.108627, 0.838249, -0.49441, 0.202727)
-bones/16/rotation = Quaternion(0.270503, -0.727645, 0.293853, 0.557684)
-bones/19/rotation = Quaternion(0.260557, -0.445659, -0.715605, -0.47054)
-bones/20/rotation = Quaternion(0.25928, 0.838554, -0.478736, -0.020326)
-bones/21/rotation = Quaternion(0.272249, 0.768914, -0.190432, 0.546249)
-bones/25/rotation = Quaternion(0.182607, 0.298594, -0.00718298, 0.93672)
-
-[node name="CharacterVisual" parent="AncientTree" index="2"]
-transform = Transform3D(-0.00729547, 0, 0.999973, 0, 1, 0, -0.999973, 0, -0.00729547, 0, 0.884308, 0)
-
-[node name="CharacterLogic" parent="AncientTree" index="6" node_paths=PackedStringArray("modules", "families_managers")]
-modules = {
-0: NodePath("Modules/MovementModule"),
-1: NodePath("Modules/ActionModule"),
-2: NodePath("Modules/InteractModule"),
-3: NodePath("Modules/AutoAttackModule"),
-4: NodePath("Modules/TargetModule")
-}
-families_managers = {
-0: NodePath("FamiliesManagers/AttackManager"),
-1: NodePath("FamiliesManagers/DefenseManager"),
-2: NodePath("FamiliesManagers/FireManager"),
-3: NodePath("FamiliesManagers/StormManager"),
-4: NodePath("FamiliesManagers/SerenityManager"),
-5: NodePath("FamiliesManagers/LifeManager"),
-6: NodePath("FamiliesManagers/PoisonManager")
-}
-
 [node name="Cyborg" parent="." instance=ExtResource("3_4p440")]
 transform = Transform3D(-0.999428, 0, 0.0338182, 0, 1, 0, -0.0338182, 0, -0.999428, 2.28313, 0, 6.83022)
 _is_prototype = true
@@ -185,9 +146,5 @@ shape = SubResource("BoxShape3D_sakdd")
 _nodes_where_to_find_meshs = [NodePath("../MeshInstance3D")]
 _owner = NodePath("..")
 
-[editable path="AncientTree"]
-[editable path="AncientTree/AncientTreeModel"]
-[editable path="AncientTree/TurretCenterPoint/Turret"]
-[editable path="AncientTree/CharacterLogic"]
 [editable path="FightingIsland"]
 [editable path="FightingIsland/CenterPointCamera"]

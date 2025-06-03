@@ -29,7 +29,7 @@ input_1/reset = true
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_i08v8"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_p4e66"]
-graph_offset = Vector2(-450.21, 2.08981)
+graph_offset = Vector2(-20, 2.08981)
 nodes/AnimIdle/node = SubResource("AnimationNodeAnimation_su5oi")
 nodes/AnimIdle/position = Vector2(-460, -20)
 nodes/AnimRun/node = SubResource("AnimationNodeAnimation_61y0m")
@@ -66,6 +66,8 @@ properties/6/spawn = true
 properties/6/replication_mode = 2
 
 [node name="TonyLeBarde" type="CharacterBody3D" node_paths=PackedStringArray("_character_logic", "_turret") groups=["CHARACTER"]]
+collision_layer = 16
+collision_mask = 9
 motion_mode = 1
 script = ExtResource("1_t7etg")
 _hero = ExtResource("2_tw8mw")
