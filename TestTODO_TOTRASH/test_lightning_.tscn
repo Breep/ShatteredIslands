@@ -1,0 +1,264 @@
+[gd_scene load_steps=29 format=3 uid="uid://c2rtowb3vvct8"]
+
+[ext_resource type="Texture2D" uid="uid://bav76nkdqrew4" path="res://Data/Assets/BackGround/background_text_vfx_bottom.png" id="1_767ko"]
+[ext_resource type="Texture2D" uid="uid://ct5ppocexx7mg" path="res://Data/Assets/BackGround/background_text_vfx_top.png" id="2_8d4k0"]
+[ext_resource type="Texture2D" uid="uid://cv3deg4obeqrt" path="res://Data/Assets/BackGround/cloud_grey.png" id="3_xfg3r"]
+[ext_resource type="PackedScene" uid="uid://b2x1gwlq6444i" path="res://VFX/Particle/Shader Spell-Projectile/vfx_thunder_light.tscn" id="4_d7xxu"]
+[ext_resource type="Texture2D" uid="uid://bqnubx2u1t1" path="res://Data/Texture/2D/T_VFX_Glo31.png" id="6_ewhjo"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_ifqnu"]
+input_name = "color"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_5kd1t"]
+operator = 2
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_pjlro"]
+parameter_name = "basic_texture"
+texture_type = 1
+texture_repeat = 1
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_ami5v"]
+expanded_output_ports = [0]
+source = 5
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_mcgtu"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_ncrcx"]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_wsqhb"]
+default_input_values = [0, Vector2(0, 0), 1, Vector2(1, 0)]
+op_type = 0
+operator = 2
+
+[sub_resource type="VisualShaderNodeVec2Parameter" id="VisualShaderNodeVec2Parameter_ivn6q"]
+parameter_name = "Speed"
+
+[sub_resource type="VisualShaderNodeSmoothStep" id="VisualShaderNodeSmoothStep_0kheo"]
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_6t8y0"]
+parameter_name = "Vanishin_Value"
+hint = 1
+
+[sub_resource type="VisualShader" id="VisualShader_gaxm8"]
+code = "shader_type canvas_item;
+render_mode blend_add, unshaded;
+
+uniform float Vanishin_Value : hint_range(0.0, 1.0);
+uniform vec2 Speed;
+uniform sampler2D basic_texture : source_color, repeat_enable;
+
+
+
+void fragment() {
+// Input:10
+	vec4 n_out10p0 = COLOR;
+
+
+// FloatParameter:9
+	float n_out9p0 = Vanishin_Value;
+
+
+// Input:5
+	float n_out5p0 = TIME;
+
+
+// Vector2Parameter:7
+	vec2 n_out7p0 = Speed;
+
+
+// VectorOp:6
+	vec2 n_out6p0 = vec2(n_out5p0) * n_out7p0;
+
+
+// UVFunc:4
+	vec2 n_in4p1 = vec2(1.00000, 1.00000);
+	vec2 n_out4p0 = n_out6p0 * n_in4p1 + UV;
+
+
+	vec4 n_out3p0;
+// Texture2D:3
+	n_out3p0 = texture(basic_texture, n_out4p0);
+	float n_out3p1 = n_out3p0.r;
+
+
+// SmoothStep:8
+	float n_in8p1 = 1.00000;
+	float n_out8p0 = smoothstep(n_out9p0, n_in8p1, n_out3p1);
+
+
+// VectorOp:11
+	vec3 n_out11p0 = vec3(n_out10p0.xyz) * vec3(n_out8p0);
+
+
+// Output:0
+	COLOR.rgb = n_out11p0;
+
+
+}
+"
+mode = 1
+modes/blend = 1
+flags/unshaded = true
+flags/light_only = false
+nodes/fragment/0/position = Vector2(1380, 240)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture2DParameter_pjlro")
+nodes/fragment/2/position = Vector2(-160, 320)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_ami5v")
+nodes/fragment/3/position = Vector2(237.7, 234.7)
+nodes/fragment/4/node = SubResource("VisualShaderNodeUVFunc_mcgtu")
+nodes/fragment/4/position = Vector2(-80, 80)
+nodes/fragment/5/node = SubResource("VisualShaderNodeInput_ncrcx")
+nodes/fragment/5/position = Vector2(-600, 80)
+nodes/fragment/6/node = SubResource("VisualShaderNodeVectorOp_wsqhb")
+nodes/fragment/6/position = Vector2(-300, 100)
+nodes/fragment/7/node = SubResource("VisualShaderNodeVec2Parameter_ivn6q")
+nodes/fragment/7/position = Vector2(-620, 240)
+nodes/fragment/8/node = SubResource("VisualShaderNodeSmoothStep_0kheo")
+nodes/fragment/8/position = Vector2(540, 240)
+nodes/fragment/9/node = SubResource("VisualShaderNodeFloatParameter_6t8y0")
+nodes/fragment/9/position = Vector2(240, -80)
+nodes/fragment/10/node = SubResource("VisualShaderNodeInput_ifqnu")
+nodes/fragment/10/position = Vector2(620, 20)
+nodes/fragment/11/node = SubResource("VisualShaderNodeVectorOp_5kd1t")
+nodes/fragment/11/position = Vector2(940, 160)
+nodes/fragment/connections = PackedInt32Array(2, 0, 3, 2, 4, 0, 3, 0, 5, 0, 6, 0, 6, 0, 4, 2, 7, 0, 6, 1, 3, 1, 8, 2, 9, 0, 8, 0, 8, 0, 11, 1, 10, 0, 11, 0, 11, 0, 0, 0)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qnvvc"]
+load_path = "res://.godot/imported/spark_05_rotated.png-15512ef7db33530ce4ceb2c83e008f81.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x4jhc"]
+shader = SubResource("VisualShader_gaxm8")
+shader_parameter/Vanishin_Value = 0.0
+shader_parameter/Speed = Vector2(-2, 0)
+shader_parameter/basic_texture = SubResource("CompressedTexture2D_qnvvc")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lp58i"]
+blend_mode = 1
+light_mode = 1
+
+[sub_resource type="Curve" id="Curve_8jywu"]
+_data = [Vector2(0, 0.494505), 0.0, 0.0, 0, 0, Vector2(1, 0.0879121), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_n704e"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_u68bh"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_1kp03"]
+curve_x = SubResource("Curve_8jywu")
+curve_y = SubResource("Curve_n704e")
+curve_z = SubResource("Curve_u68bh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_20efn"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 50.0
+emission_ring_radius = 50.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = -500.0
+initial_velocity_max = -400.0
+radial_velocity_min = 500.0
+radial_velocity_max = 700.0
+gravity = Vector3(0, 98, 0)
+scale_min = 0.05
+scale_max = 0.2
+scale_curve = SubResource("CurveXYZTexture_1kp03")
+color = Color(0.5, 1.3, 2.2, 1)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lhg54"]
+blend_mode = 1
+light_mode = 1
+
+[sub_resource type="Curve" id="Curve_e6bw8"]
+_data = [Vector2(0, 0.032967), 0.0, 0.0, 0, 0, Vector2(0.164634, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.032967), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_bcgbn"]
+curve = SubResource("Curve_e6bw8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8wkmr"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 0.7
+scale_max = 0.9
+scale_curve = SubResource("CurveTexture_bcgbn")
+color = Color(0.216819, 0.527936, 0.954469, 1)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Map" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Map"]
+z_index = 1
+position = Vector2(496, 68)
+scale = Vector2(0.589416, 0.483631)
+texture = ExtResource("3_xfg3r")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Map"]
+z_index = 1
+position = Vector2(920, 61)
+scale = Vector2(0.589416, 0.483631)
+texture = ExtResource("3_xfg3r")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Map"]
+offset_left = 1.0
+offset_right = 1151.0
+offset_bottom = 539.0
+texture = ExtResource("2_8d4k0")
+region_rect = Rect2(0, 8, 995, 16)
+
+[node name="TextureRect" type="TextureRect" parent="Map"]
+z_index = 1
+offset_left = -1.0
+offset_top = 542.0
+offset_right = 1149.0
+offset_bottom = 661.0
+texture = ExtResource("1_767ko")
+expand_mode = 1
+
+[node name="VFX_Thunder" parent="." instance=ExtResource("4_d7xxu")]
+
+[node name="VFX_Thunder_blue" type="Node2D" parent="."]
+position = Vector2(422, -13)
+
+[node name="Thunder" type="Line2D" parent="VFX_Thunder_blue"]
+material = SubResource("ShaderMaterial_x4jhc")
+points = PackedVector2Array(492, 21, 289, 182, 217, 365, 256, 493, 500, 563)
+width = 250.0
+default_color = Color(0.369164, 0.597614, 0.965027, 1)
+texture_mode = 2
+
+[node name="Sparks" type="GPUParticles2D" parent="VFX_Thunder_blue"]
+material = SubResource("CanvasItemMaterial_lp58i")
+position = Vector2(502, 534)
+amount = 15
+process_material = SubResource("ParticleProcessMaterial_20efn")
+texture = ExtResource("6_ewhjo")
+lifetime = 0.15
+fixed_fps = 60
+
+[node name="Flare" type="GPUParticles2D" parent="VFX_Thunder_blue"]
+material = SubResource("CanvasItemMaterial_lhg54")
+position = Vector2(501, 536)
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_8wkmr")
+texture = ExtResource("6_ewhjo")
+lifetime = 0.15
+fixed_fps = 60
+
+[node name="PointLight2D" type="PointLight2D" parent="VFX_Thunder_blue"]
+position = Vector2(508, 534)
+color = Color(0.172699, 0.410006, 0.777522, 1)
+energy = 3.0
+texture = ExtResource("6_ewhjo")

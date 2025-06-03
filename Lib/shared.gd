@@ -1,0 +1,45 @@
+extends Node
+
+var HEROES: Dictionary[Hero.HeroId, Hero] = {
+	Hero.HeroId.ANCIENT_TREE: load("res://Entities/Heroes/AncientTree/ancient_tree.tres"),
+	Hero.HeroId.CYBORG: load("res://Entities/Heroes/Cyborg/cyborg.tres"),
+	Hero.HeroId.DR_BOOM: load("res://Entities/Heroes/DrBoom/dr_boom.tres"),
+	Hero.HeroId.LAURENT_KROFT: load("res://Entities/Heroes/LaurentKroft/laurent_kroft.tres"),
+	Hero.HeroId.MR_KRUMB: load("res://Entities/Heroes/MrKrumb/mr_krumb.tres"),
+	Hero.HeroId.SIR_REGINALD: load("res://Entities/Heroes/SirReginald/sir_reginald.tres"),
+	Hero.HeroId.TONY_LE_BARDE: load("res://Entities/Heroes/TonyLeBarde/tony_le_barde.tres"),
+	Hero.HeroId.RHINO: load("res://Entities/Heroes/Rhino/rhino.tres"),
+	Hero.HeroId.DARK_KNIGHT: load("res://Entities/Heroes/DarkKnight/dark_knight.tres")
+}
+
+var CHARACTERS: Dictionary[Hero.HeroId, PackedScene] = {
+	Hero.HeroId.ANCIENT_TREE: load("res://Entities/Heroes/AncientTree/ancient_tree.tscn"),
+	Hero.HeroId.CYBORG: load("res://Entities/Heroes/Cyborg/cyborg.tscn"),
+	Hero.HeroId.DR_BOOM: load("res://Entities/Heroes/DrBoom/dr_boom.tscn"),
+	Hero.HeroId.LAURENT_KROFT: load("res://Entities/Heroes/LaurentKroft/laurent_kroft.tscn"),
+	Hero.HeroId.MR_KRUMB: load("res://Entities/Heroes/MrKrumb/mr_krumb.tscn"),
+	Hero.HeroId.SIR_REGINALD: load("res://Entities/Heroes/SirReginald/sir_reginald.tscn"),
+	Hero.HeroId.TONY_LE_BARDE: load("res://Entities/Heroes/TonyLeBarde/tony_le_barde.tscn"),
+	Hero.HeroId.RHINO: load("res://Entities/Heroes/Rhino/rhino.tscn"),
+	Hero.HeroId.DARK_KNIGHT: load("res://Entities/Heroes/DarkKnight/dark_knight.tscn")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

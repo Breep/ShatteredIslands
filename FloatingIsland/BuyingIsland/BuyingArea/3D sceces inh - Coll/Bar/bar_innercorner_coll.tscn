@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://blhvq0qvktia3"]
+
+[ext_resource type="PackedScene" uid="uid://bwgwl4ibjod8k" path="res://FloatingIsland/BuyingIsland/BuyingArea/3D Scenes inherited/Bar/bar_innercorner_2.tscn" id="1_75kdf"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_dh2td"]
+points = PackedVector3Array(0.978565, 0.00356513, 1.44791, -0.9875, 0.029758, -0.4875, -0.983023, 0.983953, -0.483023, 0.987597, 0.0297112, -0.487403, 0.983023, 0.983953, 1.48302, -0.222148, 0.809344, 1.51587, 0.983101, 0.983991, -0.482908, -0.957623, 0.0143613, 0.589613, -0.919178, 0.99722, 0.67778, -0.0896275, 0.014282, 1.45778, -1.01587, 0.809344, 0.722148, -0.17778, 0.99722, 1.41918, -0.183337, 0.00356512, -0.478565, 0.924401, 1, -0.424401, 0.9875, 0.029758, 1.4875, 0.977551, 0.00408808, -0.44693, -0.187353, 0.273719, -0.5, -0.978565, 0.00356513, -0.447913, 0.924401, 1, 1.4244, -0.924401, 1, -0.424401, -0.216146, 0.986571, -0.488429, 0.947913, 0.00356514, 1.47857, 0.947012, 0.00404464, -0.477444, -0.947913, 0.00356512, -0.478565)
+
+[node name="bar_innercorner_2" type="StaticBody3D"]
+
+[node name="bar_innercorner" parent="." instance=ExtResource("1_75kdf")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_dh2td")

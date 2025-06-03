@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://crqesljjrouec"]
-
-[ext_resource type="Script" uid="uid://bs07pjtj2hnjt" path="res://Scripts/Character/FamiliesManagers/attack_manager.gd" id="1_431n5"]
-
-[node name="AttackManager" type="Node"]
-script = ExtResource("1_431n5")

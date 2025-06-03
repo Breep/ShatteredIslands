@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://rrlv43pawkil"]
+
+[ext_resource type="Script" uid="uid://dv8w8kb4xsqp3" path="res://SpellsAndProjectiles/Projectiles/projectile.gd" id="1_j7jsv"]
+[ext_resource type="PackedScene" uid="uid://dus0o7sp36exd" path="res://Entities/Heroes/AncientTree/butterfly_model.tscn" id="2_r8n23"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_a055b"]
+radius = 0.1
+
+[node name="Projectile" type="Area3D"]
+script = ExtResource("1_j7jsv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_a055b")
+
+[node name="ButterflyModel" parent="." instance=ExtResource("2_r8n23")]
+transform = Transform3D(-5.24537e-09, 0, -0.12, 0, 0.12, 0, 0.12, 0, -5.24537e-09, 0, 0, 0)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

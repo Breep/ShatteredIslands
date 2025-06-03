@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvtbjmadt2v8p"]
-
-[ext_resource type="Script" uid="uid://boijjesl7u0r0" path="res://Scripts/hero_3d.gd" id="1_5efed"]
-[ext_resource type="PackedScene" uid="uid://bmtp8uvuepsu5" path="res://Scenes/3D_heroes/Sir Reginald/sir_.tscn" id="2_vvy81"]
-
-[node name="SirReginaldModel" type="Node3D"]
-script = ExtResource("1_5efed")
-
-[node name="sir_rigged_animated" parent="." instance=ExtResource("2_vvy81")]

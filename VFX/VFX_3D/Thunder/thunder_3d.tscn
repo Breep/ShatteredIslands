@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvdqonpgslx38"]
+
+[ext_resource type="Material" uid="uid://bqa4yxqnd8cg6" path="res://VFX/Shaders/Spell/Electric/vfx_thunder_light.tres" id="4_td8db"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_e7tt7"]
+
+[node name="Thunder" type="Node3D"]
+
+[node name="ThunderMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.516054, 0)
+material_override = ExtResource("4_td8db")
+mesh = SubResource("QuadMesh_e7tt7")

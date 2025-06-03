@@ -1,0 +1,45 @@
+[gd_scene load_steps=12 format=3 uid="uid://t0eic3fm86xs"]
+
+[ext_resource type="Shader" uid="uid://dohr4h8kc67x2" path="res://VFX/Shaders/Spell/smoke_bomb.tres" id="1_wpf1u"]
+[ext_resource type="Texture2D" uid="uid://dmpy3jjabbmm7" path="res://Data/Texture/2D/T_1_pixel.jpg" id="3_5bq04"]
+[ext_resource type="Texture2D" uid="uid://c6nrnfhdcd33x" path="res://Data/Texture/kenney_particle_pack/smoke_04.png" id="5_j8r7n"]
+
+[sub_resource type="Gradient" id="Gradient_064kw"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_iap3r"]
+gradient = SubResource("Gradient_064kw")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_j24ht"]
+offsets = PackedFloat32Array(0, 0.419118, 0.558824, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.154876, 0.154876, 0.154876, 0.779, 0.182989, 0.189833, 0.179606, 1, 0, 0, 0, 0.725)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_o1fwv"]
+gradient = SubResource("Gradient_j24ht")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ybk4v"]
+load_path = "res://.godot/imported/T_VFX_Noise_2.PNG-380ee3926d8a61ac8206ac80205b1f7b.ctex"
+
+[sub_resource type="Gradient" id="Gradient_88ei8"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nu74c"]
+gradient = SubResource("Gradient_88ei8")
+fill_to = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xgqp1"]
+shader = ExtResource("1_wpf1u")
+shader_parameter/Scale = Vector2(3, 3)
+shader_parameter/Speed = Vector2(1, 0)
+shader_parameter/Texture_Main = SubResource("CompressedTexture2D_ybk4v")
+shader_parameter/Texture_Add = SubResource("GradientTexture2D_iap3r")
+shader_parameter/Texture_Multiply = ExtResource("5_j8r7n")
+shader_parameter/Texture_Substract = SubResource("GradientTexture2D_nu74c")
+shader_parameter/Texture_Color_1D = SubResource("GradientTexture1D_o1fwv")
+
+[node name="Smoke" type="Node2D"]
+
+[node name="dark" type="Sprite2D" parent="."]
+z_index = 1
+material = SubResource("ShaderMaterial_xgqp1")
+scale = Vector2(210.516, 209.43)
+texture = ExtResource("3_5bq04")

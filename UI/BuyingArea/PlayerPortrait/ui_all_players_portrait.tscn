@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=3 uid="uid://be38goiqxp28o"]
+
+[ext_resource type="Script" uid="uid://darlhccrb6y62" path="res://UI/BuyingArea/PlayerPortrait/ui_all_players_portrait.gd" id="1_3jfw4"]
+[ext_resource type="PackedScene" uid="uid://dyf154pndkj6u" path="res://UI/BuyingArea/PlayerPortrait/ui_player_portrait.tscn" id="1_a7ivo"]
+
+[node name="AllPlayersPortrait" type="Control" node_paths=PackedStringArray("_players_portraits")]
+layout_mode = 3
+anchor_right = 0.139
+anchor_bottom = 1.0
+offset_right = -0.128021
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3jfw4")
+_players_portraits = [NodePath("VBoxContainer/PlayerPortrait"), NodePath("VBoxContainer/PlayerPortrait2"), NodePath("VBoxContainer/PlayerPortrait3"), NodePath("VBoxContainer/PlayerPortrait4"), NodePath("VBoxContainer/PlayerPortrait5"), NodePath("VBoxContainer/PlayerPortrait6"), NodePath("VBoxContainer/PlayerPortrait7"), NodePath("VBoxContainer/PlayerPortrait8")]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayerPortrait" parent="VBoxContainer" instance=ExtResource("1_a7ivo")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlayerPortrait2" parent="VBoxContainer" instance=ExtResource("1_a7ivo")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlayerPortrait3" parent="VBoxContainer" instance=ExtResource("1_a7ivo")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlayerPortrait4" parent="VBoxContainer" instance=ExtResource("1_a7ivo")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlayerPortrait5" parent="VBoxContainer" instance=ExtResource("1_a7ivo")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlayerPortrait6" parent="VBoxContainer" instance=ExtResource("1_a7ivo")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlayerPortrait7" parent="VBoxContainer" instance=ExtResource("1_a7ivo")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlayerPortrait8" parent="VBoxContainer" instance=ExtResource("1_a7ivo")]
+layout_mode = 2
+size_flags_vertical = 3

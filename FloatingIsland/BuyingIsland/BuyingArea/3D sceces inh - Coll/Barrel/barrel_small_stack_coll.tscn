@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dte4bvkoeif3q"]
+
+[ext_resource type="PackedScene" uid="uid://dvp3vdghtrqdm" path="res://FloatingIsland/BuyingIsland/BuyingArea/3D Scenes inherited/Barrel/barrel_small_stack_2.tscn" id="1_8bfwt"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_guhj4"]
+height = 1.60019
+radius = 1.0
+
+[node name="Area3D" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.891133, 0)
+shape = SubResource("CylinderShape3D_guhj4")
+
+[node name="barrel_small_stack2" parent="." instance=ExtResource("1_8bfwt")]

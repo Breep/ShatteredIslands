@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bext8rh783yay"]
-
-[ext_resource type="Script" uid="uid://41ms8fokkggm" path="res://Scripts/Character/FamiliesManagers/defense_manager.gd" id="1_rws5t"]
-
-[node name="DefenseManager" type="Node"]
-script = ExtResource("1_rws5t")

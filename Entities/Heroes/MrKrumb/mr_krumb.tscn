@@ -1,0 +1,145 @@
+[gd_scene load_steps=13 format=3 uid="uid://btuch2oo5bxk4"]
+
+[ext_resource type="Script" uid="uid://dyp7mmfduudai" path="res://Entities/Heroes/MrKrumb/mr_krumb.gd" id="1_c4fri"]
+[ext_resource type="PackedScene" uid="uid://ls38xt04tcla" path="res://Entities/Heroes/MrKrumb/mr_krumb_model.tscn" id="2_0vypu"]
+[ext_resource type="Resource" uid="uid://ccww2pxgtqvfx" path="res://Entities/Heroes/MrKrumb/mr_krumb.tres" id="2_1mska"]
+[ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Entities/Character/character_visual.tscn" id="2_iqdsy"]
+[ext_resource type="PackedScene" uid="uid://qgjyscmtp6t3" path="res://Entities/Character/CharacterLogic/character_logic.tscn" id="8_c5bi3"]
+[ext_resource type="PackedScene" uid="uid://dqrhym1sskng8" path="res://Entities/Turret/turret.tscn" id="17_pa7fn"]
+[ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="18_5vj3a"]
+[ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://Tool/QuickAnims/anim_rotating_module.tscn" id="19_yspgx"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c5bi3"]
+animation = &"idle 1"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_4ta5f"]
+graph_offset = Vector2(0, 19)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_c5bi3")
+nodes/Animation/position = Vector2(20, 120)
+node_connections = [&"output", 0, &"Animation"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rxegs"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5ed6q"]
+properties/0/path = NodePath(".:owner_player_id")
+properties/0/spawn = true
+properties/0/replication_mode = 0
+properties/1/path = NodePath(".:id")
+properties/1/spawn = true
+properties/1/replication_mode = 0
+properties/2/path = NodePath(".:team")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath(".:position")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+properties/4/path = NodePath(".:fighting_state")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+properties/5/path = NodePath(".:battle_id")
+properties/5/spawn = true
+properties/5/replication_mode = 2
+properties/6/path = NodePath(".:rotation")
+properties/6/spawn = true
+properties/6/replication_mode = 2
+
+[node name="MrKrumb" type="CharacterBody3D" node_paths=PackedStringArray("_character_logic", "_turret") groups=["CHARACTER"]]
+collision_layer = 16
+collision_mask = 9
+motion_mode = 1
+script = ExtResource("1_c4fri")
+_hero = ExtResource("2_1mska")
+_character_logic = NodePath("CharacterLogic")
+_turret = NodePath("TurretCenterPoint/Turret")
+
+[node name="MrKrumbModel" parent="." instance=ExtResource("2_0vypu")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="GeneralSkeleton" parent="MrKrumbModel/mr crumb rigged animated/Armature" index="0"]
+bones/0/position = Vector3(0.0173518, 0.569897, -0.013706)
+bones/0/rotation = Quaternion(-0.000330724, 0.315705, -0.0377254, 0.948107)
+bones/1/rotation = Quaternion(0.275732, 0.407293, 0.82579, -0.275965)
+bones/2/rotation = Quaternion(-0.000316265, 0.901922, -0.429268, 0.0476046)
+bones/3/rotation = Quaternion(-0.205954, 0.713804, -0.668992, -0.0227192)
+bones/4/rotation = Quaternion(0.00757984, 0.996468, 0.0834222, -0.00583805)
+bones/5/rotation = Quaternion(-0.177587, 0.314613, 0.911027, 0.198776)
+bones/6/rotation = Quaternion(0.0012469, 0.894756, -0.444078, -0.0469488)
+bones/7/rotation = Quaternion(0.19319, 0.653706, -0.72691, -0.0833557)
+bones/8/rotation = Quaternion(-0.00785873, 0.996354, 0.0847416, 0.00593526)
+bones/9/rotation = Quaternion(0.0722639, 0.00786782, 0.00402653, 0.997346)
+bones/10/rotation = Quaternion(0.0253533, 0.014014, 0.0091754, 0.999538)
+bones/11/rotation = Quaternion(0.0165045, 0.00236889, 5.5961e-05, 0.999861)
+bones/12/rotation = Quaternion(0.365302, 0.59883, 0.419685, -0.57604)
+bones/13/rotation = Quaternion(-0.366622, 0.91417, -0.0729368, 0.156725)
+bones/14/rotation = Quaternion(0.227214, -0.927995, 0.169064, 0.242107)
+bones/15/rotation = Quaternion(0.125617, 0.552253, 0.0452578, 0.822915)
+bones/16/rotation = Quaternion(0.319096, -0.622086, -0.480045, -0.529852)
+bones/17/rotation = Quaternion(-0.0652457, 0.992828, -0.048989, -0.0873796)
+bones/18/rotation = Quaternion(0.206466, 0.915915, -0.156937, 0.306337)
+bones/19/rotation = Quaternion(0.183385, -0.634172, -0.285528, 0.694744)
+bones/20/rotation = Quaternion(0.155792, 0.0133172, 0.014013, 0.987601)
+bones/21/rotation = Quaternion(-0.061902, 0.293035, -0.130275, 0.94516)
+bones/22/rotation = Quaternion(-0.0430349, 0.00134613, -0.00136265, 0.999072)
+bones/23/rotation = Quaternion(0.707095, -1.18249e-05, -4.13735e-06, 0.707119)
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../MrKrumbModel/mr crumb rigged animated")
+tree_root = SubResource("AnimationNodeBlendTree_4ta5f")
+anim_player = NodePath("../MrKrumbModel/mr crumb rigged animated/AnimationPlayer")
+
+[node name="CharacterVisual" parent="." instance=ExtResource("2_iqdsy")]
+unique_name_in_owner = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_rxegs")
+
+[node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+unique_name_in_owner = true
+replication_config = SubResource("SceneReplicationConfig_5ed6q")
+
+[node name="TurretCenterPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.36537, 0)
+
+[node name="Turret" parent="TurretCenterPoint" node_paths=PackedStringArray("_auto_attack_module") instance=ExtResource("17_pa7fn")]
+transform = Transform3D(0.495, 0, 0, 0, 0.495, 0, 0, 0, 0.495, 3, 0, 0)
+_auto_attack_module = NodePath("../../CharacterLogic/Modules/AutoAttackModule")
+
+[node name="AnimHoveringModule" parent="TurretCenterPoint/Turret" node_paths=PackedStringArray("_owner") instance=ExtResource("18_5vj3a")]
+_owner = NodePath("..")
+_hover_power = 0.1
+_hover_period = 2.0
+
+[node name="AnimRotatingModule" parent="TurretCenterPoint" node_paths=PackedStringArray("_owner") instance=ExtResource("19_yspgx")]
+_owner = NodePath("..")
+_rot_axis = 1
+_rot_period = 10.0
+_rot_max = 360.0
+_rot_full = true
+
+[node name="CharacterLogic" parent="." node_paths=PackedStringArray("_source", "modules", "families_managers") instance=ExtResource("8_c5bi3")]
+_source = NodePath("..")
+modules = {
+0: NodePath("Modules/MovementModule"),
+1: NodePath("Modules/ActionModule"),
+2: NodePath("Modules/InteractModule"),
+3: NodePath("Modules/AutoAttackModule"),
+4: NodePath("Modules/TargetModule")
+}
+families_managers = {
+0: NodePath("FamiliesManagers/AttackManager"),
+1: NodePath("FamiliesManagers/DefenseManager"),
+2: NodePath("FamiliesManagers/FireManager"),
+3: NodePath("FamiliesManagers/StormManager"),
+4: NodePath("FamiliesManagers/SerenityManager"),
+5: NodePath("FamiliesManagers/LifeManager"),
+6: NodePath("FamiliesManagers/PoisonManager")
+}
+
+[node name="AutoAttackModule" parent="CharacterLogic/Modules" index="3" node_paths=PackedStringArray("projectile_spawn")]
+projectile_spawn = NodePath("../../../TurretCenterPoint/Turret/SpawnPoint")
+
+[editable path="MrKrumbModel"]
+[editable path="MrKrumbModel/mr crumb rigged animated"]
+[editable path="TurretCenterPoint/Turret"]
+[editable path="CharacterLogic"]

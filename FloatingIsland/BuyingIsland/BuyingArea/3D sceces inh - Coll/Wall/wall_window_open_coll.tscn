@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3846clx51grm"]
+
+[ext_resource type="PackedScene" uid="uid://qu8eio5lswkh" path="res://FloatingIsland/BuyingIsland/BuyingArea/3D Scenes inherited/Wall/wall_window_open_2.tscn" id="1_ge3uf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e0otk"]
+size = Vector3(3.99695, 4.00433, 1)
+
+[node name="Area3D" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000216842, 1.99789, 0)
+shape = SubResource("BoxShape3D_e0otk")
+
+[node name="wall_window_open2" parent="." instance=ExtResource("1_ge3uf")]

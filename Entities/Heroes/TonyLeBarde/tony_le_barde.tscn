@@ -1,0 +1,142 @@
+[gd_scene load_steps=16 format=3 uid="uid://bjv2kwt6brxy4"]
+
+[ext_resource type="Script" uid="uid://d4g31ktyr1gqk" path="res://Entities/Heroes/TonyLeBarde/tony_le_barde.gd" id="1_t7etg"]
+[ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Entities/Character/character_visual.tscn" id="2_87chu"]
+[ext_resource type="Resource" uid="uid://8hfga7o6w8xp" path="res://Entities/Heroes/TonyLeBarde/tony_le_barde.tres" id="2_tw8mw"]
+[ext_resource type="PackedScene" uid="uid://0dsfddayqyc8" path="res://Entities/Heroes/TonyLeBarde/tony_le_bard_model.tscn" id="3_tmtlu"]
+[ext_resource type="PackedScene" uid="uid://qgjyscmtp6t3" path="res://Entities/Character/CharacterLogic/character_logic.tscn" id="8_p4e66"]
+[ext_resource type="PackedScene" uid="uid://dqrhym1sskng8" path="res://Entities/Turret/turret.tscn" id="17_2i4k1"]
+[ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="18_uk7dm"]
+[ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://Tool/QuickAnims/anim_rotating_module.tscn" id="19_4b60l"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_su5oi"]
+animation = &"idle 1"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_61y0m"]
+animation = &"run"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_fsm3l"]
+xfade_time = 0.5
+input_0/name = "Idle"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Run"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_i08v8"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_p4e66"]
+nodes/AnimIdle/node = SubResource("AnimationNodeAnimation_su5oi")
+nodes/AnimIdle/position = Vector2(-460, -20)
+nodes/AnimRun/node = SubResource("AnimationNodeAnimation_61y0m")
+nodes/AnimRun/position = Vector2(-600, 240)
+nodes/Transition/node = SubResource("AnimationNodeTransition_fsm3l")
+nodes/Transition/position = Vector2(0, 80)
+nodes/run_speed/node = SubResource("AnimationNodeTimeScale_i08v8")
+nodes/run_speed/position = Vector2(-320, 220)
+node_connections = [&"Transition", 0, &"AnimIdle", &"Transition", 1, &"run_speed", &"output", 0, &"Transition", &"run_speed", 0, &"AnimRun"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rxegs"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5ed6q"]
+properties/0/path = NodePath(".:owner_player_id")
+properties/0/spawn = true
+properties/0/replication_mode = 0
+properties/1/path = NodePath(".:id")
+properties/1/spawn = true
+properties/1/replication_mode = 0
+properties/2/path = NodePath(".:team")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath(".:position")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+properties/4/path = NodePath(".:fighting_state")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+properties/5/path = NodePath(".:battle_id")
+properties/5/spawn = true
+properties/5/replication_mode = 2
+properties/6/path = NodePath(".:rotation")
+properties/6/spawn = true
+properties/6/replication_mode = 2
+
+[node name="TonyLeBarde" type="CharacterBody3D" node_paths=PackedStringArray("_character_logic", "_turret") groups=["CHARACTER"]]
+collision_layer = 16
+collision_mask = 9
+motion_mode = 1
+script = ExtResource("1_t7etg")
+_hero = ExtResource("2_tw8mw")
+_character_logic = NodePath("CharacterLogic")
+_turret = NodePath("TurretCenterPoint/Turret")
+
+[node name="dragon_lord" parent="." instance=ExtResource("3_tmtlu")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.638704, -0.32114)
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+unique_name_in_owner = true
+root_node = NodePath("%AnimationTree/../TonyLeBarde/dragon_lord")
+tree_root = SubResource("AnimationNodeBlendTree_p4e66")
+anim_player = NodePath("../TonyLeBarde/dragon_lord/AnimationPlayer")
+parameters/Transition/current_state = "Idle"
+parameters/Transition/transition_request = ""
+parameters/Transition/current_index = 0
+parameters/run_speed/scale = 1.0
+
+[node name="CharacterVisual" parent="." instance=ExtResource("2_87chu")]
+unique_name_in_owner = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_rxegs")
+
+[node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+unique_name_in_owner = true
+replication_config = SubResource("SceneReplicationConfig_5ed6q")
+
+[node name="TurretCenterPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.36537, 0)
+
+[node name="Turret" parent="TurretCenterPoint" node_paths=PackedStringArray("_auto_attack_module") instance=ExtResource("17_2i4k1")]
+transform = Transform3D(0.495, 0, 0, 0, 0.495, 0, 0, 0, 0.495, 3, 0, 0)
+_auto_attack_module = NodePath("../../CharacterLogic/Modules/AutoAttackModule")
+
+[node name="AnimHoveringModule" parent="TurretCenterPoint/Turret" node_paths=PackedStringArray("_owner") instance=ExtResource("18_uk7dm")]
+_owner = NodePath("..")
+_hover_power = 0.05
+_hover_period = 2.0
+
+[node name="AnimRotatingModule" parent="TurretCenterPoint" node_paths=PackedStringArray("_owner") instance=ExtResource("19_4b60l")]
+_owner = NodePath("..")
+_rot_axis = 1
+_rot_period = 7.0
+_rot_max = 360.0
+_rot_full = true
+
+[node name="CharacterLogic" parent="." node_paths=PackedStringArray("_source", "modules", "families_managers") instance=ExtResource("8_p4e66")]
+_source = NodePath("..")
+modules = {
+0: NodePath("Modules/MovementModule"),
+1: NodePath("Modules/ActionModule"),
+2: NodePath("Modules/InteractModule"),
+3: NodePath("Modules/AutoAttackModule"),
+4: NodePath("Modules/TargetModule")
+}
+families_managers = {
+0: NodePath("FamiliesManagers/AttackManager"),
+1: NodePath("FamiliesManagers/DefenseManager"),
+2: NodePath("FamiliesManagers/FireManager"),
+3: NodePath("FamiliesManagers/StormManager"),
+4: NodePath("FamiliesManagers/SerenityManager"),
+5: NodePath("FamiliesManagers/LifeManager"),
+6: NodePath("FamiliesManagers/PoisonManager")
+}
+
+[node name="AutoAttackModule" parent="CharacterLogic/Modules" index="3" node_paths=PackedStringArray("projectile_spawn")]
+projectile_spawn = NodePath("../../../TurretCenterPoint/Turret/SpawnPoint")
+
+[editable path="TurretCenterPoint/Turret"]
+[editable path="CharacterLogic"]

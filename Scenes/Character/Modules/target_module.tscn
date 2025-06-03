@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://n30ifkjad344"]
-
-[ext_resource type="Script" uid="uid://b30yhoxkrlptw" path="res://Scripts/Character/Modules/target_module.gd" id="1_4id68"]
-
-[node name="TargetModule" type="Node"]
-script = ExtResource("1_4id68")

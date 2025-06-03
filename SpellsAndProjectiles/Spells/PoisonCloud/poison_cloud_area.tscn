@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://jpp4lg5aycnv"]
+
+[ext_resource type="Script" uid="uid://b277lm0f1tpm8" path="res://SpellsAndProjectiles/Spells/PoisonCloud/poison_cloud_area.gd" id="1_u0hi1"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_yjd37"]
+height = 0.3
+radius = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fgae4"]
+transparency = 1
+albedo_color = Color(0.173, 0.293, 0.121, 0.286)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_fs6qp"]
+material = SubResource("StandardMaterial3D_fgae4")
+top_radius = 3.0
+bottom_radius = 3.0
+height = 0.1
+
+[node name="PoisonCloudArea" type="Area3D"]
+script = ExtResource("1_u0hi1")
+
+[node name="CollisionShape2D" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
+shape = SubResource("CylinderShape3D_yjd37")
+
+[node name="PoisonCloudVisual" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+mesh = SubResource("CylinderMesh_fs6qp")
+
+[node name="EffectTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="EffectTimer" to="." method="_on_effect_timer_timeout"]

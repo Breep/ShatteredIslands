@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="Hero" load_steps=6 format=3 uid="uid://cnecvw18tqmuq"]
+
+[ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://Entities/Heroes/hero.gd" id="1_5swsy"]
+[ext_resource type="Script" uid="uid://c76rxvnlcwltf" path="res://Entities/Character/CharacterStats/character_stats.gd" id="2_3y3xu"]
+[ext_resource type="Texture2D" uid="uid://ccxx5oitw5cty" path="res://Data/Heroes/Portraits/Laurent Kroft.webp" id="2_fey0l"]
+[ext_resource type="PackedScene" uid="uid://cf0pc5jtr0651" path="res://Entities/Heroes/LaurentKroft/laurent_kroft_model.tscn" id="4_ovxht"]
+
+[sub_resource type="Resource" id="Resource_mul21"]
+script = ExtResource("2_3y3xu")
+health_max = 1000
+mana_max = 100
+mana_regen = 5.0
+attack_damage = 20
+attack_speed = 1.0
+attack_move_speed = 1.0
+physical_critical_chance = 10.0
+physical_critical_multiplier = 2.0
+
+[resource]
+script = ExtResource("1_5swsy")
+name = "Laurent Kroft"
+id = 3
+portrait = ExtResource("2_fey0l")
+description = "You belong in a museum !"
+stats = SubResource("Resource_mul21")
+aa_projectile_type = 4
+model = ExtResource("4_ovxht")

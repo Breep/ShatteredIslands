@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Hero" load_steps=2 format=3 uid="uid://cgaiavne5bbb2"]
+
+[ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://Entities/Heroes/hero.gd" id="1_671ot"]
+
+[resource]
+script = ExtResource("1_671ot")
+name = ""
+id = 0
+description = ""
+aa_projectile_type = 0
+metadata/_custom_type_script = "uid://dtcjta70luxvr"

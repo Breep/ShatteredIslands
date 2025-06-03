@@ -1,0 +1,161 @@
+[gd_scene load_steps=6 format=3 uid="uid://dyf154pndkj6u"]
+
+[ext_resource type="Script" uid="uid://4mjiyc4ne1" path="res://UI/BuyingArea/PlayerPortrait/ui_player_portrait.gd" id="1_7toxq"]
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_q7lmx"]
+[ext_resource type="Texture2D" uid="uid://bw3okxwbucu42" path="res://Data/Heroes/Portraits/Default.webp" id="3_7toxq"]
+[ext_resource type="PackedScene" uid="uid://baxstke5i0khe" path="res://UI/BuyingArea/PlayerPortrait/ui_player_life.tscn" id="3_fvjac"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_fvjac"]
+viewport_path = NodePath("SubViewport")
+
+[node name="PlayerPortrait" type="Control"]
+layout_mode = 3
+anchor_right = 0.434028
+anchor_bottom = 0.771605
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7toxq")
+metadata/_edit_use_anchors_ = true
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="AspectRatioContainer"]
+layout_mode = 2
+texture = SubResource("ViewportTexture_fvjac")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(500, 500)
+
+[node name="SubPlayerPortrait" type="Control" parent="SubViewport"]
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 3
+anchor_right = 0.434
+anchor_bottom = 0.772
+offset_right = 283.0
+offset_bottom = 114.0
+theme = ExtResource("1_q7lmx")
+
+[node name="Panel" type="Panel" parent="SubViewport/SubPlayerPortrait"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="SubViewport/SubPlayerPortrait/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/SubPlayerPortrait/Panel/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Panel" type="Panel" parent="SubViewport/SubPlayerPortrait/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="PlayerNameLabel" type="Label" parent="SubViewport/SubPlayerPortrait/Panel/MarginContainer/VBoxContainer/Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Nobody"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="SubViewport/SubPlayerPortrait/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HeroPortrait" type="TextureRect" parent="SubViewport/SubPlayerPortrait/Panel/MarginContainer/VBoxContainer/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_7toxq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PlayerLife" parent="SubViewport/SubPlayerPortrait/Panel/MarginContainer/VBoxContainer/Control" instance=ExtResource("3_fvjac")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -167.0
+offset_top = -153.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="DamagePanel" type="Panel" parent="SubViewport/SubPlayerPortrait/Panel/MarginContainer/VBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = -146.0
+offset_right = 150.0
+offset_bottom = -11.0
+grow_vertical = 0
+
+[node name="DamageLabel" type="Label" parent="SubViewport/SubPlayerPortrait/Panel/MarginContainer/VBoxContainer/Control/DamagePanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 60
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LevelPanel" type="Panel" parent="SubViewport/SubPlayerPortrait/Panel/MarginContainer/VBoxContainer/Control"]
+layout_mode = 1
+offset_left = 27.0
+offset_top = 14.0
+offset_right = 112.0
+offset_bottom = 92.0
+
+[node name="LevelLabel" type="Label" parent="SubViewport/SubPlayerPortrait/Panel/MarginContainer/VBoxContainer/Control/LevelPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 60
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1

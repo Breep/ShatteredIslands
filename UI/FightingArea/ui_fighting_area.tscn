@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bhxhqex1pbh2p"]
 
 [ext_resource type="Script" uid="uid://cl4rtcia6te0m" path="res://UI/FightingArea/ui_fighting_area.gd" id="1_xkiby"]
-[ext_resource type="PackedScene" uid="uid://db2anika8bvj8" path="res://UI/ui_character_stats.tscn" id="2_g28wu"]
+[ext_resource type="PackedScene" uid="uid://db2anika8bvj8" path="res://UI/CharacterStats/ui_character_stats.tscn" id="2_g28wu"]
 
 [node name="UIFightingArea" type="Control" node_paths=PackedStringArray("_ui_selected_character_stats_1", "_ui_selected_character_stats_2")]
 layout_mode = 3

@@ -1,0 +1,247 @@
+[gd_scene load_steps=21 format=3 uid="uid://g706yyhstscc"]
+
+[ext_resource type="Script" uid="uid://bmtq7u6jxaxhj" path="res://Entities/Heroes/Cyborg/cyborg.gd" id="1_t1mer"]
+[ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Entities/Character/character_visual.tscn" id="2_1njov"]
+[ext_resource type="Resource" uid="uid://fb28rdceanxm" path="res://Entities/Heroes/Cyborg/cyborg.tres" id="2_frf0o"]
+[ext_resource type="PackedScene" uid="uid://qgjyscmtp6t3" path="res://Entities/Character/CharacterLogic/character_logic.tscn" id="5_sriek"]
+[ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://Modules/PickableClickable/PickableModule/pickable_module.tscn" id="9_n64m2"]
+[ext_resource type="PackedScene" uid="uid://c8630px7dwlvh" path="res://Modules/PickableClickable/Constraints/PickableCollider/pickable_collider.tscn" id="10_16jr2"]
+[ext_resource type="PackedScene" uid="uid://dyyf8nhixlubs" path="res://Modules/PickableClickable/Constraints/SpawnAreaChecker/spawn_area_checker.tscn" id="11_0og4p"]
+[ext_resource type="PackedScene" uid="uid://5en73tnp30yw" path="res://Entities/Heroes/Cyborg/cyborg_model.tscn" id="16_frf0o"]
+[ext_resource type="PackedScene" uid="uid://dqrhym1sskng8" path="res://Entities/Turret/turret.tscn" id="17_lbjpi"]
+[ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="18_4bsoj"]
+[ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://Tool/QuickAnims/anim_rotating_module.tscn" id="19_bnit0"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_txfgg"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_frf0o"]
+animation = &"Attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xdo7g"]
+animation = &"run_in_place"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_b3ar5"]
+xfade_time = 0.1
+input_0/name = "Idle"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Run"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_0ty30"]
+fadein_time = 0.5
+fadeout_time = 0.5
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_iexl2"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_frf0o"]
+graph_offset = Vector2(-240, -83.07)
+"nodes/Anim Idle/node" = SubResource("AnimationNodeAnimation_txfgg")
+"nodes/Anim Idle/position" = Vector2(-120, -100)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_xdo7g")
+nodes/Animation/position = Vector2(-240, 120)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_frf0o")
+"nodes/Animation 2/position" = Vector2(200, 300)
+nodes/Movement/node = SubResource("AnimationNodeTransition_b3ar5")
+nodes/Movement/position = Vector2(260, 0)
+nodes/OneShot/node = SubResource("AnimationNodeOneShot_0ty30")
+nodes/OneShot/position = Vector2(460, 60)
+nodes/output/position = Vector2(680, 20)
+nodes/run_speed/node = SubResource("AnimationNodeTimeScale_iexl2")
+nodes/run_speed/position = Vector2(-40, 120)
+node_connections = [&"Movement", 0, &"Anim Idle", &"Movement", 1, &"run_speed", &"OneShot", 0, &"Movement", &"OneShot", 1, &"Animation 2", &"output", 0, &"OneShot", &"run_speed", 0, &"Animation"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rxegs"]
+radius = 0.347978
+height = 1.8
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5ed6q"]
+properties/0/path = NodePath(".:owner_player_id")
+properties/0/spawn = true
+properties/0/replication_mode = 0
+properties/1/path = NodePath(".:id")
+properties/1/spawn = true
+properties/1/replication_mode = 0
+properties/2/path = NodePath(".:team")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath(".:position")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+properties/4/path = NodePath(".:fighting_state")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+properties/5/path = NodePath(".:battle_id")
+properties/5/spawn = true
+properties/5/replication_mode = 2
+properties/6/path = NodePath(".:rotation")
+properties/6/spawn = true
+properties/6/replication_mode = 2
+
+[node name="Cyborg" type="CharacterBody3D" node_paths=PackedStringArray("_character_logic", "_turret", "_interact_module") groups=["CHARACTER"]]
+collision_layer = 16
+collision_mask = 9
+script = ExtResource("1_t1mer")
+_hero = ExtResource("2_frf0o")
+_character_logic = NodePath("CharacterLogic")
+_turret = NodePath("TurretCenterPoint/Turret")
+_interact_module = NodePath("CharacterLogic/Modules/InteractModule")
+
+[node name="CyborgModel" parent="." instance=ExtResource("16_frf0o")]
+transform = Transform3D(0.76, 0, 0, 0, 0.76, 0, 0, 0, 0.76, 0, 0, 0)
+
+[node name="Skeleton3D" parent="CyborgModel/cyborg_animated/Idle_main" index="0"]
+bones/0/position = Vector3(0.49511, -0.976236, -66.3897)
+bones/0/rotation = Quaternion(-0.683539, -0.26821, 0.250375, 0.630991)
+bones/1/rotation = Quaternion(0.058325, 0.0399056, -0.00967363, 0.997453)
+bones/2/position = Vector3(1.78814e-07, 11.1428, 5.2154e-08)
+bones/2/rotation = Quaternion(0.100293, 0.0806996, -0.019689, 0.991484)
+bones/3/rotation = Quaternion(0.100318, 0.0806985, -0.0196965, 0.991482)
+bones/4/position = Vector3(2.38419e-07, 14.3264, 1.3199e-06)
+bones/4/rotation = Quaternion(-0.0446871, -0.0109202, 0.00198243, 0.998939)
+bones/5/position = Vector3(-7.15256e-07, 5.66684, 0.721662)
+bones/5/rotation = Quaternion(-0.0559732, 0.176803, -0.0122722, 0.982577)
+bones/7/position = Vector3(9.74145, 12.3086, 0.0875115)
+bones/7/rotation = Quaternion(0.607128, 0.381797, -0.585042, 0.378618)
+bones/8/position = Vector3(-1.67683e-06, 15.4673, 9.8134e-06)
+bones/8/rotation = Quaternion(0.390042, -0.103744, 0.0696823, 0.912277)
+bones/9/position = Vector3(1.15998e-06, 29.4579, 2.78081e-06)
+bones/9/rotation = Quaternion(-0.01991, 0.0493214, 0.405808, 0.912409)
+bones/10/position = Vector3(-4.71186e-06, 22.3492, -4.0286e-06)
+bones/10/rotation = Quaternion(-0.15588, 0.345274, -0.0201861, 0.925246)
+bones/11/position = Vector3(-4.40956, 5.12982, -2.17557e-06)
+bones/11/rotation = Quaternion(0.176924, 0.0980581, 0.243988, 0.948447)
+bones/12/position = Vector3(-0.550369, 5.3836, -8.04969e-06)
+bones/12/rotation = Quaternion(-0.00368785, -0.021213, -0.0430753, 0.99884)
+bones/13/position = Vector3(-1.04274, 5.68668, 2.77535e-06)
+bones/13/rotation = Quaternion(-0.00174596, -0.0160434, 0.285693, 0.958185)
+bones/14/position = Vector3(1.5931, 3.78706, 9.10555e-06)
+bones/15/position = Vector3(4.20351e-06, 10.8881, -1.10377e-05)
+bones/15/rotation = Quaternion(0.00322951, -0.00386138, 0.103701, 0.994596)
+bones/16/position = Vector3(0.474795, 6.82247, -7.41947e-06)
+bones/16/rotation = Quaternion(0.133153, -0.00389847, -0.0522804, 0.989708)
+bones/17/position = Vector3(-0.414468, 2.83215, -3.89755e-07)
+bones/17/rotation = Quaternion(-0.000860087, 0.0106412, 0.0646153, 0.997853)
+bones/18/position = Vector3(-0.0603305, 3.76892, -2.18859e-06)
+bones/19/rotation = Quaternion(0.654098, -0.346553, 0.546035, 0.392303)
+bones/20/position = Vector3(1.0376e-06, 15.4673, 2.48184e-06)
+bones/20/rotation = Quaternion(0.363414, 0.117095, 0.160262, 0.910239)
+bones/21/position = Vector3(3.1371e-06, 29.4396, 1.40583e-05)
+bones/21/rotation = Quaternion(0.0399576, 0.0353, -0.360488, 0.931239)
+bones/22/position = Vector3(1.02922e-06, 22.3403, -4.65205e-06)
+bones/22/rotation = Quaternion(0.0755524, -0.327893, -0.129464, 0.932747)
+bones/23/rotation = Quaternion(0.0678311, 0.0617486, -0.272004, 0.957914)
+bones/24/position = Vector3(0.302023, 5.48551, -6.21536e-07)
+bones/24/rotation = Quaternion(0.0863023, 0.00237432, 0.139284, 0.986482)
+bones/25/position = Vector3(0.0644143, 5.8767, 2.55981e-06)
+bones/25/rotation = Quaternion(9.38624e-05, -0.0021126, -0.0553102, 0.998467)
+bones/26/position = Vector3(-0.366436, 3.66204, -1.38962e-06)
+bones/27/position = Vector3(1.69936e-07, 10.2104, -8.9313e-06)
+bones/27/rotation = Quaternion(0.0389491, 0.017452, -0.083104, 0.995627)
+bones/28/position = Vector3(-1.15885, 8.16615, 6.80183e-06)
+bones/28/rotation = Quaternion(0.135726, 0.0106919, 0.120243, 0.983365)
+bones/29/position = Vector3(0.601485, 2.47643, -1.87388e-06)
+bones/29/rotation = Quaternion(-0.00383413, -0.0202386, -0.0510233, 0.998485)
+bones/30/position = Vector3(0.557369, 4.06822, -7.88882e-07)
+bones/31/position = Vector3(11.1288, -5.30214, -0.0391559)
+bones/31/rotation = Quaternion(0.0786282, 0.216829, 0.965211, -0.123166)
+bones/32/position = Vector3(-6.53908e-07, 30.2703, -1.77239e-06)
+bones/32/rotation = Quaternion(-0.304977, 0.12276, -0.0566247, 0.942716)
+bones/33/position = Vector3(2.40487e-06, 26.22, 3.88274e-07)
+bones/33/rotation = Quaternion(0.50499, 0.19055, -0.0779324, 0.838214)
+bones/34/position = Vector3(2.0043e-06, 15.8882, 3.25184e-07)
+bones/34/rotation = Quaternion(0.334441, -0.177526, 0.0458915, 0.924407)
+bones/35/position = Vector3(3.72781e-08, 6.21617, -2.38412e-07)
+bones/36/position = Vector3(-11.1288, -5.30213, 0.254128)
+bones/36/rotation = Quaternion(-0.128258, -0.033856, 0.981566, 0.137592)
+bones/37/position = Vector3(-1.94744e-06, 30.2694, 9.64537e-07)
+bones/37/rotation = Quaternion(-0.282662, 0.0637931, -0.0149482, 0.956979)
+bones/38/position = Vector3(-1.25501e-07, 26.2358, 7.67817e-07)
+bones/38/rotation = Quaternion(0.655533, -0.148911, 0.119263, 0.730669)
+bones/39/position = Vector3(-1.62714e-06, 15.6597, -8.55379e-07)
+bones/39/rotation = Quaternion(0.337621, 0.206285, -0.0757093, 0.915274)
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+unique_name_in_owner = true
+root_node = NodePath("%AnimationTree/../CyborgModel/cyborg_animated")
+tree_root = SubResource("AnimationNodeBlendTree_frf0o")
+anim_player = NodePath("../CyborgModel/cyborg_animated/AnimationPlayer")
+parameters/Movement/current_state = "Idle"
+parameters/Movement/transition_request = ""
+parameters/Movement/current_index = 0
+parameters/OneShot/active = false
+parameters/OneShot/internal_active = false
+parameters/OneShot/request = 0
+parameters/run_speed/scale = 1.0
+
+[node name="CharacterVisual" parent="." instance=ExtResource("2_1njov")]
+unique_name_in_owner = true
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_rxegs")
+
+[node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+unique_name_in_owner = true
+replication_config = SubResource("SceneReplicationConfig_5ed6q")
+
+[node name="CharacterLogic" parent="." node_paths=PackedStringArray("_source", "modules", "families_managers") instance=ExtResource("5_sriek")]
+_source = NodePath("..")
+modules = {
+0: NodePath("Modules/MovementModule"),
+1: NodePath("Modules/ActionModule"),
+2: NodePath("Modules/InteractModule"),
+3: NodePath("Modules/AutoAttackModule"),
+4: NodePath("Modules/TargetModule")
+}
+families_managers = {
+0: NodePath("FamiliesManagers/AttackManager"),
+1: NodePath("FamiliesManagers/DefenseManager"),
+2: NodePath("FamiliesManagers/FireManager"),
+3: NodePath("FamiliesManagers/StormManager"),
+4: NodePath("FamiliesManagers/SerenityManager"),
+5: NodePath("FamiliesManagers/LifeManager"),
+6: NodePath("FamiliesManagers/PoisonManager")
+}
+
+[node name="AutoAttackModule" parent="CharacterLogic/Modules" index="3" node_paths=PackedStringArray("projectile_spawn")]
+projectile_spawn = NodePath("../../../TurretCenterPoint/Turret/SpawnPoint")
+
+[node name="TurretCenterPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.36537, 0)
+
+[node name="Turret" parent="TurretCenterPoint" node_paths=PackedStringArray("_auto_attack_module") instance=ExtResource("17_lbjpi")]
+transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 1.42133, -0.890861, 0)
+_auto_attack_module = NodePath("../../CharacterLogic/Modules/AutoAttackModule")
+
+[node name="AnimHoveringModule" parent="TurretCenterPoint/Turret" node_paths=PackedStringArray("_owner") instance=ExtResource("18_4bsoj")]
+_owner = NodePath("..")
+_hover_power = 0.1
+_hover_period = 2.0
+
+[node name="AnimRotatingModule" parent="TurretCenterPoint" node_paths=PackedStringArray("_owner") instance=ExtResource("19_bnit0")]
+_owner = NodePath("..")
+_rot_axis = 1
+_rot_period = 8.0
+_rot_max = 360.0
+_rot_full = true
+
+[node name="PickableModule" parent="." node_paths=PackedStringArray("_nodes_where_to_find_meshs", "_owner", "_pickable_collider", "_spawn_area_checker") instance=ExtResource("9_n64m2")]
+_nodes_where_to_find_meshs = [NodePath("../CyborgModel")]
+_owner = NodePath("..")
+_pickable_collider = NodePath("../PickableCollider")
+_spawn_area_checker = NodePath("../SpawnAreaChecker")
+
+[node name="PickableCollider" parent="." instance=ExtResource("10_16jr2")]
+
+[node name="SpawnAreaChecker" parent="." instance=ExtResource("11_0og4p")]
+
+[editable path="CyborgModel"]
+[editable path="CharacterLogic"]
+[editable path="TurretCenterPoint/Turret"]

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://j1jiqs0fnk25"]
+
+[ext_resource type="PackedScene" uid="uid://cqbyu71nrkv65" path="res://FloatingIsland/BuyingIsland/BuyingArea/3D Scenes inherited/Bar/bar_straight_a_2.tscn" id="1_yf7hl"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_v33ih"]
+points = PackedVector3Array(-0.975135, 0.0249583, -0.5, -0.975135, -2.48849e-06, -0.475098, -0.999998, 0.0249583, -0.475098, -0.975135, 0.974938, -0.5, 0.974943, 0.0249583, -0.5, -0.975135, -2.48849e-06, 0.574902, 0.974943, -2.48849e-06, -0.475098, -0.999998, 0.974938, -0.475098, -0.999998, 0.0249583, 0.574902, -0.975135, 0.999997, -0.475098, 0.974943, 0.974938, -0.5, 1, 0.0249583, -0.475098, -0.975135, 0.0249583, 0.599922, 0.974943, -2.48849e-06, 0.574902, -0.999998, 0.974938, 0.674981, -0.999998, 0.824977, 0.674981, -0.975135, 0.999997, 0.674981, 0.974943, 0.999997, -0.475098, 1, 0.974938, -0.475098, 1, 0.0249583, 0.574902, -0.975135, 0.824977, 0.699883, 0.974943, 0.0249583, 0.599922, -0.975135, 0.974938, 0.699883, 0.974943, 0.999997, 0.674981, 1, 0.974938, 0.674981, 1, 0.824977, 0.674981, 0.974943, 0.824977, 0.699883, 0.974943, 0.974938, 0.699883)
+
+[node name="bar_straight_a_2" type="StaticBody3D"]
+
+[node name="bar_straight_A" parent="." instance=ExtResource("1_yf7hl")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_v33ih")

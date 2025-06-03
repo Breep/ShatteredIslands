@@ -1,0 +1,76 @@
+[gd_scene load_steps=9 format=3 uid="uid://c66yw4go2ykwa"]
+
+[ext_resource type="Script" uid="uid://cd8u3lm3xa8c4" path="res://FloatingIsland/FightingIsland/FightingArea/fighting_area.gd" id="1_t74of"]
+[ext_resource type="PackedScene" uid="uid://pyrw8lacvly2" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/EntityManager/entity_manager.tscn" id="2_wtb7j"]
+[ext_resource type="PackedScene" uid="uid://c0l0roxttdtlp" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/FightingManager/fighting_manager.tscn" id="3_yyfcp"]
+[ext_resource type="PackedScene" uid="uid://bhxhqex1pbh2p" path="res://UI/FightingArea/ui_fighting_area.tscn" id="4_hqxx4"]
+[ext_resource type="PackedScene" uid="uid://ctspehviccwd5" path="res://FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor_1v1.tscn" id="5_2akj6"]
+[ext_resource type="PackedScene" uid="uid://c6oxeboe353od" path="res://FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor_2v2.tscn" id="6_yyfcp"]
+[ext_resource type="PackedScene" uid="uid://dbbpa637es0uf" path="res://FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor_ffa13.tscn" id="7_hqxx4"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_yyfcp"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 0
+properties/1/path = NodePath(".:battle_id")
+properties/1/spawn = true
+properties/1/replication_mode = 0
+
+[node name="FightingArea" type="Node3D" node_paths=PackedStringArray("_fighting_manager", "_entity_manager", "_ui_fighting_area", "_fighting_floors")]
+script = ExtResource("1_t74of")
+_fighting_manager = NodePath("FightingManager")
+_entity_manager = NodePath("EntityManager")
+_ui_fighting_area = NodePath("UI/UIFightingArea")
+_fighting_floors = {
+0: NodePath("FightingFloorTemplates/FightingFloor_1v1"),
+1: NodePath("FightingFloorTemplates/FightingFloor_2v2"),
+2: NodePath("FightingFloorTemplates/FightingFloor_ffa13")
+}
+
+[node name="EntityManager" parent="." instance=ExtResource("2_wtb7j")]
+
+[node name="FightingManager" parent="." instance=ExtResource("3_yyfcp")]
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_yyfcp")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UIFightingArea" parent="UI" instance=ExtResource("4_hqxx4")]
+layout_mode = 1
+
+[node name="FightingFloorTemplates" type="Node3D" parent="."]
+
+[node name="FightingFloor_1v1" parent="FightingFloorTemplates" instance=ExtResource("5_2akj6")]
+
+[node name="SpawnManager" parent="FightingFloorTemplates/FightingFloor_1v1" index="0" node_paths=PackedStringArray("_entities_node", "_projectiles_node")]
+_entities_node = NodePath("../../../Entities")
+_projectiles_node = NodePath("../../../Projectiles")
+
+[node name="FightingFloor_2v2" parent="FightingFloorTemplates" instance=ExtResource("6_yyfcp")]
+visible = false
+
+[node name="SpawnManager" parent="FightingFloorTemplates/FightingFloor_2v2" index="0" node_paths=PackedStringArray("_entities_node", "_projectiles_node")]
+_entities_node = NodePath("../../../Entities")
+_projectiles_node = NodePath("../../../Projectiles")
+
+[node name="FightingFloor_ffa13" parent="FightingFloorTemplates" instance=ExtResource("7_hqxx4")]
+visible = false
+
+[node name="SpawnManager" parent="FightingFloorTemplates/FightingFloor_ffa13" index="0" node_paths=PackedStringArray("_entities_node", "_projectiles_node")]
+_entities_node = NodePath("../../../Entities")
+_projectiles_node = NodePath("../../../Projectiles")
+
+[node name="Entities" type="Node3D" parent="."]
+
+[node name="Projectiles" type="Node3D" parent="."]
+
+[editable path="FightingFloorTemplates/FightingFloor_1v1"]
+[editable path="FightingFloorTemplates/FightingFloor_2v2"]
+[editable path="FightingFloorTemplates/FightingFloor_ffa13"]

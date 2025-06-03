@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtk5sgg7jstmy"]
+
+[ext_resource type="PackedScene" uid="uid://ccnburf5bsvl8" path="res://FloatingIsland/BuyingIsland/BuyingArea/3D Scenes inherited/Deco/plate_stack_2.tscn" id="1_nu8n8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q7yxq"]
+size = Vector3(0.974121, 0.543457, 0.947388)
+
+[node name="plate_stack_2" type="StaticBody3D"]
+
+[node name="plate_stack" parent="." instance=ExtResource("1_nu8n8")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0129395, 0.310791, -0.0263062)
+shape = SubResource("BoxShape3D_q7yxq")

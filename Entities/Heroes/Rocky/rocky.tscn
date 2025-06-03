@@ -1,0 +1,162 @@
+[gd_scene load_steps=15 format=3 uid="uid://h726o6giwel8"]
+
+[ext_resource type="Script" uid="uid://dqjjmiebmxpf4" path="res://Entities/Heroes/Rocky/rocky.gd" id="1_e8asp"]
+[ext_resource type="PackedScene" uid="uid://d080glq1m1puv" path="res://Entities/Heroes/Rocky/rocky_model.tscn" id="2_1t8nd"]
+[ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Entities/Character/character_visual.tscn" id="2_vxmuk"]
+[ext_resource type="PackedScene" uid="uid://qgjyscmtp6t3" path="res://Entities/Character/CharacterLogic/character_logic.tscn" id="7_0ei4b"]
+[ext_resource type="PackedScene" uid="uid://dqrhym1sskng8" path="res://Entities/Turret/turret.tscn" id="16_abyaq"]
+[ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="17_cd1gv"]
+[ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://Tool/QuickAnims/anim_rotating_module.tscn" id="18_lro7s"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_e8asp"]
+animation = &"Rocky_lib/idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1t8nd"]
+animation = &"Rocky_lib/Slow Run"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_abyaq"]
+input_0/name = "Idle"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Run"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_jwgrf"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_cd1gv"]
+graph_offset = Vector2(-419.792, -67.2275)
+nodes/AnimIdle/node = SubResource("AnimationNodeAnimation_e8asp")
+nodes/AnimIdle/position = Vector2(-520, 0)
+nodes/AnimRun/node = SubResource("AnimationNodeAnimation_1t8nd")
+nodes/AnimRun/position = Vector2(-540, 340)
+nodes/Transition/node = SubResource("AnimationNodeTransition_abyaq")
+nodes/Transition/position = Vector2(-20, 120)
+nodes/output/position = Vector2(280, 140)
+nodes/run_speed/node = SubResource("AnimationNodeTimeScale_jwgrf")
+nodes/run_speed/position = Vector2(-320, 320)
+node_connections = [&"Transition", 0, &"AnimIdle", &"Transition", 1, &"run_speed", &"output", 0, &"Transition", &"run_speed", 0, &"AnimRun"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rxegs"]
+height = 2.2
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5ed6q"]
+properties/0/path = NodePath(".:owner_player_id")
+properties/0/spawn = true
+properties/0/replication_mode = 0
+properties/1/path = NodePath(".:id")
+properties/1/spawn = true
+properties/1/replication_mode = 0
+properties/2/path = NodePath(".:team")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath(".:position")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+properties/4/path = NodePath(".:fighting_state")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+properties/5/path = NodePath(".:battle_id")
+properties/5/spawn = true
+properties/5/replication_mode = 2
+properties/6/path = NodePath(".:rotation")
+properties/6/spawn = true
+properties/6/replication_mode = 2
+
+[node name="Rocky" type="CharacterBody3D" node_paths=PackedStringArray("_character_logic", "_turret") groups=["CHARACTER"]]
+collision_layer = 16
+collision_mask = 9
+motion_mode = 1
+script = ExtResource("1_e8asp")
+_character_logic = NodePath("CharacterLogic")
+_turret = NodePath("TurretCenterPoint/Turret")
+
+[node name="RockyModel" parent="." instance=ExtResource("2_1t8nd")]
+transform = Transform3D(-1.505, 0, -2.27249e-07, 0, 1.505, 0, 2.27249e-07, 0, -1.505, 0, 0, 0)
+
+[node name="GeneralSkeleton" parent="RockyModel/Armature" index="0"]
+bones/0/position = Vector3(0.00809982, 0.507319, 0.0223468)
+bones/0/rotation = Quaternion(-0.0404774, -0.366463, -0.0130892, 0.92946)
+bones/1/rotation = Quaternion(-0.0200715, 0.318811, 0.940994, -0.111748)
+bones/2/rotation = Quaternion(0.0361404, 0.945998, -0.320449, -0.0330664)
+bones/3/rotation = Quaternion(-0.0598284, 0.733869, -0.672682, 0.0731873)
+bones/5/rotation = Quaternion(-0.103598, 0.0238871, 0.979037, 0.173734)
+bones/6/rotation = Quaternion(0.0210317, 0.965049, -0.224212, -0.134044)
+bones/7/rotation = Quaternion(0.124356, 0.572661, -0.796184, -0.15062)
+bones/11/rotation = Quaternion(0.0103139, 0.0596341, 0.0155549, 0.998046)
+bones/12/rotation = Quaternion(0.459796, 0.246692, 0.578972, -0.626515)
+bones/13/rotation = Quaternion(-0.106168, 0.834465, -0.502268, 0.200306)
+bones/14/rotation = Quaternion(0.278273, -0.724815, 0.297647, 0.555529)
+bones/16/rotation = Quaternion(0.264361, -0.455971, -0.704634, -0.475074)
+bones/17/rotation = Quaternion(0.252469, 0.831301, -0.494888, -0.0168354)
+bones/18/rotation = Quaternion(0.281102, 0.760585, -0.191838, 0.552893)
+bones/21/rotation = Quaternion(0.142391, 0.30038, 0.00253393, 0.943128)
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../RockyModel")
+tree_root = SubResource("AnimationNodeBlendTree_cd1gv")
+anim_player = NodePath("../RockyModel/AnimationPlayer")
+parameters/Transition/current_state = "Idle"
+parameters/Transition/transition_request = ""
+parameters/Transition/current_index = 0
+parameters/run_speed/scale = 1.0
+
+[node name="CharacterVisual" parent="." instance=ExtResource("2_vxmuk")]
+unique_name_in_owner = true
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+shape = SubResource("CapsuleShape3D_rxegs")
+
+[node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+unique_name_in_owner = true
+replication_config = SubResource("SceneReplicationConfig_5ed6q")
+
+[node name="TurretCenterPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.36537, 0)
+
+[node name="Turret" parent="TurretCenterPoint" node_paths=PackedStringArray("_auto_attack_module") instance=ExtResource("16_abyaq")]
+transform = Transform3D(0.495, 0, 0, 0, 0.495, 0, 0, 0, 0.495, 3, 0, 0)
+_auto_attack_module = NodePath("../../CharacterLogic/Modules/AutoAttackModule")
+
+[node name="AnimHoveringModule" parent="TurretCenterPoint/Turret" node_paths=PackedStringArray("_owner") instance=ExtResource("17_cd1gv")]
+_owner = NodePath("..")
+_hover_power = 0.1
+_hover_period = 2.0
+
+[node name="AnimRotatingModule" parent="TurretCenterPoint" node_paths=PackedStringArray("_owner") instance=ExtResource("18_lro7s")]
+_owner = NodePath("..")
+_rot_axis = 1
+_rot_period = 20.0
+_rot_max = 360.0
+_rot_full = true
+
+[node name="CharacterLogic" parent="." node_paths=PackedStringArray("_source", "modules", "families_managers") instance=ExtResource("7_0ei4b")]
+_source = NodePath("..")
+modules = {
+0: NodePath("Modules/MovementModule"),
+1: NodePath("Modules/ActionModule"),
+2: NodePath("Modules/InteractModule"),
+3: NodePath("Modules/AutoAttackModule"),
+4: NodePath("Modules/TargetModule")
+}
+families_managers = {
+0: NodePath("FamiliesManagers/AttackManager"),
+1: NodePath("FamiliesManagers/DefenseManager"),
+2: NodePath("FamiliesManagers/FireManager"),
+3: NodePath("FamiliesManagers/StormManager"),
+4: NodePath("FamiliesManagers/SerenityManager"),
+5: NodePath("FamiliesManagers/LifeManager"),
+6: NodePath("FamiliesManagers/PoisonManager")
+}
+
+[node name="AutoAttackModule" parent="CharacterLogic/Modules" index="3" node_paths=PackedStringArray("projectile_spawn")]
+projectile_spawn = NodePath("../../../TurretCenterPoint/Turret/SpawnPoint")
+
+[editable path="RockyModel"]
+[editable path="TurretCenterPoint/Turret"]
+[editable path="CharacterLogic"]

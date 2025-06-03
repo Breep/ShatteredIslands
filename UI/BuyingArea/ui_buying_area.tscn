@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://cmstx61h3h6ar"]
 
-[ext_resource type="PackedScene" uid="uid://bvqsnkh0s11q2" path="res://UI/BuyingArea/ui_all_families_portrait.tscn" id="1_2h2nu"]
+[ext_resource type="PackedScene" uid="uid://bvqsnkh0s11q2" path="res://UI/BuyingArea/FamilyPortrait/ui_all_families_portrait.tscn" id="1_2h2nu"]
 [ext_resource type="Script" uid="uid://cc7c0q2xebkyp" path="res://UI/BuyingArea/ui_buying_area.gd" id="1_5o5p6"]
-[ext_resource type="PackedScene" uid="uid://be38goiqxp28o" path="res://UI/BuyingArea/ui_all_players_portrait.tscn" id="2_5o5p6"]
-[ext_resource type="PackedScene" uid="uid://db2anika8bvj8" path="res://UI/ui_character_stats.tscn" id="2_btc45"]
-[ext_resource type="PackedScene" uid="uid://cxalabhvxw1pd" path="res://UI/ui_timer.tscn" id="2_c4gh8"]
+[ext_resource type="PackedScene" uid="uid://be38goiqxp28o" path="res://UI/BuyingArea/PlayerPortrait/ui_all_players_portrait.tscn" id="2_5o5p6"]
+[ext_resource type="PackedScene" uid="uid://db2anika8bvj8" path="res://UI/CharacterStats/ui_character_stats.tscn" id="2_btc45"]
+[ext_resource type="PackedScene" uid="uid://cxalabhvxw1pd" path="res://UI/Tool/Timer/ui_timer.tscn" id="2_c4gh8"]
 [ext_resource type="PackedScene" uid="uid://d1oxnd1g75rqh" path="res://UI/BuyingArea/CardShop/ui_card_shop.tscn" id="4_dsp03"]
 
 [node name="UIBuyingArea" type="Control"]

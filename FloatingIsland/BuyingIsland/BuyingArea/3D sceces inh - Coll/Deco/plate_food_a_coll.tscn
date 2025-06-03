@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7f8csclemxaf"]
+
+[ext_resource type="PackedScene" uid="uid://ce27a7kbqlxc8" path="res://FloatingIsland/BuyingIsland/BuyingArea/3D Scenes inherited/Deco/plate_food_a_2.tscn" id="1_ygmw3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v21bx"]
+size = Vector3(1, 0.731415, 1)
+
+[node name="plate_food_a_" type="StaticBody3D"]
+
+[node name="plate_food_A" parent="." instance=ExtResource("1_ygmw3")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.410202, 0)
+shape = SubResource("BoxShape3D_v21bx")

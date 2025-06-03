@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhaiwenh8dmgr"]
+
+[ext_resource type="PackedScene" uid="uid://dr1b0wst0xf1u" path="res://FloatingIsland/BuyingIsland/BuyingArea/3D Scenes inherited/Barrel/keg_decorated.tscn" id="1_enxxg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s26dk"]
+size = Vector3(3.4, 2.0528, 1.67993)
+
+[node name="Area3D" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.78814e-07, 1.02484, 0.117798)
+shape = SubResource("BoxShape3D_s26dk")
+
+[node name="keg_decorated" parent="." instance=ExtResource("1_enxxg")]

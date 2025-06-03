@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dgt36qu64oomj"]
-
-[ext_resource type="Script" uid="uid://c60636qefvyql" path="res://Scripts/Tool/anim_rotating_module.gd" id="1_3pqve"]
-
-[node name="AnimRotatingModule" type="Node"]
-script = ExtResource("1_3pqve")

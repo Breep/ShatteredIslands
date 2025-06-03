@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://b4d230tklju1w"]
-
-[ext_resource type="Script" uid="uid://boijjesl7u0r0" path="res://Scripts/hero_3d.gd" id="1_lfe0o"]
-[ext_resource type="PackedScene" uid="uid://ls38xt04tcla" path="res://Scenes/3D_heroes/MrKrumb/mrkrumb.tscn" id="2_hex2o"]
-
-[node name="MrKrumbModel" type="Node3D"]
-script = ExtResource("1_lfe0o")
-
-[node name="mr crumb rigged animated" parent="." instance=ExtResource("2_hex2o")]

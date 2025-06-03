@@ -1,0 +1,22 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cpukwmrm0x4d8"]
+
+[ext_resource type="Shader" uid="uid://qygviethbgxl" path="res://VFX/Shaders/Misc/lightning.gdshader" id="1_60euq"]
+
+[resource]
+shader = ExtResource("1_60euq")
+shader_parameter/lightning_number = 1
+shader_parameter/amplitude = Vector2(2, 1)
+shader_parameter/offset = 0.45
+shader_parameter/thickness = 0.02
+shader_parameter/speed = 0.5
+shader_parameter/base_color = Color(0.202605, 0.369272, 0.937028, 1)
+shader_parameter/glow_thickness = 0.08
+shader_parameter/glow_color = Color(0.271, 0.432, 0.864, 0.168)
+shader_parameter/alpha = 1.0
+shader_parameter/noise_frequency = 1.0
+shader_parameter/noise_intensity = 1.0
+shader_parameter/use_random_colors = true
+shader_parameter/color_variation_range = Vector2(0.8, 1.2)
+shader_parameter/modulate_alpha_over_time = false
+shader_parameter/y_start = 0.2
+shader_parameter/y_end = 0.2

@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://cmq21hx4nihv4"]
-
-[ext_resource type="Script" uid="uid://boijjesl7u0r0" path="res://Scripts/hero_3d.gd" id="1_52dcc"]
-[ext_resource type="PackedScene" uid="uid://cmojifbx1glt4" path="res://Scenes/3D_heroes/Drboom/drboom.tscn" id="2_ca8ky"]
-
-[node name="DrBoomModel" type="Node3D"]
-script = ExtResource("1_52dcc")
-
-[node name="Drboom" parent="." instance=ExtResource("2_ca8ky")]

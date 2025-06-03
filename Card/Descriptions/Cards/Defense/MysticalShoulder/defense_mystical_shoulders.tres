@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://bc4iiswwd2sde"]
+
+[ext_resource type="Script" uid="uid://crtn3pihaopfp" path="res://Card/Descriptions/Cards/Defense/MysticalShoulder/defense_mystical_shoulders.gd" id="1_m227l"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_snmcq"]
+[ext_resource type="Texture2D" uid="uid://bgxgko7eqjwyn" path="res://Data/Assets/Card/Portraits/Defense/card_portrait_defense_mystical_shoulders.png" id="1_wyh30"]
+
+[sub_resource type="Resource" id="Resource_wyh30"]
+script = ExtResource("1_m227l")
+_magic_damage = 0
+_percents_inc = Array[float]([0.1, 0.2, 0.3, 0.4, 0.5])
+_percents_max = Array[float]([5.0, 10.0, 15.0, 20.0, 30.0])
+metadata/_custom_type_script = "uid://crtn3pihaopfp"
+
+[resource]
+script = ExtResource("1_snmcq")
+name = "Mystical Shoulders"
+picture = ExtResource("1_wyh30")
+family = 1
+rarity = 0
+player_upgrade = SubResource("Resource_wyh30")
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

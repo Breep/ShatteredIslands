@@ -1,0 +1,127 @@
+[gd_scene load_steps=9 format=3 uid="uid://baxstke5i0khe"]
+
+[ext_resource type="Script" uid="uid://dfrc6epjmo848" path="res://UI/BuyingArea/PlayerPortrait/ui_player_life.gd" id="1_2sxk0"]
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_5din3"]
+[ext_resource type="Texture2D" uid="uid://dl132mivg8ol4" path="res://Data/Assets/Card/ICONS/HP.png" id="1_f264h"]
+[ext_resource type="Texture2D" uid="uid://sex75jj3yj3x" path="res://Data/Assets/Buying_area/UI/empty_heart.png" id="2_5din3"]
+[ext_resource type="Texture2D" uid="uid://cia42t0jcdkfg" path="res://Data/Assets/Card/ICONS/HP color.png" id="3_2sxk0"]
+[ext_resource type="Shader" uid="uid://bfevd5ui3tdi0" path="res://VFX/Shaders/UI/hearth_liquid.gdshader" id="4_befu8"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_f264h"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a4ora"]
+shader = ExtResource("4_befu8")
+shader_parameter/bg_color = Color(0.920071, 0.934238, 0.924132, 1)
+shader_parameter/uv_scale = 0.1
+shader_parameter/percentage = 1.0
+shader_parameter/speed = 1.0
+shader_parameter/wave_1_speed = -1.0
+shader_parameter/wave_2_speed = 1.0
+shader_parameter/wave_1_freq = 1.2
+shader_parameter/wave_2_freq = 1.0
+shader_parameter/wave_1_amp = 0.015
+shader_parameter/wave_2_amp = 0.01
+shader_parameter/sun_dir = Vector3(-0.2, 0.4, 1)
+shader_parameter/water_colour = Color(0.477427, 0, 0.0902698, 1)
+shader_parameter/foam_colour = Color(0.0224705, 1.7673e-08, 0.00099498, 1)
+shader_parameter/sky_colour = Color(0.343277, 6.01634e-09, 0.053668, 1)
+shader_parameter/specular_colour = Color(0.336903, 1.56425e-07, 0.0519289, 1)
+
+[node name="PlayerLife" type="Control"]
+layout_mode = 3
+anchor_right = 0.035
+anchor_bottom = 0.062
+offset_right = -0.32
+offset_bottom = -0.176003
+script = ExtResource("1_2sxk0")
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="AspectRatioContainer"]
+layout_mode = 2
+texture = SubResource("ViewportTexture_f264h")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+
+[node name="SubPlayerLife" type="Control" parent="SubViewport"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 500.0
+offset_bottom = 500.0
+theme = ExtResource("1_5din3")
+
+[node name="Health_background" type="TextureProgressBar" parent="SubViewport/SubPlayerLife"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+min_value = 1.0
+max_value = 30.0
+value = 28.0
+fill_mode = 3
+nine_patch_stretch = true
+texture_progress = ExtResource("1_f264h")
+
+[node name="HealthProgressBar" type="TextureProgressBar" parent="SubViewport/SubPlayerLife"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.692)
+clip_children = 2
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+min_value = 1.0
+max_value = 30.0
+value = 1.0
+fill_mode = 3
+nine_patch_stretch = true
+texture_under = ExtResource("2_5din3")
+texture_progress = ExtResource("3_2sxk0")
+
+[node name="Health2" type="TextureProgressBar" parent="SubViewport/SubPlayerLife/HealthProgressBar"]
+material = SubResource("ShaderMaterial_a4ora")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+mouse_filter = 2
+min_value = 1.0
+max_value = 30.0
+value = 30.0
+fill_mode = 3
+nine_patch_stretch = true
+texture_under = ExtResource("2_5din3")
+texture_progress = ExtResource("3_2sxk0")
+
+[node name="HealthValueLabel" type="Label" parent="SubViewport/SubPlayerLife"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 150
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
