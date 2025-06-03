@@ -67,6 +67,8 @@ properties/6/spawn = true
 properties/6/replication_mode = 2
 
 [node name="Rhino" type="CharacterBody3D" node_paths=PackedStringArray("_character_logic", "_turret") groups=["CHARACTER"]]
+collision_layer = 16
+collision_mask = 9
 motion_mode = 1
 script = ExtResource("1_y4ny4")
 _hero = ExtResource("2_tksyq")
@@ -77,33 +79,33 @@ _turret = NodePath("TurretCenterPoint/Turret")
 transform = Transform3D(-1.43, 0, -2.15924e-07, 0, 1.43, 0, 2.15924e-07, 0, -1.43, 0, 0, 0)
 
 [node name="GeneralSkeleton" parent="RhinoModel/Rhino_armature" index="0"]
-bones/0/position = Vector3(0.0441645, 0.497614, 0.0062794)
-bones/0/rotation = Quaternion(-0.027463, -0.0118445, -0.0298395, 0.999107)
-bones/1/rotation = Quaternion(-0.043434, 0.227126, 0.950804, -0.206153)
-bones/2/rotation = Quaternion(0.0762932, 0.940959, -0.320479, 0.0779014)
-bones/3/rotation = Quaternion(-0.126701, 0.635339, -0.757879, -0.0768802)
-bones/4/rotation = Quaternion(0.106358, 0.993046, 0.0168618, -0.0475686)
-bones/6/rotation = Quaternion(-0.0438334, 0.285477, 0.926967, 0.239402)
-bones/7/rotation = Quaternion(-0.100193, 0.87771, -0.468414, 0.0132645)
-bones/8/rotation = Quaternion(0.118698, 0.562968, -0.816193, -0.0529712)
-bones/9/rotation = Quaternion(-0.103065, 0.989621, 0.0344309, -0.0940386)
+bones/0/position = Vector3(0.0433986, 0.516449, 0.0208968)
+bones/0/rotation = Quaternion(0.00642688, -0.0132758, -0.0234664, 0.999616)
+bones/1/rotation = Quaternion(-0.0409754, 0.214757, 0.957095, -0.190182)
+bones/2/rotation = Quaternion(0.0772483, 0.954606, -0.282121, 0.0562855)
+bones/3/rotation = Quaternion(-0.120591, 0.634883, -0.761555, -0.0491443)
+bones/4/rotation = Quaternion(0.106236, 0.993077, 0.0158745, -0.0475457)
+bones/6/rotation = Quaternion(-0.0475342, 0.285948, 0.928608, 0.231649)
+bones/7/rotation = Quaternion(-0.0886001, 0.896907, -0.432823, 0.0192784)
+bones/8/rotation = Quaternion(0.124952, 0.565617, -0.812653, -0.0637083)
+bones/9/rotation = Quaternion(-0.102544, 0.989741, 0.0318534, -0.0942527)
 bones/11/rotation = Quaternion(2.96277e-08, -6.51926e-09, -3.72529e-09, 1)
 bones/12/rotation = Quaternion(6.82121e-13, -2.03727e-10, -2.61934e-10, 1)
-bones/13/rotation = Quaternion(0.128588, 0.00317949, 0.00847068, 0.991657)
-bones/14/rotation = Quaternion(0.258206, 0.420555, 0.687024, -0.53335)
-bones/15/rotation = Quaternion(-0.256104, 0.912862, 0.112594, 0.297348)
-bones/16/rotation = Quaternion(-0.014797, -0.871538, 0.401335, 0.281307)
-bones/17/rotation = Quaternion(0.0213238, 0.301259, -0.233972, 0.924146)
-bones/19/rotation = Quaternion(0.308494, -0.380218, -0.601599, -0.631145)
-bones/20/rotation = Quaternion(0.0768059, 0.962496, -0.0247353, -0.25902)
-bones/21/rotation = Quaternion(0.0684335, 0.945233, -0.313553, 0.0594625)
-bones/22/rotation = Quaternion(0.0877058, -0.426228, 0.121246, 0.892153)
+bones/13/rotation = Quaternion(0.102891, 0.0159653, 0.0014238, 0.994564)
+bones/14/rotation = Quaternion(0.484095, 0.423898, 0.353892, -0.678765)
+bones/15/rotation = Quaternion(-0.567826, 0.7361, -0.187046, 0.317401)
+bones/16/rotation = Quaternion(0.0227696, -0.876309, 0.212406, 0.431796)
+bones/17/rotation = Quaternion(-0.0162937, 0.291459, -0.200908, 0.935106)
+bones/19/rotation = Quaternion(0.421944, -0.520556, -0.350357, -0.654397)
+bones/20/rotation = Quaternion(0.467497, 0.814166, -0.344354, 0.000698774)
+bones/21/rotation = Quaternion(-0.00571416, 0.917356, -0.175399, 0.357295)
+bones/22/rotation = Quaternion(-0.103819, -0.282849, 0.571413, 0.763352)
 bones/24/rotation = Quaternion(3.25977e-08, -8.56744e-10, 5.43878e-10, 1)
-bones/25/rotation = Quaternion(-0.0592901, 0.0290007, -0.0482944, 0.99665)
+bones/25/rotation = Quaternion(-0.0609809, 0.112102, -0.131207, 0.983107)
 bones/26/rotation = Quaternion(0.0509365, -0.0042404, 0.00424033, 0.998684)
 
 [node name="BoneAttachment3D" parent="RhinoModel/Rhino_armature/GeneralSkeleton" index="1"]
-transform = Transform3D(0.514685, 0.722765, -0.461205, -0.850139, 0.499974, -0.165198, 0.111191, 0.477113, 0.87178, 0.670621, 0.887506, 0.315036)
+transform = Transform3D(0.458612, 0.399967, 0.793537, -0.82583, -0.137925, 0.546793, 0.328148, -0.906092, 0.26705, 0.641437, 0.861046, -0.22914)
 
 [node name="AnimationPlayer" parent="RhinoModel" index="1"]
 libraries = {

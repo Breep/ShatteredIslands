@@ -49,7 +49,7 @@ var battles: Dictionary[int, Battle] = {}
 
 func get_current_round_battles() -> Array[Battle]:
 	current_round += 1
-	print("[", multiplayer.get_unique_id(), "] STARTING A NEW ROUND: ", current_round)
+	print("[", multiplayer.get_unique_id(), "] POSITIONING A NEW ROUND: ", current_round)
 	battle_history[current_round] = BattleHistory.new()
 	battle_history[current_round].round_id = current_round
 	battles.clear()

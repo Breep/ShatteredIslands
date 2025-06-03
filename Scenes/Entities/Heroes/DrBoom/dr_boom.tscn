@@ -10,17 +10,17 @@
 [ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://Scenes/Tool/anim_rotating_module.tscn" id="19_q170r"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dvcma"]
-animation = &"idle 1"
+animation = &"Tpose"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_l3nb2"]
-graph_offset = Vector2(-96, 22)
+graph_offset = Vector2(-328, 21)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_dvcma")
 nodes/Animation/position = Vector2(0, 120)
 node_connections = [&"output", 0, &"Animation"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rxegs"]
-radius = 0.2
-height = 1.0
+radius = 0.298654
+height = 1.36098
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5ed6q"]
 properties/0/path = NodePath(".:owner_player_id")
@@ -46,6 +46,8 @@ properties/6/spawn = true
 properties/6/replication_mode = 2
 
 [node name="DrBoom" type="CharacterBody3D" node_paths=PackedStringArray("_character_logic", "_turret") groups=["CHARACTER"]]
+collision_layer = 16
+collision_mask = 9
 motion_mode = 1
 script = ExtResource("1_2scy2")
 _hero = ExtResource("2_1vhg0")
@@ -56,26 +58,30 @@ _turret = NodePath("TurretCenterPoint/Turret")
 transform = Transform3D(-0.87, 0, -1.31366e-07, 0, 0.87, 0, 1.31366e-07, 0, -0.87, 0, 0, 0)
 
 [node name="GeneralSkeleton" parent="DrBoomModel/Drboom/Armature" index="0"]
-bones/0/position = Vector3(0.00704608, 0.579275, 0.0719309)
-bones/0/rotation = Quaternion(0.069065, -0.0432433, -0.055026, 0.995154)
-bones/1/rotation = Quaternion(0.126072, 0.0800154, 0.849188, -0.506541)
-bones/2/rotation = Quaternion(-0.0680238, 0.7363, -0.404678, 0.538025)
-bones/3/rotation = Quaternion(0.169017, 0.58947, -0.401922, -0.680013)
-bones/4/rotation = Quaternion(-0.00483893, 0.999596, -0.0277551, -0.00372609)
-bones/6/rotation = Quaternion(0.0426427, 0.257784, 0.945399, -0.194804)
-bones/7/rotation = Quaternion(0.0581417, 0.924697, -0.368893, -0.0739816)
-bones/8/rotation = Quaternion(-0.0239335, 0.585401, -0.809069, 0.0462744)
-bones/9/rotation = Quaternion(-0.00164837, 0.999142, 0.0413471, -0.00166971)
-bones/13/rotation = Quaternion(0.0357618, 0.0348813, 0.0214445, 0.998521)
-bones/14/rotation = Quaternion(0.390149, 0.431144, 0.660261, -0.475347)
-bones/15/rotation = Quaternion(0.0567618, 0.904311, -0.387197, 0.17052)
-bones/16/rotation = Quaternion(-0.0833886, -0.826801, 0.547916, 0.0960948)
-bones/17/rotation = Quaternion(0.0541683, 0.677559, 0.135118, 0.720918)
-bones/19/rotation = Quaternion(0.483489, -0.404903, -0.619367, -0.467629)
-bones/20/rotation = Quaternion(-0.183006, 0.951123, -0.221326, -0.113524)
-bones/21/rotation = Quaternion(0.127657, 0.831018, -0.520281, 0.149738)
-bones/22/rotation = Quaternion(-0.117443, -0.550518, -0.154522, 0.811948)
-bones/25/rotation = Quaternion(-0.155652, 0.014499, 0.0348964, 0.987089)
+bones/0/position = Vector3(0.00588841, 0.67386, -0.0208194)
+bones/0/rotation = Quaternion(0.0522831, 0.0148937, -0.0484763, 0.997344)
+bones/1/rotation = Quaternion(0.080803, 0.232098, 0.965003, 0.0914953)
+bones/2/rotation = Quaternion(4.16907e-05, 0.975571, -0.217949, -0.0275687)
+bones/3/rotation = Quaternion(0.0912253, 0.836139, -0.540702, 0.0138046)
+bones/4/rotation = Quaternion(0.00408497, 0.999231, 0.0262928, -0.0288035)
+bones/6/rotation = Quaternion(-0.0517994, 0.195367, 0.962377, -0.1816)
+bones/7/rotation = Quaternion(0.0360006, 0.983751, -0.175883, 0.00171955)
+bones/8/rotation = Quaternion(-0.037473, 0.690399, -0.721692, 0.0332564)
+bones/9/rotation = Quaternion(0.000839729, 0.999422, -0.00428778, 0.0337148)
+bones/11/rotation = Quaternion(0.0313094, -0.00841355, 0.0139159, 0.999378)
+bones/12/rotation = Quaternion(0.018821, -0.0190909, 0.00705299, 0.999616)
+bones/13/rotation = Quaternion(-0.0450093, -0.0160915, 0.0343274, 0.998267)
+bones/14/rotation = Quaternion(0.458106, 0.445241, 0.62301, -0.451395)
+bones/15/rotation = Quaternion(0.131322, 0.89567, 0.392071, -0.163739)
+bones/16/rotation = Quaternion(-0.0393523, -0.436573, -0.347704, 0.828829)
+bones/17/rotation = Quaternion(0.0295551, 0.746392, -0.0399303, 0.66365)
+bones/19/rotation = Quaternion(0.493451, -0.436059, -0.598742, -0.455924)
+bones/20/rotation = Quaternion(-0.204094, 0.8663, 0.452359, 0.0569304)
+bones/21/rotation = Quaternion(-0.0576635, 0.451524, 0.365337, 0.811991)
+bones/22/rotation = Quaternion(0.0364713, -0.719139, 0.0369084, 0.692926)
+bones/24/rotation = Quaternion(-0.00214967, 0.0192241, 0.00683789, 0.99979)
+bones/25/rotation = Quaternion(-0.023506, 0.0354766, -0.0107445, 0.999036)
+bones/26/rotation = Quaternion(-0.0764545, 0.00383248, -0.00127051, 0.997065)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../DrBoomModel/Drboom")
@@ -86,7 +92,7 @@ anim_player = NodePath("../DrBoomModel/Drboom/AnimationPlayer")
 unique_name_in_owner = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.68974, 0)
 shape = SubResource("CapsuleShape3D_rxegs")
 
 [node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="."]

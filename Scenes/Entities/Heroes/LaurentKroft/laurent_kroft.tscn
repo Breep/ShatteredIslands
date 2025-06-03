@@ -35,6 +35,8 @@ properties/6/spawn = true
 properties/6/replication_mode = 2
 
 [node name="LaurentKroft" type="CharacterBody3D" node_paths=PackedStringArray("_character_logic", "_turret") groups=["CHARACTER"]]
+collision_layer = 16
+collision_mask = 9
 motion_mode = 1
 script = ExtResource("1_p8n2g")
 _hero = ExtResource("2_hk5ya")

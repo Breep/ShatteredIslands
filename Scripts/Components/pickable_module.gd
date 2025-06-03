@@ -149,11 +149,13 @@ func _build_impact_mesh() -> void:
 	
 	sphere_mesh.material = material
 	_debug_impact.mesh = sphere_mesh
+	_debug_impact.name = "PickableModule_DebugImpact" + str(get_instance_id())
 
 
 func _build_raycast_mesh() -> void:
 	_debug_raycast = MeshInstance3D.new()
 	_debug_raycast.mesh = ImmediateMesh.new()
+	_debug_raycast.name = "PickableModule_DebugRaycast" + str(get_instance_id())
 
 
 func _update_debug_raycast(origin: Vector3, end: Vector3, hit: Dictionary) -> void:

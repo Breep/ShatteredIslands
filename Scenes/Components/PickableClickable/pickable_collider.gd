@@ -41,11 +41,11 @@ func _reset() -> void:
 	_pickable_collider_overlapping_counter = 0
 
 func _on_area_entered(area: Area3D) -> void:
-	_pickable_collider_overlapping_counter = _pickable_collider_overlapping_counter + 1
+	_pickable_collider_overlapping_counter += 1
 
 
 func _on_area_exited(area: Area3D) -> void:
-	_pickable_collider_overlapping_counter = _pickable_collider_overlapping_counter - 1
+	_pickable_collider_overlapping_counter -= 1
 
 
 func _on_events_game_state_changed(game_state: Game.GameState) -> void:

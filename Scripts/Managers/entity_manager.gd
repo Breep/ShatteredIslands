@@ -19,6 +19,7 @@ var characters: Dictionary[int, Character]:
 func _ready() -> void:
 	get_parent().add_user_signal(Entity.SIGNAL_NAME_SPAWNED, ["entity_ref"])
 	get_parent().connect(Entity.SIGNAL_NAME_SPAWNED, _on_parent_entity_is_spawned)
+	Events.game_state_changed.connect(_on_events_game_state_changed)
 
 # ============================== Private functions ==============================
 
@@ -44,6 +45,11 @@ func _on_entity_dead(who: Entity) -> void:
 	_entities.erase(who)
 	entity_dead.emit(who)
 
+
+func _on_events_game_state_changed(game_state: Game.GameState) -> void:
+	if game_state == Game.GameState.BUYING:
+		_entities.clear()
+		_characters.clear()
 
 
 

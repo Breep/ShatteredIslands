@@ -61,6 +61,8 @@ func connect_to_fighting_area(fighting_area: FightingArea) -> void:
 
 func _init() -> void:
 	stats = CharacterStats.new()
+	stats.health_changed.connect(_on_stats_health_changed)
+	_entity_init()
 
 
 func _ready() -> void:
@@ -158,7 +160,10 @@ func _on_events_game_state_changed(new_state: Game.GameState) -> void:
 			if _turret != null: _turret.show()
 
 
-
+func _on_stats_health_changed(new_health: int) -> void:
+	if new_health <= 0:
+		print("DEBUG | ", name, " | DEAD")
+		dead.emit()
 
 
 

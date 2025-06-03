@@ -49,7 +49,6 @@ var current_target: Entity:
 # ============================== Public functions ==============================
 
 func start() -> void:
-	print("DEBUG: STARTING AUTO-ATTACK MODULE")
 	attack_speed = _owner.stats.attack_speed
 	_auto_attack_timer.start()
 
@@ -76,7 +75,6 @@ func set_auto_attack_speed(attack_speed: float) -> void:
 
 
 func _auto_attack(target: Character) -> void:
-	print("  COUCOU2")
 	var projectile_stats := ProjectileStats.new()
 	
 	projectile_stats.physical_damage_flat = _owner.stats.attack_damage
@@ -100,7 +98,6 @@ func _update_auto_attack_speed() -> void:
 # ============================== Callbacks functions ==============================
 
 func _on_auto_attack_timer_timeout() -> void:
-	print("COUCOU1")
 	var target = _owner.target_module.get_target(_attack_strategy)
 	current_target = target
 	if target == null: return

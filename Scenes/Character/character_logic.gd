@@ -29,19 +29,26 @@ func connect_to_fighting_area(fighting_area: FightingArea) -> void:
 	action_module.connect_to_spawn_manager(fighting_area.spawn_manager)
 
 
+func start() -> void:
+	for family_manager in families_managers.values():
+		family_manager.start()
+	modules[Module.ModuleType.AUTOATTACK].start()
+
+
+func stop() -> void:
+	for family_manager in families_managers.values():
+		family_manager.stop()
+	modules[Module.ModuleType.AUTOATTACK].stop()
+
+
 func _on_source_fighting_state_changed(new_state: GlobalFightingManager.FightingState) -> void:
-	print("_on_source_fighting_state_changed() ", new_state)
 	match new_state:
-		GlobalFightingManager.FightingState.STARTING:
+		GlobalFightingManager.FightingState.POSITIONING:
 			pass
 		GlobalFightingManager.FightingState.FIGHT:
-			for family_manager in families_managers.values():
-				family_manager.start()
-			modules[Module.ModuleType.AUTOATTACK].start()
+			start()
 		GlobalFightingManager.FightingState.FINISHED:
-			for family_manager in families_managers.values():
-				family_manager.stop()
-			modules[Module.ModuleType.AUTOATTACK].stop()
+			stop()
 
 
 

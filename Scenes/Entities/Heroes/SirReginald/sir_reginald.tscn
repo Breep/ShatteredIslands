@@ -13,7 +13,6 @@
 animation = &"idle"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_eo037"]
-graph_offset = Vector2(-167, 14)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_qnymp")
 nodes/Animation/position = Vector2(-20, 140)
 node_connections = [&"output", 0, &"Animation"]
@@ -44,6 +43,8 @@ properties/6/spawn = true
 properties/6/replication_mode = 2
 
 [node name="SirReginald" type="CharacterBody3D" node_paths=PackedStringArray("_character_logic", "_turret") groups=["CHARACTER"]]
+collision_layer = 16
+collision_mask = 9
 motion_mode = 1
 script = ExtResource("1_bmlym")
 _hero = ExtResource("2_sms4n")
@@ -54,29 +55,30 @@ _turret = NodePath("TurretCenterPoint/Turret")
 transform = Transform3D(-1.235, 0, -1.8648e-07, 0, 1.235, 0, 1.8648e-07, 0, -1.235, 0, 0, 0)
 
 [node name="GeneralSkeleton" parent="SirReginaldModel/sir_rigged_animated/Armature" index="0"]
-bones/0/position = Vector3(-0.000281801, 0.671473, 0.0323375)
-bones/0/rotation = Quaternion(0.0418585, -0.135736, -0.00516131, 0.989847)
-bones/1/rotation = Quaternion(-0.0298825, 0.343023, 0.937066, -0.0578791)
-bones/2/rotation = Quaternion(-0.015913, 0.983675, -0.154129, 0.0915171)
-bones/3/rotation = Quaternion(-0.0499878, 0.803232, -0.593376, 0.0150068)
-bones/4/rotation = Quaternion(0.0123486, 0.999909, 0.00190572, -0.00505867)
-bones/6/rotation = Quaternion(-0.0464544, 0.140567, 0.978867, 0.141075)
-bones/7/rotation = Quaternion(-0.0424611, 0.929253, -0.362575, -0.0567973)
-bones/8/rotation = Quaternion(0.0931416, 0.506924, -0.850073, -0.108297)
-bones/9/rotation = Quaternion(-0.0105053, 0.999877, 0.0115474, 0.0016393)
+bones/0/position = Vector3(0.00219834, 0.672419, 0.0339765)
+bones/0/rotation = Quaternion(0.0426309, -0.137107, -0.00488928, 0.989626)
+bones/1/rotation = Quaternion(-0.0289935, 0.340566, 0.93804, -0.0570545)
+bones/2/rotation = Quaternion(-0.0142247, 0.983596, -0.15377, 0.0932244)
+bones/3/rotation = Quaternion(-0.0490549, 0.801098, -0.596342, 0.0145433)
+bones/4/rotation = Quaternion(0.0122639, 0.999911, 0.00188603, -0.00496101)
+bones/6/rotation = Quaternion(-0.045422, 0.140452, 0.97873, 0.142469)
+bones/7/rotation = Quaternion(-0.039892, 0.931151, -0.358144, -0.0556681)
+bones/8/rotation = Quaternion(0.0951561, 0.509546, -0.847951, -0.110848)
+bones/9/rotation = Quaternion(-0.010193, 0.999885, 0.0110723, 0.00166719)
 bones/11/rotation = Quaternion(-4.09782e-08, 2.23517e-08, 9.68575e-08, 1)
 bones/12/rotation = Quaternion(-3.7212e-09, 1.41517e-09, 4.36557e-10, 1)
-bones/13/rotation = Quaternion(0.198696, 0.0342991, 0.00398069, 0.979453)
-bones/14/rotation = Quaternion(0.303414, 0.516936, 0.591123, -0.539714)
-bones/15/rotation = Quaternion(0.309367, 0.773217, -0.217166, 0.509182)
-bones/16/rotation = Quaternion(-0.0606575, -0.850791, 0.230036, 0.468571)
-bones/17/rotation = Quaternion(0.095156, 0.522194, -0.0319984, 0.846897)
-bones/19/rotation = Quaternion(0.154383, -0.60163, -0.540613, -0.567402)
-bones/20/rotation = Quaternion(-0.243857, 0.770105, -0.288808, -0.51387)
-bones/21/rotation = Quaternion(-0.0629519, 0.900385, -0.276317, 0.330141)
-bones/22/rotation = Quaternion(0.0596351, -0.470815, 0.049838, 0.878802)
+bones/13/rotation = Quaternion(0.198982, 0.0360613, 0.00414194, 0.979331)
+bones/14/rotation = Quaternion(0.305973, 0.51626, 0.591064, -0.53898)
+bones/15/rotation = Quaternion(0.309438, 0.772471, -0.219193, 0.509402)
+bones/16/rotation = Quaternion(-0.0624978, -0.851922, 0.232023, 0.465284)
+bones/17/rotation = Quaternion(0.0924541, 0.52566, -0.0299283, 0.845126)
+bones/19/rotation = Quaternion(0.15431, -0.601597, -0.540418, -0.567643)
+bones/20/rotation = Quaternion(-0.243005, 0.770891, -0.289611, -0.512642)
+bones/21/rotation = Quaternion(-0.0619623, 0.901377, -0.27919, 0.325166)
+bones/22/rotation = Quaternion(0.0613102, -0.472438, 0.0478385, 0.877927)
 bones/24/rotation = Quaternion(-1.49048e-08, 8.73115e-10, -1.83354e-09, 1)
-bones/25/rotation = Quaternion(-0.161894, 0.0916068, -0.037983, 0.981813)
+bones/25/rotation = Quaternion(-0.163404, 0.0916324, -0.0387359, 0.981531)
+bones/26/rotation = Quaternion(-0.0124874, 0.00507926, -0.00507948, 0.999896)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../SirReginaldModel/sir_rigged_animated")
@@ -131,6 +133,9 @@ families_managers = {
 5: NodePath("FamiliesManagers/LifeManager"),
 6: NodePath("FamiliesManagers/PoisonManager")
 }
+
+[node name="AutoAttackModule" parent="CharacterLogic/Modules" index="3" node_paths=PackedStringArray("projectile_spawn")]
+projectile_spawn = NodePath("../../../TurretCenterPoint/Turret/SpawnPoint")
 
 [editable path="SirReginaldModel"]
 [editable path="SirReginaldModel/sir_rigged_animated"]

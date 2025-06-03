@@ -34,16 +34,17 @@ input_1/reset = true
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_i08v8"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_su5oi"]
-graph_offset = Vector2(-524.081, -59.8497)
+graph_offset = Vector2(-630.536, -79.6703)
 nodes/AnimIdle/node = SubResource("AnimationNodeAnimation_su5oi")
-nodes/AnimIdle/position = Vector2(-460, -20)
+nodes/AnimIdle/position = Vector2(-831.142, -63.5431)
 nodes/AnimRun/node = SubResource("AnimationNodeAnimation_61y0m")
-nodes/AnimRun/position = Vector2(-560, 200)
+nodes/AnimRun/position = Vector2(-840, 160)
 nodes/Transition/node = SubResource("AnimationNodeTransition_fsm3l")
-nodes/Transition/position = Vector2(0, 80)
+nodes/Transition/position = Vector2(-120, -60)
+nodes/output/position = Vector2(520, 100)
 nodes/run_speed/node = SubResource("AnimationNodeTimeScale_i08v8")
-nodes/run_speed/position = Vector2(-260, 200)
-node_connections = [&"Transition", 0, &"AnimIdle", &"output", 0, &"Transition", &"run_speed", 0, &"AnimRun"]
+nodes/run_speed/position = Vector2(-540, 200)
+node_connections = [&"Transition", 0, &"AnimIdle", &"Transition", 1, &"run_speed", &"output", 0, &"Transition", &"run_speed", 0, &"AnimRun"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rxegs"]
 height = 3.0
@@ -78,7 +79,8 @@ properties/8/spawn = true
 properties/8/replication_mode = 2
 
 [node name="AncientTree" type="CharacterBody3D" node_paths=PackedStringArray("_character_logic", "_turret", "_interact_module") groups=["CHARACTER"]]
-collision_layer = 17
+collision_layer = 16
+collision_mask = 9
 script = ExtResource("1_61y0m")
 _hero = ExtResource("2_fsm3l")
 _character_logic = NodePath("CharacterLogic")

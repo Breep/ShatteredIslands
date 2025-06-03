@@ -61,9 +61,9 @@ func _on_area_entered(area: Area3D) -> void:
 		return
 	var spawn_area: SpawnArea = area
 	if spawn_area.team == team:
-		_owner_team_spawn_area_overlapping_counter = _owner_team_spawn_area_overlapping_counter + 1
+		_owner_team_spawn_area_overlapping_counter += 1
 	else:
-		_other_team_spawn_area_overlapping_counter = _other_team_spawn_area_overlapping_counter + 1
+		_other_team_spawn_area_overlapping_counter += 1
 
 
 func _on_area_exited(area: Area3D) -> void:
@@ -72,9 +72,9 @@ func _on_area_exited(area: Area3D) -> void:
 		return
 	var spawn_area: SpawnArea = area
 	if spawn_area.team == team:
-		_owner_team_spawn_area_overlapping_counter = _owner_team_spawn_area_overlapping_counter - 1
+		_owner_team_spawn_area_overlapping_counter -= 1
 	else:
-		_other_team_spawn_area_overlapping_counter = _other_team_spawn_area_overlapping_counter - 1
+		_other_team_spawn_area_overlapping_counter -= 1
 
 
 func _on_events_game_state_changed(game_state: Game.GameState) -> void:

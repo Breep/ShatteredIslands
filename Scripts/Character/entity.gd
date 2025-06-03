@@ -21,7 +21,16 @@ enum EntityType {
 
 const SIGNAL_NAME_SPAWNED: String = "spawned"
 
+# ============================== Static variables ==============================
+
+static var instance_count: int = 0
+
 # ============================== Node base functions ==============================
+
+func _entity_init() -> void:
+	print("Character: _init() [", get_path(), "] [", instance_count, "]")
+	id = instance_count
+	instance_count += 1
 
 func _enter_tree() -> void:
 	print("Character: _enter_tree() [", get_path(), "] [", battle_id, "]")
