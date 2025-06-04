@@ -3,8 +3,6 @@ extends Node3D
 
 # ============================== TMP TODO improve this crapy code TMP ==============================
 
-@onready var damage_popup_scene = preload("res://Entities/Character/damage_pop_up.tscn")
-
 @export var physical_popup_spawn: Node3D
 @export var magic_popup_spawn: Node3D
 @export var poison_popup_spawn: Node3D
@@ -43,7 +41,7 @@ func update_name_displayed(player_name: String) -> void:
 
 
 func damage_popup(amount: float, damage_type: Utils.DamageType, is_critic: bool):
-	var popup: DamagePopUp = damage_popup_scene.instantiate()
+	var popup: DamagePopUp = Shared.DAMAGE_POPUP_SCENE.instantiate()
 	var offset = Vector3(randf_range(-0.5, 0.5), randf_range(-0.5, 0.5), 0) 
 	popup.text = str(amount as int)
 	get_tree().current_scene.add_child(popup)

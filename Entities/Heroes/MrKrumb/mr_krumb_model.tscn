@@ -668,6 +668,7 @@ tracks/24/keys = PackedFloat32Array(0, 1, 0.707107, 4.07024e-08, -8.12723e-08, 0
 [sub_resource type="Animation" id="Animation_mfwe6"]
 resource_name = "dancce"
 length = 10.4167
+loop_mode = 1
 tracks/0/type = "position_3d"
 tracks/0/imported = true
 tracks/0/enabled = true
@@ -1026,6 +1027,7 @@ tracks/24/keys = PackedFloat32Array(0, 1, 0.707093, -3.71877e-06, 9.56434e-07, 0
 [sub_resource type="Animation" id="Animation_qf0iy"]
 resource_name = "idle 1"
 length = 3.66667
+loop_mode = 1
 tracks/0/type = "position_3d"
 tracks/0/imported = true
 tracks/0/enabled = true

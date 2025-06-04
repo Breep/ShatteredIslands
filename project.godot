@@ -59,7 +59,7 @@ folder_colors={
 "res://SpellsAndProjectiles/": "green",
 "res://TestTODO_TOTRASH/": "red",
 "res://Tool/": "green",
-"res://UI/": "green",
+"res://UI/": "pink",
 "res://UI/_Themes/": "red",
 "res://VFX/GPUTrail-main/": "red",
 "res://VFX/Particle/": "red",

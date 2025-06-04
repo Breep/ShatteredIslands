@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7uung05infs2"]
+
+[ext_resource type="FontFile" uid="uid://dgaako73a24kh" path="res://Data/font/rimouski sb.ttf" id="1_t02g7"]
+[ext_resource type="Script" uid="uid://d1ikna8cew0nn" path="res://UI/3D/DamagePopup/damage_popup.gd" id="2_oq443"]
+
+[node name="PopUp" type="Label3D"]
+layers = 4
+text = "42"
+font = ExtResource("1_t02g7")
+font_size = 150
+script = ExtResource("2_oq443")

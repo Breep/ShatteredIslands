@@ -1,22 +1,70 @@
-[gd_scene load_steps=13 format=3 uid="uid://btuch2oo5bxk4"]
+[gd_scene load_steps=20 format=3 uid="uid://btuch2oo5bxk4"]
 
 [ext_resource type="Script" uid="uid://dyp7mmfduudai" path="res://Entities/Heroes/MrKrumb/mr_krumb.gd" id="1_c4fri"]
 [ext_resource type="PackedScene" uid="uid://ls38xt04tcla" path="res://Entities/Heroes/MrKrumb/mr_krumb_model.tscn" id="2_0vypu"]
 [ext_resource type="Resource" uid="uid://ccww2pxgtqvfx" path="res://Entities/Heroes/MrKrumb/mr_krumb.tres" id="2_1mska"]
-[ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Entities/Character/character_visual.tscn" id="2_iqdsy"]
+[ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Entities/Character/CharacterVisual/character_visual.tscn" id="2_iqdsy"]
 [ext_resource type="PackedScene" uid="uid://qgjyscmtp6t3" path="res://Entities/Character/CharacterLogic/character_logic.tscn" id="8_c5bi3"]
 [ext_resource type="PackedScene" uid="uid://dqrhym1sskng8" path="res://Entities/Turret/turret.tscn" id="17_pa7fn"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="18_5vj3a"]
 [ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://Tool/QuickAnims/anim_rotating_module.tscn" id="19_yspgx"]
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c5bi3"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hn03c"]
+animation = &"dancce"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_654og"]
+animation = &"die"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ymq24"]
 animation = &"idle 1"
 
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_4ta5f"]
-graph_offset = Vector2(0, 19)
-nodes/Animation/node = SubResource("AnimationNodeAnimation_c5bi3")
-nodes/Animation/position = Vector2(20, 120)
-node_connections = [&"output", 0, &"Animation"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bjs65"]
+animation = &"dragonlord_anim/Tpose"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_hn03c"]
+xfade_time = 0.5
+input_0/name = "Idle"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Dance"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+input_2/name = "Die"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
+input_3/name = "TPose"
+input_3/auto_advance = false
+input_3/break_loop_at_end = false
+input_3/reset = true
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_vb6kp"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_a6wt4"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_jhv8m"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_654og"]
+graph_offset = Vector2(-665.69, -41.9909)
+nodes/AnimDance/node = SubResource("AnimationNodeAnimation_hn03c")
+nodes/AnimDance/position = Vector2(-680, 40)
+nodes/AnimDie/node = SubResource("AnimationNodeAnimation_654og")
+nodes/AnimDie/position = Vector2(-680, 260)
+nodes/AnimIdle/node = SubResource("AnimationNodeAnimation_ymq24")
+nodes/AnimIdle/position = Vector2(-680, -160)
+nodes/AnimTPose/node = SubResource("AnimationNodeAnimation_bjs65")
+nodes/AnimTPose/position = Vector2(-600, 480)
+nodes/Transition/node = SubResource("AnimationNodeTransition_hn03c")
+nodes/Transition/position = Vector2(-80, 80)
+nodes/dance_speed/node = SubResource("AnimationNodeTimeScale_vb6kp")
+nodes/dance_speed/position = Vector2(-500, 20)
+nodes/die_speed/node = SubResource("AnimationNodeTimeScale_a6wt4")
+nodes/die_speed/position = Vector2(-500, 240)
+nodes/idle_speed/node = SubResource("AnimationNodeTimeScale_jhv8m")
+nodes/idle_speed/position = Vector2(-500, -180)
+node_connections = [&"Transition", 0, &"idle_speed", &"Transition", 1, &"dance_speed", &"Transition", 2, &"die_speed", &"Transition", 3, &"AnimTPose", &"dance_speed", 0, &"AnimDance", &"die_speed", 0, &"AnimDie", &"idle_speed", 0, &"AnimIdle", &"output", 0, &"Transition"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rxegs"]
 
@@ -55,37 +103,43 @@ _turret = NodePath("TurretCenterPoint/Turret")
 [node name="MrKrumbModel" parent="." instance=ExtResource("2_0vypu")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
-[node name="GeneralSkeleton" parent="MrKrumbModel/mr crumb rigged animated/Armature" index="0"]
-bones/0/position = Vector3(0.0173518, 0.569897, -0.013706)
-bones/0/rotation = Quaternion(-0.000330724, 0.315705, -0.0377254, 0.948107)
-bones/1/rotation = Quaternion(0.275732, 0.407293, 0.82579, -0.275965)
-bones/2/rotation = Quaternion(-0.000316265, 0.901922, -0.429268, 0.0476046)
-bones/3/rotation = Quaternion(-0.205954, 0.713804, -0.668992, -0.0227192)
-bones/4/rotation = Quaternion(0.00757984, 0.996468, 0.0834222, -0.00583805)
-bones/5/rotation = Quaternion(-0.177587, 0.314613, 0.911027, 0.198776)
-bones/6/rotation = Quaternion(0.0012469, 0.894756, -0.444078, -0.0469488)
-bones/7/rotation = Quaternion(0.19319, 0.653706, -0.72691, -0.0833557)
-bones/8/rotation = Quaternion(-0.00785873, 0.996354, 0.0847416, 0.00593526)
-bones/9/rotation = Quaternion(0.0722639, 0.00786782, 0.00402653, 0.997346)
-bones/10/rotation = Quaternion(0.0253533, 0.014014, 0.0091754, 0.999538)
-bones/11/rotation = Quaternion(0.0165045, 0.00236889, 5.5961e-05, 0.999861)
-bones/12/rotation = Quaternion(0.365302, 0.59883, 0.419685, -0.57604)
-bones/13/rotation = Quaternion(-0.366622, 0.91417, -0.0729368, 0.156725)
-bones/14/rotation = Quaternion(0.227214, -0.927995, 0.169064, 0.242107)
-bones/15/rotation = Quaternion(0.125617, 0.552253, 0.0452578, 0.822915)
-bones/16/rotation = Quaternion(0.319096, -0.622086, -0.480045, -0.529852)
-bones/17/rotation = Quaternion(-0.0652457, 0.992828, -0.048989, -0.0873796)
-bones/18/rotation = Quaternion(0.206466, 0.915915, -0.156937, 0.306337)
-bones/19/rotation = Quaternion(0.183385, -0.634172, -0.285528, 0.694744)
-bones/20/rotation = Quaternion(0.155792, 0.0133172, 0.014013, 0.987601)
-bones/21/rotation = Quaternion(-0.061902, 0.293035, -0.130275, 0.94516)
-bones/22/rotation = Quaternion(-0.0430349, 0.00134613, -0.00136265, 0.999072)
-bones/23/rotation = Quaternion(0.707095, -1.18249e-05, -4.13735e-06, 0.707119)
+[node name="GeneralSkeleton" parent="MrKrumbModel/Armature" index="0"]
+bones/0/position = Vector3(0, 0.57292, 0)
+bones/0/rotation = Quaternion(0, 0, 0, 1)
+bones/1/rotation = Quaternion(-0.00451643, 0.104387, 0.993611, 0.042658)
+bones/2/rotation = Quaternion(0.0003061, 0.997831, -0.0656341, 0.00500944)
+bones/3/rotation = Quaternion(0.0322165, 0.733302, -0.678524, -0.0289054)
+bones/4/rotation = Quaternion(-5.76226e-09, 1, -2.98023e-08, -1.811e-09)
+bones/5/rotation = Quaternion(0.00475696, 0.11053, 0.992942, -0.0427319)
+bones/6/rotation = Quaternion(-0.000292841, 0.996508, -0.0832243, -0.00673046)
+bones/7/rotation = Quaternion(-0.0316516, 0.725434, -0.686939, 0.0292973)
+bones/8/rotation = Quaternion(-2.33783e-08, 1, -5.96046e-08, -1.64636e-09)
+bones/9/rotation = Quaternion(2.13459e-06, -1.50276e-05, 0.000124534, 1)
+bones/10/rotation = Quaternion(3.72529e-09, 4.26291e-14, -6.82122e-13, 1)
+bones/11/rotation = Quaternion(-3.72529e-09, -8.80291e-19, -1.56283e-19, 1)
+bones/12/rotation = Quaternion(0.472369, 0.526182, 0.472372, -0.526179)
+bones/13/rotation = Quaternion(0.0366827, 0.921246, 0.387053, 0.012289)
+bones/14/rotation = Quaternion(0.190166, -0.591417, -0.33363, 0.709051)
+bones/15/rotation = Quaternion(0.130801, 0.696134, 0.0460249, 0.704393)
+bones/16/rotation = Quaternion(0.472352, -0.526198, -0.472352, -0.526197)
+bones/17/rotation = Quaternion(-0.0351356, 0.921295, 0.387096, -0.0117708)
+bones/18/rotation = Quaternion(0.189074, 0.588798, 0.334146, 0.711277)
+bones/19/rotation = Quaternion(0.135363, -0.699646, -0.0283305, 0.700978)
+bones/20/rotation = Quaternion(-1.11759e-08, -4.26327e-14, -2.27377e-13, 1)
+bones/21/rotation = Quaternion(2.22045e-15, -7.56721e-20, -1.0032e-18, 1)
+bones/22/rotation = Quaternion(-0.043018, 0.00135118, -0.00135116, 0.999072)
+bones/23/rotation = Quaternion(0.707107, 3.75525e-08, -7.62111e-08, 0.707107)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-root_node = NodePath("../MrKrumbModel/mr crumb rigged animated")
-tree_root = SubResource("AnimationNodeBlendTree_4ta5f")
-anim_player = NodePath("../MrKrumbModel/mr crumb rigged animated/AnimationPlayer")
+root_node = NodePath("../MrKrumbModel")
+tree_root = SubResource("AnimationNodeBlendTree_654og")
+anim_player = NodePath("../MrKrumbModel/AnimationPlayer")
+parameters/Transition/current_state = "TPose"
+parameters/Transition/transition_request = ""
+parameters/Transition/current_index = 3
+parameters/dance_speed/scale = 1.0
+parameters/die_speed/scale = 1.0
+parameters/idle_speed/scale = 1.0
 
 [node name="CharacterVisual" parent="." instance=ExtResource("2_iqdsy")]
 unique_name_in_owner = true
@@ -140,6 +194,5 @@ families_managers = {
 projectile_spawn = NodePath("../../../TurretCenterPoint/Turret/SpawnPoint")
 
 [editable path="MrKrumbModel"]
-[editable path="MrKrumbModel/mr crumb rigged animated"]
 [editable path="TurretCenterPoint/Turret"]
 [editable path="CharacterLogic"]

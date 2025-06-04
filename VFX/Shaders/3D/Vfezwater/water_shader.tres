@@ -1,7 +1,4 @@
-[gd_resource type="ShaderMaterial" script_class="VFEZMaterial3D" load_steps=4 format=3 uid="uid://dvsxuoovauuo3"]
-
-[ext_resource type="Script" uid="uid://s03hbdebpt0q" path="res://VFEZ-godot-main/vfez_material_3d.gd" id="1_jgcl8"]
-[ext_resource type="Texture2D" uid="uid://dknfkykqwklf7" path="res://Texture/2D/T_VFX_Noise_465.png" id="2_y53k8"]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dvsxuoovauuo3"]
 
 [sub_resource type="Shader" id="Shader_jgcl8"]
 resource_name = "VFEZ3DPreview"
@@ -28,68 +25,4 @@ shader_type spatial;
 [resource]
 render_priority = 0
 shader = SubResource("Shader_jgcl8")
-shader_parameter/global_color = Color(1, 1, 1, 1)
-shader_parameter/global_alpha = 1.0
-shader_parameter/additive_config = false
-shader_parameter/premultiply_color = false
-shader_parameter/premultiply_alpha = false
-shader_parameter/shape1_main_texture = ExtResource("2_y53k8")
-shader_parameter/shape1_main_texture_scale = Vector2(1, 1)
-shader_parameter/shape1_main_texture_offset = Vector2(0, 0)
-shader_parameter/shape1_color = Color(0.421451, 0.705376, 0.92812, 1)
-shader_parameter/shape1_red_as_alpha = false
-shader_parameter/shape1_scroll_speed = Vector2(0, -0.1)
-shader_parameter/shape1_rotation_offset = 0.0
-shader_parameter/shape1_rotation_speed = 0.0
-shader_parameter/shape1_contrast = 1.0
-shader_parameter/shape1_brightness = 0.0
-shader_parameter/shape1_distortion_texture_scale = Vector2(1, 1)
-shader_parameter/shape1_distortion_texture_offset = Vector2(0, 0)
-shader_parameter/shape1_distortion_amount = 0.0
-shader_parameter/shape1_distortion_speed = Vector2(0.1, 0.1)
-shader_parameter/shape1_use_polar_uv = false
-shader_parameter/shape1_polar_uv_center = Vector2(0.5, 0.5)
-shader_parameter/shape1_distortion_polar_uvs = false
-shader_parameter/shape1_use_screenspace_uv = false
-shader_parameter/use_shape2 = false
-shader_parameter/use_shape3 = false
-shader_parameter/use_uv_pixelate = false
-shader_parameter/use_uv_twist = false
-shader_parameter/use_uv_handrawn = false
-shader_parameter/use_uv_shake = false
-shader_parameter/use_uv_wave = false
-shader_parameter/use_uv_round_wave = true
-shader_parameter/uv_round_wave_strength = 0.029
-shader_parameter/uv_round_wave_speed = 2.0
-shader_parameter/use_uv_global_distortion = false
-shader_parameter/use_alpha_disolve = false
-shader_parameter/use_color_face_tint = false
-shader_parameter/use_color_toning = false
-shader_parameter/use_color_ramp = false
-shader_parameter/use_color_posterize = false
-shader_parameter/use_color_rim = false
-shader_parameter/use_color_glow = true
-shader_parameter/glow_color = Color(0.186244, 0.477409, 0.787137, 1)
-shader_parameter/glow_intensity = 0.24
-shader_parameter/glow_intensity_global = 1.0
-shader_parameter/use_glow_texture = false
-shader_parameter/use_color_hsv_shift = false
-shader_parameter/use_alpha_mask = false
-shader_parameter/use_alpha_remap = false
-shader_parameter/use_alpha_cutoff = false
-shader_parameter/use_alpha_scissor = false
-shader_parameter/use_vertex_offset = false
-shader_parameter/use_vertex_expand = false
-shader_parameter/use_particle_trails = false
-shader_parameter/use_particle_anim = false
-script = ExtResource("1_jgcl8")
-BlendMode = 1
-DepthDrawMode = 0
-CullMode = 0
-DiffuseMode = 0
-SpecularMode = 0
-ShadingMode = 0
-BillboardMode = 0
-BillboardKeepScale = false
-NoDepthTest = false
 metadata/_custom_type_script = "uid://s03hbdebpt0q"

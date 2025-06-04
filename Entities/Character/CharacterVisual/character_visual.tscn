@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://br1wrpaxa7qjk"]
 
-[ext_resource type="Script" uid="uid://c03q2h4ty3455" path="res://Entities/Character/character_visual.gd" id="1_8fkrf"]
+[ext_resource type="Script" uid="uid://c03q2h4ty3455" path="res://Entities/Character/CharacterVisual/character_visual.gd" id="1_8fkrf"]
 [ext_resource type="Theme" uid="uid://duu3l81c6tmkh" path="res://UI/_Themes/Labels/popup_damage_normal.tres" id="2_hmo4h"]
 [ext_resource type="Theme" uid="uid://uriahirynhrm" path="res://UI/_Themes/TMP_Themes/health_bar.tres" id="18_qehcj"]
 [ext_resource type="Theme" uid="uid://bxg2e5lw04pol" path="res://UI/_Themes/TMP_Themes/mana_bar.tres" id="19_3u6jw"]

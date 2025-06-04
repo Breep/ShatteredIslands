@@ -8,9 +8,6 @@ var pickable_locked: bool = false # True if the object can't be picked up
 
 # ============================== Export ==============================
 
-@export var _meshs: Array[MeshInstance3D]
-@export var _nodes_where_to_find_meshs: Array[Node3D]
-
 @export var _owner: Node3D
 @export var _pickable_collider: PickableCollider
 @export var _spawn_area_checker: SpawnAreaChecker
@@ -78,26 +75,6 @@ func drop() -> bool:
 
 func _connect_to_owner() -> void:
 	_owner.set_meta(PICKABLE_META, self)
-
-
-func _init_meshs() -> void:
-	if not _meshs.is_empty():
-		return
-	
-	if not _nodes_where_to_find_meshs.is_empty():
-		for node in _nodes_where_to_find_meshs:
-			_recursive_find_all_meshs(node)
-		return
-	
-	_recursive_find_all_meshs(_owner)
-
-
-func _recursive_find_all_meshs(node: Node3D) -> void:
-	for child in node.get_children():
-		if child is Node3D:
-			_recursive_find_all_meshs(child)
-	if node is MeshInstance3D:
-		_meshs.append(node)
 
 
 func _pick() -> bool:

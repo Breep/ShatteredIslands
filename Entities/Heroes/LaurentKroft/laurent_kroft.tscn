@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bvx6cyg3ybjvf" path="res://Entities/Heroes/LaurentKroft/laurent_kroft.gd" id="1_p8n2g"]
 [ext_resource type="Resource" uid="uid://cnecvw18tqmuq" path="res://Entities/Heroes/LaurentKroft/laurent_kroft.tres" id="2_hk5ya"]
-[ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Entities/Character/character_visual.tscn" id="2_u56hr"]
+[ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Entities/Character/CharacterVisual/character_visual.tscn" id="2_u56hr"]
 [ext_resource type="PackedScene" uid="uid://cf0pc5jtr0651" path="res://Entities/Heroes/LaurentKroft/laurent_kroft_model.tscn" id="2_w4ua8"]
 [ext_resource type="PackedScene" uid="uid://qgjyscmtp6t3" path="res://Entities/Character/CharacterLogic/character_logic.tscn" id="8_vsb3i"]
 [ext_resource type="PackedScene" uid="uid://dqrhym1sskng8" path="res://Entities/Turret/turret.tscn" id="17_wovto"]

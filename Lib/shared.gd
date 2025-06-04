@@ -24,7 +24,7 @@ var CHARACTERS: Dictionary[Hero.HeroId, PackedScene] = {
 	Hero.HeroId.DARK_KNIGHT: load("res://Entities/Heroes/DarkKnight/dark_knight.tscn")
 }
 
-
+var DAMAGE_POPUP_SCENE: PackedScene = load("res://UI/3D/DamagePopup/damage_popup.tscn")
 
 
 
