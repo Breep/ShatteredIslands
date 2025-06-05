@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://bhxhqex1pbh2p"]
+[gd_scene load_steps=5 format=3 uid="uid://bhxhqex1pbh2p"]
 
 [ext_resource type="Script" uid="uid://cl4rtcia6te0m" path="res://UI/FightingArea/ui_fighting_area.gd" id="1_xkiby"]
 [ext_resource type="PackedScene" uid="uid://db2anika8bvj8" path="res://UI/CharacterStats/ui_character_stats.tscn" id="2_g28wu"]
+[ext_resource type="PackedScene" uid="uid://cxalabhvxw1pd" path="res://UI/Tool/Timer/ui_timer.tscn" id="2_twkqc"]
+[ext_resource type="PackedScene" uid="uid://dmfkigo1trjd0" path="res://UI/Tool/Countdown/ui_countdown.tscn" id="3_gg8jf"]
 
-[node name="UIFightingArea" type="Control" node_paths=PackedStringArray("_ui_selected_character_stats_1", "_ui_selected_character_stats_2")]
+[node name="UIFightingArea" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,8 +14,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_xkiby")
-_ui_selected_character_stats_1 = NodePath("VBoxContainer/BottomPanel/HBoxContainer/BottomMiddle/HBoxContainer/SelectedCharacterStats_1")
-_ui_selected_character_stats_2 = NodePath("VBoxContainer/BottomPanel/HBoxContainer/BottomMiddle/HBoxContainer/SelectedCharacterStats_2")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -40,6 +40,10 @@ theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
+
+[node name="ContinousTimer" parent="VBoxContainer/TopPanel/MarginContainer" instance=ExtResource("2_twkqc")]
+unique_name_in_owner = true
+layout_mode = 2
 
 [node name="MiddlePanel" type="Control" parent="VBoxContainer"]
 layout_mode = 2
@@ -74,6 +78,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Countdown" parent="VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel/CenterContainer" instance=ExtResource("3_gg8jf")]
+unique_name_in_owner = true
+layout_mode = 2
 
 [node name="RightPanel" type="Control" parent="VBoxContainer/MiddlePanel/HBoxContainer"]
 layout_mode = 2
@@ -115,12 +123,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 10
 
-[node name="SelectedCharacterStats_1" parent="VBoxContainer/BottomPanel/HBoxContainer/BottomMiddle/HBoxContainer" instance=ExtResource("2_g28wu")]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="SelectedCharacterStats_2" parent="VBoxContainer/BottomPanel/HBoxContainer/BottomMiddle/HBoxContainer" instance=ExtResource("2_g28wu")]
+[node name="SelectedCharacterStats" parent="VBoxContainer/BottomPanel/HBoxContainer/BottomMiddle/HBoxContainer" instance=ExtResource("2_g28wu")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3

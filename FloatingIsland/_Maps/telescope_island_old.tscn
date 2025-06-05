@@ -5,11 +5,11 @@
 [ext_resource type="Texture2D" uid="uid://u4kayolln7un" path="res://Data/Blender/Map/Map/Telescope island/ile_flottante_V3_Wood_DockBoards_01_Diffuse.png" id="3_6a5dx"]
 [ext_resource type="Material" uid="uid://dvsxuoovauuo3" path="res://VFX/Shaders/3D/Vfezwater/water_shader.tres" id="4_nxnlb"]
 [ext_resource type="Texture2D" uid="uid://cx3dbgmpv2u21" path="res://Data/Blender/Map/Map/Telescope island/ile_flottante_V3_PolygonElven_Texture_01_A.png" id="4_s711j"]
-[ext_resource type="Script" uid="uid://btvmyefdjrxsx" path="res://VFX/VFEZ-godot-main/vfez_material_3d.gd" id="5_wt7pg"]
+[ext_resource type="Script" uid="uid://cikf26aplx4y4" path="res://VFX/VFEZ-godot-main/vfez_material_3d.gd" id="5_wt7pg"]
 [ext_resource type="Texture2D" uid="uid://cox677fl8sgl" path="res://Data/Texture/2D/T_VFX_Noise_2.PNG" id="6_fdjtm"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="7_wrir2"]
 [ext_resource type="PackedScene" uid="uid://dwsu0wswqq2ny" path="res://Data/Blender/Heroes/Golem/monster.blend" id="7_wt7pg"]
-[ext_resource type="PackedScene" uid="uid://rttk0xqwxb2b" path="res://NPC/CuteLapinou/cute_lapinou_model.tscn" id="8_fdjtm"]
+[ext_resource type="PackedScene" uid="uid://rttk0xqwxb2b" path="res://Entities/NPC/CuteLapinou/cute_lapinou_model.tscn" id="8_fdjtm"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nxnlb"]
 albedo_texture = ExtResource("4_s711j")

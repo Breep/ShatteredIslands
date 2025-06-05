@@ -27,7 +27,7 @@ const _fighting_phase_durations: Dictionary[FightingState, int] = {
 	FightingState.POSITIONING: 5,
 	FightingState.COUNTDOWN: 3,
 	FightingState.FIGHT: 10,
-	FightingState.FIGHT_ACCELERATED: 1, 
+	FightingState.FIGHT_ACCELERATED: 5, 
 	FightingState.FINISHED: 3, # Winners cheers
 }
 
@@ -96,27 +96,43 @@ func _finish_all_fights() -> void:
 
 # ============================== Callbacks ==============================
 
+# Fighting state machine
 func _on_timer_timeout() -> void:
 	match fighting_state:
 		FightingState.POSITIONING:
-			print("GlobalFightingManager: Starting the fight")
+			fighting_state = FightingState.COUNTDOWN
+			Events.ui_main_countdown_triggered.emit(_fighting_phase_durations[FightingState.COUNTDOWN], "Fight")
+			timer.wait_time = _fighting_phase_durations[FightingState.COUNTDOWN]
+			timer.start()
+		FightingState.COUNTDOWN:
 			fighting_state = FightingState.FIGHT
-			timer.wait_time = _fighting_phase_durations[FightingState.POSITIONING]
+			timer.wait_time = _fighting_phase_durations[FightingState.FIGHT]
 			timer.start()
 		FightingState.FIGHT:
-			print("GlobalFightingManager: Starting the accelerated fight (TODO)")
 			#Engine.time_scale = 3 # A VOIR PLUS TARD COMMENT SYNHRO ENTRE LES CLIENTS
 			fighting_state = FightingState.FIGHT_ACCELERATED
-			timer.wait_time = _fighting_phase_durations[FightingState.POSITIONING]
+			timer.wait_time = _fighting_phase_durations[FightingState.FIGHT_ACCELERATED]
 			timer.start()
 		FightingState.FIGHT_ACCELERATED:
-			print("GlobalFightingManager: Ending fight (CHECK FOR WINNER)")
 			fighting_state = FightingState.FINISHED
+			timer.wait_time = _fighting_phase_durations[FightingState.FINISHED]
+			timer.start()
+		FightingState.FINISHED:
+			_finish_all_fights.rpc()
 
 
 func _on_state_changed(new_state) -> void:
-	if new_state == FightingState.FINISHED:
-		_finish_all_fights.rpc()
+	match new_state:
+		FightingState.POSITIONING:
+			print("GlobalFightingManager: Starting the positioning")
+		FightingState.COUNTDOWN:
+			print("GlobalFightingManager: Starting countdown")
+		FightingState.FIGHT:
+			print("GlobalFightingManager: Starting the fight")
+		FightingState.FIGHT_ACCELERATED:
+			print("GlobalFightingManager: Starting the accelerated fight")
+		FightingState.FINISHED:
+			print("GlobalFightingManager: Starting the finished phase (dance)")
 
 
 func _fighting_manager_fighting_is_over(fighting_manager: FightingManager, _winning_team) -> void:

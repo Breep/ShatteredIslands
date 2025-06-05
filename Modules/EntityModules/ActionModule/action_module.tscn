@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://617x5c1qrdpg"]
+
+[ext_resource type="Script" uid="uid://qg5w0dqh51ix" path="res://Modules/EntityModules/ActionModule/action_module.gd" id="1_skbms"]
+
+[node name="ActionModule" type="Node"]
+script = ExtResource("1_skbms")

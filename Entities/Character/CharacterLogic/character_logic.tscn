@@ -1,10 +1,10 @@
 [gd_scene load_steps=14 format=3 uid="uid://qgjyscmtp6t3"]
 
 [ext_resource type="Script" uid="uid://l2r5b7efg66k" path="res://Entities/Character/CharacterLogic/character_logic.gd" id="1_0s7d1"]
-[ext_resource type="PackedScene" uid="uid://d0g0xkyr876lc" path="res://Modules/EntityModules/Movement/movement_module.tscn" id="1_qe31t"]
-[ext_resource type="PackedScene" uid="uid://617x5c1qrdpg" path="res://Modules/EntityModules/Action/action_module.tscn" id="2_0s7d1"]
-[ext_resource type="PackedScene" uid="uid://bbwmtb5op8clu" path="res://Modules/EntityModules/Interact/interact_module.tscn" id="3_uh7jt"]
-[ext_resource type="PackedScene" uid="uid://b6yg1bhhmnicr" path="res://Modules/EntityModules/AutoAttack/auto_attack_module.tscn" id="4_f011x"]
+[ext_resource type="PackedScene" uid="uid://d0g0xkyr876lc" path="res://Modules/EntityModules/MovementModule/movement_module.tscn" id="1_qe31t"]
+[ext_resource type="PackedScene" uid="uid://617x5c1qrdpg" path="res://Modules/EntityModules/ActionModule/action_module.tscn" id="2_0s7d1"]
+[ext_resource type="PackedScene" uid="uid://bbwmtb5op8clu" path="res://Modules/EntityModules/InteractModule/interact_module.tscn" id="3_uh7jt"]
+[ext_resource type="PackedScene" uid="uid://b6yg1bhhmnicr" path="res://Modules/EntityModules/AutoAttackModule/auto_attack_module.tscn" id="4_f011x"]
 [ext_resource type="PackedScene" uid="uid://bext8rh783yay" path="res://Entities/Character/FamiliesManagers/Defense/defense_manager.tscn" id="5_140mw"]
 [ext_resource type="PackedScene" uid="uid://cl10r3idwllx" path="res://Entities/Character/FamiliesManagers/Fire/fire_manager.tscn" id="6_2r7uk"]
 [ext_resource type="PackedScene" uid="uid://6holmj326e1y" path="res://Entities/Character/FamiliesManagers/Life/life_manager.tscn" id="7_3fp6t"]
@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bdl1xxjdbeugn" path="res://Entities/Character/FamiliesManagers/Serenity/serenity_manager.tscn" id="9_5ysdc"]
 [ext_resource type="PackedScene" uid="uid://bjbfnigvphbfc" path="res://Entities/Character/FamiliesManagers/Storm/storm_manager.tscn" id="10_7a66c"]
 [ext_resource type="PackedScene" uid="uid://crqesljjrouec" path="res://Entities/Character/FamiliesManagers/Attack/attack_manager.tscn" id="11_rmt4k"]
-[ext_resource type="PackedScene" uid="uid://n30ifkjad344" path="res://Modules/EntityModules/Target/target_module.tscn" id="12_yu7ro"]
+[ext_resource type="PackedScene" uid="uid://n30ifkjad344" path="res://Modules/EntityModules/TargetModule/target_module.tscn" id="12_yu7ro"]
 
 [node name="CharacterLogic" type="Node" node_paths=PackedStringArray("modules", "families_managers")]
 script = ExtResource("1_0s7d1")

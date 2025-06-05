@@ -1,49 +1,61 @@
 class_name UIFightingArea
 extends Control
 
-var _left_character: Character
-@export var left_character: Character:
-	get: return _left_character
-	set(value):
-		if _left_character != value:
-			_left_character = value
-			_ui_selected_character_stats_1.connect_character_stats(_left_character.stats)
+#var _left_character: Character
+#@export var left_character: Character:
+	#get: return _left_character
+	#set(value):
+		#if _left_character != value:
+			#_left_character = value
+			#_ui_selected_character_stats_1.connect_character_stats(_left_character.stats)
+#
+#var _right_character: Character
+#@export var right_character: Character:
+	#get: return _right_character
+	#set(value):
+		#if _right_character != value:
+			#_right_character = value
+			#_ui_selected_character_stats_2.connect_character_stats(_right_character.stats)
 
-var _right_character: Character
-@export var right_character: Character:
-	get: return _right_character
-	set(value):
-		if _right_character != value:
-			_right_character = value
-			_ui_selected_character_stats_2.connect_character_stats(_right_character.stats)
+# ============================== Local nodes ==============================
+
+@onready var _continuous_timer: UIContinousTimer = %ContinousTimer
+@onready var _countdown: UICountdown = %Countdown
 
 # ============================== Private variables ==============================
 
 var _battle_id: int
 var _characters: Array[Character]
-
-# ============================== Local nodes ==============================
-
-@export var _ui_selected_character_stats_1: UICharacterStats
-@export var _ui_selected_character_stats_2: UICharacterStats
-
-# ============================== Public functions ==============================
-
-func start(battle_id: int) -> void:
-	Events.ui_fighting_area_opened.connect(_on_events_ui_fighting_area_opened)
-	_battle_id = battle_id
-	#_characters = _get_fighting_characters()
-	_ui_selected_character_stats_1.connect_character_stats(_characters[0].stats)
-	_ui_selected_character_stats_2.connect_character_stats(_characters[1].stats)
-	_ui_selected_character_stats_1.show()
-	_ui_selected_character_stats_2.show()
+var _is_active: bool = false
 
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
 	hide()
-	#_ui_selected_character_stats_1.hide()
-	#_ui_selected_character_stats_2.hide()
+	Events.ui_main_countdown_triggered.connect(_on_events_ui_main_countdown_triggered)
+	_continuous_timer.connect_timer(GlobalFightingManager.timer)
+
+# ============================== Public functions ==============================
+
+func start(battle_id: int) -> void:
+	_battle_id = battle_id
+	#_characters = _get_fighting_characters()
+	#_ui_selected_character_stats_1.connect_character_stats(_characters[0].stats)
+	#_ui_selected_character_stats_2.connect_character_stats(_characters[1].stats)
+	#_ui_selected_character_stats_1.show()
+	#_ui_selected_character_stats_2.show()
+
+
+func set_active() -> void:
+	if _is_active: return
+	_is_active = true
+	show()
+
+
+func set_inactive() -> void:
+	if not _is_active: return
+	_is_active = false
+	hide()
 
 # ============================== Private functions ==============================
 
@@ -57,11 +69,5 @@ func _ready() -> void:
 
 # ============================== Callbacks ==============================
 
-func _on_events_ui_fighting_area_opened(is_opened: bool, battle_id: int) -> void:
-	if battle_id != -1 and battle_id != _battle_id:
-		return
-	
-	if is_opened:
-		show()
-	else:
-		hide()
+func _on_events_ui_main_countdown_triggered(countdown_value: int, endword: String) -> void:
+	_countdown.start(countdown_value, endword)

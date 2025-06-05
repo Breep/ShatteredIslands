@@ -120,8 +120,7 @@ mesh = SubResource("BoxMesh_foia4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_sakdd")
 
-[node name="PickableModule" parent="PickableBodyA" node_paths=PackedStringArray("_nodes_where_to_find_meshs", "_owner", "_pickable_collider") instance=ExtResource("9_08xy3")]
-_nodes_where_to_find_meshs = [NodePath("../MeshInstance3D")]
+[node name="PickableModule" parent="PickableBodyA" node_paths=PackedStringArray("_owner", "_pickable_collider") instance=ExtResource("9_08xy3")]
 _owner = NodePath("..")
 _pickable_collider = NodePath("../PickableCollider")
 _debug = true
@@ -140,8 +139,7 @@ mesh = SubResource("BoxMesh_foia4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_sakdd")
 
-[node name="PickableModule" parent="PickableBodyB" node_paths=PackedStringArray("_nodes_where_to_find_meshs", "_owner") instance=ExtResource("9_08xy3")]
-_nodes_where_to_find_meshs = [NodePath("../MeshInstance3D")]
+[node name="PickableModule" parent="PickableBodyB" node_paths=PackedStringArray("_owner") instance=ExtResource("9_08xy3")]
 _owner = NodePath("..")
 
 [editable path="FightingIsland"]
