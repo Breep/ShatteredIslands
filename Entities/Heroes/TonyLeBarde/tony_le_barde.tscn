@@ -104,34 +104,6 @@ _turret = NodePath("TurretCenterPoint/Turret")
 [node name="dragon_lord" parent="." instance=ExtResource("3_tmtlu")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.638704, -0.32114)
 
-[node name="GeneralSkeleton" parent="dragon_lord/Armature" index="0"]
-bones/0/position = Vector3(0, 0.1769, 0)
-bones/7/rotation = Quaternion(0.472369, 0.526182, 0.472372, -0.526179)
-bones/8/rotation = Quaternion(0.0366827, 0.921246, 0.387053, 0.012289)
-bones/9/rotation = Quaternion(0.190166, -0.591417, -0.33363, 0.709051)
-bones/10/rotation = Quaternion(0.130801, 0.696134, 0.0460249, 0.704393)
-bones/11/rotation = Quaternion(-0.112948, 0.769208, -0.0332943, 0.628055)
-bones/12/rotation = Quaternion(-0.263611, -0.160216, 0.0304222, 0.950744)
-bones/13/rotation = Quaternion(-0.199175, -0.120304, 0.019525, 0.972355)
-bones/15/rotation = Quaternion(-0.104927, 0.00765958, -0.0395568, 0.993663)
-bones/16/rotation = Quaternion(-0.246058, 0.00714061, -0.045453, 0.968163)
-bones/19/rotation = Quaternion(0.472352, -0.526198, -0.472352, -0.526197)
-bones/20/rotation = Quaternion(-0.0351356, 0.921295, 0.387096, -0.0117708)
-bones/21/rotation = Quaternion(0.189074, 0.588798, 0.334146, 0.711277)
-bones/22/rotation = Quaternion(0.135363, -0.699646, -0.0283305, 0.700978)
-bones/23/rotation = Quaternion(-0.118417, -0.758572, 0.020315, 0.640417)
-bones/24/rotation = Quaternion(-0.238026, 0.152407, 0.00739438, 0.959198)
-bones/25/rotation = Quaternion(-0.209151, 0.155951, -0.117225, 0.958224)
-bones/27/rotation = Quaternion(-0.113413, -0.00458211, -0.00445212, 0.993527)
-bones/28/rotation = Quaternion(-0.264448, -0.0227506, 0.0462468, 0.963022)
-bones/29/rotation = Quaternion(-0.0232677, 0.000145704, 0.00174513, 0.999728)
-bones/31/rotation = Quaternion(-0.00451643, 0.104387, 0.993611, 0.042658)
-bones/32/rotation = Quaternion(0.0003061, 0.997831, -0.0656341, 0.00500944)
-bones/33/rotation = Quaternion(0.0322165, 0.733302, -0.678524, -0.0289054)
-bones/36/rotation = Quaternion(0.00475696, 0.11053, 0.992942, -0.0427319)
-bones/37/rotation = Quaternion(-0.000292841, 0.996508, -0.0832243, -0.00673046)
-bones/38/rotation = Quaternion(-0.0316516, 0.725434, -0.686939, 0.0292973)
-
 [node name="AnimationTree" type="AnimationTree" parent="."]
 unique_name_in_owner = true
 root_node = NodePath("%AnimationTree/../dragon_lord")
@@ -146,6 +118,7 @@ parameters/idle_speed/scale = 1.0
 
 [node name="CharacterVisual" parent="." instance=ExtResource("2_87chu")]
 unique_name_in_owner = true
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 2.62212, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

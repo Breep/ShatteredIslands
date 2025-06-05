@@ -6685,7 +6685,7 @@ input_3/reset = true
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_x0r43"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_2g30f"]
-graph_offset = Vector2(-586.84, -30.41)
+graph_offset = Vector2(-240, 0)
 nodes/AnimDance/node = SubResource("AnimationNodeAnimation_ds2a6")
 nodes/AnimDance/position = Vector2(-580, 200)
 nodes/AnimDie/node = SubResource("AnimationNodeAnimation_l2r0u")
@@ -6794,7 +6794,7 @@ bones/54/rotation = Quaternion(-0.0160358, 0.451756, -0.891745, 0.0212091)
 bones/55/rotation = Quaternion(0, 1, 0, 0)
 
 [node name="BoneAttachment3D" parent="DarkKnightModel/Armature/GeneralSkeleton" index="1"]
-transform = Transform3D(-0.157519, -0.980147, -0.120411, 0.512355, 0.0231212, -0.858462, 0.844204, -0.196917, 0.498542, -0.886177, 0.302139, 0.292601)
+transform = Transform3D(-0.157519, -0.980147, -0.120411, 0.512355, 0.0231214, -0.858463, 0.844204, -0.196917, 0.498541, -0.886177, 0.302139, 0.292602)
 
 [node name="AnimationPlayer" parent="DarkKnightModel" index="1"]
 libraries = {
@@ -6815,8 +6815,7 @@ parameters/idle_speed/scale = 1.0
 
 [node name="CharacterVisual" parent="." instance=ExtResource("2_8182s")]
 unique_name_in_owner = true
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-visible = false
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 2.50215, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

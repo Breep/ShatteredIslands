@@ -57,6 +57,18 @@ func connect_to_fighting_area(fighting_area: FightingArea) -> void:
 	_character_logic.connect_to_fighting_area(fighting_area)
 	fighting_area.fighting_manager.fight_is_over.connect(_on_fighting_manager_fight_is_over, CONNECT_ONE_SHOT)
 
+
+func set_lookat_camera(camera: Camera3D) -> void:
+	_character_visual.set_camera(camera)
+
+
+func on_active_island() -> void:
+	_character_visual.show()
+
+
+func on_inactive_island() -> void:
+	_character_visual.hide()
+
 # ============================== Node base functions ==============================
 
 func _init() -> void:

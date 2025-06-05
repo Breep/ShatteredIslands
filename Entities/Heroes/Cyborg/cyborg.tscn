@@ -49,7 +49,7 @@ input_3/reset = true
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_lope7"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_frf0o"]
-graph_offset = Vector2(-426.904, -120.593)
+graph_offset = Vector2(-240, -120.593)
 nodes/AnimDance/node = SubResource("AnimationNodeAnimation_xdo7g")
 nodes/AnimDance/position = Vector2(-240, 40)
 nodes/AnimDie/node = SubResource("AnimationNodeAnimation_tmwsy")
@@ -193,8 +193,7 @@ parameters/idle_speed/scale = 1.0
 
 [node name="CharacterVisual" parent="." instance=ExtResource("2_1njov")]
 unique_name_in_owner = true
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-visible = false
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 2.37992, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)

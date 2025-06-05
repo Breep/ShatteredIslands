@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bfk1vk6iow70n" path="res://Entities/Heroes/AncientTree/ancient_tree.gd" id="1_61y0m"]
 [ext_resource type="Resource" uid="uid://qa70iekc67ac" path="res://Entities/Heroes/AncientTree/ancient_tree.tres" id="2_fsm3l"]
 [ext_resource type="PackedScene" uid="uid://dfrrvt8lpo17x" path="res://Entities/Heroes/AncientTree/ancient_tree_model.tscn" id="2_su5oi"]
-[ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Entities/Character/CharacterVisual/character_visual.tscn" id="2_yqw0q"]
+[ext_resource type="PackedScene" uid="uid://cf4y1g6c4ia6w" path="res://Entities/Character/CharacterVisual/character_visual.tscn" id="2_yqw0q"]
 [ext_resource type="AnimationLibrary" uid="uid://bd8buex3pprwv" path="res://Data/Anim/Ancient tree v2 .res" id="3_61y0m"]
 [ext_resource type="AnimationLibrary" uid="uid://bmijhrm7py8vg" path="res://Data/Anim/lib_rig_no_mixamo.res" id="4_fsm3l"]
 [ext_resource type="PackedScene" uid="uid://qgjyscmtp6t3" path="res://Entities/Character/CharacterLogic/character_logic.tscn" id="10_ieptw"]
@@ -52,7 +52,6 @@ input_3/reset = true
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_s6iox"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_su5oi"]
-graph_offset = Vector2(-853.507, -180.231)
 nodes/AnimDance/node = SubResource("AnimationNodeAnimation_61y0m")
 nodes/AnimDance/position = Vector2(-1080, -80)
 nodes/AnimDie/node = SubResource("AnimationNodeAnimation_katp2")
@@ -163,8 +162,7 @@ parameters/idle_speed/scale = 1.0
 
 [node name="CharacterVisual" parent="." instance=ExtResource("2_yqw0q")]
 unique_name_in_owner = true
-transform = Transform3D(-0.0100704, 0, 0.999949, 0, 1, 0, -0.999949, 0, -0.0100704, 0, 0.884308, 0)
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5214, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
