@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://2v270ywaa1vg"]
+[gd_scene load_steps=26 format=3 uid="uid://2v270ywaa1vg"]
 
 [ext_resource type="Script" uid="uid://bfk1vk6iow70n" path="res://Entities/Heroes/AncientTree/ancient_tree.gd" id="1_61y0m"]
 [ext_resource type="Resource" uid="uid://qa70iekc67ac" path="res://Entities/Heroes/AncientTree/ancient_tree.tres" id="2_fsm3l"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://Modules/PickableClickable/PickableModule/pickable_module.tscn" id="11_tww0m"]
 [ext_resource type="PackedScene" uid="uid://c8630px7dwlvh" path="res://Modules/PickableClickable/Constraints/PickableCollider/pickable_collider.tscn" id="12_j737t"]
 [ext_resource type="PackedScene" uid="uid://dyyf8nhixlubs" path="res://Modules/PickableClickable/Constraints/SpawnAreaChecker/spawn_area_checker.tscn" id="13_l700e"]
+[ext_resource type="PackedScene" uid="uid://cpqtocfge7ott" path="res://Entities/Character/CharacterAnimator/character_animator.tscn" id="14_katp2"]
 [ext_resource type="PackedScene" uid="uid://dqrhym1sskng8" path="res://Entities/Turret/turret.tscn" id="19_i08v8"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="20_6rj4w"]
 [ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://Tool/QuickAnims/anim_rotating_module.tscn" id="21_50blj"]
@@ -52,6 +53,7 @@ input_3/reset = true
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_s6iox"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_su5oi"]
+graph_offset = Vector2(-669, -134)
 nodes/AnimDance/node = SubResource("AnimationNodeAnimation_61y0m")
 nodes/AnimDance/position = Vector2(-1080, -80)
 nodes/AnimDie/node = SubResource("AnimationNodeAnimation_katp2")
@@ -61,7 +63,7 @@ nodes/AnimIdle/position = Vector2(-1080, -260)
 nodes/AnimTPose/node = SubResource("AnimationNodeAnimation_nyedn")
 nodes/AnimTPose/position = Vector2(-920, 320)
 nodes/Transition/node = SubResource("AnimationNodeTransition_fsm3l")
-nodes/Transition/position = Vector2(-260, -120)
+nodes/Transition/position = Vector2(-240, -120)
 nodes/dance_speed/node = SubResource("AnimationNodeTimeScale_i08v8")
 nodes/dance_speed/position = Vector2(-820, -80)
 nodes/die_speed/node = SubResource("AnimationNodeTimeScale_hugel")
@@ -221,6 +223,10 @@ _spawn_area_checker = NodePath("../SpawnAreaChecker")
 [node name="PickableCollider" parent="." instance=ExtResource("12_j737t")]
 
 [node name="SpawnAreaChecker" parent="." instance=ExtResource("13_l700e")]
+
+[node name="CharacterAnimator" parent="." node_paths=PackedStringArray("_animation_tree", "_owner") instance=ExtResource("14_katp2")]
+_animation_tree = NodePath("../AnimationTree")
+_owner = NodePath("..")
 
 [editable path="AncientTreeModel"]
 [editable path="TurretCenterPoint/Turret"]

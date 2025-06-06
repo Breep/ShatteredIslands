@@ -117,13 +117,6 @@ func _handle_death() -> void:
 	dead.emit(self)
 	_is_dead = true
 
-
-func _look_at_target_y_only(target_position: Vector3):
-	var direction = target_position - global_transform.origin
-	direction.y = 0
-	if direction.length() > 0.1:
-		look_at(global_transform.origin + direction, Vector3.UP)
-
 # ============================== Family callbacks ==============================
 
 func _on_life_manager_revived(life_after_revived: int) -> void:
@@ -175,7 +168,7 @@ func _on_events_game_state_changed(new_state: Game.GameState) -> void:
 func _on_stats_health_changed(new_health: int) -> void:
 	if new_health <= 0:
 		print("DEBUG | ", name, " | DEAD")
-		dead.emit()
+		dead.emit(self)
 
 
 

@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://h726o6giwel8"]
+[gd_scene load_steps=20 format=3 uid="uid://h726o6giwel8"]
 
 [ext_resource type="Script" uid="uid://dqjjmiebmxpf4" path="res://Entities/Heroes/Rocky/rocky.gd" id="1_e8asp"]
 [ext_resource type="PackedScene" uid="uid://d080glq1m1puv" path="res://Entities/Heroes/Rocky/rocky_model.tscn" id="2_1t8nd"]
-[ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Entities/Character/CharacterVisual/character_visual.tscn" id="2_vxmuk"]
+[ext_resource type="PackedScene" uid="uid://cf4y1g6c4ia6w" path="res://Entities/Character/CharacterVisual/character_visual.tscn" id="2_vxmuk"]
 [ext_resource type="PackedScene" uid="uid://qgjyscmtp6t3" path="res://Entities/Character/CharacterLogic/character_logic.tscn" id="7_0ei4b"]
+[ext_resource type="PackedScene" uid="uid://cpqtocfge7ott" path="res://Entities/Character/CharacterAnimator/character_animator.tscn" id="8_40mtd"]
 [ext_resource type="PackedScene" uid="uid://dqrhym1sskng8" path="res://Entities/Turret/turret.tscn" id="16_abyaq"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="17_cd1gv"]
 [ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://Tool/QuickAnims/anim_rotating_module.tscn" id="18_lro7s"]
@@ -186,6 +187,10 @@ families_managers = {
 
 [node name="AutoAttackModule" parent="CharacterLogic/Modules" index="3" node_paths=PackedStringArray("projectile_spawn")]
 projectile_spawn = NodePath("../../../TurretCenterPoint/Turret/SpawnPoint")
+
+[node name="CharacterAnimator" parent="." node_paths=PackedStringArray("_animation_tree", "_owner") instance=ExtResource("8_40mtd")]
+_animation_tree = NodePath("../AnimationTree")
+_owner = NodePath("..")
 
 [editable path="RockyModel"]
 [editable path="TurretCenterPoint/Turret"]

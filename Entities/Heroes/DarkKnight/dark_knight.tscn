@@ -1,11 +1,12 @@
-[gd_scene load_steps=39 format=3 uid="uid://c48aqh8mlb7lc"]
+[gd_scene load_steps=40 format=3 uid="uid://c48aqh8mlb7lc"]
 
 [ext_resource type="Script" uid="uid://cusafkpxrg6we" path="res://Entities/Heroes/DarkKnight/dark_knight.gd" id="1_ufk4g"]
 [ext_resource type="Resource" uid="uid://by3bwbvf4ekcd" path="res://Entities/Heroes/DarkKnight/dark_knight.tres" id="2_5qtoa"]
-[ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Entities/Character/CharacterVisual/character_visual.tscn" id="2_8182s"]
+[ext_resource type="PackedScene" uid="uid://cf4y1g6c4ia6w" path="res://Entities/Character/CharacterVisual/character_visual.tscn" id="2_8182s"]
 [ext_resource type="PackedScene" uid="uid://dsdxbwk2i351e" path="res://Entities/Heroes/DarkKnight/dark_knight_model.tscn" id="2_ds2a6"]
 [ext_resource type="AnimationLibrary" uid="uid://bmijhrm7py8vg" path="res://Data/Anim/lib_rig_no_mixamo.res" id="3_ds2a6"]
 [ext_resource type="PackedScene" uid="uid://qgjyscmtp6t3" path="res://Entities/Character/CharacterLogic/character_logic.tscn" id="9_7iff5"]
+[ext_resource type="PackedScene" uid="uid://cpqtocfge7ott" path="res://Entities/Character/CharacterAnimator/character_animator.tscn" id="10_3dwlx"]
 [ext_resource type="PackedScene" uid="uid://dqrhym1sskng8" path="res://Entities/Turret/turret.tscn" id="18_bo24q"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="19_thqxc"]
 [ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://Tool/QuickAnims/anim_rotating_module.tscn" id="20_x3tde"]
@@ -6794,7 +6795,7 @@ bones/54/rotation = Quaternion(-0.0160358, 0.451756, -0.891745, 0.0212091)
 bones/55/rotation = Quaternion(0, 1, 0, 0)
 
 [node name="BoneAttachment3D" parent="DarkKnightModel/Armature/GeneralSkeleton" index="1"]
-transform = Transform3D(-0.157519, -0.980147, -0.120411, 0.512355, 0.0231214, -0.858463, 0.844204, -0.196917, 0.498541, -0.886177, 0.302139, 0.292602)
+transform = Transform3D(-0.157519, -0.980147, -0.120411, 0.512355, 0.0231212, -0.858462, 0.844204, -0.196917, 0.498542, -0.886177, 0.302139, 0.292601)
 
 [node name="AnimationPlayer" parent="DarkKnightModel" index="1"]
 libraries = {
@@ -6865,6 +6866,10 @@ families_managers = {
 
 [node name="AutoAttackModule" parent="CharacterLogic/Modules" index="3" node_paths=PackedStringArray("projectile_spawn")]
 projectile_spawn = NodePath("../../../TurretCenterPoint/Turret/SpawnPoint")
+
+[node name="CharacterAnimator" parent="." node_paths=PackedStringArray("_animation_tree", "_owner") instance=ExtResource("10_3dwlx")]
+_animation_tree = NodePath("../AnimationTree")
+_owner = NodePath("..")
 
 [editable path="DarkKnightModel"]
 [editable path="TurretCenterPoint/Turret"]
