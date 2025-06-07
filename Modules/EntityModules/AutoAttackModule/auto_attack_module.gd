@@ -46,6 +46,11 @@ var current_target: Entity:
 
 @onready var _auto_attack_timer: Timer = %AutoAttackTimer
 
+# ============================== Node base function ==============================
+
+func _ready() -> void:
+	_owner.dead.connect(_on_owner_dead)
+
 # ============================== Public functions ==============================
 
 func start() -> void:
@@ -107,6 +112,9 @@ func _on_auto_attack_timer_timeout() -> void:
 func _on_source_stats_attack_speed_changed(new_attack_speed: float) -> void:
 	attack_speed = new_attack_speed
 
+
+func _on_owner_dead(_unused) -> void:
+	stop()
 
 
 

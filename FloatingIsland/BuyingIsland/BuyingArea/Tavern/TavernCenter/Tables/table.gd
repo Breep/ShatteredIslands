@@ -13,12 +13,19 @@ extends Node3D
 @export var battle_type: Battle.BattleType
 @export var battle_id: int
 
+# ============================== Private variables ==============================
+
+var _coin_piles_dictionary: Dictionary[SpawnPoint, CoinPile]
+
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	if _hero_spawns.size() != _coin_piles.size(): # or _card_fans.size() != _hero_spawns.size():
+	if _hero_spawns.size() != _coin_piles.size():
 		printerr("Table: There are not the same amount of CoinPile/HereSpawn")
 		return
+	
+	for i in _hero_spawns.size():
+		_coin_piles_dictionary[_hero_spawns[i]] = _coin_piles[i]
 
 # ============================== Public functions ==============================
 
@@ -41,8 +48,7 @@ func _spawn_player_character(player: Player, avaible_spawns: Array[SpawnPoint]) 
 			character.global_rotation = spawn_point.global_rotation
 			character.global_position = spawn_point.global_position
 			avaible_spawns.erase(spawn_point)
-			return
-			#_coin_piles[i].connect_to_player(players[i])
+			_coin_piles_dictionary[spawn_point].connect_to_player(player)
 
 
 @rpc("authority", "call_local")
