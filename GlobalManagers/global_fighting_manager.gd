@@ -135,7 +135,7 @@ func _on_state_changed(new_state) -> void:
 			print("GlobalFightingManager: Starting the finished phase (dance)")
 
 
-func _fighting_manager_fighting_is_over(fighting_manager: FightingManager, _winning_team) -> void:
+func _fighting_manager_fighting_is_over(fighting_manager: FightingManager, _winner_teams_order: Array[int]) -> void:
 	print("GlobalFightingManager: A FIGHT IS OVER")
 	if not _current_active_fighting_managers.has(fighting_manager):
 		printerr("GlobalFightingManager: An unexpected FightingArea signal a fight is over [", fighting_manager.get_path(), "]")

@@ -1,6 +1,11 @@
 class_name Character
 extends Entity
 
+# ============================== Signal ==============================
+
+signal fight_is_won()
+signal fight_is_lost()
+
 # ============================== Export variables (Network) ==============================
 
 @export var owner_player_id: int # ID of the player owner of this character
@@ -166,6 +171,7 @@ func _on_events_game_state_changed(new_state: Game.GameState) -> void:
 
 
 func _on_stats_health_changed(new_health: int) -> void:
+	if _character_visual != null: _character_visual.update_health_bar(new_health, stats.health_max)
 	if new_health <= 0:
 		print("DEBUG | ", name, " | DEAD")
 		dead.emit(self)

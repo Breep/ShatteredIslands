@@ -12,9 +12,9 @@
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 0
-properties/1/path = NodePath(".:battle_id")
+properties/1/path = NodePath(".:_current_battle_id")
 properties/1/spawn = true
-properties/1/replication_mode = 0
+properties/1/replication_mode = 2
 
 [node name="FightingArea" type="Node3D" node_paths=PackedStringArray("_fighting_manager", "_entity_manager", "_ui_fighting_area", "_fighting_floors")]
 script = ExtResource("1_t74of")

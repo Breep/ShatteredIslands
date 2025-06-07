@@ -107,10 +107,23 @@ func _get_winner_teams_order() -> Array[int]:
 
 
 func _stop_fighting_manager() -> void:
+	print("[DEBUG] Stop FightingManager [", battle_id, "] - ", _get_winner_teams_order().size())
 	_is_active = false
 	_disconnect_from_characters_signals()
 	var winner_teams_order: Array[int] = _get_winner_teams_order()
+	for member in _characters_dictionary[winner_teams_order[winner_teams_order.size() - 1]]:
+		var character: Character = member
+		character.fight_is_won.emit()
 	fight_is_over.emit(self, winner_teams_order)
+	_cleanup()
+
+
+func _cleanup() -> void:
+	battle_id = -1
+	_is_active = false
+	_characters_dictionary.clear()
+	_alive_characters_dictionary.clear()
+	_lowest_hp_teams_order.clear()
 
 # ============================== Callbacks ==============================
 

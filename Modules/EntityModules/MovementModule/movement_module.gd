@@ -5,12 +5,6 @@ var _target_position: Vector3
 var _is_moving: bool = false
 var _is_stopped: bool = false
 
-func init() -> void:
-	Events.map_clicked.connect(_on_events_map_clicked)
-	#if not source.player.is_bot:
-		#Events.map_clicked.connect(_on_events_map_clicked)
-
-
 func start() -> void:
 	_is_stopped = false
 
@@ -52,13 +46,3 @@ func _move_toward_target(delta: float):
 func _get_move_speed() -> float:
 	var move_speed: float = _owner.stats.move_speed
 	return move_speed
-
-
-func _on_events_map_clicked(battle_id: int, clicked_position: Vector3) -> void:
-	if not battle_id == _owner.battle_id:
-		return
-	
-	clicked_position.y = 0
-	print("SHOULD MOVE to ", clicked_position, "/", _owner.global_position)
-	_target_position = clicked_position
-	_is_moving = true

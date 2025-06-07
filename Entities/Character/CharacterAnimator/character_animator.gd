@@ -9,6 +9,7 @@ var _is_fighting: bool = false
 func _ready() -> void:
 	GlobalFightingManager.state_changed.connect(_on_global_fighting_manager_state_changed)
 	_owner.dead.connect(_on_owner_dead)
+	_owner.fight_is_won.connect(_on_owner_fight_is_won)
 	Events.game_state_changed.connect(_on_events_game_stated_changed)
 
 
@@ -27,9 +28,9 @@ func _on_global_fighting_manager_state_changed(new_state: GlobalFightingManager.
 		GlobalFightingManager.FightingState.FIGHT:
 			return
 		GlobalFightingManager.FightingState.FIGHT_ACCELERATED:
-			pass
+			return
 		GlobalFightingManager.FightingState.FINISHED:
-			_animation_tree.set("parameters/Transition/transition_request", "Dance")
+			return
 
 
 func _on_owner_dead(_self_ref: Entity) -> void:
@@ -40,3 +41,8 @@ func _on_events_game_stated_changed(new_state: Game.GameState) -> void:
 	match new_state:
 		Game.GameState.BUYING:
 			_animation_tree.set("parameters/Transition/transition_request", "Idle")
+
+
+func _on_owner_fight_is_won() -> void:
+	print("[DEBUG] ", _owner.name, " won a fight and should DANCE")
+	_animation_tree.set("parameters/Transition/transition_request", "Dance")

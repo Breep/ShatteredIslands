@@ -90,7 +90,7 @@ func _start_fighting_phase(battles: Array[Battle]) -> void:
 		for player in battles[i].players:
 			player.character.battle_id = battles[i].id
 			characters.append(player.character)
-		fighting_islands_choosen[i].start_fight(characters, battles[i].battle_type)
+		fighting_islands_choosen[i].start_fight(characters, battles[i].battle_type, battles[i].id)
 	# Start fight on each island
 	GlobalFightingManager.start()
 
