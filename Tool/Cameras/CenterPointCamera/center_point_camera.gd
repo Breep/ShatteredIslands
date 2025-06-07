@@ -9,7 +9,7 @@ extends Node3D
 # ============================== Configuration ==============================
 
 @export var _rotation_sensitivity: float = 0.3
-@export var _zoom_sensitivity: float = 0.5
+@export var _zoom_sensitivity: float = 1.0
 
 @export var _zoom_min: float = 10.0
 @export var _zoom_start: float = 20.0

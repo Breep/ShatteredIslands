@@ -1,6 +1,11 @@
 class_name Character
 extends Entity
 
+# ============================== Signal ==============================
+
+signal fight_is_won()
+signal fight_is_lost()
+
 # ============================== Export variables (Network) ==============================
 
 @export var owner_player_id: int # ID of the player owner of this character
@@ -57,6 +62,18 @@ func connect_to_fighting_area(fighting_area: FightingArea) -> void:
 	_character_logic.connect_to_fighting_area(fighting_area)
 	fighting_area.fighting_manager.fight_is_over.connect(_on_fighting_manager_fight_is_over, CONNECT_ONE_SHOT)
 
+
+func set_lookat_camera(camera: Camera3D) -> void:
+	_character_visual.set_camera(camera)
+
+
+func on_active_island() -> void:
+	_character_visual.show()
+
+
+func on_inactive_island() -> void:
+	_character_visual.hide()
+
 # ============================== Node base functions ==============================
 
 func _init() -> void:
@@ -104,13 +121,6 @@ func _reset() -> void:
 func _handle_death() -> void:
 	dead.emit(self)
 	_is_dead = true
-
-
-func _look_at_target_y_only(target_position: Vector3):
-	var direction = target_position - global_transform.origin
-	direction.y = 0
-	if direction.length() > 0.1:
-		look_at(global_transform.origin + direction, Vector3.UP)
 
 # ============================== Family callbacks ==============================
 
@@ -161,9 +171,10 @@ func _on_events_game_state_changed(new_state: Game.GameState) -> void:
 
 
 func _on_stats_health_changed(new_health: int) -> void:
+	if _character_visual != null: _character_visual.update_health_bar(new_health, stats.health_max)
 	if new_health <= 0:
 		print("DEBUG | ", name, " | DEAD")
-		dead.emit()
+		dead.emit(self)
 
 
 

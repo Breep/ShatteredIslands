@@ -64,6 +64,7 @@ func get_current_round_battles() -> Array[Battle]:
 
 func register_battle_result(battle_id: int, winner_teams_order: Array[int]) -> void:
 	print("[", multiplayer.get_unique_id(), "] register_battle_result()")
+	if battles.is_empty(): return
 	var battle_result := BattleResult.new()
 	battle_result.battle_id = battle_id
 	battle_result.battle_type = battles[battle_id].battle_type

@@ -1,19 +1,28 @@
 class_name CharacterVisual
 extends Node3D
 
-# ============================== TMP TODO improve this crapy code TMP ==============================
-
-@export var physical_popup_spawn: Node3D
-@export var magic_popup_spawn: Node3D
-@export var poison_popup_spawn: Node3D
-@export var heal_popup_spawn: Node3D
-
 # ============================== Local scene nodes ==============================
+
+@export var physical_popup_spawn: SpawnPoint
+@export var magic_popup_spawn: SpawnPoint
+@export var poison_popup_spawn: SpawnPoint
+@export var heal_popup_spawn: SpawnPoint
 
 @onready var _health_bar: ProgressBar = %HealthBar
 @onready var _mana_bar: ProgressBar = %ManaBar
-@onready var _energy_bar: ProgressBar = %EnergyBar
 @onready var _name_displayed: Label = %NameDisplayed
+
+var _camera: Camera3D # If defined, the visual will look at it
+
+# ============================== Node base functions ==============================
+
+func _process(delta: float) -> void:
+	if _camera != null:
+		look_at(_camera.global_position)
+
+
+func set_camera(camera: Camera3D) -> void:
+	_camera = camera
 
 # ============================== Public ==============================
 
@@ -29,11 +38,6 @@ func update_health_bar(health: int, health_max: int) -> void:
 func update_mana_bar(mana: float, mana_max: float) -> void:
 	_mana_bar.max_value = mana_max
 	_mana_bar.value = mana
-
-
-func update_energy_bar(energy: float, energy_max: float) -> void:
-	_energy_bar.max_value = energy_max * 100.0
-	_energy_bar.value = energy * 100.0
 
 
 func update_name_displayed(player_name: String) -> void:

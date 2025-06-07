@@ -1,10 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://d3tlk3rg4dhpk"]
+[gd_scene load_steps=21 format=3 uid="uid://d3tlk3rg4dhpk"]
 
 [ext_resource type="Script" uid="uid://juprec5foa1l" path="res://Entities/Heroes/SirReginald/sir_reginald.gd" id="1_bmlym"]
 [ext_resource type="PackedScene" uid="uid://bmtp8uvuepsu5" path="res://Entities/Heroes/SirReginald/sir_reginald_model.tscn" id="2_dpdl0"]
-[ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Entities/Character/CharacterVisual/character_visual.tscn" id="2_m5fhr"]
+[ext_resource type="PackedScene" uid="uid://cf4y1g6c4ia6w" path="res://Entities/Character/CharacterVisual/character_visual.tscn" id="2_m5fhr"]
 [ext_resource type="Resource" uid="uid://bqjyvw4bxcnt7" path="res://Entities/Heroes/SirReginald/sir_reginald.tres" id="2_sms4n"]
 [ext_resource type="PackedScene" uid="uid://qgjyscmtp6t3" path="res://Entities/Character/CharacterLogic/character_logic.tscn" id="8_qnymp"]
+[ext_resource type="PackedScene" uid="uid://cpqtocfge7ott" path="res://Entities/Character/CharacterAnimator/character_animator.tscn" id="9_75e2x"]
 [ext_resource type="PackedScene" uid="uid://dqrhym1sskng8" path="res://Entities/Turret/turret.tscn" id="17_prs0y"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="18_ul7oy"]
 [ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://Tool/QuickAnims/anim_rotating_module.tscn" id="19_txr2m"]
@@ -141,6 +142,7 @@ parameters/idle_speed/scale = 1.0
 
 [node name="CharacterVisual" parent="." instance=ExtResource("2_m5fhr")]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.59555, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -190,6 +192,10 @@ families_managers = {
 
 [node name="AutoAttackModule" parent="CharacterLogic/Modules" index="3" node_paths=PackedStringArray("projectile_spawn")]
 projectile_spawn = NodePath("../../../TurretCenterPoint/Turret/SpawnPoint")
+
+[node name="CharacterAnimator" parent="." node_paths=PackedStringArray("_animation_tree", "_owner") instance=ExtResource("9_75e2x")]
+_animation_tree = NodePath("../AnimationTree")
+_owner = NodePath("..")
 
 [editable path="SirReginaldModel"]
 [editable path="TurretCenterPoint/Turret"]

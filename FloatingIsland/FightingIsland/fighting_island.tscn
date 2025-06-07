@@ -16,9 +16,10 @@ properties/2/path = NodePath(".:rotation")
 properties/2/spawn = true
 properties/2/replication_mode = 0
 
-[node name="FightingIsland" type="Node3D" node_paths=PackedStringArray("_fighting_area", "_center_point_camera")]
+[node name="FightingIsland" type="Node3D" node_paths=PackedStringArray("_fighting_area", "_camera", "_center_point_camera")]
 script = ExtResource("1_hqxtb")
 _fighting_area = NodePath("FightingArea")
+_camera = NodePath("CenterPointCamera/CenterPoint/Camera3D")
 _center_point_camera = NodePath("CenterPointCamera")
 
 [node name="FightingArea" parent="." node_paths=PackedStringArray("_fighting_floors") instance=ExtResource("2_0nkjk")]
@@ -35,3 +36,5 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_622jh")
+
+[editable path="CenterPointCamera"]

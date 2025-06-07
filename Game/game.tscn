@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://oimyi4iueoda"]
+[gd_scene load_steps=14 format=3 uid="uid://oimyi4iueoda"]
 
 [ext_resource type="Script" uid="uid://blljr68c4u466" path="res://Game/game.gd" id="1_7r6pw"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Tool/SpawnPoint/spawn_point.tscn" id="3_i1e5p"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://drcuyohos0doa" path="res://FloatingIsland/FightingIsland/fighting_island.tscn" id="5_vifcx"]
 [ext_resource type="PackedScene" uid="uid://7u3ksm0e4v61" path="res://FloatingIsland/BuyingIsland/buying_island.tscn" id="6_flgk0"]
 [ext_resource type="PackedScene" uid="uid://cbd5jq0bp7fef" path="res://Game/HeroSelector/HeroSelector.tscn" id="8_xfil1"]
+[ext_resource type="PackedScene" uid="uid://dv3kwc5eeyuk2" path="res://UI/Game/ui_game.tscn" id="9_kul4i"]
+[ext_resource type="PackedScene" uid="uid://b7ix6abnaxeay" path="res://FloatingIsland/_Maps/turtle_tavern.tscn" id="10_7gi1t"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_flgk0"]
 panorama = ExtResource("5_ciybh")
@@ -23,7 +25,7 @@ sky = SubResource("Sky_ciybh")
 tonemap_mode = 3
 glow_enabled = true
 
-[node name="Game" type="Node3D" node_paths=PackedStringArray("_buying_island", "_scene_switcher", "_hero_selector", "_node_fighting_islands", "_node_characters", "_islands_spawn_points")]
+[node name="Game" type="Node3D" node_paths=PackedStringArray("_buying_island", "_scene_switcher", "_hero_selector", "_node_fighting_islands", "_node_characters", "_islands_spawn_points", "_ui_game")]
 script = ExtResource("1_7r6pw")
 _buying_island = NodePath("BuyingIsland")
 _scene_switcher = NodePath("SceneSwitcher")
@@ -31,6 +33,7 @@ _hero_selector = NodePath("HeroSelector")
 _node_fighting_islands = NodePath("FightingIslands")
 _node_characters = NodePath("Characters")
 _islands_spawn_points = [NodePath("IslandSpawns/CenterPoint1/SpawnPoint1"), NodePath("IslandSpawns/CenterPoint2/SpawnPoint2"), NodePath("IslandSpawns/CenterPoint3/SpawnPoint3"), NodePath("IslandSpawns/CenterPoint4/SpawnPoint4"), NodePath("IslandSpawns/CenterPoint5/SpawnPoint5"), NodePath("IslandSpawns/CenterPoint6/SpawnPoint6"), NodePath("IslandSpawns/CenterPoint7/SpawnPoint7"), NodePath("IslandSpawns/CenterPoint8/SpawnPoint8")]
+_ui_game = NodePath("UI/UIGame")
 
 [node name="BuyingIsland" parent="." instance=ExtResource("6_flgk0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 56.0279, 0)
@@ -41,7 +44,7 @@ unique_name_in_owner = true
 [node name="CenterPoint1" type="Node3D" parent="IslandSpawns"]
 
 [node name="SpawnPoint1" parent="IslandSpawns/CenterPoint1" instance=ExtResource("3_i1e5p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100, 0, 0)
 
 [node name="FightingIsland" parent="IslandSpawns/CenterPoint1/SpawnPoint1" instance=ExtResource("5_vifcx")]
 
@@ -49,7 +52,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 0)
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0)
 
 [node name="SpawnPoint2" parent="IslandSpawns/CenterPoint2" instance=ExtResource("3_i1e5p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 20, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100, 20, 0)
 
 [node name="FightingIsland" parent="IslandSpawns/CenterPoint2/SpawnPoint2" instance=ExtResource("5_vifcx")]
 
@@ -57,7 +60,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 20, 0)
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="SpawnPoint3" parent="IslandSpawns/CenterPoint3" instance=ExtResource("3_i1e5p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100, 0, 0)
 
 [node name="FightingIsland" parent="IslandSpawns/CenterPoint3/SpawnPoint3" instance=ExtResource("5_vifcx")]
 
@@ -65,7 +68,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 0)
 transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 0, 0, 0)
 
 [node name="SpawnPoint4" parent="IslandSpawns/CenterPoint4" instance=ExtResource("3_i1e5p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, -20, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100, -20, 0)
 
 [node name="FightingIsland" parent="IslandSpawns/CenterPoint4/SpawnPoint4" instance=ExtResource("5_vifcx")]
 
@@ -73,7 +76,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, -20, 0)
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="SpawnPoint5" parent="IslandSpawns/CenterPoint5" instance=ExtResource("3_i1e5p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100, 0, 0)
 
 [node name="FightingIsland" parent="IslandSpawns/CenterPoint5/SpawnPoint5" instance=ExtResource("5_vifcx")]
 
@@ -81,7 +84,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 0)
 transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 0, 0, 0)
 
 [node name="SpawnPoint6" parent="IslandSpawns/CenterPoint6" instance=ExtResource("3_i1e5p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 20, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100, 20, 0)
 
 [node name="FightingIsland" parent="IslandSpawns/CenterPoint6/SpawnPoint6" instance=ExtResource("5_vifcx")]
 
@@ -89,7 +92,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 20, 0)
 transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0)
 
 [node name="SpawnPoint7" parent="IslandSpawns/CenterPoint7" instance=ExtResource("3_i1e5p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100, 0, 0)
 
 [node name="FightingIsland" parent="IslandSpawns/CenterPoint7/SpawnPoint7" instance=ExtResource("5_vifcx")]
 
@@ -97,7 +100,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 0)
 transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0, 0)
 
 [node name="SpawnPoint8" parent="IslandSpawns/CenterPoint8" instance=ExtResource("3_i1e5p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, -20, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100, -20, 0)
 
 [node name="FightingIsland" parent="IslandSpawns/CenterPoint8/SpawnPoint8" instance=ExtResource("5_vifcx")]
 
@@ -129,3 +132,17 @@ buying_island = NodePath("../BuyingIsland")
 fighting_islands = [NodePath("../IslandSpawns/CenterPoint1/SpawnPoint1/FightingIsland"), NodePath("../IslandSpawns/CenterPoint2/SpawnPoint2/FightingIsland"), NodePath("../IslandSpawns/CenterPoint3/SpawnPoint3/FightingIsland"), NodePath("../IslandSpawns/CenterPoint4/SpawnPoint4/FightingIsland"), NodePath("../IslandSpawns/CenterPoint5/SpawnPoint5/FightingIsland"), NodePath("../IslandSpawns/CenterPoint6/SpawnPoint6/FightingIsland"), NodePath("../IslandSpawns/CenterPoint7/SpawnPoint7/FightingIsland"), NodePath("../IslandSpawns/CenterPoint8/SpawnPoint8/FightingIsland")]
 
 [node name="HeroSelector" parent="." instance=ExtResource("8_xfil1")]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UIGame" parent="UI" instance=ExtResource("9_kul4i")]
+layout_mode = 1
+
+[node name="turtle2" parent="." instance=ExtResource("10_7gi1t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.3404, 0, -0.250733)

@@ -1,17 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://br1wrpaxa7qjk"]
+[gd_scene load_steps=10 format=3 uid="uid://cf4y1g6c4ia6w"]
 
 [ext_resource type="Script" uid="uid://c03q2h4ty3455" path="res://Entities/Character/CharacterVisual/character_visual.gd" id="1_8fkrf"]
 [ext_resource type="Theme" uid="uid://duu3l81c6tmkh" path="res://UI/_Themes/Labels/popup_damage_normal.tres" id="2_hmo4h"]
+[ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Tool/SpawnPoint/spawn_point.tscn" id="5_xieti"]
 [ext_resource type="Theme" uid="uid://uriahirynhrm" path="res://UI/_Themes/TMP_Themes/health_bar.tres" id="18_qehcj"]
 [ext_resource type="Theme" uid="uid://bxg2e5lw04pol" path="res://UI/_Themes/TMP_Themes/mana_bar.tres" id="19_3u6jw"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mj886"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3hqhs"]
-bg_color = Color(0.833054, 0.748808, 0.429592, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jo15d"]
-bg_color = Color(0.537427, 0.472393, 0.216299, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_75adc"]
 resource_local_to_scene = true
@@ -28,13 +23,12 @@ albedo_texture = SubResource("ViewportTexture_2bgvd")
 
 [node name="CharacterVisual" type="Node3D" node_paths=PackedStringArray("physical_popup_spawn", "magic_popup_spawn", "poison_popup_spawn", "heal_popup_spawn")]
 script = ExtResource("1_8fkrf")
-physical_popup_spawn = NodePath("PopUpSpawns/PhysicalDamage")
-magic_popup_spawn = NodePath("PopUpSpawns/MagicDamage")
-poison_popup_spawn = NodePath("PopUpSpawns/PoisonDamage")
-heal_popup_spawn = NodePath("PopUpSpawns/Heal")
+physical_popup_spawn = NodePath("PopUpSpawns/PhysicalDamageCenter")
+magic_popup_spawn = NodePath("PopUpSpawns/MagicDamageCenter")
+poison_popup_spawn = NodePath("PopUpSpawns/PoisonDamageCenter")
+heal_popup_spawn = NodePath("PopUpSpawns/HealCenter")
 
 [node name="TopUI" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.09903, 0)
 
 [node name="SubViewport" type="SubViewport" parent="TopUI"]
 transparent_bg = true
@@ -95,35 +89,52 @@ step = 1.0
 value = 20.0
 show_percentage = false
 
-[node name="EnergyBar" type="ProgressBar" parent="TopUI/SubViewport/Control/Panel/VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-size_flags_vertical = 2
-theme = ExtResource("18_qehcj")
-theme_override_styles/background = SubResource("StyleBoxFlat_3hqhs")
-theme_override_styles/fill = SubResource("StyleBoxFlat_jo15d")
-step = 1.0
-value = 20.0
-show_percentage = false
-
 [node name="TopUI3DPanel" type="MeshInstance3D" parent="."]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 2.73842, 0)
+transform = Transform3D(-3, 0, -2.62268e-07, 0, 3, 0, 2.62268e-07, 0, -3, 0, 0, 0)
 layers = 4
 mesh = SubResource("QuadMesh_75adc")
 skeleton = NodePath("../TopUI")
 surface_material_override/0 = SubResource("StandardMaterial3D_p3mll")
 
 [node name="PopUpSpawns" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -1.19196, 0)
 
-[node name="PhysicalDamage" type="Node3D" parent="PopUpSpawns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 3, 0)
+[node name="PhysicalDamageCenter" type="Node3D" parent="PopUpSpawns"]
 
-[node name="PoisonDamage" type="Node3D" parent="PopUpSpawns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, 0)
+[node name="SpawnPoint" parent="PopUpSpawns/PhysicalDamageCenter" instance=ExtResource("5_xieti")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
 
-[node name="MagicDamage" type="Node3D" parent="PopUpSpawns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2, 2, 0)
+[node name="VisualToBeDestroyed" parent="PopUpSpawns/PhysicalDamageCenter/SpawnPoint" index="0"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 
-[node name="Heal" type="Node3D" parent="PopUpSpawns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2, 2, 0)
+[node name="PoisonDamageCenter" type="Node3D" parent="PopUpSpawns"]
+transform = Transform3D(0.5, -0.866025, 0, 0.866025, 0.5, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="SpawnPoint2" parent="PopUpSpawns/PoisonDamageCenter" instance=ExtResource("5_xieti")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+
+[node name="VisualToBeDestroyed" parent="PopUpSpawns/PoisonDamageCenter/SpawnPoint2" index="0"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+
+[node name="MagicDamageCenter" type="Node3D" parent="PopUpSpawns"]
+transform = Transform3D(-0.5, -0.866025, 0, 0.866025, -0.5, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="SpawnPoint3" parent="PopUpSpawns/MagicDamageCenter" instance=ExtResource("5_xieti")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+
+[node name="VisualToBeDestroyed" parent="PopUpSpawns/MagicDamageCenter/SpawnPoint3" index="0"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+
+[node name="HealCenter" type="Node3D" parent="PopUpSpawns"]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="SpawnPoint4" parent="PopUpSpawns/HealCenter" instance=ExtResource("5_xieti")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+
+[node name="VisualToBeDestroyed" parent="PopUpSpawns/HealCenter/SpawnPoint4" index="0"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+
+[editable path="PopUpSpawns/PhysicalDamageCenter/SpawnPoint"]
+[editable path="PopUpSpawns/PoisonDamageCenter/SpawnPoint2"]
+[editable path="PopUpSpawns/MagicDamageCenter/SpawnPoint3"]
+[editable path="PopUpSpawns/HealCenter/SpawnPoint4"]

@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://dq1pqesv0lptu"]
+[gd_scene load_steps=21 format=3 uid="uid://dq1pqesv0lptu"]
 
 [ext_resource type="Script" uid="uid://b8w7wec46hqv3" path="res://Entities/Heroes/DrBoom/dr_boom.gd" id="1_2scy2"]
 [ext_resource type="Resource" uid="uid://5ww2u1ldoabr" path="res://Entities/Heroes/DrBoom/dr_boom.tres" id="2_1vhg0"]
-[ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Entities/Character/CharacterVisual/character_visual.tscn" id="2_38dqm"]
+[ext_resource type="PackedScene" uid="uid://cf4y1g6c4ia6w" path="res://Entities/Character/CharacterVisual/character_visual.tscn" id="2_38dqm"]
 [ext_resource type="PackedScene" uid="uid://qgjyscmtp6t3" path="res://Entities/Character/CharacterLogic/character_logic.tscn" id="8_dvcma"]
+[ext_resource type="PackedScene" uid="uid://cpqtocfge7ott" path="res://Entities/Character/CharacterAnimator/character_animator.tscn" id="9_0qum4"]
 [ext_resource type="PackedScene" uid="uid://cmojifbx1glt4" path="res://Entities/Heroes/DrBoom/dr_boom_model.tscn" id="16_1vhg0"]
 [ext_resource type="PackedScene" uid="uid://dqrhym1sskng8" path="res://Entities/Turret/turret.tscn" id="17_modjl"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="18_l7rtq"]
@@ -47,7 +48,7 @@ input_3/reset = true
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_23ah5"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_0qum4"]
-graph_offset = Vector2(-594.293, -158.775)
+graph_offset = Vector2(-594.293, 0)
 nodes/AnimDance/node = SubResource("AnimationNodeAnimation_4kv3i")
 nodes/AnimDance/position = Vector2(-600, 40)
 nodes/AnimDie/node = SubResource("AnimationNodeAnimation_0qum4")
@@ -144,6 +145,7 @@ parameters/idle_speed/scale = 1.0
 
 [node name="CharacterVisual" parent="." instance=ExtResource("2_38dqm")]
 unique_name_in_owner = true
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 2.23741, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.68974, 0)
@@ -193,6 +195,10 @@ families_managers = {
 
 [node name="AutoAttackModule" parent="CharacterLogic/Modules" index="3" node_paths=PackedStringArray("projectile_spawn")]
 projectile_spawn = NodePath("../../../TurretCenterPoint/Turret/SpawnPoint")
+
+[node name="CharacterAnimator" parent="." node_paths=PackedStringArray("_animation_tree", "_owner") instance=ExtResource("9_0qum4")]
+_animation_tree = NodePath("../AnimationTree")
+_owner = NodePath("..")
 
 [editable path="Drboom"]
 [editable path="TurretCenterPoint/Turret"]

@@ -3,11 +3,11 @@
 [ext_resource type="Script" uid="uid://bu48b2v401db2" path="res://Prototyping/FightingIsland/prototyping_map.gd" id="1_66i2r"]
 [ext_resource type="PackedScene" uid="uid://2v270ywaa1vg" path="res://Entities/Heroes/AncientTree/ancient_tree.tscn" id="2_jb5pd"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="2_ovips"]
-[ext_resource type="PackedScene" uid="uid://g706yyhstscc" path="res://Entities/Heroes/Cyborg/cyborg.tscn" id="3_4p440"]
 [ext_resource type="Resource" uid="uid://dvpdubk0btegx" path="res://Card/Descriptions/Cards/Poison/poison_periodica_agaricus.tres" id="3_ovips"]
 [ext_resource type="Texture2D" uid="uid://dodc5quv2uysn" path="res://Data/Misc/skybox.jpg" id="7_xd7nd"]
 [ext_resource type="PackedScene" uid="uid://drcuyohos0doa" path="res://FloatingIsland/FightingIsland/fighting_island.tscn" id="7_yjquk"]
 [ext_resource type="PackedScene" uid="uid://bg5efhnq0erdv" path="res://Modules/PickableClickable/ClickableModule/clickable_module.tscn" id="8_ovips"]
+[ext_resource type="PackedScene" uid="uid://c48aqh8mlb7lc" path="res://Entities/Heroes/DarkKnight/dark_knight.tscn" id="9_7w4nr"]
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://Modules/PickableClickable/PickableModule/pickable_module.tscn" id="9_08xy3"]
 [ext_resource type="PackedScene" uid="uid://c8630px7dwlvh" path="res://Modules/PickableClickable/Constraints/PickableCollider/pickable_collider.tscn" id="9_k73x5"]
 
@@ -43,21 +43,7 @@ _battle_id = 1
 _floating_island = NodePath("FightingIsland")
 _player1_cards = Array[ExtResource("2_ovips")]([ExtResource("3_ovips")])
 _character1 = NodePath("AncientTree")
-_character2 = NodePath("Cyborg")
-
-[node name="AncientTree" parent="." instance=ExtResource("2_jb5pd")]
-transform = Transform3D(0.964391, 0, 0.264479, 0, 1, 0, -0.264479, 0, 0.964391, 1.6476, 0, 8.97634)
-_is_prototype = true
-id = 1
-team = 1
-battle_id = 1
-
-[node name="Cyborg" parent="." instance=ExtResource("3_4p440")]
-transform = Transform3D(-0.999428, 0, 0.0338182, 0, 1, 0, -0.0338182, 0, -0.999428, 2.28313, 0, 6.83022)
-_is_prototype = true
-id = 2
-team = 2
-battle_id = 1
+_character2 = NodePath("DarkKnight")
 
 [node name="FightingIsland" parent="." instance=ExtResource("7_yjquk")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
@@ -73,7 +59,7 @@ _fighting_floors = {
 environment = SubResource("Environment_k73x5")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.320018, 0.689149, -0.650125, 0, 0.686212, 0.727402, 0.947412, -0.232781, 0.2196, 0, 52.8971, 0)
+transform = Transform3D(0.88089, 0.0799744, 0.466517, -0.360914, 0.751164, 0.552716, -0.306227, -0.655254, 0.690556, 0, 52.8971, 0)
 shadow_enabled = true
 
 [node name="ClickableBodyA" type="StaticBody3D" parent="."]
@@ -120,8 +106,7 @@ mesh = SubResource("BoxMesh_foia4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_sakdd")
 
-[node name="PickableModule" parent="PickableBodyA" node_paths=PackedStringArray("_nodes_where_to_find_meshs", "_owner", "_pickable_collider") instance=ExtResource("9_08xy3")]
-_nodes_where_to_find_meshs = [NodePath("../MeshInstance3D")]
+[node name="PickableModule" parent="PickableBodyA" node_paths=PackedStringArray("_owner", "_pickable_collider") instance=ExtResource("9_08xy3")]
 _owner = NodePath("..")
 _pickable_collider = NodePath("../PickableCollider")
 _debug = true
@@ -140,9 +125,18 @@ mesh = SubResource("BoxMesh_foia4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_sakdd")
 
-[node name="PickableModule" parent="PickableBodyB" node_paths=PackedStringArray("_nodes_where_to_find_meshs", "_owner") instance=ExtResource("9_08xy3")]
-_nodes_where_to_find_meshs = [NodePath("../MeshInstance3D")]
+[node name="PickableModule" parent="PickableBodyB" node_paths=PackedStringArray("_owner") instance=ExtResource("9_08xy3")]
 _owner = NodePath("..")
+
+[node name="DarkKnight" parent="." instance=ExtResource("9_7w4nr")]
+transform = Transform3D(-0.999953, 0, 0.00966907, 0, 1, 0, -0.00966907, 0, -0.999953, 3.22934, 0, -3.00476)
+team = 2
+battle_id = 1
+
+[node name="AncientTree" parent="." instance=ExtResource("2_jb5pd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.262631, 0, 4.77714)
+team = 1
+battle_id = 1
 
 [editable path="FightingIsland"]
 [editable path="FightingIsland/CenterPointCamera"]

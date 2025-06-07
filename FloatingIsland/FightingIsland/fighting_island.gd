@@ -4,18 +4,26 @@ extends FloatingIsland
 # ============================== local node ==============================
 
 @export var _fighting_area: FightingArea
+@export var _camera: Camera3D
+
+# ============================== private variables ==============================
+
+var _current_characters: Array[Character]
 
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	_register_self_in_shared()
+	pass
 
 # ============================== Public functions ==============================
 
 # Spawn all characters on the FightingArea according to the battle
 # Connect all characters to the FightingArea of the FloatingIsland
-func start_fight(characters: Array[Character], battle_type: Battle.BattleType) -> void:
-	_fighting_area.start_fight(characters, battle_type)
+func start_fight(characters: Array[Character], battle_type: Battle.BattleType, battle_id: int = -1) -> void:
+	_fighting_area.start_fight(characters, battle_type, battle_id)
+	_current_characters = characters
+	for character in _current_characters:
+		character.set_lookat_camera(_camera)
 
 
 func set_active() -> void:
@@ -23,6 +31,8 @@ func set_active() -> void:
 	_is_active = true
 	_fighting_area.set_active()
 	_center_point_camera.set_active()
+	for character in _current_characters:
+		character.on_active_island()
 
 
 func set_inactive() -> void:
@@ -30,8 +40,7 @@ func set_inactive() -> void:
 	_is_active = false
 	_fighting_area.set_inactive()
 	_center_point_camera.set_inactive()
+	for character in _current_characters:
+		character.on_inactive_island()
 
 # ============================== Private functions ==============================
-
-func _register_self_in_shared() -> void:
-	pass

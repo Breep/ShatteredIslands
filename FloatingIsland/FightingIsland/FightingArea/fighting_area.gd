@@ -1,13 +1,9 @@
 class_name FightingArea
 extends Node3D
 
-# ============================== Signals ==============================
-
-signal map_clicked(position: Vector3)
-
 # ============================== Network Export variables ==============================
 
-@export var battle_id: int
+@export var _current_battle_id: int = -1
 
 # ============================== Private variables ==============================
 
@@ -44,7 +40,7 @@ func _ready() -> void:
 
 # Spawn all characters on the FightingArea according to the battle
 # Connect all characters to this FightingArea
-func start_fight(characters: Array[Character], battle_type: Battle.BattleType) -> void:
+func start_fight(characters: Array[Character], battle_type: Battle.BattleType, battle_id: int = -1) -> void:
 	spawn_manager = _set_fighting_floor(battle_type)
 	if spawn_manager == null:
 		printerr("FightingArea: No SpawnManager for this battle type: ", battle_type)
@@ -53,20 +49,17 @@ func start_fight(characters: Array[Character], battle_type: Battle.BattleType) -
 	for character in characters:
 		character.connect_to_fighting_area(self)
 	
+	_current_battle_id = battle_id
 	_fighting_manager.fight_is_over.connect(_on_fighting_manager_fight_is_over, CONNECT_ONE_SHOT)
 	_fighting_manager.start(characters)
-	
-	# TODO TMP Need to make the ui smarter in the character choice at start
-	_ui_fighting_area.left_character = characters[0]
-	_ui_fighting_area.right_character = characters[1]
 
 
 func set_active() -> void:
-	_ui_fighting_area.show()
+	_ui_fighting_area.set_active()
 
 
 func set_inactive() -> void:
-	_ui_fighting_area.hide()
+	_ui_fighting_area.set_inactive()
 
 # ============================== Private functions ==============================
 
@@ -90,8 +83,9 @@ func _set_fighting_floor(battle_type: Battle.BattleType) -> SpawnManager:
 # ============================== Callbacks ==============================
 
 func _on_fighting_manager_fight_is_over(_fighting_manager: FightingManager, winner_teams_order: Array[int]) -> void:
-	print("Fight is over for the battle[", battle_id, "]")
-	RoundManager.register_battle_result(battle_id, winner_teams_order)
+	if _current_battle_id < 0: return
+	print("Fight is over for the battle[", _current_battle_id, "]")
+	RoundManager.register_battle_result(_current_battle_id, winner_teams_order)
 	# Calculate damage (=average of the winners damage)
 
 

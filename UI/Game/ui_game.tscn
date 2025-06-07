@@ -1,0 +1,135 @@
+[gd_scene load_steps=4 format=3 uid="uid://dv3kwc5eeyuk2"]
+
+[ext_resource type="Script" uid="uid://dy35nobyyvy4r" path="res://UI/Game/ui_game.gd" id="1_tbfb0"]
+[ext_resource type="PackedScene" uid="uid://bvqsnkh0s11q2" path="res://UI/BuyingArea/FamilyPortrait/ui_all_families_portrait.tscn" id="3_ur737"]
+[ext_resource type="PackedScene" uid="uid://be38goiqxp28o" path="res://UI/BuyingArea/PlayerPortrait/ui_all_players_portrait.tscn" id="5_30pdm"]
+
+[node name="UIGame" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tbfb0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopPanel" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+mouse_filter = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/TopPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="MiddlePanel" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.8
+mouse_filter = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MiddlePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftPanel" type="Control" parent="VBoxContainer/MiddlePanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+mouse_filter = 1
+
+[node name="AllFamiliesPortrait" parent="VBoxContainer/MiddlePanel/HBoxContainer/LeftPanel" instance=ExtResource("3_ur737")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+offset_right = 0.0
+script = null
+
+[node name="MiddlePanel" type="Control" parent="VBoxContainer/MiddlePanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+mouse_filter = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RightPanel" type="Control" parent="VBoxContainer/MiddlePanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+mouse_filter = 1
+
+[node name="AllPlayersPortrait" parent="VBoxContainer/MiddlePanel/HBoxContainer/RightPanel" instance=ExtResource("5_30pdm")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+offset_right = 0.0
+
+[node name="BottomPanel" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+mouse_filter = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/BottomPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BottomLeftEmpty" type="Control" parent="VBoxContainer/BottomPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+mouse_filter = 1
+
+[node name="BottomMiddle" type="Control" parent="VBoxContainer/BottomPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/BottomPanel/HBoxContainer/BottomMiddle"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="BottomRightEmpty" type="Control" parent="VBoxContainer/BottomPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+mouse_filter = 1

@@ -1,12 +1,13 @@
-[gd_scene load_steps=23 format=3 uid="uid://g706yyhstscc"]
+[gd_scene load_steps=24 format=3 uid="uid://g706yyhstscc"]
 
 [ext_resource type="Script" uid="uid://bmtq7u6jxaxhj" path="res://Entities/Heroes/Cyborg/cyborg.gd" id="1_t1mer"]
-[ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Entities/Character/CharacterVisual/character_visual.tscn" id="2_1njov"]
+[ext_resource type="PackedScene" uid="uid://cf4y1g6c4ia6w" path="res://Entities/Character/CharacterVisual/character_visual.tscn" id="2_1njov"]
 [ext_resource type="Resource" uid="uid://fb28rdceanxm" path="res://Entities/Heroes/Cyborg/cyborg.tres" id="2_frf0o"]
 [ext_resource type="PackedScene" uid="uid://qgjyscmtp6t3" path="res://Entities/Character/CharacterLogic/character_logic.tscn" id="5_sriek"]
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://Modules/PickableClickable/PickableModule/pickable_module.tscn" id="9_n64m2"]
 [ext_resource type="PackedScene" uid="uid://c8630px7dwlvh" path="res://Modules/PickableClickable/Constraints/PickableCollider/pickable_collider.tscn" id="10_16jr2"]
 [ext_resource type="PackedScene" uid="uid://dyyf8nhixlubs" path="res://Modules/PickableClickable/Constraints/SpawnAreaChecker/spawn_area_checker.tscn" id="11_0og4p"]
+[ext_resource type="PackedScene" uid="uid://cpqtocfge7ott" path="res://Entities/Character/CharacterAnimator/character_animator.tscn" id="12_l44ou"]
 [ext_resource type="PackedScene" uid="uid://5en73tnp30yw" path="res://Entities/Heroes/Cyborg/cyborg_model.tscn" id="16_frf0o"]
 [ext_resource type="PackedScene" uid="uid://dqrhym1sskng8" path="res://Entities/Turret/turret.tscn" id="17_lbjpi"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="18_4bsoj"]
@@ -49,7 +50,7 @@ input_3/reset = true
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_lope7"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_frf0o"]
-graph_offset = Vector2(-426.904, -120.593)
+graph_offset = Vector2(-240, -120.593)
 nodes/AnimDance/node = SubResource("AnimationNodeAnimation_xdo7g")
 nodes/AnimDance/position = Vector2(-240, 40)
 nodes/AnimDie/node = SubResource("AnimationNodeAnimation_tmwsy")
@@ -193,8 +194,7 @@ parameters/idle_speed/scale = 1.0
 
 [node name="CharacterVisual" parent="." instance=ExtResource("2_1njov")]
 unique_name_in_owner = true
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-visible = false
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 2.37992, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
@@ -253,6 +253,10 @@ _spawn_area_checker = NodePath("../SpawnAreaChecker")
 [node name="PickableCollider" parent="." instance=ExtResource("10_16jr2")]
 
 [node name="SpawnAreaChecker" parent="." instance=ExtResource("11_0og4p")]
+
+[node name="CharacterAnimator" parent="." node_paths=PackedStringArray("_animation_tree", "_owner") instance=ExtResource("12_l44ou")]
+_animation_tree = NodePath("../AnimationTree")
+_owner = NodePath("..")
 
 [editable path="CyborgModel"]
 [editable path="CharacterLogic"]

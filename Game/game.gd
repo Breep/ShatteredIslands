@@ -37,6 +37,8 @@ var _current_round_battles: Array[Battle]
 
 @export var _islands_spawn_points: Array[SpawnPoint]
 
+@export var _ui_game: UIGame
+
 @onready var _island_spawns_to_be_removed: Node3D = %IslandSpawns
 
 # ============================== Node base functions ==============================
@@ -48,6 +50,7 @@ func _ready() -> void:
 	_buying_island.buying_phase_finished.connect(_on_buying_island_buying_phase_finished)
 	
 	GlobalFightingManager.all_fights_are_over.connect(_on_global_fighting_manager_all_fights_are_over)
+	
 	_start_game()
 
 # ============================== Private functions ==============================
@@ -87,7 +90,7 @@ func _start_fighting_phase(battles: Array[Battle]) -> void:
 		for player in battles[i].players:
 			player.character.battle_id = battles[i].id
 			characters.append(player.character)
-		fighting_islands_choosen[i].start_fight(characters, battles[i].battle_type)
+		fighting_islands_choosen[i].start_fight(characters, battles[i].battle_type, battles[i].id)
 	# Start fight on each island
 	GlobalFightingManager.start()
 

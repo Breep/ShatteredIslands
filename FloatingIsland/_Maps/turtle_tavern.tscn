@@ -1,6 +1,5 @@
 [gd_scene load_steps=100 format=4 uid="uid://b7ix6abnaxeay"]
 
-[ext_resource type="Script" uid="uid://s03hbdebpt0q" path="res://VFEZ-godot-main/vfez_material_3d.gd" id="1_fwh8y"]
 [ext_resource type="Texture2D" uid="uid://7bs55t8utgii" path="res://Data/Blender/Map/Turtle/turtle2_EnvSamplerTex.png" id="2_4mptg"]
 [ext_resource type="Texture2D" uid="uid://b3uy0e2nljpxh" path="res://Data/Blender/Map/Turtle/turtle2_EnvSamplerTex_2.png" id="3_dg4b1"]
 [ext_resource type="Texture2D" uid="uid://k3xsv3vfyock" path="res://Data/Blender/Map/Turtle/turtle2_PolygonNatureBiomes_Tropical_Texture_01.png.png" id="4_xrsu5"]
@@ -27,76 +26,9 @@ shader_type spatial;
 #include \"res://VFEZ-godot-main/Shaders/vfez_3d_template.gdshaderinc\"
 "
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ysu5g"]
-load_path = "res://.godot/imported/T_VFX_Noise_465.png-36f3b688c288866d42b4c7a29d82c4e4.s3tc.ctex"
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pu4xd"]
 render_priority = 0
 shader = SubResource("Shader_fwh8y")
-shader_parameter/global_color = Color(1, 1, 1, 1)
-shader_parameter/global_alpha = 1.0
-shader_parameter/additive_config = false
-shader_parameter/premultiply_color = false
-shader_parameter/premultiply_alpha = false
-shader_parameter/shape1_main_texture = SubResource("CompressedTexture2D_ysu5g")
-shader_parameter/shape1_main_texture_scale = Vector2(2.33, 1.885)
-shader_parameter/shape1_main_texture_offset = Vector2(0, 0)
-shader_parameter/shape1_color = Color(0.421451, 0.705376, 0.92812, 1)
-shader_parameter/shape1_red_as_alpha = false
-shader_parameter/shape1_scroll_speed = Vector2(0.1, 0)
-shader_parameter/shape1_rotation_offset = 0.0
-shader_parameter/shape1_rotation_speed = 0.0
-shader_parameter/shape1_contrast = 1.0
-shader_parameter/shape1_brightness = 0.0
-shader_parameter/shape1_distortion_texture_scale = Vector2(1, 1)
-shader_parameter/shape1_distortion_texture_offset = Vector2(0, 0)
-shader_parameter/shape1_distortion_amount = 0.0
-shader_parameter/shape1_distortion_speed = Vector2(0.1, 0.1)
-shader_parameter/shape1_use_polar_uv = false
-shader_parameter/shape1_polar_uv_center = Vector2(0.5, 0.5)
-shader_parameter/shape1_distortion_polar_uvs = false
-shader_parameter/shape1_use_screenspace_uv = false
-shader_parameter/use_shape2 = false
-shader_parameter/use_shape3 = false
-shader_parameter/use_uv_pixelate = false
-shader_parameter/use_uv_twist = false
-shader_parameter/use_uv_handrawn = false
-shader_parameter/use_uv_shake = false
-shader_parameter/use_uv_wave = false
-shader_parameter/use_uv_round_wave = true
-shader_parameter/uv_round_wave_strength = 0.029
-shader_parameter/uv_round_wave_speed = 2.0
-shader_parameter/use_uv_global_distortion = false
-shader_parameter/use_alpha_disolve = false
-shader_parameter/use_color_face_tint = false
-shader_parameter/use_color_toning = false
-shader_parameter/use_color_ramp = false
-shader_parameter/use_color_posterize = false
-shader_parameter/use_color_rim = false
-shader_parameter/use_color_glow = true
-shader_parameter/glow_color = Color(0.186244, 0.477409, 0.787137, 1)
-shader_parameter/glow_intensity = 0.24
-shader_parameter/glow_intensity_global = 1.0
-shader_parameter/use_glow_texture = false
-shader_parameter/use_color_hsv_shift = false
-shader_parameter/use_alpha_mask = false
-shader_parameter/use_alpha_remap = false
-shader_parameter/use_alpha_cutoff = false
-shader_parameter/use_alpha_scissor = false
-shader_parameter/use_vertex_offset = false
-shader_parameter/use_vertex_expand = false
-shader_parameter/use_particle_trails = false
-shader_parameter/use_particle_anim = false
-script = ExtResource("1_fwh8y")
-BlendMode = 1
-DepthDrawMode = 0
-CullMode = 0
-DiffuseMode = 0
-SpecularMode = 0
-ShadingMode = 0
-BillboardMode = 0
-BillboardKeepScale = false
-NoDepthTest = false
 metadata/_custom_type_script = "uid://s03hbdebpt0q"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ep3dy"]
@@ -1618,6 +1550,7 @@ bind/12/pose = Transform3D(2.69593, 0, 0, 0, 2.69593, -2.03537e-07, 0, 2.03537e-
 [sub_resource type="Animation" id="Animation_q2bh6"]
 resource_name = "swim"
 length = 8.8
+loop_mode = 1
 tracks/0/type = "rotation_3d"
 tracks/0/imported = true
 tracks/0/enabled = true
@@ -1756,6 +1689,15 @@ tracks/18/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.133333, 1, -8.14349e-05,
 _data = {
 &"swim": SubResource("Animation_q2bh6")
 }
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ihlgc"]
+animation = &"swim"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_6vn2q"]
+graph_offset = Vector2(-514.212, -85.8002)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_ihlgc")
+nodes/Animation/position = Vector2(0, 120)
+node_connections = [&"output", 0, &"Animation"]
 
 [node name="turtle2" type="Node3D"]
 
@@ -2649,7 +2591,7 @@ bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, -4.70917, -4.46339, 0.782897)
 bones/0/enabled = true
 bones/0/position = Vector3(-4.70917, -4.46339, 0.782897)
-bones/0/rotation = Quaternion(-0.707107, 0, 0, 0.707107)
+bones/0/rotation = Quaternion(-0.707114, 8.09692e-05, 0.00032908, 0.7071)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Head_01"
 bones/1/parent = 0
@@ -2662,50 +2604,50 @@ bones/2/name = "Head_02"
 bones/2/parent = 1
 bones/2/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8147e-06, 5.72389, 9.50586)
 bones/2/enabled = true
-bones/2/position = Vector3(0, 5.72389, 9.50586)
-bones/2/rotation = Quaternion(0, 0, 0, 1)
+bones/2/position = Vector3(4.27467e-08, 5.72389, 9.50586)
+bones/2/rotation = Quaternion(-6.01572e-16, -0.167166, -2.77092e-08, 0.985929)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/name = "Leg_Front_L_01"
 bones/3/parent = 0
 bones/3/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.9037, -2.48485, 12.6944)
 bones/3/enabled = true
-bones/3/position = Vector3(30.9037, -2.48485, 12.6944)
-bones/3/rotation = Quaternion(0, 0, 0, 1)
+bones/3/position = Vector3(30.9037, -2.01347, 12.6944)
+bones/3/rotation = Quaternion(-5.8604e-05, -0.000143229, 0.000535555, 1)
 bones/3/scale = Vector3(1, 1, 1)
 bones/4/name = "Leg_Front_L_02"
 bones/4/parent = 3
 bones/4/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.843, -1.99465e-08, -6.43979)
 bones/4/enabled = true
-bones/4/position = Vector3(32.843, 2.38419e-07, -6.43979)
-bones/4/rotation = Quaternion(0, 0, 0, 1)
+bones/4/position = Vector3(32.843, 3.42222, -6.43979)
+bones/4/rotation = Quaternion(-2.07433e-05, -5.06967e-05, 0.00018957, 1)
 bones/4/scale = Vector3(1, 1, 1)
 bones/5/name = "Leg_Front_L_03"
 bones/5/parent = 4
 bones/5/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.1914, 7.46663e-07, -10.1541)
 bones/5/enabled = true
-bones/5/position = Vector3(20.1914, 0, -10.1541)
+bones/5/position = Vector3(20.1914, -1.77965, -10.1541)
 bones/5/rotation = Quaternion(0, 0, 0, 1)
 bones/5/scale = Vector3(1, 1, 1)
 bones/6/name = "Leg_Front_R_01"
 bones/6/parent = 0
 bones/6/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.9037, -2.48485, 12.6944)
 bones/6/enabled = true
-bones/6/position = Vector3(-30.9037, -2.48485, 12.6944)
+bones/6/position = Vector3(-30.8631, -2.75163, 11.9858)
 bones/6/rotation = Quaternion(0, 0, 0, 1)
 bones/6/scale = Vector3(1, 1, 1)
 bones/7/name = "Leg_Front_R_02"
 bones/7/parent = 6
 bones/7/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.8431, -1.99465e-08, -6.43979)
 bones/7/enabled = true
-bones/7/position = Vector3(-32.843, 2.38419e-07, -6.43979)
+bones/7/position = Vector3(-32.879, -0.79275, -7.82157)
 bones/7/rotation = Quaternion(0, 0, 0, 1)
 bones/7/scale = Vector3(1, 1, 1)
 bones/8/name = "Leg_Front_R_03"
 bones/8/parent = 7
 bones/8/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.1914, 7.46663e-07, -10.1541)
 bones/8/enabled = true
-bones/8/position = Vector3(-20.1914, 0, -10.1541)
-bones/8/rotation = Quaternion(0, 0, 0, 1)
+bones/8/position = Vector3(-17.933, -3.49959, -11.2105)
+bones/8/rotation = Quaternion(-0.105722, -0.00769169, 0.0441144, 0.993387)
 bones/8/scale = Vector3(1, 1, 1)
 bones/9/name = "Leg_Back_L_01"
 bones/9/parent = 0
@@ -2754,3 +2696,7 @@ metadata/extras = {
 libraries = {
 &"": SubResource("AnimationLibrary_e2pfe")
 }
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_6vn2q")
+anim_player = NodePath("../AnimationPlayer")

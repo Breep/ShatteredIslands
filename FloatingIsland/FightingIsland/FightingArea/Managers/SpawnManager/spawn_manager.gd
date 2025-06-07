@@ -21,6 +21,11 @@ var battle_id: int = -1 # Set by the parent
 var _entity_counter: int = 0
 var _projectile_counter: int = 0
 
+# ============================== Node base functions ==============================
+
+func _ready() -> void:
+	GlobalFightingManager.all_fights_are_over.connect(_on_global_fighting_manager_all_fights_are_over)
+
 # ============================== Public function ==============================
 
 # Reparent characters into the FightingArea/Entities node and teleport them on the FightingArea
@@ -60,8 +65,11 @@ func _spawn_character(character: Character, available_spawn_locations: Array[Spa
 	printerr("SpawnManager: No more available spawn point for ", character.name, " [Team#", character.team, "]")
 	return false
 
+# ============================== Callbacks ==============================
 
-
+func _on_global_fighting_manager_all_fights_are_over() -> void:
+	for child in _projectiles_node.get_children():
+		child.queue_free()
 
 
 

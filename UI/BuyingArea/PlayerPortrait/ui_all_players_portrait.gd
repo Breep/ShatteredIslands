@@ -13,9 +13,16 @@ var _player_id_player_portrait_map: Dictionary[int, UIPlayerPortrait] # Key=<pla
 
 @onready var vbox_container: VBoxContainer = %VBoxContainer
 
+# ============================== Node base functions ==============================
+
+func _ready() -> void:
+	_connect_all_players(PlayerManager.players.values())
+
 # ============================== Public functions ==============================
 
-func connect_all_players(players: Array[Player]) -> void:
+# ============================== Private functions ==============================
+
+func _connect_all_players(players: Array[Player]) -> void:
 	if _players_portraits.size() != players.size():
 		printerr("UIAllPlayersPortrait: Players number and players portrait number mismatch")
 		return
@@ -25,7 +32,6 @@ func connect_all_players(players: Array[Player]) -> void:
 		players[i].health_changed.connect(_on_player_health_changed)
 		_player_id_player_portrait_map[players[i].id] = _players_portraits[i]
 
-# ============================== Private functions ==============================
 
 func _reorder_portraits() -> void:
 	var players_sorted: Array[Player] = _get_players_ordered_by_health()
