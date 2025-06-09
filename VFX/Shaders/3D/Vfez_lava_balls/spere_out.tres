@@ -1,6 +1,4 @@
-[gd_resource type="ShaderMaterial" script_class="VFEZMaterial3D" load_steps=9 format=3 uid="uid://vyo1aeb3gmxv"]
-
-[ext_resource type="Script" uid="uid://s03hbdebpt0q" path="res://VFEZ-godot-main/vfez_material_3d.gd" id="1_iq3gn"]
+[gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://vyo1aeb3gmxv"]
 
 [sub_resource type="Shader" id="Shader_41foc"]
 resource_name = "VFEZ3DPreview"
@@ -22,7 +20,7 @@ shader_type spatial;
 #define COLOR_TONING
 #define COLOR_RIM
 #define VERTEX_OFFSET
-#include \"res://VFEZ-godot-main/Shaders/vfez_3d_template.gdshaderinc\"
+#include \"res://VFX/VFEZ-godot-main/Shaders/vfez_3d_template.gdshaderinc\"
 "
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_goiqf"]
@@ -111,13 +109,3 @@ shader_parameter/vertex_offset_speed = Vector2(0.1, 0.1)
 shader_parameter/use_vertex_expand = false
 shader_parameter/use_particle_trails = false
 shader_parameter/use_particle_anim = false
-script = ExtResource("1_iq3gn")
-BlendMode = 0
-DepthDrawMode = 0
-CullMode = 0
-DiffuseMode = 0
-SpecularMode = 0
-ShadingMode = 0
-BillboardMode = 0
-BillboardKeepScale = false
-NoDepthTest = false
