@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c66yw4go2ykwa"]
+[gd_scene load_steps=11 format=3 uid="uid://c66yw4go2ykwa"]
 
 [ext_resource type="Script" uid="uid://cd8u3lm3xa8c4" path="res://FloatingIsland/FightingIsland/FightingArea/fighting_area.gd" id="1_t74of"]
 [ext_resource type="PackedScene" uid="uid://pyrw8lacvly2" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/EntityManager/entity_manager.tscn" id="2_wtb7j"]
@@ -15,6 +15,12 @@ properties/0/replication_mode = 0
 properties/1/path = NodePath(".:_current_battle_id")
 properties/1/spawn = true
 properties/1/replication_mode = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6wjnm"]
+size = Vector3(20, 5, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7oplh"]
+size = Vector3(1, 5, 10)
 
 [node name="FightingArea" type="Node3D" node_paths=PackedStringArray("_fighting_manager", "_entity_manager", "_ui_fighting_area", "_fighting_floors")]
 script = ExtResource("1_t74of")
@@ -70,6 +76,40 @@ _projectiles_node = NodePath("../../../Projectiles")
 [node name="Entities" type="Node3D" parent="."]
 
 [node name="Projectiles" type="Node3D" parent="."]
+
+[node name="Walls" type="Node3D" parent="."]
+
+[node name="Wall1" type="Area3D" parent="Walls" groups=["WALL"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.5)
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall1"]
+shape = SubResource("BoxShape3D_6wjnm")
+
+[node name="Wall2" type="Area3D" parent="Walls" groups=["WALL"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.5)
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall2"]
+shape = SubResource("BoxShape3D_6wjnm")
+
+[node name="Wall3" type="Area3D" parent="Walls" groups=["WALL"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, 0, 0)
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall3"]
+shape = SubResource("BoxShape3D_7oplh")
+
+[node name="Wall4" type="Area3D" parent="Walls" groups=["WALL"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, 0)
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall4"]
+shape = SubResource("BoxShape3D_7oplh")
 
 [editable path="FightingFloorTemplates/FightingFloor_1v1"]
 [editable path="FightingFloorTemplates/FightingFloor_2v2"]

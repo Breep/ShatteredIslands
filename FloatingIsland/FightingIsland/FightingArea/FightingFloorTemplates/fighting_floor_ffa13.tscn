@@ -1,10 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://dbbpa637es0uf"]
+[gd_scene load_steps=17 format=3 uid="uid://dbbpa637es0uf"]
 
 [ext_resource type="Script" uid="uid://bhv0dmum15mp1" path="res://FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor.gd" id="1_6j5cd"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="2_jgfjt"]
 [ext_resource type="PackedScene" uid="uid://dibux7uwcsatj" path="res://FloatingIsland/FightingIsland/FightingArea/SpawnArea/spawn_area.tscn" id="3_1158a"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Tool/SpawnPoint/spawn_point.tscn" id="4_ch78g"]
-[ext_resource type="Script" uid="uid://bl63dedy1xfg8" path="res://Modules/PickableClickable/Constraints/PickableCollider/pickable_collider.gd" id="5_jgfjt"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_05r3l"]
 size = Vector3(20, 0.1, 3.333)
@@ -50,19 +49,13 @@ size = Vector3(20, 1, 10)
 [sub_resource type="BoxShape3D" id="BoxShape3D_6j5cd"]
 size = Vector3(20, 1, 10)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_jgfjt"]
-size = Vector3(20, 5, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_1158a"]
-size = Vector3(1, 5, 10)
-
 [node name="FightingFloor_ffa13" type="Node3D" node_paths=PackedStringArray("_visual_to_be_destroyed", "_spawn_manager", "_spawn_areas", "_floor", "_walls")]
 script = ExtResource("1_6j5cd")
 _visual_to_be_destroyed = NodePath("Floor/FloorMesh3D")
 _spawn_manager = NodePath("SpawnManager")
 _spawn_areas = [NodePath("SpawnManager/SpawnArea"), NodePath("SpawnManager/SpawnArea2"), NodePath("SpawnManager/SpawnArea3")]
 _floor = NodePath("Floor")
-_walls = [NodePath("Walls/Wall1"), NodePath("Walls/Wall2"), NodePath("Walls/Wall3"), NodePath("Walls/Wall4")]
+_walls = [NodePath(""), NodePath(""), NodePath(""), NodePath("")]
 
 [node name="SpawnManager" parent="." node_paths=PackedStringArray("_spawn_points", "_spawn_areas") instance=ExtResource("2_jgfjt")]
 _spawn_points = [NodePath("SpawnArea/SpawnPoint"), NodePath("SpawnArea2/SpawnPoint2"), NodePath("SpawnArea3/SpawnPoint3")]
@@ -131,41 +124,3 @@ skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
 shape = SubResource("BoxShape3D_6j5cd")
-
-[node name="Walls" type="Node3D" parent="."]
-
-[node name="Wall1" type="Area3D" parent="Walls" groups=["WALL"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.5)
-monitoring = false
-monitorable = false
-script = ExtResource("5_jgfjt")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall1"]
-shape = SubResource("BoxShape3D_jgfjt")
-
-[node name="Wall2" type="Area3D" parent="Walls" groups=["WALL"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.5)
-monitoring = false
-monitorable = false
-script = ExtResource("5_jgfjt")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall2"]
-shape = SubResource("BoxShape3D_jgfjt")
-
-[node name="Wall3" type="Area3D" parent="Walls" groups=["WALL"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, 0, 0)
-monitoring = false
-monitorable = false
-script = ExtResource("5_jgfjt")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall3"]
-shape = SubResource("BoxShape3D_1158a")
-
-[node name="Wall4" type="Area3D" parent="Walls" groups=["WALL"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, 0)
-monitoring = false
-monitorable = false
-script = ExtResource("5_jgfjt")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall4"]
-shape = SubResource("BoxShape3D_1158a")
