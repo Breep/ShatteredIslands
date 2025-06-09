@@ -24,8 +24,6 @@ var attack_speed: float:
 
 var _aa_stats: CharacterAutoAttackStats # Ref to the owner auto attack stats
 
-var _projectile_type: Projectile.ProjectileType
-
 #var _forced_target: Character # TODO Unused now, maybe for a futur hero that can taunt ?
 var _attack_strategy: TargetModule.TargettingStrategy = TargetModule.TargettingStrategy.CLOSEST_ENEMY # The algo used to find the target
 
@@ -61,10 +59,6 @@ func start() -> void:
 func stop() -> void:
 	_auto_attack_timer.stop()
 
-
-func set_projectile(projectile_type: Projectile.ProjectileType) -> void:
-	_projectile_type = projectile_type
-
 # ============================== Private functions ==============================
 
 func _specific_init() -> void:
@@ -89,7 +83,7 @@ func _auto_attack(target: Character) -> void:
 		_attack_manager.notice_auto_attack_done(target)
 		_attack_manager.update_aa_projectile_stats(projectile_stats)
 	
-	_action_module.projectile_attack(target, _projectile_type, projectile_spawn, projectile_stats)
+	_action_module.projectile_attack(target, Projectile.ProjectileType.AUTO_ATTACK, projectile_spawn, projectile_stats)
 	attack_done.emit()
 
 

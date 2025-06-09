@@ -1,9 +1,9 @@
-extends Node3D # Needs to be a Node 3D to get global_position of areas childs of this manager
+extends Node # Needs to be a Node 3D to get global_position of areas childs of this manager
 class_name SpawnManager
 
 # ============================== Signal ==============================
 
-signal all_players_spawned()
+signal projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.ProjectileType, projectile_modifiers: Array[Projectile.ProjectileEffect])
 
 # ============================== Public variables ==============================
 
@@ -11,8 +11,8 @@ var battle_id: int = -1 # Set by the parent
 
 # ============================== External Export ==============================
 
-@export var _spawn_points: Array[SpawnPoint]
-@export var _spawn_areas: Array[SpawnArea]
+@export var _fighting_area: FightingArea
+
 @export var _entities_node: Node3D
 @export var _projectiles_node: Node3D
 
@@ -28,13 +28,6 @@ func _ready() -> void:
 
 # ============================== Public function ==============================
 
-# Reparent characters into the FightingArea/Entities node and teleport them on the FightingArea
-func spawn_characters(characters: Array[Character]) -> void:
-	var _available_spawn_points: Array[SpawnPoint] = _spawn_points.duplicate()
-	for character in characters:
-		_spawn_character(character, _available_spawn_points)
-
-
 func spawn_projectile(source: Character, target: Character, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	var projectile: Projectile = preload("res://SpellsAndProjectiles/Projectiles/projectile.tscn").instantiate()
 	projectile.name = "Projectile_" + str(_projectile_counter)
@@ -44,26 +37,13 @@ func spawn_projectile(source: Character, target: Character, projectile_type: Pro
 	projectile.target = target
 	projectile.battle_id = battle_id
 	projectile.id = _projectile_counter
+	
+	var modifiers: Array[Projectile.ProjectileEffect] = []
+	_fighting_area.projectile_spawned.emit(source, target, projectile_type, modifiers)
 	_projectile_counter += 1
 	_projectiles_node.add_child(projectile)
 
 # ============================== Private functions ==============================
-
-# spawn an already instatiated character on the _entities_node at a spawn location available
-func _spawn_character(character: Character, available_spawn_locations: Array[SpawnPoint]) -> bool:
-	if character == null:
-		printerr("SpawnManager: Trying to spawn a <null> Character")
-		return false
-	
-	for spawn_point in available_spawn_locations:
-		if spawn_point.team == character.team:
-			character.reparent(_entities_node)
-			character.global_position = spawn_point.global_position
-			available_spawn_locations.erase(spawn_point)
-			return true
-	
-	printerr("SpawnManager: No more available spawn point for ", character.name, " [Team#", character.team, "]")
-	return false
 
 # ============================== Callbacks ==============================
 

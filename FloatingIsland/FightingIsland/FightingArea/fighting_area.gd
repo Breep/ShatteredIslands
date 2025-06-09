@@ -1,6 +1,10 @@
 class_name FightingArea
 extends Node3D
 
+# ============================== Signals ==============================
+
+signal projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.ProjectileType, projectile_modifiers: Array[Projectile.ProjectileEffect])
+
 # ============================== Network Export variables ==============================
 
 @export var _current_battle_id: int = -1
@@ -12,9 +16,12 @@ var _characters: Array[Character] # Array of all characters in the fight scene
 
 # ============================== Public variables ==============================
 
-var spawn_manager: SpawnManager
 
 # ============================== Local nodes / Configuration ==============================
+
+@export var _spawn_manager: SpawnManager
+var spawn_manager: SpawnManager:
+	get: return _spawn_manager
 
 @export var _battle_type: Battle.BattleType
 
@@ -30,6 +37,8 @@ var entity_manager: EntityManager:
 
 @export var _fighting_floors: Dictionary[Battle.BattleType, FightingFloor]
 
+@export var _entities_node: Node3D
+
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
@@ -41,11 +50,11 @@ func _ready() -> void:
 # Spawn all characters on the FightingArea according to the battle
 # Connect all characters to this FightingArea
 func start_fight(characters: Array[Character], battle_type: Battle.BattleType, battle_id: int = -1) -> void:
-	spawn_manager = _set_fighting_floor(battle_type)
-	if spawn_manager == null:
-		printerr("FightingArea: No SpawnManager for this battle type: ", battle_type)
+	var character_spawner: CharacterSpawner = _set_fighting_floor(battle_type)
+	if character_spawner == null:
+		printerr("FightingArea: No CharacterSpawner for this battle type: ", battle_type)
 	
-	spawn_manager.spawn_characters(characters)
+	character_spawner.spawn_characters(characters, _entities_node)
 	for character in characters:
 		character.connect_to_fighting_area(self)
 	
@@ -75,7 +84,7 @@ func _ready_checks() -> bool:
 	return true
 
 
-func _set_fighting_floor(battle_type: Battle.BattleType) -> SpawnManager:
+func _set_fighting_floor(battle_type: Battle.BattleType) -> CharacterSpawner:
 	for fighting_floor in _fighting_floors.values():
 		fighting_floor.set_inactive()
 	return _fighting_floors[battle_type].set_active()

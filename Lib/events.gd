@@ -12,7 +12,6 @@ signal damage_done(source, target, damage, damage_type, is_critical)
 signal heal_done(source, target, heal_amount)
 signal condition_stacks_done(source, target, stacks_number, stack_type)
 
-
 # UI related events
 signal ui_card_shop_opened(is_opened: bool)
 signal ui_buying_area_opened(is_opened: bool)

@@ -1,8 +1,8 @@
 [gd_scene load_steps=17 format=3 uid="uid://dbbpa637es0uf"]
 
 [ext_resource type="Script" uid="uid://bhv0dmum15mp1" path="res://FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor.gd" id="1_6j5cd"]
-[ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="2_jgfjt"]
 [ext_resource type="PackedScene" uid="uid://dibux7uwcsatj" path="res://FloatingIsland/FightingIsland/FightingArea/SpawnArea/spawn_area.tscn" id="3_1158a"]
+[ext_resource type="PackedScene" uid="uid://cc8wss5swf76b" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/CharacterSpawner/character_spawner.tscn" id="4_72v03"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Tool/SpawnPoint/spawn_point.tscn" id="4_ch78g"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_05r3l"]
@@ -49,19 +49,14 @@ size = Vector3(20, 1, 10)
 [sub_resource type="BoxShape3D" id="BoxShape3D_6j5cd"]
 size = Vector3(20, 1, 10)
 
-[node name="FightingFloor_ffa13" type="Node3D" node_paths=PackedStringArray("_visual_to_be_destroyed", "_spawn_manager", "_spawn_areas", "_floor", "_walls")]
+[node name="FightingFloor_ffa13" type="Node3D" node_paths=PackedStringArray("_visual_to_be_destroyed", "_character_spawner", "_spawn_areas", "_floor")]
 script = ExtResource("1_6j5cd")
 _visual_to_be_destroyed = NodePath("Floor/FloorMesh3D")
-_spawn_manager = NodePath("SpawnManager")
-_spawn_areas = [NodePath("SpawnManager/SpawnArea"), NodePath("SpawnManager/SpawnArea2"), NodePath("SpawnManager/SpawnArea3")]
-_floor = NodePath("Floor")
-_walls = [NodePath(""), NodePath(""), NodePath(""), NodePath("")]
-
-[node name="SpawnManager" parent="." node_paths=PackedStringArray("_spawn_points", "_spawn_areas") instance=ExtResource("2_jgfjt")]
-_spawn_points = [NodePath("SpawnArea/SpawnPoint"), NodePath("SpawnArea2/SpawnPoint2"), NodePath("SpawnArea3/SpawnPoint3")]
+_character_spawner = NodePath("CharacterSpawner")
 _spawn_areas = [NodePath("SpawnArea"), NodePath("SpawnArea2"), NodePath("SpawnArea3")]
+_floor = NodePath("Floor")
 
-[node name="SpawnArea" parent="SpawnManager" node_paths=PackedStringArray("_visual_to_be_destroyed") instance=ExtResource("3_1158a")]
+[node name="SpawnArea" parent="." node_paths=PackedStringArray("_visual_to_be_destroyed") instance=ExtResource("3_1158a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.333)
 collision_layer = 4
 collision_mask = 0
@@ -70,16 +65,16 @@ monitorable = false
 team = 1
 _visual_to_be_destroyed = NodePath("MeshInstance3D")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnManager/SpawnArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnArea"]
 shape = SubResource("BoxShape3D_05r3l")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SpawnManager/SpawnArea"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SpawnArea"]
 mesh = SubResource("BoxMesh_dhmms")
 
-[node name="SpawnPoint" parent="SpawnManager/SpawnArea" instance=ExtResource("4_ch78g")]
+[node name="SpawnPoint" parent="SpawnArea" instance=ExtResource("4_ch78g")]
 team = 1
 
-[node name="SpawnArea2" parent="SpawnManager" node_paths=PackedStringArray("_visual_to_be_destroyed") instance=ExtResource("3_1158a")]
+[node name="SpawnArea2" parent="." node_paths=PackedStringArray("_visual_to_be_destroyed") instance=ExtResource("3_1158a")]
 collision_layer = 4
 collision_mask = 0
 monitoring = false
@@ -87,16 +82,16 @@ monitorable = false
 team = 2
 _visual_to_be_destroyed = NodePath("MeshInstance3D")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnManager/SpawnArea2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnArea2"]
 shape = SubResource("BoxShape3D_s5mjc")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SpawnManager/SpawnArea2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SpawnArea2"]
 mesh = SubResource("BoxMesh_qkrr5")
 
-[node name="SpawnPoint2" parent="SpawnManager/SpawnArea2" instance=ExtResource("4_ch78g")]
+[node name="SpawnPoint2" parent="SpawnArea2" instance=ExtResource("4_ch78g")]
 team = 2
 
-[node name="SpawnArea3" parent="SpawnManager" node_paths=PackedStringArray("_visual_to_be_destroyed") instance=ExtResource("3_1158a")]
+[node name="SpawnArea3" parent="." node_paths=PackedStringArray("_visual_to_be_destroyed") instance=ExtResource("3_1158a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.333)
 collision_layer = 4
 collision_mask = 0
@@ -105,13 +100,13 @@ monitorable = false
 team = 3
 _visual_to_be_destroyed = NodePath("MeshInstance3D")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnManager/SpawnArea3"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnArea3"]
 shape = SubResource("BoxShape3D_ltado")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SpawnManager/SpawnArea3"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SpawnArea3"]
 mesh = SubResource("BoxMesh_5uiyh")
 
-[node name="SpawnPoint3" parent="SpawnManager/SpawnArea3" instance=ExtResource("4_ch78g")]
+[node name="SpawnPoint3" parent="SpawnArea3" instance=ExtResource("4_ch78g")]
 team = 3
 
 [node name="Floor" type="StaticBody3D" parent="."]
@@ -124,3 +119,7 @@ skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
 shape = SubResource("BoxShape3D_6j5cd")
+
+[node name="CharacterSpawner" parent="." node_paths=PackedStringArray("_spawn_points", "_spawn_areas") instance=ExtResource("4_72v03")]
+_spawn_points = [NodePath("../SpawnArea/SpawnPoint"), NodePath("../SpawnArea2/SpawnPoint2"), NodePath("../SpawnArea3/SpawnPoint3")]
+_spawn_areas = [NodePath("../SpawnArea"), NodePath("../SpawnArea2"), NodePath("../SpawnArea3")]

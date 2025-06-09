@@ -1,12 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://c66yw4go2ykwa"]
+[gd_scene load_steps=13 format=3 uid="uid://c66yw4go2ykwa"]
 
 [ext_resource type="Script" uid="uid://cd8u3lm3xa8c4" path="res://FloatingIsland/FightingIsland/FightingArea/fighting_area.gd" id="1_t74of"]
 [ext_resource type="PackedScene" uid="uid://pyrw8lacvly2" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/EntityManager/entity_manager.tscn" id="2_wtb7j"]
 [ext_resource type="PackedScene" uid="uid://c0l0roxttdtlp" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/FightingManager/fighting_manager.tscn" id="3_yyfcp"]
 [ext_resource type="PackedScene" uid="uid://bhxhqex1pbh2p" path="res://UI/FightingArea/ui_fighting_area.tscn" id="4_hqxx4"]
 [ext_resource type="PackedScene" uid="uid://ctspehviccwd5" path="res://FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor_1v1.tscn" id="5_2akj6"]
+[ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="5_xgsbs"]
 [ext_resource type="PackedScene" uid="uid://c6oxeboe353od" path="res://FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor_2v2.tscn" id="6_yyfcp"]
 [ext_resource type="PackedScene" uid="uid://dbbpa637es0uf" path="res://FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor_ffa13.tscn" id="7_hqxx4"]
+[ext_resource type="PackedScene" uid="uid://1h20y2oaj3fm" path="res://Modules/BattleModule/BattleWriter/battle_writer.tscn" id="8_7oplh"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_yyfcp"]
 properties/0/path = NodePath(".:position")
@@ -22,8 +24,9 @@ size = Vector3(20, 5, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_7oplh"]
 size = Vector3(1, 5, 10)
 
-[node name="FightingArea" type="Node3D" node_paths=PackedStringArray("_fighting_manager", "_entity_manager", "_ui_fighting_area", "_fighting_floors")]
+[node name="FightingArea" type="Node3D" node_paths=PackedStringArray("_spawn_manager", "_fighting_manager", "_entity_manager", "_ui_fighting_area", "_fighting_floors", "_entities_node")]
 script = ExtResource("1_t74of")
+_spawn_manager = NodePath("SpawnManager")
 _fighting_manager = NodePath("FightingManager")
 _entity_manager = NodePath("EntityManager")
 _ui_fighting_area = NodePath("UI/UIFightingArea")
@@ -32,10 +35,19 @@ _fighting_floors = {
 1: NodePath("FightingFloorTemplates/FightingFloor_2v2"),
 2: NodePath("FightingFloorTemplates/FightingFloor_ffa13")
 }
+_entities_node = NodePath("Entities")
 
 [node name="EntityManager" parent="." instance=ExtResource("2_wtb7j")]
 
 [node name="FightingManager" parent="." instance=ExtResource("3_yyfcp")]
+
+[node name="BattleWriter" parent="." node_paths=PackedStringArray("_fighting_area") instance=ExtResource("8_7oplh")]
+_fighting_area = NodePath("..")
+
+[node name="SpawnManager" parent="." node_paths=PackedStringArray("_fighting_area", "_entities_node", "_projectiles_node") instance=ExtResource("5_xgsbs")]
+_fighting_area = NodePath("..")
+_entities_node = NodePath("../Entities")
+_projectiles_node = NodePath("../Projectiles")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_yyfcp")
@@ -55,23 +67,11 @@ layout_mode = 1
 
 [node name="FightingFloor_1v1" parent="FightingFloorTemplates" instance=ExtResource("5_2akj6")]
 
-[node name="SpawnManager" parent="FightingFloorTemplates/FightingFloor_1v1" index="0" node_paths=PackedStringArray("_entities_node", "_projectiles_node")]
-_entities_node = NodePath("../../../Entities")
-_projectiles_node = NodePath("../../../Projectiles")
-
 [node name="FightingFloor_2v2" parent="FightingFloorTemplates" instance=ExtResource("6_yyfcp")]
 visible = false
 
-[node name="SpawnManager" parent="FightingFloorTemplates/FightingFloor_2v2" index="0" node_paths=PackedStringArray("_entities_node", "_projectiles_node")]
-_entities_node = NodePath("../../../Entities")
-_projectiles_node = NodePath("../../../Projectiles")
-
 [node name="FightingFloor_ffa13" parent="FightingFloorTemplates" instance=ExtResource("7_hqxx4")]
 visible = false
-
-[node name="SpawnManager" parent="FightingFloorTemplates/FightingFloor_ffa13" index="0" node_paths=PackedStringArray("_entities_node", "_projectiles_node")]
-_entities_node = NodePath("../../../Entities")
-_projectiles_node = NodePath("../../../Projectiles")
 
 [node name="Entities" type="Node3D" parent="."]
 
@@ -82,7 +82,6 @@ _projectiles_node = NodePath("../../../Projectiles")
 [node name="Wall1" type="Area3D" parent="Walls" groups=["WALL"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.5)
 monitoring = false
-monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall1"]
 shape = SubResource("BoxShape3D_6wjnm")
@@ -90,7 +89,6 @@ shape = SubResource("BoxShape3D_6wjnm")
 [node name="Wall2" type="Area3D" parent="Walls" groups=["WALL"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.5)
 monitoring = false
-monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall2"]
 shape = SubResource("BoxShape3D_6wjnm")
@@ -98,7 +96,6 @@ shape = SubResource("BoxShape3D_6wjnm")
 [node name="Wall3" type="Area3D" parent="Walls" groups=["WALL"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, 0, 0)
 monitoring = false
-monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall3"]
 shape = SubResource("BoxShape3D_7oplh")
@@ -106,11 +103,6 @@ shape = SubResource("BoxShape3D_7oplh")
 [node name="Wall4" type="Area3D" parent="Walls" groups=["WALL"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, 0)
 monitoring = false
-monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall4"]
 shape = SubResource("BoxShape3D_7oplh")
-
-[editable path="FightingFloorTemplates/FightingFloor_1v1"]
-[editable path="FightingFloorTemplates/FightingFloor_2v2"]
-[editable path="FightingFloorTemplates/FightingFloor_ffa13"]

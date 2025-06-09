@@ -12,6 +12,14 @@ enum Modifier {
 	INSTABILITY
 }
 
+enum Main {
+	TIME,
+	TYPE,
+	SOURCE,
+	TARGET,
+	MODIFIER
+}
+
 const TIME: String = "time"
 const TYPE: String = "type"
 const SOURCE: String = "source"

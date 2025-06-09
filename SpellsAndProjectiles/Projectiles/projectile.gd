@@ -5,23 +5,14 @@ extends Area3D
 
 enum ProjectileEffect {
 	POISON,       # Add poison stacks
-	VULNERABILTY, # Add vulnerability stacks
+	INSTABILITY,  # Add instqbility stacks
 	CRITIC,       # Do more physical damage
 	BOUNCE,       # Will bounce to an other target keeping all current stats
-	FIRE          # Do more damage bases on target current hp
+	IGNITE        # Do more damage bases on target current hp
 }
 
 enum ProjectileType {
-	AA_ANCIENT_TREE,
-	AA_CYBORG,
-	AA_DR_BOOM,
-	AA_ENERGY_MAN,
-	AA_LAURENT_KROFT,
-	AA_MR_KRUMB,
-	AA_SIR_REGINALD,
-	AA_TONY_LE_BARDE,
-	SPELL_FIREBOLT,
-	SPELL_SHADOW_BOLT
+	AUTO_ATTACK,
 }
 
 # ============================== Constants ==============================
