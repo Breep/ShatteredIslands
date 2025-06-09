@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=4 uid="uid://d080glq1m1puv"]
 
 [ext_resource type="Texture2D" uid="uid://dknfkykqwklf7" path="res://Data/Texture/2D/T_VFX_Noise_465.png" id="1_t1683"]
-[ext_resource type="Material" uid="uid://dqfq0thy6d1of" path="res://VFX/Shaders/3D/Vfezwater/shader_rocky.tres" id="2_pn56m"]
+[ext_resource type="Material" uid="uid://d3cx4okwaescj" path="res://VFX/Shaders/3D/Vfezwater/vfez_rocky.tres" id="2_sia6g"]
 [ext_resource type="AnimationLibrary" uid="uid://cdpewy3xl7vlx" path="res://Data/Anim/Rocky_lib.res" id="3_pn56m"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_mjas6"]
@@ -311,7 +311,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_6nx3r")
 [node name="char1" type="MeshInstance3D" parent="Armature/GeneralSkeleton"]
 mesh = SubResource("ArrayMesh_2njk6")
 skin = SubResource("Skin_53fyd")
-surface_material_override/0 = ExtResource("2_pn56m")
+surface_material_override/0 = ExtResource("2_sia6g")
 metadata/extras = {
 "gflow": {
 "bakeAnchor": {},
