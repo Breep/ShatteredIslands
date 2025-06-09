@@ -32,7 +32,15 @@ animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
-_subresources={}
+_subresources={
+"nodes": {
+"PATH:Armature/Skeleton3D": {
+"retarget/bone_map": Object(BoneMap,"resource_local_to_scene":false,"resource_name":"","profile":Object(SkeletonProfileHumanoid,"resource_local_to_scene":false,"resource_name":"","root_bone":&"Root","scale_base_bone":&"Hips","group_size":4,"bone_size":56,"script":null)
+,"bonemap":null,"bone_map/Root":&"Root_M","bone_map/Hips":&"Spine1_M","bone_map/Spine":&"Spine2_M","bone_map/Chest":&"Chest_M","bone_map/UpperChest":&"","bone_map/Neck":&"Neck_M","bone_map/Head":&"Head_M","bone_map/LeftEye":&"EyeJoint_L","bone_map/RightEye":&"EyeJoint_R","bone_map/Jaw":&"JawJoint_M","bone_map/LeftShoulder":&"Shoulder_L","bone_map/LeftUpperArm":&"","bone_map/LeftLowerArm":&"Elbow_L","bone_map/LeftHand":&"Wrist_L","bone_map/LeftThumbMetacarpal":&"ThumbFinger1_L","bone_map/LeftThumbProximal":&"ThumbFinger2_L","bone_map/LeftThumbDistal":&"ThumbFinger3_L","bone_map/LeftIndexProximal":&"IndexFinger1_L","bone_map/LeftIndexIntermediate":&"IndexFinger2_L","bone_map/LeftIndexDistal":&"IndexFinger3_L","bone_map/LeftMiddleProximal":&"MiddleFinger1_L","bone_map/LeftMiddleIntermediate":&"MiddleFinger2_L","bone_map/LeftMiddleDistal":&"MiddleFinger3_L","bone_map/LeftRingProximal":&"RingFinger1_L","bone_map/LeftRingIntermediate":&"RingFinger2_L","bone_map/LeftRingDistal":&"RingFinger3_L","bone_map/LeftLittleProximal":&"PinkyFinger1_L","bone_map/LeftLittleIntermediate":&"PinkyFinger2_L","bone_map/LeftLittleDistal":&"PinkyFinger3_L","bone_map/RightShoulder":&"Shoulder_R","bone_map/RightUpperArm":&"","bone_map/RightLowerArm":&"Elbow_R","bone_map/RightHand":&"Wrist_R","bone_map/RightThumbMetacarpal":&"ThumbFinger1_R","bone_map/RightThumbProximal":&"ThumbFinger2_R","bone_map/RightThumbDistal":&"ThumbFinger3_R","bone_map/RightIndexProximal":&"IndexFinger1_R","bone_map/RightIndexIntermediate":&"IndexFinger2_R","bone_map/RightIndexDistal":&"IndexFinger3_R","bone_map/RightMiddleProximal":&"MiddleFinger1_R","bone_map/RightMiddleIntermediate":&"MiddleFinger2_R","bone_map/RightMiddleDistal":&"MiddleFinger3_R","bone_map/RightRingProximal":&"RingFinger1_R","bone_map/RightRingIntermediate":&"RingFinger2_R","bone_map/RightRingDistal":&"RingFinger3_R","bone_map/RightLittleProximal":&"PinkyFinger1_R","bone_map/RightLittleIntermediate":&"PinkyFinger2_R","bone_map/RightLittleDistal":&"PinkyFinger3_R","bone_map/LeftUpperLeg":&"","bone_map/LeftLowerLeg":&"","bone_map/LeftFoot":&"","bone_map/LeftToes":&"","bone_map/RightUpperLeg":&"","bone_map/RightLowerLeg":&"","bone_map/RightFoot":&"","bone_map/RightToes":&"","script":null)
+
+}
+}
+}
 blender/nodes/visible=0
 blender/nodes/active_collection_only=false
 blender/nodes/punctual_lights=true
