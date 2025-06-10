@@ -35,6 +35,8 @@ const _fighting_phase_durations: Dictionary[FightingState, int] = {
 
 var timer: Timer
 
+const SERVER_TIME_SCALE: float = 5
+
 # ============================== Private variables ==============================
 
 var _fighting_state: FightingState = FightingState.UNDEF
@@ -100,6 +102,7 @@ func _finish_all_fights() -> void:
 func _on_timer_timeout() -> void:
 	match fighting_state:
 		FightingState.POSITIONING:
+			Engine.time_scale = SERVER_TIME_SCALE
 			fighting_state = FightingState.COUNTDOWN
 			Events.ui_main_countdown_triggered.emit(_fighting_phase_durations[FightingState.COUNTDOWN], "Fight")
 			timer.wait_time = _fighting_phase_durations[FightingState.COUNTDOWN]
@@ -118,6 +121,7 @@ func _on_timer_timeout() -> void:
 			timer.wait_time = _fighting_phase_durations[FightingState.FINISHED]
 			timer.start()
 		FightingState.FINISHED:
+			Engine.time_scale = 1
 			_finish_all_fights.rpc()
 
 
