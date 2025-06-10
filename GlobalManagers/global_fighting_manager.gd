@@ -24,7 +24,7 @@ enum FightingState {
 # ============================== Fighting phase duration ==============================
 
 const _fighting_phase_durations: Dictionary[FightingState, int] = {
-	FightingState.POSITIONING: 600,
+	FightingState.POSITIONING: 10,
 	FightingState.COUNTDOWN: 3,
 	FightingState.FIGHT: 10,
 	FightingState.FIGHT_ACCELERATED: 5, 
@@ -47,6 +47,7 @@ var fighting_state: FightingState:
 		if _fighting_state != value:
 			_fighting_state = value
 			state_changed.emit(value)
+			_sync_state.rpc(_fighting_state)
 
 var _fighting_managers: Array[FightingManager]
 var _current_active_fighting_managers: Array[FightingManager]
@@ -95,6 +96,12 @@ func _finish_all_fights() -> void:
 	Engine.time_scale = 1
 	timer.stop()
 	all_fights_are_over.emit()
+
+# ============================== RPC sync fighting state ==============================
+
+@rpc("authority", "call_remote")
+func _sync_state(server_fighting_state: FightingState) -> void:
+	fighting_state = server_fighting_state
 
 # ============================== Callbacks ==============================
 
