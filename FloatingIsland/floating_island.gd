@@ -1,12 +1,9 @@
 class_name FloatingIsland
 extends Node3D
 
-# ============================== Network export ==============================
+# ============================== Local nodes ==============================
 
-@export var player_owner_id : int = -1
-
-# ============================== local node ==============================
-
+@export_group("Local Nodes")
 @export var _center_point_camera: CenterPointCamera
 
 # ============================== Private variables ==============================
@@ -16,7 +13,7 @@ var _is_active: bool = false
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	_register_self_in_shared()
+	pass
 
 # ============================== Public functions ==============================
 
@@ -31,9 +28,4 @@ func set_active() -> void:
 
 
 func set_inactive() -> void:
-	pass
-
-# ============================== Private functions ==============================
-
-func _register_self_in_shared() -> void:
 	pass

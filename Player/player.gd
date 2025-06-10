@@ -27,6 +27,7 @@ var ready: bool # If this player is ready to continue the game flow (Used to syn
 
 var deck: PlayerDeck
 var character: Character
+var fighting_island: FightingIsland
 
 var win_streak: int
 var health_lost_since_last_round: int

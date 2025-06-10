@@ -1,8 +1,21 @@
 class_name FightingIsland
 extends FloatingIsland
 
+# ============================== Network export ==============================
+
+@export_group("Network")
+var _player_owner_id: int = -1
+@export var player_owner_id: int = -1:
+	get: return _player_owner_id
+	set(value):
+		if _player_owner_id == value: return
+		_player_owner_id = value
+		_update_player_ref(_player_owner_id)
+
+
 # ============================== local node ==============================
 
+@export_group("Local Nodes")
 @export var _fighting_area: FightingArea
 @export var _camera: Camera3D
 
@@ -13,7 +26,7 @@ var _current_characters: Array[Character]
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	pass
+	_update_player_ref(_player_owner_id)
 
 # ============================== Public functions ==============================
 
@@ -44,3 +57,7 @@ func set_inactive() -> void:
 		character.on_inactive_island()
 
 # ============================== Private functions ==============================
+
+func _update_player_ref(player_id: int) -> void:
+	if PlayerManager.players.has(player_id):
+		PlayerManager.players[player_id].fighting_island = self
