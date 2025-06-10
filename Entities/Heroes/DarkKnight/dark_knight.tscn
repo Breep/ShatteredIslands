@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://c48aqh8mlb7lc"]
+[gd_scene load_steps=43 format=3 uid="uid://c48aqh8mlb7lc"]
 
 [ext_resource type="Script" uid="uid://cusafkpxrg6we" path="res://Entities/Heroes/DarkKnight/dark_knight.gd" id="1_ufk4g"]
 [ext_resource type="Resource" uid="uid://by3bwbvf4ekcd" path="res://Entities/Heroes/DarkKnight/dark_knight.tres" id="2_5qtoa"]
@@ -7,6 +7,9 @@
 [ext_resource type="AnimationLibrary" uid="uid://bmijhrm7py8vg" path="res://Data/Anim/lib_rig_no_mixamo.res" id="3_ds2a6"]
 [ext_resource type="PackedScene" uid="uid://qgjyscmtp6t3" path="res://Entities/Character/CharacterLogic/character_logic.tscn" id="9_7iff5"]
 [ext_resource type="PackedScene" uid="uid://cpqtocfge7ott" path="res://Entities/Character/CharacterAnimator/character_animator.tscn" id="10_3dwlx"]
+[ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://Modules/PickableClickable/PickableModule/pickable_module.tscn" id="11_vgqdx"]
+[ext_resource type="PackedScene" uid="uid://c8630px7dwlvh" path="res://Modules/PickableClickable/Constraints/PickableCollider/pickable_collider.tscn" id="12_rsfv3"]
+[ext_resource type="PackedScene" uid="uid://dyyf8nhixlubs" path="res://Modules/PickableClickable/Constraints/SpawnAreaChecker/spawn_area_checker.tscn" id="13_xsepk"]
 [ext_resource type="PackedScene" uid="uid://dqrhym1sskng8" path="res://Entities/Turret/turret.tscn" id="18_bo24q"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="19_thqxc"]
 [ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://Tool/QuickAnims/anim_rotating_module.tscn" id="20_x3tde"]
@@ -6869,6 +6872,15 @@ projectile_spawn = NodePath("../../../TurretCenterPoint/Turret/SpawnPoint")
 [node name="CharacterAnimator" parent="." node_paths=PackedStringArray("_animation_tree", "_owner") instance=ExtResource("10_3dwlx")]
 _animation_tree = NodePath("../AnimationTree")
 _owner = NodePath("..")
+
+[node name="PickableModule" parent="." node_paths=PackedStringArray("_owner", "_pickable_collider", "_spawn_area_checker") instance=ExtResource("11_vgqdx")]
+_owner = NodePath("..")
+_pickable_collider = NodePath("../PickableCollider")
+_spawn_area_checker = NodePath("../SpawnAreaChecker")
+
+[node name="PickableCollider" parent="." instance=ExtResource("12_rsfv3")]
+
+[node name="SpawnAreaChecker" parent="." instance=ExtResource("13_xsepk")]
 
 [editable path="DarkKnightModel"]
 [editable path="TurretCenterPoint/Turret"]

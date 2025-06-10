@@ -14,6 +14,7 @@ var _start_time: float
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
+	if not multiplayer.is_server(): queue_free() # Only the server writes a BattleLog
 	_fighting_area.projectile_spawned.connect(_on_events_projectile_spawned)
 	GlobalFightingManager.state_changed.connect(_on_global_fighting_manager_state_changed)
 

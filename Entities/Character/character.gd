@@ -109,7 +109,7 @@ func _character_ready() -> void:
 	#_interact_module.damage_taken.connect(_on_interact_module_damage_taken)
 	#_interact_module.heal_received.connect(_on_interact_module_heal_received)
 	
-	#_server_synchronizer.set_multiplayer_authority(player.id)
+	#
 
 # ============================== Private functions ==============================
 
@@ -166,6 +166,7 @@ func _on_events_game_state_changed(new_state: Game.GameState) -> void:
 			_character_visual.hide()
 			if _turret != null: _turret.hide()
 		Game.GameState.FIGHTING:
+			if not player.is_bot: _server_synchronizer.set_multiplayer_authority(player.id)
 			_character_visual.show()
 			if _turret != null: _turret.show()
 

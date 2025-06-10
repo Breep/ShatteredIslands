@@ -11,10 +11,10 @@ properties/0/spawn = true
 properties/0/replication_mode = 0
 properties/1/path = NodePath(".:position")
 properties/1/spawn = true
-properties/1/replication_mode = 0
+properties/1/replication_mode = 2
 properties/2/path = NodePath(".:rotation")
 properties/2/spawn = true
-properties/2/replication_mode = 0
+properties/2/replication_mode = 2
 
 [node name="FightingIsland" type="Node3D" node_paths=PackedStringArray("_fighting_area", "_camera", "_center_point_camera")]
 script = ExtResource("1_hqxtb")

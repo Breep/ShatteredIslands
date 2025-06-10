@@ -24,7 +24,7 @@ enum FightingState {
 # ============================== Fighting phase duration ==============================
 
 const _fighting_phase_durations: Dictionary[FightingState, int] = {
-	FightingState.POSITIONING: 5,
+	FightingState.POSITIONING: 600,
 	FightingState.COUNTDOWN: 3,
 	FightingState.FIGHT: 10,
 	FightingState.FIGHT_ACCELERATED: 5, 

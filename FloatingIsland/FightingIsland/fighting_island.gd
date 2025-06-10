@@ -27,6 +27,8 @@ var _current_characters: Array[Character]
 
 func _ready() -> void:
 	_update_player_ref(_player_owner_id)
+	if _player_owner_id != -1:
+		Events.fighting_island_spawned.emit(self, _player_owner_id)
 
 # ============================== Public functions ==============================
 

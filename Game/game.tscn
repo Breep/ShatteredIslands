@@ -133,9 +133,8 @@ transform = Transform3D(0.72304, 0.426404, -0.543501, 0, 0.786763, 0.617256, 0.6
 light_color = Color(0.806127, 0.544895, 0.445082, 1)
 shadow_enabled = true
 
-[node name="SceneSwitcher" parent="." node_paths=PackedStringArray("buying_island", "fighting_islands") instance=ExtResource("3_vifcx")]
+[node name="SceneSwitcher" parent="." node_paths=PackedStringArray("buying_island") instance=ExtResource("3_vifcx")]
 buying_island = NodePath("../BuyingIsland")
-fighting_islands = [NodePath("../IslandSpawns/CenterPoint1/SpawnPoint1/FightingIsland"), NodePath("../IslandSpawns/CenterPoint2/SpawnPoint2/FightingIsland"), NodePath("../IslandSpawns/CenterPoint3/SpawnPoint3/FightingIsland"), NodePath("../IslandSpawns/CenterPoint4/SpawnPoint4/FightingIsland"), NodePath("../IslandSpawns/CenterPoint5/SpawnPoint5/FightingIsland"), NodePath("../IslandSpawns/CenterPoint6/SpawnPoint6/FightingIsland"), NodePath("../IslandSpawns/CenterPoint7/SpawnPoint7/FightingIsland"), NodePath("../IslandSpawns/CenterPoint8/SpawnPoint8/FightingIsland")]
 
 [node name="HeroSelector" parent="." instance=ExtResource("8_xfil1")]
 
