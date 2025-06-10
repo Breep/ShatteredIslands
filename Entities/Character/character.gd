@@ -156,8 +156,11 @@ func _on_fighting_manager_fight_is_over(_winner_team) -> void:
 	_character_logic.stop()
 
 
-func _on_global_fighting_manager_state_changed(new_state: GlobalFightingManager.FightingState) -> void:
-	fighting_state = new_state
+func _on_global_fighting_manager_state_changed(global_fighting_state: GlobalFightingManager.FightingState) -> void:
+	fighting_state = global_fighting_state
+	if global_fighting_state == GlobalFightingManager.FightingState.COUNTDOWN:
+		_server_synchronizer.set_multiplayer_authority(-1)
+		set_multiplayer_authority(-1)
 
 
 func _on_events_game_state_changed(new_state: Game.GameState) -> void:
@@ -169,6 +172,9 @@ func _on_events_game_state_changed(new_state: Game.GameState) -> void:
 			if not player.is_bot:
 				_server_synchronizer.set_multiplayer_authority(player.id)
 				set_multiplayer_authority(player.id)
+			else:
+				_server_synchronizer.set_multiplayer_authority(1)
+				set_multiplayer_authority(1)
 			_character_visual.show()
 			if _turret != null: _turret.show()
 

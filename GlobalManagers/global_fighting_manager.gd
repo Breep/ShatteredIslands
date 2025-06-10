@@ -47,7 +47,6 @@ var fighting_state: FightingState:
 		if _fighting_state != value:
 			_fighting_state = value
 			state_changed.emit(value)
-			_sync_state.rpc(_fighting_state)
 
 var _fighting_managers: Array[FightingManager]
 var _current_active_fighting_managers: Array[FightingManager]
@@ -110,9 +109,9 @@ func _on_timer_timeout() -> void:
 	match fighting_state:
 		FightingState.POSITIONING:
 			Engine.time_scale = SERVER_TIME_SCALE
-			fighting_state = FightingState.COUNTDOWN
-			Events.ui_main_countdown_triggered.emit(_fighting_phase_durations[FightingState.COUNTDOWN], "Fight")
-			timer.wait_time = _fighting_phase_durations[FightingState.COUNTDOWN]
+			_sync_state.rpc(FightingState.COUNTDOWN) # Trigger COUNTDOWN STATE on client
+			fighting_state = FightingState.FIGHT
+			timer.wait_time = _fighting_phase_durations[FightingState.FIGHT]
 			timer.start()
 		FightingState.COUNTDOWN:
 			fighting_state = FightingState.FIGHT
@@ -135,15 +134,17 @@ func _on_timer_timeout() -> void:
 func _on_state_changed(new_state) -> void:
 	match new_state:
 		FightingState.POSITIONING:
-			print("GlobalFightingManager: Starting the positioning")
+			_sync_state.rpc(_fighting_state)
+			print("[", multiplayer.get_unique_id(), "] GlobalFightingManager: Starting the positioning")
 		FightingState.COUNTDOWN:
-			print("GlobalFightingManager: Starting countdown")
+			Events.ui_main_countdown_triggered.emit(_fighting_phase_durations[FightingState.COUNTDOWN], "Fight")
+			print("[", multiplayer.get_unique_id(), "] GlobalFightingManager: Starting countdown")
 		FightingState.FIGHT:
-			print("GlobalFightingManager: Starting the fight")
+			print("[", multiplayer.get_unique_id(), "] GlobalFightingManager: Starting the fight")
 		FightingState.FIGHT_ACCELERATED:
-			print("GlobalFightingManager: Starting the accelerated fight")
+			print("[", multiplayer.get_unique_id(), "] GlobalFightingManager: Starting the accelerated fight")
 		FightingState.FINISHED:
-			print("GlobalFightingManager: Starting the finished phase (dance)")
+			print("[", multiplayer.get_unique_id(), "] GlobalFightingManager: Starting the finished phase (dance)")
 
 
 func _fighting_manager_fighting_is_over(fighting_manager: FightingManager, _winner_teams_order: Array[int]) -> void:
