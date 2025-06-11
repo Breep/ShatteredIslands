@@ -1,19 +1,11 @@
-[gd_scene load_steps=26 format=3 uid="uid://2v270ywaa1vg"]
+[gd_scene load_steps=17 format=3 uid="uid://2v270ywaa1vg"]
 
 [ext_resource type="Script" uid="uid://bfk1vk6iow70n" path="res://Entities/Heroes/AncientTree/ancient_tree.gd" id="1_61y0m"]
 [ext_resource type="Resource" uid="uid://qa70iekc67ac" path="res://Entities/Heroes/AncientTree/ancient_tree.tres" id="2_fsm3l"]
 [ext_resource type="PackedScene" uid="uid://dfrrvt8lpo17x" path="res://Entities/Heroes/AncientTree/ancient_tree_model.tscn" id="2_su5oi"]
-[ext_resource type="PackedScene" uid="uid://cf4y1g6c4ia6w" path="res://Entities/Character/CharacterVisual/character_visual.tscn" id="2_yqw0q"]
 [ext_resource type="AnimationLibrary" uid="uid://bd8buex3pprwv" path="res://Data/Anim/Ancient tree v2 .res" id="3_61y0m"]
 [ext_resource type="AnimationLibrary" uid="uid://bmijhrm7py8vg" path="res://Data/Anim/lib_rig_no_mixamo.res" id="4_fsm3l"]
-[ext_resource type="PackedScene" uid="uid://qgjyscmtp6t3" path="res://Entities/Character/CharacterLogic/character_logic.tscn" id="10_ieptw"]
-[ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://Modules/PickableClickable/PickableModule/pickable_module.tscn" id="11_tww0m"]
-[ext_resource type="PackedScene" uid="uid://c8630px7dwlvh" path="res://Modules/PickableClickable/Constraints/PickableCollider/pickable_collider.tscn" id="12_j737t"]
-[ext_resource type="PackedScene" uid="uid://dyyf8nhixlubs" path="res://Modules/PickableClickable/Constraints/SpawnAreaChecker/spawn_area_checker.tscn" id="13_l700e"]
-[ext_resource type="PackedScene" uid="uid://cpqtocfge7ott" path="res://Entities/Character/CharacterAnimator/character_animator.tscn" id="14_katp2"]
-[ext_resource type="PackedScene" uid="uid://dqrhym1sskng8" path="res://Entities/Turret/turret.tscn" id="19_i08v8"]
-[ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="20_6rj4w"]
-[ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://Tool/QuickAnims/anim_rotating_module.tscn" id="21_50blj"]
+[ext_resource type="PackedScene" uid="uid://cpqtocfge7ott" path="res://Entities/Character/HeroAnimator/hero_animator.tscn" id="14_katp2"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_61y0m"]
 animation = &"Ancient tree v2 /dance"
@@ -53,7 +45,7 @@ input_3/reset = true
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_s6iox"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_su5oi"]
-graph_offset = Vector2(-669, -134)
+graph_offset = Vector2(-586, -110)
 nodes/AnimDance/node = SubResource("AnimationNodeAnimation_61y0m")
 nodes/AnimDance/position = Vector2(-1080, -80)
 nodes/AnimDie/node = SubResource("AnimationNodeAnimation_katp2")
@@ -76,43 +68,13 @@ node_connections = [&"Transition", 0, &"idle_speed", &"Transition", 1, &"dance_s
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rxegs"]
 height = 3.0
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5ed6q"]
-properties/0/path = NodePath(".:owner_player_id")
-properties/0/spawn = true
-properties/0/replication_mode = 0
-properties/1/path = NodePath(".:id")
-properties/1/spawn = true
-properties/1/replication_mode = 0
-properties/2/path = NodePath(".:team")
-properties/2/spawn = true
-properties/2/replication_mode = 2
-properties/3/path = NodePath(".:position")
-properties/3/spawn = true
-properties/3/replication_mode = 2
-properties/4/path = NodePath(".:fighting_state")
-properties/4/spawn = true
-properties/4/replication_mode = 2
-properties/5/path = NodePath(".:battle_id")
-properties/5/spawn = true
-properties/5/replication_mode = 2
-properties/6/path = NodePath(".:rotation")
-properties/6/spawn = true
-properties/6/replication_mode = 2
-properties/7/path = NodePath("CharacterVisual:visible")
-properties/7/spawn = true
-properties/7/replication_mode = 2
-properties/8/path = NodePath("TurretCenterPoint:visible")
-properties/8/spawn = true
-properties/8/replication_mode = 2
-
-[node name="AncientTree" type="CharacterBody3D" node_paths=PackedStringArray("_character_logic", "_turret", "_interact_module") groups=["CHARACTER"]]
-collision_layer = 16
-collision_mask = 9
+[node name="AncientTree" type="StaticBody3D" node_paths=PackedStringArray("collision_shape", "_hero_animator") groups=["CHARACTER"]]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_61y0m")
-_hero = ExtResource("2_fsm3l")
-_character_logic = NodePath("CharacterLogic")
-_turret = NodePath("TurretCenterPoint/Turret")
-_interact_module = NodePath("CharacterLogic/Modules/InteractModule")
+hero = ExtResource("2_fsm3l")
+collision_shape = NodePath("CollisionShape3D")
+_hero_animator = NodePath("HeroAnimator")
 
 [node name="AncientTreeModel" parent="." instance=ExtResource("2_su5oi")]
 transform = Transform3D(-1.82, 0, -1.59109e-07, 0, 1.82, 0, 1.59109e-07, 0, -1.82, 0, 0, 0)
@@ -151,8 +113,7 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-unique_name_in_owner = true
-root_node = NodePath("%AnimationTree/../AncientTreeModel")
+root_node = NodePath("../AncientTreeModel")
 tree_root = SubResource("AnimationNodeBlendTree_su5oi")
 anim_player = NodePath("../AncientTreeModel/AnimationPlayer")
 parameters/Transition/current_state = "TPose"
@@ -162,72 +123,12 @@ parameters/dance_speed/scale = 1.0
 parameters/die_speed/scale = 1.0
 parameters/idle_speed/scale = 1.0
 
-[node name="CharacterVisual" parent="." instance=ExtResource("2_yqw0q")]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5214, 0)
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("CapsuleShape3D_rxegs")
 
-[node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-unique_name_in_owner = true
-replication_config = SubResource("SceneReplicationConfig_5ed6q")
-
-[node name="TurretCenterPoint" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.36537, 0)
-
-[node name="Turret" parent="TurretCenterPoint" node_paths=PackedStringArray("_auto_attack_module") instance=ExtResource("19_i08v8")]
-transform = Transform3D(0.495, 0, 0, 0, 0.495, 0, 0, 0, 0.495, 1.935, 0, 0)
-_auto_attack_module = NodePath("../../CharacterLogic/Modules/AutoAttackModule")
-
-[node name="AnimHoveringModule" parent="TurretCenterPoint/Turret" node_paths=PackedStringArray("_owner") instance=ExtResource("20_6rj4w")]
-_owner = NodePath("..")
-_hover_power = 0.155
-_hover_period = 2.0
-
-[node name="AnimRotatingModule" parent="TurretCenterPoint" node_paths=PackedStringArray("_owner") instance=ExtResource("21_50blj")]
-_owner = NodePath("..")
-_rot_axis = 1
-_rot_period = 10.0
-_rot_max = 360.0
-_rot_full = true
-
-[node name="CharacterLogic" parent="." node_paths=PackedStringArray("_source", "modules", "families_managers") instance=ExtResource("10_ieptw")]
-_source = NodePath("..")
-modules = {
-0: NodePath("Modules/MovementModule"),
-1: NodePath("Modules/ActionModule"),
-2: NodePath("Modules/InteractModule"),
-3: NodePath("Modules/AutoAttackModule"),
-4: NodePath("Modules/TargetModule")
-}
-families_managers = {
-0: NodePath("FamiliesManagers/AttackManager"),
-1: NodePath("FamiliesManagers/DefenseManager"),
-2: NodePath("FamiliesManagers/FireManager"),
-3: NodePath("FamiliesManagers/StormManager"),
-4: NodePath("FamiliesManagers/SerenityManager"),
-5: NodePath("FamiliesManagers/LifeManager"),
-6: NodePath("FamiliesManagers/PoisonManager")
-}
-
-[node name="AutoAttackModule" parent="CharacterLogic/Modules" index="3" node_paths=PackedStringArray("projectile_spawn")]
-projectile_spawn = NodePath("../../../TurretCenterPoint/Turret/SpawnPoint")
-
-[node name="PickableModule" parent="." node_paths=PackedStringArray("_owner", "_pickable_collider", "_spawn_area_checker") instance=ExtResource("11_tww0m")]
-_owner = NodePath("..")
-_pickable_collider = NodePath("../PickableCollider")
-_spawn_area_checker = NodePath("../SpawnAreaChecker")
-
-[node name="PickableCollider" parent="." instance=ExtResource("12_j737t")]
-
-[node name="SpawnAreaChecker" parent="." instance=ExtResource("13_l700e")]
-
-[node name="CharacterAnimator" parent="." node_paths=PackedStringArray("_animation_tree", "_owner") instance=ExtResource("14_katp2")]
+[node name="HeroAnimator" parent="." node_paths=PackedStringArray("_animation_tree") instance=ExtResource("14_katp2")]
 _animation_tree = NodePath("../AnimationTree")
-_owner = NodePath("..")
 
 [editable path="AncientTreeModel"]
-[editable path="TurretCenterPoint/Turret"]
-[editable path="CharacterLogic"]

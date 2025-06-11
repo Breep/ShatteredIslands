@@ -1,5 +1,5 @@
 class_name Cyborg
-extends Character
+extends Hero3D
 
 func _ready() -> void:
-	_character_ready()
+	pass

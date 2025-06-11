@@ -102,7 +102,7 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -1.
 [node name="PhysicalDamageCenter" type="Node3D" parent="PopUpSpawns"]
 
 [node name="SpawnPoint" parent="PopUpSpawns/PhysicalDamageCenter" instance=ExtResource("5_xieti")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 
 [node name="VisualToBeDestroyed" parent="PopUpSpawns/PhysicalDamageCenter/SpawnPoint" index="0"]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
@@ -111,7 +111,7 @@ transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 transform = Transform3D(0.5, -0.866025, 0, 0.866025, 0.5, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="SpawnPoint2" parent="PopUpSpawns/PoisonDamageCenter" instance=ExtResource("5_xieti")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 
 [node name="VisualToBeDestroyed" parent="PopUpSpawns/PoisonDamageCenter/SpawnPoint2" index="0"]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
@@ -120,7 +120,7 @@ transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 transform = Transform3D(-0.5, -0.866025, 0, 0.866025, -0.5, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="SpawnPoint3" parent="PopUpSpawns/MagicDamageCenter" instance=ExtResource("5_xieti")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 
 [node name="VisualToBeDestroyed" parent="PopUpSpawns/MagicDamageCenter/SpawnPoint3" index="0"]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
@@ -129,7 +129,7 @@ transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="SpawnPoint4" parent="PopUpSpawns/HealCenter" instance=ExtResource("5_xieti")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 
 [node name="VisualToBeDestroyed" parent="PopUpSpawns/HealCenter/SpawnPoint4" index="0"]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)

@@ -1,14 +1,26 @@
+@tool
+
 class_name Character
 extends Entity
+
+# ============================== Editor-only tools ==============================
+
+const _HEROES_3D: Dictionary[Hero.HeroId, PackedScene] = {
+	Hero.HeroId.ANCIENT_TREE: preload("res://Entities/Heroes/AncientTree/ancient_tree.tscn"),
+	Hero.HeroId.CYBORG: preload("res://Entities/Heroes/Cyborg/cyborg.tscn"),
+	Hero.HeroId.DR_BOOM: preload("res://Entities/Heroes/DrBoom/dr_boom.tscn"),
+	Hero.HeroId.LAURENT_KROFT: preload("res://Entities/Heroes/LaurentKroft/laurent_kroft.tscn"),
+	Hero.HeroId.MR_KRUMB: preload("res://Entities/Heroes/MrKrumb/mr_krumb.tscn"),
+	Hero.HeroId.SIR_REGINALD: preload("res://Entities/Heroes/SirReginald/sir_reginald.tscn"),
+	Hero.HeroId.TONY_LE_BARDE: preload("res://Entities/Heroes/TonyLeBarde/tony_le_barde.tscn"),
+	Hero.HeroId.RHINO: preload("res://Entities/Heroes/Rhino/rhino.tscn"),
+	Hero.HeroId.DARK_KNIGHT: preload("res://Entities/Heroes/DarkKnight/dark_knight.tscn")
+}
 
 # ============================== Signal ==============================
 
 signal fight_is_won()
 signal fight_is_lost()
-
-# ============================== Export variables (Network) ==============================
-
-@export var owner_player_id: int # ID of the player owner of this character
 
 # ============================== Fighting State ==============================
 
@@ -22,8 +34,29 @@ var fighting_state: GlobalFightingManager.FightingState:
 
 # ============================== Export ==============================
 
-@export var _hero: Hero
-@export var _is_prototype: bool # 
+@export_group("Network")
+@export_subgroup("Variables")
+@export var owner_player_id: int # ID of the player owner of this character
+var _hero_id: Hero.HeroId = Hero.HeroId.ANCIENT_TREE
+@export var hero_id: Hero.HeroId: # ID of the hero this character represent
+	get: return _hero_id
+	set(value):
+		if value == _hero_id: return
+		_hero_id = value
+		print("Changing hero to: ", hero_id)
+		_change_hero()
+
+@export_subgroup("Synchronizer")
+@export var _server_synchronizer: MultiplayerSynchronizer
+@export var _movement_synchronizer: MultiplayerSynchronizer
+
+@export_group("Local Nodes")
+@export var _character_visual: CharacterVisual
+@export var _character_logic: CharacterLogic
+@export var _turret: Turret
+@export var _hero_3D: Hero3D
+@export var _collision_shape: CollisionShape3D
+@export var _interact_module: InteractModule # TODO TMP
 
 # ============================== Public variables ==============================
 
@@ -39,20 +72,10 @@ var _is_local: bool = false
 
 var _fighting_state: GlobalFightingManager.FightingState = GlobalFightingManager.FightingState.UNDEF
 
-# ============================== Local scene nodes ==============================
-
-@onready var _character_visual: CharacterVisual = $CharacterVisual
-@onready var _server_synchronizer: MultiplayerSynchronizer = %ServerSynchronizer
-
-@export var _character_logic: CharacterLogic
-@export var _turret: Turret
-
-@export var _interact_module: InteractModule # TODO TMP
-
 # ============================== Public functions ==============================
 
 func apply_cards_upgrade(deck: PlayerDeck) -> void:
-	stats.reset_stats(_hero.stats)
+	stats.reset_stats(_hero_3D.hero.stats)
 	for card in deck.card_pile:
 		card.player_upgrade.apply(stats, card.lvl)
 
@@ -77,17 +100,15 @@ func on_inactive_island() -> void:
 # ============================== Node base functions ==============================
 
 func _init() -> void:
+	if Engine.is_editor_hint(): return
 	stats = CharacterStats.new()
 	stats.health_changed.connect(_on_stats_health_changed)
 	_entity_init()
 
 
 func _ready() -> void:
-	printerr("Character is a virtual class and shouldn't be instantiated")
-
-
-func _character_ready() -> void:
-	stats.reset_stats(_hero.stats)
+	if Engine.is_editor_hint(): return
+	stats.reset_stats(_hero_3D.hero.stats)
 	target_module = _character_logic.target_module
 	
 	if owner_player_id != 0:
@@ -114,7 +135,18 @@ func _character_ready() -> void:
 # ============================== Private functions ==============================
 
 func _reset() -> void:
-	stats.reset_stats(_hero.stats)
+	stats.reset_stats(_hero_3D.hero.stats)
+
+
+func _change_hero() -> void:
+	if _hero_3D != null: _hero_3D.queue_free()
+	_hero_3D = _HEROES_3D[hero_id].instantiate()
+	_hero_3D.character_owner = self
+	_collision_shape.shape = _hero_3D.collision_shape.shape.duplicate() # Update Collider
+	var hero_height: float = (_collision_shape.shape as CapsuleShape3D).height
+	_character_visual.position.y = hero_height + 1
+	
+	add_child(_hero_3D)
 
 # ============================== Private ==============================
 
@@ -158,8 +190,15 @@ func _on_fighting_manager_fight_is_over(_winner_team) -> void:
 
 func _on_global_fighting_manager_state_changed(global_fighting_state: GlobalFightingManager.FightingState) -> void:
 	fighting_state = global_fighting_state
+	if global_fighting_state == GlobalFightingManager.FightingState.POSITIONING:
+		if not player.is_bot:
+			_movement_synchronizer.set_multiplayer_authority(player.id)
+			set_multiplayer_authority(player.id)
+		else:
+			_movement_synchronizer.set_multiplayer_authority(1)
+			set_multiplayer_authority(1)
 	if global_fighting_state == GlobalFightingManager.FightingState.COUNTDOWN:
-		_server_synchronizer.set_multiplayer_authority(-1)
+		_movement_synchronizer.set_multiplayer_authority(-1)
 		set_multiplayer_authority(-1)
 
 
@@ -169,12 +208,6 @@ func _on_events_game_state_changed(new_state: Game.GameState) -> void:
 			_character_visual.hide()
 			if _turret != null: _turret.hide()
 		Game.GameState.FIGHTING:
-			if not player.is_bot:
-				_server_synchronizer.set_multiplayer_authority(player.id)
-				set_multiplayer_authority(player.id)
-			else:
-				_server_synchronizer.set_multiplayer_authority(1)
-				set_multiplayer_authority(1)
 			_character_visual.show()
 			if _turret != null: _turret.show()
 
