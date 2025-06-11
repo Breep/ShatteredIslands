@@ -77,9 +77,9 @@ func _start_new_round() ->void:
 	_current_round_player_id_islands.clear()
 	
 	_current_round_battles = await RoundManager.get_current_round_battles()
-	await PlayerManager.sync_point(PlayerManager.SyncID.STARTING_NEW_ROUND)
 	_init_current_round_player_id_islands(_current_round_battles.size())
 	RoundManager.starting_round_player_changes()
+	await PlayerManager.sync_point(PlayerManager.SyncID.ROUND_SETUP)
 	_start_buying_phase(_current_round_battles)
 
 
@@ -149,6 +149,7 @@ func _spawn_all_characters() -> void:
 
 func _on_buying_island_buying_phase_finished() -> void:
 	print("[", multiplayer.get_unique_id(), "] Game: BUYING PHASE ENDED")
+	await PlayerManager.sync_point(PlayerManager.SyncID.BUYING_PHASE)
 	_start_fighting_phase(_current_round_battles)
 
 
@@ -161,9 +162,5 @@ func _on_hero_selector_all_heroes_picked() -> void:
 func _on_global_fighting_manager_all_fights_are_over() -> void:
 	print("[", multiplayer.get_unique_id(), "] Game: ALL FIGHTS ARE OVER")
 	await RoundManager.ending_round_player_changes()
-	print("[", multiplayer.get_unique_id(), "] Game: ALL FIGHTS ARE OVER 1")
-	await get_tree().create_timer(1.0).timeout
-	print("[", multiplayer.get_unique_id(), "] Game: ALL FIGHTS ARE OVER 2")
-	await PlayerManager.sync_point(PlayerManager.SyncID.ENDING_ROUND)
-	print("[", multiplayer.get_unique_id(), "] Game: ALL FIGHTS ARE OVER 3")
+	await PlayerManager.sync_point(PlayerManager.SyncID.ROUND_ENDING)
 	_start_new_round()
