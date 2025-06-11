@@ -161,6 +161,7 @@ func _on_hero_selector_all_heroes_picked() -> void:
 
 func _on_global_fighting_manager_all_fights_are_over() -> void:
 	print("[", multiplayer.get_unique_id(), "] Game: ALL FIGHTS ARE OVER")
+	await PlayerManager.sync_point(PlayerManager.SyncID.FIGHTING_PHASE)
 	await RoundManager.ending_round_player_changes()
 	await PlayerManager.sync_point(PlayerManager.SyncID.ROUND_ENDING)
 	_start_new_round()
