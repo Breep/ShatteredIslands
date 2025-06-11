@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://1h20y2oaj3fm"]
+
+[ext_resource type="Script" uid="uid://cg7kmqw3ln4wu" path="res://Modules/BattleModule/BattleWriter/battle_writer.gd" id="1_q2r2b"]
+
+[node name="BattleWriter" type="Node"]
+script = ExtResource("1_q2r2b")

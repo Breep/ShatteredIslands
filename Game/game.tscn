@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://oimyi4iueoda"]
+[gd_scene load_steps=15 format=3 uid="uid://oimyi4iueoda"]
 
 [ext_resource type="Script" uid="uid://blljr68c4u466" path="res://Game/game.gd" id="1_7r6pw"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Tool/SpawnPoint/spawn_point.tscn" id="3_i1e5p"]
@@ -24,6 +24,11 @@ background_energy_multiplier = 1.63
 sky = SubResource("Sky_ciybh")
 tonemap_mode = 3
 glow_enabled = true
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_7gi1t"]
+properties/0/path = NodePath(".:_current_round_player_id_islands")
+properties/0/spawn = true
+properties/0/replication_mode = 2
 
 [node name="Game" type="Node3D" node_paths=PackedStringArray("_buying_island", "_scene_switcher", "_hero_selector", "_node_fighting_islands", "_node_characters", "_islands_spawn_points", "_ui_game")]
 script = ExtResource("1_7r6pw")
@@ -113,6 +118,7 @@ _spawnable_scenes = PackedStringArray("uid://drcuyohos0doa")
 spawn_path = NodePath("../FightingIslands")
 
 [node name="CharacterSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://2v270ywaa1vg", "uid://g706yyhstscc", "uid://c48aqh8mlb7lc", "uid://dq1pqesv0lptu", "uid://dry6jgn0h7srg", "uid://btuch2oo5bxk4", "uid://vut8b02xa34b", "uid://h726o6giwel8", "uid://d3tlk3rg4dhpk", "uid://bjv2kwt6brxy4")
 spawn_path = NodePath("../Characters")
 
 [node name="FightingIslands" type="Node3D" parent="."]
@@ -127,13 +133,13 @@ transform = Transform3D(0.72304, 0.426404, -0.543501, 0, 0.786763, 0.617256, 0.6
 light_color = Color(0.806127, 0.544895, 0.445082, 1)
 shadow_enabled = true
 
-[node name="SceneSwitcher" parent="." node_paths=PackedStringArray("buying_island", "fighting_islands") instance=ExtResource("3_vifcx")]
+[node name="SceneSwitcher" parent="." node_paths=PackedStringArray("buying_island") instance=ExtResource("3_vifcx")]
 buying_island = NodePath("../BuyingIsland")
-fighting_islands = [NodePath("../IslandSpawns/CenterPoint1/SpawnPoint1/FightingIsland"), NodePath("../IslandSpawns/CenterPoint2/SpawnPoint2/FightingIsland"), NodePath("../IslandSpawns/CenterPoint3/SpawnPoint3/FightingIsland"), NodePath("../IslandSpawns/CenterPoint4/SpawnPoint4/FightingIsland"), NodePath("../IslandSpawns/CenterPoint5/SpawnPoint5/FightingIsland"), NodePath("../IslandSpawns/CenterPoint6/SpawnPoint6/FightingIsland"), NodePath("../IslandSpawns/CenterPoint7/SpawnPoint7/FightingIsland"), NodePath("../IslandSpawns/CenterPoint8/SpawnPoint8/FightingIsland")]
 
 [node name="HeroSelector" parent="." instance=ExtResource("8_xfil1")]
 
 [node name="UI" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -142,7 +148,11 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="UIGame" parent="UI" instance=ExtResource("9_kul4i")]
+visible = false
 layout_mode = 1
 
 [node name="turtle2" parent="." instance=ExtResource("10_7gi1t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.3404, 0, -0.250733)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_7gi1t")

@@ -24,7 +24,7 @@ enum FightingState {
 # ============================== Fighting phase duration ==============================
 
 const _fighting_phase_durations: Dictionary[FightingState, int] = {
-	FightingState.POSITIONING: 5,
+	FightingState.POSITIONING: 10,
 	FightingState.COUNTDOWN: 3,
 	FightingState.FIGHT: 10,
 	FightingState.FIGHT_ACCELERATED: 5, 
@@ -34,6 +34,8 @@ const _fighting_phase_durations: Dictionary[FightingState, int] = {
 # ============================== Public variables ==============================
 
 var timer: Timer
+
+const SERVER_TIME_SCALE: float = 5
 
 # ============================== Private variables ==============================
 
@@ -94,15 +96,22 @@ func _finish_all_fights() -> void:
 	timer.stop()
 	all_fights_are_over.emit()
 
+# ============================== RPC sync fighting state ==============================
+
+@rpc("authority", "call_remote")
+func _sync_state(server_fighting_state: FightingState) -> void:
+	fighting_state = server_fighting_state
+
 # ============================== Callbacks ==============================
 
 # Fighting state machine
 func _on_timer_timeout() -> void:
 	match fighting_state:
 		FightingState.POSITIONING:
-			fighting_state = FightingState.COUNTDOWN
-			Events.ui_main_countdown_triggered.emit(_fighting_phase_durations[FightingState.COUNTDOWN], "Fight")
-			timer.wait_time = _fighting_phase_durations[FightingState.COUNTDOWN]
+			Engine.time_scale = SERVER_TIME_SCALE
+			_sync_state.rpc(FightingState.COUNTDOWN) # Trigger COUNTDOWN STATE on client
+			fighting_state = FightingState.FIGHT
+			timer.wait_time = _fighting_phase_durations[FightingState.FIGHT]
 			timer.start()
 		FightingState.COUNTDOWN:
 			fighting_state = FightingState.FIGHT
@@ -118,21 +127,24 @@ func _on_timer_timeout() -> void:
 			timer.wait_time = _fighting_phase_durations[FightingState.FINISHED]
 			timer.start()
 		FightingState.FINISHED:
+			Engine.time_scale = 1
 			_finish_all_fights.rpc()
 
 
 func _on_state_changed(new_state) -> void:
 	match new_state:
 		FightingState.POSITIONING:
-			print("GlobalFightingManager: Starting the positioning")
+			_sync_state.rpc(_fighting_state)
+			print("[", multiplayer.get_unique_id(), "] GlobalFightingManager: Starting the positioning")
 		FightingState.COUNTDOWN:
-			print("GlobalFightingManager: Starting countdown")
+			Events.ui_main_countdown_triggered.emit(_fighting_phase_durations[FightingState.COUNTDOWN], "Fight")
+			print("[", multiplayer.get_unique_id(), "] GlobalFightingManager: Starting countdown")
 		FightingState.FIGHT:
-			print("GlobalFightingManager: Starting the fight")
+			print("[", multiplayer.get_unique_id(), "] GlobalFightingManager: Starting the fight")
 		FightingState.FIGHT_ACCELERATED:
-			print("GlobalFightingManager: Starting the accelerated fight")
+			print("[", multiplayer.get_unique_id(), "] GlobalFightingManager: Starting the accelerated fight")
 		FightingState.FINISHED:
-			print("GlobalFightingManager: Starting the finished phase (dance)")
+			print("[", multiplayer.get_unique_id(), "] GlobalFightingManager: Starting the finished phase (dance)")
 
 
 func _fighting_manager_fighting_is_over(fighting_manager: FightingManager, _winner_teams_order: Array[int]) -> void:

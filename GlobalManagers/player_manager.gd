@@ -1,8 +1,10 @@
 extends Node
 
 enum SyncID {
-	STARTING_NEW_ROUND,
-	ENDING_ROUND
+	ROUND_SETUP,
+	BUYING_PHASE,
+	FIGHTING_PHASE,
+	ROUND_ENDING
 }
 
 # Bot names and their fake peer_id

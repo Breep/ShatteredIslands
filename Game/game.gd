@@ -22,12 +22,18 @@ var _families_ref: Dictionary # Reference Dictionary to all families
 var _active_families: Array[Family] # Array of all families activated for this game only
 var _rules: GameRules
 
-var _fighting_islands: Dictionary[int, FightingIsland]
+var _fighting_islands: Dictionary[int, FightingIsland] # [player_id, FightingIslands]
 
 var _current_round_battles: Array[Battle]
 
+# ============================== Network Export ==============================
+
+@export_group("Network")
+@export var _current_round_player_id_islands: Array[int] # player_id
+
 # ============================== Local nodes ==============================
 
+@export_group("Local Nodes")
 @export var _buying_island: BuyingIsland
 @export var _scene_switcher: SceneSwitcher
 @export var _hero_selector: HeroSelector
@@ -68,9 +74,12 @@ func _start_hero_selection() -> void:
 
 func _start_new_round() ->void:
 	print("[", multiplayer.get_unique_id(), "] Game: Start new round")
+	_current_round_player_id_islands.clear()
+	
 	_current_round_battles = await RoundManager.get_current_round_battles()
-	await PlayerManager.sync_point(PlayerManager.SyncID.STARTING_NEW_ROUND)
+	_init_current_round_player_id_islands(_current_round_battles.size())
 	RoundManager.starting_round_player_changes()
+	await PlayerManager.sync_point(PlayerManager.SyncID.ROUND_SETUP)
 	_start_buying_phase(_current_round_battles)
 
 
@@ -84,28 +93,30 @@ func _start_buying_phase(battles: Array[Battle]) -> void:
 func _start_fighting_phase(battles: Array[Battle]) -> void:
 	print("[", multiplayer.get_unique_id(), "] Game: Start fights !")
 	game_state = GameState.FIGHTING
-	var fighting_islands_choosen: Array[FightingIsland] = _pickup_n_random_islands(battles.size())
 	for i in battles.size():
 		var characters: Array[Character]
 		for player in battles[i].players:
 			player.character.battle_id = battles[i].id
 			characters.append(player.character)
-		fighting_islands_choosen[i].start_fight(characters, battles[i].battle_type, battles[i].id)
+		var player_id: int = _current_round_player_id_islands[i]
+		var fighting_island: FightingIsland = PlayerManager.players[player_id].fighting_island
+		fighting_island.start_fight(characters, battles[i].battle_type, battles[i].id)
 	# Start fight on each island
 	GlobalFightingManager.start()
 
 
-# ============================== Private functions ==============================
+# ============================== Random islands functions ==============================
 
-func _pickup_n_random_islands(islands_number: int) -> Array[FightingIsland]:
-	if not multiplayer.is_server(): return [] # TODO
-	var fighting_islands_choosen: Array[FightingIsland]
+# Automatically sync with MultiplayerSynchronizer
+func _init_current_round_player_id_islands(islands_number: int) -> void:
+	if not multiplayer.is_server(): return
 	var alive_players: Array[Player] = PlayerManager.get_alive_players().values().duplicate()
 	for i in islands_number:
 		var random_player: Player = alive_players.pick_random()
-		fighting_islands_choosen.append(_fighting_islands[random_player.id])
+		_current_round_player_id_islands.append(random_player.id)
 		alive_players.erase(random_player)
-	return fighting_islands_choosen
+	return
+
 
 # ============================== Spawn functions ==============================
 
@@ -138,6 +149,7 @@ func _spawn_all_characters() -> void:
 
 func _on_buying_island_buying_phase_finished() -> void:
 	print("[", multiplayer.get_unique_id(), "] Game: BUYING PHASE ENDED")
+	await PlayerManager.sync_point(PlayerManager.SyncID.BUYING_PHASE)
 	_start_fighting_phase(_current_round_battles)
 
 
@@ -149,10 +161,7 @@ func _on_hero_selector_all_heroes_picked() -> void:
 
 func _on_global_fighting_manager_all_fights_are_over() -> void:
 	print("[", multiplayer.get_unique_id(), "] Game: ALL FIGHTS ARE OVER")
+	await PlayerManager.sync_point(PlayerManager.SyncID.FIGHTING_PHASE)
 	await RoundManager.ending_round_player_changes()
-	print("[", multiplayer.get_unique_id(), "] Game: ALL FIGHTS ARE OVER 1")
-	await get_tree().create_timer(1.0).timeout
-	print("[", multiplayer.get_unique_id(), "] Game: ALL FIGHTS ARE OVER 2")
-	await PlayerManager.sync_point(PlayerManager.SyncID.ENDING_ROUND)
-	print("[", multiplayer.get_unique_id(), "] Game: ALL FIGHTS ARE OVER 3")
+	await PlayerManager.sync_point(PlayerManager.SyncID.ROUND_ENDING)
 	_start_new_round()

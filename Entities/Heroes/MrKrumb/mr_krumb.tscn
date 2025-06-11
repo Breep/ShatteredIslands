@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://btuch2oo5bxk4"]
+[gd_scene load_steps=24 format=3 uid="uid://btuch2oo5bxk4"]
 
 [ext_resource type="Script" uid="uid://dyp7mmfduudai" path="res://Entities/Heroes/MrKrumb/mr_krumb.gd" id="1_c4fri"]
 [ext_resource type="PackedScene" uid="uid://ls38xt04tcla" path="res://Entities/Heroes/MrKrumb/mr_krumb_model.tscn" id="2_0vypu"]
@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://cf4y1g6c4ia6w" path="res://Entities/Character/CharacterVisual/character_visual.tscn" id="2_iqdsy"]
 [ext_resource type="PackedScene" uid="uid://qgjyscmtp6t3" path="res://Entities/Character/CharacterLogic/character_logic.tscn" id="8_c5bi3"]
 [ext_resource type="PackedScene" uid="uid://cpqtocfge7ott" path="res://Entities/Character/CharacterAnimator/character_animator.tscn" id="9_654og"]
+[ext_resource type="PackedScene" uid="uid://c8630px7dwlvh" path="res://Modules/PickableClickable/Constraints/PickableCollider/pickable_collider.tscn" id="10_vb6kp"]
+[ext_resource type="PackedScene" uid="uid://dyyf8nhixlubs" path="res://Modules/PickableClickable/Constraints/SpawnAreaChecker/spawn_area_checker.tscn" id="11_a6wt4"]
+[ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://Modules/PickableClickable/PickableModule/pickable_module.tscn" id="12_jhv8m"]
 [ext_resource type="PackedScene" uid="uid://dqrhym1sskng8" path="res://Entities/Turret/turret.tscn" id="17_pa7fn"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="18_5vj3a"]
 [ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://Tool/QuickAnims/anim_rotating_module.tscn" id="19_yspgx"]
@@ -198,6 +201,15 @@ projectile_spawn = NodePath("../../../TurretCenterPoint/Turret/SpawnPoint")
 [node name="CharacterAnimator" parent="." node_paths=PackedStringArray("_animation_tree", "_owner") instance=ExtResource("9_654og")]
 _animation_tree = NodePath("../AnimationTree")
 _owner = NodePath("..")
+
+[node name="PickableCollider" parent="." instance=ExtResource("10_vb6kp")]
+
+[node name="SpawnAreaChecker" parent="." instance=ExtResource("11_a6wt4")]
+
+[node name="PickableModule" parent="." node_paths=PackedStringArray("_owner", "_pickable_collider", "_spawn_area_checker") instance=ExtResource("12_jhv8m")]
+_owner = NodePath("..")
+_pickable_collider = NodePath("../PickableCollider")
+_spawn_area_checker = NodePath("../SpawnAreaChecker")
 
 [editable path="MrKrumbModel"]
 [editable path="TurretCenterPoint/Turret"]

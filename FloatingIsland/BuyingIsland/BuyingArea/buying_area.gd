@@ -5,8 +5,6 @@ extends Node3D
 
 signal buying_phase_finished()
 
-signal _player_hero_picked()
-
 # ============================== Private variables ==============================
 
 var _is_active: bool = false

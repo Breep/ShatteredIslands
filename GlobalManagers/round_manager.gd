@@ -49,7 +49,7 @@ var battles: Dictionary[int, Battle] = {}
 
 func get_current_round_battles() -> Array[Battle]:
 	current_round += 1
-	print("[", multiplayer.get_unique_id(), "] POSITIONING A NEW ROUND: ", current_round)
+	print("[", multiplayer.get_unique_id(), "] STARTING A NEW ROUND: ", current_round)
 	battle_history[current_round] = BattleHistory.new()
 	battle_history[current_round].round_id = current_round
 	battles.clear()
@@ -140,7 +140,7 @@ func ending_round_player_changes() -> void:
 
 # ============================== RPC - Ask/Answer current round battle ==============================
 
-@rpc("any_peer", "call_remote")
+@rpc("any_peer", "call_remote", "reliable")
 func _ask_current_round_battles(peer_id: int) -> void:
 	if not multiplayer.is_server():
 		printerr("Only the server can answer the current round battles")
@@ -155,7 +155,7 @@ func _ask_current_round_battles(peer_id: int) -> void:
 	_anwser_current_round_battles.rpc_id(peer_id, serialized_battles)
 
 
-@rpc("authority", "call_remote")
+@rpc("authority", "call_remote", "reliable")
 func _anwser_current_round_battles(serialized_battles: Array[Dictionary]) -> void:
 	for serialized_battle in serialized_battles:
 		var battle := Battle.new_from_serialized(serialized_battle)

@@ -52,17 +52,20 @@ func _ready() -> void:
 		_is_on_owner_spawn_area = true
 	
 	Events.game_state_changed.connect(_on_events_game_state_changed)
+	
+	GlobalFightingManager.state_changed.connect(_on_global_fighting_manager_state_changed)
 
 # ============================== Public functions ==============================
 
 func pick() -> bool:
-	if _is_picked_up or pickable_locked: return false
+	
+	if _is_picked_up or _is_locked(): return false
 	_is_picked_up = true
 	return _pick()
 
 
 func drop() -> bool:
-	if not _is_picked_up or pickable_locked: return false
+	if not _is_picked_up or _is_locked(): return false
 	if _drop():
 		print("[DEBUG] Dropped: ", _owner.name)
 		_is_picked_up = false
@@ -95,6 +98,13 @@ func _can_be_dropped() -> bool:
 	if _owner.has_method("_on_clickable_module_override_can_be_dropped"):
 		return _owner.call("_on_clickable_module_override_can_be_dropped")
 	return _default_can_be_dropped()
+
+
+func _is_locked() -> bool:
+	if pickable_locked: return true
+	if multiplayer.is_server(): return false
+	if _owner.get_multiplayer_authority() != PlayerManager.get_local_player().id: return true
+	return false
 
 # ============================== DEFAULT "can be dropped" check ==============================
 
@@ -188,6 +198,8 @@ func _on_events_game_state_changed(game_state: Game.GameState) -> void:
 		pickable_locked = true
 
 
-
+func _on_global_fighting_manager_state_changed(state: GlobalFightingManager.FightingState) -> void:
+	if state == GlobalFightingManager.FightingState.COUNTDOWN:
+		pickable_locked = true # TODO need to handle the case the entity is is picked up (can be dropped and can't)
 
  

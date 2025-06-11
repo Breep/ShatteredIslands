@@ -1,9 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://ctspehviccwd5"]
+[gd_scene load_steps=13 format=3 uid="uid://ctspehviccwd5"]
 
 [ext_resource type="Script" uid="uid://bhv0dmum15mp1" path="res://FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor.gd" id="1_i0b8l"]
-[ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="1_kcex7"]
 [ext_resource type="PackedScene" uid="uid://dibux7uwcsatj" path="res://FloatingIsland/FightingIsland/FightingArea/SpawnArea/spawn_area.tscn" id="2_1l6d4"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Tool/SpawnPoint/spawn_point.tscn" id="3_8mse8"]
+[ext_resource type="PackedScene" uid="uid://cc8wss5swf76b" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/CharacterSpawner/character_spawner.tscn" id="4_eavw2"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_57pjl"]
 size = Vector3(10, 0.1, 10)
@@ -35,25 +35,14 @@ size = Vector3(20, 1, 10)
 [sub_resource type="BoxShape3D" id="BoxShape3D_go3o7"]
 size = Vector3(20, 1, 10)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_i0b8l"]
-size = Vector3(20, 5, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_fuiuu"]
-size = Vector3(1, 5, 10)
-
-[node name="FightingFloor_1v1" type="Node3D" node_paths=PackedStringArray("_visual_to_be_destroyed", "_spawn_manager", "_spawn_areas", "_floor", "_walls")]
+[node name="FightingFloor_1v1" type="Node3D" node_paths=PackedStringArray("_visual_to_be_destroyed", "_character_spawner", "_spawn_areas", "_floor")]
 script = ExtResource("1_i0b8l")
 _visual_to_be_destroyed = NodePath("Floor/FloorMesh3D")
-_spawn_manager = NodePath("SpawnManager")
-_spawn_areas = [NodePath("SpawnManager/SpawnArea"), NodePath("SpawnManager/SpawnArea2")]
-_floor = NodePath("Floor")
-_walls = [NodePath("Walls/Wall1"), NodePath("Walls/Wall2"), NodePath("Walls/Wall3"), NodePath("Walls/Wall4")]
-
-[node name="SpawnManager" parent="." node_paths=PackedStringArray("_spawn_points", "_spawn_areas") instance=ExtResource("1_kcex7")]
-_spawn_points = [NodePath("SpawnArea/SpawnPoint"), NodePath("SpawnArea2/SpawnPoint2")]
+_character_spawner = NodePath("CharacterSpawner")
 _spawn_areas = [NodePath("SpawnArea"), NodePath("SpawnArea2")]
+_floor = NodePath("Floor")
 
-[node name="SpawnArea" parent="SpawnManager" node_paths=PackedStringArray("_visual_to_be_destroyed") instance=ExtResource("2_1l6d4")]
+[node name="SpawnArea" parent="." node_paths=PackedStringArray("_visual_to_be_destroyed") instance=ExtResource("2_1l6d4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
 collision_layer = 4
 monitoring = false
@@ -61,16 +50,16 @@ monitorable = false
 team = 1
 _visual_to_be_destroyed = NodePath("MeshInstance3D")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnManager/SpawnArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnArea"]
 shape = SubResource("BoxShape3D_57pjl")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SpawnManager/SpawnArea"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SpawnArea"]
 mesh = SubResource("BoxMesh_dhmms")
 
-[node name="SpawnPoint" parent="SpawnManager/SpawnArea" instance=ExtResource("3_8mse8")]
+[node name="SpawnPoint" parent="SpawnArea" instance=ExtResource("3_8mse8")]
 team = 1
 
-[node name="SpawnArea2" parent="SpawnManager" node_paths=PackedStringArray("_visual_to_be_destroyed") instance=ExtResource("2_1l6d4")]
+[node name="SpawnArea2" parent="." node_paths=PackedStringArray("_visual_to_be_destroyed") instance=ExtResource("2_1l6d4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
 collision_layer = 4
 monitoring = false
@@ -78,13 +67,13 @@ monitorable = false
 team = 2
 _visual_to_be_destroyed = NodePath("MeshInstance3D")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnManager/SpawnArea2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnArea2"]
 shape = SubResource("BoxShape3D_57pjl")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SpawnManager/SpawnArea2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SpawnArea2"]
 mesh = SubResource("BoxMesh_qkrr5")
 
-[node name="SpawnPoint2" parent="SpawnManager/SpawnArea2" instance=ExtResource("3_8mse8")]
+[node name="SpawnPoint2" parent="SpawnArea2" instance=ExtResource("3_8mse8")]
 team = 2
 
 [node name="Floor" type="StaticBody3D" parent="."]
@@ -98,36 +87,6 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
 shape = SubResource("BoxShape3D_go3o7")
 
-[node name="Walls" type="Node3D" parent="."]
-
-[node name="Wall1" type="Area3D" parent="Walls" groups=["WALL"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.5)
-monitoring = false
-monitorable = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall1"]
-shape = SubResource("BoxShape3D_i0b8l")
-
-[node name="Wall2" type="Area3D" parent="Walls" groups=["WALL"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.5)
-monitoring = false
-monitorable = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall2"]
-shape = SubResource("BoxShape3D_i0b8l")
-
-[node name="Wall3" type="Area3D" parent="Walls" groups=["WALL"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, 0, 0)
-monitoring = false
-monitorable = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall3"]
-shape = SubResource("BoxShape3D_fuiuu")
-
-[node name="Wall4" type="Area3D" parent="Walls" groups=["WALL"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, 0)
-monitoring = false
-monitorable = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall4"]
-shape = SubResource("BoxShape3D_fuiuu")
+[node name="CharacterSpawner" parent="." node_paths=PackedStringArray("_spawn_points", "_spawn_areas") instance=ExtResource("4_eavw2")]
+_spawn_points = [NodePath("../SpawnArea/SpawnPoint"), NodePath("../SpawnArea2/SpawnPoint2")]
+_spawn_areas = [NodePath("../SpawnArea"), NodePath("../SpawnArea2")]

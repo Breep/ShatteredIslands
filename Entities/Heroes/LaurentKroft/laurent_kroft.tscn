@@ -1,10 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://dry6jgn0h7srg"]
+[gd_scene load_steps=14 format=3 uid="uid://dry6jgn0h7srg"]
 
 [ext_resource type="Script" uid="uid://bvx6cyg3ybjvf" path="res://Entities/Heroes/LaurentKroft/laurent_kroft.gd" id="1_p8n2g"]
 [ext_resource type="Resource" uid="uid://cnecvw18tqmuq" path="res://Entities/Heroes/LaurentKroft/laurent_kroft.tres" id="2_hk5ya"]
-[ext_resource type="PackedScene" uid="uid://br1wrpaxa7qjk" path="res://Entities/Character/CharacterVisual/character_visual.tscn" id="2_u56hr"]
+[ext_resource type="PackedScene" uid="uid://cf4y1g6c4ia6w" path="res://Entities/Character/CharacterVisual/character_visual.tscn" id="2_u56hr"]
 [ext_resource type="PackedScene" uid="uid://cf0pc5jtr0651" path="res://Entities/Heroes/LaurentKroft/laurent_kroft_model.tscn" id="2_w4ua8"]
 [ext_resource type="PackedScene" uid="uid://qgjyscmtp6t3" path="res://Entities/Character/CharacterLogic/character_logic.tscn" id="8_vsb3i"]
+[ext_resource type="PackedScene" uid="uid://c8630px7dwlvh" path="res://Modules/PickableClickable/Constraints/PickableCollider/pickable_collider.tscn" id="9_q4atd"]
+[ext_resource type="PackedScene" uid="uid://dyyf8nhixlubs" path="res://Modules/PickableClickable/Constraints/SpawnAreaChecker/spawn_area_checker.tscn" id="10_urvs7"]
+[ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://Modules/PickableClickable/PickableModule/pickable_module.tscn" id="11_me0im"]
 [ext_resource type="PackedScene" uid="uid://dqrhym1sskng8" path="res://Entities/Turret/turret.tscn" id="17_wovto"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="18_pr4i5"]
 [ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://Tool/QuickAnims/anim_rotating_module.tscn" id="19_vq8b4"]
@@ -95,6 +98,15 @@ families_managers = {
 
 [node name="AutoAttackModule" parent="CharacterLogic/Modules" index="3" node_paths=PackedStringArray("projectile_spawn")]
 projectile_spawn = NodePath("../../../TurretCenterPoint/Turret/SpawnPoint")
+
+[node name="PickableCollider" parent="." instance=ExtResource("9_q4atd")]
+
+[node name="SpawnAreaChecker" parent="." instance=ExtResource("10_urvs7")]
+
+[node name="PickableModule" parent="." node_paths=PackedStringArray("_owner", "_pickable_collider", "_spawn_area_checker") instance=ExtResource("11_me0im")]
+_owner = NodePath("..")
+_pickable_collider = NodePath("../PickableCollider")
+_spawn_area_checker = NodePath("../SpawnAreaChecker")
 
 [editable path="LaurentKroftModel"]
 [editable path="TurretCenterPoint/Turret"]

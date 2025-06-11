@@ -32,6 +32,7 @@ func _entity_init() -> void:
 	id = instance_count
 	instance_count += 1
 
+
 func _enter_tree() -> void:
 	#print("Character: _enter_tree() [", get_path(), "] [", battle_id, "]")
 	if is_node_ready() and battle_id != -1:
