@@ -45,7 +45,7 @@ var _hero_id: Hero.HeroId = -1
 	set(value):
 		if value == _hero_id: return
 		_hero_id = value
-		_change_hero()
+		_update_hero()
 
 @export_subgroup("Synchronizer")
 @export var _server_synchronizer: MultiplayerSynchronizer
@@ -76,6 +76,7 @@ var _fighting_state: GlobalFightingManager.FightingState = GlobalFightingManager
 # ============================== Public functions ==============================
 
 func apply_cards_upgrade(deck: PlayerDeck) -> void:
+	if not is_node_ready(): return
 	stats.reset_stats(_hero_3D.hero.stats)
 	for card in deck.card_pile:
 		card.player_upgrade.apply(stats, card.lvl)
@@ -131,7 +132,7 @@ func _ready() -> void:
 	#_interact_module.damage_taken.connect(_on_interact_module_damage_taken)
 	#_interact_module.heal_received.connect(_on_interact_module_heal_received)
 	
-	#
+	_update_hero()
 
 # ============================== Private functions ==============================
 
@@ -139,11 +140,11 @@ func _reset() -> void:
 	stats.reset_stats(_hero_3D.hero.stats)
 
 
-func _change_hero() -> void:
+func _update_hero() -> void:
 	if hero_id == Hero.HeroId.UNDEF: return
 	if _hero_3D != null: _hero_3D.queue_free()
 	_hero_3D = _HEROES_3D[hero_id].instantiate()
-	print("[DEBUG] Charachter change hero to: ", _hero_3D.hero.name)
+	print("Character change hero to: ", _hero_3D.hero.name)
 	_hero_3D.character_owner = self
 	_collision_shape.shape = _hero_3D.collision_shape.shape.duplicate() # Update Collider
 	var hero_height: float = (_collision_shape.shape as CapsuleShape3D).height

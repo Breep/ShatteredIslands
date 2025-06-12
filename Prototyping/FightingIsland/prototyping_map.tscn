@@ -52,8 +52,8 @@ battle_id = 1
 
 [node name="Character2" parent="." node_paths=PackedStringArray("_hero_3D") instance=ExtResource("9_4fa74")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.260875, 0, 7.68254)
-hero_id = 10
-_hero_3D = NodePath("Rocky")
+hero_id = 6
+_hero_3D = NodePath("SirReginald")
 id = 2
 team = 1
 battle_id = 1

@@ -118,7 +118,7 @@ _spawnable_scenes = PackedStringArray("uid://drcuyohos0doa")
 spawn_path = NodePath("../FightingIslands")
 
 [node name="CharacterSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://bbnioyc6ti8wn", "")
+_spawnable_scenes = PackedStringArray("uid://bbnioyc6ti8wn")
 spawn_path = NodePath("../Characters")
 
 [node name="FightingIslands" type="Node3D" parent="."]
