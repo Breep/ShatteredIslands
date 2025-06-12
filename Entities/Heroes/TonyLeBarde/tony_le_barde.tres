@@ -21,7 +21,7 @@ physical_critical_multiplier = 2.0
 [resource]
 script = ExtResource("1_a5tni")
 name = "Tony le barde"
-id = 6
+id = 7
 portrait = ExtResource("2_244fa")
 description = "Cocorico"
 stats = SubResource("Resource_uh6kp")

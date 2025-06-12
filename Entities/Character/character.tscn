@@ -3,12 +3,12 @@
 [ext_resource type="Script" uid="uid://dsiet7v8tbihn" path="res://Entities/Character/character.gd" id="1_a1h5o"]
 [ext_resource type="PackedScene" uid="uid://cf4y1g6c4ia6w" path="res://Entities/Character/CharacterVisual/character_visual.tscn" id="2_xasj2"]
 [ext_resource type="PackedScene" uid="uid://qgjyscmtp6t3" path="res://Entities/Character/CharacterLogic/character_logic.tscn" id="3_4th1x"]
-[ext_resource type="PackedScene" uid="uid://2v270ywaa1vg" path="res://Entities/Heroes/AncientTree/ancient_tree.tscn" id="3_b3hxd"]
 [ext_resource type="PackedScene" uid="uid://dqrhym1sskng8" path="res://Entities/Turret/turret.tscn" id="4_roimm"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="5_an1mw"]
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://Modules/PickableClickable/PickableModule/pickable_module.tscn" id="7_h7fwd"]
 [ext_resource type="PackedScene" uid="uid://c8630px7dwlvh" path="res://Modules/PickableClickable/Constraints/PickableCollider/pickable_collider.tscn" id="8_b3hxd"]
 [ext_resource type="PackedScene" uid="uid://dyyf8nhixlubs" path="res://Modules/PickableClickable/Constraints/SpawnAreaChecker/spawn_area_checker.tscn" id="9_dhfj1"]
+[ext_resource type="PackedScene" uid="uid://4f6k0cp6bjxt" path="res://Entities/Heroes/_Undef/undef.tscn" id="9_h7fwd"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rxegs"]
 
@@ -37,24 +37,23 @@ properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 2
 
-[node name="Character" type="CharacterBody3D" node_paths=PackedStringArray("_server_synchronizer", "_movement_synchronizer", "_character_visual", "_character_logic", "_turret", "_hero_3D", "_collision_shape") groups=["CHARACTER"]]
+[node name="Character" type="CharacterBody3D" node_paths=PackedStringArray("_server_synchronizer", "_movement_synchronizer", "_character_visual", "_character_logic", "_turret", "_hero_3D", "_collision_shape")]
 collision_layer = 16
 collision_mask = 16
 motion_mode = 1
 script = ExtResource("1_a1h5o")
+hero_id = -1
 _server_synchronizer = NodePath("ServerSynchronizer")
 _movement_synchronizer = NodePath("MovementSynchronizer")
 _character_visual = NodePath("CharacterVisual")
 _character_logic = NodePath("CharacterLogic")
 _turret = NodePath("TurretCenterPoint/Turret")
-_hero_3D = NodePath("AncientTree")
+_hero_3D = NodePath("Undef")
 _collision_shape = NodePath("CollisionShape3D")
 
 [node name="CharacterVisual" parent="." instance=ExtResource("2_xasj2")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.50618, 0)
-
-[node name="AncientTree" parent="." instance=ExtResource("3_b3hxd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.53532, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -114,6 +113,8 @@ replication_config = SubResource("SceneReplicationConfig_5ed6q")
 
 [node name="MovementSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_h7fwd")
+
+[node name="Undef" parent="." instance=ExtResource("9_h7fwd")]
 
 [editable path="CharacterLogic"]
 [editable path="TurretCenterPoint/Turret"]

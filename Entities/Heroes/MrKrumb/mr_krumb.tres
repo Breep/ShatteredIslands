@@ -19,7 +19,7 @@ physical_critical_multiplier = 2.0
 [resource]
 script = ExtResource("1_x5ik6")
 name = "Mr Krumb"
-id = 4
+id = 5
 portrait = ExtResource("2_ydxen")
 description = "Change personality"
 stats = SubResource("Resource_yjtod")

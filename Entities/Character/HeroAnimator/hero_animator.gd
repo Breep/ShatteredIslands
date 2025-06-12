@@ -42,13 +42,13 @@ func _on_global_fighting_manager_state_changed(new_state: GlobalFightingManager.
 
 
 func _on_character_owner_dead(_self_ref: Entity) -> void:
+	print("[DEBUG] ", _character_owner.name, " won a fight and should DIE")
 	_animation_tree.set("parameters/Transition/transition_request", "Die")
 
 
-func _on_events_game_stated_changed(new_state: Game.GameState) -> void:
-	match new_state:
-		Game.GameState.BUYING:
-			_animation_tree.set("parameters/Transition/transition_request", "Idle")
+func _on_events_game_stated_changed(game_state: Game.GameState) -> void:
+	if game_state == Game.GameState.BUYING:
+		_animation_tree.set("parameters/Transition/transition_request", "Idle")
 
 
 func _on_character_owner_fight_is_won() -> void:

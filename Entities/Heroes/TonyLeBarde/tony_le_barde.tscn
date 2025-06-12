@@ -74,7 +74,7 @@ collision_shape = NodePath("CollisionShape3D")
 _hero_animator = NodePath("HeroAnimator")
 
 [node name="dragon_lord" parent="." instance=ExtResource("3_tmtlu")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.638704, -0.32114)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -0.0142095, -0.32114)
 
 [node name="GeneralSkeleton" parent="dragon_lord/Armature" index="0"]
 bones/0/position = Vector3(0, 0.715002, 0.488002)

@@ -4,6 +4,7 @@ extends Resource
 # ============================== Enum ==============================
 
 enum HeroId {
+	UNDEF,
 	ANCIENT_TREE,
 	CYBORG,
 	DR_BOOM,
@@ -12,7 +13,8 @@ enum HeroId {
 	SIR_REGINALD,
 	TONY_LE_BARDE,
 	RHINO,
-	DARK_KNIGHT
+	DARK_KNIGHT,
+	ROCKY
 }
 
 # ============================== Export ==============================

@@ -6,6 +6,7 @@ extends Entity
 # ============================== Editor-only tools ==============================
 
 const _HEROES_3D: Dictionary[Hero.HeroId, PackedScene] = {
+	Hero.HeroId.UNDEF: preload("res://Entities/Heroes/_Undef/undef.tscn"),
 	Hero.HeroId.ANCIENT_TREE: preload("res://Entities/Heroes/AncientTree/ancient_tree.tscn"),
 	Hero.HeroId.CYBORG: preload("res://Entities/Heroes/Cyborg/cyborg.tscn"),
 	Hero.HeroId.DR_BOOM: preload("res://Entities/Heroes/DrBoom/dr_boom.tscn"),
@@ -14,7 +15,8 @@ const _HEROES_3D: Dictionary[Hero.HeroId, PackedScene] = {
 	Hero.HeroId.SIR_REGINALD: preload("res://Entities/Heroes/SirReginald/sir_reginald.tscn"),
 	Hero.HeroId.TONY_LE_BARDE: preload("res://Entities/Heroes/TonyLeBarde/tony_le_barde.tscn"),
 	Hero.HeroId.RHINO: preload("res://Entities/Heroes/Rhino/rhino.tscn"),
-	Hero.HeroId.DARK_KNIGHT: preload("res://Entities/Heroes/DarkKnight/dark_knight.tscn")
+	Hero.HeroId.DARK_KNIGHT: preload("res://Entities/Heroes/DarkKnight/dark_knight.tscn"),
+	Hero.HeroId.ROCKY: preload("res://Entities/Heroes/Rocky/rocky.tscn")
 }
 
 # ============================== Signal ==============================
@@ -37,13 +39,12 @@ var fighting_state: GlobalFightingManager.FightingState:
 @export_group("Network")
 @export_subgroup("Variables")
 @export var owner_player_id: int # ID of the player owner of this character
-var _hero_id: Hero.HeroId = Hero.HeroId.ANCIENT_TREE
+var _hero_id: Hero.HeroId = -1
 @export var hero_id: Hero.HeroId: # ID of the hero this character represent
 	get: return _hero_id
 	set(value):
 		if value == _hero_id: return
 		_hero_id = value
-		print("Changing hero to: ", hero_id)
 		_change_hero()
 
 @export_subgroup("Synchronizer")
@@ -139,8 +140,10 @@ func _reset() -> void:
 
 
 func _change_hero() -> void:
+	if hero_id == Hero.HeroId.UNDEF: return
 	if _hero_3D != null: _hero_3D.queue_free()
 	_hero_3D = _HEROES_3D[hero_id].instantiate()
+	print("[DEBUG] Charachter change hero to: ", _hero_3D.hero.name)
 	_hero_3D.character_owner = self
 	_collision_shape.shape = _hero_3D.collision_shape.shape.duplicate() # Update Collider
 	var hero_height: float = (_collision_shape.shape as CapsuleShape3D).height

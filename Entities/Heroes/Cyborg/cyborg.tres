@@ -22,7 +22,7 @@ metadata/_custom_type_script = "uid://c76rxvnlcwltf"
 [resource]
 script = ExtResource("1_cktai")
 name = "Cyborg"
-id = 1
+id = 2
 portrait = ExtResource("2_ixmt6")
 description = "Bip bap boup"
 stats = SubResource("Resource_ce5xo")

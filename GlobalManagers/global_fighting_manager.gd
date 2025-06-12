@@ -15,7 +15,7 @@ signal all_fights_are_over()
 enum FightingState {
 	POSITIONING, # Positioning phase
 	COUNTDOWN, # Beggining countdown
-	FIGHT, # 30 seconds of fight
+	FIGHT, # Normal speed fight
 	FIGHT_ACCELERATED, # 10 seconds accelerated fight
 	FINISHED, # Either only one team remains alive or times up
 	UNDEF
@@ -24,9 +24,9 @@ enum FightingState {
 # ============================== Fighting phase duration ==============================
 
 const _fighting_phase_durations: Dictionary[FightingState, int] = {
-	FightingState.POSITIONING: 600,
+	FightingState.POSITIONING: 5,
 	FightingState.COUNTDOWN: 3,
-	FightingState.FIGHT: 10,
+	FightingState.FIGHT: 30,
 	FightingState.FIGHT_ACCELERATED: 5, 
 	FightingState.FINISHED: 3, # Winners cheers
 }
@@ -35,7 +35,7 @@ const _fighting_phase_durations: Dictionary[FightingState, int] = {
 
 var timer: Timer
 
-const SERVER_TIME_SCALE: float = 5
+var SERVER_TIME_SCALE: float = 1
 
 # ============================== Private variables ==============================
 
@@ -51,6 +51,8 @@ var fighting_state: FightingState:
 var _fighting_managers: Array[FightingManager]
 var _current_active_fighting_managers: Array[FightingManager]
 
+const __PROTOTYPING: bool = true
+
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
@@ -60,6 +62,7 @@ func _ready() -> void:
 	timer.name = "GlobalFightingTimer"
 	timer.timeout.connect(_on_timer_timeout)
 	state_changed.connect(_on_state_changed)
+	if __PROTOTYPING: SERVER_TIME_SCALE = 1
 
 # ============================== Public functions ==============================
 
@@ -110,8 +113,12 @@ func _on_timer_timeout() -> void:
 		FightingState.POSITIONING:
 			Engine.time_scale = SERVER_TIME_SCALE
 			_sync_state.rpc(FightingState.COUNTDOWN) # Trigger COUNTDOWN STATE on client
-			fighting_state = FightingState.FIGHT
-			timer.wait_time = _fighting_phase_durations[FightingState.FIGHT]
+			if __PROTOTYPING:
+				fighting_state = FightingState.COUNTDOWN
+				timer.wait_time = _fighting_phase_durations[FightingState.COUNTDOWN]
+			else:
+				fighting_state = FightingState.FIGHT
+				timer.wait_time = _fighting_phase_durations[FightingState.FIGHT]
 			timer.start()
 		FightingState.COUNTDOWN:
 			fighting_state = FightingState.FIGHT
@@ -134,7 +141,7 @@ func _on_timer_timeout() -> void:
 func _on_state_changed(new_state) -> void:
 	match new_state:
 		FightingState.POSITIONING:
-			_sync_state.rpc(_fighting_state)
+			_sync_state.rpc(FightingState.POSITIONING)
 			print("[", multiplayer.get_unique_id(), "] GlobalFightingManager: Starting the positioning")
 		FightingState.COUNTDOWN:
 			Events.ui_main_countdown_triggered.emit(_fighting_phase_durations[FightingState.COUNTDOWN], "Fight")

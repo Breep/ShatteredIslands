@@ -19,7 +19,7 @@ metadata/_custom_type_script = "uid://c76rxvnlcwltf"
 [resource]
 script = ExtResource("1_bk1f2")
 name = "Rhino"
-id = 7
+id = 8
 portrait = ExtResource("1_b582t")
 description = "Rhino"
 stats = SubResource("Resource_1emsa")

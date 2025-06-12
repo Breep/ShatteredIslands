@@ -21,7 +21,7 @@ physical_critical_multiplier = 2.0
 [resource]
 script = ExtResource("1_t0hox")
 name = "Dr Boom"
-id = 2
+id = 3
 portrait = ExtResource("2_blowq")
 description = "BOOM"
 stats = SubResource("Resource_u3dta")

@@ -19,7 +19,7 @@ metadata/_custom_type_script = "uid://c76rxvnlcwltf"
 [resource]
 script = ExtResource("1_2ttjg")
 name = "DarkKnight"
-id = 8
+id = 9
 portrait = ExtResource("1_5422o")
 description = "So dark"
 stats = SubResource("Resource_nnyy0")

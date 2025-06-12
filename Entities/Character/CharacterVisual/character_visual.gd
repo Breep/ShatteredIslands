@@ -3,14 +3,16 @@ extends Node3D
 
 # ============================== Local scene nodes ==============================
 
+@export_group("Popup Spawns")
 @export var physical_popup_spawn: SpawnPoint
 @export var magic_popup_spawn: SpawnPoint
 @export var poison_popup_spawn: SpawnPoint
 @export var heal_popup_spawn: SpawnPoint
 
-@onready var _health_bar: ProgressBar = %HealthBar
-@onready var _mana_bar: ProgressBar = %ManaBar
-@onready var _name_displayed: Label = %NameDisplayed
+@export_group("Local Nodes")
+@export var _health_bar: ProgressBar
+@export var _mana_bar: ProgressBar
+@export var _name_displayed: Label
 
 var _camera: Camera3D # If defined, the visual will look at it
 
