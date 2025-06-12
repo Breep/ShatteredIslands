@@ -19,7 +19,7 @@ physical_critical_multiplier = 2.0
 [resource]
 script = ExtResource("1_synja")
 name = "Sir Reginald"
-id = 5
+id = 6
 portrait = ExtResource("2_1xx0h")
 description = "Sir Reginald Von Gloriforth III"
 stats = SubResource("Resource_gr18g")

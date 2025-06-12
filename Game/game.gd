@@ -104,7 +104,6 @@ func _start_fighting_phase(battles: Array[Battle]) -> void:
 	# Start fight on each island
 	GlobalFightingManager.start()
 
-
 # ============================== Random islands functions ==============================
 
 # Automatically sync with MultiplayerSynchronizer
@@ -116,7 +115,6 @@ func _init_current_round_player_id_islands(islands_number: int) -> void:
 		_current_round_player_id_islands.append(random_player.id)
 		alive_players.erase(random_player)
 	return
-
 
 # ============================== Spawn functions ==============================
 
@@ -140,8 +138,9 @@ func _spawn_fighting_islands() -> void:
 func _spawn_all_characters() -> void:
 	if not multiplayer.is_server(): return
 	for player in PlayerManager.players.values():
-		var character: Character = Shared.CHARACTERS[player.hero.id].instantiate()
+		var character: Character = preload("res://Entities/Character/character.tscn").instantiate()
 		character.owner_player_id = player.id
+		character.hero_id = player.hero.id
 		_node_characters.add_child(character)
 		player.character = character
 
@@ -154,7 +153,7 @@ func _on_buying_island_buying_phase_finished() -> void:
 
 
 func _on_hero_selector_all_heroes_picked() -> void:
-	print("[", multiplayer.get_unique_id(), "] Game: BUYING AREA ALL HEAROES PICKED")
+	print("[", multiplayer.get_unique_id(), "] Game: BUYING AREA ALL HEROES PICKED")
 	_spawn_all_characters()
 	_start_new_round()
 

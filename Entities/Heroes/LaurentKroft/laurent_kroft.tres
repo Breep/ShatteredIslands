@@ -19,7 +19,7 @@ physical_critical_multiplier = 2.0
 [resource]
 script = ExtResource("1_5swsy")
 name = "Laurent Kroft"
-id = 3
+id = 4
 portrait = ExtResource("2_fey0l")
 description = "You belong in a museum !"
 stats = SubResource("Resource_mul21")

@@ -1,17 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://dq1pqesv0lptu"]
+[gd_scene load_steps=15 format=3 uid="uid://dq1pqesv0lptu"]
 
 [ext_resource type="Script" uid="uid://b8w7wec46hqv3" path="res://Entities/Heroes/DrBoom/dr_boom.gd" id="1_2scy2"]
-[ext_resource type="Resource" uid="uid://5ww2u1ldoabr" path="res://Entities/Heroes/DrBoom/dr_boom.tres" id="2_1vhg0"]
-[ext_resource type="PackedScene" uid="uid://cf4y1g6c4ia6w" path="res://Entities/Character/CharacterVisual/character_visual.tscn" id="2_38dqm"]
-[ext_resource type="PackedScene" uid="uid://qgjyscmtp6t3" path="res://Entities/Character/CharacterLogic/character_logic.tscn" id="8_dvcma"]
-[ext_resource type="PackedScene" uid="uid://cpqtocfge7ott" path="res://Entities/Character/CharacterAnimator/character_animator.tscn" id="9_0qum4"]
-[ext_resource type="PackedScene" uid="uid://c8630px7dwlvh" path="res://Modules/PickableClickable/Constraints/PickableCollider/pickable_collider.tscn" id="10_8ddps"]
-[ext_resource type="PackedScene" uid="uid://dyyf8nhixlubs" path="res://Modules/PickableClickable/Constraints/SpawnAreaChecker/spawn_area_checker.tscn" id="11_bkbbm"]
-[ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://Modules/PickableClickable/PickableModule/pickable_module.tscn" id="12_23ah5"]
+[ext_resource type="Resource" uid="uid://5ww2u1ldoabr" path="res://Entities/Heroes/DrBoom/dr_boom.tres" id="2_xrnom"]
+[ext_resource type="PackedScene" uid="uid://cpqtocfge7ott" path="res://Entities/Character/HeroAnimator/hero_animator.tscn" id="9_0qum4"]
 [ext_resource type="PackedScene" uid="uid://cmojifbx1glt4" path="res://Entities/Heroes/DrBoom/dr_boom_model.tscn" id="16_1vhg0"]
-[ext_resource type="PackedScene" uid="uid://dqrhym1sskng8" path="res://Entities/Turret/turret.tscn" id="17_modjl"]
-[ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="18_l7rtq"]
-[ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://Tool/QuickAnims/anim_rotating_module.tscn" id="19_q170r"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4kv3i"]
 animation = &"dance"
@@ -51,7 +43,7 @@ input_3/reset = true
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_23ah5"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_0qum4"]
-graph_offset = Vector2(-594.293, 0)
+graph_offset = Vector2(-757.075, -33.2765)
 nodes/AnimDance/node = SubResource("AnimationNodeAnimation_4kv3i")
 nodes/AnimDance/position = Vector2(-600, 40)
 nodes/AnimDie/node = SubResource("AnimationNodeAnimation_0qum4")
@@ -74,37 +66,13 @@ node_connections = [&"Transition", 0, &"idle_speed", &"Transition", 1, &"dance_s
 radius = 0.298654
 height = 1.36098
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5ed6q"]
-properties/0/path = NodePath(".:owner_player_id")
-properties/0/spawn = true
-properties/0/replication_mode = 0
-properties/1/path = NodePath(".:id")
-properties/1/spawn = true
-properties/1/replication_mode = 0
-properties/2/path = NodePath(".:team")
-properties/2/spawn = true
-properties/2/replication_mode = 2
-properties/3/path = NodePath(".:position")
-properties/3/spawn = true
-properties/3/replication_mode = 2
-properties/4/path = NodePath(".:fighting_state")
-properties/4/spawn = true
-properties/4/replication_mode = 2
-properties/5/path = NodePath(".:battle_id")
-properties/5/spawn = true
-properties/5/replication_mode = 2
-properties/6/path = NodePath(".:rotation")
-properties/6/spawn = true
-properties/6/replication_mode = 2
-
-[node name="DrBoom" type="CharacterBody3D" node_paths=PackedStringArray("_character_logic", "_turret") groups=["CHARACTER"]]
-collision_layer = 16
-collision_mask = 9
-motion_mode = 1
+[node name="DrBoom" type="StaticBody3D" node_paths=PackedStringArray("collision_shape", "_hero_animator") groups=["CHARACTER"]]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_2scy2")
-_hero = ExtResource("2_1vhg0")
-_character_logic = NodePath("CharacterLogic")
-_turret = NodePath("TurretCenterPoint/Turret")
+hero = ExtResource("2_xrnom")
+collision_shape = NodePath("CollisionShape3D")
+_hero_animator = NodePath("HeroAnimator")
 
 [node name="Drboom" parent="." instance=ExtResource("16_1vhg0")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
@@ -146,72 +114,11 @@ parameters/dance_speed/scale = 1.0
 parameters/die_speed/scale = 1.0
 parameters/idle_speed/scale = 1.0
 
-[node name="CharacterVisual" parent="." instance=ExtResource("2_38dqm")]
-unique_name_in_owner = true
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 2.23741, 0)
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.68974, 0)
 shape = SubResource("CapsuleShape3D_rxegs")
 
-[node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-unique_name_in_owner = true
-replication_config = SubResource("SceneReplicationConfig_5ed6q")
-
-[node name="TurretCenterPoint" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.41612, 0)
-
-[node name="Turret" parent="TurretCenterPoint" node_paths=PackedStringArray("_auto_attack_module") instance=ExtResource("17_modjl")]
-transform = Transform3D(0.495, 0, 0, 0, 0.495, 0, 0, 0, 0.495, 0.778867, 0, 0)
-_auto_attack_module = NodePath("../../CharacterLogic/Modules/AutoAttackModule")
-
-[node name="AnimHoveringModule" parent="TurretCenterPoint/Turret" node_paths=PackedStringArray("_owner") instance=ExtResource("18_l7rtq")]
-_owner = NodePath("..")
-_hover_power = 0.1
-_hover_period = 2.0
-
-[node name="AnimRotatingModule" parent="TurretCenterPoint" node_paths=PackedStringArray("_owner") instance=ExtResource("19_q170r")]
-_owner = NodePath("..")
-_rot_axis = 1
-_rot_period = 10.0
-_rot_max = 360.0
-_rot_full = true
-
-[node name="CharacterLogic" parent="." node_paths=PackedStringArray("_source", "modules", "families_managers") instance=ExtResource("8_dvcma")]
-_source = NodePath("..")
-modules = {
-0: NodePath("Modules/MovementModule"),
-1: NodePath("Modules/ActionModule"),
-2: NodePath("Modules/InteractModule"),
-3: NodePath("Modules/AutoAttackModule"),
-4: NodePath("Modules/TargetModule")
-}
-families_managers = {
-0: NodePath("FamiliesManagers/AttackManager"),
-1: NodePath("FamiliesManagers/DefenseManager"),
-2: NodePath("FamiliesManagers/FireManager"),
-3: NodePath("FamiliesManagers/StormManager"),
-4: NodePath("FamiliesManagers/SerenityManager"),
-5: NodePath("FamiliesManagers/LifeManager"),
-6: NodePath("FamiliesManagers/PoisonManager")
-}
-
-[node name="AutoAttackModule" parent="CharacterLogic/Modules" index="3" node_paths=PackedStringArray("projectile_spawn")]
-projectile_spawn = NodePath("../../../TurretCenterPoint/Turret/SpawnPoint")
-
-[node name="CharacterAnimator" parent="." node_paths=PackedStringArray("_animation_tree", "_owner") instance=ExtResource("9_0qum4")]
+[node name="HeroAnimator" parent="." node_paths=PackedStringArray("_animation_tree") instance=ExtResource("9_0qum4")]
 _animation_tree = NodePath("../AnimationTree")
-_owner = NodePath("..")
-
-[node name="PickableCollider" parent="." instance=ExtResource("10_8ddps")]
-
-[node name="SpawnAreaChecker" parent="." instance=ExtResource("11_bkbbm")]
-
-[node name="PickableModule" parent="." node_paths=PackedStringArray("_owner", "_pickable_collider", "_spawn_area_checker") instance=ExtResource("12_23ah5")]
-_owner = NodePath("..")
-_pickable_collider = NodePath("../PickableCollider")
-_spawn_area_checker = NodePath("../SpawnAreaChecker")
 
 [editable path="Drboom"]
-[editable path="TurretCenterPoint/Turret"]
-[editable path="CharacterLogic"]

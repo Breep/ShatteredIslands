@@ -19,7 +19,7 @@ physical_critical_multiplier = 2.0
 [resource]
 script = ExtResource("1_atefr")
 name = "Ancient tree"
-id = 0
+id = 1
 portrait = ExtResource("2_b45nk")
 description = "Un ancien arbre"
 stats = SubResource("Resource_vi0jq")
