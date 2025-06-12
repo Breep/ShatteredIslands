@@ -42,9 +42,10 @@ environment = SubResource("Environment_k73x5")
 transform = Transform3D(0.88089, 0.0799744, 0.466517, -0.360914, 0.751164, 0.552716, -0.306227, -0.655254, 0.690556, 0, 52.8971, 0)
 shadow_enabled = true
 
-[node name="Character" parent="." instance=ExtResource("9_4fa74")]
+[node name="Character" parent="." node_paths=PackedStringArray("_hero_3D") instance=ExtResource("9_4fa74")]
 transform = Transform3D(0.161104, 0, -0.986937, 0, 1, 0, 0.986937, 0, 0.161104, 2.87392, 0, -5.69988)
-hero_id = 0
+hero_id = 1
+_hero_3D = NodePath("AncientTree")
 id = 1
 team = 2
 battle_id = 1
