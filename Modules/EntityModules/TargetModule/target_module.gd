@@ -29,6 +29,8 @@ var _entities: Array[Entity] # All character on the fighting scene
 var _enemies: Array[Entity] # All enemies of the owned character
 var _allies: Array[Entity] # All allies of the owned character
 
+var _current_entity_manager_linked_to: EntityManager
+
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
@@ -43,9 +45,12 @@ func connect_to_entity_manager(entity_manager: EntityManager) -> void:
 		printerr("TargetModule: entity_manager is null")
 		return
 	
+	_clear()
+	print("Connect to entity manager: ", _owner.name)
 	_entities = entity_manager.entities.values()
 	entity_manager.entity_spawned.connect(_on_entity_manager_entity_spawned)
 	entity_manager.entity_dead.connect(_on_entity_manager_entity_dead)
+	_current_entity_manager_linked_to = entity_manager
 	_enemies = _get_enemies_from_entities()
 	_allies = _get_allies_from_entities()
 
@@ -229,9 +234,17 @@ func _get_array_without_untargetable_targets(characters: Array[Entity]) -> Array
 	return characters_copy
 
 
+func _clear() -> void:
+	_enemies.clear()
+	_allies.clear()
+	if _current_entity_manager_linked_to != null:
+		_current_entity_manager_linked_to.entity_spawned.disconnect(_on_entity_manager_entity_spawned)
+		_current_entity_manager_linked_to.entity_dead.disconnect(_on_entity_manager_entity_dead)
+
 # ============================== Callback ==============================
 
 func _on_entity_manager_entity_spawned(who: Entity) -> void:
+	print("EntityManager spawned(): ", _owner.name, "-", who.name)
 	if who.team != _owner.team:
 		_enemies.append(who)
 	else:

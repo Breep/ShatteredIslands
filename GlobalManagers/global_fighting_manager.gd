@@ -24,10 +24,10 @@ enum FightingState {
 # ============================== Fighting phase duration ==============================
 
 const _fighting_phase_durations: Dictionary[FightingState, int] = {
-	FightingState.POSITIONING: 5,
+	FightingState.POSITIONING: 1,
 	FightingState.COUNTDOWN: 3,
-	FightingState.FIGHT: 30,
-	FightingState.FIGHT_ACCELERATED: 5, 
+	FightingState.FIGHT: 10,
+	FightingState.FIGHT_ACCELERATED: 1, 
 	FightingState.FINISHED: 3, # Winners cheers
 }
 
@@ -51,7 +51,7 @@ var fighting_state: FightingState:
 var _fighting_managers: Array[FightingManager]
 var _current_active_fighting_managers: Array[FightingManager]
 
-const __PROTOTYPING: bool = true
+const __PROTOTYPING: bool = false
 
 # ============================== Node base functions ==============================
 

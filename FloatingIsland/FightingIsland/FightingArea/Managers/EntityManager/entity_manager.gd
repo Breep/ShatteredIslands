@@ -21,6 +21,12 @@ func _ready() -> void:
 	get_parent().connect(Entity.SIGNAL_NAME_SPAWNED, _on_parent_entity_is_spawned)
 	Events.game_state_changed.connect(_on_events_game_state_changed)
 
+# ============================== Public functions ==============================
+
+func clear() -> void:
+	_entities.clear()
+	_characters.clear()
+
 # ============================== Private functions ==============================
 
 func _register_entity(who: Entity) -> void:
@@ -48,8 +54,8 @@ func _on_entity_dead(who: Entity) -> void:
 
 func _on_events_game_state_changed(game_state: Game.GameState) -> void:
 	if game_state == Game.GameState.BUYING:
-		_entities.clear()
-		_characters.clear()
+		print("EntityManager.clear()")
+		clear()
 
 
 

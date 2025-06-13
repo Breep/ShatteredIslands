@@ -54,6 +54,8 @@ func start_fight(characters: Array[Character], battle_type: Battle.BattleType, b
 	if character_spawner == null:
 		printerr("FightingArea: No CharacterSpawner for this battle type: ", battle_type)
 	
+	_entity_manager.clear()
+	
 	character_spawner.spawn_characters(characters, _entities_node)
 	for character in characters:
 		character.connect_to_fighting_area(self)
