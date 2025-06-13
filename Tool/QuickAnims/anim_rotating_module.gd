@@ -7,8 +7,6 @@ enum AXIS {
 	Z
 }
 
-@onready var _tween := create_tween()
-
 @export var _owner: Node3D
 
 @export var _rot_axis: AXIS
@@ -19,6 +17,7 @@ enum AXIS {
 func _ready():
 	if _owner == null:
 		printerr("AnimRotatingModule: Owner isn't set ! [", get_path(), "]")
+		queue_free()
 		return
 	
 	if _rot_full:
@@ -28,9 +27,10 @@ func _ready():
 
 
 func _start_back_and_forth_rotating():
+	var tween = create_tween()
 	var delta_rot = Vector3.ZERO
 	
-	_tween.set_loops()
+	tween.set_loops()
 	
 	match _rot_axis:
 		AXIS.X: delta_rot.x = deg_to_rad(_rot_max)
@@ -39,8 +39,8 @@ func _start_back_and_forth_rotating():
 	
 	var rot_min: Vector3 = _owner.rotation - delta_rot
 	var rot_max: Vector3 = _owner.rotation + delta_rot
-	_tween.tween_property(_owner, "rotation", rot_max, _rot_period).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	_tween.tween_property(_owner, "rotation", rot_min, _rot_period).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(_owner, "rotation", rot_max, _rot_period).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(_owner, "rotation", rot_min, _rot_period).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 
 func _start_endless_rotating():

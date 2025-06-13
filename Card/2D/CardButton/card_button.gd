@@ -21,9 +21,7 @@ var card: Card:
 var _angle_x_max: float = 15.0
 var _angle_y_max: float = 15.0
 var _tween_rot: Tween
-var _tween_hover: Tween
 var _card: Card
-var _middle_offset: Vector2 = Vector2(125,175)
 
 # ============================== Local scene nodes ==============================
 

@@ -235,7 +235,7 @@ func _on_tooltip_focused(tooltip: Tooltip)->void:
 	_tooltip_focused  = tooltip
 
 
-func _on_tooltip_unfocused(tooltip: Tooltip)->void:
+func _on_tooltip_unfocused(_tooltip: Tooltip)->void:
 	print("unfocused")
 	_tooltip_focused  = null
 

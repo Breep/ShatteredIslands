@@ -18,12 +18,7 @@ var game_state: GameState:
 		_game_state = value
 		Events.game_state_changed.emit(_game_state)
 
-var _families_ref: Dictionary # Reference Dictionary to all families
-var _active_families: Array[Family] # Array of all families activated for this game only
-var _rules: GameRules
-
 var _fighting_islands: Dictionary[int, FightingIsland] # [player_id, FightingIslands]
-
 var _current_round_battles: Array[Battle]
 
 # ============================== Network Export ==============================
@@ -42,8 +37,6 @@ var _current_round_battles: Array[Battle]
 @export var _node_characters: Node3D # Network spawn of Characters
 
 @export var _islands_spawn_points: Array[SpawnPoint]
-
-@export var _ui_game: UIGame
 
 @onready var _island_spawns_to_be_removed: Node3D = %IslandSpawns
 

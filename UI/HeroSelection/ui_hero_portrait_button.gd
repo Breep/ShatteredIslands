@@ -7,7 +7,7 @@ var hero: Hero
 
 signal selected(hero: Hero)
 
-func _process(delta):
+func _process(_delta: float):
 	custom_minimum_size.y = size.x
 
 

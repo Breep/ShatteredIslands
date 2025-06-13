@@ -65,7 +65,8 @@ func _disconnect_from_characters_signals() -> void:
 	for team_members in _characters_dictionary.values():
 		for member in team_members:
 			var character: Character = member
-			character.dead.disconnect(_on_character_dead)
+			if character.dead.is_connected(_on_character_dead):
+				character.dead.disconnect(_on_character_dead)
 
 
 # Check if there is only one team alive, also add into the _lowest_hp_teams_order the team_id of a newly dead team

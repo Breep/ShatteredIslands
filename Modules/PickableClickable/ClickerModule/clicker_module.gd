@@ -88,7 +88,6 @@ func _ready() -> void:
 		_force_inactive = true
 		return
 	
-	_tween = create_tween()
 	if _debug:
 		_build_debug_meshs()
 
@@ -143,7 +142,6 @@ func _select_pickable(pickable: Node3D, is_selected: bool, event: InputEvent) ->
 	
 	var pickable_module: PickableModule = pickable.get_meta(PickableModule.PICKABLE_META)
 	if _tween: _tween.kill()
-	_tween = create_tween()
 	if is_selected:
 		if pickable_module.pick() == false: return
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -154,11 +152,13 @@ func _select_pickable(pickable: Node3D, is_selected: bool, event: InputEvent) ->
 		var from: Vector3 = _camera.project_ray_origin(event.position)
 		var to: Vector3 = from + _camera.project_ray_normal(event.position) * 1000
 		_pickable_start_intersection = _pickable_plane.intersects_ray(from, to) # TODO Move this inside the pickable module probably
+		_tween = create_tween()
 		_tween.tween_property(pickable, "position:y", 0.5, 0.2).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 	else:
 		if pickable_module.drop() == false: return
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		_pickable_selected = null
+		_tween = create_tween()
 		_tween.tween_property(pickable, "position:y", 0, 0.2).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_IN)
 
 

@@ -47,7 +47,7 @@ func get_current_game_heroes() -> Array[Hero]:
 	if multiplayer.is_server():
 		_init_current_current_game_heroes(HEROES_NUMBER)
 	else:
-		_ask_get_n_random_heroes.rpc_id(1, multiplayer.get_unique_id(), HEROES_NUMBER)
+		_ask_get_n_random_heroes.rpc_id(1, multiplayer.get_unique_id())
 		await _server_answered
 	
 	var random_heroes: Array[Hero]
@@ -137,7 +137,7 @@ func _init_families_ref() -> void:
 # ============================== RPC - Ask/Answer current round battle ==============================
 
 @rpc("any_peer", "call_remote")
-func _ask_get_n_random_heroes(peer_id: int, heroes_number: int) -> void:
+func _ask_get_n_random_heroes(peer_id: int) -> void:
 	if not multiplayer.is_server():
 		printerr("Only server should be asked for random heroes")
 		return

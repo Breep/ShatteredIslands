@@ -82,4 +82,5 @@ func _reconnect_to_card_signal(card_button: CardButton) -> void:
 
 
 func _on_events_ui_card_shop_opened(is_opened: bool) -> void:
-	show() if is_opened else hide()
+	if is_opened: show()
+	else: hide()

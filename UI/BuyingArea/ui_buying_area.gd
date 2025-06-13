@@ -6,7 +6,6 @@ extends Control
 # ============================== Local nodes ==============================
 
 @onready var _continous_timer: UIContinousTimer = %ContinousTimer
-@onready var _card_shop: UICardShop = %CardShop
 
 # ============================== Private variables ==============================
 

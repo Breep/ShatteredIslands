@@ -30,7 +30,7 @@ properties/0/path = NodePath(".:_current_round_player_id_islands")
 properties/0/spawn = true
 properties/0/replication_mode = 2
 
-[node name="Game" type="Node3D" node_paths=PackedStringArray("_buying_island", "_scene_switcher", "_hero_selector", "_node_fighting_islands", "_node_characters", "_islands_spawn_points", "_ui_game")]
+[node name="Game" type="Node3D" node_paths=PackedStringArray("_buying_island", "_scene_switcher", "_hero_selector", "_node_fighting_islands", "_node_characters", "_islands_spawn_points")]
 script = ExtResource("1_7r6pw")
 _buying_island = NodePath("BuyingIsland")
 _scene_switcher = NodePath("SceneSwitcher")
@@ -38,7 +38,6 @@ _hero_selector = NodePath("HeroSelector")
 _node_fighting_islands = NodePath("FightingIslands")
 _node_characters = NodePath("Characters")
 _islands_spawn_points = [NodePath("IslandSpawns/CenterPoint1/SpawnPoint1"), NodePath("IslandSpawns/CenterPoint2/SpawnPoint2"), NodePath("IslandSpawns/CenterPoint3/SpawnPoint3"), NodePath("IslandSpawns/CenterPoint4/SpawnPoint4"), NodePath("IslandSpawns/CenterPoint5/SpawnPoint5"), NodePath("IslandSpawns/CenterPoint6/SpawnPoint6"), NodePath("IslandSpawns/CenterPoint7/SpawnPoint7"), NodePath("IslandSpawns/CenterPoint8/SpawnPoint8")]
-_ui_game = NodePath("UI/UIGame")
 
 [node name="BuyingIsland" parent="." instance=ExtResource("6_flgk0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 56.0279, 0)

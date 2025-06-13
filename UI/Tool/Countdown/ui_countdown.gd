@@ -3,7 +3,7 @@ extends Control
 
 @onready var _timer_label = %TimerLabel
 @onready var _timer = %TimerCountdown
-@onready var _tween = Tween.new() 
+@onready var _tween: Tween
 
 var _sec_timer: int
 var _end_timer_word : String
@@ -28,14 +28,14 @@ func _update_label() -> void:
 
 func _animate_label() -> void:
 	if _tween: _tween.kill()
-	_tween = get_tree().create_tween()  
+	_tween = create_tween()  
 	_tween.tween_property(_timer_label, "scale", Vector2(1.5, 1.5), 0.2).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
 	_tween.tween_property(_timer_label, "scale", Vector2(1, 1), 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 
 
 func _animate_endword_effect() -> void:
 	if _tween: _tween.kill()
-	_tween = get_tree().create_tween()
+	_tween = create_tween()
 	_tween.tween_property(_timer_label, "scale", Vector2(2, 2), 0.5).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
 	_tween.tween_property(_timer_label, "modulate", Color.RED, 0.3).set_trans(Tween.TRANS_LINEAR)
 

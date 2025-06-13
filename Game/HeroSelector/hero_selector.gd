@@ -36,7 +36,7 @@ func _start_player_turn_to_pick(player_id: int) -> void:
 	if multiplayer.is_server():
 		_ui_hero_picking_screen.update_bottom_message(player_picking.name, false)
 		if player_picking.is_bot:
-			player_picking.hero = await _get_random_hero_and_wait_random_duration(_available_heroes)
+			player_picking.hero = await _get_random_hero_and_wait_random_duration()
 			print("Player ", player_picking.name, " picked ", player_picking.hero.name)
 			_pick_hero.rpc(player_picking.id, player_picking.hero.id)
 	else:
@@ -47,7 +47,7 @@ func _start_player_turn_to_pick(player_id: int) -> void:
 			_ui_hero_picking_screen.update_bottom_message(player_picking.name, false)
 
 
-func _get_random_hero_and_wait_random_duration(heroes: Array[Hero]) -> Hero:
+func _get_random_hero_and_wait_random_duration() -> Hero:
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	await get_tree().create_timer(rng.randf_range(0.1, 0.5)).timeout

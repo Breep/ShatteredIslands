@@ -24,6 +24,9 @@ func _ready() -> void:
 # ============================== Public functions ==============================
 
 func clear() -> void:
+	for entity in _entities.values():
+		if entity.dead.is_connected(_on_entity_dead):
+			entity.dead.disconnect(_on_entity_dead)
 	_entities.clear()
 	_characters.clear()
 
@@ -35,7 +38,7 @@ func _register_entity(who: Entity) -> void:
 		_characters[who.id] = who
 	
 	entity_spawned.emit(who)
-	who.dead.connect(_on_entity_dead)
+	who.dead.connect(_on_entity_dead, CONNECT_ONE_SHOT)
 
 # ============================== Callbacks ==============================
 
@@ -48,13 +51,13 @@ func _on_parent_entity_is_spawned(who: Entity) -> void:
 
 
 func _on_entity_dead(who: Entity) -> void:
-	_entities.erase(who)
+	if not _entities.has(who.id): return
+	_entities.erase(who.id)
 	entity_dead.emit(who)
 
 
 func _on_events_game_state_changed(game_state: Game.GameState) -> void:
 	if game_state == Game.GameState.BUYING:
-		print("EntityManager.clear()")
 		clear()
 
 

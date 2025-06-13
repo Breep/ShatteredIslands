@@ -188,7 +188,7 @@ func _on_interact_module_heal_received(heal_amount: int) -> void:
 
 # ============================== Other callbacks ==============================
 
-func _on_fighting_manager_fight_is_over(_winner_team) -> void:
+func _on_fighting_manager_fight_is_over(_fighting_manager, _winner_team) -> void:
 	_character_logic.stop()
 
 

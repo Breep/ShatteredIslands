@@ -15,6 +15,8 @@ const MAX_TOWER_HEIGHT_DIFF: int = 2 # Max coin (or height) diff between the hig
 var _old_player_gold: int 
 var _rng := RandomNumberGenerator.new()
 
+var _player_connected_to: Player
+
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
@@ -23,7 +25,10 @@ func _ready() -> void:
 # ============================== Public functions ==============================
 
 func connect_to_player(player: Player) -> void:
+	if _player_connected_to != null and _player_connected_to.gold_changed.is_connected(_on_player_gold_changed):
+		_player_connected_to.gold_changed.disconnect(_on_player_gold_changed)
 	player.gold_changed.connect(_on_player_gold_changed)
+	_player_connected_to = player
 	_update_visual(player.gold)
 
 # ============================== Private functions ==============================

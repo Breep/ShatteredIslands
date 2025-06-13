@@ -28,7 +28,6 @@ func _ready() -> void:
 	_server_ip_edit.text = _default_server_ip
 	
 	PlayerManager.player_added.connect(_on_player_manager_player_added)
-	PlayerManager.player_removed.connect(_on_player_manager_player_removed)
 	
 	for child in _players_list.get_children():
 		child.hide()
@@ -135,7 +134,3 @@ func _on_connection_failed():
 func _on_player_manager_player_added(peer_id: int) -> void:
 	if not multiplayer.is_server(): return
 	_add_connected_player_line(peer_id)
-
-
-func _on_player_manager_player_removed(peer_id: int, player_name: String) -> void:
-	pass

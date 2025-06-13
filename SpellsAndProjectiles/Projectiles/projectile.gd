@@ -109,5 +109,5 @@ func _damage_percent(target: Character, damage_percent: float, damage_type: Util
 
 # ============================== Callbacks ==============================
 
-func _on_target_dead(_who, _true_death) -> void:
+func _on_target_dead(_who) -> void:
 	queue_free()

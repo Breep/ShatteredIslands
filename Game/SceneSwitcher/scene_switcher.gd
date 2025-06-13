@@ -39,5 +39,5 @@ func _set_island_active_only(floating_island: FloatingIsland) -> void:
 
 # ============================== Callbacks ==============================
 
-func _on_events_fighting_island_spawned(fighting_island_ref: FightingIsland, player_id: int) -> void:
+func _on_events_fighting_island_spawned(fighting_island_ref: FightingIsland, _player_id: int) -> void:
 	fighting_islands.append(fighting_island_ref)

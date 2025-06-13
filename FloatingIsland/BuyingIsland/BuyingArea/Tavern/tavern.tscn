@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://b8clqslwo8t68"]
+[gd_scene load_steps=65 format=3 uid="uid://b8clqslwo8t68"]
 
 [ext_resource type="Script" uid="uid://bg27we47t814j" path="res://FloatingIsland/BuyingIsland/BuyingArea/Tavern/tavern.gd" id="1_amkis"]
 [ext_resource type="PackedScene" uid="uid://cdryp1jj4woix" path="res://FloatingIsland/BuyingIsland/BuyingArea/ShopDeck3DVisual/shop_deck_3d_visual.tscn" id="2_7m3y5"]
@@ -31,10 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://dkg57ci356apb" path="res://FloatingIsland/BuyingIsland/BuyingArea/3D sceces inh - Coll/Deco/candle_2_coll.tscn" id="30_axw6g"]
 [ext_resource type="PackedScene" uid="uid://c8l6s15qw6j78" path="res://FloatingIsland/BuyingIsland/BuyingArea/3D sceces inh - Coll/Barrel/barrel_large_decorated_coll.tscn" id="30_b68hs"]
 [ext_resource type="PackedScene" uid="uid://cimu2cd5awo4e" path="res://FloatingIsland/BuyingIsland/BuyingArea/3D sceces inh - Coll/Deco/scaffold_pillar_wall_coll.tscn" id="32_0lqi4"]
-[ext_resource type="PackedScene" path="res://Scenes/Object_scene/mimic_chest.tscn" id="32_61xjn"]
-[ext_resource type="PackedScene" uid="uid://bb4esvsygn6h2" path="res://Entities/NPC/knight.tscn" id="33_dru4r"]
 [ext_resource type="PackedScene" uid="uid://cy0neemmn0e8k" path="res://FloatingIsland/BuyingIsland/BuyingArea/3D sceces inh - Coll/Banner/banner_red_coll.tscn" id="33_wu4do"]
-[ext_resource type="PackedScene" uid="uid://d4m8fv3pjumps" path="res://Entities/NPC/rogue.tscn" id="34_t4vwx"]
 [ext_resource type="PackedScene" uid="uid://bi6jnpt48kdc7" path="res://FloatingIsland/BuyingIsland/BuyingArea/3D sceces inh - Coll/Floor/floor_tile_rock_coll.tscn" id="37_ybrre"]
 [ext_resource type="PackedScene" uid="uid://4uow8jg5jprd" path="res://FloatingIsland/BuyingIsland/BuyingArea/3D sceces inh - Coll/Floor/floor_tile_wood_coll.tscn" id="39_4who6"]
 [ext_resource type="PackedScene" uid="uid://ccs4nk1pw4w71" path="res://FloatingIsland/BuyingIsland/BuyingArea/3D sceces inh - Coll/Wall/wall_coll.tscn" id="39_6qgkj"]
@@ -193,8 +190,7 @@ transform = Transform3D(0.943668, 0, 0.330893, 0, 1, 0, -0.330893, 0, 0.943668, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.89352, 2.04605, -1.51286)
 shape = SubResource("BoxShape3D_ee6hw")
 
-[node name="InteractionComponent" parent="Bar" node_paths=PackedStringArray("_nodes_where_to_find_meshs") instance=ExtResource("23_03w0h")]
-_nodes_where_to_find_meshs = [NodePath("../DecoBar_"), NodePath("../BarMeuble"), NodePath("../Stool_round")]
+[node name="InteractionComponent" parent="Bar" instance=ExtResource("23_03w0h")]
 
 [node name="Decco" type="Node3D" parent="."]
 
@@ -234,33 +230,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.469236, 0, -16.5311)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0257704, 0, 0.47257)
 
 [node name="Chest" type="Node3D" parent="Decco"]
-
-[node name="ChestMimic" parent="Decco/Chest" instance=ExtResource("32_61xjn")]
-transform = Transform3D(0.530214, -0.000808874, -0.847863, 0.000133426, 1, -0.000870578, 0.847863, 0.000348473, 0.530214, 4.70404, 1.00192, -5.32994)
-
-[node name="PNJ" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.360003, 0, -15.755)
-
-[node name="Knight3" parent="PNJ" instance=ExtResource("33_dru4r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.44375, -4.76837e-07, 19.5985)
-
-[node name="Rogue3" parent="PNJ" instance=ExtResource("34_t4vwx")]
-transform = Transform3D(-0.987375, 0, 0.158399, 0, 1, 0, -0.158399, 0, -0.987375, 6.68231, 4.76837e-07, 22.4128)
-
-[node name="Rogue4" parent="PNJ" instance=ExtResource("34_t4vwx")]
-transform = Transform3D(-0.511623, 0, -0.85921, 0, 1, 0, 0.85921, 0, -0.511623, -14.5461, 0, 24.352)
-
-[node name="Knight" parent="PNJ" instance=ExtResource("33_dru4r")]
-transform = Transform3D(0.868147, 0, 0.496307, 0, 1, 0, -0.496307, 0, 0.868147, -17.191, 0, 0.925239)
-
-[node name="Rogue" parent="PNJ" instance=ExtResource("34_t4vwx")]
-transform = Transform3D(0.983369, 0, -0.181618, 0, 1, 0, 0.181618, 0, 0.983369, -5.51097, 0, -1.98013)
-
-[node name="Rogue2" parent="PNJ" instance=ExtResource("34_t4vwx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.87923, 0, -1.60982)
-
-[node name="Knight2" parent="PNJ" instance=ExtResource("33_dru4r")]
-transform = Transform3D(0.810349, 0, -0.585948, 0, 1, 0, 0.585948, 0, 0.810349, 5.59581, 0, -0.640927)
 
 [node name="Ground" type="Node3D" parent="."]
 

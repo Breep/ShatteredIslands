@@ -116,7 +116,7 @@ func _on_mouse_exited() -> void:
 
 
 func _on_panel_mouse_entered() -> void:
-	var debugg_string : String
+	var debugg_string : String = ""
 	if parent_tooltip != null:
 		debugg_string += str(parent_tooltip.debugg_int) + " "
 	debugg_string += str(debugg_int) + " "
@@ -128,6 +128,6 @@ func _on_panel_mouse_entered() -> void:
 	_mouse_on_self = true
 
 
-func _on_description_meta_hover_ended(meta: Variant) -> void:
+func _on_description_meta_hover_ended(_meta: Variant) -> void:
 	if _child_tooltip != null:
 		_child_tooltip.start_recursive_parent_free()
