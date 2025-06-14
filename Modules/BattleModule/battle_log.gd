@@ -28,5 +28,5 @@ const MODIFIER: String = "Modifier"
 
 
 @rpc("authority", "call_remote", "reliable")
-func send_battle_log(log: Array[Dictionary]) -> void:
+func send_battle_log(_log: Array[Dictionary]) -> void:
 	pass

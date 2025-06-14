@@ -37,12 +37,7 @@ signal _join_server_answered()
 var _join_server_response: bool
 var _join_server_reason: String
 
-var _game_state_changed_signal: Signal # Ref to game_state_changed signal
-
 # ============================== Node base functions ==============================
-
-func _ready() -> void:
-	Events.new_game_started.connect(_on_events_new_game_started)
 
 # ============================== Public functions ==============================
 
@@ -246,10 +241,6 @@ func _on_player_xp_changed(player: Player, _unused) -> void:
 
 func _on_player_lvl_changed(player: Player, _unused) -> void:
 	_sync_player.rpc(player.serialized())
-
-
-func _on_events_new_game_started(game_node: Game) ->void:
-	_game_state_changed_signal = game_node.game_state_changed
 
 
 

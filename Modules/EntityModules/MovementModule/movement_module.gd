@@ -39,8 +39,6 @@ func _move_toward_target(delta: float):
 	_owner.velocity = direction * _get_move_speed() * delta
 	#print("DIRECTION ", direction)
 	_owner.move_and_slide()
-	var distance_moved = _owner.global_position.distance_to(previous_position)
-	print("POS= ", _owner.global_position)
 
 
 func _get_move_speed() -> float:

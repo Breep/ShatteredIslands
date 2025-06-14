@@ -147,9 +147,9 @@ func serialized() -> Dictionary:
 # Create a new empty battle randomly picked from a category (no players assiociated to it)
 static func new_from_category(battle_category: BattleCategory) -> Battle:
 	var battle := Battle.new()
-	var battle_type = _get_battle_type(battle_category)
-	var battle_info = BATTLES_INFO_DIC[battle_type]
-	battle.battle_type = battle_type
+	var random_battle_type = _get_random_battle_type(battle_category)
+	var battle_info = BATTLES_INFO_DIC[random_battle_type]
+	battle.battle_type = random_battle_type
 	battle.name = battle_info["name"]
 	battle.players_number = battle_info["players_number"]
 	battle.teams_number = battle_info["teams_number"]
@@ -176,7 +176,7 @@ func _sort_players_in_team() -> void:
 		printerr("Battle: Can't sort players in team")
 		return
 	
-	var players_per_team = players_number / teams_number
+	var players_per_team: int = players_number / teams_number
 	for team_index in teams_number:
 		for i in players_per_team:
 			players[team_index * players_per_team + i].team = team_index + 1
@@ -184,15 +184,15 @@ func _sort_players_in_team() -> void:
 # ============================== Private functions ==============================
 
 # Pick a random player from players dictionary and remove it from the dictionary
-func _pick_random_player(players: Dictionary) -> Player:
-	var player_index = Utils.rng.randi_range(0, players.size() - 1)
-	var player = players.values()[player_index]
-	players.erase(players.find_key(player))
+func _pick_random_player(players_list: Dictionary) -> Player:
+	var player_index = Utils.rng.randi_range(0, players_list.size() - 1)
+	var player = players_list.values()[player_index]
+	players_list.erase(players_list.find_key(player))
 	return player
 
 
 # Get a random battle_type from a number of players (If there are 4 players in a fight, it can be either a 2v2 or a 1v1v1v1 for instance)
-static func _get_battle_type(battle_category: BattleCategory) -> Battle.BattleType:
+static func _get_random_battle_type(battle_category: BattleCategory) -> Battle.BattleType:
 	var battle_types: Array = BATTLES_TYPE_DIC[battle_category]
 	var battle_id = Utils.rng.randi_range(0, battle_types.size() - 1)
 	return battle_types[battle_id]

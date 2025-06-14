@@ -26,8 +26,6 @@ func _ready() -> void:
 	for i in 3:
 		var card_button = _card_container.get_node(str(i)) as CardButton
 		card_button.connect("card_selected", _on_card_shop_button_pressed, CONNECT_ONE_SHOT)
-	
-	Events.ui_card_shop_opened.connect(_on_events_ui_card_shop_opened)
 
 
 func _on_back_pressed() -> void:
@@ -79,8 +77,3 @@ func _adapt_cards_lvl_to_player() -> void:
 
 func _reconnect_to_card_signal(card_button: CardButton) -> void:
 	card_button.card_selected.connect(_on_card_shop_button_pressed, CONNECT_ONE_SHOT)
-
-
-func _on_events_ui_card_shop_opened(is_opened: bool) -> void:
-	if is_opened: show()
-	else: hide()

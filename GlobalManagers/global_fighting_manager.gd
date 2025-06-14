@@ -9,6 +9,7 @@ extends Node
 
 signal state_changed(state: FightingState)
 signal all_fights_are_over()
+signal countdown_started(time: float, text: String)
 
 # ============================== Enums ==============================
 
@@ -144,7 +145,7 @@ func _on_state_changed(new_state) -> void:
 			_sync_state.rpc(FightingState.POSITIONING)
 			print("[", multiplayer.get_unique_id(), "] GlobalFightingManager: Starting the positioning")
 		FightingState.COUNTDOWN:
-			Events.ui_main_countdown_triggered.emit(_fighting_phase_durations[FightingState.COUNTDOWN], "Fight")
+			countdown_started.emit(_fighting_phase_durations[FightingState.COUNTDOWN], "Fight")
 			print("[", multiplayer.get_unique_id(), "] GlobalFightingManager: Starting countdown")
 		FightingState.FIGHT:
 			print("[", multiplayer.get_unique_id(), "] GlobalFightingManager: Starting the fight")

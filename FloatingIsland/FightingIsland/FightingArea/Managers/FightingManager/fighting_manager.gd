@@ -71,7 +71,6 @@ func _disconnect_from_characters_signals() -> void:
 
 # Check if there is only one team alive, also add into the _lowest_hp_teams_order the team_id of a newly dead team
 func _is_only_one_team_alive() -> bool:
-	var teams_number: int = _alive_characters_dictionary.size()
 	var teams_alived_counter: int = 0
 	for team_id in _alive_characters_dictionary.keys():
 		if _alive_characters_dictionary[team_id].size() > 0:

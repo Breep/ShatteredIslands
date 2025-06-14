@@ -54,9 +54,9 @@ func _on_body_entered(body: Node3D) -> void:
 			if stats.magical_damage_flat > 0:
 				Events.damage_done.emit(source, target, stats.magical_damage_flat, Utils.DamageType.MAGICAL, stats.is_critic)
 			if stats.physical_damage_percent > 0:
-				_damage_percent(target, stats.physical_damage_percent, Utils.DamageType.PHYSICAL, stats.physical_damage_percent_type, stats.is_critic)
+				_damage_percent(stats.physical_damage_percent, Utils.DamageType.PHYSICAL, stats.physical_damage_percent_type, stats.is_critic)
 			if stats.magical_damage_percent > 0:
-				_damage_percent(target, stats.magical_damage_percent, Utils.DamageType.MAGICAL, stats.magical_damage_percent_type, stats.is_critic)
+				_damage_percent(stats.magical_damage_percent, Utils.DamageType.MAGICAL, stats.magical_damage_percent_type, stats.is_critic)
 			if stats.poison_stacks > 0:
 				Events.condition_stacks_done.emit(source, target, stats.poison_stacks, Utils.StackType.POISON, stats.poison_duration)
 			if stats.vulnerability_stacks > 0:
@@ -69,16 +69,6 @@ func _on_body_entered(body: Node3D) -> void:
 				return
 		
 		queue_free()
-
-# ============================== Public functions ==============================
-
-#func init(source: Character, target: Character, stats: ProjectileStats) -> void:
-	#source = source
-	#target = target
-	#stats = stats
-	#
-	#if stats.is_critic:
-		#scale *= 2
 
 # ============================== Private functions ==============================
 
@@ -94,7 +84,7 @@ func _move_toward_target(delta: float):
 	look_at(target.global_position)
 
 
-func _damage_percent(target: Character, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier, is_critical: bool) -> void:
+func _damage_percent(damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier, is_critical: bool) -> void:
 	if not multiplayer.is_server(): return
 	var hp: int
 	match percent_modifier:

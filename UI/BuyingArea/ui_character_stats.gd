@@ -14,7 +14,6 @@ var _character_stats: CharacterStats
 @onready var _attack_label: Label = %AttackLabel
 @onready var _attack_speed_label: Label = %AttackSpeedLabel
 @onready var _crit_chance_label: Label = %CritChanceLabel
-@onready var _move_speed_label: Label = %MoveSpeedLabel
 @onready var _poison_label: Label = %PoisonLabel
 @onready var _armor_label: Label = %ArmorLabel
 

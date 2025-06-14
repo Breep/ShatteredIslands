@@ -18,7 +18,7 @@ var _camera: Camera3D # If defined, the visual will look at it
 
 # ============================== Node base functions ==============================
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if _camera != null:
 		look_at(_camera.global_position)
 

@@ -8,7 +8,6 @@ extends Node
 # ============================== Private variables ==============================
 
 var _battle_logs: Array[Dictionary]
-var _entities: Array[Entity]
 var _start_time: float
 
 # ============================== Node base functions ==============================

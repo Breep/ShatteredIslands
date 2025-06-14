@@ -39,11 +39,11 @@ var fighting_state: GlobalFightingManager.FightingState:
 @export_group("Network")
 @export_subgroup("Variables")
 @export var owner_player_id: int # ID of the player owner of this character
-var _hero_id: Hero.HeroId = -1
+var _hero_id := Hero.HeroId.UNDEF
 @export var hero_id: Hero.HeroId: # ID of the hero this character represent
 	get: return _hero_id
 	set(value):
-		if value == _hero_id: return
+		if value == _hero_id or value < 0: return
 		_hero_id = value
 		_update_hero()
 
@@ -128,9 +128,6 @@ func _ready() -> void:
 	
 	GlobalFightingManager.state_changed.connect(_on_global_fighting_manager_state_changed)
 	Events.game_state_changed.connect(_on_events_game_state_changed)
-	
-	#_interact_module.damage_taken.connect(_on_interact_module_damage_taken)
-	#_interact_module.heal_received.connect(_on_interact_module_heal_received)
 	
 	_update_hero()
 

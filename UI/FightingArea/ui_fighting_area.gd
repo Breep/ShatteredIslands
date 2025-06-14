@@ -32,7 +32,7 @@ var _is_active: bool = false
 
 func _ready() -> void:
 	hide()
-	Events.ui_main_countdown_triggered.connect(_on_events_ui_main_countdown_triggered)
+	GlobalFightingManager.countdown_started.connect(_on_global_fighting_manager_countdown_started)
 	_continuous_timer.connect_timer(GlobalFightingManager.timer)
 
 # ============================== Public functions ==============================
@@ -69,5 +69,5 @@ func set_inactive() -> void:
 
 # ============================== Callbacks ==============================
 
-func _on_events_ui_main_countdown_triggered(countdown_value: int, endword: String) -> void:
+func _on_global_fighting_manager_countdown_started(countdown_value: int, endword: String) -> void:
 	_countdown.start(countdown_value, endword)

@@ -16,7 +16,7 @@ var game_state: GameState:
 	set(value):
 		if _game_state == value: return
 		_game_state = value
-		Events.game_state_changed.emit(_game_state)
+		Events.change_game_state(_game_state)
 
 var _fighting_islands: Dictionary[int, FightingIsland] # [player_id, FightingIslands]
 var _current_round_battles: Array[Battle]

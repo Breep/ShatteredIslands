@@ -44,9 +44,8 @@ _entities_node = NodePath("Entities")
 [node name="BattleWriter" parent="." node_paths=PackedStringArray("_fighting_area") instance=ExtResource("8_7oplh")]
 _fighting_area = NodePath("..")
 
-[node name="SpawnManager" parent="." node_paths=PackedStringArray("_fighting_area", "_entities_node", "_projectiles_node") instance=ExtResource("5_xgsbs")]
+[node name="SpawnManager" parent="." node_paths=PackedStringArray("_fighting_area", "_projectiles_node") instance=ExtResource("5_xgsbs")]
 _fighting_area = NodePath("..")
-_entities_node = NodePath("../Entities")
 _projectiles_node = NodePath("../Projectiles")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]

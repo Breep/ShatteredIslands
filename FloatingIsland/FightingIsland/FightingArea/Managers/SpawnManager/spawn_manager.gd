@@ -3,8 +3,6 @@ class_name SpawnManager
 
 # ============================== Signal ==============================
 
-signal projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.ProjectileType, projectile_modifiers: Array[Projectile.ProjectileEffect])
-
 # ============================== Public variables ==============================
 
 var battle_id: int = -1 # Set by the parent
@@ -13,7 +11,7 @@ var battle_id: int = -1 # Set by the parent
 
 @export var _fighting_area: FightingArea
 
-@export var _entities_node: Node3D
+#@export var _entities_node: Node3D
 @export var _projectiles_node: Node3D
 
 # ============================== Private variables ==============================

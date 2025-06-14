@@ -20,7 +20,7 @@ func _ready() -> void:
 	Events.game_state_changed.connect(_on_events_game_stated_changed)
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if _character_owner == null or _character_owner.target_module == null: return
 	var closest_enemy: Entity = _character_owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
 	if closest_enemy != null and _is_fighting:

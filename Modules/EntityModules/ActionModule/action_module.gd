@@ -5,7 +5,6 @@ extends Module
 @export var _defense_manager: DefenseManager
 @export var _life_manager: LifeManager
 @export var _fire_manager: FireManager
-@export var _poison_manager: PoisonManager
 @export var _serenity_manager: SerenityManager
 
 var _spawn_manager: SpawnManager
@@ -20,13 +19,6 @@ func connect_to_spawn_manager(spawn_manager: SpawnManager) -> void:
 	_spawn_manager = spawn_manager
 
 # ============================== Attack ==============================
-
-# [All]
-@rpc("authority", "call_local")
-func _attack(target_peer_id: int, damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
-	pass
-	# Placer signal pour animation ici ? GameManager.players[target_peer_id].character pour savoir la target
-
 
 # Instantly attack the target - Apply cards damages multiplier if there are some
 func direct_attack(target: Character, damage: int, damage_type: Utils.DamageType) -> void:
@@ -106,11 +98,6 @@ func _spawn_projectile(target: Character, projectile_type: Projectile.Projectile
 
 # ============================== Heal ==============================
 
-@rpc("authority", "call_local")
-func _heal(target_peer_id: int, heal_amount: int) -> void:
-	pass
-
-
 # [Server only]
 func heal(target: Character, heal_amount: int) -> void:
 	if not multiplayer.is_server(): return
@@ -118,7 +105,6 @@ func heal(target: Character, heal_amount: int) -> void:
 	Events.heal_done.emit(_owner, target, heal_amount)
 	#target.take_heal(source, heal_amount)
 	#_heal_manager.notify_heal()
-	_heal.rpc(target.player.id, heal_amount)
 
 
 func heal_percent(target: Character, heal_percent: float, percent_modifier: Utils.PercentModifier) -> void:
@@ -136,13 +122,7 @@ func heal_percent(target: Character, heal_percent: float, percent_modifier: Util
 
 # ============================== Condition stacks ==============================
 
-@rpc("authority", "call_local")
-func _inflict_condition_stacks(stacks_number: int, stack_type: Utils.StackType, source_id: int = -1) -> void:
-	pass
-
-
 # [Server only]
 func inflict_condition_stacks(target: Character, stacks_number: int, stack_type: Utils.StackType) -> void:
 	if not multiplayer.is_server(): return
-	print("Inflict POISON")
 	Events.condition_stacks_done.emit(_owner, target, stacks_number, stack_type)
