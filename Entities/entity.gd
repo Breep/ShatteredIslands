@@ -4,6 +4,8 @@ extends CharacterBody3D
 # ============================== Signals ==============================
 
 signal dead(self_ref: Entity)
+func signal_death() -> void:
+	dead.emit(self)
 
 # ============================== Export (Network) ==============================
 

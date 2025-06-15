@@ -42,17 +42,6 @@ func stop() -> void:
 func get_reduced_damage(damage: int) -> int:
 	return (damage - damage * _poison_stats.poison_resist / 100.0) as int
 
-
-func add_to_poison_effects(source: Character, poison_stacks: int) -> void:
-	if poison_stacks == 0:
-		return
-	
-	_poison_stats.poison_stacks += poison_stacks
-	if _poison_stats.poison_stacks_ref.has(source.id):
-		_poison_stats.poison_stacks_ref[source.id] += poison_stacks
-	else:
-		_poison_stats.poison_stacks_ref[source.id] = poison_stacks
-
 # ============================== Private functions ==============================
 
 func _create_optional_timers() -> void:

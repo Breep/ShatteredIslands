@@ -217,7 +217,7 @@ func _on_stats_health_changed(new_health: int) -> void:
 	if _character_visual != null: _character_visual.update_health_bar(new_health, stats.health_max)
 	if new_health <= 0:
 		print("DEBUG | ", name, " | DEAD")
-		dead.emit(self)
+		signal_death()
 
 
 func _on_events_player_won_a_fight(winner: Player) -> void:

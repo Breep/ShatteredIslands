@@ -2,13 +2,12 @@ class_name InteractModule
 extends Module
 
 #signal heal_received(heal_amount: int)
-signal damage_taken(damage: int, damage_type: Utils.DamageType, is_critical: bool)
+#signal damage_taken(damage: int, damage_type: Utils.DamageType, is_critical: bool)
 
 @export var _storm_manager: StormManager
 @export var _defense_manager: DefenseManager
 @export var _life_manager: LifeManager
 @export var _fire_manager: FireManager
-@export var _poison_manager: PoisonManager
 
 # ============================== Node base functions ==============================
 
@@ -20,7 +19,7 @@ func _ready() -> void:
 # ============================== Damage ==============================
 
 # [Server only]
-func _take_damage(source: Character, damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
+func _take_damage(_source: Character, damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
 	if not multiplayer.is_server(): return
 	if _storm_manager != null:
 		damage = _storm_manager.get_increased_critical_damage(damage, is_critical) # Increase ALL critical damage
@@ -42,18 +41,18 @@ func _take_damage(source: Character, damage: int, damage_type: Utils.DamageType,
 # ============================== Condition stacks ==============================
 
 # [Server only]
-func _take_condition_stacks(source: Character, stacks_number: int, stack_type: Utils.StackType) -> void:
+func _take_condition_stacks(_source: Character, stacks_number: int, stack_type: Utils.StackType) -> void:
 	if not multiplayer.is_server(): return
 	match stack_type:
 		Utils.StackType.POISON:
-			_poison_manager.add_to_poison_effects(source, stacks_number)
+			_owner.stats.poison.poison_stacks += stacks_number
 		Utils.StackType.VULNERABILITY:
 			_owner.stats.storm.vulnerability_stacks += stacks_number
 
 # ============================== Heal ==============================
 
 # [Server only]
-func _take_heal(source: Character, heal_amount: int) -> void:
+func _take_heal(_source: Character, heal_amount: int) -> void:
 	if not multiplayer.is_server(): return
 	_owner.stats.health += heal_amount
 

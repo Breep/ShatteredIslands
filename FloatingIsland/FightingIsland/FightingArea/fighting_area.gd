@@ -4,6 +4,8 @@ extends Node3D
 # ============================== Signals ==============================
 
 signal projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.ProjectileType, projectile_modifiers: Array[Projectile.ProjectileEffect])
+func signal_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.ProjectileType, projectile_modifiers: Array[Projectile.ProjectileEffect]) -> void:
+	projectile_spawned.emit(source, target, projectile_type, projectile_modifiers)
 
 # ============================== Network Export variables ==============================
 

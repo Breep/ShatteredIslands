@@ -1,9 +1,6 @@
 class_name CharacterPoisonStats
 extends Resource
 
-# Dictionary of all stacks on the entity sorted by entity source
-var poison_stacks_ref: Dictionary[int, int] #Key=<entity_id, Value=stacks of poison>
-
 signal poison_stacks_changed(new_poison_stacks: int)
 var poison_stacks: int:
 	get: return poison_stacks

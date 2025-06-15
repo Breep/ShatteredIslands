@@ -36,7 +36,7 @@ func spawn_projectile(source: Character, target: Character, projectile_type: Pro
 	projectile.id = _projectile_counter
 	
 	var modifiers: Array[Projectile.ProjectileEffect] = []
-	_fighting_area.projectile_spawned.emit(source, target, projectile_type, modifiers)
+	_fighting_area.signal_projectile_spawned(source, target, projectile_type, modifiers)
 	_projectile_counter += 1
 	_projectiles_node.add_child(projectile)
 
