@@ -56,9 +56,6 @@ func get_critical_multiplier(damage_type: Utils.DamageType) -> float:
 		return 1 
 	
 	var critical_multiplier = source.stats.physical_critical_multiplier
-	if _storm_stats.lost_hp_crit_multiplier_activated:
-		var lost_hp = source.stats.health_max - source.stats.health
-		critical_multiplier += (lost_hp / _storm_stats.lost_hp_crit_multiplier_hp_number) * _storm_stats.lost_hp_crit_multiplier_amount / 100.0
 	return critical_multiplier
 
 
@@ -67,16 +64,6 @@ func notice_critical_damage(char_who_received_the_crit: Character, damage: int) 
 	if _storm_stats.crit_heal_activated:
 		var target = source.target_module.get_target(TargetModule.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
 		_action_module.heal(target, damage * _storm_stats.crit_heal_amount as float / 100.0)
-	
-	# [Poisonous lightning]
-	if _storm_stats.crit_poison_activated:
-		var poison_stacks: int = (damage * _storm_stats.crit_poison_amount as float / 100.0) as int
-		_action_module.inflict_condition_stacks(char_who_received_the_crit, poison_stacks, Utils.StackType.POISON)
-	
-	# [Thunder break]
-	if _storm_stats.crit_vulnerability_activated:
-		var vuln_stacks: int = (damage * _storm_stats.crit_vulnerability_amount as float / 100.0) as int
-		_action_module.inflict_condition_stacks(char_who_received_the_crit, vuln_stacks, Utils.StackType.VULNERABILITY)
 	
 	# [Lightning speed]
 	if _storm_stats.crit_move_speed_activated:
@@ -153,7 +140,6 @@ var __previous_time: float
 func _on_focus_timer_timeout() -> void:
 	var time = Time.get_ticks_msec()
 	_focus_timer_time_elapsed += time - __previous_time
-	var focus_timer_ticks_max: int = (_storm_stats.focus_target_duration / FOCUS_INCREASE_CRIT_PERIOD) as int
 	var physical_crit_inc: float = remap(_focus_timer_time_elapsed / 1000,                                  \
 									0, _storm_stats.focus_target_duration,                                  \
 									_storm_stats.focus_target_crit_min, _storm_stats.focus_target_crit_max)

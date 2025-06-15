@@ -16,7 +16,6 @@ var battle_id: int = -1 # Set by the parent
 
 # ============================== Private variables ==============================
 
-var _entity_counter: int = 0
 var _projectile_counter: int = 0
 
 # ============================== Node base functions ==============================

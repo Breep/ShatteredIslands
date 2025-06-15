@@ -49,7 +49,7 @@ var battles: Dictionary[int, Battle] = {}
 
 func get_current_round_battles() -> Array[Battle]:
 	current_round += 1
-	print("[", multiplayer.get_unique_id(), "] STARTING A NEW ROUND: ", current_round)
+	print("[", multiplayer.get_unique_id(), "] STARTING A NEW ROUND: ", current_round, " | Players left: ", PlayerManager.get_alive_players().size())
 	battle_history[current_round] = BattleHistory.new()
 	battle_history[current_round].round_id = current_round
 	battles.clear()
@@ -91,7 +91,7 @@ func starting_round_player_changes() -> void:
 	var game_rules: GameRules = GameManager.game_rules
 	for player_ in PlayerManager.players.values():
 		var player: Player = player_
-		var gold_stacks: int = clampi(player.gold/100, 0, game_rules.gold_stack_max)
+		var gold_stacks: int = clampf(player.gold/100.0, 0, game_rules.gold_stack_max) as int
 		var gold_increase_economy: int = gold_stacks * game_rules.gold_earned_per_100_gold_stack
 		var gold_increase_hp_lost: int = player.health_lost_since_last_round * game_rules.gold_earned_per_hp_lost
 		var player_win_streak: int = clamp(player.win_streak, 0, game_rules.gold_earned_on_win_streak.size() - 1)

@@ -35,7 +35,7 @@ func _take_damage(source: Character, damage: int, damage_type: Utils.DamageType,
 		damage = _fire_manager.get_reduced_damage(damage, damage_type) # Reduce % of MAGIC damage
 	
 	if _defense_manager != null:
-		damage = _defense_manager.get_reduced_damage_taken_from_armor(_owner, damage, damage_type) # Reduce flat of PHYSIC AND MAGIC damage
+		damage = _defense_manager.get_reduced_damage_taken_from_armor(damage, damage_type) # Reduce flat of PHYSIC AND MAGIC damage
 	
 	_owner.stats.health -= damage
 

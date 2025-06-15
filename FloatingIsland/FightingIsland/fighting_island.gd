@@ -28,13 +28,15 @@ var _current_characters: Array[Character]
 func _ready() -> void:
 	_update_player_ref(_player_owner_id)
 	if _player_owner_id != -1:
-		Events.fighting_island_spawned.emit(self, _player_owner_id)
+		Events.signal_fighting_island_spawned(self, _player_owner_id)
+	Events.game_state_changed.connect(_on_events_game_state_changed)
 
 # ============================== Public functions ==============================
 
 # Spawn all characters on the FightingArea according to the battle
 # Connect all characters to the FightingArea of the FloatingIsland
 func start_fight(characters: Array[Character], battle_type: Battle.BattleType, battle_id: int = -1) -> void:
+	print("FightingIsland: Starting a fight : ", battle_id)
 	_fighting_area.start_fight(characters, battle_type, battle_id)
 	_current_characters = characters
 	for character in _current_characters:
@@ -63,3 +65,28 @@ func set_inactive() -> void:
 func _update_player_ref(player_id: int) -> void:
 	if PlayerManager.players.has(player_id):
 		PlayerManager.players[player_id].fighting_island = self
+
+# ============================== Callback functions ==============================
+
+func _on_events_game_state_changed(game_state: Game.GameState) -> void:
+	if game_state == Game.GameState.BUYING:
+		_current_characters.clear()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

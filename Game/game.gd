@@ -4,7 +4,7 @@ extends Node3D
 # ============================== Enum ==============================
 
 enum GameState {
-	POSITIONING,
+	STARTING,
 	BUYING,
 	FIGHTING,
 	UNDEF
@@ -16,7 +16,7 @@ var game_state: GameState:
 	set(value):
 		if _game_state == value: return
 		_game_state = value
-		Events.change_game_state(_game_state)
+		Events.signal_game_state_changed(_game_state)
 
 var _fighting_islands: Dictionary[int, FightingIsland] # [player_id, FightingIslands]
 var _current_round_battles: Array[Battle]
@@ -60,7 +60,7 @@ func _start_game() -> void:
 
 
 func _start_hero_selection() -> void:
-	game_state = GameState.POSITIONING
+	game_state = GameState.STARTING
 	_hero_selector.start()
 	#_buying_area.start_hero_selection(heroes)
 

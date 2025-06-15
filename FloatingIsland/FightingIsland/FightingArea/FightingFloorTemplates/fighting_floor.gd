@@ -5,7 +5,6 @@ extends Node3D
 
 @export var _character_spawner: CharacterSpawner
 @export var _spawn_areas: Array[SpawnArea]
-@export var _floor: StaticBody3D
 
 var _is_active: bool = false
 

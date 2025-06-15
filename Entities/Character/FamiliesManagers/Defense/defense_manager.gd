@@ -40,7 +40,7 @@ func get_increased_damage_done_from_power_wrist(damage: float) -> float:
 	if not _defense_stats.power_wrists_activated:
 		return damage
 	
-	var power_stacks: int = _defense_stats.armor_stacks / _defense_stats.power_wrists_armor_stacks
+	var power_stacks: int = floor(_defense_stats.armor_stacks as float / _defense_stats.power_wrists_armor_stacks)
 	var damage_inc_percent: float = _defense_stats.power_wrists_damage_increase_percent * power_stacks
 	var damage_inc: float = (damage * damage_inc_percent) / 100.0
 	return damage + damage_inc
@@ -54,7 +54,7 @@ func get_reduced_damage_taken_from_mystical_shoulder(damage: int) -> int:
 	return damage - damage_reduction
 
 
-func get_reduced_damage_taken_from_armor(damage_source: Character, damage: int, damage_type: Utils.DamageType) -> int:
+func get_reduced_damage_taken_from_armor(damage: int, damage_type: Utils.DamageType) -> int:
 	if damage_type == Utils.DamageType.POISON: # Armor doesn't work on poison
 		return damage
 	

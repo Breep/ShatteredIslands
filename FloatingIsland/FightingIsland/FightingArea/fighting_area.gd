@@ -11,11 +11,7 @@ signal projectile_spawned(source: Entity, target: Entity, projectile_type: Proje
 
 # ============================== Private variables ==============================
 
-var _battle: Battle # Battle of the fighting area
-var _characters: Array[Character] # Array of all characters in the fight scene
-
 # ============================== Public variables ==============================
-
 
 # ============================== Local nodes / Configuration ==============================
 
@@ -93,11 +89,9 @@ func _set_fighting_floor(battle_type: Battle.BattleType) -> CharacterSpawner:
 
 # ============================== Callbacks ==============================
 
-func _on_fighting_manager_fight_is_over(_fighting_manager: FightingManager, winner_teams_order: Array[int]) -> void:
+func _on_fighting_manager_fight_is_over(_unused: FightingManager, winner_teams_order: Array[int]) -> void:
 	if _current_battle_id < 0: return
-	print("Fight is over for the battle[", _current_battle_id, "]")
 	RoundManager.register_battle_result(_current_battle_id, winner_teams_order)
-	# Calculate damage (=average of the winners damage)
 
 
 

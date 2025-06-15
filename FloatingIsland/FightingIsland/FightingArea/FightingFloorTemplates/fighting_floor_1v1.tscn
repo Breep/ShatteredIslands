@@ -35,12 +35,11 @@ size = Vector3(20, 1, 10)
 [sub_resource type="BoxShape3D" id="BoxShape3D_go3o7"]
 size = Vector3(20, 1, 10)
 
-[node name="FightingFloor_1v1" type="Node3D" node_paths=PackedStringArray("_visual_to_be_destroyed", "_character_spawner", "_spawn_areas", "_floor")]
+[node name="FightingFloor_1v1" type="Node3D" node_paths=PackedStringArray("_visual_to_be_destroyed", "_character_spawner", "_spawn_areas")]
 script = ExtResource("1_i0b8l")
 _visual_to_be_destroyed = NodePath("Floor/FloorMesh3D")
 _character_spawner = NodePath("CharacterSpawner")
 _spawn_areas = [NodePath("SpawnArea"), NodePath("SpawnArea2")]
-_floor = NodePath("Floor")
 
 [node name="SpawnArea" parent="." node_paths=PackedStringArray("_visual_to_be_destroyed") instance=ExtResource("2_1l6d4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
@@ -87,6 +86,5 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
 shape = SubResource("BoxShape3D_go3o7")
 
-[node name="CharacterSpawner" parent="." node_paths=PackedStringArray("_spawn_points", "_spawn_areas") instance=ExtResource("4_eavw2")]
+[node name="CharacterSpawner" parent="." node_paths=PackedStringArray("_spawn_points") instance=ExtResource("4_eavw2")]
 _spawn_points = [NodePath("../SpawnArea/SpawnPoint"), NodePath("../SpawnArea2/SpawnPoint2")]
-_spawn_areas = [NodePath("../SpawnArea"), NodePath("../SpawnArea2")]

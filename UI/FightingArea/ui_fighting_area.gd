@@ -25,7 +25,7 @@ extends Control
 # ============================== Private variables ==============================
 
 var _battle_id: int
-var _characters: Array[Character]
+#var _characters: Array[Character]
 var _is_active: bool = false
 
 # ============================== Node base functions ==============================

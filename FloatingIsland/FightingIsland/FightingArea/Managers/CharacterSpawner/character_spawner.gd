@@ -3,8 +3,6 @@ class_name CharacterSpawner
 
 # ============================== Signal ==============================
 
-signal all_players_spawned()
-
 # ============================== Public variables ==============================
 
 var battle_id: int = -1 # Set by the parent
@@ -12,7 +10,6 @@ var battle_id: int = -1 # Set by the parent
 # ============================== External Export ==============================
 
 @export var _spawn_points: Array[SpawnPoint]
-@export var _spawn_areas: Array[SpawnArea]
 
 # ============================== Node base functions ==============================
 

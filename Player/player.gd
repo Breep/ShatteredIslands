@@ -87,6 +87,8 @@ var health: int:
 		if _health == value: return
 		_health = clampi(value, 0, 100)
 		health_changed.emit(self, _health)
+		if _health <= 0: # TODO Change this by a pile of corpse is funnier
+			character.queue_free()
 
 signal gold_changed(self_ref: Player, new_gold: int)
 var _gold: int
