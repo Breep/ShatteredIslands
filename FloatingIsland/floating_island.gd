@@ -6,14 +6,11 @@ extends Node3D
 @export_group("Local Nodes")
 @export var _center_point_camera: CenterPointCamera
 
-# ============================== Private variables ==============================
-
-var _is_active: bool = false
-
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	pass
+	if _center_point_camera == null:
+		printerr("FloatingIsland: Need a CenterPointCamera [", get_path(), "]")
 
 # ============================== Public functions ==============================
 

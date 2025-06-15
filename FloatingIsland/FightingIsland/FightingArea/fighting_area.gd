@@ -19,8 +19,6 @@ signal projectile_spawned(source: Entity, target: Entity, projectile_type: Proje
 var spawn_manager: SpawnManager:
 	get: return _spawn_manager
 
-@export var _battle_type: Battle.BattleType
-
 @export var _fighting_manager: FightingManager
 var fighting_manager: FightingManager:
 	get: return _fighting_manager

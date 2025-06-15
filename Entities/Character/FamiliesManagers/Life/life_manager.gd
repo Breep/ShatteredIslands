@@ -30,7 +30,7 @@ func stop() -> void:
 		timer.stop()
 
 
-func get_increased_damage_taken_from_lost_hp(damage: float, damage_type: Utils.DamageType) -> float:
+func get_increased_damage_taken_from_lost_hp(damage: float, _damage_type: Utils.DamageType) -> float:
 	return damage
 	#if not source.stats.hp.damage_increased_by_hp_lost_activated:
 		#return damage
@@ -83,12 +83,7 @@ func _create_optional_timers() -> void:
 # ============================== Callbacks functions ==============================
 
 func _on_poison_by_lost_hp_timer_timeout() -> void:
-	var target = source.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
-	if target == null: return
-	var lost_hp: int = source.stats.health_max - source.stats.health
-	var stack_multiplier: int = _life_stats.poison_by_lost_hp_stacks
-	var poison_stacks: int = (lost_hp / _life_stats.poison_by_lost_hp_hp_number) * stack_multiplier
-	_action_module.inflict_condition_stacks(target, poison_stacks, Utils.StackType.POISON)
+	pass
 
 
 func _on_fire_damage_timer_timeout() -> void:

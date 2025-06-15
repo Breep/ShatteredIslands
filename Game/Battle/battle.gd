@@ -176,7 +176,7 @@ func _sort_players_in_team() -> void:
 		printerr("Battle: Can't sort players in team")
 		return
 	
-	var players_per_team: int = players_number / teams_number
+	var players_per_team: int = floor(players_number as float / teams_number as float)
 	for team_index in teams_number:
 		for i in players_per_team:
 			players[team_index * players_per_team + i].team = team_index + 1

@@ -22,6 +22,7 @@ var _player_owner_id: int = -1
 # ============================== private variables ==============================
 
 var _current_characters: Array[Character]
+var _is_active: bool = false
 
 # ============================== Node base functions ==============================
 

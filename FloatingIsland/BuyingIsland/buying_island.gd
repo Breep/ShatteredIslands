@@ -9,6 +9,10 @@ signal buying_phase_finished()
 
 @export var _buying_area: BuyingArea
 
+# ============================== Private variables ==============================
+
+var _is_active: bool = false
+
 # ============================== Node base functions ==============================
 
 func _ready() -> void:

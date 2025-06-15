@@ -107,7 +107,7 @@ func heal(target: Character, heal_amount: int) -> void:
 	#_heal_manager.notify_heal()
 
 
-func heal_percent(target: Character, heal_percent: float, percent_modifier: Utils.PercentModifier) -> void:
+func heal_percent(target: Character, percent: float, percent_modifier: Utils.PercentModifier) -> void:
 	if not multiplayer.is_server(): return
 	var hp: int
 	match percent_modifier:
@@ -117,7 +117,7 @@ func heal_percent(target: Character, heal_percent: float, percent_modifier: Util
 			hp = target.stats.health
 		Utils.PercentModifier.LOST_HP:
 			hp = target.stats.health_max - _owner.stats.health
-	var heal_amount: int = (heal_percent * hp) / 100
+	var heal_amount: int = floor((percent * hp as float) / 100.0)
 	heal(target, heal_amount)
 
 # ============================== Condition stacks ==============================

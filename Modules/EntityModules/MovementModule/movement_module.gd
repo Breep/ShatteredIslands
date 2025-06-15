@@ -32,12 +32,8 @@ func _move_toward_target(delta: float):
 		_is_moving = false
 		return
 	
-	var previous_position = _owner.global_position
 	var direction: Vector3 = (_target_position - _owner.global_position).normalized()
-	
-	
 	_owner.velocity = direction * _get_move_speed() * delta
-	#print("DIRECTION ", direction)
 	_owner.move_and_slide()
 
 

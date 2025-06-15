@@ -113,7 +113,7 @@ func _stop_fighting_manager() -> void:
 	var winner_teams_order: Array[int] = _get_winner_teams_order()
 	for member in _characters_dictionary[winner_teams_order[winner_teams_order.size() - 1]]:
 		var character: Character = member
-		character.fight_is_won.emit()
+		Events.signal_player_won_a_fight(PlayerManager.players[character.owner_player_id])
 	fight_is_over.emit(self, winner_teams_order)
 	_cleanup()
 

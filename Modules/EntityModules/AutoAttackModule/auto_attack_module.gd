@@ -29,7 +29,6 @@ var _attack_strategy: TargetModule.TargettingStrategy = TargetModule.TargettingS
 
 var _default_attack_speed: float # Default attack speed of the hero
 
-var _damage: int # Basic damage of the auto-attack module
 var _attack_speed: float = 1 # Basic attack speed of the auto-attack module (attacks/s)
 
 var _current_target: Entity
@@ -65,12 +64,12 @@ func _specific_init() -> void:
 	_owner.stats.attack_speed_changed.connect(_on_source_stats_attack_speed_changed)
 
 
-func set_auto_attack_speed(attack_speed: float) -> void:
-	if attack_speed <= 0:
+func set_auto_attack_speed(new_attack_speed: float) -> void:
+	if new_attack_speed <= 0:
 		printerr("AutoAttackManager: Attack speed is lower than 0 !")
 		_auto_attack_timer.wait_time = 1.0
 	else:
-		_auto_attack_timer.wait_time = 1.0 / attack_speed
+		_auto_attack_timer.wait_time = 1.0 / new_attack_speed
 
 
 func _auto_attack(target: Character) -> void:
@@ -81,7 +80,6 @@ func _auto_attack(target: Character) -> void:
 	
 	if _attack_manager != null:
 		_attack_manager.notice_auto_attack_done(target)
-		_attack_manager.update_aa_projectile_stats(projectile_stats)
 	
 	_action_module.projectile_attack(target, Projectile.ProjectileType.AUTO_ATTACK, projectile_spawn, projectile_stats)
 	attack_done.emit()

@@ -22,7 +22,7 @@ const _HEROES_3D: Dictionary[Hero.HeroId, PackedScene] = {
 # ============================== Signal ==============================
 
 signal fight_is_won()
-signal fight_is_lost()
+#signal fight_is_lost()
 
 # ============================== Fighting State ==============================
 
@@ -48,7 +48,6 @@ var _hero_id := Hero.HeroId.UNDEF
 		_update_hero()
 
 @export_subgroup("Synchronizer")
-@export var _server_synchronizer: MultiplayerSynchronizer
 @export var _movement_synchronizer: MultiplayerSynchronizer
 
 @export_group("Local Nodes")
@@ -57,7 +56,6 @@ var _hero_id := Hero.HeroId.UNDEF
 @export var _turret: Turret
 @export var _hero_3D: Hero3D
 @export var _collision_shape: CollisionShape3D
-@export var _interact_module: InteractModule # TODO TMP
 
 # ============================== Public variables ==============================
 
@@ -128,8 +126,10 @@ func _ready() -> void:
 	
 	GlobalFightingManager.state_changed.connect(_on_global_fighting_manager_state_changed)
 	Events.game_state_changed.connect(_on_events_game_state_changed)
+	Events.player_won_a_fight.connect(_on_events_player_won_a_fight)
 	
 	_update_hero()
+	
 
 # ============================== Private functions ==============================
 
@@ -220,7 +220,9 @@ func _on_stats_health_changed(new_health: int) -> void:
 		dead.emit(self)
 
 
-
+func _on_events_player_won_a_fight(winner: Player) -> void:
+	if winner == player:
+		fight_is_won.emit()
 
 
 

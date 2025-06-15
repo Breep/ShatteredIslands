@@ -35,12 +35,12 @@ func connect_to_player(player: Player) -> void:
 
 func _update_visual(new_player_gold: int) -> void:
 	if new_player_gold >= _old_player_gold + GOLD_PER_COIN:
-		var number_of_coin_to_add: int = (new_player_gold - _old_player_gold) / GOLD_PER_COIN
+		var number_of_coin_to_add: int = floor((new_player_gold as float - _old_player_gold as float) / GOLD_PER_COIN as float)
 		for i in number_of_coin_to_add:
 			var coin_tower = _coin_towers[_rng.randi_range(0, _coin_towers.size() - 1)]
 			coin_tower.coins_number += 1
 	elif new_player_gold <= _old_player_gold - GOLD_PER_COIN:
-		var number_of_coin_to_remove: int = (_old_player_gold - new_player_gold) / GOLD_PER_COIN
+		var number_of_coin_to_remove: int = floor((_old_player_gold as float - new_player_gold as float) / GOLD_PER_COIN as float)
 		for i in number_of_coin_to_remove:
 			var coin_tower_index = _rng.randi_range(0, _coin_towers.size() - 1)
 			var coin_tower = _coin_towers[coin_tower_index]
@@ -50,7 +50,7 @@ func _update_visual(new_player_gold: int) -> void:
 				j += 1
 			coin_tower.coins_number -= 1
 	
-	_old_player_gold = (new_player_gold / GOLD_PER_COIN) * GOLD_PER_COIN
+	_old_player_gold = floor((new_player_gold as float / GOLD_PER_COIN as float) * GOLD_PER_COIN)
 	_check_height_diff()
 
 

@@ -99,7 +99,7 @@ func starting_round_player_changes() -> void:
 		player.gold += game_rules.gold_earned_per_round + gold_increase_economy + gold_increase_hp_lost + gold_increase_win_streak
 		
 		var damage_mod_lvl: int = game_rules.damage_player_level_modifier[player.lvl]
-		var damage_min: int = 1 + current_round/game_rules.damage_min_round_divider + damage_mod_lvl
+		var damage_min: int = 1 + floor(current_round as float / game_rules.damage_min_round_divider as float) + damage_mod_lvl
 		var damage_mod_win_lose: int = player.current_damage_win_lose_diff * game_rules.damage_on_win_lose_modifier
 		player.damage = clampi(damage_min + damage_mod_win_lose, damage_min, 30)
 		
@@ -136,7 +136,7 @@ func ending_round_player_changes() -> void:
 			looser.current_damage_win_lose_diff = clampi(looser.current_damage_win_lose_diff - 1,
 														-GameManager.game_rules.damage_max_diff_win_lose,
 														GameManager.game_rules.damage_max_diff_win_lose)
-			looser.health -= winner_team_damage / winners.size()
+			looser.health -= floor(winner_team_damage as float / winners.size() as float)
 
 # ============================== RPC - Ask/Answer current round battle ==============================
 

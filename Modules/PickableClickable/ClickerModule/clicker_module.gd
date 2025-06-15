@@ -23,7 +23,7 @@ var _previous_focus: Node3D # The previous object pointed by the cursor
 var _pickable_overing: Node3D # The PICKABLE pointed by the cursor
 var _pickable_overing_module: PickableModule # The PickableModule of the PICKABLE pointed by the cursor
 var _pickable_selected: Node3D # The PICKABLE previously selected
-var _pickable_selected_module: PickableModule # The PickableModule of the PICKABLE previously selected
+#var _pickable_selected_module: PickableModule # The PickableModule of the PICKABLE previously selected
 
 var _clickable_overing: Node3D # The CLICKABLE pointed by the cursor
 var _clickable_overing_module: ClickableModule # The ClickableModule of the CLICKABLE pointed by the cursor

@@ -60,10 +60,6 @@ func notice_auto_attack_done(target: Character) -> void:
 		var heal_target: Character = source.target_module.get_target(TargetModule.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
 		source.heal(heal_target, _attack_stats.healing_attack_heal_amount)
 
-
-func update_aa_projectile_stats(projectile_stats: ProjectileStats) -> void:
-	pass
-
 # ============================== Private functions ==============================
 
 func _create_optional_timers() -> void:

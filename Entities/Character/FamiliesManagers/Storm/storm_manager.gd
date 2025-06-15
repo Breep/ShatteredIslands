@@ -7,9 +7,6 @@ const FOCUS_INCREASE_CRIT_PERIOD: float = 0.5
 
 # ============================== Private variables ==============================
 
-@export var _percent_decrease: float # Percentage of vulnerability stacks removed per tick
-@export var _minimum_stacks_decrease_flat: float # Minimum stacks removed each tick
-
 var _storm_stats: CharacterStormStats # Ref to the owner storm stats
 
 var _focus_timer: Timer
@@ -60,11 +57,6 @@ func get_critical_multiplier(damage_type: Utils.DamageType) -> float:
 
 
 func notice_critical_damage(char_who_received_the_crit: Character, damage: int) -> void:
-	# [Thunder priest]
-	if _storm_stats.crit_heal_activated:
-		var target = source.target_module.get_target(TargetModule.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
-		_action_module.heal(target, damage * _storm_stats.crit_heal_amount as float / 100.0)
-	
 	# [Lightning speed]
 	if _storm_stats.crit_move_speed_activated:
 		_storm_stats.speed_boosted = true
@@ -125,15 +117,7 @@ func _on_periodic_vulnerability_timer_timeout() -> void:
 
 
 func _on_vulnerability_timer_timeout() -> void:
-	#print("StormManager: Vulnerability removal")
-	var vulnerability_stacks_removed: int = ((_percent_decrease / 100.0) * _storm_stats.vulnerability_stacks as float) as int
-	if vulnerability_stacks_removed < _minimum_stacks_decrease_flat:
-		vulnerability_stacks_removed = _minimum_stacks_decrease_flat
-	
-	_storm_stats.vulnerability_stacks -= vulnerability_stacks_removed
-	
-	if _storm_stats.vulnerability_stacks < 0:
-		_storm_stats.vulnerability_stacks = 0
+	pass
 
 
 var __previous_time: float

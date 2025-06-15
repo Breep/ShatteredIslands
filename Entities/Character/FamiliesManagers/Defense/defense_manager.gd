@@ -97,7 +97,7 @@ func _rainbow_boots_effect(armor_lost: int) -> void:
 	if _armor_lost_since_last_rainbow_boots < _defense_stats.rainbow_boots_armor_stacks:
 		return
 	
-	var number_of_procs: int = armor_lost / _defense_stats.rainbow_boots_armor_stacks
+	var number_of_procs: int = floor(armor_lost as float / _defense_stats.rainbow_boots_armor_stacks as float)
 	_armor_lost_since_last_rainbow_boots -= number_of_procs * _defense_stats.rainbow_boots_armor_stacks
 	for i in number_of_procs:
 		var effects: Array[Utils.StackType] = [Utils.StackType.POISON, Utils.StackType.VULNERABILITY]
@@ -129,7 +129,7 @@ func _mystical_shoulders(magical_damage_blocked: int) -> void:
 		return
 	
 	_total_magical_damage_blocked += magical_damage_blocked
-	var number_of_proc: int = _total_magical_damage_blocked / _defense_stats.mystical_shoulders_magic_damage
+	var number_of_proc: int = floor(_total_magical_damage_blocked as float / _defense_stats.mystical_shoulders_magic_damage as float)
 	_mystical_shoulders_damage_reduced_percent = number_of_proc * _defense_stats.mystical_shoulders_percent_inc
 	_mystical_shoulders_damage_reduced_percent = clampf(_mystical_shoulders_damage_reduced_percent, 0, _defense_stats.mystical_shoulders_percent_max)
 

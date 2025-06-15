@@ -20,3 +20,7 @@ func signal_game_state_changed(new_game_state: Game.GameState) -> void:
 signal fighting_island_spawned(fighting_island_ref: FightingIsland, player_id: int)
 func signal_fighting_island_spawned(fighting_island_ref: FightingIsland, player_id: int) -> void:
 	fighting_island_spawned.emit(fighting_island_ref, player_id)
+
+signal player_won_a_fight(player: Player)
+func signal_player_won_a_fight(player: Player) -> void:
+	player_won_a_fight.emit(player)
