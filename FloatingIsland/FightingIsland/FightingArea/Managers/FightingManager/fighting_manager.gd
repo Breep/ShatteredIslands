@@ -107,7 +107,6 @@ func _get_winner_teams_order() -> Array[int]:
 
 
 func _stop_fighting_manager() -> void:
-	print("[DEBUG] Stop FightingManager [", battle_id, "] - ", _get_winner_teams_order().size())
 	_is_active = false
 	_disconnect_from_characters_signals()
 	var winner_teams_order: Array[int] = _get_winner_teams_order()

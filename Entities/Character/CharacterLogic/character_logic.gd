@@ -29,13 +29,15 @@ func connect_to_fighting_area(fighting_area: FightingArea) -> void:
 	action_module.connect_to_spawn_manager(fighting_area.spawn_manager)
 
 
-func start() -> void:
+func start() -> void: # Only the server simulate the fight, Clients gets the BattleLog and do a playback
+	if not multiplayer.is_server(): return
 	for family_manager in families_managers.values():
 		family_manager.start()
 	modules[Module.ModuleType.AUTOATTACK].start()
 
 
 func stop() -> void:
+	if not multiplayer.is_server(): return
 	for family_manager in families_managers.values():
 		family_manager.stop()
 	modules[Module.ModuleType.AUTOATTACK].stop()

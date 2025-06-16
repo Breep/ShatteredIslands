@@ -3,11 +3,13 @@ extends Node
 
 # ============================== External nodes ==============================
 
+@export_group("External nodes")
 @export var _fighting_area: FightingArea
 
 # ============================== Private variables ==============================
 
 var _battle_logs: Array[Dictionary]
+var _last_log_index_sent: int = 0
 var _start_time: float
 
 # ============================== Node base functions ==============================
@@ -19,7 +21,11 @@ func _ready() -> void:
 
 # ============================== Public functions ==============================
 
-
+# Should return the new logs (current logs - last logs (how to do so ?))
+func get_current_logs() -> Array[Dictionary]:
+	var new_logs: Array[Dictionary] = _battle_logs.slice(_last_log_index_sent)
+	_last_log_index_sent = _battle_logs.size()
+	return new_logs
 
 # ============================== Private functions ==============================
 

@@ -1,14 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://c66yw4go2ykwa"]
+[gd_scene load_steps=13 format=3 uid="uid://c66yw4go2ykwa"]
 
 [ext_resource type="Script" uid="uid://cd8u3lm3xa8c4" path="res://FloatingIsland/FightingIsland/FightingArea/fighting_area.gd" id="1_t74of"]
 [ext_resource type="PackedScene" uid="uid://pyrw8lacvly2" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/EntityManager/entity_manager.tscn" id="2_wtb7j"]
 [ext_resource type="PackedScene" uid="uid://c0l0roxttdtlp" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/FightingManager/fighting_manager.tscn" id="3_yyfcp"]
+[ext_resource type="PackedScene" uid="uid://dnt0yj1cs67ko" path="res://Modules/BattleLogModule/BattleLogSynchronizer/battle_log_synchronizer.tscn" id="4_327ee"]
 [ext_resource type="PackedScene" uid="uid://bhxhqex1pbh2p" path="res://UI/FightingArea/ui_fighting_area.tscn" id="4_hqxx4"]
 [ext_resource type="PackedScene" uid="uid://ctspehviccwd5" path="res://FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor_1v1.tscn" id="5_2akj6"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="5_xgsbs"]
 [ext_resource type="PackedScene" uid="uid://c6oxeboe353od" path="res://FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor_2v2.tscn" id="6_yyfcp"]
 [ext_resource type="PackedScene" uid="uid://dbbpa637es0uf" path="res://FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor_ffa13.tscn" id="7_hqxx4"]
-[ext_resource type="PackedScene" uid="uid://1h20y2oaj3fm" path="res://Modules/BattleModule/BattleWriter/battle_writer.tscn" id="8_7oplh"]
+[ext_resource type="PackedScene" uid="uid://1h20y2oaj3fm" path="res://Modules/BattleLogModule/BattleWriter/battle_writer.tscn" id="8_7oplh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6wjnm"]
 size = Vector3(20, 5, 1)
@@ -32,6 +33,9 @@ _entities_node = NodePath("Entities")
 [node name="EntityManager" parent="." instance=ExtResource("2_wtb7j")]
 
 [node name="FightingManager" parent="." instance=ExtResource("3_yyfcp")]
+
+[node name="BattleLogSynchronizer" parent="." node_paths=PackedStringArray("_battle_writer") instance=ExtResource("4_327ee")]
+_battle_writer = NodePath("../BattleWriter")
 
 [node name="BattleWriter" parent="." node_paths=PackedStringArray("_fighting_area") instance=ExtResource("8_7oplh")]
 _fighting_area = NodePath("..")
