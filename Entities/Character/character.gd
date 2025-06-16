@@ -108,7 +108,6 @@ func _init() -> void:
 
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
-	stats.reset_stats(_hero_3D.hero.stats)
 	target_module = _character_logic.target_module
 	
 	if owner_player_id != 0:
@@ -129,7 +128,7 @@ func _ready() -> void:
 	Events.player_won_a_fight.connect(_on_events_player_won_a_fight)
 	
 	_update_hero()
-	
+	stats.reset_stats(_hero_3D.hero.stats)
 
 # ============================== Private functions ==============================
 
@@ -138,7 +137,9 @@ func _reset() -> void:
 
 
 func _update_hero() -> void:
+	if not is_inside_tree(): return
 	if hero_id == Hero.HeroId.UNDEF: return
+	if not Engine.is_editor_hint() and not is_node_ready(): return
 	if _hero_3D != null: _hero_3D.queue_free()
 	_hero_3D = _HEROES_3D[hero_id].instantiate()
 	print("Character change hero to: ", _hero_3D.hero.name)

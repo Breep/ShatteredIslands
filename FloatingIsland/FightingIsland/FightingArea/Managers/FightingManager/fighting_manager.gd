@@ -10,7 +10,7 @@ extends Node
 # ============================== Signals ==============================
 
 signal fight_is_over(self_ref: FightingManager, winner_teams_order: Array[int]) # The Array is from Looser to Winner [4th, 3rd, 2nd, 1st]
-signal fight_is_started(self_ref: FightingManager)
+signal fight_is_ready_to_be_started(self_ref: FightingManager)
 
 # ============================== Public variables ==============================
 
@@ -38,9 +38,9 @@ func _exit_tree() -> void:
 
 func start(characters: Array[Character]) -> void:
 	_is_active = true
-	fight_is_started.emit(self)
 	_setup_characters_dictionary(characters)
 	_connect_to_characters_signals()
+	fight_is_ready_to_be_started.emit(self)
 
 # ============================== Private functions ==============================
 
@@ -113,7 +113,8 @@ func _stop_fighting_manager() -> void:
 	var winner_teams_order: Array[int] = _get_winner_teams_order()
 	for member in _characters_dictionary[winner_teams_order[winner_teams_order.size() - 1]]:
 		var character: Character = member
-		Events.signal_player_won_a_fight(PlayerManager.players[character.owner_player_id])
+		if PlayerManager.players.has(character.owner_player_id):
+			Events.signal_player_won_a_fight(PlayerManager.players[character.owner_player_id])
 	fight_is_over.emit(self, winner_teams_order)
 	_cleanup()
 
@@ -137,7 +138,7 @@ func _on_character_dead(who: Character) -> void:
 
 func _on_global_fighting_manager_state_changed(new_state) -> void:
 	if not _is_active: return
-	if new_state == GlobalFightingManager.FightingState.FINISHED:
+	if new_state == GlobalFightingManager.FightingState.CELEBRATING:
 		_stop_fighting_manager()
 
 

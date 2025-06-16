@@ -21,7 +21,8 @@ var _projectile_counter: int = 0
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	GlobalFightingManager.all_fights_are_over.connect(_on_global_fighting_manager_all_fights_are_over)
+	GlobalFightingManager.state_changed.connect(_on_global_fighting_manager_state_changed)
+	_fighting_area.fighting_manager.fight_is_over.connect(_on_fighting_area_fighting_manager_fight_is_over)
 
 # ============================== Public function ==============================
 
@@ -42,12 +43,17 @@ func spawn_projectile(source: Character, target: Character, projectile_type: Pro
 
 # ============================== Private functions ==============================
 
+func _clear_all() -> void:
+	for child in _projectiles_node.get_children():
+			child.queue_free()
+
 # ============================== Callbacks ==============================
 
-func _on_global_fighting_manager_all_fights_are_over() -> void:
-	for child in _projectiles_node.get_children():
-		child.queue_free()
+func _on_global_fighting_manager_state_changed(state: GlobalFightingManager.FightingState) -> void:
+	if state == GlobalFightingManager.FightingState.CELEBRATING:
+		_clear_all()
 
 
-
+func _on_fighting_area_fighting_manager_fight_is_over(_self_ref: FightingManager, _winner_teams_order: Array[int]) -> void:
+	_clear_all()
  

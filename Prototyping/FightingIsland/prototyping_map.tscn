@@ -19,7 +19,6 @@ sky = SubResource("Sky_08xy3")
 
 [node name="PrototypingMap" type="Node3D" node_paths=PackedStringArray("_floating_island", "_character1", "_character2")]
 script = ExtResource("1_66i2r")
-_battle_id = 1
 _floating_island = NodePath("FightingIsland")
 _player1_cards = Array[ExtResource("2_ovips")]([ExtResource("3_ovips")])
 _character1 = NodePath("Character")
@@ -44,16 +43,16 @@ shadow_enabled = true
 
 [node name="Character" parent="." node_paths=PackedStringArray("_hero_3D") instance=ExtResource("9_4fa74")]
 transform = Transform3D(0.161104, 0, -0.986937, 0, 1, 0, 0.986937, 0, 0.161104, 2.87392, 0, -5.69988)
-hero_id = 1
-_hero_3D = NodePath("AncientTree")
+hero_id = 2
+_hero_3D = NodePath("Cyborg")
 id = 1
 team = 2
 battle_id = 1
 
 [node name="Character2" parent="." node_paths=PackedStringArray("_hero_3D") instance=ExtResource("9_4fa74")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.260875, 0, 7.68254)
-hero_id = 6
-_hero_3D = NodePath("SirReginald")
+hero_id = 4
+_hero_3D = NodePath("LaurentKroft")
 id = 2
 team = 1
 battle_id = 1

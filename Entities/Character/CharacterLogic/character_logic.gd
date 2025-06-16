@@ -45,9 +45,9 @@ func _on_source_fighting_state_changed(new_state: GlobalFightingManager.Fighting
 	match new_state:
 		GlobalFightingManager.FightingState.POSITIONING:
 			pass
-		GlobalFightingManager.FightingState.FIGHT:
+		GlobalFightingManager.FightingState.FIGHTING:
 			start()
-		GlobalFightingManager.FightingState.FINISHED:
+		GlobalFightingManager.FightingState.CELEBRATING:
 			stop()
 
 

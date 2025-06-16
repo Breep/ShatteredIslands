@@ -50,10 +50,10 @@ func _on_global_fighting_manager_state_changed(state: GlobalFightingManager.Figh
 	match state:
 		GlobalFightingManager.FightingState.POSITIONING:
 			_battle_logs.clear()
-		GlobalFightingManager.FightingState.FIGHT:
+		GlobalFightingManager.FightingState.FIGHTING:
 			_start_time = (Time.get_ticks_msec() as float) / 1000.0
 		GlobalFightingManager.FightingState.FINISHED:
-			print("BattleLog size = ", _battle_logs.size())
+			return
 
 
 func _on_events_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.ProjectileType, projectile_modifiers: Array[Projectile.ProjectileEffect]) -> void:

@@ -34,7 +34,6 @@ func stop() -> void:
 		timer.stop()
 	for spell in _optional_spells:
 		spell.queue_free()
-	_poison_stats.poison_stacks_ref.clear()
 	_poison_stats.poison_stacks = 0
 	_poison_tick_timer.stop()
 
