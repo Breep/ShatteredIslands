@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c66yw4go2ykwa"]
+[gd_scene load_steps=14 format=3 uid="uid://c66yw4go2ykwa"]
 
 [ext_resource type="Script" uid="uid://cd8u3lm3xa8c4" path="res://FloatingIsland/FightingIsland/FightingArea/fighting_area.gd" id="1_t74of"]
 [ext_resource type="PackedScene" uid="uid://pyrw8lacvly2" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/EntityManager/entity_manager.tscn" id="2_wtb7j"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bhxhqex1pbh2p" path="res://UI/FightingArea/ui_fighting_area.tscn" id="4_hqxx4"]
 [ext_resource type="PackedScene" uid="uid://ctspehviccwd5" path="res://FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor_1v1.tscn" id="5_2akj6"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="5_xgsbs"]
+[ext_resource type="PackedScene" uid="uid://c6wua1qduvyhp" path="res://Modules/BattleLogModule/BattleReader/battle_reader.tscn" id="6_w72k1"]
 [ext_resource type="PackedScene" uid="uid://c6oxeboe353od" path="res://FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor_2v2.tscn" id="6_yyfcp"]
 [ext_resource type="PackedScene" uid="uid://dbbpa637es0uf" path="res://FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor_ffa13.tscn" id="7_hqxx4"]
 [ext_resource type="PackedScene" uid="uid://1h20y2oaj3fm" path="res://Modules/BattleLogModule/BattleWriter/battle_writer.tscn" id="8_7oplh"]
@@ -34,11 +35,16 @@ _entities_node = NodePath("Entities")
 
 [node name="FightingManager" parent="." instance=ExtResource("3_yyfcp")]
 
-[node name="BattleLogSynchronizer" parent="." node_paths=PackedStringArray("_battle_writer") instance=ExtResource("4_327ee")]
+[node name="BattleLogSynchronizer" parent="." node_paths=PackedStringArray("_battle_writer", "_battle_reader") instance=ExtResource("4_327ee")]
 _battle_writer = NodePath("../BattleWriter")
+_battle_reader = NodePath("../BattleReader")
 
 [node name="BattleWriter" parent="." node_paths=PackedStringArray("_fighting_area") instance=ExtResource("8_7oplh")]
 _fighting_area = NodePath("..")
+
+[node name="BattleReader" parent="." node_paths=PackedStringArray("_entity_manager", "_spawn_manager") instance=ExtResource("6_w72k1")]
+_entity_manager = NodePath("../EntityManager")
+_spawn_manager = NodePath("../SpawnManager")
 
 [node name="SpawnManager" parent="." node_paths=PackedStringArray("_fighting_area", "_projectiles_node") instance=ExtResource("5_xgsbs")]
 _fighting_area = NodePath("..")

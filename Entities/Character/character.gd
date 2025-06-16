@@ -90,12 +90,17 @@ func set_lookat_camera(camera: Camera3D) -> void:
 	_character_visual.set_camera(camera)
 
 
-func on_active_island() -> void:
+func on_active_island() -> void: # TODO Should be a signal no ?
 	_character_visual.show()
 
 
 func on_inactive_island() -> void:
 	_character_visual.hide()
+
+
+func get_auto_attack_spawn() -> Node3D:
+	return _turret.get_projectile_spawn_point()
+
 
 # ============================== Node base functions ==============================
 

@@ -1,6 +1,8 @@
 class_name BattleWriter
 extends Node
 
+# [CLIENT ONLY]
+
 # ============================== External nodes ==============================
 
 @export_group("External nodes")
@@ -15,7 +17,7 @@ var _start_time: float
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	if not multiplayer.is_server(): queue_free() # Only the server writes a BattleLog
+	if not multiplayer.is_server(): queue_free() # Only the server writes battle logs
 	_fighting_area.projectile_spawned.connect(_on_events_projectile_spawned)
 	GlobalFightingManager.state_changed.connect(_on_global_fighting_manager_state_changed)
 

@@ -49,6 +49,10 @@ func look_at_target_y_only(target_position: Vector3):
 	if direction.length() > 0.1:
 		look_at(global_position + direction, Vector3.UP)
 
+
+func get_auto_attack_spawn() -> Node3D:
+	return self
+
 # ============================== Private functions ==============================
 
 func _recursive_propagate_signal(node: Node, signal_name: String) -> void:
