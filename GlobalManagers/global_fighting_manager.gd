@@ -53,7 +53,7 @@ var fighting_state: FightingState:
 var _fighting_managers: Array[FightingManager]
 var _current_active_fighting_managers: Array[FightingManager]
 
-const __PROTOTYPING: bool = false
+var __prototyping: bool = false
 const _ACCELERATED_FIGHT_TIME_SCALE: float = 2.0
 
 # ====== SERVER ONLY
@@ -69,12 +69,13 @@ func _ready() -> void:
 	timer.name = "GlobalFightingTimer"
 	timer.timeout.connect(_on_timer_timeout)
 	state_changed.connect(_on_state_changed)
-	if __PROTOTYPING: SERVER_TIME_SCALE = 1
 
 # ============================== Public functions ==============================
 
-func start() -> void:
+func start(prototyping: bool = false) -> void:
 	if not multiplayer.is_server(): return
+	__prototyping = prototyping
+	if __prototyping: SERVER_TIME_SCALE = 1
 	fighting_state = FightingState.POSITIONING
 	timer.wait_time = _fighting_phase_durations[FightingState.POSITIONING]
 	_players_running_playback = PlayerManager.get_human_players().values().duplicate()
@@ -114,7 +115,7 @@ func _on_timer_timeout() -> void:
 	match fighting_state:
 		FightingState.POSITIONING: # End of POSITIONING State
 			_sync_state.rpc(FightingState.COUNTDOWN) # Trigger COUNTDOWN STATE on client
-			if __PROTOTYPING:
+			if __prototyping:
 				fighting_state = FightingState.COUNTDOWN
 				return
 			else:

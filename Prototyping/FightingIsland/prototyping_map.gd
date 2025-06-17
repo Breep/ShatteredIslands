@@ -28,6 +28,6 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	_floating_island.start_fight([_character1, _character2], Battle.BattleType.VS_1)
-	GlobalFightingManager.start()
+	GlobalFightingManager.start(true)
 	_floating_island.set_active()
 	#_ui_fighting_area.show()

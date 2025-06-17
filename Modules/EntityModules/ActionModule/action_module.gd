@@ -30,7 +30,6 @@ func direct_attack(target: Character, damage: int, damage_type: Utils.DamageType
 		damage *= multiplier["magical"]
 	
 	target.take_damage(damage, damage_type, multiplier["is_critical"], _owner)
-	#_attack.rpc(target.player.id, damage, damage_type, is_critical)
 
 
 # Instantly attack the target - Apply cards damages multiplier if there are some
@@ -101,10 +100,7 @@ func _spawn_projectile(target: Character, projectile_type: Projectile.Projectile
 # [Server only]
 func heal(target: Character, heal_amount: int) -> void:
 	if not multiplayer.is_server(): return
-	#signal heal_done(source, target, heal_amount)
-	Events.heal_done.emit(_owner, target, heal_amount)
-	#target.take_heal(source, heal_amount)
-	#_heal_manager.notify_heal()
+	target.take_heal(heal_amount, _owner)
 
 
 func heal_percent(target: Character, percent: float, percent_modifier: Utils.PercentModifier) -> void:
@@ -125,4 +121,4 @@ func heal_percent(target: Character, percent: float, percent_modifier: Utils.Per
 # [Server only]
 func inflict_condition_stacks(target: Character, stacks_number: int, stack_type: Utils.StackType) -> void:
 	if not multiplayer.is_server(): return
-	Events.condition_stacks_done.emit(_owner, target, stacks_number, stack_type)
+	target.take_condition_stacks(stacks_number, stack_type, _owner)

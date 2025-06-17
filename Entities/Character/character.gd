@@ -146,6 +146,7 @@ func _ready() -> void:
 	Events.game_state_changed.connect(_on_events_game_state_changed)
 	Events.player_won_a_fight.connect(_on_events_player_won_a_fight)
 	
+	print("Update from ready")
 	_update_hero()
 	stats.reset_stats(_hero_3D.hero.stats)
 

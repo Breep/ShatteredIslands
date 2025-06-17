@@ -41,20 +41,18 @@ environment = SubResource("Environment_k73x5")
 transform = Transform3D(0.88089, 0.0799744, 0.466517, -0.360914, 0.751164, 0.552716, -0.306227, -0.655254, 0.690556, 0, 52.8971, 0)
 shadow_enabled = true
 
-[node name="Character" parent="." node_paths=PackedStringArray("_hero_3D") instance=ExtResource("9_4fa74")]
-transform = Transform3D(0.161104, 0, -0.986937, 0, 1, 0, 0.986937, 0, 0.161104, 2.87392, 0, -5.69988)
+[node name="Character" parent="." instance=ExtResource("9_4fa74")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.34606, 0, 2.12149)
 hero_id = 2
-_hero_3D = NodePath("Cyborg")
 id = 1
-team = 2
+team = 1
 battle_id = 1
 
-[node name="Character2" parent="." node_paths=PackedStringArray("_hero_3D") instance=ExtResource("9_4fa74")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.260875, 0, 7.68254)
-hero_id = 4
-_hero_3D = NodePath("LaurentKroft")
+[node name="Character2" parent="." instance=ExtResource("9_4fa74")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.03813, 0, -2.59736)
+hero_id = 3
 id = 2
-team = 1
+team = 2
 battle_id = 1
 
 [editable path="FightingIsland"]
