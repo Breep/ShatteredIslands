@@ -30,14 +30,14 @@ const _fighting_phase_durations: Dictionary[FightingState, int] = {
 	FightingState.COUNTDOWN: 3,
 	FightingState.FIGHTING: 30,
 	FightingState.FIGHTING_ACCELERATED: 10,
-	FightingState.CELEBRATING: 600, # Winners cheers
+	FightingState.CELEBRATING: 3, # Winners cheers
 }
 
 # ============================== Public variables ==============================
 
 var timer: Timer
 
-var SERVER_TIME_SCALE: float = 5.0
+var SERVER_TIME_SCALE: float = 2.0
 
 # ============================== Private variables ==============================
 
@@ -120,7 +120,7 @@ func _on_timer_timeout() -> void:
 				return
 			else:
 				fighting_state = FightingState.FIGHTING
-				timer.wait_time = _fighting_phase_durations[FightingState.FIGHTING]
+				timer.wait_time = _fighting_phase_durations[FightingState.COUNTDOWN]
 			timer.start()
 		
 		FightingState.COUNTDOWN: # End of COUNTDOWN State (Client only (or prototyping))
@@ -159,7 +159,7 @@ func _on_state_changed(new_state) -> void:
 		
 		FightingState.FIGHTING_ACCELERATED:
 			print("[", multiplayer.get_unique_id(), "] GlobalFightingManager: Starting the accelerated fight")
-			if not multiplayer.is_server(): Engine.time_scale = _ACCELERATED_FIGHT_TIME_SCALE
+			if not multiplayer.is_server() or __prototyping: Engine.time_scale = _ACCELERATED_FIGHT_TIME_SCALE
 			timer.wait_time = _fighting_phase_durations[FightingState.FIGHTING_ACCELERATED]
 			timer.start()
 		

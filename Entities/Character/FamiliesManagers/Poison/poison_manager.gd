@@ -19,23 +19,22 @@ var _poison_stats: CharacterPoisonStats # Ref to the owner poison stats
 
 func _ready() -> void:
 	_poison_stats = source.stats.poison
-	_create_optional_timers()
 
 
 func start() -> void:
-	for timer in _optional_timers:
-		timer.stop()
+	print("STARTING POISON MANAGER")
 	_lanch_optional_spells()
+	_create_optional_timers()
 	_poison_tick_timer.start()
 
 
 func stop() -> void:
-	for timer in _optional_timers:
-		timer.stop()
+	print("PoisonManager: STOP")
 	for spell in _optional_spells:
 		spell.queue_free()
 	_poison_stats.poison_stacks = 0
 	_poison_tick_timer.stop()
+	_clear_optional_timers()
 
 
 func get_reduced_damage(damage: int) -> int:
@@ -44,9 +43,16 @@ func get_reduced_damage(damage: int) -> int:
 # ============================== Private functions ==============================
 
 func _create_optional_timers() -> void:
-	# Death flask
+	print("PoisonManager: CREATING OPTIONAL TIMERS")
+	# [PERIODICA AGARICUS]
 	if _poison_stats.periodica_agaricus_activated:
-		Utils.create_perpetual_timer(self, _poison_stats.periodica_agaricus_period, _on_periodica_agaricus_timer_timeout, false)
+		print("PoisonManager: CREATING PERIODICA AGARICUS TIMER")
+		_optional_timers.append(Utils.create_perpetual_timer(self, _poison_stats.periodica_agaricus_period, _on_periodica_agaricus_timer_timeout, true))
+
+
+func _clear_optional_timers() -> void:
+	for timer in _optional_timers:
+		timer.queue_free()
 
 
 func _lanch_optional_spells() -> void:
@@ -63,7 +69,7 @@ func _lanch_optional_spells() -> void:
 # Handle poison stacks and damage on source
 func _on_poison_tick_timer_timeout() -> void:
 	if _poison_stats.poison_stacks > 0:
-		Events.damage_done.emit(null, source, get_reduced_damage(_poison_stats.poison_stacks), Utils.DamageType.POISON, false)
+		source.take_damage(get_reduced_damage(_poison_stats.poison_stacks), Utils.DamageType.POISON, false)
 
 
 func _on_periodica_agaricus_timer_timeout() -> void:

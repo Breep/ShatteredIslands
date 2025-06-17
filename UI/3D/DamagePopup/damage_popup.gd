@@ -1,12 +1,20 @@
 class_name DamagePopUp
-extends Label3D
+extends Node3D
  
-var _str: String
+# ============================== Public functions ============================== 
+
+@export var label3d: Label3D
 
 # ============================== Public functions ============================== 
 
-func set_value(value: int) -> void:
-	_str = str(value)
+func set_value(value: float) -> void:
+	label3d.text = str(value as int)
+
+func modulate(color: Color) -> void:
+	label3d.modulate = color
+
+func outline_modulate(color: Color) -> void:
+	label3d.outline_modulate = color
 
 # ============================== Node base functions ==============================
 

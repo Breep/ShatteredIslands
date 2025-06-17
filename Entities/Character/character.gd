@@ -1,5 +1,3 @@
-@tool
-
 class_name Character
 extends Entity
 
@@ -146,9 +144,8 @@ func _ready() -> void:
 	Events.game_state_changed.connect(_on_events_game_state_changed)
 	Events.player_won_a_fight.connect(_on_events_player_won_a_fight)
 	
-	print("Update from ready")
 	_update_hero()
-	stats.reset_stats(_hero_3D.hero.stats)
+	if player != null: apply_cards_upgrade(player.deck)
 
 # ============================== Private functions ==============================
 
@@ -157,9 +154,9 @@ func _reset() -> void:
 
 
 func _update_hero() -> void:
-	if not is_inside_tree(): return
-	if hero_id == Hero.HeroId.UNDEF: return
+	if not Engine.is_editor_hint() and not is_inside_tree(): return
 	if not Engine.is_editor_hint() and not is_node_ready(): return
+	if hero_id == Hero.HeroId.UNDEF: return
 	if _hero_3D != null: _hero_3D.queue_free()
 	_hero_3D = _HEROES_3D[hero_id].instantiate()
 	print("Character change hero to: ", _hero_3D.hero.name)

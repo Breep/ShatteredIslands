@@ -58,21 +58,21 @@ func _stop_playback() -> void:
 	_is_playing = false
 
 
-func _apply_log(log: Dictionary) -> void:
-	var type: BattleLog.Type = log[BattleLog.Main.TYPE]
+func _apply_log(battle_log: Dictionary) -> void:
+	var type: BattleLog.Type = battle_log[BattleLog.Main.TYPE]
 	match type:
 		BattleLog.Type.AUTO_ATTACK:
-			_apply_auto_attack(log)
+			_apply_auto_attack(battle_log)
 		BattleLog.Type.DAMAGE_TAKEN:
-			_apply_damage_taken(log)
+			_apply_damage_taken(battle_log)
 
 # ============================== Logs applied ==============================
 
  #{"time":0.1, "type":"auto_attack", "source":1, "target":2, "modifier":{"critical":true, "poison":false, "ignite":false, "instability":true}}
-func _apply_auto_attack(log: Dictionary) -> void:
-	var source_id: int = log[BattleLog.Main.SOURCE]
-	var target_id: int = log[BattleLog.Main.TARGET]
-	var modifier: Dictionary = log[BattleLog.Main.MODIFIER]
+func _apply_auto_attack(battle_log: Dictionary) -> void:
+	var source_id: int = battle_log[BattleLog.Main.SOURCE]
+	var target_id: int = battle_log[BattleLog.Main.TARGET]
+	#var modifier: Dictionary = battle_log[BattleLog.Main.MODIFIER]
 	#print("[", multiplayer.get_unique_id(), "] BattleReader: Auto-attack: ", source_id, "->", target_id)
 	if not _entity_manager.entities.has(source_id):
 		printerr("[", multiplayer.get_unique_id(), "] BattleReader: Auto-attack: Unknown source !")
@@ -87,11 +87,11 @@ func _apply_auto_attack(log: Dictionary) -> void:
 
 
 #{"time":0.1, "type":"damage_taken", "source":1, "modifier":{"critical":true}}
-func _apply_damage_taken(log: Dictionary) -> void:
-	var source_id: int = log[BattleLog.Main.SOURCE]
-	var damage: int = log [BattleLog.Main.DAMAGE]
-	var damage_type: Utils.DamageType = log[BattleLog.Main.DAMAGE_TYPE]
-	var modifier: Dictionary = log[BattleLog.Main.MODIFIER]
+func _apply_damage_taken(battle_log: Dictionary) -> void:
+	var source_id: int = battle_log[BattleLog.Main.SOURCE]
+	var damage: int = battle_log [BattleLog.Main.DAMAGE]
+	var damage_type: Utils.DamageType = battle_log[BattleLog.Main.DAMAGE_TYPE]
+	var modifier: Dictionary = battle_log[BattleLog.Main.MODIFIER]
 	print("[", multiplayer.get_unique_id(), "] BattleReader: Damage taken: ", source_id, ":", damage)
 	if not _entity_manager.entities.has(source_id):
 		printerr("[", multiplayer.get_unique_id(), "] BattleReader: Damage taken: Unknown source !")

@@ -12,5 +12,4 @@ enum Rarity {
 @export var family: Family.FamilyType
 @export var rarity : Rarity
 @export var player_upgrade: PlayerUpgrade
-
-var lvl : int
+@export var lvl : int = 1

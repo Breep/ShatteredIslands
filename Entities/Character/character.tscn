@@ -50,9 +50,10 @@ _hero_3D = NodePath("Undef")
 _collision_shape = NodePath("CollisionShape3D")
 _interact_module = NodePath("CharacterLogic/Modules/InteractModule")
 
-[node name="CharacterVisual" parent="." instance=ExtResource("2_xasj2")]
+[node name="CharacterVisual" parent="." node_paths=PackedStringArray("_owner_entity") instance=ExtResource("2_xasj2")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.53532, 0)
+_owner_entity = NodePath("..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

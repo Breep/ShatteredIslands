@@ -4,15 +4,18 @@ extends Node3D
 # ============================== Local scene nodes ==============================
 
 @export_group("Popup Spawns")
-@export var physical_popup_spawn: SpawnPoint
-@export var magic_popup_spawn: SpawnPoint
-@export var poison_popup_spawn: SpawnPoint
-@export var heal_popup_spawn: SpawnPoint
+@export var _physical_popup_spawn: SpawnPoint
+@export var _magic_popup_spawn: SpawnPoint
+@export var _poison_popup_spawn: SpawnPoint
+@export var _heal_popup_spawn: SpawnPoint
 
 @export_group("Local Nodes")
 @export var _health_bar: ProgressBar
 @export var _mana_bar: ProgressBar
 @export var _name_displayed: Label
+
+@export_group("External Nodes")
+@export var _owner_entity: Entity
 
 var _camera: Camera3D # If defined, the visual will look at it
 
@@ -23,14 +26,13 @@ func _process(_delta: float) -> void:
 		look_at(_camera.global_position)
 
 
-func set_camera(camera: Camera3D) -> void:
-	_camera = camera
+func _ready() -> void:
+	_owner_entity.damage_taken.connect(_on_owner_entity_damage_taken)
 
 # ============================== Public ==============================
 
-#func attach_to_attack_done_signal(attack_done_signal: Signal) -> void:
-	#_hero_model.attach_to_attack_done_signal(attack_done_signal)
-
+func set_camera(camera: Camera3D) -> void:
+	_camera = camera
 
 func update_health_bar(health: int, health_max: int) -> void:
 	_health_bar.max_value = health_max
@@ -49,21 +51,28 @@ func update_name_displayed(player_name: String) -> void:
 func damage_popup(amount: float, damage_type: Utils.DamageType, is_critic: bool):
 	var popup: DamagePopUp = Shared.DAMAGE_POPUP_SCENE.instantiate()
 	var offset = Vector3(randf_range(-0.5, 0.5), randf_range(-0.5, 0.5), 0) 
-	popup.text = str(amount as int)
+	popup.set_value(amount)
 	get_tree().current_scene.add_child(popup)
 	
 	if is_critic:
-		popup.modulate = Color8(95, 20, 28, 255)
+		popup.modulate(Color8(95, 20, 28, 255))
 	
 	match damage_type:
 		Utils.DamageType.POISON:
-			popup.global_position = poison_popup_spawn.global_position + offset
-			popup.outline_modulate = Color8(20, 95, 28, 255)
+			popup.global_position = _poison_popup_spawn.global_position + offset
+			popup.outline_modulate(Color8(20, 95, 28, 255))
 		Utils.DamageType.PHYSICAL:
-			popup.global_position = physical_popup_spawn.global_position + offset
+			popup.global_position = _physical_popup_spawn.global_position + offset
 		Utils.DamageType.MAGICAL:
-			popup.global_position = magic_popup_spawn.global_position + offset
-			popup.outline_modulate = Color8(0, 0, 204, 255)
+			popup.global_position = _magic_popup_spawn.global_position + offset
+			popup.outline_modulate(Color8(0, 0, 204, 255))
 		Utils.DamageType.HEAL:
-			popup.global_position = heal_popup_spawn.global_position + offset
-			popup.outline_modulate = Color8(51, 255, 153, 255)
+			popup.global_position = _heal_popup_spawn.global_position + offset
+			popup.outline_modulate(Color8(51, 255, 153, 255))
+	
+	if _camera != null: popup.look_at(_camera.global_position)
+
+# ============================== Callbacks ==============================
+
+func _on_owner_entity_damage_taken(_entity_ref: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
+	damage_popup(damage, damage_type, is_critical)
