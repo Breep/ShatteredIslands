@@ -7,6 +7,10 @@ signal dead(self_ref: Entity)
 func signal_death() -> void:
 	dead.emit(self)
 
+signal damage_taken(entity_ref: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool)
+func signal_damage_taken(damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
+	damage_taken.emit(self, damage, damage_type, is_critical)
+
 # ============================== Export (Network) ==============================
 
 @export var id: int = -1 # Multiplayer ID of the entity
@@ -52,6 +56,19 @@ func look_at_target_y_only(target_position: Vector3):
 
 func get_auto_attack_spawn() -> Node3D:
 	return self
+
+# ===== Actions
+
+# ===== Interaction [VIRTUAL]
+
+func take_damage(_damage: int, _damage_type: Utils.DamageType, _is_critical: bool, _source: Entity = null) -> void:
+	printerr("Entity: virtual take_damage() called [", get_path(), "]")
+
+func take_condition_stacks(_stacks_number: int, _stack_type: Utils.StackType, _source: Character = null) -> void:
+	printerr("Entity: virtual take_condition_stack() called [", get_path(), "]")
+
+func take_heal(_heal_amount: int, _source: Character = null) -> void:
+	printerr("Entity: virtual take_heal() called [", get_path(), "]")
 
 # ============================== Private functions ==============================
 

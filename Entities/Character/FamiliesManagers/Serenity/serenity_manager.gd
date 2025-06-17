@@ -36,12 +36,6 @@ func notify_heal() -> void:
 			return
 		source.attack(target, _heal_stats.heal_projectile_damage, Utils.DamageType.MAGICAL)
 	
-	# [Hazardous healing]
-	if _heal_stats.poison_stacks_activated and Utils.is_randomize_modifier_active(_heal_stats.poison_stacks_chance):
-		var target: Character = source.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
-		if target == null:
-			return
-		target.take_condition_stacks(_heal_stats.poison_stacks_number, Utils.StackType.POISON, source, 5) # TODO relier à la duration du poison
 	
 	# [Panda-cify]
 	if _heal_stats.pacify_enemy_activated and Utils.is_randomize_modifier_active(_heal_stats.pacify_enemy_chance):

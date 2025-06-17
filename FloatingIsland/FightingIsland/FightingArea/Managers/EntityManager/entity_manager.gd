@@ -1,6 +1,13 @@
 class_name EntityManager
 extends Node
 
+# ============================== Export variables ==============================
+
+@export_group("External nodes")
+@export var _fighting_area: FightingArea
+
+# ============================== Signals ==============================
+
 signal entity_spawned(entity: Entity)
 signal entity_dead(entity: Entity)
 
@@ -39,6 +46,7 @@ func _register_entity(who: Entity) -> void:
 	
 	entity_spawned.emit(who)
 	who.dead.connect(_on_entity_dead, CONNECT_ONE_SHOT)
+	who.damage_taken.connect(_on_entity_damage_taken)
 
 # ============================== Callbacks ==============================
 
@@ -61,7 +69,8 @@ func _on_events_game_state_changed(game_state: Game.GameState) -> void:
 		clear()
 
 
-
+func _on_entity_damage_taken(entity_ref: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
+	_fighting_area.signal_damage_taken(entity_ref, damage, damage_type, is_critical)
 
 
 

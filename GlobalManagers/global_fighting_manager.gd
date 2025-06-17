@@ -28,9 +28,9 @@ enum FightingState {
 const _fighting_phase_durations: Dictionary[FightingState, int] = {
 	FightingState.POSITIONING: 5,
 	FightingState.COUNTDOWN: 3,
-	FightingState.FIGHTING: 10,
-	FightingState.FIGHTING_ACCELERATED: 5,
-	FightingState.CELEBRATING: 3, # Winners cheers
+	FightingState.FIGHTING: 30,
+	FightingState.FIGHTING_ACCELERATED: 10,
+	FightingState.CELEBRATING: 600, # Winners cheers
 }
 
 # ============================== Public variables ==============================

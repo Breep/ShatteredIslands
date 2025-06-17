@@ -18,8 +18,9 @@ var _start_time: float
 
 func _ready() -> void:
 	if not multiplayer.is_server(): queue_free() # Only the server writes battle logs
-	_fighting_area.projectile_spawned.connect(_on_events_projectile_spawned)
 	GlobalFightingManager.state_changed.connect(_on_global_fighting_manager_state_changed)
+	_fighting_area.projectile_spawned.connect(_on_fighting_area_projectile_spawned)
+	_fighting_area.damage_taken.connect(_on_fighting_area_damage_taken)
 
 # ============================== Public functions ==============================
 
@@ -49,6 +50,20 @@ func _log_attack(source: Entity, target: Entity,
 	_battle_logs.append(data)
 
 
+func _log_damage_taken(source: Entity, damage: int, damage_type: Utils.DamageType, critical: bool) -> void:
+	var data: Dictionary = {
+		BattleLog.Main.TIME: _get_time(),
+		BattleLog.Main.TYPE: BattleLog.Type.DAMAGE_TAKEN,
+		BattleLog.Main.SOURCE: source.id,
+		BattleLog.Main.DAMAGE: damage,
+		BattleLog.Main.DAMAGE_TYPE: damage_type,
+		BattleLog.Main.MODIFIER: {
+			BattleLog.Modifier.CRITICAL: critical,
+		}
+	}
+	_battle_logs.append(data)
+
+
 func _get_time() -> float:
 	return ((Time.get_ticks_msec() as float) / 1000.0 - _start_time) * GlobalFightingManager.SERVER_TIME_SCALE
 
@@ -64,10 +79,14 @@ func _on_global_fighting_manager_state_changed(state: GlobalFightingManager.Figh
 			return
 
 
-func _on_events_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.ProjectileType, projectile_modifiers: Array[Projectile.ProjectileEffect]) -> void:
+func _on_fighting_area_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.ProjectileType, projectile_modifiers: Array[Projectile.ProjectileEffect]) -> void:
 	if projectile_type == Projectile.ProjectileType.AUTO_ATTACK:
 		_log_attack(source, target,
 					projectile_modifiers.has(Projectile.ProjectileEffect.CRITIC),
 					projectile_modifiers.has(Projectile.ProjectileEffect.POISON),
 					projectile_modifiers.has(Projectile.ProjectileEffect.IGNITE),
 					projectile_modifiers.has(Projectile.ProjectileEffect.INSTABILITY))
+
+
+func _on_fighting_area_damage_taken(source: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
+	_log_damage_taken(source, damage, damage_type, is_critical)

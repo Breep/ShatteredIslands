@@ -31,7 +31,8 @@ _fighting_floors = {
 }
 _entities_node = NodePath("Entities")
 
-[node name="EntityManager" parent="." instance=ExtResource("2_wtb7j")]
+[node name="EntityManager" parent="." node_paths=PackedStringArray("_fighting_area") instance=ExtResource("2_wtb7j")]
+_fighting_area = NodePath("..")
 
 [node name="FightingManager" parent="." instance=ExtResource("3_yyfcp")]
 

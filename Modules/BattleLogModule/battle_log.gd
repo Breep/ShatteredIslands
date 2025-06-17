@@ -2,7 +2,8 @@ class_name BattleLog
 extends Resource
 
 enum Type {
-	AUTO_ATTACK
+	AUTO_ATTACK,
+	DAMAGE_TAKEN
 }
 
 enum Modifier {
@@ -17,7 +18,9 @@ enum Main {
 	TYPE,
 	SOURCE,
 	TARGET,
-	MODIFIER
+	MODIFIER,
+	DAMAGE,
+	DAMAGE_TYPE
 }
 
 const TIME: String = "time"

@@ -29,7 +29,7 @@ func direct_attack(target: Character, damage: int, damage_type: Utils.DamageType
 	elif damage_type == Utils.DamageType.MAGICAL:
 		damage *= multiplier["magical"]
 	
-	Events.damage_done.emit(_owner, target, damage, damage_type, multiplier["is_critical"])
+	target.take_damage(damage, damage_type, multiplier["is_critical"], _owner)
 	#_attack.rpc(target.player.id, damage, damage_type, is_critical)
 
 

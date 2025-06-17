@@ -7,6 +7,10 @@ signal projectile_spawned(source: Entity, target: Entity, projectile_type: Proje
 func signal_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.ProjectileType, projectile_modifiers: Array[Projectile.ProjectileEffect]) -> void:
 	projectile_spawned.emit(source, target, projectile_type, projectile_modifiers)
 
+signal damage_taken(source: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool)
+func signal_damage_taken(source: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
+	damage_taken.emit(source, damage, damage_type, is_critical)
+
 # ============================== Network Export variables ==============================
 
 @export var _current_battle_id: int = -1

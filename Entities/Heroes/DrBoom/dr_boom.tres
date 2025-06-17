@@ -9,7 +9,7 @@ metadata/__load_path__ = "res://Entities/Heroes/DrBoom/dr_boom_model.tscn"
 
 [sub_resource type="Resource" id="Resource_u3dta"]
 script = ExtResource("2_sgt0q")
-health_max = 1000
+health_max = 3500
 mana_max = 100
 mana_regen = 5.0
 attack_damage = 75

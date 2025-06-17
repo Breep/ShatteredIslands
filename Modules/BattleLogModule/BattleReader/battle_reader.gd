@@ -63,14 +63,17 @@ func _apply_log(log: Dictionary) -> void:
 	match type:
 		BattleLog.Type.AUTO_ATTACK:
 			_apply_auto_attack(log)
+		BattleLog.Type.DAMAGE_TAKEN:
+			_apply_damage_taken(log)
 
 # ============================== Logs applied ==============================
 
+ #{"time":0.1, "type":"auto_attack", "source":1, "target":2, "modifier":{"critical":true, "poison":false, "ignite":false, "instability":true}}
 func _apply_auto_attack(log: Dictionary) -> void:
 	var source_id: int = log[BattleLog.Main.SOURCE]
 	var target_id: int = log[BattleLog.Main.TARGET]
 	var modifier: Dictionary = log[BattleLog.Main.MODIFIER]
-	print("[", multiplayer.get_unique_id(), "] BattleReader: Auto-attack: ", source_id, "->", target_id)
+	#print("[", multiplayer.get_unique_id(), "] BattleReader: Auto-attack: ", source_id, "->", target_id)
 	if not _entity_manager.entities.has(source_id):
 		printerr("[", multiplayer.get_unique_id(), "] BattleReader: Auto-attack: Unknown source !")
 		return
@@ -83,6 +86,18 @@ func _apply_auto_attack(log: Dictionary) -> void:
 	_spawn_manager.spawn_projectile(source, target, Projectile.ProjectileType.AUTO_ATTACK, projectile_spawn, ProjectileStats.new())
 
 
+#{"time":0.1, "type":"damage_taken", "source":1, "modifier":{"critical":true}}
+func _apply_damage_taken(log: Dictionary) -> void:
+	var source_id: int = log[BattleLog.Main.SOURCE]
+	var damage: int = log [BattleLog.Main.DAMAGE]
+	var damage_type: Utils.DamageType = log[BattleLog.Main.DAMAGE_TYPE]
+	var modifier: Dictionary = log[BattleLog.Main.MODIFIER]
+	print("[", multiplayer.get_unique_id(), "] BattleReader: Damage taken: ", source_id, ":", damage)
+	if not _entity_manager.entities.has(source_id):
+		printerr("[", multiplayer.get_unique_id(), "] BattleReader: Damage taken: Unknown source !")
+		return
+	var source: Entity = _entity_manager.entities[source_id]
+	source.take_damage(damage, damage_type, modifier[BattleLog.Modifier.CRITICAL])
 
 
 

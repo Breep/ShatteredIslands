@@ -56,6 +56,7 @@ var _hero_id := Hero.HeroId.UNDEF
 @export var _turret: Turret
 @export var _hero_3D: Hero3D
 @export var _collision_shape: CollisionShape3D
+@export var _interact_module: InteractModule
 
 # ============================== Public variables ==============================
 
@@ -101,6 +102,19 @@ func on_inactive_island() -> void:
 func get_auto_attack_spawn() -> Node3D:
 	return _turret.get_projectile_spawn_point()
 
+
+# ===== Actions
+
+# ===== Interaction
+
+func take_damage(damage: int, damage_type: Utils.DamageType, is_critical: bool, source: Entity = null) -> void:
+	_interact_module.take_damage(damage, damage_type, is_critical, source)
+
+func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, source: Character = null) -> void:
+	_interact_module.take_condition_stacks(stacks_number, stack_type, source)
+
+func take_heal(heal_amount: int, source: Character = null) -> void:
+	_interact_module.take_heal(heal_amount, source)
 
 # ============================== Node base functions ==============================
 
