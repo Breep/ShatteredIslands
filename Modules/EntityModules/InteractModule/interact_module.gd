@@ -32,9 +32,7 @@ func take_damage(damage: int, damage_type: Utils.DamageType, is_critical: bool, 
 func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, _source: Character = null) -> void:
 	match stack_type:
 		Utils.StackType.POISON:
-			_owner.stats.poison.poison_stacks += stacks_number
-		Utils.StackType.VULNERABILITY:
-			_owner.stats.storm.vulnerability_stacks += stacks_number
+			_owner.stats.poison_stacks += stacks_number
 
 # ===== Heal
 func take_heal(heal_amount: int, _source: Character = null) -> void:

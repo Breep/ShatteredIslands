@@ -22,12 +22,8 @@ var attack_speed: float:
 
 # ============================== Private variables ==============================
 
-var _aa_stats: CharacterAutoAttackStats # Ref to the owner auto attack stats
-
 #var _forced_target: Character # TODO Unused now, maybe for a futur hero that can taunt ?
 var _attack_strategy: TargetModule.TargettingStrategy = TargetModule.TargettingStrategy.CLOSEST_ENEMY # The algo used to find the target
-
-var _default_attack_speed: float # Default attack speed of the hero
 
 var _attack_speed: float = 1 # Basic attack speed of the auto-attack module (attacks/s)
 
@@ -86,10 +82,6 @@ func _auto_attack(target: Character) -> void:
 
 
 func _update_auto_attack_speed() -> void:
-	_owner.stats.attack_speed = _default_attack_speed
-	var attack_speed_boost: float = _aa_stats.attack_speed_boost + _aa_stats.attack_speed_overtime_current
-	var multiply_boost: float = remap(attack_speed_boost, 0, 100, 1, 2) # Convert % in proportional multiple (100% = x2 | 150% = x2.5)
-	_owner.stats.attack_speed *= multiply_boost
 	set_auto_attack_speed(_owner.stats.attack_speed)
 
 # ============================== Callbacks functions ==============================

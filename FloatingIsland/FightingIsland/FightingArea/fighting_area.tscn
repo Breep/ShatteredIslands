@@ -74,6 +74,8 @@ visible = false
 
 [node name="Entities" type="Node3D" parent="."]
 
+[node name="Characters" type="Node3D" parent="."]
+
 [node name="Projectiles" type="Node3D" parent="."]
 
 [node name="Walls" type="Node3D" parent="."]
@@ -105,3 +107,6 @@ monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall4"]
 shape = SubResource("BoxShape3D_7oplh")
+
+[node name="CharacterSynchronizer" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("../Characters")

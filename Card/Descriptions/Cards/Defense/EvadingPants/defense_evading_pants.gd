@@ -1,9 +1,9 @@
 class_name DefenseEvadingPants
-extends PlayerUpgrade
+extends CharacterUpgrade
 
 @export var _armor_stacks: Array[int] # Armor stacks gained each dodge
 
-func apply(stats: CharacterStats, cardlvl: int) -> void: # override
+func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > 5:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return

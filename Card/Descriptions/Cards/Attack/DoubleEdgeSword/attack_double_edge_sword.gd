@@ -1,10 +1,10 @@
 class_name AttackDoubleEdgeSword
-extends PlayerUpgrade
+extends CharacterUpgrade
 
 @export var _damage_percent: Array[int] # % of damage increased when changing target
 @export var _attacks_number: Array[int] # Number of attack boosted
 
-func apply(stats: CharacterStats, cardlvl: int) -> void: # override
+func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > 3:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return

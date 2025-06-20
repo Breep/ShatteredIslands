@@ -1,7 +1,7 @@
 extends Control
 
-@export var player1_ui : CharacterStats
-@export var player2_ui : CharacterStats
+@export var player1_ui : FamiliesStats
+@export var player2_ui : FamiliesStats
 
 @onready var healthbar1: ProgressBar = %HealthBar1
 @onready var manabar1: ProgressBar = %ManaBAr1

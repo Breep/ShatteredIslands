@@ -1,20 +1,20 @@
 [gd_resource type="Resource" script_class="Hero" load_steps=6 format=3 uid="uid://bqjyvw4bxcnt7"]
 
 [ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://Entities/Heroes/hero.gd" id="1_synja"]
-[ext_resource type="Script" uid="uid://c76rxvnlcwltf" path="res://Entities/Character/CharacterStats/character_stats.gd" id="2_0fuq0"]
 [ext_resource type="Texture2D" uid="uid://3wy134hag6ic" path="res://Data/Heroes/Portraits/Sir Reginald Von Glorifoth III.webp" id="2_1xx0h"]
 [ext_resource type="PackedScene" uid="uid://bmtp8uvuepsu5" path="res://Entities/Heroes/SirReginald/sir_reginald_model.tscn" id="3_lvb6b"]
+[ext_resource type="Script" uid="uid://2py6kv5aqgem" path="res://Entities/Heroes/hero_stats.gd" id="4_gvt4n"]
 
-[sub_resource type="Resource" id="Resource_gr18g"]
-script = ExtResource("2_0fuq0")
+[sub_resource type="Resource" id="Resource_77n2g"]
+script = ExtResource("4_gvt4n")
 health_max = 1000
 mana_max = 100
-mana_regen = 5.0
-attack_damage = 130
-attack_speed = 1.2
-attack_move_speed = 1.0
-physical_critical_chance = 10.0
+mana_regen = 2.0
+attack_damage = 20
+attack_speed = 0.5
+physical_critical_chance = 15.0
 physical_critical_multiplier = 2.0
+metadata/_custom_type_script = "uid://2py6kv5aqgem"
 
 [resource]
 script = ExtResource("1_synja")
@@ -22,6 +22,6 @@ name = "Sir Reginald"
 id = 6
 portrait = ExtResource("2_1xx0h")
 description = "Sir Reginald Von Gloriforth III"
-stats = SubResource("Resource_gr18g")
+stats = SubResource("Resource_77n2g")
 aa_projectile_type = 6
 model = ExtResource("3_lvb6b")

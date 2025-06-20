@@ -2,19 +2,19 @@
 
 [ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://Entities/Heroes/hero.gd" id="1_atefr"]
 [ext_resource type="Texture2D" uid="uid://dula3wiwe4px4" path="res://Data/Heroes/Portraits/Ancient Tree.webp" id="2_b45nk"]
-[ext_resource type="Script" uid="uid://c76rxvnlcwltf" path="res://Entities/Character/CharacterStats/character_stats.gd" id="3_8fiyi"]
+[ext_resource type="Script" uid="uid://2py6kv5aqgem" path="res://Entities/Heroes/hero_stats.gd" id="4_8puak"]
 [ext_resource type="PackedScene" uid="uid://dfrrvt8lpo17x" path="res://Entities/Heroes/AncientTree/ancient_tree_model.tscn" id="4_8wut5"]
 
-[sub_resource type="Resource" id="Resource_vi0jq"]
-script = ExtResource("3_8fiyi")
-health_max = 5000
+[sub_resource type="Resource" id="Resource_ca4dq"]
+script = ExtResource("4_8puak")
+health_max = 1000
 mana_max = 100
-mana_regen = 5.0
-attack_damage = 40
+mana_regen = 2.0
+attack_damage = 20
 attack_speed = 0.5
-attack_move_speed = 1.0
-physical_critical_chance = 10.0
+physical_critical_chance = 15.0
 physical_critical_multiplier = 2.0
+metadata/_custom_type_script = "uid://2py6kv5aqgem"
 
 [resource]
 script = ExtResource("1_atefr")
@@ -22,6 +22,6 @@ name = "Ancient tree"
 id = 1
 portrait = ExtResource("2_b45nk")
 description = "Un ancien arbre"
-stats = SubResource("Resource_vi0jq")
+stats = SubResource("Resource_ca4dq")
 aa_projectile_type = 0
 model = ExtResource("4_8wut5")

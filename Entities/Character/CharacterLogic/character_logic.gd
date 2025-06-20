@@ -8,14 +8,10 @@ extends Node
 
 var target_module: TargetModule
 
+var _is_stopped: bool = true
+
 func _enter_tree() -> void:
 	if is_node_ready(): return # Only do it once
-	for module in modules.values():
-		module._owner = _source
-	
-	for family_manager in families_managers.values():
-		family_manager.source = _source
-	
 	target_module = modules[Module.ModuleType.TARGET]
 
 
@@ -31,6 +27,8 @@ func connect_to_fighting_area(fighting_area: FightingArea) -> void:
 
 func start() -> void: # Only the server simulate the fight, Clients gets the BattleLog and do a playback
 	if not multiplayer.is_server(): return
+	if not _is_stopped: return
+	_is_stopped = false
 	for family_manager in families_managers.values():
 		family_manager.start()
 	modules[Module.ModuleType.AUTOATTACK].start()
@@ -38,6 +36,8 @@ func start() -> void: # Only the server simulate the fight, Clients gets the Bat
 
 func stop() -> void:
 	if not multiplayer.is_server(): return
+	if _is_stopped: return
+	_is_stopped = true
 	for family_manager in families_managers.values():
 		family_manager.stop()
 	modules[Module.ModuleType.AUTOATTACK].stop()

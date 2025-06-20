@@ -13,9 +13,15 @@ func signal_damage_taken(damage: int, damage_type: Utils.DamageType, is_critical
 
 # ============================== Export (Network) ==============================
 
+@export_group("Network")
 @export var id: int = -1 # Multiplayer ID of the entity
 @export var team: int = -1 # Team number of the entity
 @export var battle_id: int = -1 # The id of the battle the entity is in
+
+# ============================== Local Nodes ==============================
+
+@export_group("Stats")
+@export var stats: EntityStats
 
 # ============================== Enums ==============================
 

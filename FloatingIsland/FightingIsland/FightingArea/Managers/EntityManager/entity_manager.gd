@@ -34,6 +34,8 @@ func clear() -> void:
 	for entity in _entities.values():
 		if entity.dead.is_connected(_on_entity_dead):
 			entity.dead.disconnect(_on_entity_dead)
+		if entity.damage_taken.is_connected(_on_entity_damage_taken):
+			entity.damage_taken.disconnect(_on_entity_damage_taken)
 	_entities.clear()
 	_characters.clear()
 

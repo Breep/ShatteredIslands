@@ -16,6 +16,3 @@ var is_critic: bool # If the projectile is a critical
 var is_bouncing: bool # If the projectile should bounce on the enemy
 
 var poison_stacks: int # Number of poison stacks within the projectile
-var poison_duration: int # Duration of the poison stacks (in ticks)
-
-var vulnerability_stacks: int # Number of vulnerability stacks within the projectile

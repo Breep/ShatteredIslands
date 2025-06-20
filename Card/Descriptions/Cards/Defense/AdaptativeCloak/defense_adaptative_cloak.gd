@@ -1,9 +1,9 @@
 class_name DefenseAdaptativeCloak
-extends PlayerUpgrade
+extends CharacterUpgrade
 
 @export var _attack_percents: Array[int] # % Percent of AA damage converted into armor stacks
 
-func apply(stats: CharacterStats, cardlvl: int) -> void: # override
+func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > 5:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return

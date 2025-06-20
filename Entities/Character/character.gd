@@ -43,7 +43,7 @@ var _hero_id := Hero.HeroId.UNDEF
 	set(value):
 		if value == _hero_id or value < 0: return
 		_hero_id = value
-		_update_hero()
+		if Engine.is_editor_hint(): _update_hero()
 
 @export_subgroup("Synchronizer")
 @export var _movement_synchronizer: MultiplayerSynchronizer
@@ -55,12 +55,11 @@ var _hero_id := Hero.HeroId.UNDEF
 @export var _hero_3D: Hero3D
 @export var _collision_shape: CollisionShape3D
 @export var _interact_module: InteractModule
+@export var families_stats: FamiliesStats
 
 # ============================== Public variables ==============================
 
 var player: Player
-var stats: CharacterStats
-
 var target_module: TargetModule
 
 # ============================== Private variables ==============================
@@ -74,9 +73,9 @@ var _fighting_state: GlobalFightingManager.FightingState = GlobalFightingManager
 
 func apply_cards_upgrade(deck: PlayerDeck) -> void:
 	if not is_node_ready(): return
-	stats.reset_stats(_hero_3D.hero.stats)
+	stats.reset_from_hero(_hero_3D.hero)
 	for card in deck.card_pile:
-		card.player_upgrade.apply(stats, card.lvl)
+		card.player_upgrade.apply(families_stats, card.lvl)
 
 
 func connect_to_fighting_area(fighting_area: FightingArea) -> void:
@@ -118,8 +117,6 @@ func take_heal(heal_amount: int, source: Character = null) -> void:
 
 func _init() -> void:
 	if Engine.is_editor_hint(): return
-	stats = CharacterStats.new()
-	stats.health_changed.connect(_on_stats_health_changed)
 	_entity_init()
 
 
@@ -146,17 +143,18 @@ func _ready() -> void:
 	
 	_update_hero()
 	if player != null: apply_cards_upgrade(player.deck)
+	
+	stats.health_changed.connect(_on_stats_health_changed)
 
 # ============================== Private functions ==============================
 
 func _reset() -> void:
-	stats.reset_stats(_hero_3D.hero.stats)
+	stats.reset_from_hero(_hero_3D.hero)
 
 
 func _update_hero() -> void:
 	if not Engine.is_editor_hint() and not is_inside_tree(): return
 	if not Engine.is_editor_hint() and not is_node_ready(): return
-	if hero_id == Hero.HeroId.UNDEF: return
 	if _hero_3D != null: _hero_3D.queue_free()
 	_hero_3D = _HEROES_3D[hero_id].instantiate()
 	print("Character change hero to: ", _hero_3D.hero.name)
@@ -164,7 +162,6 @@ func _update_hero() -> void:
 	_collision_shape.shape = _hero_3D.collision_shape.shape.duplicate() # Update Collider
 	var hero_height: float = (_collision_shape.shape as CapsuleShape3D).height
 	_character_visual.position.y = hero_height + 1
-	
 	add_child(_hero_3D)
 
 # ============================== Private ==============================
@@ -180,12 +177,6 @@ func _on_life_manager_revived(life_after_revived: int) -> void:
 	_character_visual.update_health_bar(stats.health, stats.health_max)
 	_is_dead = false
 	Events.character_is_spawned.emit(self)
-
-
-func _on_shadow_manager_gain_max_hp_triggered(hp: int) -> void:
-	stats.health_max += hp
-	stats.health += hp
-	_character_visual.update_health_bar(stats.health, stats.health_max)
 
 # ============================== Module callbacks ==============================
 

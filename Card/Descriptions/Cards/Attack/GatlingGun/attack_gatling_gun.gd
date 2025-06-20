@@ -1,11 +1,11 @@
 class_name AttackGatlingGun
-extends PlayerUpgrade
+extends CharacterUpgrade
 
 @export var _attack_speed_min: Array[int] # % Attack speed minimum
 @export var _attack_speed_max: Array[int] # % Attack speed maximum
 @export var _duration: float # % Duration to go from minimum to maximum attack speed
 
-func apply(stats: CharacterStats, cardlvl: int) -> void: # override
+func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > 3:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return

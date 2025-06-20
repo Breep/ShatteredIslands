@@ -1,9 +1,9 @@
 class_name DefenseDualShield
-extends PlayerUpgrade
+extends CharacterUpgrade
 
 @export var _health_threshold: int
 
-func apply(stats: CharacterStats, cardlvl: int) -> void: # override
+func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
 	if cardlvl != 1:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return

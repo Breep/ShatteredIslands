@@ -7,7 +7,7 @@ const FOCUS_INCREASE_CRIT_PERIOD: float = 0.5
 
 # ============================== Private variables ==============================
 
-var _storm_stats: CharacterStormStats # Ref to the owner storm stats
+var _storm_stats: FamilyStormStats
 
 var _focus_timer: Timer
 var _crit_move_speed_timer: Timer
@@ -16,32 +16,26 @@ var _focus_timer_time_elapsed: float # Time elapsed since lanch of the timer
 
 # ============================== Local nodes ==============================
 
-@onready var _vulnerability_timer: Timer = %VulnerabilityTimer
-
 # ============================== Public functions ==============================
 
 func _ready() -> void:
-	_storm_stats = source.stats.storm
-	_create_optional_timers()
+	_storm_stats = _owner.families_stats.storm
 
 
 func start() -> void:
 	for timer in _optional_timers:
 		timer.start()
-	_vulnerability_timer.start()
 
 
 func stop() -> void:
 	for timer in _optional_timers:
 		timer.stop()
-	_vulnerability_timer.stop()
 
 
 func get_increased_critical_damage(damage: int, is_critical: bool) -> int:
 	if not is_critical:
 		return damage
-	var vulnerability_multiplier = remap(_storm_stats.vulnerability_stacks, 0, 100, 1, 2)
-	return damage * vulnerability_multiplier
+	return damage
 
 
 func get_critical_chance() -> float:
@@ -52,84 +46,27 @@ func get_critical_multiplier(damage_type: Utils.DamageType) -> float:
 	if damage_type != Utils.DamageType.PHYSICAL:
 		return 1 
 	
-	var critical_multiplier = source.stats.physical_critical_multiplier
+	var critical_multiplier = _owner.stats.physical_critical_multiplier
 	return critical_multiplier
 
 
-func notice_critical_damage(char_who_received_the_crit: Character, damage: int) -> void:
-	# [Lightning speed]
-	if _storm_stats.crit_move_speed_activated:
-		_storm_stats.speed_boosted = true
-		if not _crit_move_speed_timer.is_stopped():
-			_crit_move_speed_timer.stop()
-		_crit_move_speed_timer.start()
-	
-	# [Overcharge]
-	if _storm_stats.overcharge_activated:
-		var target = source.target_module.get_closest_enemy_from(char_who_received_the_crit)
-		if target != null:
-			var overcharge_damage: int = (damage * _storm_stats.overcharge_percent / 100.0) as int
-			if multiplayer.get_unique_id() == 1: print(char_who_received_the_crit.player.name, " ", target.player.name)
-			source.attack(target, overcharge_damage, Utils.DamageType.MAGICAL)
+func notice_critical_damage(_char_who_received_the_crit: Character, _damage: int) -> void:
+	pass
 
 
 func focus_changed(focused: bool) -> void:
-	if focused:
-		_focus_timer_time_elapsed = 0
-		__previous_time = Time.get_ticks_msec()
-		_focus_timer.start()
-	else:
-		_focus_timer.stop()
-		_storm_stats.focus_target_crit_current = 0
+	pass
+
 
 # ============================== Private functions ==============================
 
 func _create_optional_timers() -> void:
-	# Break armor
-	if _storm_stats.periodic_vulnerability_activated:
-		_optional_timers.append(Utils.create_perpetual_timer(self, _storm_stats.periodic_vulnerability_period, _on_periodic_vulnerability_timer_timeout))
-	
-	if _storm_stats.focus_target_activated:
-		_focus_timer = Timer.new()
-		add_child(_focus_timer)
-		_focus_timer.one_shot = true
-		_focus_timer.wait_time = FOCUS_INCREASE_CRIT_PERIOD
-		_focus_timer.connect("timeout", _on_focus_timer_timeout)
-		_optional_timers.append(_focus_timer)
-	
-	if _storm_stats.crit_move_speed_activated:
-		_crit_move_speed_timer = Timer.new()
-		add_child(_crit_move_speed_timer)
-		_crit_move_speed_timer.one_shot = true
-		_crit_move_speed_timer.wait_time = _storm_stats.crit_move_speed_duration
-		_crit_move_speed_timer.connect("timeout", _on_crit_move_speed_timer_timeout)
-		_optional_timers.append(_crit_move_speed_timer)
+	pass
 
 # ============================== Callbacks functions ==============================
 
-func _on_periodic_vulnerability_timer_timeout() -> void:
-	var target: Character = source.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
-	if target == null:
-		return
-	
-	var vulnerability_stacks: int = _storm_stats.periodic_vulnerability_amount
-	_action_module.inflict_condition_stacks(target, vulnerability_stacks, Utils.StackType.VULNERABILITY)
-
-
 func _on_vulnerability_timer_timeout() -> void:
 	pass
-
-
-var __previous_time: float
-func _on_focus_timer_timeout() -> void:
-	var time = Time.get_ticks_msec()
-	_focus_timer_time_elapsed += time - __previous_time
-	var physical_crit_inc: float = remap(_focus_timer_time_elapsed / 1000,                                  \
-									0, _storm_stats.focus_target_duration,                                  \
-									_storm_stats.focus_target_crit_min, _storm_stats.focus_target_crit_max)
-	physical_crit_inc = clampf(physical_crit_inc, _storm_stats.focus_target_crit_min, _storm_stats.focus_target_crit_max)
-	_storm_stats.focus_target_crit_current = physical_crit_inc
-	__previous_time = time
 
 
 func _on_crit_move_speed_timer_timeout() -> void:

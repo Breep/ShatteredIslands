@@ -1,10 +1,10 @@
 class_name DefenseTitanGloves
-extends PlayerUpgrade
+extends CharacterUpgrade
 
 @export var _max_health_percents: Array[float] # % of max life converted into armor stacks each tick
 @export var _period: float  # Time between 2 ticks
 
-func apply(stats: CharacterStats, cardlvl: int) -> void: # override
+func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > 5:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return

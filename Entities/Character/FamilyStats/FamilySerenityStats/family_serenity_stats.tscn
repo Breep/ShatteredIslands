@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://85h2khsq3bri"]
+
+[ext_resource type="Script" uid="uid://c48c580dr2d5o" path="res://Entities/Character/FamilyStats/FamilySerenityStats/family_serenity_stats.gd" id="1_imyvt"]
+
+[node name="FamilySerenityStats" type="Node"]
+script = ExtResource("1_imyvt")

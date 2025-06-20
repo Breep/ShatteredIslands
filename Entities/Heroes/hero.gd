@@ -21,13 +21,9 @@ enum HeroId {
 
 @export var name: String
 @export var id: HeroId
-
 @export var portrait: CompressedTexture2D
-
 @export var description: String
-
-@export var stats: CharacterStats
-
+@export var stats: HeroStats
 @export var aa_projectile_type: Projectile.ProjectileType
 @export var model: PackedScene
 

@@ -3,7 +3,7 @@ extends Control
 
 # ============================== Private variables ==============================
 
-var _character_stats: CharacterStats
+var _character_stats: FamiliesStats
 
 # ============================== Local nodes ==============================
 
@@ -19,7 +19,7 @@ var _character_stats: CharacterStats
 
 # ============================== Public functions ==============================
 
-func connect_character_stats(new_character_stats: CharacterStats):
+func connect_character_stats(new_character_stats: FamiliesStats):
 	_disconnect_all_character_stats_signals(_character_stats)
 	_character_stats = new_character_stats
 	_setup_local_nodes()
@@ -52,7 +52,7 @@ func _update_local_nodes() -> void:
 	_poison_label.text = str(_character_stats.poison.poison_stacks)
 
 
-func _connect_all_character_stats_signals(character_stats: CharacterStats) -> void:
+func _connect_all_character_stats_signals(character_stats: FamiliesStats) -> void:
 	character_stats.health_max_changed.connect(_on_character_stats_health_max_changed)
 	character_stats.health_changed.connect(_on_character_stats_health_changed)
 	character_stats.mana_max_changed.connect(_on_character_stats_mana_max_changed)
@@ -64,7 +64,7 @@ func _connect_all_character_stats_signals(character_stats: CharacterStats) -> vo
 	character_stats.poison.poison_stacks_changed.connect(_on_character_stats_poison_poison_stacks_changed)
 
 
-func _disconnect_all_character_stats_signals(character_stats: CharacterStats) -> void:
+func _disconnect_all_character_stats_signals(character_stats: FamiliesStats) -> void:
 	if character_stats == null: return
 	character_stats.health_max_changed.disconnect(_on_character_stats_health_max_changed)
 	character_stats.health_changed.disconnect(_on_character_stats_health_changed)

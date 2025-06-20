@@ -1,11 +1,11 @@
 class_name DefenseMysticalShoulders
-extends PlayerUpgrade
+extends CharacterUpgrade
 
 @export var _magic_damage: int # Amount of magic damage needed to proc this skill
 @export var _percents_inc: Array[float] # % of magic resist gained each time this skill proc
 @export var _percents_max: Array[float] # Maximum % of magic resist
 
-func apply(stats: CharacterStats, cardlvl: int) -> void: # override
+func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > 5:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return

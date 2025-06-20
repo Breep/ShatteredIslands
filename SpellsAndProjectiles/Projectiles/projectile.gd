@@ -61,8 +61,6 @@ func _on_body_entered(body: Node3D) -> void:
 				_damage_percent(stats.magical_damage_percent, Utils.DamageType.MAGICAL, stats.magical_damage_percent_type, stats.is_critic)
 			if stats.poison_stacks > 0:
 				Events.condition_stacks_done.emit(source, target, stats.poison_stacks, Utils.StackType.POISON, stats.poison_duration)
-			if stats.vulnerability_stacks > 0:
-				Events.condition_stacks_done.emit(source, target, stats.vulnerability_stacks, Utils.StackType.VULNERABILITY, 0)
 			if stats.is_bouncing:
 				target = source.target_module.get_closest_enemy_from(target) # Set new target to the closest character enemy to the source
 				if target == null:
@@ -97,7 +95,7 @@ func _damage_percent(damage_percent: float, damage_type: Utils.DamageType, perce
 		Utils.PercentModifier.LOST_HP:
 			hp = target.stats.health_max - source.stats.health
 	var damage = hp * damage_percent  / 100.0
-	Events.damage_done.emit(source, target, damage, damage_type, is_critical)
+	target.take_damage(damage, damage_type, is_critical, source)
 
 # ============================== Callbacks ==============================
 
