@@ -28,11 +28,27 @@ func take_damage(damage: int, damage_type: Utils.DamageType, is_critical: bool, 
 	_owner.stats.health -= damage
 	_owner.signal_damage_taken(damage, damage_type, is_critical)
 
+
+func take_damage_percent(damage_percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.DamageType, is_critical: bool, source: Entity = null) -> void:
+	if not multiplayer.is_server(): return
+	var hp: int
+	match percent_modifier:
+		Utils.PercentModifier.MAX_HP:
+			hp = _owner.stats.health_max
+		Utils.PercentModifier.CURRENT_HP:
+			hp = _owner.stats.health
+		Utils.PercentModifier.LOST_HP:
+			hp = _owner.stats.health_max - _owner.stats.health
+	var damage = hp * damage_percent  / 100.0
+	take_damage(damage, damage_type, is_critical, source)
+
 # ===== Condition stacks
 func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, _source: Character = null) -> void:
 	match stack_type:
 		Utils.StackType.POISON:
 			_owner.stats.poison_stacks += stacks_number
+		Utils.StackType.IGNITE:
+			_owner.stats.ignite_stacks += stacks_number
 
 # ===== Heal
 func take_heal(heal_amount: int, _source: Character = null) -> void:

@@ -1,6 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://c5ji8s1iic5v8"]
+[gd_scene load_steps=11 format=3 uid="uid://c5ji8s1iic5v8"]
 
 [ext_resource type="Script" uid="uid://bu48b2v401db2" path="res://Prototyping/FightingIsland/prototyping_map.gd" id="1_66i2r"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="2_ovips"]
+[ext_resource type="Resource" uid="uid://b3ohguwihk7x3" path="res://Card/Descriptions/Cards/Fire/PeriodicIgnite/fire_periodic_ignite.tres" id="3_fvg5y"]
+[ext_resource type="Resource" uid="uid://dvpdubk0btegx" path="res://Card/Descriptions/Cards/Poison/poison_periodica_agaricus.tres" id="3_ovips"]
 [ext_resource type="Texture2D" uid="uid://dodc5quv2uysn" path="res://Data/Misc/skybox.jpg" id="7_xd7nd"]
 [ext_resource type="PackedScene" uid="uid://drcuyohos0doa" path="res://FloatingIsland/FightingIsland/fighting_island.tscn" id="7_yjquk"]
 [ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Entities/Character/character.tscn" id="9_4fa74"]
@@ -18,6 +21,7 @@ sky = SubResource("Sky_08xy3")
 [node name="PrototypingMap" type="Node3D" node_paths=PackedStringArray("_floating_island", "_character1", "_character2")]
 script = ExtResource("1_66i2r")
 _floating_island = NodePath("FightingIsland")
+_player1_cards = Array[ExtResource("2_ovips")]([ExtResource("3_fvg5y"), ExtResource("3_ovips")])
 _character1 = NodePath("Character")
 _character2 = NodePath("Character2")
 

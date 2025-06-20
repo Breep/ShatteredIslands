@@ -55,6 +55,9 @@ var _hero_id := Hero.HeroId.UNDEF
 @export var _hero_3D: Hero3D
 @export var _collision_shape: CollisionShape3D
 @export var _interact_module: InteractModule
+@export var _action_module: ActionModule
+
+@export_group("Stats")
 @export var families_stats: FamiliesStats
 
 # ============================== Public variables ==============================
@@ -102,10 +105,31 @@ func get_auto_attack_spawn() -> Node3D:
 
 # ===== Actions
 
+func direct_attack(target: Character, damage: int, damage_type: Utils.DamageType) -> void:
+	_action_module.direct_attack(target, damage, damage_type)
+
+func direct_attack_percent(target: Character, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier) -> void:
+	_action_module.direct_attack_percent(target, damage_percent, damage_type, percent_modifier)
+
+func projectile_attack(target: Character, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
+	_action_module.projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
+
+func heal(target: Character, heal_amount: int) -> void:
+	_action_module.heal(target, heal_amount)
+
+func heal_percent(target: Character, percent: float, percent_modifier: Utils.PercentModifier) -> void:
+	_action_module.heal_percent(target, percent, percent_modifier)
+
+func inflict_condition_stacks(target: Character, stacks_number: int, stack_type: Utils.StackType) -> void:
+	_action_module.inflict_condition_stacks(target, stacks_number, stack_type)
+
 # ===== Interaction
 
 func take_damage(damage: int, damage_type: Utils.DamageType, is_critical: bool, source: Entity = null) -> void:
 	_interact_module.take_damage(damage, damage_type, is_critical, source)
+
+func take_damage_percent(percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.DamageType, is_critical: bool, source: Entity = null) -> void:
+	_interact_module.take_damage_percent(percent, percent_modifier, damage_type, is_critical, source)
 
 func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, source: Character = null) -> void:
 	_interact_module.take_condition_stacks(stacks_number, stack_type, source)

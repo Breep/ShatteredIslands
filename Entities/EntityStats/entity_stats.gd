@@ -108,6 +108,7 @@ var ignite_stacks: int:
 	get: return _ignite_stacks
 	set(value):
 		if value == _ignite_stacks: return
+		if value < 0: value = 0
 		_ignite_stacks = value
 		ignite_stacks_changed.emit(_ignite_stacks)
 

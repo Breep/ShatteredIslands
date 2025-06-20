@@ -18,6 +18,7 @@ enum PercentModifier {
 enum StackType {
 	POISON,
 	ARMOR,
+	IGNITE,
 }
 
 # ============================== Public variables ==============================

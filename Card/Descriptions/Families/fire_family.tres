@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Family" load_steps=3 format=3 uid="uid://dsbwlgjbtxhh0"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_l3j17"]
+[ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://Card/Templates/family.gd" id="2_u6eys"]
+
+[resource]
+script = ExtResource("2_u6eys")
+cards = Array[ExtResource("1_l3j17")]([])
+family_name = "Fire"
+family_type = 2
+metadata/_custom_type_script = "uid://d3wk3nm7f672j"

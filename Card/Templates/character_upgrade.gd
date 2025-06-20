@@ -6,6 +6,7 @@ const VULNERABILITY: String = "[url=vulnerability][color=#00008B][wave freq=2.0 
 const ARMOR: String = "[url=armor][color=#8B4513][wave freq=2.0 amp=5.0]Armor[/wave][/color][/url]" # Marron
 const POISON: String = "[url=poison][color=#006400][wave freq=2.0 amp=5.0]Poison[/wave][/color][/url]" # Vert foncé
 const HEAL: String = "[url=heal][color=#006400][wave freq=2.0 amp=5.0]Heal[/wave][/color][/url]" # Vert foncé (correspond à Poison)
+const IGNITE: String = "[url=ignite][color=#FF0000][wave freq=2.0 amp=5.0]Ignite[/wave][/color][/url]" # Vert foncé (correspond à Poison)
 
 # Types de dégâts
 const MAGICAL_DAMAGE: String = "[url=magical_damage][color=#1E90FF][wave freq=2.0 amp=5.0]Magical Damage[/wave][/color][/url]" # Bleu clair

@@ -63,12 +63,36 @@ func look_at_target_y_only(target_position: Vector3):
 func get_auto_attack_spawn() -> Node3D:
 	return self
 
-# ===== Actions
+# ===== Actions [VIRTUAL]
+
+func direct_attack(target: Character, damage: int, damage_type: Utils.DamageType) -> void:
+	printerr("Entity: virtual direct_attack() called [", get_path(), "]")
+
+func direct_attack_percent(target: Character, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier) -> void:
+	printerr("Entity: virtual direct_attack_percent() called [", get_path(), "]")
+
+func projectile_attack(target: Character, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
+	printerr("Entity: virtual projectile_attack() called [", get_path(), "]")
+
+func cast_spell(target: Entity, spell_type) -> void:
+	printerr("Entity: virtual cast_spell() called [", get_path(), "]")
+
+func heal(target: Character, heal_amount: int) -> void:
+	printerr("Entity: virtual heal() called [", get_path(), "]")
+
+func heal_percent(target: Character, percent: float, percent_modifier: Utils.PercentModifier) -> void:
+	printerr("Entity: virtual heal_percent() called [", get_path(), "]")
+
+func inflict_condition_stacks(target: Character, stacks_number: int, stack_type: Utils.StackType) -> void:
+	printerr("Entity: virtual inflict_condition_stacks() called [", get_path(), "]")
 
 # ===== Interaction [VIRTUAL]
 
 func take_damage(_damage: int, _damage_type: Utils.DamageType, _is_critical: bool, _source: Entity = null) -> void:
 	printerr("Entity: virtual take_damage() called [", get_path(), "]")
+
+func take_damage_percent(_percent: float, _percent_modifier: Utils.PercentModifier, _damage_type: Utils.DamageType, _is_critical: bool, _source: Entity = null) -> void:
+	printerr("Entity: virtual take_damage_percent() called [", get_path(), "]")
 
 func take_condition_stacks(_stacks_number: int, _stack_type: Utils.StackType, _source: Character = null) -> void:
 	printerr("Entity: virtual take_condition_stack() called [", get_path(), "]")

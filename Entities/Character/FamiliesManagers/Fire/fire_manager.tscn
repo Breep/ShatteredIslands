@@ -4,3 +4,11 @@
 
 [node name="FireManager" type="Node"]
 script = ExtResource("1_7a5by")
+_ignite_decay_percent = 10.0
+_ignite_percent_per_stack = 0.1
+
+[node name="IgniteTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.5
+
+[connection signal="timeout" from="IgniteTimer" to="." method="_on_ignite_timer_timeout"]
