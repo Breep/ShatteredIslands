@@ -37,7 +37,7 @@ const _fighting_phase_durations: Dictionary[FightingState, int] = {
 
 var timer: Timer
 
-var SERVER_TIME_SCALE: float = 2.0
+var SERVER_TIME_SCALE: float = 1.0
 
 # ============================== Private variables ==============================
 
@@ -116,11 +116,11 @@ func _on_timer_timeout() -> void:
 		FightingState.POSITIONING: # End of POSITIONING State
 			_sync_state.rpc(FightingState.COUNTDOWN) # Trigger COUNTDOWN STATE on client
 			if __prototyping:
-				fighting_state = FightingState.COUNTDOWN
+				fighting_state = FightingState.COUNTDOWN # Trigger COUNTDOWN STATE for prototyping map
 				return
 			else:
-				fighting_state = FightingState.FIGHTING
-				timer.wait_time = _fighting_phase_durations[FightingState.COUNTDOWN]
+				fighting_state = FightingState.FIGHTING # Trigger FIGHT directly on server
+				timer.wait_time = _fighting_phase_durations[FightingState.FIGHTING]
 			timer.start()
 		
 		FightingState.COUNTDOWN: # End of COUNTDOWN State (Client only (or prototyping))

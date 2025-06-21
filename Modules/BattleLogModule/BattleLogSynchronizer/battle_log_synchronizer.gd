@@ -50,6 +50,5 @@ func _on_events_game_state_changed(state: Game.GameState) -> void:
 
 @rpc("authority", "call_remote", "reliable")
 func _sync_battle_log(logs: Array[Dictionary]) -> void:
-	print("[", multiplayer.get_unique_id(), "] BattleLogSynchronizer: Receiving ", logs.size(), " logs | ", get_path())
 	_battle_logs += logs
 	_battle_reader.add_log(logs)

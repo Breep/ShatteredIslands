@@ -20,7 +20,7 @@ var _damage_per_stacks: int
 @onready var hit_marker_scene = preload("res://VFX/VFX_3D/Hit_marker/vfx_hit_meteor.tscn")
 
 #target, source, ignite_stacks, damage_per_stacks, radius
-func init(target: Entity, ignite_stacks: int, damage_per_stacks: float, source: Entity = null) -> void:
+func init(target: Entity, ignite_stacks: int, damage_per_stacks: int, source: Entity = null) -> void:
 	_owner = source
 	_target = target
 	_ignite_stacks = ignite_stacks
@@ -61,6 +61,12 @@ func _on_impact_effect_area_body_exited(body: Node3D) -> void:
 
 
 func _on_deploy_timer_timeout() -> void:
+	var hit_marker : Node3D = hit_marker_scene.instantiate()
+	get_tree().current_scene.add_child(hit_marker)
+	hit_marker.global_position = global_position
+	queue_free()
+	if not multiplayer.is_server(): return
+	
 	for entity in _entities_inside:
 		if entity.team != _owner.team:
 			if _owner != null:
@@ -69,8 +75,3 @@ func _on_deploy_timer_timeout() -> void:
 			else:
 				entity.take_condition_stacks(_ignite_stacks, Utils.StackType.IGNITE)
 				entity.take_damage(entity.stats.ignite_stacks * _damage_per_stacks, Utils.DamageType.MAGICAL)
-	
-	var hit_marker : Node3D = hit_marker_scene.instantiate()
-	get_tree().current_scene.add_child(hit_marker)
-	hit_marker.global_position = global_position
-	queue_free()

@@ -36,6 +36,8 @@ func clear() -> void:
 			entity.dead.disconnect(_on_entity_dead)
 		if entity.damage_taken.is_connected(_on_entity_damage_taken):
 			entity.damage_taken.disconnect(_on_entity_damage_taken)
+		if entity.spell_casted.is_connected(_on_entity_spell_casted):
+			entity.spell_casted.disconnect(_on_entity_spell_casted)
 	_entities.clear()
 	_characters.clear()
 
@@ -49,11 +51,12 @@ func _register_entity(who: Entity) -> void:
 	entity_spawned.emit(who)
 	who.dead.connect(_on_entity_dead, CONNECT_ONE_SHOT)
 	who.damage_taken.connect(_on_entity_damage_taken)
+	who.spell_casted.connect(_on_entity_spell_casted)
 
 # ============================== Callbacks ==============================
 
-# Attached to a custom user signals added my this module to the parent
-func _on_parent_entity_is_spawned(who: Entity) -> void:
+# Attached to a custom user signals added by this module to the parent
+func _on_parent_entity_is_spawned(who: Entity) -> void: # TODO ça peut être simplifié en mettant une Area3D sur l'entity manager qui scan la zone de combat
 	if _entities.has(who.id):
 		printerr("EntityManager: ", who, "-", who.name, " is spawned more than once")
 		return
@@ -75,7 +78,8 @@ func _on_entity_damage_taken(entity_ref: Entity, damage: int, damage_type: Utils
 	_fighting_area.signal_damage_taken(entity_ref, damage, damage_type, is_critical)
 
 
-
+func _on_entity_spell_casted(entity_ref: Entity, target: Entity, spell_type: Spell.Type) -> void:
+	_fighting_area.signal_spell_casted(entity_ref, target, spell_type)
 
 
 

@@ -3,7 +3,8 @@ extends Resource
 
 enum Type {
 	AUTO_ATTACK,
-	DAMAGE_TAKEN
+	DAMAGE_TAKEN,
+	SPELL_CASTED
 }
 
 enum Modifier {
@@ -20,7 +21,8 @@ enum Main {
 	TARGET,
 	MODIFIER,
 	DAMAGE,
-	DAMAGE_TYPE
+	DAMAGE_TYPE,
+	SPELL_TYPE
 }
 
 const TIME: String = "time"

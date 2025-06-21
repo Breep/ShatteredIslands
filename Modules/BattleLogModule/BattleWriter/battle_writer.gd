@@ -21,6 +21,7 @@ func _ready() -> void:
 	GlobalFightingManager.state_changed.connect(_on_global_fighting_manager_state_changed)
 	_fighting_area.projectile_spawned.connect(_on_fighting_area_projectile_spawned)
 	_fighting_area.damage_taken.connect(_on_fighting_area_damage_taken)
+	_fighting_area.spell_casted.connect(_on_fighting_area_spell_casted)
 
 # ============================== Public functions ==============================
 
@@ -64,6 +65,17 @@ func _log_damage_taken(source: Entity, damage: int, damage_type: Utils.DamageTyp
 	_battle_logs.append(data)
 
 
+func _log_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type) -> void:
+	var data: Dictionary = {
+		BattleLog.Main.TIME: _get_time(),
+		BattleLog.Main.TYPE: BattleLog.Type.SPELL_CASTED,
+		BattleLog.Main.SOURCE: source.id,
+		BattleLog.Main.TARGET: target.id,
+		BattleLog.Main.SPELL_TYPE: spell_type,
+	}
+	_battle_logs.append(data)
+
+
 func _get_time() -> float:
 	return ((Time.get_ticks_msec() as float) / 1000.0 - _start_time) * GlobalFightingManager.SERVER_TIME_SCALE
 
@@ -90,3 +102,7 @@ func _on_fighting_area_projectile_spawned(source: Entity, target: Entity, projec
 
 func _on_fighting_area_damage_taken(source: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
 	_log_damage_taken(source, damage, damage_type, is_critical)
+
+
+func _on_fighting_area_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type) -> void:
+	_log_spell_casted(source, target, spell_type)

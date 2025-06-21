@@ -11,6 +11,10 @@ signal damage_taken(entity_ref: Entity, damage: int, damage_type: Utils.DamageTy
 func signal_damage_taken(damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
 	damage_taken.emit(self, damage, damage_type, is_critical)
 
+signal spell_casted(source: Entity, target: Entity, spell_type: Spell.Type)
+func signal_spell_casted(target: Entity, spell_type: Spell.Type) -> void:
+	spell_casted.emit(self, target, spell_type)
+
 # ============================== Export (Network) ==============================
 
 @export_group("Network")
@@ -40,15 +44,12 @@ static var instance_count: int = 0
 # ============================== Node base functions ==============================
 
 func _entity_init() -> void:
-	#print("Character: _init() [", get_path(), "] [", instance_count, "]")
 	id = instance_count
 	instance_count += 1
 
 
 func _enter_tree() -> void:
-	#print("Character: _enter_tree() [", get_path(), "] [", battle_id, "]")
 	if is_node_ready() and battle_id != -1:
-		#print("Character:      _enter_tree() signal")
 		_recursive_propagate_signal(get_parent(), Entity.SIGNAL_NAME_SPAWNED)
 
 # ============================== Public functions ==============================
@@ -65,25 +66,25 @@ func get_auto_attack_spawn() -> Node3D:
 
 # ===== Actions [VIRTUAL]
 
-func direct_attack(target: Character, damage: int, damage_type: Utils.DamageType) -> void:
+func direct_attack(_target: Character, _damage: int, _damage_type: Utils.DamageType) -> void:
 	printerr("Entity: virtual direct_attack() called [", get_path(), "]")
 
-func direct_attack_percent(target: Character, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier) -> void:
+func direct_attack_percent(_target: Character, _damage_percent: float, _damage_type: Utils.DamageType, _percent_modifier: Utils.PercentModifier) -> void:
 	printerr("Entity: virtual direct_attack_percent() called [", get_path(), "]")
 
-func projectile_attack(target: Character, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
+func projectile_attack(_target: Character, _projectile_type: Projectile.ProjectileType, _projectile_spawn: Node3D, _projectile_stats: ProjectileStats) -> void:
 	printerr("Entity: virtual projectile_attack() called [", get_path(), "]")
 
-func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary) -> void:
+func cast_spell(_target: Entity, _spell_type: Spell.Type, _spell_modifier: Dictionary) -> void:
 	printerr("Entity: virtual cast_spell() called [", get_path(), "]")
 
-func heal(target: Character, heal_amount: int) -> void:
+func heal(_target: Character, _heal_amount: int) -> void:
 	printerr("Entity: virtual heal() called [", get_path(), "]")
 
-func heal_percent(target: Character, percent: float, percent_modifier: Utils.PercentModifier) -> void:
+func heal_percent(_target: Character, _percent: float, _percent_modifier: Utils.PercentModifier) -> void:
 	printerr("Entity: virtual heal_percent() called [", get_path(), "]")
 
-func inflict_condition_stacks(target: Character, stacks_number: int, stack_type: Utils.StackType) -> void:
+func inflict_condition_stacks(_target: Character, _stacks_number: int, _stack_type: Utils.StackType) -> void:
 	printerr("Entity: virtual inflict_condition_stacks() called [", get_path(), "]")
 
 # ===== Interaction [VIRTUAL]

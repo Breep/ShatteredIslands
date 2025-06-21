@@ -25,7 +25,7 @@ script = ExtResource("1_66i2r")
 _floating_island = NodePath("FightingIsland")
 _player1_cards = Array[ExtResource("2_ovips")]([ExtResource("3_fvg5y"), ExtResource("3_ovips"), ExtResource("5_4fa74")])
 _player2_cards = Array[ExtResource("2_ovips")]([ExtResource("5_11vyl")])
-_character1 = NodePath("Character")
+_character1 = NodePath("Character1")
 _character2 = NodePath("Character2")
 
 [node name="FightingIsland" parent="." instance=ExtResource("7_yjquk")]
@@ -38,7 +38,7 @@ environment = SubResource("Environment_k73x5")
 transform = Transform3D(0.88089, 0.0799744, 0.466517, -0.360914, 0.751164, 0.552716, -0.306227, -0.655254, 0.690556, 0, 52.8971, 0)
 shadow_enabled = true
 
-[node name="Character" parent="." instance=ExtResource("9_4fa74")]
+[node name="Character1" parent="." instance=ExtResource("9_4fa74")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.34606, 0, 2.12149)
 hero_id = 1
 id = 1

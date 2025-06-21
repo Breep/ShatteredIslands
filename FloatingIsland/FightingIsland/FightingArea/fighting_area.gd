@@ -11,6 +11,11 @@ signal damage_taken(source: Entity, damage: int, damage_type: Utils.DamageType, 
 func signal_damage_taken(source: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
 	damage_taken.emit(source, damage, damage_type, is_critical)
 
+signal spell_casted(source: Entity, target: Entity, spell_type: Spell.Type)
+func signal_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type) -> void:
+	spell_casted.emit(source, target, spell_type)
+
+
 # ============================== Network Export variables ==============================
 
 @export var _current_battle_id: int = -1

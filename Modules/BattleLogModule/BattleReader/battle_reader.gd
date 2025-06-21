@@ -65,6 +65,8 @@ func _apply_log(battle_log: Dictionary) -> void:
 			_apply_auto_attack(battle_log)
 		BattleLog.Type.DAMAGE_TAKEN:
 			_apply_damage_taken(battle_log)
+		BattleLog.Type.SPELL_CASTED:
+			_apply_spell_casted(battle_log)
 
 # ============================== Logs applied ==============================
 
@@ -92,7 +94,7 @@ func _apply_damage_taken(battle_log: Dictionary) -> void:
 	var damage: int = battle_log [BattleLog.Main.DAMAGE]
 	var damage_type: Utils.DamageType = battle_log[BattleLog.Main.DAMAGE_TYPE]
 	var modifier: Dictionary = battle_log[BattleLog.Main.MODIFIER]
-	print("[", multiplayer.get_unique_id(), "] BattleReader: Damage taken: ", source_id, ":", damage)
+	#print("[", multiplayer.get_unique_id(), "] BattleReader: Damage taken: ", source_id, ":", damage)
 	if not _entity_manager.entities.has(source_id):
 		printerr("[", multiplayer.get_unique_id(), "] BattleReader: Damage taken: Unknown source !")
 		return
@@ -100,6 +102,19 @@ func _apply_damage_taken(battle_log: Dictionary) -> void:
 	source.take_damage(damage, damage_type, modifier[BattleLog.Modifier.CRITICAL])
 
 
+func _apply_spell_casted(battle_log: Dictionary) -> void:
+	var source_id: int = battle_log[BattleLog.Main.SOURCE]
+	var target_id: int = battle_log[BattleLog.Main.TARGET]
+	var spell_type: Spell.Type = battle_log[BattleLog.Main.SPELL_TYPE]
+	if not _entity_manager.entities.has(source_id):
+		printerr("[", multiplayer.get_unique_id(), "] BattleReader: Spell casted: Unknown source !")
+		return
+	if not _entity_manager.entities.has(target_id):
+		printerr("[", multiplayer.get_unique_id(), "] BattleReader: Spell casted: Unknown target !")
+		return
+	var source: Entity = _entity_manager.entities[source_id]
+	var target: Entity = _entity_manager.entities[target_id]
+	source.cast_spell(target, spell_type, {})
 
 
 
