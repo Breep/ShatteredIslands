@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_2346c"]
 script = ExtResource("1_m55fq")
-_armor_stacks = Array[int]([5, 10, 15, 20, 35])
+_armor_stacks = Array[int]([5, 10, 15, 20, 40])
 _period = 1.0
 metadata/_custom_type_script = "uid://deiehs802w30h"
 
@@ -17,5 +17,5 @@ picture = ExtResource("1_2346c")
 family = 1
 rarity = 0
 player_upgrade = SubResource("Resource_2346c")
-lvl = 1
+lvl = 5
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

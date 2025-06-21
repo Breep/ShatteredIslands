@@ -114,6 +114,9 @@ func direct_attack_percent(target: Character, damage_percent: float, damage_type
 func projectile_attack(target: Character, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	_action_module.projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
 
+func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary) -> void:
+	_action_module.cast_spell(target, spell_type, spell_modifier)
+
 func heal(target: Character, heal_amount: int) -> void:
 	_action_module.heal(target, heal_amount)
 
@@ -125,10 +128,10 @@ func inflict_condition_stacks(target: Character, stacks_number: int, stack_type:
 
 # ===== Interaction
 
-func take_damage(damage: int, damage_type: Utils.DamageType, is_critical: bool, source: Entity = null) -> void:
+func take_damage(damage: int, damage_type: Utils.DamageType, is_critical: bool = false, source: Entity = null) -> void:
 	_interact_module.take_damage(damage, damage_type, is_critical, source)
 
-func take_damage_percent(percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.DamageType, is_critical: bool, source: Entity = null) -> void:
+func take_damage_percent(percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.DamageType, is_critical: bool = false, source: Entity = null) -> void:
 	_interact_module.take_damage_percent(percent, percent_modifier, damage_type, is_critical, source)
 
 func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, source: Character = null) -> void:

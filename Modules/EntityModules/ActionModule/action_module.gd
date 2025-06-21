@@ -9,6 +9,8 @@ extends Module
 
 var _spawn_manager: SpawnManager
 
+const METEOR_SCENE: PackedScene = preload("res://SpellsAndProjectiles/Spells/Meteor/meteor.tscn")
+
 # ============================== Public functions ==============================
 
 func connect_to_spawn_manager(spawn_manager: SpawnManager) -> void:
@@ -122,3 +124,37 @@ func heal_percent(target: Character, percent: float, percent_modifier: Utils.Per
 func inflict_condition_stacks(target: Character, stacks_number: int, stack_type: Utils.StackType) -> void:
 	if not multiplayer.is_server(): return
 	target.take_condition_stacks(stacks_number, stack_type, _owner)
+
+# ============================== Condition stacks ==============================
+
+func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary) -> void:
+	match spell_type:
+		Spell.Type.METEOR:
+			_cast_meteor(target, spell_modifier)
+
+
+func _cast_meteor(target: Entity, spell_modifier: Dictionary) -> void:
+	var meteor: Meteor = METEOR_SCENE.instantiate()
+	var ignite_stacks: int = spell_modifier[Spell.MeteorModifier.IGNITE_STACKS]
+	var damage_per_stack: int = spell_modifier[Spell.MeteorModifier.DAMAGE_PER_STACK]
+	meteor.init(target, ignite_stacks, damage_per_stack, _owner)
+	_spawn_manager.spawn_spell(meteor)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

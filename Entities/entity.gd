@@ -74,7 +74,7 @@ func direct_attack_percent(target: Character, damage_percent: float, damage_type
 func projectile_attack(target: Character, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	printerr("Entity: virtual projectile_attack() called [", get_path(), "]")
 
-func cast_spell(target: Entity, spell_type) -> void:
+func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary) -> void:
 	printerr("Entity: virtual cast_spell() called [", get_path(), "]")
 
 func heal(target: Character, heal_amount: int) -> void:
@@ -88,10 +88,10 @@ func inflict_condition_stacks(target: Character, stacks_number: int, stack_type:
 
 # ===== Interaction [VIRTUAL]
 
-func take_damage(_damage: int, _damage_type: Utils.DamageType, _is_critical: bool, _source: Entity = null) -> void:
+func take_damage(_damage: int, _damage_type: Utils.DamageType, _is_critical: bool = false, _source: Entity = null) -> void:
 	printerr("Entity: virtual take_damage() called [", get_path(), "]")
 
-func take_damage_percent(_percent: float, _percent_modifier: Utils.PercentModifier, _damage_type: Utils.DamageType, _is_critical: bool, _source: Entity = null) -> void:
+func take_damage_percent(_percent: float, _percent_modifier: Utils.PercentModifier, _damage_type: Utils.DamageType, _is_critical: bool = false, _source: Entity = null) -> void:
 	printerr("Entity: virtual take_damage_percent() called [", get_path(), "]")
 
 func take_condition_stacks(_stacks_number: int, _stack_type: Utils.StackType, _source: Character = null) -> void:

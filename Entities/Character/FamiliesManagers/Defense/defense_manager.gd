@@ -84,7 +84,7 @@ func _gain_armor(armor_stacks: int) -> void:
 		if health_ratio >= _defense_stats.dual_shield_health_threshold:
 			armor_stacks *= 2
 	
-	_defense_stats.armor_stacks += armor_stacks
+	_owner.stats.armor_stacks += armor_stacks
 
 
 func _rainbow_boots_effect(armor_lost: int) -> void:

@@ -51,6 +51,9 @@ func get_increased_damage(damage: float, damage_type: Utils.DamageType) -> float
 func _create_optional_timers() -> void:
 	if _fire_stats.periodic_ignite_activated:
 		_optional_timers.append(Utils.create_perpetual_timer(self, _fire_stats.periodic_ignite_period, _on_periodic_ignite_timer_timeout, true))
+	
+	if _fire_stats.meteor_activated:
+		_optional_timers.append(Utils.create_perpetual_timer(self, _fire_stats.meteor_period, _on_meteor_timer_timeout, true))
 
 
 func _lanch_optional_spells() -> void:
@@ -78,6 +81,14 @@ func _on_ignite_timer_timeout() -> void:
 	_owner.stats.ignite_stacks -= decay
 
 
+func _on_meteor_timer_timeout() -> void:
+	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
+	if target != null:
+		var spell_modifier: Dictionary = {
+			Spell.MeteorModifier.IGNITE_STACKS: _fire_stats.meteor_ignite_stacks,
+			Spell.MeteorModifier.DAMAGE_PER_STACK: _fire_stats.meteor_damage_per_stack
+		}
+		_owner.cast_spell(target, Spell.Type.METEOR, spell_modifier)
 
 
 

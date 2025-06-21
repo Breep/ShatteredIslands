@@ -47,9 +47,10 @@ _fighting_area = NodePath("..")
 _entity_manager = NodePath("../EntityManager")
 _spawn_manager = NodePath("../SpawnManager")
 
-[node name="SpawnManager" parent="." node_paths=PackedStringArray("_fighting_area", "_projectiles_node") instance=ExtResource("5_xgsbs")]
+[node name="SpawnManager" parent="." node_paths=PackedStringArray("_fighting_area", "_projectiles_node", "_spells_node") instance=ExtResource("5_xgsbs")]
 _fighting_area = NodePath("..")
 _projectiles_node = NodePath("../Projectiles")
+_spells_node = NodePath("../Spells")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -77,6 +78,8 @@ visible = false
 [node name="Characters" type="Node3D" parent="."]
 
 [node name="Projectiles" type="Node3D" parent="."]
+
+[node name="Spells" type="Node3D" parent="."]
 
 [node name="Walls" type="Node3D" parent="."]
 

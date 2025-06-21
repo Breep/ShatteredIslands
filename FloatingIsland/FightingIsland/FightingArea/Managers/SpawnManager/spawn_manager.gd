@@ -13,6 +13,7 @@ var battle_id: int = -1 # Set by the parent
 
 #@export var _entities_node: Node3D
 @export var _projectiles_node: Node3D
+@export var _spells_node: Node3D
 
 # ============================== Private variables ==============================
 
@@ -40,6 +41,10 @@ func spawn_projectile(source: Character, target: Character, projectile_type: Pro
 	_fighting_area.signal_projectile_spawned(source, target, projectile_type, modifiers)
 	_projectile_counter += 1
 	_projectiles_node.add_child(projectile)
+
+
+func spawn_spell(spell: Node3D) -> void:
+	_spells_node.add_child(spell)
 
 # ============================== Private functions ==============================
 
