@@ -59,7 +59,7 @@ func _add_or_improve_card(new_card_ref: Card) -> void:
 	
 	print("ADDING NEW CARD ", new_card_ref.name)
 	var new_card = new_card_ref.duplicate()
-	new_card.lvl = 1
+	new_card.lvl = new_card_ref.lvl
 	_card_pile.append(new_card)
 
 

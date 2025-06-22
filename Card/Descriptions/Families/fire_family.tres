@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Family" load_steps=6 format=3 uid="uid://dsbwlgjbtxhh0"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_l3j17"]
+[ext_resource type="Resource" uid="uid://cdr51p56pftqi" path="res://Card/Descriptions/Cards/Fire/Meteor/fire_meteor.tres" id="2_qr6wv"]
+[ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://Card/Templates/family.gd" id="2_u6eys"]
+[ext_resource type="Resource" uid="uid://b3ohguwihk7x3" path="res://Card/Descriptions/Cards/Fire/PeriodicIgnite/fire_periodic_ignite.tres" id="3_5ul4r"]
+[ext_resource type="Texture2D" uid="uid://cia42t0jcdkfg" path="res://Data/Assets/Card/ICONS/HP color.png" id="4_6jhbs"]
+
+[resource]
+script = ExtResource("2_u6eys")
+cards = Array[ExtResource("1_l3j17")]([ExtResource("2_qr6wv"), ExtResource("3_5ul4r")])
+icon = ExtResource("4_6jhbs")
+family_name = "Fire"
+family_type = 2
+metadata/_custom_type_script = "uid://d3wk3nm7f672j"

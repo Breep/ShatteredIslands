@@ -42,6 +42,7 @@ input_3/reset = true
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_pvus8"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_cd1gv"]
+graph_offset = Vector2(-458.719, 136.504)
 nodes/AnimDance/node = SubResource("AnimationNodeAnimation_1t8nd")
 nodes/AnimDance/position = Vector2(-560, 180)
 nodes/AnimDie/node = SubResource("AnimationNodeAnimation_40mtd")
@@ -65,6 +66,7 @@ node_connections = [&"Transition", 0, &"idle_speed", &"Transition", 1, &"dance_s
 height = 2.2
 
 [node name="Rocky" type="StaticBody3D" node_paths=PackedStringArray("collision_shape", "_hero_animator") groups=["CHARACTER"]]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_e8asp")
@@ -73,7 +75,7 @@ collision_shape = NodePath("CollisionShape3D")
 _hero_animator = NodePath("HeroAnimator")
 
 [node name="RockyModel" parent="." instance=ExtResource("2_1t8nd")]
-transform = Transform3D(-1.505, 0, -2.27249e-07, 0, 1.505, 0, 2.27249e-07, 0, -1.505, 0, 0, 0)
+transform = Transform3D(1.67, 0, 0, 0, 1.67, 0, 0, 0, 1.67, 0, 0, 0)
 
 [node name="GeneralSkeleton" parent="RockyModel/Armature" index="0"]
 bones/0/position = Vector3(1.91985e-10, 0.570145, 0.0298995)

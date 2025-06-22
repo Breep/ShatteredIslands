@@ -6,6 +6,7 @@ extends Node3D
 
 # ============================== Local nodes ==============================
 
+@export_group("Local nodes")
 @export var _table_layouts: Array[TableLayout]
 
 # ============================== Node base functions ==============================

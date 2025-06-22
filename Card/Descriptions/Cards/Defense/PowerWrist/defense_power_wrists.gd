@@ -1,10 +1,10 @@
 class_name DefensePowerWrists
-extends PlayerUpgrade
+extends CharacterUpgrade
 
 @export var _armor_stacks: int # Armor stacks needed to increase damage by power_wrist_damage_increase_percent
 @export var _damage_increase_percent: Array[int] # % of damage increase for each power_wrist_armor_stacks
 
-func apply(stats: CharacterStats, cardlvl: int) -> void: # override
+func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > 3:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return

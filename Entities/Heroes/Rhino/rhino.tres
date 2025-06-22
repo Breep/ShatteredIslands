@@ -2,19 +2,18 @@
 
 [ext_resource type="Texture2D" uid="uid://cwtpqq3k0gvfv" path="res://Data/Heroes/Portraits/Rhino.png" id="1_b582t"]
 [ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://Entities/Heroes/hero.gd" id="1_bk1f2"]
-[ext_resource type="Script" uid="uid://c76rxvnlcwltf" path="res://Entities/Character/CharacterStats/character_stats.gd" id="3_10mhe"]
+[ext_resource type="Script" uid="uid://2py6kv5aqgem" path="res://Entities/Heroes/hero_stats.gd" id="3_c8plt"]
 
-[sub_resource type="Resource" id="Resource_1emsa"]
-script = ExtResource("3_10mhe")
+[sub_resource type="Resource" id="Resource_mlmuf"]
+script = ExtResource("3_c8plt")
 health_max = 1000
 mana_max = 100
-mana_regen = 1.0
-attack_damage = 250
-attack_speed = 0.4
-attack_move_speed = 1.0
+mana_regen = 2.0
+attack_damage = 20
+attack_speed = 0.5
 physical_critical_chance = 15.0
 physical_critical_multiplier = 2.0
-metadata/_custom_type_script = "uid://c76rxvnlcwltf"
+metadata/_custom_type_script = "uid://2py6kv5aqgem"
 
 [resource]
 script = ExtResource("1_bk1f2")
@@ -22,6 +21,6 @@ name = "Rhino"
 id = 8
 portrait = ExtResource("1_b582t")
 description = "Rhino"
-stats = SubResource("Resource_1emsa")
+stats = SubResource("Resource_mlmuf")
 aa_projectile_type = 0
 metadata/_custom_type_script = "uid://dtcjta70luxvr"

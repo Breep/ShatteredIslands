@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cfmaiom8xymvq" path="res://VFX/VFX_3D/Trail/3d_meteor_visual.tscn" id="2_bmmic"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_y4y4j"]
-height = 0.1
+height = 1.0
 radius = 3.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o085g"]
@@ -138,6 +138,8 @@ _data = {
 
 [node name="Meteor" type="Node3D"]
 script = ExtResource("1_kjd23")
+_deploy_time = 2.0
+_radius = 3.0
 
 [node name="Visual" type="Node3D" parent="."]
 
@@ -146,6 +148,9 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 
 [node name="ImpactEffectArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 16
+monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ImpactEffectArea"]
 unique_name_in_owner = true
@@ -170,7 +175,7 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 root_node = NodePath("../ImpactEffectArea/ImpactEffectAreaVisual")
 libraries = {
-"": SubResource("AnimationLibrary_fgblb")
+&"": SubResource("AnimationLibrary_fgblb")
 }
 autoplay = "Area"
 

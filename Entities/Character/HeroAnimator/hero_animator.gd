@@ -34,11 +34,11 @@ func _on_global_fighting_manager_state_changed(new_state: GlobalFightingManager.
 			_animation_tree.set("parameters/Transition/transition_request", "Idle")
 		GlobalFightingManager.FightingState.COUNTDOWN:
 			_is_fighting = true
-		GlobalFightingManager.FightingState.FIGHT:
+		GlobalFightingManager.FightingState.FIGHTING:
 			return
-		GlobalFightingManager.FightingState.FIGHT_ACCELERATED:
+		GlobalFightingManager.FightingState.FIGHTING_ACCELERATED:
 			return
-		GlobalFightingManager.FightingState.FINISHED:
+		GlobalFightingManager.FightingState.CELEBRATING:
 			_is_fighting = false
 
 

@@ -21,12 +21,12 @@ transparency = 1
 shading_mode = 0
 albedo_texture = SubResource("ViewportTexture_2bgvd")
 
-[node name="CharacterVisual" type="Node3D" node_paths=PackedStringArray("physical_popup_spawn", "magic_popup_spawn", "poison_popup_spawn", "heal_popup_spawn", "_health_bar", "_mana_bar", "_name_displayed")]
+[node name="CharacterVisual" type="Node3D" node_paths=PackedStringArray("_physical_popup_spawn", "_magic_popup_spawn", "_poison_popup_spawn", "_heal_popup_spawn", "_health_bar", "_mana_bar", "_name_displayed")]
 script = ExtResource("1_8fkrf")
-physical_popup_spawn = NodePath("PopUpSpawns/PhysicalDamageCenter")
-magic_popup_spawn = NodePath("PopUpSpawns/MagicDamageCenter")
-poison_popup_spawn = NodePath("PopUpSpawns/PoisonDamageCenter")
-heal_popup_spawn = NodePath("PopUpSpawns/HealCenter")
+_physical_popup_spawn = NodePath("PopUpSpawns/PhysicalDamageCenter/SpawnPoint")
+_magic_popup_spawn = NodePath("PopUpSpawns/PoisonDamageCenter/SpawnPoint2")
+_poison_popup_spawn = NodePath("PopUpSpawns/MagicDamageCenter/SpawnPoint3")
+_heal_popup_spawn = NodePath("PopUpSpawns/HealCenter/SpawnPoint4")
 _health_bar = NodePath("TopUI/SubViewport/Control/Panel/VBoxContainer/HealthBar")
 _mana_bar = NodePath("TopUI/SubViewport/Control/Panel/VBoxContainer/ManaBar")
 _name_displayed = NodePath("TopUI/SubViewport/Control/Panel/VBoxContainer/NameDisplayed")

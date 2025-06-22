@@ -1,10 +1,10 @@
 class_name DefenseHedgehogArmor
-extends PlayerUpgrade
+extends CharacterUpgrade
 
 @export var _period: float # Time between two ticks
 @export var _lost_armor_percentages: Array[int] # Percent of armor lost dealed as damage
 
-func apply(stats: CharacterStats, cardlvl: int) -> void: # override
+func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > 3:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return

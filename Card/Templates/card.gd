@@ -11,6 +11,5 @@ enum Rarity {
 @export var picture : Texture2D
 @export var family: Family.FamilyType
 @export var rarity : Rarity
-@export var player_upgrade: PlayerUpgrade
-
-var lvl : int
+@export var player_upgrade: CharacterUpgrade
+@export var lvl : int = 1

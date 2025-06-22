@@ -46,4 +46,4 @@ func _on_body_exited(body: Node3D) -> void:
 func _on_effect_timer_timeout() -> void:
 	for character in _characters_inside:
 		if character.team != _source.team:
-			character.take_condition_stacks(_stacks, Utils.StackType.POISON, _source, 5)
+			character.take_condition_stacks(_stacks, Utils.StackType.POISON, _source)

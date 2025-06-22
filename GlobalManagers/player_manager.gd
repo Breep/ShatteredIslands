@@ -56,6 +56,15 @@ func get_alive_players() -> Dictionary[int, Player]:
 	return alive_players
 
 
+# Get all non bot players
+func get_human_players() -> Dictionary[int, Player]:
+	var human_players: Dictionary[int, Player]
+	for player in players.values():
+		if player.id > 0:
+			human_players[player.id] = player
+	return human_players
+
+
 func join_game(peer_id: int, player_name: String) -> Dictionary:
 	if multiplayer.is_server():
 		printerr("PlayerManager: Server can't be a player")
@@ -84,6 +93,8 @@ func add_bot() -> void:
 	var bot_id = bot_infos.keys().pick_random()
 	_add_player(BOT_INFOS[bot_id], bot_id, true, {})
 
+
+# ============================== RPC - SYNC POINT ==============================
 
 signal __all_players_syncronized()
 var __all_players_synchronized_for_sync_id: Dictionary[int, bool] # Key=SyncID, Value=<True if all players are synchronized>

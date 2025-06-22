@@ -1,5 +1,3 @@
-@tool
-
 class_name Character
 extends Entity
 
@@ -45,7 +43,7 @@ var _hero_id := Hero.HeroId.UNDEF
 	set(value):
 		if value == _hero_id or value < 0: return
 		_hero_id = value
-		_update_hero()
+		if Engine.is_editor_hint(): _update_hero()
 
 @export_subgroup("Synchronizer")
 @export var _movement_synchronizer: MultiplayerSynchronizer
@@ -56,12 +54,15 @@ var _hero_id := Hero.HeroId.UNDEF
 @export var _turret: Turret
 @export var _hero_3D: Hero3D
 @export var _collision_shape: CollisionShape3D
+@export var _interact_module: InteractModule
+@export var _action_module: ActionModule
+
+@export_group("Stats")
+@export var families_stats: FamiliesStats
 
 # ============================== Public variables ==============================
 
 var player: Player
-var stats: CharacterStats
-
 var target_module: TargetModule
 
 # ============================== Private variables ==============================
@@ -75,9 +76,9 @@ var _fighting_state: GlobalFightingManager.FightingState = GlobalFightingManager
 
 func apply_cards_upgrade(deck: PlayerDeck) -> void:
 	if not is_node_ready(): return
-	stats.reset_stats(_hero_3D.hero.stats)
+	stats.reset_from_hero(_hero_3D.hero)
 	for card in deck.card_pile:
-		card.player_upgrade.apply(stats, card.lvl)
+		card.player_upgrade.apply(families_stats, card.lvl)
 
 
 func connect_to_fighting_area(fighting_area: FightingArea) -> void:
@@ -90,25 +91,64 @@ func set_lookat_camera(camera: Camera3D) -> void:
 	_character_visual.set_camera(camera)
 
 
-func on_active_island() -> void:
+func on_active_island() -> void: # TODO Should be a signal no ?
 	_character_visual.show()
 
 
 func on_inactive_island() -> void:
 	_character_visual.hide()
 
+
+func get_auto_attack_spawn() -> Node3D:
+	return _turret.get_projectile_spawn_point()
+
+
+# ===== Actions
+
+func direct_attack(target: Character, damage: int, damage_type: Utils.DamageType) -> void:
+	_action_module.direct_attack(target, damage, damage_type)
+
+func direct_attack_percent(target: Character, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier) -> void:
+	_action_module.direct_attack_percent(target, damage_percent, damage_type, percent_modifier)
+
+func projectile_attack(target: Character, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
+	_action_module.projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
+
+func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary) -> void:
+	_action_module.cast_spell(target, spell_type, spell_modifier)
+
+func heal(target: Character, heal_amount: int) -> void:
+	_action_module.heal(target, heal_amount)
+
+func heal_percent(target: Character, percent: float, percent_modifier: Utils.PercentModifier) -> void:
+	_action_module.heal_percent(target, percent, percent_modifier)
+
+func inflict_condition_stacks(target: Character, stacks_number: int, stack_type: Utils.StackType) -> void:
+	_action_module.inflict_condition_stacks(target, stacks_number, stack_type)
+
+# ===== Interaction
+
+func take_damage(damage: int, damage_type: Utils.DamageType, is_critical: bool = false, source: Entity = null) -> void:
+	_interact_module.take_damage(damage, damage_type, is_critical, source)
+
+func take_damage_percent(percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.DamageType, is_critical: bool = false, source: Entity = null) -> void:
+	_interact_module.take_damage_percent(percent, percent_modifier, damage_type, is_critical, source)
+
+func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, source: Character = null) -> void:
+	_interact_module.take_condition_stacks(stacks_number, stack_type, source)
+
+func take_heal(heal_amount: int, source: Character = null) -> void:
+	_interact_module.take_heal(heal_amount, source)
+
 # ============================== Node base functions ==============================
 
 func _init() -> void:
 	if Engine.is_editor_hint(): return
-	stats = CharacterStats.new()
-	stats.health_changed.connect(_on_stats_health_changed)
 	_entity_init()
 
 
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
-	stats.reset_stats(_hero_3D.hero.stats)
 	target_module = _character_logic.target_module
 	
 	if owner_player_id != 0:
@@ -129,16 +169,19 @@ func _ready() -> void:
 	Events.player_won_a_fight.connect(_on_events_player_won_a_fight)
 	
 	_update_hero()
+	if player != null: apply_cards_upgrade(player.deck)
 	
+	stats.health_changed.connect(_on_stats_health_changed)
 
 # ============================== Private functions ==============================
 
 func _reset() -> void:
-	stats.reset_stats(_hero_3D.hero.stats)
+	stats.reset_from_hero(_hero_3D.hero)
 
 
 func _update_hero() -> void:
-	if hero_id == Hero.HeroId.UNDEF: return
+	if not Engine.is_editor_hint() and not is_inside_tree(): return
+	if not Engine.is_editor_hint() and not is_node_ready(): return
 	if _hero_3D != null: _hero_3D.queue_free()
 	_hero_3D = _HEROES_3D[hero_id].instantiate()
 	print("Character change hero to: ", _hero_3D.hero.name)
@@ -146,7 +189,6 @@ func _update_hero() -> void:
 	_collision_shape.shape = _hero_3D.collision_shape.shape.duplicate() # Update Collider
 	var hero_height: float = (_collision_shape.shape as CapsuleShape3D).height
 	_character_visual.position.y = hero_height + 1
-	
 	add_child(_hero_3D)
 
 # ============================== Private ==============================
@@ -162,12 +204,6 @@ func _on_life_manager_revived(life_after_revived: int) -> void:
 	_character_visual.update_health_bar(stats.health, stats.health_max)
 	_is_dead = false
 	Events.character_is_spawned.emit(self)
-
-
-func _on_shadow_manager_gain_max_hp_triggered(hp: int) -> void:
-	stats.health_max += hp
-	stats.health += hp
-	_character_visual.update_health_bar(stats.health, stats.health_max)
 
 # ============================== Module callbacks ==============================
 
@@ -217,7 +253,7 @@ func _on_stats_health_changed(new_health: int) -> void:
 	if _character_visual != null: _character_visual.update_health_bar(new_health, stats.health_max)
 	if new_health <= 0:
 		print("DEBUG | ", name, " | DEAD")
-		dead.emit(self)
+		signal_death()
 
 
 func _on_events_player_won_a_fight(winner: Player) -> void:

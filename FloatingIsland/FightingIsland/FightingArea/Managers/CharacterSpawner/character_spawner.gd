@@ -36,6 +36,7 @@ func _spawn_character(character: Character, available_spawn_locations: Array[Spa
 		if spawn_point.team == character.team:
 			character.reparent(node_to_spawn_into)
 			character.global_position = spawn_point.global_position
+			character.global_rotation = spawn_point.global_rotation
 			available_spawn_locations.erase(spawn_point)
 			return true
 	

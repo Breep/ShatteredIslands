@@ -3,7 +3,7 @@ extends Node3D
 
 # ============================== Local nodes ==============================
 
-@onready var entities_node: Node3D = %Entities
+@onready var _entities_node: Node3D = %Entities
 
 # ============================== Export (Local) ==============================
 
@@ -33,7 +33,7 @@ func connect_to_players(players: Array[Player]) -> void:
 	if players.size() > _hero_spawns.size():
 		printerr("Table: There are too many players for this table !")
 		return
-		
+	
 	var avaible_spawns: Array[SpawnPoint] = _hero_spawns.duplicate()
 	for player in players:
 		_spawn_player_character(player, avaible_spawns)
@@ -44,7 +44,7 @@ func _spawn_player_character(player: Player, avaible_spawns: Array[SpawnPoint]) 
 	var character: Character = player.character
 	for spawn_point in avaible_spawns:
 		if spawn_point.team == player.team:
-			reparent_entity.rpc(character.get_path(), entities_node.get_path())
+			reparent_entity.rpc(character.get_path(), _entities_node.get_path())
 			character.global_rotation = spawn_point.global_rotation
 			character.global_position = spawn_point.global_position
 			avaible_spawns.erase(spawn_point)

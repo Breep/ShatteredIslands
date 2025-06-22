@@ -3,9 +3,14 @@
 [ext_resource type="FontFile" uid="uid://dgaako73a24kh" path="res://Data/font/rimouski sb.ttf" id="1_t02g7"]
 [ext_resource type="Script" uid="uid://d1ikna8cew0nn" path="res://UI/3D/DamagePopup/damage_popup.gd" id="2_oq443"]
 
-[node name="PopUp" type="Label3D"]
+[node name="PopUp" type="Node3D" node_paths=PackedStringArray("label3d")]
+script = ExtResource("2_oq443")
+label3d = NodePath("Label3D")
+
+[node name="Label3D" type="Label3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 layers = 4
 text = "42"
 font = ExtResource("1_t02g7")
 font_size = 150
-script = ExtResource("2_oq443")

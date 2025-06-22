@@ -1,9 +1,9 @@
 class_name AttackStormHammer
-extends PlayerUpgrade
+extends CharacterUpgrade
 
 @export var _bounce_chance: int # % Percent of chance for auto attack to bounce
 
-func apply(stats: CharacterStats, cardlvl: int) -> void: # override
+func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > 1:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return

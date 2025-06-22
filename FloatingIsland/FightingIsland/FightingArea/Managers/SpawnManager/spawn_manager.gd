@@ -13,6 +13,7 @@ var battle_id: int = -1 # Set by the parent
 
 #@export var _entities_node: Node3D
 @export var _projectiles_node: Node3D
+@export var _spells_node: Node3D
 
 # ============================== Private variables ==============================
 
@@ -21,7 +22,8 @@ var _projectile_counter: int = 0
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	GlobalFightingManager.all_fights_are_over.connect(_on_global_fighting_manager_all_fights_are_over)
+	GlobalFightingManager.state_changed.connect(_on_global_fighting_manager_state_changed)
+	_fighting_area.fighting_manager.fight_is_over.connect(_on_fighting_area_fighting_manager_fight_is_over)
 
 # ============================== Public function ==============================
 
@@ -36,18 +38,27 @@ func spawn_projectile(source: Character, target: Character, projectile_type: Pro
 	projectile.id = _projectile_counter
 	
 	var modifiers: Array[Projectile.ProjectileEffect] = []
-	_fighting_area.projectile_spawned.emit(source, target, projectile_type, modifiers)
+	_fighting_area.signal_projectile_spawned(source, target, projectile_type, modifiers)
 	_projectile_counter += 1
 	_projectiles_node.add_child(projectile)
 
+
+func spawn_spell(spell: Node3D) -> void:
+	_spells_node.add_child(spell)
+
 # ============================== Private functions ==============================
+
+func _clear_all() -> void:
+	for child in _projectiles_node.get_children():
+			child.queue_free()
 
 # ============================== Callbacks ==============================
 
-func _on_global_fighting_manager_all_fights_are_over() -> void:
-	for child in _projectiles_node.get_children():
-		child.queue_free()
+func _on_global_fighting_manager_state_changed(state: GlobalFightingManager.FightingState) -> void:
+	if state == GlobalFightingManager.FightingState.CELEBRATING:
+		_clear_all()
 
 
-
+func _on_fighting_area_fighting_manager_fight_is_over(_self_ref: FightingManager, _winner_teams_order: Array[int]) -> void:
+	_clear_all()
  

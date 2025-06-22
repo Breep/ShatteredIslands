@@ -154,6 +154,19 @@ func update_from_serialized(serialized_data: Dictionary) -> void:
 	is_bot = serialized_data[SerializedField.IS_BOT]
 	xp = serialized_data[SerializedField.XP]
 
+
+func spawn_character(spawn_node: Node3D, spawn_point: SpawnPoint) -> Character:
+	if character != null: character.queue_free()
+	var new_character: Character = preload("res://Entities/Character/character.tscn").instantiate()
+	new_character.owner_player_id = id
+	new_character.hero_id = hero.id
+	new_character.name = "Character_" + hero.name
+	character = new_character
+	spawn_node.add_child(character)
+	character.global_rotation = spawn_point.global_rotation
+	character.global_position = spawn_point.global_position
+	return character
+
 # ============================== Resource base functions ==============================
 
 func _init() -> void:

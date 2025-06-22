@@ -11,7 +11,7 @@ const ATTACK_SPEED_BOOST_OVERTIME_PERIOD: float = 1
 
 # ============================== Private variables ==============================
 
-var _attack_stats: CharacterAutoAttackStats # Ref to the owner attack stats
+var _attack_stats: FamilyAttackStats # Ref to the owner attack stats
 
 var _aa_speed_overtime_time_started: float = 0
 
@@ -24,8 +24,7 @@ var _previous_target: Character
 # ============================== Public functions ==============================
 
 func _ready() -> void:
-	_attack_stats = source.stats.auto_attack
-	_create_optional_timers()
+	_attack_stats = _owner.families_stats.auto_attack
 
 
 func start() -> void:
@@ -38,27 +37,9 @@ func stop() -> void:
 		timer.stop()
 
 
-func notice_auto_attack_done(target: Character) -> void:
+func notice_auto_attack_done(_target: Character) -> void:
 	_aa_counter += 1
-	
-	# [Focus]
-	if source.stats.storm.focus_target_activated:
-		_check_storm_focus(target)
-		_previous_target = target
-	
-	# [Necrosis scythe]
-	if _attack_stats.increase_max_hp_activated and _aa_counter % _attack_stats.increase_max_hp_period == 0:
-		source.stats.health_max += _attack_stats.increase_max_hp_amount
-		source.stats.health += _attack_stats.increase_max_hp_amount
-	
-	# [Sword armor]
-	if Utils.is_randomize_modifier_active(_attack_stats.armor_stacks_chance):
-		source.stats.defense.armor_stacks += _attack_stats.armor_stacks_amount
-	
-	# [Knife of terror]
-	if Utils.is_randomize_modifier_active(_attack_stats.healing_attack_chance):
-		var heal_target: Character = source.target_module.get_target(TargetModule.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
-		source.heal(heal_target, _attack_stats.healing_attack_heal_amount)
+
 
 # ============================== Private functions ==============================
 

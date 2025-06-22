@@ -1,6 +1,5 @@
 extends Node3D
 
-@export var _battle_id: int
 @export var _floating_island: FightingIsland
 
 @export var _player1_cards: Array[Card]
@@ -29,6 +28,6 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	_floating_island.start_fight([_character1, _character2], Battle.BattleType.VS_1)
-	GlobalFightingManager.start()
+	GlobalFightingManager.start(true)
 	_floating_island.set_active()
 	#_ui_fighting_area.show()

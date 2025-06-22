@@ -1,22 +1,22 @@
 [gd_resource type="Resource" script_class="Hero" load_steps=6 format=3 uid="uid://8hfga7o6w8xp"]
 
 [ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://Entities/Heroes/hero.gd" id="1_a5tni"]
-[ext_resource type="Script" uid="uid://c76rxvnlcwltf" path="res://Entities/Character/CharacterStats/character_stats.gd" id="2_5n5m3"]
 [ext_resource type="Texture2D" uid="uid://dks3t5mo62ss8" path="res://Data/Heroes/Portraits/Tony Le Bard.webp" id="2_244fa"]
+[ext_resource type="Script" uid="uid://2py6kv5aqgem" path="res://Entities/Heroes/hero_stats.gd" id="3_b7vlq"]
 
 [sub_resource type="Resource" id="Resource_b7vlq"]
 metadata/__load_path__ = "res://Entities/Heroes/TonyLeBarde/tony_le_barde_model.tscn"
 
-[sub_resource type="Resource" id="Resource_uh6kp"]
-script = ExtResource("2_5n5m3")
+[sub_resource type="Resource" id="Resource_ix2di"]
+script = ExtResource("3_b7vlq")
 health_max = 1000
 mana_max = 100
-mana_regen = 5.0
-attack_damage = 124
-attack_speed = 1.27
-attack_move_speed = 1.0
-physical_critical_chance = 10.0
+mana_regen = 2.0
+attack_damage = 20
+attack_speed = 0.5
+physical_critical_chance = 15.0
 physical_critical_multiplier = 2.0
+metadata/_custom_type_script = "uid://2py6kv5aqgem"
 
 [resource]
 script = ExtResource("1_a5tni")
@@ -24,6 +24,6 @@ name = "Tony le barde"
 id = 7
 portrait = ExtResource("2_244fa")
 description = "Cocorico"
-stats = SubResource("Resource_uh6kp")
+stats = SubResource("Resource_ix2di")
 aa_projectile_type = 7
 model = SubResource("Resource_b7vlq")

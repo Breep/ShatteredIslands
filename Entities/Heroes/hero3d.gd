@@ -16,4 +16,4 @@ var _character_owner: Character
 		print(hero.name, " changing owner to: ", value.name)
 		if value == _character_owner: return
 		_character_owner = value
-		_hero_animator.character_owner = value
+		if _hero_animator != null: _hero_animator.character_owner = value

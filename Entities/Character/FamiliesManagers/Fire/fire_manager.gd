@@ -5,132 +5,90 @@ extends FamilyManager
 
 # ============================== Private variables ==============================
 
-var _fire_stats: CharacterFireStats # Ref to the owner fire stats
+var _fire_stats: FamilyFireStats # Ref to the owner fire stats
 
-# ============================== Spells scenes ==============================
+# ============================== Local nodes ==============================
 
-@onready var _healing_fire_area_scene: PackedScene = preload("res://SpellsAndProjectiles/Spells/HealingFire/healing_fire_area.tscn")
-@onready var _meteor_scene: PackedScene = preload("res://SpellsAndProjectiles/Spells/Meteor/meteor.tscn")
-@onready var _fire_trail_scene: PackedScene = preload("res://SpellsAndProjectiles/Spells/FireTrail/fire_trail.tscn")
+@onready var _ignite_timer: Timer = %IgniteTimer
+
+@export_group("Configuration")
+@export var _ignite_decay_percent: float
+@export var _ignite_percent_per_stack: float
+
+# ============================== Node base functions ==============================
+
+func _ready() -> void:
+	_fire_stats = _owner.families_stats.fire
 
 # ============================== Public functions ==============================
 
-func _ready() -> void:
-	_fire_stats = source.stats.fire
-	_create_optional_timers()
-
-
 func start() -> void:
+	_create_optional_timers()
 	_lanch_optional_spells()
-	for timer in _optional_timers:
-		timer.start()
+	_ignite_timer.start()
 
 
 func stop() -> void:
+	_owner.stats.ignite_stacks = 0
 	for timer in _optional_timers:
-		timer.stop()
+		timer.queue_free()
+	_optional_timers.clear()
 	for spell in _optional_spells:
 		spell.queue_free()
+	_ignite_timer.stop()
 
 
 func get_reduced_damage(damage: int, damage_type: Utils.DamageType) -> int:
-	if damage_type != Utils.DamageType.MAGICAL:
-		return damage
-	
-	var damage_reduced = damage - damage * _fire_stats.magic_resist_percent / 100.0
-	return damage_reduced
+	return damage
 
 
 # Storm of fire
 func get_increased_damage(damage: float, damage_type: Utils.DamageType) -> float:
-	if damage_type != Utils.DamageType.MAGICAL:
-		return damage
-	
-	if not _fire_stats.damage_increase_on_low_life_enemy_activated:
-		return damage
-	
-	var health_ratio_percent: float = (source.stats.health as float / source.stats.health_max as float) * 100.0
-	if health_ratio_percent >= _fire_stats.damage_increase_on_low_life_enemy_threshold:
-		return damage
-	
-	return damage + damage * _fire_stats.damage_increase_on_low_life_enemy_percent / 100.0
+	return damage
 
 # ============================== Private functions ==============================
 
 func _create_optional_timers() -> void:
-	# [Fire dagger bolt]
-	if _fire_stats.firebolt_activated:
-		_optional_timers.append(Utils.create_perpetual_timer(self, _fire_stats.firebolt_period, _on_firebolt_timer_timeout))
+	if _fire_stats.periodic_ignite_activated:
+		_optional_timers.append(Utils.create_perpetual_timer(self, _fire_stats.periodic_ignite_period, _on_periodic_ignite_timer_timeout, true))
 	
-	# [Explosion]
-	if _fire_stats.nuke_activated:
-		_on_nuke_timer_timeout()
-		_optional_timers.append(Utils.create_perpetual_timer(self, _fire_stats.nuke_period, _on_nuke_timer_timeout))
-	
-	# [Meteor]
 	if _fire_stats.meteor_activated:
-		var meteor_period = _fire_stats.meteor_deploy_time + _fire_stats.meteor_cooldown
-		_optional_timers.append(Utils.create_perpetual_timer(self, meteor_period, _on_meteor_timer_timeout))
+		_optional_timers.append(Utils.create_perpetual_timer(self, _fire_stats.meteor_period, _on_meteor_timer_timeout, true))
 
 
 func _lanch_optional_spells() -> void:
-	# [Ring of fire healing]
-	if _fire_stats.healing_fire_area_activated:
-		var healing_fire_area: HealingFireArea = _healing_fire_area_scene.instantiate()
-		healing_fire_area.init(source, _fire_stats.healing_fire_area_damage, _fire_stats.healing_fire_area_heal, 
-				_fire_stats.healing_fire_area_period, _fire_stats.healing_fire_area_range)
-		source.add_child(healing_fire_area)
-		healing_fire_area.position = Vector3.ZERO
-	
-	# [Fire trail]
-	if _fire_stats.trail_activated:
-		var fire_trail: FireTrail = _fire_trail_scene.instantiate()
-		fire_trail.init(source, _fire_stats.trail_damage_percent, _fire_stats.trail_period, _fire_stats.trail_life_time)
-		source.add_child(fire_trail)
-		fire_trail.position = Vector3.ZERO
+	pass
 
 # ============================== Callbacks functions ==============================
 
 func _on_firebolt_timer_timeout() -> void:
-	var target = source.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
-	if target == null:
-		return
-		
-	var projectile_stats := ProjectileStats.new()
-	projectile_stats.magical_damage_percent = _fire_stats.firebolt_damage
-	projectile_stats.magical_damage_percent_type = Utils.PercentModifier.CURRENT_HP
-	projectile_stats.speed = 2
-	#_action_module.projectile_attack(target, _fire_bolt_scene, _projectile_spawn, projectile_stats)
+	pass
 
 
-func _on_nuke_timer_timeout() -> void:
-	var target = source.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
-	if target == null:
-		return
+func _on_periodic_ignite_timer_timeout() -> void:
+	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
+	if target != null:
+		_owner.inflict_condition_stacks(target, _fire_stats.periodic_ignite_stacks, Utils.StackType.IGNITE)
+
+
+func _on_ignite_timer_timeout() -> void:
+	if _owner.stats.ignite_stacks > 0:
+		var percent: float = _ignite_percent_per_stack * _owner.stats.ignite_stacks
+		_owner.take_damage_percent(percent, Utils.PercentModifier.CURRENT_HP, Utils.DamageType.MAGICAL, false)
 	
-	_action_module.direct_attack_percent(target, _fire_stats.nuke_damage, Utils.DamageType.MAGICAL, Utils.PercentModifier.MAX_HP)
+	var decay: int = (_owner.stats.ignite_stacks * _ignite_decay_percent / 100.0) as int
+	decay = clampi(decay, 1, decay)
+	_owner.stats.ignite_stacks -= decay
 
 
 func _on_meteor_timer_timeout() -> void:
-	var target = source.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
-	if target == null:
-		return
-	
-	var meteor: Meteor = _meteor_scene.instantiate()
-	meteor.init(source, _fire_stats.meteor_damage, _fire_stats.meteor_deploy_time, _fire_stats.meteor_area_range)
-	get_tree().current_scene.add_child(meteor)
-	meteor.position = target.position
-
-
-
-
-
-
-
-
-
-
-
+	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
+	if target != null:
+		var spell_modifier: Dictionary = {
+			Spell.MeteorModifier.IGNITE_STACKS: _fire_stats.meteor_ignite_stacks,
+			Spell.MeteorModifier.DAMAGE_PER_STACK: _fire_stats.meteor_damage_per_stack
+		}
+		_owner.cast_spell(target, Spell.Type.METEOR, spell_modifier)
 
 
 

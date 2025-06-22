@@ -46,7 +46,6 @@ func connect_to_entity_manager(entity_manager: EntityManager) -> void:
 		return
 	
 	_clear()
-	print("Connect to entity manager: ", _owner.name)
 	_entities = entity_manager.entities.values()
 	entity_manager.entity_spawned.connect(_on_entity_manager_entity_spawned)
 	entity_manager.entity_dead.connect(_on_entity_manager_entity_dead)

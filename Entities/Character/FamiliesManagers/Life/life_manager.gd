@@ -7,7 +7,7 @@ signal revived(life_after_revive: int)
 
 # ============================== Private variables ==============================
 
-var _life_stats: CharacterLifeStats # Ref to the owner life stats
+var _life_stats: FamilyLifeStats # Ref to the owner life stats
 
 var _revive_timer: Timer
 
@@ -16,8 +16,7 @@ var _revive_timer: Timer
 # ============================== Public functions ==============================
 
 func _ready() -> void:
-	_life_stats = source.stats.life
-	_create_optional_timers()
+	_life_stats = _owner.families_stats.life
 
 
 func start() -> void:
@@ -32,12 +31,12 @@ func stop() -> void:
 
 func get_increased_damage_taken_from_lost_hp(damage: float, _damage_type: Utils.DamageType) -> float:
 	return damage
-	#if not source.stats.hp.damage_increased_by_hp_lost_activated:
+	#if not _owner.stats.hp.damage_increased_by_hp_lost_activated:
 		#return damage
 	#
-	#var lost_hp: int = source.stats.health_max - source.stats.health
-	#var damage_inc_percent: int = source.stats.hp.damage_increased_by_hp_lost_percentage
-	#var lost_hp_stacks: int = lost_hp / source.stats.hp.damage_increased_by_hp_lost_hp_number
+	#var lost_hp: int = _owner.stats.health_max - _owner.stats.health
+	#var damage_inc_percent: int = _owner.stats.hp.damage_increased_by_hp_lost_percentage
+	#var lost_hp_stacks: int = lost_hp / _owner.stats.hp.damage_increased_by_hp_lost_hp_number
 	#var damage_multiplier: float = remap(damage_inc_percent * lost_hp_stacks, 0, 100, 1, 2)
 #
 	#return damage * damage_multiplier
@@ -46,7 +45,7 @@ func get_reduced_damage(damage: int) -> int:
 	if not _life_stats.damage_taken_reduced_below_treshold_activated:
 		return damage
 	
-	var life_ratio: float = (source.stats.health as float / source.stats.health_max as float) * 100.0
+	var life_ratio: float = (_owner.stats.health as float / _owner.stats.health_max as float) * 100.0
 	if life_ratio <= _life_stats.damage_taken_reduced_below_treshold_threshold:
 		var damage_reduction = (damage as float) * _life_stats.damage_taken_reduced_below_treshold_percentage / 100.0
 		return damage - damage_reduction
@@ -87,14 +86,14 @@ func _on_poison_by_lost_hp_timer_timeout() -> void:
 
 
 func _on_fire_damage_timer_timeout() -> void:
-	var target = source.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
+	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
 	if target == null: return
-	var damage = source.stats.health_max * _life_stats.fire_damage_percent / 100.0
+	var damage = _owner.stats.health_max * _life_stats.fire_damage_percent / 100.0
 	_action_module.direct_attack(target, damage, Utils.DamageType.MAGICAL)
 
 
 func _on_revive_timer_timeout() -> void:
 	print("REVIVE")
 	print("Spawn revive bomb here")
-	var life_after_revive: int = ((_life_stats.revive_after_death_percentage_life * source.stats.health_max) / 100.0) as int
+	var life_after_revive: int = ((_life_stats.revive_after_death_percentage_life * _owner.stats.health_max) / 100.0) as int
 	revived.emit(life_after_revive)

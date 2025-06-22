@@ -1,10 +1,10 @@
 class_name DefenseSmithHammer
-extends PlayerUpgrade
+extends CharacterUpgrade
 
 @export var _armor_stacks: int # Armor stacks gained when effect proc
 @export var _chance_percents: Array[int]  # % of chance to proc effect when being hit
 
-func apply(stats: CharacterStats, cardlvl: int) -> void: # override
+func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > 5:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return

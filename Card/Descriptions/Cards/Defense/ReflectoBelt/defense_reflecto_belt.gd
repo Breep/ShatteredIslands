@@ -1,10 +1,10 @@
 class_name DefenseReflectoBelt
-extends PlayerUpgrade
+extends CharacterUpgrade
 
 @export var _armor_stacks: int # Armor stacks lost needed to proc reflecto_belt effect
 @export var _attack_increase_percent: Array[int] # % of damage increase for the next auto-attack
 
-func apply(stats: CharacterStats, cardlvl: int) -> void: # override
+func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > 5:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return

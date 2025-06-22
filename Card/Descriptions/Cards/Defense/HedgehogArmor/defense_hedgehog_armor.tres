@@ -17,4 +17,5 @@ picture = ExtResource("1_xlqm0")
 family = 1
 rarity = 1
 player_upgrade = SubResource("Resource_t1d4h")
+lvl = 1
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"
