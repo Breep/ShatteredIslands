@@ -39,5 +39,6 @@ script = ExtResource("1_0wav7")
 shape = SubResource("SphereShape3D_mxhml")
 
 [node name="Projectile_turret_visual" parent="." instance=ExtResource("2_41b4g")]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

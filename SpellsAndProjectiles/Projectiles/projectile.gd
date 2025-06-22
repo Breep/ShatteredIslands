@@ -81,7 +81,7 @@ func _move_toward_target(delta: float):
 	var target_position: Vector3 = target.global_position + _vertical_offset * Vector3.UP
 	var direction: Vector3 = (target_position - global_position).normalized()
 	global_position += direction * _SPEED_MIN * delta
-	look_at(target.global_position)
+	look_at(target.global_position + _vertical_offset * Vector3.UP)
 
 
 func _damage_percent(damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier, is_critical: bool) -> void:
