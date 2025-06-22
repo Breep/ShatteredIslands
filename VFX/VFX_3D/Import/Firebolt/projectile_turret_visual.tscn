@@ -92,11 +92,11 @@ anim_speed_min = 0.01
 anim_speed_max = 0.02
 anim_offset_max = 1.0
 
-[node name="Projectile_turret_visual" type="Area3D"]
+[node name="Projectile_turret_visual" type="Node3D"]
 
 [node name="FireballShellMesh" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(0.2, 0, 0, 0, -8.74228e-09, -0.2, 0, 0.2, -8.74228e-09, 0, 0, 0)
+transform = Transform3D(0.1, 0, 0, 0, -4.37114e-09, -0.1, 0, 0.1, -4.37114e-09, 0, 0, 0)
 material_override = ExtResource("1_w6po2")
 mesh = ExtResource("2_r0v37")
 
@@ -107,17 +107,18 @@ cast_shadow = 0
 mesh = SubResource("SphereMesh_77e4v")
 skeleton = NodePath("../..")
 
-[node name="FireTrail" type="GPUParticles3D" parent="."]
+[node name="FireTrail" type="GPUParticles3D" parent="FireballShellMesh"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.13)
+transform = Transform3D(5, 0, 0, 0, -2.18557e-07, 5, 0, -5, -2.18557e-07, 0, -0.65, 2.84124e-08)
 material_override = ExtResource("4_e4r0o")
 amount = 16
 lifetime = 0.5
 process_material = ExtResource("5_kj6qa")
 draw_pass_1 = SubResource("QuadMesh_6lh4h")
 
-[node name="FireSmoke" type="GPUParticles3D" parent="."]
+[node name="FireSmoke" type="GPUParticles3D" parent="FireballShellMesh"]
 unique_name_in_owner = true
+transform = Transform3D(5, 0, 0, 0, -2.18557e-07, 5, 0, -5, -2.18557e-07, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_wk0ro")
 amount = 16
 explosiveness = 0.2
