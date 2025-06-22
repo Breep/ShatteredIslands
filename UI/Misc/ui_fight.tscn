@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c210b1bxn3s4"]
+[gd_scene load_steps=15 format=3 uid="uid://dl2paxq7lf6wi"]
 
 [ext_resource type="Script" uid="uid://ccsp1xqwk4cnn" path="res://UI/Misc/ui_fight.gd" id="1_card7"]
 [ext_resource type="Texture2D" uid="uid://digbaq8kid6eq" path="res://Data/Assets/Misc/Misc_IMG/cadre_blue2-removebg-preview.png" id="2_o210i"]

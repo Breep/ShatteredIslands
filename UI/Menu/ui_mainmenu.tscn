@@ -1,0 +1,106 @@
+[gd_scene load_steps=6 format=3 uid="uid://bn7sfcotfnn7b"]
+
+[ext_resource type="Texture2D" uid="uid://c88c1h5yq3w4d" path="res://Data/Assets/UI/ile flottante.jpg" id="1_i2r5a"]
+[ext_resource type="Theme" uid="uid://da4vub8s3sjmd" path="res://UI/_Themes/add_player.tres" id="2_3br58"]
+[ext_resource type="Theme" uid="uid://bpo76n2lvfxb6" path="res://UI/_Themes/main_menu_button.tres" id="2_q560i"]
+[ext_resource type="Texture2D" uid="uid://hl4bi74ds0b0" path="res://Data/Misc/logo.png" id="3_k25tv"]
+[ext_resource type="Texture2D" uid="uid://nv26u8gl3cbr" path="res://Data/Misc/plus blanc.png" id="4_hcgp0"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_i2r5a")
+expand_mode = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.01
+anchor_top = 0.01
+anchor_right = 0.13
+anchor_bottom = 0.12
+offset_right = 12.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_3br58")
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer2/HBoxContainer/Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_k25tv")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Button2" type="Button" parent="VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_3br58")
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer2/HBoxContainer/Button2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.08
+anchor_top = 0.08
+anchor_right = 0.92
+anchor_bottom = 0.92
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_hcgp0")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.436
+anchor_right = 0.3
+anchor_bottom = 0.9
+offset_right = 8.0
+grow_vertical = 2
+
+[node name="Play" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_q560i")
+text = "Play"
+
+[node name="Lobby" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_q560i")
+text = "lobby"
+
+[node name="Store" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_q560i")
+text = "store"
+
+[node name="Collection" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_q560i")
+text = "collection
+"

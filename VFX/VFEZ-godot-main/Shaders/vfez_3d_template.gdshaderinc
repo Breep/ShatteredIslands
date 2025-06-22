@@ -359,7 +359,7 @@ group_uniforms;
 	uniform float shade_normal_map_depth: hint_range(0., 10.) = 1.;
 	group_uniforms;
 #endif
-	
+
 group_uniforms vertex_offset;
 uniform bool use_vertex_offset = false;
 group_uniforms;
@@ -933,21 +933,21 @@ void fragment() {
 
 	ALBEDO = color.rgb;
 	ALPHA = color.a;
-	
+
 	#if defined(ALPHA_SCISSOR)
 		if (use_alpha_scissor)
 		{
-			ALPHA_SCISSOR_THRESHOLD = alpha_scissor_thres;	
+			ALPHA_SCISSOR_THRESHOLD = alpha_scissor_thres;
 		}
 	#endif
-	
+
 	#if defined(SHADE_NORMAL_MAP) && not defined(UNSHADED)
 		if (use_shade_normal_map)
 		{
 			vec2 normalUV = transform_uv(baseUV, shade_normal_map_texture_scale, shade_normal_map_texture_offset, false);
 			vec3 normal = texture(shade_normal_map_texture, normalUV).rgb;
 			NORMAL_MAP = normal;
-			NORMAL_MAP_DEPTH = shade_normal_map_depth;	
+			NORMAL_MAP_DEPTH = shade_normal_map_depth;
 		}
 	#endif
 }
