@@ -1,29 +1,31 @@
-[gd_scene load_steps=15 format=3 uid="uid://oimyi4iueoda"]
+[gd_scene load_steps=14 format=3 uid="uid://oimyi4iueoda"]
 
 [ext_resource type="Script" uid="uid://blljr68c4u466" path="res://Game/game.gd" id="1_7r6pw"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Tool/SpawnPoint/spawn_point.tscn" id="3_i1e5p"]
 [ext_resource type="PackedScene" uid="uid://di34xfy5cli15" path="res://Tool/Cameras/FreeFly/free_fly_camera.tscn" id="3_t03ty"]
 [ext_resource type="PackedScene" uid="uid://bbn7yt4y0lu6q" path="res://Game/SceneSwitcher/scene_switcher.tscn" id="3_vifcx"]
-[ext_resource type="Texture2D" uid="uid://capk6pfx3rt4k" path="res://Data/Misc/scrn2.jpg" id="5_ciybh"]
 [ext_resource type="PackedScene" uid="uid://drcuyohos0doa" path="res://FloatingIsland/FightingIsland/fighting_island.tscn" id="5_vifcx"]
+[ext_resource type="Material" uid="uid://2wlal7g5718r" path="res://VFX/Shaders/Sky/stylized_shader_night.tres" id="6_7gi1t"]
 [ext_resource type="PackedScene" uid="uid://7u3ksm0e4v61" path="res://FloatingIsland/BuyingIsland/buying_island.tscn" id="6_flgk0"]
 [ext_resource type="PackedScene" uid="uid://cbd5jq0bp7fef" path="res://Game/HeroSelector/HeroSelector.tscn" id="8_xfil1"]
 [ext_resource type="PackedScene" uid="uid://dv3kwc5eeyuk2" path="res://UI/Game/ui_game.tscn" id="9_kul4i"]
 [ext_resource type="PackedScene" uid="uid://b7ix6abnaxeay" path="res://FloatingIsland/_Maps/turtle_tavern.tscn" id="10_7gi1t"]
 
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_flgk0"]
-panorama = ExtResource("5_ciybh")
-energy_multiplier = 0.2
-
 [sub_resource type="Sky" id="Sky_ciybh"]
-sky_material = SubResource("PanoramaSkyMaterial_flgk0")
+sky_material = ExtResource("6_7gi1t")
 
 [sub_resource type="Environment" id="Environment_flgk0"]
 background_mode = 2
-background_energy_multiplier = 1.63
 sky = SubResource("Sky_ciybh")
-tonemap_mode = 3
+ambient_light_source = 2
+ambient_light_color = Color(0.45098, 0.333333, 0.309804, 1)
+ambient_light_energy = 0.5
+tonemap_mode = 2
 glow_enabled = true
+glow_bloom = 0.2
+fog_light_color = Color(0.175414, 0.565791, 0.908127, 1)
+fog_light_energy = 0.05
+volumetric_fog_density = 0.0
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_7gi1t"]
 properties/0/path = NodePath(".:_current_round_player_id_islands")
@@ -124,13 +126,16 @@ spawn_path = NodePath("../Characters")
 
 [node name="Characters" type="Node3D" parent="."]
 
-[node name="WorldEnvironment2" type="WorldEnvironment" parent="."]
+[node name="Light" type="Node3D" parent="."]
+
+[node name="WorldEnvironment2" type="WorldEnvironment" parent="Light"]
 environment = SubResource("Environment_flgk0")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.72304, 0.426404, -0.543501, 0, 0.786763, 0.617256, 0.690807, -0.4463, 0.56886, 0, 11.082, 0)
-light_color = Color(0.806127, 0.544895, 0.445082, 1)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Light"]
+transform = Transform3D(0.567362, -0.153111, -0.809109, 0.448204, 0.881688, 0.147444, 0.690807, -0.4463, 0.568861, 0, 24.845, 62.0824)
 shadow_enabled = true
+
+[node name="Secondary" type="Node3D" parent="Light"]
 
 [node name="SceneSwitcher" parent="." node_paths=PackedStringArray("buying_island") instance=ExtResource("3_vifcx")]
 buying_island = NodePath("../BuyingIsland")

@@ -1,0 +1,78 @@
+[gd_resource type="ShaderMaterial" load_steps=13 format=3 uid="uid://dfelty2iqo12a"]
+
+[ext_resource type="Shader" uid="uid://ba7ksj2t5s6jn" path="res://VFX/Shaders/Sky/stylized_sky_day.gdshader" id="1_6x86g"]
+
+[sub_resource type="Gradient" id="Gradient_pr3pm"]
+offsets = PackedFloat32Array(0.520833, 0.524306)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cjujp"]
+gradient = SubResource("Gradient_pr3pm")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Curve" id="Curve_rsfg4"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0764331, 0.900128), 0.0, 0.0, 0, 0, Vector2(0.996815, 0.733675), 0.0, -0.316765, 0, 1]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_qmtp5"]
+texture_mode = 1
+curve = SubResource("Curve_rsfg4")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_g4lo2"]
+noise_type = 3
+fractal_octaves = 10
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cmnk4"]
+seamless = true
+seamless_blend_skirt = 1.0
+noise = SubResource("FastNoiseLite_g4lo2")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_sr012"]
+noise_type = 3
+fractal_octaves = 10
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_praae"]
+seamless = true
+seamless_blend_skirt = 1.0
+noise = SubResource("FastNoiseLite_sr012")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bnafk"]
+noise_type = 3
+fractal_octaves = 10
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_x1a55"]
+seamless = true
+seamless_blend_skirt = 1.0
+noise = SubResource("FastNoiseLite_bnafk")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vv61o"]
+load_path = "res://.godot/imported/shooting_star_sampler.png-88365188570b4ec7e1840aee97d34e52.s3tc.ctex"
+
+[resource]
+shader = ExtResource("1_6x86g")
+shader_parameter/cloud_shape_sampler = SubResource("NoiseTexture2D_praae")
+shader_parameter/cloud_noise_sampler = SubResource("NoiseTexture2D_cmnk4")
+shader_parameter/cloud_curves = SubResource("CurveTexture_qmtp5")
+shader_parameter/clouds_samples = 32
+shader_parameter/shadow_sample = 4
+shader_parameter/clouds_density = 0.4
+shader_parameter/clouds_scale = 1.0
+shader_parameter/clouds_smoothness = 0.03
+shader_parameter/clouds_light_color = Color(1, 1, 1, 1)
+shader_parameter/clouds_shadow_intensity = 3.5
+shader_parameter/high_clouds_sampler = SubResource("NoiseTexture2D_x1a55")
+shader_parameter/high_clouds_density = 0.2
+shader_parameter/top_color = Color(0.34902, 0.588235, 1, 1)
+shader_parameter/bottom_color = Color(0, 0.329412, 0.968627, 1)
+shader_parameter/sun_scatter = Color(0.0754444, 0.331976, 0.395647, 1)
+shader_parameter/astro_tint = Color(0.905882, 0.788235, 0.627451, 1)
+shader_parameter/astro_sampler = SubResource("GradientTexture2D_cjujp")
+shader_parameter/astro_scale = 9.0
+shader_parameter/astro_intensity = 3.0
+shader_parameter/stars_intensity = 5.0
+shader_parameter/shooting_stars_intensity = 4.0
+shader_parameter/shooting_star_sampler = SubResource("CompressedTexture2D_vv61o")
+shader_parameter/shooting_star_tint = Color(0.572951, 0.82385, 0.618695, 1)

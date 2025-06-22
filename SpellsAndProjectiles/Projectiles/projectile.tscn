@@ -1,16 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://ceqjwbnxlllrw"]
+[gd_scene load_steps=5 format=3 uid="uid://ceqjwbnxlllrw"]
 
 [ext_resource type="Script" uid="uid://dv8w8kb4xsqp3" path="res://SpellsAndProjectiles/Projectiles/projectile.gd" id="1_0wav7"]
+[ext_resource type="PackedScene" uid="uid://d37wg3mc76fs7" path="res://VFX/VFX_3D/Import/Firebolt/projectile_turret_visual.tscn" id="2_41b4g"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_mxhml"]
 radius = 0.1
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uwb3t"]
-albedo_color = Color(0.905098, 6.76718e-05, 0.674899, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_ae6as"]
-material = SubResource("StandardMaterial3D_uwb3t")
-size = Vector3(2, 2, 2)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_gwocg"]
 properties/0/path = NodePath(".:id")
@@ -37,8 +31,7 @@ script = ExtResource("1_0wav7")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_mxhml")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_ae6as")
+[node name="Projectile_turret_visual" parent="." instance=ExtResource("2_41b4g")]
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_gwocg")
