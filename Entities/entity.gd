@@ -13,6 +13,8 @@ func signal_death() -> void:
 
 signal damage_taken(entity_ref: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool)
 func signal_damage_taken(damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
+	if name == "Character_Rocky":
+		print("[DEBUG] ", name, " SIGNAL DAMAGE TAKEN (", damage, ")")
 	damage_taken.emit(self, damage, damage_type, is_critical)
 
 signal spell_casted(source: Entity, target: Entity, spell_type: Spell.Type)
@@ -58,9 +60,9 @@ func _entity_init() -> void:
 	instance_count += 1
 
 
-func _enter_tree() -> void:
-	if is_node_ready() and battle_id != -1:
-		_recursive_propagate_signal(get_parent(), Entity.SIGNAL_NAME_SPAWNED)
+#func _enter_tree() -> void:
+	#if is_node_ready() and battle_id != -1:
+		#_recursive_propagate_signal(get_parent(), Entity.SIGNAL_NAME_SPAWNED)
 
 # ============================== Public functions ==============================
 

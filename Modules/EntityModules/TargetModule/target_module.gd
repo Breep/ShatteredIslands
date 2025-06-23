@@ -133,8 +133,8 @@ func _remove_character(character_to_remove: Entity) -> void:
 
 func _add_body_as_entity(body: Node3D) -> void:
 	if not body is Entity:
-			printerr("TargetModule: A body detected by a TargetModule has an Entity mask but is not an entity: [", body.get_path(), "]")
-			return
+		printerr("TargetModule: A body detected by a TargetModule has an Entity mask but is not an entity: [", body.get_path(), "]")
+		return
 		
 	var entity: Entity = body
 	if entity.team == _owner.team: _allies.append(entity)
