@@ -32,8 +32,6 @@ func _ready() -> void:
 
 func clear() -> void:
 	for entity in _entities.values():
-		if entity.dead.is_connected(_on_entity_dead):
-			entity.dead.disconnect(_on_entity_dead)
 		if entity.damage_taken.is_connected(_on_entity_damage_taken):
 			entity.damage_taken.disconnect(_on_entity_damage_taken)
 		if entity.spell_casted.is_connected(_on_entity_spell_casted):
@@ -49,7 +47,6 @@ func _register_entity(who: Entity) -> void:
 		_characters[who.id] = who
 	
 	entity_spawned.emit(who)
-	who.dead.connect(_on_entity_dead, CONNECT_ONE_SHOT)
 	who.damage_taken.connect(_on_entity_damage_taken)
 	who.spell_casted.connect(_on_entity_spell_casted)
 
@@ -61,12 +58,6 @@ func _on_parent_entity_is_spawned(who: Entity) -> void: # TODO ça peut être si
 		printerr("EntityManager: ", who, "-", who.name, " is spawned more than once")
 		return
 	_register_entity(who)
-
-
-func _on_entity_dead(who: Entity) -> void:
-	if not _entities.has(who.id): return
-	_entities.erase(who.id)
-	entity_dead.emit(who)
 
 
 func _on_events_game_state_changed(game_state: Game.GameState) -> void:

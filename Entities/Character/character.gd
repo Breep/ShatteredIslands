@@ -67,9 +67,6 @@ var target_module: TargetModule
 
 # ============================== Private variables ==============================
 
-var _is_dead: bool = false
-var _is_local: bool = false
-
 var _fighting_state: GlobalFightingManager.FightingState = GlobalFightingManager.FightingState.UNDEF
 
 # ============================== Public functions ==============================
@@ -101,7 +98,6 @@ func on_inactive_island() -> void:
 
 func get_auto_attack_spawn() -> Node3D:
 	return _turret.get_projectile_spawn_point()
-
 
 # ===== Actions
 
@@ -154,7 +150,6 @@ func _ready() -> void:
 	if owner_player_id != 0:
 		player = PlayerManager.players[owner_player_id]
 		player.character = self
-		_is_local = player.id == multiplayer.get_unique_id()
 	
 	if battle_id == -1:
 		_character_visual.hide()
@@ -199,25 +194,7 @@ func _handle_death() -> void:
 
 # ============================== Family callbacks ==============================
 
-func _on_life_manager_revived(life_after_revived: int) -> void:
-	stats.health = life_after_revived
-	_character_visual.update_health_bar(stats.health, stats.health_max)
-	_is_dead = false
-	Events.character_is_spawned.emit(self)
-
 # ============================== Module callbacks ==============================
-
-func _on_interact_module_damage_taken(damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
-	_character_visual.damage_popup(damage, damage_type, is_critical)
-	_character_visual.update_health_bar(stats.health, stats.health_max)
-	if stats.health <= 0 and !_is_dead:
-		_handle_death()
-
-
-func _on_interact_module_heal_received(heal_amount: int) -> void:
-	if heal_amount != 0:
-		_character_visual.damage_popup(heal_amount, Utils.DamageType.HEAL, false)
-		_character_visual.update_health_bar(stats.health, stats.health_max)
 
 # ============================== Other callbacks ==============================
 
@@ -242,6 +219,7 @@ func _on_global_fighting_manager_state_changed(global_fighting_state: GlobalFigh
 func _on_events_game_state_changed(new_state: Game.GameState) -> void:
 	match new_state:
 		Game.GameState.BUYING:
+			_is_dead = false
 			_character_visual.hide()
 			if _turret != null: _turret.hide()
 		Game.GameState.FIGHTING:

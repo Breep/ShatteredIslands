@@ -4,13 +4,13 @@ extends Module
 # ============================== Enums ==============================
 
 enum TargettingStrategy {
-	CLOSEST, # Closest character except self (can be null)
+	CLOSEST, # Closest entity except self (can be null)
 	CLOSEST_ENEMY, # Closest enemy (can be null)
 	CLOSEST_ALLY, # Closest ally except self (can be null)
-	FARTHEST, # Farthest character except self (can be null)
+	FARTHEST, # Farthest entity except self (can be null)
 	FARTHEST_ENEMY, # Farthest enemy (can be null)
 	FARTHEST_ALLY, # Farthest ally except self (can be null)
-	RANDOM, # Random character except self (can be null)
+	RANDOM, # Random entity except self (can be null)
 	RANDOM_ENEMY, # Random enemy (can be null)
 	RANDOM_ALLY, # Random ally except self (can be null)
 	RANDOM_ALLY_INCLUDING_SELF, # Random ally
@@ -25,11 +25,13 @@ enum MultipleTargettingStrategy {
 
 # ============================== Private variables ==============================
 
-var _entities: Array[Entity] # All character on the fighting scene
-var _enemies: Array[Entity] # All enemies of the owned character
-var _allies: Array[Entity] # All allies of the owned character
+var _entities: Array[Entity] # All entities on the fighting scene
+var _enemies: Array[Entity] # All enemies of the owned entity
+var _allies: Array[Entity] # All allies of the owned entity
 
-var _current_entity_manager_linked_to: EntityManager
+# ============================== Local nodes ==============================
+
+@onready var _scanning_area: Area3D = %ScanningArea
 
 # ============================== Node base functions ==============================
 
@@ -40,18 +42,16 @@ func _ready() -> void:
 
 # ============================== Public functions ==============================
 
-func connect_to_entity_manager(entity_manager: EntityManager) -> void:
-	if entity_manager == null:
-		printerr("TargetModule: entity_manager is null")
-		return
-	
+func start() -> void:
 	_clear()
-	_entities = entity_manager.entities.values()
-	entity_manager.entity_spawned.connect(_on_entity_manager_entity_spawned)
-	entity_manager.entity_dead.connect(_on_entity_manager_entity_dead)
-	_current_entity_manager_linked_to = entity_manager
-	_enemies = _get_enemies_from_entities()
-	_allies = _get_allies_from_entities()
+	_scanning_area.monitoring = true
+	var bodies: Array[Node3D] = _scanning_area.get_overlapping_bodies()
+	for body in bodies:
+		_add_body_as_entity(body)
+
+
+func stop() -> void:
+	_scanning_area.monitoring = false
 
 
 # Get target of the owned character from a given strategy
@@ -119,43 +119,51 @@ func get_targets(strategy: MultipleTargettingStrategy) -> Array[Entity]:
 
 # ============================== Private functions ==============================
 
-func _get_enemies_from_entities() -> Array[Entity]:
-	var ret: Array[Entity]
-	for character in _entities:
-		if character.team != _owner.team:
-			ret.append(character)
-	return ret
-
-
-func _get_allies_from_entities() -> Array[Entity]:
-	var ret: Array[Entity]
-	for character in _entities:
-		if character.team == _owner.team:
-			ret.append(character)
-	return ret
-
+func _get_alive_entities(entities: Array[Entity]) -> Array[Entity]:
+	var alive_entities: Array[Entity]
+	for entity in entities:
+		if not entity.is_dead:
+			alive_entities.append(entity)
+	return alive_entities
 
 func _remove_character(character_to_remove: Entity) -> void:
 	_enemies.erase(character_to_remove)
 	_allies.erase(character_to_remove)
 
+
+func _add_body_as_entity(body: Node3D) -> void:
+	if not body is Entity:
+			printerr("TargetModule: A body detected by a TargetModule has an Entity mask but is not an entity: [", body.get_path(), "]")
+			return
+		
+	var entity: Entity = body
+	if entity.team == _owner.team: _allies.append(entity)
+	else: _enemies.append(entity)
+	_entities.append(entity)
+
+
+func _clear() -> void:
+	_enemies.clear()
+	_allies.clear()
+	_entities.clear()
+
 # ============================== Target strategy functions ==============================
 
-func _get_closest(characters: Array[Entity], excluded_character: Entity) -> Entity:
-	if characters.is_empty():
+func _get_closest(entities: Array[Entity], excluded_character: Entity) -> Entity:
+	if entities.is_empty():
 		return null
 	
-	var characters_copy: Array[Entity] = characters.duplicate()
-	characters_copy.erase(excluded_character)
-	if characters_copy.is_empty():
+	var entities_copy: Array[Entity] = _get_alive_entities(entities).duplicate()
+	entities_copy.erase(excluded_character)
+	if entities_copy.is_empty():
 		return null
 	
-	characters_copy = _get_array_without_untargetable_targets(characters_copy)
-	if characters_copy.is_empty():
+	entities_copy = _get_array_without_untargetable_targets(entities_copy)
+	if entities_copy.is_empty():
 		return null
 	
-	var closest_character = characters_copy[0]
-	for character in characters:
+	var closest_character = entities_copy[0]
+	for character in entities_copy:
 		if character != _owner:
 			if (character.position - _owner.position).length_squared() < (closest_character.position - _owner.position).length_squared():
 				closest_character = character
@@ -163,21 +171,21 @@ func _get_closest(characters: Array[Entity], excluded_character: Entity) -> Enti
 	return closest_character
 
 
-func _get_farthest(characters: Array[Entity], excluded_character: Entity) -> Entity:
-	if characters.is_empty():
+func _get_farthest(entities: Array[Entity], excluded_character: Entity) -> Entity:
+	if entities.is_empty():
 		return null
 	
-	var characters_copy: Array[Entity] = characters.duplicate()
-	characters_copy.erase(excluded_character)
-	if characters_copy.is_empty():
+	var entities_copy: Array[Entity] = _get_alive_entities(entities).duplicate()
+	entities_copy.erase(excluded_character)
+	if entities_copy.is_empty():
 		return null
 	
-	characters_copy = _get_array_without_untargetable_targets(characters_copy)
-	if characters_copy.is_empty():
+	entities_copy = _get_array_without_untargetable_targets(entities_copy)
+	if entities_copy.is_empty():
 		return null
 	
-	var farthest_character = characters_copy[0]
-	for character in characters:
+	var farthest_character = entities_copy[0]
+	for character in entities_copy:
 		if character != _owner:
 			if (character.global_position - _owner.global_position).length_squared() > (farthest_character.global_position - _owner.global_position).length_squared():
 				farthest_character = character
@@ -185,40 +193,40 @@ func _get_farthest(characters: Array[Entity], excluded_character: Entity) -> Ent
 	return farthest_character
 
 
-func _get_random(characters: Array[Entity], excluded_character: Entity) -> Entity:
-	if characters.is_empty():
+func _get_random(entities: Array[Entity], excluded_character: Entity) -> Entity:
+	if entities.is_empty():
 		return null
 	
 	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 	rng.randomize()
-	var characters_copy: Array[Entity] = characters.duplicate()
-	characters_copy.erase(excluded_character)
-	if characters_copy.is_empty():
+	var entities_copy: Array[Entity] = _get_alive_entities(entities).duplicate()
+	entities_copy.erase(excluded_character)
+	if entities_copy.is_empty():
 		return null
 	
-	characters_copy = _get_array_without_untargetable_targets(characters_copy)
-	if characters_copy.is_empty():
+	entities_copy = _get_array_without_untargetable_targets(entities_copy)
+	if entities_copy.is_empty():
 		return null
 	
-	characters_copy = _get_array_without_untargetable_targets(characters_copy)
-	if characters_copy.is_empty():
+	entities_copy = _get_array_without_untargetable_targets(entities_copy)
+	if entities_copy.is_empty():
 		return null
 	
-	return characters_copy[rng.randi_range(0, characters_copy.size()-1)]
+	return entities_copy[rng.randi_range(0, entities_copy.size()-1)]
 
 
 # TODO améliorer cette fonction pour ne pas pouvoir heal une target untargetable autre que nous
-func _get_lowest_hp(characters: Array[Entity], excluded_character: Entity) -> Entity:
-	if characters.is_empty():
+func _get_lowest_hp(entities: Array[Entity], excluded_character: Entity) -> Entity:
+	if entities.is_empty():
 		return null
 	
-	var characters_copy: Array[Entity] = characters.duplicate()
-	characters_copy.erase(excluded_character)
-	if characters_copy.is_empty():
+	var entities_copy: Array[Entity] = _get_alive_entities(entities).duplicate()
+	entities_copy.erase(excluded_character)
+	if entities_copy.is_empty():
 		return null
 	
-	var lowest_hp_character = characters_copy[0]
-	for character in characters:
+	var lowest_hp_character = entities_copy[0]
+	for character in entities:
 		var character_hp_percent: float = ((character.stats.health as float) / (character.stats.health_max as float)) * 100.0
 		var lowest_hp_character_hp_percent: float = ((lowest_hp_character.stats.health as float) / (lowest_hp_character.stats.health_max as float)) * 100.0
 		if character_hp_percent < lowest_hp_character_hp_percent:
@@ -227,18 +235,10 @@ func _get_lowest_hp(characters: Array[Entity], excluded_character: Entity) -> En
 	return lowest_hp_character
 
 
-func _get_array_without_untargetable_targets(characters: Array[Entity]) -> Array[Entity]:
-	var characters_copy: Array[Entity] = characters.duplicate()
+func _get_array_without_untargetable_targets(entities: Array[Entity]) -> Array[Entity]:
+	var entities_copy: Array[Entity] = entities.duplicate()
 	# TODO Here it was for shadow untargetable. Maybe some heroes will have untargetable ultimate
-	return characters_copy
-
-
-func _clear() -> void:
-	_enemies.clear()
-	_allies.clear()
-	if _current_entity_manager_linked_to != null:
-		_current_entity_manager_linked_to.entity_spawned.disconnect(_on_entity_manager_entity_spawned)
-		_current_entity_manager_linked_to.entity_dead.disconnect(_on_entity_manager_entity_dead)
+	return entities_copy
 
 # ============================== Callback ==============================
 
@@ -254,20 +254,16 @@ func _on_entity_manager_entity_dead(who: Entity):
 	_remove_character(who)
 
 
+func _on_scanning_area_body_entered(body: Node3D) -> void:
+	_add_body_as_entity(body)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
+func _on_scanning_area_body_exited(body: Node3D) -> void:
+	if not body is Entity:
+		printerr("TargetModule: A body detected by a TargetModule has a Entity mask but is not an entity: [", body.get_path(), "]")
+		return
+	
+	var entity: Entity = body
+	if entity.team == _owner.team and _allies.has(entity): _allies.erase(entity)
+	elif entity.team == _owner.team and _enemies.has(entity): _enemies.append(entity)
+	if _entities.has(entity):  _enemies.erase(entity)

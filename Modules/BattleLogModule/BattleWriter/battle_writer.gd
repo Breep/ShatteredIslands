@@ -13,6 +13,9 @@ extends Node
 var _battle_logs: Array[Dictionary]
 var _last_log_index_sent: int = 0
 var _start_time: float
+var _normal_fight_duration: float
+var _accelerated_fight_start_time: float
+var _is_accelerated_fight: bool = false
 
 # ============================== Node base functions ==============================
 
@@ -77,7 +80,10 @@ func _log_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type) -
 
 
 func _get_time() -> float:
-	return ((Time.get_ticks_msec() as float) / 1000.0 - _start_time) * GlobalFightingManager.SERVER_TIME_SCALE
+	if _is_accelerated_fight:
+		return _normal_fight_duration + ((Time.get_ticks_msec() as float) / 1000.0 - _accelerated_fight_start_time)# / GlobalFightingManager.ACCELERATED_FIGHT_TIME_SCALE
+	else:
+		return ((Time.get_ticks_msec() as float) / 1000.0 - _start_time)# * GlobalFightingManager.SERVER_TIME_SCALE
 
 # ============================== Callbacks ==============================
 
@@ -87,6 +93,12 @@ func _on_global_fighting_manager_state_changed(state: GlobalFightingManager.Figh
 			_battle_logs.clear()
 		GlobalFightingManager.FightingState.FIGHTING:
 			_start_time = (Time.get_ticks_msec() as float) / 1000.0
+			_is_accelerated_fight = false
+		GlobalFightingManager.FightingState.FIGHTING_ACCELERATED:
+			_normal_fight_duration = _get_time()
+			_accelerated_fight_start_time = (Time.get_ticks_msec() as float) / 1000.0
+			_is_accelerated_fight = true
+			GlobalFightingManager.ACCELERATED_FIGHT_TIME_SCALE
 		GlobalFightingManager.FightingState.FINISHED:
 			return
 

@@ -20,7 +20,6 @@ func _ready() -> void:
 
 
 func connect_to_fighting_area(fighting_area: FightingArea) -> void:
-	target_module.connect_to_entity_manager(fighting_area.entity_manager)
 	var action_module: ActionModule = modules[Module.ModuleType.ACTION]
 	action_module.connect_to_spawn_manager(fighting_area.spawn_manager)
 
@@ -46,10 +45,11 @@ func stop() -> void:
 func _on_source_fighting_state_changed(new_state: GlobalFightingManager.FightingState) -> void:
 	match new_state:
 		GlobalFightingManager.FightingState.POSITIONING:
-			pass
+			target_module.start()
 		GlobalFightingManager.FightingState.FIGHTING:
 			start()
 		GlobalFightingManager.FightingState.CELEBRATING:
+			target_module.stop()
 			stop()
 
 

@@ -3,7 +3,7 @@ extends CharacterUpgrade
 
 @export var _period: float
 @export var _ignite_stacks: Array[int]
-@export var _damage_per_stack: Array[int]
+@export var _damage_per_stack: Array[float]
 
 func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > 3:

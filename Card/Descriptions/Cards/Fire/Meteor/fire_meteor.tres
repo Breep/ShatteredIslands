@@ -8,7 +8,7 @@
 script = ExtResource("2_cdh3s")
 _period = 2.5
 _ignite_stacks = Array[int]([10, 20, 40])
-_damage_per_stack = Array[int]([2, 4, 8])
+_damage_per_stack = Array[float]([0.5, 1.0, 2.0])
 metadata/_custom_type_script = "uid://qpy43lrfpomj"
 
 [resource]

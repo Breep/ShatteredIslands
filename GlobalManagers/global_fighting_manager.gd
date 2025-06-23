@@ -29,7 +29,7 @@ const _fighting_phase_durations: Dictionary[FightingState, int] = {
 	FightingState.POSITIONING: 5,
 	FightingState.COUNTDOWN: 3,
 	FightingState.FIGHTING: 30,
-	FightingState.FIGHTING_ACCELERATED: 10,
+	FightingState.FIGHTING_ACCELERATED: 10 * ACCELERATED_FIGHT_TIME_SCALE,
 	FightingState.CELEBRATING: 3, # Winners cheers
 }
 
@@ -54,7 +54,7 @@ var _fighting_managers: Array[FightingManager]
 var _current_active_fighting_managers: Array[FightingManager]
 
 var __prototyping: bool = false
-const _ACCELERATED_FIGHT_TIME_SCALE: float = 2.0
+const ACCELERATED_FIGHT_TIME_SCALE: float = 2.0
 
 # ====== SERVER ONLY
 
@@ -159,7 +159,7 @@ func _on_state_changed(new_state) -> void:
 		
 		FightingState.FIGHTING_ACCELERATED:
 			print("[", multiplayer.get_unique_id(), "] GlobalFightingManager: Starting the accelerated fight")
-			if not multiplayer.is_server() or __prototyping: Engine.time_scale = _ACCELERATED_FIGHT_TIME_SCALE
+			Engine.time_scale = ACCELERATED_FIGHT_TIME_SCALE
 			timer.wait_time = _fighting_phase_durations[FightingState.FIGHTING_ACCELERATED]
 			timer.start()
 		

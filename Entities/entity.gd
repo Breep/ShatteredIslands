@@ -5,6 +5,10 @@ extends CharacterBody3D
 
 signal dead(self_ref: Entity)
 func signal_death() -> void:
+	_is_dead = true
+	stats.armor_stacks = 0
+	stats.ignite_stacks = 0
+	stats.poison_stacks = 0
 	dead.emit(self)
 
 signal damage_taken(entity_ref: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool)
@@ -14,6 +18,12 @@ func signal_damage_taken(damage: int, damage_type: Utils.DamageType, is_critical
 signal spell_casted(source: Entity, target: Entity, spell_type: Spell.Type)
 func signal_spell_casted(target: Entity, spell_type: Spell.Type) -> void:
 	spell_casted.emit(self, target, spell_type)
+
+# ============================== Public variables ==============================
+
+var _is_dead: bool = false
+var is_dead: bool:
+	get: return _is_dead
 
 # ============================== Export (Network) ==============================
 
