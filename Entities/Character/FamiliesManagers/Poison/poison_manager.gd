@@ -9,8 +9,6 @@ var _poison_stats: FamilyPoisonStats # Ref to the owner poison stats
 
 # ============================== Spells scenes ==============================
 
-@onready var _poison_cloud_area_scene: PackedScene = preload("res://SpellsAndProjectiles/Spells/PoisonCloud/poison_cloud_area.tscn")
-
 # ============================== Local scenes ==============================
 
 @onready var _poison_tick_timer:Timer = %PoisonTickTimer

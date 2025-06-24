@@ -7,11 +7,6 @@ extends Node
 @export var _fighting_area: FightingArea
 @export var _scanner_area: Area3D
 
-# ============================== Signals ==============================
-
-signal entity_spawned(entity: Entity)
-signal entity_dead(entity: Entity)
-
 # ============================== Private variables ==============================
 
 var _entities: Dictionary[int, Entity] # Key=Entity id, Value=Entity ref

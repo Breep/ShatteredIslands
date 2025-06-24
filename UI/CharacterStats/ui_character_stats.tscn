@@ -1,14 +1,11 @@
 [gd_scene load_steps=16 format=3 uid="uid://db2anika8bvj8"]
 
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_0k5gn"]
-[ext_resource type="Script" uid="uid://wsv4m6qf4t76" path="res://UI/BuyingArea/ui_character_stats.gd" id="1_xv57f"]
+[ext_resource type="Script" uid="uid://wsv4m6qf4t76" path="res://UI/CharacterStats/ui_character_stats.gd" id="1_xv57f"]
 [ext_resource type="Texture2D" uid="uid://bxd1jnaci6olo" path="res://Data/Assets/Card/ICONS/ATTACK color.png" id="2_xv57f"]
 [ext_resource type="Theme" uid="uid://e45umaj22fg7" path="res://UI/_Themes/UI_Label_buying_area.tres" id="3_op3jl"]
 [ext_resource type="Texture2D" uid="uid://upsytg61ftqu" path="res://Data/Assets/Buying_area/UI/aaspeed-removebg-preview (1).png" id="4_f1wmx"]
 [ext_resource type="Texture2D" uid="uid://d3v87ioxyy0vi" path="res://Data/Assets/Buying_area/UI/Critical_strike_icon.webp" id="5_g6iyk"]
-[ext_resource type="Texture2D" uid="uid://csfafgbgft15h" path="res://Data/Assets/Card/Card_IMG/shadow/icon speed.png" id="6_fn11v"]
-[ext_resource type="Texture2D" uid="uid://c48pomq83nro2" path="res://Data/Assets/Card/Card_IMG/poison/poison.png" id="8_w4gma"]
-[ext_resource type="Texture2D" uid="uid://cnp4ioj5qvrv4" path="res://Data/Assets/Card/ICONS/DEFENSE color.png" id="9_iguts"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_xv57f"]
 viewport_path = NodePath("SubViewport")
@@ -17,6 +14,12 @@ viewport_path = NodePath("SubViewport")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3kc6s"]
 bg_color = Color(0.0666667, 0.458824, 0.329412, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lwsw1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pepte"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_klm3a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iykoh"]
 bg_color = Color(0.588235, 0.588235, 0.588235, 1)
@@ -93,10 +96,50 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/background = SubResource("StyleBoxFlat_avmc0")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3kc6s")
-value = 80.0
+value = 100.0
 show_percentage = false
 
-[node name="HealthLabel" type="Label" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/HealthBar"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/HealthBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BuffPanel" type="Panel" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/HealthBar/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_lwsw1")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/HealthBar/HBoxContainer/BuffPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ArmorCenter" type="CenterContainer" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/HealthBar/HBoxContainer/BuffPanel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ArmorLabel" type="Label" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/HealthBar/HBoxContainer/BuffPanel/HBoxContainer/ArmorCenter"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.423613, 0.260802, 0.0955867, 1)
+theme_override_font_sizes/font_size = 30
+text = "X"
+
+[node name="HealthPanel" type="Panel" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/HealthBar/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.6
+theme_override_styles/panel = SubResource("StyleBoxEmpty_pepte")
+
+[node name="HealthLabel" type="Label" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/HealthBar/HBoxContainer/HealthPanel"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -105,9 +148,59 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 35
-text = "1000/1000"
+text = "X/X"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="DebuffPanel" type="Panel" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/HealthBar/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_klm3a")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/HealthBar/HBoxContainer/DebuffPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PoisonCenter" type="CenterContainer" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/HealthBar/HBoxContainer/DebuffPanel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PoisonLabel" type="Label" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/HealthBar/HBoxContainer/DebuffPanel/HBoxContainer/PoisonCenter"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.360784, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "X"
+
+[node name="IgniteCenter" type="CenterContainer" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/HealthBar/HBoxContainer/DebuffPanel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="IgniteLabel" type="Label" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/HealthBar/HBoxContainer/DebuffPanel/HBoxContainer/IgniteCenter"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.639216, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "X"
+
+[node name="InstabilityCenter" type="CenterContainer" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/HealthBar/HBoxContainer/DebuffPanel/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="InstabilityLabel" type="Label" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/HealthBar/HBoxContainer/DebuffPanel/HBoxContainer/InstabilityCenter"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.381413, 0.617571, 0.872876, 1)
+theme_override_font_sizes/font_size = 30
+text = "X"
 
 [node name="ManaBar" type="ProgressBar" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -115,7 +208,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/background = SubResource("StyleBoxFlat_iykoh")
 theme_override_styles/fill = SubResource("StyleBoxFlat_c6x3o")
-value = 30.0
+value = 100.0
 show_percentage = false
 
 [node name="ManaLabel" type="Label" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/ManaBar"]
@@ -127,7 +220,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 35
-text = "0/100"
+text = "X/X"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -146,7 +239,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_2y85p")
 [node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats/AttackPanel"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats/AttackPanel/HBoxContainer"]
+[node name="AttackPortrait" type="TextureRect" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats/AttackPanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("2_xv57f")
@@ -208,124 +301,4 @@ size_flags_horizontal = 3
 theme = ExtResource("3_op3jl")
 theme_override_font_sizes/font_size = 25
 text = "X"
-horizontal_alignment = 1
-
-[node name="MoveSpeedPanel" type="PanelContainer" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxEmpty_2y85p")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats/MoveSpeedPanel"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats/MoveSpeedPanel/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("6_fn11v")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="MoveSpeedLabel" type="Label" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats/MoveSpeedPanel/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("3_op3jl")
-theme_override_font_sizes/font_size = 25
-text = "X"
-horizontal_alignment = 1
-
-[node name="PoisonPanel" type="PanelContainer" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats"]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxEmpty_2y85p")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats/PoisonPanel"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats/PoisonPanel/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("8_w4gma")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="PoisonLabel" type="Label" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats/PoisonPanel/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("3_op3jl")
-theme_override_font_sizes/font_size = 25
-text = "X"
-horizontal_alignment = 1
-
-[node name="ArmorPanel" type="PanelContainer" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxEmpty_2y85p")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats/ArmorPanel"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats/ArmorPanel/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("9_iguts")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="ArmorLabel" type="Label" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats/ArmorPanel/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("3_op3jl")
-theme_override_font_sizes/font_size = 25
-text = "X"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MoveSpeed4" type="PanelContainer" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxEmpty_2y85p")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats/MoveSpeed4"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats/MoveSpeed4/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("6_fn11v")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Label" type="Label" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats/MoveSpeed4/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("3_op3jl")
-text = "10"
-horizontal_alignment = 1
-
-[node name="MoveSpeed5" type="PanelContainer" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxEmpty_2y85p")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats/MoveSpeed5"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats/MoveSpeed5/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("6_fn11v")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Label" type="Label" parent="SubViewport/SubCharacterStats/Stats/MarginContainer/HBoxContainer/VBoxContainer/MultipleStats/MoveSpeed5/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("3_op3jl")
-text = "10"
 horizontal_alignment = 1

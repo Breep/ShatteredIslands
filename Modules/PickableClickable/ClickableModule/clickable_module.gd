@@ -46,6 +46,7 @@ func unfocus() -> void:
 func select() -> void:
 	if _is_selected or select_locked: return
 	_is_selected = true
+	Events.signal_clickable_cliked(_owner)
 	_select()
 
 
@@ -61,6 +62,7 @@ func _connect_to_owner() -> void:
 
 
 func _init_meshs() -> void:
+	return
 	if not _meshs.is_empty():
 		return
 	

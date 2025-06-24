@@ -24,3 +24,8 @@ func signal_fighting_island_spawned(fighting_island_ref: FightingIsland, player_
 signal player_won_a_fight(player: Player)
 func signal_player_won_a_fight(player: Player) -> void:
 	player_won_a_fight.emit(player)
+
+signal entity_cliked(entity: Entity)
+func signal_clickable_cliked(clickable: Node3D) -> void:
+	if clickable is Entity:
+		entity_cliked.emit(clickable)

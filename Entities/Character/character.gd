@@ -43,7 +43,6 @@ var _hero_id := Hero.HeroId.UNDEF
 	set(value):
 		if value == _hero_id or value < 0: return
 		_hero_id = value
-		if Engine.is_editor_hint(): _update_hero()
 
 @export_subgroup("Synchronizer")
 @export var _movement_synchronizer: MultiplayerSynchronizer

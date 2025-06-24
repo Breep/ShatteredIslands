@@ -6,7 +6,7 @@ extends Area3D
 # ==================================================================
 
 var _characters_inside: Array[Character] # Array of all character inside the area
-var _stacks: float = 0 # Stacks applied every tick
+var _stacks: int = 0 # Stacks applied every tick
 var _source: Character # Owner of this poison cloud
 var _wait_time: float # period between two ticks of the poison cloud (in seconds)
 var _radius: float # Radius of the poison cloud area (in m)
@@ -15,7 +15,7 @@ var _radius: float # Radius of the poison cloud area (in m)
 @onready var _collision_shape_3d: CollisionShape3D = %CollisionShape2D
 @onready var tmp_debug_mesh: MeshInstance3D = $PoisonCloudVisual
 
-func init(source: Character, stacks: float, period: float, radius: float) -> void:
+func init(source: Character, stacks: int, period: float, radius: float) -> void:
 	_source = source
 	_stacks = stacks
 	_wait_time = period
