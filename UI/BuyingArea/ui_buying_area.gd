@@ -6,19 +6,17 @@ extends Control
 # ============================== Local nodes ==============================
 
 @onready var _continous_timer: UIContinousTimer = %ContinousTimer
-
+@onready var _ui_selected_entity_stats: UICharacterStats = %SelectedCharacterStats
 # ============================== Private variables ==============================
 
 func _ready() -> void:
-	#if multiplayer.is_server() and _selected_player != null:
-		#_self_character_stats.connect_character_stats(_selected_player.character_stats)
-	#elif not multiplayer.is_server():
-		#_self_character_stats.connect_character_stats(PlayerManager.get_local_player().character_stats)
+	Events.entity_cliked.connect(_on_events_entity_clicked)
 	
 	_continous_timer.connect_timer(_round_timer)
 
 
-
+func _on_events_entity_clicked(entity: Entity) -> void:
+	_ui_selected_entity_stats.connect_entity_stats(entity.stats)
 
 
 

@@ -67,11 +67,9 @@ func pick() -> bool:
 func drop() -> bool:
 	if not _is_picked_up or _is_locked(): return false
 	if _drop():
-		print("[DEBUG] Dropped: ", _owner.name)
 		_is_picked_up = false
 		return true
 	else:
-		print("[DEBUG] Can't be dropped: ", _owner.name)
 		return false
 
 # ============================== Private functions ==============================
@@ -81,14 +79,12 @@ func _connect_to_owner() -> void:
 
 
 func _pick() -> bool:
-	print("[DEBUG] Picked up: ", _owner.name)
 	if _owner.has_method("_on_clickable_module_picked"):
 		_owner.call("_on_clickable_module_picked")
 	return true
 
 
 func _drop() -> bool:
-	print("[DEBUG] Trying to drop: ", _owner.name)
 	if _owner.has_method("_on_clickable_module_dropped"): # TODO wtf c'est un peu nimps ici faut changer ça
 		_owner.call("_on_clickable_module_dropped")
 	return _can_be_dropped()

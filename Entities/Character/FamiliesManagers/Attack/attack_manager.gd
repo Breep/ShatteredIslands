@@ -7,19 +7,30 @@ signal focus_changed(focused: bool)
 
 # ============================== Constants ==============================
 
-const ATTACK_SPEED_BOOST_OVERTIME_PERIOD: float = 1
+const GATLING_TIME: float = 1
+
+# ============================== Export ==============================
+
+#@export_group("External Nodes")
+#@export var _auto_attack_module: AutoAttackModule
 
 # ============================== Private variables ==============================
 
 var _attack_stats: FamilyAttackStats # Ref to the owner attack stats
-
-var _aa_speed_overtime_time_started: float = 0
-
-var _focus_timer: Timer
-var _focused: bool
-
 var _aa_counter: int
-var _previous_target: Character
+
+var _on_gatling_gun_timer_start: float = 0
+
+var _gatling_speed_boost: float = 0 # Boost of attack speed from [Gatling Gun]
+var gatling_speed_boost: float:
+	get: return _gatling_speed_boost
+	set(value):
+		if _gatling_speed_boost == value: return
+		_gatling_speed_boost = value
+		print("GATLING BOOST: ", _gatling_speed_boost)
+		_owner.stats.attack_speed_boost = _attack_stats.twin_blade_speed + _gatling_speed_boost
+
+
 
 # ============================== Public functions ==============================
 
@@ -28,50 +39,48 @@ func _ready() -> void:
 
 
 func start() -> void:
+	_aa_counter = 0
+	_create_optional_timers()
 	for timer in _optional_timers:
 		timer.start()
 
 
 func stop() -> void:
 	for timer in _optional_timers:
-		timer.stop()
+		timer.queue_free()
+	_optional_timers.clear()
 
 
-func notice_auto_attack_done(_target: Character) -> void:
+func apply_stats_modifiers() -> void:
+	if _attack_stats.diamond_sword_activated:
+		_owner.stats.attack_damage += _attack_stats.diamond_sword_attack
+	
+	if _attack_stats.twin_blade_activated:
+		_owner.stats.attack_speed_boost += _attack_stats.twin_blade_speed
+
+
+func attack(target: Character, projectile_spawn: SpawnPoint) -> void:
 	_aa_counter += 1
-
+	var projectile_stats := ProjectileStats.new()
+	projectile_stats.physical_damage_flat = _owner.stats.attack_damage
+	if _attack_stats.titan_axe_activated and _aa_counter % _attack_stats.titan_axe_attack_number == 0:
+		projectile_stats.physical_damage_percent = _attack_stats.titan_axe_damage_percent
+		projectile_stats.physical_damage_percent_type = Utils.PercentModifier.MAX_HP
+	projectile_stats.speed = 15
+	_owner.projectile_attack(target, Projectile.ProjectileType.AUTO_ATTACK, projectile_spawn, projectile_stats)
 
 # ============================== Private functions ==============================
 
 func _create_optional_timers() -> void:
-	# [Gatling]
+	# [Gatling Gun]
 	if _attack_stats.gatling_gun_activated:
-		_optional_timers.append(Utils.create_perpetual_timer(self, ATTACK_SPEED_BOOST_OVERTIME_PERIOD, _on_aa_speed_overtime_timer_timeout))
-		_aa_speed_overtime_time_started = Time.get_ticks_msec()
-
-
-func _check_storm_focus(target) -> void:
-	if target == _previous_target and _focus_timer.is_stopped() and not _focused:
-		_focus_timer.start()
-	elif target != _previous_target:
-		if not _focus_timer.is_stopped():
-			_focus_timer.stop()
-		if _focused:
-			focus_changed.emit(false)
-			_focused = false
-
-
+		_optional_timers.append(Utils.create_perpetual_timer(self, GATLING_TIME, _on_gatling_gun_timer_timeout, true))
+		_on_gatling_gun_timer_start = Time.get_ticks_msec()
 
 # ============================== Callbacks functions ==============================
 
-func _on_aa_speed_overtime_timer_timeout() -> void:
-	var time_elapsed: float = Time.get_ticks_msec() - _aa_speed_overtime_time_started
+func _on_gatling_gun_timer_timeout() -> void:
+	var time_elapsed: float = (Time.get_ticks_msec() - _on_gatling_gun_timer_start) / 1000.0
 	var attack_speed_boost = remap(time_elapsed, 0, _attack_stats.gatling_gun_duration, \
 			_attack_stats.gatling_gun_min, _attack_stats.gatling_gun_max)
-	attack_speed_boost = clampf(attack_speed_boost, _attack_stats.gatling_gun_min, _attack_stats.gatling_gun_max)
-	# _update_auto_attack_speed()
-
-
-func _on_focus_timer_timeout() -> void:
-	_focused = true
-	focus_changed.emit(true)
+	gatling_speed_boost = clampf(attack_speed_boost, _attack_stats.gatling_gun_min, _attack_stats.gatling_gun_max)

@@ -1,14 +1,16 @@
-[gd_scene load_steps=13 format=3 uid="uid://c5ji8s1iic5v8"]
+[gd_scene load_steps=15 format=3 uid="uid://c5ji8s1iic5v8"]
 
 [ext_resource type="Script" uid="uid://bu48b2v401db2" path="res://Prototyping/FightingIsland/prototyping_map.gd" id="1_66i2r"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="2_ovips"]
 [ext_resource type="Resource" uid="uid://b3ohguwihk7x3" path="res://Card/Descriptions/Cards/Fire/PeriodicIgnite/fire_periodic_ignite.tres" id="3_fvg5y"]
-[ext_resource type="Resource" uid="uid://dvpdubk0btegx" path="res://Card/Descriptions/Cards/Poison/poison_periodica_agaricus.tres" id="3_ovips"]
 [ext_resource type="Resource" uid="uid://cdr51p56pftqi" path="res://Card/Descriptions/Cards/Fire/Meteor/fire_meteor.tres" id="5_4fa74"]
 [ext_resource type="Resource" uid="uid://bt615e0tyxyls" path="res://Card/Descriptions/Cards/Defense/GladiatorHelmet/defense_gladiator_helmet.tres" id="5_11vyl"]
+[ext_resource type="Resource" uid="uid://cvkv7hq8nsvks" path="res://Card/Descriptions/Cards/Attack/TitanAxe/attack_titan_axe.tres" id="7_7w4nr"]
+[ext_resource type="Resource" uid="uid://3vjmnbpyyjyk" path="res://Card/Descriptions/Cards/Attack/GatlingGun/attack_gatling_gun.tres" id="7_gs0rq"]
 [ext_resource type="Texture2D" uid="uid://dodc5quv2uysn" path="res://Data/Misc/skybox.jpg" id="7_xd7nd"]
 [ext_resource type="PackedScene" uid="uid://drcuyohos0doa" path="res://FloatingIsland/FightingIsland/fighting_island.tscn" id="7_yjquk"]
 [ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Entities/Character/character.tscn" id="9_4fa74"]
+[ext_resource type="Resource" uid="uid://ctm6ojtt36a88" path="res://Card/Descriptions/Cards/Attack/TwinBlade/attack_twin_blade.tres" id="9_ksjav"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ovips"]
 panorama = ExtResource("7_xd7nd")
@@ -23,8 +25,8 @@ sky = SubResource("Sky_08xy3")
 [node name="PrototypingMap" type="Node3D" node_paths=PackedStringArray("_floating_island", "_character1", "_character2")]
 script = ExtResource("1_66i2r")
 _floating_island = NodePath("FightingIsland")
-_player1_cards = Array[ExtResource("2_ovips")]([ExtResource("3_fvg5y"), ExtResource("3_ovips"), ExtResource("5_4fa74")])
-_player2_cards = Array[ExtResource("2_ovips")]([ExtResource("5_11vyl")])
+_player1_cards = Array[ExtResource("2_ovips")]([ExtResource("3_fvg5y"), ExtResource("5_4fa74"), ExtResource("5_11vyl")])
+_player2_cards = Array[ExtResource("2_ovips")]([ExtResource("5_11vyl"), ExtResource("7_7w4nr"), ExtResource("7_gs0rq"), ExtResource("9_ksjav")])
 _character1 = NodePath("Character1")
 _character2 = NodePath("Character2")
 

@@ -17,7 +17,7 @@ enum ProjectileType {
 
 # ============================== Constants ==============================
 
-const _SPEED_MIN: float = 10
+const _SPEED_MIN: float = 20
 const _DAMMAGE_MIN: int = 1
 
 # ============================== Network Export ==============================
@@ -47,26 +47,23 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node3D) -> void:
 	if body is Character and body == target:
-		if target != null:
-			if not multiplayer.is_server():
+		if not multiplayer.is_server():
+			queue_free()
+			return
+		var physical_damage: int = stats.physical_damage_flat
+		physical_damage += _get_damage_percent(stats.physical_damage_percent, stats.physical_damage_percent_type)
+		if physical_damage > 0:
+			target.take_damage(physical_damage, Utils.DamageType.PHYSICAL, stats.is_critic, source)
+		var magical_damage: int = stats.magical_damage_flat
+		magical_damage += _get_damage_percent(stats.magical_damage_percent, stats.magical_damage_percent_type)
+		if magical_damage > 0:
+			target.take_damage(magical_damage, Utils.DamageType.MAGICAL, stats.is_critic, source)
+		if stats.is_bouncing:
+			target = source.target_module.get_closest_enemy_from(target) # Set new target to the closest character enemy to the source
+			if target == null:
 				queue_free()
-				return
-			if stats.physical_damage_flat > 0:
-				target.take_damage(stats.physical_damage_flat, Utils.DamageType.PHYSICAL, stats.is_critic, source)
-			if stats.magical_damage_flat > 0:
-				target.take_damage(stats.magical_damage_flat, Utils.DamageType.MAGICAL, stats.is_critic, source)
-			if stats.physical_damage_percent > 0:
-				_damage_percent(stats.physical_damage_percent, Utils.DamageType.PHYSICAL, stats.physical_damage_percent_type, stats.is_critic)
-			if stats.magical_damage_percent > 0:
-				_damage_percent(stats.magical_damage_percent, Utils.DamageType.MAGICAL, stats.magical_damage_percent_type, stats.is_critic)
-			if stats.poison_stacks > 0:
-				Events.condition_stacks_done.emit(source, target, stats.poison_stacks, Utils.StackType.POISON, stats.poison_duration)
-			if stats.is_bouncing:
-				target = source.target_module.get_closest_enemy_from(target) # Set new target to the closest character enemy to the source
-				if target == null:
-					queue_free()
-				stats.is_bouncing = false
-				return
+			stats.is_bouncing = false
+			return
 		
 		queue_free()
 
@@ -84,8 +81,7 @@ func _move_toward_target(delta: float):
 	look_at(target.global_position + _vertical_offset * Vector3.UP)
 
 
-func _damage_percent(damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier, is_critical: bool) -> void:
-	if not multiplayer.is_server(): return
+func _get_damage_percent(damage_percent: float, percent_modifier: Utils.PercentModifier) -> int:
 	var hp: int
 	match percent_modifier:
 		Utils.PercentModifier.MAX_HP:
@@ -94,8 +90,7 @@ func _damage_percent(damage_percent: float, damage_type: Utils.DamageType, perce
 			hp = target.stats.health
 		Utils.PercentModifier.LOST_HP:
 			hp = target.stats.health_max - source.stats.health
-	var damage = hp * damage_percent  / 100.0
-	target.take_damage(damage, damage_type, is_critical, source)
+	return hp * damage_percent  / 100.0
 
 # ============================== Callbacks ==============================
 

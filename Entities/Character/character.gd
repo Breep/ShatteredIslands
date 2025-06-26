@@ -59,6 +59,9 @@ var _hero_id := Hero.HeroId.UNDEF
 @export_group("Stats")
 @export var families_stats: FamiliesStats
 
+@export_group("Family Managers")
+@export var attack_manager: AttackManager
+
 # ============================== Public variables ==============================
 
 var player: Player
@@ -75,6 +78,7 @@ func apply_cards_upgrade(deck: PlayerDeck) -> void:
 	stats.reset_from_hero(_hero_3D.hero)
 	for card in deck.card_pile:
 		card.player_upgrade.apply(families_stats, card.lvl)
+	attack_manager.apply_stats_modifiers()
 
 
 func connect_to_fighting_area(fighting_area: FightingArea) -> void:
@@ -170,7 +174,7 @@ func _ready() -> void:
 # ============================== Private functions ==============================
 
 func _reset() -> void:
-	stats.reset_from_hero(_hero_3D.hero)
+	apply_cards_upgrade(player.deck)
 
 
 func _update_hero() -> void:

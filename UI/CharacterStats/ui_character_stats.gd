@@ -24,8 +24,8 @@ var _entity_stats: EntityStats
 @onready var _ignite_container: CenterContainer = %IgniteCenter
 @onready var _ignite_label: Label = %IgniteLabel
 
-@onready var _instability_container: CenterContainer = %IgniteCenter
-@onready var _instability_label: Label = %IgniteLabel
+#@onready var _instability_container: CenterContainer = %IgniteCenter
+#@onready var _instability_label: Label = %IgniteLabel
 
 # ============================== Public functions ==============================
 
@@ -125,7 +125,7 @@ func _on_entity_stats_attack_damage_changed(new_attack_damage: int) -> void:
 
 
 func _on_entity_stats_attack_speed_changed(new_attack_speed: float) -> void:
-	_attack_speed_label.text = str(new_attack_speed)
+	_attack_speed_label.text = str("%.2f" % new_attack_speed)
 
 
 func _on_entity_stats_physical_critical_chance_changed(new_physical_critical_chance: float) -> void:

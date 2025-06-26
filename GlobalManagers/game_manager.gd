@@ -38,9 +38,10 @@ var _random_heroes_ref: Array[Hero.HeroId]
 func _ready() -> void:
 	game_rules = load("res://Game/GameRules/NormalGameRules.tres")
 	_init_families_ref()
-	#_active_families.append(get_family_from_type(Family.FamilyType.DEFENSE))
+	_active_families.append(get_family_from_type(Family.FamilyType.DEFENSE))
 	_active_families.append(get_family_from_type(Family.FamilyType.POISON))
 	_active_families.append(get_family_from_type(Family.FamilyType.FIRE))
+	_active_families.append(get_family_from_type(Family.FamilyType.ATTACK))
 
 # ============================== Public function ==============================
 
@@ -127,7 +128,7 @@ func _answer_hero_pickup_order(hero_pickup_order_player_ids: Array[int]) -> void
 # ============================== Private function ==============================
 
 func _init_families_ref() -> void:
-	#_families_ref[Family.FamilyType.ATTACK] = load("res://Resources/Families/attack_family.tres") as Family
+	_families_ref[Family.FamilyType.ATTACK] = load("res://Card/Descriptions/Families/attack_family.tres") as Family
 	_families_ref[Family.FamilyType.DEFENSE] = load("res://Card/Descriptions/Families/defense_family.tres") as Family
 	_families_ref[Family.FamilyType.FIRE] = load("res://Card/Descriptions/Families/fire_family.tres") as Family
 	#_families_ref[Family.FamilyType.STORM] = load("res://Resources/Families/storm_family.tres") as Family

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://cvkv7hq8nsvks"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_fnffb"]
+[ext_resource type="Texture2D" uid="uid://bklqewqg3jm0l" path="res://Data/Assets/Card/Portraits/Attack/attack_titan_axe.png" id="1_j4nvj"]
+[ext_resource type="Script" uid="uid://ctlctd41056hl" path="res://Card/Descriptions/Cards/Attack/TitanAxe/attack_titan_axe.gd" id="2_dlsa4"]
+
+[sub_resource type="Resource" id="Resource_4lasq"]
+script = ExtResource("2_dlsa4")
+_attack_number = 5
+_damage_percent = Array[float]([0.5, 1.0, 1.5, 2.0, 4.0])
+metadata/_custom_type_script = "uid://ctlctd41056hl"
+
+[resource]
+script = ExtResource("1_fnffb")
+name = "Titan Axe"
+picture = ExtResource("1_j4nvj")
+family = 0
+rarity = 0
+player_upgrade = SubResource("Resource_4lasq")
+lvl = 5
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"
