@@ -17,7 +17,7 @@ func _ready() -> void:
 # ============================== Public function ==============================
 
 # ===== Damage
-func take_damage(damage: int, damage_type: Utils.DamageType, is_critical: bool, _source: Entity = null) -> void:
+func take_damage(damage: int, damage_type: Utils.DamageType, is_critical: bool, source: Entity = null, attack_type: Utils.AttackType = Utils.AttackType.UNDEF) -> void:
 	if multiplayer.is_server(): 
 		if _storm_manager != null: damage = _storm_manager.get_increased_critical_damage(damage, is_critical) # Increase ALL critical damage
 		if _defense_manager != null: damage = _defense_manager.get_reduced_damage_taken_from_mystical_shoulder(damage) # Reduce % of MAGIC damage
@@ -27,6 +27,8 @@ func take_damage(damage: int, damage_type: Utils.DamageType, is_critical: bool, 
 	
 	_owner.stats.health -= damage
 	_owner.signal_damage_taken(damage, damage_type, is_critical)
+	if source != null and attack_type != Utils.AttackType.UNDEF:
+		source.notify_damage_done(damage, attack_type)
 
 
 func take_damage_percent(damage_percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.DamageType, is_critical: bool, source: Entity = null) -> void:
@@ -43,6 +45,7 @@ func take_damage_percent(damage_percent: float, percent_modifier: Utils.PercentM
 	take_damage(damage, damage_type, is_critical, source)
 
 # ===== Condition stacks
+
 func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, _source: Character = null) -> void:
 	match stack_type:
 		Utils.StackType.POISON:
@@ -51,5 +54,7 @@ func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, _sou
 			_owner.stats.ignite_stacks += stacks_number
 
 # ===== Heal
+
 func take_heal(heal_amount: int, _source: Character = null) -> void:
 	_owner.stats.health += heal_amount
+	_owner.signal_heal_taken(heal_amount)

@@ -21,6 +21,11 @@ enum StackType {
 	IGNITE,
 }
 
+enum AttackType {
+	UNDEF,
+	AUTO_ATTACK
+}
+
 # ============================== Public variables ==============================
 
 @onready var rng := RandomNumberGenerator.new()

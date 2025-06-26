@@ -53,7 +53,7 @@ func _on_body_entered(body: Node3D) -> void:
 		var physical_damage: int = stats.physical_damage_flat
 		physical_damage += _get_damage_percent(stats.physical_damage_percent, stats.physical_damage_percent_type)
 		if physical_damage > 0:
-			target.take_damage(physical_damage, Utils.DamageType.PHYSICAL, stats.is_critic, source)
+			target.take_damage(physical_damage, Utils.DamageType.PHYSICAL, stats.is_critic, source, Utils.AttackType.AUTO_ATTACK)
 		var magical_damage: int = stats.magical_damage_flat
 		magical_damage += _get_damage_percent(stats.magical_damage_percent, stats.magical_damage_percent_type)
 		if magical_damage > 0:

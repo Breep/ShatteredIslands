@@ -60,7 +60,7 @@ var _hero_id := Hero.HeroId.UNDEF
 @export var families_stats: FamiliesStats
 
 @export_group("Family Managers")
-@export var attack_manager: AttackManager
+@export var _attack_manager: AttackManager
 
 # ============================== Public variables ==============================
 
@@ -78,7 +78,7 @@ func apply_cards_upgrade(deck: PlayerDeck) -> void:
 	stats.reset_from_hero(_hero_3D.hero)
 	for card in deck.card_pile:
 		card.player_upgrade.apply(families_stats, card.lvl)
-	attack_manager.apply_stats_modifiers()
+	_attack_manager.apply_stats_modifiers()
 
 
 func connect_to_fighting_area(fighting_area: FightingArea) -> void:
@@ -101,6 +101,12 @@ func on_inactive_island() -> void:
 
 func get_auto_attack_spawn() -> Node3D:
 	return _turret.get_projectile_spawn_point()
+
+# ===== Notifications
+
+func notify_damage_done(damage: int, attack_type: Utils.AttackType) -> void:
+	if attack_type == Utils.AttackType.AUTO_ATTACK:
+		_attack_manager.notify_damage_done(damage)
 
 # ===== Actions
 
@@ -127,8 +133,8 @@ func inflict_condition_stacks(target: Character, stacks_number: int, stack_type:
 
 # ===== Interaction
 
-func take_damage(damage: int, damage_type: Utils.DamageType, is_critical: bool = false, source: Entity = null) -> void:
-	_interact_module.take_damage(damage, damage_type, is_critical, source)
+func take_damage(damage: int, damage_type: Utils.DamageType, is_critical: bool = false, source: Entity = null, attack_type: Utils.AttackType = Utils.AttackType.UNDEF) -> void:
+	_interact_module.take_damage(damage, damage_type, is_critical, source, attack_type)
 
 func take_damage_percent(percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.DamageType, is_critical: bool = false, source: Entity = null) -> void:
 	_interact_module.take_damage_percent(percent, percent_modifier, damage_type, is_critical, source)

@@ -70,6 +70,13 @@ func attack(target: Character, projectile_spawn: SpawnPoint) -> void:
 	projectile_stats.speed = 15
 	_owner.projectile_attack(target, Projectile.ProjectileType.AUTO_ATTACK, projectile_spawn, projectile_stats)
 
+
+func notify_damage_done(damage: int) -> void:
+	if _attack_stats.healing_crossbow_activated:
+		if Utils.is_randomize_modifier_active(_attack_stats.healing_crossbow_chance):
+			var heal_amount: int = (damage as float * _attack_stats.healing_crossbow_percent / 100.0) as int
+			_owner.heal(_owner, heal_amount)
+
 # ============================== Private functions ==============================
 
 func _create_optional_timers() -> void:

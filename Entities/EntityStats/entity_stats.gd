@@ -17,7 +17,7 @@ var _health: int # Current health
 var health: int:
 	get: return _health
 	set(value):
-		if value < 0: value = 0
+		value = clampi(value, 0, health_max)
 		if value == _health: return
 		_health = value
 		health_changed.emit(_health)

@@ -29,14 +29,17 @@ extends FamilyStats
 @export var titan_axe_attack_number: int # Number of attack needed to proc the skil
 @export var titan_axe_damage_percent: float # % of target max hp damage buff
 
+@export_group("Healing Crossbow")
+@export var healing_crossbow_activated: bool # True if this skill is activated
+@export var healing_crossbow_percent: float # Self heal amount when auto attacking (% of damage done)
+@export var healing_crossbow_chance: float # % of chance to proc healing attack
+
 var double_edge_sword_activated: bool # True if this skill is activated
 var double_edge_sword_damage_percent: int # % of damage increased
 var double_edge_sword_attacks_number: int # Number oof attacks boosted
 
 var double_attack_chance: float # % of chance to proc a double attack
 
-var healing_attack_heal_amount: int # Heal amount applied to an ally (can be self) when  auto attacking
-var healing_attack_chance: float # % of chance to proc healing attack
 
 var fire_attack_activated: bool  # If the fire attack is activated
 var fire_attack_damage: float  # Damage done in addition to normal auto attack (in % of current enemy hp)

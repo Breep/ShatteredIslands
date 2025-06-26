@@ -13,9 +13,11 @@ func signal_death() -> void:
 
 signal damage_taken(entity_ref: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool)
 func signal_damage_taken(damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
-	if name == "Character_Rocky":
-		print("[DEBUG] ", name, " SIGNAL DAMAGE TAKEN (", damage, ")")
 	damage_taken.emit(self, damage, damage_type, is_critical)
+
+signal heal_taken(entity_ref: Entity, heal_amount: int, damage_type: Utils.DamageType)
+func signal_heal_taken(heal_amount: int) -> void:
+	heal_taken.emit(self, heal_amount)
 
 signal spell_casted(source: Entity, target: Entity, spell_type: Spell.Type)
 func signal_spell_casted(target: Entity, spell_type: Spell.Type) -> void:
@@ -76,6 +78,11 @@ func look_at_target_y_only(target_position: Vector3):
 func get_auto_attack_spawn() -> Node3D:
 	return self
 
+# ===== Notifications [VIRTUAL]
+
+func notify_damage_done(_damage: int, _attack_type: Utils.AttackType) -> void:
+	printerr("Entity: virtual notice_damage_done() called [", get_path(), "]")
+
 # ===== Actions [VIRTUAL]
 
 func direct_attack(_target: Character, _damage: int, _damage_type: Utils.DamageType) -> void:
@@ -101,7 +108,7 @@ func inflict_condition_stacks(_target: Character, _stacks_number: int, _stack_ty
 
 # ===== Interaction [VIRTUAL]
 
-func take_damage(_damage: int, _damage_type: Utils.DamageType, _is_critical: bool = false, _source: Entity = null) -> void:
+func take_damage(_damage: int, _damage_type: Utils.DamageType, _is_critical: bool = false, _source: Entity = null, attack_type: Utils.AttackType = Utils.AttackType.UNDEF) -> void:
 	printerr("Entity: virtual take_damage() called [", get_path(), "]")
 
 func take_damage_percent(_percent: float, _percent_modifier: Utils.PercentModifier, _damage_type: Utils.DamageType, _is_critical: bool = false, _source: Entity = null) -> void:

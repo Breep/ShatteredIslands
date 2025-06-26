@@ -28,6 +28,7 @@ func _process(_delta: float) -> void:
 
 func _ready() -> void:
 	_owner_entity.damage_taken.connect(_on_owner_entity_damage_taken)
+	_owner_entity.heal_taken.connect(_on_owner_entity_heal_taken)
 
 # ============================== Public ==============================
 
@@ -48,7 +49,7 @@ func update_name_displayed(player_name: String) -> void:
 	_name_displayed.text = player_name
 
 
-func damage_popup(amount: float, damage_type: Utils.DamageType, is_critic: bool):
+func damage_popup(amount: float, damage_type: Utils.DamageType, is_critic: bool = false):
 	var popup: DamagePopUp = Shared.DAMAGE_POPUP_SCENE.instantiate()
 	var offset = Vector3(randf_range(-0.5, 0.5), randf_range(-0.5, 0.5), 0) 
 	popup.set_value(amount)
@@ -76,3 +77,7 @@ func damage_popup(amount: float, damage_type: Utils.DamageType, is_critic: bool)
 
 func _on_owner_entity_damage_taken(_entity_ref: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
 	damage_popup(damage, damage_type, is_critical)
+
+
+func _on_owner_entity_heal_taken(_entity_ref: Entity, heal_amount: int) -> void:
+	damage_popup(heal_amount, Utils.DamageType.HEAL)
