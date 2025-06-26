@@ -17,6 +17,7 @@ var _health: int # Current health
 var health: int:
 	get: return _health
 	set(value):
+		if value < 0: value = 0
 		if value == _health: return
 		_health = value
 		health_changed.emit(_health)
@@ -106,6 +107,7 @@ var _poison_stacks: int = 0
 var poison_stacks: int:
 	get: return _poison_stacks
 	set(value):
+		if value < 0: value = 0
 		if value == _poison_stacks: return
 		_poison_stacks = value
 		poison_stacks_changed.emit(_poison_stacks)
@@ -116,8 +118,8 @@ var _ignite_stacks: int
 var ignite_stacks: int:
 	get: return _ignite_stacks
 	set(value):
-		if value == _ignite_stacks: return
 		if value < 0: value = 0
+		if value == _ignite_stacks: return
 		_ignite_stacks = value
 		ignite_stacks_changed.emit(_ignite_stacks)
 

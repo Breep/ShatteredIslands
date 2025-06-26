@@ -85,7 +85,6 @@ func _on_auto_attack_timer_timeout() -> void:
 
 
 func _on_owner_stats_attack_speed_changed(new_attack_speed: float) -> void:
-	print("AutoAttackModule: Attack speed changed: ", new_attack_speed)
 	attack_speed = new_attack_speed
 
 

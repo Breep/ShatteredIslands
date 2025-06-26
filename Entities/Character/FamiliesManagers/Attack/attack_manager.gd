@@ -27,7 +27,6 @@ var gatling_speed_boost: float:
 	set(value):
 		if _gatling_speed_boost == value: return
 		_gatling_speed_boost = value
-		print("GATLING BOOST: ", _gatling_speed_boost)
 		_owner.stats.attack_speed_boost = _attack_stats.twin_blade_speed + _gatling_speed_boost
 
 
@@ -61,6 +60,8 @@ func apply_stats_modifiers() -> void:
 
 func attack(target: Character, projectile_spawn: SpawnPoint) -> void:
 	_aa_counter += 1
+	if _attack_stats.curative_knife_activated and Utils.is_randomize_modifier_active(_attack_stats.curative_knife_chance):
+		_remove_random_debuff_stack(_attack_stats.curative_knife_stacks)
 	var projectile_stats := ProjectileStats.new()
 	projectile_stats.physical_damage_flat = _owner.stats.attack_damage
 	if _attack_stats.titan_axe_activated and _aa_counter % _attack_stats.titan_axe_attack_number == 0:
@@ -76,6 +77,16 @@ func _create_optional_timers() -> void:
 	if _attack_stats.gatling_gun_activated:
 		_optional_timers.append(Utils.create_perpetual_timer(self, GATLING_TIME, _on_gatling_gun_timer_timeout, true))
 		_on_gatling_gun_timer_start = Time.get_ticks_msec()
+
+
+func _remove_random_debuff_stack(stack_number: int) -> void:
+	var random_stacks_types: Array[Utils.StackType]
+	if _owner.stats.poison_stacks > 0: random_stacks_types.append(Utils.StackType.POISON)
+	if _owner.stats.ignite_stacks > 0: random_stacks_types.append(Utils.StackType.IGNITE)
+	var random_stack_type: Utils.StackType = random_stacks_types.pick_random()
+	match random_stack_type:
+		Utils.StackType.POISON: _owner.stats.poison_stacks -= stack_number
+		Utils.StackType.IGNITE: _owner.stats.ignite_stacks -= stack_number
 
 # ============================== Callbacks functions ==============================
 
