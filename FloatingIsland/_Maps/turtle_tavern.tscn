@@ -1694,7 +1694,6 @@ _data = {
 animation = &"swim"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_6vn2q"]
-graph_offset = Vector2(-514.212, -85.8002)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_ihlgc")
 nodes/Animation/position = Vector2(0, 120)
 node_connections = [&"output", 0, &"Animation"]

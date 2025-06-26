@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c5ji8s1iic5v8"]
+[gd_scene load_steps=17 format=3 uid="uid://c5ji8s1iic5v8"]
 
 [ext_resource type="Script" uid="uid://bu48b2v401db2" path="res://Prototyping/FightingIsland/prototyping_map.gd" id="1_66i2r"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="2_ovips"]
