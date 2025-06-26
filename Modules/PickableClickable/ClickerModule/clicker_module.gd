@@ -117,9 +117,9 @@ func _handle_clickable_select(event: InputEvent) -> void:
 
 
 func _handle_pickable_select(event: InputEvent) -> void:
-	if event.is_action_pressed("select_main") and _pickable_overing != null:
+	if event.is_action_pressed("select_secondary") and _pickable_overing != null:
 		_select_pickable(_pickable_overing, true, event)
-	elif event.is_action_released("select_main") and _pickable_selected != null:
+	elif event.is_action_released("select_secondary") and _pickable_selected != null:
 		_select_pickable(_pickable_selected, false, event)
 
 

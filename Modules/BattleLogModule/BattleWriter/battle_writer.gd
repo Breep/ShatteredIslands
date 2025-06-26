@@ -98,7 +98,6 @@ func _on_global_fighting_manager_state_changed(state: GlobalFightingManager.Figh
 			_normal_fight_duration = _get_time()
 			_accelerated_fight_start_time = (Time.get_ticks_msec() as float) / 1000.0
 			_is_accelerated_fight = true
-			GlobalFightingManager.ACCELERATED_FIGHT_TIME_SCALE
 		GlobalFightingManager.FightingState.FINISHED:
 			return
 

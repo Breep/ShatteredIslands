@@ -17,6 +17,7 @@ var _health: int # Current health
 var health: int:
 	get: return _health
 	set(value):
+		if value < 0: value = 0
 		if value == _health: return
 		_health = value
 		health_changed.emit(_health)
@@ -62,6 +63,7 @@ var _attack_damage: int # Damage of auto attack
 		attack_damage_changed.emit(_attack_damage)
 
 signal attack_speed_changed(new_attack_speed: float)
+var _attack_speed_default: float # Default attack speed
 var _attack_speed: float # Attack per second
 @export var attack_speed: float:
 	get: return _attack_speed
@@ -69,6 +71,14 @@ var _attack_speed: float # Attack per second
 		if value == _attack_speed: return
 		_attack_speed = value
 		attack_speed_changed.emit(_attack_speed)
+
+var _attack_speed_boost: float # % of attack speed modification
+@export var attack_speed_boost: float:
+	get: return _attack_speed_boost
+	set(value):
+		if value == _attack_speed_boost: return
+		_attack_speed_boost = value
+		attack_speed = _attack_speed_default + _attack_speed_default * _attack_speed_boost / 100.0
 
 # ============================== Critic ==============================
 
@@ -97,6 +107,7 @@ var _poison_stacks: int = 0
 var poison_stacks: int:
 	get: return _poison_stacks
 	set(value):
+		if value < 0: value = 0
 		if value == _poison_stacks: return
 		_poison_stacks = value
 		poison_stacks_changed.emit(_poison_stacks)
@@ -107,8 +118,8 @@ var _ignite_stacks: int
 var ignite_stacks: int:
 	get: return _ignite_stacks
 	set(value):
-		if value == _ignite_stacks: return
 		if value < 0: value = 0
+		if value == _ignite_stacks: return
 		_ignite_stacks = value
 		ignite_stacks_changed.emit(_ignite_stacks)
 
@@ -132,7 +143,9 @@ func reset_from_hero(hero: Hero) -> void:
 	mana = 0
 	mana_regen = hero.stats.mana_regen
 	attack_damage = hero.stats.attack_damage
+	_attack_speed_default = hero.stats.attack_speed
 	attack_speed = hero.stats.attack_speed
+	attack_speed_boost = 0
 	physical_critical_chance = hero.stats.physical_critical_chance
 	physical_critical_multiplier = hero.stats.physical_critical_multiplier
 

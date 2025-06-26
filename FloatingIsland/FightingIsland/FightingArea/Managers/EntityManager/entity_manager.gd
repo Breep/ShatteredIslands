@@ -5,11 +5,7 @@ extends Node
 
 @export_group("External nodes")
 @export var _fighting_area: FightingArea
-
-# ============================== Signals ==============================
-
-signal entity_spawned(entity: Entity)
-signal entity_dead(entity: Entity)
+@export var _scanner_area: Area3D
 
 # ============================== Private variables ==============================
 
@@ -21,12 +17,18 @@ var _characters: Dictionary[int, Character] # Key=Entity id, Value=Character ref
 var characters: Dictionary[int, Character]:
 	get: return _characters
 
+var _is_active: bool = false
+
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	get_parent().add_user_signal(Entity.SIGNAL_NAME_SPAWNED, ["entity_ref"])
-	get_parent().connect(Entity.SIGNAL_NAME_SPAWNED, _on_parent_entity_is_spawned)
+	if _scanner_area == null:
+		printerr("EntityManager: Scanning area unset [", get_path(), "]")
+		return
+	
 	Events.game_state_changed.connect(_on_events_game_state_changed)
+	_scanner_area.body_entered.connect(_on_scanner_area_body_entered)
+	_scanner_area.body_exited.connect(_on_scanner_area_body_exited)
 
 # ============================== Public functions ==============================
 
@@ -41,37 +43,57 @@ func clear() -> void:
 
 # ============================== Private functions ==============================
 
-func _register_entity(who: Entity) -> void:
-	_entities[who.id] = who
-	if who is Character:
-		_characters[who.id] = who
+func _register_entity(entity: Entity) -> void:
+	if _entities.has(entity.id):
+		printerr("EntityManager: Entity ", entity.name, " is already registered [", get_path(), "]")
+		return
 	
-	entity_spawned.emit(who)
-	who.damage_taken.connect(_on_entity_damage_taken)
-	who.spell_casted.connect(_on_entity_spell_casted)
+	_entities[entity.id] = entity
+	if entity is Character:
+		_characters[entity.id] = entity
+	
+	if multiplayer.is_server():
+		entity.damage_taken.connect(_on_entity_damage_taken)
+		entity.spell_casted.connect(_on_entity_spell_casted)
+
+
+func _kick_entity(entity: Entity) -> void:
+	if entity.damage_taken.is_connected(_on_entity_damage_taken):
+		entity.damage_taken.disconnect(_on_entity_damage_taken)
+	if entity.spell_casted.is_connected(_on_entity_spell_casted):
+		entity.spell_casted.disconnect(_on_entity_spell_casted)
+	entities.erase(entity)
+	if _characters.has(entity.id): _characters.erase(entity)
 
 # ============================== Callbacks ==============================
 
-# Attached to a custom user signals added by this module to the parent
-func _on_parent_entity_is_spawned(who: Entity) -> void: # TODO ça peut être simplifié en mettant une Area3D sur l'entity manager qui scan la zone de combat
-	if _entities.has(who.id):
-		printerr("EntityManager: ", who, "-", who.name, " is spawned more than once")
-		return
-	_register_entity(who)
-
-
 func _on_events_game_state_changed(game_state: Game.GameState) -> void:
 	if game_state == Game.GameState.BUYING:
+		_is_active = false
 		clear()
+	if game_state == Game.GameState.FIGHTING:
+		_is_active = true
 
 
-func _on_entity_damage_taken(entity_ref: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
-	_fighting_area.signal_damage_taken(entity_ref, damage, damage_type, is_critical)
+func _on_entity_damage_taken(entity: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
+	_fighting_area.signal_damage_taken(entity, damage, damage_type, is_critical)
 
 
 func _on_entity_spell_casted(entity_ref: Entity, target: Entity, spell_type: Spell.Type) -> void:
 	_fighting_area.signal_spell_casted(entity_ref, target, spell_type)
 
 
-
+func _on_scanner_area_body_entered(body: Node3D) -> void:
+	if not _is_active: return
+	if not body is Entity:
+		printerr("EntityManager: A body detected has an Entity mask but is not an entity: [", body.get_path(), "]")
+		return
+	_register_entity(body)
  
+
+func _on_scanner_area_body_exited(body: Node3D) -> void:
+	if not _is_active: return
+	if not body is Entity:
+		printerr("EntityManager: A body detected has an Entity mask but is not an entity: [", body.get_path(), "]")
+		return
+	_kick_entity(body)

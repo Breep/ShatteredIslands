@@ -38,12 +38,12 @@ func stop() -> void:
 	_ignite_timer.stop()
 
 
-func get_reduced_damage(damage: int, damage_type: Utils.DamageType) -> int:
+func get_reduced_damage(damage: int, _damage_type: Utils.DamageType) -> int:
 	return damage
 
 
 # Storm of fire
-func get_increased_damage(damage: float, damage_type: Utils.DamageType) -> float:
+func get_increased_damage(damage: float, _damage_type: Utils.DamageType) -> float:
 	return damage
 
 # ============================== Private functions ==============================

@@ -7,7 +7,7 @@ extends Control
 
 # ============================== Local nodes ==============================
 
-@onready var _timer_label : Label = %TimerLabel
+#@onready var _timer_label : Label = %TimerLabel
 @onready var _timer_progress_bar : TextureProgressBar = %TimerProgressBar
 
 # ============================== Node base functions ==============================
@@ -30,7 +30,7 @@ func connect_timer(new_timer: Timer) -> void:
 func _update_visual() -> void:
 	if _timer and _timer.time_left > 0 and not _timer.is_stopped():
 		show()
-		_timer_label.text = str(_timer.time_left as int)
+		#_timer_label.text = str(_timer.time_left as int)
 		_timer_progress_bar.value = (_timer.time_left / _timer.wait_time) * _timer_progress_bar.max_value
 	else:
 		hide()

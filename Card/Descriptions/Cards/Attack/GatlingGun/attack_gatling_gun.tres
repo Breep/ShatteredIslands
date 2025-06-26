@@ -18,5 +18,5 @@ picture = ExtResource("1_simcp")
 family = 0
 rarity = 0
 player_upgrade = SubResource("Resource_qhoma")
-lvl = 1
+lvl = 3
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

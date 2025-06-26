@@ -1,33 +1,42 @@
 class_name FamilyAttackStats
 extends FamilyStats
 
-var storm_hammer_activated: bool # True if this skill is activated
-var storm_hammer_chance: int # % of chance for an auto-attack to bounce
+@export_group("Diamond Sword")
+@export var diamond_sword_activated: bool # True if this skill is activated
+@export var diamond_sword_attack: int # Value of increased attack
 
-var gatling_gun_activated: bool # True if this skill is activated
-var gatling_gun_min: int # Min value of the attack speed increased overtime
-var gatling_gun_max: int # Max value of the attack speed increased overtime
-var gatling_gun_duration: int # Time needed to go from min to max attack speed increase
+@export_group("Twin Blade")
+@export var twin_blade_activated: bool # True if this skill is activated
+@export var twin_blade_speed: int # Value of increased speed (in %)
+
+@export_group("Curative knife")
+@export var curative_knife_activated: bool # True if this skill is activated
+@export var curative_knife_chance: float # Chance to proc the curative knife
+@export var curative_knife_stacks: int # Number of negative stacks removed
+
+@export_group("Storm Hammer")
+@export var storm_hammer_activated: bool # True if this skill is activated
+@export var storm_hammer_chance: int # % of chance for an auto-attack to bounce
+
+@export_group("Gatling Gun")
+@export var gatling_gun_activated: bool # True if this skill is activated
+@export var gatling_gun_min: int # Min value of the attack speed increased overtime
+@export var gatling_gun_max: int # Max value of the attack speed increased overtime
+@export var gatling_gun_duration: int # Time needed to go from min to max attack speed increase
+
+@export_group("Titan Axe")
+@export var titan_axe_activated: bool # True if this skill is activated
+@export var titan_axe_attack_number: int # Number of attack needed to proc the skil
+@export var titan_axe_damage_percent: float # % of target max hp damage buff
 
 var double_edge_sword_activated: bool # True if this skill is activated
 var double_edge_sword_damage_percent: int # % of damage increased
 var double_edge_sword_attacks_number: int # Number oof attacks boosted
 
-var poison_stacks_amount: int # Number of poison stacks applied for with an auto attack
-var poison_stacks_chance: float # % of chance to proc the poison stacks
-
-var vulnerability_stacks_amount: int # Number of vulnerability stacks applied for with an auto attack
-var vulnerability_stacks_chance: float # % of chance to proc the vulnerability stacks
-
-var bounce_chance: float # % of chance to proc a bouncing attack (attack continue to an second enemy after hitting the first)
-
 var double_attack_chance: float # % of chance to proc a double attack
 
 var healing_attack_heal_amount: int # Heal amount applied to an ally (can be self) when  auto attacking
 var healing_attack_chance: float # % of chance to proc healing attack
-
-var armor_stacks_amount: int  # Number of armor stacks applied for with an auto attack
-var armor_stacks_chance: float  # % of chance to proc the armor stacks
 
 var fire_attack_activated: bool  # If the fire attack is activated
 var fire_attack_damage: float  # Damage done in addition to normal auto attack (in % of current enemy hp)

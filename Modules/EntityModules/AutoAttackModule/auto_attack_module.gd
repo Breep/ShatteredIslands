@@ -8,8 +8,7 @@ signal target_changed(new_target: Entity)
 
 # ============================== Export variables ==============================
 
-@export var projectile_spawn: Node3D
-@export var _action_module: ActionModule
+@export var _projectile_spawn: SpawnPoint
 @export var _attack_manager: AttackManager
 
 # ============================== OTHER variables ==============================
@@ -18,7 +17,7 @@ var attack_speed: float:
 	get: return _attack_speed
 	set(value):
 		_attack_speed = value
-		set_auto_attack_speed(_attack_speed)
+		_set_auto_attack_speed(_attack_speed)
 
 # ============================== Private variables ==============================
 
@@ -42,6 +41,7 @@ var current_target: Entity:
 # ============================== Node base function ==============================
 
 func _ready() -> void:
+	_owner.stats.attack_speed_changed.connect(_on_owner_stats_attack_speed_changed)
 	_owner.dead.connect(_on_owner_dead)
 
 # ============================== Public functions ==============================
@@ -56,33 +56,24 @@ func stop() -> void:
 
 # ============================== Private functions ==============================
 
-func _specific_init() -> void:
-	_owner.stats.attack_speed_changed.connect(_on_source_stats_attack_speed_changed)
-
-
-func set_auto_attack_speed(new_attack_speed: float) -> void:
+func _set_auto_attack_speed(new_attack_speed: float) -> void:
 	if new_attack_speed <= 0:
-		printerr("AutoAttackManager: Attack speed is lower than 0 !")
+		printerr("AutoAttackManager: Attack speed is lower than 0 ! [", get_path(), "]")
 		_auto_attack_timer.wait_time = 1.0
 	else:
 		_auto_attack_timer.wait_time = 1.0 / new_attack_speed
 
 
 func _auto_attack(target: Character) -> void:
-	var projectile_stats := ProjectileStats.new()
-	
-	projectile_stats.physical_damage_flat = _owner.stats.attack_damage
-	projectile_stats.speed = 10
-	
 	if _attack_manager != null:
-		_attack_manager.notice_auto_attack_done(target)
+		_attack_manager.attack(target, _projectile_spawn)
+	else:
+		var projectile_stats := ProjectileStats.new()
+		projectile_stats.physical_damage_flat = _owner.stats.attack_damage
+		projectile_stats.speed = 15
+		_owner.projectile_attack(target, Projectile.ProjectileType.AUTO_ATTACK, _projectile_spawn, projectile_stats)
 	
-	_action_module.projectile_attack(target, Projectile.ProjectileType.AUTO_ATTACK, projectile_spawn, projectile_stats)
 	attack_done.emit()
-
-
-func _update_auto_attack_speed() -> void:
-	set_auto_attack_speed(_owner.stats.attack_speed)
 
 # ============================== Callbacks functions ==============================
 
@@ -93,7 +84,7 @@ func _on_auto_attack_timer_timeout() -> void:
 	_auto_attack(target)
 
 
-func _on_source_stats_attack_speed_changed(new_attack_speed: float) -> void:
+func _on_owner_stats_attack_speed_changed(new_attack_speed: float) -> void:
 	attack_speed = new_attack_speed
 
 

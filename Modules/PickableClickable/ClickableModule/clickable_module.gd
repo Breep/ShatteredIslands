@@ -46,6 +46,7 @@ func unfocus() -> void:
 func select() -> void:
 	if _is_selected or select_locked: return
 	_is_selected = true
+	Events.signal_clickable_cliked(_owner)
 	_select()
 
 
@@ -61,15 +62,16 @@ func _connect_to_owner() -> void:
 
 
 func _init_meshs() -> void:
-	if not _meshs.is_empty():
-		return
-	
-	if not _nodes_where_to_find_meshs.is_empty():
-		for node in _nodes_where_to_find_meshs:
-			_recursive_find_all_meshs(node)
-		return
-	
-	_recursive_find_all_meshs(_owner)
+	return
+	#if not _meshs.is_empty():
+		#return
+	#
+	#if not _nodes_where_to_find_meshs.is_empty():
+		#for node in _nodes_where_to_find_meshs:
+			#_recursive_find_all_meshs(node)
+		#return
+	#
+	#_recursive_find_all_meshs(_owner)
 
 
 func _recursive_find_all_meshs(node: Node3D) -> void:
@@ -82,7 +84,6 @@ func _recursive_find_all_meshs(node: Node3D) -> void:
 # ============================== Callbacks ==============================
 
 func _focus() -> void:
-	print("[DEBUG] Focused: ", _owner.name)
 	for mesh in _meshs:
 		if not mesh.is_queued_for_deletion():
 			mesh.material_overlay = _material_overlay
@@ -91,7 +92,6 @@ func _focus() -> void:
 
 
 func _unfocus() -> void:
-	print("[DEBUG] Unfocused: ", _owner.name)
 	for mesh in _meshs:
 		if not mesh.is_queued_for_deletion():
 			mesh.material_overlay = null
@@ -100,12 +100,10 @@ func _unfocus() -> void:
 
 
 func _select() -> void:
-	print("[DEBUG] Selected: ", _owner.name)
 	if _owner.has_method("_on_clickable_module_selected"):
 		_owner.call("_on_clickable_module_selected")
 
 
 func _unselect() -> void:
-	print("[DEBUG] Unselected: ", _owner.name)
 	if _owner.has_method("_on_clickable_module_unselected"):
 		_owner.call("_on_clickable_module_unselected")

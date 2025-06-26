@@ -9,13 +9,6 @@ const FOCUS_INCREASE_CRIT_PERIOD: float = 0.5
 
 var _storm_stats: FamilyStormStats
 
-var _focus_timer: Timer
-var _crit_move_speed_timer: Timer
-
-var _focus_timer_time_elapsed: float # Time elapsed since lanch of the timer
-
-# ============================== Local nodes ==============================
-
 # ============================== Public functions ==============================
 
 func _ready() -> void:
@@ -52,11 +45,6 @@ func get_critical_multiplier(damage_type: Utils.DamageType) -> float:
 
 func notice_critical_damage(_char_who_received_the_crit: Character, _damage: int) -> void:
 	pass
-
-
-func focus_changed(focused: bool) -> void:
-	pass
-
 
 # ============================== Private functions ==============================
 
