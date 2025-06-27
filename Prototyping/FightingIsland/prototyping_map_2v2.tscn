@@ -1,0 +1,97 @@
+[gd_scene load_steps=14 format=3 uid="uid://f2n7hccdooke"]
+
+[ext_resource type="Script" uid="uid://bu48b2v401db2" path="res://Prototyping/FightingIsland/prototyping_map.gd" id="1_oc45v"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="2_5t2nw"]
+[ext_resource type="PackedScene" uid="uid://drcuyohos0doa" path="res://FloatingIsland/FightingIsland/fighting_island.tscn" id="2_xvkv2"]
+[ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Entities/Character/character.tscn" id="3_doj2u"]
+[ext_resource type="Resource" uid="uid://bt615e0tyxyls" path="res://Card/Descriptions/Cards/Defense/GladiatorHelmet/defense_gladiator_helmet.tres" id="3_y3vk0"]
+[ext_resource type="Material" uid="uid://2wlal7g5718r" path="res://VFX/Shaders/Sky/stylized_shader_night.tres" id="4_3ldpt"]
+[ext_resource type="Resource" uid="uid://3vjmnbpyyjyk" path="res://Card/Descriptions/Cards/Attack/GatlingGun/attack_gatling_gun.tres" id="4_blmm3"]
+[ext_resource type="Resource" uid="uid://ctm6ojtt36a88" path="res://Card/Descriptions/Cards/Attack/TwinBlade/attack_twin_blade.tres" id="5_a1wsu"]
+[ext_resource type="Resource" uid="uid://dvpdubk0btegx" path="res://Card/Descriptions/Cards/Poison/PeriodicaAgaricus/poison_periodica_agaricus.tres" id="6_4gryv"]
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_4fa74"]
+
+[sub_resource type="FogMaterial" id="FogMaterial_7w4nr"]
+albedo = Color(0.299504, 0.876198, 0.915194, 1)
+emission = Color(0.544485, 0.202056, 0.230078, 1)
+height_falloff = 0.678472
+edge_fade = 0.69644
+density_texture = SubResource("NoiseTexture3D_4fa74")
+
+[sub_resource type="Sky" id="Sky_ciybh"]
+sky_material = ExtResource("4_3ldpt")
+
+[sub_resource type="Environment" id="Environment_gs0rq"]
+background_mode = 2
+sky = SubResource("Sky_ciybh")
+ambient_light_source = 2
+ambient_light_color = Color(0.45098, 0.333333, 0.309804, 1)
+ambient_light_energy = 0.5
+tonemap_mode = 2
+sdfgi_enabled = true
+glow_enabled = true
+glow_bloom = 0.2
+fog_light_color = Color(0.175414, 0.565791, 0.908127, 1)
+fog_light_energy = 0.05
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+
+[node name="PrototypingMap" type="Node3D" node_paths=PackedStringArray("_characters", "_floating_island")]
+script = ExtResource("1_oc45v")
+_player1_cards = Array[ExtResource("2_5t2nw")]([ExtResource("3_y3vk0")])
+_player2_cards = Array[ExtResource("2_5t2nw")]([ExtResource("4_blmm3")])
+_player3_cards = Array[ExtResource("2_5t2nw")]([ExtResource("5_a1wsu")])
+_player4_cards = Array[ExtResource("2_5t2nw")]([ExtResource("6_4gryv")])
+_characters = [NodePath("Character1"), NodePath("Character2"), NodePath("Character3"), NodePath("Character4")]
+_floating_island = NodePath("FightingIsland")
+_battle_type = 1
+
+[node name="FightingIsland" parent="." instance=ExtResource("2_xvkv2")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.88089, 0.0799744, 0.466517, -0.360914, 0.751164, 0.552716, -0.306227, -0.655254, 0.690556, 0, 52.8971, 0)
+shadow_enabled = true
+
+[node name="FogVolume" type="FogVolume" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.26962, 0.223571, 5.01905)
+size = Vector3(4.52728, 4.15, 8.08638)
+material = SubResource("FogMaterial_7w4nr")
+
+[node name="WorldEnvironment2" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_gs0rq")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0.2, 5.7)
+light_color = Color(0.846952, 0.2959, 0.736692, 1)
+light_volumetric_fog_energy = 6.642
+light_specular = 4.879
+
+[node name="Character1" parent="." instance=ExtResource("3_doj2u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.34606, 0, 2.12149)
+hero_id = 1
+id = 1
+team = 1
+battle_id = 1
+
+[node name="Character2" parent="." instance=ExtResource("3_doj2u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.03813, 0, -2.59736)
+hero_id = 10
+id = 2
+team = 1
+battle_id = 1
+
+[node name="Character3" parent="." instance=ExtResource("3_doj2u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.167192, 2.02964, -10.1344)
+hero_id = 8
+id = 4
+team = 2
+battle_id = 1
+
+[node name="Character4" parent="." instance=ExtResource("3_doj2u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6354, 2.03525, -6.30828)
+hero_id = 9
+id = 3
+team = 2
+battle_id = 1
