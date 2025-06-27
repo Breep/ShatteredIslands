@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://c5ji8s1iic5v8"]
+[gd_scene load_steps=13 format=3 uid="uid://c5ji8s1iic5v8"]
 
 [ext_resource type="Script" uid="uid://bu48b2v401db2" path="res://Prototyping/FightingIsland/prototyping_map.gd" id="1_66i2r"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="2_ovips"]
-[ext_resource type="Resource" uid="uid://qm75h7gw2hgn" path="res://Card/Descriptions/Cards/Attack/HealingCrossbow/attack_healing_crossbow.tres" id="3_fvg5y"]
-[ext_resource type="Resource" uid="uid://ctm6ojtt36a88" path="res://Card/Descriptions/Cards/Attack/TwinBlade/attack_twin_blade.tres" id="3_rkl6v"]
+[ext_resource type="Resource" uid="uid://bhogu6m1synt8" path="res://Card/Descriptions/Cards/Attack/DiamondSword/attack_diamond_sword.tres" id="4_7w4nr"]
+[ext_resource type="Resource" uid="uid://bt615e0tyxyls" path="res://Card/Descriptions/Cards/Defense/GladiatorHelmet/defense_gladiator_helmet.tres" id="6_4fa74"]
+[ext_resource type="Resource" uid="uid://by2fg3cyrvuja" path="res://Card/Descriptions/Cards/Defense/ReflectoBelt/defense_reflecto_belt.tres" id="6_7w4nr"]
 [ext_resource type="PackedScene" uid="uid://drcuyohos0doa" path="res://FloatingIsland/FightingIsland/fighting_island.tscn" id="7_yjquk"]
 [ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Entities/Character/character.tscn" id="9_4fa74"]
 [ext_resource type="Material" uid="uid://2wlal7g5718r" path="res://VFX/Shaders/Sky/stylized_shader_night.tres" id="9_7w4nr"]
@@ -38,8 +39,8 @@ volumetric_fog_density = 0.0
 [node name="PrototypingMap" type="Node3D" node_paths=PackedStringArray("_floating_island", "_character1", "_character2")]
 script = ExtResource("1_66i2r")
 _floating_island = NodePath("FightingIsland")
-_player1_cards = Array[ExtResource("2_ovips")]([ExtResource("3_rkl6v")])
-_player2_cards = Array[ExtResource("2_ovips")]([ExtResource("3_fvg5y")])
+_player1_cards = Array[ExtResource("2_ovips")]([ExtResource("4_7w4nr")])
+_player2_cards = Array[ExtResource("2_ovips")]([ExtResource("6_4fa74"), ExtResource("6_7w4nr")])
 _character1 = NodePath("Character1")
 _character2 = NodePath("Character2")
 

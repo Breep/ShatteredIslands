@@ -3,8 +3,6 @@ extends FamilyManager
 
 # ============================== Signals ==============================
 
-signal focus_changed(focused: bool)
-
 # ============================== Constants ==============================
 
 const GATLING_TIME: float = 1
@@ -13,6 +11,12 @@ const GATLING_TIME: float = 1
 
 #@export_group("External Nodes")
 #@export var _auto_attack_module: AutoAttackModule
+
+# ============================== Public variables ==============================
+
+# [Reflecto Belt]
+var reflecto_belt_number_of_attacks: int = 0
+var reflecto_belt_damage_percent: float
 
 # ============================== Private variables ==============================
 
@@ -28,7 +32,6 @@ var gatling_speed_boost: float:
 		if _gatling_speed_boost == value: return
 		_gatling_speed_boost = value
 		_owner.stats.attack_speed_boost = _attack_stats.twin_blade_speed + _gatling_speed_boost
-
 
 
 # ============================== Public functions ==============================
@@ -64,6 +67,8 @@ func attack(target: Character, projectile_spawn: SpawnPoint) -> void:
 		_remove_random_debuff_stack(_attack_stats.curative_knife_stacks)
 	var projectile_stats := ProjectileStats.new()
 	projectile_stats.physical_damage_flat = _owner.stats.attack_damage
+	if reflecto_belt_number_of_attacks > 0:
+		projectile_stats.physical_damage_flat += (projectile_stats.physical_damage_flat * reflecto_belt_damage_percent / 100.0) as int
 	if _attack_stats.titan_axe_activated and _aa_counter % _attack_stats.titan_axe_attack_number == 0:
 		projectile_stats.physical_damage_percent = _attack_stats.titan_axe_damage_percent
 		projectile_stats.physical_damage_percent_type = Utils.PercentModifier.MAX_HP
@@ -90,6 +95,7 @@ func _remove_random_debuff_stack(stack_number: int) -> void:
 	var random_stacks_types: Array[Utils.StackType]
 	if _owner.stats.poison_stacks > 0: random_stacks_types.append(Utils.StackType.POISON)
 	if _owner.stats.ignite_stacks > 0: random_stacks_types.append(Utils.StackType.IGNITE)
+	if random_stacks_types.is_empty(): return
 	var random_stack_type: Utils.StackType = random_stacks_types.pick_random()
 	match random_stack_type:
 		Utils.StackType.POISON: _owner.stats.poison_stacks -= stack_number

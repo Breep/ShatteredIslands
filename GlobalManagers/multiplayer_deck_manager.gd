@@ -66,6 +66,7 @@ func init_cards_ref(families: Array[Family], _rules: GameRules) -> void:
 	for family in families:
 		for card in family.cards:
 			if not _isCardInArray(card, _cards_refs):
+				card.lvl = 1
 				_cards_refs.append(card)
 	
 	# init dictionary

@@ -90,7 +90,7 @@ func _get_damage_percent(damage_percent: float, percent_modifier: Utils.PercentM
 			hp = target.stats.health
 		Utils.PercentModifier.LOST_HP:
 			hp = target.stats.health_max - source.stats.health
-	return hp * damage_percent  / 100.0
+	return (hp * damage_percent  / 100.0) as int
 
 # ============================== Callbacks ==============================
 

@@ -108,7 +108,7 @@ func inflict_condition_stacks(_target: Character, _stacks_number: int, _stack_ty
 
 # ===== Interaction [VIRTUAL]
 
-func take_damage(_damage: int, _damage_type: Utils.DamageType, _is_critical: bool = false, _source: Entity = null, attack_type: Utils.AttackType = Utils.AttackType.UNDEF) -> void:
+func take_damage(_damage: int, _damage_type: Utils.DamageType, _is_critical: bool = false, _source: Entity = null, _attack_type: Utils.AttackType = Utils.AttackType.UNDEF) -> void:
 	printerr("Entity: virtual take_damage() called [", get_path(), "]")
 
 func take_damage_percent(_percent: float, _percent_modifier: Utils.PercentModifier, _damage_type: Utils.DamageType, _is_critical: bool = false, _source: Entity = null) -> void:

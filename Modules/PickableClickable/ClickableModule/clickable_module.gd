@@ -10,7 +10,7 @@ var select_locked: bool = false # True if the object can't be interacted
 # ============================== Export ==============================
 
 @export var _meshs: Array[MeshInstance3D]
-@export var _nodes_where_to_find_meshs: Array[Node3D]
+#@export var _nodes_where_to_find_meshs: Array[Node3D]
 @export var _owner: Node3D
 
 # ============================== Private variables ==============================

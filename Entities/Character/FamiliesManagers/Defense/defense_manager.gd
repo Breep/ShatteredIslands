@@ -3,7 +3,7 @@ extends FamilyManager
 
 # ============================== Signals ==============================
 
-signal reflecto_belt_activated(damage_inc_percent: int)
+signal reflecto_belt_activated(damage_inc_percent: float, number_of_attacks: int)
 
 # ============================== Private variables ==============================
 
@@ -38,7 +38,7 @@ func get_increased_damage_done_from_power_wrist(damage: float) -> float:
 	if not _defense_stats.power_wrists_activated:
 		return damage
 	
-	var power_stacks: int = floor(_defense_stats.armor_stacks as float / _defense_stats.power_wrists_armor_stacks)
+	var power_stacks: int = floor(_owner.stats.armor_stacks as float / _defense_stats.power_wrists_armor_stacks)
 	var damage_inc_percent: float = _defense_stats.power_wrists_damage_increase_percent * power_stacks
 	var damage_inc: float = (damage * damage_inc_percent) / 100.0
 	return damage + damage_inc
@@ -98,7 +98,7 @@ func _rainbow_boots_effect(armor_lost: int) -> void:
 	var number_of_procs: int = floor(armor_lost as float / _defense_stats.rainbow_boots_armor_stacks as float)
 	_armor_lost_since_last_rainbow_boots -= number_of_procs * _defense_stats.rainbow_boots_armor_stacks
 	for i in number_of_procs:
-		var effects: Array[Utils.StackType] = [Utils.StackType.POISON]
+		var effects: Array[Utils.StackType] = [Utils.StackType.POISON, Utils.StackType.IGNITE]
 		var effect: Utils.StackType = effects[Utils.rng.randi_range(0, effects.size() - 1)]
 		var target: Entity = _owner.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
 		_action_module.inflict_condition_stacks(target, 1, effect)
@@ -110,7 +110,7 @@ func _reflecto_belt_effect(armor_lost: int) -> void:
 	
 	_armor_lost_since_last_reflecto_belt += armor_lost
 	if _armor_lost_since_last_reflecto_belt >= _defense_stats.reflecto_belt_armor_stacks:
-		reflecto_belt_activated.emit(_defense_stats.reflecto_belt_attack_increase_percent)
+		reflecto_belt_activated.emit(_defense_stats.reflecto_belt_attack_increase_percent, 2)
 		_armor_lost_since_last_reflecto_belt = 0
 
 

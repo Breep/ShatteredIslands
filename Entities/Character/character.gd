@@ -61,6 +61,7 @@ var _hero_id := Hero.HeroId.UNDEF
 
 @export_group("Family Managers")
 @export var _attack_manager: AttackManager
+@export var _defense_manager: DefenseManager
 
 # ============================== Public variables ==============================
 
@@ -176,6 +177,8 @@ func _ready() -> void:
 	if player != null: apply_cards_upgrade(player.deck)
 	
 	stats.health_changed.connect(_on_stats_health_changed)
+	
+	_defense_manager.reflecto_belt_activated.connect(_on_defense_manager_reflecto_belt_activated)
 
 # ============================== Private functions ==============================
 
@@ -202,6 +205,10 @@ func _handle_death() -> void:
 	_is_dead = true
 
 # ============================== Family callbacks ==============================
+
+func _on_defense_manager_reflecto_belt_activated(damage_inc_percent: float, number_of_attacks: int) -> void:
+	_attack_manager.reflecto_belt_damage_percent = damage_inc_percent
+	_attack_manager.reflecto_belt_number_of_attacks += number_of_attacks
 
 # ============================== Module callbacks ==============================
 

@@ -4,8 +4,8 @@ extends Node
 # L'idée de cette IA c'est qu'elle soit totalement indépendante une fois créée
 # Pour être créé elle a besoin d'être associé à un Player et d'avoir un accès à l'état de la partie
 
-const MIN_WAIT_TIME: float = 1
-const MAX_WAIT_TIME: float = 8
+const MIN_WAIT_TIME: float = 0.8
+const MAX_WAIT_TIME: float = 2.1
 
 var player: Player # Player Ref this BotAI is linked to
 
@@ -20,6 +20,9 @@ enum EconomyStrategy {
 	WASTER, # Spend all its money each turn
 }
 
+func _enter_tree() -> void:
+	_card_shop.player = player
+
 func _ready() -> void:
 	if player == null:
 		printerr("PlayerBotAI: Can't exist without a ref to a player !")
@@ -27,8 +30,6 @@ func _ready() -> void:
 		return
 	
 	Events.game_state_changed.connect(_on_events_game_state_changed)
-	
-	_card_shop.player = player
 	
 	_rng = RandomNumberGenerator.new()
 	_rng.randomize()
@@ -60,6 +61,7 @@ func _on_events_game_state_changed(new_game_state: Game.GameState) -> void:
 
 
 func _on_wake_up_timer_timeout() -> void:
+	print("PlayerBotAI: Starting AI for ", player.name, "WAKING UP")
 	if _economy_strategy == EconomyStrategy.KEEPER and player.gold >= 600:
 		_buy_a_card()
 	elif _economy_strategy == EconomyStrategy.WASTER and player.gold >= 100:

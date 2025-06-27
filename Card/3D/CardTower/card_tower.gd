@@ -37,7 +37,6 @@ func _ready() -> void:
 # ============================== Private functions ==============================
 
 func _update_visual(new_cards_number) -> void:
-	print("Updating visual of a card tower: ", card_family, " - ", cards_number)
 	if new_cards_number < 0:
 		printerr("CoinTower: Can't have less than 0 cards in the tower")
 	
