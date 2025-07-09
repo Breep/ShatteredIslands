@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://f2n7hccdooke"]
+[gd_scene load_steps=15 format=3 uid="uid://f2n7hccdooke"]
 
 [ext_resource type="Script" uid="uid://bu48b2v401db2" path="res://Prototyping/FightingIsland/prototyping_map.gd" id="1_oc45v"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="2_5t2nw"]
@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://3vjmnbpyyjyk" path="res://Card/Descriptions/Cards/Attack/GatlingGun/attack_gatling_gun.tres" id="4_blmm3"]
 [ext_resource type="Resource" uid="uid://ctm6ojtt36a88" path="res://Card/Descriptions/Cards/Attack/TwinBlade/attack_twin_blade.tres" id="5_a1wsu"]
 [ext_resource type="Resource" uid="uid://dvpdubk0btegx" path="res://Card/Descriptions/Cards/Poison/PeriodicaAgaricus/poison_periodica_agaricus.tres" id="6_4gryv"]
+[ext_resource type="Resource" uid="uid://cdr51p56pftqi" path="res://Card/Descriptions/Cards/Fire/Meteor/fire_meteor.tres" id="7_y3vk0"]
 
 [sub_resource type="NoiseTexture3D" id="NoiseTexture3D_4fa74"]
 
@@ -42,7 +43,7 @@ script = ExtResource("1_oc45v")
 _player1_cards = Array[ExtResource("2_5t2nw")]([ExtResource("3_y3vk0")])
 _player2_cards = Array[ExtResource("2_5t2nw")]([ExtResource("4_blmm3")])
 _player3_cards = Array[ExtResource("2_5t2nw")]([ExtResource("5_a1wsu")])
-_player4_cards = Array[ExtResource("2_5t2nw")]([ExtResource("6_4gryv")])
+_player4_cards = Array[ExtResource("2_5t2nw")]([ExtResource("6_4gryv"), ExtResource("7_y3vk0")])
 _characters = [NodePath("Character1"), NodePath("Character2"), NodePath("Character3"), NodePath("Character4")]
 _floating_island = NodePath("FightingIsland")
 _battle_type = 1

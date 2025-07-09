@@ -61,7 +61,7 @@ func _on_events_game_state_changed(new_game_state: Game.GameState) -> void:
 
 
 func _on_wake_up_timer_timeout() -> void:
-	print("PlayerBotAI: Starting AI for ", player.name, "WAKING UP")
+	#print("PlayerBotAI: Starting AI for ", player.name, "WAKING UP")
 	if _economy_strategy == EconomyStrategy.KEEPER and player.gold >= 600:
 		_buy_a_card()
 	elif _economy_strategy == EconomyStrategy.WASTER and player.gold >= 100:
