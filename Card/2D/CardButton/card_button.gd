@@ -21,7 +21,6 @@ var card: Card:
 
 var _angle_x_max: float = 15.0
 var _angle_y_max: float = 15.0
-var _tween_rot: Tween
 var _card: Card
 
 var _target_rot_x: float
@@ -81,22 +80,15 @@ func _update_rotation_target() -> void:
 
 
 func _animation_3d_rotate(delta: float) -> void:
-	if not _is_focused: return
+	if _current_rot_x == _target_rot_x and _target_rot_y == _current_rot_y: return
 	_current_rot_x = lerp(_current_rot_x, _target_rot_x, delta * ROT_SPEED)
 	_current_rot_y = lerp(_current_rot_y, _target_rot_y, delta * ROT_SPEED)
 	_texture_rect.material.set_shader_parameter("x_rot", _current_rot_y)
 	_texture_rect.material.set_shader_parameter("y_rot", _current_rot_x)
 
 func _animation_reset_3d_rotation() -> void:
-	if _tween_rot:
-		_tween_rot.kill()
-	_tween_rot = create_tween().set_ease(Tween.EASE_OUT_IN).set_trans(Tween.TRANS_LINEAR).set_parallel(true)
-	_tween_rot.tween_property(_texture_rect.material, "shader_parameter/x_rot", 0.0, 0.5)
-	_tween_rot.tween_property(_texture_rect.material, "shader_parameter/y_rot", 0.0, 0.5)
 	_target_rot_x = 0.0
 	_target_rot_y = 0.0
-	_current_rot_x = 0.0
-	_current_rot_y = 0.0
 
 
 func _on_gui_input(event: InputEvent) -> void:
