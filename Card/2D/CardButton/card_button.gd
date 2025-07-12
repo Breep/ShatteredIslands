@@ -9,7 +9,7 @@ signal card_selected(self_ref: CardButton, card: Card)
 
 const LAYER_FRONT = 1
 const LAYER_BACK = 0
-const ROT_SPEED: float = 5
+const ROT_SPEED: float = 4
 
 # ============================== Public variables ==============================
 
@@ -51,18 +51,19 @@ func update_visual(new_card: Card) -> void:
 func _ready() -> void:
 	_texture_rect.material = _texture_rect.material.duplicate() # Make the material unique
 
+
 func _process(delta: float) -> void:
 	_animation_3d_rotate(delta)
 
+
 func _on_mouse_entered() -> void:
 	_is_focused = true
-	print("CARD mouse_entered [", get_path(), "]")
+
 
 func _on_mouse_exited() -> void:
 	_is_focused = false
-	print("CARD mouse_exited [", get_path(), "]")
 	_animation_reset_3d_rotation()
-	#_animation_pop_in()
+
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and _is_focused:
@@ -71,7 +72,6 @@ func _input(event: InputEvent) -> void:
 # ============================== Private functions ==============================
 
 func _update_rotation_target() -> void:
-	#print("DEBUG _update_rotation_target")
 	var mouse_pos: Vector2 = get_local_mouse_position()
 	var lerp_val_x: float = remap(mouse_pos.x, 0.0, size.x, 0, 1)
 	var lerp_val_y: float = remap(mouse_pos.y, 0.0, size.y, 0, 1)
@@ -85,6 +85,7 @@ func _animation_3d_rotate(delta: float) -> void:
 	_current_rot_y = lerp(_current_rot_y, _target_rot_y, delta * ROT_SPEED)
 	_texture_rect.material.set_shader_parameter("x_rot", _current_rot_y)
 	_texture_rect.material.set_shader_parameter("y_rot", _current_rot_x)
+
 
 func _animation_reset_3d_rotation() -> void:
 	_target_rot_x = 0.0
