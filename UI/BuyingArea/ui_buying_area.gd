@@ -11,7 +11,6 @@ extends Control
 
 func _ready() -> void:
 	Events.entity_cliked.connect(_on_events_entity_clicked)
-	
 	_continous_timer.connect_timer(_round_timer)
 
 

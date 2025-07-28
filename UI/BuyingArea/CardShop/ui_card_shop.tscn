@@ -1,9 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://d1oxnd1g75rqh"]
+[gd_scene load_steps=14 format=3 uid="uid://d1oxnd1g75rqh"]
 
 [ext_resource type="Script" uid="uid://8tub4ube48p7" path="res://UI/BuyingArea/CardShop/ui_card_shop.gd" id="1_xu7re"]
 [ext_resource type="Script" uid="uid://d0vv2ero6ere2" path="res://UI/BuyingArea/CardShop/card_shop_visual.gd" id="2_t3oox"]
 [ext_resource type="Script" uid="uid://dl8cs3pdc7hvl" path="res://UI/Tool/input_transmiter.gd" id="2_ytrdm"]
-[ext_resource type="Script" uid="uid://7ie8nna8yg0n" path="res://TESTESTTEST_TO8TRASH/on_it.gd" id="3_37vaa"]
 [ext_resource type="PackedScene" uid="uid://c2psjj8133op3" path="res://Card/2D/CardButton/card_button.tscn" id="4_37vaa"]
 [ext_resource type="Texture2D" uid="uid://b0d6hj2uhwbei" path="res://Data/Assets/Buying_area/UI/coin.png" id="4_gpath"]
 [ext_resource type="Theme" uid="uid://bpo76n2lvfxb6" path="res://UI/_Themes/main_menu_button.tres" id="6_cj73j"]
@@ -82,7 +81,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_7km6h")
 theme_type_variation = &"card"
-script = ExtResource("3_37vaa")
 
 [node name="MarginContainer" type="MarginContainer" parent="SubViewport/SubCardShop"]
 layout_mode = 1
