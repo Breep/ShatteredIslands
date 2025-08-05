@@ -19,16 +19,26 @@ var player: Player:
 		_player = value
 		refresh_shop_cards()
 
+# ============================== private variables ==============================
+
+var _is_enabled: bool
+
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
 	if player != null:
 		refresh_shop_cards()
+	
+	Events.game_state_changed.connect(_on_events_game_state_changed)
 
 # ============================== Public functions ==============================
 
 # Try to buy a card for the player owner of this shop, It will ask the server for permission
 func try_buy_card(card: Card) -> bool:
+	if !_is_enabled:
+		printerr("CardShop: CardShop is disabled")
+		return false
+	
 	if player == null:
 		printerr("CardShop: Need to be linked to a player [", get_path(), "]")
 		return false
@@ -67,3 +77,8 @@ func refresh_shop_cards() -> void:
 func _adapt_cards_lvl_to_player() -> void:
 	for card in cards_displayed:
 		card.lvl = player.deck.get_card_lvl(card) + 1
+
+# ============================== Callbacks ==============================
+
+func _on_events_game_state_changed(state: Game.GameState) -> void:
+	_is_enabled = (state == Game.GameState.BUYING)
