@@ -42,6 +42,7 @@ func start_fight(characters: Array[Character], battle_type: Battle.BattleType, b
 	_current_characters = characters
 	for character in _current_characters:
 		character.set_lookat_camera(_camera)
+	_force_local_player_camera_on_island()
 
 
 func set_active() -> void:
@@ -62,6 +63,12 @@ func set_inactive() -> void:
 		character.on_inactive_island()
 
 # ============================== Private functions ==============================
+
+func _force_local_player_camera_on_island() -> void:
+	if multiplayer.is_server() or _current_characters.is_empty(): return
+	for character in _current_characters:
+		if character.player == PlayerManager.get_local_player():
+			Shared.scene_switcher.set_island_active_only(self)
 
 func _update_player_ref(player_id: int) -> void:
 	if PlayerManager.players.has(player_id):

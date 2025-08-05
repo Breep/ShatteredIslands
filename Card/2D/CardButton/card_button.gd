@@ -93,4 +93,5 @@ func _animation_reset_3d_rotation() -> void:
 
 
 func _on_gui_input(event: InputEvent) -> void:
+	card_selected.emit(self, card)
 	print("CardButton gui input [", get_path(), "]")

@@ -191,7 +191,7 @@ func _check_lvl_up() -> void:
 # ============================== Callbacks ==============================
 
 func _on_deck_has_changed() -> void:
-	print("Player[", name, "]: Deck has changed")
+	#print("Player[", name, "]: Deck has changed")
 	_apply_all_cards_upgrades()
 
 

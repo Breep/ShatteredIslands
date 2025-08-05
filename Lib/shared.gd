@@ -16,7 +16,7 @@ var HEROES: Dictionary[Hero.HeroId, Hero] = {
 
 var DAMAGE_POPUP_SCENE: PackedScene = load("res://UI/3D/DamagePopup/damage_popup.tscn")
 
-
+var scene_switcher: SceneSwitcher
 
 
 

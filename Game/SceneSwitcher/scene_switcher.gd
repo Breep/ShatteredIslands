@@ -10,6 +10,11 @@ extends Node
 @export var buying_island: BuyingIsland
 var fighting_islands: Array[FightingIsland]
 
+# ============================== public functions ==============================
+
+func set_island_active_only(floating_island: FloatingIsland) -> void:
+	_set_island_active_only(floating_island)
+
 # ============================== Base node functions ==============================
 
 func _ready() -> void:

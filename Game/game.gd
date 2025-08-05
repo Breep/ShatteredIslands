@@ -50,6 +50,8 @@ func _ready() -> void:
 	
 	GlobalFightingManager.all_fights_are_over.connect(_on_global_fighting_manager_all_fights_are_over)
 	
+	Shared.scene_switcher = _scene_switcher
+	
 	_start_game()
 
 # ============================== Private functions ==============================
