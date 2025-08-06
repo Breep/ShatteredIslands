@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://d1oxnd1g75rqh" path="res://UI/BuyingArea/CardShop/ui_card_shop.tscn" id="1_1jad1"]
 [ext_resource type="Script" uid="uid://blgwnuhx2x0ic" path="res://Prototyping/UI/UICardShop/prototyping_card_shop.gd" id="1_b3o3y"]
 
-[node name="PrototypingCardShop" type="Control"]
+[node name="PrototypingCardShop" type="Control" node_paths=PackedStringArray("_ui_card_shop")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,6 +11,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_b3o3y")
+_ui_card_shop = NodePath("UICardShop2")
 
 [node name="UICardShop2" parent="." instance=ExtResource("1_1jad1")]
 layout_mode = 1

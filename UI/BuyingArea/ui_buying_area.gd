@@ -1,12 +1,19 @@
 class_name UIBuyingArea
 extends Control
 
+@export_group("External nodes")
 @export var _round_timer: Timer
+
+@export_group("Buttons")
+@export var _random_button: Button
+@export var _refresh_button: Button
+@export var _back_button: Button
 
 # ============================== Local nodes ==============================
 
 @onready var _continous_timer: UIContinousTimer = %ContinousTimer
 @onready var _ui_selected_entity_stats: UICharacterStats = %SelectedCharacterStats
+
 # ============================== Private variables ==============================
 
 func _ready() -> void:

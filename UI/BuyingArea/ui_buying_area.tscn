@@ -76,7 +76,7 @@ grow_vertical = 2
 
 [node name="CardShop" parent="VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel/CenterContainer" instance=ExtResource("4_dsp03")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(600, 500)
+custom_minimum_size = Vector2(600, 330.085)
 layout_mode = 2
 
 [node name="RightPanel" type="Control" parent="VBoxContainer/MiddlePanel/HBoxContainer"]

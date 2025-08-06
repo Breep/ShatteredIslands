@@ -1,14 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://d1oxnd1g75rqh"]
+[gd_scene load_steps=16 format=3 uid="uid://d1oxnd1g75rqh"]
 
 [ext_resource type="Script" uid="uid://8tub4ube48p7" path="res://UI/BuyingArea/CardShop/ui_card_shop.gd" id="1_xu7re"]
 [ext_resource type="Script" uid="uid://d0vv2ero6ere2" path="res://UI/BuyingArea/CardShop/card_shop_visual.gd" id="2_t3oox"]
 [ext_resource type="Script" uid="uid://dl8cs3pdc7hvl" path="res://UI/Tool/input_transmiter.gd" id="2_ytrdm"]
 [ext_resource type="PackedScene" uid="uid://c2psjj8133op3" path="res://Card/2D/CardButton/card_button.tscn" id="4_37vaa"]
-[ext_resource type="Texture2D" uid="uid://b0d6hj2uhwbei" path="res://Data/Assets/Buying_area/UI/coin.png" id="4_gpath"]
 [ext_resource type="Theme" uid="uid://bpo76n2lvfxb6" path="res://UI/_Themes/main_menu_button.tres" id="6_cj73j"]
+[ext_resource type="Texture2D" uid="uid://7vxx0bo6tjmd" path="res://Data/Assets/Buying_area/UI/MenuButton/menu_button_pressed.png" id="7_mn8ci"]
 [ext_resource type="Texture2D" uid="uid://dyh5w3d8v3wkm" path="res://Data/Assets/Buying_area/UI/menu_button (1).png" id="7_yjsua"]
 [ext_resource type="Theme" uid="uid://b3fq4x00gjiqa" path="res://UI/_Themes/UI_Label_card_shop.tres" id="8_hgnjc"]
+[ext_resource type="Texture2D" uid="uid://b8rclnfcndl13" path="res://Data/Assets/Buying_area/UI/MenuButton/menu_button_hover.png" id="8_hvqqa"]
 [ext_resource type="PackedScene" uid="uid://dlh177khgltfq" path="res://Game/CardShop/card_shop.tscn" id="9_ahun0"]
+[ext_resource type="Texture2D" uid="uid://ddfnqd804dw32" path="res://Data/Assets/Buying_area/UI/MenuButton/menu_button_disabled.png" id="9_xghmy"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_gvdv1"]
 viewport_path = NodePath("SubViewport")
@@ -43,19 +45,17 @@ grow_vertical = 2
 script = ExtResource("1_xu7re")
 _card_shop = NodePath("CardShop")
 _card_buttons = [NodePath("SubViewport/SubCardShop/MarginContainer/VBoxContainer/CardContainer/1"), NodePath("SubViewport/SubCardShop/MarginContainer/VBoxContainer/CardContainer/2"), NodePath("SubViewport/SubCardShop/MarginContainer/VBoxContainer/CardContainer/3")]
-metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect" type="TextureRect" parent="." node_paths=PackedStringArray("viewport")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -6.10352e-05
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("ViewportTexture_gvdv1")
 expand_mode = 1
-stretch_mode = 5
+stretch_mode = 4
 script = ExtResource("2_ytrdm")
 viewport = NodePath("../SubViewport")
 
@@ -128,6 +128,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("6_cj73j")
 texture_normal = ExtResource("7_yjsua")
+texture_pressed = ExtResource("7_mn8ci")
+texture_hover = ExtResource("8_hvqqa")
+texture_disabled = ExtResource("9_xghmy")
 ignore_texture_size = true
 stretch_mode = 5
 
@@ -154,24 +157,19 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("8_hgnjc")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 20
-text = "RANDOM  90"
+theme_override_font_sizes/font_size = 40
+text = "RANDOM"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Gold_icon" type="TextureRect" parent="SubViewport/SubCardShop/MarginContainer/VBoxContainer/BottomRow/Random/MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.4
-texture = ExtResource("4_gpath")
-expand_mode = 1
-stretch_mode = 5
 
 [node name="refresh" type="TextureButton" parent="SubViewport/SubCardShop/MarginContainer/VBoxContainer/BottomRow"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("6_cj73j")
 texture_normal = ExtResource("7_yjsua")
+texture_pressed = ExtResource("7_mn8ci")
+texture_hover = ExtResource("8_hvqqa")
+texture_disabled = ExtResource("9_xghmy")
 ignore_texture_size = true
 stretch_mode = 5
 
@@ -198,18 +196,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("8_hgnjc")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 20
-text = "REFRESH    10 "
+theme_override_font_sizes/font_size = 40
+text = "REFRESH"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Gold_icon" type="TextureRect" parent="SubViewport/SubCardShop/MarginContainer/VBoxContainer/BottomRow/refresh/MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.4
-texture = ExtResource("4_gpath")
-expand_mode = 1
-stretch_mode = 5
 
 [node name="Back" type="TextureButton" parent="SubViewport/SubCardShop/MarginContainer/VBoxContainer/BottomRow"]
 unique_name_in_owner = true
@@ -217,6 +207,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("6_cj73j")
 texture_normal = ExtResource("7_yjsua")
+texture_pressed = ExtResource("7_mn8ci")
+texture_hover = ExtResource("8_hvqqa")
+texture_disabled = ExtResource("9_xghmy")
 ignore_texture_size = true
 stretch_mode = 5
 
@@ -228,13 +221,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("8_hgnjc")
+theme_override_font_sizes/font_size = 40
 text = "BACK"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Button" type="Button" parent="SubViewport/SubCardShop/MarginContainer/VBoxContainer/BottomRow"]
-layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="CardShop" parent="." instance=ExtResource("9_ahun0")]
 
