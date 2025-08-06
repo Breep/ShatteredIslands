@@ -24,15 +24,15 @@ var _entity_stats: EntityStats
 @onready var _ignite_container: CenterContainer = %IgniteCenter
 @onready var _ignite_label: Label = %IgniteLabel
 
-#@onready var _instability_container: CenterContainer = %IgniteCenter
-#@onready var _instability_label: Label = %IgniteLabel
+@onready var _player_name_label: Label = %PlayerName
 
 # ============================== Public functions ==============================
 
-func connect_entity_stats(new_entity_stats: EntityStats):
+func connect_entity_stats(new_entity_stats: EntityStats, entity_name: String = ""):
 	_disconnect_all_entity_stats_signals(_entity_stats)
 	_entity_stats = new_entity_stats
 	_setup_local_nodes()
+	_player_name_label.text = entity_name
 
 # ============================== Node base functions ==============================
 

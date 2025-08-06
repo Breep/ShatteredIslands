@@ -22,7 +22,11 @@ func _ready() -> void:
 
 
 func _on_events_entity_clicked(entity: Entity) -> void:
-	_ui_selected_entity_stats.connect_entity_stats(entity.stats)
+	if entity is Character:
+		var character: Character = entity
+		_ui_selected_entity_stats.connect_entity_stats(entity.stats, character.player.name)
+	else:
+		_ui_selected_entity_stats.connect_entity_stats(entity.stats, entity.name)
 
 
 
