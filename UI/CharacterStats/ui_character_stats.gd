@@ -33,11 +33,15 @@ func connect_entity_stats(new_entity_stats: EntityStats, entity_name: String = "
 	_entity_stats = new_entity_stats
 	_setup_local_nodes()
 	_player_name_label.text = entity_name
+	show()
 
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
+	hide()
 	_setup_local_nodes()
+	
+	Events.nothing_clicked.connect(_on_events_nothing_clicked)
 
 # ============================== Private functions ==============================
 
@@ -143,5 +147,8 @@ func _on_entity_stats_poison_stacks_changed(poison_stacks: int) -> void:
 func _on_entity_stats_ignite_stacks_changed(ignite_stacks: int) -> void:
 	_update_optional_value(_ignite_container, _ignite_label, ignite_stacks)
 
+
+func _on_events_nothing_clicked() -> void:
+	hide()
 
  

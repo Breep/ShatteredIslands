@@ -13,9 +13,13 @@ signal condition_stacks_done(source, target, stacks_number, stack_type)
 func signal_condition_stacks_done(source, target, stacks_number, stack_type) -> void:
 	condition_stacks_done.emit(source, target, stacks_number, stack_type)
 
+
+
 signal game_state_changed(new_game_state: Game.GameState)
 func signal_game_state_changed(new_game_state: Game.GameState) -> void:
 	game_state_changed.emit(new_game_state)
+
+
 
 signal fighting_island_spawned(fighting_island_ref: FightingIsland, player_id: int)
 func signal_fighting_island_spawned(fighting_island_ref: FightingIsland, player_id: int) -> void:
@@ -25,7 +29,13 @@ signal player_won_a_fight(player: Player)
 func signal_player_won_a_fight(player: Player) -> void:
 	player_won_a_fight.emit(player)
 
+
+
 signal entity_cliked(entity: Entity)
 func signal_clickable_cliked(clickable: Node3D) -> void:
 	if clickable is Entity:
 		entity_cliked.emit(clickable)
+
+signal nothing_clicked()
+func signal_nothing_clicked() -> void:
+	nothing_clicked.emit()
