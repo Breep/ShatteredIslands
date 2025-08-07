@@ -1,0 +1,149 @@
+[gd_scene load_steps=16 format=3 uid="uid://gbmiuhc63ji7"]
+
+[ext_resource type="PackedScene" uid="uid://b8clqslwo8t68" path="res://FloatingIsland/BuyingIsland/BuyingArea/Tavern/tavern.tscn" id="1_38cx4"]
+[ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="2_2lp7i"]
+[ext_resource type="PackedScene" uid="uid://bn7sfcotfnn7b" path="res://UI/Menu/ui_mainmenu.tscn" id="2_8c8b4"]
+[ext_resource type="PackedScene" uid="uid://dfrrvt8lpo17x" path="res://Entities/Heroes/AncientTree/ancient_tree_model.tscn" id="2_p0buh"]
+[ext_resource type="PackedScene" uid="uid://5en73tnp30yw" path="res://Entities/Heroes/Cyborg/cyborg_model.tscn" id="3_xkuis"]
+[ext_resource type="PackedScene" uid="uid://cmojifbx1glt4" path="res://Entities/Heroes/DrBoom/dr_boom_model.tscn" id="4_mwhpp"]
+[ext_resource type="PackedScene" uid="uid://da6itu0upcuqj" path="res://Entities/Heroes/Rhino/rhino_model.tscn" id="5_uvndp"]
+[ext_resource type="PackedScene" uid="uid://0dsfddayqyc8" path="res://Entities/Heroes/TonyLeBarde/tony_le_bard_model.tscn" id="6_0ewnc"]
+[ext_resource type="PackedScene" uid="uid://bmtp8uvuepsu5" path="res://Entities/Heroes/SirReginald/sir_reginald_model.tscn" id="7_h47y2"]
+[ext_resource type="PackedScene" uid="uid://ls38xt04tcla" path="res://Entities/Heroes/MrKrumb/mr_krumb_model.tscn" id="8_aouoj"]
+[ext_resource type="Script" uid="uid://1hqrwl2e0q2r" path="res://Game/MainMenu/torch_light.gd" id="11_xkuis"]
+[ext_resource type="AudioStream" uid="uid://bntxtpta0uv6e" path="res://Data/Sounds/medieval_village_atmosphere-79282.mp3" id="12_0ewnc"]
+[ext_resource type="AudioStream" uid="uid://buiooajmh742s" path="res://Data/Sounds/tavern_ambience_inside_laughter-73008.mp3" id="13_h47y2"]
+[ext_resource type="AudioStream" uid="uid://cm1soq1vpv5y4" path="res://Data/Musics/the_tavern.mp3" id="14_aouoj"]
+
+[sub_resource type="Environment" id="Environment_8c8b4"]
+
+[node name="MainMenu" type="Node3D"]
+
+[node name="Tavern" parent="." instance=ExtResource("1_38cx4")]
+script = null
+
+[node name="TavernCenter" parent="Tavern" index="7"]
+script = null
+
+[node name="Heroes" type="Node3D" parent="Tavern"]
+
+[node name="ancient tree anim" parent="Tavern/Heroes" instance=ExtResource("2_p0buh")]
+transform = Transform3D(1.30047, 0, -1.66794, 0, 2.115, 0, 1.66794, 0, 1.30047, -8.44032, 0, -11.0495)
+
+[node name="CyborgModel" parent="Tavern/Heroes" instance=ExtResource("3_xkuis")]
+transform = Transform3D(-0.802093, 0, 0.170432, 0, 0.82, 0, -0.170432, 0, -0.802093, -1.80308, -4.76837e-07, -11.2925)
+
+[node name="Drboom" parent="Tavern/Heroes" instance=ExtResource("4_mwhpp")]
+transform = Transform3D(-0.849994, 0, 0.526793, 0, 1, 0, -0.526793, 0, -0.849994, -10.3139, 0, -7.61487)
+
+[node name="RhinoModel" parent="Tavern/Heroes" instance=ExtResource("5_uvndp")]
+transform = Transform3D(0.930936, 0, -1.38043, 0, 1.665, 0, 1.38043, 0, 0.930936, -9.06384, 0, -5.75323)
+
+[node name="dragon_lord_all_anim" parent="Tavern/Heroes" instance=ExtResource("6_0ewnc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.11998, 0, -7.48706)
+
+[node name="GeneralSkeleton" parent="Tavern/Heroes/dragon_lord_all_anim/Armature" index="0"]
+bones/0/position = Vector3(0, 0.715002, 0.488002)
+bones/0/rotation = Quaternion(-0.0132612, -0.00109117, -0.00925366, 0.999869)
+bones/1/rotation = Quaternion(0.0084419, -0.00108939, 7.86252e-05, 0.999964)
+bones/2/rotation = Quaternion(0.0088794, -0.0216358, 0.00108275, 0.999726)
+bones/3/rotation = Quaternion(0.00882675, -0.0216075, 0.00146075, 0.999727)
+bones/4/rotation = Quaternion(-0.0240902, 0.00738061, -0.0126373, 0.999603)
+bones/5/rotation = Quaternion(0.0481969, -0.0148466, 0.0315465, 0.998229)
+bones/7/rotation = Quaternion(0.531434, 0.462901, 0.470666, -0.530823)
+bones/8/rotation = Quaternion(0.180523, 0.794993, -0.574465, 0.0734016)
+bones/9/rotation = Quaternion(0.166467, -0.710127, 0.186764, 0.658124)
+bones/10/rotation = Quaternion(-0.00049188, 0.732975, -0.16801, 0.659181)
+bones/11/rotation = Quaternion(-0.120684, 0.644323, 0.107434, 0.74749)
+bones/12/rotation = Quaternion(0.109333, 0.0867072, 0.0337912, 0.98964)
+bones/13/rotation = Quaternion(0.0178882, 0.0231275, -0.0157792, 0.999448)
+bones/15/rotation = Quaternion(0.183492, -0.000683829, 0.00325185, 0.983016)
+bones/16/rotation = Quaternion(0.303837, 0.038795, 0.0023047, 0.951931)
+bones/17/rotation = Quaternion(0.148456, 0.0291939, 0.0110449, 0.988426)
+bones/19/rotation = Quaternion(0.469624, -0.52395, -0.497376, -0.50749)
+bones/20/rotation = Quaternion(-0.179122, 0.777199, -0.593151, -0.109769)
+bones/21/rotation = Quaternion(0.15347, 0.711726, -0.173621, 0.663136)
+bones/22/rotation = Quaternion(-0.0771131, -0.685955, 0.102737, 0.716215)
+bones/23/rotation = Quaternion(-0.103072, -0.766961, -0.0583586, 0.630668)
+bones/24/rotation = Quaternion(-0.0143386, -0.0369649, -0.0302102, 0.998757)
+bones/25/rotation = Quaternion(-0.0157828, -0.0164434, 0.023538, 0.999463)
+bones/27/rotation = Quaternion(0.0998457, -0.00627664, 0.03621, 0.994324)
+bones/28/rotation = Quaternion(0.331301, -0.0224354, -0.00281388, 0.943254)
+bones/29/rotation = Quaternion(0.0703361, -0.00497723, -0.000803828, 0.997511)
+bones/31/rotation = Quaternion(0.0201136, 0.139647, 0.98927, -0.0379232)
+bones/32/rotation = Quaternion(-0.0257198, 0.966663, -0.236639, 0.0943566)
+bones/33/rotation = Quaternion(-0.0160353, 0.64056, -0.766135, 0.0496324)
+bones/34/rotation = Quaternion(-3.08693e-08, 0.999992, 0.00405088, -8.6434e-09)
+bones/36/rotation = Quaternion(-0.100771, 0.141472, 0.982417, 0.0684625)
+bones/37/rotation = Quaternion(0.0195705, 0.978368, -0.200472, -0.047161)
+bones/38/rotation = Quaternion(0.0252944, 0.674001, -0.733677, -0.0824683)
+bones/39/rotation = Quaternion(7.24399e-08, 1, 8.9407e-08, -4.95555e-08)
+
+[node name="Dragonlord" parent="Tavern/Heroes/dragon_lord_all_anim/Armature/GeneralSkeleton" index="0"]
+transform = Transform3D(-0.970245, 0, 0.242125, 0, 1, 0, -0.242125, 0, -0.970245, 0.0868564, 0, 0.593033)
+
+[node name="sir_rigged_animated" parent="Tavern/Heroes" instance=ExtResource("7_h47y2")]
+transform = Transform3D(1.08662, 0, -0.695242, 0, 1.29, 0, 0.695242, 0, 1.08662, -1.84894, 0, -6.125)
+
+[node name="MrKrumbModel" parent="Tavern/Heroes" instance=ExtResource("8_aouoj")]
+transform = Transform3D(-0.855328, 0, 0.518087, 0, 1, 0, -0.518087, 0, -0.855328, -3.79872, 0, -2.66513)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.893661, -0.1806, 0.410795, 1.49012e-08, 0.915438, 0.402459, -0.448742, -0.359662, 0.818092, -0.723868, 6.4113, 3.32719)
+fov = 30.0
+
+[node name="AnimHoveringModule" parent="Camera3D" node_paths=PackedStringArray("_owner") instance=ExtResource("2_2lp7i")]
+_owner = NodePath("..")
+_hover_power = 0.05
+_hover_period = 10.0
+
+[node name="UIMainMenu" parent="." instance=ExtResource("2_8c8b4")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8c8b4")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.985973, 1.86265e-09, 0.166906, -0.0196091, 0.993075, 0.115837, -0.165751, -0.117485, 0.979144, 0, 4.9928, 0)
+light_color = Color(0.741719, 0.525808, 0.718671, 1)
+shadow_enabled = true
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.84696, 2.98089, -20.3139)
+light_color = Color(0.796078, 0.513726, 0.152941, 1)
+omni_range = 18.543
+omni_attenuation = 0.497
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.2354, 2.66241, -14.3286)
+light_color = Color(0.796078, 0.513726, 0.152941, 1)
+omni_range = 18.543
+omni_attenuation = 0.497
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.3112, 3.12881, -19.7422)
+light_color = Color(0.796078, 0.513726, 0.152941, 1)
+omni_range = 18.543
+omni_attenuation = 0.497
+script = ExtResource("11_xkuis")
+flicker_speed = 5.0
+flicker_strength = 0.1
+base_energy = 1.0
+
+[node name="VillageSound" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.087, 0, -26.2006)
+stream = ExtResource("12_0ewnc")
+autoplay = true
+
+[node name="TavernSound" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.90907, 0, 1.76646)
+stream = ExtResource("13_h47y2")
+volume_db = -11.636
+autoplay = true
+
+[node name="Music" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("14_aouoj")
+attenuation_model = 3
+autoplay = true
+
+[editable path="Tavern"]
+[editable path="Tavern/Heroes/dragon_lord_all_anim"]

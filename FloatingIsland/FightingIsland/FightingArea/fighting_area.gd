@@ -15,6 +15,10 @@ signal spell_casted(source: Entity, target: Entity, spell_type: Spell.Type)
 func signal_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type) -> void:
 	spell_casted.emit(source, target, spell_type)
 
+signal stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: int)
+func signal_stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: int) -> void:
+	stack_taken.emit(source, stack_type, stack_number)
+
 
 # ============================== Network Export variables ==============================
 

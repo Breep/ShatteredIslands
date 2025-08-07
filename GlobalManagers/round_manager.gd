@@ -1,6 +1,13 @@
 extends Node
 
-var current_round: int
+signal current_round_changed(round_number: int)
+var _current_round: int
+var current_round: int:
+	get: return _current_round
+	set(value):
+		if value == _current_round: return
+		_current_round = value
+		current_round_changed.emit(_current_round)
 
 signal _current_round_battle_history_is_ready()
 var battle_history: Dictionary[int, BattleHistory] # Key=round_id, Value=BattleHystory

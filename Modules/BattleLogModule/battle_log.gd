@@ -4,14 +4,16 @@ extends Resource
 enum Type {
 	AUTO_ATTACK,
 	DAMAGE_TAKEN,
-	SPELL_CASTED
+	SPELL_CASTED,
+	STACK_TAKEN
 }
 
 enum Modifier {
 	CRITICAL,
 	POISON,
 	IGNITE,
-	INSTABILITY
+	INSTABILITY,
+	ARMOR
 }
 
 enum Main {
@@ -22,7 +24,9 @@ enum Main {
 	MODIFIER,
 	DAMAGE,
 	DAMAGE_TYPE,
-	SPELL_TYPE
+	SPELL_TYPE,
+	STACK_TYPE,
+	STACK_NUMBER
 }
 
 const TIME: String = "time"

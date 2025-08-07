@@ -39,7 +39,9 @@ func _ready() -> void:
 	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 	rng.randomize()
 	_player_name_edit.text = "Breep" + str(rng.randi_range(0, 1000))
-	pass
+	
+	if "server" in OS.get_cmdline_args():
+		_on_host_button_pressed()
 
 # ============================================
 

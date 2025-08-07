@@ -47,6 +47,7 @@ func take_damage_percent(damage_percent: float, percent_modifier: Utils.PercentM
 # ===== Condition stacks
 
 func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, _source: Character = null) -> void:
+	_owner.signal_stack_taken(stack_type, stacks_number)
 	match stack_type:
 		Utils.StackType.POISON:
 			_owner.stats.poison_stacks += stacks_number

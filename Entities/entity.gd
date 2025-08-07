@@ -23,6 +23,10 @@ signal spell_casted(source: Entity, target: Entity, spell_type: Spell.Type)
 func signal_spell_casted(target: Entity, spell_type: Spell.Type) -> void:
 	spell_casted.emit(self, target, spell_type)
 
+signal stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: int)
+func signal_stack_taken(stack_type: Utils.StackType, stack_number: int) -> void:
+	stack_taken.emit(self, stack_type, stack_number)
+
 # ============================== Public variables ==============================
 
 var _is_dead: bool = false

@@ -67,6 +67,8 @@ func _apply_log(battle_log: Dictionary) -> void:
 			_apply_damage_taken(battle_log)
 		BattleLog.Type.SPELL_CASTED:
 			_apply_spell_casted(battle_log)
+		BattleLog.Type.STACK_TAKEN:
+			_apply_stack_taken(battle_log)
 
 # ============================== Logs applied ==============================
 
@@ -102,6 +104,7 @@ func _apply_damage_taken(battle_log: Dictionary) -> void:
 	source.take_damage(damage, damage_type, modifier[BattleLog.Modifier.CRITICAL])
 
 
+#{"time":0.1, "type":"spell_casted", "source":1, "target":2, "spell_type":<spell_type>}
 func _apply_spell_casted(battle_log: Dictionary) -> void:
 	var source_id: int = battle_log[BattleLog.Main.SOURCE]
 	var target_id: int = battle_log[BattleLog.Main.TARGET]
@@ -117,9 +120,14 @@ func _apply_spell_casted(battle_log: Dictionary) -> void:
 	source.cast_spell(target, spell_type, {})
 
 
-
-
-
-
-
- 
+#{"time":0.1, "source":1, "stack_type":<stack_type>, "stack_number":42}
+func _apply_stack_taken(battle_log: Dictionary) -> void:
+	print("DEBUG - STACK TAKEN")
+	var source_id: int = battle_log[BattleLog.Main.SOURCE]
+	var stack_type: Utils.StackType = battle_log[BattleLog.Main.STACK_TYPE]
+	var stack_number: int = battle_log[BattleLog.Main.STACK_NUMBER]
+	if not _entity_manager.entities.has(source_id):
+		printerr("[", multiplayer.get_unique_id(), "] BattleReader: Stack taken: Unknown source !")
+		return
+	var source: Entity = _entity_manager.entities[source_id]
+	source.take_condition_stacks(stack_number, stack_type)

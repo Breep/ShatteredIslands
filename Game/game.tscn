@@ -128,6 +128,7 @@ spawn_path = NodePath("../Characters")
 [node name="Characters" type="Node3D" parent="."]
 
 [node name="Light" type="Node3D" parent="."]
+transform = Transform3D(0.471889, 0, 0.881658, -0.0862491, 0.995204, 0.0461631, -0.877429, -0.0978261, 0.469626, 0, 0, 0)
 
 [node name="WorldEnvironment2" type="WorldEnvironment" parent="Light"]
 environment = SubResource("Environment_flgk0")

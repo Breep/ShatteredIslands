@@ -1,6 +1,5 @@
-[gd_scene load_steps=7 format=3 uid="uid://bn7sfcotfnn7b"]
+[gd_scene load_steps=6 format=3 uid="uid://bn7sfcotfnn7b"]
 
-[ext_resource type="Texture2D" uid="uid://c88c1h5yq3w4d" path="res://Data/Assets/UI/ile flottante.jpg" id="1_i2r5a"]
 [ext_resource type="Script" uid="uid://gai0y5rpfigb" path="res://UI/Menu/ui_mainmenu.gd" id="1_k25tv"]
 [ext_resource type="Theme" uid="uid://da4vub8s3sjmd" path="res://UI/_Themes/add_player.tres" id="2_3br58"]
 [ext_resource type="Theme" uid="uid://bpo76n2lvfxb6" path="res://UI/_Themes/main_menu_button.tres" id="2_q560i"]
@@ -16,16 +15,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_k25tv")
 _play_button = NodePath("VBoxContainer/Play")
-
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_i2r5a")
-expand_mode = 1
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -88,12 +77,6 @@ layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_q560i")
 text = "Play"
-
-[node name="Lobby" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("2_q560i")
-text = "lobby"
 
 [node name="Store" type="Button" parent="VBoxContainer"]
 layout_mode = 2

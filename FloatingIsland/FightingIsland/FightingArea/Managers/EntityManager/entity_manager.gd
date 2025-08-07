@@ -38,6 +38,8 @@ func clear() -> void:
 			entity.damage_taken.disconnect(_on_entity_damage_taken)
 		if entity.spell_casted.is_connected(_on_entity_spell_casted):
 			entity.spell_casted.disconnect(_on_entity_spell_casted)
+		if entity.stack_taken.is_connected(_on_entity_stack_taken):
+			entity.stack_taken.disconnect(_on_entity_stack_taken)
 	_entities.clear()
 	_characters.clear()
 
@@ -55,6 +57,7 @@ func _register_entity(entity: Entity) -> void:
 	if multiplayer.is_server():
 		entity.damage_taken.connect(_on_entity_damage_taken)
 		entity.spell_casted.connect(_on_entity_spell_casted)
+		entity.stack_taken.connect(_on_entity_stack_taken)
 
 
 func _kick_entity(entity: Entity) -> void:
@@ -62,6 +65,8 @@ func _kick_entity(entity: Entity) -> void:
 		entity.damage_taken.disconnect(_on_entity_damage_taken)
 	if entity.spell_casted.is_connected(_on_entity_spell_casted):
 		entity.spell_casted.disconnect(_on_entity_spell_casted)
+	if entity.stack_taken.is_connected(_on_entity_stack_taken):
+			entity.stack_taken.disconnect(_on_entity_stack_taken)
 	entities.erase(entity)
 	if _characters.has(entity.id): _characters.erase(entity)
 
@@ -79,8 +84,12 @@ func _on_entity_damage_taken(entity: Entity, damage: int, damage_type: Utils.Dam
 	_fighting_area.signal_damage_taken(entity, damage, damage_type, is_critical)
 
 
-func _on_entity_spell_casted(entity_ref: Entity, target: Entity, spell_type: Spell.Type) -> void:
-	_fighting_area.signal_spell_casted(entity_ref, target, spell_type)
+func _on_entity_spell_casted(entity: Entity, target: Entity, spell_type: Spell.Type) -> void:
+	_fighting_area.signal_spell_casted(entity, target, spell_type)
+
+
+func _on_entity_stack_taken(entity: Entity, stack_type: Utils.StackType, stack_number: int) -> void:
+	_fighting_area.signal_stack_taken(entity, stack_type, stack_number)
 
 
 func _on_scanner_area_body_entered(body: Node3D) -> void:
