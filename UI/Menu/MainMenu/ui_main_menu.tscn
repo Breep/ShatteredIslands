@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://bn7sfcotfnn7b"]
 
-[ext_resource type="Script" uid="uid://gai0y5rpfigb" path="res://UI/Menu/MainMenu/ui_mainmenu.gd" id="1_k25tv"]
+[ext_resource type="Script" uid="uid://gai0y5rpfigb" path="res://UI/Menu/MainMenu/ui_main_menu.gd" id="1_k25tv"]
 [ext_resource type="Theme" uid="uid://da4vub8s3sjmd" path="res://UI/_Themes/add_player.tres" id="2_3br58"]
 [ext_resource type="Theme" uid="uid://bpo76n2lvfxb6" path="res://UI/_Themes/main_menu_button.tres" id="2_q560i"]
 [ext_resource type="Texture2D" uid="uid://hl4bi74ds0b0" path="res://Data/Misc/logo.png" id="3_k25tv"]
 [ext_resource type="Texture2D" uid="uid://nv26u8gl3cbr" path="res://Data/Misc/plus blanc.png" id="4_hcgp0"]
-[ext_resource type="PackedScene" uid="uid://c6hrhnld0nlpl" path="res://UI/Menu/PlayMenu/play_menu.tscn" id="6_57mrh"]
+[ext_resource type="PackedScene" uid="uid://c6hrhnld0nlpl" path="res://UI/Menu/PlayMenu/ui_play_menu.tscn" id="6_57mrh"]
 
 [node name="UIMainMenu" type="Control" node_paths=PackedStringArray("_play_button")]
 layout_mode = 3

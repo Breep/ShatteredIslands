@@ -1,0 +1,217 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6hrhnld0nlpl"]
+
+[ext_resource type="Script" uid="uid://c8alyo5som56r" path="res://UI/Menu/PlayMenu/ui_play_menu.gd" id="1_ae5as"]
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="2_0s0ho"]
+
+[node name="PlayMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ae5as")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel2" type="Panel" parent="CenterContainer"]
+custom_minimum_size = Vector2(500, 400)
+layout_mode = 2
+theme = ExtResource("2_0s0ho")
+
+[node name="SubPlayMenu" type="MarginContainer" parent="CenterContainer/Panel2"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Panel2/SubPlayMenu"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+theme_override_font_sizes/font_size = 50
+text = "PLAY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="InfoPanel" type="Panel" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/InfoPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/InfoPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/InfoPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Hello there !
+Welcome in the tournament
+of the Shattered Islands !"
+
+[node name="BackButton" type="Button" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/InfoPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+text = "BACK"
+
+[node name="SoloPanel" type="Panel" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/SoloPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/SoloPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="SoloLabel" type="Label" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/SoloPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "SOLO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartSoloButton" type="Button" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/SoloPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 25
+text = "START GAME"
+
+[node name="OnlinePanel" type="Panel" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_0s0ho")
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer"]
+layout_mode = 2
+
+[node name="OnlineLabel" type="Label" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "ONLINE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PlayerNameLabel" type="Label" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Player Name"
+
+[node name="PlayerNameEdit" type="LineEdit" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Breep"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ServerIPLabel" type="Label" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Server IP"
+
+[node name="ServerIPEdit" type="LineEdit" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "127.0.0.1"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ServerPortLabel" type="Label" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Server Port"
+
+[node name="ServerPortEdit" type="LineEdit" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "4242"
+
+[node name="JoinButton" type="Button" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+theme_override_font_sizes/font_size = 50
+text = "JOIN"
+
+[node name="ClientMessage" type="Label" parent="CenterContainer/Panel2"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2

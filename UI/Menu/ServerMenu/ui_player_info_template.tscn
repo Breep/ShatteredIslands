@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dqkyovx2krwgi"]
 
-[ext_resource type="Script" uid="uid://b423g47alaib2" path="res://tmp_player_info_template.gd" id="1_ka7fd"]
+[ext_resource type="Script" uid="uid://b423g47alaib2" path="res://UI/Menu/ServerMenu/ui_player_info_template.gd" id="1_ka7fd"]
 
 [node name="PlayerInfoTemplate" type="HBoxContainer"]
 theme_override_constants/separation = 10

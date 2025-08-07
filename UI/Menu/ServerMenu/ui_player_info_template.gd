@@ -1,4 +1,4 @@
-class_name PlayerInfoTemplate
+class_name UIPlayerInfoTemplate
 extends HBoxContainer
 
 signal kick_button_pressed(peer_id: int)

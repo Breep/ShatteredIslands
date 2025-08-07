@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b8clqslwo8t68" path="res://FloatingIsland/BuyingIsland/BuyingArea/Tavern/tavern.tscn" id="1_38cx4"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="2_2lp7i"]
-[ext_resource type="PackedScene" uid="uid://bn7sfcotfnn7b" path="res://UI/Menu/MainMenu/ui_mainmenu.tscn" id="2_8c8b4"]
+[ext_resource type="PackedScene" uid="uid://bn7sfcotfnn7b" path="res://UI/Menu/MainMenu/ui_main_menu.tscn" id="2_8c8b4"]
 [ext_resource type="PackedScene" uid="uid://dfrrvt8lpo17x" path="res://Entities/Heroes/AncientTree/ancient_tree_model.tscn" id="2_p0buh"]
 [ext_resource type="PackedScene" uid="uid://5en73tnp30yw" path="res://Entities/Heroes/Cyborg/cyborg_model.tscn" id="3_xkuis"]
 [ext_resource type="PackedScene" uid="uid://cmojifbx1glt4" path="res://Entities/Heroes/DrBoom/dr_boom_model.tscn" id="4_mwhpp"]
