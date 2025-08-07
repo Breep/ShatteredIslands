@@ -58,6 +58,7 @@ func _lanch_optional_spells() -> void:
 
 # Handle poison stacks and damage on _owner
 func _on_poison_tick_timer_timeout() -> void:
+	if not multiplayer.is_server(): return
 	if _owner.stats.poison_stacks > 0:
 		_owner.take_damage(_owner.stats.poison_stacks, Utils.DamageType.POISON, false)
 

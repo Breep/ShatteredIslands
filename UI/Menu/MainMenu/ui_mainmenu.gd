@@ -1,7 +1,10 @@
+class_name UIMainMenu
 extends Control
 
 @export_group("Local Nodes")
 @export var _play_button: Button
+
+@onready var _play_menu: UIPlayMenu = %PlayMenu
 
 func _ready() -> void:
 	_play_button.pressed.connect(_on_play_button_pressed)
@@ -14,5 +17,6 @@ func _ready() -> void:
 		print("Server enabled")
 		get_tree().change_scene_to_file("res://TMP_MultiplayerStart.tscn")
 
+
 func _on_play_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://TMP_MultiplayerStart.tscn")
+	_play_menu.show()

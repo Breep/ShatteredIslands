@@ -28,6 +28,7 @@ Shared="*res://Lib/shared.gd"
 PlayerManager="*res://GlobalManagers/player_manager.gd"
 GlobalFightingManager="*res://GlobalManagers/global_fighting_manager.gd"
 SimpleGrass="*res://addons/simplegrasstextured/singleton.tscn"
+MultiplayerManager="*res://GlobalManagers/multiplayer_manager.gd"
 
 [debug]
 

@@ -32,8 +32,11 @@ func _ready() -> void:
 	for child in _players_list.get_children():
 		child.hide()
 	
+	#SERVER ONLY
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
+	
+	#CLIENT ONLY
 	multiplayer.connected_to_server.connect(_on_connected_to_server)
 	multiplayer.connection_failed.connect(_on_connection_failed)
 	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
