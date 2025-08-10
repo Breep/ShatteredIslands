@@ -1,7 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://c6hrhnld0nlpl"]
+[gd_scene load_steps=6 format=3 uid="uid://c6hrhnld0nlpl"]
 
 [ext_resource type="Script" uid="uid://c8alyo5som56r" path="res://UI/Menu/PlayMenu/ui_play_menu.gd" id="1_ae5as"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="2_0s0ho"]
+[ext_resource type="Texture2D" uid="uid://xhyj0k42ilb3" path="res://UI/_Themes/Data/panel_tileable_20px_border_only.png" id="3_0s0ho"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0s0ho"]
+texture = ExtResource("3_0s0ho")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="Theme" id="Theme_3htyq"]
+Panel/styles/panel = SubResource("StyleBoxTexture_0s0ho")
 
 [node name="PlayMenu" type="Control"]
 layout_mode = 3
@@ -91,6 +104,16 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
 text = "BACK"
 
+[node name="PanelBorder" type="Panel" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/InfoPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_3htyq")
+
 [node name="SoloPanel" type="Panel" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -122,6 +145,16 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 25
 text = "START GAME"
+
+[node name="PanelBorder" type="Panel" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/SoloPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_3htyq")
 
 [node name="OnlinePanel" type="Panel" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -202,6 +235,16 @@ size_flags_stretch_ratio = 2.0
 theme_override_font_sizes/font_size = 50
 text = "JOIN"
 
+[node name="PanelBorder" type="Panel" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_3htyq")
+
 [node name="ClientMessage" type="Label" parent="CenterContainer/Panel2"]
 unique_name_in_owner = true
 visible = false
@@ -215,3 +258,13 @@ theme_override_font_sizes/font_size = 30
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="PanelBorder" type="Panel" parent="CenterContainer/Panel2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_3htyq")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://db2anika8bvj8"]
+[gd_scene load_steps=19 format=3 uid="uid://db2anika8bvj8"]
 
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_0k5gn"]
 [ext_resource type="Script" uid="uid://wsv4m6qf4t76" path="res://UI/CharacterStats/ui_character_stats.gd" id="1_xv57f"]
@@ -6,6 +6,7 @@
 [ext_resource type="Theme" uid="uid://e45umaj22fg7" path="res://UI/_Themes/UI_Label_buying_area.tres" id="3_op3jl"]
 [ext_resource type="Texture2D" uid="uid://upsytg61ftqu" path="res://Data/Assets/Buying_area/UI/aaspeed-removebg-preview (1).png" id="4_f1wmx"]
 [ext_resource type="Texture2D" uid="uid://d3v87ioxyy0vi" path="res://Data/Assets/Buying_area/UI/Critical_strike_icon.webp" id="5_g6iyk"]
+[ext_resource type="Texture2D" uid="uid://xhyj0k42ilb3" path="res://UI/_Themes/Data/panel_tileable_20px_border_only.png" id="7_pepte"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_xv57f"]
 viewport_path = NodePath("SubViewport")
@@ -28,6 +29,18 @@ bg_color = Color(0.588235, 0.588235, 0.588235, 1)
 bg_color = Color(0.0784314, 0.239216, 0.376471, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2y85p"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_klm3a"]
+texture = ExtResource("7_pepte")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="Theme" id="Theme_u6yy0"]
+Panel/styles/panel = SubResource("StyleBoxTexture_klm3a")
 
 [node name="CharacterStats" type="Control"]
 layout_mode = 3
@@ -320,3 +333,12 @@ theme_override_font_sizes/font_size = 35
 text = "Player name"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="PanelBorder" type="Panel" parent="SubViewport/SubCharacterStats/Stats"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_u6yy0")

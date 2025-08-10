@@ -1,22 +1,53 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://deijluejrkd7e"]
+[gd_resource type="Theme" load_steps=15 format=3 uid="uid://deijluejrkd7e"]
 
 [ext_resource type="FontFile" uid="uid://dbqejd0leblna" path="res://Data/font/Nunito-Bold.ttf" id="1_itn17"]
+[ext_resource type="Texture2D" uid="uid://bgvd0xleomdh0" path="res://UI/_Themes/Data/tileable_dark_wood.png" id="2_c6cb3"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ai5n5"]
-bg_color = Color(0.605167, 0.404879, 0.292275, 0.901961)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0, 0, 0, 1)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m6wv4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c6cb3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fmn5p"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0pcbd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4nuse"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bck8t"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fmn5p"]
+texture = ExtResource("2_c6cb3")
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nkx1b"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8s0gw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yrare"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vnk8o"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eh5cd"]
 
 [resource]
 Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
 Button/colors/font_outline_color = Color(0, 0, 0, 1)
 Button/constants/outline_size = 5
 Button/fonts/font = ExtResource("1_itn17")
+Button/styles/normal = SubResource("StyleBoxEmpty_m6wv4")
+HScrollBar/styles/grabber = SubResource("StyleBoxEmpty_c6cb3")
+HScrollBar/styles/grabber_highlight = SubResource("StyleBoxEmpty_fmn5p")
+HScrollBar/styles/grabber_pressed = SubResource("StyleBoxEmpty_0pcbd")
+HScrollBar/styles/scroll = SubResource("StyleBoxEmpty_4nuse")
+HScrollBar/styles/scroll_focus = SubResource("StyleBoxEmpty_bck8t")
 Label/colors/font_color = Color(1, 1, 1, 1)
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
 Label/constants/outline_size = 5
 Label/fonts/font = ExtResource("1_itn17")
-Panel/styles/panel = SubResource("StyleBoxFlat_ai5n5")
+Panel/styles/panel = SubResource("StyleBoxTexture_fmn5p")
+VScrollBar/styles/grabber = SubResource("StyleBoxEmpty_nkx1b")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxEmpty_8s0gw")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxEmpty_yrare")
+VScrollBar/styles/scroll = SubResource("StyleBoxEmpty_vnk8o")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxEmpty_eh5cd")

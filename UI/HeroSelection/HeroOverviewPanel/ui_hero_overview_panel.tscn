@@ -1,0 +1,838 @@
+[gd_scene load_steps=14 format=3 uid="uid://ddugcksbtixea"]
+
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_vyxcd"]
+[ext_resource type="Script" uid="uid://72f2hpoywkt6" path="res://UI/HeroSelection/HeroOverviewPanel/ui_hero_overview_panel.gd" id="1_w3h7f"]
+[ext_resource type="Texture2D" uid="uid://xhyj0k42ilb3" path="res://UI/_Themes/Data/panel_tileable_20px_border_only.png" id="2_gk4fp"]
+[ext_resource type="Texture2D" uid="uid://dagqv7cd1gdn1" path="res://UI/_Themes/Data/Separator/plant.png" id="3_rp41f"]
+[ext_resource type="Texture2D" uid="uid://df7c3xa2eudnt" path="res://Data/Heroes/Portraits/Dark Knight.png" id="4_gk4fp"]
+[ext_resource type="Texture2D" uid="uid://cia42t0jcdkfg" path="res://Data/Assets/Card/ICONS/HP color.png" id="5_rp41f"]
+[ext_resource type="Texture2D" uid="uid://nxj6jw2phtcp" path="res://Data/Assets/Card/ICONS/MANA color.png" id="7_wvgek"]
+[ext_resource type="Texture2D" uid="uid://c3ruvqyjokopc" path="res://Data/Assets/Card/ICONS/dodge.png" id="8_5cpim"]
+[ext_resource type="Texture2D" uid="uid://bxd1jnaci6olo" path="res://Data/Assets/Card/ICONS/ATTACK color.png" id="9_0noyl"]
+[ext_resource type="Texture2D" uid="uid://dlac4nmdbamph" path="res://Data/Assets/Card/ICONS/attack_speed.png" id="10_71p6x"]
+[ext_resource type="Texture2D" uid="uid://cawoo43ethscj" path="res://Data/Assets/Card/ICONS/critic.png" id="11_nhrae"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rp41f"]
+texture = ExtResource("2_gk4fp")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="Theme" id="Theme_w3h7f"]
+Panel/styles/panel = SubResource("StyleBoxTexture_rp41f")
+
+[node name="UiHeroOverviewPanel" type="Control"]
+layout_mode = 3
+anchor_right = 0.423
+anchor_bottom = 4.582
+offset_right = -0.296021
+offset_bottom = -0.13623
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_w3h7f")
+
+[node name="HeroOverViewPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_vyxcd")
+
+[node name="PanelBorder" type="Panel" parent="HeroOverViewPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_w3h7f")
+
+[node name="MarginContainer" type="MarginContainer" parent="HeroOverViewPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HeroOverViewPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="HeroNameLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "[Hero's name]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Separator" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+texture = ExtResource("3_rp41f")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PortraitCenterContainer" type="CenterContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HeroPortrait" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/PortraitCenterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+texture = ExtResource("4_gk4fp")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="PanelBorder" type="Panel" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/PortraitCenterContainer/HeroPortrait"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_w3h7f")
+
+[node name="SkinChoice" type="HBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/SkinChoice"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_gk4fp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/SkinChoice"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_gk4fp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect3" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/SkinChoice"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_gk4fp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Separator2" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+texture = ExtResource("3_rp41f")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StatisticContainer" type="GridContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+columns = 3
+
+[node name="HealthPanel" type="Panel" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer/HealthPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer/HealthPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Icon" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer/HealthPanel/HBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("5_rp41f")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="HealthLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer/HealthPanel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "1000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelBorder" type="Panel" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer/HealthPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_w3h7f")
+
+[node name="ManaPanel" type="Panel" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer/ManaPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer/ManaPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Icon" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer/ManaPanel/HBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("7_wvgek")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="ManaLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer/ManaPanel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "3.7"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelBorder" type="Panel" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer/ManaPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_w3h7f")
+
+[node name="DodgePanel" type="Panel" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer/DodgePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer/DodgePanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Icon" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer/DodgePanel/HBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("8_5cpim")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="DodgeLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer/DodgePanel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "20"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelBorder" type="Panel" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer/DodgePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_w3h7f")
+
+[node name="AttackPanel" type="Panel" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer/AttackPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer/AttackPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Icon" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer/AttackPanel/HBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("9_0noyl")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="AttackLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer/AttackPanel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "22"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelBorder" type="Panel" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer/AttackPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_w3h7f")
+
+[node name="AttackSpeedPanel" type="Panel" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer/AttackSpeedPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer/AttackSpeedPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Icon" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer/AttackSpeedPanel/HBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("10_71p6x")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="AttackSpeedLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer/AttackSpeedPanel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "0.5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelBorder" type="Panel" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer/AttackSpeedPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_w3h7f")
+
+[node name="CriticPanel" type="Panel" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer/CriticPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer/CriticPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Icon" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer/CriticPanel/HBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("11_nhrae")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="CriticLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer/CriticPanel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "15"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelBorder" type="Panel" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer/CriticPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_w3h7f")
+
+[node name="Separator3" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+texture = ExtResource("3_rp41f")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PassiveName" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "[Passive Name]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PassiveDescription" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi."
+horizontal_alignment = 3
+vertical_alignment = 3
+autowrap_mode = 2
+
+[node name="Separator4" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+texture = ExtResource("3_rp41f")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="UltimateName" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "[Ultimate Name]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UltimateDescription" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi."
+horizontal_alignment = 3
+vertical_alignment = 3
+autowrap_mode = 2
+
+[node name="Separator5" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+texture = ExtResource("3_rp41f")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SkillsNameLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Skills"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatisticContainer2" type="GridContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+columns = 2
+
+[node name="Skill1APanel" type="Panel" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelBorder" type="Panel" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill1APanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_w3h7f")
+
+[node name="MarginContainer" type="MarginContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill1APanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill1APanel/MarginContainer"]
+layout_mode = 2
+
+[node name="Skill1AName" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill1APanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+text = "Skill 1-A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill1APanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Skill1ADescription" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill1APanel/MarginContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 12
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam."
+horizontal_alignment = 3
+vertical_alignment = 3
+autowrap_mode = 2
+
+[node name="Skill1BPanel" type="Panel" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelBorder" type="Panel" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill1BPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_w3h7f")
+
+[node name="MarginContainer" type="MarginContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill1BPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill1BPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="Skill1BName" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill1BPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+text = "Skill 1-B"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill1BPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Skill1BDescription" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill1BPanel/MarginContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 12
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam."
+horizontal_alignment = 3
+vertical_alignment = 3
+autowrap_mode = 2
+
+[node name="Skill2APanel" type="Panel" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelBorder" type="Panel" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill2APanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_w3h7f")
+
+[node name="MarginContainer" type="MarginContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill2APanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill2APanel/MarginContainer"]
+layout_mode = 2
+
+[node name="Skill2AName" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill2APanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+text = "Skill 2-A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill2APanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Skill2ADescription" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill2APanel/MarginContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 12
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam."
+horizontal_alignment = 3
+vertical_alignment = 3
+autowrap_mode = 2
+
+[node name="Skill2BPanel" type="Panel" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelBorder" type="Panel" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill2BPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_w3h7f")
+
+[node name="MarginContainer" type="MarginContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill2BPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill2BPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="Skill2BName" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill2BPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+text = "Skill 2-B"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill2BPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Skill2BDescription" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill2BPanel/MarginContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 12
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam."
+horizontal_alignment = 3
+vertical_alignment = 3
+autowrap_mode = 2
+
+[node name="Skill3APanel" type="Panel" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelBorder" type="Panel" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill3APanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_w3h7f")
+
+[node name="MarginContainer" type="MarginContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill3APanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill3APanel/MarginContainer"]
+layout_mode = 2
+
+[node name="Skill3AName" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill3APanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+text = "Skill 3-A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill3APanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Skill3ADescription" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill3APanel/MarginContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 12
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam."
+horizontal_alignment = 3
+vertical_alignment = 3
+autowrap_mode = 2
+
+[node name="Skill3BPanel" type="Panel" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelBorder" type="Panel" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill3BPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_w3h7f")
+
+[node name="MarginContainer" type="MarginContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill3BPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill3BPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="Skill3BName" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill3BPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+text = "Skill 3-B"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill3BPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Skill3BDescription" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/StatisticContainer2/Skill3BPanel/MarginContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 12
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam."
+horizontal_alignment = 3
+vertical_alignment = 3
+autowrap_mode = 2
+
+[node name="Separator6" type="TextureRect" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+texture = ExtResource("3_rp41f")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LoreLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Autrefois, Aeron Vantaal était l’orgueil de la Maison Vantaal, une lignée de nobles guerriers dévoués à la Lumière. Héritier d’une tradition de paladins, il portait l’armure étincelante de ses ancêtres et menait les troupes royales au nom de la justice. Sa famille régnait sur l’une des cités flottantes les plus prospères du Grand Skyland, avant le Cataclysme.
+Mais lors de la guerre finale, les Vantaal furent trahis. Un sort interdit frappa leur île, la précipitant dans l’abîme. Aeron survécut — mais la Lumière qui brûlait en lui fut arrachée et remplacée par un vide froid et affamé. Certains murmurent qu’il conclut un pacte avec une entité du Néant pour remonter des profondeurs, en échange de son âme. Son armure se noircit, ses yeux se teintèrent de rouge, et sa force prit racine dans une colère inextinguible.
+La magie sombre qui le traverse amplifie ses frappes à mesure qu’il combat, sa rage nourrissant une vitesse meurtrière. Sa Tempête Noire n’est autre que l’écho du sort qui anéantit sa maison, arraché et dompté pour être projeté contre ses ennemis.
+Aujourd’hui, Aeron erre de taverne en taverne, participant aux Tournois des Îles Brisées non pour la gloire, mais pour une seule raison : accumuler or et influence jusqu’à retrouver ceux qui ont causé la chute des Vantaal… et leur rendre la justice des ténèbres.
+"
+horizontal_alignment = 3
+vertical_alignment = 3
+autowrap_mode = 2
