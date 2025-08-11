@@ -136,7 +136,7 @@ func _spawn_all_characters() -> void:
 		var character: Character = preload("res://Entities/Character/character.tscn").instantiate()
 		character.owner_player_id = player.id
 		character.hero_id = player.hero.id
-		character.name = "Character_" + player.hero.name
+		character.name = "Character_" + player.hero.name + "_" + player.name
 		_node_characters.add_child(character)
 		player.character = character
 

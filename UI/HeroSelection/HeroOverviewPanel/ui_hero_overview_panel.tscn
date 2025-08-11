@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://72f2hpoywkt6" path="res://UI/HeroSelection/HeroOverviewPanel/ui_hero_overview_panel.gd" id="1_w3h7f"]
 [ext_resource type="Texture2D" uid="uid://xhyj0k42ilb3" path="res://UI/_Themes/Data/panel_tileable_20px_border_only.png" id="2_gk4fp"]
 [ext_resource type="Texture2D" uid="uid://dagqv7cd1gdn1" path="res://UI/_Themes/Data/Separator/plant.png" id="3_rp41f"]
-[ext_resource type="Texture2D" uid="uid://df7c3xa2eudnt" path="res://Data/Heroes/Portraits/Dark Knight.png" id="4_gk4fp"]
+[ext_resource type="Texture2D" uid="uid://bg6pifa7ua0v0" path="res://Data/Heroes/Portraits/dummy_default.png" id="5_5cpim"]
 [ext_resource type="Texture2D" uid="uid://cia42t0jcdkfg" path="res://Data/Assets/Card/ICONS/HP color.png" id="5_rp41f"]
 [ext_resource type="Texture2D" uid="uid://nxj6jw2phtcp" path="res://Data/Assets/Card/ICONS/MANA color.png" id="7_wvgek"]
 [ext_resource type="Texture2D" uid="uid://c3ruvqyjokopc" path="res://Data/Assets/Card/ICONS/dodge.png" id="8_5cpim"]
@@ -98,17 +98,24 @@ layout_mode = 2
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
-texture = ExtResource("4_gk4fp")
+texture = ExtResource("5_5cpim")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="PanelBorder" type="Panel" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/PortraitCenterContainer/HeroPortrait"]
+[node name="MarginContainer" type="MarginContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/PortraitCenterContainer/HeroPortrait"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = -3
+theme_override_constants/margin_top = -3
+theme_override_constants/margin_right = -3
+theme_override_constants/margin_bottom = -3
+
+[node name="PanelBorder" type="Panel" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/PortraitCenterContainer/HeroPortrait/MarginContainer"]
+layout_mode = 2
 mouse_filter = 2
 theme = SubResource("Theme_w3h7f")
 
@@ -120,7 +127,7 @@ alignment = 1
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("4_gk4fp")
+texture = ExtResource("5_5cpim")
 expand_mode = 1
 stretch_mode = 5
 
@@ -128,7 +135,7 @@ stretch_mode = 5
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("4_gk4fp")
+texture = ExtResource("5_5cpim")
 expand_mode = 1
 stretch_mode = 5
 
@@ -136,7 +143,7 @@ stretch_mode = 5
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("4_gk4fp")
+texture = ExtResource("5_5cpim")
 expand_mode = 1
 stretch_mode = 5
 
@@ -827,12 +834,10 @@ stretch_mode = 5
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
-text = "Autrefois, Aeron Vantaal était l’orgueil de la Maison Vantaal, une lignée de nobles guerriers dévoués à la Lumière. Héritier d’une tradition de paladins, il portait l’armure étincelante de ses ancêtres et menait les troupes royales au nom de la justice. Sa famille régnait sur l’une des cités flottantes les plus prospères du Grand Skyland, avant le Cataclysme.
-Mais lors de la guerre finale, les Vantaal furent trahis. Un sort interdit frappa leur île, la précipitant dans l’abîme. Aeron survécut — mais la Lumière qui brûlait en lui fut arrachée et remplacée par un vide froid et affamé. Certains murmurent qu’il conclut un pacte avec une entité du Néant pour remonter des profondeurs, en échange de son âme. Son armure se noircit, ses yeux se teintèrent de rouge, et sa force prit racine dans une colère inextinguible.
-La magie sombre qui le traverse amplifie ses frappes à mesure qu’il combat, sa rage nourrissant une vitesse meurtrière. Sa Tempête Noire n’est autre que l’écho du sort qui anéantit sa maison, arraché et dompté pour être projeté contre ses ennemis.
-Aujourd’hui, Aeron erre de taverne en taverne, participant aux Tournois des Îles Brisées non pour la gloire, mais pour une seule raison : accumuler or et influence jusqu’à retrouver ceux qui ont causé la chute des Vantaal… et leur rendre la justice des ténèbres.
-"
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui ut augue blandit sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam nibh. Mauris ac mauris sed pede pellentesque fermentum. Maecenas adipiscing ante non diam sodales hendrerit.
+Ut velit mauris, egestas sed, gravida nec, ornare ut, mi. Aenean ut orci vel massa suscipit pulvinar. Nulla sollicitudin. Fusce varius, ligula non tempus aliquam, nunc turpis ullamcorper nibh, in tempus sapien eros vitae ligula. Pellentesque rhoncus nunc et augue. Integer id felis. Curabitur aliquet pellentesque diam. Integer quis metus vitae elit lobortis egestas. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi vel erat non mauris convallis vehicula. Nulla et sapien. Integer tortor tellus, aliquam faucibus, convallis id, congue eu, quam. Mauris ullamcorper felis vitae erat. Proin feugiat, augue non elementum posuere, metus purus iaculis lectus, et tristique ligula justo vitae magna.
+
+Aliquam convallis sollicitudin purus. Praesent aliquam, enim at fermentum mollis, ligula massa adipiscing nisl, ac euismod nibh nisl eu lectus. Fusce vulputate sem at sapien. Vivamus leo. Aliquam euismod libero eu enim. Nulla nec felis sed leo placerat imperdiet. Aenean suscipit nulla in justo. Suspendisse cursus rutrum augue. Nulla tincidunt tincidunt mi. Curabitur iaculis, lorem vel rhoncus faucibus, felis magna fermentum augue, et ultricies lacus lorem varius purus. Curabitur eu amet."
 horizontal_alignment = 3
 vertical_alignment = 3
 autowrap_mode = 2

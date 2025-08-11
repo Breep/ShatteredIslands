@@ -154,7 +154,6 @@ func _ask_get_n_random_heroes(peer_id: int) -> void:
 func _answer_get_n_random_heroes(heroes_ref: Array[Hero.HeroId]) -> void:
 	_random_heroes_ref = heroes_ref
 	_server_answered.emit()
-	pass
 
 # ============================== Private functions ==============================
 
@@ -163,17 +162,19 @@ func _init_current_current_game_heroes(heroes_number: int) -> void:
 		printerr("Hero: Wrong heroes_number: ", heroes_number)
 		return
 	
-	var heroes_ref: Array[Hero.HeroId]
-	for hero_ref in Shared.HEROES.keys():
-		heroes_ref.append(hero_ref)
+	# TODO Disabled for the moment
+	#var heroes_ref: Array[Hero.HeroId]
+	#for hero_ref in Shared.HEROES.keys():
+		#heroes_ref.append(hero_ref)
+	#
+	#var rng := RandomNumberGenerator.new()
+	#rng.randomize()
+	#for i in heroes_number:
+		#var random_index: int = rng.randi_range(0, heroes_ref.size() - 1)
+		#_random_heroes_ref.append(heroes_ref.get(random_index))
+		#heroes_ref.remove_at(random_index)
 	
-	var rng := RandomNumberGenerator.new()
-	rng.randomize()
-	for i in heroes_number:
-		var random_index: int = rng.randi_range(0, heroes_ref.size() - 1)
-		_random_heroes_ref.append(heroes_ref.get(random_index))
-		heroes_ref.remove_at(random_index)
-	
+	_random_heroes_ref.append(Hero.HeroId.DARK_KNIGHT)
 	_heroes_choosen.emit()
 	_game_heroes_ready = true
 

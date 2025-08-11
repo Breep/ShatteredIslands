@@ -136,56 +136,41 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
 columns = 4
 
 [node name="HeroPortraitButton" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer/AllHeroesPanel/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("4_kexe1")]
-custom_minimum_size = Vector2(0, 131)
 layout_mode = 2
 mouse_filter = 1
 
 [node name="HeroPortraitButton2" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer/AllHeroesPanel/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("4_kexe1")]
-custom_minimum_size = Vector2(0, 131)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="HeroPortraitButton3" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer/AllHeroesPanel/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("4_kexe1")]
-custom_minimum_size = Vector2(0, 130)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="HeroPortraitButton4" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer/AllHeroesPanel/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("4_kexe1")]
-custom_minimum_size = Vector2(0, 130)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="HeroPortraitButton5" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer/AllHeroesPanel/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("4_kexe1")]
-custom_minimum_size = Vector2(0, 131)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="HeroPortraitButton6" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer/AllHeroesPanel/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("4_kexe1")]
-custom_minimum_size = Vector2(0, 131)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="HeroPortraitButton7" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer/AllHeroesPanel/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("4_kexe1")]
-custom_minimum_size = Vector2(0, 130)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="HeroPortraitButton8" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer/AllHeroesPanel/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("4_kexe1")]
-custom_minimum_size = Vector2(0, 130)
 layout_mode = 2
-
-[node name="HeroPortraitButton9" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer/AllHeroesPanel/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("4_kexe1")]
-custom_minimum_size = Vector2(0, 131)
-layout_mode = 2
-
-[node name="HeroPortraitButton10" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer/AllHeroesPanel/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("4_kexe1")]
-custom_minimum_size = Vector2(0, 131)
-layout_mode = 2
-
-[node name="HeroPortraitButton11" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer/AllHeroesPanel/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("4_kexe1")]
-custom_minimum_size = Vector2(0, 130)
-layout_mode = 2
-
-[node name="HeroPortraitButton12" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer/AllHeroesPanel/MarginContainer/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("4_kexe1")]
-custom_minimum_size = Vector2(0, 130)
-layout_mode = 2
+mouse_filter = 1
 
 [node name="LockHeroButton" type="Button" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer/AllHeroesPanel/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -207,6 +192,7 @@ mouse_filter = 2
 theme = SubResource("Theme_xwnkc")
 
 [node name="UiHeroOverviewPanel" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer" instance=ExtResource("5_bveri")]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 

@@ -8,3 +8,4 @@ extends Resource
 @export var attack_speed: float
 @export var physical_critical_chance: float
 @export var physical_critical_multiplier: float
+@export var dodge: float

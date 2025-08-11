@@ -1,33 +1,37 @@
-@tool
+class_name UIHeroPortraitButton
+extends Control
 
-class_name HeroPortraitButton
-extends TextureButton
+# ============================== Signals ==============================
 
-var hero: Hero
+signal selected(selected_hero: Hero)
 
-signal selected(hero: Hero)
+# ============================== Public variables ==============================
 
-func _process(_delta: float):
-	custom_minimum_size.y = size.x
+var _hero: Hero
+var hero: Hero:
+	get: return _hero
+	set(value):
+		if _hero == value: return
+		_hero = value
+		_portrait.texture = _hero.portrait
 
+var disabled: bool = false
 
-func init_hero(new_hero: Hero) -> void:
-	hero = new_hero
+# ============================== Local nodes ==============================
 
+@export_group("Local Nodes")
+@export var _portrait: TextureRect
+@export var _button: Button
+
+# ============================== Public variables ==============================
 
 func disable() -> void:
 	disabled = true
+	_button.disabled = true
 	create_tween().tween_property(self, "modulate", Color.RED, 0.2)
 
+# ============================== Callbacks ==============================
 
-func _ready() -> void:
-	ignore_texture_size = true
-	stretch_mode = StretchMode.STRETCH_SCALE
-	size_flags_horizontal = SIZE_EXPAND_FILL
-	size_flags_vertical = SIZE_FILL
-	if hero != null:
-		texture_normal = hero.portrait
-
-
-func _on_pressed() -> void:
-	selected.emit(hero)
+func _on_button_pressed() -> void:
+	print("DEBUG - Selected hero : ", _hero)
+	selected.emit(_hero)

@@ -11,7 +11,6 @@ signal card_bought(card: Card)
 # ============================== Local scene nodes ==============================
 
 @onready var _card_shop_visual: CardShopVisual = %SubCardShop
-@onready var _card_container: HBoxContainer = %CardContainer
 
 @export var _card_shop: CardShop
 

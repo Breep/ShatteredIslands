@@ -9,22 +9,24 @@ var _ui_hero_portrait_button: PackedScene = preload("res://UI/HeroSelection/ui_h
 
 @onready var _ui_countdown: UICountdown = %Countdown
 @onready var _player_turn_label: Label = %PlayerTurnLabel
-
 @onready var _grid_container: GridContainer = %GridContainer
 @onready var _lock_hero_button: Button = %LockHeroButton
+@onready var _hero_overview_panel: UIHeroOverviewPanel = %UiHeroOverviewPanel
 
 var _selected_hero: Hero
 
+# ============================== Node base functions ==============================
+
 func _ready() -> void:
-	#hide()
 	for child in _grid_container.get_children():
 		child.queue_free()
 	_lock_hero_button.disabled = true
 
+# ============================== Public functions ==============================
 
 func make_hero_unavailable(hero: Hero) -> void:
 	for child in _grid_container.get_children():
-		var hero_portrait_button: HeroPortraitButton = child
+		var hero_portrait_button: UIHeroPortraitButton = child
 		if hero_portrait_button.hero == hero:
 			hero_portrait_button.disable()
 			return
@@ -36,39 +38,49 @@ func open_hero_selection() -> void:
 
 func update_heroes(heroes: Array[Hero]) -> void:
 	for hero in heroes:
-		var hero_portrait = _ui_hero_portrait_button.instantiate()
-		hero_portrait.init_hero(hero)
+		var hero_portrait: UIHeroPortraitButton = _ui_hero_portrait_button.instantiate()
+		hero_portrait.hero = hero
 		hero_portrait.selected.connect(_on_hero_portrait_selected)
 		_grid_container.add_child(hero_portrait)
 
 
-func update_bottom_message(player_name: String, is_local: bool) -> void:
+func update_bottom_player_name(player_name: String, is_local: bool) -> void:
 	if is_local:
 		_player_turn_label.text = "Your turn to pick !"
 		_blink_player_turn_label()
 	else:
 		_player_turn_label.text = player_name + "'s turn to pick"
-		if _tween:
-			_tween.kill()
-	_ui_countdown.start(10, "")
+		if _tween: _tween.kill()
 
+
+func update_bottom_message(message: String) -> void:
+	_player_turn_label.text = message
+
+
+func update_countdown(value: int) -> void:
+	_ui_countdown.start(value, "")
+
+# ============================== Private functions ==============================
 
 func _blink_player_turn_label() -> void:
-	if _tween:
-		_tween.kill()
+	if _tween: _tween.kill()
 	_tween = create_tween().set_loops()
 	_tween.tween_property(_player_turn_label, "modulate", Color.BLACK, 0.5)
 	_tween.tween_property(_player_turn_label, "modulate", Color.CRIMSON, 0.5)
 
 
+# ============================== Callbacks ==============================
+
 func _on_hero_portrait_selected(hero: Hero) ->void:
 	_selected_hero = hero
-	%Label.text = hero.name # TMP
+	_hero_overview_panel.display_hero_information(hero)
 
 
 func _on_lock_hero_button_pressed() -> void:
+	if _selected_hero == null:
+		printerr("UIHeroPickingScreen: Can't lock hero -> No selected hero")
 	for child in _grid_container.get_children():
-		var hero_portrait_button: HeroPortraitButton = child
+		var hero_portrait_button: UIHeroPortraitButton = child
 		if hero_portrait_button.hero == _selected_hero && hero_portrait_button.disabled:
 			return
 	_lock_hero_button.disabled = true
