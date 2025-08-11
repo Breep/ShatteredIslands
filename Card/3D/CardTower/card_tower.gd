@@ -39,6 +39,10 @@ func _ready() -> void:
 func _update_visual(new_cards_number) -> void:
 	if new_cards_number < 0:
 		printerr("CoinTower: Can't have less than 0 cards in the tower")
+		return
+	
+	if card_family == Family.FamilyType.UNDEF:
+		return
 	
 	if new_cards_number > _cards_number:
 		var number_of_coins_to_add: int = new_cards_number - _cards_number

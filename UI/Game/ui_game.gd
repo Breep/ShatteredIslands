@@ -6,8 +6,6 @@ extends Control
 
 # ============================== Node base functions ==============================
 
-func _ready() -> void:
-	show()
 
 # ============================== Public functions ==============================
 

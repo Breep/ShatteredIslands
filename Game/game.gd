@@ -40,6 +40,9 @@ var _current_round_battles: Array[Battle]
 
 @onready var _island_spawns_to_be_removed: Node3D = %IslandSpawns
 
+@export_group("UI")
+@export var _ui_game: UIGame
+
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
@@ -152,6 +155,7 @@ func _on_hero_selector_all_heroes_picked() -> void:
 	print("[", multiplayer.get_unique_id(), "] Game: BUYING AREA ALL HEROES PICKED")
 	_spawn_all_characters()
 	_start_new_round()
+	_ui_game.show()
 
 
 func _on_global_fighting_manager_all_fights_are_over() -> void:
