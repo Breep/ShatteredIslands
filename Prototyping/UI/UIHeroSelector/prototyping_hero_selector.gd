@@ -13,7 +13,7 @@ func _ready() -> void:
 	heroes.append(Shared.HEROES[Hero.HeroId.DARK_KNIGHT])
 	heroes.append(Shared.HEROES[Hero.HeroId.DARK_KNIGHT])
 	heroes.append(Shared.HEROES[Hero.HeroId.DARK_KNIGHT])
-	heroes.append(Shared.HEROES[Hero.HeroId.DARK_KNIGHT])
+	heroes.append(Shared.HEROES[Hero.HeroId.DR_BOOM])
 	heroes.append(Shared.HEROES[Hero.HeroId.DARK_KNIGHT])
 	heroes.append(Shared.HEROES[Hero.HeroId.DARK_KNIGHT])
 	heroes.append(Shared.HEROES[Hero.HeroId.DARK_KNIGHT])

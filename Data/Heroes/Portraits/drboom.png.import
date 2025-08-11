@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dck1kflaybnjq"
-path="res://.godot/imported/Dr Boom.webp-5689e193fb7457f0bfff8dd3fd466f64.ctex"
+uid="uid://d4iqu533wu8hg"
+path="res://.godot/imported/drboom.png-54f579e827ac06f0256834d798ddfb38.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Data/Heroes/Portraits/Dr Boom.webp"
-dest_files=["res://.godot/imported/Dr Boom.webp-5689e193fb7457f0bfff8dd3fd466f64.ctex"]
+source_file="res://Data/Heroes/Portraits/drboom.png"
+dest_files=["res://.godot/imported/drboom.png-54f579e827ac06f0256834d798ddfb38.ctex"]
 
 [params]
 
