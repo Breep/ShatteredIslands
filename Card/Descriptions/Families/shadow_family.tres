@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Family" load_steps=4 format=3 uid="uid://dt6w06ld8k0lj"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_htyro"]
+[ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://Card/Templates/family.gd" id="1_ylvlj"]
+[ext_resource type="Texture2D" uid="uid://cg7s2jepq8uk4" path="res://Card/Descriptions/Families/Icons/shadow.png" id="2_l107k"]
+
+[resource]
+script = ExtResource("1_ylvlj")
+cards = Array[ExtResource("1_htyro")]([])
+icon = ExtResource("2_l107k")
+family_name = "Shadow"
+family_type = 12
+metadata/_custom_type_script = "uid://d3wk3nm7f672j"

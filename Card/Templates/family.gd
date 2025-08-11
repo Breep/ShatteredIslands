@@ -4,6 +4,7 @@ extends Resource
 # ============================== Enum ==============================
 
 enum FamilyType {
+	UNDEF,
 	ATTACK,
 	DEFENSE,
 	FIRE,
@@ -11,6 +12,11 @@ enum FamilyType {
 	SERENITY,
 	LIFE,
 	POISON,
+	MANA,
+	CHICKEN,
+	LIGHTNING,
+	NECROSIS,
+	SHADOW
 }
 
 # ============================== Constant ==============================

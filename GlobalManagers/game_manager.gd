@@ -16,6 +16,7 @@ const HEROES_NUMBER: int = 8
 # ============================== Public variables ==============================
 
 var game_rules: GameRules
+var active_families_type: Array[Family.FamilyType]
 
 # ============================== Private variables ==============================
 
@@ -39,9 +40,13 @@ func _ready() -> void:
 	game_rules = load("res://Game/GameRules/NormalGameRules.tres")
 	_init_families_ref()
 	_active_families.append(get_family_from_type(Family.FamilyType.DEFENSE))
+	active_families_type.append(Family.FamilyType.DEFENSE)
 	_active_families.append(get_family_from_type(Family.FamilyType.POISON))
+	active_families_type.append(Family.FamilyType.POISON)
 	_active_families.append(get_family_from_type(Family.FamilyType.FIRE))
+	active_families_type.append(Family.FamilyType.FIRE)
 	_active_families.append(get_family_from_type(Family.FamilyType.ATTACK))
+	active_families_type.append(Family.FamilyType.ATTACK)
 
 # ============================== Public function ==============================
 

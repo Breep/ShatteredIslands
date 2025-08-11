@@ -9,12 +9,12 @@
 [ext_resource type="Resource" uid="uid://c526xnq31ipht" path="res://Card/Descriptions/Cards/Attack/DoubleEdgeSword/attack_double_edge_sword.tres" id="6_gthbg"]
 [ext_resource type="Resource" uid="uid://bhogu6m1synt8" path="res://Card/Descriptions/Cards/Attack/DiamondSword/attack_diamond_sword.tres" id="7_eobhs"]
 [ext_resource type="Resource" uid="uid://5vemx42gusi2" path="res://Card/Descriptions/Cards/Attack/CurativeKnife/attack_curative_knife.tres" id="8_eyhuj"]
-[ext_resource type="Texture2D" uid="uid://bxd1jnaci6olo" path="res://Data/Assets/Card/ICONS/ATTACK color.png" id="9_2diy6"]
+[ext_resource type="Texture2D" uid="uid://b78s362n5bu6" path="res://Card/Descriptions/Families/Icons/turret.png" id="9_m74lt"]
 
 [resource]
 script = ExtResource("2_m6yig")
 cards = Array[ExtResource("1_4dvmk")]([ExtResource("2_m74lt"), ExtResource("3_ypjtd"), ExtResource("4_xkvlw"), ExtResource("5_cg3dx"), ExtResource("6_gthbg"), ExtResource("7_eobhs"), ExtResource("8_eyhuj")])
-icon = ExtResource("9_2diy6")
-family_name = ""
-family_type = 0
+icon = ExtResource("9_m74lt")
+family_name = "Attack"
+family_type = 1
 metadata/_custom_type_script = "uid://d3wk3nm7f672j"

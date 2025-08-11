@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Family" load_steps=4 format=3 uid="uid://djjcx0kdvmr5f"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_kkrq8"]
+[ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://Card/Templates/family.gd" id="2_ad662"]
+[ext_resource type="Texture2D" uid="uid://ctng6xf3suweb" path="res://Card/Descriptions/Families/Icons/storm.png" id="2_xw4lb"]
+
+[resource]
+script = ExtResource("2_ad662")
+cards = Array[ExtResource("1_kkrq8")]([])
+icon = ExtResource("2_xw4lb")
+family_name = "Storm"
+family_type = 4
+metadata/_custom_type_script = "uid://d3wk3nm7f672j"
