@@ -16,6 +16,7 @@ attack_damage = 20
 attack_speed = 0.5
 physical_critical_chance = 15.0
 physical_critical_multiplier = 2.0
+dodge = 0.0
 metadata/_custom_type_script = "uid://2py6kv5aqgem"
 
 [resource]

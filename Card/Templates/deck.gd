@@ -6,13 +6,13 @@ extends Resource
 
 # ============================== Public variables ==============================
 
+var _card_pile: Array[Card] = []
 var card_pile: Array[Card]:
 	get: return _card_pile
-	set(_value): pass
 
-# ============================== Private variables ==============================
-
-var _card_pile: Array[Card] = []
+var _families_count: Dictionary[Family.FamilyType, int]
+var families_count: Dictionary[Family.FamilyType, int]:
+	get: return _families_count
 
 # ============================== Private functions ==============================
 
@@ -21,14 +21,19 @@ func add_card(card_to_add: Card) -> void:
 		printerr("Can't add a null card inside the card_pile")
 	else:
 		_card_pile.append(card_to_add)
+		if _families_count.has(card_to_add.family):
+			_families_count[card_to_add.family] += 1
+		else:
+			_families_count[card_to_add.family] = 1
 
 
 func remove_card(card_to_remove: Card) -> void:
 	if card_to_remove == null:
 		printerr("Can't remove a null card")
-		return
-	if card_to_remove in _card_pile:
+	elif card_to_remove in _card_pile:
 		_card_pile.erase(card_to_remove)
+		if _families_count.has(card_to_remove.family):
+			_families_count[card_to_remove.family] -= 1
 
 
 func size():

@@ -23,24 +23,25 @@ func connect_to_player(player: Player) -> void:
 # ============================== Private functions ==============================
 
 func _update_visual(deck: PlayerDeck):
-	var families_lvl_raw = deck.get_families_lvl_raw()
-	var cards_number = deck.card_pile.size()
-	for i in min(cards_number, _cards.size()):
-		_cards[i].show()
-	
-	var families_sorted = _get_families_sorted(families_lvl_raw)
-	var total_lvl = 0
-	for family_index in min(NUMBER_OF_FAMILIES_TO_DISPLAY, families_sorted.size()):
-		total_lvl += families_lvl_raw[families_sorted[family_index]]
-	
-	var card_index:int = 0
-	for i in min(NUMBER_OF_FAMILIES_TO_DISPLAY, families_sorted.size()):
-		var ratio = families_lvl_raw[families_sorted[i]] / (total_lvl as float)
-		var number_of_cards_to_color:int = round(ratio * min(cards_number, _cards.size()))
-		print(i, " ", number_of_cards_to_color)
-		for j in number_of_cards_to_color:
-			_cards[card_index].set_color(Family.COLORS[families_sorted[i]])
-			card_index += 1
+	pass
+	#var families_lvl_raw = deck.get_families_lvl_raw()
+	#var cards_number = deck.card_pile.size()
+	#for i in min(cards_number, _cards.size()):
+		#_cards[i].show()
+	#
+	#var families_sorted = _get_families_sorted(families_lvl_raw)
+	#var total_lvl = 0
+	#for family_index in min(NUMBER_OF_FAMILIES_TO_DISPLAY, families_sorted.size()):
+		#total_lvl += families_lvl_raw[families_sorted[family_index]]
+	#
+	#var card_index:int = 0
+	#for i in min(NUMBER_OF_FAMILIES_TO_DISPLAY, families_sorted.size()):
+		#var ratio = families_lvl_raw[families_sorted[i]] / (total_lvl as float)
+		#var number_of_cards_to_color:int = round(ratio * min(cards_number, _cards.size()))
+		#print(i, " ", number_of_cards_to_color)
+		#for j in number_of_cards_to_color:
+			#_cards[card_index].set_color(Family.COLORS[families_sorted[i]])
+			#card_index += 1
 
 
 func _get_families_sorted(families_lvl_raw: Dictionary) -> Array[Family.FamilyType]:

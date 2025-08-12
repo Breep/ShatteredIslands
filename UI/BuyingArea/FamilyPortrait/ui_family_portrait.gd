@@ -18,6 +18,14 @@ var family_type: Family.FamilyType:
 		_family_type = value
 		_update_family_portrait()
 
+var _family_count: int
+var family_count: int:
+	get: return _family_count
+	set(value):
+		if value == _family_count: return
+		_family_count = value
+		_family_cards_number_label.text = str(_family_count)
+
 # ============================== Node base functions ==============================
 
 func _ready() -> void:

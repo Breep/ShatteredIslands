@@ -5,7 +5,7 @@ signal has_changed()
 
 # ============================== Public function ==============================
 
-func add_card(card_to_add: Card) -> void: #override
+func add_card(card_to_add: Card) -> void: # override
 	_add_or_improve_card(card_to_add)
 	has_changed.emit()
 
@@ -36,6 +36,7 @@ func debug_print() -> void:
 
 
 func get_families_lvl_raw() -> Dictionary:
+	#TODO Look for GameRules for the family level
 	var families_lvl_raw: Dictionary
 	for card in _card_pile:
 		for family in card.families:
@@ -53,14 +54,19 @@ func _add_or_improve_card(new_card_ref: Card) -> void:
 			#print("UPGRADING ", new_card.name)
 			if card.lvl < _get_lvl_max_of_card_rarity(card.rarity):
 				card.lvl += 1
+				_families_count[card.family] += 1
 			else:
 				printerr("Trying to upgrade an already maximized card")
 			return
 	
 	#print("ADDING NEW CARD ", new_card_ref.name)
-	var new_card = new_card_ref.duplicate()
+	var new_card: Card = new_card_ref.duplicate()
 	new_card.lvl = new_card_ref.lvl
 	_card_pile.append(new_card)
+	if _families_count.has(new_card.family):
+		_families_count[new_card.family] += 1
+	else:
+		_families_count[new_card.family] = 1
 
 
 func _get_lvl_max_of_card_rarity(card_rarity: Card.Rarity) -> int:
