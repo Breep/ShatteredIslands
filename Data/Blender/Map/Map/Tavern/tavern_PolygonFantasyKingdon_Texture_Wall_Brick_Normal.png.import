@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://6tioyuf1kcu3"
-path.s3tc="res://.godot/imported/tavern_PolygonFantasyKingdon_Texture_Wall_Brick_Normal.png-ddc1737e7dbb5b582f4db848834efca0.s3tc.ctex"
+path.s3tc="res://.godot/imported/tavern_PolygonFantasyKingdon_Texture_Wall_Brick_Normal.png-9e4f17db0bd5cb72d5fd28166f6aa80b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://Data/Blender/Map/Map/New Folder/tavern_PolygonFantasyKingdon_Texture_Wall_Brick_Normal.png"
-dest_files=["res://.godot/imported/tavern_PolygonFantasyKingdon_Texture_Wall_Brick_Normal.png-ddc1737e7dbb5b582f4db848834efca0.s3tc.ctex"]
+source_file="res://Data/Blender/Map/Map/Tavern/tavern_PolygonFantasyKingdon_Texture_Wall_Brick_Normal.png"
+dest_files=["res://.godot/imported/tavern_PolygonFantasyKingdon_Texture_Wall_Brick_Normal.png-9e4f17db0bd5cb72d5fd28166f6aa80b.s3tc.ctex"]
 
 [params]
 

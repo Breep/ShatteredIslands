@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cnk860spex0sb"
-path.s3tc="res://.godot/imported/tavern_PolygonFantasyKingdom_Texture_01_A.png-dffa4b63454e7d723069c07e96e349a6.s3tc.ctex"
+uid="uid://cyv86gw6h5gsw"
+path.s3tc="res://.godot/imported/tavern_PolygonFantasyKingdon_Texture_Wall_Brick_01.png-3a2e68545b41322eb3cf2b25aeb174d5.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "a894040228c6efb83332f0a5af71753c"
+"md5": "725b8249c8725708a7f99fccd8a773fd"
 }
 
 [deps]
 
-source_file="res://Data/Blender/Map/Map/New Folder/tavern_PolygonFantasyKingdom_Texture_01_A.png"
-dest_files=["res://.godot/imported/tavern_PolygonFantasyKingdom_Texture_01_A.png-dffa4b63454e7d723069c07e96e349a6.s3tc.ctex"]
+source_file="res://Data/Blender/Map/Map/Tavern/tavern_PolygonFantasyKingdon_Texture_Wall_Brick_01.png"
+dest_files=["res://.godot/imported/tavern_PolygonFantasyKingdon_Texture_Wall_Brick_01.png-3a2e68545b41322eb3cf2b25aeb174d5.s3tc.ctex"]
 
 [params]
 

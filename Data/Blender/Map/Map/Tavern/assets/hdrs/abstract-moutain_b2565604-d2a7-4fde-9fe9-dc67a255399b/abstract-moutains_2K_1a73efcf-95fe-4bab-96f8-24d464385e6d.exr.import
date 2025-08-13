@@ -2,12 +2,12 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://n5h7mgvritqs"
+uid="uid://boqmrq84ef14a"
 valid=false
 
 [deps]
 
-source_file="res://Data/Blender/Map/Map/New Folder/assets/hdrs/murky-green-skyd_45c2b365-afb3-4230-83b9-7dc918501086/murky-green-skydome_2K_5aaa7a6a-e0db-4146-be66-d4916397702b.exr"
+source_file="res://Data/Blender/Map/Map/Tavern/assets/hdrs/abstract-moutain_b2565604-d2a7-4fde-9fe9-dc67a255399b/abstract-moutains_2K_1a73efcf-95fe-4bab-96f8-24d464385e6d.exr"
 
 [params]
 
