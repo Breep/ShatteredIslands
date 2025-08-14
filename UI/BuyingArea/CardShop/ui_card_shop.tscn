@@ -12,7 +12,7 @@
 [sub_resource type="ViewportTexture" id="ViewportTexture_gvdv1"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_37vaa"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_l0ee0"]
 texture = ExtResource("3_l0ee0")
 texture_margin_left = 20.0
 texture_margin_top = 20.0
@@ -22,7 +22,7 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
 [sub_resource type="Theme" id="Theme_mn8ci"]
-Panel/styles/panel = SubResource("StyleBoxTexture_37vaa")
+Panel/styles/panel = SubResource("StyleBoxTexture_l0ee0")
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xt3ho"]
 blend_mode = 1

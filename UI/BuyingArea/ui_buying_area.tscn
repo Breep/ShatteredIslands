@@ -1,12 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://cmstx61h3h6ar"]
+[gd_scene load_steps=7 format=3 uid="uid://cmstx61h3h6ar"]
 
 [ext_resource type="Script" uid="uid://cc7c0q2xebkyp" path="res://UI/BuyingArea/ui_buying_area.gd" id="1_5o5p6"]
 [ext_resource type="PackedScene" uid="uid://db2anika8bvj8" path="res://UI/CharacterStats/ui_character_stats.tscn" id="2_btc45"]
 [ext_resource type="PackedScene" uid="uid://cxalabhvxw1pd" path="res://UI/Tool/Timer/ui_timer.tscn" id="2_c4gh8"]
 [ext_resource type="Theme" uid="uid://b3fq4x00gjiqa" path="res://UI/_Themes/UI_Label_card_shop.tres" id="3_25lij"]
 [ext_resource type="PackedScene" uid="uid://d1oxnd1g75rqh" path="res://UI/BuyingArea/CardShop/ui_card_shop.tscn" id="4_dsp03"]
+[ext_resource type="PackedScene" uid="uid://dpb7vslj2dbl0" path="res://UI/BuyingArea/Oracle/ui_oracle.tscn" id="5_8ytae"]
 
-[node name="UIBuyingArea" type="Control"]
+[node name="UIBuyingArea" type="Control" node_paths=PackedStringArray("_ui_card_shop", "_ui_oracle")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,6 +15,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5o5p6")
+_ui_card_shop = NodePath("VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel/CenterContainer/CardShop")
+_ui_oracle = NodePath("VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel/CenterContainer/UIOracle")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -110,8 +113,11 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="CardShop" parent="VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel/CenterContainer" instance=ExtResource("4_dsp03")]
-unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(600, 330.085)
+layout_mode = 2
+
+[node name="UIOracle" parent="VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel/CenterContainer" instance=ExtResource("5_8ytae")]
 layout_mode = 2
 
 [node name="RightPanel" type="Control" parent="VBoxContainer/MiddlePanel/HBoxContainer"]

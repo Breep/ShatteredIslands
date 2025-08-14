@@ -4,10 +4,9 @@ extends Control
 @export_group("External nodes")
 @export var _round_timer: Timer
 
-@export_group("Buttons")
-@export var _random_button: Button
-@export var _refresh_button: Button
-@export var _back_button: Button
+@export_group("Middle Panels")
+@export var _ui_card_shop: UICardShop
+@export var _ui_oracle: UIOracle
 
 # ============================== Local nodes ==============================
 
@@ -21,6 +20,8 @@ func _ready() -> void:
 	Events.entity_cliked.connect(_on_events_entity_clicked)
 	RoundManager.current_round_changed.connect(_on_round_manager_current_round_changed)
 	_continous_timer.connect_timer(_round_timer)
+	_ui_card_shop.hide()
+	_ui_oracle.hide()
 
 
 func _on_events_entity_clicked(entity: Entity) -> void:
