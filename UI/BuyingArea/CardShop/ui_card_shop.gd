@@ -19,9 +19,6 @@ signal card_bought(card: Card)
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	if multiplayer.is_server(): 
-		hide()
-	
 	_local_player = PlayerManager.get_local_player()
 	_card_shop.player = _local_player
 	

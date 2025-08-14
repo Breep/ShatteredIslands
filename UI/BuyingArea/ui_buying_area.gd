@@ -21,8 +21,8 @@ func _ready() -> void:
 	Events.furniture_clicked.connect(_on_events_furniture_clicked)
 	RoundManager.current_round_changed.connect(_on_round_manager_current_round_changed)
 	_continous_timer.connect_timer(_round_timer)
-	_ui_card_shop.hide()
-	_ui_oracle.hide()
+	#_ui_card_shop.hide()
+	#_ui_oracle.hide()
 
 
 func _on_events_entity_clicked(entity: Entity) -> void:
@@ -57,3 +57,27 @@ func _on_round_manager_current_round_changed(round_number: int) -> void:
 
 
  
+
+
+func _on_card_shop_mouse_entered() -> void:
+	print("CARD SHOP MOUSE ENTERED")
+
+
+func _on_ui_oracle_mouse_entered() -> void:
+	print("ORACLE MOUSE ENTERED")
+
+
+func _on_v_box_container_mouse_entered() -> void:
+	print("VBOX MOUSE ENTERED")
+
+
+func _on_top_panel_mouse_entered() -> void:
+	print("TOP PANEL MOUSE ENTERED")
+
+
+func _on_middle_panel_mouse_entered() -> void:
+	print("MIDDLE PANEL MOUSE ENTERED")
+
+
+func _on_bottom_panel_mouse_entered() -> void:
+	print("BOTTOM PANEL MOUSE ENTERED")

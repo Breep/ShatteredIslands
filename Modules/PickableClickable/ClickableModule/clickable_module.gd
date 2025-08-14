@@ -83,6 +83,7 @@ func _recursive_find_all_meshs(node: Node3D) -> void:
 # ============================== Callbacks ==============================
 
 func _focus() -> void:
+	Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
 	for mesh in _meshs:
 		if mesh != null and not mesh.is_queued_for_deletion():
 			mesh.material_overlay = _material_overlay
@@ -91,6 +92,7 @@ func _focus() -> void:
 
 
 func _unfocus() -> void:
+	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
 	for mesh in _meshs:
 		if mesh != null and not mesh.is_queued_for_deletion():
 			mesh.material_overlay = null

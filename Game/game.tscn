@@ -155,7 +155,6 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="UIGame" parent="UI" instance=ExtResource("9_kul4i")]
-visible = false
 layout_mode = 1
 
 [node name="turtle2" parent="." instance=ExtResource("10_7gi1t")]

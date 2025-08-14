@@ -23,4 +23,4 @@ func _on_buy_xp_button_pressed() -> void:
 
 
 func _on_close_button_pressed() -> void:
-	pass
+	hide()

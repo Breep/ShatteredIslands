@@ -14,6 +14,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_5o5p6")
 _ui_card_shop = NodePath("VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel/CenterContainer/CardShop")
 _ui_oracle = NodePath("VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel/CenterContainer/UIOracle")
@@ -25,6 +26,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
 
 [node name="TopPanel" type="Control" parent="VBoxContainer"]
 layout_mode = 2
@@ -85,6 +88,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.8
+mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MiddlePanel"]
 layout_mode = 1
@@ -93,32 +97,41 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="LeftPanel" type="Control" parent="VBoxContainer/MiddlePanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.1
+mouse_filter = 2
 
 [node name="MiddlePanel" type="Control" parent="VBoxContainer/MiddlePanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.8
+mouse_filter = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
+anchor_top = -0.086
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 1.086
+offset_top = 44.032
+offset_bottom = -44.032
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="CardShop" parent="VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel/CenterContainer" instance=ExtResource("4_dsp03")]
-visible = false
 custom_minimum_size = Vector2(600, 330.085)
 layout_mode = 2
+mouse_default_cursor_shape = 7
 
 [node name="UIOracle" parent="VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel/CenterContainer" instance=ExtResource("5_8ytae")]
+visible = false
 layout_mode = 2
+mouse_default_cursor_shape = 8
 
 [node name="RightPanel" type="Control" parent="VBoxContainer/MiddlePanel/HBoxContainer"]
 layout_mode = 2
@@ -129,6 +142,7 @@ size_flags_stretch_ratio = 0.1
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.1
+mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/BottomPanel"]
 layout_mode = 1
@@ -137,16 +151,19 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="BottomLeftEmpty" type="Control" parent="VBoxContainer/BottomPanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
+mouse_filter = 2
 
 [node name="BottomMiddle" type="Control" parent="VBoxContainer/BottomPanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
+mouse_filter = 2
 
 [node name="SelectedCharacterStats" parent="VBoxContainer/BottomPanel/HBoxContainer/BottomMiddle" instance=ExtResource("2_btc45")]
 unique_name_in_owner = true
@@ -157,3 +174,11 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
+mouse_filter = 2
+
+[connection signal="mouse_entered" from="VBoxContainer" to="." method="_on_v_box_container_mouse_entered"]
+[connection signal="mouse_entered" from="VBoxContainer/TopPanel" to="." method="_on_top_panel_mouse_entered"]
+[connection signal="mouse_entered" from="VBoxContainer/MiddlePanel" to="." method="_on_middle_panel_mouse_entered"]
+[connection signal="mouse_entered" from="VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel/CenterContainer/CardShop" to="." method="_on_card_shop_mouse_entered"]
+[connection signal="mouse_entered" from="VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel/CenterContainer/UIOracle" to="." method="_on_ui_oracle_mouse_entered"]
+[connection signal="mouse_entered" from="VBoxContainer/BottomPanel" to="." method="_on_bottom_panel_mouse_entered"]
