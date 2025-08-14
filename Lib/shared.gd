@@ -33,12 +33,13 @@ var DAMAGE_POPUP_SCENE: PackedScene = load("res://UI/3D/DamagePopup/damage_popup
 
 var scene_switcher: SceneSwitcher
 
-
-
-
-
-
-
+const LAYER_WALLS: int = 1 << 0
+const LAYER_PROJECTILES: int = 1 << 1
+const LAYER_SPAWN_AREAS: int = 1 << 2
+const LAYER_FLOOR: int = 1 << 3
+const LAYER_ENTITIES: int = 1 << 4
+const LAYER_PICKABLE_CONSTRAINT: int = 1 << 5
+const LAYER_FURNITURE: int = 1 << 6
 
 
 

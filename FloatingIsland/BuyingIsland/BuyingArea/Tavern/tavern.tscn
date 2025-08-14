@@ -1,7 +1,8 @@
-[gd_scene load_steps=65 format=3 uid="uid://b8clqslwo8t68"]
+[gd_scene load_steps=68 format=3 uid="uid://b8clqslwo8t68"]
 
 [ext_resource type="Script" uid="uid://bg27we47t814j" path="res://FloatingIsland/BuyingIsland/BuyingArea/Tavern/tavern.gd" id="1_amkis"]
 [ext_resource type="PackedScene" uid="uid://cdryp1jj4woix" path="res://FloatingIsland/BuyingIsland/BuyingArea/ShopDeck3DVisual/shop_deck_3d_visual.tscn" id="2_7m3y5"]
+[ext_resource type="Script" uid="uid://cfmyr6dqjwc8a" path="res://FloatingIsland/BuyingIsland/BuyingArea/Tavern/furniture.gd" id="2_av7nd"]
 [ext_resource type="PackedScene" uid="uid://ca4hq5vmo2led" path="res://FloatingIsland/BuyingIsland/BuyingArea/3D sceces inh - Coll/Deco/bottle_b_brown_coll.tscn" id="3_7txpj"]
 [ext_resource type="PackedScene" uid="uid://bb1u6xo8ouv6t" path="res://FloatingIsland/BuyingIsland/BuyingArea/3D sceces inh - Coll/Deco/bottle_a_brown_coll.tscn" id="3_8gbnn"]
 [ext_resource type="PackedScene" uid="uid://c7ka867rj0gkr" path="res://FloatingIsland/BuyingIsland/BuyingArea/3D sceces inh - Coll/Deco/plate_food_b_coll.tscn" id="3_vx36f"]
@@ -21,8 +22,8 @@
 [ext_resource type="PackedScene" uid="uid://1rofii7pievm" path="res://FloatingIsland/BuyingIsland/BuyingArea/3D sceces inh - Coll/Bar/bar_straight_b_coll.tscn" id="16_8x7c4"]
 [ext_resource type="PackedScene" uid="uid://737q40i64b40" path="res://FloatingIsland/BuyingIsland/BuyingArea/3D sceces inh - Coll/Deco/keyring_coll.tscn" id="16_nrh2s"]
 [ext_resource type="PackedScene" uid="uid://engqkn6ikktk" path="res://FloatingIsland/BuyingIsland/BuyingArea/3D sceces inh - Coll/Bar/bar_straight_c_coll.tscn" id="17_iam8e"]
-[ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://Modules/PickableClickable/PickableModule/pickable_module.tscn" id="23_03w0h"]
 [ext_resource type="PackedScene" uid="uid://3wvjugdxyvfn" path="res://FloatingIsland/BuyingIsland/BuyingArea/3D sceces inh - Coll/Bar/stool_round_coll.tscn" id="23_gj6s6"]
+[ext_resource type="PackedScene" uid="uid://bg5efhnq0erdv" path="res://Modules/PickableClickable/ClickableModule/clickable_module.tscn" id="24_av7nd"]
 [ext_resource type="PackedScene" uid="uid://ccgffvm3dhetu" path="res://FloatingIsland/BuyingIsland/BuyingArea/3D sceces inh - Coll/Banner/banner_pattern_c_white_coll.tscn" id="24_nbc4i"]
 [ext_resource type="PackedScene" uid="uid://ddpnam3agt3b" path="res://FloatingIsland/BuyingIsland/BuyingArea/3D sceces inh - Coll/Banner/banner_shield_brown_coll.tscn" id="28_aguh0"]
 [ext_resource type="PackedScene" uid="uid://ywdrg4dqdg8d" path="res://FloatingIsland/BuyingIsland/BuyingArea/3D sceces inh - Coll/Banner/banner_thin_blue_coll.tscn" id="29_ah466"]
@@ -67,12 +68,22 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_ee6hw"]
 size = Vector3(9.99387, 3.99359, 4.45267)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_av7nd"]
+size = Vector3(4.35043, 2.11633, 6.37256)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bpuxk"]
+size = Vector3(4.32123, 4.52106, 1.2948)
+
 [node name="Tavern" type="Node3D" node_paths=PackedStringArray("_tarven_center")]
 script = ExtResource("1_amkis")
 _tarven_center = NodePath("TavernCenter")
 
 [node name="Bar" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.360003, 0, -15.755)
+collision_layer = 64
+collision_mask = 0
+script = ExtResource("2_av7nd")
+furniture_type = 2
 
 [node name="ShopDeck3DVisual" parent="Bar" instance=ExtResource("2_7m3y5")]
 unique_name_in_owner = true
@@ -190,7 +201,9 @@ transform = Transform3D(0.943668, 0, 0.330893, 0, 1, 0, -0.330893, 0, 0.943668, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.89352, 2.04605, -1.51286)
 shape = SubResource("BoxShape3D_ee6hw")
 
-[node name="InteractionComponent" parent="Bar" instance=ExtResource("23_03w0h")]
+[node name="ClickableModule" parent="Bar" node_paths=PackedStringArray("_nodes_where_to_find_meshs", "_owner") instance=ExtResource("24_av7nd")]
+_nodes_where_to_find_meshs = [NodePath("../BarMeuble")]
+_owner = NodePath("..")
 
 [node name="Decco" type="Node3D" parent="."]
 
@@ -338,8 +351,12 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -21.75
 [node name="wall_corner4" parent="Structure/Wall/Corner" instance=ExtResource("41_me4il")]
 transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -21.7832, 0, -20.7779)
 
-[node name="Talent_select" type="Node3D" parent="."]
+[node name="Talent_select" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.04127, 0, -13.2381)
+collision_layer = 64
+collision_mask = 0
+script = ExtResource("2_av7nd")
+furniture_type = 3
 
 [node name="Bureau" type="Node3D" parent="Talent_select"]
 transform = Transform3D(0.937136, 0, -0.348965, 0, 1, 0, 0.348965, 0, 0.937136, 0.407416, 0, -1.53454)
@@ -355,6 +372,14 @@ transform = Transform3D(1.31134e-07, 0, -0.999999, 0, 1, 0, 0.999999, 0, 1.31134
 
 [node name="chest_large_gold_2" parent="Talent_select" instance=ExtResource("52_4awnd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.23812, 0.0362114, -6.17842)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Talent_select"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.55162, 0.558167, -3.21313)
+shape = SubResource("BoxShape3D_av7nd")
+
+[node name="ClickableModule" parent="Talent_select" node_paths=PackedStringArray("_nodes_where_to_find_meshs", "_owner") instance=ExtResource("24_av7nd")]
+_nodes_where_to_find_meshs = [NodePath("..")]
+_owner = NodePath("..")
 
 [node name="Table" type="Node3D" parent="."]
 
@@ -430,8 +455,12 @@ transform = Transform3D(0.882825, 0, 0.469703, 0, 1, 0, -0.469703, 0, 0.882825, 
 [node name="chair" parent="Table/Table_decco/Chair_" instance=ExtResource("63_sh827")]
 transform = Transform3D(0.993048, 0, -0.117711, 0, 1, 0, 0.117711, 0, 0.993048, 8.55238, 0.037564, 8.32603)
 
-[node name="Dps_meter" type="Node3D" parent="."]
+[node name="Dps_meter" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.987, 4.76837e-07, -16.4719)
+collision_layer = 64
+collision_mask = 0
+script = ExtResource("2_av7nd")
+furniture_type = 1
 
 [node name="VFX3DPortal" parent="Dps_meter" instance=ExtResource("55_1pr28")]
 transform = Transform3D(0.926758, 0, 0.375658, 0, 1, 0, -0.375658, 0, 0.926758, 2.35714, 1.85235, 0.756575)
@@ -453,6 +482,14 @@ transform = Transform3D(0.954031, -8.58764e-08, 0.299707, 1.51156e-08, 1, 2.3841
 
 [node name="bar_straight_a_7" parent="Dps_meter" instance=ExtResource("15_7iapu")]
 transform = Transform3D(0.954031, -8.58764e-08, 0.299707, 1.51156e-08, 1, 2.38418e-07, -0.299707, -2.22928e-07, 0.954031, 2.7778, 2.99695, -0.121098)
+
+[node name="ClickableModule" parent="Dps_meter" node_paths=PackedStringArray("_nodes_where_to_find_meshs", "_owner") instance=ExtResource("24_av7nd")]
+_nodes_where_to_find_meshs = [NodePath("..")]
+_owner = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Dps_meter"]
+transform = Transform3D(0.957757, 0, 0.287578, 0, 1, 0, -0.287578, 0, 0.957757, 2.09513, 1.76053, 0.202888)
+shape = SubResource("BoxShape3D_bpuxk")
 
 [node name="TavernCenter" parent="." instance=ExtResource("66_amm73")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.64318, 0, -7.15971)

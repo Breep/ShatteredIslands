@@ -10,7 +10,7 @@ var select_locked: bool = false # True if the object can't be interacted
 # ============================== Export ==============================
 
 @export var _meshs: Array[MeshInstance3D]
-#@export var _nodes_where_to_find_meshs: Array[Node3D]
+@export var _nodes_where_to_find_meshs: Array[Node3D]
 @export var _owner: Node3D
 
 # ============================== Private variables ==============================
@@ -62,20 +62,19 @@ func _connect_to_owner() -> void:
 
 
 func _init_meshs() -> void:
-	return
-	#if not _meshs.is_empty():
-		#return
-	#
-	#if not _nodes_where_to_find_meshs.is_empty():
-		#for node in _nodes_where_to_find_meshs:
-			#_recursive_find_all_meshs(node)
-		#return
-	#
-	#_recursive_find_all_meshs(_owner)
+	if not _meshs.is_empty():
+		return
+	
+	if not _nodes_where_to_find_meshs.is_empty():
+		for node in _nodes_where_to_find_meshs:
+			_recursive_find_all_meshs(node)
+		return
+	
+	_recursive_find_all_meshs(_owner)
 
 
 func _recursive_find_all_meshs(node: Node3D) -> void:
-	for child in node.get_children():
+	for child in node.get_children(true):
 		if child is Node3D:
 			_recursive_find_all_meshs(child)
 	if node is MeshInstance3D:
@@ -85,7 +84,7 @@ func _recursive_find_all_meshs(node: Node3D) -> void:
 
 func _focus() -> void:
 	for mesh in _meshs:
-		if not mesh.is_queued_for_deletion():
+		if mesh != null and not mesh.is_queued_for_deletion():
 			mesh.material_overlay = _material_overlay
 	if _owner.has_method("_on_clickable_module_focused"):
 		_owner.call("_on_clickable_module_focused")
@@ -93,7 +92,7 @@ func _focus() -> void:
 
 func _unfocus() -> void:
 	for mesh in _meshs:
-		if not mesh.is_queued_for_deletion():
+		if mesh != null and not mesh.is_queued_for_deletion():
 			mesh.material_overlay = null
 	if _owner.has_method("_on_clickable_module_unfocused"):
 		_owner.call("_on_clickable_module_unfocused")

@@ -165,6 +165,7 @@ camera_zoom_out={
 3d_physics/layer_4="Floor"
 3d_physics/layer_5="Entities"
 3d_physics/layer_6="PickableConstraint"
+3d_physics/layer_7="Furniture"
 
 [shader_globals]
 

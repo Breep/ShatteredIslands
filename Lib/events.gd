@@ -32,9 +32,12 @@ func signal_player_won_a_fight(player: Player) -> void:
 
 
 signal entity_cliked(entity: Entity)
+signal furniture_clicked(furniture: Furniture)
 func signal_clickable_cliked(clickable: Node3D) -> void:
 	if clickable is Entity:
 		entity_cliked.emit(clickable)
+	elif clickable is Furniture:
+		furniture_clicked.emit(clickable)
 
 signal nothing_clicked()
 func signal_nothing_clicked() -> void:
