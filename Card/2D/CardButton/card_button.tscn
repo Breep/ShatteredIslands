@@ -6,11 +6,11 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_23gh2"]
 shader = ExtResource("2_mmqgw")
-shader_parameter/fov = 90.0
-shader_parameter/cull_back = true
-shader_parameter/y_rot = 8.55e-06
+shader_parameter/fov = 60.0
+shader_parameter/cull_back = false
+shader_parameter/y_rot = 0.0
 shader_parameter/x_rot = 0.0
-shader_parameter/inset = 0.0
+shader_parameter/inset = 0.64
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_vk20g"]
 viewport_path = NodePath("SubViewport")
@@ -18,10 +18,8 @@ viewport_path = NodePath("SubViewport")
 [node name="CardButton" type="Control" node_paths=PackedStringArray("_card_layout", "_texture_rect")]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 3
-anchor_right = 0.443701
-anchor_bottom = 1.06633
-offset_right = -0.144043
-offset_bottom = 0.0159912
+anchor_right = 0.403646
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
@@ -38,6 +36,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_default_cursor_shape = 2
 texture = SubResource("ViewportTexture_vk20g")
 expand_mode = 1
 stretch_mode = 5

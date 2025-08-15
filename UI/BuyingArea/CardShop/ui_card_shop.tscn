@@ -1,16 +1,20 @@
-[gd_scene load_steps=13 format=3 uid="uid://d1oxnd1g75rqh"]
+[gd_scene load_steps=17 format=3 uid="uid://d1oxnd1g75rqh"]
 
 [ext_resource type="Script" uid="uid://8tub4ube48p7" path="res://UI/BuyingArea/CardShop/ui_card_shop.gd" id="1_xu7re"]
-[ext_resource type="Script" uid="uid://d0vv2ero6ere2" path="res://UI/BuyingArea/CardShop/card_shop_visual.gd" id="2_t3oox"]
-[ext_resource type="Script" uid="uid://dl8cs3pdc7hvl" path="res://UI/Tool/input_transmiter.gd" id="2_ytrdm"]
+[ext_resource type="Texture2D" uid="uid://bbcbah5ifbsrw" path="res://UI/_Themes/Data/coin.png" id="3_1gnrk"]
 [ext_resource type="Texture2D" uid="uid://xhyj0k42ilb3" path="res://UI/_Themes/Data/panel_tileable_20px_border_only.png" id="3_l0ee0"]
 [ext_resource type="PackedScene" uid="uid://c2psjj8133op3" path="res://Card/2D/CardButton/card_button.tscn" id="4_37vaa"]
+[ext_resource type="Texture2D" uid="uid://dy0343bv63shg" path="res://UI/_Themes/Data/pick_random_card.png" id="4_l0ee0"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="5_ahun0"]
-[ext_resource type="Theme" uid="uid://bpo76n2lvfxb6" path="res://UI/_Themes/main_menu_button.tres" id="6_cj73j"]
+[ext_resource type="Texture2D" uid="uid://crffb1sac4ayf" path="res://UI/_Themes/Data/refresh.png" id="6_l0ee0"]
+[ext_resource type="Texture2D" uid="uid://db2m1yw0asd6l" path="res://UI/_Themes/Data/cross.png" id="6_yc0cs"]
 [ext_resource type="PackedScene" uid="uid://dlh177khgltfq" path="res://Game/CardShop/card_shop.tscn" id="9_ahun0"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_gvdv1"]
-viewport_path = NodePath("SubViewport")
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xt3ho"]
+blend_mode = 1
+light_mode = 1
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1gnrk"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_l0ee0"]
 texture = ExtResource("3_l0ee0")
@@ -24,61 +28,286 @@ axis_stretch_vertical = 1
 [sub_resource type="Theme" id="Theme_mn8ci"]
 Panel/styles/panel = SubResource("StyleBoxTexture_l0ee0")
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xt3ho"]
-blend_mode = 1
-light_mode = 1
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_37vaa"]
+texture = ExtResource("3_l0ee0")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="Theme" id="Theme_1gnrk"]
+Panel/styles/panel = SubResource("StyleBoxTexture_37vaa")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l0ee0"]
 
 [node name="UICardShop" type="Control" node_paths=PackedStringArray("_card_shop", "_card_buttons")]
-layout_direction = 2
+custom_minimum_size = Vector2(700, 500)
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1_xu7re")
-_card_shop = NodePath("CardShop")
-_card_buttons = [NodePath("SubViewport/SubCardShop/MarginContainer/VBoxContainer/CardContainer/1"), NodePath("SubViewport/SubCardShop/MarginContainer/VBoxContainer/CardContainer/2"), NodePath("SubViewport/SubCardShop/MarginContainer/VBoxContainer/CardContainer/3")]
-
-[node name="TextureRect" type="TextureRect" parent="." node_paths=PackedStringArray("viewport")]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("ViewportTexture_gvdv1")
-expand_mode = 1
-stretch_mode = 4
-script = ExtResource("2_ytrdm")
-viewport = NodePath("../SubViewport")
-
-[node name="SubViewport" type="SubViewport" parent="."]
-transparent_bg = true
-size = Vector2i(2000, 1100)
-
-[node name="SubCardShop" type="Control" parent="SubViewport" node_paths=PackedStringArray("_cardContainer")]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(2000, 1000)
-layout_mode = 3
-anchors_preset = 0
-offset_right = 2000.0
-offset_bottom = 1100.0
-script = ExtResource("2_t3oox")
-_cardContainer = NodePath("MarginContainer/VBoxContainer/CardContainer")
-
-[node name="Panel" type="Panel" parent="SubViewport/SubCardShop"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -250.0
+offset_right = 350.0
+offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("5_ahun0")
+script = ExtResource("1_xu7re")
+_card_shop = NodePath("CardShop")
+_card_buttons = [NodePath("MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer/CardButton"), NodePath("MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer2/CardButton"), NodePath("MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer3/CardButton")]
+
+[node name="MainPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_type_variation = &"card"
 
-[node name="PanelBorder" type="Panel" parent="SubViewport/SubCardShop/Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="MainPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="CardContainer" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer"]
+material = SubResource("CanvasItemMaterial_xt3ho")
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.8
+theme_override_constants/separation = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CardButton" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer" instance=ExtResource("4_37vaa")]
+custom_minimum_size = Vector2(200, 265)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+
+[node name="BuyCardControl" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer/BuyCardControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.0
+offset_top = -20.0
+offset_right = 37.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BuyCardPriceLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer/BuyCardControl/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "100"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer/BuyCardControl/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_1gnrk")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CardButton" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer2" instance=ExtResource("4_37vaa")]
+custom_minimum_size = Vector2(200, 265)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+
+[node name="BuyCardControl" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer2/BuyCardControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.5
+offset_top = -20.0
+offset_right = 44.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BuyCardPriceLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer2/BuyCardControl/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "100"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer2/BuyCardControl/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_1gnrk")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CardButton" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer3" instance=ExtResource("4_37vaa")]
+custom_minimum_size = Vector2(200, 265)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+
+[node name="BuyCardControl" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer3/BuyCardControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.0
+offset_top = -20.0
+offset_right = 37.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BuyCardPriceLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer3/BuyCardControl/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "100"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer3/BuyCardControl/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_1gnrk")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="BottomRow" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+theme_override_constants/separation = 25
+
+[node name="RandomCardPanel" type="Panel" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RandomCardButton" type="Button" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1gnrk")
+
+[node name="MarginContainer" type="MarginContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Refresh" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardPanel/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MainHBox" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardPanel/MarginContainer/Refresh"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardPanel/MarginContainer/Refresh/MainHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+texture = ExtResource("4_l0ee0")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardPanel/MarginContainer/Refresh/MainHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardPanel/MarginContainer/Refresh/MainHBox/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 20
+text = "RANDOM"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Price" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardPanel/MarginContainer/Refresh/MainHBox/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+alignment = 1
+
+[node name="RandomCardPriceLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardPanel/MarginContainer/Refresh/MainHBox/VBoxContainer/Price"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "90"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardPanel/MarginContainer/Refresh/MainHBox/VBoxContainer/Price"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_1gnrk")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="PanelBorder" type="Panel" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -88,68 +317,193 @@ grow_vertical = 2
 mouse_filter = 2
 theme = SubResource("Theme_mn8ci")
 
-[node name="MarginContainer" type="MarginContainer" parent="SubViewport/SubCardShop"]
+[node name="RefreshShopPanel" type="Panel" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RefreshButton" type="Button" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshShopPanel"]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 16.0
-offset_top = 16.0
-offset_right = -16.0
-offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1gnrk")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/SubCardShop/MarginContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshShopPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Control" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshShopPanel/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 40
+mouse_filter = 2
 
-[node name="CardContainer" type="HBoxContainer" parent="SubViewport/SubCardShop/MarginContainer/VBoxContainer"]
-material = SubResource("CanvasItemMaterial_xt3ho")
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.8
-theme_override_constants/separation = 40
+[node name="MainHBox" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshShopPanel/MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
-[node name="1" parent="SubViewport/SubCardShop/MarginContainer/VBoxContainer/CardContainer" instance=ExtResource("4_37vaa")]
-custom_minimum_size = Vector2(630, 0)
-layout_mode = 2
-
-[node name="2" parent="SubViewport/SubCardShop/MarginContainer/VBoxContainer/CardContainer" instance=ExtResource("4_37vaa")]
-custom_minimum_size = Vector2(630, 0)
-layout_mode = 2
-
-[node name="3" parent="SubViewport/SubCardShop/MarginContainer/VBoxContainer/CardContainer" instance=ExtResource("4_37vaa")]
-custom_minimum_size = Vector2(630, 0)
-layout_mode = 2
-
-[node name="BottomRow" type="HBoxContainer" parent="SubViewport/SubCardShop/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.14
-theme_override_constants/separation = 40
-
-[node name="Random" type="Button" parent="SubViewport/SubCardShop/MarginContainer/VBoxContainer/BottomRow"]
+[node name="Icon" type="TextureRect" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshShopPanel/MarginContainer/Control/MainHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("6_cj73j")
-theme_override_font_sizes/font_size = 70
-text = "RANDOM"
+mouse_filter = 2
+texture = ExtResource("6_l0ee0")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="refresh" type="Button" parent="SubViewport/SubCardShop/MarginContainer/VBoxContainer/BottomRow"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshShopPanel/MarginContainer/Control/MainHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("6_cj73j")
-theme_override_font_sizes/font_size = 70
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshShopPanel/MarginContainer/Control/MainHBox/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 20
 text = "REFRESH"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Back" type="Button" parent="SubViewport/SubCardShop/MarginContainer/VBoxContainer/BottomRow"]
-unique_name_in_owner = true
+[node name="Price" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshShopPanel/MarginContainer/Control/MainHBox/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("6_cj73j")
-theme_override_font_sizes/font_size = 70
-text = "BACK"
+size_flags_vertical = 3
+mouse_filter = 2
+alignment = 1
+
+[node name="RefreshShopPriceLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshShopPanel/MarginContainer/Control/MainHBox/VBoxContainer/Price"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "20"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshShopPanel/MarginContainer/Control/MainHBox/VBoxContainer/Price"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_1gnrk")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="PanelBorder" type="Panel" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshShopPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_mn8ci")
+
+[node name="PanelBorder" type="Panel" parent="MainPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_mn8ci")
 
 [node name="CardShop" parent="." instance=ExtResource("9_ahun0")]
 
-[connection signal="pressed" from="SubViewport/SubCardShop/MarginContainer/VBoxContainer/BottomRow/Back" to="." method="_on_back_pressed"]
+[node name="TitlePanel" type="Panel" parent="."]
+custom_minimum_size = Vector2(300, 70)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = -35.0
+offset_right = 150.0
+offset_bottom = 35.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="TitlePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "CARD SHOP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelBorder" type="Panel" parent="TitlePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_1gnrk")
+
+[node name="ClosePanel" type="Panel" parent="."]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -45.0
+offset_top = -15.0
+offset_right = 15.0
+offset_bottom = 45.0
+grow_horizontal = 0
+
+[node name="TextureRect" type="TextureRect" parent="ClosePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_yc0cs")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CloseButton" type="Button" parent="ClosePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_l0ee0")
+
+[node name="PanelBorder" type="Panel" parent="ClosePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_1gnrk")
+
+[connection signal="pressed" from="ClosePanel/CloseButton" to="." method="_on_close_button_pressed"]

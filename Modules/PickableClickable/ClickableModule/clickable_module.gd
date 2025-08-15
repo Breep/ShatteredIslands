@@ -69,8 +69,8 @@ func _init_meshs() -> void:
 		for node in _nodes_where_to_find_meshs:
 			_recursive_find_all_meshs(node)
 		return
-	
-	_recursive_find_all_meshs(_owner)
+	#
+	#_recursive_find_all_meshs(_owner)
 
 
 func _recursive_find_all_meshs(node: Node3D) -> void:

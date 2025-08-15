@@ -40,7 +40,7 @@ var _force_inactive: bool = false
 
 # ============================== Node base functions ==============================
 
-func _input(event: InputEvent) -> void: # TODO Should be unhandled input but GUI is doing shit, need to check out that
+func _unhandled_input(event: InputEvent) -> void: # TODO Should be unhandled input but GUI is doing shit, need to check out that
 	if not _is_active or _force_inactive: return
 	_handle_pickable_select(event)
 	_handle_pickable_movement(event)

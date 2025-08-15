@@ -67,7 +67,7 @@ func _start_game() -> void:
 func _start_hero_selection() -> void:
 	game_state = GameState.STARTING
 	_hero_selector.start()
-	#_buying_area.start_hero_selection(heroes)
+	_ui_game.hide()
 
 
 func _start_new_round() ->void:
