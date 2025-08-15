@@ -1,0 +1,271 @@
+[gd_scene load_steps=11 format=3 uid="uid://dpb7vslj2dbl0"]
+
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_1jvkn"]
+[ext_resource type="Script" uid="uid://cy6mpamwt0egj" path="res://UI/BuyingArea/Oracle/ui_oracle.gd" id="2_52pse"]
+[ext_resource type="Texture2D" uid="uid://xhyj0k42ilb3" path="res://UI/_Themes/Data/panel_tileable_20px_border_only.png" id="2_u8k82"]
+[ext_resource type="Texture2D" uid="uid://db2m1yw0asd6l" path="res://UI/_Themes/Data/cross.png" id="3_u8k82"]
+[ext_resource type="PackedScene" uid="uid://d2ftrvw88il7f" path="res://UI/Misc/SkillPanel/ui_skill_panel.tscn" id="4_vncfa"]
+[ext_resource type="Texture2D" uid="uid://bbcbah5ifbsrw" path="res://UI/_Themes/Data/coin.png" id="5_vncfa"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vncfa"]
+texture = ExtResource("2_u8k82")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="Theme" id="Theme_ua3xp"]
+Panel/styles/panel = SubResource("StyleBoxTexture_vncfa")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vncfa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u8k82"]
+
+[node name="UIOracle" type="Control" node_paths=PackedStringArray("_skill1A", "_skill1B", "_skill2A", "_skill2B", "_skill3A", "_skill3B", "_player_level_label", "_xp_bar", "_xp_label")]
+custom_minimum_size = Vector2(700, 600)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_1jvkn")
+script = ExtResource("2_52pse")
+_skill1A = NodePath("MainPanel/MarginContainer/VBoxContainer/SkillsContainer/UiSkillPanel_1A")
+_skill1B = NodePath("MainPanel/MarginContainer/VBoxContainer/SkillsContainer/UiSkillPanel_1B")
+_skill2A = NodePath("MainPanel/MarginContainer/VBoxContainer/SkillsContainer/UiSkillPanel_2A")
+_skill2B = NodePath("MainPanel/MarginContainer/VBoxContainer/SkillsContainer/UiSkillPanel_2B")
+_skill3A = NodePath("MainPanel/MarginContainer/VBoxContainer/SkillsContainer/UiSkillPanel_3A")
+_skill3B = NodePath("MainPanel/MarginContainer/VBoxContainer/SkillsContainer/UiSkillPanel_3B")
+_player_level_label = NodePath("MainPanel/MarginContainer/VBoxContainer/XPContainer/PlayerLevelLabel")
+_xp_bar = NodePath("MainPanel/MarginContainer/VBoxContainer/XPContainer/XPBar")
+_xp_label = NodePath("MainPanel/MarginContainer/VBoxContainer/XPContainer/XPBar/XPLabel")
+
+[node name="MainPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelBorder" type="Panel" parent="MainPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_ua3xp")
+
+[node name="MarginContainer" type="MarginContainer" parent="MainPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="SkillsContainer" type="GridContainer" parent="MainPanel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+columns = 2
+
+[node name="UiSkillPanel_1A" parent="MainPanel/MarginContainer/VBoxContainer/SkillsContainer" instance=ExtResource("4_vncfa")]
+layout_mode = 2
+_skill_level = 3
+
+[node name="UiSkillPanel_1B" parent="MainPanel/MarginContainer/VBoxContainer/SkillsContainer" instance=ExtResource("4_vncfa")]
+layout_mode = 2
+_skill_level = 3
+
+[node name="UiSkillPanel_2A" parent="MainPanel/MarginContainer/VBoxContainer/SkillsContainer" instance=ExtResource("4_vncfa")]
+layout_mode = 2
+_skill_level = 5
+
+[node name="UiSkillPanel_2B" parent="MainPanel/MarginContainer/VBoxContainer/SkillsContainer" instance=ExtResource("4_vncfa")]
+layout_mode = 2
+_skill_level = 5
+
+[node name="UiSkillPanel_3A" parent="MainPanel/MarginContainer/VBoxContainer/SkillsContainer" instance=ExtResource("4_vncfa")]
+layout_mode = 2
+_skill_level = 7
+
+[node name="UiSkillPanel_3B" parent="MainPanel/MarginContainer/VBoxContainer/SkillsContainer" instance=ExtResource("4_vncfa")]
+layout_mode = 2
+_skill_level = 7
+
+[node name="XPContainer" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlayerLevelLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/XPContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 50
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="XPBar" type="ProgressBar" parent="MainPanel/MarginContainer/VBoxContainer/XPContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+step = 1.0
+value = 15.0
+show_percentage = false
+
+[node name="XPLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/XPContainer/XPBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "10/42"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BuyXPButton" type="Control" parent="MainPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BuyXPButton"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -95.0
+offset_top = -20.0
+offset_right = -31.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="BuyXPPriceLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/BuyXPButton/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "10"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MainPanel/MarginContainer/VBoxContainer/BuyXPButton/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("5_vncfa")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="BuyXPButton" type="Button" parent="MainPanel/MarginContainer/VBoxContainer/BuyXPButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vncfa")
+text = "BUY XP"
+
+[node name="TitlePanel" type="Panel" parent="."]
+custom_minimum_size = Vector2(300, 70)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = -35.0
+offset_right = 150.0
+offset_bottom = 35.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="TitlePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "ORACLE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelBorder" type="Panel" parent="TitlePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_ua3xp")
+
+[node name="ClosePanel" type="Panel" parent="."]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -45.0
+offset_top = -15.0
+offset_right = 15.0
+offset_bottom = 45.0
+grow_horizontal = 0
+
+[node name="TextureRect" type="TextureRect" parent="ClosePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_u8k82")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CloseButton" type="Button" parent="ClosePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_u8k82")
+
+[node name="PanelBorder" type="Panel" parent="ClosePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_ua3xp")
+
+[connection signal="pressed" from="MainPanel/MarginContainer/VBoxContainer/BuyXPButton/BuyXPButton" to="." method="_on_buy_xp_button_pressed"]
+[connection signal="pressed" from="ClosePanel/CloseButton" to="." method="_on_close_button_pressed"]

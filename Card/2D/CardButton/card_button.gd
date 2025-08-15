@@ -93,5 +93,5 @@ func _animation_reset_3d_rotation() -> void:
 
 
 func _on_gui_input(event: InputEvent) -> void:
-	card_selected.emit(self, card)
-	print("CardButton gui input [", get_path(), "]")
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		card_selected.emit(self, card)

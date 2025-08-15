@@ -10,8 +10,6 @@ signal card_bought(card: Card)
 
 # ============================== Local scene nodes ==============================
 
-@onready var _card_shop_visual: CardShopVisual = %SubCardShop
-
 @export var _card_shop: CardShop
 
 @export var _card_buttons: Array[CardButton]
@@ -19,9 +17,6 @@ signal card_bought(card: Card)
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	if multiplayer.is_server(): 
-		hide()
-	
 	_local_player = PlayerManager.get_local_player()
 	_card_shop.player = _local_player
 	
@@ -48,6 +43,11 @@ func _adapt_cards_lvl_to_player() -> void:
 func _reconnect_to_card_signal(card_button: CardButton) -> void:
 	card_button.card_selected.connect(_on_card_shop_button_pressed, CONNECT_ONE_SHOT)
 
+
+func _update_shop_cards_displayed_visual(cards: Array[Card]) -> void:
+	for i in cards.size():
+		_card_buttons[i].update_visual(cards[i])
+
 # ============================== Callbacks ==============================
 
 func _on_back_pressed() -> void:
@@ -59,14 +59,12 @@ func _on_card_shop_button_pressed(card_button_selected: CardButton, card: Card) 
 
 
 func _on_card_shop_shop_refreshed(new_cards: Array[Card]) -> void:
-	_card_shop_visual.update_shop_cards_displayed_visual(new_cards)
+	_update_shop_cards_displayed_visual(new_cards)
 
 
 func _on_card_shop_card_bought(card: Card) -> void:
 	card_bought.emit(card)
 
 
-
-
-
- 
+func _on_close_button_pressed() -> void:
+	hide()

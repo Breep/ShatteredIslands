@@ -7,7 +7,7 @@ extends Node
 
 # ============================== Configuration ==============================
 
-@export var _clickable_collider_mask: int = 16
+@export var _clickable_collider_mask: int = Shared.LAYER_ENTITIES | Shared.LAYER_FURNITURE
 
 # ============================== Configuration ==============================
 
@@ -23,7 +23,6 @@ var _previous_focus: Node3D # The previous object pointed by the cursor
 var _pickable_overing: Node3D # The PICKABLE pointed by the cursor
 var _pickable_overing_module: PickableModule # The PickableModule of the PICKABLE pointed by the cursor
 var _pickable_selected: Node3D # The PICKABLE previously selected
-#var _pickable_selected_module: PickableModule # The PickableModule of the PICKABLE previously selected
 
 var _clickable_overing: Node3D # The CLICKABLE pointed by the cursor
 var _clickable_overing_module: ClickableModule # The ClickableModule of the CLICKABLE pointed by the cursor
@@ -41,7 +40,7 @@ var _force_inactive: bool = false
 
 # ============================== Node base functions ==============================
 
-func _input(event: InputEvent) -> void: # TODO Should be unhandled input but GUI is doing shit, need to check out that
+func _unhandled_input(event: InputEvent) -> void: # TODO Should be unhandled input but GUI is doing shit, need to check out that
 	if not _is_active or _force_inactive: return
 	_handle_pickable_select(event)
 	_handle_pickable_movement(event)

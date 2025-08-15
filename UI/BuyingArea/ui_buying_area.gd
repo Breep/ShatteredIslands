@@ -4,10 +4,9 @@ extends Control
 @export_group("External nodes")
 @export var _round_timer: Timer
 
-@export_group("Buttons")
-@export var _random_button: Button
-@export var _refresh_button: Button
-@export var _back_button: Button
+@export_group("Middle Panels")
+@export var _ui_card_shop: UICardShop
+@export var _ui_oracle: UIOracle
 
 # ============================== Local nodes ==============================
 
@@ -19,8 +18,11 @@ extends Control
 
 func _ready() -> void:
 	Events.entity_cliked.connect(_on_events_entity_clicked)
+	Events.furniture_clicked.connect(_on_events_furniture_clicked)
 	RoundManager.current_round_changed.connect(_on_round_manager_current_round_changed)
 	_continous_timer.connect_timer(_round_timer)
+	#_ui_card_shop.hide()
+	#_ui_oracle.hide()
 
 
 func _on_events_entity_clicked(entity: Entity) -> void:
@@ -29,6 +31,16 @@ func _on_events_entity_clicked(entity: Entity) -> void:
 		_ui_selected_entity_stats.connect_entity_stats(entity.stats, character.player.name)
 	else:
 		_ui_selected_entity_stats.connect_entity_stats(entity.stats, entity.name)
+
+
+func _on_events_furniture_clicked(furniture: Furniture) -> void:
+	_ui_card_shop.hide()
+	_ui_oracle.hide()
+	match furniture.furniture_type:
+		Furniture.FurnitureType.CARD_SHOP:
+			_ui_card_shop.show()
+		Furniture.FurnitureType.ORACLE:
+			_ui_oracle.show()
 
 
 func _on_round_manager_current_round_changed(round_number: int) -> void:
@@ -45,3 +57,27 @@ func _on_round_manager_current_round_changed(round_number: int) -> void:
 
 
  
+
+
+func _on_card_shop_mouse_entered() -> void:
+	print("CARD SHOP MOUSE ENTERED")
+
+
+func _on_ui_oracle_mouse_entered() -> void:
+	print("ORACLE MOUSE ENTERED")
+
+
+func _on_v_box_container_mouse_entered() -> void:
+	print("VBOX MOUSE ENTERED")
+
+
+func _on_top_panel_mouse_entered() -> void:
+	print("TOP PANEL MOUSE ENTERED")
+
+
+func _on_middle_panel_mouse_entered() -> void:
+	print("MIDDLE PANEL MOUSE ENTERED")
+
+
+func _on_bottom_panel_mouse_entered() -> void:
+	print("BOTTOM PANEL MOUSE ENTERED")

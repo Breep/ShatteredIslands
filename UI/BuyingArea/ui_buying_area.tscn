@@ -1,19 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://cmstx61h3h6ar"]
+[gd_scene load_steps=7 format=3 uid="uid://cmstx61h3h6ar"]
 
 [ext_resource type="Script" uid="uid://cc7c0q2xebkyp" path="res://UI/BuyingArea/ui_buying_area.gd" id="1_5o5p6"]
 [ext_resource type="PackedScene" uid="uid://db2anika8bvj8" path="res://UI/CharacterStats/ui_character_stats.tscn" id="2_btc45"]
 [ext_resource type="PackedScene" uid="uid://cxalabhvxw1pd" path="res://UI/Tool/Timer/ui_timer.tscn" id="2_c4gh8"]
 [ext_resource type="Theme" uid="uid://b3fq4x00gjiqa" path="res://UI/_Themes/UI_Label_card_shop.tres" id="3_25lij"]
 [ext_resource type="PackedScene" uid="uid://d1oxnd1g75rqh" path="res://UI/BuyingArea/CardShop/ui_card_shop.tscn" id="4_dsp03"]
+[ext_resource type="PackedScene" uid="uid://dpb7vslj2dbl0" path="res://UI/BuyingArea/Oracle/ui_oracle.tscn" id="5_8ytae"]
 
-[node name="UIBuyingArea" type="Control"]
+[node name="UIBuyingArea" type="Control" node_paths=PackedStringArray("_ui_card_shop", "_ui_oracle")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_5o5p6")
+_ui_card_shop = NodePath("VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel/CenterContainer/CardShop")
+_ui_oracle = NodePath("VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel/CenterContainer/UIOracle")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -22,11 +26,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
 
 [node name="TopPanel" type="Control" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.1
+mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TopPanel"]
 layout_mode = 1
@@ -35,14 +42,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="LeftPanel" type="Control" parent="VBoxContainer/TopPanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="MiddlePanel" type="Control" parent="VBoxContainer/TopPanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/TopPanel/HBoxContainer/MiddlePanel"]
 layout_mode = 1
@@ -51,6 +61,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
@@ -59,10 +70,12 @@ theme_override_constants/margin_bottom = 5
 [node name="ContinousTimer" parent="VBoxContainer/TopPanel/HBoxContainer/MiddlePanel/MarginContainer" instance=ExtResource("2_c4gh8")]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_filter = 2
 
 [node name="RightPanel" type="Control" parent="VBoxContainer/TopPanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="RoundLabel" type="Label" parent="VBoxContainer/TopPanel/HBoxContainer/RightPanel"]
 unique_name_in_owner = true
@@ -82,6 +95,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.8
+mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MiddlePanel"]
 layout_mode = 1
@@ -90,39 +104,53 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="LeftPanel" type="Control" parent="VBoxContainer/MiddlePanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.1
+mouse_filter = 2
 
 [node name="MiddlePanel" type="Control" parent="VBoxContainer/MiddlePanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.8
+mouse_filter = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
+anchor_top = -0.086
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 1.086
+offset_top = 44.032
+offset_bottom = -44.032
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="CardShop" parent="VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel/CenterContainer" instance=ExtResource("4_dsp03")]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(600, 330.085)
 layout_mode = 2
+mouse_filter = 2
+
+[node name="UIOracle" parent="VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel/CenterContainer" instance=ExtResource("5_8ytae")]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+mouse_default_cursor_shape = 8
 
 [node name="RightPanel" type="Control" parent="VBoxContainer/MiddlePanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.1
+mouse_filter = 2
 
 [node name="BottomPanel" type="Control" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.1
+mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/BottomPanel"]
 layout_mode = 1
@@ -131,23 +159,35 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="BottomLeftEmpty" type="Control" parent="VBoxContainer/BottomPanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
+mouse_filter = 2
 
 [node name="BottomMiddle" type="Control" parent="VBoxContainer/BottomPanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
+mouse_filter = 2
 
 [node name="SelectedCharacterStats" parent="VBoxContainer/BottomPanel/HBoxContainer/BottomMiddle" instance=ExtResource("2_btc45")]
 unique_name_in_owner = true
 layout_mode = 1
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="BottomRightEmpty" type="Control" parent="VBoxContainer/BottomPanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
+mouse_filter = 2
+
+[connection signal="mouse_entered" from="VBoxContainer" to="." method="_on_v_box_container_mouse_entered"]
+[connection signal="mouse_entered" from="VBoxContainer/TopPanel" to="." method="_on_top_panel_mouse_entered"]
+[connection signal="mouse_entered" from="VBoxContainer/MiddlePanel" to="." method="_on_middle_panel_mouse_entered"]
+[connection signal="mouse_entered" from="VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel/CenterContainer/CardShop" to="." method="_on_card_shop_mouse_entered"]
+[connection signal="mouse_entered" from="VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel/CenterContainer/UIOracle" to="." method="_on_ui_oracle_mouse_entered"]
+[connection signal="mouse_entered" from="VBoxContainer/BottomPanel" to="." method="_on_bottom_panel_mouse_entered"]
