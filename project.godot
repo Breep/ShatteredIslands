@@ -66,10 +66,6 @@ folder_colors={
 "res://VFX/VFEZ-godot-main/": "gray"
 }
 
-[filesystem]
-
-import/blender/enabled=false
-
 [global_group]
 
 WALL=""
