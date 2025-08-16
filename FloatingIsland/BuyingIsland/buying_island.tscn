@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://7u3ksm0e4v61"]
+[gd_scene load_steps=6 format=3 uid="uid://7u3ksm0e4v61"]
 
 [ext_resource type="Script" uid="uid://d1f3f8bl0pp3r" path="res://FloatingIsland/BuyingIsland/buying_island.gd" id="1_275uc"]
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="3_l1roj"]
 [ext_resource type="PackedScene" uid="uid://ca8mcplp2va4s" path="res://FloatingIsland/BuyingIsland/BuyingArea/buying_area.tscn" id="4_f5s3d"]
+[ext_resource type="PackedScene" uid="uid://dsdxbwk2i351e" path="res://Entities/Heroes/DarkKnight/dark_knight_model.tscn" id="4_k4qgv"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_uio2g"]
 
@@ -14,9 +15,15 @@ _center_point_camera = NodePath("CenterPointCamera")
 [node name="BuyingArea" parent="." instance=ExtResource("4_f5s3d")]
 
 [node name="CenterPointCamera" parent="." instance=ExtResource("3_l1roj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.65533, 0, -5.94256)
-_zoom_sensitivity = 10.0
-_zoom_max = 400.0
+transform = Transform3D(0.493972, 0, 0.869478, 0, 1, 0, -0.869478, 0, 0.493972, -3.62635, 0, 0.679526)
+
+[node name="Camera3D" parent="CenterPointCamera/CenterPoint" index="0"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 17.3132, 0, -9.31922e-09)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_uio2g")
+
+[node name="DarkKnightModel" parent="." instance=ExtResource("4_k4qgv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.267461, 0.537017, -0.75467)
+
+[editable path="CenterPointCamera"]

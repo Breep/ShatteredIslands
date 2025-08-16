@@ -1,9 +1,9 @@
 class_name Tavern
 extends Node3D
 
+@export_group("Local Nodes")
 @export var _tarven_center: TavernCenter
-
-@onready var _shop_deck_3d_visual: ShopDeck3DVisual = %ShopDeck3DVisual
+@export var _shop_deck_3d_visual: ShopDeck3DVisual
 
 func _ready() -> void:
 	_shop_deck_3d_visual.connect_to_shop_deck()

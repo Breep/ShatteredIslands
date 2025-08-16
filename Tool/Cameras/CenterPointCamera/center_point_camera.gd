@@ -12,7 +12,6 @@ extends Node3D
 @export var _zoom_sensitivity: float = 1.0
 
 @export var _zoom_min: float = 10.0
-@export var _zoom_start: float = 20.0
 @export var _zoom_max: float = 40.0
 
 var _is_active: bool = false
@@ -24,9 +23,6 @@ func _input(event: InputEvent) -> void:
 	_handle_center_point_rotation(event)
 	_handle_camera_zoom(event)
 
-
-func _ready() -> void:
-	_camera.position.x = _zoom_start
 
 # ============================== Public functions ==============================
 

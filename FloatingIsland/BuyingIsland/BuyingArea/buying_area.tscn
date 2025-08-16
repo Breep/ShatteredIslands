@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://ca8mcplp2va4s"]
+[gd_scene load_steps=8 format=3 uid="uid://ca8mcplp2va4s"]
 
 [ext_resource type="Script" uid="uid://cvy50on4evfts" path="res://FloatingIsland/BuyingIsland/BuyingArea/buying_area.gd" id="1_ed4aq"]
+[ext_resource type="PackedScene" uid="uid://3m2v1arprnf7" path="res://FloatingIsland/_Maps/tavern.tscn" id="3_g5vai"]
+[ext_resource type="Script" uid="uid://bg27we47t814j" path="res://FloatingIsland/BuyingIsland/BuyingArea/Tavern/tavern.gd" id="4_gi2cy"]
+[ext_resource type="PackedScene" uid="uid://dr8xv1vshmvyq" path="res://FloatingIsland/BuyingIsland/BuyingArea/Tavern/TavernCenter/tavern_center.tscn" id="5_4lvlh"]
 [ext_resource type="PackedScene" uid="uid://cmstx61h3h6ar" path="res://UI/BuyingArea/ui_buying_area.tscn" id="5_dvq4w"]
-[ext_resource type="PackedScene" uid="uid://b8clqslwo8t68" path="res://FloatingIsland/BuyingIsland/BuyingArea/Tavern/tavern.tscn" id="7_s1xub"]
+[ext_resource type="PackedScene" uid="uid://cdryp1jj4woix" path="res://FloatingIsland/BuyingIsland/BuyingArea/ShopDeck3DVisual/shop_deck_3d_visual.tscn" id="6_gi2cy"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jhmrm"]
 
@@ -22,9 +25,6 @@ unique_name_in_owner = true
 layout_mode = 1
 _round_timer = NodePath("../../BuyingAreaTimer")
 
-[node name="Tavern" parent="." instance=ExtResource("7_s1xub")]
-unique_name_in_owner = true
-
 [node name="BuyingAreaTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 10.0
@@ -33,4 +33,22 @@ one_shot = true
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_jhmrm")
 
+[node name="tavern" parent="." node_paths=PackedStringArray("_tarven_center") instance=ExtResource("3_g5vai")]
+script = ExtResource("4_gi2cy")
+_tarven_center = NodePath("TavernCenter")
+
+[node name="plafond" parent="tavern/Floor" index="1"]
+visible = false
+
+[node name="Roof" parent="tavern" index="1"]
+visible = false
+
+[node name="TavernCenter" parent="tavern" instance=ExtResource("5_4lvlh")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0670199, 0.55223, 0.0844293)
+
+[node name="ShopDeck3DVisual" parent="tavern" instance=ExtResource("6_gi2cy")]
+transform = Transform3D(0.000895275, 0, -0.569999, 0, 0.57, 0, 0.569999, 0, 0.000895275, -7.94129, 1.11738, 0.147098)
+
 [connection signal="timeout" from="BuyingAreaTimer" to="." method="_on_timer_timeout"]
+
+[editable path="tavern"]
