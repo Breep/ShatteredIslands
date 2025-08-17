@@ -12,9 +12,7 @@ var _is_active: bool = false
 # ============================== Local nodes ==============================
 
 @onready var _tavern: Tavern = %Tavern
-
 @onready var _ui_buying_area: UIBuyingArea = %UIBuyingArea
-
 @onready var _timer: Timer = %BuyingAreaTimer
 
 # ============================== Node base functions ==============================

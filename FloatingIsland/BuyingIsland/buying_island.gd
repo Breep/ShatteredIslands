@@ -8,6 +8,7 @@ signal buying_phase_finished()
 # ============================== Local nodes ==============================
 
 @export var _buying_area: BuyingArea
+@export var _camera: Camera3D
 
 # ============================== Private variables ==============================
 
@@ -28,14 +29,13 @@ func start_buying_phase(battles: Array[Battle]) -> void:
 func set_active() -> void:
 	if _is_active: return
 	_is_active = true
-	_center_point_camera.set_active()
+	_camera.make_current()
 	_buying_area.set_active()
 
 
 func set_inactive() -> void:
 	if not _is_active: return
 	_is_active = false
-	_center_point_camera.set_inactive()
 	_buying_area.set_inactive()
 
 # ============================== Callbacks ==============================

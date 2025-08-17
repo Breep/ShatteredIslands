@@ -183,24 +183,4 @@ script = ExtResource("11_xkuis")
 flicker_speed = 0.3
 flicker_strength = 0.02
 
-[node name="OmniLight3D4" type="OmniLight3D" parent="Lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.978363, 2.09494, 3.61103)
-light_color = Color(0.576403, 0.405019, 0.162577, 1)
-shadow_enabled = true
-omni_range = 8.365
-omni_attenuation = 0.2
-script = ExtResource("11_xkuis")
-flicker_speed = 0.05
-flicker_strength = 0.05
-
-[node name="OmniLight3D5" type="OmniLight3D" parent="Lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.27519, 2.07413, -3.33926)
-light_color = Color(0.576403, 0.405019, 0.162577, 1)
-shadow_enabled = true
-omni_range = 8.365
-omni_attenuation = 0.2
-script = ExtResource("11_xkuis")
-flicker_speed = 1.2
-flicker_strength = 0.1
-
 [editable path="tavern"]

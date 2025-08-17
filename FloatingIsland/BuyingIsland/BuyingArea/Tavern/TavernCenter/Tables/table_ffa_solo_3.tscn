@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cqskpy33r7xoi"]
+[gd_scene load_steps=6 format=3 uid="uid://cqskpy33r7xoi"]
 
-[ext_resource type="PackedScene" uid="uid://dghajk42luw8y" path="res://FloatingIsland/BuyingIsland/BuyingArea/Tavern/TavernCenter/Tables/VisualTODOCHECK/table_round_large_2.tscn" id="1_uqqne"]
 [ext_resource type="Script" uid="uid://ccc0vnl2cv7lt" path="res://FloatingIsland/BuyingIsland/BuyingArea/Tavern/TavernCenter/Tables/table.gd" id="2_w5250"]
 [ext_resource type="PackedScene" uid="uid://bs8lfftv32dp1" path="res://FloatingIsland/BuyingIsland/BuyingArea/Tavern/TavernCenter/Tables/Common/Coin/coin_pile.tscn" id="4_1tqwg"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Tool/SpawnPoint/spawn_point.tscn" id="4_m6y5y"]
+[ext_resource type="PackedScene" uid="uid://dumhxpaktew01" path="res://Data/Assets/3D/Furnitures/table.tscn" id="5_mohk4"]
+[ext_resource type="PackedScene" uid="uid://dntunh7ry24ql" path="res://Data/Assets/3D/Furnitures/torch.tscn" id="6_det8y"]
 
 [node name="Table_ffa3" type="Node3D" node_paths=PackedStringArray("_coin_piles", "_hero_spawns")]
 script = ExtResource("2_w5250")
@@ -11,37 +12,48 @@ _coin_piles = [NodePath("Player1/CoinPile1"), NodePath("Player2/CoinPile2"), Nod
 _hero_spawns = [NodePath("Player1/SpawnPoint"), NodePath("Player2/SpawnPoint"), NodePath("Player3/SpawnPoint")]
 battle_type = 2
 
-[node name="TableVisual" parent="." instance=ExtResource("1_uqqne")]
-
 [node name="Player1" type="Node3D" parent="."]
 transform = Transform3D(0.435325, 0, 0.900273, 0, 1, 0, -0.900273, 0, 0.435325, 1.71488, 2.38419e-07, -1.09529)
 
 [node name="CoinPile1" parent="Player1" instance=ExtResource("4_1tqwg")]
-transform = Transform3D(0.234597, 0, 0.441547, 0, 0.5, 0, -0.441547, 0, 0.234597, -1.20639, 1.03176, -0.0183819)
+transform = Transform3D(0.187678, 0, 0.353238, 0, 0.4, 0, -0.353238, 0, 0.187678, -1.19312, 0.971622, -0.444668)
 
 [node name="SpawnPoint" parent="Player1" instance=ExtResource("4_m6y5y")]
-transform = Transform3D(0.505642, 0, 0.862743, 0, 1, 0, -0.862743, 0, 0.505642, -0.00644046, 0, 0.425222)
+transform = Transform3D(0.505642, 0, 0.862743, 0, 1, 0, -0.862743, 0, 0.505642, -0.412407, 0, 0.197666)
 team = 1
 
 [node name="Player2" type="Node3D" parent="."]
 transform = Transform3D(-0.620984, 0, 0.783824, 0, 1, 0, -0.783824, 0, -0.620984, -1.96588, 4.76837e-07, -0.58355)
 
 [node name="CoinPile2" parent="Player2" instance=ExtResource("4_1tqwg")]
-transform = Transform3D(-0.420897, 0, 0.2699, 0, 0.5, 0, -0.2699, 0, -0.420897, -0.589508, 1.03176, 1.14596)
+transform = Transform3D(-0.267351, 0, 0.297529, 0, 0.4, 0, -0.297529, 0, -0.267351, -0.859719, 0.963307, 1.14715)
 
 [node name="SpawnPoint" parent="Player2" instance=ExtResource("4_m6y5y")]
-transform = Transform3D(-0.458913, 0, 0.888481, 0, 1, 0, -0.888481, 0, -0.458913, 0.3404, 0, 0.233096)
+transform = Transform3D(-0.15026, 0, 0.988646, 0, 1, 0, -0.988646, 0, -0.15026, 0.117353, 0, 1.11091)
 team = 2
 
 [node name="Player3" type="Node3D" parent="."]
 transform = Transform3D(-0.975985, 0, -0.217836, 0, 1, 0, 0.217836, 0, -0.975985, 0.856116, 7.15256e-07, 1.96119)
 
 [node name="CoinPile3" parent="Player3" instance=ExtResource("4_1tqwg")]
-transform = Transform3D(-0.479568, 0, -0.141472, 0, 0.5, 0, 0.141472, 0, -0.479568, 0.888716, 1.03176, 1.15682)
+transform = Transform3D(-0.383655, 0, -0.113178, 0, 0.4, 0, 0.113178, 0, -0.383655, 0.742296, 0.963141, 1.3147)
 
 [node name="SpawnPoint" parent="Player3" instance=ExtResource("4_m6y5y")]
-transform = Transform3D(-0.990802, 0, 0.135318, 0, 1, 0, -0.135318, 0, -0.990802, 0.536433, -2.38419e-07, 0.0078932)
+transform = Transform3D(-0.990802, 0, 0.135318, 0, 1, 0, -0.135318, 0, -0.990802, 0.830737, -2.38419e-07, 0.330995)
 team = 3
 
 [node name="Entities" type="Node3D" parent="."]
 unique_name_in_owner = true
+
+[node name="Table" parent="." instance=ExtResource("5_mohk4")]
+
+[node name="SM_Prop_Table_Wood_05_009" parent="Table" index="0"]
+visible = false
+
+[node name="SM_Prop_Table_Barrel_01_004" parent="Table" index="1"]
+visible = true
+
+[node name="Torch" parent="Table" instance=ExtResource("6_det8y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.959944, 0)
+
+[editable path="Table"]

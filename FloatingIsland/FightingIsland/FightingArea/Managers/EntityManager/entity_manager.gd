@@ -34,12 +34,13 @@ func _ready() -> void:
 
 func clear() -> void:
 	for entity in _entities.values():
-		if entity.damage_taken.is_connected(_on_entity_damage_taken):
-			entity.damage_taken.disconnect(_on_entity_damage_taken)
-		if entity.spell_casted.is_connected(_on_entity_spell_casted):
-			entity.spell_casted.disconnect(_on_entity_spell_casted)
-		if entity.stack_taken.is_connected(_on_entity_stack_taken):
-			entity.stack_taken.disconnect(_on_entity_stack_taken)
+		if entity != null:
+			if entity.damage_taken.is_connected(_on_entity_damage_taken):
+				entity.damage_taken.disconnect(_on_entity_damage_taken)
+			if entity.spell_casted.is_connected(_on_entity_spell_casted):
+				entity.spell_casted.disconnect(_on_entity_spell_casted)
+			if entity.stack_taken.is_connected(_on_entity_stack_taken):
+				entity.stack_taken.disconnect(_on_entity_stack_taken)
 	_entities.clear()
 	_characters.clear()
 

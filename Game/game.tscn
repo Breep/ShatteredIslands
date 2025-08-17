@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://oimyi4iueoda"]
+[gd_scene load_steps=14 format=3 uid="uid://oimyi4iueoda"]
 
 [ext_resource type="Script" uid="uid://blljr68c4u466" path="res://Game/game.gd" id="1_7r6pw"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Tool/SpawnPoint/spawn_point.tscn" id="3_i1e5p"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://7u3ksm0e4v61" path="res://FloatingIsland/BuyingIsland/buying_island.tscn" id="6_flgk0"]
 [ext_resource type="PackedScene" uid="uid://cbd5jq0bp7fef" path="res://Game/HeroSelector/HeroSelector.tscn" id="8_xfil1"]
 [ext_resource type="PackedScene" uid="uid://dv3kwc5eeyuk2" path="res://UI/Game/ui_game.tscn" id="9_kul4i"]
-[ext_resource type="PackedScene" uid="uid://b7ix6abnaxeay" path="res://FloatingIsland/_Maps/turtle_tavern.tscn" id="10_7gi1t"]
 [ext_resource type="PackedScene" uid="uid://di7eyuedvo17p" path="res://UI/Menu/PauseMenu/ui_pause_menu.tscn" id="10_fsxsm"]
 
 [sub_resource type="Sky" id="Sky_7gi1t"]
@@ -45,7 +44,7 @@ _islands_spawn_points = [NodePath("IslandSpawns/CenterPoint1/SpawnPoint1"), Node
 _ui_game = NodePath("UI/UIGame")
 
 [node name="BuyingIsland" parent="." instance=ExtResource("6_flgk0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 56.0279, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -29.8858, 0)
 
 [node name="IslandSpawns" type="Node3D" parent="."]
 unique_name_in_owner = true
@@ -161,9 +160,6 @@ layout_mode = 1
 [node name="PauseMenu" parent="UI" instance=ExtResource("10_fsxsm")]
 layout_mode = 1
 mouse_filter = 2
-
-[node name="turtle2" parent="." instance=ExtResource("10_7gi1t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.3404, 0, -0.250733)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_7gi1t")

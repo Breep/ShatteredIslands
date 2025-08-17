@@ -33,22 +33,22 @@ one_shot = true
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_jhmrm")
 
-[node name="tavern" parent="." node_paths=PackedStringArray("_tarven_center") instance=ExtResource("3_g5vai")]
+[node name="Tavern" parent="." node_paths=PackedStringArray("_tarven_center", "_shop_deck_3d_visual") instance=ExtResource("3_g5vai")]
+unique_name_in_owner = true
 script = ExtResource("4_gi2cy")
 _tarven_center = NodePath("TavernCenter")
+_shop_deck_3d_visual = NodePath("ShopDeck3DVisual")
 
-[node name="plafond" parent="tavern/Floor" index="1"]
-visible = false
-
-[node name="Roof" parent="tavern" index="1"]
-visible = false
-
-[node name="TavernCenter" parent="tavern" instance=ExtResource("5_4lvlh")]
+[node name="TavernCenter" parent="Tavern" instance=ExtResource("5_4lvlh")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0670199, 0.55223, 0.0844293)
 
-[node name="ShopDeck3DVisual" parent="tavern" instance=ExtResource("6_gi2cy")]
+[node name="ShopDeck3DVisual" parent="Tavern" instance=ExtResource("6_gi2cy")]
 transform = Transform3D(0.000895275, 0, -0.569999, 0, 0.57, 0, 0.569999, 0, 0.000895275, -7.94129, 1.11738, 0.147098)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.9435, 2.27672, -8.53603)
+light_color = Color(1, 0.724747, 0.804626, 1)
 
 [connection signal="timeout" from="BuyingAreaTimer" to="." method="_on_timer_timeout"]
 
-[editable path="tavern"]
+[editable path="Tavern"]
