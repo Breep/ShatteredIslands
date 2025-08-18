@@ -4,3 +4,4 @@
 
 [node name="ClickerModule" type="Node"]
 script = ExtResource("1_unwa0")
+_debug = true

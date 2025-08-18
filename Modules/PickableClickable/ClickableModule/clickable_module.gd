@@ -12,10 +12,11 @@ var select_locked: bool = false # True if the object can't be interacted
 @export var _meshs: Array[MeshInstance3D]
 @export var _nodes_where_to_find_meshs: Array[Node3D]
 @export var _owner: Node3D
+@export var _scale_div_grow: float = 1.0
 
 # ============================== Private variables ==============================
 
-var _material_overlay: StandardMaterial3D = preload("res://Modules/PickableClickable/default_interact_material_overlay.tres")
+var _material_overlay: StandardMaterial3D = preload("res://VFX/Shaders/outline/Outline_3D/simple_outline.tres")
 var _is_focused: bool = false
 var _is_selected: bool = false
 
@@ -87,6 +88,8 @@ func _focus() -> void:
 	for mesh in _meshs:
 		if mesh != null and not mesh.is_queued_for_deletion():
 			mesh.material_overlay = _material_overlay
+			(mesh.material_overlay as StandardMaterial3D).grow = true
+			(mesh.material_overlay as StandardMaterial3D).grow_amount = 0.03 / _scale_div_grow
 	if _owner.has_method("_on_clickable_module_focused"):
 		_owner.call("_on_clickable_module_focused")
 

@@ -9,6 +9,7 @@ signal buying_phase_finished()
 
 @export var _buying_area: BuyingArea
 @export var _camera: Camera3D
+@export var _clicker_module: ClickerModule
 
 # ============================== Private variables ==============================
 
@@ -31,12 +32,14 @@ func set_active() -> void:
 	_is_active = true
 	_camera.make_current()
 	_buying_area.set_active()
+	_clicker_module.set_active()
 
 
 func set_inactive() -> void:
 	if not _is_active: return
 	_is_active = false
 	_buying_area.set_inactive()
+	_clicker_module.set_inactive()
 
 # ============================== Callbacks ==============================
 

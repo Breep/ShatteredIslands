@@ -6,10 +6,11 @@
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_uio2g"]
 
-[node name="BuyingIsland" type="Node3D" node_paths=PackedStringArray("_buying_area", "_camera")]
+[node name="BuyingIsland" type="Node3D" node_paths=PackedStringArray("_buying_area", "_camera", "_clicker_module")]
 script = ExtResource("1_275uc")
 _buying_area = NodePath("BuyingArea")
 _camera = NodePath("CameraCenter/Camera3D")
+_clicker_module = NodePath("CameraCenter/Camera3D/ClickerModule")
 
 [node name="BuyingArea" parent="." instance=ExtResource("4_f5s3d")]
 
