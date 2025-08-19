@@ -5,13 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://Modules/PickableClickable/PickableModule/pickable_module.tscn" id="4_jy07b"]
 [ext_resource type="PackedScene" uid="uid://dpm8jqxh45q3x" path="res://VFX/Proto/Chain/chainon.tscn" id="5_r1l57"]
 [ext_resource type="PackedScene" uid="uid://dumhxpaktew01" path="res://Data/Assets/3D/Furnitures/table.tscn" id="5_vrfg7"]
+[ext_resource type="PackedScene" uid="uid://dlicqbvk6hpq6" path="res://Prototyping/Chain/chain_link.tscn" id="6_h813j"]
+[ext_resource type="PackedScene" uid="uid://c4iv26adgresi" path="res://Prototyping/Chain/chain.tscn" id="6_r1l57"]
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="6_vrfg7"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t812x"]
-
-[sub_resource type="QuadMesh" id="QuadMesh_25bs0"]
-material = SubResource("StandardMaterial3D_t812x")
-size = Vector2(10, 10)
+[ext_resource type="Script" uid="uid://crx0gwxvxg6yv" path="res://Prototyping/Chain/chain_link.gd" id="7_c0305"]
 
 [sub_resource type="Environment" id="Environment_bi2n1"]
 background_mode = 1
@@ -36,10 +33,6 @@ size = Vector3(1, 0.863037, 2.28625)
 [node name="PrototypingCamera" type="Node3D" node_paths=PackedStringArray("_center_point_camera")]
 script = ExtResource("1_t812x")
 _center_point_camera = NodePath("CenterPointCamera")
-
-[node name="Floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.5, 0)
-mesh = SubResource("QuadMesh_25bs0")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_bi2n1")
@@ -73,7 +66,7 @@ omni_range = 10.0
 [node name="Pickables" type="Node3D" parent="."]
 
 [node name="PickableA" type="StaticBody3D" parent="Pickables"]
-collision_layer = 16
+collision_layer = 17
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Pickables/PickableA"]
 mesh = SubResource("BoxMesh_jy07b")
@@ -120,10 +113,1002 @@ _nodes_where_to_find_meshs = [NodePath("../Table")]
 _owner = NodePath("..")
 _scale_div_grow = 0.01
 
-[node name="CenterPointCamera" parent="." instance=ExtResource("6_vrfg7")]
-_zoom_sensitivity = 1.0
+[node name="PickableModule" parent="Pickables/StaticBody3D" node_paths=PackedStringArray("_owner") instance=ExtResource("4_jy07b")]
+_owner = NodePath("..")
 
-[node name="Chain" parent="." instance=ExtResource("5_r1l57")]
-transform = Transform3D(1, 0, 0, 0, 0.849119, 0.528201, 0, -0.528201, 0.849119, 1.17095, 1.24643, 0.400547)
+[node name="Chain" parent="." node_paths=PackedStringArray("_links") instance=ExtResource("6_r1l57")]
+transform = Transform3D(-0.854927, 0.518314, -0.0212417, -0.514232, -0.841378, 0.166278, 0.0683119, 0.153078, 0.98585, -4.96937, 30.2445, -5.74462)
+link_number = 25
+_links = [NodePath("BaseLink"), NodePath("ChainLink0"), NodePath("ChainLink1"), NodePath("ChainLink2"), NodePath("ChainLink3"), NodePath("ChainLink4"), NodePath("ChainLink5"), NodePath("ChainLink6"), NodePath("ChainLink7"), NodePath("ChainLink8"), NodePath("ChainLink9"), NodePath("ChainLink10"), NodePath("ChainLink11"), NodePath("@RigidBody3D@210864"), NodePath("@RigidBody3D@210866"), NodePath("@RigidBody3D@210868"), NodePath("@RigidBody3D@210870"), NodePath("@RigidBody3D@210872"), NodePath("@RigidBody3D@210874"), NodePath("@RigidBody3D@210876"), NodePath("@RigidBody3D@210878"), NodePath("@RigidBody3D@210880"), NodePath("@RigidBody3D@210882"), NodePath("@RigidBody3D@210884"), NodePath("@RigidBody3D@210886"), NodePath("ChainLink24")]
+
+[node name="@PinJoint3D@210852" type="PinJoint3D" parent="Chain/BaseLink" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink0" type="RigidBody3D" parent="Chain" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210853" type="PinJoint3D" parent="Chain/ChainLink0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink1" type="RigidBody3D" parent="Chain" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210854" type="PinJoint3D" parent="Chain/ChainLink1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink2" type="RigidBody3D" parent="Chain" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210855" type="PinJoint3D" parent="Chain/ChainLink2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink3" type="RigidBody3D" parent="Chain" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210856" type="PinJoint3D" parent="Chain/ChainLink3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink4" type="RigidBody3D" parent="Chain" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210857" type="PinJoint3D" parent="Chain/ChainLink4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink5" type="RigidBody3D" parent="Chain" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210858" type="PinJoint3D" parent="Chain/ChainLink5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink6" type="RigidBody3D" parent="Chain" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210859" type="PinJoint3D" parent="Chain/ChainLink6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink7" type="RigidBody3D" parent="Chain" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210860" type="PinJoint3D" parent="Chain/ChainLink7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink8" type="RigidBody3D" parent="Chain" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210861" type="PinJoint3D" parent="Chain/ChainLink8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink9" type="RigidBody3D" parent="Chain" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210862" type="PinJoint3D" parent="Chain/ChainLink9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink10" type="RigidBody3D" parent="Chain" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210863" type="PinJoint3D" parent="Chain/ChainLink10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink11" type="RigidBody3D" parent="Chain" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210865" type="PinJoint3D" parent="Chain/ChainLink11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@210864" type="RigidBody3D" parent="Chain" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210867" type="PinJoint3D" parent="Chain/@RigidBody3D@210864"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@210866" type="RigidBody3D" parent="Chain" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210869" type="PinJoint3D" parent="Chain/@RigidBody3D@210866"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@210868" type="RigidBody3D" parent="Chain" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210871" type="PinJoint3D" parent="Chain/@RigidBody3D@210868"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@210870" type="RigidBody3D" parent="Chain" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210873" type="PinJoint3D" parent="Chain/@RigidBody3D@210870"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@210872" type="RigidBody3D" parent="Chain" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210875" type="PinJoint3D" parent="Chain/@RigidBody3D@210872"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@210874" type="RigidBody3D" parent="Chain" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210877" type="PinJoint3D" parent="Chain/@RigidBody3D@210874"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@210876" type="RigidBody3D" parent="Chain" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210879" type="PinJoint3D" parent="Chain/@RigidBody3D@210876"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@210878" type="RigidBody3D" parent="Chain" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210881" type="PinJoint3D" parent="Chain/@RigidBody3D@210878"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@210880" type="RigidBody3D" parent="Chain" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210883" type="PinJoint3D" parent="Chain/@RigidBody3D@210880"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@210882" type="RigidBody3D" parent="Chain" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 22, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210885" type="PinJoint3D" parent="Chain/@RigidBody3D@210882"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@210884" type="RigidBody3D" parent="Chain" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 23, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210887" type="PinJoint3D" parent="Chain/@RigidBody3D@210884"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@210886" type="RigidBody3D" parent="Chain" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210888" type="PinJoint3D" parent="Chain/@RigidBody3D@210886"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink24" type="RigidBody3D" parent="Chain" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="CenterPointCamera" parent="." instance=ExtResource("6_vrfg7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 27.6713, 3.34777)
+
+[node name="Camera3D" parent="CenterPointCamera/CenterPoint" index="0"]
+transform = Transform3D(-4.35824e-08, -0.00589922, 0.999983, -3.41671e-11, 0.999983, 0.00589922, -1, 2.22938e-10, -4.35818e-08, 30, 0, -4.26326e-14)
+fov = 50.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.395546, 0.91825, -0.018994, -0.614275, -0.249117, 0.748737, 0.682796, 0.307827, 0.662595, 13.7948, 5.51448, 4.41668)
+
+[node name="Chain2" parent="." node_paths=PackedStringArray("_links") instance=ExtResource("6_r1l57")]
+transform = Transform3D(-0.282469, -0.0169093, -0.959127, -0.514232, -0.841378, 0.166278, -0.809801, 0.540182, 0.228968, -0.414214, 30.0506, -0.139796)
+link_number = 25
+_links = [NodePath("BaseLink"), NodePath("ChainLink0"), NodePath("ChainLink1"), NodePath("ChainLink2"), NodePath("ChainLink3"), NodePath("ChainLink4"), NodePath("ChainLink5"), NodePath("ChainLink6"), NodePath("ChainLink7"), NodePath("ChainLink8"), NodePath("ChainLink9"), NodePath("ChainLink10"), NodePath("ChainLink11"), NodePath("ChainLink12"), NodePath("ChainLink13"), NodePath("ChainLink14"), NodePath("ChainLink15"), NodePath("ChainLink16"), NodePath("ChainLink17"), NodePath("ChainLink18"), NodePath("ChainLink19"), NodePath("ChainLink20"), NodePath("ChainLink21"), NodePath("ChainLink22"), NodePath("ChainLink23"), NodePath("ChainLink24")]
+
+[node name="@PinJoint3D@209684" type="PinJoint3D" parent="Chain2/BaseLink" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink0" type="RigidBody3D" parent="Chain2" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209685" type="PinJoint3D" parent="Chain2/ChainLink0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink1" type="RigidBody3D" parent="Chain2" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209686" type="PinJoint3D" parent="Chain2/ChainLink1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink2" type="RigidBody3D" parent="Chain2" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209687" type="PinJoint3D" parent="Chain2/ChainLink2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink3" type="RigidBody3D" parent="Chain2" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209688" type="PinJoint3D" parent="Chain2/ChainLink3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink4" type="RigidBody3D" parent="Chain2" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209689" type="PinJoint3D" parent="Chain2/ChainLink4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink5" type="RigidBody3D" parent="Chain2" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209690" type="PinJoint3D" parent="Chain2/ChainLink5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink6" type="RigidBody3D" parent="Chain2" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209691" type="PinJoint3D" parent="Chain2/ChainLink6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink7" type="RigidBody3D" parent="Chain2" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209692" type="PinJoint3D" parent="Chain2/ChainLink7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink8" type="RigidBody3D" parent="Chain2" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209693" type="PinJoint3D" parent="Chain2/ChainLink8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink9" type="RigidBody3D" parent="Chain2" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209694" type="PinJoint3D" parent="Chain2/ChainLink9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink10" type="RigidBody3D" parent="Chain2" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209695" type="PinJoint3D" parent="Chain2/ChainLink10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink11" type="RigidBody3D" parent="Chain2" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209696" type="PinJoint3D" parent="Chain2/ChainLink11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink12" type="RigidBody3D" parent="Chain2" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209697" type="PinJoint3D" parent="Chain2/ChainLink12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink13" type="RigidBody3D" parent="Chain2" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209698" type="PinJoint3D" parent="Chain2/ChainLink13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink14" type="RigidBody3D" parent="Chain2" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209699" type="PinJoint3D" parent="Chain2/ChainLink14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink15" type="RigidBody3D" parent="Chain2" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209700" type="PinJoint3D" parent="Chain2/ChainLink15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink16" type="RigidBody3D" parent="Chain2" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209701" type="PinJoint3D" parent="Chain2/ChainLink16"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink17" type="RigidBody3D" parent="Chain2" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209702" type="PinJoint3D" parent="Chain2/ChainLink17"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink18" type="RigidBody3D" parent="Chain2" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209703" type="PinJoint3D" parent="Chain2/ChainLink18"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink19" type="RigidBody3D" parent="Chain2" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209704" type="PinJoint3D" parent="Chain2/ChainLink19"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink20" type="RigidBody3D" parent="Chain2" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209705" type="PinJoint3D" parent="Chain2/ChainLink20"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink21" type="RigidBody3D" parent="Chain2" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 22, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209706" type="PinJoint3D" parent="Chain2/ChainLink21"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink22" type="RigidBody3D" parent="Chain2" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 23, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209707" type="PinJoint3D" parent="Chain2/ChainLink22"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink23" type="RigidBody3D" parent="Chain2" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209708" type="PinJoint3D" parent="Chain2/ChainLink23"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink24" type="RigidBody3D" parent="Chain2" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="Chain3" parent="." node_paths=PackedStringArray("_links") instance=ExtResource("6_r1l57")]
+transform = Transform3D(0.679631, -0.520393, 0.517004, -0.708936, -0.647016, 0.280678, 0.188448, -0.55728, -0.808657, -12.2128, 30.2445, -5.74462)
+link_number = 30
+_links = [NodePath("BaseLink"), NodePath("ChainLink0"), NodePath("ChainLink1"), NodePath("ChainLink2"), NodePath("ChainLink3"), NodePath("ChainLink4"), NodePath("ChainLink5"), NodePath("ChainLink6"), NodePath("ChainLink7"), NodePath("ChainLink8"), NodePath("ChainLink9"), NodePath("ChainLink10"), NodePath("@RigidBody3D@209948"), NodePath("@RigidBody3D@209950"), NodePath("@RigidBody3D@209952"), NodePath("@RigidBody3D@209954"), NodePath("@RigidBody3D@209956"), NodePath("@RigidBody3D@209958"), NodePath("@RigidBody3D@209960"), NodePath("@RigidBody3D@209962"), NodePath("@RigidBody3D@209964"), NodePath("@RigidBody3D@209966"), NodePath("@RigidBody3D@209968"), NodePath("@RigidBody3D@209970"), NodePath("@RigidBody3D@209972"), NodePath("@RigidBody3D@209974"), NodePath("@RigidBody3D@209976"), NodePath("ChainLink26"), NodePath("ChainLink27"), NodePath("ChainLink28"), NodePath("ChainLink29")]
+
+[node name="@PinJoint3D@209937" type="PinJoint3D" parent="Chain3/BaseLink" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink0" type="RigidBody3D" parent="Chain3" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209938" type="PinJoint3D" parent="Chain3/ChainLink0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink1" type="RigidBody3D" parent="Chain3" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209939" type="PinJoint3D" parent="Chain3/ChainLink1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink2" type="RigidBody3D" parent="Chain3" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209940" type="PinJoint3D" parent="Chain3/ChainLink2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink3" type="RigidBody3D" parent="Chain3" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209941" type="PinJoint3D" parent="Chain3/ChainLink3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink4" type="RigidBody3D" parent="Chain3" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209942" type="PinJoint3D" parent="Chain3/ChainLink4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink5" type="RigidBody3D" parent="Chain3" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209943" type="PinJoint3D" parent="Chain3/ChainLink5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink6" type="RigidBody3D" parent="Chain3" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209944" type="PinJoint3D" parent="Chain3/ChainLink6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink7" type="RigidBody3D" parent="Chain3" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209945" type="PinJoint3D" parent="Chain3/ChainLink7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink8" type="RigidBody3D" parent="Chain3" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209946" type="PinJoint3D" parent="Chain3/ChainLink8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink9" type="RigidBody3D" parent="Chain3" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209947" type="PinJoint3D" parent="Chain3/ChainLink9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink10" type="RigidBody3D" parent="Chain3" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209949" type="PinJoint3D" parent="Chain3/ChainLink10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@209948" type="RigidBody3D" parent="Chain3" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209951" type="PinJoint3D" parent="Chain3/@RigidBody3D@209948"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@209950" type="RigidBody3D" parent="Chain3" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209953" type="PinJoint3D" parent="Chain3/@RigidBody3D@209950"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@209952" type="RigidBody3D" parent="Chain3" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209955" type="PinJoint3D" parent="Chain3/@RigidBody3D@209952"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@209954" type="RigidBody3D" parent="Chain3" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209957" type="PinJoint3D" parent="Chain3/@RigidBody3D@209954"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@209956" type="RigidBody3D" parent="Chain3" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209959" type="PinJoint3D" parent="Chain3/@RigidBody3D@209956"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@209958" type="RigidBody3D" parent="Chain3" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209961" type="PinJoint3D" parent="Chain3/@RigidBody3D@209958"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@209960" type="RigidBody3D" parent="Chain3" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209963" type="PinJoint3D" parent="Chain3/@RigidBody3D@209960"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@209962" type="RigidBody3D" parent="Chain3" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209965" type="PinJoint3D" parent="Chain3/@RigidBody3D@209962"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@209964" type="RigidBody3D" parent="Chain3" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209967" type="PinJoint3D" parent="Chain3/@RigidBody3D@209964"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@209966" type="RigidBody3D" parent="Chain3" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209969" type="PinJoint3D" parent="Chain3/@RigidBody3D@209966"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@209968" type="RigidBody3D" parent="Chain3" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 22, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209971" type="PinJoint3D" parent="Chain3/@RigidBody3D@209968"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@209970" type="RigidBody3D" parent="Chain3" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 23, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209973" type="PinJoint3D" parent="Chain3/@RigidBody3D@209970"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@209972" type="RigidBody3D" parent="Chain3" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209975" type="PinJoint3D" parent="Chain3/@RigidBody3D@209972"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@209974" type="RigidBody3D" parent="Chain3" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209977" type="PinJoint3D" parent="Chain3/@RigidBody3D@209974"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@209976" type="RigidBody3D" parent="Chain3" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 26, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209978" type="PinJoint3D" parent="Chain3/@RigidBody3D@209976"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink26" type="RigidBody3D" parent="Chain3" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 27, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209979" type="PinJoint3D" parent="Chain3/ChainLink26"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink27" type="RigidBody3D" parent="Chain3" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 28, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209980" type="PinJoint3D" parent="Chain3/ChainLink27"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink28" type="RigidBody3D" parent="Chain3" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 29, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@209981" type="PinJoint3D" parent="Chain3/ChainLink28"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink29" type="RigidBody3D" parent="Chain3" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="Chain4" parent="." node_paths=PackedStringArray("_links") instance=ExtResource("6_r1l57")]
+transform = Transform3D(0.279526, -0.659611, -0.697695, -0.823355, -0.538485, 0.17922, -0.493915, 0.524354, -0.693615, -6.80149, 36.3198, -0.972334)
+link_number = 40
+_links = [NodePath("BaseLink"), NodePath("ChainLink0"), NodePath("ChainLink1"), NodePath("ChainLink2"), NodePath("ChainLink3"), NodePath("@RigidBody3D@210238"), NodePath("@RigidBody3D@210240"), NodePath("@RigidBody3D@210242"), NodePath("@RigidBody3D@210244"), NodePath("@RigidBody3D@210246"), NodePath("@RigidBody3D@210248"), NodePath("@RigidBody3D@210250"), NodePath("ChainLink11"), NodePath("ChainLink12"), NodePath("ChainLink13"), NodePath("ChainLink14"), NodePath("ChainLink15"), NodePath("ChainLink16"), NodePath("ChainLink17"), NodePath("ChainLink18"), NodePath("ChainLink19"), NodePath("ChainLink20"), NodePath("ChainLink21"), NodePath("ChainLink22"), NodePath("ChainLink23"), NodePath("ChainLink24"), NodePath("ChainLink25"), NodePath("@RigidBody3D@210267"), NodePath("@RigidBody3D@210269"), NodePath("@RigidBody3D@210271"), NodePath("@RigidBody3D@210273"), NodePath("ChainLink30"), NodePath("ChainLink31"), NodePath("ChainLink32"), NodePath("ChainLink33"), NodePath("ChainLink34"), NodePath("ChainLink35"), NodePath("ChainLink36"), NodePath("ChainLink37"), NodePath("ChainLink38"), NodePath("ChainLink39")]
+
+[node name="@PinJoint3D@210234" type="PinJoint3D" parent="Chain4/BaseLink" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink0" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210235" type="PinJoint3D" parent="Chain4/ChainLink0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink1" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210236" type="PinJoint3D" parent="Chain4/ChainLink1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink2" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210237" type="PinJoint3D" parent="Chain4/ChainLink2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink3" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210239" type="PinJoint3D" parent="Chain4/ChainLink3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@210238" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210241" type="PinJoint3D" parent="Chain4/@RigidBody3D@210238"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@210240" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210243" type="PinJoint3D" parent="Chain4/@RigidBody3D@210240"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@210242" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210245" type="PinJoint3D" parent="Chain4/@RigidBody3D@210242"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@210244" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210247" type="PinJoint3D" parent="Chain4/@RigidBody3D@210244"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@210246" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210249" type="PinJoint3D" parent="Chain4/@RigidBody3D@210246"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@210248" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210251" type="PinJoint3D" parent="Chain4/@RigidBody3D@210248"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@210250" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210252" type="PinJoint3D" parent="Chain4/@RigidBody3D@210250"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink11" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210253" type="PinJoint3D" parent="Chain4/ChainLink11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink12" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210254" type="PinJoint3D" parent="Chain4/ChainLink12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink13" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210255" type="PinJoint3D" parent="Chain4/ChainLink13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink14" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210256" type="PinJoint3D" parent="Chain4/ChainLink14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink15" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210257" type="PinJoint3D" parent="Chain4/ChainLink15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink16" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210258" type="PinJoint3D" parent="Chain4/ChainLink16"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink17" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210259" type="PinJoint3D" parent="Chain4/ChainLink17"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink18" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210260" type="PinJoint3D" parent="Chain4/ChainLink18"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink19" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210261" type="PinJoint3D" parent="Chain4/ChainLink19"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink20" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210262" type="PinJoint3D" parent="Chain4/ChainLink20"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink21" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 22, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210263" type="PinJoint3D" parent="Chain4/ChainLink21"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink22" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 23, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210264" type="PinJoint3D" parent="Chain4/ChainLink22"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink23" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210265" type="PinJoint3D" parent="Chain4/ChainLink23"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink24" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210266" type="PinJoint3D" parent="Chain4/ChainLink24"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink25" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 26, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210268" type="PinJoint3D" parent="Chain4/ChainLink25"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@210267" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 27, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210270" type="PinJoint3D" parent="Chain4/@RigidBody3D@210267"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@210269" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 28, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210272" type="PinJoint3D" parent="Chain4/@RigidBody3D@210269"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@210271" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 29, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210274" type="PinJoint3D" parent="Chain4/@RigidBody3D@210271"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="@RigidBody3D@210273" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210275" type="PinJoint3D" parent="Chain4/@RigidBody3D@210273"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink30" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 31, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210276" type="PinJoint3D" parent="Chain4/ChainLink30"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink31" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 32, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210277" type="PinJoint3D" parent="Chain4/ChainLink31"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink32" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 33, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210278" type="PinJoint3D" parent="Chain4/ChainLink32"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink33" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 34, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210279" type="PinJoint3D" parent="Chain4/ChainLink33"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink34" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 35, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210280" type="PinJoint3D" parent="Chain4/ChainLink34"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink35" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 36, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210281" type="PinJoint3D" parent="Chain4/ChainLink35"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink36" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 37, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210282" type="PinJoint3D" parent="Chain4/ChainLink36"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink37" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 38, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210283" type="PinJoint3D" parent="Chain4/ChainLink37"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink38" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 39, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
+
+[node name="@PinJoint3D@210284" type="PinJoint3D" parent="Chain4/ChainLink38"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ChainLink39" type="RigidBody3D" parent="Chain4" instance=ExtResource("6_h813j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 40, 0)
+mass = 10.0
+script = ExtResource("7_c0305")
 
 [editable path="Pickables/StaticBody3D/Table"]
+[editable path="Chain"]
+[editable path="CenterPointCamera"]
+[editable path="Chain2"]
+[editable path="Chain3"]
+[editable path="Chain4"]

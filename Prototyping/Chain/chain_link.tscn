@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dlicqbvk6hpq6"]
+
+[ext_resource type="Script" uid="uid://crx0gwxvxg6yv" path="res://Prototyping/Chain/chain_link.gd" id="1_q674b"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_t1yhs"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_q674b"]
+
+[node name="ChainLink" type="RigidBody3D"]
+mass = 10.0
+script = ExtResource("1_q674b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_t1yhs")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_q674b")

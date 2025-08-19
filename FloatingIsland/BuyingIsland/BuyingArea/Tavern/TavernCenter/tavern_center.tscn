@@ -32,6 +32,7 @@ skeleton = NodePath("")
 
 [node name="DebugVisualPlace" type="MeshInstance3D" parent="DebugVisualPlace"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+visible = false
 material_override = SubResource("StandardMaterial3D_h5ieb")
 mesh = SubResource("BoxMesh_iowfl")
 skeleton = NodePath("")
