@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://bd30qmtgnma2p"]
+[gd_scene load_steps=16 format=3 uid="uid://bd30qmtgnma2p"]
 
 [ext_resource type="Script" uid="uid://d30k2yor5okgu" path="res://Prototyping/Camera/prototyping_camera.gd" id="1_t812x"]
 [ext_resource type="PackedScene" uid="uid://bg5efhnq0erdv" path="res://Modules/PickableClickable/ClickableModule/clickable_module.tscn" id="3_25bs0"]
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://Modules/PickableClickable/PickableModule/pickable_module.tscn" id="4_jy07b"]
+[ext_resource type="PackedScene" uid="uid://dpm8jqxh45q3x" path="res://VFX/Proto/Chain/chainon.tscn" id="5_r1l57"]
 [ext_resource type="PackedScene" uid="uid://dumhxpaktew01" path="res://Data/Assets/3D/Furnitures/table.tscn" id="5_vrfg7"]
-[ext_resource type="PackedScene" uid="uid://bxlnf4tyuq8uu" path="res://Modules/PickableClickable/ClickerModule/clicker_module.tscn" id="6_vrfg7"]
+[ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="6_vrfg7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t812x"]
 
@@ -32,9 +33,9 @@ material = SubResource("StandardMaterial3D_c0305")
 [sub_resource type="BoxShape3D" id="BoxShape3D_vrfg7"]
 size = Vector3(1, 0.863037, 2.28625)
 
-[node name="PrototypingCamera" type="Node3D" node_paths=PackedStringArray("_clicker_module")]
+[node name="PrototypingCamera" type="Node3D" node_paths=PackedStringArray("_center_point_camera")]
 script = ExtResource("1_t812x")
-_clicker_module = NodePath("Camera3D/ClickerModule")
+_center_point_camera = NodePath("CenterPointCamera")
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.5, 0)
@@ -89,7 +90,7 @@ _owner = NodePath("..")
 
 [node name="PickableA2" type="StaticBody3D" parent="Pickables"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.17351)
-collision_layer = 16
+collision_layer = 17
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Pickables/PickableA2"]
 mesh = SubResource("BoxMesh_ttdeo")
@@ -119,11 +120,10 @@ _nodes_where_to_find_meshs = [NodePath("../Table")]
 _owner = NodePath("..")
 _scale_div_grow = 0.01
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.862337, 0.506335, 0, -0.506335, 0.862337, 0, 5.24264, 9.43435)
-fov = 40.0
+[node name="CenterPointCamera" parent="." instance=ExtResource("6_vrfg7")]
+_zoom_sensitivity = 1.0
 
-[node name="ClickerModule" parent="Camera3D" node_paths=PackedStringArray("_camera") instance=ExtResource("6_vrfg7")]
-_camera = NodePath("..")
+[node name="Chain" parent="." instance=ExtResource("5_r1l57")]
+transform = Transform3D(1, 0, 0, 0, 0.849119, 0.528201, 0, -0.528201, 0.849119, 1.17095, 1.24643, 0.400547)
 
 [editable path="Pickables/StaticBody3D/Table"]
