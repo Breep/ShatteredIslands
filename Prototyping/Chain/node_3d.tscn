@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://bampl685bak7y"]
+
+[sub_resource type="Environment" id="Environment_huss8"]
+background_mode = 1
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.895227, -0.0705539, 0.43999, -0.0696188, 0.953117, 0.294485, -0.440139, -0.294263, 0.848344, 1.63332, 2.09023, 1.78185)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.753953, 0.656928, 0, -0.656928, 0.753953, 0, 1.82271, 2.75224)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_huss8")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.282823, 0)
+
+[node name="CSGTorus3D" type="CSGTorus3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0410004, 0.558577, -0.127012)
+use_collision = true
+inner_radius = 0.763
+
+[node name="CSGTorus3D2" type="CSGTorus3D" parent="Node3D"]
+transform = Transform3D(-0.0038921, 0.999992, 0, -0.999992, -0.0038921, 0, 0, 0, 1, 0.0410004, 0.558577, -1.06829)
+use_collision = true
+inner_radius = 0.763

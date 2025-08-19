@@ -1,0 +1,2 @@
+class_name BaseLink
+extends StaticBody3D
