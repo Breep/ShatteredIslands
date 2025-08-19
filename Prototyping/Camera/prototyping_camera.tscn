@@ -119,6 +119,9 @@ _nodes_where_to_find_meshs = [NodePath("../Table")]
 _owner = NodePath("..")
 _scale_div_grow = 0.01
 
+[node name="PickableModule" parent="Pickables/StaticBody3D" node_paths=PackedStringArray("_owner") instance=ExtResource("4_jy07b")]
+_owner = NodePath("..")
+
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.862337, 0.506335, 0, -0.506335, 0.862337, 0, 5.24264, 9.43435)
 fov = 40.0
