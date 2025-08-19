@@ -11,11 +11,8 @@ const CARDS_PER_CARDS3D: int = 1 # Number of cards that represent a 3d card
 
 # ============================== Private variables ==============================
 
-var _rng: RandomNumberGenerator
-
 func _ready() -> void:
-	_rng = RandomNumberGenerator.new()
-	_rng.randomize()
+	connect_to_shop_deck()
 
 var _card_tower_family_ref: Dictionary[Family.FamilyType, CardTower]
 

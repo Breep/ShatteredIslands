@@ -32,6 +32,11 @@ func _ready() -> void:
 
 # ============================== Public functions ==============================
 
+func update_mesh(nodes_where_to_find_meshs: Array[Node3D]) -> void:
+	_nodes_where_to_find_meshs = nodes_where_to_find_meshs
+	_meshs.clear()
+	_init_meshs()
+
 func focus() -> void:
 	if _is_focused or focus_locked: return
 	_is_focused = true
@@ -45,6 +50,7 @@ func unfocus() -> void:
 
 
 func select() -> void:
+	print("DEBUG - SELECT")
 	if _is_selected or select_locked: return
 	_is_selected = true
 	Events.signal_clickable_cliked(_owner)

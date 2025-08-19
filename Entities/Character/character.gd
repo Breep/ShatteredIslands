@@ -63,6 +63,9 @@ var _hero_id := Hero.HeroId.UNDEF
 @export var _attack_manager: AttackManager
 @export var _defense_manager: DefenseManager
 
+@export_group("Modules")
+@export var _clickable_module: ClickableModule
+
 # ============================== Public variables ==============================
 
 var player: Player
@@ -197,6 +200,7 @@ func _update_hero() -> void:
 	var hero_height: float = (_collision_shape.shape as CapsuleShape3D).height
 	_character_visual.position.y = hero_height + 1
 	add_child(_hero_3D)
+	_clickable_module.update_mesh([_hero_3D])
 
 # ============================== Private ==============================
 

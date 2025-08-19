@@ -25,7 +25,7 @@ var _rng := RandomNumberGenerator.new()
 
 # ============================== Preload ==============================
 
-@onready var _card_scene: PackedScene = preload("res://Card/3D/Card3D/card_3d.tscn")
+var _card_scene: PackedScene = preload("res://Card/3D/Card3D/card_3d.tscn")
 
 # ============================== Node base functions ==============================
 
@@ -37,6 +37,12 @@ func _ready() -> void:
 # ============================== Private functions ==============================
 
 func _update_visual(new_cards_number) -> void:
+	if not is_node_ready(): return
+	
+	if _card_scene == null:
+		printerr("CoinTower: Trying to update visual but the card3D isn't loaded yet")
+		return
+	
 	if new_cards_number < 0:
 		printerr("CoinTower: Can't have less than 0 cards in the tower")
 		return

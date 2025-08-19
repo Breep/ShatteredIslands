@@ -40,7 +40,7 @@ properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 2
 
-[node name="Character" type="CharacterBody3D" node_paths=PackedStringArray("_movement_synchronizer", "_character_visual", "_character_logic", "_turret", "_collision_shape", "_interact_module", "_action_module", "families_stats", "_attack_manager", "_defense_manager", "stats")]
+[node name="Character" type="CharacterBody3D" node_paths=PackedStringArray("_movement_synchronizer", "_character_visual", "_character_logic", "_turret", "_collision_shape", "_interact_module", "_action_module", "families_stats", "_attack_manager", "_defense_manager", "_clickable_module", "stats")]
 collision_layer = 16
 collision_mask = 16
 motion_mode = 1
@@ -55,6 +55,7 @@ _action_module = NodePath("CharacterLogic/Modules/ActionModule")
 families_stats = NodePath("FamiliesStats")
 _attack_manager = NodePath("CharacterLogic/FamiliesManagers/AttackManager")
 _defense_manager = NodePath("CharacterLogic/FamiliesManagers/DefenseManager")
+_clickable_module = NodePath("ClickableModule")
 stats = NodePath("EntityStats")
 
 [node name="CharacterVisual" parent="." node_paths=PackedStringArray("_owner_entity") instance=ExtResource("2_xasj2")]
