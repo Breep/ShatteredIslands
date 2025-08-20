@@ -235,7 +235,7 @@ draw_pass_1 = SubResource("QuadMesh_051lk")
 
 [node name="Smoke" type="GPUParticles3D" parent="Fire"]
 material_override = SubResource("ShaderMaterial_x5mq0")
-amount = 15
+amount = 4
 lifetime = 1.6
 randomness = 0.1
 process_material = SubResource("ParticleProcessMaterial_4fhc0")

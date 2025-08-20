@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://gbmiuhc63ji7"]
+[gd_scene load_steps=21 format=4 uid="uid://gbmiuhc63ji7"]
 
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="2_2lp7i"]
 [ext_resource type="PackedScene" uid="uid://bn7sfcotfnn7b" path="res://UI/Menu/MainMenu/ui_main_menu.tscn" id="2_8c8b4"]
@@ -17,8 +17,6 @@
 [ext_resource type="AudioStream" uid="uid://buiooajmh742s" path="res://Data/Sounds/tavern_ambience_inside_laughter-73008.mp3" id="13_h47y2"]
 [ext_resource type="AudioStream" uid="uid://cm1soq1vpv5y4" path="res://Data/Musics/the_tavern.mp3" id="14_aouoj"]
 [ext_resource type="Texture2D" uid="uid://wbrwetv4d7je" path="res://Data/Blender/Map/Map/Tavern/tavern_spec.png" id="16_thayi"]
-
-[sub_resource type="Environment" id="Environment_8c8b4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vhqui"]
 resource_name = "Wood Floor"
@@ -76,9 +74,6 @@ _hover_power = 0.05
 _hover_period = 10.0
 
 [node name="UIMainMenu" parent="." instance=ExtResource("2_8c8b4")]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_8c8b4")
 
 [node name="VillageSound" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.087, 0, -26.2006)

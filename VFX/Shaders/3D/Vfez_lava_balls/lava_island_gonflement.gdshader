@@ -22,7 +22,7 @@ float noise(vec3 p) {
     float n101 = rand(i + vec3(1.0, 0.0, 1.0));
     float n110 = rand(i + vec3(1.0, 1.0, 0.0));
     float n111 = rand(i + vec3(1.0, 1.0, 1.0));
-    
+
     return mix(
         mix(mix(n000, n100, f.x), mix(n010, n110, f.x), f.y),
         mix(mix(n001, n101, f.x), mix(n011, n111, f.x), f.y),
@@ -32,12 +32,12 @@ float noise(vec3 p) {
 
 void vertex() {
     float time = TIME * speed;
-    
+
     float noise_val = noise(VERTEX * noise_scale + time);
-    
+
     float pulse = abs(sin(time * pulse_frequency + noise_val * 10.0));
     pulse = pow(pulse, sharpness);
-    
+
     float displacement = amplitude * noise_val * pulse;
 
     VERTEX += NORMAL * displacement;
