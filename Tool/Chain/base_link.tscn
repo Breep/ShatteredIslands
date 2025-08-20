@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://bdgq2v87slsr3"]
+
+[ext_resource type="Script" uid="uid://bvpjyhx64m701" path="res://Tool/Chain/base_link.gd" id="1_epvxm"]
+[ext_resource type="PackedScene" uid="uid://bd1nrt4n7dpsk" path="res://Tool/Chain/metal_chain_link_model.tscn" id="2_x4n6v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bh4d0"]
+albedo_color = Color(0.882597, 0, 0.36956, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_bh4d0"]
+material = SubResource("StandardMaterial3D_bh4d0")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_epvxm"]
+
+[node name="BaseLink" type="RigidBody3D"]
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_y = true
+script = ExtResource("1_epvxm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_bh4d0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_epvxm")
+
+[node name="MetalChainLinkModel" parent="." instance=ExtResource("2_x4n6v")]
+transform = Transform3D(12.055, 0, 0, 0, 12.055, 0, 0, 0, 12.055, 0, 0, 0)
+visible = false
