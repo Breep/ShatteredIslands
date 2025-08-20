@@ -148,6 +148,7 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 
 [node name="ImpactEffectArea" type="Area3D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 16
 monitorable = false

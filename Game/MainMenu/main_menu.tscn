@@ -65,7 +65,7 @@ shadow_mesh = SubResource("ArrayMesh_frsg7")
 [node name="MainMenu" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.78482, -0.0840098, 0.614004, 1.86265e-09, 0.990769, 0.13556, -0.619724, -0.10639, 0.777575, 12.5115, 1.68746, 16.1699)
+transform = Transform3D(0.78482, -0.0840097, 0.614003, 1.86265e-09, 0.990769, 0.13556, -0.619724, -0.10639, 0.777575, 12.5115, 4.46165, 16.1699)
 fov = 35.0
 
 [node name="AnimHoveringModule" parent="Camera3D" node_paths=PackedStringArray("_owner") instance=ExtResource("2_2lp7i")]

@@ -17,7 +17,7 @@ var _damage_per_stacks: int
 @onready var _impact_effect_area_visual: MeshInstance3D = %ImpactEffectAreaVisualBackground
 @onready var _meteor_visual: Node3D = %MeteorVisual
 @onready var anim_player = %AnimationPlayer
-@onready var hit_marker_scene = preload("res://VFX/VFX_3D/Hit_marker/vfx_hit_meteor.tscn")
+@onready var hit_marker_scene = preload("res://VFX/VFX_3D/Explosion/Scenes/VFX_Explosion_B.tscn")
 
 #target, source, ignite_stacks, damage_per_stacks, radius
 func init(target: Entity, ignite_stacks: int, damage_per_stacks: int, source: Entity = null) -> void:
@@ -64,6 +64,9 @@ func _on_deploy_timer_timeout() -> void:
 	var hit_marker : Node3D = hit_marker_scene.instantiate()
 	get_tree().current_scene.add_child(hit_marker)
 	hit_marker.global_position = global_position
+	var anim_player: AnimationPlayer = hit_marker.get_node("AnimationPlayer")
+	if anim_player:
+		anim_player.play("Init")
 	queue_free()
 	if not multiplayer.is_server(): return
 	
