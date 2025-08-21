@@ -1,8 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://c6hrhnld0nlpl"]
+[gd_scene load_steps=12 format=3 uid="uid://c6hrhnld0nlpl"]
 
 [ext_resource type="Script" uid="uid://c8alyo5som56r" path="res://UI/Menu/PlayMenu/ui_play_menu.gd" id="1_ae5as"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="2_0s0ho"]
 [ext_resource type="Texture2D" uid="uid://xhyj0k42ilb3" path="res://UI/_Themes/Data/panel_tileable_20px_border_only.png" id="3_0s0ho"]
+[ext_resource type="Texture2D" uid="uid://db2m1yw0asd6l" path="res://UI/_Themes/Data/cross.png" id="4_rp0om"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_l0ee0"]
+texture = ExtResource("3_0s0ho")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="Theme" id="Theme_uc0fp"]
+Panel/styles/panel = SubResource("StyleBoxTexture_l0ee0")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0s0ho"]
 texture = ExtResource("3_0s0ho")
@@ -16,95 +29,104 @@ axis_stretch_vertical = 1
 [sub_resource type="Theme" id="Theme_3htyq"]
 Panel/styles/panel = SubResource("StyleBoxTexture_0s0ho")
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_37vaa"]
+texture = ExtResource("3_0s0ho")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="Theme" id="Theme_agysy"]
+Panel/styles/panel = SubResource("StyleBoxTexture_37vaa")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w8u3q"]
+
 [node name="PlayMenu" type="Control"]
+custom_minimum_size = Vector2(700, 500)
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_0s0ho")
 script = ExtResource("1_ae5as")
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="MainPanel" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_type_variation = &"card"
 
-[node name="Panel2" type="Panel" parent="CenterContainer"]
-custom_minimum_size = Vector2(500, 400)
-layout_mode = 2
-theme = ExtResource("2_0s0ho")
-
-[node name="SubPlayMenu" type="MarginContainer" parent="CenterContainer/Panel2"]
-unique_name_in_owner = true
+[node name="PanelBorder" type="Panel" parent="MainPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+mouse_filter = 2
+theme = SubResource("Theme_uc0fp")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Panel2/SubPlayMenu"]
+[node name="SubPlayMenu" type="MarginContainer" parent="MainPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/SubPlayMenu"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainPanel/SubPlayMenu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.2
-theme_override_font_sizes/font_size = 50
-text = "PLAY"
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_constants/separation = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 10
 
-[node name="InfoPanel" type="Panel" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="InfoPanel" type="Panel" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/InfoPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/InfoPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/InfoPanel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/InfoPanel/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/InfoPanel/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/InfoPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
 text = "Hello there !
 Welcome in the tournament
 of the Shattered Islands !"
 
-[node name="BackButton" type="Button" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/InfoPanel/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.2
-text = "BACK"
-
-[node name="PanelBorder" type="Panel" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/InfoPanel"]
+[node name="PanelBorder" type="Panel" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/InfoPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -114,39 +136,40 @@ grow_vertical = 2
 mouse_filter = 2
 theme = SubResource("Theme_3htyq")
 
-[node name="SoloPanel" type="Panel" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="SoloPanel" type="Panel" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/SoloPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/SoloPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/SoloPanel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/SoloPanel/MarginContainer"]
 layout_mode = 2
 
-[node name="SoloLabel" type="Label" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/SoloPanel/MarginContainer/VBoxContainer"]
+[node name="SoloLabel" type="Label" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/SoloPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 50
 text = "SOLO"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StartSoloButton" type="Button" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/SoloPanel/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
+[node name="StartSoloButton" type="Button" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/SoloPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 25
 text = "START GAME"
 
-[node name="PanelBorder" type="Panel" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/SoloPanel"]
+[node name="PanelBorder" type="Panel" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/SoloPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -156,86 +179,83 @@ grow_vertical = 2
 mouse_filter = 2
 theme = SubResource("Theme_3htyq")
 
-[node name="OnlinePanel" type="Panel" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer"]
+[node name="OnlinePanel" type="Panel" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_0s0ho")
 
-[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel"]
+[node name="MarginContainer" type="MarginContainer" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer"]
 layout_mode = 2
 
-[node name="OnlineLabel" type="Label" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer"]
+[node name="OnlineLabel" type="Label" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "ONLINE"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlayerNameLabel" type="Label" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="PlayerNameLabel" type="Label" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Player Name"
 
-[node name="PlayerNameEdit" type="LineEdit" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
+[node name="PlayerNameEdit" type="LineEdit" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Breep"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ServerIPLabel" type="Label" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="ServerIPLabel" type="Label" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 text = "Server IP"
 
-[node name="ServerIPEdit" type="LineEdit" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer/HBoxContainer2"]
-unique_name_in_owner = true
+[node name="ServerIPEdit" type="LineEdit" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "127.0.0.1"
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ServerPortLabel" type="Label" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer/HBoxContainer3"]
+[node name="ServerPortLabel" type="Label" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 text = "Server Port"
 
-[node name="ServerPortEdit" type="LineEdit" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer/HBoxContainer3"]
-unique_name_in_owner = true
+[node name="ServerPortEdit" type="LineEdit" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "4242"
 
-[node name="JoinButton" type="Button" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
+[node name="JoinButton" type="Button" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
+mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 50
 text = "JOIN"
 
-[node name="PanelBorder" type="Panel" parent="CenterContainer/Panel2/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel"]
+[node name="PanelBorder" type="Panel" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -245,8 +265,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme = SubResource("Theme_3htyq")
 
-[node name="ClientMessage" type="Label" parent="CenterContainer/Panel2"]
-unique_name_in_owner = true
+[node name="ClientMessage" type="Label" parent="MainPanel"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -255,11 +274,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 30
+text = "Client Message"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="PanelBorder" type="Panel" parent="CenterContainer/Panel2"]
+[node name="PanelBorder2" type="Panel" parent="MainPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -268,3 +288,91 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme = SubResource("Theme_3htyq")
+
+[node name="TitlePanel" type="Panel" parent="."]
+custom_minimum_size = Vector2(300, 70)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = -35.0
+offset_right = 150.0
+offset_bottom = 35.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="TitlePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "PLAY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelBorder" type="Panel" parent="TitlePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_agysy")
+
+[node name="ClosePanel" type="Panel" parent="."]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -45.0
+offset_top = -15.0
+offset_right = 15.0
+offset_bottom = 45.0
+grow_horizontal = 0
+
+[node name="TextureRect" type="TextureRect" parent="ClosePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_rp0om")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CloseButton" type="Button" parent="ClosePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_w8u3q")
+
+[node name="PanelBorder" type="Panel" parent="ClosePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_agysy")
+
+[connection signal="pressed" from="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/SoloPanel/MarginContainer/VBoxContainer/StartSoloButton" to="." method="_on_start_solo_button_pressed"]
+[connection signal="pressed" from="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/OnlinePanel/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="ClosePanel/CloseButton" to="." method="_on_close_button_pressed"]

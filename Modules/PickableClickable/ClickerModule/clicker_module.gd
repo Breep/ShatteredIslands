@@ -114,7 +114,6 @@ func _handle_clickable_select(event: InputEvent) -> void:
 			_clickable_selected = _clickable_overing
 			_clickable_selected_module = _clickable_overing_module
 		if _clickable_overing == null:
-			print("DEBUG -> CLICKED ON NOTHING")
 			Events.signal_nothing_clicked()
 
 

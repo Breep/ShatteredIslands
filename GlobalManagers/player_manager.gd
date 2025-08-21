@@ -34,6 +34,7 @@ signal player_added(peer_id: int)
 signal player_removed(peer_id: int)
 
 signal _join_server_answered()
+var _join_server_has_answered: bool
 var _join_server_response: bool
 var _join_server_reason: String
 
@@ -43,7 +44,7 @@ var _join_server_reason: String
 
 func get_local_player() -> Player:
 	if not players.has(multiplayer.get_unique_id()):
-		printerr(" No local player for player_id=", multiplayer.get_unique_id())
+		printerr("PlayerManager: No local player for player_id=", multiplayer.get_unique_id())
 		return null
 	return players[multiplayer.get_unique_id()]
 
@@ -66,13 +67,15 @@ func get_human_players() -> Dictionary[int, Player]:
 
 
 func join_game(peer_id: int, player_name: String) -> Dictionary:
-	if multiplayer.is_server():
+	if multiplayer.is_server() and GameManager.game_type != GameManager.GameType.SOLO:
 		printerr("PlayerManager: Server can't be a player")
 		return {JoinGameKeys.RESPONSE: false, JoinGameKeys.REASON: "Server can't be a player"}
 	
 	_ask_join_game.rpc_id(1, peer_id, player_name)
-	await _join_server_answered
+	if not _join_server_has_answered:
+		await _join_server_answered
 	
+	_join_server_has_answered = false
 	if _join_server_response == true:
 		return {JoinGameKeys.RESPONSE: true, JoinGameKeys.REASON: "OK"}
 	else:
@@ -129,7 +132,7 @@ func _all_clients_ready(sync_id: int) -> void:
 
 # ============================== RPC - Ask/Answer Join game ==============================
 
-@rpc("any_peer", "call_remote")
+@rpc("any_peer", "call_local")
 func _ask_join_game(peer_id: int, player_name: String) -> void:
 	if not multiplayer.is_server():
 		printerr("PlayerManager: Only the server should be asked to join the game")
@@ -154,10 +157,11 @@ func _ask_join_game(peer_id: int, player_name: String) -> void:
 	_add_player(player_name, peer_id, false, {})
 
 
-@rpc("authority", "call_remote")
+@rpc("authority", "call_local")
 func _answer_join_game(response: int, reason: String) -> void:
 	_join_server_response = response
 	_join_server_reason = reason
+	_join_server_has_answered = true
 	_join_server_answered.emit()
 
 # ============================== Private functions ==============================

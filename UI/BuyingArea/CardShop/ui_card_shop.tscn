@@ -16,7 +16,7 @@ light_mode = 1
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1gnrk"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_l0ee0"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ahun0"]
 texture = ExtResource("3_l0ee0")
 texture_margin_left = 20.0
 texture_margin_top = 20.0
@@ -26,7 +26,7 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
 [sub_resource type="Theme" id="Theme_mn8ci"]
-Panel/styles/panel = SubResource("StyleBoxTexture_l0ee0")
+Panel/styles/panel = SubResource("StyleBoxTexture_ahun0")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_37vaa"]
 texture = ExtResource("3_l0ee0")
@@ -420,8 +420,6 @@ grow_vertical = 2
 mouse_filter = 2
 theme = SubResource("Theme_mn8ci")
 
-[node name="CardShop" parent="." instance=ExtResource("9_ahun0")]
-
 [node name="TitlePanel" type="Panel" parent="."]
 custom_minimum_size = Vector2(300, 70)
 layout_mode = 1
@@ -505,5 +503,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme = SubResource("Theme_1gnrk")
+
+[node name="CardShop" parent="." instance=ExtResource("9_ahun0")]
 
 [connection signal="pressed" from="ClosePanel/CloseButton" to="." method="_on_close_button_pressed"]

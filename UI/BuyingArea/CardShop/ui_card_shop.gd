@@ -59,6 +59,7 @@ func _on_card_shop_button_pressed(card_button_selected: CardButton, card: Card) 
 
 
 func _on_card_shop_shop_refreshed(new_cards: Array[Card]) -> void:
+	print("REFRESH CARD SHOP VISUAL")
 	_update_shop_cards_displayed_visual(new_cards)
 
 

@@ -1,10 +1,6 @@
 class_name UIPlayMenu
 extends Control
 
-@onready var _back_button: Button = %BackButton
-@onready var _join_button: Button = %JoinButton
-@onready var _start_solo_button: Button = %StartSoloButton
-
 @onready var _player_name_edit: LineEdit = %PlayerNameEdit
 @onready var _server_ip_edit: LineEdit = %ServerIPEdit
 @onready var _server_port_edit: LineEdit = %ServerPortEdit
@@ -15,15 +11,9 @@ extends Control
 
 func _ready() -> void:
 	hide()
-	_back_button.pressed.connect(_on_back_button_pressed)
-	_join_button.pressed.connect(_on_join_button_pressed)
-	
+
 	multiplayer.connected_to_server.connect(_on_connected_to_server)
 	multiplayer.connection_failed.connect(_on_connection_failed)
-
-
-func _on_back_button_pressed() -> void:
-	hide()
 
 
 func _on_join_button_pressed() -> void:
@@ -54,3 +44,11 @@ func _on_connected_to_server():
 func _on_connection_failed() -> void:
 	_sub_play_menu.show()
 	_client_message.hide()
+
+
+func _on_close_button_pressed() -> void:
+	hide()
+
+
+func _on_start_solo_button_pressed() -> void:
+	GameManager.start_solo_game()

@@ -1,13 +1,12 @@
 extends Node2D
-# Global Singleton
 
-# =============================================================
-# =============================================================
-# ====================                     ====================
-# ====================     GameManager     ====================
-# ====================                     ====================
-# =============================================================
-# =============================================================
+# ============================== Enum ==============================
+
+enum GameType {
+	UNDEF,
+	SOLO,
+	MULTIPLAYER
+}
 
 # ============================== Constants ==============================
 
@@ -17,6 +16,10 @@ const HEROES_NUMBER: int = 8
 
 var game_rules: GameRules
 var active_families_type: Array[Family.FamilyType]
+
+var _game_type: GameType
+var game_type: GameType:
+	get: return _game_type
 
 # ============================== Private variables ==============================
 
@@ -50,6 +53,18 @@ func _ready() -> void:
 
 # ============================== Public function ==============================
 
+func start_solo_game() -> void:
+	print("START SOLO GAME 1")
+	_game_type = GameType.SOLO
+	for i in 7:
+		PlayerManager.add_bot()
+	PlayerManager.join_game(1, "Breepsolo")
+	print("START SOLO GAME 2")
+	start_game()
+	# Ajouter un boolean quelque part qui bypass les restrictions serveurs sur certaines UI
+	pass
+
+
 func get_current_game_heroes() -> Array[Hero]:
 	if multiplayer.is_server():
 		_init_current_current_game_heroes(HEROES_NUMBER)
@@ -66,10 +81,12 @@ func get_current_game_heroes() -> Array[Hero]:
 
 @rpc("any_peer", "call_local")
 func start_game() -> void:
+	print("START GAME 1")
 	MultiplayerDeckManager.init_cards_ref(_active_families, game_rules)
 	if multiplayer.is_server():
 		MultiplayerDeckManager.construct_shop_deck(_active_families, game_rules)
 	
+	print("START GAME 2")
 	get_tree().change_scene_to_packed(_game_scene)
 
 

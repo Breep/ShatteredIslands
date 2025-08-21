@@ -50,7 +50,6 @@ func unfocus() -> void:
 
 
 func select() -> void:
-	print("DEBUG - SELECT")
 	if _is_selected or select_locked: return
 	_is_selected = true
 	Events.signal_clickable_cliked(_owner)
