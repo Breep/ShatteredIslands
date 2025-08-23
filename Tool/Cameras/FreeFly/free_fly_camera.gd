@@ -1,9 +1,23 @@
+class_name FreeFlyCamera
 extends Camera3D
 
 @export var _move_speed: float = 25.0
 @export var _look_sensitivity: float = 0.2
 
 var _is_active: bool = false
+
+func set_active() -> void:
+	if _is_active == true: return
+	_is_active = true
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	make_current()
+
+
+func set_inactive() -> void:
+	if _is_active == false: return
+	_is_active = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
 
 func _input(event):
 	if not _is_active: return

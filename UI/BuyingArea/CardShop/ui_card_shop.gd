@@ -17,6 +17,10 @@ signal card_bought(card: Card)
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
+	if GameManager.game_type != GameManager.GameType.SOLO and multiplayer.is_server():
+		queue_free()
+		return
+	
 	_local_player = PlayerManager.get_local_player()
 	_card_shop.player = _local_player
 	
@@ -59,6 +63,7 @@ func _on_card_shop_button_pressed(card_button_selected: CardButton, card: Card) 
 
 
 func _on_card_shop_shop_refreshed(new_cards: Array[Card]) -> void:
+	print("REFRESH CARD SHOP VISUAL")
 	_update_shop_cards_displayed_visual(new_cards)
 
 

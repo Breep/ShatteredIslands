@@ -20,8 +20,10 @@ enum EconomyStrategy {
 	WASTER, # Spend all its money each turn
 }
 
+
 func _enter_tree() -> void:
 	_card_shop.player = player
+
 
 func _ready() -> void:
 	if player == null:

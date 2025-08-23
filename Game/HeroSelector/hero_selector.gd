@@ -39,6 +39,9 @@ func start() -> void:
 	_ui_hero_picking_screen.show()
 	_ui_hero_picking_screen.update_heroes(heroes)
 	
+	if GameManager.game_type == GameManager.GameType.SOLO:
+		_ui_hero_picking_screen.open_hero_selection()
+	
 	_start_multiple_hero_selection_behaviour()
 
 # ============================== Private functions ==============================
@@ -115,7 +118,6 @@ func _pick_hero_unique(player_id: int, hero_id: Hero.HeroId) -> void:
 # ============================== Callbacks ==============================
 
 func _on_ui_hero_picking_screen_hero_locked(hero: Hero) -> void:
-	if multiplayer.is_server(): return
 	if _selection_type == SelectionType.UNIQUE:
 		_pick_hero_unique.rpc(multiplayer.get_unique_id(), hero.id)
 	else:
@@ -124,6 +126,7 @@ func _on_ui_hero_picking_screen_hero_locked(hero: Hero) -> void:
 
 func _on_player_hero_picked() -> void:
 	_heroes_ready += 1
+	print("PLAYER HERO PICKED - ", _heroes_ready)
 	if _heroes_ready >= PlayerManager.MAX_PLAYERS:
 		_ui_hero_picking_screen.hide()
 		all_heroes_picked.emit()
