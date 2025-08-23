@@ -13,7 +13,6 @@ var _player: Player
 # ============================== Public functions ==============================
 
 func connect_to_player(new_player: Player) -> void:
-	print("CONNECT TO PLAYER ", new_player.name)
 	if new_player == null:
 		printerr("UIPlayerInfo: Trying to connect to a <null> hero")
 		return
@@ -27,5 +26,5 @@ func connect_to_player(new_player: Player) -> void:
 
 # ============================== Callbacks ==============================
 
-func _on_player_gold_changed(new_gold: int) -> void:
+func _on_player_gold_changed(_player_ref: Player, new_gold: int) -> void:
 	_ui_player_gold_label.text = str(new_gold)

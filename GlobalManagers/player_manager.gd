@@ -106,7 +106,7 @@ func sync_point(sync_id: int) -> void:
 	_client_ready.rpc_id(1, sync_id)
 	if not __all_players_synchronized_for_sync_id.has(sync_id) or __all_players_synchronized_for_sync_id[sync_id] == false:
 		await __all_players_syncronized
-
+	
 	__number_of_players_syncronized[sync_id] = 0
 	__all_players_synchronized_for_sync_id[sync_id] = false
 
@@ -115,12 +115,12 @@ func sync_point(sync_id: int) -> void:
 func _client_ready(sync_id) -> void:
 	if not multiplayer.is_server():
 		return
-
+	
 	if __number_of_players_syncronized.has(sync_id):
 		__number_of_players_syncronized[sync_id] += 1
 	else:
 		__number_of_players_syncronized[sync_id] = 1
-
+	
 	if __number_of_players_syncronized[sync_id] >= multiplayer.get_peers().size() + 1:
 		_all_clients_ready.rpc(sync_id)
 

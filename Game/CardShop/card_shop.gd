@@ -60,8 +60,6 @@ func try_buy_card(card: Card) -> bool:
 
 
 func refresh_shop_cards() -> void:
-	if _player == PlayerManager.get_local_player():
-		print("REFRESH SHOP CARD 1 - LOCAL PLAYER")
 	if player.deck == null:
 		printerr("CardShop: Can't update shop cards, there is no player_deck")
 		return
@@ -83,7 +81,6 @@ func _on_events_game_state_changed(state: Game.GameState) -> void:
 		_is_enabled = true
 		if RoundManager.current_round == 1:
 			refresh_shop_cards()
-	
 
 
 

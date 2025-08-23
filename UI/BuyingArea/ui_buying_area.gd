@@ -22,7 +22,8 @@ func _ready() -> void:
 	Events.furniture_clicked.connect(_on_events_furniture_clicked)
 	RoundManager.current_round_changed.connect(_on_round_manager_current_round_changed)
 	_continous_timer.connect_timer(_round_timer)
-	_ui_player_info.connect_to_player(PlayerManager.get_local_player())
+	if GameManager.game_type != GameManager.GameType.SOLO and not multiplayer.is_server():
+		_ui_player_info.connect_to_player(PlayerManager.get_local_player())
 	
 	#_ui_card_shop.hide()
 	#_ui_oracle.hide()
@@ -37,6 +38,9 @@ func _on_events_entity_clicked(entity: Entity) -> void:
 
 
 func _on_events_furniture_clicked(furniture: Furniture) -> void:
+	if GameManager.game_type != GameManager.GameType.SOLO and multiplayer.is_server():
+		return
+	
 	_ui_card_shop.hide()
 	_ui_oracle.hide()
 	match furniture.furniture_type:
