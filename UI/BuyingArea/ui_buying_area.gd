@@ -24,6 +24,8 @@ func _ready() -> void:
 	_continous_timer.connect_timer(_round_timer)
 	if GameManager.game_type != GameManager.GameType.SOLO and not multiplayer.is_server():
 		_ui_player_info.connect_to_player(PlayerManager.get_local_player())
+	elif GameManager.game_type == GameManager.GameType.SOLO:
+		_ui_player_info.connect_to_player(PlayerManager.get_local_player())
 	
 	#_ui_card_shop.hide()
 	#_ui_oracle.hide()
