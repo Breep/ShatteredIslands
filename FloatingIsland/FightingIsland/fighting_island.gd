@@ -65,10 +65,12 @@ func set_inactive() -> void:
 # ============================== Private functions ==============================
 
 func _force_local_player_camera_on_island() -> void:
-	if multiplayer.is_server() or _current_characters.is_empty(): return
+	if GameManager.game_type != GameManager.GameType.SOLO and multiplayer.is_server(): return
+	if _current_characters.is_empty(): return
 	for character in _current_characters:
 		if character.player == PlayerManager.get_local_player():
 			Shared.scene_switcher.set_island_active_only(self)
+
 
 func _update_player_ref(player_id: int) -> void:
 	if PlayerManager.players.has(player_id):

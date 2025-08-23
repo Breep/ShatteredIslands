@@ -84,7 +84,7 @@ func _start_new_round() ->void:
 func _start_buying_phase(battles: Array[Battle]) -> void:
 	print("[", multiplayer.get_unique_id(), "] Game: Start BUYING !")
 	game_state = GameState.BUYING
-	_buying_island.set_active()
+	_scene_switcher.set_island_active_only(_buying_island)
 	_buying_island.start_buying_phase(battles)
 
 

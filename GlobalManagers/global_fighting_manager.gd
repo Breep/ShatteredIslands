@@ -180,7 +180,7 @@ signal _all_players_playback_finished()
 func _wait_for_all_players_to_finish_playback() -> void:
 	if not multiplayer.is_server(): return
 	print("[", multiplayer.get_unique_id(), "] GlobalFightingManager: Waiting for clients to finish their playback")
-	if not _players_running_playback.is_empty():
+	if GameManager.game_type != GameManager.GameType.SOLO and not _players_running_playback.is_empty():
 		await _all_players_playback_finished
 	_finish_all_fights.rpc()
 
