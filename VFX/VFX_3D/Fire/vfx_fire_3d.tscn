@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://b7kxtljteovd6"]
+[gd_scene load_steps=33 format=3 uid="uid://b7kxtljteovd6"]
 
 [ext_resource type="Shader" uid="uid://bcu1kjfpd6cri" path="res://VFX/Shaders/3D/Fire/fire_3d.tres" id="1_1r8wa"]
 [ext_resource type="Texture2D" uid="uid://byg7j5pbkqak" path="res://Data/Texture/2D/fire texture 2.png" id="2_h8jbn"]
@@ -215,10 +215,6 @@ scale_curve = SubResource("CurveTexture_fjmxo")
 color = Color(1.183, 0.663, 0.528, 0.675)
 color_ramp = SubResource("GradientTexture1D_2nwy5")
 
-[sub_resource type="Environment" id="Environment_pt2fe"]
-glow_enabled = true
-glow_strength = 1.08
-
 [node name="VFXFire3D" type="Node3D"]
 
 [node name="Fire" type="CPUParticles3D" parent="."]
@@ -243,6 +239,3 @@ lifetime = 1.6
 randomness = 0.1
 process_material = SubResource("ParticleProcessMaterial_th2fo")
 draw_pass_1 = SubResource("QuadMesh_2qi40")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_pt2fe")
