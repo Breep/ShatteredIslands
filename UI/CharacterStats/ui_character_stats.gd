@@ -29,7 +29,8 @@ var _entity_stats: EntityStats
 # ============================== Public functions ==============================
 
 func connect_entity_stats(new_entity_stats: EntityStats, entity_name: String = ""):
-	_disconnect_all_entity_stats_signals(_entity_stats)
+	if not (_entity_stats == null or _entity_stats.is_queued_for_deletion()):
+		_disconnect_all_entity_stats_signals(_entity_stats)
 	_entity_stats = new_entity_stats
 	_setup_local_nodes()
 	_player_name_label.text = entity_name

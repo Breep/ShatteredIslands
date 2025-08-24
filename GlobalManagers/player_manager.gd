@@ -18,7 +18,8 @@ const BOT_INFOS: Dictionary [int, String] = {
 	-70: "CritsMcGee",
 	-80: "Xx_Slayer_xX",
 	-90: "GoldHoarder",
-	-100: "Zorro"
+	-100: "Zorro",
+	-110: "Latika"
 }
 
 enum JoinGameKeys {
