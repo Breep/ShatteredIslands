@@ -40,14 +40,26 @@ func _ready() -> void:
 	var anim : Animation = anim_player.get_animation("Area")
 	var track_index = anim.find_track("ImpactEffectAreaVisualBackground:mesh:bottom_radius", Animation.TYPE_VALUE)
 	anim.track_set_key_value(track_index, 1, _radius)
-	_meteor_visual.position.z = randf_range(-0.2,0.2)
-	_meteor_visual.position.x = randf_range(-0.2,0.2)
-	_meteor_visual.position.y += randf_range(-2,2)
+	var lateral_range = 2.0   
+	var vertical_range = 0.3 
+	_meteor_visual.position.x = randf_range(-lateral_range, lateral_range)
+	_meteor_visual.position.z = randf_range(-lateral_range, lateral_range)
+	_meteor_visual.position.y += randf_range(-vertical_range, vertical_range)
+	var dir: Vector3 = (_meteor_visual.global_position - global_position).normalized()
+	var tilt_x = clamp(dir.x * 1.0, -1.0, 1.0) 
+	var tilt_z = clamp(dir.z * 1.0, -1.0, 1.0) 
+	_meteor_visual.rotation_degrees = Vector3(180.0, 0.0, 0.0)
+	_meteor_visual.rotate_x(deg_to_rad(tilt_x * 45.0)) 
+	_meteor_visual.rotate_z(deg_to_rad(tilt_z * 45.0)) 
 	_effect_timer.one_shot = true
 	_effect_timer.wait_time = _deploy_time
 	_effect_timer.start()
 	var tween = get_tree().create_tween()
-	tween.tween_property(_meteor_visual, "position", Vector3.ZERO, _deploy_time)
+	var wait_ratio = randf_range(0.8, 0.95)
+	tween.tween_interval(_deploy_time * wait_ratio)
+	tween.tween_property(_meteor_visual, "position", Vector3.ZERO, _deploy_time * (1.0 - wait_ratio))\
+		 .set_trans(Tween.TRANS_QUAD)\
+		 .set_ease(Tween.EASE_IN)
 
 
 func _on_impact_effect_area_body_entered(body: Node3D) -> void:

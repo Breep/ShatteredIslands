@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cy3aoffgfb8t2"
+path="res://.godot/imported/sm_cylinder_based_inverted.obj-69bc5838bbbf803543f281eb19b2c4c0.mesh"
+
+[deps]
+
+files=["res://.godot/imported/sm_cylinder_based_inverted.obj-69bc5838bbbf803543f281eb19b2c4c0.mesh"]
+
+source_file="res://VFX/VFX_3D/Ultimate/Aeron/Objects/sm_cylinder_based_inverted.obj"
+dest_files=["res://.godot/imported/sm_cylinder_based_inverted.obj-69bc5838bbbf803543f281eb19b2c4c0.mesh", "res://.godot/imported/sm_cylinder_based_inverted.obj-69bc5838bbbf803543f281eb19b2c4c0.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

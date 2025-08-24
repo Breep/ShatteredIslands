@@ -43,6 +43,18 @@ _node_characters = NodePath("Characters")
 _islands_spawn_points = [NodePath("IslandSpawns/CenterPoint1/SpawnPoint1"), NodePath("IslandSpawns/CenterPoint2/SpawnPoint2"), NodePath("IslandSpawns/CenterPoint3/SpawnPoint3"), NodePath("IslandSpawns/CenterPoint4/SpawnPoint4"), NodePath("IslandSpawns/CenterPoint5/SpawnPoint5"), NodePath("IslandSpawns/CenterPoint6/SpawnPoint6"), NodePath("IslandSpawns/CenterPoint7/SpawnPoint7"), NodePath("IslandSpawns/CenterPoint8/SpawnPoint8")]
 _ui_game = NodePath("UI/UIGame")
 
+[node name="Light" type="Node3D" parent="."]
+transform = Transform3D(0.471889, 0, 0.881658, -0.0862491, 0.995204, 0.0461631, -0.877429, -0.0978261, 0.469626, 0, 0, 0)
+
+[node name="WorldEnvironment2" type="WorldEnvironment" parent="Light"]
+environment = SubResource("Environment_flgk0")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Light"]
+transform = Transform3D(0.567362, -0.153111, -0.809109, 0.448204, 0.881688, 0.147444, 0.690807, -0.4463, 0.568861, 0, 24.845, 62.0824)
+shadow_enabled = true
+
+[node name="Secondary" type="Node3D" parent="Light"]
+
 [node name="BuyingIsland" parent="." instance=ExtResource("6_flgk0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -29.8858, 0)
 
@@ -127,18 +139,6 @@ spawn_path = NodePath("../Characters")
 [node name="FightingIslands" type="Node3D" parent="."]
 
 [node name="Characters" type="Node3D" parent="."]
-
-[node name="Light" type="Node3D" parent="."]
-transform = Transform3D(0.471889, 0, 0.881658, -0.0862491, 0.995204, 0.0461631, -0.877429, -0.0978261, 0.469626, 0, 0, 0)
-
-[node name="WorldEnvironment2" type="WorldEnvironment" parent="Light"]
-environment = SubResource("Environment_flgk0")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Light"]
-transform = Transform3D(0.567362, -0.153111, -0.809109, 0.448204, 0.881688, 0.147444, 0.690807, -0.4463, 0.568861, 0, 24.845, 62.0824)
-shadow_enabled = true
-
-[node name="Secondary" type="Node3D" parent="Light"]
 
 [node name="SceneSwitcher" parent="." node_paths=PackedStringArray("buying_island") instance=ExtResource("3_vifcx")]
 buying_island = NodePath("../BuyingIsland")

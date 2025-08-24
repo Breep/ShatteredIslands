@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://gbmiuhc63ji7"]
+[gd_scene load_steps=20 format=4 uid="uid://gbmiuhc63ji7"]
 
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="2_2lp7i"]
 [ext_resource type="PackedScene" uid="uid://bn7sfcotfnn7b" path="res://UI/Menu/MainMenu/ui_main_menu.tscn" id="2_8c8b4"]
@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://dr8xv1vshmvyq" path="res://FloatingIsland/BuyingIsland/BuyingArea/Tavern/TavernCenter/tavern_center.tscn" id="7_ytlrh"]
 [ext_resource type="PackedScene" uid="uid://ls38xt04tcla" path="res://Entities/Heroes/MrKrumb/mr_krumb_model.tscn" id="8_aouoj"]
 [ext_resource type="PackedScene" uid="uid://dsdxbwk2i351e" path="res://Entities/Heroes/DarkKnight/dark_knight_model.tscn" id="10_pm3tx"]
-[ext_resource type="Script" uid="uid://1hqrwl2e0q2r" path="res://Game/MainMenu/torch_light.gd" id="11_xkuis"]
 [ext_resource type="AudioStream" uid="uid://bntxtpta0uv6e" path="res://Data/Sounds/medieval_village_atmosphere-79282.mp3" id="12_0ewnc"]
 [ext_resource type="PackedScene" uid="uid://cf0pc5jtr0651" path="res://Entities/Heroes/LaurentKroft/laurent_kroft_model.tscn" id="12_c2tj4"]
 [ext_resource type="AudioStream" uid="uid://buiooajmh742s" path="res://Data/Sounds/tavern_ambience_inside_laughter-73008.mp3" id="13_h47y2"]
@@ -65,8 +64,8 @@ shadow_mesh = SubResource("ArrayMesh_frsg7")
 [node name="MainMenu" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.78482, -0.0840097, 0.614003, 1.86265e-09, 0.990769, 0.13556, -0.619724, -0.10639, 0.777575, 12.5115, 4.46165, 16.1699)
-fov = 35.0
+transform = Transform3D(0.642788, -0.103964, 0.758956, 0, 0.990748, 0.135715, -0.766044, -0.0872363, 0.63684, 12.5115, 4.46165, 16.1699)
+fov = 45.0
 
 [node name="AnimHoveringModule" parent="Camera3D" node_paths=PackedStringArray("_owner") instance=ExtResource("2_2lp7i")]
 _owner = NodePath("..")
@@ -148,34 +147,5 @@ metadata/extras = {
 "textureSetEnum": 0.0
 }
 }
-
-[node name="Lights" type="Node3D" parent="."]
-
-[node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.1559, 2.77832, 6.82891)
-light_color = Color(0.576403, 0.405019, 0.162577, 1)
-omni_range = 8.365
-omni_attenuation = 0.2
-script = ExtResource("11_xkuis")
-flicker_speed = 1.0
-flicker_strength = 0.08
-
-[node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.7139, 2.77832, -5.54031)
-light_color = Color(0.576403, 0.405019, 0.162577, 1)
-omni_range = 8.365
-omni_attenuation = 0.2
-script = ExtResource("11_xkuis")
-flicker_speed = 0.2
-flicker_strength = 0.12
-
-[node name="OmniLight3D3" type="OmniLight3D" parent="Lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.54704, 1.46052, 11.8253)
-light_color = Color(0.576403, 0.405019, 0.162577, 1)
-omni_range = 8.365
-omni_attenuation = 0.2
-script = ExtResource("11_xkuis")
-flicker_speed = 0.3
-flicker_strength = 0.02
 
 [editable path="tavern"]
