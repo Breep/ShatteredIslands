@@ -33,6 +33,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme = ExtResource("1_1jvkn")
 script = ExtResource("2_52pse")
 _skill1A = NodePath("MainPanel/MarginContainer/VBoxContainer/SkillsContainer/UiSkillPanel_1A")

@@ -74,6 +74,10 @@ func _start_new_round() ->void:
 	print("[", multiplayer.get_unique_id(), "] Game: Start new round")
 	_current_round_player_id_islands.clear()
 	
+	if PlayerManager.get_alive_players().size() == 1:
+		print("Game: Looks like we have a winner ! Congrats ", PlayerManager.get_alive_players().values()[0].name)
+		return
+	
 	_current_round_battles = await RoundManager.get_current_round_battles()
 	_init_current_round_player_id_islands(_current_round_battles.size())
 	RoundManager.starting_round_player_changes()
