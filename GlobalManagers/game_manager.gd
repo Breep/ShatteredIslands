@@ -90,6 +90,7 @@ func start_game() -> void:
 	get_tree().change_scene_to_packed(_game_scene)
 
 
+
 func get_family_from_type(family_type: Family.FamilyType) -> Family:
 	return _families_ref[family_type]
 
@@ -200,6 +201,9 @@ func _init_current_current_game_heroes(heroes_number: int) -> void:
 	_heroes_choosen.emit()
 	_game_heroes_ready = true
 
+
+func _player_health_compare(player_a: Player, player_b: Player) -> bool:
+	return player_a.health >= player_b.health
 	
 	
 	

@@ -117,6 +117,7 @@ func starting_round_player_changes() -> void:
 # Handle all changes affecting players at end of round: damage taken by loosing a fight
 func ending_round_player_changes() -> void:
 	if not multiplayer.is_server():
+		printerr("RoundManager: A client should not run this code ending_round_player_changes()")
 		return
 	
 	# Not all FightingArea reported their fight result yet (There is a race of signals)

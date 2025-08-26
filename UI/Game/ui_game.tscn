@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dv3kwc5eeyuk2"]
+[gd_scene load_steps=5 format=3 uid="uid://dv3kwc5eeyuk2"]
 
 [ext_resource type="Script" uid="uid://dy35nobyyvy4r" path="res://UI/Game/ui_game.gd" id="1_tbfb0"]
+[ext_resource type="PackedScene" uid="uid://da7u7sme0yrjw" path="res://UI/Game/Loose/ui_result.tscn" id="3_tbfb0"]
 [ext_resource type="PackedScene" uid="uid://bvqsnkh0s11q2" path="res://UI/BuyingArea/FamilyPortrait/ui_all_families_portrait.tscn" id="3_ur737"]
 [ext_resource type="PackedScene" uid="uid://be38goiqxp28o" path="res://UI/BuyingArea/PlayerPortrait/ui_all_players_portrait.tscn" id="5_30pdm"]
 
-[node name="UIGame" type="Control"]
+[node name="UIGame" type="Control" node_paths=PackedStringArray("_ui_result")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,6 +14,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_tbfb0")
+_ui_result = NodePath("VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel/CenterContainer/UIResult")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -85,6 +87,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="UIResult" parent="VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel/CenterContainer" instance=ExtResource("3_tbfb0")]
+custom_minimum_size = Vector2(2000, 1000)
+layout_mode = 2
 
 [node name="RightPanel" type="Control" parent="VBoxContainer/MiddlePanel/HBoxContainer"]
 layout_mode = 2

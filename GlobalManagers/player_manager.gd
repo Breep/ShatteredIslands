@@ -67,6 +67,14 @@ func get_human_players() -> Dictionary[int, Player]:
 	return human_players
 
 
+func get_dead_players() -> Dictionary[int, Player]:
+	var dead_players: Dictionary[int, Player]
+	for player in players.values():
+		if player.health <= 0:
+			dead_players[player.id] = player
+	return dead_players
+
+
 func join_game(peer_id: int, player_name: String) -> Dictionary:
 	if multiplayer.is_server() and GameManager.game_type != GameManager.GameType.SOLO:
 		printerr("PlayerManager: Server can't be a player")
@@ -96,7 +104,6 @@ func add_bot() -> void:
 	
 	var bot_id = bot_infos.keys().pick_random()
 	_add_player(BOT_INFOS[bot_id], bot_id, true, {})
-
 
 # ============================== RPC - SYNC POINT ==============================
 
@@ -230,7 +237,7 @@ func _sync_player(serialized_player: Dictionary) -> void:
 	player.update_from_serialized(serialized_player)
 
 
-# ============================== Callbacks ==============================
+# ============================== Serialization Callbacks ==============================
 
 func _on_player_health_changed(player: Player, _unused) -> void:
 	_sync_player.rpc(player.serialized())
@@ -259,8 +266,7 @@ func _on_player_xp_changed(player: Player, _unused) -> void:
 func _on_player_lvl_changed(player: Player, _unused) -> void:
 	_sync_player.rpc(player.serialized())
 
-
-
+# ============================== Callbacks ==============================
 
 
 

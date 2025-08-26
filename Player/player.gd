@@ -79,6 +79,7 @@ var max_health: int:
 		_max_health = clampi(value, 0, 100)
 		max_health_changed.emit(self, _max_health)
 
+signal death(self_ref: Player)
 signal health_changed(self_ref: Player, new_health: int)
 var _health: int
 var health: int:
@@ -88,6 +89,7 @@ var health: int:
 		_health = clampi(value, 0, 100)
 		health_changed.emit(self, _health)
 		if _health <= 0: # TODO Change this by a pile of corpse is funnier
+			death.emit(self)
 			character.queue_free()
 
 signal gold_changed(self_ref: Player, new_gold: int)

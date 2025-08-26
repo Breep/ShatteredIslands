@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://4lew07lrdo4p"]
+
+[ext_resource type="Script" uid="uid://bse5tr8wv227c" path="res://Prototyping/UI/UIResult/prototyping_ui_result.gd" id="1_e4n02"]
+[ext_resource type="PackedScene" uid="uid://da7u7sme0yrjw" path="res://UI/Game/Loose/ui_result.tscn" id="2_4bdpp"]
+
+[node name="PrototypingUIResult" type="Control" node_paths=PackedStringArray("_prototyping_ui_result")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_e4n02")
+_prototyping_ui_result = NodePath("UIResult")
+
+[node name="UIResult" parent="." instance=ExtResource("2_4bdpp")]
+layout_mode = 1
