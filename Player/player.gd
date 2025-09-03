@@ -35,6 +35,9 @@ var total_win_number: int
 var total_lose_number: int
 var current_damage_win_lose_diff: int # <win>-<lose> but can't go over what the rules indicate (used for damage modifier)
 
+var is_dead: bool = false # True if the player is dead and signaled it
+var round_of_death: int = -1 # The round when the player died (if dead)
+
 var _team: int # Current team of the player during this round
 var team: int:
 	get: return _team
@@ -76,7 +79,7 @@ var max_health: int:
 	get: return _max_health
 	set(value):
 		if _max_health == value: return
-		_max_health = clampi(value, 0, 100)
+		_max_health = clampi(value, 0, 100) # TODO la valeur de 100 est purement arbitraire
 		max_health_changed.emit(self, _max_health)
 
 signal death(self_ref: Player)
@@ -86,7 +89,7 @@ var health: int:
 	get: return _health
 	set(value):
 		if _health == value: return
-		_health = clampi(value, 0, 100)
+		_health = clampi(value, -100, 100)
 		health_changed.emit(self, _health)
 		if _health <= 0: # TODO Change this by a pile of corpse is funnier
 			death.emit(self)

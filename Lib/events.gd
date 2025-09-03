@@ -13,13 +13,17 @@ signal condition_stacks_done(source, target, stacks_number, stack_type)
 func signal_condition_stacks_done(source, target, stacks_number, stack_type) -> void:
 	condition_stacks_done.emit(source, target, stacks_number, stack_type)
 
-
+# ============================== GAME STATE ==============================
 
 signal game_state_changed(new_game_state: Game.GameState)
 func signal_game_state_changed(new_game_state: Game.GameState) -> void:
 	game_state_changed.emit(new_game_state)
 
+signal local_player_is_dead()
+func signal_local_player_is_dead() -> void:
+	local_player_is_dead.emit()
 
+# ============================== MISC TODO: Check if those signals are really usefull ==============================
 
 signal fighting_island_spawned(fighting_island_ref: FightingIsland, player_id: int)
 func signal_fighting_island_spawned(fighting_island_ref: FightingIsland, player_id: int) -> void:
@@ -29,7 +33,7 @@ signal player_won_a_fight(player: Player)
 func signal_player_won_a_fight(player: Player) -> void:
 	player_won_a_fight.emit(player)
 
-
+# ============================== CLICKABLE ==============================
 
 signal entity_cliked(entity: Entity)
 signal furniture_clicked(furniture: Furniture)

@@ -370,6 +370,8 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 250
 text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="Control/MainPanel/MarginContainer/VBoxContainer/HBoxContainer/ContinuePanel/StayButton" to="." method="_on_stay_button_pressed"]
 [connection signal="pressed" from="Control/MainPanel/MarginContainer/VBoxContainer/HBoxContainer/LeavePanel/LeaveButton" to="." method="_on_leave_button_pressed"]

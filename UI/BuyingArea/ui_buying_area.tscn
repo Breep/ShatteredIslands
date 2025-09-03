@@ -195,9 +195,5 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 mouse_filter = 2
 
-[connection signal="mouse_entered" from="VBoxContainer" to="." method="_on_v_box_container_mouse_entered"]
-[connection signal="mouse_entered" from="VBoxContainer/TopPanel" to="." method="_on_top_panel_mouse_entered"]
-[connection signal="mouse_entered" from="VBoxContainer/MiddlePanel" to="." method="_on_middle_panel_mouse_entered"]
 [connection signal="mouse_entered" from="VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel/CenterContainer/CardShop" to="." method="_on_card_shop_mouse_entered"]
 [connection signal="mouse_entered" from="VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel/CenterContainer/UIOracle" to="." method="_on_ui_oracle_mouse_entered"]
-[connection signal="mouse_entered" from="VBoxContainer/BottomPanel" to="." method="_on_bottom_panel_mouse_entered"]

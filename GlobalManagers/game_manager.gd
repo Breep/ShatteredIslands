@@ -53,16 +53,17 @@ func _ready() -> void:
 
 # ============================== Public function ==============================
 
+func is_end_of_game() -> bool:
+	if PlayerManager.get_local_player() in PlayerManager.dead_players.values():
+		Events.signal_local_player_is_dead()
+	return PlayerManager.dead_players.size() >= 7
+
 func start_solo_game() -> void:
-	print("START SOLO GAME 1")
 	_game_type = GameType.SOLO
-	for i in 7:
+	for i in 7: # TODO Avoir un nombre max de joueur qui dépend du mode ?
 		PlayerManager.add_bot()
 	PlayerManager.join_game(1, "Breepsolo")
-	print("START SOLO GAME 2")
 	start_game()
-	# Ajouter un boolean quelque part qui bypass les restrictions serveurs sur certaines UI
-	pass
 
 
 func get_current_game_heroes() -> Array[Hero]:

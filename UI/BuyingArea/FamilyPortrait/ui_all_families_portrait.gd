@@ -41,7 +41,6 @@ func _connect_new_player(new_player: Player) -> void:
 
 
 func _update_portrait_families() -> void:
-	print("Update portrait card families for ", player.name)
 	_reset_portrait_families()
 	var families_count: Dictionary[Family.FamilyType, int] = _player.deck.families_count
 	for family_portrait in _portrait_families:
@@ -55,12 +54,10 @@ func _reset_portrait_families() -> void:
 		family_portrait.family_count = 0
 
 func _on_player_deck_has_changed() -> void:
-	print("Player deck has changed")
 	_update_portrait_families()
 
 
 func _on_events_entity_clicked(entity: Entity) -> void:
-	print("UIAllFamiliesPortrait: Clicked on entity")
 	if not entity is Character: return
 	if not multiplayer.is_server(): return
 	player = (entity as Character).player

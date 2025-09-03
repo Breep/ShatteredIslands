@@ -31,13 +31,14 @@ func start_round(battles: Array[Battle]) -> void:
 func set_active() -> void:
 	if _is_active: return
 	_is_active = true
-	_ui_buying_area.show()
+	_ui_buying_area.set_active()
 
 
 func set_inactive() -> void:
 	if not _is_active: return
 	_is_active = false
-	_ui_buying_area.hide()
+	_ui_buying_area.set_inactive()
+
 
 @rpc("authority", "call_local")
 func _end_buying_round() -> void:

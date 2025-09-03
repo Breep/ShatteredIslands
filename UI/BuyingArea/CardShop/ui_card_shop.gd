@@ -6,6 +6,9 @@ extends Control
 var _card_displayed: Array[Card]
 var _local_player: Player
 
+var _is_active: bool = true
+var _is_locked: bool
+
 signal card_bought(card: Card)
 
 # ============================== Local scene nodes ==============================
@@ -22,6 +25,7 @@ func _ready() -> void:
 		return
 	
 	_local_player = PlayerManager.get_local_player()
+	_local_player.death.connect(_on_local_player_death)
 	_card_shop.player = _local_player
 	
 	_card_shop.shop_refreshed.connect(_on_card_shop_shop_refreshed)
@@ -29,6 +33,19 @@ func _ready() -> void:
 	
 	for card_button in _card_buttons:
 		card_button.card_selected.connect(_on_card_shop_button_pressed, CONNECT_ONE_SHOT)
+
+# ============================== Public functions ==============================
+
+func set_active() -> void:
+	if _is_active or _is_locked: return
+	_is_active = true
+	show()
+
+
+func set_inactive() -> void:
+	if not _is_active: return
+	_is_active = false
+	hide()
 
 # ============================== Private functions ==============================
 
@@ -54,16 +71,11 @@ func _update_shop_cards_displayed_visual(cards: Array[Card]) -> void:
 
 # ============================== Callbacks ==============================
 
-func _on_back_pressed() -> void:
-	hide()
-
-
 func _on_card_shop_button_pressed(card_button_selected: CardButton, card: Card) -> void:
 	_try_buy_card(card_button_selected, card)
 
 
 func _on_card_shop_shop_refreshed(new_cards: Array[Card]) -> void:
-	print("REFRESH CARD SHOP VISUAL")
 	_update_shop_cards_displayed_visual(new_cards)
 
 
@@ -72,4 +84,10 @@ func _on_card_shop_card_bought(card: Card) -> void:
 
 
 func _on_close_button_pressed() -> void:
-	hide()
+	set_inactive()
+
+
+func _on_local_player_death(_player: Player) -> void:
+	print("CarsShop: lock card shop for ", _local_player.name)
+	set_inactive()
+	_is_locked = true

@@ -1,6 +1,8 @@
 class_name UIOracle
 extends Control
 
+# ============================== Local Nodes ==============================
+
 @export_group("Skills")
 @export var _skill1A: UISkillPanel
 @export var _skill1B: UISkillPanel
@@ -14,9 +16,32 @@ extends Control
 @export var _xp_bar: ProgressBar
 @export var _xp_label: Label
 
-func _ready() -> void:
-	pass
+# ============================== Private variables ==============================
 
+var _local_player: Player
+var _is_active: bool
+var _is_locked: bool
+
+# ============================== Node base functions ==============================
+
+func _ready() -> void:
+	_local_player = PlayerManager.get_local_player()
+	_local_player.death.connect(_on_local_player_death)
+
+# ============================== Public functions ==============================
+
+func set_active() -> void:
+	if _is_active or _is_locked: return
+	_is_active = true
+	show()
+
+
+func set_inactive() -> void:
+	if not _is_active: return
+	_is_active = false
+	hide()
+
+# ============================== Callbacks ==============================
 
 func _on_buy_xp_button_pressed() -> void:
 	pass
@@ -24,3 +49,9 @@ func _on_buy_xp_button_pressed() -> void:
 
 func _on_close_button_pressed() -> void:
 	hide()
+
+
+func _on_local_player_death(_player: Player) -> void:
+	print("Oracle: lock oracle for ", _local_player.name)
+	set_inactive()
+	_is_locked = true

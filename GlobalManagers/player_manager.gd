@@ -1,11 +1,25 @@
 extends Node
 
+# ============================== Signals ==============================
+
+signal player_added(peer_id: int)
+signal player_removed(peer_id: int)
+
+# ============================== Enum ==============================
+
 enum SyncID {
 	ROUND_SETUP,
 	BUYING_PHASE,
 	FIGHTING_PHASE,
 	ROUND_ENDING
 }
+
+enum JoinGameKeys {
+	RESPONSE,
+	REASON
+}
+
+# ============================== Constants ==============================
 
 # Bot names and their fake peer_id
 const BOT_INFOS: Dictionary [int, String] = {
@@ -22,17 +36,14 @@ const BOT_INFOS: Dictionary [int, String] = {
 	-110: "Latika"
 }
 
-enum JoinGameKeys {
-	RESPONSE,
-	REASON
-}
-
 const MAX_PLAYERS: int = 8
 
-var players: Dictionary[int, Player]
+# ============================== Public variables ==============================
 
-signal player_added(peer_id: int)
-signal player_removed(peer_id: int)
+var players: Dictionary[int, Player]
+var dead_players: Dictionary[int, Player]
+
+# ============================== Private variables ==============================
 
 signal _join_server_answered()
 var _join_server_has_answered: bool
@@ -58,6 +69,17 @@ func get_alive_players() -> Dictionary[int, Player]:
 	return alive_players
 
 
+func get_players_ordered() -> Array[Player]:
+	var players_ordered: Array[Player] = players.values().duplicate()
+	players_ordered.sort_custom(_compare_player)
+	return players_ordered
+
+
+func get_player_current_place(player: Player) -> int:
+	var player_ordered: Array[Player] = get_players_ordered()
+	return player_ordered.find(player) + 1
+
+
 # Get all non bot players
 func get_human_players() -> Dictionary[int, Player]:
 	var human_players: Dictionary[int, Player]
@@ -65,14 +87,6 @@ func get_human_players() -> Dictionary[int, Player]:
 		if player.id > 0:
 			human_players[player.id] = player
 	return human_players
-
-
-func get_dead_players() -> Dictionary[int, Player]:
-	var dead_players: Dictionary[int, Player]
-	for player in players.values():
-		if player.health <= 0:
-			dead_players[player.id] = player
-	return dead_players
 
 
 func join_game(peer_id: int, player_name: String) -> Dictionary:
@@ -229,6 +243,7 @@ func _connect_to_signals(player: Player) -> void:
 	player.gold_changed.connect(_on_player_gold_changed)
 	player.xp_changed.connect(_on_player_xp_changed)
 	player.lvl_changed.connect(_on_player_lvl_changed)
+	player.death.connect(_on_player_death)
 
 
 @rpc("authority", "call_remote")
@@ -236,6 +251,19 @@ func _sync_player(serialized_player: Dictionary) -> void:
 	var player: Player = players[serialized_player[Player.SerializedField.ID]]
 	player.update_from_serialized(serialized_player)
 
+
+# Return true if player1 is better than player2
+func _compare_player(player1: Player, player2: Player) -> bool:
+	if player1.is_dead != player2.is_dead:
+		return player2.is_dead
+	else:
+		if player1.is_dead: # Both player are dead
+			if player1.round_of_death != player2.round_of_death:
+				return player1.round_of_death > player2.round_of_death
+			else:
+				return player1.health > player2.health
+		else: # Both player are alive
+			return player1.health > player2.health
 
 # ============================== Serialization Callbacks ==============================
 
@@ -268,7 +296,10 @@ func _on_player_lvl_changed(player: Player, _unused) -> void:
 
 # ============================== Callbacks ==============================
 
-
+func _on_player_death(player: Player) -> void:
+	player.round_of_death = RoundManager.current_round
+	player.is_dead = true
+	dead_players[player.id] = player
 
 
 

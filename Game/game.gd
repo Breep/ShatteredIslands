@@ -7,6 +7,7 @@ enum GameState {
 	STARTING,
 	BUYING,
 	FIGHTING,
+	FINISHED,
 	UNDEF
 }
 
@@ -74,7 +75,13 @@ func _start_new_round() ->void:
 	print("[", multiplayer.get_unique_id(), "] Game: Start new round")
 	_current_round_player_id_islands.clear()
 	
-	if PlayerManager.get_alive_players().size() == 1:
+	# Check local player life ?
+	# Comment le serveur gère la mort de chaque joueur
+	# -> Enregistrement à la fin de la partie des scores
+	# Au fur et à mesure, pour le moment chaque client gère localement le check de sa vie, si elle passe sous 0 alors on désactive le shop
+	# et on affiche l'UI de resultat
+	if GameManager.is_end_of_game():
+		game_state = GameState.FINISHED
 		print("Game: Looks like we have a winner ! Congrats ", PlayerManager.get_alive_players().values()[0].name)
 		return
 	

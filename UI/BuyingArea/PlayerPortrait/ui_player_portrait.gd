@@ -12,6 +12,9 @@ var player: Player
 @onready var _ui_player_life: UIPlayerLife = %PlayerLife
 @onready var _damage_label: Label = %DamageLabel
 @onready var _level_label: Label = %LevelLabel
+@onready var _panel_button: Button = %PanelButton
+@onready var _death_color_layer: ColorRect = %DeathColorLayer
+@onready var _dead_on_round_label: Label = %DeadOnRoundLabel
 
 # ============================== Public functions ==============================
 
@@ -24,6 +27,7 @@ func connect_to_player(new_player: Player) -> void:
 
 func _ready() -> void:
 	_setup_local_nodes()
+	_death_color_layer.hide()
 
 # ============================== Private functions ==============================
 
@@ -39,6 +43,7 @@ func _setup_local_nodes() -> void:
 	_on_player_damage_changed(player, player.damage)
 	player.lvl_changed.connect(_on_player_lvl_changed)
 	_on_player_lvl_changed(player, player.lvl)
+	player.death.connect(_on_player_death)
 
 # ============================== Callbacks ==============================
 
@@ -52,3 +57,8 @@ func _on_player_damage_changed(_player: Player, damage: int) -> void:
 
 func _on_player_lvl_changed(_player: Player, lvl: int) -> void:
 	_level_label.text = str(lvl)
+
+
+func _on_player_death(player: Player) -> void:
+	_death_color_layer.show()
+	_dead_on_round_label.text = "Dead on round " + str(player.round_of_death)

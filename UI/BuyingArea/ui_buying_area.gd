@@ -17,6 +17,10 @@ extends Control
 
 # ============================== Private variables ==============================
 
+var _is_active: bool
+
+# ============================== Local nodes functions ==============================
+
 func _ready() -> void:
 	Events.entity_cliked.connect(_on_events_entity_clicked)
 	Events.furniture_clicked.connect(_on_events_furniture_clicked)
@@ -26,10 +30,21 @@ func _ready() -> void:
 		_ui_player_info.connect_to_player(PlayerManager.get_local_player())
 	elif GameManager.game_type == GameManager.GameType.SOLO:
 		_ui_player_info.connect_to_player(PlayerManager.get_local_player())
-	
-	#_ui_card_shop.hide()
-	#_ui_oracle.hide()
 
+# ============================== Public functions ==============================
+
+func set_active() -> void:
+	if _is_active: return
+	_is_active = true
+	show()
+
+
+func set_inactive() -> void:
+	if not _is_active: return
+	_is_active = false
+	hide()
+
+# ============================== Callbacks ==============================
 
 func _on_events_entity_clicked(entity: Entity) -> void:
 	if entity is Character:
@@ -43,50 +58,14 @@ func _on_events_furniture_clicked(furniture: Furniture) -> void:
 	if GameManager.game_type != GameManager.GameType.SOLO and multiplayer.is_server():
 		return
 	
-	_ui_card_shop.hide()
-	_ui_oracle.hide()
+	_ui_card_shop.set_inactive()
+	_ui_oracle.set_inactive()
 	match furniture.furniture_type:
 		Furniture.FurnitureType.CARD_SHOP:
-			_ui_card_shop.show()
+			_ui_card_shop.set_active()
 		Furniture.FurnitureType.ORACLE:
-			_ui_oracle.show()
+			_ui_oracle.set_active()
 
 
 func _on_round_manager_current_round_changed(round_number: int) -> void:
 	_round_label.text = str("ROUND ") + str(round_number)
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-func _on_card_shop_mouse_entered() -> void:
-	print("CARD SHOP MOUSE ENTERED")
-
-
-func _on_ui_oracle_mouse_entered() -> void:
-	print("ORACLE MOUSE ENTERED")
-
-
-func _on_v_box_container_mouse_entered() -> void:
-	print("VBOX MOUSE ENTERED")
-
-
-func _on_top_panel_mouse_entered() -> void:
-	print("TOP PANEL MOUSE ENTERED")
-
-
-func _on_middle_panel_mouse_entered() -> void:
-	print("MIDDLE PANEL MOUSE ENTERED")
-
-
-func _on_bottom_panel_mouse_entered() -> void:
-	print("BOTTOM PANEL MOUSE ENTERED")
