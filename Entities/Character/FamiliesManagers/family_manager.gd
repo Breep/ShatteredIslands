@@ -23,5 +23,13 @@ func init() -> void:
 	_specific_init()
 
 
+func start() -> void:
+	printerr("FamilyManager: virtual start() called [", get_path(), "]")
+
+
+func stop() -> void:
+	printerr("FamilyManager: virtual stop() called [", get_path(), "]")
+
+
 func _specific_init() -> void:
 	pass

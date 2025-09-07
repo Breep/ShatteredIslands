@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://qgjyscmtp6t3"]
+[gd_scene load_steps=15 format=3 uid="uid://qgjyscmtp6t3"]
 
 [ext_resource type="Script" uid="uid://l2r5b7efg66k" path="res://Entities/Character/CharacterLogic/character_logic.gd" id="1_0s7d1"]
 [ext_resource type="PackedScene" uid="uid://d0g0xkyr876lc" path="res://Modules/EntityModules/MovementModule/movement_module.tscn" id="1_qe31t"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bjbfnigvphbfc" path="res://Entities/Character/FamiliesManagers/Storm/storm_manager.tscn" id="10_7a66c"]
 [ext_resource type="PackedScene" uid="uid://crqesljjrouec" path="res://Entities/Character/FamiliesManagers/Attack/attack_manager.tscn" id="11_rmt4k"]
 [ext_resource type="PackedScene" uid="uid://n30ifkjad344" path="res://Modules/EntityModules/TargetModule/target_module.tscn" id="12_yu7ro"]
+[ext_resource type="PackedScene" uid="uid://br00pidd4svpc" path="res://Entities/Character/FamiliesManagers/Mana/mana_manager.tscn" id="14_lbs17"]
 
 [node name="CharacterLogic" type="Node3D" node_paths=PackedStringArray("modules", "families_managers")]
 script = ExtResource("1_0s7d1")
@@ -24,13 +25,14 @@ modules = {
 4: NodePath("Modules/TargetModule")
 }
 families_managers = {
-0: NodePath("FamiliesManagers/AttackManager"),
-1: NodePath("FamiliesManagers/DefenseManager"),
-2: NodePath("FamiliesManagers/FireManager"),
-3: NodePath("FamiliesManagers/StormManager"),
-4: NodePath("FamiliesManagers/SerenityManager"),
-5: NodePath("FamiliesManagers/LifeManager"),
-6: NodePath("FamiliesManagers/PoisonManager")
+1: NodePath("FamiliesManagers/AttackManager"),
+2: NodePath("FamiliesManagers/DefenseManager"),
+3: NodePath("FamiliesManagers/FireManager"),
+4: NodePath("FamiliesManagers/StormManager"),
+5: NodePath("FamiliesManagers/SerenityManager"),
+6: NodePath("FamiliesManagers/LifeManager"),
+7: NodePath("FamiliesManagers/PoisonManager"),
+8: NodePath("FamiliesManagers/ManaManager")
 }
 
 [node name="Modules" type="Node3D" parent="."]
@@ -53,9 +55,8 @@ _defense_manager = NodePath("../../FamiliesManagers/DefenseManager")
 _life_manager = NodePath("../../FamiliesManagers/LifeManager")
 _fire_manager = NodePath("../../FamiliesManagers/FireManager")
 
-[node name="AutoAttackModule" parent="Modules" node_paths=PackedStringArray("_action_module", "_attack_manager") instance=ExtResource("4_f011x")]
+[node name="AutoAttackModule" parent="Modules" node_paths=PackedStringArray("_attack_manager") instance=ExtResource("4_f011x")]
 unique_name_in_owner = true
-_action_module = NodePath("../ActionModule")
 _attack_manager = NodePath("../../FamiliesManagers/AttackManager")
 
 [node name="TargetModule" parent="Modules" instance=ExtResource("12_yu7ro")]
@@ -87,5 +88,9 @@ unique_name_in_owner = true
 _action_module = NodePath("../../Modules/ActionModule")
 
 [node name="AttackManager" parent="FamiliesManagers" node_paths=PackedStringArray("_action_module") instance=ExtResource("11_rmt4k")]
+unique_name_in_owner = true
+_action_module = NodePath("../../Modules/ActionModule")
+
+[node name="ManaManager" parent="FamiliesManagers" node_paths=PackedStringArray("_action_module") instance=ExtResource("14_lbs17")]
 unique_name_in_owner = true
 _action_module = NodePath("../../Modules/ActionModule")

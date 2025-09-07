@@ -35,6 +35,7 @@ func _ready() -> void:
 func set_camera(camera: Camera3D) -> void:
 	_camera = camera
 
+
 func update_health_bar(health: int, health_max: int) -> void:
 	_health_bar.max_value = health_max
 	_health_bar.value = health

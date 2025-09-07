@@ -169,7 +169,7 @@ func _ready() -> void:
 		if _turret != null: _turret.hide()
 	
 	_character_visual.update_health_bar(stats.health, stats.health_max)
-	_character_visual.update_mana_bar(stats.mana, stats.mana_max)
+	_character_visual.update_mana_bar(0, stats.mana_max)
 	_character_visual.update_name_displayed(player.name)
 	
 	GlobalFightingManager.state_changed.connect(_on_global_fighting_manager_state_changed)
@@ -180,6 +180,7 @@ func _ready() -> void:
 	if player != null: apply_cards_upgrade(player.deck)
 	
 	stats.health_changed.connect(_on_stats_health_changed)
+	stats.mana_changed.connect(_on_stats_mana_changed)
 	
 	_defense_manager.reflecto_belt_activated.connect(_on_defense_manager_reflecto_belt_activated)
 
@@ -250,8 +251,11 @@ func _on_events_game_state_changed(new_state: Game.GameState) -> void:
 func _on_stats_health_changed(new_health: int) -> void:
 	if _character_visual != null: _character_visual.update_health_bar(new_health, stats.health_max)
 	if new_health <= 0:
-		print("DEBUG | ", name, " | DEAD")
 		signal_death()
+
+
+func _on_stats_mana_changed(new_mana: float) -> void:
+	if _character_visual != null: _character_visual.update_mana_bar(new_mana, stats.mana_max)
 
 
 func _on_events_player_won_a_fight(winner: Player) -> void:

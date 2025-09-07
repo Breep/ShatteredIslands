@@ -88,7 +88,9 @@ families_managers = {
 3: NodePath("FamiliesManagers/StormManager"),
 4: NodePath("FamiliesManagers/SerenityManager"),
 5: NodePath("FamiliesManagers/LifeManager"),
-6: NodePath("FamiliesManagers/PoisonManager")
+6: NodePath("FamiliesManagers/PoisonManager"),
+7: NodePath("FamiliesManagers/PoisonManager"),
+8: NodePath("FamiliesManagers/ManaManager")
 }
 
 [node name="MovementModule" parent="CharacterLogic/Modules" index="0" node_paths=PackedStringArray("_owner")]
@@ -126,6 +128,9 @@ _owner = NodePath("../../..")
 _owner = NodePath("../../..")
 
 [node name="AttackManager" parent="CharacterLogic/FamiliesManagers" index="6" node_paths=PackedStringArray("_owner")]
+_owner = NodePath("../../..")
+
+[node name="ManaManager" parent="CharacterLogic/FamiliesManagers" index="7" node_paths=PackedStringArray("_owner")]
 _owner = NodePath("../../..")
 
 [node name="TurretCenterPoint" type="Node3D" parent="."]

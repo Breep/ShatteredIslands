@@ -88,8 +88,7 @@ custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_vertical = 2
 theme = ExtResource("19_3u6jw")
-step = 1.0
-value = 20.0
+step = 0.001
 show_percentage = false
 
 [node name="TopUI3DPanel" type="MeshInstance3D" parent="."]

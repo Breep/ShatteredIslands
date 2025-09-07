@@ -120,7 +120,7 @@ func _on_entity_stats_mana_max_changed(new_mana_max: int) -> void:
 	_mana_label.text = str(_entity_stats.mana) + "/" + str(new_mana_max)
 
 
-func _on_entity_stats_mana_changed(new_mana: int) -> void:
+func _on_entity_stats_mana_changed(new_mana: float) -> void:
 	_mana_bar.value = new_mana
 	_mana_label.text = str(new_mana) + "/" + str(_entity_stats.mana_max)
 
