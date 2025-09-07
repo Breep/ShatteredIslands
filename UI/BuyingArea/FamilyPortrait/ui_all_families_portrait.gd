@@ -21,12 +21,12 @@ func _ready() -> void:
 
 
 func _settup_portait_families() -> void:
-	if GameManager.active_families_type.size() > 8:
+	if GameManager.active_families.size() > 8:
 		printerr("UIAllFamiliesPortrait: Too many active families at once")
 		return
 	for i in _portrait_families.size():
-		if i < GameManager.active_families_type.size():
-			_portrait_families[i].family_type = GameManager.active_families_type[i]
+		if i < GameManager.active_families.size():
+			_portrait_families[i].family_type = GameManager.active_families[i].family_type
 		else:
 			_portrait_families[i].hide()
 

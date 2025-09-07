@@ -1,5 +1,7 @@
 extends Node2D
 
+# In game manager
+
 # ============================== Enum ==============================
 
 enum GameType {
@@ -14,19 +16,28 @@ const HEROES_NUMBER: int = 8
 
 # ============================== Public variables ==============================
 
-var game_rules: GameRules
-var active_families_type: Array[Family.FamilyType]
+var _game_rules: GameRules
+var game_rules: GameRules:
+	get: return _game_rules
 
 var _game_type: GameType
 var game_type: GameType:
 	get: return _game_type
 
+var _active_families: Array[Family] # Array of all families activated for this game only
+var active_families: Array[Family]:
+	get: return _active_families
+
 # ============================== Private variables ==============================
 
 var _game_scene: PackedScene = preload("res://Game/game.tscn")
 
-var _families_ref: Dictionary # Reference Dictionary to all families
-var _active_families: Array[Family] # Array of all families activated for this game only
+var _FAMILIES_REF: Dictionary[Family.FamilyType, Family] = {
+	Family.FamilyType.ATTACK: load("res://Card/Descriptions/Families/attack_family.tres") as Family,
+	Family.FamilyType.DEFENSE: load("res://Card/Descriptions/Families/defense_family.tres") as Family,
+	Family.FamilyType.FIRE: load("res://Card/Descriptions/Families/fire_family.tres") as Family,
+	Family.FamilyType.POISON: load("res://Card/Descriptions/Families/poison_family.tres") as Family
+}
 
 #[Server only]
 var _game_heroes_ready: bool = false
@@ -37,28 +48,33 @@ signal _server_answered()
 
 var _random_heroes_ref: Array[Hero.HeroId]
 
-# ============================== Node base functions ==============================
-
-func _ready() -> void:
-	game_rules = load("res://Game/GameRules/NormalGameRules.tres")
-	_init_families_ref()
-	_active_families.append(get_family_from_type(Family.FamilyType.DEFENSE))
-	active_families_type.append(Family.FamilyType.DEFENSE)
-	_active_families.append(get_family_from_type(Family.FamilyType.POISON))
-	active_families_type.append(Family.FamilyType.POISON)
-	_active_families.append(get_family_from_type(Family.FamilyType.FIRE))
-	active_families_type.append(Family.FamilyType.FIRE)
-	_active_families.append(get_family_from_type(Family.FamilyType.ATTACK))
-	active_families_type.append(Family.FamilyType.ATTACK)
-
 # ============================== Public function ==============================
 
+func clear() -> void:
+	_game_type = GameType.UNDEF
+	_active_families.clear()
+	_random_heroes_ref.clear()
+	MultiplayerDeckManager.clear()
+
+
+func init() -> void:
+	_game_rules = load("res://Game/GameRules/NormalGameRules.tres")
+	_active_families.append(_FAMILIES_REF[Family.FamilyType.DEFENSE])
+	_active_families.append(_FAMILIES_REF[Family.FamilyType.POISON])
+	_active_families.append(_FAMILIES_REF[Family.FamilyType.FIRE])
+	_active_families.append(_FAMILIES_REF[Family.FamilyType.ATTACK])
+	MultiplayerDeckManager.init(_active_families, _game_rules)
+
+
+#TODO Move into round manager ?
 func is_end_of_game() -> bool:
 	if PlayerManager.get_local_player() in PlayerManager.dead_players.values():
 		Events.signal_local_player_is_dead()
-	return PlayerManager.dead_players.size() >= 7
+	return PlayerManager.get_alive_players().size() == 1
+
 
 func start_solo_game() -> void:
+	print("DEBUG START SOLO GAME")
 	_game_type = GameType.SOLO
 	for i in 7: # TODO Avoir un nombre max de joueur qui dépend du mode ?
 		PlayerManager.add_bot()
@@ -82,19 +98,9 @@ func get_current_game_heroes() -> Array[Hero]:
 
 @rpc("any_peer", "call_local")
 func start_game() -> void:
-	print("START GAME 1")
-	MultiplayerDeckManager.init_cards_ref(_active_families, game_rules)
-	if multiplayer.is_server():
-		MultiplayerDeckManager.construct_shop_deck(_active_families, game_rules)
-	
-	print("START GAME 2")
 	get_tree().change_scene_to_packed(_game_scene)
 
-
-
-func get_family_from_type(family_type: Family.FamilyType) -> Family:
-	return _families_ref[family_type]
-
+# TODO: Move all 4 bellow functions into HeroSelector
 
 # [Client only]
 signal _server_hero_pickup_order_answered
@@ -148,17 +154,6 @@ func _answer_hero_pickup_order(hero_pickup_order_player_ids: Array[int]) -> void
 		_hero_pickup_order_players.append(PlayerManager.players[player_id])
 	_server_hero_pickup_order_answered.emit()
 
-
-# ============================== Private function ==============================
-
-func _init_families_ref() -> void:
-	_families_ref[Family.FamilyType.ATTACK] = load("res://Card/Descriptions/Families/attack_family.tres") as Family
-	_families_ref[Family.FamilyType.DEFENSE] = load("res://Card/Descriptions/Families/defense_family.tres") as Family
-	_families_ref[Family.FamilyType.FIRE] = load("res://Card/Descriptions/Families/fire_family.tres") as Family
-	#_families_ref[Family.FamilyType.STORM] = load("res://Resources/Families/storm_family.tres") as Family
-	#_families_ref[Family.FamilyType.SERENITY] = load("res://Resources/Families/heal_family.tres") as Family
-	#_families_ref[Family.FamilyType.Life] = load("res://Resources/Families/life_family.tres") as Family
-	_families_ref[Family.FamilyType.POISON] = load("res://Card/Descriptions/Families/poison_family.tres") as Family
 
 # ============================== RPC - Ask/Answer current round battle ==============================
 

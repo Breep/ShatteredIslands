@@ -13,7 +13,7 @@ var available_cards_composition: Dictionary[Family.FamilyType, int] # Key=Family
 
 func shuffle() -> void:
 	if _card_pile.is_empty():
-		printerr("Trying to shuffle an empty card pile")
+		printerr("ShopDeck: Trying to shuffle an empty card pile")
 		return
 	
 	for i in _card_pile.size():
@@ -27,16 +27,13 @@ func construct_shop_deck(families: Array[Family], game_rules: GameRules) -> void
 	_card_pile.clear()
 	for family in families:
 		for card in family.cards:
+			var number_of_cards_to_add: int
 			match card.rarity:
-				Card.Rarity.COMMON:
-					for i in game_rules.common_number:
-						add_card(card.duplicate())
-				Card.Rarity.RARE:
-					for i in game_rules.rare_number:
-						add_card(card.duplicate())
-				Card.Rarity.EPIC:
-					for i in game_rules.epic_number:
-						add_card(card.duplicate())
+				Card.Rarity.COMMON: number_of_cards_to_add = game_rules.common_number
+				Card.Rarity.RARE: number_of_cards_to_add = game_rules.rare_number
+				Card.Rarity.EPIC: number_of_cards_to_add = game_rules.epic_number
+			for i in number_of_cards_to_add:
+				add_card(card.duplicate())
 	_available_cards = _card_pile.duplicate()
 	_update_available_cards_composition(_available_cards, [])
 

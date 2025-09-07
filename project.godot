@@ -18,17 +18,18 @@ config/icon="uid://hl4bi74ds0b0"
 
 [autoload]
 
+Utils="*res://Lib/utils.gd"
 GameManager="*res://GlobalManagers/game_manager.gd"
 MultiplayerDeckManager="*res://GlobalManagers/multiplayer_deck_manager.gd"
-Utils="*res://Lib/utils.gd"
 TooltipManager="*res://GlobalManagers/tooltip_manager.gd"
 Events="*res://Lib/events.gd"
 RoundManager="*res://GlobalManagers/round_manager.gd"
-Shared="*res://Lib/shared.gd"
 PlayerManager="*res://GlobalManagers/player_manager.gd"
 GlobalFightingManager="*res://GlobalManagers/global_fighting_manager.gd"
 SimpleGrass="*res://addons/simplegrasstextured/singleton.tscn"
 MultiplayerManager="*res://GlobalManagers/multiplayer_manager.gd"
+GlobalGameManager="*res://GlobalManagers/global_game_manager.gd"
+Shared="*res://Lib/shared.gd"
 
 [debug]
 

@@ -54,6 +54,14 @@ var _join_server_reason: String
 
 # ============================== Public functions ==============================
 
+func clear() -> void:
+	players.clear()
+	dead_players.clear()
+	for child in get_children():
+		child.queue_free()
+
+# ============================== Public getter ==============================
+
 func get_local_player() -> Player:
 	if not players.has(multiplayer.get_unique_id()):
 		printerr("PlayerManager: No local player for player_id=", multiplayer.get_unique_id())

@@ -54,6 +54,10 @@ var battles: Dictionary[int, Battle] = {}
 
 # ============================== Public functions ==============================
 
+func clear() -> void:
+	_current_round = 0
+	battle_history.clear()
+
 func get_current_round_battles() -> Array[Battle]:
 	current_round += 1
 	print("[", multiplayer.get_unique_id(), "] STARTING A NEW ROUND: ", current_round, " | Players left: ", PlayerManager.get_alive_players().size())

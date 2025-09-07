@@ -4,7 +4,7 @@ extends Node2D
 # ========================================================================
 # ========================================================================
 # ====================                                ====================
-# ====================     MultiPlayerDeckManager     ====================
+# ====================     MultiplayerDeckManager     ====================
 # ====================                                ====================
 # ========================================================================
 # ========================================================================
@@ -60,31 +60,17 @@ var _cards_refs_displayed_in_player_shop: Dictionary[int, Array] # { player_id, 
 
 # ============================== Public function ==============================
 
-# TODO Rework those 2 function to be private and and a MultiplayerDeckManager.init()
-# Init the cards_ref Array
-func init_cards_ref(families: Array[Family], _rules: GameRules) -> void:
-	for family in families:
-		for card in family.cards:
-			if not _isCardInArray(card, _cards_refs):
-				card.lvl = 1
-				_cards_refs.append(card)
-	
-	# init dictionary
-	for player_id in PlayerManager.players.keys():
-		_cards_refs_displayed_in_player_shop[player_id] = []
+func clear() -> void:
+	_cards_refs.clear()
+	_cards_drawn.clear()
+	_cards_refs_displayed_in_player_shop.clear()
+	_is_ready = false
 
 
-# Construct the shop deck
-func construct_shop_deck(families: Array[Family], rules: GameRules) -> void:
-	if not multiplayer.is_server():
-		printerr("Only the server should construct the shop deck")
-		return
-	
-	shop_deck = ShopDeck.new()
-	shop_deck.construct_shop_deck(families, rules)
-	shop_deck.shuffle()
-	_is_ready = true
-	_shop_deck_shuffled.emit()
+func init(families: Array[Family], rules: GameRules) -> void:
+	_init_cards_ref(families)
+	if multiplayer.is_server():
+		_construct_shop_deck(families, rules)
 
 
 # Draw n cards in the server shop deck
@@ -103,6 +89,30 @@ func try_buy_card_for_player(player: Player, card: Card) -> bool:
 
 
 # ============================== Private function ==============================
+
+func _init_cards_ref(families: Array[Family]) -> void:
+	for family in families:
+		for card in family.cards:
+			if not _isCardInArray(card, _cards_refs):
+				card.lvl = 1
+				_cards_refs.append(card)
+	
+	# init dictionary
+	for player_id in PlayerManager.players.keys():
+		_cards_refs_displayed_in_player_shop[player_id] = []
+
+
+func _construct_shop_deck(families: Array[Family], rules: GameRules) -> void:
+	if not multiplayer.is_server():
+		printerr("Only the server should construct the shop deck")
+		return
+	
+	shop_deck = ShopDeck.new()
+	shop_deck.construct_shop_deck(families, rules)
+	shop_deck.shuffle()
+	_is_ready = true
+	_shop_deck_shuffled.emit()
+
 
 func _server_smart_draw_n_cards(player: Player, cards_to_remove: Array[Card], number_of_cards_to_draw: int) -> Array[Card]:
 	if not _is_ready:

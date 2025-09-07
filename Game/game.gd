@@ -46,9 +46,13 @@ var _current_round_battles: Array[Battle]
 
 # ============================== Node base functions ==============================
 
+func _init() -> void:
+	pass
+
+func _enter_tree() -> void:
+	pass
+
 func _ready() -> void:
-	if PlayerManager.players.size() < 2: return # Don't do anything if there is no player (for testing purpose)
-	
 	_hero_selector.all_heroes_picked.connect(_on_hero_selector_all_heroes_picked)
 	_buying_island.buying_phase_finished.connect(_on_buying_island_buying_phase_finished)
 	
@@ -123,7 +127,6 @@ func _init_current_round_player_id_islands(islands_number: int) -> void:
 		var random_player: Player = alive_players.pick_random()
 		_current_round_player_id_islands.append(random_player.id)
 		alive_players.erase(random_player)
-	return
 
 # ============================== Spawn functions ==============================
 

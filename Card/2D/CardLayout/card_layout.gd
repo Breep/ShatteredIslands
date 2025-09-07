@@ -14,7 +14,7 @@ extends Control
 func update_card_layout(card: Card) :
 	_description_label.text = card.player_upgrade.get_description(card.lvl)
 	_picture.texture = card.picture
-	_family_icon.texture = GameManager.get_family_from_type(card.family).icon
+	_family_icon.texture = Shared.FAMILIES[card.family].icon
 	_card_name.text = card.name
 	match card.rarity :
 		Card.Rarity.COMMON:

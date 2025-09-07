@@ -72,6 +72,13 @@ func _ready() -> void:
 
 # ============================== Public functions ==============================
 
+func clear() -> void:
+	_fighting_managers.clear()
+	_current_active_fighting_managers.clear()
+	_players_running_playback.clear()
+	_fighting_state = FightingState.UNDEF
+
+
 func start(prototyping: bool = false) -> void:
 	if not multiplayer.is_server(): return
 	__prototyping = prototyping
