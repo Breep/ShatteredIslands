@@ -23,3 +23,7 @@ func _specific_init() -> void:
 func _on_mana_tick_timer_timeout() -> void:
 	var inc: float = _owner.stats.mana_regen * _timer_wait_time
 	_owner.stats.mana += inc
+	
+	if _owner.stats.mana >= _owner.stats.mana_max:
+		_owner.cast_ultimate()
+		_owner.stats.mana -= _owner.stats.mana_max

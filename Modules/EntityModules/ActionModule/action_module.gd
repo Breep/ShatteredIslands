@@ -10,6 +10,7 @@ extends Module
 var _spawn_manager: SpawnManager
 
 const METEOR_SCENE: PackedScene = preload("res://SpellsAndProjectiles/Spells/Meteor/meteor.tscn")
+const DARK_STORM_SCENE: PackedScene = preload("res://SpellsAndProjectiles/Spells/DarkStorm/dark_storm.tscn")
 
 # ============================== Public functions ==============================
 
@@ -127,10 +128,10 @@ func inflict_condition_stacks(target: Character, stacks_number: int, stack_type:
 
 # ============================== Spells ==============================
 
-func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary) -> void:
+func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary = {}) -> void:
 	match spell_type:
-		Spell.Type.METEOR:
-			_cast_meteor(target, spell_modifier)
+		Spell.Type.METEOR: _cast_meteor(target, spell_modifier)
+		Spell.Type.DARK_STORM: _cast_dark_storm(target, spell_modifier)
 
 
 func _cast_meteor(target: Entity, spell_modifier: Dictionary) -> void:
@@ -145,7 +146,17 @@ func _cast_meteor(target: Entity, spell_modifier: Dictionary) -> void:
 	_spawn_manager.spawn_spell(meteor)
 
 
-
+func _cast_dark_storm(target: Entity, spell_modifier: Dictionary) -> void:
+	_owner.signal_spell_casted(target, Spell.Type.DARK_STORM)
+	var dark_storm: DarkStorm = DARK_STORM_SCENE.instantiate()
+	if multiplayer.is_server():
+		var damage: int = spell_modifier[Spell.DarkStormModifier.DAMAGE]
+		var period: float = spell_modifier[Spell.DarkStormModifier.PERIOD]
+		var lifespan: float = spell_modifier[Spell.DarkStormModifier.LIFESPAN]
+		dark_storm.init(target, damage, period, lifespan, _owner)
+	else:
+		dark_storm.init(target, 0, 0, 0, _owner)
+	_spawn_manager.spawn_spell(dark_storm)
 
 
 

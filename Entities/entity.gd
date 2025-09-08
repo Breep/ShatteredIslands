@@ -101,6 +101,9 @@ func projectile_attack(_target: Character, _projectile_type: Projectile.Projecti
 func cast_spell(_target: Entity, _spell_type: Spell.Type, _spell_modifier: Dictionary) -> void:
 	printerr("Entity: virtual cast_spell() called [", get_path(), "]")
 
+func cast_ultimate() -> void:
+	printerr("Entity: virtual cast_ultimate() called [", get_path(), "]")
+
 func heal(_target: Character, _heal_amount: int) -> void:
 	printerr("Entity: virtual heal() called [", get_path(), "]")
 

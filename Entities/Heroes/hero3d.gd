@@ -17,3 +17,6 @@ var _character_owner: Character
 		if value == _character_owner: return
 		_character_owner = value
 		if _hero_animator != null: _hero_animator.character_owner = value
+
+func cast_ultimate() -> void:
+	printerr("Hero3D: virtual cast_ultimate() called [", get_path(), "]")

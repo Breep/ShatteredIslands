@@ -123,8 +123,11 @@ func direct_attack_percent(target: Character, damage_percent: float, damage_type
 func projectile_attack(target: Character, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	_action_module.projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
 
-func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary) -> void:
+func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary = {}) -> void:
 	_action_module.cast_spell(target, spell_type, spell_modifier)
+
+func cast_ultimate() -> void:
+	_hero_3D.cast_ultimate()
 
 func heal(target: Character, heal_amount: int) -> void:
 	_action_module.heal(target, heal_amount)

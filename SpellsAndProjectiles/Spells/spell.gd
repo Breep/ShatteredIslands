@@ -10,3 +10,9 @@ enum MeteorModifier {
 	IGNITE_STACKS,
 	DAMAGE_PER_STACK
 }
+
+enum DarkStormModifier {
+	DAMAGE,
+	PERIOD,
+	LIFESPAN
+}

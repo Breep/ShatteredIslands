@@ -7,13 +7,15 @@ extends Node3D
 
 # ============================== Private variables ==============================
 
-var _team: int = -1 # Team of the caster
 var _damage: int = -1 # Damage done to all enemies inside each tick
 var _period: float = -1.0 # Time between each tick
 var _lifespan: float = -1.0 # Lifespan of the spell
 var _is_init: bool = false
 
 var _entities_inside: Array[Entity] # Array of all entities inside the area
+
+var _owner: Entity # Caster
+var _target: Entity # Target (used for location)
 
 # ============================== Local nodes ==============================
 
@@ -28,6 +30,8 @@ func _ready() -> void:
 		queue_free()
 		return
 	
+	global_position = _target.global_position
+	
 	_damage_tick_timer.wait_time = _period
 	_damage_tick_timer.start()
 	
@@ -36,11 +40,12 @@ func _ready() -> void:
 
 # ============================== Public functions ==============================
 
-func init(team: int, damage: int, period: float, lifespan: float) -> void:
-	_team = team
+func init(target: Entity, damage: int, period: float, lifespan: float, owner: Entity = null) -> void:
+	_target = target
 	_damage = damage
 	_period = period
 	_lifespan = lifespan
+	_owner = owner
 	_is_init = true
 
 # ============================== Callbacks ==============================
@@ -57,8 +62,8 @@ func _on_area_3d_body_exited(body: Node3D) -> void:
 
 func _on_damage_tick_timer_timeout() -> void:
 	for entity in _entities_inside:
-		if entity.team != _team:
-			entity.take_damage(_damage, Utils.DamageType.PHYSICAL)
+		if entity.team != _owner.team:
+			_owner.direct_attack(entity, _damage, Utils.DamageType.PHYSICAL)
 
 
 func _on_lifespan_timer_timeout() -> void:
