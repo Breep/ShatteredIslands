@@ -6,7 +6,7 @@ func cast_ultimate() -> void:
 	if target == null:
 		return
 	var spell_modifier: Dictionary = {
-		Spell.DarkStormModifier.DAMAGE: 10,
+		Spell.DarkStormModifier.DAMAGE: _character_owner.stats.attack_damage * 0.5,
 		Spell.DarkStormModifier.PERIOD: 0.2,
 		Spell.DarkStormModifier.LIFESPAN: 1
 	}

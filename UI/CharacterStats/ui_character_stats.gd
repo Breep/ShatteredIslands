@@ -59,7 +59,7 @@ func _update_local_nodes() -> void:
 	_health_label.text = str(_entity_stats.health) + "/" + str(_entity_stats.health_max)
 	_mana_bar.max_value = _entity_stats.mana_max
 	_mana_bar.value = _entity_stats.mana
-	_mana_label.text = str(_entity_stats.mana) + "/" + str(_entity_stats.mana_max)
+	_mana_label.text = str(_entity_stats.mana as int) + "/" + str(_entity_stats.mana_max as int)
 	_attack_label.text = str(_entity_stats.attack_damage)
 	_attack_speed_label.text = str(_entity_stats.attack_speed)
 	_crit_chance_label.text = str(_entity_stats.physical_critical_chance)
@@ -122,7 +122,7 @@ func _on_entity_stats_mana_max_changed(new_mana_max: int) -> void:
 
 func _on_entity_stats_mana_changed(new_mana: float) -> void:
 	_mana_bar.value = new_mana
-	_mana_label.text = str(new_mana) + "/" + str(_entity_stats.mana_max)
+	_mana_label.text = str(new_mana as int) + "/" + str(_entity_stats.mana_max as int)
 
 
 func _on_entity_stats_attack_damage_changed(new_attack_damage: int) -> void:
