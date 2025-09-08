@@ -53,13 +53,55 @@ func try_buy_card(card: Card) -> bool:
 	
 	var buy_ok = await MultiplayerDeckManager.try_buy_card_for_player(player, card)
 	if buy_ok:
-		await refresh_shop_cards()
+		await _refresh_shop_cards()
 		card_bought.emit(card)
 	
 	return true
 
 
-func refresh_shop_cards() -> void:
+signal _server_refresh_permission_answered
+var _server_refresh_permission_is_known: bool = false
+var _server_refresh_permission_said_can_refresh: bool = false
+func try_refresh_shop_cards() -> void:
+	if player.gold < 20: return
+	_server_refresh_permission_is_known = false
+	_server_refresh_permission_said_can_refresh = false
+	_ask_for_refresh_permission.rpc_id(1)
+	if not _server_refresh_permission_is_known:
+		await _server_refresh_permission_answered
+	if _server_refresh_permission_said_can_refresh == true:
+		await _refresh_shop_cards()
+
+
+@rpc("any_peer", "call_local", "reliable")
+func _ask_for_refresh_permission() -> void:
+	if not multiplayer.is_server():
+		printerr("CardShop: Only the server can decide if the player can refresh !")
+		return
+	
+	var peer_id: int = multiplayer.get_remote_sender_id()
+	var can_refresh: bool = false
+	if PlayerManager.players[peer_id].gold >= 20:
+		PlayerManager.players[peer_id].gold -= 20
+		can_refresh = true
+	
+	_answer_refresh_permission.rpc_id(peer_id, can_refresh)
+
+
+@rpc("authority", "call_local", "reliable")
+func _answer_refresh_permission(can_refresh: bool) -> void:
+	_server_refresh_permission_said_can_refresh = can_refresh
+	_server_refresh_permission_is_known = true
+	_server_refresh_permission_answered.emit()
+
+# ============================== Private functions ==============================
+
+func _adapt_cards_lvl_to_player() -> void:
+	for card in cards_displayed:
+		card.lvl = player.deck.get_card_lvl(card) + 1
+
+
+func _refresh_shop_cards() -> void:
 	if player.deck == null:
 		printerr("CardShop: Can't update shop cards, there is no player_deck")
 		return
@@ -68,19 +110,13 @@ func refresh_shop_cards() -> void:
 	_adapt_cards_lvl_to_player()
 	shop_refreshed.emit(cards_displayed)
 
-# ============================== Private functions ==============================
-
-func _adapt_cards_lvl_to_player() -> void:
-	for card in cards_displayed:
-		card.lvl = player.deck.get_card_lvl(card) + 1
-
 # ============================== Callbacks ==============================
 
 func _on_events_game_state_changed(state: Game.GameState) -> void:
 	if state == Game.GameState.BUYING:
 		_is_enabled = true
 		if RoundManager.current_round == 1:
-			refresh_shop_cards()
+			_refresh_shop_cards()
 
 
 

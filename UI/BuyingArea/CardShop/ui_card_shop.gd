@@ -91,3 +91,7 @@ func _on_local_player_death(_player: Player) -> void:
 	print("CarsShop: lock card shop for ", _local_player.name)
 	set_inactive()
 	_is_locked = true
+
+
+func _on_refresh_button_pressed() -> void:
+	_card_shop.try_refresh_shop_cards()
