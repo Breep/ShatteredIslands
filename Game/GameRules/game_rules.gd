@@ -33,3 +33,12 @@ extends Resource
 @export var xp_per_100_gold: int # XP gained for each 100 golds spent
 @export var xp_per_family_lvl: int # XP gained each time a card family lvl up
 @export var xp_required_for_each_player_lvl: Array[int]
+
+
+func get_updated_player_damage(player_lvl: int, current_player_win_lose_diff: int, last_round_won: bool, current_round: int) -> int:
+	var damage_min: int = damage_player_level_modifier[player_lvl] # = player_lvl in normal games
+	var damage_max: int = current_round
+	var damage_mod_last_fight: int = damage_on_win_lose_modifier if last_round_won else -damage_max_diff_win_lose
+	var damage_mod_win_loose_diff: int = current_player_win_lose_diff
+	var damage: int = damage_player_level_modifier[player_lvl] + damage_mod_last_fight + damage_mod_win_loose_diff
+	return clampi(damage, damage_min, damage_max)

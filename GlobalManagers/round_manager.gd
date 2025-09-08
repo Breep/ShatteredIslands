@@ -109,10 +109,7 @@ func starting_round_player_changes() -> void:
 		var gold_increase_win_streak: int = game_rules.gold_earned_on_win_streak[player_win_streak]
 		player.gold += game_rules.gold_earned_per_round + gold_increase_economy + gold_increase_hp_lost + gold_increase_win_streak
 		
-		var damage_mod_lvl: int = game_rules.damage_player_level_modifier[player.lvl]
-		var damage_min: int = 1 + floor(current_round as float / game_rules.damage_min_round_divider as float) + damage_mod_lvl
-		var damage_mod_win_lose: int = player.current_damage_win_lose_diff * game_rules.damage_on_win_lose_modifier
-		player.damage = clampi(damage_min + damage_mod_win_lose, damage_min, 30)
+		player.damage = game_rules.get_updated_player_damage(player.lvl, player.current_damage_win_lose_diff, player.win_streak > 0, _current_round)
 		
 		player.xp += game_rules.xp_per_round
 
@@ -129,7 +126,7 @@ func ending_round_player_changes() -> void:
 		await _current_round_battle_history_is_ready
 	
 	for battle_result in battle_history[current_round].battle_results:
-		var players_by_team: Array[Array] = battle_result.players.values()
+		var players_by_team: Array[Array] = battle_result.players.values() # [[Loosers], [], [], [], [Winners]]
 		var winners: Array = players_by_team[players_by_team.size() - 1]
 		var loosers: Array = players_by_team[0]
 		var winner_team_damage: int = 0
