@@ -125,7 +125,7 @@ func inflict_condition_stacks(target: Character, stacks_number: int, stack_type:
 	if not multiplayer.is_server(): return
 	target.take_condition_stacks(stacks_number, stack_type, _owner)
 
-# ============================== Condition stacks ==============================
+# ============================== Spells ==============================
 
 func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary) -> void:
 	match spell_type:

@@ -8,7 +8,7 @@
 script = ExtResource("3_hluaq")
 health_max = 1000
 mana_max = 100
-mana_regen = 2.0
+mana_regen = 10.0
 attack_damage = 20
 attack_speed = 0.5
 physical_critical_chance = 15.0

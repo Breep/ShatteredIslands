@@ -2,7 +2,8 @@ class_name Spell
 extends Node
 
 enum Type {
-	METEOR
+	METEOR,
+	DARK_STORM,
 }
 
 enum MeteorModifier {

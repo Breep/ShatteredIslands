@@ -135,6 +135,9 @@ func heal_percent(target: Character, percent: float, percent_modifier: Utils.Per
 func inflict_condition_stacks(target: Character, stacks_number: int, stack_type: Utils.StackType) -> void:
 	_action_module.inflict_condition_stacks(target, stacks_number, stack_type)
 
+func ultimate() -> void:
+	_hero_3D.ultimate()
+
 # ===== Interaction
 
 func take_damage(damage: int, damage_type: Utils.DamageType, is_critical: bool = false, source: Entity = null, attack_type: Utils.AttackType = Utils.AttackType.UNDEF) -> void:
