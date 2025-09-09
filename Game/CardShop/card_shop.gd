@@ -120,6 +120,8 @@ func _on_events_game_state_changed(state: Game.GameState) -> void:
 		_is_enabled = true
 		if RoundManager.current_round == 1:
 			_refresh_shop_cards()
+	else:
+		_is_enabled = false
 
 
 
