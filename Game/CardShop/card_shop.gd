@@ -5,6 +5,7 @@ extends Node
 
 signal card_bought(card: Card)
 signal shop_refreshed(new_cards: Array[Card])
+signal shop_tried_to_refresh() # Used to notice UICardShop that it can reactivate its refresh button
 
 # ============================== Public variables ==============================
 
@@ -58,6 +59,7 @@ func try_buy_card(card: Card) -> bool:
 	
 	return true
 
+# === REFRESH CARD SHOP ===
 
 signal _server_refresh_permission_answered
 var _server_refresh_permission_is_known: bool = false
@@ -71,6 +73,7 @@ func try_refresh_shop_cards() -> void:
 		await _server_refresh_permission_answered
 	if _server_refresh_permission_said_can_refresh == true:
 		await _refresh_shop_cards()
+	shop_tried_to_refresh.emit()
 
 
 @rpc("any_peer", "call_local", "reliable")

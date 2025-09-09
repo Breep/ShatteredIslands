@@ -14,8 +14,9 @@ signal card_bought(card: Card)
 # ============================== Local scene nodes ==============================
 
 @export var _card_shop: CardShop
-
 @export var _card_buttons: Array[CardButton]
+
+@onready var _refresh_button: Button = %RefreshButton
 
 # ============================== Node base functions ==============================
 
@@ -30,9 +31,12 @@ func _ready() -> void:
 	
 	_card_shop.shop_refreshed.connect(_on_card_shop_shop_refreshed)
 	_card_shop.card_bought.connect(_on_card_shop_card_bought)
+	_card_shop.shop_tried_to_refresh.connect(_on_card_shop_shop_tried_to_refresh)
 	
 	for card_button in _card_buttons:
 		card_button.card_selected.connect(_on_card_shop_button_pressed, CONNECT_ONE_SHOT)
+	
+	_refresh_button.pressed.connect(_on_refresh_button_pressed, CONNECT_ONE_SHOT)
 
 # ============================== Public functions ==============================
 
@@ -83,15 +87,21 @@ func _on_card_shop_card_bought(card: Card) -> void:
 	card_bought.emit(card)
 
 
-func _on_close_button_pressed() -> void:
-	set_inactive()
-
-
 func _on_local_player_death(_player: Player) -> void:
 	print("CarsShop: lock card shop for ", _local_player.name)
 	set_inactive()
 	_is_locked = true
 
+func _on_card_shop_shop_tried_to_refresh() -> void:
+	_refresh_button.pressed.connect(_on_refresh_button_pressed, CONNECT_ONE_SHOT)
+	_refresh_button.disabled = false
+
+# ============================== Buttons Callbacks ==============================
+
+func _on_close_button_pressed() -> void:
+	set_inactive()
+
 
 func _on_refresh_button_pressed() -> void:
+	_refresh_button.disabled = true
 	_card_shop.try_refresh_shop_cards()
