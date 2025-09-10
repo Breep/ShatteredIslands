@@ -1,7 +1,6 @@
 class_name ShopDeck
 extends Deck
 
-
 var _available_cards: Array[Card]
 var available_cards: Array[Card]: # ALL cards in card_pile + ALL cards in players shop
 	get: return _available_cards
@@ -10,6 +9,12 @@ signal available_cards_composition_changed(new_family_composition: Dictionary[Fa
 var available_cards_composition: Dictionary[Family.FamilyType, int] # Key=FamilyType, Value=number of cards of this family in the available cards
 
 # ============================== Public function ==============================
+
+func get_from_uid(uid: int) -> Card:
+	for card in _card_pile:
+		if card.uid == uid:
+			return card
+	return null
 
 func shuffle() -> void:
 	if _card_pile.is_empty():
@@ -25,6 +30,7 @@ func shuffle() -> void:
 
 func construct_shop_deck(families: Array[Family], game_rules: GameRules) -> void:
 	_card_pile.clear()
+	var uid: int = 0
 	for family in families:
 		for card in family.cards:
 			var number_of_cards_to_add: int
@@ -33,11 +39,15 @@ func construct_shop_deck(families: Array[Family], game_rules: GameRules) -> void
 				Card.Rarity.RARE: number_of_cards_to_add = game_rules.rare_number
 				Card.Rarity.EPIC: number_of_cards_to_add = game_rules.epic_number
 			for i in number_of_cards_to_add:
-				add_card(card.duplicate())
+				var ucard: Card = card.duplicate()
+				ucard.uid = uid
+				uid += 1
+				add_card(ucard)
 	_available_cards = _card_pile.duplicate()
 	_update_available_cards_composition(_available_cards, [])
 
 
+#TODO Add check on family level
 func smart_draw_n_cards(cards_to_remove: Array[Card], number_of_cards_to_draw: int):
 	#print("Remaining cards in shop deck: ", size())
 	var card_pile_copy = _card_pile.duplicate()

@@ -13,3 +13,5 @@ enum Rarity {
 @export var rarity : Rarity
 @export var player_upgrade: CharacterUpgrade
 @export var lvl : int = 1
+
+var uid: int

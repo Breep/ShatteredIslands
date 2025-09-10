@@ -122,7 +122,6 @@ func _apply_spell_casted(battle_log: Dictionary) -> void:
 
 #{"time":0.1, "source":1, "stack_type":<stack_type>, "stack_number":42}
 func _apply_stack_taken(battle_log: Dictionary) -> void:
-	print("DEBUG - STACK TAKEN")
 	var source_id: int = battle_log[BattleLog.Main.SOURCE]
 	var stack_type: Utils.StackType = battle_log[BattleLog.Main.STACK_TYPE]
 	var stack_number: int = battle_log[BattleLog.Main.STACK_NUMBER]

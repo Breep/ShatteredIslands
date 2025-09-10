@@ -246,6 +246,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="RandomCardButton" type="Button" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardPanel"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

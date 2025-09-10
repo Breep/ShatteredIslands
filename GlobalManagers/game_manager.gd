@@ -54,7 +54,7 @@ func clear() -> void:
 	_game_type = GameType.UNDEF
 	_active_families.clear()
 	_random_heroes_ref.clear()
-	MultiplayerDeckManager.clear()
+	ServerCardShop.clear()
 
 
 func init() -> void:
@@ -63,7 +63,6 @@ func init() -> void:
 	_active_families.append(_FAMILIES_REF[Family.FamilyType.POISON])
 	_active_families.append(_FAMILIES_REF[Family.FamilyType.FIRE])
 	_active_families.append(_FAMILIES_REF[Family.FamilyType.ATTACK])
-	MultiplayerDeckManager.init(_active_families, _game_rules)
 
 
 #TODO Move into round manager ?
@@ -98,6 +97,7 @@ func get_current_game_heroes() -> Array[Hero]:
 
 @rpc("any_peer", "call_local")
 func start_game() -> void:
+	ServerCardShop.init(_active_families, _game_rules)
 	get_tree().change_scene_to_packed(_game_scene)
 
 # TODO: Move all 4 bellow functions into HeroSelector

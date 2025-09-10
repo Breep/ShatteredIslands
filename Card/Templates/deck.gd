@@ -1,12 +1,9 @@
 class_name Deck
 extends Resource
 
-# TODO Check if there is a way to compare cards other than with their names
-# Can't directly do card1 == card2 because cards are duplicated ressource hence difference
-
 # ============================== Public variables ==============================
 
-var _card_pile: Array[Card] = []
+var _card_pile: Array[Card]
 var card_pile: Array[Card]:
 	get: return _card_pile
 
@@ -14,7 +11,7 @@ var _families_count: Dictionary[Family.FamilyType, int]
 var families_count: Dictionary[Family.FamilyType, int]:
 	get: return _families_count
 
-# ============================== Private functions ==============================
+# ============================== Public functions ==============================
 
 func add_card(card_to_add: Card) -> void:
 	if card_to_add == null:

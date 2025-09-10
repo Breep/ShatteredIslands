@@ -25,6 +25,8 @@ var _is_locked: bool
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
+	if multiplayer.is_server() and GameManager.game_type != GameManager.GameType.SOLO:
+		return
 	_local_player = PlayerManager.get_local_player()
 	_local_player.death.connect(_on_local_player_death)
 

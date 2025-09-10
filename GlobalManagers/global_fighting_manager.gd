@@ -216,7 +216,6 @@ func _notice_playback_is_over() -> void:
 # ============================== FightingManager callbacks ==============================
 
 func _fighting_manager_fighting_is_over(fighting_manager: FightingManager, _winner_teams_order: Array[int]) -> void:
-	print("[", multiplayer.get_unique_id(), "] GlobalFightingManager: A FIGHT IS OVER")
 	if not _current_active_fighting_managers.has(fighting_manager):
 		printerr("GlobalFightingManager: An unexpected FightingArea signal a fight is over [", fighting_manager.get_path(), "]")
 		return
@@ -227,7 +226,6 @@ func _fighting_manager_fighting_is_over(fighting_manager: FightingManager, _winn
 
 
 func _on_fighting_manager_fight_is_ready_to_be_started(fighting_manager: FightingManager) -> void:
-	print("[", multiplayer.get_unique_id(), "] GlobalFightingManager: A FIGHT IS READY TO START")
 	if _current_active_fighting_managers.has(fighting_manager):
 		printerr("GlobalFightingManager: A fight is starting more than once at the same time on the same FightingArea [", fighting_manager.get_path(), "]")
 		return

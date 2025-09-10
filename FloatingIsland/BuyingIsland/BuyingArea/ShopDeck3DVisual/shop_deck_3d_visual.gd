@@ -20,9 +20,9 @@ var _card_tower_family_ref: Dictionary[Family.FamilyType, CardTower]
 
 func connect_to_shop_deck() -> void:
 	if not multiplayer.is_server(): return
-	if MultiplayerDeckManager.shop_deck == null: return
-	MultiplayerDeckManager.shop_deck.available_cards_composition_changed.connect(_on_shop_deck_available_cards_composition_changed)
-	_setup_card_towers(MultiplayerDeckManager.shop_deck.available_cards_composition)
+	if ServerCardShop.shop_deck == null: return
+	ServerCardShop.shop_deck.available_cards_composition_changed.connect(_on_shop_deck_available_cards_composition_changed)
+	_setup_card_towers(ServerCardShop.shop_deck.available_cards_composition)
 
 # ============================== Private functions ==============================
 

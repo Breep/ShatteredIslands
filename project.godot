@@ -20,7 +20,7 @@ config/icon="uid://hl4bi74ds0b0"
 
 Utils="*res://Lib/utils.gd"
 GameManager="*res://GlobalManagers/game_manager.gd"
-MultiplayerDeckManager="*res://GlobalManagers/multiplayer_deck_manager.gd"
+ServerCardShop="*res://GlobalManagers/server_card_shop.gd"
 TooltipManager="*res://GlobalManagers/tooltip_manager.gd"
 Events="*res://Lib/events.gd"
 RoundManager="*res://GlobalManagers/round_manager.gd"

@@ -17,6 +17,7 @@ signal card_bought(card: Card)
 @export var _card_buttons: Array[CardButton]
 
 @onready var _refresh_button: Button = %RefreshButton
+@onready var _random_card_button: Button = %RandomCardButton
 
 # ============================== Node base functions ==============================
 
@@ -32,11 +33,13 @@ func _ready() -> void:
 	_card_shop.shop_refreshed.connect(_on_card_shop_shop_refreshed)
 	_card_shop.card_bought.connect(_on_card_shop_card_bought)
 	_card_shop.shop_tried_to_refresh.connect(_on_card_shop_shop_tried_to_refresh)
+	_card_shop.shop_tried_to_buy_random_card.connect(_on_card_shop_shop_tried_to_buy_random_card)
 	
 	for card_button in _card_buttons:
 		card_button.card_selected.connect(_on_card_shop_button_pressed, CONNECT_ONE_SHOT)
 	
 	_refresh_button.pressed.connect(_on_refresh_button_pressed, CONNECT_ONE_SHOT)
+	_random_card_button.pressed.connect(_on_random_card_button_pressed, CONNECT_ONE_SHOT)
 
 # ============================== Public functions ==============================
 
@@ -92,9 +95,15 @@ func _on_local_player_death(_player: Player) -> void:
 	set_inactive()
 	_is_locked = true
 
+
 func _on_card_shop_shop_tried_to_refresh() -> void:
 	_refresh_button.pressed.connect(_on_refresh_button_pressed, CONNECT_ONE_SHOT)
 	_refresh_button.disabled = false
+
+
+func _on_card_shop_shop_tried_to_buy_random_card() -> void:
+	_random_card_button.pressed.connect(_on_random_card_button_pressed, CONNECT_ONE_SHOT)
+	_random_card_button.disabled = false
 
 # ============================== Buttons Callbacks ==============================
 
@@ -105,3 +114,8 @@ func _on_close_button_pressed() -> void:
 func _on_refresh_button_pressed() -> void:
 	_refresh_button.disabled = true
 	_card_shop.try_refresh_shop_cards()
+
+
+func _on_random_card_button_pressed() -> void:
+	_random_card_button.disabled = true
+	_card_shop.try_buy_random_card()
