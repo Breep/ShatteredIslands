@@ -29,15 +29,6 @@ var shop_deck: ShopDeck
 
 # ============================== Private ==============================
 
-# [Client only]
-# Array of cards drawn by the server when the client ask for cards
-# Used to communicate between 2 async rpc
-var _cards_drawn: Array[Card]
-
-# [Client only]
-# Used to store server response for buying request
-
-
 # [Server only] Used to know if the server can start to answer clients
 var _is_ready: bool = false
 
@@ -47,7 +38,6 @@ var _cards_in_player_shop: Dictionary[int, Array] # { player_id, Array[Card] }
 # ============================== Public INIT/CLEAR function ==============================
 
 func clear() -> void:
-	_cards_drawn.clear()
 	_cards_in_player_shop.clear()
 	_is_ready = false
 
@@ -141,7 +131,7 @@ func _client_try_buy_card_from_player_shop(card: Card) -> bool:
 	return false
 
 
-@rpc("any_peer", "call_local", "reliable")
+@rpc("any_peer", "call_remote", "reliable")
 func _ask_buy_card_from_player_shop(card_uid: int) -> void:
 	if not multiplayer.is_server(): return
 	if not _is_ready: await _shop_deck_shuffled
@@ -164,7 +154,7 @@ func _ask_buy_card_from_player_shop(card_uid: int) -> void:
 	_answer_buy_card_from_player_shop.rpc_id(peer_id, ServerResponse.OK)
 
 
-@rpc("authority", "call_local", "reliable")
+@rpc("authority", "call_remote", "reliable")
 func _answer_buy_card_from_player_shop(server_response: ServerResponse) -> void:
 	_server_response = server_response
 	_answer_for_buying_request_received.emit()
@@ -172,19 +162,46 @@ func _answer_buy_card_from_player_shop(server_response: ServerResponse) -> void:
 # ========== BUY RANDOM CARD
 
 func _server_try_buy_random_card_for_player(player: Player) -> Card:
-	if player.gold < 90: # TODO check gamerules for card price
-		printerr("[", multiplayer.get_unique_id(),"]  Peer.", player.id, " is not rich enough")
-		return null
-	var cards_to_remove: Array[Card] = player.deck.get_max_lvl_cards()
-	var cards: Array[Card] = shop_deck.smart_draw_n_cards(cards_to_remove, 1)
+	if player.gold < 90: return null
+	var cards: Array[Card] = shop_deck.draw_n_cards(1, player.deck)
 	player.deck.add_card(cards[0])
 	player.gold -= 90
 	return cards[0]
 
 
+signal _server_buy_random_card_answered
+var _random_card_bought: Card
 func _client_try_buy_random_card_for_player() -> Card:
-	return null
+	_ask_buy_random_card_from_all.rpc_id(SERVER_ID)
+	await _server_buy_random_card_answered
+	match _server_response:
+		ServerResponse.OK:
+			PlayerManager.get_local_player().deck.add_card(_random_card_bought)
+		ServerResponse.NOT_ENOUGHT_MONEY:
+			print("ServerCardShop: [id:", multiplayer.get_unique_id(),"] Not enought money")
+	return _random_card_bought
 
+
+@rpc("any_peer", "call_remote", "reliable")
+func _ask_buy_random_card_from_all() -> void:
+	if not multiplayer.is_server(): return
+	if not _is_ready: await _shop_deck_shuffled
+	var peer_id: int = multiplayer.get_remote_sender_id()
+	var player: Player = PlayerManager.players[peer_id]
+	if player.gold < 90:
+		_answer_buy_random_card_from_all(-1, ServerResponse.NOT_ENOUGHT_MONEY)
+		return
+	var cards: Array[Card] = shop_deck.draw_n_cards(1, player.deck)
+	player.deck.add_card(cards[0])
+	player.gold -= 90
+	_answer_buy_random_card_from_all.rpc_id(peer_id, cards[0].uid, ServerResponse.OK)
+
+
+@rpc("authority", "call_remote", "reliable")
+func _answer_buy_random_card_from_all(card_uid: int, server_response: ServerResponse) -> void:
+	_server_response = server_response
+	_random_card_bought = shop_deck.get_card(card_uid)
+	_server_buy_random_card_answered.emit()
 
 # ========== REFRESH PLAYER CARD SHOP
 

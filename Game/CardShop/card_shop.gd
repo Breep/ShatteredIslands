@@ -61,13 +61,15 @@ func try_refresh_shop_cards() -> void:
 
 # Try to buy a random card for the player owner of this shop, It will ask the server for permission
 func try_buy_random_card() -> bool:
-	if !_is_enabled or player.gold < 100: return false
+	if !_is_enabled or player.gold < 90: 
+		shop_tried_to_buy_random_card.emit()
+		return false
 	var card: Card = await ServerCardShop.try_buy_random_card_for_player(player)
-	shop_tried_to_buy_random_card.emit()
 	if card != null:
+		await _refresh_shop_cards(true)
 		card_bought.emit(card)
-		return true
-	return false
+	shop_tried_to_buy_random_card.emit()
+	return card != null
 
 # ============================== Private functions ==============================
 

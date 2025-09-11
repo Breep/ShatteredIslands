@@ -21,7 +21,6 @@ func construct_shop_deck(families: Array[Family], game_rules: GameRules) -> void
 				ucard.uid = uid
 				uid += 1
 				add_card(ucard)
-	
 	_update_available_cards_composition(_card_pile.values(), [])
 
 
