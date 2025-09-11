@@ -100,42 +100,8 @@ func _construct_shop_deck(families: Array[Family], rules: GameRules) -> void:
 
 func _server_draw_n_cards(player: Player, number_of_cards_to_draw: int) -> Array[Card]:
 	if not _is_ready: await _shop_deck_shuffled
-	var cards_to_remove: Array[Card] = player.deck.get_max_lvl_cards()
-	var cards_drawn = shop_deck.smart_draw_n_cards(cards_to_remove, number_of_cards_to_draw)
+	var cards_drawn = shop_deck.draw_n_cards(number_of_cards_to_draw, player.deck)
 	return cards_drawn
-
-
-#func _client_draw_n_cards(number_of_cards_to_draw: int) -> Array[Card]:
-	#_cards_drawn.clear()
-	#_ask_draw_n_random_card.rpc_id(SERVER_ID, number_of_cards_to_draw)
-	#await _answer_for_draw_received
-	#return _cards_drawn
- #
-#
-## Client call this server rpc  to request the server to draw <number_of_cards_to_draw> cards from its shopdeck
-## If possible, the server will draw as many cards as it can and store information about the cards draw in
-## _cards_refs_displayed_in_player_shop[peer_id]. Then it will anwser the peer_id client only with an array
-## of cards_ref_ids
-#@rpc("any_peer", "call_local", "reliable")
-#func _ask_draw_n_random_card(number_of_cards_to_draw: int) -> void:
-	#if not multiplayer.is_server(): return
-	#if not _is_ready: await _shop_deck_shuffled
-	#var peer_id: int = multiplayer.get_remote_sender_id()
-	#var cards_to_remove: Array[Card] = PlayerManager.players[peer_id].deck.get_max_lvl_cards()
-	#var cards_drawn: Array[Card] = shop_deck.smart_draw_n_cards(cards_to_remove, number_of_cards_to_draw)
-	#var cards_drawn_uids: Array[int]
-	#for card in cards_drawn:
-		#cards_drawn_uids.append(card.uid)
-	#
-	#_cards_in_player_shop[peer_id] = cards_drawn
-	#_answer_draw_cards.rpc_id(peer_id, cards_drawn_uids)
-#
-#
-#@rpc("authority", "call_local", "reliable")
-#func _answer_draw_cards(cards_drawn_uids: Array[int]) -> void:
-	#for uid in cards_drawn_uids:
-		#_cards_drawn.append(shop_deck.card_pile[uid]) # TODO ADD a find card with uid in shopdeck
-	#_answer_for_draw_received.emit()
 
 # ========== BUY A CARD FROM PLAYER CARD SHOP
 
@@ -180,8 +146,8 @@ func _ask_buy_card_from_player_shop(card_uid: int) -> void:
 	if not multiplayer.is_server(): return
 	if not _is_ready: await _shop_deck_shuffled
 	var peer_id: int = multiplayer.get_remote_sender_id()
-	var card_to_buy: Card = shop_deck.card_pile[card_uid]
-	if not card_to_buy in _cards_in_player_shop[peer_id]:
+	var card_to_buy: Card = _get_card_in_array(card_uid, _cards_in_player_shop[peer_id])
+	if card_to_buy == null:
 		printerr("[", multiplayer.get_unique_id(),"] Peer.", peer_id, " try to buy a card not displayed in his shop")
 		_answer_buy_card_from_player_shop.rpc_id(peer_id, ServerResponse.CARD_NOT_BUYABLE)
 		return
@@ -276,5 +242,13 @@ func _ask_for_refresh_shop(is_free: bool) -> void:
 @rpc("authority", "call_local", "reliable")
 func _answer_refresh_shop(cards_uids: Array[int]) -> void:
 	for uid in cards_uids:
-		_server_refresh_shop_cards.append(shop_deck.card_pile[uid])
+		_server_refresh_shop_cards.append(shop_deck.get_card(uid))
 	_server_refresh_shop_answered.emit()
+
+# ========== Tools
+
+func _get_card_in_array(uid: int, cards: Array[Card]) -> Card:
+	for card in cards:
+		if card.uid == uid:
+			return card
+	return null

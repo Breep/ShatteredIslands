@@ -1,18 +1,18 @@
 class_name PlayerDeck
 extends Deck
 
+var _active_cards: Array[Card]
+
 signal has_changed()
 
 # ============================== Public function ==============================
 
-func add_card(card_to_add: Card) -> void: # override
-	_add_or_improve_card(card_to_add)
-	has_changed.emit()
-
+func get_active_deck() -> Array[Card]:
+	return _active_cards
 
 func get_max_lvl_cards() -> Array[Card]:
 	var max_lvl_cards: Array[Card]
-	for card in _card_pile:
+	for card in _active_cards:
 		if card.rarity == Card.Rarity.COMMON and card.lvl == 5:
 			max_lvl_cards.append(card)
 		elif card.rarity == Card.Rarity.RARE and card.lvl == 3:
@@ -23,22 +23,16 @@ func get_max_lvl_cards() -> Array[Card]:
 
 
 func get_card_lvl(card_to_get_lvl: Card) -> int:
-	for card in _card_pile:
+	for card in _active_cards:
 		if card.name == card_to_get_lvl.name:
 			return card.lvl
 	return 0
 
 
-func debug_print() -> void:
-	print("Player deck:")
-	for card in _card_pile:
-		print(card.name, "->lvl[", card.lvl, "]")
-
-
 func get_families_lvl_raw() -> Dictionary:
 	#TODO Look for GameRules for the family level
 	var families_lvl_raw: Dictionary
-	for card in _card_pile:
+	for card in _active_cards:
 		for family in card.families:
 			if families_lvl_raw.has(family):
 				families_lvl_raw[family] += 1
@@ -48,25 +42,16 @@ func get_families_lvl_raw() -> Dictionary:
 
 # ============================== Private function ==============================
 
-func _add_or_improve_card(new_card_ref: Card) -> void:
-	for card in _card_pile:
-		if card.name == new_card_ref.name:
-			#print("UPGRADING ", new_card.name)
+func _add_or_improve_card(card_to_add: Card) -> void:
+	for card in _active_cards:
+		if card.name == card_to_add.name:
 			if card.lvl < _get_lvl_max_of_card_rarity(card.rarity):
 				card.lvl += 1
 				_families_count[card.family] += 1
 			else:
 				printerr("Trying to upgrade an already maximized card")
 			return
-	
-	#print("ADDING NEW CARD ", new_card_ref.name)
-	var new_card: Card = new_card_ref.duplicate()
-	new_card.lvl = new_card_ref.lvl
-	_card_pile.append(new_card)
-	if _families_count.has(new_card.family):
-		_families_count[new_card.family] += 1
-	else:
-		_families_count[new_card.family] = 1
+	_active_cards.append(card_to_add)
 
 
 func _get_lvl_max_of_card_rarity(card_rarity: Card.Rarity) -> int:
@@ -78,3 +63,8 @@ func _get_lvl_max_of_card_rarity(card_rarity: Card.Rarity) -> int:
 		Card.Rarity.EPIC:
 			return 1
 	return 0
+
+
+func _specific_add(card_to_add: Card) -> void:
+	_add_or_improve_card(card_to_add)
+	has_changed.emit()

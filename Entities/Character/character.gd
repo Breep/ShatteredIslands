@@ -80,7 +80,7 @@ var _fighting_state: GlobalFightingManager.FightingState = GlobalFightingManager
 func apply_cards_upgrade(deck: PlayerDeck) -> void:
 	if not is_node_ready(): return
 	stats.reset_from_hero(_hero_3D.hero)
-	for card in deck.card_pile:
+	for card in deck.get_active_deck():
 		card.player_upgrade.apply(families_stats, card.lvl)
 	_attack_manager.apply_stats_modifiers()
 

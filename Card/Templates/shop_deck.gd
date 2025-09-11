@@ -1,32 +1,10 @@
 class_name ShopDeck
 extends Deck
 
-var _available_cards: Array[Card]
-var available_cards: Array[Card]: # ALL cards in card_pile + ALL cards in players shop
-	get: return _available_cards
-
 signal available_cards_composition_changed(new_family_composition: Dictionary[Family.FamilyType, int])
 var available_cards_composition: Dictionary[Family.FamilyType, int] # Key=FamilyType, Value=number of cards of this family in the available cards
 
 # ============================== Public function ==============================
-
-func get_from_uid(uid: int) -> Card:
-	for card in _card_pile:
-		if card.uid == uid:
-			return card
-	return null
-
-func shuffle() -> void:
-	if _card_pile.is_empty():
-		printerr("ShopDeck: Trying to shuffle an empty card pile")
-		return
-	
-	for i in _card_pile.size():
-		var random_index =  Utils.rng.randi_range(0, _card_pile.size() - 1)
-		var temp = _card_pile[i]
-		_card_pile[i] = _card_pile[random_index]
-		_card_pile[random_index] = temp
-
 
 func construct_shop_deck(families: Array[Family], game_rules: GameRules) -> void:
 	_card_pile.clear()
@@ -43,32 +21,15 @@ func construct_shop_deck(families: Array[Family], game_rules: GameRules) -> void
 				ucard.uid = uid
 				uid += 1
 				add_card(ucard)
-	_available_cards = _card_pile.duplicate()
-	_update_available_cards_composition(_available_cards, [])
-
-
-#TODO Add check on family level
-func smart_draw_n_cards(cards_to_remove: Array[Card], number_of_cards_to_draw: int):
-	#print("Remaining cards in shop deck: ", size())
-	var card_pile_copy = _card_pile.duplicate()
-	for card_to_remove in cards_to_remove:
-		_remove_all_same_card_in_array(card_to_remove, card_pile_copy)
-	var cardsToDraw: Array[Card] = _draw_n_random_card_in_array(number_of_cards_to_draw, card_pile_copy)
-	for drawcard in cardsToDraw:
-		remove_card(drawcard)
-	return cardsToDraw
-
-
-func debug_print() -> void:
-	var card_types_number_dictionary: Dictionary
-	for card in _card_pile:
-		if card_types_number_dictionary.has(card.name):
-			card_types_number_dictionary[card.name] += 1
-		else:
-			card_types_number_dictionary[card.name] = 1
 	
-	for card_name in card_types_number_dictionary.keys():
-		print(card_name, " : ", card_types_number_dictionary[card_name])
+	_update_available_cards_composition(_card_pile.values(), [])
+
+
+func draw_n_cards(number_of_cards_to_draw: int, player_deck: PlayerDeck = null) -> Array[Card]:
+	if player_deck == null:
+		return _legacy_draw_n_card(number_of_cards_to_draw)
+	else:
+		return _smart_draw_n_card(number_of_cards_to_draw, player_deck)
 
 
 func remove_from_available_cards(card_to_remove: Card) -> void:
