@@ -10,6 +10,7 @@ signal has_changed()
 func get_active_deck() -> Array[Card]:
 	return _active_cards
 
+
 func get_max_lvl_cards() -> Array[Card]:
 	var max_lvl_cards: Array[Card]
 	for card in _active_cards:
@@ -42,14 +43,13 @@ func get_families_lvl_raw() -> Dictionary:
 
 # ============================== Private function ==============================
 
-func _add_or_improve_card(card_to_add: Card) -> void:
+func _add_or_improve_card_to_active_cards(card_to_add: Card) -> void:
 	for card in _active_cards:
 		if card.name == card_to_add.name:
 			if card.lvl < _get_lvl_max_of_card_rarity(card.rarity):
 				card.lvl += 1
-				_families_count[card.family] += 1
 			else:
-				printerr("Trying to upgrade an already maximized card")
+				printerr("PlayerDeck: Trying to upgrade an already maximized card - ", card_to_add.name)
 			return
 	_active_cards.append(card_to_add)
 
@@ -66,5 +66,5 @@ func _get_lvl_max_of_card_rarity(card_rarity: Card.Rarity) -> int:
 
 
 func _specific_add(card_to_add: Card) -> void:
-	_add_or_improve_card(card_to_add)
+	_add_or_improve_card_to_active_cards(card_to_add)
 	has_changed.emit()

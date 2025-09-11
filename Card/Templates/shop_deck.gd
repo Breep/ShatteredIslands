@@ -19,6 +19,7 @@ func construct_shop_deck(families: Array[Family], game_rules: GameRules) -> void
 			for i in number_of_cards_to_add:
 				var ucard: Card = card.duplicate()
 				ucard.uid = uid
+				ucard.lvl = 1
 				uid += 1
 				add_card(ucard)
 	_update_available_cards_composition(_card_pile.values(), [])

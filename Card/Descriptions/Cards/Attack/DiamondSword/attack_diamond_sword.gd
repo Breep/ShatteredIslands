@@ -13,7 +13,7 @@ func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
 
 
 func get_description(cardlvl: int) -> String:
-	if cardlvl < 1 or cardlvl > 3:
+	if cardlvl < 1 or cardlvl > 5:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
