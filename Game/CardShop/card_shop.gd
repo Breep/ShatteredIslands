@@ -8,6 +8,7 @@ signal shop_refreshed(new_cards: Array[Card])
 
 signal shop_tried_to_refresh() # Used to notice UICardShop that it can reactivate its refresh button
 signal shop_tried_to_buy_random_card() # Used to notice UICardShop that it can reactivate its random button
+signal shop_tried_to_buy_card() # Used to notice UICardShop that it can reactivate its cards buttons
 
 # ============================== Public variables ==============================
 
@@ -37,6 +38,7 @@ func try_buy_card(card: Card) -> bool:
 	if !_is_enabled or player.gold < 100: return false
 	if not cards_displayed.has(card):
 		printerr("CardShop: Can't buy this card [", card.name, "]: it's not in the cards displayed in the shop")
+		shop_tried_to_buy_card.emit()
 		return false
 	
 	var buy_ok = await ServerCardShop.try_buy_card_from_player_shop(player, card)
@@ -44,6 +46,7 @@ func try_buy_card(card: Card) -> bool:
 		await _refresh_shop_cards(true)
 		card_bought.emit(card)
 	
+	shop_tried_to_buy_card.emit()
 	return true
 
 # ============================== REFRESH CARD SHOP ==============================

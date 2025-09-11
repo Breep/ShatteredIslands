@@ -32,8 +32,10 @@ func _ready() -> void:
 	
 	_card_shop.shop_refreshed.connect(_on_card_shop_shop_refreshed)
 	_card_shop.card_bought.connect(_on_card_shop_card_bought)
+	
 	_card_shop.shop_tried_to_refresh.connect(_on_card_shop_shop_tried_to_refresh)
 	_card_shop.shop_tried_to_buy_random_card.connect(_on_card_shop_shop_tried_to_buy_random_card)
+	_card_shop.shop_tried_to_buy_card.connect(_on_card_shop_shop_tried_to_buy_card)
 	
 	for card_button in _card_buttons:
 		card_button.card_selected.connect(_on_card_shop_button_pressed, CONNECT_ONE_SHOT)
@@ -56,20 +58,21 @@ func set_inactive() -> void:
 
 # ============================== Private functions ==============================
 
-# Try to buy a card for the local player
-# It will ask the server for permission, if granted, all other players will be notified
-func _try_buy_card(card_button_selected: CardButton, card: Card) -> void:
-	_card_shop.try_buy_card(card)
-	_reconnect_to_card_signal(card_button_selected)
-
-
 func _adapt_cards_lvl_to_player() -> void:
 	for card in _card_displayed:
 		card.lvl = _local_player.deck.get_card_lvl(card) + 1
 
 
-func _reconnect_to_card_signal(card_button: CardButton) -> void:
-	card_button.card_selected.connect(_on_card_shop_button_pressed, CONNECT_ONE_SHOT)
+func _disconnect_from_cards_signals() -> void:
+	for card_button in _card_buttons:
+		if card_button.card_selected.is_connected(_on_card_shop_button_pressed):
+			card_button.card_selected.disconnect(_on_card_shop_button_pressed)
+
+
+func _reconnect_to_cards_signals() -> void:
+	for card_button in _card_buttons:
+		if not card_button.card_selected.is_connected(_on_card_shop_button_pressed):
+			card_button.card_selected.connect(_on_card_shop_button_pressed, CONNECT_ONE_SHOT)
 
 
 func _update_shop_cards_displayed_visual(cards: Array[Card]) -> void:
@@ -79,7 +82,8 @@ func _update_shop_cards_displayed_visual(cards: Array[Card]) -> void:
 # ============================== Callbacks ==============================
 
 func _on_card_shop_button_pressed(card_button_selected: CardButton, card: Card) -> void:
-	_try_buy_card(card_button_selected, card)
+	_disconnect_from_cards_signals()
+	_card_shop.try_buy_card(card)
 
 
 func _on_card_shop_shop_refreshed(new_cards: Array[Card]) -> void:
@@ -104,6 +108,10 @@ func _on_card_shop_shop_tried_to_refresh() -> void:
 func _on_card_shop_shop_tried_to_buy_random_card() -> void:
 	_random_card_button.pressed.connect(_on_random_card_button_pressed, CONNECT_ONE_SHOT)
 	_random_card_button.disabled = false
+
+
+func _on_card_shop_shop_tried_to_buy_card() -> void:
+	_reconnect_to_cards_signals()
 
 # ============================== Buttons Callbacks ==============================
 
