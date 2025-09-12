@@ -55,7 +55,7 @@ func _client_try_buy_xp() -> bool:
 
 
 @rpc("any_peer", "call_remote", "reliable")
-func _ask_buy_xp(card_uid: int) -> void:
+func _ask_buy_xp() -> void:
 	if not multiplayer.is_server(): return
 	var peer_id: int = multiplayer.get_remote_sender_id()
 	var player: Player = PlayerManager.players[peer_id]
@@ -71,6 +71,7 @@ func _ask_buy_xp(card_uid: int) -> void:
 		return
 	
 	player.xp += GameManager.game_rules.xp_per_oracle_buy
+	player.gold -= GameManager.game_rules.buy_xp_price
 	_answer_buy_card_from_player_shop.rpc_id(peer_id, ServerResponse.OK)
 
 
