@@ -12,6 +12,9 @@ extends Resource
 @export var rare_price: int = 100
 @export var epic_price: int = 100
 
+@export_group("Oracle shop rules")
+@export var buy_xp_price: int = 50
+
 @export_subgroup("Other price")
 @export var _refresh_price: int = 20
 @export var _buy_random_price: int = 90
@@ -35,9 +38,9 @@ extends Resource
 @export var damage_player_level_modifier: Array[int] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] # Player damage increased by his hero level
 
 @export_group("Player xp")
-@export var xp_per_round: int # XP gained each round
-@export var xp_per_oracle_buy: int # XP gained for each oracle_buy
-@export var xp_per_family_lvl: int # XP gained each time a card family lvl up
+@export var xp_per_round: int = 4 # XP gained each round
+@export var xp_per_oracle_buy: int = 3 # XP gained for each oracle_buy
+@export var xp_per_family_lvl: int = 10 # XP gained each time a card family lvl up
 @export var xp_per_levels: Dictionary[int, int] = {
 	1: 6,
 	2: 10,

@@ -33,6 +33,8 @@ func _ready() -> void:
 	_local_player.xp_changed.connect(_on_local_player_xp_changed)
 	var max_xp: int = GameManager.game_rules.xp_per_levels[_local_player.lvl]
 	_update_xp_bar(_local_player.xp, max_xp)
+	_local_player.lvl_changed.connect(_on_local_player_lvl_changed)
+	
 
 # ============================== Public functions ==============================
 
@@ -54,6 +56,9 @@ func _update_xp_bar(value: int, max_value: int) -> void:
 	_xp_bar.max_value = max_value
 	_xp_label.text = str(value) + "/" + str(max_value)
 
+func _update_level_label(level: int) -> void:
+	_player_level_label.text = str(level)
+
 # ============================== Callbacks ==============================
 
 func _on_buy_xp_button_pressed() -> void:
@@ -73,3 +78,7 @@ func _on_local_player_death(_player: Player) -> void:
 func _on_local_player_xp_changed(player_ref: Player, xp: int) -> void:
 	var max_xp: int = GameManager.game_rules.xp_per_levels[player_ref.lvl]
 	_update_xp_bar(xp, max_xp)
+
+
+func _on_local_player_lvl_changed(_player_ref: Player, level: int) -> void:
+	_update_level_label(level)
