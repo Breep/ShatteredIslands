@@ -191,6 +191,8 @@ func _check_lvl_up() -> void:
 	while xp >= GameManager.game_rules.xp_per_levels[_lvl]:
 		xp -= GameManager.game_rules.xp_per_levels[_lvl]
 		lvl += 1
+		if _lvl == GameManager.game_rules.xp_max_player_level:
+			return
 
 # ============================== Callbacks ==============================
 

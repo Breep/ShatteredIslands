@@ -41,6 +41,7 @@ extends Resource
 @export var xp_per_round: int = 4 # XP gained each round
 @export var xp_per_oracle_buy: int = 3 # XP gained for each oracle_buy
 @export var xp_per_family_lvl: int = 10 # XP gained each time a card family lvl up
+@export var xp_max_player_level: int = 10
 @export var xp_per_levels: Dictionary[int, int] = {
 	1: 6,
 	2: 10,
@@ -51,7 +52,6 @@ extends Resource
 	7: 34,
 	8: 40,
 	9: 50,
-	10: 100,
 }
 
 

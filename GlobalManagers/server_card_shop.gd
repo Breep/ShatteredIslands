@@ -2,15 +2,9 @@ extends Node
 
 # ============================== Signals ==============================
 
-# [Client only] Is emit when server has answered the local client request to draw 3 cards
-signal _answer_for_draw_received()
-
 signal _shop_deck_shuffled() # Server only
 
-# [Client only] Is emit when server has answered the local client request to buy a card
-signal _answer_for_buying_request_received()
-
-# ============================== Signals ==============================
+# ============================== Constants ==============================
 
 const SERVER_ID = 1
 
@@ -111,6 +105,7 @@ func _server_try_buy_card_from_player_shop(player: Player, card_to_buy: Card) ->
 	return true
 
 
+signal _answer_for_buying_request_received()
 func _client_try_buy_card_from_player_shop(card: Card) -> bool:
 	_ask_buy_card_from_player_shop.rpc_id(SERVER_ID, card.uid)
 	await _answer_for_buying_request_received

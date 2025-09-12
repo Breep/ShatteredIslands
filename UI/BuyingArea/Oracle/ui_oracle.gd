@@ -16,6 +16,13 @@ extends Control
 @export var _xp_bar: ProgressBar
 @export var _xp_label: Label
 
+@onready var _buy_xp_price_label: Label = %BuyXPPriceLabel
+@onready var _flame_texture: ColorRect = %FlameTexture
+
+@onready var _buy_xp_container: Control = %BuyXPContainer
+@onready var _xp_container: Control = %XPContainer
+@onready var _level_max_control: Control = %LevelMaxContainer
+
 # ============================== Private variables ==============================
 
 var _local_player: Player
@@ -35,6 +42,7 @@ func _ready() -> void:
 	_update_xp_bar(_local_player.xp, max_xp)
 	_local_player.lvl_changed.connect(_on_local_player_lvl_changed)
 	
+	_buy_xp_price_label.text = str(GameManager.game_rules.buy_xp_price)
 
 # ============================== Public functions ==============================
 
@@ -56,13 +64,20 @@ func _update_xp_bar(value: int, max_value: int) -> void:
 	_xp_bar.max_value = max_value
 	_xp_label.text = str(value) + "/" + str(max_value)
 
+
+func _activate_max_level_ui() -> void:
+	_buy_xp_container.hide()
+	_xp_container.hide()
+	_level_max_control.show()
+
+
 func _update_level_label(level: int) -> void:
 	_player_level_label.text = str(level)
 
 # ============================== Callbacks ==============================
 
 func _on_buy_xp_button_pressed() -> void:
-	pass
+	ServerOracleShop.try_buy_xp(_local_player)
 
 
 func _on_close_button_pressed() -> void:
@@ -82,3 +97,5 @@ func _on_local_player_xp_changed(player_ref: Player, xp: int) -> void:
 
 func _on_local_player_lvl_changed(_player_ref: Player, level: int) -> void:
 	_update_level_label(level)
+	if level == GameManager.game_rules.xp_max_player_level:
+		_activate_max_level_ui()
