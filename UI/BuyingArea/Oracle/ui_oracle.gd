@@ -28,7 +28,10 @@ func _ready() -> void:
 	if multiplayer.is_server() and GameManager.game_type != GameManager.GameType.SOLO:
 		return
 	_local_player = PlayerManager.get_local_player()
+	
 	_local_player.death.connect(_on_local_player_death)
+	_local_player.xp_changed.connect(_on_local_player_xp_changed)
+	_update_xp_bar(_local_player.xp, 100)
 
 # ============================== Public functions ==============================
 
@@ -42,6 +45,13 @@ func set_inactive() -> void:
 	if not _is_active: return
 	_is_active = false
 	hide()
+
+# ============================== Private functions ==============================
+
+func _update_xp_bar(value: int, max_value: int) -> void:
+	_xp_bar.value = value
+	_xp_bar.max_value = max_value
+	_xp_label.text = str(value) + "/" + str(max_value)
 
 # ============================== Callbacks ==============================
 
@@ -57,3 +67,7 @@ func _on_local_player_death(_player: Player) -> void:
 	print("Oracle: lock oracle for ", _local_player.name)
 	set_inactive()
 	_is_locked = true
+
+
+func _on_local_player_xp_changed(_player_ref: Player, xp: int) -> void:
+	_update_xp_bar(xp, 100)
