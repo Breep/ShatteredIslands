@@ -31,7 +31,8 @@ func _ready() -> void:
 	
 	_local_player.death.connect(_on_local_player_death)
 	_local_player.xp_changed.connect(_on_local_player_xp_changed)
-	_update_xp_bar(_local_player.xp, 100)
+	var max_xp: int = GameManager.game_rules.xp_per_levels[_local_player.lvl]
+	_update_xp_bar(_local_player.xp, max_xp)
 
 # ============================== Public functions ==============================
 
@@ -69,5 +70,6 @@ func _on_local_player_death(_player: Player) -> void:
 	_is_locked = true
 
 
-func _on_local_player_xp_changed(_player_ref: Player, xp: int) -> void:
-	_update_xp_bar(xp, 100)
+func _on_local_player_xp_changed(player_ref: Player, xp: int) -> void:
+	var max_xp: int = GameManager.game_rules.xp_per_levels[player_ref.lvl]
+	_update_xp_bar(xp, max_xp)

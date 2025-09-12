@@ -46,12 +46,12 @@ var team: int:
 		if character != null: character.team = _team
 
 signal lvl_changed(self_ref: Player, new_lvl)
-var _lvl: int
+var _lvl: int = 1
 var lvl: int:
 	get: return _lvl
 	set(value):
 		if _lvl == value: return
-		_lvl = clampi(value, 0, 5)
+		_lvl = clampi(value, 1, 10)
 		lvl_changed.emit(self, _lvl)
 
 signal xp_changed(self_ref: Player, new_xp: int)
@@ -188,10 +188,9 @@ func _apply_all_cards_upgrades() -> void:
 
 
 func _check_lvl_up() -> void:
-	for i in range(5, 0, -1):
-		if xp >= GameManager.game_rules.xp_required_for_each_player_lvl[i]:
-			lvl = i
-			return
+	while xp >= GameManager.game_rules.xp_per_levels[_lvl]:
+		xp -= GameManager.game_rules.xp_per_levels[_lvl]
+		lvl += 1
 
 # ============================== Callbacks ==============================
 
