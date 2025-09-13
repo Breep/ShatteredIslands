@@ -1443,4 +1443,4 @@ libraries = {
 &"": SubResource("AnimationLibrary_sruxg")
 }
 autoplay = "Init"
-speed_scale = 3.0
+speed_scale = 2.5
