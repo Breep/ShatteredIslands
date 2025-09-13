@@ -1320,7 +1320,6 @@ _data = {
 }
 
 [node name="VFX_PlasmaBeam_RED" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0214777, -4.76837e-07, -0.00107002)
 script = ExtResource("1_hs0eu")
 
 [node name="in_rays_cylinder" type="MeshInstance3D" parent="."]
@@ -1444,3 +1443,4 @@ libraries = {
 &"": SubResource("AnimationLibrary_sruxg")
 }
 autoplay = "Init"
+speed_scale = 3.0
