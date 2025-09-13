@@ -3,13 +3,12 @@ extends Control
 
 # ============================== Local Nodes ==============================
 
-@export_group("Skills")
-@export var _skill1A: UISkillPanel
-@export var _skill1B: UISkillPanel
-@export var _skill2A: UISkillPanel
-@export var _skill2B: UISkillPanel
-@export var _skill3A: UISkillPanel
-@export var _skill3B: UISkillPanel
+@onready var _skill1APanel: UISkillPanel = %UiSkillPanel_1A
+@onready var _skill1BPanel: UISkillPanel = %UiSkillPanel_1B
+@onready var _skill2APanel: UISkillPanel = %UiSkillPanel_2A
+@onready var _skill2BPanel: UISkillPanel = %UiSkillPanel_2B
+@onready var _skill3APanel: UISkillPanel = %UiSkillPanel_3A
+@onready var _skill3BPanel: UISkillPanel = %UiSkillPanel_3B
 
 @export_group("XP")
 @export var _player_level_label: Label
@@ -43,6 +42,8 @@ func _ready() -> void:
 	_local_player.lvl_changed.connect(_on_local_player_lvl_changed)
 	
 	_buy_xp_price_label.text = str(GameManager.game_rules.buy_xp_price)
+	
+	_local_player.hero_changed.connect(_on_local_player_hero_changed)
 
 # ============================== Public functions ==============================
 
@@ -74,6 +75,15 @@ func _activate_max_level_ui() -> void:
 func _update_level_label(level: int) -> void:
 	_player_level_label.text = str(level)
 
+
+func _init_skills_table() -> void:
+	_skill1APanel.init(_local_player.hero.skill1A_name, _local_player.hero.skill1A_description)
+	_skill1BPanel.init(_local_player.hero.skill1B_name, _local_player.hero.skill1B_description)
+	_skill2APanel.init(_local_player.hero.skill2A_name, _local_player.hero.skill2A_description)
+	_skill2BPanel.init(_local_player.hero.skill2B_name, _local_player.hero.skill2B_description)
+	_skill3APanel.init(_local_player.hero.skill3A_name, _local_player.hero.skill3A_description)
+	_skill3BPanel.init(_local_player.hero.skill3B_name, _local_player.hero.skill3B_description)
+
 # ============================== Callbacks ==============================
 
 func _on_buy_xp_button_pressed() -> void:
@@ -99,3 +109,7 @@ func _on_local_player_lvl_changed(_player_ref: Player, level: int) -> void:
 	_update_level_label(level)
 	if level == GameManager.game_rules.xp_max_player_level:
 		_activate_max_level_ui()
+
+
+func _on_local_player_hero_changed(_player_ref: Player, _new_hero: Hero) -> void:
+	_init_skills_table()

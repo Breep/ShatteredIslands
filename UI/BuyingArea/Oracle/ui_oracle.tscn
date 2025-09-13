@@ -57,7 +57,7 @@ shader_parameter/Texture_Color_1D = SubResource("GradientTexture1D_d5stg")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u8k82"]
 
-[node name="UIOracle" type="Control" node_paths=PackedStringArray("_skill1A", "_skill1B", "_skill2A", "_skill2B", "_skill3A", "_skill3B", "_player_level_label", "_xp_bar", "_xp_label")]
+[node name="UIOracle" type="Control" node_paths=PackedStringArray("_player_level_label", "_xp_bar", "_xp_label")]
 custom_minimum_size = Vector2(700, 600)
 layout_mode = 3
 anchors_preset = 8
@@ -70,12 +70,6 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("1_1jvkn")
 script = ExtResource("2_52pse")
-_skill1A = NodePath("MainPanel/MarginContainer/VBoxContainer/SkillsContainer/UiSkillPanel_1A")
-_skill1B = NodePath("MainPanel/MarginContainer/VBoxContainer/SkillsContainer/UiSkillPanel_1B")
-_skill2A = NodePath("MainPanel/MarginContainer/VBoxContainer/SkillsContainer/UiSkillPanel_2A")
-_skill2B = NodePath("MainPanel/MarginContainer/VBoxContainer/SkillsContainer/UiSkillPanel_2B")
-_skill3A = NodePath("MainPanel/MarginContainer/VBoxContainer/SkillsContainer/UiSkillPanel_3A")
-_skill3B = NodePath("MainPanel/MarginContainer/VBoxContainer/SkillsContainer/UiSkillPanel_3B")
 _player_level_label = NodePath("MainPanel/MarginContainer/VBoxContainer/XPContainer/PlayerLevelLabel")
 _xp_bar = NodePath("MainPanel/MarginContainer/VBoxContainer/XPContainer/XPBar")
 _xp_label = NodePath("MainPanel/MarginContainer/VBoxContainer/XPContainer/XPBar/XPLabel")
@@ -119,26 +113,32 @@ layout_mode = 2
 columns = 2
 
 [node name="UiSkillPanel_1A" parent="MainPanel/MarginContainer/VBoxContainer/SkillsContainer" instance=ExtResource("4_vncfa")]
+unique_name_in_owner = true
 layout_mode = 2
 _skill_level = 3
 
 [node name="UiSkillPanel_1B" parent="MainPanel/MarginContainer/VBoxContainer/SkillsContainer" instance=ExtResource("4_vncfa")]
+unique_name_in_owner = true
 layout_mode = 2
 _skill_level = 3
 
 [node name="UiSkillPanel_2A" parent="MainPanel/MarginContainer/VBoxContainer/SkillsContainer" instance=ExtResource("4_vncfa")]
+unique_name_in_owner = true
 layout_mode = 2
 _skill_level = 5
 
 [node name="UiSkillPanel_2B" parent="MainPanel/MarginContainer/VBoxContainer/SkillsContainer" instance=ExtResource("4_vncfa")]
+unique_name_in_owner = true
 layout_mode = 2
 _skill_level = 5
 
 [node name="UiSkillPanel_3A" parent="MainPanel/MarginContainer/VBoxContainer/SkillsContainer" instance=ExtResource("4_vncfa")]
+unique_name_in_owner = true
 layout_mode = 2
 _skill_level = 7
 
 [node name="UiSkillPanel_3B" parent="MainPanel/MarginContainer/VBoxContainer/SkillsContainer" instance=ExtResource("4_vncfa")]
+unique_name_in_owner = true
 layout_mode = 2
 _skill_level = 7
 

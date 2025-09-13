@@ -16,7 +16,7 @@ axis_stretch_vertical = 1
 [sub_resource type="Theme" id="Theme_57mws"]
 Panel/styles/panel = SubResource("StyleBoxTexture_rp41f")
 
-[node name="UiSkillPanel" type="Control" node_paths=PackedStringArray("_skill_name", "_skill_description", "_lock_container")]
+[node name="UiSkillPanel" type="Control"]
 layout_mode = 3
 anchor_right = 0.285
 anchor_bottom = 0.202
@@ -28,9 +28,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_ckp2u")
 script = ExtResource("1_mr3li")
-_skill_name = NodePath("SkillPanel/MarginContainer/VBoxContainer/SkillName")
-_skill_description = NodePath("SkillPanel/MarginContainer/VBoxContainer/ScrollContainer/SkillDescription")
-_lock_container = NodePath("SkillPanel/MarginContainer/LockContainer")
 
 [node name="SkillPanel" type="Panel" parent="."]
 layout_mode = 1
@@ -58,7 +55,7 @@ theme_override_constants/margin_bottom = 15
 [node name="VBoxContainer" type="VBoxContainer" parent="SkillPanel/MarginContainer"]
 layout_mode = 2
 
-[node name="SkillName" type="Label" parent="SkillPanel/MarginContainer/VBoxContainer"]
+[node name="SkillNameLabel" type="Label" parent="SkillPanel/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -72,7 +69,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="SkillDescription" type="Label" parent="SkillPanel/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="SkillDescriptionLabel" type="Label" parent="SkillPanel/MarginContainer/VBoxContainer/ScrollContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
