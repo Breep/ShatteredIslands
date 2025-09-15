@@ -1,7 +1,7 @@
 [gd_resource type="ShaderMaterial" load_steps=9 format=3 uid="uid://bsi6ixmhl3aco"]
 
-[ext_resource type="Shader" uid="uid://ccdqpctojp701" path="res://VFX/Shaders/s_dual_master_disolver.tres" id="1_cytg0"]
-[ext_resource type="Texture2D" uid="uid://dd1pmd840fclm" path="res://VFX/Textures/T_NHU85.png" id="2_m082p"]
+[ext_resource type="Shader" uid="uid://ccdqpctojp701" path="res://VFX/VFX_3D/Ultimate/Aeron/Shaders/s_dual_master_disolver.tres" id="1_cytg0"]
+[ext_resource type="Texture2D" uid="uid://dd1pmd840fclm" path="res://VFX/VFX_3D/Ultimate/Aeron/Textures/T_NHU85.png" id="2_m082p"]
 
 [sub_resource type="Gradient" id="Gradient_e5dav"]
 offsets = PackedFloat32Array(0.433544, 1)
@@ -30,8 +30,8 @@ shader = ExtResource("1_cytg0")
 shader_parameter/Color_Intensity = 2.0
 shader_parameter/Scale_XY = Vector2(3, 1)
 shader_parameter/Speed_XY = Vector2(0, 3)
-shader_parameter/Dissolver_edge = 0.0
 shader_parameter/Base_Texture = ExtResource("2_m082p")
 shader_parameter/Add_Texture = SubResource("GradientTexture2D_clfkk")
 shader_parameter/Substract_Texture = SubResource("GradientTexture2D_y5l4u")
 shader_parameter/Gradient_1D_Color = SubResource("GradientTexture1D_f1f7h")
+shader_parameter/Dissolver_edge = 0.0
