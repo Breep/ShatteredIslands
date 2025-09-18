@@ -46,7 +46,7 @@ Panel/styles/panel = SubResource("StyleBoxTexture_01uy0")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_01uy0"]
 
-[node name="HeroPortraitButton" type="Control" node_paths=PackedStringArray("_button")]
+[node name="HeroPortraitButton" type="Control" node_paths=PackedStringArray("_portrait", "_button")]
 custom_minimum_size = Vector2(0, 126)
 layout_mode = 3
 anchor_right = 0.434
@@ -56,6 +56,7 @@ offset_bottom = -0.256012
 size_flags_horizontal = 3
 theme = ExtResource("1_fftwn")
 script = ExtResource("3_uh3hr")
+_portrait = NodePath("MarginContainer/Portrait")
 _button = NodePath("Button")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]

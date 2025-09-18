@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://tu8vucebda8l"
-path="res://.godot/imported/Mage.glb-500222903b96759a5dbfc332bf765cec.scn"
+valid=false
 
 [deps]
 
 source_file="res://Data/Assets/Character 3D/Adventurer/Mage.glb"
-dest_files=["res://.godot/imported/Mage.glb-500222903b96759a5dbfc332bf765cec.scn"]
 
 [params]
 
