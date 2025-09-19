@@ -50,7 +50,7 @@ func show_label() -> void:
 
 
 func update_max_health(max_health: int) -> void:
-	for segment_control in _segment_controls_container.get_children():
+	for segment_control in _segment_controls_container.get_children(): # 950 / 10 = 9 | 50
 		segment_control.queue_free()
 	var segment_control_number: int = max_health / _health_per_segment
 	var remaining_health_segment: int = max_health - segment_control_number * _health_per_segment

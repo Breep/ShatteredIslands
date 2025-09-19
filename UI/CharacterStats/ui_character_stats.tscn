@@ -1,18 +1,17 @@
-[gd_scene load_steps=22 format=3 uid="uid://db2anika8bvj8"]
+[gd_scene load_steps=21 format=3 uid="uid://db2anika8bvj8"]
 
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_0k5gn"]
 [ext_resource type="Script" uid="uid://wsv4m6qf4t76" path="res://UI/CharacterStats/ui_character_stats.gd" id="1_xv57f"]
 [ext_resource type="Texture2D" uid="uid://bxd1jnaci6olo" path="res://Data/Assets/Card/ICONS/ATTACK color.png" id="2_xv57f"]
+[ext_resource type="Script" uid="uid://di5dalpbck8bm" path="res://UI/CharacterStats/main_container.gd" id="3_8tx5y"]
 [ext_resource type="PackedScene" uid="uid://c1xlwqgum36g6" path="res://UI/CharacterStats/HealthBar/ui_health_bar.tscn" id="3_ghk6k"]
 [ext_resource type="Texture2D" uid="uid://cia42t0jcdkfg" path="res://Data/Assets/Card/ICONS/HP color.png" id="3_u6yy0"]
 [ext_resource type="Texture2D" uid="uid://nxj6jw2phtcp" path="res://Data/Assets/Card/ICONS/MANA color.png" id="5_5herf"]
 [ext_resource type="Texture2D" uid="uid://c3ruvqyjokopc" path="res://Data/Assets/Card/ICONS/dodge.png" id="6_8tx5y"]
+[ext_resource type="Texture2D" uid="uid://c3xudjd0byl2p" path="res://UI/_Themes/Data/show_stats_icon.png" id="6_fhoub"]
 [ext_resource type="Texture2D" uid="uid://xhyj0k42ilb3" path="res://UI/_Themes/Data/panel_tileable_20px_border_only.png" id="7_pepte"]
 [ext_resource type="Texture2D" uid="uid://dlac4nmdbamph" path="res://Data/Assets/Card/ICONS/attack_speed.png" id="8_fhoub"]
 [ext_resource type="Texture2D" uid="uid://cawoo43ethscj" path="res://Data/Assets/Card/ICONS/critic.png" id="9_ghk6k"]
-[ext_resource type="Texture2D" uid="uid://dlbjl8ihicpc8" path="res://Card/Descriptions/Families/Icons/defense.png" id="10_fhoub"]
-[ext_resource type="Texture2D" uid="uid://c7qa3nkyxcdlg" path="res://Card/Descriptions/Families/Icons/fire.png" id="11_ghk6k"]
-[ext_resource type="Texture2D" uid="uid://cwqdngpmbcnck" path="res://Card/Descriptions/Families/Icons/poison.png" id="12_6gtko"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iykoh"]
 bg_color = Color(0.588235, 0.588235, 0.588235, 1)
@@ -32,18 +31,6 @@ axis_stretch_vertical = 1
 [sub_resource type="Theme" id="Theme_u6yy0"]
 Panel/styles/panel = SubResource("StyleBoxTexture_klm3a")
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wvgek"]
-texture = ExtResource("7_pepte")
-texture_margin_left = 20.0
-texture_margin_top = 20.0
-texture_margin_right = 20.0
-texture_margin_bottom = 20.0
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[sub_resource type="Theme" id="Theme_6gtko"]
-Panel/styles/panel = SubResource("StyleBoxTexture_wvgek")
-
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vncfa"]
 texture = ExtResource("7_pepte")
 texture_margin_left = 20.0
@@ -56,32 +43,69 @@ axis_stretch_vertical = 1
 [sub_resource type="Theme" id="Theme_oylhr"]
 Panel/styles/panel = SubResource("StyleBoxTexture_vncfa")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ghk6k"]
+bg_color = Color(0.218577, 0.468984, 0.155291, 0.7)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6gtko"]
+bg_color = Color(0.6, 0.6, 0.6, 0.4)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+anti_aliasing = false
+
 [node name="CharacterStats" type="Control"]
-custom_minimum_size = Vector2(800, 250)
+custom_minimum_size = Vector2(600, 125)
 layout_mode = 3
-anchors_preset = 7
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -400.0
-offset_top = -250.0
-offset_right = 400.0
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -75.0
+offset_right = 300.0
+offset_bottom = 50.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 mouse_filter = 1
 theme = ExtResource("1_0k5gn")
 script = ExtResource("1_xv57f")
 
-[node name="Stats" type="Panel" parent="."]
+[node name="MainContainer" type="HBoxContainer" parent="." node_paths=PackedStringArray("_status_container", "_stats_container", "_left_container", "_right_container")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("3_8tx5y")
+_status_container = NodePath("MainPanel")
+_stats_container = NodePath("StatsContainer")
+_left_container = NodePath("MainPanel/LeftContainer")
+_right_container = NodePath("MainPanel/RightContainer")
+stats_position = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="Stats"]
+[node name="MainPanel" type="Panel" parent="MainContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MainContainer/MainPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -91,19 +115,19 @@ grow_vertical = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 25
-theme_override_constants/margin_bottom = 17
+theme_override_constants/margin_bottom = 25
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Stats/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer/MainPanel/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.6
 theme_override_constants/separation = 15
 
-[node name="HealthAndManaBar" type="Control" parent="Stats/MarginContainer/VBoxContainer"]
+[node name="HealthAndManaBar" type="Control" parent="MainContainer/MainPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Stats/MarginContainer/VBoxContainer/HealthAndManaBar"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer/MainPanel/MarginContainer/VBoxContainer/HealthAndManaBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -113,16 +137,16 @@ grow_vertical = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
-[node name="HealthBar" parent="Stats/MarginContainer/VBoxContainer/HealthAndManaBar/VBoxContainer" instance=ExtResource("3_ghk6k")]
+[node name="HealthBar" parent="MainContainer/MainPanel/MarginContainer/VBoxContainer/HealthAndManaBar/VBoxContainer" instance=ExtResource("3_ghk6k")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="HorizontalSeparation" type="ColorRect" parent="Stats/MarginContainer/VBoxContainer/HealthAndManaBar/VBoxContainer"]
+[node name="HorizontalSeparation" type="ColorRect" parent="MainContainer/MainPanel/MarginContainer/VBoxContainer/HealthAndManaBar/VBoxContainer"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 color = Color(0, 0, 0, 1)
 
-[node name="ManaBar" type="ProgressBar" parent="Stats/MarginContainer/VBoxContainer/HealthAndManaBar/VBoxContainer"]
+[node name="ManaBar" type="ProgressBar" parent="MainContainer/MainPanel/MarginContainer/VBoxContainer/HealthAndManaBar/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -133,7 +157,7 @@ step = 0.001
 value = 100.0
 show_percentage = false
 
-[node name="ManaLabel" type="Label" parent="Stats/MarginContainer/VBoxContainer/HealthAndManaBar/VBoxContainer/ManaBar"]
+[node name="ManaLabel" type="Label" parent="MainContainer/MainPanel/MarginContainer/VBoxContainer/HealthAndManaBar/VBoxContainer/ManaBar"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -141,12 +165,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 15
 text = "100"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="Stats/MarginContainer/VBoxContainer/HealthAndManaBar"]
+[node name="MarginContainer" type="MarginContainer" parent="MainContainer/MainPanel/MarginContainer/VBoxContainer/HealthAndManaBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -158,543 +182,11 @@ theme_override_constants/margin_top = -10
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = -10
 
-[node name="PanelBorder" type="Panel" parent="Stats/MarginContainer/VBoxContainer/HealthAndManaBar/MarginContainer"]
+[node name="PanelBorder" type="Panel" parent="MainContainer/MainPanel/MarginContainer/VBoxContainer/HealthAndManaBar/MarginContainer"]
 layout_mode = 2
 theme = SubResource("Theme_u6yy0")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Stats/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="StatisticContainer" type="GridContainer" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-size_flags_horizontal = 3
-columns = 3
-
-[node name="HealthPanel" type="Panel" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer/HealthPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer/HealthPanel/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Icon" type="TextureRect" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer/HealthPanel/HBoxContainer/CenterContainer"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("3_u6yy0")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="MaxHealthLabel" type="Label" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer/HealthPanel/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-text = "1000"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PanelBorder" type="Panel" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer/HealthPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme = SubResource("Theme_6gtko")
-
-[node name="ManaPanel" type="Panel" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer/ManaPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer/ManaPanel/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Icon" type="TextureRect" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer/ManaPanel/HBoxContainer/CenterContainer"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("5_5herf")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="ManaRegenLabel" type="Label" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer/ManaPanel/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-text = "3.7"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PanelBorder" type="Panel" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer/ManaPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme = SubResource("Theme_6gtko")
-
-[node name="DodgePanel" type="Panel" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer/DodgePanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer/DodgePanel/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Icon" type="TextureRect" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer/DodgePanel/HBoxContainer/CenterContainer"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("6_8tx5y")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="DodgeLabel" type="Label" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer/DodgePanel/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-text = "20"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PanelBorder" type="Panel" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer/DodgePanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme = SubResource("Theme_6gtko")
-
-[node name="AttackPanel" type="Panel" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer/AttackPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer/AttackPanel/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Icon" type="TextureRect" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer/AttackPanel/HBoxContainer/CenterContainer"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("2_xv57f")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="AttackLabel" type="Label" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer/AttackPanel/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-text = "22"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PanelBorder" type="Panel" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer/AttackPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme = SubResource("Theme_6gtko")
-
-[node name="AttackSpeedPanel" type="Panel" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer/AttackSpeedPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer/AttackSpeedPanel/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Icon" type="TextureRect" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer/AttackSpeedPanel/HBoxContainer/CenterContainer"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("8_fhoub")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="AttackSpeedLabel" type="Label" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer/AttackSpeedPanel/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-text = "0.5"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PanelBorder" type="Panel" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer/AttackSpeedPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme = SubResource("Theme_6gtko")
-
-[node name="CriticPanel" type="Panel" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer/CriticPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer/CriticPanel/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Icon" type="TextureRect" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer/CriticPanel/HBoxContainer/CenterContainer"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("9_ghk6k")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="CriticLabel" type="Label" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer/CriticPanel/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-text = "15"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PanelBorder" type="Panel" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/StatisticContainer/CriticPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme = SubResource("Theme_6gtko")
-
-[node name="ConditionContainer" type="GridContainer" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-size_flags_horizontal = 3
-columns = 3
-
-[node name="ConditionContainer1" type="Control" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Control" type="Control" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer/ConditionContainer1"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer/ConditionContainer1/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer/ConditionContainer1/Control/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Icon" type="TextureRect" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer/ConditionContainer1/Control/HBoxContainer/CenterContainer"]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("10_fhoub")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="ArmorLabel" type="Label" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer/ConditionContainer1/Control/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-text = "1000"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ConditionContainer2" type="Control" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Control" type="Control" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer/ConditionContainer2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer/ConditionContainer2/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer/ConditionContainer2/Control/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Icon" type="TextureRect" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer/ConditionContainer2/Control/HBoxContainer/CenterContainer"]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("11_ghk6k")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="IgniteLabel" type="Label" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer/ConditionContainer2/Control/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-text = "1000"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ConditionContainer3" type="Control" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Control" type="Control" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer/ConditionContainer3"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer/ConditionContainer3/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer/ConditionContainer3/Control/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Icon" type="TextureRect" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer/ConditionContainer3/Control/HBoxContainer/CenterContainer"]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("12_6gtko")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="PoisonLabel" type="Label" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer/ConditionContainer3/Control/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-text = "1000"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ConditionContainer4" type="Control" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Control" type="Control" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer/ConditionContainer4"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer/ConditionContainer4/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer/ConditionContainer4/Control/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Icon" type="TextureRect" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer/ConditionContainer4/Control/HBoxContainer/CenterContainer"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("10_fhoub")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="HealthLabel" type="Label" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer/ConditionContainer4/Control/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-text = "1000"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ConditionContainer5" type="Control" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Control" type="Control" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer/ConditionContainer5"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer/ConditionContainer5/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer/ConditionContainer5/Control/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Icon" type="TextureRect" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer/ConditionContainer5/Control/HBoxContainer/CenterContainer"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("10_fhoub")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="HealthLabel" type="Label" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer/ConditionContainer5/Control/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-text = "1000"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ConditionContainer6" type="Control" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Control" type="Control" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer/ConditionContainer6"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer/ConditionContainer6/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer/ConditionContainer6/Control/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Icon" type="TextureRect" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer/ConditionContainer6/Control/HBoxContainer/CenterContainer"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("10_fhoub")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="HealthLabel" type="Label" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer/ConditionContainer/ConditionContainer6/Control/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-text = "1000"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PanelBorder" type="Panel" parent="Stats"]
+[node name="PanelBorder" type="Panel" parent="MainContainer/MainPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -703,19 +195,19 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_u6yy0")
 
-[node name="TitlePanel" type="Panel" parent="."]
-custom_minimum_size = Vector2(300, 70)
+[node name="TitlePanel" type="Panel" parent="MainContainer/MainPanel"]
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -150.0
-offset_top = -35.0
-offset_right = 150.0
-offset_bottom = 35.0
+offset_left = -100.0
+offset_top = -25.0
+offset_right = 100.0
+offset_bottom = 25.0
 grow_horizontal = 2
 
-[node name="PlayerNameLabel" type="Label" parent="TitlePanel"]
+[node name="PlayerNameLabel" type="Label" parent="MainContainer/MainPanel/TitlePanel"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -723,12 +215,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 20
 text = "Breep"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PanelBorder" type="Panel" parent="TitlePanel"]
+[node name="PanelBorder" type="Panel" parent="MainContainer/MainPanel/TitlePanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -737,3 +229,370 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme = SubResource("Theme_oylhr")
+
+[node name="LeftContainer" type="Control" parent="MainContainer/MainPanel"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_right = 20.0
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MainContainer/MainPanel/LeftContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer/MainPanel/LeftContainer/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ShowThing" type="TextureRect" parent="MainContainer/MainPanel/LeftContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("6_fhoub")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Button" type="Button" parent="MainContainer/MainPanel/LeftContainer/MarginContainer/VBoxContainer/ShowThing"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ghk6k")
+theme_override_styles/normal = SubResource("StyleBoxFlat_6gtko")
+toggle_mode = true
+
+[node name="ShowStatsIcon" type="TextureRect" parent="MainContainer/MainPanel/LeftContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("6_fhoub")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="LeftShowStatsButton" type="Button" parent="MainContainer/MainPanel/LeftContainer/MarginContainer/VBoxContainer/ShowStatsIcon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_0k5gn")
+theme_type_variation = &"ToggleButton"
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ghk6k")
+theme_override_styles/normal = SubResource("StyleBoxFlat_6gtko")
+toggle_mode = true
+
+[node name="RightContainer" type="Control" parent="MainContainer/MainPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_right = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MainContainer/MainPanel/RightContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer/MainPanel/RightContainer/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ShowThing" type="TextureRect" parent="MainContainer/MainPanel/RightContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("6_fhoub")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Button" type="Button" parent="MainContainer/MainPanel/RightContainer/MarginContainer/VBoxContainer/ShowThing"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ghk6k")
+theme_override_styles/normal = SubResource("StyleBoxFlat_6gtko")
+toggle_mode = true
+
+[node name="ShowStatsIcon" type="TextureRect" parent="MainContainer/MainPanel/RightContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("6_fhoub")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="RightShowStatsButton" type="Button" parent="MainContainer/MainPanel/RightContainer/MarginContainer/VBoxContainer/ShowStatsIcon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_0k5gn")
+theme_type_variation = &"ToggleButton"
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ghk6k")
+theme_override_styles/normal = SubResource("StyleBoxFlat_6gtko")
+toggle_mode = true
+
+[node name="StatsContainer" type="Control" parent="MainContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="StatsPanel" type="Panel" parent="MainContainer/StatsContainer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="MarginContainer" type="MarginContainer" parent="MainContainer/StatsContainer/StatsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="StatisticContainer" type="GridContainer" parent="MainContainer/StatsContainer/StatsPanel/MarginContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 2
+
+[node name="HealthPanel" type="Control" parent="MainContainer/StatsContainer/StatsPanel/MarginContainer/StatisticContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/StatsContainer/StatsPanel/MarginContainer/StatisticContainer/HealthPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="MainContainer/StatsContainer/StatsPanel/MarginContainer/StatisticContainer/HealthPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Icon" type="TextureRect" parent="MainContainer/StatsContainer/StatsPanel/MarginContainer/StatisticContainer/HealthPanel/HBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("3_u6yy0")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="MaxHealthLabel" type="Label" parent="MainContainer/StatsContainer/StatsPanel/MarginContainer/StatisticContainer/HealthPanel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "1000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ManaPanel" type="Control" parent="MainContainer/StatsContainer/StatsPanel/MarginContainer/StatisticContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/StatsContainer/StatsPanel/MarginContainer/StatisticContainer/ManaPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="MainContainer/StatsContainer/StatsPanel/MarginContainer/StatisticContainer/ManaPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Icon" type="TextureRect" parent="MainContainer/StatsContainer/StatsPanel/MarginContainer/StatisticContainer/ManaPanel/HBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("5_5herf")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="ManaRegenLabel" type="Label" parent="MainContainer/StatsContainer/StatsPanel/MarginContainer/StatisticContainer/ManaPanel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "3.7"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DodgePanel" type="Control" parent="MainContainer/StatsContainer/StatsPanel/MarginContainer/StatisticContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/StatsContainer/StatsPanel/MarginContainer/StatisticContainer/DodgePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="MainContainer/StatsContainer/StatsPanel/MarginContainer/StatisticContainer/DodgePanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Icon" type="TextureRect" parent="MainContainer/StatsContainer/StatsPanel/MarginContainer/StatisticContainer/DodgePanel/HBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("6_8tx5y")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="DodgeLabel" type="Label" parent="MainContainer/StatsContainer/StatsPanel/MarginContainer/StatisticContainer/DodgePanel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "20"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AttackPanel" type="Control" parent="MainContainer/StatsContainer/StatsPanel/MarginContainer/StatisticContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/StatsContainer/StatsPanel/MarginContainer/StatisticContainer/AttackPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="MainContainer/StatsContainer/StatsPanel/MarginContainer/StatisticContainer/AttackPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Icon" type="TextureRect" parent="MainContainer/StatsContainer/StatsPanel/MarginContainer/StatisticContainer/AttackPanel/HBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("2_xv57f")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="AttackLabel" type="Label" parent="MainContainer/StatsContainer/StatsPanel/MarginContainer/StatisticContainer/AttackPanel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "22"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AttackSpeedPanel" type="Control" parent="MainContainer/StatsContainer/StatsPanel/MarginContainer/StatisticContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/StatsContainer/StatsPanel/MarginContainer/StatisticContainer/AttackSpeedPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="MainContainer/StatsContainer/StatsPanel/MarginContainer/StatisticContainer/AttackSpeedPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Icon" type="TextureRect" parent="MainContainer/StatsContainer/StatsPanel/MarginContainer/StatisticContainer/AttackSpeedPanel/HBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("8_fhoub")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="AttackSpeedLabel" type="Label" parent="MainContainer/StatsContainer/StatsPanel/MarginContainer/StatisticContainer/AttackSpeedPanel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "0.5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CriticPanel" type="Control" parent="MainContainer/StatsContainer/StatsPanel/MarginContainer/StatisticContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/StatsContainer/StatsPanel/MarginContainer/StatisticContainer/CriticPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="MainContainer/StatsContainer/StatsPanel/MarginContainer/StatisticContainer/CriticPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Icon" type="TextureRect" parent="MainContainer/StatsContainer/StatsPanel/MarginContainer/StatisticContainer/CriticPanel/HBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("9_ghk6k")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="CriticLabel" type="Label" parent="MainContainer/StatsContainer/StatsPanel/MarginContainer/StatisticContainer/CriticPanel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "15"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelBorder" type="Panel" parent="MainContainer/StatsContainer/StatsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_oylhr")
+
+[connection signal="toggled" from="MainContainer/MainPanel/LeftContainer/MarginContainer/VBoxContainer/ShowStatsIcon/LeftShowStatsButton" to="." method="_on_left_show_stats_button_toggled"]
+[connection signal="toggled" from="MainContainer/MainPanel/RightContainer/MarginContainer/VBoxContainer/ShowStatsIcon/RightShowStatsButton" to="." method="_on_right_show_stats_button_toggled"]

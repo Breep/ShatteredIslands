@@ -107,26 +107,54 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BottomLeftEmpty" type="Control" parent="VBoxContainer/BottomPanel/HBoxContainer"]
-visible = false
+[node name="Control2" type="Control" parent="VBoxContainer/BottomPanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.25
+size_flags_stretch_ratio = 0.4
+
+[node name="BottomLeftEmpty" type="Control" parent="VBoxContainer/BottomPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 mouse_filter = 1
 
-[node name="BottomRightEmpty" type="Control" parent="VBoxContainer/BottomPanel/HBoxContainer"]
+[node name="SelectedCharacterStats" parent="VBoxContainer/BottomPanel/HBoxContainer/BottomLeftEmpty" instance=ExtResource("2_g28wu")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -125.0
+offset_bottom = 0.0
+grow_vertical = 0
+size_flags_horizontal = 3
+
+[node name="MainContainer" parent="VBoxContainer/BottomPanel/HBoxContainer/BottomLeftEmpty/SelectedCharacterStats" index="0"]
+stats_position = 0
+
+[node name="LeftContainer" parent="VBoxContainer/BottomPanel/HBoxContainer/BottomLeftEmpty/SelectedCharacterStats/MainContainer/MainPanel" index="3"]
 visible = false
+
+[node name="RightContainer" parent="VBoxContainer/BottomPanel/HBoxContainer/BottomLeftEmpty/SelectedCharacterStats/MainContainer/MainPanel" index="4"]
+visible = true
+
+[node name="BottomRightEmpty" type="Control" parent="VBoxContainer/BottomPanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.25
 mouse_filter = 1
 
 [node name="SelectedCharacterStats" parent="VBoxContainer/BottomPanel/HBoxContainer/BottomRightEmpty" instance=ExtResource("2_g28wu")]
-visible = false
 layout_mode = 1
+anchors_preset = 7
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -125.0
+offset_bottom = 0.0
+grow_vertical = 0
 size_flags_horizontal = 3
 
-[node name="SelectedCharacterStats" parent="VBoxContainer/BottomPanel" instance=ExtResource("2_g28wu")]
-unique_name_in_owner = true
-layout_mode = 1
+[node name="Control" type="Control" parent="VBoxContainer/BottomPanel/HBoxContainer"]
+layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+
+[editable path="VBoxContainer/BottomPanel/HBoxContainer/BottomLeftEmpty/SelectedCharacterStats"]

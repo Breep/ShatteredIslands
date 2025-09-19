@@ -25,6 +25,8 @@ var _entity_stats: EntityStats
 
 @onready var _player_name_label: Label = %PlayerNameLabel
 
+@onready var _stats_panel: Panel = %StatsPanel
+
 # ============================== Public functions ==============================
 
 func connect_entity_stats(new_entity_stats: EntityStats, entity_name: String = ""):
@@ -39,6 +41,7 @@ func connect_entity_stats(new_entity_stats: EntityStats, entity_name: String = "
 
 func _ready() -> void:
 	hide()
+	_stats_panel.hide()
 	_setup_local_nodes()
 	
 	Events.nothing_clicked.connect(_on_events_nothing_clicked)
@@ -96,7 +99,7 @@ func _update_optional_value(optional_container: CenterContainer, optional_label:
 		optional_container.show()
 		optional_label.text = str(value)
 
-# ============================== Callbacks ==============================
+# ============================== Entity Callbacks ==============================
 
 func _on_entity_stats_health_max_changed(new_max_health: int) -> void:
 	_ui_health_bar.update_max_health(new_max_health)
@@ -143,4 +146,12 @@ func _on_entity_stats_ignite_stacks_changed(ignite_stacks: int) -> void:
 func _on_events_nothing_clicked() -> void:
 	hide()
 
- 
+# ============================== Local Callbacks ==============================
+
+func _on_right_show_stats_button_toggled(toggled_on: bool) -> void:
+	print("HELLO RIGHT TOOGLED: ", toggled_on)
+	_stats_panel.show() if toggled_on else _stats_panel.hide()
+
+func _on_left_show_stats_button_toggled(toggled_on: bool) -> void:
+	print("HELLO LEFT TOOGLED: ", toggled_on)
+	_stats_panel.show() if toggled_on else _stats_panel.hide()

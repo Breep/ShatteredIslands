@@ -19,7 +19,6 @@ offset_left = 257.0
 offset_top = 405.0
 offset_right = 1615.0
 offset_bottom = 472.0
-_health_per_segment = 250
 
 [node name="MaxHealthTextEdit" type="TextEdit" parent="."]
 unique_name_in_owner = true
