@@ -34,6 +34,8 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
+	GameManager.init()
+	_floating_island._fighting_area._ui_fighting_area._ui_own_entity_stats.connect_entity_stats(_characters[0])
 	_floating_island.start_fight(_characters, _battle_type)
 	GlobalFightingManager.start(true)
 	_floating_island.set_active()

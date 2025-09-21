@@ -75,6 +75,10 @@ folder_colors={
 
 WALL=""
 
+[gui]
+
+theme/default_font_multichannel_signed_distance_field=true
+
 [input]
 
 select_main={
@@ -195,6 +199,7 @@ move_down={
 
 [layer_names]
 
+3d_render/layer_2="Floor"
 3d_physics/layer_1="Walls"
 3d_physics/layer_2="Projectiles"
 3d_physics/layer_3="SpawnAreas"

@@ -65,6 +65,8 @@ var _hero_id := Hero.HeroId.UNDEF
 
 @export_group("Modules")
 @export var _clickable_module: ClickableModule
+@export var _clickable_feedback: ClickableSelectionFeedback
+
 
 # ============================== Public variables ==============================
 
@@ -181,6 +183,7 @@ func _ready() -> void:
 	GlobalFightingManager.state_changed.connect(_on_global_fighting_manager_state_changed)
 	Events.game_state_changed.connect(_on_events_game_state_changed)
 	Events.player_won_a_fight.connect(_on_events_player_won_a_fight)
+	Events.entity_cliked.connect(_on_events_entity_clicked)
 	
 	_update_hero()
 	if player != null: apply_cards_upgrade(player.deck)
@@ -269,7 +272,11 @@ func _on_events_player_won_a_fight(winner: Player) -> void:
 		fight_is_won.emit()
 
 
-
+func _on_events_entity_clicked(entity: Entity) -> void:
+	if not entity == self:
+		_clickable_feedback.set_inactive()
+	else:
+		_clickable_feedback.set_active()
 
 
 

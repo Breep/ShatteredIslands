@@ -53,7 +53,7 @@ func _update_local_nodes() -> void:
 	_update_entity_name_label()
 	_ui_health_bar.reset(_entity.stats.health, _entity.stats.health_max)
 	_update_mana_bar(_entity.stats.mana, _entity.stats.mana_max)
-	if _entity is Character:
+	if _entity is Character and _entity.player != null:
 		_no_xp_color_rect.hide()
 		_update_xp_bar(_entity.player.xp, GameManager.game_rules.xp_per_levels[_entity.player.lvl])
 	else:
