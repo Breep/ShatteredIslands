@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Hero" load_steps=5 format=3 uid="uid://by3bwbvf4ekcd"]
 
 [ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://Entities/Heroes/hero.gd" id="1_2ttjg"]
-[ext_resource type="Texture2D" uid="uid://df7c3xa2eudnt" path="res://Data/Heroes/Portraits/Dark Knight.png" id="1_5422o"]
+[ext_resource type="Texture2D" uid="uid://difeq0pm3hgjs" path="res://Data/Heroes/Portraits/darkknight2.png" id="1_hluaq"]
 [ext_resource type="Script" uid="uid://2py6kv5aqgem" path="res://Entities/Heroes/hero_stats.gd" id="3_hluaq"]
 
 [sub_resource type="Resource" id="Resource_m1110"]
@@ -20,7 +20,7 @@ metadata/_custom_type_script = "uid://2py6kv5aqgem"
 script = ExtResource("1_2ttjg")
 name = "Dark Knight"
 id = 9
-portrait = ExtResource("1_5422o")
+portrait = ExtResource("1_hluaq")
 description = "Autrefois, Aeron Vantaal était l’orgueil de la Maison Vantaal, une lignée de nobles guerriers dévoués à la Lumière. Héritier d’une tradition de paladins, il portait l’armure étincelante de ses ancêtres et menait les troupes royales au nom de la justice. Sa famille régnait sur l’une des cités flottantes les plus prospères du Grand Skyland, avant le Cataclysme.Mais lors de la guerre finale, les Vantaal furent trahis. Un sort interdit frappa leur île, la précipitant dans l’abîme. Aeron survécut — mais la Lumière qui brûlait en lui fut arrachée et remplacée par un vide froid et affamé. Certains murmurent qu’il conclut un pacte avec une entité du Néant pour remonter des profondeurs, en échange de son âme. Son armure se noircit, ses yeux se teintèrent de rouge, et sa force prit racine dans une colère inextinguible.La magie sombre qui le traverse amplifie ses frappes à mesure qu’il combat, sa rage nourrissant une vitesse meurtrière. Sa Tempête Noire n’est autre que l’écho du sort qui anéantit sa maison, arraché et dompté pour être projeté contre ses ennemis.Aujourd’hui, Aeron erre de taverne en taverne, participant aux Tournois des Îles Brisées non pour la gloire, mais pour une seule raison : accumuler or et influence jusqu’à retrouver ceux qui ont causé la chute des Vantaal… et leur rendre la justice des ténèbres."
 stats = SubResource("Resource_m1110")
 aa_projectile_type = 0

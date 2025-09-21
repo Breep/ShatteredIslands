@@ -76585,7 +76585,7 @@ metadata/extras = {
 }
 }
 
-[node name="SM_Prop_Curtain_Large_03_002" type="SoftBody3D" parent="Deco"]
+[node name="SM_Prop_Curtain_Large_03_002" type="MeshInstance3D" parent="Deco"]
 transform = Transform3D(0.005, 0, 0, 0, 0, -0.005, 0, 0.005, 0, -0.21427, 4.86585, -17.1461)
 mesh = SubResource("ArrayMesh_05wpu")
 skeleton = NodePath("")
