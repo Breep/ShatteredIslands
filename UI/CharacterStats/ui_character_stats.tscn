@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://db2anika8bvj8"]
+[gd_scene load_steps=29 format=3 uid="uid://db2anika8bvj8"]
 
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_0k5gn"]
 [ext_resource type="Script" uid="uid://wsv4m6qf4t76" path="res://UI/CharacterStats/ui_character_stats.gd" id="1_xv57f"]
@@ -6,18 +6,24 @@
 [ext_resource type="Script" uid="uid://di5dalpbck8bm" path="res://UI/CharacterStats/main_container.gd" id="3_8tx5y"]
 [ext_resource type="PackedScene" uid="uid://c1xlwqgum36g6" path="res://UI/CharacterStats/HealthBar/ui_health_bar.tscn" id="3_ghk6k"]
 [ext_resource type="Texture2D" uid="uid://cia42t0jcdkfg" path="res://Data/Assets/Card/ICONS/HP color.png" id="3_u6yy0"]
+[ext_resource type="Texture2D" uid="uid://dlbjl8ihicpc8" path="res://Card/Descriptions/Families/Icons/defense.png" id="4_ghk6k"]
 [ext_resource type="Texture2D" uid="uid://nxj6jw2phtcp" path="res://Data/Assets/Card/ICONS/MANA color.png" id="5_5herf"]
+[ext_resource type="Texture2D" uid="uid://c7qa3nkyxcdlg" path="res://Card/Descriptions/Families/Icons/fire.png" id="5_ulwx1"]
 [ext_resource type="Texture2D" uid="uid://c3ruvqyjokopc" path="res://Data/Assets/Card/ICONS/dodge.png" id="6_8tx5y"]
 [ext_resource type="Texture2D" uid="uid://c3xudjd0byl2p" path="res://UI/_Themes/Data/show_stats_icon.png" id="6_fhoub"]
+[ext_resource type="Texture2D" uid="uid://cwqdngpmbcnck" path="res://Card/Descriptions/Families/Icons/poison.png" id="6_nfm7m"]
 [ext_resource type="Texture2D" uid="uid://xhyj0k42ilb3" path="res://UI/_Themes/Data/panel_tileable_20px_border_only.png" id="7_pepte"]
+[ext_resource type="Texture2D" uid="uid://ckifdy6fknspj" path="res://Card/Descriptions/Families/Icons/serenity.png" id="7_vju3m"]
 [ext_resource type="Texture2D" uid="uid://dlac4nmdbamph" path="res://Data/Assets/Card/ICONS/attack_speed.png" id="8_fhoub"]
+[ext_resource type="Texture2D" uid="uid://di7p4njh4seia" path="res://Card/Descriptions/Families/Icons/life.png" id="8_ycatr"]
 [ext_resource type="Texture2D" uid="uid://cawoo43ethscj" path="res://Data/Assets/Card/ICONS/critic.png" id="9_ghk6k"]
+[ext_resource type="Texture2D" uid="uid://inrfqqaj0ycx" path="res://Card/Descriptions/Families/Icons/mana.png" id="9_vncdf"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iykoh"]
-bg_color = Color(0.588235, 0.588235, 0.588235, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fhoub"]
+bg_color = Color(0.401153, 0.310384, 0.533518, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c6x3o"]
-bg_color = Color(0.0784314, 0.239216, 0.376471, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oylhr"]
+bg_color = Color(0.243668, 0.178638, 0.332414, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_klm3a"]
 texture = ExtResource("7_pepte")
@@ -30,6 +36,12 @@ axis_stretch_vertical = 1
 
 [sub_resource type="Theme" id="Theme_u6yy0"]
 Panel/styles/panel = SubResource("StyleBoxTexture_klm3a")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iykoh"]
+bg_color = Color(0.193052, 0.460362, 0.691992, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c6x3o"]
+bg_color = Color(0.0784314, 0.239216, 0.376471, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vncfa"]
 texture = ExtResource("7_pepte")
@@ -70,7 +82,7 @@ corner_radius_bottom_left = 5
 anti_aliasing = false
 
 [node name="CharacterStats" type="Control"]
-custom_minimum_size = Vector2(600, 125)
+custom_minimum_size = Vector2(600, 150)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -113,21 +125,218 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 50
+theme_override_constants/margin_top = 26
 theme_override_constants/margin_right = 25
-theme_override_constants/margin_bottom = 25
+theme_override_constants/margin_bottom = 96
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer/MainPanel/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/MainPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="ConditionContainer1" type="Control" parent="MainContainer/MainPanel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.6
-theme_override_constants/separation = 15
 
-[node name="HealthAndManaBar" type="Control" parent="MainContainer/MainPanel/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/MainPanel/MarginContainer/HBoxContainer/ConditionContainer1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="MainContainer/MainPanel/MarginContainer/HBoxContainer/ConditionContainer1/HBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_horizontal = 3
+texture = ExtResource("4_ghk6k")
+expand_mode = 2
+stretch_mode = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer/MainPanel/MarginContainer/VBoxContainer/HealthAndManaBar"]
+[node name="ArmorLabel" type="Label" parent="MainContainer/MainPanel/MarginContainer/HBoxContainer/ConditionContainer1/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+
+[node name="ConditionContainer2" type="Control" parent="MainContainer/MainPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/MainPanel/MarginContainer/HBoxContainer/ConditionContainer2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="MainContainer/MainPanel/MarginContainer/HBoxContainer/ConditionContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("5_ulwx1")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="IgniteLabel" type="Label" parent="MainContainer/MainPanel/MarginContainer/HBoxContainer/ConditionContainer2/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+
+[node name="ConditionContainer3" type="Control" parent="MainContainer/MainPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/MainPanel/MarginContainer/HBoxContainer/ConditionContainer3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="MainContainer/MainPanel/MarginContainer/HBoxContainer/ConditionContainer3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("6_nfm7m")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="PoisonLabel" type="Label" parent="MainContainer/MainPanel/MarginContainer/HBoxContainer/ConditionContainer3/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+
+[node name="ConditionContainer4" type="Control" parent="MainContainer/MainPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/MainPanel/MarginContainer/HBoxContainer/ConditionContainer4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="MainContainer/MainPanel/MarginContainer/HBoxContainer/ConditionContainer4/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("7_vju3m")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="MainContainer/MainPanel/MarginContainer/HBoxContainer/ConditionContainer4/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+
+[node name="ConditionContainer5" type="Control" parent="MainContainer/MainPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/MainPanel/MarginContainer/HBoxContainer/ConditionContainer5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="MainContainer/MainPanel/MarginContainer/HBoxContainer/ConditionContainer5/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("8_ycatr")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="MainContainer/MainPanel/MarginContainer/HBoxContainer/ConditionContainer5/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+
+[node name="ConditionContainer6" type="Control" parent="MainContainer/MainPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/MainPanel/MarginContainer/HBoxContainer/ConditionContainer6"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="MainContainer/MainPanel/MarginContainer/HBoxContainer/ConditionContainer6/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("9_vncdf")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="MainContainer/MainPanel/MarginContainer/HBoxContainer/ConditionContainer6/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+
+[node name="XPMarginContainer" type="MarginContainer" parent="MainContainer/MainPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 18
+
+[node name="Control" type="Control" parent="MainContainer/MainPanel/XPMarginContainer"]
+layout_mode = 2
+
+[node name="XPBar" type="ProgressBar" parent="MainContainer/MainPanel/XPMarginContainer/Control"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxFlat_fhoub")
+theme_override_styles/fill = SubResource("StyleBoxFlat_oylhr")
+step = 0.001
+value = 75.0
+show_percentage = false
+
+[node name="MarginContainer" type="MarginContainer" parent="MainContainer/MainPanel/XPMarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = -5
+theme_override_constants/margin_right = -5
+theme_override_constants/margin_bottom = -5
+
+[node name="PanelBorder" type="Panel" parent="MainContainer/MainPanel/XPMarginContainer/MarginContainer"]
+layout_mode = 2
+theme = SubResource("Theme_u6yy0")
+
+[node name="HealthAndManaMarginContainer" type="MarginContainer" parent="MainContainer/MainPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 65
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 40
+
+[node name="HealthAndManaBar" type="Control" parent="MainContainer/MainPanel/HealthAndManaMarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer/MainPanel/HealthAndManaMarginContainer/HealthAndManaBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -137,16 +346,16 @@ grow_vertical = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
-[node name="HealthBar" parent="MainContainer/MainPanel/MarginContainer/VBoxContainer/HealthAndManaBar/VBoxContainer" instance=ExtResource("3_ghk6k")]
+[node name="HealthBar" parent="MainContainer/MainPanel/HealthAndManaMarginContainer/HealthAndManaBar/VBoxContainer" instance=ExtResource("3_ghk6k")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="HorizontalSeparation" type="ColorRect" parent="MainContainer/MainPanel/MarginContainer/VBoxContainer/HealthAndManaBar/VBoxContainer"]
+[node name="HorizontalSeparation" type="ColorRect" parent="MainContainer/MainPanel/HealthAndManaMarginContainer/HealthAndManaBar/VBoxContainer"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 color = Color(0, 0, 0, 1)
 
-[node name="ManaBar" type="ProgressBar" parent="MainContainer/MainPanel/MarginContainer/VBoxContainer/HealthAndManaBar/VBoxContainer"]
+[node name="ManaBar" type="ProgressBar" parent="MainContainer/MainPanel/HealthAndManaMarginContainer/HealthAndManaBar/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -154,10 +363,10 @@ size_flags_stretch_ratio = 0.5
 theme_override_styles/background = SubResource("StyleBoxFlat_iykoh")
 theme_override_styles/fill = SubResource("StyleBoxFlat_c6x3o")
 step = 0.001
-value = 100.0
+value = 75.0
 show_percentage = false
 
-[node name="ManaLabel" type="Label" parent="MainContainer/MainPanel/MarginContainer/VBoxContainer/HealthAndManaBar/VBoxContainer/ManaBar"]
+[node name="ManaLabel" type="Label" parent="MainContainer/MainPanel/HealthAndManaMarginContainer/HealthAndManaBar/VBoxContainer/ManaBar"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -166,11 +375,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 15
-text = "100"
+text = "75"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="MainContainer/MainPanel/MarginContainer/VBoxContainer/HealthAndManaBar"]
+[node name="MarginContainer" type="MarginContainer" parent="MainContainer/MainPanel/HealthAndManaMarginContainer/HealthAndManaBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -182,7 +391,7 @@ theme_override_constants/margin_top = -10
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = -10
 
-[node name="PanelBorder" type="Panel" parent="MainContainer/MainPanel/MarginContainer/VBoxContainer/HealthAndManaBar/MarginContainer"]
+[node name="PanelBorder" type="Panel" parent="MainContainer/MainPanel/HealthAndManaMarginContainer/HealthAndManaBar/MarginContainer"]
 layout_mode = 2
 theme = SubResource("Theme_u6yy0")
 

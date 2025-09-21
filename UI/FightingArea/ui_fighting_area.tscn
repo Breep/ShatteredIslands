@@ -131,10 +131,10 @@ size_flags_horizontal = 3
 [node name="MainContainer" parent="VBoxContainer/BottomPanel/HBoxContainer/BottomLeftEmpty/SelectedCharacterStats" index="0"]
 stats_position = 0
 
-[node name="LeftContainer" parent="VBoxContainer/BottomPanel/HBoxContainer/BottomLeftEmpty/SelectedCharacterStats/MainContainer/MainPanel" index="3"]
+[node name="LeftContainer" parent="VBoxContainer/BottomPanel/HBoxContainer/BottomLeftEmpty/SelectedCharacterStats/MainContainer/MainPanel" index="5"]
 visible = false
 
-[node name="RightContainer" parent="VBoxContainer/BottomPanel/HBoxContainer/BottomLeftEmpty/SelectedCharacterStats/MainContainer/MainPanel" index="4"]
+[node name="RightContainer" parent="VBoxContainer/BottomPanel/HBoxContainer/BottomLeftEmpty/SelectedCharacterStats/MainContainer/MainPanel" index="6"]
 visible = true
 
 [node name="BottomRightEmpty" type="Control" parent="VBoxContainer/BottomPanel/HBoxContainer"]
