@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cc7c0q2xebkyp" path="res://UI/BuyingArea/ui_buying_area.gd" id="1_5o5p6"]
 [ext_resource type="PackedScene" uid="uid://c25ls8pp84qld" path="res://UI/BuyingArea/PlayerInfo/ui_player_info.tscn" id="2_4kg3l"]
-[ext_resource type="PackedScene" uid="uid://db2anika8bvj8" path="res://UI/CharacterStats/ui_character_stats.tscn" id="2_btc45"]
+[ext_resource type="PackedScene" uid="uid://db2anika8bvj8" path="res://UI/EntityStats/ui_entity_stats.tscn" id="2_btc45"]
 [ext_resource type="PackedScene" uid="uid://cxalabhvxw1pd" path="res://UI/Tool/Timer/ui_timer.tscn" id="2_c4gh8"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="4_4kg3l"]
 [ext_resource type="PackedScene" uid="uid://d1oxnd1g75rqh" path="res://UI/BuyingArea/CardShop/ui_card_shop.tscn" id="4_dsp03"]

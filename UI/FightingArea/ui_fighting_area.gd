@@ -47,11 +47,7 @@ func _on_global_fighting_manager_countdown_started(countdown_value: int, endword
 
 func _on_events_entity_clicked(entity: Entity) -> void:
 	if not _is_active: return
-	if entity is Character:
-		var character: Character = entity
-		_ui_selected_entity_stats.connect_entity_stats(entity.stats, character.player.name)
-	else:
-		_ui_selected_entity_stats.connect_entity_stats(entity.stats, entity.name)
+	_ui_selected_entity_stats.connect_entity_stats(entity)
 
 
 

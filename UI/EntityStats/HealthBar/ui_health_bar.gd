@@ -18,7 +18,7 @@ extends Control
 
 # ============================== Constants ==============================
 
-const UI_SEGMENT_CONTROL_SCENE: PackedScene = preload("res://UI/CharacterStats/HealthBar/ui_segment_control.tscn")
+const UI_SEGMENT_CONTROL_SCENE: PackedScene = preload("res://UI/EntityStats/HealthBar/ui_segment_control.tscn")
 
 # ============================== Node base functions ==============================
 

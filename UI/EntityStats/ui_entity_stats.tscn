@@ -1,23 +1,23 @@
 [gd_scene load_steps=29 format=3 uid="uid://db2anika8bvj8"]
 
-[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_0k5gn"]
-[ext_resource type="Script" uid="uid://wsv4m6qf4t76" path="res://UI/CharacterStats/ui_character_stats.gd" id="1_xv57f"]
-[ext_resource type="Texture2D" uid="uid://bxd1jnaci6olo" path="res://Data/Assets/Card/ICONS/ATTACK color.png" id="2_xv57f"]
-[ext_resource type="Script" uid="uid://di5dalpbck8bm" path="res://UI/CharacterStats/main_container.gd" id="3_8tx5y"]
-[ext_resource type="PackedScene" uid="uid://c1xlwqgum36g6" path="res://UI/CharacterStats/HealthBar/ui_health_bar.tscn" id="3_ghk6k"]
-[ext_resource type="Texture2D" uid="uid://cia42t0jcdkfg" path="res://Data/Assets/Card/ICONS/HP color.png" id="3_u6yy0"]
-[ext_resource type="Texture2D" uid="uid://dlbjl8ihicpc8" path="res://Card/Descriptions/Families/Icons/defense.png" id="4_ghk6k"]
-[ext_resource type="Texture2D" uid="uid://nxj6jw2phtcp" path="res://Data/Assets/Card/ICONS/MANA color.png" id="5_5herf"]
-[ext_resource type="Texture2D" uid="uid://c7qa3nkyxcdlg" path="res://Card/Descriptions/Families/Icons/fire.png" id="5_ulwx1"]
-[ext_resource type="Texture2D" uid="uid://c3ruvqyjokopc" path="res://Data/Assets/Card/ICONS/dodge.png" id="6_8tx5y"]
-[ext_resource type="Texture2D" uid="uid://c3xudjd0byl2p" path="res://UI/_Themes/Data/show_stats_icon.png" id="6_fhoub"]
-[ext_resource type="Texture2D" uid="uid://cwqdngpmbcnck" path="res://Card/Descriptions/Families/Icons/poison.png" id="6_nfm7m"]
-[ext_resource type="Texture2D" uid="uid://xhyj0k42ilb3" path="res://UI/_Themes/Data/panel_tileable_20px_border_only.png" id="7_pepte"]
-[ext_resource type="Texture2D" uid="uid://ckifdy6fknspj" path="res://Card/Descriptions/Families/Icons/serenity.png" id="7_vju3m"]
-[ext_resource type="Texture2D" uid="uid://dlac4nmdbamph" path="res://Data/Assets/Card/ICONS/attack_speed.png" id="8_fhoub"]
-[ext_resource type="Texture2D" uid="uid://di7p4njh4seia" path="res://Card/Descriptions/Families/Icons/life.png" id="8_ycatr"]
-[ext_resource type="Texture2D" uid="uid://cawoo43ethscj" path="res://Data/Assets/Card/ICONS/critic.png" id="9_ghk6k"]
-[ext_resource type="Texture2D" uid="uid://inrfqqaj0ycx" path="res://Card/Descriptions/Families/Icons/mana.png" id="9_vncdf"]
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_xclh3"]
+[ext_resource type="Script" uid="uid://wsv4m6qf4t76" path="res://UI/EntityStats/ui_entity_stats.gd" id="2_8ou46"]
+[ext_resource type="Script" uid="uid://di5dalpbck8bm" path="res://UI/EntityStats/main_container.gd" id="3_r1owi"]
+[ext_resource type="Texture2D" uid="uid://dlbjl8ihicpc8" path="res://Card/Descriptions/Families/Icons/defense.png" id="4_mrme5"]
+[ext_resource type="Texture2D" uid="uid://c7qa3nkyxcdlg" path="res://Card/Descriptions/Families/Icons/fire.png" id="5_5wjm3"]
+[ext_resource type="Texture2D" uid="uid://cwqdngpmbcnck" path="res://Card/Descriptions/Families/Icons/poison.png" id="6_ti7eb"]
+[ext_resource type="Texture2D" uid="uid://ckifdy6fknspj" path="res://Card/Descriptions/Families/Icons/serenity.png" id="7_rou2w"]
+[ext_resource type="Texture2D" uid="uid://di7p4njh4seia" path="res://Card/Descriptions/Families/Icons/life.png" id="8_0gcep"]
+[ext_resource type="Texture2D" uid="uid://inrfqqaj0ycx" path="res://Card/Descriptions/Families/Icons/mana.png" id="9_4yclk"]
+[ext_resource type="Texture2D" uid="uid://xhyj0k42ilb3" path="res://UI/_Themes/Data/panel_tileable_20px_border_only.png" id="10_nmuyo"]
+[ext_resource type="PackedScene" uid="uid://c1xlwqgum36g6" path="res://UI/EntityStats/HealthBar/ui_health_bar.tscn" id="11_ln0qv"]
+[ext_resource type="Texture2D" uid="uid://c3xudjd0byl2p" path="res://UI/_Themes/Data/show_stats_icon.png" id="12_8o3n0"]
+[ext_resource type="Texture2D" uid="uid://cia42t0jcdkfg" path="res://Data/Assets/Card/ICONS/HP color.png" id="13_xg13p"]
+[ext_resource type="Texture2D" uid="uid://nxj6jw2phtcp" path="res://Data/Assets/Card/ICONS/MANA color.png" id="14_ibyde"]
+[ext_resource type="Texture2D" uid="uid://c3ruvqyjokopc" path="res://Data/Assets/Card/ICONS/dodge.png" id="15_ekc1w"]
+[ext_resource type="Texture2D" uid="uid://bxd1jnaci6olo" path="res://Data/Assets/Card/ICONS/ATTACK color.png" id="16_atocv"]
+[ext_resource type="Texture2D" uid="uid://dlac4nmdbamph" path="res://Data/Assets/Card/ICONS/attack_speed.png" id="17_i0uw4"]
+[ext_resource type="Texture2D" uid="uid://cawoo43ethscj" path="res://Data/Assets/Card/ICONS/critic.png" id="18_4m3xl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fhoub"]
 bg_color = Color(0.401153, 0.310384, 0.533518, 1)
@@ -26,7 +26,7 @@ bg_color = Color(0.401153, 0.310384, 0.533518, 1)
 bg_color = Color(0.243668, 0.178638, 0.332414, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_klm3a"]
-texture = ExtResource("7_pepte")
+texture = ExtResource("10_nmuyo")
 texture_margin_left = 20.0
 texture_margin_top = 20.0
 texture_margin_right = 20.0
@@ -44,7 +44,7 @@ bg_color = Color(0.193052, 0.460362, 0.691992, 1)
 bg_color = Color(0.0784314, 0.239216, 0.376471, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vncfa"]
-texture = ExtResource("7_pepte")
+texture = ExtResource("10_nmuyo")
 texture_margin_left = 20.0
 texture_margin_top = 20.0
 texture_margin_right = 20.0
@@ -81,7 +81,7 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 anti_aliasing = false
 
-[node name="CharacterStats" type="Control"]
+[node name="EntityStats" type="Control"]
 custom_minimum_size = Vector2(600, 150)
 layout_mode = 3
 anchors_preset = 8
@@ -96,8 +96,8 @@ offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
-theme = ExtResource("1_0k5gn")
-script = ExtResource("1_xv57f")
+theme = ExtResource("1_xclh3")
+script = ExtResource("2_8ou46")
 
 [node name="MainContainer" type="HBoxContainer" parent="." node_paths=PackedStringArray("_status_container", "_stats_container", "_left_container", "_right_container")]
 layout_mode = 1
@@ -106,7 +106,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("3_8tx5y")
+script = ExtResource("3_r1owi")
 _status_container = NodePath("MainPanel")
 _stats_container = NodePath("StatsContainer")
 _left_container = NodePath("MainPanel/LeftContainer")
@@ -147,7 +147,7 @@ grow_vertical = 2
 [node name="TextureRect" type="TextureRect" parent="MainContainer/MainPanel/MarginContainer/HBoxContainer/ConditionContainer1/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("4_ghk6k")
+texture = ExtResource("4_mrme5")
 expand_mode = 2
 stretch_mode = 4
 
@@ -172,7 +172,7 @@ grow_vertical = 2
 [node name="TextureRect" type="TextureRect" parent="MainContainer/MainPanel/MarginContainer/HBoxContainer/ConditionContainer2/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("5_ulwx1")
+texture = ExtResource("5_5wjm3")
 expand_mode = 2
 stretch_mode = 4
 
@@ -197,7 +197,7 @@ grow_vertical = 2
 [node name="TextureRect" type="TextureRect" parent="MainContainer/MainPanel/MarginContainer/HBoxContainer/ConditionContainer3/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("6_nfm7m")
+texture = ExtResource("6_ti7eb")
 expand_mode = 2
 stretch_mode = 4
 
@@ -222,7 +222,7 @@ grow_vertical = 2
 [node name="TextureRect" type="TextureRect" parent="MainContainer/MainPanel/MarginContainer/HBoxContainer/ConditionContainer4/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("7_vju3m")
+texture = ExtResource("7_rou2w")
 expand_mode = 2
 stretch_mode = 4
 
@@ -246,7 +246,7 @@ grow_vertical = 2
 [node name="TextureRect" type="TextureRect" parent="MainContainer/MainPanel/MarginContainer/HBoxContainer/ConditionContainer5/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("8_ycatr")
+texture = ExtResource("8_0gcep")
 expand_mode = 2
 stretch_mode = 4
 
@@ -270,7 +270,7 @@ grow_vertical = 2
 [node name="TextureRect" type="TextureRect" parent="MainContainer/MainPanel/MarginContainer/HBoxContainer/ConditionContainer6/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("9_vncdf")
+texture = ExtResource("9_4yclk")
 expand_mode = 2
 stretch_mode = 4
 
@@ -295,6 +295,7 @@ theme_override_constants/margin_bottom = 18
 layout_mode = 2
 
 [node name="XPBar" type="ProgressBar" parent="MainContainer/MainPanel/XPMarginContainer/Control"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 1
 anchors_preset = 12
@@ -310,6 +311,16 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_oylhr")
 step = 0.001
 value = 75.0
 show_percentage = false
+
+[node name="NoXPColorRect" type="ColorRect" parent="MainContainer/MainPanel/XPMarginContainer/Control/XPBar"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="MainContainer/MainPanel/XPMarginContainer"]
 layout_mode = 2
@@ -346,7 +357,7 @@ grow_vertical = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
-[node name="HealthBar" parent="MainContainer/MainPanel/HealthAndManaMarginContainer/HealthAndManaBar/VBoxContainer" instance=ExtResource("3_ghk6k")]
+[node name="HealthBar" parent="MainContainer/MainPanel/HealthAndManaMarginContainer/HealthAndManaBar/VBoxContainer" instance=ExtResource("11_ln0qv")]
 unique_name_in_owner = true
 layout_mode = 2
 
@@ -416,7 +427,7 @@ offset_right = 100.0
 offset_bottom = 25.0
 grow_horizontal = 2
 
-[node name="PlayerNameLabel" type="Label" parent="MainContainer/MainPanel/TitlePanel"]
+[node name="EntityNameLabel" type="Label" parent="MainContainer/MainPanel/TitlePanel"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -461,7 +472,7 @@ alignment = 1
 
 [node name="ShowThing" type="TextureRect" parent="MainContainer/MainPanel/LeftContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("6_fhoub")
+texture = ExtResource("12_8o3n0")
 expand_mode = 5
 stretch_mode = 5
 
@@ -478,7 +489,7 @@ toggle_mode = true
 
 [node name="ShowStatsIcon" type="TextureRect" parent="MainContainer/MainPanel/LeftContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("6_fhoub")
+texture = ExtResource("12_8o3n0")
 expand_mode = 5
 stretch_mode = 5
 
@@ -489,7 +500,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_0k5gn")
+theme = ExtResource("1_xclh3")
 theme_type_variation = &"ToggleButton"
 theme_override_styles/pressed = SubResource("StyleBoxFlat_ghk6k")
 theme_override_styles/normal = SubResource("StyleBoxFlat_6gtko")
@@ -521,7 +532,7 @@ alignment = 1
 
 [node name="ShowThing" type="TextureRect" parent="MainContainer/MainPanel/RightContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("6_fhoub")
+texture = ExtResource("12_8o3n0")
 expand_mode = 5
 stretch_mode = 5
 
@@ -538,7 +549,7 @@ toggle_mode = true
 
 [node name="ShowStatsIcon" type="TextureRect" parent="MainContainer/MainPanel/RightContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("6_fhoub")
+texture = ExtResource("12_8o3n0")
 expand_mode = 5
 stretch_mode = 5
 
@@ -549,7 +560,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_0k5gn")
+theme = ExtResource("1_xclh3")
 theme_type_variation = &"ToggleButton"
 theme_override_styles/pressed = SubResource("StyleBoxFlat_ghk6k")
 theme_override_styles/normal = SubResource("StyleBoxFlat_6gtko")
@@ -610,7 +621,7 @@ size_flags_horizontal = 3
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("3_u6yy0")
+texture = ExtResource("13_xg13p")
 expand_mode = 3
 stretch_mode = 5
 
@@ -644,7 +655,7 @@ size_flags_horizontal = 3
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("5_5herf")
+texture = ExtResource("14_ibyde")
 expand_mode = 3
 stretch_mode = 5
 
@@ -678,7 +689,7 @@ size_flags_horizontal = 3
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("6_8tx5y")
+texture = ExtResource("15_ekc1w")
 expand_mode = 3
 stretch_mode = 5
 
@@ -712,7 +723,7 @@ size_flags_horizontal = 3
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("2_xv57f")
+texture = ExtResource("16_atocv")
 expand_mode = 3
 stretch_mode = 5
 
@@ -746,7 +757,7 @@ size_flags_horizontal = 3
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("8_fhoub")
+texture = ExtResource("17_i0uw4")
 expand_mode = 3
 stretch_mode = 5
 
@@ -780,7 +791,7 @@ size_flags_horizontal = 3
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("9_ghk6k")
+texture = ExtResource("18_4m3xl")
 expand_mode = 3
 stretch_mode = 5
 

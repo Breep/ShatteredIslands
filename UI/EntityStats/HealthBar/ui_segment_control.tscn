@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b5i0paccpjrts"]
 
-[ext_resource type="Script" uid="uid://cg2ncbklo705r" path="res://UI/CharacterStats/HealthBar/ui_segment_control.gd" id="1_3nupr"]
+[ext_resource type="Script" uid="uid://cg2ncbklo705r" path="res://UI/EntityStats/HealthBar/ui_segment_control.gd" id="1_3nupr"]
 
 [node name="SegmentControl" type="Control" node_paths=PackedStringArray("_segment")]
 layout_mode = 3
