@@ -1,4 +1,4 @@
-class_name UICharacterStats
+class_name UIEntityStats
 extends Control
 
 # ============================== Private variables ==============================
@@ -45,8 +45,6 @@ func connect_entity_stats(new_entity: Entity):
 func _ready() -> void:
 	hide()
 	_stats_panel.hide()
-	
-	Events.nothing_clicked.connect(_on_events_nothing_clicked)
 
 # ============================== Private functions ==============================
 
@@ -171,10 +169,6 @@ func _on_entity_stats_ignite_stacks_changed(ignite_stacks: int) -> void:
 
 func _on_entity_player_xp_changed(_self_ref: Player, new_xp: int) -> void:
 	_update_xp_bar(new_xp, GameManager.game_rules.xp_per_levels[_entity.player.lvl])
-
-
-func _on_events_nothing_clicked() -> void:
-	hide()
 
 # ============================== Local Callbacks ==============================
 

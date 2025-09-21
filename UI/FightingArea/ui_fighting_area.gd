@@ -5,7 +5,9 @@ extends Control
 
 @onready var _continuous_timer: UIContinousTimer = %ContinousTimer
 @onready var _countdown: UICountdown = %Countdown
-@onready var _ui_selected_entity_stats: UICharacterStats = %SelectedCharacterStats
+
+@onready var _ui_own_entity_stats: UIEntityStats = %OwnEntityStats
+@onready var _ui_selected_entity_stats: UIEntityStats = %SelectedEntityStats
 
 # ============================== Private variables ==============================
 
@@ -30,6 +32,8 @@ func set_active() -> void:
 	if _is_active: return
 	_is_active = true
 	show()
+	if not multiplayer.is_server() or GameManager.game_type == GameManager.GameType.SOLO:
+		_ui_own_entity_stats.connect_entity_stats(PlayerManager.get_local_player().character)
 
 
 func set_inactive() -> void:
