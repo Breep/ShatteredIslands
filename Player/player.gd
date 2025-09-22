@@ -45,7 +45,7 @@ var team: int:
 		_team = value
 		if character != null: character.team = _team
 
-signal lvl_changed(self_ref: Player, new_lvl)
+signal lvl_changed(self_ref: Player, new_lvl: int)
 var _lvl: int = 1
 var lvl: int:
 	get: return _lvl

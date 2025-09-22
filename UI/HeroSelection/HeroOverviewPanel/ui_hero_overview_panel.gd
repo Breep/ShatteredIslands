@@ -54,12 +54,12 @@ func _update_content(hero: Hero) -> void:
 	_hero_name_label.text = hero.name
 	_hero_portrait.texture = hero.portrait
 	
-	_health_label.text = str(hero.stats.health_max)
-	_mana_label.text = str(hero.stats.mana_regen).pad_decimals(1)
-	_dodge_label.text = str(int(hero.stats.dodge))
-	_attack_label.text = str(hero.stats.attack_damage)
-	_attack_speed_label.text = str(hero.stats.attack_speed).pad_decimals(1)
-	_critic_label.text = str(int(hero.stats.physical_critical_chance))
+	_health_label.text = str(hero.stats[1].health_max)
+	_mana_label.text = str(hero.stats[1].mana_regen).pad_decimals(1)
+	_dodge_label.text = str(int(hero.stats[1].dodge))
+	_attack_label.text = str(hero.stats[1].attack_damage)
+	_attack_speed_label.text = str(hero.stats[1].attack_speed).pad_decimals(1)
+	_critic_label.text = str(int(hero.stats[1].physical_critical_chance))
 	
 	_passive_name_label.text = hero.passive_name
 	_passive_description_label.text = hero.passive_description

@@ -81,7 +81,7 @@ var _fighting_state: GlobalFightingManager.FightingState = GlobalFightingManager
 
 func apply_cards_upgrade(deck: PlayerDeck) -> void:
 	if not is_node_ready(): return
-	stats.reset_from_hero(_hero_3D.hero)
+	stats.reset_from_hero(_hero_3D.hero, player.lvl)
 	for card in deck.get_active_deck():
 		card.player_upgrade.apply(families_stats, card.lvl)
 	_attack_manager.apply_stats_modifiers()
@@ -172,6 +172,8 @@ func _ready() -> void:
 		player = PlayerManager.players[owner_player_id]
 		player.character = self
 	
+	player.lvl_changed.connect(_on_player_lvl_changed)
+	
 	if battle_id == -1:
 		_character_visual.hide()
 		if _turret != null: _turret.hide()
@@ -210,7 +212,6 @@ func _update_hero() -> void:
 	if not Engine.is_editor_hint() and not is_node_ready(): return
 	if _hero_3D != null: _hero_3D.queue_free()
 	_hero_3D = _HEROES_3D[hero_id].instantiate()
-	print("Character change hero to: ", _hero_3D.hero.name)
 	_hero_3D.character_owner = self
 	_collision_shape.shape = _hero_3D.collision_shape.shape.duplicate() # Update Collider
 	var hero_height: float = (_collision_shape.shape as CapsuleShape3D).height
@@ -286,5 +287,7 @@ func _on_events_entity_clicked(entity: Entity) -> void:
 		_clickable_feedback.set_active()
 
 
+func _on_player_lvl_changed(self_ref: Player, new_lvl: int) -> void:
+	apply_cards_upgrade(player.deck)
 
  

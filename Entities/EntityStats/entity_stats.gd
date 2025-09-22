@@ -136,18 +136,18 @@ var armor_stacks: int:
 
 # ============================== Public functions ==============================
 
-func reset_from_hero(hero: Hero) -> void:
-	health_max = hero.stats.health_max
+func reset_from_hero(hero: Hero, lvl: int) -> void:
+	health_max = hero.stats[lvl].health_max
 	health = health_max
-	mana_max = hero.stats.mana_max
+	mana_max = hero.stats[lvl].mana_max
 	mana = 0
-	mana_regen = hero.stats.mana_regen
-	attack_damage = hero.stats.attack_damage
-	_attack_speed_default = hero.stats.attack_speed
-	attack_speed = hero.stats.attack_speed
+	mana_regen = hero.stats[lvl].mana_regen
+	attack_damage = hero.stats[lvl].attack_damage
+	_attack_speed_default = hero.stats[lvl].attack_speed
+	attack_speed = hero.stats[lvl].attack_speed
 	attack_speed_boost = 0
-	physical_critical_chance = hero.stats.physical_critical_chance
-	physical_critical_multiplier = hero.stats.physical_critical_multiplier
+	physical_critical_chance = hero.stats[lvl].physical_critical_chance
+	physical_critical_multiplier = hero.stats[lvl].physical_critical_multiplier
 
 
 
