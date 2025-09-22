@@ -1,7 +1,14 @@
 class_name ClickableSelectionFeedback
 extends Node3D
 
-@export var _color: Color = Color(1, 1, 1, 1)
+var _color: Color = Color(1, 1, 1, 1)
+@export var color: Color:
+	get: return _color
+	set(value):
+		if value == _color or not is_node_ready(): return
+		_color = value
+		_decal.modulate = _color
+
 @export var pulse_amount: float = 0.02     # % bigger on X/Z at peak
 @export var pulse_duration: float = 0.8   # seconds for a grow/shrink cycle
 @export var color_wobble: float = 0.3     # how much to lighten at peak
@@ -17,7 +24,7 @@ var _tween_color: Tween
 
 func _ready() -> void:
 	_size_base = _decal.size
-	_decal.modulate = _color
+	_decal.modulate = color
 	hide()
 
 
@@ -58,12 +65,12 @@ func _start_pulse() -> void:
 	_tween_size.set_loops(0)
 
 	# --- color wobble around base color (lighten and back) ---
-	var brighter := _color.lightened(color_wobble)
+	var brighter := color.lightened(color_wobble)
 
 	_tween_color = create_tween()
 	_tween_color.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	_tween_color.tween_property(_decal, "modulate", brighter,  color_duration * 0.5)
-	_tween_color.tween_property(_decal, "modulate", _color,    color_duration * 0.5)
+	_tween_color.tween_property(_decal, "modulate", color,    color_duration * 0.5)
 	_tween_color.set_loops(0)
 
 
@@ -74,4 +81,4 @@ func _stop_pulse() -> void:
 		_tween_color.kill()
 	# reset visuals
 	_decal.size = _size_base
-	_decal.modulate = _color
+	_decal.modulate = color

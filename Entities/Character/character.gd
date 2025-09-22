@@ -192,6 +192,12 @@ func _ready() -> void:
 	stats.mana_changed.connect(_on_stats_mana_changed)
 	
 	_defense_manager.reflecto_belt_activated.connect(_on_defense_manager_reflecto_belt_activated)
+	
+	if player == PlayerManager.get_local_player():
+		_clickable_feedback.color = Color.DARK_BLUE
+		_clickable_feedback.set_active()
+	else:
+		_clickable_feedback.color = Color.CRIMSON
 
 # ============================== Private functions ==============================
 
@@ -273,6 +279,7 @@ func _on_events_player_won_a_fight(winner: Player) -> void:
 
 
 func _on_events_entity_clicked(entity: Entity) -> void:
+	if player == PlayerManager.get_local_player(): return
 	if not entity == self:
 		_clickable_feedback.set_inactive()
 	else:

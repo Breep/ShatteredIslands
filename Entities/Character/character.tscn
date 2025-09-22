@@ -159,7 +159,7 @@ _spawn_area_checker = NodePath("../SpawnAreaChecker")
 _owner = NodePath("..")
 
 [node name="ClickableSelectionFeedback" parent="." instance=ExtResource("13_jwnrq")]
-_color = Color(0.863004, 0, 0.207898, 1)
+color = Color(0.909681, 0, 0.246544, 1)
 
 [node name="PickableCollider" parent="." instance=ExtResource("8_b3hxd")]
 
