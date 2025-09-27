@@ -1,8 +1,57 @@
-[gd_resource type="Resource" script_class="Hero" load_steps=14 format=3 uid="uid://by3bwbvf4ekcd"]
+[gd_resource type="Resource" script_class="Hero" load_steps=27 format=3 uid="uid://by3bwbvf4ekcd"]
 
 [ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://Entities/Heroes/hero.gd" id="1_2ttjg"]
 [ext_resource type="Texture2D" uid="uid://difeq0pm3hgjs" path="res://Data/Heroes/Portraits/darkknight2.png" id="1_hluaq"]
 [ext_resource type="Script" uid="uid://2py6kv5aqgem" path="res://Entities/Heroes/hero_stats.gd" id="3_hluaq"]
+[ext_resource type="Texture2D" uid="uid://dgch3sc5bbdxb" path="res://Entities/Heroes/DarkKnight/Data/1A-SparkOfLight.jpeg" id="3_ylsnw"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://Entities/Heroes/skill.gd" id="4_f1ben"]
+[ext_resource type="Texture2D" uid="uid://dnpy1x6ryvstv" path="res://Entities/Heroes/DarkKnight/Data/1B-Corruption.jpeg" id="5_mngad"]
+[ext_resource type="Texture2D" uid="uid://bdvfbqxfklts4" path="res://Entities/Heroes/DarkKnight/Data/2A-Pain.jpeg" id="6_m1h0u"]
+[ext_resource type="Texture2D" uid="uid://c1wcq2u3lsw8m" path="res://Entities/Heroes/DarkKnight/Data/2B-Cataclysm.jpeg" id="7_aqqbn"]
+[ext_resource type="Texture2D" uid="uid://cnm0o7n7qoq65" path="res://Entities/Heroes/DarkKnight/Data/3A-ManaStrike.jpeg" id="8_pb84q"]
+[ext_resource type="Texture2D" uid="uid://cljgrwgbsbfa2" path="res://Entities/Heroes/DarkKnight/Data/3B-MegaStrike.jpeg" id="9_2bb52"]
+
+[sub_resource type="Resource" id="Resource_0fu0u"]
+script = ExtResource("4_f1ben")
+name = "Spark of light"
+description = "Aeron Vantaal se soigne pour 100% des dégâts de la super frappe."
+portrait = ExtResource("3_ylsnw")
+metadata/_custom_type_script = "uid://dfby4merlgkep"
+
+[sub_resource type="Resource" id="Resource_y7u6o"]
+script = ExtResource("4_f1ben")
+name = "Corruption"
+description = "Aeron Vantaal gagne définitivement 1 AD pour chaque super frappe effectué."
+portrait = ExtResource("5_mngad")
+metadata/_custom_type_script = "uid://dfby4merlgkep"
+
+[sub_resource type="Resource" id="Resource_4hyio"]
+script = ExtResource("4_f1ben")
+name = "Pain"
+description = "La tempête noire se nourrit de la souffrance de ses victimes. Elle inflige 1% damage supplémentaire pour chaque (1x) stack."
+portrait = ExtResource("6_m1h0u")
+metadata/_custom_type_script = "uid://dfby4merlgkep"
+
+[sub_resource type="Resource" id="Resource_7xt14"]
+script = ExtResource("4_f1ben")
+name = "Cataclysm"
+description = "Lance 2 tempête noire. Le coup en mana de l’ultimate augmente à 150."
+portrait = ExtResource("7_aqqbn")
+metadata/_custom_type_script = "uid://dfby4merlgkep"
+
+[sub_resource type="Resource" id="Resource_roewo"]
+script = ExtResource("4_f1ben")
+name = "Mana strike"
+description = "Chaque superfrappe charge l'ultimat. Regen du mana égal à 5% des dégâts infligés."
+portrait = ExtResource("8_pb84q")
+metadata/_custom_type_script = "uid://dfby4merlgkep"
+
+[sub_resource type="Resource" id="Resource_ec2v6"]
+script = ExtResource("4_f1ben")
+name = "Mega strike"
+description = "Aeron Vantaal peut maintenant cumuler 10 charges pour effectuer 500% des dégâts."
+portrait = ExtResource("9_2bb52")
+metadata/_custom_type_script = "uid://dfby4merlgkep"
 
 [sub_resource type="Resource" id="Resource_hluaq"]
 script = ExtResource("3_hluaq")
@@ -147,16 +196,10 @@ passive_name = "Super frappe"
 passive_description = "Chaque fois que la tourelle Aeron Vantaal attaque, elle gagne une charge. Effet des charges : + (1*lvl) aa damage À 5 charges, Aeron Vantaal déclenche une Super Frappe, infligeant 150% de ses dégâts réinitialisant les charges."
 ultimate_name = "Tempête noire"
 ultimate_description = "Aeron Vantaal crée une tempête du néant sur l'ennemi ciblé, La tempête fait des dommage égal à 50% de son AD toutes les 0,2sec pendant 1sec"
-skill1A_name = "Eclat de lumière"
-skill1A_description = "Aeron Vantaal se soigne pour 100% des dégâts de la super frappe."
-skill1B_name = "Corruption"
-skill1B_description = "Aeron Vantaal gagne définitivement 1 AD pour chaque super frappe effectué."
-skill2A_name = "Souffrance"
-skill2A_description = "La tempête noire se nourrit de la souffrance de ses victimes. Elle inflige 1% damage supplémentaire pour chaque (1x) stack."
-skill2B_name = "Cataclysme"
-skill2B_description = "Lance 2 tempête noire. Le coup en mana de l’ultimate augmente à 150."
-skill3A_name = "Frappe de mana"
-skill3A_description = "Chaque superfrappe charge l'ultimat. Regen du mana égal à 5% des dégâts infligés."
-skill3B_name = "Mega frappe"
-skill3B_description = "Aeron Vantaal peut maintenant cumuler 10 charges pour effectuer 500% des dégâts."
+skill1A = SubResource("Resource_0fu0u")
+skill1B = SubResource("Resource_y7u6o")
+skill2A = SubResource("Resource_4hyio")
+skill2B = SubResource("Resource_7xt14")
+skill3A = SubResource("Resource_roewo")
+skill3B = SubResource("Resource_ec2v6")
 metadata/_custom_type_script = "uid://dtcjta70luxvr"

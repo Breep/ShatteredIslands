@@ -93,7 +93,7 @@ theme_override_constants/margin_bottom = -5
 [node name="ColorRect" type="ColorRect" parent="SkillPanel/MarginContainer/LockContainer"]
 layout_mode = 2
 mouse_filter = 2
-color = Color(0.337255, 0.282353, 0.27451, 0.392157)
+color = Color(0.468839, 0.174336, 0.179526, 0.392157)
 
 [node name="PanelBorder" type="Panel" parent="SkillPanel"]
 layout_mode = 1

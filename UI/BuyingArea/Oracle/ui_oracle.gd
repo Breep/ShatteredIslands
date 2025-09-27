@@ -20,7 +20,6 @@ extends Control
 
 @onready var _buy_xp_container: Control = %BuyXPContainer
 @onready var _xp_container: Control = %XPContainer
-@onready var _level_max_control: Control = %LevelMaxContainer
 
 # ============================== Private variables ==============================
 
@@ -31,6 +30,7 @@ var _is_locked: bool
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
+	return
 	if multiplayer.is_server() and GameManager.game_type != GameManager.GameType.SOLO:
 		return
 	_local_player = PlayerManager.get_local_player()
@@ -68,8 +68,6 @@ func _update_xp_bar(value: int, max_value: int) -> void:
 
 func _activate_max_level_ui() -> void:
 	_buy_xp_container.hide()
-	_xp_container.hide()
-	_level_max_control.show()
 
 
 func _update_level_label(level: int) -> void:

@@ -33,17 +33,11 @@ enum HeroId {
 @export var ultimate_name: String
 @export var ultimate_description: String
 
-@export var skill1A_name: String
-@export var skill1A_description: String
-@export var skill1B_name: String
-@export var skill1B_description: String
-@export var skill2A_name: String
-@export var skill2A_description: String
-@export var skill2B_name: String
-@export var skill2B_description: String
-@export var skill3A_name: String
-@export var skill3A_description: String
-@export var skill3B_name: String
-@export var skill3B_description: String
+@export var skill1A: Skill
+@export var skill1B: Skill
+@export var skill2A: Skill
+@export var skill2B: Skill
+@export var skill3A: Skill
+@export var skill3B: Skill
 
 # ============================== Public functions ==============================

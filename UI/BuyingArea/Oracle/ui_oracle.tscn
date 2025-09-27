@@ -1,14 +1,15 @@
-[gd_scene load_steps=21 format=3 uid="uid://dpb7vslj2dbl0"]
+[gd_scene load_steps=49 format=3 uid="uid://dpb7vslj2dbl0"]
 
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_1jvkn"]
 [ext_resource type="Script" uid="uid://cy6mpamwt0egj" path="res://UI/BuyingArea/Oracle/ui_oracle.gd" id="2_52pse"]
 [ext_resource type="Texture2D" uid="uid://xhyj0k42ilb3" path="res://UI/_Themes/Data/panel_tileable_20px_border_only.png" id="2_u8k82"]
 [ext_resource type="Texture2D" uid="uid://db2m1yw0asd6l" path="res://UI/_Themes/Data/cross.png" id="3_u8k82"]
-[ext_resource type="PackedScene" uid="uid://d2ftrvw88il7f" path="res://UI/Misc/SkillPanel/ui_skill_panel.tscn" id="4_vncfa"]
+[ext_resource type="PackedScene" uid="uid://bu2pbcjf7rk1p" path="res://UI/BuyingArea/Oracle/LevelPreviewContainer/level_preview_container.tscn" id="4_n0c5e"]
+[ext_resource type="PackedScene" uid="uid://c511u0grpxqea" path="res://UI/BuyingArea/Oracle/LevelContainer/level_container.tscn" id="4_ss180"]
+[ext_resource type="Script" uid="uid://chq0j8yno1edc" path="res://UI/BuyingArea/Oracle/all_levels_containers.gd" id="4_whvag"]
 [ext_resource type="Texture2D" uid="uid://bbcbah5ifbsrw" path="res://UI/_Themes/Data/coin.png" id="5_vncfa"]
-[ext_resource type="Shader" uid="uid://cesby1b2fruhl" path="res://UI/BuyingArea/Oracle/ui_oracle_fire_shader.tres" id="6_fjef2"]
-[ext_resource type="Texture2D" uid="uid://dknfkykqwklf7" path="res://Data/Texture/2D/T_VFX_Noise_465.png" id="7_fjef2"]
-[ext_resource type="Texture2D" uid="uid://bdn6w1dgmnmqp" path="res://Data/Texture/2D/T_Gradient_circle22.jpg" id="8_n0c5e"]
+[ext_resource type="Shader" uid="uid://bv6hpsis17qbh" path="res://VFX/Shaders/2D/2d_highlight.gdshader" id="6_ss180"]
+[ext_resource type="Texture2D" uid="uid://bl5f54pvygwuh" path="res://UI/_Themes/Data/book.png" id="8_whvag"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vncfa"]
 texture = ExtResource("2_u8k82")
@@ -22,42 +23,496 @@ axis_stretch_vertical = 1
 [sub_resource type="Theme" id="Theme_ua3xp"]
 Panel/styles/panel = SubResource("StyleBoxTexture_vncfa")
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vncfa"]
+[sub_resource type="Gradient" id="Gradient_n0c5e"]
 
-[sub_resource type="Gradient" id="Gradient_ss180"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ss180"]
+gradient = SubResource("Gradient_n0c5e")
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_obply"]
-gradient = SubResource("Gradient_ss180")
-fill_to = Vector2(0, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_obply"]
+shader = ExtResource("6_ss180")
+shader_parameter/vertical_gradient = SubResource("GradientTexture1D_ss180")
+shader_parameter/size_effect = 0.4
+shader_parameter/speed = 0.7
+shader_parameter/highlight_strength = 1.0
+shader_parameter/color_mode_toggle = false
+shader_parameter/is_horizontal = false
+shader_parameter/pause_duration = 0.5
+shader_parameter/effect_enabled = false
+shader_parameter/start_time = 0.0
 
-[sub_resource type="Gradient" id="Gradient_f3dfd"]
-offsets = PackedFloat32Array(0.111486, 0.486486, 0.527027, 1)
-colors = PackedColorArray(0, 0, 0, 0, 0.700306, 0.232534, 0.213378, 1, 1, 0.5, 0.1, 1, 5, 0.9, 0.5, 1)
+[sub_resource type="Gradient" id="Gradient_d5stg"]
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_d5stg"]
-gradient = SubResource("Gradient_f3dfd")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6ym3k"]
+gradient = SubResource("Gradient_d5stg")
 
-[sub_resource type="Gradient" id="Gradient_6ym3k"]
-offsets = PackedFloat32Array(0, 0.108108, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.0236486, 0.0236486, 0.0236486, 1, 1, 1, 1, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t0r4d"]
+shader = ExtResource("6_ss180")
+shader_parameter/vertical_gradient = SubResource("GradientTexture1D_6ym3k")
+shader_parameter/size_effect = 0.4
+shader_parameter/speed = 0.7
+shader_parameter/highlight_strength = 1.0
+shader_parameter/color_mode_toggle = false
+shader_parameter/is_horizontal = false
+shader_parameter/pause_duration = 0.5
+shader_parameter/effect_enabled = false
+shader_parameter/start_time = 0.0
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_t0r4d"]
-gradient = SubResource("Gradient_6ym3k")
-fill_from = Vector2(1, 1)
+[sub_resource type="Gradient" id="Gradient_q2w6v"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_q2w6v"]
-shader = ExtResource("6_fjef2")
-shader_parameter/Scale = Vector2(1, 1)
-shader_parameter/Speed = Vector2(0, 1)
-shader_parameter/Texture_Main = ExtResource("7_fjef2")
-shader_parameter/Texture_Add = SubResource("GradientTexture2D_obply")
-shader_parameter/Texture_Multiply = ExtResource("8_n0c5e")
-shader_parameter/Texture_Substract = SubResource("GradientTexture2D_t0r4d")
-shader_parameter/Texture_Color_1D = SubResource("GradientTexture1D_d5stg")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_mri4l"]
+gradient = SubResource("Gradient_q2w6v")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hgneb"]
+shader = ExtResource("6_ss180")
+shader_parameter/vertical_gradient = SubResource("GradientTexture1D_mri4l")
+shader_parameter/size_effect = 0.4
+shader_parameter/speed = 0.7
+shader_parameter/highlight_strength = 1.0
+shader_parameter/color_mode_toggle = false
+shader_parameter/is_horizontal = false
+shader_parameter/pause_duration = 0.5
+shader_parameter/effect_enabled = false
+shader_parameter/start_time = 0.0
+
+[sub_resource type="Gradient" id="Gradient_ewpet"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jetfs"]
+gradient = SubResource("Gradient_ewpet")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_06pu5"]
+shader = ExtResource("6_ss180")
+shader_parameter/vertical_gradient = SubResource("GradientTexture1D_jetfs")
+shader_parameter/size_effect = 0.4
+shader_parameter/speed = 0.7
+shader_parameter/highlight_strength = 1.0
+shader_parameter/color_mode_toggle = false
+shader_parameter/is_horizontal = false
+shader_parameter/pause_duration = 0.5
+shader_parameter/effect_enabled = false
+shader_parameter/start_time = 0.0
+
+[sub_resource type="Gradient" id="Gradient_iuo7g"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_x8pci"]
+gradient = SubResource("Gradient_iuo7g")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ppbxu"]
+shader = ExtResource("6_ss180")
+shader_parameter/vertical_gradient = SubResource("GradientTexture1D_x8pci")
+shader_parameter/size_effect = 0.4
+shader_parameter/speed = 0.7
+shader_parameter/highlight_strength = 1.0
+shader_parameter/color_mode_toggle = false
+shader_parameter/is_horizontal = false
+shader_parameter/pause_duration = 0.5
+shader_parameter/effect_enabled = false
+shader_parameter/start_time = 0.0
+
+[sub_resource type="Gradient" id="Gradient_mpk7q"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dqeso"]
+gradient = SubResource("Gradient_mpk7q")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vbmtp"]
+shader = ExtResource("6_ss180")
+shader_parameter/vertical_gradient = SubResource("GradientTexture1D_dqeso")
+shader_parameter/size_effect = 0.4
+shader_parameter/speed = 0.7
+shader_parameter/highlight_strength = 1.0
+shader_parameter/color_mode_toggle = false
+shader_parameter/is_horizontal = false
+shader_parameter/pause_duration = 0.5
+shader_parameter/effect_enabled = false
+shader_parameter/start_time = 0.0
+
+[sub_resource type="Gradient" id="Gradient_p52qw"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7yux2"]
+gradient = SubResource("Gradient_p52qw")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1c23j"]
+shader = ExtResource("6_ss180")
+shader_parameter/vertical_gradient = SubResource("GradientTexture1D_7yux2")
+shader_parameter/size_effect = 0.4
+shader_parameter/speed = 0.7
+shader_parameter/highlight_strength = 1.0
+shader_parameter/color_mode_toggle = false
+shader_parameter/is_horizontal = false
+shader_parameter/pause_duration = 0.5
+shader_parameter/effect_enabled = false
+shader_parameter/start_time = 0.0
+
+[sub_resource type="Gradient" id="Gradient_hx32h"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nmbkh"]
+gradient = SubResource("Gradient_hx32h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qh4yd"]
+shader = ExtResource("6_ss180")
+shader_parameter/vertical_gradient = SubResource("GradientTexture1D_nmbkh")
+shader_parameter/size_effect = 0.4
+shader_parameter/speed = 0.7
+shader_parameter/highlight_strength = 1.0
+shader_parameter/color_mode_toggle = false
+shader_parameter/is_horizontal = false
+shader_parameter/pause_duration = 0.5
+shader_parameter/effect_enabled = false
+shader_parameter/start_time = 0.0
+
+[sub_resource type="Gradient" id="Gradient_5437i"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_utwjt"]
+gradient = SubResource("Gradient_5437i")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ig8fj"]
+shader = ExtResource("6_ss180")
+shader_parameter/vertical_gradient = SubResource("GradientTexture1D_utwjt")
+shader_parameter/size_effect = 0.4
+shader_parameter/speed = 0.7
+shader_parameter/highlight_strength = 1.0
+shader_parameter/color_mode_toggle = false
+shader_parameter/is_horizontal = false
+shader_parameter/pause_duration = 0.5
+shader_parameter/effect_enabled = false
+shader_parameter/start_time = 0.0
+
+[sub_resource type="Gradient" id="Gradient_c21km"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_x4qh4"]
+gradient = SubResource("Gradient_c21km")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_73htb"]
+shader = ExtResource("6_ss180")
+shader_parameter/vertical_gradient = SubResource("GradientTexture1D_x4qh4")
+shader_parameter/size_effect = 0.4
+shader_parameter/speed = 0.7
+shader_parameter/highlight_strength = 1.0
+shader_parameter/color_mode_toggle = false
+shader_parameter/is_horizontal = false
+shader_parameter/pause_duration = 0.5
+shader_parameter/effect_enabled = false
+shader_parameter/start_time = 0.0
+
+[sub_resource type="Shader" id="Shader_whvag"]
+code = "shader_type canvas_item;
+
+
+//背景填充颜色
+uniform vec3 backFillColour : source_color = vec3(0.62,1.00,1.00);
+//前景填充靠里的颜色
+uniform vec3 frontFillInnerColour : source_color = vec3(0.35,1.00,1.00);
+//前景填充靠边的颜色
+uniform vec3 frontFillOuterColour : source_color = vec3(0.00,0.35,1.00);
+//环的颜色
+uniform vec3 ringColour : source_color = vec3(0.00,0.16,0.13);
+//玻璃罩阴影颜色
+uniform vec3 fresnelColour : source_color = vec3(0.00,0.88,1.00);
+//内环发光颜色
+uniform vec3 innerRingGlowColour : source_color = vec3(0.00,1.00,1.00);
+//填充颜色调整
+uniform vec4 fillcolour : source_color = vec4(1);
+//环的宽度
+uniform float ringWidth = 0.15;
+//玻璃球与环的间隔
+uniform float innerCircleRadiusOffset = 0.0;
+//fill_value,填充球体的值
+uniform float fill_value : hint_range(-1, 1) = 0.25;
+
+
+
+// 定义函数：计算点到圆弧的距离
+float sdArc(in vec2 p, in vec2 sc, in float ra, float rb)
+{
+    // sc is the sin/cos of the arc's aperture
+	//sc 是圆弧孔径的 sin/cos
+    p.x = abs(p.x);
+    return ((sc.y*p.x>sc.x*p.y) ? length(p-sc*ra) : 
+                                  abs(length(p)-ra)) - rb;
+}
+// 计算2D旋转矩阵
+mat2 Get2DRotationMatrix(float angle) {
+    float c = cos(angle);
+    float s = sin(angle);
+	vec2 V1 = vec2(c, -s);
+	vec2 V2 = vec2(s, c);
+    return mat2(V1,V2);
+}
+
+void fragment() {
+// 获取屏幕像素的UV坐标
+// Centered, aspect ratio-corrected, normalized pixel coordinates [0.0, 1.0].
+    //vec2 uv = ((UV / -0.48)) + vec2(1.038,1.038);
+	vec2 uv = ((UV / -0.48)) + vec2(1.038,1.038);//默认最佳参数
+	////调整球体大小和边距，uv=((UV/调整球体大小的参数))+vec2(球体边距参数,球体边距参数)   
+	// FRAGCOORD.xy / SCREEN_PIXEL_SIZE.xy 其实就是 UV
+    vec2 normalizedCenteredUV = (uv - 0.5) * 2.0;
+    // vec2 normalizedCenteredUV = ((FRAGCOORD.xy / SCREEN_PIXEL_SIZE.xy) - 0.5) * 2.0;
+    //{应该是没用的代码，上面这行好像也不起作用，但是不知道怎么改：）
+    //float aspectRatio = SCREEN_PIXEL_SIZE.x / SCREEN_PIXEL_SIZE.y;
+    //vec2 uv = vec2(normalizedCenteredUV.x * aspectRatio, normalizedCenteredUV.y);}
+            
+    // Get circle SDF -> clip 3x circles.
+    //获取圆 SDF -> 剪出 3x 圆。        
+    float circleSDF = length(uv);
+    
+    //const float ringWidth = 0.15;//环的宽度
+    //const float innerCircleRadiusOffset = 0.0;//玻璃球与环的间隔
+    
+    float oneMinusRingWidth = 1.0 - ringWidth;
+    
+    // 2x circles used to generate outer ring.
+	//2x 个圆圈用于生成外环。
+    
+    float circleA = step(circleSDF, 1.0);
+    float circleB = step(circleSDF, oneMinusRingWidth);
+        
+    float ring = circleA - circleB;
+    
+    // 1x circle used for the actual container/shell (as its mask).
+	//1x 用于实际容器/外壳的圆圈（作为其遮罩）。
+    
+    float fillMaskCircle = step(circleSDF, oneMinusRingWidth - innerCircleRadiusOffset);
+    
+    // Ring glow.
+	//环发光
+        
+    float ringGlowCircleSDF = circleSDF - 1.0;
+    const float innerRingGlowRadiusOffset = 0.15;
+    
+    float innerRingGlow = ringGlowCircleSDF + innerRingGlowRadiusOffset;    
+    float outerRingGlow = ringGlowCircleSDF;   
+    
+    const float outerRingGlowWidth = 0.01;
+    float outerRingGlowPower = 0.8;
+    
+    const float innerRingGlowWidth = 0.01;
+    const float innerRingGlowPower = 1.2;
+    
+    const float outerRingGlowAnimation = 12.0;
+    const float outerRingGlowAnimationRange = 0.2;    
+    
+    innerRingGlow = pow(innerRingGlowWidth / innerRingGlow, innerRingGlowPower);
+    innerRingGlow = clamp(innerRingGlow - fillMaskCircle, 0.0, 1.0); 
+    
+    outerRingGlowPower += (sin(TIME * outerRingGlowAnimation) * outerRingGlowAnimationRange);
+    
+    outerRingGlow = pow(outerRingGlowWidth / outerRingGlow, outerRingGlowPower);
+    outerRingGlow = clamp(outerRingGlow - fillMaskCircle, 0.0, 1.0);
+    
+    // Progress/fill. Animated.
+	//进度/填充。 动画。
+    
+    const float fillAnimationFrequency = 4.0;
+    const float fillAnimationAmplitude = 0.05;
+        
+    float fillAnimationPhase = TIME * fillAnimationFrequency;
+    
+    float fillAnimation = sin(fillAnimationPhase) * fillAnimationAmplitude;
+    
+    const float waveFrequency = 2.0;
+    const float waveAmplitude = 0.05;
+    
+    const float waveAnimation = 2.0;
+    
+    // Waves as repeating sine/band offsets to the horizontal gradient.
+	//波作为重复正弦/频带偏移到水平梯度。
+    
+    float frontWavePhase = (TIME * waveAnimation) + uv.x;
+    float backWavePhase = (TIME * -waveAnimation) + uv.x;
+        
+    frontWavePhase *= waveFrequency;
+    backWavePhase *= waveFrequency;
+        
+    const float backWavesPhaseOffset = PI;
+    
+    float frontWaves = sin(frontWavePhase) * waveAmplitude;
+    float backWaves = sin(backWavePhase + backWavesPhaseOffset) * waveAmplitude;
+            
+    float verticalBand = sin(uv.x + (PI * 0.5)) - 0.3;
+    verticalBand = smoothstep(0.1, 0.9, verticalBand);
+   
+    // Stretch waves up/down near center, synced as they bob up/down.
+	//在中心附近向上/向下拉伸波浪，当它们向上/向下摆动时同步。
+    
+    const float animatedVerticalBandStrength = 0.125;
+    float animatedVerticalBand = verticalBand * animatedVerticalBandStrength;
+            
+    animatedVerticalBand *= sin(TIME * fillAnimationFrequency);
+            
+    frontWaves += animatedVerticalBand;
+    backWaves -= animatedVerticalBand;
+    
+    // Pinch sides (mask by the vertical gradient band) so they don't move.
+	//捏住两侧（用垂直渐变带遮盖），这样它们就不会移动。
+    
+    fillAnimation *= verticalBand;
+            
+    // Centered fill progress.居中填充进度。
+    // 0.0 = center 中心, -0.5 = bottom 底部, 0.5 = top 顶部.
+    
+    float fillProgressAnimationFrequency = 1.0;
+    float fillProgressAnimationAmplitude = 0.1;
+    
+    float fillProgress = fill_value;//填充进度
+    
+    fillProgress += sin((TIME * fillProgressAnimationFrequency) * PI) * fillProgressAnimationAmplitude;
+    //fillProgress = (fillProgress - 0.5) * 2.0; 
+    
+    float frontFill = step(uv.y, (fillAnimation + frontWaves) + fillProgress);
+    float backFill = step(uv.y, (-fillAnimation + backWaves) + fillProgress);
+    
+    frontFill *= fillMaskCircle;
+    backFill *= fillMaskCircle;
+    
+    // Mask back fill to only parts that would be visible separate from frontFill.
+	//仅将背面填充蒙版为与正面填充分开可见的部分。
+    
+    backFill = clamp(backFill - frontFill, 0.0, 1.0);
+    
+    float fillMask = 1.0 - (frontFill + backFill);
+    fillMask *= fillMaskCircle;
+        
+    float fill = frontFill + backFill;
+    
+    // Simple edge glow using radial gradient (circle SDF).
+	//使用径向渐变（圆形 SDF）的简单边缘发光。
+    
+    const float fresnelOffset = 0.01;
+    float fresnel = (circleSDF + fresnelOffset) * fillMask;    
+    
+    const float fresnelPower = 5.0;
+    fresnel = clamp(pow(fresnel, fresnelPower), 0.0, 1.0);
+    
+    const float frontFillFresnelPower = 5.0;
+    const float frontFillFresnelOffset = 0.02;
+    
+    float frontFillFresnel = (circleSDF + frontFillFresnelOffset) * (1.0 - fillMask);
+    frontFillFresnel = clamp(pow(frontFillFresnel, frontFillFresnelPower), 0.0, 1.0);
+    
+    // Specular reflection, drawn (stylized, like a cartoon) as two arcs.
+	//镜面反射，绘制（风格化，像卡通）为两条弧线。
+        
+    float specularArcAngle1 = radians(15.0);
+    float specularArcAngle2 = radians(2.0);
+    
+    float specularArcRotation1 = radians(60.0);
+    float specularArcRotation2 = radians(28.0);
+    
+    vec2 specularArcSC1 = vec2(sin(specularArcAngle1), cos(specularArcAngle1));
+    vec2 specularArcSC2 = vec2(sin(specularArcAngle2), cos(specularArcAngle2));
+    
+    const float specularArcOffset = 0.35;
+    const float specularArcWidth = 0.07;
+    
+    vec2 specularArcUV1 = Get2DRotationMatrix(specularArcRotation1) * uv;
+    vec2 specularArcUV2 = Get2DRotationMatrix(specularArcRotation2) * uv;
+    
+    float specularArc1 = sdArc(specularArcUV1, specularArcSC1, 1.0 - specularArcOffset, specularArcWidth);
+    float specularArc2 = sdArc(specularArcUV2, specularArcSC2, 1.0 - specularArcOffset, specularArcWidth);
+        
+    specularArc1 = step(specularArc1, 0.0);
+    specularArc2 = step(specularArc2, 0.0);
+    
+    const float specularStrength = 0.2;
+    float specular = specularArc1 + specularArc2;
+    
+    specular *= specularStrength;
+    
+    // Final mask. Can be used as alpha.
+	//最后的遮罩。 可以用作透明通道。
+    
+    float mask = ring + fill + fresnel + specular;
+    
+    // Per-mask RGB colour.
+	//每个蒙版 RGB 颜色。
+    
+    //const vec3 ringColour = vec3(1.0, 0.9, 0.8);//环的颜色
+    
+    //const vec3 frontFillInnerColour = vec3(1.0, 0.2, 0.1);//前景填充靠里的颜色
+    //const vec3 frontFillOuterColour = vec3(0.0, 0.0, 0.0);//前景填充靠边的颜色
+    
+    vec3 frontFillColour = mix(frontFillInnerColour, frontFillOuterColour, frontFillFresnel);
+    
+    //const vec3 backFillColour = vec3(0.5, 0.0, 0.0);//背景填充颜色
+    
+    const vec3 specularColour = vec3(1.0, 1.0, 0.9);//高光颜色
+    //const vec3 fresnelColour = vec3(0.5, 0.0, 0.3);//玻璃罩阴影颜色
+    
+    //const vec3 innerRingGlowColour = vec3(1.0, 0.3, 0.1);//内环发光颜色
+    const vec3 outerRingGlowColour = vec3(1.0, 0.8, 0.1);//外环发光颜色
+             
+    vec3 rgb =
+    
+        (ring * ringColour) +
+        
+        (innerRingGlow * innerRingGlowColour) +
+        (outerRingGlow * outerRingGlowColour) +
+        
+        
+        ((frontFill * frontFillColour) +
+        (backFill * backFillColour))*fillcolour.rbg +
+        (fresnel * fresnelColour) +
+        (specular * specularColour);
+    
+    // Background gradient. Just for presentation.
+	//背景渐变。 只是为了演示。
+    
+    const float backgroundGradientPower = 0.6;
+    
+    float backgroundGradient = length(normalizedCenteredUV);
+    
+    backgroundGradient = pow(backgroundGradient, backgroundGradientPower);
+    backgroundGradient = smoothstep(0.0, 1.0, backgroundGradient);//第一个参数是背景阴影的亮度
+    
+    vec3 backgroundGradientInnerColour = vec3(0.13, 0.0, 0.4);
+    vec3 backgroundGradientOuterColour = vec3(0.0, 0.0, 0.0);//背景外玻璃颜色
+    
+    vec3 background = mix(backgroundGradientInnerColour, backgroundGradientOuterColour, backgroundGradient);
+    
+    // Simply add the background to the composite so far.
+    //到目前为止，只需将背景添加到合成中    
+    background = clamp(background - (fill + ring), 0.0, 1.0);//背景-（填充+环）,亮度参数1,亮度参数2
+         
+    const float backgroundStrength = 0.65;//背景强度    
+    background *= backgroundStrength;
+    
+    rgb += background;
+    
+    // Output to screen.将颜色输出到屏幕
+    
+	COLOR = vec4(rgb, mask);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ss180"]
+shader = SubResource("Shader_whvag")
+shader_parameter/backFillColour = Color(0.62, 1, 1, 1)
+shader_parameter/frontFillInnerColour = Color(0.35, 1, 1, 1)
+shader_parameter/frontFillOuterColour = Color(0, 0.35, 1, 1)
+shader_parameter/ringColour = Color(0, 0, 0, 1)
+shader_parameter/fresnelColour = Color(1, 1, 1, 1)
+shader_parameter/innerRingGlowColour = Color(0, 0.808884, 0.808884, 1)
+shader_parameter/fillcolour = Color(1, 1, 1, 1)
+shader_parameter/ringWidth = 0.15
+shader_parameter/innerCircleRadiusOffset = 0.0
+shader_parameter/fill_value = 4.75e-08
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_obply"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ahun0"]
+texture = ExtResource("2_u8k82")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="Theme" id="Theme_f3dfd"]
+Panel/styles/panel = SubResource("StyleBoxTexture_ahun0")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u8k82"]
 
-[node name="UIOracle" type="Control" node_paths=PackedStringArray("_player_level_label", "_xp_bar", "_xp_label")]
+[node name="UIOracle" type="Control"]
 custom_minimum_size = Vector2(700, 600)
 layout_mode = 3
 anchors_preset = 8
@@ -70,9 +525,6 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("1_1jvkn")
 script = ExtResource("2_52pse")
-_player_level_label = NodePath("MainPanel/MarginContainer/VBoxContainer/XPContainer/PlayerLevelLabel")
-_xp_bar = NodePath("MainPanel/MarginContainer/VBoxContainer/XPContainer/XPBar")
-_xp_label = NodePath("MainPanel/MarginContainer/VBoxContainer/XPContainer/XPBar/XPLabel")
 
 [node name="MainPanel" type="Panel" parent="."]
 layout_mode = 1
@@ -100,174 +552,287 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 50
+theme_override_constants/margin_top = 60
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 20
 
-[node name="SkillsContainer" type="GridContainer" parent="MainPanel/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 400)
-layout_mode = 2
-columns = 2
-
-[node name="UiSkillPanel_1A" parent="MainPanel/MarginContainer/VBoxContainer/SkillsContainer" instance=ExtResource("4_vncfa")]
-unique_name_in_owner = true
-layout_mode = 2
-_skill_level = 3
-
-[node name="UiSkillPanel_1B" parent="MainPanel/MarginContainer/VBoxContainer/SkillsContainer" instance=ExtResource("4_vncfa")]
-unique_name_in_owner = true
-layout_mode = 2
-_skill_level = 3
-
-[node name="UiSkillPanel_2A" parent="MainPanel/MarginContainer/VBoxContainer/SkillsContainer" instance=ExtResource("4_vncfa")]
-unique_name_in_owner = true
-layout_mode = 2
-_skill_level = 5
-
-[node name="UiSkillPanel_2B" parent="MainPanel/MarginContainer/VBoxContainer/SkillsContainer" instance=ExtResource("4_vncfa")]
-unique_name_in_owner = true
-layout_mode = 2
-_skill_level = 5
-
-[node name="UiSkillPanel_3A" parent="MainPanel/MarginContainer/VBoxContainer/SkillsContainer" instance=ExtResource("4_vncfa")]
-unique_name_in_owner = true
-layout_mode = 2
-_skill_level = 7
-
-[node name="UiSkillPanel_3B" parent="MainPanel/MarginContainer/VBoxContainer/SkillsContainer" instance=ExtResource("4_vncfa")]
-unique_name_in_owner = true
-layout_mode = 2
-_skill_level = 7
-
-[node name="XPContainer" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
+[node name="TopContainer" type="Control" parent="MainPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
 
-[node name="PlayerLevelLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/XPContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-theme_override_font_sizes/font_size = 50
-text = "1"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="XPBar" type="ProgressBar" parent="MainPanel/MarginContainer/VBoxContainer/XPContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-step = 1.0
-value = 15.0
-show_percentage = false
-
-[node name="XPLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/XPContainer/XPBar"]
+[node name="MarginContainer" type="MarginContainer" parent="MainPanel/MarginContainer/VBoxContainer/TopContainer"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "10/42"
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_right = 0
 
-[node name="FlameTexture" type="ColorRect" parent="MainPanel/MarginContainer/VBoxContainer/XPContainer/XPBar"]
-unique_name_in_owner = true
-visible = false
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="LevelPreviewContainer" parent="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer" instance=ExtResource("4_n0c5e")]
+layout_mode = 2
+
+[node name="AllLevelsContainer" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AllLevelsContainers" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer" node_paths=PackedStringArray("_level_containers")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
+script = ExtResource("4_whvag")
+_level_containers = [NodePath("LevelContainer1"), NodePath("LevelContainer2"), NodePath("LevelContainer3"), NodePath("LevelContainer4"), NodePath("LevelContainer5"), NodePath("LevelContainer6"), NodePath("LevelContainer7"), NodePath("LevelContainer8"), NodePath("LevelContainer9"), NodePath("LevelContainer10")]
 
-[node name="BuyXPContainer" type="Control" parent="MainPanel/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
+[node name="LevelContainer1" parent="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers" instance=ExtResource("4_ss180")]
 layout_mode = 2
-size_flags_vertical = 3
-mouse_default_cursor_shape = 2
+level = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BuyXPContainer"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -95.0
-offset_top = -20.0
-offset_right = -31.0
-offset_bottom = 20.0
-grow_horizontal = 0
-grow_vertical = 2
+[node name="OutlineMetal" parent="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers/LevelContainer1/TextureButton" index="0"]
+material = SubResource("ShaderMaterial_obply")
 
-[node name="BuyXPPriceLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/BuyXPContainer/HBoxContainer"]
-unique_name_in_owner = true
+[node name="LevelContainer2" parent="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers" instance=ExtResource("4_ss180")]
 layout_mode = 2
-theme_override_font_sizes/font_size = 25
+level = 2
+
+[node name="LevelLabel" parent="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers/LevelContainer2" index="0"]
+text = "2"
+
+[node name="OutlineMetal" parent="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers/LevelContainer2/TextureButton" index="0"]
+material = SubResource("ShaderMaterial_t0r4d")
+
+[node name="LevelContainer3" parent="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers" instance=ExtResource("4_ss180")]
+layout_mode = 2
+size_flags_stretch_ratio = 1.5
+level = 3
+
+[node name="LevelLabel" parent="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers/LevelContainer3" index="0"]
+theme_override_font_sizes/font_size = 30
+text = "3"
+
+[node name="OutlineMetal" parent="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers/LevelContainer3/TextureButton" index="0"]
+material = SubResource("ShaderMaterial_hgneb")
+
+[node name="LevelContainer4" parent="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers" instance=ExtResource("4_ss180")]
+layout_mode = 2
+level = 4
+
+[node name="LevelLabel" parent="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers/LevelContainer4" index="0"]
+text = "4"
+
+[node name="OutlineMetal" parent="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers/LevelContainer4/TextureButton" index="0"]
+material = SubResource("ShaderMaterial_06pu5")
+
+[node name="LevelContainer5" parent="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers" instance=ExtResource("4_ss180")]
+layout_mode = 2
+size_flags_stretch_ratio = 1.5
+level = 5
+
+[node name="LevelLabel" parent="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers/LevelContainer5" index="0"]
+theme_override_font_sizes/font_size = 30
+text = "5"
+
+[node name="OutlineMetal" parent="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers/LevelContainer5/TextureButton" index="0"]
+material = SubResource("ShaderMaterial_ppbxu")
+
+[node name="LevelContainer6" parent="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers" instance=ExtResource("4_ss180")]
+layout_mode = 2
+level = 6
+
+[node name="LevelLabel" parent="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers/LevelContainer6" index="0"]
+text = "6"
+
+[node name="OutlineMetal" parent="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers/LevelContainer6/TextureButton" index="0"]
+material = SubResource("ShaderMaterial_vbmtp")
+
+[node name="LevelContainer7" parent="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers" instance=ExtResource("4_ss180")]
+layout_mode = 2
+size_flags_stretch_ratio = 1.5
+level = 7
+
+[node name="LevelLabel" parent="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers/LevelContainer7" index="0"]
+theme_override_font_sizes/font_size = 30
+text = "7"
+
+[node name="OutlineMetal" parent="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers/LevelContainer7/TextureButton" index="0"]
+material = SubResource("ShaderMaterial_1c23j")
+
+[node name="LevelContainer8" parent="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers" instance=ExtResource("4_ss180")]
+layout_mode = 2
+level = 8
+
+[node name="LevelLabel" parent="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers/LevelContainer8" index="0"]
+text = "8"
+
+[node name="OutlineMetal" parent="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers/LevelContainer8/TextureButton" index="0"]
+material = SubResource("ShaderMaterial_qh4yd")
+
+[node name="LevelContainer9" parent="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers" instance=ExtResource("4_ss180")]
+layout_mode = 2
+level = 9
+
+[node name="LevelLabel" parent="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers/LevelContainer9" index="0"]
+text = "9"
+
+[node name="OutlineMetal" parent="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers/LevelContainer9/TextureButton" index="0"]
+material = SubResource("ShaderMaterial_ig8fj")
+
+[node name="LevelContainer10" parent="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers" instance=ExtResource("4_ss180")]
+layout_mode = 2
+size_flags_stretch_ratio = 2.0
+level = 10
+
+[node name="LevelLabel" parent="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers/LevelContainer10" index="0"]
+theme_override_font_sizes/font_size = 40
 text = "10"
+
+[node name="OutlineMetal" parent="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers/LevelContainer10/TextureButton" index="0"]
+material = SubResource("ShaderMaterial_73htb")
+
+[node name="BottomContainer" type="Control" parent="MainPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="LeftContainer" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/BottomContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ColorRect" type="ColorRect" parent="MainPanel/MarginContainer/VBoxContainer/BottomContainer/MarginContainer/HBoxContainer/LeftContainer"]
+visible = false
+material = SubResource("ShaderMaterial_ss180")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RightContainer" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/BottomContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BuyXPPanel" type="Panel" parent="MainPanel/MarginContainer/VBoxContainer/BottomContainer/MarginContainer/HBoxContainer/RightContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="RandomCardButton" type="Button" parent="MainPanel/MarginContainer/VBoxContainer/BottomContainer/MarginContainer/HBoxContainer/RightContainer/BuyXPPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_obply")
+
+[node name="MarginContainer" type="MarginContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomContainer/MarginContainer/HBoxContainer/RightContainer/BuyXPPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Refresh" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/BottomContainer/MarginContainer/HBoxContainer/RightContainer/BuyXPPanel/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MainHBox" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomContainer/MarginContainer/HBoxContainer/RightContainer/BuyXPPanel/MarginContainer/Refresh"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="MainPanel/MarginContainer/VBoxContainer/BottomContainer/MarginContainer/HBoxContainer/RightContainer/BuyXPPanel/MarginContainer/Refresh/MainHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+texture = ExtResource("8_whvag")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomContainer/MarginContainer/HBoxContainer/RightContainer/BuyXPPanel/MarginContainer/Refresh/MainHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/BottomContainer/MarginContainer/HBoxContainer/RightContainer/BuyXPPanel/MarginContainer/Refresh/MainHBox/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 20
+text = "+4 XP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Price" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomContainer/MarginContainer/HBoxContainer/RightContainer/BuyXPPanel/MarginContainer/Refresh/MainHBox/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+alignment = 1
+
+[node name="BuyXPPriceLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/BottomContainer/MarginContainer/HBoxContainer/RightContainer/BuyXPPanel/MarginContainer/Refresh/MainHBox/VBoxContainer/Price"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "50"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="MainPanel/MarginContainer/VBoxContainer/BuyXPContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="MainPanel/MarginContainer/VBoxContainer/BottomContainer/MarginContainer/HBoxContainer/RightContainer/BuyXPPanel/MarginContainer/Refresh/MainHBox/VBoxContainer/Price"]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("5_vncfa")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="BuyXPButton" type="Button" parent="MainPanel/MarginContainer/VBoxContainer/BuyXPContainer"]
+[node name="PanelBorder" type="Panel" parent="MainPanel/MarginContainer/VBoxContainer/BottomContainer/MarginContainer/HBoxContainer/RightContainer/BuyXPPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_default_cursor_shape = 2
-theme_override_font_sizes/font_size = 30
-theme_override_styles/focus = SubResource("StyleBoxEmpty_vncfa")
-text = "BUY XP"
-
-[node name="LevelMaxContainer" type="Control" parent="MainPanel/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="ColorRect" type="ColorRect" parent="MainPanel/MarginContainer/VBoxContainer/LevelMaxContainer"]
-material = SubResource("ShaderMaterial_q2w6v")
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -96.0
-offset_top = -135.0
-offset_right = 104.0
-offset_bottom = 65.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/LevelMaxContainer/ColorRect"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -35.0
-offset_top = -69.0
-offset_right = 25.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_font_sizes/font_size = 50
-text = "10"
-horizontal_alignment = 1
-vertical_alignment = 1
+mouse_filter = 2
+theme = SubResource("Theme_f3dfd")
 
 [node name="TitlePanel" type="Panel" parent="."]
 custom_minimum_size = Vector2(300, 70)
@@ -353,5 +918,15 @@ grow_vertical = 2
 mouse_filter = 2
 theme = SubResource("Theme_ua3xp")
 
-[connection signal="pressed" from="MainPanel/MarginContainer/VBoxContainer/BuyXPContainer/BuyXPButton" to="." method="_on_buy_xp_button_pressed"]
 [connection signal="pressed" from="ClosePanel/CloseButton" to="." method="_on_close_button_pressed"]
+
+[editable path="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers/LevelContainer1"]
+[editable path="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers/LevelContainer2"]
+[editable path="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers/LevelContainer3"]
+[editable path="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers/LevelContainer4"]
+[editable path="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers/LevelContainer5"]
+[editable path="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers/LevelContainer6"]
+[editable path="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers/LevelContainer7"]
+[editable path="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers/LevelContainer8"]
+[editable path="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers/LevelContainer9"]
+[editable path="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers/LevelContainer10"]
