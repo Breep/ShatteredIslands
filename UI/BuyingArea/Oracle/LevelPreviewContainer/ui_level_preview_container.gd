@@ -1,6 +1,8 @@
 class_name UILevelPreviewContainer
 extends Control
 
+@onready var _main_container: MarginContainer = %MainContainer
+
 @onready var _container_title_label: Label = %ContainerTitleLabel
 
 @onready var _skillA_portrait: TextureRect = %SkillAPortrait
@@ -20,12 +22,16 @@ var _skillB: Skill
 const SKILL_PORTRAIT_BLINK_FREQUENCY: float = 5.0
 
 func _ready() -> void:
-	_skillA_portrait.material.set_shader_parameter("shader_parameter/frequency", 0)
-	_skillB_portrait.material.set_shader_parameter("shader_parameter/frequency", 0)
+	_main_container.hide()
+	_skillA_portrait.material.set_shader_parameter("frequency", 0)
+	_skillB_portrait.material.set_shader_parameter("frequency", 0)
 
+func set_empty() -> void:
+	_main_container.hide()
 
 func set_title(title: String) -> void:
 	_container_title_label.text = title
+	_main_container.show()
 
 
 func set_skills_info(skillA: Skill, skillB: Skill) -> void:
@@ -33,6 +39,7 @@ func set_skills_info(skillA: Skill, skillB: Skill) -> void:
 	_skillB = skillB
 	_skillA_portrait.texture = skillA.portrait
 	_skillB_portrait.texture = skillB.portrait
+	_preview_skillA()
 
 
 func _update_skill_desc_panel(skill: Skill) -> void:
@@ -50,12 +57,23 @@ func _desactivate_outline_highlight(skill_border: TextureRect) -> void:
 	skill_border.material.set_shader_parameter("effect_enabled", false)
 
 
-
 func _on_skill_a_button_pressed() -> void:
-	_desactivate_outline_highlight(_skillB_border)
-	_activate_outline_highlight(_skillA_border)
+	_preview_skillA()
 
 
 func _on_skill_b_button_pressed() -> void:
+	_preview_skillB()
+
+
+func _preview_skillA() -> void:
+	_desactivate_outline_highlight(_skillB_border)
+	_activate_outline_highlight(_skillA_border)
+	_skill_name_label.text = _skillA.name
+	_skill_desc_label.text = _skillA.description
+
+
+func _preview_skillB() -> void:
 	_desactivate_outline_highlight(_skillA_border)
 	_activate_outline_highlight(_skillB_border)
+	_skill_name_label.text = _skillB.name
+	_skill_desc_label.text = _skillB.description

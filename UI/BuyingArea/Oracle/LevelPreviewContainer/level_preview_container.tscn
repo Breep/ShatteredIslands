@@ -1,6 +1,6 @@
 [gd_scene load_steps=24 format=3 uid="uid://bu2pbcjf7rk1p"]
 
-[ext_resource type="Shader" uid="uid://b6ifujxjephkb" path="res://VFX/Shaders/2D/2d_basic_effects.gdshader" id="1_fo5lu"]
+[ext_resource type="Shader" uid="uid://b6ifujxjephkb" path="res://VFX/Shaders/2D/2d_mask_and_blink.gdshader" id="1_fo5lu"]
 [ext_resource type="Script" uid="uid://dbrpunqr31vsr" path="res://UI/BuyingArea/Oracle/LevelPreviewContainer/ui_level_preview_container.gd" id="1_stget"]
 [ext_resource type="Texture2D" uid="uid://cnj88qr8xveyx" path="res://UI/_Themes/Data/HexagonButton/hexagon_mask.png" id="2_o8brh"]
 [ext_resource type="Script" uid="uid://ddn8p84mlkyr0" path="res://UI/Tool/HexGridContainer/hex_grid_container.gd" id="2_ollh3"]
@@ -117,7 +117,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+[node name="MainContainer" type="MarginContainer" parent="Panel"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -129,14 +130,14 @@ theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 25
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MainContainer"]
 layout_mode = 2
 
-[node name="Top" type="Control" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="Top" type="Control" parent="Panel/MainContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ContainerTitleLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Top"]
+[node name="ContainerTitleLabel" type="Label" parent="Panel/MainContainer/VBoxContainer/Top"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
@@ -155,12 +156,12 @@ text = "Level 3 Skills"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Bottom" type="Control" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="Bottom" type="Control" parent="Panel/MainContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/Bottom"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MainContainer/VBoxContainer/Bottom"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -168,11 +169,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="LeftHexagoneContainer" type="Control" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer"]
+[node name="LeftHexagoneContainer" type="Control" parent="Panel/MainContainer/VBoxContainer/Bottom/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HexGridContainer" type="Container" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/LeftHexagoneContainer"]
+[node name="HexGridContainer" type="Container" parent="Panel/MainContainer/VBoxContainer/Bottom/HBoxContainer/LeftHexagoneContainer"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -184,10 +185,10 @@ columns = 1
 cell_size = Vector2(100, 100)
 metadata/_custom_type_script = "uid://ddn8p84mlkyr0"
 
-[node name="Control" type="Control" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/LeftHexagoneContainer/HexGridContainer"]
+[node name="Control" type="Control" parent="Panel/MainContainer/VBoxContainer/Bottom/HBoxContainer/LeftHexagoneContainer/HexGridContainer"]
 layout_mode = 2
 
-[node name="SkillAPortrait" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/LeftHexagoneContainer/HexGridContainer/Control"]
+[node name="SkillAPortrait" type="TextureRect" parent="Panel/MainContainer/VBoxContainer/Bottom/HBoxContainer/LeftHexagoneContainer/HexGridContainer/Control"]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_jetfs")
 layout_mode = 1
@@ -199,7 +200,7 @@ grow_vertical = 2
 texture = ExtResource("3_stget")
 expand_mode = 1
 
-[node name="SkillAButton" type="TextureButton" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/LeftHexagoneContainer/HexGridContainer/Control/SkillAPortrait"]
+[node name="SkillAButton" type="TextureButton" parent="Panel/MainContainer/VBoxContainer/Bottom/HBoxContainer/LeftHexagoneContainer/HexGridContainer/Control/SkillAPortrait"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -213,7 +214,7 @@ texture_click_mask = ExtResource("7_ollh3")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="SkillAHexBorder" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/LeftHexagoneContainer/HexGridContainer/Control/SkillAPortrait/SkillAButton"]
+[node name="SkillAHexBorder" type="TextureRect" parent="Panel/MainContainer/VBoxContainer/Bottom/HBoxContainer/LeftHexagoneContainer/HexGridContainer/Control/SkillAPortrait/SkillAButton"]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_iuo7g")
 layout_mode = 1
@@ -225,10 +226,10 @@ grow_vertical = 2
 texture = ExtResource("5_wkyos")
 expand_mode = 1
 
-[node name="Control2" type="Control" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/LeftHexagoneContainer/HexGridContainer"]
+[node name="Control2" type="Control" parent="Panel/MainContainer/VBoxContainer/Bottom/HBoxContainer/LeftHexagoneContainer/HexGridContainer"]
 layout_mode = 2
 
-[node name="SkillBPortrait" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/LeftHexagoneContainer/HexGridContainer/Control2"]
+[node name="SkillBPortrait" type="TextureRect" parent="Panel/MainContainer/VBoxContainer/Bottom/HBoxContainer/LeftHexagoneContainer/HexGridContainer/Control2"]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_3gqcl")
 layout_mode = 1
@@ -240,7 +241,7 @@ grow_vertical = 2
 texture = ExtResource("6_p3ovg")
 expand_mode = 1
 
-[node name="SkillBButton" type="TextureButton" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/LeftHexagoneContainer/HexGridContainer/Control2/SkillBPortrait"]
+[node name="SkillBButton" type="TextureButton" parent="Panel/MainContainer/VBoxContainer/Bottom/HBoxContainer/LeftHexagoneContainer/HexGridContainer/Control2/SkillBPortrait"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -254,7 +255,7 @@ texture_click_mask = ExtResource("7_ollh3")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="SkillBHexBorder" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/LeftHexagoneContainer/HexGridContainer/Control2/SkillBPortrait/SkillBButton"]
+[node name="SkillBHexBorder" type="TextureRect" parent="Panel/MainContainer/VBoxContainer/Bottom/HBoxContainer/LeftHexagoneContainer/HexGridContainer/Control2/SkillBPortrait/SkillBButton"]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_wkyos")
 layout_mode = 1
@@ -266,12 +267,12 @@ grow_vertical = 2
 texture = ExtResource("5_wkyos")
 expand_mode = 1
 
-[node name="DescriptionContainer" type="Control" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer"]
+[node name="DescriptionContainer" type="Control" parent="Panel/MainContainer/VBoxContainer/Bottom/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
 
-[node name="Panel" type="Panel" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer"]
+[node name="Panel" type="Panel" parent="Panel/MainContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -279,7 +280,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer/Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MainContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -291,14 +292,14 @@ theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer/Panel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MainContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer/Panel/MarginContainer"]
 layout_mode = 2
 
-[node name="TitleContainer" type="Control" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer/Panel/MarginContainer/VBoxContainer"]
+[node name="TitleContainer" type="Control" parent="Panel/MainContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="SkillNameLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer/Panel/MarginContainer/VBoxContainer/TitleContainer"]
+[node name="SkillNameLabel" type="Label" parent="Panel/MainContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer/Panel/MarginContainer/VBoxContainer/TitleContainer"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
@@ -316,12 +317,12 @@ text = "<Skill name>"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DescriptionContainer" type="Control" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer/Panel/MarginContainer/VBoxContainer"]
+[node name="DescriptionContainer" type="Control" parent="Panel/MainContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer/Panel/MarginContainer/VBoxContainer/DescriptionContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MainContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer/Panel/MarginContainer/VBoxContainer/DescriptionContainer"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -330,11 +331,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_bottom = 10
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer/Panel/MarginContainer/VBoxContainer/DescriptionContainer/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MainContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer/Panel/MarginContainer/VBoxContainer/DescriptionContainer/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="SkillDescriptionLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer/Panel/MarginContainer/VBoxContainer/DescriptionContainer/MarginContainer/ScrollContainer"]
+[node name="SkillDescriptionLabel" type="Label" parent="Panel/MainContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer/Panel/MarginContainer/VBoxContainer/DescriptionContainer/MarginContainer/ScrollContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
@@ -346,7 +347,7 @@ horizontal_alignment = 3
 vertical_alignment = 3
 autowrap_mode = 2
 
-[node name="PanelBorder" type="Panel" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer/Panel"]
+[node name="PanelBorder" type="Panel" parent="Panel/MainContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer/Panel"]
 material = SubResource("ShaderMaterial_p3ovg")
 layout_mode = 1
 anchors_preset = 15
@@ -357,7 +358,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme = SubResource("Theme_ua3xp")
 
-[node name="LockSkillIcon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer/Panel"]
+[node name="LockSkillIcon" type="TextureRect" parent="Panel/MainContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer/Panel"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 1
@@ -376,7 +377,7 @@ texture = ExtResource("10_wkyos")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="LockSkillButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer/Panel/LockSkillIcon"]
+[node name="LockSkillButton" type="Button" parent="Panel/MainContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer/Panel/LockSkillIcon"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -399,5 +400,5 @@ grow_vertical = 2
 mouse_filter = 2
 theme = SubResource("Theme_ua3xp")
 
-[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/LeftHexagoneContainer/HexGridContainer/Control/SkillAPortrait/SkillAButton" to="." method="_on_skill_a_button_pressed"]
-[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/LeftHexagoneContainer/HexGridContainer/Control2/SkillBPortrait/SkillBButton" to="." method="_on_skill_b_button_pressed"]
+[connection signal="pressed" from="Panel/MainContainer/VBoxContainer/Bottom/HBoxContainer/LeftHexagoneContainer/HexGridContainer/Control/SkillAPortrait/SkillAButton" to="." method="_on_skill_a_button_pressed"]
+[connection signal="pressed" from="Panel/MainContainer/VBoxContainer/Bottom/HBoxContainer/LeftHexagoneContainer/HexGridContainer/Control2/SkillBPortrait/SkillBButton" to="." method="_on_skill_b_button_pressed"]

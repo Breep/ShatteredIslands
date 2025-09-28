@@ -3,23 +3,10 @@ extends Control
 
 # ============================== Local Nodes ==============================
 
-@onready var _skill1APanel: UISkillPanel = %UiSkillPanel_1A
-@onready var _skill1BPanel: UISkillPanel = %UiSkillPanel_1B
-@onready var _skill2APanel: UISkillPanel = %UiSkillPanel_2A
-@onready var _skill2BPanel: UISkillPanel = %UiSkillPanel_2B
-@onready var _skill3APanel: UISkillPanel = %UiSkillPanel_3A
-@onready var _skill3BPanel: UISkillPanel = %UiSkillPanel_3B
-
-@export_group("XP")
-@export var _player_level_label: Label
-@export var _xp_bar: ProgressBar
-@export var _xp_label: Label
-
 @onready var _buy_xp_price_label: Label = %BuyXPPriceLabel
-@onready var _flame_texture: ColorRect = %FlameTexture
-
-@onready var _buy_xp_container: Control = %BuyXPContainer
-@onready var _xp_container: Control = %XPContainer
+@onready var _buy_xp_button: Button = %BuyXPButton
+@onready var _all_levels_container: AllLevelsContainers = %AllLevelsContainers
+@onready var _level_preview_container: UILevelPreviewContainer = %LevelPreviewContainer
 
 # ============================== Private variables ==============================
 
@@ -36,13 +23,15 @@ func _ready() -> void:
 	
 	_local_player.death.connect(_on_local_player_death)
 	_local_player.xp_changed.connect(_on_local_player_xp_changed)
-	var max_xp: int = GameManager.game_rules.xp_per_levels[_local_player.lvl]
-	_update_xp_bar(_local_player.xp, max_xp)
 	_local_player.lvl_changed.connect(_on_local_player_lvl_changed)
+	_local_player.skill_choice_awaiting.connect(_on_local_player_skill_choice_awaiting)
+	
+	_all_levels_container.level_preview_changed.connect(_on_all_levels_container_level_preview_changed)
 	
 	_buy_xp_price_label.text = str(GameManager.game_rules.buy_xp_price)
 	
-	_local_player.hero_changed.connect(_on_local_player_hero_changed)
+	var max_xp: int = GameManager.game_rules.xp_per_levels[_local_player.lvl]
+	_all_levels_container.update_player_xp(_local_player.lvl, _local_player.xp, max_xp)
 
 # ============================== Public functions ==============================
 
@@ -59,27 +48,6 @@ func set_inactive() -> void:
 
 # ============================== Private functions ==============================
 
-func _update_xp_bar(value: int, max_value: int) -> void:
-	_xp_bar.value = value
-	_xp_bar.max_value = max_value
-	_xp_label.text = str(value) + "/" + str(max_value)
-
-
-func _activate_max_level_ui() -> void:
-	_buy_xp_container.hide()
-
-
-func _update_level_label(level: int) -> void:
-	_player_level_label.text = str(level)
-
-
-func _init_skills_table() -> void:
-	_skill1APanel.init(_local_player.hero.skill1A_name, _local_player.hero.skill1A_description)
-	_skill1BPanel.init(_local_player.hero.skill1B_name, _local_player.hero.skill1B_description)
-	_skill2APanel.init(_local_player.hero.skill2A_name, _local_player.hero.skill2A_description)
-	_skill2BPanel.init(_local_player.hero.skill2B_name, _local_player.hero.skill2B_description)
-	_skill3APanel.init(_local_player.hero.skill3A_name, _local_player.hero.skill3A_description)
-	_skill3BPanel.init(_local_player.hero.skill3B_name, _local_player.hero.skill3B_description)
 
 # ============================== Callbacks ==============================
 
@@ -92,21 +60,31 @@ func _on_close_button_pressed() -> void:
 
 
 func _on_local_player_death(_player: Player) -> void:
-	print("Oracle: lock oracle for ", _local_player.name)
 	set_inactive()
 	_is_locked = true
 
 
 func _on_local_player_xp_changed(player_ref: Player, xp: int) -> void:
 	var max_xp: int = GameManager.game_rules.xp_per_levels[player_ref.lvl]
-	_update_xp_bar(xp, max_xp)
+	_all_levels_container.update_player_xp(player_ref.lvl, player_ref.xp, max_xp)
 
 
-func _on_local_player_lvl_changed(_player_ref: Player, level: int) -> void:
-	_update_level_label(level)
-	if level == GameManager.game_rules.xp_max_player_level:
-		_activate_max_level_ui()
+func _on_local_player_lvl_changed(player_ref: Player, level: int) -> void:
+	var max_xp: int = GameManager.game_rules.xp_per_levels[player_ref.lvl]
+	_all_levels_container.update_player_xp(player_ref.lvl, player_ref.xp, max_xp)
+	if level >= GameManager.game_rules.xp_max_player_level:
+		_buy_xp_button.disabled = true
 
 
-func _on_local_player_hero_changed(_player_ref: Player, _new_hero: Hero) -> void:
-	_init_skills_table()
+func _on_local_player_skill_choice_awaiting(skill_level: int) -> void:
+	_all_levels_container.blink(skill_level)
+
+
+func _on_all_levels_container_level_preview_changed(level: int) -> void:
+	_level_preview_container.set_title("Level " + str(level) + " Skills")
+	match level:
+		3: _level_preview_container.set_skills_info(_local_player.hero.skill1A, _local_player.hero.skill1B)
+		5: _level_preview_container.set_skills_info(_local_player.hero.skill2A, _local_player.hero.skill2B)
+		7: _level_preview_container.set_skills_info(_local_player.hero.skill3A, _local_player.hero.skill3B)
+		_: _level_preview_container.set_empty()
+		

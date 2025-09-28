@@ -1,7 +1,9 @@
-class_name LevelContainer
+class_name UILevelContainer
 extends TextureRect
 
-signal activated(self_ref: LevelContainer)
+signal activated(self_ref: UILevelContainer)
+
+const SKILL_PORTRAIT_BLINK_FREQUENCY: float = 5.0
 
 @export var level: int = 0
 
@@ -15,9 +17,18 @@ func _ready() -> void:
 	_reset()
 
 
+func blink() -> void:
+	(material as ShaderMaterial).set_shader_parameter("frequency", SKILL_PORTRAIT_BLINK_FREQUENCY)
+
+func unlock() -> void:
+	_inside_metal.value = 0
+	_button.mouse_default_cursor_shape = CursorShape.CURSOR_POINTING_HAND
+	_button.disabled = false
+
+
 func set_xp_value(current_value: int, max_value: int) -> void:
 	_inside_metal.max_value = max_value
-	_inside_metal.value = current_value
+	_inside_metal.value = max_value - current_value
 
 
 func desactivate() -> void:
@@ -33,8 +44,6 @@ func _reset() -> void:
 	_inside_metal.max_value = 100.0
 	_inside_metal.value = 100.0
 	_button.mouse_default_cursor_shape = CursorShape.CURSOR_ARROW
-	_inside_metal.mouse_default_cursor_shape = CursorShape.CURSOR_ARROW
-	_outline_metal.mouse_default_cursor_shape = CursorShape.CURSOR_ARROW
 
 
 func _activate_outline_highlight() -> void:
