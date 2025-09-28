@@ -30,7 +30,6 @@ var _is_locked: bool
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	return
 	if multiplayer.is_server() and GameManager.game_type != GameManager.GameType.SOLO:
 		return
 	_local_player = PlayerManager.get_local_player()

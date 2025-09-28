@@ -12,7 +12,6 @@ signal activated(self_ref: LevelContainer)
 var _is_activated: bool = false
 
 func _ready() -> void:
-	return
 	_reset()
 
 

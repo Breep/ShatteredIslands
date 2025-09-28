@@ -744,7 +744,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 
-[node name="RandomCardButton" type="Button" parent="MainPanel/MarginContainer/VBoxContainer/BottomContainer/MarginContainer/HBoxContainer/RightContainer/BuyXPPanel"]
+[node name="BuyXPButton" type="Button" parent="MainPanel/MarginContainer/VBoxContainer/BottomContainer/MarginContainer/HBoxContainer/RightContainer/BuyXPPanel"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -918,6 +918,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme = SubResource("Theme_ua3xp")
 
+[connection signal="pressed" from="MainPanel/MarginContainer/VBoxContainer/BottomContainer/MarginContainer/HBoxContainer/RightContainer/BuyXPPanel/BuyXPButton" to="." method="_on_buy_xp_button_pressed"]
 [connection signal="pressed" from="ClosePanel/CloseButton" to="." method="_on_close_button_pressed"]
 
 [editable path="MainPanel/MarginContainer/VBoxContainer/TopContainer/MarginContainer/VBoxContainer/AllLevelsContainer/AllLevelsContainers/LevelContainer1"]
