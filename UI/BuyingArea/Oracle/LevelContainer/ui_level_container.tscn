@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c6kqlmtjb5lil" path="res://UI/_Themes/Data/HexagonButton/hexagon_hover.png" id="5_3tiw6"]
 [ext_resource type="BitMap" uid="uid://d0lvjglm03lbs" path="res://UI/_Themes/Data/HexagonButton/hexagon_mask_bm.png" id="6_j41jn"]
 [ext_resource type="Shader" uid="uid://bv6hpsis17qbh" path="res://VFX/Shaders/2D/2d_highlight.gdshader" id="7_2kdmo"]
-[ext_resource type="Texture2D" uid="uid://b56326clvnq2" path="res://UI/_Themes/Data/HexagonButton/hexagon_wood_border.png" id="8_sxltf"]
+[ext_resource type="Texture2D" uid="uid://b56326clvnq2" path="res://UI/_Themes/Data/HexagonButton/hexagon_border_iron.png" id="8_sxltf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qlrv2"]
 shader = ExtResource("1_s3jm6")

@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dgch3sc5bbdxb" path="res://Entities/Heroes/DarkKnight/Data/1A-SparkOfLight.jpeg" id="3_ylsnw"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://Entities/Heroes/skill.gd" id="4_f1ben"]
 [ext_resource type="Texture2D" uid="uid://dnpy1x6ryvstv" path="res://Entities/Heroes/DarkKnight/Data/1B-Corruption.jpeg" id="5_mngad"]
-[ext_resource type="Texture2D" uid="uid://bdvfbqxfklts4" path="res://Entities/Heroes/DarkKnight/Data/2A-Pain.jpeg" id="6_m1h0u"]
+[ext_resource type="Texture2D" uid="uid://g4isbydrxh2l" path="res://Entities/Heroes/DarkKnight/Data/2A-Pain.png" id="6_ylsnw"]
 [ext_resource type="Texture2D" uid="uid://c1wcq2u3lsw8m" path="res://Entities/Heroes/DarkKnight/Data/2B-Cataclysm.jpeg" id="7_aqqbn"]
 [ext_resource type="Texture2D" uid="uid://cnm0o7n7qoq65" path="res://Entities/Heroes/DarkKnight/Data/3A-ManaStrike.jpeg" id="8_pb84q"]
 [ext_resource type="Texture2D" uid="uid://cljgrwgbsbfa2" path="res://Entities/Heroes/DarkKnight/Data/3B-MegaStrike.jpeg" id="9_2bb52"]
@@ -29,7 +29,7 @@ metadata/_custom_type_script = "uid://dfby4merlgkep"
 script = ExtResource("4_f1ben")
 name = "Pain"
 description = "La tempête noire se nourrit de la souffrance de ses victimes. Elle inflige 1% damage supplémentaire pour chaque (1x) stack."
-portrait = ExtResource("6_m1h0u")
+portrait = ExtResource("6_ylsnw")
 metadata/_custom_type_script = "uid://dfby4merlgkep"
 
 [sub_resource type="Resource" id="Resource_7xt14"]

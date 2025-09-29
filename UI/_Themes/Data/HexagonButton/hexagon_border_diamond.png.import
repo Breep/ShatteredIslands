@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b56326clvnq2"
-path="res://.godot/imported/hexagon_wood_border.png-edb32b7afd082743d1a0f013c45d6a22.ctex"
+uid="uid://di2ihs6g6788o"
+path="res://.godot/imported/hexagon_border_diamond.png-559eb5948acc9f2a921e632efb6cb332.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/_Themes/Data/HexagonButton/hexagon_wood_border.png"
-dest_files=["res://.godot/imported/hexagon_wood_border.png-edb32b7afd082743d1a0f013c45d6a22.ctex"]
+source_file="res://UI/_Themes/Data/HexagonButton/hexagon_border_diamond.png"
+dest_files=["res://.godot/imported/hexagon_border_diamond.png-559eb5948acc9f2a921e632efb6cb332.ctex"]
 
 [params]
 

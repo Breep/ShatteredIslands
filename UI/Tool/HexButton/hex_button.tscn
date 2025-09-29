@@ -1,0 +1,64 @@
+[gd_scene load_steps=11 format=3 uid="uid://c7jrogdsytaah"]
+
+[ext_resource type="Shader" uid="uid://b6ifujxjephkb" path="res://VFX/Shaders/2D/2d_mask_and_blink.gdshader" id="1_oy7e4"]
+[ext_resource type="Texture2D" uid="uid://cnj88qr8xveyx" path="res://UI/_Themes/Data/HexagonButton/hexagon_mask.png" id="2_7kd84"]
+[ext_resource type="Texture2D" uid="uid://dgch3sc5bbdxb" path="res://Entities/Heroes/DarkKnight/Data/1A-SparkOfLight.jpeg" id="3_7j7hk"]
+[ext_resource type="Texture2D" uid="uid://c6kqlmtjb5lil" path="res://UI/_Themes/Data/HexagonButton/hexagon_hover.png" id="4_0bsuy"]
+[ext_resource type="Script" uid="uid://q4yxpa41ngwe" path="res://UI/Tool/HexButton/hex_button.gd" id="4_7kd84"]
+[ext_resource type="BitMap" uid="uid://d0lvjglm03lbs" path="res://UI/_Themes/Data/HexagonButton/hexagon_mask_bm.png" id="5_nxora"]
+[ext_resource type="Shader" uid="uid://bv6hpsis17qbh" path="res://VFX/Shaders/2D/2d_highlight.gdshader" id="7_7j7hk"]
+[ext_resource type="Texture2D" uid="uid://b56326clvnq2" path="res://UI/_Themes/Data/HexagonButton/hexagon_border_iron.png" id="8_7j7hk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7rmoe"]
+shader = ExtResource("1_oy7e4")
+shader_parameter/frequency = 0.0
+shader_parameter/dimLevel = 0.0
+shader_parameter/brightnessRange = 0.05
+shader_parameter/brightnessOffset = -0.05
+shader_parameter/tintColor = Color(0, 0, 0, 1)
+shader_parameter/tintBrightness = 0.2
+shader_parameter/maskImage = ExtResource("2_7kd84")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0bsuy"]
+shader = ExtResource("7_7j7hk")
+shader_parameter/size_effect = 1.0
+shader_parameter/speed = 1.0
+shader_parameter/highlight_strength = 0.5
+shader_parameter/color_mode_toggle = false
+shader_parameter/is_horizontal = false
+shader_parameter/pause_duration = 0.5
+shader_parameter/effect_enabled = false
+shader_parameter/start_time = 0.0
+
+[node name="HexButton" type="TextureRect"]
+material = SubResource("ShaderMaterial_7rmoe")
+custom_minimum_size = Vector2(128, 128)
+texture = ExtResource("3_7j7hk")
+expand_mode = 1
+script = ExtResource("4_7kd84")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+texture_hover = ExtResource("4_0bsuy")
+texture_click_mask = ExtResource("5_nxora")
+ignore_texture_size = true
+
+[node name="Border" type="TextureRect" parent="TextureButton"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_0bsuy")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_7j7hk")
+expand_mode = 1
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]
