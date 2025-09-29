@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="Hero" load_steps=27 format=3 uid="uid://by3bwbvf4ekcd"]
+[gd_resource type="Resource" script_class="Hero" load_steps=31 format=3 uid="uid://by3bwbvf4ekcd"]
 
 [ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://Entities/Heroes/hero.gd" id="1_2ttjg"]
 [ext_resource type="Texture2D" uid="uid://difeq0pm3hgjs" path="res://Data/Heroes/Portraits/darkknight2.png" id="1_hluaq"]
+[ext_resource type="Texture2D" uid="uid://bs4ekryxkfoof" path="res://Entities/Heroes/DarkKnight/Data/passive.png" id="1_mngad"]
 [ext_resource type="Script" uid="uid://2py6kv5aqgem" path="res://Entities/Heroes/hero_stats.gd" id="3_hluaq"]
 [ext_resource type="Texture2D" uid="uid://dgch3sc5bbdxb" path="res://Entities/Heroes/DarkKnight/Data/1A-SparkOfLight.jpeg" id="3_ylsnw"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://Entities/Heroes/skill.gd" id="4_f1ben"]
@@ -10,6 +11,14 @@
 [ext_resource type="Texture2D" uid="uid://c1wcq2u3lsw8m" path="res://Entities/Heroes/DarkKnight/Data/2B-Cataclysm.jpeg" id="7_aqqbn"]
 [ext_resource type="Texture2D" uid="uid://cnm0o7n7qoq65" path="res://Entities/Heroes/DarkKnight/Data/3A-ManaStrike.jpeg" id="8_pb84q"]
 [ext_resource type="Texture2D" uid="uid://cljgrwgbsbfa2" path="res://Entities/Heroes/DarkKnight/Data/3B-MegaStrike.jpeg" id="9_2bb52"]
+[ext_resource type="Texture2D" uid="uid://ccfhgxkn06s0e" path="res://Entities/Heroes/DarkKnight/Data/ultimate.png" id="12_m1h0u"]
+
+[sub_resource type="Resource" id="Resource_aqqbn"]
+script = ExtResource("4_f1ben")
+name = "Super Strike"
+description = "Chaque fois que la tourelle Aeron Vantaal attaque, elle gagne une charge. Effet des charges : + (1*lvl) aa damage À 5 charges, Aeron Vantaal déclenche une Super Frappe, infligeant 150% de ses dégâts réinitialisant les charges."
+portrait = ExtResource("1_mngad")
+metadata/_custom_type_script = "uid://dfby4merlgkep"
 
 [sub_resource type="Resource" id="Resource_0fu0u"]
 script = ExtResource("4_f1ben")
@@ -173,6 +182,13 @@ physical_critical_multiplier = 1.0
 dodge = 12.0
 metadata/_custom_type_script = "uid://2py6kv5aqgem"
 
+[sub_resource type="Resource" id="Resource_pb84q"]
+script = ExtResource("4_f1ben")
+name = "Black Storm"
+description = "Aeron Vantaal crée une tempête du néant sur l'ennemi ciblé, La tempête fait des dommage égal à 50% de son AD toutes les 0,2sec pendant 1sec"
+portrait = ExtResource("12_m1h0u")
+metadata/_custom_type_script = "uid://dfby4merlgkep"
+
 [resource]
 script = ExtResource("1_2ttjg")
 name = "Dark Knight"
@@ -192,10 +208,8 @@ stats = Dictionary[int, ExtResource("3_hluaq")]({
 10: SubResource("Resource_mngad")
 })
 aa_projectile_type = 0
-passive_name = "Super frappe"
-passive_description = "Chaque fois que la tourelle Aeron Vantaal attaque, elle gagne une charge. Effet des charges : + (1*lvl) aa damage À 5 charges, Aeron Vantaal déclenche une Super Frappe, infligeant 150% de ses dégâts réinitialisant les charges."
-ultimate_name = "Tempête noire"
-ultimate_description = "Aeron Vantaal crée une tempête du néant sur l'ennemi ciblé, La tempête fait des dommage égal à 50% de son AD toutes les 0,2sec pendant 1sec"
+passive = SubResource("Resource_aqqbn")
+ultimate = SubResource("Resource_pb84q")
 skill1A = SubResource("Resource_0fu0u")
 skill1B = SubResource("Resource_y7u6o")
 skill2A = SubResource("Resource_4hyio")

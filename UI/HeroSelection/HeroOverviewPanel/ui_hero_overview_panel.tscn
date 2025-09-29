@@ -636,10 +636,21 @@ texture = ExtResource("3_rp41f")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="SkillsContainer" type="Control" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="SkillsContainer" type="Control" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("_skills_buttons", "_skill_name_label", "_skill_desc_label")]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
 script = ExtResource("17_q0qm1")
+_skills_buttons = {
+0: NodePath("VBoxContainer/HexGridContainer/SkillBronze1"),
+1: NodePath("VBoxContainer/HexGridContainer/SkillBronze2"),
+2: NodePath("VBoxContainer/HexGridContainer/SkillSilver1"),
+3: NodePath("VBoxContainer/HexGridContainer/SkillSilver2"),
+4: NodePath("VBoxContainer/HexGridContainer/SkillGold1"),
+5: NodePath("VBoxContainer/HexGridContainer/SkillGold2")
+}
+_skill_name_label = NodePath("VBoxContainer/MarginContainer/Panel/MarginContainer/VBoxContainer/TitleContainer/SkillNameLabel")
+_skill_desc_label = NodePath("VBoxContainer/MarginContainer/Panel/MarginContainer/VBoxContainer/DescriptionContainer/MarginContainer/ScrollContainer/SkillDescriptionLabel")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/SkillsContainer"]
 layout_mode = 1
@@ -663,7 +674,6 @@ columns = 3
 metadata/_custom_type_script = "uid://ddn8p84mlkyr0"
 
 [node name="SkillBronze1" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/SkillsContainer/VBoxContainer/HexGridContainer" instance=ExtResource("19_kt0us")]
-unique_name_in_owner = true
 layout_mode = 2
 _make_shader_unique = true
 
@@ -671,7 +681,6 @@ _make_shader_unique = true
 texture = ExtResource("20_1d4bw")
 
 [node name="SkillSilver1" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/SkillsContainer/VBoxContainer/HexGridContainer" instance=ExtResource("19_kt0us")]
-unique_name_in_owner = true
 layout_mode = 2
 _make_shader_unique = true
 
@@ -679,7 +688,6 @@ _make_shader_unique = true
 texture = ExtResource("21_54ott")
 
 [node name="SkillGold1" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/SkillsContainer/VBoxContainer/HexGridContainer" instance=ExtResource("19_kt0us")]
-unique_name_in_owner = true
 layout_mode = 2
 _make_shader_unique = true
 
@@ -687,7 +695,6 @@ _make_shader_unique = true
 texture = ExtResource("22_me5gi")
 
 [node name="SkillBronze2" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/SkillsContainer/VBoxContainer/HexGridContainer" instance=ExtResource("19_kt0us")]
-unique_name_in_owner = true
 layout_mode = 2
 _make_shader_unique = true
 
@@ -695,7 +702,6 @@ _make_shader_unique = true
 texture = ExtResource("20_1d4bw")
 
 [node name="SkillSilver2" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/SkillsContainer/VBoxContainer/HexGridContainer" instance=ExtResource("19_kt0us")]
-unique_name_in_owner = true
 layout_mode = 2
 _make_shader_unique = true
 
@@ -703,7 +709,6 @@ _make_shader_unique = true
 texture = ExtResource("21_54ott")
 
 [node name="SkillGold2" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/SkillsContainer/VBoxContainer/HexGridContainer" instance=ExtResource("19_kt0us")]
-unique_name_in_owner = true
 layout_mode = 2
 _make_shader_unique = true
 
@@ -740,7 +745,6 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="SkillNameLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/SkillsContainer/VBoxContainer/MarginContainer/Panel/MarginContainer/VBoxContainer/TitleContainer"]
-unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -776,7 +780,6 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="SkillDescriptionLabel" type="Label" parent="HeroOverViewPanel/MarginContainer/ScrollContainer/VBoxContainer/SkillsContainer/VBoxContainer/MarginContainer/Panel/MarginContainer/VBoxContainer/DescriptionContainer/MarginContainer/ScrollContainer"]
-unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_horizontal = 3

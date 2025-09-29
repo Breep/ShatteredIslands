@@ -14,24 +14,15 @@ extends Control
 @onready var _attack_speed_label: Label = %AttackSpeedLabel
 @onready var _critic_label: Label = %CriticLabel
 
-@onready var _passive_name_label: Label = %PassiveName
-@onready var _passive_description_label: Label = %PassiveDescription
+@onready var _passive_name_label: Label = %PassiveNameLabel
+@onready var _passive_description_label: Label = %PassiveDescriptionLabel
+@onready var _passive_portrait: TextureRect = %PassivePortrait
 
-@onready var _ultimate_name_label: Label = %UltimateName
-@onready var _ultimate_description_label: Label = %UltimateDescription
+@onready var _ultimate_name_label: Label = %UltimateNameLabel
+@onready var _ultimate_description_label: Label = %UltimateDescriptionLabel
+@onready var _ultimate_portrait: TextureRect = %UltimatePortrait
 
-@onready var _skill1A_name_label: Label = %Skill1AName
-@onready var _skill1A_description_label: Label = %Skill1ADescription
-@onready var _skill1B_name_label: Label = %Skill1BName
-@onready var _skill1B_description_label: Label = %Skill1BDescription
-@onready var _skill2A_name_label: Label = %Skill2AName
-@onready var _skill2A_description_label: Label = %Skill2ADescription
-@onready var _skill2B_name_label: Label = %Skill2BName
-@onready var _skill2B_description_label: Label = %Skill2BDescription
-@onready var _skill3A_name_label: Label = %Skill3AName
-@onready var _skill3A_description_label: Label = %Skill3ADescription
-@onready var _skill3B_name_label: Label = %Skill3BName
-@onready var _skill3B_description_label: Label = %Skill3BDescription
+@onready var _skill_container: UISkillsContainer = %SkillsContainer
 
 @onready var _lore_label: Label = %LoreLabel
 
@@ -61,24 +52,15 @@ func _update_content(hero: Hero) -> void:
 	_attack_speed_label.text = str(hero.stats[1].attack_speed).pad_decimals(1)
 	_critic_label.text = str(int(hero.stats[1].physical_critical_chance))
 	
-	_passive_name_label.text = hero.passive_name
-	_passive_description_label.text = hero.passive_description
+	_passive_name_label.text = hero.passive.name
+	_passive_description_label.text = hero.passive.description
+	_passive_portrait.texture = hero.passive.portrait
 	
-	_ultimate_name_label.text = hero.ultimate_name
-	_ultimate_description_label.text = hero.ultimate_description
+	_ultimate_name_label.text = hero.ultimate.name
+	_ultimate_description_label.text = hero.ultimate.description
+	_ultimate_portrait.texture = hero.ultimate.portrait
 	
-	_skill1A_name_label.text = hero.skill1A_name
-	_skill1A_description_label.text = hero.skill1A_description
-	_skill1B_name_label.text = hero.skill1B_name
-	_skill1B_description_label.text = hero.skill1B_description
-	_skill2A_name_label.text = hero.skill2A_name
-	_skill2A_description_label.text = hero.skill2A_description
-	_skill2B_name_label.text = hero.skill2B_name
-	_skill2B_description_label.text = hero.skill2B_description
-	_skill3A_name_label.text = hero.skill3A_name
-	_skill3A_description_label.text = hero.skill3A_description
-	_skill3B_name_label.text = hero.skill3B_name
-	_skill3B_description_label.text = hero.skill3B_description
+	_skill_container.update_content(hero)
 	
 	_lore_label.text = hero.description
 

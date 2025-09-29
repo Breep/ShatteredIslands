@@ -27,11 +27,8 @@ enum HeroId {
 @export var aa_projectile_type: Projectile.ProjectileType
 @export var model: PackedScene
 
-@export var passive_name: String
-@export var passive_description: String
-
-@export var ultimate_name: String
-@export var ultimate_description: String
+@export var passive: Skill
+@export var ultimate: Skill
 
 @export var skill1A: Skill
 @export var skill1B: Skill

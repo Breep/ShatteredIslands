@@ -7,7 +7,9 @@ enum SkillID {
 	SILVER1,
 	SILVER2,
 	GOLD1,
-	GOLD2
+	GOLD2,
+	PASSIVE,
+	ULTIMATE
 }
 
 @export var name: String
