@@ -16,7 +16,3 @@ description = "Née dans le légendaire Clan Pisse-Étincelle, Dr Boom — de so
 stats = Dictionary[int, ExtResource("3_2q0cn")]({})
 aa_projectile_type = 0
 model = SubResource("Resource_2q0cn")
-passive_name = "Bomby"
-passive_description = "Lors de la phase d'achat, lance une bombe (bomby) sur un joueur aléatoire, la mèche se consume en 5s. A la fin de son timer, bomby explose et inflige 2 dégat au joueur. Les dégât de bomby son divisé par 2 sur Dr Boom. Lorsqu'un joueur possédant une bombe achète une carte, bomby passe au voisin, le timer de la bombe est alors reset. A chaque fois que la bombe change de hero, elle a 25% de chance d'exploser en plein vol et d'infliger aucun dégât"
-ultimate_name = "Giga bombe"
-ultimate_description = "Lance une giga bombe proche d'un joueur aléatoire. Inflige 10% vie max à TOUS les joueurs sauf le mad bomber dans la zone d'impact. Rayon de 3m zone d'impact."

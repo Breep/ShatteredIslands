@@ -14,7 +14,3 @@ description = "Sir Reginald Von Gloriforth III"
 stats = Dictionary[int, ExtResource("4_gvt4n")]({})
 aa_projectile_type = 6
 model = ExtResource("3_lvb6b")
-passive_name = ""
-passive_description = ""
-ultimate_name = ""
-ultimate_description = ""

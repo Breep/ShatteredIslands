@@ -14,7 +14,3 @@ description = "You belong in a museum !"
 stats = Dictionary[int, ExtResource("4_yp1sq")]({})
 aa_projectile_type = 4
 model = ExtResource("4_ovxht")
-passive_name = ""
-passive_description = ""
-ultimate_name = ""
-ultimate_description = ""

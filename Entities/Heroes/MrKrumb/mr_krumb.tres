@@ -14,7 +14,3 @@ description = "Change personality"
 stats = Dictionary[int, ExtResource("4_wbxcr")]({})
 aa_projectile_type = 5
 model = ExtResource("4_4joxv")
-passive_name = ""
-passive_description = ""
-ultimate_name = ""
-ultimate_description = ""
