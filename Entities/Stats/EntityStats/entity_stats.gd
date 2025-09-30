@@ -1,6 +1,18 @@
 class_name EntityStats
 extends Node
 
+enum StatType {
+	HEALTH_MAX,
+	HEALTH,
+	MANA_MAX,
+	MANA,
+	MANA_REGEN,
+	AD,
+	AA_SPEED,
+	CRIT_CHANCE,
+	CRIT_MULT
+}
+
 # ============================== Health ==============================
 
 signal health_max_changed(new_health_max: int)
@@ -123,7 +135,7 @@ var ignite_stacks: int:
 		_ignite_stacks = value
 		ignite_stacks_changed.emit(_ignite_stacks)
 
- 
+
 signal armor_stacks_changed(new_armor_stacks: int)
 var _armor_stacks: int = 0
 var armor_stacks: int:
@@ -132,7 +144,6 @@ var armor_stacks: int:
 		if value == _armor_stacks: return
 		_armor_stacks = value
 		armor_stacks_changed.emit(_armor_stacks)
-
 
 # ============================== Public functions ==============================
 

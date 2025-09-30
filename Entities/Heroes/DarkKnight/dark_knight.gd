@@ -43,6 +43,10 @@ extends Hero3D
 @export var _mega_strike_damage_percent: float = 500.0
 
 
+# TODO BULLSHIT
+func _ready() -> void:
+	pass
+
 func cast_ultimate() -> void:
 	var target = _character_owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
 	if target == null:

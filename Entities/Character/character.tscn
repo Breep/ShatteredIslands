@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cf4y1g6c4ia6w" path="res://Entities/Character/CharacterVisual/character_visual.tscn" id="2_xasj2"]
 [ext_resource type="PackedScene" uid="uid://qgjyscmtp6t3" path="res://Entities/Character/CharacterLogic/character_logic.tscn" id="3_4th1x"]
 [ext_resource type="PackedScene" uid="uid://biqqopaoa3486" path="res://Entities/Character/CharacterStats/families_stats.tscn" id="3_b3hxd"]
-[ext_resource type="PackedScene" uid="uid://cjqhs57x28gtu" path="res://Entities/EntityStats/EntityStats.tscn" id="4_dhfj1"]
+[ext_resource type="PackedScene" uid="uid://cjqhs57x28gtu" path="res://Entities/Stats/EntityStats/EntityStats.tscn" id="4_dhfj1"]
 [ext_resource type="PackedScene" uid="uid://dqrhym1sskng8" path="res://Entities/Turret/turret.tscn" id="4_roimm"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="5_an1mw"]
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://Modules/PickableClickable/PickableModule/pickable_module.tscn" id="7_h7fwd"]
