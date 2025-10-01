@@ -1,8 +1,128 @@
-[gd_resource type="Resource" script_class="Hero" load_steps=4 format=3 uid="uid://cgaiavne5bbb2"]
+[gd_resource type="Resource" script_class="Hero" load_steps=14 format=3 uid="uid://cgaiavne5bbb2"]
 
 [ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://Entities/Heroes/hero.gd" id="1_671ot"]
 [ext_resource type="Texture2D" uid="uid://bdd6axcmvrqr3" path="res://Data/Heroes/Portraits/Rocky.png" id="1_odka4"]
 [ext_resource type="Script" uid="uid://2py6kv5aqgem" path="res://Entities/Heroes/hero_stats.gd" id="3_v3xqc"]
+
+[sub_resource type="Resource" id="Resource_v3xqc"]
+script = ExtResource("3_v3xqc")
+health_max = 10000
+mana_max = 100
+mana_regen = 1.0
+attack_damage = 20
+attack_speed = 0.5
+physical_critical_chance = 15.0
+physical_critical_multiplier = 1.0
+dodge = 10.0
+metadata/_custom_type_script = "uid://2py6kv5aqgem"
+
+[sub_resource type="Resource" id="Resource_s5rmn"]
+script = ExtResource("3_v3xqc")
+health_max = 0
+mana_max = 0
+mana_regen = 0.0
+attack_damage = 0
+attack_speed = 0.0
+physical_critical_chance = 0.0
+physical_critical_multiplier = 0.0
+dodge = 0.0
+metadata/_custom_type_script = "uid://2py6kv5aqgem"
+
+[sub_resource type="Resource" id="Resource_7mohf"]
+script = ExtResource("3_v3xqc")
+health_max = 0
+mana_max = 0
+mana_regen = 0.0
+attack_damage = 0
+attack_speed = 0.0
+physical_critical_chance = 0.0
+physical_critical_multiplier = 0.0
+dodge = 0.0
+metadata/_custom_type_script = "uid://2py6kv5aqgem"
+
+[sub_resource type="Resource" id="Resource_ed0sr"]
+script = ExtResource("3_v3xqc")
+health_max = 0
+mana_max = 0
+mana_regen = 0.0
+attack_damage = 0
+attack_speed = 0.0
+physical_critical_chance = 0.0
+physical_critical_multiplier = 0.0
+dodge = 0.0
+metadata/_custom_type_script = "uid://2py6kv5aqgem"
+
+[sub_resource type="Resource" id="Resource_gmv4n"]
+script = ExtResource("3_v3xqc")
+health_max = 0
+mana_max = 0
+mana_regen = 0.0
+attack_damage = 0
+attack_speed = 0.0
+physical_critical_chance = 0.0
+physical_critical_multiplier = 0.0
+dodge = 0.0
+metadata/_custom_type_script = "uid://2py6kv5aqgem"
+
+[sub_resource type="Resource" id="Resource_6vrkr"]
+script = ExtResource("3_v3xqc")
+health_max = 0
+mana_max = 0
+mana_regen = 0.0
+attack_damage = 0
+attack_speed = 0.0
+physical_critical_chance = 0.0
+physical_critical_multiplier = 0.0
+dodge = 0.0
+metadata/_custom_type_script = "uid://2py6kv5aqgem"
+
+[sub_resource type="Resource" id="Resource_7jp6j"]
+script = ExtResource("3_v3xqc")
+health_max = 0
+mana_max = 0
+mana_regen = 0.0
+attack_damage = 0
+attack_speed = 0.0
+physical_critical_chance = 0.0
+physical_critical_multiplier = 0.0
+dodge = 0.0
+metadata/_custom_type_script = "uid://2py6kv5aqgem"
+
+[sub_resource type="Resource" id="Resource_dwu8p"]
+script = ExtResource("3_v3xqc")
+health_max = 0
+mana_max = 0
+mana_regen = 0.0
+attack_damage = 0
+attack_speed = 0.0
+physical_critical_chance = 0.0
+physical_critical_multiplier = 0.0
+dodge = 0.0
+metadata/_custom_type_script = "uid://2py6kv5aqgem"
+
+[sub_resource type="Resource" id="Resource_idytg"]
+script = ExtResource("3_v3xqc")
+health_max = 0
+mana_max = 0
+mana_regen = 0.0
+attack_damage = 0
+attack_speed = 0.0
+physical_critical_chance = 0.0
+physical_critical_multiplier = 0.0
+dodge = 0.0
+metadata/_custom_type_script = "uid://2py6kv5aqgem"
+
+[sub_resource type="Resource" id="Resource_2e5ha"]
+script = ExtResource("3_v3xqc")
+health_max = 0
+mana_max = 0
+mana_regen = 0.0
+attack_damage = 0
+attack_speed = 0.0
+physical_critical_chance = 0.0
+physical_critical_multiplier = 0.0
+dodge = 0.0
+metadata/_custom_type_script = "uid://2py6kv5aqgem"
 
 [resource]
 script = ExtResource("1_671ot")
@@ -10,6 +130,17 @@ name = "Rocky"
 id = 10
 portrait = ExtResource("1_odka4")
 description = "Hard as rock"
-stats = Dictionary[int, ExtResource("3_v3xqc")]({})
+stats = Dictionary[int, ExtResource("3_v3xqc")]({
+1: SubResource("Resource_v3xqc"),
+2: SubResource("Resource_s5rmn"),
+3: SubResource("Resource_7mohf"),
+4: SubResource("Resource_ed0sr"),
+5: SubResource("Resource_gmv4n"),
+6: SubResource("Resource_6vrkr"),
+7: SubResource("Resource_7jp6j"),
+8: SubResource("Resource_dwu8p"),
+9: SubResource("Resource_idytg"),
+10: SubResource("Resource_2e5ha")
+})
 aa_projectile_type = 0
 metadata/_custom_type_script = "uid://dtcjta70luxvr"
