@@ -60,6 +60,7 @@ func cast_ultimate() -> void:
 
 var __aa_counter: int = 0
 func _on_character_owner_aa_done() -> void:
+	__aa_counter = (__aa_counter + 1) % 5
 	var stat_modifier := StatModifier.new()
 	stat_modifier.id = "Super Strike"
 	stat_modifier.stat_type = EntityStats.StatType.AD
