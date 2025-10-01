@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bbnioyc6ti8wn"]
+[gd_scene load_steps=18 format=3 uid="uid://bbnioyc6ti8wn"]
 
 [ext_resource type="Script" uid="uid://dsiet7v8tbihn" path="res://Entities/Character/character.gd" id="1_a1h5o"]
 [ext_resource type="PackedScene" uid="uid://cf4y1g6c4ia6w" path="res://Entities/Character/CharacterVisual/character_visual.tscn" id="2_xasj2"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://4f6k0cp6bjxt" path="res://Entities/Heroes/_Undef/undef.tscn" id="9_h7fwd"]
 [ext_resource type="PackedScene" uid="uid://bg5efhnq0erdv" path="res://Modules/PickableClickable/ClickableModule/clickable_module.tscn" id="9_sjrcw"]
 [ext_resource type="PackedScene" uid="uid://cp34ya8q3861m" path="res://Modules/PickableClickable/VisualFeedback/clickable_selection_feedback.tscn" id="13_jwnrq"]
+[ext_resource type="PackedScene" uid="uid://chxhutes821g8" path="res://Entities/Stats/EntityStatsManager/entity_stats_manager.tscn" id="14_6s1v2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rxegs"]
 
@@ -58,7 +59,7 @@ _attack_manager = NodePath("CharacterLogic/FamiliesManagers/AttackManager")
 _defense_manager = NodePath("CharacterLogic/FamiliesManagers/DefenseManager")
 _clickable_module = NodePath("ClickableModule")
 _clickable_feedback = NodePath("ClickableSelectionFeedback")
-stats = NodePath("EntityStats")
+stats = NodePath("Stats/CurrentStats")
 
 [node name="CharacterVisual" parent="." node_paths=PackedStringArray("_owner_entity") instance=ExtResource("2_xasj2")]
 unique_name_in_owner = true
@@ -71,8 +72,6 @@ visible = false
 shape = SubResource("CapsuleShape3D_rxegs")
 
 [node name="FamiliesStats" parent="." instance=ExtResource("3_b3hxd")]
-
-[node name="EntityStats" parent="." instance=ExtResource("4_dhfj1")]
 
 [node name="CharacterLogic" parent="." node_paths=PackedStringArray("_source", "modules", "families_managers") instance=ExtResource("3_4th1x")]
 _source = NodePath("..")
@@ -174,6 +173,16 @@ replication_config = SubResource("SceneReplicationConfig_5ed6q")
 replication_config = SubResource("SceneReplicationConfig_h7fwd")
 
 [node name="Undef" parent="." instance=ExtResource("9_h7fwd")]
+
+[node name="Stats" type="Node" parent="."]
+
+[node name="CurrentStats" parent="Stats" instance=ExtResource("4_dhfj1")]
+
+[node name="StatsManager" parent="Stats" node_paths=PackedStringArray("_entity_stats", "_entity_base_stats") instance=ExtResource("14_6s1v2")]
+_entity_stats = NodePath("../CurrentStats")
+_entity_base_stats = NodePath("../BaseStats")
+
+[node name="BaseStats" parent="Stats" instance=ExtResource("4_dhfj1")]
 
 [editable path="CharacterLogic"]
 [editable path="TurretCenterPoint/Turret"]
