@@ -44,6 +44,8 @@ var is_dead: bool:
 
 @export_group("Stats")
 @export var stats: EntityStats
+@export var base_stats: EntityStats
+@export var stats_manager: EntityStatsManager
 
 # ============================== Enums ==============================
 

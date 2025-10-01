@@ -20,6 +20,7 @@ const _HEROES_3D: Dictionary[Hero.HeroId, PackedScene] = {
 # ============================== Signal ==============================
 
 signal fight_is_won()
+signal aa_done()
 #signal fight_is_lost()
 
 # ============================== Fighting State ==============================
@@ -193,6 +194,9 @@ func _ready() -> void:
 	stats.health_changed.connect(_on_stats_health_changed)
 	stats.mana_changed.connect(_on_stats_mana_changed)
 	
+	var aa_module: AutoAttackModule = _character_logic.modules[Module.ModuleType.AUTOATTACK]
+	aa_module.attack_done.connect(_on_aa_module_attack_done)
+	
 	_defense_manager.reflecto_belt_activated.connect(_on_defense_manager_reflecto_belt_activated)
 	
 	if player == PlayerManager.get_local_player():
@@ -291,3 +295,5 @@ func _on_player_lvl_changed(self_ref: Player, new_lvl: int) -> void:
 	apply_cards_upgrade(player.deck)
 
  
+func _on_aa_module_attack_done() -> void:
+	aa_done.emit()

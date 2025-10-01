@@ -43,9 +43,8 @@ extends Hero3D
 @export var _mega_strike_damage_percent: float = 500.0
 
 
-# TODO BULLSHIT
 func _ready() -> void:
-	pass
+	_character_owner.aa_done.connect(_on_character_owner_aa_done)
 
 func cast_ultimate() -> void:
 	var target = _character_owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
@@ -57,3 +56,14 @@ func cast_ultimate() -> void:
 		Spell.DarkStormModifier.LIFESPAN: _black_storm_duration
 	}
 	_character_owner.cast_spell(target, Spell.Type.DARK_STORM, spell_modifier)
+
+
+var __aa_counter: int = 0
+func _on_character_owner_aa_done() -> void:
+	var stat_modifier := StatModifier.new()
+	stat_modifier.id = "Super Strike"
+	stat_modifier.stat_type = EntityStats.StatType.AD
+	stat_modifier.calc_type = StatModifier.CalcType.ADD
+	stat_modifier.value = _super_strike_factor * __aa_counter * _character_owner.player.lvl
+	stat_modifier.tags = [StatModifier.TagType.HERO]
+	_character_owner.stats_manager.update_modifier(stat_modifier)
