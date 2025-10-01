@@ -1,7 +1,10 @@
 class_name EntityStatsManager
 extends Node
 
-@onready var _stats_modifiers: Dictionary [EntityStats.StatType, StatModifierDictionary] = {
+@export var _entity_stats: EntityStats
+@export var _entity_base_stats: EntityStats
+
+@onready var _stats_modifiers_dictionaries: Dictionary [EntityStats.StatType, StatModifierDictionary] = {
 	EntityStats.StatType.HEALTH_MAX: StatModifierDictionary.new(),
 	EntityStats.StatType.HEALTH: StatModifierDictionary.new(),
 	EntityStats.StatType.MANA_MAX: StatModifierDictionary.new(),
@@ -15,27 +18,15 @@ extends Node
 
 
 func register_modifier(stat_modifier: StatModifier) -> void:
-	var type: EntityStats.StatType = stat_modifier.stat_type
-	var key: String = stat_modifier.id
-	if _stats_modifiers[type].has(key):
-		printerr("EntityStatsManager: register_modifier() - already known stat modifier \"", key, "\" [", get_path(), "]")
-		return
-	_recompute_stats()
+	var stat_type: EntityStats.StatType = stat_modifier.stat_type
+	_stats_modifiers_dictionaries[stat_type].register_modifier(stat_modifier)
 
 
-func update_modifier(key: String, stat_modifier: StatModifier) -> void:
-	_recompute_stats()
+func update_modifier(stat_modifier: StatModifier) -> void:
+	var stat_type: EntityStats.StatType = stat_modifier.stat_type
+	_stats_modifiers_dictionaries[stat_type].update_modifier(stat_modifier)
 
 
 func unregister_modifier(stat_modifier: StatModifier) -> void:
-	var type: EntityStats.StatType = stat_modifier.stat_type
-	var key: String = stat_modifier.id
-	if not _stats_modifiers[type].has(key):
-		printerr("EntityStatsManager: unregister_modifier() - unknown stat modifier \"", key, "\" [", get_path(), "]")
-		return
-	
-	_recompute_stats()
-
-
-func _recompute_stats() -> void:
-	pass
+	var stat_type: EntityStats.StatType = stat_modifier.stat_type
+	_stats_modifiers_dictionaries[stat_type].unregister_modifier(stat_modifier)

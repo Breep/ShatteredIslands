@@ -1,6 +1,8 @@
 class_name StatModifier
 extends Resource
 
+# ============================== Enum ==============================
+
 enum CalcType {
 	ADD,
 	MULT
@@ -12,6 +14,8 @@ enum TagType {
 	QUEST,
 	EVENT
 }
+
+# ============================== Public variables ==============================
 
 var stat_type: EntityStats.StatType
 var id: StringName

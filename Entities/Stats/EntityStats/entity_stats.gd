@@ -161,6 +161,31 @@ func reset_from_hero(hero: Hero, lvl: int) -> void:
 	physical_critical_multiplier = hero.stats[lvl].physical_critical_multiplier
 
 
+func get_stat(stat_type: StatType) -> float:
+	match stat_type:
+		EntityStats.StatType.HEALTH_MAX: return float(_health_max)
+		EntityStats.StatType.HEALTH: return float(_health)
+		EntityStats.StatType.MANA_MAX: return float(_mana_max)
+		EntityStats.StatType.MANA: return _mana
+		EntityStats.StatType.MANA_REGEN: return _mana_regen
+		EntityStats.StatType.AD: return float(_attack_damage)
+		EntityStats.StatType.AA_SPEED: return _attack_speed
+		EntityStats.StatType.CRIT_CHANCE: return _physical_critical_chance
+		EntityStats.StatType.CRIT_MULT: return _physical_critical_multiplier
+		_:
+			printerr("EntityStats: get_stat() - Unknown stat type [", stat_type, "]")
+			return 0.0
 
 
- 
+func update_stat(stat_type: StatType, value: float) -> void:
+	match stat_type:
+		EntityStats.StatType.HEALTH_MAX: health_max = int(round(value))
+		EntityStats.StatType.HEALTH: health = int(round(value))
+		EntityStats.StatType.MANA_MAX: mana_max = int(round(value))
+		EntityStats.StatType.MANA: mana = value
+		EntityStats.StatType.MANA_REGEN: mana_regen = value
+		EntityStats.StatType.AD: attack_damage = int(round(value))
+		EntityStats.StatType.AA_SPEED: attack_speed = value
+		EntityStats.StatType.CRIT_CHANCE: physical_critical_chance = value
+		EntityStats.StatType.CRIT_MULT: physical_critical_multiplier = value
+		_: printerr("EntityStats: get_stat() - Unknown stat type [", stat_type, "]")
