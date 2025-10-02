@@ -160,11 +160,6 @@ func take_heal(heal_amount: int, source: Character = null) -> void:
 
 # ============================== Node base functions ==============================
 
-func _init() -> void:
-	if Engine.is_editor_hint(): return
-	_entity_init()
-
-
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
 	target_module = _character_logic.target_module

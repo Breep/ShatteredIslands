@@ -66,7 +66,7 @@ static var instance_count: int = 0
 
 # ============================== Node base functions ==============================
 
-func _entity_init() -> void:
+func _init() -> void:
 	id = instance_count
 	instance_count += 1
 
