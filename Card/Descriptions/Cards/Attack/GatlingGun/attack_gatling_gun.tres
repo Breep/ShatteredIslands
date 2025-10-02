@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_qhoma"]
 script = ExtResource("2_7uy84")
-_attack_speed_min = Array[int]([15, 30, 50])
+_attack_speed_min = Array[int]([0, 0, 0])
 _attack_speed_max = Array[int]([150, 300, 500])
 _duration = 30.0
 metadata/_custom_type_script = "uid://huymddyommss"

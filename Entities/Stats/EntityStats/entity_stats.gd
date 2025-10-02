@@ -90,14 +90,6 @@ var _attack_speed: float # Attack per second
 		_attack_speed = value
 		attack_speed_changed.emit(_attack_speed)
 
-var _attack_speed_boost: float # % of attack speed modification
-@export var attack_speed_boost: float:
-	get: return _attack_speed_boost
-	set(value):
-		if value == _attack_speed_boost: return
-		_attack_speed_boost = value
-		attack_speed = _attack_speed_default + _attack_speed_default * _attack_speed_boost / 100.0
-
 # ============================== Critic ==============================
 
 signal physical_critical_chance_changed(new_physical_critical_chance: float)
@@ -162,7 +154,6 @@ func reset_from_hero(hero: Hero, lvl: int) -> void:
 	attack_damage = hero.stats[lvl].attack_damage
 	_attack_speed_default = hero.stats[lvl].attack_speed
 	attack_speed = hero.stats[lvl].attack_speed
-	attack_speed_boost = 0
 	physical_critical_chance = hero.stats[lvl].physical_critical_chance
 	physical_critical_multiplier = hero.stats[lvl].physical_critical_multiplier
 	has_been_reset.emit()
