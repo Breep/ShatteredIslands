@@ -70,6 +70,14 @@ func cast_ultimate() -> void:
 func _is_next_attack_super_strike() -> bool:
 	return _super_strike_charges == _super_strike_max_charge
 
+
+func _register_super_strike() -> void:
+	var aa_modifier := AutoAttackModifier.new()
+	aa_modifier.id = "Super Strike"
+	aa_modifier.damage_mult = _super_strike_damage_percent / 100.0
+	aa_modifier.tags = [AutoAttackModifier.TagType.HERO]
+	_character_owner.auto_attack_modifier_registry.register_modifier(aa_modifier)
+
 # ============================== Callback ==============================
 
 func _on_character_owner_aa_done() -> void:
@@ -81,3 +89,5 @@ func _on_character_owner_aa_done() -> void:
 	stat_modifier.value = _super_strike_factor * _super_strike_charges * _character_owner.player.lvl
 	stat_modifier.tags = [StatModifier.TagType.HERO]
 	_character_owner.stats_manager.update_modifier(stat_modifier)
+	if _is_next_attack_super_strike():
+		_register_super_strike()

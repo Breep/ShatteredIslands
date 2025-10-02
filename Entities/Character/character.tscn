@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bbnioyc6ti8wn"]
+[gd_scene load_steps=19 format=3 uid="uid://bbnioyc6ti8wn"]
 
 [ext_resource type="Script" uid="uid://dsiet7v8tbihn" path="res://Entities/Character/character.gd" id="1_a1h5o"]
 [ext_resource type="PackedScene" uid="uid://cf4y1g6c4ia6w" path="res://Entities/Character/CharacterVisual/character_visual.tscn" id="2_xasj2"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bg5efhnq0erdv" path="res://Modules/PickableClickable/ClickableModule/clickable_module.tscn" id="9_sjrcw"]
 [ext_resource type="PackedScene" uid="uid://cp34ya8q3861m" path="res://Modules/PickableClickable/VisualFeedback/clickable_selection_feedback.tscn" id="13_jwnrq"]
 [ext_resource type="PackedScene" uid="uid://chxhutes821g8" path="res://Entities/Stats/EntityStatsManager/entity_stats_manager.tscn" id="14_6s1v2"]
+[ext_resource type="PackedScene" uid="uid://cyp7s6axjgfdt" path="res://Modules/EntityModules/AutoAttackModule/AutoAttackManager/auto_attack_modifier_registry.tscn" id="15_liv0f"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rxegs"]
 
@@ -42,7 +43,7 @@ properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 2
 
-[node name="Character" type="CharacterBody3D" node_paths=PackedStringArray("_movement_synchronizer", "_character_visual", "_character_logic", "_turret", "_collision_shape", "_interact_module", "_action_module", "families_stats", "_attack_manager", "_defense_manager", "_clickable_module", "_clickable_feedback", "stats", "base_stats", "stats_manager")]
+[node name="Character" type="CharacterBody3D" node_paths=PackedStringArray("_movement_synchronizer", "_character_visual", "_character_logic", "_turret", "_collision_shape", "_interact_module", "_action_module", "families_stats", "_attack_manager", "_defense_manager", "_clickable_module", "_clickable_feedback", "stats", "base_stats", "stats_manager", "auto_attack_modifier_registry")]
 collision_layer = 16
 collision_mask = 16
 motion_mode = 1
@@ -62,6 +63,7 @@ _clickable_feedback = NodePath("ClickableSelectionFeedback")
 stats = NodePath("Stats/CurrentStats")
 base_stats = NodePath("Stats/BaseStats")
 stats_manager = NodePath("Stats/StatsManager")
+auto_attack_modifier_registry = NodePath("AutoAttackModifierRegistry")
 
 [node name="Stats" type="Node" parent="."]
 
@@ -72,6 +74,8 @@ _entity_stats = NodePath("../CurrentStats")
 _entity_base_stats = NodePath("../BaseStats")
 
 [node name="BaseStats" parent="Stats" instance=ExtResource("4_dhfj1")]
+
+[node name="AutoAttackModifierRegistry" parent="." instance=ExtResource("15_liv0f")]
 
 [node name="CharacterVisual" parent="." node_paths=PackedStringArray("_owner_entity") instance=ExtResource("2_xasj2")]
 unique_name_in_owner = true

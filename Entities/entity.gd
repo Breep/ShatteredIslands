@@ -47,6 +47,9 @@ var is_dead: bool:
 @export var base_stats: EntityStats
 @export var stats_manager: EntityStatsManager
 
+@export_group("Registry")
+@export var auto_attack_modifier_registry: AutoAttackModifierRegistry
+
 # ============================== Enums ==============================
 
 enum EntityType {
