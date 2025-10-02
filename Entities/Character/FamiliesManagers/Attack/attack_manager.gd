@@ -55,7 +55,13 @@ func stop() -> void:
 
 func apply_stats_modifiers() -> void:
 	if _attack_stats.diamond_sword_activated:
-		_owner.stats.attack_damage += _attack_stats.diamond_sword_attack
+		var stat_modifier := StatModifier.new()
+		stat_modifier.id = "Diamond Sword"
+		stat_modifier.stat_type = EntityStats.StatType.AD
+		stat_modifier.calc_type = StatModifier.CalcType.ADD
+		stat_modifier.value = _attack_stats.diamond_sword_attack
+		stat_modifier.tags = [StatModifier.TagType.CARD]
+		_owner.stats_manager.update_modifier(stat_modifier)
 	
 	if _attack_stats.twin_blade_activated:
 		_owner.stats.attack_speed_boost += _attack_stats.twin_blade_speed
