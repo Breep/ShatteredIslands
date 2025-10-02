@@ -83,9 +83,9 @@ func _register_super_strike() -> void:
 	aa_modifier.id = "Super Strike"
 	aa_modifier.damage_mult = _mega_strike_damage_percent / 100.0 if _mega_strike_activated else _super_strike_damage_percent / 100.0
 	aa_modifier.tags = [AutoAttackModifier.TagType.HERO]
-	aa_modifier.on_attack_logic_callback = _on_super_strike_attack_callback
-	aa_modifier.on_attack_visual_callback = _on_super_strike_attack_visual_callback
-	aa_modifier.on_hit_visual_callback = _on_super_strike_attack_visual_callback
+	aa_modifier.on_attack_logic_callback = _on_attack_super_strike_logic_callback
+	aa_modifier.on_attack_visual_callback = _on_attack_super_strike_visual_callback
+	aa_modifier.on_hit_visual_callback = _on_hit_super_strike_visual_callback
 	_character_owner.auto_attack_modifier_registry.register_modifier(aa_modifier)
 
 
@@ -116,12 +116,18 @@ func _on_character_owner_aa_done() -> void:
 
 # ============================== Hero specific callbacks ==============================
 
-func _on_super_strike_attack_callback() -> void:
+func _on_attack_super_strike_logic_callback() -> void:
 	if _corruption_activated:
 		_register_corruption()
 
 
-func _on_super_strike_attack_visual_callback(gpos: Vector3) -> void:
+func _on_attack_super_strike_visual_callback(gpos: Vector3) -> void:
+	var explosion = SUPER_STRIKE_ON_ATTACK_SCENE.instantiate()
+	add_child(explosion)
+	explosion.global_position = gpos
+
+
+func _on_hit_super_strike_visual_callback(gpos: Vector3) -> void:
 	var explosion = SUPER_STRIKE_ON_ATTACK_SCENE.instantiate()
 	add_child(explosion)
 	explosion.global_position = gpos
