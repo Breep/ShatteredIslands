@@ -57,6 +57,7 @@ const SUPER_STRIKE_ON_ATTACK_SCENE: PackedScene = preload("res://Entities/Heroes
 func _ready() -> void:
 	_character_owner.aa_done.connect(_on_character_owner_aa_done)
 	_corruption_activated = true
+	_mana_strike_activated = true
 
 # ============================== Public function ==============================
 
@@ -85,6 +86,7 @@ func _register_super_strike() -> void:
 	aa_modifier.tags = [AutoAttackModifier.TagType.HERO]
 	aa_modifier.on_attack_logic_callback = _on_attack_super_strike_logic_callback
 	aa_modifier.on_attack_visual_callback = _on_attack_super_strike_visual_callback
+	aa_modifier.on_hit_logic_callback = _on_hit_super_strike_logic_callback
 	aa_modifier.on_hit_visual_callback = _on_hit_super_strike_visual_callback
 	_character_owner.auto_attack_modifier_registry.register_modifier(aa_modifier)
 
@@ -98,6 +100,14 @@ func _register_corruption() -> void:
 	stat_modifier.value = _corruption_charges * _corruption_ad_gain
 	stat_modifier.tags = [StatModifier.TagType.HERO]
 	_character_owner.stats_manager.update_modifier(stat_modifier)
+
+
+func _register_mana_strike() -> void:
+	var aa_modifier := AutoAttackModifier.new()
+	aa_modifier.id = "Mana Strike"
+	aa_modifier.tags = [AutoAttackModifier.TagType.HERO]
+	aa_modifier.on_hit_logic_callback = _on_hit_mana_strike_logic_callback
+	_character_owner.auto_attack_modifier_registry.register_modifier(aa_modifier)
 
 # ============================== Callback ==============================
 
@@ -113,6 +123,8 @@ func _on_character_owner_aa_done() -> void:
 	_character_owner.stats_manager.update_modifier(stat_modifier)
 	if _is_next_attack_super_strike():
 		_register_super_strike()
+		if _mana_strike_activated:
+			_register_mana_strike()
 
 # ============================== Hero specific callbacks ==============================
 
@@ -127,7 +139,17 @@ func _on_attack_super_strike_visual_callback(gpos: Vector3) -> void:
 	explosion.global_position = gpos
 
 
+func _on_hit_super_strike_logic_callback(damage: int) -> void:
+	print("SUPER STRIKE DEALS ", damage, " damage !")
+
+
 func _on_hit_super_strike_visual_callback(gpos: Vector3) -> void:
 	var explosion = SUPER_STRIKE_ON_ATTACK_SCENE.instantiate()
 	add_child(explosion)
 	explosion.global_position = gpos
+
+
+func _on_hit_mana_strike_logic_callback(damage: int) -> void:
+	var mana_inc: float = float(damage) * (_mana_strike_percent / 100.0)
+	print("MANA STRIKE: gain ", mana_inc, " mana !")
+	character_owner.stats.mana += mana_inc

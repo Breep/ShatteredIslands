@@ -146,8 +146,8 @@ func ultimate() -> void:
 
 # ===== Interaction
 
-func take_damage(damage: int, damage_type: Utils.DamageType, is_critical: bool = false, source: Entity = null, attack_type: Utils.AttackType = Utils.AttackType.UNDEF) -> void:
-	_interact_module.take_damage(damage, damage_type, is_critical, source, attack_type)
+func take_damage(damage: int, damage_type: Utils.DamageType, is_critical: bool = false, source: Entity = null, attack_type: Utils.AttackType = Utils.AttackType.UNDEF) -> int:
+	return _interact_module.take_damage(damage, damage_type, is_critical, source, attack_type)
 
 func take_damage_percent(percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.DamageType, is_critical: bool = false, source: Entity = null) -> void:
 	_interact_module.take_damage_percent(percent, percent_modifier, damage_type, is_critical, source)

@@ -47,13 +47,14 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node3D) -> void:
 	if body is Character and body == target:
+		var physical_damage_done_flat: int
 		if not multiplayer.is_server():
 			queue_free()
 			return
 		var physical_damage: int = stats.physical_damage_flat
 		physical_damage += _get_damage_percent(stats.physical_damage_percent, stats.physical_damage_percent_type)
 		if physical_damage > 0:
-			target.take_damage(physical_damage, Utils.DamageType.PHYSICAL, stats.is_critic, source, Utils.AttackType.AUTO_ATTACK)
+			physical_damage_done_flat = target.take_damage(physical_damage, Utils.DamageType.PHYSICAL, stats.is_critic, source, Utils.AttackType.AUTO_ATTACK)
 		var magical_damage: int = stats.magical_damage_flat
 		magical_damage += _get_damage_percent(stats.magical_damage_percent, stats.magical_damage_percent_type)
 		if magical_damage > 0:
@@ -66,7 +67,7 @@ func _on_body_entered(body: Node3D) -> void:
 			return
 		
 		if stats.on_hit_logic_callback.is_valid():
-			stats.on_hit_logic_callback.call()
+			stats.on_hit_logic_callback.call(physical_damage_done_flat)
 		if stats.on_hit_visual_callback.is_valid():
 			stats.on_hit_visual_callback.call(global_position)
 		queue_free()

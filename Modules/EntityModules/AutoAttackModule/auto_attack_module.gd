@@ -76,7 +76,7 @@ func _auto_attack(target: Character) -> void:
 	projectile_stats.speed = 15
 	_consume_modifiers(projectile_stats)
 	_owner.projectile_attack(target, Projectile.ProjectileType.AUTO_ATTACK, _projectile_spawn, projectile_stats)
-
+	
 	attack_done.emit()
 
 
