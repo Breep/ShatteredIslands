@@ -1,8 +1,12 @@
 class_name EntityStatsManager
 extends Node
 
+# ============================== Export - Entity stats ==============================
+
 @export var _entity_stats: EntityStats
 @export var _entity_base_stats: EntityStats
+
+# ============================== Private variables ==============================
 
 @onready var _stats_modifiers_dictionaries: Dictionary [EntityStats.StatType, StatModifierDictionary] = {
 	EntityStats.StatType.HEALTH_MAX: StatModifierDictionary.new(),
@@ -16,10 +20,14 @@ extends Node
 	EntityStats.StatType.CRIT_MULT: StatModifierDictionary.new()
 }
 
+# ============================== Node base functions ==============================
+
 func _ready() -> void:
-	for stat_type in _stats_modifiers_dictionaries.keys():
+	_entity_base_stats.has_been_reset.connect(_on_entity_base_stats_has_been_reset)
+	for stat_type: EntityStats.StatType in _stats_modifiers_dictionaries.keys():
 		_stats_modifiers_dictionaries[stat_type].setup(stat_type, _entity_stats, _entity_base_stats)
 
+# ============================== Public functions ==============================
 
 func register_modifier(stat_modifier: StatModifier) -> void:
 	var stat_type: EntityStats.StatType = stat_modifier.stat_type
@@ -34,3 +42,9 @@ func update_modifier(stat_modifier: StatModifier) -> void:
 func unregister_modifier(stat_modifier: StatModifier) -> void:
 	var stat_type: EntityStats.StatType = stat_modifier.stat_type
 	_stats_modifiers_dictionaries[stat_type].unregister_modifier(stat_modifier)
+
+# ============================== Callbacks ==============================
+
+func _on_entity_base_stats_has_been_reset() -> void:
+	for smd: StatModifierDictionary in _stats_modifiers_dictionaries.values():
+		smd.recompute_stats()

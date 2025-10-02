@@ -17,6 +17,10 @@ func setup(stat_type: EntityStats.StatType, entity_stat_ref: EntityStats, entity
 	_entity_base_stats_ref = entity_base_stats_ref
 
 
+func recompute_stats() -> void:
+	_recompute_stats()
+
+
 func register_modifier(stat_modifier: StatModifier) -> void:
 	var stat_type: EntityStats.StatType = stat_modifier.stat_type
 	if stat_type != _stat_type:

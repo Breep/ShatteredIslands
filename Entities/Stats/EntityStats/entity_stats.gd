@@ -1,6 +1,8 @@
 class_name EntityStats
 extends Node
 
+# ============================== Enum ==============================
+
 enum StatType {
 	HEALTH_MAX,
 	HEALTH,
@@ -12,6 +14,10 @@ enum StatType {
 	CRIT_CHANCE,
 	CRIT_MULT
 }
+
+# ============================== Signals ==============================
+
+signal has_been_reset()
 
 # ============================== Health ==============================
 
@@ -159,6 +165,7 @@ func reset_from_hero(hero: Hero, lvl: int) -> void:
 	attack_speed_boost = 0
 	physical_critical_chance = hero.stats[lvl].physical_critical_chance
 	physical_critical_multiplier = hero.stats[lvl].physical_critical_multiplier
+	has_been_reset.emit()
 
 
 func get_stat(stat_type: StatType) -> float:
