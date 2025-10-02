@@ -89,7 +89,9 @@ func _consume_modifiers(projectile_stats: ProjectileStats) -> void:
 		if aa_modifier.on_attack_logic_callback.is_valid():
 			aa_modifier.on_attack_logic_callback.call()
 		if aa_modifier.on_attack_visual_callback.is_valid():
-			aa_modifier.on_attack_visual_callback.call()
+			aa_modifier.on_attack_visual_callback.call(_projectile_spawn.global_position)
+		projectile_stats.on_hit_logic_callback = aa_modifier.on_hit_logic_callback
+		projectile_stats.on_hit_visual_callback = aa_modifier.on_hit_visual_callback
 	projectile_stats.physical_damage_flat += add
 	projectile_stats.physical_damage_flat *= (1 + mul)
 

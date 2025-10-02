@@ -1,22 +1,22 @@
 [gd_scene load_steps=53 format=3 uid="uid://ch6kqo2qu7mhf"]
 
-[ext_resource type="Shader" uid="uid://d2cgt83o6qjed" path="res://VFX/shaders/s_simple_disolver.tres" id="1_jwpp4"]
-[ext_resource type="Texture2D" uid="uid://c6pcyeugsepnp" path="res://VFX/textures/T_PerlinNoise_Tiled11_inv.png" id="2_th8gq"]
-[ext_resource type="ArrayMesh" uid="uid://c76t0djtwb6l6" path="res://VFX/objects/sm_teardrop.obj" id="3_3sx23"]
-[ext_resource type="Shader" uid="uid://dp4ffi7pqnpmw" path="res://VFX/shaders/s_multi_disolver.tres" id="4_k0fss"]
-[ext_resource type="Texture2D" uid="uid://nyyc5vq2e8a8" path="res://VFX/textures/T_VFX_Noise_44xainv.png" id="5_3vntu"]
-[ext_resource type="Shader" uid="uid://bj7tw025wwvj" path="res://VFX/shaders/s_master_smoke.tres" id="6_2u6wn"]
-[ext_resource type="Texture2D" uid="uid://cwhkes8gbjqfp" path="res://VFX/textures/T_VFX_Noise_13.PNG" id="7_vwi1o"]
-[ext_resource type="Shader" uid="uid://1q6lsrjyrqr1" path="res://VFX/shaders/s_simple_pfc.tres" id="8_ghw52"]
-[ext_resource type="Texture2D" uid="uid://v0okqjvd2j3y" path="res://VFX/textures/T_VFX_Glo31.png" id="9_52fdw"]
+[ext_resource type="Shader" uid="uid://d2cgt83o6qjed" path="res://VFX/VFX_3D/Explosion/shaders/s_simple_disolver.tres" id="1_jwpp4"]
+[ext_resource type="Texture2D" uid="uid://c6pcyeugsepnp" path="res://VFX/VFX_3D/Explosion/textures/T_PerlinNoise_Tiled11_inv.png" id="2_th8gq"]
+[ext_resource type="ArrayMesh" uid="uid://c76t0djtwb6l6" path="res://VFX/VFX_3D/Explosion/objects/sm_teardrop.obj" id="3_3sx23"]
+[ext_resource type="Shader" uid="uid://dp4ffi7pqnpmw" path="res://VFX/VFX_3D/Explosion/shaders/s_multi_disolver.tres" id="4_k0fss"]
+[ext_resource type="Texture2D" uid="uid://nyyc5vq2e8a8" path="res://VFX/VFX_3D/Ultimate/Aeron/Textures/T_VFX_Noise_44xainv.png" id="5_3vntu"]
+[ext_resource type="Shader" uid="uid://bj7tw025wwvj" path="res://VFX/VFX_3D/Explosion/shaders/s_master_smoke.tres" id="6_2u6wn"]
+[ext_resource type="Texture2D" uid="uid://cwhkes8gbjqfp" path="res://VFX/VFX_3D/Explosion/textures/T_VFX_Noise_13.PNG" id="7_vwi1o"]
+[ext_resource type="Shader" uid="uid://1q6lsrjyrqr1" path="res://VFX/VFX_3D/Ultimate/Aeron/Shaders/s_simple_pfc.tres" id="8_ghw52"]
+[ext_resource type="Texture2D" uid="uid://v0okqjvd2j3y" path="res://VFX/VFX_3D/Explosion/textures/T_VFX_Glo31.png" id="9_52fdw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_phfx7"]
 render_priority = 0
 shader = ExtResource("1_jwpp4")
 shader_parameter/Texture_Scale = Vector2(1, 0.2)
 shader_parameter/Texture_offset = Vector2(0, 0)
-shader_parameter/Proximity_Fade = 0.5
 shader_parameter/Disolver_Texture = ExtResource("2_th8gq")
+shader_parameter/Proximity_Fade = 0.5
 
 [sub_resource type="Curve" id="Curve_43xbj"]
 _data = [Vector2(0, 0), 0.0, 1.76624, 0, 0, Vector2(1, 1), 1.09076e-06, 0.0, 0, 0]
@@ -38,7 +38,7 @@ _data = [Vector2(0, 0.793432), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_c0u4l"]
-max_value = 2.0
+_limits = [0.0, 2.0, 0.0, 1.0]
 _data = [Vector2(0, 0.650424), 0.0, 0.0, 0, 0, Vector2(1, 1.27013), 0.0, 0.0, 0, 0]
 point_count = 2
 
@@ -141,11 +141,11 @@ gradient = SubResource("Gradient_lyson")
 render_priority = 1
 shader = ExtResource("6_2u6wn")
 shader_parameter/Displacement_Speed = Vector2(0, 0.6)
-shader_parameter/ProximityFade = 1.0
 shader_parameter/Dissplacement_texture = ExtResource("7_vwi1o")
 shader_parameter/Dark_Color_Gradient_1D = SubResource("GradientTexture1D_keg3i")
 shader_parameter/Disapear_Noise = SubResource("NoiseTexture2D_102ug")
 shader_parameter/Gradient_1D = SubResource("GradientTexture1D_6rmdy")
+shader_parameter/ProximityFade = 1.0
 
 [sub_resource type="Curve" id="Curve_2jjed"]
 _data = [Vector2(0, 0), 0.0, 2.2035, 0, 0, Vector2(1, 1), 0.051592, 0.0, 0, 0]
@@ -191,8 +191,8 @@ alpha_curve = SubResource("CurveTexture_e3xy1")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uqy5u"]
 render_priority = 0
 shader = ExtResource("8_ghw52")
-shader_parameter/ProximityFade = 0.5
 shader_parameter/Alpha_Texture = ExtResource("9_52fdw")
+shader_parameter/ProximityFade = 0.5
 
 [sub_resource type="Curve" id="Curve_qfksj"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.631746, 0), 0.0, 0.0, 0, 0]
@@ -311,8 +311,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mt5l2"]
 _data = {
-"Init": SubResource("Animation_j4wsx"),
-"RESET": SubResource("Animation_qpcob")
+&"Init": SubResource("Animation_j4wsx"),
+&"RESET": SubResource("Animation_qpcob")
 }
 
 [node name="mini_explosion_1" type="Node3D"]
@@ -373,6 +373,6 @@ light_energy = 0.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_mt5l2")
+&"": SubResource("AnimationLibrary_mt5l2")
 }
 autoplay = "Init"

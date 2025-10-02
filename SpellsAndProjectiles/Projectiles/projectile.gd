@@ -65,6 +65,10 @@ func _on_body_entered(body: Node3D) -> void:
 			stats.is_bouncing = false
 			return
 		
+		if stats.on_hit_logic_callback.is_valid():
+			stats.on_hit_logic_callback.call()
+		if stats.on_hit_visual_callback.is_valid():
+			stats.on_hit_visual_callback.call(global_position)
 		queue_free()
 
 # ============================== Private functions ==============================

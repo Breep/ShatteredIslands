@@ -16,3 +16,6 @@ var is_critic: bool # If the projectile is a critical
 var is_bouncing: bool # If the projectile should bounce on the enemy
 
 var poison_stacks: int # Number of poison stacks within the projectile
+
+var on_hit_logic_callback := Callable()
+var on_hit_visual_callback := Callable()

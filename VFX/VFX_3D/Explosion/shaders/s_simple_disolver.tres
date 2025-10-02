@@ -44,7 +44,7 @@ render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_s
 uniform vec2 Texture_Scale = vec2(1.000000, 1.000000);
 uniform vec2 Texture_offset = vec2(0.000000, 0.000000);
 uniform sampler2D Disolver_Texture : source_color;
-uniform float Proximity_Fade = 1;
+uniform float Proximity_Fade = 1.0;
 uniform sampler2D depth_tex_frg_3 : hint_depth_texture;
 
 
