@@ -18,7 +18,7 @@ var damage_mult: float
 var tags: Array[TagType]
 var is_one_time_effect: bool = true
 
-var on_attack_logic_callable: Callable
-var on_attack_visual_callable: Callable
-var on_hit_logic_callable: Callable
-var on_hit_visual_callable: Callable
+var on_attack_logic_callback := Callable()
+var on_attack_visual_callback := Callable()
+var on_hit_logic_callback := Callable()
+var on_hit_visual_callback := Callable()

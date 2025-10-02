@@ -73,5 +73,4 @@ func _recompute_stats() -> void:
 			mul += modifier.value
 	var base_stat = _entity_base_stats_ref.get_stat(_stat_type)
 	var new_stat = (base_stat + add) * (1.0 + mul)
-	print("DEBUG - RECOMPUTING STATS [", _stat_type, "] ", base_stat, "-", new_stat)
 	_entity_stats_ref.update_stat(_stat_type, new_stat)

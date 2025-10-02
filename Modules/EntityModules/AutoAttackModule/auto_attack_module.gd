@@ -86,6 +86,10 @@ func _consume_modifiers(projectile_stats: ProjectileStats) -> void:
 	for aa_modifier: AutoAttackModifier in _owner.auto_attack_modifier_registry.consume_all_modifiers():
 		add += aa_modifier.damage_flat
 		mul += aa_modifier.damage_mult
+		if aa_modifier.on_attack_logic_callback.is_valid():
+			aa_modifier.on_attack_logic_callback.call()
+		if aa_modifier.on_attack_visual_callback.is_valid():
+			aa_modifier.on_attack_visual_callback.call()
 	projectile_stats.physical_damage_flat += add
 	projectile_stats.physical_damage_flat *= (1 + mul)
 

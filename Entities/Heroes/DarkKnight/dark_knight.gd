@@ -28,17 +28,17 @@ extends Hero3D
 @export var _pain_activated: bool = false
 @export var _pain_percent_per_stack: float = 1.0
 
-@export_subgroup("Skill 2B - Cataclysm")
+@export_subgroup("Skill2B - Cataclysm")
 @export var _cataclysm_activated: bool = false
 @export var _cataclysm_number: int = 2
 @export var _cataclysm_mana_cost: int = 150
 
 @export_group("Level 7 Skills")
-@export_subgroup("Skill 3A - Mana Strike")
+@export_subgroup("Skill3A - Mana Strike")
 @export var _mana_strike_activated: bool = false
 @export var _mana_strike_percent: float = 5.0
 
-@export_subgroup("Skill 3B - Mega Strike")
+@export_subgroup("Skill3B - Mega Strike")
 @export var _mega_strike_activated: bool = false
 @export var _mega_strike_max_charge: int = 10
 @export var _mega_strike_damage_percent: float = 500.0
@@ -46,11 +46,13 @@ extends Hero3D
 # ============================== Private variables ==============================
 
 var _super_strike_charges: int = 0
+var _corruption_charges: int = 0
 
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
 	_character_owner.aa_done.connect(_on_character_owner_aa_done)
+	_corruption_activated = true
 
 # ============================== Public function ==============================
 
@@ -68,20 +70,34 @@ func cast_ultimate() -> void:
 # ============================== Private function ==============================
 
 func _is_next_attack_super_strike() -> bool:
-	return _super_strike_charges == _super_strike_max_charge
+	var max_charge: int = _mega_strike_max_charge if _mega_strike_activated else _super_strike_max_charge
+	return _super_strike_charges == max_charge
 
 
 func _register_super_strike() -> void:
 	var aa_modifier := AutoAttackModifier.new()
 	aa_modifier.id = "Super Strike"
-	aa_modifier.damage_mult = _super_strike_damage_percent / 100.0
+	aa_modifier.damage_mult = _mega_strike_damage_percent / 100.0 if _mega_strike_activated else _super_strike_damage_percent / 100.0
 	aa_modifier.tags = [AutoAttackModifier.TagType.HERO]
+	aa_modifier.on_attack_logic_callback = _on_super_strike_attack_callback
 	_character_owner.auto_attack_modifier_registry.register_modifier(aa_modifier)
+
+
+func _register_corruption() -> void:
+	_corruption_charges += 1
+	var stat_modifier := StatModifier.new()
+	stat_modifier.id = "Corruption"
+	stat_modifier.stat_type = EntityStats.StatType.AD
+	stat_modifier.calc_type = StatModifier.CalcType.ADD
+	stat_modifier.value = _corruption_charges * _corruption_ad_gain
+	stat_modifier.tags = [StatModifier.TagType.HERO]
+	_character_owner.stats_manager.update_modifier(stat_modifier)
 
 # ============================== Callback ==============================
 
 func _on_character_owner_aa_done() -> void:
-	_super_strike_charges = (_super_strike_charges + 1) % (_super_strike_max_charge + 1)
+	var max_charge: int = _mega_strike_max_charge if _mega_strike_activated else _super_strike_max_charge
+	_super_strike_charges = (_super_strike_charges + 1) % (max_charge + 1)
 	var stat_modifier := StatModifier.new()
 	stat_modifier.id = "Super Strike"
 	stat_modifier.stat_type = EntityStats.StatType.AD
@@ -91,3 +107,9 @@ func _on_character_owner_aa_done() -> void:
 	_character_owner.stats_manager.update_modifier(stat_modifier)
 	if _is_next_attack_super_strike():
 		_register_super_strike()
+
+# ============================== Hero specific callbacks ==============================
+
+func _on_super_strike_attack_callback() -> void:
+	if _corruption_activated:
+		_register_corruption()
