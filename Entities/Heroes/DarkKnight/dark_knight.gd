@@ -1,7 +1,8 @@
 class_name DarkKnight
 extends Hero3D
 
-# Passive
+# ============================== Export - Skills constants ==============================
+
 @export_group("Passive - Ultimate")
 @export_subgroup("Passive - Super Strike")
 @export var _super_strike_factor: float = 1.0
@@ -42,9 +43,12 @@ extends Hero3D
 @export var _mega_strike_max_charge: int = 10
 @export var _mega_strike_damage_percent: float = 500.0
 
+# ============================== Node base functions ==============================
 
 func _ready() -> void:
 	_character_owner.aa_done.connect(_on_character_owner_aa_done)
+
+# ============================== Public function ==============================
 
 func cast_ultimate() -> void:
 	var target = _character_owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
@@ -57,10 +61,11 @@ func cast_ultimate() -> void:
 	}
 	_character_owner.cast_spell(target, Spell.Type.DARK_STORM, spell_modifier)
 
+# ============================== Callback ==============================
 
 var __aa_counter: int = 0
 func _on_character_owner_aa_done() -> void:
-	__aa_counter = (__aa_counter + 1) % 5
+	__aa_counter = (__aa_counter + 1) % (_super_strike_max_charge + 1)
 	var stat_modifier := StatModifier.new()
 	stat_modifier.id = "Super Strike"
 	stat_modifier.stat_type = EntityStats.StatType.AD
