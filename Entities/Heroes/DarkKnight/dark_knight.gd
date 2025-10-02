@@ -43,6 +43,10 @@ extends Hero3D
 @export var _mega_strike_max_charge: int = 10
 @export var _mega_strike_damage_percent: float = 500.0
 
+# ============================== Private variables ==============================
+
+var _super_strike_charges: int = 0
+
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
@@ -61,15 +65,19 @@ func cast_ultimate() -> void:
 	}
 	_character_owner.cast_spell(target, Spell.Type.DARK_STORM, spell_modifier)
 
+# ============================== Private function ==============================
+
+func _is_next_attack_super_strike() -> bool:
+	return _super_strike_charges == _super_strike_max_charge
+
 # ============================== Callback ==============================
 
-var __aa_counter: int = 0
 func _on_character_owner_aa_done() -> void:
-	__aa_counter = (__aa_counter + 1) % (_super_strike_max_charge + 1)
+	_super_strike_charges = (_super_strike_charges + 1) % (_super_strike_max_charge + 1)
 	var stat_modifier := StatModifier.new()
 	stat_modifier.id = "Super Strike"
 	stat_modifier.stat_type = EntityStats.StatType.AD
 	stat_modifier.calc_type = StatModifier.CalcType.ADD
-	stat_modifier.value = _super_strike_factor * __aa_counter * _character_owner.player.lvl
+	stat_modifier.value = _super_strike_factor * _super_strike_charges * _character_owner.player.lvl
 	stat_modifier.tags = [StatModifier.TagType.HERO]
 	_character_owner.stats_manager.update_modifier(stat_modifier)

@@ -70,7 +70,7 @@ mana_regen = 2.0
 attack_damage = 20
 attack_speed = 0.6
 physical_critical_chance = 5.0
-physical_critical_multiplier = 1.0
+physical_critical_multiplier = 2.0
 dodge = 5.0
 metadata/_custom_type_script = "uid://2py6kv5aqgem"
 
@@ -82,7 +82,7 @@ mana_regen = 2.39
 attack_damage = 25
 attack_speed = 0.7
 physical_critical_chance = 6.0
-physical_critical_multiplier = 1.0
+physical_critical_multiplier = 2.0
 dodge = 5.0
 metadata/_custom_type_script = "uid://2py6kv5aqgem"
 
@@ -94,7 +94,7 @@ mana_regen = 2.57
 attack_damage = 28
 attack_speed = 0.77
 physical_critical_chance = 7.0
-physical_critical_multiplier = 1.0
+physical_critical_multiplier = 2.0
 dodge = 7.0
 metadata/_custom_type_script = "uid://2py6kv5aqgem"
 
@@ -106,7 +106,7 @@ mana_regen = 2.69
 attack_damage = 31
 attack_speed = 0.83
 physical_critical_chance = 8.0
-physical_critical_multiplier = 1.0
+physical_critical_multiplier = 2.0
 dodge = 8.0
 metadata/_custom_type_script = "uid://2py6kv5aqgem"
 
@@ -118,7 +118,7 @@ mana_regen = 2.78
 attack_damage = 34
 attack_speed = 0.89
 physical_critical_chance = 8.0
-physical_critical_multiplier = 1.0
+physical_critical_multiplier = 2.0
 dodge = 8.0
 metadata/_custom_type_script = "uid://2py6kv5aqgem"
 
@@ -130,7 +130,7 @@ mana_regen = 2.85
 attack_damage = 37
 attack_speed = 0.95
 physical_critical_chance = 9.0
-physical_critical_multiplier = 1.0
+physical_critical_multiplier = 2.0
 dodge = 9.0
 metadata/_custom_type_script = "uid://2py6kv5aqgem"
 
@@ -142,7 +142,7 @@ mana_regen = 2.92
 attack_damage = 40
 attack_speed = 1.02
 physical_critical_chance = 10.0
-physical_critical_multiplier = 1.0
+physical_critical_multiplier = 2.0
 dodge = 10.0
 metadata/_custom_type_script = "uid://2py6kv5aqgem"
 
@@ -154,7 +154,7 @@ mana_regen = 2.98
 attack_damage = 43
 attack_speed = 1.08
 physical_critical_chance = 11.0
-physical_critical_multiplier = 1.0
+physical_critical_multiplier = 2.0
 dodge = 11.0
 metadata/_custom_type_script = "uid://2py6kv5aqgem"
 
@@ -166,7 +166,7 @@ mana_regen = 3.03
 attack_damage = 46
 attack_speed = 1.15
 physical_critical_chance = 12.0
-physical_critical_multiplier = 1.0
+physical_critical_multiplier = 2.0
 dodge = 12.0
 metadata/_custom_type_script = "uid://2py6kv5aqgem"
 
@@ -178,7 +178,7 @@ mana_regen = 3.09
 attack_damage = 50
 attack_speed = 1.23
 physical_critical_chance = 12.0
-physical_critical_multiplier = 1.0
+physical_critical_multiplier = 2.0
 dodge = 12.0
 metadata/_custom_type_script = "uid://2py6kv5aqgem"
 
