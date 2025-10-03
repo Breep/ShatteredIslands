@@ -128,28 +128,33 @@ func _on_character_owner_aa_done() -> void:
 
 # ============================== Hero specific callbacks ==============================
 
-func _on_attack_super_strike_logic_callback() -> void:
+func _on_attack_super_strike_logic_callback(_cb_vars: Dictionary) -> void:
 	if _corruption_activated:
 		_register_corruption()
 
 
-func _on_attack_super_strike_visual_callback(gpos: Vector3) -> void:
+func _on_attack_super_strike_visual_callback(cb_vars: Dictionary) -> void:
+	if not cb_vars.has(AutoAttackModifier.VarType.VISUAL_POS): return
+	var gpos: Vector3 = cb_vars[AutoAttackModifier.VarType.VISUAL_POS]
 	var explosion = SUPER_STRIKE_ON_ATTACK_SCENE.instantiate()
 	add_child(explosion)
 	explosion.global_position = gpos
 
 
-func _on_hit_super_strike_logic_callback(damage: int) -> void:
-	print("SUPER STRIKE DEALS ", damage, " damage !")
+func _on_hit_super_strike_logic_callback(_cb_vars: Dictionary) -> void:
+	pass
 
 
-func _on_hit_super_strike_visual_callback(gpos: Vector3) -> void:
+func _on_hit_super_strike_visual_callback(cb_vars: Dictionary) -> void:
+	if not cb_vars.has(AutoAttackModifier.VarType.VISUAL_POS): return
+	var gpos: Vector3 = cb_vars[AutoAttackModifier.VarType.VISUAL_POS]
 	var explosion = SUPER_STRIKE_ON_ATTACK_SCENE.instantiate()
 	add_child(explosion)
 	explosion.global_position = gpos
 
 
-func _on_hit_mana_strike_logic_callback(damage: int) -> void:
+func _on_hit_mana_strike_logic_callback(cb_vars: Dictionary) -> void:
+	if not cb_vars.has(AutoAttackModifier.VarType.PHYSICAL_DAMAGE): return
+	var damage: int = cb_vars[AutoAttackModifier.VarType.PHYSICAL_DAMAGE]
 	var mana_inc: float = float(damage) * (_mana_strike_percent / 100.0)
-	print("MANA STRIKE: gain ", mana_inc, " mana !")
 	character_owner.stats.mana += mana_inc

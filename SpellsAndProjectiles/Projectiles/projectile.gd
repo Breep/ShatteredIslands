@@ -67,9 +67,9 @@ func _on_body_entered(body: Node3D) -> void:
 			return
 		
 		if stats.on_hit_logic_callback.is_valid():
-			stats.on_hit_logic_callback.call(physical_damage_done_flat)
+			stats.on_hit_logic_callback.call({AutoAttackModifier.VarType.PHYSICAL_DAMAGE:physical_damage_done_flat})
 		if stats.on_hit_visual_callback.is_valid():
-			stats.on_hit_visual_callback.call(global_position)
+			stats.on_hit_visual_callback.call({AutoAttackModifier.VarType.VISUAL_POS:global_position})
 		queue_free()
 
 # ============================== Private functions ==============================
