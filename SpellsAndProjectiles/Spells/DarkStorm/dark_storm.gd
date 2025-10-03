@@ -5,6 +5,10 @@ extends Node3D
 # === This is the dark storm area from the ultimate [DarkStorm] from The DarkKnight ===
 # =====================================================================================
 
+# ============================== Constant ==============================
+
+const MAX_RANDOM_XY: float = 1.5
+
 # ============================== Private variables ==============================
 
 var _damage: int = -1 # Damage done to all enemies inside each tick
@@ -30,7 +34,11 @@ func _ready() -> void:
 		queue_free()
 		return
 	
-	global_position = _target.global_position
+	var a: float = Utils.rng.randf_range(0, 1)
+	var b: float = Utils.rng.randf_range(-1, 1)
+	var d: float = Utils.rng.randf_range(-MAX_RANDOM_XY, MAX_RANDOM_XY)
+	var vec := Vector3(a, 0, b).normalized()
+	global_position = _target.global_position + d * vec
 	
 	_damage_tick_timer.wait_time = _period
 	_damage_tick_timer.start()

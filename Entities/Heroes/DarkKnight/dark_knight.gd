@@ -10,9 +10,9 @@ extends Hero3D
 @export var _super_strike_damage_percent: float = 150.0
 
 @export_subgroup("Ultimate - Black Storm")
-@export var _black_storm_duration: float = 2.4
-@export var _black_storm_period: float = 0.2
-@export var _black_storm_damage_percent: float = 0.5
+@export var _dark_storm_duration: float = 2.4
+@export var _dark_storm_period: float = 0.2
+@export var _dark_storm_damage_percent: float = 0.5
 
 @export_group("Level 3 Skills")
 @export_subgroup("Skill1A - Spark Of Light")
@@ -31,7 +31,7 @@ extends Hero3D
 @export_subgroup("Skill2B - Cataclysm")
 @export var _cataclysm_activated: bool = false
 @export var _cataclysm_number: int = 2
-@export var _cataclysm_mana_cost: int = 150
+@export var _cataclysm_mana_cost: int = 50
 
 @export_group("Level 7 Skills")
 @export_subgroup("Skill3A - Mana Strike")
@@ -58,21 +58,31 @@ func _ready() -> void:
 	_character_owner.aa_done.connect(_on_character_owner_aa_done)
 	_corruption_activated = true
 	_mana_strike_activated = true
+	_spark_of_light_activated = true
+	_cataclysm_activated = true
+	
+	if _cataclysm_activated:
+		_on_cataclysm_activation()
 
 # ============================== Public function ==============================
 
 func cast_ultimate() -> void:
+	_cast_ultimate()
+	if _cataclysm_activated:
+		_cast_ultimate()
+
+# ============================== Private function ==============================
+
+func _cast_ultimate() -> void:
 	var target = _character_owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
 	if target == null:
 		return
 	var spell_modifier: Dictionary = {
-		Spell.DarkStormModifier.DAMAGE: _character_owner.stats.attack_damage * _black_storm_damage_percent,
-		Spell.DarkStormModifier.PERIOD: _black_storm_period,
-		Spell.DarkStormModifier.LIFESPAN: _black_storm_duration
+		Spell.DarkStormModifier.DAMAGE: _character_owner.stats.attack_damage * _dark_storm_damage_percent,
+		Spell.DarkStormModifier.PERIOD: _dark_storm_period,
+		Spell.DarkStormModifier.LIFESPAN: _dark_storm_duration
 	}
 	_character_owner.cast_spell(target, Spell.Type.DARK_STORM, spell_modifier)
-
-# ============================== Private function ==============================
 
 func _is_next_attack_super_strike() -> bool:
 	var max_charge: int = _mega_strike_max_charge if _mega_strike_activated else _super_strike_max_charge
@@ -109,6 +119,15 @@ func _register_mana_strike() -> void:
 	aa_modifier.on_hit_logic_callback = _on_hit_mana_strike_logic_callback
 	_character_owner.auto_attack_modifier_registry.register_modifier(aa_modifier)
 
+
+func _register_spark_of_light() -> void:
+	var aa_modifier := AutoAttackModifier.new()
+	aa_modifier.id = "Spark Of Light"
+	aa_modifier.tags = [AutoAttackModifier.TagType.HERO]
+	aa_modifier.on_hit_logic_callback = _on_hit_spark_of_light_logic_callback
+	_character_owner.auto_attack_modifier_registry.register_modifier(aa_modifier)
+
+
 # ============================== Callback ==============================
 
 func _on_character_owner_aa_done() -> void:
@@ -125,8 +144,12 @@ func _on_character_owner_aa_done() -> void:
 		_register_super_strike()
 		if _mana_strike_activated:
 			_register_mana_strike()
+		if _spark_of_light_activated:
+			_register_spark_of_light()
 
 # ============================== Hero specific callbacks ==============================
+
+# ===== SUPER STRIKE
 
 func _on_attack_super_strike_logic_callback(_cb_vars: Dictionary) -> void:
 	if _corruption_activated:
@@ -152,9 +175,30 @@ func _on_hit_super_strike_visual_callback(cb_vars: Dictionary) -> void:
 	add_child(explosion)
 	explosion.global_position = gpos
 
+# ===== MANA STRIKE
 
 func _on_hit_mana_strike_logic_callback(cb_vars: Dictionary) -> void:
 	if not cb_vars.has(AutoAttackModifier.VarType.PHYSICAL_DAMAGE): return
 	var damage: int = cb_vars[AutoAttackModifier.VarType.PHYSICAL_DAMAGE]
 	var mana_inc: float = float(damage) * (_mana_strike_percent / 100.0)
 	character_owner.stats.mana += mana_inc
+
+# ===== SPARK OF LIGHT
+
+func _on_hit_spark_of_light_logic_callback(cb_vars: Dictionary) -> void:
+	if not cb_vars.has(AutoAttackModifier.VarType.PHYSICAL_DAMAGE): return
+	var damage: int = cb_vars[AutoAttackModifier.VarType.PHYSICAL_DAMAGE]
+	var health_inc: float = float(damage) * (_spark_of_light_percent / 100.0)
+	character_owner.heal(character_owner, health_inc)
+
+
+# ===== CATACLYSM
+
+func _on_cataclysm_activation() -> void:
+	var stat_modifier := StatModifier.new()
+	stat_modifier.id = "Cataclysm"
+	stat_modifier.stat_type = EntityStats.StatType.MANA_MAX
+	stat_modifier.calc_type = StatModifier.CalcType.ADD
+	stat_modifier.value = _cataclysm_mana_cost
+	stat_modifier.tags = [StatModifier.TagType.HERO]
+	_character_owner.stats_manager.update_modifier(stat_modifier)

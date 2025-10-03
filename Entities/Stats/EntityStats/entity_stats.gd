@@ -81,7 +81,6 @@ var _attack_damage: int # Damage of auto attack
 		attack_damage_changed.emit(_attack_damage)
 
 signal attack_speed_changed(new_attack_speed: float)
-var _attack_speed_default: float # Default attack speed
 var _attack_speed: float # Attack per second
 @export var attack_speed: float:
 	get: return _attack_speed
@@ -152,7 +151,6 @@ func reset_from_hero(hero: Hero, lvl: int) -> void:
 	mana = 0
 	mana_regen = hero.stats[lvl].mana_regen
 	attack_damage = hero.stats[lvl].attack_damage
-	_attack_speed_default = hero.stats[lvl].attack_speed
 	attack_speed = hero.stats[lvl].attack_speed
 	physical_critical_chance = hero.stats[lvl].physical_critical_chance
 	physical_critical_multiplier = hero.stats[lvl].physical_critical_multiplier
