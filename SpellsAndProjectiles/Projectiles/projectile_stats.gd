@@ -17,5 +17,5 @@ var is_bouncing: bool # If the projectile should bounce on the enemy
 
 var poison_stacks: int # Number of poison stacks within the projectile
 
-var on_hit_logic_callback := Callable()
-var on_hit_visual_callback := Callable()
+var on_hit_logic_callbacks : Array[Callable] # var: Dictionary
+var on_hit_visual_callbacks : Array[Callable] # var: Dictionary
