@@ -1,7 +1,7 @@
 class_name PoisonPeriodicaAgaricus
 extends CharacterUpgrade
 
-@export var _poison_stacks: int
+@export var _poison_stacks: int = 1
 @export var _period: Array[float]
 
 func apply(stats: FamiliesStats, cardlvl: int) -> void: # override

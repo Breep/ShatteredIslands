@@ -99,13 +99,12 @@ modules = {
 4: NodePath("Modules/TargetModule")
 }
 families_managers = {
-0: NodePath("FamiliesManagers/AttackManager"),
-1: NodePath("FamiliesManagers/DefenseManager"),
-2: NodePath("FamiliesManagers/FireManager"),
-3: NodePath("FamiliesManagers/StormManager"),
-4: NodePath("FamiliesManagers/SerenityManager"),
-5: NodePath("FamiliesManagers/LifeManager"),
-6: NodePath("FamiliesManagers/PoisonManager"),
+1: NodePath("FamiliesManagers/AttackManager"),
+2: NodePath("FamiliesManagers/DefenseManager"),
+3: NodePath("FamiliesManagers/FireManager"),
+4: NodePath("FamiliesManagers/StormManager"),
+5: NodePath("FamiliesManagers/SerenityManager"),
+6: NodePath("FamiliesManagers/LifeManager"),
 7: NodePath("FamiliesManagers/PoisonManager"),
 8: NodePath("FamiliesManagers/ManaManager")
 }

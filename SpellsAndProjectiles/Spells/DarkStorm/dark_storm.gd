@@ -15,6 +15,7 @@ var _damage: int = -1 # Damage done to all enemies inside each tick
 var _period: float = -1.0 # Time between each tick
 var _lifespan: float = -1.0 # Lifespan of the spell
 var _is_init: bool = false
+var _pain_percent: float = 1.0
 
 var _entities_inside: Array[Entity] # Array of all entities inside the area
 
@@ -48,13 +49,14 @@ func _ready() -> void:
 
 # ============================== Public functions ==============================
 
-func init(target: Entity, damage: int, period: float, lifespan: float, owner: Entity = null) -> void:
+func init(target: Entity, damage: int, period: float, lifespan: float, owner: Entity, pain_percent: float = 0.0) -> void:
 	_target = target
 	_damage = damage
 	_period = period
 	_lifespan = lifespan
 	_owner = owner
 	_is_init = true
+	_pain_percent = pain_percent
 
 # ============================== Callbacks ==============================
 
@@ -70,8 +72,12 @@ func _on_area_3d_body_exited(body: Node3D) -> void:
 
 func _on_damage_tick_timer_timeout() -> void:
 	for entity in _entities_inside:
-		if entity.team != _owner.team:
-			_owner.direct_attack(entity, _damage, Utils.DamageType.PHYSICAL)
+		if _owner != null and entity.team != _owner.team:
+			var damage: float = _damage
+			if _pain_percent > 0.0:
+				var damage_before = damage
+				damage = damage * (1.0 + entity.stats.get_stacks_number() * _pain_percent / 100.0)
+			_owner.direct_attack(entity, int(round(damage)), Utils.DamageType.PHYSICAL)
 
 
 func _on_lifespan_timer_timeout() -> void:

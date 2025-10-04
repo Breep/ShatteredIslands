@@ -144,6 +144,9 @@ var armor_stacks: int:
 
 # ============================== Public functions ==============================
 
+func get_stacks_number() -> int:
+	return _poison_stacks + _ignite_stacks + _armor_stacks
+
 func reset_from_hero(hero: Hero, lvl: int) -> void:
 	health_max = hero.stats[lvl].health_max
 	health = health_max

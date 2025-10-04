@@ -153,7 +153,8 @@ func _cast_dark_storm(target: Entity, spell_modifier: Dictionary) -> void:
 		var damage: int = spell_modifier[Spell.DarkStormModifier.DAMAGE]
 		var period: float = spell_modifier[Spell.DarkStormModifier.PERIOD]
 		var lifespan: float = spell_modifier[Spell.DarkStormModifier.LIFESPAN]
-		dark_storm.init(target, damage, period, lifespan, _owner)
+		var pain_stack_percent: float = spell_modifier[Spell.DarkStormModifier.PAIN_STACK_PERCENT]
+		dark_storm.init(target, damage, period, lifespan, _owner, pain_stack_percent)
 	else:
 		dark_storm.init(target, 0, 0, 0, _owner)
 	_spawn_manager.spawn_spell(dark_storm)

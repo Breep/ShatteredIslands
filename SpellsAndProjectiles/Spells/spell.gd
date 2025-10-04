@@ -14,5 +14,6 @@ enum MeteorModifier {
 enum DarkStormModifier {
 	DAMAGE,
 	PERIOD,
-	LIFESPAN
+	LIFESPAN,
+	PAIN_STACK_PERCENT
 }

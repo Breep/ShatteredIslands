@@ -26,7 +26,7 @@ extends Hero3D
 @export_group("Level 5 Skills")
 @export_subgroup("Skill2A - Pain")
 @export var _pain_activated: bool = false
-@export var _pain_percent_per_stack: float = 1.0
+@export var _pain_percent_per_stack: float = 2.5
 
 @export_subgroup("Skill2B - Cataclysm")
 @export var _cataclysm_activated: bool = false
@@ -59,7 +59,7 @@ func _ready() -> void:
 	_corruption_activated = true
 	_mana_strike_activated = true
 	_spark_of_light_activated = true
-	_cataclysm_activated = true
+	_pain_activated = true
 	
 	if _cataclysm_activated:
 		_on_cataclysm_activation()
@@ -80,9 +80,11 @@ func _cast_ultimate() -> void:
 	var spell_modifier: Dictionary = {
 		Spell.DarkStormModifier.DAMAGE: _character_owner.stats.attack_damage * _dark_storm_damage_percent,
 		Spell.DarkStormModifier.PERIOD: _dark_storm_period,
-		Spell.DarkStormModifier.LIFESPAN: _dark_storm_duration
+		Spell.DarkStormModifier.LIFESPAN: _dark_storm_duration,
+		Spell.DarkStormModifier.PAIN_STACK_PERCENT: _pain_percent_per_stack if _pain_activated else 0.0
 	}
 	_character_owner.cast_spell(target, Spell.Type.DARK_STORM, spell_modifier)
+
 
 func _is_next_attack_super_strike() -> bool:
 	var max_charge: int = _mega_strike_max_charge if _mega_strike_activated else _super_strike_max_charge
