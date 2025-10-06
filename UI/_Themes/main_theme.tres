@@ -1,7 +1,8 @@
-[gd_resource type="Theme" load_steps=16 format=3 uid="uid://deijluejrkd7e"]
+[gd_resource type="Theme" load_steps=17 format=3 uid="uid://deijluejrkd7e"]
 
 [ext_resource type="FontFile" uid="uid://dbqejd0leblna" path="res://Data/font/Nunito-Bold.ttf" id="1_itn17"]
 [ext_resource type="Texture2D" uid="uid://bgvd0xleomdh0" path="res://UI/_Themes/Data/tileable_dark_wood.png" id="2_c6cb3"]
+[ext_resource type="FontFile" uid="uid://b3ceq6nwnmlhq" path="res://Data/font/LuckiestGuy-Regular.ttf" id="2_m6wv4"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1psgx"]
 
@@ -47,7 +48,7 @@ HScrollBar/styles/scroll_focus = SubResource("StyleBoxEmpty_bck8t")
 Label/colors/font_color = Color(1, 1, 1, 1)
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
 Label/constants/outline_size = 5
-Label/fonts/font = ExtResource("1_itn17")
+Label/fonts/font = ExtResource("2_m6wv4")
 Panel/styles/panel = SubResource("StyleBoxTexture_fmn5p")
 VScrollBar/styles/grabber = SubResource("StyleBoxEmpty_nkx1b")
 VScrollBar/styles/grabber_highlight = SubResource("StyleBoxEmpty_8s0gw")

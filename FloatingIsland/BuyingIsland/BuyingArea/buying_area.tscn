@@ -34,6 +34,7 @@ mouse_filter = 2
 
 [node name="UIBuyingArea" parent="UI" node_paths=PackedStringArray("_round_timer") instance=ExtResource("5_dvq4w")]
 unique_name_in_owner = true
+visible = true
 layout_mode = 1
 _round_timer = NodePath("../../BuyingAreaTimer")
 

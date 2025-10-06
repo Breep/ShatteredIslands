@@ -43,7 +43,7 @@ bg_color = Color(0.193052, 0.460362, 0.691992, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c6x3o"]
 bg_color = Color(0.0784314, 0.239216, 0.376471, 1)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vncfa"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hqjce"]
 texture = ExtResource("10_nmuyo")
 texture_margin_left = 20.0
 texture_margin_top = 20.0
@@ -53,7 +53,7 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
 [sub_resource type="Theme" id="Theme_oylhr"]
-Panel/styles/panel = SubResource("StyleBoxTexture_vncfa")
+Panel/styles/panel = SubResource("StyleBoxTexture_hqjce")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ghk6k"]
 bg_color = Color(0.218577, 0.468984, 0.155291, 0.7)

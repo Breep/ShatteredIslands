@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://q4yxpa41ngwe" path="res://UI/Tool/HexButton/hex_button.gd" id="4_7kd84"]
 [ext_resource type="BitMap" uid="uid://d0lvjglm03lbs" path="res://UI/_Themes/Data/HexagonButton/hexagon_mask_bm.png" id="5_nxora"]
 [ext_resource type="Shader" uid="uid://bv6hpsis17qbh" path="res://VFX/Shaders/2D/2d_highlight.gdshader" id="7_7j7hk"]
-[ext_resource type="Texture2D" uid="uid://b56326clvnq2" path="res://UI/_Themes/Data/HexagonButton/hexagon_border_iron.png" id="8_7j7hk"]
+[ext_resource type="Texture2D" uid="uid://dxel7fvb713jt" path="res://UI/_Themes/Data/HexagonButton/hexagon_border_black.png" id="8_7j7hk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7rmoe"]
 shader = ExtResource("1_oy7e4")

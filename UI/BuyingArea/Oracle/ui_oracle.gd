@@ -87,4 +87,3 @@ func _on_all_levels_container_level_preview_changed(level: int) -> void:
 		5: _level_preview_container.set_skills_info(_local_player.hero.skill2A, _local_player.hero.skill2B)
 		7: _level_preview_container.set_skills_info(_local_player.hero.skill3A, _local_player.hero.skill3B)
 		_: _level_preview_container.set_empty()
-		
