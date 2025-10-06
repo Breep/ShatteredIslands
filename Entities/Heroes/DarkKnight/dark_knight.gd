@@ -56,10 +56,6 @@ const SUPER_STRIKE_ON_ATTACK_SCENE: PackedScene = preload("res://Entities/Heroes
 
 func _ready() -> void:
 	_character_owner.aa_done.connect(_on_character_owner_aa_done)
-	_corruption_activated = true
-	_mana_strike_activated = true
-	_spark_of_light_activated = true
-	_pain_activated = true
 	
 	if _cataclysm_activated:
 		_on_cataclysm_activation()
