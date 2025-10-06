@@ -44,6 +44,11 @@ var is_dead: bool:
 
 @export_group("Stats")
 @export var stats: EntityStats
+@export var base_stats: EntityStats
+@export var stats_manager: EntityStatsManager
+
+@export_group("Registry")
+@export var auto_attack_modifier_registry: AutoAttackModifierRegistry
 
 # ============================== Enums ==============================
 
@@ -61,7 +66,7 @@ static var instance_count: int = 0
 
 # ============================== Node base functions ==============================
 
-func _entity_init() -> void:
+func _init() -> void:
 	id = instance_count
 	instance_count += 1
 

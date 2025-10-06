@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Hero" load_steps=6 format=3 uid="uid://8hfga7o6w8xp"]
+[gd_resource type="Resource" script_class="Hero" load_steps=5 format=3 uid="uid://8hfga7o6w8xp"]
 
 [ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://Entities/Heroes/hero.gd" id="1_a5tni"]
 [ext_resource type="Texture2D" uid="uid://dks3t5mo62ss8" path="res://Data/Heroes/Portraits/Tony Le Bard.webp" id="2_244fa"]
@@ -7,40 +7,12 @@
 [sub_resource type="Resource" id="Resource_b7vlq"]
 metadata/__load_path__ = "res://Entities/Heroes/TonyLeBarde/tony_le_barde_model.tscn"
 
-[sub_resource type="Resource" id="Resource_ix2di"]
-script = ExtResource("3_b7vlq")
-health_max = 1000
-mana_max = 100
-mana_regen = 2.0
-attack_damage = 20
-attack_speed = 0.5
-physical_critical_chance = 15.0
-physical_critical_multiplier = 2.0
-dodge = 0.0
-metadata/_custom_type_script = "uid://2py6kv5aqgem"
-
 [resource]
 script = ExtResource("1_a5tni")
 name = "Tony le barde"
 id = 7
 portrait = ExtResource("2_244fa")
 description = "Cocorico"
-stats = SubResource("Resource_ix2di")
+stats = Dictionary[int, ExtResource("3_b7vlq")]({})
 aa_projectile_type = 7
 model = SubResource("Resource_b7vlq")
-passive_name = ""
-passive_description = ""
-ultimate_name = ""
-ultimate_description = ""
-skill1A_name = ""
-skill1A_description = ""
-skill1B_name = ""
-skill1B_description = ""
-skill2A_name = ""
-skill2A_description = ""
-skill2B_name = ""
-skill2B_description = ""
-skill3A_name = ""
-skill3A_description = ""
-skill3B_name = ""
-skill3B_description = ""

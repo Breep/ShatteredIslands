@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cyp7s6axjgfdt"]
+
+[ext_resource type="Script" uid="uid://b2st8tpvrvllt" path="res://Modules/EntityModules/AutoAttackModule/AutoAttackManager/auto_attack_modifier_registry.gd" id="1_dcgog"]
+
+[node name="AutoAttackModifierRegistry" type="Node"]
+script = ExtResource("1_dcgog")

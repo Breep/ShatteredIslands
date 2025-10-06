@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://mqss4e7gehaq"]
+
+[ext_resource type="Script" uid="uid://cogtbsoguli5l" path="res://Prototyping/UI/UIOracle/prototyping_oracle.gd" id="1_eyyj7"]
+[ext_resource type="PackedScene" uid="uid://dpb7vslj2dbl0" path="res://UI/BuyingArea/Oracle/ui_oracle.tscn" id="2_lf7yw"]
+
+[node name="PrototypingOracle" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_eyyj7")
+_hero_id = 9
+
+[node name="UIOracle" parent="." instance=ExtResource("2_lf7yw")]
+layout_mode = 1

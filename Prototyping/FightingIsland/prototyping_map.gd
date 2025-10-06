@@ -1,6 +1,5 @@
 extends Node3D
 
-
 @export_group("Player Cards")
 @export var _player1_cards: Array[Card]
 @export var _player2_cards: Array[Card]
@@ -23,17 +22,22 @@ func _enter_tree() -> void:
 		_player1_cards, _player2_cards, _player3_cards, _player4_cards, _player5_cards, _player6_cards,_player7_cards, _player8_cards
 	]
 	
-	for i in _characters.size():
+	for i: int in _characters.size():
 		var player: Player = Player.new()
 		player.name = "Player" + str(i)
 		player.id = 1
 		player.character = _characters[i]
 		player.character.player = player
-		for card in _players_cards[i]:
+		var uid: int = 0
+		for card: Card in _players_cards[i]:
+			card.uid = uid
+			uid += 1
 			player.deck.add_card(card)
 
 
 func _ready() -> void:
+	GameManager.init()
+	_floating_island._fighting_area._ui_fighting_area._ui_own_entity_stats.connect_entity_stats(_characters[0])
 	_floating_island.start_fight(_characters, _battle_type)
 	GlobalFightingManager.start(true)
 	_floating_island.set_active()

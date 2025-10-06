@@ -3,25 +3,10 @@ extends Control
 
 # ============================== Local Nodes ==============================
 
-@export_group("Skills")
-@export var _skill1A: UISkillPanel
-@export var _skill1B: UISkillPanel
-@export var _skill2A: UISkillPanel
-@export var _skill2B: UISkillPanel
-@export var _skill3A: UISkillPanel
-@export var _skill3B: UISkillPanel
-
-@export_group("XP")
-@export var _player_level_label: Label
-@export var _xp_bar: ProgressBar
-@export var _xp_label: Label
-
 @onready var _buy_xp_price_label: Label = %BuyXPPriceLabel
-@onready var _flame_texture: ColorRect = %FlameTexture
-
-@onready var _buy_xp_container: Control = %BuyXPContainer
-@onready var _xp_container: Control = %XPContainer
-@onready var _level_max_control: Control = %LevelMaxContainer
+@onready var _buy_xp_button: Button = %BuyXPButton
+@onready var _all_levels_container: AllLevelsContainers = %AllLevelsContainers
+@onready var _level_preview_container: UILevelPreviewContainer = %LevelPreviewContainer
 
 # ============================== Private variables ==============================
 
@@ -38,11 +23,15 @@ func _ready() -> void:
 	
 	_local_player.death.connect(_on_local_player_death)
 	_local_player.xp_changed.connect(_on_local_player_xp_changed)
-	var max_xp: int = GameManager.game_rules.xp_per_levels[_local_player.lvl]
-	_update_xp_bar(_local_player.xp, max_xp)
 	_local_player.lvl_changed.connect(_on_local_player_lvl_changed)
+	_local_player.skill_choice_awaiting.connect(_on_local_player_skill_choice_awaiting)
+	
+	_all_levels_container.level_preview_changed.connect(_on_all_levels_container_level_preview_changed)
 	
 	_buy_xp_price_label.text = str(GameManager.game_rules.buy_xp_price)
+	
+	var max_xp: int = GameManager.game_rules.xp_per_levels[_local_player.lvl]
+	_all_levels_container.update_player_xp(_local_player.lvl, _local_player.xp, max_xp)
 
 # ============================== Public functions ==============================
 
@@ -59,20 +48,6 @@ func set_inactive() -> void:
 
 # ============================== Private functions ==============================
 
-func _update_xp_bar(value: int, max_value: int) -> void:
-	_xp_bar.value = value
-	_xp_bar.max_value = max_value
-	_xp_label.text = str(value) + "/" + str(max_value)
-
-
-func _activate_max_level_ui() -> void:
-	_buy_xp_container.hide()
-	_xp_container.hide()
-	_level_max_control.show()
-
-
-func _update_level_label(level: int) -> void:
-	_player_level_label.text = str(level)
 
 # ============================== Callbacks ==============================
 
@@ -85,17 +60,31 @@ func _on_close_button_pressed() -> void:
 
 
 func _on_local_player_death(_player: Player) -> void:
-	print("Oracle: lock oracle for ", _local_player.name)
 	set_inactive()
 	_is_locked = true
 
 
 func _on_local_player_xp_changed(player_ref: Player, xp: int) -> void:
 	var max_xp: int = GameManager.game_rules.xp_per_levels[player_ref.lvl]
-	_update_xp_bar(xp, max_xp)
+	_all_levels_container.update_player_xp(player_ref.lvl, player_ref.xp, max_xp)
 
 
-func _on_local_player_lvl_changed(_player_ref: Player, level: int) -> void:
-	_update_level_label(level)
-	if level == GameManager.game_rules.xp_max_player_level:
-		_activate_max_level_ui()
+func _on_local_player_lvl_changed(player_ref: Player, level: int) -> void:
+	var max_xp: int = GameManager.game_rules.xp_per_levels[player_ref.lvl]
+	_all_levels_container.update_player_xp(player_ref.lvl, player_ref.xp, max_xp)
+	if level >= GameManager.game_rules.xp_max_player_level:
+		_buy_xp_button.disabled = true
+
+
+func _on_local_player_skill_choice_awaiting(skill_level: int) -> void:
+	_all_levels_container.blink(skill_level)
+
+
+func _on_all_levels_container_level_preview_changed(level: int) -> void:
+	_level_preview_container.set_title("Level " + str(level) + " Skills")
+	match level:
+		3: _level_preview_container.set_skills_info(_local_player.hero.skill1A, _local_player.hero.skill1B)
+		5: _level_preview_container.set_skills_info(_local_player.hero.skill2A, _local_player.hero.skill2B)
+		7: _level_preview_container.set_skills_info(_local_player.hero.skill3A, _local_player.hero.skill3B)
+		_: _level_preview_container.set_empty()
+		

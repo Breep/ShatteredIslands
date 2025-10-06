@@ -25,15 +25,6 @@ var _aa_counter: int
 
 var _on_gatling_gun_timer_start: float = 0
 
-var _gatling_speed_boost: float = 0 # Boost of attack speed from [Gatling Gun]
-var gatling_speed_boost: float:
-	get: return _gatling_speed_boost
-	set(value):
-		if _gatling_speed_boost == value: return
-		_gatling_speed_boost = value
-		_owner.stats.attack_speed_boost = _attack_stats.twin_blade_speed + _gatling_speed_boost
-
-
 # ============================== Public functions ==============================
 
 func _ready() -> void:
@@ -55,10 +46,22 @@ func stop() -> void:
 
 func apply_stats_modifiers() -> void:
 	if _attack_stats.diamond_sword_activated:
-		_owner.stats.attack_damage += _attack_stats.diamond_sword_attack
+		var stat_modifier := StatModifier.new()
+		stat_modifier.id = "Diamond Sword"
+		stat_modifier.stat_type = EntityStats.StatType.AD
+		stat_modifier.calc_type = StatModifier.CalcType.ADD
+		stat_modifier.value = _attack_stats.diamond_sword_attack
+		stat_modifier.tags = [StatModifier.TagType.CARD]
+		_owner.stats_manager.update_modifier(stat_modifier)
 	
 	if _attack_stats.twin_blade_activated:
-		_owner.stats.attack_speed_boost += _attack_stats.twin_blade_speed
+		var stat_modifier := StatModifier.new()
+		stat_modifier.id = "Twin Blade"
+		stat_modifier.stat_type = EntityStats.StatType.AA_SPEED
+		stat_modifier.calc_type = StatModifier.CalcType.MULT
+		stat_modifier.value = _attack_stats.twin_blade_speed / 100.0
+		stat_modifier.tags = [StatModifier.TagType.CARD]
+		_owner.stats_manager.update_modifier(stat_modifier)
 
 
 func attack(target: Character, projectile_spawn: SpawnPoint) -> void:
@@ -105,6 +108,13 @@ func _remove_random_debuff_stack(stack_number: int) -> void:
 
 func _on_gatling_gun_timer_timeout() -> void:
 	var time_elapsed: float = (Time.get_ticks_msec() - _on_gatling_gun_timer_start) / 1000.0
-	var attack_speed_boost = remap(time_elapsed, 0, _attack_stats.gatling_gun_duration, \
+	var attack_speed_boost: float = remap(time_elapsed, 0, _attack_stats.gatling_gun_duration, \
 			_attack_stats.gatling_gun_min, _attack_stats.gatling_gun_max)
-	gatling_speed_boost = clampf(attack_speed_boost, _attack_stats.gatling_gun_min, _attack_stats.gatling_gun_max)
+	var gatling_speed_boost: float = clampf(attack_speed_boost, _attack_stats.gatling_gun_min, _attack_stats.gatling_gun_max)
+	var stat_modifier := StatModifier.new()
+	stat_modifier.id = "Gatling Gun"
+	stat_modifier.stat_type = EntityStats.StatType.AA_SPEED
+	stat_modifier.calc_type = StatModifier.CalcType.MULT
+	stat_modifier.value = gatling_speed_boost / 100.0
+	stat_modifier.tags = [StatModifier.TagType.CARD]
+	_owner.stats_manager.update_modifier(stat_modifier)

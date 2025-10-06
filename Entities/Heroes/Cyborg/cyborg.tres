@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Hero" load_steps=6 format=3 uid="uid://fb28rdceanxm"]
+[gd_resource type="Resource" script_class="Hero" load_steps=5 format=3 uid="uid://fb28rdceanxm"]
 
 [ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://Entities/Heroes/hero.gd" id="1_cktai"]
 [ext_resource type="Texture2D" uid="uid://b0jd3h3b7i1eq" path="res://Data/Heroes/Portraits/Cyborg.webp" id="2_ixmt6"]
@@ -7,41 +7,13 @@
 [sub_resource type="Resource" id="Resource_qgouw"]
 metadata/__load_path__ = "res://Scenes/Heroes/Cyborg/model.tscn"
 
-[sub_resource type="Resource" id="Resource_1ibhk"]
-script = ExtResource("3_4dlis")
-health_max = 1000
-mana_max = 100
-mana_regen = 2.0
-attack_damage = 20
-attack_speed = 0.5
-physical_critical_chance = 15.0
-physical_critical_multiplier = 2.0
-dodge = 0.0
-metadata/_custom_type_script = "uid://2py6kv5aqgem"
-
 [resource]
 script = ExtResource("1_cktai")
 name = "Cyborg"
 id = 2
 portrait = ExtResource("2_ixmt6")
 description = "Bip bap boup"
-stats = SubResource("Resource_1ibhk")
+stats = Dictionary[int, ExtResource("3_4dlis")]({})
 aa_projectile_type = 1
 model = SubResource("Resource_qgouw")
-passive_name = ""
-passive_description = ""
-ultimate_name = ""
-ultimate_description = ""
-skill1A_name = ""
-skill1A_description = ""
-skill1B_name = ""
-skill1B_description = ""
-skill2A_name = ""
-skill2A_description = ""
-skill2B_name = ""
-skill2B_description = ""
-skill3A_name = ""
-skill3A_description = ""
-skill3B_name = ""
-skill3B_description = ""
 metadata/_custom_type_script = "uid://dtcjta70luxvr"

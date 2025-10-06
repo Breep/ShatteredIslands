@@ -20,6 +20,7 @@ const _HEROES_3D: Dictionary[Hero.HeroId, PackedScene] = {
 # ============================== Signal ==============================
 
 signal fight_is_won()
+signal aa_done()
 #signal fight_is_lost()
 
 # ============================== Fighting State ==============================
@@ -65,6 +66,8 @@ var _hero_id := Hero.HeroId.UNDEF
 
 @export_group("Modules")
 @export var _clickable_module: ClickableModule
+@export var _clickable_feedback: ClickableSelectionFeedback
+
 
 # ============================== Public variables ==============================
 
@@ -79,7 +82,7 @@ var _fighting_state: GlobalFightingManager.FightingState = GlobalFightingManager
 
 func apply_cards_upgrade(deck: PlayerDeck) -> void:
 	if not is_node_ready(): return
-	stats.reset_from_hero(_hero_3D.hero)
+	base_stats.reset_from_hero(_hero_3D.hero, player.lvl)
 	for card in deck.get_active_deck():
 		card.player_upgrade.apply(families_stats, card.lvl)
 	_attack_manager.apply_stats_modifiers()
@@ -157,11 +160,6 @@ func take_heal(heal_amount: int, source: Character = null) -> void:
 
 # ============================== Node base functions ==============================
 
-func _init() -> void:
-	if Engine.is_editor_hint(): return
-	_entity_init()
-
-
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
 	target_module = _character_logic.target_module
@@ -169,6 +167,8 @@ func _ready() -> void:
 	if owner_player_id != 0:
 		player = PlayerManager.players[owner_player_id]
 		player.character = self
+	
+	player.lvl_changed.connect(_on_player_lvl_changed)
 	
 	if battle_id == -1:
 		_character_visual.hide()
@@ -181,6 +181,7 @@ func _ready() -> void:
 	GlobalFightingManager.state_changed.connect(_on_global_fighting_manager_state_changed)
 	Events.game_state_changed.connect(_on_events_game_state_changed)
 	Events.player_won_a_fight.connect(_on_events_player_won_a_fight)
+	Events.entity_cliked.connect(_on_events_entity_clicked)
 	
 	_update_hero()
 	if player != null: apply_cards_upgrade(player.deck)
@@ -188,7 +189,16 @@ func _ready() -> void:
 	stats.health_changed.connect(_on_stats_health_changed)
 	stats.mana_changed.connect(_on_stats_mana_changed)
 	
+	var aa_module: AutoAttackModule = _character_logic.modules[Module.ModuleType.AUTOATTACK]
+	aa_module.attack_done.connect(_on_aa_module_attack_done)
+	
 	_defense_manager.reflecto_belt_activated.connect(_on_defense_manager_reflecto_belt_activated)
+	
+	if player == PlayerManager.get_local_player():
+		_clickable_feedback.color = Color.DARK_BLUE
+		_clickable_feedback.set_active()
+	else:
+		_clickable_feedback.color = Color.CRIMSON
 
 # ============================== Private functions ==============================
 
@@ -201,7 +211,6 @@ func _update_hero() -> void:
 	if not Engine.is_editor_hint() and not is_node_ready(): return
 	if _hero_3D != null: _hero_3D.queue_free()
 	_hero_3D = _HEROES_3D[hero_id].instantiate()
-	print("Character change hero to: ", _hero_3D.hero.name)
 	_hero_3D.character_owner = self
 	_collision_shape.shape = _hero_3D.collision_shape.shape.duplicate() # Update Collider
 	var hero_height: float = (_collision_shape.shape as CapsuleShape3D).height
@@ -269,8 +278,17 @@ func _on_events_player_won_a_fight(winner: Player) -> void:
 		fight_is_won.emit()
 
 
+func _on_events_entity_clicked(entity: Entity) -> void:
+	if player == PlayerManager.get_local_player(): return
+	if not entity == self:
+		_clickable_feedback.set_inactive()
+	else:
+		_clickable_feedback.set_active()
 
 
-
+func _on_player_lvl_changed(self_ref: Player, new_lvl: int) -> void:
+	apply_cards_upgrade(player.deck)
 
  
+func _on_aa_module_attack_done() -> void:
+	aa_done.emit()

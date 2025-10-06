@@ -1,21 +1,9 @@
-[gd_resource type="Resource" script_class="Hero" load_steps=6 format=3 uid="uid://ccww2pxgtqvfx"]
+[gd_resource type="Resource" script_class="Hero" load_steps=5 format=3 uid="uid://ccww2pxgtqvfx"]
 
 [ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://Entities/Heroes/hero.gd" id="1_x5ik6"]
 [ext_resource type="Texture2D" uid="uid://d3y6yovf61lio" path="res://Data/Heroes/Portraits/Mr Krumb.webp" id="2_ydxen"]
 [ext_resource type="PackedScene" uid="uid://ls38xt04tcla" path="res://Entities/Heroes/MrKrumb/mr_krumb_model.tscn" id="4_4joxv"]
 [ext_resource type="Script" uid="uid://2py6kv5aqgem" path="res://Entities/Heroes/hero_stats.gd" id="4_wbxcr"]
-
-[sub_resource type="Resource" id="Resource_crv88"]
-script = ExtResource("4_wbxcr")
-health_max = 1000
-mana_max = 100
-mana_regen = 2.0
-attack_damage = 20
-attack_speed = 0.5
-physical_critical_chance = 15.0
-physical_critical_multiplier = 2.0
-dodge = 0.0
-metadata/_custom_type_script = "uid://2py6kv5aqgem"
 
 [resource]
 script = ExtResource("1_x5ik6")
@@ -23,22 +11,6 @@ name = "Mr Krumb"
 id = 5
 portrait = ExtResource("2_ydxen")
 description = "Change personality"
-stats = SubResource("Resource_crv88")
+stats = Dictionary[int, ExtResource("4_wbxcr")]({})
 aa_projectile_type = 5
 model = ExtResource("4_4joxv")
-passive_name = ""
-passive_description = ""
-ultimate_name = ""
-ultimate_description = ""
-skill1A_name = ""
-skill1A_description = ""
-skill1B_name = ""
-skill1B_description = ""
-skill2A_name = ""
-skill2A_description = ""
-skill2B_name = ""
-skill2B_description = ""
-skill3A_name = ""
-skill3A_description = ""
-skill3B_name = ""
-skill3B_description = ""

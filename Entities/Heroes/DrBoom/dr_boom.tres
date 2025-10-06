@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Hero" load_steps=6 format=3 uid="uid://5ww2u1ldoabr"]
+[gd_resource type="Resource" script_class="Hero" load_steps=5 format=3 uid="uid://5ww2u1ldoabr"]
 
 [ext_resource type="Texture2D" uid="uid://d4iqu533wu8hg" path="res://Data/Heroes/Portraits/drboom.png" id="1_2q0cn"]
 [ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://Entities/Heroes/hero.gd" id="1_t0hox"]
@@ -7,40 +7,12 @@
 [sub_resource type="Resource" id="Resource_2q0cn"]
 metadata/__load_path__ = "res://Entities/Heroes/DrBoom/dr_boom_model.tscn"
 
-[sub_resource type="Resource" id="Resource_g0t5h"]
-script = ExtResource("3_2q0cn")
-health_max = 800
-mana_max = 100
-mana_regen = 3.5
-attack_damage = 20
-attack_speed = 0.5
-physical_critical_chance = 15.0
-physical_critical_multiplier = 2.0
-dodge = 10.0
-metadata/_custom_type_script = "uid://2py6kv5aqgem"
-
 [resource]
 script = ExtResource("1_t0hox")
 name = "Dr Boom"
 id = 3
 portrait = ExtResource("1_2q0cn")
 description = "Née dans le légendaire Clan Pisse-Étincelle, Dr Boom — de son vrai nom Boombella Briskfeu — était déjà un problème bien avant de savoir compter jusqu’à trois… ce qui tombait bien, puisque trois secondes, c’est généralement le temps qu’il lui faut pour faire exploser quelque chose. Dans son village gobelin, elle était connue pour avoir transformé la forge en fontaine à soupe, repeint la maison du chef en violet (avec de la poudre à canon), et inventé la première « chaise explosive de bureau »… purement pour voir si ça marcherait.Même chez les gobelins — pourtant pas réputés pour leur calme — elle passait pour une vraie faiseuse de troubles. Mais Dr Boom n’est pas mauvaise : elle aime simplement le chaos joyeux, celui qui fait voler les chapeaux, rouler les tonneaux, et hurler les serveurs de taverne. Pour elle, tout ce qui brille est un trésor, et tout ce qui explose… est une œuvre d’art.Bomby, sa petite bombe fétiche, est presque un animal de compagnie. Elle la passe de main en main « pour rigoler » et adore voir la tête des gens quand la mèche se met à crépiter. Quant à la Giga Bomb, c’est sa grande fierté, une création « inspirée » par un feu d’artifice interdit, un tonneau de rhum, et une demi-heure d’ennui profond.Si elle participe au Tournoi des Îles Brisées, ce n’est pas pour la gloire ni la vengeance… mais parce que c’est le seul endroit où on la laisse poser des explosifs à l’intérieur sans qu’on lui crie dessus. Et puis, entre les bourses d’or des vainqueurs et les éclats de rire (et de bois) après une bonne explosion, elle ne pourrait rêver d’un meilleur terrain de jeu."
-stats = SubResource("Resource_g0t5h")
+stats = Dictionary[int, ExtResource("3_2q0cn")]({})
 aa_projectile_type = 0
 model = SubResource("Resource_2q0cn")
-passive_name = "Bomby"
-passive_description = "Lors de la phase d'achat, lance une bombe (bomby) sur un joueur aléatoire, la mèche se consume en 5s. A la fin de son timer, bomby explose et inflige 2 dégat au joueur. Les dégât de bomby son divisé par 2 sur Dr Boom. Lorsqu'un joueur possédant une bombe achète une carte, bomby passe au voisin, le timer de la bombe est alors reset. A chaque fois que la bombe change de hero, elle a 25% de chance d'exploser en plein vol et d'infliger aucun dégât"
-ultimate_name = "Giga bombe"
-ultimate_description = "Lance une giga bombe proche d'un joueur aléatoire. Inflige 10% vie max à TOUS les joueurs sauf le mad bomber dans la zone d'impact. Rayon de 3m zone d'impact."
-skill1A_name = "Double bomby"
-skill1A_description = "Lance une bomby supplémentaire"
-skill1B_name = "Double Gigabomb"
-skill1B_description = "Lance une Gigabomb supplémentaire"
-skill2A_name = "Bomby Up"
-skill2A_description = "Double les dégât de Bomby"
-skill2B_name = "Gigabomb Up"
-skill2B_description = "Double les dégâts de la Gigabomb"
-skill3A_name = "Stabilized Bomby"
-skill3A_description = "La chance d'exploser prématurément est réduite à 10%"
-skill3B_name = "MEGA GIGA BOMB"
-skill3B_description = "Le rayon d'action de la Gigabomb passe à 6m"

@@ -12,10 +12,10 @@ size = Vector3(2.005, 1.948, 1.997)
 [node name="field" instance=ExtResource("1_obln1")]
 
 [node name="Cube" parent="." index="0"]
+layers = 2
 surface_material_override/0 = SubResource("StandardMaterial3D_pckt3")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Cube" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Cube/StaticBody3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1.00001, 0, 0, 0, 1, -0.00172452, 0, 0.00265503)

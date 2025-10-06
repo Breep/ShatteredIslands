@@ -1,20 +1,8 @@
-[gd_resource type="Resource" script_class="Hero" load_steps=5 format=3 uid="uid://da7twhn1qr7at"]
+[gd_resource type="Resource" script_class="Hero" load_steps=4 format=3 uid="uid://da7twhn1qr7at"]
 
 [ext_resource type="Texture2D" uid="uid://hl4bi74ds0b0" path="res://Data/Misc/logo.png" id="1_3bkug"]
 [ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://Entities/Heroes/hero.gd" id="1_tw5xp"]
 [ext_resource type="Script" uid="uid://2py6kv5aqgem" path="res://Entities/Heroes/hero_stats.gd" id="3_3bkug"]
-
-[sub_resource type="Resource" id="Resource_h080w"]
-script = ExtResource("3_3bkug")
-health_max = 1000
-mana_max = 100
-mana_regen = 2.0
-attack_damage = 20
-attack_speed = 0.5
-physical_critical_chance = 15.0
-physical_critical_multiplier = 2.0
-dodge = 0.0
-metadata/_custom_type_script = "uid://2py6kv5aqgem"
 
 [resource]
 script = ExtResource("1_tw5xp")
@@ -22,22 +10,6 @@ name = "Undefined Hero"
 id = 0
 portrait = ExtResource("1_3bkug")
 description = "Not defined"
-stats = SubResource("Resource_h080w")
+stats = Dictionary[int, ExtResource("3_3bkug")]({})
 aa_projectile_type = 0
-passive_name = ""
-passive_description = ""
-ultimate_name = ""
-ultimate_description = ""
-skill1A_name = ""
-skill1A_description = ""
-skill1B_name = ""
-skill1B_description = ""
-skill2A_name = ""
-skill2A_description = ""
-skill2B_name = ""
-skill2B_description = ""
-skill3A_name = ""
-skill3A_description = ""
-skill3B_name = ""
-skill3B_description = ""
 metadata/_custom_type_script = "uid://dtcjta70luxvr"

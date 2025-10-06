@@ -1,0 +1,380 @@
+[gd_scene load_steps=23 format=3 uid="uid://bu2pbcjf7rk1p"]
+
+[ext_resource type="Shader" uid="uid://b6ifujxjephkb" path="res://VFX/Shaders/2D/2d_basic_effects.gdshader" id="1_fo5lu"]
+[ext_resource type="Script" uid="uid://dbrpunqr31vsr" path="res://UI/BuyingArea/Oracle/LevelPreviewContainer/ui_level_preview_container.gd" id="1_stget"]
+[ext_resource type="Texture2D" uid="uid://cnj88qr8xveyx" path="res://UI/_Themes/Data/HexagonButton/hexagon_mask.png" id="2_o8brh"]
+[ext_resource type="Script" uid="uid://ddn8p84mlkyr0" path="res://UI/Tool/HexGridContainer/hex_grid_container.gd" id="2_ollh3"]
+[ext_resource type="Texture2D" uid="uid://dgch3sc5bbdxb" path="res://Entities/Heroes/DarkKnight/Data/1A-SparkOfLight.jpeg" id="3_stget"]
+[ext_resource type="Shader" uid="uid://bv6hpsis17qbh" path="res://VFX/Shaders/2D/2d_highlight.gdshader" id="4_ollh3"]
+[ext_resource type="Texture2D" uid="uid://b56326clvnq2" path="res://UI/_Themes/Data/HexagonButton/hexagon_wood_border.png" id="5_wkyos"]
+[ext_resource type="Texture2D" uid="uid://dnpy1x6ryvstv" path="res://Entities/Heroes/DarkKnight/Data/1B-Corruption.jpeg" id="6_p3ovg"]
+[ext_resource type="Texture2D" uid="uid://c6kqlmtjb5lil" path="res://UI/_Themes/Data/HexagonButton/hexagon_hover.png" id="6_wkyos"]
+[ext_resource type="Texture2D" uid="uid://xhyj0k42ilb3" path="res://UI/_Themes/Data/panel_tileable_20px_border_only.png" id="7_3gqcl"]
+[ext_resource type="BitMap" uid="uid://d0lvjglm03lbs" path="res://UI/_Themes/Data/HexagonButton/hexagon_mask_bm.png" id="7_ollh3"]
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="9_crc3e"]
+[ext_resource type="Texture2D" uid="uid://cpba081dvrj64" path="res://UI/_Themes/Data/lock.png" id="10_wkyos"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jetfs"]
+shader = ExtResource("1_fo5lu")
+shader_parameter/frequency = 5.0
+shader_parameter/dimLevel = 0.0
+shader_parameter/brightnessRange = 0.2
+shader_parameter/brightnessOffset = 0.1
+shader_parameter/tintColor = Color(1, 1, 1, 1)
+shader_parameter/tintBrightness = 1.0
+shader_parameter/maskImage = ExtResource("2_o8brh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iuo7g"]
+shader = ExtResource("4_ollh3")
+shader_parameter/size_effect = 0.5
+shader_parameter/speed = 1.0
+shader_parameter/highlight_strength = 0.5
+shader_parameter/color_mode_toggle = false
+shader_parameter/is_horizontal = false
+shader_parameter/pause_duration = 0.5
+shader_parameter/effect_enabled = true
+shader_parameter/start_time = 0.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_p3ovg"]
+load_path = "res://.godot/imported/hexagon_mask.png-bf34fecfa4e18d42498042d5bfbd745d.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3gqcl"]
+shader = ExtResource("1_fo5lu")
+shader_parameter/frequency = 2.0
+shader_parameter/dimLevel = 0.0
+shader_parameter/brightnessRange = 0.05
+shader_parameter/brightnessOffset = -0.05
+shader_parameter/tintColor = Color(0, 0, 0, 1)
+shader_parameter/tintBrightness = 0.2
+shader_parameter/maskImage = SubResource("CompressedTexture2D_p3ovg")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p3ovg"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vncfa"]
+texture = ExtResource("7_3gqcl")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="Theme" id="Theme_ua3xp"]
+Panel/styles/panel = SubResource("StyleBoxTexture_vncfa")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x8pci"]
+bg_color = Color(0.218577, 0.468984, 0.155291, 0.7)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ppbxu"]
+bg_color = Color(0.6, 0.6, 0.6, 0.4)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+anti_aliasing = false
+
+[node name="LevelPreviewContainer" type="Control"]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 660.0
+offset_bottom = 297.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+script = ExtResource("1_stget")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="Top" type="Control" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ContainerTitleLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Top"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -49.5
+offset_top = -11.5
+offset_right = 49.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Level 3 Skills"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Bottom" type="Control" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/Bottom"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftHexagoneContainer" type="Control" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HexGridContainer" type="Container" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/LeftHexagoneContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_ollh3")
+columns = 1
+cell_size = Vector2(100, 100)
+metadata/_custom_type_script = "uid://ddn8p84mlkyr0"
+
+[node name="Control" type="Control" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/LeftHexagoneContainer/HexGridContainer"]
+layout_mode = 2
+
+[node name="SkillAPortrait" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/LeftHexagoneContainer/HexGridContainer/Control"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_jetfs")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_stget")
+expand_mode = 1
+
+[node name="SkillAButton" type="TextureButton" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/LeftHexagoneContainer/HexGridContainer/Control/SkillAPortrait"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_hover = ExtResource("6_wkyos")
+texture_click_mask = ExtResource("7_ollh3")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="SkillHexBorder" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/LeftHexagoneContainer/HexGridContainer/Control/SkillAPortrait/SkillAButton"]
+material = SubResource("ShaderMaterial_iuo7g")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_wkyos")
+expand_mode = 1
+
+[node name="Control2" type="Control" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/LeftHexagoneContainer/HexGridContainer"]
+layout_mode = 2
+
+[node name="SkillBPortrait" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/LeftHexagoneContainer/HexGridContainer/Control2"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_3gqcl")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_p3ovg")
+expand_mode = 1
+
+[node name="SkillHexBorder" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/LeftHexagoneContainer/HexGridContainer/Control2/SkillBPortrait"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_wkyos")
+expand_mode = 1
+
+[node name="SkillBButton" type="TextureButton" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/LeftHexagoneContainer/HexGridContainer/Control2/SkillBPortrait"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 0
+
+[node name="DescriptionContainer" type="Control" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="Panel" type="Panel" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="TitleContainer" type="Control" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SkillName" type="Label" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer/Panel/MarginContainer/VBoxContainer/TitleContainer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "<Skill name>"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DescriptionContainer" type="Control" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer/Panel/MarginContainer/VBoxContainer/DescriptionContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer/Panel/MarginContainer/VBoxContainer/DescriptionContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SkillDescriptionLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer/Panel/MarginContainer/VBoxContainer/DescriptionContainer/MarginContainer/ScrollContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 12
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam."
+horizontal_alignment = 3
+vertical_alignment = 3
+autowrap_mode = 2
+
+[node name="PanelBorder" type="Panel" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer/Panel"]
+material = SubResource("ShaderMaterial_p3ovg")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_ua3xp")
+
+[node name="LockSkillIcon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer/Panel"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -30.0
+offset_right = 20.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("10_wkyos")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="LockSkillButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/Bottom/HBoxContainer/DescriptionContainer/Panel/LockSkillIcon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_crc3e")
+theme_type_variation = &"ToggleButton"
+theme_override_styles/pressed = SubResource("StyleBoxFlat_x8pci")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ppbxu")
+toggle_mode = true
+
+[node name="PanelBorder" type="Panel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_ua3xp")
