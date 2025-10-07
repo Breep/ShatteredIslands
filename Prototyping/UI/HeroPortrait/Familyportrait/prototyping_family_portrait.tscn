@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0t0atu7hi4ys"]
+
+[ext_resource type="Script" uid="uid://262wx6bfbig7" path="res://Prototyping/UI/HeroPortrait/Familyportrait/prototyping_family_portrait.gd" id="1_th28h"]
+[ext_resource type="PackedScene" uid="uid://bvqsnkh0s11q2" path="res://UI/InGamePlayerProfile/FamilyPortrait/ui_all_families_portrait.tscn" id="2_od8ek"]
+
+[node name="PrototypingFamilyPortrait" type="Control" node_paths=PackedStringArray("_ui_all_families_portrait", "_hide_show_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_th28h")
+_ui_all_families_portrait = NodePath("UIAllFamiliesPortrait")
+_hide_show_button = NodePath("HideShowButton")
+
+[node name="UIAllFamiliesPortrait" parent="." instance=ExtResource("2_od8ek")]
+offset_left = 210.0
+offset_top = 53.0
+offset_right = 410.0
+offset_bottom = 756.0
+
+[node name="HideShowButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 225.0
+offset_top = 770.0
+offset_right = 418.0
+offset_bottom = 824.0
+text = "Show"
+
+[connection signal="pressed" from="HideShowButton" to="." method="_on_hide_show_button_pressed"]

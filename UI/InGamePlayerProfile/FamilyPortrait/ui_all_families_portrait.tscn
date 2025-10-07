@@ -1,0 +1,180 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvqsnkh0s11q2"]
+
+[ext_resource type="Script" uid="uid://c5un27j5jnca7" path="res://UI/InGamePlayerProfile/FamilyPortrait/ui_all_families_portrait.gd" id="1_77i2i"]
+[ext_resource type="Script" uid="uid://dl8cs3pdc7hvl" path="res://UI/Tool/input_transmiter.gd" id="2_34l55"]
+[ext_resource type="PackedScene" uid="uid://gtilbo2y2g0n" path="res://UI/InGamePlayerProfile/FamilyPortrait/ui_family_portrait.tscn" id="2_c78sh"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_imbpe"]
+viewport_path = NodePath("SubViewport")
+
+[node name="UIAllFamiliesPortrait" type="Control" node_paths=PackedStringArray("_portrait_families")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 250.0
+offset_bottom = 1080.0
+script = ExtResource("1_77i2i")
+_portrait_families = [NodePath("SubViewport/SubAllFamiliesPortrait/MarginContainer/VBoxContainer/1/PortraitFamily"), NodePath("SubViewport/SubAllFamiliesPortrait/MarginContainer/VBoxContainer/2/PortraitFamily"), NodePath("SubViewport/SubAllFamiliesPortrait/MarginContainer/VBoxContainer/3/PortraitFamily"), NodePath("SubViewport/SubAllFamiliesPortrait/MarginContainer/VBoxContainer/4/PortraitFamily"), NodePath("SubViewport/SubAllFamiliesPortrait/MarginContainer/VBoxContainer/5/PortraitFamily"), NodePath("SubViewport/SubAllFamiliesPortrait/MarginContainer/VBoxContainer/6/PortraitFamily"), NodePath("SubViewport/SubAllFamiliesPortrait/MarginContainer/VBoxContainer/7/PortraitFamily"), NodePath("SubViewport/SubAllFamiliesPortrait/MarginContainer/VBoxContainer/8/PortraitFamily")]
+
+[node name="TextureRect" type="TextureRect" parent="." node_paths=PackedStringArray("viewport")]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.184
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_imbpe")
+expand_mode = 3
+stretch_mode = 5
+script = ExtResource("2_34l55")
+viewport = NodePath("../SubViewport")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(300, 1080)
+
+[node name="SubAllFamiliesPortrait" type="Control" parent="SubViewport"]
+custom_minimum_size = Vector2(300, 1080)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 300.0
+offset_bottom = 1080.0
+
+[node name="MarginContainer" type="MarginContainer" parent="SubViewport/SubAllFamiliesPortrait"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -299.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/margin_bottom = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/SubAllFamiliesPortrait/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = -80
+alignment = 1
+
+[node name="1" type="Control" parent="SubViewport/SubAllFamiliesPortrait/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PortraitFamily" parent="SubViewport/SubAllFamiliesPortrait/MarginContainer/VBoxContainer/1" instance=ExtResource("2_c78sh")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 300.0
+offset_bottom = 285.0
+grow_horizontal = 1
+grow_vertical = 1
+size_flags_vertical = 3
+
+[node name="2" type="Control" parent="SubViewport/SubAllFamiliesPortrait/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PortraitFamily" parent="SubViewport/SubAllFamiliesPortrait/MarginContainer/VBoxContainer/2" instance=ExtResource("2_c78sh")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 300.0
+offset_bottom = 285.0
+grow_horizontal = 1
+grow_vertical = 1
+size_flags_vertical = 3
+
+[node name="3" type="Control" parent="SubViewport/SubAllFamiliesPortrait/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PortraitFamily" parent="SubViewport/SubAllFamiliesPortrait/MarginContainer/VBoxContainer/3" instance=ExtResource("2_c78sh")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 300.0
+offset_bottom = 285.0
+grow_horizontal = 1
+grow_vertical = 1
+size_flags_vertical = 3
+
+[node name="4" type="Control" parent="SubViewport/SubAllFamiliesPortrait/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PortraitFamily" parent="SubViewport/SubAllFamiliesPortrait/MarginContainer/VBoxContainer/4" instance=ExtResource("2_c78sh")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 300.0
+offset_bottom = 285.0
+grow_horizontal = 1
+grow_vertical = 1
+size_flags_vertical = 3
+
+[node name="5" type="Control" parent="SubViewport/SubAllFamiliesPortrait/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PortraitFamily" parent="SubViewport/SubAllFamiliesPortrait/MarginContainer/VBoxContainer/5" instance=ExtResource("2_c78sh")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 300.0
+offset_bottom = 285.0
+grow_horizontal = 1
+grow_vertical = 1
+size_flags_vertical = 3
+
+[node name="6" type="Control" parent="SubViewport/SubAllFamiliesPortrait/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PortraitFamily" parent="SubViewport/SubAllFamiliesPortrait/MarginContainer/VBoxContainer/6" instance=ExtResource("2_c78sh")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 300.0
+offset_bottom = 285.0
+grow_horizontal = 1
+grow_vertical = 1
+size_flags_vertical = 3
+
+[node name="7" type="Control" parent="SubViewport/SubAllFamiliesPortrait/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PortraitFamily" parent="SubViewport/SubAllFamiliesPortrait/MarginContainer/VBoxContainer/7" instance=ExtResource("2_c78sh")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 300.0
+offset_bottom = 285.0
+grow_horizontal = 1
+grow_vertical = 1
+size_flags_vertical = 3
+
+[node name="8" type="Control" parent="SubViewport/SubAllFamiliesPortrait/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PortraitFamily" parent="SubViewport/SubAllFamiliesPortrait/MarginContainer/VBoxContainer/8" instance=ExtResource("2_c78sh")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 300.0
+offset_bottom = 285.0
+grow_horizontal = 1
+grow_vertical = 1
+size_flags_vertical = 3
