@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://y5shm75bnv6o"]
+[gd_scene load_steps=17 format=3 uid="uid://y5shm75bnv6o"]
 
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_nf783"]
 [ext_resource type="Script" uid="uid://7uumhon7ijie" path="res://UI/InGamePlayerProfile/ui_in_game_player_profile.gd" id="2_80vn0"]
 [ext_resource type="Texture2D" uid="uid://lo5uflpmr3pl" path="res://UI/InGamePlayerProfile/Data/MainBlock/ui_main_block_background.png" id="2_fytqe"]
+[ext_resource type="Script" uid="uid://dl8cs3pdc7hvl" path="res://UI/Tool/input_transmiter.gd" id="3_1wa8w"]
 [ext_resource type="Texture2D" uid="uid://d2hebqi6qxjsk" path="res://UI/InGamePlayerProfile/Data/MainBlock/ui_main_block_all_border.png" id="3_s2skf"]
 [ext_resource type="Texture2D" uid="uid://ch2gviiwxg8b1" path="res://UI/InGamePlayerProfile/Data/MainBlock/top_bar.png" id="3_t6n12"]
 [ext_resource type="Script" uid="uid://ddn8p84mlkyr0" path="res://UI/Tool/HexGridContainer/hex_grid_container.gd" id="4_6sevo"]
@@ -28,7 +29,7 @@ grow_vertical = 2
 theme = ExtResource("1_nf783")
 script = ExtResource("2_80vn0")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." node_paths=PackedStringArray("viewport")]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -38,6 +39,8 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("ViewportTexture_8k0yf")
 expand_mode = 1
+script = ExtResource("3_1wa8w")
+viewport = NodePath("../SubViewport")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
@@ -49,6 +52,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
+theme = ExtResource("1_nf783")
 
 [node name="Background" type="TextureRect" parent="SubViewport/SubViewPortContainer"]
 layout_mode = 1

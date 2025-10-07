@@ -10,4 +10,5 @@ cards = Array[ExtResource("1_htyro")]([])
 icon = ExtResource("2_l107k")
 family_name = "Shadow"
 family_type = 12
+color = Color(0.0392157, 0.027451, 0.00392157, 1)
 metadata/_custom_type_script = "uid://d3wk3nm7f672j"

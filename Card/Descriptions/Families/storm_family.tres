@@ -10,4 +10,5 @@ cards = Array[ExtResource("1_kkrq8")]([])
 icon = ExtResource("2_xw4lb")
 family_name = "Storm"
 family_type = 4
+color = Color(0.266667, 0.827451, 0.733333, 1)
 metadata/_custom_type_script = "uid://d3wk3nm7f672j"

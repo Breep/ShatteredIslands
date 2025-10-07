@@ -10,4 +10,5 @@ cards = Array[ExtResource("1_t3wnt")]([])
 icon = ExtResource("2_t8wja")
 family_name = "Chicken Lord"
 family_type = 9
+color = Color(0.864837, 0.631169, 0.228011, 1)
 metadata/_custom_type_script = "uid://d3wk3nm7f672j"

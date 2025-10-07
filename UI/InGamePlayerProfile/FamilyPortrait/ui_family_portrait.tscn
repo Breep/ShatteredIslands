@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://gtilbo2y2g0n"]
+[gd_scene load_steps=17 format=3 uid="uid://gtilbo2y2g0n"]
 
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_sd2ix"]
 [ext_resource type="Script" uid="uid://d1qoulvgvrr6f" path="res://UI/InGamePlayerProfile/FamilyPortrait/ui_family_portrait.gd" id="2_2lws7"]
 [ext_resource type="Script" uid="uid://dl8cs3pdc7hvl" path="res://UI/Tool/input_transmiter.gd" id="3_nngot"]
+[ext_resource type="Texture2D" uid="uid://pkbwg372p322" path="res://UI/InGamePlayerProfile/Data/Family/button_background_white.png" id="4_ah4o6"]
 [ext_resource type="Texture2D" uid="uid://2xxeu4qbxjas" path="res://UI/InGamePlayerProfile/Data/Family/button_background_gray.png" id="4_ibr0v"]
 [ext_resource type="BitMap" uid="uid://cc2he2y4wlxup" path="res://UI/InGamePlayerProfile/Data/Family/button_mask.png" id="5_g4mri"]
 [ext_resource type="Texture2D" uid="uid://c8y3xgoy5u28h" path="res://UI/InGamePlayerProfile/Data/Family/button_pressed.png" id="5_ue87n"]
@@ -25,6 +26,7 @@ anchor_bottom = 1.0
 offset_right = 0.575928
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme = ExtResource("1_sd2ix")
 script = ExtResource("2_2lws7")
 
@@ -35,6 +37,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = SubResource("ViewportTexture_sd2ix")
 expand_mode = 1
 stretch_mode = 5
@@ -51,8 +54,22 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 400.0
 offset_bottom = 400.0
+mouse_filter = 2
+
+[node name="Background" type="TextureRect" parent="SubViewport/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_ah4o6")
+expand_mode = 1
 
 [node name="TextureButton" type="TextureButton" parent="SubViewport/Control"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -65,7 +82,8 @@ texture_pressed = ExtResource("5_ue87n")
 texture_hover = ExtResource("6_ah4o6")
 texture_click_mask = ExtResource("5_g4mri")
 
-[node name="Icon" type="TextureRect" parent="SubViewport/Control"]
+[node name="FamilyIcon" type="TextureRect" parent="SubViewport/Control"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 38.0
 offset_top = 209.0

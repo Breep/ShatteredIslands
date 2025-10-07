@@ -27,13 +27,6 @@ func show_families() -> void:
 		tw.parallel().tween_property(portrait_family, "scale", Vector2.ONE, _effect_duration).from(Vector2(0.9, 0.9)).set_delay(i * _step)
 
 func hide_families() -> void:
-	#var step : float = 0.05
-	#var effect_duration: float = 0.4
-	#for i: int in _portrait_families.size():
-		#var portrait_family: UIFamilyPortrait = _portrait_families[_portrait_families.size() - i - 1]
-		#var tw := create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-		#tw.tween_property(portrait_family, "modulate:a", 0.0, _effect_duration).from(1.0).set_delay(i * _step)
-		#tw.parallel().tween_property(portrait_family, "scale", Vector2(0.9, 0.9), _effect_duration).from(Vector2.ONE).set_delay(i * _step)
 	hide()
 	for tween: Tween in _tweens:
 		tween.kill()
@@ -49,22 +42,19 @@ func _ready() -> void:
 		portrait_family.modulate.a = 0
 		portrait_family.scale = Vector2(0.9, 0.9)
 	return
-	_settup_portait_families()
+	
 	if multiplayer.is_server():
 		Events.entity_cliked.connect(_on_events_entity_clicked)
 	else:
 		player = PlayerManager.get_local_player()
 
 
-func _settup_portait_families() -> void:
-	if GameManager.active_families.size() > 8:
+func init_portait_families(families: Array[Family]) -> void:
+	if families.size() > _portrait_families.size():
 		printerr("UIAllFamiliesPortrait: Too many active families at once")
 		return
 	for i in _portrait_families.size():
-		if i < GameManager.active_families.size():
-			_portrait_families[i].family_type = GameManager.active_families[i].family_type
-		else:
-			_portrait_families[i].hide()
+		_portrait_families[i].init(families[i])
 
 
 func _connect_new_player(new_player: Player) -> void:

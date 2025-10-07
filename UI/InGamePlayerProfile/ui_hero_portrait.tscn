@@ -1,10 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://cxlyl8wdndq08"]
+[gd_scene load_steps=12 format=3 uid="uid://cxlyl8wdndq08"]
 
 [ext_resource type="Script" uid="uid://104q00bex1w5" path="res://UI/InGamePlayerProfile/ui_hero_portrait.gd" id="1_7ey5r"]
 [ext_resource type="PackedScene" uid="uid://y5shm75bnv6o" path="res://UI/InGamePlayerProfile/ui_in_game_player_profile.tscn" id="1_32u4t"]
 [ext_resource type="PackedScene" uid="uid://c7jrogdsytaah" path="res://UI/Tool/HexButton/hex_button.tscn" id="2_7ey5r"]
 [ext_resource type="PackedScene" uid="uid://bvqsnkh0s11q2" path="res://UI/InGamePlayerProfile/FamilyPortrait/ui_all_families_portrait.tscn" id="3_7nhgy"]
 [ext_resource type="Script" uid="uid://dl8cs3pdc7hvl" path="res://UI/Tool/input_transmiter.gd" id="5_7nhgy"]
+[ext_resource type="Texture2D" uid="uid://dlq5hwnkfmwqt" path="res://UI/InGamePlayerProfile/Data/MinimizeButton/minimize_button_background_light_gray.png" id="6_5mr82"]
+[ext_resource type="Texture2D" uid="uid://dmvvb8uvkcuur" path="res://UI/InGamePlayerProfile/Data/MinimizeButton/minimize_button_background_dark_gray.png" id="7_hc0nn"]
+[ext_resource type="Texture2D" uid="uid://dc704colnawug" path="res://UI/InGamePlayerProfile/Data/MinimizeButton/minimize_button_background_medium_gray.png" id="8_jstcm"]
+[ext_resource type="BitMap" uid="uid://ds0yfbmrkvhlk" path="res://UI/InGamePlayerProfile/Data/MinimizeButton/minimize_button_mask.png" id="9_r8f4n"]
+[ext_resource type="Texture2D" uid="uid://v6ggbm7n1o8s" path="res://UI/InGamePlayerProfile/Data/MinimizeButton/minimize_button_border_black.png" id="10_0xg2j"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_32u4t"]
 viewport_path = NodePath("SubViewport")
@@ -54,13 +59,6 @@ offset_top = 81.0
 offset_right = 23.0
 offset_bottom = -33.0
 
-[node name="HexPortraitButton" parent="SubViewport/SubHeroPortrait" instance=ExtResource("2_7ey5r")]
-layout_mode = 0
-offset_left = 218.0
-offset_top = 673.0
-offset_right = 610.0
-offset_bottom = 1065.0
-
 [node name="UIAllFamiliesPortrait" parent="SubViewport/SubHeroPortrait" instance=ExtResource("3_7nhgy")]
 unique_name_in_owner = true
 layout_mode = 0
@@ -69,4 +67,38 @@ offset_top = 40.285
 offset_right = 402.745
 offset_bottom = 793.285
 
+[node name="HexPortraitButton" parent="SubViewport/SubHeroPortrait" instance=ExtResource("2_7ey5r")]
+layout_mode = 0
+offset_left = 218.0
+offset_top = 673.0
+offset_right = 610.0
+offset_bottom = 1065.0
+
+[node name="MinimizeButton" type="TextureButton" parent="SubViewport/SubHeroPortrait"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 457.0
+offset_top = 648.0
+offset_right = 613.0
+offset_bottom = 701.0
+rotation = 0.523599
+texture_normal = ExtResource("6_5mr82")
+texture_pressed = ExtResource("7_hc0nn")
+texture_hover = ExtResource("8_jstcm")
+texture_click_mask = ExtResource("9_r8f4n")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="MinimizeButtonBorder" type="TextureRect" parent="SubViewport/SubHeroPortrait/MinimizeButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("10_0xg2j")
+expand_mode = 1
+
 [connection signal="pressed" from="SubViewport/SubHeroPortrait/HexPortraitButton" to="." method="_on_hex_portrait_button_pressed"]
+[connection signal="pressed" from="SubViewport/SubHeroPortrait/MinimizeButton" to="." method="_on_minimize_button_pressed"]

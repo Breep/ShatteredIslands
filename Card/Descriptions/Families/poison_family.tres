@@ -11,4 +11,5 @@ cards = Array[ExtResource("1_aqx3a")]([ExtResource("2_nmeyg")])
 icon = ExtResource("3_p8dmb")
 family_name = "Poison"
 family_type = 7
+color = Color(0.227451, 0.494118, 0.141176, 1)
 metadata/_custom_type_script = "uid://d3wk3nm7f672j"

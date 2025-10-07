@@ -13,7 +13,6 @@ func _ready() -> void:
 
 
 func _on_texture_button_pressed() -> void:
-	_activate_outline_highlight()
 	pressed.emit(self)
 
 

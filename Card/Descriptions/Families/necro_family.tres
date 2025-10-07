@@ -10,4 +10,5 @@ cards = Array[ExtResource("1_c0xxk")]([])
 icon = ExtResource("2_egdka")
 family_name = "Necrosis"
 family_type = 11
+color = Color(0.384314, 0.113725, 0.596078, 1)
 metadata/_custom_type_script = "uid://d3wk3nm7f672j"

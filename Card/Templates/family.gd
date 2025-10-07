@@ -37,6 +37,7 @@ const COLORS = {
 @export var icon: Texture2D
 @export var family_name: String
 @export var family_type: FamilyType
+@export var color: Color
 
 # ============================== Public variables ==============================
 

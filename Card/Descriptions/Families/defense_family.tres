@@ -21,3 +21,4 @@ cards = Array[ExtResource("1_yud7m")]([ExtResource("2_e835t"), ExtResource("3_m1
 icon = ExtResource("13_spcg6")
 family_name = "Defense"
 family_type = 2
+color = Color(0.573467, 0.31114, 0.127107, 1)

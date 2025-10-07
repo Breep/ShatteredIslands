@@ -17,4 +17,5 @@ cards = Array[ExtResource("1_4dvmk")]([ExtResource("2_m74lt"), ExtResource("3_yp
 icon = ExtResource("9_m74lt")
 family_name = "Attack"
 family_type = 1
+color = Color(0.299547, 0.299547, 0.299547, 1)
 metadata/_custom_type_script = "uid://d3wk3nm7f672j"
