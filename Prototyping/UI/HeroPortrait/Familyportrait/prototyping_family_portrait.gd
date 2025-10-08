@@ -8,7 +8,6 @@ extends Control
 var _is_families_portrait_hidden: bool = false
 
 @onready var _rng := RandomNumberGenerator.new()
-
 @onready var _player := Player.new()
 
 func _ready() -> void:
