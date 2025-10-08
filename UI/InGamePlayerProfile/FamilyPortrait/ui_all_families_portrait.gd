@@ -4,6 +4,7 @@ extends Control
 @export_group("Local Nodes")
 @export var _portrait_families: Array[UIFamilyPortrait]
 
+@export_group("Animation Configuration")
 @export var _step : float = 0.04
 @export var _effect_duration: float = 0.4
 
@@ -69,7 +70,7 @@ func _connect_new_player(new_player: Player) -> void:
 func _update_portrait_families() -> void:
 	_reset_portrait_families()
 	var families_count: Dictionary[Family.FamilyType, int] = _player.deck.families_count
-	for family_portrait in _portrait_families:
+	for family_portrait: UIFamilyPortrait in _portrait_families:
 		for family_type in families_count.keys():
 			if family_portrait.family_type == family_type:
 				family_portrait.family_count = families_count[family_type]

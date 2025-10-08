@@ -38,4 +38,13 @@ offset_right = 418.0
 offset_bottom = 824.0
 text = "Show"
 
+[node name="AddRandomCardButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 841.0
+offset_right = 420.0
+offset_bottom = 907.0
+text = "Add Random Card"
+
 [connection signal="pressed" from="HideShowButton" to="." method="_on_hide_show_button_pressed"]
+[connection signal="pressed" from="AddRandomCardButton" to="." method="_on_add_random_card_button_pressed"]
