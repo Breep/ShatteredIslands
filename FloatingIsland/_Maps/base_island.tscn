@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://8877p356mtf8"]
+
+[ext_resource type="PackedScene" uid="uid://7wydq5g685hr" path="res://Data/Blender/Map/Map/Tavern/base island.blend" id="1_slwen"]
+
+[node name="base island" instance=ExtResource("1_slwen")]
