@@ -27,7 +27,7 @@
 [ext_resource type="Material" uid="uid://vyo1aeb3gmxv" path="res://VFX/Shaders/3D/Vfez_lava_balls/spere_out.tres" id="22_u61q3"]
 [ext_resource type="Shader" uid="uid://bi3o8elbtqoni" path="res://addons/simplegrasstextured/shaders/grass.gdshader" id="23_85fmq"]
 [ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://Tool/QuickAnims/anim_rotating_module.tscn" id="23_bsylk"]
-[ext_resource type="Script" uid="uid://cikf26aplx4y4" path="res://VFX/VFEZ-godot-main/vfez_material_3d.gd" id="23_ri6sx"]
+[ext_resource type="Script" uid="uid://dyaf84dw23d0c" path="res://VFX/VFEZ-godot-main/vfez_material_3d.gd" id="23_ri6sx"]
 [ext_resource type="Texture2D" uid="uid://dknfkykqwklf7" path="res://Data/Texture/2D/T_VFX_Noise_465.png" id="24_exnrn"]
 [ext_resource type="Texture2D" uid="uid://r7btgqcboaiu" path="res://Data/Texture/2D/grass_texture_inverted-removebg.png" id="24_j5xrg"]
 [ext_resource type="Script" uid="uid://2juaclm8gc1n" path="res://addons/simplegrasstextured/grass.gd" id="25_ef3vw"]
