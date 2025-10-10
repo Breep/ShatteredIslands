@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dy35nobyyvy4r" path="res://UI/Game/ui_game.gd" id="1_tbfb0"]
 [ext_resource type="PackedScene" uid="uid://da7u7sme0yrjw" path="res://UI/Game/Loose/ui_result.tscn" id="3_tbfb0"]
-[ext_resource type="PackedScene" uid="uid://bvqsnkh0s11q2" path="res://UI/InGamePlayerProfile/FamilyPortrait/ui_all_families_portrait.tscn" id="3_ur737"]
+[ext_resource type="PackedScene" uid="uid://bvqsnkh0s11q2" path="res://UI/HeroPortrait/FamilyPortrait/ui_all_families_portrait.tscn" id="3_ur737"]
 [ext_resource type="PackedScene" uid="uid://be38goiqxp28o" path="res://UI/BuyingArea/PlayerPortrait/ui_all_players_portrait.tscn" id="5_30pdm"]
 
 [node name="UIGame" type="Control" node_paths=PackedStringArray("_ui_result")]

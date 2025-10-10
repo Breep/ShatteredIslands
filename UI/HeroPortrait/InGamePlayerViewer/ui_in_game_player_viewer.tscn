@@ -1,0 +1,507 @@
+[gd_scene load_steps=18 format=3 uid="uid://y5shm75bnv6o"]
+
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_2d2sx"]
+[ext_resource type="Script" uid="uid://7uumhon7ijie" path="res://UI/HeroPortrait/InGamePlayerViewer/ui_in_game_player_viewer.gd" id="2_dnuj1"]
+[ext_resource type="Script" uid="uid://dl8cs3pdc7hvl" path="res://UI/Tool/input_transmiter.gd" id="3_hub8h"]
+[ext_resource type="Texture2D" uid="uid://lo5uflpmr3pl" path="res://UI/HeroPortrait/Data/MainBlock/ui_main_block_background.png" id="4_py1cm"]
+[ext_resource type="Texture2D" uid="uid://ch2gviiwxg8b1" path="res://UI/HeroPortrait/Data/MainBlock/top_bar.png" id="5_oqwl1"]
+[ext_resource type="Texture2D" uid="uid://4i268kdv0k83" path="res://UI/HeroPortrait/Data/MainBlock/bottom_bar.png" id="6_81ohx"]
+[ext_resource type="Texture2D" uid="uid://d2hebqi6qxjsk" path="res://UI/HeroPortrait/Data/MainBlock/ui_main_block_all_border.png" id="7_0adhb"]
+[ext_resource type="Script" uid="uid://ddn8p84mlkyr0" path="res://UI/Tool/HexGridContainer/hex_grid_container.gd" id="8_glwvb"]
+[ext_resource type="PackedScene" uid="uid://c7jrogdsytaah" path="res://UI/Tool/HexButton/hex_button.tscn" id="9_snl4q"]
+[ext_resource type="Texture2D" uid="uid://cia42t0jcdkfg" path="res://Data/Assets/Card/ICONS/HP color.png" id="10_58kwv"]
+[ext_resource type="Texture2D" uid="uid://nxj6jw2phtcp" path="res://Data/Assets/Card/ICONS/MANA color.png" id="11_oql82"]
+[ext_resource type="Texture2D" uid="uid://c3ruvqyjokopc" path="res://Data/Assets/Card/ICONS/dodge.png" id="12_0ye6u"]
+[ext_resource type="Texture2D" uid="uid://bxd1jnaci6olo" path="res://Data/Assets/Card/ICONS/ATTACK color.png" id="13_n7r7v"]
+[ext_resource type="Texture2D" uid="uid://dlac4nmdbamph" path="res://Data/Assets/Card/ICONS/attack_speed.png" id="14_efxm5"]
+[ext_resource type="Texture2D" uid="uid://cawoo43ethscj" path="res://Data/Assets/Card/ICONS/critic.png" id="15_iiudj"]
+[ext_resource type="Texture2D" uid="uid://cijd36pn712uv" path="res://UI/HeroPortrait/Data/MainBlock/ui_main_block_outside_border.png" id="16_ufpdy"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_8k0yf"]
+viewport_path = NodePath("SubViewport")
+
+[node name="InGamePlayerViewer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_2d2sx")
+script = ExtResource("2_dnuj1")
+
+[node name="TextureRect" type="TextureRect" parent="." node_paths=PackedStringArray("viewport")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_8k0yf")
+expand_mode = 1
+script = ExtResource("3_hub8h")
+viewport = NodePath("../SubViewport")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(1920, 1080)
+
+[node name="InGameHeroViewer" type="Control" parent="SubViewport"]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme = ExtResource("1_2d2sx")
+
+[node name="Background" type="TextureRect" parent="SubViewport/InGameHeroViewer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_py1cm")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="SubViewport/InGameHeroViewer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 50.0
+nine_patch_stretch = true
+texture_progress = ExtResource("5_oqwl1")
+
+[node name="TextureProgressBar2" type="TextureProgressBar" parent="SubViewport/InGameHeroViewer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 35.0
+nine_patch_stretch = true
+texture_progress = ExtResource("6_81ohx")
+
+[node name="AllBorders" type="TextureRect" parent="SubViewport/InGameHeroViewer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_0adhb")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="HeroLevelLabel" type="Label" parent="SubViewport/InGameHeroViewer"]
+layout_mode = 0
+offset_left = 278.0
+offset_top = 98.0
+offset_right = 354.0
+offset_bottom = 202.688
+theme = ExtResource("1_2d2sx")
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 75
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerNameLabel" type="Label" parent="SubViewport/InGameHeroViewer"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 638.0
+offset_top = 162.0
+offset_right = 859.0
+offset_bottom = 267.0
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 75
+text = "Breep"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HeroNameLabel" type="Label" parent="SubViewport/InGameHeroViewer"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 532.0
+offset_top = 235.0
+offset_right = 961.0
+offset_bottom = 340.0
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 50
+text = "Dark Knight"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HexGridContainer" type="Container" parent="SubViewport/InGameHeroViewer"]
+layout_mode = 0
+offset_left = 305.0
+offset_top = 326.0
+offset_right = 1116.5
+offset_bottom = 640.25
+script = ExtResource("8_glwvb")
+columns = 4
+cell_size = Vector2(175, 175)
+metadata/_custom_type_script = "uid://ddn8p84mlkyr0"
+
+[node name="HexButton" parent="SubViewport/InGameHeroViewer/HexGridContainer" instance=ExtResource("9_snl4q")]
+layout_mode = 2
+
+[node name="HexButton2" parent="SubViewport/InGameHeroViewer/HexGridContainer" instance=ExtResource("9_snl4q")]
+layout_mode = 2
+
+[node name="HexButton3" parent="SubViewport/InGameHeroViewer/HexGridContainer" instance=ExtResource("9_snl4q")]
+layout_mode = 2
+
+[node name="HexButton4" parent="SubViewport/InGameHeroViewer/HexGridContainer" instance=ExtResource("9_snl4q")]
+layout_mode = 2
+
+[node name="HexButton5" parent="SubViewport/InGameHeroViewer/HexGridContainer" instance=ExtResource("9_snl4q")]
+layout_mode = 2
+
+[node name="HexButton6" parent="SubViewport/InGameHeroViewer/HexGridContainer" instance=ExtResource("9_snl4q")]
+layout_mode = 2
+
+[node name="HexButton7" parent="SubViewport/InGameHeroViewer/HexGridContainer" instance=ExtResource("9_snl4q")]
+layout_mode = 2
+
+[node name="HexButton8" parent="SubViewport/InGameHeroViewer/HexGridContainer" instance=ExtResource("9_snl4q")]
+layout_mode = 2
+
+[node name="StatsContainer" type="Control" parent="SubViewport/InGameHeroViewer"]
+anchors_preset = 0
+offset_left = 560.0
+offset_top = 665.0
+offset_right = 1060.0
+offset_bottom = 815.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="MarginContainer" type="MarginContainer" parent="SubViewport/InGameHeroViewer/StatsContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="StatisticContainer" type="GridContainer" parent="SubViewport/InGameHeroViewer/StatsContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 3
+
+[node name="HealthPanel" type="Control" parent="SubViewport/InGameHeroViewer/StatsContainer/MarginContainer/StatisticContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/InGameHeroViewer/StatsContainer/MarginContainer/StatisticContainer/HealthPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="SubViewport/InGameHeroViewer/StatsContainer/MarginContainer/StatisticContainer/HealthPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="Icon" type="TextureRect" parent="SubViewport/InGameHeroViewer/StatsContainer/MarginContainer/StatisticContainer/HealthPanel/HBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("10_58kwv")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="MaxHealthLabel" type="Label" parent="SubViewport/InGameHeroViewer/StatsContainer/MarginContainer/StatisticContainer/HealthPanel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 30
+text = "1000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ManaPanel" type="Control" parent="SubViewport/InGameHeroViewer/StatsContainer/MarginContainer/StatisticContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/InGameHeroViewer/StatsContainer/MarginContainer/StatisticContainer/ManaPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="SubViewport/InGameHeroViewer/StatsContainer/MarginContainer/StatisticContainer/ManaPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="Icon" type="TextureRect" parent="SubViewport/InGameHeroViewer/StatsContainer/MarginContainer/StatisticContainer/ManaPanel/HBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("11_oql82")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="ManaRegenLabel" type="Label" parent="SubViewport/InGameHeroViewer/StatsContainer/MarginContainer/StatisticContainer/ManaPanel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 30
+text = "3.7"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DodgePanel" type="Control" parent="SubViewport/InGameHeroViewer/StatsContainer/MarginContainer/StatisticContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/InGameHeroViewer/StatsContainer/MarginContainer/StatisticContainer/DodgePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="SubViewport/InGameHeroViewer/StatsContainer/MarginContainer/StatisticContainer/DodgePanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="Icon" type="TextureRect" parent="SubViewport/InGameHeroViewer/StatsContainer/MarginContainer/StatisticContainer/DodgePanel/HBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("12_0ye6u")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="DodgeLabel" type="Label" parent="SubViewport/InGameHeroViewer/StatsContainer/MarginContainer/StatisticContainer/DodgePanel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 30
+text = "20"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AttackPanel" type="Control" parent="SubViewport/InGameHeroViewer/StatsContainer/MarginContainer/StatisticContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/InGameHeroViewer/StatsContainer/MarginContainer/StatisticContainer/AttackPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="SubViewport/InGameHeroViewer/StatsContainer/MarginContainer/StatisticContainer/AttackPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="Icon" type="TextureRect" parent="SubViewport/InGameHeroViewer/StatsContainer/MarginContainer/StatisticContainer/AttackPanel/HBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("13_n7r7v")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="AttackLabel" type="Label" parent="SubViewport/InGameHeroViewer/StatsContainer/MarginContainer/StatisticContainer/AttackPanel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 30
+text = "22"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AttackSpeedPanel" type="Control" parent="SubViewport/InGameHeroViewer/StatsContainer/MarginContainer/StatisticContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/InGameHeroViewer/StatsContainer/MarginContainer/StatisticContainer/AttackSpeedPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="SubViewport/InGameHeroViewer/StatsContainer/MarginContainer/StatisticContainer/AttackSpeedPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="Icon" type="TextureRect" parent="SubViewport/InGameHeroViewer/StatsContainer/MarginContainer/StatisticContainer/AttackSpeedPanel/HBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("14_efxm5")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="AttackSpeedLabel" type="Label" parent="SubViewport/InGameHeroViewer/StatsContainer/MarginContainer/StatisticContainer/AttackSpeedPanel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 30
+text = "0.5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CriticPanel" type="Control" parent="SubViewport/InGameHeroViewer/StatsContainer/MarginContainer/StatisticContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/InGameHeroViewer/StatsContainer/MarginContainer/StatisticContainer/CriticPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="SubViewport/InGameHeroViewer/StatsContainer/MarginContainer/StatisticContainer/CriticPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="Icon" type="TextureRect" parent="SubViewport/InGameHeroViewer/StatsContainer/MarginContainer/StatisticContainer/CriticPanel/HBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("15_iiudj")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="CriticLabel" type="Label" parent="SubViewport/InGameHeroViewer/StatsContainer/MarginContainer/StatisticContainer/CriticPanel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 30
+text = "15"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InGameFamilyViewer" type="Control" parent="SubViewport"]
+visible = false
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme = ExtResource("1_2d2sx")
+
+[node name="Background" type="TextureRect" parent="SubViewport/InGameFamilyViewer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_py1cm")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AllBorders" type="TextureRect" parent="SubViewport/InGameFamilyViewer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("16_ufpdy")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="FamilyNameLabel" type="Label" parent="SubViewport/InGameFamilyViewer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+offset_left = 241.0
+offset_top = 162.0
+offset_right = 1217.0
+offset_bottom = 267.0
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 75
+text = "Poison"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="SubViewport/InGameFamilyViewer"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 260.0
+offset_top = 250.0
+offset_right = 1213.0
+offset_bottom = 385.0
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 25
+text = "5/10/15/30% to inflict 1 more poison stack when 1 poison stack is applied"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Control" type="Control" parent="SubViewport/InGameFamilyViewer"]
+anchors_preset = 0
+offset_left = 422.0
+offset_top = 389.0
+offset_right = 1105.0
+offset_bottom = 823.0
+
+[node name="ColorRect" type="ColorRect" parent="SubViewport/InGameFamilyViewer/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VSlider" type="ScrollContainer" parent="SubViewport/InGameFamilyViewer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="SubViewport/InGameFamilyViewer/Control/VSlider"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 3
