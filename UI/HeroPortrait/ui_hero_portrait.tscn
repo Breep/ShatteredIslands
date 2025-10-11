@@ -69,6 +69,9 @@ offset_bottom = 793.285
 
 [node name="HexPortraitButton" parent="SubViewport/SubHeroPortrait" instance=ExtResource("2_7ey5r")]
 layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
 offset_left = 218.0
 offset_top = 673.0
 offset_right = 610.0
@@ -100,5 +103,4 @@ mouse_filter = 2
 texture = ExtResource("10_0xg2j")
 expand_mode = 1
 
-[connection signal="pressed" from="SubViewport/SubHeroPortrait/HexPortraitButton" to="." method="_on_hex_portrait_button_pressed"]
 [connection signal="pressed" from="SubViewport/SubHeroPortrait/MinimizeButton" to="." method="_on_minimize_button_pressed"]
