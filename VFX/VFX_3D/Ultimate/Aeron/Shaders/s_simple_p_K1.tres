@@ -28,7 +28,7 @@ operator = 2
 
 [resource]
 code = "shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx, unshaded, fog_disabled;
+render_mode blend_mix, depth_draw_opaque, depth_test_default, cull_back, diffuse_lambert, specular_schlick_ggx, unshaded, fog_disabled;
 
 uniform vec2 Speed_Multiplier;
 uniform sampler2D Mask_Texture : source_color, hint_default_black, filter_linear, repeat_disable;

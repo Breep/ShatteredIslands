@@ -207,7 +207,6 @@ stats = Dictionary[int, ExtResource("3_hluaq")]({
 9: SubResource("Resource_f1ben"),
 10: SubResource("Resource_mngad")
 })
-aa_projectile_type = 0
 passive = SubResource("Resource_aqqbn")
 ultimate = SubResource("Resource_pb84q")
 skill1A = SubResource("Resource_0fu0u")

@@ -53,6 +53,15 @@ unique_name_in_owner = true
 script = ExtResource("4_gi2cy")
 _tarven_center = NodePath("../TavernCenter")
 
+[node name="TavernSound" parent="Tavern_Animated/SFX" index="0"]
+visible = false
+
+[node name="Music" parent="Tavern_Animated/SFX" index="1"]
+visible = false
+
+[node name="VillageSound" parent="Tavern_Animated/SFX" index="2"]
+visible = false
+
 [node name="Furnitures" type="Node3D" parent="."]
 
 [node name="CardShop" type="StaticBody3D" parent="Furnitures"]

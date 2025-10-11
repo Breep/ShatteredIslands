@@ -13,7 +13,6 @@ name = "Cyborg"
 id = 2
 portrait = ExtResource("2_ixmt6")
 description = "Bip bap boup"
-stats = Dictionary[int, ExtResource("3_4dlis")]({})
 aa_projectile_type = 1
 model = SubResource("Resource_qgouw")
 metadata/_custom_type_script = "uid://dtcjta70luxvr"
