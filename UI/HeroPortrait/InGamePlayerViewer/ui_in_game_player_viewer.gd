@@ -9,6 +9,8 @@ extends Control
 # ============================== Local Nodes ==============================
 
 @onready var _texture_rect: TextureRect = %TextureRect
+@onready var _hero_viewer: UIInGameHeroViewer = %InGameHeroViewer
+@onready var _family_viewer: UIInGameFamilyViewer = %InGameFamilyViewer
 
 # ============================== Node base function ==============================
 
@@ -17,6 +19,8 @@ func _ready() -> void:
 	hide()
 	_texture_rect.modulate.a = 0.0
 	_texture_rect.scale = Vector2(0.9, 0.9)
+	_hero_viewer.show()
+	_family_viewer.hide()
 
 # ============================== Public function ==============================
 
@@ -31,3 +35,7 @@ func hide_panel() -> void:
 	_texture_rect.modulate.a = 0.0
 	_texture_rect.scale = Vector2(0.9, 0.9)
 	hide()
+
+
+func update_content(player: Player) -> void:
+	_hero_viewer.update_content(player, player.character.stats)
