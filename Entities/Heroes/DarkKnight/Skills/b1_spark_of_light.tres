@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://bulji3na650gb"]
+
+[ext_resource type="Texture2D" uid="uid://dgch3sc5bbdxb" path="res://Entities/Heroes/DarkKnight/Data/b1_spark_of_light.jpeg" id="1_dl385"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://Entities/Heroes/skill.gd" id="2_yputa"]
+
+[resource]
+script = ExtResource("2_yputa")
+name = "Spark Of Light"
+description = "Aeron Vantaal se soigne pour 100% des dégâts de la super frappe."
+portrait = ExtResource("1_dl385")
+metadata/_custom_type_script = "uid://dfby4merlgkep"

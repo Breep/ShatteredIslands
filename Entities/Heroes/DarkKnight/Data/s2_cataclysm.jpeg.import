@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cljgrwgbsbfa2"
-path="res://.godot/imported/3B-MegaStrike.jpeg-d49d318c7092528aa79d449f94d01248.ctex"
+uid="uid://c1wcq2u3lsw8m"
+path="res://.godot/imported/s2_cataclysm.jpeg-f504d55d2ab4d265de02bdc2124d8637.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entities/Heroes/DarkKnight/Data/3B-MegaStrike.jpeg"
-dest_files=["res://.godot/imported/3B-MegaStrike.jpeg-d49d318c7092528aa79d449f94d01248.ctex"]
+source_file="res://Entities/Heroes/DarkKnight/Data/s2_cataclysm.jpeg"
+dest_files=["res://.godot/imported/s2_cataclysm.jpeg-f504d55d2ab4d265de02bdc2124d8637.ctex"]
 
 [params]
 

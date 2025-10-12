@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cnm0o7n7qoq65"
-path="res://.godot/imported/3A-ManaStrike.jpeg-36a1cd98722782d2ce0813fc2ceaec56.ctex"
+uid="uid://bhkhq1mu0dbha"
+path="res://.godot/imported/ui_hexagon_white.png-e324c7697a7f365386ec1e6854bd9661.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entities/Heroes/DarkKnight/Data/3A-ManaStrike.jpeg"
-dest_files=["res://.godot/imported/3A-ManaStrike.jpeg-36a1cd98722782d2ce0813fc2ceaec56.ctex"]
+source_file="res://UI/_Themes/Data/HexagonButton/ui_hexagon_white.png"
+dest_files=["res://.godot/imported/ui_hexagon_white.png-e324c7697a7f365386ec1e6854bd9661.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://g4isbydrxh2l"
-path="res://.godot/imported/2A-Pain.png-263d6e3ad4750f49154a9593109ba2f8.ctex"
+uid="uid://dgch3sc5bbdxb"
+path="res://.godot/imported/b1_spark_of_light.jpeg-19b5983c47863c33075b12913529dcda.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entities/Heroes/DarkKnight/Data/2A-Pain.png"
-dest_files=["res://.godot/imported/2A-Pain.png-263d6e3ad4750f49154a9593109ba2f8.ctex"]
+source_file="res://Entities/Heroes/DarkKnight/Data/b1_spark_of_light.jpeg"
+dest_files=["res://.godot/imported/b1_spark_of_light.jpeg-19b5983c47863c33075b12913529dcda.ctex"]
 
 [params]
 

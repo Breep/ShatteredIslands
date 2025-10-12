@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1wcq2u3lsw8m"
-path="res://.godot/imported/2B-Cataclysm.jpeg-20e77b453158c9607e736f30122373fe.ctex"
+uid="uid://cdpiqotug84sg"
+path="res://.godot/imported/screenshot_background.jpeg-2fffb2b57a6a6a643949498451e3a63d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entities/Heroes/DarkKnight/Data/2B-Cataclysm.jpeg"
-dest_files=["res://.godot/imported/2B-Cataclysm.jpeg-20e77b453158c9607e736f30122373fe.ctex"]
+source_file="res://Prototyping/UI/UIHeroPortrait/screenshot_background.jpeg"
+dest_files=["res://.godot/imported/screenshot_background.jpeg-2fffb2b57a6a6a643949498451e3a63d.ctex"]
 
 [params]
 

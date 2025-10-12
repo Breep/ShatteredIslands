@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dnpy1x6ryvstv"
-path="res://.godot/imported/1B-Corruption.jpeg-869a5f5bf9746e63a0511a68fd3d8e24.ctex"
+uid="uid://cljgrwgbsbfa2"
+path="res://.godot/imported/g2_mega_strike.jpeg-2a98f858754797efa9514446f52bd4f4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entities/Heroes/DarkKnight/Data/1B-Corruption.jpeg"
-dest_files=["res://.godot/imported/1B-Corruption.jpeg-869a5f5bf9746e63a0511a68fd3d8e24.ctex"]
+source_file="res://Entities/Heroes/DarkKnight/Data/g2_mega_strike.jpeg"
+dest_files=["res://.godot/imported/g2_mega_strike.jpeg-2a98f858754797efa9514446f52bd4f4.ctex"]
 
 [params]
 

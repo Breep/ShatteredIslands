@@ -9,6 +9,7 @@ extends TextureButton
 # ============================== Local Nodes ==============================
 
 @onready var _border: TextureRect = %Border
+@onready var _background: TextureRect = %Background
 
 # ============================== Node base functions ==============================
 
@@ -21,6 +22,14 @@ func _ready() -> void:
 func set_highlight(is_highlight_activated: bool = false) -> void:
 	if is_highlight_activated:
 		_activate_outline_highlight()
+
+
+func set_texture(background_texture: CompressedTexture2D) -> void:
+	_background.texture = background_texture
+
+
+func set_outline_color(color: Color) -> void:
+	_border.modulate = color
 
 # ============================== Configuration ==============================
 

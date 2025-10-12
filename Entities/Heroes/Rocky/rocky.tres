@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="Hero" load_steps=14 format=3 uid="uid://cgaiavne5bbb2"]
+[gd_resource type="Resource" script_class="Hero" load_steps=15 format=3 uid="uid://cgaiavne5bbb2"]
 
 [ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://Entities/Heroes/hero.gd" id="1_671ot"]
 [ext_resource type="Texture2D" uid="uid://bdd6axcmvrqr3" path="res://Data/Heroes/Portraits/Rocky.png" id="1_odka4"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://Entities/Heroes/skill.gd" id="3_s5rmn"]
 [ext_resource type="Script" uid="uid://2py6kv5aqgem" path="res://Entities/Heroes/hero_stats.gd" id="3_v3xqc"]
 
 [sub_resource type="Resource" id="Resource_v3xqc"]
@@ -143,4 +144,5 @@ stats = Dictionary[int, ExtResource("3_v3xqc")]({
 10: SubResource("Resource_2e5ha")
 })
 aa_projectile_type = 0
+skills = Dictionary[int, ExtResource("3_s5rmn")]({})
 metadata/_custom_type_script = "uid://dtcjta70luxvr"

@@ -1,66 +1,17 @@
-[gd_resource type="Resource" script_class="Hero" load_steps=31 format=3 uid="uid://by3bwbvf4ekcd"]
+[gd_resource type="Resource" script_class="Hero" load_steps=23 format=3 uid="uid://by3bwbvf4ekcd"]
 
 [ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://Entities/Heroes/hero.gd" id="1_2ttjg"]
 [ext_resource type="Texture2D" uid="uid://difeq0pm3hgjs" path="res://Data/Heroes/Portraits/darkknight2.png" id="1_hluaq"]
-[ext_resource type="Texture2D" uid="uid://bs4ekryxkfoof" path="res://Entities/Heroes/DarkKnight/Data/passive.png" id="1_mngad"]
 [ext_resource type="Script" uid="uid://2py6kv5aqgem" path="res://Entities/Heroes/hero_stats.gd" id="3_hluaq"]
-[ext_resource type="Texture2D" uid="uid://dgch3sc5bbdxb" path="res://Entities/Heroes/DarkKnight/Data/1A-SparkOfLight.jpeg" id="3_ylsnw"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://Entities/Heroes/skill.gd" id="4_f1ben"]
-[ext_resource type="Texture2D" uid="uid://dnpy1x6ryvstv" path="res://Entities/Heroes/DarkKnight/Data/1B-Corruption.jpeg" id="5_mngad"]
-[ext_resource type="Texture2D" uid="uid://g4isbydrxh2l" path="res://Entities/Heroes/DarkKnight/Data/2A-Pain.png" id="6_ylsnw"]
-[ext_resource type="Texture2D" uid="uid://c1wcq2u3lsw8m" path="res://Entities/Heroes/DarkKnight/Data/2B-Cataclysm.jpeg" id="7_aqqbn"]
-[ext_resource type="Texture2D" uid="uid://cnm0o7n7qoq65" path="res://Entities/Heroes/DarkKnight/Data/3A-ManaStrike.jpeg" id="8_pb84q"]
-[ext_resource type="Texture2D" uid="uid://cljgrwgbsbfa2" path="res://Entities/Heroes/DarkKnight/Data/3B-MegaStrike.jpeg" id="9_2bb52"]
-[ext_resource type="Texture2D" uid="uid://ccfhgxkn06s0e" path="res://Entities/Heroes/DarkKnight/Data/ultimate.png" id="12_m1h0u"]
-
-[sub_resource type="Resource" id="Resource_aqqbn"]
-script = ExtResource("4_f1ben")
-name = "Super Strike"
-description = "Chaque fois que la tourelle Aeron Vantaal attaque, elle gagne une charge. Effet des charges : + (1*lvl) aa damage À 5 charges, Aeron Vantaal déclenche une Super Frappe, infligeant 150% de ses dégâts réinitialisant les charges."
-portrait = ExtResource("1_mngad")
-metadata/_custom_type_script = "uid://dfby4merlgkep"
-
-[sub_resource type="Resource" id="Resource_0fu0u"]
-script = ExtResource("4_f1ben")
-name = "Spark of light"
-description = "Aeron Vantaal se soigne pour 100% des dégâts de la super frappe."
-portrait = ExtResource("3_ylsnw")
-metadata/_custom_type_script = "uid://dfby4merlgkep"
-
-[sub_resource type="Resource" id="Resource_y7u6o"]
-script = ExtResource("4_f1ben")
-name = "Corruption"
-description = "Aeron Vantaal gagne définitivement 1 AD pour chaque super frappe effectué."
-portrait = ExtResource("5_mngad")
-metadata/_custom_type_script = "uid://dfby4merlgkep"
-
-[sub_resource type="Resource" id="Resource_4hyio"]
-script = ExtResource("4_f1ben")
-name = "Pain"
-description = "La tempête noire se nourrit de la souffrance de ses victimes. Elle inflige 1% damage supplémentaire pour chaque (1x) stack."
-portrait = ExtResource("6_ylsnw")
-metadata/_custom_type_script = "uid://dfby4merlgkep"
-
-[sub_resource type="Resource" id="Resource_7xt14"]
-script = ExtResource("4_f1ben")
-name = "Cataclysm"
-description = "Lance 2 tempête noire. Le coup en mana de l’ultimate augmente à 150."
-portrait = ExtResource("7_aqqbn")
-metadata/_custom_type_script = "uid://dfby4merlgkep"
-
-[sub_resource type="Resource" id="Resource_roewo"]
-script = ExtResource("4_f1ben")
-name = "Mana strike"
-description = "Chaque superfrappe charge l'ultimat. Regen du mana égal à 5% des dégâts infligés."
-portrait = ExtResource("8_pb84q")
-metadata/_custom_type_script = "uid://dfby4merlgkep"
-
-[sub_resource type="Resource" id="Resource_ec2v6"]
-script = ExtResource("4_f1ben")
-name = "Mega strike"
-description = "Aeron Vantaal peut maintenant cumuler 10 charges pour effectuer 500% des dégâts."
-portrait = ExtResource("9_2bb52")
-metadata/_custom_type_script = "uid://dfby4merlgkep"
+[ext_resource type="Resource" uid="uid://bulji3na650gb" path="res://Entities/Heroes/DarkKnight/Skills/b1_spark_of_light.tres" id="4_mngad"]
+[ext_resource type="Resource" uid="uid://bts22443uo7i3" path="res://Entities/Heroes/DarkKnight/Skills/b2_corruption.tres" id="5_m1h0u"]
+[ext_resource type="Resource" uid="uid://tws8irvjtsk8" path="res://Entities/Heroes/DarkKnight/Skills/s1_pain.tres" id="6_aqqbn"]
+[ext_resource type="Resource" uid="uid://budjocpe7prm0" path="res://Entities/Heroes/DarkKnight/Skills/s2_cataclysm.tres" id="7_pb84q"]
+[ext_resource type="Resource" uid="uid://b0xsyfnk0uofn" path="res://Entities/Heroes/DarkKnight/Skills/g1_mana_strike.tres" id="8_2bb52"]
+[ext_resource type="Resource" uid="uid://vkyl862t2h5d" path="res://Entities/Heroes/DarkKnight/Skills/g2_mega_strike.tres" id="9_0fu0u"]
+[ext_resource type="Resource" uid="uid://dwgxfevvu8dti" path="res://Entities/Heroes/DarkKnight/Skills/p_super_strike.tres" id="10_y7u6o"]
+[ext_resource type="Resource" uid="uid://dbsddpfwj0xba" path="res://Entities/Heroes/DarkKnight/Skills/u_dark_storm.tres" id="11_4hyio"]
 
 [sub_resource type="Resource" id="Resource_hluaq"]
 script = ExtResource("3_hluaq")
@@ -182,13 +133,6 @@ physical_critical_multiplier = 2.0
 dodge = 12.0
 metadata/_custom_type_script = "uid://2py6kv5aqgem"
 
-[sub_resource type="Resource" id="Resource_pb84q"]
-script = ExtResource("4_f1ben")
-name = "Black Storm"
-description = "Aeron Vantaal crée une tempête du néant sur l'ennemi ciblé, La tempête fait des dommage égal à 50% de son AD toutes les 0,2sec pendant 1sec"
-portrait = ExtResource("12_m1h0u")
-metadata/_custom_type_script = "uid://dfby4merlgkep"
-
 [resource]
 script = ExtResource("1_2ttjg")
 name = "Dark Knight"
@@ -208,12 +152,14 @@ stats = Dictionary[int, ExtResource("3_hluaq")]({
 10: SubResource("Resource_mngad")
 })
 aa_projectile_type = 0
-passive = SubResource("Resource_aqqbn")
-ultimate = SubResource("Resource_pb84q")
-skill1A = SubResource("Resource_0fu0u")
-skill1B = SubResource("Resource_y7u6o")
-skill2A = SubResource("Resource_4hyio")
-skill2B = SubResource("Resource_7xt14")
-skill3A = SubResource("Resource_roewo")
-skill3B = SubResource("Resource_ec2v6")
+skills = Dictionary[int, ExtResource("4_f1ben")]({
+0: ExtResource("4_mngad"),
+1: ExtResource("5_m1h0u"),
+2: ExtResource("6_aqqbn"),
+3: ExtResource("7_pb84q"),
+4: ExtResource("8_2bb52"),
+5: ExtResource("9_0fu0u"),
+6: ExtResource("10_y7u6o"),
+7: ExtResource("11_4hyio")
+})
 metadata/_custom_type_script = "uid://dtcjta70luxvr"

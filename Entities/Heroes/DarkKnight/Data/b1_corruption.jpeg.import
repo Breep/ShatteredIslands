@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgch3sc5bbdxb"
-path="res://.godot/imported/1A-SparkOfLight.jpeg-bd6a67ec4ccfc3fafe5652b1fe3e1e11.ctex"
+uid="uid://dnpy1x6ryvstv"
+path="res://.godot/imported/b1_corruption.jpeg-8748bda2341af62b209fd88f6508374d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entities/Heroes/DarkKnight/Data/1A-SparkOfLight.jpeg"
-dest_files=["res://.godot/imported/1A-SparkOfLight.jpeg-bd6a67ec4ccfc3fafe5652b1fe3e1e11.ctex"]
+source_file="res://Entities/Heroes/DarkKnight/Data/b1_corruption.jpeg"
+dest_files=["res://.godot/imported/b1_corruption.jpeg-8748bda2341af62b209fd88f6508374d.ctex"]
 
 [params]
 

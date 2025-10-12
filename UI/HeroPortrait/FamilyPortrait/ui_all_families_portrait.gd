@@ -108,7 +108,7 @@ func _on_portrait_family_selected(portrait_family: UIFamilyPortrait) -> void:
 
 
 func _on_portrait_family_unselected(portrait_family: UIFamilyPortrait) -> void:
-	print("UNSELECTED - ", portrait_family._family.family_name)
+	pass
 
 
 

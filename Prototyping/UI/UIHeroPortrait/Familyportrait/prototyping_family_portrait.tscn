@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://d0t0atu7hi4ys"]
 
-[ext_resource type="Script" uid="uid://262wx6bfbig7" path="res://Prototyping/UI/HeroPortrait/Familyportrait/prototyping_family_portrait.gd" id="1_th28h"]
+[ext_resource type="Script" uid="uid://262wx6bfbig7" path="res://Prototyping/UI/UIHeroPortrait/Familyportrait/prototyping_family_portrait.gd" id="1_th28h"]
 [ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://Card/Templates/family.gd" id="2_ju7j7"]
 [ext_resource type="PackedScene" uid="uid://bvqsnkh0s11q2" path="res://UI/HeroPortrait/FamilyPortrait/ui_all_families_portrait.tscn" id="2_od8ek"]
 [ext_resource type="Resource" uid="uid://cbmvayb0bb72n" path="res://Card/Descriptions/Families/attack_family.tres" id="3_h2kn7"]

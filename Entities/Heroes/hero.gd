@@ -27,14 +27,6 @@ enum HeroId {
 @export var aa_projectile_type: Projectile.ProjectileType
 @export var model: PackedScene
 
-@export var passive: Skill
-@export var ultimate: Skill
-
-@export var skill1A: Skill
-@export var skill1B: Skill
-@export var skill2A: Skill
-@export var skill2B: Skill
-@export var skill3A: Skill
-@export var skill3B: Skill
+@export var skills: Dictionary[Skill.SkillID, Skill]
 
 # ============================== Public functions ==============================

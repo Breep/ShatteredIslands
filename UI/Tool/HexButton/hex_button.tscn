@@ -6,9 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://c6kqlmtjb5lil" path="res://UI/_Themes/Data/HexagonButton/hexagon_hover.png" id="4_0bsuy"]
 [ext_resource type="Script" uid="uid://q4yxpa41ngwe" path="res://UI/Tool/HexButton/hex_button.gd" id="4_7kd84"]
 [ext_resource type="Texture2D" uid="uid://c765h1dqan50x" path="res://UI/_Themes/Data/HexagonButton/hexagon_pressed.png" id="5_0bsuy"]
-[ext_resource type="Texture2D" uid="uid://dnpy1x6ryvstv" path="res://Entities/Heroes/DarkKnight/Data/1B-Corruption.jpeg" id="6_7j7hk"]
+[ext_resource type="Texture2D" uid="uid://dnpy1x6ryvstv" path="res://Entities/Heroes/DarkKnight/Data/b1_corruption.jpeg" id="6_7j7hk"]
 [ext_resource type="Shader" uid="uid://bv6hpsis17qbh" path="res://VFX/Shaders/2D/2d_highlight.gdshader" id="7_7j7hk"]
-[ext_resource type="Texture2D" uid="uid://dxel7fvb713jt" path="res://UI/_Themes/Data/HexagonButton/hexagon_border_black.png" id="8_7j7hk"]
+[ext_resource type="Texture2D" uid="uid://bhkhq1mu0dbha" path="res://UI/_Themes/Data/HexagonButton/ui_hexagon_white.png" id="9_0bsuy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7rmoe"]
 
@@ -41,7 +41,6 @@ anchor_right = 0.067
 anchor_bottom = 0.119
 offset_right = -0.639999
 offset_bottom = -0.520004
-toggle_mode = true
 texture_pressed = ExtResource("5_0bsuy")
 texture_hover = ExtResource("4_0bsuy")
 texture_disabled = ExtResource("3_0bsuy")
@@ -50,6 +49,7 @@ stretch_mode = 0
 script = ExtResource("4_7kd84")
 
 [node name="Background" type="TextureRect" parent="."]
+unique_name_in_owner = true
 show_behind_parent = true
 material = SubResource("ShaderMaterial_nxora")
 layout_mode = 1
@@ -64,6 +64,7 @@ expand_mode = 1
 
 [node name="Border" type="TextureRect" parent="."]
 unique_name_in_owner = true
+modulate = Color(0, 0, 0, 1)
 material = SubResource("ShaderMaterial_0bsuy")
 layout_mode = 1
 anchors_preset = 15
@@ -72,5 +73,5 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("8_7j7hk")
+texture = ExtResource("9_0bsuy")
 expand_mode = 1

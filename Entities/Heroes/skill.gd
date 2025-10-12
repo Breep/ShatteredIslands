@@ -12,6 +12,17 @@ enum SkillID {
 	ULTIMATE
 }
 
+const COLORS: Dictionary [SkillID, Color] = {
+	SkillID.BRONZE1: Color.SADDLE_BROWN,
+	SkillID.BRONZE2: Color.SADDLE_BROWN,
+	SkillID.SILVER1: Color.SILVER,
+	SkillID.SILVER2: Color.SILVER,
+	SkillID.GOLD1: Color.GOLD,
+	SkillID.GOLD2: Color.GOLD,
+	SkillID.PASSIVE: Color.BLACK,
+	SkillID.ULTIMATE: Color.BLACK
+}
+
 @export var name: String
 @export var description: String
 @export var portrait: CompressedTexture2D
