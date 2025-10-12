@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="Hero" load_steps=4 format=3 uid="uid://da7twhn1qr7at"]
+[gd_resource type="Resource" script_class="Hero" load_steps=5 format=3 uid="uid://da7twhn1qr7at"]
 
 [ext_resource type="Texture2D" uid="uid://hl4bi74ds0b0" path="res://Data/Misc/logo.png" id="1_3bkug"]
 [ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://Entities/Heroes/hero.gd" id="1_tw5xp"]
 [ext_resource type="Script" uid="uid://2py6kv5aqgem" path="res://Entities/Heroes/hero_stats.gd" id="3_3bkug"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://Entities/Heroes/skill.gd" id="3_h080w"]
 
 [resource]
 script = ExtResource("1_tw5xp")
@@ -12,4 +13,5 @@ portrait = ExtResource("1_3bkug")
 description = "Not defined"
 stats = Dictionary[int, ExtResource("3_3bkug")]({})
 aa_projectile_type = 0
+skills = Dictionary[int, ExtResource("3_h080w")]({})
 metadata/_custom_type_script = "uid://dtcjta70luxvr"
