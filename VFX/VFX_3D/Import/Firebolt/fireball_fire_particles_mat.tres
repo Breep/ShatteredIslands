@@ -8,8 +8,8 @@ noise_type = 2
 fractal_octaves = 2
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_bsxdd"]
-seamless = true
 noise = SubResource("FastNoiseLite_xkkqs")
+seamless = true
 
 [resource]
 render_priority = 0

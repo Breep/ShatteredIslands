@@ -26,21 +26,21 @@ shader_type spatial;
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_goiqf"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_l4boc"]
-seamless = true
 noise = SubResource("FastNoiseLite_goiqf")
+seamless = true
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_fm7x5"]
 noise_type = 3
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gjelf"]
-seamless = true
 noise = SubResource("FastNoiseLite_fm7x5")
+seamless = true
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_7epju"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_21bhv"]
-seamless = true
 noise = SubResource("FastNoiseLite_7epju")
+seamless = true
 
 [resource]
 render_priority = 10

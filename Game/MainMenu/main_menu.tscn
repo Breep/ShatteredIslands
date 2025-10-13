@@ -1,12 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://gbmiuhc63ji7"]
+[gd_scene load_steps=5 format=3 uid="uid://gbmiuhc63ji7"]
 
 [ext_resource type="Script" uid="uid://cmjqaxabnsph4" path="res://Game/MainMenu/main_menu.gd" id="1_ytlrh"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="2_2lp7i"]
 [ext_resource type="PackedScene" uid="uid://bn7sfcotfnn7b" path="res://UI/Menu/MainMenu/ui_main_menu.tscn" id="2_8c8b4"]
 [ext_resource type="PackedScene" uid="uid://ca3wssxlwj4qk" path="res://FloatingIsland/_Maps/tavern_animated.tscn" id="7_5g5lb"]
-[ext_resource type="AudioStream" uid="uid://bntxtpta0uv6e" path="res://Data/Sounds/medieval_village_atmosphere-79282.mp3" id="12_0ewnc"]
-[ext_resource type="AudioStream" uid="uid://buiooajmh742s" path="res://Data/Sounds/tavern_ambience_inside_laughter-73008.mp3" id="13_h47y2"]
-[ext_resource type="AudioStream" uid="uid://cm1soq1vpv5y4" path="res://Data/Musics/the_tavern.mp3" id="14_aouoj"]
 
 [node name="MainMenu" type="Node3D"]
 script = ExtResource("1_ytlrh")
@@ -21,22 +18,5 @@ _hover_power = 0.05
 _hover_period = 10.0
 
 [node name="UIMainMenu" parent="." instance=ExtResource("2_8c8b4")]
-
-[node name="VillageSound" type="AudioStreamPlayer3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.087, 0, -26.2006)
-stream = ExtResource("12_0ewnc")
-autoplay = true
-
-[node name="TavernSound" type="AudioStreamPlayer3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.90907, 0, 1.76646)
-stream = ExtResource("13_h47y2")
-volume_db = -14.171
-autoplay = true
-
-[node name="Music" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("14_aouoj")
-attenuation_model = 3
-volume_db = -9.029
-autoplay = true
 
 [node name="Tavern_Animated" parent="." instance=ExtResource("7_5g5lb")]

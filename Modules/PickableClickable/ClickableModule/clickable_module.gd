@@ -83,7 +83,7 @@ func _recursive_find_all_meshs(node: Node3D) -> void:
 	for child in node.get_children(true):
 		if child is Node3D:
 			_recursive_find_all_meshs(child)
-	if node is MeshInstance3D:
+	if node is MeshInstance3D: 
 		_meshs.append(node)
 
 # ============================== Callbacks ==============================

@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://ca8mcplp2va4s"]
 
 [ext_resource type="Script" uid="uid://cvy50on4evfts" path="res://FloatingIsland/BuyingIsland/BuyingArea/buying_area.gd" id="1_ed4aq"]
-[ext_resource type="PackedScene" uid="uid://3m2v1arprnf7" path="res://FloatingIsland/_Maps/tavern.tscn" id="3_g5vai"]
+[ext_resource type="PackedScene" uid="uid://ca3wssxlwj4qk" path="res://FloatingIsland/_Maps/tavern_animated.tscn" id="4_4b3p2"]
 [ext_resource type="Script" uid="uid://bg27we47t814j" path="res://FloatingIsland/BuyingIsland/BuyingArea/Tavern/tavern.gd" id="4_gi2cy"]
 [ext_resource type="PackedScene" uid="uid://bg5efhnq0erdv" path="res://Modules/PickableClickable/ClickableModule/clickable_module.tscn" id="5_4b3p2"]
 [ext_resource type="PackedScene" uid="uid://dr8xv1vshmvyq" path="res://FloatingIsland/BuyingIsland/BuyingArea/Tavern/TavernCenter/tavern_center.tscn" id="5_4lvlh"]
@@ -40,7 +40,7 @@ _round_timer = NodePath("../../BuyingAreaTimer")
 
 [node name="BuyingAreaTimer" type="Timer" parent="."]
 unique_name_in_owner = true
-wait_time = 30.0
+wait_time = 10.0
 one_shot = true
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
@@ -49,15 +49,19 @@ replication_config = SubResource("SceneReplicationConfig_jhmrm")
 [node name="TavernCenter" parent="." instance=ExtResource("5_4lvlh")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0670199, 0.55223, 0.0844293)
 
-[node name="Tavern" parent="." node_paths=PackedStringArray("_tarven_center") instance=ExtResource("3_g5vai")]
+[node name="Tavern_Animated" parent="." node_paths=PackedStringArray("_tarven_center") instance=ExtResource("4_4b3p2")]
 unique_name_in_owner = true
 script = ExtResource("4_gi2cy")
 _tarven_center = NodePath("../TavernCenter")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.753539, 2.27672, 11.1196)
-omni_range = 69.138
-omni_attenuation = 0.684
+[node name="TavernSound" parent="Tavern_Animated/SFX" index="0"]
+visible = false
+
+[node name="Music" parent="Tavern_Animated/SFX" index="1"]
+visible = false
+
+[node name="VillageSound" parent="Tavern_Animated/SFX" index="2"]
+visible = false
 
 [node name="Furnitures" type="Node3D" parent="."]
 
@@ -72,7 +76,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19556, 1.00049, -0.242096)
 shape = SubResource("BoxShape3D_rgybp")
 
 [node name="ClickableModule" parent="Furnitures/CardShop" node_paths=PackedStringArray("_nodes_where_to_find_meshs", "_owner") instance=ExtResource("5_4b3p2")]
-_nodes_where_to_find_meshs = [NodePath("../../../Tavern/Bar main")]
+_nodes_where_to_find_meshs = [NodePath("../../../Tavern_Animated/tavern/Bar main")]
 _owner = NodePath("..")
 _scale_div_grow = 0.01
 
@@ -87,7 +91,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0448303, 1.17047, 0.244019
 shape = SubResource("BoxShape3D_4b3p2")
 
 [node name="ClickableModule" parent="Furnitures/Oracle" node_paths=PackedStringArray("_nodes_where_to_find_meshs", "_owner") instance=ExtResource("5_4b3p2")]
-_nodes_where_to_find_meshs = [NodePath("../../../Tavern/Voyante")]
+_nodes_where_to_find_meshs = [NodePath("../../../Tavern_Animated/tavern/Voyante")]
 _owner = NodePath("..")
 _scale_div_grow = 0.01
 
@@ -102,7 +106,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.321869, 1.55145, -0.151093
 shape = SubResource("BoxShape3D_q21af")
 
 [node name="ClickableModule" parent="Furnitures/StatisticsBoard" node_paths=PackedStringArray("_nodes_where_to_find_meshs", "_owner") instance=ExtResource("5_4b3p2")]
-_nodes_where_to_find_meshs = [NodePath("../../../Tavern/XP")]
+_nodes_where_to_find_meshs = [NodePath("../../../Tavern_Animated/tavern/XP")]
 _owner = NodePath("..")
 _scale_div_grow = 0.01
 
@@ -113,4 +117,5 @@ transform = Transform3D(0.000895275, 0, -0.569999, 0, 0.57, 0, 0.569999, 0, 0.00
 
 [connection signal="timeout" from="BuyingAreaTimer" to="." method="_on_timer_timeout"]
 
-[editable path="Tavern"]
+[editable path="Tavern_Animated"]
+[editable path="Tavern_Animated/tavern"]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://dfvy6jfn4qd4k"]
+[gd_scene load_steps=18 format=3 uid="uid://dfvy6jfn4qd4k"]
 
 [ext_resource type="Script" uid="uid://b2ikvkm7dfsto" path="res://SpellsAndProjectiles/Spells/Meteor/meteor.gd" id="1_kjd23"]
 [ext_resource type="PackedScene" uid="uid://cfmaiom8xymvq" path="res://VFX/VFX_3D/Trail/3d_meteor_visual.tscn" id="2_bmmic"]
 [ext_resource type="Shader" uid="uid://dqfpk08tliddq" path="res://VFX/VFX_3D/Meteor/meteor.gdshader" id="3_dk7r1"]
+[ext_resource type="AudioStream" uid="uid://cxj6q36uewa0e" path="res://Data/Sounds/SFX/Firefly_audio_Meteor_explosion_with_a_small_sound_before_it_cras_variation2.wav" id="4_fvlyx"]
 
 [sub_resource type="Gradient" id="Gradient_x7ff7"]
 offsets = PackedFloat32Array(0, 0.4, 1)
@@ -210,6 +211,10 @@ libraries = {
 &"": SubResource("AnimationLibrary_fgblb")
 }
 autoplay = "Area"
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_fvlyx")
+attenuation_model = 3
 
 [connection signal="body_entered" from="ImpactEffectArea" to="." method="_on_impact_effect_area_body_entered"]
 [connection signal="body_exited" from="ImpactEffectArea" to="." method="_on_impact_effect_area_body_exited"]

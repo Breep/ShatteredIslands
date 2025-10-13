@@ -18,6 +18,8 @@ var _damage_per_stacks: int
 @onready var _meteor_visual: Node3D = %MeteorVisual
 @onready var anim_player = %AnimationPlayer
 @onready var hit_marker_scene = preload("res://VFX/VFX_3D/Explosion/Scenes/VFX_Explosion_B.tscn")
+@onready var audio_player = $AudioStreamPlayer3D
+
 
 #target, source, ignite_stacks, damage_per_stacks, radius
 func init(target: Entity, ignite_stacks: int, damage_per_stacks: int, source: Entity = null) -> void:
@@ -31,6 +33,10 @@ func _ready() -> void:
 	if _target == null:
 		printerr("Meteor: No target assigned to [", get_path(), "]")
 		queue_free()
+		return
+	
+	var sound_play_time = max(0.0, _deploy_time - 0.2)
+	get_tree().create_timer(sound_play_time).timeout.connect(play_impact_sound)
 	
 	global_position = _target.global_position
 	
@@ -90,3 +96,15 @@ func _on_deploy_timer_timeout() -> void:
 			else:
 				entity.take_condition_stacks(_ignite_stacks, Utils.StackType.IGNITE)
 				entity.take_damage(entity.stats.ignite_stacks * _damage_per_stacks, Utils.DamageType.MAGICAL)
+
+
+func play_impact_sound():
+	
+	# On détache le nœud audio de son parent actuel (la scène Meteor)
+	# Il ne sera donc plus détruit quand on appellera queue_free() sur le météore.
+	remove_child(audio_player)
+	get_tree().get_root().add_child(audio_player)
+	audio_player.volume_db = randf_range(-9, -5)
+	audio_player.pitch_scale = randf_range(0.6, 1.4)
+	audio_player.play()
+	audio_player.finished.connect(audio_player.queue_free)

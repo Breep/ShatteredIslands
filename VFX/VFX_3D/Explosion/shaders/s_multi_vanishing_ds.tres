@@ -72,7 +72,7 @@ operator = 2
 
 [resource]
 code = "shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_lambert, specular_schlick_ggx, fog_disabled;
+render_mode blend_mix, depth_draw_opaque, depth_test_default, cull_disabled, diffuse_lambert, specular_schlick_ggx, fog_disabled;
 
 uniform sampler2D Linear_Color_1D : source_color, filter_linear;
 uniform sampler2D curve_frg_16 : repeat_disable;

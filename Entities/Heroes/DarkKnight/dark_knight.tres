@@ -151,15 +151,12 @@ stats = Dictionary[int, ExtResource("3_hluaq")]({
 9: SubResource("Resource_f1ben"),
 10: SubResource("Resource_mngad")
 })
-aa_projectile_type = 0
-skills = Dictionary[int, ExtResource("4_f1ben")]({
-0: ExtResource("4_mngad"),
-1: ExtResource("5_m1h0u"),
-2: ExtResource("6_aqqbn"),
-3: ExtResource("7_pb84q"),
-4: ExtResource("8_2bb52"),
-5: ExtResource("9_0fu0u"),
-6: ExtResource("10_y7u6o"),
-7: ExtResource("11_4hyio")
-})
+passive = SubResource("Resource_aqqbn")
+ultimate = SubResource("Resource_pb84q")
+skill1A = SubResource("Resource_0fu0u")
+skill1B = SubResource("Resource_y7u6o")
+skill2A = SubResource("Resource_4hyio")
+skill2B = SubResource("Resource_7xt14")
+skill3A = SubResource("Resource_roewo")
+skill3B = SubResource("Resource_ec2v6")
 metadata/_custom_type_script = "uid://dtcjta70luxvr"
