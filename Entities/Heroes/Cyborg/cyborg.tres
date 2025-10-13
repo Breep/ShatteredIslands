@@ -16,5 +16,4 @@ portrait = ExtResource("2_ixmt6")
 description = "Bip bap boup"
 aa_projectile_type = 1
 model = SubResource("Resource_qgouw")
-skills = Dictionary[int, ExtResource("3_1ibhk")]({})
 metadata/_custom_type_script = "uid://dtcjta70luxvr"

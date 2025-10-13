@@ -16,4 +16,3 @@ portrait = ExtResource("2_244fa")
 description = "Cocorico"
 aa_projectile_type = 7
 model = SubResource("Resource_b7vlq")
-skills = Dictionary[int, ExtResource("3_ix2di")]({})
