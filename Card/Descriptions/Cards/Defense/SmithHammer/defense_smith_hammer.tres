@@ -15,7 +15,5 @@ script = ExtResource("1_s4jgh")
 name = "Smith Hammer"
 picture = ExtResource("1_0kpsx")
 family = 2
-rarity = 0
 player_upgrade = SubResource("Resource_0kpsx")
-lvl = 1
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

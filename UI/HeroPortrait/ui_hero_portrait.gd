@@ -22,6 +22,8 @@ var _panel_minimized: bool = false
 
 func _ready() -> void:
 	_minimize_button.hide()
+	_ui_all_families_portrait.init_portait_families(GameManager.active_families)
+	_ui_all_families_portrait.family_selected.connect(_on_ui_all_families_portrait_family_selected)
 
 # ============================== Public functions ==============================
 
@@ -29,6 +31,7 @@ func update_content(player: Player) -> void:
 	var hero: Hero = player.hero
 	_hex_portrait_button.set_texture(hero.portrait)
 	_ui_in_game_player_viewer.update_content(player)
+	_ui_all_families_portrait.update_content(player)
 
 # ============================== Private functions ==============================
 
@@ -84,3 +87,7 @@ func _on_minimize_button_pressed() -> void:
 		_maximize_profile()
 	else:
 		_minimize_profile()
+
+
+func _on_ui_all_families_portrait_family_selected(family_type: Family.FamilyType) -> void:
+	print("Family selected ! ", family_type)

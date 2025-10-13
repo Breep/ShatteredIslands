@@ -15,7 +15,6 @@ script = ExtResource("1_fnffb")
 name = "Titan Axe"
 picture = ExtResource("1_j4nvj")
 family = 1
-rarity = 0
 player_upgrade = SubResource("Resource_4lasq")
 lvl = 5
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

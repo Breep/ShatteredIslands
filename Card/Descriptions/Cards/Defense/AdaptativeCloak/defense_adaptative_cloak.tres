@@ -14,7 +14,5 @@ script = ExtResource("1_4phqe")
 name = "Adaptative Cloak"
 picture = ExtResource("1_r4fnh")
 family = 2
-rarity = 0
 player_upgrade = SubResource("Resource_v5u1o")
-lvl = 1
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

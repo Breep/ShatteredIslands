@@ -2,22 +2,24 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dj1pt6pgnxbil"
-path="res://.godot/imported/ui_main_block_inside_top_border.png-2fb1200ab21c06aefa609ce22da35bec.ctex"
+uid="uid://b5xk3ijtiwqh3"
+path="res://.godot/imported/ui_main_block_match_history_tick.png-cffceb6e6be3bbaf9463a91c805bd0ec.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/HeroPortrait/Data/MainBlock/ui_main_block_inside_top_border.png"
-dest_files=["res://.godot/imported/ui_main_block_inside_top_border.png-2fb1200ab21c06aefa609ce22da35bec.ctex"]
+source_file="res://UI/HeroPortrait/Data/MainBlock/ui_main_block_match_history_tick.png"
+dest_files=["res://.godot/imported/ui_main_block_match_history_tick.png-cffceb6e6be3bbaf9463a91c805bd0ec.ctex"]
 
 [params]
 
 compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
+compress/uastc_level=0
+compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
@@ -25,6 +27,10 @@ mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
+process/channel_remap/red=0
+process/channel_remap/green=1
+process/channel_remap/blue=2
+process/channel_remap/alpha=3
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false

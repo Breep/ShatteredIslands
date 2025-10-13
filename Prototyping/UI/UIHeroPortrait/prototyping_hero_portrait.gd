@@ -1,13 +1,16 @@
 extends Control
 
 @export var _ui_hero_portrait: UIHeroPortrait
-@export var _ui_all_families_portrait: UIAllFamiliesPortrait
 
 @export var _families: Array[Family]
 @export var _hero: Hero
 
 @onready var _rng := RandomNumberGenerator.new()
 @onready var _player := Player.new()
+
+func _enter_tree() -> void:
+	GameManager.init()
+
 
 func _ready() -> void:
 	_rng.randomize()
@@ -27,7 +30,7 @@ func _ready() -> void:
 
 
 func _on_add_random_card_button_pressed() -> void:
-	var randi: int = _rng.randi_range(0, _families.size() - 1)
-	var rand_family: Family = _families[randi]
+	var rand_family_id: int = _rng.randi_range(0, _families.size() - 1)
+	var rand_family: Family = _families[rand_family_id]
 	_player.deck._families_count[rand_family.family_type] += 1
 	_player.deck.has_changed.emit()

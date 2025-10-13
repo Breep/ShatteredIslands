@@ -36,7 +36,15 @@ var _FAMILIES_REF: Dictionary[Family.FamilyType, Family] = {
 	Family.FamilyType.ATTACK: load("res://Card/Descriptions/Families/attack_family.tres") as Family,
 	Family.FamilyType.DEFENSE: load("res://Card/Descriptions/Families/defense_family.tres") as Family,
 	Family.FamilyType.FIRE: load("res://Card/Descriptions/Families/fire_family.tres") as Family,
-	Family.FamilyType.POISON: load("res://Card/Descriptions/Families/poison_family.tres") as Family
+	Family.FamilyType.POISON: load("res://Card/Descriptions/Families/poison_family.tres") as Family,
+	Family.FamilyType.STORM: load("res://Card/Descriptions/Families/storm_family.tres") as Family,
+	Family.FamilyType.SERENITY: load("res://Card/Descriptions/Families/serenity_family.tres") as Family,
+	Family.FamilyType.LIFE: load("res://Card/Descriptions/Families/life_family.tres") as Family,
+	Family.FamilyType.MANA: load("res://Card/Descriptions/Families/mana_family.tres") as Family,
+	Family.FamilyType.CHICKEN: load("res://Card/Descriptions/Families/chickenlord_family.tres") as Family,
+	Family.FamilyType.LIGHTNING: load("res://Card/Descriptions/Families/lightning_family.tres") as Family,
+	Family.FamilyType.NECROSIS: load("res://Card/Descriptions/Families/necro_family.tres") as Family,
+	Family.FamilyType.SHADOW: load("res://Card/Descriptions/Families/shadow_family.tres") as Family,
 }
 
 #[Server only]
@@ -63,6 +71,10 @@ func init() -> void:
 	_active_families.append(_FAMILIES_REF[Family.FamilyType.POISON])
 	_active_families.append(_FAMILIES_REF[Family.FamilyType.FIRE])
 	_active_families.append(_FAMILIES_REF[Family.FamilyType.ATTACK])
+	_active_families.append(_FAMILIES_REF[Family.FamilyType.SERENITY])
+	_active_families.append(_FAMILIES_REF[Family.FamilyType.CHICKEN])
+	_active_families.append(_FAMILIES_REF[Family.FamilyType.MANA])
+	_active_families.append(_FAMILIES_REF[Family.FamilyType.LIFE])
 
 
 #TODO Move into round manager ?
@@ -93,6 +105,10 @@ func get_current_game_heroes() -> Array[Hero]:
 		random_heroes.append(Shared.HEROES[hero_ref])
 	
 	return random_heroes
+
+
+func get_active_families() -> Array[Family]:
+	return _active_families
 
 
 @rpc("any_peer", "call_local")

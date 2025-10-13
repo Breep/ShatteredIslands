@@ -15,7 +15,6 @@ extends Control
 # ============================== Node base function ==============================
 
 func _ready() -> void:
-	return
 	hide()
 	_texture_rect.modulate.a = 0.0
 	_texture_rect.scale = Vector2(0.9, 0.9)

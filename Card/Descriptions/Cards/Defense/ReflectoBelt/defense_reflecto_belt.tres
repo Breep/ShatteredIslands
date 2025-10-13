@@ -15,7 +15,6 @@ script = ExtResource("1_tuqjb")
 name = "Reflecto Belt"
 picture = ExtResource("1_rtxvx")
 family = 2
-rarity = 0
 player_upgrade = SubResource("Resource_rtxvx")
 lvl = 5
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

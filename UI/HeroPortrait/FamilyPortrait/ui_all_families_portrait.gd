@@ -19,11 +19,6 @@ signal family_selected(family_type: Family.FamilyType)
 # ============================== Public variables ==============================
 
 var _player: Player
-var player: Player:
-	get: return _player
-	set(value):
-		if value == _player: return
-		_connect_new_player(value)
 
 # ============================== Private variables ==============================
 
@@ -70,6 +65,10 @@ func init_portait_families(families: Array[Family]) -> void:
 	for i: int in _family_portraits.size():
 		_family_portraits[i].init(families[i])
 
+
+func update_content(player: Player) -> void:
+	_connect_new_player(player)
+
 # ============================== Private functions ==============================
 
 func _connect_new_player(new_player: Player) -> void:
@@ -107,7 +106,7 @@ func _on_portrait_family_selected(portrait_family: UIFamilyPortrait) -> void:
 			pf.unselect()
 
 
-func _on_portrait_family_unselected(portrait_family: UIFamilyPortrait) -> void:
+func _on_portrait_family_unselected(_portrait_family: UIFamilyPortrait) -> void:
 	pass
 
 

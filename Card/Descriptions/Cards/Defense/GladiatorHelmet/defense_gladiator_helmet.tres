@@ -15,7 +15,6 @@ script = ExtResource("1_5mdi6")
 name = "Gladiator Helmet"
 picture = ExtResource("1_2346c")
 family = 2
-rarity = 0
 player_upgrade = SubResource("Resource_2346c")
 lvl = 5
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

@@ -15,7 +15,6 @@ script = ExtResource("3_5ffm5")
 name = "Periodic Ignite"
 picture = ExtResource("1_rf2x4")
 family = 3
-rarity = 0
 player_upgrade = SubResource("Resource_yobeh")
 lvl = 2
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"
