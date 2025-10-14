@@ -16,7 +16,6 @@ func get_card(uid: int) -> Card:
 
 
 func add_card(card_to_add: Card) -> void:
-	print("DEBUG - Adding card ", card_to_add.name)
 	if card_to_add == null:
 		printerr("Deck: Can't add a null card inside the card_pile")
 	else:

@@ -2,6 +2,7 @@ class_name PlayerDeck
 extends Deck
 
 var _active_cards: Array[Card]
+var _cards_dictionary: Dictionary[Family.FamilyType, Array] # FamilyType:Array[Cards]
 
 signal has_changed()
 
@@ -9,6 +10,13 @@ signal has_changed()
 
 func get_active_deck() -> Array[Card]:
 	return _active_cards
+
+
+func get_cards_by_type(family_type: Family.FamilyType) -> Array[Card]:
+	if _cards_dictionary.has(family_type):
+		return _cards_dictionary[family_type]
+	else:
+		return []
 
 
 func get_max_lvl_cards() -> Array[Card]:
@@ -52,6 +60,10 @@ func _add_or_improve_card_to_active_cards(card_to_add: Card) -> void:
 				printerr("PlayerDeck: Trying to upgrade an already maximized card - ", card_to_add.name)
 			return
 	_active_cards.append(card_to_add)
+	if _cards_dictionary.has(card_to_add.family):
+		_cards_dictionary[card_to_add.family].append(card_to_add)
+	else:
+		_cards_dictionary[card_to_add.family] = [card_to_add]
 
 
 func _get_lvl_max_of_card_rarity(card_rarity: Card.Rarity) -> int:
