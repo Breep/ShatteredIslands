@@ -1,7 +1,6 @@
-[gd_resource type="Theme" load_steps=17 format=3 uid="uid://deijluejrkd7e"]
+[gd_resource type="Theme" load_steps=16 format=3 uid="uid://deijluejrkd7e"]
 
 [ext_resource type="FontFile" uid="uid://dbqejd0leblna" path="res://Data/font/Nunito-Bold.ttf" id="1_itn17"]
-[ext_resource type="Texture2D" uid="uid://bgvd0xleomdh0" path="res://UI/_Themes/Data/tileable_dark_wood.png" id="2_c6cb3"]
 [ext_resource type="FontFile" uid="uid://b3ceq6nwnmlhq" path="res://Data/font/LuckiestGuy-Regular.ttf" id="2_m6wv4"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1psgx"]
@@ -18,10 +17,13 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bck8t"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fmn5p"]
-texture = ExtResource("2_c6cb3")
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c6cb3"]
+bg_color = Color(0.6, 0.6, 0.6, 0.47058824)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nkx1b"]
 
@@ -49,7 +51,7 @@ Label/colors/font_color = Color(1, 1, 1, 1)
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
 Label/constants/outline_size = 5
 Label/fonts/font = ExtResource("2_m6wv4")
-Panel/styles/panel = SubResource("StyleBoxTexture_fmn5p")
+Panel/styles/panel = SubResource("StyleBoxFlat_c6cb3")
 VScrollBar/styles/grabber = SubResource("StyleBoxEmpty_nkx1b")
 VScrollBar/styles/grabber_highlight = SubResource("StyleBoxEmpty_8s0gw")
 VScrollBar/styles/grabber_pressed = SubResource("StyleBoxEmpty_yrare")

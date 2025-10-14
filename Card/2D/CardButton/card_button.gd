@@ -43,7 +43,7 @@ func update_visual(new_card: Card) -> void:
 	if new_card == null:
 		printerr("Can't update button visual: card is null")
 		return
-	_card_layout.update_card_layout(new_card)
+	_card_layout.update_content(new_card)
 
 
 # ============================== Node base functions ==============================

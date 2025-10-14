@@ -1,0 +1,82 @@
+[gd_scene load_steps=6 format=3 uid="uid://dj7bvdysxgxe6"]
+
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_ekq81"]
+[ext_resource type="PackedScene" uid="uid://c2psjj8133op3" path="res://Card/2D/CardButton/card_button.tscn" id="1_mu264"]
+[ext_resource type="Script" uid="uid://b05cjd0m0y2ss" path="res://Card/2D/FamilyViewer/ui_family_viewer.gd" id="2_f23eh"]
+[ext_resource type="Script" uid="uid://dl8cs3pdc7hvl" path="res://UI/Tool/input_transmiter.gd" id="3_x2cxy"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_f23eh"]
+viewport_path = NodePath("SubViewport")
+
+[node name="UiFamilyViewer" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1910.0
+offset_bottom = 1770.0
+theme = ExtResource("1_ekq81")
+script = ExtResource("2_f23eh")
+
+[node name="TextureRect" type="TextureRect" parent="." node_paths=PackedStringArray("viewport")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_f23eh")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("3_x2cxy")
+viewport = NodePath("../SubViewport")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(1910, 1770)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="SubViewport"]
+custom_minimum_size = Vector2(1910, 1770)
+offset_right = 1910.0
+offset_bottom = 1770.0
+theme = ExtResource("1_ekq81")
+
+[node name="GridContainer" type="GridContainer" parent="SubViewport/ScrollContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1910, 4440)
+layout_mode = 2
+columns = 3
+
+[node name="CardButton" parent="SubViewport/ScrollContainer/GridContainer" instance=ExtResource("1_mu264")]
+custom_minimum_size = Vector2(630, 880)
+layout_mode = 2
+
+[node name="CardButton2" parent="SubViewport/ScrollContainer/GridContainer" instance=ExtResource("1_mu264")]
+custom_minimum_size = Vector2(630, 880)
+layout_mode = 2
+
+[node name="CardButton3" parent="SubViewport/ScrollContainer/GridContainer" instance=ExtResource("1_mu264")]
+custom_minimum_size = Vector2(630, 880)
+layout_mode = 2
+
+[node name="CardButton4" parent="SubViewport/ScrollContainer/GridContainer" instance=ExtResource("1_mu264")]
+custom_minimum_size = Vector2(630, 880)
+layout_mode = 2
+
+[node name="CardButton5" parent="SubViewport/ScrollContainer/GridContainer" instance=ExtResource("1_mu264")]
+custom_minimum_size = Vector2(630, 880)
+layout_mode = 2
+
+[node name="CardButton6" parent="SubViewport/ScrollContainer/GridContainer" instance=ExtResource("1_mu264")]
+custom_minimum_size = Vector2(630, 880)
+layout_mode = 2
+
+[node name="CardButton7" parent="SubViewport/ScrollContainer/GridContainer" instance=ExtResource("1_mu264")]
+custom_minimum_size = Vector2(630, 880)
+layout_mode = 2
+
+[node name="CardButton8" parent="SubViewport/ScrollContainer/GridContainer" instance=ExtResource("1_mu264")]
+custom_minimum_size = Vector2(630, 880)
+layout_mode = 2
+
+[node name="CardButton9" parent="SubViewport/ScrollContainer/GridContainer" instance=ExtResource("1_mu264")]
+custom_minimum_size = Vector2(630, 880)
+layout_mode = 2

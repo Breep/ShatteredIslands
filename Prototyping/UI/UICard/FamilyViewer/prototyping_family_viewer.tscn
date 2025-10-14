@@ -1,0 +1,168 @@
+[gd_scene load_steps=17 format=3 uid="uid://bqiox3j3gtn21"]
+
+[ext_resource type="Script" uid="uid://cxd0fu3ysb6ea" path="res://Prototyping/UI/UICard/FamilyViewer/prototyping_family_viewer.gd" id="1_46hog"]
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_saa37"]
+[ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://Card/Templates/family.gd" id="2_55vrr"]
+[ext_resource type="PackedScene" uid="uid://dj7bvdysxgxe6" path="res://Card/2D/FamilyViewer/ui_family_viewer.tscn" id="2_ecwdt"]
+[ext_resource type="Resource" uid="uid://cbmvayb0bb72n" path="res://Card/Descriptions/Families/attack_family.tres" id="3_kkinp"]
+[ext_resource type="Resource" uid="uid://cqw2clgppw78q" path="res://Card/Descriptions/Families/chickenlord_family.tres" id="4_ak4cx"]
+[ext_resource type="Resource" uid="uid://dw66lnwee8ruk" path="res://Card/Descriptions/Families/defense_family.tres" id="5_nn51c"]
+[ext_resource type="Resource" uid="uid://dsbwlgjbtxhh0" path="res://Card/Descriptions/Families/fire_family.tres" id="6_7gqt2"]
+[ext_resource type="Resource" uid="uid://r422raom70t5" path="res://Card/Descriptions/Families/life_family.tres" id="7_saa37"]
+[ext_resource type="Resource" uid="uid://do61ok0tnubtj" path="res://Card/Descriptions/Families/lightning_family.tres" id="8_j0tmp"]
+[ext_resource type="Resource" uid="uid://bjuv4tv3ekqgx" path="res://Card/Descriptions/Families/mana_family.tres" id="9_7e2ka"]
+[ext_resource type="Resource" uid="uid://b3vqgxyoo4150" path="res://Card/Descriptions/Families/necro_family.tres" id="10_hlrbg"]
+[ext_resource type="Resource" uid="uid://cqqln8j72uq1e" path="res://Card/Descriptions/Families/poison_family.tres" id="11_rn7bt"]
+[ext_resource type="Resource" uid="uid://brvmbafl0cv83" path="res://Card/Descriptions/Families/serenity_family.tres" id="12_qfecr"]
+[ext_resource type="Resource" uid="uid://dt6w06ld8k0lj" path="res://Card/Descriptions/Families/shadow_family.tres" id="13_fy8ix"]
+[ext_resource type="Resource" uid="uid://djjcx0kdvmr5f" path="res://Card/Descriptions/Families/storm_family.tres" id="14_uvosj"]
+
+[node name="PrototypingFamilyViewer" type="Control" node_paths=PackedStringArray("_family_viewer")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_saa37")
+script = ExtResource("1_46hog")
+_families = Dictionary[int, ExtResource("2_55vrr")]({
+1: ExtResource("3_kkinp"),
+2: ExtResource("5_nn51c"),
+3: ExtResource("6_7gqt2"),
+4: ExtResource("14_uvosj"),
+5: ExtResource("12_qfecr"),
+6: ExtResource("7_saa37"),
+7: ExtResource("11_rn7bt"),
+8: ExtResource("9_7e2ka"),
+9: ExtResource("4_ak4cx"),
+10: ExtResource("8_j0tmp"),
+11: ExtResource("10_hlrbg"),
+12: ExtResource("13_fy8ix")
+})
+_family_viewer = NodePath("MarginContainer/HBoxContainer/UiFamilyViewer")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="UiFamilyViewer" parent="MarginContainer/HBoxContainer" instance=ExtResource("2_ecwdt")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/Panel/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="AttackFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 30
+text = "Attack Family"
+
+[node name="ChickenLordFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 30
+text = "Chicken Lord Family"
+
+[node name="DefenseFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 30
+text = "Defense Family"
+
+[node name="FireFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 30
+text = "Fire Family"
+
+[node name="LifeFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 30
+text = "Life Family"
+
+[node name="LightningFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 30
+text = "Lightning Family"
+
+[node name="ManaFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 30
+text = "Mana Family"
+
+[node name="NecroFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 30
+text = "Necro Family"
+
+[node name="PoisonFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 30
+text = "Poison Family"
+
+[node name="SerenityFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 30
+text = "Serenity Family"
+
+[node name="ShadowFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 30
+text = "Shadow Family"
+
+[node name="StormFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 30
+text = "Storm Family"
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/AttackFamilyButton" to="." method="_on_attack_family_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/ChickenLordFamilyButton" to="." method="_on_chicken_lord_family_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/DefenseFamilyButton" to="." method="_on_defense_family_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/FireFamilyButton" to="." method="_on_fire_family_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/LifeFamilyButton" to="." method="_on_life_family_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/LightningFamilyButton" to="." method="_on_lightning_family_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/ManaFamilyButton" to="." method="_on_mana_family_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/NecroFamilyButton" to="." method="_on_necro_family_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/PoisonFamilyButton" to="." method="_on_poison_family_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/SerenityFamilyButton" to="." method="_on_serenity_family_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/ShadowFamilyButton" to="." method="_on_shadow_family_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/StormFamilyButton" to="." method="_on_storm_family_button_pressed"]

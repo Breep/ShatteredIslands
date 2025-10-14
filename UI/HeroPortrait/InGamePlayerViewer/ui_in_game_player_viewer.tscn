@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://y5shm75bnv6o"]
+[gd_scene load_steps=24 format=3 uid="uid://y5shm75bnv6o"]
 
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_2d2sx"]
 [ext_resource type="Script" uid="uid://7uumhon7ijie" path="res://UI/HeroPortrait/InGamePlayerViewer/ui_in_game_player_viewer.gd" id="2_dnuj1"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bmxu8ooq2q3sw" path="res://UI/HeroPortrait/InGamePlayerViewer/in_game_hero_viewer.gd" id="4_n43rp"]
 [ext_resource type="Texture2D" uid="uid://lo5uflpmr3pl" path="res://UI/HeroPortrait/Data/MainBlock/ui_main_block_background.png" id="4_py1cm"]
 [ext_resource type="Texture2D" uid="uid://b5xk3ijtiwqh3" path="res://UI/HeroPortrait/Data/MainBlock/ui_main_block_match_history_tick.png" id="6_1emkf"]
+[ext_resource type="PackedScene" uid="uid://dj7bvdysxgxe6" path="res://Card/2D/FamilyViewer/ui_family_viewer.tscn" id="7_kkbei"]
 [ext_resource type="Script" uid="uid://ddn8p84mlkyr0" path="res://UI/Tool/HexGridContainer/hex_grid_container.gd" id="8_glwvb"]
 [ext_resource type="PackedScene" uid="uid://c7jrogdsytaah" path="res://UI/Tool/HexButton/hex_button.tscn" id="9_snl4q"]
 [ext_resource type="Texture2D" uid="uid://cia42t0jcdkfg" path="res://Data/Assets/Card/ICONS/HP color.png" id="10_58kwv"]
@@ -37,6 +38,7 @@ script = ExtResource("2_dnuj1")
 
 [node name="TextureRect" type="TextureRect" parent="." node_paths=PackedStringArray("viewport")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -48,22 +50,16 @@ expand_mode = 1
 script = ExtResource("3_hub8h")
 viewport = NodePath("../SubViewport")
 
-[node name="SubViewport" type="SubViewport" parent="."]
-transparent_bg = true
-size = Vector2i(1920, 1080)
-
-[node name="InGameFamilyViewer" type="Control" parent="SubViewport"]
+[node name="InGameFamilyViewer" type="Control" parent="."]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(1920, 1080)
-layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 theme = ExtResource("1_2d2sx")
 script = ExtResource("18_8k2vn")
 
-[node name="Background" type="TextureRect" parent="SubViewport/InGameFamilyViewer"]
+[node name="Background" type="TextureRect" parent="InGameFamilyViewer"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -74,7 +70,7 @@ texture = ExtResource("4_py1cm")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Border" type="TextureRect" parent="SubViewport/InGameFamilyViewer"]
+[node name="Border" type="TextureRect" parent="InGameFamilyViewer"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -85,7 +81,7 @@ texture = ExtResource("20_kkbei")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="FamilyNameLabel" type="Label" parent="SubViewport/InGameFamilyViewer"]
+[node name="FamilyNameLabel" type="Label" parent="InGameFamilyViewer"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
@@ -99,7 +95,7 @@ text = "Poison"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DescriptionLabel" type="Label" parent="SubViewport/InGameFamilyViewer"]
+[node name="DescriptionLabel" type="Label" parent="InGameFamilyViewer"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 260.0
@@ -113,37 +109,20 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="Control" type="Control" parent="SubViewport/InGameFamilyViewer"]
-anchors_preset = 0
-offset_left = 422.0
-offset_top = 389.0
-offset_right = 1105.0
-offset_bottom = 823.0
+[node name="UiFamilyViewer" parent="InGameFamilyViewer" instance=ExtResource("7_kkbei")]
+layout_mode = 0
+offset_left = 473.0
+offset_top = 326.0
+offset_right = 1054.0
+offset_bottom = 892.0
 
-[node name="ColorRect" type="ColorRect" parent="SubViewport/InGameFamilyViewer/Control"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VSlider" type="ScrollContainer" parent="SubViewport/InGameFamilyViewer/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="GridContainer" type="GridContainer" parent="SubViewport/InGameFamilyViewer/Control/VSlider"]
-layout_mode = 2
-size_flags_horizontal = 3
-columns = 3
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(1920, 1080)
 
 [node name="InGameHeroViewer" type="Control" parent="SubViewport" node_paths=PackedStringArray("_player_name_label", "_hero_name_label", "_player_level_label", "_statistic_container", "_skills_container", "_player_xp_progress_bar", "_player_xp_border", "_match_history_ticks")]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 3
 anchors_preset = 0
