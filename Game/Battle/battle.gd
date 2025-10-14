@@ -24,6 +24,11 @@ enum BattleCategory {
 	C4_PLAYERS_BATTLE = 4, # 4 players battle
 }
 
+enum BattleResolution {
+	WIN,
+	LOOSE
+}
+
 # ============================== Constants ==============================
 
 const BATTLES_INFO_DIC = {
