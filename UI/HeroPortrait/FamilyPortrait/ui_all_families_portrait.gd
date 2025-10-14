@@ -107,7 +107,7 @@ func _on_portrait_family_selected(portrait_family: UIFamilyPortrait) -> void:
 
 
 func _on_portrait_family_unselected(_portrait_family: UIFamilyPortrait) -> void:
-	pass
+	family_selected.emit(Family.FamilyType.UNDEF)
 
 
 

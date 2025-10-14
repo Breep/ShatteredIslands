@@ -12,4 +12,5 @@ icon = ExtResource("3_p8dmb")
 family_name = "Poison"
 family_type = 7
 color = Color(0.227451, 0.494118, 0.141176, 1)
+description = "5/10/15/30% chance to inflict 1 more poison stack when 1 poison stack is applied"
 metadata/_custom_type_script = "uid://d3wk3nm7f672j"

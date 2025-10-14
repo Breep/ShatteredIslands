@@ -38,6 +38,7 @@ const COLORS = {
 @export var family_name: String
 @export var family_type: FamilyType
 @export var color: Color
+@export var description: String = "<Family Description>"
 
 # ============================== Public variables ==============================
 

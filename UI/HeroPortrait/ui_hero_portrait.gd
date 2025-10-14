@@ -17,6 +17,7 @@ extends Control
 
 var _is_active: bool = false
 var _panel_minimized: bool = false
+var _player: Player
 
 # ============================== Node base functions ==============================
 
@@ -32,6 +33,7 @@ func update_content(player: Player) -> void:
 	_hex_portrait_button.set_texture(hero.portrait)
 	_ui_in_game_player_viewer.update_content(player)
 	_ui_all_families_portrait.update_content(player)
+	_player = player
 
 # ============================== Private functions ==============================
 
@@ -90,4 +92,4 @@ func _on_minimize_button_pressed() -> void:
 
 
 func _on_ui_all_families_portrait_family_selected(family_type: Family.FamilyType) -> void:
-	print("Family selected ! ", family_type)
+	_ui_in_game_player_viewer.update_content(_player, family_type)
