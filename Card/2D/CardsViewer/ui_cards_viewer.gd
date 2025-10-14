@@ -1,13 +1,13 @@
-class_name UIFamilyViewer
+class_name UICardsViewer
 extends Control
 
 @onready var _grid_container: GridContainer = %GridContainer
 
 const CARD_BUTTON_SCENE: PackedScene = preload("res://Card/2D/CardButton/card_button.tscn")
 
-func update_content(family: Family) -> void:
+func update_content(cards: Array[Card]) -> void:
 	_clear_all()
-	for card: Card in family.cards:
+	for card: Card in cards:
 		var card_button: CardButton = CARD_BUTTON_SCENE.instantiate()
 		card_button.custom_minimum_size = Vector2(630, 880)
 		card_button.update_visual(card)

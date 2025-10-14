@@ -2,13 +2,13 @@
 
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_ekq81"]
 [ext_resource type="PackedScene" uid="uid://c2psjj8133op3" path="res://Card/2D/CardButton/card_button.tscn" id="1_mu264"]
-[ext_resource type="Script" uid="uid://b05cjd0m0y2ss" path="res://Card/2D/FamilyViewer/ui_family_viewer.gd" id="2_f23eh"]
+[ext_resource type="Script" uid="uid://b05cjd0m0y2ss" path="res://Card/2D/CardsViewer/ui_cards_viewer.gd" id="2_f23eh"]
 [ext_resource type="Script" uid="uid://dl8cs3pdc7hvl" path="res://UI/Tool/input_transmiter.gd" id="3_x2cxy"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_f23eh"]
 viewport_path = NodePath("SubViewport")
 
-[node name="UiFamilyViewer" type="Control"]
+[node name="UICardsViewer" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1910.0
