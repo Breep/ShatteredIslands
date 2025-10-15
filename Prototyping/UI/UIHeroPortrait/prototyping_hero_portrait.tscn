@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cbjnq0p3cypr3"]
+[gd_scene load_steps=15 format=3 uid="uid://cbjnq0p3cypr3"]
 
 [ext_resource type="Texture2D" uid="uid://cdpiqotug84sg" path="res://Prototyping/UI/UIHeroPortrait/screenshot_background.jpeg" id="1_m705b"]
 [ext_resource type="Script" uid="uid://cvtkj5unjvacf" path="res://Prototyping/UI/UIHeroPortrait/prototyping_hero_portrait.gd" id="1_sdjhf"]
@@ -13,8 +13,9 @@
 [ext_resource type="Resource" uid="uid://cqqln8j72uq1e" path="res://Card/Descriptions/Families/poison_family.tres" id="8_kusgk"]
 [ext_resource type="Resource" uid="uid://b3vqgxyoo4150" path="res://Card/Descriptions/Families/necro_family.tres" id="9_4q7kw"]
 [ext_resource type="Resource" uid="uid://bjuv4tv3ekqgx" path="res://Card/Descriptions/Families/mana_family.tres" id="10_pxkly"]
+[ext_resource type="PackedScene" uid="uid://dj7bvdysxgxe6" path="res://Card/2D/CardsViewer/ui_cards_viewer.tscn" id="14_rw83l"]
 
-[node name="PrototypingHeroPortrait" type="Control" node_paths=PackedStringArray("_ui_hero_portrait")]
+[node name="PrototypingHeroPortrait" type="Control" node_paths=PackedStringArray("_ui_hero_portrait", "_cards_viewer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,6 +24,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_sdjhf")
 _ui_hero_portrait = NodePath("UiHeroPortrait")
+_cards_viewer = NodePath("Panel/MarginContainer/UICardsViewer")
 _families = Array[ExtResource("2_fb50w")]([ExtResource("3_abnj3"), ExtResource("4_5tynv"), ExtResource("5_0e8nv"), ExtResource("6_8x34o"), ExtResource("7_rw83l"), ExtResource("8_kusgk"), ExtResource("9_4q7kw"), ExtResource("10_pxkly")])
 _hero = ExtResource("2_h0vv0")
 
@@ -64,6 +66,29 @@ text = "+4 XP"
 layout_mode = 2
 size_flags_vertical = 3
 text = "Add Card"
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 0
+offset_left = 1302.0
+offset_top = 117.0
+offset_right = 1802.0
+offset_bottom = 617.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="UICardsViewer" parent="Panel/MarginContainer" instance=ExtResource("14_rw83l")]
+layout_mode = 2
 
 [connection signal="pressed" from="VBoxContainer/AddVictoryButton" to="." method="_on_add_victory_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/AddLooseButton" to="." method="_on_add_loose_button_pressed"]

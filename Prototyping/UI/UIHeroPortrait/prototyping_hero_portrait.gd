@@ -3,6 +3,7 @@ extends Control
 # ============================== Local Nodes ==============================
 
 @export var _ui_hero_portrait: UIHeroPortrait
+@export var _cards_viewer: UICardsViewer
 
 @export var _families: Array[Family]
 @export var _hero: Hero
@@ -11,6 +12,8 @@ extends Control
 
 @onready var _rng := RandomNumberGenerator.new()
 @onready var _player := Player.new()
+
+@onready var _shop_deck := ShopDeck.new()
 
 # ============================== Node base functions ==============================
 
@@ -31,6 +34,13 @@ func _ready() -> void:
 	_player.character.stats.reset_from_hero(_player.hero, 1)
 	
 	_ui_hero_portrait.update_content(_player)
+	
+	_shop_deck.construct_shop_deck(GameManager.get_active_families(), GameManager.game_rules)
+	var cards:Array[Card] = _shop_deck.draw_n_cards(10)
+	_cards_viewer.update_content(cards)
+	
+	for card: Card in cards:
+		_player.deck.add_card(card)
 	#_ui_all_families_portrait.init_portait_families(_families)
 
 # ============================== Callbacks ==============================

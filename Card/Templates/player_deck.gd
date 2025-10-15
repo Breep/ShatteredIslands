@@ -14,7 +14,10 @@ func get_active_deck() -> Array[Card]:
 
 func get_cards_by_type(family_type: Family.FamilyType) -> Array[Card]:
 	if _cards_dictionary.has(family_type):
-		return _cards_dictionary[family_type]
+		var cards_array: Array[Card] # Because nested type is not supported yet, I need to do this shit
+		for card: Card in _cards_dictionary[family_type]:
+			cards_array.append(card)
+		return cards_array
 	else:
 		return []
 
