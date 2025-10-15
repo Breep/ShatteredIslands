@@ -28,6 +28,7 @@ var family_count: int:
 # ============================== Private variables ==============================
 
 var _family: Family
+var _is_active: bool
 
 # ============================== Node base functions ==============================
 
@@ -44,12 +45,12 @@ func init(family: Family) -> void:
 
 
 func unselect() -> void:
-	_button.button_pressed = false
+	_button.set_pressed_no_signal(false)
 
 # ============================== Private functions ==============================
 
 func _update_visual() -> void:
-	_family_lvl_progress_bar.value = round(_family_count / 8)
+	_family_lvl_progress_bar.value = round(_family_count / 8.0)
 	_current_xp_progress_bar.value = _family_count % 8
 
 
