@@ -1,10 +1,18 @@
 class_name HexButton
 extends TextureButton
 
+# ============================== Enum ==============================
+
+enum HighlightType {
+	OUTLINE,
+	PLAIN
+}
+
 # ============================== Configuration ==============================
 
 @export_group("Shader Configuration")
 @export var _make_border_shader_unique: bool = true
+@export var _make_plain_shader_unique: bool = true
 
 # ============================== Local Nodes ==============================
 
@@ -16,12 +24,23 @@ extends TextureButton
 func _ready() -> void:
 	if _make_border_shader_unique:
 		_border.material = _border.material.duplicate(true)
+	if _make_plain_shader_unique:
+		_background.material = _background.material.duplicate(true)
 
 # ============================== Public functions ==============================
 
-func set_highlight(is_highlight_activated: bool = false) -> void:
-	if is_highlight_activated:
-		_activate_outline_highlight()
+func set_highlight(highlight_type: HighlightType, is_highlight_activated: bool = true) -> void:
+		match highlight_type:
+			HighlightType.OUTLINE:
+				if is_highlight_activated:
+					_activate_outline_highlight()
+				else:
+					_deactivate_outline_highlight()
+			HighlightType.PLAIN:
+				if is_highlight_activated:
+					_activate_plain_highlight()
+				else:
+					_deactivate_plain_highlight()
 
 
 func set_texture(background_texture: CompressedTexture2D) -> void:
@@ -34,10 +53,20 @@ func set_outline_color(color: Color) -> void:
 # ============================== Configuration ==============================
 
 func _activate_outline_highlight() -> void:
-	var now := float(Time.get_ticks_msec()) / 1000.0
-	_border.material.set_shader_parameter("start_time", now - 1.0)
+	print("DEBUG  SHOULD ACTIVTE OUTLINE HIGHLIGHT")
+	_border.material.set_shader_parameter("start_time", 0.0)
 	_border.material.set_shader_parameter("effect_enabled", true)
 
 
-func desactivate_outline_highlight() -> void:
+func _deactivate_outline_highlight() -> void:
 	_border.material.set_shader_parameter("effect_enabled", false)
+
+
+func _activate_plain_highlight() -> void:
+	_background.material.set_shader_parameter("enable_blink", true)
+	_background.material.set_shader_parameter("enable_shine", true)
+
+
+func _deactivate_plain_highlight() -> void:
+	_background.material.set_shader_parameter("enable_blink", false)
+	_background.material.set_shader_parameter("enable_shine", false)
