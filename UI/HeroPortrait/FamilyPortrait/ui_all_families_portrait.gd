@@ -16,6 +16,8 @@ signal family_selected(family_type: Family.FamilyType)
 @export_group("Local Nodes")
 @export var _family_portraits: Array[UIFamilyPortrait]
 
+@onready var _vbox_container: VBoxContainer = %VBoxContainer
+
 # ============================== Public variables ==============================
 
 var _player: Player
@@ -92,11 +94,24 @@ func _update_portrait_families() -> void:
 		for family_type in families_count.keys():
 			if family_portrait.family_type == family_type:
 				family_portrait.family_count = families_count[family_type]
+	_sort_family_portraits()
 
 
 func _reset_portrait_families() -> void:
 	for family_portrait in _family_portraits:
 		family_portrait.family_count = 0
+
+
+func _sort_family_portraits() -> void:
+	var family_portraits_sorted: Array[UIFamilyPortrait] = _family_portraits.duplicate()
+	family_portraits_sorted.sort_custom(_custom_sort_fp)
+	for i: int in family_portraits_sorted.size():
+		var parent_control_node: Control = family_portraits_sorted[i].get_parent()
+		_vbox_container.move_child(parent_control_node, i)
+
+
+func _custom_sort_fp(fp1: UIFamilyPortrait, fp2: UIFamilyPortrait) -> bool:
+	return fp1.family_count > fp2.family_count
 
 # ============================== Callbacks ==============================
 
