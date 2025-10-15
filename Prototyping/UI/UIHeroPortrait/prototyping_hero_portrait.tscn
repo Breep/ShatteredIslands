@@ -60,7 +60,7 @@ text = "Loose"
 [node name="AddXP" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "+4 XP"
+text = "XP"
 
 [node name="AddCard" type="Button" parent="VBoxContainer"]
 layout_mode = 2

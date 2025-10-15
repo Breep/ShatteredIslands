@@ -26,8 +26,6 @@ func _ready() -> void:
 	
 	_player.name = "Breep"
 	_player.deck = PlayerDeck.new()
-	for family: Family in _families:
-		_player.deck._families_count[family.family_type] = 0
 	_player.hero = _hero
 	_player.character = Character.new()
 	_player.character.stats = EntityStats.new()
@@ -36,11 +34,8 @@ func _ready() -> void:
 	_ui_hero_portrait.update_content(_player)
 	
 	_shop_deck.construct_shop_deck(GameManager.get_active_families(), GameManager.game_rules)
-	var cards:Array[Card] = _shop_deck.draw_n_cards(10)
-	_cards_viewer.update_content(cards)
+	_cards_viewer.update_content([])
 	
-	for card: Card in cards:
-		_player.deck.add_card(card)
 	#_ui_all_families_portrait.init_portait_families(_families)
 
 # ============================== Callbacks ==============================
@@ -63,8 +58,10 @@ func _on_add_loose_button_pressed() -> void:
 
 
 func _on_add_xp_pressed() -> void:
-	_player.xp += 4
+	_player.xp += 1
 
 
 func _on_add_card_pressed() -> void:
-	pass # Replace with function body.
+	var cards:Array[Card] = _shop_deck.draw_n_cards(1, _player.deck)
+	_player.deck.add_card(cards[0])
+	_cards_viewer.update_content(_player.deck.get_active_deck())

@@ -11,3 +11,4 @@ func update_content(player: Player, family: Family) -> void:
 	_family_description_label.text = family.description
 	var cards: Array[Card] = player.deck.get_cards_by_type(family.family_type)
 	_ui_cards_viewer.update_content(cards)
+	_ui_cards_viewer.reset_scroll()

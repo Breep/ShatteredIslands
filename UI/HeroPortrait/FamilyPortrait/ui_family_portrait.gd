@@ -28,7 +28,6 @@ var family_count: int:
 # ============================== Private variables ==============================
 
 var _family: Family
-var _is_active: bool
 
 # ============================== Node base functions ==============================
 
@@ -50,7 +49,8 @@ func unselect() -> void:
 # ============================== Private functions ==============================
 
 func _update_visual() -> void:
-	_family_lvl_progress_bar.value = round(_family_count / 8.0)
+	@warning_ignore("integer_division")
+	_family_lvl_progress_bar.value = _family_count / 8
 	_current_xp_progress_bar.value = _family_count % 8
 
 
