@@ -39,9 +39,7 @@ var battle_history: Array[Battle.BattleResolution]
 var is_dead: bool = false # True if the player is dead and signaled it
 var round_of_death: int = -1 # The round when the player died (if dead)
 
-signal skill_choice_awaiting(skill_level: int)
-signal skill_choosen(skill_level: int)
-var skills: Array[Skill]
+var skill_manager: SkillManager
 
 var _team: int # Current team of the player during this round
 var team: int:
@@ -58,8 +56,6 @@ var lvl: int:
 		if _lvl == value: return
 		_lvl = clampi(value, 1, 10)
 		lvl_changed.emit(self, _lvl)
-		if _lvl == 3 or _lvl == 5 or _lvl == 7 or _lvl == 10:
-			skill_choice_awaiting.emit(_lvl)
 
 signal xp_changed(self_ref: Player, new_xp: int)
 var _xp: int

@@ -16,8 +16,8 @@ extends Resource
 @export var buy_xp_price: int = 50
 
 @export_subgroup("Other price")
-@export var _refresh_price: int = 20
-@export var _buy_random_price: int = 90
+@export var refresh_price: int = 20
+@export var buy_random_price: int = 90
 
 @export_group("Player gold")
 @export var gold_earned_on_win_streak: Array[int] = [0, 50, 60, 70, 80] # Each consecutive win increase the gold earn after a win
@@ -54,6 +54,10 @@ extends Resource
 	9: 50,
 }
 
+@export_group("Skills")
+@export var bronze_skill_unlock_lvl: int = 3
+@export var silver_skill_unlock_lvl: int = 5
+@export var gold_skill_unlock_lvl: int = 7
 
 func get_updated_player_damage(player_lvl: int, current_player_win_lose_diff: int, last_round_won: bool, current_round: int) -> int:
 	var damage_min: int = damage_player_level_modifier[player_lvl] # = player_lvl in normal games

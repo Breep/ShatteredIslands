@@ -9,7 +9,13 @@ enum SkillID {
 	GOLD1,
 	GOLD2,
 	PASSIVE,
-	ULTIMATE
+	ULTIMATE,
+}
+
+enum SkillType {
+	BRONZE,
+	SILVER,
+	GOLD
 }
 
 const COLORS: Dictionary [SkillID, Color] = {

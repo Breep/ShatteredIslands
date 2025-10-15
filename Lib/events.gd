@@ -46,3 +46,9 @@ func signal_clickable_cliked(clickable: Node3D) -> void:
 signal nothing_clicked()
 func signal_nothing_clicked() -> void:
 	nothing_clicked.emit()
+
+# ============================== UI ==============================
+
+signal ui_skill_picked(skill_id: Skill.SkillID)
+func signal_ui_skill_picked(skill_id: Skill.SkillID) -> void:
+	ui_skill_picked.emit(skill_id)
