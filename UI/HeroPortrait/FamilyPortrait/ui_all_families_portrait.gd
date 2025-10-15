@@ -69,6 +69,11 @@ func init_portait_families(families: Array[Family]) -> void:
 func update_content(player: Player) -> void:
 	_connect_new_player(player)
 
+
+func reset_buttons_state() -> void:
+	for pf: UIFamilyPortrait in _family_portraits:
+		pf.unselect()
+
 # ============================== Private functions ==============================
 
 func _connect_new_player(new_player: Player) -> void:

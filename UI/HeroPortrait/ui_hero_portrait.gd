@@ -40,6 +40,7 @@ func update_content(player: Player) -> void:
 func _activate() -> void:
 	_ui_all_families_portrait.show_families()
 	_ui_in_game_player_viewer.show_panel()
+	_ui_in_game_player_viewer.update_content(_player)
 	_show_minimize_button()
 	_is_active = true
 	_panel_minimized = false
@@ -47,6 +48,7 @@ func _activate() -> void:
 
 func _deactivate() -> void:
 	_ui_all_families_portrait.hide_families()
+	_ui_all_families_portrait.reset_buttons_state()
 	_ui_in_game_player_viewer.hide_panel()
 	_hide_minimize_button()
 	_is_active = false
@@ -55,6 +57,8 @@ func _deactivate() -> void:
 
 func _minimize_profile() -> void:
 	_ui_in_game_player_viewer.hide_panel()
+	_ui_in_game_player_viewer.update_content(_player)
+	_ui_all_families_portrait.reset_buttons_state()
 	_panel_minimized = true
 
 
@@ -93,3 +97,5 @@ func _on_minimize_button_pressed() -> void:
 
 func _on_ui_all_families_portrait_family_selected(family_type: Family.FamilyType) -> void:
 	_ui_in_game_player_viewer.update_content(_player, family_type)
+	if _panel_minimized:
+		_maximize_profile()
