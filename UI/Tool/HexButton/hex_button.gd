@@ -1,5 +1,9 @@
 class_name HexButton
-extends TextureButton
+extends Control
+
+# ============================== Signal ==============================
+
+signal pressed()
 
 # ============================== Enum ==============================
 
@@ -18,11 +22,11 @@ enum HighlightType {
 
 @onready var _border: TextureRect = %Border
 @onready var _background: TextureRect = %Background
+@onready var _button: TextureButton = %TextureButton
 
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	return
 	if _make_border_shader_unique:
 		_border.material = _border.material.duplicate(true)
 	if _make_plain_shader_unique:
@@ -71,3 +75,7 @@ func _activate_plain_highlight() -> void:
 func _deactivate_plain_highlight() -> void:
 	_background.material.set_shader_parameter("enable_blink", false)
 	_background.material.set_shader_parameter("enable_shine", false)
+
+
+func _on_texture_button_pressed() -> void:
+	pressed.emit()
