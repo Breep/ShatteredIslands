@@ -5,12 +5,11 @@
 [ext_resource type="Texture2D" uid="uid://bw64dywri83to" path="res://UI/_Themes/Data/HexagonButton/hexagon_disabled.png" id="3_0bsuy"]
 [ext_resource type="Texture2D" uid="uid://c6kqlmtjb5lil" path="res://UI/_Themes/Data/HexagonButton/hexagon_hover.png" id="4_0bsuy"]
 [ext_resource type="Script" uid="uid://q4yxpa41ngwe" path="res://UI/Tool/HexButton/hex_button.gd" id="4_7kd84"]
+[ext_resource type="BitMap" uid="uid://d0lvjglm03lbs" path="res://UI/_Themes/Data/HexagonButton/hexagon_mask_bm.png" id="4_nxora"]
 [ext_resource type="Texture2D" uid="uid://c765h1dqan50x" path="res://UI/_Themes/Data/HexagonButton/hexagon_pressed.png" id="5_0bsuy"]
 [ext_resource type="Texture2D" uid="uid://dnpy1x6ryvstv" path="res://Entities/Heroes/DarkKnight/Data/b1_corruption.jpeg" id="6_7j7hk"]
 [ext_resource type="Shader" uid="uid://bv6hpsis17qbh" path="res://VFX/Shaders/2D/2d_highlight.gdshader" id="7_7j7hk"]
 [ext_resource type="Texture2D" uid="uid://bhkhq1mu0dbha" path="res://UI/_Themes/Data/HexagonButton/ui_hexagon_white.png" id="9_0bsuy"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7rmoe"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nxora"]
 shader = ExtResource("1_oy7e4")
@@ -45,7 +44,6 @@ shader_parameter/effect_enabled = false
 shader_parameter/start_time = 0.0
 
 [node name="HexButton" type="TextureButton"]
-material = SubResource("ShaderMaterial_7rmoe")
 custom_minimum_size = Vector2(128, 128)
 anchors_preset = -1
 anchor_right = 0.067
@@ -55,6 +53,7 @@ offset_bottom = -0.520004
 texture_pressed = ExtResource("5_0bsuy")
 texture_hover = ExtResource("4_0bsuy")
 texture_disabled = ExtResource("3_0bsuy")
+texture_click_mask = ExtResource("4_nxora")
 ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("4_7kd84")

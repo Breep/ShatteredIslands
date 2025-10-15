@@ -22,6 +22,7 @@ enum HighlightType {
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
+	return
 	if _make_border_shader_unique:
 		_border.material = _border.material.duplicate(true)
 	if _make_plain_shader_unique:

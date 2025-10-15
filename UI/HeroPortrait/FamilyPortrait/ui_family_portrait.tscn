@@ -69,6 +69,7 @@ texture_normal = ExtResource("4_ibr0v")
 texture_pressed = ExtResource("5_ue87n")
 texture_hover = ExtResource("6_ah4o6")
 texture_click_mask = ExtResource("5_g4mri")
+ignore_texture_size = true
 
 [node name="FamilyIcon" type="TextureRect" parent="SubViewport/Control"]
 unique_name_in_owner = true

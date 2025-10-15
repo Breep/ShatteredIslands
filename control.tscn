@@ -1,0 +1,54 @@
+[gd_scene load_steps=10 format=3 uid="uid://cs66hky7o30da"]
+
+[ext_resource type="Texture2D" uid="uid://bw64dywri83to" path="res://UI/_Themes/Data/HexagonButton/hexagon_disabled.png" id="1_6a6wx"]
+[ext_resource type="Texture2D" uid="uid://c765h1dqan50x" path="res://UI/_Themes/Data/HexagonButton/hexagon_pressed.png" id="2_sky72"]
+[ext_resource type="Texture2D" uid="uid://c6kqlmtjb5lil" path="res://UI/_Themes/Data/HexagonButton/hexagon_hover.png" id="3_0ytqx"]
+[ext_resource type="BitMap" uid="uid://d0lvjglm03lbs" path="res://UI/_Themes/Data/HexagonButton/hexagon_mask_bm.png" id="4_pxugv"]
+[ext_resource type="Texture2D" uid="uid://pkbwg372p322" path="res://UI/HeroPortrait/Data/Family/button_background_white.png" id="5_eh0v1"]
+[ext_resource type="Texture2D" uid="uid://bhkhq1mu0dbha" path="res://UI/_Themes/Data/HexagonButton/ui_hexagon_white.png" id="5_sky72"]
+[ext_resource type="Texture2D" uid="uid://c8y3xgoy5u28h" path="res://UI/HeroPortrait/Data/Family/button_pressed.png" id="6_am1vj"]
+[ext_resource type="Texture2D" uid="uid://dyv1duqg6t2ck" path="res://UI/HeroPortrait/Data/Family/button_hover.png" id="7_g31lc"]
+[ext_resource type="BitMap" uid="uid://cc2he2y4wlxup" path="res://UI/HeroPortrait/Data/Family/button_mask.png" id="8_knq72"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HEXAGON" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 897.0
+offset_top = 79.0
+offset_right = 1701.0
+offset_bottom = 915.0
+texture_normal = ExtResource("1_6a6wx")
+texture_pressed = ExtResource("2_sky72")
+texture_hover = ExtResource("3_0ytqx")
+texture_click_mask = ExtResource("4_pxugv")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="HEXAGON"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_sky72")
+expand_mode = 1
+
+[node name="TextureButton2" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 282.0
+offset_right = 741.0
+offset_bottom = 766.0
+texture_normal = ExtResource("5_eh0v1")
+texture_pressed = ExtResource("6_am1vj")
+texture_hover = ExtResource("7_g31lc")
+texture_click_mask = ExtResource("8_knq72")
+stretch_mode = 0
