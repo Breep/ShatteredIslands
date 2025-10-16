@@ -81,6 +81,11 @@ func _ready():
 			Very very ....\n\
 			long :) ....\n",
 		},
+		"test_recursive": {
+			"name": "RECURSIVE TOOLTIP",
+			"icon": attack_family_icon,
+			"description": "[url=test_recursive]RECURSIVE TOOLTIP[/url]",
+		},
 		
 		# Familles d'améliorations
 		"attack_family": {
@@ -240,7 +245,7 @@ func _ready():
 
 func create_tooltip(tooltip_name: String) -> Tooltip:
 	if not tooltip_name in _tooltips_dictionnary:
-		printerr(tooltip_name + "not in tooltip dictionnary")
+		printerr(tooltip_name + " is not in the tooltip dictionnary")
 		return
 	
 	var tooltip_ref: Dictionary = _tooltips_dictionnary[tooltip_name]

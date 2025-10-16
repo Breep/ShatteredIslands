@@ -82,6 +82,10 @@ layout_mode = 2
 theme_override_font_sizes/normal_font_size = 30
 text = "[color=#3a7e24][url=poison_family]POISON FAMILY[/url][/color]"
 
+[node name="SmartTextLabel2" parent="MarginContainer/HBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("3_c4yu4")]
+layout_mode = 2
+text = "[url=test_recursive]RECURSIVE TOOLTIP[/url]"
+
 [node name="Control" type="Control" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3

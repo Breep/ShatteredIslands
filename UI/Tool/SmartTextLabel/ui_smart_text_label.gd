@@ -10,6 +10,8 @@ var _tooltip: Tooltip
 func _on_meta_hover_started(meta: Variant) -> void:
 	if _tooltip == null:
 		_tooltip = TooltipManager.create_tooltip(meta)
+		if _tooltip == null:
+			return
 		_tooltip.queue_freed.connect(_on_tooltip_queue_freed)
 
 
