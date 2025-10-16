@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="TooltipDesc" load_steps=2 format=3 uid="uid://dpttcyq3fcg5w"]
+
+[ext_resource type="Script" uid="uid://cr1qi4s4jv5f7" path="res://UI/Tool/Tooltip/Dictionary/tooltip_desc.gd" id="1_ril5c"]
+
+[resource]
+script = ExtResource("1_ril5c")
+key = &"poison_stack"
+display_name = "POISON STACK"
+metadata/_custom_type_script = "uid://cr1qi4s4jv5f7"

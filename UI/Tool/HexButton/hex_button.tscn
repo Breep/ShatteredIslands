@@ -73,7 +73,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_default_cursor_shape = 2
 texture_pressed = ExtResource("5_0bsuy")
 texture_hover = ExtResource("4_0bsuy")
 texture_click_mask = ExtResource("4_nxora")
@@ -108,4 +107,6 @@ mouse_filter = 2
 texture = ExtResource("9_0bsuy")
 expand_mode = 1
 
+[connection signal="mouse_entered" from="TextureButton" to="." method="_on_texture_button_mouse_entered"]
+[connection signal="mouse_exited" from="TextureButton" to="." method="_on_texture_button_mouse_exited"]
 [connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

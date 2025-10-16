@@ -21,6 +21,10 @@ enum HighlightType {
 @export_group("Misc Configuration")
 @export var _hover_color: Color
 
+# ============================== Public variable ==============================
+
+var tooltip_attached: Tooltip
+
 # ============================== Local Nodes ==============================
 
 @onready var _border: TextureRect = %Border
@@ -100,3 +104,11 @@ func _deactivate_plain_highlight() -> void:
 
 func _on_texture_button_pressed() -> void:
 	pressed.emit()
+
+
+func _on_texture_button_mouse_entered() -> void:
+	pass
+
+
+func _on_texture_button_mouse_exited() -> void:
+	pass

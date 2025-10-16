@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_yputa")
 name = "Spark Of Light"
-description = "Aeron Vantaal se soigne pour 100% des dégâts de la super frappe."
+description = "Super strike heals the Dark Knight for 100% of damage done"
 portrait = ExtResource("1_dl385")
 metadata/_custom_type_script = "uid://dfby4merlgkep"
