@@ -116,6 +116,8 @@ func _on_description_label_meta_hover_started(meta: Variant) -> void:
 	if _child_tooltip != null:
 		return
 	_child_tooltip = TooltipManager.create_tooltip(meta)
+	if _child_tooltip == null:
+		return
 	_child_tooltip.connect("queue_freed", _on_tooltip_queue_freed)
 	_child_tooltip.parent_tooltip = self
 

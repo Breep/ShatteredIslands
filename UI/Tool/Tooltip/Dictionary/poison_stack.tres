@@ -4,6 +4,8 @@
 
 [resource]
 script = ExtResource("1_ril5c")
-key = &"poison_stack"
-display_name = "POISON STACK"
+key = &"POISON_STACK"
+title = "POISON STACK"
+description = "[[POISON_STACK]] deals [[POISON_DAMAGE]] over time"
+icon_key = "POISON_STACK_ICON"
 metadata/_custom_type_script = "uid://cr1qi4s4jv5f7"

@@ -4,6 +4,22 @@ extends RichTextLabel
 # ============================== Private Variables ==============================
 
 var _tooltip: Tooltip
+var _raw_text: String
+
+@export_multiline var text_template: String:
+	set(value):
+		if value.is_empty(): return
+		_raw_text = value
+		if Engine.is_editor_hint():
+			text = value
+		else:
+			text = TooltipManager.render_bbcode(value)
+	get:
+		return _raw_text
+
+
+func _ready() -> void:
+	text = TooltipManager.render_bbcode(text)
 
 # ============================== Callbacks ==============================
 

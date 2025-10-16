@@ -18,7 +18,22 @@ extends Resource
 @export_subgroup("Misc")
 @export var DEFAULT_ICON: CompressedTexture2D
 
-
-
 @export_group("Colors")
 @export var POISON_COLOR: Color = Color.DARK_OLIVE_GREEN
+@export var DEFAULT_COLOR: Color = Color.WHITE
+
+
+func color_html(color_key: String, include_alpha: bool = true) -> String:
+	var color = get(color_key)
+	if color != null:
+		return color.to_html(include_alpha)
+	else:
+		return DEFAULT_COLOR.to_html(include_alpha)
+
+
+func icon(icon_key: String) -> Texture2D:
+	var icon_texture = get(icon_key)
+	if icon_texture != null:
+		return icon_texture
+	else:
+		return DEFAULT_ICON

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="TooltipRef" load_steps=8 format=3 uid="uid://dxvbn034enrvj"]
+[gd_resource type="Resource" script_class="TooltipTheme" load_steps=8 format=3 uid="uid://dxvbn034enrvj"]
 
 [ext_resource type="Texture2D" uid="uid://dlbjl8ihicpc8" path="res://Card/Descriptions/Families/Icons/defense.png" id="1_8138d"]
 [ext_resource type="Texture2D" uid="uid://bl5f54pvygwuh" path="res://UI/_Themes/Data/book.png" id="2_0gl0c"]
