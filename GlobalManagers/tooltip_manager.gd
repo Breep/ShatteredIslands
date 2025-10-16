@@ -44,13 +44,19 @@ extends  Node
 
 var _tooltips_dictionnary : Dictionary = {}
 var debugg_int = 0
-var _tooltip_scene = preload("res://UI/Tooltip/ui_tooltip.tscn")
+var _tooltip_scene = preload("res://UI/Tool/Tooltip/ui_tooltip.tscn")
 
 var _all_scene_tooltips: Array[Tooltip] 
 var _tooltip_focused: Tooltip
 
 func _ready():
 	_tooltips_dictionnary = {
+		"test": {
+			"name": "TEST",
+			"icon": attack_family_icon,
+			"description": "HELLO ! I'm a TOOLTIP !",
+		},
+		
 		# Familles d'améliorations
 		"attack_family": {
 			"name": "Attack Family",

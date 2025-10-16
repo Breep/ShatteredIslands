@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://cum4bwnnvuilh"]
 
-[ext_resource type="Theme" uid="uid://c3afe8ow3fc6c" path="res://UI/_Themes/ui_panel_tooltip.tres" id="1_wqi74"]
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_2vwyg"]
 [ext_resource type="Texture2D" uid="uid://mbywgrya6a52" path="res://Data/Assets/Misc/Misc_IMG/timer circle.png" id="2_fbqj2"]
 [ext_resource type="FontFile" uid="uid://cl0jltnxq5gum" path="res://Data/font/GlacialIndifference-Bold.otf" id="3_l2bya"]
-[ext_resource type="Script" uid="uid://bgre5ftopmpca" path="res://UI/Tooltip/ui_tooltip.gd" id="3_tsmqo"]
+[ext_resource type="Script" uid="uid://bgre5ftopmpca" path="res://UI/Tool/Tooltip/ui_tooltip.gd" id="3_tsmqo"]
 [ext_resource type="Texture2D" uid="uid://bd6cc2c6etfc2" path="res://Data/Assets/Card/Card_IMG/fire/icon flame.png" id="4_yipgy"]
 [ext_resource type="FontFile" uid="uid://dbqejd0leblna" path="res://Data/font/Nunito-Bold.ttf" id="5_6lpig"]
 
@@ -17,6 +17,7 @@ offset_right = -10.8
 offset_bottom = -9.60001
 grow_horizontal = 2
 mouse_filter = 1
+theme = ExtResource("1_2vwyg")
 script = ExtResource("3_tsmqo")
 
 [node name="Panel" type="Panel" parent="."]
@@ -27,7 +28,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
-theme = ExtResource("1_wqi74")
 
 [node name="Loading" type="TextureProgressBar" parent="Panel"]
 unique_name_in_owner = true
@@ -48,7 +48,7 @@ texture_progress = ExtResource("2_fbqj2")
 
 [node name="Name" type="RichTextLabel" parent="Panel"]
 unique_name_in_owner = true
-layout_mode = 2
+layout_mode = 0
 offset_left = 52.0
 offset_top = 11.0
 offset_right = 266.0
@@ -63,7 +63,7 @@ scroll_active = false
 
 [node name="Icon" type="TextureRect" parent="Panel"]
 unique_name_in_owner = true
-layout_mode = 2
+layout_mode = 0
 offset_left = 9.0
 offset_top = 3.0
 offset_right = 44.0
@@ -76,7 +76,7 @@ stretch_mode = 5
 
 [node name="Description" type="RichTextLabel" parent="Panel"]
 unique_name_in_owner = true
-layout_mode = 2
+layout_mode = 0
 offset_left = 19.0
 offset_top = 47.0
 offset_right = 433.0
@@ -91,10 +91,6 @@ text = "Une Famille qui permet de faire des dégats basé sur les % de points de
  
 "
 scroll_active = false
-
-[node name="Line2D" type="Line2D" parent="."]
-points = PackedVector2Array(430, 40, 20, 40)
-width = 2.0
 
 [node name="FreeTimer" type="Timer" parent="."]
 unique_name_in_owner = true
