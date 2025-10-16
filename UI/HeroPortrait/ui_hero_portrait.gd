@@ -34,6 +34,7 @@ func update_content(player: Player) -> void:
 	_ui_in_game_player_viewer.update_content(player)
 	_ui_all_families_portrait.update_content(player)
 	_player = player
+	_add_local_player_special_behaviour()
 
 # ============================== Private functions ==============================
 
@@ -79,14 +80,21 @@ func _hide_minimize_button() -> void:
 	_minimize_button.modulate.a = 0.0
 	_minimize_button.scale = Vector2(0.9, 0.9)
 
+func _add_local_player_special_behaviour() -> void:
+	if not _player == PlayerManager.get_local_player():
+		return
+	_player.skill_manager.skill_unlocked.connect(_on_local_player_skill_manager_skill_unlocked)
+	for skill_type: Skill.SkillType in _player.skill_manager.skills_pending.keys():
+		if _player.skill_manager.skills_pending[skill_type] == true:
+			_ui_in_game_player_viewer.set_highlight_skills(skill_type, true)
+
+# ============================== Callbacks ==============================
 
 func _on_hex_portrait_button_pressed() -> void:
 	if _is_active:
 		_deactivate()
 	else:
 		_activate()
-
-# ============================== Callbacks ==============================
 
 func _on_minimize_button_pressed() -> void:
 	if _panel_minimized:
@@ -99,3 +107,8 @@ func _on_ui_all_families_portrait_family_selected(family_type: Family.FamilyType
 	_ui_in_game_player_viewer.update_content(_player, family_type)
 	if _panel_minimized:
 		_maximize_profile()
+
+
+func _on_local_player_skill_manager_skill_unlocked(skill_type: Skill.SkillType) -> void:
+	_hex_portrait_button.set_highlight(HexButton.HighlightType.PLAIN, true)
+	_ui_in_game_player_viewer.set_highlight_skills(skill_type, true)

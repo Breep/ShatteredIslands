@@ -48,6 +48,18 @@ func update_content(player: Player, current_stats: EntityStats) -> void:
 	_player.lvl_changed.connect(_on_player_lvl_changed)
 	_player.xp_changed.connect(_on_player_xp_changed)
 
+
+func set_highlight_skills(skill_type: Skill.SkillType, is_activated: bool) -> void:
+	if skill_type == Skill.SkillType.BRONZE:
+		_skills_container.highlight_skill(Skill.SkillID.BRONZE1, HexButton.HighlightType.PLAIN, is_activated)
+		_skills_container.highlight_skill(Skill.SkillID.BRONZE2, HexButton.HighlightType.PLAIN, is_activated)
+	elif skill_type == Skill.SkillType.SILVER:
+		_skills_container.highlight_skill(Skill.SkillID.SILVER1, HexButton.HighlightType.PLAIN, is_activated)
+		_skills_container.highlight_skill(Skill.SkillID.SILVER2, HexButton.HighlightType.PLAIN, is_activated)
+	elif skill_type == Skill.SkillType.GOLD:
+		_skills_container.highlight_skill(Skill.SkillID.GOLD1, HexButton.HighlightType.PLAIN, is_activated)
+		_skills_container.highlight_skill(Skill.SkillID.GOLD2, HexButton.HighlightType.PLAIN, is_activated)
+
 # ============================== Private functions ==============================
 
 func _init_match_history_ticks() -> void:

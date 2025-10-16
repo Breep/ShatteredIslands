@@ -45,3 +45,7 @@ func update_content(player: Player, family_type: Family.FamilyType = Family.Fami
 		_family_viewer.update_content(player, GameManager._FAMILIES_REF[family_type])
 		_hero_viewer.hide()
 		_family_viewer.show()
+
+
+func set_highlight_skills(skill_type: Skill.SkillType, is_activated: bool) ->void:
+	_hero_viewer.set_highlight_skills(skill_type, is_activated)

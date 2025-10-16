@@ -27,6 +27,7 @@ func init(player: Player) -> void:
 		return
 	
 	_player_owner = player
+	_player_owner.lvl_changed.connect(_on_player_owner_lvl_changed)
 	_check_skills(player.lvl)
 	Events.ui_skill_picked.connect(_on_ui_skill_picked)
 
@@ -34,15 +35,15 @@ func init(player: Player) -> void:
 
 func _check_skills(lvl: int) -> void:
 	if lvl >= GameManager.game_rules.bronze_skill_unlock_lvl:
-		if not skills_choosen.has(Skill.SkillType.BRONZE) and not skills_pending.has(Skill.SkillType.BRONZE):
+		if not skills_choosen.has(Skill.SkillType.BRONZE) and skills_pending[Skill.SkillType.BRONZE] == false:
 			skill_unlocked.emit(Skill.SkillType.BRONZE)
 			skills_pending[Skill.SkillType.BRONZE] = true
 	if lvl >= GameManager.game_rules.silver_skill_unlock_lvl:
-		if not skills_choosen.has(Skill.SkillType.SILVER) and not skills_pending.has(Skill.SkillType.SILVER):
+		if not skills_choosen.has(Skill.SkillType.SILVER) and skills_pending[Skill.SkillType.SILVER] == false:
 			skill_unlocked.emit(Skill.SkillType.SILVER)
 			skills_pending[Skill.SkillType.SILVER] = true
 	if lvl >= GameManager.game_rules.gold_skill_unlock_lvl:
-		if not skills_choosen.has(Skill.SkillType.GOLD) and not skills_pending.has(Skill.SkillType.GOLD):
+		if not skills_choosen.has(Skill.SkillType.GOLD) and skills_pending[Skill.SkillType.GOLD] == false:
 			skill_unlocked.emit(Skill.SkillType.GOLD)
 			skills_pending[Skill.SkillType.GOLD] = true
 

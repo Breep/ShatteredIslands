@@ -30,6 +30,9 @@ func _ready() -> void:
 	_player.character = Character.new()
 	_player.character.stats = EntityStats.new()
 	_player.character.stats.reset_from_hero(_player.hero, 1)
+	_player.skill_manager = SkillManager.new()
+	_player.skill_manager.init(_player)
+	PlayerManager.players[multiplayer.get_unique_id()] = _player
 	
 	_ui_hero_portrait.update_content(_player)
 	
@@ -58,7 +61,7 @@ func _on_add_loose_button_pressed() -> void:
 
 
 func _on_add_xp_pressed() -> void:
-	_player.xp += 1
+	_player.xp += 5
 
 
 func _on_add_card_pressed() -> void:

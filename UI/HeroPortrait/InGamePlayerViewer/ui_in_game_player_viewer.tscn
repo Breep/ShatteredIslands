@@ -510,6 +510,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("20_kkbei")
 expand_mode = 1
 stretch_mode = 4
@@ -521,6 +522,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("20_c1rnq")
 expand_mode = 1
 
@@ -531,6 +533,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("21_kkbei")
 expand_mode = 1
 
