@@ -30,5 +30,5 @@ const COLORS: Dictionary [SkillID, Color] = {
 }
 
 @export var name: String
-@export var description: String
+@export_multiline var description: String
 @export var portrait: CompressedTexture2D
