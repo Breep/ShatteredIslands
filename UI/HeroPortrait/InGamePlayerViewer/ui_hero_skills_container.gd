@@ -16,13 +16,47 @@ func _ready() -> void:
 func update_content(skills: Dictionary[Skill.SkillID, Skill]) -> void:
 	for skill_id: Skill.SkillID in _skill_buttons.keys():
 		_skill_buttons[skill_id].set_texture(skills[skill_id].portrait)
+		_skill_buttons[skill_id].deactivate()
 
 
-func highlight_skill(skill_id: Skill.SkillID, highlight_type: HexButton.HighlightType, is_activated: bool) -> void:
+func highlight_skill(skill_id: Skill.SkillID, highlight_type: HexButton.HighlightType, is_activated: bool = true) -> void:
 	_skill_buttons[skill_id].set_highlight(highlight_type, is_activated)
+	if highlight_type == HexButton.HighlightType.PLAIN:
+		if is_activated:
+			_skill_buttons[skill_id].activate()
+		else:
+			_skill_buttons[skill_id].deactivate()
+
+
+func hover_skill(skill_id: Skill.SkillID, is_activated: bool = true) -> void:
+	_skill_buttons[skill_id].set_hover_mode(is_activated)
 
 # ============================== Private functions ==============================
 
 func _colorize_buttons() -> void:
 	for skill_id: Skill.SkillID in _skill_buttons.keys():
 		_skill_buttons[skill_id].set_outline_color(Skill.COLORS[skill_id])
+
+
+func _on_bronze_1_button_pressed() -> void:
+	Events.signal_ui_skill_picked(Skill.SkillID.BRONZE1)
+
+
+func _on_silver_1_button_pressed() -> void:
+	Events.signal_ui_skill_picked(Skill.SkillID.SILVER1)
+
+
+func _on_gold_1_button_pressed() -> void:
+	Events.signal_ui_skill_picked(Skill.SkillID.GOLD1)
+
+
+func _on_bronze_2_button_pressed() -> void:
+	Events.signal_ui_skill_picked(Skill.SkillID.BRONZE2)
+
+
+func _on_silver_2_button_pressed() -> void:
+	Events.signal_ui_skill_picked(Skill.SkillID.SILVER2)
+
+
+func _on_gold_2_button_pressed() -> void:
+	Events.signal_ui_skill_picked(Skill.SkillID.GOLD2)

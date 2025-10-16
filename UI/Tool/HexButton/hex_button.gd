@@ -18,10 +18,14 @@ enum HighlightType {
 @export var _make_border_shader_unique: bool = true
 @export var _make_plain_shader_unique: bool = true
 
+@export_group("Misc Configuration")
+@export var _hover_color: Color
+
 # ============================== Local Nodes ==============================
 
 @onready var _border: TextureRect = %Border
 @onready var _background: TextureRect = %Background
+@onready var _hover_texture: TextureRect = %HoverTexture
 @onready var _button: TextureButton = %TextureButton
 
 # ============================== Node base functions ==============================
@@ -33,6 +37,24 @@ func _ready() -> void:
 		_background.material = _background.material.duplicate(true)
 
 # ============================== Public functions ==============================
+
+func activate() -> void:
+	_button.disabled = false
+
+
+func deactivate() -> void:
+	_button.disabled = true
+
+
+func set_hover_mode(is_activated: bool, color: Color = Color.TRANSPARENT) -> void:
+	if color != Color.TRANSPARENT:
+		_hover_color = color
+		_hover_texture.modulate = _hover_color
+	if is_activated:
+		_hover_texture.show()
+	else:
+		_hover_texture.hide()
+
 
 func set_highlight(highlight_type: HighlightType, is_highlight_activated: bool = true) -> void:
 		match highlight_type:
@@ -58,7 +80,6 @@ func set_outline_color(color: Color) -> void:
 # ============================== Configuration ==============================
 
 func _activate_outline_highlight() -> void:
-	print("DEBUG  SHOULD ACTIVTE OUTLINE HIGHLIGHT")
 	_border.material.set_shader_parameter("start_time", 0.0)
 	_border.material.set_shader_parameter("effect_enabled", true)
 

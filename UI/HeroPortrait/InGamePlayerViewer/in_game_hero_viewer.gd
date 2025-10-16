@@ -49,16 +49,24 @@ func update_content(player: Player, current_stats: EntityStats) -> void:
 	_player.xp_changed.connect(_on_player_xp_changed)
 
 
-func set_highlight_skills(skill_type: Skill.SkillType, is_activated: bool) -> void:
+func set_highlight_skills_by_type(highlight_type: HexButton.HighlightType, skill_type: Skill.SkillType, is_activated: bool) -> void:
 	if skill_type == Skill.SkillType.BRONZE:
-		_skills_container.highlight_skill(Skill.SkillID.BRONZE1, HexButton.HighlightType.PLAIN, is_activated)
-		_skills_container.highlight_skill(Skill.SkillID.BRONZE2, HexButton.HighlightType.PLAIN, is_activated)
+		_skills_container.highlight_skill(Skill.SkillID.BRONZE1, highlight_type, is_activated)
+		_skills_container.highlight_skill(Skill.SkillID.BRONZE2, highlight_type, is_activated)
 	elif skill_type == Skill.SkillType.SILVER:
-		_skills_container.highlight_skill(Skill.SkillID.SILVER1, HexButton.HighlightType.PLAIN, is_activated)
-		_skills_container.highlight_skill(Skill.SkillID.SILVER2, HexButton.HighlightType.PLAIN, is_activated)
+		_skills_container.highlight_skill(Skill.SkillID.SILVER1, highlight_type, is_activated)
+		_skills_container.highlight_skill(Skill.SkillID.SILVER2, highlight_type, is_activated)
 	elif skill_type == Skill.SkillType.GOLD:
-		_skills_container.highlight_skill(Skill.SkillID.GOLD1, HexButton.HighlightType.PLAIN, is_activated)
-		_skills_container.highlight_skill(Skill.SkillID.GOLD2, HexButton.HighlightType.PLAIN, is_activated)
+		_skills_container.highlight_skill(Skill.SkillID.GOLD1, highlight_type, is_activated)
+		_skills_container.highlight_skill(Skill.SkillID.GOLD2, highlight_type, is_activated)
+
+
+func set_highlight_skill_by_id(highlight_type: HexButton.HighlightType, skill_id: Skill.SkillID, is_activated: bool) -> void:
+	_skills_container.highlight_skill(skill_id, highlight_type, is_activated)
+
+
+func set_hover_skill_by_id(skill_id: Skill.SkillID, is_activated: bool) -> void:
+	_skills_container.hover_skill(skill_id, is_activated)
 
 # ============================== Private functions ==============================
 

@@ -38,17 +38,8 @@ func _ready() -> void:
 	
 	_shop_deck.construct_shop_deck(GameManager.get_active_families(), GameManager.game_rules)
 	_cards_viewer.update_content([])
-	
-	#_ui_all_families_portrait.init_portait_families(_families)
 
 # ============================== Callbacks ==============================
-
-func _on_add_random_card_button_pressed() -> void:
-	var rand_family_id: int = _rng.randi_range(0, _families.size() - 1)
-	var rand_family: Family = _families[rand_family_id]
-	_player.deck._families_count[rand_family.family_type] += 1
-	_player.deck.has_changed.emit()
-
 
 func _on_add_victory_button_pressed() -> void:
 	_player.battle_history.append(Battle.BattleResolution.WIN)

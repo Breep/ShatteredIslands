@@ -47,5 +47,13 @@ func update_content(player: Player, family_type: Family.FamilyType = Family.Fami
 		_family_viewer.show()
 
 
-func set_highlight_skills(skill_type: Skill.SkillType, is_activated: bool) ->void:
-	_hero_viewer.set_highlight_skills(skill_type, is_activated)
+func set_highlight_skills_by_type(highlight_style: HexButton.HighlightType, skill_type: Skill.SkillType, is_activated: bool) ->void:
+	_hero_viewer.set_highlight_skills_by_type(highlight_style, skill_type, is_activated)
+
+
+func set_highlight_skill_by_id(highlight_style: HexButton.HighlightType, skill_id: Skill.SkillID, is_activated: bool) ->void:
+	_hero_viewer.set_highlight_skill_by_id(highlight_style, skill_id, is_activated)
+
+
+func set_hover_skill_by_id(skill_id: Skill.SkillID, is_activated: bool) -> void:
+	_hero_viewer.set_hover_skill_by_id(skill_id, is_activated)

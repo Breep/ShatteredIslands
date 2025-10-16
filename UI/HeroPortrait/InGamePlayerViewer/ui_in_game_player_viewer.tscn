@@ -605,3 +605,10 @@ offset_left = 473.0
 offset_top = 326.0
 offset_right = 1054.0
 offset_bottom = 892.0
+
+[connection signal="pressed" from="SubViewport/InGameHeroViewer/HeroSkillsContainer/HexGridContainer/Bronze1Button" to="SubViewport/InGameHeroViewer/HeroSkillsContainer" method="_on_bronze_1_button_pressed"]
+[connection signal="pressed" from="SubViewport/InGameHeroViewer/HeroSkillsContainer/HexGridContainer/Silver1Button" to="SubViewport/InGameHeroViewer/HeroSkillsContainer" method="_on_silver_1_button_pressed"]
+[connection signal="pressed" from="SubViewport/InGameHeroViewer/HeroSkillsContainer/HexGridContainer/Gold1Button" to="SubViewport/InGameHeroViewer/HeroSkillsContainer" method="_on_gold_1_button_pressed"]
+[connection signal="pressed" from="SubViewport/InGameHeroViewer/HeroSkillsContainer/HexGridContainer/Bronze2Button" to="SubViewport/InGameHeroViewer/HeroSkillsContainer" method="_on_bronze_2_button_pressed"]
+[connection signal="pressed" from="SubViewport/InGameHeroViewer/HeroSkillsContainer/HexGridContainer/Silver2Button" to="SubViewport/InGameHeroViewer/HeroSkillsContainer" method="_on_silver_2_button_pressed"]
+[connection signal="pressed" from="SubViewport/InGameHeroViewer/HeroSkillsContainer/HexGridContainer/Gold2Button" to="SubViewport/InGameHeroViewer/HeroSkillsContainer" method="_on_gold_2_button_pressed"]

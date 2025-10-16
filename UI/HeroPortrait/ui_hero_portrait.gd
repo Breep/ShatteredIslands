@@ -84,9 +84,11 @@ func _add_local_player_special_behaviour() -> void:
 	if not _player == PlayerManager.get_local_player():
 		return
 	_player.skill_manager.skill_unlocked.connect(_on_local_player_skill_manager_skill_unlocked)
+	_player.skill_manager.skill_picked.connect(_on_local_player_skill_manager_skill_picked)
 	for skill_type: Skill.SkillType in _player.skill_manager.skills_pending.keys():
 		if _player.skill_manager.skills_pending[skill_type] == true:
-			_ui_in_game_player_viewer.set_highlight_skills(skill_type, true)
+			_hex_portrait_button.set_highlight(HexButton.HighlightType.PLAIN, true)
+			_ui_in_game_player_viewer.set_highlight_skills_by_type(HexButton.HighlightType.PLAIN, skill_type, true)
 
 # ============================== Callbacks ==============================
 
@@ -111,4 +113,32 @@ func _on_ui_all_families_portrait_family_selected(family_type: Family.FamilyType
 
 func _on_local_player_skill_manager_skill_unlocked(skill_type: Skill.SkillType) -> void:
 	_hex_portrait_button.set_highlight(HexButton.HighlightType.PLAIN, true)
-	_ui_in_game_player_viewer.set_highlight_skills(skill_type, true)
+	_ui_in_game_player_viewer.set_highlight_skills_by_type(HexButton.HighlightType.PLAIN, skill_type, true)
+
+
+func _on_local_player_skill_manager_skill_picked(skill_id: Skill.SkillID) -> void:
+	var is_a_skill_pending: bool = false
+	for skill_type: Skill.SkillType in _player.skill_manager.skills_pending.keys():
+		if _player.skill_manager.skills_pending[skill_type] == true:
+			is_a_skill_pending = true
+	if not is_a_skill_pending:
+		_hex_portrait_button.set_highlight(HexButton.HighlightType.PLAIN, false)
+	if skill_id == Skill.SkillID.BRONZE1 or skill_id == Skill.SkillID.BRONZE2:
+		_ui_in_game_player_viewer.set_highlight_skills_by_type(HexButton.HighlightType.PLAIN, Skill.SkillType.BRONZE, false)
+		if skill_id == Skill.SkillID.BRONZE1:
+			_ui_in_game_player_viewer.set_hover_skill_by_id(Skill.SkillID.BRONZE2, true)
+		else:
+			_ui_in_game_player_viewer.set_hover_skill_by_id(Skill.SkillID.BRONZE1, true)
+	elif skill_id == Skill.SkillID.SILVER1 or skill_id == Skill.SkillID.SILVER2:
+		_ui_in_game_player_viewer.set_highlight_skills_by_type(HexButton.HighlightType.PLAIN, Skill.SkillType.SILVER, false)
+		if skill_id == Skill.SkillID.SILVER1:
+			_ui_in_game_player_viewer.set_hover_skill_by_id(Skill.SkillID.SILVER2, true)
+		else:
+			_ui_in_game_player_viewer.set_hover_skill_by_id(Skill.SkillID.SILVER1, true)
+	elif skill_id == Skill.SkillID.GOLD1 or skill_id == Skill.SkillID.GOLD2:
+		_ui_in_game_player_viewer.set_highlight_skills_by_type(HexButton.HighlightType.PLAIN, Skill.SkillType.GOLD, false)
+		if skill_id == Skill.SkillID.GOLD1:
+			_ui_in_game_player_viewer.set_hover_skill_by_id(Skill.SkillID.GOLD2, true)
+		else:
+			_ui_in_game_player_viewer.set_hover_skill_by_id(Skill.SkillID.GOLD1, true)
+	_ui_in_game_player_viewer.set_highlight_skill_by_id(HexButton.HighlightType.OUTLINE, skill_id, true)
