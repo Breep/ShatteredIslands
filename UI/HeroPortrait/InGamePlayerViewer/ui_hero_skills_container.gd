@@ -10,13 +10,14 @@ extends Control
 
 func _ready() -> void:
 	_colorize_buttons()
+	for skill_id: Skill.SkillID in _skill_buttons.keys():
+		_skill_buttons[skill_id].deactivate()
 
 # ============================== Public functions ==============================
 
 func update_content(skills: Dictionary[Skill.SkillID, Skill]) -> void:
 	for skill_id: Skill.SkillID in _skill_buttons.keys():
 		_skill_buttons[skill_id].set_texture(skills[skill_id].portrait)
-		_skill_buttons[skill_id].deactivate()
 
 
 func highlight_skill(skill_id: Skill.SkillID, highlight_type: HexButton.HighlightType, is_activated: bool = true) -> void:

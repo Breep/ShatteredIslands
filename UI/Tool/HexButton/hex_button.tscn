@@ -34,7 +34,7 @@ shader_parameter/shine_pause_between = 0.5
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0bsuy"]
 shader = ExtResource("7_7j7hk")
 shader_parameter/size_effect = 1.0
-shader_parameter/speed = 0.1
+shader_parameter/speed = 1.0
 shader_parameter/highlight_strength = 1.0000000745059996
 shader_parameter/color_mode_toggle = false
 shader_parameter/is_horizontal = false
@@ -83,7 +83,7 @@ stretch_mode = 0
 [node name="HoverTexture" type="TextureRect" parent="."]
 unique_name_in_owner = true
 visible = false
-modulate = Color(0, 0, 0, 0.5882353)
+modulate = Color(0, 0, 0, 0.7254902)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
