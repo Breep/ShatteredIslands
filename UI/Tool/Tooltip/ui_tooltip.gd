@@ -1,23 +1,32 @@
 class_name Tooltip
 extends Control
 
+# ============================== Signal ==============================
+
 signal queue_freed(tooltip: Tooltip)
 signal focused(tooltip: Tooltip)
 signal unfocused(tooltip: Tooltip)
 
+# ============================== Public variable ==============================
+
 var parent_tooltip: Tooltip
 var debugg_int = 0 
+
+# ============================== Private variables ==============================
 
 var _child_tooltip : Tooltip
 var _tween: Tween 
 var _mouse_on_self: bool = false
 
-@onready var _hide_timer : Timer = %FreeTimer
-@onready var _tooltip_name: RichTextLabel= %Name
-@onready var _tooltip_description : RichTextLabel = %Description
+# ============================== Local Nodes ==============================
+
+@onready var _free_timer : Timer = %FreeTimer
+@onready var _tooltip_name: RichTextLabel= %NameLabel
+@onready var _tooltip_description : RichTextLabel = %DescriptionLabel
 @onready var _progress_bar : TextureProgressBar = %Loading
 @onready var _tooltip_icon: TextureRect = %Icon
 
+# ============================== Public functions ==============================
 
 func init(tooltip_name: String, icon: Texture, description: String) -> void:
 	_tooltip_description.text = description
@@ -38,6 +47,7 @@ func force_recursive_child_delete(delete_self: bool) -> void:
 	if delete_self:
 		delete()
 
+
 func start_recursive_parent_free() -> void:
 	print(debugg_int , "start_recursive_parent_free()")
 	if _mouse_on_self:
@@ -45,6 +55,16 @@ func start_recursive_parent_free() -> void:
 		return
 	start_self_free()
 
+
+func start_self_free():
+	if _tween != null:
+		_tween.kill()
+	_free_timer.start()
+	_tween = create_tween()
+	_tween.tween_property(_progress_bar, "value", 0, _free_timer.wait_time)
+
+
+# ============================== Privates functions ==============================
 
 func _init_position() -> void:
 	var mouse_position = get_viewport().get_mouse_position()
@@ -72,45 +92,42 @@ func _calculate_tooltip_position(mouse_position) -> Vector2:
 	
 	return tooltip_position
 
-func _on_tooltip_queue_freed():
-	_child_tooltip = null
-
-
-func start_self_free():
-	if _tween != null:
-		_tween.kill()
-	_hide_timer.start()
-	_tween = create_tween()
-	_tween.tween_property(_progress_bar, "value", 0, _hide_timer.wait_time)
 
 func _stop_self_free():
 	if _tween != null:
 		_tween.kill()
-	_hide_timer.stop()
+	_free_timer.stop()
 	_tween = create_tween()
 	_tween.tween_property(_progress_bar, "value", 100, 0.1)
 
+# ============================== Callbacks ==============================
+
+func _on_tooltip_queue_freed():
+	_child_tooltip = null
+
 
 func _on_free_timer_timeout() -> void:
-	#print("free_timer_timeout", debugg_int)
 	if parent_tooltip != null:
 		parent_tooltip.start_recursive_parent_free()
 	delete()
 
 
-func _on_description_meta_hover_started(meta: Variant) -> void:
+func _on_description_label_meta_hover_started(meta: Variant) -> void:
 	if _child_tooltip != null:
 		return
 	_child_tooltip = TooltipManager.create_tooltip(meta)
 	_child_tooltip.connect("queue_freed", _on_tooltip_queue_freed)
 	_child_tooltip.parent_tooltip = self
-	#print("meta_started", debugg_int)
+
+
+func _on_description_label_meta_hover_ended(_meta: Variant) -> void:
+	if _child_tooltip != null:
+		_child_tooltip.start_recursive_parent_free()
 
 
 func _on_mouse_exited() -> void:
 	unfocused.emit(self)
 	_mouse_on_self = false
-	#print("mouse_exited", debugg_int)
 	if _child_tooltip == null:
 		start_recursive_parent_free()
 
@@ -126,8 +143,3 @@ func _on_panel_mouse_entered() -> void:
 	_stop_self_free()
 	focused.emit(self)
 	_mouse_on_self = true
-
-
-func _on_description_meta_hover_ended(_meta: Variant) -> void:
-	if _child_tooltip != null:
-		_child_tooltip.start_recursive_parent_free()

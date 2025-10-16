@@ -1,7 +1,11 @@
 class_name SmartTextLabel
 extends RichTextLabel
 
+# ============================== Private Variables ==============================
+
 var _tooltip: Tooltip
+
+# ============================== Callbacks ==============================
 
 func _on_meta_hover_started(meta: Variant) -> void:
 	if _tooltip == null:

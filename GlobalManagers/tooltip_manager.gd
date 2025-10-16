@@ -3,13 +3,13 @@ extends  Node
 # Effets généraux
 @onready var vulnerability_icon = preload("res://Data/Assets/Card/Card_IMG/fire/icon flame.png")
 @onready var armor_icon = preload("res://Data/Assets/Card/Card_IMG/fire/icon flame.png")
-@onready var poison_icon = preload("res://Data/Assets/Card/Card_IMG/fire/icon flame.png")
+@onready var poison_icon = preload("res://Card/Descriptions/Families/Icons/poison.png")
 @onready var heal_icon = preload("res://Data/Assets/Card/Card_IMG/fire/icon flame.png")
 
 # Types de dégâts
 @onready var magical_damage_icon = preload("res://Data/Assets/Card/Card_IMG/fire/icon flame.png")
 @onready var physical_damage_icon = preload("res://Data/Assets/Card/Card_IMG/fire/icon flame.png")
-@onready var poison_damage_icon = preload("res://Data/Assets/Card/Card_IMG/fire/icon flame.png")
+@onready var poison_damage_icon = preload("res://Card/Descriptions/Families/Icons/poison.png")
 
 # Statistiques 
 @onready var attack_damage_icon = preload("res://Data/Assets/Card/Card_IMG/fire/icon flame.png")
@@ -35,12 +35,13 @@ extends  Node
 @onready var fire_family_icon = preload("res://Data/Assets/Card/Card_IMG/fire/icon flame.png")
 @onready var shadow_family_icon = preload("res://Data/Assets/Card/Card_IMG/shadow/shadow icon.png")
 @onready var heal_family_icon = preload("res://Data/Assets/Card/Card_IMG/fire/icon flame.png")
-@onready var poison_family_icon = preload("res://Data/Assets/Card/Card_IMG/fire/icon flame.png")
+@onready var poison_family_icon = preload("res://Card/Descriptions/Families/Icons/poison.png")
 @onready var storm_family_icon = preload("res://Data/Assets/Card/Card_IMG/storm/storm icon.png")
 @onready var hp_family_icon = preload("res://Data/Assets/Card/Card_IMG/fire/icon flame.png")
 
 
-
+const POISON_DAMAGE = "[color=#3a7e24][url=poison_damage]poison damage[/url][/color]"
+const POISON_STACK = "[color=#3a7e24][url=poison_stack]poison stack[/url][/color]"
 
 var _tooltips_dictionnary : Dictionary = {}
 var debugg_int = 0
@@ -52,9 +53,33 @@ var _tooltip_focused: Tooltip
 func _ready():
 	_tooltips_dictionnary = {
 		"test": {
-			"name": "TEST",
+			"name": "TESTING TOOLTIP",
 			"icon": attack_family_icon,
-			"description": "HELLO ! I'm a TOOLTIP !",
+			"description": "HELLO ! I'm an [b]awesome[/b] TOOLTIP !",
+		},
+		"test_very_long_tooltip": {
+			"name": "TESTING VERY LONG TOOLTIP",
+			"icon": attack_family_icon,
+			"description": "HELLO ! I'm an [b]awesome[/b] TOOLTIP ! \n\
+			I'm very very\n\
+			Very very ....\n\
+			Very very ....\n\
+			Very very ....\n\
+			Very very ....\n\
+			Very very ....\n\
+			Very very ....\n\
+			Very very ....\n\
+			Very very ....\n\
+			Very very ....\n\
+			Very very ....\n\
+			Very very ....\n\
+			Very very ....\n\
+			Very very ....\n\
+			Very very ....\n\
+			Very very ....\n\
+			Oh! An other tooltip is hidden [url=test]HERE[/url]\n\
+			Very very ....\n\
+			long :) ....\n",
 		},
 		
 		# Familles d'améliorations
@@ -84,9 +109,9 @@ func _ready():
 			"description": "Increase all healing effects by 10/20/30/50%",
 		},
 		"poison_family": {
-			"name": "Poison Family",
+			"name": "[color=#3a7e24]Poison Family[/color]",
 			"icon": poison_family_icon,
-			"description": "Apply poison damage over time to enemies",
+			"description": "Apply " + POISON_STACK + " over time to random enemies",
 		},
 		"storm_family": {
 			"name": "Storm Family",
@@ -110,10 +135,10 @@ func _ready():
 			"icon": armor_icon,
 			"description": "A stackable buff that reduce incoming damage by 1 per stack. Stack are lost on use",
 		},
-		"poison": {
-			"name": "Poison",
+		"poison_stack": {
+			"name": "[color=#3a7e24]POISON STACK[/color]",
 			"icon": poison_icon,
-			"description": "Deals damage over time. 1 damage per poison stack per tick. Tick = 1sec",
+			"description": "Deals damage over time. 1 " + POISON_DAMAGE + " per stack per tick. Tick = 1sec",
 		},
 		"heal": {
 			"name": "Heal",
@@ -133,9 +158,9 @@ func _ready():
 			"description": "Physical Damage",
 		},
 		"poison_damage": {
-			"name": "Poison Damage",
+			"name": "[color=#3a7e24]POISON DAMAGE[/color]",
 			"icon": poison_damage_icon,
-			"description": "Poison Damage",
+			"description": "Ignore armor. Can't crit",
 		},
 
 		# Statistiques
