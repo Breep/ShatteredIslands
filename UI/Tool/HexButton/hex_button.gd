@@ -3,7 +3,9 @@ extends Control
 
 # ============================== Signal ==============================
 
-signal pressed()
+signal pressed(self_ref: HexButton)
+signal button_mouse_entered(self_ref: HexButton)
+signal button_mouse_exited(self_ref: HexButton)
 
 # ============================== Enum ==============================
 
@@ -103,12 +105,12 @@ func _deactivate_plain_highlight() -> void:
 
 
 func _on_texture_button_pressed() -> void:
-	pressed.emit()
+	pressed.emit(self)
 
 
 func _on_texture_button_mouse_entered() -> void:
-	pass
+	button_mouse_entered.emit(self)
 
 
 func _on_texture_button_mouse_exited() -> void:
-	pass
+	button_mouse_exited.emit(self)

@@ -92,7 +92,7 @@ func _add_local_player_special_behaviour() -> void:
 
 # ============================== Callbacks ==============================
 
-func _on_hex_portrait_button_pressed() -> void:
+func _on_hex_portrait_button_pressed(_unused) -> void:
 	if _is_active:
 		_deactivate()
 	else:

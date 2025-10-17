@@ -37,11 +37,21 @@ func _ready() -> void:
 	global_position = _spawn_pos
 	_pop_in()
 
+
+func _input(event):
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		if not _mouse_in_window:
+			_pop_out()
+
 # ============================== Public functions ==============================
 
 func init(skill: Skill, spawn_pos: Vector2) -> void:
 	_skill = skill
 	_spawn_pos = spawn_pos
+
+
+func close() -> void:
+	_pop_out()
 
 # ============================== Private functions ==============================
 
@@ -54,7 +64,7 @@ func _pop_in() -> void:
 	_tween = create_tween()
 	_tween.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	_tween.parallel().tween_property(self, "scale", Vector2.ONE, POP_TIME)
-	_tween.parallel().tween_property(self, "modulate:a", 1.0, 0.18)
+	_tween.parallel().tween_property(self, "modulate:a", 1.0, POP_TIME)
 
 
 func _pop_out() -> void:
@@ -62,17 +72,11 @@ func _pop_out() -> void:
 	_poping_out = true
 	if _tween and _tween.is_valid():
 		_tween.kill()
-
 	_tween = create_tween()
 	_tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 	_tween.parallel().tween_property(self, "scale", POP_SCALE, POP_TIME)
 	_tween.parallel().tween_property(self, "modulate:a", 0.0, POP_TIME)
 	_tween.tween_callback(Callable(self, "queue_free"))
-
-func _input(event):
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		if not _mouse_in_window:
-			_pop_out()
  
 # ============================== Callbacks ==============================
 
