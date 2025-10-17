@@ -63,7 +63,6 @@ func _build_cache():
 
 
 func _render_bbcode(text: String) -> String:
-	print("DEBUG - ", text)
 	var out := text
 
 	# 1) Replace snippet tokens like [[POISON_STACK]]
@@ -71,9 +70,7 @@ func _render_bbcode(text: String) -> String:
 	r.compile("\\[\\[(\\w+)\\]\\]")
 	var matches := r.search_all(out)
 	for m in matches:
-		print("\tDEBUG - ", m)
 		var token := m.get_string(1)
-		print("\t\tDEBUG - ", token)
 		if token in SNIPPET_MAP:
 			out = out.replace("[[%s]]" % token, SNIPPET_MAP[token])
 	
