@@ -16,5 +16,6 @@ IGNITE_STACK_ICON = ExtResource("2_4uhde")
 MAGICAL_DAMAGE_ICON = ExtResource("3_0gl0c")
 PHYSICAL_DAMAGE_ICON = ExtResource("4_51tpr")
 POISON_DAMAGE_ICON = ExtResource("5_t0qtx")
+POISON_FAMILY_ICON = ExtResource("5_t0qtx")
 DEFAULT_ICON = ExtResource("2_0gl0c")
 metadata/_custom_type_script = "uid://dgukdre62e5bf"

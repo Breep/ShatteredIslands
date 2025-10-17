@@ -4,22 +4,14 @@ extends RichTextLabel
 # ============================== Private Variables ==============================
 
 var _tooltip: Tooltip
-var _raw_text: String
 
-@export_multiline var text_template: String:
-	set(value):
-		if value.is_empty(): return
-		_raw_text = value
-		if Engine.is_editor_hint():
-			text = value
-		else:
-			text = TooltipManager.render_bbcode(value)
-	get:
-		return _raw_text
-
+@export_multiline var text_template: String
 
 func _ready() -> void:
-	text = TooltipManager.render_bbcode(text)
+	if text_template.is_empty():
+		text = TooltipManager.render_bbcode(text)
+	else:
+		text = TooltipManager.render_bbcode(text_template)
 
 # ============================== Callbacks ==============================
 

@@ -64,36 +64,12 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 10.0
 
-[node name="FirstLabelTest" type="RichTextLabel" parent="MarginContainer/HBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="Poison" parent="MarginContainer/HBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("3_c4yu4")]
 layout_mode = 2
-bbcode_enabled = true
-text = "Une histoire de [url=test] TEST [/url]"
-fit_content = true
-
-[node name="SmartTextLabel" parent="MarginContainer/HBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("3_c4yu4")]
-layout_mode = 2
-
-[node name="InsanilyLongTooltip" parent="MarginContainer/HBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("3_c4yu4")]
-layout_mode = 2
-text = "Very long tooltip [b][url=test_very_long_tooltip] HERE [/url][/b]"
-
-[node name="Family Labels" parent="MarginContainer/HBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("3_c4yu4")]
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 30
-text = "[color=#3a7e24][url=poison_family]POISON FAMILY[/url][/color]"
-
-[node name="SmartTextLabel2" parent="MarginContainer/HBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("3_c4yu4")]
-layout_mode = 2
-text = "[url=test_recursive]RECURSIVE TOOLTIP[/url]"
-
-[node name="SmartTextLabel3" parent="MarginContainer/HBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("3_c4yu4")]
-layout_mode = 2
-text = "[[POISON_STACK]]"
+theme_override_font_sizes/normal_font_size = 20
+text = "[[POISON_STACK]]  |  [[POISON_DAMAGE]]"
 
 [node name="Control" type="Control" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
-
-[connection signal="meta_hover_ended" from="MarginContainer/HBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/FirstLabelTest" to="." method="_on_first_label_test_meta_hover_ended"]
-[connection signal="meta_hover_started" from="MarginContainer/HBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/FirstLabelTest" to="." method="_on_first_label_test_meta_hover_started"]

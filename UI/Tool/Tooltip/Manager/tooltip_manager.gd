@@ -1,72 +1,17 @@
 extends Node
 
-
-#func _ready():
-	#_tooltips_dictionnary = {
-		#"test": {
-			#"name": "TESTING TOOLTIP",
-			#"icon": THEME.DEFAULT_ICON,
-			#"description": "HELLO ! I'm an [b]awesome[/b] TOOLTIP !",
-		#},
-		#"test_very_long_tooltip": {
-			#"name": "TESTING VERY LONG TOOLTIP",
-			#"icon": THEME.DEFAULT_ICON,
-			#"description": "HELLO ! I'm an [b]awesome[/b] TOOLTIP ! \n\
-			#I'm very very\n\
-			#Very very ....\n\
-			#Very very ....\n\
-			#Very very ....\n\
-			#Very very ....\n\
-			#Very very ....\n\
-			#Very very ....\n\
-			#Very very ....\n\
-			#Very very ....\n\
-			#Very very ....\n\
-			#Very very ....\n\
-			#Very very ....\n\
-			#Very very ....\n\
-			#Very very ....\n\
-			#Very very ....\n\
-			#Very very ....\n\
-			#Oh! An other tooltip is hidden [url=test]HERE[/url]\n\
-			#Very very ....\n\
-			#long :) ....\n",
-		#},
-		#"test_recursive": {
-			#"name": "RECURSIVE TOOLTIP",
-			#"icon": THEME.DEFAULT_ICON,
-			#"description": "[url=test_recursive]RECURSIVE TOOLTIP[/url]",
-		#},
-		#
-		#"poison_family": {
-			#"name": "[color=" + THEME.POISON_COLOR.to_html() + "]POISON FAMILY[/color]",
-			#"icon": THEME.POISON_FAMILY_ICON,
-			#"description": "Apply " + POISON_STACK + " over time to random enemies",
-		#},
-		#"poison_stack": {
-			#"name": "[color=" + THEME.POISON_COLOR.to_html() + "]POISON STACK[/color]",
-			#"icon": THEME.POISON_STACK_ICON,
-			#"description": "Deals damage over time. 1 " + POISON_DAMAGE + " per stack per tick. Tick = 1sec",
-		#},
-		#"poison_damage": {
-			#"name": "[color=" + THEME.POISON_COLOR.to_html() + "]POISON DAMAGE[/color]",
-			#"icon": THEME.POISON_DAMAGE_ICON,
-			#"description": "Ignore armor. Can't crit",
-		#},
-	#}
-
 # ============================== Configuration ==============================
 
 @onready var TOOLTIP_SCENE = load("res://UI/Tool/Tooltip/ui_tooltip.tscn")
 @onready var THEME: TooltipTheme = load("res://UI/Tool/Tooltip/Theme/standard_theme.tres")
 @onready var TOOLTIP_DATABASE: Array[TooltipDesc] = [
-	load("res://UI/Tool/Tooltip/Dictionary/poison_stack.tres")
+	load("res://UI/Tool/Tooltip/Dictionary/poison_stack.tres"),
+	load("res://UI/Tool/Tooltip/Dictionary/poison_damage.tres")
 ]
 
 @onready var SNIPPET_MAP: Dictionary[String, String] = {
 	"POISON_DAMAGE": "[color=%s][url=POISON_DAMAGE]poison damage[/url][/color]" % THEME.color_html("POISON_COLOR"),
 	"POISON_STACK":  "[color=%s][url=POISON_STACK]poison stack[/url][/color]"  % THEME.color_html("POISON_COLOR"),
-	"POISON_FAMILY": "[color=%s]POISON FAMILY[/color]" % THEME.color_html("POISON")
 }
 
 var _all_scene_tooltips: Array[Tooltip] 
@@ -118,6 +63,7 @@ func _build_cache():
 
 
 func _render_bbcode(text: String) -> String:
+	print("DEBUG - ", text)
 	var out := text
 
 	# 1) Replace snippet tokens like [[POISON_STACK]]
@@ -125,7 +71,9 @@ func _render_bbcode(text: String) -> String:
 	r.compile("\\[\\[(\\w+)\\]\\]")
 	var matches := r.search_all(out)
 	for m in matches:
+		print("\tDEBUG - ", m)
 		var token := m.get_string(1)
+		print("\t\tDEBUG - ", token)
 		if token in SNIPPET_MAP:
 			out = out.replace("[[%s]]" % token, SNIPPET_MAP[token])
 	
