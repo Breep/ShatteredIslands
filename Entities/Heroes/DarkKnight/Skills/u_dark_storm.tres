@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("2_332ir")
+skill_id = 7
 name = "Dark Storm"
 description = "Aeron Vantaal crée une tempête du néant sur l'ennemi ciblé, La tempête fait des dommage égal à 50% de son AD toutes les 0,2sec pendant 1sec"
 portrait = ExtResource("1_axcq2")

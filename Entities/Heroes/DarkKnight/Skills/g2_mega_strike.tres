@@ -5,7 +5,8 @@
 
 [resource]
 script = ExtResource("1_4n501")
+skill_id = 5
 name = "Mega Strike"
-description = "Aeron Vantaal peut maintenant cumuler 10 charges pour effectuer 500% des dégâts."
+description = "Aeron Vantaal peut maintenant cumuler 10 charges pour effectuer 500% des dégâts. [[POISON_DAMAGE]]"
 portrait = ExtResource("1_4n7wf")
 metadata/_custom_type_script = "uid://dfby4merlgkep"

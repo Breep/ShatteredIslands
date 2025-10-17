@@ -5,7 +5,17 @@ extends RichTextLabel
 
 var _tooltip: Tooltip
 
-@export_multiline var text_template: String
+# ============================== Public Variables ==============================
+
+var _text_raw: String
+@export_multiline var text_raw: String:
+	get: return _text_raw
+	set(value):
+		if value.is_empty(): return
+		_text_raw = value
+		_generate_text()
+
+# ============================== Node base functions ==============================
 
 func _ready() -> void:
 	meta_hover_started.connect(_on_meta_hover_started)
@@ -13,11 +23,15 @@ func _ready() -> void:
 	fit_content = true
 	bbcode_enabled = true
 	meta_underlined = false
-	
-	if text_template.is_empty():
+	_generate_text()
+
+# ============================== Private functions ==============================
+
+func _generate_text() -> void:
+	if text_raw.is_empty():
 		text = TooltipManager.render_bbcode(text)
 	else:
-		text = TooltipManager.render_bbcode(text_template)
+		text = TooltipManager.render_bbcode(text_raw)
 
 # ============================== Callbacks ==============================
 

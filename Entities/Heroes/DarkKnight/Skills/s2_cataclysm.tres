@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_3eyt5")
+skill_id = 3
 name = "Cataclysm"
 description = "Lance 2 tempête noire. Le coup en mana de l’ultimate augmente à 150."
 portrait = ExtResource("1_1k7uo")

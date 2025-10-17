@@ -1,11 +1,9 @@
 extends Control
 
-var _tooltip: Tooltip
-
-func _on_first_label_test_meta_hover_started(meta: Variant) -> void:
-	_tooltip = TooltipManager.create_tooltip(meta)
+@export var test_skill: Skill
 
 
-func _on_first_label_test_meta_hover_ended(_meta: Variant) -> void:
-	if _tooltip != null and not _tooltip.is_queued_for_deletion():
-		_tooltip.start_self_free()
+func _on_create_skill_window_button_pressed() -> void:
+	var skill_window: UISkillWindow = preload("res://UI/Tool/SkillWindow/ui_skill_window.tscn").instantiate()
+	skill_window.init(test_skill, get_global_mouse_position())
+	get_tree().root.add_child(skill_window)

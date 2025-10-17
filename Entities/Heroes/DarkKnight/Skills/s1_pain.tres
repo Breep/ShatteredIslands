@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_st347")
+skill_id = 2
 name = "Pain"
 description = "La tempête noire se nourrit de la souffrance de ses victimes. Elle inflige 1% damage supplémentaire pour chaque (1x) stack."
 portrait = ExtResource("1_ykt3a")

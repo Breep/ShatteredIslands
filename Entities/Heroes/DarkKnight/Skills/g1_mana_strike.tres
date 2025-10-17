@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_qf37b")
+skill_id = 4
 name = "Mana Strike"
 description = "Chaque superfrappe charge l'ultimat. Regen du mana égal à 5% des dégâts infligés."
 portrait = ExtResource("1_ewmlu")
