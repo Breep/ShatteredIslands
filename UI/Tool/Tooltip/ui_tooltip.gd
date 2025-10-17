@@ -10,7 +10,6 @@ signal unfocused(tooltip: Tooltip)
 # ============================== Public variable ==============================
 
 var parent_tooltip: Tooltip
-var debugg_int = 0 
 
 # ============================== Private variables ==============================
 

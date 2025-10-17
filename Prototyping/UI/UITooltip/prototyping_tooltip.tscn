@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ctce0022qwf78"]
+[gd_scene load_steps=5 format=3 uid="uid://ctce0022qwf78"]
 
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_dpmaf"]
 [ext_resource type="Script" uid="uid://b22tkewg8jw2q" path="res://Prototyping/UI/UITooltip/prototyping_tooltip.gd" id="2_uhpfw"]
 [ext_resource type="PackedScene" uid="uid://elffrjkkq2jc" path="res://UI/Tool/SmartTextLabel/ui_smart_text_label.tscn" id="3_c4yu4"]
+[ext_resource type="Script" uid="uid://bd3srw4twda5w" path="res://UI/Tool/SmartTextLabel/ui_smart_text_label.gd" id="4_nydl5"]
 
 [node name="PrototypingTooltip" type="Control"]
 layout_mode = 3
@@ -68,6 +69,13 @@ size_flags_stretch_ratio = 10.0
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 20
 text = "[[POISON_STACK]]  |  [[POISON_DAMAGE]]"
+
+[node name="SmartTextLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "[[POISON_DAMAGE]]"
+fit_content = true
+script = ExtResource("4_nydl5")
+metadata/_custom_type_script = "uid://bd3srw4twda5w"
 
 [node name="Control" type="Control" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2

@@ -8,6 +8,12 @@ var _tooltip: Tooltip
 @export_multiline var text_template: String
 
 func _ready() -> void:
+	meta_hover_started.connect(_on_meta_hover_started)
+	meta_hover_ended.connect(_on_meta_hover_ended)
+	fit_content = true
+	bbcode_enabled = true
+	meta_underlined = false
+	
 	if text_template.is_empty():
 		text = TooltipManager.render_bbcode(text)
 	else:
