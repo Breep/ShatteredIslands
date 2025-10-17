@@ -33,7 +33,6 @@ func init(tooltip_name: String, icon: Texture, description: String) -> void:
 	_tooltip_name.text = tooltip_name
 	_tooltip_icon.texture = icon
 	_init_position()
-	#_next_tooltip.connect("queue_freed",_on_tooltip_queue_freed)
 
 
 func delete() -> void:
@@ -49,9 +48,7 @@ func force_recursive_child_delete(delete_self: bool) -> void:
 
 
 func start_recursive_parent_free() -> void:
-	print(debugg_int , "start_recursive_parent_free()")
 	if _mouse_on_self:
-		print(debugg_int , "mouse-self")
 		return
 	start_self_free()
 
@@ -135,13 +132,6 @@ func _on_mouse_exited() -> void:
 
 
 func _on_panel_mouse_entered() -> void:
-	var debugg_string : String = ""
-	if parent_tooltip != null:
-		debugg_string += str(parent_tooltip.debugg_int) + " "
-	debugg_string += str(debugg_int) + " "
-	if _child_tooltip != null:
-		debugg_string += str(_child_tooltip.debugg_int)
-	print(debugg_string)
 	_stop_self_free()
 	focused.emit(self)
 	_mouse_on_self = true
