@@ -7,11 +7,19 @@ var dead_time: float = 0.5
 var alive_time: float = 2.0
 var follow_mouse: bool = false
 
+# ============================== CONSTANTS ==============================
+
+const POP_TIME: float = 0.15
+const POP_SCALE := Vector2(0.9, 0.9)
+
 # ============================== Private Variables ==============================
 
 var _skill: Skill
 var _spawn_pos: Vector2
 var _mouse_in_window: bool = false
+
+var _tween: Tween
+var _poping_out: bool = false
 
 # ============================== Local nodes ==============================
 
@@ -38,17 +46,33 @@ func init(skill: Skill, spawn_pos: Vector2) -> void:
 # ============================== Private functions ==============================
 
 func _pop_in() -> void:
-	# POP in the screen with a small and minimalist tween effect
-	pass
+	pivot_offset = size * 0.5
+	modulate.a = 0.0
+	scale = POP_SCALE
+	if _tween and _tween.is_valid():
+		_tween.kill()
+	_tween = create_tween()
+	_tween.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	_tween.parallel().tween_property(self, "scale", Vector2.ONE, POP_TIME)
+	_tween.parallel().tween_property(self, "modulate:a", 1.0, 0.18)
+
 
 func _pop_out() -> void:
-	# POP out of the screen with a small and minimalist tween effect
-	pass
+	if _poping_out: return
+	_poping_out = true
+	if _tween and _tween.is_valid():
+		_tween.kill()
+
+	_tween = create_tween()
+	_tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	_tween.parallel().tween_property(self, "scale", POP_SCALE, POP_TIME)
+	_tween.parallel().tween_property(self, "modulate:a", 0.0, POP_TIME)
+	_tween.tween_callback(Callable(self, "queue_free"))
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if not _mouse_in_window:
-			queue_free()
+			_pop_out()
  
 # ============================== Callbacks ==============================
 
