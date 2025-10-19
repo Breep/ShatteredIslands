@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://4ej2ucoq4s04"
-path="res://.godot/imported/dark knight.glb-53d74d7927bccae9df748e1ad5740084.scn"
+uid="uid://bq0urt465jov"
+path="res://.godot/imported/darkknight_gold.glb-5067e8e00f31a3e8f75c93ea555783cc.scn"
 
 [deps]
 
-source_file="res://Data/Blender/Heroes/Dark knight new/dark knight.glb"
-dest_files=["res://.godot/imported/dark knight.glb-53d74d7927bccae9df748e1ad5740084.scn"]
+source_file="res://Data/Blender/Heroes/Dark knight new/darkknight_gold.glb"
+dest_files=["res://.godot/imported/darkknight_gold.glb-5067e8e00f31a3e8f75c93ea555783cc.scn"]
 
 [params]
 
