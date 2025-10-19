@@ -79,12 +79,13 @@ func _on_impact_effect_area_body_exited(body: Node3D) -> void:
 
 
 func _on_deploy_timer_timeout() -> void:
-	var hit_marker : Node3D = hit_marker_scene.instantiate()
-	get_tree().current_scene.add_child(hit_marker)
-	hit_marker.global_position = global_position
-	var anim_player: AnimationPlayer = hit_marker.get_node("AnimationPlayer")
-	if anim_player:
-		anim_player.play("Init")
+	#var hit_marker : Node3D = hit_marker_scene.instantiate()
+	#get_tree().current_scene.add_child(hit_marker)
+	#hit_marker.global_position = global_position
+	#var anim_player: AnimationPlayer = hit_marker.get_node("AnimationPlayer")
+	#if anim_player:
+		#anim_player.play("Init")
+	#print("DEBUG -- SHOULD BEING DESTROYED")
 	queue_free()
 	if not multiplayer.is_server(): return
 	
@@ -99,7 +100,7 @@ func _on_deploy_timer_timeout() -> void:
 
 
 func play_impact_sound():
-	
+	return
 	# On détache le nœud audio de son parent actuel (la scène Meteor)
 	# Il ne sera donc plus détruit quand on appellera queue_free() sur le météore.
 	remove_child(audio_player)

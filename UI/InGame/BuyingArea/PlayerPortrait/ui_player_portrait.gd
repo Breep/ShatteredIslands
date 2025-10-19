@@ -28,6 +28,8 @@ func connect_to_player(new_player: Player) -> void:
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
+	if _player_health_bar.material != null:
+		_player_health_bar.material = _player_health_bar.material.duplicate()
 	_setup_local_nodes()
 
 # ============================== Private functions ==============================
@@ -46,6 +48,8 @@ func _setup_local_nodes() -> void:
 	
 	player.death.connect(_on_player_death)
 	
+	player.health_changed.connect(_on_player_health_changed)
+	player.max_health_changed.connect(_on_player_max_health_changed)
 	_player_health_bar.set_max_value(player.max_health)
 	_player_health_bar.set_bar_value(player.health)
 	_player_health_label.text = str(player.health)
