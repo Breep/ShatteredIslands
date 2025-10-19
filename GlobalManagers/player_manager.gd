@@ -208,6 +208,7 @@ func _add_player(player_name: String, id: int, is_bot: bool, serialized_player: 
 	
 	if multiplayer.is_server():
 		var new_player := Player.new()
+		new_player.skill_manager = SkillManager.new()
 		new_player.name = player_name
 		new_player.id = id
 		new_player.is_bot = is_bot

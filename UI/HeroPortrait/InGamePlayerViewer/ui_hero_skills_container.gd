@@ -10,6 +10,8 @@ const SKILL_WINDOW_SCENE: PackedScene = preload("res://UI/Tool/SkillWindow/ui_sk
 
 var _skills: Dictionary[Skill.SkillID, Skill]
 var _skill_window_opened: UISkillWindow
+var _hover_timer: Timer         # <— we'll create this dynamically
+var _hovered_skill_id: Skill.SkillID
 
 # ============================== Local nodes ==============================
 
@@ -22,6 +24,10 @@ func _ready() -> void:
 	_colorize_buttons()
 	for skill_id: Skill.SkillID in _skill_buttons.keys():
 		_skill_buttons[skill_id].deactivate()
+	_hover_timer = Timer.new()
+	_hover_timer.one_shot = true
+	add_child(_hover_timer)
+	_hover_timer.timeout.connect(_on_hover_timer_timeout)
 
 # ============================== Public functions ==============================
 
@@ -70,9 +76,16 @@ func _on_hex_button_pressed(button_ref: HexButton) -> void:
 	var skill_id: Skill.SkillID = _get_skill_id_from_hex_button(button_ref)
 	Events.signal_ui_skill_picked(skill_id)
 
-func _on_hex_button_mouse_entered(button_ref: HexButton) -> void:
-	var skill_id: Skill.SkillID = _get_skill_id_from_hex_button(button_ref)
-	_create_skill_window(_skills[skill_id])
 
-func _on_hex_button_mouse_exited(button_ref: HexButton) -> void:
-	var skill_id: Skill.SkillID = _get_skill_id_from_hex_button(button_ref)
+func _on_hex_button_mouse_entered(button_ref: HexButton) -> void:
+	_hovered_skill_id = _get_skill_id_from_hex_button(button_ref)
+	_hover_timer.start(WAIT_TIME_BEFORE_SKILL_WINDOW)
+
+
+func _on_hex_button_mouse_exited(_button_ref: HexButton) -> void:
+	_hover_timer.stop()
+
+
+func _on_hover_timer_timeout() -> void:
+	if _hovered_skill_id != null:
+		_create_skill_window(_skills[_hovered_skill_id])

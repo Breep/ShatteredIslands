@@ -72,13 +72,11 @@ func _show_minimize_button() -> void:
 	_minimize_button.show()
 	var tw := create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	tw.tween_property(_minimize_button, "modulate:a", 1.0, _effect_duration).from(0.0)
-	tw.parallel().tween_property(_minimize_button, "scale", Vector2.ONE, _effect_duration).from(Vector2(0.9, 0.9))
 
 
 func _hide_minimize_button() -> void:
 	_minimize_button.hide()
 	_minimize_button.modulate.a = 0.0
-	_minimize_button.scale = Vector2(0.9, 0.9)
 
 func _add_local_player_special_behaviour() -> void:
 	if not _player == PlayerManager.get_local_player():

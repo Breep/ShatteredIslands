@@ -53,6 +53,75 @@ viewport = NodePath("../SubViewport")
 transparent_bg = true
 size = Vector2i(1920, 1080)
 
+[node name="InGameFamilyViewer" type="Control" parent="SubViewport" node_paths=PackedStringArray("_family_name_label", "_family_description_label", "_ui_cards_viewer")]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme = ExtResource("1_2d2sx")
+script = ExtResource("18_8k2vn")
+_family_name_label = NodePath("FamilyNameLabel")
+_family_description_label = NodePath("DescriptionLabel")
+_ui_cards_viewer = NodePath("CardsViewer")
+
+[node name="Background" type="TextureRect" parent="SubViewport/InGameFamilyViewer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_py1cm")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Border" type="TextureRect" parent="SubViewport/InGameFamilyViewer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("20_kkbei")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="FamilyNameLabel" type="Label" parent="SubViewport/InGameFamilyViewer"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 241.0
+offset_top = 162.0
+offset_right = 1217.0
+offset_bottom = 267.0
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 75
+text = "Poison"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="SubViewport/InGameFamilyViewer"]
+layout_mode = 0
+offset_left = 260.0
+offset_top = 250.0
+offset_right = 1213.0
+offset_bottom = 385.0
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 25
+text = "5/10/15/30% to inflict 1 more poison stack when 1 poison stack is applied"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="CardsViewer" parent="SubViewport/InGameFamilyViewer" instance=ExtResource("7_kkbei")]
+layout_mode = 0
+offset_left = 473.0
+offset_top = 326.0
+offset_right = 1054.0
+offset_bottom = 892.0
+
 [node name="InGameHeroViewer" type="Control" parent="SubViewport" node_paths=PackedStringArray("_player_name_label", "_hero_name_label", "_player_level_label", "_statistic_container", "_skills_container", "_player_xp_progress_bar", "_player_xp_border", "_match_history_ticks")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(1920, 1080)
@@ -161,9 +230,9 @@ vertical_alignment = 1
 [node name="PlayerNameLabel" type="Label" parent="SubViewport/InGameHeroViewer"]
 layout_mode = 1
 anchors_preset = -1
-offset_left = 638.0
+offset_left = 259.0
 offset_top = 162.0
-offset_right = 859.0
+offset_right = 1203.0
 offset_bottom = 267.0
 theme_override_constants/outline_size = 20
 theme_override_font_sizes/font_size = 75
@@ -174,9 +243,9 @@ vertical_alignment = 1
 [node name="HeroNameLabel" type="Label" parent="SubViewport/InGameHeroViewer"]
 layout_mode = 1
 anchors_preset = -1
-offset_left = 532.0
+offset_left = 258.0
 offset_top = 235.0
-offset_right = 961.0
+offset_right = 1204.0
 offset_bottom = 340.0
 theme_override_constants/outline_size = 15
 theme_override_font_sizes/font_size = 50
@@ -536,72 +605,3 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("21_kkbei")
 expand_mode = 1
-
-[node name="InGameFamilyViewer" type="Control" parent="SubViewport" node_paths=PackedStringArray("_family_name_label", "_family_description_label", "_ui_cards_viewer")]
-unique_name_in_owner = true
-visible = false
-custom_minimum_size = Vector2(1920, 1080)
-layout_mode = 3
-anchors_preset = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
-theme = ExtResource("1_2d2sx")
-script = ExtResource("18_8k2vn")
-_family_name_label = NodePath("FamilyNameLabel")
-_family_description_label = NodePath("DescriptionLabel")
-_ui_cards_viewer = NodePath("CardsViewer")
-
-[node name="Background" type="TextureRect" parent="SubViewport/InGameFamilyViewer"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_py1cm")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Border" type="TextureRect" parent="SubViewport/InGameFamilyViewer"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("20_kkbei")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="FamilyNameLabel" type="Label" parent="SubViewport/InGameFamilyViewer"]
-layout_mode = 1
-anchors_preset = -1
-offset_left = 241.0
-offset_top = 162.0
-offset_right = 1217.0
-offset_bottom = 267.0
-theme_override_constants/outline_size = 20
-theme_override_font_sizes/font_size = 75
-text = "Poison"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="DescriptionLabel" type="Label" parent="SubViewport/InGameFamilyViewer"]
-layout_mode = 0
-offset_left = 260.0
-offset_top = 250.0
-offset_right = 1213.0
-offset_bottom = 385.0
-theme_override_constants/outline_size = 15
-theme_override_font_sizes/font_size = 25
-text = "5/10/15/30% to inflict 1 more poison stack when 1 poison stack is applied"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="CardsViewer" parent="SubViewport/InGameFamilyViewer" instance=ExtResource("7_kkbei")]
-layout_mode = 0
-offset_left = 473.0
-offset_top = 326.0
-offset_right = 1054.0
-offset_bottom = 892.0

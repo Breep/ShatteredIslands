@@ -14,8 +14,7 @@ extends Control
 @onready var _round_label: Label = %RoundLabel
 @onready var _ui_player_info: UIPlayerInfo = %UIPlayerInfo
 
-@onready var _ui_selected_entity_stats: UIEntityStats = %SelectedEntityStats
-@onready var _ui_own_entity_stats: UIEntityStats = %OwnEntityStats
+@onready var _ui_local_player_hero_portrait: UIHeroPortrait = %LocalPlayerHeroPortrait
 
 # ============================== Private variables ==============================
 
@@ -41,7 +40,7 @@ func set_active() -> void:
 	_is_active = true
 	show()
 	if not multiplayer.is_server() or GameManager.game_type == GameManager.GameType.SOLO:
-		_ui_own_entity_stats.connect_entity_stats(PlayerManager.get_local_player().character)
+		_ui_local_player_hero_portrait.update_content(PlayerManager.get_local_player())
 
 
 func set_inactive() -> void:
@@ -51,8 +50,8 @@ func set_inactive() -> void:
 
 # ============================== Callbacks ==============================
 
-func _on_events_entity_clicked(entity: Entity) -> void:
-	_ui_selected_entity_stats.connect_entity_stats(entity)
+func _on_events_entity_clicked(_entity: Entity) -> void:
+	pass
 
 
 func _on_events_furniture_clicked(furniture: Furniture) -> void:
@@ -69,7 +68,7 @@ func _on_events_furniture_clicked(furniture: Furniture) -> void:
 
 
 func _on_events_nothing_clicked() -> void:
-	_ui_selected_entity_stats.hide()
+	pass
 
 
 func _on_round_manager_current_round_changed(round_number: int) -> void:

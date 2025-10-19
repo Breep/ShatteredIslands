@@ -26,7 +26,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel"]
 layout_mode = 1
@@ -39,6 +38,57 @@ theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+mouse_filter = 2
+theme_override_constants/margin_left = -5
+theme_override_constants/margin_top = -5
+theme_override_constants/margin_right = -5
+
+[node name="ColorRect" type="ColorRect" parent="Panel/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.16409835, 0.16409835, 0.16409835, 0.6)
+
+[node name="NameLabel" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer/MarginContainer/ColorRect"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("3_l2bya")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "TOOLTIP"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+bbcode_enabled = true
+text = "This is an awesome tooltip !
+You can even find more [b][url=test] HERE [/url][/b]"
+fit_content = true
 
 [node name="Control" type="Control" parent="Panel/MarginContainer"]
 layout_mode = 2
@@ -68,38 +118,6 @@ value = 100.0
 fill_mode = 4
 nine_patch_stretch = true
 texture_progress = ExtResource("2_fbqj2")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="NameLabel" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_filter = 1
-theme_override_fonts/normal_font = ExtResource("3_l2bya")
-theme_override_font_sizes/normal_font_size = 30
-bbcode_enabled = true
-text = "TOOLTIP"
-fit_content = true
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="DescriptionLabel" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-mouse_filter = 1
-bbcode_enabled = true
-text = "This is an awesome tooltip !
-You can even find more [b][url=test] HERE [/url][/b]>"
-fit_content = true
 
 [node name="FreeTimer" type="Timer" parent="."]
 unique_name_in_owner = true

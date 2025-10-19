@@ -1,11 +1,27 @@
-[gd_resource type="Theme" load_steps=16 format=3 uid="uid://deijluejrkd7e"]
+[gd_resource type="Theme" load_steps=18 format=3 uid="uid://deijluejrkd7e"]
 
 [ext_resource type="FontFile" uid="uid://dbqejd0leblna" path="res://Data/font/Nunito-Bold.ttf" id="1_itn17"]
 [ext_resource type="FontFile" uid="uid://b3ceq6nwnmlhq" path="res://Data/font/LuckiestGuy-Regular.ttf" id="2_m6wv4"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1psgx"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m6wv4"]
+bg_color = Color(0.60038817, 0.60038817, 0.60038817, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m6wv4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fmn5p"]
+bg_color = Color(0.60038817, 0.60038817, 0.60038817, 0.5)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c6cb3"]
 
@@ -18,7 +34,7 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bck8t"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c6cb3"]
-bg_color = Color(0.6, 0.6, 0.6, 0.47058824)
+bg_color = Color(0.40443814, 0.40443814, 0.40443814, 0.90000004)
 border_width_left = 5
 border_width_top = 5
 border_width_right = 5
@@ -41,7 +57,9 @@ Button/colors/font_outline_color = Color(0, 0, 0, 1)
 Button/constants/outline_size = 5
 Button/fonts/font = ExtResource("1_itn17")
 Button/styles/focus = SubResource("StyleBoxEmpty_1psgx")
+Button/styles/hover = SubResource("StyleBoxFlat_m6wv4")
 Button/styles/normal = SubResource("StyleBoxEmpty_m6wv4")
+Button/styles/pressed = SubResource("StyleBoxFlat_fmn5p")
 HScrollBar/styles/grabber = SubResource("StyleBoxEmpty_c6cb3")
 HScrollBar/styles/grabber_highlight = SubResource("StyleBoxEmpty_fmn5p")
 HScrollBar/styles/grabber_pressed = SubResource("StyleBoxEmpty_0pcbd")

@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://bhxhqex1pbh2p"]
 
 [ext_resource type="Script" uid="uid://cl4rtcia6te0m" path="res://UI/FightingArea/ui_fighting_area.gd" id="1_xkiby"]
-[ext_resource type="PackedScene" uid="uid://db2anika8bvj8" path="res://UI/EntityStats/ui_entity_stats.tscn" id="2_g28wu"]
 [ext_resource type="PackedScene" uid="uid://cxalabhvxw1pd" path="res://UI/Tool/Timer/ui_timer.tscn" id="2_twkqc"]
 [ext_resource type="PackedScene" uid="uid://dmfkigo1trjd0" path="res://UI/Tool/Countdown/ui_countdown.tscn" id="3_gg8jf"]
+[ext_resource type="PackedScene" uid="uid://cxlyl8wdndq08" path="res://UI/HeroPortrait/ui_hero_portrait.tscn" id="4_twkqc"]
 
 [node name="UIFightingArea" type="Control"]
 layout_mode = 3
@@ -112,50 +112,27 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
 
+[node name="LocalPlayerHeroPortrait" parent="VBoxContainer/BottomPanel/HBoxContainer/Control2" instance=ExtResource("4_twkqc")]
+unique_name_in_owner = true
+layout_mode = 1
+anchor_top = -6.065
+anchor_right = 3.3530002
+offset_left = 23.0
+offset_top = -28.97998
+offset_right = 22.983948
+offset_bottom = -21.0
+
 [node name="BottomLeftEmpty" type="Control" parent="VBoxContainer/BottomPanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
-
-[node name="OwnEntityStats" parent="VBoxContainer/BottomPanel/HBoxContainer/BottomLeftEmpty" instance=ExtResource("2_g28wu")]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 7
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -125.0
-offset_bottom = 0.0
-grow_vertical = 0
-size_flags_horizontal = 3
-
-[node name="MainContainer" parent="VBoxContainer/BottomPanel/HBoxContainer/BottomLeftEmpty/OwnEntityStats" index="0"]
-stats_position = 0
-
-[node name="LeftContainer" parent="VBoxContainer/BottomPanel/HBoxContainer/BottomLeftEmpty/OwnEntityStats/MainContainer/MainPanel" index="5"]
-visible = false
-
-[node name="RightContainer" parent="VBoxContainer/BottomPanel/HBoxContainer/BottomLeftEmpty/OwnEntityStats/MainContainer/MainPanel" index="6"]
-visible = true
 
 [node name="BottomRightEmpty" type="Control" parent="VBoxContainer/BottomPanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 
-[node name="SelectedEntityStats" parent="VBoxContainer/BottomPanel/HBoxContainer/BottomRightEmpty" instance=ExtResource("2_g28wu")]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 7
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -125.0
-offset_bottom = 0.0
-grow_vertical = 0
-size_flags_horizontal = 3
-
 [node name="Control" type="Control" parent="VBoxContainer/BottomPanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
-
-[editable path="VBoxContainer/BottomPanel/HBoxContainer/BottomLeftEmpty/OwnEntityStats"]

@@ -1,26 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://dyf154pndkj6u"]
+[gd_scene load_steps=7 format=3 uid="uid://dyf154pndkj6u"]
 
 [ext_resource type="Script" uid="uid://4mjiyc4ne1" path="res://UI/BuyingArea/PlayerPortrait/ui_player_portrait.gd" id="1_7toxq"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_q7lmx"]
 [ext_resource type="Script" uid="uid://dl8cs3pdc7hvl" path="res://UI/Tool/input_transmiter.gd" id="2_0qefo"]
-[ext_resource type="Texture2D" uid="uid://xhyj0k42ilb3" path="res://UI/_Themes/Data/panel_tileable_20px_border_only.png" id="2_08slx"]
 [ext_resource type="Texture2D" uid="uid://bw3okxwbucu42" path="res://Data/Heroes/Portraits/Default.webp" id="3_7toxq"]
 [ext_resource type="PackedScene" uid="uid://baxstke5i0khe" path="res://UI/BuyingArea/PlayerPortrait/ui_player_life.tscn" id="3_fvjac"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_fvjac"]
 viewport_path = NodePath("SubViewport")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rp0om"]
-texture = ExtResource("2_08slx")
-texture_margin_left = 20.0
-texture_margin_top = 20.0
-texture_margin_right = 20.0
-texture_margin_bottom = 20.0
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[sub_resource type="Theme" id="Theme_0qefo"]
-Panel/styles/panel = SubResource("StyleBoxTexture_rp0om")
 
 [node name="PlayerPortrait" type="Control"]
 layout_mode = 3
@@ -154,16 +141,6 @@ text = "2"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PanelBorder" type="Panel" parent="SubViewport/SubPlayerPortrait/Panel/MarginContainer/VBoxContainer/Control/DamagePanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme = SubResource("Theme_0qefo")
-
 [node name="LevelPanel" type="Panel" parent="SubViewport/SubPlayerPortrait/Panel/MarginContainer/VBoxContainer/Control"]
 layout_mode = 1
 offset_left = 27.0
@@ -183,16 +160,6 @@ theme_override_font_sizes/font_size = 60
 text = "2"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="PanelBorder" type="Panel" parent="SubViewport/SubPlayerPortrait/Panel/MarginContainer/VBoxContainer/Control/LevelPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme = SubResource("Theme_0qefo")
 
 [node name="DeathColorLayer" type="ColorRect" parent="SubViewport/SubPlayerPortrait/Panel"]
 unique_name_in_owner = true
@@ -228,16 +195,3 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="PanelBorder" type="Panel" parent="SubViewport/SubPlayerPortrait"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 9.15527e-05
-offset_right = 0.000152588
-offset_bottom = 6.10352e-05
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme = SubResource("Theme_0qefo")

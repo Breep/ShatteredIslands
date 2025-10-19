@@ -120,6 +120,7 @@ var damage: int:
 
 static func new_from_serialized(serialized_data: Dictionary) -> Player:
 	var player := Player.new()
+	player.skill_manager = SkillManager.new()
 	player.name = serialized_data[SerializedField.NAME]
 	player.id = serialized_data[SerializedField.ID]
 	player.team = serialized_data[SerializedField.TEAM]

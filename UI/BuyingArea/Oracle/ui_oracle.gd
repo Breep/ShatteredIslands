@@ -17,21 +17,21 @@ var _is_locked: bool
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	if multiplayer.is_server() and GameManager.game_type != GameManager.GameType.SOLO:
-		return
-	_local_player = PlayerManager.get_local_player()
-	
-	_local_player.death.connect(_on_local_player_death)
-	_local_player.xp_changed.connect(_on_local_player_xp_changed)
-	_local_player.lvl_changed.connect(_on_local_player_lvl_changed)
-	_local_player.skill_choice_awaiting.connect(_on_local_player_skill_choice_awaiting)
-	
-	_all_levels_container.level_preview_changed.connect(_on_all_levels_container_level_preview_changed)
-	
-	_buy_xp_price_label.text = str(GameManager.game_rules.buy_xp_price)
-	
-	var max_xp: int = GameManager.game_rules.xp_per_levels[_local_player.lvl]
-	_all_levels_container.update_player_xp(_local_player.lvl, _local_player.xp, max_xp)
+	return
+	#if multiplayer.is_server() and GameManager.game_type != GameManager.GameType.SOLO:
+		#return
+	#_local_player = PlayerManager.get_local_player()
+	#
+	#_local_player.death.connect(_on_local_player_death)
+	#_local_player.xp_changed.connect(_on_local_player_xp_changed)
+	#_local_player.lvl_changed.connect(_on_local_player_lvl_changed)
+	#
+	#_all_levels_container.level_preview_changed.connect(_on_all_levels_container_level_preview_changed)
+	#
+	#_buy_xp_price_label.text = str(GameManager.game_rules.buy_xp_price)
+	#
+	#var max_xp: int = GameManager.game_rules.xp_per_levels[_local_player.lvl]
+	#_all_levels_container.update_player_xp(_local_player.lvl, _local_player.xp, max_xp)
 
 # ============================== Public functions ==============================
 

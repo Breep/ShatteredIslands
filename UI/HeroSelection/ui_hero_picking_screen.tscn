@@ -1,23 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://k4dc5j8ecdxo"]
+[gd_scene load_steps=8 format=3 uid="uid://k4dc5j8ecdxo"]
 
 [ext_resource type="Script" uid="uid://ftwn66cpwnyp" path="res://UI/HeroSelection/ui_hero_picking_screen.gd" id="1_r4a5p"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="2_5jgqs"]
 [ext_resource type="PackedScene" uid="uid://dmfkigo1trjd0" path="res://UI/Tool/Countdown/ui_countdown.tscn" id="2_r4a5p"]
-[ext_resource type="Texture2D" uid="uid://xhyj0k42ilb3" path="res://UI/_Themes/Data/panel_tileable_20px_border_only.png" id="3_h1sxx"]
 [ext_resource type="PackedScene" uid="uid://b6lyxftbneqy" path="res://UI/HeroSelection/ui_hero_portrait_button.tscn" id="4_kexe1"]
 [ext_resource type="PackedScene" uid="uid://ddugcksbtixea" path="res://UI/HeroSelection/HeroOverviewPanel/ui_hero_overview_panel.tscn" id="5_bveri"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bveri"]
-texture = ExtResource("3_h1sxx")
-texture_margin_left = 20.0
-texture_margin_top = 20.0
-texture_margin_right = 20.0
-texture_margin_bottom = 20.0
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[sub_resource type="Theme" id="Theme_xwnkc"]
-Panel/styles/panel = SubResource("StyleBoxTexture_bveri")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kexe1"]
 
@@ -32,14 +19,14 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_r4a5p")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.104986, 0.0747311, 0.0394778, 1)
+color = Color(0.20511743, 0.20511743, 0.20511743, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -67,16 +54,6 @@ theme_override_font_sizes/font_size = 35
 text = "Hero picking phase"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="PanelBorder" type="Panel" parent="VBoxContainer/TitlePanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme = SubResource("Theme_xwnkc")
 
 [node name="ScreenCenter" type="Panel" parent="VBoxContainer"]
 layout_mode = 2
@@ -180,16 +157,6 @@ size_flags_stretch_ratio = 0.2
 theme = ExtResource("2_5jgqs")
 theme_override_font_sizes/font_size = 50
 text = "Lock hero"
-
-[node name="PanelBorder" type="Panel" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer/AllHeroesPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme = SubResource("Theme_xwnkc")
 
 [node name="UiHeroOverviewPanel" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer" instance=ExtResource("5_bveri")]
 unique_name_in_owner = true

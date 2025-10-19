@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://cc7c0q2xebkyp" path="res://UI/BuyingArea/ui_buying_area.gd" id="1_5o5p6"]
 [ext_resource type="PackedScene" uid="uid://c25ls8pp84qld" path="res://UI/BuyingArea/PlayerInfo/ui_player_info.tscn" id="2_4kg3l"]
-[ext_resource type="PackedScene" uid="uid://db2anika8bvj8" path="res://UI/EntityStats/ui_entity_stats.tscn" id="2_btc45"]
 [ext_resource type="PackedScene" uid="uid://cxalabhvxw1pd" path="res://UI/Tool/Timer/ui_timer.tscn" id="2_c4gh8"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="4_4kg3l"]
 [ext_resource type="PackedScene" uid="uid://d1oxnd1g75rqh" path="res://UI/BuyingArea/CardShop/ui_card_shop.tscn" id="4_dsp03"]
 [ext_resource type="PackedScene" uid="uid://dpb7vslj2dbl0" path="res://UI/BuyingArea/Oracle/ui_oracle.tscn" id="5_8ytae"]
+[ext_resource type="PackedScene" uid="uid://cxlyl8wdndq08" path="res://UI/HeroPortrait/ui_hero_portrait.tscn" id="7_4kg3l"]
 
 [node name="UIBuyingArea" type="Control" node_paths=PackedStringArray("_ui_card_shop", "_ui_oracle")]
 layout_mode = 3
@@ -17,7 +17,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_5o5p6")
-_ui_card_shop = NodePath("VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel/CenterContainer/CardShop")
+_ui_card_shop = NodePath("VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel/CardShop")
 _ui_oracle = NodePath("VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel/CenterContainer/UIOracle")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -130,20 +130,23 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.8
 mouse_filter = 2
 
+[node name="CardShop" parent="VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel" instance=ExtResource("4_dsp03")]
+layout_mode = 1
+anchors_preset = 5
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_top = 0.0
+offset_bottom = 500.00003
+grow_vertical = 1
+
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel"]
 layout_mode = 1
-anchors_preset = -1
-anchor_top = -0.086
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 1.086
-offset_top = 44.032
-offset_bottom = -44.032
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-
-[node name="CardShop" parent="VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel/CenterContainer" instance=ExtResource("4_dsp03")]
-layout_mode = 2
 
 [node name="UIOracle" parent="VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel/CenterContainer" instance=ExtResource("5_8ytae")]
 visible = false
@@ -175,53 +178,32 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
 
+[node name="LocalPlayerHeroPortrait" parent="VBoxContainer/BottomPanel/HBoxContainer/Control2" instance=ExtResource("7_4kg3l")]
+unique_name_in_owner = true
+layout_mode = 1
+anchor_left = 0.051000003
+anchor_top = -5.7310004
+anchor_right = 3.1360002
+anchor_bottom = 0.88000005
+offset_left = 0.1279993
+offset_top = -0.051940918
+offset_right = 0.00793457
+offset_bottom = -0.040008545
+
 [node name="BottomLeftEmpty" type="Control" parent="VBoxContainer/BottomPanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
-
-[node name="OwnEntityStats" parent="VBoxContainer/BottomPanel/HBoxContainer/BottomLeftEmpty" instance=ExtResource("2_btc45")]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 7
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -125.0
-offset_bottom = 0.0
-grow_vertical = 0
-size_flags_horizontal = 3
-
-[node name="MainContainer" parent="VBoxContainer/BottomPanel/HBoxContainer/BottomLeftEmpty/OwnEntityStats" index="0"]
-stats_position = 0
-
-[node name="LeftContainer" parent="VBoxContainer/BottomPanel/HBoxContainer/BottomLeftEmpty/OwnEntityStats/MainContainer/MainPanel" index="5"]
-visible = false
-
-[node name="RightContainer" parent="VBoxContainer/BottomPanel/HBoxContainer/BottomLeftEmpty/OwnEntityStats/MainContainer/MainPanel" index="6"]
-visible = true
 
 [node name="BottomRightEmpty" type="Control" parent="VBoxContainer/BottomPanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 
-[node name="SelectedEntityStats" parent="VBoxContainer/BottomPanel/HBoxContainer/BottomRightEmpty" instance=ExtResource("2_btc45")]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 7
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -125.0
-offset_bottom = 0.0
-grow_vertical = 0
-size_flags_horizontal = 3
-
 [node name="Control" type="Control" parent="VBoxContainer/BottomPanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
 
-[connection signal="mouse_entered" from="VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel/CenterContainer/CardShop" to="." method="_on_card_shop_mouse_entered"]
+[connection signal="mouse_entered" from="VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel/CardShop" to="." method="_on_card_shop_mouse_entered"]
 [connection signal="mouse_entered" from="VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel/CenterContainer/UIOracle" to="." method="_on_ui_oracle_mouse_entered"]
-
-[editable path="VBoxContainer/BottomPanel/HBoxContainer/BottomLeftEmpty/OwnEntityStats"]

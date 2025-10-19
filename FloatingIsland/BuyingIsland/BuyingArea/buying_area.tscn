@@ -34,13 +34,12 @@ mouse_filter = 2
 
 [node name="UIBuyingArea" parent="UI" node_paths=PackedStringArray("_round_timer") instance=ExtResource("5_dvq4w")]
 unique_name_in_owner = true
-visible = true
 layout_mode = 1
 _round_timer = NodePath("../../BuyingAreaTimer")
 
 [node name="BuyingAreaTimer" type="Timer" parent="."]
 unique_name_in_owner = true
-wait_time = 10.0
+wait_time = 20.0
 one_shot = true
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
