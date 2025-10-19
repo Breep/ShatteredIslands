@@ -6,7 +6,6 @@ extends Control
 
 @export_group("Middle Panels")
 @export var _ui_card_shop: UICardShop
-@export var _ui_oracle: UIOracle
 
 # ============================== Local nodes ==============================
 
@@ -59,12 +58,9 @@ func _on_events_furniture_clicked(furniture: Furniture) -> void:
 		return
 	
 	_ui_card_shop.set_inactive()
-	_ui_oracle.set_inactive()
 	match furniture.furniture_type:
 		Furniture.FurnitureType.CARD_SHOP:
 			_ui_card_shop.set_active()
-		Furniture.FurnitureType.ORACLE:
-			_ui_oracle.set_active()
 
 
 func _on_events_nothing_clicked() -> void:

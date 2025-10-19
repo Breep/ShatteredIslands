@@ -127,3 +127,7 @@ func _on_refresh_button_pressed() -> void:
 func _on_random_card_button_pressed() -> void:
 	_random_card_button.disabled = true
 	_card_shop.try_buy_random_card()
+
+
+func _on_buy_xp_button_pressed() -> void:
+	ServerOracleShop.try_buy_xp(_local_player)

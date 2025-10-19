@@ -15,30 +15,30 @@ extends Hero3D
 @export var _dark_storm_damage_percent: float = 0.5
 
 @export_group("Level 3 Skills")
-@export_subgroup("Skill1A - Spark Of Light")
+@export_subgroup("Skill Bronze 1 - Spark Of Light")
 @export var _spark_of_light_activated: bool = false
 @export var _spark_of_light_percent: float = 100.0
 
-@export_subgroup("Skill1B - Corruption")
+@export_subgroup("Skill Bronze 2 - Corruption")
 @export var _corruption_activated: bool = false
 @export var _corruption_ad_gain: float = 1.0
 
 @export_group("Level 5 Skills")
-@export_subgroup("Skill2A - Pain")
+@export_subgroup("Skill Silver 1 - Pain")
 @export var _pain_activated: bool = false
 @export var _pain_percent_per_stack: float = 2.5
 
-@export_subgroup("Skill2B - Cataclysm")
+@export_subgroup("Skill Silver 2 - Cataclysm")
 @export var _cataclysm_activated: bool = false
 @export var _cataclysm_number: int = 2
 @export var _cataclysm_mana_cost: int = 50
 
 @export_group("Level 7 Skills")
-@export_subgroup("Skill3A - Mana Strike")
+@export_subgroup("Skill Gold 1 - Mana Strike")
 @export var _mana_strike_activated: bool = false
 @export var _mana_strike_percent: float = 5.0
 
-@export_subgroup("Skill3B - Mega Strike")
+@export_subgroup("Skill Gold 2 - Mega Strike")
 @export var _mega_strike_activated: bool = false
 @export var _mega_strike_max_charge: int = 10
 @export var _mega_strike_damage_percent: float = 500.0
@@ -47,6 +47,7 @@ extends Hero3D
 
 var _super_strike_charges: int = 0
 var _corruption_charges: int = 0
+var _skill_manager: SkillManager
 
 # ============================== Constants ==============================
 
@@ -59,6 +60,9 @@ func _ready() -> void:
 	
 	if _cataclysm_activated:
 		_on_cataclysm_activation()
+	
+	_skill_manager = _character_owner.player.skill_manager
+	_skill_manager.skill_picked.connect(_on_skill_manager_skill_picked)
 
 # ============================== Public function ==============================
 
@@ -200,3 +204,21 @@ func _on_cataclysm_activation() -> void:
 	stat_modifier.value = _cataclysm_mana_cost
 	stat_modifier.tags = [StatModifier.TagType.HERO]
 	_character_owner.stats_manager.update_modifier(stat_modifier)
+
+# ============================== Skill Manager Callbacks ==============================
+
+func _on_skill_manager_skill_picked(skill_id: Skill.SkillID) -> void:
+	match skill_id:
+		Skill.SkillID.BRONZE1:
+			_spark_of_light_activated = true
+		Skill.SkillID.BRONZE2:
+			_corruption_activated = true
+		Skill.SkillID.SILVER1:
+			_pain_activated = true
+		Skill.SkillID.SILVER2:
+			_cataclysm_activated = true
+			_on_cataclysm_activation()
+		Skill.SkillID.GOLD1:
+			_mana_strike_activated = true
+		Skill.SkillID.GOLD2:
+			_mega_strike_activated = true

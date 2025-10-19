@@ -428,3 +428,5 @@ expand_mode = 3
 stretch_mode = 5
 
 [node name="CardShop" parent="." instance=ExtResource("9_ahun0")]
+
+[connection signal="pressed" from="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXP/BuyXPButton" to="." method="_on_buy_xp_button_pressed"]
