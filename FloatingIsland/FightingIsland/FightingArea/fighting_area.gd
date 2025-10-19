@@ -42,8 +42,6 @@ var fighting_manager: FightingManager:
 var entity_manager: EntityManager:
 	get: return _entity_manager
 
-@export var _ui_fighting_area: UIFightingArea
-
 @export var _fighting_floors: Dictionary[Battle.BattleType, FightingFloor]
 
 @export var _entities_node: Node3D
@@ -72,14 +70,6 @@ func start_fight(characters: Array[Character], battle_type: Battle.BattleType, b
 	_current_battle_id = battle_id
 	_fighting_manager.fight_is_over.connect(_on_fighting_manager_fight_is_over, CONNECT_ONE_SHOT)
 	_fighting_manager.start(characters)
-
-
-func set_active() -> void:
-	_ui_fighting_area.set_active()
-
-
-func set_inactive() -> void:
-	_ui_fighting_area.set_inactive()
 
 # ============================== Private functions ==============================
 

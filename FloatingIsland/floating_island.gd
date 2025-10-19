@@ -26,3 +26,7 @@ func set_active() -> void:
 
 func set_inactive() -> void:
 	pass
+
+
+func get_fighting_area() -> FightingArea:
+	return null

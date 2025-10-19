@@ -41,8 +41,7 @@ var _current_round_battles: Array[Battle]
 
 @onready var _island_spawns_to_be_removed: Node3D = %IslandSpawns
 
-@export_group("UI")
-@export var _ui_game: UIGame
+@onready var _buying_area_timer: Timer = %BuyingAreaTimer
 
 # ============================== Node base functions ==============================
 
@@ -54,7 +53,6 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	_hero_selector.all_heroes_picked.connect(_on_hero_selector_all_heroes_picked)
-	_buying_island.buying_phase_finished.connect(_on_buying_island_buying_phase_finished)
 	
 	GlobalFightingManager.all_fights_are_over.connect(_on_global_fighting_manager_all_fights_are_over)
 	
@@ -72,7 +70,6 @@ func _start_game() -> void:
 func _start_hero_selection() -> void:
 	game_state = GameState.STARTING
 	_hero_selector.start()
-	_ui_game.hide()
 
 
 func _start_new_round() ->void:
@@ -101,6 +98,7 @@ func _start_buying_phase(battles: Array[Battle]) -> void:
 	game_state = GameState.BUYING
 	_scene_switcher.set_island_active_only(_buying_island)
 	_buying_island.start_buying_phase(battles)
+	_buying_area_timer.start()
 
 
 func _start_fighting_phase(battles: Array[Battle]) -> void:
@@ -157,6 +155,10 @@ func _spawn_all_characters() -> void:
 		_node_characters.add_child(character)
 		player.character = character
 
+@rpc("authority", "call_local")
+func _end_buying_round() -> void:
+	_on_buying_island_buying_phase_finished()
+
 # ============================== Callbacks ==============================
 
 func _on_buying_island_buying_phase_finished() -> void:
@@ -170,7 +172,6 @@ func _on_hero_selector_all_heroes_picked() -> void:
 	print("[", multiplayer.get_unique_id(), "] Game: BUYING AREA ALL HEROES PICKED")
 	_spawn_all_characters()
 	_start_new_round()
-	_ui_game.show()
 
 
 func _on_global_fighting_manager_all_fights_are_over() -> void:
@@ -180,3 +181,8 @@ func _on_global_fighting_manager_all_fights_are_over() -> void:
 	await PlayerManager.sync_point(PlayerManager.SyncID.ROUND_ENDING)
 	_start_new_round()
 	_buying_island.show()
+
+
+func _on_buying_area_timer_timeout() -> void:
+	if multiplayer.is_server():
+		_end_buying_round.rpc()

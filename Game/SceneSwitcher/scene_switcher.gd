@@ -37,6 +37,7 @@ func _input(event):
 # ============================== Private functions ==============================
 
 func _set_island_active_only(floating_island: FloatingIsland) -> void:
+	Events.signal_scene_switched(floating_island)
 	floating_island.set_active()
 	if floating_island != buying_island: buying_island.set_inactive()
 	for fighting_island: FightingIsland in fighting_islands:

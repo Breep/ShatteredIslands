@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://oimyi4iueoda"]
+[gd_scene load_steps=13 format=3 uid="uid://oimyi4iueoda"]
 
 [ext_resource type="Script" uid="uid://blljr68c4u466" path="res://Game/game.gd" id="1_7r6pw"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Tool/SpawnPoint/spawn_point.tscn" id="3_i1e5p"]
@@ -8,8 +8,7 @@
 [ext_resource type="Material" uid="uid://2wlal7g5718r" path="res://VFX/Shaders/Sky/stylized_shader_night.tres" id="6_7gi1t"]
 [ext_resource type="PackedScene" uid="uid://7u3ksm0e4v61" path="res://FloatingIsland/BuyingIsland/buying_island.tscn" id="6_flgk0"]
 [ext_resource type="PackedScene" uid="uid://cbd5jq0bp7fef" path="res://Game/HeroSelector/HeroSelector.tscn" id="8_xfil1"]
-[ext_resource type="PackedScene" uid="uid://dv3kwc5eeyuk2" path="res://UI/Game/ui_game.tscn" id="9_kul4i"]
-[ext_resource type="PackedScene" uid="uid://di7eyuedvo17p" path="res://UI/Menu/PauseMenu/ui_pause_menu.tscn" id="10_fsxsm"]
+[ext_resource type="PackedScene" uid="uid://dv3kwc5eeyuk2" path="res://UI/InGame/Game/ui_game.tscn" id="9_kul4i"]
 
 [sub_resource type="Sky" id="Sky_7gi1t"]
 sky_material = ExtResource("6_7gi1t")
@@ -33,7 +32,7 @@ properties/0/path = NodePath(".:_current_round_player_id_islands")
 properties/0/spawn = true
 properties/0/replication_mode = 2
 
-[node name="Game" type="Node3D" node_paths=PackedStringArray("_buying_island", "_scene_switcher", "_hero_selector", "_node_fighting_islands", "_node_characters", "_islands_spawn_points", "_ui_game")]
+[node name="Game" type="Node3D" node_paths=PackedStringArray("_buying_island", "_scene_switcher", "_hero_selector", "_node_fighting_islands", "_node_characters", "_islands_spawn_points")]
 script = ExtResource("1_7r6pw")
 _buying_island = NodePath("BuyingIsland")
 _scene_switcher = NodePath("SceneSwitcher")
@@ -41,7 +40,6 @@ _hero_selector = NodePath("HeroSelector")
 _node_fighting_islands = NodePath("FightingIslands")
 _node_characters = NodePath("Characters")
 _islands_spawn_points = [NodePath("IslandSpawns/CenterPoint1/SpawnPoint1"), NodePath("IslandSpawns/CenterPoint2/SpawnPoint2"), NodePath("IslandSpawns/CenterPoint3/SpawnPoint3"), NodePath("IslandSpawns/CenterPoint4/SpawnPoint4"), NodePath("IslandSpawns/CenterPoint5/SpawnPoint5"), NodePath("IslandSpawns/CenterPoint6/SpawnPoint6"), NodePath("IslandSpawns/CenterPoint7/SpawnPoint7"), NodePath("IslandSpawns/CenterPoint8/SpawnPoint8")]
-_ui_game = NodePath("UI/UIGame")
 
 [node name="Light" type="Node3D" parent="."]
 transform = Transform3D(0.471889, 0, 0.881658, -0.0862491, 0.995204, 0.0461631, -0.877429, -0.0978261, 0.469626, 0, 0, 0)
@@ -144,7 +142,8 @@ spawn_path = NodePath("../Characters")
 [node name="SceneSwitcher" parent="." node_paths=PackedStringArray("buying_island") instance=ExtResource("3_vifcx")]
 buying_island = NodePath("../BuyingIsland")
 
-[node name="HeroSelector" parent="." instance=ExtResource("8_xfil1")]
+[node name="HeroSelector" parent="." node_paths=PackedStringArray("_ui_hero_picking_screen") instance=ExtResource("8_xfil1")]
+_ui_hero_picking_screen = NodePath("../UI/UIGame/UIHeroPickingScreen")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -155,12 +154,22 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="Tooltips" type="Control" parent="UI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [node name="UIGame" parent="UI" instance=ExtResource("9_kul4i")]
 layout_mode = 1
 
-[node name="PauseMenu" parent="UI" instance=ExtResource("10_fsxsm")]
-layout_mode = 1
-mouse_filter = 2
-
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_7gi1t")
+
+[node name="BuyingAreaTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 20.0
+one_shot = true
+
+[connection signal="timeout" from="BuyingAreaTimer" to="." method="_on_buying_area_timer_timeout"]
+
+[editable path="UI/UIGame"]

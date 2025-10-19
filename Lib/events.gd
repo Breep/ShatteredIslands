@@ -52,3 +52,7 @@ func signal_nothing_clicked() -> void:
 signal ui_skill_picked(skill_id: Skill.SkillID)
 func signal_ui_skill_picked(skill_id: Skill.SkillID) -> void:
 	ui_skill_picked.emit(skill_id)
+
+signal scene_switched(floating_island: FloatingIsland)
+func signal_scene_switched(floating_island: FloatingIsland) -> void:
+	scene_switched.emit(floating_island)

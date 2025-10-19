@@ -1,10 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://c66yw4go2ykwa"]
+[gd_scene load_steps=14 format=3 uid="uid://c66yw4go2ykwa"]
 
 [ext_resource type="Script" uid="uid://cd8u3lm3xa8c4" path="res://FloatingIsland/FightingIsland/FightingArea/fighting_area.gd" id="1_t74of"]
 [ext_resource type="PackedScene" uid="uid://pyrw8lacvly2" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/EntityManager/entity_manager.tscn" id="2_wtb7j"]
 [ext_resource type="PackedScene" uid="uid://c0l0roxttdtlp" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/FightingManager/fighting_manager.tscn" id="3_yyfcp"]
 [ext_resource type="PackedScene" uid="uid://dnt0yj1cs67ko" path="res://Modules/BattleLogModule/BattleLogSynchronizer/battle_log_synchronizer.tscn" id="4_327ee"]
-[ext_resource type="PackedScene" uid="uid://bhxhqex1pbh2p" path="res://UI/FightingArea/ui_fighting_area.tscn" id="4_hqxx4"]
 [ext_resource type="PackedScene" uid="uid://ctspehviccwd5" path="res://FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor_1v1.tscn" id="5_2akj6"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="5_xgsbs"]
 [ext_resource type="PackedScene" uid="uid://c6wua1qduvyhp" path="res://Modules/BattleLogModule/BattleReader/battle_reader.tscn" id="6_w72k1"]
@@ -21,12 +20,11 @@ size = Vector3(20, 5, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_7oplh"]
 size = Vector3(1, 5, 10)
 
-[node name="FightingArea" type="Node3D" node_paths=PackedStringArray("_spawn_manager", "_fighting_manager", "_entity_manager", "_ui_fighting_area", "_fighting_floors", "_entities_node")]
+[node name="FightingArea" type="Node3D" node_paths=PackedStringArray("_spawn_manager", "_fighting_manager", "_entity_manager", "_fighting_floors", "_entities_node")]
 script = ExtResource("1_t74of")
 _spawn_manager = NodePath("SpawnManager")
 _fighting_manager = NodePath("FightingManager")
 _entity_manager = NodePath("EntityManager")
-_ui_fighting_area = NodePath("UI/UIFightingArea")
 _fighting_floors = {
 0: NodePath("FightingFloorTemplates/FightingFloor_1v1"),
 1: NodePath("FightingFloorTemplates/FightingFloor_2v2"),
@@ -55,19 +53,6 @@ _spawn_manager = NodePath("../SpawnManager")
 _fighting_area = NodePath("..")
 _projectiles_node = NodePath("../Projectiles")
 _spells_node = NodePath("../Spells")
-
-[node name="UI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="UIFightingArea" parent="UI" instance=ExtResource("4_hqxx4")]
-layout_mode = 1
-mouse_filter = 2
 
 [node name="FightingFloorTemplates" type="Node3D" parent="."]
 

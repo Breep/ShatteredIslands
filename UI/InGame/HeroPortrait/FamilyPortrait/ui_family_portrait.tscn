@@ -1,0 +1,124 @@
+[gd_scene load_steps=16 format=3 uid="uid://gtilbo2y2g0n"]
+
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_sd2ix"]
+[ext_resource type="Script" uid="uid://d1qoulvgvrr6f" path="res://UI/InGame/HeroPortrait/FamilyPortrait/ui_family_portrait.gd" id="2_2lws7"]
+[ext_resource type="Script" uid="uid://dl8cs3pdc7hvl" path="res://UI/Tool/input_transmiter.gd" id="3_nngot"]
+[ext_resource type="Texture2D" uid="uid://2xxeu4qbxjas" path="res://UI/InGame/HeroPortrait/Data/Family/button_background_gray.png" id="4_ibr0v"]
+[ext_resource type="BitMap" uid="uid://cc2he2y4wlxup" path="res://UI/InGame/HeroPortrait/Data/Family/button_mask.png" id="5_g4mri"]
+[ext_resource type="Texture2D" uid="uid://c8y3xgoy5u28h" path="res://UI/InGame/HeroPortrait/Data/Family/button_pressed.png" id="5_ue87n"]
+[ext_resource type="Texture2D" uid="uid://dyv1duqg6t2ck" path="res://UI/InGame/HeroPortrait/Data/Family/button_hover.png" id="6_ah4o6"]
+[ext_resource type="Texture2D" uid="uid://bwens7lf1wr46" path="res://UI/InGame/HeroPortrait/Data/Family/button_border_black.png" id="6_d57mx"]
+[ext_resource type="Texture2D" uid="uid://cwqdngpmbcnck" path="res://Card/Descriptions/Families/Icons/poison.png" id="7_4v355"]
+[ext_resource type="Texture2D" uid="uid://br6li80efnidw" path="res://UI/InGame/HeroPortrait/Data/Family/progres_bar_background.png" id="8_yailc"]
+[ext_resource type="Texture2D" uid="uid://d2ksit7uo8ij1" path="res://UI/InGame/HeroPortrait/Data/Family/progres_bar.png" id="9_kppja"]
+[ext_resource type="Texture2D" uid="uid://84g8crun7hm5" path="res://UI/InGame/HeroPortrait/Data/Family/big_progress_bar_gray.png" id="10_ue87n"]
+[ext_resource type="Texture2D" uid="uid://147hq74sbnd6" path="res://UI/InGame/HeroPortrait/Data/Family/big_progress_bar_border.png" id="11_ah4o6"]
+[ext_resource type="Texture2D" uid="uid://b421h5hkko4uq" path="res://UI/InGame/HeroPortrait/Data/Family/big_progress_bar_green.png" id="12_5rnw0"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_sd2ix"]
+viewport_path = NodePath("SubViewport")
+
+[node name="FamilyPortrait" type="Control"]
+layout_mode = 3
+anchor_right = 0.562
+anchor_bottom = 1.0
+offset_right = 0.575928
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_sd2ix")
+script = ExtResource("2_2lws7")
+
+[node name="TextureRect" type="TextureRect" parent="." node_paths=PackedStringArray("viewport")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("ViewportTexture_sd2ix")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("3_nngot")
+viewport = NodePath("../SubViewport")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(400, 400)
+
+[node name="Control" type="Control" parent="SubViewport"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 400.0
+offset_bottom = 400.0
+mouse_filter = 2
+
+[node name="TextureButton" type="TextureButton" parent="SubViewport/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+toggle_mode = true
+texture_normal = ExtResource("4_ibr0v")
+texture_pressed = ExtResource("5_ue87n")
+texture_hover = ExtResource("6_ah4o6")
+texture_click_mask = ExtResource("5_g4mri")
+ignore_texture_size = true
+
+[node name="FamilyIcon" type="TextureRect" parent="SubViewport/Control"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 38.0
+offset_top = 209.0
+offset_right = 154.0
+offset_bottom = 312.0
+mouse_filter = 2
+texture = ExtResource("7_4v355")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CurrentXPProgressBar" type="TextureProgressBar" parent="SubViewport/Control"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 157.0
+offset_top = 77.0
+offset_right = 358.0
+offset_bottom = 278.0
+mouse_filter = 2
+max_value = 8.0
+nine_patch_stretch = true
+texture_under = ExtResource("9_kppja")
+texture_progress = ExtResource("8_yailc")
+
+[node name="FamilyLvlProgressBar" type="TextureProgressBar" parent="SubViewport/Control"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 172.0
+offset_top = 84.0
+offset_right = 322.0
+offset_bottom = 234.0
+mouse_filter = 2
+max_value = 4.0
+value = 1.0
+nine_patch_stretch = true
+texture_under = ExtResource("10_ue87n")
+texture_over = ExtResource("11_ah4o6")
+texture_progress = ExtResource("12_5rnw0")
+
+[node name="Border" type="TextureRect" parent="SubViewport/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_d57mx")
+
+[connection signal="toggled" from="SubViewport/Control/TextureButton" to="." method="_on_texture_button_toggled"]

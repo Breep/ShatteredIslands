@@ -1,11 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://ca8mcplp2va4s"]
+[gd_scene load_steps=12 format=3 uid="uid://ca8mcplp2va4s"]
 
 [ext_resource type="Script" uid="uid://cvy50on4evfts" path="res://FloatingIsland/BuyingIsland/BuyingArea/buying_area.gd" id="1_ed4aq"]
 [ext_resource type="PackedScene" uid="uid://ca3wssxlwj4qk" path="res://FloatingIsland/_Maps/tavern_animated.tscn" id="4_4b3p2"]
 [ext_resource type="Script" uid="uid://bg27we47t814j" path="res://FloatingIsland/BuyingIsland/BuyingArea/Tavern/tavern.gd" id="4_gi2cy"]
 [ext_resource type="PackedScene" uid="uid://bg5efhnq0erdv" path="res://Modules/PickableClickable/ClickableModule/clickable_module.tscn" id="5_4b3p2"]
 [ext_resource type="PackedScene" uid="uid://dr8xv1vshmvyq" path="res://FloatingIsland/BuyingIsland/BuyingArea/Tavern/TavernCenter/tavern_center.tscn" id="5_4lvlh"]
-[ext_resource type="PackedScene" uid="uid://cmstx61h3h6ar" path="res://UI/BuyingArea/ui_buying_area.tscn" id="5_dvq4w"]
 [ext_resource type="PackedScene" uid="uid://cdryp1jj4woix" path="res://FloatingIsland/BuyingIsland/BuyingArea/ShopDeck3DVisual/shop_deck_3d_visual.tscn" id="6_gi2cy"]
 [ext_resource type="Script" uid="uid://cfmyr6dqjwc8a" path="res://FloatingIsland/BuyingIsland/BuyingArea/Tavern/furniture.gd" id="6_q21af"]
 
@@ -23,25 +22,6 @@ size = Vector3(4.51068, 4.10291, 6.01385)
 [node name="BuyingArea" type="Node3D"]
 script = ExtResource("1_ed4aq")
 
-[node name="UI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="UIBuyingArea" parent="UI" node_paths=PackedStringArray("_round_timer") instance=ExtResource("5_dvq4w")]
-unique_name_in_owner = true
-layout_mode = 1
-_round_timer = NodePath("../../BuyingAreaTimer")
-
-[node name="BuyingAreaTimer" type="Timer" parent="."]
-unique_name_in_owner = true
-wait_time = 20.0
-one_shot = true
-
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_jhmrm")
 
@@ -52,15 +32,6 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.067
 unique_name_in_owner = true
 script = ExtResource("4_gi2cy")
 _tarven_center = NodePath("../TavernCenter")
-
-[node name="TavernSound" parent="Tavern_Animated/SFX" index="0"]
-visible = false
-
-[node name="Music" parent="Tavern_Animated/SFX" index="1"]
-visible = false
-
-[node name="VillageSound" parent="Tavern_Animated/SFX" index="2"]
-visible = false
 
 [node name="Furnitures" type="Node3D" parent="."]
 
@@ -113,8 +84,6 @@ _scale_div_grow = 0.01
 
 [node name="ShopDeck3DVisual" parent="VisualFeedbacks" instance=ExtResource("6_gi2cy")]
 transform = Transform3D(0.000895275, 0, -0.569999, 0, 0.57, 0, 0.569999, 0, 0.000895275, -7.94129, 1.11738, 0.147098)
-
-[connection signal="timeout" from="BuyingAreaTimer" to="." method="_on_timer_timeout"]
 
 [editable path="Tavern_Animated"]
 [editable path="Tavern_Animated/tavern"]

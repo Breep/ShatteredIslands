@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://ds0yfbmrkvhlk"
+path="res://.godot/imported/minimize_button_mask.png-2ccfee80f612f54c39957308bda4b0cd.res"
+
+[deps]
+
+source_file="res://UI/InGame/HeroPortrait/Data/MinimizeButton/minimize_button_mask.png"
+dest_files=["res://.godot/imported/minimize_button_mask.png-2ccfee80f612f54c39957308bda4b0cd.res"]
+
+[params]
+
+create_from=0
+threshold=0.5

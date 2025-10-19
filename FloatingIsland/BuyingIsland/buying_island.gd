@@ -1,10 +1,6 @@
 class_name BuyingIsland
 extends FloatingIsland
 
-# ============================== Signals ==============================
-
-signal buying_phase_finished()
-
 # ============================== Local nodes ==============================
 
 @export var _buying_area: BuyingArea
@@ -18,7 +14,7 @@ var _is_active: bool = false
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	_buying_area.buying_phase_finished.connect(_on_buying_area_buying_phase_finished)
+	pass
 
 # ============================== Public functions ==============================
 
@@ -40,8 +36,3 @@ func set_inactive() -> void:
 	_is_active = false
 	_buying_area.set_inactive()
 	_clicker_module.set_inactive()
-
-# ============================== Callbacks ==============================
-
-func _on_buying_area_buying_phase_finished() -> void:
-	buying_phase_finished.emit()
