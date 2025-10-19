@@ -56,6 +56,7 @@ shadow_enabled = true
 [node name="Secondary" type="Node3D" parent="Light"]
 
 [node name="BuyingIsland" parent="." instance=ExtResource("6_flgk0")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -29.8858, 0)
 
 [node name="IslandSpawns" type="Node3D" parent="."]

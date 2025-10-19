@@ -10,6 +10,7 @@ func update_content(cards: Array[Card]) -> void:
 	_clear_all()
 	for card: Card in cards:
 		var card_button: CardButton = CARD_BUTTON_SCENE.instantiate()
+		card_button.remove_shader()
 		card_button.custom_minimum_size = Vector2(630, 880)
 		card_button.update_visual(card)
 		_grid_container.add_child(card_button)

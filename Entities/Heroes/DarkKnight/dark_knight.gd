@@ -193,7 +193,6 @@ func _on_hit_spark_of_light_logic_callback(cb_vars: Dictionary) -> void:
 	var health_inc: float = float(damage) * (_spark_of_light_percent / 100.0)
 	character_owner.heal(character_owner, health_inc)
 
-
 # ===== CATACLYSM
 
 func _on_cataclysm_activation() -> void:

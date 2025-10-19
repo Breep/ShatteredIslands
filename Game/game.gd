@@ -163,6 +163,7 @@ func _on_buying_island_buying_phase_finished() -> void:
 	print("[", multiplayer.get_unique_id(), "] Game: BUYING PHASE ENDED")
 	await PlayerManager.sync_point(PlayerManager.SyncID.BUYING_PHASE)
 	_start_fighting_phase(_current_round_battles)
+	_buying_island.hide()
 
 
 func _on_hero_selector_all_heroes_picked() -> void:
@@ -178,3 +179,4 @@ func _on_global_fighting_manager_all_fights_are_over() -> void:
 	await RoundManager.ending_round_player_changes()
 	await PlayerManager.sync_point(PlayerManager.SyncID.ROUND_ENDING)
 	_start_new_round()
+	_buying_island.show()

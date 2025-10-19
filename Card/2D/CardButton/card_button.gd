@@ -28,7 +28,6 @@ var _target_rot_y: float
 var _current_rot_x: float
 var _current_rot_y: float
 
-
 var _is_focused: bool = false
 
 # ============================== Local scene nodes ==============================
@@ -45,11 +44,14 @@ func update_visual(new_card: Card) -> void:
 		return
 	_card_layout.update_content(new_card)
 
+func remove_shader() -> void:
+	_texture_rect.material = null
 
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	_texture_rect.material = _texture_rect.material.duplicate() # Make the material unique
+	if _texture_rect.material != null:
+		_texture_rect.material = _texture_rect.material.duplicate() # Make the material unique
 
 
 func _process(delta: float) -> void:
@@ -72,6 +74,7 @@ func _input(event: InputEvent) -> void:
 # ============================== Private functions ==============================
 
 func _update_rotation_target() -> void:
+	if _texture_rect.material == null: return
 	var mouse_pos: Vector2 = get_local_mouse_position()
 	var lerp_val_x: float = remap(mouse_pos.x, 0.0, size.x, 0, 1)
 	var lerp_val_y: float = remap(mouse_pos.y, 0.0, size.y, 0, 1)
@@ -80,6 +83,7 @@ func _update_rotation_target() -> void:
 
 
 func _animation_3d_rotate(delta: float) -> void:
+	if _texture_rect.material == null: return
 	if _current_rot_x == _target_rot_x and _target_rot_y == _current_rot_y: return
 	_current_rot_x = lerp(_current_rot_x, _target_rot_x, delta * ROT_SPEED)
 	_current_rot_y = lerp(_current_rot_y, _target_rot_y, delta * ROT_SPEED)
@@ -88,6 +92,7 @@ func _animation_3d_rotate(delta: float) -> void:
 
 
 func _animation_reset_3d_rotation() -> void:
+	if _texture_rect.material == null: return
 	_target_rot_x = 0.0
 	_target_rot_y = 0.0
 

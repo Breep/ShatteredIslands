@@ -39,8 +39,9 @@ func _input(event):
 func _set_island_active_only(floating_island: FloatingIsland) -> void:
 	floating_island.set_active()
 	if floating_island != buying_island: buying_island.set_inactive()
-	for fighting_island in fighting_islands:
-		if floating_island != fighting_island: fighting_island.set_inactive()
+	for fighting_island: FightingIsland in fighting_islands:
+		if floating_island != fighting_island:
+			fighting_island.set_inactive()
 
 # ============================== Callbacks ==============================
 

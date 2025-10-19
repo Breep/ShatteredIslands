@@ -46,6 +46,7 @@ func start_fight(characters: Array[Character], battle_type: Battle.BattleType, b
 
 
 func set_active() -> void:
+	show()
 	if _is_active: return
 	_is_active = true
 	_fighting_area.set_active()
@@ -55,6 +56,7 @@ func set_active() -> void:
 
 
 func set_inactive() -> void:
+	hide()
 	if not _is_active: return
 	_is_active = false
 	_fighting_area.set_inactive()
