@@ -21,35 +21,36 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
 
 [node name="PlayerPortrait" parent="VBoxContainer" instance=ExtResource("1_a7ivo")]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="PlayerPortrait2" parent="VBoxContainer" instance=ExtResource("1_a7ivo")]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="PlayerPortrait3" parent="VBoxContainer" instance=ExtResource("1_a7ivo")]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="PlayerPortrait4" parent="VBoxContainer" instance=ExtResource("1_a7ivo")]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="PlayerPortrait5" parent="VBoxContainer" instance=ExtResource("1_a7ivo")]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="PlayerPortrait6" parent="VBoxContainer" instance=ExtResource("1_a7ivo")]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="PlayerPortrait7" parent="VBoxContainer" instance=ExtResource("1_a7ivo")]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="PlayerPortrait8" parent="VBoxContainer" instance=ExtResource("1_a7ivo")]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
-size_flags_vertical = 3

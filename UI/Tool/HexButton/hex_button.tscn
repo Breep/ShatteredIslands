@@ -43,7 +43,6 @@ shader_parameter/effect_enabled = false
 shader_parameter/start_time = 0.0
 
 [node name="HexButton" type="Control"]
-custom_minimum_size = Vector2(128, 128)
 layout_mode = 3
 anchor_right = 0.067
 anchor_bottom = 0.119

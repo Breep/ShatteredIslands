@@ -1,20 +1,88 @@
-[gd_scene load_steps=7 format=3 uid="uid://dyf154pndkj6u"]
+[gd_scene load_steps=11 format=3 uid="uid://dyf154pndkj6u"]
 
 [ext_resource type="Script" uid="uid://4mjiyc4ne1" path="res://UI/InGame/BuyingArea/PlayerPortrait/ui_player_portrait.gd" id="1_7toxq"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_q7lmx"]
-[ext_resource type="Script" uid="uid://dl8cs3pdc7hvl" path="res://UI/Tool/input_transmiter.gd" id="2_0qefo"]
-[ext_resource type="Texture2D" uid="uid://bw3okxwbucu42" path="res://Data/Heroes/Portraits/Default.webp" id="3_7toxq"]
-[ext_resource type="PackedScene" uid="uid://baxstke5i0khe" path="res://UI/InGame/BuyingArea/PlayerPortrait/ui_player_life.tscn" id="3_fvjac"]
+[ext_resource type="PackedScene" uid="uid://c7jrogdsytaah" path="res://UI/Tool/HexButton/hex_button.tscn" id="2_4n3yu"]
+[ext_resource type="Script" uid="uid://dl8cs3pdc7hvl" path="res://UI/Tool/input_transmiter.gd" id="3_861v8"]
+[ext_resource type="Shader" uid="uid://bngl8v6o10lds" path="res://VFX/Shaders/2D/2d_flexible_progress_bar.gdshader" id="4_5cjsk"]
+[ext_resource type="Script" uid="uid://chcmgrh1l6vyn" path="res://UI/Tool/Misc/progress_bar.gd" id="5_r717o"]
+[ext_resource type="Texture2D" uid="uid://6wyyd2v5hnf3" path="res://UI/_Themes/Data/Icons/sword_icon.png" id="6_b1swy"]
+[ext_resource type="Texture2D" uid="uid://dylq535nmr30g" path="res://UI/_Themes/Data/Icons/XP_icon.png" id="7_50qpm"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_fvjac"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_50qpm"]
 viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r717o"]
+shader = ExtResource("4_5cjsk")
+shader_parameter/bar_mode = 2
+shader_parameter/fill_mode = 1
+shader_parameter/segment_count = 10
+shader_parameter/discrete_fill_amount = 12
+shader_parameter/fade_fill_amount = 1.0
+shader_parameter/pour_fill_amount = 1.0
+shader_parameter/animation_speed = 1.0
+shader_parameter/flash_type = 0
+shader_parameter/flash_segment = 0
+shader_parameter/flash_intensity = 0.0
+shader_parameter/single_segment_previous_fill = 1.0
+shader_parameter/single_segment_current_fill = 1.0
+shader_parameter/single_segment_flash_intensity = 0.8
+shader_parameter/flash_from_segment = 0
+shader_parameter/flash_to_segment = 0
+shader_parameter/single_segment_fade_from = 1.0
+shader_parameter/single_segment_fade_to = 1.0
+shader_parameter/single_segment_fade_progress = 0.0
+shader_parameter/drain_previous_fill = 1.0
+shader_parameter/drain_current_fill = 1.0
+shader_parameter/drain_time_progress = 0.0
+shader_parameter/background_color = Color(0.1, 0.1, 0.1, 1)
+shader_parameter/filled_color = Color(1, 0.85, 0, 1)
+shader_parameter/border_color = Color(0, 0, 0, 1)
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/drain_flash_color = Color(1, 1, 1, 1)
+shader_parameter/custom_frame = false
+shader_parameter/frame_trim = 0.0
+shader_parameter/alpha_threshold = 0.69
+shader_parameter/scan_steps = 15
+shader_parameter/edge_smoothness = 0.02
+shader_parameter/mask_expansion = 0.0
+shader_parameter/frame_edge_opacity = 0.9
+shader_parameter/fluid_base_color = Color(0.2, 0.6, 1, 1)
+shader_parameter/fluid_highlight_color = Color(0.8, 0.9, 1, 1)
+shader_parameter/fluid_shadow_color = Color(0.1, 0.3, 0.6, 1)
+shader_parameter/fluid_flow_speed = 1.5
+shader_parameter/fluid_turbulence = 1.0
+shader_parameter/fluid_noise_scale = 6.0
+shader_parameter/gas_mode = false
+shader_parameter/gas_intensity = 0.8
+shader_parameter/effect_mode = 0
+shader_parameter/effect_strength = 0.3
+shader_parameter/effect_speed = 1.5
+shader_parameter/wave_thickness = 0.1
+shader_parameter/bubbles_aspect_ratio = 1.0
+shader_parameter/vertical_gradient = false
+shader_parameter/V_gradient_strength = 0.6
+shader_parameter/horizontal_gradient = false
+shader_parameter/H_gradient_strength = 0.75
+shader_parameter/segment_gap = 0.0
+shader_parameter/universal_border_size = 0.10000000475
+shader_parameter/horizontal_border_size = 1.0
+shader_parameter/inner_border_thickness_multiplier = 1.0
+shader_parameter/outer_border_size = 2.0
+shader_parameter/slant_amount = 0.0
+shader_parameter/scale = 0.0
+shader_parameter/x_offset = 0.0
+shader_parameter/slant_clip_margin = 0.0
 
 [node name="PlayerPortrait" type="Control"]
 layout_mode = 3
-anchor_right = 0.434028
-anchor_bottom = 0.771605
+anchor_right = 0.208
+anchor_bottom = 0.126
+offset_right = 0.63998413
+offset_bottom = -0.08000183
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_q7lmx")
 script = ExtResource("1_7toxq")
 metadata/_edit_use_anchors_ = true
 
@@ -25,173 +93,213 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("ViewportTexture_fvjac")
+texture = SubResource("ViewportTexture_50qpm")
 expand_mode = 1
 stretch_mode = 5
-script = ExtResource("2_0qefo")
+script = ExtResource("3_861v8")
 viewport = NodePath("../SubViewport")
 
 [node name="SubViewport" type="SubViewport" parent="."]
-size = Vector2i(500, 500)
+transparent_bg = true
+size = Vector2i(1600, 544)
 
-[node name="SubPlayerPortrait" type="Control" parent="SubViewport"]
-custom_minimum_size = Vector2(500, 500)
-layout_mode = 3
-anchor_right = 0.434
-anchor_bottom = 0.772
-offset_right = 283.00003
-offset_bottom = 114.0
+[node name="MarginContainer" type="MarginContainer" parent="SubViewport"]
+anchors_preset = -1
+anchor_right = 4.0
+anchor_bottom = 4.0
+offset_right = -4800.0
+offset_bottom = -1632.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("1_q7lmx")
+theme_override_constants/margin_right = 10
 
-[node name="Panel" type="Panel" parent="SubViewport/SubPlayerPortrait"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/MarginContainer"]
+layout_mode = 2
+
+[node name="PortraitContainer" type="Control" parent="SubViewport/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="SubViewport/MarginContainer/HBoxContainer/PortraitContainer"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="SubViewport/SubPlayerPortrait/Panel"]
+[node name="HeroPortraitButton" parent="SubViewport/MarginContainer/HBoxContainer/PortraitContainer/AspectRatioContainer" instance=ExtResource("2_4n3yu")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="StatsContainer" type="Control" parent="SubViewport/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/MarginContainer/HBoxContainer/StatsContainer"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
+alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/SubPlayerPortrait/Panel/MarginContainer"]
+[node name="PlayerNameLabel" type="Label" parent="SubViewport/MarginContainer/HBoxContainer/StatsContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 120
+text = "Breep"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainerHealthBar" type="HBoxContainer" parent="SubViewport/MarginContainer/HBoxContainer/StatsContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="LabelControl" type="Control" parent="SubViewport/MarginContainer/HBoxContainer/StatsContainer/VBoxContainer/HBoxContainerHealthBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="PlayerHealthLabel" type="Label" parent="SubViewport/MarginContainer/HBoxContainer/StatsContainer/VBoxContainer/HBoxContainerHealthBar/LabelControl"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -42.25
+offset_right = 70.0
+offset_bottom = 80.25
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+theme_override_constants/outline_size = 25
+theme_override_font_sizes/font_size = 120
+text = "50"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerHealthBarControl" type="Control" parent="SubViewport/MarginContainer/HBoxContainer/StatsContainer/VBoxContainer/HBoxContainerHealthBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PlayerHealthBar" type="ColorRect" parent="SubViewport/MarginContainer/HBoxContainer/StatsContainer/VBoxContainer/HBoxContainerHealthBar/PlayerHealthBarControl"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_r717o")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("5_r717o")
+flow_mode = "Discrete"
+fill_type = "Fade"
+
+[node name="HBoxContainerDamage" type="HBoxContainer" parent="SubViewport/MarginContainer/HBoxContainer/StatsContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 160)
 layout_mode = 2
 alignment = 1
 
-[node name="Panel" type="Panel" parent="SubViewport/SubPlayerPortrait/Panel/MarginContainer/VBoxContainer"]
+[node name="DamageControl" type="Control" parent="SubViewport/MarginContainer/HBoxContainer/StatsContainer/VBoxContainer/HBoxContainerDamage"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.2
 
-[node name="PlayerNameLabel" type="Label" parent="SubViewport/SubPlayerPortrait/Panel/MarginContainer/VBoxContainer/Panel"]
-unique_name_in_owner = true
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/MarginContainer/HBoxContainer/StatsContainer/VBoxContainer/HBoxContainerDamage/DamageControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 50
-text = "Nobody"
-horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="Control" type="Control" parent="SubViewport/SubPlayerPortrait/Panel/MarginContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="SubViewport/MarginContainer/HBoxContainer/StatsContainer/VBoxContainer/HBoxContainerDamage/DamageControl/HBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
-
-[node name="HeroPortrait" type="TextureRect" parent="SubViewport/SubPlayerPortrait/Panel/MarginContainer/VBoxContainer/Control"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("3_7toxq")
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+texture = ExtResource("6_b1swy")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="PlayerLife" parent="SubViewport/SubPlayerPortrait/Panel/MarginContainer/VBoxContainer/Control" instance=ExtResource("3_fvjac")]
+[node name="Control" type="Control" parent="SubViewport/MarginContainer/HBoxContainer/StatsContainer/VBoxContainer/HBoxContainerDamage/DamageControl/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PlayerDamageLabel" type="Label" parent="SubViewport/MarginContainer/HBoxContainer/StatsContainer/VBoxContainer/HBoxContainerDamage/DamageControl/HBoxContainer/Control"]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -167.0
-offset_top = -153.0
-offset_right = 2.0
-offset_bottom = 2.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="DamagePanel" type="Panel" parent="SubViewport/SubPlayerPortrait/Panel/MarginContainer/VBoxContainer/Control"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 15.0
-offset_top = -146.0
-offset_right = 150.0
-offset_bottom = -11.0
-grow_vertical = 0
-
-[node name="DamageLabel" type="Label" parent="SubViewport/SubPlayerPortrait/Panel/MarginContainer/VBoxContainer/Control/DamagePanel"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.5
+offset_top = -39.249
+offset_right = 23.5
+offset_bottom = 83.25101
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 60
-text = "2"
+theme_override_constants/outline_size = 25
+theme_override_font_sizes/font_size = 120
+text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LevelPanel" type="Panel" parent="SubViewport/SubPlayerPortrait/Panel/MarginContainer/VBoxContainer/Control"]
-layout_mode = 1
-offset_left = 27.0
-offset_top = 14.0
-offset_right = 112.0
-offset_bottom = 92.0
+[node name="EmptyMid" type="Control" parent="SubViewport/MarginContainer/HBoxContainer/StatsContainer/VBoxContainer/HBoxContainerDamage"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
 
-[node name="LevelLabel" type="Label" parent="SubViewport/SubPlayerPortrait/Panel/MarginContainer/VBoxContainer/Control/LevelPanel"]
-unique_name_in_owner = true
+[node name="Control3" type="Control" parent="SubViewport/MarginContainer/HBoxContainer/StatsContainer/VBoxContainer/HBoxContainerDamage"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/MarginContainer/HBoxContainer/StatsContainer/VBoxContainer/HBoxContainerDamage/Control3"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 60
-text = "2"
+
+[node name="TextureRect" type="TextureRect" parent="SubViewport/MarginContainer/HBoxContainer/StatsContainer/VBoxContainer/HBoxContainerDamage/Control3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+texture = ExtResource("7_50qpm")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Control" type="Control" parent="SubViewport/MarginContainer/HBoxContainer/StatsContainer/VBoxContainer/HBoxContainerDamage/Control3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PlayerLevelLabel" type="Label" parent="SubViewport/MarginContainer/HBoxContainer/StatsContainer/VBoxContainer/HBoxContainerDamage/Control3/HBoxContainer/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.5
+offset_top = -35.249
+offset_right = 23.5
+offset_bottom = 87.25101
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 25
+theme_override_font_sizes/font_size = 120
+text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="DeathColorLayer" type="ColorRect" parent="SubViewport/SubPlayerPortrait/Panel"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.0784314, 0, 0, 0.717647)
-
-[node name="DeadOnRoundLabel" type="Label" parent="SubViewport/SubPlayerPortrait/Panel/DeathColorLayer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 40
-text = "Dead on round 5"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="PanelButton" type="Button" parent="SubViewport/SubPlayerPortrait"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
