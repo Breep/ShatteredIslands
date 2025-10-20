@@ -38,6 +38,11 @@ func connect_to_players(players: Array[Player]) -> void:
 	for player in players:
 		_spawn_player_character(player, avaible_spawns)
 
+
+func cleanup() -> void:
+	for coin_pile: CoinPile in _coin_piles:
+		coin_pile.cleanup()
+
 # ============================== Private functions ==============================
 
 func _spawn_player_character(player: Player, avaible_spawns: Array[SpawnPoint]) -> void:

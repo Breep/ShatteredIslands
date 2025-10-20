@@ -3,6 +3,10 @@ extends Node3D
 
 @export var _tables: Array[Table]
 
+func cleanup_tables() -> void:
+	for table: Table in _tables:
+		table.cleanup()
+
 func set_active(battles: Array[Battle]) -> void:
 	show()
 	for table in _tables:

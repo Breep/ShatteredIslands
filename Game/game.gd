@@ -68,13 +68,34 @@ func _start_game() -> void:
 
 
 func _start_hero_selection() -> void:
+	print("\n\n=== DEBUG === [Hero Selection]")
+	for child in _buying_island._buying_area.get_children(true):
+		if child is Node:
+			print("DEBUG - [", child.name, "] Nodes=", count_nodes_recursive(child))
+	print("=== DEBUG ===\n\n")
 	game_state = GameState.STARTING
 	_hero_selector.start()
+
+
+func __debug_print_nodes_count() -> void:
+	print("\n\n=== DEBUG === [", RoundManager.current_round, "]")
+	for child in _buying_island._buying_area.get_children(true):
+		if child is Node:
+			print("DEBUG - [", child.name, "] Nodes=", count_nodes_recursive(child))
+	print("=== DEBUG ===\n\n")
+
+
+func count_nodes_recursive(node: Node) -> int:
+	var count := 1 # count self
+	for child in node.get_children(true):
+		count += count_nodes_recursive(child)
+	return count
 
 
 func _start_new_round() ->void:
 	print("[", multiplayer.get_unique_id(), "] Game: Start new round")
 	_current_round_player_id_islands.clear()
+	__debug_print_nodes_count()
 	
 	# Check local player life ?
 	# Comment le serveur gère la mort de chaque joueur
@@ -166,6 +187,7 @@ func _on_buying_island_buying_phase_finished() -> void:
 	await PlayerManager.sync_point(PlayerManager.SyncID.BUYING_PHASE)
 	_start_fighting_phase(_current_round_battles)
 	_buying_island.hide()
+	_buying_island.cleanup()
 
 
 func _on_hero_selector_all_heroes_picked() -> void:

@@ -24,6 +24,13 @@ func _ready() -> void:
 
 # ============================== Public functions ==============================
 
+func cleanup() -> void:
+	if _player_connected_to != null and _player_connected_to.gold_changed.is_connected(_on_player_gold_changed):
+		_player_connected_to.gold_changed.disconnect(_on_player_gold_changed)
+	_player_connected_to = null
+	_update_visual(0)
+
+
 func connect_to_player(player: Player) -> void:
 	if _player_connected_to != null and _player_connected_to.gold_changed.is_connected(_on_player_gold_changed):
 		_player_connected_to.gold_changed.disconnect(_on_player_gold_changed)

@@ -6,3 +6,7 @@ extends Node3D
 
 func put_tables_according_to_battles(battles: Array[Battle]) -> void:
 	_tarven_center.put_tables_according_to_battles(battles)
+
+
+func cleanup() -> void:
+	_tarven_center.cleanup_table_layouts()

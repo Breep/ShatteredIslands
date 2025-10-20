@@ -17,6 +17,10 @@ func _ready() -> void:
 
 # ============================== Public functions ==============================
 
+func cleanup_table_layouts() -> void:
+	for table_layout: TableLayout in _table_layouts:
+		table_layout.cleanup_tables()
+
 # TODO Rework cette monstruosité: l'idée sera d'avoir des spawn de tables, de définir si une table a besoin d'un espace plus grand que d'autres etc etc
 func put_tables_according_to_battles(battles: Array[Battle]) -> void:
 	for table_layout in _table_layouts:

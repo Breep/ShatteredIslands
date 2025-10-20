@@ -21,6 +21,10 @@ func start_round(battles: Array[Battle]) -> void:
 	_tavern.put_tables_according_to_battles(battles)
 
 
+func cleanup() -> void:
+	_tavern.cleanup()
+
+
 func set_active() -> void:
 	if _is_active: return
 	_is_active = true
