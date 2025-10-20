@@ -10,13 +10,10 @@ var _damage_per_stacks: int
 
 @export_group("Configuration")
 @export var _deploy_time: float # Time for the metor to fall on the ground (in s)
-@export var _radius: float # Range of the meteor impact (in m)
+#@export var _radius: float = 3.0 # Range of the meteor impact (in m)
 
 @onready var _effect_timer: Timer = %DeployTimer
-@onready var _collision_shape_3d: CollisionShape3D = %CollisionShape3D
-@onready var _impact_effect_area_visual: MeshInstance3D = %ImpactEffectAreaVisualBackground
 @onready var _meteor_visual: Node3D = %MeteorVisual
-@onready var anim_player = %AnimationPlayer
 @onready var hit_marker_scene = preload("res://VFX/VFX_3D/Explosion/Scenes/VFX_Explosion_B.tscn")
 @onready var audio_player = $AudioStreamPlayer3D
 
@@ -35,17 +32,7 @@ func _ready() -> void:
 		queue_free()
 		return
 	
-	var sound_play_time = max(0.0, _deploy_time - 0.2)
-	get_tree().create_timer(sound_play_time).timeout.connect(play_impact_sound)
-	
 	global_position = _target.global_position
-	
-	(_collision_shape_3d.shape as CylinderShape3D).radius = _radius
-	(_impact_effect_area_visual.mesh as CylinderMesh).top_radius = _radius 
-	(_impact_effect_area_visual.mesh as CylinderMesh).bottom_radius = _radius
-	var anim : Animation = anim_player.get_animation("Area")
-	var track_index = anim.find_track("ImpactEffectAreaVisualBackground:mesh:bottom_radius", Animation.TYPE_VALUE)
-	anim.track_set_key_value(track_index, 1, _radius)
 	var lateral_range = 2.0   
 	var vertical_range = 0.3 
 	_meteor_visual.position.x = randf_range(-lateral_range, lateral_range)
@@ -60,7 +47,7 @@ func _ready() -> void:
 	_effect_timer.one_shot = true
 	_effect_timer.wait_time = _deploy_time
 	_effect_timer.start()
-	var tween = get_tree().create_tween()
+	var tween = create_tween()
 	var wait_ratio = randf_range(0.8, 0.95)
 	tween.tween_interval(_deploy_time * wait_ratio)
 	tween.tween_property(_meteor_visual, "position", Vector3.ZERO, _deploy_time * (1.0 - wait_ratio))\

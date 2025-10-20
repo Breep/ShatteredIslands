@@ -18,6 +18,7 @@ extends Node3D
 @export var _battle_type: Battle.BattleType
 
 func _enter_tree() -> void:
+	GameManager.init()
 	var _players_cards: Array[Array] = [
 		_player1_cards, _player2_cards, _player3_cards, _player4_cards, _player5_cards, _player6_cards,_player7_cards, _player8_cards
 	]
@@ -28,6 +29,8 @@ func _enter_tree() -> void:
 		player.id = 1
 		player.character = _characters[i]
 		player.character.player = player
+		player.skill_manager = SkillManager.new()
+		player.skill_manager.init(player)
 		var uid: int = 0
 		for card: Card in _players_cards[i]:
 			card.uid = uid
@@ -36,8 +39,6 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
-	GameManager.init()
-	_floating_island._fighting_area._ui_fighting_area._ui_own_entity_stats.connect_entity_stats(_characters[0])
 	_floating_island.start_fight(_characters, _battle_type)
 	GlobalFightingManager.start(true)
 	_floating_island.set_active()
