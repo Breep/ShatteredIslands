@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://drcuyohos0doa"]
+[gd_scene load_steps=6 format=3 uid="uid://drcuyohos0doa"]
 
 [ext_resource type="Script" uid="uid://b6yyjft0aylpr" path="res://FloatingIsland/FightingIsland/fighting_island.gd" id="1_hqxtb"]
 [ext_resource type="PackedScene" uid="uid://c66yw4go2ykwa" path="res://FloatingIsland/FightingIsland/FightingArea/fighting_area.tscn" id="2_0nkjk"]
 [ext_resource type="PackedScene" uid="uid://cntkxgbjx1c0e" path="res://FloatingIsland/_Maps/telescope_island.tscn" id="3_0nkjk"]
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_0ovsq"]
-[ext_resource type="PackedScene" uid="uid://bulrgvsjiu7l8" path="res://FloatingIsland/_Maps/lava_island.tscn" id="5_8bkkt"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_622jh"]
 properties/0/path = NodePath(".:_player_owner_id")
@@ -39,9 +38,5 @@ _zoom_max = 400.0
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_622jh")
-
-[node name="lava_mapv1" parent="." instance=ExtResource("5_8bkkt")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
-visible = false
 
 [editable path="CenterPointCamera"]
