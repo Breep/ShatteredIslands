@@ -101,7 +101,9 @@ viewport = NodePath("../SubViewport")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
-size = Vector2i(1600, 544)
+handle_input_locally = false
+size = Vector2i(1604, 552)
+render_target_update_mode = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="SubViewport"]
 anchors_preset = -1
@@ -115,22 +117,6 @@ theme = ExtResource("1_q7lmx")
 theme_override_constants/margin_right = 10
 
 [node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/MarginContainer"]
-layout_mode = 2
-
-[node name="PortraitContainer" type="Control" parent="SubViewport/MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="SubViewport/MarginContainer/HBoxContainer/PortraitContainer"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HeroPortraitButton" parent="SubViewport/MarginContainer/HBoxContainer/PortraitContainer/AspectRatioContainer" instance=ExtResource("2_4n3yu")]
-unique_name_in_owner = true
 layout_mode = 2
 
 [node name="StatsContainer" type="Control" parent="SubViewport/MarginContainer/HBoxContainer"]
@@ -303,3 +289,19 @@ theme_override_font_sizes/font_size = 120
 text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="PortraitContainer" type="Control" parent="SubViewport/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="SubViewport/MarginContainer/HBoxContainer/PortraitContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HeroPortraitButton" parent="SubViewport/MarginContainer/HBoxContainer/PortraitContainer/AspectRatioContainer" instance=ExtResource("2_4n3yu")]
+unique_name_in_owner = true
+layout_mode = 2

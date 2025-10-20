@@ -24,6 +24,9 @@ func _ready() -> void:
 	_colorize_buttons()
 	for skill_id: Skill.SkillID in _skill_buttons.keys():
 		_skill_buttons[skill_id].deactivate()
+		_skill_buttons[skill_id].pressed.connect(_on_hex_button_pressed)
+		_skill_buttons[skill_id].button_mouse_entered.connect(_on_hex_button_mouse_entered)
+		_skill_buttons[skill_id].button_mouse_exited.connect(_on_hex_button_mouse_exited)
 	_hover_timer = Timer.new()
 	_hover_timer.one_shot = true
 	add_child(_hover_timer)
@@ -35,9 +38,6 @@ func update_content(skills: Dictionary[Skill.SkillID, Skill]) -> void:
 	_skills = skills
 	for skill_id: Skill.SkillID in _skill_buttons.keys():
 		_skill_buttons[skill_id].set_texture(skills[skill_id].portrait)
-		_skill_buttons[skill_id].pressed.connect(_on_hex_button_pressed)
-		_skill_buttons[skill_id].button_mouse_entered.connect(_on_hex_button_mouse_entered)
-		_skill_buttons[skill_id].button_mouse_exited.connect(_on_hex_button_mouse_exited)
 
 
 func highlight_skill(skill_id: Skill.SkillID, highlight_type: HexButton.HighlightType, is_activated: bool = true) -> void:

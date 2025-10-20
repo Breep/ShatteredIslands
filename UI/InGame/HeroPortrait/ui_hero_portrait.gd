@@ -78,9 +78,13 @@ func _hide_minimize_button() -> void:
 	_minimize_button.hide()
 	_minimize_button.modulate.a = 0.0
 
+
 func _add_local_player_special_behaviour() -> void:
-	if not _player == PlayerManager.get_local_player():
-		return
+	if not _player == PlayerManager.get_local_player(): return
+	if _player.skill_manager.skill_unlocked.is_connected(_on_local_player_skill_manager_skill_unlocked):
+		_player.skill_manager.skill_unlocked.disconnect(_on_local_player_skill_manager_skill_unlocked)
+	if _player.skill_manager.skill_picked.is_connected(_on_local_player_skill_manager_skill_picked):
+		_player.skill_manager.skill_picked.disconnect(_on_local_player_skill_manager_skill_picked)
 	_player.skill_manager.skill_unlocked.connect(_on_local_player_skill_manager_skill_unlocked)
 	_player.skill_manager.skill_picked.connect(_on_local_player_skill_manager_skill_picked)
 	for skill_type: Skill.SkillType in _player.skill_manager.skills_pending.keys():

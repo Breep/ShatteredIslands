@@ -34,6 +34,8 @@ func _ready() -> void:
 		var portrait_family: UIFamilyPortrait = _family_portraits[_family_portraits.size() - i - 1]
 		portrait_family.modulate.a = 0
 		portrait_family.scale = Vector2(0.9, 0.9)
+		portrait_family.selected.connect(_on_portrait_family_selected)
+		portrait_family.unselected.connect(_on_portrait_family_unselected)
 
 # ============================== Public functions ==============================
 
@@ -46,8 +48,6 @@ func show_families() -> void:
 		_tweens.append(tw)
 		tw.tween_property(portrait_family, "modulate:a", 1.0, _effect_duration).from(0.0).set_delay(i * _step)
 		tw.parallel().tween_property(portrait_family, "scale", Vector2.ONE, _effect_duration).from(Vector2(0.9, 0.9)).set_delay(i * _step)
-		portrait_family.selected.connect(_on_portrait_family_selected)
-		portrait_family.unselected.connect(_on_portrait_family_unselected)
 
 
 func hide_families() -> void:
