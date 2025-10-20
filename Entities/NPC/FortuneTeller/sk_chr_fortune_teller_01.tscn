@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://d05soq0vastae"]
 
-[ext_resource type="PackedScene" uid="uid://b3flnc0ctccgt" path="res://Data/PNJ/SK_Chr_FortuneTeller_01.fbx" id="1_12pkq"]
+[ext_resource type="PackedScene" uid="uid://b3flnc0ctccgt" path="res://Entities/NPC/FortuneTeller/SK_Chr_FortuneTeller_01.fbx" id="1_12pkq"]
 [ext_resource type="Texture2D" uid="uid://cnk860spex0sb" path="res://Data/Blender/Map/Map/Tavern/tavern_PolygonFantasyKingdom_Texture_01_A.png" id="2_w3lw8"]
 [ext_resource type="AnimationLibrary" uid="uid://lusuqdn4nl3c" path="res://Data/Anim/Anim library/1_anim_pack_full.res" id="3_w3lw8"]
 

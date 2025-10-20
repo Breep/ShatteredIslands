@@ -4,20 +4,22 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://blsio7chc461c"
-path="res://.godot/imported/SM_Chr_Fairy_Wing_R_01.fbx-67ab3d469be0248c5d5bd695a6dee041.scn"
+path="res://.godot/imported/SM_Chr_Fairy_Wing_R_01.fbx-c600ca004d45befdc7d06d5aa4d8df43.scn"
 
 [deps]
 
-source_file="res://Data/PNJ/SM_Chr_Fairy_Wing_R_01.fbx"
-dest_files=["res://.godot/imported/SM_Chr_Fairy_Wing_R_01.fbx-67ab3d469be0248c5d5bd695a6dee041.scn"]
+source_file="res://Entities/NPC/Fairy/SM_Chr_Fairy_Wing_R_01.fbx"
+dest_files=["res://.godot/imported/SM_Chr_Fairy_Wing_R_01.fbx-c600ca004d45befdc7d06d5aa4d8df43.scn"]
 
 [params]
 
 nodes/root_type=""
 nodes/root_name=""
+nodes/root_script=null
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
 nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
 nodes/use_node_type_suffixes=true
 meshes/ensure_tangents=true
 meshes/generate_lods=true
@@ -32,7 +34,11 @@ animation/trimming=true
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
+materials/extract=0
+materials/extract_format=0
+materials/extract_path=""
 _subresources={}
 fbx/importer=0
 fbx/allow_geometry_helper_nodes=false
 fbx/embedded_image_handling=1
+fbx/naming_version=1

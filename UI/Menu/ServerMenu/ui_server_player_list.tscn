@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://cfy3wb4emhq5q"]
+[gd_scene load_steps=4 format=3 uid="uid://cfy3wb4emhq5q"]
 
 [ext_resource type="Script" uid="uid://ydc55iptm4fr" path="res://UI/Menu/ServerMenu/ui_server_player_list.gd" id="1_urncf"]
-[ext_resource type="Texture2D" uid="uid://capk6pfx3rt4k" path="res://Data/Misc/scrn2.jpg" id="2_0275w"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="3_w1xft"]
 [ext_resource type="PackedScene" uid="uid://dqkyovx2krwgi" path="res://UI/Menu/ServerMenu/ui_player_info_template.tscn" id="4_eeq53"]
 
@@ -13,16 +12,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_urncf")
-
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_0275w")
-expand_mode = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1

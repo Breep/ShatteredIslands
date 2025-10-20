@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ca3wssxlwj4qk" path="res://FloatingIsland/_Maps/tavern_animated.tscn" id="1_t0ehc"]
 [ext_resource type="PackedScene" uid="uid://dv0rauvoaxb0y" path="res://Entities/Heroes/DarkKnight/dark_knight_import.tscn" id="2_h1ykg"]
-[ext_resource type="PackedScene" uid="uid://6l0c0aa6rcl7" path="res://FloatingIsland/PNJ/sk_chr_jester_01.tscn" id="3_ob281"]
+[ext_resource type="PackedScene" uid="uid://6l0c0aa6rcl7" path="res://Entities/NPC/Jester/sk_chr_jester_01.tscn" id="3_ob281"]
 [ext_resource type="AudioStream" uid="uid://biv0onttk3ob3" path="res://Data/Sounds/song/🎵 La Taverne Chante ! 🎵.mp3" id="4_vlphg"]
 [ext_resource type="Script" uid="uid://d0lxap0ihwci2" path="res://Prototyping/tavern_camera/path3d/procedural_path.gd" id="5_o0ndx"]
 [ext_resource type="Script" uid="uid://bf03xdqwc8h23" path="res://Prototyping/tavern_camera/path3d/path_section.gd" id="6_vlphg"]

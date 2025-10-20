@@ -3,21 +3,23 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bjbuveewqbpye"
-path="res://.godot/imported/SK_Chr_Fairy_01.fbx-64a870f26eed37d90c04e9f4bd9238f7.scn"
+uid="uid://b6r1exa3cp7ln"
+path="res://.godot/imported/SK_Chr_Bartender_01.fbx-cef218e1fa09013c763069273a9e9820.scn"
 
 [deps]
 
-source_file="res://Data/PNJ/SK_Chr_Fairy_01.fbx"
-dest_files=["res://.godot/imported/SK_Chr_Fairy_01.fbx-64a870f26eed37d90c04e9f4bd9238f7.scn"]
+source_file="res://Entities/NPC/Bartender/SK_Chr_Bartender_01.fbx"
+dest_files=["res://.godot/imported/SK_Chr_Bartender_01.fbx-cef218e1fa09013c763069273a9e9820.scn"]
 
 [params]
 
 nodes/root_type=""
 nodes/root_name=""
+nodes/root_script=null
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
 nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
 nodes/use_node_type_suffixes=true
 meshes/ensure_tangents=true
 meshes/generate_lods=true
@@ -32,6 +34,9 @@ animation/trimming=true
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
+materials/extract=0
+materials/extract_format=0
+materials/extract_path=""
 _subresources={
 "nodes": {
 "PATH:Root/Skeleton3D": {
@@ -45,3 +50,4 @@ _subresources={
 fbx/importer=0
 fbx/allow_geometry_helper_nodes=false
 fbx/embedded_image_handling=1
+fbx/naming_version=1

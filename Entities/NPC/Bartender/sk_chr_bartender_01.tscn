@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://jjd3kidthudx"]
 
-[ext_resource type="PackedScene" uid="uid://b6r1exa3cp7ln" path="res://Data/PNJ/SK_Chr_Bartender_01.fbx" id="1_cs64x"]
+[ext_resource type="PackedScene" uid="uid://b6r1exa3cp7ln" path="res://Entities/NPC/Bartender/SK_Chr_Bartender_01.fbx" id="1_cs64x"]
 [ext_resource type="Texture2D" uid="uid://cnk860spex0sb" path="res://Data/Blender/Map/Map/Tavern/tavern_PolygonFantasyKingdom_Texture_01_A.png" id="2_a73kq"]
 [ext_resource type="Animation" uid="uid://83wnojrrvug4" path="res://Data/Anim/Anim library/bartender.res" id="3_a73kq"]
 

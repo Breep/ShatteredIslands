@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://61bey01gukxt"]
 
-[ext_resource type="PackedScene" uid="uid://hqbo5ocmsdkf" path="res://Data/PNJ/SK_Chr_Mage_01.fbx" id="1_b25dn"]
+[ext_resource type="PackedScene" uid="uid://hqbo5ocmsdkf" path="res://Entities/NPC/Mage/SK_Chr_Mage_01.fbx" id="1_b25dn"]
 [ext_resource type="Texture2D" uid="uid://cnk860spex0sb" path="res://Data/Blender/Map/Map/Tavern/tavern_PolygonFantasyKingdom_Texture_01_A.png" id="2_18nso"]
 [ext_resource type="AnimationLibrary" uid="uid://lusuqdn4nl3c" path="res://Data/Anim/Anim library/1_anim_pack_full.res" id="3_18nso"]
 

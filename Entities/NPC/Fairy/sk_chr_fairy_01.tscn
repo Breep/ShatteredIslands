@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://cai63yuhuv3a8"]
 
-[ext_resource type="PackedScene" uid="uid://bjbuveewqbpye" path="res://Data/PNJ/SK_Chr_Fairy_01.fbx" id="1_uqjss"]
+[ext_resource type="PackedScene" uid="uid://bjbuveewqbpye" path="res://Entities/NPC/Fairy/SK_Chr_Fairy_01.fbx" id="1_uqjss"]
 [ext_resource type="Texture2D" uid="uid://cnk860spex0sb" path="res://Data/Blender/Map/Map/Tavern/tavern_PolygonFantasyKingdom_Texture_01_A.png" id="2_sk6nu"]
-[ext_resource type="PackedScene" uid="uid://yx4w78dpfunw" path="res://Data/PNJ/SM_Chr_Fairy_Wing_L_01.fbx" id="3_a4xt6"]
-[ext_resource type="PackedScene" uid="uid://blsio7chc461c" path="res://Data/PNJ/SM_Chr_Fairy_Wing_R_01.fbx" id="4_m423r"]
+[ext_resource type="PackedScene" uid="uid://yx4w78dpfunw" path="res://Entities/NPC/Fairy/SM_Chr_Fairy_Wing_L_01.fbx" id="3_a4xt6"]
+[ext_resource type="PackedScene" uid="uid://blsio7chc461c" path="res://Entities/NPC/Fairy/SM_Chr_Fairy_Wing_R_01.fbx" id="4_m423r"]
 [ext_resource type="AnimationLibrary" uid="uid://lusuqdn4nl3c" path="res://Data/Anim/Anim library/1_anim_pack_full.res" id="5_sk6nu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bl8cq"]

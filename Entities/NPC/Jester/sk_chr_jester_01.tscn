@@ -1,6 +1,6 @@
 [gd_scene load_steps=53 format=3 uid="uid://6l0c0aa6rcl7"]
 
-[ext_resource type="PackedScene" uid="uid://clt5rkt34hlgg" path="res://Data/PNJ/SK_Chr_Jester_01.fbx" id="1_t1n7u"]
+[ext_resource type="PackedScene" uid="uid://clt5rkt34hlgg" path="res://Entities/NPC/Jester/SK_Chr_Jester_01.fbx" id="1_t1n7u"]
 [ext_resource type="Texture2D" uid="uid://cnk860spex0sb" path="res://Data/Blender/Map/Map/Tavern/tavern_PolygonFantasyKingdom_Texture_01_A.png" id="2_ax4nv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3h6jp"]
