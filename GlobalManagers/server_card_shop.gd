@@ -159,6 +159,9 @@ func _answer_buy_card_from_player_shop(server_response: ServerResponse) -> void:
 func _server_try_buy_random_card_for_player(player: Player) -> Card:
 	if player.gold < 90: return null
 	var cards: Array[Card] = shop_deck.draw_n_cards(1, player.deck)
+	if cards.is_empty():
+		push_warning("ServerCardShop: No more random card from the server")
+		return null
 	player.deck.add_card(cards[0])
 	player.gold -= 90
 	return cards[0]
