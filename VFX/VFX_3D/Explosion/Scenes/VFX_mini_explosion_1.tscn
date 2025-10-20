@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c6pcyeugsepnp" path="res://VFX/VFX_3D/Explosion/textures/T_PerlinNoise_Tiled11_inv.png" id="2_th8gq"]
 [ext_resource type="ArrayMesh" uid="uid://c76t0djtwb6l6" path="res://VFX/VFX_3D/Explosion/objects/sm_teardrop.obj" id="3_3sx23"]
 [ext_resource type="Shader" uid="uid://dp4ffi7pqnpmw" path="res://VFX/VFX_3D/Explosion/shaders/s_multi_disolver.tres" id="4_k0fss"]
-[ext_resource type="Texture2D" uid="uid://nyyc5vq2e8a8" path="res://VFX/VFX_3D/Ultimate/Aeron/Textures/T_VFX_Noise_44xainv.png" id="5_3vntu"]
+[ext_resource type="Texture2D" uid="uid://cso3mxnikia0i" path="res://VFX/VFX_3D/Ultimate/Aeron/Textures/T_VFX_Noise_44xainv.png" id="5_3vntu"]
 [ext_resource type="Shader" uid="uid://bj7tw025wwvj" path="res://VFX/VFX_3D/Explosion/shaders/s_master_smoke.tres" id="6_2u6wn"]
 [ext_resource type="Texture2D" uid="uid://cwhkes8gbjqfp" path="res://VFX/VFX_3D/Explosion/textures/T_VFX_Noise_13.PNG" id="7_vwi1o"]
 [ext_resource type="Shader" uid="uid://1q6lsrjyrqr1" path="res://VFX/VFX_3D/Ultimate/Aeron/Shaders/s_simple_pfc.tres" id="8_ghw52"]

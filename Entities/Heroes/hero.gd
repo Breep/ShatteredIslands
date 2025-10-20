@@ -5,16 +5,7 @@ extends Resource
 
 enum HeroId {
 	UNDEF,
-	ANCIENT_TREE,
-	CYBORG,
-	DR_BOOM,
-	LAURENT_KROFT,
-	MR_KRUMB,
-	SIR_REGINALD,
-	TONY_LE_BARDE,
-	RHINO,
 	DARK_KNIGHT,
-	ROCKY
 }
 
 # ============================== Export ==============================

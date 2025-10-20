@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://4f6k0cp6bjxt"]
+[gd_scene load_steps=5 format=3 uid="uid://4f6k0cp6bjxt"]
 
-[ext_resource type="Script" uid="uid://bfk1vk6iow70n" path="res://Entities/Heroes/AncientTree/ancient_tree.gd" id="1_xpnxw"]
-[ext_resource type="Resource" uid="uid://da7twhn1qr7at" path="res://Entities/Heroes/_Undef/undef.tres" id="2_25tbx"]
+[ext_resource type="Script" uid="uid://c6s2dfe26hy62" path="res://Entities/Heroes/_Undef/undef.gd" id="1_1dm1m"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rxegs"]
 
@@ -11,12 +10,10 @@ albedo_color = Color(1, 0.324846, 0.770827, 1)
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_cd7ob"]
 material = SubResource("StandardMaterial3D_25tbx")
 
-[node name="Undef" type="StaticBody3D" node_paths=PackedStringArray("collision_shape")]
+[node name="Undef" type="StaticBody3D"]
 collision_layer = 0
 collision_mask = 0
-script = ExtResource("1_xpnxw")
-hero = ExtResource("2_25tbx")
-collision_shape = NodePath("CollisionShape3D")
+script = ExtResource("1_1dm1m")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 unique_name_in_owner = true

@@ -1,2 +1,0 @@
-class_name LaurentKroft
-extends Hero3D

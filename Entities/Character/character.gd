@@ -5,16 +5,7 @@ extends Entity
 
 const _HEROES_3D: Dictionary[Hero.HeroId, PackedScene] = {
 	Hero.HeroId.UNDEF: preload("res://Entities/Heroes/_Undef/undef.tscn"),
-	Hero.HeroId.ANCIENT_TREE: preload("res://Entities/Heroes/AncientTree/ancient_tree.tscn"),
-	Hero.HeroId.CYBORG: preload("res://Entities/Heroes/Cyborg/cyborg.tscn"),
-	Hero.HeroId.DR_BOOM: preload("res://Entities/Heroes/DrBoom/dr_boom.tscn"),
-	Hero.HeroId.LAURENT_KROFT: preload("res://Entities/Heroes/LaurentKroft/laurent_kroft.tscn"),
-	Hero.HeroId.MR_KRUMB: preload("res://Entities/Heroes/MrKrumb/mr_krumb.tscn"),
-	Hero.HeroId.SIR_REGINALD: preload("res://Entities/Heroes/SirReginald/sir_reginald.tscn"),
-	Hero.HeroId.TONY_LE_BARDE: preload("res://Entities/Heroes/TonyLeBarde/tony_le_barde.tscn"),
-	Hero.HeroId.RHINO: preload("res://Entities/Heroes/Rhino/rhino.tscn"),
 	Hero.HeroId.DARK_KNIGHT: preload("res://Entities/Heroes/DarkKnight/dark_knight.tscn"),
-	Hero.HeroId.ROCKY: preload("res://Entities/Heroes/Rocky/rocky.tscn")
 }
 
 # ============================== Signal ==============================
