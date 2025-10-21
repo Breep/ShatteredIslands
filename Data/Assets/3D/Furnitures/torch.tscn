@@ -64,5 +64,4 @@ metadata/extras = {
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.511596, 0)
 light_color = Color(0.871725, 0.690394, 0.432234, 1)
-shadow_enabled = true
 omni_range = 10.0

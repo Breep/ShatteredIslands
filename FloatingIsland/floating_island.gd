@@ -21,10 +21,12 @@ func start_fight(_characters: Array[Character], _battle_type: Battle.BattleType)
 
 
 func set_active() -> void:
+	show()
 	pass
 
 
 func set_inactive() -> void:
+	hide()
 	pass
 
 

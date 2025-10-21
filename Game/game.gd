@@ -45,19 +45,10 @@ var _current_round_battles: Array[Battle]
 
 # ============================== Node base functions ==============================
 
-func _init() -> void:
-	pass
-
-func _enter_tree() -> void:
-	pass
-
 func _ready() -> void:
 	_hero_selector.all_heroes_picked.connect(_on_hero_selector_all_heroes_picked)
-	
 	GlobalFightingManager.all_fights_are_over.connect(_on_global_fighting_manager_all_fights_are_over)
-	
 	Shared.scene_switcher = _scene_switcher
-	
 	_start_game()
 
 # ============================== Private functions ==============================
@@ -68,21 +59,8 @@ func _start_game() -> void:
 
 
 func _start_hero_selection() -> void:
-	print("\n\n=== DEBUG === [Hero Selection]")
-	for child in _buying_island._buying_area.get_children(true):
-		if child is Node:
-			print("DEBUG - [", child.name, "] Nodes=", count_nodes_recursive(child))
-	print("=== DEBUG ===\n\n")
 	game_state = GameState.STARTING
 	_hero_selector.start()
-
-
-func __debug_print_nodes_count() -> void:
-	print("\n\n=== DEBUG === [", RoundManager.current_round, "]")
-	for child in _buying_island._buying_area.get_children(true):
-		if child is Node:
-			print("DEBUG - [", child.name, "] Nodes=", count_nodes_recursive(child))
-	print("=== DEBUG ===\n\n")
 
 
 func count_nodes_recursive(node: Node) -> int:
@@ -95,7 +73,6 @@ func count_nodes_recursive(node: Node) -> int:
 func _start_new_round() ->void:
 	print("[", multiplayer.get_unique_id(), "] Game: Start new round")
 	_current_round_player_id_islands.clear()
-	__debug_print_nodes_count()
 	
 	# Check local player life ?
 	# Comment le serveur gère la mort de chaque joueur
