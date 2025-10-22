@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://ccea0ipats5yf" path="res://UI/InGame/FightingArea/EntityStats/HealthBar/ui_health_bar.gd" id="1_k8w14"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_lbpif"]
 [ext_resource type="Shader" uid="uid://bngl8v6o10lds" path="res://VFX/Shaders/2D/2d_flexible_progress_bar.gdshader" id="2_sxjj2"]
-[ext_resource type="Script" uid="uid://chcmgrh1l6vyn" path="res://UI/Tool/Misc/progress_bar.gd" id="3_lbpif"]
+[ext_resource type="Script" uid="uid://chcmgrh1l6vyn" path="res://UI/Tool/Misc/flexible_progress_bar.gd" id="3_lbpif"]
 [ext_resource type="Script" uid="uid://bttgnk3bb2a8i" path="res://addons/font_auto_size_labels/auto_size_label.gd" id="5_kcbmh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kcbmh"]
@@ -15,7 +15,7 @@ bg_color = Color(1, 1, 1, 1)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_io7js"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ej5du"]
-bg_color = Color(0.4879406, 0.26294863, 0.10510888, 1)
+bg_color = Color(0.515031, 0.4059724, 0.18658766, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l8o62"]
 
@@ -838,8 +838,24 @@ alignment = 2
 
 [node name="PoisonLabel" type="Label" parent="SubHealthBar/HBoxContainer/DebufControl/HBoxContainer"]
 unique_name_in_owner = true
-visible = false
 modulate = Color(0.26909426, 0.4003629, 0.15316594, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 100
+text = "100"
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 3
+clip_text = true
+script = ExtResource("5_kcbmh")
+_max_size = 100
+_current_font_size = 100
+_editor_defaults_set = true
+
+[node name="IgniteLabel" type="Label" parent="SubHealthBar/HBoxContainer/DebufControl/HBoxContainer"]
+unique_name_in_owner = true
+modulate = Color(0.8337731, 0.42145184, 0.19609237, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -893,7 +909,6 @@ grow_vertical = 2
 
 [node name="ArmorLabel" type="Label" parent="SubHealthBar/HBoxContainer/BufControl/HBoxContainer"]
 unique_name_in_owner = true
-visible = false
 modulate = Color(0.59979576, 0.2856071, 0.16820335, 1)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -907,3 +922,8 @@ script = ExtResource("5_kcbmh")
 _max_size = 100
 _current_font_size = 100
 _editor_defaults_set = true
+
+[node name="DamagePopups" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

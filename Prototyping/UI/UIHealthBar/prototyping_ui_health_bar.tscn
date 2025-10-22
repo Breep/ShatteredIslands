@@ -15,10 +15,10 @@ script = ExtResource("1_au3y3")
 [node name="HealthBar" parent="." instance=ExtResource("2_iluhx")]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 404.0
-offset_top = 335.0
-offset_right = 1505.0
-offset_bottom = 419.0
+offset_left = 482.0
+offset_top = 389.0
+offset_right = 1583.0
+offset_bottom = 473.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0

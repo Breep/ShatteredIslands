@@ -25,6 +25,7 @@ var _flash_delay_timer: Timer
 @onready var _health_label: Label = %HealthLabel
 @onready var _poison_label: Label = %PoisonLabel
 @onready var _armor_label: Label = %ArmorLabel
+@onready var _ignite_label: Label = %IgniteLabel
 
 @export var _poison_multiplier: float = 1.0
 @export var _armor_multiplier: float = 1.0
@@ -60,10 +61,16 @@ var armor_stacks: int:
 	get: return _armor_stacks
 	set(value):
 		_armor_stacks = value
-		# Defer max changes until after flash completes
 		_pending_total_max = _max_health + _armor_stacks
 		_apply_max_after_flash = true
-		_update_layout()
+		_update_armor_bar()
+
+var _ignite_stacks: int = 0
+var ignite_stacks: int:
+	get: return _ignite_stacks
+	set(value):
+		_ignite_stacks = value
+		_update_ignite()
 
 var _current_health: int = 1000
 var current_health: int:
@@ -102,12 +109,10 @@ func _apply_max_values(total_max: int) -> void:
 func _ready() -> void:
 	if _show_armor: _armor_bar.show()
 	if _show_poison: _poison_bar.show()
-
 	_flash_delay_timer = Timer.new()
 	_flash_delay_timer.one_shot = true
 	add_child(_flash_delay_timer)
 	_flash_delay_timer.timeout.connect(_on_flash_delay_timeout)
-
 	_update_layout()
 
 func _update_layout() -> void:
@@ -115,7 +120,8 @@ func _update_layout() -> void:
 	var end_pos: Vector2 = _get_health_bar_end_pos()
 	_update_health_bar()
 	_update_poison_bar(end_pos)
-	_update_armor_bar(end_pos, _armor_stacks)
+	_update_armor_bar()
+	_update_ignite()
 
 func _update_poison_bar(start_pos: Vector2) -> void:
 	if _poison_stacks <= 0:
@@ -131,7 +137,7 @@ func _update_poison_bar(start_pos: Vector2) -> void:
 	_poison_bar.size.y = _health_bar.size.y
 	_poison_bar.position = start_pos - _poison_bar.size.x * Vector2.RIGHT
 
-func _update_armor_bar(_start_pos: Vector2, _new_armor_stacks: int) -> void:
+func _update_armor_bar() -> void:
 	if _armor_stacks <= 0:
 		_armor_bar.hide()
 		_armor_label.hide()
@@ -161,6 +167,13 @@ func _update_health_bar() -> void:
 
 	_health_bar.value = _current_health
 	_schedule_flash_to(_current_health + _armor_stacks)
+
+func _update_ignite() -> void:
+	if _ignite_stacks <= 0:
+		_ignite_label.hide()
+	else:
+		_ignite_label.show()
+		_ignite_label.text = str(_ignite_stacks)
 
 func _get_health_bar_end_pos() -> Vector2:
 	var total_max: float = float(_max_health + _armor_stacks)

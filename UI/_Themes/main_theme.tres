@@ -1,6 +1,5 @@
-[gd_resource type="Theme" load_steps=18 format=3 uid="uid://deijluejrkd7e"]
+[gd_resource type="Theme" load_steps=17 format=3 uid="uid://deijluejrkd7e"]
 
-[ext_resource type="FontFile" uid="uid://dbqejd0leblna" path="res://Data/font/Nunito-Bold.ttf" id="1_itn17"]
 [ext_resource type="FontFile" uid="uid://cvfku6uge3mvi" path="res://Data/font/Super Trend.ttf" id="2_c6cb3"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1psgx"]
@@ -55,7 +54,7 @@ border_color = Color(0, 0, 0, 1)
 Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
 Button/colors/font_outline_color = Color(0, 0, 0, 1)
 Button/constants/outline_size = 5
-Button/fonts/font = ExtResource("1_itn17")
+Button/fonts/font = ExtResource("2_c6cb3")
 Button/styles/focus = SubResource("StyleBoxEmpty_1psgx")
 Button/styles/hover = SubResource("StyleBoxFlat_m6wv4")
 Button/styles/normal = SubResource("StyleBoxEmpty_m6wv4")

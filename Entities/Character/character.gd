@@ -21,6 +21,7 @@ var fighting_state: GlobalFightingManager.FightingState:
 	get: return _fighting_state
 	set(value):
 		if value != _fighting_state:
+			print("DEBUG CHANGE FIGHTING STATE")
 			_fighting_state = value
 			fighting_state_changed.emit(_fighting_state)
 

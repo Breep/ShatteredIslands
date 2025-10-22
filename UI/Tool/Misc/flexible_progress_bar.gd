@@ -519,6 +519,7 @@ func get_fill_percentage() -> float:
 	return current_fill
 
 func update_segment_count(new_segment_count: int):
+	if segment_count == new_segment_count: return
 	segment_count = new_segment_count
 	max_segments = segment_count
 	material.set_shader_parameter("segment_count", segment_count)

@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://db2anika8bvj8"]
+[gd_scene load_steps=8 format=3 uid="uid://db2anika8bvj8"]
 
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_xclh3"]
 [ext_resource type="Script" uid="uid://wsv4m6qf4t76" path="res://UI/InGame/FightingArea/EntityStats/ui_entity_stats.gd" id="2_8ou46"]
+[ext_resource type="Script" uid="uid://bttgnk3bb2a8i" path="res://addons/font_auto_size_labels/auto_size_label.gd" id="3_5f36r"]
 [ext_resource type="PackedScene" uid="uid://bccnumgm5v1f8" path="res://UI/InGame/FightingArea/EntityStats/HealthBar/ui_health_bar.tscn" id="3_b0dtw"]
 [ext_resource type="Shader" uid="uid://bngl8v6o10lds" path="res://VFX/Shaders/2D/2d_flexible_progress_bar.gdshader" id="3_tdusk"]
+[ext_resource type="Script" uid="uid://chcmgrh1l6vyn" path="res://UI/Tool/Misc/flexible_progress_bar.gd" id="6_5f36r"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y44ja"]
 shader = ExtResource("3_tdusk")
@@ -98,11 +100,18 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/outline_size = 25
-theme_override_font_sizes/font_size = 50
-text = "Breep"
+theme_override_font_sizes/font_size = 40
+text = " Breep"
 vertical_alignment = 1
+autowrap_mode = 3
+clip_text = true
+script = ExtResource("3_5f36r")
+_max_size = 100
+_current_font_size = 40
+_editor_defaults_set = true
 
 [node name="HealthBar" parent="VBoxContainer" instance=ExtResource("3_b0dtw")]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -112,10 +121,12 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
 
 [node name="ManaProgressBar" type="ColorRect" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 material = SubResource("ShaderMaterial_y44ja")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("6_5f36r")
 
 [node name="Control" type="Control" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2

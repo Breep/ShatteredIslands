@@ -1,0 +1,523 @@
+[gd_scene load_steps=40 format=3 uid="uid://b5k22tsib3qek"]
+
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_6k7ey"]
+[ext_resource type="Script" uid="uid://bovdfdcxjdc1i" path="res://Prototyping/UI/UIEntityStats/prototyping_entity_stats.gd" id="2_1cuyt"]
+[ext_resource type="PackedScene" uid="uid://db2anika8bvj8" path="res://UI/InGame/FightingArea/EntityStats/ui_entity_stats.tscn" id="2_vortl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_volhp"]
+bg_color = Color(0.2051487, 0.71239763, 0.29593343, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u7vis"]
+bg_color = Color(0.14804077, 0.50895923, 0.20939589, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fkolm"]
+bg_color = Color(0.2051487, 0.71239763, 0.29593343, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qnhu0"]
+bg_color = Color(0.98829156, 0.23109415, 0.33042333, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xfd4e"]
+bg_color = Color(0.73260415, 0.041652367, 0.19620848, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ypdm"]
+bg_color = Color(0.98829156, 0.23109415, 0.33042333, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t7amo"]
+bg_color = Color(0.9311065, 0.3727773, 0.34522524, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wl0n1"]
+bg_color = Color(0.76006246, 0.21333838, 0.20623758, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_77gk5"]
+bg_color = Color(0.9311065, 0.3727773, 0.34522524, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_20kkd"]
+bg_color = Color(0.9311065, 0.3727773, 0.34522524, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o0nd8"]
+bg_color = Color(0.76006246, 0.21333838, 0.20623758, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e8k78"]
+bg_color = Color(0.9311065, 0.3727773, 0.34522524, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f0b73"]
+bg_color = Color(0.34539133, 0.68797565, 0.40948927, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8v6uc"]
+bg_color = Color(0.20602766, 0.43682262, 0.24982291, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3u318"]
+bg_color = Color(0.34539133, 0.68797565, 0.40948927, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7qyrv"]
+bg_color = Color(0.73680305, 0.39459157, 0.24808079, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xxg0n"]
+bg_color = Color(0.57918453, 0.29567236, 0.17302275, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5july"]
+bg_color = Color(0.73680305, 0.39459157, 0.24808079, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_funep"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cl6jy"]
+bg_color = Color(0.3665946, 0.36659464, 0.36659443, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lh78h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1cuyt"]
+bg_color = Color(0.26610193, 0.67235273, 0.6680487, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vsbcj"]
+bg_color = Color(0.19767138, 0.5376727, 0.5342231, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6k7ey"]
+bg_color = Color(0.26610193, 0.67235273, 0.6680487, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_clh6h"]
+bg_color = Color(0.26610193, 0.67235273, 0.6680487, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e1nhj"]
+bg_color = Color(0.19767138, 0.5376727, 0.5342231, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vortl"]
+bg_color = Color(0.26610193, 0.67235273, 0.6680487, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0psvp"]
+bg_color = Color(0.97705144, 0.5093269, 0.30353752, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2o5ap"]
+bg_color = Color(0.9429342, 0.42169404, 0.16696328, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7xdgm"]
+bg_color = Color(0.97705144, 0.5093269, 0.30353752, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xbhig"]
+bg_color = Color(0.31395465, 0.6868305, 0.4844677, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jis0c"]
+bg_color = Color(0.21071607, 0.4925043, 0.34068674, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ao245"]
+bg_color = Color(0.31395465, 0.6868305, 0.4844677, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k1rt8"]
+bg_color = Color(0.08957543, 0.6216859, 0.99999994, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nj7t4"]
+bg_color = Color(0, 0.4469707, 0.7379461, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6x65p"]
+bg_color = Color(0.08957543, 0.6216859, 0.99999994, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[node name="PrototypingEntityStats" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_6k7ey")
+script = ExtResource("2_1cuyt")
+
+[node name="EntityStats" parent="." instance=ExtResource("2_vortl")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = -474.0
+offset_top = -267.0
+offset_right = 507.0
+offset_bottom = -80.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 283.0
+offset_top = 528.0
+offset_right = 1663.0
+offset_bottom = 938.0
+theme_override_constants/separation = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer2"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+
+[node name="StartBattle" type="Button" parent="HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/outline_size = 25
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_volhp")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_u7vis")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fkolm")
+text = "START 
+BATTLE"
+
+[node name="EndBattle" type="Button" parent="HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/outline_size = 25
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_qnhu0")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xfd4e")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5ypdm")
+text = "END 
+BATTLE"
+
+[node name="HBoxContainer" type="GridContainer" parent="HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 5
+
+[node name="MaxHealth" type="VBoxContainer" parent="HBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[node name="MaxHealthTextEdit" type="TextEdit" parent="HBoxContainer2/HBoxContainer/MaxHealth"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "1000"
+placeholder_text = "Max health"
+
+[node name="SetMaxHealthButton" type="Button" parent="HBoxContainer2/HBoxContainer/MaxHealth"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_t7amo")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_wl0n1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_77gk5")
+text = "Set MAX HEALTH"
+
+[node name="CurrentHealth" type="VBoxContainer" parent="HBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[node name="CurrentHealthTextEdit" type="TextEdit" parent="HBoxContainer2/HBoxContainer/CurrentHealth"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "1000"
+placeholder_text = "Current health"
+
+[node name="SetCurrentHealthButton" type="Button" parent="HBoxContainer2/HBoxContainer/CurrentHealth"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_20kkd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_o0nd8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_e8k78")
+text = "Set CURRENT HEALTH"
+
+[node name="Poison" type="VBoxContainer" parent="HBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[node name="PoisonTextEdit" type="TextEdit" parent="HBoxContainer2/HBoxContainer/Poison"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "0"
+placeholder_text = "Current poison stacks"
+
+[node name="PoisonButton" type="Button" parent="HBoxContainer2/HBoxContainer/Poison"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_f0b73")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8v6uc")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3u318")
+text = "Set POISON STACKS"
+
+[node name="Armor" type="VBoxContainer" parent="HBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[node name="ArmorTextEdit" type="TextEdit" parent="HBoxContainer2/HBoxContainer/Armor"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "0"
+placeholder_text = "Current armor stacks"
+
+[node name="ArmorButton" type="Button" parent="HBoxContainer2/HBoxContainer/Armor"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_7qyrv")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xxg0n")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5july")
+text = "Set ARMOR STACKS"
+
+[node name="PhysicalDamage" type="VBoxContainer" parent="HBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer2/HBoxContainer/PhysicalDamage"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DamageTextEdit" type="TextEdit" parent="HBoxContainer2/HBoxContainer/PhysicalDamage/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+text = "20"
+placeholder_text = "Damage"
+
+[node name="VariationTextEdit" type="TextEdit" parent="HBoxContainer2/HBoxContainer/PhysicalDamage/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+text = "10"
+placeholder_text = "Damage variation"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer2/HBoxContainer/PhysicalDamage"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DealPhysicalDamageButton" type="Button" parent="HBoxContainer2/HBoxContainer/PhysicalDamage/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_funep")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_cl6jy")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lh78h")
+text = "DEAL
+DAMAGE"
+
+[node name="DealCriticalDamageButton" type="Button" parent="HBoxContainer2/HBoxContainer/PhysicalDamage/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_funep")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_cl6jy")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lh78h")
+text = "DEAL
+CRITICAL
+DAMAGE"
+
+[node name="ManaRegen" type="VBoxContainer" parent="HBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[node name="ManaRegenTextEdit" type="TextEdit" parent="HBoxContainer2/HBoxContainer/ManaRegen"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "2.0"
+placeholder_text = "Mana Regen"
+
+[node name="SetManaRegenButton" type="Button" parent="HBoxContainer2/HBoxContainer/ManaRegen"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_6k7ey")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1cuyt")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_vsbcj")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6k7ey")
+text = "Set MANA REGEN"
+
+[node name="MaxMana" type="VBoxContainer" parent="HBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[node name="MaxManaTextEdit" type="TextEdit" parent="HBoxContainer2/HBoxContainer/MaxMana"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "100"
+placeholder_text = "Max Mana"
+
+[node name="SetMaxManaButton" type="Button" parent="HBoxContainer2/HBoxContainer/MaxMana"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_clh6h")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_e1nhj")
+theme_override_styles/hover = SubResource("StyleBoxFlat_vortl")
+text = "Set MAX MANA"
+
+[node name="Ignite" type="VBoxContainer" parent="HBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[node name="IgniteStacksTextEdit" type="TextEdit" parent="HBoxContainer2/HBoxContainer/Ignite"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "0"
+placeholder_text = "Max Mana"
+
+[node name="SetIgniteButton" type="Button" parent="HBoxContainer2/HBoxContainer/Ignite"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_0psvp")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2o5ap")
+theme_override_styles/hover = SubResource("StyleBoxFlat_7xdgm")
+text = "SET IGNITE STACKS"
+
+[node name="Heal" type="VBoxContainer" parent="HBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[node name="HealTextEdit" type="TextEdit" parent="HBoxContainer2/HBoxContainer/Heal"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "100"
+placeholder_text = "Max Mana"
+
+[node name="HealButton" type="Button" parent="HBoxContainer2/HBoxContainer/Heal"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_xbhig")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jis0c")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ao245")
+text = "HEAL"
+
+[node name="MagicalDamage" type="VBoxContainer" parent="HBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[node name="MagicalDamageTextEdit" type="TextEdit" parent="HBoxContainer2/HBoxContainer/MagicalDamage"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+text = "20"
+placeholder_text = "Damage"
+
+[node name="MagicalVariationTextEdit" type="TextEdit" parent="HBoxContainer2/HBoxContainer/MagicalDamage"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+text = "10"
+placeholder_text = "Damage variation"
+
+[node name="DealMagicalDamageButton" type="Button" parent="HBoxContainer2/HBoxContainer/MagicalDamage"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_k1rt8")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nj7t4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6x65p")
+text = "DEAL MAGICAL DAMAGE"
+
+[connection signal="pressed" from="HBoxContainer2/VBoxContainer/StartBattle" to="." method="_on_start_battle_pressed"]
+[connection signal="pressed" from="HBoxContainer2/VBoxContainer/EndBattle" to="." method="_on_end_battle_pressed"]
+[connection signal="pressed" from="HBoxContainer2/HBoxContainer/MaxHealth/SetMaxHealthButton" to="." method="_on_set_max_health_button_pressed"]
+[connection signal="pressed" from="HBoxContainer2/HBoxContainer/CurrentHealth/SetCurrentHealthButton" to="." method="_on_set_current_health_button_pressed"]
+[connection signal="pressed" from="HBoxContainer2/HBoxContainer/Poison/PoisonButton" to="." method="_on_poison_button_pressed"]
+[connection signal="pressed" from="HBoxContainer2/HBoxContainer/Armor/ArmorButton" to="." method="_on_armor_button_pressed"]
+[connection signal="pressed" from="HBoxContainer2/HBoxContainer/PhysicalDamage/HBoxContainer/DealPhysicalDamageButton" to="." method="_on_deal_physical_damage_button_pressed"]
+[connection signal="pressed" from="HBoxContainer2/HBoxContainer/PhysicalDamage/HBoxContainer/DealCriticalDamageButton" to="." method="_on_deal_critical_damage_button_pressed"]
+[connection signal="pressed" from="HBoxContainer2/HBoxContainer/ManaRegen/SetManaRegenButton" to="." method="_on_set_mana_regen_button_pressed"]
+[connection signal="pressed" from="HBoxContainer2/HBoxContainer/MaxMana/SetMaxManaButton" to="." method="_on_set_max_mana_button_pressed"]
+[connection signal="pressed" from="HBoxContainer2/HBoxContainer/Ignite/SetIgniteButton" to="." method="_on_set_ignite_button_pressed"]
+[connection signal="pressed" from="HBoxContainer2/HBoxContainer/Heal/HealButton" to="." method="_on_heal_button_pressed"]
+[connection signal="pressed" from="HBoxContainer2/HBoxContainer/MagicalDamage/DealMagicalDamageButton" to="." method="_on_deal_magical_damage_button_pressed"]
