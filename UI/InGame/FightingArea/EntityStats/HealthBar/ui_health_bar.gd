@@ -17,18 +17,24 @@ var _flash_delay_timer: Timer
 
 #region Local Nodes
 @onready var _flash_bar: ProgressBar = %FlashBar
-@onready var _health_bar: ProgressBar = %HealthBar
-@onready var _poison_bar: ColorRect = %PoisonBar
-@onready var _armor_bar: ProgressBar = %ArmorBar
 @onready var _segments: FlexibleProgressBar = %Segments
 
+@onready var _health_bar: ProgressBar = %HealthBar
 @onready var _health_label: Label = %HealthLabel
-@onready var _poison_label: Label = %PoisonLabel
-@onready var _armor_label: Label = %ArmorLabel
-@onready var _ignite_label: Label = %IgniteLabel
 
+@onready var _armor_bar: ProgressBar = %ArmorBar
+@onready var _armor_label: Label = %ArmorLabel
+#@export var _armor_multiplier: float = 1.0
+
+@onready var _ignite_bar: ColorRect = %IgniteBar
+@onready var _ignite_label: Label = %IgniteLabel
+@export var _ignite_multiplier: float = 1.0
+@export var _ignite_vsize_divider: float = 1.0
+
+@onready var _poison_bar: ColorRect = %PoisonBar
+@onready var _poison_label: Label = %PoisonLabel
 @export var _poison_multiplier: float = 1.0
-@export var _armor_multiplier: float = 1.0
+@export var _poison_vsize_divider: float = 1.0
 #endregion
 
 #region HealthBar variables
@@ -69,8 +75,9 @@ var _ignite_stacks: int = 0
 var ignite_stacks: int:
 	get: return _ignite_stacks
 	set(value):
+		var end_pos: Vector2 = _get_health_bar_end_pos()
 		_ignite_stacks = value
-		_update_ignite()
+		_update_ignite(end_pos)
 
 var _current_health: int = 1000
 var current_health: int:
@@ -115,26 +122,26 @@ func _ready() -> void:
 	_flash_delay_timer.timeout.connect(_on_flash_delay_timeout)
 	_update_layout()
 
+
 func _update_layout() -> void:
 	if not is_node_ready(): return
 	var end_pos: Vector2 = _get_health_bar_end_pos()
 	_update_health_bar()
-	_update_poison_bar(end_pos)
 	_update_armor_bar()
-	_update_ignite()
+	_update_poison_bar(end_pos)
+	_update_ignite(end_pos)
+
 
 func _update_poison_bar(start_pos: Vector2) -> void:
 	if _poison_stacks <= 0:
 		_poison_bar.hide()
 		_poison_label.hide()
-		return
 	else:
 		_poison_bar.show()
 		_poison_label.show()
 		_poison_label.text = str(_poison_stacks)
-
 	_poison_bar.size.x = (float(_poison_stacks) / _health_bar.max_value) * _health_bar.size.x * _poison_multiplier
-	_poison_bar.size.y = _health_bar.size.y
+	_poison_bar.size.y = _health_bar.size.y / _poison_vsize_divider
 	_poison_bar.position = start_pos - _poison_bar.size.x * Vector2.RIGHT
 
 func _update_armor_bar() -> void:
@@ -168,12 +175,17 @@ func _update_health_bar() -> void:
 	_health_bar.value = _current_health
 	_schedule_flash_to(_current_health + _armor_stacks)
 
-func _update_ignite() -> void:
+func _update_ignite(start_pos: Vector2) -> void:
 	if _ignite_stacks <= 0:
+		_ignite_bar.hide()
 		_ignite_label.hide()
 	else:
+		_ignite_bar.show()
 		_ignite_label.show()
 		_ignite_label.text = str(_ignite_stacks)
+	_ignite_bar.size.x = (float(_ignite_stacks) / _health_bar.max_value) * _health_bar.size.x * _ignite_multiplier
+	_ignite_bar.size.y = _health_bar.size.y / _ignite_vsize_divider
+	_ignite_bar.position = start_pos - (_poison_bar.size.x + _ignite_bar.size.x) * Vector2.RIGHT
 
 func _get_health_bar_end_pos() -> Vector2:
 	var total_max: float = float(_max_health + _armor_stacks)

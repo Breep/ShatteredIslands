@@ -12,8 +12,8 @@ var _fire_stats: FamilyFireStats # Ref to the owner fire stats
 @onready var _ignite_timer: Timer = %IgniteTimer
 
 @export_group("Configuration")
-@export var _ignite_decay_percent: float
-@export var _ignite_percent_per_stack: float
+@export var _ignite_decay_percent: float = 20.0
+@export var _ignite_percent_per_stack: float = 0.05
 
 # ============================== Node base functions ==============================
 

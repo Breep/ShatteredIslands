@@ -92,8 +92,11 @@ func _on_deal_magical_damage_button_pressed() -> void:
 #endregion
 
 #region Mana
+@onready var _control: Control = %Control
 func _on_set_mana_regen_button_pressed() -> void:
-	pass # Replace with function body.
+	var damage_popup := UIDamagePopup.new().setup(42)
+	add_child(damage_popup)
+	damage_popup.position = _control.position
 
 func _on_set_max_mana_button_pressed() -> void:
 	pass # Replace with function body.
