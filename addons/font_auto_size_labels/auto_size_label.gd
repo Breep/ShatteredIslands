@@ -185,6 +185,7 @@ func _apply_font_size(new_size: int) -> void:
 		label_settings.font_size = new_size
 	else:
 		set("theme_override_font_sizes/font_size", new_size)
+		#set("theme_override_constants/outline_size", new_size/2)
 	_current_font_size = new_size
 #endregion
 

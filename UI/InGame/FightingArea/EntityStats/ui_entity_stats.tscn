@@ -103,7 +103,6 @@ text = "Breep"
 vertical_alignment = 1
 
 [node name="HealthBar" parent="VBoxContainer" instance=ExtResource("3_b0dtw")]
-unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 

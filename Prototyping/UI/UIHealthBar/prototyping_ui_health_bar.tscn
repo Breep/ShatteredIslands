@@ -12,32 +12,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_au3y3")
 
-[node name="DealDamageButton" type="Button" parent="."]
-layout_mode = 0
-offset_left = 1465.0
-offset_top = 699.0
-offset_right = 1703.0
-offset_bottom = 767.0
-text = "DEAL DAMAGE"
-
-[node name="DamageTextEdit" type="TextEdit" parent="."]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 1508.0
-offset_top = 595.0
-offset_right = 1678.0
-offset_bottom = 644.0
-placeholder_text = "Damage"
-
-[node name="VariationTextEdit" type="TextEdit" parent="."]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 1485.0
-offset_top = 651.0
-offset_right = 1698.0
-offset_bottom = 692.0
-placeholder_text = "Damage variation"
-
 [node name="HealthBar" parent="." instance=ExtResource("2_iluhx")]
 unique_name_in_owner = true
 layout_mode = 0
@@ -45,10 +19,6 @@ offset_left = 404.0
 offset_top = 335.0
 offset_right = 1505.0
 offset_bottom = 419.0
-poison_stacks = 10
-armor_stacks = 10
-current_health = 70
-max_health = 100
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
@@ -66,6 +36,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+text = "1000"
 placeholder_text = "Max health"
 
 [node name="ValidateMaxHealthButton" type="Button" parent="HBoxContainer/MaxHealth"]
@@ -81,6 +52,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+text = "1000"
 placeholder_text = "Current health"
 
 [node name="ValidateCurrentHealthButton" type="Button" parent="HBoxContainer/CurrentHealth"]
@@ -96,6 +68,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+text = "0"
 placeholder_text = "Current poison stacks"
 
 [node name="PoisonButton" type="Button" parent="HBoxContainer/Poison"]
@@ -103,23 +76,49 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "Set POISON STACKS"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="Armor" type="VBoxContainer" parent="HBoxContainer"]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 
-[node name="ArmorTextEdit" type="TextEdit" parent="HBoxContainer/VBoxContainer"]
+[node name="ArmorTextEdit" type="TextEdit" parent="HBoxContainer/Armor"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+text = "0"
 placeholder_text = "Current armor stacks"
 
-[node name="ArmorButton" type="Button" parent="HBoxContainer/VBoxContainer"]
+[node name="ArmorButton" type="Button" parent="HBoxContainer/Armor"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Set ARMOR STACKS"
 
-[connection signal="pressed" from="DealDamageButton" to="." method="_on_deal_damage_button_pressed"]
+[node name="Damage" type="VBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[node name="DamageTextEdit" type="TextEdit" parent="HBoxContainer/Damage"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+text = "20"
+placeholder_text = "Damage"
+
+[node name="VariationTextEdit" type="TextEdit" parent="HBoxContainer/Damage"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+text = "10"
+placeholder_text = "Damage variation"
+
+[node name="DealDamageButton" type="Button" parent="HBoxContainer/Damage"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "DEAL DAMAGE"
+
 [connection signal="pressed" from="HBoxContainer/MaxHealth/ValidateMaxHealthButton" to="." method="_on_validate_max_health_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/CurrentHealth/ValidateCurrentHealthButton" to="." method="_on_validate_current_health_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/Poison/PoisonButton" to="." method="_on_poison_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/ArmorButton" to="." method="_on_armor_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/Armor/ArmorButton" to="." method="_on_armor_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/Damage/DealDamageButton" to="." method="_on_deal_damage_button_pressed"]
