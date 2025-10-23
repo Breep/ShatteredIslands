@@ -75,7 +75,9 @@ var max_health: int:
 # ============================
 
 func _ready() -> void:
-	_update_layout()
+	
+	if not Engine.is_editor_hint():
+		_update_layout()
 
 
 func get_armor_popup_global_pos() -> Vector2:
