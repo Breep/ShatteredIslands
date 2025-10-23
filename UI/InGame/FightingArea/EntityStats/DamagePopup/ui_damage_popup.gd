@@ -12,11 +12,11 @@ var _damage_type: Utils.DamageType
 
 # ================== Tuning ==================
 #region Tuning
-var lifetime: float = 0.8                  # total anim time (s)
-var end_scale: float = 1.2                 # End scale of the label
-var rise_distance: float = 48.0            # how far it floats up (px)
-var horizontal_wiggle: float = 10.0        # random left/right drift (px)
-var delay: float = 0.0                     # optional delay before anim
+var popup_ratio: float = 2.0
+var lifetime: float = 1.5                  # total anim time (s)
+var end_scale: float = 1.5                 # End scale of the label
+var rise_distance: float = 70.0            # how far it floats up (px)
+var horizontal_wiggle: float = 15.0        # random left/right drift (px)
 var critical_scale_multiplier: float = 2.0 # how much critics are displayed bigger
 
 # Optional fine control on easing
@@ -27,7 +27,7 @@ var trans: Tween.TransitionType = Tween.TRANS_CUBIC
 #endregion
 
 # ================== API ==================
-func setup(value: int, damage_type: Utils.DamageType, global_start_pos: Vector2, critical: bool = false,) -> UIDamagePopup:
+func setup(value: int, damage_type: Utils.DamageType, global_start_pos: Vector2, critical: bool = false) -> UIDamagePopup:
 	_is_crit = critical
 	_global_start_pos = global_start_pos
 	text = str(value)
@@ -45,8 +45,13 @@ func _ready() -> void:
 	scale = Vector2(0.01, 0.01)
 	modulate = _color
 	global_position = _global_start_pos
-	#add_theme_font_size_override("font_size", 50)
+	rise_distance *= popup_ratio
+	horizontal_wiggle *= popup_ratio
+	add_theme_font_size_override("font_size", int(16.0 * popup_ratio))
+	
 	if _is_crit:
+		rise_distance *= 2
+		lifetime *= 1.5
 		end_scale *= critical_scale_multiplier
 	
 	_start_animation()
@@ -54,12 +59,6 @@ func _ready() -> void:
 # ================== Internals ==================
 func _start_animation() -> void:
 	var tw: Tween = create_tween()
-	if delay > 0.0:
-		tw.set_pause_mode(Tween.TWEEN_PAUSE_BOUND)
-		tw.pause()
-		await get_tree().create_timer(delay).timeout
-		tw.play()
-
 	tw.set_trans(trans)
 
 	# Random slight horizontal offset (left or right)
@@ -70,15 +69,6 @@ func _start_animation() -> void:
 		dx = randf_range(0, horizontal_wiggle)
 	var start_pos := position
 	var end_pos := start_pos + Vector2(dx, -rise_distance)
-
-	# POP: quick up-scale, then ease to end_scale while moving up & fading out
-	#var pop_time = min(0.16, lifetime * 0.25)
-	#var remain = max(0.0, lifetime - pop_time)
-
-	# Phase 1 (pop) - scale up quickly
-	#tw.parallel().set_ease(scale_ease).tween_property(self, "scale", Vector2(pop_scale, pop_scale), pop_time)
-
-	# Phase 2 (settle) - scale down slightly while rising & fading
 	if lifetime > 0.0:
 		tw = tw.chain() # next phase
 		tw.set_trans(trans)

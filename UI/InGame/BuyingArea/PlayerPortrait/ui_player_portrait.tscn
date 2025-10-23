@@ -4,7 +4,7 @@
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_q7lmx"]
 [ext_resource type="PackedScene" uid="uid://c7jrogdsytaah" path="res://UI/Tool/HexButton/hex_button.tscn" id="2_4n3yu"]
 [ext_resource type="Script" uid="uid://dl8cs3pdc7hvl" path="res://UI/Tool/input_transmiter.gd" id="3_861v8"]
-[ext_resource type="Shader" uid="uid://bngl8v6o10lds" path="res://VFX/Shaders/2D/2d_flexible_progress_bar.gdshader" id="4_5cjsk"]
+[ext_resource type="Shader" uid="uid://bngl8v6o10lds" path="res://UI/Tool/Misc/2d_flexible_progress_bar.gdshader" id="4_5cjsk"]
 [ext_resource type="Script" uid="uid://chcmgrh1l6vyn" path="res://UI/Tool/Misc/flexible_progress_bar.gd" id="5_r717o"]
 [ext_resource type="Texture2D" uid="uid://6wyyd2v5hnf3" path="res://UI/_Themes/Data/Icons/sword_icon.png" id="6_b1swy"]
 [ext_resource type="Texture2D" uid="uid://dylq535nmr30g" path="res://UI/_Themes/Data/Icons/XP_icon.png" id="7_50qpm"]

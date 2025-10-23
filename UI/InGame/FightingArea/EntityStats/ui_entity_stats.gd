@@ -101,12 +101,12 @@ func _on_entity_ignite_stacks_changed(ignite_stacks: int) -> void:
 
 
 func _on_entity_damage_taken(_entity_ref: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
-	var popup_pos: Vector2 = _health_bar.get_health_bar_end_global_pos()
+	var popup_pos: Vector2 = _health_bar.get_damage_popup_global_position(damage_type)
 	var popup := UIDamagePopup.new().setup(damage, damage_type, popup_pos, is_critical)
 	_popups_node.add_child(popup)
 
 
 func _on_entity_heal_taken(_entity_ref: Entity, heal_amount: int) -> void:
-	var popup_pos: Vector2 = _health_bar.get_health_bar_end_global_pos()
+	var popup_pos: Vector2 = _health_bar.get_damage_popup_global_position(Utils.DamageType.HEAL)
 	var popup := UIDamagePopup.new().setup(heal_amount, Utils.DamageType.HEAL, popup_pos)
 	_popups_node.add_child(popup)
