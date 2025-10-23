@@ -7,9 +7,9 @@ signal projectile_spawned(source: Entity, target: Entity, projectile_type: Proje
 func signal_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.ProjectileType, projectile_modifiers: Array[Projectile.ProjectileEffect]) -> void:
 	projectile_spawned.emit(source, target, projectile_type, projectile_modifiers)
 
-signal damage_taken(source: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool)
-func signal_damage_taken(source: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
-	damage_taken.emit(source, damage, damage_type, is_critical)
+signal damage_taken(source: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool)
+func signal_damage_taken(source: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool) -> void:
+	damage_taken.emit(source, damage, damage_type, is_critical, blocked_by_armor)
 
 signal spell_casted(source: Entity, target: Entity, spell_type: Spell.Type)
 func signal_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type) -> void:

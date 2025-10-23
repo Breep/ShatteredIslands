@@ -4,10 +4,12 @@ extends Label
 # ============================== Private variables ==============================
 #region Private Variables
 var _is_crit: bool = false
+var _is_blocked_by_armor: bool = false
 var _global_start_pos: Vector2
 var _color: Color
 var _is_setup: bool = false
 var _damage_type: Utils.DamageType
+var _is_damage: bool = false
 #endregion
 
 # ================== Tuning ==================
@@ -27,12 +29,26 @@ var trans: Tween.TransitionType = Tween.TRANS_CUBIC
 #endregion
 
 # ================== API ==================
-func setup(value: int, damage_type: Utils.DamageType, global_start_pos: Vector2, critical: bool = false) -> UIDamagePopup:
+func setup_damage(value: int, damage_type: Utils.DamageType, global_start_pos: Vector2, critical: bool = false, blocked_by_armor: bool = false) -> UIDamagePopup:
 	_is_crit = critical
+	_is_blocked_by_armor = blocked_by_armor
 	_global_start_pos = global_start_pos
-	text = str(value)
+	if damage_type == Utils.DamageType.HEAL:
+		text = "+" + str(value)
+	else:
+		text = "-" + str(value)
 	_color = Utils.DAMAGE_COLORS[damage_type]
 	_damage_type = damage_type
+	_is_damage = true
+	_is_setup = true
+	return self
+
+
+func setup_stack(value: int, stack_type: Utils.StackType, global_start_pos: Vector2) -> UIDamagePopup:
+	_global_start_pos = global_start_pos
+	text = "+" + str(value)
+	_color = Utils.STACK_COLORS[stack_type]
+	_is_damage = false
 	_is_setup = true
 	return self
 
@@ -63,8 +79,8 @@ func _start_animation() -> void:
 
 	# Random slight horizontal offset (left or right)
 	var dx: float
-	if _damage_type == Utils.DamageType.HEAL:
-		dx = randf_range(-3 * horizontal_wiggle, -horizontal_wiggle)
+	if not _is_damage or _damage_type == Utils.DamageType.HEAL:
+		dx = randf_range(-4 * horizontal_wiggle, -2 * horizontal_wiggle)
 	else:
 		dx = randf_range(0, horizontal_wiggle)
 	var start_pos := position

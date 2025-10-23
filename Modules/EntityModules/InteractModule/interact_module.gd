@@ -18,15 +18,20 @@ func _ready() -> void:
 
 # ===== Damage
 func take_damage(damage: int, damage_type: Utils.DamageType, is_critical: bool, source: Entity = null, attack_type: Utils.AttackType = Utils.AttackType.UNDEF) -> int:
+	var damage_before_armor: int = 0
 	if multiplayer.is_server(): 
 		if _storm_manager != null: damage = _storm_manager.get_increased_critical_damage(damage, is_critical) # Increase ALL critical damage
 		if _defense_manager != null: damage = _defense_manager.get_reduced_damage_taken_from_mystical_shoulder(damage) # Reduce % of MAGIC damage
 		if _life_manager != null: damage = _life_manager.get_reduced_damage(damage) # Reduce % of ALL damage
 		if _fire_manager != null: damage = _fire_manager.get_reduced_damage(damage, damage_type) # Reduce % of MAGIC damage
+		damage_before_armor = damage
 		if _defense_manager != null: damage = _defense_manager.get_reduced_damage_taken_from_armor(damage, damage_type) # Reduce flat of PHYSIC AND MAGIC damage
+		if damage_before_armor - damage > 0:
+			_owner.signal_damage_taken(damage_before_armor - damage, damage_type, is_critical, true)
 	
 	_owner.stats.health -= damage
-	_owner.signal_damage_taken(damage, damage_type, is_critical)
+	if damage > 0 or (damage_before_armor == 0 and damage == 0):
+		_owner.signal_damage_taken(damage, damage_type, is_critical, false)
 	if source != null and attack_type != Utils.AttackType.UNDEF:
 		source.notify_damage_done(damage, attack_type)
 	return damage
@@ -54,6 +59,8 @@ func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, _sou
 			_owner.stats.poison_stacks += stacks_number
 		Utils.StackType.IGNITE:
 			_owner.stats.ignite_stacks += stacks_number
+		Utils.StackType.ARMOR:
+			_owner.stats.armor_stacks += stacks_number
 
 # ===== Heal
 

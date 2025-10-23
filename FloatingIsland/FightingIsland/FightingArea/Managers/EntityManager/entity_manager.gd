@@ -81,8 +81,8 @@ func _on_events_game_state_changed(game_state: Game.GameState) -> void:
 		_is_active = true
 
 
-func _on_entity_damage_taken(entity: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
-	_fighting_area.signal_damage_taken(entity, damage, damage_type, is_critical)
+func _on_entity_damage_taken(entity: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool) -> void:
+	_fighting_area.signal_damage_taken(entity, damage, damage_type, is_critical, blocked_by_armor)
 
 
 func _on_entity_spell_casted(entity: Entity, target: Entity, spell_type: Spell.Type) -> void:

@@ -35,6 +35,12 @@ const DAMAGE_COLORS: Dictionary[DamageType, Color] = {
 	DamageType.POISON: Color.WEB_GREEN,
 	DamageType.HEAL: Color.AQUAMARINE
 }
+
+const STACK_COLORS: Dictionary[StackType, Color] = {
+	StackType.POISON: Color.WEB_GREEN,
+	StackType.ARMOR: Color.SADDLE_BROWN,
+	StackType.IGNITE: Color.DARK_RED
+}
 #endregion
 
 # ============================== Public variables ==============================

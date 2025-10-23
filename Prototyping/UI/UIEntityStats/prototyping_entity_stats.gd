@@ -62,7 +62,7 @@ func _on_poison_button_pressed() -> void:
 func _on_armor_button_pressed() -> void:
 	var armor_stacks: int = int(_armor_stacks_text_edit.text)
 	if armor_stacks >= 0:
-		_character.stats.armor_stacks = armor_stacks
+		_character.take_condition_stacks(armor_stacks, Utils.StackType.ARMOR)
 
 
 func _on_set_ignite_button_pressed() -> void:
@@ -104,11 +104,15 @@ func _on_set_max_mana_button_pressed() -> void:
 
 #region Health
 func _on_set_current_health_button_pressed() -> void:
-	pass # Replace with function body.
+	var health: int = int(_current_health_text_edit.text)
+	if health >= 0:
+		_character.stats.health = health
 
 
 func _on_set_max_health_button_pressed() -> void:
-	pass # Replace with function body.
+	var max_health: int = int(_max_health_text_edit.text)
+	if max_health >= 0:
+		_character.stats.health_max = max_health
 #endregion
 
 func _on_heal_button_pressed() -> void:
@@ -129,6 +133,6 @@ func _on_random_popup_button_pressed() -> void:
 	var is_critical: bool = false
 	if random_type == Utils.DamageType.PHYSICAL:
 		is_critical = (_rng.randi() % 2 == 0)
-	var damage_popup := UIDamagePopup.new().setup(random_value, random_type, _popup_positioner.global_position, is_critical)
+	var damage_popup := UIDamagePopup.new().setup_damage(random_value, random_type, _popup_positioner.global_position, is_critical)
 	add_child(damage_popup)
 #endregion

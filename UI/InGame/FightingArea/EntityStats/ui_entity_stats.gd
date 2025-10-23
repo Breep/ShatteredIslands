@@ -58,6 +58,7 @@ func _connect_new_signals() -> void:
 	_entity.stats.ignite_stacks_changed.connect(_on_entity_ignite_stacks_changed)
 	_entity.damage_taken.connect(_on_entity_damage_taken)
 	_entity.heal_taken.connect(_on_entity_heal_taken)
+	_entity.stack_taken.connect(_on_entity_stack_taken)
 
 
 func _update_layout() -> void:
@@ -100,13 +101,23 @@ func _on_entity_ignite_stacks_changed(ignite_stacks: int) -> void:
 #endregion
 
 
-func _on_entity_damage_taken(_entity_ref: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
-	var popup_pos: Vector2 = _health_bar.get_damage_popup_global_position(damage_type)
-	var popup := UIDamagePopup.new().setup(damage, damage_type, popup_pos, is_critical)
+func _on_entity_damage_taken(_entity_ref: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor) -> void:
+	var popup_pos: Vector2
+	if blocked_by_armor:
+		popup_pos = _health_bar.get_armor_popup_global_pos()
+	else:
+		popup_pos = _health_bar.get_health_popup_global_position()
+	var popup := UIDamagePopup.new().setup_damage(damage, damage_type, popup_pos, is_critical, blocked_by_armor)
 	_popups_node.add_child(popup)
 
 
 func _on_entity_heal_taken(_entity_ref: Entity, heal_amount: int) -> void:
-	var popup_pos: Vector2 = _health_bar.get_damage_popup_global_position(Utils.DamageType.HEAL)
-	var popup := UIDamagePopup.new().setup(heal_amount, Utils.DamageType.HEAL, popup_pos)
+	var popup_pos: Vector2 = _health_bar.get_health_popup_global_position()
+	var popup := UIDamagePopup.new().setup_damage(heal_amount, Utils.DamageType.HEAL, popup_pos)
+	_popups_node.add_child(popup)
+
+
+func _on_entity_stack_taken(_entity_ref: Entity, stack_type: Utils.StackType, stack_number: int) -> void:
+	var popup_pos: Vector2 = _health_bar.get_armor_popup_global_pos()
+	var popup := UIDamagePopup.new().setup_stack(stack_number, stack_type, popup_pos)
 	_popups_node.add_child(popup)

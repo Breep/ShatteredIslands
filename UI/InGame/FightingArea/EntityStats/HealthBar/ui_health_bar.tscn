@@ -601,7 +601,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ej5du"]
 shader = SubResource("Shader_io7js")
-shader_parameter/bar_mode = 0
+shader_parameter/bar_mode = 2
 shader_parameter/fill_mode = 0
 shader_parameter/segment_count = 12
 shader_parameter/discrete_fill_amount = 12
@@ -1342,8 +1342,8 @@ shader_parameter/drain_time_progress = 0.0
 shader_parameter/background_color = Color(0.101960786, 0.101960786, 0.101960786, 0)
 shader_parameter/filled_color = Color(0.7008128, 0.38665852, 0.044014417, 1)
 shader_parameter/border_color = Color(0, 0, 0, 1)
-shader_parameter/flash_color = Color(1, 1, 1, 1)
-shader_parameter/drain_flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_color = Color(0.97465616, 0.57474095, 0.19913828, 1)
+shader_parameter/drain_flash_color = Color(0.97465616, 0.57474095, 0.19913828, 1)
 shader_parameter/custom_frame = false
 shader_parameter/frame_trim = 0.0
 shader_parameter/alpha_threshold = 0.69
@@ -2058,6 +2058,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_lbpif")
+effect_type = "Drain Solid"
 metadata/_custom_type_script = "uid://chcmgrh1l6vyn"
 
 [node name="PoisonBar" type="ColorRect" parent="SubHealthBar"]
@@ -2081,6 +2082,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_lbpif")
+effect_type = "Drain Solid"
 metadata/_custom_type_script = "uid://chcmgrh1l6vyn"
 
 [node name="IgniteBar" type="ColorRect" parent="SubHealthBar"]
@@ -2146,7 +2148,7 @@ _editor_defaults_set = true
 
 [node name="IgniteLabel" type="Label" parent="SubHealthBar/HBoxContainer/DebufControl/HBoxContainer"]
 unique_name_in_owner = true
-modulate = Color(0.8337731, 0.42145184, 0.19609237, 1)
+modulate = Color(0.7137228, 0.12336647, 0.18423858, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -2168,7 +2170,7 @@ size_flags_stretch_ratio = 0.5
 
 [node name="HealthLabel" type="Label" parent="SubHealthBar/HBoxContainer/HealthControl"]
 unique_name_in_owner = true
-modulate = Color(0.8856641, 0.45921832, 0.46700507, 1)
+modulate = Color(0, 0.8666667, 0, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

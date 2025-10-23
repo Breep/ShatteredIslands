@@ -11,9 +11,9 @@ func signal_death() -> void:
 	stats.poison_stacks = 0
 	dead.emit(self)
 
-signal damage_taken(entity_ref: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool)
-func signal_damage_taken(damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
-	damage_taken.emit(self, damage, damage_type, is_critical)
+signal damage_taken(entity_ref: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool)
+func signal_damage_taken(damage: int, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool) -> void:
+	damage_taken.emit(self, damage, damage_type, is_critical, blocked_by_armor)
 
 signal heal_taken(entity_ref: Entity, heal_amount: int)
 func signal_heal_taken(heal_amount: int) -> void:

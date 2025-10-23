@@ -371,7 +371,8 @@ size_flags_vertical = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_7qyrv")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_xxg0n")
 theme_override_styles/hover = SubResource("StyleBoxFlat_5july")
-text = "Set ARMOR STACKS"
+text = "ADD
+ARMOR STACKS"
 
 [node name="PhysicalDamage" type="VBoxContainer" parent="HBoxContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(200, 200)

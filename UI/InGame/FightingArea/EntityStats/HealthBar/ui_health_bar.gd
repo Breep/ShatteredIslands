@@ -40,7 +40,6 @@ var poison_stacks: int:
 		_poison_stacks = max(0, value)
 		_update_poison(end_pos)
 
-var _old_armor_stacks: int = 0
 var _armor_stacks: int = 0
 var armor_stacks: int:
 	get: return _armor_stacks
@@ -57,7 +56,6 @@ var ignite_stacks: int:
 		_ignite_stacks = max(0, value)
 		_update_ignite(end_pos)
 
-var _old_current_health: int = 0
 var _current_health: int = 1000
 var current_health: int:
 	get: return _current_health
@@ -80,14 +78,11 @@ func _ready() -> void:
 	_update_layout()
 
 
-func get_damage_popup_global_position(damage_type: Utils.DamageType) -> Vector2:
-	if damage_type == Utils.DamageType.POISON or damage_type == Utils.DamageType.HEAL:
-		return _health_bar_end_positioner.global_position
-	else:
-		if _armor_stacks > 0:
-			return _armor_bar_end_positioner.global_position
-		else:
-			return _health_bar_end_positioner.global_position
+func get_armor_popup_global_pos() -> Vector2:
+	return _armor_bar_end_positioner.global_position
+
+func get_health_popup_global_position() -> Vector2:
+	return _health_bar_end_positioner.global_position
 
 
 func _update_layout() -> void:
@@ -126,14 +121,12 @@ func _update_armor() -> void:
 		_armor_bar.show()
 		_armor_label.show()
 		_armor_label.text = str(_armor_stacks)
-	_armor_bar.increase_bar_value(_armor_stacks - _old_armor_stacks)
-	_old_armor_stacks = _armor_stacks
+	_armor_bar.set_bar_value(_armor_stacks)
 
 
 func _update_health() -> void:
 	_health_label.text = str(current_health)
-	_health_bar.increase_bar_value(_current_health - _old_current_health)
-	_old_current_health = _current_health
+	_health_bar.set_bar_value(_current_health)
 
 
 func _update_ignite(_end_pos: Vector2) -> void:
