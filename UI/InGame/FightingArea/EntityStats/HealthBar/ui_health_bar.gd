@@ -35,6 +35,8 @@ var _flash_delay_timer: Timer
 @onready var _poison_label: Label = %PoisonLabel
 @export var _poison_multiplier: float = 1.0
 @export var _poison_vsize_divider: float = 1.0
+
+@onready var _health_bar_end_positioner: Control = %HealthBarEndPositioner
 #endregion
 
 #region HealthBar variables
@@ -123,6 +125,10 @@ func _ready() -> void:
 	_update_layout()
 
 
+func get_health_bar_end_global_pos() -> Vector2:
+	return _health_bar_end_positioner.global_position
+
+
 func _update_layout() -> void:
 	if not is_node_ready(): return
 	var end_pos: Vector2 = _get_health_bar_end_pos()
@@ -144,6 +150,7 @@ func _update_poison_bar(start_pos: Vector2) -> void:
 	_poison_bar.size.y = _health_bar.size.y / _poison_vsize_divider
 	_poison_bar.position = start_pos - _poison_bar.size.x * Vector2.RIGHT
 
+
 func _update_armor_bar() -> void:
 	if _armor_stacks <= 0:
 		_armor_bar.hide()
@@ -164,6 +171,7 @@ func _update_armor_bar() -> void:
 	# Flash to (health + armor) but if deferring, target may exceed current max; that's OK—visual clamp now, real size later
 	_schedule_flash_to(_current_health + _armor_stacks)
 
+
 func _update_health_bar() -> void:
 	_health_label.text = str(current_health)
 
@@ -174,6 +182,7 @@ func _update_health_bar() -> void:
 
 	_health_bar.value = _current_health
 	_schedule_flash_to(_current_health + _armor_stacks)
+
 
 func _update_ignite(start_pos: Vector2) -> void:
 	if _ignite_stacks <= 0:
@@ -187,15 +196,19 @@ func _update_ignite(start_pos: Vector2) -> void:
 	_ignite_bar.size.y = _health_bar.size.y / _ignite_vsize_divider
 	_ignite_bar.position = start_pos - (_poison_bar.size.x + _ignite_bar.size.x) * Vector2.RIGHT
 
+
 func _get_health_bar_end_pos() -> Vector2:
 	var total_max: float = float(_max_health + _armor_stacks)
 	var ratio: float = float(_current_health) / total_max if total_max > 0.0 else 0.0
-	return _health_bar.position + ratio * _health_bar.size.x * Vector2.RIGHT
+	_health_bar_end_positioner.position = _health_bar.position + ratio * _health_bar.size.x * Vector2.RIGHT
+	return _health_bar_end_positioner.position
 
+#region Flash Animation
 func _schedule_flash_to(target: float) -> void:
 	_flash_target = target
 	if _flash_tween: _flash_tween.kill()
 	_flash_delay_timer.start(_flash_delay)
+
 
 func _on_flash_delay_timeout() -> void:
 	# Do NOT pre-apply maxes here if we're deferring
@@ -208,6 +221,7 @@ func _on_flash_delay_timeout() -> void:
 	# When the tween finishes, finalize any deferred max updates and re-sync bars
 	_flash_tween.finished.connect(_on_flash_finished, CONNECT_ONE_SHOT)
 
+
 func _on_flash_finished() -> void:
 	if _apply_max_after_flash and _pending_total_max >= 0:
 		_apply_max_values(_pending_total_max)
@@ -218,3 +232,4 @@ func _on_flash_finished() -> void:
 		_health_bar.value = _current_health
 		_armor_bar.value = _current_health + _armor_stacks
 		_update_poison_bar(end_pos)
+#endregion

@@ -7,6 +7,7 @@ extends Control
 @onready var _player_name_label: Label = %PlayerNameLabel
 @onready var _health_bar: UIHealthBar = %HealthBar
 @onready var _mana_progress_bar: FlexibleProgressBar = %ManaProgressBar
+@onready var _popups_node: Control = %Popups
 #endregion
 
 # ============================== Private variables ==============================
@@ -40,6 +41,10 @@ func _disconnect_old_signals() -> void:
 		_entity.stats.armor_stacks_changed.disconnect(_on_entity_armor_stacks_changed)
 	if _entity.stats.ignite_stacks_changed.is_connected(_on_entity_ignite_stacks_changed):
 		_entity.stats.ignite_stacks_changed.disconnect(_on_entity_ignite_stacks_changed)
+	if _entity.damage_taken.is_connected(_on_entity_damage_taken):
+		_entity.damage_taken.disconnect(_on_entity_damage_taken)
+	if _entity.heal_taken.is_connected(_on_entity_heal_taken):
+		_entity.heal_taken.disconnect(_on_entity_heal_taken)
 
 
 func _connect_new_signals() -> void:
@@ -51,6 +56,8 @@ func _connect_new_signals() -> void:
 	_entity.stats.poison_stacks_changed.connect(_on_entity_poison_stacks_changed)
 	_entity.stats.armor_stacks_changed.connect(_on_entity_armor_stacks_changed)
 	_entity.stats.ignite_stacks_changed.connect(_on_entity_ignite_stacks_changed)
+	_entity.damage_taken.connect(_on_entity_damage_taken)
+	_entity.heal_taken.connect(_on_entity_heal_taken)
 
 
 func _update_layout() -> void:
@@ -91,3 +98,15 @@ func _on_entity_armor_stacks_changed(armor_stacks: int) -> void:
 func _on_entity_ignite_stacks_changed(ignite_stacks: int) -> void:
 	_health_bar.ignite_stacks = ignite_stacks
 #endregion
+
+
+func _on_entity_damage_taken(_entity_ref: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
+	var popup_pos: Vector2 = _health_bar.get_health_bar_end_global_pos()
+	var popup := UIDamagePopup.new().setup(damage, damage_type, popup_pos, is_critical)
+	_popups_node.add_child(popup)
+
+
+func _on_entity_heal_taken(_entity_ref: Entity, heal_amount: int) -> void:
+	var popup_pos: Vector2 = _health_bar.get_health_bar_end_global_pos()
+	var popup := UIDamagePopup.new().setup(heal_amount, Utils.DamageType.HEAL, popup_pos)
+	_popups_node.add_child(popup)

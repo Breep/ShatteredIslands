@@ -18,6 +18,8 @@ extends Control
 
 @onready var _heal_text_edit: TextEdit = %HealTextEdit
 
+@onready var _popup_positioner: Control = %RandomPopupStartPositioner
+
 @onready var _entity_stats: UIEntityStats = %EntityStats
 
 const CHARACTER_SCENE : PackedScene = preload("res://Entities/Character/character.tscn")
@@ -92,11 +94,9 @@ func _on_deal_magical_damage_button_pressed() -> void:
 #endregion
 
 #region Mana
-@onready var _control: Control = %Control
+
 func _on_set_mana_regen_button_pressed() -> void:
-	var damage_popup := UIDamagePopup.new().setup(42)
-	add_child(damage_popup)
-	damage_popup.position = _control.position
+	pass
 
 func _on_set_max_mana_button_pressed() -> void:
 	pass # Replace with function body.
@@ -115,3 +115,20 @@ func _on_heal_button_pressed() -> void:
 	var heal: int = int(_heal_text_edit.text)
 	if heal >= 0:
 		_character.take_heal(heal)
+
+#region Random POPUP
+const DAMAGE_TYPES: Array[Utils.DamageType] = [
+	Utils.DamageType.PHYSICAL,
+	Utils.DamageType.MAGICAL,
+	Utils.DamageType.POISON,
+	Utils.DamageType.HEAL,
+]
+func _on_random_popup_button_pressed() -> void:
+	var random_value: int = _rng.randi_range(1, 200)
+	var random_type: Utils.DamageType = DAMAGE_TYPES.pick_random()
+	var is_critical: bool = false
+	if random_type == Utils.DamageType.PHYSICAL:
+		is_critical = (_rng.randi() % 2 == 0)
+	var damage_popup := UIDamagePopup.new().setup(random_value, random_type, _popup_positioner.global_position, is_critical)
+	add_child(damage_popup)
+#endregion

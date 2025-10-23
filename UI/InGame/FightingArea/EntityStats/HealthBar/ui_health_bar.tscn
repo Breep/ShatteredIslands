@@ -869,7 +869,8 @@ _max_size = 100
 _current_font_size = 100
 _editor_defaults_set = true
 
-[node name="DamagePopups" type="Control" parent="."]
+[node name="HealthBarEndPositioner" type="Control" parent="SubHealthBar"]
+unique_name_in_owner = true
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0

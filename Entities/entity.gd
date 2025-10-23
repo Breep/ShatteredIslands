@@ -15,7 +15,7 @@ signal damage_taken(entity_ref: Entity, damage: int, damage_type: Utils.DamageTy
 func signal_damage_taken(damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
 	damage_taken.emit(self, damage, damage_type, is_critical)
 
-signal heal_taken(entity_ref: Entity, heal_amount: int, damage_type: Utils.DamageType)
+signal heal_taken(entity_ref: Entity, heal_amount: int)
 func signal_heal_taken(heal_amount: int) -> void:
 	heal_taken.emit(self, heal_amount)
 

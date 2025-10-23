@@ -1,7 +1,7 @@
 extends Node
 
 # ============================== Enums ==============================
-
+#region Enums
 enum DamageType {
 	PHYSICAL,
 	MAGICAL,
@@ -25,6 +25,17 @@ enum AttackType {
 	UNDEF,
 	AUTO_ATTACK
 }
+#endregion
+
+# ============================== Constants ==============================
+#region Constants
+const DAMAGE_COLORS: Dictionary[DamageType, Color] = {
+	DamageType.PHYSICAL: Color.WHITE,
+	DamageType.MAGICAL: Color.DARK_BLUE,
+	DamageType.POISON: Color.WEB_GREEN,
+	DamageType.HEAL: Color.AQUAMARINE
+}
+#endregion
 
 # ============================== Public variables ==============================
 
