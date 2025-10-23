@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cl4rtcia6te0m" path="res://UI/InGame/FightingArea/ui_fighting_area.gd" id="1_xkiby"]
 [ext_resource type="PackedScene" uid="uid://cxalabhvxw1pd" path="res://UI/Tool/Timer/ui_timer.tscn" id="2_twkqc"]
 [ext_resource type="PackedScene" uid="uid://dmfkigo1trjd0" path="res://UI/Tool/Countdown/ui_countdown.tscn" id="3_gg8jf"]
-[ext_resource type="PackedScene" uid="uid://cxlyl8wdndq08" path="res://UI/InGame/HeroPortrait/ui_hero_portrait.tscn" id="4_twkqc"]
+[ext_resource type="PackedScene" uid="uid://db2anika8bvj8" path="res://UI/InGame/FightingArea/EntityStats/ui_entity_stats.tscn" id="4_ejw1r"]
 
 [node name="UIFightingArea" type="Control"]
 layout_mode = 3
@@ -112,15 +112,12 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
 
-[node name="LocalPlayerHeroPortrait" parent="VBoxContainer/BottomPanel/HBoxContainer/Control2" instance=ExtResource("4_twkqc")]
-unique_name_in_owner = true
+[node name="EntityStats" parent="VBoxContainer/BottomPanel/HBoxContainer/Control2" instance=ExtResource("4_ejw1r")]
 layout_mode = 1
-anchor_top = -6.065
-anchor_right = 3.3530002
-offset_left = 23.0
-offset_top = -28.97998
-offset_right = 22.983948
-offset_bottom = -21.0
+offset_left = 50.0
+offset_top = -181.0
+offset_right = 649.99994
+offset_bottom = -56.0
 
 [node name="BottomLeftEmpty" type="Control" parent="VBoxContainer/BottomPanel/HBoxContainer"]
 layout_mode = 2

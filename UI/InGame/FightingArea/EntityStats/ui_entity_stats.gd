@@ -1,18 +1,37 @@
+@tool
+
 class_name UIEntityStats
 extends Control
+
+var _mirrored: bool
+@export var mirrored: bool:
+	get: return _mirrored
+	set(value):
+		_mirrored = value
+		_mirror_ui(_mirrored)
+	
 
 # ============================== Local Nodes ==============================
 
 #region Local Nodes
 @onready var _player_name_label: Label = %PlayerNameLabel
 @onready var _health_bar: UIHealthBar = %HealthBar
-@onready var _mana_progress_bar: FlexibleProgressBar = %ManaProgressBar
 @onready var _popups_node: Control = %Popups
+
+@onready var _mana_progress_bar: FlexibleProgressBar = %ManaProgressBar
+@onready var _mana_bar_container: HBoxContainer = %ManaBarContainer
+@onready var _mana_bar_empty_space: Control = %ManaBarEmptySpace
+@onready var _mana_bar_viewport_texture: TextureRect = %ManaBarViewportTexture
 #endregion
 
 # ============================== Private variables ==============================
 
 var _entity: Entity
+
+# ============================== Node base functions ==============================
+
+func _ready() -> void:
+	pass
 
 # ============================== Public functions ==============================
 
@@ -24,7 +43,7 @@ func connect_entity(entity: Entity) -> void:
 
 # ============================== Private functions ==============================
 
-#region Private functions
+#region Signals
 func _disconnect_old_signals() -> void:
 	if _entity == null: return
 	if _entity.stats.health_changed.is_connected(_on_entity_health_changed):
@@ -59,6 +78,7 @@ func _connect_new_signals() -> void:
 	_entity.damage_taken.connect(_on_entity_damage_taken)
 	_entity.heal_taken.connect(_on_entity_heal_taken)
 	_entity.stack_taken.connect(_on_entity_stack_taken)
+#endregion
 
 
 func _update_layout() -> void:
@@ -67,7 +87,22 @@ func _update_layout() -> void:
 	_health_bar.current_health = _entity.stats.health
 	_health_bar.poison_stacks = _entity.stats.poison_stacks
 	_health_bar.armor_stacks = _entity.stats.armor_stacks
-#endregion
+
+
+func _mirror_ui(is_mirrored: bool) -> void:
+	if not is_node_ready(): return
+	if is_mirrored:
+		_player_name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+		_player_name_label.text = _player_name_label.text.trim_prefix(" ").trim_suffix(" ") # TODO REMOVE this (Text clipping with current font)
+		_player_name_label.text = _player_name_label.text + " "
+		_mana_bar_container.move_child(_mana_bar_empty_space, 0)
+		_mana_bar_viewport_texture.flip_h = true
+	else:
+		_player_name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+		_player_name_label.text = _player_name_label.text.trim_prefix(" ").trim_suffix(" ") # TODO REMOVE this (Text clipping with current font)
+		_player_name_label.text = " " + _player_name_label.text
+		_mana_bar_container.move_child(_mana_bar_viewport_texture, 0)
+		_mana_bar_viewport_texture.flip_h = false
 
 # ============================== Callbacks ==============================
 

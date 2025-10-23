@@ -75,7 +75,6 @@ func _ready() -> void:
 # ================== Internals ==================
 func _start_animation() -> void:
 	var tw: Tween = create_tween()
-	tw.set_trans(trans)
 
 	# Random slight horizontal offset (left or right)
 	var dx: float
@@ -83,10 +82,9 @@ func _start_animation() -> void:
 		dx = randf_range(-4 * horizontal_wiggle, -2 * horizontal_wiggle)
 	else:
 		dx = randf_range(0, horizontal_wiggle)
-	var start_pos := position
-	var end_pos := start_pos + Vector2(dx, -rise_distance)
+	
+	var end_pos := position + Vector2(dx, -rise_distance)
 	if lifetime > 0.0:
-		tw = tw.chain() # next phase
 		tw.set_trans(trans)
 		tw.parallel().set_ease(rise_ease).tween_property(self, "position", end_pos, lifetime) # Move UP
 		tw.parallel().set_ease(fade_ease).tween_property(self, "modulate:a", 0.0, lifetime) # FADE OUT

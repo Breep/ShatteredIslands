@@ -602,11 +602,11 @@ void fragment() {
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ej5du"]
 shader = SubResource("Shader_io7js")
 shader_parameter/bar_mode = 2
-shader_parameter/fill_mode = 0
+shader_parameter/fill_mode = 2
 shader_parameter/segment_count = 12
 shader_parameter/discrete_fill_amount = 12
 shader_parameter/fade_fill_amount = 1.0
-shader_parameter/pour_fill_amount = 1.0
+shader_parameter/pour_fill_amount = 0.638000030305
 shader_parameter/animation_speed = 1.0
 shader_parameter/flash_type = 1
 shader_parameter/flash_segment = 100
