@@ -657,8 +657,8 @@ shader_parameter/H_gradient_strength = 0.75
 shader_parameter/segment_gap = 0.0
 shader_parameter/universal_border_size = 0.1
 shader_parameter/horizontal_border_size = 1.0
-shader_parameter/inner_border_thickness_multiplier = 0.1
-shader_parameter/outer_border_size = 0.2
+shader_parameter/inner_border_thickness_multiplier = 0.5
+shader_parameter/outer_border_size = 1.0
 shader_parameter/slant_amount = 0.0
 shader_parameter/scale = 0.0
 shader_parameter/x_offset = 0.0
@@ -2051,7 +2051,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="SubHealthBar"]
+[node name="ProgressBarViewportTexture" type="TextureRect" parent="SubHealthBar"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2073,7 +2074,8 @@ grow_vertical = 2
 size_flags_vertical = 3
 script = ExtResource("3_lbpif")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SubHealthBar"]
+[node name="LabelsHBox" type="HBoxContainer" parent="SubHealthBar"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2083,11 +2085,13 @@ grow_vertical = 2
 theme = ExtResource("1_lbpif")
 alignment = 1
 
-[node name="DebufControl" type="Control" parent="SubHealthBar/HBoxContainer"]
+[node name="DebufControl" type="Control" parent="SubHealthBar/LabelsHBox"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SubHealthBar/HBoxContainer/DebufControl"]
+[node name="DebufHBox" type="HBoxContainer" parent="SubHealthBar/LabelsHBox/DebufControl"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2096,7 +2100,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
 
-[node name="PoisonLabel" type="Label" parent="SubHealthBar/HBoxContainer/DebufControl/HBoxContainer"]
+[node name="PoisonLabel" type="Label" parent="SubHealthBar/LabelsHBox/DebufControl/DebufHBox"]
 unique_name_in_owner = true
 modulate = Color(0.26909426, 0.4003629, 0.15316594, 1)
 layout_mode = 2
@@ -2104,7 +2108,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 100
 text = "100"
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 clip_text = true
@@ -2113,7 +2117,7 @@ _max_size = 100
 _current_font_size = 100
 _editor_defaults_set = true
 
-[node name="IgniteLabel" type="Label" parent="SubHealthBar/HBoxContainer/DebufControl/HBoxContainer"]
+[node name="IgniteLabel" type="Label" parent="SubHealthBar/LabelsHBox/DebufControl/DebufHBox"]
 unique_name_in_owner = true
 modulate = Color(0.7137228, 0.12336647, 0.18423858, 1)
 layout_mode = 2
@@ -2121,7 +2125,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 100
 text = "100"
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 clip_text = true
@@ -2130,12 +2134,12 @@ _max_size = 100
 _current_font_size = 100
 _editor_defaults_set = true
 
-[node name="HealthControl" type="Control" parent="SubHealthBar/HBoxContainer"]
+[node name="HealthControl" type="Control" parent="SubHealthBar/LabelsHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 
-[node name="HealthLabel" type="Label" parent="SubHealthBar/HBoxContainer/HealthControl"]
+[node name="HealthLabel" type="Label" parent="SubHealthBar/LabelsHBox/HealthControl"]
 unique_name_in_owner = true
 modulate = Color(0, 0.8666667, 0, 1)
 layout_mode = 1
@@ -2155,11 +2159,12 @@ _max_size = 100
 _current_font_size = 100
 _editor_defaults_set = true
 
-[node name="BufControl" type="Control" parent="SubHealthBar/HBoxContainer"]
+[node name="BufControl" type="Control" parent="SubHealthBar/LabelsHBox"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SubHealthBar/HBoxContainer/BufControl"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SubHealthBar/LabelsHBox/BufControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2167,7 +2172,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ArmorLabel" type="Label" parent="SubHealthBar/HBoxContainer/BufControl/HBoxContainer"]
+[node name="ArmorLabel" type="Label" parent="SubHealthBar/LabelsHBox/BufControl/HBoxContainer"]
 unique_name_in_owner = true
 modulate = Color(0.59979576, 0.2856071, 0.16820335, 1)
 layout_mode = 2
@@ -2175,6 +2180,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 100
 text = "100"
+horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 clip_text = true

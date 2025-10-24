@@ -20,7 +20,8 @@ extends Control
 
 @onready var _popup_positioner: Control = %RandomPopupStartPositioner
 
-@onready var _entity_stats: UIEntityStats = %EntityStats
+@onready var _entity_stats_left: UIEntityStats = %EntityStatsLeft
+@onready var _entity_stats_right: UIEntityStats = %EntityStatsRight
 
 const CHARACTER_SCENE : PackedScene = preload("res://Entities/Character/character.tscn")
 
@@ -40,7 +41,8 @@ func _ready() -> void:
 	add_child(_character)
 	_character.base_stats.reset_from_hero(Shared.HEROES[Hero.HeroId.DARK_KNIGHT], 10)
 	_character.stats.reset_from_hero(Shared.HEROES[Hero.HeroId.DARK_KNIGHT], 10)
-	_entity_stats.connect_entity(_character)
+	_entity_stats_left.connect_entity(_character)
+	_entity_stats_right.connect_entity(_character)
 
 
 #region Start/Stop Battle
@@ -133,6 +135,6 @@ func _on_random_popup_button_pressed() -> void:
 	var is_critical: bool = false
 	if random_type == Utils.DamageType.PHYSICAL:
 		is_critical = (_rng.randi() % 2 == 0)
-	var damage_popup := UIDamagePopup.new().setup_damage(random_value, random_type, _popup_positioner.global_position, is_critical)
-	add_child(damage_popup)
+	var label_popup := LabelPopup.new().setup_damage(random_value, random_type, _popup_positioner.global_position, is_critical)
+	add_child(label_popup)
 #endregion

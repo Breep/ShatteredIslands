@@ -31,7 +31,7 @@ var _entity: Entity
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	pass
+	_mirror_ui(_mirrored)
 
 # ============================== Public functions ==============================
 
@@ -97,12 +97,14 @@ func _mirror_ui(is_mirrored: bool) -> void:
 		_player_name_label.text = _player_name_label.text + " "
 		_mana_bar_container.move_child(_mana_bar_empty_space, 0)
 		_mana_bar_viewport_texture.flip_h = true
+		_health_bar.mirrored = true
 	else:
 		_player_name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 		_player_name_label.text = _player_name_label.text.trim_prefix(" ").trim_suffix(" ") # TODO REMOVE this (Text clipping with current font)
 		_player_name_label.text = " " + _player_name_label.text
 		_mana_bar_container.move_child(_mana_bar_viewport_texture, 0)
 		_mana_bar_viewport_texture.flip_h = false
+		_health_bar.mirrored = false
 
 # ============================== Callbacks ==============================
 
@@ -142,17 +144,17 @@ func _on_entity_damage_taken(_entity_ref: Entity, damage: int, damage_type: Util
 		popup_pos = _health_bar.get_armor_popup_global_pos()
 	else:
 		popup_pos = _health_bar.get_health_popup_global_position()
-	var popup := UIDamagePopup.new().setup_damage(damage, damage_type, popup_pos, is_critical, blocked_by_armor)
+	var popup := LabelPopup.new().setup_damage(damage, damage_type, popup_pos, is_critical, blocked_by_armor).mirror(_mirrored)
 	_popups_node.add_child(popup)
 
 
 func _on_entity_heal_taken(_entity_ref: Entity, heal_amount: int) -> void:
 	var popup_pos: Vector2 = _health_bar.get_health_popup_global_position()
-	var popup := UIDamagePopup.new().setup_damage(heal_amount, Utils.DamageType.HEAL, popup_pos)
+	var popup := LabelPopup.new().setup_damage(heal_amount, Utils.DamageType.HEAL, popup_pos).mirror(_mirrored)
 	_popups_node.add_child(popup)
 
 
 func _on_entity_stack_taken(_entity_ref: Entity, stack_type: Utils.StackType, stack_number: int) -> void:
 	var popup_pos: Vector2 = _health_bar.get_armor_popup_global_pos()
-	var popup := UIDamagePopup.new().setup_stack(stack_number, stack_type, popup_pos)
+	var popup := LabelPopup.new().setup_stack(stack_number, stack_type, popup_pos).mirror(_mirrored)
 	_popups_node.add_child(popup)
