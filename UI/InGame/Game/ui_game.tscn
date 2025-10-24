@@ -27,10 +27,10 @@ _ui_result = NodePath("UIResult")
 layout_mode = 1
 
 [node name="UIBuyingArea" parent="." instance=ExtResource("3_d4l1p")]
+visible = false
 layout_mode = 1
 
 [node name="UIFightingArea" parent="." instance=ExtResource("4_qmks4")]
-visible = false
 layout_mode = 1
 
 [node name="UIResult" parent="." instance=ExtResource("3_y4wsx")]

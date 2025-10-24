@@ -123,8 +123,8 @@ func _on_fighting_area_projectile_spawned(source: Entity, target: Entity, projec
 					projectile_modifiers.has(Projectile.ProjectileEffect.INSTABILITY))
 
 
-func _on_fighting_area_damage_taken(source: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
-	_log_damage_taken(source, damage, damage_type, is_critical)
+func _on_fighting_area_damage_taken(source: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool, _blocked_by_armor: bool) -> void:
+	_log_damage_taken(source, damage, damage_type, is_critical) # TODO Log blocked by armor
 
 
 func _on_fighting_area_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type) -> void:

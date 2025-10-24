@@ -39,7 +39,7 @@ func _on_events_scene_switched(floating_island: FloatingIsland) -> void:
 	if floating_island is BuyingIsland:
 		_ui_buying_area.set_active()
 		_ui_fighting_area.set_inactive()
-	else:
+	elif floating_island is FightingIsland:
 		_ui_buying_area.set_inactive()
 		_ui_fighting_area.set_active()
 		_ui_fighting_area.update_content(floating_island.get_fighting_area())

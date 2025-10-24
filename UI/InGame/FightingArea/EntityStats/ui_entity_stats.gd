@@ -36,8 +36,8 @@ func _ready() -> void:
 # ============================== Public functions ==============================
 
 func connect_entity(entity: Entity) -> void:
-	_entity = entity
 	_disconnect_old_signals()
+	_entity = entity
 	_connect_new_signals()
 	_update_layout()
 
@@ -87,6 +87,15 @@ func _update_layout() -> void:
 	_health_bar.current_health = _entity.stats.health
 	_health_bar.poison_stacks = _entity.stats.poison_stacks
 	_health_bar.armor_stacks = _entity.stats.armor_stacks
+	if _entity is Character:
+		var character: Character = _entity
+		if character.player != null:
+			_player_name_label.text = character.player.name
+		else:
+			_player_name_label.text = character.name
+	else:
+		_player_name_label.text = _entity.name
+	_mirror_ui(_mirrored)
 
 
 func _mirror_ui(is_mirrored: bool) -> void:

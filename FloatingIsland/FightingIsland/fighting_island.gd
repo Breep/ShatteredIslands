@@ -62,6 +62,10 @@ func set_inactive() -> void:
 	for character in _current_characters:
 		character.on_inactive_island()
 
+
+func get_fighting_area() -> FightingArea:
+	return _fighting_area
+
 # ============================== Private functions ==============================
 
 func _force_local_player_camera_on_island() -> void:
