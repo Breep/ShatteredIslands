@@ -26,6 +26,9 @@ func signal_stack_taken(source: Entity, stack_type: Utils.StackType, stack_numbe
 
 # ============================== Private variables ==============================
 
+var _characters: Array[Character]
+var _battle_type: Battle.BattleType
+
 # ============================== Public variables ==============================
 
 # ============================== Local nodes / Configuration ==============================
@@ -60,6 +63,7 @@ func start_fight(characters: Array[Character], battle_type: Battle.BattleType, b
 	var character_spawner: CharacterSpawner = _set_fighting_floor(battle_type)
 	if character_spawner == null:
 		printerr("FightingArea: No CharacterSpawner for this battle type: ", battle_type)
+		return
 	
 	_entity_manager.clear()
 	
@@ -67,9 +71,18 @@ func start_fight(characters: Array[Character], battle_type: Battle.BattleType, b
 	for character in characters:
 		character.connect_to_fighting_area(self)
 	
+	_characters = characters
+	_battle_type = battle_type
 	_current_battle_id = battle_id
 	_fighting_manager.fight_is_over.connect(_on_fighting_manager_fight_is_over, CONNECT_ONE_SHOT)
 	_fighting_manager.start(characters)
+
+
+func get_fighting_characters() -> Array[Character]:
+	return _characters
+
+func get_battle_type() -> Battle.BattleType:
+	return _battle_type
 
 # ============================== Private functions ==============================
 
@@ -94,6 +107,7 @@ func _set_fighting_floor(battle_type: Battle.BattleType) -> CharacterSpawner:
 
 func _on_fighting_manager_fight_is_over(_unused: FightingManager, winner_teams_order: Array[int]) -> void:
 	if _current_battle_id < 0: return
+	_characters.clear()
 	RoundManager.register_battle_result(_current_battle_id, winner_teams_order)
 
 

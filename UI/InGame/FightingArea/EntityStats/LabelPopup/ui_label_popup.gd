@@ -35,6 +35,7 @@ func mirror(is_mirrored: bool) -> LabelPopup:
 	_is_mirrored = is_mirrored
 	return self
 
+
 func setup_damage(value: int, damage_type: Utils.DamageType, global_start_pos: Vector2, critical: bool = false, blocked_by_armor: bool = false) -> LabelPopup:
 	_is_crit = critical
 	_is_blocked_by_armor = blocked_by_armor

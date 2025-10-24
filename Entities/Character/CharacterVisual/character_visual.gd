@@ -76,7 +76,7 @@ func damage_popup(amount: float, damage_type: Utils.DamageType, is_critic: bool 
 
 # ============================== Callbacks ==============================
 
-func _on_owner_entity_damage_taken(_entity_ref: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool) -> void:
+func _on_owner_entity_damage_taken(_entity_ref: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool, _blocked_by_armor) -> void:
 	damage_popup(damage, damage_type, is_critical)
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://f2n7hccdooke"]
+[gd_scene load_steps=16 format=3 uid="uid://f2n7hccdooke"]
 
 [ext_resource type="Script" uid="uid://bu48b2v401db2" path="res://Prototyping/FightingIsland/prototyping_map.gd" id="1_oc45v"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="2_5t2nw"]
@@ -10,6 +10,7 @@
 [ext_resource type="Resource" uid="uid://ctm6ojtt36a88" path="res://Card/Descriptions/Cards/Attack/TwinBlade/attack_twin_blade.tres" id="5_a1wsu"]
 [ext_resource type="Resource" uid="uid://dvpdubk0btegx" path="res://Card/Descriptions/Cards/Poison/PeriodicaAgaricus/poison_periodica_agaricus.tres" id="6_4gryv"]
 [ext_resource type="Resource" uid="uid://cdr51p56pftqi" path="res://Card/Descriptions/Cards/Fire/Meteor/fire_meteor.tres" id="7_y3vk0"]
+[ext_resource type="PackedScene" uid="uid://bhxhqex1pbh2p" path="res://UI/InGame/FightingArea/ui_fighting_area.tscn" id="11_blmm3"]
 
 [sub_resource type="NoiseTexture3D" id="NoiseTexture3D_4fa74"]
 
@@ -78,21 +79,24 @@ battle_id = 1
 
 [node name="Character2" parent="." instance=ExtResource("3_doj2u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.03813, 0, -2.59736)
-hero_id = 10
+hero_id = 1
 id = 2
 team = 1
 battle_id = 1
 
 [node name="Character3" parent="." instance=ExtResource("3_doj2u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.167192, 2.02964, -10.1344)
-hero_id = 8
+hero_id = 1
 id = 4
 team = 2
 battle_id = 1
 
 [node name="Character4" parent="." instance=ExtResource("3_doj2u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6354, 2.03525, -6.30828)
-hero_id = 9
+hero_id = 1
 id = 3
 team = 2
 battle_id = 1
+
+[node name="UIFightingArea" parent="." instance=ExtResource("11_blmm3")]
+unique_name_in_owner = true

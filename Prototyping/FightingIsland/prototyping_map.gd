@@ -17,6 +17,8 @@ extends Node3D
 @export var _floating_island: FightingIsland
 @export var _battle_type: Battle.BattleType
 
+@onready var _ui_fighting_area: UIFightingArea = %UIFightingArea
+
 func _enter_tree() -> void:
 	GameManager.init()
 	var _players_cards: Array[Array] = [
@@ -42,4 +44,5 @@ func _ready() -> void:
 	_floating_island.start_fight(_characters, _battle_type)
 	GlobalFightingManager.start(true)
 	_floating_island.set_active()
-	#_ui_fighting_area.show()
+	_ui_fighting_area.update_content(_floating_island._fighting_area)
+	_ui_fighting_area.set_active()
