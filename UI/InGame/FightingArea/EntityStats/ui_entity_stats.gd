@@ -164,6 +164,7 @@ func _on_entity_heal_taken(_entity_ref: Entity, heal_amount: int) -> void:
 
 
 func _on_entity_stack_taken(_entity_ref: Entity, stack_type: Utils.StackType, stack_number: int) -> void:
+	if stack_type != Utils.StackType.ARMOR: return
 	var popup_pos: Vector2 = _health_bar.get_armor_popup_global_pos()
 	var popup := LabelPopup.new().setup_stack(stack_number, stack_type, popup_pos).mirror(_mirrored)
 	_popups_node.add_child(popup)
