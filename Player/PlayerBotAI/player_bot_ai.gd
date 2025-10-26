@@ -31,7 +31,7 @@ func _ready() -> void:
 		queue_free()
 		return
 	
-	Events.game_state_changed.connect(_on_events_game_state_changed)
+	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 	
 	_rng = RandomNumberGenerator.new()
 	_rng.randomize()
@@ -55,7 +55,7 @@ func _buy_a_card() -> void:
 	_card_shop.try_buy_card(card)
 
 
-func _on_events_game_state_changed(new_game_state: Game.GameState) -> void:
+func _on_game_manager_game_state_changed(new_game_state: Game.GameState) -> void:
 	if new_game_state == Game.GameState.BUYING:
 		_dumb_buying_area()
 	else:

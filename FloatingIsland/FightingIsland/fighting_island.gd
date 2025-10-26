@@ -30,7 +30,7 @@ func _ready() -> void:
 	_update_player_ref(_player_owner_id)
 	if _player_owner_id != -1:
 		Events.signal_fighting_island_spawned(self, _player_owner_id)
-	Events.game_state_changed.connect(_on_events_game_state_changed)
+	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 
 # ============================== Public functions ==============================
 
@@ -82,7 +82,7 @@ func _update_player_ref(player_id: int) -> void:
 
 # ============================== Callback functions ==============================
 
-func _on_events_game_state_changed(game_state: Game.GameState) -> void:
+func _on_game_manager_game_state_changed(game_state: Game.GameState) -> void:
 	if game_state == Game.GameState.BUYING:
 		_current_characters.clear()
 

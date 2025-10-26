@@ -3,17 +3,18 @@ extends Control
 
 # ============================== Local nodes ==============================
 
-@export var _ui_buying_area: UIBuyingArea
-@export var _ui_fighting_area: UIFightingArea
-@export var _ui_pause_menu: UIPauseMenu
-@export var _ui_picking_screen: UIHeroPickingScreen
-@export var _ui_result: UIResult
+@onready var _ui_buying_area: UIBuyingArea = %BuyingArea
+@onready var _ui_fighting_area: UIFightingArea = %FightingArea
+@onready var _ui_pause_menu: UIPauseMenu = %PauseMenu
+@onready var _ui_picking_screen: UIHeroPickingScreen = %HeroPickingScreen
+@onready var _ui_result: UIResult = %Result
+@onready var _ui_transition_screen: UITransitionScreen = %TransitionScreen
 
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
 	Events.local_player_is_dead.connect(_on_events_local_player_is_dead)
-	Events.game_state_changed.connect(_on_events_game_state_changed)
+	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 	Events.scene_switched.connect(_on_events_scene_switched)
 	
 
@@ -28,11 +29,14 @@ func _on_events_local_player_is_dead() -> void:
 	_ui_result.show_result(player_place)
 
 
-func _on_events_game_state_changed(game_state: Game.GameState) -> void:
-	if game_state != Game.GameState.FINISHED: return
-	var local_player: Player = PlayerManager.get_local_player()
-	var player_place: int = PlayerManager.get_player_current_place(local_player)
-	_ui_result.show_result(player_place)
+func _on_game_manager_game_state_changed(game_state: Game.GameState) -> void:
+	match game_state:
+		Game.GameState.FIGHTING_FINISHED:
+			_ui_transition_screen.start_transition(GameManager.game_rules.duration_fighting_finished * 2)
+		Game.GameState.FINISHED:
+			var local_player: Player = PlayerManager.get_local_player()
+			var player_place: int = PlayerManager.get_player_current_place(local_player)
+			_ui_result.show_result(player_place)
 
 
 func _on_events_scene_switched(floating_island: FloatingIsland) -> void:

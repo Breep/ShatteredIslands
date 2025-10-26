@@ -16,7 +16,6 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
-	print("CONNECTING FIGHTING STATE")
 	_source.fighting_state_changed.connect(_on_source_fighting_state_changed)
 
 
@@ -43,14 +42,13 @@ func stop() -> void:
 	modules[Module.ModuleType.AUTOATTACK].stop()
 
 
-func _on_source_fighting_state_changed(new_state: GlobalFightingManager.FightingState) -> void:
-	print("_on_source_fighting_state_changed() ", new_state)
+func _on_source_fighting_state_changed(new_state: Character.FightingState) -> void:
 	match new_state:
-		GlobalFightingManager.FightingState.POSITIONING:
+		Character.FightingState.POSITIONING:
 			target_module.start()
-		GlobalFightingManager.FightingState.FIGHTING:
+		Character.FightingState.FIGHTING:
 			start()
-		GlobalFightingManager.FightingState.CELEBRATING:
+		Character.FightingState.CELEBRATING:
 			target_module.stop()
 			stop()
 

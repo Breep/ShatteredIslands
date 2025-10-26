@@ -29,7 +29,7 @@ var _is_enabled: bool
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	Events.game_state_changed.connect(_on_events_game_state_changed)
+	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 
 # ============================== Public functions ==============================
 
@@ -89,7 +89,7 @@ func _refresh_shop_cards(is_free: bool) -> void:
 
 # ============================== Callbacks ==============================
 
-func _on_events_game_state_changed(state: Game.GameState) -> void:
+func _on_game_manager_game_state_changed(state: Game.GameState) -> void:
 	if state == Game.GameState.BUYING:
 		_is_enabled = true
 		if RoundManager.current_round == 1:

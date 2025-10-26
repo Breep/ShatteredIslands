@@ -5,7 +5,7 @@ extends Node
 #
 # Local FightingManager, register itself to the GlobalFightingManager
 # On Start() call, will connect to all character on the local FightingArea death signals
-# Will notify that the fight is over (either one team is alive or the GlobalFightingManager say it's over)
+# Will notify that the fight is over (either one team is alive or the GameManager says it's over)
 
 # ============================== Signals ==============================
 
@@ -28,7 +28,7 @@ var _is_active: bool = false
 
 func _enter_tree() -> void:
 	GlobalFightingManager.register_fighting_manager(self)
-	GlobalFightingManager.state_changed.connect(_on_global_fighting_manager_state_changed)
+	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 
 
 func _exit_tree() -> void:
@@ -135,9 +135,9 @@ func _on_character_dead(who: Character) -> void:
 		_stop_fighting_manager()
 
 
-func _on_global_fighting_manager_state_changed(new_state) -> void:
+func _on_game_manager_game_state_changed(new_state: Game.GameState) -> void:
 	if not _is_active: return
-	if new_state == GlobalFightingManager.FightingState.CELEBRATING:
+	if new_state == Game.GameState.FIGHTING_CELEBRATING:
 		_stop_fighting_manager()
 
 

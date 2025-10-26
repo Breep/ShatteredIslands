@@ -26,6 +26,7 @@ Label/font_sizes/font_size = 75
 Label/fonts/font = ExtResource("1_1snar")
 
 [node name="Countdown" type="Control"]
+custom_minimum_size = Vector2(500, 100)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -36,10 +37,10 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_kdeao")
 
-[node name="TimerCountdown" type="Timer" parent="."]
+[node name="TimerLabel" type="Label" parent="."]
 unique_name_in_owner = true
-
-[node name="CenterContainer" type="CenterContainer" parent="."]
+material = SubResource("ShaderMaterial_cpdrj")
+custom_minimum_size = Vector2(500, 100)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -52,14 +53,12 @@ offset_right = 26.5
 offset_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="TimerLabel" type="Label" parent="CenterContainer"]
-unique_name_in_owner = true
-material = SubResource("ShaderMaterial_cpdrj")
-layout_mode = 2
 theme = SubResource("Theme_ol2a8")
 text = "8"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="TimerCountdown" type="Timer" parent="."]
+unique_name_in_owner = true
 
 [connection signal="timeout" from="TimerCountdown" to="." method="_on_timer_countdown_timeout"]

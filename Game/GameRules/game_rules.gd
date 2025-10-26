@@ -2,9 +2,9 @@ class_name GameRules
 extends Resource
 
 @export_subgroup("Cards rules")
-@export var common_number: int = 12
-@export var rare_number: int = 5
-@export var epic_number: int = 3
+@export var common_number: int = 25
+@export var rare_number: int = 10
+@export var epic_number: int = 5
 
 @export_group("Card shop rules")
 @export_subgroup("Card price")
@@ -58,6 +58,16 @@ extends Resource
 @export var bronze_skill_unlock_lvl: int = 3
 @export var silver_skill_unlock_lvl: int = 5
 @export var gold_skill_unlock_lvl: int = 7
+
+
+@export_group("Game States Duration")
+@export var duration_buying_phase: float = 20.0
+@export var duration_fighting_positioning: float = 5.0
+@export var duration_fighting_countdown: float = 3.0
+@export var duration_fighting_normal: float = 20.0
+@export var duration_fighting_accelerated: float = 10.0
+@export var duration_fighting_celebrating: float = 3.0
+@export var duration_fighting_finished: float = 1.0
 
 func get_updated_player_damage(player_lvl: int, current_player_win_lose_diff: int, last_round_won: bool, current_round: int) -> int:
 	var damage_min: int = damage_player_level_modifier[player_lvl] # = player_lvl in normal games

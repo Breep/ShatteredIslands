@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dv3kwc5eeyuk2"]
+[gd_scene load_steps=9 format=3 uid="uid://dv3kwc5eeyuk2"]
 
 [ext_resource type="Script" uid="uid://dy35nobyyvy4r" path="res://UI/InGame/Game/ui_game.gd" id="1_tbfb0"]
 [ext_resource type="PackedScene" uid="uid://cjefxxuvp7cp5" path="res://UI/InGame/Persistant/ui_persistant.tscn" id="2_jydru"]
@@ -7,8 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://di7eyuedvo17p" path="res://UI/InGame/PauseMenu/ui_pause_menu.tscn" id="4_ij2s5"]
 [ext_resource type="PackedScene" uid="uid://bhxhqex1pbh2p" path="res://UI/InGame/FightingArea/ui_fighting_area.tscn" id="4_qmks4"]
 [ext_resource type="PackedScene" uid="uid://k4dc5j8ecdxo" path="res://UI/InGame/HeroSelection/ui_hero_picking_screen.tscn" id="7_d48pm"]
+[ext_resource type="PackedScene" uid="uid://btd2mq1ktm86w" path="res://UI/Tool/TransitionScreen/ui_transition_screen.tscn" id="8_qmks4"]
 
-[node name="UIGame" type="Control" node_paths=PackedStringArray("_ui_buying_area", "_ui_fighting_area", "_ui_pause_menu", "_ui_picking_screen", "_ui_result")]
+[node name="UIGame" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,30 +18,36 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_tbfb0")
-_ui_buying_area = NodePath("UIBuyingArea")
-_ui_fighting_area = NodePath("UIFightingArea")
-_ui_pause_menu = NodePath("PauseMenu")
-_ui_picking_screen = NodePath("UIHeroPickingScreen")
-_ui_result = NodePath("UIResult")
 
 [node name="Persistant" parent="." instance=ExtResource("2_jydru")]
+unique_name_in_owner = true
 layout_mode = 1
 
-[node name="UIBuyingArea" parent="." instance=ExtResource("3_d4l1p")]
+[node name="BuyingArea" parent="." instance=ExtResource("3_d4l1p")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 1
 
-[node name="UIFightingArea" parent="." instance=ExtResource("4_qmks4")]
+[node name="FightingArea" parent="." instance=ExtResource("4_qmks4")]
+unique_name_in_owner = true
 layout_mode = 1
 
-[node name="UIResult" parent="." instance=ExtResource("3_y4wsx")]
+[node name="Result" parent="." instance=ExtResource("3_y4wsx")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 1
 
 [node name="PauseMenu" parent="." instance=ExtResource("4_ij2s5")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 1
 
-[node name="UIHeroPickingScreen" parent="." instance=ExtResource("7_d48pm")]
+[node name="HeroPickingScreen" parent="." instance=ExtResource("7_d48pm")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="TransitionScreen" parent="." instance=ExtResource("8_qmks4")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 1

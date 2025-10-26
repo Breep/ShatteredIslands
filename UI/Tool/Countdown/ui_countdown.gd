@@ -17,7 +17,8 @@ func start(countdown_sec: int, endword: String) -> void:
 	_end_timer_word = endword
 	_timer.wait_time = 1.0  
 	_timer.one_shot = false 
-	_timer.start()  
+	_timer.start()
+	_timer_label.pivot_offset = _timer_label.size / 2.0
 	_update_label()
 	show()
 
@@ -48,6 +49,7 @@ func _on_timer_countdown_timeout() -> void:
 	if _sec_timer <= 0:
 		_timer.stop()  
 		_timer_label.text = _end_timer_word 
+		_timer_label.pivot_offset = _timer_label.size / 2.0
 		_animate_endword_effect()  
 		await get_tree().create_timer(1).timeout
 		hide()

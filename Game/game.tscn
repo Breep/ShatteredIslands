@@ -143,7 +143,7 @@ spawn_path = NodePath("../Characters")
 buying_island = NodePath("../BuyingIsland")
 
 [node name="HeroSelector" parent="." node_paths=PackedStringArray("_ui_hero_picking_screen") instance=ExtResource("8_xfil1")]
-_ui_hero_picking_screen = NodePath("../UI/UIGame/UIHeroPickingScreen")
+_ui_hero_picking_screen = NodePath("../UI/UIGame/HeroPickingScreen")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3

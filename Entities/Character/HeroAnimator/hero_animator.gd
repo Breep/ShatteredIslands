@@ -15,9 +15,12 @@ var character_owner: Character:
 var _is_fighting: bool = false
 
 func _ready() -> void:
-	GlobalFightingManager.state_changed.connect(_on_global_fighting_manager_state_changed)
+	if _character_owner == null:
+		push_warning("HeroAnimator: No character owner")
+		return
 	
-	Events.game_state_changed.connect(_on_events_game_stated_changed)
+	_character_owner.fighting_state_changed.connect(_on_character_owner_fighting_state_changed)
+	GameManager.game_state_changed.connect(_on_game_manager_game_stated_changed)
 
 
 func _process(_delta: float) -> void:
@@ -28,17 +31,13 @@ func _process(_delta: float) -> void:
 		_character_owner.look_at_target_y_only(closest_enemy.global_position)
 
 
-func _on_global_fighting_manager_state_changed(new_state: GlobalFightingManager.FightingState) -> void:
+func _on_character_owner_fighting_state_changed(new_state: Character.FightingState) -> void:
 	match new_state:
-		GlobalFightingManager.FightingState.POSITIONING:
+		Character.FightingState.POSITIONING:
 			_animation_tree.set("parameters/Transition/transition_request", "Idle")
-		GlobalFightingManager.FightingState.COUNTDOWN:
+		Character.FightingState.FIGHTING:
 			_is_fighting = true
-		GlobalFightingManager.FightingState.FIGHTING:
-			return
-		GlobalFightingManager.FightingState.FIGHTING_ACCELERATED:
-			return
-		GlobalFightingManager.FightingState.CELEBRATING:
+		Character.FightingState.CELEBRATING:
 			_is_fighting = false
 
 
@@ -46,7 +45,7 @@ func _on_character_owner_dead(_self_ref: Entity) -> void:
 	_animation_tree.set("parameters/Transition/transition_request", "Die")
 
 
-func _on_events_game_stated_changed(game_state: Game.GameState) -> void:
+func _on_game_manager_game_stated_changed(game_state: Game.GameState) -> void:
 	if game_state == Game.GameState.BUYING:
 		_animation_tree.set("parameters/Transition/transition_request", "Idle")
 

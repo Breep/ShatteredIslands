@@ -43,7 +43,7 @@ properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 2
 
-[node name="Character" type="CharacterBody3D" node_paths=PackedStringArray("_movement_synchronizer", "_character_visual", "_character_logic", "_turret", "_collision_shape", "_interact_module", "_action_module", "families_stats", "_attack_manager", "_defense_manager", "_clickable_module", "_clickable_feedback", "stats", "base_stats", "stats_manager", "auto_attack_modifier_registry")]
+[node name="Character" type="CharacterBody3D" node_paths=PackedStringArray("_movement_synchronizer", "_character_visual", "_character_logic", "_turret", "_hero_3D", "_collision_shape", "_interact_module", "_action_module", "families_stats", "_attack_manager", "_defense_manager", "_clickable_module", "_clickable_feedback", "stats", "base_stats", "stats_manager", "auto_attack_modifier_registry")]
 collision_layer = 16
 collision_mask = 16
 motion_mode = 1
@@ -52,6 +52,7 @@ _movement_synchronizer = NodePath("MovementSynchronizer")
 _character_visual = NodePath("CharacterVisual")
 _character_logic = NodePath("CharacterLogic")
 _turret = NodePath("TurretCenterPoint/Turret")
+_hero_3D = NodePath("Undef")
 _collision_shape = NodePath("CollisionShape3D")
 _interact_module = NodePath("CharacterLogic/Modules/InteractModule")
 _action_module = NodePath("CharacterLogic/Modules/ActionModule")

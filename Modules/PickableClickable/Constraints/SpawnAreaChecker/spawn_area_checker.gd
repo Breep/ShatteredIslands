@@ -36,7 +36,7 @@ var _owner_team_spawn_area_overlapping_counter: int = 0: # Number of pickable co
 
 func _ready() -> void:
 	hide()
-	Events.game_state_changed.connect(_on_events_game_state_changed)
+	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 
 
 func _set_active() -> void:
@@ -77,8 +77,8 @@ func _on_area_exited(area: Area3D) -> void:
 		_other_team_spawn_area_overlapping_counter -= 1
 
 
-func _on_events_game_state_changed(game_state: Game.GameState) -> void:
-	if game_state == Game.GameState.FIGHTING:
+func _on_game_manager_game_state_changed(game_state: Game.GameState) -> void:
+	if game_state == Game.GameState.FIGHTING_POSITIONING:
 		_set_active()
-	elif game_state == Game.GameState.BUYING:
+	elif game_state == Game.GameState.FIGHTING_CELEBRATING:
 		_set_inactive()

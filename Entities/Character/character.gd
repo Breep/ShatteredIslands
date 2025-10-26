@@ -14,14 +14,22 @@ signal fight_is_won()
 signal aa_done()
 #signal fight_is_lost()
 
+# ============================== Enums ==============================
+
+enum FightingState {
+	POSITIONING,
+	FIGHTING,
+	CELEBRATING,
+	UNDEF
+}
+
 # ============================== Fighting State ==============================
 
-signal fighting_state_changed(new_fighting_state: GlobalFightingManager.FightingState)
-var fighting_state: GlobalFightingManager.FightingState:
+signal fighting_state_changed(new_fighting_state: FightingState)
+var fighting_state: FightingState:
 	get: return _fighting_state
 	set(value):
 		if value != _fighting_state:
-			print("DEBUG CHANGE FIGHTING STATE")
 			_fighting_state = value
 			fighting_state_changed.emit(_fighting_state)
 
@@ -68,7 +76,7 @@ var target_module: TargetModule
 
 # ============================== Private variables ==============================
 
-var _fighting_state: GlobalFightingManager.FightingState = GlobalFightingManager.FightingState.UNDEF
+var _fighting_state: FightingState = FightingState.UNDEF
 
 # ============================== Public functions ==============================
 
@@ -107,8 +115,7 @@ func notify_damage_done(damage: int, attack_type: Utils.AttackType) -> void:
 	if attack_type == Utils.AttackType.AUTO_ATTACK:
 		_attack_manager.notify_damage_done(damage)
 
-# ===== Actions
-
+#region ===== Actions =====
 func direct_attack(target: Character, damage: int, damage_type: Utils.DamageType) -> void:
 	_action_module.direct_attack(target, damage, damage_type)
 
@@ -135,9 +142,9 @@ func inflict_condition_stacks(target: Character, stacks_number: int, stack_type:
 
 func ultimate() -> void:
 	_hero_3D.ultimate()
+#endregion
 
-# ===== Interaction
-
+#region ===== Interaction =====
 func take_damage(damage: int, damage_type: Utils.DamageType, is_critical: bool = false, source: Entity = null, attack_type: Utils.AttackType = Utils.AttackType.UNDEF) -> int:
 	return _interact_module.take_damage(damage, damage_type, is_critical, source, attack_type)
 
@@ -149,6 +156,7 @@ func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, sour
 
 func take_heal(heal_amount: int, source: Character = null) -> void:
 	_interact_module.take_heal(heal_amount, source)
+#endregion
 
 # ============================== Node base functions ==============================
 
@@ -170,8 +178,7 @@ func _ready() -> void:
 	_character_visual.update_mana_bar(0, stats.mana_max)
 	_character_visual.update_name_displayed(player.name)
 	
-	GlobalFightingManager.state_changed.connect(_on_global_fighting_manager_state_changed)
-	Events.game_state_changed.connect(_on_events_game_state_changed)
+	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 	Events.player_won_a_fight.connect(_on_events_player_won_a_fight)
 	Events.entity_cliked.connect(_on_events_entity_clicked)
 	
@@ -199,9 +206,12 @@ func _reset() -> void:
 
 
 func _update_hero() -> void:
-	if not Engine.is_editor_hint() and not is_inside_tree(): return
-	if not Engine.is_editor_hint() and not is_node_ready(): return
-	if _hero_3D != null: _hero_3D.queue_free()
+	if not is_node_ready(): return
+	print("DEBUG - Updating HERO")
+	if _hero_3D != null: 
+		print("DEBUG - Deleting HERO")
+		_hero_3D.queue_free()
+	print("DEBUG - Changing HERO")
 	_hero_3D = _HEROES_3D[hero_id].instantiate()
 	_hero_3D.character_owner = self
 	_collision_shape.shape = _hero_3D.collision_shape.shape.duplicate() # Update Collider
@@ -230,29 +240,29 @@ func _on_fighting_manager_fight_is_over(_fighting_manager, _winner_team) -> void
 	_character_logic.stop()
 
 
-func _on_global_fighting_manager_state_changed(global_fighting_state: GlobalFightingManager.FightingState) -> void:
-	fighting_state = global_fighting_state
-	if global_fighting_state == GlobalFightingManager.FightingState.POSITIONING:
-		if not player.is_bot:
-			_movement_synchronizer.set_multiplayer_authority(player.id)
-			set_multiplayer_authority(player.id)
-		else:
-			_movement_synchronizer.set_multiplayer_authority(1)
-			set_multiplayer_authority(1)
-	if global_fighting_state == GlobalFightingManager.FightingState.COUNTDOWN:
-		_movement_synchronizer.set_multiplayer_authority(-1)
-		set_multiplayer_authority(-1)
-
-
-func _on_events_game_state_changed(new_state: Game.GameState) -> void:
-	match new_state:
+func _on_game_manager_game_state_changed(game_state: Game.GameState) -> void:
+	match game_state:
 		Game.GameState.BUYING:
 			_is_dead = false
 			_character_visual.hide()
 			if _turret != null: _turret.hide()
-		Game.GameState.FIGHTING:
+		Game.GameState.FIGHTING_POSITIONING:
+			fighting_state = FightingState.POSITIONING
+			if not player.is_bot:
+				_movement_synchronizer.set_multiplayer_authority(player.id)
+				set_multiplayer_authority(player.id)
+			else:
+				_movement_synchronizer.set_multiplayer_authority(1)
+				set_multiplayer_authority(1)
 			_character_visual.show()
 			if _turret != null: _turret.show()
+		Game.GameState.FIGHTING_COUNTDOWN:
+			_movement_synchronizer.set_multiplayer_authority(-1)
+			set_multiplayer_authority(-1)
+		Game.GameState.FIGHTING_NORMAL:
+			fighting_state = FightingState.FIGHTING
+		Game.GameState.FIGHTING_CELEBRATING:
+			fighting_state = FightingState.CELEBRATING
 
 
 func _on_stats_health_changed(new_health: int) -> void:

@@ -18,11 +18,7 @@ var _battle_logs: Array[Dictionary] = [] # [CLIENT ONLY]
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	if multiplayer.is_server():
-		GlobalFightingManager.state_changed.connect(_on_global_fighting_manager_state_changed)
-		_synchronizer_timer.wait_time *= GlobalFightingManager.SERVER_TIME_SCALE # Needs to be relative to the Engine speed up
-	else:
-		Events.game_state_changed.connect(_on_events_game_state_changed)
+	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 
 # ============================== Callbacks functions ============================== [SERVER ONLY]
 
@@ -32,19 +28,21 @@ func _on_synchronizer_timer_timeout() -> void:
 		_sync_battle_log.rpc(new_logs)
 
 
-func _on_global_fighting_manager_state_changed(state: GlobalFightingManager.FightingState) -> void:
-	if state == GlobalFightingManager.FightingState.FIGHTING:
-		_synchronizer_timer.start()
-	elif state == GlobalFightingManager.FightingState.CELEBRATING: # TODO Si erreur de synchro sur les derniers event d'un combat, c'est surement une race ici
-		_synchronizer_timer.stop()
-		var new_logs: Array[Dictionary] = _battle_writer.get_current_logs()
-		if not new_logs.is_empty():
-			_sync_battle_log.rpc(new_logs)
+func _on_game_manager_game_state_changed(state: Game.GameState) -> void:
+	match state:
+		Game.GameState.BUYING:
+			_battle_logs.clear()
+		Game.GameState.FIGHTING_NORMAL:
+			if multiplayer.is_server():
+				_synchronizer_timer.start()
+		Game.GameState.FIGHTING_CELEBRATING: # TODO Si erreur de synchro sur les derniers event d'un combat, c'est surement une race ici
+			if multiplayer.is_server():
+				_synchronizer_timer.stop()
+				var new_logs: Array[Dictionary] = _battle_writer.get_current_logs()
+				if not new_logs.is_empty():
+					_sync_battle_log.rpc(new_logs)
 
 # ============================== Callbacks functions ============================== [CLIENT ONLY]
-
-func _on_events_game_state_changed(state: Game.GameState) -> void:
-	if state == Game.GameState.BUYING: _battle_logs.clear()
 
 # ============================== RPC - Synchronizer ==============================
 

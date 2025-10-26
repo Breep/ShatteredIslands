@@ -9,7 +9,6 @@ var _mirrored: bool
 	set(value):
 		_mirrored = value
 		_mirror_ui(_mirrored)
-	
 
 # ============================== Local Nodes ==============================
 
@@ -32,6 +31,7 @@ var _entity: Entity
 
 func _ready() -> void:
 	_mirror_ui(_mirrored)
+	_make_unique()
 
 # ============================== Public functions ==============================
 
@@ -114,6 +114,10 @@ func _mirror_ui(is_mirrored: bool) -> void:
 		_mana_bar_container.move_child(_mana_bar_viewport_texture, 0)
 		_mana_bar_viewport_texture.flip_h = false
 		_health_bar.mirrored = false
+
+
+func _make_unique() -> void:
+	if _mana_progress_bar.material != null: _mana_progress_bar.material = _mana_progress_bar.material.duplicate(true)
 
 # ============================== Callbacks ==============================
 

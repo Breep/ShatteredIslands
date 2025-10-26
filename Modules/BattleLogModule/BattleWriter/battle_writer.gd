@@ -21,7 +21,7 @@ var _is_accelerated_fight: bool = false
 
 func _ready() -> void:
 	if not multiplayer.is_server(): queue_free() # Only the server writes battle logs
-	GlobalFightingManager.state_changed.connect(_on_global_fighting_manager_state_changed)
+	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 	_fighting_area.projectile_spawned.connect(_on_fighting_area_projectile_spawned)
 	_fighting_area.damage_taken.connect(_on_fighting_area_damage_taken)
 	_fighting_area.spell_casted.connect(_on_fighting_area_spell_casted)
@@ -95,23 +95,21 @@ func _get_time() -> float:
 	if _is_accelerated_fight:
 		return _normal_fight_duration + ((Time.get_ticks_msec() as float) / 1000.0 - _accelerated_fight_start_time)# / GlobalFightingManager.ACCELERATED_FIGHT_TIME_SCALE
 	else:
-		return ((Time.get_ticks_msec() as float) / 1000.0 - _start_time)# * GlobalFightingManager.SERVER_TIME_SCALE
+		return ((Time.get_ticks_msec() as float) / 1000.0 - _start_time)
 
 # ============================== Callbacks ==============================
 
-func _on_global_fighting_manager_state_changed(state: GlobalFightingManager.FightingState) -> void:
+func _on_game_manager_game_state_changed(state: Game.GameState) -> void:
 	match state:
-		GlobalFightingManager.FightingState.POSITIONING:
+		Game.GameState.FIGHTING_POSITIONING:
 			_battle_logs.clear()
-		GlobalFightingManager.FightingState.FIGHTING:
+		Game.GameState.FIGHTING_NORMAL:
 			_start_time = (Time.get_ticks_msec() as float) / 1000.0
 			_is_accelerated_fight = false
-		GlobalFightingManager.FightingState.FIGHTING_ACCELERATED:
+		Game.GameState.FIGHTING_ACCELERATED:
 			_normal_fight_duration = _get_time()
 			_accelerated_fight_start_time = (Time.get_ticks_msec() as float) / 1000.0
 			_is_accelerated_fight = true
-		GlobalFightingManager.FightingState.FINISHED:
-			return
 
 
 func _on_fighting_area_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.ProjectileType, projectile_modifiers: Array[Projectile.ProjectileEffect]) -> void:

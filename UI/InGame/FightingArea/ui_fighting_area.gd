@@ -17,6 +17,8 @@ extends Control
 @onready var _ui_entity_stats_right2: UIEntityStats = %EntityStatsRight2
 #endregion
 
+@onready var _ui_countdown: UICountdown = %Countdown
+
 # ============================== Private variables ==============================
 
 var _is_active: bool = false
@@ -24,6 +26,7 @@ var _is_active: bool = false
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
+	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 	hide()
 
 # ============================== Public functions ==============================
@@ -72,7 +75,10 @@ func _set_layout_2v2(characters: Array[Character]) -> void:
 
 # ============================== Callbacks ==============================
 
-
+func _on_game_manager_game_state_changed(game_state: Game.GameState) -> void:
+	match game_state:
+		Game.GameState.FIGHTING_COUNTDOWN:
+			_ui_countdown.start(int(GameManager.game_rules.duration_fighting_countdown), "FIGHT")
 
 
 

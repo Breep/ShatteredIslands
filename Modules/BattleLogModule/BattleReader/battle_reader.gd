@@ -21,7 +21,7 @@ var _is_playing: bool = false
 
 func _ready() -> void:
 	if multiplayer.is_server(): queue_free() # Only clients read battle logs
-	GlobalFightingManager.state_changed.connect(_on_global_fighting_manager_state_changed)
+	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 
 
 func _process(_delta: float) -> void:
@@ -37,14 +37,12 @@ func add_log(logs: Array[Dictionary]) -> void:
 	_battle_logs += logs
 
 
-func _on_global_fighting_manager_state_changed(state: GlobalFightingManager.FightingState) -> void:
+func _on_game_manager_game_state_changed(state: Game.GameState) -> void:
 	match state:
-		GlobalFightingManager.FightingState.POSITIONING:
+		Game.GameState.FIGHTING_POSITIONING:
 			_battle_logs.clear()
-		GlobalFightingManager.FightingState.FIGHTING:
+		Game.GameState.FIGHTING_NORMAL:
 			_start_playback()
-		GlobalFightingManager.FightingState.FINISHED:
-			return
 
 # ============================== Private function ==============================
 

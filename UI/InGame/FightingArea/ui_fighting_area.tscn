@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bhxhqex1pbh2p"]
+[gd_scene load_steps=4 format=3 uid="uid://bhxhqex1pbh2p"]
 
 [ext_resource type="Script" uid="uid://cl4rtcia6te0m" path="res://UI/InGame/FightingArea/ui_fighting_area.gd" id="1_xkiby"]
+[ext_resource type="PackedScene" uid="uid://dmfkigo1trjd0" path="res://UI/Tool/Countdown/ui_countdown.tscn" id="3_ie0xi"]
 [ext_resource type="PackedScene" uid="uid://db2anika8bvj8" path="res://UI/InGame/FightingArea/EntityStats/ui_entity_stats.tscn" id="4_ejw1r"]
 
 [node name="UIFightingArea" type="Control"]
@@ -281,3 +282,7 @@ mirrored = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="Countdown" parent="MarginContainer" instance=ExtResource("3_ie0xi")]
+unique_name_in_owner = true
+layout_mode = 2

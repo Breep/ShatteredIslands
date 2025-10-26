@@ -26,7 +26,7 @@ func _ready() -> void:
 		printerr("EntityManager: Scanning area unset [", get_path(), "]")
 		return
 	
-	Events.game_state_changed.connect(_on_events_game_state_changed)
+	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 	_scanner_area.body_entered.connect(_on_scanner_area_body_entered)
 	_scanner_area.body_exited.connect(_on_scanner_area_body_exited)
 
@@ -73,11 +73,11 @@ func _kick_entity(entity: Entity) -> void:
 
 # ============================== Callbacks ==============================
 
-func _on_events_game_state_changed(game_state: Game.GameState) -> void:
+func _on_game_manager_game_state_changed(game_state: Game.GameState) -> void:
 	if game_state == Game.GameState.BUYING:
 		_is_active = false
 		clear()
-	if game_state == Game.GameState.FIGHTING:
+	if game_state == Game.GameState.FIGHTING_POSITIONING:
 		_is_active = true
 
 

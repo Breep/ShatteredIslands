@@ -21,7 +21,8 @@ var _pickable_collider_overlapping_counter: int = 0: # Number of pickable constr
 
 func _ready() -> void:
 	hide()
-	Events.game_state_changed.connect(_on_events_game_state_changed)
+	_set_inactive()
+	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 
 
 func _set_active() -> void:
@@ -48,8 +49,9 @@ func _on_area_exited(_area: Area3D) -> void:
 	_pickable_collider_overlapping_counter -= 1
 
 
-func _on_events_game_state_changed(game_state: Game.GameState) -> void:
-	if game_state == Game.GameState.FIGHTING:
-		_set_active()
-	elif game_state == Game.GameState.BUYING:
-		_set_inactive()
+func _on_game_manager_game_state_changed(game_state: Game.GameState) -> void:
+	match game_state:
+		Game.GameState.FIGHTING_POSITIONING:
+			_set_active()
+		Game.GameState.FIGHTING_FINISHED:
+			_set_inactive()

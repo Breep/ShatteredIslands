@@ -47,11 +47,11 @@ func _ready() -> void:
 
 #region Start/Stop Battle
 func _on_start_battle_pressed() -> void:
-	_character.fighting_state = GlobalFightingManager.FightingState.FIGHTING
+	_character.fighting_state = Character.FightingState.POSITIONING
 
 
 func _on_end_battle_pressed() -> void:
-	_character.fighting_state = GlobalFightingManager.FightingState.CELEBRATING
+	_character.fighting_state = Character.FightingState.CELEBRATING
 #endregion
 
 #region Stacks

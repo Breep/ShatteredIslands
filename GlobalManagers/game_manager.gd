@@ -1,6 +1,6 @@
-extends Node2D
+extends Control
 
-# In game manager
+# ============================== Signals ==============================
 
 # ============================== Enum ==============================
 
@@ -13,6 +13,7 @@ enum GameType {
 # ============================== Constants ==============================
 
 const HEROES_NUMBER: int = 8
+const ACCELERATED_FIGHT_TIME_SCALE = 2.0
 
 # ============================== Public variables ==============================
 
@@ -28,9 +29,24 @@ var _active_families: Array[Family] # Array of all families activated for this g
 var active_families: Array[Family]:
 	get: return _active_families
 
+var _game_state_timer: Timer
+var game_state_timer: Timer:
+	get: return _game_state_timer
+
+signal game_state_changed(game_state: Game.GameState)
+var _game_state: Game.GameState
+var game_state: Game.GameState:
+	get: return _game_state
+	set(value):
+		if _game_state == value: return
+		_game_state = value
+		game_state_changed.emit(_game_state)
+
 # ============================== Private variables ==============================
 
-var _game_scene: PackedScene = preload("res://Game/game.tscn")
+var __prototyping: bool = false
+
+var _game_scene: PackedScene = load("res://Game/game.tscn")
 
 var _FAMILIES_REF: Dictionary[Family.FamilyType, Family] = {
 	Family.FamilyType.ATTACK: load("res://Card/Descriptions/Families/attack_family.tres") as Family,
@@ -56,7 +72,20 @@ signal _server_answered()
 
 var _random_heroes_ref: Array[Hero.HeroId]
 
+# ============================== Node base functions ==============================
+
+func _ready() -> void:
+	_game_state_timer = Timer.new()
+	_game_state_timer.autostart = false
+	_game_state_timer.one_shot = true
+	add_child(_game_state_timer)
+	game_state_changed.connect(_on_game_state_changed)
+	_game_state_timer.timeout.connect(_on_game_state_timer_timeout)
+
 # ============================== Public function ==============================
+
+
+
 
 func clear() -> void:
 	_game_type = GameType.UNDEF
@@ -85,7 +114,6 @@ func is_end_of_game() -> bool:
 
 
 func start_solo_game() -> void:
-	print("DEBUG START SOLO GAME")
 	_game_type = GameType.SOLO
 	for i in 7: # TODO Avoir un nombre max de joueur qui dépend du mode ?
 		PlayerManager.add_bot()
@@ -117,7 +145,7 @@ func start_game() -> void:
 	get_tree().change_scene_to_packed(_game_scene)
 
 # TODO: Move all 4 bellow functions into HeroSelector
-
+#region HERO PICKUP ORDER
 # [Client only]
 signal _server_hero_pickup_order_answered
 
@@ -169,10 +197,9 @@ func _answer_hero_pickup_order(hero_pickup_order_player_ids: Array[int]) -> void
 	for player_id in hero_pickup_order_player_ids:
 		_hero_pickup_order_players.append(PlayerManager.players[player_id])
 	_server_hero_pickup_order_answered.emit()
+#endregion
 
-
-# ============================== RPC - Ask/Answer current round battle ==============================
-
+#region [RPC] Ask/Answer GET N RANDOM HEROES
 @rpc("any_peer", "call_remote")
 func _ask_get_n_random_heroes(peer_id: int) -> void:
 	if not multiplayer.is_server():
@@ -189,6 +216,7 @@ func _ask_get_n_random_heroes(peer_id: int) -> void:
 func _answer_get_n_random_heroes(heroes_ref: Array[Hero.HeroId]) -> void:
 	_random_heroes_ref = heroes_ref
 	_server_answered.emit()
+#endregion
 
 # ============================== Private functions ==============================
 
@@ -216,12 +244,88 @@ func _init_current_current_game_heroes(heroes_number: int) -> void:
 
 func _player_health_compare(player_a: Player, player_b: Player) -> bool:
 	return player_a.health >= player_b.health
-	
-	
-	
-	
-	
-	
+
+
+#region GAME STATE
+@rpc("authority", "call_remote")
+func _sync_state(server_game_state: Game.GameState) -> void:
+	game_state = server_game_state
+
+
+func update_game_state(new_game_state: Game.GameState, need_to_sync: bool = false) -> void:
+	game_state = new_game_state
+	if need_to_sync:
+		_sync_state(game_state)
+
+
+func _on_game_state_timer_timeout() -> void:
+	match game_state:
+		Game.GameState.BUYING:
+			await PlayerManager.sync_point(PlayerManager.SyncID.BUYING_PHASE)
+			game_state = Game.GameState.FIGHTING_POSITIONING
+		Game.GameState.FIGHTING_POSITIONING: # End of POSITIONING State
+			if __prototyping or game_type == GameType.SOLO:
+				game_state = Game.GameState.FIGHTING_COUNTDOWN # Trigger COUNTDOWN STATE for prototyping map
+			else:
+				game_state = Game.GameState.FIGHTING_NORMAL # Trigger FIGHT directly on server
+		
+		Game.GameState.FIGHTING_COUNTDOWN: game_state = Game.GameState.FIGHTING_NORMAL
+		Game.GameState.FIGHTING_NORMAL: game_state = Game.GameState.FIGHTING_ACCELERATED
+		Game.GameState.FIGHTING_ACCELERATED: game_state = Game.GameState.FIGHTING_CELEBRATING
+		Game.GameState.FIGHTING_CELEBRATING: game_state = Game.GameState.FIGHTING_FINISHED
+		Game.GameState.FIGHTING_FINISHED: game_state = Game.GameState.INITIATING_NEW_ROUND
+
+
+# Start Timers
+func _on_game_state_changed(new_state) -> void:
+	_game_state_timer.stop()
+	match new_state:
+		Game.GameState.BUYING:
+			print("[", multiplayer.get_unique_id(), "] GameManager: [State=BUYING] (", _game_rules.duration_buying_phase, "s)")
+			_game_state_timer.wait_time = _game_rules.duration_buying_phase
+			_game_state_timer.start()
+		
+		Game.GameState.FIGHTING_POSITIONING:
+			print("[", multiplayer.get_unique_id(), "] GameManager: [State=FIGHTING_POSITIONING] (", _game_rules.duration_fighting_positioning, "s)")
+			_game_state_timer.wait_time = _game_rules.duration_fighting_positioning
+			_game_state_timer.start()
+		
+		Game.GameState.FIGHTING_COUNTDOWN:
+			print("[", multiplayer.get_unique_id(), "] GameManager: [State=FIGHTING_COUNTDOWN] (", _game_rules.duration_fighting_countdown, "s)")
+			_game_state_timer.wait_time = _game_rules.duration_fighting_countdown
+			_game_state_timer.start()
+		
+		Game.GameState.FIGHTING_NORMAL:
+			print("[", multiplayer.get_unique_id(), "] GameManager: [State=FIGHTING_NORMAL] (", _game_rules.duration_fighting_normal, "s)")
+			_game_state_timer.wait_time = _game_rules.duration_fighting_normal
+			_game_state_timer.start()
+		
+		Game.GameState.FIGHTING_ACCELERATED:
+			print("[", multiplayer.get_unique_id(), "] GameManager: [State=FIGHTING_ACCELERATED] (", _game_rules.duration_fighting_accelerated, "s)")
+			Engine.time_scale = ACCELERATED_FIGHT_TIME_SCALE
+			_game_state_timer.wait_time = _game_rules.duration_fighting_accelerated
+			_game_state_timer.start()
+		
+		Game.GameState.FIGHTING_CELEBRATING:
+			print("[", multiplayer.get_unique_id(), "] GameManager: [State=FIGHTING_CELEBRATING] (", _game_rules.duration_fighting_celebrating, "s)")
+			Engine.time_scale = 1.0
+			_game_state_timer.wait_time = _game_rules.duration_fighting_celebrating
+			_game_state_timer.start()
+		
+		Game.GameState.FIGHTING_FINISHED:
+			print("[", multiplayer.get_unique_id(), "] GameManager: [State=FIGHTING_FINISHED]")
+			_game_state_timer.wait_time = _game_rules.duration_fighting_finished
+			_game_state_timer.start()
+		
+		Game.GameState.STARTING:
+			print("[", multiplayer.get_unique_id(), "] GameManager: [State=STARTING]")
+		Game.GameState.INITIATING_NEW_ROUND:
+			print("[", multiplayer.get_unique_id(), "] GameManager: [State=INITIATING_NEW_ROUND]")
+		Game.GameState.FINISHED:
+			print("[", multiplayer.get_unique_id(), "] GameManager: [State=FINISHED]")
+		Game.GameState.UNDEF:
+			print("[", multiplayer.get_unique_id(), "] GameManager: [State=UNDEF]")
+#endregion
 	
 	
 	

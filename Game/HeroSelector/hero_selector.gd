@@ -126,7 +126,6 @@ func _on_ui_hero_picking_screen_hero_locked(hero: Hero) -> void:
 
 func _on_player_hero_picked() -> void:
 	_heroes_ready += 1
-	print("PLAYER HERO PICKED - ", _heroes_ready)
 	if _heroes_ready >= PlayerManager.MAX_PLAYERS:
 		_ui_hero_picking_screen.hide()
 		all_heroes_picked.emit()

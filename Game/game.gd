@@ -5,19 +5,17 @@ extends Node3D
 
 enum GameState {
 	STARTING,
+	INITIATING_NEW_ROUND,
 	BUYING,
-	FIGHTING,
+	FIGHTING_POSITIONING,
+	FIGHTING_COUNTDOWN,
+	FIGHTING_NORMAL,
+	FIGHTING_ACCELERATED,
+	FIGHTING_CELEBRATING,
+	FIGHTING_FINISHED,
 	FINISHED,
 	UNDEF
 }
-
-var _game_state: GameState = GameState.UNDEF
-var game_state: GameState:
-	get: return _game_state
-	set(value):
-		if _game_state == value: return
-		_game_state = value
-		Events.signal_game_state_changed(_game_state)
 
 var _fighting_islands: Dictionary[int, FightingIsland] # [player_id, FightingIslands]
 var _current_round_battles: Array[Battle]
@@ -41,12 +39,11 @@ var _current_round_battles: Array[Battle]
 
 @onready var _island_spawns_to_be_removed: Node3D = %IslandSpawns
 
-@onready var _buying_area_timer: Timer = %BuyingAreaTimer
-
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
 	_hero_selector.all_heroes_picked.connect(_on_hero_selector_all_heroes_picked)
+	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 	GlobalFightingManager.all_fights_are_over.connect(_on_global_fighting_manager_all_fights_are_over)
 	Shared.scene_switcher = _scene_switcher
 	_start_game()
@@ -54,33 +51,21 @@ func _ready() -> void:
 # ============================== Private functions ==============================
 
 func _start_game() -> void:
+	GameManager.update_game_state(GameState.STARTING, true)
 	_spawn_fighting_islands()
 	_start_hero_selection()
 
 
 func _start_hero_selection() -> void:
-	game_state = GameState.STARTING
 	_hero_selector.start()
-
-
-func count_nodes_recursive(node: Node) -> int:
-	var count := 1 # count self
-	for child in node.get_children(true):
-		count += count_nodes_recursive(child)
-	return count
 
 
 func _start_new_round() ->void:
 	print("[", multiplayer.get_unique_id(), "] Game: Start new round")
 	_current_round_player_id_islands.clear()
 	
-	# Check local player life ?
-	# Comment le serveur gère la mort de chaque joueur
-	# -> Enregistrement à la fin de la partie des scores
-	# Au fur et à mesure, pour le moment chaque client gère localement le check de sa vie, si elle passe sous 0 alors on désactive le shop
-	# et on affiche l'UI de resultat
 	if GameManager.is_end_of_game():
-		game_state = GameState.FINISHED
+		GameManager.update_game_state(GameState.FINISHED, true)
 		print("Game: Looks like we have a winner ! Congrats ", PlayerManager.get_alive_players().values()[0].name)
 		return
 	
@@ -88,20 +73,20 @@ func _start_new_round() ->void:
 	_init_current_round_player_id_islands(_current_round_battles.size())
 	RoundManager.starting_round_player_changes()
 	await PlayerManager.sync_point(PlayerManager.SyncID.ROUND_SETUP)
-	_start_buying_phase(_current_round_battles)
+	GameManager.update_game_state(Game.GameState.BUYING)
 
 
-func _start_buying_phase(battles: Array[Battle]) -> void:
+func _start_buying_phase() -> void:
 	print("[", multiplayer.get_unique_id(), "] Game: Start BUYING !")
-	game_state = GameState.BUYING
 	_scene_switcher.set_island_active_only(_buying_island)
-	_buying_island.start_buying_phase(battles)
-	_buying_area_timer.start()
+	_buying_island.start_buying_phase(_current_round_battles)
+	GameManager.game_state_timer.wait_time = GameManager.game_rules.duration_buying_phase
+	GameManager.game_state_timer.start()
 
 
-func _start_fighting_phase(battles: Array[Battle]) -> void:
+func _start_fighting_phase() -> void:
 	print("[", multiplayer.get_unique_id(), "] Game: Start fights !")
-	game_state = GameState.FIGHTING
+	var battles: Array[Battle] = _current_round_battles
 	for i in battles.size():
 		var characters: Array[Character]
 		for player in battles[i].players:
@@ -161,16 +146,14 @@ func _end_buying_round() -> void:
 
 func _on_buying_island_buying_phase_finished() -> void:
 	print("[", multiplayer.get_unique_id(), "] Game: BUYING PHASE ENDED")
-	await PlayerManager.sync_point(PlayerManager.SyncID.BUYING_PHASE)
-	_start_fighting_phase(_current_round_battles)
-	_buying_island.hide()
+	_start_fighting_phase()
 	_buying_island.cleanup()
 
 
 func _on_hero_selector_all_heroes_picked() -> void:
 	print("[", multiplayer.get_unique_id(), "] Game: BUYING AREA ALL HEROES PICKED")
 	_spawn_all_characters()
-	_start_new_round()
+	GameManager.update_game_state(Game.GameState.INITIATING_NEW_ROUND)
 
 
 func _on_global_fighting_manager_all_fights_are_over() -> void:
@@ -178,8 +161,13 @@ func _on_global_fighting_manager_all_fights_are_over() -> void:
 	await PlayerManager.sync_point(PlayerManager.SyncID.FIGHTING_PHASE)
 	await RoundManager.ending_round_player_changes()
 	await PlayerManager.sync_point(PlayerManager.SyncID.ROUND_ENDING)
-	_start_new_round()
-	_buying_island.show()
+
+
+func _on_game_manager_game_state_changed(game_state: GameState) -> void:
+	match game_state:
+		GameState.INITIATING_NEW_ROUND: _start_new_round()
+		GameState.BUYING: _start_buying_phase()
+		GameState.FIGHTING_POSITIONING: _start_fighting_phase()
 
 
 func _on_buying_area_timer_timeout() -> void:

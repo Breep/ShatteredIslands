@@ -22,7 +22,7 @@ var _projectile_counter: int = 0
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	GlobalFightingManager.state_changed.connect(_on_global_fighting_manager_state_changed)
+	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 	_fighting_area.fighting_manager.fight_is_over.connect(_on_fighting_area_fighting_manager_fight_is_over)
 
 # ============================== Public function ==============================
@@ -54,8 +54,8 @@ func _clear_all() -> void:
 
 # ============================== Callbacks ==============================
 
-func _on_global_fighting_manager_state_changed(state: GlobalFightingManager.FightingState) -> void:
-	if state == GlobalFightingManager.FightingState.CELEBRATING:
+func _on_game_manager_game_state_changed(state: Game.GameState) -> void:
+	if state == Game.GameState.FIGHTING_CELEBRATING:
 		_clear_all()
 
 

@@ -127,6 +127,7 @@ func _make_unique() -> void:
 	if _armor_bar.material != null: _armor_bar.material = _armor_bar.material.duplicate(true)
 	if _poison_bar.material != null: _poison_bar.material = _poison_bar.material.duplicate(true)
 	if _ignite_bar.material != null: _ignite_bar.material = _ignite_bar.material.duplicate(true)
+	if _segments.material != null: _segments.material = _segments.material.duplicate(true)
 
 
 func _update_layout() -> void:

@@ -43,21 +43,17 @@ func _ready() -> void:
 	else:
 		_is_on_owner_spawn_area = true
 	
-	Events.game_state_changed.connect(_on_events_game_state_changed)
-	
-	GlobalFightingManager.state_changed.connect(_on_global_fighting_manager_state_changed)
+	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 
 # ============================== Public functions ==============================
 
 func pick() -> bool:
-	print("DEBUG - PICK")
 	if _is_picked_up or _is_locked(): return false
 	_is_picked_up = true
 	return _pick()
 
 
 func drop() -> bool:
-	print("DEBUG - DROP")
 	if not _is_picked_up or _is_locked(): return false
 	if _drop():
 		_is_picked_up = false
@@ -130,17 +126,13 @@ func _on_spawn_area_checker_other_team_spawn_area_freed() -> void:
 	_is_on_other_spawn_area = false
 
 
-func _on_events_game_state_changed(game_state: Game.GameState) -> void:
+func _on_game_manager_game_state_changed(game_state: Game.GameState) -> void:
 	if _spawn_area_checker == null: return
-	if game_state == Game.GameState.FIGHTING:
-		pickable_locked = false
-		_spawn_area_checker.team = _owner.team
-	elif game_state == Game.GameState.BUYING:
-		pickable_locked = true
-
-
-func _on_global_fighting_manager_state_changed(state: GlobalFightingManager.FightingState) -> void:
-	if state == GlobalFightingManager.FightingState.COUNTDOWN:
-		pickable_locked = true # TODO need to handle the case the entity is is picked up (can be dropped and can't)
-
- 
+	match game_state:
+		Game.GameState.FIGHTING_POSITIONING:
+			pickable_locked = false
+			_spawn_area_checker.team = _owner.team
+		Game.GameState.FIGHTING_COUNTDOWN:
+			pickable_locked = true
+		Game.GameState.FIGHTING_NORMAL:
+			pickable_locked = true 
