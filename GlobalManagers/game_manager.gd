@@ -95,7 +95,7 @@ func clear() -> void:
 
 
 func init() -> void:
-	_game_rules = load("res://Game/GameRules/NormalGameRules.tres")
+	_game_rules = load("res://Game/GameRules/normal_game_rules.tres")
 	_active_families.append(_FAMILIES_REF[Family.FamilyType.DEFENSE])
 	_active_families.append(_FAMILIES_REF[Family.FamilyType.POISON])
 	_active_families.append(_FAMILIES_REF[Family.FamilyType.FIRE])

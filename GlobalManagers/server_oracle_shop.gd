@@ -33,6 +33,7 @@ func _server_try_buy_xp(player: Player) -> bool:
 		return false
 	
 	player.xp += GameManager.game_rules.xp_per_oracle_buy
+	player.gold -= GameManager.game_rules.buy_xp_price
 	return true
 
 

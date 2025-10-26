@@ -5,6 +5,7 @@ extends Control
 
 @onready var _round_label: Label = %RoundLabel
 @onready var _game_state_viewer: UIGameStateViewer = %GameStateViewer
+@onready var _ui_player_info: UIPlayerInfo = %UIPlayerInfo
 
 # ============================== Node base functions ==============================
 
@@ -12,6 +13,7 @@ func _ready() -> void:
 	RoundManager.current_round_changed.connect(_on_round_manager_current_round_changed)
 	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 	_game_state_viewer.connect_timer(GameManager.game_state_timer)
+	_ui_player_info.connect_to_player(PlayerManager.get_local_player())
 
 # ============================== Public functions ==============================
 

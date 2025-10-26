@@ -19,6 +19,9 @@ signal card_bought(card: Card)
 @onready var _refresh_button: Button = %RefreshButton
 @onready var _random_card_button: Button = %RandomCardButton
 
+@onready var _xp_gain_label: Label = %XPGainLabel
+@onready var _buy_xp_price_label: Label = %BuyXPPriceLabel
+
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
@@ -42,6 +45,9 @@ func _ready() -> void:
 	
 	_refresh_button.pressed.connect(_on_refresh_button_pressed, CONNECT_ONE_SHOT)
 	_random_card_button.pressed.connect(_on_random_card_button_pressed, CONNECT_ONE_SHOT)
+	
+	_xp_gain_label.text = "+" + str(GameManager.game_rules.xp_per_oracle_buy) + " XP"
+	_buy_xp_price_label.text = str(GameManager.game_rules.buy_xp_price)
 
 # ============================== Public functions ==============================
 

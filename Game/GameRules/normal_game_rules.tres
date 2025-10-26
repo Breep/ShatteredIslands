@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="GameRules" load_steps=2 format=3 uid="uid://l3qnot0yr7wv"]
+
+[ext_resource type="Script" uid="uid://d0vk1a3vmag" path="res://Game/GameRules/game_rules.gd" id="1_8i4ne"]
+
+[resource]
+script = ExtResource("1_8i4ne")
+xp_per_family_lvl = 0
+xp_per_levels = Dictionary[int, int]({
+1: 6,
+2: 10,
+3: 14,
+4: 18,
+5: 22,
+6: 28,
+7: 34,
+8: 40,
+9: 50,
+10: 100
+})

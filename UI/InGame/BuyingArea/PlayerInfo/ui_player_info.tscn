@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://c25ls8pp84qld"]
+[gd_scene load_steps=4 format=3 uid="uid://c25ls8pp84qld"]
 
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_rdqgw"]
 [ext_resource type="Script" uid="uid://ogolctpkdab6" path="res://UI/InGame/BuyingArea/PlayerInfo/ui_player_info.gd" id="2_jb4gq"]
-[ext_resource type="PackedScene" uid="uid://baxstke5i0khe" path="res://UI/InGame/BuyingArea/PlayerPortrait/ui_player_life.tscn" id="3_2e7vv"]
 [ext_resource type="Texture2D" uid="uid://bbcbah5ifbsrw" path="res://UI/_Themes/Data/coin.png" id="4_jb4gq"]
 
 [node name="UIPlayerInfo" type="Control"]
@@ -33,12 +32,6 @@ theme_override_constants/margin_bottom = 10
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 alignment = 1
-
-[node name="UIPlayerLife" parent="MarginContainer/HBoxContainer" instance=ExtResource("3_2e7vv")]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="PlayerGoldHBox" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2

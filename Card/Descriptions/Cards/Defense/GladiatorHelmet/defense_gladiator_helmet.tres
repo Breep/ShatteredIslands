@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_2346c"]
 script = ExtResource("1_m55fq")
-_armor_stacks = Array[int]([15, 30, 45, 60, 120])
+_armor_stacks = Array[int]([40, 80, 120, 160, 320])
 _period = 3.0
 metadata/_custom_type_script = "uid://deiehs802w30h"
 
