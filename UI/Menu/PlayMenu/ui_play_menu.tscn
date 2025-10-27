@@ -51,7 +51,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 10
 
-[node name="InfoPanel" type="Panel" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="InfoPanel" type="Control" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -77,7 +77,7 @@ text = "Hello there !
 Welcome in the tournament
 of the Shattered Islands !"
 
-[node name="SoloPanel" type="Panel" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="SoloPanel" type="Control" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -111,7 +111,7 @@ mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 25
 text = "START GAME"
 
-[node name="OnlinePanel" type="Panel" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer"]
+[node name="OnlinePanel" type="Control" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_0s0ho")

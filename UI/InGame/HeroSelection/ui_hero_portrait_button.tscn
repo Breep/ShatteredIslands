@@ -1,8 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://b6lyxftbneqy"]
+[gd_scene load_steps=12 format=3 uid="uid://b6lyxftbneqy"]
 
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_fftwn"]
 [ext_resource type="Script" uid="uid://d0bm2pkkcp3db" path="res://UI/InGame/HeroSelection/ui_hero_portrait_button.gd" id="3_uh3hr"]
-[ext_resource type="Texture2D" uid="uid://xhyj0k42ilb3" path="res://UI/_Themes/Data/panel_tileable_20px_border_only.png" id="4_01uy0"]
 [ext_resource type="Shader" uid="uid://ba1avekvq4s1o" path="res://VFX/VFX_2D/UI/vortex_selector_v2.gdshader" id="4_6i4xs"]
 [ext_resource type="Texture2D" uid="uid://251if7lh55vt" path="res://Data/Texture/Kenney2/scratch 3.png" id="5_6bbru"]
 [ext_resource type="Texture2D" uid="uid://1bc5vvkoe4ur" path="res://Data/Heroes/Portraits/darkknight.png" id="6_kdn62"]
@@ -32,22 +31,10 @@ shader_parameter/seal_points = 5.0
 shader_parameter/seal_sharpness = 0.15
 shader_parameter/max_zoom = 4.0
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_01uy0"]
-texture = ExtResource("4_01uy0")
-texture_margin_left = 20.0
-texture_margin_top = 20.0
-texture_margin_right = 20.0
-texture_margin_bottom = 20.0
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[sub_resource type="Theme" id="Theme_j4f3y"]
-Panel/styles/panel = SubResource("StyleBoxTexture_01uy0")
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_01uy0"]
 
 [node name="HeroPortraitButton" type="Control" node_paths=PackedStringArray("_portrait", "_button")]
-custom_minimum_size = Vector2(0, 126)
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 3
 anchor_right = 0.434
 anchor_bottom = 0.772
@@ -83,16 +70,6 @@ unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("7_5y33r")
 expand_mode = 1
-
-[node name="PanelBorder" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme = SubResource("Theme_j4f3y")
 
 [node name="Button" type="Button" parent="."]
 unique_name_in_owner = true

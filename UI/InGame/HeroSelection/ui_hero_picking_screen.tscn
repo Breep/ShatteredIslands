@@ -1,14 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://k4dc5j8ecdxo"]
+[gd_scene load_steps=6 format=3 uid="uid://k4dc5j8ecdxo"]
 
 [ext_resource type="Script" uid="uid://ftwn66cpwnyp" path="res://UI/InGame/HeroSelection/ui_hero_picking_screen.gd" id="1_r4a5p"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="2_5jgqs"]
 [ext_resource type="PackedScene" uid="uid://dmfkigo1trjd0" path="res://UI/Tool/Countdown/ui_countdown.tscn" id="2_r4a5p"]
 [ext_resource type="PackedScene" uid="uid://b6lyxftbneqy" path="res://UI/InGame/HeroSelection/ui_hero_portrait_button.tscn" id="4_kexe1"]
 [ext_resource type="PackedScene" uid="uid://ddugcksbtixea" path="res://UI/InGame/HeroSelection/HeroOverviewPanel/ui_hero_overview_panel.tscn" id="5_bveri"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kexe1"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hy4fc"]
 
 [node name="UIHeroPickingScreen" type="Control"]
 layout_mode = 3
@@ -20,6 +16,7 @@ grow_vertical = 2
 script = ExtResource("1_r4a5p")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,7 +33,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TitlePanel" type="Panel" parent="VBoxContainer"]
+[node name="TitlePanel" type="Control" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.1
@@ -50,16 +47,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_5jgqs")
-theme_override_font_sizes/font_size = 35
+theme_override_constants/outline_size = 50
+theme_override_font_sizes/font_size = 75
 text = "Hero picking phase"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ScreenCenter" type="Panel" parent="VBoxContainer"]
+[node name="ScreenCenter" type="Control" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.9
-theme_override_styles/panel = SubResource("StyleBoxEmpty_kexe1")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScreenCenter"]
 layout_mode = 1
@@ -69,11 +66,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="Panel" parent="VBoxContainer/ScreenCenter/VBoxContainer"]
+[node name="Panel" type="Control" parent="VBoxContainer/ScreenCenter/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.9
-theme_override_styles/panel = SubResource("StyleBoxEmpty_hy4fc")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel"]
 layout_mode = 1
@@ -83,7 +79,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="AllHeroesPanel" type="Panel" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer"]
+[node name="AllHeroesPanel" type="Control" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_5jgqs")

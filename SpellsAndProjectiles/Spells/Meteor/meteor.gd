@@ -66,6 +66,7 @@ func _on_impact_effect_area_body_exited(body: Node3D) -> void:
 
 
 func _on_deploy_timer_timeout() -> void:
+	if _owner == null or _owner.is_queued_for_deletion(): return
 	#var hit_marker : Node3D = hit_marker_scene.instantiate()
 	#get_tree().current_scene.add_child(hit_marker)
 	#hit_marker.global_position = global_position
@@ -77,7 +78,8 @@ func _on_deploy_timer_timeout() -> void:
 	if not multiplayer.is_server(): return
 	
 	for entity in _entities_inside:
-		if entity.team != _owner.team:
+		if entity == null or entity.is_queued_for_deletion(): pass
+		elif entity.team != _owner.team:
 			if _owner != null:
 				_owner.inflict_condition_stacks(entity, _ignite_stacks, Utils.StackType.IGNITE)
 				_owner.direct_attack(entity, entity.stats.ignite_stacks * _damage_per_stacks, Utils.DamageType.MAGICAL)

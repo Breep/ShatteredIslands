@@ -26,6 +26,7 @@ func connect_to_spawn_manager(spawn_manager: SpawnManager) -> void:
 # Instantly attack the target - Apply cards damages multiplier if there are some
 func direct_attack(target: Character, damage: int, damage_type: Utils.DamageType) -> void:
 	if not multiplayer.is_server(): return
+	if target == null: return
 	var multiplier = _get_damage_multipliers()
 	if damage_type == Utils.DamageType.PHYSICAL:
 		damage *= multiplier["physical"]
@@ -38,6 +39,7 @@ func direct_attack(target: Character, damage: int, damage_type: Utils.DamageType
 # Instantly attack the target - Apply cards damages multiplier if there are some
 func direct_attack_percent(target: Character, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier) -> void:
 	if not multiplayer.is_server(): return
+	if target == null: return
 	var hp: int
 	match percent_modifier:
 		Utils.PercentModifier.MAX_HP:
@@ -53,6 +55,7 @@ func direct_attack_percent(target: Character, damage_percent: float, damage_type
 # Create a projectile to attack the target - Apply cards damages multiplier if there are some
 func projectile_attack(target: Character, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	if not multiplayer.is_server(): return
+	if target == null: return
 	var multiplier = _get_damage_multipliers()
 	projectile_stats.is_critic = multiplier["is_critical"]
 	projectile_stats.physical_damage_flat *= multiplier["physical"]
@@ -96,6 +99,7 @@ func _get_damage_multipliers() -> Dictionary:
 
 
 func _spawn_projectile(target: Character, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
+	if target == null: return
 	_spawn_manager.spawn_projectile(_owner, target, projectile_type, projectile_spawn, projectile_stats)
 
 # ============================== Heal ==============================
@@ -103,11 +107,13 @@ func _spawn_projectile(target: Character, projectile_type: Projectile.Projectile
 # [Server only]
 func heal(target: Character, heal_amount: int) -> void:
 	if not multiplayer.is_server(): return
+	if target == null: return
 	target.take_heal(heal_amount, _owner)
 
 
 func heal_percent(target: Character, percent: float, percent_modifier: Utils.PercentModifier) -> void:
 	if not multiplayer.is_server(): return
+	if target == null: return
 	var hp: int
 	match percent_modifier:
 		Utils.PercentModifier.MAX_HP:
@@ -124,11 +130,13 @@ func heal_percent(target: Character, percent: float, percent_modifier: Utils.Per
 # [Server only]
 func inflict_condition_stacks(target: Character, stacks_number: int, stack_type: Utils.StackType) -> void:
 	if not multiplayer.is_server(): return
+	if target == null: return
 	target.take_condition_stacks(stacks_number, stack_type, _owner)
 
 # ============================== Spells ==============================
 
 func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary = {}) -> void:
+	if target == null: return
 	match spell_type:
 		Spell.Type.METEOR: _cast_meteor(target, spell_modifier)
 		Spell.Type.DARK_STORM: _cast_dark_storm(target, spell_modifier)
