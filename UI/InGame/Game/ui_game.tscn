@@ -37,17 +37,17 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 1
 
-[node name="PauseMenu" parent="." instance=ExtResource("4_ij2s5")]
-unique_name_in_owner = true
-visible = false
-layout_mode = 1
-
 [node name="HeroPickingScreen" parent="." instance=ExtResource("7_d48pm")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
 
 [node name="TransitionScreen" parent="." instance=ExtResource("8_qmks4")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="PauseMenu" parent="." instance=ExtResource("4_ij2s5")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1

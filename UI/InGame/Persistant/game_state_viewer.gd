@@ -11,6 +11,7 @@ const MAIN_GAME_STATE_TEXT: Dictionary [Game.GameState, String] = {
 	Game.GameState.FIGHTING_ACCELERATED: "FIGHTING PHASE - Accelerated",
 	Game.GameState.FIGHTING_CELEBRATING: "FIGHTING PHASE - Celebrating",
 	Game.GameState.FIGHTING_FINISHED: "FIGHTING PHASE - Finished",
+	Game.GameState.FINISHED: "FINISHED",
 	Game.GameState.UNDEF: "UNDEF",
 }
 
