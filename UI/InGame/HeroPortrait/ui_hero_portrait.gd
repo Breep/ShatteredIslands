@@ -1,7 +1,16 @@
+@tool
+
 class_name UIHeroPortrait
 extends Control
 
 # ============================== Configuration ==============================
+
+var _mirrored: bool
+@export var mirrored: bool:
+	get: return _mirrored
+	set(value):
+		_mirrored = value
+		_mirror_ui()
 
 @export_group("Effects Configuration")
 @export var _effect_duration: float = 0.4
@@ -13,6 +22,8 @@ extends Control
 @onready var _minimize_button: TextureButton = %MinimizeButton
 @onready var _hex_portrait_button: HexButton = %HexPortraitButton
 
+@onready var _main_texture_rect: TextureRect = %MainTextureRect
+
 # ============================== Private variables ==============================
 
 var _is_active: bool = false
@@ -22,9 +33,11 @@ var _player: Player
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	_minimize_button.hide()
-	_ui_all_families_portrait.init_portait_families(GameManager.active_families)
-	_ui_all_families_portrait.family_selected.connect(_on_ui_all_families_portrait_family_selected)
+	_mirror_ui()
+	if not Engine.is_editor_hint():
+		_minimize_button.hide()
+		_ui_all_families_portrait.init_portait_families(GameManager.active_families)
+		_ui_all_families_portrait.family_selected.connect(_on_ui_all_families_portrait_family_selected)
 
 # ============================== Public functions ==============================
 
@@ -37,6 +50,15 @@ func update_content(player: Player) -> void:
 	_add_local_player_special_behaviour()
 
 # ============================== Private functions ==============================
+
+func _mirror_ui() -> void:
+	if not is_node_ready(): return
+	if _mirrored:
+		_main_texture_rect.flip_h = true
+		_ui_in_game_player_viewer.mirrored = true
+	else:
+		_main_texture_rect.flip_h = false
+		_ui_in_game_player_viewer.mirrored = false
 
 func _activate() -> void:
 	_ui_all_families_portrait.show_families()

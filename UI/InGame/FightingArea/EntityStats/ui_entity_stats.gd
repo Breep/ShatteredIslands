@@ -8,7 +8,7 @@ var _mirrored: bool
 	get: return _mirrored
 	set(value):
 		_mirrored = value
-		_mirror_ui(_mirrored)
+		_mirror_ui()
 
 # ============================== Local Nodes ==============================
 
@@ -30,8 +30,9 @@ var _entity: Entity
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	_mirror_ui(_mirrored)
-	_make_unique()
+	_mirror_ui()
+	if not Engine.is_editor_hint():
+		_make_unique()
 
 # ============================== Public functions ==============================
 
@@ -97,12 +98,12 @@ func _update_layout() -> void:
 			_player_name_label.text = character.name
 	else:
 		_player_name_label.text = _entity.name
-	_mirror_ui(_mirrored)
+	_mirror_ui()
 
 
-func _mirror_ui(is_mirrored: bool) -> void:
+func _mirror_ui() -> void:
 	if not is_node_ready(): return
-	if is_mirrored:
+	if _mirrored:
 		_player_name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 		_player_name_label.text = _player_name_label.text.trim_prefix(" ").trim_suffix(" ") # TODO REMOVE this (Text clipping with current font)
 		_player_name_label.text = _player_name_label.text + " "

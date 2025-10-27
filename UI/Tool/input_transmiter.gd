@@ -26,6 +26,7 @@ func _input(event: InputEvent) -> void:
 
 	var inside := Rect2(Vector2.ZERO, size).has_point(local_mouse)
 	var uv := (local_mouse - draw_rect.position) / draw_rect.size
+	if flip_h: uv.x = 1.0 - uv.x
 	var vp_pos := uv * tex_px_size
 
 	var e := event.duplicate()

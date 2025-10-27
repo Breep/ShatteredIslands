@@ -26,7 +26,8 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_7ey5r")
 
-[node name="TextureRect" type="TextureRect" parent="." node_paths=PackedStringArray("viewport")]
+[node name="MainTextureRect" type="TextureRect" parent="." node_paths=PackedStringArray("viewport")]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
