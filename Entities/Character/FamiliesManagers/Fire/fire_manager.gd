@@ -29,7 +29,6 @@ func start() -> void:
 
 
 func stop() -> void:
-	_owner.stats.ignite_stacks = 0
 	for timer in _optional_timers:
 		timer.queue_free()
 	_optional_timers.clear()

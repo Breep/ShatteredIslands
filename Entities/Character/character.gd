@@ -83,6 +83,9 @@ var _fighting_state: FightingState = FightingState.UNDEF
 func apply_cards_upgrade(deck: PlayerDeck) -> void:
 	if not is_node_ready(): return
 	base_stats.reset_from_hero(_hero_3D.hero, player.lvl)
+	stats.armor_stacks = 0
+	stats.ignite_stacks = 0
+	stats.poison_stacks = 0
 	for card in deck.get_active_deck():
 		card.player_upgrade.apply(families_stats, card.lvl)
 	_attack_manager.apply_stats_modifiers()
@@ -161,7 +164,6 @@ func take_heal(heal_amount: int, source: Character = null) -> void:
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	if Engine.is_editor_hint(): return
 	target_module = _character_logic.target_module
 	
 	if owner_player_id != 0:
@@ -207,11 +209,8 @@ func _reset() -> void:
 
 func _update_hero() -> void:
 	if not is_node_ready(): return
-	print("DEBUG - Updating HERO")
 	if _hero_3D != null: 
-		print("DEBUG - Deleting HERO")
 		_hero_3D.queue_free()
-	print("DEBUG - Changing HERO")
 	_hero_3D = _HEROES_3D[hero_id].instantiate()
 	_hero_3D.character_owner = self
 	_collision_shape.shape = _hero_3D.collision_shape.shape.duplicate() # Update Collider

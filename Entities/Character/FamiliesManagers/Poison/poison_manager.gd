@@ -29,7 +29,6 @@ func start() -> void:
 func stop() -> void:
 	for spell in _optional_spells:
 		spell.queue_free()
-	_owner.stats.poison_stacks = 0
 	_poison_tick_timer.stop()
 	_clear_optional_timers()
 

@@ -64,6 +64,8 @@ func _disconnect_old_signals() -> void:
 		_entity.damage_taken.disconnect(_on_entity_damage_taken)
 	if _entity.heal_taken.is_connected(_on_entity_heal_taken):
 		_entity.heal_taken.disconnect(_on_entity_heal_taken)
+	if _entity.stack_taken.is_connected(_on_entity_stack_taken):
+		_entity.stack_taken.disconnect(_on_entity_stack_taken)
 
 
 func _connect_new_signals() -> void:
