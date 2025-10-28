@@ -9,14 +9,18 @@ extends Control
 @onready var _ui_picking_screen: UIHeroPickingScreen = %HeroPickingScreen
 @onready var _ui_result: UIResult = %Result
 @onready var _ui_transition_screen: UITransitionScreen = %TransitionScreen
+@onready var _ui_persistant: UIPersistant = %Persistant
 
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
+	if multiplayer.is_server() and GameManager.game_type != GameManager.GameType.SOLO:
+		queue_free()
 	Events.local_player_is_dead.connect(_on_events_local_player_is_dead)
 	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 	Events.scene_switched.connect(_on_events_scene_switched)
-	
+	_ui_buying_area.hide()
+	_ui_persistant.hide()
 
 # ============================== Public functions ==============================
 
@@ -31,6 +35,11 @@ func _on_events_local_player_is_dead() -> void:
 
 func _on_game_manager_game_state_changed(game_state: Game.GameState) -> void:
 	match game_state:
+		Game.GameState.STARTING:
+			_ui_buying_area.hide()
+			_ui_persistant.hide()
+		Game.GameState.INITIATING_NEW_ROUND:
+			_ui_persistant.show()
 		Game.GameState.FIGHTING_FINISHED:
 			_ui_transition_screen.start_transition(GameManager.game_rules.duration_fighting_finished * 2)
 		Game.GameState.FINISHED:

@@ -83,7 +83,6 @@ func _on_lock_hero_button_pressed() -> void:
 		var hero_portrait_button: UIHeroPortraitButton = child
 		if hero_portrait_button.hero == _selected_hero && hero_portrait_button.disabled:
 			return
-	_lock_hero_button.disabled = true
 	hero_locked.emit(_selected_hero)
 
 

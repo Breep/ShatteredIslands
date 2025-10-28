@@ -6,7 +6,6 @@ var _was_inside := false
 
 func _ready() -> void:
 	set_process_input(true)
-	mouse_filter = Control.MOUSE_FILTER_STOP
 	connect("mouse_exited", Callable(self, "_on_mouse_exited"))
 
 func _input(event: InputEvent) -> void:

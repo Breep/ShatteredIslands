@@ -158,6 +158,7 @@ mouse_filter = 2
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 
 [node name="UIGame" parent="UI" instance=ExtResource("9_kul4i")]
 layout_mode = 1
