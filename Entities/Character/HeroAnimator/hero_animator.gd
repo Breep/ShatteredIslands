@@ -3,6 +3,16 @@ extends Node
 
 @export var _animation_tree: AnimationTree
 
+enum AnimationType {
+	TPOSE,
+	SIT_IDLE,
+	STAND_IDLE,
+	AUTO_ATTACK,
+	ULTIMATE,
+	DEATH,
+	DANCE
+}
+
 var _character_owner: Character
 var character_owner: Character:
 	get: return _character_owner

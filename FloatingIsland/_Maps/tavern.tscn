@@ -39261,9 +39261,9 @@ metadata/extras = {
 
 [node name="SM_Item_Crystal_05" type="MeshInstance3D" parent="Voyante"]
 transform = Transform3D(0.0325563, 0, 0, 0, 0, -0.0325563, 0, 0.0325563, 0, -10.1004, 0.366085, -7.85107)
+visible = false
 material_override = ExtResource("9_ur5cx")
 mesh = SubResource("ArrayMesh_m3d1l")
-skeleton = NodePath("")
 metadata/extras = {
 "currentUVSet": "map1",
 "gflow": {

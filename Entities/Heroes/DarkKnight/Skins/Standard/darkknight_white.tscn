@@ -5098,7 +5098,7 @@ skin = SubResource("Skin_42n4r")
 mesh = SubResource("ArrayMesh_y8hpy")
 skin = SubResource("Skin_42n4r")
 
-[node name="Plane_018" type="MeshInstance3D" parent="rig/Skeleton3D"]
+[node name="Weapons" type="MeshInstance3D" parent="rig/Skeleton3D"]
 mesh = SubResource("ArrayMesh_tfppa")
 skin = SubResource("Skin_42n4r")
 
