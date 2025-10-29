@@ -27,7 +27,15 @@ var _mirrored: bool
 # ============================== Private variables ==============================
 
 var _is_active: bool = false
-var _panel_minimized: bool = false
+var __panel_minimized: bool = false
+var _panel_minimized: bool = false:
+	get: return __panel_minimized
+	set(value):
+		__panel_minimized = value
+		if __panel_minimized:
+			mouse_filter = Control.MOUSE_FILTER_IGNORE
+		else:
+			mouse_filter = Control.MOUSE_FILTER_STOP
 var _player: Player
 
 # ============================== Node base functions ==============================
