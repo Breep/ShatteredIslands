@@ -3,15 +3,28 @@ extends Node
 
 @export var _animation_tree: AnimationTree
 
-enum AnimationType {
-	TPOSE,
-	SIT_IDLE,
-	STAND_IDLE,
-	AUTO_ATTACK,
-	ULTIMATE,
-	DEATH,
-	DANCE
-}
+#region AnimatorTree parameters
+const PARAM_TRANSITION_GLOBAL: String = "parameters/transition_global/transition_request"
+
+const PARAM_TRANSITION_FIGHTING: String = "parameters/transition_fighting/transition_request"
+
+const PARAM_SCALE_IDLE: String = "parameters/scale_idle/scale"
+const PARAM_SCALE_IDLE_VAR: String = "parameters/scale_idle_var/scale"
+const PARAM_ONE_SHOT_IDLE: String = "parameters/one_shot_idle/request"
+
+const PARAM_SCALE_DANCE: String = "parameters/scale_dance/scale"
+const PARAM_SCALE_DIE: String = "parameters/scale_die/scale"
+
+const PARAM_SCALE_ATTACK_LEFT: String = "parameters/scale_attack_left/scale"
+const PARAM_SCALE_ATTACK_RIGHT: String = "parameters/scale_attack_right/scale"
+const PARAM_ONE_SHOT_ATTACK: String = "parameters/one_shot_attack/request"
+const PARAM_BLEND_ATTACK: String = "parameters/blend_attack/blend_amount"
+
+const PARAM_SCALE_ULTIMATE: String = "parameters/scale_ultimate/scale"
+const PARAM_ONE_SHOT_ULTIMATE: String = "parameters/one_shot_ultimate/request"
+
+const PARAM_ONE_SHOT_SITTING: String = "parameters/one_shot_sitting/request"
+#endregion
 
 var _character_owner: Character
 var character_owner: Character:
@@ -62,3 +75,20 @@ func _on_game_manager_game_stated_changed(game_state: Game.GameState) -> void:
 
 func _on_character_owner_fight_is_won() -> void:
 	_animation_tree.set("parameters/Transition/transition_request", "Dance")
+
+
+
+func _anim_attack() -> void:
+	pass
+
+
+func _anim_dance() -> void:
+	pass
+
+
+func _anim_die() -> void:
+	pass
+
+
+func _anim_idle() -> void:
+	pass
