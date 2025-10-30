@@ -2,11 +2,18 @@ class_name HeroAnimator
 extends Node
 
 @export var _animation_tree: AnimationTree
+@export var _weapons_node: Node3D
 
 #region AnimatorTree parameters
 const PARAM_TRANSITION_GLOBAL: String = "parameters/transition_global/transition_request"
+const VALUE_TRANSITION_GLOBAL_TPOSE: String = "TPOSE"
+const VALUE_TRANSITION_GLOBAL_SITTING: String = "Sitting"
+const VALUE_TRANSITION_GLOBAL_FIGHTING: String = "Fighting"
 
 const PARAM_TRANSITION_FIGHTING: String = "parameters/transition_fighting/transition_request"
+const VALUE_TRANSITION_FIGHTING_IDLE: String = "Idle"
+const VALUE_TRANSITION_FIGHTING_DANCE: String = "Dance"
+const VALUE_TRANSITION_FIGHTING_DIE: String = "Die"
 
 const PARAM_SCALE_IDLE: String = "parameters/scale_idle/scale"
 const PARAM_SCALE_IDLE_VAR: String = "parameters/scale_idle_var/scale"
@@ -26,6 +33,9 @@ const PARAM_ONE_SHOT_ULTIMATE: String = "parameters/one_shot_ultimate/request"
 const PARAM_ONE_SHOT_SITTING: String = "parameters/one_shot_sitting/request"
 #endregion
 
+@onready var _rng := RandomNumberGenerator.new()
+@onready var _idle_variation_timer := Timer.new()
+
 var _character_owner: Character
 var character_owner: Character:
 	get: return _character_owner
@@ -44,6 +54,11 @@ func _ready() -> void:
 	
 	_character_owner.fighting_state_changed.connect(_on_character_owner_fighting_state_changed)
 	GameManager.game_state_changed.connect(_on_game_manager_game_stated_changed)
+	_rng.randomize()
+	add_child(_idle_variation_timer)
+	_idle_variation_timer.timeout.connect(_on_idle_variation_timer_timeout)
+	_idle_variation_timer.autostart = false
+	_idle_variation_timer.one_shot = true
 
 
 func _process(_delta: float) -> void:
@@ -57,7 +72,7 @@ func _process(_delta: float) -> void:
 func _on_character_owner_fighting_state_changed(new_state: Character.FightingState) -> void:
 	match new_state:
 		Character.FightingState.POSITIONING:
-			_animation_tree.set("parameters/Transition/transition_request", "Idle")
+			pass
 		Character.FightingState.FIGHTING:
 			_is_fighting = true
 		Character.FightingState.CELEBRATING:
@@ -65,16 +80,26 @@ func _on_character_owner_fighting_state_changed(new_state: Character.FightingSta
 
 
 func _on_character_owner_dead(_self_ref: Entity) -> void:
-	_animation_tree.set("parameters/Transition/transition_request", "Die")
+	_animation_tree.set(PARAM_TRANSITION_FIGHTING, VALUE_TRANSITION_FIGHTING_DIE)
 
 
 func _on_game_manager_game_stated_changed(game_state: Game.GameState) -> void:
-	if game_state == Game.GameState.BUYING:
-		_animation_tree.set("parameters/Transition/transition_request", "Idle")
+	match game_state:
+		Game.GameState.UNDEF:
+			_animation_tree.set(PARAM_TRANSITION_GLOBAL, VALUE_TRANSITION_GLOBAL_TPOSE)
+		Game.GameState.BUYING:
+			_animation_tree.set(PARAM_TRANSITION_GLOBAL, VALUE_TRANSITION_GLOBAL_SITTING)
+			_start_buying_area_animation()
+			_weapons_node.hide()
+		Game.GameState.FIGHTING_POSITIONING:
+			_idle_variation_timer.stop()
+			_animation_tree.set(PARAM_TRANSITION_GLOBAL, VALUE_TRANSITION_GLOBAL_FIGHTING)
+			_animation_tree.set(PARAM_TRANSITION_FIGHTING, VALUE_TRANSITION_FIGHTING_IDLE)
+			_weapons_node.show()
 
 
 func _on_character_owner_fight_is_won() -> void:
-	_animation_tree.set("parameters/Transition/transition_request", "Dance")
+	_animation_tree.set(PARAM_TRANSITION_FIGHTING, VALUE_TRANSITION_FIGHTING_DANCE)
 
 
 
@@ -90,5 +115,18 @@ func _anim_die() -> void:
 	pass
 
 
-func _anim_idle() -> void:
-	pass
+func _start_buying_area_animation() -> void:
+	_idle_variation_timer.wait_time = _rng.randf_range(5.0, 15.0)
+	_idle_variation_timer.start()
+
+
+
+func _on_idle_variation_timer_timeout() -> void:
+	_animation_tree.set("parameters/one_shot_sitting/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+	_start_buying_area_animation()
+
+
+
+
+
+ 

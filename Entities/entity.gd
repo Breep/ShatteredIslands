@@ -27,6 +27,9 @@ signal stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: in
 func signal_stack_taken(stack_type: Utils.StackType, stack_number: int) -> void:
 	stack_taken.emit(self, stack_type, stack_number)
 
+signal auto_attack_started()
+
+
 # ============================== Public variables ==============================
 
 var _is_dead: bool = false
