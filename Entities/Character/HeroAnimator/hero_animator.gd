@@ -136,7 +136,6 @@ func _on_idle_variation_timer_timeout() -> void:
 
 
 func _on_hero_animation_player_attack_done() -> void:
-	print("HELLO THERE")
 	_character_owner.anim_events_manager.attack_hit_frame.emit()
 
 
