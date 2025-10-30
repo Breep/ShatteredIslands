@@ -138,6 +138,7 @@ func projectile_attack(target: Character, projectile_type: Projectile.Projectile
 func _on_anim_events_manager_attack_hit_frame() -> void:
 	if _pending_attacks.is_empty(): return
 	var attack_cmd: AttackCommand = _pending_attacks.pop_front()
+	if !is_instance_valid(attack_cmd.target) or attack_cmd.target.is_queued_for_deletion(): return
 	_action_module.projectile_attack(attack_cmd.target, attack_cmd.projectile_type, attack_cmd.spawn_node, attack_cmd.stats)
 
 func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary = {}) -> void:
