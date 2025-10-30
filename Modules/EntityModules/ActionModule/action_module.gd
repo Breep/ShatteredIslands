@@ -53,7 +53,7 @@ func direct_attack_percent(target: Character, damage_percent: float, damage_type
 
 
 # Create a projectile to attack the target - Apply cards damages multiplier if there are some
-func projectile_attack(target: Character, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
+func build_projectile_attack(target: Character, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> AttackCommand:
 	if not multiplayer.is_server(): return
 	if target == null: return
 	var multiplier = _get_damage_multipliers()
@@ -62,7 +62,11 @@ func projectile_attack(target: Character, projectile_type: Projectile.Projectile
 	projectile_stats.physical_damage_percent *= multiplier["physical"]
 	projectile_stats.magical_damage_flat *= multiplier["magical"]
 	projectile_stats.magical_damage_percent *= multiplier["magical"]
-	_spawn_projectile(target, projectile_type, projectile_spawn, projectile_stats)
+	return AttackCommand.new().setup(target, projectile_type, projectile_spawn, projectile_stats)
+
+
+func projectile_attack(target: Character, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
+	_spawn_manager.spawn_projectile(_owner, target, projectile_type, projectile_spawn, projectile_stats)
 
 
 func _get_damage_multipliers() -> Dictionary:

@@ -68,8 +68,8 @@ func _kick_entity(entity: Entity) -> void:
 		entity.spell_casted.disconnect(_on_entity_spell_casted)
 	if entity.stack_taken.is_connected(_on_entity_stack_taken):
 			entity.stack_taken.disconnect(_on_entity_stack_taken)
-	entities.erase(entity)
-	if _characters.has(entity.id): _characters.erase(entity)
+	entities.erase(entity.id)
+	if _characters.has(entity.id): _characters.erase(entity.id)
 
 # ============================== Callbacks ==============================
 

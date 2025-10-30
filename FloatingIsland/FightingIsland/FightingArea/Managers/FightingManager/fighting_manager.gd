@@ -114,6 +114,10 @@ func _stop_fighting_manager() -> void:
 		var character: Character = member
 		if PlayerManager.players.has(character.owner_player_id):
 			Events.signal_player_won_a_fight(PlayerManager.players[character.owner_player_id])
+	for member in _characters_dictionary[winner_teams_order[0]]:
+		var character: Character = member
+		if PlayerManager.players.has(character.owner_player_id):
+			Events.signal_player_lost_a_fight(PlayerManager.players[character.owner_player_id])
 	fight_is_over.emit(self, winner_teams_order)
 	_cleanup()
 

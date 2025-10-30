@@ -9,8 +9,6 @@ signal target_changed(new_target: Entity)
 # ============================== Export variables ==============================
 
 @export var _projectile_spawn: SpawnPoint
-@export var _attack_manager: AttackManager
-@export var _auto_attack_modifier_registry: AutoAttackModifierRegistry
 
 # ============================== Public variables ==============================
 
@@ -92,7 +90,7 @@ func _consume_modifiers(projectile_stats: ProjectileStats) -> void:
 			aa_modifier.on_attack_visual_callback.call({AutoAttackModifier.VarType.VISUAL_POS:_projectile_spawn.global_position})
 		projectile_stats.on_hit_logic_callbacks.append(aa_modifier.on_hit_logic_callback)
 		projectile_stats.on_hit_visual_callbacks.append(aa_modifier.on_hit_visual_callback)
-	projectile_stats.physical_damage_flat += add
+	projectile_stats.physical_damage_flat += int(add)
 	projectile_stats.physical_damage_flat *= (1 + mul)
 
 # ============================== Callbacks functions ==============================

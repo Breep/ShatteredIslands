@@ -27,7 +27,9 @@ signal stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: in
 func signal_stack_taken(stack_type: Utils.StackType, stack_number: int) -> void:
 	stack_taken.emit(self, stack_type, stack_number)
 
-signal auto_attack_started()
+signal auto_attack_started(is_critical: bool)
+func signal_auto_attack_started(is_critical: bool) -> void:
+	auto_attack_started.emit(is_critical)
 
 
 # ============================== Public variables ==============================

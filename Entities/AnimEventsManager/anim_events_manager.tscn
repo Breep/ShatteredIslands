@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b64wu2s6lpcv7"]
+
+[ext_resource type="Script" uid="uid://byca855e1tmny" path="res://Entities/AnimEventsManager/anim_events_manager.gd" id="1_ttl3w"]
+
+[node name="AnimEventsManager" type="Node"]
+script = ExtResource("1_ttl3w")

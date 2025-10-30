@@ -11,8 +11,10 @@ const _HEROES_3D: Dictionary[Hero.HeroId, PackedScene] = {
 # ============================== Signal ==============================
 
 signal fight_is_won()
+signal fight_is_lost()
 signal aa_done()
 #signal fight_is_lost()
+signal ultimate_casted()
 
 # ============================== Enums ==============================
 
@@ -56,6 +58,7 @@ var _hero_id := Hero.HeroId.UNDEF
 @export var _collision_shape: CollisionShape3D
 @export var _interact_module: InteractModule
 @export var _action_module: ActionModule
+@export var anim_events_manager: AnimEventsManager
 
 @export_group("Stats")
 @export var families_stats: FamiliesStats
@@ -125,13 +128,23 @@ func direct_attack(target: Character, damage: int, damage_type: Utils.DamageType
 func direct_attack_percent(target: Character, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier) -> void:
 	_action_module.direct_attack_percent(target, damage_percent, damage_type, percent_modifier)
 
+var _pending_attacks: Array[AttackCommand]
 func projectile_attack(target: Character, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
-	_action_module.projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
+	var attack_cmd: AttackCommand = _action_module.build_projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
+	if attack_cmd == null: return
+	_pending_attacks.append(attack_cmd)
+	auto_attack_started.emit(projectile_stats.is_critic)
+
+func _on_anim_events_manager_attack_hit_frame() -> void:
+	if _pending_attacks.is_empty(): return
+	var attack_cmd: AttackCommand = _pending_attacks.pop_front()
+	_action_module.projectile_attack(attack_cmd.target, attack_cmd.projectile_type, attack_cmd.spawn_node, attack_cmd.stats)
 
 func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary = {}) -> void:
 	_action_module.cast_spell(target, spell_type, spell_modifier)
 
 func cast_ultimate() -> void:
+	ultimate_casted.emit()
 	_hero_3D.cast_ultimate()
 
 func heal(target: Character, heal_amount: int) -> void:
@@ -182,6 +195,7 @@ func _ready() -> void:
 	
 	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 	Events.player_won_a_fight.connect(_on_events_player_won_a_fight)
+	Events.player_lost_a_fight.connect(_on_events_player_lost_a_fight)
 	Events.entity_cliked.connect(_on_events_entity_clicked)
 	
 	_update_hero()
@@ -200,6 +214,8 @@ func _ready() -> void:
 		_clickable_feedback.set_active()
 	else:
 		_clickable_feedback.color = Color.CRIMSON
+	
+	anim_events_manager.attack_hit_frame.connect(_on_anim_events_manager_attack_hit_frame)
 
 # ============================== Private functions ==============================
 
@@ -242,6 +258,7 @@ func _on_fighting_manager_fight_is_over(_fighting_manager, _winner_team) -> void
 func _on_game_manager_game_state_changed(game_state: Game.GameState) -> void:
 	match game_state:
 		Game.GameState.BUYING:
+			_pending_attacks.clear()
 			_is_dead = false
 			_character_visual.hide()
 			if _turret != null: _turret.hide()
@@ -277,6 +294,11 @@ func _on_stats_mana_changed(new_mana: float) -> void:
 func _on_events_player_won_a_fight(winner: Player) -> void:
 	if winner == player:
 		fight_is_won.emit()
+
+
+func _on_events_player_lost_a_fight(looser: Player) -> void:
+	if looser == player:
+		fight_is_lost.emit()
 
 
 func _on_events_entity_clicked(entity: Entity) -> void:

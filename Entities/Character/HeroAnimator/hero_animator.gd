@@ -3,6 +3,7 @@ extends Node
 
 @export var _animation_tree: AnimationTree
 @export var _weapons_node: Node3D
+@export var _hero_animation_player: HeroAnimationPlayer
 
 #region AnimatorTree parameters
 const PARAM_TRANSITION_GLOBAL: String = "parameters/transition_global/transition_request"
@@ -34,7 +35,7 @@ const PARAM_ONE_SHOT_SITTING: String = "parameters/one_shot_sitting/request"
 #endregion
 
 @onready var _rng := RandomNumberGenerator.new()
-@onready var _idle_variation_timer := Timer.new()
+@onready var _idle_variation_timer: Timer = %IdleVariationTimer 
 
 var _character_owner: Character
 var character_owner: Character:
@@ -42,8 +43,6 @@ var character_owner: Character:
 	set(value):
 		if value == _character_owner: return
 		_character_owner = value
-		_character_owner.dead.connect(_on_character_owner_dead)
-		_character_owner.fight_is_won.connect(_on_character_owner_fight_is_won)
 
 var _is_fighting: bool = false
 
@@ -52,13 +51,19 @@ func _ready() -> void:
 		push_warning("HeroAnimator: No character owner")
 		return
 	
-	_character_owner.fighting_state_changed.connect(_on_character_owner_fighting_state_changed)
-	GameManager.game_state_changed.connect(_on_game_manager_game_stated_changed)
 	_rng.randomize()
-	add_child(_idle_variation_timer)
+	_character_owner.dead.connect(_on_character_owner_dead)
+	_character_owner.fight_is_won.connect(_on_character_owner_fight_is_won)
+	_character_owner.fight_is_lost.connect(_on_character_owner_fight_is_lost)
+	_character_owner.fighting_state_changed.connect(_on_character_owner_fighting_state_changed)
+	_character_owner.auto_attack_started.connect(_on_character_owner_auto_attack_started)
+	_character_owner.ultimate_casted.connect(_on_character_owner_ultimate_casted)
+	
+	GameManager.game_state_changed.connect(_on_game_manager_game_stated_changed)
+	
 	_idle_variation_timer.timeout.connect(_on_idle_variation_timer_timeout)
-	_idle_variation_timer.autostart = false
-	_idle_variation_timer.one_shot = true
+	
+	_hero_animation_player.attack_done.connect(_on_hero_animation_player_attack_done)
 
 
 func _process(_delta: float) -> void:
@@ -102,17 +107,21 @@ func _on_character_owner_fight_is_won() -> void:
 	_animation_tree.set(PARAM_TRANSITION_FIGHTING, VALUE_TRANSITION_FIGHTING_DANCE)
 
 
+func _on_character_owner_fight_is_lost() -> void:
+	_animation_tree.set(PARAM_TRANSITION_FIGHTING, VALUE_TRANSITION_FIGHTING_DIE)
 
-func _anim_attack() -> void:
-	pass
+func _on_character_owner_auto_attack_started(is_critical: bool) -> void:
+	var use_right_hand: bool = _rng.randf_range(0.0, 1.0) < 0.5
+	if use_right_hand: _animation_tree.set(PARAM_BLEND_ATTACK, 1.0)
+	else: _animation_tree.set(PARAM_BLEND_ATTACK, 0.0)
+	if is_critical: _animation_tree.set(PARAM_BLEND_ATTACK, 0.5)
+	_animation_tree.set(PARAM_SCALE_ATTACK_LEFT, 1.0 + character_owner.stats.attack_speed)
+	_animation_tree.set(PARAM_SCALE_ATTACK_RIGHT, 1.0 + character_owner.stats.attack_speed)
+	_animation_tree.set(PARAM_ONE_SHOT_ATTACK, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 
-func _anim_dance() -> void:
-	pass
-
-
-func _anim_die() -> void:
-	pass
+func _on_character_owner_ultimate_casted() -> void:
+	_animation_tree.set(PARAM_ONE_SHOT_ULTIMATE, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 
 func _start_buying_area_animation() -> void:
@@ -122,11 +131,13 @@ func _start_buying_area_animation() -> void:
 
 
 func _on_idle_variation_timer_timeout() -> void:
-	_animation_tree.set("parameters/one_shot_sitting/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+	_animation_tree.set(PARAM_ONE_SHOT_SITTING, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	_start_buying_area_animation()
 
 
-
+func _on_hero_animation_player_attack_done() -> void:
+	print("HELLO THERE")
+	_character_owner.anim_events_manager.attack_hit_frame.emit()
 
 
  
