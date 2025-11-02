@@ -40,8 +40,8 @@ func get_reduced_damage(damage: int) -> int:
 
 func _create_optional_timers() -> void:
 	# [PERIODICA AGARICUS]
-	if _poison_stats.periodica_agaricus_activated:
-		_optional_timers.append(Utils.create_perpetual_timer(self, _poison_stats.periodica_agaricus_period, _on_periodica_agaricus_timer_timeout, true))
+	if _poison_stats.poison_flask_activated:
+		_optional_timers.append(Utils.create_perpetual_timer(self, _poison_stats.poison_flask_period, _on_periodica_agaricus_timer_timeout, true))
 
 
 func _clear_optional_timers() -> void:
@@ -65,5 +65,5 @@ func _on_poison_tick_timer_timeout() -> void:
 func _on_periodica_agaricus_timer_timeout() -> void:
 	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
 	if target == null: return
-	var poison_stacks = _poison_stats.periodica_agaricus_stacks
+	var poison_stacks = _poison_stats.poison_flask_stacks
 	_action_module.inflict_condition_stacks(target, poison_stacks, Utils.StackType.POISON)

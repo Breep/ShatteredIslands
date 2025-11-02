@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://dvpdubk0btegx"]
 
 [ext_resource type="Texture2D" uid="uid://dkdco3c8kqapb" path="res://Data/Assets/Card/Portraits/Poison/card_portrait_poison_periodica_agaricus.png" id="1_pmpgx"]
-[ext_resource type="Script" uid="uid://1k2khgqbc78a" path="res://Card/Descriptions/Cards/Poison/Common/PoisonFlask/poison_periodica_agaricus.gd" id="2_ufl0f"]
+[ext_resource type="Script" uid="uid://1k2khgqbc78a" path="res://Card/Descriptions/Cards/Poison/Common/PoisonFlask/poison_poison_flask.gd" id="2_ufl0f"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="3_u0q3m"]
 
 [sub_resource type="Resource" id="Resource_ij4m6"]
