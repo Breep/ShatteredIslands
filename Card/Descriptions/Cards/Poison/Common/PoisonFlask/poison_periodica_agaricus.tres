@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://dvpdubk0btegx"]
+
+[ext_resource type="Texture2D" uid="uid://dkdco3c8kqapb" path="res://Data/Assets/Card/Portraits/Poison/card_portrait_poison_periodica_agaricus.png" id="1_pmpgx"]
+[ext_resource type="Script" uid="uid://1k2khgqbc78a" path="res://Card/Descriptions/Cards/Poison/Common/PoisonFlask/poison_periodica_agaricus.gd" id="2_ufl0f"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="3_u0q3m"]
+
+[sub_resource type="Resource" id="Resource_ij4m6"]
+script = ExtResource("2_ufl0f")
+_period = Array[float]([2.0, 1.8, 1.6, 1.4, 0.7])
+metadata/_custom_type_script = "uid://1k2khgqbc78a"
+
+[resource]
+script = ExtResource("3_u0q3m")
+name = "Periodica Agaricus"
+picture = ExtResource("1_pmpgx")
+family = 7
+player_upgrade = SubResource("Resource_ij4m6")
+lvl = 3
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Card" load_steps=4 format=3 uid="uid://c2ujt5gb1o3qi"]
+
+[ext_resource type="Script" uid="uid://cbgp1flwqecm1" path="res://Card/Descriptions/Cards/Poison/Rare/TideOfCorruption/poison_tide_of_corruption.gd" id="1_7654w"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_dphlq"]
+
+[sub_resource type="Resource" id="Resource_geh03"]
+script = ExtResource("1_7654w")
+metadata/_custom_type_script = "uid://cbgp1flwqecm1"
+
+[resource]
+script = ExtResource("1_dphlq")
+name = "Tide of corruption"
+family = 7
+player_upgrade = SubResource("Resource_geh03")
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

@@ -48,6 +48,7 @@ func _ready() -> void:
 #region Start/Stop Battle
 func _on_start_battle_pressed() -> void:
 	_character.fighting_state = Character.FightingState.POSITIONING
+	_character.fighting_state = Character.FightingState.FIGHTING
 
 
 func _on_end_battle_pressed() -> void:

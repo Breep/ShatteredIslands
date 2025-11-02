@@ -1,0 +1,2 @@
+class_name PoisonRustyDagger
+extends CharacterUpgrade
