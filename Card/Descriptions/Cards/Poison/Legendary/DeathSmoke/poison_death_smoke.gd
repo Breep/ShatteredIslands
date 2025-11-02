@@ -1,8 +1,8 @@
 class_name PoisonDeathSmoke
 extends CharacterUpgrade
 
-@export var _period: Array
-@export var _multiplayer: Array
+@export var _period: Array[float]
+@export var _multiplayer: Array[float]
 
 func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
 	if cardlvl < 1 or cardlvl > LEGENDARY_CARD_MAX_LEVEL:
