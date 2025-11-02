@@ -27,12 +27,13 @@ extends FamilyStats
 
 @export_subgroup("Antidote")
 @export var poison_antidote_activated: bool # True if the player has at least one of this card
-@export var poison_antidote_percent: int # % of poison damage reduction
+@export var poison_antidote_decrease: float # % of poison damage reduction
 
 @export_subgroup("Venomous Darts")
 @export var poison_venomous_darts_activated: bool # True if the player has at least one of this card
-@export var poison_venomous_darts_period: int # Time between 2 darts throw
-@export var poison_venomous_darts_multiplier: int # damage multiplier <poison stacks> * multiplier
+@export var poison_venomous_darts_period: float # Time between 2 darts throw
+@export var poison_venomous_darts_darts_number: int # Number of darts thrown
+@export var poison_venomous_darts_multiplier: float # damage multiplier <poison stacks> * multiplier
 #endregion
 
 #region Rare Cards

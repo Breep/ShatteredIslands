@@ -1,22 +1,20 @@
 class_name PoisonAntidote
 extends CharacterUpgrade
 
-@export var _poison_stacks: int = 1
-@export var _period: Array[float]
+@export var _damage_deacrease: Array[float]
 
 func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
-	if cardlvl < 1 or cardlvl > 5:
+	if cardlvl < 1 or cardlvl > COMMON_CARD_MAX_LEVEL:
 		printerr("Antidote: Wrong cardlvl: ", cardlvl)
 		return
 	
-	stats.poison.poison_flask_activated = true
-	stats.poison.poison_flask_stacks = _poison_stacks
-	stats.poison.poison_flask_period = _period[cardlvl - 1]
+	stats.poison.poison_antidote_activated = true
+	stats.poison.poison_antidote_decrease = _damage_deacrease[cardlvl - 1]
 
 
 func get_description(cardlvl: int) -> String:
-	if cardlvl < 1 or cardlvl > 5:
+	if cardlvl < 1 or cardlvl > COMMON_CARD_MAX_LEVEL:
 		printerr("Antidote: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]Inflict " + str(_poison_stacks) + CharacterUpgrade.POISON + " Stacks, every " + str(_period[cardlvl - 1]) + "[/center]"
+	return "Decrease [[POISON_DAMAGE]] received by " + str(_damage_deacrease) + "%"

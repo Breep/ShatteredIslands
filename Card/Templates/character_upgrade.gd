@@ -1,6 +1,11 @@
 class_name CharacterUpgrade
 extends Resource
 
+const LEGENDARY_CARD_MAX_LEVEL: int = 1
+const EPIC_CARD_MAX_LEVEL: int = 2
+const RARE_CARD_MAX_LEVEL: int = 3
+const COMMON_CARD_MAX_LEVEL: int = 5
+
 # Effets généraux
 const VULNERABILITY: String = "[url=vulnerability][color=#00008B][wave freq=2.0 amp=5.0]Vulnerability[/wave][/color][/url]" # Bleu foncé
 const ARMOR: String = "[url=armor][color=#8B4513][wave freq=2.0 amp=5.0]Armor[/wave][/color][/url]" # Marron
