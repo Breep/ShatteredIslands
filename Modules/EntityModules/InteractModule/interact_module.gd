@@ -5,6 +5,7 @@ extends Module
 @export var _defense_manager: DefenseManager
 @export var _life_manager: LifeManager
 @export var _fire_manager: FireManager
+@export var _poison_manager: PoisonManager
 
 # ============================== Node base functions ==============================
 
@@ -24,6 +25,7 @@ func take_damage(damage: int, damage_type: Utils.DamageType, is_critical: bool, 
 		if _defense_manager != null: damage = _defense_manager.get_reduced_damage_taken_from_mystical_shoulder(damage) # Reduce % of MAGIC damage
 		if _life_manager != null: damage = _life_manager.get_reduced_damage(damage) # Reduce % of ALL damage
 		if _fire_manager != null: damage = _fire_manager.get_reduced_damage(damage, damage_type) # Reduce % of MAGIC damage
+		if _poison_manager != null: damage = _poison_manager.get_reduced_damage(damage, damage_type)
 		damage_before_armor = damage
 		if _defense_manager != null: damage = _defense_manager.get_reduced_damage_taken_from_armor(damage, damage_type) # Reduce flat of PHYSIC AND MAGIC damage
 		if damage_before_armor - damage > 0:

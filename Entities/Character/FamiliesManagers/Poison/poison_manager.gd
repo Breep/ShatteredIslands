@@ -34,8 +34,11 @@ func stop() -> void:
 	_clear_optional_timers()
 
 
-func get_reduced_damage(damage: int) -> int:
-	return damage
+func get_reduced_damage(damage: int, damage_type: Utils.DamageType) -> int:
+	if not damage_type == Utils.DamageType.POISON: return damage
+	if not _poison_stats.poison_antidote_activated: return damage
+	var damage_reduction: int = int(float(damage) * _poison_stats.poison_antidote_decrease / 100.0)
+	return damage - damage_reduction
 
 # ============================== Private functions ==============================
 

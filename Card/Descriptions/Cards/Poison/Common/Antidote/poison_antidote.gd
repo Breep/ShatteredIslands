@@ -17,4 +17,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Antidote: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "Decrease [[POISON_DAMAGE]] received by " + str(_damage_deacrease) + "%"
+	return "Decrease [[POISON_DAMAGE]] received by " + str(_damage_deacrease[cardlvl - 1]) + "%"

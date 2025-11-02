@@ -61,7 +61,7 @@ func _on_body_entered(body: Node3D) -> void:
 		if magical_damage > 0:
 			target.take_damage(magical_damage, Utils.DamageType.MAGICAL, stats.is_critic, source)
 		
-		if stats.poison_stacks > 0: target.take_condition_stacks(stats.poison_stacks, Utils.StackType.POISON, source)
+		if stats.poison_stacks > 0: source.inflict_condition_stacks(target, stats.poison_stacks, Utils.StackType.POISON)
 		
 		if stats.is_bouncing:
 			target = source.target_module.get_closest_enemy_from(target) # Set new target to the closest character enemy to the source
