@@ -19,4 +19,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Rusty Dagger: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return str(_poison_stacks) + "% chance to inflict " + str(_poison_stacks[cardlvl - 1]) + " [[POISON_STACK]] when auto attacking"
+	return str(_chance[cardlvl - 1]) + "% chance to inflict " + str(_poison_stacks[cardlvl - 1]) + " [[POISON_STACK]] when auto attacking"

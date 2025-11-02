@@ -84,7 +84,6 @@ func _on_rusty_dagger_logic_callback(cb_vars: Dictionary) -> void:
 	var proj_stats: ProjectileStats = cb_vars[AutoAttackModifier.VarType.PROJECTILE_STATS]
 	if Utils.is_randomize_modifier_active(_poison_stats.poison_rusty_dagger_chance):
 		proj_stats.poison_stacks += _poison_stats.poison_rusty_dagger_stacks
-		print("PROJ STATS POISON : ", proj_stats.poison_stacks)
 
 
 
