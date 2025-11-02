@@ -23,6 +23,7 @@ func _ready() -> void:
 func start() -> void:
 	_lanch_optional_spells()
 	_create_optional_timers()
+	_add_attack_modifiers()
 	_poison_tick_timer.start()
 
 
@@ -37,6 +38,15 @@ func get_reduced_damage(damage: int) -> int:
 	return damage
 
 # ============================== Private functions ==============================
+
+func _add_attack_modifiers() -> void:
+	if _poison_stats.poison_rusty_dagger_activated:
+		var aa_modifier := AutoAttackModifier.new()
+		aa_modifier.id = "Rusty Dagger"
+		aa_modifier.tags = [AutoAttackModifier.TagType.CARD]
+		aa_modifier.on_attack_logic_callback = _on_rusty_dagger_logic_callback
+		aa_modifier.is_one_time_effect = false
+		_owner.auto_attack_modifier_registry.register_modifier(aa_modifier)
 
 func _create_optional_timers() -> void:
 	# [PERIODICA AGARICUS]
@@ -67,3 +77,29 @@ func _on_periodica_agaricus_timer_timeout() -> void:
 	if target == null: return
 	var poison_stacks = _poison_stats.poison_flask_stacks
 	_action_module.inflict_condition_stacks(target, poison_stacks, Utils.StackType.POISON)
+
+
+func _on_rusty_dagger_logic_callback(cb_vars: Dictionary) -> void:
+	if not cb_vars.has(AutoAttackModifier.VarType.PROJECTILE_STATS): return
+	var proj_stats: ProjectileStats = cb_vars[AutoAttackModifier.VarType.PROJECTILE_STATS]
+	if Utils.is_randomize_modifier_active(_poison_stats.poison_rusty_dagger_chance):
+		proj_stats.poison_stacks += _poison_stats.poison_rusty_dagger_stacks
+		print("PROJ STATS POISON : ", proj_stats.poison_stacks)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

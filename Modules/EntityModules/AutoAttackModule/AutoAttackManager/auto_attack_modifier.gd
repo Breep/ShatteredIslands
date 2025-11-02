@@ -10,9 +10,10 @@ enum TagType {
 	EVENT
 }
 
-enum VarType {
+enum VarType { # Variable types of the callbacks dictionary
 	VISUAL_POS,
-	PHYSICAL_DAMAGE
+	PHYSICAL_DAMAGE,
+	PROJECTILE_STATS
 }
 
 # ============================== Public variables ==============================

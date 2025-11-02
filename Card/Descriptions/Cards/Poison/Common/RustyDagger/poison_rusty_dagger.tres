@@ -16,4 +16,5 @@ name = "Rusty Dagger"
 picture = ExtResource("1_s4ad2")
 family = 7
 player_upgrade = SubResource("Resource_he4gq")
+lvl = 5
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"
