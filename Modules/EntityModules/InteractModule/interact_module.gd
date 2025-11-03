@@ -21,11 +21,14 @@ func _ready() -> void:
 func take_damage(damage: int, damage_type: Utils.DamageType, is_critical: bool, source: Entity = null, attack_type: Utils.AttackType = Utils.AttackType.UNDEF) -> int:
 	var damage_before_armor: int = 0
 	if multiplayer.is_server():
-		if _storm_manager != null: damage = _storm_manager.get_increased_critical_damage(damage, is_critical) # Increase ALL critical damage
-		if _defense_manager != null: damage = _defense_manager.get_reduced_damage_taken_from_mystical_shoulder(damage) # Reduce % of MAGIC damage
-		if _life_manager != null: damage = _life_manager.get_reduced_damage(damage) # Reduce % of ALL damage
-		if _fire_manager != null: damage = _fire_manager.get_reduced_damage(damage, damage_type) # Reduce % of MAGIC damage
-		if _poison_manager != null: damage = _poison_manager.get_reduced_damage(damage, damage_type)
+		var phy_res: float = _owner.stats.all_resistance + _owner.stats.physical_resistance
+		var mag_res: float = _owner.stats.all_resistance + _owner.stats.magical_resistance
+		var poi_res: float = _owner.stats.all_resistance + _owner.stats.poison_resistance
+		match damage_type:
+			Utils.DamageType.PHYSICAL: damage = int((1.0 - phy_res / 100.0) * float(damage))
+			Utils.DamageType.MAGICAL: damage = int((1.0 - mag_res / 100.0) * float(damage))
+			Utils.DamageType.POISON: damage = int((1.0 - poi_res / 100.0) * float(damage))
+		
 		damage_before_armor = damage
 		if _defense_manager != null: damage = _defense_manager.get_reduced_damage_taken_from_armor(damage, damage_type) # Reduce flat of PHYSIC AND MAGIC damage
 		if damage_before_armor - damage > 0:

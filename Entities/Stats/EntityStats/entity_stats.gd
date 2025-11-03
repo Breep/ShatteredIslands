@@ -223,7 +223,7 @@ func get_stat(stat_type: StatType) -> float:
 		EntityStats.StatType.AA_SPEED: return _attack_speed
 		EntityStats.StatType.CRIT_CHANCE: return _physical_critical_chance
 		EntityStats.StatType.CRIT_MULT: return _physical_critical_multiplier
-		EntityStats.StatType.PHYSICAL_RESISTANCE: return _physical_critical_chance
+		EntityStats.StatType.PHYSICAL_RESISTANCE: return _physical_resistance
 		EntityStats.StatType.MAGICAL_RESISTANCE: return _magical_resistance
 		EntityStats.StatType.POISON_RESISTANCE: return _poison_resistance
 		EntityStats.StatType.ALL_RESISTANCE: return _all_resistance
@@ -243,7 +243,7 @@ func update_stat(stat_type: StatType, value: float) -> void:
 		EntityStats.StatType.AA_SPEED: attack_speed = value
 		EntityStats.StatType.CRIT_CHANCE: physical_critical_chance = value
 		EntityStats.StatType.CRIT_MULT: physical_critical_multiplier = value
-		EntityStats.StatType.PHYSICAL_RESISTANCE: _physical_critical_chance = value
+		EntityStats.StatType.PHYSICAL_RESISTANCE: _physical_resistance = value
 		EntityStats.StatType.MAGICAL_RESISTANCE: _magical_resistance = value
 		EntityStats.StatType.POISON_RESISTANCE: _poison_resistance = value
 		EntityStats.StatType.ALL_RESISTANCE: _all_resistance = value

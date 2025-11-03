@@ -89,6 +89,7 @@ func apply_cards_upgrade(deck: PlayerDeck) -> void:
 	stats.armor_stacks = 0
 	stats.ignite_stacks = 0
 	stats.poison_stacks = 0
+	stats.regen_stacks = 0
 	for card in deck.get_active_deck():
 		card.player_upgrade.apply(families_stats, card.lvl)
 	_attack_manager.apply_stats_modifiers()

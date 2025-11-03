@@ -24,6 +24,7 @@ func start() -> void:
 	_lanch_optional_spells()
 	_create_optional_timers()
 	_add_attack_modifiers()
+	_add_stat_modifiers()
 	_poison_tick_timer.start()
 
 
@@ -31,15 +32,9 @@ func stop() -> void:
 	for spell in _optional_spells:
 		spell.queue_free()
 	_poison_tick_timer.stop()
+	_clear_stat_modifiers()
 	_clear_attack_modifiers()
 	_clear_optional_timers()
-
-
-func get_reduced_damage(damage: int, damage_type: Utils.DamageType) -> int:
-	if not damage_type == Utils.DamageType.POISON: return damage
-	if not _poison_stats.poison_antidote_activated: return damage
-	var damage_reduction: int = int(float(damage) * _poison_stats.poison_antidote_decrease / 100.0)
-	return damage - damage_reduction
 
 
 func check_on_apply_poison_stack(target: Entity, stacks_number: int, stack_type: Utils.StackType) -> void:
@@ -60,6 +55,22 @@ func _add_attack_modifiers() -> void:
 		aa_modifier.on_attack_logic_callback = _on_rusty_dagger_logic_callback
 		aa_modifier.is_one_time_effect = false
 		_owner.auto_attack_modifier_registry.register_modifier(aa_modifier)
+
+func _add_stat_modifiers() -> void:
+	if _poison_stats.poison_antidote_activated:
+		var mod := StatModifier.new()
+		mod.calc_type = StatModifier.CalcType.ADD
+		mod.value = _poison_stats.poison_antidote_decrease
+		mod.stat_type = EntityStats.StatType.POISON_RESISTANCE
+		mod.id = "Antidote"
+		_owner.stats_manager.register_modifier(mod)
+
+func _clear_stat_modifiers() -> void:
+	if _poison_stats.poison_antidote_activated:
+		var mod := StatModifier.new()
+		mod.stat_type = EntityStats.StatType.POISON_RESISTANCE
+		mod.id = "Antidote"
+		_owner.stats_manager.unregister_modifier(mod)
 
 func _clear_attack_modifiers() -> void:
 	if _poison_stats.poison_rusty_dagger_activated:

@@ -6,9 +6,6 @@ extends CharacterBody3D
 signal dead(self_ref: Entity)
 func signal_death() -> void:
 	_is_dead = true
-	stats.armor_stacks = 0
-	stats.ignite_stacks = 0
-	stats.poison_stacks = 0
 	dead.emit(self)
 
 signal damage_taken(entity_ref: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool)
