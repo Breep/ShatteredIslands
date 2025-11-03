@@ -121,7 +121,7 @@ var poison_stacks: int:
 	set(value):
 		if value < 0: value = 0
 		if value == _poison_stacks: return
-		_poison_stacks = value
+		_poison_stacks = max(0, value)
 		poison_stacks_changed.emit(_poison_stacks)
 
 
@@ -132,7 +132,7 @@ var ignite_stacks: int:
 	set(value):
 		if value < 0: value = 0
 		if value == _ignite_stacks: return
-		_ignite_stacks = value
+		_ignite_stacks = max(0, value)
 		ignite_stacks_changed.emit(_ignite_stacks)
 
 
@@ -142,7 +142,7 @@ var armor_stacks: int:
 	get: return _armor_stacks
 	set(value):
 		if value == _armor_stacks: return
-		_armor_stacks = value
+		_armor_stacks = max(0, value)
 		armor_stacks_changed.emit(_armor_stacks)
 
 
@@ -152,7 +152,7 @@ var regen_stacks: int:
 	get: return _regen_stacks
 	set(value):
 		if value == _regen_stacks: return
-		_regen_stacks = value
+		_regen_stacks = max(0, value)
 		regen_stacks_changed.emit(_regen_stacks)
 #endregion
 

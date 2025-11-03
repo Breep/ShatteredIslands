@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_mw1bv"]
 script = ExtResource("2_21bbd")
-_buff_stacks = Array[int]([5, 10, 15, 20, 30])
+_buff_stacks = Array[int]([10, 20, 40])
 metadata/_custom_type_script = "uid://dr4iawe3yvtxg"
 
 [resource]
@@ -15,4 +15,5 @@ name = "Corrosion"
 picture = ExtResource("1_2ey3a")
 family = 7
 player_upgrade = SubResource("Resource_mw1bv")
+lvl = 3
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

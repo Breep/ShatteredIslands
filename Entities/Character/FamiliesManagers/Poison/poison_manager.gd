@@ -44,6 +44,11 @@ func check_on_apply_poison_stack(target: Entity, stacks_number: int, stack_type:
 		_owner.inflict_condition_stacks(target, _poison_stats.poison_hot_pot_ignite_stacks, Utils.StackType.IGNITE)
 	if _poison_stats.poison_rotting_milk_activated and Utils.is_randomize_modifier_active(_poison_stats.poison_rotting_milk_chance):
 		_owner.inflict_condition_stacks(_owner, _poison_stats.poison_rotting_milk_regen_stacks, Utils.StackType.REGEN)
+	if _poison_stats.poison_corrosion_activated:
+		if Utils.rng.randi() % 2 == 0:
+			target.stats.armor_stacks -= _poison_stats.poison_corrosion_buff_stacks
+		else:
+			target.stats.regen_stacks -= _poison_stats.poison_corrosion_buff_stacks
 
 # ============================== Private functions ==============================
 
