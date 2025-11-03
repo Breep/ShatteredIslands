@@ -7,7 +7,6 @@
 [sub_resource type="Resource" id="Resource_wjj7k"]
 script = ExtResource("2_bvmea")
 _chance = Array[float]([10.0, 20.0, 30.0, 40.0, 80.0])
-_poison_stacks = Array[int]([1, 1, 1, 1, 1])
 _regen_stacks = Array[int]([5, 5, 5, 5, 5])
 metadata/_custom_type_script = "uid://ccvsci6tjvuuu"
 
@@ -17,4 +16,5 @@ name = "Rotting Milk"
 picture = ExtResource("1_ra12r")
 family = 7
 player_upgrade = SubResource("Resource_wjj7k")
+lvl = 5
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

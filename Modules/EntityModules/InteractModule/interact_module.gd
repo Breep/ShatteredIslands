@@ -63,6 +63,8 @@ func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, _sou
 			_owner.stats.ignite_stacks += stacks_number
 		Utils.StackType.ARMOR:
 			_owner.stats.armor_stacks += stacks_number
+		Utils.StackType.REGEN:
+			_owner.stats.regen_stacks += stacks_number
 
 # ===== Heal
 

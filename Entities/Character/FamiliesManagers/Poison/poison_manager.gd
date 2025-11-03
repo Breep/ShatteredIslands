@@ -45,9 +45,10 @@ func get_reduced_damage(damage: int, damage_type: Utils.DamageType) -> int:
 func check_on_apply_poison_stack(target: Entity, stacks_number: int, stack_type: Utils.StackType) -> void:
 	if stacks_number <= 0 or stack_type != Utils.StackType.POISON: return
 	if target == null or target.is_queued_for_deletion(): return
-	if _poison_stats.poison_hot_pot_activated:
-		if Utils.is_randomize_modifier_active(_poison_stats.poison_hot_pot_chance):
-			_owner.inflict_condition_stacks(target, _poison_stats.poison_hot_pot_ignite_stacks, Utils.StackType.IGNITE)
+	if _poison_stats.poison_hot_pot_activated and Utils.is_randomize_modifier_active(_poison_stats.poison_hot_pot_chance):
+		_owner.inflict_condition_stacks(target, _poison_stats.poison_hot_pot_ignite_stacks, Utils.StackType.IGNITE)
+	if _poison_stats.poison_rotting_milk_activated and Utils.is_randomize_modifier_active(_poison_stats.poison_rotting_milk_chance):
+		_owner.inflict_condition_stacks(_owner, _poison_stats.poison_rotting_milk_regen_stacks, Utils.StackType.REGEN)
 
 # ============================== Private functions ==============================
 

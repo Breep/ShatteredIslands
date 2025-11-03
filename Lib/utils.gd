@@ -19,6 +19,7 @@ enum StackType {
 	POISON,
 	ARMOR,
 	IGNITE,
+	REGEN
 }
 
 enum AttackType {
