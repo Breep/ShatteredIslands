@@ -17,4 +17,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Corrosion: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "Each time applying [[POISON_STACK]], remove " + str(_buff_stacks[cardlvl - 1]) + " on the target"
+	return "Each time applying [[POISON_STACK]], remove " + str(_buff_stacks[cardlvl - 1]) + " [[BUF_STACKS]] on the target"
