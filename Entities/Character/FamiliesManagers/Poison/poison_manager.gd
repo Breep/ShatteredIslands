@@ -89,6 +89,10 @@ func _create_optional_timers() -> void:
 	# [VENOMOUS DARTS]
 	if _poison_stats.poison_venomous_darts_activated:
 		_optional_timers.append(Utils.create_perpetual_timer(self, _poison_stats.poison_venomous_darts_period, _on_venomous_darts_timer_timeout, true))
+	
+	# [TIDE OF CORRUPTION]
+	if _poison_stats.poison_tide_of_corruption_activated:
+		_optional_timers.append(Utils.create_perpetual_timer(self, _poison_stats.poison_tide_of_corruption_period, _on_tide_of_corruption_timer_timeout, true))
 
 
 func _clear_optional_timers() -> void:
@@ -141,7 +145,15 @@ func _on_hit_venomous_logic_callback(cb_vars: Dictionary) -> void:
 	_owner.direct_attack(target, damage, Utils.DamageType.PHYSICAL)
 #endregion
 
-
+#region TIDE OF CORRUPTION
+func _on_tide_of_corruption_timer_timeout() -> void:
+	var targets: Array[Entity] = _owner.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ENEMIES)
+	if targets.is_empty(): return
+	var target_number: int = targets.size()
+	var poison_stacks: int = int(_poison_stats.poison_tide_of_corruption_multiplier * float(target_number))
+	for target in targets:
+		_owner.inflict_condition_stacks(target, poison_stacks, Utils.StackType.POISON)
+#endregion
 
 
 

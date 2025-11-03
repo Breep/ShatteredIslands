@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Family" load_steps=11 format=3 uid="uid://cqqln8j72uq1e"]
+[gd_resource type="Resource" script_class="Family" load_steps=12 format=3 uid="uid://cqqln8j72uq1e"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_aqx3a"]
 [ext_resource type="Resource" uid="uid://dvpdubk0btegx" path="res://Card/Descriptions/Cards/Poison/Common/PoisonFlask/poison_poison_flask.tres" id="2_nmeyg"]
@@ -10,10 +10,11 @@
 [ext_resource type="Resource" uid="uid://dtqhilutyn471" path="res://Card/Descriptions/Cards/Poison/Common/HotPot/poison_hot_pot.tres" id="6_fol86"]
 [ext_resource type="Resource" uid="uid://bj3e4jhk5i7ab" path="res://Card/Descriptions/Cards/Poison/Common/RottingMilk/poison_rotting_milk.tres" id="7_bl42u"]
 [ext_resource type="Resource" uid="uid://e4sl6p15d3rj" path="res://Card/Descriptions/Cards/Poison/Rare/Corrosion/poison_corrosion.tres" id="8_wa8bb"]
+[ext_resource type="Resource" uid="uid://c2ujt5gb1o3qi" path="res://Card/Descriptions/Cards/Poison/Rare/TideOfCorruption/poison_tide_of_corruption.tres" id="9_jpvhv"]
 
 [resource]
 script = ExtResource("2_tp2df")
-cards = Array[ExtResource("1_aqx3a")]([ExtResource("2_nmeyg"), ExtResource("3_bfw8n"), ExtResource("4_3glqm"), ExtResource("5_c68o4"), ExtResource("6_fol86"), ExtResource("7_bl42u"), ExtResource("8_wa8bb")])
+cards = Array[ExtResource("1_aqx3a")]([ExtResource("2_nmeyg"), ExtResource("3_bfw8n"), ExtResource("4_3glqm"), ExtResource("5_c68o4"), ExtResource("6_fol86"), ExtResource("7_bl42u"), ExtResource("8_wa8bb"), ExtResource("9_jpvhv")])
 icon = ExtResource("3_p8dmb")
 family_name = "Poison"
 family_type = 7
