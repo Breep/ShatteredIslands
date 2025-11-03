@@ -36,6 +36,7 @@ func spawn_projectile(source: Character, target: Character, projectile_type: Pro
 	projectile.target = target
 	projectile.battle_id = battle_id
 	projectile.id = _projectile_counter
+	projectile.projectile_type = projectile_type
 	
 	var modifiers: Array[Projectile.ProjectileEffect] = []
 	_fighting_area.signal_projectile_spawned(source, target, projectile_type, modifiers)

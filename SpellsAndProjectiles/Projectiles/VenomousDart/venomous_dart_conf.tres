@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ProjectileConf" load_steps=3 format=3 uid="uid://duesut4chtal"]
+
+[ext_resource type="Script" uid="uid://dad8gpwjaprib" path="res://SpellsAndProjectiles/Projectiles/projectile_conf_template.gd" id="1_yrimw"]
+[ext_resource type="PackedScene" uid="uid://cmmipw18epkmv" path="res://SpellsAndProjectiles/Projectiles/VenomousDart/venomous_dart_visual.tscn" id="2_g63ga"]
+
+[resource]
+script = ExtResource("1_yrimw")
+projectile_type = 1
+visual_scene = ExtResource("2_g63ga")
+trajectory_type = 2
+metadata/_custom_type_script = "uid://dad8gpwjaprib"

@@ -130,10 +130,13 @@ func direct_attack_percent(target: Character, damage_percent: float, damage_type
 
 var _pending_attacks: Array[AttackCommand]
 func projectile_attack(target: Character, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
-	var attack_cmd: AttackCommand = _action_module.build_projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
-	if attack_cmd == null: return
-	_pending_attacks.append(attack_cmd)
-	auto_attack_started.emit(projectile_stats.is_critic)
+	if projectile_type == Projectile.ProjectileType.AUTO_ATTACK:
+		var attack_cmd: AttackCommand = _action_module.build_projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
+		if attack_cmd == null: return
+		_pending_attacks.append(attack_cmd)
+		auto_attack_started.emit(projectile_stats.is_critic)
+	else:
+		_action_module.projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
 
 func _on_anim_events_manager_attack_hit_frame() -> void:
 	if _pending_attacks.is_empty(): return

@@ -13,7 +13,8 @@ enum TagType {
 enum VarType { # Variable types of the callbacks dictionary
 	VISUAL_POS,
 	PHYSICAL_DAMAGE,
-	PROJECTILE_STATS
+	PROJECTILE_STATS,
+	TARGET
 }
 
 # ============================== Public variables ==============================

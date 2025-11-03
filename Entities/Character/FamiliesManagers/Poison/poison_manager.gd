@@ -52,9 +52,13 @@ func _add_attack_modifiers() -> void:
 		_owner.auto_attack_modifier_registry.register_modifier(aa_modifier)
 
 func _create_optional_timers() -> void:
-	# [PERIODICA AGARICUS]
+	# [POISON FLASK]
 	if _poison_stats.poison_flask_activated:
 		_optional_timers.append(Utils.create_perpetual_timer(self, _poison_stats.poison_flask_period, _on_periodica_agaricus_timer_timeout, true))
+	
+	# [VENOMOUS DARTS]
+	if _poison_stats.poison_venomous_darts_activated:
+		_optional_timers.append(Utils.create_perpetual_timer(self, _poison_stats.poison_venomous_darts_period, _on_venomous_darts_timer_timeout, true))
 
 
 func _clear_optional_timers() -> void:
@@ -89,8 +93,23 @@ func _on_rusty_dagger_logic_callback(cb_vars: Dictionary) -> void:
 		proj_stats.poison_stacks += _poison_stats.poison_rusty_dagger_stacks
 
 
+#region VENOMOUS DARTS
+func _on_venomous_darts_timer_timeout() -> void:
+	for i in _poison_stats.poison_venomous_darts_darts_number:
+		var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
+		if target == null: return
+		var projectile_stats := ProjectileStats.new()
+		projectile_stats.on_hit_logic_callbacks.append(_on_hit_venomous_logic_callback)
+		_owner.projectile_attack(target, Projectile.ProjectileType.VENOMOUS_DART, _owner._turret._projectile_spawn_point, projectile_stats)
 
 
+func _on_hit_venomous_logic_callback(cb_vars: Dictionary) -> void:
+	if not cb_vars.has(AutoAttackModifier.VarType.TARGET): return
+	var target: Entity = cb_vars[AutoAttackModifier.VarType.TARGET]
+	if target == null or target.is_queued_for_deletion(): return
+	var damage := int(float(target.stats.poison_stacks) * _poison_stats.poison_venomous_darts_multiplier)
+	_owner.direct_attack(target, damage, Utils.DamageType.PHYSICAL)
+#endregion
 
 
 

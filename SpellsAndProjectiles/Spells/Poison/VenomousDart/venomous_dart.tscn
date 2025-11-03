@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dcesr500u8lov"]
-
-[ext_resource type="Script" uid="uid://btokma8cpc8mo" path="res://SpellsAndProjectiles/Spells/Poison/VenomousDart/venomous_dart.gd" id="1_er4l8"]
-
-[node name="VenomousDart" type="Node3D"]
-script = ExtResource("1_er4l8")
