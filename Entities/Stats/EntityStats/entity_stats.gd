@@ -1,8 +1,7 @@
 class_name EntityStats
 extends Node
 
-# ============================== Enum ==============================
-
+#region ============================== Enum ==============================
 enum StatType {
 	HEALTH_MAX,
 	HEALTH,
@@ -12,15 +11,19 @@ enum StatType {
 	AD,
 	AA_SPEED,
 	CRIT_CHANCE,
-	CRIT_MULT
+	CRIT_MULT,
+	PHYSICAL_RESISTANCE,
+	MAGICAL_RESISTANCE,
+	POISON_RESISTANCE,
+	ALL_RESISTANCE
 }
+#endregion
 
-# ============================== Signals ==============================
-
+#region ============================== Signals ==============================
 signal has_been_reset()
+#endregion
 
-# ============================== Health ==============================
-
+#region ============================== Health ==============================
 signal health_max_changed(new_health_max: int)
 var _health_max: int # Maximum health of the character (Can't be heal over this)
 @export var health_max: int:
@@ -39,9 +42,9 @@ var health: int:
 		if value == _health: return
 		_health = value
 		health_changed.emit(_health)
+#endregion
 
-# ============================== Mana ==============================
-
+#region ============================== Mana ==============================
 signal mana_max_changed(new_mana_max: int)
 var _mana_max: int # When mana hit mana_max, the ultimate is triggered
 @export var mana_max: int:
@@ -68,9 +71,9 @@ var _mana_regen: float # mana/s
 		if value == _mana_regen: return
 		_mana_regen = value
 		mana_regen_changed.emit(_mana_regen)
+#endregion
 
-# ============================== Auto-Attack ==============================
-
+#region ============================== Auto-Attack ==============================
 signal attack_damage_changed(new_attack_damage: int)
 var _attack_damage: int # Damage of auto attack
 @export var attack_damage: int:
@@ -88,9 +91,9 @@ var _attack_speed: float # Attack per second
 		if value == _attack_speed: return
 		_attack_speed = value
 		attack_speed_changed.emit(_attack_speed)
+#endregion
 
-# ============================== Critic ==============================
-
+#region ============================== Critic ==============================
 signal physical_critical_chance_changed(new_physical_critical_chance: float)
 var _physical_critical_chance: float # % of chance for an auto attack to do critical damage
 @export var physical_critical_chance: float:
@@ -108,9 +111,9 @@ var _physical_critical_multiplier: float # Critical damage multiplier (2 per def
 		if value == _physical_critical_multiplier: return
 		_physical_critical_multiplier = value
 		physical_critical_multiplier_changed.emit(_physical_critical_multiplier)
+#endregion
 
-# ============================== Conditions ==============================
-
+#region ============================== Conditions ==============================
 signal poison_stacks_changed(new_poison_stacks: int)
 var _poison_stacks: int = 0
 var poison_stacks: int:
@@ -151,7 +154,45 @@ var regen_stacks: int:
 		if value == _regen_stacks: return
 		_regen_stacks = value
 		regen_stacks_changed.emit(_regen_stacks)
+#endregion
 
+#region ============================== Resistances ==============================
+signal physical_resistance_changed(new_physical_resistance: int)
+var _physical_resistance: float
+@export var physical_resistance: float:
+	get: return _physical_resistance
+	set(value):
+		if value == _physical_resistance: return
+		_physical_resistance = value
+		physical_resistance_changed.emit(_physical_resistance)
+
+signal magical_resistance_changed(new_magical_resistance: float)
+var _magical_resistance: float
+@export var magical_resistance: float:
+	get: return _magical_resistance
+	set(value):
+		if value == _magical_resistance: return
+		_magical_resistance = value
+		magical_resistance_changed.emit(_magical_resistance)
+
+signal poison_resistance_changed(new_poison_resistance: float)
+var _poison_resistance: float
+@export var poison_resistance: float:
+	get: return _poison_resistance
+	set(value):
+		if value == _poison_resistance: return
+		_poison_resistance = value
+		poison_resistance_changed.emit(_poison_resistance)
+
+signal all_resistance_changed(new_all_resistance: float)
+var _all_resistance: float
+@export var all_resistance: float:
+	get: return _all_resistance
+	set(value):
+		if value == _all_resistance: return
+		_all_resistance = value
+		all_resistance_changed.emit(_all_resistance)
+#endregion
 
 # ============================== Public functions ==============================
 
@@ -182,6 +223,10 @@ func get_stat(stat_type: StatType) -> float:
 		EntityStats.StatType.AA_SPEED: return _attack_speed
 		EntityStats.StatType.CRIT_CHANCE: return _physical_critical_chance
 		EntityStats.StatType.CRIT_MULT: return _physical_critical_multiplier
+		EntityStats.StatType.PHYSICAL_RESISTANCE: return _physical_critical_chance
+		EntityStats.StatType.MAGICAL_RESISTANCE: return _magical_resistance
+		EntityStats.StatType.POISON_RESISTANCE: return _poison_resistance
+		EntityStats.StatType.ALL_RESISTANCE: return _all_resistance
 		_:
 			printerr("EntityStats: get_stat() - Unknown stat type [", stat_type, "]")
 			return 0.0
@@ -198,4 +243,8 @@ func update_stat(stat_type: StatType, value: float) -> void:
 		EntityStats.StatType.AA_SPEED: attack_speed = value
 		EntityStats.StatType.CRIT_CHANCE: physical_critical_chance = value
 		EntityStats.StatType.CRIT_MULT: physical_critical_multiplier = value
+		EntityStats.StatType.PHYSICAL_RESISTANCE: _physical_critical_chance = value
+		EntityStats.StatType.MAGICAL_RESISTANCE: _magical_resistance = value
+		EntityStats.StatType.POISON_RESISTANCE: _poison_resistance = value
+		EntityStats.StatType.ALL_RESISTANCE: _all_resistance = value
 		_: printerr("EntityStats: get_stat() - Unknown stat type [", stat_type, "]")
