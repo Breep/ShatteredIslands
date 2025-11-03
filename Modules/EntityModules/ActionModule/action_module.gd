@@ -6,6 +6,7 @@ extends Module
 @export var _life_manager: LifeManager
 @export var _fire_manager: FireManager
 @export var _serenity_manager: SerenityManager
+@export var _poison_manager: PoisonManager
 
 var _spawn_manager: SpawnManager
 
@@ -135,7 +136,14 @@ func heal_percent(target: Character, percent: float, percent_modifier: Utils.Per
 func inflict_condition_stacks(target: Character, stacks_number: int, stack_type: Utils.StackType) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
+	_check_on_inflict_condition_stacks_modifier(target, stacks_number, stack_type)
 	target.take_condition_stacks(stacks_number, stack_type, _owner)
+
+
+#TODO Use a StackModifier like the AutoAttackModifier to remove dependancies between action module and family managers
+func _check_on_inflict_condition_stacks_modifier(target: Entity, stacks_number: int, stack_type: Utils.StackType) -> void:
+	if _poison_manager != null:
+		_poison_manager.check_on_apply_poison_stack(target, stacks_number, stack_type)
 
 # ============================== Spells ==============================
 

@@ -15,13 +15,11 @@ extends FamilyStats
 
 @export_subgroup("Rotting Milk")
 @export var poison_rotting_milk_activated: bool # True if the player has at least one of this card
-@export var poison_rotting_milk_poison_stacks: int # Number of poison stack applied each proc
 @export var poison_rotting_milk_regen_stacks: int # Number of regen stack applied each proc
 @export var poison_rotting_milk_chance: float # % of chance to proc the skill
 
 @export_subgroup("Hot Pot")
 @export var poison_hot_pot_activated: bool # True if the player has at least one of this card
-@export var poison_hot_pot_poison_stacks: int # Number of poison stack applied each proc
 @export var poison_hot_pot_ignite_stacks: int # Number of ignite stack applied each proc
 @export var poison_hot_pot_chance: float # % of chance to proc the skill
 

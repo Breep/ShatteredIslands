@@ -94,4 +94,5 @@ func _on_epic_heal_area_timer_timeout() -> void:
 
 func _on_regen_tick_timer_timeout() -> void:
 	var heal_amount: int = _owner.stats.regen_stacks
-	_owner.heal(_owner, heal_amount)
+	if heal_amount > 0:
+		_owner.heal(_owner, heal_amount)

@@ -8,7 +8,7 @@
 script = ExtResource("2_whajc")
 _chance = Array[float]([10.0, 20.0, 30.0, 40.0, 70.0])
 _poison_stacks = Array[int]([5, 5, 5, 5, 5])
-_ignite_stacks = Array[int]([1, 1, 1, 1, 1])
+_ignite_stacks = Array[int]([5, 5, 5, 5, 5])
 metadata/_custom_type_script = "uid://hrp0l8fctrln"
 
 [resource]
@@ -17,4 +17,5 @@ name = "Hot Pot"
 picture = ExtResource("1_monbk")
 family = 7
 player_upgrade = SubResource("Resource_xg1u6")
+lvl = 5
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

@@ -2,7 +2,6 @@ class_name PoisonHotPot
 extends CharacterUpgrade
 
 @export var _chance: Array[float]
-@export var _poison_stacks: Array[int]
 @export var _ignite_stacks: Array[int]
 
 func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
@@ -13,7 +12,6 @@ func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
 	stats.poison.poison_hot_pot_activated = true
 	stats.poison.poison_hot_pot_chance = _chance[cardlvl - 1]
 	stats.poison.poison_hot_pot_ignite_stacks = _ignite_stacks[cardlvl - 1]
-	stats.poison.poison_hot_pot_poison_stacks = _poison_stacks[cardlvl - 1]
 
 
 func get_description(cardlvl: int) -> String:
@@ -22,4 +20,4 @@ func get_description(cardlvl: int) -> String:
 		return "ERROR"
 	
 	return str(_chance[cardlvl - 1]) + "% of chance to gain " + str(_ignite_stacks[cardlvl - 1]) + " [[IGNITE_STACK]] when applying " \
-			+ str(_poison_stacks[cardlvl - 1]) + " [[POISON_STACK]]"
+			+ "[[POISON_STACK]]"

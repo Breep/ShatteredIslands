@@ -115,7 +115,8 @@ families_managers = {
 [node name="MovementModule" parent="CharacterLogic/Modules" index="0" node_paths=PackedStringArray("_owner")]
 _owner = NodePath("../../..")
 
-[node name="ActionModule" parent="CharacterLogic/Modules" index="1" node_paths=PackedStringArray("_owner")]
+[node name="ActionModule" parent="CharacterLogic/Modules" index="1" node_paths=PackedStringArray("_poison_manager", "_owner")]
+_poison_manager = NodePath("../../FamiliesManagers/PoisonManager")
 _owner = NodePath("../../..")
 
 [node name="InteractModule" parent="CharacterLogic/Modules" index="2" node_paths=PackedStringArray("_poison_manager", "_owner")]
