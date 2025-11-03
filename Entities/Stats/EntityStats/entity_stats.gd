@@ -142,6 +142,17 @@ var armor_stacks: int:
 		_armor_stacks = value
 		armor_stacks_changed.emit(_armor_stacks)
 
+
+signal regen_stacks_changed(new_regen_stacks: int)
+var _regen_stacks: int = 0
+var regen_stacks: int:
+	get: return _regen_stacks
+	set(value):
+		if value == _regen_stacks: return
+		_regen_stacks = value
+		regen_stacks_changed.emit(_regen_stacks)
+
+
 # ============================== Public functions ==============================
 
 func get_stacks_number() -> int:

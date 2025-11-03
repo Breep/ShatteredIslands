@@ -6,6 +6,7 @@ extends Control
 @onready var _poison_stacks_text_edit: TextEdit = %PoisonTextEdit
 @onready var _armor_stacks_text_edit: TextEdit = %ArmorTextEdit
 @onready var _ignite_stacks_text_edit: TextEdit = %IgniteStacksTextEdit
+@onready var _regen_stacks_text_edit: TextEdit = %RegenStacksTextEdit
 
 @onready var _mana_regen_text_edit: TextEdit = %ManaRegenTextEdit
 @onready var _max_mana_text_edit: TextEdit = %MaxManaTextEdit
@@ -72,6 +73,11 @@ func _on_set_ignite_button_pressed() -> void:
 	var ignite_stacks: int = int(_ignite_stacks_text_edit.text)
 	if ignite_stacks >= 0:
 		_character.stats.ignite_stacks = ignite_stacks
+
+func _on_set_regen_button_pressed() -> void:
+	var regen_stacks: int = int(_regen_stacks_text_edit.text)
+	if regen_stacks >= 0:
+		_character.stats.regen_stacks = regen_stacks
 #endregion
 
 #region Attack

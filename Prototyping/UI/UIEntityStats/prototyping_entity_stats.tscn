@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://b5k22tsib3qek"]
+[gd_scene load_steps=46 format=3 uid="uid://b5k22tsib3qek"]
 
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_6k7ey"]
 [ext_resource type="Script" uid="uid://bovdfdcxjdc1i" path="res://Prototyping/UI/UIEntityStats/prototyping_entity_stats.gd" id="2_1cuyt"]
@@ -80,50 +80,24 @@ border_width_right = 5
 border_width_bottom = 5
 border_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f0b73"]
-bg_color = Color(0.34539133, 0.68797565, 0.40948927, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_clh6h"]
+bg_color = Color(0.26610193, 0.67235273, 0.6680487, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8v6uc"]
-bg_color = Color(0.20602766, 0.43682262, 0.24982291, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e1nhj"]
+bg_color = Color(0.19767138, 0.5376727, 0.5342231, 1)
 border_width_left = 5
 border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
 border_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3u318"]
-bg_color = Color(0.34539133, 0.68797565, 0.40948927, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vortl"]
+bg_color = Color(0.26610193, 0.67235273, 0.6680487, 1)
 border_width_left = 5
 border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
 border_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7qyrv"]
-bg_color = Color(0.73680305, 0.39459157, 0.24808079, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xxg0n"]
-bg_color = Color(0.57918453, 0.29567236, 0.17302275, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5july"]
-bg_color = Color(0.73680305, 0.39459157, 0.24808079, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_funep"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cl6jy"]
-bg_color = Color(0.3665946, 0.36659464, 0.36659443, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lh78h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1cuyt"]
 bg_color = Color(0.26610193, 0.67235273, 0.6680487, 1)
@@ -144,19 +118,38 @@ border_width_right = 5
 border_width_bottom = 5
 border_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_clh6h"]
-bg_color = Color(0.26610193, 0.67235273, 0.6680487, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xbhig"]
+bg_color = Color(0.31395465, 0.6868305, 0.4844677, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e1nhj"]
-bg_color = Color(0.19767138, 0.5376727, 0.5342231, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jis0c"]
+bg_color = Color(0.21071607, 0.4925043, 0.34068674, 1)
 border_width_left = 5
 border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
 border_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vortl"]
-bg_color = Color(0.26610193, 0.67235273, 0.6680487, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ao245"]
+bg_color = Color(0.31395465, 0.6868305, 0.4844677, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f0b73"]
+bg_color = Color(0.34539133, 0.68797565, 0.40948927, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8v6uc"]
+bg_color = Color(0.20602766, 0.43682262, 0.24982291, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3u318"]
+bg_color = Color(0.34539133, 0.68797565, 0.40948927, 1)
 border_width_left = 5
 border_width_top = 5
 border_width_right = 5
@@ -182,24 +175,50 @@ border_width_right = 5
 border_width_bottom = 5
 border_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xbhig"]
-bg_color = Color(0.31395465, 0.6868305, 0.4844677, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7qyrv"]
+bg_color = Color(0.73680305, 0.39459157, 0.24808079, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jis0c"]
-bg_color = Color(0.21071607, 0.4925043, 0.34068674, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xxg0n"]
+bg_color = Color(0.57918453, 0.29567236, 0.17302275, 1)
 border_width_left = 5
 border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
 border_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ao245"]
-bg_color = Color(0.31395465, 0.6868305, 0.4844677, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5july"]
+bg_color = Color(0.73680305, 0.39459157, 0.24808079, 1)
 border_width_left = 5
 border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
 border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c4rpy"]
+bg_color = Color(0.34117648, 0.827451, 0.38431373, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b4lmq"]
+bg_color = Color(0.34134758, 0.8259478, 0.38493958, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aocyj"]
+bg_color = Color(0.34134758, 0.8259478, 0.38493958, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_funep"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cl6jy"]
+bg_color = Color(0.3665946, 0.36659464, 0.36659443, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lh78h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k1rt8"]
 bg_color = Color(0.08957543, 0.6216859, 0.99999994, 1)
@@ -371,6 +390,70 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_o0nd8")
 theme_override_styles/hover = SubResource("StyleBoxFlat_e8k78")
 text = "Set CURRENT HEALTH"
 
+[node name="MaxMana" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MaxManaTextEdit" type="TextEdit" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/MaxMana"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "100"
+placeholder_text = "Max Mana"
+
+[node name="SetMaxManaButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/MaxMana"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_clh6h")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_e1nhj")
+theme_override_styles/hover = SubResource("StyleBoxFlat_vortl")
+text = "Set MAX MANA"
+
+[node name="ManaRegen" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ManaRegenTextEdit" type="TextEdit" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/ManaRegen"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "2.0"
+placeholder_text = "Mana Regen"
+
+[node name="SetManaRegenButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/ManaRegen"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_6k7ey")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1cuyt")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_vsbcj")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6k7ey")
+text = "Set MANA REGEN"
+
+[node name="Heal" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HealTextEdit" type="TextEdit" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Heal"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "500"
+placeholder_text = "Max Mana"
+
+[node name="HealButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Heal"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_xbhig")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jis0c")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ao245")
+text = "HEAL"
+
 [node name="Poison" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
@@ -391,6 +474,27 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_f0b73")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_8v6uc")
 theme_override_styles/hover = SubResource("StyleBoxFlat_3u318")
 text = "Set POISON STACKS"
+
+[node name="Ignite" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="IgniteStacksTextEdit" type="TextEdit" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Ignite"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "100"
+placeholder_text = "Max Mana"
+
+[node name="SetIgniteButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Ignite"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_0psvp")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2o5ap")
+theme_override_styles/hover = SubResource("StyleBoxFlat_7xdgm")
+text = "SET IGNITE STACKS"
 
 [node name="Armor" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(200, 200)
@@ -413,6 +517,27 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_xxg0n")
 theme_override_styles/hover = SubResource("StyleBoxFlat_5july")
 text = "ADD
 ARMOR STACKS"
+
+[node name="Regen" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="RegenStacksTextEdit" type="TextEdit" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Regen"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "100"
+placeholder_text = "Max Mana"
+
+[node name="SetRegenButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Regen"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_c4rpy")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_b4lmq")
+theme_override_styles/hover = SubResource("StyleBoxFlat_aocyj")
+text = "SET REGEN STACKS"
 
 [node name="PhysicalDamage" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(200, 200)
@@ -464,91 +589,6 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_lh78h")
 text = "DEAL
 CRITICAL
 DAMAGE"
-
-[node name="ManaRegen" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
-custom_minimum_size = Vector2(200, 200)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ManaRegenTextEdit" type="TextEdit" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/ManaRegen"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 3
-text = "2.0"
-placeholder_text = "Mana Regen"
-
-[node name="SetManaRegenButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/ManaRegen"]
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("1_6k7ey")
-theme_override_styles/normal = SubResource("StyleBoxFlat_1cuyt")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_vsbcj")
-theme_override_styles/hover = SubResource("StyleBoxFlat_6k7ey")
-text = "Set MANA REGEN"
-
-[node name="MaxMana" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
-custom_minimum_size = Vector2(200, 200)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="MaxManaTextEdit" type="TextEdit" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/MaxMana"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 3
-text = "100"
-placeholder_text = "Max Mana"
-
-[node name="SetMaxManaButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/MaxMana"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/normal = SubResource("StyleBoxFlat_clh6h")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_e1nhj")
-theme_override_styles/hover = SubResource("StyleBoxFlat_vortl")
-text = "Set MAX MANA"
-
-[node name="Ignite" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
-custom_minimum_size = Vector2(200, 200)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="IgniteStacksTextEdit" type="TextEdit" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Ignite"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 3
-text = "100"
-placeholder_text = "Max Mana"
-
-[node name="SetIgniteButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Ignite"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/normal = SubResource("StyleBoxFlat_0psvp")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_2o5ap")
-theme_override_styles/hover = SubResource("StyleBoxFlat_7xdgm")
-text = "SET IGNITE STACKS"
-
-[node name="Heal" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
-custom_minimum_size = Vector2(200, 200)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="HealTextEdit" type="TextEdit" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Heal"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 3
-text = "500"
-placeholder_text = "Max Mana"
-
-[node name="HealButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Heal"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/normal = SubResource("StyleBoxFlat_xbhig")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_jis0c")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ao245")
-text = "HEAL"
 
 [node name="MagicalDamage" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(200, 200)
@@ -611,13 +651,14 @@ text = "Random POPUP"
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/EndBattle" to="." method="_on_end_battle_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/MaxHealth/SetMaxHealthButton" to="." method="_on_set_max_health_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/CurrentHealth/SetCurrentHealthButton" to="." method="_on_set_current_health_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/MaxMana/SetMaxManaButton" to="." method="_on_set_max_mana_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/ManaRegen/SetManaRegenButton" to="." method="_on_set_mana_regen_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Heal/HealButton" to="." method="_on_heal_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Poison/PoisonButton" to="." method="_on_poison_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Ignite/SetIgniteButton" to="." method="_on_set_ignite_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Armor/ArmorButton" to="." method="_on_armor_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Regen/SetRegenButton" to="." method="_on_set_regen_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/PhysicalDamage/HBoxContainer/DealPhysicalDamageButton" to="." method="_on_deal_physical_damage_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/PhysicalDamage/HBoxContainer/DealCriticalDamageButton" to="." method="_on_deal_critical_damage_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/ManaRegen/SetManaRegenButton" to="." method="_on_set_mana_regen_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/MaxMana/SetMaxManaButton" to="." method="_on_set_max_mana_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Ignite/SetIgniteButton" to="." method="_on_set_ignite_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Heal/HealButton" to="." method="_on_heal_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/MagicalDamage/DealMagicalDamageButton" to="." method="_on_deal_magical_damage_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/RandomPopup/RandomPopupButton" to="." method="_on_random_popup_button_pressed"]

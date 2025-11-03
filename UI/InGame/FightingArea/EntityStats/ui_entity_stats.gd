@@ -67,6 +67,8 @@ func _disconnect_old_signals() -> void:
 		_entity.heal_taken.disconnect(_on_entity_heal_taken)
 	if _entity.stack_taken.is_connected(_on_entity_stack_taken):
 		_entity.stack_taken.disconnect(_on_entity_stack_taken)
+	if _entity.stats.regen_stacks_changed.is_connected(_on_entity_regen_stacks_changed):
+		_entity.stats.regen_stacks_changed.disconnect(_on_entity_regen_stacks_changed)
 
 
 func _connect_new_signals() -> void:
@@ -78,6 +80,7 @@ func _connect_new_signals() -> void:
 	_entity.stats.poison_stacks_changed.connect(_on_entity_poison_stacks_changed)
 	_entity.stats.armor_stacks_changed.connect(_on_entity_armor_stacks_changed)
 	_entity.stats.ignite_stacks_changed.connect(_on_entity_ignite_stacks_changed)
+	_entity.stats.regen_stacks_changed.connect(_on_entity_regen_stacks_changed)
 	_entity.damage_taken.connect(_on_entity_damage_taken)
 	_entity.heal_taken.connect(_on_entity_heal_taken)
 	_entity.stack_taken.connect(_on_entity_stack_taken)
@@ -151,6 +154,10 @@ func _on_entity_armor_stacks_changed(armor_stacks: int) -> void:
 
 func _on_entity_ignite_stacks_changed(ignite_stacks: int) -> void:
 	_health_bar.ignite_stacks = ignite_stacks
+
+
+func _on_entity_regen_stacks_changed(regen_stacks: int) -> void:
+	_health_bar.regen_stacks = regen_stacks
 #endregion
 
 
