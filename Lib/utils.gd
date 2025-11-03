@@ -54,8 +54,7 @@ var _seed: int = 42
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	print("SEED ", _seed)
-	rng.seed = _seed
+	rng.randomize()
 
 # ============================== Public functions ==============================
 

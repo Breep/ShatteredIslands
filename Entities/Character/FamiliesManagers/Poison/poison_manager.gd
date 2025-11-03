@@ -31,6 +31,7 @@ func stop() -> void:
 	for spell in _optional_spells:
 		spell.queue_free()
 	_poison_tick_timer.stop()
+	_clear_attack_modifiers()
 	_clear_optional_timers()
 
 
@@ -50,6 +51,10 @@ func _add_attack_modifiers() -> void:
 		aa_modifier.on_attack_logic_callback = _on_rusty_dagger_logic_callback
 		aa_modifier.is_one_time_effect = false
 		_owner.auto_attack_modifier_registry.register_modifier(aa_modifier)
+
+func _clear_attack_modifiers() -> void:
+	if _poison_stats.poison_rusty_dagger_activated:
+		_owner.auto_attack_modifier_registry.unregister_modifier("Rusty Dagger")
 
 func _create_optional_timers() -> void:
 	# [POISON FLASK]
