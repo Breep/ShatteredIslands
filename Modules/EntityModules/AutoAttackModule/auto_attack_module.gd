@@ -42,7 +42,7 @@ var current_target: Entity:
 
 func _ready() -> void:
 	_owner.stats.attack_speed_changed.connect(_on_owner_stats_attack_speed_changed)
-	_owner.dead.connect(_on_owner_dead)
+	_owner.died.connect(_on_owner_died)
 
 # ============================== Public functions ==============================
 
@@ -106,7 +106,7 @@ func _on_owner_stats_attack_speed_changed(new_attack_speed: float) -> void:
 	attack_speed = new_attack_speed
 
 
-func _on_owner_dead(_unused) -> void:
+func _on_owner_died(_unused) -> void:
 	stop()
 
 

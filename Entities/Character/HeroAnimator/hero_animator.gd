@@ -52,7 +52,7 @@ func _ready() -> void:
 		return
 	
 	_rng.randomize()
-	_character_owner.dead.connect(_on_character_owner_dead)
+	_character_owner.died.connect(_on_character_owner_died)
 	_character_owner.fight_is_won.connect(_on_character_owner_fight_is_won)
 	_character_owner.fight_is_lost.connect(_on_character_owner_fight_is_lost)
 	_character_owner.fighting_state_changed.connect(_on_character_owner_fighting_state_changed)
@@ -84,7 +84,7 @@ func _on_character_owner_fighting_state_changed(new_state: Character.FightingSta
 			_is_fighting = false
 
 
-func _on_character_owner_dead(_self_ref: Entity) -> void:
+func _on_character_owner_died(_self_ref: Entity) -> void:
 	_animation_tree.set(PARAM_TRANSITION_FIGHTING, VALUE_TRANSITION_FIGHTING_DIE)
 
 

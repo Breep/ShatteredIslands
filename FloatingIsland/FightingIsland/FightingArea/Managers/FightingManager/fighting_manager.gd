@@ -58,15 +58,15 @@ func _connect_to_characters_signals() -> void:
 	for team_members in _characters_dictionary.values():
 		for member in team_members:
 			var character: Character = member
-			character.dead.connect(_on_character_dead, CONNECT_ONE_SHOT)
+			character.died.connect(_on_character_died, CONNECT_ONE_SHOT)
 
 
 func _disconnect_from_characters_signals() -> void:
 	for team_members in _characters_dictionary.values():
 		for member in team_members:
 			var character: Character = member
-			if character.dead.is_connected(_on_character_dead):
-				character.dead.disconnect(_on_character_dead)
+			if character.died.is_connected(_on_character_died):
+				character.died.disconnect(_on_character_died)
 
 
 # Check if there is only one team alive, also add into the _lowest_hp_teams_order the team_id of a newly dead team
@@ -131,7 +131,7 @@ func _cleanup() -> void:
 
 # ============================== Callbacks ==============================
 
-func _on_character_dead(who: Character) -> void:
+func _on_character_died(who: Character) -> void:
 	for team_members in _alive_characters_dictionary.values():
 		team_members.erase(who)
 	

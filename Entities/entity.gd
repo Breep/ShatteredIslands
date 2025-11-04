@@ -3,10 +3,10 @@ extends CharacterBody3D
 
 # ============================== Signals ==============================
 
-signal dead(self_ref: Entity)
+signal died(self_ref: Entity)
 func signal_death() -> void:
 	_is_dead = true
-	dead.emit(self)
+	died.emit(self)
 
 signal damage_taken(entity_ref: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool)
 func signal_damage_taken(damage: int, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool) -> void:

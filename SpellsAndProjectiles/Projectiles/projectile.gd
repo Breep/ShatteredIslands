@@ -76,7 +76,7 @@ var _velocity: Vector3 = Vector3.ZERO
 
 func _ready() -> void:
 	if target:
-		target.dead.connect(_on_target_dead)
+		target.died.connect(_on_target_died)
 	_start_pos = global_position
 	_vertical_offset = 1.0 + Utils.rng.randf_range(-_vertical_spread, _vertical_spread)
 	_projectile_conf = PROJECTILE_CONF_REF[projectile_type]
@@ -158,11 +158,11 @@ func _update_visual() -> void:
 
 func _set_target(new_target: Character) -> void:
 	if target:
-		if target.dead.is_connected(_on_target_dead):
-			target.dead.disconnect(_on_target_dead)
+		if target.died.is_connected(_on_target_died):
+			target.died.disconnect(_on_target_died)
 	target = new_target
 	if target:
-		target.dead.connect(_on_target_dead)
+		target.died.connect(_on_target_died)
 	# Reset path from *current* position toward new target
 	_start_pos = global_position
 	_snapshot_target_and_prepare_path()
@@ -271,5 +271,5 @@ func _get_damage_percent(damage_percent: float, percent_modifier: Utils.PercentM
 
 # ============================== Callbacks ==============================
 
-func _on_target_dead(_who) -> void:
+func _on_target_died(_who) -> void:
 	queue_free()

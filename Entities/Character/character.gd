@@ -243,7 +243,7 @@ func _update_hero() -> void:
 # ============================== Private ==============================
 
 func _handle_death() -> void:
-	dead.emit(self)
+	died.emit(self)
 	_is_dead = true
 
 # ============================== Family callbacks ==============================
