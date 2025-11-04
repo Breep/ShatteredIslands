@@ -104,14 +104,28 @@ func get_closest_enemy_from(from_character: Entity) -> Entity:
 	return closest_enemy
 
 
-func get_targets(strategy: MultipleTargettingStrategy) -> Array[Entity]:
-	match strategy:
-		MultipleTargettingStrategy.ALL:
-			return _entities.duplicate()
-		MultipleTargettingStrategy.ALLIES:
-			return _allies.duplicate()
-		MultipleTargettingStrategy.ENEMIES:
-			return _enemies.duplicate()
+func get_targets(strategy: MultipleTargettingStrategy, radius:float = -1.0) -> Array[Entity]:
+	if radius <= 0:
+		match strategy:
+			MultipleTargettingStrategy.ALL: return _entities.duplicate()
+			MultipleTargettingStrategy.ALLIES: return _allies.duplicate()
+			MultipleTargettingStrategy.ENEMIES: return _enemies.duplicate()
+	else:
+		var returned_entities: Array[Entity]
+		match strategy:
+			MultipleTargettingStrategy.ALL:
+				for entity in _entities:
+					if entity.global_position.distance_to(_owner.global_position) <= radius:
+						returned_entities.append(entity)
+			MultipleTargettingStrategy.ALLIES:
+				for entity in _allies:
+					if entity.global_position.distance_to(_owner.global_position) <= radius:
+						returned_entities.append(entity)
+			MultipleTargettingStrategy.ENEMIES:
+				for entity in _enemies:
+					if entity.global_position.distance_to(_owner.global_position) <= radius:
+						returned_entities.append(entity)
+		return returned_entities
 	
 	printerr("TargetModule: Unknown strategy")
 	var empty: Array[Entity]

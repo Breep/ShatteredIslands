@@ -25,7 +25,6 @@ func start() -> void:
 	_create_optional_timers()
 	_add_attack_modifiers()
 	_add_stat_modifiers()
-	_add_fighting_events()
 	_poison_tick_timer.start()
 
 
@@ -71,10 +70,6 @@ func _add_stat_modifiers() -> void:
 		mod.id = "Antidote"
 		_owner.stats_manager.register_modifier(mod)
 
-func _add_fighting_events() -> void:
-	if _poison_stats.poison_contagion_activated:
-		_register_contagion()
-
 func _clear_stat_modifiers() -> void:
 	if _poison_stats.poison_antidote_activated:
 		var mod := StatModifier.new()
@@ -107,7 +102,12 @@ func _clear_optional_timers() -> void:
 
 
 func _lanch_optional_spells() -> void:
-	pass
+	if _poison_stats.poison_contagion_activated:
+		var spell_modifier: Dictionary = {
+			Spell.ContagionModifier.RADIUS: _poison_stats.poison_contagion_radius,
+			Spell.ContagionModifier.SPREAD_PERCENT: _poison_stats.poison_contagion_percent
+		}
+		_owner.cast_spell(_owner, Spell.Type.CONTAGION, spell_modifier)
 
 # ============================== Callbacks functions ==============================
 

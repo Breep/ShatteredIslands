@@ -22,7 +22,6 @@ func register_event(fe: FightingEvent) -> void:
 	if _fighting_events.has(fe.id):
 		printerr("FightingEventRegistry: register_handler() - already known fighting event \"", fe.id, "\" [", get_path(), "]")
 		return
-	print("DEBUG - FIGHTING EVENT REGISTRY : REGISTER")
 	_fighting_events[fe.id] = fe
 
 
@@ -43,7 +42,6 @@ func clear() -> void:
 
 # ============================== Private callbacks ==============================
 func _on_entity_died(victim: Entity) -> void:
-	print("DEBUG - FIGHTING EVENT REGISTRY : ENTITY DIED")
 	for fighting_event in _fighting_events.values():
 		if !fighting_event.enabled:
 			continue

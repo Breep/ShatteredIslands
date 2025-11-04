@@ -75,7 +75,6 @@ var _hero_id := Hero.HeroId.UNDEF
 # ============================== Public variables ==============================
 
 var player: Player
-var target_module: TargetModule
 
 # ============================== Private variables ==============================
 
@@ -182,8 +181,6 @@ func take_heal(heal_amount: int, source: Character = null) -> void:
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	target_module = _character_logic.target_module
-	
 	if owner_player_id != 0:
 		player = PlayerManager.players[owner_player_id]
 		player.character = self

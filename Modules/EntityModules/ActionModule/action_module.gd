@@ -12,6 +12,7 @@ var _spawn_manager: SpawnManager
 
 const METEOR_SCENE: PackedScene = preload("res://SpellsAndProjectiles/Spells/Meteor/meteor.tscn")
 const DARK_STORM_SCENE: PackedScene = preload("res://SpellsAndProjectiles/Spells/DarkStorm/dark_storm.tscn")
+const CONTAGION_SPELL_SCENE: PackedScene = preload("res://SpellsAndProjectiles/Spells/Poison/Contagion/contagion_spell_area.tscn")
 
 # ============================== Public functions ==============================
 
@@ -148,13 +149,14 @@ func _check_on_inflict_condition_stacks_modifier(target: Entity, stacks_number: 
 # ============================== Spells ==============================
 
 func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary = {}) -> void:
-	if target == null: return
 	match spell_type:
 		Spell.Type.METEOR: _cast_meteor(target, spell_modifier)
 		Spell.Type.DARK_STORM: _cast_dark_storm(target, spell_modifier)
+		Spell.Type.CONTAGION: _cast_contagion(spell_modifier)
 
 
 func _cast_meteor(target: Entity, spell_modifier: Dictionary) -> void:
+	if target == null: return
 	_owner.signal_spell_casted(target, Spell.Type.METEOR)
 	var meteor: Meteor = METEOR_SCENE.instantiate()
 	if multiplayer.is_server():
@@ -167,6 +169,7 @@ func _cast_meteor(target: Entity, spell_modifier: Dictionary) -> void:
 
 
 func _cast_dark_storm(target: Entity, spell_modifier: Dictionary) -> void:
+	if target == null: return
 	_owner.signal_spell_casted(target, Spell.Type.DARK_STORM)
 	var dark_storm: DarkStorm = DARK_STORM_SCENE.instantiate()
 	if multiplayer.is_server():
@@ -179,6 +182,14 @@ func _cast_dark_storm(target: Entity, spell_modifier: Dictionary) -> void:
 		dark_storm.init(target, 0, 0, 0, _owner)
 	_spawn_manager.spawn_spell(dark_storm)
 
+func _cast_contagion(spell_modifier: Dictionary) -> void:
+	_owner.signal_spell_casted(_owner, Spell.Type.CONTAGION)
+	var contagion: ContagionSpellArea = CONTAGION_SPELL_SCENE.instantiate()
+	if multiplayer.is_server():
+		var radius: float = spell_modifier[Spell.ContagionModifier.RADIUS]
+		var spread_percent: float = spell_modifier[Spell.ContagionModifier.SPREAD_PERCENT]
+		contagion.init(_owner, radius, spread_percent)
+	_spawn_manager.spawn_spell(contagion)
 
 
 

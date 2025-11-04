@@ -33,5 +33,4 @@ func disable() -> void:
 # ============================== Callbacks ==============================
 
 func _on_button_pressed() -> void:
-	print("DEBUG - Selected hero : ", _hero)
 	selected.emit(_hero)

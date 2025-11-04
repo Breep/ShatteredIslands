@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_gcxcv"]
 script = ExtResource("2_qdbqp")
-_percent = Array[float]([20.0, 30.0, 40.0])
+_percent = Array[float]([20.0, 50.0, 100.0])
 _radius = Array[float]([20.0, 20.0, 20.0])
 metadata/_custom_type_script = "uid://630ldlxlvucv"
 

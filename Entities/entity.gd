@@ -52,6 +52,9 @@ var is_dead: bool:
 @export_group("Registry")
 @export var auto_attack_modifier_registry: AutoAttackModifierRegistry
 
+@export_group("Logic")
+@export var target_module: TargetModule
+
 # ============================== Enums ==============================
 
 enum EntityType {
