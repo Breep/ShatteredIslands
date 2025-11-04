@@ -36,7 +36,7 @@ func stop() -> void:
 	_clear_attack_modifiers()
 	_clear_optional_timers()
 
-
+# TODO Make a StackModifier like the AutoAttackModifier
 func check_on_apply_poison_stack(target: Entity, stacks_number: int, stack_type: Utils.StackType) -> void:
 	if stacks_number <= 0 or stack_type != Utils.StackType.POISON: return
 	if target == null or target.is_queued_for_deletion(): return

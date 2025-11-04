@@ -194,8 +194,7 @@ var _all_resistance: float
 		all_resistance_changed.emit(_all_resistance)
 #endregion
 
-# ============================== Public functions ==============================
-
+#region ============================== Public functions ==============================
 func get_stacks_number() -> int:
 	return _poison_stacks + _ignite_stacks + _armor_stacks
 
@@ -248,3 +247,4 @@ func update_stat(stat_type: StatType, value: float) -> void:
 		EntityStats.StatType.POISON_RESISTANCE: _poison_resistance = value
 		EntityStats.StatType.ALL_RESISTANCE: _all_resistance = value
 		_: printerr("EntityStats: get_stat() - Unknown stat type [", stat_type, "]")
+#endregion

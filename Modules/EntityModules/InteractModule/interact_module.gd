@@ -19,6 +19,7 @@ func _ready() -> void:
 
 # ===== Damage
 func take_damage(damage: int, damage_type: Utils.DamageType, is_critical: bool, source: Entity = null, attack_type: Utils.AttackType = Utils.AttackType.UNDEF) -> int:
+	if _owner.stats.health <= 0 or _owner.is_dead: return 0
 	var damage_before_armor: int = 0
 	if multiplayer.is_server():
 		var phy_res: float = _owner.stats.all_resistance + _owner.stats.physical_resistance
@@ -72,5 +73,6 @@ func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, _sou
 # ===== Heal
 
 func take_heal(heal_amount: int, _source: Character = null) -> void:
+	if _owner.stats.health <= 0 or _owner.is_dead: return
 	_owner.stats.health += heal_amount
 	_owner.signal_heal_taken(heal_amount)
