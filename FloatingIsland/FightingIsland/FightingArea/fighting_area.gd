@@ -19,6 +19,9 @@ signal stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: in
 func signal_stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: int) -> void:
 	stack_taken.emit(source, stack_type, stack_number)
 
+signal entity_died(victim: Entity)
+func signal_entity_died(victim: Entity) -> void:
+	entity_died.emit(victim)
 
 # ============================== Network Export variables ==============================
 
@@ -45,6 +48,10 @@ var fighting_manager: FightingManager:
 var entity_manager: EntityManager:
 	get: return _entity_manager
 
+@export var _fighting_event_registry: FightingEventRegistry
+var fighting_event_registry: FightingEventRegistry:
+	get: return _fighting_event_registry
+
 @export var _fighting_floors: Dictionary[Battle.BattleType, FightingFloor]
 
 @export var _entities_node: Node3D
@@ -66,7 +73,6 @@ func start_fight(characters: Array[Character], battle_type: Battle.BattleType, b
 		return
 	
 	_entity_manager.clear()
-	
 	character_spawner.spawn_characters(characters, _entities_node)
 	for character in characters:
 		character.connect_to_fighting_area(self)

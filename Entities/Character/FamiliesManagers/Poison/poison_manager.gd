@@ -25,6 +25,7 @@ func start() -> void:
 	_create_optional_timers()
 	_add_attack_modifiers()
 	_add_stat_modifiers()
+	_add_fighting_events()
 	_poison_tick_timer.start()
 
 
@@ -69,6 +70,10 @@ func _add_stat_modifiers() -> void:
 		mod.stat_type = EntityStats.StatType.POISON_RESISTANCE
 		mod.id = "Antidote"
 		_owner.stats_manager.register_modifier(mod)
+
+func _add_fighting_events() -> void:
+	if _poison_stats.poison_contagion_activated:
+		_register_contagion()
 
 func _clear_stat_modifiers() -> void:
 	if _poison_stats.poison_antidote_activated:
@@ -155,8 +160,37 @@ func _on_tide_of_corruption_timer_timeout() -> void:
 		_owner.inflict_condition_stacks(target, poison_stacks, Utils.StackType.POISON)
 #endregion
 
+#region CONTAGION
+func _register_contagion() -> void:
+	var fighting_event := FightingEvent.new()
+	fighting_event.id = "Contagion"
+	fighting_event.tags = [FightingEvent.TagType.CARD]
+	fighting_event.enabled = true
+	fighting_event.is_one_time_effect = false
+	fighting_event.on_entity_died_callback = _on_enemy_died_contagion
+	#fighting_area.fighting_event_registry.register_event(fighting_event)
 
 
+func _on_enemy_died_contagion(cb_vars: Dictionary) -> void:
+	var entities: Array[Entity] = cb_vars[FightingEvent.VarType.ENTITIES]
+	var victim: Entity = cb_vars[FightingEvent.VarType.VICTIM]
+	if victim == null: return
+	if victim.team_id == _owner.team_id: return
+	
+	var poison_stacks := victim.stats.poison_stacks
+	if poison_stacks <= 0: return
+	
+	var radius: float = _poison_stats.poison_contagion_radius
+	var targets := []
+	for entity in entities:
+		if entity.team_id == victim.team_id and !entity.is_dead and entity != victim:
+			if entity.global_transform.origin.distance_to(victim.global_transform.origin) <= radius:
+				targets.append(entity)
+	
+	var spread := int(poison_stacks * 0.5)
+	for target in targets:
+		_owner.inflict_condition_stacks(target, spread, Utils.StackType.POISON)
+#endregion
 
 
 

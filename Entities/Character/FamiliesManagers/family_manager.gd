@@ -1,7 +1,6 @@
 class_name FamilyManager
 extends Node
 
-
 @export var _owner: Character # Ref to character owner
 @export var _action_module: ActionModule
 
