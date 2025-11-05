@@ -55,8 +55,9 @@ extends FamilyStats
 @export_group("EPIC")
 @export_subgroup("Snake barrel")
 @export var poison_snake_barrel_activated: bool # True if the player has at least one of this card
-@export var poison_snake_barrel_hits_number: float # Number of hits before the barrel brakes
+@export var poison_snake_barrel_health: float # Health of the barrel
 @export var poison_snake_barrel_snake_number: float # Number of snakes comming out of the barrel
+@export var poison_snake_barrel_snake_poison_stacks: float # Number of poison stacks carried by each snake
 
 @export_subgroup("Shrooms")
 @export var poison_shrooms_activated: bool # True if the player has at least one of this card

@@ -174,10 +174,10 @@ func take_damage(damage: int, damage_type: Utils.DamageType, is_critical: bool =
 func take_damage_percent(percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.DamageType, is_critical: bool = false, source: Entity = null) -> void:
 	_interact_module.take_damage_percent(percent, percent_modifier, damage_type, is_critical, source)
 
-func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, source: Character = null) -> void:
+func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, source: Entity = null) -> void:
 	_interact_module.take_condition_stacks(stacks_number, stack_type, source)
 
-func take_heal(heal_amount: int, source: Character = null) -> void:
+func take_heal(heal_amount: int, source: Entity = null) -> void:
 	_interact_module.take_heal(heal_amount, source)
 #endregion
 

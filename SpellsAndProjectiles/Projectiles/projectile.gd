@@ -5,7 +5,7 @@ extends Area3D
 
 enum ProjectileEffect {
 	POISON,       # Add poison stacks
-	INSTABILITY,  # Add instqbility stacks
+	INSTABILITY,  # Add instability stacks
 	CRITIC,       # Do more physical damage
 	BOUNCE,       # Will bounce to an other target keeping all current stats
 	IGNITE        # Do more damage bases on target current hp
@@ -13,7 +13,8 @@ enum ProjectileEffect {
 
 enum ProjectileType {
 	AUTO_ATTACK,
-	VENOMOUS_DART
+	VENOMOUS_DART,
+	SNAKE
 }
 
 enum TrajectoryType {
@@ -26,7 +27,8 @@ enum TrajectoryType {
 
 const PROJECTILE_CONF_REF: Dictionary[ProjectileType, ProjectileConf] = {
 	ProjectileType.AUTO_ATTACK: preload("res://SpellsAndProjectiles/Projectiles/AutoAttack/default_auto_attack_conf.tres"),
-	ProjectileType.VENOMOUS_DART: preload("res://SpellsAndProjectiles/Projectiles/VenomousDart/venomous_dart_conf.tres")
+	ProjectileType.VENOMOUS_DART: preload("res://SpellsAndProjectiles/Projectiles/VenomousDart/venomous_dart_conf.tres"),
+	ProjectileType.SNAKE: preload("res://SpellsAndProjectiles/Projectiles/Snake/snake_proj_conf.tres")
 }
 
 # ============================== Constants / Exports ==============================
@@ -111,7 +113,8 @@ func _on_body_entered(body: Node3D) -> void:
 			target.take_damage(magical_damage, Utils.DamageType.MAGICAL, stats.is_critic, source)
 
 		if stats.poison_stacks > 0:
-			source.inflict_condition_stacks(target, stats.poison_stacks, Utils.StackType.POISON)
+			if source != null: source.inflict_condition_stacks(target, stats.poison_stacks, Utils.StackType.POISON)
+			else: target.take_condition_stacks(stats.poison_stacks, Utils.StackType.POISON)
 
 		if stats.is_bouncing:
 			var new_target: Entity = source.target_module.get_closest_enemy_from(target)

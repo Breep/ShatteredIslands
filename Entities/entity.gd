@@ -65,7 +65,9 @@ enum EntityType {
 }
 
 enum SnakeBarrelModifier {
-	START_POSITION
+	SNAKE_NUMBER,
+	SNAKE_POISON_STACKS,
+	MAX_HEALTH
 }
 
 # ============================== Constants ==============================
@@ -81,6 +83,7 @@ static var instance_count: int = 0
 func _init() -> void:
 	id = instance_count
 	instance_count += 1
+	print("ENTITY INIT CALLED: ", id, "-", name)
 
 
 #func _enter_tree() -> void:
@@ -101,7 +104,7 @@ func get_auto_attack_spawn() -> Node3D:
 
 
 func connect_to_fighting_area(_fighting_area: FightingArea) -> void:
-	print("VIRTUAL")
+	printerr("Entity: virtual connect_to_fighting_area() called [", get_path(), "]")
 
 # ===== Notifications [VIRTUAL]
 
@@ -145,10 +148,10 @@ func take_damage(_damage: int, _damage_type: Utils.DamageType, _is_critical: boo
 func take_damage_percent(_percent: float, _percent_modifier: Utils.PercentModifier, _damage_type: Utils.DamageType, _is_critical: bool = false, _source: Entity = null) -> void:
 	printerr("Entity: virtual take_damage_percent() called [", get_path(), "]")
 
-func take_condition_stacks(_stacks_number: int, _stack_type: Utils.StackType, _source: Character = null) -> void:
+func take_condition_stacks(_stacks_number: int, _stack_type: Utils.StackType, _source: Entity = null) -> void:
 	printerr("Entity: virtual take_condition_stack() called [", get_path(), "]")
 
-func take_heal(_heal_amount: int, _source: Character = null) -> void:
+func take_heal(_heal_amount: int, _source: Entity = null) -> void:
 	printerr("Entity: virtual take_heal() called [", get_path(), "]")
 #endregion
 

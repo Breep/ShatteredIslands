@@ -6,8 +6,9 @@
 
 [sub_resource type="Resource" id="Resource_jk0e5"]
 script = ExtResource("2_vkndp")
-_hits_number = Array[int]([5, 6, 7, 8, 10])
-_snake_number = Array[int]([5, 6, 7, 8, 10])
+_barrel_health = Array[int]([100, 150])
+_snake_number = Array[int]([5, 10])
+_poison_stacks = Array[int]([10, 15])
 metadata/_custom_type_script = "uid://dgsvedao7me5j"
 
 [resource]
@@ -16,4 +17,5 @@ name = "Snake barrel"
 picture = ExtResource("1_de10l")
 family = 7
 player_upgrade = SubResource("Resource_jk0e5")
+lvl = 2
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

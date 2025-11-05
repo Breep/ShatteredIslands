@@ -51,7 +51,7 @@ func take_damage_percent(damage_percent: float, percent_modifier: Utils.PercentM
 
 # ===== Condition stacks
 
-func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, _source: Character = null) -> void:
+func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, _source: Entity = null) -> void:
 	if _owner.stats.health <= 0 or _owner.is_dead: return
 	_owner.signal_stack_taken(stack_type, stacks_number)
 	match stack_type:
@@ -66,7 +66,7 @@ func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, _sou
 
 # ===== Heal
 
-func take_heal(heal_amount: int, _source: Character = null) -> void:
+func take_heal(heal_amount: int, _source: Entity = null) -> void:
 	if _owner.stats.health <= 0 or _owner.is_dead: return
 	_owner.stats.health += heal_amount
 	_owner.signal_heal_taken(heal_amount)

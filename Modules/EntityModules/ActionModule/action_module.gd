@@ -222,8 +222,11 @@ func summon_entity(entity_type: Entity.EntityType, entity_spawn_global_position:
 
 func _summon_snake_barrel(entity_spawn_global_position: Vector3, entity_modifier: Dictionary) -> void:
 	var snake_barrel: SnakeBarrel = SNAKE_BARREL_SCENE.instantiate()
-	var start_position: Vector3 = entity_modifier[Entity.SnakeBarrelModifier.START_POSITION]
-	snake_barrel.init(start_position)
+	if multiplayer.is_server():
+		var snake_number: int = entity_modifier[Entity.SnakeBarrelModifier.SNAKE_NUMBER]
+		var snake_poison_stacks: int = entity_modifier[Entity.SnakeBarrelModifier.SNAKE_POISON_STACKS]
+		var max_health: int = entity_modifier[Entity.SnakeBarrelModifier.MAX_HEALTH]
+		snake_barrel.init(snake_number, snake_poison_stacks, max_health)
 	snake_barrel.team = _owner.team
 	_spawn_manager.spawn_entity(snake_barrel, entity_spawn_global_position)
 
