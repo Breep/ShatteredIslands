@@ -64,11 +64,7 @@ func _set_auto_attack_speed(new_attack_speed: float) -> void:
 		_auto_attack_timer.wait_time = 1.0 / new_attack_speed
 
 
-func _auto_attack(target: Character) -> void:
-	#if _attack_manager != null:
-		#_attack_manager.attack(target, _projectile_spawn)
-	#else:
-	#
+func _auto_attack(target: Entity) -> void:
 	var projectile_stats := ProjectileStats.new()
 	projectile_stats.physical_damage_flat = _owner.stats.attack_damage
 	projectile_stats.speed = 15

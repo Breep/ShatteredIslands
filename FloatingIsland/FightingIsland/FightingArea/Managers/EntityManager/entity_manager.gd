@@ -93,6 +93,7 @@ func _on_entity_stack_taken(entity: Entity, stack_type: Utils.StackType, stack_n
 
 
 func _on_entity_died(entity: Entity) -> void:
+	print("DEBUG ENtity: ", entity.name, " DIED")
 	_fighting_area.signal_entity_died(entity)
 
 

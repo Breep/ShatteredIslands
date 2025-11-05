@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c5ji8s1iic5v8"]
+[gd_scene load_steps=16 format=3 uid="uid://c5ji8s1iic5v8"]
 
 [ext_resource type="Script" uid="uid://bu48b2v401db2" path="res://Prototyping/FightingIsland/prototyping_map.gd" id="1_vksg0"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="2_dnu2k"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Entities/Character/character.tscn" id="7_pc3mw"]
 [ext_resource type="PackedScene" uid="uid://bhxhqex1pbh2p" path="res://UI/InGame/FightingArea/ui_fighting_area.tscn" id="7_wwtbg"]
 [ext_resource type="Material" uid="uid://2wlal7g5718r" path="res://VFX/Shaders/Sky/stylized_shader_night.tres" id="8_qw25r"]
+[ext_resource type="PackedScene" uid="uid://dlvbvygdkane8" path="res://SpellsAndProjectiles/Spells/Poison/SnakeBarrel/snake_barrel.tscn" id="11_e0xek"]
 
 [sub_resource type="NoiseTexture3D" id="NoiseTexture3D_4fa74"]
 
@@ -82,3 +83,8 @@ light_specular = 4.879
 
 [node name="UIFightingArea" parent="." instance=ExtResource("7_wwtbg")]
 unique_name_in_owner = true
+
+[node name="SnakeBarrelSpell" parent="." instance=ExtResource("11_e0xek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5143497, 0.57989013, 0.8071933)
+id = 10
+team = 1

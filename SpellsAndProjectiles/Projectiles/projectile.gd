@@ -50,8 +50,8 @@ var _homing_retarget_each_frame: bool = true     # If false, homes to snapshot
 
 # ============================== Private ==============================
 
-var source: Character
-var target: Character
+var source: Entity
+var target: Entity
 var projectile_type: ProjectileType = ProjectileType.AUTO_ATTACK
 
 var _projectile_conf: ProjectileConf
@@ -92,7 +92,7 @@ func _process(delta: float) -> void:
 	_move_toward_target(delta)
 
 func _on_body_entered(body: Node3D) -> void:
-	if body is Character and body == target:
+	if body is Entity and body == target:
 		var physical_damage_done_flat: int
 		if not multiplayer.is_server():
 			queue_free()
@@ -114,7 +114,7 @@ func _on_body_entered(body: Node3D) -> void:
 			source.inflict_condition_stacks(target, stats.poison_stacks, Utils.StackType.POISON)
 
 		if stats.is_bouncing:
-			var new_target: Character = source.target_module.get_closest_enemy_from(target)
+			var new_target: Entity = source.target_module.get_closest_enemy_from(target)
 			if new_target == null:
 				queue_free()
 			else:
@@ -156,7 +156,7 @@ func _update_visual() -> void:
 	_visual_node.add_child(visual)
 
 
-func _set_target(new_target: Character) -> void:
+func _set_target(new_target: Entity) -> void:
 	if target:
 		if target.died.is_connected(_on_target_died):
 			target.died.disconnect(_on_target_died)

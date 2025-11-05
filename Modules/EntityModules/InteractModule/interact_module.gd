@@ -1,19 +1,12 @@
 class_name InteractModule
 extends Module
 
-@export var _storm_manager: StormManager
 @export var _defense_manager: DefenseManager
-@export var _life_manager: LifeManager
-@export var _fire_manager: FireManager
-@export var _poison_manager: PoisonManager
 
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	if _storm_manager == null: printerr("InteractModule: Not linked to a StormManager [", get_path(), "]")
 	if _defense_manager == null: printerr("InteractModule: Not linked to a DefenseManager [", get_path(), "]")
-	if _life_manager == null: printerr("InteractModule: Not linked to a LifeManager [", get_path(), "]")
-	if _fire_manager == null: printerr("InteractModule: Not linked to a FireManager [", get_path(), "]")
 
 # ============================== Public function ==============================
 

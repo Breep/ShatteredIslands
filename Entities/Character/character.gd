@@ -122,14 +122,14 @@ func notify_damage_done(damage: int, attack_type: Utils.AttackType) -> void:
 		_attack_manager.notify_damage_done(damage)
 
 #region ===== Actions =====
-func direct_attack(target: Character, damage: int, damage_type: Utils.DamageType) -> void:
+func direct_attack(target: Entity, damage: int, damage_type: Utils.DamageType) -> void:
 	_action_module.direct_attack(target, damage, damage_type)
 
-func direct_attack_percent(target: Character, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier) -> void:
+func direct_attack_percent(target: Entity, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier) -> void:
 	_action_module.direct_attack_percent(target, damage_percent, damage_type, percent_modifier)
 
 var _pending_attacks: Array[AttackCommand]
-func projectile_attack(target: Character, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
+func projectile_attack(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	if projectile_type == Projectile.ProjectileType.AUTO_ATTACK:
 		var attack_cmd: AttackCommand = _action_module.build_projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
 		if attack_cmd == null: return
@@ -151,13 +151,13 @@ func cast_ultimate() -> void:
 	ultimate_casted.emit()
 	_hero_3D.cast_ultimate()
 
-func heal(target: Character, heal_amount: int) -> void:
+func heal(target: Entity, heal_amount: int) -> void:
 	_action_module.heal(target, heal_amount)
 
-func heal_percent(target: Character, percent: float, percent_modifier: Utils.PercentModifier) -> void:
+func heal_percent(target: Entity, percent: float, percent_modifier: Utils.PercentModifier) -> void:
 	_action_module.heal_percent(target, percent, percent_modifier)
 
-func inflict_condition_stacks(target: Character, stacks_number: int, stack_type: Utils.StackType) -> void:
+func inflict_condition_stacks(target: Entity, stacks_number: int, stack_type: Utils.StackType) -> void:
 	_action_module.inflict_condition_stacks(target, stacks_number, stack_type)
 
 func ultimate() -> void:

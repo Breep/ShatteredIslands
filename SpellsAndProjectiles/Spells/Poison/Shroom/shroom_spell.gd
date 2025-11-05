@@ -28,7 +28,6 @@ func _ready() -> void:
 	var cyl := _area_of_effect_collision_shape_3d.shape as CylinderShape3D
 	if cyl: cyl.radius = _radius
 	_shroom_visual.scale = Vector3.ONE * 0.05
-	print("DEBUG NEW SHROOM")
 	_animate()
 
 

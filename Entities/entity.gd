@@ -59,6 +59,7 @@ var is_dead: bool:
 
 enum EntityType {
 	CHARACTER,
+	SNAKE_BARREL
 }
 
 # ============================== Constants ==============================
@@ -97,15 +98,14 @@ func get_auto_attack_spawn() -> Node3D:
 func notify_damage_done(_damage: int, _attack_type: Utils.AttackType) -> void:
 	printerr("Entity: virtual notice_damage_done() called [", get_path(), "]")
 
-# ===== Actions [VIRTUAL]
-
-func direct_attack(_target: Character, _damage: int, _damage_type: Utils.DamageType) -> void:
+#region ===== Actions [VIRTUAL]
+func direct_attack(_target: Entity, _damage: int, _damage_type: Utils.DamageType) -> void:
 	printerr("Entity: virtual direct_attack() called [", get_path(), "]")
 
-func direct_attack_percent(_target: Character, _damage_percent: float, _damage_type: Utils.DamageType, _percent_modifier: Utils.PercentModifier) -> void:
+func direct_attack_percent(_target: Entity, _damage_percent: float, _damage_type: Utils.DamageType, _percent_modifier: Utils.PercentModifier) -> void:
 	printerr("Entity: virtual direct_attack_percent() called [", get_path(), "]")
 
-func projectile_attack(_target: Character, _projectile_type: Projectile.ProjectileType, _projectile_spawn: Node3D, _projectile_stats: ProjectileStats) -> void:
+func projectile_attack(_target: Entity, _projectile_type: Projectile.ProjectileType, _projectile_spawn: Node3D, _projectile_stats: ProjectileStats) -> void:
 	printerr("Entity: virtual projectile_attack() called [", get_path(), "]")
 
 func cast_spell(_target: Entity, _spell_type: Spell.Type, _spell_modifier: Dictionary) -> void:
@@ -114,17 +114,20 @@ func cast_spell(_target: Entity, _spell_type: Spell.Type, _spell_modifier: Dicti
 func cast_ultimate() -> void:
 	printerr("Entity: virtual cast_ultimate() called [", get_path(), "]")
 
-func heal(_target: Character, _heal_amount: int) -> void:
+func heal(_target: Entity, _heal_amount: int) -> void:
 	printerr("Entity: virtual heal() called [", get_path(), "]")
 
-func heal_percent(_target: Character, _percent: float, _percent_modifier: Utils.PercentModifier) -> void:
+func heal_percent(_target: Entity, _percent: float, _percent_modifier: Utils.PercentModifier) -> void:
 	printerr("Entity: virtual heal_percent() called [", get_path(), "]")
 
-func inflict_condition_stacks(_target: Character, _stacks_number: int, _stack_type: Utils.StackType) -> void:
+func inflict_condition_stacks(_target: Entity, _stacks_number: int, _stack_type: Utils.StackType) -> void:
 	printerr("Entity: virtual inflict_condition_stacks() called [", get_path(), "]")
 
-# ===== Interaction [VIRTUAL]
+func spawn_entity(_entity_type: EntityType, _entity_spawn: Node3D) -> void:
+	printerr("Entity: virtual spawn_entity() called [", get_path(), "]")
+#endregion
 
+#region ===== Interaction [VIRTUAL]
 func take_damage(_damage: int, _damage_type: Utils.DamageType, _is_critical: bool = false, _source: Entity = null, _attack_type: Utils.AttackType = Utils.AttackType.UNDEF) -> int:
 	printerr("Entity: virtual take_damage() called [", get_path(), "]")
 	return -1
@@ -137,6 +140,7 @@ func take_condition_stacks(_stacks_number: int, _stack_type: Utils.StackType, _s
 
 func take_heal(_heal_amount: int, _source: Character = null) -> void:
 	printerr("Entity: virtual take_heal() called [", get_path(), "]")
+#endregion
 
 # ============================== Private functions ==============================
 

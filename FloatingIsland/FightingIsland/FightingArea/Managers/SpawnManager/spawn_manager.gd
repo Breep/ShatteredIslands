@@ -27,7 +27,7 @@ func _ready() -> void:
 
 # ============================== Public function ==============================
 
-func spawn_projectile(source: Character, target: Character, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
+func spawn_projectile(source: Entity, target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	var projectile: Projectile = preload("res://SpellsAndProjectiles/Projectiles/projectile.tscn").instantiate()
 	projectile.name = "Projectile_" + str(_projectile_counter)
 	projectile.position = _projectiles_node.to_local(projectile_spawn.global_position)

@@ -27,7 +27,7 @@ func connect_to_spawn_manager(spawn_manager: SpawnManager) -> void:
 # ============================== Attack ==============================
 
 # Instantly attack the target - Apply cards damages multiplier if there are some
-func direct_attack(target: Character, damage: int, damage_type: Utils.DamageType) -> void:
+func direct_attack(target: Entity, damage: int, damage_type: Utils.DamageType) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
 	var multiplier = _get_damage_multipliers()
@@ -40,7 +40,7 @@ func direct_attack(target: Character, damage: int, damage_type: Utils.DamageType
 
 
 # Instantly attack the target - Apply cards damages multiplier if there are some
-func direct_attack_percent(target: Character, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier) -> void:
+func direct_attack_percent(target: Entity, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
 	var hp: int
@@ -56,7 +56,7 @@ func direct_attack_percent(target: Character, damage_percent: float, damage_type
 
 
 # Create a projectile to attack the target - Apply cards damages multiplier if there are some
-func build_projectile_attack(target: Character, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> AttackCommand:
+func build_projectile_attack(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> AttackCommand:
 	if not multiplayer.is_server(): return
 	if target == null: return
 	var multiplier = _get_damage_multipliers()
@@ -68,7 +68,7 @@ func build_projectile_attack(target: Character, projectile_type: Projectile.Proj
 	return AttackCommand.new().setup(target, projectile_type, projectile_spawn, projectile_stats)
 
 
-func projectile_attack(target: Character, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
+func projectile_attack(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	_spawn_manager.spawn_projectile(_owner, target, projectile_type, projectile_spawn, projectile_stats)
 
 
@@ -105,20 +105,20 @@ func _get_damage_multipliers() -> Dictionary:
 	return { "physical": physical_multiplier, "magical": magical_multiplier, "is_critical": is_critical }
 
 
-func _spawn_projectile(target: Character, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
+func _spawn_projectile(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	if target == null: return
 	_spawn_manager.spawn_projectile(_owner, target, projectile_type, projectile_spawn, projectile_stats)
 
 # ============================== Heal ==============================
 
 # [Server only]
-func heal(target: Character, heal_amount: int) -> void:
+func heal(target: Entity, heal_amount: int) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
 	target.take_heal(heal_amount, _owner)
 
 
-func heal_percent(target: Character, percent: float, percent_modifier: Utils.PercentModifier) -> void:
+func heal_percent(target: Entity, percent: float, percent_modifier: Utils.PercentModifier) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
 	var hp: int
@@ -135,7 +135,7 @@ func heal_percent(target: Character, percent: float, percent_modifier: Utils.Per
 # ============================== Condition stacks ==============================
 
 # [Server only]
-func inflict_condition_stacks(target: Character, stacks_number: int, stack_type: Utils.StackType) -> void:
+func inflict_condition_stacks(target: Entity, stacks_number: int, stack_type: Utils.StackType) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
 	_check_on_inflict_condition_stacks_modifier(target, stacks_number, stack_type)
