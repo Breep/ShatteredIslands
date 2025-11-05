@@ -97,11 +97,6 @@ func _create_optional_timers() -> void:
 	# [SHROOMS]
 	if _poison_stats.poison_shrooms_activated:
 		_optional_timers.append(Utils.create_perpetual_timer(self , _poison_stats.poison_shrooms_period, _on_shrooms_timer_timeout, true))
-	
-	# [SNAKE BARREL]
-	if _poison_stats.poison_snake_barrel_activated:
-		_summon_snake_barrel()
-		#_optional_timers.append(Utils.create_perpetual_timer(self, 5.0, _on_snake_barrel_timer_timeout, true))
 
 
 func _clear_optional_timers() -> void:
@@ -111,12 +106,26 @@ func _clear_optional_timers() -> void:
 
 
 func _lanch_optional_spells() -> void:
+	# [CONTAGION]
 	if _poison_stats.poison_contagion_activated:
 		var spell_modifier: Dictionary = {
 			Spell.ContagionModifier.RADIUS: _poison_stats.poison_contagion_radius,
 			Spell.ContagionModifier.SPREAD_PERCENT: _poison_stats.poison_contagion_percent
 		}
 		_owner.cast_spell(_owner, Spell.Type.CONTAGION, spell_modifier)
+	
+	# [SNAKE BARREL]
+	if _poison_stats.poison_snake_barrel_activated:
+		_summon_snake_barrel()
+	
+	# [DEATH FOG]
+	if _poison_stats.poison_death_smoke_activated:
+		var spell_modifier: Dictionary = {
+			Spell.DeathFogModifier.GROW_SPEED: 0.2,
+			Spell.DeathFogModifier.TICK_PERIOD: _poison_stats.poison_death_smoke_period,
+			Spell.DeathFogModifier.DAMAGE_MULTIPLIER: _poison_stats.poison_death_smoke_multiplier,
+		}
+		_owner.cast_spell(_owner, Spell.Type.DEATH_FOG, spell_modifier)
 
 # ============================== Callbacks functions ==============================
 

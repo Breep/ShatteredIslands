@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://2dcs5xxjn7hn"]
+
+[ext_resource type="Script" uid="uid://bdcu4om705dyd" path="res://SpellsAndProjectiles/Spells/Poison/DeathFog/death_fog_visual.gd" id="1_dcdey"]
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_4fa74"]
+
+[sub_resource type="FogMaterial" id="FogMaterial_dcdey"]
+density = 8.0
+albedo = Color(0.28386497, 0.91230106, 0.5943204, 1)
+emission = Color(0.3009996, 0.36081448, 0.18230993, 1)
+height_falloff = 0.678472
+edge_fade = 0.69644
+density_texture = SubResource("NoiseTexture3D_4fa74")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7imci"]
+transparency = 1
+albedo_color = Color(0.3264042, 0.49995556, 0.050708726, 0.48100004)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2il7w"]
+material = SubResource("StandardMaterial3D_7imci")
+
+[node name="DeathSmokeVisual" type="Node3D"]
+script = ExtResource("1_dcdey")
+
+[node name="FogVolumeLeft" type="FogVolume" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.3528557, 0.223571, 5.01905)
+size = Vector3(10.360807, 4.15, 8.08638)
+material = SubResource("FogMaterial_dcdey")
+
+[node name="FogVolumeRight" type="FogVolume" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.3528557, 0.223571, 5.01905)
+size = Vector3(10.360807, 4.15, 8.08638)
+material = SubResource("FogMaterial_dcdey")
+
+[node name="DebugMeshLeft" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+visible = false
+mesh = SubResource("BoxMesh_2il7w")
+
+[node name="DebugMeshRight" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+visible = false
+mesh = SubResource("BoxMesh_2il7w")

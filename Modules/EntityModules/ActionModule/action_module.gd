@@ -14,6 +14,7 @@ const METEOR_SCENE: PackedScene = preload("res://SpellsAndProjectiles/Spells/Met
 const DARK_STORM_SCENE: PackedScene = preload("res://SpellsAndProjectiles/Spells/DarkStorm/dark_storm.tscn")
 const CONTAGION_SPELL_SCENE: PackedScene = preload("res://SpellsAndProjectiles/Spells/Poison/Contagion/contagion_spell_area.tscn")
 const SHROOM_SPELL_SCENE: PackedScene = preload("res://SpellsAndProjectiles/Spells/Poison/Shroom/shroom_spell.tscn")
+const DEATH_FOG_SCENE: PackedScene = preload("res://SpellsAndProjectiles/Spells/Poison/DeathFog/death_fog.tscn")
 
 const SNAKE_BARREL_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Poison/SnakeBarrel/snake_barrel.tscn")
 const SNAKE_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Poison/Snake/snake.tscn"
@@ -158,6 +159,7 @@ func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictiona
 		Spell.Type.DARK_STORM: _cast_dark_storm(target, spell_modifier)
 		Spell.Type.CONTAGION: _cast_contagion(spell_modifier)
 		Spell.Type.SHROOM: _cast_shroom(target, spell_modifier)
+		Spell.Type.DEATH_FOG: _cast_death_fog(spell_modifier)
 
 
 func _cast_meteor(target: Entity, spell_modifier: Dictionary) -> void:
@@ -207,6 +209,17 @@ func _cast_shroom(target: Entity, spell_modifier: Dictionary) -> void:
 		var damage: int = spell_modifier[Spell.ShroomModifier.DAMAGE]
 		shroom.init(_owner, target, damage, radius, life_time)
 	_spawn_manager.spawn_spell(shroom)
+
+
+func _cast_death_fog(spell_modifier: Dictionary) -> void:
+	_owner.signal_spell_casted(_owner, Spell.Type.DEATH_FOG)
+	var death_fog: DeathFog = DEATH_FOG_SCENE.instantiate()
+	if multiplayer.is_server():
+		var grow_speed: float = spell_modifier[Spell.DeathFogModifier.GROW_SPEED]
+		var tick_period: float = spell_modifier[Spell.DeathFogModifier.TICK_PERIOD]
+		var damage_multiplier: int = spell_modifier[Spell.DeathFogModifier.DAMAGE_MULTIPLIER]
+		death_fog.init(_owner, grow_speed, tick_period, damage_multiplier)
+	_spawn_manager.spawn_spell(death_fog)
 #endregion
 
 #region  ============================== Summon ==============================
