@@ -60,6 +60,7 @@ func _register_entity(entity: Entity) -> void:
 		entity.spell_casted.connect(_on_entity_spell_casted)
 		entity.stack_taken.connect(_on_entity_stack_taken)
 		entity.died.connect(_on_entity_died)
+		entity.connect_to_fighting_area(_fighting_area)
 
 
 func _kick_entity(entity: Entity) -> void:

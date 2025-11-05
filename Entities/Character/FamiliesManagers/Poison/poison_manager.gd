@@ -97,6 +97,10 @@ func _create_optional_timers() -> void:
 	# [SHROOMS]
 	if _poison_stats.poison_shrooms_activated:
 		_optional_timers.append(Utils.create_perpetual_timer(self , _poison_stats.poison_shrooms_period, _on_shrooms_timer_timeout, true))
+	
+	# [SNAKE BARREL]
+	if _poison_stats.poison_snake_barrel_activated:
+		_optional_timers.append(Utils.create_perpetual_timer(self, 5.0, _on_snake_barrel_timer_timeout, true))
 
 
 func _clear_optional_timers() -> void:
@@ -176,5 +180,21 @@ func _on_shrooms_timer_timeout() -> void:
 	_owner.cast_spell(target, Spell.Type.SHROOM, spell_modifier)
 #endregion
 
+#region SNAKE BARREL
+const FIGHTING_AREA_SIZE := Vector2(20, 10)
+func _on_snake_barrel_timer_timeout() -> void:
+	var center := Vector3(0, 0, 0)
+	var half_w := FIGHTING_AREA_SIZE.x * 0.5
+	var half_d := FIGHTING_AREA_SIZE.y * 0.5
 
+	var rng := RandomNumberGenerator.new()
+	rng.randomize()
+	var dx := rng.randf_range(-half_w, half_w)
+	var dz := rng.randf_range(-half_d, half_d)
+
+	var summon_modifier :Dictionary = {
+		Entity.SnakeBarrelModifier.START_POSITION: Vector3(center.x + dx, center.y, center.z + dz)
+	}
+	_owner.summon_entity(Entity.EntityType.SNAKE_BARREL, Vector3(center.x + dx, center.y, center.z + dz), summon_modifier)
+#endregion
  

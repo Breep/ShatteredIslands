@@ -77,8 +77,6 @@ func _add_temporary_cylinder_and_kill_self() -> void:
 	var fade := create_tween()
 	fade.tween_property(radius_mesh.material_override, "albedo_color:a", 0.0, 0.4)
 	fade.finished.connect(func ():
-		if is_instance_valid(radius_mesh):
-			radius_mesh.queue_free()
 		queue_free()
 	)
 

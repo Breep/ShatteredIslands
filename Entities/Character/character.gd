@@ -162,6 +162,9 @@ func inflict_condition_stacks(target: Entity, stacks_number: int, stack_type: Ut
 
 func ultimate() -> void:
 	_hero_3D.ultimate()
+
+func summon_entity(entity_type: EntityType, entity_spawn_global_position: Vector3, entity_modifier: Dictionary) -> void:
+	_action_module.summon_entity(entity_type, entity_spawn_global_position, entity_modifier)
 #endregion
 
 #region ===== Interaction =====

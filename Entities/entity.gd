@@ -41,6 +41,7 @@ var is_dead: bool:
 @export var id: int = -1 # Multiplayer ID of the entity
 @export var team: int = -1 # Team number of the entity
 @export var battle_id: int = -1 # The id of the battle the entity is in
+@export var entity_name: String = "<entity name>"
 
 # ============================== Local Nodes ==============================
 
@@ -59,7 +60,12 @@ var is_dead: bool:
 
 enum EntityType {
 	CHARACTER,
-	SNAKE_BARREL
+	SNAKE_BARREL,
+	SNAKE
+}
+
+enum SnakeBarrelModifier {
+	START_POSITION
 }
 
 # ============================== Constants ==============================
@@ -93,6 +99,10 @@ func look_at_target_y_only(target_position: Vector3):
 func get_auto_attack_spawn() -> Node3D:
 	return self
 
+
+func connect_to_fighting_area(_fighting_area: FightingArea) -> void:
+	print("VIRTUAL")
+
 # ===== Notifications [VIRTUAL]
 
 func notify_damage_done(_damage: int, _attack_type: Utils.AttackType) -> void:
@@ -123,8 +133,8 @@ func heal_percent(_target: Entity, _percent: float, _percent_modifier: Utils.Per
 func inflict_condition_stacks(_target: Entity, _stacks_number: int, _stack_type: Utils.StackType) -> void:
 	printerr("Entity: virtual inflict_condition_stacks() called [", get_path(), "]")
 
-func spawn_entity(_entity_type: EntityType, _entity_spawn: Node3D) -> void:
-	printerr("Entity: virtual spawn_entity() called [", get_path(), "]")
+func summon_entity(_entity_type: EntityType, _entity_spawn_global_position: Vector3, _entity_modifier: Dictionary) -> void:
+	printerr("Entity: virtual summon_entity() called [", get_path(), "]")
 #endregion
 
 #region ===== Interaction [VIRTUAL]

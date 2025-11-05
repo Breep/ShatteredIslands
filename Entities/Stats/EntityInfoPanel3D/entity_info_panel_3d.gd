@@ -29,8 +29,10 @@ func _ready() -> void:
 	_owner_entity.heal_taken.connect(_on_owner_entity_heal_taken)
 	_owner_entity.stats.health_changed.connect(_on_own_entity_health_change)
 	_owner_entity.stats.health_max_changed.connect(_on_own_entity_max_health_change)
-	_entity_name_label.text = _owner_entity.name
+	_entity_name_label.text = _owner_entity.entity_name
 	_update_health_bar(_owner_entity.stats.health, _owner_entity.stats.health_max)
+	if _health_bar.material != null:
+		_health_bar.material = _health_bar.material.duplicate(true)
 
 # ============================== Private ==============================
 

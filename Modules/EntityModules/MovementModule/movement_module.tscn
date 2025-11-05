@@ -4,9 +4,3 @@
 
 [node name="MovementManager" type="Node"]
 script = ExtResource("1_p0hjb")
-
-[node name="EnergyRegenTimer" type="Timer" parent="."]
-unique_name_in_owner = true
-wait_time = 0.05
-
-[connection signal="timeout" from="EnergyRegenTimer" to="." method="_on_energy_regen_timer_timeout"]

@@ -11,7 +11,7 @@ var battle_id: int = -1 # Set by the parent
 
 @export var _fighting_area: FightingArea
 
-#@export var _entities_node: Node3D
+@export var _entities_node: Node3D
 @export var _projectiles_node: Node3D
 @export var _spells_node: Node3D
 
@@ -46,6 +46,15 @@ func spawn_projectile(source: Entity, target: Entity, projectile_type: Projectil
 
 func spawn_spell(spell: Node3D) -> void:
 	_spells_node.add_child(spell)
+
+
+func spawn_entity(entity: Entity, entity_spawn_global_position: Vector3) -> void:
+	if entity == null: 
+		push_error("SpawnManager: Trying to spawn a <null> entity")
+		return
+	_entities_node.add_child(entity)
+	if entity_spawn_global_position != null: 
+		entity.global_position = entity_spawn_global_position
 
 # ============================== Private functions ==============================
 
