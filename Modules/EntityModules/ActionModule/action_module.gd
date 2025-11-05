@@ -217,7 +217,7 @@ func _cast_death_fog(spell_modifier: Dictionary) -> void:
 	if multiplayer.is_server():
 		var grow_speed: float = spell_modifier[Spell.DeathFogModifier.GROW_SPEED]
 		var tick_period: float = spell_modifier[Spell.DeathFogModifier.TICK_PERIOD]
-		var damage_multiplier: int = spell_modifier[Spell.DeathFogModifier.DAMAGE_MULTIPLIER]
+		var damage_multiplier: float = spell_modifier[Spell.DeathFogModifier.DAMAGE_MULTIPLIER]
 		death_fog.init(_owner, grow_speed, tick_period, damage_multiplier)
 	_spawn_manager.spawn_spell(death_fog)
 #endregion

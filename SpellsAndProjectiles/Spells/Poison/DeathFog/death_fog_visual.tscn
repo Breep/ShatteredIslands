@@ -14,7 +14,7 @@ density_texture = SubResource("NoiseTexture3D_4fa74")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7imci"]
 transparency = 1
-albedo_color = Color(0.3264042, 0.49995556, 0.050708726, 0.48100004)
+albedo_color = Color(0.3264042, 0.49995556, 0.050708726, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_2il7w"]
 material = SubResource("StandardMaterial3D_7imci")
