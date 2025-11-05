@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://vs02vwfjpfok"]
+
+[ext_resource type="PackedScene" uid="uid://dhav1rk8n22u8" path="res://SpellsAndProjectiles/Spells/Poison/Shroom/shroom_visual.tscn" id="1_kbu47"]
+[ext_resource type="Script" uid="uid://cm8bnv3rq4smr" path="res://SpellsAndProjectiles/Spells/Poison/Shroom/shroom_spell.gd" id="1_kvbuj"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_kvbuj"]
+radius = 3.0
+
+[node name="ShroomSpell" type="Node3D"]
+script = ExtResource("1_kvbuj")
+
+[node name="ShroomVisual" parent="." instance=ExtResource("1_kbu47")]
+unique_name_in_owner = true
+
+[node name="AreaOfEffect" type="Area3D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 16
+monitorable = false
+
+[node name="AreaOfEffectCollisionShape3D" type="CollisionShape3D" parent="AreaOfEffect"]
+unique_name_in_owner = true
+shape = SubResource("CylinderShape3D_kvbuj")
+
+[connection signal="body_entered" from="AreaOfEffect" to="." method="_on_area_of_effect_body_entered"]
+[connection signal="body_exited" from="AreaOfEffect" to="." method="_on_area_of_effect_body_exited"]

@@ -18,4 +18,5 @@ name = "Shrooms"
 picture = ExtResource("1_y8bx5")
 family = 7
 player_upgrade = SubResource("Resource_j6af7")
+lvl = 2
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

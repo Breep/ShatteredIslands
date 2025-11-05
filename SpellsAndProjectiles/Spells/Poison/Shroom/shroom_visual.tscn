@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhav1rk8n22u8"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_6pncl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4gunq"]
+albedo_color = Color(0.45920748, 0.6627967, 0.1489242, 1)
+
+[node name="ShroomVisual" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_6pncl")
+surface_material_override/0 = SubResource("StandardMaterial3D_4gunq")

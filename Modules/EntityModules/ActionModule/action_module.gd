@@ -13,6 +13,7 @@ var _spawn_manager: SpawnManager
 const METEOR_SCENE: PackedScene = preload("res://SpellsAndProjectiles/Spells/Meteor/meteor.tscn")
 const DARK_STORM_SCENE: PackedScene = preload("res://SpellsAndProjectiles/Spells/DarkStorm/dark_storm.tscn")
 const CONTAGION_SPELL_SCENE: PackedScene = preload("res://SpellsAndProjectiles/Spells/Poison/Contagion/contagion_spell_area.tscn")
+const SHROOM_SPELL_SCENE: PackedScene = preload("res://SpellsAndProjectiles/Spells/Poison/Shroom/shroom_spell.tscn")
 
 # ============================== Public functions ==============================
 
@@ -153,6 +154,7 @@ func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictiona
 		Spell.Type.METEOR: _cast_meteor(target, spell_modifier)
 		Spell.Type.DARK_STORM: _cast_dark_storm(target, spell_modifier)
 		Spell.Type.CONTAGION: _cast_contagion(spell_modifier)
+		Spell.Type.SHROOM: _cast_shroom(target, spell_modifier)
 
 
 func _cast_meteor(target: Entity, spell_modifier: Dictionary) -> void:
@@ -182,6 +184,7 @@ func _cast_dark_storm(target: Entity, spell_modifier: Dictionary) -> void:
 		dark_storm.init(target, 0, 0, 0, _owner)
 	_spawn_manager.spawn_spell(dark_storm)
 
+
 func _cast_contagion(spell_modifier: Dictionary) -> void:
 	_owner.signal_spell_casted(_owner, Spell.Type.CONTAGION)
 	var contagion: ContagionSpellArea = CONTAGION_SPELL_SCENE.instantiate()
@@ -192,7 +195,16 @@ func _cast_contagion(spell_modifier: Dictionary) -> void:
 	_spawn_manager.spawn_spell(contagion)
 
 
-
+func _cast_shroom(target: Entity, spell_modifier: Dictionary) -> void:
+	_owner.signal_spell_casted(_owner, Spell.Type.CONTAGION)
+	var shroom: Shroom = SHROOM_SPELL_SCENE.instantiate()
+	if multiplayer.is_server():
+		var radius: float = spell_modifier[Spell.ShroomModifier.RADIUS]
+		var life_time: float = spell_modifier[Spell.ShroomModifier.LIFE_TIME]
+		var damage: int = spell_modifier[Spell.ShroomModifier.DAMAGE]
+		shroom.init(_owner, target, damage, radius, life_time)
+	_spawn_manager.spawn_spell(shroom)
+	
 
 
 

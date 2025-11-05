@@ -4,7 +4,8 @@ extends Node
 enum Type {
 	METEOR,
 	DARK_STORM,
-	CONTAGION
+	CONTAGION,
+	SHROOM
 }
 
 enum MeteorModifier {
@@ -22,4 +23,10 @@ enum DarkStormModifier {
 enum ContagionModifier {
 	RADIUS,
 	SPREAD_PERCENT
+}
+
+enum ShroomModifier {
+	RADIUS,
+	DAMAGE,
+	LIFE_TIME
 }
