@@ -9,6 +9,8 @@ const PACIFY_DAMAGE_REDUCTION_PERCENT: float = 50 # Percentage of damage reducti
 
 var _serenity_stats: FamilySerenityStats # Ref to the owner heal stats
 
+@onready var _regen_tick_timer: Timer = %RegenTickTimer
+
 # ============================== Spells scenes ==============================
 
 # ============================== Public functions ==============================
@@ -20,11 +22,13 @@ func _ready() -> void:
 func start() -> void:
 	for timer in _optional_timers:
 		timer.start()
+	_regen_tick_timer.start()
 
 
 func stop() -> void:
 	for timer in _optional_timers:
 		timer.stop()
+	_regen_tick_timer.stop()
 
 
 func notify_heal() -> void:
@@ -86,3 +90,9 @@ func _on_epic_heal_area_timer_timeout() -> void:
 		return
 	for target in targets:
 		_action_module.heal_percent(target, _serenity_stats.epic_heal_area_percentage, Utils.PercentModifier.MAX_HP)
+
+
+func _on_regen_tick_timer_timeout() -> void:
+	var heal_amount: int = _owner.stats.regen_stacks
+	if heal_amount > 0:
+		_owner.heal(_owner, heal_amount)

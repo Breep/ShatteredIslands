@@ -14,7 +14,6 @@ signal all_fights_are_over()
 var _fighting_managers: Array[FightingManager]
 var _current_active_fighting_managers: Array[FightingManager]
 
-var __prototyping: bool = false
 
 # ====== SERVER ONLY
 
@@ -33,9 +32,8 @@ func clear() -> void:
 	_players_running_playback.clear()
 
 
-func start(prototyping: bool = false) -> void:
+func start() -> void:
 	if not multiplayer.is_server(): return
-	__prototyping = prototyping
 	_players_running_playback = PlayerManager.get_human_players().values().duplicate()
 
 

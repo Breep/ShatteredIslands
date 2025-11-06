@@ -1,10 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://bbnioyc6ti8wn"]
+[gd_scene load_steps=20 format=3 uid="uid://bbnioyc6ti8wn"]
 
 [ext_resource type="Script" uid="uid://dsiet7v8tbihn" path="res://Entities/Character/character.gd" id="1_a1h5o"]
 [ext_resource type="PackedScene" uid="uid://cf4y1g6c4ia6w" path="res://Entities/Character/CharacterVisual/character_visual.tscn" id="2_xasj2"]
 [ext_resource type="PackedScene" uid="uid://qgjyscmtp6t3" path="res://Entities/Character/CharacterLogic/character_logic.tscn" id="3_4th1x"]
 [ext_resource type="PackedScene" uid="uid://biqqopaoa3486" path="res://Entities/Character/CharacterStats/families_stats.tscn" id="3_b3hxd"]
-[ext_resource type="PackedScene" uid="uid://cjqhs57x28gtu" path="res://Entities/Stats/EntityStats/EntityStats.tscn" id="4_dhfj1"]
+[ext_resource type="PackedScene" uid="uid://cjqhs57x28gtu" path="res://Entities/Stats/EntityStats/entity_stats.tscn" id="4_dhfj1"]
 [ext_resource type="PackedScene" uid="uid://dqrhym1sskng8" path="res://Entities/Turret/turret.tscn" id="4_roimm"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="5_an1mw"]
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://Modules/PickableClickable/PickableModule/pickable_module.tscn" id="7_h7fwd"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://cp34ya8q3861m" path="res://Modules/PickableClickable/VisualFeedback/clickable_selection_feedback.tscn" id="13_jwnrq"]
 [ext_resource type="PackedScene" uid="uid://chxhutes821g8" path="res://Entities/Stats/EntityStatsManager/entity_stats_manager.tscn" id="14_6s1v2"]
 [ext_resource type="PackedScene" uid="uid://cyp7s6axjgfdt" path="res://Modules/EntityModules/AutoAttackModule/AutoAttackManager/auto_attack_modifier_registry.tscn" id="15_liv0f"]
+[ext_resource type="PackedScene" uid="uid://b64wu2s6lpcv7" path="res://Entities/AnimEventsManager/anim_events_manager.tscn" id="16_s266u"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rxegs"]
 
@@ -43,7 +44,7 @@ properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 2
 
-[node name="Character" type="CharacterBody3D" node_paths=PackedStringArray("_movement_synchronizer", "_character_visual", "_character_logic", "_turret", "_hero_3D", "_collision_shape", "_interact_module", "_action_module", "families_stats", "_attack_manager", "_defense_manager", "_clickable_module", "_clickable_feedback", "stats", "base_stats", "stats_manager", "auto_attack_modifier_registry")]
+[node name="Character" type="CharacterBody3D" node_paths=PackedStringArray("_movement_synchronizer", "_character_visual", "_character_logic", "_turret", "_hero_3D", "_collision_shape", "_interact_module", "_action_module", "anim_events_manager", "families_stats", "_attack_manager", "_defense_manager", "_clickable_module", "_clickable_feedback", "stats", "base_stats", "stats_manager", "auto_attack_modifier_registry", "target_module")]
 collision_layer = 16
 collision_mask = 16
 motion_mode = 1
@@ -56,6 +57,7 @@ _hero_3D = NodePath("Undef")
 _collision_shape = NodePath("CollisionShape3D")
 _interact_module = NodePath("CharacterLogic/Modules/InteractModule")
 _action_module = NodePath("CharacterLogic/Modules/ActionModule")
+anim_events_manager = NodePath("AnimEventsManager")
 families_stats = NodePath("FamiliesStats")
 _attack_manager = NodePath("CharacterLogic/FamiliesManagers/AttackManager")
 _defense_manager = NodePath("CharacterLogic/FamiliesManagers/DefenseManager")
@@ -65,6 +67,7 @@ stats = NodePath("Stats/CurrentStats")
 base_stats = NodePath("Stats/BaseStats")
 stats_manager = NodePath("Stats/StatsManager")
 auto_attack_modifier_registry = NodePath("AutoAttackModifierRegistry")
+target_module = NodePath("CharacterLogic/Modules/TargetModule")
 
 [node name="Stats" type="Node" parent="."]
 
@@ -77,6 +80,8 @@ _entity_base_stats = NodePath("../BaseStats")
 [node name="BaseStats" parent="Stats" instance=ExtResource("4_dhfj1")]
 
 [node name="AutoAttackModifierRegistry" parent="." instance=ExtResource("15_liv0f")]
+
+[node name="AnimEventsManager" parent="." instance=ExtResource("16_s266u")]
 
 [node name="CharacterVisual" parent="." node_paths=PackedStringArray("_owner_entity") instance=ExtResource("2_xasj2")]
 unique_name_in_owner = true
@@ -113,7 +118,8 @@ families_managers = {
 [node name="MovementModule" parent="CharacterLogic/Modules" index="0" node_paths=PackedStringArray("_owner")]
 _owner = NodePath("../../..")
 
-[node name="ActionModule" parent="CharacterLogic/Modules" index="1" node_paths=PackedStringArray("_owner")]
+[node name="ActionModule" parent="CharacterLogic/Modules" index="1" node_paths=PackedStringArray("_poison_manager", "_owner")]
+_poison_manager = NodePath("../../FamiliesManagers/PoisonManager")
 _owner = NodePath("../../..")
 
 [node name="InteractModule" parent="CharacterLogic/Modules" index="2" node_paths=PackedStringArray("_owner")]
@@ -152,13 +158,18 @@ _owner = NodePath("../../..")
 
 [node name="TurretCenterPoint" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.36537, 0)
+visible = false
 
 [node name="Turret" parent="TurretCenterPoint" node_paths=PackedStringArray("_auto_attack_module") instance=ExtResource("4_roimm")]
 transform = Transform3D(0.495, 0, 0, 0, 0.495, 0, 0, 0, 0.495, 1.10818, -0.0624669, 0)
+visible = false
 _auto_attack_module = NodePath("../../CharacterLogic/Modules/AutoAttackModule")
 
 [node name="TurretVisual" parent="TurretCenterPoint/Turret" index="0"]
 transform = Transform3D(-1.61732e-08, 0, -0.37, 0, 0.37, 0, 0.37, 0, -1.61732e-08, 0, 0, -0.966609)
+
+[node name="SpawnPoint" parent="TurretCenterPoint/Turret" index="1"]
+transform = Transform3D(0.5799994, 0, 0, 0, 0.5799994, 0, 0, 0, 0.5799994, -2.1106486, -4.5066633, -5.144084)
 
 [node name="AnimHoveringModule" parent="TurretCenterPoint/Turret" node_paths=PackedStringArray("_owner") instance=ExtResource("5_an1mw")]
 _owner = NodePath("..")

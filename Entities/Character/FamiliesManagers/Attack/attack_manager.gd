@@ -64,21 +64,8 @@ func apply_stats_modifiers() -> void:
 		_owner.stats_manager.update_modifier(stat_modifier)
 
 
-func attack(target: Character, projectile_spawn: SpawnPoint) -> void:
-	_aa_counter += 1
-	if _attack_stats.curative_knife_activated and Utils.is_randomize_modifier_active(_attack_stats.curative_knife_chance):
-		_remove_random_debuff_stack(_attack_stats.curative_knife_stacks)
-	var projectile_stats := ProjectileStats.new()
-	projectile_stats.physical_damage_flat = _owner.stats.attack_damage
-	if reflecto_belt_number_of_attacks > 0:
-		projectile_stats.physical_damage_flat += (projectile_stats.physical_damage_flat * reflecto_belt_damage_percent / 100.0) as int
-	if _attack_stats.titan_axe_activated and _aa_counter % _attack_stats.titan_axe_attack_number == 0:
-		projectile_stats.physical_damage_percent = _attack_stats.titan_axe_damage_percent
-		projectile_stats.physical_damage_percent_type = Utils.PercentModifier.MAX_HP
-	projectile_stats.speed = 15
-	_owner.projectile_attack(target, Projectile.ProjectileType.AUTO_ATTACK, projectile_spawn, projectile_stats)
 
-
+# TODO Use an AttackModifier
 func notify_damage_done(damage: int) -> void:
 	if _attack_stats.healing_crossbow_activated:
 		if Utils.is_randomize_modifier_active(_attack_stats.healing_crossbow_chance):

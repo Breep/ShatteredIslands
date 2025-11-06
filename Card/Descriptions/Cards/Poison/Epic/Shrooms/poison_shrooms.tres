@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://unfr47gd88os"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_fxwd2"]
+[ext_resource type="Texture2D" uid="uid://vj0eycrtv4pb" path="res://Card/Descriptions/Cards/Poison/Epic/Shrooms/06_shrooms.png" id="1_y8bx5"]
+[ext_resource type="Script" uid="uid://c0giyj8kvcjp2" path="res://Card/Descriptions/Cards/Poison/Epic/Shrooms/poison_shrooms.gd" id="2_8l8xt"]
+
+[sub_resource type="Resource" id="Resource_j6af7"]
+script = ExtResource("2_8l8xt")
+_damage = Array[int]([50, 75, 100, 125, 200])
+_life_time = Array[float]([5.0, 5.0, 5.0, 5.0, 5.0])
+_period = Array[float]([2.0, 2.0, 2.0, 2.0, 2.0])
+_radius = Array[float]([5.0, 5.0, 5.0, 5.0, 5.0])
+metadata/_custom_type_script = "uid://c0giyj8kvcjp2"
+
+[resource]
+script = ExtResource("1_fxwd2")
+name = "Shrooms"
+picture = ExtResource("1_y8bx5")
+family = 7
+player_upgrade = SubResource("Resource_j6af7")
+lvl = 2
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

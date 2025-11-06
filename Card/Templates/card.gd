@@ -4,7 +4,8 @@ extends Resource
 enum Rarity {
 	COMMON,
 	RARE,
-	EPIC
+	EPIC,
+	LEGENDARY
 }
 
 @export var name : String

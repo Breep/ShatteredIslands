@@ -23,6 +23,8 @@ func _ready() -> void:
 func start() -> void:
 	_lanch_optional_spells()
 	_create_optional_timers()
+	_add_attack_modifiers()
+	_add_stat_modifiers()
 	_poison_tick_timer.start()
 
 
@@ -30,18 +32,71 @@ func stop() -> void:
 	for spell in _optional_spells:
 		spell.queue_free()
 	_poison_tick_timer.stop()
+	_clear_stat_modifiers()
+	_clear_attack_modifiers()
 	_clear_optional_timers()
 
-
-func get_reduced_damage(damage: int) -> int:
-	return damage
+# TODO Make a StackModifier like the AutoAttackModifier
+func check_on_apply_poison_stack(target: Entity, stacks_number: int, stack_type: Utils.StackType) -> void:
+	if stacks_number <= 0 or stack_type != Utils.StackType.POISON: return
+	if target == null or target.is_queued_for_deletion(): return
+	if _poison_stats.poison_hot_pot_activated and Utils.is_randomize_modifier_active(_poison_stats.poison_hot_pot_chance):
+		_owner.inflict_condition_stacks(target, _poison_stats.poison_hot_pot_ignite_stacks, Utils.StackType.IGNITE)
+	if _poison_stats.poison_rotting_milk_activated and Utils.is_randomize_modifier_active(_poison_stats.poison_rotting_milk_chance):
+		_owner.inflict_condition_stacks(_owner, _poison_stats.poison_rotting_milk_regen_stacks, Utils.StackType.REGEN)
+	if _poison_stats.poison_corrosion_activated:
+		if Utils.rng.randi() % 2 == 0:
+			target.stats.armor_stacks -= _poison_stats.poison_corrosion_buff_stacks
+		else:
+			target.stats.regen_stacks -= _poison_stats.poison_corrosion_buff_stacks
 
 # ============================== Private functions ==============================
 
+func _add_attack_modifiers() -> void:
+	if _poison_stats.poison_rusty_dagger_activated:
+		var aa_modifier := AutoAttackModifier.new()
+		aa_modifier.id = "Rusty Dagger"
+		aa_modifier.tags = [AutoAttackModifier.TagType.CARD]
+		aa_modifier.on_attack_logic_callback = _on_rusty_dagger_logic_callback
+		aa_modifier.is_one_time_effect = false
+		_owner.auto_attack_modifier_registry.register_modifier(aa_modifier)
+
+func _add_stat_modifiers() -> void:
+	if _poison_stats.poison_antidote_activated:
+		var mod := StatModifier.new()
+		mod.calc_type = StatModifier.CalcType.ADD
+		mod.value = _poison_stats.poison_antidote_decrease
+		mod.stat_type = EntityStats.StatType.POISON_RESISTANCE
+		mod.id = "Antidote"
+		_owner.stats_manager.register_modifier(mod)
+
+func _clear_stat_modifiers() -> void:
+	if _poison_stats.poison_antidote_activated:
+		var mod := StatModifier.new()
+		mod.stat_type = EntityStats.StatType.POISON_RESISTANCE
+		mod.id = "Antidote"
+		_owner.stats_manager.unregister_modifier(mod)
+
+func _clear_attack_modifiers() -> void:
+	if _poison_stats.poison_rusty_dagger_activated:
+		_owner.auto_attack_modifier_registry.unregister_modifier("Rusty Dagger")
+
 func _create_optional_timers() -> void:
-	# [PERIODICA AGARICUS]
-	if _poison_stats.periodica_agaricus_activated:
-		_optional_timers.append(Utils.create_perpetual_timer(self, _poison_stats.periodica_agaricus_period, _on_periodica_agaricus_timer_timeout, true))
+	# [POISON FLASK]
+	if _poison_stats.poison_flask_activated:
+		_optional_timers.append(Utils.create_perpetual_timer(self, _poison_stats.poison_flask_period, _on_periodica_agaricus_timer_timeout, true))
+	
+	# [VENOMOUS DARTS]
+	if _poison_stats.poison_venomous_darts_activated:
+		_optional_timers.append(Utils.create_perpetual_timer(self, _poison_stats.poison_venomous_darts_period, _on_venomous_darts_timer_timeout, true))
+	
+	# [TIDE OF CORRUPTION]
+	if _poison_stats.poison_tide_of_corruption_activated:
+		_optional_timers.append(Utils.create_perpetual_timer(self, _poison_stats.poison_tide_of_corruption_period, _on_tide_of_corruption_timer_timeout, true))
+	
+	# [SHROOMS]
+	if _poison_stats.poison_shrooms_activated:
+		_optional_timers.append(Utils.create_perpetual_timer(self , _poison_stats.poison_shrooms_period, _on_shrooms_timer_timeout, true))
 
 
 func _clear_optional_timers() -> void:
@@ -51,7 +106,26 @@ func _clear_optional_timers() -> void:
 
 
 func _lanch_optional_spells() -> void:
-	pass
+	# [CONTAGION]
+	if _poison_stats.poison_contagion_activated:
+		var spell_modifier: Dictionary = {
+			Spell.ContagionModifier.RADIUS: _poison_stats.poison_contagion_radius,
+			Spell.ContagionModifier.SPREAD_PERCENT: _poison_stats.poison_contagion_percent
+		}
+		_owner.cast_spell(_owner, Spell.Type.CONTAGION, spell_modifier)
+	
+	# [SNAKE BARREL]
+	if _poison_stats.poison_snake_barrel_activated:
+		_summon_snake_barrel()
+	
+	# [DEATH FOG]
+	if _poison_stats.poison_death_smoke_activated:
+		var spell_modifier: Dictionary = {
+			Spell.DeathFogModifier.GROW_SPEED: 0.2,
+			Spell.DeathFogModifier.TICK_PERIOD: _poison_stats.poison_death_smoke_period,
+			Spell.DeathFogModifier.DAMAGE_MULTIPLIER: _poison_stats.poison_death_smoke_multiplier,
+		}
+		_owner.cast_spell(_owner, Spell.Type.DEATH_FOG, spell_modifier)
 
 # ============================== Callbacks functions ==============================
 
@@ -65,5 +139,77 @@ func _on_poison_tick_timer_timeout() -> void:
 func _on_periodica_agaricus_timer_timeout() -> void:
 	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
 	if target == null: return
-	var poison_stacks = _poison_stats.periodica_agaricus_stacks
+	var poison_stacks = _poison_stats.poison_flask_stacks
 	_action_module.inflict_condition_stacks(target, poison_stacks, Utils.StackType.POISON)
+
+
+func _on_rusty_dagger_logic_callback(cb_vars: Dictionary) -> void:
+	if not cb_vars.has(AutoAttackModifier.VarType.PROJECTILE_STATS): return
+	var proj_stats: ProjectileStats = cb_vars[AutoAttackModifier.VarType.PROJECTILE_STATS]
+	if Utils.is_randomize_modifier_active(_poison_stats.poison_rusty_dagger_chance):
+		proj_stats.poison_stacks += _poison_stats.poison_rusty_dagger_stacks
+
+
+#region VENOMOUS DARTS
+func _on_venomous_darts_timer_timeout() -> void:
+	for i in _poison_stats.poison_venomous_darts_darts_number:
+		var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
+		if target == null: return
+		var projectile_stats := ProjectileStats.new()
+		projectile_stats.on_hit_logic_callbacks.append(_on_hit_venomous_logic_callback)
+		_owner.projectile_attack(target, Projectile.ProjectileType.VENOMOUS_DART, _owner._turret._projectile_spawn_point, projectile_stats)
+
+
+func _on_hit_venomous_logic_callback(cb_vars: Dictionary) -> void:
+	if not cb_vars.has(AutoAttackModifier.VarType.TARGET): return
+	var target: Entity = cb_vars[AutoAttackModifier.VarType.TARGET]
+	if target == null or target.is_queued_for_deletion(): return
+	var damage := int(float(target.stats.poison_stacks) * _poison_stats.poison_venomous_darts_multiplier)
+	_owner.direct_attack(target, damage, Utils.DamageType.PHYSICAL)
+#endregion
+
+#region TIDE OF CORRUPTION
+func _on_tide_of_corruption_timer_timeout() -> void:
+	var targets: Array[Entity] = _owner.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ENEMIES)
+	if targets.is_empty(): return
+	var target_number: int = targets.size()
+	var poison_stacks: int = int(_poison_stats.poison_tide_of_corruption_multiplier * float(target_number))
+	for target in targets:
+		_owner.inflict_condition_stacks(target, poison_stacks, Utils.StackType.POISON)
+#endregion
+
+#region SHROOM
+func _on_shrooms_timer_timeout() -> void:
+	var target: Entity = _owner.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
+	if target == null: return
+	var spell_modifier: Dictionary = {
+		Spell.ShroomModifier.RADIUS: _poison_stats.poison_shrooms_radius,
+		Spell.ShroomModifier.DAMAGE: _poison_stats.poison_shrooms_damage,
+		Spell.ShroomModifier.LIFE_TIME: _poison_stats.poison_shrooms_life_time
+	}
+	_owner.cast_spell(target, Spell.Type.SHROOM, spell_modifier)
+#endregion
+
+#region SNAKE BARREL
+const FIGHTING_AREA_SIZE := Vector2(20, 10)
+func _on_snake_barrel_timer_timeout() -> void:
+	_summon_snake_barrel()
+
+func _summon_snake_barrel() -> void:
+	var center := Vector3(0, 0, 0)
+	var half_w := FIGHTING_AREA_SIZE.x * 0.1
+	var half_d := FIGHTING_AREA_SIZE.y * 0.5
+
+	var rng := RandomNumberGenerator.new()
+	rng.randomize()
+	var dx := rng.randf_range(-half_w, half_w)
+	var dz := rng.randf_range(-half_d, half_d)
+
+	var summon_modifier :Dictionary = {
+		Entity.SnakeBarrelModifier.SNAKE_NUMBER: _poison_stats.poison_snake_barrel_snake_number,
+		Entity.SnakeBarrelModifier.SNAKE_POISON_STACKS: _poison_stats.poison_snake_barrel_snake_poison_stacks,
+		Entity.SnakeBarrelModifier.MAX_HEALTH: _poison_stats.poison_snake_barrel_health
+	}
+	_owner.summon_entity(Entity.EntityType.SNAKE_BARREL, _owner.to_global(Vector3(center.x + dx, center.y, center.z + dz)), summon_modifier)
+#endregion
+ 

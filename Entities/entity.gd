@@ -3,13 +3,10 @@ extends CharacterBody3D
 
 # ============================== Signals ==============================
 
-signal dead(self_ref: Entity)
+signal died(self_ref: Entity)
 func signal_death() -> void:
 	_is_dead = true
-	stats.armor_stacks = 0
-	stats.ignite_stacks = 0
-	stats.poison_stacks = 0
-	dead.emit(self)
+	died.emit(self)
 
 signal damage_taken(entity_ref: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool)
 func signal_damage_taken(damage: int, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool) -> void:
@@ -27,6 +24,11 @@ signal stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: in
 func signal_stack_taken(stack_type: Utils.StackType, stack_number: int) -> void:
 	stack_taken.emit(self, stack_type, stack_number)
 
+signal auto_attack_started(is_critical: bool)
+func signal_auto_attack_started(is_critical: bool) -> void:
+	auto_attack_started.emit(is_critical)
+
+
 # ============================== Public variables ==============================
 
 var _is_dead: bool = false
@@ -39,6 +41,7 @@ var is_dead: bool:
 @export var id: int = -1 # Multiplayer ID of the entity
 @export var team: int = -1 # Team number of the entity
 @export var battle_id: int = -1 # The id of the battle the entity is in
+@export var entity_name: String = "<entity name>"
 
 # ============================== Local Nodes ==============================
 
@@ -50,10 +53,21 @@ var is_dead: bool:
 @export_group("Registry")
 @export var auto_attack_modifier_registry: AutoAttackModifierRegistry
 
+@export_group("Logic")
+@export var target_module: TargetModule
+
 # ============================== Enums ==============================
 
 enum EntityType {
 	CHARACTER,
+	SNAKE_BARREL,
+	SNAKE
+}
+
+enum SnakeBarrelModifier {
+	SNAKE_NUMBER,
+	SNAKE_POISON_STACKS,
+	MAX_HEALTH
 }
 
 # ============================== Constants ==============================
@@ -69,6 +83,7 @@ static var instance_count: int = 0
 func _init() -> void:
 	id = instance_count
 	instance_count += 1
+	print("ENTITY INIT CALLED: ", id, "-", name)
 
 
 #func _enter_tree() -> void:
@@ -87,20 +102,23 @@ func look_at_target_y_only(target_position: Vector3):
 func get_auto_attack_spawn() -> Node3D:
 	return self
 
+
+func connect_to_fighting_area(_fighting_area: FightingArea) -> void:
+	printerr("Entity: virtual connect_to_fighting_area() called [", get_path(), "]")
+
 # ===== Notifications [VIRTUAL]
 
 func notify_damage_done(_damage: int, _attack_type: Utils.AttackType) -> void:
 	printerr("Entity: virtual notice_damage_done() called [", get_path(), "]")
 
-# ===== Actions [VIRTUAL]
-
-func direct_attack(_target: Character, _damage: int, _damage_type: Utils.DamageType) -> void:
+#region ===== Actions [VIRTUAL]
+func direct_attack(_target: Entity, _damage: int, _damage_type: Utils.DamageType) -> void:
 	printerr("Entity: virtual direct_attack() called [", get_path(), "]")
 
-func direct_attack_percent(_target: Character, _damage_percent: float, _damage_type: Utils.DamageType, _percent_modifier: Utils.PercentModifier) -> void:
+func direct_attack_percent(_target: Entity, _damage_percent: float, _damage_type: Utils.DamageType, _percent_modifier: Utils.PercentModifier) -> void:
 	printerr("Entity: virtual direct_attack_percent() called [", get_path(), "]")
 
-func projectile_attack(_target: Character, _projectile_type: Projectile.ProjectileType, _projectile_spawn: Node3D, _projectile_stats: ProjectileStats) -> void:
+func projectile_attack(_target: Entity, _projectile_type: Projectile.ProjectileType, _projectile_spawn: Node3D, _projectile_stats: ProjectileStats) -> void:
 	printerr("Entity: virtual projectile_attack() called [", get_path(), "]")
 
 func cast_spell(_target: Entity, _spell_type: Spell.Type, _spell_modifier: Dictionary) -> void:
@@ -109,17 +127,20 @@ func cast_spell(_target: Entity, _spell_type: Spell.Type, _spell_modifier: Dicti
 func cast_ultimate() -> void:
 	printerr("Entity: virtual cast_ultimate() called [", get_path(), "]")
 
-func heal(_target: Character, _heal_amount: int) -> void:
+func heal(_target: Entity, _heal_amount: int) -> void:
 	printerr("Entity: virtual heal() called [", get_path(), "]")
 
-func heal_percent(_target: Character, _percent: float, _percent_modifier: Utils.PercentModifier) -> void:
+func heal_percent(_target: Entity, _percent: float, _percent_modifier: Utils.PercentModifier) -> void:
 	printerr("Entity: virtual heal_percent() called [", get_path(), "]")
 
-func inflict_condition_stacks(_target: Character, _stacks_number: int, _stack_type: Utils.StackType) -> void:
+func inflict_condition_stacks(_target: Entity, _stacks_number: int, _stack_type: Utils.StackType) -> void:
 	printerr("Entity: virtual inflict_condition_stacks() called [", get_path(), "]")
 
-# ===== Interaction [VIRTUAL]
+func summon_entity(_entity_type: EntityType, _entity_spawn_global_position: Vector3, _entity_modifier: Dictionary) -> void:
+	printerr("Entity: virtual summon_entity() called [", get_path(), "]")
+#endregion
 
+#region ===== Interaction [VIRTUAL]
 func take_damage(_damage: int, _damage_type: Utils.DamageType, _is_critical: bool = false, _source: Entity = null, _attack_type: Utils.AttackType = Utils.AttackType.UNDEF) -> int:
 	printerr("Entity: virtual take_damage() called [", get_path(), "]")
 	return -1
@@ -127,11 +148,12 @@ func take_damage(_damage: int, _damage_type: Utils.DamageType, _is_critical: boo
 func take_damage_percent(_percent: float, _percent_modifier: Utils.PercentModifier, _damage_type: Utils.DamageType, _is_critical: bool = false, _source: Entity = null) -> void:
 	printerr("Entity: virtual take_damage_percent() called [", get_path(), "]")
 
-func take_condition_stacks(_stacks_number: int, _stack_type: Utils.StackType, _source: Character = null) -> void:
+func take_condition_stacks(_stacks_number: int, _stack_type: Utils.StackType, _source: Entity = null) -> void:
 	printerr("Entity: virtual take_condition_stack() called [", get_path(), "]")
 
-func take_heal(_heal_amount: int, _source: Character = null) -> void:
+func take_heal(_heal_amount: int, _source: Entity = null) -> void:
 	printerr("Entity: virtual take_heal() called [", get_path(), "]")
+#endregion
 
 # ============================== Private functions ==============================
 

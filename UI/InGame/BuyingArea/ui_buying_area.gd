@@ -4,7 +4,9 @@ extends Control
 # ============================== Local nodes ==============================
 
 @onready var _ui_card_shop: UICardShop = %CardShop
+
 @onready var _ui_local_player_hero_portrait: UIHeroPortrait = %LocalPlayerHeroPortrait
+@onready var _ui_selected_player_hero_portrait: UIHeroPortrait = %SelectedPlayerHeroPortrait
 
 # ============================== Private variables ==============================
 
@@ -16,11 +18,8 @@ func _ready() -> void:
 	Events.entity_cliked.connect(_on_events_entity_clicked)
 	Events.furniture_clicked.connect(_on_events_furniture_clicked)
 	Events.nothing_clicked.connect(_on_events_nothing_clicked)
-	#RoundManager.current_round_changed.connect(_on_round_manager_current_round_changed)
-	#if GameManager.game_type != GameManager.GameType.SOLO and not multiplayer.is_server():
-		#_ui_player_info.connect_to_player(PlayerManager.get_local_player())
-	#elif GameManager.game_type == GameManager.GameType.SOLO:
-		#_ui_player_info.connect_to_player(PlayerManager.get_local_player())
+	_ui_selected_player_hero_portrait.hide()
+
 
 # ============================== Public functions ==============================
 
@@ -40,7 +39,11 @@ func set_inactive() -> void:
 # ============================== Callbacks ==============================
 
 func _on_events_entity_clicked(_entity: Entity) -> void:
-	pass
+	if not _entity is Character: return
+	var character: Character = _entity
+	if character.player == PlayerManager.get_local_player(): return
+	_ui_selected_player_hero_portrait.show()
+	_ui_selected_player_hero_portrait.update_content(character.player)
 
 
 func _on_events_furniture_clicked(furniture: Furniture) -> void:
@@ -54,4 +57,4 @@ func _on_events_furniture_clicked(furniture: Furniture) -> void:
 
 
 func _on_events_nothing_clicked() -> void:
-	pass
+	_ui_selected_player_hero_portrait.hide()

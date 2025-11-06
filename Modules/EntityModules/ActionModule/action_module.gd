@@ -6,12 +6,19 @@ extends Module
 @export var _life_manager: LifeManager
 @export var _fire_manager: FireManager
 @export var _serenity_manager: SerenityManager
+@export var _poison_manager: PoisonManager
 
 var _spawn_manager: SpawnManager
 
 const METEOR_SCENE: PackedScene = preload("res://SpellsAndProjectiles/Spells/Meteor/meteor.tscn")
 const DARK_STORM_SCENE: PackedScene = preload("res://SpellsAndProjectiles/Spells/DarkStorm/dark_storm.tscn")
+const CONTAGION_SPELL_SCENE: PackedScene = preload("res://SpellsAndProjectiles/Spells/Poison/Contagion/contagion_spell_area.tscn")
+const SHROOM_SPELL_SCENE: PackedScene = preload("res://SpellsAndProjectiles/Spells/Poison/Shroom/shroom_spell.tscn")
+const DEATH_FOG_SCENE: PackedScene = preload("res://SpellsAndProjectiles/Spells/Poison/DeathFog/death_fog.tscn")
 
+const SNAKE_BARREL_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Poison/SnakeBarrel/snake_barrel.tscn")
+const SNAKE_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Poison/Snake/snake.tscn"
+)
 # ============================== Public functions ==============================
 
 func connect_to_spawn_manager(spawn_manager: SpawnManager) -> void:
@@ -21,10 +28,10 @@ func connect_to_spawn_manager(spawn_manager: SpawnManager) -> void:
 	
 	_spawn_manager = spawn_manager
 
-# ============================== Attack ==============================
+#region ============================== Attack ==============================
 
 # Instantly attack the target - Apply cards damages multiplier if there are some
-func direct_attack(target: Character, damage: int, damage_type: Utils.DamageType) -> void:
+func direct_attack(target: Entity, damage: int, damage_type: Utils.DamageType) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
 	var multiplier = _get_damage_multipliers()
@@ -37,7 +44,7 @@ func direct_attack(target: Character, damage: int, damage_type: Utils.DamageType
 
 
 # Instantly attack the target - Apply cards damages multiplier if there are some
-func direct_attack_percent(target: Character, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier) -> void:
+func direct_attack_percent(target: Entity, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
 	var hp: int
@@ -53,7 +60,7 @@ func direct_attack_percent(target: Character, damage_percent: float, damage_type
 
 
 # Create a projectile to attack the target - Apply cards damages multiplier if there are some
-func projectile_attack(target: Character, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
+func build_projectile_attack(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> AttackCommand:
 	if not multiplayer.is_server(): return
 	if target == null: return
 	var multiplier = _get_damage_multipliers()
@@ -62,7 +69,11 @@ func projectile_attack(target: Character, projectile_type: Projectile.Projectile
 	projectile_stats.physical_damage_percent *= multiplier["physical"]
 	projectile_stats.magical_damage_flat *= multiplier["magical"]
 	projectile_stats.magical_damage_percent *= multiplier["magical"]
-	_spawn_projectile(target, projectile_type, projectile_spawn, projectile_stats)
+	return AttackCommand.new().setup(target, projectile_type, projectile_spawn, projectile_stats)
+
+
+func projectile_attack(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
+	_spawn_manager.spawn_projectile(_owner, target, projectile_type, projectile_spawn, projectile_stats)
 
 
 func _get_damage_multipliers() -> Dictionary:
@@ -98,20 +109,20 @@ func _get_damage_multipliers() -> Dictionary:
 	return { "physical": physical_multiplier, "magical": magical_multiplier, "is_critical": is_critical }
 
 
-func _spawn_projectile(target: Character, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
+func _spawn_projectile(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	if target == null: return
 	_spawn_manager.spawn_projectile(_owner, target, projectile_type, projectile_spawn, projectile_stats)
+#endregion
 
-# ============================== Heal ==============================
-
+#region ============================== Heal ==============================
 # [Server only]
-func heal(target: Character, heal_amount: int) -> void:
+func heal(target: Entity, heal_amount: int) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
 	target.take_heal(heal_amount, _owner)
 
 
-func heal_percent(target: Character, percent: float, percent_modifier: Utils.PercentModifier) -> void:
+func heal_percent(target: Entity, percent: float, percent_modifier: Utils.PercentModifier) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
 	var hp: int
@@ -124,25 +135,35 @@ func heal_percent(target: Character, percent: float, percent_modifier: Utils.Per
 			hp = target.stats.health_max - _owner.stats.health
 	var heal_amount: int = floor((percent * hp as float) / 100.0)
 	heal(target, heal_amount)
+#endregion
 
-# ============================== Condition stacks ==============================
-
+#region ============================== Condition stacks ==============================
 # [Server only]
-func inflict_condition_stacks(target: Character, stacks_number: int, stack_type: Utils.StackType) -> void:
+func inflict_condition_stacks(target: Entity, stacks_number: int, stack_type: Utils.StackType) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
+	_check_on_inflict_condition_stacks_modifier(target, stacks_number, stack_type)
 	target.take_condition_stacks(stacks_number, stack_type, _owner)
 
-# ============================== Spells ==============================
 
+#TODO Use a StackModifier like the AutoAttackModifier to remove dependancies between action module and family managers
+func _check_on_inflict_condition_stacks_modifier(target: Entity, stacks_number: int, stack_type: Utils.StackType) -> void:
+	if _poison_manager != null:
+		_poison_manager.check_on_apply_poison_stack(target, stacks_number, stack_type)
+#endregion
+
+#region ============================== Spells ==============================
 func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary = {}) -> void:
-	if target == null: return
 	match spell_type:
 		Spell.Type.METEOR: _cast_meteor(target, spell_modifier)
 		Spell.Type.DARK_STORM: _cast_dark_storm(target, spell_modifier)
+		Spell.Type.CONTAGION: _cast_contagion(spell_modifier)
+		Spell.Type.SHROOM: _cast_shroom(target, spell_modifier)
+		Spell.Type.DEATH_FOG: _cast_death_fog(spell_modifier)
 
 
 func _cast_meteor(target: Entity, spell_modifier: Dictionary) -> void:
+	if target == null: return
 	_owner.signal_spell_casted(target, Spell.Type.METEOR)
 	var meteor: Meteor = METEOR_SCENE.instantiate()
 	if multiplayer.is_server():
@@ -155,6 +176,7 @@ func _cast_meteor(target: Entity, spell_modifier: Dictionary) -> void:
 
 
 func _cast_dark_storm(target: Entity, spell_modifier: Dictionary) -> void:
+	if target == null: return
 	_owner.signal_spell_casted(target, Spell.Type.DARK_STORM)
 	var dark_storm: DarkStorm = DARK_STORM_SCENE.instantiate()
 	if multiplayer.is_server():
@@ -168,16 +190,66 @@ func _cast_dark_storm(target: Entity, spell_modifier: Dictionary) -> void:
 	_spawn_manager.spawn_spell(dark_storm)
 
 
+func _cast_contagion(spell_modifier: Dictionary) -> void:
+	_owner.signal_spell_casted(_owner, Spell.Type.CONTAGION)
+	var contagion: ContagionSpellArea = CONTAGION_SPELL_SCENE.instantiate()
+	if multiplayer.is_server():
+		var radius: float = spell_modifier[Spell.ContagionModifier.RADIUS]
+		var spread_percent: float = spell_modifier[Spell.ContagionModifier.SPREAD_PERCENT]
+		contagion.init(_owner, radius, spread_percent)
+	_spawn_manager.spawn_spell(contagion)
 
 
+func _cast_shroom(target: Entity, spell_modifier: Dictionary) -> void:
+	_owner.signal_spell_casted(_owner, Spell.Type.CONTAGION)
+	var shroom: Shroom = SHROOM_SPELL_SCENE.instantiate()
+	if multiplayer.is_server():
+		var radius: float = spell_modifier[Spell.ShroomModifier.RADIUS]
+		var life_time: float = spell_modifier[Spell.ShroomModifier.LIFE_TIME]
+		var damage: int = spell_modifier[Spell.ShroomModifier.DAMAGE]
+		shroom.init(_owner, target, damage, radius, life_time)
+	_spawn_manager.spawn_spell(shroom)
 
 
+func _cast_death_fog(spell_modifier: Dictionary) -> void:
+	_owner.signal_spell_casted(_owner, Spell.Type.DEATH_FOG)
+	var death_fog: DeathFog = DEATH_FOG_SCENE.instantiate()
+	if multiplayer.is_server():
+		var grow_speed: float = spell_modifier[Spell.DeathFogModifier.GROW_SPEED]
+		var tick_period: float = spell_modifier[Spell.DeathFogModifier.TICK_PERIOD]
+		var damage_multiplier: float = spell_modifier[Spell.DeathFogModifier.DAMAGE_MULTIPLIER]
+		death_fog.init(_owner, grow_speed, tick_period, damage_multiplier)
+	_spawn_manager.spawn_spell(death_fog)
+#endregion
+
+#region  ============================== Summon ==============================
+func summon_entity(entity_type: Entity.EntityType, entity_spawn_global_position: Vector3, entity_modifier: Dictionary) -> void:
+	if _spawn_manager == null:
+		push_error("ActionModule: Can't summon an entity if no SpawnManager is linked to me [", get_path(), "]")
+		return
+	match entity_type:
+		Entity.EntityType.CHARACTER: print("Summon a character ? I think not !")
+		Entity.EntityType.SNAKE_BARREL:  _summon_snake_barrel(entity_spawn_global_position, entity_modifier)
+		Entity.EntityType.SNAKE: _summon_snake(entity_spawn_global_position, entity_modifier)
 
 
+func _summon_snake_barrel(entity_spawn_global_position: Vector3, entity_modifier: Dictionary) -> void:
+	var snake_barrel: SnakeBarrel = SNAKE_BARREL_SCENE.instantiate()
+	if multiplayer.is_server():
+		var snake_number: int = entity_modifier[Entity.SnakeBarrelModifier.SNAKE_NUMBER]
+		var snake_poison_stacks: int = entity_modifier[Entity.SnakeBarrelModifier.SNAKE_POISON_STACKS]
+		var max_health: int = entity_modifier[Entity.SnakeBarrelModifier.MAX_HEALTH]
+		snake_barrel.init(snake_number, snake_poison_stacks, max_health)
+	snake_barrel.team = _owner.team
+	_spawn_manager.spawn_entity(snake_barrel, entity_spawn_global_position)
 
 
-
-
+func _summon_snake(entity_spawn_global_position: Vector3, _entity_modifier: Dictionary) -> void:
+	var snake: Snake = SNAKE_SCENE.instantiate()
+	snake.team = _owner.team
+	_spawn_manager.spawn_entity(snake, entity_spawn_global_position)
+	print("SUMMON SNAKE")
+#endregion
 
 
 

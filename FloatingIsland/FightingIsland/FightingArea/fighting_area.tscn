@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://c66yw4go2ykwa"]
+[gd_scene load_steps=15 format=3 uid="uid://c66yw4go2ykwa"]
 
 [ext_resource type="Script" uid="uid://cd8u3lm3xa8c4" path="res://FloatingIsland/FightingIsland/FightingArea/fighting_area.gd" id="1_t74of"]
 [ext_resource type="PackedScene" uid="uid://pyrw8lacvly2" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/EntityManager/entity_manager.tscn" id="2_wtb7j"]
 [ext_resource type="PackedScene" uid="uid://c0l0roxttdtlp" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/FightingManager/fighting_manager.tscn" id="3_yyfcp"]
 [ext_resource type="PackedScene" uid="uid://dnt0yj1cs67ko" path="res://Modules/BattleLogModule/BattleLogSynchronizer/battle_log_synchronizer.tscn" id="4_327ee"]
+[ext_resource type="PackedScene" uid="uid://do44qn4g8pq5j" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/Events/fighting_event_registry.tscn" id="4_w72k1"]
 [ext_resource type="PackedScene" uid="uid://ctspehviccwd5" path="res://FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor_1v1.tscn" id="5_2akj6"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="5_xgsbs"]
 [ext_resource type="PackedScene" uid="uid://c6wua1qduvyhp" path="res://Modules/BattleLogModule/BattleReader/battle_reader.tscn" id="6_w72k1"]
@@ -38,6 +39,9 @@ _scanner_area = NodePath("../ScanningArea")
 
 [node name="FightingManager" parent="." instance=ExtResource("3_yyfcp")]
 
+[node name="FightingEventRegistry" parent="." node_paths=PackedStringArray("_fighting_area") instance=ExtResource("4_w72k1")]
+_fighting_area = NodePath("..")
+
 [node name="BattleLogSynchronizer" parent="." node_paths=PackedStringArray("_battle_writer", "_battle_reader") instance=ExtResource("4_327ee")]
 _battle_writer = NodePath("../BattleWriter")
 _battle_reader = NodePath("../BattleReader")
@@ -49,8 +53,9 @@ _fighting_area = NodePath("..")
 _entity_manager = NodePath("../EntityManager")
 _spawn_manager = NodePath("../SpawnManager")
 
-[node name="SpawnManager" parent="." node_paths=PackedStringArray("_fighting_area", "_projectiles_node", "_spells_node") instance=ExtResource("5_xgsbs")]
+[node name="SpawnManager" parent="." node_paths=PackedStringArray("_fighting_area", "_entities_node", "_projectiles_node", "_spells_node") instance=ExtResource("5_xgsbs")]
 _fighting_area = NodePath("..")
+_entities_node = NodePath("../Entities")
 _projectiles_node = NodePath("../Projectiles")
 _spells_node = NodePath("../Spells")
 

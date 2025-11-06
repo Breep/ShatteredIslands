@@ -44,7 +44,9 @@ func _ready() -> void:
 	_floating_island.start_fight(_characters, _battle_type)
 	GameManager.game_rules.duration_fighting_positioning = 0.5
 	GameManager.game_rules.duration_fighting_countdown = 0.5
-	GlobalFightingManager.start(true)
+	GameManager.game_rules.duration_fighting_normal = 120.0
+	GameManager.game_state = Game.GameState.FIGHTING_POSITIONING
+	GlobalFightingManager.start()
 	_floating_island.set_active()
 	_ui_fighting_area.update_content(_floating_island._fighting_area)
 	_ui_fighting_area.set_active()

@@ -29,6 +29,10 @@ signal player_won_a_fight(player: Player)
 func signal_player_won_a_fight(player: Player) -> void:
 	player_won_a_fight.emit(player)
 
+signal player_lost_a_fight(player: Player)
+func signal_player_lost_a_fight(player: Player) -> void:
+	player_lost_a_fight.emit(player)
+
 # ============================== CLICKABLE ==============================
 
 signal entity_cliked(entity: Entity)

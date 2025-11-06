@@ -1,13 +1,24 @@
-[gd_resource type="Resource" script_class="Family" load_steps=5 format=3 uid="uid://cqqln8j72uq1e"]
+[gd_resource type="Resource" script_class="Family" load_steps=16 format=3 uid="uid://cqqln8j72uq1e"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_aqx3a"]
-[ext_resource type="Resource" uid="uid://dvpdubk0btegx" path="res://Card/Descriptions/Cards/Poison/PeriodicaAgaricus/poison_periodica_agaricus.tres" id="2_nmeyg"]
+[ext_resource type="Resource" uid="uid://dvpdubk0btegx" path="res://Card/Descriptions/Cards/Poison/Common/PoisonFlask/poison_poison_flask.tres" id="2_nmeyg"]
 [ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://Card/Templates/family.gd" id="2_tp2df"]
+[ext_resource type="Resource" uid="uid://cnr2ratevd17m" path="res://Card/Descriptions/Cards/Poison/Common/RustyDagger/poison_rusty_dagger.tres" id="3_bfw8n"]
 [ext_resource type="Texture2D" uid="uid://cwqdngpmbcnck" path="res://Card/Descriptions/Families/Icons/poison.png" id="3_p8dmb"]
+[ext_resource type="Resource" uid="uid://db0b7kkosks20" path="res://Card/Descriptions/Cards/Poison/Common/Antidote/poison_antidote.tres" id="4_3glqm"]
+[ext_resource type="Resource" uid="uid://bkwylok1rm33p" path="res://Card/Descriptions/Cards/Poison/Common/VenomousDarts/poison_venomous_darts.tres" id="5_c68o4"]
+[ext_resource type="Resource" uid="uid://dtqhilutyn471" path="res://Card/Descriptions/Cards/Poison/Common/HotPot/poison_hot_pot.tres" id="6_fol86"]
+[ext_resource type="Resource" uid="uid://bj3e4jhk5i7ab" path="res://Card/Descriptions/Cards/Poison/Common/RottingMilk/poison_rotting_milk.tres" id="7_bl42u"]
+[ext_resource type="Resource" uid="uid://e4sl6p15d3rj" path="res://Card/Descriptions/Cards/Poison/Rare/Corrosion/poison_corrosion.tres" id="8_wa8bb"]
+[ext_resource type="Resource" uid="uid://c2ujt5gb1o3qi" path="res://Card/Descriptions/Cards/Poison/Rare/TideOfCorruption/poison_tide_of_corruption.tres" id="9_jpvhv"]
+[ext_resource type="Resource" uid="uid://cl3olcm4jbk1q" path="res://Card/Descriptions/Cards/Poison/Rare/Contagion/poison_contagion.tres" id="10_ia6qo"]
+[ext_resource type="Resource" uid="uid://unfr47gd88os" path="res://Card/Descriptions/Cards/Poison/Epic/Shrooms/poison_shrooms.tres" id="11_bgeqi"]
+[ext_resource type="Resource" uid="uid://cu7ymo37wp14y" path="res://Card/Descriptions/Cards/Poison/Epic/SnakeBarrel/poison_snake_barrel.tres" id="12_ypcm0"]
+[ext_resource type="Resource" uid="uid://cjlgjeiu5bb3g" path="res://Card/Descriptions/Cards/Poison/Legendary/DeathSmoke/poison_death_smoke.tres" id="13_q0x7l"]
 
 [resource]
 script = ExtResource("2_tp2df")
-cards = Array[ExtResource("1_aqx3a")]([ExtResource("2_nmeyg")])
+cards = Array[ExtResource("1_aqx3a")]([ExtResource("2_nmeyg"), ExtResource("3_bfw8n"), ExtResource("4_3glqm"), ExtResource("5_c68o4"), ExtResource("6_fol86"), ExtResource("7_bl42u"), ExtResource("8_wa8bb"), ExtResource("9_jpvhv"), ExtResource("10_ia6qo"), ExtResource("11_bgeqi"), ExtResource("12_ypcm0"), ExtResource("13_q0x7l")])
 icon = ExtResource("3_p8dmb")
 family_name = "Poison"
 family_type = 7

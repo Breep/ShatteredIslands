@@ -8,7 +8,7 @@ var _mirrored: bool
 	get: return _mirrored
 	set(value):
 		_mirrored = value
-		_mirror_ui(_mirrored)
+		_mirror_ui()
 
 # ============================== Local Nodes ==============================
 
@@ -30,8 +30,9 @@ var _entity: Entity
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	_mirror_ui(_mirrored)
-	_make_unique()
+	_mirror_ui()
+	if not Engine.is_editor_hint():
+		_make_unique()
 
 # ============================== Public functions ==============================
 
@@ -66,6 +67,8 @@ func _disconnect_old_signals() -> void:
 		_entity.heal_taken.disconnect(_on_entity_heal_taken)
 	if _entity.stack_taken.is_connected(_on_entity_stack_taken):
 		_entity.stack_taken.disconnect(_on_entity_stack_taken)
+	if _entity.stats.regen_stacks_changed.is_connected(_on_entity_regen_stacks_changed):
+		_entity.stats.regen_stacks_changed.disconnect(_on_entity_regen_stacks_changed)
 
 
 func _connect_new_signals() -> void:
@@ -77,6 +80,7 @@ func _connect_new_signals() -> void:
 	_entity.stats.poison_stacks_changed.connect(_on_entity_poison_stacks_changed)
 	_entity.stats.armor_stacks_changed.connect(_on_entity_armor_stacks_changed)
 	_entity.stats.ignite_stacks_changed.connect(_on_entity_ignite_stacks_changed)
+	_entity.stats.regen_stacks_changed.connect(_on_entity_regen_stacks_changed)
 	_entity.damage_taken.connect(_on_entity_damage_taken)
 	_entity.heal_taken.connect(_on_entity_heal_taken)
 	_entity.stack_taken.connect(_on_entity_stack_taken)
@@ -97,12 +101,12 @@ func _update_layout() -> void:
 			_player_name_label.text = character.name
 	else:
 		_player_name_label.text = _entity.name
-	_mirror_ui(_mirrored)
+	_mirror_ui()
 
 
-func _mirror_ui(is_mirrored: bool) -> void:
+func _mirror_ui() -> void:
 	if not is_node_ready(): return
-	if is_mirrored:
+	if _mirrored:
 		_player_name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 		_player_name_label.text = _player_name_label.text.trim_prefix(" ").trim_suffix(" ") # TODO REMOVE this (Text clipping with current font)
 		_player_name_label.text = _player_name_label.text + " "
@@ -150,6 +154,10 @@ func _on_entity_armor_stacks_changed(armor_stacks: int) -> void:
 
 func _on_entity_ignite_stacks_changed(ignite_stacks: int) -> void:
 	_health_bar.ignite_stacks = ignite_stacks
+
+
+func _on_entity_regen_stacks_changed(regen_stacks: int) -> void:
+	_health_bar.regen_stacks = regen_stacks
 #endregion
 
 

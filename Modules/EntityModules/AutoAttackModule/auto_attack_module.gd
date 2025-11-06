@@ -9,8 +9,6 @@ signal target_changed(new_target: Entity)
 # ============================== Export variables ==============================
 
 @export var _projectile_spawn: SpawnPoint
-@export var _attack_manager: AttackManager
-@export var _auto_attack_modifier_registry: AutoAttackModifierRegistry
 
 # ============================== Public variables ==============================
 
@@ -44,7 +42,7 @@ var current_target: Entity:
 
 func _ready() -> void:
 	_owner.stats.attack_speed_changed.connect(_on_owner_stats_attack_speed_changed)
-	_owner.dead.connect(_on_owner_dead)
+	_owner.died.connect(_on_owner_died)
 
 # ============================== Public functions ==============================
 
@@ -66,11 +64,7 @@ func _set_auto_attack_speed(new_attack_speed: float) -> void:
 		_auto_attack_timer.wait_time = 1.0 / new_attack_speed
 
 
-func _auto_attack(target: Character) -> void:
-	#if _attack_manager != null:
-		#_attack_manager.attack(target, _projectile_spawn)
-	#else:
-	#
+func _auto_attack(target: Entity) -> void:
 	var projectile_stats := ProjectileStats.new()
 	projectile_stats.physical_damage_flat = _owner.stats.attack_damage
 	projectile_stats.speed = 15
@@ -87,12 +81,12 @@ func _consume_modifiers(projectile_stats: ProjectileStats) -> void:
 		add += aa_modifier.damage_flat
 		mul += aa_modifier.damage_mult
 		if aa_modifier.on_attack_logic_callback.is_valid():
-			aa_modifier.on_attack_logic_callback.call({})
+			aa_modifier.on_attack_logic_callback.call({AutoAttackModifier.VarType.PROJECTILE_STATS:projectile_stats})
 		if aa_modifier.on_attack_visual_callback.is_valid():
 			aa_modifier.on_attack_visual_callback.call({AutoAttackModifier.VarType.VISUAL_POS:_projectile_spawn.global_position})
 		projectile_stats.on_hit_logic_callbacks.append(aa_modifier.on_hit_logic_callback)
 		projectile_stats.on_hit_visual_callbacks.append(aa_modifier.on_hit_visual_callback)
-	projectile_stats.physical_damage_flat += add
+	projectile_stats.physical_damage_flat += int(add)
 	projectile_stats.physical_damage_flat *= (1 + mul)
 
 # ============================== Callbacks functions ==============================
@@ -108,7 +102,7 @@ func _on_owner_stats_attack_speed_changed(new_attack_speed: float) -> void:
 	attack_speed = new_attack_speed
 
 
-func _on_owner_dead(_unused) -> void:
+func _on_owner_died(_unused) -> void:
 	stop()
 
 

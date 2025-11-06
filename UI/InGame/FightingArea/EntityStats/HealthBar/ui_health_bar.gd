@@ -30,10 +30,12 @@ var _mirrored: bool
 @onready var _debuf_control: Control = %DebufControl
 @onready var _buf_control: Control = %BufControl
 @onready var _debuf_h_box: HBoxContainer = %DebufHBox
+@onready var _buf_h_box: HBoxContainer = %BufHBox
 @onready var _ignite_label: Label = %IgniteLabel
 @onready var _poison_label: Label = %PoisonLabel
 @onready var _health_label: Label = %HealthLabel
 @onready var _armor_label: Label = %ArmorLabel
+@onready var _regen_label: Label = %RegenLabel
 #endregion
 
 @export var _ignite_multiplier: float = 1.0
@@ -56,6 +58,14 @@ var poison_stacks: int:
 		_poison_stacks = max(0, value)
 		_update_poison()
 
+
+var _ignite_stacks: int = 0
+var ignite_stacks: int:
+	get: return _ignite_stacks
+	set(value):
+		_ignite_stacks = max(0, value)
+		_update_ignite()
+
 var _armor_stacks: int = 0
 var armor_stacks: int:
 	get: return _armor_stacks
@@ -64,12 +74,13 @@ var armor_stacks: int:
 		_update_armor()
 		_update_armor_bar_end_pos()
 
-var _ignite_stacks: int = 0
-var ignite_stacks: int:
-	get: return _ignite_stacks
+var _regen_stacks: int = 0
+var regen_stacks: int:
+	get: return _regen_stacks
 	set(value):
-		_ignite_stacks = max(0, value)
-		_update_ignite()
+		_regen_stacks = max(0, value)
+		_update_regen()
+
 
 var _current_health: int = 1000
 var current_health: int:
@@ -114,12 +125,16 @@ func _mirror_ui(is_mirrored: bool) -> void:
 		_labels_h_box.move_child(_debuf_control, -1)
 		_debuf_h_box.move_child(_ignite_label, 0)
 		_debuf_h_box.move_child(_poison_label, -1)
+		_buf_h_box.move_child(_armor_label, -1)
+		_buf_h_box.move_child(_regen_label, 0)
 	else:
 		_progress_bar_viewport_texture.flip_h = false
 		_labels_h_box.move_child(_buf_control, -1)
 		_labels_h_box.move_child(_debuf_control, 0)
 		_debuf_h_box.move_child(_ignite_label, -1)
 		_debuf_h_box.move_child(_poison_label, 0)
+		_buf_h_box.move_child(_armor_label, 0)
+		_buf_h_box.move_child(_regen_label, -1)
 
 
 func _make_unique() -> void:
@@ -140,10 +155,16 @@ func _update_layout() -> void:
 	_update_armor()
 	_update_poison()
 	_update_ignite()
+	_update_regen()
 	
 	_segments.update_segment_count(round(float(_max_health) / float(_health_per_segment)))
 
 
+func _update_health() -> void:
+	_health_label.text = str(current_health)
+	_health_bar.set_bar_value(_current_health)
+
+#region Stacks
 func _update_poison() -> void:
 	if _poison_stacks <= 0:
 		_poison_bar.hide()
@@ -170,23 +191,21 @@ func _update_armor() -> void:
 	_armor_bar.set_bar_value(_armor_stacks)
 
 
-func _update_health() -> void:
-	_health_label.text = str(current_health)
-	_health_bar.set_bar_value(_current_health)
-
-
 func _update_ignite() -> void:
 	if _ignite_stacks <= 0:
-		#_ignite_bar.hide()
 		_ignite_label.hide()
 	else:
-		#_ignite_bar.show()
 		_ignite_label.show()
 		_ignite_label.text = str(_ignite_stacks)
-	#_ignite_bar.size.x = (float(_ignite_stacks) / _health_bar.max_value) * _health_bar.size.x * _ignite_multiplier
-	#_ignite_bar.size.y = _health_bar.size.y / _ignite_vsize_divider
-	#_ignite_bar.position = end_pos - (_poison_bar.size.x + _ignite_bar.size.x) * Vector2.RIGHT
 
+
+func _update_regen() -> void:
+	if _regen_stacks <= 0:
+		_regen_label.hide()
+	else:
+		_regen_label.show()
+		_regen_label.text = str(_regen_stacks)
+#endregion
 
 func _update_health_bar_end_pos() -> void:
 	var ratio: float = float(_current_health) / float(_max_health)

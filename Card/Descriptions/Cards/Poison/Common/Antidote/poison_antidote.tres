@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://db0b7kkosks20"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_deq0v"]
+[ext_resource type="Texture2D" uid="uid://ce5ub2nmu7n25" path="res://Card/Descriptions/Cards/Poison/Common/Antidote/portrait_antidote.png" id="1_n6870"]
+[ext_resource type="Script" uid="uid://dcejixs26dr0s" path="res://Card/Descriptions/Cards/Poison/Common/Antidote/poison_antidote.gd" id="2_bguij"]
+
+[sub_resource type="Resource" id="Resource_cl7n6"]
+script = ExtResource("2_bguij")
+_damage_deacrease = Array[float]([8.0, 16.0, 24.0, 32.0, 48.0])
+metadata/_custom_type_script = "uid://dcejixs26dr0s"
+
+[resource]
+script = ExtResource("1_deq0v")
+name = "Antidote"
+picture = ExtResource("1_n6870")
+family = 7
+player_upgrade = SubResource("Resource_cl7n6")
+lvl = 5
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

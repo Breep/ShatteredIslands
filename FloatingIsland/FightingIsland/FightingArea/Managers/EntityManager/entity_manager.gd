@@ -59,17 +59,17 @@ func _register_entity(entity: Entity) -> void:
 		entity.damage_taken.connect(_on_entity_damage_taken)
 		entity.spell_casted.connect(_on_entity_spell_casted)
 		entity.stack_taken.connect(_on_entity_stack_taken)
+		entity.died.connect(_on_entity_died)
+		entity.connect_to_fighting_area(_fighting_area)
 
 
 func _kick_entity(entity: Entity) -> void:
-	if entity.damage_taken.is_connected(_on_entity_damage_taken):
-		entity.damage_taken.disconnect(_on_entity_damage_taken)
-	if entity.spell_casted.is_connected(_on_entity_spell_casted):
-		entity.spell_casted.disconnect(_on_entity_spell_casted)
-	if entity.stack_taken.is_connected(_on_entity_stack_taken):
-			entity.stack_taken.disconnect(_on_entity_stack_taken)
-	entities.erase(entity)
-	if _characters.has(entity.id): _characters.erase(entity)
+	if entity.damage_taken.is_connected(_on_entity_damage_taken): entity.damage_taken.disconnect(_on_entity_damage_taken)
+	if entity.spell_casted.is_connected(_on_entity_spell_casted): entity.spell_casted.disconnect(_on_entity_spell_casted)
+	if entity.stack_taken.is_connected(_on_entity_stack_taken): entity.stack_taken.disconnect(_on_entity_stack_taken)
+	if entity.died.is_connected(_on_entity_died): entity.died.disconnect(_on_entity_died)
+	entities.erase(entity.id)
+	if _characters.has(entity.id): _characters.erase(entity.id)
 
 # ============================== Callbacks ==============================
 
@@ -91,6 +91,11 @@ func _on_entity_spell_casted(entity: Entity, target: Entity, spell_type: Spell.T
 
 func _on_entity_stack_taken(entity: Entity, stack_type: Utils.StackType, stack_number: int) -> void:
 	_fighting_area.signal_stack_taken(entity, stack_type, stack_number)
+
+
+func _on_entity_died(entity: Entity) -> void:
+	print("DEBUG ENtity: ", entity.name, " DIED")
+	_fighting_area.signal_entity_died(entity)
 
 
 func _on_scanner_area_body_entered(body: Node3D) -> void:

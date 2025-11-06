@@ -25,11 +25,11 @@ layout_mode = 1
 
 [node name="BuyingArea" parent="." instance=ExtResource("3_d4l1p")]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
 
 [node name="FightingArea" parent="." instance=ExtResource("4_qmks4")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 
 [node name="Result" parent="." instance=ExtResource("3_y4wsx")]

@@ -11,7 +11,7 @@ var battle_id: int = -1 # Set by the parent
 
 @export var _fighting_area: FightingArea
 
-#@export var _entities_node: Node3D
+@export var _entities_node: Node3D
 @export var _projectiles_node: Node3D
 @export var _spells_node: Node3D
 
@@ -27,7 +27,7 @@ func _ready() -> void:
 
 # ============================== Public function ==============================
 
-func spawn_projectile(source: Character, target: Character, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
+func spawn_projectile(source: Entity, target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	var projectile: Projectile = preload("res://SpellsAndProjectiles/Projectiles/projectile.tscn").instantiate()
 	projectile.name = "Projectile_" + str(_projectile_counter)
 	projectile.position = _projectiles_node.to_local(projectile_spawn.global_position)
@@ -36,6 +36,7 @@ func spawn_projectile(source: Character, target: Character, projectile_type: Pro
 	projectile.target = target
 	projectile.battle_id = battle_id
 	projectile.id = _projectile_counter
+	projectile.projectile_type = projectile_type
 	
 	var modifiers: Array[Projectile.ProjectileEffect] = []
 	_fighting_area.signal_projectile_spawned(source, target, projectile_type, modifiers)
@@ -45,6 +46,15 @@ func spawn_projectile(source: Character, target: Character, projectile_type: Pro
 
 func spawn_spell(spell: Node3D) -> void:
 	_spells_node.add_child(spell)
+
+
+func spawn_entity(entity: Entity, entity_spawn_global_position: Vector3) -> void:
+	if entity == null: 
+		push_error("SpawnManager: Trying to spawn a <null> entity")
+		return
+	_entities_node.add_child(entity)
+	if entity_spawn_global_position != null: 
+		entity.global_position = entity_spawn_global_position
 
 # ============================== Private functions ==============================
 

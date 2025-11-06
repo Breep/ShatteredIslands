@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://bd30qmtgnma2p"]
+[gd_scene load_steps=19 format=3 uid="uid://bd30qmtgnma2p"]
 
 [ext_resource type="Script" uid="uid://d30k2yor5okgu" path="res://Prototyping/Camera/prototyping_camera.gd" id="1_t812x"]
 [ext_resource type="PackedScene" uid="uid://bg5efhnq0erdv" path="res://Modules/PickableClickable/ClickableModule/clickable_module.tscn" id="3_25bs0"]
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://Modules/PickableClickable/PickableModule/pickable_module.tscn" id="4_jy07b"]
 [ext_resource type="PackedScene" uid="uid://dumhxpaktew01" path="res://Data/Assets/3D/Furnitures/table.tscn" id="5_vrfg7"]
+[ext_resource type="Script" uid="uid://58q3n5lv4aac" path="res://Prototyping/Camera/static_body_3d.gd" id="6_r1l57"]
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="6_vrfg7"]
 
 [sub_resource type="Environment" id="Environment_bi2n1"]
@@ -26,6 +27,20 @@ material = SubResource("StandardMaterial3D_c0305")
 [sub_resource type="BoxShape3D" id="BoxShape3D_vrfg7"]
 size = Vector3(1, 0.863037, 2.28625)
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pxrnd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vrfg7"]
+albedo_color = Color(0.7100482, 0.4537912, 0.22758529, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_r1l57"]
+material = SubResource("StandardMaterial3D_vrfg7")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r1l57"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_h813j"]
+material = SubResource("StandardMaterial3D_r1l57")
+size = Vector2(20, 20)
+
 [node name="PrototypingCamera" type="Node3D" node_paths=PackedStringArray("_center_point_camera")]
 script = ExtResource("1_t812x")
 _center_point_camera = NodePath("CenterPointCamera")
@@ -36,32 +51,41 @@ environment = SubResource("Environment_bi2n1")
 [node name="Lights" type="Node3D" parent="."]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 2, 2.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 5, 2.5)
 light_color = Color(0.337255, 0.00392157, 0.737255, 1)
+light_energy = 2.0
 shadow_enabled = true
-omni_range = 10.0
+omni_range = 100.0
+omni_attenuation = 0.4
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2, -2.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 5, -2.5)
 light_color = Color(0.639216, 0.439216, 0.94902, 1)
+light_energy = 2.0
 shadow_enabled = true
-omni_range = 10.0
+omni_range = 100.0
+omni_attenuation = 0.4
 
 [node name="OmniLight3D4" type="OmniLight3D" parent="Lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2, 2.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 5, 2.5)
 light_color = Color(0.12549, 0.270588, 0.886275, 1)
+light_energy = 2.0
 shadow_enabled = true
-omni_range = 10.0
+omni_range = 100.0
+omni_attenuation = 0.4
 
 [node name="OmniLight3D5" type="OmniLight3D" parent="Lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 2, -2.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 5, -2.5)
 light_color = Color(0.0196078, 1, 0.811765, 1)
+light_energy = 2.0
 shadow_enabled = true
-omni_range = 10.0
+omni_range = 100.0
+omni_attenuation = 0.4
 
 [node name="Pickables" type="Node3D" parent="."]
 
 [node name="PickableA" type="StaticBody3D" parent="Pickables"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -2.7826796)
 collision_layer = 17
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Pickables/PickableA"]
@@ -78,7 +102,7 @@ _owner = NodePath("..")
 _owner = NodePath("..")
 
 [node name="PickableA2" type="StaticBody3D" parent="Pickables"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.17351)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7319403, 0.5, 1.1503565)
 collision_layer = 17
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Pickables/PickableA2"]
@@ -116,5 +140,23 @@ _owner = NodePath("..")
 transform = Transform3D(-0.395546, 0.91825, -0.018994, -0.614275, -0.249117, 0.748737, 0.682796, 0.307827, 0.662595, 13.7948, 5.51448, 4.41668)
 
 [node name="CenterPointCamera" parent="." instance=ExtResource("6_vrfg7")]
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8385696, 2.3841858e-07, 1.3014617)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("6_r1l57")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/StaticBody3D"]
+shape = SubResource("CapsuleShape3D_pxrnd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_r1l57")
+skeleton = NodePath("../StaticBody3D")
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_h813j")
 
 [editable path="Pickables/StaticBody3D/Table"]

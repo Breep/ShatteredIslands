@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqg0p41xhlwb7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1no8e"]
+albedo_color = Color(0.2915872, 0.50683206, 0.22083485, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_edf8b"]
+material = SubResource("StandardMaterial3D_1no8e")
+radius = 0.1
+height = 0.5
+
+[node name="SnakeVisual" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.9106855e-15, 4.371139e-08, 1, 1, -4.371139e-08, 0, 4.371139e-08, 1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_edf8b")

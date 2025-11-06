@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://fe7g12v4g3lb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w1ck6"]
+albedo_color = Color(0.5877949, 0.30254856, 0.03938087, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_s7fsq"]
+material = SubResource("StandardMaterial3D_w1ck6")
+height = 1.0
+
+[node name="SnakeBarrelVisual" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_s7fsq")

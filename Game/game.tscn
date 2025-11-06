@@ -25,6 +25,7 @@ glow_enabled = true
 glow_bloom = 0.2
 fog_light_color = Color(0.175414, 0.565791, 0.908127, 1)
 fog_light_energy = 0.05
+volumetric_fog_enabled = true
 volumetric_fog_density = 0.0
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_7gi1t"]
@@ -158,6 +159,7 @@ mouse_filter = 2
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 
 [node name="UIGame" parent="UI" instance=ExtResource("9_kul4i")]
 layout_mode = 1

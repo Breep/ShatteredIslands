@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://cl3olcm4jbk1q"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_0lrnh"]
+[ext_resource type="Texture2D" uid="uid://uo5qk5oy4vej" path="res://Card/Descriptions/Cards/Poison/Rare/Contagion/portrait_contagion.png" id="1_a23ts"]
+[ext_resource type="Script" uid="uid://630ldlxlvucv" path="res://Card/Descriptions/Cards/Poison/Rare/Contagion/poison_contagion.gd" id="2_qdbqp"]
+
+[sub_resource type="Resource" id="Resource_gcxcv"]
+script = ExtResource("2_qdbqp")
+_percent = Array[float]([20.0, 50.0, 100.0])
+_radius = Array[float]([20.0, 20.0, 20.0])
+metadata/_custom_type_script = "uid://630ldlxlvucv"
+
+[resource]
+script = ExtResource("1_0lrnh")
+name = "Contagion"
+picture = ExtResource("1_a23ts")
+family = 7
+player_upgrade = SubResource("Resource_gcxcv")
+lvl = 3
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

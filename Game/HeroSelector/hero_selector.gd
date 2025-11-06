@@ -118,6 +118,7 @@ func _pick_hero_unique(player_id: int, hero_id: Hero.HeroId) -> void:
 # ============================== Callbacks ==============================
 
 func _on_ui_hero_picking_screen_hero_locked(hero: Hero) -> void:
+	if hero == null: return
 	if _selection_type == SelectionType.UNIQUE:
 		_pick_hero_unique.rpc(multiplayer.get_unique_id(), hero.id)
 	else:
