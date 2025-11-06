@@ -26,8 +26,10 @@ func _on_scanner_area_body_exited(_body: Node3D) -> void:
 
 
 func _on_enemy_died(victim: Entity) -> void:
-	print("DEBUG - SPREAD POISON STACKS")
 	if victim == null or victim.is_queued_for_deletion(): return
+	if _entity_owner == null or victim.is_queued_for_deletion():
+		queue_free()
+		return
 	if victim.team == _entity_owner.team: return
 	
 	var poison_stacks: int = int(float(victim.stats.poison_stacks) * _spread_percent / 100.0)

@@ -16,6 +16,7 @@ script = ExtResource("1_l621g")
 name = "Snake barrel"
 picture = ExtResource("1_de10l")
 family = 7
+rarity = 2
 player_upgrade = SubResource("Resource_jk0e5")
 lvl = 2
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

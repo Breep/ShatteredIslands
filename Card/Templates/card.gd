@@ -8,6 +8,13 @@ enum Rarity {
 	LEGENDARY
 }
 
+const RARITY_COLORS: Dictionary[Rarity, Color] = {
+	Rarity.COMMON: Color.WEB_GRAY,
+	Rarity.RARE: Color.DARK_BLUE,
+	Rarity.EPIC: Color.REBECCA_PURPLE,
+	Rarity.LEGENDARY: Color.DARK_ORANGE,
+}
+
 @export var name : String
 @export var picture : Texture2D
 @export var family: Family.FamilyType

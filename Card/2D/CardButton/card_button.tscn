@@ -1,22 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://c2psjj8133op3"]
+[gd_scene load_steps=7 format=3 uid="uid://c2psjj8133op3"]
 
 [ext_resource type="Script" uid="uid://wf6yt1v2e55m" path="res://Card/2D/CardButton/card_button.gd" id="1_l6wd5"]
 [ext_resource type="Shader" uid="uid://h1sabcy25vtt" path="res://Card/2D/CardButton/3dcard.gdshader" id="2_mmqgw"]
+[ext_resource type="Script" uid="uid://dl8cs3pdc7hvl" path="res://UI/Tool/input_transmiter.gd" id="3_23gh2"]
 [ext_resource type="PackedScene" uid="uid://l4hi6dgs8lvg" path="res://Card/2D/CardLayout/card_layout.tscn" id="3_cgxxr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_23gh2"]
 shader = ExtResource("2_mmqgw")
-shader_parameter/fov = 60.0
+shader_parameter/fov = 30.0000013775
 shader_parameter/cull_back = false
 shader_parameter/y_rot = 0.0
 shader_parameter/x_rot = 0.0
-shader_parameter/inset = 0.64
+shader_parameter/inset = 0.7610000361475
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_vk20g"]
-viewport_path = NodePath("SubViewport")
+viewport_path = NodePath("TextureRect/SubViewport")
 
 [node name="CardButton" type="Control" node_paths=PackedStringArray("_card_layout", "_texture_rect")]
-self_modulate = Color(1, 1, 1, 0)
 layout_mode = 3
 anchor_right = 0.403646
 anchor_bottom = 1.0
@@ -24,7 +24,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_l6wd5")
-_card_layout = NodePath("SubViewport/CardLayout")
+_card_layout = NodePath("TextureRect/SubViewport/CardLayout")
 _texture_rect = NodePath("TextureRect")
 metadata/_edit_use_anchors_ = true
 
@@ -40,16 +40,18 @@ mouse_default_cursor_shape = 2
 texture = SubResource("ViewportTexture_vk20g")
 expand_mode = 1
 stretch_mode = 5
+script = ExtResource("3_23gh2")
 
-[node name="SubViewport" type="SubViewport" parent="."]
-size = Vector2i(630, 880)
+[node name="SubViewport" type="SubViewport" parent="TextureRect"]
+transparent_bg = true
+size = Vector2i(1260, 1760)
 
-[node name="CardLayout" parent="SubViewport" instance=ExtResource("3_cgxxr")]
+[node name="CardLayout" parent="TextureRect/SubViewport" instance=ExtResource("3_cgxxr")]
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_right = 630.0
-offset_bottom = 880.0
+offset_right = 1260.0
+offset_bottom = 1760.0
 grow_horizontal = 1
 grow_vertical = 1
 

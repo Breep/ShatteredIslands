@@ -15,5 +15,6 @@ script = ExtResource("1_kl7m4")
 name = "Death Smoke"
 picture = ExtResource("1_gscfb")
 family = 7
+rarity = 3
 player_upgrade = SubResource("Resource_bi3sl")
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"
