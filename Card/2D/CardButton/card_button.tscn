@@ -2,16 +2,16 @@
 
 [ext_resource type="Script" uid="uid://wf6yt1v2e55m" path="res://Card/2D/CardButton/card_button.gd" id="1_l6wd5"]
 [ext_resource type="Shader" uid="uid://h1sabcy25vtt" path="res://Card/2D/CardButton/3dcard.gdshader" id="2_mmqgw"]
-[ext_resource type="Script" uid="uid://dl8cs3pdc7hvl" path="res://UI/Tool/input_transmiter.gd" id="3_23gh2"]
+[ext_resource type="Script" uid="uid://bsi14l08a6gp4" path="res://UI/Tool/input_transmiter_fake_3d.gd" id="3_23gh2"]
 [ext_resource type="PackedScene" uid="uid://l4hi6dgs8lvg" path="res://Card/2D/CardLayout/card_layout.tscn" id="3_cgxxr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_23gh2"]
 shader = ExtResource("2_mmqgw")
-shader_parameter/fov = 30.0000013775
+shader_parameter/fov = 60.0000028025
 shader_parameter/cull_back = false
 shader_parameter/y_rot = 0.0
 shader_parameter/x_rot = 0.0
-shader_parameter/inset = 0.7610000361475
+shader_parameter/inset = 0.800000038
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_vk20g"]
 viewport_path = NodePath("TextureRect/SubViewport")
@@ -22,13 +22,12 @@ anchor_right = 0.403646
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
 script = ExtResource("1_l6wd5")
 _card_layout = NodePath("TextureRect/SubViewport/CardLayout")
 _texture_rect = NodePath("TextureRect")
 metadata/_edit_use_anchors_ = true
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." node_paths=PackedStringArray("viewport")]
 material = SubResource("ShaderMaterial_23gh2")
 layout_mode = 1
 anchors_preset = 15
@@ -41,6 +40,8 @@ texture = SubResource("ViewportTexture_vk20g")
 expand_mode = 1
 stretch_mode = 5
 script = ExtResource("3_23gh2")
+viewport = NodePath("SubViewport")
+rotation_strength = -0.1
 
 [node name="SubViewport" type="SubViewport" parent="TextureRect"]
 transparent_bg = true

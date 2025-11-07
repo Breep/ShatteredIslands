@@ -36,6 +36,7 @@ func _generate_text() -> void:
 # ============================== Callbacks ==============================
 
 func _on_meta_hover_started(meta: Variant) -> void:
+	print("COUCOU 1")
 	if _tooltip == null:
 		_tooltip = TooltipManager.create_tooltip(meta)
 		if _tooltip == null:

@@ -39,10 +39,10 @@ func _update_card_layout(card: Card) -> void:
 	if card == null:
 		push_error("CardLayout: Trying to update a <null> card")
 		return
-	_card_desc_label.text = card.player_upgrade.get_description(card.lvl)
+	_card_name_label.text = card.name
+	_card_desc_label.text_raw = card.player_upgrade.get_description(card.lvl)
 	_card_portrait_texture.texture = card.picture
 	_family_icons[0].texture = Shared.FAMILIES[card.family].icon
-	_card_name_label.text = card.name
 	_bottom_background.modulate = Card.RARITY_COLORS[card.rarity]
 	
 	for i in 5:
