@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://l4hi6dgs8lvg"]
+[gd_scene load_steps=23 format=3 uid="uid://l4hi6dgs8lvg"]
 
 [ext_resource type="Script" uid="uid://dbdgpnlir03dy" path="res://Card/2D/CardLayout/card_layout.gd" id="1_2an10"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_ru7cc"]
@@ -292,14 +292,6 @@ metadata/_custom_type_script = "uid://xgjmhhke0a8p"
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_mrwhp"]
 gradient = SubResource("Gradient_s3doy")
 fill_to = Vector2(1, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p31bt"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tx335"]
-bg_color = Color(0.6608774, 0.35694543, 0.21648768, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pjbj4"]
-bg_color = Color(0.46563447, 0.6654576, 0.37518433, 1)
 
 [node name="CardLayout" type="Control" node_paths=PackedStringArray("_level_containers", "_level_background", "_family_icon_containers", "_family_icons")]
 custom_minimum_size = Vector2(1260, 1760)
@@ -797,13 +789,3 @@ vertical_alignment = 1
 script = ExtResource("11_pjbj4")
 text_raw = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor [[POISON_STACK]] incididunt ut labore et dolore magna aliqua. "
 metadata/_custom_type_script = "uid://bd3srw4twda5w"
-
-[node name="Button" type="Button" parent="."]
-layout_mode = 0
-offset_left = 209.0
-offset_top = 230.0
-offset_right = 1072.0
-offset_bottom = 1439.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_p31bt")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_tx335")
-theme_override_styles/hover = SubResource("StyleBoxFlat_pjbj4")
