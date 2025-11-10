@@ -1,8 +1,8 @@
 class_name AttackGatlingGun
 extends CharacterUpgrade
 
-@export var _attack_speed_min: Array[int] # % Attack speed minimum
-@export var _attack_speed_max: Array[int] # % Attack speed maximum
+@export var _attack_speed_min: Array[float] # % Attack speed minimum
+@export var _attack_speed_max: Array[float] # % Attack speed maximum
 @export var _duration: float # % Duration to go from minimum to maximum attack speed
 
 func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
@@ -21,5 +21,5 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]Increase auto-attack speed from " + str(_attack_speed_min[cardlvl - 1]) + " to " + str(_attack_speed_min[cardlvl - 1]) + \
+	return "[center]Increase auto-attack speed from " + str(_attack_speed_min[cardlvl - 1]) + " to " + str(_attack_speed_max[cardlvl - 1]) + \
 			" during " + str(_duration) + "s[/center]"

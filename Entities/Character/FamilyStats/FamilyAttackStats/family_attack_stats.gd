@@ -20,9 +20,9 @@ extends FamilyStats
 
 @export_group("Gatling Gun")
 @export var gatling_gun_activated: bool # True if this skill is activated
-@export var gatling_gun_min: int # Min value of the attack speed increased overtime
-@export var gatling_gun_max: int # Max value of the attack speed increased overtime
-@export var gatling_gun_duration: int # Time needed to go from min to max attack speed increase
+@export var gatling_gun_min: float # Min value of the attack speed increased overtime
+@export var gatling_gun_max: float # Max value of the attack speed increased overtime
+@export var gatling_gun_duration: float # Time needed to go from min to max attack speed increase
 
 @export_group("Titan Axe")
 @export var titan_axe_activated: bool # True if this skill is activated
