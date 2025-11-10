@@ -173,17 +173,17 @@ func _on_entity_damage_taken(_entity_ref: Entity, damage: int, damage_type: Util
 	_popups_node.add_child(popup)
 
 
-func _on_entity_heal_taken(_entity_ref: Entity, heal_amount: int) -> void:
+func _on_entity_heal_taken(_entity_ref: Entity, heal_amount: int, is_critical: bool) -> void:
 	var popup_pos: Vector2 = _health_bar.get_health_popup_global_position()
-	var popup: LabelPopup = UI_LABEL_POPUP_SCENE.instantiate().setup_damage(heal_amount, Utils.DamageType.HEAL, popup_pos).mirror(_mirrored)
+	var popup: LabelPopup = UI_LABEL_POPUP_SCENE.instantiate().setup_damage(heal_amount, Utils.DamageType.HEAL, popup_pos, is_critical).mirror(_mirrored)
 	_popups_node.add_child(popup)
 
 
-func _on_entity_stack_taken(_entity_ref: Entity, stack_type: Utils.StackType, stack_number: int) -> void:
+func _on_entity_stack_taken(_entity_ref: Entity, stack_type: Utils.StackType, stack_number: int, is_critical: bool) -> void:
 	var popup_pos: Vector2
 	if stack_type == Utils.StackType.ARMOR:
 		popup_pos = _health_bar.get_armor_popup_global_pos()
 	else:
 		popup_pos = _health_bar.get_health_popup_global_position()
-	var popup: LabelPopup = UI_LABEL_POPUP_SCENE.instantiate().setup_stack(stack_number, stack_type, popup_pos).mirror(_mirrored)
+	var popup: LabelPopup = UI_LABEL_POPUP_SCENE.instantiate().setup_stack(stack_number, stack_type, popup_pos, is_critical).mirror(_mirrored)
 	_popups_node.add_child(popup)

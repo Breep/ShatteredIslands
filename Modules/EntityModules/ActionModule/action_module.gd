@@ -119,7 +119,7 @@ func _spawn_projectile(target: Entity, projectile_type: Projectile.ProjectileTyp
 func heal(target: Entity, heal_amount: int) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
-	target.take_heal(heal_amount, _owner)
+	target.take_heal(heal_amount, false, _owner)
 
 
 func heal_percent(target: Entity, percent: float, percent_modifier: Utils.PercentModifier) -> void:
@@ -143,7 +143,7 @@ func inflict_condition_stacks(target: Entity, stacks_number: int, stack_type: Ut
 	if not multiplayer.is_server(): return
 	if target == null: return
 	_check_on_inflict_condition_stacks_modifier(target, stacks_number, stack_type)
-	target.take_condition_stacks(stacks_number, stack_type, _owner)
+	target.take_condition_stacks(stacks_number, stack_type, false, _owner)
 
 
 #TODO Use a StackModifier like the AutoAttackModifier to remove dependancies between action module and family managers

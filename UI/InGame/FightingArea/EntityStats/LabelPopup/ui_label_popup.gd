@@ -22,7 +22,7 @@ enum HMoveType { LEFT, RIGHT }
 var popup_ratio: float = 2.0
 var lifetime: float = 2.0                  # total anim time (s)
 var end_scale: float = 1.5                 # End scale of the label
-var rise_distance: float = 55.0            # how far it floats up (px)
+var rise_distance: float = 20.0            # how far it floats up (px)
 var horizontal_wiggle: float = 50.0        # random left/right drift (px)
 var critical_scale_multiplier: float = 2.0 # how much critics are displayed bigger
 var vmove: VMoveType = VMoveType.UP

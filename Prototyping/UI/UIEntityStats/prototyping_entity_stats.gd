@@ -63,12 +63,12 @@ func _on_end_battle_pressed() -> void:
 func _on_add_poison_button_pressed() -> void:
 	var poison_stacks: int = int(_poison_stacks_text_edit.text)
 	if poison_stacks >= 0:
-		_character.take_condition_stacks(poison_stacks, Utils.StackType.POISON)
+		_character.take_condition_stacks(poison_stacks, Utils.StackType.POISON, false)
 
 func _on_add_poison_button_critical_pressed() -> void:
 	var poison_stacks: int = int(_poison_stacks_text_edit.text)
 	if poison_stacks >= 0:
-		_character.take_condition_stacks(poison_stacks, Utils.StackType.POISON)
+		_character.take_condition_stacks(poison_stacks*2, Utils.StackType.POISON, true)
 
 func _on_reset_poison_button_pressed() -> void:
 	_character.stats.poison_stacks = 0
@@ -78,12 +78,12 @@ func _on_reset_poison_button_pressed() -> void:
 func _on_add_armor_button_pressed() -> void:
 	var armor_stacks: int = int(_armor_stacks_text_edit.text)
 	if armor_stacks >= 0:
-		_character.take_condition_stacks(armor_stacks, Utils.StackType.ARMOR)
+		_character.take_condition_stacks(armor_stacks, Utils.StackType.ARMOR, false)
 
 func _on_add_armor_button_critical_pressed() -> void:
 	var armor_stacks: int = int(_armor_stacks_text_edit.text)
 	if armor_stacks >= 0:
-		_character.take_condition_stacks(armor_stacks, Utils.StackType.ARMOR)
+		_character.take_condition_stacks(armor_stacks*2, Utils.StackType.ARMOR, true)
 
 func _on_reset_armor_button_pressed() -> void:
 	_character.stats.armor_stacks = 0
@@ -93,12 +93,12 @@ func _on_reset_armor_button_pressed() -> void:
 func _on_add_ignite_button_pressed() -> void:
 	var ignite_stacks: int = int(_ignite_stacks_text_edit.text)
 	if ignite_stacks >= 0:
-		_character.take_condition_stacks(ignite_stacks, Utils.StackType.IGNITE)
+		_character.take_condition_stacks(ignite_stacks, Utils.StackType.IGNITE, false)
 
 func _on_add_ignite_button_critical_pressed() -> void:
 	var ignite_stacks: int = int(_ignite_stacks_text_edit.text)
 	if ignite_stacks >= 0:
-		_character.take_condition_stacks(ignite_stacks, Utils.StackType.IGNITE)
+		_character.take_condition_stacks(ignite_stacks*2, Utils.StackType.IGNITE, true)
 
 func _on_reset_ignite_button_pressed() -> void:
 	_character.stats.ignite_stacks = 0
@@ -108,12 +108,12 @@ func _on_reset_ignite_button_pressed() -> void:
 func _on_add_regen_button_pressed() -> void:
 	var regen_stacks: int = int(_regen_stacks_text_edit.text)
 	if regen_stacks >= 0:
-		_character.take_condition_stacks(regen_stacks, Utils.StackType.REGEN)
+		_character.take_condition_stacks(regen_stacks, Utils.StackType.REGEN, false)
 
 func _on_add_regen_button_critical_pressed() -> void:
 	var regen_stacks: int = int(_regen_stacks_text_edit.text)
 	if regen_stacks >= 0:
-		_character.take_condition_stacks(regen_stacks, Utils.StackType.REGEN)
+		_character.take_condition_stacks(regen_stacks*2, Utils.StackType.REGEN, true)
 
 func _on_reset_regen_button_pressed() -> void:
 	_character.stats.regen_stacks = 0
@@ -175,12 +175,12 @@ func _on_set_max_health_button_pressed() -> void:
 func _on_heal_button_pressed() -> void:
 	var heal: int = int(_heal_text_edit.text)
 	if heal >= 0:
-		_character.take_heal(heal)
+		_character.take_heal(heal, false)
 
 func _on_heal_button_critical_pressed() -> void:
 	var heal: int = int(_heal_text_edit.text)
 	if heal >= 0:
-		_character.take_heal(heal)
+		_character.take_heal(heal*2, true)
 #endregion
 
 #region Random POPUP

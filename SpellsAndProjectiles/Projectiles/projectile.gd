@@ -114,7 +114,7 @@ func _on_body_entered(body: Node3D) -> void:
 
 		if stats.poison_stacks > 0:
 			if source != null: source.inflict_condition_stacks(target, stats.poison_stacks, Utils.StackType.POISON)
-			else: target.take_condition_stacks(stats.poison_stacks, Utils.StackType.POISON)
+			else: target.take_condition_stacks(stats.poison_stacks, Utils.StackType.POISON, false)
 
 		if stats.is_bouncing:
 			var new_target: Entity = source.target_module.get_closest_enemy_from(target)
