@@ -118,6 +118,7 @@ func _on_add_regen_button_critical_pressed() -> void:
 func _on_reset_regen_button_pressed() -> void:
 	_character.stats.regen_stacks = 0
 #endregion
+#endregion
 
 #region Attack
 func _on_deal_physical_damage_button_pressed() -> void:
@@ -139,10 +140,16 @@ func _on_deal_magical_damage_button_pressed() -> void:
 	var variation := int(_magical_variation_text_edit.text)
 	var damage: int = _rng.randi_range(clampi(damage_raw - variation, 0, 10000), clampi(damage_raw + variation, 0, 10000))
 	_character.take_damage(damage, Utils.DamageType.MAGICAL)
+
+
+func _on_deal_magical_damage_critical_pressed() -> void:
+	var damage_raw := int(_magical_text_edit.text)
+	var variation := int(_magical_variation_text_edit.text)
+	var damage: int = _rng.randi_range(clampi(damage_raw - variation, 0, 10000), clampi(damage_raw + variation, 0, 10000))
+	_character.take_damage(damage*2, Utils.DamageType.MAGICAL, true)
 #endregion
 
 #region Mana
-
 func _on_set_mana_regen_button_pressed() -> void:
 	pass
 
@@ -150,12 +157,12 @@ func _on_set_max_mana_button_pressed() -> void:
 	pass # Replace with function body.
 #endregion
 
+
 #region Health
 func _on_set_current_health_button_pressed() -> void:
 	var health: int = int(_current_health_text_edit.text)
 	if health >= 0:
 		_character.stats.health = health
-
 
 func _on_set_max_health_button_pressed() -> void:
 	var max_health: int = int(_max_health_text_edit.text)
@@ -163,10 +170,18 @@ func _on_set_max_health_button_pressed() -> void:
 		_character.stats.health_max = max_health
 #endregion
 
+
+#region Heal
 func _on_heal_button_pressed() -> void:
 	var heal: int = int(_heal_text_edit.text)
 	if heal >= 0:
 		_character.take_heal(heal)
+
+func _on_heal_button_critical_pressed() -> void:
+	var heal: int = int(_heal_text_edit.text)
+	if heal >= 0:
+		_character.take_heal(heal)
+#endregion
 
 #region Random POPUP
 const DAMAGE_TYPES: Array[Utils.DamageType] = [

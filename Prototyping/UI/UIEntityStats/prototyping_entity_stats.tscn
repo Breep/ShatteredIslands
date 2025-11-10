@@ -446,13 +446,28 @@ size_flags_vertical = 3
 text = "500"
 placeholder_text = "Max Mana"
 
-[node name="HealButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Heal"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Heal"]
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HealButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Heal/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_xbhig")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_jis0c")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ao245")
 text = "HEAL"
+
+[node name="HealButtonCritical" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Heal/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_xbhig")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jis0c")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ao245")
+text = "HEAL
+CRITICAL"
 
 [node name="Poison" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(200, 200)
@@ -722,13 +737,29 @@ size_flags_stretch_ratio = 0.5
 text = "10"
 placeholder_text = "Damage variation"
 
-[node name="DealMagicalDamageButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/MagicalDamage"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/MagicalDamage"]
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DealMagicalDamageButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/MagicalDamage/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_k1rt8")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_nj7t4")
 theme_override_styles/hover = SubResource("StyleBoxFlat_6x65p")
 text = "DEAL MAGICAL DAMAGE"
+autowrap_mode = 3
+
+[node name="DealMagicalDamageCritical" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/MagicalDamage/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_k1rt8")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nj7t4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6x65p")
+text = "DEAL MAGICAL DAMAGE"
+autowrap_mode = 3
 
 [node name="RandomPopup" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(300, 300)
@@ -763,7 +794,8 @@ text = "Random POPUP"
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/CurrentHealth/SetCurrentHealthButton" to="." method="_on_set_current_health_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/MaxMana/SetMaxManaButton" to="." method="_on_set_max_mana_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/ManaRegen/SetManaRegenButton" to="." method="_on_set_mana_regen_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Heal/HealButton" to="." method="_on_heal_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Heal/HBoxContainer/HealButton" to="." method="_on_heal_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Heal/HBoxContainer/HealButtonCritical" to="." method="_on_heal_button_critical_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Poison/HBoxContainer/AddPoisonButton" to="." method="_on_add_poison_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Poison/HBoxContainer/AddPoisonButtonCritical" to="." method="_on_add_poison_button_critical_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Poison/HBoxContainer/ResetPoisonButton" to="." method="_on_reset_poison_button_pressed"]
@@ -778,5 +810,6 @@ text = "Random POPUP"
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Regen/HBoxContainer/ResetRegenButton" to="." method="_on_reset_regen_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/PhysicalDamage/HBoxContainer/DealPhysicalDamageButton" to="." method="_on_deal_physical_damage_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/PhysicalDamage/HBoxContainer/DealCriticalDamageButton" to="." method="_on_deal_critical_damage_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/MagicalDamage/DealMagicalDamageButton" to="." method="_on_deal_magical_damage_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/MagicalDamage/HBoxContainer/DealMagicalDamageButton" to="." method="_on_deal_magical_damage_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/MagicalDamage/HBoxContainer/DealMagicalDamageCritical" to="." method="_on_deal_magical_damage_critical_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/RandomPopup/RandomPopupButton" to="." method="_on_random_popup_button_pressed"]
