@@ -51,7 +51,7 @@ extends FamilyStats
 @export var poison_corrosion_buff_stacks: int # Number of buff stacks remove each time poison is applied
 #endregion
  
-#region Rare Cards
+#region Epic Cards
 @export_group("EPIC")
 @export_subgroup("Snake barrel")
 @export var poison_snake_barrel_activated: bool # True if the player has at least one of this card

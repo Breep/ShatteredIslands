@@ -94,8 +94,9 @@ var _attack_speed: float # Attack per second
 #endregion
 
 #region ============================== Critic ==============================
-signal physical_critical_chance_changed(new_physical_critical_chance: float)
-var _physical_critical_chance: float # % of chance for an auto attack to do critical damage
+#region ===== PHYSICAL
+signal physical_critical_chance_changed(new_critical_chance: float)
+var _physical_critical_chance: float
 @export var physical_critical_chance: float:
 	get: return _physical_critical_chance
 	set(value):
@@ -103,14 +104,15 @@ var _physical_critical_chance: float # % of chance for an auto attack to do crit
 		_physical_critical_chance = value
 		physical_critical_chance_changed.emit(_physical_critical_chance)
 
-signal physical_critical_multiplier_changed(new_physical_critical_multiplier: float)
-var _physical_critical_multiplier: float # Critical damage multiplier (2 per default)
+signal physical_critical_multiplier_changed(new_critical_multiplier: float) # in %
+var _physical_critical_multiplier: float
 @export var physical_critical_multiplier: float:
 	get: return _physical_critical_multiplier
 	set(value):
 		if value == _physical_critical_multiplier: return
 		_physical_critical_multiplier = value
 		physical_critical_multiplier_changed.emit(_physical_critical_multiplier)
+#endregion
 #endregion
 
 #region ============================== Conditions ==============================
