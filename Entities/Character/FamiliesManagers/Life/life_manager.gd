@@ -31,27 +31,6 @@ func stop() -> void:
 
 func get_increased_damage_taken_from_lost_hp(damage: float, _damage_type: Utils.DamageType) -> float:
 	return damage
-	#if not _owner.stats.hp.damage_increased_by_hp_lost_activated:
-		#return damage
-	#
-	#var lost_hp: int = _owner.stats.health_max - _owner.stats.health
-	#var damage_inc_percent: int = _owner.stats.hp.damage_increased_by_hp_lost_percentage
-	#var lost_hp_stacks: int = lost_hp / _owner.stats.hp.damage_increased_by_hp_lost_hp_number
-	#var damage_multiplier: float = remap(damage_inc_percent * lost_hp_stacks, 0, 100, 1, 2)
-#
-	#return damage * damage_multiplier
-	
-func get_reduced_damage(damage: int) -> int:
-	if not _life_stats.damage_taken_reduced_below_treshold_activated:
-		return damage
-	
-	var life_ratio: float = (_owner.stats.health as float / _owner.stats.health_max as float) * 100.0
-	if life_ratio <= _life_stats.damage_taken_reduced_below_treshold_threshold:
-		var damage_reduction = (damage as float) * _life_stats.damage_taken_reduced_below_treshold_percentage / 100.0
-		return damage - damage_reduction
-	
-	return damage
-
 
 # [Revive]
 func source_is_dead() -> void:
