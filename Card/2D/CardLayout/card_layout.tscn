@@ -756,9 +756,9 @@ stretch_mode = 5
 [node name="Bottom" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.45
+size_flags_stretch_ratio = 0.5
 theme_override_constants/margin_left = 40
-theme_override_constants/margin_top = 20
+theme_override_constants/margin_top = 110
 theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 40
 

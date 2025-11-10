@@ -30,6 +30,8 @@ var _character: Character
 
 @onready var _rng:= RandomNumberGenerator.new()
 
+const UI_LABEL_POPUP_SCENE: PackedScene = preload("res://UI/InGame/FightingArea/EntityStats/LabelPopup/ui_label_popup.tscn")
+
 func _ready() -> void:
 	_rng.randomize()
 	
@@ -57,27 +59,64 @@ func _on_end_battle_pressed() -> void:
 #endregion
 
 #region Stacks
-func _on_poison_button_pressed() -> void:
+#region ===== STACKS -> POISON
+func _on_add_poison_button_pressed() -> void:
 	var poison_stacks: int = int(_poison_stacks_text_edit.text)
 	if poison_stacks >= 0:
-		_character.stats.poison_stacks = poison_stacks
+		_character.take_condition_stacks(poison_stacks, Utils.StackType.POISON)
 
+func _on_add_poison_button_critical_pressed() -> void:
+	var poison_stacks: int = int(_poison_stacks_text_edit.text)
+	if poison_stacks >= 0:
+		_character.take_condition_stacks(poison_stacks, Utils.StackType.POISON)
 
-func _on_armor_button_pressed() -> void:
+func _on_reset_poison_button_pressed() -> void:
+	_character.stats.poison_stacks = 0
+#endregion
+
+#region ===== STACKS -> ARMOR
+func _on_add_armor_button_pressed() -> void:
 	var armor_stacks: int = int(_armor_stacks_text_edit.text)
 	if armor_stacks >= 0:
 		_character.take_condition_stacks(armor_stacks, Utils.StackType.ARMOR)
 
+func _on_add_armor_button_critical_pressed() -> void:
+	var armor_stacks: int = int(_armor_stacks_text_edit.text)
+	if armor_stacks >= 0:
+		_character.take_condition_stacks(armor_stacks, Utils.StackType.ARMOR)
 
-func _on_set_ignite_button_pressed() -> void:
+func _on_reset_armor_button_pressed() -> void:
+	_character.stats.armor_stacks = 0
+#endregion
+
+#region ===== STACKS -> IGNITE
+func _on_add_ignite_button_pressed() -> void:
 	var ignite_stacks: int = int(_ignite_stacks_text_edit.text)
 	if ignite_stacks >= 0:
-		_character.stats.ignite_stacks = ignite_stacks
+		_character.take_condition_stacks(ignite_stacks, Utils.StackType.IGNITE)
 
-func _on_set_regen_button_pressed() -> void:
+func _on_add_ignite_button_critical_pressed() -> void:
+	var ignite_stacks: int = int(_ignite_stacks_text_edit.text)
+	if ignite_stacks >= 0:
+		_character.take_condition_stacks(ignite_stacks, Utils.StackType.IGNITE)
+
+func _on_reset_ignite_button_pressed() -> void:
+	_character.stats.ignite_stacks = 0
+#endregion
+
+#region ===== STACKS -> REGEN
+func _on_add_regen_button_pressed() -> void:
 	var regen_stacks: int = int(_regen_stacks_text_edit.text)
 	if regen_stacks >= 0:
-		_character.stats.regen_stacks = regen_stacks
+		_character.take_condition_stacks(regen_stacks, Utils.StackType.REGEN)
+
+func _on_add_regen_button_critical_pressed() -> void:
+	var regen_stacks: int = int(_regen_stacks_text_edit.text)
+	if regen_stacks >= 0:
+		_character.take_condition_stacks(regen_stacks, Utils.StackType.REGEN)
+
+func _on_reset_regen_button_pressed() -> void:
+	_character.stats.regen_stacks = 0
 #endregion
 
 #region Attack
@@ -136,12 +175,23 @@ const DAMAGE_TYPES: Array[Utils.DamageType] = [
 	Utils.DamageType.POISON,
 	Utils.DamageType.HEAL,
 ]
+const STACK_TYPES: Array[Utils.StackType] = [
+	Utils.StackType.POISON,
+	Utils.StackType.IGNITE,
+	Utils.StackType.REGEN,
+	Utils.StackType.ARMOR,
+]
 func _on_random_popup_button_pressed() -> void:
-	var random_value: int = _rng.randi_range(1, 200)
-	var random_type: Utils.DamageType = DAMAGE_TYPES.pick_random()
-	var is_critical: bool = false
-	if random_type == Utils.DamageType.PHYSICAL:
-		is_critical = (_rng.randi() % 2 == 0)
-	var label_popup := LabelPopup.new().setup_damage(random_value, random_type, _popup_positioner.global_position, is_critical)
-	add_child(label_popup)
+	if (_rng.randi() % 2 == 0):
+		var random_value: int = _rng.randi_range(1, 200)
+		var random_type: Utils.DamageType = DAMAGE_TYPES.pick_random()
+		var is_critical: bool = (_rng.randi() % 5 == 0)
+		var label_popup: LabelPopup = UI_LABEL_POPUP_SCENE.instantiate().setup_damage(random_value, random_type, _popup_positioner.global_position, is_critical)
+		add_child(label_popup)
+	else:
+		var random_value: int = _rng.randi_range(1, 200)
+		var random_type: Utils.DamageType = STACK_TYPES.pick_random()
+		var is_critical: bool = (_rng.randi() % 5 == 0)
+		var label_popup: LabelPopup = UI_LABEL_POPUP_SCENE.instantiate().setup_stack(random_value, random_type, _popup_positioner.global_position, is_critical)
+		add_child(label_popup)
 #endregion

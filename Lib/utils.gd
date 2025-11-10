@@ -40,7 +40,8 @@ const DAMAGE_COLORS: Dictionary[DamageType, Color] = {
 const STACK_COLORS: Dictionary[StackType, Color] = {
 	StackType.POISON: Color.WEB_GREEN,
 	StackType.ARMOR: Color.SADDLE_BROWN,
-	StackType.IGNITE: Color.DARK_RED
+	StackType.IGNITE: Color.DARK_RED,
+	StackType.REGEN: Color.AQUAMARINE
 }
 #endregion
 
