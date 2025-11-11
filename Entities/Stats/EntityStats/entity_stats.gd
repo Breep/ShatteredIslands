@@ -2,6 +2,7 @@ class_name EntityStats
 extends Node
 
 #region ============================== Enum ==============================
+
 enum StatType {
 	HEALTH_MAX,
 	HEALTH,
@@ -16,24 +17,6 @@ enum StatType {
 	MAGICAL_RESISTANCE,
 	POISON_RESISTANCE,
 	ALL_RESISTANCE
-}
-
-enum CritType {
-	ALL,
-	ALL_DAMAGE,
-	PHYSICAL_DAMAGE,
-	MAGICAL_DAMAGE,
-	POISON_DAMAGE,
-	HEAL,
-	STUN,
-	CLEANSE,
-	PURIFY,
-	ALL_STACK,
-	ARMOR_STACK,
-	IGNITE_STACK,
-	POISON_STACK,
-	REGEN_STACK,
-	NECROSIS_STACK
 }
 #endregion
 
@@ -116,289 +99,52 @@ var _attack_speed: float # Attack per second
 
 #region ============================== Critic ==============================
 @export_group("Critic")
-signal critical_chance_changed(new_critical_chance: float, critical_type: CritType)
-signal critical_multiplier_changed(new_critical_multiplier: float, critical_type: CritType) # in %
-var _critical_chances: Dictionary[CritType, float] = {
-	CritType.ALL: 0.0,
-	CritType.ALL_DAMAGE: 0.0,
-	CritType.PHYSICAL_DAMAGE: 0.0,
-	CritType.MAGICAL_DAMAGE: 0.0,
-	CritType.POISON_DAMAGE: 0.0,
-	CritType.HEAL: 0.0,
-	CritType.STUN: 0.0,
-	CritType.CLEANSE: 0.0,
-	CritType.PURIFY: 0.0,
-	CritType.ALL_STACK: 0.0,
-	CritType.ARMOR_STACK: 0.0,
-	CritType.IGNITE_STACK: 0.0,
-	CritType.POISON_STACK: 0.0,
-	CritType.REGEN_STACK: 0.0,
-	CritType.NECROSIS_STACK: 0.0
+signal critical_chance_changed(new_critical_chance: float, critical_type: Utils.ActionType)
+signal critical_multiplier_changed(new_critical_multiplier: float, critical_type: Utils.ActionType) # in %
+var _critical_chances: Dictionary[Utils.ActionType, float] = {
+	Utils.ActionType.DAMAGE_PHYSICAL: 0.0,
+	Utils.ActionType.DAMAGE_MAGICAL: 0.0,
+	Utils.ActionType.DAMAGE_POISON: 0.0,
+	Utils.ActionType.UTILITY_HEAL: 0.0,
+	Utils.ActionType.UTILITY_STUN: 0.0,
+	Utils.ActionType.UTILITY_CLEANSE: 0.0,
+	Utils.ActionType.UTILITY_PURIFY: 0.0,
+	Utils.ActionType.STACK_ARMOR: 0.0,
+	Utils.ActionType.STACK_IGNITE: 0.0,
+	Utils.ActionType.STACK_POISON: 0.0,
+	Utils.ActionType.STACK_REGEN: 0.0,
+	Utils.ActionType.STACK_NECROSIS: 0.0,
 }
 
-var _critical_multipliers: Dictionary[CritType, float] = {
-	CritType.ALL: 0.0,
-	CritType.ALL_DAMAGE: 0.0,
-	CritType.PHYSICAL_DAMAGE: 100.0,
-	CritType.MAGICAL_DAMAGE: 100.0,
-	CritType.POISON_DAMAGE: 100.0,
-	CritType.HEAL: 100.0,
-	CritType.STUN: 100.0,
-	CritType.CLEANSE: 100.0,
-	CritType.PURIFY: 100.0,
-	CritType.ALL_STACK: 0.0,
-	CritType.ARMOR_STACK: 100.0,
-	CritType.IGNITE_STACK: 100.0,
-	CritType.POISON_STACK: 100.0,
-	CritType.REGEN_STACK: 100.0,
-	CritType.NECROSIS_STACK: 100.0
+var _critical_multipliers: Dictionary[Utils.ActionType, float] = {
+	Utils.ActionType.DAMAGE_PHYSICAL: 100,
+	Utils.ActionType.DAMAGE_MAGICAL: 100,
+	Utils.ActionType.DAMAGE_POISON: 100,
+	Utils.ActionType.UTILITY_HEAL: 100,
+	Utils.ActionType.UTILITY_STUN: 100,
+	Utils.ActionType.UTILITY_CLEANSE: 100,
+	Utils.ActionType.UTILITY_PURIFY: 100,
+	Utils.ActionType.STACK_ARMOR: 100,
+	Utils.ActionType.STACK_IGNITE: 100,
+	Utils.ActionType.STACK_POISON: 100,
+	Utils.ActionType.STACK_REGEN: 100,
+	Utils.ActionType.STACK_NECROSIS: 100,
 }
 
-#region ===== ALL
-@export var all_critical_chance: float:
-	get: return _critical_chances[CritType.ALL]
-	set(value):
-		if value == _critical_chances[CritType.ALL]: return
-		_critical_chances[CritType.ALL] = value
-		critical_chance_changed.emit(_critical_chances[CritType.ALL], CritType.ALL)
-
-@export var all_critical_multiplier: float:
-	get: return _critical_multipliers[CritType.ALL]
-	set(value):
-		if value == _critical_multipliers[CritType.ALL]: return
-		_critical_multipliers[CritType.ALL] = value
-		critical_multiplier_changed.emit(_critical_multipliers[CritType.ALL], CritType.ALL)
-#endregion
-
-#region ========== DAMAGE
-#region ===== ALL_DAMAGE
-@export var all_damage_critical_chance: float:
-	get: return _critical_chances[CritType.ALL_DAMAGE]
-	set(value):
-		if value == _critical_chances[CritType.ALL_DAMAGE]: return
-		_critical_chances[CritType.ALL_DAMAGE] = value
-		critical_chance_changed.emit(_critical_chances[CritType.ALL_DAMAGE], CritType.ALL_DAMAGE)
-
-@export var all_damage_critical_multiplier: float:
-	get: return _critical_multipliers[CritType.ALL_DAMAGE]
-	set(value):
-		if value == _critical_multipliers[CritType.ALL_DAMAGE]: return
-		_critical_multipliers[CritType.ALL_DAMAGE] = value
-		critical_multiplier_changed.emit(_critical_multipliers[CritType.ALL_DAMAGE], CritType.ALL_DAMAGE)
-#endregion
-
-#region ===== PHYSICAL
-@export var physical_critical_chance: float:
-	get: return _critical_chances[CritType.PHYSICAL_DAMAGE]
-	set(value):
-		if value == _critical_chances[CritType.PHYSICAL_DAMAGE]: return
-		_critical_chances[CritType.PHYSICAL_DAMAGE] = value
-		critical_chance_changed.emit(_critical_chances[CritType.PHYSICAL_DAMAGE], CritType.PHYSICAL_DAMAGE)
-
-@export var physical_critical_multiplier: float:
-	get: return _critical_multipliers[CritType.PHYSICAL_DAMAGE]
-	set(value):
-		if value == _critical_multipliers[CritType.PHYSICAL_DAMAGE]: return
-		_critical_multipliers[CritType.PHYSICAL_DAMAGE] = value
-		critical_multiplier_changed.emit(_critical_multipliers[CritType.PHYSICAL_DAMAGE], CritType.PHYSICAL_DAMAGE)
-#endregion
-
-#region ===== MAGICAL
-@export var magical_critical_chance: float:
-	get: return _critical_chances[CritType.MAGICAL_DAMAGE]
-	set(value):
-		if value == _critical_chances[CritType.MAGICAL_DAMAGE]: return
-		_critical_chances[CritType.MAGICAL_DAMAGE] = value
-		critical_chance_changed.emit(_critical_chances[CritType.MAGICAL_DAMAGE], CritType.MAGICAL_DAMAGE)
-
-@export var magical_critical_multiplier: float:
-	get: return _critical_multipliers[CritType.MAGICAL_DAMAGE]
-	set(value):
-		if value == _critical_multipliers[CritType.MAGICAL_DAMAGE]: return
-		_critical_multipliers[CritType.MAGICAL_DAMAGE] = value
-		critical_multiplier_changed.emit(_critical_multipliers[CritType.MAGICAL_DAMAGE], CritType.MAGICAL_DAMAGE)
-#endregion
-
-#region ===== POISON_DAMAGE
-@export var poison_critical_chance: float:
-	get: return _critical_chances[CritType.POISON_DAMAGE]
-	set(value):
-		if value == _critical_chances[CritType.POISON_DAMAGE]: return
-		_critical_chances[CritType.POISON_DAMAGE] = value
-		critical_chance_changed.emit(_critical_chances[CritType.POISON_DAMAGE], CritType.POISON_DAMAGE)
-
-@export var poison_critical_multiplier: float:
-	get: return _critical_multipliers[CritType.POISON_DAMAGE]
-	set(value):
-		if value == _critical_multipliers[CritType.POISON_DAMAGE]: return
-		_critical_multipliers[CritType.POISON_DAMAGE] = value
-		critical_multiplier_changed.emit(_critical_multipliers[CritType.POISON_DAMAGE], CritType.POISON_DAMAGE)
-#endregion
-#endregion
-
-#region ========== UTILITY
-#region ===== HEAL
-@export var heal_critical_chance: float:
-	get: return _critical_chances[CritType.HEAL]
-	set(value):
-		if value == _critical_chances[CritType.HEAL]: return
-		_critical_chances[CritType.HEAL] = value
-		critical_chance_changed.emit(_critical_chances[CritType.HEAL], CritType.HEAL)
-
-@export var heal_critical_multiplier: float:
-	get: return _critical_multipliers[CritType.HEAL]
-	set(value):
-		if value == _critical_multipliers[CritType.HEAL]: return
-		_critical_multipliers[CritType.HEAL] = value
-		critical_multiplier_changed.emit(_critical_multipliers[CritType.HEAL], CritType.HEAL)
-#endregion
-
-#region ===== STUN
-@export var stun_critical_chance: float:
-	get: return _critical_chances[CritType.STUN]
-	set(value):
-		if value == _critical_chances[CritType.STUN]: return
-		_critical_chances[CritType.STUN] = value
-		critical_chance_changed.emit(_critical_chances[CritType.STUN], CritType.STUN)
-
-@export var stun_critical_multiplier: float:
-	get: return _critical_multipliers[CritType.STUN]
-	set(value):
-		if value == _critical_multipliers[CritType.STUN]: return
-		_critical_multipliers[CritType.STUN] = value
-		critical_multiplier_changed.emit(_critical_multipliers[CritType.STUN], CritType.STUN)
-#endregion
-
-#region ===== CLEANSE
-@export var cleanse_critical_chance: float:
-	get: return _critical_chances[CritType.CLEANSE]
-	set(value):
-		if value == _critical_chances[CritType.CLEANSE]: return
-		_critical_chances[CritType.CLEANSE] = value
-		critical_chance_changed.emit(_critical_chances[CritType.CLEANSE], CritType.CLEANSE)
-
-@export var cleanse_critical_multiplier: float:
-	get: return _critical_multipliers[CritType.CLEANSE]
-	set(value):
-		if value == _critical_multipliers[CritType.CLEANSE]: return
-		_critical_multipliers[CritType.CLEANSE] = value
-		critical_multiplier_changed.emit(_critical_multipliers[CritType.CLEANSE], CritType.CLEANSE)
-#endregion
-
-#region ===== PURIFY
-@export var purify_critical_chance: float:
-	get: return _critical_chances[CritType.PURIFY]
-	set(value):
-		if value == _critical_chances[CritType.PURIFY]: return
-		_critical_chances[CritType.PURIFY] = value
-		critical_chance_changed.emit(_critical_chances[CritType.PURIFY], CritType.PURIFY)
-
-@export var purify_critical_multiplier: float:
-	get: return _critical_multipliers[CritType.PURIFY]
-	set(value):
-		if value == _critical_multipliers[CritType.PURIFY]: return
-		_critical_multipliers[CritType.PURIFY] = value
-		critical_multiplier_changed.emit(_critical_multipliers[CritType.PURIFY], CritType.PURIFY)
-#endregion
-#endregion
-
-#region ========== CONDITION STACKS
-#region ===== ALL_STACK
-@export var all_stack_critical_chance: float:
-	get: return _critical_chances[CritType.ALL_STACK]
-	set(value):
-		if value == _critical_chances[CritType.ALL_STACK]: return
-		_critical_chances[CritType.ALL_STACK] = value
-		critical_chance_changed.emit(_critical_chances[CritType.ALL_STACK], CritType.ALL_STACK)
-
-@export var all_stack_critical_multiplier: float:
-	get: return _critical_multipliers[CritType.ALL_STACK]
-	set(value):
-		if value == _critical_multipliers[CritType.ALL_STACK]: return
-		_critical_multipliers[CritType.ALL_STACK] = value
-		critical_multiplier_changed.emit(_critical_multipliers[CritType.ALL_STACK], CritType.ALL_STACK)
-#endregion
-
-#region ===== ARMOR_STACK
-@export var armor_stack_critical_chance: float:
-	get: return _critical_chances[CritType.ARMOR_STACK]
-	set(value):
-		if value == _critical_chances[CritType.ARMOR_STACK]: return
-		_critical_chances[CritType.ARMOR_STACK] = value
-		critical_chance_changed.emit(_critical_chances[CritType.ARMOR_STACK], CritType.ARMOR_STACK)
-
-@export var armor_stack_critical_multiplier: float:
-	get: return _critical_multipliers[CritType.ARMOR_STACK]
-	set(value):
-		if value == _critical_multipliers[CritType.ARMOR_STACK]: return
-		_critical_multipliers[CritType.ARMOR_STACK] = value
-		critical_multiplier_changed.emit(_critical_multipliers[CritType.ARMOR_STACK], CritType.ARMOR_STACK)
-#endregion
-
-#region ===== IGNITE_STACK
-@export var ignite_stack_critical_chance: float:
-	get: return _critical_chances[CritType.IGNITE_STACK]
-	set(value):
-		if value == _critical_chances[CritType.IGNITE_STACK]: return
-		_critical_chances[CritType.IGNITE_STACK] = value
-		critical_chance_changed.emit(_critical_chances[CritType.IGNITE_STACK], CritType.IGNITE_STACK)
-
-@export var ignite_stack_critical_multiplier: float:
-	get: return _critical_multipliers[CritType.IGNITE_STACK]
-	set(value):
-		if value == _critical_multipliers[CritType.IGNITE_STACK]: return
-		_critical_multipliers[CritType.IGNITE_STACK] = value
-		critical_multiplier_changed.emit(_critical_multipliers[CritType.IGNITE_STACK], CritType.IGNITE_STACK)
-#endregion
-
-#region ===== POISON_STACK
-@export var poison_stack_critical_chance: float:
-	get: return _critical_chances[CritType.POISON_STACK]
-	set(value):
-		if value == _critical_chances[CritType.POISON_STACK]: return
-		_critical_chances[CritType.POISON_STACK] = value
-		critical_chance_changed.emit(_critical_chances[CritType.POISON_STACK], CritType.POISON_STACK)
-
-@export var poison_stack_critical_multiplier: float:
-	get: return _critical_multipliers[CritType.POISON_STACK]
-	set(value):
-		if value == _critical_multipliers[CritType.POISON_STACK]: return
-		_critical_multipliers[CritType.POISON_STACK] = value
-		critical_multiplier_changed.emit(_critical_multipliers[CritType.POISON_STACK], CritType.POISON_STACK)
-#endregion
-
-#region ===== REGEN_STACK
-@export var regen_stack_critical_chance: float:
-	get: return _critical_chances[CritType.REGEN_STACK]
-	set(value):
-		if value == _critical_chances[CritType.REGEN_STACK]: return
-		_critical_chances[CritType.REGEN_STACK] = value
-		critical_chance_changed.emit(_critical_chances[CritType.REGEN_STACK], CritType.REGEN_STACK)
-
-@export var regen_stack_critical_multiplier: float:
-	get: return _critical_multipliers[CritType.REGEN_STACK]
-	set(value):
-		if value == _critical_multipliers[CritType.REGEN_STACK]: return
-		_critical_multipliers[CritType.REGEN_STACK] = value
-		critical_multiplier_changed.emit(_critical_multipliers[CritType.REGEN_STACK], CritType.REGEN_STACK)
-#endregion
-
-#region ===== NECROSIS_STACK
-@export var necrosis_stack_critical_chance: float:
-	get: return _critical_chances[CritType.NECROSIS_STACK]
-	set(value):
-		if value == _critical_chances[CritType.NECROSIS_STACK]: return
-		_critical_chances[CritType.NECROSIS_STACK] = value
-		critical_chance_changed.emit(_critical_chances[CritType.NECROSIS_STACK], CritType.NECROSIS_STACK)
-
-@export var necrosis_stack_critical_multiplier: float:
-	get: return _critical_multipliers[CritType.NECROSIS_STACK]
-	set(value):
-		if value == _critical_multipliers[CritType.NECROSIS_STACK]: return
-		_critical_multipliers[CritType.NECROSIS_STACK] = value
-		critical_multiplier_changed.emit(_critical_multipliers[CritType.NECROSIS_STACK], CritType.NECROSIS_STACK)
-#endregion
-#endregion
+const CRITICAL_MULTIPLIERS_DEFAULT: Dictionary[Utils.ActionType, float] = {
+	Utils.ActionType.DAMAGE_PHYSICAL: 100,
+	Utils.ActionType.DAMAGE_MAGICAL: 100,
+	Utils.ActionType.DAMAGE_POISON: 100,
+	Utils.ActionType.UTILITY_HEAL: 100,
+	Utils.ActionType.UTILITY_STUN: 100,
+	Utils.ActionType.UTILITY_CLEANSE: 100,
+	Utils.ActionType.UTILITY_PURIFY: 100,
+	Utils.ActionType.STACK_ARMOR: 100,
+	Utils.ActionType.STACK_IGNITE: 100,
+	Utils.ActionType.STACK_POISON: 100,
+	Utils.ActionType.STACK_REGEN: 100,
+	Utils.ActionType.STACK_NECROSIS: 100,
+}
 #endregion
 
 #region ============================== Condition Stacks ==============================
@@ -497,25 +243,13 @@ func reset_from_hero(hero: Hero, lvl: int) -> void:
 	attack_damage = hero.stats[lvl].attack_damage
 	attack_speed = hero.stats[lvl].attack_speed
 	
-	physical_critical_chance = hero.stats[lvl].critical_chance.get(CritType.PHYSICAL_DAMAGE, 0.0)
-	physical_critical_multiplier = hero.stats[lvl].critical_multiplier.get(CritType.PHYSICAL_DAMAGE, 0.0)
-	
-	magical_critical_chance = hero.stats[lvl].critical_chance.get(CritType.MAGICAL_DAMAGE, 0.0)
-	magical_critical_multiplier = hero.stats[lvl].critical_multiplier.get(CritType.MAGICAL_DAMAGE, 0.0)
-	
-	poison_critical_chance = hero.stats[lvl].critical_chance.get(CritType.POISON_DAMAGE, 0.0)
-	poison_critical_multiplier = hero.stats[lvl].critical_multiplier.get(CritType.POISON_DAMAGE, 0.0)
-	
-	poison_stack_critical_chance = hero.stats[lvl].critical_chance.get(CritType.POISON_STACK, 0.0)
-	print("POISON STACK CRIT CHANCE: ", poison_stack_critical_chance)
-	poison_stack_critical_multiplier = hero.stats[lvl].critical_multiplier.get(CritType.POISON_STACK, 0.0)
-	print("POISON STACK CRIT MULT: ", poison_stack_critical_chance)
-	print("\n\n\n\n")
+	for action_type: Utils.ActionType in _critical_chances.keys():
+		_critical_chances[action_type] = hero.stats[lvl].critical_multiplier.get(action_type, CRITICAL_MULTIPLIERS_DEFAULT[action_type])
 	
 	has_been_reset.emit()
 
 
-func get_stat(stat_type: StatType, crit_type: CritType = CritType.PHYSICAL_DAMAGE) -> float:
+func get_stat(stat_type: StatType, action_type: Utils.ActionType = Utils.ActionType.DAMAGE_PHYSICAL) -> float:
 	match stat_type:
 		EntityStats.StatType.HEALTH_MAX: return float(_health_max)
 		EntityStats.StatType.HEALTH: return float(_health)
@@ -524,42 +258,8 @@ func get_stat(stat_type: StatType, crit_type: CritType = CritType.PHYSICAL_DAMAG
 		EntityStats.StatType.MANA_REGEN: return _mana_regen
 		EntityStats.StatType.AD: return float(_attack_damage)
 		EntityStats.StatType.AA_SPEED: return _attack_speed
-		EntityStats.StatType.CRIT_CHANCE:
-			match crit_type:
-				CritType.ALL: return all_critical_chance
-				CritType.ALL_DAMAGE: return all_damage_critical_chance
-				CritType.PHYSICAL_DAMAGE: return physical_critical_chance
-				CritType.MAGICAL_DAMAGE: return magical_critical_chance
-				CritType.POISON_DAMAGE: return poison_critical_chance
-				CritType.HEAL: return heal_critical_chance
-				CritType.STUN: return stun_critical_chance
-				CritType.CLEANSE: return cleanse_critical_chance
-				CritType.PURIFY: return purify_critical_chance
-				CritType.ALL_STACK: return all_stack_critical_chance
-				CritType.ARMOR_STACK: return armor_stack_critical_chance
-				CritType.IGNITE_STACK: return ignite_stack_critical_chance
-				CritType.POISON_STACK: return poison_stack_critical_chance
-				CritType.REGEN_STACK: return regen_stack_critical_chance
-				CritType.NECROSIS_STACK: return necrosis_stack_critical_chance
-				_: return 0.0
-		EntityStats.StatType.CRIT_MULT:
-			match crit_type:
-				CritType.ALL: return all_critical_multiplier
-				CritType.ALL_DAMAGE: return all_damage_critical_multiplier
-				CritType.PHYSICAL_DAMAGE: return physical_critical_multiplier
-				CritType.MAGICAL_DAMAGE: return magical_critical_multiplier
-				CritType.POISON_DAMAGE: return poison_critical_multiplier
-				CritType.HEAL: return heal_critical_multiplier
-				CritType.STUN: return stun_critical_multiplier
-				CritType.CLEANSE: return cleanse_critical_multiplier
-				CritType.PURIFY: return purify_critical_multiplier
-				CritType.ALL_STACK: return all_stack_critical_multiplier
-				CritType.ARMOR_STACK: return armor_stack_critical_multiplier
-				CritType.IGNITE_STACK: return ignite_stack_critical_multiplier
-				CritType.POISON_STACK: return poison_stack_critical_multiplier
-				CritType.REGEN_STACK: return regen_stack_critical_multiplier
-				CritType.NECROSIS_STACK: return necrosis_stack_critical_multiplier
-				_: return 0.0
+		EntityStats.StatType.CRIT_CHANCE: return _critical_chances[action_type]
+		EntityStats.StatType.CRIT_MULT: return _critical_multipliers[action_type]
 		EntityStats.StatType.PHYSICAL_RESISTANCE: return _physical_resistance
 		EntityStats.StatType.MAGICAL_RESISTANCE: return _magical_resistance
 		EntityStats.StatType.POISON_RESISTANCE: return _poison_resistance
@@ -569,7 +269,7 @@ func get_stat(stat_type: StatType, crit_type: CritType = CritType.PHYSICAL_DAMAG
 			return 0.0
 
 
-func update_stat(stat_type: StatType, value: float, crit_type: CritType = CritType.PHYSICAL_DAMAGE) -> void:
+func update_stat(stat_type: StatType, value: float, action_type: Utils.ActionType = Utils.ActionType.DAMAGE_PHYSICAL) -> void:
 	match stat_type:
 		EntityStats.StatType.HEALTH_MAX: health_max = int(round(value))
 		EntityStats.StatType.HEALTH: health = int(round(value))
@@ -579,39 +279,11 @@ func update_stat(stat_type: StatType, value: float, crit_type: CritType = CritTy
 		EntityStats.StatType.AD: attack_damage = int(round(value))
 		EntityStats.StatType.AA_SPEED: attack_speed = value
 		EntityStats.StatType.CRIT_CHANCE:
-			match crit_type:
-				CritType.ALL: all_critical_chance = value
-				CritType.ALL_DAMAGE: all_damage_critical_chance = value
-				CritType.PHYSICAL_DAMAGE: physical_critical_chance = value
-				CritType.MAGICAL_DAMAGE: magical_critical_chance = value
-				CritType.POISON_DAMAGE: poison_critical_chance = value
-				CritType.HEAL: heal_critical_chance = value
-				CritType.STUN: stun_critical_chance = value
-				CritType.CLEANSE: cleanse_critical_chance = value
-				CritType.PURIFY: purify_critical_chance = value
-				CritType.ALL_STACK: all_stack_critical_chance = value
-				CritType.ARMOR_STACK: armor_stack_critical_chance = value
-				CritType.IGNITE_STACK: ignite_stack_critical_chance = value
-				CritType.POISON_STACK: poison_stack_critical_chance = value
-				CritType.REGEN_STACK: regen_stack_critical_chance = value
-				CritType.NECROSIS_STACK: necrosis_stack_critical_chance = value
+			_critical_chances[action_type] = value
+			critical_chance_changed.emit(value, action_type)
 		EntityStats.StatType.CRIT_MULT:
-			match crit_type:
-				CritType.ALL: all_critical_multiplier = value
-				CritType.ALL_DAMAGE: all_damage_critical_multiplier = value
-				CritType.PHYSICAL_DAMAGE: physical_critical_multiplier = value
-				CritType.MAGICAL_DAMAGE: magical_critical_multiplier = value
-				CritType.POISON_DAMAGE: poison_critical_multiplier = value
-				CritType.HEAL: heal_critical_multiplier = value
-				CritType.STUN: stun_critical_multiplier = value
-				CritType.CLEANSE: cleanse_critical_multiplier = value
-				CritType.PURIFY: purify_critical_multiplier = value
-				CritType.ALL_STACK: all_stack_critical_multiplier = value
-				CritType.ARMOR_STACK: armor_stack_critical_multiplier = value
-				CritType.IGNITE_STACK: ignite_stack_critical_multiplier = value
-				CritType.POISON_STACK: poison_stack_critical_multiplier = value
-				CritType.REGEN_STACK: regen_stack_critical_multiplier = value
-				CritType.NECROSIS_STACK: necrosis_stack_critical_multiplier = value
+			_critical_multipliers[action_type] = value
+			critical_multiplier_changed.emit(value, action_type)
 		EntityStats.StatType.PHYSICAL_RESISTANCE: _physical_resistance = value
 		EntityStats.StatType.MAGICAL_RESISTANCE: _magical_resistance = value
 		EntityStats.StatType.POISON_RESISTANCE: _poison_resistance = value

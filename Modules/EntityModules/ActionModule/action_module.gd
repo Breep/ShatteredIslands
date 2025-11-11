@@ -1,11 +1,7 @@
 class_name ActionModule
 extends Module
 
-@export var _storm_manager: StormManager
-@export var _defense_manager: DefenseManager
-@export var _life_manager: LifeManager
-@export var _fire_manager: FireManager
-@export var _serenity_manager: SerenityManager
+
 @export var _poison_manager: PoisonManager
 
 var _spawn_manager: SpawnManager
@@ -114,7 +110,7 @@ func _get_stack_multipliers(stack_type: Utils.StackType) -> Dictionary:
 	match stack_type:
 		Utils.StackType.POISON:
 			crit_chance = _owner.stats.get_stat(EntityStats.StatType.CRIT_CHANCE, EntityStats.CritType.POISON_STACK)
-			print("CRITICAL STACK calculation: ", crit_chance)
+			print("POISON CRIT CHANCE ?  ", crit_chance)
 		Utils.StackType.ARMOR:
 			crit_chance = _owner.stats.get_stat(EntityStats.StatType.CRIT_CHANCE, EntityStats.CritType.ARMOR_STACK)
 		Utils.StackType.IGNITE:
@@ -123,7 +119,6 @@ func _get_stack_multipliers(stack_type: Utils.StackType) -> Dictionary:
 			crit_chance = _owner.stats.get_stat(EntityStats.StatType.CRIT_CHANCE, EntityStats.CritType.REGEN_STACK)
 	
 	if Utils.is_randomize_modifier_active(crit_chance):
-		print("STACK IS CRITICAL !")
 		is_critical = true
 		var crit_multiplier = 1.0
 		match stack_type:
@@ -149,7 +144,9 @@ func _spawn_projectile(target: Entity, projectile_type: Projectile.ProjectileTyp
 func heal(target: Entity, heal_amount: int) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
-	target.take_heal(heal_amount, false, _owner)
+	var multipliers = _get_damage_multipliers(Utils.DamageType.HEAL)
+	heal_amount *= multipliers["multiplier"]
+	target.take_heal(heal_amount, multipliers["is_critical"], _owner)
 
 
 func heal_percent(target: Entity, percent: float, percent_modifier: Utils.PercentModifier) -> void:

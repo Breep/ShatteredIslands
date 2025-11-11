@@ -2,6 +2,21 @@ extends Node
 
 # ============================== Enums ==============================
 #region Enums
+enum ActionType {
+	DAMAGE_PHYSICAL,
+	DAMAGE_MAGICAL,
+	DAMAGE_POISON,
+	UTILITY_HEAL,
+	UTILITY_STUN,
+	UTILITY_CLEANSE,
+	UTILITY_PURIFY,
+	STACK_ARMOR,
+	STACK_IGNITE,
+	STACK_POISON,
+	STACK_REGEN,
+	STACK_NECROSIS
+}
+
 enum DamageType {
 	PHYSICAL,
 	MAGICAL,

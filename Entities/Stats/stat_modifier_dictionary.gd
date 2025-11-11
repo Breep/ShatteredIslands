@@ -1,10 +1,25 @@
 class_name StatModifierDictionary
 extends Resource
 
+const ACTION_TYPES: Array[Utils.ActionType] = [
+	Utils.ActionType.DAMAGE_PHYSICAL,
+	Utils.ActionType.DAMAGE_MAGICAL,
+	Utils.ActionType.DAMAGE_POISON,
+	Utils.ActionType.UTILITY_HEAL,
+	Utils.ActionType.UTILITY_STUN,
+	Utils.ActionType.UTILITY_CLEANSE,
+	Utils.ActionType.UTILITY_PURIFY,
+	Utils.ActionType.STACK_ARMOR,
+	Utils.ActionType.STACK_IGNITE,
+	Utils.ActionType.STACK_POISON,
+	Utils.ActionType.STACK_REGEN,
+	Utils.ActionType.STACK_NECROSIS]
+
 # ============================== Private variables ==============================
 
 var _stat_type: EntityStats.StatType
 var _modifiers: Dictionary[StringName, StatModifier]
+var _modifiers_per_action_type: Dictionary[Utils.ActionType, Dictionary]
 
 var _entity_stats_ref: EntityStats
 var _entity_base_stats_ref: EntityStats
@@ -32,7 +47,10 @@ func register_modifier(stat_modifier: StatModifier) -> void:
 		printerr("StatModifierDictionary: register_modifier() - already known stat modifier \"", modifier_id, "\" [", _stat_type, "]")
 		return
 	
-	_modifiers[modifier_id] = stat_modifier
+	if _is_multiple_stats():
+		_modifiers_per_action_type[stat_modifier.action_type][modifier_id] = stat_modifier
+	else:
+		_modifiers[modifier_id] = stat_modifier
 	_recompute_stats()
 
 
@@ -64,6 +82,12 @@ func unregister_modifier(stat_modifier: StatModifier) -> void:
 # ============================== Private functions ==============================
 
 func _recompute_stats() -> void:
+	if _is_multiple_stats():
+		_recompute_multiple_stats()
+	else:
+		_recompute_single_stats()
+
+func _recompute_single_stats() -> void:
 	var add: float = 0.0
 	var mul: float = 0.0
 	for modifier: StatModifier in _modifiers.values():
@@ -74,3 +98,25 @@ func _recompute_stats() -> void:
 	var base_stat = _entity_base_stats_ref.get_stat(_stat_type)
 	var new_stat = (base_stat + add) * (1.0 + mul)
 	_entity_stats_ref.update_stat(_stat_type, new_stat)
+
+
+func _recompute_multiple_stats() -> void:
+	for mods: Dictionary in _modifiers_per_action_type.values():
+		if mods.is_empty(): continue
+		var action_type: Utils.ActionType
+		var add: float = 0.0
+		var mul: float = 0.0
+		for modifier: StatModifier in mods.values():
+			action_type = modifier.action_type
+			if modifier.calc_type == StatModifier.CalcType.ADD:
+				add += modifier.value
+			elif modifier.calc_type == StatModifier.CalcType.MULT:
+				mul += modifier.value
+		var base_stat = _entity_base_stats_ref.get_stat(_stat_type, action_type)
+		var new_stat = (base_stat + add) * (1.0 + mul)
+		_entity_stats_ref.update_stat(_stat_type, new_stat, action_type)
+
+
+func _is_multiple_stats() -> bool:
+	return _stat_type == EntityStats.StatType.CRIT_CHANCE \
+			or _stat_type == EntityStats.StatType.CRIT_MULT
