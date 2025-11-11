@@ -496,8 +496,22 @@ func reset_from_hero(hero: Hero, lvl: int) -> void:
 	mana_regen = hero.stats[lvl].mana_regen
 	attack_damage = hero.stats[lvl].attack_damage
 	attack_speed = hero.stats[lvl].attack_speed
-	physical_critical_chance = hero.stats[lvl].physical_critical_chance
-	physical_critical_multiplier = hero.stats[lvl].physical_critical_multiplier
+	
+	physical_critical_chance = hero.stats[lvl].critical_chance.get(CritType.PHYSICAL_DAMAGE, 0.0)
+	physical_critical_multiplier = hero.stats[lvl].critical_multiplier.get(CritType.PHYSICAL_DAMAGE, 0.0)
+	
+	magical_critical_chance = hero.stats[lvl].critical_chance.get(CritType.MAGICAL_DAMAGE, 0.0)
+	magical_critical_multiplier = hero.stats[lvl].critical_multiplier.get(CritType.MAGICAL_DAMAGE, 0.0)
+	
+	poison_critical_chance = hero.stats[lvl].critical_chance.get(CritType.POISON_DAMAGE, 0.0)
+	poison_critical_multiplier = hero.stats[lvl].critical_multiplier.get(CritType.POISON_DAMAGE, 0.0)
+	
+	poison_stack_critical_chance = hero.stats[lvl].critical_chance.get(CritType.POISON_STACK, 0.0)
+	print("POISON STACK CRIT CHANCE: ", poison_stack_critical_chance)
+	poison_stack_critical_multiplier = hero.stats[lvl].critical_multiplier.get(CritType.POISON_STACK, 0.0)
+	print("POISON STACK CRIT MULT: ", poison_stack_critical_chance)
+	print("\n\n\n\n")
+	
 	has_been_reset.emit()
 
 
@@ -510,8 +524,42 @@ func get_stat(stat_type: StatType, crit_type: CritType = CritType.PHYSICAL_DAMAG
 		EntityStats.StatType.MANA_REGEN: return _mana_regen
 		EntityStats.StatType.AD: return float(_attack_damage)
 		EntityStats.StatType.AA_SPEED: return _attack_speed
-		EntityStats.StatType.CRIT_CHANCE: return _critical_chances.get(crit_type, 0.0)
-		EntityStats.StatType.CRIT_MULT: return _critical_multipliers.get(crit_type, 0.0)
+		EntityStats.StatType.CRIT_CHANCE:
+			match crit_type:
+				CritType.ALL: return all_critical_chance
+				CritType.ALL_DAMAGE: return all_damage_critical_chance
+				CritType.PHYSICAL_DAMAGE: return physical_critical_chance
+				CritType.MAGICAL_DAMAGE: return magical_critical_chance
+				CritType.POISON_DAMAGE: return poison_critical_chance
+				CritType.HEAL: return heal_critical_chance
+				CritType.STUN: return stun_critical_chance
+				CritType.CLEANSE: return cleanse_critical_chance
+				CritType.PURIFY: return purify_critical_chance
+				CritType.ALL_STACK: return all_stack_critical_chance
+				CritType.ARMOR_STACK: return armor_stack_critical_chance
+				CritType.IGNITE_STACK: return ignite_stack_critical_chance
+				CritType.POISON_STACK: return poison_stack_critical_chance
+				CritType.REGEN_STACK: return regen_stack_critical_chance
+				CritType.NECROSIS_STACK: return necrosis_stack_critical_chance
+				_: return 0.0
+		EntityStats.StatType.CRIT_MULT:
+			match crit_type:
+				CritType.ALL: return all_critical_multiplier
+				CritType.ALL_DAMAGE: return all_damage_critical_multiplier
+				CritType.PHYSICAL_DAMAGE: return physical_critical_multiplier
+				CritType.MAGICAL_DAMAGE: return magical_critical_multiplier
+				CritType.POISON_DAMAGE: return poison_critical_multiplier
+				CritType.HEAL: return heal_critical_multiplier
+				CritType.STUN: return stun_critical_multiplier
+				CritType.CLEANSE: return cleanse_critical_multiplier
+				CritType.PURIFY: return purify_critical_multiplier
+				CritType.ALL_STACK: return all_stack_critical_multiplier
+				CritType.ARMOR_STACK: return armor_stack_critical_multiplier
+				CritType.IGNITE_STACK: return ignite_stack_critical_multiplier
+				CritType.POISON_STACK: return poison_stack_critical_multiplier
+				CritType.REGEN_STACK: return regen_stack_critical_multiplier
+				CritType.NECROSIS_STACK: return necrosis_stack_critical_multiplier
+				_: return 0.0
 		EntityStats.StatType.PHYSICAL_RESISTANCE: return _physical_resistance
 		EntityStats.StatType.MAGICAL_RESISTANCE: return _magical_resistance
 		EntityStats.StatType.POISON_RESISTANCE: return _poison_resistance

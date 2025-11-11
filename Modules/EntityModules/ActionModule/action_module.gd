@@ -17,8 +17,8 @@ const SHROOM_SPELL_SCENE: PackedScene = preload("res://SpellsAndProjectiles/Spel
 const DEATH_FOG_SCENE: PackedScene = preload("res://SpellsAndProjectiles/Spells/Poison/DeathFog/death_fog.tscn")
 
 const SNAKE_BARREL_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Poison/SnakeBarrel/snake_barrel.tscn")
-const SNAKE_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Poison/Snake/snake.tscn"
-)
+const SNAKE_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Poison/Snake/snake.tscn")
+
 # ============================== Public functions ==============================
 
 func connect_to_spawn_manager(spawn_manager: SpawnManager) -> void:
@@ -34,12 +34,8 @@ func connect_to_spawn_manager(spawn_manager: SpawnManager) -> void:
 func direct_attack(target: Entity, damage: int, damage_type: Utils.DamageType) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
-	var multiplier = _get_damage_multipliers()
-	if damage_type == Utils.DamageType.PHYSICAL:
-		damage *= multiplier["physical"]
-	elif damage_type == Utils.DamageType.MAGICAL:
-		damage *= multiplier["magical"]
-	
+	var multiplier = _get_damage_multipliers(damage_type)
+	damage *= multiplier["multiplier"]
 	target.take_damage(damage, damage_type, multiplier["is_critical"], _owner)
 
 
@@ -63,12 +59,19 @@ func direct_attack_percent(target: Entity, damage_percent: float, damage_type: U
 func build_projectile_attack(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> AttackCommand:
 	if not multiplayer.is_server(): return
 	if target == null: return
-	var multiplier = _get_damage_multipliers()
-	projectile_stats.is_critic = multiplier["is_critical"]
-	projectile_stats.physical_damage_flat *= multiplier["physical"]
-	projectile_stats.physical_damage_percent *= multiplier["physical"]
-	projectile_stats.magical_damage_flat *= multiplier["magical"]
-	projectile_stats.magical_damage_percent *= multiplier["magical"]
+	var physical_multiplier = _get_damage_multipliers(Utils.DamageType.PHYSICAL)
+	projectile_stats.physical_is_critical = physical_multiplier["is_critical"]
+	projectile_stats.physical_damage_flat *= physical_multiplier["multiplier"]
+	projectile_stats.physical_damage_percent *= physical_multiplier["multiplier"]
+	
+	var magical_multiplier = _get_damage_multipliers(Utils.DamageType.MAGICAL)
+	projectile_stats.magical_is_critical = magical_multiplier["is_critical"]
+	projectile_stats.magical_damage_flat *= magical_multiplier["multiplier"]
+	projectile_stats.magical_damage_percent *= magical_multiplier["multiplier"]
+	
+	var poison_stacks_multiplier = _get_stack_multipliers(Utils.StackType.POISON)
+	projectile_stats.poison_stacks_is_critical = poison_stacks_multiplier["is_critical"]
+	projectile_stats.poison_stacks *= poison_stacks_multiplier["multiplier"]
 	return AttackCommand.new().setup(target, projectile_type, projectile_spawn, projectile_stats)
 
 
@@ -76,38 +79,65 @@ func projectile_attack(target: Entity, projectile_type: Projectile.ProjectileTyp
 	_spawn_manager.spawn_projectile(_owner, target, projectile_type, projectile_spawn, projectile_stats)
 
 
-func _get_damage_multipliers() -> Dictionary:
+func _get_damage_multipliers(damage_type: Utils.DamageType) -> Dictionary:
 	var is_critical: bool = false
-	var physical_multiplier: float = 1.0
-	var magical_multiplier: float = 1.0
+	var multiplier: float = 1.0
 	
-	var crit_chance = _owner.stats.physical_critical_chance
-	if _storm_manager != null:
-		crit_chance = _storm_manager.get_critical_chance()
+	var crit_chance: float = 1.0
+	match damage_type:
+		Utils.DamageType.PHYSICAL:
+			crit_chance = _owner.stats.get_stat(EntityStats.StatType.CRIT_CHANCE, EntityStats.CritType.PHYSICAL_DAMAGE)
+		Utils.DamageType.MAGICAL:
+			crit_chance = _owner.stats.get_stat(EntityStats.StatType.CRIT_CHANCE, EntityStats.CritType.MAGICAL_DAMAGE)
+		Utils.DamageType.POISON:
+			crit_chance = _owner.stats.get_stat(EntityStats.StatType.CRIT_CHANCE, EntityStats.CritType.POISON_DAMAGE)
 	
 	if Utils.is_randomize_modifier_active(crit_chance):
 		is_critical = true
-		var crit_multiplier = _owner.stats.physical_critical_multiplier
-		if _storm_manager != null:
-			crit_multiplier = _storm_manager.get_critical_multiplier(Utils.DamageType.PHYSICAL)
-		physical_multiplier *= crit_multiplier
+		var crit_multiplier = 1.0
+		match damage_type:
+			Utils.DamageType.PHYSICAL:
+				crit_chance = _owner.stats.get_stat(EntityStats.StatType.CRIT_MULT, EntityStats.CritType.PHYSICAL_DAMAGE)
+			Utils.DamageType.MAGICAL:
+				crit_chance = _owner.stats.get_stat(EntityStats.StatType.CRIT_MULT, EntityStats.CritType.MAGICAL_DAMAGE)
+			Utils.DamageType.POISON:
+				crit_chance = _owner.stats.get_stat(EntityStats.StatType.CRIT_MULT, EntityStats.CritType.POISON_DAMAGE)
+		multiplier *= crit_multiplier
 	
-	if _life_manager != null:
-		physical_multiplier = _life_manager.get_increased_damage_taken_from_lost_hp(physical_multiplier, Utils.DamageType.PHYSICAL) # Increase % of PHYSICAL damage
-	
-	if _fire_manager != null:
-		magical_multiplier = _fire_manager.get_increased_damage(magical_multiplier, Utils.DamageType.MAGICAL) # Increase % of MAGICAL damage
-	
-	if _defense_manager != null:
-		physical_multiplier = _defense_manager.get_increased_damage_done_from_power_wrist(physical_multiplier)
-		magical_multiplier = _defense_manager.get_increased_damage_done_from_power_wrist(magical_multiplier)
-	
-	if _serenity_manager != null:
-		physical_multiplier = _serenity_manager.get_reduced_damage_dealed_from_pacify(physical_multiplier) # Reduce % of ALL damage
-		magical_multiplier = _serenity_manager.get_reduced_damage_dealed_from_pacify(magical_multiplier) # Reduce % of ALL damage
-	
-	return { "physical": physical_multiplier, "magical": magical_multiplier, "is_critical": is_critical }
+	return { "multiplier": multiplier, "is_critical": is_critical }
 
+func _get_stack_multipliers(stack_type: Utils.StackType) -> Dictionary:
+	var is_critical: bool = false
+	var multiplier: float = 1.0
+	
+	var crit_chance: float = 1.0
+	match stack_type:
+		Utils.StackType.POISON:
+			crit_chance = _owner.stats.get_stat(EntityStats.StatType.CRIT_CHANCE, EntityStats.CritType.POISON_STACK)
+			print("CRITICAL STACK calculation: ", crit_chance)
+		Utils.StackType.ARMOR:
+			crit_chance = _owner.stats.get_stat(EntityStats.StatType.CRIT_CHANCE, EntityStats.CritType.ARMOR_STACK)
+		Utils.StackType.IGNITE:
+			crit_chance = _owner.stats.get_stat(EntityStats.StatType.CRIT_CHANCE, EntityStats.CritType.IGNITE_STACK)
+		Utils.StackType.REGEN:
+			crit_chance = _owner.stats.get_stat(EntityStats.StatType.CRIT_CHANCE, EntityStats.CritType.REGEN_STACK)
+	
+	if Utils.is_randomize_modifier_active(crit_chance):
+		print("STACK IS CRITICAL !")
+		is_critical = true
+		var crit_multiplier = 1.0
+		match stack_type:
+			Utils.StackType.POISON:
+				crit_chance = _owner.stats.get_stat(EntityStats.StatType.CRIT_MULT, EntityStats.CritType.POISON_STACK)
+			Utils.StackType.ARMOR:
+				crit_chance = _owner.stats.get_stat(EntityStats.StatType.CRIT_MULT, EntityStats.CritType.ARMOR_STACK)
+			Utils.StackType.IGNITE:
+				crit_chance = _owner.stats.get_stat(EntityStats.StatType.CRIT_MULT, EntityStats.CritType.IGNITE_STACK)
+			Utils.StackType.REGEN:
+				crit_chance = _owner.stats.get_stat(EntityStats.StatType.CRIT_MULT, EntityStats.CritType.REGEN_STACK)
+		multiplier *= crit_multiplier
+	
+	return { "multiplier": multiplier, "is_critical": is_critical }
 
 func _spawn_projectile(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	if target == null: return
@@ -142,8 +172,10 @@ func heal_percent(target: Entity, percent: float, percent_modifier: Utils.Percen
 func inflict_condition_stacks(target: Entity, stacks_number: int, stack_type: Utils.StackType) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
+	var stack_multiplier = _get_stack_multipliers(stack_type)
+	stacks_number *= stack_multiplier["multiplier"]
 	_check_on_inflict_condition_stacks_modifier(target, stacks_number, stack_type)
-	target.take_condition_stacks(stacks_number, stack_type, false, _owner)
+	target.take_condition_stacks(stacks_number, stack_type, stack_multiplier["is_critical"], _owner)
 
 
 #TODO Use a StackModifier like the AutoAttackModifier to remove dependancies between action module and family managers

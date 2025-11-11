@@ -134,7 +134,7 @@ func projectile_attack(target: Entity, projectile_type: Projectile.ProjectileTyp
 		var attack_cmd: AttackCommand = _action_module.build_projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
 		if attack_cmd == null: return
 		_pending_attacks.append(attack_cmd)
-		auto_attack_started.emit(projectile_stats.is_critic)
+		auto_attack_started.emit(projectile_stats.physical_is_critical)
 	else:
 		_action_module.projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
 

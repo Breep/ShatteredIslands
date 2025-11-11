@@ -104,17 +104,25 @@ func _on_body_entered(body: Node3D) -> void:
 		physical_damage += _get_damage_percent(stats.physical_damage_percent, stats.physical_damage_percent_type)
 		if physical_damage > 0:
 			physical_damage_done_flat = target.take_damage(
-				physical_damage, Utils.DamageType.PHYSICAL, stats.is_critic, source, Utils.AttackType.AUTO_ATTACK
+				physical_damage,
+				Utils.DamageType.PHYSICAL,
+				stats.physical_is_critical,
+				source,
+				Utils.AttackType.AUTO_ATTACK
 			)
 
 		var magical_damage: int = stats.magical_damage_flat
 		magical_damage += _get_damage_percent(stats.magical_damage_percent, stats.magical_damage_percent_type)
 		if magical_damage > 0:
-			target.take_damage(magical_damage, Utils.DamageType.MAGICAL, stats.is_critic, source)
+			target.take_damage(
+				magical_damage,
+				Utils.DamageType.MAGICAL,
+				stats.magical_is_critical,
+				source)
 
 		if stats.poison_stacks > 0:
 			if source != null: source.inflict_condition_stacks(target, stats.poison_stacks, Utils.StackType.POISON)
-			else: target.take_condition_stacks(stats.poison_stacks, Utils.StackType.POISON, false)
+			else: target.take_condition_stacks(stats.poison_stacks, Utils.StackType.POISON, stats.poison_stacks_is_critical)
 
 		if stats.is_bouncing:
 			var new_target: Entity = source.target_module.get_closest_enemy_from(target)
