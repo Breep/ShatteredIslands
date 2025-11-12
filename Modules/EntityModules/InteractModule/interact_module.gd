@@ -10,11 +10,14 @@ func _ready() -> void:
 
 # ============================== Public function ==============================
 
-# ===== Damage
+#region ============================== Damage ==============================
 func take_damage(damage: int, damage_type: Utils.DamageType, is_critical: bool, source: Entity = null, attack_type: Utils.AttackType = Utils.AttackType.UNDEF) -> int:
 	if _owner.stats.health <= 0 or _owner.is_dead: return 0
 	var damage_before_armor: int = 0
 	if multiplayer.is_server():
+		if _is_dodged(Utils.damage_to_action(damage_type)):
+			print("DAMAGE DODGED")
+			return 0
 		var phy_res: float = _owner.stats.get_stat(EntityStats.StatType.RESISTANCE, Utils.ActionType.DAMAGE_PHYSICAL)
 		var mag_res: float = _owner.stats.get_stat(EntityStats.StatType.RESISTANCE, Utils.ActionType.DAMAGE_MAGICAL)
 		var poi_res: float = _owner.stats.get_stat(EntityStats.StatType.RESISTANCE, Utils.ActionType.DAMAGE_POISON)
@@ -36,8 +39,8 @@ func take_damage(damage: int, damage_type: Utils.DamageType, is_critical: bool, 
 	return damage
 
 
-func take_damage_percent(damage_percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.DamageType, is_critical: bool, source: Entity = null) -> void:
-	if not multiplayer.is_server(): return
+func take_damage_percent(damage_percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.DamageType, is_critical: bool, source: Entity = null) -> int:
+	if not multiplayer.is_server(): return 0
 	var hp: int
 	match percent_modifier:
 		Utils.PercentModifier.MAX_HP:
@@ -47,12 +50,15 @@ func take_damage_percent(damage_percent: float, percent_modifier: Utils.PercentM
 		Utils.PercentModifier.LOST_HP:
 			hp = _owner.stats.health_max - _owner.stats.health
 	var damage = hp * damage_percent  / 100.0
-	take_damage(damage, damage_type, is_critical, source)
+	return take_damage(damage, damage_type, is_critical, source)
+#endregion
 
-# ===== Condition stacks
-
+#region ============================== Condition stacks ==============================
 func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, is_critical: bool, _source: Entity = null) -> void:
 	if _owner.stats.health <= 0 or _owner.is_dead: return
+	if _is_dodged(Utils.stack_to_action(stack_type)):
+		print("CONDITION STACK DODGED")
+		return
 	_owner.signal_stack_taken(stack_type, stacks_number, is_critical)
 	match stack_type:
 		Utils.StackType.POISON:
@@ -63,10 +69,22 @@ func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, is_c
 			_owner.stats.armor_stacks += stacks_number
 		Utils.StackType.REGEN:
 			_owner.stats.regen_stacks += stacks_number
+#endregion
 
-# ===== Heal
-
+#region ============================== Heal ==============================
 func take_heal(heal_amount: int, is_critical: bool, _source: Entity = null) -> void:
 	if _owner.stats.health <= 0 or _owner.is_dead: return
+	if _is_dodged(Utils.ActionType.UTILITY_HEAL):
+		print("HEAL DODGED")
+		return
 	_owner.stats.health += heal_amount
 	_owner.signal_heal_taken(heal_amount, is_critical)
+#endregion
+
+#region ============================== Private functions ==============================
+func _is_dodged(action_type: Utils.ActionType) -> bool:
+	var dodge_chance: float = _owner.stats.get_stat(EntityStats.StatType.DODGE, action_type)
+	if Utils.is_randomize_modifier_active(dodge_chance):
+		return true
+	return false
+#endregion

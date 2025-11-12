@@ -19,6 +19,7 @@ extends Node
 	EntityStats.StatType.CRIT_CHANCE: StatModifierDictionary.new(),
 	EntityStats.StatType.CRIT_MULT: StatModifierDictionary.new(),
 	EntityStats.StatType.RESISTANCE: StatModifierDictionary.new(),
+	EntityStats.StatType.DODGE: StatModifierDictionary.new()
 }
 
 # ============================== Node base functions ==============================

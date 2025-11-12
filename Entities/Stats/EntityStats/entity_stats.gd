@@ -14,6 +14,7 @@ enum StatType {
 	CRIT_CHANCE,
 	CRIT_MULT,
 	RESISTANCE,
+	DODGE
 	}
 #endregion
 
@@ -174,7 +175,6 @@ var _regen_stacks: int = 0
 #endregion
 
 #region ============================== Resistances ==============================
-@export_group("Resistances")
 signal resistance_changed(new_resistance: float, action_type: Utils.ActionType)
 var _resistances: Dictionary[Utils.ActionType, float] = {
 	Utils.ActionType.DAMAGE_PHYSICAL: 0.0,
@@ -191,6 +191,26 @@ var _resistances: Dictionary[Utils.ActionType, float] = {
 	Utils.ActionType.STACK_NECROSIS: 0.0,
 }
 #endregion
+
+
+#region ============================== Resistances ==============================
+signal dodge_changed(new_dodge: float, action_type: Utils.ActionType)
+var _dodges: Dictionary[Utils.ActionType, float] = {
+	Utils.ActionType.DAMAGE_PHYSICAL: 10.0,
+	Utils.ActionType.DAMAGE_MAGICAL: 0.0,
+	Utils.ActionType.DAMAGE_POISON: 0.0,
+	Utils.ActionType.UTILITY_HEAL: 0.0,
+	Utils.ActionType.UTILITY_STUN: 0.0,
+	Utils.ActionType.UTILITY_CLEANSE: 0.0,
+	Utils.ActionType.UTILITY_PURIFY: 0.0,
+	Utils.ActionType.STACK_ARMOR: 0.0,
+	Utils.ActionType.STACK_IGNITE: 0.0,
+	Utils.ActionType.STACK_POISON: 0.0,
+	Utils.ActionType.STACK_REGEN: 0.0,
+	Utils.ActionType.STACK_NECROSIS: 0.0,
+}
+#endregion
+
 
 #region ============================== Public functions ==============================
 func get_stacks_number() -> int:
@@ -209,6 +229,7 @@ func reset_from_hero(hero: Hero, lvl: int) -> void:
 		_critical_chances[action_type] = hero.stats[lvl].critical_chances.get(action_type, 0.0)
 		_critical_multipliers[action_type] = hero.stats[lvl].critical_multipliers.get(action_type, 100.0)
 		_resistances[action_type] = hero.stats[lvl].resistances.get(action_type, 0.0)
+		_dodges[action_type] = hero.stats[lvl].dodges.get(action_type, 0.0)
 	
 	has_been_reset.emit()
 
@@ -225,6 +246,7 @@ func get_stat(stat_type: StatType, action_type: Utils.ActionType = Utils.ActionT
 		EntityStats.StatType.CRIT_CHANCE: return _critical_chances[action_type]
 		EntityStats.StatType.CRIT_MULT: return _critical_multipliers[action_type]
 		EntityStats.StatType.RESISTANCE: return _resistances[action_type]
+		EntityStats.StatType.DODGE: return _dodges[action_type]
 		_:
 			printerr("EntityStats: get_stat() - Unknown stat type [", stat_type, "]")
 			return 0.0
@@ -248,5 +270,8 @@ func update_stat(stat_type: StatType, value: float, action_type: Utils.ActionTyp
 		EntityStats.StatType.RESISTANCE:
 			_resistances[action_type] = value
 			resistance_changed.emit(value, action_type)
+		EntityStats.StatType.DODGE:
+			_dodges[action_type] = value
+			dodge_changed.emit(value, action_type)
 		_: printerr("EntityStats: get_stat() - Unknown stat type [", stat_type, "]")
 #endregion

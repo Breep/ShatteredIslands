@@ -117,4 +117,5 @@ func _recompute_multiple_stats() -> void:
 func _is_multiple_stats() -> bool:
 	return _stat_type == EntityStats.StatType.CRIT_CHANCE \
 			or _stat_type == EntityStats.StatType.CRIT_MULT \
-			or _stat_type == EntityStats.StatType.RESISTANCE
+			or _stat_type == EntityStats.StatType.RESISTANCE \
+			or _stat_type == EntityStats.StatType.DODGE
