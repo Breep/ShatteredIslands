@@ -13,11 +13,8 @@ enum StatType {
 	AA_SPEED,
 	CRIT_CHANCE,
 	CRIT_MULT,
-	PHYSICAL_RESISTANCE,
-	MAGICAL_RESISTANCE,
-	POISON_RESISTANCE,
-	ALL_RESISTANCE
-}
+	RESISTANCE,
+	}
 #endregion
 
 #region ============================== Signals ==============================
@@ -130,21 +127,6 @@ var _critical_multipliers: Dictionary[Utils.ActionType, float] = {
 	Utils.ActionType.STACK_REGEN: 100,
 	Utils.ActionType.STACK_NECROSIS: 100,
 }
-
-const CRITICAL_MULTIPLIERS_DEFAULT: Dictionary[Utils.ActionType, float] = {
-	Utils.ActionType.DAMAGE_PHYSICAL: 100,
-	Utils.ActionType.DAMAGE_MAGICAL: 100,
-	Utils.ActionType.DAMAGE_POISON: 100,
-	Utils.ActionType.UTILITY_HEAL: 100,
-	Utils.ActionType.UTILITY_STUN: 100,
-	Utils.ActionType.UTILITY_CLEANSE: 100,
-	Utils.ActionType.UTILITY_PURIFY: 100,
-	Utils.ActionType.STACK_ARMOR: 100,
-	Utils.ActionType.STACK_IGNITE: 100,
-	Utils.ActionType.STACK_POISON: 100,
-	Utils.ActionType.STACK_REGEN: 100,
-	Utils.ActionType.STACK_NECROSIS: 100,
-}
 #endregion
 
 #region ============================== Condition Stacks ==============================
@@ -193,41 +175,21 @@ var _regen_stacks: int = 0
 
 #region ============================== Resistances ==============================
 @export_group("Resistances")
-signal physical_resistance_changed(new_physical_resistance: int)
-var _physical_resistance: float
-@export var physical_resistance: float:
-	get: return _physical_resistance
-	set(value):
-		if value == _physical_resistance: return
-		_physical_resistance = value
-		physical_resistance_changed.emit(_physical_resistance)
-
-signal magical_resistance_changed(new_magical_resistance: float)
-var _magical_resistance: float
-@export var magical_resistance: float:
-	get: return _magical_resistance
-	set(value):
-		if value == _magical_resistance: return
-		_magical_resistance = value
-		magical_resistance_changed.emit(_magical_resistance)
-
-signal poison_resistance_changed(new_poison_resistance: float)
-var _poison_resistance: float
-@export var poison_resistance: float:
-	get: return _poison_resistance
-	set(value):
-		if value == _poison_resistance: return
-		_poison_resistance = value
-		poison_resistance_changed.emit(_poison_resistance)
-
-signal all_resistance_changed(new_all_resistance: float)
-var _all_resistance: float
-@export var all_resistance: float:
-	get: return _all_resistance
-	set(value):
-		if value == _all_resistance: return
-		_all_resistance = value
-		all_resistance_changed.emit(_all_resistance)
+signal resistance_changed(new_resistance: float, action_type: Utils.ActionType)
+var _resistances: Dictionary[Utils.ActionType, float] = {
+	Utils.ActionType.DAMAGE_PHYSICAL: 0.0,
+	Utils.ActionType.DAMAGE_MAGICAL: 0.0,
+	Utils.ActionType.DAMAGE_POISON: 0.0,
+	Utils.ActionType.UTILITY_HEAL: 0.0,
+	Utils.ActionType.UTILITY_STUN: 0.0,
+	Utils.ActionType.UTILITY_CLEANSE: 0.0,
+	Utils.ActionType.UTILITY_PURIFY: 0.0,
+	Utils.ActionType.STACK_ARMOR: 0.0,
+	Utils.ActionType.STACK_IGNITE: 0.0,
+	Utils.ActionType.STACK_POISON: 0.0,
+	Utils.ActionType.STACK_REGEN: 0.0,
+	Utils.ActionType.STACK_NECROSIS: 0.0,
+}
 #endregion
 
 #region ============================== Public functions ==============================
@@ -244,8 +206,9 @@ func reset_from_hero(hero: Hero, lvl: int) -> void:
 	attack_speed = hero.stats[lvl].attack_speed
 	
 	for action_type: Utils.ActionType in _critical_chances.keys():
-		_critical_chances[action_type] = hero.stats[lvl].critical_chance.get(action_type, 0.0)
-		_critical_multipliers[action_type] = hero.stats[lvl].critical_multiplier.get(action_type, CRITICAL_MULTIPLIERS_DEFAULT[action_type])
+		_critical_chances[action_type] = hero.stats[lvl].critical_chances.get(action_type, 0.0)
+		_critical_multipliers[action_type] = hero.stats[lvl].critical_multipliers.get(action_type, 100.0)
+		_resistances[action_type] = hero.stats[lvl].resistances.get(action_type, 0.0)
 	
 	has_been_reset.emit()
 
@@ -261,10 +224,7 @@ func get_stat(stat_type: StatType, action_type: Utils.ActionType = Utils.ActionT
 		EntityStats.StatType.AA_SPEED: return _attack_speed
 		EntityStats.StatType.CRIT_CHANCE: return _critical_chances[action_type]
 		EntityStats.StatType.CRIT_MULT: return _critical_multipliers[action_type]
-		EntityStats.StatType.PHYSICAL_RESISTANCE: return _physical_resistance
-		EntityStats.StatType.MAGICAL_RESISTANCE: return _magical_resistance
-		EntityStats.StatType.POISON_RESISTANCE: return _poison_resistance
-		EntityStats.StatType.ALL_RESISTANCE: return _all_resistance
+		EntityStats.StatType.RESISTANCE: return _resistances[action_type]
 		_:
 			printerr("EntityStats: get_stat() - Unknown stat type [", stat_type, "]")
 			return 0.0
@@ -285,9 +245,8 @@ func update_stat(stat_type: StatType, value: float, action_type: Utils.ActionTyp
 		EntityStats.StatType.CRIT_MULT:
 			_critical_multipliers[action_type] = value
 			critical_multiplier_changed.emit(value, action_type)
-		EntityStats.StatType.PHYSICAL_RESISTANCE: _physical_resistance = value
-		EntityStats.StatType.MAGICAL_RESISTANCE: _magical_resistance = value
-		EntityStats.StatType.POISON_RESISTANCE: _poison_resistance = value
-		EntityStats.StatType.ALL_RESISTANCE: _all_resistance = value
+		EntityStats.StatType.RESISTANCE:
+			_resistances[action_type] = value
+			resistance_changed.emit(value, action_type)
 		_: printerr("EntityStats: get_stat() - Unknown stat type [", stat_type, "]")
 #endregion

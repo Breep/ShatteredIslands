@@ -18,10 +18,7 @@ extends Node
 	EntityStats.StatType.AA_SPEED: StatModifierDictionary.new(),
 	EntityStats.StatType.CRIT_CHANCE: StatModifierDictionary.new(),
 	EntityStats.StatType.CRIT_MULT: StatModifierDictionary.new(),
-	EntityStats.StatType.PHYSICAL_RESISTANCE: StatModifierDictionary.new(),
-	EntityStats.StatType.MAGICAL_RESISTANCE: StatModifierDictionary.new(),
-	EntityStats.StatType.POISON_RESISTANCE: StatModifierDictionary.new(),
-	EntityStats.StatType.ALL_RESISTANCE: StatModifierDictionary.new(),
+	EntityStats.StatType.RESISTANCE: StatModifierDictionary.new(),
 }
 
 # ============================== Node base functions ==============================

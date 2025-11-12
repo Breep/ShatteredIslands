@@ -66,14 +66,16 @@ func _add_stat_modifiers() -> void:
 		var mod := StatModifier.new()
 		mod.calc_type = StatModifier.CalcType.ADD
 		mod.value = _poison_stats.poison_antidote_decrease
-		mod.stat_type = EntityStats.StatType.POISON_RESISTANCE
+		mod.stat_type = EntityStats.StatType.RESISTANCE
+		mod.action_type = Utils.ActionType.DAMAGE_POISON
 		mod.id = "Antidote"
 		_owner.stats_manager.register_modifier(mod)
 
 func _clear_stat_modifiers() -> void:
 	if _poison_stats.poison_antidote_activated:
 		var mod := StatModifier.new()
-		mod.stat_type = EntityStats.StatType.POISON_RESISTANCE
+		mod.stat_type = EntityStats.StatType.RESISTANCE
+		mod.action_type = Utils.ActionType.DAMAGE_POISON
 		mod.id = "Antidote"
 		_owner.stats_manager.unregister_modifier(mod)
 

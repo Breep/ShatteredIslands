@@ -15,9 +15,9 @@ func take_damage(damage: int, damage_type: Utils.DamageType, is_critical: bool, 
 	if _owner.stats.health <= 0 or _owner.is_dead: return 0
 	var damage_before_armor: int = 0
 	if multiplayer.is_server():
-		var phy_res: float = _owner.stats.all_resistance + _owner.stats.physical_resistance
-		var mag_res: float = _owner.stats.all_resistance + _owner.stats.magical_resistance
-		var poi_res: float = _owner.stats.all_resistance + _owner.stats.poison_resistance
+		var phy_res: float = _owner.stats.get_stat(EntityStats.StatType.RESISTANCE, Utils.ActionType.DAMAGE_PHYSICAL)
+		var mag_res: float = _owner.stats.get_stat(EntityStats.StatType.RESISTANCE, Utils.ActionType.DAMAGE_MAGICAL)
+		var poi_res: float = _owner.stats.get_stat(EntityStats.StatType.RESISTANCE, Utils.ActionType.DAMAGE_POISON)
 		match damage_type:
 			Utils.DamageType.PHYSICAL: damage = int((1.0 - phy_res / 100.0) * float(damage))
 			Utils.DamageType.MAGICAL: damage = int((1.0 - mag_res / 100.0) * float(damage))
