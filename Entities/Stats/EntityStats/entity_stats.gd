@@ -14,6 +14,7 @@ enum StatType {
 	CRIT_CHANCE,
 	CRIT_MULT,
 	RESISTANCE,
+	VULNERABILITY,
 	DODGE
 	}
 #endregion
@@ -99,35 +100,8 @@ var _attack_speed: float # Attack per second
 @export_group("Critic")
 signal critical_chance_changed(new_critical_chance: float, critical_type: Utils.ActionType)
 signal critical_multiplier_changed(new_critical_multiplier: float, critical_type: Utils.ActionType) # in %
-var _critical_chances: Dictionary[Utils.ActionType, float] = {
-	Utils.ActionType.DAMAGE_PHYSICAL: 0.0,
-	Utils.ActionType.DAMAGE_MAGICAL: 0.0,
-	Utils.ActionType.DAMAGE_POISON: 0.0,
-	Utils.ActionType.UTILITY_HEAL: 0.0,
-	Utils.ActionType.UTILITY_STUN: 0.0,
-	Utils.ActionType.UTILITY_CLEANSE: 0.0,
-	Utils.ActionType.UTILITY_PURIFY: 0.0,
-	Utils.ActionType.STACK_ARMOR: 0.0,
-	Utils.ActionType.STACK_IGNITE: 0.0,
-	Utils.ActionType.STACK_POISON: 0.0,
-	Utils.ActionType.STACK_REGEN: 0.0,
-	Utils.ActionType.STACK_NECROSIS: 0.0,
-}
-
-var _critical_multipliers: Dictionary[Utils.ActionType, float] = {
-	Utils.ActionType.DAMAGE_PHYSICAL: 100,
-	Utils.ActionType.DAMAGE_MAGICAL: 100,
-	Utils.ActionType.DAMAGE_POISON: 100,
-	Utils.ActionType.UTILITY_HEAL: 100,
-	Utils.ActionType.UTILITY_STUN: 100,
-	Utils.ActionType.UTILITY_CLEANSE: 100,
-	Utils.ActionType.UTILITY_PURIFY: 100,
-	Utils.ActionType.STACK_ARMOR: 100,
-	Utils.ActionType.STACK_IGNITE: 100,
-	Utils.ActionType.STACK_POISON: 100,
-	Utils.ActionType.STACK_REGEN: 100,
-	Utils.ActionType.STACK_NECROSIS: 100,
-}
+var _critical_chances: Dictionary[Utils.ActionType, float]
+var _critical_multipliers: Dictionary[Utils.ActionType, float]
 #endregion
 
 #region ============================== Condition Stacks ==============================
@@ -176,40 +150,20 @@ var _regen_stacks: int = 0
 
 #region ============================== Resistances ==============================
 signal resistance_changed(new_resistance: float, action_type: Utils.ActionType)
-var _resistances: Dictionary[Utils.ActionType, float] = {
-	Utils.ActionType.DAMAGE_PHYSICAL: 0.0,
-	Utils.ActionType.DAMAGE_MAGICAL: 0.0,
-	Utils.ActionType.DAMAGE_POISON: 0.0,
-	Utils.ActionType.UTILITY_HEAL: 0.0,
-	Utils.ActionType.UTILITY_STUN: 0.0,
-	Utils.ActionType.UTILITY_CLEANSE: 0.0,
-	Utils.ActionType.UTILITY_PURIFY: 0.0,
-	Utils.ActionType.STACK_ARMOR: 0.0,
-	Utils.ActionType.STACK_IGNITE: 0.0,
-	Utils.ActionType.STACK_POISON: 0.0,
-	Utils.ActionType.STACK_REGEN: 0.0,
-	Utils.ActionType.STACK_NECROSIS: 0.0,
-}
+var _resistances: Dictionary[Utils.ActionType, float]
 #endregion
 
 
-#region ============================== Resistances ==============================
+#region ============================== Dodge ==============================
 signal dodge_changed(new_dodge: float, action_type: Utils.ActionType)
-var _dodges: Dictionary[Utils.ActionType, float] = {
-	Utils.ActionType.DAMAGE_PHYSICAL: 10.0,
-	Utils.ActionType.DAMAGE_MAGICAL: 0.0,
-	Utils.ActionType.DAMAGE_POISON: 0.0,
-	Utils.ActionType.UTILITY_HEAL: 0.0,
-	Utils.ActionType.UTILITY_STUN: 0.0,
-	Utils.ActionType.UTILITY_CLEANSE: 0.0,
-	Utils.ActionType.UTILITY_PURIFY: 0.0,
-	Utils.ActionType.STACK_ARMOR: 0.0,
-	Utils.ActionType.STACK_IGNITE: 0.0,
-	Utils.ActionType.STACK_POISON: 0.0,
-	Utils.ActionType.STACK_REGEN: 0.0,
-	Utils.ActionType.STACK_NECROSIS: 0.0,
-}
+var _dodges: Dictionary[Utils.ActionType, float]
 #endregion
+
+#region ============================== Vulnerability ==============================
+signal vulnerability_changed(new_vulnerability: float, action_type: Utils.ActionType)
+var _vulnerabilities: Dictionary[Utils.ActionType, float]
+#endregion
+
 
 
 #region ============================== Public functions ==============================
@@ -225,11 +179,12 @@ func reset_from_hero(hero: Hero, lvl: int) -> void:
 	attack_damage = hero.stats[lvl].attack_damage
 	attack_speed = hero.stats[lvl].attack_speed
 	
-	for action_type: Utils.ActionType in _critical_chances.keys():
+	for action_type: Utils.ActionType in Utils.get_all_actions():
 		_critical_chances[action_type] = hero.stats[lvl].critical_chances.get(action_type, 0.0)
 		_critical_multipliers[action_type] = hero.stats[lvl].critical_multipliers.get(action_type, 100.0)
 		_resistances[action_type] = hero.stats[lvl].resistances.get(action_type, 0.0)
 		_dodges[action_type] = hero.stats[lvl].dodges.get(action_type, 0.0)
+		_vulnerabilities[action_type] = hero.stats[lvl].vulnerabilities.get(action_type, 0.0)
 	
 	has_been_reset.emit()
 
@@ -243,10 +198,11 @@ func get_stat(stat_type: StatType, action_type: Utils.ActionType = Utils.ActionT
 		EntityStats.StatType.MANA_REGEN: return _mana_regen
 		EntityStats.StatType.AD: return float(_attack_damage)
 		EntityStats.StatType.AA_SPEED: return _attack_speed
-		EntityStats.StatType.CRIT_CHANCE: return _critical_chances[action_type]
-		EntityStats.StatType.CRIT_MULT: return _critical_multipliers[action_type]
-		EntityStats.StatType.RESISTANCE: return _resistances[action_type]
-		EntityStats.StatType.DODGE: return _dodges[action_type]
+		EntityStats.StatType.CRIT_CHANCE: return _critical_chances.get(action_type, 0.0)
+		EntityStats.StatType.CRIT_MULT: return _critical_multipliers.get(action_type, 100.0)
+		EntityStats.StatType.RESISTANCE: return _resistances.get(action_type, 0.0)
+		EntityStats.StatType.VULNERABILITY: return _vulnerabilities.get(action_type, 0.0)
+		EntityStats.StatType.DODGE: return _dodges.get(action_type, 0.0)
 		_:
 			printerr("EntityStats: get_stat() - Unknown stat type [", stat_type, "]")
 			return 0.0
@@ -270,6 +226,9 @@ func update_stat(stat_type: StatType, value: float, action_type: Utils.ActionTyp
 		EntityStats.StatType.RESISTANCE:
 			_resistances[action_type] = value
 			resistance_changed.emit(value, action_type)
+		EntityStats.StatType.VULNERABILITY:
+			_vulnerabilities[action_type] = value
+			vulnerability_changed.emit(value, action_type)
 		EntityStats.StatType.DODGE:
 			_dodges[action_type] = value
 			dodge_changed.emit(value, action_type)

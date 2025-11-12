@@ -37,9 +37,24 @@ extends Resource
 }
 
 @export var resistances: Dictionary[Utils.ActionType, float] = {
-	Utils.ActionType.DAMAGE_PHYSICAL: 50,
+	Utils.ActionType.DAMAGE_PHYSICAL: 0,
 	Utils.ActionType.DAMAGE_MAGICAL: 0,
-	Utils.ActionType.DAMAGE_POISON: 80,
+	Utils.ActionType.DAMAGE_POISON: 0,
+	Utils.ActionType.UTILITY_HEAL: 0,
+	Utils.ActionType.UTILITY_STUN: 0,
+	Utils.ActionType.UTILITY_CLEANSE: 0,
+	Utils.ActionType.UTILITY_PURIFY: 0,
+	Utils.ActionType.STACK_ARMOR: 0,
+	Utils.ActionType.STACK_IGNITE: 0,
+	Utils.ActionType.STACK_POISON: 0,
+	Utils.ActionType.STACK_REGEN: 0,
+	Utils.ActionType.STACK_NECROSIS: 0,
+}
+
+@export var vulnerabilities: Dictionary[Utils.ActionType, float] = {
+	Utils.ActionType.DAMAGE_PHYSICAL: 0,
+	Utils.ActionType.DAMAGE_MAGICAL: 0,
+	Utils.ActionType.DAMAGE_POISON: 0,
 	Utils.ActionType.UTILITY_HEAL: 0,
 	Utils.ActionType.UTILITY_STUN: 0,
 	Utils.ActionType.UTILITY_CLEANSE: 0,
@@ -52,7 +67,7 @@ extends Resource
 }
 
 @export var dodges: Dictionary[Utils.ActionType, float] = {
-	Utils.ActionType.DAMAGE_PHYSICAL: 50,
+	Utils.ActionType.DAMAGE_PHYSICAL: 0,
 	Utils.ActionType.DAMAGE_MAGICAL: 0,
 	Utils.ActionType.DAMAGE_POISON: 0,
 	Utils.ActionType.UTILITY_HEAL: 0,
@@ -61,7 +76,7 @@ extends Resource
 	Utils.ActionType.UTILITY_PURIFY: 0,
 	Utils.ActionType.STACK_ARMOR: 0,
 	Utils.ActionType.STACK_IGNITE: 0,
-	Utils.ActionType.STACK_POISON: 50,
+	Utils.ActionType.STACK_POISON: 0,
 	Utils.ActionType.STACK_REGEN: 0,
 	Utils.ActionType.STACK_NECROSIS: 0,
 }

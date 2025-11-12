@@ -5,20 +5,7 @@ extends Resource
 
 var _stat_type: EntityStats.StatType
 var _modifiers: Dictionary[StringName, StatModifier]
-var _modifiers_per_action_type: Dictionary[Utils.ActionType, Dictionary] = {
-	Utils.ActionType.DAMAGE_PHYSICAL: {},
-	Utils.ActionType.DAMAGE_MAGICAL: {},
-	Utils.ActionType.DAMAGE_POISON: {},
-	Utils.ActionType.UTILITY_HEAL: {},
-	Utils.ActionType.UTILITY_STUN: {},
-	Utils.ActionType.UTILITY_CLEANSE: {},
-	Utils.ActionType.UTILITY_PURIFY: {},
-	Utils.ActionType.STACK_ARMOR: {},
-	Utils.ActionType.STACK_IGNITE: {},
-	Utils.ActionType.STACK_POISON: {},
-	Utils.ActionType.STACK_REGEN: {},
-	Utils.ActionType.STACK_NECROSIS: {}
-}
+var _modifiers_per_action_type: Dictionary[Utils.ActionType, Dictionary]
 
 var _entity_stats_ref: EntityStats
 var _entity_base_stats_ref: EntityStats
@@ -29,6 +16,8 @@ func setup(stat_type: EntityStats.StatType, entity_stat_ref: EntityStats, entity
 	_stat_type = stat_type
 	_entity_stats_ref = entity_stat_ref
 	_entity_base_stats_ref = entity_base_stats_ref
+	for action_type: Utils.ActionType in Utils.get_all_actions():
+		_modifiers_per_action_type[action_type] = {}
 
 
 func recompute_stats() -> void:
@@ -100,7 +89,7 @@ func _recompute_single_stats() -> void:
 
 
 func _recompute_multiple_stats() -> void:
-	for action_type: Utils.ActionType in _modifiers_per_action_type.keys():
+	for action_type: Utils.ActionType in Utils.get_all_actions():
 		var mods: Dictionary = _modifiers_per_action_type[action_type]
 		var add: float = 0.0
 		var mul: float = 0.0
@@ -118,4 +107,5 @@ func _is_multiple_stats() -> bool:
 	return _stat_type == EntityStats.StatType.CRIT_CHANCE \
 			or _stat_type == EntityStats.StatType.CRIT_MULT \
 			or _stat_type == EntityStats.StatType.RESISTANCE \
+			or _stat_type == EntityStats.StatType.VULNERABILITY \
 			or _stat_type == EntityStats.StatType.DODGE

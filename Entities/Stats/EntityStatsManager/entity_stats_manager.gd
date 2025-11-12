@@ -9,6 +9,7 @@ extends Node
 # ============================== Private variables ==============================
 
 @onready var _stats_modifiers_dictionaries: Dictionary [EntityStats.StatType, StatModifierDictionary] = {
+	# Single stats
 	EntityStats.StatType.HEALTH_MAX: StatModifierDictionary.new(),
 	EntityStats.StatType.HEALTH: StatModifierDictionary.new(),
 	EntityStats.StatType.MANA_MAX: StatModifierDictionary.new(),
@@ -16,9 +17,12 @@ extends Node
 	EntityStats.StatType.MANA_REGEN: StatModifierDictionary.new(),
 	EntityStats.StatType.AD: StatModifierDictionary.new(),
 	EntityStats.StatType.AA_SPEED: StatModifierDictionary.new(),
+	
+	# Multiple stats
 	EntityStats.StatType.CRIT_CHANCE: StatModifierDictionary.new(),
 	EntityStats.StatType.CRIT_MULT: StatModifierDictionary.new(),
 	EntityStats.StatType.RESISTANCE: StatModifierDictionary.new(),
+	EntityStats.StatType.VULNERABILITY: StatModifierDictionary.new(),
 	EntityStats.StatType.DODGE: StatModifierDictionary.new()
 }
 

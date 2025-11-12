@@ -18,13 +18,9 @@ func take_damage(damage: int, damage_type: Utils.DamageType, is_critical: bool, 
 		if _is_dodged(Utils.damage_to_action(damage_type)):
 			print("DAMAGE DODGED")
 			return 0
-		var phy_res: float = _owner.stats.get_stat(EntityStats.StatType.RESISTANCE, Utils.ActionType.DAMAGE_PHYSICAL)
-		var mag_res: float = _owner.stats.get_stat(EntityStats.StatType.RESISTANCE, Utils.ActionType.DAMAGE_MAGICAL)
-		var poi_res: float = _owner.stats.get_stat(EntityStats.StatType.RESISTANCE, Utils.ActionType.DAMAGE_POISON)
-		match damage_type:
-			Utils.DamageType.PHYSICAL: damage = int((1.0 - phy_res / 100.0) * float(damage))
-			Utils.DamageType.MAGICAL: damage = int((1.0 - mag_res / 100.0) * float(damage))
-			Utils.DamageType.POISON: damage = int((1.0 - poi_res / 100.0) * float(damage))
+		var res: float = _owner.stats.get_stat(EntityStats.StatType.RESISTANCE, Utils.damage_to_action(damage_type))
+		var vuln: float = _owner.stats.get_stat(EntityStats.StatType.VULNERABILITY, Utils.damage_to_action(damage_type))
+		damage = int(float(damage) * (100 + vuln) / (100 + res))
 		
 		damage_before_armor = damage
 		if _defense_manager != null: damage = _defense_manager.get_reduced_damage_taken_from_armor(damage, damage_type) # Reduce flat of PHYSIC AND MAGIC damage

@@ -74,7 +74,7 @@ func _ready() -> void:
 	rng.randomize()
 
 # ============================== Public functions ==============================
-
+#region ===== ACTIONS
 func stack_to_action(stack_type: StackType) -> ActionType:
 	match stack_type:
 		StackType.POISON: return ActionType.STACK_POISON
@@ -91,6 +91,22 @@ func damage_to_action(damage_type: DamageType) -> ActionType:
 		DamageType.POISON: return ActionType.DAMAGE_POISON
 		_: return ActionType.DAMAGE_PHYSICAL
 
+func get_all_actions() -> Array[ActionType]:
+	return [
+		ActionType.DAMAGE_PHYSICAL,
+		ActionType.DAMAGE_MAGICAL,
+		ActionType.DAMAGE_POISON,
+		ActionType.UTILITY_HEAL,
+		ActionType.UTILITY_STUN,
+		ActionType.UTILITY_CLEANSE,
+		ActionType.UTILITY_PURIFY,
+		ActionType.STACK_ARMOR,
+		ActionType.STACK_IGNITE,
+		ActionType.STACK_POISON,
+		ActionType.STACK_REGEN,
+		ActionType.STACK_NECROSIS
+	]
+#endregion
 
 func create_perpetual_timer(node: Node, wait_time: float, callback: Callable, autostart: bool = false) -> Timer:
 	var timer := Timer.new()
