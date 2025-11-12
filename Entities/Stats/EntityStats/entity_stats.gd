@@ -244,7 +244,8 @@ func reset_from_hero(hero: Hero, lvl: int) -> void:
 	attack_speed = hero.stats[lvl].attack_speed
 	
 	for action_type: Utils.ActionType in _critical_chances.keys():
-		_critical_chances[action_type] = hero.stats[lvl].critical_multiplier.get(action_type, CRITICAL_MULTIPLIERS_DEFAULT[action_type])
+		_critical_chances[action_type] = hero.stats[lvl].critical_chance.get(action_type, 0.0)
+		_critical_multipliers[action_type] = hero.stats[lvl].critical_multiplier.get(action_type, CRITICAL_MULTIPLIERS_DEFAULT[action_type])
 	
 	has_been_reset.emit()
 

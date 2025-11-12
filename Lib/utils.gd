@@ -75,6 +75,23 @@ func _ready() -> void:
 
 # ============================== Public functions ==============================
 
+func stack_to_action(stack_type: StackType) -> ActionType:
+	match stack_type:
+		StackType.POISON: return ActionType.STACK_POISON
+		StackType.ARMOR: return ActionType.STACK_ARMOR
+		StackType.IGNITE: return ActionType.STACK_IGNITE
+		StackType.REGEN: return ActionType.STACK_REGEN
+		_: return ActionType.STACK_POISON
+
+
+func damage_to_action(damage_type: DamageType) -> ActionType:
+	match damage_type:
+		DamageType.PHYSICAL: return ActionType.DAMAGE_PHYSICAL
+		DamageType.MAGICAL: return ActionType.DAMAGE_MAGICAL
+		DamageType.POISON: return ActionType.DAMAGE_POISON
+		_: return ActionType.DAMAGE_PHYSICAL
+
+
 func create_perpetual_timer(node: Node, wait_time: float, callback: Callable, autostart: bool = false) -> Timer:
 	var timer := Timer.new()
 	timer.wait_time = wait_time
