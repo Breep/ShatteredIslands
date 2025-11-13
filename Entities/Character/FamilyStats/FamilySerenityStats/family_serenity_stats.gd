@@ -1,9 +1,20 @@
 class_name FamilySerenityStats
 extends FamilyStats
 
+#region Common Cards
+
+var holy_touch_activated: bool # True if the player has at least one of this card
+var holy_touch_period: float # tick rate (/s)
+var holy_touch_amount: float # Amount of heal done to an ally every periodic_heal_period
+
+#endregion
+
+
+# CACA a supprimer 
 # Current pacify stacks on the hero (reduce auto attack damage)
 # Decreases by attacking: 1 auto attack = 1 pacify stack consumed
 var pacify_stacks: int = 0
+
 
 var periodic_heal_activated: bool # True if the player has at least one of this card
 var periodic_heal_amount: int # Amount of heal done to an ally every periodic_heal_period

@@ -1,10 +1,6 @@
 class_name FamilyPoisonStats
 extends FamilyStats
 
-#region Family Level
-
-#endregion
-
 #region Common Cards
 # [Poison FLask]
 var poison_flask_activated: bool # True if the player has at least one of this card

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://lypcpcn4pc4a"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_v43a7"]
+[ext_resource type="Texture2D" uid="uid://dni7nok7g6p3j" path="res://Card/Descriptions/Cards/Light/Common/HolyTouch/portrait_holy_touch.png" id="1_xf8j7"]
+[ext_resource type="Script" uid="uid://tswgfdudffa2" path="res://Card/Descriptions/Cards/Light/Common/HolyTouch/light_holy_touch.gd" id="2_7r5a3"]
+
+[sub_resource type="Resource" id="Resource_epg00"]
+script = ExtResource("2_7r5a3")
+_heal_amount = Array[int]([50, 80, 110, 140, 200])
+_period = Array[float]([3.0, 3.0, 3.0, 3.0, 3.0])
+metadata/_custom_type_script = "uid://tswgfdudffa2"
+
+[resource]
+script = ExtResource("1_v43a7")
+name = "Holy Touch"
+picture = ExtResource("1_xf8j7")
+family = 5
+player_upgrade = SubResource("Resource_epg00")
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"
