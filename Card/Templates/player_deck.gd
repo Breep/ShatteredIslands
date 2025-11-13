@@ -49,7 +49,7 @@ func get_family_lvl(family_type: Family.FamilyType) -> int:
 func _add_or_improve_card_to_active_cards(card_to_add: Card) -> void:
 	for card in _active_cards:
 		if card.name == card_to_add.name:
-			if card.lvl < _get_lvl_max_of_card_rarity(card.rarity):
+			if not card.is_max_level():
 				card.lvl += 1
 			else:
 				printerr("PlayerDeck: Trying to upgrade an already maximized card - ", card_to_add.name)
@@ -59,17 +59,6 @@ func _add_or_improve_card_to_active_cards(card_to_add: Card) -> void:
 		_cards_dictionary[card_to_add.family].append(card_to_add)
 	else:
 		_cards_dictionary[card_to_add.family] = [card_to_add]
-
-
-func _get_lvl_max_of_card_rarity(card_rarity: Card.Rarity) -> int:
-	match card_rarity:
-		Card.Rarity.COMMON:
-			return 5
-		Card.Rarity.RARE:
-			return 3
-		Card.Rarity.EPIC:
-			return 1
-	return 0
 
 
 func _specific_add(card_to_add: Card) -> void:
