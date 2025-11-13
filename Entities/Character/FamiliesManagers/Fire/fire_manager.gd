@@ -26,6 +26,7 @@ func start() -> void:
 	_create_optional_timers()
 	_lanch_optional_spells()
 	_ignite_timer.start()
+	_on_battle_start()
 
 
 func stop() -> void:
@@ -37,15 +38,15 @@ func stop() -> void:
 	_ignite_timer.stop()
 
 
-func get_reduced_damage(damage: int, _damage_type: Utils.DamageType) -> int:
-	return damage
-
-
-# Storm of fire
-func get_increased_damage(damage: float, _damage_type: Utils.DamageType) -> float:
-	return damage
-
 # ============================== Private functions ==============================
+
+func _on_battle_start() -> void:
+	# [nuke]
+	if _fire_stats.nuke_activated:
+		var targets: Array[Entity] = _owner.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ENEMIES)
+		for target: Entity in targets:
+			_owner.inflict_condition_stacks(target,_fire_stats.nuke_ignite,Utils.StackType.IGNITE)
+		
 
 func _create_optional_timers() -> void:
 	if _fire_stats.periodic_ignite_activated:
@@ -73,7 +74,7 @@ func _on_periodic_ignite_timer_timeout() -> void:
 func _on_ignite_timer_timeout() -> void:
 	if _owner.stats.ignite_stacks > 0:
 		var percent: float = _ignite_percent_per_stack * _owner.stats.ignite_stacks
-		_owner.take_damage_percent(percent, Utils.PercentModifier.CURRENT_HP, Utils.DamageType.MAGICAL, false)
+		_owner.take_damage_percent(percent, Utils.PercentModifier.MAX_HP, Utils.DamageType.MAGICAL)
 	
 	var decay: int = (_owner.stats.ignite_stacks * _ignite_decay_percent / 100.0) as int
 	decay = clampi(decay, 1, decay)
