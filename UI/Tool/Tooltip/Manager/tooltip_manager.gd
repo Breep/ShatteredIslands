@@ -6,12 +6,14 @@ extends Node
 @onready var THEME: TooltipTheme = load("res://UI/Tool/Tooltip/Theme/standard_theme.tres")
 @onready var TOOLTIP_DATABASE: Array[TooltipDesc] = [
 	load("res://UI/Tool/Tooltip/Dictionary/poison_stack.tres"),
-	load("res://UI/Tool/Tooltip/Dictionary/poison_damage.tres")
+	load("res://UI/Tool/Tooltip/Dictionary/poison_damage.tres"),
+	load("res://UI/Tool/Tooltip/Dictionary/ignite_stack.tres")
 ]
 
 @onready var SNIPPET_MAP: Dictionary[String, String] = {
 	"POISON_DAMAGE": "[color=%s][url=POISON_DAMAGE]poison damage[/url][/color]" % THEME.color_html("POISON_COLOR"),
 	"POISON_STACK":  "[color=%s][url=POISON_STACK]poison stack[/url][/color]"  % THEME.color_html("POISON_COLOR"),
+	"IGNITE_STACK":  "[color=%s][url=IGNITE_STACK]ignite stack[/url][/color]"  % THEME.color_html("FIRE_COLOR")
 }
 
 var _all_scene_tooltips: Array[Tooltip] 

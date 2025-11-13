@@ -20,6 +20,7 @@ extends Resource
 
 @export_group("Colors")
 @export var POISON_COLOR: Color = Color.DARK_OLIVE_GREEN
+@export var FIRE_COLOR: Color = Color.DARK_RED
 @export var DEFAULT_COLOR: Color = Color.WHITE
 
 

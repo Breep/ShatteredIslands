@@ -75,7 +75,7 @@ text = "[[POISON_STACK]]  |  [[POISON_DAMAGE]]"
 
 [node name="SmartTextLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "[[POISON_DAMAGE]]"
+text = "[[POISON_DAMAGE]] [[IGNITE_STACK]]"
 fit_content = true
 script = ExtResource("4_nydl5")
 metadata/_custom_type_script = "uid://bd3srw4twda5w"
