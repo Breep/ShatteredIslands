@@ -134,7 +134,7 @@ func projectile_attack(target: Entity, projectile_type: Projectile.ProjectileTyp
 		var attack_cmd: AttackCommand = _action_module.build_projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
 		if attack_cmd == null: return
 		_pending_attacks.append(attack_cmd)
-		auto_attack_started.emit(projectile_stats.is_critic)
+		auto_attack_started.emit(projectile_stats.physical_is_critical)
 	else:
 		_action_module.projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
 
@@ -174,11 +174,11 @@ func take_damage(damage: int, damage_type: Utils.DamageType, is_critical: bool =
 func take_damage_percent(percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.DamageType, is_critical: bool = false, source: Entity = null) -> void:
 	_interact_module.take_damage_percent(percent, percent_modifier, damage_type, is_critical, source)
 
-func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, source: Entity = null) -> void:
-	_interact_module.take_condition_stacks(stacks_number, stack_type, source)
+func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, is_critical: bool, source: Entity = null) -> void:
+	_interact_module.take_condition_stacks(stacks_number, stack_type, is_critical, source)
 
-func take_heal(heal_amount: int, source: Entity = null) -> void:
-	_interact_module.take_heal(heal_amount, source)
+func take_heal(heal_amount: int, is_critical: bool, source: Entity = null) -> void:
+	_interact_module.take_heal(heal_amount, is_critical, source)
 #endregion
 
 # ============================== Node base functions ==============================
@@ -189,6 +189,8 @@ func _ready() -> void:
 		player.character = self
 	
 	player.lvl_changed.connect(_on_player_lvl_changed)
+	
+	_character_logic.connect_to_player(player)
 	
 	if battle_id == -1:
 		_character_visual.hide()

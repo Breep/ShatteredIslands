@@ -59,13 +59,15 @@ func spawn_entity(entity: Entity, entity_spawn_global_position: Vector3) -> void
 # ============================== Private functions ==============================
 
 func _clear_all() -> void:
-	for child in _projectiles_node.get_children():
-			child.queue_free()
+	for projectile in _projectiles_node.get_children():
+		projectile.queue_free()
+	for spell in _spells_node.get_children():
+		spell.queue_free()
 
 # ============================== Callbacks ==============================
 
 func _on_game_manager_game_state_changed(state: Game.GameState) -> void:
-	if state == Game.GameState.FIGHTING_CELEBRATING:
+	if state == Game.GameState.BUYING:
 		_clear_all()
 
 

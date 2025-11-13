@@ -84,7 +84,7 @@ func _on_deploy_timer_timeout() -> void:
 				_owner.inflict_condition_stacks(entity, _ignite_stacks, Utils.StackType.IGNITE)
 				_owner.direct_attack(entity, entity.stats.ignite_stacks * _damage_per_stacks, Utils.DamageType.MAGICAL)
 			else:
-				entity.take_condition_stacks(_ignite_stacks, Utils.StackType.IGNITE)
+				entity.take_condition_stacks(_ignite_stacks, Utils.StackType.IGNITE, false)
 				entity.take_damage(entity.stats.ignite_stacks * _damage_per_stacks, Utils.DamageType.MAGICAL)
 
 

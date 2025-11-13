@@ -15,6 +15,7 @@ script = ExtResource("1_0lrnh")
 name = "Contagion"
 picture = ExtResource("1_a23ts")
 family = 7
+rarity = 1
 player_upgrade = SubResource("Resource_gcxcv")
 lvl = 3
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

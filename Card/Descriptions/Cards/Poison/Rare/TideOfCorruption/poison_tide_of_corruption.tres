@@ -15,6 +15,7 @@ script = ExtResource("1_dphlq")
 name = "Tide of corruption"
 picture = ExtResource("1_geh03")
 family = 7
+rarity = 1
 player_upgrade = SubResource("Resource_geh03")
 lvl = 3
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

@@ -10,18 +10,15 @@ func _ready() -> void:
 
 # ============================== Public function ==============================
 
-# ===== Damage
+#region ============================== Damage ==============================
 func take_damage(damage: int, damage_type: Utils.DamageType, is_critical: bool, source: Entity = null, attack_type: Utils.AttackType = Utils.AttackType.UNDEF) -> int:
 	if _owner.stats.health <= 0 or _owner.is_dead: return 0
 	var damage_before_armor: int = 0
 	if multiplayer.is_server():
-		var phy_res: float = _owner.stats.all_resistance + _owner.stats.physical_resistance
-		var mag_res: float = _owner.stats.all_resistance + _owner.stats.magical_resistance
-		var poi_res: float = _owner.stats.all_resistance + _owner.stats.poison_resistance
-		match damage_type:
-			Utils.DamageType.PHYSICAL: damage = int((1.0 - phy_res / 100.0) * float(damage))
-			Utils.DamageType.MAGICAL: damage = int((1.0 - mag_res / 100.0) * float(damage))
-			Utils.DamageType.POISON: damage = int((1.0 - poi_res / 100.0) * float(damage))
+		if _is_dodged(Utils.damage_to_action(damage_type)):
+			print("DAMAGE DODGED")
+			return 0
+		damage = int(float(damage) * _get_resistance_vulnerability_multiplier(Utils.damage_to_action(damage_type)))
 		
 		damage_before_armor = damage
 		if _defense_manager != null: damage = _defense_manager.get_reduced_damage_taken_from_armor(damage, damage_type) # Reduce flat of PHYSIC AND MAGIC damage
@@ -36,8 +33,8 @@ func take_damage(damage: int, damage_type: Utils.DamageType, is_critical: bool, 
 	return damage
 
 
-func take_damage_percent(damage_percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.DamageType, is_critical: bool, source: Entity = null) -> void:
-	if not multiplayer.is_server(): return
+func take_damage_percent(damage_percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.DamageType, is_critical: bool, source: Entity = null) -> int:
+	if not multiplayer.is_server(): return 0
 	var hp: int
 	match percent_modifier:
 		Utils.PercentModifier.MAX_HP:
@@ -47,13 +44,17 @@ func take_damage_percent(damage_percent: float, percent_modifier: Utils.PercentM
 		Utils.PercentModifier.LOST_HP:
 			hp = _owner.stats.health_max - _owner.stats.health
 	var damage = hp * damage_percent  / 100.0
-	take_damage(damage, damage_type, is_critical, source)
+	return take_damage(damage, damage_type, is_critical, source)
+#endregion
 
-# ===== Condition stacks
-
-func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, _source: Entity = null) -> void:
+#region ============================== Condition stacks ==============================
+func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, is_critical: bool, _source: Entity = null) -> void:
 	if _owner.stats.health <= 0 or _owner.is_dead: return
-	_owner.signal_stack_taken(stack_type, stacks_number)
+	if _is_dodged(Utils.stack_to_action(stack_type)):
+		print("CONDITION STACK DODGED")
+		return
+	stacks_number = int(float(stacks_number) * _get_resistance_vulnerability_multiplier(Utils.stack_to_action(stack_type)))
+	_owner.signal_stack_taken(stack_type, stacks_number, is_critical)
 	match stack_type:
 		Utils.StackType.POISON:
 			_owner.stats.poison_stacks += stacks_number
@@ -63,10 +64,30 @@ func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, _sou
 			_owner.stats.armor_stacks += stacks_number
 		Utils.StackType.REGEN:
 			_owner.stats.regen_stacks += stacks_number
+#endregion
 
-# ===== Heal
-
-func take_heal(heal_amount: int, _source: Entity = null) -> void:
+#region ============================== Heal ==============================
+func take_heal(heal_amount: int, is_critical: bool, _source: Entity = null) -> void:
 	if _owner.stats.health <= 0 or _owner.is_dead: return
+	if _is_dodged(Utils.ActionType.UTILITY_HEAL):
+		print("HEAL DODGED")
+		return
+	heal_amount = int(float(heal_amount) * _get_resistance_vulnerability_multiplier(Utils.ActionType.UTILITY_HEAL))
 	_owner.stats.health += heal_amount
-	_owner.signal_heal_taken(heal_amount)
+	_owner.signal_heal_taken(heal_amount, is_critical)
+#endregion
+
+#region ============================== Private functions ==============================
+func _is_dodged(action_type: Utils.ActionType) -> bool:
+	var dodge_chance: float = _owner.stats.get_stat(EntityStats.StatType.DODGE, action_type)
+	if Utils.is_randomize_modifier_active(dodge_chance):
+		return true
+	return false
+
+
+func _get_resistance_vulnerability_multiplier(action_type: Utils.ActionType) -> float:
+	var res: float = _owner.stats.get_stat(EntityStats.StatType.RESISTANCE, action_type)
+	var vuln: float = _owner.stats.get_stat(EntityStats.StatType.VULNERABILITY, action_type)
+	return (100 + vuln) / (100 + res)
+
+#endregion

@@ -7,6 +7,9 @@ extends Node
 var _optional_timers: Array[Timer]
 var _optional_spells: Array[Node]
 
+var _player: Player
+var _family_type: Family.FamilyType
+
 func _ready() -> void:
 	if _owner == null:
 		printerr("FamilyManager: Need a character owner [", get_path(), "]")
@@ -16,6 +19,10 @@ func _ready() -> void:
 	
 	_optional_spells.clear()
 	_optional_timers.clear()
+
+func connect_to_player(player: Player) -> void:
+	_player = player
+	_player.deck.has_changed.connect(_on_owner_player_deck_has_changed)
 
 
 func init() -> void:
@@ -32,3 +39,8 @@ func stop() -> void:
 
 func _specific_init() -> void:
 	pass
+
+
+func _on_owner_player_deck_has_changed() -> void:
+	var deck: PlayerDeck = _owner.player.deck
+	print("family [", _family_type, "] | level = ", deck.get_family_lvl(_family_type))

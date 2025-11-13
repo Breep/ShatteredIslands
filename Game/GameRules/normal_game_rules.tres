@@ -17,3 +17,4 @@ xp_per_levels = Dictionary[int, int]({
 9: 50,
 10: 100
 })
+duration_buying_phase = 40.0

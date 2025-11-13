@@ -24,6 +24,11 @@ func connect_to_fighting_area(fighting_area: FightingArea) -> void:
 	action_module.connect_to_spawn_manager(fighting_area.spawn_manager)
 
 
+func connect_to_player(player: Player) -> void:
+	for family_manager: FamilyManager in families_managers.values():
+		family_manager.connect_to_player(player)
+
+
 func start() -> void: # Only the server simulate the fight, Clients gets the BattleLog and do a playback
 	if not multiplayer.is_server(): return
 	if not _is_stopped: return
@@ -51,7 +56,6 @@ func _on_source_fighting_state_changed(new_state: Character.FightingState) -> vo
 		Character.FightingState.CELEBRATING:
 			target_module.stop()
 			stop()
-
 
 
 

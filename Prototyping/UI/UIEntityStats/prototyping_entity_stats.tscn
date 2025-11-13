@@ -446,13 +446,28 @@ size_flags_vertical = 3
 text = "500"
 placeholder_text = "Max Mana"
 
-[node name="HealButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Heal"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Heal"]
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HealButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Heal/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_xbhig")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_jis0c")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ao245")
 text = "HEAL"
+
+[node name="HealButtonCritical" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Heal/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_xbhig")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jis0c")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ao245")
+text = "HEAL
+CRITICAL"
 
 [node name="Poison" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(200, 200)
@@ -464,16 +479,46 @@ size_flags_vertical = 3
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
-text = "100"
+text = "5"
 placeholder_text = "Current poison stacks"
 
-[node name="PoisonButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Poison"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Poison"]
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AddPoisonButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Poison/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_f0b73")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_8v6uc")
 theme_override_styles/hover = SubResource("StyleBoxFlat_3u318")
-text = "Set POISON STACKS"
+text = "ADD
+POISON
+STACKS"
+autowrap_mode = 3
+
+[node name="AddPoisonButtonCritical" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Poison/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_f0b73")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8v6uc")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3u318")
+text = "ADD
+POISON STACK
+CRITICAL"
+autowrap_mode = 3
+
+[node name="ResetPoisonButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Poison/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_f0b73")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8v6uc")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3u318")
+text = "RESET"
+autowrap_mode = 3
 
 [node name="Ignite" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(200, 200)
@@ -485,16 +530,43 @@ size_flags_vertical = 3
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
-text = "100"
+text = "10"
 placeholder_text = "Max Mana"
 
-[node name="SetIgniteButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Ignite"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Ignite"]
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AddIgniteButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Ignite/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_0psvp")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_2o5ap")
 theme_override_styles/hover = SubResource("StyleBoxFlat_7xdgm")
-text = "SET IGNITE STACKS"
+text = "ADD IGNITE STACKS"
+autowrap_mode = 3
+
+[node name="AddIgniteButtonCritical" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Ignite/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_0psvp")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2o5ap")
+theme_override_styles/hover = SubResource("StyleBoxFlat_7xdgm")
+text = "ADD IGNITE STACKS
+CRITICAL"
+autowrap_mode = 3
+
+[node name="ResetIgniteButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Ignite/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_0psvp")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2o5ap")
+theme_override_styles/hover = SubResource("StyleBoxFlat_7xdgm")
+text = "RESET"
+autowrap_mode = 3
 
 [node name="Armor" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(200, 200)
@@ -506,17 +578,43 @@ size_flags_vertical = 3
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
-text = "100"
+text = "50"
 placeholder_text = "Current armor stacks"
 
-[node name="ArmorButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Armor"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Armor"]
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AddArmorButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Armor/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_7qyrv")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_xxg0n")
 theme_override_styles/hover = SubResource("StyleBoxFlat_5july")
-text = "ADD
-ARMOR STACKS"
+text = "ADD ARMOR STACKS"
+autowrap_mode = 3
+
+[node name="AddArmorButtonCritical" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Armor/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_7qyrv")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xxg0n")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5july")
+text = "ADD ARMOR STACKS
+CRITICAL"
+autowrap_mode = 3
+
+[node name="ResetArmorButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Armor/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_7qyrv")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xxg0n")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5july")
+text = "RESET"
+autowrap_mode = 3
 
 [node name="Regen" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(200, 200)
@@ -528,16 +626,43 @@ size_flags_vertical = 3
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
-text = "100"
+text = "10"
 placeholder_text = "Max Mana"
 
-[node name="SetRegenButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Regen"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Regen"]
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AddRegenButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Regen/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_c4rpy")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_b4lmq")
 theme_override_styles/hover = SubResource("StyleBoxFlat_aocyj")
 text = "SET REGEN STACKS"
+autowrap_mode = 3
+
+[node name="AddRegenButtonCritical" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Regen/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_c4rpy")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_b4lmq")
+theme_override_styles/hover = SubResource("StyleBoxFlat_aocyj")
+text = "SET REGEN STACKS
+CRITICAL"
+autowrap_mode = 3
+
+[node name="ResetRegenButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Regen/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_c4rpy")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_b4lmq")
+theme_override_styles/hover = SubResource("StyleBoxFlat_aocyj")
+text = "RESET"
+autowrap_mode = 3
 
 [node name="PhysicalDamage" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(200, 200)
@@ -612,13 +737,29 @@ size_flags_stretch_ratio = 0.5
 text = "10"
 placeholder_text = "Damage variation"
 
-[node name="DealMagicalDamageButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/MagicalDamage"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/MagicalDamage"]
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DealMagicalDamageButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/MagicalDamage/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_k1rt8")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_nj7t4")
 theme_override_styles/hover = SubResource("StyleBoxFlat_6x65p")
 text = "DEAL MAGICAL DAMAGE"
+autowrap_mode = 3
+
+[node name="DealMagicalDamageCritical" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/MagicalDamage/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_k1rt8")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nj7t4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6x65p")
+text = "DEAL MAGICAL DAMAGE"
+autowrap_mode = 3
 
 [node name="RandomPopup" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(300, 300)
@@ -653,12 +794,22 @@ text = "Random POPUP"
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/CurrentHealth/SetCurrentHealthButton" to="." method="_on_set_current_health_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/MaxMana/SetMaxManaButton" to="." method="_on_set_max_mana_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/ManaRegen/SetManaRegenButton" to="." method="_on_set_mana_regen_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Heal/HealButton" to="." method="_on_heal_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Poison/PoisonButton" to="." method="_on_poison_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Ignite/SetIgniteButton" to="." method="_on_set_ignite_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Armor/ArmorButton" to="." method="_on_armor_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Regen/SetRegenButton" to="." method="_on_set_regen_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Heal/HBoxContainer/HealButton" to="." method="_on_heal_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Heal/HBoxContainer/HealButtonCritical" to="." method="_on_heal_button_critical_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Poison/HBoxContainer/AddPoisonButton" to="." method="_on_add_poison_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Poison/HBoxContainer/AddPoisonButtonCritical" to="." method="_on_add_poison_button_critical_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Poison/HBoxContainer/ResetPoisonButton" to="." method="_on_reset_poison_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Ignite/HBoxContainer/AddIgniteButton" to="." method="_on_add_ignite_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Ignite/HBoxContainer/AddIgniteButtonCritical" to="." method="_on_add_ignite_button_critical_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Ignite/HBoxContainer/ResetIgniteButton" to="." method="_on_reset_ignite_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Armor/HBoxContainer/AddArmorButton" to="." method="_on_add_armor_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Armor/HBoxContainer/AddArmorButtonCritical" to="." method="_on_add_armor_button_critical_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Armor/HBoxContainer/ResetArmorButton" to="." method="_on_reset_armor_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Regen/HBoxContainer/AddRegenButton" to="." method="_on_add_regen_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Regen/HBoxContainer/AddRegenButtonCritical" to="." method="_on_add_regen_button_critical_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/Regen/HBoxContainer/ResetRegenButton" to="." method="_on_reset_regen_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/PhysicalDamage/HBoxContainer/DealPhysicalDamageButton" to="." method="_on_deal_physical_damage_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/PhysicalDamage/HBoxContainer/DealCriticalDamageButton" to="." method="_on_deal_critical_damage_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/MagicalDamage/DealMagicalDamageButton" to="." method="_on_deal_magical_damage_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/MagicalDamage/HBoxContainer/DealMagicalDamageButton" to="." method="_on_deal_magical_damage_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/MagicalDamage/HBoxContainer/DealMagicalDamageCritical" to="." method="_on_deal_magical_damage_critical_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/RandomPopup/RandomPopupButton" to="." method="_on_random_popup_button_pressed"]

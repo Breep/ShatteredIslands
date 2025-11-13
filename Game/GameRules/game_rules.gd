@@ -1,10 +1,34 @@
 class_name GameRules
 extends Resource
 
-@export_subgroup("Cards rules")
+@export_group("Cards rules")
+@export_subgroup("Cards number")
 @export var common_number: int = 25
 @export var rare_number: int = 10
 @export var epic_number: int = 5
+
+@export_subgroup("Family rules")
+@export var rarity_card_values: Dictionary[Card.Rarity, int] = {
+	Card.Rarity.COMMON: 1,
+	Card.Rarity.RARE: 2,
+	Card.Rarity.EPIC: 3,
+	Card.Rarity.LEGENDARY: 5,
+}
+
+@export var family_levels: Dictionary[int, int] = {
+	0: 0,
+	1: 10,
+	2: 20,
+	3: 30,
+	4: 40,
+}
+
+@export var rarity_card_unlocked: Dictionary[int, Card.Rarity] = {
+	0: Card.Rarity.COMMON,
+	1: Card.Rarity.RARE,
+	2: Card.Rarity.EPIC,
+	3: Card.Rarity.LEGENDARY,
+}
 
 @export_group("Card shop rules")
 @export_subgroup("Card price")

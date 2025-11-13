@@ -233,6 +233,10 @@ move_down={
 3d_physics/layer_6="PickableConstraint"
 3d_physics/layer_7="Furniture"
 
+[rendering]
+
+viewport/hdr_2d=true
+
 [shader_globals]
 
 sgt_legacy_renderer={

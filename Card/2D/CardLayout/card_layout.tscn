@@ -1,218 +1,791 @@
-[gd_scene load_steps=9 format=3 uid="uid://l4hi6dgs8lvg"]
+[gd_scene load_steps=23 format=3 uid="uid://l4hi6dgs8lvg"]
 
 [ext_resource type="Script" uid="uid://dbdgpnlir03dy" path="res://Card/2D/CardLayout/card_layout.gd" id="1_2an10"]
-[ext_resource type="Texture2D" uid="uid://csebxot4tboo4" path="res://Data/Assets/Card/GENERAL/BACK.png" id="2_7bjq2"]
-[ext_resource type="Texture2D" uid="uid://s0h8lcs7kd5o" path="res://Data/Assets/Card/GENERAL/FRONT-retag.png" id="2_ghe4c"]
-[ext_resource type="Texture2D" uid="uid://ljrda5geyfek" path="res://Data/Assets/Card/Card_IMG/shadow/knife terror.jpg" id="3_gjfba"]
-[ext_resource type="Texture2D" uid="uid://bxd1jnaci6olo" path="res://Data/Assets/Card/ICONS/ATTACK color.png" id="3_qt50n"]
-[ext_resource type="Texture2D" uid="uid://y0t815fi2pdf" path="res://Data/Assets/Card/ICONS/MANA.png" id="5_mnjh7"]
-[ext_resource type="Texture2D" uid="uid://nxj6jw2phtcp" path="res://Data/Assets/Card/ICONS/MANA color.png" id="6_4njnx"]
-[ext_resource type="Texture2D" uid="uid://ba6cllpcqe1xc" path="res://Data/Assets/Card/ICONS/star.png" id="7_6jij0"]
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_ru7cc"]
+[ext_resource type="Texture2D" uid="uid://yekknulevsvb" path="res://Card/Descriptions/Cards/Poison/Common/PoisonFlask/portrait_poison_flask.png" id="3_mt3v6"]
+[ext_resource type="Texture2D" uid="uid://bspoqf8u52o66" path="res://Card/2D/CardLayout/Data/card_mask.png" id="3_ru7cc"]
+[ext_resource type="Texture2D" uid="uid://dim4igseywh4w" path="res://Card/2D/CardLayout/Data/bottom_background.png" id="4_m3odx"]
+[ext_resource type="Script" uid="uid://xgjmhhke0a8p" path="res://VFX/VFEZ-godot-main/vfez_material_2d.gd" id="5_m3odx"]
+[ext_resource type="Texture2D" uid="uid://cac6hxtdkqv56" path="res://Card/2D/CardLayout/Data/level_outline.png" id="7_rmy05"]
+[ext_resource type="Texture2D" uid="uid://dc8asjqeqgkc6" path="res://Card/2D/CardLayout/Data/level_mask.png" id="8_ru7cc"]
+[ext_resource type="Texture2D" uid="uid://cwqdngpmbcnck" path="res://Card/Descriptions/Families/Icons/poison.png" id="9_mt3v6"]
+[ext_resource type="Texture2D" uid="uid://m7l8in06cyh7" path="res://Card/2D/CardLayout/Data/bottom_outline.png" id="9_p31bt"]
+[ext_resource type="Texture2D" uid="uid://b7amwfq46wq4w" path="res://Card/2D/CardLayout/Data/card_outline.png" id="10_mt3v6"]
+[ext_resource type="Texture2D" uid="uid://dxvrc4sxqk44v" path="res://Card/2D/CardLayout/Data/top_outline.png" id="10_tx335"]
+[ext_resource type="Script" uid="uid://bd3srw4twda5w" path="res://UI/Tool/SmartTextLabel/ui_smart_text_label.gd" id="11_pjbj4"]
+[ext_resource type="FontFile" uid="uid://bdgqiedfa6ld2" path="res://Data/font/Nunito-ExtraBold.ttf" id="13_p31bt"]
 
-[node name="CardLayout" type="Control"]
-custom_minimum_size = Vector2(630, 880)
+[sub_resource type="Shader" id="Shader_mt3v6"]
+code = "shader_type canvas_item;
+
+// --- Original controls ---
+uniform float frequency : hint_range(0.0, 10.0) = 2.0;       // Legacy/inner glow baseline
+uniform float dimLevel : hint_range(0.0, 1.0) = 0.0;         // Alpha outside mask
+uniform float brightnessRange : hint_range(0.0, 1.0) = 0.05; // Blink amplitude
+uniform float brightnessOffset : hint_range(-0.1, 0.1) = -0.05;
+uniform vec3  tintColor : source_color = vec3(1.0);
+uniform float tintBrightness : hint_range(0.0, 1.0) = 0.2;
+uniform sampler2D maskImage : filter_linear;
+
+// --- New: blink frequency ---
+uniform bool  enable_blink = true;
+uniform float blink_frequency : hint_range(0.0, 10.0) = 2.0; // Hz (0 = static)
+uniform float blink_intensity : hint_range(0.0, 1.0) = 0.25; // Extra pulse
+
+// --- Shine band (sweeping metal ray) ---
+uniform bool  enable_shine = true;
+uniform float shine_speed = 0.5;                             // Sweeps per second across UV (same as before)
+uniform float shine_width : hint_range(0.01, 0.5) = 0.15;
+uniform float shine_sharpness : hint_range(1.0, 12.0) = 4.0;
+uniform float shine_angle_deg : hint_range(0.0, 180.0) = 35.0;
+uniform float shine_intensity : hint_range(0.0, 2.0) = 0.6;
+uniform vec2  shine_offset = vec2(0.0, 0.0);
+
+// --- New: pause between two shine passes (in seconds) ---
+uniform float shine_pause_between : hint_range(0.0, 5.0) = 0.5;
+
+void fragment() {
+    vec4 base = texture(TEXTURE, UV);
+    COLOR = base;
+
+    // --- Mask ---
+    vec4 mask_col = texture(maskImage, UV);
+    float mask_brightness = (mask_col.r + mask_col.g + mask_col.b) * (1.0 / 3.0);
+    COLOR.a = min(dimLevel + mask_brightness, 1.0);
+
+    // --- Blink (uses new blink_frequency) ---
+    float blink = 0.0;
+    if (enable_blink) {
+        // Legacy inner glow baseline
+        float base_wave = brightnessRange * sin(frequency * TIME) + brightnessOffset;
+        // Extra pulse driven by blink_frequency
+        float f = blink_frequency;
+        float pulse = (f > 0.0) ? (0.5 + 0.5 * sin(2.0 * 3.14159265 * f * TIME)) : 0.0;
+        blink = base_wave + pulse * blink_intensity;
+    }
+
+    // --- Shine band with pause between passes ---
+    float shine = 0.0;
+    if (enable_shine) {
+        float ang = radians(shine_angle_deg);
+        vec2 dir = normalize(vec2(cos(ang), sin(ang)));
+
+        // Project UVs and wrap to [0,1]
+        float proj = dot(UV + shine_offset, dir) / 1.41421356;
+        float u = fract(proj);
+
+        // Base period for one full sweep (seconds per pass)
+        float base_period = (abs(shine_speed) > 0.0001) ? (1.0 / abs(shine_speed)) : 1e6;
+
+        // Add a pause after each sweep
+        float cycle = base_period + max(shine_pause_between, 0.0);
+        float phase = mod(TIME, cycle);
+        float gate = (phase < base_period) ? 1.0 : 0.0; // 1 during sweep, 0 during pause
+
+        // When sweeping, center moves uniformly 0..1
+        float progress = clamp(phase / base_period, 0.0, 1.0);
+        float center = (shine_speed >= 0.0) ? progress : (1.0 - progress);
+
+        // Circular distance on [0,1] so the band stays continuous at wrap
+        float diff = abs(u - center);
+        float cd = min(diff, 1.0 - diff);
+
+        float edge_in  = shine_width * 0.5;
+        float edge_out = edge_in * 1.8;
+        float band = 1.0 - smoothstep(edge_in, edge_out, cd);
+        shine = pow(max(band, 0.0), shine_sharpness) * shine_intensity * gate;
+    }
+
+    float highlight_total = (enable_blink ? blink : 0.0) + (enable_shine ? shine : 0.0);
+    vec3 highlight_color = tintColor * tintBrightness;
+
+    COLOR.rgb += mask_brightness * highlight_total * highlight_color;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m3odx"]
+shader = SubResource("Shader_mt3v6")
+shader_parameter/frequency = 0.10000000475
+shader_parameter/dimLevel = 0.0
+shader_parameter/brightnessRange = 0.05
+shader_parameter/brightnessOffset = -0.05
+shader_parameter/tintColor = Color(1, 1, 1, 1)
+shader_parameter/tintBrightness = 0.0
+shader_parameter/maskImage = ExtResource("3_ru7cc")
+shader_parameter/enable_blink = false
+shader_parameter/blink_frequency = 0.10000000475
+shader_parameter/blink_intensity = 0.25
+shader_parameter/enable_shine = false
+shader_parameter/shine_speed = 0.5
+shader_parameter/shine_width = 0.15
+shader_parameter/shine_sharpness = 4.0
+shader_parameter/shine_angle_deg = 35.0
+shader_parameter/shine_intensity = 0.6
+shader_parameter/shine_offset = Vector2(0, 0)
+shader_parameter/shine_pause_between = 0.5
+
+[sub_resource type="Shader" id="Shader_p31bt"]
+resource_name = "VFEZ2DPreview"
+code = "
+// This shader was dynamically generated by the VFEZ material.
+// **********************************
+// Every change to the VFEZ material Render Options or 
+// Include Options generates a new shader. After every change
+// you can click on the new exported shader in the editor to view
+// the latest changes. Only the definitions (#define) actually change.
+// **********************************
+shader_type canvas_item;
+#define BLEND_MIX
+#define COLOR_GRADIENT
+#include \"res://VFX/VFEZ-godot-main/Shaders/vfez_2d_template.gdshaderinc\"
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tx335"]
+shader = SubResource("Shader_p31bt")
+shader_parameter/texture_scale = Vector2(1, 1)
+shader_parameter/texture_offset = Vector2(0, 0)
+shader_parameter/texture_scroll_speed = Vector2(0, 0)
+shader_parameter/replicate_on_scale = true
+shader_parameter/texture_color = Color(0.358406, 0.38802433, 0.39795908, 1)
+shader_parameter/texture_alpha = 0.950000045125
+shader_parameter/texture_red_as_alpha = false
+shader_parameter/premultiply_color = false
+shader_parameter/premultiply_alpha = false
+shader_parameter/contrast = 1.0
+shader_parameter/brightness = 0.0
+shader_parameter/rect_size_ratio = 1.0
+shader_parameter/use_uv_polar = false
+shader_parameter/use_uv_distortion = false
+shader_parameter/use_uv_rotation = false
+shader_parameter/use_uv_pixelate = false
+shader_parameter/use_uv_twist = false
+shader_parameter/use_uv_fisheye = false
+shader_parameter/use_uv_pinch = false
+shader_parameter/use_uv_handrawn = false
+shader_parameter/use_uv_shake = false
+shader_parameter/use_uv_wave = false
+shader_parameter/use_uv_round_wave = false
+shader_parameter/use_uv_wind = false
+shader_parameter/use_uv_wrap = false
+shader_parameter/use_uv_zoom = false
+shader_parameter/use_color_single = false
+shader_parameter/use_color_overlay_texture = false
+shader_parameter/use_outline = false
+shader_parameter/use_outline_inner = false
+shader_parameter/use_alpha_disolve = false
+shader_parameter/use_chromatic_aberration = false
+shader_parameter/use_motion_blur = false
+shader_parameter/use_glitch = false
+shader_parameter/use_color_gradient = true
+shader_parameter/color_gradient_blend = 0.5
+shader_parameter/color_gradient_boost_x = 0.5
+shader_parameter/color_gradient_boost_y = 0.5
+shader_parameter/color_gradient_top_right_color = Color(1, 1, 1, 1)
+shader_parameter/color_gradient_bottom_right_color = Color(0, 0, 0, 1)
+shader_parameter/color_gradient_top_left_color = Color(0, 0, 0, 1)
+shader_parameter/color_gradient_bottom_left_color = Color(1, 1, 1, 1)
+shader_parameter/use_color_radial_gradient = false
+shader_parameter/use_color_toning = false
+shader_parameter/use_color_ramp = false
+shader_parameter/use_color_change = false
+shader_parameter/use_color_ghost = false
+shader_parameter/use_color_hologram = false
+shader_parameter/use_color_posterize = false
+shader_parameter/use_color_negative = false
+shader_parameter/use_color_glow = false
+shader_parameter/use_color_hsv_shift = false
+shader_parameter/use_color_shadow = false
+shader_parameter/use_color_greyscale = false
+shader_parameter/use_color_shine = false
+shader_parameter/use_alpha_mask = false
+shader_parameter/use_alpha_remap = false
+shader_parameter/use_alpha_cutoff = false
+shader_parameter/use_alpha_clip = false
+shader_parameter/use_alpha_radial_clip = false
+shader_parameter/use_alpha_flicker = false
+shader_parameter/use_particle_anim = false
+script = ExtResource("5_m3odx")
+metadata/_custom_type_script = "uid://xgjmhhke0a8p"
+
+[sub_resource type="Shader" id="Shader_tx335"]
+resource_name = "VFEZ2DPreview"
+code = "
+// This shader was dynamically generated by the VFEZ material.
+// **********************************
+// Every change to the VFEZ material Render Options or 
+// Include Options generates a new shader. After every change
+// you can click on the new exported shader in the editor to view
+// the latest changes. Only the definitions (#define) actually change.
+// **********************************
+shader_type canvas_item;
+#define BLEND_MIX
+#define ALPHA_MASK
+#include \"res://VFX/VFEZ-godot-main/Shaders/vfez_2d_template.gdshaderinc\"
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pjbj4"]
+shader = SubResource("Shader_tx335")
+shader_parameter/texture_scale = Vector2(1, 1)
+shader_parameter/texture_offset = Vector2(0, 0)
+shader_parameter/texture_scroll_speed = Vector2(0, 0)
+shader_parameter/replicate_on_scale = true
+shader_parameter/texture_color = Color(1, 1, 1, 1)
+shader_parameter/texture_alpha = 1.0
+shader_parameter/texture_red_as_alpha = false
+shader_parameter/premultiply_color = false
+shader_parameter/premultiply_alpha = false
+shader_parameter/contrast = 1.0
+shader_parameter/brightness = 0.0
+shader_parameter/rect_size_ratio = 1.0
+shader_parameter/use_uv_polar = false
+shader_parameter/use_uv_distortion = false
+shader_parameter/use_uv_rotation = false
+shader_parameter/use_uv_pixelate = false
+shader_parameter/use_uv_twist = false
+shader_parameter/use_uv_fisheye = false
+shader_parameter/use_uv_pinch = false
+shader_parameter/use_uv_handrawn = false
+shader_parameter/use_uv_shake = false
+shader_parameter/use_uv_wave = false
+shader_parameter/use_uv_round_wave = false
+shader_parameter/use_uv_wind = false
+shader_parameter/use_uv_wrap = false
+shader_parameter/use_uv_zoom = false
+shader_parameter/use_color_single = false
+shader_parameter/use_color_overlay_texture = false
+shader_parameter/use_outline = false
+shader_parameter/use_outline_inner = false
+shader_parameter/use_alpha_disolve = false
+shader_parameter/use_chromatic_aberration = false
+shader_parameter/use_motion_blur = false
+shader_parameter/use_glitch = false
+shader_parameter/use_color_gradient = false
+shader_parameter/use_color_radial_gradient = false
+shader_parameter/use_color_toning = false
+shader_parameter/use_color_ramp = false
+shader_parameter/use_color_change = false
+shader_parameter/use_color_ghost = false
+shader_parameter/use_color_hologram = false
+shader_parameter/use_color_posterize = false
+shader_parameter/use_color_negative = false
+shader_parameter/use_color_glow = false
+shader_parameter/use_color_hsv_shift = false
+shader_parameter/use_color_shadow = false
+shader_parameter/use_color_greyscale = false
+shader_parameter/use_color_shine = false
+shader_parameter/use_alpha_mask = true
+shader_parameter/alpha_mask_texture = ExtResource("8_ru7cc")
+shader_parameter/alpha_mask_scale = Vector2(1, 1)
+shader_parameter/alpha_mask_offset = Vector2(0, 0)
+shader_parameter/alpha_mask_power = 1.0
+shader_parameter/use_alpha_remap = false
+shader_parameter/use_alpha_cutoff = false
+shader_parameter/use_alpha_clip = false
+shader_parameter/use_alpha_radial_clip = false
+shader_parameter/use_alpha_flicker = false
+shader_parameter/use_particle_anim = false
+script = ExtResource("5_m3odx")
+metadata/_custom_type_script = "uid://xgjmhhke0a8p"
+
+[sub_resource type="Gradient" id="Gradient_s3doy"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mrwhp"]
+gradient = SubResource("Gradient_s3doy")
+fill_to = Vector2(1, 1)
+
+[node name="CardLayout" type="Control" node_paths=PackedStringArray("_level_containers", "_level_background", "_family_icon_containers", "_family_icons")]
+custom_minimum_size = Vector2(1260, 1760)
 layout_mode = 3
-anchor_right = 0.547
-anchor_bottom = 1.358
-offset_right = -0.144043
-offset_bottom = 0.0159912
+anchor_right = 0.656
+anchor_bottom = 1.6300001
+offset_right = 0.47998047
+offset_bottom = -0.40014648
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(124, 193)
 mouse_filter = 1
+theme = ExtResource("1_ru7cc")
 script = ExtResource("1_2an10")
+_level_containers = [NodePath("VBoxContainer/Top/MarginContainer/Control/CurrentLevelContainer/currentLvlContainer/Level1"), NodePath("VBoxContainer/Top/MarginContainer/Control/CurrentLevelContainer/currentLvlContainer/Level2"), NodePath("VBoxContainer/Top/MarginContainer/Control/CurrentLevelContainer/currentLvlContainer/Level3"), NodePath("VBoxContainer/Top/MarginContainer/Control/CurrentLevelContainer/currentLvlContainer/Level4"), NodePath("VBoxContainer/Top/MarginContainer/Control/CurrentLevelContainer/currentLvlContainer/Level5")]
+_level_background = [NodePath("VBoxContainer/Top/MarginContainer/Control/CurrentLevelContainer/currentLvlContainer/Level1/Level1Background"), NodePath("VBoxContainer/Top/MarginContainer/Control/CurrentLevelContainer/currentLvlContainer/Level2/Level2Background"), NodePath("VBoxContainer/Top/MarginContainer/Control/CurrentLevelContainer/currentLvlContainer/Level3/Level3Background"), NodePath("VBoxContainer/Top/MarginContainer/Control/CurrentLevelContainer/currentLvlContainer/Level4/Level4Background"), NodePath("VBoxContainer/Top/MarginContainer/Control/CurrentLevelContainer/currentLvlContainer/Level5/Level5Background")]
+_family_icon_containers = [NodePath("VBoxContainer/Top/MarginContainer/Control/FamilyIcons/HBoxContainer/FamilyIconContainer1"), NodePath("VBoxContainer/Top/MarginContainer/Control/FamilyIcons/HBoxContainer/FamilyIconContainer2"), NodePath("VBoxContainer/Top/MarginContainer/Control/FamilyIcons/HBoxContainer/FamilyIconContainer3"), NodePath("VBoxContainer/Top/MarginContainer/Control/FamilyIcons/HBoxContainer/FamilyIconContainer4"), NodePath("VBoxContainer/Top/MarginContainer/Control/FamilyIcons/HBoxContainer/FamilyIconContainer5")]
+_family_icons = [NodePath("VBoxContainer/Top/MarginContainer/Control/FamilyIcons/HBoxContainer/FamilyIconContainer1/FamilyIcon1"), NodePath("VBoxContainer/Top/MarginContainer/Control/FamilyIcons/HBoxContainer/FamilyIconContainer2/FamilyIcon2"), NodePath("VBoxContainer/Top/MarginContainer/Control/FamilyIcons/HBoxContainer/FamilyIconContainer3/FamilyIcon3"), NodePath("VBoxContainer/Top/MarginContainer/Control/FamilyIcons/HBoxContainer/FamilyIconContainer4/FamilyIcon4"), NodePath("VBoxContainer/Top/MarginContainer/Control/FamilyIcons/HBoxContainer/FamilyIconContainer5/FamilyIcon5")]
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="CardPortraitTextureRect" type="TextureRect" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_m3odx")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 6.10352e-05
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_7bjq2")
+texture = ExtResource("3_mt3v6")
 expand_mode = 1
 
-[node name="Picture" type="TextureRect" parent="."]
+[node name="BottomBackground" type="TextureRect" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_tx335")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = -9.99994
-offset_bottom = -342.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_gjfba")
+texture = ExtResource("4_m3odx")
 expand_mode = 1
 
-[node name="MainOutline" type="TextureRect" parent="."]
+[node name="BottomOutline" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 6.10352e-05
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_ghe4c")
+texture = ExtResource("9_p31bt")
 expand_mode = 1
 
-[node name="CardName" type="Label" parent="."]
+[node name="TopOutline" type="TextureRect" parent="."]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_tx335")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Top" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Top"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Control" type="Control" parent="VBoxContainer/Top/MarginContainer"]
+layout_mode = 2
+
+[node name="CurrentLevelContainer" type="Control" parent="VBoxContainer/Top/MarginContainer/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
+
+[node name="currentLvlContainer" type="VBoxContainer" parent="VBoxContainer/Top/MarginContainer/Control/CurrentLevelContainer"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -142.0
+offset_right = 80.0
+offset_bottom = 142.0
+grow_vertical = 2
+alignment = 1
+
+[node name="Level1" type="TextureRect" parent="VBoxContainer/Top/MarginContainer/Control/CurrentLevelContainer/currentLvlContainer"]
+layout_mode = 2
+texture = ExtResource("7_rmy05")
+
+[node name="Level1Background" type="TextureRect" parent="VBoxContainer/Top/MarginContainer/Control/CurrentLevelContainer/currentLvlContainer/Level1"]
+modulate = Color(0.6142802, 0.48610878, 0.1789797, 1)
+show_behind_parent = true
+material = SubResource("ShaderMaterial_pjbj4")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.5
+offset_right = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_mrwhp")
+
+[node name="Level2" type="TextureRect" parent="VBoxContainer/Top/MarginContainer/Control/CurrentLevelContainer/currentLvlContainer"]
+layout_mode = 2
+texture = ExtResource("7_rmy05")
+
+[node name="Level2Background" type="TextureRect" parent="VBoxContainer/Top/MarginContainer/Control/CurrentLevelContainer/currentLvlContainer/Level2"]
+modulate = Color(0.6142802, 0.48610878, 0.1789797, 1)
+show_behind_parent = true
+material = SubResource("ShaderMaterial_pjbj4")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.5
+offset_right = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_mrwhp")
+
+[node name="Level3" type="TextureRect" parent="VBoxContainer/Top/MarginContainer/Control/CurrentLevelContainer/currentLvlContainer"]
+layout_mode = 2
+texture = ExtResource("7_rmy05")
+
+[node name="Level3Background" type="TextureRect" parent="VBoxContainer/Top/MarginContainer/Control/CurrentLevelContainer/currentLvlContainer/Level3"]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_pjbj4")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.5
+offset_right = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_mrwhp")
+
+[node name="Level4" type="TextureRect" parent="VBoxContainer/Top/MarginContainer/Control/CurrentLevelContainer/currentLvlContainer"]
+layout_mode = 2
+texture = ExtResource("7_rmy05")
+
+[node name="Level4Background" type="TextureRect" parent="VBoxContainer/Top/MarginContainer/Control/CurrentLevelContainer/currentLvlContainer/Level4"]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_pjbj4")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.5
+offset_right = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_mrwhp")
+
+[node name="Level5" type="TextureRect" parent="VBoxContainer/Top/MarginContainer/Control/CurrentLevelContainer/currentLvlContainer"]
+layout_mode = 2
+texture = ExtResource("7_rmy05")
+
+[node name="Level5Background" type="TextureRect" parent="VBoxContainer/Top/MarginContainer/Control/CurrentLevelContainer/currentLvlContainer/Level5"]
+unique_name_in_owner = true
+show_behind_parent = true
+material = SubResource("ShaderMaterial_pjbj4")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.5
+offset_right = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_mrwhp")
+
+[node name="FamilyIcons" type="Control" parent="VBoxContainer/Top/MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer/Top/MarginContainer/Control/FamilyIcons"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -100.0
+offset_bottom = 100.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/separation = 10
+alignment = 2
+
+[node name="FamilyIconContainer1" type="NinePatchRect" parent="VBoxContainer/Top/MarginContainer/Control/FamilyIcons/HBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+texture = ExtResource("10_mt3v6")
+region_rect = Rect2(0, 0, 1000, 1760)
+patch_margin_left = 50
+patch_margin_top = 50
+patch_margin_right = 50
+patch_margin_bottom = 50
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/Top/MarginContainer/Control/FamilyIcons/HBoxContainer/FamilyIconContainer1"]
+modulate = Color(0.38928655, 0.38928664, 0.38928658, 0.5019608)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_ru7cc")
+region_rect = Rect2(0, 0, 500, 1760)
+patch_margin_left = 50
+patch_margin_top = 50
+patch_margin_right = 50
+patch_margin_bottom = 50
+
+[node name="FamilyIcon1" type="TextureRect" parent="VBoxContainer/Top/MarginContainer/Control/FamilyIcons/HBoxContainer/FamilyIconContainer1"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 1
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 0.62
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.62
-offset_left = -137.0
-offset_top = -20.6
-offset_right = 141.0
-offset_bottom = 66.4
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -75.0
+offset_right = 75.0
+offset_bottom = 75.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_vertical = 8
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
-text = "JINTO LE MAGICIEN
-"
+texture = ExtResource("9_mt3v6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="FamilyIconContainer2" type="NinePatchRect" parent="VBoxContainer/Top/MarginContainer/Control/FamilyIcons/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+texture = ExtResource("10_mt3v6")
+region_rect = Rect2(0, 0, 1000, 1760)
+patch_margin_left = 50
+patch_margin_top = 50
+patch_margin_right = 50
+patch_margin_bottom = 50
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/Top/MarginContainer/Control/FamilyIcons/HBoxContainer/FamilyIconContainer2"]
+modulate = Color(0.38928655, 0.38928664, 0.38928658, 0.5019608)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_ru7cc")
+region_rect = Rect2(0, 0, 500, 1760)
+patch_margin_left = 50
+patch_margin_top = 50
+patch_margin_right = 50
+patch_margin_bottom = 50
+
+[node name="FamilyIcon2" type="TextureRect" parent="VBoxContainer/Top/MarginContainer/Control/FamilyIcons/HBoxContainer/FamilyIconContainer2"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -75.0
+offset_right = 75.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_mt3v6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="FamilyIconContainer3" type="NinePatchRect" parent="VBoxContainer/Top/MarginContainer/Control/FamilyIcons/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+texture = ExtResource("10_mt3v6")
+region_rect = Rect2(0, 0, 1000, 1760)
+patch_margin_left = 50
+patch_margin_top = 50
+patch_margin_right = 50
+patch_margin_bottom = 50
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/Top/MarginContainer/Control/FamilyIcons/HBoxContainer/FamilyIconContainer3"]
+modulate = Color(0.38928655, 0.38928664, 0.38928658, 0.5019608)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_ru7cc")
+region_rect = Rect2(0, 0, 500, 1760)
+patch_margin_left = 50
+patch_margin_top = 50
+patch_margin_right = 50
+patch_margin_bottom = 50
+
+[node name="FamilyIcon3" type="TextureRect" parent="VBoxContainer/Top/MarginContainer/Control/FamilyIcons/HBoxContainer/FamilyIconContainer3"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -75.0
+offset_right = 75.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_mt3v6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="FamilyIconContainer4" type="NinePatchRect" parent="VBoxContainer/Top/MarginContainer/Control/FamilyIcons/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+texture = ExtResource("10_mt3v6")
+region_rect = Rect2(0, 0, 1000, 1760)
+patch_margin_left = 50
+patch_margin_top = 50
+patch_margin_right = 50
+patch_margin_bottom = 50
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/Top/MarginContainer/Control/FamilyIcons/HBoxContainer/FamilyIconContainer4"]
+modulate = Color(0.38928655, 0.38928664, 0.38928658, 0.5019608)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_ru7cc")
+region_rect = Rect2(0, 0, 500, 1760)
+patch_margin_left = 50
+patch_margin_top = 50
+patch_margin_right = 50
+patch_margin_bottom = 50
+
+[node name="FamilyIcon4" type="TextureRect" parent="VBoxContainer/Top/MarginContainer/Control/FamilyIcons/HBoxContainer/FamilyIconContainer4"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -75.0
+offset_right = 75.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_mt3v6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="FamilyIconContainer5" type="NinePatchRect" parent="VBoxContainer/Top/MarginContainer/Control/FamilyIcons/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+texture = ExtResource("10_mt3v6")
+region_rect = Rect2(0, 0, 1000, 1760)
+patch_margin_left = 50
+patch_margin_top = 50
+patch_margin_right = 50
+patch_margin_bottom = 50
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/Top/MarginContainer/Control/FamilyIcons/HBoxContainer/FamilyIconContainer5"]
+modulate = Color(0.38928655, 0.38928664, 0.38928658, 0.5019608)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_ru7cc")
+region_rect = Rect2(0, 0, 500, 1760)
+patch_margin_left = 50
+patch_margin_top = 50
+patch_margin_right = 50
+patch_margin_bottom = 50
+
+[node name="FamilyIcon5" type="TextureRect" parent="VBoxContainer/Top/MarginContainer/Control/FamilyIcons/HBoxContainer/FamilyIconContainer5"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -75.0
+offset_right = 75.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_mt3v6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Bottom" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 110
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Bottom"]
+layout_mode = 2
+
+[node name="CardNameLabel" type="Label" parent="VBoxContainer/Bottom/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+theme_override_constants/outline_size = 50
+theme_override_font_sizes/font_size = 90
+text = "<Card name>"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Description" type="RichTextLabel" parent="."]
+[node name="CardDescSmartTextLabel" type="RichTextLabel" parent="VBoxContainer/Bottom/VBoxContainer"]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.822
-anchor_right = 0.5
-anchor_bottom = 0.822
-offset_left = -250.0
-offset_top = -107.36
-offset_right = 241.0
-offset_bottom = 113.64
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-theme_override_font_sizes/normal_font_size = 25
-bbcode_enabled = true
-text = "[url=fire]🔥[/url][center] % Chance to [color=#00008B][wave freq=2.0 amp=5.0]Static Charge[/wave] and many other effect that we cant read all the card ect ect ect"
-scroll_active = false
-autowrap_mode = 2
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("13_p31bt")
+theme_override_font_sizes/normal_font_size = 65
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
+horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Rarity" type="Control" parent="."]
-layout_mode = 1
-anchor_left = 0.285
-anchor_top = 0.887
-anchor_right = 0.285
-anchor_bottom = 0.887
-offset_left = 95.45
-offset_top = 36.44
-offset_right = 139.45
-offset_bottom = 81.44
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="Common" type="TextureRect" parent="Rarity"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -12.0
-offset_top = -56.0
-offset_right = 86.0
-offset_bottom = 23.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("5_mnjh7")
-expand_mode = 1
-
-[node name="Rare" type="TextureRect" parent="Rarity"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -15.0
-offset_top = -60.0
-offset_right = 86.0
-offset_bottom = 19.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("6_4njnx")
-expand_mode = 1
-
-[node name="Epic" type="TextureRect" parent="Rarity"]
-modulate = Color(0.999634, 0.430299, 1, 1)
-layout_mode = 0
-offset_left = 6.0
-offset_top = -14.0
-offset_right = 108.0
-offset_bottom = 66.0
-texture = ExtResource("5_mnjh7")
-expand_mode = 1
-
-[node name="FamilyIcon" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.565
-anchor_right = 0.5
-anchor_bottom = 0.565
-offset_left = -51.0
-offset_top = -41.2
-offset_right = 57.0
-offset_bottom = 40.8
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("3_qt50n")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="currentLvlContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.111
-anchor_top = 0.055
-anchor_right = 0.111
-anchor_bottom = 0.055
-offset_left = -30.93
-offset_top = -0.400002
-offset_right = 31.07
-offset_bottom = 393.6
-
-[node name="0" type="TextureRect" parent="currentLvlContainer"]
-layout_mode = 2
-texture = ExtResource("7_6jij0")
-expand_mode = 5
-stretch_mode = 5
-
-[node name="1" type="TextureRect" parent="currentLvlContainer"]
-layout_mode = 2
-texture = ExtResource("7_6jij0")
-expand_mode = 5
-stretch_mode = 5
-
-[node name="2" type="TextureRect" parent="currentLvlContainer"]
-layout_mode = 2
-texture = ExtResource("7_6jij0")
-expand_mode = 5
-stretch_mode = 5
-
-[node name="3" type="TextureRect" parent="currentLvlContainer"]
-layout_mode = 2
-texture = ExtResource("7_6jij0")
-expand_mode = 5
-stretch_mode = 5
-
-[node name="4" type="TextureRect" parent="currentLvlContainer"]
-layout_mode = 2
-texture = ExtResource("7_6jij0")
-expand_mode = 5
-stretch_mode = 5
-
-[connection signal="meta_hover_started" from="Description" to="." method="_on_description_meta_hover_started"]
+script = ExtResource("11_pjbj4")
+text_raw = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor [[POISON_STACK]] incididunt ut labore et dolore magna aliqua. "
+metadata/_custom_type_script = "uid://bd3srw4twda5w"

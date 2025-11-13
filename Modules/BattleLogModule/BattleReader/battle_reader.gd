@@ -127,4 +127,4 @@ func _apply_stack_taken(battle_log: Dictionary) -> void:
 		printerr("[", multiplayer.get_unique_id(), "] BattleReader: Stack taken: Unknown source !")
 		return
 	var source: Entity = _entity_manager.entities[source_id]
-	source.take_condition_stacks(stack_number, stack_type)
+	source.take_condition_stacks(stack_number, stack_type, false)

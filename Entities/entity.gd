@@ -12,17 +12,17 @@ signal damage_taken(entity_ref: Entity, damage: int, damage_type: Utils.DamageTy
 func signal_damage_taken(damage: int, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool) -> void:
 	damage_taken.emit(self, damage, damage_type, is_critical, blocked_by_armor)
 
-signal heal_taken(entity_ref: Entity, heal_amount: int)
-func signal_heal_taken(heal_amount: int) -> void:
-	heal_taken.emit(self, heal_amount)
+signal heal_taken(entity_ref: Entity, heal_amount: int, is_critical: bool)
+func signal_heal_taken(heal_amount: int, is_critical: bool) -> void:
+	heal_taken.emit(self, heal_amount, is_critical)
 
 signal spell_casted(source: Entity, target: Entity, spell_type: Spell.Type)
 func signal_spell_casted(target: Entity, spell_type: Spell.Type) -> void:
 	spell_casted.emit(self, target, spell_type)
 
-signal stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: int)
-func signal_stack_taken(stack_type: Utils.StackType, stack_number: int) -> void:
-	stack_taken.emit(self, stack_type, stack_number)
+signal stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: int, is_critical: bool)
+func signal_stack_taken(stack_type: Utils.StackType, stack_number: int, is_critical: bool) -> void:
+	stack_taken.emit(self, stack_type, stack_number, is_critical)
 
 signal auto_attack_started(is_critical: bool)
 func signal_auto_attack_started(is_critical: bool) -> void:
@@ -148,10 +148,10 @@ func take_damage(_damage: int, _damage_type: Utils.DamageType, _is_critical: boo
 func take_damage_percent(_percent: float, _percent_modifier: Utils.PercentModifier, _damage_type: Utils.DamageType, _is_critical: bool = false, _source: Entity = null) -> void:
 	printerr("Entity: virtual take_damage_percent() called [", get_path(), "]")
 
-func take_condition_stacks(_stacks_number: int, _stack_type: Utils.StackType, _source: Entity = null) -> void:
+func take_condition_stacks(_stacks_number: int, _stack_type: Utils.StackType, _is_critical: bool, _source: Entity = null) -> void:
 	printerr("Entity: virtual take_condition_stack() called [", get_path(), "]")
 
-func take_heal(_heal_amount: int, _source: Entity = null) -> void:
+func take_heal(_heal_amount: int, _is_critical: bool, _source: Entity = null) -> void:
 	printerr("Entity: virtual take_heal() called [", get_path(), "]")
 #endregion
 

@@ -115,14 +115,17 @@ func get_targets(strategy: MultipleTargettingStrategy, radius:float = -1.0) -> A
 		match strategy:
 			MultipleTargettingStrategy.ALL:
 				for entity in _entities:
+					if entity == null: continue
 					if entity.global_position.distance_to(_owner.global_position) <= radius:
 						returned_entities.append(entity)
 			MultipleTargettingStrategy.ALLIES:
 				for entity in _allies:
+					if entity == null: continue
 					if entity.global_position.distance_to(_owner.global_position) <= radius:
 						returned_entities.append(entity)
 			MultipleTargettingStrategy.ENEMIES:
 				for entity in _enemies:
+					if entity == null: continue
 					if entity.global_position.distance_to(_owner.global_position) <= radius:
 						returned_entities.append(entity)
 		return returned_entities

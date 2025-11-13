@@ -64,7 +64,7 @@ func clear() -> void:
 
 func get_local_player() -> Player:
 	if not players.has(multiplayer.get_unique_id()):
-		printerr("PlayerManager: No local player for player_id=", multiplayer.get_unique_id())
+		#printerr("PlayerManager: No local player for player_id=", multiplayer.get_unique_id())
 		return null
 	return players[multiplayer.get_unique_id()]
 

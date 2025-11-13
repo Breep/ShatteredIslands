@@ -5,7 +5,7 @@ extends CharacterUpgrade
 @export var _period: Array[float]
 
 func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
-	if cardlvl < 1 or cardlvl > COMMON_CARD_MAX_LEVEL:
+	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[Card.Rarity.COMMON]:
 		printerr("Poison Flask: Wrong cardlvl: ", cardlvl)
 		return
 	
@@ -15,8 +15,8 @@ func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
 
 
 func get_description(cardlvl: int) -> String:
-	if cardlvl < 1 or cardlvl > COMMON_CARD_MAX_LEVEL:
+	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[Card.Rarity.COMMON]:
 		printerr("Poison Flask: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "Inflict " + str(_poison_stacks[cardlvl - 1]) + CharacterUpgrade.POISON + " Stacks, every " + str(_period[cardlvl - 1]) + "s"
+	return "Inflict " + str(_poison_stacks[cardlvl - 1]) + " [[POISON_STACK]], every " + str(_period[cardlvl - 1]) + "s"

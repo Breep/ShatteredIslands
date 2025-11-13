@@ -1,11 +1,7 @@
 class_name ActionModule
 extends Module
 
-@export var _storm_manager: StormManager
-@export var _defense_manager: DefenseManager
-@export var _life_manager: LifeManager
-@export var _fire_manager: FireManager
-@export var _serenity_manager: SerenityManager
+
 @export var _poison_manager: PoisonManager
 
 var _spawn_manager: SpawnManager
@@ -17,8 +13,8 @@ const SHROOM_SPELL_SCENE: PackedScene = preload("res://SpellsAndProjectiles/Spel
 const DEATH_FOG_SCENE: PackedScene = preload("res://SpellsAndProjectiles/Spells/Poison/DeathFog/death_fog.tscn")
 
 const SNAKE_BARREL_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Poison/SnakeBarrel/snake_barrel.tscn")
-const SNAKE_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Poison/Snake/snake.tscn"
-)
+const SNAKE_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Poison/Snake/snake.tscn")
+
 # ============================== Public functions ==============================
 
 func connect_to_spawn_manager(spawn_manager: SpawnManager) -> void:
@@ -34,12 +30,9 @@ func connect_to_spawn_manager(spawn_manager: SpawnManager) -> void:
 func direct_attack(target: Entity, damage: int, damage_type: Utils.DamageType) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
-	var multiplier = _get_damage_multipliers()
-	if damage_type == Utils.DamageType.PHYSICAL:
-		damage *= multiplier["physical"]
-	elif damage_type == Utils.DamageType.MAGICAL:
-		damage *= multiplier["magical"]
-	
+	var multiplier = _get_crit_multiplier(Utils.damage_to_action(damage_type))
+	damage *= multiplier["multiplier"]
+	damage = int(float(damage) * _get_strenght_weakness_multiplier(Utils.damage_to_action(damage_type)))
 	target.take_damage(damage, damage_type, multiplier["is_critical"], _owner)
 
 
@@ -63,51 +56,24 @@ func direct_attack_percent(target: Entity, damage_percent: float, damage_type: U
 func build_projectile_attack(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> AttackCommand:
 	if not multiplayer.is_server(): return
 	if target == null: return
-	var multiplier = _get_damage_multipliers()
-	projectile_stats.is_critic = multiplier["is_critical"]
-	projectile_stats.physical_damage_flat *= multiplier["physical"]
-	projectile_stats.physical_damage_percent *= multiplier["physical"]
-	projectile_stats.magical_damage_flat *= multiplier["magical"]
-	projectile_stats.magical_damage_percent *= multiplier["magical"]
+	var physical_multiplier = _get_crit_multiplier(Utils.ActionType.DAMAGE_PHYSICAL)
+	projectile_stats.physical_is_critical = physical_multiplier["is_critical"]
+	projectile_stats.physical_damage_flat *= physical_multiplier["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_PHYSICAL)
+	projectile_stats.physical_damage_percent *= physical_multiplier["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_PHYSICAL)
+	
+	var magical_multiplier = _get_crit_multiplier(Utils.ActionType.DAMAGE_MAGICAL)
+	projectile_stats.magical_is_critical = magical_multiplier["is_critical"]
+	projectile_stats.magical_damage_flat *= magical_multiplier["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_MAGICAL)
+	projectile_stats.magical_damage_percent *= magical_multiplier["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_MAGICAL)
+	
+	var poison_stacks_multiplier = _get_crit_multiplier(Utils.ActionType.DAMAGE_POISON)
+	projectile_stats.poison_stacks_is_critical = poison_stacks_multiplier["is_critical"]
+	projectile_stats.poison_stacks *= poison_stacks_multiplier["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.STACK_POISON)
 	return AttackCommand.new().setup(target, projectile_type, projectile_spawn, projectile_stats)
 
 
 func projectile_attack(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	_spawn_manager.spawn_projectile(_owner, target, projectile_type, projectile_spawn, projectile_stats)
-
-
-func _get_damage_multipliers() -> Dictionary:
-	var is_critical: bool = false
-	var physical_multiplier: float = 1.0
-	var magical_multiplier: float = 1.0
-	
-	var crit_chance = _owner.stats.physical_critical_chance
-	if _storm_manager != null:
-		crit_chance = _storm_manager.get_critical_chance()
-	
-	if Utils.is_randomize_modifier_active(crit_chance):
-		is_critical = true
-		var crit_multiplier = _owner.stats.physical_critical_multiplier
-		if _storm_manager != null:
-			crit_multiplier = _storm_manager.get_critical_multiplier(Utils.DamageType.PHYSICAL)
-		physical_multiplier *= crit_multiplier
-	
-	if _life_manager != null:
-		physical_multiplier = _life_manager.get_increased_damage_taken_from_lost_hp(physical_multiplier, Utils.DamageType.PHYSICAL) # Increase % of PHYSICAL damage
-	
-	if _fire_manager != null:
-		magical_multiplier = _fire_manager.get_increased_damage(magical_multiplier, Utils.DamageType.MAGICAL) # Increase % of MAGICAL damage
-	
-	if _defense_manager != null:
-		physical_multiplier = _defense_manager.get_increased_damage_done_from_power_wrist(physical_multiplier)
-		magical_multiplier = _defense_manager.get_increased_damage_done_from_power_wrist(magical_multiplier)
-	
-	if _serenity_manager != null:
-		physical_multiplier = _serenity_manager.get_reduced_damage_dealed_from_pacify(physical_multiplier) # Reduce % of ALL damage
-		magical_multiplier = _serenity_manager.get_reduced_damage_dealed_from_pacify(magical_multiplier) # Reduce % of ALL damage
-	
-	return { "physical": physical_multiplier, "magical": magical_multiplier, "is_critical": is_critical }
-
 
 func _spawn_projectile(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	if target == null: return
@@ -119,7 +85,9 @@ func _spawn_projectile(target: Entity, projectile_type: Projectile.ProjectileTyp
 func heal(target: Entity, heal_amount: int) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
-	target.take_heal(heal_amount, _owner)
+	var multipliers = _get_crit_multiplier(Utils.ActionType.UTILITY_HEAL)
+	heal_amount *= multipliers["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.UTILITY_HEAL)
+	target.take_heal(heal_amount, multipliers["is_critical"], _owner)
 
 
 func heal_percent(target: Entity, percent: float, percent_modifier: Utils.PercentModifier) -> void:
@@ -142,8 +110,10 @@ func heal_percent(target: Entity, percent: float, percent_modifier: Utils.Percen
 func inflict_condition_stacks(target: Entity, stacks_number: int, stack_type: Utils.StackType) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
+	var stack_multiplier = _get_crit_multiplier(Utils.stack_to_action(stack_type))
+	stacks_number *= stack_multiplier["multiplier"]
 	_check_on_inflict_condition_stacks_modifier(target, stacks_number, stack_type)
-	target.take_condition_stacks(stacks_number, stack_type, _owner)
+	target.take_condition_stacks(stacks_number, stack_type, stack_multiplier["is_critical"], _owner)
 
 
 #TODO Use a StackModifier like the AutoAttackModifier to remove dependancies between action module and family managers
@@ -251,6 +221,19 @@ func _summon_snake(entity_spawn_global_position: Vector3, _entity_modifier: Dict
 	print("SUMMON SNAKE")
 #endregion
 
+#region ===== Private functions
+func _get_crit_multiplier(action_type: Utils.ActionType) -> Dictionary:
+	var is_critical: bool = false
+	var crit_chance: float = _owner.stats.get_stat(EntityStats.StatType.CRIT_CHANCE, action_type)
+	var crit_multiplier_percent: float = 0.0
+	
+	if Utils.is_randomize_modifier_active(crit_chance):
+		is_critical = true
+		crit_multiplier_percent = _owner.stats.get_stat(EntityStats.StatType.CRIT_MULT, action_type)
+	
+	return { "multiplier": remap(crit_multiplier_percent, 0, 100, 1, 2), "is_critical": is_critical }
 
-
- 
+func _get_strenght_weakness_multiplier(action_type: Utils.ActionType) -> float:
+	var strenght: float = _owner.stats.get_stat(EntityStats.StatType.STRENGHT, action_type)
+	var weakness: float = _owner.stats.get_stat(EntityStats.StatType.WEAKNESS, action_type)
+	return (100.0 + strenght) / (100.0 + weakness)
