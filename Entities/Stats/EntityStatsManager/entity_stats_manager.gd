@@ -23,7 +23,9 @@ extends Node
 	EntityStats.StatType.CRIT_MULT: StatModifierDictionary.new(),
 	EntityStats.StatType.RESISTANCE: StatModifierDictionary.new(),
 	EntityStats.StatType.VULNERABILITY: StatModifierDictionary.new(),
-	EntityStats.StatType.DODGE: StatModifierDictionary.new()
+	EntityStats.StatType.DODGE: StatModifierDictionary.new(),
+	EntityStats.StatType.STRENGHT: StatModifierDictionary.new(),
+	EntityStats.StatType.WEAKNESS: StatModifierDictionary.new(),
 }
 
 # ============================== Node base functions ==============================

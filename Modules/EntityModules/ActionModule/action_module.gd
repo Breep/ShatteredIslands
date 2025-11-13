@@ -32,6 +32,7 @@ func direct_attack(target: Entity, damage: int, damage_type: Utils.DamageType) -
 	if target == null: return
 	var multiplier = _get_crit_multiplier(Utils.damage_to_action(damage_type))
 	damage *= multiplier["multiplier"]
+	damage = int(float(damage) * _get_strenght_weakness_multiplier(Utils.damage_to_action(damage_type)))
 	target.take_damage(damage, damage_type, multiplier["is_critical"], _owner)
 
 
@@ -57,17 +58,17 @@ func build_projectile_attack(target: Entity, projectile_type: Projectile.Project
 	if target == null: return
 	var physical_multiplier = _get_crit_multiplier(Utils.ActionType.DAMAGE_PHYSICAL)
 	projectile_stats.physical_is_critical = physical_multiplier["is_critical"]
-	projectile_stats.physical_damage_flat *= physical_multiplier["multiplier"]
-	projectile_stats.physical_damage_percent *= physical_multiplier["multiplier"]
+	projectile_stats.physical_damage_flat *= physical_multiplier["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_PHYSICAL)
+	projectile_stats.physical_damage_percent *= physical_multiplier["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_PHYSICAL)
 	
 	var magical_multiplier = _get_crit_multiplier(Utils.ActionType.DAMAGE_MAGICAL)
 	projectile_stats.magical_is_critical = magical_multiplier["is_critical"]
-	projectile_stats.magical_damage_flat *= magical_multiplier["multiplier"]
-	projectile_stats.magical_damage_percent *= magical_multiplier["multiplier"]
+	projectile_stats.magical_damage_flat *= magical_multiplier["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_MAGICAL)
+	projectile_stats.magical_damage_percent *= magical_multiplier["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_MAGICAL)
 	
 	var poison_stacks_multiplier = _get_crit_multiplier(Utils.ActionType.DAMAGE_POISON)
 	projectile_stats.poison_stacks_is_critical = poison_stacks_multiplier["is_critical"]
-	projectile_stats.poison_stacks *= poison_stacks_multiplier["multiplier"]
+	projectile_stats.poison_stacks *= poison_stacks_multiplier["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.STACK_POISON)
 	return AttackCommand.new().setup(target, projectile_type, projectile_spawn, projectile_stats)
 
 
@@ -85,7 +86,7 @@ func heal(target: Entity, heal_amount: int) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
 	var multipliers = _get_crit_multiplier(Utils.ActionType.UTILITY_HEAL)
-	heal_amount *= multipliers["multiplier"]
+	heal_amount *= multipliers["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.UTILITY_HEAL)
 	target.take_heal(heal_amount, multipliers["is_critical"], _owner)
 
 
@@ -230,4 +231,9 @@ func _get_crit_multiplier(action_type: Utils.ActionType) -> Dictionary:
 		is_critical = true
 		crit_multiplier_percent = _owner.stats.get_stat(EntityStats.StatType.CRIT_MULT, action_type)
 	
-	return { "multiplier": remap(crit_multiplier_percent, 0, 100, 1, 2), "is_critical": is_critical } 
+	return { "multiplier": remap(crit_multiplier_percent, 0, 100, 1, 2), "is_critical": is_critical }
+
+func _get_strenght_weakness_multiplier(action_type: Utils.ActionType) -> float:
+	var strenght: float = _owner.stats.get_stat(EntityStats.StatType.STRENGHT, action_type)
+	var weakness: float = _owner.stats.get_stat(EntityStats.StatType.WEAKNESS, action_type)
+	return (100.0 + strenght) / (100.0 + weakness)

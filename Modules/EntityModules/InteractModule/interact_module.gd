@@ -18,9 +18,7 @@ func take_damage(damage: int, damage_type: Utils.DamageType, is_critical: bool, 
 		if _is_dodged(Utils.damage_to_action(damage_type)):
 			print("DAMAGE DODGED")
 			return 0
-		var res: float = _owner.stats.get_stat(EntityStats.StatType.RESISTANCE, Utils.damage_to_action(damage_type))
-		var vuln: float = _owner.stats.get_stat(EntityStats.StatType.VULNERABILITY, Utils.damage_to_action(damage_type))
-		damage = int(float(damage) * (100 + vuln) / (100 + res))
+		damage = int(float(damage) * _get_resistance_vulnerability_multiplier(Utils.damage_to_action(damage_type)))
 		
 		damage_before_armor = damage
 		if _defense_manager != null: damage = _defense_manager.get_reduced_damage_taken_from_armor(damage, damage_type) # Reduce flat of PHYSIC AND MAGIC damage
@@ -55,6 +53,7 @@ func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, is_c
 	if _is_dodged(Utils.stack_to_action(stack_type)):
 		print("CONDITION STACK DODGED")
 		return
+	stacks_number = int(float(stacks_number) * _get_resistance_vulnerability_multiplier(Utils.stack_to_action(stack_type)))
 	_owner.signal_stack_taken(stack_type, stacks_number, is_critical)
 	match stack_type:
 		Utils.StackType.POISON:
@@ -73,6 +72,7 @@ func take_heal(heal_amount: int, is_critical: bool, _source: Entity = null) -> v
 	if _is_dodged(Utils.ActionType.UTILITY_HEAL):
 		print("HEAL DODGED")
 		return
+	heal_amount = int(float(heal_amount) * _get_resistance_vulnerability_multiplier(Utils.ActionType.UTILITY_HEAL))
 	_owner.stats.health += heal_amount
 	_owner.signal_heal_taken(heal_amount, is_critical)
 #endregion
@@ -83,4 +83,11 @@ func _is_dodged(action_type: Utils.ActionType) -> bool:
 	if Utils.is_randomize_modifier_active(dodge_chance):
 		return true
 	return false
+
+
+func _get_resistance_vulnerability_multiplier(action_type: Utils.ActionType) -> float:
+	var res: float = _owner.stats.get_stat(EntityStats.StatType.RESISTANCE, action_type)
+	var vuln: float = _owner.stats.get_stat(EntityStats.StatType.VULNERABILITY, action_type)
+	return (100 + vuln) / (100 + res)
+
 #endregion
