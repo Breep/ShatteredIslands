@@ -25,11 +25,7 @@ func get_cards_by_type(family_type: Family.FamilyType) -> Array[Card]:
 func get_max_lvl_cards() -> Array[Card]:
 	var max_lvl_cards: Array[Card]
 	for card in _active_cards:
-		if card.rarity == Card.Rarity.COMMON and card.lvl == 5:
-			max_lvl_cards.append(card)
-		elif card.rarity == Card.Rarity.RARE and card.lvl == 3:
-			max_lvl_cards.append(card)
-		elif card.rarity == Card.Rarity.EPIC and card.lvl == 1:
+		if card.is_max_level():
 			max_lvl_cards.append(card)
 	return max_lvl_cards
 
@@ -41,16 +37,12 @@ func get_card_lvl(card_to_get_lvl: Card) -> int:
 	return 0
 
 
-func get_families_lvl_raw() -> Dictionary:
-	#TODO Look for GameRules for the family level
-	var families_lvl_raw: Dictionary
-	for card in _active_cards:
-		for family in card.families:
-			if families_lvl_raw.has(family):
-				families_lvl_raw[family] += 1
-			else:
-				families_lvl_raw[family] = 1
-	return families_lvl_raw
+func get_family_lvl(family_type: Family.FamilyType) -> int:
+	var family_lvl: int = 0
+	for card: Card in _cards_dictionary.get(family_type, []):
+		var value: int = Card.RARITY_CARD_VALUE[card.rarity]
+		family_lvl += value * card.lvl
+	return family_lvl
 
 # ============================== Private function ==============================
 

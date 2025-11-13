@@ -190,6 +190,8 @@ func _ready() -> void:
 	
 	player.lvl_changed.connect(_on_player_lvl_changed)
 	
+	_character_logic.connect_to_player(player)
+	
 	if battle_id == -1:
 		_character_visual.hide()
 		if _turret != null: _turret.hide()

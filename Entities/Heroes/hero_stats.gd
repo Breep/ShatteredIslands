@@ -91,7 +91,7 @@ extends Resource
 	Utils.ActionType.UTILITY_PURIFY: 0,
 	Utils.ActionType.STACK_ARMOR: 0,
 	Utils.ActionType.STACK_IGNITE: 0,
-	Utils.ActionType.STACK_POISON: 200,
+	Utils.ActionType.STACK_POISON: 0,
 	Utils.ActionType.STACK_REGEN: 0,
 	Utils.ActionType.STACK_NECROSIS: 0,
 }

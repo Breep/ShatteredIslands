@@ -215,3 +215,4 @@ func _summon_snake_barrel() -> void:
 	_owner.summon_entity(Entity.EntityType.SNAKE_BARREL, _owner.to_global(Vector3(center.x + dx, center.y, center.z + dz)), summon_modifier)
 #endregion
  
+# ============================== Callbacks functions ==============================

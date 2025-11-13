@@ -75,6 +75,7 @@ func _recompute_stats() -> void:
 	else:
 		_recompute_single_stats()
 
+
 func _recompute_single_stats() -> void:
 	var add: float = 0.0
 	var mul: float = 0.0
