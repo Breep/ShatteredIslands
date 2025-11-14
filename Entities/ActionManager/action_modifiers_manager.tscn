@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cknwsd7johmin"]
+
+[ext_resource type="Script" uid="uid://8i76v7esqrkp" path="res://Entities/ActionManager/action_modifiers_manager.gd" id="1_fni4v"]
+
+[node name="ActionModifiersManager" type="Node"]
+script = ExtResource("1_fni4v")

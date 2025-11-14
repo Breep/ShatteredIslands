@@ -56,6 +56,9 @@ var is_dead: bool:
 @export_group("Logic")
 @export var target_module: TargetModule
 
+@export_group("Manager")
+@export var action_modifiers_manager: ActionModifiersManager
+
 # ============================== Enums ==============================
 
 enum EntityType {

@@ -71,7 +71,6 @@ var _hero_id := Hero.HeroId.UNDEF
 @export var _clickable_module: ClickableModule
 @export var _clickable_feedback: ClickableSelectionFeedback
 
-
 # ============================== Public variables ==============================
 
 var player: Player
