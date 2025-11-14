@@ -56,8 +56,7 @@ var is_dead: bool:
 @export_group("Logic")
 @export var target_module: TargetModule
 
-@export_group("Manager")
-@export var action_modifiers_manager: ActionModifiersManager
+var action_modifiers_manager: ActionModifiersManager
 
 # ============================== Enums ==============================
 
@@ -89,9 +88,9 @@ func _init() -> void:
 	print("ENTITY INIT CALLED: ", id, "-", name)
 
 
-#func _enter_tree() -> void:
-	#if is_node_ready() and battle_id != -1:
-		#_recursive_propagate_signal(get_parent(), Entity.SIGNAL_NAME_SPAWNED)
+func _enter_tree() -> void:
+	print("Entity ENTER TREE")
+	action_modifiers_manager = ActionModifiersManager.new()
 
 # ============================== Public functions ==============================
 

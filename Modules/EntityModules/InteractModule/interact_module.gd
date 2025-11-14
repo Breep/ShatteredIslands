@@ -81,6 +81,10 @@ func take_heal(heal_amount: int, is_critical: bool, _source: Entity = null) -> v
 func _is_dodged(action_type: Utils.ActionType) -> bool:
 	var dodge_chance: float = _owner.stats.get_stat(EntityStats.StatType.DODGE, action_type)
 	if Utils.is_randomize_modifier_active(dodge_chance):
+		if _owner.action_modifiers_manager != null:
+			for dodge_modifier: ActionModifier in _owner.action_modifiers_manager.consume_all_modifiers(ActionModifier.ActionType.DODGE):
+				if dodge_modifier.after_action_logic_callback.is_valid():
+					dodge_modifier.after_action_logic_callback.call({})
 		return true
 	return false
 

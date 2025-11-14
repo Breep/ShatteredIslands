@@ -1,9 +1,6 @@
 class_name ActionModule
 extends Module
 
-
-@export var _poison_manager: PoisonManager
-
 var _spawn_manager: SpawnManager
 
 const METEOR_SCENE: PackedScene = preload("res://SpellsAndProjectiles/Spells/Meteor/meteor.tscn")
@@ -112,14 +109,15 @@ func inflict_condition_stacks(target: Entity, stacks_number: int, stack_type: Ut
 	if target == null: return
 	var stack_multiplier = _get_crit_multiplier(Utils.stack_to_action(stack_type))
 	stacks_number *= stack_multiplier["multiplier"]
-	_check_on_inflict_condition_stacks_modifier(target, stacks_number, stack_type)
+	if _owner.action_modifiers_manager != null:
+		for condition_modifier: ActionModifier in _owner.action_modifiers_manager.consume_all_modifiers(ActionModifier.ActionType.INFLICT_CONDITION):
+			if condition_modifier.after_action_logic_callback.is_valid():
+				condition_modifier.after_action_logic_callback.call({
+					ActionModifier.VarType.STACK_VALUE: stacks_number,
+					ActionModifier.VarType.STACK_TYPE: stack_type,
+					ActionModifier.VarType.TARGET: target
+				})
 	target.take_condition_stacks(stacks_number, stack_type, stack_multiplier["is_critical"], _owner)
-
-
-#TODO Use a StackModifier like the AutoAttackModifier to remove dependancies between action module and family managers
-func _check_on_inflict_condition_stacks_modifier(target: Entity, stacks_number: int, stack_type: Utils.StackType) -> void:
-	if _poison_manager != null:
-		_poison_manager.check_on_apply_poison_stack(target, stacks_number, stack_type)
 #endregion
 
 #region ============================== Spells ==============================

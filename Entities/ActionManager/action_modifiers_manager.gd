@@ -1,14 +1,18 @@
 class_name ActionModifiersManager
-extends Node
+extends Resource
 
 # Hold all kind of callbacks that wil be called when the entity do something (attack, inflict_condition, heal, move, die, dodge)
 
-@onready var _action_modifiers_dictionaries: Dictionary [ActionModifier.ActionType, ActionModifiersDictionary] = {
-	ActionModifier.ActionType.DIRECT_ATTACK: ActionModifiersDictionary.new(),
-	ActionModifier.ActionType.INFLICT_CONDITION: ActionModifiersDictionary.new(),
-	ActionModifier.ActionType.HEAL: ActionModifiersDictionary.new(),
-	ActionModifier.ActionType.DODGE: ActionModifiersDictionary.new(),
-}
+var _action_modifiers_dictionaries: Dictionary [ActionModifier.ActionType, ActionModifiersDictionary]
+
+func _init() -> void:
+	print("ActionModifiersManager INIT")
+	_action_modifiers_dictionaries = {
+		ActionModifier.ActionType.DIRECT_ATTACK: ActionModifiersDictionary.new(),
+		ActionModifier.ActionType.INFLICT_CONDITION: ActionModifiersDictionary.new(),
+		ActionModifier.ActionType.HEAL: ActionModifiersDictionary.new(),
+		ActionModifier.ActionType.DODGE: ActionModifiersDictionary.new(),
+	}
 
 func register_modifier(action_modifier: ActionModifier) -> void:
 	var action_type: ActionModifier.ActionType = action_modifier.action_type

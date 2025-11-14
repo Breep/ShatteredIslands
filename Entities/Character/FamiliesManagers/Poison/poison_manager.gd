@@ -25,6 +25,7 @@ func start() -> void:
 	_create_optional_timers()
 	_add_attack_modifiers()
 	_add_stat_modifiers()
+	_add_stack_modifiers()
 	_poison_tick_timer.start()
 
 
@@ -36,21 +37,38 @@ func stop() -> void:
 	_clear_attack_modifiers()
 	_clear_optional_timers()
 
-# TODO Make a StackModifier like the AutoAttackModifier
-func check_on_apply_poison_stack(target: Entity, stacks_number: int, stack_type: Utils.StackType) -> void:
-	if stacks_number <= 0 or stack_type != Utils.StackType.POISON: return
-	if target == null or target.is_queued_for_deletion(): return
-	if _poison_stats.poison_hot_pot_activated and Utils.is_randomize_modifier_active(_poison_stats.poison_hot_pot_chance):
-		_owner.inflict_condition_stacks(target, _poison_stats.poison_hot_pot_ignite_stacks, Utils.StackType.IGNITE)
-	if _poison_stats.poison_rotting_milk_activated and Utils.is_randomize_modifier_active(_poison_stats.poison_rotting_milk_chance):
-		_owner.inflict_condition_stacks(_owner, _poison_stats.poison_rotting_milk_regen_stacks, Utils.StackType.REGEN)
-	if _poison_stats.poison_corrosion_activated:
-		if Utils.rng.randi() % 2 == 0:
-			target.stats.armor_stacks -= _poison_stats.poison_corrosion_buff_stacks
-		else:
-			target.stats.regen_stacks -= _poison_stats.poison_corrosion_buff_stacks
-
 # ============================== Private functions ==============================
+
+func _add_stack_modifiers() -> void:
+	# [HOT POT]
+	if _poison_stats.poison_hot_pot_activated:
+		var stack_modifier := ActionModifier.new()
+		stack_modifier.action_type = ActionModifier.ActionType.INFLICT_CONDITION
+		stack_modifier.id = "Hot Pot"
+		stack_modifier.tags = [ActionModifier.TagType.CARD]
+		stack_modifier.after_action_logic_callback = _on_inflict_condition_hot_pot
+		stack_modifier.is_one_time_effect = false
+		_owner.action_modifiers_manager.register_modifier(stack_modifier)
+	
+	# [ROTTING MILK]
+	if _poison_stats.poison_rotting_milk_activated:
+		var stack_modifier := ActionModifier.new()
+		stack_modifier.action_type = ActionModifier.ActionType.INFLICT_CONDITION
+		stack_modifier.id = "Rotting Milk"
+		stack_modifier.tags = [ActionModifier.TagType.CARD]
+		stack_modifier.after_action_logic_callback = _on_inflict_condition_rotting_milk
+		stack_modifier.is_one_time_effect = false
+		_owner.action_modifiers_manager.register_modifier(stack_modifier)
+	
+	# [CORROSION ACTIVATED]
+	if _poison_stats.poison_corrosion_activated:
+		var stack_modifier := ActionModifier.new()
+		stack_modifier.action_type = ActionModifier.ActionType.INFLICT_CONDITION
+		stack_modifier.id = "Corrosion"
+		stack_modifier.tags = [ActionModifier.TagType.CARD]
+		stack_modifier.after_action_logic_callback = _on_inflict_condition_corrosion
+		stack_modifier.is_one_time_effect = false
+		_owner.action_modifiers_manager.register_modifier(stack_modifier)
 
 func _add_attack_modifiers() -> void:
 	if _poison_stats.poison_rusty_dagger_activated:
@@ -216,3 +234,32 @@ func _summon_snake_barrel() -> void:
 #endregion
  
 # ============================== Callbacks functions ==============================
+
+func _on_inflict_condition_hot_pot(cb_vars: Dictionary) -> void:
+	if not cb_vars.has(ActionModifier.VarType.STACK_TYPE): return
+	if not cb_vars.has(ActionModifier.VarType.TARGET): return
+	var stack_type: Utils.StackType = cb_vars[ActionModifier.VarType.STACK_TYPE]
+	var target: Entity = cb_vars[ActionModifier.VarType.TARGET]
+	if stack_type != Utils.StackType.POISON: return
+	if Utils.is_randomize_modifier_active(_poison_stats.poison_hot_pot_chance):
+		_owner.inflict_condition_stacks(target, _poison_stats.poison_hot_pot_ignite_stacks, Utils.StackType.IGNITE)
+
+
+func _on_inflict_condition_rotting_milk(cb_vars: Dictionary) -> void:
+	if not cb_vars.has(ActionModifier.VarType.STACK_TYPE): return
+	var stack_type: Utils.StackType = cb_vars[ActionModifier.VarType.STACK_TYPE]
+	if stack_type != Utils.StackType.POISON: return
+	if Utils.is_randomize_modifier_active(_poison_stats.poison_rotting_milk_chance):
+		_owner.inflict_condition_stacks(_owner, _poison_stats.poison_rotting_milk_regen_stacks, Utils.StackType.REGEN)
+
+
+func _on_inflict_condition_corrosion(cb_vars: Dictionary) -> void:
+	if not cb_vars.has(ActionModifier.VarType.STACK_TYPE): return
+	if not cb_vars.has(ActionModifier.VarType.TARGET): return
+	var stack_type: Utils.StackType = cb_vars[ActionModifier.VarType.STACK_TYPE]
+	var target: Entity = cb_vars[ActionModifier.VarType.TARGET]
+	if stack_type != Utils.StackType.POISON: return
+	if Utils.rng.randi() % 2 == 0:
+		target.stats.armor_stacks -= _poison_stats.poison_corrosion_buff_stacks
+	else:
+		target.stats.regen_stacks -= _poison_stats.poison_corrosion_buff_stacks
