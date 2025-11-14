@@ -48,3 +48,41 @@ func _update_available_cards_composition(new_cards: Array[Card], removed_cards: 
 		available_cards_composition[card.family] -= 1
 	
 	available_cards_composition_changed.emit(available_cards_composition)
+
+
+# Draw n cards in the deck but first:
+# - Remove all cards already at max level in the player_deck
+# - Remove all cards from rarity level not unlocked (TODO)
+func _smart_draw_n_card(number_of_cards_to_draw: int, player_deck: PlayerDeck) -> Array[Card]:
+	var card_pile_values_duplicate: Array[Card] = _card_pile.values().duplicate()
+	for card_to_remove in player_deck.get_max_lvl_cards():
+		_remove_all_same_card_in_array(card_to_remove, card_pile_values_duplicate)
+	_remove_locked_cards(player_deck, card_pile_values_duplicate)
+	var cards_drawn: Array[Card] = _draw_n_random_different_cards_in_array(number_of_cards_to_draw, card_pile_values_duplicate)
+	for card in cards_drawn:
+		_card_pile.erase(card.uid)
+	return cards_drawn
+
+
+func _remove_locked_cards(player_deck: PlayerDeck, cards: Array[Card]) -> void:
+	for family: Family in GameManager.active_families:
+		var player_family_points: int = player_deck.get_family_points(family.family_type)
+		var player_family_level: int = GameManager.game_rules.get_family_level(player_family_points)
+		var locked_rarities: Array[Card.Rarity] = GameManager.game_rules.get_locked_rarities(player_family_level)
+		var cards_locked: Array[Card] = _get_all_cards_of_rarities_of_family_type(locked_rarities, family.family_type, cards)
+		for card_to_remove in cards_locked:
+			_remove_all_same_card_in_array(card_to_remove, cards)
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

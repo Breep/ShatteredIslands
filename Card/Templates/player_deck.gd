@@ -37,12 +37,12 @@ func get_card_lvl(card_to_get_lvl: Card) -> int:
 	return 0
 
 
-func get_family_lvl(family_type: Family.FamilyType) -> int:
-	var family_lvl: int = 0
+func get_family_points(family_type: Family.FamilyType) -> int:
+	var family_points: int = 0
 	for card: Card in _cards_dictionary.get(family_type, []):
 		var value: int = Card.RARITY_CARD_VALUE[card.rarity]
-		family_lvl += value * card.lvl
-	return family_lvl
+		family_points += value * card.lvl
+	return family_points
 
 # ============================== Private function ==============================
 

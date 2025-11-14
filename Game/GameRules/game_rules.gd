@@ -15,7 +15,7 @@ extends Resource
 	Card.Rarity.LEGENDARY: 5,
 }
 
-@export var family_levels: Dictionary[int, int] = {
+@export var family_level_points: Dictionary[int, int] = {
 	0: 0,
 	1: 10,
 	2: 20,
@@ -23,11 +23,12 @@ extends Resource
 	4: 40,
 }
 
-@export var rarity_card_unlocked: Dictionary[int, Card.Rarity] = {
-	0: Card.Rarity.COMMON,
-	1: Card.Rarity.RARE,
-	2: Card.Rarity.EPIC,
-	3: Card.Rarity.LEGENDARY,
+@export var card_rarities_locked_by_level: Dictionary[int, Array] = {
+	0: [Card.Rarity.RARE, Card.Rarity.EPIC, Card.Rarity.LEGENDARY],
+	1: [Card.Rarity.EPIC, Card.Rarity.LEGENDARY],
+	2: [Card.Rarity.LEGENDARY],
+	3: [],
+	4: [],
 }
 
 @export_group("Card shop rules")
@@ -100,3 +101,20 @@ func get_updated_player_damage(player_lvl: int, current_player_win_lose_diff: in
 	var damage_mod_win_loose_diff: int = current_player_win_lose_diff
 	var damage: int = damage_player_level_modifier[player_lvl] + damage_mod_last_fight + damage_mod_win_loose_diff
 	return clampi(damage, damage_min, damage_max)
+
+
+func get_family_level(point: int) -> int:
+	if point < family_level_points[1]: return 0
+	elif point >= family_level_points[1] and point < family_level_points[2]: return 1
+	elif point >= family_level_points[2] and point < family_level_points[3]: return 2
+	elif point >= family_level_points[3] and point < family_level_points[4]: return 3
+	else: return 4
+
+
+func get_locked_rarities(family_level: int) -> Array[Card.Rarity]:
+	if family_level < 0 or family_level > card_rarities_locked_by_level.size():
+		return []
+	var locked_rarities: Array[Card.Rarity]
+	for rarity in card_rarities_locked_by_level[family_level]:
+		locked_rarities.append(rarity)
+	return locked_rarities
