@@ -134,20 +134,22 @@ func _legacy_draw_n_card(number_of_cards_to_draw: int) -> Array[Card]:
 	return cards_drawn
 
 
-# Draw n cards in the deck but first:
-# - Remove all cards already at max level in the player_deck
-# - Remove all cards from rarity level not unlocked (TODO)
-func _smart_draw_n_card(number_of_cards_to_draw: int, player_deck: PlayerDeck) -> Array[Card]:
-	var card_pile_values_duplicate: Array[Card] = _card_pile.values().duplicate()
-	for card_to_remove in player_deck.get_max_lvl_cards():
-		_remove_all_same_card_in_array(card_to_remove, card_pile_values_duplicate)
-	var cards_drawn: Array[Card] = _draw_n_random_different_cards_in_array(number_of_cards_to_draw, card_pile_values_duplicate)
-	for card in cards_drawn:
-		_card_pile.erase(card.uid)
-	return cards_drawn
+func _get_all_cards_of_rarity(rarity: Card.Rarity, family_type: Family.FamilyType, cards: Array[Card]) -> Array[Card]:
+	var cards_matching_rarity: Array[Card]
+	for card: Card in cards:
+		if card.family == family_type and card.rarity == rarity:
+			cards_matching_rarity.append(card)
+	return cards_matching_rarity
 
 
-func _specific_add(card_to_add: Card) -> void:
+func _get_all_cards_of_rarities_of_family_type(rarities: Array[Card.Rarity], family_type: Family.FamilyType, cards: Array[Card]) -> Array[Card]:
+	var cards_matching_rarities: Array[Card]
+	for rarity in rarities:
+		cards_matching_rarities.append_array(_get_all_cards_of_rarity(rarity, family_type, cards))
+	return cards_matching_rarities
+
+
+func _specific_add(_card_to_add: Card) -> void:
 	pass
 
 

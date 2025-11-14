@@ -4,8 +4,7 @@
 
 [resource]
 script = ExtResource("1_8i4ne")
-epic_number = 100
-gold_starting_game = 1500
+gold_starting_game = 5000
 xp_per_family_lvl = 0
 xp_per_levels = Dictionary[int, int]({
 1: 6,

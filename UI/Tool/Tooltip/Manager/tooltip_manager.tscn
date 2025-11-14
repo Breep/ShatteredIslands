@@ -1,10 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://cugis6rnmqdha"]
+[gd_scene load_steps=2 format=3 uid="uid://cugis6rnmqdha"]
 
 [ext_resource type="Script" uid="uid://dr1wp5wwrs4fy" path="res://UI/Tool/Tooltip/Manager/tooltip_manager.gd" id="1_5xry7"]
-[ext_resource type="Script" uid="uid://cr1qi4s4jv5f7" path="res://UI/Tool/Tooltip/Dictionary/tooltip_desc.gd" id="2_mna38"]
-[ext_resource type="Resource" uid="uid://dpttcyq3fcg5w" path="res://UI/Tool/Tooltip/Dictionary/poison_stack.tres" id="3_wuqyr"]
 
 [node name="TooltipManager" type="Node"]
 script = ExtResource("1_5xry7")
-test = "PLEASE WORK"
-database = Array[ExtResource("2_mna38")]([ExtResource("3_wuqyr")])

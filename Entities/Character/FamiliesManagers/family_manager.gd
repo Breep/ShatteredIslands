@@ -42,5 +42,4 @@ func _specific_init() -> void:
 
 
 func _on_owner_player_deck_has_changed() -> void:
-	var deck: PlayerDeck = _owner.player.deck
-	print("family [", _family_type, "] | level = ", deck.get_family_lvl(_family_type))
+	pass
