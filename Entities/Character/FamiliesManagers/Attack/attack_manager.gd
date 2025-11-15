@@ -25,6 +25,7 @@ var _aa_counter: int
 
 var _on_gatling_gun_timer_start: float = 0
 
+
 # ============================== Public functions ==============================
 
 func _ready() -> void:
@@ -36,9 +37,13 @@ func start() -> void:
 	_create_optional_timers()
 	for timer in _optional_timers:
 		timer.start()
+	_add_stat_modifiers()
+	_add_action_modifiers()
 
 
 func stop() -> void:
+	_remove_action_modifiers()
+	_clear_stat_modifiers()
 	for timer in _optional_timers:
 		timer.queue_free()
 	_optional_timers.clear()
@@ -62,6 +67,7 @@ func apply_stats_modifiers() -> void:
 		stat_modifier.value = _attack_stats.twin_blade_speed / 100.0
 		stat_modifier.tags = [StatModifier.TagType.CARD]
 		_owner.stats_manager.update_modifier(stat_modifier)
+		
 
 
 
@@ -91,6 +97,49 @@ func _remove_random_debuff_stack(stack_number: int) -> void:
 		Utils.StackType.POISON: _owner.stats.poison_stacks -= stack_number
 		Utils.StackType.IGNITE: _owner.stats.ignite_stacks -= stack_number
 
+func _add_stat_modifiers() -> void:
+	
+	# [FIGHT BACK]
+	if _attack_stats.fight_back_activated:
+		var mod := StatModifier.new()
+		mod.calc_type = StatModifier.CalcType.ADD
+		mod.value = _attack_stats.fight_back_increase_dodge
+		mod.stat_type = EntityStats.StatType.DODGE
+		mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
+		mod.id = "Fight back"
+		_owner.stats_manager.register_modifier(mod)
+		
+func _clear_stat_modifiers() -> void:
+	
+	# [FIGHT BACK]
+	if _attack_stats.fight_back_activated:
+		var mod := StatModifier.new()
+		mod.stat_type = EntityStats.StatType.DODGE
+		mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
+		mod.id = "Fight back"
+		_owner.stats_manager.unregister_modifier(mod)
+		
+func _add_action_modifiers() -> void:
+
+	# [FIGHT BACK]
+	if _attack_stats.fight_back_activated:
+		var action_modifier := ActionModifier.new()
+		action_modifier.action_type = ActionModifier.ActionType.DODGE
+		action_modifier.id = "Fight back"
+		action_modifier.is_one_time_effect = false
+		action_modifier.after_action_logic_callback = _on_dodge_fight_back
+		_owner.action_modifiers_manager.register_modifier(action_modifier)
+
+func _remove_action_modifiers() -> void:
+	
+	# [FIGHT BACK]
+	if _attack_stats.fight_back_activated:
+		var action_modifier := ActionModifier.new()
+		action_modifier.action_type = ActionModifier.ActionType.DODGE
+		action_modifier.id = "Fight back"
+		action_modifier.after_action_logic_callback = _on_dodge_fight_back
+		_owner.action_modifiers_manager.unregister_modifier(action_modifier)
+
 # ============================== Callbacks functions ==============================
 
 func _on_gatling_gun_timer_timeout() -> void:
@@ -103,5 +152,22 @@ func _on_gatling_gun_timer_timeout() -> void:
 	stat_modifier.stat_type = EntityStats.StatType.AA_SPEED
 	stat_modifier.calc_type = StatModifier.CalcType.MULT
 	stat_modifier.value = gatling_speed_boost / 100.0
+	stat_modifier.tags = [StatModifier.TagType.CARD]
+	_owner.stats_manager.update_modifier(stat_modifier)
+
+
+func _on_dodge_fight_back(cb_vars: Dictionary) -> void:
+	
+	# [FIGHT BACK]
+	if _owner == null or not is_instance_valid(_owner):
+		printerr("Fight back callback: _owner est invalide.")
+		return
+	var attack_saved: float = EntityStats.StatType.AD
+	var attack_bonus: float = attack_saved + _attack_stats.fight_back_increase_attack_damage
+	var stat_modifier := StatModifier.new()
+	stat_modifier.id = "Fight Back"
+	stat_modifier.stat_type = EntityStats.StatType.AD
+	stat_modifier.calc_type = StatModifier.CalcType.ADD
+	stat_modifier.value = attack_bonus
 	stat_modifier.tags = [StatModifier.TagType.CARD]
 	_owner.stats_manager.update_modifier(stat_modifier)

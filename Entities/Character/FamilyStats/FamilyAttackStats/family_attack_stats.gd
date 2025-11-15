@@ -1,6 +1,15 @@
 class_name FamilyAttackStats
 extends FamilyStats
 
+#region
+
+# [FIGHT BACK]
+var fight_back_activated: bool # True if this skill is activated
+var fight_back_increase_dodge: float # % dodge
+var fight_back_increase_attack_damage: float # +AD
+
+#endregion
+
 @export_group("Diamond Sword")
 @export var diamond_sword_activated: bool # True if this skill is activated
 @export var diamond_sword_attack: int # Value of increased attack
