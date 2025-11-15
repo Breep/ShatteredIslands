@@ -120,6 +120,24 @@ func inflict_condition_stacks(target: Entity, stacks_number: int, stack_type: Ut
 	target.take_condition_stacks(stacks_number, stack_type, stack_multiplier["is_critical"], _owner)
 #endregion
 
+#region ============================== Cleanse and Dispell ==============================
+# Removes debuf
+func cleanse(target: Entity, value: float) -> void:
+	if target == null or target.is_queued_for_deletion(): return
+	value *= _get_strenght_weakness_multiplier(Utils.ActionType.UTILITY_CLEANSE)
+	var multiplier: Dictionary = _get_crit_multiplier(Utils.ActionType.UTILITY_CLEANSE)
+	value *= multiplier["multiplier"]
+	target.take_cleanse(value, multiplier["is_critical"], _owner)
+
+#Removes buf
+func dispell(target: Entity, value: float) -> void:
+	if target == null or target.is_queued_for_deletion(): return
+	value *= _get_strenght_weakness_multiplier(Utils.ActionType.UTILITY_DISPELL)
+	var multiplier: Dictionary = _get_crit_multiplier(Utils.ActionType.UTILITY_DISPELL)
+	value *= multiplier["multiplier"]
+	target.take_dispell(value, multiplier["is_critical"], _owner)
+#endregion
+
 #region ============================== Spells ==============================
 func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary = {}) -> void:
 	match spell_type:

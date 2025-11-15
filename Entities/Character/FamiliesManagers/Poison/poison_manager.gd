@@ -269,10 +269,7 @@ func _on_inflict_condition_corrosion(cb_vars: Dictionary) -> void:
 	var stack_type: Utils.StackType = cb_vars[ActionModifier.VarType.STACK_TYPE]
 	var target: Entity = cb_vars[ActionModifier.VarType.TARGET]
 	if stack_type != Utils.StackType.POISON: return
-	if Utils.rng.randi() % 2 == 0:
-		target.stats.armor_stacks -= _poison_stats.poison_corrosion_buff_stacks
-	else:
-		target.stats.regen_stacks -= _poison_stats.poison_corrosion_buff_stacks
+	_owner.dispell(target, _poison_stats.poison_corrosion_buff_stacks)
 
 
 func _on_inflict_condition_poison(cb_vars: Dictionary) -> void:

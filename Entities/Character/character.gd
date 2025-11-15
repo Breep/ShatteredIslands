@@ -164,6 +164,12 @@ func ultimate() -> void:
 
 func summon_entity(entity_type: EntityType, entity_spawn_global_position: Vector3, entity_modifier: Dictionary) -> void:
 	_action_module.summon_entity(entity_type, entity_spawn_global_position, entity_modifier)
+
+func cleanse(target: Entity, value: float) -> void:
+	_action_module.cleanse(target, value)
+
+func dispell(target: Entity, value: float) -> void:
+	_action_module.dispell(target, value)
 #endregion
 
 #region ===== Interaction =====
@@ -178,6 +184,12 @@ func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, is_c
 
 func take_heal(heal_amount: int, is_critical: bool, source: Entity = null) -> void:
 	_interact_module.take_heal(heal_amount, is_critical, source)
+
+func take_cleanse(value: float, is_critical: bool, source: Entity = null) -> float:
+	return _interact_module.take_cleanse(value, is_critical, source)
+
+func take_dispell(value: float, is_critical: bool, source: Entity = null) -> float:
+	return _interact_module.take_dispell(value, is_critical, source)
 #endregion
 
 # ============================== Node base functions ==============================
