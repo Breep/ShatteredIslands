@@ -67,7 +67,7 @@ extends Resource
 }
 
 @export var dodges: Dictionary[Utils.ActionType, float] = {
-	Utils.ActionType.DAMAGE_PHYSICAL: 0,
+	Utils.ActionType.DAMAGE_PHYSICAL: 50,
 	Utils.ActionType.DAMAGE_MAGICAL: 0,
 	Utils.ActionType.DAMAGE_POISON: 0,
 	Utils.ActionType.UTILITY_HEAL: 0,

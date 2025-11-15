@@ -2,7 +2,8 @@ class_name TargetModule
 extends Module
 
 # ============================== Enums ==============================
-
+#TODO : Attacker ( Celui qui a attaqué, par exemple pour le dodge)
+#HERO / ENTITIES
 enum TargettingStrategy {
 	CLOSEST, # Closest entity except self (can be null)
 	CLOSEST_ENEMY, # Closest enemy (can be null)

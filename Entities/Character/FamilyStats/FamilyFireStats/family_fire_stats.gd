@@ -3,8 +3,14 @@ extends FamilyStats
 
 #region Epic Cards
 
+# [NUKE]
 var nuke_activated: bool # True if the player has at least one of this card
 var nuke_ignite: float # ignite stack inflicted
+
+# [DARK FOREST]
+var dark_forest_activated: bool
+var dark_forest_increase_dodge: float
+var dark_forest_ignite_stacks: float
 
 #endregion
 

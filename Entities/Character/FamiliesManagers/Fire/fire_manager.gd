@@ -27,9 +27,13 @@ func start() -> void:
 	_lanch_optional_spells()
 	_ignite_timer.start()
 	_on_battle_start()
+	_add_stat_modifiers()
+	_add_action_modifiers()
 
 
 func stop() -> void:
+	_clear_stat_modifiers()
+	_remove_action_modifiers()
 	for timer in _optional_timers:
 		timer.queue_free()
 	_optional_timers.clear()
@@ -59,6 +63,44 @@ func _create_optional_timers() -> void:
 func _lanch_optional_spells() -> void:
 	pass
 
+func _add_stat_modifiers() -> void:
+	# [DARK FOREST]
+	if _fire_stats.dark_forest_activated:
+		var mod := StatModifier.new()
+		mod.calc_type = StatModifier.CalcType.ADD
+		mod.value = _fire_stats.dark_forest_increase_dodge
+		mod.stat_type = EntityStats.StatType.DODGE
+		mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
+		mod.id = "Dark Forest"
+		_owner.stats_manager.register_modifier(mod)
+		
+func _clear_stat_modifiers() -> void:
+	# [DARK FOREST]
+	if _fire_stats.dark_forest_activated:
+		var mod := StatModifier.new()
+		mod.stat_type = EntityStats.StatType.DODGE
+		mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
+		mod.id = "Dark Forest"
+		_owner.stats_manager.unregister_modifier(mod)
+	
+func _add_action_modifiers() -> void:
+	# [DARK FOREST]
+	if _fire_stats.dark_forest_activated:
+		var action_modifier := ActionModifier.new()
+		action_modifier.action_type = ActionModifier.ActionType.DODGE
+		action_modifier.id = "Dark Forest"
+		action_modifier.is_one_time_effect = false
+		action_modifier.after_action_logic_callback = _on_dodge_dark_forest
+		_owner.action_modifiers_manager.register_modifier(action_modifier)
+
+func _remove_action_modifiers() -> void:
+	# [DARK FOREST]
+	if _fire_stats.dark_forest_activated:
+		var action_modifier := ActionModifier.new()
+		action_modifier.action_type = ActionModifier.ActionType.DODGE
+		action_modifier.id = "Dark Forest"
+		action_modifier.after_action_logic_callback = _on_dodge_dark_forest
+		_owner.action_modifiers_manager.unregister_modifier(action_modifier)
 # ============================== Callbacks functions ==============================
 
 func _on_firebolt_timer_timeout() -> void:
@@ -90,7 +132,11 @@ func _on_meteor_timer_timeout() -> void:
 		}
 		_owner.cast_spell(target, Spell.Type.METEOR, spell_modifier)
 
-
+func _on_dodge_dark_forest(cb_vars: Dictionary) -> void:
+	# [DARK FOREST]
+	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
+	if target != null:
+		_owner.inflict_condition_stacks(target, _fire_stats.dark_forest_ignite_stacks, Utils.StackType.IGNITE)
 
 
  

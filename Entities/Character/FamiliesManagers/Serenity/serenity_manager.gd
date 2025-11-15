@@ -25,14 +25,16 @@ func start() -> void:
 	_regen_tick_timer.start()
 	_create_optional_timers()
 	_add_action_modifiers()
+	_add_stat_modifiers()
 	
 
 func stop() -> void:
-	for timer in _optional_timers:
-		timer.stop()
+	_clear_stat_modifiers()
 	_remove_action_modifiers()
 	_clear_optional_timers()
 	_regen_tick_timer.stop()
+	for timer in _optional_timers:
+		timer.stop()
 	
 	
 # ============================== Private functions ==============================
