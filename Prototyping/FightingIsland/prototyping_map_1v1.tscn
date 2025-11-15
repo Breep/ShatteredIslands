@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="2_dnu2k"]
 [ext_resource type="Resource" uid="uid://dvpdubk0btegx" path="res://Card/Descriptions/Cards/Poison/Common/PoisonFlask/poison_poison_flask.tres" id="4_dlg3x"]
 [ext_resource type="Resource" uid="uid://bj3e4jhk5i7ab" path="res://Card/Descriptions/Cards/Poison/Common/RottingMilk/poison_rotting_milk.tres" id="4_vksg0"]
-[ext_resource type="Resource" uid="uid://e4sl6p15d3rj" path="res://Card/Descriptions/Cards/Poison/Rare/Corrosion/poison_corrosion.tres" id="5_dlg3x"]
+[ext_resource type="Resource" uid="uid://dtqhilutyn471" path="res://Card/Descriptions/Cards/Poison/Common/HotPot/poison_hot_pot.tres" id="5_dlg3x"]
 [ext_resource type="PackedScene" uid="uid://drcuyohos0doa" path="res://FloatingIsland/FightingIsland/fighting_island.tscn" id="6_sp80o"]
 [ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Entities/Character/character.tscn" id="7_pc3mw"]
 [ext_resource type="PackedScene" uid="uid://bhxhqex1pbh2p" path="res://UI/InGame/FightingArea/ui_fighting_area.tscn" id="7_wwtbg"]

@@ -16,5 +16,4 @@ name = "Poison Flask"
 picture = ExtResource("1_ufqyo")
 family = 7
 player_upgrade = SubResource("Resource_ij4m6")
-lvl = 5
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

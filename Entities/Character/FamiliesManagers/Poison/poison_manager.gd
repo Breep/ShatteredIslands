@@ -69,6 +69,16 @@ func _add_stack_modifiers() -> void:
 		stack_modifier.after_action_logic_callback = _on_inflict_condition_corrosion
 		stack_modifier.is_one_time_effect = false
 		_owner.action_modifiers_manager.register_modifier(stack_modifier)
+	
+	# [FAMILY PASSIVE]
+	if true:
+		var stack_modifier := ActionModifier.new()
+		stack_modifier.action_type = ActionModifier.ActionType.INFLICT_CONDITION
+		stack_modifier.id = "Poison Passive"
+		stack_modifier.tags = [ActionModifier.TagType.CARD]
+		stack_modifier.after_action_logic_callback = _on_inflict_condition_poison
+		stack_modifier.is_one_time_effect = false
+		_owner.action_modifiers_manager.register_modifier(stack_modifier)
 
 func _add_attack_modifiers() -> void:
 	if _poison_stats.poison_rusty_dagger_activated:
@@ -263,3 +273,13 @@ func _on_inflict_condition_corrosion(cb_vars: Dictionary) -> void:
 		target.stats.armor_stacks -= _poison_stats.poison_corrosion_buff_stacks
 	else:
 		target.stats.regen_stacks -= _poison_stats.poison_corrosion_buff_stacks
+
+
+func _on_inflict_condition_poison(cb_vars: Dictionary) -> void:
+	if not cb_vars.has(ActionModifier.VarType.STACK_TYPE): return
+	if not cb_vars.has(ActionModifier.VarType.TARGET): return
+	var stack_type: Utils.StackType = cb_vars[ActionModifier.VarType.STACK_TYPE]
+	var target: Entity = cb_vars[ActionModifier.VarType.TARGET]
+	if stack_type != Utils.StackType.POISON: return
+	if Utils.is_randomize_modifier_active(20.0):
+		_owner.inflict_condition_stacks(target, 1, Utils.StackType.POISON)
