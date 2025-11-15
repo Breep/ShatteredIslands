@@ -1,14 +1,15 @@
-[gd_resource type="Resource" script_class="Family" load_steps=6 format=3 uid="uid://brvmbafl0cv83"]
+[gd_resource type="Resource" script_class="Family" load_steps=7 format=3 uid="uid://brvmbafl0cv83"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_8oghy"]
 [ext_resource type="Texture2D" uid="uid://ckifdy6fknspj" path="res://Card/Descriptions/Families/Icons/serenity.png" id="2_1sm61"]
 [ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://Card/Templates/family.gd" id="2_11cd3"]
 [ext_resource type="Resource" uid="uid://lypcpcn4pc4a" path="res://Card/Descriptions/Cards/Light/Common/HolyTouch/light_holy_touch.tres" id="2_ao7hk"]
 [ext_resource type="Resource" uid="uid://dtuljjoqfnos0" path="res://Card/Descriptions/Cards/Light/Common/GracefulStep/light_graceful_step.tres" id="3_ao7hk"]
+[ext_resource type="Resource" uid="uid://c3qf5odp5y6ap" path="res://Card/Descriptions/Cards/Light/Common/LifeSpring/light_life_spring.tres" id="4_4ants"]
 
 [resource]
 script = ExtResource("2_11cd3")
-cards = Array[ExtResource("1_8oghy")]([ExtResource("2_ao7hk"), ExtResource("3_ao7hk")])
+cards = Array[ExtResource("1_8oghy")]([ExtResource("2_ao7hk"), ExtResource("3_ao7hk"), ExtResource("4_4ants")])
 icon = ExtResource("2_1sm61")
 family_name = "Serenity"
 family_type = 5

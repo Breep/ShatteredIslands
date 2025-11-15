@@ -1,19 +1,20 @@
-[gd_resource type="Resource" script_class="Family" load_steps=11 format=3 uid="uid://cbmvayb0bb72n"]
+[gd_resource type="Resource" script_class="Family" load_steps=12 format=3 uid="uid://cbmvayb0bb72n"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_4dvmk"]
 [ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://Card/Templates/family.gd" id="2_m6yig"]
 [ext_resource type="Resource" uid="uid://ctm6ojtt36a88" path="res://Card/Descriptions/Cards/Attack/TwinBlade/attack_twin_blade.tres" id="2_m74lt"]
 [ext_resource type="Resource" uid="uid://cvkv7hq8nsvks" path="res://Card/Descriptions/Cards/Attack/TitanAxe/attack_titan_axe.tres" id="3_ypjtd"]
 [ext_resource type="Resource" uid="uid://dq5i43mqjqg38" path="res://Card/Descriptions/Cards/Attack/StormHammer/attack_storm_hammer.tres" id="4_xkvlw"]
-[ext_resource type="Resource" uid="uid://3vjmnbpyyjyk" path="res://Card/Descriptions/Cards/Attack/GatlingGun/attack_gatling_gun.tres" id="5_cg3dx"]
+[ext_resource type="Resource" uid="uid://3vjmnbpyyjyk" path="res://Card/Descriptions/Cards/Attack/Epic/GatlingGun/attack_gatling_gun.tres" id="5_cg3dx"]
 [ext_resource type="Resource" uid="uid://c526xnq31ipht" path="res://Card/Descriptions/Cards/Attack/DoubleEdgeSword/attack_double_edge_sword.tres" id="6_gthbg"]
 [ext_resource type="Resource" uid="uid://bhogu6m1synt8" path="res://Card/Descriptions/Cards/Attack/DiamondSword/attack_diamond_sword.tres" id="7_eobhs"]
 [ext_resource type="Resource" uid="uid://5vemx42gusi2" path="res://Card/Descriptions/Cards/Attack/CurativeKnife/attack_curative_knife.tres" id="8_eyhuj"]
 [ext_resource type="Texture2D" uid="uid://b78s362n5bu6" path="res://Card/Descriptions/Families/Icons/turret.png" id="9_m74lt"]
+[ext_resource type="Resource" uid="uid://cj6hexnvedxmb" path="res://Card/Descriptions/Cards/Attack/Common/FightBack/attack_fight_back.tres" id="9_ypjtd"]
 
 [resource]
 script = ExtResource("2_m6yig")
-cards = Array[ExtResource("1_4dvmk")]([ExtResource("2_m74lt"), ExtResource("3_ypjtd"), ExtResource("4_xkvlw"), ExtResource("5_cg3dx"), ExtResource("6_gthbg"), ExtResource("7_eobhs"), ExtResource("8_eyhuj")])
+cards = Array[ExtResource("1_4dvmk")]([ExtResource("2_m74lt"), ExtResource("3_ypjtd"), ExtResource("4_xkvlw"), ExtResource("5_cg3dx"), ExtResource("6_gthbg"), ExtResource("7_eobhs"), ExtResource("8_eyhuj"), ExtResource("9_ypjtd")])
 icon = ExtResource("9_m74lt")
 family_name = "Attack"
 family_type = 1

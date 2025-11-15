@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://byi0eabn1lsix"
-path="res://.godot/imported/portrait_nuke.png-2b9325d0047c7db35ab7b3b0535f8360.ctex"
+uid="uid://bvrs16xxav5u7"
+path="res://.godot/imported/attack_fight_back.png-276d8b65a8e79a2635404fac7b358848.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Card/Descriptions/Cards/Fire/Nuke/portrait_nuke.png"
-dest_files=["res://.godot/imported/portrait_nuke.png-2b9325d0047c7db35ab7b3b0535f8360.ctex"]
+source_file="res://Card/Descriptions/Cards/Attack/Common/FightBack/attack_fight_back.png"
+dest_files=["res://.godot/imported/attack_fight_back.png-276d8b65a8e79a2635404fac7b358848.ctex"]
 
 [params]
 

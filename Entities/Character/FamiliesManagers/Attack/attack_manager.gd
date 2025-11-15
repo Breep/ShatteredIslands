@@ -25,6 +25,8 @@ var _aa_counter: int
 
 var _on_gatling_gun_timer_start: float = 0
 
+# [FIGHT BACK]
+var _dodge_number: int
 
 # ============================== Public functions ==============================
 
@@ -39,6 +41,7 @@ func start() -> void:
 		timer.start()
 	_add_stat_modifiers()
 	_add_action_modifiers()
+	_dodge_number = 0
 
 
 func stop() -> void:
@@ -106,7 +109,7 @@ func _add_stat_modifiers() -> void:
 		mod.value = _attack_stats.fight_back_increase_dodge
 		mod.stat_type = EntityStats.StatType.DODGE
 		mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
-		mod.id = "Fight back"
+		mod.id = "Fight Back"
 		_owner.stats_manager.register_modifier(mod)
 		
 func _clear_stat_modifiers() -> void:
@@ -116,7 +119,7 @@ func _clear_stat_modifiers() -> void:
 		var mod := StatModifier.new()
 		mod.stat_type = EntityStats.StatType.DODGE
 		mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
-		mod.id = "Fight back"
+		mod.id = "Fight Back"
 		_owner.stats_manager.unregister_modifier(mod)
 		
 func _add_action_modifiers() -> void:
@@ -125,7 +128,7 @@ func _add_action_modifiers() -> void:
 	if _attack_stats.fight_back_activated:
 		var action_modifier := ActionModifier.new()
 		action_modifier.action_type = ActionModifier.ActionType.DODGE
-		action_modifier.id = "Fight back"
+		action_modifier.id = "Fight Back"
 		action_modifier.is_one_time_effect = false
 		action_modifier.after_action_logic_callback = _on_dodge_fight_back
 		_owner.action_modifiers_manager.register_modifier(action_modifier)
@@ -136,7 +139,7 @@ func _remove_action_modifiers() -> void:
 	if _attack_stats.fight_back_activated:
 		var action_modifier := ActionModifier.new()
 		action_modifier.action_type = ActionModifier.ActionType.DODGE
-		action_modifier.id = "Fight back"
+		action_modifier.id = "Fight Back"
 		action_modifier.after_action_logic_callback = _on_dodge_fight_back
 		_owner.action_modifiers_manager.unregister_modifier(action_modifier)
 
@@ -162,12 +165,11 @@ func _on_dodge_fight_back(cb_vars: Dictionary) -> void:
 	if _owner == null or not is_instance_valid(_owner):
 		printerr("Fight back callback: _owner est invalide.")
 		return
-	var attack_saved: float = EntityStats.StatType.AD
-	var attack_bonus: float = attack_saved + _attack_stats.fight_back_increase_attack_damage
+	_dodge_number += 1
 	var stat_modifier := StatModifier.new()
 	stat_modifier.id = "Fight Back"
 	stat_modifier.stat_type = EntityStats.StatType.AD
 	stat_modifier.calc_type = StatModifier.CalcType.ADD
-	stat_modifier.value = attack_bonus
+	stat_modifier.value = _dodge_number * _attack_stats.fight_back_increase_attack_damage
 	stat_modifier.tags = [StatModifier.TagType.CARD]
 	_owner.stats_manager.update_modifier(stat_modifier)

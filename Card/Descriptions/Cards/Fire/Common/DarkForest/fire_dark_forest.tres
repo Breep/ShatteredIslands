@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://cx8ghn5qu8ot6"]
 
-[ext_resource type="Texture2D" uid="uid://tuwewl8ngbqu" path="res://Card/Descriptions/Cards/Fire/DarkForest/fire_dark_forest.png" id="1_32p1v"]
-[ext_resource type="Script" uid="uid://codt4sirjnqh7" path="res://Card/Descriptions/Cards/Fire/DarkForest/fire_dark_forest.gd" id="2_m1x01"]
+[ext_resource type="Texture2D" uid="uid://tuwewl8ngbqu" path="res://Card/Descriptions/Cards/Fire/Common/DarkForest/fire_dark_forest.png" id="1_32p1v"]
+[ext_resource type="Script" uid="uid://codt4sirjnqh7" path="res://Card/Descriptions/Cards/Fire/Common/DarkForest/fire_dark_forest.gd" id="2_m1x01"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="3_5htay"]
 
 [sub_resource type="Resource" id="Resource_omhxh"]

@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c5uqdlixv1t8a" path="res://Data/Assets/Card/Portraits/Fire/card_portrait_fire_meteor.png" id="1_61wps"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_71aee"]
-[ext_resource type="Script" uid="uid://qpy43lrfpomj" path="res://Card/Descriptions/Cards/Fire/Meteor/fire_meteor.gd" id="2_cdh3s"]
+[ext_resource type="Script" uid="uid://qpy43lrfpomj" path="res://Card/Descriptions/Cards/Fire/Epic/Meteor/fire_meteor.gd" id="2_cdh3s"]
 
 [sub_resource type="Resource" id="Resource_pn366"]
 script = ExtResource("2_cdh3s")

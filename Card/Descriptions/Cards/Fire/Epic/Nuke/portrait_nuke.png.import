@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://tuwewl8ngbqu"
-path="res://.godot/imported/fire_dark_forest.png-3d6d7d383cea1d08443d02b3fbb52e02.ctex"
+uid="uid://byi0eabn1lsix"
+path="res://.godot/imported/portrait_nuke.png-3fdf6096718449b94b7e8c78631c23cb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Card/Descriptions/Cards/Fire/DarkForest/fire_dark_forest.png"
-dest_files=["res://.godot/imported/fire_dark_forest.png-3d6d7d383cea1d08443d02b3fbb52e02.ctex"]
+source_file="res://Card/Descriptions/Cards/Fire/Epic/Nuke/portrait_nuke.png"
+dest_files=["res://.godot/imported/portrait_nuke.png-3fdf6096718449b94b7e8c78631c23cb.ctex"]
 
 [params]
 

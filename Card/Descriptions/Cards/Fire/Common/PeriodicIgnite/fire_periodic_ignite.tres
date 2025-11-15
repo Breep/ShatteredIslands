@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://b3ohguwihk7x3"]
 
 [ext_resource type="Texture2D" uid="uid://unqrk1nbjqyf" path="res://Data/Assets/Card/Portraits/Fire/card_portrait_fire_periodic_ignite.png" id="1_rf2x4"]
-[ext_resource type="Script" uid="uid://c1cycap2yrxuj" path="res://Card/Descriptions/Cards/Fire/PeriodicIgnite/fire_periodic_ignite.gd" id="1_rop2d"]
+[ext_resource type="Script" uid="uid://c1cycap2yrxuj" path="res://Card/Descriptions/Cards/Fire/Common/PeriodicIgnite/fire_periodic_ignite.gd" id="1_rop2d"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="3_5ffm5"]
 
 [sub_resource type="Resource" id="Resource_yobeh"]
