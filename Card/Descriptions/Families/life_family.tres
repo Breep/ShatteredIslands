@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="Family" load_steps=4 format=3 uid="uid://r422raom70t5"]
+[gd_resource type="Resource" script_class="Family" load_steps=5 format=3 uid="uid://r422raom70t5"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_f2mb4"]
+[ext_resource type="Resource" uid="uid://cywh2kajy8jg3" path="res://Card/Descriptions/Cards/Colossus/Common/EvasiveGrowth/colossus_evasive_growth.tres" id="2_m8e2k"]
 [ext_resource type="Texture2D" uid="uid://di7p4njh4seia" path="res://Card/Descriptions/Families/Icons/life.png" id="2_sor6b"]
 [ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://Card/Templates/family.gd" id="2_upugm"]
 
 [resource]
 script = ExtResource("2_upugm")
+cards = Array[ExtResource("1_f2mb4")]([ExtResource("2_m8e2k")])
 icon = ExtResource("2_sor6b")
 family_name = "Colossus"
 family_type = 6
