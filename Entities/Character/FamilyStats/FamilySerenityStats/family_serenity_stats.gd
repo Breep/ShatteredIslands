@@ -7,6 +7,10 @@ var holy_touch_activated: bool # True if the player has at least one of this car
 var holy_touch_period: float # tick rate (/s)
 var holy_touch_amount: float # Amount of heal done to an ally every periodic_heal_period
 
+var graceful_step_activated: bool # True if the player has at least one of this card 
+var graceful_step_increase_dodge: float #augmente les chances de dodges
+var graceful_step_regen: float #amount regen applied
+
 #endregion
 
 
