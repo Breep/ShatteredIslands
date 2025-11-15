@@ -4,7 +4,7 @@ extends CharacterUpgrade
 @export var _regen_amount: Array[float]
 @export var _period: Array[float]
 
-func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
+func apply(stats: FamiliesStats, cardlvl: int) -> void: 
 	if cardlvl < 1 or cardlvl > COMMON_CARD_MAX_LEVEL:
 		printerr("Life Spring: Wrong cardlvl: ", cardlvl)
 		return

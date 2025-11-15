@@ -18,6 +18,10 @@ var life_spring_activated: bool  #True if the player has at least one of this ca
 var life_spring_regen_amount: float # Amount of regen applied to an ally every periodic_heal_period
 var life_spring_period: float # tick rate (/s)
 
+# [MIRACLE LIGHT]
+var miracle_light_activated: bool
+var miracle_light_crit_chance: float # %chance to crit
+
 #endregion
 
 

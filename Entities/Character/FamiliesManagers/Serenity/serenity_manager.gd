@@ -22,6 +22,12 @@ func _ready() -> void:
 func start() -> void:
 	for timer in _optional_timers:
 		timer.start()
+		
+	# [MIRACLE LIGHT]
+	if _serenity_stats.miracle_light_activated:
+		_owner.stats_manager.critical_chance_changed.connect(_on_owner_critical_chance_changed)
+		_update_miracle_light_modifier()
+		
 	_regen_tick_timer.start()
 	_create_optional_timers()
 	_add_action_modifiers()
@@ -33,6 +39,12 @@ func stop() -> void:
 	_remove_action_modifiers()
 	_clear_optional_timers()
 	_regen_tick_timer.stop()
+	
+	# [MIRACLE LIGHT]
+	if _serenity_stats.miracle_light_activated:
+		if _owner.stats_manager.critical_chance_changed.is_connected(_on_owner_critical_chance_changed):
+			_owner.stats_manager.critical_chance_changed.disconnect(_on_owner_critical_chance_changed)
+			
 	for timer in _optional_timers:
 		timer.stop()
 	
@@ -50,7 +62,7 @@ func _create_optional_timers() -> void:
 	# [LIFE SPRING]
 	if _serenity_stats.life_spring_activated:
 		_optional_timers.append(Utils.create_perpetual_timer(self, _serenity_stats.life_spring_period, _life_spring_timer_timeout, true))	
-
+	
 func _add_stat_modifiers() -> void:
 	# [GRACEFUL STEP]
 	if _serenity_stats.graceful_step_activated:
@@ -70,6 +82,13 @@ func _clear_stat_modifiers() -> void:
 		mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
 		mod.id = "Graceful Step"
 		_owner.stats_manager.unregister_modifier(mod)
+	
+	# [MIRACLE LIGHT]
+	var mod := StatModifier.new()
+	mod.id = "Miracle Light"
+	mod.stat_type = EntityStats.StatType.CRIT_CHANCE
+	mod.action_type = Utils.ActionType.UTILITY_HEAL
+	_owner.stats_manager.unregister_modifier(mod)
 		
 func _add_action_modifiers() -> void:
 	# [GRACEFUL STEP]
@@ -90,6 +109,24 @@ func _remove_action_modifiers() -> void:
 		action_modifier.after_action_logic_callback = _on_dodge_graceful_step
 		_owner.action_modifiers_manager.unregister_modifier(action_modifier)
 		
+func _update_miracle_light_modifier() -> void:
+	# [MIRACLE LIGHT]
+	if _owner == null or not is_instance_valid(_owner):
+		return
+
+	var phys_crit: float = _owner.stats.get_stat(EntityStats.StatType.CRIT_CHANCE)
+	var card_mult: float = _serenity_stats.miracle_light_crit_chance
+	var heal_crit_percent: float = phys_crit * card_mult
+	
+	var mod := StatModifier.new()
+	mod.id = "Miracle Light"
+	mod.stat_type = EntityStats.StatType.CRIT_CHANCE
+	mod.action_type = Utils.ActionType.UTILITY_HEAL
+	mod.calc_type = StatModifier.CalcType.ADD
+	mod.value = heal_crit_percent
+	mod.tags = [StatModifier.TagType.CARD]
+	_owner.stats_manager.update_modifier(mod)
+	
 # ============================== Callbacks functions ==============================
 
 func _holy_touch_timer_timeout() -> void: 
@@ -115,4 +152,8 @@ func _on_dodge_graceful_step(cb_vars: Dictionary) -> void:
 	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
 	if target != null:
 		_owner.inflict_condition_stacks(target, _serenity_stats.graceful_step_regen, Utils.StackType.REGEN)
-		
+
+func _on_owner_critical_chance_changed(new_critical_chance: float, critical_type: Utils.ActionType) -> void:
+	# [MIRACLE LIGHT]
+	if critical_type == Utils.ActionType.DAMAGE_PHYSICAL:
+		_update_miracle_light_modifier()
