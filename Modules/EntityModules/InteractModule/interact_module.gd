@@ -3,10 +3,13 @@ extends Module
 
 @export var _defense_manager: DefenseManager
 
+var _dodge_number: int = 0
+
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
 	if _defense_manager == null: printerr("InteractModule: Not linked to a DefenseManager [", get_path(), "]")
+	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 
 # ============================== Public function ==============================
 
@@ -144,10 +147,12 @@ func take_dispell(value: float, is_critical: bool, source: Entity = null) -> flo
 func _is_dodged(action_type: Utils.ActionType) -> bool:
 	var dodge_chance: float = _owner.stats.get_stat(EntityStats.StatType.DODGE, action_type)
 	if Utils.is_randomize_modifier_active(dodge_chance):
-		if _owner.action_modifiers_manager != null:
-			for dodge_modifier: ActionModifier in _owner.action_modifiers_manager.consume_all_modifiers(ActionModifier.ActionType.DODGE):
-				if dodge_modifier.after_action_logic_callback.is_valid():
-					dodge_modifier.after_action_logic_callback.call({})
+		_dodge_number += 1
+		for dodge_modifier: ActionModifier in _owner.action_modifiers_manager.consume_all_modifiers(ActionModifier.ActionType.DODGE):
+			if dodge_modifier.after_action_logic_callback.is_valid():
+				dodge_modifier.after_action_logic_callback.call({
+					ActionModifier.VarType.DODGE_NUMBER: _dodge_number
+				})
 		return true
 	return false
 
@@ -156,5 +161,11 @@ func _get_resistance_vulnerability_multiplier(action_type: Utils.ActionType) -> 
 	var res: float = _owner.stats.get_stat(EntityStats.StatType.RESISTANCE, action_type)
 	var vuln: float = _owner.stats.get_stat(EntityStats.StatType.VULNERABILITY, action_type)
 	return (100 + vuln) / (100 + res)
+#endregion
 
+
+#region ============================== Callbacks ==============================
+func _on_game_manager_game_state_changed(game_state: Game.GameState) -> void:
+	match game_state:
+		Game.GameState.FIGHTING_POSITIONING: _dodge_number = 0
 #endregion

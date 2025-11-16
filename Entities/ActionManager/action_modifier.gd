@@ -13,7 +13,8 @@ enum VarType { # Variable types of the callbacks dictionary
 	PHYSICAL_DAMAGE,
 	STACK_VALUE,
 	STACK_TYPE,
-	TARGET
+	TARGET,
+	DODGE_NUMBER
 }
 
 enum ActionType {
