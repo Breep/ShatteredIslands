@@ -178,13 +178,13 @@ func _update_layout() -> void:
 	_ad_label.text = str(_owner_entity.stats.get_stat(EntityStats.StatType.AD))
 	_as_label.text = str(_owner_entity.stats.get_stat(EntityStats.StatType.AA_SPEED))
 	for action_type: Utils.ActionType in Utils.get_all_actions():
-		_critical_chance_labels[action_type].text = str(_owner_entity.stats.get_stat(EntityStats.StatType.CRIT_CHANCE, action_type))
-		_critical_multiplier_labels[action_type].text = str(_owner_entity.stats.get_stat(EntityStats.StatType.CRIT_MULT, action_type))
-		_dodge_labels[action_type].text = str(_owner_entity.stats.get_stat(EntityStats.StatType.DODGE, action_type))
-		_resistance_labels[action_type].text = str(_owner_entity.stats.get_stat(EntityStats.StatType.RESISTANCE, action_type))
-		_vulnerability_labels[action_type].text = str(_owner_entity.stats.get_stat(EntityStats.StatType.VULNERABILITY, action_type))
-		_strenght_labels[action_type].text = str(_owner_entity.stats.get_stat(EntityStats.StatType.STRENGHT, action_type))
-		_weakness_labels[action_type].text = str(_owner_entity.stats.get_stat(EntityStats.StatType.WEAKNESS, action_type))
+		_critical_chance_labels[action_type].text = str(int(_owner_entity.stats.get_stat(EntityStats.StatType.CRIT_CHANCE, action_type)))
+		_critical_multiplier_labels[action_type].text = str(int(_owner_entity.stats.get_stat(EntityStats.StatType.CRIT_MULT, action_type)))
+		_dodge_labels[action_type].text = str(int(_owner_entity.stats.get_stat(EntityStats.StatType.DODGE, action_type)))
+		_resistance_labels[action_type].text = str(int(_owner_entity.stats.get_stat(EntityStats.StatType.RESISTANCE, action_type)))
+		_vulnerability_labels[action_type].text = str(int(_owner_entity.stats.get_stat(EntityStats.StatType.VULNERABILITY, action_type)))
+		_strenght_labels[action_type].text = str(int(_owner_entity.stats.get_stat(EntityStats.StatType.STRENGHT, action_type)))
+		_weakness_labels[action_type].text = str(int(_owner_entity.stats.get_stat(EntityStats.StatType.WEAKNESS, action_type)))
 	_entity_name_label.text = _owner_entity.name
 
 # Callbacks

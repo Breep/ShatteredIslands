@@ -8,6 +8,10 @@ func signal_death() -> void:
 	_is_dead = true
 	died.emit(self)
 
+signal critical_action_done(entity_ref: Entity, target: Entity, action_type: Utils.ActionType, value: float)
+func signal_critical_action_done(target: Entity, action_type: Utils.ActionType, value: float) -> void:
+	critical_action_done.emit(self, target, action_type, value)
+
 signal damage_taken(entity_ref: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool)
 func signal_damage_taken(damage: int, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool) -> void:
 	damage_taken.emit(self, damage, damage_type, is_critical, blocked_by_armor)
@@ -86,11 +90,9 @@ static var instance_count: int = 0
 func _init() -> void:
 	id = instance_count
 	instance_count += 1
-	print("ENTITY INIT CALLED: ", id, "-", name)
 
 
 func _enter_tree() -> void:
-	print("Entity ENTER TREE")
 	action_modifiers_manager = ActionModifiersManager.new()
 
 # ============================== Public functions ==============================

@@ -110,6 +110,8 @@ func _on_body_entered(body: Node3D) -> void:
 				source,
 				Utils.AttackType.AUTO_ATTACK
 			)
+		if stats.physical_is_critical:
+			source.signal_critical_action_done(target, Utils.ActionType.DAMAGE_PHYSICAL, physical_damage)
 
 		var magical_damage: int = stats.magical_damage_flat
 		magical_damage += _get_damage_percent(stats.magical_damage_percent, stats.magical_damage_percent_type)

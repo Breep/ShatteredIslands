@@ -6,7 +6,6 @@ extends Resource
 var _action_modifiers_dictionaries: Dictionary [ActionModifier.ActionType, ActionModifiersDictionary]
 
 func _init() -> void:
-	print("ActionModifiersManager INIT")
 	_action_modifiers_dictionaries = {
 		ActionModifier.ActionType.DIRECT_ATTACK: ActionModifiersDictionary.new(),
 		ActionModifier.ActionType.INFLICT_CONDITION: ActionModifiersDictionary.new(),

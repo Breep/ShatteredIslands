@@ -1,11 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://c5ji8s1iic5v8"]
+[gd_scene load_steps=15 format=3 uid="uid://c5ji8s1iic5v8"]
 
 [ext_resource type="Script" uid="uid://bu48b2v401db2" path="res://Prototyping/FightingIsland/prototyping_map.gd" id="1_vksg0"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="2_dnu2k"]
 [ext_resource type="Resource" uid="uid://dvpdubk0btegx" path="res://Card/Descriptions/Cards/Poison/Common/PoisonFlask/poison_poison_flask.tres" id="4_dlg3x"]
-[ext_resource type="Resource" uid="uid://e4sl6p15d3rj" path="res://Card/Descriptions/Cards/Poison/Rare/Corrosion/poison_corrosion.tres" id="4_kngc2"]
+[ext_resource type="Resource" uid="uid://db0b7kkosks20" path="res://Card/Descriptions/Cards/Poison/Common/Antidote/poison_antidote.tres" id="4_kngc2"]
 [ext_resource type="Resource" uid="uid://bj3e4jhk5i7ab" path="res://Card/Descriptions/Cards/Poison/Common/RottingMilk/poison_rotting_milk.tres" id="4_vksg0"]
-[ext_resource type="Resource" uid="uid://bt615e0tyxyls" path="res://Card/Descriptions/Cards/Defense/GladiatorHelmet/defense_gladiator_helmet.tres" id="6_e0xek"]
 [ext_resource type="PackedScene" uid="uid://drcuyohos0doa" path="res://FloatingIsland/FightingIsland/fighting_island.tscn" id="6_sp80o"]
 [ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Entities/Character/character.tscn" id="7_pc3mw"]
 [ext_resource type="PackedScene" uid="uid://bhxhqex1pbh2p" path="res://UI/InGame/FightingArea/ui_fighting_area.tscn" id="7_wwtbg"]
@@ -42,7 +41,7 @@ volumetric_fog_density = 0.0
 [node name="PrototypingMap" type="Node3D" node_paths=PackedStringArray("_characters", "_floating_island")]
 script = ExtResource("1_vksg0")
 _player1_cards = Array[ExtResource("2_dnu2k")]([ExtResource("4_dlg3x"), ExtResource("4_kngc2")])
-_player2_cards = Array[ExtResource("2_dnu2k")]([ExtResource("4_dlg3x"), ExtResource("4_vksg0"), ExtResource("6_e0xek")])
+_player2_cards = Array[ExtResource("2_dnu2k")]([ExtResource("4_dlg3x"), ExtResource("4_vksg0")])
 _characters = [NodePath("DarkKnight"), NodePath("Character2")]
 _floating_island = NodePath("FightingIsland")
 

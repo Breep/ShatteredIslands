@@ -3,8 +3,6 @@ extends FamilyManager
 
 # ============================== Constants ==============================
 
-const FOCUS_INCREASE_CRIT_PERIOD: float = 0.5
-
 # ============================== Private variables ==============================
 
 var _storm_stats: FamilyStormStats
@@ -13,6 +11,7 @@ var _storm_stats: FamilyStormStats
 
 func _ready() -> void:
 	_storm_stats = _owner.families_stats.storm
+	_owner.critical_action_done.connect(_on_owner_critical_action_done)
 
 
 func start() -> void:
@@ -24,28 +23,6 @@ func stop() -> void:
 	for timer in _optional_timers:
 		timer.stop()
 
-
-func get_increased_critical_damage(damage: int, is_critical: bool) -> int:
-	if not is_critical:
-		return damage
-	return damage
-
-
-func get_critical_chance() -> float:
-	return 10 # TODO A FAIRE
-
-
-func get_critical_multiplier(damage_type: Utils.DamageType) -> float:
-	if damage_type != Utils.DamageType.PHYSICAL:
-		return 1 
-	
-	var critical_multiplier = _owner.stats.physical_critical_multiplier
-	return critical_multiplier
-
-
-func notice_critical_damage(_char_who_received_the_crit: Character, _damage: int) -> void:
-	pass
-
 # ============================== Private functions ==============================
 
 func _create_optional_timers() -> void:
@@ -53,9 +30,5 @@ func _create_optional_timers() -> void:
 
 # ============================== Callbacks functions ==============================
 
-func _on_vulnerability_timer_timeout() -> void:
-	pass
-
-
-func _on_crit_move_speed_timer_timeout() -> void:
-	_storm_stats.speed_boosted = false
+func _on_owner_critical_action_done(_entity_ref: Entity, target: Entity, action_type: Utils.ActionType, value: float) -> void:
+	print("CRIT DONE on ", target, " A=", action_type, " V=", value)

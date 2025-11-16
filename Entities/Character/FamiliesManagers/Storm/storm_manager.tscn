@@ -4,8 +4,3 @@
 
 [node name="StormManager" type="Node"]
 script = ExtResource("1_dc83y")
-
-[node name="VulnerabilityTimer" type="Timer" parent="."]
-unique_name_in_owner = true
-
-[connection signal="timeout" from="VulnerabilityTimer" to="." method="_on_vulnerability_timer_timeout"]

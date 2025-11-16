@@ -27,10 +27,12 @@ func connect_to_spawn_manager(spawn_manager: SpawnManager) -> void:
 func direct_attack(target: Entity, damage: int, damage_type: Utils.DamageType) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
-	var multiplier = _get_crit_multiplier(Utils.damage_to_action(damage_type))
-	damage *= multiplier["multiplier"]
+	var crit_multiplier = _get_crit_multiplier(Utils.damage_to_action(damage_type))
+	damage *= crit_multiplier["multiplier"]
 	damage = int(float(damage) * _get_strenght_weakness_multiplier(Utils.damage_to_action(damage_type)))
-	target.take_damage(damage, damage_type, multiplier["is_critical"], _owner)
+	var damage_done = target.take_damage(damage, damage_type, crit_multiplier["is_critical"], _owner)
+	if crit_multiplier["is_critical"]:
+		_owner.signal_critical_action_done(target, Utils.damage_to_action(damage_type), damage_done)
 
 
 # Instantly attack the target - Apply cards damages multiplier if there are some
@@ -82,9 +84,11 @@ func _spawn_projectile(target: Entity, projectile_type: Projectile.ProjectileTyp
 func heal(target: Entity, heal_amount: int) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
-	var multipliers = _get_crit_multiplier(Utils.ActionType.UTILITY_HEAL)
-	heal_amount *= multipliers["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.UTILITY_HEAL)
-	target.take_heal(heal_amount, multipliers["is_critical"], _owner)
+	var crit_multiplier = _get_crit_multiplier(Utils.ActionType.UTILITY_HEAL)
+	heal_amount *= crit_multiplier["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.UTILITY_HEAL)
+	target.take_heal(heal_amount, crit_multiplier["is_critical"], _owner)
+	if crit_multiplier["is_critical"]:
+		_owner.signal_critical_action_done(target, Utils.ActionType.UTILITY_HEAL, heal_amount)
 
 
 func heal_percent(target: Entity, percent: float, percent_modifier: Utils.PercentModifier) -> void:
@@ -107,8 +111,9 @@ func heal_percent(target: Entity, percent: float, percent_modifier: Utils.Percen
 func inflict_condition_stacks(target: Entity, stacks_number: int, stack_type: Utils.StackType) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
-	var stack_multiplier = _get_crit_multiplier(Utils.stack_to_action(stack_type))
-	stacks_number *= stack_multiplier["multiplier"]
+	var crit_multiplier = _get_crit_multiplier(Utils.stack_to_action(stack_type))
+	stacks_number *= crit_multiplier["multiplier"]
+	stacks_number *= _get_strenght_weakness_multiplier(Utils.stack_to_action(stack_type))
 	if _owner.action_modifiers_manager != null:
 		for condition_modifier: ActionModifier in _owner.action_modifiers_manager.consume_all_modifiers(ActionModifier.ActionType.INFLICT_CONDITION):
 			if condition_modifier.after_action_logic_callback.is_valid():
@@ -117,7 +122,9 @@ func inflict_condition_stacks(target: Entity, stacks_number: int, stack_type: Ut
 					ActionModifier.VarType.STACK_TYPE: stack_type,
 					ActionModifier.VarType.TARGET: target
 				})
-	target.take_condition_stacks(stacks_number, stack_type, stack_multiplier["is_critical"], _owner)
+	target.take_condition_stacks(stacks_number, stack_type, crit_multiplier["is_critical"], _owner)
+	if crit_multiplier["is_critical"]:
+		_owner.signal_critical_action_done(target, Utils.stack_to_action(stack_type), stacks_number)
 #endregion
 
 #region ============================== Cleanse and Dispell ==============================
@@ -125,17 +132,21 @@ func inflict_condition_stacks(target: Entity, stacks_number: int, stack_type: Ut
 func cleanse(target: Entity, value: float) -> void:
 	if target == null or target.is_queued_for_deletion(): return
 	value *= _get_strenght_weakness_multiplier(Utils.ActionType.UTILITY_CLEANSE)
-	var multiplier: Dictionary = _get_crit_multiplier(Utils.ActionType.UTILITY_CLEANSE)
-	value *= multiplier["multiplier"]
-	target.take_cleanse(value, multiplier["is_critical"], _owner)
+	var crit_multiplier: Dictionary = _get_crit_multiplier(Utils.ActionType.UTILITY_CLEANSE)
+	value *= crit_multiplier["multiplier"]
+	var stack_removed = target.take_cleanse(value, crit_multiplier["is_critical"], _owner)
+	if crit_multiplier["is_critical"]:
+		_owner.signal_critical_action_done(target, Utils.ActionType.UTILITY_CLEANSE, stack_removed)
 
 #Removes buf
 func dispell(target: Entity, value: float) -> void:
 	if target == null or target.is_queued_for_deletion(): return
 	value *= _get_strenght_weakness_multiplier(Utils.ActionType.UTILITY_DISPELL)
-	var multiplier: Dictionary = _get_crit_multiplier(Utils.ActionType.UTILITY_DISPELL)
-	value *= multiplier["multiplier"]
-	target.take_dispell(value, multiplier["is_critical"], _owner)
+	var crit_multiplier: Dictionary = _get_crit_multiplier(Utils.ActionType.UTILITY_DISPELL)
+	value *= crit_multiplier["multiplier"]
+	var stack_removed = target.take_dispell(value, crit_multiplier["is_critical"], _owner)
+	if crit_multiplier["is_critical"]:
+		_owner.signal_critical_action_done(target, Utils.ActionType.UTILITY_CLEANSE, stack_removed)
 #endregion
 
 #region ============================== Spells ==============================

@@ -23,3 +23,4 @@ var auto_attack_modifiers: Array[AutoAttackModifier]
 var on_battle_start: Callable
 var on_battle_end: Callable
 var on_purchase: Callable
+var periodic_callback: Callable
