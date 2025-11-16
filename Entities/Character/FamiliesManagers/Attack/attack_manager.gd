@@ -117,6 +117,15 @@ func _add_attack_modifiers() -> void:
 		aa_modifier.is_one_time_effect = false
 		_owner.auto_attack_modifier_registry.register_modifier(aa_modifier)
 		
+	# [ARCANE STAFF]
+	if _attack_stats.arcane_staff_activated:
+		var aa_modifier := AutoAttackModifier.new()
+		aa_modifier.id = "Arcane Staff"
+		aa_modifier.tags = [AutoAttackModifier.TagType.CARD]
+		aa_modifier.on_hit_logic_callback = _on_hit_arcane_staff
+		aa_modifier.is_one_time_effect = false
+		_owner.auto_attack_modifier_registry.register_modifier(aa_modifier)
+		
 func _clear_attack_modifiers() -> void:
 	# [RUSTY DAGGER]
 	if _attack_stats.rusty_dagger_activated:
@@ -137,6 +146,10 @@ func _clear_attack_modifiers() -> void:
 	# [STORM HAMMER]
 	if _attack_stats.storm_hammer_activated:
 		_owner.auto_attack_modifier_registry.unregister_modifier("Storm Hammer")
+		
+	# [ARCANE STAFF]
+	if _attack_stats.arcane_staff_activated:
+		_owner.auto_attack_modifier_registry.unregister_modifier("Arcane Staff")
 		
 #endregion
 
@@ -382,3 +395,12 @@ func _on_attack_storm_hammer(cb_vars: Dictionary) -> void:
 	var projectile_stat: ProjectileStats = cb_vars[AutoAttackModifier.VarType.PROJECTILE_STATS]
 	projectile_stat.is_bouncing = true
 	
+func _on_hit_arcane_staff(cb_vars: Dictionary) -> void:
+	# [ARCANE STAFF]
+	var chance: float = _attack_stats.arcane_staff_chance
+	if not Utils.is_randomize_modifier_active(chance):
+		return 
+
+	var mana_gain: float = _attack_stats.arcane_staff_mana_gain
+	if mana_gain > 0:
+		_owner.stats.mana += mana_gain

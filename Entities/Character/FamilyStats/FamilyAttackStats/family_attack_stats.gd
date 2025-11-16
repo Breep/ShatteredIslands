@@ -21,6 +21,11 @@ var rusty_dagger_poison_stacks: float # amount stacks
 var diamond_sword_activated: bool # True if this skill is activated
 var diamond_sword_attack: int # Value of increased attack
 
+# [ARCANE STAFF]
+var arcane_staff_activated: bool
+var arcane_staff_chance: float
+var arcane_staff_mana_gain: float
+
 # [TWIN BLADE]
 var twin_blade_activated: bool # True if this skill is activated
 var twin_blade_speed: float # Le pourcentage d'augmentation (ex: 10.0, 15.0) speed (in %)

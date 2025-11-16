@@ -7,7 +7,7 @@
 [ext_resource type="Resource" uid="uid://ctm6ojtt36a88" path="res://Card/Descriptions/Cards/Attack/Common/TwinBlade/attack_twin_blade.tres" id="4_e0xek"]
 [ext_resource type="Resource" uid="uid://bj3e4jhk5i7ab" path="res://Card/Descriptions/Cards/Poison/Common/RottingMilk/poison_rotting_milk.tres" id="4_vksg0"]
 [ext_resource type="Resource" uid="uid://b76twqciou5cu" path="res://Card/Descriptions/Cards/Attack/Rare/BladeRush/attack_blade_rush.tres" id="5_7wmtn"]
-[ext_resource type="Resource" uid="uid://dq5i43mqjqg38" path="res://Card/Descriptions/Cards/Attack/Epic/StormHammer/attack_storm_hammer.tres" id="6_pc3mw"]
+[ext_resource type="Resource" uid="uid://cmri5y5lsw4pe" path="res://Card/Descriptions/Cards/Attack/Common/ArcaneStaff/attack_arcane_staff.tres" id="6_pc3mw"]
 [ext_resource type="PackedScene" uid="uid://drcuyohos0doa" path="res://FloatingIsland/FightingIsland/fighting_island.tscn" id="6_sp80o"]
 [ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Entities/Character/character.tscn" id="7_pc3mw"]
 [ext_resource type="PackedScene" uid="uid://bhxhqex1pbh2p" path="res://UI/InGame/FightingArea/ui_fighting_area.tscn" id="7_wwtbg"]
