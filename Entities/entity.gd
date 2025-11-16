@@ -57,6 +57,7 @@ var is_dead: bool:
 @export var target_module: TargetModule
 
 var action_modifiers_manager: ActionModifiersManager
+var stack_manager: StackManager
 
 # ============================== Enums ==============================
 
