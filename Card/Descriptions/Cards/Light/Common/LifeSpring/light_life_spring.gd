@@ -5,7 +5,7 @@ extends CharacterUpgrade
 @export var _period: Array[float]
 
 func apply(stats: FamiliesStats, cardlvl: int) -> void: 
-	if cardlvl < 1 or cardlvl > COMMON_CARD_MAX_LEVEL:
+	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[Card.Rarity.COMMON]:
 		printerr("Life Spring: Wrong cardlvl: ", cardlvl)
 		return
 	
@@ -15,7 +15,7 @@ func apply(stats: FamiliesStats, cardlvl: int) -> void:
 
 
 func get_description(cardlvl: int) -> String:
-	if cardlvl < 1 or cardlvl > COMMON_CARD_MAX_LEVEL:
+	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[Card.Rarity.COMMON]:
 		printerr("Life Spring: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	

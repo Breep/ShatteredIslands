@@ -23,7 +23,7 @@ var diamond_sword_attack: int # Value of increased attack
 
 # [TWIN BLADE]
 var twin_blade_activated: bool # True if this skill is activated
-var twin_blade_speed: int # Value of increased speed (in %)
+var twin_blade_speed: float # Le pourcentage d'augmentation (ex: 10.0, 15.0) speed (in %)
 
 # [TITAN AXE]
 var titan_axe_activated: bool # True if this skill is activated

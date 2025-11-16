@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://ctm6ojtt36a88"]
 
-[ext_resource type="Texture2D" uid="uid://vdyxf2bkaljm" path="res://Data/Assets/Card/Portraits/Attack/attack_twin_blade.png" id="1_hf1xf"]
+[ext_resource type="Texture2D" uid="uid://dj3egr4t037xv" path="res://Card/Descriptions/Cards/Attack/TwinBlade/attack_twin_blade.png" id="1_hf1xf"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_na10k"]
 [ext_resource type="Script" uid="uid://p78qiv5h7hsm" path="res://Card/Descriptions/Cards/Attack/TwinBlade/attack_twin_blade.gd" id="2_t7rln"]
 
 [sub_resource type="Resource" id="Resource_us67u"]
 script = ExtResource("2_t7rln")
-_speed = Array[int]([20, 40, 60, 80, 160])
+_attack_speed_percent = Array[float]([400.0, 40.0, 60.0, 80.0, 100.0])
 metadata/_custom_type_script = "uid://p78qiv5h7hsm"
 
 [resource]

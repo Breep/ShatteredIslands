@@ -1,20 +1,20 @@
-class_name AttackTwinBlade
+class_name TwinBlade
 extends CharacterUpgrade
 
-@export var _speed: Array[int] # attack speed increase (in %)
+@export var _attack_speed_percent: Array[float] 
 
-func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
-	if cardlvl < 1 or cardlvl > 5:
-		printerr("Wrong cardlvl: ", cardlvl)
+func apply(stats: FamiliesStats, cardlvl: int) -> void: 
+	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[Card.Rarity.RARE]:
+		printerr("Twin Blade: Wrong cardlvl: ", cardlvl)
 		return
 	
+	# On utilise stats.auto_attack comme tu l'as demandé
 	stats.auto_attack.twin_blade_activated = true
-	stats.auto_attack.twin_blade_speed = _speed[cardlvl - 1]
-
+	stats.auto_attack.twin_blade_speed = _attack_speed_percent[cardlvl - 1]
 
 func get_description(cardlvl: int) -> String:
-	if cardlvl < 1 or cardlvl > 5:
-		printerr("Wrong cardlvl: ", cardlvl)
+	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[Card.Rarity.RARE]:
+		printerr("Twin Blade: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]Increase turret attack speed by " + str(_speed[cardlvl - 1]) + ".[/center]"
+	return "Increase attack speed by " + str(_attack_speed_percent[cardlvl - 1]) + "%."
