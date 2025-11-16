@@ -3,20 +3,20 @@
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_4dvmk"]
 [ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://Card/Templates/family.gd" id="2_m6yig"]
 [ext_resource type="Resource" uid="uid://ctm6ojtt36a88" path="res://Card/Descriptions/Cards/Attack/Common/TwinBlade/attack_twin_blade.tres" id="2_m74lt"]
-[ext_resource type="Resource" uid="uid://cvkv7hq8nsvks" path="res://Card/Descriptions/Cards/Attack/TitanAxe/attack_titan_axe.tres" id="3_ypjtd"]
 [ext_resource type="Resource" uid="uid://dq5i43mqjqg38" path="res://Card/Descriptions/Cards/Attack/Epic/StormHammer/attack_storm_hammer.tres" id="4_xkvlw"]
 [ext_resource type="Resource" uid="uid://3vjmnbpyyjyk" path="res://Card/Descriptions/Cards/Attack/Epic/GatlingGun/attack_gatling_gun.tres" id="5_cg3dx"]
-[ext_resource type="Resource" uid="uid://c526xnq31ipht" path="res://Card/Descriptions/Cards/Attack/DoubleEdgeSword/attack_double_edge_sword.tres" id="6_gthbg"]
 [ext_resource type="Resource" uid="uid://bhogu6m1synt8" path="res://Card/Descriptions/Cards/Attack/Common/DiamondSword/attack_diamond_sword.tres" id="7_eobhs"]
+[ext_resource type="Resource" uid="uid://cmri5y5lsw4pe" path="res://Card/Descriptions/Cards/Attack/Common/ArcaneStaff/attack_arcane_staff.tres" id="8_cg3dx"]
 [ext_resource type="Resource" uid="uid://5vemx42gusi2" path="res://Card/Descriptions/Cards/Attack/Rare/SurgicalKnife/attack_curative_knife.tres" id="8_eyhuj"]
 [ext_resource type="Texture2D" uid="uid://b78s362n5bu6" path="res://Card/Descriptions/Families/Icons/turret.png" id="9_m74lt"]
 [ext_resource type="Resource" uid="uid://cj6hexnvedxmb" path="res://Card/Descriptions/Cards/Attack/Common/FightBack/attack_fight_back.tres" id="9_ypjtd"]
 [ext_resource type="Resource" uid="uid://dxr7p12a3u5s0" path="res://Card/Descriptions/Cards/Attack/Common/RustyDagger/attack_rusty_dagger.tres" id="10_cg3dx"]
+[ext_resource type="Resource" uid="uid://qm75h7gw2hgn" path="res://Card/Descriptions/Cards/Attack/Common/HealingCrossbow/attack_healing_crossbow.tres" id="11_eobhs"]
 [ext_resource type="Resource" uid="uid://dpnpvtk3elac0" path="res://Card/Descriptions/Cards/Attack/Common/ScorchingBlade/attack_scorching_blade.tres" id="11_gthbg"]
 
 [resource]
 script = ExtResource("2_m6yig")
-cards = Array[ExtResource("1_4dvmk")]([ExtResource("2_m74lt"), ExtResource("3_ypjtd"), ExtResource("4_xkvlw"), ExtResource("5_cg3dx"), ExtResource("6_gthbg"), ExtResource("7_eobhs"), ExtResource("9_ypjtd"), ExtResource("8_eyhuj"), ExtResource("10_cg3dx"), ExtResource("11_gthbg")])
+cards = Array[ExtResource("1_4dvmk")]([ExtResource("5_cg3dx"), ExtResource("7_eobhs"), ExtResource("9_ypjtd"), ExtResource("8_eyhuj"), ExtResource("10_cg3dx"), ExtResource("11_gthbg"), ExtResource("8_cg3dx"), ExtResource("4_xkvlw"), ExtResource("2_m74lt"), ExtResource("11_eobhs")])
 icon = ExtResource("9_m74lt")
 family_name = "Attack"
 family_type = 1

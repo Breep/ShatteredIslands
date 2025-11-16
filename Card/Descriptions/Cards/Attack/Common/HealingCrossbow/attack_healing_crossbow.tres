@@ -14,5 +14,6 @@ metadata/_custom_type_script = "uid://cixnliius7d48"
 script = ExtResource("1_ckkh8")
 name = "Healing Crossbow"
 picture = ExtResource("1_jocew")
+family = 1
 player_upgrade = SubResource("Resource_kjnav")
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"
