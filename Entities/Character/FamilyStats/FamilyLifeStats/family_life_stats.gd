@@ -20,10 +20,10 @@ var armor_by_lost_hp_period: float # Period between each tick
 var the_collector_activated: bool # If this skill is activated
 var the_collector_hp: bool # max HP gained for each unique card
 
-# [Dodge]
-var dodge_activated: bool # If this skill is activated
-var dodge_increase: float # Amount of dodge increase
-var dodge_hp: int # max HP gained each dodge
+# [EVASIVE GROWTH]
+var evasive_growth_activated: bool
+var evasive_growth_increase_dodge: float
+var evasive_growth_increase_max_hp: float
 
 # [Vicious Mockery]
 var vicious_mockery_activated: bool # If this skill is activated

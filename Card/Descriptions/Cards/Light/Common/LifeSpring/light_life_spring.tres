@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://c3qf5odp5y6ap"]
+
+[ext_resource type="Texture2D" uid="uid://bv67s0hqdhhnd" path="res://Card/Descriptions/Cards/Light/Common/LifeSpring/light_life_spring.png" id="1_eptq0"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_if6hk"]
+[ext_resource type="Script" uid="uid://x2bc4gpho4jt" path="res://Card/Descriptions/Cards/Light/Common/LifeSpring/light_life_spring.gd" id="1_tpriq"]
+
+[sub_resource type="Resource" id="Resource_eptq0"]
+script = ExtResource("1_tpriq")
+_regen_amount = Array[float]([1.0, 2.0, 3.0, 4.0, 5.0])
+_period = Array[float]([2.0, 1.2, 1.2, 1.2, 1.2])
+metadata/_custom_type_script = "uid://x2bc4gpho4jt"
+
+[resource]
+script = ExtResource("1_if6hk")
+name = "Life Spring"
+picture = ExtResource("1_eptq0")
+family = 5
+player_upgrade = SubResource("Resource_eptq0")
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

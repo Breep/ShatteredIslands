@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://cj6hexnvedxmb"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_5mypg"]
+[ext_resource type="Texture2D" uid="uid://bvrs16xxav5u7" path="res://Card/Descriptions/Cards/Attack/Common/FightBack/attack_fight_back.png" id="1_b144d"]
+[ext_resource type="Script" uid="uid://uiyqfsgg1lfo" path="res://Card/Descriptions/Cards/Attack/Common/FightBack/attack_fight_back.gd" id="2_sn1ql"]
+
+[sub_resource type="Resource" id="Resource_ov13x"]
+script = ExtResource("2_sn1ql")
+_increase_dodge = Array[float]([1.0, 2.0, 3.0, 4.0, 6.0])
+_increase_attack_damage = Array[float]([0.1, 0.2, 0.3, 0.4, 0.5])
+metadata/_custom_type_script = "uid://uiyqfsgg1lfo"
+
+[resource]
+script = ExtResource("1_5mypg")
+name = "Fight Back"
+picture = ExtResource("1_b144d")
+family = 1
+player_upgrade = SubResource("Resource_ov13x")
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

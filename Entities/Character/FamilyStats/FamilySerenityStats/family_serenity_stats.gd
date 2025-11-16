@@ -3,12 +3,41 @@ extends FamilyStats
 
 #region Common Cards
 
+# [HOLY TOUCH]
 var holy_touch_activated: bool # True if the player has at least one of this card
 var holy_touch_period: float # tick rate (/s)
 var holy_touch_amount: float # Amount of heal done to an ally every periodic_heal_period
 
+# [GRACEFUL STEP]
+var graceful_step_activated: bool # True if the player has at least one of this card 
+var graceful_step_increase_dodge: float #augmente les chances de dodges
+var graceful_step_regen: float #amount regen applied
+
+# [LIFE SPRING]
+var life_spring_activated: bool  #True if the player has at least one of this card
+var life_spring_regen_amount: float # Amount of regen applied to an ally every periodic_heal_period
+var life_spring_period: float # tick rate (/s)
+
+# [MIRACLE LIGHT]
+var miracle_light_activated: bool
+var miracle_light_crit_chance: float # %chance to crit
+
+# [PURIFYING FLAME]
+var purifying_flame_activated: bool # True if the player has at least one of this card
+var purifying_flame_period: float # tick rate (/s)
+var purifying_flame_cleanse_amount: float # Amount
+
 #endregion
 
+
+#region Rare Card
+#endregion
+
+#region Epic Card
+#endregion
+
+#region Legendary Card
+#endregion
 
 # CACA a supprimer 
 # Current pacify stacks on the hero (reduce auto attack damage)

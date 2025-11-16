@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://5vemx42gusi2"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_3yipl"]
+[ext_resource type="Texture2D" uid="uid://cjdiw7juhgccn" path="res://Card/Descriptions/Cards/Attack/Rare/SurgicalKnife/attack_surgical_knife.png" id="1_bie7h"]
+[ext_resource type="Script" uid="uid://briloju0g5b45" path="res://Card/Descriptions/Cards/Attack/Rare/SurgicalKnife/attack_curative_knife.gd" id="2_frngn"]
+
+[sub_resource type="Resource" id="Resource_3280w"]
+script = ExtResource("2_frngn")
+_chance = Array[float]([100.0, 20.0, 20.0, 20.0, 20.0])
+_cleanse_amount = Array[float]([1.0, 2.0, 3.0, 4.0, 5.0])
+metadata/_custom_type_script = "uid://briloju0g5b45"
+
+[resource]
+script = ExtResource("1_3yipl")
+name = "Curative Knife"
+picture = ExtResource("1_bie7h")
+family = 1
+rarity = 1
+player_upgrade = SubResource("Resource_3280w")
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"
