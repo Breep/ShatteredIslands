@@ -17,51 +17,54 @@ var rusty_dagger_activated: bool # true if activated
 var rusty_dagger_chance: float # % chance to proc
 var rusty_dagger_poison_stacks: float # amount stacks
 
+# [DIAMOND SWORD]
+var diamond_sword_activated: bool # True if this skill is activated
+var diamond_sword_attack: int # Value of increased attack
+
+# [TWIN BLADE]
+var twin_blade_activated: bool # True if this skill is activated
+var twin_blade_speed: int # Value of increased speed (in %)
+
+# [TITAN AXE]
+var titan_axe_activated: bool # True if this skill is activated
+var titan_axe_attack_number: int # Number of attack needed to proc the skil
+var titan_axe_damage_percent: float # % of target max hp damage buff
+
+
+# [HEALING CROSSBOW]
+var healing_crossbow_activated: bool # True if this skill is activated
+var healing_crossbow_percent: float # Self heal amount when auto attacking (% of damage done)
+var healing_crossbow_chance: float # % of chance to proc healing attack
+var double_edge_sword_activated: bool # True if this skill is activated
 #endregion
 
 #region Rare Card
+
+# [SURGICAL KNIFE]
+var surgical_knife_activated: bool # True if this skill is activated
+var surgical_knife_chance: float # Chance to proc the curative knife
+var surgical_knife_stacks: int # Number of negative stacks removed
 #endregion
 
 #region Epic Card
+
+# [GATLING GUN]
+var gatling_gun_activated: bool # True if this skill is activated
+var gatling_gun_min: float # Min value of the attack speed increased overtime
+var gatling_gun_max: float # Max value of the attack speed increased overtime
+var gatling_gun_duration: float # Time needed to go from min to max attack speed increase
+
+# [STORM HAMMER]
+var storm_hammer_activated: bool # True if this skill is activated
+var storm_hammer_chance: int # % of chance for an auto-attack to bounce
+
 #endregion
 
 #region Legendary Card
 #endregion
 
-@export_group("Diamond Sword")
-@export var diamond_sword_activated: bool # True if this skill is activated
-@export var diamond_sword_attack: int # Value of increased attack
 
-@export_group("Twin Blade")
-@export var twin_blade_activated: bool # True if this skill is activated
-@export var twin_blade_speed: int # Value of increased speed (in %)
-
-@export_group("Curative knife")
-@export var curative_knife_activated: bool # True if this skill is activated
-@export var curative_knife_chance: float # Chance to proc the curative knife
-@export var curative_knife_stacks: int # Number of negative stacks removed
-
-@export_group("Storm Hammer")
-@export var storm_hammer_activated: bool # True if this skill is activated
-@export var storm_hammer_chance: int # % of chance for an auto-attack to bounce
-
-@export_group("Gatling Gun")
-@export var gatling_gun_activated: bool # True if this skill is activated
-@export var gatling_gun_min: float # Min value of the attack speed increased overtime
-@export var gatling_gun_max: float # Max value of the attack speed increased overtime
-@export var gatling_gun_duration: float # Time needed to go from min to max attack speed increase
-
-@export_group("Titan Axe")
-@export var titan_axe_activated: bool # True if this skill is activated
-@export var titan_axe_attack_number: int # Number of attack needed to proc the skil
-@export var titan_axe_damage_percent: float # % of target max hp damage buff
-
-@export_group("Healing Crossbow")
-@export var healing_crossbow_activated: bool # True if this skill is activated
-@export var healing_crossbow_percent: float # Self heal amount when auto attacking (% of damage done)
-@export var healing_crossbow_chance: float # % of chance to proc healing attack
-
-var double_edge_sword_activated: bool # True if this skill is activated
+# [DOUBLE EDGE SWORD]
 var double_edge_sword_damage_percent: int # % of damage increased
 var double_edge_sword_attacks_number: int # Number oof attacks boosted
 

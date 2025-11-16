@@ -86,7 +86,7 @@ func notify_damage_done(damage: int) -> void:
 # ============================== Private functions ==============================
 
 func _create_optional_timers() -> void:
-	# [Gatling Gun]
+	# [GATLING GUN]
 	if _attack_stats.gatling_gun_activated:
 		_optional_timers.append(Utils.create_perpetual_timer(self, GATLING_TIME, _on_gatling_gun_timer_timeout, true))
 		_on_gatling_gun_timer_start = Time.get_ticks_msec()
@@ -147,6 +147,26 @@ func _add_stat_modifiers() -> void:
 		mod.id = "Fight Back"
 		_owner.stats_manager.register_modifier(mod)
 		
+	# [DIAMOND SWORD]
+	if _attack_stats.diamond_sword_activated:
+		var stat_modifier := StatModifier.new()
+		stat_modifier.id = "Diamond Sword"
+		stat_modifier.stat_type = EntityStats.StatType.AD
+		stat_modifier.calc_type = StatModifier.CalcType.ADD
+		stat_modifier.value = _attack_stats.diamond_sword_attack
+		stat_modifier.tags = [StatModifier.TagType.CARD]
+		_owner.stats_manager.register_modifier(stat_modifier)
+	
+	# [TWIN BLADE]
+	if _attack_stats.twin_blade_activated:
+		var stat_modifier := StatModifier.new()
+		stat_modifier.id = "Twin Blade"
+		stat_modifier.stat_type = EntityStats.StatType.AA_SPEED
+		stat_modifier.calc_type = StatModifier.CalcType.MULT
+		stat_modifier.value = _attack_stats.twin_blade_speed / 100.0
+		stat_modifier.tags = [StatModifier.TagType.CARD]
+		_owner.stats_manager.register_modifier(stat_modifier)
+		
 		
 func _clear_stat_modifiers() -> void:
 	
@@ -156,6 +176,26 @@ func _clear_stat_modifiers() -> void:
 		mod.stat_type = EntityStats.StatType.DODGE
 		mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
 		mod.id = "Fight Back"
+		_owner.stats_manager.unregister_modifier(mod)
+	
+	# [FIGHT BACK AD] (AD Cumulatif)
+	var ad_mod := StatModifier.new()
+	ad_mod.id = "Fight Back AD"
+	ad_mod.stat_type = EntityStats.StatType.AD
+	_owner.stats_manager.unregister_modifier(ad_mod)
+		
+	# [DIAMOND SWORD]
+	if _attack_stats.diamond_sword_activated:
+		var mod := StatModifier.new()
+		mod.id = "Diamond Sword"
+		mod.stat_type = EntityStats.StatType.AD
+		_owner.stats_manager.unregister_modifier(mod)
+
+	# [TWIN BLADE]
+	if _attack_stats.twin_blade_activated:
+		var mod := StatModifier.new()
+		mod.id = "Twin Blade"
+		mod.stat_type = EntityStats.StatType.AA_SPEED
 		_owner.stats_manager.unregister_modifier(mod)
 		
 #endregion
@@ -188,6 +228,7 @@ func _remove_action_modifiers() -> void:
 # ============================== Callbacks functions ==============================
 
 func _on_gatling_gun_timer_timeout() -> void:
+	# [GATLING GUN]
 	var time_elapsed: float = (Time.get_ticks_msec() - _on_gatling_gun_timer_start) / 1000.0
 	var attack_speed_boost: float = remap(time_elapsed, 0, _attack_stats.gatling_gun_duration, \
 			_attack_stats.gatling_gun_min, _attack_stats.gatling_gun_max)
@@ -209,7 +250,7 @@ func _on_dodge_fight_back(cb_vars: Dictionary) -> void:
 		return
 	_dodge_number += 1
 	var stat_modifier := StatModifier.new()
-	stat_modifier.id = "Fight Back"
+	stat_modifier.id = "Fight Back AD"
 	stat_modifier.stat_type = EntityStats.StatType.AD
 	stat_modifier.calc_type = StatModifier.CalcType.ADD
 	stat_modifier.value = _dodge_number * _attack_stats.fight_back_increase_attack_damage

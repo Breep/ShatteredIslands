@@ -7,8 +7,8 @@
 [ext_resource type="Resource" uid="uid://dq5i43mqjqg38" path="res://Card/Descriptions/Cards/Attack/StormHammer/attack_storm_hammer.tres" id="4_xkvlw"]
 [ext_resource type="Resource" uid="uid://3vjmnbpyyjyk" path="res://Card/Descriptions/Cards/Attack/Epic/GatlingGun/attack_gatling_gun.tres" id="5_cg3dx"]
 [ext_resource type="Resource" uid="uid://c526xnq31ipht" path="res://Card/Descriptions/Cards/Attack/DoubleEdgeSword/attack_double_edge_sword.tres" id="6_gthbg"]
-[ext_resource type="Resource" uid="uid://bhogu6m1synt8" path="res://Card/Descriptions/Cards/Attack/DiamondSword/attack_diamond_sword.tres" id="7_eobhs"]
-[ext_resource type="Resource" uid="uid://5vemx42gusi2" path="res://Card/Descriptions/Cards/Attack/CurativeKnife/attack_curative_knife.tres" id="8_eyhuj"]
+[ext_resource type="Resource" uid="uid://bhogu6m1synt8" path="res://Card/Descriptions/Cards/Attack/Common/DiamondSword/attack_diamond_sword.tres" id="7_eobhs"]
+[ext_resource type="Resource" uid="uid://5vemx42gusi2" path="res://Card/Descriptions/Cards/Attack/Rare/SurgicalKnife/attack_curative_knife.tres" id="8_eyhuj"]
 [ext_resource type="Texture2D" uid="uid://b78s362n5bu6" path="res://Card/Descriptions/Families/Icons/turret.png" id="9_m74lt"]
 [ext_resource type="Resource" uid="uid://cj6hexnvedxmb" path="res://Card/Descriptions/Cards/Attack/Common/FightBack/attack_fight_back.tres" id="9_ypjtd"]
 
