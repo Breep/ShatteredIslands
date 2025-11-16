@@ -92,13 +92,13 @@ func take_cleanse(value: float, is_critical: bool, source: Entity = null) -> flo
 		if candidates.is_empty():
 			break
 		var stack_chosen: Utils.StackType = candidates[randi() % candidates.size()]
-		var to_remove: int = 0
+		var to_remove: int =  min(CLEANSE_PACK_SIZE, remaining)
 		match stack_chosen:
 			Utils.StackType.IGNITE:
-				to_remove = min(CLEANSE_PACK_SIZE, _owner.stats.ignite_stacks)
+				to_remove = min(to_remove, _owner.stats.ignite_stacks)
 				_owner.stats.ignite_stacks -= to_remove
 			Utils.StackType.POISON:
-				to_remove = min(CLEANSE_PACK_SIZE, _owner.stats.poison_stacks)
+				to_remove = min(to_remove, _owner.stats.poison_stacks)
 				_owner.stats.poison_stacks -= to_remove
 		remaining -= to_remove
 		removed += to_remove
@@ -122,13 +122,13 @@ func take_dispell(value: float, is_critical: bool, source: Entity = null) -> flo
 		if candidates.is_empty():
 			break
 		var stack_chosen: Utils.StackType = candidates[randi() % candidates.size()]
-		var to_remove: int = 0
+		var to_remove: int = min(CLEANSE_PACK_SIZE, remaining)
 		match stack_chosen:
 			Utils.StackType.ARMOR:
-				to_remove = min(DISPELL_PACK_SIZE, _owner.stats.armor_stacks)
+				to_remove = min(to_remove, _owner.stats.armor_stacks)
 				_owner.stats.armor_stacks -= to_remove
 			Utils.StackType.REGEN:
-				to_remove = min(DISPELL_PACK_SIZE, _owner.stats.regen_stacks)
+				to_remove = min(to_remove, _owner.stats.regen_stacks)
 				_owner.stats.regen_stacks -= to_remove
 		remaining -= to_remove
 		removed += to_remove
