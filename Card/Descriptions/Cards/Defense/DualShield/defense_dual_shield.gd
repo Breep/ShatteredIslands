@@ -17,4 +17,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]Double" + ARMOR + " gained while above " + str(_health_threshold) + "% hp[/center]"
+	return "[center]Double [[ARMOR_STACK]] gained while above " + str(_health_threshold) + "% hp[/center]"

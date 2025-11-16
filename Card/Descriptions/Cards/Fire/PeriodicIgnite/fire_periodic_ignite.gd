@@ -19,4 +19,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]Inflict " + str(_ignite_stacks[cardlvl - 1]) + CharacterUpgrade.IGNITE + " stacks, every " + str(_period) + "[/center]"
+	return "Inflict " + str(_ignite_stacks[cardlvl - 1]) + " [[IGNITE_STACK]], every " + str(_period)

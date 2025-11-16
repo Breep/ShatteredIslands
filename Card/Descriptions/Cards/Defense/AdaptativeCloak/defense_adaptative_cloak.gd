@@ -17,4 +17,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]Convert " + str(_attack_percents[cardlvl - 1]) + "% of auto-attack damage into " + ARMOR + "[/center]"
+	return "[center]Convert " + str(_attack_percents[cardlvl - 1]) + "% of auto-attack damage into [[SHIELD]] [/center]"

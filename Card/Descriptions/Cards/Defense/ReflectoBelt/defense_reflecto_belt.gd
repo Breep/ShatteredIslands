@@ -19,4 +19,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]After losing " + str(_armor_stacks) + ARMOR + ", increase next auto-attack by " + str(_attack_increase_percent[cardlvl - 1]) + "%[/center]"
+	return "[center]After losing " + str(_armor_stacks) + "[[SHIELD]], increase next auto-attack by " + str(_attack_increase_percent[cardlvl - 1]) + "%[/center]"
