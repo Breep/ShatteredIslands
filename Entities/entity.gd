@@ -140,6 +140,12 @@ func inflict_condition_stacks(_target: Entity, _stacks_number: int, _stack_type:
 
 func summon_entity(_entity_type: EntityType, _entity_spawn_global_position: Vector3, _entity_modifier: Dictionary) -> void:
 	printerr("Entity: virtual summon_entity() called [", get_path(), "]")
+
+func cleanse(_target: Entity, _value: float) -> void:
+	printerr("Entity: virtual cleanse() called [", get_path(), "]")
+
+func dispell(_target: Entity, _value: float) -> void:
+	printerr("Entity: virtual dispell() called [", get_path(), "]")
 #endregion
 
 #region ===== Interaction [VIRTUAL]
@@ -155,6 +161,14 @@ func take_condition_stacks(_stacks_number: int, _stack_type: Utils.StackType, _i
 
 func take_heal(_heal_amount: int, _is_critical: bool, _source: Entity = null) -> void:
 	printerr("Entity: virtual take_heal() called [", get_path(), "]")
+
+func take_cleanse(_value: float, _is_critical: bool, _source: Entity = null) -> float:
+	printerr("Entity: virtual take_cleanse() called [", get_path(), "]")
+	return -1.0
+
+func take_dispell(_value: float, _is_critical: bool, _source: Entity = null) -> float:
+	printerr("Entity: virtual take_dispell() called [", get_path(), "]")
+	return -1.0
 #endregion
 
 # ============================== Private functions ==============================

@@ -77,6 +77,69 @@ func take_heal(heal_amount: int, is_critical: bool, _source: Entity = null) -> v
 	_owner.signal_heal_taken(heal_amount, is_critical)
 #endregion
 
+#region ============================== Cleanse/Dispell ==============================
+# Removes debufs
+const CLEANSE_PACK_SIZE: int = 2
+func take_cleanse(value: float, is_critical: bool, source: Entity = null) -> float:
+	var total_to_dispell: int = int(value * _get_resistance_vulnerability_multiplier(Utils.ActionType.UTILITY_CLEANSE))
+	if total_to_dispell <= 0:
+		return 0.0
+
+	var remaining: int = total_to_dispell
+	var removed: int = 0
+	while remaining > 0 and _owner.stats.get_debuf_stacks_number() > 0:
+		var candidates: Array[Utils.StackType] = []
+		if _owner.stats.ignite_stacks > 0: candidates.append(Utils.StackType.IGNITE)
+		if _owner.stats.poison_stacks > 0: candidates.append(Utils.StackType.POISON)
+		if candidates.is_empty():
+			break
+		var stack_chosen: Utils.StackType = candidates[randi() % candidates.size()]
+		var to_remove: int = 0
+		match stack_chosen:
+			Utils.StackType.IGNITE:
+				to_remove = min(CLEANSE_PACK_SIZE, _owner.stats.ignite_stacks)
+				_owner.stats.ignite_stacks -= to_remove
+			Utils.StackType.POISON:
+				to_remove = min(CLEANSE_PACK_SIZE, _owner.stats.poison_stacks)
+				_owner.stats.poison_stacks -= to_remove
+		remaining -= to_remove
+		removed += to_remove
+
+	return float(removed)
+
+# Removes bufs
+const DISPELL_PACK_SIZE: int = 2
+func take_dispell(value: float, is_critical: bool, source: Entity = null) -> float:
+	var total_to_dispell: int = int(value * _get_resistance_vulnerability_multiplier(Utils.ActionType.UTILITY_DISPELL))
+	if total_to_dispell <= 0:
+		return 0.0
+
+	var remaining: int = total_to_dispell
+	var removed: int = 0
+	print("\n\n\n")
+	while remaining > 0 and _owner.stats.get_buf_stacks_number() > 0:
+		var candidates: Array[Utils.StackType] = []
+		if _owner.stats.armor_stacks > 0: candidates.append(Utils.StackType.ARMOR)
+		if _owner.stats.regen_stacks > 0: candidates.append(Utils.StackType.REGEN)
+		if candidates.is_empty():
+			break
+		var stack_chosen: Utils.StackType = candidates[randi() % candidates.size()]
+		var to_remove: int = 0
+		match stack_chosen:
+			Utils.StackType.ARMOR:
+				print("REMOVES ", DISPELL_PACK_SIZE, "ARMOR STACK")
+				to_remove = min(DISPELL_PACK_SIZE, _owner.stats.armor_stacks)
+				_owner.stats.armor_stacks -= to_remove
+			Utils.StackType.REGEN:
+				print("   REMOVES ", DISPELL_PACK_SIZE, "REGEN STACK")
+				to_remove = min(DISPELL_PACK_SIZE, _owner.stats.regen_stacks)
+				_owner.stats.regen_stacks -= to_remove
+		remaining -= to_remove
+		removed += to_remove
+
+	return float(removed)
+#endregion
+
 #region ============================== Private functions ==============================
 func _is_dodged(action_type: Utils.ActionType) -> bool:
 	var dodge_chance: float = _owner.stats.get_stat(EntityStats.StatType.DODGE, action_type)

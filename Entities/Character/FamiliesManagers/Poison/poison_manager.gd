@@ -33,12 +33,14 @@ func stop() -> void:
 	for spell in _optional_spells:
 		spell.queue_free()
 	_poison_tick_timer.stop()
+	_clear_stack_modifiers()
 	_clear_stat_modifiers()
 	_clear_attack_modifiers()
 	_clear_optional_timers()
 
 # ============================== Private functions ==============================
 
+#region ===== ATTACK MODIFIERS =====
 func _add_stack_modifiers() -> void:
 	# [HOT POT]
 	if _poison_stats.poison_hot_pot_activated:
@@ -71,7 +73,7 @@ func _add_stack_modifiers() -> void:
 		_owner.action_modifiers_manager.register_modifier(stack_modifier)
 	
 	# [FAMILY PASSIVE]
-	if true:
+	if false:
 		var stack_modifier := ActionModifier.new()
 		stack_modifier.action_type = ActionModifier.ActionType.INFLICT_CONDITION
 		stack_modifier.id = "Poison Passive"
@@ -80,15 +82,50 @@ func _add_stack_modifiers() -> void:
 		stack_modifier.is_one_time_effect = false
 		_owner.action_modifiers_manager.register_modifier(stack_modifier)
 
-func _add_attack_modifiers() -> void:
-	if _poison_stats.poison_rusty_dagger_activated:
-		var aa_modifier := AutoAttackModifier.new()
-		aa_modifier.id = "Rusty Dagger"
-		aa_modifier.tags = [AutoAttackModifier.TagType.CARD]
-		aa_modifier.on_attack_logic_callback = _on_rusty_dagger_logic_callback
-		aa_modifier.is_one_time_effect = false
-		_owner.auto_attack_modifier_registry.register_modifier(aa_modifier)
 
+func _clear_stack_modifiers() -> void:
+	# [HOT POT]
+	if _poison_stats.poison_hot_pot_activated:
+		var stack_modifier := ActionModifier.new()
+		stack_modifier.id = "Hot Pot"
+		stack_modifier.action_type = ActionModifier.ActionType.INFLICT_CONDITION
+		stack_modifier.tags = [ActionModifier.TagType.CARD]
+		stack_modifier.after_action_logic_callback = _on_inflict_condition_hot_pot
+		stack_modifier.is_one_time_effect = false
+		_owner.action_modifiers_manager.unregister_modifier(stack_modifier)
+	
+	# [ROTTING MILK]
+	if _poison_stats.poison_rotting_milk_activated:
+		var stack_modifier := ActionModifier.new()
+		stack_modifier.id = "Rotting Milk"
+		stack_modifier.action_type = ActionModifier.ActionType.INFLICT_CONDITION
+		stack_modifier.tags = [ActionModifier.TagType.CARD]
+		stack_modifier.after_action_logic_callback = _on_inflict_condition_rotting_milk
+		stack_modifier.is_one_time_effect = false
+		_owner.action_modifiers_manager.unregister_modifier(stack_modifier)
+	
+	# [CORROSION ACTIVATED]
+	if _poison_stats.poison_corrosion_activated:
+		var stack_modifier := ActionModifier.new()
+		stack_modifier.id = "Corrosion"
+		stack_modifier.action_type = ActionModifier.ActionType.INFLICT_CONDITION
+		stack_modifier.tags = [ActionModifier.TagType.CARD]
+		stack_modifier.after_action_logic_callback = _on_inflict_condition_corrosion
+		stack_modifier.is_one_time_effect = false
+		_owner.action_modifiers_manager.unregister_modifier(stack_modifier)
+	
+	# [FAMILY PASSIVE]
+	if false:
+		var stack_modifier := ActionModifier.new()
+		stack_modifier.action_type = ActionModifier.ActionType.INFLICT_CONDITION
+		stack_modifier.id = "Poison Passive"
+		stack_modifier.tags = [ActionModifier.TagType.CARD]
+		stack_modifier.after_action_logic_callback = _on_inflict_condition_poison
+		stack_modifier.is_one_time_effect = false
+		_owner.action_modifiers_manager.unregister_modifier(stack_modifier)
+#endregion
+
+#region ===== STAT MODIFIERS =====
 func _add_stat_modifiers() -> void:
 	if _poison_stats.poison_antidote_activated:
 		var mod := StatModifier.new()
@@ -106,10 +143,22 @@ func _clear_stat_modifiers() -> void:
 		mod.action_type = Utils.ActionType.DAMAGE_POISON
 		mod.id = "Antidote"
 		_owner.stats_manager.unregister_modifier(mod)
+#endregion
+
+#region ===== AUTO ATTACK MODIFIERS =====
+func _add_attack_modifiers() -> void:
+	if _poison_stats.poison_rusty_dagger_activated:
+		var aa_modifier := AutoAttackModifier.new()
+		aa_modifier.id = "Rusty Dagger"
+		aa_modifier.tags = [AutoAttackModifier.TagType.CARD]
+		aa_modifier.on_attack_logic_callback = _on_rusty_dagger_logic_callback
+		aa_modifier.is_one_time_effect = false
+		_owner.auto_attack_modifier_registry.register_modifier(aa_modifier)
 
 func _clear_attack_modifiers() -> void:
 	if _poison_stats.poison_rusty_dagger_activated:
 		_owner.auto_attack_modifier_registry.unregister_modifier("Rusty Dagger")
+#endregion
 
 func _create_optional_timers() -> void:
 	# [POISON FLASK]
@@ -269,10 +318,7 @@ func _on_inflict_condition_corrosion(cb_vars: Dictionary) -> void:
 	var stack_type: Utils.StackType = cb_vars[ActionModifier.VarType.STACK_TYPE]
 	var target: Entity = cb_vars[ActionModifier.VarType.TARGET]
 	if stack_type != Utils.StackType.POISON: return
-	if Utils.rng.randi() % 2 == 0:
-		target.stats.armor_stacks -= _poison_stats.poison_corrosion_buff_stacks
-	else:
-		target.stats.regen_stacks -= _poison_stats.poison_corrosion_buff_stacks
+	_owner.dispell(target, _poison_stats.poison_corrosion_buff_stacks)
 
 
 func _on_inflict_condition_poison(cb_vars: Dictionary) -> void:

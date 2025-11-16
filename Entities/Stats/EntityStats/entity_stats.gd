@@ -177,7 +177,15 @@ var _weaknesses: Dictionary[Utils.ActionType, float]
 
 #region ============================== Public functions ==============================
 func get_stacks_number() -> int:
-	return _poison_stacks + _ignite_stacks + _armor_stacks
+	return _poison_stacks + _ignite_stacks + _armor_stacks + _regen_stacks
+
+
+func get_debuf_stacks_number() -> int :
+	return _poison_stacks + _ignite_stacks
+
+
+func get_buf_stacks_number() -> int:
+	return _armor_stacks + _regen_stacks
 
 
 func reset_from_hero(hero: Hero, lvl: int) -> void:
