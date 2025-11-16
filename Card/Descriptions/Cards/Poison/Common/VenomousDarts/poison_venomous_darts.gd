@@ -6,7 +6,7 @@ extends CharacterUpgrade
 @export var _darts_number: Array[int]
 
 func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
-	if cardlvl < 1 or cardlvl > COMMON_CARD_MAX_LEVEL:
+	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[Card.Rarity.COMMON]:
 		printerr("Venomous Darts: Wrong cardlvl: ", cardlvl)
 		return
 	
@@ -17,7 +17,7 @@ func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
 
 
 func get_description(cardlvl: int) -> String:
-	if cardlvl < 1 or cardlvl > COMMON_CARD_MAX_LEVEL:
+	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[Card.Rarity.COMMON]:
 		printerr("Venomous Darts: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	

@@ -17,4 +17,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]Every " + str(_armor_stacks[cardlvl - 1]) + " " + ARMOR + " lost, inflict 1 status effect to a random enemy[/center]"
+	return "[center]Every " + str(_armor_stacks[cardlvl - 1]) + " [[SHIELD]] lost, inflict 1 status effect to a random enemy[/center]"

@@ -19,6 +19,10 @@ extends Node3D
 
 @onready var _ui_fighting_area: UIFightingArea = %UIFightingArea
 
+@onready var _ui_player_stats: UIDebugEntityStats = %PlayerStats
+
+# add a way to show stats when player press tabs button (input mapped on "see_stats")
+
 func _enter_tree() -> void:
 	GameManager.init()
 	var _players_cards: Array[Array] = [
@@ -27,9 +31,10 @@ func _enter_tree() -> void:
 	
 	for i: int in _characters.size():
 		var player: Player = Player.new()
-		player.name = "Player" + str(i)
+		player.name = "Player" + str(i+1)
 		player.id = 1
 		player.character = _characters[i]
+		player.character.name = player.name
 		player.character.player = player
 		player.skill_manager = SkillManager.new()
 		player.skill_manager.init(player)
@@ -50,3 +55,20 @@ func _ready() -> void:
 	_floating_island.set_active()
 	_ui_fighting_area.update_content(_floating_island._fighting_area)
 	_ui_fighting_area.set_active()
+	_ui_player_stats.hide()
+	_ui_player_stats.connect_entity(_characters[0])
+
+
+# Add a way to show stats when player presses Tab (input mapped on "see_stats")
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.is_pressed():
+		if event.is_action_pressed("see_stats"):
+			_ui_player_stats.visible = not _ui_player_stats.visible
+		if event.is_action_pressed("scene_switch_1") and _characters.size() > 0: _ui_player_stats.connect_entity(_characters[0])
+		if event.is_action_pressed("scene_switch_2") and _characters.size() > 1: _ui_player_stats.connect_entity(_characters[1])
+		if event.is_action_pressed("scene_switch_3") and _characters.size() > 2: _ui_player_stats.connect_entity(_characters[2])
+		if event.is_action_pressed("scene_switch_4") and _characters.size() > 3: _ui_player_stats.connect_entity(_characters[3])
+		if event.is_action_pressed("scene_switch_5") and _characters.size() > 4: _ui_player_stats.connect_entity(_characters[4])
+		if event.is_action_pressed("scene_switch_6") and _characters.size() > 5: _ui_player_stats.connect_entity(_characters[5])
+		if event.is_action_pressed("scene_switch_7") and _characters.size() > 6: _ui_player_stats.connect_entity(_characters[6])
+		if event.is_action_pressed("scene_switch_8") and _characters.size() > 7: _ui_player_stats.connect_entity(_characters[7])

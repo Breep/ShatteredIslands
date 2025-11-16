@@ -19,4 +19,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]" + str(_chance_percents[cardlvl - 1]) + "% of chance to gain " + str(_armor_stacks) + ARMOR + " when being hit[/center]"
+	return "[center]" + str(_chance_percents[cardlvl - 1]) + "% of chance to gain " + str(_armor_stacks) + " [[SHIELD]] when being hit[/center]"

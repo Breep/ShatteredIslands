@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bs6iwxojgrpha"]
+
+[ext_resource type="Script" uid="uid://dm6w3ipglidev" path="res://Entities/StackManager/stack_manager.gd" id="1_7g4w3"]
+
+[node name="StackManager" type="Node"]
+script = ExtResource("1_7g4w3")
+
+[node name="PoisonTickTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[node name="IgniteTickTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[connection signal="timeout" from="PoisonTickTimer" to="." method="_on_poison_tick_timer_timeout"]
+[connection signal="timeout" from="IgniteTickTimer" to="." method="_on_ignite_tick_timer_timeout"]

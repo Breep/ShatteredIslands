@@ -57,6 +57,7 @@ var is_dead: bool:
 @export var target_module: TargetModule
 
 var action_modifiers_manager: ActionModifiersManager
+var stack_manager: StackManager
 
 # ============================== Enums ==============================
 
@@ -107,11 +108,6 @@ func get_auto_attack_spawn() -> Node3D:
 
 func connect_to_fighting_area(_fighting_area: FightingArea) -> void:
 	printerr("Entity: virtual connect_to_fighting_area() called [", get_path(), "]")
-
-# ===== Notifications [VIRTUAL]
-
-func notify_damage_done(_damage: int, _attack_type: Utils.AttackType) -> void:
-	printerr("Entity: virtual notice_damage_done() called [", get_path(), "]")
 
 #region ===== Actions [VIRTUAL]
 func direct_attack(_target: Entity, _damage: int, _damage_type: Utils.DamageType) -> void:

@@ -19,4 +19,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]Gain " + ARMOR + " equal to " + str(_max_health_percents[cardlvl - 1]) + "% of self max health every " + str(_period) + "s[/center]"
+	return "[center]Gain [[SHIELD]] equal to " + str(_max_health_percents[cardlvl - 1]) + "% of self max health every " + str(_period) + "s[/center]"

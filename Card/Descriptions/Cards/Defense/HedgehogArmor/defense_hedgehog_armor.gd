@@ -19,4 +19,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]Every " + str(_period) + "s, convert " + str(_lost_armor_percentages[cardlvl - 1]) + "% of " + ARMOR + " lost[/center]"
+	return "[center]Every " + str(_period) + "s, convert " + str(_lost_armor_percentages[cardlvl - 1]) + "% of [[SHIELD]] lost[/center]"

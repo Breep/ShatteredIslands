@@ -4,7 +4,7 @@ extends CharacterUpgrade
 @export var _buff_stacks: Array[int]
 
 func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
-	if cardlvl < 1 or cardlvl > RARE_CARD_MAX_LEVEL:
+	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[Card.Rarity.RARE]:
 		printerr("Corrosion: Wrong cardlvl: ", cardlvl)
 		return
 	
@@ -13,7 +13,7 @@ func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
 
 
 func get_description(cardlvl: int) -> String:
-	if cardlvl < 1 or cardlvl > RARE_CARD_MAX_LEVEL:
+	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[Card.Rarity.RARE]:
 		printerr("Corrosion: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	

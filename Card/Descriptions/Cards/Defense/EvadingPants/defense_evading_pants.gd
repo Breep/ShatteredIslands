@@ -17,4 +17,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]Gain " + str(_armor_stacks[cardlvl - 1]) + " " + ARMOR + " each dodge[/center]"
+	return "[center]Gain " + str(_armor_stacks[cardlvl - 1]) + " [[SHIELD]] each dodge[/center]"

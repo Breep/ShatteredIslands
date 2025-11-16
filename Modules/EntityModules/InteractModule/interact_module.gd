@@ -3,10 +3,13 @@ extends Module
 
 @export var _defense_manager: DefenseManager
 
+var _dodge_number: int = 0
+
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
 	if _defense_manager == null: printerr("InteractModule: Not linked to a DefenseManager [", get_path(), "]")
+	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 
 # ============================== Public function ==============================
 
@@ -16,7 +19,6 @@ func take_damage(damage: int, damage_type: Utils.DamageType, is_critical: bool, 
 	var damage_before_armor: int = 0
 	if multiplayer.is_server():
 		if _is_dodged(Utils.damage_to_action(damage_type)):
-			print("DAMAGE DODGED")
 			return 0
 		damage = int(float(damage) * _get_resistance_vulnerability_multiplier(Utils.damage_to_action(damage_type)))
 		
@@ -28,8 +30,6 @@ func take_damage(damage: int, damage_type: Utils.DamageType, is_critical: bool, 
 	_owner.stats.health -= damage
 	if damage > 0 or (damage_before_armor == 0 and damage == 0):
 		_owner.signal_damage_taken(damage, damage_type, is_critical, false)
-	if source != null and attack_type != Utils.AttackType.UNDEF:
-		source.notify_damage_done(damage, attack_type)
 	return damage
 
 
@@ -51,7 +51,6 @@ func take_damage_percent(damage_percent: float, percent_modifier: Utils.PercentM
 func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, is_critical: bool, _source: Entity = null) -> void:
 	if _owner.stats.health <= 0 or _owner.is_dead: return
 	if _is_dodged(Utils.stack_to_action(stack_type)):
-		print("CONDITION STACK DODGED")
 		return
 	stacks_number = int(float(stacks_number) * _get_resistance_vulnerability_multiplier(Utils.stack_to_action(stack_type)))
 	_owner.signal_stack_taken(stack_type, stacks_number, is_critical)
@@ -70,7 +69,6 @@ func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, is_c
 func take_heal(heal_amount: int, is_critical: bool, _source: Entity = null) -> void:
 	if _owner.stats.health <= 0 or _owner.is_dead: return
 	if _is_dodged(Utils.ActionType.UTILITY_HEAL):
-		print("HEAL DODGED")
 		return
 	heal_amount = int(float(heal_amount) * _get_resistance_vulnerability_multiplier(Utils.ActionType.UTILITY_HEAL))
 	_owner.stats.health += heal_amount
@@ -94,13 +92,13 @@ func take_cleanse(value: float, is_critical: bool, source: Entity = null) -> flo
 		if candidates.is_empty():
 			break
 		var stack_chosen: Utils.StackType = candidates[randi() % candidates.size()]
-		var to_remove: int = 0
+		var to_remove: int =  min(CLEANSE_PACK_SIZE, remaining)
 		match stack_chosen:
 			Utils.StackType.IGNITE:
-				to_remove = min(CLEANSE_PACK_SIZE, _owner.stats.ignite_stacks)
+				to_remove = min(to_remove, _owner.stats.ignite_stacks)
 				_owner.stats.ignite_stacks -= to_remove
 			Utils.StackType.POISON:
-				to_remove = min(CLEANSE_PACK_SIZE, _owner.stats.poison_stacks)
+				to_remove = min(to_remove, _owner.stats.poison_stacks)
 				_owner.stats.poison_stacks -= to_remove
 		remaining -= to_remove
 		removed += to_remove
@@ -124,15 +122,13 @@ func take_dispell(value: float, is_critical: bool, source: Entity = null) -> flo
 		if candidates.is_empty():
 			break
 		var stack_chosen: Utils.StackType = candidates[randi() % candidates.size()]
-		var to_remove: int = 0
+		var to_remove: int = min(CLEANSE_PACK_SIZE, remaining)
 		match stack_chosen:
 			Utils.StackType.ARMOR:
-				print("REMOVES ", DISPELL_PACK_SIZE, "ARMOR STACK")
-				to_remove = min(DISPELL_PACK_SIZE, _owner.stats.armor_stacks)
+				to_remove = min(to_remove, _owner.stats.armor_stacks)
 				_owner.stats.armor_stacks -= to_remove
 			Utils.StackType.REGEN:
-				print("   REMOVES ", DISPELL_PACK_SIZE, "REGEN STACK")
-				to_remove = min(DISPELL_PACK_SIZE, _owner.stats.regen_stacks)
+				to_remove = min(to_remove, _owner.stats.regen_stacks)
 				_owner.stats.regen_stacks -= to_remove
 		remaining -= to_remove
 		removed += to_remove
@@ -144,10 +140,12 @@ func take_dispell(value: float, is_critical: bool, source: Entity = null) -> flo
 func _is_dodged(action_type: Utils.ActionType) -> bool:
 	var dodge_chance: float = _owner.stats.get_stat(EntityStats.StatType.DODGE, action_type)
 	if Utils.is_randomize_modifier_active(dodge_chance):
-		if _owner.action_modifiers_manager != null:
-			for dodge_modifier: ActionModifier in _owner.action_modifiers_manager.consume_all_modifiers(ActionModifier.ActionType.DODGE):
-				if dodge_modifier.after_action_logic_callback.is_valid():
-					dodge_modifier.after_action_logic_callback.call({})
+		_dodge_number += 1
+		for dodge_modifier: ActionModifier in _owner.action_modifiers_manager.consume_all_modifiers(ActionModifier.ActionType.DODGE):
+			if dodge_modifier.after_action_logic_callback.is_valid():
+				dodge_modifier.after_action_logic_callback.call({
+					ActionModifier.VarType.DODGE_NUMBER: _dodge_number
+				})
 		return true
 	return false
 
@@ -156,5 +154,11 @@ func _get_resistance_vulnerability_multiplier(action_type: Utils.ActionType) -> 
 	var res: float = _owner.stats.get_stat(EntityStats.StatType.RESISTANCE, action_type)
 	var vuln: float = _owner.stats.get_stat(EntityStats.StatType.VULNERABILITY, action_type)
 	return (100 + vuln) / (100 + res)
+#endregion
 
+
+#region ============================== Callbacks ==============================
+func _on_game_manager_game_state_changed(game_state: Game.GameState) -> void:
+	match game_state:
+		Game.GameState.FIGHTING_POSITIONING: _dodge_number = 0
 #endregion

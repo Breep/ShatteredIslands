@@ -21,5 +21,5 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]Every " + str(_magic_damage) + " " + MAGICAL_DAMAGE + "blocked, increase magic resist by " + str(_percents_inc[cardlvl - 1]) \
+	return "[center]Every " + str(_magic_damage) + " [[MAGICAL_DAMAGE]] blocked, increase magic resist by " + str(_percents_inc[cardlvl - 1]) \
 			+ "% up to " + str(_percents_max[cardlvl - 1]) + "%[/center]"
