@@ -102,6 +102,15 @@ func _add_attack_modifiers() -> void:
 		aa_modifier.on_attack_logic_callback = _on_auto_attack_surgical_knife
 		aa_modifier.is_one_time_effect = false
 		_owner.auto_attack_modifier_registry.register_modifier(aa_modifier)
+		
+	# [HEALING CROSSBOW]
+	if _attack_stats.healing_crossbow_activated:
+		var aa_modifier := AutoAttackModifier.new()
+		aa_modifier.id = "Healing Crossbow"
+		aa_modifier.tags = [AutoAttackModifier.TagType.CARD]
+		aa_modifier.on_attack_logic_callback = _on_auto_attack_healing_crossbow
+		aa_modifier.is_one_time_effect = false
+		_owner.auto_attack_modifier_registry.register_modifier(aa_modifier)
 
 func _clear_attack_modifiers() -> void:
 	# [RUSTY DAGGER]
@@ -115,6 +124,10 @@ func _clear_attack_modifiers() -> void:
 	# [SURGICAL KNIFE]
 	if _attack_stats.surgical_knife_activated:
 		_owner.auto_attack_modifier_registry.unregister_modifier("Surgical Knife")
+		
+	# [HEALING CROSSBOW]
+	if _attack_stats.healing_crossbow_activated:
+		_owner.auto_attack_modifier_registry.unregister_modifier("Healing Crossbow")
 		
 #endregion
 
@@ -298,3 +311,14 @@ func _on_auto_attack_surgical_knife(cb_vars: Dictionary) -> void:
 		return 
 	var amount_to_cleanse: float = _attack_stats.surgical_knife_cleanse_amount
 	_owner.cleanse(_owner, amount_to_cleanse)
+	
+func _on_auto_attack_healing_crossbow(cb_vars: Dictionary) -> void:
+	# [HEALING CROSSBOW]
+	var chance: float = _attack_stats.healing_crossbow_chance
+	if not Utils.is_randomize_modifier_active(chance):
+		return 
+	var heal_amount: int = _attack_stats.healing_crossbow_heal_amount
+	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
+	if target == null:
+		return
+	_owner.heal(target, heal_amount)

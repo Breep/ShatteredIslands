@@ -1,22 +1,21 @@
-class_name AttackHealingCrossbow
+class_name HealingCrossbow
 extends CharacterUpgrade
 
-@export var _chance: float # % of chance to proc the heal
-@export var _percent_heal: Array[float] # % of damage converted as heal
+@export var _chance: Array[float] 
+@export var _heal_amount: Array[float]
 
 func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
-	if cardlvl < 1 or cardlvl > 5:
-		printerr("Wrong cardlvl: ", cardlvl)
+	if cardlvl < 1 or cardlvl > COMMON_CARD_MAX_LEVEL:
+		printerr("Healing Crossbow: Wrong cardlvl: ", cardlvl)
 		return
 	
 	stats.auto_attack.healing_crossbow_activated = true
-	stats.auto_attack.healing_crossbow_chance = _chance
-	stats.auto_attack.healing_crossbow_percent = _percent_heal[cardlvl -1]
-
+	stats.auto_attack.healing_crossbow_chance = _chance[cardlvl - 1]
+	stats.auto_attack.healing_crossbow_heal_amount = _heal_amount[cardlvl - 1]
 
 func get_description(cardlvl: int) -> String:
-	if cardlvl < 1 or cardlvl > 5:
-		printerr("Wrong cardlvl: ", cardlvl)
+	if cardlvl < 1 or cardlvl > COMMON_CARD_MAX_LEVEL:
+		printerr("Healing Crossbow: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]" + str(_chance) + "% chance to convert " + str(_percent_heal[cardlvl - 1]) + "% auto-attack damage as self heal.[/center]"
+	return str(_chance[cardlvl - 1]) + "% chance to heal for " + str(_heal_amount[cardlvl - 1]) + " on auto-attack."

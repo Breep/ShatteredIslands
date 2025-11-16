@@ -32,9 +32,11 @@ var titan_axe_damage_percent: float # % of target max hp damage buff
 
 
 # [HEALING CROSSBOW]
-var healing_crossbow_activated: bool # True if this skill is activated
-var healing_crossbow_percent: float # Self heal amount when auto attacking (% of damage done)
-var healing_crossbow_chance: float # % of chance to proc healing attack
+var healing_crossbow_activated: bool
+var healing_crossbow_chance: float
+var healing_crossbow_heal_amount: float
+
+
 var double_edge_sword_activated: bool # True if this skill is activated
 #endregion
 
