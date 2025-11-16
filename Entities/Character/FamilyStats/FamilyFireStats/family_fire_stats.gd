@@ -1,11 +1,8 @@
 class_name FamilyFireStats
 extends FamilyStats
 
-#region Epic Cards
 
-# [NUKE]
-var nuke_activated: bool # True if the player has at least one of this card
-var nuke_ignite: float # ignite stack inflicted
+#region Common Card
 
 # [DARK FOREST]
 var dark_forest_activated: bool
@@ -14,6 +11,20 @@ var dark_forest_ignite_stacks: float
 
 #endregion
 
+#region Rare Card
+#endregion
+
+#region Epic Card
+
+# [NUKE]
+var nuke_activated: bool # True if the player has at least one of this card
+var nuke_ignite: float # ignite stack inflicted
+
+
+#endregion
+
+#region Legendary Card
+#endregion
 @export_group("Firebolt")
 @export var firebolt_activated: bool # True if the player has at least one of this card
 @export var firebolt_damage: float # Damage of the firebolt (in % of enemy current hp)

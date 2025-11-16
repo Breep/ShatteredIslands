@@ -30,6 +30,15 @@ var purifying_flame_cleanse_amount: float # Amount
 #endregion
 
 
+#region Rare Card
+#endregion
+
+#region Epic Card
+#endregion
+
+#region Legendary Card
+#endregion
+
 # CACA a supprimer 
 # Current pacify stacks on the hero (reduce auto attack damage)
 # Decreases by attacking: 1 auto attack = 1 pacify stack consumed

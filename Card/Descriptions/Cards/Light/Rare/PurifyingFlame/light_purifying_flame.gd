@@ -1,4 +1,4 @@
-class_name PurifyingFlame
+class_name LightPurifyingFlame
 extends CharacterUpgrade
 
 @export var _cleanse_amount: Array[float]

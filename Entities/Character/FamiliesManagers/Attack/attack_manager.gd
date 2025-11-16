@@ -41,10 +41,12 @@ func start() -> void:
 		timer.start()
 	_add_stat_modifiers()
 	_add_action_modifiers()
+	_add_attack_modifiers()
 	_dodge_number = 0
 
 
 func stop() -> void:
+	_clear_attack_modifiers()
 	_remove_action_modifiers()
 	_clear_stat_modifiers()
 	for timer in _optional_timers:
@@ -100,6 +102,39 @@ func _remove_random_debuff_stack(stack_number: int) -> void:
 		Utils.StackType.POISON: _owner.stats.poison_stacks -= stack_number
 		Utils.StackType.IGNITE: _owner.stats.ignite_stacks -= stack_number
 
+#region aa modifier
+
+func _add_attack_modifiers() -> void:
+	# [RUSTY DAGGER]
+	if _attack_stats.rusty_dagger_activated:
+		var aa_modifier := AutoAttackModifier.new()
+		aa_modifier.id = "Rusty Dagger"
+		aa_modifier.tags = [AutoAttackModifier.TagType.CARD]
+		aa_modifier.on_attack_logic_callback = _on_auto_attack_rusty_dagger
+		aa_modifier.is_one_time_effect = false
+		_owner.auto_attack_modifier_registry.register_modifier(aa_modifier)
+		
+	# [SCORCHING BLADE]
+	if _attack_stats.scorching_blade_activated:
+		var aa_modifier := AutoAttackModifier.new()
+		aa_modifier.id = "Scorching Blade"
+		aa_modifier.tags = [AutoAttackModifier.TagType.CARD]
+		aa_modifier.on_hit_logic_callback = _on_hit_scorching_blade
+		aa_modifier.is_one_time_effect = false
+		_owner.auto_attack_modifier_registry.register_modifier(aa_modifier)
+
+func _clear_attack_modifiers() -> void:
+	# [RUSTY DAGGER]
+	if _attack_stats.rusty_dagger_activated:
+		_owner.auto_attack_modifier_registry.unregister_modifier("Rusty Dagger")
+		
+	# [SCORCHING BLADE]
+	if _attack_stats.scorching_blade_activated:
+		_owner.auto_attack_modifier_registry.unregister_modifier("Scorching Blade")
+		
+#endregion
+
+#region stat modifier
 func _add_stat_modifiers() -> void:
 	
 	# [FIGHT BACK]
@@ -123,6 +158,10 @@ func _clear_stat_modifiers() -> void:
 		mod.id = "Fight Back"
 		_owner.stats_manager.unregister_modifier(mod)
 		
+#endregion
+
+#region action modifier
+
 func _add_action_modifiers() -> void:
 
 	# [FIGHT BACK]
@@ -134,14 +173,6 @@ func _add_action_modifiers() -> void:
 		action_modifier.after_action_logic_callback = _on_dodge_fight_back
 		_owner.action_modifiers_manager.register_modifier(action_modifier)
 		
-	# [SCORCHING BLADE]
-	if _attack_stats.scorching_blade_activated:
-		var action_modifier := ActionModifier.new()
-		action_modifier.action_type = ActionModifier.ActionType.DIRECT_ATTACK
-		action_modifier.id = "Scorching Blade"
-		action_modifier.is_one_time_effect = false
-		action_modifier.after_action_logic_callback = _on_auto_attack_scorching_blade
-		_owner.action_modifiers_manager.register_modifier(action_modifier)
 
 func _remove_action_modifiers() -> void:
 	
@@ -153,14 +184,7 @@ func _remove_action_modifiers() -> void:
 		action_modifier.after_action_logic_callback = _on_dodge_fight_back
 		_owner.action_modifiers_manager.unregister_modifier(action_modifier)
 		
-	# [SCORCHING BLADE]
-	if _attack_stats.scorching_blade_activated:
-		var action_modifier := ActionModifier.new()
-		action_modifier.action_type = ActionModifier.ActionType.DIRECT_ATTACK
-		action_modifier.id = "Scorching Blade"
-		action_modifier.after_action_logic_callback = _on_auto_attack_scorching_blade
-		_owner.action_modifiers_manager.unregister_modifier(action_modifier)
-
+#endregion
 # ============================== Callbacks functions ==============================
 
 func _on_gatling_gun_timer_timeout() -> void:
@@ -206,6 +230,38 @@ func _on_auto_attack_scorching_blade(cb_vars: Dictionary) -> void:
 		printerr("Scorching Blade: cb_vars n'a pas de DAMAGE")
 		return
 	var damage_dealt: int = cb_vars[ActionModifier.VarType.PHYSICAL_DAMAGE]
+	var percent: float = _attack_stats.scorching_blade_damage_percent
+	var ignite_stacks: float = (damage_dealt as float) * (percent / 100.0)
+
+	if ignite_stacks > 0:
+		_owner.inflict_condition_stacks(target, ignite_stacks, Utils.StackType.IGNITE)
+
+func _on_auto_attack_rusty_dagger(cb_vars: Dictionary) -> void:
+	
+	# [RUSTY DAGGER]
+	if not cb_vars.has(AutoAttackModifier.VarType.PROJECTILE_STATS): 
+		printerr("Rusty Dagger: cb_vars n'a pas de PROJECTILE_STATS")
+		return
+	var proj_stats: ProjectileStats = cb_vars[AutoAttackModifier.VarType.PROJECTILE_STATS]
+	var chance: float = _attack_stats.rusty_dagger_chance
+	if Utils.is_randomize_modifier_active(chance):
+		proj_stats.poison_stacks += _attack_stats.rusty_dagger_poison_stacks
+
+
+func _on_hit_scorching_blade(cb_vars: Dictionary) -> void:
+	
+	# [SCORCHING BLADE]
+	if not cb_vars.has(AutoAttackModifier.VarType.PHYSICAL_DAMAGE): 
+		printerr("Scorching Blade (on_hit): cb_vars n'a pas de PHYSICAL_DAMAGE")
+		return
+	var damage_dealt: int = cb_vars[AutoAttackModifier.VarType.PHYSICAL_DAMAGE]
+
+	if not cb_vars.has(AutoAttackModifier.VarType.TARGET): 
+		printerr("Scorching Blade (on_hit): cb_vars n'a pas de TARGET")
+		return
+	var target: Entity = cb_vars[AutoAttackModifier.VarType.TARGET]
+	if target == null or not is_instance_valid(target):
+		return
 	
 	var percent: float = _attack_stats.scorching_blade_damage_percent
 	var ignite_stacks: float = (damage_dealt as float) * (percent / 100.0)

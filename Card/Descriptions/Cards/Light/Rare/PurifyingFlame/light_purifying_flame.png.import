@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dtryu80rg4xlt"
-path="res://.godot/imported/portrait_rusty_dagger.png-4fc383a6224bd41a8b1111414cf767fd.ctex"
+uid="uid://ca627o6humh4h"
+path="res://.godot/imported/light_purifying_flame.png-2aa4179c36490e6e8118ec1b48f79d60.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Card/Descriptions/Cards/Poison/Common/RustyDagger/portrait_rusty_dagger.png"
-dest_files=["res://.godot/imported/portrait_rusty_dagger.png-4fc383a6224bd41a8b1111414cf767fd.ctex"]
+source_file="res://Card/Descriptions/Cards/Light/Rare/PurifyingFlame/light_purifying_flame.png"
+dest_files=["res://.godot/imported/light_purifying_flame.png-2aa4179c36490e6e8118ec1b48f79d60.ctex"]
 
 [params]
 

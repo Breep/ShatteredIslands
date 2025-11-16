@@ -20,33 +20,21 @@ func _ready() -> void:
 
 
 func start() -> void:
+	_create_optional_timers()
 	for timer in _optional_timers:
 		timer.start()
-		
-	# [MIRACLE LIGHT]
-	if _serenity_stats.miracle_light_activated:
-		_owner.stats_manager.critical_chance_changed.connect(_on_owner_critical_chance_changed)
-		_update_miracle_light_modifier()
-		
-	_regen_tick_timer.start()
-	_create_optional_timers()
 	_add_action_modifiers()
 	_add_stat_modifiers()
+	_regen_tick_timer.start()
 	
 
 func stop() -> void:
+	_regen_tick_timer.stop()
 	_clear_stat_modifiers()
 	_remove_action_modifiers()
-	_clear_optional_timers()
-	_regen_tick_timer.stop()
-	
-	# [MIRACLE LIGHT]
-	if _serenity_stats.miracle_light_activated:
-		if _owner.stats_manager.critical_chance_changed.is_connected(_on_owner_critical_chance_changed):
-			_owner.stats_manager.critical_chance_changed.disconnect(_on_owner_critical_chance_changed)
-			
 	for timer in _optional_timers:
 		timer.stop()
+	_clear_optional_timers()
 	
 	
 # ============================== Private functions ==============================
@@ -116,7 +104,7 @@ func _update_miracle_light_modifier() -> void:
 	# [MIRACLE LIGHT]
 	if _owner == null or not is_instance_valid(_owner):
 		return
-
+		
 	var phys_crit: float = _owner.stats.get_stat(EntityStats.StatType.CRIT_CHANCE)
 	var card_mult: float = _serenity_stats.miracle_light_crit_chance
 	var heal_crit_percent: float = phys_crit * card_mult
@@ -152,11 +140,11 @@ func _on_regen_tick_timer_timeout() -> void:
 	
 func _purifying_flame_timer_timeout() -> void:
 	# [PURIFYING FLAME]
-	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ALLY)
+	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ALLY_INCLUDING_SELF)
 	if target == null: 
 		return
 	var amount_to_cleanse: int = _serenity_stats.purifying_flame_cleanse_amount
-	_owner.dispell(target, amount_to_cleanse)
+	_owner.cleanse(target, amount_to_cleanse)
 	
 func _on_dodge_graceful_step(cb_vars: Dictionary) -> void:
 	# [GRACEFUL STEP]

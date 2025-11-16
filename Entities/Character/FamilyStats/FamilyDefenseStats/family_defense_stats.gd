@@ -1,6 +1,18 @@
 class_name FamilyDefenseStats
 extends FamilyStats
 
+#region Common Card
+#endregion
+
+#region Rare Card
+#endregion
+
+#region Epic Card
+#endregion
+
+#region Legendary Card
+#endregion
+
 @export_group("Dual Shield")
 @export var dual_shield_activated: bool # True if this skill is activated
 @export var dual_shield_health_threshold: int # % of hp minimum to trigger the dual shield effect

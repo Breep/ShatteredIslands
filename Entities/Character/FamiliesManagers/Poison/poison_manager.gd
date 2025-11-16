@@ -147,17 +147,11 @@ func _clear_stat_modifiers() -> void:
 
 #region ===== AUTO ATTACK MODIFIERS =====
 func _add_attack_modifiers() -> void:
-	if _poison_stats.poison_rusty_dagger_activated:
-		var aa_modifier := AutoAttackModifier.new()
-		aa_modifier.id = "Rusty Dagger"
-		aa_modifier.tags = [AutoAttackModifier.TagType.CARD]
-		aa_modifier.on_attack_logic_callback = _on_rusty_dagger_logic_callback
-		aa_modifier.is_one_time_effect = false
-		_owner.auto_attack_modifier_registry.register_modifier(aa_modifier)
+	return
 
 func _clear_attack_modifiers() -> void:
-	if _poison_stats.poison_rusty_dagger_activated:
-		_owner.auto_attack_modifier_registry.unregister_modifier("Rusty Dagger")
+	return
+	
 #endregion
 
 func _create_optional_timers() -> void:

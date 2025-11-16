@@ -1,7 +1,7 @@
 class_name FamilyAttackStats
 extends FamilyStats
 
-#region
+#region Common Card
 
 # [FIGHT BACK]
 var fight_back_activated: bool # True if this skill is activated
@@ -12,6 +12,20 @@ var fight_back_increase_attack_damage: float # +AD
 var scorching_blade_activated: bool # true if activated
 var scorching_blade_damage_percent: float # Le % de dégâts convertis (ex: 10.0, 15.0, ...)0)
 
+# [VENOMOUS STRIKE]
+var rusty_dagger_activated: bool # true if activated
+var rusty_dagger_chance: float # % chance to proc
+var rusty_dagger_poison_stacks: float # amount stacks
+
+#endregion
+
+#region Rare Card
+#endregion
+
+#region Epic Card
+#endregion
+
+#region Legendary Card
 #endregion
 
 @export_group("Diamond Sword")
