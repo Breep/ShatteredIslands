@@ -31,8 +31,6 @@ func take_damage(damage: int, damage_type: Utils.DamageType, is_critical: bool, 
 	_owner.stats.health -= damage
 	if damage > 0 or (damage_before_armor == 0 and damage == 0):
 		_owner.signal_damage_taken(damage, damage_type, is_critical, false)
-	if source != null and attack_type != Utils.AttackType.UNDEF:
-		source.notify_damage_done(damage, attack_type)
 	return damage
 
 

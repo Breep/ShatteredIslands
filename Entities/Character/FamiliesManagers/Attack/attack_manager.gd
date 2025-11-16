@@ -63,15 +63,6 @@ func apply_stats_modifiers() -> void:
 		stat_modifier.tags = [StatModifier.TagType.CARD]
 		_owner.stats_manager.update_modifier(stat_modifier)
 
-
-
-# TODO Use an AttackModifier
-func notify_damage_done(damage: int) -> void:
-	if _attack_stats.healing_crossbow_activated:
-		if Utils.is_randomize_modifier_active(_attack_stats.healing_crossbow_chance):
-			var heal_amount: int = (damage as float * _attack_stats.healing_crossbow_percent / 100.0) as int
-			_owner.heal(_owner, heal_amount)
-
 # ============================== Private functions ==============================
 
 func _create_optional_timers() -> void:

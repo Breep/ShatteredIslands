@@ -114,12 +114,6 @@ func on_inactive_island() -> void:
 func get_auto_attack_spawn() -> Node3D:
 	return _turret.get_projectile_spawn_point()
 
-# ===== Notifications
-
-func notify_damage_done(damage: int, attack_type: Utils.AttackType) -> void:
-	if attack_type == Utils.AttackType.AUTO_ATTACK:
-		_attack_manager.notify_damage_done(damage)
-
 #region ===== Actions =====
 func direct_attack(target: Entity, damage: int, damage_type: Utils.DamageType) -> void:
 	_action_module.direct_attack(target, damage, damage_type)
