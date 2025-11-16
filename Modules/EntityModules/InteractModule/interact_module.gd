@@ -19,7 +19,6 @@ func take_damage(damage: int, damage_type: Utils.DamageType, is_critical: bool, 
 	var damage_before_armor: int = 0
 	if multiplayer.is_server():
 		if _is_dodged(Utils.damage_to_action(damage_type)):
-			print("DAMAGE DODGED")
 			return 0
 		damage = int(float(damage) * _get_resistance_vulnerability_multiplier(Utils.damage_to_action(damage_type)))
 		
@@ -52,7 +51,6 @@ func take_damage_percent(damage_percent: float, percent_modifier: Utils.PercentM
 func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, is_critical: bool, _source: Entity = null) -> void:
 	if _owner.stats.health <= 0 or _owner.is_dead: return
 	if _is_dodged(Utils.stack_to_action(stack_type)):
-		print("CONDITION STACK DODGED")
 		return
 	stacks_number = int(float(stacks_number) * _get_resistance_vulnerability_multiplier(Utils.stack_to_action(stack_type)))
 	_owner.signal_stack_taken(stack_type, stacks_number, is_critical)
@@ -71,7 +69,6 @@ func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, is_c
 func take_heal(heal_amount: int, is_critical: bool, _source: Entity = null) -> void:
 	if _owner.stats.health <= 0 or _owner.is_dead: return
 	if _is_dodged(Utils.ActionType.UTILITY_HEAL):
-		print("HEAL DODGED")
 		return
 	heal_amount = int(float(heal_amount) * _get_resistance_vulnerability_multiplier(Utils.ActionType.UTILITY_HEAL))
 	_owner.stats.health += heal_amount
@@ -128,11 +125,9 @@ func take_dispell(value: float, is_critical: bool, source: Entity = null) -> flo
 		var to_remove: int = 0
 		match stack_chosen:
 			Utils.StackType.ARMOR:
-				print("REMOVES ", DISPELL_PACK_SIZE, "ARMOR STACK")
 				to_remove = min(DISPELL_PACK_SIZE, _owner.stats.armor_stacks)
 				_owner.stats.armor_stacks -= to_remove
 			Utils.StackType.REGEN:
-				print("   REMOVES ", DISPELL_PACK_SIZE, "REGEN STACK")
 				to_remove = min(DISPELL_PACK_SIZE, _owner.stats.regen_stacks)
 				_owner.stats.regen_stacks -= to_remove
 		remaining -= to_remove
