@@ -43,7 +43,7 @@ volumetric_fog_density = 0.0
 
 [node name="PrototypingMap" type="Node3D" node_paths=PackedStringArray("_characters", "_floating_island")]
 script = ExtResource("1_vksg0")
-_player1_cards = Array[ExtResource("2_dnu2k")]([ExtResource("3_kngc2"), ExtResource("4_e0xek"), ExtResource("6_pc3mw"), ExtResource("6_qw25r"), ExtResource("5_7wmtn")])
+_player1_cards = Array[ExtResource("2_dnu2k")]([ExtResource("3_kngc2"), ExtResource("4_e0xek"), ExtResource("6_pc3mw"), ExtResource("5_7wmtn"), ExtResource("6_qw25r")])
 _player2_cards = Array[ExtResource("2_dnu2k")]([ExtResource("4_dlg3x"), ExtResource("4_vksg0")])
 _characters = [NodePath("DarkKnight"), NodePath("Character2")]
 _floating_island = NodePath("FightingIsland")

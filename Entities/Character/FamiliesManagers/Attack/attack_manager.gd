@@ -54,28 +54,6 @@ func stop() -> void:
 	_optional_timers.clear()
 
 
-func apply_stats_modifiers() -> void:
-	if _attack_stats.diamond_sword_activated:
-		var stat_modifier := StatModifier.new()
-		stat_modifier.id = "Diamond Sword"
-		stat_modifier.stat_type = EntityStats.StatType.AD
-		stat_modifier.calc_type = StatModifier.CalcType.ADD
-		stat_modifier.value = _attack_stats.diamond_sword_attack
-		stat_modifier.tags = [StatModifier.TagType.CARD]
-		_owner.stats_manager.update_modifier(stat_modifier)
-	
-	if _attack_stats.twin_blade_activated:
-		var stat_modifier := StatModifier.new()
-		stat_modifier.id = "Twin Blade"
-		stat_modifier.stat_type = EntityStats.StatType.AA_SPEED
-		stat_modifier.calc_type = StatModifier.CalcType.MULT
-		stat_modifier.value = _attack_stats.twin_blade_speed / 100.0
-		stat_modifier.tags = [StatModifier.TagType.CARD]
-		_owner.stats_manager.update_modifier(stat_modifier)
-		
-
-
-
 # TODO Use an AttackModifier
 func notify_damage_done(damage: int) -> void:
 	if _attack_stats.healing_crossbow_activated:
@@ -85,22 +63,15 @@ func notify_damage_done(damage: int) -> void:
 
 # ============================== Private functions ==============================
 
+#region optinal timer
+
 func _create_optional_timers() -> void:
 	# [GATLING GUN]
 	if _attack_stats.gatling_gun_activated:
 		_optional_timers.append(Utils.create_perpetual_timer(self, GATLING_TIME, _on_gatling_gun_timer_timeout, true))
 		_on_gatling_gun_timer_start = Time.get_ticks_msec()
-
-
-func _remove_random_debuff_stack(stack_number: int) -> void:
-	var random_stacks_types: Array[Utils.StackType]
-	if _owner.stats.poison_stacks > 0: random_stacks_types.append(Utils.StackType.POISON)
-	if _owner.stats.ignite_stacks > 0: random_stacks_types.append(Utils.StackType.IGNITE)
-	if random_stacks_types.is_empty(): return
-	var random_stack_type: Utils.StackType = random_stacks_types.pick_random()
-	match random_stack_type:
-		Utils.StackType.POISON: _owner.stats.poison_stacks -= stack_number
-		Utils.StackType.IGNITE: _owner.stats.ignite_stacks -= stack_number
+		
+#endregion
 
 #region aa modifier
 
@@ -122,6 +93,15 @@ func _add_attack_modifiers() -> void:
 		aa_modifier.on_hit_logic_callback = _on_hit_scorching_blade
 		aa_modifier.is_one_time_effect = false
 		_owner.auto_attack_modifier_registry.register_modifier(aa_modifier)
+		
+	# [SURGICAL KNIFE]
+	if _attack_stats.surgical_knife_activated:
+		var aa_modifier := AutoAttackModifier.new()
+		aa_modifier.id = "Surgical Knife"
+		aa_modifier.tags = [AutoAttackModifier.TagType.CARD]
+		aa_modifier.on_attack_logic_callback = _on_auto_attack_surgical_knife
+		aa_modifier.is_one_time_effect = false
+		_owner.auto_attack_modifier_registry.register_modifier(aa_modifier)
 
 func _clear_attack_modifiers() -> void:
 	# [RUSTY DAGGER]
@@ -131,6 +111,10 @@ func _clear_attack_modifiers() -> void:
 	# [SCORCHING BLADE]
 	if _attack_stats.scorching_blade_activated:
 		_owner.auto_attack_modifier_registry.unregister_modifier("Scorching Blade")
+		
+	# [SURGICAL KNIFE]
+	if _attack_stats.surgical_knife_activated:
+		_owner.auto_attack_modifier_registry.unregister_modifier("Surgical Knife")
 		
 #endregion
 
@@ -180,7 +164,7 @@ func _clear_stat_modifiers() -> void:
 	
 	# [FIGHT BACK AD] (AD Cumulatif)
 	var ad_mod := StatModifier.new()
-	ad_mod.id = "Fight Back AD"
+	ad_mod.id = "Fight Back"
 	ad_mod.stat_type = EntityStats.StatType.AD
 	_owner.stats_manager.unregister_modifier(ad_mod)
 		
@@ -250,7 +234,7 @@ func _on_dodge_fight_back(cb_vars: Dictionary) -> void:
 		return
 	_dodge_number += 1
 	var stat_modifier := StatModifier.new()
-	stat_modifier.id = "Fight Back AD"
+	stat_modifier.id = "Fight Back"
 	stat_modifier.stat_type = EntityStats.StatType.AD
 	stat_modifier.calc_type = StatModifier.CalcType.ADD
 	stat_modifier.value = _dodge_number * _attack_stats.fight_back_increase_attack_damage
@@ -296,16 +280,21 @@ func _on_hit_scorching_blade(cb_vars: Dictionary) -> void:
 		printerr("Scorching Blade (on_hit): cb_vars n'a pas de PHYSICAL_DAMAGE")
 		return
 	var damage_dealt: int = cb_vars[AutoAttackModifier.VarType.PHYSICAL_DAMAGE]
-
 	if not cb_vars.has(AutoAttackModifier.VarType.TARGET): 
 		printerr("Scorching Blade (on_hit): cb_vars n'a pas de TARGET")
 		return
 	var target: Entity = cb_vars[AutoAttackModifier.VarType.TARGET]
 	if target == null or not is_instance_valid(target):
 		return
-	
 	var percent: float = _attack_stats.scorching_blade_damage_percent
 	var ignite_stacks: float = (damage_dealt as float) * (percent / 100.0)
-
 	if ignite_stacks > 0:
 		_owner.inflict_condition_stacks(target, ignite_stacks, Utils.StackType.IGNITE)
+
+func _on_auto_attack_surgical_knife(cb_vars: Dictionary) -> void:
+	# [SURGICAL KNIFE]
+	var chance: float = _attack_stats.surgical_knife_chance
+	if not Utils.is_randomize_modifier_active(chance):
+		return 
+	var amount_to_cleanse: float = _attack_stats.surgical_knife_cleanse_amount
+	_owner.cleanse(_owner, amount_to_cleanse)

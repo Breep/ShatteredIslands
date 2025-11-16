@@ -43,7 +43,8 @@ var double_edge_sword_activated: bool # True if this skill is activated
 # [SURGICAL KNIFE]
 var surgical_knife_activated: bool # True if this skill is activated
 var surgical_knife_chance: float # Chance to proc the curative knife
-var surgical_knife_stacks: int # Number of negative stacks removed
+var surgical_knife_cleanse_amount: float # Number of negative stacks removed
+
 #endregion
 
 #region Epic Card

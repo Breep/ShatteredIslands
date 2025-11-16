@@ -1,22 +1,22 @@
-class_name AttackSurgicalKnife
+class_name SurgicalKnife
 extends CharacterUpgrade
 
-@export var _chance_percent: int # % of chance to proc
-@export var _stacks_number: Array[int] # Number of stacks removed
+@export var _chance: Array[float] 
+@export var _cleanse_amount: Array[float]
 
-func apply(stats: FamiliesStats, cardlvl: int) -> void:
-	if cardlvl < 1 or cardlvl > 3:
-		printerr("Wrong cardlvl: ", cardlvl, " [AttackSurgicalKnife]")
+func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
+	if cardlvl < 1 or cardlvl > COMMON_CARD_MAX_LEVEL:
+		printerr("Surgical Knife: Wrong cardlvl: ", cardlvl)
 		return
 	
 	stats.auto_attack.surgical_knife_activated = true
-	stats.auto_attack.surgical_knife_chance = _chance_percent
-	stats.auto_attack.surgical_knife_stacks = _stacks_number[cardlvl - 1]
+	stats.auto_attack.surgical_knife_chance = _chance[cardlvl - 1]
+	stats.auto_attack.surgical_knife_cleanse_amount = _cleanse_amount[cardlvl - 1]
 
 
 func get_description(cardlvl: int) -> String:
-	if cardlvl < 1 or cardlvl > 3:
-		printerr("Wrong cardlvl: ", cardlvl, " [AttackSurgicalKnife]")
+	if cardlvl < 1 or cardlvl > COMMON_CARD_MAX_LEVEL:
+		printerr("Surgical Knife: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "[center]Each turret attack has " + str(_chance_percent) + "% chance to remove" + str(_stacks_number[cardlvl - 1]) + " debuff stacks.[/center]"
+	return str(_chance[cardlvl - 1]) + "% chance to cleanse " + str(_cleanse_amount[cardlvl - 1]) + " self negative stack(s) on attack."

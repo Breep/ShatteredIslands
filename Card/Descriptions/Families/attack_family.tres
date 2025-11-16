@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Family" load_steps=12 format=3 uid="uid://cbmvayb0bb72n"]
+[gd_resource type="Resource" script_class="Family" load_steps=14 format=3 uid="uid://cbmvayb0bb72n"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_4dvmk"]
 [ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://Card/Templates/family.gd" id="2_m6yig"]
@@ -11,10 +11,12 @@
 [ext_resource type="Resource" uid="uid://5vemx42gusi2" path="res://Card/Descriptions/Cards/Attack/Rare/SurgicalKnife/attack_curative_knife.tres" id="8_eyhuj"]
 [ext_resource type="Texture2D" uid="uid://b78s362n5bu6" path="res://Card/Descriptions/Families/Icons/turret.png" id="9_m74lt"]
 [ext_resource type="Resource" uid="uid://cj6hexnvedxmb" path="res://Card/Descriptions/Cards/Attack/Common/FightBack/attack_fight_back.tres" id="9_ypjtd"]
+[ext_resource type="Resource" uid="uid://dxr7p12a3u5s0" path="res://Card/Descriptions/Cards/Attack/Common/RustyDagger/attack_rusty_dagger.tres" id="10_cg3dx"]
+[ext_resource type="Resource" uid="uid://dpnpvtk3elac0" path="res://Card/Descriptions/Cards/Attack/Common/ScorchingBlade/attack_scorching_blade.tres" id="11_gthbg"]
 
 [resource]
 script = ExtResource("2_m6yig")
-cards = Array[ExtResource("1_4dvmk")]([ExtResource("2_m74lt"), ExtResource("3_ypjtd"), ExtResource("4_xkvlw"), ExtResource("5_cg3dx"), ExtResource("6_gthbg"), ExtResource("7_eobhs"), ExtResource("8_eyhuj"), ExtResource("9_ypjtd")])
+cards = Array[ExtResource("1_4dvmk")]([ExtResource("2_m74lt"), ExtResource("3_ypjtd"), ExtResource("4_xkvlw"), ExtResource("5_cg3dx"), ExtResource("6_gthbg"), ExtResource("7_eobhs"), ExtResource("9_ypjtd"), ExtResource("8_eyhuj"), ExtResource("10_cg3dx"), ExtResource("11_gthbg")])
 icon = ExtResource("9_m74lt")
 family_name = "Attack"
 family_type = 1
