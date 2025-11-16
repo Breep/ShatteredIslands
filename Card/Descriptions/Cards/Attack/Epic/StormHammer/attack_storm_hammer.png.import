@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dj3egr4t037xv"
-path="res://.godot/imported/attack_twin_blade.png-94e507fa19540648cc62ab0d30888c98.ctex"
+uid="uid://cy3hmlkfjyryb"
+path="res://.godot/imported/attack_storm_hammer.png-0c21761ab1d10b02c8008598b20592cc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Card/Descriptions/Cards/Attack/TwinBlade/attack_twin_blade.png"
-dest_files=["res://.godot/imported/attack_twin_blade.png-94e507fa19540648cc62ab0d30888c98.ctex"]
+source_file="res://Card/Descriptions/Cards/Attack/Epic/StormHammer/attack_storm_hammer.png"
+dest_files=["res://.godot/imported/attack_storm_hammer.png-0c21761ab1d10b02c8008598b20592cc.ctex"]
 
 [params]
 

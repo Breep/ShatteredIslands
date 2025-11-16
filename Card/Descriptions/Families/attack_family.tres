@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_4dvmk"]
 [ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://Card/Templates/family.gd" id="2_m6yig"]
-[ext_resource type="Resource" uid="uid://ctm6ojtt36a88" path="res://Card/Descriptions/Cards/Attack/TwinBlade/attack_twin_blade.tres" id="2_m74lt"]
+[ext_resource type="Resource" uid="uid://ctm6ojtt36a88" path="res://Card/Descriptions/Cards/Attack/Common/TwinBlade/attack_twin_blade.tres" id="2_m74lt"]
 [ext_resource type="Resource" uid="uid://cvkv7hq8nsvks" path="res://Card/Descriptions/Cards/Attack/TitanAxe/attack_titan_axe.tres" id="3_ypjtd"]
 [ext_resource type="Resource" uid="uid://dq5i43mqjqg38" path="res://Card/Descriptions/Cards/Attack/Epic/StormHammer/attack_storm_hammer.tres" id="4_xkvlw"]
 [ext_resource type="Resource" uid="uid://3vjmnbpyyjyk" path="res://Card/Descriptions/Cards/Attack/Epic/GatlingGun/attack_gatling_gun.tres" id="5_cg3dx"]

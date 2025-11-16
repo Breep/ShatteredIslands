@@ -30,6 +30,10 @@ var titan_axe_activated: bool # True if this skill is activated
 var titan_axe_attack_number: int # Number of attack needed to proc the skil
 var titan_axe_damage_percent: float # % of target max hp damage buff
 
+# [BLADE RUSH]
+var blade_rush_activated: bool
+var blade_rush_damage: float
+var blade_rush_duration: float
 
 # [HEALING CROSSBOW]
 var healing_crossbow_activated: bool

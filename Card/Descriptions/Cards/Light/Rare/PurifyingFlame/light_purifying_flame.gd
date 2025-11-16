@@ -3,9 +3,10 @@ extends CharacterUpgrade
 
 @export var _cleanse_amount: Array[float]
 @export var _period: Array[float]
+var _rarity: Card.Rarity = Card.Rarity.RARE
 
 func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
-	if cardlvl < 1 or cardlvl > RARE_CARD_MAX_LEVEL:
+	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
 		printerr("Purifying Flame: Wrong cardlvl: ", cardlvl)
 		return
 	
@@ -15,7 +16,7 @@ func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
 
 
 func get_description(cardlvl: int) -> String:
-	if cardlvl < 1 or cardlvl > RARE_CARD_MAX_LEVEL:
+	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
 		printerr("Purifying Flame: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
