@@ -62,7 +62,6 @@ func _create_optional_timers() -> void:
 	# [LIFE SPRING]
 	if _serenity_stats.life_spring_activated:
 		_optional_timers.append(Utils.create_perpetual_timer(self, _serenity_stats.life_spring_period, _life_spring_timer_timeout, true))
-	
 	# [PURIFYING FLAME]
 	if _serenity_stats.purifying_flame_activated:
 		_optional_timers.append(Utils.create_perpetual_timer(self, _serenity_stats.purifying_flame_period, _purifying_flame_timer_timeout, true))
@@ -153,11 +152,11 @@ func _on_regen_tick_timer_timeout() -> void:
 	
 func _purifying_flame_timer_timeout() -> void:
 	# [PURIFYING FLAME]
-	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
+	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ALLY)
 	if target == null: 
 		return
 	var amount_to_cleanse: int = _serenity_stats.purifying_flame_cleanse_amount
-	#_owner.cleanse(target, amount_to_cleanse, Utils.StackType.)
+	_owner.dispell(target, amount_to_cleanse)
 	
 func _on_dodge_graceful_step(cb_vars: Dictionary) -> void:
 	# [GRACEFUL STEP]

@@ -112,6 +112,7 @@ func _add_stat_modifiers() -> void:
 		mod.id = "Fight Back"
 		_owner.stats_manager.register_modifier(mod)
 		
+		
 func _clear_stat_modifiers() -> void:
 	
 	# [FIGHT BACK]
@@ -132,6 +133,15 @@ func _add_action_modifiers() -> void:
 		action_modifier.is_one_time_effect = false
 		action_modifier.after_action_logic_callback = _on_dodge_fight_back
 		_owner.action_modifiers_manager.register_modifier(action_modifier)
+		
+	# [SCORCHING BLADE]
+	if _attack_stats.scorching_blade_activated:
+		var action_modifier := ActionModifier.new()
+		action_modifier.action_type = ActionModifier.ActionType.DIRECT_ATTACK
+		action_modifier.id = "Scorching Blade"
+		action_modifier.is_one_time_effect = false
+		action_modifier.after_action_logic_callback = _on_auto_attack_scorching_blade
+		_owner.action_modifiers_manager.register_modifier(action_modifier)
 
 func _remove_action_modifiers() -> void:
 	
@@ -141,6 +151,14 @@ func _remove_action_modifiers() -> void:
 		action_modifier.action_type = ActionModifier.ActionType.DODGE
 		action_modifier.id = "Fight Back"
 		action_modifier.after_action_logic_callback = _on_dodge_fight_back
+		_owner.action_modifiers_manager.unregister_modifier(action_modifier)
+		
+	# [SCORCHING BLADE]
+	if _attack_stats.scorching_blade_activated:
+		var action_modifier := ActionModifier.new()
+		action_modifier.action_type = ActionModifier.ActionType.DIRECT_ATTACK
+		action_modifier.id = "Scorching Blade"
+		action_modifier.after_action_logic_callback = _on_auto_attack_scorching_blade
 		_owner.action_modifiers_manager.unregister_modifier(action_modifier)
 
 # ============================== Callbacks functions ==============================
@@ -173,3 +191,24 @@ func _on_dodge_fight_back(cb_vars: Dictionary) -> void:
 	stat_modifier.value = _dodge_number * _attack_stats.fight_back_increase_attack_damage
 	stat_modifier.tags = [StatModifier.TagType.CARD]
 	_owner.stats_manager.update_modifier(stat_modifier)
+	
+func _on_auto_attack_scorching_blade(cb_vars: Dictionary) -> void:
+	
+	# [SCORCHING BLADE]
+	if not cb_vars.has(ActionModifier.VarType.TARGET): 
+		printerr("Scorching Blade: cb_vars n'a pas de TARGET")
+		return
+	var target: Entity = cb_vars[ActionModifier.VarType.TARGET]
+	if target == null or not is_instance_valid(target):
+		return
+
+	if not cb_vars.has(ActionModifier.VarType.PHYSICAL_DAMAGE): 
+		printerr("Scorching Blade: cb_vars n'a pas de DAMAGE")
+		return
+	var damage_dealt: int = cb_vars[ActionModifier.VarType.PHYSICAL_DAMAGE]
+	
+	var percent: float = _attack_stats.scorching_blade_damage_percent
+	var ignite_stacks: float = (damage_dealt as float) * (percent / 100.0)
+
+	if ignite_stacks > 0:
+		_owner.inflict_condition_stacks(target, ignite_stacks, Utils.StackType.IGNITE)

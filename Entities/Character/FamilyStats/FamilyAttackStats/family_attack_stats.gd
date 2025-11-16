@@ -8,6 +8,10 @@ var fight_back_activated: bool # True if this skill is activated
 var fight_back_increase_dodge: float # % dodge
 var fight_back_increase_attack_damage: float # +AD
 
+# [SCORCHING BLADE]
+var scorching_blade_activated: bool # true if activated
+var scorching_blade_damage_percent: float # Le % de dégâts convertis (ex: 10.0, 15.0, ...)0)
+
 #endregion
 
 @export_group("Diamond Sword")
