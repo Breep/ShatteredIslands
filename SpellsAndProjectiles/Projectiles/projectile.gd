@@ -101,7 +101,6 @@ func _on_body_entered(body: Node3D) -> void:
 			return
 
 		var physical_damage: int = stats.physical_damage_flat
-		physical_damage += _get_damage_percent(stats.physical_damage_percent, stats.physical_damage_percent_type)
 		if physical_damage > 0:
 			physical_damage_done_flat = target.take_damage(
 				physical_damage,
@@ -111,10 +110,9 @@ func _on_body_entered(body: Node3D) -> void:
 				Utils.AttackType.AUTO_ATTACK
 			)
 		if stats.physical_is_critical:
-			source.signal_critical_action_done(target, Utils.ActionType.DAMAGE_PHYSICAL, physical_damage)
+			source.signal_critical_action_done(target, Utils.ActionType.DAMAGE_PHYSICAL, stats.physical_base_damage, physical_damage_done_flat)
 
 		var magical_damage: int = stats.magical_damage_flat
-		magical_damage += _get_damage_percent(stats.magical_damage_percent, stats.magical_damage_percent_type)
 		if magical_damage > 0:
 			target.take_damage(
 				magical_damage,
@@ -167,7 +165,6 @@ func _update_visual() -> void:
 		child.queue_free()
 	var visual: Node3D = _projectile_conf.visual_scene.instantiate()
 	_visual_node.add_child(visual)
-
 
 func _set_target(new_target: Entity) -> void:
 	if target:
@@ -270,17 +267,6 @@ func _move_homing_smooth(delta: float) -> void:
 	_velocity = new_dir * _speed
 	global_position += _velocity * delta
 	look_at(global_position + _velocity)
-
-func _get_damage_percent(damage_percent: float, percent_modifier: Utils.PercentModifier) -> int:
-	var hp: int
-	match percent_modifier:
-		Utils.PercentModifier.MAX_HP:
-			hp = target.stats.health_max
-		Utils.PercentModifier.CURRENT_HP:
-			hp = target.stats.health
-		Utils.PercentModifier.LOST_HP:
-			hp = target.stats.health_max - target.stats.health
-	return int(hp * damage_percent / 100.0)
 
 # ============================== Callbacks ==============================
 

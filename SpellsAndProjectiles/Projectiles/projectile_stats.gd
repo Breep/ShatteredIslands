@@ -3,14 +3,12 @@ extends Resource
 
 var speed: int # Speed of the projectile
 
-var physical_damage_flat: int # Physicial damage of the projectile
-var physical_damage_percent: float # Damage done in addition to damage (in % of enemy hp)
-var physical_damage_percent_type: Utils.PercentModifier # Max, Current or Lost HP
+var physical_base_damage: float # Physical damage before crit
+var physical_damage_flat: float # Physicial damage of the projectile
 var physical_is_critical: bool
 
-var magical_damage_flat: int # Physicial damage of the projectile
-var magical_damage_percent: float # Damage done in addition to damage (in % of enemy hp)
-var magical_damage_percent_type: Utils.PercentModifier # Max, Current or Lost HP
+var magical_base_damage: float # Magical damage before crit
+var magical_damage_flat: float # Physicial damage of the projectile
 var magical_is_critical: bool
 
 var is_bouncing: bool # If the projectile should bounce on the enemy
