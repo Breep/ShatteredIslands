@@ -61,7 +61,11 @@ func _create_optional_timers() -> void:
 		_optional_timers.append(Utils.create_perpetual_timer(self,_serenity_stats.holy_touch_period,_holy_touch_timer_timeout,true))
 	# [LIFE SPRING]
 	if _serenity_stats.life_spring_activated:
-		_optional_timers.append(Utils.create_perpetual_timer(self, _serenity_stats.life_spring_period, _life_spring_timer_timeout, true))	
+		_optional_timers.append(Utils.create_perpetual_timer(self, _serenity_stats.life_spring_period, _life_spring_timer_timeout, true))
+	
+	# [PURIFYING FLAME]
+	if _serenity_stats.purifying_flame_activated:
+		_optional_timers.append(Utils.create_perpetual_timer(self, _serenity_stats.purifying_flame_period, _purifying_flame_timer_timeout, true))
 	
 func _add_stat_modifiers() -> void:
 	# [GRACEFUL STEP]
@@ -146,7 +150,15 @@ func _on_regen_tick_timer_timeout() -> void:
 	var heal_amount: int = _owner.stats.regen_stacks
 	if heal_amount > 0:
 		_owner.heal(_owner, heal_amount)
-		
+	
+func _purifying_flame_timer_timeout() -> void:
+	# [PURIFYING FLAME]
+	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
+	if target == null: 
+		return
+	var amount_to_cleanse: int = _serenity_stats.purifying_flame_cleanse_amount
+	#_owner.cleanse(target, amount_to_cleanse, Utils.StackType.)
+	
 func _on_dodge_graceful_step(cb_vars: Dictionary) -> void:
 	# [GRACEFUL STEP]
 	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)

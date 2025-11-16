@@ -22,6 +22,11 @@ var life_spring_period: float # tick rate (/s)
 var miracle_light_activated: bool
 var miracle_light_crit_chance: float # %chance to crit
 
+# [PURIFYING FLAME]
+var purifying_flame_activated: bool # True if the player has at least one of this card
+var purifying_flame_period: float # tick rate (/s)
+var purifying_flame_cleanse_amount: float # Amount
+
 #endregion
 
 
