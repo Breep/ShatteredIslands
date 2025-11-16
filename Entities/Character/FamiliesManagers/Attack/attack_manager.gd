@@ -43,6 +43,10 @@ func start() -> void:
 	_add_action_modifiers()
 	_add_attack_modifiers()
 	_dodge_number = 0
+	
+	# [BLADE RUSH]
+	if _attack_stats.blade_rush_activated:
+		_apply_blade_rush()
 
 
 func stop() -> void:
@@ -103,7 +107,25 @@ func _add_attack_modifiers() -> void:
 		aa_modifier.on_attack_logic_callback = _on_auto_attack_healing_crossbow
 		aa_modifier.is_one_time_effect = false
 		_owner.auto_attack_modifier_registry.register_modifier(aa_modifier)
-
+		
+	# [STORM HAMMER]
+	if _attack_stats.storm_hammer_activated:
+		var aa_modifier := AutoAttackModifier.new()
+		aa_modifier.id = "Storm Hammer"
+		aa_modifier.tags = [AutoAttackModifier.TagType.CARD]
+		aa_modifier.on_attack_logic_callback = _on_attack_storm_hammer
+		aa_modifier.is_one_time_effect = false
+		_owner.auto_attack_modifier_registry.register_modifier(aa_modifier)
+		
+	# [ARCANE STAFF]
+	if _attack_stats.arcane_staff_activated:
+		var aa_modifier := AutoAttackModifier.new()
+		aa_modifier.id = "Arcane Staff"
+		aa_modifier.tags = [AutoAttackModifier.TagType.CARD]
+		aa_modifier.on_hit_logic_callback = _on_hit_arcane_staff
+		aa_modifier.is_one_time_effect = false
+		_owner.auto_attack_modifier_registry.register_modifier(aa_modifier)
+		
 func _clear_attack_modifiers() -> void:
 	# [RUSTY DAGGER]
 	if _attack_stats.rusty_dagger_activated:
@@ -120,6 +142,14 @@ func _clear_attack_modifiers() -> void:
 	# [HEALING CROSSBOW]
 	if _attack_stats.healing_crossbow_activated:
 		_owner.auto_attack_modifier_registry.unregister_modifier("Healing Crossbow")
+		
+	# [STORM HAMMER]
+	if _attack_stats.storm_hammer_activated:
+		_owner.auto_attack_modifier_registry.unregister_modifier("Storm Hammer")
+		
+	# [ARCANE STAFF]
+	if _attack_stats.arcane_staff_activated:
+		_owner.auto_attack_modifier_registry.unregister_modifier("Arcane Staff")
 		
 #endregion
 
@@ -187,6 +217,13 @@ func _clear_stat_modifiers() -> void:
 		mod.stat_type = EntityStats.StatType.AA_SPEED
 		_owner.stats_manager.unregister_modifier(mod)
 		
+	# [BLADE RUSH]
+	if _attack_stats.blade_rush_activated:
+		var mod := StatModifier.new()
+		mod.id = "Blade Rush"
+		mod.stat_type = EntityStats.StatType.AD
+		_owner.stats_manager.unregister_modifier(mod)
+		
 #endregion
 
 #region action modifier
@@ -214,6 +251,29 @@ func _remove_action_modifiers() -> void:
 		_owner.action_modifiers_manager.unregister_modifier(action_modifier)
 		
 #endregion
+
+#region other card
+
+# [BLADE RUSH]
+func _apply_blade_rush() -> void:
+	var stat_modifier := StatModifier.new()
+	stat_modifier.id = "Blade Rush"
+	stat_modifier.stat_type = EntityStats.StatType.AD
+	stat_modifier.calc_type = StatModifier.CalcType.ADD
+	stat_modifier.value = _attack_stats.blade_rush_damage
+	stat_modifier.tags = [StatModifier.TagType.CARD]
+	_owner.stats_manager.register_modifier(stat_modifier)
+	
+	var duration = _attack_stats.blade_rush_duration
+	var timer := Timer.new()
+	timer.wait_time = duration
+	timer.one_shot = true
+	timer.timeout.connect(_on_blade_rush_timeout)
+	_optional_timers.append(timer)
+	timer.start()
+
+#endregion
+
 # ============================== Callbacks functions ==============================
 
 func _on_gatling_gun_timer_timeout() -> void:
@@ -314,3 +374,33 @@ func _on_auto_attack_healing_crossbow(cb_vars: Dictionary) -> void:
 	if target == null:
 		return
 	_owner.heal(target, heal_amount)
+
+# [BLADE RUSH]
+func _on_blade_rush_timeout() -> void:
+	var mod := StatModifier.new()
+	mod.id = "Blade Rush"
+	mod.stat_type = EntityStats.StatType.AD
+	_owner.stats_manager.unregister_modifier(mod)
+
+func _on_attack_storm_hammer(cb_vars: Dictionary) -> void:
+	# [STORM HAMMER]
+	var chance: float = _attack_stats.storm_hammer_chance
+	if not Utils.is_randomize_modifier_active(chance):
+		return
+
+	if not cb_vars.has(AutoAttackModifier.VarType.PROJECTILE_STATS):
+		printerr("Storm Hammer (on_hit): cb_vars n'a pas de TARGET")
+		return
+		
+	var projectile_stat: ProjectileStats = cb_vars[AutoAttackModifier.VarType.PROJECTILE_STATS]
+	projectile_stat.is_bouncing = true
+	
+func _on_hit_arcane_staff(cb_vars: Dictionary) -> void:
+	# [ARCANE STAFF]
+	var chance: float = _attack_stats.arcane_staff_chance
+	if not Utils.is_randomize_modifier_active(chance):
+		return 
+
+	var mana_gain: float = _attack_stats.arcane_staff_mana_gain
+	if mana_gain > 0:
+		_owner.stats.mana += mana_gain

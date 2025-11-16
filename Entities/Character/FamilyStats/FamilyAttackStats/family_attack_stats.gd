@@ -21,6 +21,11 @@ var rusty_dagger_poison_stacks: float # amount stacks
 var diamond_sword_activated: bool # True if this skill is activated
 var diamond_sword_attack: int # Value of increased attack
 
+# [ARCANE STAFF]
+var arcane_staff_activated: bool
+var arcane_staff_chance: float
+var arcane_staff_mana_gain: float
+
 # [TWIN BLADE]
 var twin_blade_activated: bool # True if this skill is activated
 var twin_blade_speed: float # Le pourcentage d'augmentation (ex: 10.0, 15.0) speed (in %)
@@ -30,6 +35,10 @@ var titan_axe_activated: bool # True if this skill is activated
 var titan_axe_attack_number: int # Number of attack needed to proc the skil
 var titan_axe_damage_percent: float # % of target max hp damage buff
 
+# [BLADE RUSH]
+var blade_rush_activated: bool
+var blade_rush_damage: float
+var blade_rush_duration: float
 
 # [HEALING CROSSBOW]
 var healing_crossbow_activated: bool

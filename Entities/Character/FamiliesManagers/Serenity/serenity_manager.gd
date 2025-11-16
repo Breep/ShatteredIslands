@@ -38,6 +38,10 @@ func stop() -> void:
 	
 	
 # ============================== Private functions ==============================
+
+#region optional timer
+
+
 func _clear_optional_timers() -> void:
 	for timer in _optional_timers:
 		timer.queue_free()
@@ -53,7 +57,10 @@ func _create_optional_timers() -> void:
 	# [PURIFYING FLAME]
 	if _serenity_stats.purifying_flame_activated:
 		_optional_timers.append(Utils.create_perpetual_timer(self, _serenity_stats.purifying_flame_period, _purifying_flame_timer_timeout, true))
-	
+
+#endregion
+
+#region stat modifier
 func _add_stat_modifiers() -> void:
 	# [GRACEFUL STEP]
 	if _serenity_stats.graceful_step_activated:
@@ -64,6 +71,39 @@ func _add_stat_modifiers() -> void:
 		mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
 		mod.id = "Graceful Step"
 		_owner.stats_manager.register_modifier(mod)
+	# [MIRACLE LIGHT]
+	if _serenity_stats.miracle_light_activated:
+		var crit_bonus = _serenity_stats.miracle_light_crit_chance
+		
+		# 1. Bonus pour HEAL
+		var heal_mod := StatModifier.new()
+		heal_mod.id = "Miracle Light (Heal)"
+		heal_mod.stat_type = EntityStats.StatType.CRIT_CHANCE
+		heal_mod.action_type = Utils.ActionType.UTILITY_HEAL
+		heal_mod.calc_type = StatModifier.CalcType.ADD
+		heal_mod.value = crit_bonus
+		heal_mod.tags = [StatModifier.TagType.CARD]
+		_owner.stats_manager.register_modifier(heal_mod)
+		
+		# 2. Bonus pour CLEANSE
+		var cleanse_mod := StatModifier.new()
+		cleanse_mod.id = "Miracle Light (Cleanse)"
+		cleanse_mod.stat_type = EntityStats.StatType.CRIT_CHANCE
+		cleanse_mod.action_type = Utils.ActionType.UTILITY_CLEANSE
+		cleanse_mod.calc_type = StatModifier.CalcType.ADD
+		cleanse_mod.value = crit_bonus
+		cleanse_mod.tags = [StatModifier.TagType.CARD]
+		_owner.stats_manager.register_modifier(cleanse_mod)
+		
+		# 3. Bonus pour REGEN
+		var regen_mod := StatModifier.new()
+		regen_mod.id = "Miracle Light (Regen)"
+		regen_mod.stat_type = EntityStats.StatType.CRIT_CHANCE
+		regen_mod.action_type = Utils.ActionType.STACK_REGEN
+		regen_mod.calc_type = StatModifier.CalcType.ADD
+		regen_mod.value = crit_bonus
+		regen_mod.tags = [StatModifier.TagType.CARD]
+		_owner.stats_manager.register_modifier(regen_mod)
 		
 func _clear_stat_modifiers() -> void:
 	# [GRACEFUL STEP]
@@ -75,12 +115,28 @@ func _clear_stat_modifiers() -> void:
 		_owner.stats_manager.unregister_modifier(mod)
 	
 	# [MIRACLE LIGHT]
-	var mod := StatModifier.new()
-	mod.id = "Miracle Light"
-	mod.stat_type = EntityStats.StatType.CRIT_CHANCE
-	mod.action_type = Utils.ActionType.UTILITY_HEAL
-	_owner.stats_manager.unregister_modifier(mod)
-		
+	var heal_mod := StatModifier.new()
+	heal_mod.id = "Miracle Light (Heal)"
+	heal_mod.stat_type = EntityStats.StatType.CRIT_CHANCE
+	heal_mod.action_type = Utils.ActionType.UTILITY_HEAL
+	_owner.stats_manager.unregister_modifier(heal_mod)
+	
+	var cleanse_mod := StatModifier.new()
+	cleanse_mod.id = "Miracle Light (Cleanse)"
+	cleanse_mod.stat_type = EntityStats.StatType.CRIT_CHANCE
+	cleanse_mod.action_type = Utils.ActionType.UTILITY_CLEANSE 
+	_owner.stats_manager.unregister_modifier(cleanse_mod)
+	
+	var regen_mod := StatModifier.new()
+	regen_mod.id = "Miracle Light (Regen)"
+	regen_mod.stat_type = EntityStats.StatType.CRIT_CHANCE
+	regen_mod.action_type = Utils.ActionType.STACK_REGEN
+	_owner.stats_manager.unregister_modifier(regen_mod)
+
+#endregion
+
+#region action modifier
+
 func _add_action_modifiers() -> void:
 	# [GRACEFUL STEP]
 	if _serenity_stats.graceful_step_activated:
@@ -100,6 +156,10 @@ func _remove_action_modifiers() -> void:
 		action_modifier.after_action_logic_callback = _on_dodge_graceful_step
 		_owner.action_modifiers_manager.unregister_modifier(action_modifier)
 		
+#endregion
+
+#region others card
+
 func _update_miracle_light_modifier() -> void:
 	# [MIRACLE LIGHT]
 	if _owner == null or not is_instance_valid(_owner):
@@ -118,6 +178,8 @@ func _update_miracle_light_modifier() -> void:
 	mod.tags = [StatModifier.TagType.CARD]
 	_owner.stats_manager.update_modifier(mod)
 	
+#endregion
+
 # ============================== Callbacks functions ==============================
 
 func _holy_touch_timer_timeout() -> void: 

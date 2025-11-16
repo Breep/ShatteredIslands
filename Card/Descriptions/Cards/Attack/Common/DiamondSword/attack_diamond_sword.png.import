@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dj3egr4t037xv"
-path="res://.godot/imported/attack_twin_blade.png-94e507fa19540648cc62ab0d30888c98.ctex"
+uid="uid://b1e67csr3rjgk"
+path="res://.godot/imported/attack_diamond_sword.png-3c74ec520b2156c06b8559c8fbb22031.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Card/Descriptions/Cards/Attack/TwinBlade/attack_twin_blade.png"
-dest_files=["res://.godot/imported/attack_twin_blade.png-94e507fa19540648cc62ab0d30888c98.ctex"]
+source_file="res://Card/Descriptions/Cards/Attack/Common/DiamondSword/attack_diamond_sword.png"
+dest_files=["res://.godot/imported/attack_diamond_sword.png-3c74ec520b2156c06b8559c8fbb22031.ctex"]
 
 [params]
 
