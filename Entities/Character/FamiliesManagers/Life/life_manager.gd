@@ -69,6 +69,10 @@ func _create_optional_timers() -> void:
 	# [VITAL PULSE]
 	if _life_stats.vital_pulse_activated:
 		_optional_timers.append(Utils.create_perpetual_timer(self, _life_stats.vital_pulse_period, _vital_pulse_timer_timeout, true))
+		
+	# [TITAN'S PROTECTION]
+	if _life_stats.titans_protection_activated:
+		_optional_timers.append(Utils.create_perpetual_timer(self, _life_stats.titans_protection_period, _on_titans_protection_timer_timeout, true))
 
 func _clear_optional_timers() -> void:
 	for timer in _optional_timers:
@@ -220,3 +224,18 @@ func _on_tainted_blood_timer_timeout() -> void:
 		stacks *= 5
 		
 	_owner.inflict_condition_stacks(target, stacks, stack_type)
+	
+func _on_titans_protection_timer_timeout() -> void:
+	# [TITAN'S PROTECTION]
+	var max_hp: int = _owner.stats.health_max
+	var current_hp: int = _owner.stats.health
+	var lost_hp: int = max_hp - current_hp
+	
+	if lost_hp <= 0:
+		return
+
+	var percent: float = _life_stats.titans_protection_lost_hp_percent
+	var heal_amount: int = int(float(lost_hp) * (percent / 100.0))
+	
+	if heal_amount > 0:
+		_owner.heal(_owner, heal_amount)

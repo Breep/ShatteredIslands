@@ -12,6 +12,11 @@ var evasive_growth_activated: bool
 var evasive_growth_increase_dodge: float
 var evasive_growth_increase_max_hp: float
 
+# [TITAN'S PROTECTION]
+var titans_protection_activated: bool
+var titans_protection_period: float
+var titans_protection_lost_hp_percent: float
+
 #endregion
 
 #region Rare Cards

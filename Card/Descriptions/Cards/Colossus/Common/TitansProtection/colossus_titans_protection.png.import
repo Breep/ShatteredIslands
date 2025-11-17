@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bb86jg3fpko2u"
-path="res://.godot/imported/colossus_proteins.png-bbca63ab0ff3a286497e84040cfce5fc.ctex"
+uid="uid://dtuu4sgxjfg0"
+path="res://.godot/imported/colossus_titans_protection.png-b8cb7e33f300ad10c225ba57cf03addb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Card/Descriptions/Cards/Colossus/Common/Proteins/colossus_proteins.png"
-dest_files=["res://.godot/imported/colossus_proteins.png-bbca63ab0ff3a286497e84040cfce5fc.ctex"]
+source_file="res://Card/Descriptions/Cards/Colossus/Common/TitansProtection/colossus_titans_protection.png"
+dest_files=["res://.godot/imported/colossus_titans_protection.png-b8cb7e33f300ad10c225ba57cf03addb.ctex"]
 
 [params]
 
