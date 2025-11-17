@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_us67u"]
 script = ExtResource("2_t7rln")
-_attack_speed_percent = Array[float]([400.0, 40.0, 60.0, 80.0, 100.0])
+_attack_speed_percent = Array[float]([20.0, 40.0, 60.0, 80.0, 100.0])
 metadata/_custom_type_script = "uid://p78qiv5h7hsm"
 
 [resource]
