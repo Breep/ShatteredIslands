@@ -94,6 +94,18 @@ func _add_stat_modifiers() -> void:
 		mod.id = "Evasive Growth"
 		_owner.stats_manager.register_modifier(mod)
 		
+	# [PROTEINS]
+	if _life_stats.proteins_activated:
+		var mod := StatModifier.new()
+		mod.id = "Proteins"
+		mod.stat_type = EntityStats.StatType.HEALTH_MAX
+		mod.calc_type = StatModifier.CalcType.ADD
+		mod.value = _life_stats.proteins_max_hp_increase
+		mod.tags = [StatModifier.TagType.CARD]
+
+		_owner.stats_manager.register_modifier(mod)
+		_owner.stats.health += _life_stats.proteins_max_hp_increase
+		
 func _clear_stat_modifiers() -> void:
 	
 	# [EVASIVE GROWTH]
@@ -102,6 +114,13 @@ func _clear_stat_modifiers() -> void:
 		mod.stat_type = EntityStats.StatType.DODGE
 		mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
 		mod.id = "Evasive Growth"
+		_owner.stats_manager.unregister_modifier(mod)
+		
+	# [PROTEINS]
+	if _life_stats.proteins_activated:
+		var mod := StatModifier.new()
+		mod.id = "Proteins"
+		mod.stat_type = EntityStats.StatType.HEALTH_MAX
 		_owner.stats_manager.unregister_modifier(mod)
 		
 #endregion

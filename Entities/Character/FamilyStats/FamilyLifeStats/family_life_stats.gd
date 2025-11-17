@@ -2,37 +2,16 @@ class_name FamilyLifeStats
 extends FamilyStats
 
 #region Common Cards
-# [Proteins]
-var proteins_activated: bool # If this skill is activated
-var proteins_hp: int # Increase max HP by this number
 
-# [Late Defender]
-var late_defender_activated: bool # If this skill is activated
-var late_defender_hp: int # max HP gained each tick
-var late_defender_period: float # Period between each tick
-
-# [Armor HP]
-var armor_by_lost_hp_activated: bool # If this skill is activated
-var armor_by_lost_hp_percent: float # Percent of hp lost converted into armor each tick
-var armor_by_lost_hp_period: float # Period between each tick
-
-# [The Collector]
-var the_collector_activated: bool # If this skill is activated
-var the_collector_hp: bool # max HP gained for each unique card
+# [PROTEINS]
+var proteins_activated: bool
+var proteins_max_hp_increase: float
 
 # [EVASIVE GROWTH]
 var evasive_growth_activated: bool
 var evasive_growth_increase_dodge: float
 var evasive_growth_increase_max_hp: float
 
-# [Vicious Mockery]
-var vicious_mockery_activated: bool # If this skill is activated
-var vicious_mockery_life_time: float # Period of time all entities are taunt at start
-
-# [Bear Strenght]
-var bear_strenght_activated: bool # If skill is activated
-var bear_strenght_speed_percent: float # % of AS decreased
-var bear_strenght_ad_percent: float # % of max HP converted into AD
 #endregion
 
 #region Rare Cards

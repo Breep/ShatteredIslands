@@ -94,6 +94,8 @@ func _process(delta: float) -> void:
 	_move_toward_target(delta)
 
 func _on_body_entered(body: Node3D) -> void:
+	if target == null:
+		return
 	if body is Entity and body == target:
 		var physical_damage_done_flat: int
 		if not multiplayer.is_server():
