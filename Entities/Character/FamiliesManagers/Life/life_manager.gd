@@ -132,6 +132,41 @@ func _add_stat_modifiers() -> void:
 		ad_mod.tags = [StatModifier.TagType.CARD]
 		_owner.stats_manager.register_modifier(ad_mod)
 		
+	# [CRYSTAL MOUNTAIN]
+	if _life_stats.crystal_mountain_activated:
+		var defense_val: float = _life_stats.crystal_mountain_defense_increase
+		
+		# 1. Résistance PHYSIQUE
+		var phys_mod := StatModifier.new()
+		phys_mod.id = "Crystal Mountain (Phys)"
+		phys_mod.stat_type = EntityStats.StatType.RESISTANCE
+		phys_mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
+		phys_mod.calc_type = StatModifier.CalcType.ADD
+		phys_mod.value = defense_val
+		phys_mod.tags = [StatModifier.TagType.CARD]
+		_owner.stats_manager.register_modifier(phys_mod)
+		
+		# 2. Résistance MAGIQUE
+		var magic_mod := StatModifier.new()
+		magic_mod.id = "Crystal Mountain (Magic)"
+		magic_mod.stat_type = EntityStats.StatType.RESISTANCE
+		# Vérifie que c'est bien le bon ActionType pour la magie
+		magic_mod.action_type = Utils.ActionType.DAMAGE_MAGICAL 
+		magic_mod.calc_type = StatModifier.CalcType.ADD
+		magic_mod.value = defense_val
+		magic_mod.tags = [StatModifier.TagType.CARD]
+		_owner.stats_manager.register_modifier(magic_mod)
+		
+		# 3. Résistance POISON
+		var poison_mod := StatModifier.new()
+		poison_mod.id = "Crystal Mountain (Poison)"
+		poison_mod.stat_type = EntityStats.StatType.RESISTANCE
+		poison_mod.action_type = Utils.ActionType.DAMAGE_POISON
+		poison_mod.calc_type = StatModifier.CalcType.ADD
+		poison_mod.value = defense_val
+		poison_mod.tags = [StatModifier.TagType.CARD]
+		_owner.stats_manager.register_modifier(poison_mod)
+		
 func _clear_stat_modifiers() -> void:
 	
 	# [EVASIVE GROWTH]
@@ -162,6 +197,29 @@ func _clear_stat_modifiers() -> void:
 		ad_mod.id = "Bear Strength AD"
 		ad_mod.stat_type = EntityStats.StatType.AD
 		_owner.stats_manager.unregister_modifier(ad_mod)
+	
+	# [CRYSTAL MOUNTAIN]
+	if _life_stats.crystal_mountain_activated:
+		# 1. Nettoyer Physique
+		var phys_mod := StatModifier.new()
+		phys_mod.id = "Crystal Mountain (Phys)"
+		phys_mod.stat_type = EntityStats.StatType.RESISTANCE
+		phys_mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
+		_owner.stats_manager.unregister_modifier(phys_mod)
+		
+		# 2. Nettoyer Magique
+		var magic_mod := StatModifier.new()
+		magic_mod.id = "Crystal Mountain (Magic)"
+		magic_mod.stat_type = EntityStats.StatType.RESISTANCE
+		magic_mod.action_type = Utils.ActionType.DAMAGE_MAGICAL
+		_owner.stats_manager.unregister_modifier(magic_mod)
+		
+		# 3. Nettoyer Poison
+		var poison_mod := StatModifier.new()
+		poison_mod.id = "Crystal Mountain (Poison)"
+		poison_mod.stat_type = EntityStats.StatType.RESISTANCE
+		poison_mod.action_type = Utils.ActionType.DAMAGE_POISON
+		_owner.stats_manager.unregister_modifier(poison_mod)
 		
 #endregion
 

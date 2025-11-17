@@ -31,6 +31,10 @@ var tainted_blood_activated: bool
 var tainted_blood_period: float
 var tainted_blood_lost_hp_percent: float
 
+# [CRYSTAL MOUNTAIN]
+var crystal_mountain_activated: bool
+var crystal_mountain_defense_increase: float
+
 #endregion
 
 #region Epic Cards

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Family" load_steps=7 format=3 uid="uid://r422raom70t5"]
+[gd_resource type="Resource" script_class="Family" load_steps=10 format=3 uid="uid://r422raom70t5"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_f2mb4"]
 [ext_resource type="Resource" uid="uid://cywh2kajy8jg3" path="res://Card/Descriptions/Cards/Colossus/Common/EvasiveGrowth/colossus_evasive_growth.tres" id="2_m8e2k"]
@@ -6,10 +6,13 @@
 [ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://Card/Templates/family.gd" id="2_upugm"]
 [ext_resource type="Resource" uid="uid://cno4627vx3nt8" path="res://Card/Descriptions/Cards/Colossus/Epic/VitalPulse/colossus_vital_pulse.tres" id="3_rt3ai"]
 [ext_resource type="Resource" uid="uid://b62a25wa2mjlv" path="res://Card/Descriptions/Cards/Colossus/Rare/Tainted Blood/colossus_tainted_blood.tres" id="4_gsofw"]
+[ext_resource type="Resource" uid="uid://cj72i47u7d1nu" path="res://Card/Descriptions/Cards/Colossus/Common/Proteins/colossus_proteins.tres" id="5_4cji8"]
+[ext_resource type="Resource" uid="uid://b6rcxah2x0aqm" path="res://Card/Descriptions/Cards/Colossus/Common/BearStrenght/colossus_bear_strength.tres" id="6_4aec1"]
+[ext_resource type="Resource" uid="uid://bdq8el3f8q22o" path="res://Card/Descriptions/Cards/Colossus/Common/TitansProtection/colossus_titans_protection.tres" id="7_cam05"]
 
 [resource]
 script = ExtResource("2_upugm")
-cards = Array[ExtResource("1_f2mb4")]([ExtResource("2_m8e2k"), ExtResource("3_rt3ai"), ExtResource("4_gsofw")])
+cards = Array[ExtResource("1_f2mb4")]([ExtResource("2_m8e2k"), ExtResource("3_rt3ai"), ExtResource("4_gsofw"), ExtResource("5_4cji8"), ExtResource("6_4aec1"), ExtResource("7_cam05")])
 icon = ExtResource("2_sor6b")
 family_name = "Colossus"
 family_type = 6

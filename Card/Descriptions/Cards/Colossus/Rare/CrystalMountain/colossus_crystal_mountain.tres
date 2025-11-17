@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://lyy1665stx5d"]
+
+[ext_resource type="Texture2D" uid="uid://bajx1q0uer845" path="res://Card/Descriptions/Cards/Colossus/Rare/CrystalMountain/colossus_crystal_mountain.png" id="1_1ql3a"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_pvac3"]
+[ext_resource type="Script" uid="uid://c51nb6wkfq4ov" path="res://Card/Descriptions/Cards/Colossus/Rare/CrystalMountain/colossus_crystal_mountain.gd" id="2_n1j2v"]
+
+[sub_resource type="Resource" id="Resource_2gfvs"]
+script = ExtResource("2_n1j2v")
+_defense_increase = Array[float]([50.0, 14.0, 21.0])
+metadata/_custom_type_script = "uid://c51nb6wkfq4ov"
+
+[resource]
+script = ExtResource("1_pvac3")
+name = "Crystal Mountain"
+picture = ExtResource("1_1ql3a")
+family = 6
+player_upgrade = SubResource("Resource_2gfvs")
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"
