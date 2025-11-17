@@ -2,6 +2,17 @@ class_name FamilyDefenseStats
 extends FamilyStats
 
 #region Common Card
+
+# [EVASIVE BARRIER]
+var evasive_barrier_activated: bool
+var evasive_barrier_dodge_increase: float
+var evasive_barrier_shield_gain: float
+
+# [FORCE FIELD]
+var force_field_activated: bool
+var force_field_period: float
+var force_field_lost_hp_percent: float
+
 #endregion
 
 #region Rare Card
@@ -46,18 +57,12 @@ extends FamilyStats
 @export var gladiator_helmet_period: float # Time between 2 ticks
 @export var gladiator_helmet_armor_stacks: int # Armor stacks gained every tick
 
-@export_group("Titan Gloves")
-@export var titan_gloves_activated: bool # True if this skill is activated
-@export var titan_gloves_max_health_percent: bool # % of max life converted into armor stacks each tick
-@export var titan_gloves_period: float # Time between 2 ticks
+
 
 @export_group("Adaptative Cloak")
 @export var adaptative_cloak_activated: bool # True if this skill is activated
 @export var adaptative_cloak_attack_percent: int # % Percent of AA damage converted into armor stacks
 
-@export_group("Evading Pants")
-@export var evading_pants_activated: bool # True if this skill is activated
-@export var evading_pants_armor_stacks: int # Armor stacks gained each dodge
 
 @export_group("Mystical Shoulders")
 @export var mystical_shoulders_activated: bool # True if this skill is activated

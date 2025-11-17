@@ -21,16 +21,22 @@ func _ready() -> void:
 	_defense_stats = _owner.families_stats.defense
 
 
+
 func start() -> void:
 	_create_optional_timers()
 	for timer in _optional_timers:
 		timer.start()
+	_add_stat_modifiers()
+	_add_action_modifiers()
+
 
 
 func stop() -> void:
+	_remove_action_modifiers()
+	_clear_stat_modifiers()
 	for timer in _optional_timers:
-		timer.queue_free()
-	_optional_timers.clear()
+		timer.stop()
+
 
 
 func get_increased_damage_done_from_power_wrist(damage: float) -> float:
@@ -66,17 +72,80 @@ func get_reduced_damage_taken_from_armor(damage: int, damage_type: Utils.DamageT
 
 # ============================== Private functions ==============================
 
+
+		
+#region on battle start
+#endregion
+
+#region optional timer
+
 func _create_optional_timers() -> void:
 	if _defense_stats.hedgehog_armor_activated:
 		_optional_timers.append(Utils.create_perpetual_timer(self, _defense_stats.hedgehog_armor_period, _on_hedgehog_armor_period_timeout, true))
 	
 	if _defense_stats.gladiator_helmet_activated:
 		_optional_timers.append(Utils.create_perpetual_timer(self, _defense_stats.gladiator_helmet_period, _on_gladiator_helmet_period_timeout, true))
+		
+	# [FORCE FIELD]
+	if _defense_stats.force_field_activated:
+		_optional_timers.append(Utils.create_perpetual_timer(self, _defense_stats.force_field_period, _on_force_field_timer_timeout, true))
+		
+func _clear_optional_timers() -> void:
+	for timer in _optional_timers:
+		timer.queue_free()
+	_optional_timers.clear()
 	
-	if _defense_stats.titan_gloves_activated:
-		_optional_timers.append(Utils.create_perpetual_timer(self, _defense_stats.titan_gloves_period, _on_titan_gloves_period_timeout, true))
+#endregion
 
+#region aa modifier
+#endregion
 
+#region stats modifier
+func _add_stat_modifiers() -> void:
+	# [EVASIVE BARRIER] 
+	if _defense_stats.evasive_barrier_activated:
+		var mod := StatModifier.new()
+		mod.id = "Evasive Barrier"
+		mod.stat_type = EntityStats.StatType.DODGE
+		mod.calc_type = StatModifier.CalcType.ADD
+		mod.value = _defense_stats.evasive_barrier_dodge_increase
+		mod.tags = [StatModifier.TagType.CARD]
+		_owner.stats_manager.register_modifier(mod)
+		
+func _clear_stat_modifiers() -> void:
+	# [EVASIVE BARRIER]
+	if _defense_stats.evasive_barrier_activated:
+		var mod := StatModifier.new()
+		mod.id = "Evasive Barrier"
+		mod.stat_type = EntityStats.StatType.DODGE
+		_owner.stats_manager.unregister_modifier(mod)
+		
+#endregion
+
+#region actions modifier
+
+func _add_action_modifiers() -> void:
+	# [EVASIVE BARRIER] (Partie Active : Shield on Dodge)
+	if _defense_stats.evasive_barrier_activated:
+		var action_modifier := ActionModifier.new()
+		action_modifier.action_type = ActionModifier.ActionType.DODGE
+		action_modifier.id = "Evasive Barrier"
+		action_modifier.is_one_time_effect = false
+		action_modifier.after_action_logic_callback = _on_dodge_evasive_barrier
+		_owner.action_modifiers_manager.register_modifier(action_modifier)
+		
+func _remove_action_modifiers() -> void:
+	# [EVASIVE BARRIER]
+	if _defense_stats.evasive_barrier_activated:
+		var action_modifier := ActionModifier.new()
+		action_modifier.action_type = ActionModifier.ActionType.DODGE
+		action_modifier.id = "Evasive Barrier"
+		_owner.action_modifiers_manager.unregister_modifier(action_modifier)
+		
+#endregion
+
+#region others cards
+#endregion
 func _gain_armor(armor_stacks: int) -> void:
 	if _defense_stats.dual_shield_activated:
 		var health_ratio: float = (_owner.stats.health as float / _owner.stats.health_max) * 100.0
@@ -143,8 +212,25 @@ func _on_hedgehog_armor_period_timeout() -> void:
 func _on_gladiator_helmet_period_timeout() -> void:
 	_gain_armor(_defense_stats.gladiator_helmet_armor_stacks)
 
-
-func _on_titan_gloves_period_timeout() -> void:
-	var ratio: float = _defense_stats.titan_gloves_max_health_percent as float / 100.0
-	var armor_stacks: int = (_owner.stats.health_max * ratio) as int
-	_gain_armor(armor_stacks)
+func _on_force_field_timer_timeout() -> void:
+	
+	# [FORCE FIELD]
+	var max_hp: int = _owner.stats.health_max
+	var current_hp: int = _owner.stats.health
+	var lost_hp: int = max_hp - current_hp
+	
+	if lost_hp <= 0:
+		return
+		
+	var percent: float = _defense_stats.force_field_lost_hp_percent
+	var armor_gain: int = int(float(lost_hp) * (percent / 100.0))
+	
+	if armor_gain > 0:
+		_owner.stats.armor_stacks += armor_gain
+		
+func _on_dodge_evasive_barrier(cb_vars: Dictionary) -> void:
+	
+	# [EVASIVE BARRIER]
+	var shield_amount: float = _defense_stats.evasive_barrier_shield_gain
+	if _owner != null and is_instance_valid(_owner):
+		_owner.stats.armor_stacks += shield_amount

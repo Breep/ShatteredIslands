@@ -43,7 +43,23 @@ func stop() -> void:
 
 
 # ============================== Private functions ==============================
+#region on battle start
+#endregion
 
+#region optional timer
+#endregion
+
+#region aa modifier
+#endregion
+
+#region stats modifier
+#endregion
+
+#region actions modifier
+#endregion
+
+#region others cards
+#endregion
 func _on_battle_start() -> void:
 	# [nuke]
 	if _fire_stats.nuke_activated:

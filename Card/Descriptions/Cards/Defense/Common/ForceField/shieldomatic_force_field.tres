@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://by5tud5u1y87o"]
+
+[ext_resource type="Texture2D" uid="uid://psnthd75twnn" path="res://Card/Descriptions/Cards/Defense/Common/ForceField/shieldomatic_force_field.png" id="1_n4itg"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_svenj"]
+[ext_resource type="Script" uid="uid://dbrbch8fom76l" path="res://Card/Descriptions/Cards/Defense/Common/ForceField/shieldomatic_force_field.gd" id="2_1jt0m"]
+
+[sub_resource type="Resource" id="Resource_0hj2g"]
+script = ExtResource("2_1jt0m")
+_period = Array[float]([1.5, 1.5, 1.5, 1.5, 1.5])
+_lost_hp_percent = Array[float]([1.0, 2.0, 3.0, 4.0, 6.0])
+metadata/_custom_type_script = "uid://dbrbch8fom76l"
+
+[resource]
+script = ExtResource("1_svenj")
+name = "Force Field"
+picture = ExtResource("1_n4itg")
+family = 2
+player_upgrade = SubResource("Resource_0hj2g")
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"
