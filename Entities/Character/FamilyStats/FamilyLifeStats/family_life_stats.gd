@@ -22,6 +22,11 @@ var bear_strength_activated: bool
 var bear_strength_as_reduction: float # La réduction d'AS (ex: 7.0)
 var bear_strength_hp_to_ad_percent: float # Le % de conversion (ex: 1.5)
 
+# [ANCIENT GROWTH]
+var ancient_growth_activated: bool
+var ancient_growth_period: float
+var ancient_growth_amount: float
+
 #endregion
 
 #region Rare Cards

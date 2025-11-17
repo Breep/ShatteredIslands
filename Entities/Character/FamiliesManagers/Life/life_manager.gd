@@ -9,6 +9,9 @@ signal revived(life_after_revive: int)
 
 var _life_stats: FamilyLifeStats # Ref to the owner life stats
 
+# [ANCIENT GROWTH] Accumulateur
+var _ancient_growth_total_bonus: float = 0.0
+
 var _revive_timer: Timer
 
 # ============================== Spells scenes ==============================
@@ -25,6 +28,8 @@ func start() -> void:
 		timer.start()
 	_add_stat_modifiers()
 	_add_action_modifiers()
+	# [ANCIENT GROWTH] Reset du compteur au début du combat
+	_ancient_growth_total_bonus = 0.0
 
 
 func stop() -> void:
@@ -73,6 +78,10 @@ func _create_optional_timers() -> void:
 	# [TITAN'S PROTECTION]
 	if _life_stats.titans_protection_activated:
 		_optional_timers.append(Utils.create_perpetual_timer(self, _life_stats.titans_protection_period, _on_titans_protection_timer_timeout, true))
+		
+	# [ANCIENT GROWTH]
+	if _life_stats.ancient_growth_activated:
+		_optional_timers.append(Utils.create_perpetual_timer(self, _life_stats.ancient_growth_period, _on_ancient_growth_timer_timeout, true))
 
 func _clear_optional_timers() -> void:
 	for timer in _optional_timers:
@@ -167,6 +176,7 @@ func _add_stat_modifiers() -> void:
 		poison_mod.tags = [StatModifier.TagType.CARD]
 		_owner.stats_manager.register_modifier(poison_mod)
 		
+		
 func _clear_stat_modifiers() -> void:
 	
 	# [EVASIVE GROWTH]
@@ -220,6 +230,13 @@ func _clear_stat_modifiers() -> void:
 		poison_mod.stat_type = EntityStats.StatType.RESISTANCE
 		poison_mod.action_type = Utils.ActionType.DAMAGE_POISON
 		_owner.stats_manager.unregister_modifier(poison_mod)
+		
+		# [ANCIENT GROWTH]
+	if _life_stats.ancient_growth_activated:
+		var mod := StatModifier.new()
+		mod.id = "Ancient Growth"
+		mod.stat_type = EntityStats.StatType.HEALTH_MAX
+		_owner.stats_manager.unregister_modifier(mod)
 		
 #endregion
 
@@ -333,3 +350,15 @@ func _on_titans_protection_timer_timeout() -> void:
 	
 	if heal_amount > 0:
 		_owner.heal(_owner, heal_amount)
+
+func _on_ancient_growth_timer_timeout() -> void:
+	# [ANCIENT GROWTH]
+	_ancient_growth_total_bonus += _life_stats.ancient_growth_amount
+
+	var mod := StatModifier.new()
+	mod.id = "Ancient Growth"
+	mod.stat_type = EntityStats.StatType.HEALTH_MAX
+	mod.calc_type = StatModifier.CalcType.ADD
+	mod.value = _ancient_growth_total_bonus
+	mod.tags = [StatModifier.TagType.CARD]
+	_owner.stats_manager.update_modifier(mod)

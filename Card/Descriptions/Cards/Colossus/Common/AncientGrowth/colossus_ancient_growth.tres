@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://c4ls6c4ycmk0t"]
+
+[ext_resource type="Texture2D" uid="uid://b1rgumqb5qsrj" path="res://Card/Descriptions/Cards/Colossus/Common/AncientGrowth/colossus_ancient_growth.png" id="1_7hkqd"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_o6hwe"]
+[ext_resource type="Script" uid="uid://b073yn3ybubj2" path="res://Card/Descriptions/Cards/Colossus/Common/AncientGrowth/colossus_ancient_growth.gd" id="2_cbsq6"]
+
+[sub_resource type="Resource" id="Resource_3rf7c"]
+script = ExtResource("2_cbsq6")
+_hp_increase = Array[float]([100.0, 40.0, 60.0, 80.0, 120.0])
+_period = Array[float]([1.0, 4.0, 4.0, 4.0, 4.0])
+metadata/_custom_type_script = "uid://b073yn3ybubj2"
+
+[resource]
+script = ExtResource("1_o6hwe")
+name = "Ancient Growth"
+picture = ExtResource("1_7hkqd")
+family = 6
+player_upgrade = SubResource("Resource_3rf7c")
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"
