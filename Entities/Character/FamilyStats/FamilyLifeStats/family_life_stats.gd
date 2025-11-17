@@ -17,6 +17,11 @@ var titans_protection_activated: bool
 var titans_protection_period: float
 var titans_protection_lost_hp_percent: float
 
+# [BEAR STRENGTH]
+var bear_strength_activated: bool
+var bear_strength_as_reduction: float # La réduction d'AS (ex: 7.0)
+var bear_strength_hp_to_ad_percent: float # Le % de conversion (ex: 1.5)
+
 #endregion
 
 #region Rare Cards

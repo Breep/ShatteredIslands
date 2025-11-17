@@ -110,6 +110,28 @@ func _add_stat_modifiers() -> void:
 		_owner.stats_manager.register_modifier(mod)
 		_owner.stats.health += _life_stats.proteins_max_hp_increase
 		
+	# [BEAR STRENGTH]
+	if _life_stats.bear_strength_activated:
+		var as_mod := StatModifier.new()
+		as_mod.id = "Bear Strength AS"
+		as_mod.stat_type = EntityStats.StatType.AA_SPEED
+		as_mod.calc_type = StatModifier.CalcType.MULT
+		as_mod.value = -(_life_stats.bear_strength_as_reduction / 100.0)
+		as_mod.tags = [StatModifier.TagType.CARD]
+		_owner.stats_manager.register_modifier(as_mod)
+		
+		var ad_mod := StatModifier.new()
+		ad_mod.id = "Bear Strength AD"
+		ad_mod.stat_type = EntityStats.StatType.AD
+		ad_mod.calc_type = StatModifier.CalcType.ADD
+		
+		var max_hp: float = float(_owner.stats.health_max)
+		var percent: float = _life_stats.bear_strength_hp_to_ad_percent
+		ad_mod.value = max_hp * (percent / 100.0)
+		
+		ad_mod.tags = [StatModifier.TagType.CARD]
+		_owner.stats_manager.register_modifier(ad_mod)
+		
 func _clear_stat_modifiers() -> void:
 	
 	# [EVASIVE GROWTH]
@@ -126,6 +148,20 @@ func _clear_stat_modifiers() -> void:
 		mod.id = "Proteins"
 		mod.stat_type = EntityStats.StatType.HEALTH_MAX
 		_owner.stats_manager.unregister_modifier(mod)
+		
+	# [BEAR STRENGTH]
+	if _life_stats.bear_strength_activated:
+		# Nettoyer AS
+		var as_mod := StatModifier.new()
+		as_mod.id = "Bear Strength AS"
+		as_mod.stat_type = EntityStats.StatType.AA_SPEED
+		_owner.stats_manager.unregister_modifier(as_mod)
+		
+		# Nettoyer AD
+		var ad_mod := StatModifier.new()
+		ad_mod.id = "Bear Strength AD"
+		ad_mod.stat_type = EntityStats.StatType.AD
+		_owner.stats_manager.unregister_modifier(ad_mod)
 		
 #endregion
 
