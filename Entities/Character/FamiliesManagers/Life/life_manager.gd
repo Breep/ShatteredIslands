@@ -20,6 +20,7 @@ func _ready() -> void:
 
 
 func start() -> void:
+	_create_optional_timers()
 	for timer in _optional_timers:
 		timer.start()
 	_add_stat_modifiers()
@@ -31,6 +32,7 @@ func stop() -> void:
 	_clear_stat_modifiers()
 	for timer in _optional_timers:
 		timer.stop()
+	_clear_optional_timers()
 
 
 func get_increased_damage_taken_from_lost_hp(damage: float, _damage_type: Utils.DamageType) -> float:
@@ -45,23 +47,40 @@ func source_is_dead() -> void:
 	_revive_timer.start()
 
 # ============================== Private functions ==============================
+#region optional timer
 
 func _create_optional_timers() -> void:
-	# Poisonous hearth
-	if _life_stats.poison_by_lost_hp_activated:
-		_optional_timers.append(Utils.create_perpetual_timer(self, _life_stats.poison_by_lost_hp_period, _on_poison_by_lost_hp_timer_timeout))
 	
-	# Hearth of fire
-	if _life_stats.fire_damage_activated:
-		_optional_timers.append(Utils.create_perpetual_timer(self, _life_stats.fire_damage_period, _on_fire_damage_timer_timeout))
+	## Hearth of fire
+	#if _life_stats.fire_damage_activated:
+		#_optional_timers.append(Utils.create_perpetual_timer(self, _life_stats.fire_damage_period, _on_fire_damage_timer_timeout))
+	#
+	#if _life_stats.revive_after_death_activated:
+		#_revive_timer = Timer.new()
+		#_revive_timer.wait_time = _life_stats.revive_after_death_time
+		#_revive_timer.one_shot = true
+		#_revive_timer.timeout.connect(_on_revive_timer_timeout)
+		#add_child(_revive_timer)
 	
-	if _life_stats.revive_after_death_activated:
-		_revive_timer = Timer.new()
-		_revive_timer.wait_time = _life_stats.revive_after_death_time
-		_revive_timer.one_shot = true
-		_revive_timer.timeout.connect(_on_revive_timer_timeout)
-		add_child(_revive_timer)
+	# [TAINTED BLOOD]
+	if _life_stats.tainted_blood_activated:
+		_optional_timers.append(Utils.create_perpetual_timer(self, _life_stats.tainted_blood_period, _on_tainted_blood_timer_timeout, true))
+		
+	# [VITAL PULSE]
+	if _life_stats.vital_pulse_activated:
+		_optional_timers.append(Utils.create_perpetual_timer(self, _life_stats.vital_pulse_period, _vital_pulse_timer_timeout, true))
 
+func _clear_optional_timers() -> void:
+	for timer in _optional_timers:
+		timer.queue_free()
+	_optional_timers.clear()
+
+#endregion
+
+#region aa modifier
+#endregion
+
+#region stats modifier
 
 func _add_stat_modifiers() -> void:
 	
@@ -85,6 +104,11 @@ func _clear_stat_modifiers() -> void:
 		mod.id = "Evasive Growth"
 		_owner.stats_manager.unregister_modifier(mod)
 		
+#endregion
+
+#region action modifier
+
+
 func _add_action_modifiers() -> void:
 	# [EVASIVE GROWTH]
 	if _life_stats.evasive_growth_activated:
@@ -95,6 +119,8 @@ func _add_action_modifiers() -> void:
 		action_modifier.after_action_logic_callback = _on_dodge_evasive_growth
 		_owner.action_modifiers_manager.register_modifier(action_modifier)
 
+#endregion
+
 func _remove_action_modifiers() -> void:
 	# [EVASIVE GROWTH]
 	if _life_stats.evasive_growth_activated:
@@ -104,7 +130,9 @@ func _remove_action_modifiers() -> void:
 		action_modifier.after_action_logic_callback = _on_dodge_evasive_growth
 		_owner.action_modifiers_manager.unregister_modifier(action_modifier)
 		
+#region other card
 
+#endregion
 # ============================== Callbacks functions ==============================
 
 func _on_poison_by_lost_hp_timer_timeout() -> void:
@@ -130,3 +158,46 @@ func _on_dodge_evasive_growth(cb_vars: Dictionary) -> void:
 		printerr("Evasive Growth callback: _owner est invalide.")
 		return
 	_owner.stats.health_max += _life_stats.evasive_growth_increase_max_hp
+
+func _vital_pulse_timer_timeout() -> void:
+	# [VITAL PULSE]
+	var targets: Array[Entity] = _owner.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ENEMIES)
+	print(targets)
+	if targets.is_empty():
+		return
+	var max_hp: int = _owner.stats.health_max
+	var percent: float = _life_stats.vital_pulse_damage_percent
+	var damage: float = max_hp * (percent / 100.0)
+	if damage <= 0:
+		return
+	for target in targets:
+		if target != null and is_instance_valid(target):
+			_owner.direct_attack(target, damage, Utils.DamageType.PHYSICAL)
+
+func _on_tainted_blood_timer_timeout() -> void:
+	# [TAINTED BLOOD]
+	
+	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
+	if target == null or not is_instance_valid(target):
+		return
+
+	var max_hp: int = _owner.stats.health_max
+	var current_hp: int = _owner.stats.health
+	var lost_hp: int = max_hp - current_hp
+	
+	if lost_hp <= 0:
+		return 
+
+	var percent: float = _life_stats.tainted_blood_lost_hp_percent
+	var stacks: int = int(float(lost_hp) * (percent / 100.0))
+	
+	if stacks <= 0:
+		return
+	var stack_type: Utils.StackType
+	if Utils.rng.randi() % 2 == 0:
+		stack_type = Utils.StackType.POISON
+	else:
+		stack_type = Utils.StackType.IGNITE
+		stacks *= 5
+		
+	_owner.inflict_condition_stacks(target, stacks, stack_type)

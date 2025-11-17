@@ -36,15 +36,24 @@ var bear_strenght_ad_percent: float # % of max HP converted into AD
 #endregion
 
 #region Rare Cards
-@export_group("RARE")
+
+# [TAINTED BLOOD]
+var tainted_blood_activated: bool
+var tainted_blood_period: float
+var tainted_blood_lost_hp_percent: float
+
 #endregion
 
 #region Epic Cards
-@export_group("EPIC")
+
+# [VITAL PULSE]
+var vital_pulse_activated: bool
+var vital_pulse_period: float
+var vital_pulse_damage_percent: float
+
 #endregion
 
 #region Legendary Cards
-@export_group("LEGENDARY")
 #endregion
 
 var damage_increased_by_hp_lost_activated: bool # If this skill is activated
