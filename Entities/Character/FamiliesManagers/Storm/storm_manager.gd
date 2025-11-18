@@ -24,9 +24,26 @@ func stop() -> void:
 		timer.stop()
 
 # ============================== Private functions ==============================
+#region on battle start
+#endregion
 
+#region optional timer
 func _create_optional_timers() -> void:
 	pass
+#endregion
+
+#region aa modifier
+#endregion
+
+#region stats modifier
+#endregion
+
+#region actions modifier
+#endregion
+
+#region others cards
+#endregion
+
 
 # ============================== Callbacks functions ==============================
 

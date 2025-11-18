@@ -13,6 +13,15 @@ var force_field_activated: bool
 var force_field_period: float
 var force_field_lost_hp_percent: float
 
+# [ENERGY BARRIER]
+var energy_barrier_activated: bool
+var energy_barrier_shield_amount: float
+var energy_barrier_period: float
+
+# [SHIELD RUSH]
+var shield_rush_activated: bool
+var shield_rush_amount: float
+
 #endregion
 
 #region Rare Card

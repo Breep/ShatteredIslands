@@ -28,6 +28,10 @@ func start() -> void:
 		timer.start()
 	_add_stat_modifiers()
 	_add_action_modifiers()
+	
+	# [SHIELD RUSH]
+	if _defense_stats.shield_rush_activated:
+		_apply_shield_rush()
 
 
 
@@ -89,6 +93,10 @@ func _create_optional_timers() -> void:
 	# [FORCE FIELD]
 	if _defense_stats.force_field_activated:
 		_optional_timers.append(Utils.create_perpetual_timer(self, _defense_stats.force_field_period, _on_force_field_timer_timeout, true))
+		
+	# [ENERGY BARRIER]
+	if _defense_stats.energy_barrier_activated:
+		_optional_timers.append(Utils.create_perpetual_timer(self, _defense_stats.energy_barrier_period, _on_energy_barrier_timer_timeout, true))
 		
 func _clear_optional_timers() -> void:
 	for timer in _optional_timers:
@@ -234,3 +242,19 @@ func _on_dodge_evasive_barrier(cb_vars: Dictionary) -> void:
 	var shield_amount: float = _defense_stats.evasive_barrier_shield_gain
 	if _owner != null and is_instance_valid(_owner):
 		_owner.stats.armor_stacks += shield_amount
+
+func _on_energy_barrier_timer_timeout() -> void:
+	# [ENERGY BARRIER]
+	if _owner == null or not is_instance_valid(_owner):
+		return
+		
+	var amount: int = int(_defense_stats.energy_barrier_shield_amount)
+	_owner.stats.armor_stacks += amount
+
+func _apply_shield_rush() -> void:
+	# [SHIELD RUSH]
+	if _owner == null or not is_instance_valid(_owner):
+		return
+
+	var amount: int = int(_defense_stats.shield_rush_amount)
+	_owner.stats.armor_stacks += amount
