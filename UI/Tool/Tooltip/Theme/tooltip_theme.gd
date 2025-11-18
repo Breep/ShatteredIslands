@@ -50,23 +50,26 @@ extends Resource
 @export_subgroup("Family Colors")
 @export var ATTACK_COLOR: Color = Color("B0C4DE")    # LightSteelBlue (Gris/Bleu Attaque)
 @export var DEFENCE_COLOR: Color = Color("CD853F")   # Peru (Marron Défense)
-@export var LIGHTNING_COLOR: Color = Color("00BFFF") # DeepSkyBlue (Bleu Foudre)
+@export var LIGHTNING_COLOR: Color = Color("005bffff") # DeepSkyBlue (Bleu Foudre)
 @export var SERENITY_COLOR: Color = Color("F0F8FF")  # AliceBlue (Blanc/Bleu Serenity)
 @export var LIFE_COLOR: Color = Color("FF8C00")      # DarkOrange (Orange Vie)
 @export var NECRO_COLOR: Color = Color("9932CC")     # DarkOrchid (Violet Necro)
 @export var CHICKEN_COLOR: Color = Color("FFD700")   # Gold (Jaune Chicken-Lord)
-@export var POISON_COLOR: Color = Color("9ACD32")    # YellowGreen (Vert Poison image)
+@export var POISON_COLOR: Color = Color("346800ff")    # YellowGreen (Vert Poison image)
 
 # --- COULEURS MECANIQUES ---
 @export_subgroup("Mechanic Colors")
 @export var PHYSICAL_COLOR: Color = Color("DEB887")  # Burlywood (Physique)
 @export var MAGICAL_COLOR: Color = Color("6495ED")   # CornflowerBlue (Magique)
-@export var TRUE_COLOR: Color = Color("F5F5F5")      # WhiteSmoke (Brut)
+@export var TRUE_COLOR: Color = Color("c3af07ff")      # WhiteSmoke (Brut)
 @export var FIRE_COLOR: Color = Color("FF4500")      # OrangeRed (Feu/Ignite)
-@export var STAT_COLOR: Color = Color("FFD700")      # Gold (Stats générales)
+@export var STAT_COLOR: Color = Color("4c8bd8ff")      # Gold (Stats générales)
 @export var DEBUFF_COLOR: Color = Color("DA70D6")    # Orchid (Debuffs/Faiblesses)
-@export var SHIELD_COLOR: Color = Color("E0FFFF")    # LightCyan (Bouclier spécifique)
+@export var SHIELD_COLOR: Color = Color("895a24ff")    # LightCyan (Bouclier spécifique)
 @export var COOLDOWN_COLOR: Color = Color("87CEEB")  # Skyblue
+@export var REGEN_COLOR: Color = Color("7fdf4dff")  # Skyblue
+@export var DISPELL_COLOR: Color = Color("af23d4ff")  
+@export var METEOR_COLOR: Color = Color("7c2852")  # Skyblue
 @export var DEFAULT_COLOR: Color = Color.WHITE
 
 # ============================== FUNCTIONS ==============================

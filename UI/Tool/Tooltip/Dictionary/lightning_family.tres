@@ -6,5 +6,5 @@
 script = ExtResource("1_script")
 key = &"LIGHTNING"
 title = "{{COLOR:LIGHTNING_COLOR}}LIGHTNING{{/COLOR}}"
-description = "Famille spécialisée dans la vitesse d'attaque."
+description = "Family specialized in critical effect."
 icon_key = "LIGHTNING_FAMILY_ICON"

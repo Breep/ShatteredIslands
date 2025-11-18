@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_script")
-key = &"LIGHTNING"
-title = "{{COLOR:LIGHTNING_COLOR}}LIGHTNING{{/COLOR}}"
-description = "Family specialized in critical effect."
-icon_key = "LIGHTNING_FAMILY_ICON"
+key = &"EXECUTE"
+title = "{{COLOR:ATTACK_COLOR}}EXECUTE{{/COLOR}}"
+description = "Instantly kills the target if their HP is below a certain threshold."
+icon_key = "ATTACK_ICON"
