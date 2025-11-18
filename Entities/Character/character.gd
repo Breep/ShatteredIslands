@@ -113,6 +113,9 @@ func on_inactive_island() -> void:
 func get_auto_attack_spawn() -> Node3D:
 	return _turret.get_projectile_spawn_point()
 
+func get_rank_changed_signal() -> Signal:
+	return _character_logic.get_rank_changed_signal()
+
 #region ===== Actions =====
 func direct_attack(target: Entity, damage: int, damage_type: Utils.DamageType) -> void:
 	_action_module.direct_attack(target, damage, damage_type)

@@ -1,6 +1,10 @@
 class_name StormManager
 extends FamilyManager
 
+# ============================== Signals ==============================
+
+signal rank_changed(new_rank: Rank)
+
 # ============================== Enums ==============================
 
 enum Rank {
@@ -18,9 +22,9 @@ const CRIT_POINT_MULT: float = 0.5 # How many point does a multiplier is worth
 
 const RANK_POINT_TRESHOLDS: Dictionary[Rank, float] = {
 	Rank.D: 0.0,
-	Rank.C: 10.0,
+	Rank.C: 5.0,
 	Rank.B: 15.0,
-	Rank.A: 25.0,
+	Rank.A: 30.0,
 	Rank.S: 50.0
 }
 
@@ -52,6 +56,7 @@ var _current_rank: Rank:
 	set(value):
 		if __current_rank == value: return
 		__current_rank = value
+		rank_changed.emit(value)
 		_on_current_rank_changed()
 var _current_point: float
 
