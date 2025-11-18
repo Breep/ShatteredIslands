@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TooltipDesc" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://UI/Tool/Tooltip/Dictionary/tooltip_desc.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+key = &"SERENITY"
+title = "{{COLOR:SERENITY_COLOR}}SERENITY{{/COLOR}}"
+description = "Support family specialized in [[HEAL]], [[REGEN]] and [[CLEANSE]]."
+icon_key = "SERENITY_FAMILY_ICON"

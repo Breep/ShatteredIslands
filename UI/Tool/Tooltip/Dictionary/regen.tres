@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TooltipDesc" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://UI/Tool/Tooltip/Dictionary/tooltip_desc.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+key = &"REGEN"
+title = "{{COLOR:LIFE_COLOR}}REGENERATION{{/COLOR}}"
+description = "Restores 1HP/Stack per seconde. Regen decay above a treshhold: 40% HP"
+icon_key = "HEAL_ICON"

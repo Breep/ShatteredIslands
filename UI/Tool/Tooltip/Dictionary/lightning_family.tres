@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TooltipDesc" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://UI/Tool/Tooltip/Dictionary/tooltip_desc.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+key = &"LIGHTNING"
+title = "{{COLOR:LIGHTNING_COLOR}}LIGHTNING{{/COLOR}}"
+description = "Famille spécialisée dans la vitesse d'attaque."
+icon_key = "LIGHTNING_FAMILY_ICON"
