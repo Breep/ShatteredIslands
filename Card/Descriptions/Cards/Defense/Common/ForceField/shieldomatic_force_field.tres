@@ -8,6 +8,7 @@
 script = ExtResource("2_1jt0m")
 _period = Array[float]([1.5, 1.5, 1.5, 1.5, 1.5])
 _lost_hp_percent = Array[float]([1.0, 2.0, 3.0, 4.0, 6.0])
+_rarity = 0
 metadata/_custom_type_script = "uid://dbrbch8fom76l"
 
 [resource]
