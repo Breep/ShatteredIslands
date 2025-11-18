@@ -12,7 +12,8 @@ enum TagType {
 	CARD,
 	HERO,
 	QUEST,
-	EVENT
+	EVENT,
+	FAMILY
 }
 
 # ============================== Public variables ==============================

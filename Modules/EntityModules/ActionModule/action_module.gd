@@ -24,15 +24,15 @@ func connect_to_spawn_manager(spawn_manager: SpawnManager) -> void:
 #region ============================== Attack ==============================
 
 # Instantly attack the target - Apply cards damages multiplier if there are some
-func direct_attack(target: Entity, damage: int, damage_type: Utils.DamageType) -> void:
+func direct_attack(target: Entity, damage: float, damage_type: Utils.DamageType) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
+	var damage_before_crit: float = damage * _get_strenght_weakness_multiplier(Utils.damage_to_action(damage_type))
 	var crit_multiplier = _get_crit_multiplier(Utils.damage_to_action(damage_type))
-	damage *= crit_multiplier["multiplier"]
-	damage = int(float(damage) * _get_strenght_weakness_multiplier(Utils.damage_to_action(damage_type)))
-	var damage_done = target.take_damage(damage, damage_type, crit_multiplier["is_critical"], _owner)
+	damage = damage_before_crit * crit_multiplier["multiplier"]
+	var damage_done: float = target.take_damage(damage, damage_type, crit_multiplier["is_critical"], _owner)
 	if crit_multiplier["is_critical"]:
-		_owner.signal_critical_action_done(target, Utils.damage_to_action(damage_type), damage_done)
+		_owner.signal_critical_action_done(target, Utils.damage_to_action(damage_type), damage_before_crit, damage_done)
 
 
 # Instantly attack the target - Apply cards damages multiplier if there are some
@@ -57,13 +57,15 @@ func build_projectile_attack(target: Entity, projectile_type: Projectile.Project
 	if target == null: return
 	var physical_multiplier = _get_crit_multiplier(Utils.ActionType.DAMAGE_PHYSICAL)
 	projectile_stats.physical_is_critical = physical_multiplier["is_critical"]
-	projectile_stats.physical_damage_flat *= physical_multiplier["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_PHYSICAL)
-	projectile_stats.physical_damage_percent *= physical_multiplier["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_PHYSICAL)
+	projectile_stats.physical_base_damage = projectile_stats.physical_damage_flat * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_PHYSICAL)
+	projectile_stats.physical_damage_flat = projectile_stats.physical_base_damage * physical_multiplier["multiplier"]
+	#projectile_stats.physical_damage_percent *= physical_multiplier["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_PHYSICAL)
 	
 	var magical_multiplier = _get_crit_multiplier(Utils.ActionType.DAMAGE_MAGICAL)
 	projectile_stats.magical_is_critical = magical_multiplier["is_critical"]
-	projectile_stats.magical_damage_flat *= magical_multiplier["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_MAGICAL)
-	projectile_stats.magical_damage_percent *= magical_multiplier["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_MAGICAL)
+	projectile_stats.magical_base_damage = projectile_stats.magical_damage_flat * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_MAGICAL)
+	projectile_stats.magical_damage_flat = projectile_stats.magical_base_damage * magical_multiplier["multiplier"]
+	#projectile_stats.magical_damage_percent *= magical_multiplier["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_MAGICAL)
 	
 	var poison_stacks_multiplier = _get_crit_multiplier(Utils.ActionType.DAMAGE_POISON)
 	projectile_stats.poison_stacks_is_critical = poison_stacks_multiplier["is_critical"]
@@ -81,14 +83,15 @@ func _spawn_projectile(target: Entity, projectile_type: Projectile.ProjectileTyp
 
 #region ============================== Heal ==============================
 # [Server only]
-func heal(target: Entity, heal_amount: int) -> void:
+func heal(target: Entity, heal_amount: float) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
+	var heal_amount_before_crit: float = heal_amount * _get_strenght_weakness_multiplier(Utils.ActionType.UTILITY_HEAL)
 	var crit_multiplier = _get_crit_multiplier(Utils.ActionType.UTILITY_HEAL)
-	heal_amount *= crit_multiplier["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.UTILITY_HEAL)
-	target.take_heal(heal_amount, crit_multiplier["is_critical"], _owner)
+	heal_amount = heal_amount_before_crit * crit_multiplier["multiplier"]
+	var heal_taken: float = target.take_heal(heal_amount, crit_multiplier["is_critical"], _owner)
 	if crit_multiplier["is_critical"]:
-		_owner.signal_critical_action_done(target, Utils.ActionType.UTILITY_HEAL, heal_amount)
+		_owner.signal_critical_action_done(target, Utils.ActionType.UTILITY_HEAL, heal_amount_before_crit, heal_taken)
 
 
 func heal_percent(target: Entity, percent: float, percent_modifier: Utils.PercentModifier) -> void:
@@ -108,12 +111,12 @@ func heal_percent(target: Entity, percent: float, percent_modifier: Utils.Percen
 
 #region ============================== Condition stacks ==============================
 # [Server only]
-func inflict_condition_stacks(target: Entity, stacks_number: int, stack_type: Utils.StackType) -> void:
+func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Utils.StackType) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
+	var stacks_number_before_crit: float = stacks_number * _get_strenght_weakness_multiplier(Utils.stack_to_action(stack_type))
 	var crit_multiplier = _get_crit_multiplier(Utils.stack_to_action(stack_type))
-	stacks_number *= crit_multiplier["multiplier"]
-	stacks_number *= _get_strenght_weakness_multiplier(Utils.stack_to_action(stack_type))
+	stacks_number = stacks_number_before_crit * crit_multiplier["multiplier"]
 	if _owner.action_modifiers_manager != null:
 		for condition_modifier: ActionModifier in _owner.action_modifiers_manager.consume_all_modifiers(ActionModifier.ActionType.INFLICT_CONDITION):
 			if condition_modifier.after_action_logic_callback.is_valid():
@@ -122,31 +125,31 @@ func inflict_condition_stacks(target: Entity, stacks_number: int, stack_type: Ut
 					ActionModifier.VarType.STACK_TYPE: stack_type,
 					ActionModifier.VarType.TARGET: target
 				})
-	target.take_condition_stacks(stacks_number, stack_type, crit_multiplier["is_critical"], _owner)
+	var stacks_taken: float = target.take_condition_stacks(stacks_number, stack_type, crit_multiplier["is_critical"], _owner)
 	if crit_multiplier["is_critical"]:
-		_owner.signal_critical_action_done(target, Utils.stack_to_action(stack_type), stacks_number)
+		_owner.signal_critical_action_done(target, Utils.stack_to_action(stack_type), stacks_number_before_crit, stacks_taken)
 #endregion
 
 #region ============================== Cleanse and Dispell ==============================
 # Removes debuf
 func cleanse(target: Entity, value: float) -> void:
 	if target == null or target.is_queued_for_deletion(): return
-	value *= _get_strenght_weakness_multiplier(Utils.ActionType.UTILITY_CLEANSE)
+	var value_before_crit: float = value * _get_strenght_weakness_multiplier(Utils.ActionType.UTILITY_CLEANSE)
 	var crit_multiplier: Dictionary = _get_crit_multiplier(Utils.ActionType.UTILITY_CLEANSE)
-	value *= crit_multiplier["multiplier"]
-	var stack_removed = target.take_cleanse(value, crit_multiplier["is_critical"], _owner)
+	value = value_before_crit * crit_multiplier["multiplier"]
+	var stack_removed: float = target.take_cleanse(value, crit_multiplier["is_critical"], _owner)
 	if crit_multiplier["is_critical"]:
-		_owner.signal_critical_action_done(target, Utils.ActionType.UTILITY_CLEANSE, stack_removed)
+		_owner.signal_critical_action_done(target, Utils.ActionType.UTILITY_CLEANSE, value_before_crit, stack_removed)
 
 #Removes buf
 func dispell(target: Entity, value: float) -> void:
 	if target == null or target.is_queued_for_deletion(): return
-	value *= _get_strenght_weakness_multiplier(Utils.ActionType.UTILITY_DISPELL)
+	var value_before_crit: float = value * _get_strenght_weakness_multiplier(Utils.ActionType.UTILITY_DISPELL)
 	var crit_multiplier: Dictionary = _get_crit_multiplier(Utils.ActionType.UTILITY_DISPELL)
-	value *= crit_multiplier["multiplier"]
-	var stack_removed = target.take_dispell(value, crit_multiplier["is_critical"], _owner)
+	value = value_before_crit * crit_multiplier["multiplier"]
+	var stack_removed: float = target.take_dispell(value, crit_multiplier["is_critical"], _owner)
 	if crit_multiplier["is_critical"]:
-		_owner.signal_critical_action_done(target, Utils.ActionType.UTILITY_CLEANSE, stack_removed)
+		_owner.signal_critical_action_done(target, Utils.ActionType.UTILITY_CLEANSE, value_before_crit, stack_removed)
 #endregion
 
 #region ============================== Spells ==============================

@@ -21,6 +21,10 @@ var _mirrored: bool
 @onready var _mana_bar_container: HBoxContainer = %ManaBarContainer
 @onready var _mana_bar_empty_space: Control = %ManaBarEmptySpace
 @onready var _mana_bar_viewport_texture: TextureRect = %ManaBarViewportTexture
+
+@onready var _storm_rank_viewer: UIRankViewer = %RankViewer
+@onready var _top_layer: HBoxContainer = %TopLayer
+@onready var _rank_control: Control = %RankControl
 #endregion
 
 # ============================== Private variables ==============================
@@ -43,6 +47,7 @@ func connect_entity(entity: Entity) -> void:
 	_entity = entity
 	_connect_new_signals()
 	_update_layout()
+	_storm_rank_viewer.connect_entity(entity)
 
 # ============================== Private functions ==============================
 
@@ -115,6 +120,8 @@ func _mirror_ui() -> void:
 		_mana_bar_container.move_child(_mana_bar_empty_space, 0)
 		_mana_bar_viewport_texture.flip_h = true
 		_health_bar.mirrored = true
+		_top_layer.move_child(_player_name_label, -1)
+		_top_layer.move_child(_rank_control, 0)
 	else:
 		_player_name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 		_player_name_label.text = _player_name_label.text.trim_prefix(" ").trim_suffix(" ") # TODO REMOVE this (Text clipping with current font)
@@ -122,6 +129,8 @@ func _mirror_ui() -> void:
 		_mana_bar_container.move_child(_mana_bar_viewport_texture, 0)
 		_mana_bar_viewport_texture.flip_h = false
 		_health_bar.mirrored = false
+		_top_layer.move_child(_player_name_label, 0)
+		_top_layer.move_child(_rank_control, -1)
 
 
 func _make_unique() -> void:
@@ -129,7 +138,7 @@ func _make_unique() -> void:
 
 # ============================== Callbacks ==============================
 
-#region Callbacks
+#region Stats changed callbacks
 func _on_entity_health_changed(health: int) -> void:
 	_health_bar.current_health = health
 
@@ -162,7 +171,7 @@ func _on_entity_regen_stacks_changed(regen_stacks: int) -> void:
 	_health_bar.regen_stacks = regen_stacks
 #endregion
 
-
+#region Interaction callbacks
 func _on_entity_damage_taken(_entity_ref: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor) -> void:
 	var popup_pos: Vector2
 	if blocked_by_armor:
@@ -187,3 +196,4 @@ func _on_entity_stack_taken(_entity_ref: Entity, stack_type: Utils.StackType, st
 		popup_pos = _health_bar.get_health_popup_global_position()
 	var popup: LabelPopup = UI_LABEL_POPUP_SCENE.instantiate().setup_stack(stack_number, stack_type, popup_pos, is_critical).mirror(_mirrored)
 	_popups_node.add_child(popup)
+#endregion

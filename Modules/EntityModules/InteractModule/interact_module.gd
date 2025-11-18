@@ -48,10 +48,10 @@ func take_damage_percent(damage_percent: float, percent_modifier: Utils.PercentM
 #endregion
 
 #region ============================== Condition stacks ==============================
-func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, is_critical: bool, _source: Entity = null) -> void:
-	if _owner.stats.health <= 0 or _owner.is_dead: return
+func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, is_critical: bool, _source: Entity = null) -> float:
+	if _owner.stats.health <= 0 or _owner.is_dead: return -1.0
 	if _is_dodged(Utils.stack_to_action(stack_type)):
-		return
+		return 0.0
 	stacks_number = int(float(stacks_number) * _get_resistance_vulnerability_multiplier(Utils.stack_to_action(stack_type)))
 	_owner.signal_stack_taken(stack_type, stacks_number, is_critical)
 	match stack_type:
@@ -63,16 +63,18 @@ func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, is_c
 			_owner.stats.armor_stacks += stacks_number
 		Utils.StackType.REGEN:
 			_owner.stats.regen_stacks += stacks_number
+	return stacks_number
 #endregion
 
 #region ============================== Heal ==============================
-func take_heal(heal_amount: int, is_critical: bool, _source: Entity = null) -> void:
-	if _owner.stats.health <= 0 or _owner.is_dead: return
+func take_heal(heal_amount: float, is_critical: bool, _source: Entity = null) -> float:
+	if _owner.stats.health <= 0 or _owner.is_dead: return -1.0
 	if _is_dodged(Utils.ActionType.UTILITY_HEAL):
-		return
+		return 0.0
 	heal_amount = int(float(heal_amount) * _get_resistance_vulnerability_multiplier(Utils.ActionType.UTILITY_HEAL))
 	_owner.stats.health += heal_amount
 	_owner.signal_heal_taken(heal_amount, is_critical)
+	return heal_amount
 #endregion
 
 #region ============================== Cleanse/Dispell ==============================

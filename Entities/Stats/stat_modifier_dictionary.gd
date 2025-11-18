@@ -49,7 +49,10 @@ func update_modifier(stat_modifier: StatModifier) -> void:
 		return
 	
 	var modifier_id: String = stat_modifier.id
-	_modifiers[modifier_id] = stat_modifier
+	if _is_multiple_stats():
+		_modifiers_per_action_type[stat_modifier.action_type][modifier_id] = stat_modifier
+	else:
+		_modifiers[modifier_id] = stat_modifier
 	_recompute_stats()
 
 
@@ -90,11 +93,13 @@ func _recompute_single_stats() -> void:
 
 
 func _recompute_multiple_stats() -> void:
+	#print("[DEBUG] StatModifierDictionary: recomputing multiple stats")
 	for action_type: Utils.ActionType in Utils.get_all_actions():
 		var mods: Dictionary = _modifiers_per_action_type[action_type]
 		var add: float = 0.0
 		var mul: float = 0.0
 		for modifier: StatModifier in mods.values():
+			#print("\t[DEBUG] Modifier found ! -> ", modifier.id, " - ", modifier.value)
 			if modifier.calc_type == StatModifier.CalcType.ADD:
 				add += modifier.value
 			elif modifier.calc_type == StatModifier.CalcType.MULT:

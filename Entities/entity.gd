@@ -8,9 +8,9 @@ func signal_death() -> void:
 	_is_dead = true
 	died.emit(self)
 
-signal critical_action_done(entity_ref: Entity, target: Entity, action_type: Utils.ActionType, value: float)
-func signal_critical_action_done(target: Entity, action_type: Utils.ActionType, value: float) -> void:
-	critical_action_done.emit(self, target, action_type, value)
+signal critical_action_done(entity_ref: Entity, target: Entity, action_type: Utils.ActionType, base_value: float, real_value: float)
+func signal_critical_action_done(target: Entity, action_type: Utils.ActionType, base_value: float, real_value: float) -> void:
+	critical_action_done.emit(self, target, action_type, base_value, real_value)
 
 signal damage_taken(entity_ref: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool)
 func signal_damage_taken(damage: int, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool) -> void:
@@ -154,11 +154,13 @@ func take_damage(_damage: int, _damage_type: Utils.DamageType, _is_critical: boo
 func take_damage_percent(_percent: float, _percent_modifier: Utils.PercentModifier, _damage_type: Utils.DamageType, _is_critical: bool = false, _source: Entity = null) -> void:
 	printerr("Entity: virtual take_damage_percent() called [", get_path(), "]")
 
-func take_condition_stacks(_stacks_number: int, _stack_type: Utils.StackType, _is_critical: bool, _source: Entity = null) -> void:
+func take_condition_stacks(_stacks_number: int, _stack_type: Utils.StackType, _is_critical: bool, _source: Entity = null) -> float:
 	printerr("Entity: virtual take_condition_stack() called [", get_path(), "]")
+	return -1.0
 
-func take_heal(_heal_amount: int, _is_critical: bool, _source: Entity = null) -> void:
+func take_heal(_heal_amount: float, _is_critical: bool, _source: Entity = null) -> float:
 	printerr("Entity: virtual take_heal() called [", get_path(), "]")
+	return -1.0
 
 func take_cleanse(_value: float, _is_critical: bool, _source: Entity = null) -> float:
 	printerr("Entity: virtual take_cleanse() called [", get_path(), "]")

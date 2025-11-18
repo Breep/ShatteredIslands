@@ -28,6 +28,8 @@ func connect_to_player(player: Player) -> void:
 	for family_manager: FamilyManager in families_managers.values():
 		family_manager.connect_to_player(player)
 
+func get_rank_changed_signal() -> Signal:
+	return families_managers[Family.FamilyType.STORM].rank_changed
 
 func start() -> void: # Only the server simulate the fight, Clients gets the BattleLog and do a playback
 	if not multiplayer.is_server(): return
