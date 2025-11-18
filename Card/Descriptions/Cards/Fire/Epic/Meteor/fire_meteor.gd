@@ -21,5 +21,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Wrong cardlvl: ", cardlvl, " - ", get_class())
 		return "ERROR"
 	
-	return "[center]Cast a meteor on the target position. Inflict " + str(_ignite_stacks[cardlvl - 1]) + " " + CharacterUpgrade.IGNITE + " stacks. \
-			Additionaly deals " + str(_damage_per_stack[cardlvl - 1]) + " " + CharacterUpgrade.MAGICAL_DAMAGE + ". 3m radius.[/center]"
+	return ""

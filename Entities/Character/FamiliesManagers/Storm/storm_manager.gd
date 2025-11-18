@@ -26,6 +26,22 @@ const RANK_POINT_TRESHOLDS: Dictionary[Rank, float] = {
 
 const RANK_S_DURATION: float = 0.5
 
+const GLOBAL_CRIT_MULTIPLIER_BOOSTS: Dictionary[Rank, Array] = {
+	Rank.D: [10, 15, 20, 25],
+	Rank.C: [20, 30, 40, 50],
+	Rank.B: [30, 45, 60, 75],
+	Rank.A: [40, 60, 80, 100],
+	Rank.S: [50, 75, 100, 125]
+}
+
+const GLOBAL_CRIT_CHANCE_BOOSTS: Dictionary[Rank, Array] = {
+	Rank.D: [1, 1.5, 2, 2.5],
+	Rank.C: [2, 3.0, 4, 5.0],
+	Rank.B: [3, 4.5, 6, 7.5],
+	Rank.A: [4, 6.0, 8, 10.0],
+	Rank.S: [5, 7.5, 10, 12.5]
+}
+
 # ============================== Private variables ==============================
 
 var _storm_stats: FamilyStormStats
@@ -51,6 +67,7 @@ func _ready() -> void:
 
 
 func start() -> void:
+	_apply_passive_crit_boost()
 	for timer in _optional_timers:
 		timer.start()
 
@@ -72,6 +89,7 @@ func _reset_rank() -> void:
 # ============================== Callbacks functions ==============================
 
 func _on_current_rank_changed() -> void:
+	_apply_passive_crit_boost()
 	match _current_rank:
 		Rank.D: print("StormManager: Rank D")
 		Rank.C: print("StormManager: Rank C")
@@ -85,7 +103,7 @@ func _on_current_rank_changed() -> void:
 func _on_owner_critical_action_done(_entity_ref: Entity, _target: Entity, _action_type: Utils.ActionType, base_value: float, real_value: float) -> void:
 	#print("StormManager: CRIT DONE on ", target, " A=", action_type, " | ", base_value, "/", real_value, " | Points=", _get_crit_point(base_value, real_value))
 	_current_point += _get_crit_point(base_value, real_value)
-	print("StormManager: ", _current_point)
+	#print("StormManager: ", _current_point)
 	if _current_point >= RANK_POINT_TRESHOLDS[Rank.S]: _current_rank = Rank.S
 	elif _current_point >= RANK_POINT_TRESHOLDS[Rank.A]: _current_rank = Rank.A
 	elif _current_point >= RANK_POINT_TRESHOLDS[Rank.B]: _current_rank = Rank.B
@@ -101,3 +119,24 @@ func _get_crit_point(default_damage: float, real_damage: float) -> float:
 func _on_rank_s_timer_timeout() -> void:
 	_current_rank = Rank.D
 	_current_point = 0
+
+
+func _apply_passive_crit_boost() -> void:
+	for action_type in Utils.get_all_actions():
+		var crit_chance_boost := StatModifier.new()
+		crit_chance_boost.stat_type = EntityStats.StatType.CRIT_CHANCE
+		crit_chance_boost.action_type = action_type
+		crit_chance_boost.calc_type = StatModifier.CalcType.ADD
+		crit_chance_boost.id = "Lightning passive"
+		crit_chance_boost.tags = [StatModifier.TagType.FAMILY]
+		crit_chance_boost.value = GLOBAL_CRIT_CHANCE_BOOSTS[_current_rank][3]
+		_owner.stats_manager.update_modifier(crit_chance_boost)
+		
+		var crit_multiplier_boost := StatModifier.new()
+		crit_multiplier_boost.stat_type = EntityStats.StatType.CRIT_MULT
+		crit_multiplier_boost.action_type = action_type
+		crit_multiplier_boost.calc_type = StatModifier.CalcType.ADD
+		crit_multiplier_boost.id = "Lightning passive"
+		crit_multiplier_boost.tags = [StatModifier.TagType.FAMILY]
+		crit_multiplier_boost.value = GLOBAL_CRIT_MULTIPLIER_BOOSTS[_current_rank][3]
+		_owner.stats_manager.update_modifier(crit_multiplier_boost)
