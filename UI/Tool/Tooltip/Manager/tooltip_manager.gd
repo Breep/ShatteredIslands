@@ -21,7 +21,6 @@ extends Node
 	# --- DEFENSE ---
 	"ARMOR":             "[color=%s][url=ARMOR]armor[/url][/color]"                         % THEME.color_html("DEFENCE_COLOR"),
 	"MR":                "[color=%s][url=MR]magic resistance[/url][/color]"                 % THEME.color_html("DEFENCE_COLOR"),
-	
 	"DODGE":             "[color=%s][url=DODGE]dodge[/url][/color]"                         % THEME.color_html("STAT_COLOR"),
 	"DEFENCE":           "[color=%s][url=DEFENCE]defence[/url][/color]"                     % THEME.color_html("DEFENCE_COLOR"),
 	"POISON_RESISTANCE": "[color=%s][url=POISON_RESISTANCE]poison resistance[/url][/color]" % THEME.color_html("POISON_COLOR"),
