@@ -75,7 +75,27 @@ text = "[[POISON_STACK]]  |  [[POISON_DAMAGE]]"
 
 [node name="SmartTextLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "[[POISON_DAMAGE]] [[IGNITE_STACK]]"
+text = "--- OFFENSE ---
+[[ATTACK]] [[STRENGTH]] [[RANK]]
+[[PHYSICAL_DAMAGE]] [[MAGICAL_DAMAGE]] [[TRUE_DAMAGE]]
+[[CRIT_CHANCE]] [[CRIT_MULTIPLIER]] [[EXECUTE]]
+
+--- DEFENSE ---
+[[DEFENCE]] [[ARMOR]] [[MR]] [[SHIELD]]
+[[DODGE]] [[POISON_RESISTANCE]] 
+
+--- STATUS & CC ---
+[[IGNITE]] [[POISON_STACK]] [[NECROSIS]]
+[[STUN]]
+[[WEAKNESS]] [[VULNERABILITY]]
+
+--- UTILITY ---
+[[REGEN]]  [[COOLDOWN]]
+[[CLEANSE]] [[DISPELL]]
+
+--- FAMILIES ---
+[[CHICKEN_LORD]] [[SUMMON]] [[METEOR]]
+[[LIGHTNING]] [[SERENITY]] [[LIFE]] [[NECRO]]"
 fit_content = true
 script = ExtResource("4_nydl5")
 metadata/_custom_type_script = "uid://bd3srw4twda5w"

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TooltipDesc" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://UI/Tool/Tooltip/Dictionary/tooltip_desc.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+key = &"MAGICAL_DAMAGE"
+title = "{{COLOR:MAGICAL_COLOR}}MAGICAL DAMAGE{{/COLOR}}"
+description = "Damage reduced by target's [[MR]]."
+icon_key = "MAGICAL_DAMAGE_ICON"

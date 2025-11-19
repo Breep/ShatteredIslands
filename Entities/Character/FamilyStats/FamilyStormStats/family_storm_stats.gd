@@ -1,6 +1,20 @@
 class_name FamilyStormStats
 extends FamilyStats
 
+#region Common Card
+
+#endregion
+
+#region Rare Card
+#endregion
+
+#region Epic Card
+
+#endregion
+
+#region Legendary Card
+#endregion
+
 var periodic_vulnerability_activated: bool # True if the player has at least one of this card
 var periodic_vulnerability_amount: int # amount of vulnerability stack inflicted every period
 var periodic_vulnerability_period: float # Time between to applying of vulnerability stacks (in s)

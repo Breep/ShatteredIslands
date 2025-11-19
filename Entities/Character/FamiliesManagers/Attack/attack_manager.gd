@@ -12,12 +12,6 @@ const GATLING_TIME: float = 1
 #@export_group("External Nodes")
 #@export var _auto_attack_module: AutoAttackModule
 
-# ============================== Public variables ==============================
-
-# [Reflecto Belt]
-var reflecto_belt_number_of_attacks: int = 0
-var reflecto_belt_damage_percent: float
-
 # ============================== Private variables ==============================
 
 var _attack_stats: FamilyAttackStats # Ref to the owner attack stats

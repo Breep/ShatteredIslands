@@ -6,7 +6,7 @@
 script = ExtResource("1_ril5c")
 key = &"POISON_STACK"
 title = "{{COLOR:POISON_COLOR}}POISON STACK{{/COLOR}}"
-description = "1 stack deals 1 [[POISON_DAMAGE]]
+description = "1 stack deals 1 [[POISON_DAMAGE]] per second
 Don't decay overtime"
 icon_key = "POISON_STACK_ICON"
 metadata/_custom_type_script = "uid://cr1qi4s4jv5f7"

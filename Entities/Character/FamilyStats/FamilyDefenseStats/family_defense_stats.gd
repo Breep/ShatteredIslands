@@ -13,6 +13,25 @@ var force_field_activated: bool
 var force_field_period: float
 var force_field_lost_hp_percent: float
 
+# [ENERGY BARRIER]
+var energy_barrier_activated: bool
+var energy_barrier_shield_amount: float
+var energy_barrier_period: float
+
+# [SHIELD RUSH]
+var shield_rush_activated: bool
+var shield_rush_amount: float
+
+# [REFLECTO BELT]
+var reflecto_belt_activated: bool
+var reflecto_belt_shield_threshold: float 
+var reflecto_belt_attacks_count: int     
+var reflecto_belt_damage_percent: float  
+
+# [PROTECTIVE DOME]
+var protective_dome_activated: bool
+var protective_dome_armor_percent: float
+
 #endregion
 
 #region Rare Card
@@ -42,11 +61,6 @@ var force_field_lost_hp_percent: float
 @export var rainbow_boots_activated: bool # True if this skill is activated
 @export var rainbow_boots_armor_stacks: int # Armor stacks lost needed to proc rainbow_boots effect
 
-@export_group("Reflecto Belt")
-@export var reflecto_belt_activated: bool # True if this skill is activated
-@export var reflecto_belt_attack_increase_percent: int # % of damage increase for the next auto-attack
-@export var reflecto_belt_armor_stacks: int # Armor stacks lost needed to proc reflecto_belt effect
-
 @export_group("Smith Hammer")
 @export var smith_hammer_activated: bool # True if this skill is activated
 @export var smith_hammer_chance_percent: int # % of chance to proc effect when being hit
@@ -56,8 +70,6 @@ var force_field_lost_hp_percent: float
 @export var gladiator_helmet_activated: bool # True if this skill is activated
 @export var gladiator_helmet_period: float # Time between 2 ticks
 @export var gladiator_helmet_armor_stacks: int # Armor stacks gained every tick
-
-
 
 @export_group("Adaptative Cloak")
 @export var adaptative_cloak_activated: bool # True if this skill is activated

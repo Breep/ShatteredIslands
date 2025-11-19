@@ -1,8 +1,6 @@
-[gd_resource type="Resource" script_class="TooltipTheme" load_steps=8 format=3 uid="uid://dxvbn034enrvj"]
+[gd_resource type="Resource" script_class="TooltipTheme" load_steps=6 format=3 uid="uid://dxvbn034enrvj"]
 
-[ext_resource type="Texture2D" uid="uid://dlbjl8ihicpc8" path="res://Card/Descriptions/Families/Icons/defense.png" id="1_8138d"]
 [ext_resource type="Texture2D" uid="uid://bl5f54pvygwuh" path="res://UI/_Themes/Data/book.png" id="2_0gl0c"]
-[ext_resource type="Texture2D" uid="uid://c7qa3nkyxcdlg" path="res://Card/Descriptions/Families/Icons/fire.png" id="2_4uhde"]
 [ext_resource type="Texture2D" uid="uid://inrfqqaj0ycx" path="res://Card/Descriptions/Families/Icons/mana.png" id="3_0gl0c"]
 [ext_resource type="Texture2D" uid="uid://b78s362n5bu6" path="res://Card/Descriptions/Families/Icons/turret.png" id="4_51tpr"]
 [ext_resource type="Texture2D" uid="uid://cwqdngpmbcnck" path="res://Card/Descriptions/Families/Icons/poison.png" id="5_t0qtx"]
@@ -10,12 +8,30 @@
 
 [resource]
 script = ExtResource("6_fouw8")
-ARMOR_STACK_ICON = ExtResource("1_8138d")
-POISON_STACK_ICON = ExtResource("5_t0qtx")
-IGNITE_STACK_ICON = ExtResource("2_4uhde")
-MAGICAL_DAMAGE_ICON = ExtResource("3_0gl0c")
-PHYSICAL_DAMAGE_ICON = ExtResource("4_51tpr")
-POISON_DAMAGE_ICON = ExtResource("5_t0qtx")
+ATTACK_ICON = ExtResource("4_51tpr")
+RANK_ICON = ExtResource("4_51tpr")
+SUMMON_ICON = ExtResource("4_51tpr")
+LIGHTNING_FAMILY_ICON = ExtResource("5_t0qtx")
+SERENITY_FAMILY_ICON = ExtResource("5_t0qtx")
+LIFE_FAMILY_ICON = ExtResource("5_t0qtx")
 POISON_FAMILY_ICON = ExtResource("5_t0qtx")
+NECRO_FAMILY_ICON = ExtResource("5_t0qtx")
+CHICKEN_FAMILY_ICON = ExtResource("5_t0qtx")
+FIRE_FAMILY_ICON = ExtResource("5_t0qtx")
+ATTACK_FAMILY_ICON = ExtResource("5_t0qtx")
+CRIT_FAMILY_ICON = ExtResource("5_t0qtx")
+PHYSICAL_DAMAGE_ICON = ExtResource("4_51tpr")
+MAGICAL_DAMAGE_ICON = ExtResource("3_0gl0c")
+TRUE_DAMAGE_ICON = ExtResource("3_0gl0c")
+POISON_DAMAGE_ICON = ExtResource("5_t0qtx")
+SHIELD_ICON = ExtResource("5_t0qtx")
+POISON_STACK_ICON = ExtResource("5_t0qtx")
+IGNITE_ICON = ExtResource("5_t0qtx")
+DEFENCE_ICON = ExtResource("5_t0qtx")
+STAT_ICON = ExtResource("5_t0qtx")
+CC_ICON = ExtResource("5_t0qtx")
+MAGIC_ICON = ExtResource("5_t0qtx")
+HEAL_ICON = ExtResource("5_t0qtx")
+COOLDOWN_ICON = ExtResource("5_t0qtx")
 DEFAULT_ICON = ExtResource("2_0gl0c")
 metadata/_custom_type_script = "uid://dgukdre62e5bf"

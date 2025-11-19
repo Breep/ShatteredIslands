@@ -4,16 +4,113 @@ extends Node
 
 @onready var TOOLTIP_SCENE = load("res://UI/Tool/Tooltip/ui_tooltip.tscn")
 @onready var THEME: TooltipTheme = load("res://UI/Tool/Tooltip/Theme/standard_theme.tres")
+
 @onready var TOOLTIP_DATABASE: Array[TooltipDesc] = [
-	load("res://UI/Tool/Tooltip/Dictionary/poison_stack.tres"),
+	# --- A ---
+	load("res://UI/Tool/Tooltip/Dictionary/armor.tres"),
+	load("res://UI/Tool/Tooltip/Dictionary/attack.tres"),
+	
+	# --- C ---
+	load("res://UI/Tool/Tooltip/Dictionary/chickenlord_family.tres"),
+	load("res://UI/Tool/Tooltip/Dictionary/cleanse.tres"),
+	load("res://UI/Tool/Tooltip/Dictionary/colossus_family.tres"),
+	load("res://UI/Tool/Tooltip/Dictionary/cooldown.tres"),
+	load("res://UI/Tool/Tooltip/Dictionary/crit_chance.tres"),
+	load("res://UI/Tool/Tooltip/Dictionary/crit_multiplier.tres"),
+	
+	# --- D ---
+	load("res://UI/Tool/Tooltip/Dictionary/defence.tres"),
+	load("res://UI/Tool/Tooltip/Dictionary/dispell.tres"),
+	load("res://UI/Tool/Tooltip/Dictionary/dodge.tres"),
+	
+	# --- E ---
+	load("res://UI/Tool/Tooltip/Dictionary/execute.tres"),
+	
+	# --- I ---
+	load("res://UI/Tool/Tooltip/Dictionary/ignite_stack.tres"), # Attention: Ton fichier s'appelle encore "_stack" ici
+	
+	# --- L ---
+	load("res://UI/Tool/Tooltip/Dictionary/light_family.tres"),
+	load("res://UI/Tool/Tooltip/Dictionary/lightning_family.tres"),
+	
+	# --- M ---
+	load("res://UI/Tool/Tooltip/Dictionary/magical_damage.tres"),
+	load("res://UI/Tool/Tooltip/Dictionary/meteor.tres"),
+	load("res://UI/Tool/Tooltip/Dictionary/mr.tres"),
+	
+	# --- N ---
+	load("res://UI/Tool/Tooltip/Dictionary/necro_family.tres"),
+	load("res://UI/Tool/Tooltip/Dictionary/necrosis.tres"),
+	
+	# --- P ---
+	load("res://UI/Tool/Tooltip/Dictionary/physical_damage.tres"),
 	load("res://UI/Tool/Tooltip/Dictionary/poison_damage.tres"),
-	load("res://UI/Tool/Tooltip/Dictionary/ignite_stack.tres")
+	load("res://UI/Tool/Tooltip/Dictionary/poison_resist.tres"),
+	load("res://UI/Tool/Tooltip/Dictionary/poison_stack.tres"),
+	
+	# --- R ---
+	load("res://UI/Tool/Tooltip/Dictionary/rank.tres"),
+	load("res://UI/Tool/Tooltip/Dictionary/regen.tres"),
+	
+	# --- S ---
+	load("res://UI/Tool/Tooltip/Dictionary/shield.tres"),
+	load("res://UI/Tool/Tooltip/Dictionary/strength.tres"),
+	load("res://UI/Tool/Tooltip/Dictionary/stun.tres"),
+	load("res://UI/Tool/Tooltip/Dictionary/summon.tres"),
+	
+	# --- T / V / W ---
+	load("res://UI/Tool/Tooltip/Dictionary/true_damage.tres"),
+	load("res://UI/Tool/Tooltip/Dictionary/vulnerability.tres"),
+	load("res://UI/Tool/Tooltip/Dictionary/weakness.tres")
 ]
 
 @onready var SNIPPET_MAP: Dictionary[String, String] = {
-	"POISON_DAMAGE": "[color=%s][url=POISON_DAMAGE]poison damage[/url][/color]" % THEME.color_html("POISON_COLOR"),
-	"POISON_STACK":  "[color=%s][url=POISON_STACK]poison stack[/url][/color]"  % THEME.color_html("POISON_COLOR"),
-	"IGNITE_STACK":  "[color=%s][url=IGNITE_STACK]ignite stack[/url][/color]"  % THEME.color_html("FIRE_COLOR")
+	# --- DEGATS ---
+	"PHYSICAL_DAMAGE": "[color=%s][url=PHYSICAL_DAMAGE]physical damage[/url][/color]" % THEME.color_html("PHYSICAL_COLOR"),
+	"MAGICAL_DAMAGE":  "[color=%s][url=MAGICAL_DAMAGE]magical damage[/url][/color]"   % THEME.color_html("MAGICAL_COLOR"),
+	"POISON_DAMAGE":   "[color=%s][url=POISON_DAMAGE]poison damage[/url][/color]"     % THEME.color_html("POISON_COLOR"),
+	"TRUE_DAMAGE":     "[color=%s][url=TRUE_DAMAGE]true damage[/url][/color]"         % THEME.color_html("TRUE_COLOR"),
+
+	# --- DEFENSE ---
+	"ARMOR":             "[color=%s][url=ARMOR]armor[/url][/color]"                         % THEME.color_html("DEFENCE_COLOR"),
+	"MR":                "[color=%s][url=MR]magic resistance[/url][/color]"                 % THEME.color_html("MAGICAL_COLOR"),
+	"DODGE":             "[color=%s][url=DODGE]dodge[/url][/color]"                         % THEME.color_html("STAT_COLOR"),
+	"DEFENCE":           "[color=%s][url=DEFENCE]defence[/url][/color]"                     % THEME.color_html("DEFENCE_COLOR"),
+	"POISON_RESISTANCE": "[color=%s][url=POISON_RESISTANCE]poison resistance[/url][/color]" % THEME.color_html("POISON_COLOR"),
+
+	# --- STATS OFFENSIVES ---
+	"ATTACK":          "[color=%s][url=ATTACK]attack[/url][/color]"                   % THEME.color_html("ATTACK_COLOR"),
+	"CRIT_CHANCE":     "[color=%s][url=CRIT_CHANCE]crit chance[/url][/color]"         % THEME.color_html("STAT_COLOR"),
+	"CRIT_MULTIPLIER": "[color=%s][url=CRIT_MULTIPLIER]crit multiplier[/url][/color]" % THEME.color_html("STAT_COLOR"),
+
+	# --- STACKS ---
+	"POISON_STACK": "[color=%s][url=POISON_STACK]poison stack[/url][/color]" % THEME.color_html("POISON_COLOR"),
+	"IGNITE": "[color=%s][url=IGNITE]ignite[/url][/color]" % THEME.color_html("FIRE_COLOR"),
+	"NECROSIS":     "[color=%s][url=NECROSIS]necrosis[/url][/color]"         % THEME.color_html("NECRO_COLOR"),
+	"REGEN":        "[color=%s][url=REGEN]regen[/url][/color]"        % THEME.color_html("REGEN_COLOR"),
+	"SHIELD":            "[color=%s][url=SHIELD]shield[/url][/color]"                       % THEME.color_html("SHIELD_COLOR"),
+
+	# --- EFFETS / STATUS ---
+	"STUN":          "[color=%s][url=STUN]stun[/url][/color]"                   % THEME.color_html("STAT_COLOR"),
+	"WEAKNESS":      "[color=%s][url=WEAKNESS]weakness[/url][/color]"           % THEME.color_html("DEBUFF_COLOR"),
+	"STRENGTH":        "[color=%s][url=STRENGTH]strength[/url][/color]"               % THEME.color_html("DEBUFF_COLOR"),
+	"VULNERABILITY": "[color=%s][url=VULNERABILITY]vulnerability[/url][/color]" % THEME.color_html("DEBUFF_COLOR"),
+	"CLEANSE":       "[color=%s][url=CLEANSE]cleanse[/url][/color]"             % THEME.color_html("SERENITY_COLOR"),
+	"DISPELL":       "[color=%s][url=DISPELL]dispell[/url][/color]"             % THEME.color_html("DISPELL_COLOR"),
+	"EXECUTE": "[color=%s][url=EXECUTE]execute[/url][/color]" % THEME.color_html("FIRE_COLOR"),
+
+	# --- FAMILLE / PASSIV ---
+	"METEOR":       "[color=%s][url=METEOR]meteor[/url][/color]"             % THEME.color_html("METEOR_COLOR"),
+	"RANK":         "[color=%s][url=RANK]rank[/url][/color]"                 % THEME.color_html("LIGHTNING_COLOR"),
+	"SUMMON":       "[color=%s][url=SUMMON]summon[/url][/color]"             % THEME.color_html("NECRO_COLOR"),
+	"LIGHTNING":    "[color=%s][url=LIGHTNING]lightning[/url][/color]"       % THEME.color_html("LIGHTNING_COLOR"),
+	"SERENITY":     "[color=%s][url=SERENITY]serenity[/url][/color]"         % THEME.color_html("SERENITY_COLOR"),
+	"CHICKEN_LORD": "[color=%s][url=CHICKEN_LORD]chicken-lord[/url][/color]" % THEME.color_html("CHICKEN_COLOR"),
+	"LIFE":         "[color=%s][url=LIFE]life[/url][/color]"                 % THEME.color_html("LIFE_COLOR"),
+	"NECRO":        "[color=%s][url=NECRO]necro[/url][/color]"               % THEME.color_html("NECRO_COLOR"),
+
+	# --- AUTRE ---
+	"COOLDOWN":  "[color=%s][url=COOLDOWN]cooldown[/url][/color]"    % THEME.color_html("STAT_COLOR")
 }
 
 var _all_scene_tooltips: Array[Tooltip] 
