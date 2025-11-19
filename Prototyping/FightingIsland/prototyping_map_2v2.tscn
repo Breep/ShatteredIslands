@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://f2n7hccdooke"]
+[gd_scene load_steps=18 format=3 uid="uid://f2n7hccdooke"]
 
 [ext_resource type="Script" uid="uid://bu48b2v401db2" path="res://Prototyping/FightingIsland/prototyping_map.gd" id="1_oc45v"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="2_5t2nw"]
@@ -8,6 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Entities/Character/character.tscn" id="3_doj2u"]
 [ext_resource type="Material" uid="uid://2wlal7g5718r" path="res://VFX/Shaders/Sky/stylized_shader_night.tres" id="4_3ldpt"]
 [ext_resource type="Resource" uid="uid://c88cqm481bhcu" path="res://Card/Descriptions/Cards/Defense/Common/ShieldRush/shieldomatic_shield_rush.tres" id="4_y3vk0"]
+[ext_resource type="Resource" uid="uid://ch6lrtduf0q25" path="res://Card/Descriptions/Cards/Defense/Common/MagneticSyphon/shieldomatic_magnetic_syphon.tres" id="5_a1wsu"]
+[ext_resource type="Resource" uid="uid://by5tud5u1y87o" path="res://Card/Descriptions/Cards/Defense/Common/ForceField/shieldomatic_force_field.tres" id="7_4gryv"]
+[ext_resource type="Resource" uid="uid://mr4x6u0j5sbf" path="res://Card/Descriptions/Cards/Defense/Common/EnergyBarrier/shieldomatic_energy_barrier.tres" id="8_4gryv"]
 [ext_resource type="PackedScene" uid="uid://ci5cxqmyimurq" path="res://UI/InGame/FightingArea/DebugEntityStats/ui_debug_entity_stats.tscn" id="9_5t2nw"]
 [ext_resource type="PackedScene" uid="uid://bhxhqex1pbh2p" path="res://UI/InGame/FightingArea/ui_fighting_area.tscn" id="11_blmm3"]
 
@@ -40,10 +43,10 @@ volumetric_fog_density = 0.0
 
 [node name="PrototypingMap" type="Node3D" node_paths=PackedStringArray("_characters", "_floating_island")]
 script = ExtResource("1_oc45v")
-_player1_cards = Array[ExtResource("2_5t2nw")]([ExtResource("3_5t2nw"), ExtResource("4_y3vk0")])
+_player1_cards = Array[ExtResource("2_5t2nw")]([ExtResource("3_5t2nw"), ExtResource("4_y3vk0"), ExtResource("5_a1wsu")])
 _player2_cards = Array[ExtResource("2_5t2nw")]([ExtResource("3_3ldpt")])
-_player3_cards = Array[ExtResource("2_5t2nw")]([ExtResource("3_3ldpt")])
-_player4_cards = Array[ExtResource("2_5t2nw")]([ExtResource("3_3ldpt")])
+_player3_cards = Array[ExtResource("2_5t2nw")]([ExtResource("3_3ldpt"), ExtResource("4_y3vk0"), ExtResource("5_a1wsu")])
+_player4_cards = Array[ExtResource("2_5t2nw")]([ExtResource("3_3ldpt"), ExtResource("7_4gryv"), ExtResource("8_4gryv")])
 _characters = [NodePath("Character1"), NodePath("Character2"), NodePath("Character3"), NodePath("Character4")]
 _floating_island = NodePath("FightingIsland")
 _battle_type = 1

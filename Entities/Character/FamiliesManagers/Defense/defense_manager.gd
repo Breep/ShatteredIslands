@@ -74,24 +74,6 @@ func stop() -> void:
 
 # --- Fonctions appelées par le système de dégâts ---
 
-func get_increased_damage_done_from_power_wrist(damage: float) -> float:
-	if not _defense_stats.power_wrists_activated:
-		return damage
-	
-	var power_stacks: int = floor(_owner.stats.armor_stacks as float / _defense_stats.power_wrists_armor_stacks)
-	var damage_inc_percent: float = _defense_stats.power_wrists_damage_increase_percent * power_stacks
-	var damage_inc: float = (damage * damage_inc_percent) / 100.0
-	return damage + damage_inc
-
-
-func get_reduced_damage_taken_from_mystical_shoulder(damage: int) -> int:
-	if not _defense_stats.mystical_shoulders_activated:
-		return damage
-	
-	var damage_reduction: int = ((damage as float * _mystical_shoulders_damage_reduced_percent) / 100.0) as int
-	return damage - damage_reduction
-
-
 func get_reduced_damage_taken_from_armor(damage: int, damage_type: Utils.DamageType) -> int:
 	if damage_type == Utils.DamageType.POISON: 
 		return damage
@@ -104,7 +86,6 @@ func get_reduced_damage_taken_from_armor(damage: int, damage_type: Utils.DamageT
 	
 	# Logique des cartes sur perte d'armure
 	_armor_lost_since_last_hedgehog_armor += damage_reduction
-	_rainbow_boots_effect(damage_reduction)
 	_reflecto_belt_effect(damage_reduction)
 	
 	return damage_reduced
@@ -118,7 +99,7 @@ func _lanch_on_battle_start_effects() -> void:
 	if _defense_stats.shield_rush_activated:
 		if _owner != null and is_instance_valid(_owner):
 			var amount: int = int(_defense_stats.shield_rush_amount)
-			_owner.stats.armor_stacks += amount
+			_owner.inflict_condition_stacks(_owner, amount, Utils.StackType.ARMOR)
 #endregion
 
 #region ===== ACTION MODIFIERS =====
@@ -132,14 +113,7 @@ func _add_action_modifiers() -> void:
 		action_modifier.after_action_logic_callback = _on_dodge_evasive_barrier
 		_owner.action_modifiers_manager.register_modifier(action_modifier)
 #
-	## [SMITH HAMMER]
-	#if _defense_stats.smith_hammer_activated:
-		#var action_modifier := ActionModifier.new()
-		#action_modifier.action_type = ActionModifier.ActionType.DAMAGE_TAKEN
-		#action_modifier.id = "Smith Hammer"
-		#action_modifier.is_one_time_effect = false
-		#action_modifier.after_action_logic_callback = _on_damage_taken_smith_hammer
-		#_owner.action_modifiers_manager.register_modifier(action_modifier)
+
 
 
 func _clear_action_modifiers() -> void:
@@ -150,13 +124,7 @@ func _clear_action_modifiers() -> void:
 		action_modifier.id = "Evasive Barrier"
 		_owner.action_modifiers_manager.unregister_modifier(action_modifier)
 #
-	## [SMITH HAMMER]
-	#if _defense_stats.smith_hammer_activated:
-		#var action_modifier := ActionModifier.new()
-		#action_modifier.action_type = ActionModifier.ActionType.DAMAGE_TAKEN
-		#action_modifier.id = "Smith Hammer"
-		#_owner.action_modifiers_manager.unregister_modifier(action_modifier)
-##endregion
+#endregion
 
 #region ===== STAT MODIFIERS =====
 func _add_stat_modifiers() -> void:
@@ -182,14 +150,6 @@ func _clear_stat_modifiers() -> void:
 
 #region ===== TIMERS =====
 func _create_optional_timers() -> void:
-	# [HEDGEHOG ARMOR]
-	if _defense_stats.hedgehog_armor_activated:
-		_optional_timers.append(Utils.create_perpetual_timer(self, _defense_stats.hedgehog_armor_period, _on_hedgehog_armor_period_timeout, true))
-	
-	# [GLADIATOR HELMET]
-	if _defense_stats.gladiator_helmet_activated:
-		_optional_timers.append(Utils.create_perpetual_timer(self, _defense_stats.gladiator_helmet_period, _on_gladiator_helmet_period_timeout, true))
-		
 	# [FORCE FIELD]
 	if _defense_stats.force_field_activated:
 		_optional_timers.append(Utils.create_perpetual_timer(self, _defense_stats.force_field_period, _on_force_field_timer_timeout, true))
@@ -197,6 +157,10 @@ func _create_optional_timers() -> void:
 	# [ENERGY BARRIER]
 	if _defense_stats.energy_barrier_activated:
 		_optional_timers.append(Utils.create_perpetual_timer(self, _defense_stats.energy_barrier_period, _on_energy_barrier_timer_timeout, true))
+		
+	# [MAGNETIC SIPHON]
+	if _defense_stats.magnetic_siphon_activated:
+		_optional_timers.append(Utils.create_perpetual_timer(self, _defense_stats.magnetic_siphon_period, _on_magnetic_siphon_timer_timeout, true))
 
 
 func _clear_optional_timers() -> void:
@@ -207,30 +171,6 @@ func _clear_optional_timers() -> void:
 
 #region ===== OTHER LOGIC =====
 
-func _gain_armor(armor_stacks: int) -> void:
-	if _defense_stats.dual_shield_activated:
-		var health_ratio: float = (_owner.stats.health as float / _owner.stats.health_max) * 100.0
-		if health_ratio >= _defense_stats.dual_shield_health_threshold:
-			armor_stacks *= 2
-	
-	_owner.take_condition_stacks(armor_stacks, Utils.StackType.ARMOR, false)
-
-
-func _rainbow_boots_effect(armor_lost: int) -> void:
-	if not _defense_stats.rainbow_boots_activated:
-		return
-	
-	_armor_lost_since_last_rainbow_boots += armor_lost
-	if _armor_lost_since_last_rainbow_boots < _defense_stats.rainbow_boots_armor_stacks:
-		return
-	
-	var number_of_procs: int = floor(armor_lost as float / _defense_stats.rainbow_boots_armor_stacks as float)
-	_armor_lost_since_last_rainbow_boots -= number_of_procs * _defense_stats.rainbow_boots_armor_stacks
-	for i in number_of_procs:
-		var effects: Array[Utils.StackType] = [Utils.StackType.POISON, Utils.StackType.IGNITE]
-		var effect: Utils.StackType = effects[Utils.rng.randi_range(0, effects.size() - 1)]
-		var target: Entity = _owner.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
-		_action_module.inflict_condition_stacks(target, 1, effect)
 
 
 func _reflecto_belt_effect(armor_lost: int) -> void:
@@ -291,18 +231,6 @@ func _on_attack_reflecto_belt_consumption(cb_vars: Dictionary) -> void:
 		_owner.auto_attack_modifier_registry.unregister_modifier("Reflecto Belt")
 
 
-func _on_hedgehog_armor_period_timeout() -> void:
-	var target: Entity = _owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
-	if target == null: return
-	var damage: int = (_armor_lost_since_last_hedgehog_armor * _defense_stats.hedgehog_armor_lost_armor_percent as float / 100.0) as int
-	_action_module.direct_attack(target, damage, Utils.DamageType.MAGICAL)
-	_armor_lost_since_last_hedgehog_armor = 0
-
-
-func _on_gladiator_helmet_period_timeout() -> void:
-	_gain_armor(_defense_stats.gladiator_helmet_armor_stacks)
-
-
 func _on_force_field_timer_timeout() -> void:
 	# [FORCE FIELD]
 	if _owner == null or not is_instance_valid(_owner): return
@@ -315,15 +243,15 @@ func _on_force_field_timer_timeout() -> void:
 		var percent: float = _defense_stats.force_field_lost_hp_percent
 		var armor_gain: int = int(float(lost_hp) * (percent / 100.0))
 		if armor_gain > 0:
-			_owner.stats.armor_stacks += armor_gain
+			_owner.inflict_condition_stacks(_owner, armor_gain, Utils.StackType.ARMOR)
 
 
 func _on_dodge_evasive_barrier(cb_vars: Dictionary) -> void:
 	# [EVASIVE BARRIER]
 	if _owner == null or not is_instance_valid(_owner): return
 	
-	var shield_amount: float = _defense_stats.evasive_barrier_shield_gain
-	_owner.stats.armor_stacks += shield_amount
+	var amount: float = _defense_stats.evasive_barrier_shield_gain
+	_owner.inflict_condition_stacks(_owner, amount, Utils.StackType.ARMOR)
 
 
 func _on_energy_barrier_timer_timeout() -> void:
@@ -332,17 +260,30 @@ func _on_energy_barrier_timer_timeout() -> void:
 		return
 		
 	var amount: int = int(_defense_stats.energy_barrier_shield_amount)
-	_owner.stats.armor_stacks += amount
-
-
-func _on_damage_taken_smith_hammer(cb_vars: Dictionary) -> void:
-	# [SMITH HAMMER]
-	var chance: float = _defense_stats.smith_hammer_chance
-	if Utils.is_randomize_modifier_active(chance):
-		var armor_amount: int = int(_defense_stats.smith_hammer_armor_stacks)
-		_owner.inflict_condition_stacks(_owner, armor_amount, Utils.StackType.ARMOR)
+	_owner.inflict_condition_stacks(_owner, amount, Utils.StackType.ARMOR)
 
 
 func _on_owner_armor_stacks_changed_protective_dome(new_val: int) -> void:
 	# [PROTECTIVE DOME]
 	_update_protective_dome_modifier(new_val)
+	
+func _on_magnetic_siphon_timer_timeout() -> void:
+	# [MAGNETIC SIPHON]
+	if _owner == null or not is_instance_valid(_owner):
+		return
+	var target: Entity = _owner.target_module.get_target(TargetModule.TargettingStrategy.HIGHEST_SHIELD_ENEMIES_HERO)
+	
+	if target == null or not is_instance_valid(target):
+		return	
+	var highest_shield: int = target.stats.armor_stacks
+	if highest_shield <= 0:
+		return
+
+	var percent: float = _defense_stats.magnetic_siphon_steal_percent
+	var steal_amount: int = int(float(highest_shield) * (percent / 100.0))
+	if steal_amount <= 0:
+		return
+		
+	#TODO changer le steal quand il y aura des modificateurs a cet effet
+	target.stats.armor_stacks -= steal_amount
+	_owner.inflict_condition_stacks(_owner, steal_amount, Utils.StackType.ARMOR)

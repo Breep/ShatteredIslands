@@ -13,6 +13,11 @@ var force_field_activated: bool
 var force_field_period: float
 var force_field_lost_hp_percent: float
 
+# [MAGNETIC SIPHON]
+var magnetic_siphon_activated: bool
+var magnetic_siphon_period: float
+var magnetic_siphon_steal_percent: float
+
 # [ENERGY BARRIER]
 var energy_barrier_activated: bool
 var energy_barrier_shield_amount: float
