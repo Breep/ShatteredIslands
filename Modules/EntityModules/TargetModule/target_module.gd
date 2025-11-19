@@ -5,17 +5,37 @@ extends Module
 #TODO : Attacker ( Celui qui a attaqué, par exemple pour le dodge)
 #HERO / ENTITIES
 enum TargettingStrategy {
+	
+	# ------- CLOSEST -------
 	CLOSEST, # Closest entity except self (can be null)
 	CLOSEST_ENEMY, # Closest enemy (can be null)
 	CLOSEST_ALLY, # Closest ally except self (can be null)
+	
+	# ------- FARTHEST -------
 	FARTHEST, # Farthest entity except self (can be null)
 	FARTHEST_ENEMY, # Farthest enemy (can be null)
 	FARTHEST_ALLY, # Farthest ally except self (can be null)
+	
+	# ------- LOWEST HP -------
+	LOWEST_HP_ALLY_INCLUDING_SELF, # Lowest hp ally (in % of max life)
+	
+	# ------- HIGHEST HP -------
+	
+	# ------- LOWEST HP % -------
+	
+	# ------- HIGHEST HP % -------
+	
+	# ------- RANDOM -------
 	RANDOM, # Random entity except self (can be null)
 	RANDOM_ENEMY, # Random enemy (can be null)
+	RANDOM_HERO_ENEMY, #random enemy hero, (can be null)
 	RANDOM_ALLY, # Random ally except self (can be null)
 	RANDOM_ALLY_INCLUDING_SELF, # Random ally
-	LOWEST_HP_ALLY_INCLUDING_SELF, # Lowest hp ally (in % of max life)
+	
+	# ------- MISC -------
+	HIGHEST_SHIELD_ENEMIES_HERO, # highest amount of shield among heroes enemies (can be null)
+	HIGHEST_SHIELD_ALLIES_HERO, # highest amount of shield among heroes allies (can be null)
+	
 }
 
 enum MultipleTargettingStrategy {
@@ -29,6 +49,9 @@ enum MultipleTargettingStrategy {
 var _entities: Array[Entity] # All entities on the fighting scene
 var _enemies: Array[Entity] # All enemies of the owned entity
 var _allies: Array[Entity] # All allies of the owned entity
+var _heroes: Array[Entity] # All heroes
+var _enemy_heroes: Array[Entity] # All heroes enemies
+var _ally_heroes: Array[Entity] # All heroes allies
 
 # ============================== Local nodes ==============================
 
@@ -67,20 +90,25 @@ func get_target(targetting_strategy: TargettingStrategy) -> Entity:
 		TargettingStrategy.FARTHEST:
 			return _get_farthest(_entities, _owner)
 		TargettingStrategy.FARTHEST_ENEMY:
-			return _get_farthest(_enemies, _owner)
+			return _get_farthest(_enemies, null)
 		TargettingStrategy.FARTHEST_ALLY:
 			return _get_farthest(_allies, _owner)
 		TargettingStrategy.RANDOM:
 			return _get_random(_entities, _owner)
 		TargettingStrategy.RANDOM_ENEMY:
-			return _get_random(_enemies, _owner)
+			return _get_random(_enemies, null)
 		TargettingStrategy.RANDOM_ALLY:
 			return _get_random(_allies, _owner)
 		TargettingStrategy.RANDOM_ALLY_INCLUDING_SELF:
 			return _get_random(_allies, null)
 		TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF:
 			return _get_lowest_hp(_allies, null)
-	
+		TargettingStrategy.RANDOM_HERO_ENEMY:
+			return _get_random(_enemy_heroes, null)
+		TargettingStrategy.HIGHEST_SHIELD_ENEMIES_HERO:
+			return _get_highest_shield(_enemy_heroes, _owner)
+		TargettingStrategy.HIGHEST_SHIELD_ALLIES_HERO:
+			return _get_highest_shield(_ally_heroes, null)
 	printerr("TargetModule: Undef strategy for the TargetModule")
 	return null
 
@@ -103,8 +131,8 @@ func get_closest_enemy_from(from_character: Entity) -> Entity:
 			closest_enemy = enemy
 	
 	return closest_enemy
-
-
+	
+	
 func get_targets(strategy: MultipleTargettingStrategy, radius:float = -1.0) -> Array[Entity]:
 	if radius <= 0:
 		match strategy:
@@ -136,6 +164,27 @@ func get_targets(strategy: MultipleTargettingStrategy, radius:float = -1.0) -> A
 	return empty
 
 # ============================== Private functions ==============================
+func _get_highest_shield(entities: Array[Entity], excluded_character: Entity) -> Entity:
+	if entities.is_empty():
+		return null
+	
+	var entities_copy: Array[Entity] = _get_alive_entities(entities).duplicate()
+	entities_copy.erase(excluded_character)
+	if entities_copy.is_empty():
+		return null
+	
+	entities_copy = _get_array_without_untargetable_targets(entities_copy)
+	if entities_copy.is_empty():
+		return null
+	
+	var highest_shield_entity = entities_copy[0]
+	for entity in entities_copy:
+		if entity != _owner:
+			if entity.stats.armor_stacks > highest_shield_entity.stats.armor_stacks :
+				highest_shield_entity = entity
+	
+	return highest_shield_entity
+
 
 func _get_alive_entities(entities: Array[Entity]) -> Array[Entity]:
 	var alive_entities: Array[Entity]
@@ -143,10 +192,6 @@ func _get_alive_entities(entities: Array[Entity]) -> Array[Entity]:
 		if not entity.is_dead:
 			alive_entities.append(entity)
 	return alive_entities
-
-func _remove_character(character_to_remove: Entity) -> void:
-	_enemies.erase(character_to_remove)
-	_allies.erase(character_to_remove)
 
 
 func _add_body_as_entity(body: Node3D) -> void:
@@ -158,12 +203,19 @@ func _add_body_as_entity(body: Node3D) -> void:
 	if entity.team == _owner.team: _allies.append(entity)
 	else: _enemies.append(entity)
 	_entities.append(entity)
+	if entity is Character: 
+		if entity.team == _owner.team: _ally_heroes.append(entity)
+		else: _enemy_heroes.append(entity)
+		_heroes.append(entity)
 
 
 func _clear() -> void:
 	_enemies.clear()
 	_allies.clear()
 	_entities.clear()
+	_heroes.clear()
+	_enemy_heroes.clear()
+	_heroes.clear()
 
 # ============================== Target strategy functions ==============================
 
@@ -259,19 +311,6 @@ func _get_array_without_untargetable_targets(entities: Array[Entity]) -> Array[E
 	return entities_copy
 
 # ============================== Callback ==============================
-
-func _on_entity_manager_entity_spawned(who: Entity) -> void:
-	print("EntityManager spawned(): ", _owner.name, "-", who.name)
-	if who.team != _owner.team:
-		_enemies.append(who)
-	else:
-		_allies.append(who)
-
-
-func _on_entity_manager_entity_dead(who: Entity):
-	_remove_character(who)
-
-
 func _on_scanning_area_body_entered(body: Node3D) -> void:
 	_add_body_as_entity(body)
 

@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_t7xpg"]
 script = ExtResource("2_7strq")
-_shield_amount = Array[float]([100.0, 200.0, 300.0, 400.0, 600.0])
+_shield_amount = Array[float]([1500.0, 200.0, 300.0, 400.0, 600.0])
 metadata/_custom_type_script = "uid://bre033jc30lr7"
 
 [resource]

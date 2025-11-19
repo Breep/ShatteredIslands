@@ -221,8 +221,6 @@ func _ready() -> void:
 	var aa_module: AutoAttackModule = _character_logic.modules[Module.ModuleType.AUTOATTACK]
 	aa_module.attack_done.connect(_on_aa_module_attack_done)
 	
-	_defense_manager.reflecto_belt_activated.connect(_on_defense_manager_reflecto_belt_activated)
-	
 	if player == PlayerManager.get_local_player():
 		_clickable_feedback.color = Color.DARK_BLUE
 		_clickable_feedback.set_active()
@@ -254,12 +252,6 @@ func _update_hero() -> void:
 func _handle_death() -> void:
 	died.emit(self)
 	_is_dead = true
-
-# ============================== Family callbacks ==============================
-
-func _on_defense_manager_reflecto_belt_activated(damage_inc_percent: float, number_of_attacks: int) -> void:
-	_attack_manager.reflecto_belt_damage_percent = damage_inc_percent
-	_attack_manager.reflecto_belt_number_of_attacks += number_of_attacks
 
 # ============================== Module callbacks ==============================
 

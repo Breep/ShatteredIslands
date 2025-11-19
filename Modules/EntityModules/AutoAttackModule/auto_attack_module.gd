@@ -23,7 +23,7 @@ var attack_speed: float:
 # ============================== Private variables ==============================
 
 #var _forced_target: Character # TODO Unused now, maybe for a futur hero that can taunt ?
-var _attack_strategy: TargetModule.TargettingStrategy = TargetModule.TargettingStrategy.CLOSEST_ENEMY # The algo used to find the target
+var _attack_strategy: TargetModule.TargettingStrategy = TargetModule.TargettingStrategy.RANDOM_ENEMY # The algo used to find the target
 
 
 var _current_target: Entity

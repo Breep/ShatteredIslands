@@ -37,7 +37,7 @@ extends Resource
 }
 
 @export var resistances: Dictionary[Utils.ActionType, float] = {
-	Utils.ActionType.DAMAGE_PHYSICAL: 63,
+	Utils.ActionType.DAMAGE_PHYSICAL: 0,
 	Utils.ActionType.DAMAGE_MAGICAL: 0,
 	Utils.ActionType.DAMAGE_POISON: 80,
 	Utils.ActionType.UTILITY_HEAL: 0,

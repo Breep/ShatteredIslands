@@ -1,7 +1,18 @@
-[gd_resource type="Resource" script_class="Card" load_steps=2 format=3 uid="uid://r3rk3cnyponr"]
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://r3rk3cnyponr"]
 
+[ext_resource type="Script" uid="uid://gpbhlq6yi8ty" path="res://Card/Descriptions/Cards/Defense/Common/ProtectiveDome/shieldomatic_protective_dome.gd" id="1_e60rh"]
+[ext_resource type="Texture2D" uid="uid://dibhj1of0c2qx" path="res://Card/Descriptions/Cards/Defense/Common/ShieldRush/shieldomatic_shield_rush.png" id="1_kmq2y"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_m4356"]
+
+[sub_resource type="Resource" id="Resource_kmq2y"]
+script = ExtResource("1_e60rh")
+_armor_percent = Array[float]([80.0, 8.0, 12.0, 16.0, 20.0])
+metadata/_custom_type_script = "uid://gpbhlq6yi8ty"
 
 [resource]
 script = ExtResource("1_m4356")
+name = "Protetive dome"
+picture = ExtResource("1_kmq2y")
+family = 2
+player_upgrade = SubResource("Resource_kmq2y")
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"
