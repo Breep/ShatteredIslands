@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://k4dc5j8ecdxo"]
+[gd_scene load_steps=7 format=3 uid="uid://k4dc5j8ecdxo"]
 
 [ext_resource type="Script" uid="uid://ftwn66cpwnyp" path="res://UI/InGame/HeroSelection/ui_hero_picking_screen.gd" id="1_r4a5p"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="2_5jgqs"]
 [ext_resource type="PackedScene" uid="uid://dmfkigo1trjd0" path="res://UI/Tool/Countdown/ui_countdown.tscn" id="2_r4a5p"]
+[ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://UI/Tool/Misc/hover_boost_button.gd" id="4_i38bk"]
 [ext_resource type="PackedScene" uid="uid://b6lyxftbneqy" path="res://UI/InGame/HeroSelection/ui_hero_portrait_button.tscn" id="4_kexe1"]
 [ext_resource type="PackedScene" uid="uid://ddugcksbtixea" path="res://UI/InGame/HeroSelection/HeroOverviewPanel/ui_hero_overview_panel.tscn" id="5_bveri"]
 
@@ -151,8 +152,10 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
 theme = ExtResource("2_5jgqs")
+theme_override_constants/outline_size = 65
 theme_override_font_sizes/font_size = 50
 text = "Lock hero"
+script = ExtResource("4_i38bk")
 
 [node name="UiHeroOverviewPanel" parent="VBoxContainer/ScreenCenter/VBoxContainer/Panel/HBoxContainer" instance=ExtResource("5_bveri")]
 unique_name_in_owner = true

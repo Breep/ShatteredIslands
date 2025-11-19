@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://d1oxnd1g75rqh"]
+[gd_scene load_steps=9 format=3 uid="uid://d1oxnd1g75rqh"]
 
 [ext_resource type="Script" uid="uid://8tub4ube48p7" path="res://UI/InGame/BuyingArea/CardShop/ui_card_shop.gd" id="1_xu7re"]
 [ext_resource type="Texture2D" uid="uid://bbcbah5ifbsrw" path="res://UI/_Themes/Data/coin.png" id="3_1gnrk"]
 [ext_resource type="PackedScene" uid="uid://c2psjj8133op3" path="res://Card/2D/CardButton/card_button.tscn" id="4_37vaa"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="5_ahun0"]
+[ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://UI/Tool/Misc/hover_boost_button.gd" id="5_smee4"]
 [ext_resource type="PackedScene" uid="uid://dlh177khgltfq" path="res://Game/CardShop/card_shop.tscn" id="9_ahun0"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xt3ho"]
@@ -212,23 +213,25 @@ mouse_filter = 2
 theme_override_constants/separation = 25
 alignment = 2
 
-[node name="BuyXP" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow"]
+[node name="BuyXPButton" type="Button" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1gnrk")
+script = ExtResource("5_smee4")
 
-[node name="BuyXPButton" type="Button" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXP"]
+[node name="BuyXP" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXPButton"]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
-mouse_default_cursor_shape = 2
-theme_override_font_sizes/font_size = 30
-theme_override_styles/focus = SubResource("StyleBoxEmpty_1gnrk")
+mouse_filter = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXP"]
+[node name="MarginContainer" type="MarginContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXPButton/BuyXP"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -241,11 +244,11 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Refresh" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXP/MarginContainer"]
+[node name="Refresh" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXPButton/BuyXP/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXP/MarginContainer/Refresh"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXPButton/BuyXP/MarginContainer/Refresh"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -255,7 +258,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="XPGainLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXP/MarginContainer/Refresh/VBoxContainer"]
+[node name="XPGainLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXPButton/BuyXP/MarginContainer/Refresh/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -264,13 +267,13 @@ text = "+4 XP"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Price" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXP/MarginContainer/Refresh/VBoxContainer"]
+[node name="Price" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXPButton/BuyXP/MarginContainer/Refresh/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 alignment = 1
 
-[node name="BuyXPPriceLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXP/MarginContainer/Refresh/VBoxContainer/Price"]
+[node name="BuyXPPriceLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXPButton/BuyXP/MarginContainer/Refresh/VBoxContainer/Price"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
@@ -278,31 +281,32 @@ text = "40"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXP/MarginContainer/Refresh/VBoxContainer/Price"]
+[node name="TextureRect" type="TextureRect" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXPButton/BuyXP/MarginContainer/Refresh/VBoxContainer/Price"]
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("3_1gnrk")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="RandomCardPanel" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow"]
+[node name="RandomCardButton" type="Button" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1gnrk")
+script = ExtResource("5_smee4")
 
-[node name="RandomCardButton" type="Button" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardPanel"]
-unique_name_in_owner = true
+[node name="RandomCardPanel" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
-mouse_default_cursor_shape = 2
-theme_override_font_sizes/font_size = 30
-theme_override_styles/focus = SubResource("StyleBoxEmpty_1gnrk")
+mouse_filter = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardButton/RandomCardPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -315,11 +319,11 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Refresh" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardPanel/MarginContainer"]
+[node name="Refresh" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardButton/RandomCardPanel/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardPanel/MarginContainer/Refresh"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardButton/RandomCardPanel/MarginContainer/Refresh"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -329,7 +333,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardPanel/MarginContainer/Refresh/VBoxContainer"]
+[node name="Label" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardButton/RandomCardPanel/MarginContainer/Refresh/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 20
@@ -337,44 +341,45 @@ text = "RANDOM"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Price" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardPanel/MarginContainer/Refresh/VBoxContainer"]
+[node name="Price" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardButton/RandomCardPanel/MarginContainer/Refresh/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 alignment = 1
 
-[node name="RandomCardPriceLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardPanel/MarginContainer/Refresh/VBoxContainer/Price"]
+[node name="RandomCardPriceLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardButton/RandomCardPanel/MarginContainer/Refresh/VBoxContainer/Price"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "90"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardPanel/MarginContainer/Refresh/VBoxContainer/Price"]
+[node name="TextureRect" type="TextureRect" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardButton/RandomCardPanel/MarginContainer/Refresh/VBoxContainer/Price"]
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("3_1gnrk")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="RefreshShopPanel" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow"]
+[node name="RefreshButton" type="Button" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1gnrk")
+script = ExtResource("5_smee4")
 
-[node name="RefreshButton" type="Button" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshShopPanel"]
-unique_name_in_owner = true
+[node name="RefreshShopPanel" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
-mouse_default_cursor_shape = 2
-theme_override_font_sizes/font_size = 30
-theme_override_styles/focus = SubResource("StyleBoxEmpty_1gnrk")
+mouse_filter = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshShopPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshButton/RefreshShopPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -387,11 +392,11 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Control" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshShopPanel/MarginContainer"]
+[node name="Control" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshButton/RefreshShopPanel/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshShopPanel/MarginContainer/Control"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshButton/RefreshShopPanel/MarginContainer/Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -401,7 +406,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshShopPanel/MarginContainer/Control/VBoxContainer"]
+[node name="Label" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshButton/RefreshShopPanel/MarginContainer/Control/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 20
@@ -409,20 +414,20 @@ text = "REFRESH"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Price" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshShopPanel/MarginContainer/Control/VBoxContainer"]
+[node name="Price" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshButton/RefreshShopPanel/MarginContainer/Control/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 alignment = 1
 
-[node name="RefreshShopPriceLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshShopPanel/MarginContainer/Control/VBoxContainer/Price"]
+[node name="RefreshShopPriceLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshButton/RefreshShopPanel/MarginContainer/Control/VBoxContainer/Price"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "20"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshShopPanel/MarginContainer/Control/VBoxContainer/Price"]
+[node name="TextureRect" type="TextureRect" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshButton/RefreshShopPanel/MarginContainer/Control/VBoxContainer/Price"]
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("3_1gnrk")
@@ -431,4 +436,4 @@ stretch_mode = 5
 
 [node name="CardShop" parent="." instance=ExtResource("9_ahun0")]
 
-[connection signal="pressed" from="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXP/BuyXPButton" to="." method="_on_buy_xp_button_pressed"]
+[connection signal="pressed" from="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXPButton" to="." method="_on_buy_xp_button_pressed"]

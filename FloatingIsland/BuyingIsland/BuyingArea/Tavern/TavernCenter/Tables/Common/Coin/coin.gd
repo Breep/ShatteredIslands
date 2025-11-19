@@ -8,4 +8,5 @@ extends StaticBody3D
 # ============================== Public functions ==============================
 
 func get_height() -> float:
+	if coin_collision == null: return 0.0
 	return (coin_collision.shape as CylinderShape3D).height
