@@ -185,11 +185,9 @@ func _on_inflict_condition_ignite(cb_vars: Dictionary) -> void:
 	var target: Entity = cb_vars[ActionModifier.VarType.TARGET]
 	if target == null: return
 	if stack_type != Utils.StackType.IGNITE: return
-	print("coucou1")
 	for i in stack_value:
 		if Utils.is_randomize_modifier_active(2):
 			_owner.cast_spell(target,Spell.Type.METEOR,{
 					Spell.MeteorModifier.IGNITE_STACKS: 0,
 					Spell.MeteorModifier.DAMAGE_PER_STACK: 0
 					})
-	print("salut")

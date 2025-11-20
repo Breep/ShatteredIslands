@@ -6,7 +6,7 @@
 offsets = PackedFloat32Array(0, 0.4, 1)
 colors = PackedColorArray(0.328078, 0.55335, 1, 1, 0.960784, 0.337255, 0.0470588, 1, 1, 0.666667, 0, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_lvrrl"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rpfcu"]
 gradient = SubResource("Gradient_x7ff7")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ylf6x"]
@@ -22,6 +22,6 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("1_1v67c")
 shader_parameter/voronoi_sampler = SubResource("NoiseTexture2D_tdpic")
-shader_parameter/gradient_sampler = SubResource("GradientTexture1D_lvrrl")
+shader_parameter/gradient_sampler = SubResource("GradientTexture1D_rpfcu")
 shader_parameter/def_x = 0.0
 shader_parameter/def_z = 0.0

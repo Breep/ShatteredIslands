@@ -280,8 +280,6 @@ func _on_fire_damage_timer_timeout() -> void:
 
 
 func _on_revive_timer_timeout() -> void:
-	print("REVIVE")
-	print("Spawn revive bomb here")
 	var life_after_revive: int = ((_life_stats.revive_after_death_percentage_life * _owner.stats.health_max) / 100.0) as int
 	revived.emit(life_after_revive)
 
@@ -295,7 +293,6 @@ func _on_dodge_evasive_growth(cb_vars: Dictionary) -> void:
 func _vital_pulse_timer_timeout() -> void:
 	# [VITAL PULSE]
 	var targets: Array[Entity] = _owner.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ENEMIES)
-	print(targets)
 	if targets.is_empty():
 		return
 	var max_hp: int = _owner.stats.health_max

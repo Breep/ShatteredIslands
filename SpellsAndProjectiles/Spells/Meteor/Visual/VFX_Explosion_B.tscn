@@ -1132,6 +1132,7 @@ draw_pass_1 = SubResource("QuadMesh_47fcp")
 
 [node name="Ribbon_trails_B" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.93267, 0)
+visible = false
 material_override = SubResource("StandardMaterial3D_r748b")
 emitting = false
 sub_emitter = NodePath("../sub_Ribbon_trails_B")
