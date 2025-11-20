@@ -1,4 +1,4 @@
-class_name SpellThunder
+class_name SpellLightning
 extends Node3D
 
 const LIFETIME: float = 1.0
@@ -22,9 +22,11 @@ func _ready() -> void:
 	global_position = _target.global_position
 	
 	if _source != null:
-		_source.direct_attack(_target, _damage, Utils.DamageType.PHYSICAL)
+		_source.direct_attack(_target, _damage / 2.0, Utils.DamageType.PHYSICAL)
+		_source.direct_attack(_target, _damage / 2.0, Utils.DamageType.MAGICAL)
 	else:
-		_target.take_damage(_damage, Utils.DamageType.PHYSICAL)
+		_target.take_damage(_damage / 2.0, Utils.DamageType.PHYSICAL)
+		_target.take_damage(_damage / 2.0, Utils.DamageType.MAGICAL)
 	
 	var tween := create_tween()
 	tween.tween_interval(LIFETIME)

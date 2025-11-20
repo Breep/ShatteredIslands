@@ -70,6 +70,7 @@ func _log_damage_taken(source: Entity, damage: int, damage_type: Utils.DamageTyp
 
 
 func _log_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type) -> void:
+	if source == null or target == null: return
 	var data: Dictionary = {
 		BattleLog.Main.TIME: _get_time(),
 		BattleLog.Main.TYPE: BattleLog.Type.SPELL_CASTED,

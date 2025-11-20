@@ -46,6 +46,8 @@ const GLOBAL_CRIT_CHANCE_BOOSTS: Dictionary[Rank, Array] = {
 	Rank.S: [5, 7.5, 10, 12.5]
 }
 
+const LIGHTNING_DAMAGE_PERCENT: Array[float] = [150, 200, 300, 400]
+
 # ============================== Private variables ==============================
 
 var _storm_stats: FamilyStormStats
@@ -111,15 +113,15 @@ func _reset_rank() -> void:
 # ============================== Callbacks functions ==============================
 
 func _on_current_rank_changed() -> void:
+	_call_the_lightning()
 	_apply_passive_crit_boost()
 	match _current_rank:
-		Rank.D: print("StormManager: Rank D")
-		Rank.C: print("StormManager: Rank C")
-		Rank.B: print("StormManager: Rank B")
-		Rank.A: print("StormManager: Rank A")
+		Rank.D: pass
+		Rank.C: pass
+		Rank.B: pass
+		Rank.A: pass
 		Rank.S:
 			_rank_s_timer.start()
-			print("StormManager: Rank S")
 
 
 func _on_owner_critical_action_done(_entity_ref: Entity, _target: Entity, _action_type: Utils.ActionType, base_value: float, real_value: float) -> void:
@@ -162,3 +164,10 @@ func _apply_passive_crit_boost() -> void:
 		crit_multiplier_boost.tags = [StatModifier.TagType.FAMILY]
 		crit_multiplier_boost.value = GLOBAL_CRIT_MULTIPLIER_BOOSTS[_current_rank][3]
 		_owner.stats_manager.update_modifier(crit_multiplier_boost)
+
+
+func _call_the_lightning() -> void:
+	var target: Entity = _owner.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
+	if target == null: return
+	var damage: float = _owner.stats.attack_damage * LIGHTNING_DAMAGE_PERCENT[0] / 100.0
+	_owner.cast_spell(target, Spell.Type.LIGHTNING, { Spell.LightningModifier.DAMAGE: damage })

@@ -4,7 +4,7 @@ extends CharacterUpgrade
 @export var _attack_speed_percent: Array[float] 
 
 func apply(stats: FamiliesStats, cardlvl: int) -> void: 
-	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[Card.Rarity.RARE]:
+	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[Card.Rarity.COMMON]:
 		printerr("Twin Blade: Wrong cardlvl: ", cardlvl)
 		return
 	
@@ -13,7 +13,7 @@ func apply(stats: FamiliesStats, cardlvl: int) -> void:
 	stats.auto_attack.twin_blade_speed = _attack_speed_percent[cardlvl - 1]
 
 func get_description(cardlvl: int) -> String:
-	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[Card.Rarity.RARE]:
+	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[Card.Rarity.COMMON]:
 		printerr("Twin Blade: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	

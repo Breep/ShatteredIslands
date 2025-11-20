@@ -8,6 +8,8 @@ const DARK_STORM_SCENE: PackedScene = preload("res://SpellsAndProjectiles/Spells
 const CONTAGION_SPELL_SCENE: PackedScene = preload("res://SpellsAndProjectiles/Spells/Poison/Contagion/contagion_spell_area.tscn")
 const SHROOM_SPELL_SCENE: PackedScene = preload("res://SpellsAndProjectiles/Spells/Poison/Shroom/shroom_spell.tscn")
 const DEATH_FOG_SCENE: PackedScene = preload("res://SpellsAndProjectiles/Spells/Poison/DeathFog/death_fog.tscn")
+const LIGHTNING_SCENE: PackedScene = preload("res://SpellsAndProjectiles/Spells/Lightning/Lightning/spell_lightning.tscn")
+
 
 const SNAKE_BARREL_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Poison/SnakeBarrel/snake_barrel.tscn")
 const SNAKE_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Poison/Snake/snake.tscn")
@@ -160,6 +162,8 @@ func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictiona
 		Spell.Type.CONTAGION: _cast_contagion(spell_modifier)
 		Spell.Type.SHROOM: _cast_shroom(target, spell_modifier)
 		Spell.Type.DEATH_FOG: _cast_death_fog(spell_modifier)
+		Spell.Type.LIGHTNING: _cast_lightning(target, spell_modifier)
+		_: push_error("ActionModule: Unknown spell [", get_path(), "] [", spell_type, "]")
 
 
 func _cast_meteor(target: Entity, spell_modifier: Dictionary) -> void:
@@ -220,6 +224,16 @@ func _cast_death_fog(spell_modifier: Dictionary) -> void:
 		var damage_multiplier: float = spell_modifier[Spell.DeathFogModifier.DAMAGE_MULTIPLIER]
 		death_fog.init(_owner, grow_speed, tick_period, damage_multiplier)
 	_spawn_manager.spawn_spell(death_fog)
+
+
+func _cast_lightning(target: Entity, spell_modifier: Dictionary) -> void:
+	_owner.signal_spell_casted(target, Spell.Type.LIGHTNING)
+	var lightning: SpellLightning = LIGHTNING_SCENE.instantiate()
+	if multiplayer.is_server():
+		var damage: float = spell_modifier[Spell.LightningModifier.DAMAGE]
+		lightning.init(_owner, target, damage)
+	_spawn_manager.spawn_spell(lightning)
+	
 #endregion
 
 #region  ============================== Summon ==============================
@@ -267,3 +281,4 @@ func _get_strenght_weakness_multiplier(action_type: Utils.ActionType) -> float:
 	var strenght: float = _owner.stats.get_stat(EntityStats.StatType.STRENGHT, action_type)
 	var weakness: float = _owner.stats.get_stat(EntityStats.StatType.WEAKNESS, action_type)
 	return (100.0 + strenght) / (100.0 + weakness)
+#endregion
