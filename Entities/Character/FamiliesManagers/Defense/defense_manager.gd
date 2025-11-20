@@ -137,6 +137,17 @@ func _add_stat_modifiers() -> void:
 		mod.value = _defense_stats.evasive_barrier_dodge_increase
 		mod.tags = [StatModifier.TagType.CARD]
 		_owner.stats_manager.register_modifier(mod)
+		
+	# [AVENGERS ASSEMBLE]
+	if _defense_stats.avengers_assemble_activated:
+		var mod := StatModifier.new()
+		mod.id = "Avengers Assemble"
+		mod.stat_type = EntityStats.StatType.CRIT_CHANCE
+		mod.action_type = Utils.ActionType.STACK_ARMOR 
+		mod.calc_type = StatModifier.CalcType.ADD
+		mod.value = _defense_stats.avengers_assemble_crit_chance
+		mod.tags = [StatModifier.TagType.CARD]
+		_owner.stats_manager.register_modifier(mod)
 
 
 func _clear_stat_modifiers() -> void:
@@ -146,6 +157,15 @@ func _clear_stat_modifiers() -> void:
 		mod.id = "Evasive Barrier"
 		mod.stat_type = EntityStats.StatType.DODGE
 		_owner.stats_manager.unregister_modifier(mod)
+		
+	# [AVENGERS ASSEMBLE]
+	if _defense_stats.avengers_assemble_activated:
+		var mod := StatModifier.new()
+		mod.id = "Avengers Assemble"
+		mod.stat_type = EntityStats.StatType.CRIT_CHANCE
+		mod.action_type = Utils.ActionType.STACK_ARMOR
+		_owner.stats_manager.unregister_modifier(mod)
+		
 #endregion
 
 #region ===== TIMERS =====

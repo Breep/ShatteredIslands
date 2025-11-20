@@ -10,9 +10,7 @@ extends Node3D
 @export var _heal_popup_spawn: SpawnPoint
 
 @export_group("Local Nodes")
-@export var _health_bar: ProgressBar
-@export var _mana_bar: ProgressBar
-@export var _name_displayed: Label
+@export var _health_bar: ColorRect
 
 @export_group("External Nodes")
 @export var _owner_entity: Entity
@@ -29,6 +27,12 @@ func _process(_delta: float) -> void:
 func _ready() -> void:
 	_owner_entity.damage_taken.connect(_on_owner_entity_damage_taken)
 	_owner_entity.heal_taken.connect(_on_owner_entity_heal_taken)
+	
+	if _health_bar and _health_bar.material:
+		_health_bar.material = _health_bar.material.duplicate()
+	
+	if _owner_entity:
+		update_health_bar(_owner_entity.stats.health, _owner_entity.stats.health_max)
 
 # ============================== Public ==============================
 
@@ -37,17 +41,14 @@ func set_camera(camera: Camera3D) -> void:
 
 
 func update_health_bar(health: int, health_max: int) -> void:
-	_health_bar.max_value = health_max
-	_health_bar.value = health
+	if not _health_bar or not _health_bar.material:
+		return
 
+	var ratio = clamp(float(health) / float(health_max), 0.0, 1.0)
+	
+	_health_bar.material.set_shader_parameter("HealthAmount", ratio)
+	_health_bar.material.set_shader_parameter("MaxHealth", float(health_max))
 
-func update_mana_bar(mana: float, mana_max: float) -> void:
-	_mana_bar.max_value = mana_max
-	_mana_bar.value = mana
-
-
-func update_name_displayed(player_name: String) -> void:
-	_name_displayed.text = player_name
 
 
 func damage_popup(amount: float, damage_type: Utils.DamageType, is_critic: bool = false):

@@ -11,9 +11,8 @@ var _fire_stats: FamilyFireStats # Ref to the owner fire stats
 
 @onready var _ignite_timer: Timer = %IgniteTimer
 
-@export_group("Configuration")
-@export var _ignite_decay_percent: float = 20.0
-@export var _ignite_percent_per_stack: float = 0.05
+const _IGNITE_DECAY_PERCENT: float = 10.0
+const _IGNITE_PERCENT_PER_STACK: float = 0.05
 
 # ============================== Node base functions ==============================
 
@@ -29,9 +28,11 @@ func start() -> void:
 	_on_battle_start()
 	_add_stat_modifiers()
 	_add_action_modifiers()
+	_add_stack_modifiers()
 
 
 func stop() -> void:
+	_add_stack_modifiers()
 	_clear_stat_modifiers()
 	_remove_action_modifiers()
 	for timer in _optional_timers:
@@ -44,6 +45,16 @@ func stop() -> void:
 
 # ============================== Private functions ==============================
 #region on battle start
+
+func _on_battle_start() -> void:
+	# [nuke]
+	if _fire_stats.nuke_activated:
+		var targets: Array[Entity] = _owner.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ENEMIES)
+		for target: Entity in targets:
+			_owner.inflict_condition_stacks(target,_fire_stats.nuke_ignite,Utils.StackType.IGNITE)
+		
+
+
 #endregion
 
 #region optional timer
@@ -58,23 +69,41 @@ func stop() -> void:
 #region actions modifier
 #endregion
 
+#region on inflict stacks modifier
+
+func _add_stack_modifiers() -> void:
+	
+	# [FAMILY FIRE PASSIVE]
+	if true:
+		var stack_modifier := ActionModifier.new()
+		stack_modifier.action_type = ActionModifier.ActionType.INFLICT_CONDITION
+		stack_modifier.id = "Celestial Passive"
+		stack_modifier.tags = [ActionModifier.TagType.CARD]
+		stack_modifier.after_action_logic_callback = _on_inflict_condition_ignite
+		stack_modifier.is_one_time_effect = false
+		_owner.action_modifiers_manager.register_modifier(stack_modifier)
+		
+func _clear_stack_modifiers() -> void:
+	
+	# [FAMILY PASSIVE]
+	if true:
+		var stack_modifier := ActionModifier.new()
+		stack_modifier.action_type = ActionModifier.ActionType.INFLICT_CONDITION
+		stack_modifier.id = "Celestial Passive"
+		stack_modifier.tags = [ActionModifier.TagType.CARD]
+		stack_modifier.after_action_logic_callback = _on_inflict_condition_ignite
+		stack_modifier.is_one_time_effect = false
+		_owner.action_modifiers_manager.unregister_modifier(stack_modifier)
+		
+#endregion
+
 #region others cards
 #endregion
-func _on_battle_start() -> void:
-	# [nuke]
-	if _fire_stats.nuke_activated:
-		var targets: Array[Entity] = _owner.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ENEMIES)
-		for target: Entity in targets:
-			_owner.inflict_condition_stacks(target,_fire_stats.nuke_ignite,Utils.StackType.IGNITE)
-		
+
 
 func _create_optional_timers() -> void:
 	if _fire_stats.periodic_ignite_activated:
 		_optional_timers.append(Utils.create_perpetual_timer(self, _fire_stats.periodic_ignite_period, _on_periodic_ignite_timer_timeout, true))
-	
-	if _fire_stats.meteor_activated:
-		_optional_timers.append(Utils.create_perpetual_timer(self, _fire_stats.meteor_period, _on_meteor_timer_timeout, true))
-
 
 func _lanch_optional_spells() -> void:
 	pass
@@ -131,22 +160,13 @@ func _on_periodic_ignite_timer_timeout() -> void:
 
 func _on_ignite_timer_timeout() -> void:
 	if _owner.stats.ignite_stacks > 0:
-		var percent: float = _ignite_percent_per_stack * _owner.stats.ignite_stacks
+		var percent: float = _IGNITE_PERCENT_PER_STACK * _owner.stats.ignite_stacks
 		_owner.take_damage_percent(percent, Utils.PercentModifier.MAX_HP, Utils.DamageType.MAGICAL)
 	
-	var decay: int = (_owner.stats.ignite_stacks * _ignite_decay_percent / 100.0) as int
+	var decay: int = (_owner.stats.ignite_stacks * _IGNITE_DECAY_PERCENT / 100.0) as int
 	decay = clampi(decay, 1, decay)
 	_owner.stats.ignite_stacks -= decay
 
-
-func _on_meteor_timer_timeout() -> void:
-	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
-	if target != null:
-		var spell_modifier: Dictionary = {
-			Spell.MeteorModifier.IGNITE_STACKS: _fire_stats.meteor_ignite_stacks,
-			Spell.MeteorModifier.DAMAGE_PER_STACK: _fire_stats.meteor_damage_per_stack
-		}
-		_owner.cast_spell(target, Spell.Type.METEOR, spell_modifier)
 
 func _on_dodge_dark_forest(cb_vars: Dictionary) -> void:
 	# [DARK FOREST]
@@ -154,5 +174,22 @@ func _on_dodge_dark_forest(cb_vars: Dictionary) -> void:
 	if target != null:
 		_owner.inflict_condition_stacks(target, _fire_stats.dark_forest_ignite_stacks, Utils.StackType.IGNITE)
 
-
+# ============================== PASSIF ==============================
  
+func _on_inflict_condition_ignite(cb_vars: Dictionary) -> void:
+	if not cb_vars.has(ActionModifier.VarType.STACK_TYPE): return
+	if not cb_vars.has(ActionModifier.VarType.STACK_VALUE): return
+	if not cb_vars.has(ActionModifier.VarType.TARGET): return
+	var stack_type: Utils.StackType = cb_vars[ActionModifier.VarType.STACK_TYPE]
+	var stack_value: Utils.StackType = cb_vars[ActionModifier.VarType.STACK_VALUE]
+	var target: Entity = cb_vars[ActionModifier.VarType.TARGET]
+	if target == null: return
+	if stack_type != Utils.StackType.IGNITE: return
+	print("coucou1")
+	for i in stack_value:
+		if Utils.is_randomize_modifier_active(5):
+			_owner.cast_spell(target,Spell.Type.METEOR,{
+					Spell.MeteorModifier.IGNITE_STACKS: 0,
+					Spell.MeteorModifier.DAMAGE_PER_STACK: 0
+					})
+	print("salut")

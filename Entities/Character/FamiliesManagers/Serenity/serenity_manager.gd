@@ -71,13 +71,14 @@ func _add_stat_modifiers() -> void:
 		mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
 		mod.id = "Graceful Step"
 		_owner.stats_manager.register_modifier(mod)
+		
 	# [MIRACLE LIGHT]
 	if _serenity_stats.miracle_light_activated:
 		var crit_bonus = _serenity_stats.miracle_light_crit_chance
 		
 		# 1. Bonus pour HEAL
 		var heal_mod := StatModifier.new()
-		heal_mod.id = "Miracle Light (Heal)"
+		heal_mod.id = "Miracle Light"
 		heal_mod.stat_type = EntityStats.StatType.CRIT_CHANCE
 		heal_mod.action_type = Utils.ActionType.UTILITY_HEAL
 		heal_mod.calc_type = StatModifier.CalcType.ADD
@@ -87,7 +88,7 @@ func _add_stat_modifiers() -> void:
 		
 		# 2. Bonus pour CLEANSE
 		var cleanse_mod := StatModifier.new()
-		cleanse_mod.id = "Miracle Light (Cleanse)"
+		cleanse_mod.id = "Miracle Light"
 		cleanse_mod.stat_type = EntityStats.StatType.CRIT_CHANCE
 		cleanse_mod.action_type = Utils.ActionType.UTILITY_CLEANSE
 		cleanse_mod.calc_type = StatModifier.CalcType.ADD
@@ -97,7 +98,7 @@ func _add_stat_modifiers() -> void:
 		
 		# 3. Bonus pour REGEN
 		var regen_mod := StatModifier.new()
-		regen_mod.id = "Miracle Light (Regen)"
+		regen_mod.id = "Miracle Light"
 		regen_mod.stat_type = EntityStats.StatType.CRIT_CHANCE
 		regen_mod.action_type = Utils.ActionType.STACK_REGEN
 		regen_mod.calc_type = StatModifier.CalcType.ADD
@@ -116,19 +117,19 @@ func _clear_stat_modifiers() -> void:
 	
 	# [MIRACLE LIGHT]
 	var heal_mod := StatModifier.new()
-	heal_mod.id = "Miracle Light (Heal)"
+	heal_mod.id = "Miracle Light"
 	heal_mod.stat_type = EntityStats.StatType.CRIT_CHANCE
 	heal_mod.action_type = Utils.ActionType.UTILITY_HEAL
 	_owner.stats_manager.unregister_modifier(heal_mod)
 	
 	var cleanse_mod := StatModifier.new()
-	cleanse_mod.id = "Miracle Light (Cleanse)"
+	cleanse_mod.id = "Miracle Light"
 	cleanse_mod.stat_type = EntityStats.StatType.CRIT_CHANCE
 	cleanse_mod.action_type = Utils.ActionType.UTILITY_CLEANSE 
 	_owner.stats_manager.unregister_modifier(cleanse_mod)
 	
 	var regen_mod := StatModifier.new()
-	regen_mod.id = "Miracle Light (Regen)"
+	regen_mod.id = "Miracle Light"
 	regen_mod.stat_type = EntityStats.StatType.CRIT_CHANCE
 	regen_mod.action_type = Utils.ActionType.STACK_REGEN
 	_owner.stats_manager.unregister_modifier(regen_mod)
@@ -160,24 +161,6 @@ func _remove_action_modifiers() -> void:
 
 #region others card
 
-func _update_miracle_light_modifier() -> void:
-	# [MIRACLE LIGHT]
-	if _owner == null or not is_instance_valid(_owner):
-		return
-		
-	var phys_crit: float = _owner.stats.get_stat(EntityStats.StatType.CRIT_CHANCE)
-	var card_mult: float = _serenity_stats.miracle_light_crit_chance
-	var heal_crit_percent: float = phys_crit * card_mult
-	
-	var mod := StatModifier.new()
-	mod.id = "Miracle Light"
-	mod.stat_type = EntityStats.StatType.CRIT_CHANCE
-	mod.action_type = Utils.ActionType.UTILITY_HEAL
-	mod.calc_type = StatModifier.CalcType.ADD
-	mod.value = heal_crit_percent
-	mod.tags = [StatModifier.TagType.CARD]
-	_owner.stats_manager.update_modifier(mod)
-	
 #endregion
 
 # ============================== Callbacks functions ==============================
@@ -213,8 +196,3 @@ func _on_dodge_graceful_step(cb_vars: Dictionary) -> void:
 	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
 	if target != null:
 		_owner.inflict_condition_stacks(target, _serenity_stats.graceful_step_regen, Utils.StackType.REGEN)
-
-func _on_owner_critical_chance_changed(new_critical_chance: float, critical_type: Utils.ActionType) -> void:
-	# [MIRACLE LIGHT]
-	if critical_type == Utils.ActionType.DAMAGE_PHYSICAL:
-		_update_miracle_light_modifier()

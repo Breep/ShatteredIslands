@@ -15,7 +15,6 @@
 
 [sub_resource type="Resource" id="Resource_hluaq"]
 script = ExtResource("3_hluaq")
-health_max = 15000
 mana_regen = 5.0
 attack_speed = 0.6
 metadata/_custom_type_script = "uid://2py6kv5aqgem"

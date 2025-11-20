@@ -203,9 +203,6 @@ func _ready() -> void:
 		_character_visual.hide()
 		if _turret != null: _turret.hide()
 	
-	_character_visual.update_health_bar(stats.health, stats.health_max)
-	_character_visual.update_mana_bar(0, stats.mana_max)
-	_character_visual.update_name_displayed(player.name)
 	
 	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 	Events.player_won_a_fight.connect(_on_events_player_won_a_fight)
@@ -216,7 +213,6 @@ func _ready() -> void:
 	if player != null: apply_cards_upgrade(player.deck)
 	
 	stats.health_changed.connect(_on_stats_health_changed)
-	stats.mana_changed.connect(_on_stats_mana_changed)
 	
 	var aa_module: AutoAttackModule = _character_logic.modules[Module.ModuleType.AUTOATTACK]
 	aa_module.attack_done.connect(_on_aa_module_attack_done)
@@ -228,6 +224,8 @@ func _ready() -> void:
 		_clickable_feedback.color = Color.CRIMSON
 	
 	anim_events_manager.attack_hit_frame.connect(_on_anim_events_manager_attack_hit_frame)
+	
+	_character_visual.update_health_bar(stats.health, stats.health_max)
 
 # ============================== Private functions ==============================
 
@@ -291,10 +289,6 @@ func _on_stats_health_changed(new_health: int) -> void:
 	if _character_visual != null: _character_visual.update_health_bar(new_health, stats.health_max)
 	if new_health <= 0:
 		signal_death()
-
-
-func _on_stats_mana_changed(new_mana: float) -> void:
-	if _character_visual != null: _character_visual.update_mana_bar(new_mana, stats.mana_max)
 
 
 func _on_events_player_won_a_fight(winner: Player) -> void:

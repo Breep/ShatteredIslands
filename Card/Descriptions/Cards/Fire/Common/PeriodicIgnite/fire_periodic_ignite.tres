@@ -16,5 +16,5 @@ name = "Periodic Ignite"
 picture = ExtResource("1_rf2x4")
 family = 3
 player_upgrade = SubResource("Resource_yobeh")
-lvl = 2
+lvl = 5
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

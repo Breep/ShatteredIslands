@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c5ji8s1iic5v8"]
+[gd_scene load_steps=21 format=3 uid="uid://c5ji8s1iic5v8"]
 
 [ext_resource type="Script" uid="uid://bu48b2v401db2" path="res://Prototyping/FightingIsland/prototyping_map.gd" id="1_vksg0"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="2_dnu2k"]
@@ -7,10 +7,14 @@
 [ext_resource type="Resource" uid="uid://dvpdubk0btegx" path="res://Card/Descriptions/Cards/Poison/Common/PoisonFlask/poison_poison_flask.tres" id="4_dlg3x"]
 [ext_resource type="Resource" uid="uid://bj3e4jhk5i7ab" path="res://Card/Descriptions/Cards/Poison/Common/RottingMilk/poison_rotting_milk.tres" id="4_vksg0"]
 [ext_resource type="Resource" uid="uid://r3rk3cnyponr" path="res://Card/Descriptions/Cards/Defense/Common/ProtectiveDome/shieldomatic_protective_dome.tres" id="6_pc3mw"]
+[ext_resource type="Resource" uid="uid://dnxmyxqxal6sw" path="res://Card/Descriptions/Cards/Defense/Common/AvengersAssemble/shieldomatic_avengers_assemble.tres" id="6_qw25r"]
 [ext_resource type="PackedScene" uid="uid://drcuyohos0doa" path="res://FloatingIsland/FightingIsland/fighting_island.tscn" id="6_sp80o"]
+[ext_resource type="Resource" uid="uid://mr4x6u0j5sbf" path="res://Card/Descriptions/Cards/Defense/Common/EnergyBarrier/shieldomatic_energy_barrier.tres" id="7_0en4y"]
 [ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Entities/Character/character.tscn" id="7_pc3mw"]
 [ext_resource type="PackedScene" uid="uid://bhxhqex1pbh2p" path="res://UI/InGame/FightingArea/ui_fighting_area.tscn" id="7_wwtbg"]
+[ext_resource type="Resource" uid="uid://bu2qwhn65ehi" path="res://Card/Descriptions/Cards/Fire/Epic/Nuke/fire__nuke.tres" id="8_0en4y"]
 [ext_resource type="Material" uid="uid://2wlal7g5718r" path="res://VFX/Shaders/Sky/stylized_shader_night.tres" id="8_qw25r"]
+[ext_resource type="Resource" uid="uid://b3ohguwihk7x3" path="res://Card/Descriptions/Cards/Fire/Common/PeriodicIgnite/fire_periodic_ignite.tres" id="9_m1op8"]
 [ext_resource type="PackedScene" uid="uid://ci5cxqmyimurq" path="res://UI/InGame/FightingArea/DebugEntityStats/ui_debug_entity_stats.tscn" id="11_e0xek"]
 
 [sub_resource type="NoiseTexture3D" id="NoiseTexture3D_4fa74"]
@@ -42,8 +46,8 @@ volumetric_fog_density = 0.0
 
 [node name="PrototypingMap" type="Node3D" node_paths=PackedStringArray("_characters", "_floating_island")]
 script = ExtResource("1_vksg0")
-_player1_cards = Array[ExtResource("2_dnu2k")]([ExtResource("3_e0xek"), ExtResource("3_kngc2"), ExtResource("6_pc3mw")])
-_player2_cards = Array[ExtResource("2_dnu2k")]([ExtResource("4_dlg3x"), ExtResource("4_vksg0")])
+_player1_cards = Array[ExtResource("2_dnu2k")]([ExtResource("3_e0xek"), ExtResource("3_kngc2"), ExtResource("6_pc3mw"), ExtResource("6_qw25r"), ExtResource("7_0en4y"), ExtResource("8_0en4y"), ExtResource("9_m1op8")])
+_player2_cards = Array[ExtResource("2_dnu2k")]([ExtResource("4_dlg3x"), ExtResource("4_vksg0"), ExtResource("7_0en4y"), ExtResource("6_qw25r"), ExtResource("6_pc3mw"), ExtResource("3_e0xek"), ExtResource("9_m1op8")])
 _characters = [NodePath("DarkKnight"), NodePath("Character2")]
 _floating_island = NodePath("FightingIsland")
 

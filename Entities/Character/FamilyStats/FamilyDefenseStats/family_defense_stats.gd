@@ -37,6 +37,10 @@ var reflecto_belt_damage_percent: float
 var protective_dome_activated: bool
 var protective_dome_armor_percent: float
 
+# [AVENGERS ASSEMBLE]
+var avengers_assemble_activated: bool
+var avengers_assemble_crit_chance: float
+
 #endregion
 
 #region Rare Card
