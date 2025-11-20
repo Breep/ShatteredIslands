@@ -41,6 +41,8 @@ func clear() -> void:
 				entity.spell_casted.disconnect(_on_entity_spell_casted)
 			if entity.stack_taken.is_connected(_on_entity_stack_taken):
 				entity.stack_taken.disconnect(_on_entity_stack_taken)
+			if entity.died.is_connected(_on_entity_died):
+				entity.died.disconnect(_on_entity_died)
 	_entities.clear()
 	_characters.clear()
 
@@ -74,7 +76,7 @@ func _kick_entity(entity: Entity) -> void:
 # ============================== Callbacks ==============================
 
 func _on_game_manager_game_state_changed(game_state: Game.GameState) -> void:
-	if game_state == Game.GameState.BUYING:
+	if game_state == Game.GameState.FIGHTING_CELEBRATING:
 		_is_active = false
 		clear()
 	if game_state == Game.GameState.FIGHTING_POSITIONING:

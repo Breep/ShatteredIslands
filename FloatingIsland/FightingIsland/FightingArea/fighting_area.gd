@@ -74,8 +74,6 @@ func start_fight(characters: Array[Character], battle_type: Battle.BattleType, b
 	
 	_entity_manager.clear()
 	character_spawner.spawn_characters(characters, _entities_node)
-	for character in characters:
-		character.connect_to_fighting_area(self)
 	
 	_characters = characters
 	_battle_type = battle_type

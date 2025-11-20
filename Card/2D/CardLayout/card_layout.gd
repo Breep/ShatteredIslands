@@ -21,11 +21,6 @@ const LEVEL_COLOR := Color.GOLDENROD
 
 var _card: Card
 
-# ============================== Node base functions ==============================
-
-func _ready() -> void:
-	_update_card_layout(_card)
-
 # ============================== Public functions ==============================
 
 func update_content(card: Card) -> void:

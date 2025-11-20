@@ -95,6 +95,7 @@ func apply_cards_upgrade(deck: PlayerDeck) -> void:
 func connect_to_fighting_area(fighting_area: FightingArea) -> void:
 	_reset()
 	_character_logic.connect_to_fighting_area(fighting_area)
+	print("[DEBUG_A] ", entity_name, " connecting to fighting area signal - ", fighting_area)
 	fighting_area.fighting_manager.fight_is_over.connect(_on_fighting_manager_fight_is_over, CONNECT_ONE_SHOT)
 
 
@@ -234,6 +235,8 @@ func _ready() -> void:
 		_clickable_feedback.color = Color.CRIMSON
 	
 	anim_events_manager.attack_hit_frame.connect(_on_anim_events_manager_attack_hit_frame)
+	
+	entity_name = player.name + "_" + _hero_3D.name
 
 # ============================== Private functions ==============================
 
@@ -270,6 +273,7 @@ func _on_defense_manager_reflecto_belt_activated(damage_inc_percent: float, numb
 # ============================== Other callbacks ==============================
 
 func _on_fighting_manager_fight_is_over(_fighting_manager, _winner_team) -> void:
+	print("[DEBUG_A] ", entity_name, " receive fight is over signal")
 	_character_logic.stop()
 
 
