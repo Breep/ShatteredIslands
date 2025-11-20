@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cg1a6wmwlgdh2"]
+
+[ext_resource type="Script" uid="uid://dwdqhjhxq32i0" path="res://SpellsAndProjectiles/Spells/Meteor/Visual/meteor_visual.gd" id="1_ptlvp"]
+[ext_resource type="PackedScene" uid="uid://c77b0act7ye6o" path="res://SpellsAndProjectiles/Spells/Meteor/Visual/3d_meteor_visual.tscn" id="2_rs2tw"]
+
+[node name="MeteorVisual" type="Node3D"]
+script = ExtResource("1_ptlvp")
+
+[node name="MeteorVisual3D" parent="." instance=ExtResource("2_rs2tw")]
+unique_name_in_owner = true
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 30, 0)

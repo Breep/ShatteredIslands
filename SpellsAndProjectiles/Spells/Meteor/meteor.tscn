@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dfvy6jfn4qd4k"]
 
 [ext_resource type="Script" uid="uid://b2ikvkm7dfsto" path="res://SpellsAndProjectiles/Spells/Meteor/meteor.gd" id="1_kjd23"]
-[ext_resource type="PackedScene" uid="uid://cfmaiom8xymvq" path="res://VFX/VFX_3D/Trail/3d_meteor_visual.tscn" id="2_bmmic"]
+[ext_resource type="PackedScene" uid="uid://cg1a6wmwlgdh2" path="res://SpellsAndProjectiles/Spells/Meteor/Visual/meteor_visual.tscn" id="2_dk7r1"]
 [ext_resource type="AudioStream" uid="uid://cxj6q36uewa0e" path="res://Data/Sounds/SFX/Firefly_audio_Meteor_explosion_with_a_small_sound_before_it_cras_variation2.wav" id="4_fvlyx"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_y4y4j"]
@@ -11,13 +11,8 @@ radius = 3.0
 [node name="Meteor" type="Node3D"]
 script = ExtResource("1_kjd23")
 _deploy_time = 2.0
-_radius = 3.0
 
-[node name="Visual" type="Node3D" parent="."]
-
-[node name="MeteorVisual" parent="Visual" instance=ExtResource("2_bmmic")]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+[node name="MeteorVisual" parent="." instance=ExtResource("2_dk7r1")]
 
 [node name="ImpactEffectArea" type="Area3D" parent="."]
 visible = false
@@ -39,5 +34,3 @@ attenuation_model = 3
 [connection signal="body_entered" from="ImpactEffectArea" to="." method="_on_impact_effect_area_body_entered"]
 [connection signal="body_exited" from="ImpactEffectArea" to="." method="_on_impact_effect_area_body_exited"]
 [connection signal="timeout" from="DeployTimer" to="." method="_on_deploy_timer_timeout"]
-
-[editable path="Visual/MeteorVisual"]
