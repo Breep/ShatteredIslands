@@ -127,14 +127,18 @@ var _pending_attacks: Array[AttackCommand]
 func projectile_attack(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	if projectile_type == Projectile.ProjectileType.AUTO_ATTACK:
 		var attack_cmd: AttackCommand = _action_module.build_projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
-		if attack_cmd == null: return
+		if attack_cmd == null:
+			#push_error("[Character] Can't create an AttackCommand [", entity_name)
+			return
 		_pending_attacks.append(attack_cmd)
 		auto_attack_started.emit(projectile_stats.physical_is_critical)
 	else:
 		_action_module.projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
 
 func _on_anim_events_manager_attack_hit_frame() -> void:
-	if _pending_attacks.is_empty(): return
+	if _pending_attacks.is_empty():
+		#push_error("[Character] AA anim hit frame but no pending attacks [", entity_name)
+		return
 	var attack_cmd: AttackCommand = _pending_attacks.pop_front()
 	if !is_instance_valid(attack_cmd.target) or attack_cmd.target.is_queued_for_deletion(): return
 	_action_module.projectile_attack(attack_cmd.target, attack_cmd.projectile_type, attack_cmd.spawn_node, attack_cmd.stats)

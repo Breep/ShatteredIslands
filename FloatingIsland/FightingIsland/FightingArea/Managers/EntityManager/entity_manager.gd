@@ -89,8 +89,8 @@ func _on_entity_spell_casted(entity: Entity, target: Entity, spell_type: Spell.T
 	_fighting_area.signal_spell_casted(entity, target, spell_type)
 
 
-func _on_entity_stack_taken(entity: Entity, stack_type: Utils.StackType, stack_number: int) -> void:
-	_fighting_area.signal_stack_taken(entity, stack_type, stack_number)
+func _on_entity_stack_taken(entity: Entity, stack_type: Utils.StackType, stack_number: int, is_critical: bool) -> void:
+	_fighting_area.signal_stack_taken(entity, stack_type, stack_number, is_critical)
 
 
 func _on_entity_died(entity: Entity) -> void:

@@ -81,13 +81,16 @@ func _log_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type) -
 	_battle_logs.append(data)
 
 
-func _log_stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: int) -> void:
+func _log_stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: int, is_critical: bool) -> void:
 	var data: Dictionary = {
 		BattleLog.Main.TIME: _get_time(),
 		BattleLog.Main.TYPE: BattleLog.Type.STACK_TAKEN,
 		BattleLog.Main.STACK_TYPE: stack_type,
 		BattleLog.Main.STACK_NUMBER: stack_number,
 		BattleLog.Main.SOURCE: source.id,
+		BattleLog.Main.MODIFIER: {
+			BattleLog.Modifier.CRITICAL: is_critical
+		}
 	}
 	_battle_logs.append(data)
 
@@ -130,5 +133,5 @@ func _on_fighting_area_spell_casted(source: Entity, target: Entity, spell_type: 
 	_log_spell_casted(source, target, spell_type)
 
 
-func _on_fighting_area_stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: int) -> void:
-	_log_stack_taken(source, stack_type, stack_number)
+func _on_fighting_area_stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: int, is_critical: bool) -> void:
+	_log_stack_taken(source, stack_type, stack_number, is_critical)

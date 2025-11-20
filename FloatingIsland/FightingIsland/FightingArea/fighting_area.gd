@@ -15,9 +15,9 @@ signal spell_casted(source: Entity, target: Entity, spell_type: Spell.Type)
 func signal_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type) -> void:
 	spell_casted.emit(source, target, spell_type)
 
-signal stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: int)
-func signal_stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: int) -> void:
-	stack_taken.emit(source, stack_type, stack_number)
+signal stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: int, is_critical: bool)
+func signal_stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: int, is_critical: bool) -> void:
+	stack_taken.emit(source, stack_type, stack_number, is_critical)
 
 signal entity_died(victim: Entity)
 func signal_entity_died(victim: Entity) -> void:

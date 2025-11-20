@@ -104,13 +104,11 @@ func _create_optional_timers() -> void:
 #region others cards
 #endregion
 
-
-
 func _reset_rank() -> void:
 	_current_point = Rank.D
 	_current_point = 0
 
-# ============================== Callbacks functions ==============================
+#region ============================== Callbacks functions ==============================
 
 func _on_current_rank_changed() -> void:
 	_call_the_lightning()
@@ -124,6 +122,11 @@ func _on_current_rank_changed() -> void:
 			_rank_s_timer.start()
 
 
+func _on_rank_s_timer_timeout() -> void:
+	_current_rank = Rank.D
+	_current_point = 0
+
+
 func _on_owner_critical_action_done(_entity_ref: Entity, _target: Entity, _action_type: Utils.ActionType, base_value: float, real_value: float) -> void:
 	#print("StormManager: CRIT DONE on ", target, " A=", action_type, " | ", base_value, "/", real_value, " | Points=", _get_crit_point(base_value, real_value))
 	_current_point += _get_crit_point(base_value, real_value)
@@ -132,17 +135,13 @@ func _on_owner_critical_action_done(_entity_ref: Entity, _target: Entity, _actio
 	elif _current_point >= RANK_POINT_TRESHOLDS[Rank.A]: _current_rank = Rank.A
 	elif _current_point >= RANK_POINT_TRESHOLDS[Rank.B]: _current_rank = Rank.B
 	elif _current_point >= RANK_POINT_TRESHOLDS[Rank.C]: _current_rank = Rank.C
+#endregion
 
-
+#region ============================== Private functions ==============================
 func _get_crit_point(default_damage: float, real_damage: float) -> float:
 	if real_damage < 0: return 0
 	if default_damage < 1.0: CRIT_POINT_DEFAULT
 	return CRIT_POINT_DEFAULT + (real_damage / default_damage) * CRIT_POINT_MULT
-
-
-func _on_rank_s_timer_timeout() -> void:
-	_current_rank = Rank.D
-	_current_point = 0
 
 
 func _apply_passive_crit_boost() -> void:
@@ -171,3 +170,4 @@ func _call_the_lightning() -> void:
 	if target == null: return
 	var damage: float = _owner.stats.attack_damage * LIGHTNING_DAMAGE_PERCENT[0] / 100.0
 	_owner.cast_spell(target, Spell.Type.LIGHTNING, { Spell.LightningModifier.DAMAGE: damage })
+#endregion
