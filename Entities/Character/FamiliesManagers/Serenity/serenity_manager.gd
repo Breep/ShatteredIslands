@@ -132,7 +132,6 @@ func _clear_stat_modifiers() -> void:
 	regen_mod.stat_type = EntityStats.StatType.CRIT_CHANCE
 	regen_mod.action_type = Utils.ActionType.STACK_REGEN
 	_owner.stats_manager.unregister_modifier(regen_mod)
-
 #endregion
 
 #region action modifier

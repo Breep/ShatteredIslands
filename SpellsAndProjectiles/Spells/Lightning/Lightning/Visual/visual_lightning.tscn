@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://c4fts1wnbyw6g"]
+
+[ext_resource type="ArrayMesh" uid="uid://dtsr0t0nqnwji" path="res://SpellsAndProjectiles/Spells/Lightning/Lightning/Visual/Import/lightning_mesh.tres" id="1_qyn3e"]
+
+[sub_resource type="Gradient" id="Gradient_qyn3e"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sngc6"]
+gradient = SubResource("Gradient_qyn3e")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jkiqw"]
+lifetime_randomness = 0.1
+particle_flag_rotate_y = true
+emission_shape = 3
+emission_box_extents = Vector3(0.5, 0, 0.5)
+angle_min = -179.99998
+angle_max = 180.00002
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_sngc6")
+
+[node name="VisualLightning" type="Node3D"]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 1
+lifetime = 0.5
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_jkiqw")
+draw_pass_1 = ExtResource("1_qyn3e")
