@@ -97,12 +97,12 @@ func _on_body_entered(body: Node3D) -> void:
 	if target == null:
 		return
 	if body is Entity and body == target:
-		var physical_damage_done_flat: int
+		var physical_damage_done_flat: float
 		if not multiplayer.is_server():
 			queue_free()
 			return
 
-		var physical_damage: int = stats.physical_damage_flat
+		var physical_damage: float = stats.physical_damage_flat
 		if physical_damage > 0:
 			physical_damage_done_flat = target.take_damage(
 				physical_damage,
@@ -114,7 +114,7 @@ func _on_body_entered(body: Node3D) -> void:
 		if stats.physical_is_critical:
 			source.signal_critical_action_done(target, Utils.ActionType.DAMAGE_PHYSICAL, stats.physical_base_damage, physical_damage_done_flat)
 
-		var magical_damage: int = stats.magical_damage_flat
+		var magical_damage: float = stats.magical_damage_flat
 		if magical_damage > 0:
 			target.take_damage(
 				magical_damage,

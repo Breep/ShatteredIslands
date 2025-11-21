@@ -17,7 +17,6 @@ var _reflecto_belt_attacks_left: int = 0
 var _armor_lost_since_last_hedgehog_armor: int
 var _armor_lost_since_last_rainbow_boots: int
 var _mystical_shoulders_damage_reduced_percent: float
-var _total_magical_damage_blocked: int
 
 # ============================== Node base functions ==============================
 
@@ -74,7 +73,7 @@ func get_reduced_damage_taken_from_mystical_shoulder(damage: int) -> int:
 	return damage - damage_reduction
 
 
-func get_reduced_damage_taken_from_armor(damage: int, damage_type: Utils.DamageType) -> int:
+func get_reduced_damage_taken_from_armor(damage: float, damage_type: Utils.DamageType) -> float:
 	if damage_type == Utils.DamageType.POISON: 
 		return damage
 		
@@ -262,7 +261,7 @@ func _activate_reflecto_belt_buff() -> void:
 
 
 # [PROTECTIVE DOME] - Logique Update
-func _update_protective_dome_modifier(current_armor: int) -> void:
+func _update_protective_dome_modifier(current_armor: float) -> void:
 	var mod := StatModifier.new()
 	mod.id = "Protective Dome"
 	mod.stat_type = EntityStats.StatType.RESISTANCE 
@@ -280,7 +279,7 @@ func _update_protective_dome_modifier(current_armor: int) -> void:
 
 # ============================== Callbacks functions ==============================
 
-func _on_attack_reflecto_belt_consumption(cb_vars: Dictionary) -> void:
+func _on_attack_reflecto_belt_consumption(_cb_vars: Dictionary) -> void:
 	# [REFLECTO BELT]
 	_reflecto_belt_attacks_left -= 1
 	if _reflecto_belt_attacks_left <= 0:
@@ -304,9 +303,9 @@ func _on_force_field_timer_timeout() -> void:
 	# [FORCE FIELD]
 	if _owner == null or not is_instance_valid(_owner): return
 	
-	var max_hp: int = _owner.stats.health_max
-	var current_hp: int = _owner.stats.health
-	var lost_hp: int = max_hp - current_hp
+	var max_hp: float = _owner.stats.health_max
+	var current_hp: float = _owner.stats.health
+	var lost_hp: float = max_hp - current_hp
 	
 	if lost_hp > 0:
 		var percent: float = _defense_stats.force_field_lost_hp_percent
@@ -315,7 +314,7 @@ func _on_force_field_timer_timeout() -> void:
 			_owner.stats.armor_stacks += armor_gain
 
 
-func _on_dodge_evasive_barrier(cb_vars: Dictionary) -> void:
+func _on_dodge_evasive_barrier(_cb_vars: Dictionary) -> void:
 	# [EVASIVE BARRIER]
 	if _owner == null or not is_instance_valid(_owner): return
 	var shield_amount: float = _defense_stats.evasive_barrier_shield_gain
@@ -329,7 +328,7 @@ func _on_energy_barrier_timer_timeout() -> void:
 	_owner.stats.armor_stacks += amount
 
 
-func _on_damage_taken_smith_hammer(cb_vars: Dictionary) -> void:
+func _on_damage_taken_smith_hammer(_cb_vars: Dictionary) -> void:
 	# [SMITH HAMMER]
 	var chance: float = _defense_stats.smith_hammer_chance
 	if Utils.is_randomize_modifier_active(chance):

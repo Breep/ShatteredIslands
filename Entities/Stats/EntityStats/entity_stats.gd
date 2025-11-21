@@ -26,21 +26,21 @@ signal has_been_reset()
 
 #region ============================== Health ==============================
 @export_group("Health")
-signal health_max_changed(new_health_max: int)
-var _health_max: int # Maximum health of the character (Can't be heal over this)
-@export var health_max: int:
+signal health_max_changed(new_health_max: float)
+var _health_max: float # Maximum health of the character (Can't be heal over this)
+@export var health_max: float:
 	get: return _health_max
 	set(value):
 		if value == _health_max: return
 		_health_max = value
 		health_max_changed.emit(_health_max)
 
-signal health_changed(new_health: int)
-var _health: int # Current health
-var health: int:
+signal health_changed(new_health: float)
+var _health: float # Current health
+var health: float:
 	get: return _health
 	set(value):
-		value = clampi(value, 0, health_max)
+		value = clampf(value, 0, health_max)
 		if value == _health: return
 		_health = value
 		health_changed.emit(_health)
@@ -48,16 +48,16 @@ var health: int:
 
 #region ============================== Mana ==============================
 @export_group("Mana")
-signal mana_max_changed(new_mana_max: int)
-var _mana_max: int # When mana hit mana_max, the ultimate is triggered
-@export var mana_max: int:
+signal mana_max_changed(new_mana_max: float)
+var _mana_max: float # When mana hit mana_max, the ultimate is triggered
+@export var mana_max: float:
 	get: return _mana_max
 	set(value):
 		if value == _mana_max: return
 		_mana_max = value
 		mana_max_changed.emit(_mana_max)
 
-signal mana_changed(new_mana: int)
+signal mana_changed(new_mana: float)
 var _mana: float # Current mana
 var mana: float:
 	get: return _mana
@@ -78,9 +78,9 @@ var _mana_regen: float # mana/s
 
 #region ============================== Auto-Attack ==============================
 @export_group("Attack damage")
-signal attack_damage_changed(new_attack_damage: int)
-var _attack_damage: int # Damage of auto attack
-@export var attack_damage: int:
+signal attack_damage_changed(new_attack_damage: float)
+var _attack_damage: float # Damage of auto attack
+@export var attack_damage: float:
 	get: return _attack_damage
 	set(value):
 		if value == _attack_damage: return
@@ -107,9 +107,9 @@ var _critical_multipliers: Dictionary[Utils.ActionType, float]
 
 #region ============================== Condition Stacks ==============================
 @export_group("Condition Stacks")
-signal poison_stacks_changed(new_poison_stacks: int)
-var _poison_stacks: int = 0
-@export var poison_stacks: int:
+signal poison_stacks_changed(new_poison_stacks: float)
+var _poison_stacks: float = 0
+@export var poison_stacks: float:
 	get: return _poison_stacks
 	set(value):
 		if value < 0: value = 0
@@ -118,9 +118,9 @@ var _poison_stacks: int = 0
 		poison_stacks_changed.emit(_poison_stacks)
 
 
-signal ignite_stacks_changed(new_ignite_stacks: int)
-var _ignite_stacks: int
-@export var ignite_stacks: int:
+signal ignite_stacks_changed(new_ignite_stacks: float)
+var _ignite_stacks: float
+@export var ignite_stacks: float:
 	get: return _ignite_stacks
 	set(value):
 		if value < 0: value = 0
@@ -129,9 +129,9 @@ var _ignite_stacks: int
 		ignite_stacks_changed.emit(_ignite_stacks)
 
 
-signal armor_stacks_changed(new_armor_stacks: int)
-var _armor_stacks: int = 0
-@export var armor_stacks: int:
+signal armor_stacks_changed(new_armor_stacks: float)
+var _armor_stacks: float = 0
+@export var armor_stacks: float:
 	get: return _armor_stacks
 	set(value):
 		if value == _armor_stacks: return
@@ -139,9 +139,9 @@ var _armor_stacks: int = 0
 		armor_stacks_changed.emit(_armor_stacks)
 
 
-signal regen_stacks_changed(new_regen_stacks: int)
-var _regen_stacks: int = 0
-@export var regen_stacks: int:
+signal regen_stacks_changed(new_regen_stacks: float)
+var _regen_stacks: float = 0
+@export var regen_stacks: float:
 	get: return _regen_stacks
 	set(value):
 		if value == _regen_stacks: return
@@ -176,15 +176,15 @@ var _weaknesses: Dictionary[Utils.ActionType, float]
 #endregion
 
 #region ============================== Public functions ==============================
-func get_stacks_number() -> int:
+func get_stacks_number() -> float:
 	return _poison_stacks + _ignite_stacks + _armor_stacks + _regen_stacks
 
 
-func get_debuf_stacks_number() -> int :
+func get_debuf_stacks_number() -> float :
 	return _poison_stacks + _ignite_stacks
 
 
-func get_buf_stacks_number() -> int:
+func get_buf_stacks_number() -> float:
 	return _armor_stacks + _regen_stacks
 
 
@@ -232,12 +232,12 @@ func get_stat(stat_type: StatType, action_type: Utils.ActionType = Utils.ActionT
 
 func update_stat(stat_type: StatType, value: float, action_type: Utils.ActionType = Utils.ActionType.DAMAGE_PHYSICAL) -> void:
 	match stat_type:
-		EntityStats.StatType.HEALTH_MAX: health_max = int(round(value))
-		EntityStats.StatType.HEALTH: health = int(round(value))
-		EntityStats.StatType.MANA_MAX: mana_max = int(round(value))
+		EntityStats.StatType.HEALTH_MAX: health_max = value
+		EntityStats.StatType.HEALTH: health = value
+		EntityStats.StatType.MANA_MAX: mana_max = value
 		EntityStats.StatType.MANA: mana = value
 		EntityStats.StatType.MANA_REGEN: mana_regen = value
-		EntityStats.StatType.AD: attack_damage = int(round(value))
+		EntityStats.StatType.AD: attack_damage = value
 		EntityStats.StatType.AA_SPEED: attack_speed = value
 		EntityStats.StatType.CRIT_CHANCE:
 			_critical_chances[action_type] = value

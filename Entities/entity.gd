@@ -12,20 +12,20 @@ signal critical_action_done(entity_ref: Entity, target: Entity, action_type: Uti
 func signal_critical_action_done(target: Entity, action_type: Utils.ActionType, base_value: float, real_value: float) -> void:
 	critical_action_done.emit(self, target, action_type, base_value, real_value)
 
-signal damage_taken(entity_ref: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool)
-func signal_damage_taken(damage: int, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool) -> void:
+signal damage_taken(entity_ref: Entity, damage: float, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool)
+func signal_damage_taken(damage: float, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool) -> void:
 	damage_taken.emit(self, damage, damage_type, is_critical, blocked_by_armor)
 
-signal heal_taken(entity_ref: Entity, heal_amount: int, is_critical: bool)
-func signal_heal_taken(heal_amount: int, is_critical: bool) -> void:
+signal heal_taken(entity_ref: Entity, heal_amount: float, is_critical: bool)
+func signal_heal_taken(heal_amount: float, is_critical: bool) -> void:
 	heal_taken.emit(self, heal_amount, is_critical)
 
 signal spell_casted(source: Entity, target: Entity, spell_type: Spell.Type)
 func signal_spell_casted(target: Entity, spell_type: Spell.Type) -> void:
 	spell_casted.emit(self, target, spell_type)
 
-signal stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: int, is_critical: bool)
-func signal_stack_taken(stack_type: Utils.StackType, stack_number: int, is_critical: bool) -> void:
+signal stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: float, is_critical: bool)
+func signal_stack_taken(stack_type: Utils.StackType, stack_number: float, is_critical: bool) -> void:
 	stack_taken.emit(self, stack_type, stack_number, is_critical)
 
 signal auto_attack_started(is_critical: bool)
@@ -112,7 +112,7 @@ func connect_to_fighting_area(_fighting_area: FightingArea) -> void:
 	printerr("Entity: virtual connect_to_fighting_area() called [", get_path(), "]")
 
 #region ===== Actions [VIRTUAL]
-func direct_attack(_target: Entity, _damage: int, _damage_type: Utils.DamageType) -> void:
+func direct_attack(_target: Entity, _damage: float, _damage_type: Utils.DamageType) -> void:
 	printerr("Entity: virtual direct_attack() called [", get_path(), "]")
 
 func direct_attack_percent(_target: Entity, _damage_percent: float, _damage_type: Utils.DamageType, _percent_modifier: Utils.PercentModifier) -> void:
@@ -127,13 +127,13 @@ func cast_spell(_target: Entity, _spell_type: Spell.Type, _spell_modifier: Dicti
 func cast_ultimate() -> void:
 	printerr("Entity: virtual cast_ultimate() called [", get_path(), "]")
 
-func heal(_target: Entity, _heal_amount: int) -> void:
+func heal(_target: Entity, _heal_amount: float) -> void:
 	printerr("Entity: virtual heal() called [", get_path(), "]")
 
 func heal_percent(_target: Entity, _percent: float, _percent_modifier: Utils.PercentModifier) -> void:
 	printerr("Entity: virtual heal_percent() called [", get_path(), "]")
 
-func inflict_condition_stacks(_target: Entity, _stacks_number: int, _stack_type: Utils.StackType) -> void:
+func inflict_condition_stacks(_target: Entity, _stacks_number: float, _stack_type: Utils.StackType) -> void:
 	printerr("Entity: virtual inflict_condition_stacks() called [", get_path(), "]")
 
 func summon_entity(_entity_type: EntityType, _entity_spawn_global_position: Vector3, _entity_modifier: Dictionary) -> void:
@@ -147,14 +147,14 @@ func dispell(_target: Entity, _value: float) -> void:
 #endregion
 
 #region ===== Interaction [VIRTUAL]
-func take_damage(_damage: int, _damage_type: Utils.DamageType, _is_critical: bool = false, _source: Entity = null, _attack_type: Utils.AttackType = Utils.AttackType.UNDEF) -> int:
+func take_damage(_damage: float, _damage_type: Utils.DamageType, _is_critical: bool = false, _source: Entity = null, _attack_type: Utils.AttackType = Utils.AttackType.UNDEF) -> float:
 	printerr("Entity: virtual take_damage() called [", get_path(), "]")
 	return -1
 
 func take_damage_percent(_percent: float, _percent_modifier: Utils.PercentModifier, _damage_type: Utils.DamageType, _is_critical: bool = false, _source: Entity = null) -> void:
 	printerr("Entity: virtual take_damage_percent() called [", get_path(), "]")
 
-func take_condition_stacks(_stacks_number: int, _stack_type: Utils.StackType, _is_critical: bool, _source: Entity = null) -> float:
+func take_condition_stacks(_stacks_number: float, _stack_type: Utils.StackType, _is_critical: bool, _source: Entity = null) -> float:
 	printerr("Entity: virtual take_condition_stack() called [", get_path(), "]")
 	return -1.0
 

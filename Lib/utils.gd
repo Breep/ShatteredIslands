@@ -66,8 +66,6 @@ const STACK_COLORS: Dictionary[StackType, Color] = {
 
 # ============================== Private variables ==============================
 
-var _seed: int = 42
-
 # ============================== Node base functions ==============================
 
 func _ready() -> void:

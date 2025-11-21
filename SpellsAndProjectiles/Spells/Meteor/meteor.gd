@@ -92,9 +92,9 @@ func play_impact_sound():
 	return
 	# On détache le nœud audio de son parent actuel (la scène Meteor)
 	# Il ne sera donc plus détruit quand on appellera queue_free() sur le météore.
-	remove_child(audio_player)
-	get_tree().get_root().add_child(audio_player)
-	audio_player.volume_db = randf_range(-9, -5)
-	audio_player.pitch_scale = randf_range(0.6, 1.4)
-	audio_player.play()
-	audio_player.finished.connect(audio_player.queue_free)
+	#remove_child(audio_player)
+	#get_tree().get_root().add_child(audio_player)
+	#audio_player.volume_db = randf_range(-9, -5)
+	#audio_player.pitch_scale = randf_range(0.6, 1.4)
+	#audio_player.play()
+	#audio_player.finished.connect(audio_player.queue_free)

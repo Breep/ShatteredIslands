@@ -148,7 +148,7 @@ func _on_meteor_timer_timeout() -> void:
 		}
 		_owner.cast_spell(target, Spell.Type.METEOR, spell_modifier)
 
-func _on_dodge_dark_forest(cb_vars: Dictionary) -> void:
+func _on_dodge_dark_forest(_cb_vars: Dictionary) -> void:
 	# [DARK FOREST]
 	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
 	if target != null:

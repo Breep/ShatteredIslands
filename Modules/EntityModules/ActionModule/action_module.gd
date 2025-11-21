@@ -41,7 +41,7 @@ func direct_attack(target: Entity, damage: float, damage_type: Utils.DamageType)
 func direct_attack_percent(target: Entity, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
-	var hp: int
+	var hp: float
 	match percent_modifier:
 		Utils.PercentModifier.MAX_HP:
 			hp = target.stats.health_max
@@ -49,7 +49,7 @@ func direct_attack_percent(target: Entity, damage_percent: float, damage_type: U
 			hp = target.stats.health
 		Utils.PercentModifier.LOST_HP:
 			hp = target.stats.health_max - _owner.stats.health
-	var damage = hp * damage_percent  / 100.0
+	var damage: float = hp * damage_percent  / 100.0
 	direct_attack(target, damage, damage_type)
 
 
@@ -99,7 +99,7 @@ func heal(target: Entity, heal_amount: float) -> void:
 func heal_percent(target: Entity, percent: float, percent_modifier: Utils.PercentModifier) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
-	var hp: int
+	var hp: float
 	match percent_modifier:
 		Utils.PercentModifier.MAX_HP:
 			hp = target.stats.health_max
@@ -107,7 +107,7 @@ func heal_percent(target: Entity, percent: float, percent_modifier: Utils.Percen
 			hp = target.stats.health
 		Utils.PercentModifier.LOST_HP:
 			hp = target.stats.health_max - _owner.stats.health
-	var heal_amount: int = floor((percent * hp as float) / 100.0)
+	var heal_amount: float = (percent * hp as float) / 100.0
 	heal(target, heal_amount)
 #endregion
 

@@ -83,7 +83,7 @@ func _on_game_manager_game_state_changed(game_state: Game.GameState) -> void:
 		_is_active = true
 
 
-func _on_entity_damage_taken(entity: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool) -> void:
+func _on_entity_damage_taken(entity: Entity, damage: float, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool) -> void:
 	_fighting_area.signal_damage_taken(entity, damage, damage_type, is_critical, blocked_by_armor)
 
 
@@ -91,7 +91,7 @@ func _on_entity_spell_casted(entity: Entity, target: Entity, spell_type: Spell.T
 	_fighting_area.signal_spell_casted(entity, target, spell_type)
 
 
-func _on_entity_stack_taken(entity: Entity, stack_type: Utils.StackType, stack_number: int, is_critical: bool) -> void:
+func _on_entity_stack_taken(entity: Entity, stack_type: Utils.StackType, stack_number: float, is_critical: bool) -> void:
 	_fighting_area.signal_stack_taken(entity, stack_type, stack_number, is_critical)
 
 
