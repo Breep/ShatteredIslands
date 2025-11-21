@@ -35,8 +35,7 @@ func start() -> void:
 func stop() -> void:
 	_remove_action_modifiers()
 	_clear_stat_modifiers()
-	for timer in _optional_timers:
-		timer.stop()
+	_clear_optional_timers()
 
 
 func get_increased_damage_taken_from_lost_hp(damage: float, _damage_type: Utils.DamageType) -> float:

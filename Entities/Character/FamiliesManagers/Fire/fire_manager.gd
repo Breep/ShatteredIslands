@@ -35,12 +35,10 @@ func stop() -> void:
 	_add_stack_modifiers()
 	_clear_stat_modifiers()
 	_remove_action_modifiers()
-	for timer in _optional_timers:
-		timer.queue_free()
-	_optional_timers.clear()
 	for spell in _optional_spells:
 		spell.queue_free()
 	_ignite_timer.stop()
+	_clear_optional_timers()
 
 
 # ============================== Private functions ==============================
@@ -58,6 +56,16 @@ func _on_battle_start() -> void:
 #endregion
 
 #region optional timer
+
+func _create_optional_timers() -> void:
+	if _fire_stats.periodic_ignite_activated:
+		_optional_timers.append(Utils.create_perpetual_timer(self, _fire_stats.periodic_ignite_period, _on_periodic_ignite_timer_timeout, true))
+
+func _clear_optional_timers() -> void:
+	for timer in _optional_timers:
+		timer.queue_free()
+	_optional_timers.clear()
+
 #endregion
 
 #region aa modifier

@@ -36,16 +36,9 @@ func start() -> void:
 		if not _owner.stats.armor_stacks_changed.is_connected(_on_owner_armor_stacks_changed_protective_dome):
 			_owner.stats.armor_stacks_changed.connect(_on_owner_armor_stacks_changed_protective_dome)
 		_update_protective_dome_modifier(_owner.stats.armor_stacks)
-	
-	# Timers start
-	for timer in _optional_timers:
-		timer.start()
 
 
 func stop() -> void:
-	for timer in _optional_timers:
-		timer.queue_free()
-	_optional_timers.clear()
 	
 	_clear_action_modifiers()
 	_clear_stat_modifiers()
@@ -65,7 +58,7 @@ func stop() -> void:
 		mod.stat_type = EntityStats.StatType.RESISTANCE
 		mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
 		_owner.stats_manager.unregister_modifier(mod)
-
+	_clear_optional_timers()
 
 # --- Fonctions appelées par le système de dégâts ---
 
