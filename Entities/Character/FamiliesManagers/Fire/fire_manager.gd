@@ -58,8 +58,10 @@ func _on_battle_start() -> void:
 #region optional timer
 
 func _create_optional_timers() -> void:
-	if _fire_stats.periodic_ignite_activated:
-		_optional_timers.append(Utils.create_perpetual_timer(self, _fire_stats.periodic_ignite_period, _on_periodic_ignite_timer_timeout, true))
+	
+	# [EXPANSE UNIVERSE]
+	if _fire_stats.expanse_universe_activated:
+		_optional_timers.append(Utils.create_perpetual_timer(self, _fire_stats.expanse_universe_period, _on_expanse_universe_timer_timeout, true))
 
 func _clear_optional_timers() -> void:
 	for timer in _optional_timers:
@@ -72,9 +74,50 @@ func _clear_optional_timers() -> void:
 #endregion
 
 #region stats modifier
+
+func _add_stat_modifiers() -> void:
+	# [DARK FOREST]
+	if _fire_stats.dark_forest_activated:
+		var mod := StatModifier.new()
+		mod.calc_type = StatModifier.CalcType.ADD
+		mod.value = _fire_stats.dark_forest_increase_dodge
+		mod.stat_type = EntityStats.StatType.DODGE
+		mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
+		mod.id = "Dark Forest"
+		_owner.stats_manager.register_modifier(mod)
+		
+func _clear_stat_modifiers() -> void:
+	# [DARK FOREST]
+	if _fire_stats.dark_forest_activated:
+		var mod := StatModifier.new()
+		mod.stat_type = EntityStats.StatType.DODGE
+		mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
+		mod.id = "Dark Forest"
+		_owner.stats_manager.unregister_modifier(mod)
+		
 #endregion
 
 #region actions modifier
+
+func _add_action_modifiers() -> void:
+	# [DARK FOREST]
+	if _fire_stats.dark_forest_activated:
+		var action_modifier := ActionModifier.new()
+		action_modifier.action_type = ActionModifier.ActionType.DODGE
+		action_modifier.id = "Dark Forest"
+		action_modifier.is_one_time_effect = false
+		action_modifier.after_action_logic_callback = _on_dodge_dark_forest
+		_owner.action_modifiers_manager.register_modifier(action_modifier)
+
+func _remove_action_modifiers() -> void:
+	# [DARK FOREST]
+	if _fire_stats.dark_forest_activated:
+		var action_modifier := ActionModifier.new()
+		action_modifier.action_type = ActionModifier.ActionType.DODGE
+		action_modifier.id = "Dark Forest"
+		action_modifier.after_action_logic_callback = _on_dodge_dark_forest
+		_owner.action_modifiers_manager.unregister_modifier(action_modifier)
+		
 #endregion
 
 #region on inflict stacks modifier
@@ -106,66 +149,31 @@ func _clear_stack_modifiers() -> void:
 #endregion
 
 #region others cards
-#endregion
-
-
-func _create_optional_timers() -> void:
-	if _fire_stats.periodic_ignite_activated:
-		_optional_timers.append(Utils.create_perpetual_timer(self, _fire_stats.periodic_ignite_period, _on_periodic_ignite_timer_timeout, true))
 
 func _lanch_optional_spells() -> void:
 	pass
-
-func _add_stat_modifiers() -> void:
-	# [DARK FOREST]
-	if _fire_stats.dark_forest_activated:
-		var mod := StatModifier.new()
-		mod.calc_type = StatModifier.CalcType.ADD
-		mod.value = _fire_stats.dark_forest_increase_dodge
-		mod.stat_type = EntityStats.StatType.DODGE
-		mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
-		mod.id = "Dark Forest"
-		_owner.stats_manager.register_modifier(mod)
-		
-func _clear_stat_modifiers() -> void:
-	# [DARK FOREST]
-	if _fire_stats.dark_forest_activated:
-		var mod := StatModifier.new()
-		mod.stat_type = EntityStats.StatType.DODGE
-		mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
-		mod.id = "Dark Forest"
-		_owner.stats_manager.unregister_modifier(mod)
 	
-func _add_action_modifiers() -> void:
-	# [DARK FOREST]
-	if _fire_stats.dark_forest_activated:
-		var action_modifier := ActionModifier.new()
-		action_modifier.action_type = ActionModifier.ActionType.DODGE
-		action_modifier.id = "Dark Forest"
-		action_modifier.is_one_time_effect = false
-		action_modifier.after_action_logic_callback = _on_dodge_dark_forest
-		_owner.action_modifiers_manager.register_modifier(action_modifier)
+#endregion
 
-func _remove_action_modifiers() -> void:
-	# [DARK FOREST]
-	if _fire_stats.dark_forest_activated:
-		var action_modifier := ActionModifier.new()
-		action_modifier.action_type = ActionModifier.ActionType.DODGE
-		action_modifier.id = "Dark Forest"
-		action_modifier.after_action_logic_callback = _on_dodge_dark_forest
-		_owner.action_modifiers_manager.unregister_modifier(action_modifier)
+
+	
 # ============================== Callbacks functions ==============================
 
 func _on_firebolt_timer_timeout() -> void:
 	pass
 
+# [EXPANSE UNIVERSE]
+func _on_expanse_universe_timer_timeout() -> void:
+	if _owner == null or not is_instance_valid(_owner):
+		return
+	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.HIGHEST_HP_PERCENT_ENEMY)
+	if target == null or not is_instance_valid(target):
+		return
+	var stacks: int = int(_fire_stats.expanse_universe_ignite_stacks)
+	if stacks > 0:
+		_owner.inflict_condition_stacks(target, stacks, Utils.StackType.IGNITE)
 
-func _on_periodic_ignite_timer_timeout() -> void:
-	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
-	if target != null:
-		_owner.inflict_condition_stacks(target, _fire_stats.periodic_ignite_stacks, Utils.StackType.IGNITE)
-
-
+#[DECAY]
 func _on_ignite_timer_timeout() -> void:
 	if _owner.stats.ignite_stacks > 0:
 		var percent: float = _IGNITE_PERCENT_PER_STACK * _owner.stats.ignite_stacks
@@ -184,6 +192,7 @@ func _on_dodge_dark_forest(_cb_vars: Dictionary) -> void:
 
 # ============================== PASSIF ==============================
  
+# [PASSIVE]
 func _on_inflict_condition_ignite(cb_vars: Dictionary) -> void:
 	if not cb_vars.has(ActionModifier.VarType.STACK_TYPE): return
 	if not cb_vars.has(ActionModifier.VarType.STACK_VALUE): return

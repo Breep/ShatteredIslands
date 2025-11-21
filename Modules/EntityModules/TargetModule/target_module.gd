@@ -19,11 +19,16 @@ enum TargettingStrategy {
 	# ------- LOWEST HP -------
 	LOWEST_HP_ALLY_INCLUDING_SELF, # Lowest hp ally (in % of max life)
 	
-	# ------- HIGHEST HP -------
+	# ------- HIGHEST HP (Absolute Value) -------
+	HIGHEST_HP_ENEMY,       # Enemy with highest current HP
+	HIGHEST_HP_HERO_ENEMY,  # Enemy Hero with highest current HP
 	
-	# ------- LOWEST HP % -------
+	# ------- LOWEST HP % (Percentage) -------
+	LOWEST_HP_PERCENT_ENEMY, # Enemy with lowest HP percentage
 	
-	# ------- HIGHEST HP % -------
+	# ------- HIGHEST HP % (Percentage) -------
+	HIGHEST_HP_PERCENT_ENEMY,      # Enemy with highest HP percentage
+	HIGHEST_HP_PERCENT_HERO_ENEMY, # Enemy Hero with highest HP percentage
 	
 	# ------- RANDOM -------
 	RANDOM, # Random entity except self (can be null)
@@ -81,10 +86,11 @@ func stop() -> void:
 # Get target of the owned character from a given strategy
 func get_target(targetting_strategy: TargettingStrategy) -> Entity:
 	match targetting_strategy:
+# --- DISTANCE ---
 		TargettingStrategy.CLOSEST:
 			return _get_closest(_entities, _owner)
 		TargettingStrategy.CLOSEST_ENEMY:
-			return _get_closest(_enemies, _owner)
+			return _get_closest(_enemies, null)
 		TargettingStrategy.CLOSEST_ALLY:
 			return _get_closest(_allies, _owner)
 		TargettingStrategy.FARTHEST:
@@ -93,22 +99,39 @@ func get_target(targetting_strategy: TargettingStrategy) -> Entity:
 			return _get_farthest(_enemies, null)
 		TargettingStrategy.FARTHEST_ALLY:
 			return _get_farthest(_allies, _owner)
+			
+		# --- RANDOM ---
 		TargettingStrategy.RANDOM:
 			return _get_random(_entities, _owner)
 		TargettingStrategy.RANDOM_ENEMY:
 			return _get_random(_enemies, null)
+		TargettingStrategy.RANDOM_HERO_ENEMY:
+			return _get_random(_enemy_heroes, null)
 		TargettingStrategy.RANDOM_ALLY:
 			return _get_random(_allies, _owner)
 		TargettingStrategy.RANDOM_ALLY_INCLUDING_SELF:
 			return _get_random(_allies, null)
+			
+		# --- HP ---
 		TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF:
 			return _get_lowest_hp(_allies, null)
-		TargettingStrategy.RANDOM_HERO_ENEMY:
-			return _get_random(_enemy_heroes, null)
+		TargettingStrategy.HIGHEST_HP_ENEMY:
+			return _get_highest_hp(_enemies, null)
+		TargettingStrategy.HIGHEST_HP_HERO_ENEMY:
+			return _get_highest_hp(_enemy_heroes, null)
+		TargettingStrategy.LOWEST_HP_PERCENT_ENEMY:
+			return _get_lowest_hp_percent(_enemies, null)
+		TargettingStrategy.HIGHEST_HP_PERCENT_ENEMY:
+			return _get_highest_hp_percent(_enemies, null)
+		TargettingStrategy.HIGHEST_HP_PERCENT_HERO_ENEMY:
+			return _get_highest_hp_percent(_enemy_heroes, null)
+			
+		# --- SHIELD ---
 		TargettingStrategy.HIGHEST_SHIELD_ENEMIES_HERO:
 			return _get_highest_shield(_enemy_heroes, _owner)
 		TargettingStrategy.HIGHEST_SHIELD_ALLIES_HERO:
 			return _get_highest_shield(_ally_heroes, null)
+			
 	printerr("TargetModule: Undef strategy for the TargetModule")
 	return null
 
@@ -164,6 +187,21 @@ func get_targets(strategy: MultipleTargettingStrategy, radius:float = -1.0) -> A
 	return empty
 
 # ============================== Private functions ==============================
+
+# Filters alive, removes excluded, removes untargetable
+func _filter_candidates(entities: Array[Entity], excluded_character: Entity) -> Array[Entity]:
+	if entities.is_empty():
+		return []
+		
+	var candidates = _get_alive_entities(entities)
+	if excluded_character != null:
+		candidates.erase(excluded_character)
+		
+	if candidates.is_empty():
+		return []
+		
+	return _get_array_without_untargetable_targets(candidates)
+	
 func _get_highest_shield(entities: Array[Entity], excluded_character: Entity) -> Entity:
 	if entities.is_empty():
 		return null
@@ -189,7 +227,7 @@ func _get_highest_shield(entities: Array[Entity], excluded_character: Entity) ->
 func _get_alive_entities(entities: Array[Entity]) -> Array[Entity]:
 	var alive_entities: Array[Entity]
 	for entity in entities:
-		if not entity.is_dead:
+		if is_instance_valid(entity) and not entity.is_dead:
 			alive_entities.append(entity)
 	return alive_entities
 
@@ -261,7 +299,54 @@ func _get_farthest(entities: Array[Entity], excluded_character: Entity) -> Entit
 				farthest_character = character
 	
 	return farthest_character
+	
+func _get_lowest_hp(entities: Array[Entity], excluded_character: Entity) -> Entity:
+	var candidates = _filter_candidates(entities, excluded_character)
+	if candidates.is_empty(): return null
+	
+	var target = candidates[0]
+	for i in range(1, candidates.size()):
+		if candidates[i].stats.health < target.stats.health:
+			target = candidates[i]
+	return target
 
+func _get_highest_hp(entities: Array[Entity], excluded_character: Entity) -> Entity:
+	var candidates = _filter_candidates(entities, excluded_character)
+	if candidates.is_empty(): return null
+	
+	var target = candidates[0]
+	for i in range(1, candidates.size()):
+		if candidates[i].stats.health > target.stats.health:
+			target = candidates[i]
+	return target
+
+func _get_lowest_hp_percent(entities: Array[Entity], excluded_character: Entity) -> Entity:
+	var candidates = _filter_candidates(entities, excluded_character)
+	if candidates.is_empty(): return null
+	
+	var target = candidates[0]
+	var target_ratio = float(target.stats.health) / float(target.stats.health_max)
+	
+	for i in range(1, candidates.size()):
+		var ratio = float(candidates[i].stats.health) / float(candidates[i].stats.health_max)
+		if ratio < target_ratio:
+			target = candidates[i]
+			target_ratio = ratio
+	return target
+
+func _get_highest_hp_percent(entities: Array[Entity], excluded_character: Entity) -> Entity:
+	var candidates = _filter_candidates(entities, excluded_character)
+	if candidates.is_empty(): return null
+	
+	var target = candidates[0]
+	var target_ratio = float(target.stats.health) / float(target.stats.health_max)
+	
+	for i in range(1, candidates.size()):
+		var ratio = float(candidates[i].stats.health) / float(candidates[i].stats.health_max)
+		if ratio > target_ratio:
+			target = candidates[i]
+			target_ratio = ratio
+	return target
 
 func _get_random(entities: Array[Entity], excluded_character: Entity) -> Entity:
 	if entities.is_empty():
@@ -283,26 +368,6 @@ func _get_random(entities: Array[Entity], excluded_character: Entity) -> Entity:
 		return null
 	
 	return entities_copy[rng.randi_range(0, entities_copy.size()-1)]
-
-
-# TODO améliorer cette fonction pour ne pas pouvoir heal une target untargetable autre que nous
-func _get_lowest_hp(entities: Array[Entity], excluded_character: Entity) -> Entity:
-	if entities.is_empty():
-		return null
-	
-	var entities_copy: Array[Entity] = _get_alive_entities(entities).duplicate()
-	entities_copy.erase(excluded_character)
-	if entities_copy.is_empty():
-		return null
-	
-	var lowest_hp_character = entities_copy[0]
-	for character in entities:
-		var character_hp_percent: float = ((character.stats.health as float) / (character.stats.health_max as float)) * 100.0
-		var lowest_hp_character_hp_percent: float = ((lowest_hp_character.stats.health as float) / (lowest_hp_character.stats.health_max as float)) * 100.0
-		if character_hp_percent < lowest_hp_character_hp_percent:
-			lowest_hp_character = character
-	
-	return lowest_hp_character
 
 
 func _get_array_without_untargetable_targets(entities: Array[Entity]) -> Array[Entity]:

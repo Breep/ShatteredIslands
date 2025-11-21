@@ -1,20 +1,20 @@
 [gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://b3ohguwihk7x3"]
 
-[ext_resource type="Texture2D" uid="uid://unqrk1nbjqyf" path="res://Data/Assets/Card/Portraits/Fire/card_portrait_fire_periodic_ignite.png" id="1_rf2x4"]
 [ext_resource type="Script" uid="uid://c1cycap2yrxuj" path="res://Card/Descriptions/Cards/Fire/Common/ExpanseUniverse/fire_expanse_universe.gd" id="1_rop2d"]
+[ext_resource type="Texture2D" uid="uid://dsshpniufwm1f" path="res://Card/Descriptions/Cards/Fire/Common/ExpanseUniverse/fire_expanse_universe.png" id="1_v85bu"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="3_5ffm5"]
 
 [sub_resource type="Resource" id="Resource_yobeh"]
 script = ExtResource("1_rop2d")
-_ignite_stacks = Array[int]([2, 4, 6, 8, 16])
-_period = 1.0
+_ignite_stacks = Array[float]([4.0, 8.0, 12.0, 16.0, 20.0])
+_period = Array[float]([1.0, 1.0, 1.0, 1.0, 1.0])
+_rarity = 0
 metadata/_custom_type_script = "uid://c1cycap2yrxuj"
 
 [resource]
 script = ExtResource("3_5ffm5")
-name = "Periodic Ignite"
-picture = ExtResource("1_rf2x4")
+name = "Expanse Universe"
+picture = ExtResource("1_v85bu")
 family = 3
 player_upgrade = SubResource("Resource_yobeh")
-lvl = 5
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"
