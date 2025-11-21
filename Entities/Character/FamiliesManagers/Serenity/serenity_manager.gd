@@ -178,7 +178,7 @@ func _life_spring_timer_timeout() -> void:
 	_owner.inflict_condition_stacks(target, _serenity_stats.life_spring_regen_amount, Utils.StackType.REGEN)
 
 func _on_regen_tick_timer_timeout() -> void:
-	var heal_amount: int = _owner.stats.regen_stacks
+	var heal_amount: float = _owner.stats.regen_stacks
 	if heal_amount > 0:
 		_owner.heal(_owner, heal_amount)
 	
@@ -187,10 +187,10 @@ func _purifying_flame_timer_timeout() -> void:
 	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ALLY_INCLUDING_SELF)
 	if target == null: 
 		return
-	var amount_to_cleanse: int = _serenity_stats.purifying_flame_cleanse_amount
+	var amount_to_cleanse: float = _serenity_stats.purifying_flame_cleanse_amount
 	_owner.cleanse(target, amount_to_cleanse)
 	
-func _on_dodge_graceful_step(cb_vars: Dictionary) -> void:
+func _on_dodge_graceful_step(_cb_vars: Dictionary) -> void:
 	# [GRACEFUL STEP]
 	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
 	if target != null:

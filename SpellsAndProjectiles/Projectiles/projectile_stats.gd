@@ -13,7 +13,7 @@ var magical_is_critical: bool
 
 var is_bouncing: bool # If the projectile should bounce on the enemy
 
-var poison_stacks: int # Number of poison stacks within the projectile
+var poison_stacks: float # Number of poison stacks within the projectile
 var poison_stacks_is_critical: bool
 
 var on_hit_logic_callbacks : Array[Callable] # var: Dictionary

@@ -13,10 +13,6 @@ var _defense_stats: FamilyDefenseStats # Ref to the owner defense stats
 var _reflecto_belt_accumulated_loss: int = 0
 var _reflecto_belt_attacks_left: int = 0
 
-# [LEGACY VARIABLES]
-var _armor_lost_since_last_hedgehog_armor: int
-var _armor_lost_since_last_rainbow_boots: int
-var _mystical_shoulders_damage_reduced_percent: float
 
 # ============================== Node base functions ==============================
 
@@ -73,7 +69,7 @@ func stop() -> void:
 
 # --- Fonctions appelées par le système de dégâts ---
 
-func get_reduced_damage_taken_from_armor(damage: float, damage_type: Utils.DamageType) -> int:
+func get_reduced_damage_taken_from_armor(damage: float, damage_type: Utils.DamageType) -> float:
 	if damage_type == Utils.DamageType.POISON: 
 		return damage
 		
@@ -82,9 +78,8 @@ func get_reduced_damage_taken_from_armor(damage: float, damage_type: Utils.Damag
 	
 	# On réduit l'armure
 	_owner.stats.armor_stacks -= damage_reduction
-	
+		
 	# Logique des cartes sur perte d'armure
-	_armor_lost_since_last_hedgehog_armor += damage_reduction
 	_reflecto_belt_effect(damage_reduction)
 	
 	return damage_reduced
@@ -294,12 +289,12 @@ func _on_magnetic_siphon_timer_timeout() -> void:
 	
 	if target == null or not is_instance_valid(target):
 		return	
-	var highest_shield: int = target.stats.armor_stacks
+	var highest_shield: float = target.stats.armor_stacks
 	if highest_shield <= 0:
 		return
 
 	var percent: float = _defense_stats.magnetic_siphon_steal_percent
-	var steal_amount: int = int(float(highest_shield) * (percent / 100.0))
+	var steal_amount: float = highest_shield * percent / 100.0
 	if steal_amount <= 0:
 		return
 		

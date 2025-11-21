@@ -285,9 +285,8 @@ func _on_gatling_gun_timer_timeout() -> void:
 	_owner.stats_manager.update_modifier(stat_modifier)
 
 
-func _on_dodge_fight_back(cb_vars: Dictionary) -> void:
-	
-	# [FIGHT BACK]
+# [FIGHT BACK]
+func _on_dodge_fight_back(_cb_vars: Dictionary) -> void:
 	if _owner == null or not is_instance_valid(_owner):
 		printerr("Fight back callback: _owner est invalide.")
 		return
@@ -299,24 +298,24 @@ func _on_dodge_fight_back(cb_vars: Dictionary) -> void:
 	stat_modifier.value = _dodge_number * _attack_stats.fight_back_increase_attack_damage
 	stat_modifier.tags = [StatModifier.TagType.CARD]
 	_owner.stats_manager.update_modifier(stat_modifier)
-	
+
+
+# [SCORCHING BLADE]
 func _on_auto_attack_scorching_blade(cb_vars: Dictionary) -> void:
-	
-	# [SCORCHING BLADE]
 	if not cb_vars.has(ActionModifier.VarType.TARGET): 
 		printerr("Scorching Blade: cb_vars n'a pas de TARGET")
 		return
 	var target: Entity = cb_vars[ActionModifier.VarType.TARGET]
 	if target == null or not is_instance_valid(target):
 		return
-
+	
 	if not cb_vars.has(ActionModifier.VarType.PHYSICAL_DAMAGE): 
 		printerr("Scorching Blade: cb_vars n'a pas de DAMAGE")
 		return
 	var damage_dealt: int = cb_vars[ActionModifier.VarType.PHYSICAL_DAMAGE]
 	var percent: float = _attack_stats.scorching_blade_damage_percent
 	var ignite_stacks: float = (damage_dealt as float) * (percent / 100.0)
-
+	
 	if ignite_stacks > 0:
 		_owner.inflict_condition_stacks(target, ignite_stacks, Utils.StackType.IGNITE)
 
@@ -350,24 +349,27 @@ func _on_hit_scorching_blade(cb_vars: Dictionary) -> void:
 	if ignite_stacks > 0:
 		_owner.inflict_condition_stacks(target, ignite_stacks, Utils.StackType.IGNITE)
 
-func _on_auto_attack_surgical_knife(cb_vars: Dictionary) -> void:
-	# [SURGICAL KNIFE]
+
+# [SURGICAL KNIFE]
+func _on_auto_attack_surgical_knife(_cb_vars: Dictionary) -> void:
 	var chance: float = _attack_stats.surgical_knife_chance
 	if not Utils.is_randomize_modifier_active(chance):
 		return 
 	var amount_to_cleanse: float = _attack_stats.surgical_knife_cleanse_amount
 	_owner.cleanse(_owner, amount_to_cleanse)
-	
-func _on_auto_attack_healing_crossbow(cb_vars: Dictionary) -> void:
+
+
+func _on_auto_attack_healing_crossbow(_cb_vars: Dictionary) -> void:
 	# [HEALING CROSSBOW]
 	var chance: float = _attack_stats.healing_crossbow_chance
 	if not Utils.is_randomize_modifier_active(chance):
 		return 
-	var heal_amount: int = _attack_stats.healing_crossbow_heal_amount
+	var heal_amount: float = _attack_stats.healing_crossbow_heal_amount
 	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
 	if target == null:
 		return
 	_owner.heal(target, heal_amount)
+
 
 # [BLADE RUSH]
 func _on_blade_rush_timeout() -> void:

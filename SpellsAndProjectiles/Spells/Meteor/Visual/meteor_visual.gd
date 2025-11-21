@@ -21,12 +21,6 @@ func _init_pos() -> void:
 	_meteor_3d.position.x = randf_range(-LATERAL_RANGE, LATERAL_RANGE)
 	_meteor_3d.position.z = randf_range(-LATERAL_RANGE, LATERAL_RANGE)
 	_meteor_3d.position.y += randf_range(-VERTICAL_RANGE, VERTICAL_RANGE)
-	var dir: Vector3 = (_meteor_3d.global_position - global_position).normalized()
-	#var tilt_x = clamp(dir.x * 1.0, -1.0, 1.0) 
-	#var tilt_z = clamp(dir.z * 1.0, -1.0, 1.0) 
-	#_meteor_3d.rotation_degrees = Vector3(180.0, 0.0, 0.0)
-	#_meteor_3d.rotate_x(deg_to_rad(tilt_x * 45.0)) 
-	#_meteor_3d.rotate_z(deg_to_rad(tilt_z * 45.0))
 	_meteor_3d.look_at(global_position)
 	
 func _on_deploy_timer_timeout() -> void:

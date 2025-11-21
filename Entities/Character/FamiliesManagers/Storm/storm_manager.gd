@@ -140,7 +140,7 @@ func _on_owner_critical_action_done(_entity_ref: Entity, _target: Entity, _actio
 #region ============================== Private functions ==============================
 func _get_crit_point(default_damage: float, real_damage: float) -> float:
 	if real_damage < 0: return 0
-	if default_damage < 1.0: CRIT_POINT_DEFAULT
+	if default_damage < 1.0: return CRIT_POINT_DEFAULT
 	return CRIT_POINT_DEFAULT + (real_damage / default_damage) * CRIT_POINT_MULT
 
 

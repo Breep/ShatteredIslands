@@ -8,11 +8,10 @@ var _target: Entity
 var _ignite_stacks: int
 var _damage_per_stacks: int
 
-@export_group("Configuration")
-@export var _deploy_time: float # Time for the metor to fall on the ground (in s)
-#@export var _radius: float = 3.0 # Range of the meteor impact (in m)
+const DEPLOY_TIME: float = 2.0 # Time for the metor to fall on the ground (in s)
 
-#target, source, ignite_stacks, damage_per_stacks, radius
+@onready var _deploy_timer: Timer = %DeployTimer
+
 func init(target: Entity, ignite_stacks: int, damage_per_stacks: int, source: Entity = null) -> void:
 	_owner = source
 	_target = target
@@ -26,6 +25,8 @@ func _ready() -> void:
 		queue_free()
 		return
 	
+	_deploy_timer.wait_time = DEPLOY_TIME
+	_deploy_timer.start()
 	global_position = _target.global_position
 	
 
