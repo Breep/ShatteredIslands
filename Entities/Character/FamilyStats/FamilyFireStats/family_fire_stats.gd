@@ -17,6 +17,13 @@ var expanse_universe_period: float
 #endregion
 
 #region Rare Card
+
+# [COSMIC BOLT]
+var cosmic_bolt_activated: bool
+var cosmic_bolt_period: float
+var cosmic_bolt_damage_per_stack: float # Multiplicateur de dégâts
+var cosmic_bolt_bounce_chance_per_stack: float # Multiplicateur de chance
+
 #endregion
 
 #region Epic Card

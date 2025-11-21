@@ -15,6 +15,8 @@ extends Node3D
 @export_group("External Nodes")
 @export var _owner_entity: Entity
 
+@onready var _rank_visualizer: UIRankViewer = %RankViewer
+
 var _camera: Camera3D # If defined, the visual will look at it
 
 # ============================== Node base functions ==============================
@@ -27,12 +29,15 @@ func _process(_delta: float) -> void:
 func _ready() -> void:
 	_owner_entity.damage_taken.connect(_on_owner_entity_damage_taken)
 	_owner_entity.heal_taken.connect(_on_owner_entity_heal_taken)
+	_rank_visualizer.connect_entity(_owner_entity)
 	
 	if _health_bar and _health_bar.material:
 		_health_bar.material = _health_bar.material.duplicate()
 	
 	if _owner_entity:
 		update_health_bar(_owner_entity.stats.health, _owner_entity.stats.health_max)
+	
+	
 
 # ============================== Public ==============================
 

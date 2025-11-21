@@ -53,6 +53,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="RankViewer" parent="TopUI/Sprite3D/SubViewport" instance=ExtResource("3_mq6lt")]
+unique_name_in_owner = true
 anchors_preset = -1
 anchor_left = 0.85
 anchor_right = 0.9
