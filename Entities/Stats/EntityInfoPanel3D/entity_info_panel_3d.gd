@@ -36,7 +36,7 @@ func _ready() -> void:
 
 # ============================== Private ==============================
 
-func _update_health_bar(health: int, max_health: int) -> void:
+func _update_health_bar(health: float, max_health: float) -> void:
 	print("DEBUG - SET BAR ", health, " / ", max_health)
 	_health_bar.set_max_value(max_health)
 	_health_bar.set_bar_value(health)
@@ -72,8 +72,8 @@ func _on_owner_entity_damage_taken(_entity_ref: Entity, damage: int, damage_type
 	_damage_popup(damage, damage_type, is_critical)
 
 
-func _on_owner_entity_heal_taken(_entity_ref: Entity, heal_amount: int) -> void:
-	_damage_popup(heal_amount, Utils.DamageType.HEAL)
+func _on_owner_entity_heal_taken(_entity_ref: Entity, heal_amount: int, is_critical: bool) -> void:
+	_damage_popup(heal_amount, Utils.DamageType.HEAL, is_critical)
 
 
 func _on_own_entity_health_change(health: int) -> void:

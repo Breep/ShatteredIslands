@@ -55,7 +55,7 @@ func _log_attack(source: Entity, target: Entity,
 	_battle_logs.append(data)
 
 
-func _log_damage_taken(source: Entity, damage: int, damage_type: Utils.DamageType, critical: bool) -> void:
+func _log_damage_taken(source: Entity, damage: float, damage_type: Utils.DamageType, critical: bool) -> void:
 	var data: Dictionary = {
 		BattleLog.Main.TIME: _get_time(),
 		BattleLog.Main.TYPE: BattleLog.Type.DAMAGE_TAKEN,
@@ -70,6 +70,7 @@ func _log_damage_taken(source: Entity, damage: int, damage_type: Utils.DamageTyp
 
 
 func _log_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type) -> void:
+	if source == null or target == null: return
 	var data: Dictionary = {
 		BattleLog.Main.TIME: _get_time(),
 		BattleLog.Main.TYPE: BattleLog.Type.SPELL_CASTED,
@@ -80,13 +81,16 @@ func _log_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type) -
 	_battle_logs.append(data)
 
 
-func _log_stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: int) -> void:
+func _log_stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: float, is_critical: bool) -> void:
 	var data: Dictionary = {
 		BattleLog.Main.TIME: _get_time(),
 		BattleLog.Main.TYPE: BattleLog.Type.STACK_TAKEN,
 		BattleLog.Main.STACK_TYPE: stack_type,
 		BattleLog.Main.STACK_NUMBER: stack_number,
 		BattleLog.Main.SOURCE: source.id,
+		BattleLog.Main.MODIFIER: {
+			BattleLog.Modifier.CRITICAL: is_critical
+		}
 	}
 	_battle_logs.append(data)
 
@@ -121,13 +125,13 @@ func _on_fighting_area_projectile_spawned(source: Entity, target: Entity, projec
 					projectile_modifiers.has(Projectile.ProjectileEffect.INSTABILITY))
 
 
-func _on_fighting_area_damage_taken(source: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool, _blocked_by_armor: bool) -> void:
-	_log_damage_taken(source, damage, damage_type, is_critical) # TODO Log blocked by armor
+func _on_fighting_area_damage_taken(source: Entity, damage: float, damage_type: Utils.DamageType, is_critical: bool, _blocked_by_armor: bool) -> void:
+	_log_damage_taken(source, damage, damage_type, is_critical)
 
 
 func _on_fighting_area_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type) -> void:
 	_log_spell_casted(source, target, spell_type)
 
 
-func _on_fighting_area_stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: int) -> void:
-	_log_stack_taken(source, stack_type, stack_number)
+func _on_fighting_area_stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: float, is_critical: bool) -> void:
+	_log_stack_taken(source, stack_type, stack_number, is_critical)

@@ -9,18 +9,18 @@ func projectile_attack(target: Entity, projectile_type: Projectile.ProjectileTyp
 	_action_module.projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
 
 
-func inflict_condition_stacks(target: Entity, stacks_number: int, stack_type: Utils.StackType) -> void:
+func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Utils.StackType) -> void:
 	_action_module.inflict_condition_stacks(target, stacks_number, stack_type)
 
 
 #region ===== Interaction
-func take_damage(damage: int, damage_type: Utils.DamageType, is_critical: bool = false, source: Entity = null, attack_type: Utils.AttackType = Utils.AttackType.UNDEF) -> int:
+func take_damage(damage: float, damage_type: Utils.DamageType, is_critical: bool = false, source: Entity = null, attack_type: Utils.AttackType = Utils.AttackType.UNDEF) -> float:
 	return _interact_module.take_damage(damage, damage_type, is_critical, source, attack_type)
 
 func take_damage_percent(percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.DamageType, is_critical: bool = false, source: Entity = null) -> void:
 	return _interact_module.take_damage_percent(percent, percent_modifier, damage_type, is_critical, source)
 
-func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, is_critical: bool, source: Entity = null) -> float:
+func take_condition_stacks(stacks_number: float, stack_type: Utils.StackType, is_critical: bool, source: Entity = null) -> float:
 	return _interact_module.take_condition_stacks(stacks_number, stack_type, is_critical, source)
 
 func take_heal(heal_amount: float, is_critical: bool, source: Entity = null) -> float:

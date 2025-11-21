@@ -101,7 +101,7 @@ func init() -> void:
 	_active_families.append(_FAMILIES_REF[Family.FamilyType.FIRE])
 	_active_families.append(_FAMILIES_REF[Family.FamilyType.ATTACK])
 	_active_families.append(_FAMILIES_REF[Family.FamilyType.SERENITY])
-	_active_families.append(_FAMILIES_REF[Family.FamilyType.CHICKEN])
+	_active_families.append(_FAMILIES_REF[Family.FamilyType.LIGHTNING])
 	_active_families.append(_FAMILIES_REF[Family.FamilyType.MANA])
 	_active_families.append(_FAMILIES_REF[Family.FamilyType.LIFE])
 

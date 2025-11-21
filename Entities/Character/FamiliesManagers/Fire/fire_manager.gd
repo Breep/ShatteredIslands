@@ -168,8 +168,8 @@ func _on_ignite_timer_timeout() -> void:
 	_owner.stats.ignite_stacks -= decay
 
 
-func _on_dodge_dark_forest(cb_vars: Dictionary) -> void:
-	# [DARK FOREST]
+# [DARK FOREST]
+func _on_dodge_dark_forest(_cb_vars: Dictionary) -> void:
 	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
 	if target != null:
 		_owner.inflict_condition_stacks(target, _fire_stats.dark_forest_ignite_stacks, Utils.StackType.IGNITE)

@@ -17,7 +17,6 @@ var _reflecto_belt_attacks_left: int = 0
 var _armor_lost_since_last_hedgehog_armor: int
 var _armor_lost_since_last_rainbow_boots: int
 var _mystical_shoulders_damage_reduced_percent: float
-var _total_magical_damage_blocked: int
 
 # ============================== Node base functions ==============================
 
@@ -74,7 +73,7 @@ func stop() -> void:
 
 # --- Fonctions appelées par le système de dégâts ---
 
-func get_reduced_damage_taken_from_armor(damage: int, damage_type: Utils.DamageType) -> int:
+func get_reduced_damage_taken_from_armor(damage: float, damage_type: Utils.DamageType) -> int:
 	if damage_type == Utils.DamageType.POISON: 
 		return damage
 		
@@ -224,7 +223,7 @@ func _activate_reflecto_belt_buff() -> void:
 
 
 # [PROTECTIVE DOME]
-func _update_protective_dome_modifier(current_armor: int) -> void:
+func _update_protective_dome_modifier(current_armor: float) -> void:
 	var mod := StatModifier.new()
 	mod.id = "Protective Dome"
 	mod.stat_type = EntityStats.StatType.RESISTANCE
@@ -242,8 +241,8 @@ func _update_protective_dome_modifier(current_armor: int) -> void:
 
 # ============================== Callbacks functions ==============================
 
-func _on_attack_reflecto_belt_consumption(cb_vars: Dictionary) -> void:
-	# [REFLECTO BELT] - Consommation
+# [REFLECTO BELT]
+func _on_attack_reflecto_belt_consumption(_cb_vars: Dictionary) -> void:
 	_reflecto_belt_attacks_left -= 1
 	
 	if _reflecto_belt_attacks_left <= 0:
@@ -255,9 +254,9 @@ func _on_force_field_timer_timeout() -> void:
 	# [FORCE FIELD]
 	if _owner == null or not is_instance_valid(_owner): return
 	
-	var max_hp: int = _owner.stats.health_max
-	var current_hp: int = _owner.stats.health
-	var lost_hp: int = max_hp - current_hp
+	var max_hp: float = _owner.stats.health_max
+	var current_hp: float = _owner.stats.health
+	var lost_hp: float = max_hp - current_hp
 	
 	if lost_hp > 0:
 		var percent: float = _defense_stats.force_field_lost_hp_percent
@@ -266,7 +265,7 @@ func _on_force_field_timer_timeout() -> void:
 			_owner.inflict_condition_stacks(_owner, armor_gain, Utils.StackType.ARMOR)
 
 
-func _on_dodge_evasive_barrier(cb_vars: Dictionary) -> void:
+func _on_dodge_evasive_barrier(_cb_vars: Dictionary) -> void:
 	# [EVASIVE BARRIER]
 	if _owner == null or not is_instance_valid(_owner): return
 	

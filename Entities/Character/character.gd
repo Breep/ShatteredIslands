@@ -95,6 +95,7 @@ func apply_cards_upgrade(deck: PlayerDeck) -> void:
 func connect_to_fighting_area(fighting_area: FightingArea) -> void:
 	_reset()
 	_character_logic.connect_to_fighting_area(fighting_area)
+	print("[DEBUG_A] ", entity_name, " connecting to fighting area signal - ", fighting_area)
 	fighting_area.fighting_manager.fight_is_over.connect(_on_fighting_manager_fight_is_over, CONNECT_ONE_SHOT)
 
 
@@ -113,11 +114,12 @@ func on_inactive_island() -> void:
 func get_auto_attack_spawn() -> Node3D:
 	return _turret.get_projectile_spawn_point()
 
+
 func get_rank_changed_signal() -> Signal:
 	return _character_logic.get_rank_changed_signal()
 
 #region ===== Actions =====
-func direct_attack(target: Entity, damage: int, damage_type: Utils.DamageType) -> void:
+func direct_attack(target: Entity, damage: float, damage_type: Utils.DamageType) -> void:
 	_action_module.direct_attack(target, damage, damage_type)
 
 func direct_attack_percent(target: Entity, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier) -> void:
@@ -127,14 +129,18 @@ var _pending_attacks: Array[AttackCommand]
 func projectile_attack(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	if projectile_type == Projectile.ProjectileType.AUTO_ATTACK:
 		var attack_cmd: AttackCommand = _action_module.build_projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
-		if attack_cmd == null: return
+		if attack_cmd == null:
+			#push_error("[Character] Can't create an AttackCommand [", entity_name)
+			return
 		_pending_attacks.append(attack_cmd)
 		auto_attack_started.emit(projectile_stats.physical_is_critical)
 	else:
 		_action_module.projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
 
 func _on_anim_events_manager_attack_hit_frame() -> void:
-	if _pending_attacks.is_empty(): return
+	if _pending_attacks.is_empty():
+		#push_error("[Character] AA anim hit frame but no pending attacks [", entity_name)
+		return
 	var attack_cmd: AttackCommand = _pending_attacks.pop_front()
 	if !is_instance_valid(attack_cmd.target) or attack_cmd.target.is_queued_for_deletion(): return
 	_action_module.projectile_attack(attack_cmd.target, attack_cmd.projectile_type, attack_cmd.spawn_node, attack_cmd.stats)
@@ -146,13 +152,13 @@ func cast_ultimate() -> void:
 	ultimate_casted.emit()
 	_hero_3D.cast_ultimate()
 
-func heal(target: Entity, heal_amount: int) -> void:
+func heal(target: Entity, heal_amount: float) -> void:
 	_action_module.heal(target, heal_amount)
 
 func heal_percent(target: Entity, percent: float, percent_modifier: Utils.PercentModifier) -> void:
 	_action_module.heal_percent(target, percent, percent_modifier)
 
-func inflict_condition_stacks(target: Entity, stacks_number: int, stack_type: Utils.StackType) -> void:
+func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Utils.StackType) -> void:
 	_action_module.inflict_condition_stacks(target, stacks_number, stack_type)
 
 func ultimate() -> void:
@@ -169,13 +175,13 @@ func dispell(target: Entity, value: float) -> void:
 #endregion
 
 #region ===== Interaction =====
-func take_damage(damage: int, damage_type: Utils.DamageType, is_critical: bool = false, source: Entity = null, attack_type: Utils.AttackType = Utils.AttackType.UNDEF) -> int:
+func take_damage(damage: float, damage_type: Utils.DamageType, is_critical: bool = false, source: Entity = null, attack_type: Utils.AttackType = Utils.AttackType.UNDEF) -> float:
 	return _interact_module.take_damage(damage, damage_type, is_critical, source, attack_type)
 
 func take_damage_percent(percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.DamageType, is_critical: bool = false, source: Entity = null) -> void:
 	_interact_module.take_damage_percent(percent, percent_modifier, damage_type, is_critical, source)
 
-func take_condition_stacks(stacks_number: int, stack_type: Utils.StackType, is_critical: bool, source: Entity = null) -> float:
+func take_condition_stacks(stacks_number: float, stack_type: Utils.StackType, is_critical: bool, source: Entity = null) -> float:
 	return _interact_module.take_condition_stacks(stacks_number, stack_type, is_critical, source)
 
 func take_heal(heal_amount: float, is_critical: bool, source: Entity = null) -> float:
@@ -226,6 +232,7 @@ func _ready() -> void:
 	anim_events_manager.attack_hit_frame.connect(_on_anim_events_manager_attack_hit_frame)
 	
 	_character_visual.update_health_bar(stats.health, stats.health_max)
+	entity_name = player.name + "_" + _hero_3D.name
 
 # ============================== Private functions ==============================
 
@@ -256,6 +263,7 @@ func _handle_death() -> void:
 # ============================== Other callbacks ==============================
 
 func _on_fighting_manager_fight_is_over(_fighting_manager, _winner_team) -> void:
+	print("[DEBUG_A] ", entity_name, " receive fight is over signal")
 	_character_logic.stop()
 
 

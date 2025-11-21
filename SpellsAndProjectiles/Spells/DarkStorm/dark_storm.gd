@@ -19,7 +19,7 @@ var _pain_percent: float = 1.0
 
 var _entities_inside: Array[Entity] # Array of all entities inside the area
 
-var _owner: Entity # Caster
+var _source: Entity # Caster
 var _target: Entity # Target (used for location)
 
 # ============================== Local nodes ==============================
@@ -49,12 +49,12 @@ func _ready() -> void:
 
 # ============================== Public functions ==============================
 
-func init(target: Entity, damage: int, period: float, lifespan: float, owner: Entity, pain_percent: float = 0.0) -> void:
+func init(target: Entity, damage: int, period: float, lifespan: float, source: Entity, pain_percent: float = 0.0) -> void:
 	_target = target
 	_damage = damage
 	_period = period
 	_lifespan = lifespan
-	_owner = owner
+	_source = source
 	_is_init = true
 	_pain_percent = pain_percent
 
@@ -72,12 +72,11 @@ func _on_area_3d_body_exited(body: Node3D) -> void:
 
 func _on_damage_tick_timer_timeout() -> void:
 	for entity in _entities_inside:
-		if _owner != null and entity.team != _owner.team:
+		if _source != null and entity.team != _source.team:
 			var damage: float = _damage
 			if _pain_percent > 0.0:
-				var damage_before = damage
 				damage = damage * (1.0 + entity.stats.get_stacks_number() * _pain_percent / 100.0)
-			_owner.direct_attack(entity, int(round(damage)), Utils.DamageType.PHYSICAL)
+			_source.direct_attack(entity, int(round(damage)), Utils.DamageType.PHYSICAL)
 
 
 func _on_lifespan_timer_timeout() -> void:

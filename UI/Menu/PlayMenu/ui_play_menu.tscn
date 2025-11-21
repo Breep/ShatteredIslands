@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://c6hrhnld0nlpl"]
+[gd_scene load_steps=4 format=3 uid="uid://c6hrhnld0nlpl"]
 
 [ext_resource type="Script" uid="uid://c8alyo5som56r" path="res://UI/Menu/PlayMenu/ui_play_menu.gd" id="1_ae5as"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="2_0s0ho"]
+[ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://UI/Tool/Misc/hover_boost_button.gd" id="3_0s0ho"]
 
 [node name="PlayMenu" type="Control"]
 custom_minimum_size = Vector2(700, 500)
@@ -98,6 +99,8 @@ layout_mode = 2
 
 [node name="SoloLabel" type="Label" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer/VBoxContainer/SoloPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 50
 theme_override_font_sizes/font_size = 50
 text = "SOLO"
 horizontal_alignment = 1
@@ -108,8 +111,10 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 mouse_default_cursor_shape = 2
-theme_override_font_sizes/font_size = 25
+theme_override_constants/outline_size = 100
+theme_override_font_sizes/font_size = 30
 text = "START GAME"
+script = ExtResource("3_0s0ho")
 
 [node name="OnlinePanel" type="Control" parent="MainPanel/SubPlayMenu/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -187,8 +192,10 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 mouse_default_cursor_shape = 2
+theme_override_constants/outline_size = 40
 theme_override_font_sizes/font_size = 50
 text = "JOIN"
+script = ExtResource("3_0s0ho")
 
 [node name="ClientMessage" type="Label" parent="MainPanel"]
 unique_name_in_owner = true

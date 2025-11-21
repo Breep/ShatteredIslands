@@ -63,11 +63,17 @@ func unregister_modifier(stat_modifier: StatModifier) -> void:
 		return
 	
 	var modifier_id: String = stat_modifier.id
-	if not _modifiers.has(modifier_id):
-		printerr("EntityStatsManager: unregister_modifier() - unknown stat modifier \"", modifier_id, "\" [", _stat_type, "]")
-		return
+	if _is_multiple_stats():
+		if not _modifiers_per_action_type[stat_modifier.action_type].has(modifier_id):
+			printerr("EntityStatsManager: unregister_modifier() - unknown multiple stats modifier \"", modifier_id, "\" [", _stat_type, "]")
+			return
+		_modifiers_per_action_type[stat_modifier.action_type].erase(modifier_id)
+	else:
+		if not _modifiers.has(modifier_id):
+			printerr("EntityStatsManager: unregister_modifier() - unknown stat modifier \"", modifier_id, "\" [", _stat_type, "]")
+			return
+		_modifiers.erase(modifier_id)
 	
-	_modifiers.erase(modifier_id)
 	_recompute_stats()
 
 # ============================== Private functions ==============================

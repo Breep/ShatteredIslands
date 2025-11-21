@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://di7eyuedvo17p"]
+[gd_scene load_steps=4 format=3 uid="uid://di7eyuedvo17p"]
 
 [ext_resource type="Script" uid="uid://uarp5atsjtdt" path="res://UI/InGame/PauseMenu/ui_pause_menu.gd" id="1_41y25"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="2_e76lw"]
+[ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://UI/Tool/Misc/hover_boost_button.gd" id="3_1mefo"]
 
 [node name="PauseMenu" type="Control"]
 layout_mode = 3
@@ -44,21 +45,25 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 text = "RESUME"
+script = ExtResource("3_1mefo")
 
 [node name="OptionButton" type="Button" parent="CenterContainer/PausePanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "OPTION"
+script = ExtResource("3_1mefo")
 
 [node name="MainMenuButton" type="Button" parent="CenterContainer/PausePanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "MAIN MENU"
+script = ExtResource("3_1mefo")
 
 [node name="QuitButton" type="Button" parent="CenterContainer/PausePanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "RAGE QUIT"
+script = ExtResource("3_1mefo")
 
 [node name="ConfirmPanel" type="Panel" parent="CenterContainer"]
 unique_name_in_owner = true
@@ -99,12 +104,14 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "YES"
+script = ExtResource("3_1mefo")
 
 [node name="NoButton" type="Button" parent="CenterContainer/ConfirmPanel/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "NO"
+script = ExtResource("3_1mefo")
 
 [connection signal="pressed" from="CenterContainer/PausePanel/MarginContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="CenterContainer/PausePanel/MarginContainer/VBoxContainer/OptionButton" to="." method="_on_option_button_pressed"]

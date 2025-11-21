@@ -7,17 +7,17 @@ signal projectile_spawned(source: Entity, target: Entity, projectile_type: Proje
 func signal_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.ProjectileType, projectile_modifiers: Array[Projectile.ProjectileEffect]) -> void:
 	projectile_spawned.emit(source, target, projectile_type, projectile_modifiers)
 
-signal damage_taken(source: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool)
-func signal_damage_taken(source: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool) -> void:
+signal damage_taken(source: Entity, damage: float, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool)
+func signal_damage_taken(source: Entity, damage: float, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool) -> void:
 	damage_taken.emit(source, damage, damage_type, is_critical, blocked_by_armor)
 
 signal spell_casted(source: Entity, target: Entity, spell_type: Spell.Type)
 func signal_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type) -> void:
 	spell_casted.emit(source, target, spell_type)
 
-signal stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: int)
-func signal_stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: int) -> void:
-	stack_taken.emit(source, stack_type, stack_number)
+signal stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: float, is_critical: bool)
+func signal_stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: float, is_critical: bool) -> void:
+	stack_taken.emit(source, stack_type, stack_number, is_critical)
 
 signal entity_died(victim: Entity)
 func signal_entity_died(victim: Entity) -> void:
@@ -74,8 +74,6 @@ func start_fight(characters: Array[Character], battle_type: Battle.BattleType, b
 	
 	_entity_manager.clear()
 	character_spawner.spawn_characters(characters, _entities_node)
-	for character in characters:
-		character.connect_to_fighting_area(self)
 	
 	_characters = characters
 	_battle_type = battle_type

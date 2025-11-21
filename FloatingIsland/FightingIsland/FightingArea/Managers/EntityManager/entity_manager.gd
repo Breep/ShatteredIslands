@@ -41,6 +41,8 @@ func clear() -> void:
 				entity.spell_casted.disconnect(_on_entity_spell_casted)
 			if entity.stack_taken.is_connected(_on_entity_stack_taken):
 				entity.stack_taken.disconnect(_on_entity_stack_taken)
+			if entity.died.is_connected(_on_entity_died):
+				entity.died.disconnect(_on_entity_died)
 	_entities.clear()
 	_characters.clear()
 
@@ -74,14 +76,14 @@ func _kick_entity(entity: Entity) -> void:
 # ============================== Callbacks ==============================
 
 func _on_game_manager_game_state_changed(game_state: Game.GameState) -> void:
-	if game_state == Game.GameState.BUYING:
+	if game_state == Game.GameState.FIGHTING_CELEBRATING:
 		_is_active = false
 		clear()
 	if game_state == Game.GameState.FIGHTING_POSITIONING:
 		_is_active = true
 
 
-func _on_entity_damage_taken(entity: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool) -> void:
+func _on_entity_damage_taken(entity: Entity, damage: float, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool) -> void:
 	_fighting_area.signal_damage_taken(entity, damage, damage_type, is_critical, blocked_by_armor)
 
 
@@ -89,8 +91,8 @@ func _on_entity_spell_casted(entity: Entity, target: Entity, spell_type: Spell.T
 	_fighting_area.signal_spell_casted(entity, target, spell_type)
 
 
-func _on_entity_stack_taken(entity: Entity, stack_type: Utils.StackType, stack_number: int) -> void:
-	_fighting_area.signal_stack_taken(entity, stack_type, stack_number)
+func _on_entity_stack_taken(entity: Entity, stack_type: Utils.StackType, stack_number: float, is_critical: bool) -> void:
+	_fighting_area.signal_stack_taken(entity, stack_type, stack_number, is_critical)
 
 
 func _on_entity_died(entity: Entity) -> void:

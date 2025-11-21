@@ -283,7 +283,7 @@ func _on_revive_timer_timeout() -> void:
 	var life_after_revive: int = ((_life_stats.revive_after_death_percentage_life * _owner.stats.health_max) / 100.0) as int
 	revived.emit(life_after_revive)
 
-func _on_dodge_evasive_growth(cb_vars: Dictionary) -> void:
+func _on_dodge_evasive_growth(_cb_vars: Dictionary) -> void:
 	# [EVASIVE GROWTH]
 	if _owner == null or not is_instance_valid(_owner):
 		printerr("Evasive Growth callback: _owner est invalide.")
@@ -295,7 +295,7 @@ func _vital_pulse_timer_timeout() -> void:
 	var targets: Array[Entity] = _owner.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ENEMIES)
 	if targets.is_empty():
 		return
-	var max_hp: int = _owner.stats.health_max
+	var max_hp: float = _owner.stats.health_max
 	var percent: float = _life_stats.vital_pulse_damage_percent
 	var damage: float = max_hp * (percent / 100.0)
 	if damage <= 0:
@@ -311,9 +311,9 @@ func _on_tainted_blood_timer_timeout() -> void:
 	if target == null or not is_instance_valid(target):
 		return
 
-	var max_hp: int = _owner.stats.health_max
-	var current_hp: int = _owner.stats.health
-	var lost_hp: int = max_hp - current_hp
+	var max_hp: float = _owner.stats.health_max
+	var current_hp: float = _owner.stats.health
+	var lost_hp: float = max_hp - current_hp
 	
 	if lost_hp <= 0:
 		return 
@@ -334,15 +334,15 @@ func _on_tainted_blood_timer_timeout() -> void:
 	
 func _on_titans_protection_timer_timeout() -> void:
 	# [TITAN'S PROTECTION]
-	var max_hp: int = _owner.stats.health_max
-	var current_hp: int = _owner.stats.health
-	var lost_hp: int = max_hp - current_hp
+	var max_hp: float = _owner.stats.health_max
+	var current_hp: float = _owner.stats.health
+	var lost_hp: float = max_hp - current_hp
 	
 	if lost_hp <= 0:
 		return
 
 	var percent: float = _life_stats.titans_protection_lost_hp_percent
-	var heal_amount: int = int(float(lost_hp) * (percent / 100.0))
+	var heal_amount: float = lost_hp * (percent / 100.0)
 	
 	if heal_amount > 0:
 		_owner.heal(_owner, heal_amount)

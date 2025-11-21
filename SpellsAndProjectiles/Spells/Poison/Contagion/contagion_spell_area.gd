@@ -21,8 +21,7 @@ func _on_scanner_area_body_entered(body: Node3D) -> void:
 
 
 func _on_scanner_area_body_exited(_body: Node3D) -> void:
-	push_error("ContagionSpellArea: An entity left the area, should not be possible !")
-	pass # Replace with function body.
+	pass
 
 
 func _on_enemy_died(victim: Entity) -> void:

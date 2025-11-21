@@ -8,7 +8,6 @@ var _optional_timers: Array[Timer]
 var _optional_spells: Array[Node]
 
 var _player: Player
-var _family_type: Family.FamilyType
 
 func _ready() -> void:
 	if _owner == null:

@@ -1,0 +1,93 @@
+[gd_resource type="VisualShader" load_steps=9 format=3 uid="uid://cxeti1rlxyraa"]
+
+[ext_resource type="Texture2D" uid="uid://bwxbk8lvkoobu" path="res://SpellsAndProjectiles/Spells/Lightning/Lightning/Visual/Textures/lightning_texture.png" id="1_xlaxi"]
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_tcqli"]
+expanded_output_ports = [0]
+texture = ExtResource("1_xlaxi")
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_oiyh6"]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_xmxlh"]
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_jl2fr"]
+default_input_values = [0, Vector2(0, 0), 1, Vector2(0, -1)]
+op_type = 0
+operator = 2
+
+[sub_resource type="VisualShaderNodeSmoothStep" id="VisualShaderNodeSmoothStep_un8xj"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_tcqli"]
+input_name = "color"
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_un8xj"]
+parameter_name = "lightning_color"
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, depth_test_default, cull_disabled, diffuse_lambert, specular_schlick_ggx, unshaded;
+
+uniform vec4 lightning_color : source_color;
+uniform sampler2D tex_frg_2;
+
+
+
+void fragment() {
+// ColorParameter:8
+	vec4 n_out8p0 = lightning_color;
+
+
+// Input:7
+	vec4 n_out7p0 = COLOR;
+
+
+// Input:3
+	float n_out3p0 = TIME;
+
+
+// VectorOp:5
+	vec2 n_in5p1 = vec2(0.00000, -1.00000);
+	vec2 n_out5p0 = vec2(n_out3p0) * n_in5p1;
+
+
+// UVFunc:4
+	vec2 n_in4p1 = vec2(1.00000, 1.00000);
+	vec2 n_out4p0 = n_out5p0 * n_in4p1 + UV;
+
+
+// Texture2D:2
+	vec4 n_out2p0 = texture(tex_frg_2, n_out4p0);
+	float n_out2p1 = n_out2p0.r;
+
+
+// SmoothStep:6
+	float n_in6p1 = 1.00000;
+	float n_out6p0 = smoothstep(n_out7p0.x, n_in6p1, n_out2p1);
+
+
+// Output:0
+	ALBEDO = vec3(n_out8p0.xyz);
+	ALPHA = n_out6p0;
+
+
+}
+"
+modes/cull = 2
+flags/unshaded = true
+nodes/fragment/0/position = Vector2(340, 100)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_tcqli")
+nodes/fragment/2/position = Vector2(-220, 40)
+nodes/fragment/3/node = SubResource("VisualShaderNodeInput_oiyh6")
+nodes/fragment/3/position = Vector2(-1160, 240)
+nodes/fragment/4/node = SubResource("VisualShaderNodeUVFunc_xmxlh")
+nodes/fragment/4/position = Vector2(-520, 140)
+nodes/fragment/5/node = SubResource("VisualShaderNodeVectorOp_jl2fr")
+nodes/fragment/5/position = Vector2(-780, 180)
+nodes/fragment/6/node = SubResource("VisualShaderNodeSmoothStep_un8xj")
+nodes/fragment/6/position = Vector2(80, 100)
+nodes/fragment/7/node = SubResource("VisualShaderNodeInput_tcqli")
+nodes/fragment/7/position = Vector2(-260, -60)
+nodes/fragment/8/node = SubResource("VisualShaderNodeColorParameter_un8xj")
+nodes/fragment/8/position = Vector2(0, -280)
+nodes/fragment/connections = PackedInt32Array(3, 0, 5, 0, 5, 0, 4, 2, 4, 0, 2, 0, 7, 0, 6, 0, 2, 1, 6, 2, 6, 0, 0, 1, 8, 0, 0, 0)

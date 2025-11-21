@@ -19,10 +19,14 @@ func register_modifier(modifier: AutoAttackModifier) -> void:
 
 
 func update_modifier(modifier: AutoAttackModifier) -> void:
-	pass
+	_auto_attack_modifiers[modifier.id] = modifier
 
 
 func unregister_modifier(modifier_id: StringName) -> void:
+	if not _auto_attack_modifiers.has(modifier_id):
+		printerr("StatModifierDictionary: unregister_modifier() - unknown stat modifier \"", modifier_id, "\" [", get_path(), "]")
+		return
+	
 	_auto_attack_modifiers.erase(modifier_id)
 
 

@@ -82,8 +82,8 @@ func _is_only_one_team_alive() -> bool:
 
 
 # return Dictionary[team_id, total_hp]
-func _get_teams_total_hp() -> Dictionary[int, int]:
-	var teams_total_hp: Dictionary[int, int]
+func _get_teams_total_hp() -> Dictionary[int, float]:
+	var teams_total_hp: Dictionary[int, float]
 	for team_id in _characters_dictionary.keys():
 		teams_total_hp[team_id] = 0
 		for member in _characters_dictionary[team_id]:
@@ -95,7 +95,7 @@ func _get_teams_total_hp() -> Dictionary[int, int]:
 # Return the teams order sorted by hp (lowest to highest)
 # If several teams are already at 0, they should be already sorted in the array by _is_only_one_team_alive()
 func _get_winner_teams_order() -> Array[int]:
-	var teams_total_hp: Dictionary[int, int] = _get_teams_total_hp()
+	var teams_total_hp: Dictionary[int, float] = _get_teams_total_hp()
 	var teams_total_hp_sorted: Array[int] = teams_total_hp.values().duplicate()
 	teams_total_hp_sorted.sort()
 	for team_hp in teams_total_hp_sorted:

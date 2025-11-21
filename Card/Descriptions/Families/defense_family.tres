@@ -1,23 +1,11 @@
-[gd_resource type="Resource" script_class="Family" load_steps=15 format=3 uid="uid://dw66lnwee8ruk"]
+[gd_resource type="Resource" script_class="Family" load_steps=4 format=3 uid="uid://dw66lnwee8ruk"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_yud7m"]
-[ext_resource type="Resource" uid="uid://bcb0vm2460lsi" path="res://Card/Descriptions/Cards/Defense/DualShield/defense_dual_shield.tres" id="2_e835t"]
-[ext_resource type="Resource" uid="uid://368b10i3yt4p" path="res://Card/Descriptions/Cards/Defense/HedgehogArmor/defense_hedgehog_armor.tres" id="3_m1x30"]
 [ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://Card/Templates/family.gd" id="3_p2pe3"]
-[ext_resource type="Resource" uid="uid://cuqudlrmcu7sr" path="res://Card/Descriptions/Cards/Defense/PowerWrist/defense_power_wrist.tres" id="4_4n4h6"]
-[ext_resource type="Resource" uid="uid://dh41jcfupq5at" path="res://Card/Descriptions/Cards/Defense/RainbowBoots/defense_rainbow_boots.tres" id="5_tyadv"]
-[ext_resource type="Resource" path="res://Card/Descriptions/Cards/Defense/GladiatorHelmet/defense_gladiator_helmet.tres" id="6_08op5"]
-[ext_resource type="Resource" path="res://Card/Descriptions/Cards/Defense/TitanGloves/defense_titan_gloves.tres" id="7_dvmhl"]
-[ext_resource type="Resource" uid="uid://dx34m57gmurib" path="res://Card/Descriptions/Cards/Defense/AdaptativeCloak/defense_adaptative_cloak.tres" id="8_fw05i"]
-[ext_resource type="Resource" uid="uid://bc4iiswwd2sde" path="res://Card/Descriptions/Cards/Defense/MysticalShoulder/defense_mystical_shoulders.tres" id="9_tjt2c"]
-[ext_resource type="Resource" uid="uid://by2fg3cyrvuja" path="res://Card/Descriptions/Cards/Defense/Common/ReflectoBelt/defense_reflecto_belt.tres" id="10_wv4we"]
-[ext_resource type="Resource" uid="uid://bfnu2x0m3qokk" path="res://Card/Descriptions/Cards/Defense/SmithHammer/defense_smith_hammer.tres" id="11_ogj62"]
-[ext_resource type="Resource" uid="uid://c3rq8k7pj84qi" path="res://Card/Descriptions/Cards/Defense/Common/EvasiveBarrier/shieldomatic_evasive_barrier.tres" id="12_ratlw"]
 [ext_resource type="Texture2D" uid="uid://dlbjl8ihicpc8" path="res://Card/Descriptions/Families/Icons/defense.png" id="13_spcg6"]
 
 [resource]
 script = ExtResource("3_p2pe3")
-cards = Array[ExtResource("1_yud7m")]([ExtResource("2_e835t"), ExtResource("3_m1x30"), ExtResource("4_4n4h6"), ExtResource("5_tyadv"), ExtResource("6_08op5"), ExtResource("7_dvmhl"), ExtResource("8_fw05i"), ExtResource("9_tjt2c"), ExtResource("10_wv4we"), ExtResource("11_ogj62"), ExtResource("12_ratlw")])
 icon = ExtResource("13_spcg6")
 family_name = "Defense"
 family_type = 2
