@@ -1,19 +1,24 @@
 class_name UIRankViewer
 extends Control
 
-var _rank_changed_signal: Signal
+
+
+var _owner_character: Character
 var _blink_tween: Tween
 
 @onready var _label: Label = %Label
 
 func connect_entity(entity: Entity) -> void:
-	if entity is not Character:
+	if entity == null or not (entity is Character):
 		hide()
-	if _rank_changed_signal != null and _rank_changed_signal.is_connected(_on_rank_changed):
-		_rank_changed_signal.disconnect(_on_rank_changed)
-
-	_rank_changed_signal = (entity as Character).get_rank_changed_signal()
-	_rank_changed_signal.connect(_on_rank_changed)
+		return
+	
+	var new_character: Character = entity as Character
+	if _owner_character != null and _owner_character.get_rank_changed_signal().is_connected(_on_rank_changed):
+		_owner_character.get_rank_changed_signal().disconnect(_on_rank_changed)
+	
+	_owner_character = new_character
+	_owner_character.get_rank_changed_signal().connect(_on_rank_changed)
 
 
 func _ready() -> void:
@@ -55,7 +60,7 @@ func _start_blinking() -> void:
 
 func _stop_blinking() -> void:
 	if _blink_tween != null:
-		_blink_tween.kill()
+		_blink_tween.stop()
 	_blink_tween = null
 	_label.modulate.a = 1.0
 #endregion

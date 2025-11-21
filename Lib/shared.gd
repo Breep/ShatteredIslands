@@ -1,7 +1,7 @@
 extends Node
 
 var HEROES: Dictionary[Hero.HeroId, Hero] = {
-	Hero.HeroId.UNDEF: load("res://Entities/Heroes/_Undef/undef.tres"),
+	Hero.HeroId.UNDEF: load("res://Entities/Heroes/Undef/undef.tres"),
 	Hero.HeroId.DARK_KNIGHT: load("res://Entities/Heroes/DarkKnight/dark_knight.tres"),
 }
 

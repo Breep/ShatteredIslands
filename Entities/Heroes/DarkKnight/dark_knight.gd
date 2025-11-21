@@ -56,6 +56,7 @@ const SUPER_STRIKE_ON_ATTACK_SCENE: PackedScene = preload("res://Entities/Heroes
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
+	if _character_owner == null: return
 	_character_owner.aa_done.connect(_on_character_owner_aa_done)
 	
 	if _cataclysm_activated:

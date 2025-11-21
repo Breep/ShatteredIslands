@@ -4,7 +4,7 @@ extends Entity
 # ============================== Editor-only tools ==============================
 
 const _HEROES_3D: Dictionary[Hero.HeroId, PackedScene] = {
-	Hero.HeroId.UNDEF: preload("res://Entities/Heroes/_Undef/undef.tscn"),
+	Hero.HeroId.UNDEF: preload("res://Entities/Heroes/Undef/undef.tscn"),
 	Hero.HeroId.DARK_KNIGHT: preload("res://Entities/Heroes/DarkKnight/dark_knight.tscn"),
 }
 

@@ -24,28 +24,12 @@ extends Node3D
 # add a way to show stats when player press tabs button (input mapped on "see_stats")
 
 func _enter_tree() -> void:
-	GameManager.init()
-	var _players_cards: Array[Array] = [
-		_player1_cards, _player2_cards, _player3_cards, _player4_cards, _player5_cards, _player6_cards,_player7_cards, _player8_cards
-	]
-	
-	for i: int in _characters.size():
-		var player: Player = Player.new()
-		player.name = "Player" + str(i+1)
-		player.id = 1
-		player.character = _characters[i]
-		player.character.name = player.name
-		player.character.player = player
-		player.skill_manager = SkillManager.new()
-		player.skill_manager.init(player)
-		var uid: int = 0
-		for card: Card in _players_cards[i]:
-			card.uid = uid
-			uid += 1
-			player.deck.add_card(card)
+	_init_players()
 
 
 func _ready() -> void:
+	GameManager.init()
+	_add_player_cards()
 	_floating_island.start_fight(_characters, _battle_type)
 	GameManager.game_rules.duration_fighting_positioning = 0.5
 	GameManager.game_rules.duration_fighting_countdown = 0.5
@@ -72,3 +56,28 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event.is_action_pressed("scene_switch_6") and _characters.size() > 5: _ui_player_stats.connect_entity(_characters[5])
 		if event.is_action_pressed("scene_switch_7") and _characters.size() > 6: _ui_player_stats.connect_entity(_characters[6])
 		if event.is_action_pressed("scene_switch_8") and _characters.size() > 7: _ui_player_stats.connect_entity(_characters[7])
+
+
+func _init_players() -> void:
+	for i: int in _characters.size():
+		var player: Player = Player.new()
+		player.name = "Player" + str(i+1)
+		player.id = 1
+		player.character = _characters[i]
+		player.character.name = player.name
+		player.character.player = player
+		player.skill_manager = SkillManager.new()
+
+
+func _add_player_cards() -> void:
+	var players_cards: Array[Array] = [
+		_player1_cards, _player2_cards, _player3_cards, _player4_cards, _player5_cards, _player6_cards,_player7_cards, _player8_cards
+	]
+	
+	for i: int in _characters.size():
+		_characters[i].player.skill_manager.init(_characters[i].player)
+		var uid: int = 0
+		for card: Card in players_cards[i]:
+			card.uid = uid
+			uid += 1
+			_characters[i].player.deck.add_card(card)
