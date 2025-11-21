@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cako6w8xbx5bt"
-path="res://.godot/imported/defence_energy_shield.png-3c0a5d542d819502d8014f643b89999f.ctex"
+uid="uid://2o2rsjtula7w"
+path="res://.godot/imported/shieldomatic_aegis_resonator.webp-4f26181e49d62acb9c3a9a129166024a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Card/Descriptions/Cards/Defense/Common/EnergyBarrier/defence_energy_shield.png"
-dest_files=["res://.godot/imported/defence_energy_shield.png-3c0a5d542d819502d8014f643b89999f.ctex"]
+source_file="res://Card/Descriptions/Cards/Defense/Epic/AegisResonator/shieldomatic_aegis_resonator.webp"
+dest_files=["res://.godot/imported/shieldomatic_aegis_resonator.webp-4f26181e49d62acb9c3a9a129166024a.ctex"]
 
 [params]
 

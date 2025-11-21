@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cf4y1g6c4ia6w"]
+[gd_scene load_steps=7 format=3 uid="uid://cf4y1g6c4ia6w"]
 
 [ext_resource type="Script" uid="uid://c03q2h4ty3455" path="res://Entities/Character/CharacterVisual/character_visual.gd" id="1_8fkrf"]
+[ext_resource type="PackedScene" uid="uid://bx7rkwxhqecme" path="res://Entities/Character/FamiliesManagers/Storm/RankViewer/ui_rank_viewer.tscn" id="3_mq6lt"]
 [ext_resource type="Shader" uid="uid://cxvdhkkjpr75e" path="res://VFX/VFX_2D/UI/character_health_bar.gdshader" id="5_j51p7"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Tool/SpawnPoint/spawn_point.tscn" id="5_xieti"]
 
@@ -23,7 +24,7 @@ shader_parameter/Height100 = 0.250000011875
 shader_parameter/Height500 = 0.50000002375
 shader_parameter/BorderColor = Color(0.05, 0.05, 0.05, 1)
 shader_parameter/BorderThicknessPx = 2.0
-shader_parameter/CornerRadius = 0.070000003325
+shader_parameter/CornerRadius = 0.0
 
 [node name="CharacterVisual" type="Node3D" node_paths=PackedStringArray("_physical_popup_spawn", "_magic_popup_spawn", "_poison_popup_spawn", "_heal_popup_spawn", "_health_bar")]
 script = ExtResource("1_8fkrf")
@@ -41,15 +42,22 @@ texture = SubResource("ViewportTexture_j51p7")
 
 [node name="SubViewport" type="SubViewport" parent="TopUI/Sprite3D"]
 transparent_bg = true
-size = Vector2i(200, 30)
+size = Vector2i(220, 25)
 render_target_update_mode = 4
 
 [node name="HealthBar" type="ColorRect" parent="TopUI/Sprite3D/SubViewport"]
 material = SubResource("ShaderMaterial_t0h31")
-offset_right = 200.0
-offset_bottom = 30.0
+offset_right = 180.0
+offset_bottom = 25.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="RankViewer" parent="TopUI/Sprite3D/SubViewport" instance=ExtResource("3_mq6lt")]
+anchors_preset = -1
+anchor_left = 0.85
+anchor_right = 0.9
+grow_horizontal = 0
+scale = Vector2(0.3, 0.3)
 
 [node name="PopUpSpawns" type="Node3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -1.19196, 0)

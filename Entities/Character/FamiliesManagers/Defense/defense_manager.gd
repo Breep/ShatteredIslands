@@ -168,6 +168,10 @@ func _create_optional_timers() -> void:
 	# [MAGNETIC SIPHON]
 	if _defense_stats.magnetic_siphon_activated:
 		_optional_timers.append(Utils.create_perpetual_timer(self, _defense_stats.magnetic_siphon_period, _on_magnetic_siphon_timer_timeout, true))
+		
+	# [AEGIS RESONATOR]
+	if _defense_stats.aegis_resonator_activated:
+		_optional_timers.append(Utils.create_perpetual_timer(self, _defense_stats.aegis_resonator_period, _on_aegis_resonator_timer_timeout, true))
 
 
 func _clear_optional_timers() -> void:
@@ -294,3 +298,25 @@ func _on_magnetic_siphon_timer_timeout() -> void:
 	#TODO changer le steal quand il y aura des modificateurs a cet effet
 	target.stats.armor_stacks -= steal_amount
 	_owner.inflict_condition_stacks(_owner, steal_amount, Utils.StackType.ARMOR)
+	
+func _on_aegis_resonator_timer_timeout() -> void:
+	# [AEGIS RESONATOR]
+	if _owner == null or not is_instance_valid(_owner):
+		return
+
+	var allies: Array[Entity] = _owner.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES)
+	if allies.is_empty():
+		return
+	var total_shield: float = _defense_stats.aegis_resonator_total_shield
+	var ally_count: int = allies.size()
+	
+	var shield_per_ally: int = int(total_shield / float(ally_count))
+	
+	if shield_per_ally <= 0:
+		return
+	for ally in allies:
+		if ally != null and is_instance_valid(ally):
+			if ally == _owner:
+				_owner.inflict_condition_stacks(_owner, shield_per_ally, Utils.StackType.ARMOR)
+			else:
+				ally.stats.armor_stacks += shield_per_ally

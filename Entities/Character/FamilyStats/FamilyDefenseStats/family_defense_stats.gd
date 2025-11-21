@@ -47,6 +47,12 @@ var avengers_assemble_crit_chance: float
 #endregion
 
 #region Epic Card
+
+# [AEGIS RESONATOR]
+var aegis_resonator_activated: bool
+var aegis_resonator_period: float
+var aegis_resonator_total_shield: float
+
 #endregion
 
 #region Legendary Card
