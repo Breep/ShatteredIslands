@@ -68,7 +68,7 @@ var gatling_gun_duration: float # Time needed to go from min to max attack speed
 
 # [STORM HAMMER]
 var storm_hammer_activated: bool # True if this skill is activated
-var storm_hammer_chance: int # % of chance for an auto-attack to bounce
+var storm_hammer_chance: float # % of chance for an auto-attack to bounce
 
 #endregion
 

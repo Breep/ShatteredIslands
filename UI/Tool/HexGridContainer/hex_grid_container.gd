@@ -68,6 +68,7 @@ func _layout_children():
 	var content_max := Vector2(-INF, -INF)
 
 	for i in kids.size():
+		@warning_ignore("integer_division")
 		var row := i / columns
 		var col := i % columns
 

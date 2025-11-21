@@ -38,9 +38,6 @@ var _mirrored: bool
 @onready var _regen_label: Label = %RegenLabel
 #endregion
 
-@export var _ignite_multiplier: float = 1.0
-@export var _ignite_vsize_divider: float = 1.0
-
 @export var _poison_multiplier: float = 1.0
 @export var _poison_vsize_divider: float = 1.0
 
@@ -51,39 +48,39 @@ var _mirrored: bool
 #endregion
 
 #region HealthBar variables
-var _poison_stacks: int = 0
-var poison_stacks: int:
+var _poison_stacks: float = 0
+var poison_stacks: float:
 	get: return _poison_stacks
 	set(value):
 		_poison_stacks = max(0, value)
 		_update_poison()
 
 
-var _ignite_stacks: int = 0
-var ignite_stacks: int:
+var _ignite_stacks: float = 0
+var ignite_stacks: float:
 	get: return _ignite_stacks
 	set(value):
 		_ignite_stacks = max(0, value)
 		_update_ignite()
 
-var _armor_stacks: int = 0
-var armor_stacks: int:
+var _armor_stacks: float = 0
+var armor_stacks: float:
 	get: return _armor_stacks
 	set(value):
 		_armor_stacks = max(0, value)
 		_update_armor()
 		_update_armor_bar_end_pos()
 
-var _regen_stacks: int = 0
-var regen_stacks: int:
+var _regen_stacks: float = 0
+var regen_stacks: float:
 	get: return _regen_stacks
 	set(value):
 		_regen_stacks = max(0, value)
 		_update_regen()
 
 
-var _current_health: int = 1000
-var current_health: int:
+var _current_health: float = 1000
+var current_health: float:
 	get: return _current_health
 	set(value):
 		_current_health = max(0, value)
@@ -91,8 +88,8 @@ var current_health: int:
 		_update_health()
 		_update_poison()
 
-var _max_health: int = 1000
-var max_health: int:
+var _max_health: float = 1000
+var max_health: float:
 	get: return _max_health
 	set(value):
 		_max_health = max(1, value)

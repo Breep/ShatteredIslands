@@ -69,7 +69,8 @@ func _ready() -> void:
 func cast_ultimate() -> void:
 	_cast_ultimate()
 	if _cataclysm_activated:
-		_cast_ultimate()
+		for i in _cataclysm_number:
+			_cast_ultimate()
 
 # ============================== Private function ==============================
 

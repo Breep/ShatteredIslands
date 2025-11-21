@@ -87,7 +87,7 @@ func _update_shop_cards_displayed_visual(cards: Array[Card]) -> void:
 
 # ============================== Callbacks ==============================
 
-func _on_card_shop_button_pressed(card_button_selected: CardButton, card: Card) -> void:
+func _on_card_shop_button_pressed(_card_button_selected: CardButton, card: Card) -> void:
 	_disconnect_from_cards_signals()
 	_card_shop.try_buy_card(card)
 

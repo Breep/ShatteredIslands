@@ -19,12 +19,12 @@ func _input(event: InputEvent) -> void:
 
 	var vp_size_i: Vector2i = viewport.size
 	var tex_px_size := Vector2(vp_size_i)
-	var draw_rect := _compute_draw_rect(size, tex_px_size, stretch_mode)
-	if draw_rect.size.x <= 0.0 or draw_rect.size.y <= 0.0:
+	var draw_rect_a := _compute_draw_rect(size, tex_px_size, stretch_mode)
+	if draw_rect_a.size.x <= 0.0 or draw_rect_a.size.y <= 0.0:
 		return
 
 	var inside := Rect2(Vector2.ZERO, size).has_point(local_mouse)
-	var uv := (local_mouse - draw_rect.position) / draw_rect.size
+	var uv := (local_mouse - draw_rect_a.position) / draw_rect_a.size
 	if flip_h: uv.x = 1.0 - uv.x
 	var vp_pos := uv * tex_px_size
 
@@ -34,7 +34,7 @@ func _input(event: InputEvent) -> void:
 
 	if e is InputEventMouseMotion:
 		var mm := e as InputEventMouseMotion
-		var scale_xy := tex_px_size / draw_rect.size
+		var scale_xy := tex_px_size / draw_rect_a.size
 		mm.relative *= scale_xy
 		mm.velocity *= scale_xy
 

@@ -5,8 +5,8 @@ extends Control
 
 @onready var _ui_buying_area: UIBuyingArea = %BuyingArea
 @onready var _ui_fighting_area: UIFightingArea = %FightingArea
-@onready var _ui_pause_menu: UIPauseMenu = %PauseMenu
-@onready var _ui_picking_screen: UIHeroPickingScreen = %HeroPickingScreen
+#@onready var _ui_pause_menu: UIPauseMenu = %PauseMenu
+#@onready var _ui_picking_screen: UIHeroPickingScreen = %HeroPickingScreen
 @onready var _ui_result: UIResult = %Result
 @onready var _ui_transition_screen: UITransitionScreen = %TransitionScreen
 @onready var _ui_persistant: UIPersistant = %Persistant

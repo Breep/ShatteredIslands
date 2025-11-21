@@ -40,7 +40,7 @@ func set_camera(camera: Camera3D) -> void:
 	_camera = camera
 
 
-func update_health_bar(health: int, health_max: int) -> void:
+func update_health_bar(health: float, health_max: float) -> void:
 	if not _health_bar or not _health_bar.material:
 		return
 

@@ -2,7 +2,7 @@ extends TextureRect
 
 @onready var shader_material = material as ShaderMaterial
 
-func _process(delta):
+func _process(_delta):
 	# On s'assure que le matériel existe bien
 	if shader_material:
 		# On envoie la position LOCALE de la souris au shader

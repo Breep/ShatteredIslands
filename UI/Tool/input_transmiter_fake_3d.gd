@@ -22,7 +22,7 @@ func _input(event: InputEvent) -> void:
 	var local_mouse: Vector2 = get_global_transform_with_canvas().affine_inverse() * global_mouse
 
 	var vp_size := viewport.size
-	var draw_rect := _compute_draw_area(size, vp_size, stretch_mode)
+	var draw_rect_a := _compute_draw_area(size, vp_size, stretch_mode)
 
 	var inside := Rect2(Vector2.ZERO, size).has_point(local_mouse)
 	if event is InputEventMouseMotion and !inside:
@@ -34,7 +34,7 @@ func _input(event: InputEvent) -> void:
 	# ----------------------------------------------
 	# Simple projection alignment based on rotation
 	# ----------------------------------------------
-	var uv := (local_mouse - draw_rect.position) / draw_rect.size
+	var uv := (local_mouse - draw_rect_a.position) / draw_rect_a.size
 	if flip_h: uv.x = 1.0 - uv.x
 	if flip_v: uv.y = 1.0 - uv.y
 
@@ -56,7 +56,7 @@ func _input(event: InputEvent) -> void:
 
 	if e is InputEventMouseMotion:
 		var mm := e as InputEventMouseMotion
-		var scale_xy := Vector2(vp_size) / draw_rect.size
+		var scale_xy := Vector2(vp_size) / draw_rect_a.size
 		mm.relative *= scale_xy
 		mm.velocity *= scale_xy
 

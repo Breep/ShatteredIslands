@@ -96,7 +96,7 @@ func _get_teams_total_hp() -> Dictionary[int, float]:
 # If several teams are already at 0, they should be already sorted in the array by _is_only_one_team_alive()
 func _get_winner_teams_order() -> Array[int]:
 	var teams_total_hp: Dictionary[int, float] = _get_teams_total_hp()
-	var teams_total_hp_sorted: Array[int] = teams_total_hp.values().duplicate()
+	var teams_total_hp_sorted: Array[float] = teams_total_hp.values().duplicate()
 	teams_total_hp_sorted.sort()
 	for team_hp in teams_total_hp_sorted:
 		for team_id in teams_total_hp.keys():

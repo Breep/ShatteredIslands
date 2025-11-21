@@ -389,7 +389,7 @@ func _on_attack_storm_hammer(cb_vars: Dictionary) -> void:
 	var projectile_stat: ProjectileStats = cb_vars[AutoAttackModifier.VarType.PROJECTILE_STATS]
 	projectile_stat.is_bouncing = true
 	
-func _on_hit_arcane_staff(cb_vars: Dictionary) -> void:
+func _on_hit_arcane_staff(_cb_vars: Dictionary) -> void:
 	# [ARCANE STAFF]
 	var chance: float = _attack_stats.arcane_staff_chance
 	if not Utils.is_randomize_modifier_active(chance):

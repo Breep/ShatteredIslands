@@ -77,5 +77,5 @@ func _on_player_lvl_changed(_player: Player, lvl: int) -> void:
 	_level_label.text = str(lvl)
 
 
-func _on_player_death(player: Player) -> void:
+func _on_player_death(_player: Player) -> void:
 	pass

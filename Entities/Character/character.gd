@@ -63,10 +63,6 @@ var _hero_id := Hero.HeroId.UNDEF
 @export_group("Stats")
 @export var families_stats: FamiliesStats
 
-@export_group("Family Managers")
-@export var _attack_manager: AttackManager
-@export var _defense_manager: DefenseManager
-
 @export_group("Modules")
 @export var _clickable_module: ClickableModule
 @export var _clickable_feedback: ClickableSelectionFeedback
@@ -317,7 +313,7 @@ func _on_events_entity_clicked(entity: Entity) -> void:
 		_clickable_feedback.set_active()
 
 
-func _on_player_lvl_changed(self_ref: Player, new_lvl: int) -> void:
+func _on_player_lvl_changed(_self_ref: Player, _new_lvl: int) -> void:
 	apply_cards_upgrade(player.deck)
 
  

@@ -220,7 +220,7 @@ func _answer_get_n_random_heroes(heroes_ref: Array[Hero.HeroId]) -> void:
 
 # ============================== Private functions ==============================
 
-func _init_current_current_game_heroes(heroes_number: int) -> void:
+func _init_current_current_game_heroes(_heroes_number: int) -> void:
 	# TODO Disabled for the moment
 	#if heroes_number <= 0 or heroes_number > Shared.HEROES.size():
 		#printerr("Hero: Wrong heroes_number: ", heroes_number)
