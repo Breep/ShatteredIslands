@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1goibqlf12t3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wi8ak"]
+albedo_color = Color(0.43456253, 0.17130378, 0.042421058, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_5mwyg"]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 0.1
+
+[node name="ShieldThrowVisual" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_wi8ak")
+mesh = SubResource("CylinderMesh_5mwyg")

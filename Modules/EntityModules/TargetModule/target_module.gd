@@ -154,7 +154,27 @@ func get_closest_enemy_from(from_character: Entity) -> Entity:
 			closest_enemy = enemy
 	
 	return closest_enemy
+
+# Récupère l'ennemi le plus proche d'un point donné, en excluant une liste de cibles
+func get_closest_enemy_from_position_excluding(from_pos: Vector3, exclude_list: Array[Entity]) -> Entity:
+	var candidates = _get_alive_entities(_enemies)
+	candidates = _get_array_without_untargetable_targets(candidates)
+	for excluded in exclude_list:
+		candidates.erase(excluded)
+		
+	if candidates.is_empty():
+		return null
+		
+	var closest: Entity = candidates[0]
+	var min_dist_sq: float = from_pos.distance_squared_to(closest.global_position)
 	
+	for i in range(1, candidates.size()):
+		var dist_sq = from_pos.distance_squared_to(candidates[i].global_position)
+		if dist_sq < min_dist_sq:
+			min_dist_sq = dist_sq
+			closest = candidates[i]
+			
+	return closest
 	
 func get_targets(strategy: MultipleTargettingStrategy, radius:float = -1.0) -> Array[Entity]:
 	if radius <= 0:

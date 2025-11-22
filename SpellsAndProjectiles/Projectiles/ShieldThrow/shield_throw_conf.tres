@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ProjectileConf" load_steps=3 format=3 uid="uid://d3g76hfkx40wc"]
+
+[ext_resource type="Script" uid="uid://dad8gpwjaprib" path="res://SpellsAndProjectiles/Projectiles/projectile_conf_template.gd" id="1_h5t7d"]
+[ext_resource type="PackedScene" uid="uid://c1goibqlf12t3" path="res://SpellsAndProjectiles/Projectiles/ShieldThrow/shield_throw_visual.tscn" id="2_4olc6"]
+
+[resource]
+script = ExtResource("1_h5t7d")
+visual_scene = ExtResource("2_4olc6")
+trajectory_type = 4
+speed = 5.0
+metadata/_custom_type_script = "uid://dad8gpwjaprib"

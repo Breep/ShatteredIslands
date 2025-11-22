@@ -44,6 +44,14 @@ var avengers_assemble_crit_chance: float
 #endregion
 
 #region Rare Card
+
+
+# [SHIELD THROW]
+var shield_throw_activated: bool
+var shield_throw_threshold: float
+var shield_throw_damage: float
+var shield_throw_return_shield: float
+
 #endregion
 
 #region Epic Card
