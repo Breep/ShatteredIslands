@@ -1,15 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://c1goibqlf12t3"]
+[gd_scene load_steps=5 format=3 uid="uid://c1goibqlf12t3"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_wi8ak"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5mwyg"]
+noise = SubResource("FastNoiseLite_wi8ak")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wi8ak"]
 albedo_color = Color(0.43456253, 0.17130378, 0.042421058, 1)
+metallic = 1.0
+metallic_texture = SubResource("NoiseTexture2D_5mwyg")
+roughness = 0.0
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_5mwyg"]
-top_radius = 0.2
-bottom_radius = 0.2
+top_radius = 0.3
+bottom_radius = 0.3
 height = 0.1
 
 [node name="ShieldThrowVisual" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 material_override = SubResource("StandardMaterial3D_wi8ak")
+cast_shadow = 0
 mesh = SubResource("CylinderMesh_5mwyg")
