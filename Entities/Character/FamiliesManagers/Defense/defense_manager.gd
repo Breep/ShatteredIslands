@@ -348,44 +348,48 @@ func _on_aegis_resonator_timer_timeout() -> void:
 				ally.stats.armor_stacks += shield_per_ally
 
 func _on_hit_shield_throw(cb_vars: Dictionary, already_hit: Array[Entity]) -> void:
-	# [SHIELD THROW] Impact
+	# [SHIELD THROW] - Impact
 	if not cb_vars.has(AutoAttackModifier.VarType.TARGET): return
 	var target: Entity = cb_vars[AutoAttackModifier.VarType.TARGET]
 	if target == null or not is_instance_valid(target): return
 	
+	# 1. Ajouter à l'historique pour ne pas le retoucher
 	already_hit.append(target)
 	
-	# Dégâts
+	# 2. Dégâts
 	var damage: int = int(_defense_stats.shield_throw_damage)
-	if damage > 0: _owner.direct_attack(target, damage, Utils.DamageType.MAGICAL)
+	if damage > 0: 
+		_owner.direct_attack(target, damage, Utils.DamageType.MAGICAL)
 	
-	# Gain Shield
+	# 3. Gain Shield (CORRECTION CRITIQUE DU LOCK)
 	var shield_return: int = int(_defense_stats.shield_throw_return_shield)
 	if shield_return > 0:
-		# Lock forcé à false comme demandé (Attention aux boucles infinies si threshold < shield_return)
-		_shield_throw_lock = false 
+		_shield_throw_lock = true # <--- ON VERROUILLE
 		_owner.stats.armor_stacks += shield_return
-		_shield_throw_last_armor = _owner.stats.armor_stacks
-		_shield_throw_lock = false
+		_shield_throw_last_armor = _owner.stats.armor_stacks # On met à jour la mémoire
+		_shield_throw_lock = false # <--- ON DÉVERROUILLE
 	
-	# Rebond
-	var next_target = _get_closest_enemy_excluding(target.global_position, already_hit)
+	# 4. Rebond
+	# On cherche le prochain ennemi le plus proche de la cible actuelle
+	var next_target = _owner.target_module.get_closest_enemy_from_position_excluding(target.global_position, already_hit)
+	
 	if next_target != null:
-		var p_type = Projectile.ProjectileType.AUTO_ATTACK 
+		var p_type = Projectile.ProjectileType.AUTO_ATTACK
 		if "SHIELD_THROW" in Projectile.ProjectileType: p_type = Projectile.ProjectileType.SHIELD_THROW
+		
+		# On tire depuis la cible touchée (ou le lanceur si ta fonction projectile_attack ne gère pas la pos)
 		_shoot_shield_projectile(next_target, p_type, already_hit)
 		
 
 #region ===== SHIELD THROW =====
-
-# [SHIELD THROW] - Surveillance
+# Surveillance du gain d'armure
 func _check_shield_throw_on_armor_gain(new_val: int) -> void:
 	var gain: int = new_val - _shield_throw_last_armor
 	_shield_throw_last_armor = new_val
 	
-	# Si gain <= 0, on ignore. 
-	# J'ai retiré la condition "_shield_throw_lock" ici pour le moment
-	if gain <= 0: return
+	# Si gain négatif ou si le lock est actif (c'est nous qui donnons l'armure), on sort
+	if gain <= 0 or _shield_throw_lock: 
+		return
 		
 	_shield_throw_accumulated += gain
 	var threshold: int = int(_defense_stats.shield_throw_threshold)
@@ -395,11 +399,12 @@ func _check_shield_throw_on_armor_gain(new_val: int) -> void:
 			_shield_throw_accumulated -= threshold
 			_trigger_shield_throw_start()
 
-# [SHIELD THROW] - Premier Tir
+# Initialisation du premier lancer
 func _trigger_shield_throw_start() -> void:
 	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
 	if target == null: return
 	
+	# Nouvelle liste vide pour ce lancer
 	var already_hit: Array[Entity] = []
 	
 	var p_type = Projectile.ProjectileType.AUTO_ATTACK 
@@ -407,27 +412,16 @@ func _trigger_shield_throw_start() -> void:
 	
 	_shoot_shield_projectile(target, p_type, already_hit)
 
-# [SHIELD THROW] - Helper de tir
+# Fonction de tir (utilisée pour le début et les rebonds)
 func _shoot_shield_projectile(target: Entity, p_type, already_hit: Array[Entity]) -> void:
 	if target == null or not is_instance_valid(target): return
 	
 	var proj_stats := ProjectileStats.new()
+	
+	# IMPORTANT : On passe la liste 'already_hit' au prochain callback via bind()
 	proj_stats.on_hit_logic_callbacks.append(_on_hit_shield_throw.bind(already_hit))
 	proj_stats.is_bouncing = false
 	
 	_owner.projectile_attack(target, p_type, _owner._turret._projectile_spawn_point, proj_stats)
-
-# [HELPER]
-func _get_closest_enemy_excluding(from_pos: Vector3, exclude_list: Array[Entity]) -> Entity:
-	var all_enemies = _owner.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ENEMIES)
-	var closest: Entity = null
-	var min_dist: float = 99999.0
-	for enemy in all_enemies:
-		if is_instance_valid(enemy) and not (enemy in exclude_list):
-			var dist = from_pos.distance_to(enemy.global_position)
-			if dist < min_dist:
-				min_dist = dist
-				closest = enemy
-	return closest
 	
 #endregion

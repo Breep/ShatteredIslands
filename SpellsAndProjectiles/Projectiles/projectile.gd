@@ -76,6 +76,8 @@ var _life: float = 0.0
 # For HOMING_SMOOTH velocity
 var _velocity: Vector3 = Vector3.ZERO
 
+var _hit_history: Array[Entity] = []
+
 @onready var _visual_node: Node3D = %VisualNode
 
 # ============================== Node base functions ==============================
@@ -100,7 +102,11 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node3D) -> void:
 	if target == null:
 		return
+	
 	if body is Entity and body == target:
+		# 1. On ajoute la cible actuelle à l'historique
+		_hit_history.append(target)
+		
 		var physical_damage_done_flat: float
 		if not multiplayer.is_server():
 			queue_free()
@@ -130,15 +136,18 @@ func _on_body_entered(body: Node3D) -> void:
 			if source != null: source.inflict_condition_stacks(target, stats.poison_stacks, Utils.StackType.POISON)
 			else: target.take_condition_stacks(stats.poison_stacks, Utils.StackType.POISON, stats.poison_stacks_is_critical)
 
-		if stats.is_bouncing:
-			var new_target: Entity = source.target_module.get_closest_enemy_from(target)
-			if new_target == null:
-				queue_free()
-			else:
-				stats.is_bouncing = false
-				_set_target(new_target) # re-seed path from current position
+		# --- NOUVELLE LOGIQUE DE REBOND ---
+		if stats.bounces_remaining > 0:
+			stats.bounces_remaining -= 1
+			var new_target: Entity = source.target_module.get_closest_enemy_from_position_excluding(target.global_position, _hit_history)
+			
+			if new_target != null:
+				_set_target(new_target) 
 				return
+			else:
+				pass
 
+		# --- CALLBACKS ---
 		for cb: Callable in stats.on_hit_logic_callbacks:
 			if cb.is_valid():
 				cb.call({
