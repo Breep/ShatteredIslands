@@ -303,7 +303,8 @@ func _on_owner_armor_stacks_changed(new_val: int) -> void:
 	# [SHIELD THROW]
 	if _defense_stats.shield_throw_activated:
 		_check_shield_throw_on_armor_gain(new_val)
-	
+
+
 func _on_magnetic_siphon_timer_timeout() -> void:
 	# [MAGNETIC SIPHON]
 	if _owner == null or not is_instance_valid(_owner):

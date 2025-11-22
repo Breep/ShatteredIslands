@@ -2,10 +2,7 @@ class_name TargetModule
 extends Module
 
 # ============================== Enums ==============================
-#TODO : Attacker ( Celui qui a attaqué, par exemple pour le dodge)
-#HERO / ENTITIES
 enum TargettingStrategy {
-	
 	# ------- CLOSEST -------
 	CLOSEST, # Closest entity except self (can be null)
 	CLOSEST_ENEMY, # Closest enemy (can be null)
@@ -40,7 +37,6 @@ enum TargettingStrategy {
 	# ------- MISC -------
 	HIGHEST_SHIELD_ENEMIES_HERO, # highest amount of shield among heroes enemies (can be null)
 	HIGHEST_SHIELD_ALLIES_HERO, # highest amount of shield among heroes allies (can be null)
-	
 }
 
 enum MultipleTargettingStrategy {
@@ -49,6 +45,17 @@ enum MultipleTargettingStrategy {
 	ENEMIES, # (can be empty)
 }
 
+enum TargettingFromStrategy {
+	# ------- CLOSEST -------
+	CLOSEST, # Closest entity except self (can be null)
+	CLOSEST_ENEMY, # Closest enemy (can be null)
+	CLOSEST_ALLY, # Closest ally except self (can be null)
+	
+	# ------- FARTHEST -------
+	FARTHEST, # Farthest entity except self (can be null)
+	FARTHEST_ENEMY, # Farthest enemy (can be null)
+	FARTHEST_ALLY, # Farthest ally except self (can be null)
+}
 # ============================== Private variables ==============================
 
 var _entities: Array[Entity] # All entities on the fighting scene
@@ -87,52 +94,33 @@ func stop() -> void:
 func get_target(targetting_strategy: TargettingStrategy) -> Entity:
 	match targetting_strategy:
 # --- DISTANCE ---
-		TargettingStrategy.CLOSEST:
-			return _get_closest(_entities, _owner)
-		TargettingStrategy.CLOSEST_ENEMY:
-			return _get_closest(_enemies, null)
-		TargettingStrategy.CLOSEST_ALLY:
-			return _get_closest(_allies, _owner)
-		TargettingStrategy.FARTHEST:
-			return _get_farthest(_entities, _owner)
-		TargettingStrategy.FARTHEST_ENEMY:
-			return _get_farthest(_enemies, null)
-		TargettingStrategy.FARTHEST_ALLY:
-			return _get_farthest(_allies, _owner)
-			
+		TargettingStrategy.CLOSEST: return _get_closest(_entities, _owner)
+		TargettingStrategy.CLOSEST_ENEMY: return _get_closest(_enemies, null)
+		TargettingStrategy.CLOSEST_ALLY: return _get_closest(_allies, _owner)
+		TargettingStrategy.FARTHEST: return _get_farthest(_entities, _owner)
+		TargettingStrategy.FARTHEST_ENEMY: return _get_farthest(_enemies, null)
+		TargettingStrategy.FARTHEST_ALLY: return _get_farthest(_allies, _owner)
+		
 		# --- RANDOM ---
-		TargettingStrategy.RANDOM:
-			return _get_random(_entities, _owner)
-		TargettingStrategy.RANDOM_ENEMY:
-			return _get_random(_enemies, null)
-		TargettingStrategy.RANDOM_HERO_ENEMY:
-			return _get_random(_enemy_heroes, null)
-		TargettingStrategy.RANDOM_ALLY:
-			return _get_random(_allies, _owner)
-		TargettingStrategy.RANDOM_ALLY_INCLUDING_SELF:
-			return _get_random(_allies, null)
-			
+		TargettingStrategy.RANDOM: return _get_random(_entities, _owner)
+		TargettingStrategy.RANDOM_ENEMY: return _get_random(_enemies, null)
+		TargettingStrategy.RANDOM_HERO_ENEMY: return _get_random(_enemy_heroes, null)
+		TargettingStrategy.RANDOM_ALLY: return _get_random(_allies, _owner)
+		TargettingStrategy.RANDOM_ALLY_INCLUDING_SELF: return _get_random(_allies, null)
+		
 		# --- HP ---
-		TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF:
-			return _get_lowest_hp(_allies, null)
-		TargettingStrategy.HIGHEST_HP_ENEMY:
-			return _get_highest_hp(_enemies, null)
-		TargettingStrategy.HIGHEST_HP_HERO_ENEMY:
-			return _get_highest_hp(_enemy_heroes, null)
-		TargettingStrategy.LOWEST_HP_PERCENT_ENEMY:
-			return _get_lowest_hp_percent(_enemies, null)
-		TargettingStrategy.HIGHEST_HP_PERCENT_ENEMY:
-			return _get_highest_hp_percent(_enemies, null)
-		TargettingStrategy.HIGHEST_HP_PERCENT_HERO_ENEMY:
-			return _get_highest_hp_percent(_enemy_heroes, null)
-			
+		TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF: return _get_lowest_hp(_allies, null)
+		TargettingStrategy.HIGHEST_HP_ENEMY: return _get_highest_hp(_enemies, null)
+		TargettingStrategy.HIGHEST_HP_HERO_ENEMY: return _get_highest_hp(_enemy_heroes, null)
+		TargettingStrategy.LOWEST_HP_PERCENT_ENEMY: return _get_lowest_hp_percent(_enemies, null)
+		TargettingStrategy.HIGHEST_HP_PERCENT_ENEMY: return _get_highest_hp_percent(_enemies, null)
+		TargettingStrategy.HIGHEST_HP_PERCENT_HERO_ENEMY: return _get_highest_hp_percent(_enemy_heroes, null)
+		
 		# --- SHIELD ---
-		TargettingStrategy.HIGHEST_SHIELD_ENEMIES_HERO:
-			return _get_highest_shield(_enemy_heroes, _owner)
-		TargettingStrategy.HIGHEST_SHIELD_ALLIES_HERO:
-			return _get_highest_shield(_ally_heroes, null)
-			
-	printerr("TargetModule: Undef strategy for the TargetModule")
+		TargettingStrategy.HIGHEST_SHIELD_ENEMIES_HERO: return _get_highest_shield(_enemy_heroes, _owner)
+		TargettingStrategy.HIGHEST_SHIELD_ALLIES_HERO: return _get_highest_shield(_ally_heroes, null)
+		
+	push_error("TargetModule: Undef strategy for the TargetModule")
 	return null
 
 
@@ -155,28 +143,21 @@ func get_closest_enemy_from(from_character: Entity) -> Entity:
 	
 	return closest_enemy
 
-# Récupère l'ennemi le plus proche d'un point donné, en excluant une liste de cibles
-func get_closest_enemy_from_position_excluding(from_pos: Vector3, exclude_list: Array[Entity]) -> Entity:
-	var candidates = _get_alive_entities(_enemies)
-	candidates = _get_array_without_untargetable_targets(candidates)
-	for excluded in exclude_list:
-		candidates.erase(excluded)
-		
-	if candidates.is_empty():
-		return null
-		
-	var closest: Entity = candidates[0]
-	var min_dist_sq: float = from_pos.distance_squared_to(closest.global_position)
+
+func get_target_from(from_pos: Vector3, targetting_from_strategy: TargettingFromStrategy, exclude_list: Array[Entity] = []) -> Entity:
+	match targetting_from_strategy:
+		TargettingFromStrategy.CLOSEST: return _get_closest_from(from_pos, _entities, exclude_list)
+		TargettingFromStrategy.CLOSEST_ENEMY: return _get_closest_from(from_pos, _enemies, exclude_list)
+		TargettingFromStrategy.CLOSEST_ALLY: return _get_closest_from(from_pos, _allies, exclude_list)
+		TargettingFromStrategy.FARTHEST: return _get_farthest_from(from_pos, _entities, exclude_list)
+		TargettingFromStrategy.FARTHEST_ENEMY: return _get_farthest_from(from_pos, _enemies, exclude_list)
+		TargettingFromStrategy.FARTHEST_ALLY: return _get_farthest_from(from_pos, _allies, exclude_list)
 	
-	for i in range(1, candidates.size()):
-		var dist_sq = from_pos.distance_squared_to(candidates[i].global_position)
-		if dist_sq < min_dist_sq:
-			min_dist_sq = dist_sq
-			closest = candidates[i]
-			
-	return closest
-	
-func get_targets(strategy: MultipleTargettingStrategy, radius:float = -1.0) -> Array[Entity]:
+	push_error("TargetModule: Unknown TargettingFromStrategy")
+	return null
+
+
+func get_targets(strategy: MultipleTargettingStrategy, radius: float = -1.0) -> Array[Entity]:
 	if radius <= 0:
 		match strategy:
 			MultipleTargettingStrategy.ALL: return _entities.duplicate()
@@ -212,16 +193,17 @@ func get_targets(strategy: MultipleTargettingStrategy, radius:float = -1.0) -> A
 func _filter_candidates(entities: Array[Entity], excluded_character: Entity) -> Array[Entity]:
 	if entities.is_empty():
 		return []
-		
+	
 	var candidates = _get_alive_entities(entities)
 	if excluded_character != null:
 		candidates.erase(excluded_character)
-		
+	
 	if candidates.is_empty():
 		return []
-		
-	return _get_array_without_untargetable_targets(candidates)
 	
+	return _get_array_without_untargetable_targets(candidates)
+
+
 func _get_highest_shield(entities: Array[Entity], excluded_character: Entity) -> Entity:
 	if entities.is_empty():
 		return null
@@ -254,9 +236,9 @@ func _get_alive_entities(entities: Array[Entity]) -> Array[Entity]:
 
 func _add_body_as_entity(body: Node3D) -> void:
 	if not body is Entity:
-		printerr("TargetModule: A body detected by a TargetModule has an Entity mask but is not an entity: [", body.get_path(), "]")
+		push_error("TargetModule: A body detected by a TargetModule has an Entity mask but is not an entity: [", body.get_path(), "]")
 		return
-		
+	
 	var entity: Entity = body
 	if entity.team == _owner.team: _allies.append(entity)
 	else: _enemies.append(entity)
@@ -319,7 +301,8 @@ func _get_farthest(entities: Array[Entity], excluded_character: Entity) -> Entit
 				farthest_character = character
 	
 	return farthest_character
-	
+
+
 func _get_lowest_hp(entities: Array[Entity], excluded_character: Entity) -> Entity:
 	var candidates = _filter_candidates(entities, excluded_character)
 	if candidates.is_empty(): return null
@@ -330,6 +313,7 @@ func _get_lowest_hp(entities: Array[Entity], excluded_character: Entity) -> Enti
 			target = candidates[i]
 	return target
 
+
 func _get_highest_hp(entities: Array[Entity], excluded_character: Entity) -> Entity:
 	var candidates = _filter_candidates(entities, excluded_character)
 	if candidates.is_empty(): return null
@@ -339,6 +323,7 @@ func _get_highest_hp(entities: Array[Entity], excluded_character: Entity) -> Ent
 		if candidates[i].stats.health > target.stats.health:
 			target = candidates[i]
 	return target
+
 
 func _get_lowest_hp_percent(entities: Array[Entity], excluded_character: Entity) -> Entity:
 	var candidates = _filter_candidates(entities, excluded_character)
@@ -354,6 +339,7 @@ func _get_lowest_hp_percent(entities: Array[Entity], excluded_character: Entity)
 			target_ratio = ratio
 	return target
 
+
 func _get_highest_hp_percent(entities: Array[Entity], excluded_character: Entity) -> Entity:
 	var candidates = _filter_candidates(entities, excluded_character)
 	if candidates.is_empty(): return null
@@ -367,6 +353,7 @@ func _get_highest_hp_percent(entities: Array[Entity], excluded_character: Entity
 			target = candidates[i]
 			target_ratio = ratio
 	return target
+
 
 func _get_random(entities: Array[Entity], excluded_character: Entity) -> Entity:
 	if entities.is_empty():
@@ -394,6 +381,50 @@ func _get_array_without_untargetable_targets(entities: Array[Entity]) -> Array[E
 	var entities_copy: Array[Entity] = entities.duplicate()
 	# TODO Here it was for shadow untargetable. Maybe some heroes will have untargetable ultimate
 	return entities_copy
+
+# ============================== "Target from" strategies functions ==============================
+
+func _get_closest_from(from_pos: Vector3, entities: Array[Entity], exclude_list: Array[Entity] = []) -> Entity:
+	var candidates = _get_alive_entities(entities)
+	candidates = _get_array_without_untargetable_targets(candidates)
+	for excluded in exclude_list:
+		candidates.erase(excluded)
+	
+	if candidates.is_empty():
+		return null
+	
+	var closest: Entity = candidates[0]
+	var min_dist_sq: float = from_pos.distance_squared_to(closest.global_position)
+	
+	for i in range(1, candidates.size()):
+		var dist_sq = from_pos.distance_squared_to(candidates[i].global_position)
+		if dist_sq < min_dist_sq:
+			min_dist_sq = dist_sq
+			closest = candidates[i]
+	
+	return closest
+
+
+func _get_farthest_from(from_pos: Vector3, entities: Array[Entity], exclude_list: Array[Entity] = []) -> Entity:
+	var candidates = _get_alive_entities(entities)
+	candidates = _get_array_without_untargetable_targets(candidates)
+	for excluded in exclude_list:
+		candidates.erase(excluded)
+	
+	if candidates.is_empty():
+		return null
+	
+	var closest: Entity = candidates[0]
+	var min_dist_sq: float = from_pos.distance_squared_to(closest.global_position)
+	
+	for i in range(1, candidates.size()):
+		var dist_sq = from_pos.distance_squared_to(candidates[i].global_position)
+		if dist_sq > min_dist_sq:
+			min_dist_sq = dist_sq
+			closest = candidates[i]
+	
+	return closest
+
 
 # ============================== Callback ==============================
 func _on_scanning_area_body_entered(body: Node3D) -> void:

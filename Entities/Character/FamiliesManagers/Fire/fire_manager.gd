@@ -207,14 +207,9 @@ func _on_cosmic_bolt_timer_timeout() -> void:
 # [COSMIC BOLT] - Fonction de tir
 func _shoot_cosmic_bolt(target: Entity) -> void:
 	if target == null or not is_instance_valid(target): return
-
 	var proj_stats := ProjectileStats.new()
-	
 	proj_stats.is_bouncing = false 
-
 	proj_stats.on_hit_logic_callbacks.append(_on_hit_cosmic_bolt)
-	
-
 	_owner.projectile_attack(target, Projectile.ProjectileType.COSMIC_BOLT, _owner._turret._projectile_spawn_point, proj_stats)
 
 

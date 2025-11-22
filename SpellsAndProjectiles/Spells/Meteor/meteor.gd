@@ -1,7 +1,7 @@
 class_name Meteor
 extends Node3D
 
-var _on_hit_callbacks: Array[Callable]
+var _on_hit_callbacks: Array
 
 var _entities_inside: Array[Entity] # Array of all character inside the area
 
@@ -14,7 +14,7 @@ const DEPLOY_TIME: float = 2.0 # Time for the metor to fall on the ground (in s)
 
 @onready var _deploy_timer: Timer = %DeployTimer
 
-func init(target: Entity, ignite_stacks: int, damage_per_stacks: int, on_hit_callbacks:Array[Callable], source: Entity = null) -> void:
+func init(target: Entity, ignite_stacks: int, damage_per_stacks: int, on_hit_callbacks:Array, source: Entity = null) -> void:
 	_owner = source
 	_target = target
 	_ignite_stacks = ignite_stacks

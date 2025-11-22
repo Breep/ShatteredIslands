@@ -111,7 +111,7 @@ func _on_body_entered(body: Node3D) -> void:
 		if not multiplayer.is_server():
 			queue_free()
 			return
-
+	
 		var physical_damage: float = stats.physical_damage_flat
 		if physical_damage > 0:
 			physical_damage_done_flat = target.take_damage(
@@ -123,7 +123,7 @@ func _on_body_entered(body: Node3D) -> void:
 			)
 		if stats.physical_is_critical:
 			source.signal_critical_action_done(target, Utils.ActionType.DAMAGE_PHYSICAL, stats.physical_base_damage, physical_damage_done_flat)
-
+	
 		var magical_damage: float = stats.magical_damage_flat
 		if magical_damage > 0:
 			target.take_damage(
@@ -131,23 +131,11 @@ func _on_body_entered(body: Node3D) -> void:
 				Utils.DamageType.MAGICAL,
 				stats.magical_is_critical,
 				source)
-
+	
 		if stats.poison_stacks > 0:
 			if source != null: source.inflict_condition_stacks(target, stats.poison_stacks, Utils.StackType.POISON)
 			else: target.take_condition_stacks(stats.poison_stacks, Utils.StackType.POISON, stats.poison_stacks_is_critical)
-
-		# --- NOUVELLE LOGIQUE DE REBOND ---
-		if stats.is_bouncing:
-			if stats.bounces_remaining > 0:
-				stats.bounces_remaining -= 1
-				var new_target: Entity = source.target_module.get_closest_enemy_from_position_excluding(target.global_position, _hit_history)
-				
-				if new_target != null:
-					_set_target(new_target) 
-					return
-				else:
-					pass
-
+		
 		# --- CALLBACKS ---
 		for cb: Callable in stats.on_hit_logic_callbacks:
 			if cb.is_valid():
@@ -160,6 +148,19 @@ func _on_body_entered(body: Node3D) -> void:
 				cb.call({
 					AutoAttackModifier.VarType.VISUAL_POS: global_position
 					})
+		
+		# --- BOUNCING ---
+		if stats.is_bouncing and stats.bounces_remaining > 0:
+			stats.bounces_remaining -= 1
+			var new_target: Entity = source.target_module.get_target_from(
+				target.global_position,
+				TargetModule.TargettingFromStrategy.CLOSEST_ENEMY,
+				_hit_history)
+			
+			if new_target != null:
+				_set_target(new_target) 
+				return
+		
 		queue_free()
 
 # ============================== Private functions ==============================
