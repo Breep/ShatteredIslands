@@ -28,6 +28,10 @@ var consuming_the_star_mana_burn: float
 var scorpius_activated: bool
 var scorpius_poison_stacks: float
 
+# [ORBITAL STATION]
+var orbital_station_activated: bool
+var orbital_station_crit_chance: float
+
 #endregion
 
 

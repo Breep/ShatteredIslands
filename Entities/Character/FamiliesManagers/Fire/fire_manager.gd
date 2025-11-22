@@ -118,6 +118,17 @@ func _add_stat_modifiers() -> void:
 		mod.id = "Dark Forest"
 		_owner.stats_manager.register_modifier(mod)
 		
+	# [ORBITAL STATION]
+	if _fire_stats.orbital_station_activated:
+		var mod := StatModifier.new()
+		mod.id = "Orbital Station"
+		mod.stat_type = EntityStats.StatType.CRIT_CHANCE
+		mod.action_type = Utils.ActionType.STACK_IGNITE # (Vérifie que STACK_IGNITE existe)
+		mod.calc_type = StatModifier.CalcType.ADD
+		mod.value = _fire_stats.orbital_station_crit_chance
+		mod.tags = [StatModifier.TagType.CARD]
+		_owner.stats_manager.register_modifier(mod)
+		
 func _clear_stat_modifiers() -> void:
 	# [DARK FOREST]
 	if _fire_stats.dark_forest_activated:
@@ -133,6 +144,15 @@ func _clear_stat_modifiers() -> void:
 		mod.id = "Fire Titan Protection"
 		mod.stat_type = EntityStats.StatType.HEALTH_MAX
 		_owner.stats_manager.unregister_modifier(mod)
+		
+	# [ORBITAL STATION]
+	if _fire_stats.orbital_station_activated:
+		var mod := StatModifier.new()
+		mod.id = "Orbital Station"
+		mod.stat_type = EntityStats.StatType.CRIT_CHANCE
+		mod.action_type = Utils.ActionType.STACK_IGNITE
+		_owner.stats_manager.unregister_modifier(mod)
+		
 #endregion
 
 #region actions modifier
@@ -262,7 +282,7 @@ func _on_titans_protection_meteor_hit(cb_vars: Dictionary) -> void:
 
 #endregion
 
-#region ========== HUIPER BELT ==========
+#region ========== KUIPER BELT ==========
 # [KUIPER BELT]
 func _on_kuiper_belt_meteor_hit(cb_vars: Dictionary) -> void:
 	if _owner == null or not is_instance_valid(_owner): return

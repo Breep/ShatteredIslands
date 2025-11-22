@@ -48,7 +48,6 @@ func start() -> void:
 		_shield_throw_last_armor = _owner.stats.armor_stacks
 		_shield_throw_lock = false
 		
-		# On connecte le signal (si pas déjà fait par une autre carte)
 		if not _owner.stats.armor_stacks_changed.is_connected(_on_owner_armor_stacks_changed):
 			_owner.stats.armor_stacks_changed.connect(_on_owner_armor_stacks_changed)
 
