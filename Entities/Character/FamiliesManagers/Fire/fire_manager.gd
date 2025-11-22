@@ -77,6 +77,10 @@ func _add_meteor_modifiers() -> void:
 	# [END OF THE WORLD]
 	if _fire_stats.end_of_the_world_activated:
 		_meteor_modifiers.append(_on_end_of_the_world_meteor_hit)
+		
+# [KUIPER BELT]
+	if _fire_stats.kuiper_belt_activated:
+		_meteor_modifiers.append(_on_kuiper_belt_meteor_hit)
 
 func _clear_meteor_modifiers() -> void:
 	_meteor_modifiers.clear()
@@ -189,7 +193,17 @@ func _on_dodge_dark_forest(_cb_vars: Dictionary) -> void:
 	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
 	if target != null:
 		_owner.inflict_condition_stacks(target, _fire_stats.dark_forest_ignite_stacks, Utils.StackType.IGNITE)
+		
+#region ========== HUIPER BELT ==========
+# [KUIPER BELT]
+func _on_kuiper_belt_meteor_hit(cb_vars: Dictionary) -> void:
+	if _owner == null or not is_instance_valid(_owner): return
+	
+	var amount: int = int(_fire_stats.kuiper_belt_shield_amount)
+	if amount > 0:
+		_owner.inflict_condition_stacks(_owner, amount, Utils.StackType.ARMOR)
 
+#endregion
 
 #region ========== COSMIC BOLT ==========
 
@@ -228,15 +242,9 @@ func _on_hit_cosmic_bolt(cb_vars: Dictionary) -> void:
 	var bounce_chance: float = float(ignite_stacks) * chance_mult
 	
 	if Utils.is_randomize_modifier_active(bounce_chance):
-		# Trouver une nouvelle cible différente
 		var new_target = _owner.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
 		
 		if new_target != null:
-			# On tire un nouveau projectile depuis la position de la cible actuelle
-			# (Ou depuis le lanceur, selon ton choix visuel. 
-			# Si tu veux que ça parte de la cible touchée, il faudrait modifier projectile_attack pour accepter une pos de départ custom)
-			
-			# Pour l'instant, on tire depuis le lanceur (simple):
 			_shoot_cosmic_bolt(new_target)
 #endregion
 
@@ -253,7 +261,7 @@ func _on_end_of_the_world_meteor_hit(cb_vars: Dictionary) -> void:
 			print("DEBUG EOFW INSTA KILL")
 #endregion
 # ============================== PASSIF ==============================
- 
+ #region ==========  PASSIVE ==========
 # [PASSIVE]
 func _on_inflict_condition_ignite(cb_vars: Dictionary) -> void:
 	if not cb_vars.has(ActionModifier.VarType.STACK_TYPE): return
@@ -269,3 +277,4 @@ func _on_inflict_condition_ignite(cb_vars: Dictionary) -> void:
 					Spell.MeteorModifier.RADIUS: 3.0,
 					Spell.MeteorModifier.ON_HIT_CALLBACKS: _meteor_modifiers
 					})
+#endregion

@@ -11,6 +11,10 @@ var dark_forest_ignite_stacks: float
 var expanse_universe_activated: bool
 var expanse_universe_ignite_stacks: float
 var expanse_universe_period: float
+
+# [KUIPER BELT]
+var kuiper_belt_activated: bool
+var kuiper_belt_shield_amount: float
 #endregion
 
 

@@ -1,7 +1,18 @@
-[gd_resource type="Resource" script_class="Card" load_steps=2 format=3 uid="uid://dc5r8wy0vfksm"]
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://dc5r8wy0vfksm"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_dh6en"]
+[ext_resource type="Texture2D" uid="uid://c3afd15mi3hds" path="res://Card/Descriptions/Cards/Fire/Common/KuiperBelt/fire_kuiper_belt.png" id="1_ee887"]
+[ext_resource type="Script" uid="uid://2oq516jgd0ld" path="res://Card/Descriptions/Cards/Fire/Common/KuiperBelt/fire_kuiper_belt.gd" id="2_b5spp"]
+
+[sub_resource type="Resource" id="Resource_xok7n"]
+script = ExtResource("2_b5spp")
+_shield_amount = Array[float]([20.0, 30.0, 40.0, 50.0, 60.0])
+metadata/_custom_type_script = "uid://2oq516jgd0ld"
 
 [resource]
 script = ExtResource("1_dh6en")
+name = "Kuiper Belt"
+picture = ExtResource("1_ee887")
+family = 3
+player_upgrade = SubResource("Resource_xok7n")
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

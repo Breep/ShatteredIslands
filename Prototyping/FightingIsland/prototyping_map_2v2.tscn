@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://f2n7hccdooke"]
+[gd_scene load_steps=15 format=3 uid="uid://f2n7hccdooke"]
 
 [ext_resource type="Script" uid="uid://bu48b2v401db2" path="res://Prototyping/FightingIsland/prototyping_map.gd" id="1_oc45v"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="2_5t2nw"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Entities/Character/character.tscn" id="3_doj2u"]
 [ext_resource type="Material" uid="uid://2wlal7g5718r" path="res://VFX/Shaders/Sky/stylized_shader_night.tres" id="4_3ldpt"]
 [ext_resource type="Resource" uid="uid://vefirtk44fxp" path="res://Card/Descriptions/Cards/Fire/Rare/EndOfTheWorld/fire_end_of_the_world.tres" id="4_5t2nw"]
+[ext_resource type="Resource" uid="uid://dc5r8wy0vfksm" path="res://Card/Descriptions/Cards/Fire/Common/KuiperBelt/fire_kuiper_belt.tres" id="5_y3vk0"]
 [ext_resource type="Resource" uid="uid://b3ohguwihk7x3" path="res://Card/Descriptions/Cards/Fire/Common/ExpanseUniverse/fire_expanse_universe.tres" id="8_4ych6"]
 [ext_resource type="PackedScene" uid="uid://ci5cxqmyimurq" path="res://UI/InGame/FightingArea/DebugEntityStats/ui_debug_entity_stats.tscn" id="9_5t2nw"]
 [ext_resource type="PackedScene" uid="uid://bhxhqex1pbh2p" path="res://UI/InGame/FightingArea/ui_fighting_area.tscn" id="11_blmm3"]
@@ -39,7 +40,7 @@ volumetric_fog_density = 0.0
 
 [node name="PrototypingMap" type="Node3D" node_paths=PackedStringArray("_characters", "_floating_island")]
 script = ExtResource("1_oc45v")
-_player1_cards = Array[ExtResource("2_5t2nw")]([ExtResource("8_4ych6"), ExtResource("4_5t2nw")])
+_player1_cards = Array[ExtResource("2_5t2nw")]([ExtResource("8_4ych6"), ExtResource("4_5t2nw"), ExtResource("5_y3vk0")])
 _player2_cards = Array[ExtResource("2_5t2nw")]([ExtResource("8_4ych6")])
 _characters = [NodePath("Character1"), NodePath("Character2"), NodePath("Character3"), NodePath("Character4")]
 _floating_island = NodePath("FightingIsland")

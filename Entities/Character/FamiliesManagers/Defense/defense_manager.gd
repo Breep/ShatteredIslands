@@ -252,6 +252,41 @@ func _update_protective_dome_modifier(current_armor: float) -> void:
 
 #endregion
 
+#region ===== SHIELD THROW =====
+# [SHIELD THROW] - Surveillance
+func _check_shield_throw_on_armor_gain(new_val: int) -> void:
+	var gain: int = new_val - _shield_throw_last_armor
+	_shield_throw_last_armor = new_val
+	
+	if gain <= 0: return
+		
+	_shield_throw_accumulated += gain
+	var threshold: int = int(_defense_stats.shield_throw_threshold)
+	
+	if threshold > 0 and _shield_throw_accumulated >= threshold:
+		while _shield_throw_accumulated >= threshold:
+			_shield_throw_accumulated -= threshold
+			_trigger_shield_throw_start()
+
+# [SHIELD THROW] - Tir
+func _trigger_shield_throw_start() -> void:
+	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
+	if target == null: return
+	
+	var proj_stats := ProjectileStats.new()
+	
+	proj_stats.is_bouncing = true
+	proj_stats.bounces_remaining = 20 
+	
+	proj_stats.on_hit_logic_callbacks.append(_on_hit_shield_throw)
+	
+	var p_type = Projectile.ProjectileType.AUTO_ATTACK 
+	if "SHIELD_THROW" in Projectile.ProjectileType: p_type = Projectile.ProjectileType.SHIELD_THROW
+	
+	_owner.projectile_attack(target, p_type, _owner._turret._projectile_spawn_point, proj_stats)
+	
+#endregion
+
 # ============================== Callbacks functions ==============================
 
 # [REFLECTO BELT]
@@ -350,59 +385,18 @@ func _on_aegis_resonator_timer_timeout() -> void:
 
 # [SHIELD THROW] - Impact
 func _on_hit_shield_throw(cb_vars: Dictionary) -> void:
-	# Le rebond est géré par le Projectile.gd maintenant.
-	# Ici, on gère uniquement l'effet à l'impact.
 	
 	if not cb_vars.has(AutoAttackModifier.VarType.TARGET): return
 	var target: Entity = cb_vars[AutoAttackModifier.VarType.TARGET]
 	if target == null or not is_instance_valid(target): return
 	
-	# 1. Dégâts
 	var damage: int = int(_defense_stats.shield_throw_damage)
 	if damage > 0: 
 		_owner.direct_attack(target, damage, Utils.DamageType.MAGICAL)
 	
-	# 2. Gain Shield (Sans Lock, pour permettre le proc récursif)
 	var shield_return: int = int(_defense_stats.shield_throw_return_shield)
 	if shield_return > 0:
-		# L'ajout d'armure ici va déclencher _check_shield_throw_on_armor_gain
-		# Ce qui pourra déclencher un NOUVEAU tir si on dépasse le seuil
-		_owner.stats.armor_stacks += shield_return
+
+		_owner.inflict_condition_stacks(_owner, shield_return, Utils.StackType.ARMOR)
 		_shield_throw_last_armor = _owner.stats.armor_stacks
 		
-
-#region ===== SHIELD THROW =====
-# [SHIELD THROW] - Surveillance
-func _check_shield_throw_on_armor_gain(new_val: int) -> void:
-	var gain: int = new_val - _shield_throw_last_armor
-	_shield_throw_last_armor = new_val
-	
-	# Si on a perdu du bouclier (gain <= 0), on ne fait rien
-	if gain <= 0: return
-		
-	_shield_throw_accumulated += gain
-	var threshold: int = int(_defense_stats.shield_throw_threshold)
-	
-	if threshold > 0 and _shield_throw_accumulated >= threshold:
-		while _shield_throw_accumulated >= threshold:
-			_shield_throw_accumulated -= threshold
-			_trigger_shield_throw_start()
-
-# [SHIELD THROW] - Tir
-func _trigger_shield_throw_start() -> void:
-	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
-	if target == null: return
-	
-	var proj_stats := ProjectileStats.new()
-	
-	proj_stats.is_bouncing = true
-	proj_stats.bounces_remaining = 20 
-	
-	proj_stats.on_hit_logic_callbacks.append(_on_hit_shield_throw)
-	
-	var p_type = Projectile.ProjectileType.AUTO_ATTACK 
-	if "SHIELD_THROW" in Projectile.ProjectileType: p_type = Projectile.ProjectileType.SHIELD_THROW
-	
-	_owner.projectile_attack(target, p_type, _owner._turret._projectile_spawn_point, proj_stats)
-	
-#endregion
