@@ -62,6 +62,10 @@ func _create_optional_timers() -> void:
 	# [EXPANSE UNIVERSE]
 	if _fire_stats.expanse_universe_activated:
 		_optional_timers.append(Utils.create_perpetual_timer(self, _fire_stats.expanse_universe_period, _on_expanse_universe_timer_timeout, true))
+	
+	# [COSMIC BOLT]
+	if _fire_stats.cosmic_bolt_activated:
+		_optional_timers.append(Utils.create_perpetual_timer(self, _fire_stats.cosmic_bolt_period, _on_cosmic_bolt_timer_timeout, true))
 
 func _clear_optional_timers() -> void:
 	for timer in _optional_timers:
@@ -190,6 +194,62 @@ func _on_dodge_dark_forest(_cb_vars: Dictionary) -> void:
 	if target != null:
 		_owner.inflict_condition_stacks(target, _fire_stats.dark_forest_ignite_stacks, Utils.StackType.IGNITE)
 
+
+#region ========== COSMIC BOLT ==========
+
+# [COSMIC BOLT] - Déclenchement Timer
+func _on_cosmic_bolt_timer_timeout() -> void:
+	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.HIGHEST_HP_ENEMY)
+	if target == null: return
+	
+	_shoot_cosmic_bolt(target)
+
+# [COSMIC BOLT] - Fonction de tir
+func _shoot_cosmic_bolt(target: Entity) -> void:
+	if target == null or not is_instance_valid(target): return
+
+	var proj_stats := ProjectileStats.new()
+	
+	proj_stats.is_bouncing = false 
+
+	proj_stats.on_hit_logic_callbacks.append(_on_hit_cosmic_bolt)
+	
+
+	_owner.projectile_attack(target, Projectile.ProjectileType.COSMIC_BOLT, _owner._turret._projectile_spawn_point, proj_stats)
+
+
+# [COSMIC BOLT] - Logique à l'impact
+func _on_hit_cosmic_bolt(cb_vars: Dictionary) -> void:
+	if not cb_vars.has(AutoAttackModifier.VarType.TARGET): return
+	var target: Entity = cb_vars[AutoAttackModifier.VarType.TARGET]
+	if target == null or not is_instance_valid(target) or target.is_queued_for_deletion(): return
+	
+	# --- 1. Dégâts ---
+	var ignite_stacks: int = target.stats.ignite_stacks
+
+	
+	var dmg_mult: float = _fire_stats.cosmic_bolt_damage_per_stack
+	var damage: int = int(float(ignite_stacks) * dmg_mult)
+	
+	if damage > 0:
+		_owner.direct_attack(target, damage, Utils.DamageType.MAGICAL)
+	
+	# --- 2. Rebond ---
+	var chance_mult: float = _fire_stats.cosmic_bolt_bounce_chance_per_stack
+	var bounce_chance: float = float(ignite_stacks) * chance_mult
+	
+	if Utils.is_randomize_modifier_active(bounce_chance):
+		# Trouver une nouvelle cible différente
+		var new_target = _owner.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
+		
+		if new_target != null:
+			# On tire un nouveau projectile depuis la position de la cible actuelle
+			# (Ou depuis le lanceur, selon ton choix visuel. 
+			# Si tu veux que ça parte de la cible touchée, il faudrait modifier projectile_attack pour accepter une pos de départ custom)
+			
+			# Pour l'instant, on tire depuis le lanceur (simple):
+			_shoot_cosmic_bolt(new_target)
+#endregion
 # ============================== PASSIF ==============================
  
 # [PASSIVE]
