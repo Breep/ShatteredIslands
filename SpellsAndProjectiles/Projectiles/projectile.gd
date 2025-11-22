@@ -15,7 +15,8 @@ enum ProjectileType {
 	AUTO_ATTACK,
 	VENOMOUS_DART,
 	SNAKE,
-	COSMIC_BOLT
+	COSMIC_BOLT,
+	SHIELD_THROW
 }
 
 enum TrajectoryType {
@@ -30,7 +31,8 @@ const PROJECTILE_CONF_REF: Dictionary[ProjectileType, ProjectileConf] = {
 	ProjectileType.AUTO_ATTACK: preload("res://SpellsAndProjectiles/Projectiles/AutoAttack/default_auto_attack_conf.tres"),
 	ProjectileType.VENOMOUS_DART: preload("res://SpellsAndProjectiles/Projectiles/VenomousDart/venomous_dart_conf.tres"),
 	ProjectileType.SNAKE: preload("res://SpellsAndProjectiles/Projectiles/Snake/snake_proj_conf.tres"),
-	ProjectileType.COSMIC_BOLT: preload("res://SpellsAndProjectiles/Projectiles/CosmicBolt/cosmic_bolt_conf.tres")
+	ProjectileType.COSMIC_BOLT: preload("res://SpellsAndProjectiles/Projectiles/CosmicBolt/cosmic_bolt_conf.tres"),
+	ProjectileType.SHIELD_THROW: preload("res://SpellsAndProjectiles/Projectiles/ShieldThrow/shield_throw_conf.tres")
 }
 
 # ============================== Constants / Exports ==============================

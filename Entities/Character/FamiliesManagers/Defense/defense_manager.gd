@@ -13,6 +13,11 @@ var _defense_stats: FamilyDefenseStats # Ref to the owner defense stats
 var _reflecto_belt_accumulated_loss: int = 0
 var _reflecto_belt_attacks_left: int = 0
 
+# [SHIELD THROW]
+var _shield_throw_accumulated: int = 0
+var _shield_throw_last_armor: int = 0
+var _shield_throw_lock: bool = false # Pour éviter que le gain du bouclier qui revient ne déclenche un nouveau lancer
+
 
 # ============================== Node base functions ==============================
 
@@ -33,24 +38,32 @@ func start() -> void:
 	
 	# [PROTECTIVE DOME]
 	if _defense_stats.protective_dome_activated:
-		if not _owner.stats.armor_stacks_changed.is_connected(_on_owner_armor_stacks_changed_protective_dome):
-			_owner.stats.armor_stacks_changed.connect(_on_owner_armor_stacks_changed_protective_dome)
+		if not _owner.stats.armor_stacks_changed.is_connected(_on_owner_armor_stacks_changed):
+			_owner.stats.armor_stacks_changed.connect(_on_owner_armor_stacks_changed)
 		_update_protective_dome_modifier(_owner.stats.armor_stacks)
+	
+	# [SHIELD THROW]
+	if _defense_stats.shield_throw_activated:
+		_shield_throw_accumulated = 0
+		_shield_throw_last_armor = _owner.stats.armor_stacks
+		_shield_throw_lock = false
+		
+		# On connecte le signal (si pas déjà fait par une autre carte)
+		if not _owner.stats.armor_stacks_changed.is_connected(_on_owner_armor_stacks_changed):
+			_owner.stats.armor_stacks_changed.connect(_on_owner_armor_stacks_changed)
 
 
 func stop() -> void:
 	
-	_clear_action_modifiers()
-	_clear_stat_modifiers()
+	# [SHIELD THROW]
+	if _defense_stats.shield_throw_activated:
+		if _owner.stats.armor_stacks_changed.is_connected(_on_owner_armor_stacks_changed):
+			_owner.stats.armor_stacks_changed.disconnect(_on_owner_armor_stacks_changed)
 	
-	# [REFLECTO BELT] Nettoyage
-	if _defense_stats.reflecto_belt_activated:
-		_owner.auto_attack_modifier_registry.unregister_modifier("Reflecto Belt")
-
-	# [PROTECTIVE DOME] Déconnexion
+		# [PROTECTIVE DOME] Déconnexion
 	if _defense_stats.protective_dome_activated:
-		if _owner.stats.armor_stacks_changed.is_connected(_on_owner_armor_stacks_changed_protective_dome):
-			_owner.stats.armor_stacks_changed.disconnect(_on_owner_armor_stacks_changed_protective_dome)
+		if _owner.stats.armor_stacks_changed.is_connected(_on_owner_armor_stacks_changed):
+			_owner.stats.armor_stacks_changed.disconnect(_on_owner_armor_stacks_changed)
 		
 		# On s'assure de retirer le bonus
 		var mod := StatModifier.new()
@@ -58,6 +71,14 @@ func stop() -> void:
 		mod.stat_type = EntityStats.StatType.RESISTANCE
 		mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
 		_owner.stats_manager.unregister_modifier(mod)
+		
+		
+	# [REFLECTO BELT] Nettoyage
+	if _defense_stats.reflecto_belt_activated:
+		_owner.auto_attack_modifier_registry.unregister_modifier("Reflecto Belt")
+		
+	_clear_action_modifiers()
+	_clear_stat_modifiers()
 	_clear_optional_timers()
 
 # --- Fonctions appelées par le système de dégâts ---
@@ -274,9 +295,14 @@ func _on_energy_barrier_timer_timeout() -> void:
 	_owner.inflict_condition_stacks(_owner, amount, Utils.StackType.ARMOR)
 
 
-func _on_owner_armor_stacks_changed_protective_dome(new_val: int) -> void:
+func _on_owner_armor_stacks_changed(new_val: int) -> void:
 	# [PROTECTIVE DOME]
-	_update_protective_dome_modifier(new_val)
+	if _defense_stats.protective_dome_activated:
+		_update_protective_dome_modifier(new_val)
+		
+	# [SHIELD THROW]
+	if _defense_stats.shield_throw_activated:
+		_check_shield_throw_on_armor_gain(new_val)
 	
 func _on_magnetic_siphon_timer_timeout() -> void:
 	# [MAGNETIC SIPHON]
@@ -320,3 +346,88 @@ func _on_aegis_resonator_timer_timeout() -> void:
 				_owner.inflict_condition_stacks(_owner, shield_per_ally, Utils.StackType.ARMOR)
 			else:
 				ally.stats.armor_stacks += shield_per_ally
+
+func _on_hit_shield_throw(cb_vars: Dictionary, already_hit: Array[Entity]) -> void:
+	# [SHIELD THROW] Impact
+	if not cb_vars.has(AutoAttackModifier.VarType.TARGET): return
+	var target: Entity = cb_vars[AutoAttackModifier.VarType.TARGET]
+	if target == null or not is_instance_valid(target): return
+	
+	already_hit.append(target)
+	
+	# Dégâts
+	var damage: int = int(_defense_stats.shield_throw_damage)
+	if damage > 0: _owner.direct_attack(target, damage, Utils.DamageType.MAGICAL)
+	
+	# Gain Shield
+	var shield_return: int = int(_defense_stats.shield_throw_return_shield)
+	if shield_return > 0:
+		# Lock forcé à false comme demandé (Attention aux boucles infinies si threshold < shield_return)
+		_shield_throw_lock = false 
+		_owner.stats.armor_stacks += shield_return
+		_shield_throw_last_armor = _owner.stats.armor_stacks
+		_shield_throw_lock = false
+	
+	# Rebond
+	var next_target = _get_closest_enemy_excluding(target.global_position, already_hit)
+	if next_target != null:
+		var p_type = Projectile.ProjectileType.AUTO_ATTACK 
+		if "SHIELD_THROW" in Projectile.ProjectileType: p_type = Projectile.ProjectileType.SHIELD_THROW
+		_shoot_shield_projectile(next_target, p_type, already_hit)
+		
+
+#region ===== SHIELD THROW =====
+
+# [SHIELD THROW] - Surveillance
+func _check_shield_throw_on_armor_gain(new_val: int) -> void:
+	var gain: int = new_val - _shield_throw_last_armor
+	_shield_throw_last_armor = new_val
+	
+	# Si gain <= 0, on ignore. 
+	# J'ai retiré la condition "_shield_throw_lock" ici pour le moment
+	if gain <= 0: return
+		
+	_shield_throw_accumulated += gain
+	var threshold: int = int(_defense_stats.shield_throw_threshold)
+	
+	if threshold > 0 and _shield_throw_accumulated >= threshold:
+		while _shield_throw_accumulated >= threshold:
+			_shield_throw_accumulated -= threshold
+			_trigger_shield_throw_start()
+
+# [SHIELD THROW] - Premier Tir
+func _trigger_shield_throw_start() -> void:
+	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
+	if target == null: return
+	
+	var already_hit: Array[Entity] = []
+	
+	var p_type = Projectile.ProjectileType.AUTO_ATTACK 
+	if "SHIELD_THROW" in Projectile.ProjectileType: p_type = Projectile.ProjectileType.SHIELD_THROW
+	
+	_shoot_shield_projectile(target, p_type, already_hit)
+
+# [SHIELD THROW] - Helper de tir
+func _shoot_shield_projectile(target: Entity, p_type, already_hit: Array[Entity]) -> void:
+	if target == null or not is_instance_valid(target): return
+	
+	var proj_stats := ProjectileStats.new()
+	proj_stats.on_hit_logic_callbacks.append(_on_hit_shield_throw.bind(already_hit))
+	proj_stats.is_bouncing = false
+	
+	_owner.projectile_attack(target, p_type, _owner._turret._projectile_spawn_point, proj_stats)
+
+# [HELPER]
+func _get_closest_enemy_excluding(from_pos: Vector3, exclude_list: Array[Entity]) -> Entity:
+	var all_enemies = _owner.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ENEMIES)
+	var closest: Entity = null
+	var min_dist: float = 99999.0
+	for enemy in all_enemies:
+		if is_instance_valid(enemy) and not (enemy in exclude_list):
+			var dist = from_pos.distance_to(enemy.global_position)
+			if dist < min_dist:
+				min_dist = dist
+				closest = enemy
+	return closest
+	
+#endregion
