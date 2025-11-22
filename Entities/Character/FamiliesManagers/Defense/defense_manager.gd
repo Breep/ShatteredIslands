@@ -347,49 +347,37 @@ func _on_aegis_resonator_timer_timeout() -> void:
 			else:
 				ally.stats.armor_stacks += shield_per_ally
 
-func _on_hit_shield_throw(cb_vars: Dictionary, already_hit: Array[Entity]) -> void:
-	# [SHIELD THROW] - Impact
+# [SHIELD THROW] - Impact
+func _on_hit_shield_throw(cb_vars: Dictionary) -> void:
+	# Le rebond est géré par le Projectile.gd maintenant.
+	# Ici, on gère uniquement l'effet à l'impact.
+	
 	if not cb_vars.has(AutoAttackModifier.VarType.TARGET): return
 	var target: Entity = cb_vars[AutoAttackModifier.VarType.TARGET]
 	if target == null or not is_instance_valid(target): return
 	
-	# 1. Ajouter à l'historique pour ne pas le retoucher
-	already_hit.append(target)
-	
-	# 2. Dégâts
+	# 1. Dégâts
 	var damage: int = int(_defense_stats.shield_throw_damage)
 	if damage > 0: 
 		_owner.direct_attack(target, damage, Utils.DamageType.MAGICAL)
 	
-	# 3. Gain Shield (CORRECTION CRITIQUE DU LOCK)
+	# 2. Gain Shield (Sans Lock, pour permettre le proc récursif)
 	var shield_return: int = int(_defense_stats.shield_throw_return_shield)
 	if shield_return > 0:
-		_shield_throw_lock = true # <--- ON VERROUILLE
+		# L'ajout d'armure ici va déclencher _check_shield_throw_on_armor_gain
+		# Ce qui pourra déclencher un NOUVEAU tir si on dépasse le seuil
 		_owner.stats.armor_stacks += shield_return
-		_shield_throw_last_armor = _owner.stats.armor_stacks # On met à jour la mémoire
-		_shield_throw_lock = false # <--- ON DÉVERROUILLE
-	
-	# 4. Rebond
-	# On cherche le prochain ennemi le plus proche de la cible actuelle
-	var next_target = _owner.target_module.get_closest_enemy_from_position_excluding(target.global_position, already_hit)
-	
-	if next_target != null:
-		var p_type = Projectile.ProjectileType.AUTO_ATTACK
-		if "SHIELD_THROW" in Projectile.ProjectileType: p_type = Projectile.ProjectileType.SHIELD_THROW
-		
-		# On tire depuis la cible touchée (ou le lanceur si ta fonction projectile_attack ne gère pas la pos)
-		_shoot_shield_projectile(next_target, p_type, already_hit)
+		_shield_throw_last_armor = _owner.stats.armor_stacks
 		
 
 #region ===== SHIELD THROW =====
-# Surveillance du gain d'armure
+# [SHIELD THROW] - Surveillance
 func _check_shield_throw_on_armor_gain(new_val: int) -> void:
 	var gain: int = new_val - _shield_throw_last_armor
 	_shield_throw_last_armor = new_val
 	
-	# Si gain négatif ou si le lock est actif (c'est nous qui donnons l'armure), on sort
-	if gain <= 0 or _shield_throw_lock: 
-		return
+	# Si on a perdu du bouclier (gain <= 0), on ne fait rien
+	if gain <= 0: return
 		
 	_shield_throw_accumulated += gain
 	var threshold: int = int(_defense_stats.shield_throw_threshold)
@@ -399,28 +387,20 @@ func _check_shield_throw_on_armor_gain(new_val: int) -> void:
 			_shield_throw_accumulated -= threshold
 			_trigger_shield_throw_start()
 
-# Initialisation du premier lancer
+# [SHIELD THROW] - Tir
 func _trigger_shield_throw_start() -> void:
 	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
 	if target == null: return
 	
-	# Nouvelle liste vide pour ce lancer
-	var already_hit: Array[Entity] = []
+	var proj_stats := ProjectileStats.new()
+	
+	proj_stats.is_bouncing = true
+	proj_stats.bounces_remaining = 20 
+	
+	proj_stats.on_hit_logic_callbacks.append(_on_hit_shield_throw)
 	
 	var p_type = Projectile.ProjectileType.AUTO_ATTACK 
 	if "SHIELD_THROW" in Projectile.ProjectileType: p_type = Projectile.ProjectileType.SHIELD_THROW
-	
-	_shoot_shield_projectile(target, p_type, already_hit)
-
-# Fonction de tir (utilisée pour le début et les rebonds)
-func _shoot_shield_projectile(target: Entity, p_type, already_hit: Array[Entity]) -> void:
-	if target == null or not is_instance_valid(target): return
-	
-	var proj_stats := ProjectileStats.new()
-	
-	# IMPORTANT : On passe la liste 'already_hit' au prochain callback via bind()
-	proj_stats.on_hit_logic_callbacks.append(_on_hit_shield_throw.bind(already_hit))
-	proj_stats.is_bouncing = false
 	
 	_owner.projectile_attack(target, p_type, _owner._turret._projectile_spawn_point, proj_stats)
 	

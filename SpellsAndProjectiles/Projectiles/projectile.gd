@@ -137,15 +137,16 @@ func _on_body_entered(body: Node3D) -> void:
 			else: target.take_condition_stacks(stats.poison_stacks, Utils.StackType.POISON, stats.poison_stacks_is_critical)
 
 		# --- NOUVELLE LOGIQUE DE REBOND ---
-		if stats.bounces_remaining > 0:
-			stats.bounces_remaining -= 1
-			var new_target: Entity = source.target_module.get_closest_enemy_from_position_excluding(target.global_position, _hit_history)
-			
-			if new_target != null:
-				_set_target(new_target) 
-				return
-			else:
-				pass
+		if stats.is_bouncing:
+			if stats.bounces_remaining > 0:
+				stats.bounces_remaining -= 1
+				var new_target: Entity = source.target_module.get_closest_enemy_from_position_excluding(target.global_position, _hit_history)
+				
+				if new_target != null:
+					_set_target(new_target) 
+					return
+				else:
+					pass
 
 		# --- CALLBACKS ---
 		for cb: Callable in stats.on_hit_logic_callbacks:
