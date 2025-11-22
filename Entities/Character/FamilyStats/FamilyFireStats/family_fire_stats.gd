@@ -24,6 +24,10 @@ var titans_protection_hp_amount: float
 var consuming_the_star_activated: bool
 var consuming_the_star_mana_burn: float
 
+# [SCORPIUS]
+var scorpius_activated: bool
+var scorpius_poison_stacks: float
+
 #endregion
 
 

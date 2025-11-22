@@ -6,8 +6,8 @@
 
 [sub_resource type="Resource" id="Resource_epg00"]
 script = ExtResource("2_7r5a3")
-_heal_amount = Array[int]([50, 80, 110, 140, 200])
-_period = Array[float]([3.0, 3.0, 3.0, 3.0, 3.0])
+_heal_amount = Array[int]([10, 20, 30, 40, 50])
+_period = Array[float]([1.2, 1.2, 1.2, 1.2, 1.2])
 metadata/_custom_type_script = "uid://tswgfdudffa2"
 
 [resource]

@@ -94,6 +94,10 @@ func _add_meteor_modifiers() -> void:
 		# [CONSUMING THE STAR]
 	if _fire_stats.consuming_the_star_activated:
 		_meteor_modifiers.append(_on_consuming_the_star_meteor_hit)
+		
+	# [SCORPIUS]
+	if _fire_stats.scorpius_activated:
+		_meteor_modifiers.append(_on_scorpius_meteor_hit)
 
 func _clear_meteor_modifiers() -> void:
 	_meteor_modifiers.clear()
@@ -183,9 +187,7 @@ func _lanch_optional_spells() -> void:
 
 # ============================== Callbacks functions ==============================
 
-func _on_firebolt_timer_timeout() -> void:
-	pass
-
+#region ===== EXPANSE UNIVERSE =====
 # [EXPANSE UNIVERSE]
 func _on_expanse_universe_timer_timeout() -> void:
 	if _owner == null or not is_instance_valid(_owner):
@@ -197,23 +199,32 @@ func _on_expanse_universe_timer_timeout() -> void:
 	if stacks > 0:
 		_owner.inflict_condition_stacks(target, stacks, Utils.StackType.IGNITE)
 
-#[DECAY]
-func _on_ignite_timer_timeout() -> void:
-	if _owner.stats.ignite_stacks > 0:
-		var percent: float = _IGNITE_PERCENT_PER_STACK * _owner.stats.ignite_stacks
-		_owner.take_damage_percent(percent, Utils.PercentModifier.MAX_HP, Utils.DamageType.MAGICAL)
-	
-	var decay: int = (_owner.stats.ignite_stacks * _IGNITE_DECAY_PERCENT / 100.0) as int
-	decay = clampi(decay, 1, decay)
-	_owner.stats.ignite_stacks -= decay
+#endregion
 
-
+#region ===== DARK FOREST =====
 # [DARK FOREST]
 func _on_dodge_dark_forest(_cb_vars: Dictionary) -> void:
 	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
 	if target != null:
 		_owner.inflict_condition_stacks(target, _fire_stats.dark_forest_ignite_stacks, Utils.StackType.IGNITE)
 		
+#endregion
+
+#region ===== SCORPIUS =====
+
+# [SCORPIUS]
+func _on_scorpius_meteor_hit(cb_vars: Dictionary) -> void:
+	var entities_inside: Array = cb_vars.get(Meteor.VarType.ENTITIES_INSIDE, [])
+	if entities_inside.is_empty(): return
+	
+	var poison_amount: float = _fire_stats.scorpius_poison_stacks
+	
+	for entity: Entity in entities_inside:
+		if entity != null and is_instance_valid(entity) and entity.team != _owner.team:
+			_owner.inflict_condition_stacks(entity, int(poison_amount), Utils.StackType.POISON)
+
+#endregion
+
 #region ===== CONSUMING THE STAR =====
 
 # [CONSUMING THE STAR]
@@ -317,7 +328,9 @@ func _on_end_of_the_world_meteor_hit(cb_vars: Dictionary) -> void:
 			entity.stats.health = 0
 			print("DEBUG EOFW INSTA KILL")
 #endregion
+
 # ============================== PASSIF ==============================
+
  #region ==========  PASSIVE ==========
 # [PASSIVE]
 func _on_inflict_condition_ignite(cb_vars: Dictionary) -> void:
@@ -334,4 +347,17 @@ func _on_inflict_condition_ignite(cb_vars: Dictionary) -> void:
 					Spell.MeteorModifier.RADIUS: 3.0,
 					Spell.MeteorModifier.ON_HIT_CALLBACKS: _meteor_modifiers
 					})
+#endregion
+
+#region ===== DECAY =====
+#[DECAY]
+func _on_ignite_timer_timeout() -> void:
+	if _owner.stats.ignite_stacks > 0:
+		var percent: float = _IGNITE_PERCENT_PER_STACK * _owner.stats.ignite_stacks
+		_owner.take_damage_percent(percent, Utils.PercentModifier.MAX_HP, Utils.DamageType.MAGICAL)
+	
+	var decay: int = (_owner.stats.ignite_stacks * _IGNITE_DECAY_PERCENT / 100.0) as int
+	decay = clampi(decay, 1, decay)
+	_owner.stats.ignite_stacks -= decay
+	
 #endregion
