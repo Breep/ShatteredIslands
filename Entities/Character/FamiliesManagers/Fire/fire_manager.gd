@@ -225,11 +225,9 @@ func _on_hit_cosmic_bolt(cb_vars: Dictionary) -> void:
 	if target == null or not is_instance_valid(target) or target.is_queued_for_deletion(): return
 	
 	# --- 1. Dégâts ---
-	var ignite_stacks: int = target.stats.ignite_stacks
-
-	
+	var ignite_stacks: float = target.stats.ignite_stacks
 	var dmg_mult: float = _fire_stats.cosmic_bolt_damage_per_stack
-	var damage: int = int(float(ignite_stacks) * dmg_mult)
+	var damage: float = ignite_stacks * dmg_mult
 	
 	if damage > 0:
 		_owner.direct_attack(target, damage, Utils.DamageType.MAGICAL)

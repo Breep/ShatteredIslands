@@ -171,11 +171,12 @@ func _cast_meteor(target: Entity, spell_modifier: Dictionary) -> void:
 	_owner.signal_spell_casted(target, Spell.Type.METEOR)
 	var meteor: Meteor = METEOR_SCENE.instantiate()
 	if multiplayer.is_server():
-		var ignite_stacks: int = spell_modifier[Spell.MeteorModifier.IGNITE_STACKS]
-		var damage_per_stack: int = spell_modifier[Spell.MeteorModifier.DAMAGE_PER_STACK]
-		meteor.init(target, ignite_stacks, damage_per_stack, _owner)
+		var ignite_stacks: int = spell_modifier.get(Spell.MeteorModifier.IGNITE_STACKS, 0)
+		var damage_per_stack: int = spell_modifier.get(Spell.MeteorModifier.DAMAGE_PER_STACK, 0)
+		var on_hit_callbacks: Array[Callable] = spell_modifier.get(Spell.MeteorModifier.ON_HIT_CALLBACKS, [])
+		meteor.init(target, ignite_stacks, damage_per_stack, on_hit_callbacks, _owner)
 	else:
-		meteor.init(target, 0, 0, _owner)
+		meteor.init(target, 0, 0, [], _owner)
 	_spawn_manager.spawn_spell(meteor)
 
 

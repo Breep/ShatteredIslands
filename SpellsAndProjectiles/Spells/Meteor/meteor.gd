@@ -1,6 +1,8 @@
 class_name Meteor
 extends Node3D
 
+var _on_hit_callbacks: Array[Callable]
+
 var _entities_inside: Array[Entity] # Array of all character inside the area
 
 var _owner: Entity # Owner of this healing fire area
@@ -12,11 +14,12 @@ const DEPLOY_TIME: float = 2.0 # Time for the metor to fall on the ground (in s)
 
 @onready var _deploy_timer: Timer = %DeployTimer
 
-func init(target: Entity, ignite_stacks: int, damage_per_stacks: int, source: Entity = null) -> void:
+func init(target: Entity, ignite_stacks: int, damage_per_stacks: int, on_hit_callbacks:Array[Callable], source: Entity = null) -> void:
 	_owner = source
 	_target = target
 	_ignite_stacks = ignite_stacks
 	_damage_per_stacks = damage_per_stacks
+	_on_hit_callbacks = on_hit_callbacks
 
 
 func _ready() -> void:
@@ -44,6 +47,7 @@ func _on_deploy_timer_timeout() -> void:
 	if _owner == null or _owner.is_queued_for_deletion(): return
 	if not multiplayer.is_server(): return
 	
+	# Deal damage
 	for entity in _entities_inside:
 		if entity == null or entity.is_queued_for_deletion(): pass
 		elif entity.team != _owner.team:
@@ -53,4 +57,11 @@ func _on_deploy_timer_timeout() -> void:
 			else:
 				entity.take_condition_stacks(_ignite_stacks, Utils.StackType.IGNITE, false)
 				entity.take_damage(entity.stats.ignite_stacks * _damage_per_stacks, Utils.DamageType.MAGICAL)
+	
+	# Do optional stuffs
+	for callback in _on_hit_callbacks:
+		if callback.is_valid():
+			callback.call(
+				
+			)
 	queue_free()
