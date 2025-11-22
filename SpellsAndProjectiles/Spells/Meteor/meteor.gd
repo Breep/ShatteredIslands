@@ -7,18 +7,22 @@ var _entities_inside: Array[Entity] # Array of all character inside the area
 
 var _owner: Entity # Owner of this healing fire area
 var _target: Entity
-var _ignite_stacks: int
-var _damage_per_stacks: int
+var _damage_percent: float
+var _radius: float
 
 const DEPLOY_TIME: float = 2.0 # Time for the metor to fall on the ground (in s)
 
+enum VarType { # Variable types of the callbacks dictionary
+	ENTITIES_INSIDE
+}
+
 @onready var _deploy_timer: Timer = %DeployTimer
 
-func init(target: Entity, ignite_stacks: int, damage_per_stacks: int, on_hit_callbacks:Array, source: Entity = null) -> void:
+func init(target: Entity, damage_percent: float, radius: float, on_hit_callbacks:Array = [], source: Entity = null) -> void:
 	_owner = source
 	_target = target
-	_ignite_stacks = ignite_stacks
-	_damage_per_stacks = damage_per_stacks
+	_damage_percent = damage_percent
+	_radius = radius
 	_on_hit_callbacks = on_hit_callbacks
 
 
@@ -52,16 +56,14 @@ func _on_deploy_timer_timeout() -> void:
 		if entity == null or entity.is_queued_for_deletion(): pass
 		elif entity.team != _owner.team:
 			if _owner != null:
-				_owner.inflict_condition_stacks(entity, _ignite_stacks, Utils.StackType.IGNITE)
-				_owner.direct_attack(entity, entity.stats.ignite_stacks * _damage_per_stacks, Utils.DamageType.MAGICAL)
+				_owner.direct_attack_percent(entity, _damage_percent, Utils.DamageType.MAGICAL, Utils.PercentModifier.MAX_HP)
 			else:
-				entity.take_condition_stacks(_ignite_stacks, Utils.StackType.IGNITE, false)
-				entity.take_damage(entity.stats.ignite_stacks * _damage_per_stacks, Utils.DamageType.MAGICAL)
+				entity.take_damage_percent(_damage_percent, Utils.PercentModifier.MAX_HP, Utils.DamageType.MAGICAL)
 	
 	# Do optional stuffs
 	for callback in _on_hit_callbacks:
 		if callback.is_valid():
-			callback.call(
-				
-			)
+			callback.call({
+				VarType.ENTITIES_INSIDE: _entities_inside,
+			})
 	queue_free()

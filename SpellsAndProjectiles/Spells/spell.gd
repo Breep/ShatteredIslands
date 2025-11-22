@@ -10,7 +10,7 @@ enum Type {
 	LIGHTNING
 }
 
-enum MeteorModifier { IGNITE_STACKS, DAMAGE_PER_STACK, ON_HIT_CALLBACKS }
+enum MeteorModifier { DAMAGE_PERCENT, RADIUS, ON_HIT_CALLBACKS }
 enum DarkStormModifier { DAMAGE, PERIOD, LIFESPAN, PAIN_STACK_PERCENT }
 enum ContagionModifier { RADIUS, SPREAD_PERCENT }
 enum ShroomModifier { RADIUS, DAMAGE, LIFE_TIME }
