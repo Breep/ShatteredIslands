@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_epane"]
 script = ExtResource("2_y0wnm")
-_crit_chance = Array[float]([80.0, 40.0, 60.0, 80.0, 100.0])
+_crit_chance = Array[float]([10.0, 20.0, 30.0, 40.0, 50.0])
 _rarity = 0
 metadata/_custom_type_script = "uid://ybpnkcveh61t"
 

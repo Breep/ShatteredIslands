@@ -9,6 +9,9 @@ var _fire_stats: FamilyFireStats # Ref to the owner fire stats
 
 var _meteor_modifiers: Array
 
+# [TITANS PROTECTION]
+var _titans_protection_accumulated_hp: float = 0.0
+
 # ============================== Local nodes ==============================
 
 @onready var _ignite_timer: Timer = %IgniteTimer
@@ -32,6 +35,8 @@ func start() -> void:
 	_add_action_modifiers()
 	_add_stack_modifiers()
 	_add_meteor_modifiers()
+	# [TITANS PROTECTION] Reset
+	var _titans_protection_accumulated_hp = 0.0
 
 
 func stop() -> void:
@@ -81,6 +86,14 @@ func _add_meteor_modifiers() -> void:
 # [KUIPER BELT]
 	if _fire_stats.kuiper_belt_activated:
 		_meteor_modifiers.append(_on_kuiper_belt_meteor_hit)
+	
+	# [TITANS PROTECTION]
+	if _fire_stats.titans_protection_activated:
+		_meteor_modifiers.append(_on_titans_protection_meteor_hit)
+		
+		# [CONSUMING THE STAR]
+	if _fire_stats.consuming_the_star_activated:
+		_meteor_modifiers.append(_on_consuming_the_star_meteor_hit)
 
 func _clear_meteor_modifiers() -> void:
 	_meteor_modifiers.clear()
@@ -108,6 +121,13 @@ func _clear_stat_modifiers() -> void:
 		mod.stat_type = EntityStats.StatType.DODGE
 		mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
 		mod.id = "Dark Forest"
+		_owner.stats_manager.unregister_modifier(mod)
+	
+	# [TITANS PROTECTION] (AJOUTÉ ICI)
+	if _fire_stats.titans_protection_activated:
+		var mod := StatModifier.new()
+		mod.id = "Fire Titan Protection"
+		mod.stat_type = EntityStats.StatType.HEALTH_MAX
 		_owner.stats_manager.unregister_modifier(mod)
 #endregion
 
@@ -194,6 +214,43 @@ func _on_dodge_dark_forest(_cb_vars: Dictionary) -> void:
 	if target != null:
 		_owner.inflict_condition_stacks(target, _fire_stats.dark_forest_ignite_stacks, Utils.StackType.IGNITE)
 		
+#region ===== CONSUMING THE STAR =====
+
+# [CONSUMING THE STAR]
+func _on_consuming_the_star_meteor_hit(cb_vars: Dictionary) -> void:
+	var entities_inside: Array = cb_vars.get(Meteor.VarType.ENTITIES_INSIDE, [])
+	if entities_inside.is_empty(): return
+	
+	var burn_amount: float = _fire_stats.consuming_the_star_mana_burn
+	
+	for entity: Entity in entities_inside:
+		if entity != null and is_instance_valid(entity) and entity.team != _owner.team:
+			if entity.stats.mana > 0:
+				entity.stats.mana = max(0.0, entity.stats.mana - burn_amount)
+
+#endregion
+
+#region =====TITANS PROTECTION =====
+
+# [TITANS PROTECTION]
+func _on_titans_protection_meteor_hit(cb_vars: Dictionary) -> void:
+	if _owner == null or not is_instance_valid(_owner): return
+	
+	var amount: float = _fire_stats.titans_protection_hp_amount
+	
+	if amount > 0:
+		_titans_protection_accumulated_hp += amount
+		
+		var mod := StatModifier.new()
+		mod.id = "Fire Titan Protection" 
+		mod.stat_type = EntityStats.StatType.HEALTH_MAX
+		mod.calc_type = StatModifier.CalcType.ADD
+		mod.value = _titans_protection_accumulated_hp 
+		mod.tags = [StatModifier.TagType.CARD]
+		_owner.stats_manager.update_modifier(mod)
+
+#endregion
+
 #region ========== HUIPER BELT ==========
 # [KUIPER BELT]
 func _on_kuiper_belt_meteor_hit(cb_vars: Dictionary) -> void:

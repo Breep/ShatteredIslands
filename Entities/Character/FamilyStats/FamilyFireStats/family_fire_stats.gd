@@ -15,6 +15,15 @@ var expanse_universe_period: float
 # [KUIPER BELT]
 var kuiper_belt_activated: bool
 var kuiper_belt_shield_amount: float
+
+# [TITANS PROTECTION]
+var titans_protection_activated: bool
+var titans_protection_hp_amount: float
+
+# [CONSUMING THE STAR]
+var consuming_the_star_activated: bool
+var consuming_the_star_mana_burn: float
+
 #endregion
 
 
