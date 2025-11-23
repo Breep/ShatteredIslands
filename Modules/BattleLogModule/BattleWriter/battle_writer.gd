@@ -37,7 +37,7 @@ func get_current_logs() -> Array[Dictionary]:
 
 # ============================== Private functions ==============================
 
- #{"time":0.1, "type":"auto_attack", "source":1, "target":2, "modifier":{"critical":true, "poison":false, "ignite":false, "instability":true}}
+#{"time":0.1, "type":"auto_attack", "source":1, "target":2, "modifier":{"critical":true, "poison":false, "ignite":false, "instability":true}}
 func _log_attack(source: Entity, target: Entity,
 				critical: bool = false, poison: bool = false, ignite: bool = false, instability: bool = false) -> void:
 	var data: Dictionary = {

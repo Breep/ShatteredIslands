@@ -116,7 +116,6 @@ func take_dispell(value: float, _is_critical: bool, _source: Entity = null) -> f
 
 	var remaining: int = total_to_dispell
 	var removed: int = 0
-	print("\n\n\n")
 	while remaining > 0 and _owner.stats.get_buf_stacks_number() > 0:
 		var candidates: Array[Utils.StackType] = []
 		if _owner.stats.armor_stacks > 0: candidates.append(Utils.StackType.ARMOR)
