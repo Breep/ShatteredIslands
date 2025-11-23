@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://f2n7hccdooke"]
+[gd_scene load_steps=28 format=3 uid="uid://f2n7hccdooke"]
 
 [ext_resource type="Script" uid="uid://bu48b2v401db2" path="res://Prototyping/FightingIsland/prototyping_map.gd" id="1_oc45v"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="2_5t2nw"]
@@ -19,9 +19,10 @@
 [ext_resource type="Resource" uid="uid://mr4x6u0j5sbf" path="res://Card/Descriptions/Cards/Defense/Common/EnergyBarrier/shieldomatic_energy_barrier.tres" id="10_cyskk"]
 [ext_resource type="Resource" uid="uid://c3qf5odp5y6ap" path="res://Card/Descriptions/Cards/Light/Common/LifeSpring/light_life_spring.tres" id="10_qouoy"]
 [ext_resource type="PackedScene" uid="uid://bhxhqex1pbh2p" path="res://UI/InGame/FightingArea/ui_fighting_area.tscn" id="11_blmm3"]
+[ext_resource type="Resource" uid="uid://cki0jkayic783" path="res://Card/Descriptions/Cards/Storm/Common/Storm Battery/storm_storm_battery.tres" id="11_lx1e4"]
 [ext_resource type="Resource" uid="uid://c88cqm481bhcu" path="res://Card/Descriptions/Cards/Defense/Common/ShieldRush/shieldomatic_shield_rush.tres" id="11_q4r27"]
 [ext_resource type="Resource" uid="uid://c2fbdsokd2ayt" path="res://Card/Descriptions/Cards/Defense/Epic/AegisResonator/shieldomatic_aegis_resonator.tres" id="12_qouoy"]
-[ext_resource type="Resource" uid="uid://kbmlikqifik1" path="res://Card/Descriptions/Cards/Storm/Common/StormBreaker/storm_storm_breaker.tres" id="17_7n5st"]
+[ext_resource type="Resource" uid="uid://kbmlikqifik1" path="res://Card/Descriptions/Cards/Storm/Rare/StormBreaker/storm_storm_breaker.tres" id="17_7n5st"]
 
 [sub_resource type="NoiseTexture3D" id="NoiseTexture3D_4fa74"]
 
@@ -52,7 +53,7 @@ volumetric_fog_density = 0.0
 
 [node name="PrototypingMap" type="Node3D" node_paths=PackedStringArray("_characters", "_floating_island")]
 script = ExtResource("1_oc45v")
-_player1_cards = Array[ExtResource("2_5t2nw")]([ExtResource("8_4ych6"), ExtResource("4_5t2nw"), ExtResource("5_y3vk0"), ExtResource("6_a1wsu"), ExtResource("7_4gryv"), ExtResource("8_4gryv"), ExtResource("9_qouoy"), ExtResource("10_58xxc")])
+_player1_cards = Array[ExtResource("2_5t2nw")]([ExtResource("8_4ych6"), ExtResource("4_5t2nw"), ExtResource("5_y3vk0"), ExtResource("6_a1wsu"), ExtResource("7_4gryv"), ExtResource("8_4gryv"), ExtResource("9_qouoy"), ExtResource("10_58xxc"), ExtResource("11_lx1e4")])
 _player2_cards = Array[ExtResource("2_5t2nw")]([ExtResource("9_q4r27"), ExtResource("10_qouoy")])
 _player3_cards = Array[ExtResource("2_5t2nw")]([ExtResource("9_nlwjv"), ExtResource("10_cyskk"), ExtResource("11_q4r27"), ExtResource("12_qouoy"), ExtResource("7_4gryv"), ExtResource("17_7n5st")])
 _player4_cards = Array[ExtResource("2_5t2nw")]([ExtResource("9_nlwjv"), ExtResource("10_cyskk"), ExtResource("11_q4r27"), ExtResource("17_7n5st")])

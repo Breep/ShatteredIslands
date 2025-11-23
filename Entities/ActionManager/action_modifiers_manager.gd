@@ -12,6 +12,7 @@ func _init() -> void:
 		ActionModifier.ActionType.HEAL: ActionModifiersDictionary.new(),
 		ActionModifier.ActionType.DODGE: ActionModifiersDictionary.new(),
 	}
+	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 
 func register_modifier(action_modifier: ActionModifier) -> void:
 	var action_type: ActionModifier.ActionType = action_modifier.action_type
@@ -34,3 +35,16 @@ func get_all_modifiers(action_type: ActionModifier.ActionType) -> Array[ActionMo
 
 func consume_all_modifiers(action_type: ActionModifier.ActionType) -> Array[ActionModifier]:
 	return _action_modifiers_dictionaries[action_type].consume_all_modifiers()
+	
+# ============================== Private functions ==============================
+
+func _auto_cleanup_all() -> void:
+	for smd: ActionModifiersDictionary in _action_modifiers_dictionaries.values():
+		smd.auto_cleanup()
+
+# ============================== Callbacks ==============================
+
+func _on_game_manager_game_state_changed(game_state: Game.GameState) -> void:
+	match game_state:
+		Game.GameState.FIGHTING_FINISHED:
+			_auto_cleanup_all()

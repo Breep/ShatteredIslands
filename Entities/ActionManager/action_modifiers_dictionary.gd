@@ -30,3 +30,9 @@ func consume_all_modifiers() -> Array[ActionModifier]:
 		if _modifiers[mod_id].is_one_time_effect:
 			_modifiers.erase(mod_id)
 	return modifiers
+
+func auto_cleanup() -> void:
+	for modifier: ActionModifier in _modifiers.values().duplicate():
+		if modifier.auto_cleanup:
+			#print("DEBUG -> auto cleaning [", modifier.id, "]")
+			_modifiers.erase(modifier.id)

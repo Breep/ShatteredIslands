@@ -7,6 +7,10 @@ extends FamilyStats
 var storm_breaker_activated: bool
 var storm_breaker_base_reduction_percent: float 
 
+# [STORM BATTERY]
+var storm_battery_activated: bool
+var storm_battery_mana_gain: float
+
 #endregion
 
 #region Rare Card

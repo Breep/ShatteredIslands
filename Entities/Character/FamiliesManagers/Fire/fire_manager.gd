@@ -41,8 +41,6 @@ func start() -> void:
 func stop() -> void:
 	_clear_meteor_modifiers()
 	_clear_stack_modifiers()
-	_remove_action_modifiers()
-	_clear_stat_modifiers()
 	for spell in _optional_spells:
 		spell.queue_free()
 	_ignite_timer.stop()
@@ -128,30 +126,6 @@ func _add_stat_modifiers() -> void:
 		mod.tags = [StatModifier.TagType.CARD]
 		_owner.stats_manager.register_modifier(mod)
 
-
-func _clear_stat_modifiers() -> void:
-	# [DARK FOREST]
-	if _fire_stats.dark_forest_activated:
-		var mod := StatModifier.new()
-		mod.stat_type = EntityStats.StatType.DODGE
-		mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
-		mod.id = "Dark Forest"
-		_owner.stats_manager.unregister_modifier(mod)
-	
-	# [TITANS PROTECTION]
-	if _fire_stats.titans_protection_activated and _titans_protection_accumulated_hp > 0:
-		var mod := StatModifier.new()
-		mod.id = "Fire Titan Protection"
-		mod.stat_type = EntityStats.StatType.HEALTH_MAX
-		_owner.stats_manager.unregister_modifier(mod)
-	
-	# [ORBITAL STATION]
-	if _fire_stats.orbital_station_activated:
-		var mod := StatModifier.new()
-		mod.id = "Orbital Station"
-		mod.stat_type = EntityStats.StatType.CRIT_CHANCE
-		mod.action_type = Utils.ActionType.STACK_IGNITE
-		_owner.stats_manager.unregister_modifier(mod)
 #endregion
 
 #region actions modifier
@@ -165,14 +139,6 @@ func _add_action_modifiers() -> void:
 		action_modifier.after_action_logic_callback = _on_dodge_dark_forest
 		_owner.action_modifiers_manager.register_modifier(action_modifier)
 
-func _remove_action_modifiers() -> void:
-	# [DARK FOREST]
-	if _fire_stats.dark_forest_activated:
-		var action_modifier := ActionModifier.new()
-		action_modifier.action_type = ActionModifier.ActionType.DODGE
-		action_modifier.id = "Dark Forest"
-		action_modifier.after_action_logic_callback = _on_dodge_dark_forest
-		_owner.action_modifiers_manager.unregister_modifier(action_modifier)
 #endregion
 
 #region on inflict stacks modifier

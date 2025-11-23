@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://by0kkcp7onvge"
-path="res://.godot/imported/storm_storm_breaker.jpg-bf50083d2ddde05a700ad1e95f2c449f.ctex"
+path="res://.godot/imported/storm_storm_breaker.jpg-bf472beb7db07f04705ebb85c43536bc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Card/Descriptions/Cards/Storm/Common/StormBreaker/storm_storm_breaker.jpg"
-dest_files=["res://.godot/imported/storm_storm_breaker.jpg-bf50083d2ddde05a700ad1e95f2c449f.ctex"]
+source_file="res://Card/Descriptions/Cards/Storm/Rare/StormBreaker/storm_storm_breaker.jpg"
+dest_files=["res://.godot/imported/storm_storm_breaker.jpg-bf472beb7db07f04705ebb85c43536bc.ctex"]
 
 [params]
 

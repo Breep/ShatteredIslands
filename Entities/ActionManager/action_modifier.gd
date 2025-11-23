@@ -28,6 +28,7 @@ var id: StringName
 var action_type: ActionType
 var tags: Array[TagType]
 var is_one_time_effect: bool = true
+var auto_cleanup: bool = true
 
 var before_action_logic_callback := Callable() # var: Dictionary
 var after_action_logic_callback := Callable() # var: Dictionary
