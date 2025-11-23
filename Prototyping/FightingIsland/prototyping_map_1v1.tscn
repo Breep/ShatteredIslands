@@ -2,8 +2,13 @@
 
 [ext_resource type="Script" uid="uid://bu48b2v401db2" path="res://Prototyping/FightingIsland/prototyping_map.gd" id="1_vksg0"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="2_vksg0"]
+<<<<<<< Updated upstream
 [ext_resource type="Resource" uid="uid://db0b7kkosks20" path="res://Card/Descriptions/Cards/Poison/Common/Antidote/poison_antidote.tres" id="3_dlg3x"]
 [ext_resource type="Resource" uid="uid://bhogu6m1synt8" path="res://Card/Descriptions/Cards/Attack/Common/DiamondSword/attack_diamond_sword.tres" id="4_kngc2"]
+=======
+[ext_resource type="Resource" uid="uid://lypcpcn4pc4a" path="res://Card/Descriptions/Cards/Light/Common/HolyTouch/light_holy_touch.tres" id="4_dlg3x"]
+[ext_resource type="Resource" uid="uid://kbmlikqifik1" path="res://Card/Descriptions/Cards/Storm/Common/StormBreaker/storm_storm_breaker.tres" id="4_kngc2"]
+>>>>>>> Stashed changes
 [ext_resource type="PackedScene" uid="uid://drcuyohos0doa" path="res://FloatingIsland/FightingIsland/fighting_island.tscn" id="6_sp80o"]
 [ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Entities/Character/character.tscn" id="7_pc3mw"]
 [ext_resource type="PackedScene" uid="uid://bhxhqex1pbh2p" path="res://UI/InGame/FightingArea/ui_fighting_area.tscn" id="7_wwtbg"]
@@ -39,12 +44,17 @@ volumetric_fog_density = 0.0
 
 [node name="PrototypingMap" type="Node3D" node_paths=PackedStringArray("_characters", "_floating_island")]
 script = ExtResource("1_vksg0")
+<<<<<<< Updated upstream
 _player1_cards = Array[ExtResource("2_vksg0")]([ExtResource("3_dlg3x"), ExtResource("4_kngc2")])
+=======
+_player1_cards = Array[ExtResource("2_vksg0")]([ExtResource("4_dlg3x")])
+_player2_cards = Array[ExtResource("2_vksg0")]([ExtResource("4_dlg3x"), ExtResource("4_kngc2")])
+>>>>>>> Stashed changes
 _characters = [NodePath("DarkKnight"), NodePath("Character2")]
 _floating_island = NodePath("FightingIsland")
 
 [node name="FightingIsland" parent="." instance=ExtResource("6_sp80o")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.007268429, -0.027750969, 0.01330471)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.056681156, -0.10216141, 0.17525864)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.88089, 0.0799744, 0.466517, -0.360914, 0.751164, 0.552716, -0.306227, -0.655254, 0.690556, 0, 52.8971, 0)

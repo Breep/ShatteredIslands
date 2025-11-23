@@ -1,4 +1,4 @@
-class_name SurgicalKnife
+class_name AttackSurgicalKnife
 extends CharacterUpgrade
 
 @export var _chance: Array[float] 

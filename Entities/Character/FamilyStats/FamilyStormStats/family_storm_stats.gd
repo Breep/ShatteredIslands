@@ -3,9 +3,14 @@ extends FamilyStats
 
 #region Common Card
 
+# [STORM BREAKER]
+var storm_breaker_activated: bool
+var storm_breaker_base_reduction_percent: float 
+
 #endregion
 
 #region Rare Card
+
 #endregion
 
 #region Epic Card
