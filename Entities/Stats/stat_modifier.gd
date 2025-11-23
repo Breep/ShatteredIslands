@@ -24,3 +24,4 @@ var id: StringName
 var calc_type: CalcType
 var value: float
 var tags: Array[TagType]
+var auto_cleanup: bool = true

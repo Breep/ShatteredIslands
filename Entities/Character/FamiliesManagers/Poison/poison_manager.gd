@@ -137,12 +137,7 @@ func _add_stat_modifiers() -> void:
 		_owner.stats_manager.register_modifier(mod)
 
 func _clear_stat_modifiers() -> void:
-	if _poison_stats.poison_antidote_activated:
-		var mod := StatModifier.new()
-		mod.stat_type = EntityStats.StatType.RESISTANCE
-		mod.action_type = Utils.ActionType.DAMAGE_POISON
-		mod.id = "Antidote"
-		_owner.stats_manager.unregister_modifier(mod)
+	pass
 #endregion
 
 #region ===== AUTO ATTACK MODIFIERS =====

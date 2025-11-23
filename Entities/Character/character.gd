@@ -91,7 +91,6 @@ func apply_cards_upgrade(deck: PlayerDeck) -> void:
 func connect_to_fighting_area(fighting_area: FightingArea) -> void:
 	_reset()
 	_character_logic.connect_to_fighting_area(fighting_area)
-	print("[DEBUG_A] ", entity_name, " connecting to fighting area signal - ", fighting_area)
 	fighting_area.fighting_manager.fight_is_over.connect(_on_fighting_manager_fight_is_over, CONNECT_ONE_SHOT)
 
 
@@ -259,7 +258,6 @@ func _handle_death() -> void:
 # ============================== Other callbacks ==============================
 
 func _on_fighting_manager_fight_is_over(_fighting_manager, _winner_team) -> void:
-	print("[DEBUG_A] ", entity_name, " receive fight is over signal")
 	_character_logic.stop()
 
 

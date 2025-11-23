@@ -35,6 +35,7 @@ func register_modifier(stat_modifier: StatModifier) -> void:
 		printerr("StatModifierDictionary: register_modifier() - already known stat modifier \"", modifier_id, "\" [", _stat_type, "]")
 		return
 	
+	#print("DEBUG -> register_modifier [", modifier_id, "]")
 	if _is_multiple_stats():
 		_modifiers_per_action_type[stat_modifier.action_type][modifier_id] = stat_modifier
 	else:
@@ -49,6 +50,7 @@ func update_modifier(stat_modifier: StatModifier) -> void:
 		return
 	
 	var modifier_id: String = stat_modifier.id
+	#print("DEBUG -> update_modifier [", modifier_id, "]")
 	if _is_multiple_stats():
 		_modifiers_per_action_type[stat_modifier.action_type][modifier_id] = stat_modifier
 	else:
@@ -63,6 +65,7 @@ func unregister_modifier(stat_modifier: StatModifier) -> void:
 		return
 	
 	var modifier_id: String = stat_modifier.id
+	#print("DEBUG -> unregister_modifier [", modifier_id, "]")
 	if _is_multiple_stats():
 		if not _modifiers_per_action_type[stat_modifier.action_type].has(modifier_id):
 			printerr("EntityStatsManager: unregister_modifier() - unknown multiple stats modifier \"", modifier_id, "\" [", _stat_type, "]")
@@ -75,6 +78,20 @@ func unregister_modifier(stat_modifier: StatModifier) -> void:
 		_modifiers.erase(modifier_id)
 	
 	_recompute_stats()
+
+
+func auto_cleanup() -> void:
+	if _is_multiple_stats():
+		for action_type: Utils.ActionType in _modifiers_per_action_type.keys():
+			for modifier: StatModifier in _modifiers_per_action_type[action_type].values().duplicate():
+				if modifier.auto_cleanup:
+					#print("DEBUG -> auto cleaning [", modifier.id, "]")
+					_modifiers_per_action_type[action_type].erase(modifier.id)
+	else:
+		for modifier: StatModifier in _modifiers.values().duplicate():
+			if modifier.auto_cleanup:
+				#print("DEBUG -> auto cleaning [", modifier.id, "]")
+				_modifiers.erase(modifier.id)
 
 # ============================== Private functions ==============================
 
