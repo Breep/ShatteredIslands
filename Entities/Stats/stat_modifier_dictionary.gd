@@ -59,7 +59,7 @@ func update_modifier(stat_modifier: StatModifier) -> void:
 func unregister_modifier(stat_modifier: StatModifier) -> void:
 	var stat_type: EntityStats.StatType = stat_modifier.stat_type
 	if stat_type != _stat_type:
-		printerr("StatModifierDictionary: register_modifier() - Trying to unregister a modifier for an other stat type \"", stat_type, "\" [", _stat_type, "]")
+		printerr("StatModifierDictionary: unregister_modifier() - Trying to unregister a modifier for an other stat type \"", stat_type, "\" [", _stat_type, "]")
 		return
 	
 	var modifier_id: String = stat_modifier.id
