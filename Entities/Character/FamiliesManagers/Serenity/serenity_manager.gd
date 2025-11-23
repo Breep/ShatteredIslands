@@ -116,23 +116,24 @@ func _clear_stat_modifiers() -> void:
 		_owner.stats_manager.unregister_modifier(mod)
 	
 	# [MIRACLE LIGHT]
-	var heal_mod := StatModifier.new()
-	heal_mod.id = "Miracle Light"
-	heal_mod.stat_type = EntityStats.StatType.CRIT_CHANCE
-	heal_mod.action_type = Utils.ActionType.UTILITY_HEAL
-	_owner.stats_manager.unregister_modifier(heal_mod)
-	
-	var cleanse_mod := StatModifier.new()
-	cleanse_mod.id = "Miracle Light"
-	cleanse_mod.stat_type = EntityStats.StatType.CRIT_CHANCE
-	cleanse_mod.action_type = Utils.ActionType.UTILITY_CLEANSE 
-	_owner.stats_manager.unregister_modifier(cleanse_mod)
-	
-	var regen_mod := StatModifier.new()
-	regen_mod.id = "Miracle Light"
-	regen_mod.stat_type = EntityStats.StatType.CRIT_CHANCE
-	regen_mod.action_type = Utils.ActionType.STACK_REGEN
-	_owner.stats_manager.unregister_modifier(regen_mod)
+	if _serenity_stats.miracle_light_activated:
+		var heal_mod := StatModifier.new()
+		heal_mod.id = "Miracle Light"
+		heal_mod.stat_type = EntityStats.StatType.CRIT_CHANCE
+		heal_mod.action_type = Utils.ActionType.UTILITY_HEAL
+		_owner.stats_manager.unregister_modifier(heal_mod)
+		
+		var cleanse_mod := StatModifier.new()
+		cleanse_mod.id = "Miracle Light"
+		cleanse_mod.stat_type = EntityStats.StatType.CRIT_CHANCE
+		cleanse_mod.action_type = Utils.ActionType.UTILITY_CLEANSE 
+		_owner.stats_manager.unregister_modifier(cleanse_mod)
+		
+		var regen_mod := StatModifier.new()
+		regen_mod.id = "Miracle Light"
+		regen_mod.stat_type = EntityStats.StatType.CRIT_CHANCE
+		regen_mod.action_type = Utils.ActionType.STACK_REGEN
+		_owner.stats_manager.unregister_modifier(regen_mod)
 #endregion
 
 #region action modifier

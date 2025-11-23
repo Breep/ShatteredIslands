@@ -149,7 +149,6 @@ func _clear_attack_modifiers() -> void:
 
 #region stat modifier
 func _add_stat_modifiers() -> void:
-	
 	# [FIGHT BACK]
 	if _attack_stats.fight_back_activated:
 		var mod := StatModifier.new()
@@ -159,7 +158,7 @@ func _add_stat_modifiers() -> void:
 		mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
 		mod.id = "Fight Back"
 		_owner.stats_manager.register_modifier(mod)
-		
+	
 	# [DIAMOND SWORD]
 	if _attack_stats.diamond_sword_activated:
 		var stat_modifier := StatModifier.new()
@@ -179,10 +178,9 @@ func _add_stat_modifiers() -> void:
 		stat_modifier.value = _attack_stats.twin_blade_speed / 100.0
 		stat_modifier.tags = [StatModifier.TagType.CARD]
 		_owner.stats_manager.register_modifier(stat_modifier)
-		
-		
+
+
 func _clear_stat_modifiers() -> void:
-	
 	# [FIGHT BACK]
 	if _attack_stats.fight_back_activated:
 		var mod := StatModifier.new()
@@ -191,12 +189,13 @@ func _clear_stat_modifiers() -> void:
 		mod.id = "Fight Back"
 		_owner.stats_manager.unregister_modifier(mod)
 	
-	# [FIGHT BACK AD] (AD Cumulatif)
-	var ad_mod := StatModifier.new()
-	ad_mod.id = "Fight Back"
-	ad_mod.stat_type = EntityStats.StatType.AD
-	_owner.stats_manager.unregister_modifier(ad_mod)
-		
+		# [FIGHT BACK] - AD
+		if _dodge_number > 0:
+			var ad_mod := StatModifier.new()
+			ad_mod.id = "Fight Back"
+			ad_mod.stat_type = EntityStats.StatType.AD
+			_owner.stats_manager.unregister_modifier(ad_mod)
+	
 	# [DIAMOND SWORD]
 	if _attack_stats.diamond_sword_activated:
 		var mod := StatModifier.new()
@@ -217,13 +216,10 @@ func _clear_stat_modifiers() -> void:
 		mod.id = "Blade Rush"
 		mod.stat_type = EntityStats.StatType.AD
 		_owner.stats_manager.unregister_modifier(mod)
-		
 #endregion
 
 #region action modifier
-
 func _add_action_modifiers() -> void:
-
 	# [FIGHT BACK]
 	if _attack_stats.fight_back_activated:
 		var action_modifier := ActionModifier.new()
@@ -232,10 +228,9 @@ func _add_action_modifiers() -> void:
 		action_modifier.is_one_time_effect = false
 		action_modifier.after_action_logic_callback = _on_dodge_fight_back
 		_owner.action_modifiers_manager.register_modifier(action_modifier)
-		
+
 
 func _remove_action_modifiers() -> void:
-	
 	# [FIGHT BACK]
 	if _attack_stats.fight_back_activated:
 		var action_modifier := ActionModifier.new()
@@ -243,11 +238,10 @@ func _remove_action_modifiers() -> void:
 		action_modifier.id = "Fight Back"
 		action_modifier.after_action_logic_callback = _on_dodge_fight_back
 		_owner.action_modifiers_manager.unregister_modifier(action_modifier)
-		
 #endregion
 
-#region other card
 
+#region other card
 # [BLADE RUSH]
 func _apply_blade_rush() -> void:
 	var stat_modifier := StatModifier.new()
@@ -265,13 +259,12 @@ func _apply_blade_rush() -> void:
 	timer.timeout.connect(_on_blade_rush_timeout)
 	_optional_timers.append(timer)
 	timer.start()
-
 #endregion
 
 # ============================== Callbacks functions ==============================
 
+# [GATLING GUN]
 func _on_gatling_gun_timer_timeout() -> void:
-	# [GATLING GUN]
 	var time_elapsed: float = (Time.get_ticks_msec() - _on_gatling_gun_timer_start) / 1000.0
 	var attack_speed_boost: float = remap(time_elapsed, 0, _attack_stats.gatling_gun_duration, \
 			_attack_stats.gatling_gun_min, _attack_stats.gatling_gun_max)
@@ -319,9 +312,9 @@ func _on_auto_attack_scorching_blade(cb_vars: Dictionary) -> void:
 	if ignite_stacks > 0:
 		_owner.inflict_condition_stacks(target, ignite_stacks, Utils.StackType.IGNITE)
 
+
+# [RUSTY DAGGER]
 func _on_auto_attack_rusty_dagger(cb_vars: Dictionary) -> void:
-	
-	# [RUSTY DAGGER]
 	if not cb_vars.has(AutoAttackModifier.VarType.PROJECTILE_STATS): 
 		printerr("Rusty Dagger: cb_vars n'a pas de PROJECTILE_STATS")
 		return
@@ -331,9 +324,8 @@ func _on_auto_attack_rusty_dagger(cb_vars: Dictionary) -> void:
 		proj_stats.poison_stacks += _attack_stats.rusty_dagger_poison_stacks
 
 
+# [SCORCHING BLADE]
 func _on_hit_scorching_blade(cb_vars: Dictionary) -> void:
-	
-	# [SCORCHING BLADE]
 	if not cb_vars.has(AutoAttackModifier.VarType.PHYSICAL_DAMAGE): 
 		printerr("Scorching Blade (on_hit): cb_vars n'a pas de PHYSICAL_DAMAGE")
 		return
@@ -378,6 +370,7 @@ func _on_blade_rush_timeout() -> void:
 	mod.stat_type = EntityStats.StatType.AD
 	_owner.stats_manager.unregister_modifier(mod)
 
+
 func _on_attack_storm_hammer(cb_vars: Dictionary) -> void:
 	# [STORM HAMMER]
 	var chance: float = _attack_stats.storm_hammer_chance
@@ -390,7 +383,8 @@ func _on_attack_storm_hammer(cb_vars: Dictionary) -> void:
 		
 	var projectile_stat: ProjectileStats = cb_vars[AutoAttackModifier.VarType.PROJECTILE_STATS]
 	projectile_stat.is_bouncing = true
-	
+
+
 func _on_hit_arcane_staff(_cb_vars: Dictionary) -> void:
 	# [ARCANE STAFF]
 	var chance: float = _attack_stats.arcane_staff_chance

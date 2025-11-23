@@ -35,13 +35,12 @@ func start() -> void:
 	_add_action_modifiers()
 	_add_stack_modifiers()
 	_add_meteor_modifiers()
-	# [TITANS PROTECTION] Reset
-	var _titans_protection_accumulated_hp = 0.0
+	_titans_protection_accumulated_hp = 0.0
 
 
 func stop() -> void:
 	_clear_meteor_modifiers()
-	_add_stack_modifiers()
+	_clear_stack_modifiers()
 	_remove_action_modifiers()
 	_clear_stat_modifiers()
 	for spell in _optional_spells:
@@ -128,7 +127,8 @@ func _add_stat_modifiers() -> void:
 		mod.value = _fire_stats.orbital_station_crit_chance
 		mod.tags = [StatModifier.TagType.CARD]
 		_owner.stats_manager.register_modifier(mod)
-		
+
+
 func _clear_stat_modifiers() -> void:
 	# [DARK FOREST]
 	if _fire_stats.dark_forest_activated:
@@ -138,13 +138,13 @@ func _clear_stat_modifiers() -> void:
 		mod.id = "Dark Forest"
 		_owner.stats_manager.unregister_modifier(mod)
 	
-	# [TITANS PROTECTION] (AJOUTÉ ICI)
-	if _fire_stats.titans_protection_activated:
+	# [TITANS PROTECTION]
+	if _fire_stats.titans_protection_activated and _titans_protection_accumulated_hp > 0:
 		var mod := StatModifier.new()
 		mod.id = "Fire Titan Protection"
 		mod.stat_type = EntityStats.StatType.HEALTH_MAX
 		_owner.stats_manager.unregister_modifier(mod)
-		
+	
 	# [ORBITAL STATION]
 	if _fire_stats.orbital_station_activated:
 		var mod := StatModifier.new()
@@ -152,7 +152,6 @@ func _clear_stat_modifiers() -> void:
 		mod.stat_type = EntityStats.StatType.CRIT_CHANCE
 		mod.action_type = Utils.ActionType.STACK_IGNITE
 		_owner.stats_manager.unregister_modifier(mod)
-		
 #endregion
 
 #region actions modifier
@@ -188,6 +187,7 @@ func _add_stack_modifiers() -> void:
 		stack_modifier.is_one_time_effect = false
 		_owner.action_modifiers_manager.register_modifier(stack_modifier)
 
+
 func _clear_stack_modifiers() -> void:
 	# [FAMILY PASSIVE]
 	if true:
@@ -218,7 +218,6 @@ func _on_expanse_universe_timer_timeout() -> void:
 	var stacks: int = int(_fire_stats.expanse_universe_ignite_stacks)
 	if stacks > 0:
 		_owner.inflict_condition_stacks(target, stacks, Utils.StackType.IGNITE)
-
 #endregion
 
 #region ===== DARK FOREST =====
@@ -231,47 +230,35 @@ func _on_dodge_dark_forest(_cb_vars: Dictionary) -> void:
 #endregion
 
 #region ===== SCORPIUS =====
-
 # [SCORPIUS]
 func _on_scorpius_meteor_hit(cb_vars: Dictionary) -> void:
 	var entities_inside: Array = cb_vars.get(Meteor.VarType.ENTITIES_INSIDE, [])
 	if entities_inside.is_empty(): return
-	
 	var poison_amount: float = _fire_stats.scorpius_poison_stacks
-	
 	for entity: Entity in entities_inside:
 		if entity != null and is_instance_valid(entity) and entity.team != _owner.team:
 			_owner.inflict_condition_stacks(entity, int(poison_amount), Utils.StackType.POISON)
-
 #endregion
 
 #region ===== CONSUMING THE STAR =====
-
 # [CONSUMING THE STAR]
 func _on_consuming_the_star_meteor_hit(cb_vars: Dictionary) -> void:
 	var entities_inside: Array = cb_vars.get(Meteor.VarType.ENTITIES_INSIDE, [])
 	if entities_inside.is_empty(): return
-	
 	var burn_amount: float = _fire_stats.consuming_the_star_mana_burn
-	
 	for entity: Entity in entities_inside:
 		if entity != null and is_instance_valid(entity) and entity.team != _owner.team:
 			if entity.stats.mana > 0:
 				entity.stats.mana = max(0.0, entity.stats.mana - burn_amount)
-
 #endregion
 
 #region =====TITANS PROTECTION =====
-
 # [TITANS PROTECTION]
-func _on_titans_protection_meteor_hit(cb_vars: Dictionary) -> void:
+func _on_titans_protection_meteor_hit(_cb_vars: Dictionary) -> void:
 	if _owner == null or not is_instance_valid(_owner): return
-	
 	var amount: float = _fire_stats.titans_protection_hp_amount
-	
 	if amount > 0:
 		_titans_protection_accumulated_hp += amount
-		
 		var mod := StatModifier.new()
 		mod.id = "Fire Titan Protection" 
 		mod.stat_type = EntityStats.StatType.HEALTH_MAX
@@ -279,28 +266,24 @@ func _on_titans_protection_meteor_hit(cb_vars: Dictionary) -> void:
 		mod.value = _titans_protection_accumulated_hp 
 		mod.tags = [StatModifier.TagType.CARD]
 		_owner.stats_manager.update_modifier(mod)
-
 #endregion
 
 #region ========== KUIPER BELT ==========
 # [KUIPER BELT]
-func _on_kuiper_belt_meteor_hit(cb_vars: Dictionary) -> void:
+func _on_kuiper_belt_meteor_hit(_cb_vars: Dictionary) -> void:
 	if _owner == null or not is_instance_valid(_owner): return
-	
 	var amount: int = int(_fire_stats.kuiper_belt_shield_amount)
 	if amount > 0:
 		_owner.inflict_condition_stacks(_owner, amount, Utils.StackType.ARMOR)
-
 #endregion
 
 #region ========== COSMIC BOLT ==========
-
 # [COSMIC BOLT] - Déclenchement Timer
 func _on_cosmic_bolt_timer_timeout() -> void:
 	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.HIGHEST_HP_ENEMY)
 	if target == null: return
-	
 	_shoot_cosmic_bolt(target)
+
 
 # [COSMIC BOLT] - Fonction de tir
 func _shoot_cosmic_bolt(target: Entity) -> void:
@@ -338,7 +321,6 @@ func _on_hit_cosmic_bolt(cb_vars: Dictionary) -> void:
 
 #region ========== END OF THE WORLD ==========
 func _on_end_of_the_world_meteor_hit(cb_vars: Dictionary) -> void:
-	print("DEBUG END OF THE WORLD")
 	var _entities_inside: Array = cb_vars.get(Meteor.VarType.ENTITIES_INSIDE, [])
 	for entity: Entity in _entities_inside:
 		var hp = entity.stats.health
@@ -346,7 +328,6 @@ func _on_end_of_the_world_meteor_hit(cb_vars: Dictionary) -> void:
 		var stack_multiplier = _fire_stats.end_of_the_world_stack_multiplier
 		if entity.team != _owner.team and hp <= ignite_stacks * stack_multiplier:
 			entity.stats.health = 0
-			print("DEBUG EOFW INSTA KILL")
 #endregion
 
 # ============================== PASSIF ==============================

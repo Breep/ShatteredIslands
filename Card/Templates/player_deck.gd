@@ -52,7 +52,7 @@ func _add_or_improve_card_to_active_cards(card_to_add: Card) -> void:
 			if not card.is_max_level():
 				card.lvl += 1
 			else:
-				printerr("PlayerDeck: Trying to upgrade an already maximized card - ", card_to_add.name)
+				push_error("PlayerDeck: Trying to upgrade an already maximized card - ", card_to_add.name)
 			return
 	_active_cards.append(card_to_add)
 	if _cards_dictionary.has(card_to_add.family):

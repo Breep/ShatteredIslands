@@ -3,15 +3,14 @@ extends FamilyManager
 
 # ============================== Signals ==============================
 
-signal reflecto_belt_activated(damage_inc_percent: float, number_of_attacks: int)
-
 # ============================== Private variables ==============================
 
 var _defense_stats: FamilyDefenseStats # Ref to the owner defense stats
 
 # [REFLECTO BELT]
-var _reflecto_belt_accumulated_loss: int = 0
+var _reflecto_belt_accumulated_loss: float = 0
 var _reflecto_belt_attacks_left: int = 0
+var _is_reflecto_belt_activated: bool = false
 
 # [SHIELD THROW]
 var _shield_throw_accumulated: int = 0
@@ -35,6 +34,7 @@ func start() -> void:
 	# [REFLECTO BELT] Init
 	_reflecto_belt_accumulated_loss = 0
 	_reflecto_belt_attacks_left = 0
+	_is_reflecto_belt_activated = false
 	
 	# [PROTECTIVE DOME]
 	if _defense_stats.protective_dome_activated:
@@ -53,7 +53,6 @@ func start() -> void:
 
 
 func stop() -> void:
-	
 	# [SHIELD THROW]
 	if _defense_stats.shield_throw_activated:
 		if _owner.stats.armor_stacks_changed.is_connected(_on_owner_armor_stacks_changed):
@@ -70,12 +69,11 @@ func stop() -> void:
 		mod.stat_type = EntityStats.StatType.RESISTANCE
 		mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
 		_owner.stats_manager.unregister_modifier(mod)
-		
-		
+	
 	# [REFLECTO BELT] Nettoyage
-	if _defense_stats.reflecto_belt_activated:
+	if _defense_stats.reflecto_belt_activated and _is_reflecto_belt_activated:
 		_owner.auto_attack_modifier_registry.unregister_modifier("Reflecto Belt")
-		
+	
 	_clear_action_modifiers()
 	_clear_stat_modifiers()
 	_clear_optional_timers()
@@ -201,37 +199,28 @@ func _clear_optional_timers() -> void:
 #endregion
 
 #region ===== OTHER LOGIC =====
-
-
-
+# [REFLECTO BELT]
 func _reflecto_belt_effect(armor_lost: int) -> void:
-	# [REFLECTO BELT]
-	if not _defense_stats.reflecto_belt_activated:
-		return
-		
+	if not _defense_stats.reflecto_belt_activated: return
 	_reflecto_belt_accumulated_loss += armor_lost
-	var threshold: int = int(_defense_stats.reflecto_belt_shield_threshold)
-	
-	if threshold > 0 and _reflecto_belt_accumulated_loss >= threshold:
-		_reflecto_belt_accumulated_loss -= threshold
-		_activate_reflecto_belt_buff()
+	if  _reflecto_belt_accumulated_loss >= _defense_stats.reflecto_belt_shield_threshold:
+		_reflecto_belt_accumulated_loss -= _defense_stats.reflecto_belt_shield_threshold
+		_reflecto_belt_attacks_left += _defense_stats.reflecto_belt_attacks_count
+		if _is_reflecto_belt_activated == false:
+			_activate_reflecto_belt_buff()
 
 
+# [REFLECTO BELT]
 func _activate_reflecto_belt_buff() -> void:
-	# [REFLECTO BELT]
-	_reflecto_belt_attacks_left += _defense_stats.reflecto_belt_attacks_count
-	
+	_is_reflecto_belt_activated = true
 	var aa_modifier := AutoAttackModifier.new()
 	aa_modifier.id = "Reflecto Belt"
 	aa_modifier.tags = [AutoAttackModifier.TagType.CARD]
-	
 	var percent: float = _defense_stats.reflecto_belt_damage_percent
 	aa_modifier.damage_mult = 1.0 + (percent / 100.0)
+	aa_modifier.is_one_time_effect = false
 	aa_modifier.on_attack_logic_callback = _on_attack_reflecto_belt_consumption
-	
 	_owner.auto_attack_modifier_registry.register_modifier(aa_modifier)
-	
-	reflecto_belt_activated.emit(percent, _defense_stats.reflecto_belt_attacks_count)
 
 
 # [PROTECTIVE DOME]
@@ -248,7 +237,6 @@ func _update_protective_dome_modifier(current_armor: float) -> void:
 		_owner.stats_manager.register_modifier(mod)
 	else:
 		_owner.stats_manager.unregister_modifier(mod)
-
 #endregion
 
 #region ===== SHIELD THROW =====
@@ -283,7 +271,6 @@ func _trigger_shield_throw_start() -> void:
 	if "SHIELD_THROW" in Projectile.ProjectileType: p_type = Projectile.ProjectileType.SHIELD_THROW
 	
 	_owner.projectile_attack(target, p_type, _owner._turret._projectile_spawn_point, proj_stats)
-	
 #endregion
 
 # ============================== Callbacks functions ==============================
@@ -294,6 +281,7 @@ func _on_attack_reflecto_belt_consumption(_cb_vars: Dictionary) -> void:
 	
 	if _reflecto_belt_attacks_left <= 0:
 		_reflecto_belt_attacks_left = 0
+		_is_reflecto_belt_activated = false
 		_owner.auto_attack_modifier_registry.unregister_modifier("Reflecto Belt")
 
 
