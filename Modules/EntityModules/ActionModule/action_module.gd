@@ -35,6 +35,7 @@ func direct_attack(target: Entity, damage: float, damage_type: Utils.DamageType)
 	var damage_done: float = target.take_damage(damage, damage_type, crit_multiplier["is_critical"], _owner)
 	if crit_multiplier["is_critical"]:
 		_owner.signal_critical_action_done(target, Utils.damage_to_action(damage_type), damage_before_crit, damage_done)
+	_owner.signal_action_done(target, Utils.damage_to_action(damage_type), damage_before_crit, damage_done, crit_multiplier["is_critical"])
 
 
 # Instantly attack the target - Apply cards damages multiplier if there are some
@@ -78,6 +79,7 @@ func build_projectile_attack(target: Entity, projectile_type: Projectile.Project
 func projectile_attack(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	_spawn_manager.spawn_projectile(_owner, target, projectile_type, projectile_spawn, projectile_stats)
 
+
 func _spawn_projectile(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	if target == null: return
 	_spawn_manager.spawn_projectile(_owner, target, projectile_type, projectile_spawn, projectile_stats)
@@ -94,6 +96,7 @@ func heal(target: Entity, heal_amount: float) -> void:
 	var heal_taken: float = target.take_heal(heal_amount, crit_multiplier["is_critical"], _owner)
 	if crit_multiplier["is_critical"]:
 		_owner.signal_critical_action_done(target, Utils.ActionType.UTILITY_HEAL, heal_amount_before_crit, heal_taken)
+	_owner.signal_action_done(target, Utils.ActionType.UTILITY_HEAL, heal_amount_before_crit, heal_taken, crit_multiplier["is_critical"])
 
 
 func heal_percent(target: Entity, percent: float, percent_modifier: Utils.PercentModifier) -> void:
@@ -130,6 +133,7 @@ func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: 
 	var stacks_taken: float = target.take_condition_stacks(stacks_number, stack_type, crit_multiplier["is_critical"], _owner)
 	if crit_multiplier["is_critical"]:
 		_owner.signal_critical_action_done(target, Utils.stack_to_action(stack_type), stacks_number_before_crit, stacks_taken)
+	_owner.signal_action_done(target, Utils.stack_to_action(stack_type), stacks_number_before_crit, stacks_taken, crit_multiplier["is_critical"])
 #endregion
 
 #region ============================== Cleanse and Dispell ==============================

@@ -1,4 +1,5 @@
-extends Node
+class_name RoundData
+extends Resource
 
 # ===== DATA SET =====
 # dictionary of round logs
@@ -19,3 +20,10 @@ extends Node
 # ===== Internal API =====
 # Listen to Battle writer to record all battle logs
 # Listen to preparation events to records all preparation events
+
+
+
+var round_number: int
+
+var buying_phase_data: BuyingPhaseData
+var fighting_phase_data: FightingPhaseData

@@ -33,7 +33,7 @@ func _ready() -> void:
 # ============================== Public functions ==============================
 
 func clear() -> void:
-	for entity in _entities.values():
+	for entity: Entity in _entities.values():
 		if entity != null:
 			if entity.damage_taken.is_connected(_on_entity_damage_taken):
 				entity.damage_taken.disconnect(_on_entity_damage_taken)
@@ -43,6 +43,8 @@ func clear() -> void:
 				entity.stack_taken.disconnect(_on_entity_stack_taken)
 			if entity.died.is_connected(_on_entity_died):
 				entity.died.disconnect(_on_entity_died)
+			if entity.action_done.is_connected(_on_entity_action_done):
+				entity.action_done.disconnect(_on_entity_action_done)
 	_entities.clear()
 	_characters.clear()
 
@@ -61,6 +63,7 @@ func _register_entity(entity: Entity) -> void:
 		entity.damage_taken.connect(_on_entity_damage_taken)
 		entity.spell_casted.connect(_on_entity_spell_casted)
 		entity.stack_taken.connect(_on_entity_stack_taken)
+		entity.action_done.connect(_on_entity_action_done)
 		entity.died.connect(_on_entity_died)
 		entity.connect_to_fighting_area(_fighting_area)
 
@@ -70,6 +73,7 @@ func _kick_entity(entity: Entity) -> void:
 	if entity.spell_casted.is_connected(_on_entity_spell_casted): entity.spell_casted.disconnect(_on_entity_spell_casted)
 	if entity.stack_taken.is_connected(_on_entity_stack_taken): entity.stack_taken.disconnect(_on_entity_stack_taken)
 	if entity.died.is_connected(_on_entity_died): entity.died.disconnect(_on_entity_died)
+	if entity.action_done.is_connected(_on_entity_action_done): entity.action_done.disconnect(_on_entity_action_done)
 	entities.erase(entity.id)
 	if _characters.has(entity.id): _characters.erase(entity.id)
 
@@ -95,8 +99,11 @@ func _on_entity_stack_taken(entity: Entity, stack_type: Utils.StackType, stack_n
 	_fighting_area.signal_stack_taken(entity, stack_type, stack_number, is_critical)
 
 
+func _on_entity_action_done(source: Entity, target: Entity, action_type: Utils.ActionType, base_value: float, real_value: float, is_critical: bool) -> void:
+	_fighting_area.signal_action_done(source, target, action_type, base_value, real_value, is_critical)
+
+
 func _on_entity_died(entity: Entity) -> void:
-	print("DEBUG ENtity: ", entity.name, " DIED")
 	_fighting_area.signal_entity_died(entity)
 
 
