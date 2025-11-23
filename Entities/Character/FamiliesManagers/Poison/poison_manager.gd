@@ -34,7 +34,6 @@ func stop() -> void:
 		spell.queue_free()
 	_poison_tick_timer.stop()
 	_clear_stack_modifiers()
-	_clear_stat_modifiers()
 	_clear_attack_modifiers()
 	_clear_optional_timers()
 
@@ -136,8 +135,6 @@ func _add_stat_modifiers() -> void:
 		mod.id = "Antidote"
 		_owner.stats_manager.register_modifier(mod)
 
-func _clear_stat_modifiers() -> void:
-	pass
 #endregion
 
 #region ===== AUTO ATTACK MODIFIERS =====
