@@ -129,8 +129,8 @@ size_flags_horizontal = 3
 [node name="RankViewer" parent="VBoxContainer/TopLayer/RankControl" instance=ExtResource("7_y44ja")]
 unique_name_in_owner = true
 layout_mode = 1
-offset_top = -32.0
-offset_bottom = 18.0
+offset_top = -37.985
+offset_bottom = 12.014999
 scale = Vector2(0.2, 0.2)
 pivot_offset = Vector2(0, 25)
 

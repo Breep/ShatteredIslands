@@ -19,11 +19,11 @@ shader_parameter/ShimmerSpeed = 0.2530000120175
 shader_parameter/ShimmerStrength = 0.0400000019
 shader_parameter/VolumeStrength = 0.05600000266
 shader_parameter/LineColor = Color(0, 0, 0, 1)
-shader_parameter/LineThickness = 1.00000004424012
+shader_parameter/LineThickness = 4.00000018674012
 shader_parameter/Height100 = 0.250000011875
 shader_parameter/Height500 = 0.50000002375
 shader_parameter/BorderColor = Color(0.05, 0.05, 0.05, 1)
-shader_parameter/BorderThicknessPx = 2.0
+shader_parameter/BorderThicknessPx = 4.00000019
 shader_parameter/CornerRadius = 0.0
 
 [node name="CharacterVisual" type="Node3D" node_paths=PackedStringArray("_physical_popup_spawn", "_magic_popup_spawn", "_poison_popup_spawn", "_heal_popup_spawn", "_health_bar")]
@@ -37,12 +37,13 @@ _health_bar = NodePath("TopUI/Sprite3D/SubViewport/HealthBar")
 [node name="TopUI" type="Node3D" parent="."]
 
 [node name="Sprite3D" type="Sprite3D" parent="TopUI"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 billboard = 1
 texture = SubResource("ViewportTexture_j51p7")
 
 [node name="SubViewport" type="SubViewport" parent="TopUI/Sprite3D"]
 transparent_bg = true
-size = Vector2i(220, 45)
+size = Vector2i(650, 220)
 render_target_update_mode = 4
 
 [node name="HealthBar" type="ColorRect" parent="TopUI/Sprite3D/SubViewport"]
@@ -52,9 +53,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -180.0
-offset_top = -12.5
-offset_bottom = 12.5
+offset_left = -512.0
+offset_top = -25.0
+offset_bottom = 25.0
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -63,13 +64,12 @@ size_flags_vertical = 3
 [node name="RankViewer" parent="TopUI/Sprite3D/SubViewport" instance=ExtResource("3_mq6lt")]
 unique_name_in_owner = true
 anchors_preset = -1
-anchor_left = 0.094
-anchor_top = 0.48
-anchor_right = 0.126
-anchor_bottom = 0.48
+anchor_left = 0.11
+anchor_top = 0.319
+anchor_right = 0.377
+anchor_bottom = 0.8
 grow_horizontal = 1
-grow_vertical = 1
-scale = Vector2(0.12, 0.12)
+scale = Vector2(0.3, 0.3)
 
 [node name="PopUpSpawns" type="Node3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -1.19196, 0)
