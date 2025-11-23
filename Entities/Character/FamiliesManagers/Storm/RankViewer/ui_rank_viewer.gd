@@ -2,11 +2,49 @@ class_name UIRankViewer
 extends Control
 
 
+@export_group("Rank Colors")
+@export var rank_color_D: Color = Color("444444")
+@export var rank_color_C: Color = Color("6b8c42")
+@export var rank_color_B: Color = Color("42688c")
+@export var rank_color_A: Color = Color("c53838")
+@export var rank_color_S: Color = Color("ffd700")
+
+@export_group("Gradient Settings")
+@export_range(0.0, 1.0) var gradient_darken_factor: float = 0.5
+@export_range(0.0, 1.0) var gradient_lighten_factor: float = 0.5
+
+const RANK_ASSETS = {
+	StormManager.Rank.D: {
+		"tex": preload("res://Entities/Character/FamiliesManagers/Storm/RankViewer/RankVisual/D.png")
+	},
+	StormManager.Rank.C: {
+		"tex": preload("res://Entities/Character/FamiliesManagers/Storm/RankViewer/RankVisual/C.png")
+	},
+	StormManager.Rank.B: {
+		"tex": preload("res://Entities/Character/FamiliesManagers/Storm/RankViewer/RankVisual/B.png")
+	},
+	StormManager.Rank.A: {
+		"tex": preload("res://Entities/Character/FamiliesManagers/Storm/RankViewer/RankVisual/A.png")
+	},
+	StormManager.Rank.S: {
+		"tex": preload("res://Entities/Character/FamiliesManagers/Storm/RankViewer/RankVisual/S.png")
+	}
+}
 
 var _owner_character: Character
-var _blink_tween: Tween
+var _pulse_tween: Tween
+var _rank_gradients: Dictionary = {}
 
-@onready var _label: Label = %Label
+@onready var _rank_icon: TextureRect = %RankIcon
+@onready var _shader_mat: ShaderMaterial = _rank_icon.material as ShaderMaterial
+
+func _ready() -> void:
+	if _rank_icon.material:
+		_rank_icon.material = _rank_icon.material.duplicate()
+		_shader_mat = _rank_icon.material as ShaderMaterial
+	_generate_gradients()
+	_apply_rank_visual(StormManager.Rank.D)
+	_rank_icon.pivot_offset = _rank_icon.size / 2
 
 func connect_entity(entity: Entity) -> void:
 	if entity == null or not (entity is Character):
@@ -20,47 +58,110 @@ func connect_entity(entity: Entity) -> void:
 	_owner_character = new_character
 	_owner_character.get_rank_changed_signal().connect(_on_rank_changed)
 
-
-func _ready() -> void:
-	_label.pivot_offset = _label.size / 2
-
-
 func _on_rank_changed(new_rank: StormManager.Rank) -> void:
-	_stop_blinking()
-	_play_scale_bump()
-	match new_rank:
-		StormManager.Rank.D: _label.text = "D"
-		StormManager.Rank.C: _label.text = "C"
-		StormManager.Rank.B: _label.text = "B"
-		StormManager.Rank.A: _label.text = "A"
-		StormManager.Rank.S:
-			_label.text = "S"
-			_start_blinking()
-
-
-#region ===== ANIMATIONS =====
-func _play_scale_bump() -> void:
-	_label.pivot_offset = _label.size / 2
+	show()
+	_stop_pulsing()
 	
+	_apply_rank_visual(new_rank)
+	_play_scale_bump()
+	
+	if new_rank == StormManager.Rank.S:
+		_start_pulsing_s_rank()
+		if _shader_mat: _shader_mat.set_shader_parameter("speed", 0.3)
+	else:
+		if _shader_mat: 
+			_shader_mat.set_shader_parameter("speed", 0.3)
+			_shader_mat.set_shader_parameter("brilliance", 1.2)
+
+#region ===== GESTION VISUELLE =====
+
+func _generate_gradients() -> void:
+	for rank_enum in RANK_ASSETS:
+		var base_col: Color = _get_rank_color(rank_enum)
+		var grad := Gradient.new()
+		grad.set_color(0, base_col.darkened(gradient_darken_factor))
+		grad.set_color(1, base_col.lightened(gradient_lighten_factor))
+		
+		var grad_tex := GradientTexture1D.new()
+		grad_tex.gradient = grad
+		_rank_gradients[rank_enum] = grad_tex
+
+func _play_scale_bump() -> void:
 	var t := create_tween()
 	t.set_trans(Tween.TRANS_ELASTIC)
 	t.set_ease(Tween.EASE_OUT)
-	t.tween_property(_label, "scale", Vector2(1.25, 1.25), 0.15)
-	t.tween_property(_label, "scale", Vector2.ONE, 0.25)
+	t.tween_property(_rank_icon, "scale", Vector2(2, 2), 0.15)
+	t.tween_property(_rank_icon, "scale", Vector2.ONE, 0.25)
 
-
-func _start_blinking() -> void:
-	if _blink_tween != null and _blink_tween.is_running():
+func _start_pulsing_s_rank() -> void:
+	if _pulse_tween != null and _pulse_tween.is_running():
 		return
-	_blink_tween = create_tween()
-	_blink_tween.set_loops()
-	_blink_tween.tween_property(_label, "modulate", Color.NAVY_BLUE, 0.25)
-	_blink_tween.tween_property(_label, "modulate", Color.WHITE, 0.25)
 
+	# Reset initial
+	if _shader_mat:
+		_shader_mat.set_shader_parameter("min_brightness", 1.0)
+	_rank_icon.scale = Vector2.ONE
 
-func _stop_blinking() -> void:
-	if _blink_tween != null:
-		_blink_tween.stop()
-	_blink_tween = null
-	_label.modulate.a = 1.0
+	_pulse_tween = create_tween()
+	_pulse_tween.set_loops()
+
+	# PHASE 1 : min_brightness 1.0 → 1.15  +  scale 1.0 → 1.08
+	var up_tween := _pulse_tween.tween_method(
+		func(val): if _shader_mat: _shader_mat.set_shader_parameter("min_brightness", val),
+		1.0, 1.15, 0.25
+	)
+	up_tween.set_trans(Tween.TRANS_SINE)
+	up_tween.set_ease(Tween.EASE_IN_OUT)
+
+	_pulse_tween.parallel().tween_property(
+		_rank_icon,
+		"scale",
+		Vector2(1.08, 1.08),
+		0.25
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	# PHASE 2 : min_brightness 1.15 → 1.0  +  scale 1.08 → 1.0
+	var down_tween := _pulse_tween.tween_method(
+		func(val): if _shader_mat: _shader_mat.set_shader_parameter("min_brightness", val),
+		1.15, 1.0, 0.25
+	)
+	down_tween.set_trans(Tween.TRANS_SINE)
+	down_tween.set_ease(Tween.EASE_IN_OUT)
+
+	_pulse_tween.parallel().tween_property(
+		_rank_icon,
+		"scale",
+		Vector2.ONE,
+		0.25
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+func _stop_pulsing() -> void:
+	if _pulse_tween: _pulse_tween.kill()
+	_pulse_tween = null
+	
+	_rank_icon.scale = Vector2.ONE
+	if _shader_mat:
+		_shader_mat.set_shader_parameter("min_brightness", 2.0)
+
+func _get_rank_color(rank_enum: StormManager.Rank) -> Color:
+	match rank_enum:
+		StormManager.Rank.D: return rank_color_D
+		StormManager.Rank.C: return rank_color_C
+		StormManager.Rank.B: return rank_color_B
+		StormManager.Rank.A: return rank_color_A
+		StormManager.Rank.S: return rank_color_S
+		_: return Color.WHITE
+
+func _apply_rank_visual(rank_enum: StormManager.Rank) -> void:
+	if not RANK_ASSETS.has(rank_enum):
+		return
+	
+	var data: Dictionary = RANK_ASSETS[rank_enum]
+	
+	_rank_icon.texture = data["tex"]
+	_rank_icon.pivot_offset = _rank_icon.size / 2
+	
+	if _shader_mat and _rank_gradients.has(rank_enum):
+		_shader_mat.set_shader_parameter("gradient_texture", _rank_gradients[rank_enum])
+
 #endregion
