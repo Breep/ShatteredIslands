@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="Family" load_steps=4 format=3 uid="uid://djjcx0kdvmr5f"]
+[gd_resource type="Resource" script_class="Family" load_steps=6 format=3 uid="uid://djjcx0kdvmr5f"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_kkrq8"]
 [ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://Card/Templates/family.gd" id="2_ad662"]
+[ext_resource type="Resource" uid="uid://kbmlikqifik1" path="res://Card/Descriptions/Cards/Storm/Rare/StormBreaker/storm_storm_breaker.tres" id="2_k3wcx"]
 [ext_resource type="Texture2D" uid="uid://ctng6xf3suweb" path="res://Card/Descriptions/Families/Icons/storm.png" id="2_xw4lb"]
+[ext_resource type="Resource" uid="uid://cki0jkayic783" path="res://Card/Descriptions/Cards/Storm/Common/Storm Battery/storm_storm_battery.tres" id="3_l7wou"]
 
 [resource]
 script = ExtResource("2_ad662")
-cards = Array[ExtResource("1_kkrq8")]([])
+cards = Array[ExtResource("1_kkrq8")]([ExtResource("2_k3wcx"), ExtResource("3_l7wou")])
 icon = ExtResource("2_xw4lb")
 family_name = "Storm"
 family_type = 4

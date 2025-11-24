@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_3vmgk"]
 script = ExtResource("2_v6okv")
-_chance_percent = Array[float]([100.0, 30.0])
+_chance_percent = Array[float]([20.0, 40.0])
 metadata/_custom_type_script = "uid://cjbc0tlkk227"
 
 [resource]

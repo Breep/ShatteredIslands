@@ -27,13 +27,13 @@ const RANK_POINT_TRESHOLDS: Dictionary[Rank, float] = {
 	Rank.S: 50.0
 }
 
-const RANK_S_DURATION: float = 5.0 
-const RANK_S_LIGHTNING_COOLDOWN: float = 0.1
+const RANK_S_DURATION: float = 1
+const RANK_S_LIGHTNING_COOLDOWN: float = 0.2
 
 # --- STATS PASSIVES (Dépendent du Niveau de la famille [0, 1, 2, 3, 4]) ---
 const GLOBAL_CRIT_MULTIPLIER_BOOSTS: Array[float] = [25.0, 50.0, 75.0, 100.0]
 const GLOBAL_CRIT_CHANCE_BOOSTS: Array[float] = [2.5, 2.5, 5.0, 7.5, 10.0]
-const BASE_LIGHTNING_DAMAGE_PERCENT: Array[float] = [150.0, 150.0, 200.0, 300.0, 400.0]
+const BASE_LIGHTNING_DAMAGE_PERCENT: Array[float] = [70.0, 90.0, 110.0, 130.0, 150.0]
 
 # --- MULTIPLICATEUR DYNAMIQUE (Dépend du Rang D-S) ---
 const RANK_VALUE_MULTIPLIERS: Dictionary[Rank, float] = {
@@ -77,6 +77,8 @@ func start() -> void:
 	for timer in _optional_timers:
 		timer.start()
 	_storm_breaker_memory.clear()
+	_current_point = 0
+	_current_rank = Rank.D
 
 func stop() -> void:
 	if _lightning_spam_timer:

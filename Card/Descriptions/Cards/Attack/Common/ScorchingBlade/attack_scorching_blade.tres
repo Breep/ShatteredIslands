@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_i8f3f"]
 script = ExtResource("1_mpyox")
-_damage_percent = Array[float]([10.0, 20.0, 30.0, 40.0, 50.0])
+_damage_percent = Array[float]([5.0, 10.0, 15.0, 20.0, 25.0])
 metadata/_custom_type_script = "uid://bco8h8xegp6bs"
 
 [resource]
