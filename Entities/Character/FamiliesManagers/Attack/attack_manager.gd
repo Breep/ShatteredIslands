@@ -55,7 +55,7 @@ func _create_optional_timers() -> void:
 	if _attack_stats.gatling_gun_activated:
 		_optional_timers.append(Utils.create_perpetual_timer(self, GATLING_TIME, _on_gatling_gun_timer_timeout, true))
 		_on_gatling_gun_timer_start = Time.get_ticks_msec()
-		
+
 func _clear_optional_timers() -> void:
 	for timer in _optional_timers:
 		timer.queue_free()
@@ -177,44 +177,6 @@ func _add_stat_modifiers() -> void:
 		stat_modifier.value = _attack_stats.twin_blade_speed / 100.0
 		stat_modifier.tags = [StatModifier.TagType.CARD]
 		_owner.stats_manager.register_modifier(stat_modifier)
-
-
-func _clear_stat_modifiers() -> void:
-	# [FIGHT BACK]
-	if _attack_stats.fight_back_activated:
-		var mod := StatModifier.new()
-		mod.stat_type = EntityStats.StatType.DODGE
-		mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
-		mod.id = "Fight Back"
-		_owner.stats_manager.unregister_modifier(mod)
-	
-		# [FIGHT BACK] - AD
-		if _dodge_number > 0:
-			var ad_mod := StatModifier.new()
-			ad_mod.id = "Fight Back"
-			ad_mod.stat_type = EntityStats.StatType.AD
-			_owner.stats_manager.unregister_modifier(ad_mod)
-	
-	# [DIAMOND SWORD]
-	if _attack_stats.diamond_sword_activated:
-		var mod := StatModifier.new()
-		mod.id = "Diamond Sword"
-		mod.stat_type = EntityStats.StatType.AD
-		_owner.stats_manager.unregister_modifier(mod)
-
-	# [TWIN BLADE]
-	if _attack_stats.twin_blade_activated:
-		var mod := StatModifier.new()
-		mod.id = "Twin Blade"
-		mod.stat_type = EntityStats.StatType.AA_SPEED
-		_owner.stats_manager.unregister_modifier(mod)
-		
-	# [BLADE RUSH]
-	if _attack_stats.blade_rush_activated:
-		var mod := StatModifier.new()
-		mod.id = "Blade Rush"
-		mod.stat_type = EntityStats.StatType.AD
-		_owner.stats_manager.unregister_modifier(mod)
 #endregion
 
 #region action modifier
@@ -227,16 +189,6 @@ func _add_action_modifiers() -> void:
 		action_modifier.is_one_time_effect = false
 		action_modifier.after_action_logic_callback = _on_dodge_fight_back
 		_owner.action_modifiers_manager.register_modifier(action_modifier)
-
-
-func _remove_action_modifiers() -> void:
-	# [FIGHT BACK]
-	if _attack_stats.fight_back_activated:
-		var action_modifier := ActionModifier.new()
-		action_modifier.action_type = ActionModifier.ActionType.DODGE
-		action_modifier.id = "Fight Back"
-		action_modifier.after_action_logic_callback = _on_dodge_fight_back
-		_owner.action_modifiers_manager.unregister_modifier(action_modifier)
 #endregion
 
 
