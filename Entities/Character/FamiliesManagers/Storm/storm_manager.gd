@@ -92,7 +92,11 @@ func _create_optional_timers() -> void:
 	_lightning_spam_timer.one_shot = false
 	_lightning_spam_timer.timeout.connect(_on_lightning_spam_timer_timeout)
 	add_child(_lightning_spam_timer)
-	
+
+func _clear_optional_timers() -> void:
+	for timer in _optional_timers:
+		timer.queue_free()
+	_optional_timers.clear()
 #endregion
 
 #region stats modifier
