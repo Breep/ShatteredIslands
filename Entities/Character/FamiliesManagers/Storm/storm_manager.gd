@@ -70,19 +70,18 @@ var _lightning_spam_timer: Timer
 func _ready() -> void:
 	_storm_stats = _owner.families_stats.storm
 	_owner.critical_action_done.connect(_on_owner_critical_action_done)
-	_create_optional_timers()
 
 func start() -> void:
+	_create_optional_timers()
 	_apply_passive_crit_boost()
 	for timer in _optional_timers:
 		timer.start()
 	_storm_breaker_memory.clear()
 
 func stop() -> void:
-	for timer in _optional_timers:
-		timer.stop()
 	if _lightning_spam_timer:
 		_lightning_spam_timer.stop()
+	_clear_optional_timers()
 
 # ============================== Private functions ==============================
 
@@ -101,12 +100,9 @@ func _create_optional_timers() -> void:
 func _apply_passive_crit_boost() -> void:
 	pass
 	#var current_lvl: int = _storm_stats.level 
-	#
-	## Sécurité pour ne pas dépasser la taille du tableau
 	#current_lvl = clamp(current_lvl, 0, GLOBAL_CRIT_CHANCE_BOOSTS.size() - 1)
-#
 	#for action_type in Utils.get_all_actions():
-		## 1. Crit Chance (Fixe selon le niveau)
+		## 1. Crit Chance 
 		#var crit_chance_boost := StatModifier.new()
 		#crit_chance_boost.stat_type = EntityStats.StatType.CRIT_CHANCE
 		#crit_chance_boost.action_type = action_type
@@ -115,8 +111,7 @@ func _apply_passive_crit_boost() -> void:
 		#crit_chance_boost.tags = [StatModifier.TagType.FAMILY]
 		#crit_chance_boost.value = GLOBAL_CRIT_CHANCE_BOOSTS[current_lvl] 
 		#_owner.stats_manager.update_modifier(crit_chance_boost)
-		#
-		## 2. Crit Multiplier (Fixe selon le niveau)
+		## 2. Crit Multiplier
 		#var crit_multiplier_boost := StatModifier.new()
 		#crit_multiplier_boost.stat_type = EntityStats.StatType.CRIT_MULT
 		#crit_multiplier_boost.action_type = action_type

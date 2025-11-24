@@ -58,24 +58,9 @@ func stop() -> void:
 		if _owner.stats.armor_stacks_changed.is_connected(_on_owner_armor_stacks_changed):
 			_owner.stats.armor_stacks_changed.disconnect(_on_owner_armor_stacks_changed)
 	
-		# [PROTECTIVE DOME] Déconnexion
-	if _defense_stats.protective_dome_activated:
-		if _owner.stats.armor_stacks_changed.is_connected(_on_owner_armor_stacks_changed):
-			_owner.stats.armor_stacks_changed.disconnect(_on_owner_armor_stacks_changed)
-		
-		# On s'assure de retirer le bonus
-		var mod := StatModifier.new()
-		mod.id = "Protective Dome"
-		mod.stat_type = EntityStats.StatType.RESISTANCE
-		mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
-		_owner.stats_manager.unregister_modifier(mod)
-	
 	# [REFLECTO BELT] Nettoyage
 	if _defense_stats.reflecto_belt_activated and _is_reflecto_belt_activated:
 		_owner.auto_attack_modifier_registry.unregister_modifier("Reflecto Belt")
-	
-	_clear_action_modifiers()
-	_clear_stat_modifiers()
 	_clear_optional_timers()
 
 # --- Fonctions appelées par le système de dégâts ---

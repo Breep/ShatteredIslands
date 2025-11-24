@@ -45,11 +45,6 @@ func start() -> void:
 
 func stop() -> void:
 	_clear_attack_modifiers()
-	_remove_action_modifiers()
-	_clear_stat_modifiers()
-	for timer in _optional_timers:
-		timer.queue_free()
-	_optional_timers.clear()
 
 # ============================== Private functions ==============================
 
@@ -61,6 +56,10 @@ func _create_optional_timers() -> void:
 		_optional_timers.append(Utils.create_perpetual_timer(self, GATLING_TIME, _on_gatling_gun_timer_timeout, true))
 		_on_gatling_gun_timer_start = Time.get_ticks_msec()
 		
+func _clear_optional_timers() -> void:
+	for timer in _optional_timers:
+		timer.queue_free()
+	_optional_timers.clear()		
 #endregion
 
 #region aa modifier
