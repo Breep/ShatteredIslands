@@ -99,8 +99,8 @@ func _on_entity_stack_taken(entity: Entity, stack_type: Utils.StackType, stack_n
 	_fighting_area.signal_stack_taken(entity, stack_type, stack_number, is_critical)
 
 
-func _on_entity_action_done(source: Entity, target: Entity, action_type: Utils.ActionType, base_value: float, real_value: float, is_critical: bool) -> void:
-	_fighting_area.signal_action_done(source, target, action_type, base_value, real_value, is_critical)
+func _on_entity_action_done(source: Entity, target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
+	_fighting_area.signal_action_done(source, target, action_type, action_id, value, is_critical)
 
 
 func _on_entity_died(entity: Entity) -> void:

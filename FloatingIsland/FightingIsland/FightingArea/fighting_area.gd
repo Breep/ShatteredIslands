@@ -3,9 +3,9 @@ extends Node3D
 
 # ============================== Signals ==============================
 
-signal action_done(source: Entity, target: Entity, action_type: Utils.ActionType, base_value: float, real_value: float, is_critical: bool)
-func signal_action_done(source: Entity, target: Entity, action_type: Utils.ActionType, base_value: float, real_value: float, is_critical: bool) -> void:
-	action_done.emit(source, target, action_type, base_value, real_value, is_critical)
+signal action_done(source: Entity, target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool)
+func signal_action_done(source: Entity, target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
+	action_done.emit(source, target, action_type, action_id, value, is_critical)
 
 signal projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.ProjectileType, projectile_modifiers: Array[Projectile.ProjectileEffect])
 func signal_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.ProjectileType, projectile_modifiers: Array[Projectile.ProjectileEffect]) -> void:

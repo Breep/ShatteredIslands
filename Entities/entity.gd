@@ -8,9 +8,9 @@ func signal_death() -> void:
 	_is_dead = true
 	died.emit(self)
 
-signal action_done(entity_ref: Entity, target: Entity, action_type: Utils.ActionType, base_value: float, real_value: float, is_critical: bool)
-func signal_action_done(target: Entity, action_type: Utils.ActionType, base_value: float, real_value: float, is_critical: bool) -> void:
-	action_done.emit(self, target, action_type, base_value, real_value, is_critical)
+signal action_done(entity_ref: Entity, target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool)
+func signal_action_done(target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
+	action_done.emit(self, target, action_type, action_id, value, is_critical)
 
 signal critical_action_done(entity_ref: Entity, target: Entity, action_type: Utils.ActionType, base_value: float, real_value: float)
 func signal_critical_action_done(target: Entity, action_type: Utils.ActionType, base_value: float, real_value: float) -> void:
@@ -68,8 +68,6 @@ var action_modifiers_manager: ActionModifiersManager
 var stack_manager: StackManager
 
 # ============================== Private variables ==============================
-
-@onready var _action_recorder := ActionRecorder.new(self)
 
 # ============================== Enums ==============================
 

@@ -98,8 +98,8 @@ func _log_stack_taken(source: Entity, stack_type: Utils.StackType, stack_number:
 	_battle_logs.append(data)
 
 
-func _register_action(source: Entity, target: Entity, action_type: Utils.ActionType, base_value: float, real_value: float, is_critical: bool) -> void:
-	battle_actions_registry.register_action(_get_time(), source, target, action_type, base_value, real_value, is_critical)
+func _register_action(source: Entity, _target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
+	battle_actions_registry.register_action(source, action_type, action_id, value, is_critical)
 
 
 func _get_time() -> float:
@@ -145,5 +145,5 @@ func _on_fighting_area_stack_taken(source: Entity, stack_type: Utils.StackType, 
 	_log_stack_taken(source, stack_type, stack_number, is_critical)
 
 
-func _on_fighting_area_action_done(source: Entity, target: Entity, action_type: Utils.ActionType, base_value: float, real_value: float, is_critical: bool) -> void:
-	_register_action(source, target, action_type, base_value, real_value, is_critical)
+func _on_fighting_area_action_done(source: Entity, target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
+	_register_action(source, target, action_type, action_id, value, is_critical)

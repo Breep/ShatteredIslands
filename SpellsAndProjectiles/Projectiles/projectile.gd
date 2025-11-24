@@ -121,7 +121,7 @@ func _on_body_entered(body: Node3D) -> void:
 				source,
 				Utils.AttackType.AUTO_ATTACK
 			)
-		source.signal_action_done(target, Utils.ActionType.DAMAGE_PHYSICAL, stats.physical_base_damage, physical_damage_done_flat, stats.physical_is_critical)
+		source.signal_action_done(target, Utils.ActionType.DAMAGE_PHYSICAL, "AUTO ATTACK", physical_damage_done_flat, stats.physical_is_critical)
 		if stats.physical_is_critical:
 			source.signal_critical_action_done(target, Utils.ActionType.DAMAGE_PHYSICAL, stats.physical_base_damage, physical_damage_done_flat)
 	
