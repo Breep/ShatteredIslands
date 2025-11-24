@@ -33,8 +33,6 @@ func start() -> void:
 
 
 func stop() -> void:
-	_remove_action_modifiers()
-	_clear_stat_modifiers()
 	_clear_optional_timers()
 
 
@@ -174,68 +172,6 @@ func _add_stat_modifiers() -> void:
 		poison_mod.tags = [StatModifier.TagType.CARD]
 		_owner.stats_manager.register_modifier(poison_mod)
 		
-		
-func _clear_stat_modifiers() -> void:
-	
-	# [EVASIVE GROWTH]
-	if _life_stats.evasive_growth_activated:
-		var mod := StatModifier.new()
-		mod.stat_type = EntityStats.StatType.DODGE
-		mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
-		mod.id = "Evasive Growth"
-		_owner.stats_manager.unregister_modifier(mod)
-		
-	# [PROTEINS]
-	if _life_stats.proteins_activated:
-		var mod := StatModifier.new()
-		mod.id = "Proteins"
-		mod.stat_type = EntityStats.StatType.HEALTH_MAX
-		_owner.stats_manager.unregister_modifier(mod)
-		
-	# [BEAR STRENGTH]
-	if _life_stats.bear_strength_activated:
-		# Nettoyer AS
-		var as_mod := StatModifier.new()
-		as_mod.id = "Bear Strength AS"
-		as_mod.stat_type = EntityStats.StatType.AA_SPEED
-		_owner.stats_manager.unregister_modifier(as_mod)
-		
-		# Nettoyer AD
-		var ad_mod := StatModifier.new()
-		ad_mod.id = "Bear Strength AD"
-		ad_mod.stat_type = EntityStats.StatType.AD
-		_owner.stats_manager.unregister_modifier(ad_mod)
-	
-	# [CRYSTAL MOUNTAIN]
-	if _life_stats.crystal_mountain_activated:
-		# 1. Nettoyer Physique
-		var phys_mod := StatModifier.new()
-		phys_mod.id = "Crystal Mountain (Phys)"
-		phys_mod.stat_type = EntityStats.StatType.RESISTANCE
-		phys_mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
-		_owner.stats_manager.unregister_modifier(phys_mod)
-		
-		# 2. Nettoyer Magique
-		var magic_mod := StatModifier.new()
-		magic_mod.id = "Crystal Mountain (Magic)"
-		magic_mod.stat_type = EntityStats.StatType.RESISTANCE
-		magic_mod.action_type = Utils.ActionType.DAMAGE_MAGICAL
-		_owner.stats_manager.unregister_modifier(magic_mod)
-		
-		# 3. Nettoyer Poison
-		var poison_mod := StatModifier.new()
-		poison_mod.id = "Crystal Mountain (Poison)"
-		poison_mod.stat_type = EntityStats.StatType.RESISTANCE
-		poison_mod.action_type = Utils.ActionType.DAMAGE_POISON
-		_owner.stats_manager.unregister_modifier(poison_mod)
-		
-		# [ANCIENT GROWTH]
-	if _life_stats.ancient_growth_activated:
-		var mod := StatModifier.new()
-		mod.id = "Ancient Growth"
-		mod.stat_type = EntityStats.StatType.HEALTH_MAX
-		_owner.stats_manager.unregister_modifier(mod)
-		
 #endregion
 
 #region action modifier
@@ -252,15 +188,6 @@ func _add_action_modifiers() -> void:
 		_owner.action_modifiers_manager.register_modifier(action_modifier)
 
 #endregion
-
-func _remove_action_modifiers() -> void:
-	# [EVASIVE GROWTH]
-	if _life_stats.evasive_growth_activated:
-		var action_modifier := ActionModifier.new()
-		action_modifier.action_type = ActionModifier.ActionType.DODGE
-		action_modifier.id = "Evasive Growth"
-		action_modifier.after_action_logic_callback = _on_dodge_evasive_growth
-		_owner.action_modifiers_manager.unregister_modifier(action_modifier)
 		
 #region other card
 

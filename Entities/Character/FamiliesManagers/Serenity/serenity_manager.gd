@@ -33,7 +33,7 @@ func start() -> void:
 	
 
 func stop() -> void:
-	_regen_tick_timer.stop())
+	_regen_tick_timer.stop()
 	for timer in _optional_timers:
 		timer.stop()
 	_clear_optional_timers()
