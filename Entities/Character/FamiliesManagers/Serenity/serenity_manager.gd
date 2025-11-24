@@ -5,10 +5,14 @@ extends FamilyManager
 
 const PACIFY_DAMAGE_REDUCTION_PERCENT: float = 50 # Percentage of damage reduction when pacified
 
+#[REGEN]
+const REGEN_DECAY_PERCENT: float = 10.0
+const REGEN_DECAY_HP_THRESHOLD: float = 50.0
 # ============================== Private variables ==============================
 
 var _serenity_stats: FamilySerenityStats # Ref to the owner heal stats
 
+#[REGEN]
 @onready var _regen_tick_timer: Timer = %RegenTickTimer
 
 # ============================== Spells scenes ==============================
@@ -177,11 +181,6 @@ func _life_spring_timer_timeout() -> void:
 	if target == null: 
 		return
 	_owner.inflict_condition_stacks(target, _serenity_stats.life_spring_regen_amount, Utils.StackType.REGEN)
-
-func _on_regen_tick_timer_timeout() -> void:
-	var heal_amount: float = _owner.stats.regen_stacks
-	if heal_amount > 0:
-		_owner.heal(_owner, heal_amount)
 	
 func _purifying_flame_timer_timeout() -> void:
 	# [PURIFYING FLAME]
@@ -196,3 +195,19 @@ func _on_dodge_graceful_step(_cb_vars: Dictionary) -> void:
 	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
 	if target != null:
 		_owner.inflict_condition_stacks(target, _serenity_stats.graceful_step_regen, Utils.StackType.REGEN)
+
+#region ============== REGEN ==================
+
+func _on_regen_tick_timer_timeout() -> void:
+	var regen_stacks: float = _owner.stats.regen_stacks
+	if regen_stacks > 0:
+		_owner.heal(_owner, regen_stacks)
+		var max_hp: float = _owner.stats.health_max
+		if max_hp <= 0: return
+		var current_hp_percent: float = (_owner.stats.health / max_hp) * 100.0
+		if current_hp_percent > REGEN_DECAY_HP_THRESHOLD:
+			var decay: int = int(regen_stacks * (REGEN_DECAY_PERCENT / 100.0))
+			decay = clampi(decay, 1, decay)
+			_owner.stats.regen_stacks -= decay
+
+#endregion
