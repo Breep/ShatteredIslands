@@ -61,6 +61,10 @@ var _current_point: float = 0.0
 var _storm_breaker_memory: Dictionary = {}
 var _lightning_spam_timer: Timer
 
+# [THUNDER BERSERKER]
+var _thunder_berserker_penalty_active: bool = false
+var _thunder_berserker_accumulated_penalty: float = 0.0
+
 # ============================== Local Nodes ==============================
 
 @onready var _rank_s_duration_timer: Timer = %RankSTimer
@@ -70,15 +74,19 @@ var _lightning_spam_timer: Timer
 func _ready() -> void:
 	_storm_stats = _owner.families_stats.storm
 	_owner.critical_action_done.connect(_on_owner_critical_action_done)
+	
 
 func start() -> void:
 	_create_optional_timers()
-	_apply_passive_crit_boost()
 	for timer in _optional_timers:
 		timer.start()
+	_add_stat_modifiers()
 	_storm_breaker_memory.clear()
 	_current_point = 0
 	_current_rank = Rank.D
+	# [THUNDER BERSERKER]
+	_thunder_berserker_penalty_active = false
+	_thunder_berserker_accumulated_penalty = 0.0
 
 func stop() -> void:
 	if _lightning_spam_timer:
@@ -89,11 +97,21 @@ func stop() -> void:
 
 #region optional timer
 func _create_optional_timers() -> void:
+	# [RANK S SPAM]
 	_lightning_spam_timer = Timer.new()
 	_lightning_spam_timer.wait_time = RANK_S_LIGHTNING_COOLDOWN
 	_lightning_spam_timer.one_shot = false
 	_lightning_spam_timer.timeout.connect(_on_lightning_spam_timer_timeout)
 	add_child(_lightning_spam_timer)
+	
+	# [THUNDER BERSERKER]
+	if _storm_stats.thunder_berserker_activated:
+		var tb_timer := Timer.new()
+		tb_timer.wait_time = _storm_stats.thunder_berserker_delay
+		tb_timer.one_shot = true
+		tb_timer.timeout.connect(_on_thunder_berserker_timeout)
+		add_child(tb_timer) 
+		_optional_timers.append(tb_timer)
 
 func _clear_optional_timers() -> void:
 	for timer in _optional_timers:
@@ -103,8 +121,17 @@ func _clear_optional_timers() -> void:
 
 #region stats modifier
 
-func _apply_passive_crit_boost() -> void:
-	pass
+func _add_stat_modifiers() -> void:
+	# [THUNDER BERSERKER] - Boost Initial
+	if _storm_stats.thunder_berserker_activated:
+		var mod := StatModifier.new()
+		mod.id = "Thunder Berserker Boost"
+		mod.stat_type = EntityStats.StatType.CRIT_MULT
+		mod.calc_type = StatModifier.CalcType.ADD
+		mod.value = _storm_stats.thunder_berserker_start_boost
+		mod.tags = [StatModifier.TagType.CARD]
+		_owner.stats_manager.register_modifier(mod)
+		
 	#var current_lvl: int = _storm_stats.level 
 	#current_lvl = clamp(current_lvl, 0, GLOBAL_CRIT_CHANCE_BOOSTS.size() - 1)
 	#for action_type in Utils.get_all_actions():
@@ -139,38 +166,27 @@ func _get_crit_point(default_damage: float, real_damage: float) -> float:
 func _call_the_lightning() -> void:
 	var target: Entity = _owner.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
 	if target == null: return
-	
 	#TODO adapté avec le niveau de famille
 	var current_lvl: int = 1
-	
 	var base_percent: float = BASE_LIGHTNING_DAMAGE_PERCENT[current_lvl]
-	
 	var rank_mult: float = RANK_VALUE_MULTIPLIERS.get(_current_rank, 1.0)
-	
 	var final_percent: float = base_percent * rank_mult
 	var damage: float = _owner.stats.attack_damage * final_percent / 100.0
-	
 	_owner.cast_spell(target, Spell.Type.LIGHTNING, { Spell.LightningModifier.DAMAGE: damage })
 
 # [STORM BREAKER]
 func _apply_storm_breaker_effect() -> void:
 	var target: Entity = _owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
 	if target == null or not is_instance_valid(target): return
-	
-	# Multiplicateur de Rang s'applique ici
 	var rank_mult: float = RANK_VALUE_MULTIPLIERS.get(_current_rank, 1.0)
 	var base_percent: float = _storm_stats.storm_breaker_base_reduction_percent
 	var added_percent: float = base_percent * rank_mult
-	
 	if added_percent <= 0: return
-
 	var current_total: float = 0.0
 	if _storm_breaker_memory.has(target):
 		current_total = _storm_breaker_memory[target]
-	
 	var new_total: float = current_total + added_percent
 	_storm_breaker_memory[target] = new_total
-
 	var mod := StatModifier.new()
 	mod.id = "Storm Breaker"
 	mod.stat_type = EntityStats.StatType.VULNERABILITY
@@ -178,7 +194,6 @@ func _apply_storm_breaker_effect() -> void:
 	mod.calc_type = StatModifier.CalcType.ADD
 	mod.value = new_total
 	mod.tags = [StatModifier.TagType.CARD]
-	
 	target.stats_manager.update_modifier(mod)
 
 # [STORM BATTERY]
@@ -194,21 +209,32 @@ func _apply_storm_battery_effect() -> void:
 	if final_mana > 0:
 		_owner.stats.mana += final_mana
 
+# [THUNDER BERSERKER]
+func _apply_thunder_berserker_penalty() -> void:
+	_thunder_berserker_accumulated_penalty += _storm_stats.thunder_berserker_penalty_per_rank
+	
+	var mod := StatModifier.new()
+	mod.id = "Thunder Berserker Penalty"
+	mod.stat_type = EntityStats.StatType.CRIT_MULT
+	mod.calc_type = StatModifier.CalcType.ADD 
+	mod.value = -(_thunder_berserker_accumulated_penalty)
+	mod.tags = [StatModifier.TagType.CARD]
+	_owner.stats_manager.update_modifier(mod)
 #endregion
 
 #region ============================== Callbacks functions ==============================
 
 func _on_current_rank_changed() -> void:
 	_call_the_lightning()
-	
 	# [STORM BREAKER]
 	if _storm_stats.storm_breaker_activated:
 		_apply_storm_breaker_effect()
-		
 	# [STORM BATTERY]
 	if _storm_stats.storm_battery_activated:
 		_apply_storm_battery_effect()
-		
+	# [THUNDER BERSERKER] (Pénalité sur Grind)
+	if _storm_stats.thunder_berserker_activated and _thunder_berserker_penalty_active:
+		_apply_thunder_berserker_penalty()
 	match _current_rank:
 		Rank.S:
 			_rank_s_duration_timer.wait_time = RANK_S_DURATION
@@ -233,5 +259,8 @@ func _on_owner_critical_action_done(_entity_ref: Entity, _target: Entity, _actio
 	elif _current_point >= RANK_POINT_TRESHOLDS[Rank.A]: _current_rank = Rank.A
 	elif _current_point >= RANK_POINT_TRESHOLDS[Rank.B]: _current_rank = Rank.B
 	elif _current_point >= RANK_POINT_TRESHOLDS[Rank.C]: _current_rank = Rank.C
+	
+func _on_thunder_berserker_timeout() -> void:
+	_thunder_berserker_penalty_active = true
 	
 #endregion

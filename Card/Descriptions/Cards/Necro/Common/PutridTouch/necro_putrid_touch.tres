@@ -1,19 +1,19 @@
-[gd_resource type="Resource" script_class="Card" load_steps=4 format=3]
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://dnwa5apxanb8j"]
 
-[ext_resource type="Script" path="res://Card/Descriptions/Cards/Necro/Common/PutridTouch/necro_putrid_touch.gd" id="1_logic"]
-[ext_resource type="Texture2D" path="res://Card/Descriptions/Cards/Necro/Common/PutridTouch/necro_putrid_touch.jpg" id="2_icon"]
-[ext_resource type="Script" path="res://Card/Templates/card.gd" id="3_base"]
+[ext_resource type="Script" uid="uid://muo4wd721c3x" path="res://Card/Descriptions/Cards/Necro/Common/PutridTouch/necro_putrid_touch.gd" id="1_logic"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="3_base"]
 
-[sub_resource type="Resource" id="Resource_Logic"]
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_keeku"]
+
+[sub_resource type="Resource" id="Resource_keeku"]
 script = ExtResource("1_logic")
-_stacks = Array[int]([2, 3, 4])
-_period = Array[float]([5.0, 4.0, 3.0])
-_rarity = 0
+_stacks = Array[int]([1, 2, 3, 4, 5])
+_period = Array[float]([5.0, 5.0, 5.0, 5.0, 5.0])
+metadata/_custom_type_script = "uid://muo4wd721c3x"
 
 [resource]
 script = ExtResource("3_base")
 name = "Putrid Touch"
-picture = ExtResource("2_icon")
-family = 5
-rarity = 0
-player_upgrade = SubResource("Resource_Logic")
+picture = SubResource("PlaceholderTexture2D_keeku")
+family = 11
+player_upgrade = SubResource("Resource_keeku")

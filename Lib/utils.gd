@@ -34,7 +34,8 @@ enum StackType {
 	POISON,
 	ARMOR,
 	IGNITE,
-	REGEN
+	REGEN,
+	NECROSIS
 }
 
 enum AttackType {
@@ -56,7 +57,8 @@ const STACK_COLORS: Dictionary[StackType, Color] = {
 	StackType.POISON: Color.WEB_GREEN,
 	StackType.ARMOR: Color.SADDLE_BROWN,
 	StackType.IGNITE: Color.DARK_RED,
-	StackType.REGEN: Color.AQUAMARINE
+	StackType.REGEN: Color.AQUAMARINE,
+	StackType.NECROSIS: Color.REBECCA_PURPLE
 }
 #endregion
 
@@ -79,6 +81,7 @@ func stack_to_action(stack_type: StackType) -> ActionType:
 		StackType.ARMOR: return ActionType.STACK_ARMOR
 		StackType.IGNITE: return ActionType.STACK_IGNITE
 		StackType.REGEN: return ActionType.STACK_REGEN
+		StackType.NECROSIS: return ActionType.STACK_NECROSIS
 		_: return ActionType.STACK_POISON
 
 

@@ -8,3 +8,4 @@ extends Node
 @export var serenity: FamilySerenityStats
 @export var life: FamilyLifeStats
 @export var poison: FamilyPoisonStats
+@export var necro: FamilyNecroStats

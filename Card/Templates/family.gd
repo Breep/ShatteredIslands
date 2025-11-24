@@ -29,6 +29,7 @@ const COLORS = {
 	FamilyType.POISON: Color(0.069, 0.332, 0.106), # Green
 	FamilyType.SERENITY: Color(1, 1, 1), # White
 	FamilyType.LIFE: Color(0.737, 0.379, 0.087), # Orange
+	FamilyType.NECROSIS: Color(0.518, 0.148, 0.681, 1.0), # Orange
 }
 
 # ============================== Exports ==============================

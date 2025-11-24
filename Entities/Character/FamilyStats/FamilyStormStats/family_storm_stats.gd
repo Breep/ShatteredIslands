@@ -19,6 +19,12 @@ var storm_battery_mana_gain: float
 
 #region Epic Card
 
+# [THUNDER BERSERKER]
+var thunder_berserker_activated: bool
+var thunder_berserker_start_boost: float     
+var thunder_berserker_delay: float        
+var thunder_berserker_penalty_per_rank: float 
+
 #endregion
 
 #region Legendary Card
