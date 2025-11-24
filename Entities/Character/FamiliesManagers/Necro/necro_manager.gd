@@ -144,6 +144,16 @@ func _on_before_heal_necrosis(cb_vars: Dictionary) -> void:
 	# 3. Application de la réduction
 	if cb_vars.has(ActionModifier.VarType.VALUE):
 		var current_heal = cb_vars[ActionModifier.VarType.VALUE]
+
+		# --- DEBUG PRINTS ---
+		print("--------------------------------------------------")
+		print("[NECROSIS DEBUG] Target: ", _owner.name)
+		print("[NECROSIS DEBUG] Stacks count: ", stack_count)
+		print("[NECROSIS DEBUG] Reduction: ", reduction_percentage * 100, "%")
+		print("[NECROSIS DEBUG] Heal BEFORE: ", current_heal)
+		print("[NECROSIS DEBUG] Heal AFTER: ", new_heal)
+		print("--------------------------------------------------")
+
 		# On modifie la valeur du soin dans le dictionnaire pour la suite de la chaîne
 		cb_vars[ActionModifier.VarType.VALUE] = current_heal * (1.0 - reduction_percentage)
 		
@@ -162,14 +172,5 @@ func _on_putrid_touch_timer_timeout() -> void:
 #region ===== RAISE DEAD =====
 func _on_raise_dead_timer_timeout() -> void:
 	# Logique pour invoquer un squelette ou autre
-	pass
-#endregion
-
-#region ===== DO T / TICK =====
-# Si jamais tu veux que la nécrose fasse aussi des dégâts ou diminue avec le temps comme l'ignite
-func _on_necro_tick_timer_timeout() -> void:
-	# Exemple inspiré du FireManager :
-	# if _owner.stats.necrosis_stacks > 0:
-	# 	_owner.take_damage(_owner.stats.necrosis_stacks, Utils.DamageType.MAGICAL, false)
 	pass
 #endregion
