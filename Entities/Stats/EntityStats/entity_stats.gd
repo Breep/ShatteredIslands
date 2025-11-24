@@ -149,6 +149,17 @@ var _regen_stacks: float = 0
 		if value == _regen_stacks: return
 		_regen_stacks = max(0, value)
 		regen_stacks_changed.emit(_regen_stacks)
+
+signal necrosis_stacks_changed(new_necrosis_stacks: float)
+var _necrosis_stacks: float = 0
+@export var necrosis_stacks: float:
+	get: return _necrosis_stacks
+	set(value):
+		if value < 0: value = 0
+		if value == _necrosis_stacks: return
+		_necrosis_stacks = max(0, value)
+		necrosis_stacks_changed.emit(_necrosis_stacks)
+
 #endregion
 
 #region ============================== Resistances ==============================
@@ -179,11 +190,11 @@ var _weaknesses: Dictionary[Utils.ActionType, float]
 
 #region ============================== Public functions ==============================
 func get_stacks_number() -> float:
-	return _poison_stacks + _ignite_stacks + _armor_stacks + _regen_stacks
+	return _poison_stacks + _ignite_stacks + _armor_stacks + _regen_stacks + _necrosis_stacks
 
 
 func get_debuf_stacks_number() -> float :
-	return _poison_stacks + _ignite_stacks
+	return _poison_stacks + _ignite_stacks + _necrosis_stacks
 
 
 func get_buf_stacks_number() -> float:
