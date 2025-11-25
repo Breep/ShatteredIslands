@@ -8,7 +8,7 @@ extends Node
 @export_group("External nodes")
 @export var _fighting_area: FightingArea
 
-@onready var battle_actions_registry := BattleActionsRegistry.new()
+var entity_bds_registries: Dictionary[int, EntityBDSRegistry]
 
 # ============================== Private variables ==============================
 
@@ -99,7 +99,9 @@ func _log_stack_taken(source: Entity, stack_type: Utils.StackType, stack_number:
 
 
 func _register_action(source: Entity, _target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
-	battle_actions_registry.register_action(source, action_type, action_id, value, is_critical)
+	if not entity_bds_registries.has(source.id):
+		entity_bds_registries[source.id] = EntityBDSRegistry.new(source.name)
+	entity_bds_registries[source.id].register_action(action_id, action_type, value, is_critical)
 
 
 func _get_time() -> float:

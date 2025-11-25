@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlnt5nfitss0l"]
+
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_8hycb"]
+[ext_resource type="Script" uid="uid://batlmpclivtk3" path="res://GlobalManagers/ActionMeter/Viewer/ui_battle_data_stats_panel.gd" id="1_ctikr"]
+
+[node name="BattleDataStatsPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 500.0
+offset_bottom = 800.0
+theme = ExtResource("1_8hycb")
+script = ExtResource("1_ctikr")
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="ActionTypeLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+theme_override_font_sizes/font_size = 50
+text = "DAMAGE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/Control/MarginContainer"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="BDSViewersContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Control/MarginContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 5
+
+[connection signal="child_entered_tree" from="MarginContainer/VBoxContainer/Control/MarginContainer/ScrollContainer/BDSViewersContainer" to="." method="_on_action_meters_container_child_entered_tree"]
+[connection signal="child_exiting_tree" from="MarginContainer/VBoxContainer/Control/MarginContainer/ScrollContainer/BDSViewersContainer" to="." method="_on_action_meters_container_child_exiting_tree"]

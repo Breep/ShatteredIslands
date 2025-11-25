@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2i740j57q2r8"]
+
+[ext_resource type="Script" uid="uid://deyvipbdvwa3n" path="res://Prototyping/UI/UICharts/UIBattleDataStatViewer/prototyping_battle_data_stat_viewer.gd" id="1_ihhbo"]
+[ext_resource type="PackedScene" uid="uid://duf3kswv8x14b" path="res://GlobalManagers/ActionMeter/Viewer/ui_battle_data_stat_viewer.tscn" id="2_igj26"]
+
+[node name="PrototypingBattleDataStatViewer" type="Control" node_paths=PackedStringArray("_bds_viewer")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ihhbo")
+_bds_viewer = NodePath("BattleDataStatViewer")
+
+[node name="BattleDataStatViewer" parent="." instance=ExtResource("2_igj26")]
+layout_mode = 1
+
+[node name="CreateBDSButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 214.0
+offset_top = 144.0
+offset_right = 309.0
+offset_bottom = 175.0
+text = "Create BDS"
+
+[node name="AddPhysicalDamageButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 152.0
+offset_top = 257.0
+offset_right = 247.0
+offset_bottom = 288.0
+text = "ADD Physical damage"
+
+[node name="AddMagicalDamageButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 491.0
+offset_top = 251.0
+offset_right = 663.0
+offset_bottom = 282.0
+text = "ADD Magical damage"
+
+[node name="AddPoisonDamageButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 131.0
+offset_top = 368.0
+offset_right = 306.0
+offset_bottom = 399.0
+text = "ADD poison damage"
+
+[connection signal="pressed" from="CreateBDSButton" to="." method="_on_create_bds_button_pressed"]
+[connection signal="pressed" from="AddPhysicalDamageButton" to="." method="_on_add_physical_damage_button_pressed"]
+[connection signal="pressed" from="AddMagicalDamageButton" to="." method="_on_add_magical_damage_button_pressed"]
+[connection signal="pressed" from="AddPoisonDamageButton" to="." method="_on_add_poison_damage_button_pressed"]

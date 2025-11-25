@@ -11,6 +11,7 @@ func signal_death() -> void:
 signal action_done(entity_ref: Entity, target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool)
 func signal_action_done(target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
 	action_done.emit(self, target, action_type, action_id, value, is_critical)
+	bds_registry.register_action(action_id, action_type, value, is_critical)
 
 signal critical_action_done(entity_ref: Entity, target: Entity, action_type: Utils.ActionType, base_value: float, real_value: float)
 func signal_critical_action_done(target: Entity, action_type: Utils.ActionType, base_value: float, real_value: float) -> void:
@@ -66,6 +67,8 @@ var is_dead: bool:
 
 var action_modifiers_manager: ActionModifiersManager
 var stack_manager: StackManager
+
+@onready var bds_registry := EntityBDSRegistry.new(entity_name)
 
 # ============================== Private variables ==============================
 

@@ -89,6 +89,7 @@ func damage_to_action(damage_type: DamageType) -> ActionType:
 		DamageType.POISON: return ActionType.DAMAGE_POISON
 		_: return ActionType.DAMAGE_PHYSICAL
 
+
 func get_all_actions() -> Array[ActionType]:
 	return [
 		ActionType.DAMAGE_PHYSICAL,
