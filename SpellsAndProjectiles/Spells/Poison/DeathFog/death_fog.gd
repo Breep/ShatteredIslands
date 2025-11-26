@@ -120,7 +120,7 @@ func _on_tick_timer_timeout() -> void:
 		if _source != null:
 			_source.inflict_condition_stacks(entity, poison_stacks, Utils.StackType.POISON, "Death Fog")
 		else:
-			entity.take_condition_stacks(poison_stacks, Utils.StackType.POISON, false)
+			entity.take_condition_stacks(poison_stacks, Utils.StackType.POISON, false, "Death Fog")
 	for e in to_remove:
 		_exposure_seconds.erase(e)
 

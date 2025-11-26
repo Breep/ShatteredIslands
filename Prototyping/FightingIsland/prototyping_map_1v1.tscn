@@ -109,6 +109,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="PlayerStats" parent="Control" node_paths=PackedStringArray("_critical_chance_labels", "_critical_multiplier_labels", "_dodge_labels", "_resistance_labels", "_vulnerability_labels", "_strenght_labels", "_weakness_labels") instance=ExtResource("11_e0xek")]
 unique_name_in_owner = true

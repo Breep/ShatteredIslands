@@ -31,7 +31,7 @@ func direct_attack(target: Entity, damage: float, damage_type: Utils.DamageType,
 	var damage_before_crit: float = damage * _get_strenght_weakness_multiplier(Utils.damage_to_action(damage_type))
 	var crit_multiplier = _get_crit_multiplier(Utils.damage_to_action(damage_type))
 	damage = damage_before_crit * crit_multiplier["multiplier"]
-	var damage_done: float = target.take_damage(damage, damage_type, crit_multiplier["is_critical"], _owner)
+	var damage_done: float = target.take_damage(damage, damage_type, crit_multiplier["is_critical"], action_id, _owner)
 	if crit_multiplier["is_critical"]:
 		_owner.signal_critical_action_done(target, Utils.damage_to_action(damage_type), damage_before_crit, damage_done)
 	_owner.signal_action_done(target, Utils.damage_to_action(damage_type), action_id, damage_done, crit_multiplier["is_critical"])
@@ -94,7 +94,7 @@ func heal(target: Entity, heal_amount: float, action_id: StringName) -> void:
 	var heal_amount_before_crit: float = heal_amount * _get_strenght_weakness_multiplier(Utils.ActionType.UTILITY_HEAL)
 	var crit_multiplier = _get_crit_multiplier(Utils.ActionType.UTILITY_HEAL)
 	heal_amount = heal_amount_before_crit * crit_multiplier["multiplier"]
-	var heal_taken: float = target.take_heal(heal_amount, crit_multiplier["is_critical"], _owner)
+	var heal_taken: float = target.take_heal(heal_amount, crit_multiplier["is_critical"], action_id, _owner)
 	if crit_multiplier["is_critical"]:
 		_owner.signal_critical_action_done(target, Utils.ActionType.UTILITY_HEAL, heal_amount_before_crit, heal_taken)
 	_owner.signal_action_done(target, Utils.ActionType.UTILITY_HEAL, action_id, heal_taken, crit_multiplier["is_critical"])
@@ -133,7 +133,7 @@ func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: 
 					ActionModifier.VarType.STACK_TYPE: stack_type,
 					ActionModifier.VarType.TARGET: target
 				})
-	var stacks_taken: float = target.take_condition_stacks(stacks_number, stack_type, crit_multiplier["is_critical"], _owner)
+	var stacks_taken: float = target.take_condition_stacks(stacks_number, stack_type, crit_multiplier["is_critical"], action_id, _owner)
 	if crit_multiplier["is_critical"]:
 		_owner.signal_critical_action_done(target, Utils.stack_to_action(stack_type), stacks_number_before_crit, stacks_taken)
 	_owner.signal_action_done(target, Utils.stack_to_action(stack_type), action_id, stacks_taken, crit_multiplier["is_critical"])
@@ -148,7 +148,7 @@ func cleanse(target: Entity, value: float, action_id: StringName) -> void:
 	var value_before_crit: float = value * _get_strenght_weakness_multiplier(Utils.ActionType.UTILITY_CLEANSE)
 	var crit_multiplier: Dictionary = _get_crit_multiplier(Utils.ActionType.UTILITY_CLEANSE)
 	value = value_before_crit * crit_multiplier["multiplier"]
-	var stack_removed: float = target.take_cleanse(value, crit_multiplier["is_critical"], _owner)
+	var stack_removed: float = target.take_cleanse(value, crit_multiplier["is_critical"], action_id, _owner)
 	if crit_multiplier["is_critical"]:
 		_owner.signal_critical_action_done(target, Utils.ActionType.UTILITY_CLEANSE, value_before_crit, stack_removed)
 	_owner.signal_action_done(target, Utils.ActionType.UTILITY_CLEANSE, action_id, value, crit_multiplier["is_critical"])
@@ -160,7 +160,7 @@ func dispell(target: Entity, value: float, action_id: StringName) -> void:
 	var value_before_crit: float = value * _get_strenght_weakness_multiplier(Utils.ActionType.UTILITY_DISPELL)
 	var crit_multiplier: Dictionary = _get_crit_multiplier(Utils.ActionType.UTILITY_DISPELL)
 	value = value_before_crit * crit_multiplier["multiplier"]
-	var stack_removed: float = target.take_dispell(value, crit_multiplier["is_critical"], _owner)
+	var stack_removed: float = target.take_dispell(value, crit_multiplier["is_critical"], action_id, _owner)
 	if crit_multiplier["is_critical"]:
 		_owner.signal_critical_action_done(target, Utils.ActionType.UTILITY_DISPELL, value_before_crit, stack_removed)
 	_owner.signal_action_done(target, Utils.ActionType.UTILITY_DISPELL, action_id, value, crit_multiplier["is_critical"])

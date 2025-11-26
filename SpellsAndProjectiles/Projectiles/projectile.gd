@@ -118,8 +118,8 @@ func _on_body_entered(body: Node3D) -> void:
 				physical_damage,
 				Utils.DamageType.PHYSICAL,
 				stats.physical_is_critical,
+				"AUTO ATTACK",
 				source,
-				Utils.AttackType.AUTO_ATTACK
 			)
 		source.signal_action_done(target, Utils.ActionType.DAMAGE_PHYSICAL, "AUTO ATTACK", physical_damage_done_flat, stats.physical_is_critical)
 		if stats.physical_is_critical:
@@ -131,11 +131,12 @@ func _on_body_entered(body: Node3D) -> void:
 				magical_damage,
 				Utils.DamageType.MAGICAL,
 				stats.magical_is_critical,
+				"AUTO ATTACK",
 				source)
 	
 		if stats.poison_stacks > 0:
 			if source != null: source.inflict_condition_stacks(target, stats.poison_stacks, Utils.StackType.POISON, "AUTO ATTACK")
-			else: target.take_condition_stacks(stats.poison_stacks, Utils.StackType.POISON, stats.poison_stacks_is_critical)
+			else: target.take_condition_stacks(stats.poison_stacks, Utils.StackType.POISON, stats.poison_stacks_is_critical, "AUTO ATTACK",)
 		
 		# --- CALLBACKS ---
 		for cb: Callable in stats.on_hit_logic_callbacks:

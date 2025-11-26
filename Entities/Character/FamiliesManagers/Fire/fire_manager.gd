@@ -355,7 +355,7 @@ func _on_inflict_condition_ignite(cb_vars: Dictionary) -> void:
 func _on_ignite_timer_timeout() -> void:
 	if _owner.stats.ignite_stacks > 0:
 		var percent: float = _IGNITE_PERCENT_PER_STACK * _owner.stats.ignite_stacks
-		_owner.take_damage_percent(percent, Utils.PercentModifier.MAX_HP, Utils.DamageType.MAGICAL)
+		_owner.take_damage_percent(percent, Utils.PercentModifier.MAX_HP, Utils.DamageType.MAGICAL, false, "Ignite Periodic Damage")
 	
 	var decay: int = (_owner.stats.ignite_stacks * _IGNITE_DECAY_PERCENT / 100.0) as int
 	decay = clampi(decay, 1, decay)

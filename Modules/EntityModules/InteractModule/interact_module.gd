@@ -14,7 +14,7 @@ func _ready() -> void:
 # ============================== Public function ==============================
 
 #region ============================== Damage ==============================
-func take_damage(damage: float, damage_type: Utils.DamageType, is_critical: bool, _source: Entity = null, _attack_type: Utils.AttackType = Utils.AttackType.UNDEF) -> float:
+func take_damage(damage: float, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
 	if _owner.stats.health <= 0 or _owner.is_dead: return 0
 	var damage_before_armor: float = 0
 	if multiplayer.is_server():
@@ -30,10 +30,11 @@ func take_damage(damage: float, damage_type: Utils.DamageType, is_critical: bool
 	_owner.stats.health -= damage
 	if damage > 0 or (damage_before_armor == 0 and damage == 0):
 		_owner.signal_damage_taken(damage, damage_type, is_critical, false)
+	_owner.signal_interaction_received(source, Utils.damage_to_action(damage_type), action_id, damage, is_critical)
 	return damage
 
 
-func take_damage_percent(damage_percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.DamageType, is_critical: bool, source: Entity = null) -> float:
+func take_damage_percent(damage_percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
 	if not multiplayer.is_server(): return 0
 	var hp: float
 	match percent_modifier:
@@ -44,11 +45,11 @@ func take_damage_percent(damage_percent: float, percent_modifier: Utils.PercentM
 		Utils.PercentModifier.LOST_HP:
 			hp = _owner.stats.health_max - _owner.stats.health
 	var damage = hp * damage_percent  / 100.0
-	return take_damage(damage, damage_type, is_critical, source)
+	return take_damage(damage, damage_type, is_critical, action_id, source)
 #endregion
 
 #region ============================== Condition stacks ==============================
-func take_condition_stacks(stacks_number: float, stack_type: Utils.StackType, is_critical: bool, _source: Entity = null) -> float:
+func take_condition_stacks(stacks_number: float, stack_type: Utils.StackType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
 	if _owner.stats.health <= 0 or _owner.is_dead: return -1.0
 	if _is_dodged(Utils.stack_to_action(stack_type)):
 		return 0.0
@@ -63,24 +64,26 @@ func take_condition_stacks(stacks_number: float, stack_type: Utils.StackType, is
 			_owner.stats.armor_stacks += stacks_number
 		Utils.StackType.REGEN:
 			_owner.stats.regen_stacks += stacks_number
+	_owner.signal_interaction_received(source, Utils.stack_to_action(stack_type), action_id, stacks_number, is_critical)
 	return stacks_number
 #endregion
 
 #region ============================== Heal ==============================
-func take_heal(heal_amount: float, is_critical: bool, _source: Entity = null) -> float:
+func take_heal(heal_amount: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
 	if _owner.stats.health <= 0 or _owner.is_dead: return -1.0
 	if _is_dodged(Utils.ActionType.UTILITY_HEAL):
 		return 0.0
-	heal_amount = int(float(heal_amount) * _get_resistance_vulnerability_multiplier(Utils.ActionType.UTILITY_HEAL))
+	heal_amount *= _get_resistance_vulnerability_multiplier(Utils.ActionType.UTILITY_HEAL)
 	_owner.stats.health += heal_amount
 	_owner.signal_heal_taken(heal_amount, is_critical)
+	_owner.signal_interaction_received(source, Utils.ActionType.UTILITY_HEAL, action_id, heal_amount, is_critical)
 	return heal_amount
 #endregion
 
 #region ============================== Cleanse/Dispell ==============================
 # Removes debufs
 const CLEANSE_PACK_SIZE: int = 2
-func take_cleanse(value: float, _is_critical: bool, _source: Entity = null) -> float:
+func take_cleanse(value: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
 	var total_to_dispell: int = int(value * _get_resistance_vulnerability_multiplier(Utils.ActionType.UTILITY_CLEANSE))
 	if total_to_dispell <= 0:
 		return 0.0
@@ -104,12 +107,12 @@ func take_cleanse(value: float, _is_critical: bool, _source: Entity = null) -> f
 				_owner.stats.poison_stacks -= to_remove
 		remaining -= to_remove
 		removed += to_remove
-
+	_owner.signal_interaction_received(source, Utils.ActionType.UTILITY_CLEANSE, action_id, removed, is_critical)
 	return float(removed)
 
 # Removes bufs
 const DISPELL_PACK_SIZE: int = 2
-func take_dispell(value: float, _is_critical: bool, _source: Entity = null) -> float:
+func take_dispell(value: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
 	var total_to_dispell: int = int(value * _get_resistance_vulnerability_multiplier(Utils.ActionType.UTILITY_DISPELL))
 	if total_to_dispell <= 0:
 		return 0.0
@@ -133,7 +136,7 @@ func take_dispell(value: float, _is_critical: bool, _source: Entity = null) -> f
 				_owner.stats.regen_stacks -= to_remove
 		remaining -= to_remove
 		removed += to_remove
-
+	_owner.signal_interaction_received(source, Utils.ActionType.UTILITY_DISPELL, action_id, removed, is_critical)
 	return float(removed)
 #endregion
 

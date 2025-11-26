@@ -25,8 +25,8 @@ func _ready() -> void:
 		_source.direct_attack(_target, _damage / 2.0, Utils.DamageType.PHYSICAL, "Lightning")
 		_source.direct_attack(_target, _damage / 2.0, Utils.DamageType.MAGICAL, "Lightning")
 	else:
-		_target.take_damage(_damage / 2.0, Utils.DamageType.PHYSICAL)
-		_target.take_damage(_damage / 2.0, Utils.DamageType.MAGICAL)
+		_target.take_damage(_damage / 2.0, Utils.DamageType.PHYSICAL, false, "Lightning")
+		_target.take_damage(_damage / 2.0, Utils.DamageType.MAGICAL, false, "Lightning")
 	
 	var tween := create_tween()
 	tween.tween_interval(LIFETIME)
