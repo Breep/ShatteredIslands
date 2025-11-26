@@ -73,12 +73,16 @@ func register_action(action_type: Utils.ActionType, value: float) -> void:
 #region ============================== Static functions ==============================
 static func battle_data_stat_type_to_action_types(bds_type: Type) -> Array[Utils.ActionType]:
 	match bds_type:
-		Type.DAMAGE_DONE: return [Utils.ActionType.DAMAGE_PHYSICAL, Utils.ActionType.DAMAGE_MAGICAL, Utils.ActionType.DAMAGE_POISON]
-		Type.HEAL_DONE: return [Utils.ActionType.UTILITY_HEAL]
+		Type.DAMAGE_DONE:     return [Utils.ActionType.DAMAGE_PHYSICAL, Utils.ActionType.DAMAGE_MAGICAL, Utils.ActionType.DAMAGE_POISON]
+		Type.DAMAGE_RECEIVED: return [Utils.ActionType.DAMAGE_PHYSICAL, Utils.ActionType.DAMAGE_MAGICAL, Utils.ActionType.DAMAGE_POISON]
+		Type.HEAL_DONE:     return [Utils.ActionType.UTILITY_HEAL]
+		Type.HEAL_RECEIVED: return [Utils.ActionType.UTILITY_HEAL]
 		Type.STACK_INFLICTED: return [Utils.ActionType.STACK_ARMOR, Utils.ActionType.STACK_IGNITE, Utils.ActionType.STACK_POISON,
 										Utils.ActionType.STACK_REGEN, Utils.ActionType.STACK_NECROSIS]
-		Type.DAMAGE_RECEIVED: return [Utils.ActionType.DAMAGE_PHYSICAL, Utils.ActionType.DAMAGE_MAGICAL, Utils.ActionType.DAMAGE_POISON]
-		Type.HEAL_RECEIVED: return [Utils.ActionType.UTILITY_HEAL]
+		Type.STACK_RECEIVED:  return [Utils.ActionType.STACK_ARMOR, Utils.ActionType.STACK_IGNITE, Utils.ActionType.STACK_POISON,
+										Utils.ActionType.STACK_REGEN, Utils.ActionType.STACK_NECROSIS]
+		Type.MISC_DONE:     return [Utils.ActionType.UTILITY_STUN, Utils.ActionType.UTILITY_CLEANSE, Utils.ActionType.UTILITY_DISPELL]
+		Type.MISC_RECEIVED: return [Utils.ActionType.UTILITY_STUN, Utils.ActionType.UTILITY_CLEANSE, Utils.ActionType.UTILITY_DISPELL]
 		_: return []
 
 

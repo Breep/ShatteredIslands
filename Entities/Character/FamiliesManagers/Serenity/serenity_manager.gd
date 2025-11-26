@@ -175,7 +175,7 @@ func _on_dodge_graceful_step(_cb_vars: Dictionary) -> void:
 func _on_regen_tick_timer_timeout() -> void:
 	var regen_stacks: float = _owner.stats.regen_stacks
 	if regen_stacks > 0:
-		_owner.heal(_owner, regen_stacks)
+		_owner.heal(_owner, regen_stacks, "Regen")
 		var max_hp: float = _owner.stats.health_max
 		if max_hp <= 0: return
 		var current_hp_percent: float = (_owner.stats.health / max_hp) * 100.0
@@ -184,4 +184,3 @@ func _on_regen_tick_timer_timeout() -> void:
 			decay = clampi(decay, 1, decay)
 			_owner.stats.regen_stacks -= decay
 #endregion
-
