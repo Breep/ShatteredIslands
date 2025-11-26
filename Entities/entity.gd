@@ -121,10 +121,10 @@ func connect_to_fighting_area(_fighting_area: FightingArea) -> void:
 	printerr("Entity: virtual connect_to_fighting_area() called [", get_path(), "]")
 
 #region ===== Actions [VIRTUAL]
-func direct_attack(_target: Entity, _damage: float, _damage_type: Utils.DamageType) -> void:
+func direct_attack(_target: Entity, _damage: float, _damage_type: Utils.DamageType, _action_id: StringName) -> void:
 	printerr("Entity: virtual direct_attack() called [", get_path(), "]")
 
-func direct_attack_percent(_target: Entity, _damage_percent: float, _damage_type: Utils.DamageType, _percent_modifier: Utils.PercentModifier) -> void:
+func direct_attack_percent(_target: Entity, _damage_percent: float, _damage_type: Utils.DamageType, _percent_modifier: Utils.PercentModifier, _action_id: StringName) -> void:
 	printerr("Entity: virtual direct_attack_percent() called [", get_path(), "]")
 
 func projectile_attack(_target: Entity, _projectile_type: Projectile.ProjectileType, _projectile_spawn: Node3D, _projectile_stats: ProjectileStats) -> void:
@@ -136,22 +136,22 @@ func cast_spell(_target: Entity, _spell_type: Spell.Type, _spell_modifier: Dicti
 func cast_ultimate() -> void:
 	printerr("Entity: virtual cast_ultimate() called [", get_path(), "]")
 
-func heal(_target: Entity, _heal_amount: float) -> void:
+func heal(_target: Entity, _heal_amount: float, _action_id: StringName) -> void:
 	printerr("Entity: virtual heal() called [", get_path(), "]")
 
-func heal_percent(_target: Entity, _percent: float, _percent_modifier: Utils.PercentModifier) -> void:
+func heal_percent(_target: Entity, _percent: float, _percent_modifier: Utils.PercentModifier, _action_id: StringName) -> void:
 	printerr("Entity: virtual heal_percent() called [", get_path(), "]")
 
-func inflict_condition_stacks(_target: Entity, _stacks_number: float, _stack_type: Utils.StackType) -> void:
+func inflict_condition_stacks(_target: Entity, _stacks_number: float, _stack_type: Utils.StackType, _action_id: StringName) -> void:
 	printerr("Entity: virtual inflict_condition_stacks() called [", get_path(), "]")
 
 func summon_entity(_entity_type: EntityType, _entity_spawn_global_position: Vector3, _entity_modifier: Dictionary) -> void:
 	printerr("Entity: virtual summon_entity() called [", get_path(), "]")
 
-func cleanse(_target: Entity, _value: float) -> void:
+func cleanse(_target: Entity, _value: float, _action_id: StringName) -> void:
 	printerr("Entity: virtual cleanse() called [", get_path(), "]")
 
-func dispell(_target: Entity, _value: float) -> void:
+func dispell(_target: Entity, _value: float, _action_id: StringName) -> void:
 	printerr("Entity: virtual dispell() called [", get_path(), "]")
 #endregion
 

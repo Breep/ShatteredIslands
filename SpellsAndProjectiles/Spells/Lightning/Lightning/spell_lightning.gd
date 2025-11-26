@@ -22,8 +22,8 @@ func _ready() -> void:
 	global_position = _target.global_position
 	
 	if _source != null:
-		_source.direct_attack(_target, _damage / 2.0, Utils.DamageType.PHYSICAL)
-		_source.direct_attack(_target, _damage / 2.0, Utils.DamageType.MAGICAL)
+		_source.direct_attack(_target, _damage / 2.0, Utils.DamageType.PHYSICAL, "Lightning")
+		_source.direct_attack(_target, _damage / 2.0, Utils.DamageType.MAGICAL, "Lightning")
 	else:
 		_target.take_damage(_damage / 2.0, Utils.DamageType.PHYSICAL)
 		_target.take_damage(_damage / 2.0, Utils.DamageType.MAGICAL)

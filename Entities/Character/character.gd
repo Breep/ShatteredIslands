@@ -114,11 +114,11 @@ func get_rank_changed_signal() -> Signal:
 	return _character_logic.get_rank_changed_signal()
 
 #region ===== Actions =====
-func direct_attack(target: Entity, damage: float, damage_type: Utils.DamageType) -> void:
-	_action_module.direct_attack(target, damage, damage_type)
+func direct_attack(target: Entity, damage: float, damage_type: Utils.DamageType, action_id: StringName) -> void:
+	_action_module.direct_attack(target, damage, damage_type, action_id)
 
-func direct_attack_percent(target: Entity, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier) -> void:
-	_action_module.direct_attack_percent(target, damage_percent, damage_type, percent_modifier)
+func direct_attack_percent(target: Entity, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier, action_id: StringName) -> void:
+	_action_module.direct_attack_percent(target, damage_percent, damage_type, percent_modifier, action_id)
 
 var _pending_attacks: Array[AttackCommand]
 func projectile_attack(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
@@ -147,14 +147,14 @@ func cast_ultimate() -> void:
 	ultimate_casted.emit()
 	_hero_3D.cast_ultimate()
 
-func heal(target: Entity, heal_amount: float) -> void:
-	_action_module.heal(target, heal_amount)
+func heal(target: Entity, heal_amount: float, action_id: StringName) -> void:
+	_action_module.heal(target, heal_amount, action_id)
 
-func heal_percent(target: Entity, percent: float, percent_modifier: Utils.PercentModifier) -> void:
-	_action_module.heal_percent(target, percent, percent_modifier)
+func heal_percent(target: Entity, percent: float, percent_modifier: Utils.PercentModifier, action_id: StringName) -> void:
+	_action_module.heal_percent(target, percent, percent_modifier, action_id)
 
-func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Utils.StackType) -> void:
-	_action_module.inflict_condition_stacks(target, stacks_number, stack_type)
+func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Utils.StackType, action_id: StringName) -> void:
+	_action_module.inflict_condition_stacks(target, stacks_number, stack_type, action_id)
 
 func ultimate() -> void:
 	_hero_3D.ultimate()
@@ -162,11 +162,11 @@ func ultimate() -> void:
 func summon_entity(entity_type: EntityType, entity_spawn_global_position: Vector3, entity_modifier: Dictionary) -> void:
 	_action_module.summon_entity(entity_type, entity_spawn_global_position, entity_modifier)
 
-func cleanse(target: Entity, value: float) -> void:
-	_action_module.cleanse(target, value)
+func cleanse(target: Entity, value: float, action_id: StringName) -> void:
+	_action_module.cleanse(target, value, action_id)
 
-func dispell(target: Entity, value: float) -> void:
-	_action_module.dispell(target, value)
+func dispell(target: Entity, value: float, action_id: StringName) -> void:
+	_action_module.dispell(target, value, action_id)
 #endregion
 
 #region ===== Interaction =====

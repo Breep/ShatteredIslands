@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c5ji8s1iic5v8"]
+[gd_scene load_steps=28 format=3 uid="uid://c5ji8s1iic5v8"]
 
 [ext_resource type="Script" uid="uid://bu48b2v401db2" path="res://Prototyping/FightingIsland/prototyping_map.gd" id="1_vksg0"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="2_vksg0"]
@@ -9,9 +9,20 @@
 [ext_resource type="PackedScene" uid="uid://drcuyohos0doa" path="res://FloatingIsland/FightingIsland/fighting_island.tscn" id="6_sp80o"]
 [ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Entities/Character/character.tscn" id="7_pc3mw"]
 [ext_resource type="PackedScene" uid="uid://bhxhqex1pbh2p" path="res://UI/InGame/FightingArea/ui_fighting_area.tscn" id="7_wwtbg"]
+[ext_resource type="Resource" uid="uid://dvpdubk0btegx" path="res://Card/Descriptions/Cards/Poison/Common/PoisonFlask/poison_poison_flask.tres" id="7_yjmng"]
+[ext_resource type="Resource" uid="uid://bj3e4jhk5i7ab" path="res://Card/Descriptions/Cards/Poison/Common/RottingMilk/poison_rotting_milk.tres" id="8_0hb3b"]
 [ext_resource type="Material" uid="uid://2wlal7g5718r" path="res://VFX/Shaders/Sky/stylized_shader_night.tres" id="8_qw25r"]
+[ext_resource type="Resource" uid="uid://b3ohguwihk7x3" path="res://Card/Descriptions/Cards/Fire/Common/ExpanseUniverse/fire_expanse_universe.tres" id="9_yrphu"]
+[ext_resource type="Resource" uid="uid://dpnpvtk3elac0" path="res://Card/Descriptions/Cards/Attack/Common/ScorchingBlade/attack_scorching_blade.tres" id="10_irf3r"]
 [ext_resource type="PackedScene" uid="uid://cs66hky7o30da" path="res://GlobalManagers/ActionMeter/Viewer/ui_entity_bds_registry.tscn" id="10_kngc2"]
+[ext_resource type="Resource" uid="uid://unfr47gd88os" path="res://Card/Descriptions/Cards/Poison/Epic/Shrooms/poison_shrooms.tres" id="10_yrphu"]
 [ext_resource type="PackedScene" uid="uid://ci5cxqmyimurq" path="res://UI/InGame/FightingArea/DebugEntityStats/ui_debug_entity_stats.tscn" id="11_e0xek"]
+[ext_resource type="Resource" uid="uid://c3qf5odp5y6ap" path="res://Card/Descriptions/Cards/Light/Common/LifeSpring/light_life_spring.tres" id="11_irf3r"]
+[ext_resource type="Resource" uid="uid://dxr7p12a3u5s0" path="res://Card/Descriptions/Cards/Attack/Common/RustyDagger/attack_rusty_dagger.tres" id="11_y2jsj"]
+[ext_resource type="Resource" uid="uid://qm75h7gw2hgn" path="res://Card/Descriptions/Cards/Attack/Common/HealingCrossbow/attack_healing_crossbow.tres" id="12_l2orx"]
+[ext_resource type="Resource" uid="uid://ctm6ojtt36a88" path="res://Card/Descriptions/Cards/Attack/Common/TwinBlade/attack_twin_blade.tres" id="13_kasqd"]
+[ext_resource type="Resource" uid="uid://by5tud5u1y87o" path="res://Card/Descriptions/Cards/Defense/Common/ForceField/shieldomatic_force_field.tres" id="14_86uf5"]
+[ext_resource type="Resource" uid="uid://bdq8el3f8q22o" path="res://Card/Descriptions/Cards/Colossus/Common/TitansProtection/colossus_titans_protection.tres" id="15_4j2h2"]
 
 [sub_resource type="NoiseTexture3D" id="NoiseTexture3D_4fa74"]
 
@@ -42,7 +53,8 @@ volumetric_fog_density = 0.0
 
 [node name="PrototypingMap" type="Node3D" node_paths=PackedStringArray("_characters", "_floating_island")]
 script = ExtResource("1_vksg0")
-_player1_cards = Array[ExtResource("2_vksg0")]([ExtResource("3_dlg3x"), ExtResource("4_kngc2"), ExtResource("5_7wmtn"), ExtResource("6_pc3mw")])
+_player1_cards = Array[ExtResource("2_vksg0")]([ExtResource("3_dlg3x"), ExtResource("4_kngc2"), ExtResource("5_7wmtn"), ExtResource("6_pc3mw"), ExtResource("7_yjmng"), ExtResource("8_0hb3b"), ExtResource("9_yrphu"), ExtResource("10_yrphu"), ExtResource("11_irf3r")])
+_player2_cards = Array[ExtResource("2_vksg0")]([ExtResource("10_irf3r"), ExtResource("11_y2jsj"), ExtResource("12_l2orx"), ExtResource("13_kasqd"), ExtResource("14_86uf5"), ExtResource("5_7wmtn"), ExtResource("15_4j2h2"), ExtResource("9_yrphu")])
 _characters = [NodePath("DarkKnight"), NodePath("Character2")]
 _floating_island = NodePath("FightingIsland")
 

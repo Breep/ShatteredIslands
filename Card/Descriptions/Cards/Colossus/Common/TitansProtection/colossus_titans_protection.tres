@@ -16,4 +16,5 @@ name = "Titan's Protection"
 picture = ExtResource("1_mk17c")
 family = 6
 player_upgrade = SubResource("Resource_b3qsj")
+lvl = 5
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

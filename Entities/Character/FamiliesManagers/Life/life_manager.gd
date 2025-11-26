@@ -51,41 +51,28 @@ func source_is_dead() -> void:
 
 # ============================== Private functions ==============================
 #region optional timer
-
 func _create_optional_timers() -> void:
-	
-	## Hearth of fire
-	#if _life_stats.fire_damage_activated:
-		#_optional_timers.append(Utils.create_perpetual_timer(self, _life_stats.fire_damage_period, _on_fire_damage_timer_timeout))
-	#
-	#if _life_stats.revive_after_death_activated:
-		#_revive_timer = Timer.new()
-		#_revive_timer.wait_time = _life_stats.revive_after_death_time
-		#_revive_timer.one_shot = true
-		#_revive_timer.timeout.connect(_on_revive_timer_timeout)
-		#add_child(_revive_timer)
-	
 	# [TAINTED BLOOD]
 	if _life_stats.tainted_blood_activated:
 		_optional_timers.append(Utils.create_perpetual_timer(self, _life_stats.tainted_blood_period, _on_tainted_blood_timer_timeout, true))
-		
+	
 	# [VITAL PULSE]
 	if _life_stats.vital_pulse_activated:
 		_optional_timers.append(Utils.create_perpetual_timer(self, _life_stats.vital_pulse_period, _vital_pulse_timer_timeout, true))
-		
+	
 	# [TITAN'S PROTECTION]
 	if _life_stats.titans_protection_activated:
 		_optional_timers.append(Utils.create_perpetual_timer(self, _life_stats.titans_protection_period, _on_titans_protection_timer_timeout, true))
-		
+	
 	# [ANCIENT GROWTH]
 	if _life_stats.ancient_growth_activated:
 		_optional_timers.append(Utils.create_perpetual_timer(self, _life_stats.ancient_growth_period, _on_ancient_growth_timer_timeout, true))
+
 
 func _clear_optional_timers() -> void:
 	for timer in _optional_timers:
 		timer.queue_free()
 	_optional_timers.clear()
-
 #endregion
 
 #region aa modifier
@@ -267,17 +254,6 @@ func _remove_action_modifiers() -> void:
 #endregion
 # ============================== Callbacks functions ==============================
 
-func _on_poison_by_lost_hp_timer_timeout() -> void:
-	pass
-
-
-func _on_fire_damage_timer_timeout() -> void:
-	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
-	if target == null: return
-	var damage = _owner.stats.health_max * _life_stats.fire_damage_percent / 100.0
-	_action_module.direct_attack(target, damage, Utils.DamageType.MAGICAL)
-
-
 func _on_revive_timer_timeout() -> void:
 	var life_after_revive: int = ((_life_stats.revive_after_death_percentage_life * _owner.stats.health_max) / 100.0) as int
 	revived.emit(life_after_revive)
@@ -301,50 +277,43 @@ func _vital_pulse_timer_timeout() -> void:
 		return
 	for target in targets:
 		if target != null and is_instance_valid(target):
-			_owner.direct_attack(target, damage, Utils.DamageType.PHYSICAL)
+			_owner.direct_attack(target, damage, Utils.DamageType.PHYSICAL, "Vital Pulse")
 
+
+# [TAINTED BLOOD]
 func _on_tainted_blood_timer_timeout() -> void:
-	# [TAINTED BLOOD]
-	
 	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
 	if target == null or not is_instance_valid(target):
 		return
-
+	
 	var max_hp: float = _owner.stats.health_max
 	var current_hp: float = _owner.stats.health
 	var lost_hp: float = max_hp - current_hp
+	if lost_hp <= 0: return 
 	
-	if lost_hp <= 0:
-		return 
-
 	var percent: float = _life_stats.tainted_blood_lost_hp_percent
-	var stacks: int = int(float(lost_hp) * (percent / 100.0))
-	
-	if stacks <= 0:
-		return
+	var stacks: float = lost_hp * (percent / 100.0)
+	if stacks <= 0: return
 	var stack_type: Utils.StackType
 	if Utils.rng.randi() % 2 == 0:
 		stack_type = Utils.StackType.POISON
 	else:
 		stack_type = Utils.StackType.IGNITE
-		stacks *= 5
-		
-	_owner.inflict_condition_stacks(target, stacks, stack_type)
+		stacks *= 5 # TODO Magic number spotted !
 	
+	_owner.inflict_condition_stacks(target, stacks, stack_type, "Tainted Blood")
+
+
+# [TITAN'S PROTECTION]
 func _on_titans_protection_timer_timeout() -> void:
-	# [TITAN'S PROTECTION]
 	var max_hp: float = _owner.stats.health_max
 	var current_hp: float = _owner.stats.health
 	var lost_hp: float = max_hp - current_hp
-	
-	if lost_hp <= 0:
-		return
-
+	if lost_hp <= 0: return
 	var percent: float = _life_stats.titans_protection_lost_hp_percent
 	var heal_amount: float = lost_hp * (percent / 100.0)
-	
 	if heal_amount > 0:
-		_owner.heal(_owner, heal_amount)
+		_owner.heal(_owner, heal_amount, "Titan Protection")
 
 func _on_ancient_growth_timer_timeout() -> void:
 	# [ANCIENT GROWTH]

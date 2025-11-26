@@ -24,9 +24,8 @@ func connect_to_spawn_manager(spawn_manager: SpawnManager) -> void:
 	_spawn_manager = spawn_manager
 
 #region ============================== Attack ==============================
-
 # Instantly attack the target - Apply cards damages multiplier if there are some
-func direct_attack(target: Entity, damage: float, damage_type: Utils.DamageType) -> void:
+func direct_attack(target: Entity, damage: float, damage_type: Utils.DamageType, action_id: StringName) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
 	var damage_before_crit: float = damage * _get_strenght_weakness_multiplier(Utils.damage_to_action(damage_type))
@@ -35,11 +34,11 @@ func direct_attack(target: Entity, damage: float, damage_type: Utils.DamageType)
 	var damage_done: float = target.take_damage(damage, damage_type, crit_multiplier["is_critical"], _owner)
 	if crit_multiplier["is_critical"]:
 		_owner.signal_critical_action_done(target, Utils.damage_to_action(damage_type), damage_before_crit, damage_done)
-	_owner.signal_action_done(target, Utils.damage_to_action(damage_type), "TEST_ATTACK", damage_done, crit_multiplier["is_critical"])
+	_owner.signal_action_done(target, Utils.damage_to_action(damage_type), action_id, damage_done, crit_multiplier["is_critical"])
 
 
 # Instantly attack the target - Apply cards damages multiplier if there are some
-func direct_attack_percent(target: Entity, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier) -> void:
+func direct_attack_percent(target: Entity, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier, action_id: StringName) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
 	var hp: float
@@ -51,7 +50,7 @@ func direct_attack_percent(target: Entity, damage_percent: float, damage_type: U
 		Utils.PercentModifier.LOST_HP:
 			hp = target.stats.health_max - _owner.stats.health
 	var damage: float = hp * damage_percent  / 100.0
-	direct_attack(target, damage, damage_type)
+	direct_attack(target, damage, damage_type, action_id)
 
 
 # Create a projectile to attack the target - Apply cards damages multiplier if there are some
@@ -85,9 +84,11 @@ func _spawn_projectile(target: Entity, projectile_type: Projectile.ProjectileTyp
 	_spawn_manager.spawn_projectile(_owner, target, projectile_type, projectile_spawn, projectile_stats)
 #endregion
 
+
+
 #region ============================== Heal ==============================
 # [Server only]
-func heal(target: Entity, heal_amount: float) -> void:
+func heal(target: Entity, heal_amount: float, action_id: StringName) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
 	var heal_amount_before_crit: float = heal_amount * _get_strenght_weakness_multiplier(Utils.ActionType.UTILITY_HEAL)
@@ -96,10 +97,10 @@ func heal(target: Entity, heal_amount: float) -> void:
 	var heal_taken: float = target.take_heal(heal_amount, crit_multiplier["is_critical"], _owner)
 	if crit_multiplier["is_critical"]:
 		_owner.signal_critical_action_done(target, Utils.ActionType.UTILITY_HEAL, heal_amount_before_crit, heal_taken)
-	_owner.signal_action_done(target, Utils.ActionType.UTILITY_HEAL, "TEST_HEAL", heal_taken, crit_multiplier["is_critical"])
+	_owner.signal_action_done(target, Utils.ActionType.UTILITY_HEAL, action_id, heal_taken, crit_multiplier["is_critical"])
 
 
-func heal_percent(target: Entity, percent: float, percent_modifier: Utils.PercentModifier) -> void:
+func heal_percent(target: Entity, percent: float, percent_modifier: Utils.PercentModifier, action_id: StringName) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
 	var hp: float
@@ -111,12 +112,14 @@ func heal_percent(target: Entity, percent: float, percent_modifier: Utils.Percen
 		Utils.PercentModifier.LOST_HP:
 			hp = target.stats.health_max - _owner.stats.health
 	var heal_amount: float = (percent * hp as float) / 100.0
-	heal(target, heal_amount)
+	heal(target, heal_amount, action_id)
 #endregion
+
+
 
 #region ============================== Condition stacks ==============================
 # [Server only]
-func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Utils.StackType) -> void:
+func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Utils.StackType, action_id: StringName) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
 	var stacks_number_before_crit: float = stacks_number * _get_strenght_weakness_multiplier(Utils.stack_to_action(stack_type))
@@ -133,12 +136,14 @@ func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: 
 	var stacks_taken: float = target.take_condition_stacks(stacks_number, stack_type, crit_multiplier["is_critical"], _owner)
 	if crit_multiplier["is_critical"]:
 		_owner.signal_critical_action_done(target, Utils.stack_to_action(stack_type), stacks_number_before_crit, stacks_taken)
-	_owner.signal_action_done(target, Utils.stack_to_action(stack_type), "TEST_STACK", stacks_taken, crit_multiplier["is_critical"])
+	_owner.signal_action_done(target, Utils.stack_to_action(stack_type), action_id, stacks_taken, crit_multiplier["is_critical"])
 #endregion
+
+
 
 #region ============================== Cleanse and Dispell ==============================
 # Removes debuf
-func cleanse(target: Entity, value: float) -> void:
+func cleanse(target: Entity, value: float, action_id: StringName) -> void:
 	if target == null or target.is_queued_for_deletion(): return
 	var value_before_crit: float = value * _get_strenght_weakness_multiplier(Utils.ActionType.UTILITY_CLEANSE)
 	var crit_multiplier: Dictionary = _get_crit_multiplier(Utils.ActionType.UTILITY_CLEANSE)
@@ -146,17 +151,22 @@ func cleanse(target: Entity, value: float) -> void:
 	var stack_removed: float = target.take_cleanse(value, crit_multiplier["is_critical"], _owner)
 	if crit_multiplier["is_critical"]:
 		_owner.signal_critical_action_done(target, Utils.ActionType.UTILITY_CLEANSE, value_before_crit, stack_removed)
+	_owner.signal_action_done(target, Utils.ActionType.UTILITY_CLEANSE, action_id, value, crit_multiplier["is_critical"])
+
 
 #Removes buf
-func dispell(target: Entity, value: float) -> void:
+func dispell(target: Entity, value: float, action_id: StringName) -> void:
 	if target == null or target.is_queued_for_deletion(): return
 	var value_before_crit: float = value * _get_strenght_weakness_multiplier(Utils.ActionType.UTILITY_DISPELL)
 	var crit_multiplier: Dictionary = _get_crit_multiplier(Utils.ActionType.UTILITY_DISPELL)
 	value = value_before_crit * crit_multiplier["multiplier"]
 	var stack_removed: float = target.take_dispell(value, crit_multiplier["is_critical"], _owner)
 	if crit_multiplier["is_critical"]:
-		_owner.signal_critical_action_done(target, Utils.ActionType.UTILITY_CLEANSE, value_before_crit, stack_removed)
+		_owner.signal_critical_action_done(target, Utils.ActionType.UTILITY_DISPELL, value_before_crit, stack_removed)
+	_owner.signal_action_done(target, Utils.ActionType.UTILITY_DISPELL, action_id, value, crit_multiplier["is_critical"])
 #endregion
+
+
 
 #region ============================== Spells ==============================
 func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary = {}) -> void:
@@ -241,6 +251,8 @@ func _cast_lightning(target: Entity, spell_modifier: Dictionary) -> void:
 	
 #endregion
 
+
+
 #region  ============================== Summon ==============================
 func summon_entity(entity_type: Entity.EntityType, entity_spawn_global_position: Vector3, entity_modifier: Dictionary) -> void:
 	if _spawn_manager == null:
@@ -269,6 +281,8 @@ func _summon_snake(entity_spawn_global_position: Vector3, _entity_modifier: Dict
 	_spawn_manager.spawn_entity(snake, entity_spawn_global_position)
 	print("SUMMON SNAKE")
 #endregion
+
+
 
 #region ===== Private functions
 func _get_crit_multiplier(action_type: Utils.ActionType) -> Dictionary:

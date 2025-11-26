@@ -152,7 +152,7 @@ func _clear_attack_modifiers() -> void:
 func _create_optional_timers() -> void:
 	# [POISON FLASK]
 	if _poison_stats.poison_flask_activated:
-		_optional_timers.append(Utils.create_perpetual_timer(self, _poison_stats.poison_flask_period, _on_periodica_agaricus_timer_timeout, true))
+		_optional_timers.append(Utils.create_perpetual_timer(self, _poison_stats.poison_flask_period, _on_poison_flask_timer_timeout, true))
 	
 	# [VENOMOUS DARTS]
 	if _poison_stats.poison_venomous_darts_activated:
@@ -204,11 +204,12 @@ func _on_poison_tick_timer_timeout() -> void:
 		_owner.take_damage(_owner.stats.poison_stacks, Utils.DamageType.POISON, false)
 
 
-func _on_periodica_agaricus_timer_timeout() -> void:
+# [POISON FLASK]
+func _on_poison_flask_timer_timeout() -> void:
 	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
 	if target == null: return
 	var poison_stacks = _poison_stats.poison_flask_stacks
-	_action_module.inflict_condition_stacks(target, poison_stacks, Utils.StackType.POISON)
+	_action_module.inflict_condition_stacks(target, poison_stacks, Utils.StackType.POISON, "Poison Flask")
 
 
 func _on_rusty_dagger_logic_callback(cb_vars: Dictionary) -> void:
@@ -233,7 +234,7 @@ func _on_hit_venomous_logic_callback(cb_vars: Dictionary) -> void:
 	var target: Entity = cb_vars[AutoAttackModifier.VarType.TARGET]
 	if target == null or target.is_queued_for_deletion(): return
 	var damage := int(float(target.stats.poison_stacks) * _poison_stats.poison_venomous_darts_multiplier)
-	_owner.direct_attack(target, damage, Utils.DamageType.PHYSICAL)
+	_owner.direct_attack(target, damage, Utils.DamageType.PHYSICAL, "Venomous Darts")
 #endregion
 
 #region TIDE OF CORRUPTION
@@ -243,7 +244,7 @@ func _on_tide_of_corruption_timer_timeout() -> void:
 	var target_number: int = targets.size()
 	var poison_stacks: int = int(_poison_stats.poison_tide_of_corruption_multiplier * float(target_number))
 	for target in targets:
-		_owner.inflict_condition_stacks(target, poison_stacks, Utils.StackType.POISON)
+		_owner.inflict_condition_stacks(target, poison_stacks, Utils.StackType.POISON, "Tide of Corruption")
 #endregion
 
 #region SHROOM
@@ -290,7 +291,7 @@ func _on_inflict_condition_hot_pot(cb_vars: Dictionary) -> void:
 	var target: Entity = cb_vars[ActionModifier.VarType.TARGET]
 	if stack_type != Utils.StackType.POISON: return
 	if Utils.is_randomize_modifier_active(_poison_stats.poison_hot_pot_chance):
-		_owner.inflict_condition_stacks(target, _poison_stats.poison_hot_pot_ignite_stacks, Utils.StackType.IGNITE)
+		_owner.inflict_condition_stacks(target, _poison_stats.poison_hot_pot_ignite_stacks, Utils.StackType.IGNITE, "Hot Pot")
 
 
 func _on_inflict_condition_rotting_milk(cb_vars: Dictionary) -> void:
@@ -298,7 +299,7 @@ func _on_inflict_condition_rotting_milk(cb_vars: Dictionary) -> void:
 	var stack_type: Utils.StackType = cb_vars[ActionModifier.VarType.STACK_TYPE]
 	if stack_type != Utils.StackType.POISON: return
 	if Utils.is_randomize_modifier_active(_poison_stats.poison_rotting_milk_chance):
-		_owner.inflict_condition_stacks(_owner, _poison_stats.poison_rotting_milk_regen_stacks, Utils.StackType.REGEN)
+		_owner.inflict_condition_stacks(_owner, _poison_stats.poison_rotting_milk_regen_stacks, Utils.StackType.REGEN, "Rotting Milk")
 
 
 func _on_inflict_condition_corrosion(cb_vars: Dictionary) -> void:
@@ -307,7 +308,7 @@ func _on_inflict_condition_corrosion(cb_vars: Dictionary) -> void:
 	var stack_type: Utils.StackType = cb_vars[ActionModifier.VarType.STACK_TYPE]
 	var target: Entity = cb_vars[ActionModifier.VarType.TARGET]
 	if stack_type != Utils.StackType.POISON: return
-	_owner.dispell(target, _poison_stats.poison_corrosion_buff_stacks)
+	_owner.dispell(target, _poison_stats.poison_corrosion_buff_stacks, "Corrosion")
 
 
 func _on_inflict_condition_poison(cb_vars: Dictionary) -> void:
@@ -316,5 +317,5 @@ func _on_inflict_condition_poison(cb_vars: Dictionary) -> void:
 	var stack_type: Utils.StackType = cb_vars[ActionModifier.VarType.STACK_TYPE]
 	var target: Entity = cb_vars[ActionModifier.VarType.TARGET]
 	if stack_type != Utils.StackType.POISON: return
-	if Utils.is_randomize_modifier_active(20.0):
-		_owner.inflict_condition_stacks(target, 1, Utils.StackType.POISON)
+	if Utils.is_randomize_modifier_active(5.0): # TODO Magic number here
+		_owner.inflict_condition_stacks(target, 1, Utils.StackType.POISON, "Poison Passive")

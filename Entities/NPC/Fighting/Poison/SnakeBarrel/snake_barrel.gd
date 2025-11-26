@@ -9,8 +9,8 @@ func projectile_attack(target: Entity, projectile_type: Projectile.ProjectileTyp
 	_action_module.projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
 
 
-func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Utils.StackType) -> void:
-	_action_module.inflict_condition_stacks(target, stacks_number, stack_type)
+func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Utils.StackType, action_id: StringName) -> void:
+	_action_module.inflict_condition_stacks(target, stacks_number, stack_type, action_id)
 
 
 #region ===== Interaction

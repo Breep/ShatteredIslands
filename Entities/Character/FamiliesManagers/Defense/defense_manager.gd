@@ -104,7 +104,7 @@ func _lanch_on_battle_start_effects() -> void:
 	if _defense_stats.shield_rush_activated:
 		if _owner != null and is_instance_valid(_owner):
 			var amount: int = int(_defense_stats.shield_rush_amount)
-			_owner.inflict_condition_stacks(_owner, amount, Utils.StackType.ARMOR)
+			_owner.inflict_condition_stacks(_owner, amount, Utils.StackType.ARMOR, "Shield Rush")
 #endregion
 
 #region ===== ACTION MODIFIERS =====
@@ -297,7 +297,7 @@ func _on_force_field_timer_timeout() -> void:
 		var percent: float = _defense_stats.force_field_lost_hp_percent
 		var armor_gain: int = int(float(lost_hp) * (percent / 100.0))
 		if armor_gain > 0:
-			_owner.inflict_condition_stacks(_owner, armor_gain, Utils.StackType.ARMOR)
+			_owner.inflict_condition_stacks(_owner, armor_gain, Utils.StackType.ARMOR, "Force Field")
 
 
 func _on_dodge_evasive_barrier(_cb_vars: Dictionary) -> void:
@@ -305,7 +305,7 @@ func _on_dodge_evasive_barrier(_cb_vars: Dictionary) -> void:
 	if _owner == null or not is_instance_valid(_owner): return
 	
 	var amount: float = _defense_stats.evasive_barrier_shield_gain
-	_owner.inflict_condition_stacks(_owner, amount, Utils.StackType.ARMOR)
+	_owner.inflict_condition_stacks(_owner, amount, Utils.StackType.ARMOR, "Evasive Barrier")
 
 
 func _on_energy_barrier_timer_timeout() -> void:
@@ -314,7 +314,7 @@ func _on_energy_barrier_timer_timeout() -> void:
 		return
 		
 	var amount: int = int(_defense_stats.energy_barrier_shield_amount)
-	_owner.inflict_condition_stacks(_owner, amount, Utils.StackType.ARMOR)
+	_owner.inflict_condition_stacks(_owner, amount, Utils.StackType.ARMOR, "Energy Barrier")
 
 
 func _on_owner_armor_stacks_changed(new_val: int) -> void:
@@ -346,7 +346,7 @@ func _on_magnetic_siphon_timer_timeout() -> void:
 		
 	#TODO changer le steal quand il y aura des modificateurs a cet effet
 	target.stats.armor_stacks -= steal_amount
-	_owner.inflict_condition_stacks(_owner, steal_amount, Utils.StackType.ARMOR)
+	_owner.inflict_condition_stacks(_owner, steal_amount, Utils.StackType.ARMOR, "Magnetic Siphon")
 	
 func _on_aegis_resonator_timer_timeout() -> void:
 	# [AEGIS RESONATOR]
@@ -366,24 +366,23 @@ func _on_aegis_resonator_timer_timeout() -> void:
 	for ally in allies:
 		if ally != null and is_instance_valid(ally):
 			if ally == _owner:
-				_owner.inflict_condition_stacks(_owner, shield_per_ally, Utils.StackType.ARMOR)
+				_owner.inflict_condition_stacks(_owner, shield_per_ally, Utils.StackType.ARMOR, "Resonator")
 			else:
 				ally.stats.armor_stacks += shield_per_ally
 
+
 # [SHIELD THROW] - Impact
 func _on_hit_shield_throw(cb_vars: Dictionary) -> void:
-	
 	if not cb_vars.has(AutoAttackModifier.VarType.TARGET): return
 	var target: Entity = cb_vars[AutoAttackModifier.VarType.TARGET]
 	if target == null or not is_instance_valid(target): return
 	
-	var damage: int = int(_defense_stats.shield_throw_damage)
+	var damage: float = _defense_stats.shield_throw_damage
 	if damage > 0: 
-		_owner.direct_attack(target, damage, Utils.DamageType.MAGICAL)
+		_owner.direct_attack(target, damage, Utils.DamageType.MAGICAL, "Shield Throw")
 	
-	var shield_return: int = int(_defense_stats.shield_throw_return_shield)
+	var shield_return: float = _defense_stats.shield_throw_return_shield
 	if shield_return > 0:
-
-		_owner.inflict_condition_stacks(_owner, shield_return, Utils.StackType.ARMOR)
+		_owner.inflict_condition_stacks(_owner, shield_return, Utils.StackType.ARMOR, "Shield Throw")
 		_shield_throw_last_armor = _owner.stats.armor_stacks
 		

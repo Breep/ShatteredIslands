@@ -17,4 +17,5 @@ name = "Force Field"
 picture = ExtResource("1_n4itg")
 family = 2
 player_upgrade = SubResource("Resource_0hj2g")
+lvl = 5
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"
