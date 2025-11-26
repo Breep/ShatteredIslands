@@ -9,22 +9,28 @@ func projectile_attack(target: Entity, projectile_type: Projectile.ProjectileTyp
 	_action_module.projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
 
 
-func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Utils.StackType) -> void:
-	_action_module.inflict_condition_stacks(target, stacks_number, stack_type)
+func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Utils.StackType, action_id: StringName) -> void:
+	_action_module.inflict_condition_stacks(target, stacks_number, stack_type, action_id)
 
 
 #region ===== Interaction
-func take_damage(damage: float, damage_type: Utils.DamageType, is_critical: bool = false, source: Entity = null, attack_type: Utils.AttackType = Utils.AttackType.UNDEF) -> float:
-	return _interact_module.take_damage(damage, damage_type, is_critical, source, attack_type)
+func take_damage(damage: float, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
+	return _interact_module.take_damage(damage, damage_type, is_critical, action_id, source)
 
-func take_damage_percent(percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.DamageType, is_critical: bool = false, source: Entity = null) -> void:
-	return _interact_module.take_damage_percent(percent, percent_modifier, damage_type, is_critical, source)
+func take_damage_percent(percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> void:
+	_interact_module.take_damage_percent(percent, percent_modifier, damage_type, is_critical, action_id, source)
 
-func take_condition_stacks(stacks_number: float, stack_type: Utils.StackType, is_critical: bool, source: Entity = null) -> float:
-	return _interact_module.take_condition_stacks(stacks_number, stack_type, is_critical, source)
+func take_condition_stacks(stacks_number: float, stack_type: Utils.StackType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
+	return _interact_module.take_condition_stacks(stacks_number, stack_type, is_critical, action_id, source)
 
-func take_heal(heal_amount: float, is_critical: bool, source: Entity = null) -> float:
-	return _interact_module.take_heal(heal_amount, is_critical, source)
+func take_heal(heal_amount: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
+	return _interact_module.take_heal(heal_amount, is_critical, action_id, source)
+
+func take_cleanse(value: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
+	return _interact_module.take_cleanse(value, is_critical, action_id, source)
+
+func take_dispell(value: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
+	return _interact_module.take_dispell(value, is_critical, action_id, source)
 
 func summon_entity(entity_type: EntityType, entity_spawn_global_position: Vector3, entity_modifier: Dictionary) -> void:
 	_action_module.summon_entity(entity_type, entity_spawn_global_position, entity_modifier)

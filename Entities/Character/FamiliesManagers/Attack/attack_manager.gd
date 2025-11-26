@@ -261,7 +261,7 @@ func _on_auto_attack_scorching_blade(cb_vars: Dictionary) -> void:
 	var ignite_stacks: float = (damage_dealt as float) * (percent / 100.0)
 	
 	if ignite_stacks > 0:
-		_owner.inflict_condition_stacks(target, ignite_stacks, Utils.StackType.IGNITE)
+		_owner.inflict_condition_stacks(target, ignite_stacks, Utils.StackType.IGNITE, "Scorching Blade")
 
 
 # [RUSTY DAGGER]
@@ -290,7 +290,7 @@ func _on_hit_scorching_blade(cb_vars: Dictionary) -> void:
 	var percent: float = _attack_stats.scorching_blade_damage_percent
 	var ignite_stacks: float = (damage_dealt as float) * (percent / 100.0)
 	if ignite_stacks > 0:
-		_owner.inflict_condition_stacks(target, ignite_stacks, Utils.StackType.IGNITE)
+		_owner.inflict_condition_stacks(target, ignite_stacks, Utils.StackType.IGNITE, "Scorching Blade")
 
 
 # [SURGICAL KNIFE]
@@ -299,7 +299,7 @@ func _on_auto_attack_surgical_knife(_cb_vars: Dictionary) -> void:
 	if not Utils.is_randomize_modifier_active(chance):
 		return 
 	var amount_to_cleanse: float = _attack_stats.surgical_knife_cleanse_amount
-	_owner.cleanse(_owner, amount_to_cleanse)
+	_owner.cleanse(_owner, amount_to_cleanse, "Surgical Knife")
 
 
 func _on_auto_attack_healing_crossbow(_cb_vars: Dictionary) -> void:
@@ -311,7 +311,7 @@ func _on_auto_attack_healing_crossbow(_cb_vars: Dictionary) -> void:
 	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
 	if target == null:
 		return
-	_owner.heal(target, heal_amount)
+	_owner.heal(target, heal_amount, "Healing Crossbow")
 
 
 # [BLADE RUSH]

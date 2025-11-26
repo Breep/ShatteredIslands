@@ -56,7 +56,7 @@ func _explode() -> void:
 	pop.tween_property(_shroom_visual, "scale", Vector3.ZERO, 0.08)
 	for enemy in _enemies:
 		if enemy == null or enemy.is_queued_for_deletion(): continue
-		_source.direct_attack(enemy, _damage, Utils.DamageType.POISON)
+		_source.direct_attack(enemy, _damage, Utils.DamageType.POISON, "Shroom")
 	_add_temporary_cylinder_and_kill_self()
 
 

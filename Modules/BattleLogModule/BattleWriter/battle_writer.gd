@@ -8,6 +8,8 @@ extends Node
 @export_group("External nodes")
 @export var _fighting_area: FightingArea
 
+var entity_bds_registries: Dictionary[int, EntityBDSRegistry]
+
 # ============================== Private variables ==============================
 
 var _battle_logs: Array[Dictionary]
@@ -26,6 +28,7 @@ func _ready() -> void:
 	_fighting_area.damage_taken.connect(_on_fighting_area_damage_taken)
 	_fighting_area.spell_casted.connect(_on_fighting_area_spell_casted)
 	_fighting_area.stack_taken.connect(_on_fighting_area_stack_taken)
+	_fighting_area.action_done.connect(_on_fighting_area_action_done)
 
 # ============================== Public functions ==============================
 
@@ -95,6 +98,12 @@ func _log_stack_taken(source: Entity, stack_type: Utils.StackType, stack_number:
 	_battle_logs.append(data)
 
 
+func _register_action(source: Entity, _target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
+	if not entity_bds_registries.has(source.id):
+		entity_bds_registries[source.id] = EntityBDSRegistry.new(source.name)
+	entity_bds_registries[source.id].register_action(action_id, action_type, value, is_critical)
+
+
 func _get_time() -> float:
 	if _is_accelerated_fight:
 		return _normal_fight_duration + ((Time.get_ticks_msec() as float) / 1000.0 - _accelerated_fight_start_time)# / GlobalFightingManager.ACCELERATED_FIGHT_TIME_SCALE
@@ -108,6 +117,7 @@ func _on_game_manager_game_state_changed(state: Game.GameState) -> void:
 		Game.GameState.FIGHTING_POSITIONING:
 			_battle_logs.clear()
 		Game.GameState.FIGHTING_NORMAL:
+			print("[DEBUG_PROTO] reset timer")
 			_start_time = (Time.get_ticks_msec() as float) / 1000.0
 			_is_accelerated_fight = false
 		Game.GameState.FIGHTING_ACCELERATED:
@@ -135,3 +145,7 @@ func _on_fighting_area_spell_casted(source: Entity, target: Entity, spell_type: 
 
 func _on_fighting_area_stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: float, is_critical: bool) -> void:
 	_log_stack_taken(source, stack_type, stack_number, is_critical)
+
+
+func _on_fighting_area_action_done(source: Entity, target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
+	_register_action(source, target, action_type, action_id, value, is_critical)

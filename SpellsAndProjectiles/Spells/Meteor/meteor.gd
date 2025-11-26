@@ -56,9 +56,9 @@ func _on_deploy_timer_timeout() -> void:
 		if entity == null or entity.is_queued_for_deletion(): pass
 		elif entity.team != _owner.team:
 			if _owner != null:
-				_owner.direct_attack_percent(entity, _damage_percent, Utils.DamageType.MAGICAL, Utils.PercentModifier.MAX_HP)
+				_owner.direct_attack_percent(entity, _damage_percent, Utils.DamageType.MAGICAL, Utils.PercentModifier.MAX_HP, "Meteor")
 			else:
-				entity.take_damage_percent(_damage_percent, Utils.PercentModifier.MAX_HP, Utils.DamageType.MAGICAL)
+				entity.take_damage_percent(_damage_percent, Utils.PercentModifier.MAX_HP, Utils.DamageType.MAGICAL, false, "Meteor")
 	
 	# Do optional stuffs
 	for callback in _on_hit_callbacks:

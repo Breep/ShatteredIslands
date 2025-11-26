@@ -25,14 +25,14 @@ func _on_poison_tick_timer_timeout() -> void:
 	if _entity_owner == null: return
 	if not multiplayer.is_server(): return
 	if _entity_owner.stats.poison_stacks > 0:
-		_entity_owner.take_damage(_entity_owner.stats.poison_stacks, Utils.DamageType.POISON, false)
+		_entity_owner.take_damage(_entity_owner.stats.poison_stacks, Utils.DamageType.POISON, false, "Poison Periodic")
 
 
 func _on_ignite_tick_timer_timeout() -> void:
 	if _entity_owner == null: return
 	if _entity_owner.stats.ignite_stacks > 0:
 		var percent: float = IGNITE_MAXHP_PERCENT * _entity_owner.stats.ignite_stacks
-		_entity_owner.take_damage_percent(percent, Utils.PercentModifier.MAX_HP, Utils.DamageType.MAGICAL)
+		_entity_owner.take_damage_percent(percent, Utils.PercentModifier.MAX_HP, Utils.DamageType.MAGICAL, false, "Ignite Periodic")
 	
 	var decay: int = (_entity_owner.stats.ignite_stacks * IGNITE_DECAY / 100.0) as int
 	decay = clampi(decay, 1, decay)

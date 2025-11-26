@@ -129,46 +129,41 @@ func _add_action_modifiers() -> void:
 # ============================== Callbacks functions ==============================
 
 #region ============== HOLY TOUCH ==================
-
 func _holy_touch_timer_timeout() -> void: 
 	# [HOLY TOUCH]
 	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
 	if target == null: return
-	_owner.heal(target, _serenity_stats.holy_touch_amount)
-
+	_owner.heal(target, _serenity_stats.holy_touch_amount, "Holy Touch")
 #endregion
 
-#region ============== LIFE SPRING ==================
 
+#region ============== LIFE SPRING ==================
 func _life_spring_timer_timeout() -> void:
 	# [LIFE SPRING]
 	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
 	if target == null: 
 		return
-	_owner.inflict_condition_stacks(target, _serenity_stats.life_spring_regen_amount, Utils.StackType.REGEN)
-	
+	_owner.inflict_condition_stacks(target, _serenity_stats.life_spring_regen_amount, Utils.StackType.REGEN, "Life Spring")
 #endregion
 
-#region ============== PURIFYING FLAME ==================
 
+#region ============== PURIFYING FLAME ==================
 func _purifying_flame_timer_timeout() -> void:
 	# [PURIFYING FLAME]
 	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ALLY_INCLUDING_SELF)
 	if target == null: 
 		return
 	var amount_to_cleanse: float = _serenity_stats.purifying_flame_cleanse_amount
-	_owner.cleanse(target, amount_to_cleanse)
-	
+	_owner.cleanse(target, amount_to_cleanse, "Purifying Flame")
 #endregion
 
-#region ============== GRACEFUL STEP ==================
 
+#region ============== GRACEFUL STEP ==================
 func _on_dodge_graceful_step(_cb_vars: Dictionary) -> void:
 	# [GRACEFUL STEP]
 	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
 	if target != null:
-		_owner.inflict_condition_stacks(target, _serenity_stats.graceful_step_regen, Utils.StackType.REGEN)
-
+		_owner.inflict_condition_stacks(target, _serenity_stats.graceful_step_regen, Utils.StackType.REGEN, "Graceful Step")
 #endregion
 
 #region ==============  ==================
@@ -177,7 +172,6 @@ func _on_dodge_graceful_step(_cb_vars: Dictionary) -> void:
 #endregion
 
 #region ============== REGEN ==================
-
 func _on_regen_tick_timer_timeout() -> void:
 	var regen_stacks: float = _owner.stats.regen_stacks
 	if regen_stacks > 0:
@@ -189,5 +183,5 @@ func _on_regen_tick_timer_timeout() -> void:
 			var decay: int = int(regen_stacks * (REGEN_DECAY_PERCENT / 100.0))
 			decay = clampi(decay, 1, decay)
 			_owner.stats.regen_stacks -= decay
-
 #endregion
+

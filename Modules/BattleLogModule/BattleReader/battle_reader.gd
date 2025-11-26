@@ -99,7 +99,7 @@ func _apply_damage_taken(battle_log: Dictionary) -> void:
 		printerr("[", multiplayer.get_unique_id(), "] BattleReader: Damage taken: Unknown source !")
 		return
 	var source: Entity = _entity_manager.entities[source_id]
-	source.take_damage(damage, damage_type, modifier[BattleLog.Modifier.CRITICAL])
+	source.take_damage(damage, damage_type, modifier[BattleLog.Modifier.CRITICAL], "TODO")
 
 
 #{"time":0.1, "type":"spell_casted", "source":1, "target":2, "spell_type":<spell_type>}
@@ -127,4 +127,4 @@ func _apply_stack_taken(battle_log: Dictionary) -> void:
 		printerr("[", multiplayer.get_unique_id(), "] BattleReader: Stack taken: Unknown source !")
 		return
 	var source: Entity = _entity_manager.entities[source_id]
-	source.take_condition_stacks(stack_number, stack_type, false)
+	source.take_condition_stacks(stack_number, stack_type, false, "TODO")

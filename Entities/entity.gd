@@ -8,6 +8,16 @@ func signal_death() -> void:
 	_is_dead = true
 	died.emit(self)
 
+signal interaction_received(entity_ref: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool)
+func signal_interaction_received(source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
+	interaction_received.emit(self, source, action_type, action_id, value, is_critical)
+	bds_registry.register_interaction(action_id, action_type, value, is_critical)
+
+signal action_done(entity_ref: Entity, target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool)
+func signal_action_done(target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
+	action_done.emit(self, target, action_type, action_id, value, is_critical)
+	bds_registry.register_action(action_id, action_type, value, is_critical)
+
 signal critical_action_done(entity_ref: Entity, target: Entity, action_type: Utils.ActionType, base_value: float, real_value: float)
 func signal_critical_action_done(target: Entity, action_type: Utils.ActionType, base_value: float, real_value: float) -> void:
 	critical_action_done.emit(self, target, action_type, base_value, real_value)
@@ -63,6 +73,10 @@ var is_dead: bool:
 var action_modifiers_manager: ActionModifiersManager
 var stack_manager: StackManager
 
+@onready var bds_registry := EntityBDSRegistry.new(entity_name)
+
+# ============================== Private variables ==============================
+
 # ============================== Enums ==============================
 
 enum EntityType {
@@ -112,10 +126,10 @@ func connect_to_fighting_area(_fighting_area: FightingArea) -> void:
 	printerr("Entity: virtual connect_to_fighting_area() called [", get_path(), "]")
 
 #region ===== Actions [VIRTUAL]
-func direct_attack(_target: Entity, _damage: float, _damage_type: Utils.DamageType) -> void:
+func direct_attack(_target: Entity, _damage: float, _damage_type: Utils.DamageType, _action_id: StringName) -> void:
 	printerr("Entity: virtual direct_attack() called [", get_path(), "]")
 
-func direct_attack_percent(_target: Entity, _damage_percent: float, _damage_type: Utils.DamageType, _percent_modifier: Utils.PercentModifier) -> void:
+func direct_attack_percent(_target: Entity, _damage_percent: float, _damage_type: Utils.DamageType, _percent_modifier: Utils.PercentModifier, _action_id: StringName) -> void:
 	printerr("Entity: virtual direct_attack_percent() called [", get_path(), "]")
 
 func projectile_attack(_target: Entity, _projectile_type: Projectile.ProjectileType, _projectile_spawn: Node3D, _projectile_stats: ProjectileStats) -> void:
@@ -127,46 +141,46 @@ func cast_spell(_target: Entity, _spell_type: Spell.Type, _spell_modifier: Dicti
 func cast_ultimate() -> void:
 	printerr("Entity: virtual cast_ultimate() called [", get_path(), "]")
 
-func heal(_target: Entity, _heal_amount: float) -> void:
+func heal(_target: Entity, _heal_amount: float, _action_id: StringName) -> void:
 	printerr("Entity: virtual heal() called [", get_path(), "]")
 
-func heal_percent(_target: Entity, _percent: float, _percent_modifier: Utils.PercentModifier) -> void:
+func heal_percent(_target: Entity, _percent: float, _percent_modifier: Utils.PercentModifier, _action_id: StringName) -> void:
 	printerr("Entity: virtual heal_percent() called [", get_path(), "]")
 
-func inflict_condition_stacks(_target: Entity, _stacks_number: float, _stack_type: Utils.StackType) -> void:
+func inflict_condition_stacks(_target: Entity, _stacks_number: float, _stack_type: Utils.StackType, _action_id: StringName) -> void:
 	printerr("Entity: virtual inflict_condition_stacks() called [", get_path(), "]")
 
 func summon_entity(_entity_type: EntityType, _entity_spawn_global_position: Vector3, _entity_modifier: Dictionary) -> void:
 	printerr("Entity: virtual summon_entity() called [", get_path(), "]")
 
-func cleanse(_target: Entity, _value: float) -> void:
+func cleanse(_target: Entity, _value: float, _action_id: StringName) -> void:
 	printerr("Entity: virtual cleanse() called [", get_path(), "]")
 
-func dispell(_target: Entity, _value: float) -> void:
+func dispell(_target: Entity, _value: float, _action_id: StringName) -> void:
 	printerr("Entity: virtual dispell() called [", get_path(), "]")
 #endregion
 
 #region ===== Interaction [VIRTUAL]
-func take_damage(_damage: float, _damage_type: Utils.DamageType, _is_critical: bool = false, _source: Entity = null, _attack_type: Utils.AttackType = Utils.AttackType.UNDEF) -> float:
+func take_damage(_damage: float, _damage_type: Utils.DamageType, _is_critical: bool, _action_id: StringName, _source: Entity = null) -> float:
 	printerr("Entity: virtual take_damage() called [", get_path(), "]")
 	return -1
 
-func take_damage_percent(_percent: float, _percent_modifier: Utils.PercentModifier, _damage_type: Utils.DamageType, _is_critical: bool = false, _source: Entity = null) -> void:
+func take_damage_percent(_percent: float, _percent_modifier: Utils.PercentModifier, _damage_type: Utils.DamageType, _is_critical: bool, _action_id: StringName, _source: Entity = null) -> void:
 	printerr("Entity: virtual take_damage_percent() called [", get_path(), "]")
 
-func take_condition_stacks(_stacks_number: float, _stack_type: Utils.StackType, _is_critical: bool, _source: Entity = null) -> float:
+func take_condition_stacks(_stacks_number: float, _stack_type: Utils.StackType, _is_critical: bool, _action_id: StringName, _source: Entity = null) -> float:
 	printerr("Entity: virtual take_condition_stack() called [", get_path(), "]")
 	return -1.0
 
-func take_heal(_heal_amount: float, _is_critical: bool, _source: Entity = null) -> float:
+func take_heal(_heal_amount: float, _is_critical: bool, _action_id: StringName, _source: Entity = null) -> float:
 	printerr("Entity: virtual take_heal() called [", get_path(), "]")
 	return -1.0
 
-func take_cleanse(_value: float, _is_critical: bool, _source: Entity = null) -> float:
+func take_cleanse(_value: float, _is_critical: bool, _action_id: StringName, _source: Entity = null) -> float:
 	printerr("Entity: virtual take_cleanse() called [", get_path(), "]")
 	return -1.0
 
-func take_dispell(_value: float, _is_critical: bool, _source: Entity = null) -> float:
+func take_dispell(_value: float, _is_critical: bool, _action_id: StringName, _source: Entity = null) -> float:
 	printerr("Entity: virtual take_dispell() called [", get_path(), "]")
 	return -1.0
 #endregion

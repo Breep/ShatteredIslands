@@ -54,7 +54,7 @@ func _on_battle_start() -> void:
 	if _fire_stats.nuke_activated:
 		var targets: Array[Entity] = _owner.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ENEMIES)
 		for target: Entity in targets:
-			_owner.inflict_condition_stacks(target,_fire_stats.nuke_ignite,Utils.StackType.IGNITE)
+			_owner.inflict_condition_stacks(target,_fire_stats.nuke_ignite,Utils.StackType.IGNITE, "Nuke")
 #endregion
 
 #region optional timer
@@ -183,7 +183,7 @@ func _on_expanse_universe_timer_timeout() -> void:
 		return
 	var stacks: int = int(_fire_stats.expanse_universe_ignite_stacks)
 	if stacks > 0:
-		_owner.inflict_condition_stacks(target, stacks, Utils.StackType.IGNITE)
+		_owner.inflict_condition_stacks(target, stacks, Utils.StackType.IGNITE, "Expanse Universe")
 #endregion
 
 #region ===== DARK FOREST =====
@@ -191,7 +191,7 @@ func _on_expanse_universe_timer_timeout() -> void:
 func _on_dodge_dark_forest(_cb_vars: Dictionary) -> void:
 	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
 	if target != null:
-		_owner.inflict_condition_stacks(target, _fire_stats.dark_forest_ignite_stacks, Utils.StackType.IGNITE)
+		_owner.inflict_condition_stacks(target, _fire_stats.dark_forest_ignite_stacks, Utils.StackType.IGNITE, "Dark Forest")
 		
 #endregion
 
@@ -203,7 +203,7 @@ func _on_scorpius_meteor_hit(cb_vars: Dictionary) -> void:
 	var poison_amount: float = _fire_stats.scorpius_poison_stacks
 	for entity: Entity in entities_inside:
 		if entity != null and is_instance_valid(entity) and entity.team != _owner.team:
-			_owner.inflict_condition_stacks(entity, int(poison_amount), Utils.StackType.POISON)
+			_owner.inflict_condition_stacks(entity, int(poison_amount), Utils.StackType.POISON, "Scorpius")
 #endregion
 
 #region ===== CONSUMING THE STAR =====
@@ -240,7 +240,7 @@ func _on_kuiper_belt_meteor_hit(_cb_vars: Dictionary) -> void:
 	if _owner == null or not is_instance_valid(_owner): return
 	var amount: int = int(_fire_stats.kuiper_belt_shield_amount)
 	if amount > 0:
-		_owner.inflict_condition_stacks(_owner, amount, Utils.StackType.ARMOR)
+		_owner.inflict_condition_stacks(_owner, amount, Utils.StackType.ARMOR, "Kuiper Belt")
 #endregion
 
 #region ========== COSMIC BOLT ==========
@@ -272,7 +272,7 @@ func _on_hit_cosmic_bolt(cb_vars: Dictionary) -> void:
 	var damage: float = ignite_stacks * dmg_mult
 	
 	if damage > 0:
-		_owner.direct_attack(target, damage, Utils.DamageType.MAGICAL)
+		_owner.direct_attack(target, damage, Utils.DamageType.MAGICAL, "Cosmic Bolt")
 	
 	# --- 2. Rebond ---
 	var chance_mult: float = _fire_stats.cosmic_bolt_bounce_chance_per_stack
@@ -321,7 +321,7 @@ func _on_inflict_condition_ignite(cb_vars: Dictionary) -> void:
 func _on_ignite_timer_timeout() -> void:
 	if _owner.stats.ignite_stacks > 0:
 		var percent: float = _IGNITE_PERCENT_PER_STACK * _owner.stats.ignite_stacks
-		_owner.take_damage_percent(percent, Utils.PercentModifier.MAX_HP, Utils.DamageType.MAGICAL)
+		_owner.take_damage_percent(percent, Utils.PercentModifier.MAX_HP, Utils.DamageType.MAGICAL, false, "Ignite Periodic Damage")
 	
 	var decay: int = (_owner.stats.ignite_stacks * _IGNITE_DECAY_PERCENT / 100.0) as int
 	decay = clampi(decay, 1, decay)

@@ -16,4 +16,5 @@ name = "Venomous Strike"
 picture = ExtResource("1_ikonv")
 family = 1
 player_upgrade = SubResource("Resource_ukukp")
+lvl = 5
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

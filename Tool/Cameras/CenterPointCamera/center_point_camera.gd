@@ -18,7 +18,7 @@ var _is_active: bool = false
 
 # ============================== Node base functions ==============================
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if not _is_active: return
 	_handle_center_point_rotation(event)
 	_handle_camera_zoom(event)
