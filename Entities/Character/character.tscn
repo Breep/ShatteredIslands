@@ -108,7 +108,8 @@ families_managers = {
 5: NodePath("FamiliesManagers/SerenityManager"),
 6: NodePath("FamiliesManagers/LifeManager"),
 7: NodePath("FamiliesManagers/PoisonManager"),
-8: NodePath("FamiliesManagers/ManaManager")
+8: NodePath("FamiliesManagers/ManaManager"),
+11: NodePath("FamiliesManagers/NecroManager")
 }
 
 [node name="MovementModule" parent="CharacterLogic/Modules" index="0" node_paths=PackedStringArray("_owner")]
@@ -150,6 +151,10 @@ _owner = NodePath("../../..")
 
 [node name="ManaManager" parent="CharacterLogic/FamiliesManagers" index="7" node_paths=PackedStringArray("_owner")]
 _owner = NodePath("../../..")
+
+[node name="NecroManager" parent="CharacterLogic/FamiliesManagers" index="8" node_paths=PackedStringArray("_owner", "_action_module")]
+_owner = NodePath("../../..")
+_action_module = NodePath("../../Modules/ActionModule")
 
 [node name="TurretCenterPoint" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.36537, 0)

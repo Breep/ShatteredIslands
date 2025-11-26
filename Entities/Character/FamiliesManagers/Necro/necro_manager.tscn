@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgujm6jcrfljy"]
+
+[ext_resource type="Script" uid="uid://cfhv0prvn0rax" path="res://Entities/Character/FamiliesManagers/Necro/necro_manager.gd" id="1_2g14p"]
+
+[node name="NecroManager" type="Node"]
+script = ExtResource("1_2g14p")
