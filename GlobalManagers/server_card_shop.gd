@@ -120,7 +120,6 @@ func _client_try_buy_card_from_player_shop(card: Card) -> bool:
 	match _server_response:
 		ServerResponse.OK: 
 			PlayerManager.get_local_player().deck.add_card(card)
-			PlayerManager.get_local_player().gold -= 100
 			return true
 		ServerResponse.NOT_ENOUGHT_MONEY:
 			GlobalLogger.warn("ServerCardShop: Not enought money", GlobalLogger.Category.CARD_SHOP)
