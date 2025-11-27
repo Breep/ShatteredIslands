@@ -12,10 +12,12 @@ enum PeerType {
 const DEFAULT_SERVER_IP = "127.0.0.1"
 const DEFAULT_SERVER_PORT = 4242
 
-# ============================== Node base function ==============================
+var 
 
+# ============================== Node base function ==============================
+#server --headless --auto-start=3 --expected_clients=1
 func _ready() -> void:
-	if "server" in OS.get_cmdline_args(): #SERVER
+	if "--server" in OS.get_cmdline_args(): #SERVER
 		_start_server(DEFAULT_SERVER_PORT)
 		multiplayer.peer_connected.connect(_on_peer_connected)
 		multiplayer.peer_disconnected.connect(_on_peer_disconnected)

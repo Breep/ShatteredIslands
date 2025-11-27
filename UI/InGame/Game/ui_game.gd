@@ -14,8 +14,8 @@ extends Control
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	if multiplayer.is_server() and GameManager.game_type != GameManager.GameType.SOLO:
-		queue_free()
+	#if multiplayer.is_server() and GameManager.game_type != GameManager.GameType.SOLO:
+		#queue_free()
 	Events.local_player_is_dead.connect(_on_events_local_player_is_dead)
 	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 	Events.scene_switched.connect(_on_events_scene_switched)

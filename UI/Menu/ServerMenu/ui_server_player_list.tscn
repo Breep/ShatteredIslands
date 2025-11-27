@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cfy3wb4emhq5q"]
+[gd_scene load_steps=5 format=3 uid="uid://cfy3wb4emhq5q"]
 
 [ext_resource type="Script" uid="uid://ydc55iptm4fr" path="res://UI/Menu/ServerMenu/ui_server_player_list.gd" id="1_urncf"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="3_w1xft"]
 [ext_resource type="PackedScene" uid="uid://dqkyovx2krwgi" path="res://UI/Menu/ServerMenu/ui_player_info_template.tscn" id="4_eeq53"]
+[ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://UI/Tool/Misc/hover_boost_button.gd" id="4_urncf"]
 
 [node name="UIServerPlayerList" type="Control"]
 layout_mode = 3
@@ -85,6 +86,7 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
 text = "Add
 Bots"
+script = ExtResource("4_urncf")
 
 [node name="StartButton" type="Button" parent="CenterContainer/ServerPanels"]
 layout_mode = 2
