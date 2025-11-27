@@ -108,7 +108,6 @@ func _on_game_manager_game_state_changed(state: Game.GameState) -> void:
 		Game.GameState.FIGHTING_POSITIONING:
 			_battle_logs.clear()
 		Game.GameState.FIGHTING_NORMAL:
-			print("[DEBUG_PROTO] reset timer")
 			_start_time = (Time.get_ticks_msec() as float) / 1000.0
 			_is_accelerated_fight = false
 		Game.GameState.FIGHTING_ACCELERATED:

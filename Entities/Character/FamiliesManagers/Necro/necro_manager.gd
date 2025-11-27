@@ -15,7 +15,6 @@ var _necro_stats: FamilyNecroStats # Ref to the owner necro stats
 
 func _ready() -> void:
 	_necro_stats = _owner.families_stats.necro
-	print("[NECROSIS READY")
 
 # ============================== Public functions ==============================
 

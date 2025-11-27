@@ -99,7 +99,7 @@ func get_human_players() -> Dictionary[int, Player]:
 
 func join_game(peer_id: int, player_name: String) -> Dictionary:
 	if multiplayer.is_server() and GameManager.game_type != GameManager.GameType.SOLO:
-		printerr("PlayerManager: Server can't be a player")
+		GlobalLogger.error("PlayerManager: Server can't be a player")
 		return {JoinGameKeys.RESPONSE: false, JoinGameKeys.REASON: "Server can't be a player"}
 	
 	_ask_join_game.rpc_id(1, peer_id, player_name)
@@ -110,7 +110,7 @@ func join_game(peer_id: int, player_name: String) -> Dictionary:
 	if _join_server_response == true:
 		return {JoinGameKeys.RESPONSE: true, JoinGameKeys.REASON: "OK"}
 	else:
-		printerr("PlayerManager: Can't join the game -> ", _join_server_reason)
+		GlobalLogger.error("PlayerManager: Can't join the game -> " + _join_server_reason)
 		return {JoinGameKeys.RESPONSE: false, JoinGameKeys.REASON: _join_server_reason}
 
 

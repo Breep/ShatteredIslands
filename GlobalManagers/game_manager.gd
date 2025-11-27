@@ -180,7 +180,7 @@ func _init_hero_pickup_order() -> void:
 @rpc("any_peer", "call_remote")
 func _ask_hero_pickup_order(peer_id: int) -> void:
 	if not multiplayer.is_server():
-		printerr("GameManager: Only the server can choose the hero pickup order")
+		GlobalLogger.error("GameManager: Only the server can choose the hero pickup order")
 		return
 	
 	if not _hero_pickup_order_ready:
@@ -204,7 +204,7 @@ func _answer_hero_pickup_order(hero_pickup_order_player_ids: Array[int]) -> void
 @rpc("any_peer", "call_remote")
 func _ask_get_n_random_heroes(peer_id: int) -> void:
 	if not multiplayer.is_server():
-		printerr("Only server should be asked for random heroes")
+		GlobalLogger.error("Only server should be asked for random heroes")
 		return
 	
 	if not _game_heroes_ready:
@@ -282,50 +282,50 @@ func _on_game_state_changed(new_state) -> void:
 	_game_state_timer.stop()
 	match new_state:
 		Game.GameState.BUYING:
-			print("[", multiplayer.get_unique_id(), "] GameManager: [State=BUYING] (", _game_rules.duration_buying_phase, "s)")
+			GlobalLogger.debug("GameManager: [State=BUYING] (" + str(_game_rules.duration_buying_phase) + "s)")
 			_game_state_timer.wait_time = _game_rules.duration_buying_phase
 			_game_state_timer.start()
 		
 		Game.GameState.FIGHTING_POSITIONING:
-			print("[", multiplayer.get_unique_id(), "] GameManager: [State=FIGHTING_POSITIONING] (", _game_rules.duration_fighting_positioning, "s)")
+			GlobalLogger.debug("GameManager: [State=FIGHTING_POSITIONING] (" + str(_game_rules.duration_fighting_positioning) + "s)")
 			_game_state_timer.wait_time = _game_rules.duration_fighting_positioning
 			_game_state_timer.start()
 		
 		Game.GameState.FIGHTING_COUNTDOWN:
-			print("[", multiplayer.get_unique_id(), "] GameManager: [State=FIGHTING_COUNTDOWN] (", _game_rules.duration_fighting_countdown, "s)")
+			GlobalLogger.debug("GameManager: [State=FIGHTING_COUNTDOWN] (" + str(_game_rules.duration_fighting_countdown) + "s)")
 			_game_state_timer.wait_time = _game_rules.duration_fighting_countdown
 			_game_state_timer.start()
 		
 		Game.GameState.FIGHTING_NORMAL:
-			print("[", multiplayer.get_unique_id(), "] GameManager: [State=FIGHTING_NORMAL] (", _game_rules.duration_fighting_normal, "s)")
+			GlobalLogger.debug("GameManager: [State=FIGHTING_NORMAL] (" + str(_game_rules.duration_fighting_normal) + "s)")
 			_game_state_timer.wait_time = _game_rules.duration_fighting_normal
 			_game_state_timer.start()
 		
 		Game.GameState.FIGHTING_ACCELERATED:
-			print("[", multiplayer.get_unique_id(), "] GameManager: [State=FIGHTING_ACCELERATED] (", _game_rules.duration_fighting_accelerated, "s)")
+			GlobalLogger.debug("GameManager: [State=FIGHTING_ACCELERATED] (" + str(_game_rules.duration_fighting_accelerated) + "s)")
 			Engine.time_scale = ACCELERATED_FIGHT_TIME_SCALE
 			_game_state_timer.wait_time = _game_rules.duration_fighting_accelerated
 			_game_state_timer.start()
 		
 		Game.GameState.FIGHTING_CELEBRATING:
-			print("[", multiplayer.get_unique_id(), "] GameManager: [State=FIGHTING_CELEBRATING] (", _game_rules.duration_fighting_celebrating, "s)")
+			GlobalLogger.debug("GameManager: [State=FIGHTING_CELEBRATING] (" + str(_game_rules.duration_fighting_celebrating) + "s)")
 			Engine.time_scale = 1.0
 			_game_state_timer.wait_time = _game_rules.duration_fighting_celebrating
 			_game_state_timer.start()
 		
 		Game.GameState.FIGHTING_FINISHED:
-			print("[", multiplayer.get_unique_id(), "] GameManager: [State=FIGHTING_FINISHED]")
+			GlobalLogger.debug("GameManager: [State=FIGHTING_FINISHED]")
 			_game_state_timer.wait_time = _game_rules.duration_fighting_finished
 			_game_state_timer.start()
 		
 		Game.GameState.STARTING:
-			print("[", multiplayer.get_unique_id(), "] GameManager: [State=STARTING]")
+			GlobalLogger.debug("GameManager: [State=STARTING]")
 		Game.GameState.INITIATING_NEW_ROUND:
-			print("[", multiplayer.get_unique_id(), "] GameManager: [State=INITIATING_NEW_ROUND]")
+			GlobalLogger.debug("GameManager: [State=INITIATING_NEW_ROUND]")
 		Game.GameState.FINISHED:
-			print("[", multiplayer.get_unique_id(), "] GameManager: [State=FINISHED]")
+			GlobalLogger.debug("GameManager: [State=FINISHED]")
 		Game.GameState.UNDEF:
-			print("[", multiplayer.get_unique_id(), "] GameManager: [State=UNDEF]")
+			GlobalLogger.debug("GameManager: [State=UNDEF]")
 #endregion
 	
 	

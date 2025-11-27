@@ -27,7 +27,7 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	if player == null:
-		printerr("PlayerBotAI: Can't exist without a ref to a player !")
+		GlobalLogger.error("PlayerBotAI: Can't exist without a ref to a player !")
 		queue_free()
 		return
 	
@@ -38,7 +38,7 @@ func _ready() -> void:
 	
 	_economy_strategy = EconomyStrategy.KEEPER if _rng.randi() % 2 == 0 else EconomyStrategy.WASTER
 	var tmp_debug_strat_str: String = "KEEPER" if _economy_strategy == EconomyStrategy.KEEPER else "WASTER"
-	print("PlayerBotAI: Starting AI for ", player.name, "[", tmp_debug_strat_str, "]")
+	GlobalLogger.debug("PlayerBotAI: Starting AI for " + player.name + "[" + tmp_debug_strat_str + "]")
 
 
 func _dumb_buying_area() -> void:
@@ -63,7 +63,6 @@ func _on_game_manager_game_state_changed(new_game_state: Game.GameState) -> void
 
 
 func _on_wake_up_timer_timeout() -> void:
-	#print("PlayerBotAI: Starting AI for ", player.name, "WAKING UP")
 	if _economy_strategy == EconomyStrategy.KEEPER and player.gold >= 600:
 		_buy_a_card()
 	elif _economy_strategy == EconomyStrategy.WASTER and player.gold >= 100:

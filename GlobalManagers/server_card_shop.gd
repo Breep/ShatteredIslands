@@ -68,7 +68,7 @@ func try_buy_random_card_for_player(player: Player) -> Card:
 # ========== INIT SERVER CARD SHOP
 
 func _init_cards_in_player_shop() -> void:
-	print("INIT CARDS IN PLAYER SHOP -> ", PlayerManager.players.keys())
+	GlobalLogger.debug("INIT CARDS IN PLAYER SHOP -> " + str(PlayerManager.players.keys()))
 	for player_id in PlayerManager.players.keys():
 		_cards_in_player_shop[player_id] = []
 
@@ -91,11 +91,11 @@ func _server_draw_n_cards(player: Player, number_of_cards_to_draw: int) -> Array
 
 func _server_try_buy_card_from_player_shop(player: Player, card_to_buy: Card) -> bool:
 	if not card_to_buy in _cards_in_player_shop[player.id]:
-		printerr("[", multiplayer.get_unique_id(),"] Peer.", player.id, " try to buy a card not displayed in his shop [", card_to_buy.name, "]")
+		GlobalLogger.error("Peer." + str(player.id) + " tries to buy a card not displayed in his shop [" + card_to_buy.name + "]")
 		return false
 	
 	if player.gold < 100: # TODO check gamerules for card price
-		printerr("[", multiplayer.get_unique_id(),"]  Peer.", player.id, " is not rich enough")
+		GlobalLogger.warn("Peer." +  str(player.id) + " is not rich enough")
 		return false
 	
 	_cards_in_player_shop[player.id].erase(card_to_buy)
@@ -116,10 +116,10 @@ func _client_try_buy_card_from_player_shop(card: Card) -> bool:
 			PlayerManager.get_local_player().gold -= 100
 			return true
 		ServerResponse.NOT_ENOUGHT_MONEY:
-			print("ServerCardShop: [id:", multiplayer.get_unique_id(),"] Not enought money")
+			GlobalLogger.warn("ServerCardShop: Not enought money")
 			return false
 		ServerResponse.CARD_NOT_BUYABLE:
-			print("ServerCardShop: [id:", multiplayer.get_unique_id(),"] I can't buy this card")
+			GlobalLogger.error("ServerCardShop: I can't buy this card [" + card.name + "]")
 			return false
 	
 	# Unreachable
@@ -133,12 +133,12 @@ func _ask_buy_card_from_player_shop(card_uid: int) -> void:
 	var peer_id: int = multiplayer.get_remote_sender_id()
 	var card_to_buy: Card = _get_card_in_array(card_uid, _cards_in_player_shop[peer_id])
 	if card_to_buy == null:
-		printerr("[", multiplayer.get_unique_id(),"] Peer.", peer_id, " try to buy a card not displayed in his shop")
+		GlobalLogger.error("Peer." + str(peer_id) + " tries to buy a card not displayed in his shop")
 		_answer_buy_card_from_player_shop.rpc_id(peer_id, ServerResponse.CARD_NOT_BUYABLE)
 		return
 	
 	if PlayerManager.players[peer_id].gold < 100: # TODO check gamerules for card price
-		printerr("[", multiplayer.get_unique_id(),"]  Peer.", peer_id, " is not rich enough")
+		GlobalLogger.error("Peer." + str(peer_id) + " is not rich enough")
 		_answer_buy_card_from_player_shop.rpc_id(peer_id, ServerResponse.NOT_ENOUGHT_MONEY)
 		return
 	
@@ -160,7 +160,7 @@ func _server_try_buy_random_card_for_player(player: Player) -> Card:
 	if player.gold < 90: return null
 	var cards: Array[Card] = shop_deck.draw_n_cards(1, player.deck)
 	if cards.is_empty():
-		push_warning("ServerCardShop: No more random card from the server")
+		GlobalLogger.warn("ServerCardShop: No more random card from the server")
 		return null
 	player.deck.add_card(cards[0])
 	player.gold -= 90
@@ -176,7 +176,7 @@ func _client_try_buy_random_card_for_player() -> Card:
 		ServerResponse.OK:
 			PlayerManager.get_local_player().deck.add_card(_random_card_bought)
 		ServerResponse.NOT_ENOUGHT_MONEY:
-			print("ServerCardShop: [id:", multiplayer.get_unique_id(),"] Not enought money")
+			GlobalLogger.warn("ServerCardShop: Not enought money")
 	return _random_card_bought
 
 

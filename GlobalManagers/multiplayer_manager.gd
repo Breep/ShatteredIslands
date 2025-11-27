@@ -19,11 +19,11 @@ var expected_clients: int = 1
 var _clients_number: int = 0
 
 # ============================== Node base function ==============================
-#server --headless --auto-start=3 --expected_clients=1
 func _ready() -> void:
 	auto_start_time = float(_get_cmd_arg("auto-start", "0"))
 	expected_clients = int(_get_cmd_arg("expected_clients", "1"))
 	
+	GlobalLogger.info("Starting multiplayer manager")
 	
 	if "--server" in OS.get_cmdline_args(): #SERVER
 		_start_server(DEFAULT_SERVER_PORT)
@@ -40,14 +40,6 @@ func try_connect(ip: String, port: int) -> bool:
 
 # ============================== Private function ==============================
 
-func _check_args(args: PackedStringArray) -> void:
-	for arg in args:
-		print(arg)
-		#match arg:
-			#"--headless":
-				#print("Lanching headless server")
-			#"--"
-
 func _get_cmd_arg(key: String, default: String = "") -> String:
 	for arg in OS.get_cmdline_args():
 		if arg.begins_with("--" + key + "="):
@@ -56,9 +48,9 @@ func _get_cmd_arg(key: String, default: String = "") -> String:
 
 
 func _start_server(port: int) -> void:
-	print("[SERVER_DEBUG] MultiplayerManager: Starting server - ", port)
-	print("[SERVER_DEBUG] MultiplayerManager: Expecting ", expected_clients, " clients")
-	print("[SERVER_DEBUG] MultiplayerManager: Auto starting game after ", auto_start_time, "s")
+	GlobalLogger.info("MultiplayerManager: Starting server - " + str(port))
+	GlobalLogger.info("MultiplayerManager: Expecting " + str(expected_clients) + " clients")
+	GlobalLogger.info("MultiplayerManager: Auto starting game after " + str(auto_start_time) + "s")
 	_add_peer(PeerType.SERVER, port)
 
 
@@ -72,7 +64,7 @@ func _add_peer(peerType: PeerType, port: int, ip: String = "") -> bool:
 		error = peer.create_client(address, port)
 	
 	if error != OK:
-		printerr("MultiplayerManager: Cannot add peer: ", str(error))
+		GlobalLogger.error("MultiplayerManager: Cannot add peer: " + str(error))
 		return false
 	
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
@@ -84,9 +76,9 @@ func _add_peer(peerType: PeerType, port: int, ip: String = "") -> bool:
 func _on_peer_connected(id):
 	if not multiplayer.is_server(): return
 	_clients_number += 1
-	print("[SERVER_DEBUG], MultiplayerManager: A client [", id, "] connected (", _clients_number, "/", expected_clients, ")")
+	GlobalLogger.info("MultiplayerManager: A client [" + str(id) + "] connected (" + str(_clients_number) + "/" + str(expected_clients) + ")")
 	if _clients_number >= expected_clients:
-		print("[SERVER_DEBUG] MultiplayerManager: All clients are connected, starting the countdown (", auto_start_time, ")")
+		GlobalLogger.info("MultiplayerManager: All clients are connected, starting the countdown (" + str(auto_start_time) + ")")
 		Utils.create_one_shot_timer(self, auto_start_time, _on_auto_start_timeout, true)
 
 
