@@ -25,17 +25,17 @@ func recompute_stats() -> void:
 
 
 func register_modifier(stat_modifier: StatModifier) -> void:
+	GlobalLogger.trace("register_modifier() | " + stat_modifier.id, GlobalLogger.Category.STAT_MODIFIER)
 	var stat_type: EntityStats.StatType = stat_modifier.stat_type
 	if stat_type != _stat_type:
-		printerr("StatModifierDictionary: register_modifier() - Trying to register a modifier for an other stat type \"", stat_type, "\" [", _stat_type, "]")
+		GlobalLogger.error("Trying to register a modifier for an other stat type |" + str(stat_type) + " | " + str(_stat_type), GlobalLogger.Category.STAT_MODIFIER)
 		return
 	
 	var modifier_id: String = stat_modifier.id
 	if _modifiers.has(modifier_id):
-		printerr("StatModifierDictionary: register_modifier() - already known stat modifier \"", modifier_id, "\" [", _stat_type, "]")
+		GlobalLogger.error("Register - Already known stat modifier | id=" + modifier_id + " | " + str(_stat_type), GlobalLogger.Category.STAT_MODIFIER)
 		return
 	
-	#print("DEBUG -> register_modifier [", modifier_id, "]")
 	if _is_multiple_stats():
 		_modifiers_per_action_type[stat_modifier.action_type][modifier_id] = stat_modifier
 	else:
@@ -44,13 +44,13 @@ func register_modifier(stat_modifier: StatModifier) -> void:
 
 
 func update_modifier(stat_modifier: StatModifier) -> void:
+	GlobalLogger.trace("update_modifier() | " + stat_modifier.id, GlobalLogger.Category.STAT_MODIFIER)
 	var stat_type: EntityStats.StatType = stat_modifier.stat_type
 	if stat_type != _stat_type:
-		printerr("StatModifierDictionary: register_modifier() - Trying to update a modifier for an other stat type \"", stat_type, "\" [", _stat_type, "]")
+		GlobalLogger.error("Trying to update a modifier for an other stat type | " + str(stat_type) + " | " + str(_stat_type), GlobalLogger.Category.STAT_MODIFIER)
 		return
 	
 	var modifier_id: String = stat_modifier.id
-	#print("DEBUG -> update_modifier [", modifier_id, "]")
 	if _is_multiple_stats():
 		_modifiers_per_action_type[stat_modifier.action_type][modifier_id] = stat_modifier
 	else:
@@ -59,21 +59,21 @@ func update_modifier(stat_modifier: StatModifier) -> void:
 
 
 func unregister_modifier(stat_modifier: StatModifier) -> void:
+	GlobalLogger.trace("unregister_modifier() | " + stat_modifier.id, GlobalLogger.Category.STAT_MODIFIER)
 	var stat_type: EntityStats.StatType = stat_modifier.stat_type
 	if stat_type != _stat_type:
-		printerr("StatModifierDictionary: unregister_modifier() - Trying to unregister a modifier for an other stat type \"", stat_type, "\" [", _stat_type, "]")
+		GlobalLogger.error("Trying to unregister a modifier for an other stat type | " + str(stat_type) + str(_stat_type), GlobalLogger.Category.STAT_MODIFIER)
 		return
 	
 	var modifier_id: String = stat_modifier.id
-	#print("DEBUG -> unregister_modifier [", modifier_id, "]")
 	if _is_multiple_stats():
 		if not _modifiers_per_action_type[stat_modifier.action_type].has(modifier_id):
-			printerr("EntityStatsManager: unregister_modifier() - unknown multiple stats modifier \"", modifier_id, "\" [", _stat_type, "]")
+			GlobalLogger.error("Unregister - Unknown multiple stats modifier | " + str(modifier_id) + str(_stat_type), GlobalLogger.Category.STAT_MODIFIER)
 			return
 		_modifiers_per_action_type[stat_modifier.action_type].erase(modifier_id)
 	else:
 		if not _modifiers.has(modifier_id):
-			printerr("EntityStatsManager: unregister_modifier() - unknown stat modifier \"", modifier_id, "\" [", _stat_type, "]")
+			GlobalLogger.error("Unregister - Unknown stat modifier | " + modifier_id +  " | " +  str(_stat_type), GlobalLogger.Category.STAT_MODIFIER)
 			return
 		_modifiers.erase(modifier_id)
 	
@@ -85,17 +85,18 @@ func auto_cleanup() -> void:
 		for action_type: Utils.ActionType in _modifiers_per_action_type.keys():
 			for modifier: StatModifier in _modifiers_per_action_type[action_type].values().duplicate():
 				if modifier.auto_cleanup:
-					#print("DEBUG -> auto cleaning [", modifier.id, "]")
+					GlobalLogger.trace("Auto cleaning | " + modifier.id, GlobalLogger.Category.STAT_MODIFIER)
 					_modifiers_per_action_type[action_type].erase(modifier.id)
 	else:
 		for modifier: StatModifier in _modifiers.values().duplicate():
 			if modifier.auto_cleanup:
-				#print("DEBUG -> auto cleaning [", modifier.id, "]")
+				GlobalLogger.trace("Auto cleaning | " + modifier.id, GlobalLogger.Category.STAT_MODIFIER)
 				_modifiers.erase(modifier.id)
 
 # ============================== Private functions ==============================
 
 func _recompute_stats() -> void:
+	GlobalLogger.trace("_recompute_stats()", GlobalLogger.Category.STAT_MODIFIER)
 	if _is_multiple_stats():
 		_recompute_multiple_stats()
 	else:
@@ -116,13 +117,11 @@ func _recompute_single_stats() -> void:
 
 
 func _recompute_multiple_stats() -> void:
-	#print("[DEBUG] StatModifierDictionary: recomputing multiple stats")
 	for action_type: Utils.ActionType in Utils.get_all_actions():
 		var mods: Dictionary = _modifiers_per_action_type[action_type]
 		var add: float = 0.0
 		var mul: float = 0.0
 		for modifier: StatModifier in mods.values():
-			#print("\t[DEBUG] Modifier found ! -> ", modifier.id, " - ", modifier.value)
 			if modifier.calc_type == StatModifier.CalcType.ADD:
 				add += modifier.value
 			elif modifier.calc_type == StatModifier.CalcType.MULT:

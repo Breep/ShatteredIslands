@@ -179,7 +179,7 @@ func spawn_character(spawn_node: Node3D, spawn_point: SpawnPoint) -> Character:
 # ============================== Resource base functions ==============================
 
 func _init() -> void:
-	deck = PlayerDeck.new()
+	deck = PlayerDeck.new(self)
 	deck.has_changed.connect(_on_deck_has_changed)
 
 # ============================== Private functions ==============================

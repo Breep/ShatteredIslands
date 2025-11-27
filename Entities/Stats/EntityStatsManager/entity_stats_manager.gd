@@ -57,6 +57,7 @@ func unregister_modifier(stat_modifier: StatModifier) -> void:
 func _auto_cleanup_all() -> void:
 	for smd: StatModifierDictionary in _stats_modifiers_dictionaries.values():
 		smd.auto_cleanup()
+		smd.recompute_stats()
 
 # ============================== Callbacks ==============================
 

@@ -84,9 +84,6 @@ func _ready() -> void:
 
 # ============================== Public function ==============================
 
-
-
-
 func clear() -> void:
 	_game_type = GameType.UNDEF
 	_active_families.clear()

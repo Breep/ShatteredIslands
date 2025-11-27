@@ -25,7 +25,7 @@ func _ready() -> void:
 	_rng.randomize()
 	
 	_player.name = "Breep"
-	_player.deck = PlayerDeck.new()
+	_player.deck = PlayerDeck.new(_player)
 	_player.hero = _hero
 	_player.character = Character.new()
 	_player.character.stats = EntityStats.new()

@@ -59,7 +59,6 @@ func _on_quit_button_pressed() -> void:
 func _on_yes_button_pressed() -> void:
 	match _pause_state:
 		PauseState.MAIN_MENU:
-			print("Going back to main menu")
 			get_tree().change_scene_to_file("res://Game/MainMenu/main_menu.tscn")
 		PauseState.QUIT:
 			get_tree().quit()

@@ -19,13 +19,11 @@ func _ready() -> void:
 
 
 func _on_mouse_entered() -> void:
-	print("Mouse entered")
 	var target_size := _default_font_size * _font_increase
 	_animate_font_size(target_size)
 
 
 func _on_mouse_exited() -> void:
-	print("Mouse exited")
 	_animate_font_size(_default_font_size)
 
 

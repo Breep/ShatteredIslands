@@ -133,6 +133,7 @@ signal __all_players_syncronized()
 var __all_players_synchronized_for_sync_id: Dictionary[int, bool] # Key=SyncID, Value=<True if all players are synchronized>
 var __number_of_players_syncronized: Dictionary[int, int] # Key=SyncID, Value=<Number of players ready>
 func sync_point(sync_id: int) -> void:
+	GlobalLogger.debug("sync_point() | " + str(sync_id), GlobalLogger.Category.PLAYER_MANAGER)
 	_client_ready.rpc_id(1, sync_id)
 	if not __all_players_synchronized_for_sync_id.has(sync_id) or __all_players_synchronized_for_sync_id[sync_id] == false:
 		await __all_players_syncronized
@@ -143,6 +144,7 @@ func sync_point(sync_id: int) -> void:
 
 @rpc("any_peer", "call_local")
 func _client_ready(sync_id) -> void:
+	GlobalLogger.trace("_client_ready() | " + str(sync_id), GlobalLogger.Category.PLAYER_MANAGER)
 	if not multiplayer.is_server():
 		return
 	
@@ -157,6 +159,7 @@ func _client_ready(sync_id) -> void:
 
 @rpc("authority", "call_local")
 func _all_clients_ready(sync_id: int) -> void:
+	GlobalLogger.trace("_all_clients_ready() | " + str(sync_id), GlobalLogger.Category.PLAYER_MANAGER)
 	__all_players_synchronized_for_sync_id[sync_id] = true
 	__all_players_syncronized.emit()
 
@@ -164,6 +167,7 @@ func _all_clients_ready(sync_id: int) -> void:
 
 @rpc("any_peer", "call_local")
 func _ask_join_game(peer_id: int, player_name: String) -> void:
+	GlobalLogger.trace("_ask_join_game() | " + str(peer_id) + " | " + player_name, GlobalLogger.Category.PLAYER_MANAGER)
 	if not multiplayer.is_server():
 		printerr("PlayerManager: Only the server should be asked to join the game")
 		return
@@ -189,6 +193,7 @@ func _ask_join_game(peer_id: int, player_name: String) -> void:
 
 @rpc("authority", "call_local")
 func _answer_join_game(response: int, reason: String) -> void:
+	GlobalLogger.trace("_answer_join_game() | " + str(response) + " | " + reason, GlobalLogger.Category.PLAYER_MANAGER)
 	_join_server_response = response
 	_join_server_reason = reason
 	_join_server_has_answered = true
@@ -201,7 +206,7 @@ func _answer_join_game(response: int, reason: String) -> void:
 # TODO Improve this so it only send not known players to players
 @rpc("authority", "call_remote")
 func _add_player(player_name: String, id: int, is_bot: bool, serialized_player: Dictionary) -> void:
-	#print("[id:", multiplayer.get_unique_id(),"] Adding player: ", player_name, " of multiplayer id:", id, " in my players list")
+	GlobalLogger.trace("_add_player() | " + player_name + " | id=" + str(id) + " | " + str(is_bot), GlobalLogger.Category.PLAYER_MANAGER)
 	
 	if players.has(id) or players.size() >= MAX_PLAYERS:
 		return
@@ -222,7 +227,6 @@ func _add_player(player_name: String, id: int, is_bot: bool, serialized_player: 
 		if is_bot:
 			var player_bot_ai: PlayerBotAI = load("res://Player/PlayerBotAI/player_bot_ai.tscn").instantiate()
 			player_bot_ai.player = new_player
-			new_player.gold = 0 # TODO REMOVE ME
 			player_bot_ai.name = "PlayerBotAI_" + str(new_player.id)
 			add_child(player_bot_ai)
 		
@@ -233,12 +237,13 @@ func _add_player(player_name: String, id: int, is_bot: bool, serialized_player: 
 	player_added.emit(id)
 	
 	if multiplayer.is_server():
-		for player in players.values():
+		for player: Player in players.values():
 			_add_player.rpc(player.name, player.id, player.is_bot, player.serialized())
 
 
 @rpc("authority", "call_local")
 func _remove_player(peer_id: int) -> void:
+	GlobalLogger.trace("_remove_player() | " + str(peer_id), GlobalLogger.Category.PLAYER_MANAGER)
 	player_removed.emit(peer_id)
 	players.erase(peer_id)
 

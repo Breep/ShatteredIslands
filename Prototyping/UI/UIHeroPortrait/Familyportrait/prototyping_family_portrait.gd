@@ -18,7 +18,7 @@ func _ready() -> void:
 		_ui_all_families_portrait.show_families()
 	_ui_all_families_portrait.init_portait_families(_families)
 	
-	_player.deck = PlayerDeck.new()
+	_player.deck = PlayerDeck.new(_player)
 	for family: Family in _families:
 		_player.deck._families_count[family.family_type] = 0
 	

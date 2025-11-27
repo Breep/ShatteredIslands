@@ -19,31 +19,43 @@ enum Category {
 	NET,
 	GLOBAL_MANAGER,
 	ROUND_MANAGER,
+	PLAYER_MANAGER,
+	GLOBAL_FIGHTING_MANAGER,
 	CARD_SHOP,
+	ORACLE_SHOP,
 	AI,
 	GAME,
-	HERO_SELECTOR
+	HERO_SELECTOR,
+	DECK,
+	FIGHTING_ISLAND,
+	STAT_MODIFIER,
 }
 
 const CATEGORY_PREFIX_TEMPLATES : Dictionary [Category, String] = {
-	Category.DEFAULT:        "()          ",
-	Category.NET:            "(NET)       ",
-	Category.GLOBAL_MANAGER: "(GM)        ",
-	Category.ROUND_MANAGER:  "(RM)        ",
-	Category.CARD_SHOP:      "(CARD_SHOP) ",
-	Category.AI:             "(AI)        ",
-	Category.GAME:           "(GAME)      ",
-	Category.HERO_SELECTOR:  "(HERO_SLCT) ",
+	Category.DEFAULT:                 "(          ) ",
+	Category.NET:                     "(NET       ) ",
+	Category.GLOBAL_MANAGER:          "(GAME_M    ) ",
+	Category.ROUND_MANAGER:           "(ROUND_M   ) ",
+	Category.CARD_SHOP:               "(CARD_SHOP ) ",
+	Category.AI:                      "(AI        ) ",
+	Category.GAME:                    "(GAME      ) ",
+	Category.HERO_SELECTOR:           "(HERO_SLCT ) ",
+	Category.PLAYER_MANAGER:          "(PLAYER_M  ) ",
+	Category.DECK:                    "(DECK      ) ",
+	Category.FIGHTING_ISLAND:         "(FIGHT_ISLD) ",
+	Category.ORACLE_SHOP:             "(XP_SHOP   ) ",
+	Category.STAT_MODIFIER:           "(STAT_MOD  ) ",
+	Category.GLOBAL_FIGHTING_MANAGER: "(GFM       ) ",
 }
 
 const PREFIX_TEMPLATES : Dictionary [GameType, String] = {
-	GameType.SOLO:   "[SOLO]   ",
+	GameType.SOLO:   "[SOLO] ",
 	GameType.SERVER: "[SERVER] ",
 	GameType.CLIENT: "[CLIENT] "
 }
 
 const RICH_PREFIX_TEMPLATES : Dictionary [GameType, String] = {
-	GameType.SOLO:   "[color=purple][SOLO][/color]   ",
+	GameType.SOLO:   "[color=purple][SOLO][/color] ",
 	GameType.SERVER: "[color=blue][SERVER][/color] ",
 	GameType.CLIENT: "[color=green][CLIENT][/color] "
 }
@@ -51,15 +63,28 @@ const RICH_PREFIX_TEMPLATES : Dictionary [GameType, String] = {
 const LEVEL_PREFIX_TEMPLATES : Dictionary [Level, String] = {
 	Level.TRACE: "<TRACE> ",
 	Level.DEBUG: "<DEBUG> ",
-	Level.INFO:  "<INFO>  ",
-	Level.WARN:  "<WARN>  ",
+	Level.INFO:  "<INFO > ",
+	Level.WARN:  "<WARN > ",
 	Level.ERROR: "<ERROR> "
 }
 
 #region ============================== Configuration ==============================
 var current_level: Level = Level.TRACE
 var current_categories: Array[Category] = [
-	
+	#Category.DEFAULT,
+	#Category.NET,
+	#Category.GLOBAL_MANAGER,
+	#Category.ROUND_MANAGER,
+	#Category.CARD_SHOP,
+	#Category.AI,
+	#Category.GAME,
+	#Category.HERO_SELECTOR,
+	#Category.PLAYER_MANAGER,
+	#Category.DECK,
+	#Category.FIGHTING_ISLAND,
+	#Category.ORACLE_SHOP,
+	#Category.STAT_MODIFIER,
+	Category.GLOBAL_FIGHTING_MANAGER,
 ]
 #endregion
 
@@ -101,7 +126,6 @@ func _ready() -> void:
 #region ============================== Public function ==============================
 func _get_prefix() -> String:
 	if _is_server: return PREFIX_TEMPLATES[GameType.SERVER]
-	
 	if not multiplayer.is_server():
 		return PREFIX_TEMPLATES[GameType.CLIENT]
 	else:
@@ -110,7 +134,6 @@ func _get_prefix() -> String:
 
 func _get_rich_prefix() -> String:
 	if _is_server: return RICH_PREFIX_TEMPLATES[GameType.SERVER]
-	
 	if not multiplayer.is_server():
 		return RICH_PREFIX_TEMPLATES[GameType.CLIENT]
 	else:

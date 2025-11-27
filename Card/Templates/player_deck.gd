@@ -1,10 +1,17 @@
 class_name PlayerDeck
 extends Deck
 
+var _player_owner: Player
+
 var _active_cards: Array[Card]
 var _cards_dictionary: Dictionary[Family.FamilyType, Array] # FamilyType:Array[Cards]
 
 signal has_changed()
+
+# ============================== Node base functions ==============================
+
+func _init(player_owner: Player) -> void:
+	_player_owner = player_owner
 
 # ============================== Public function ==============================
 
@@ -51,9 +58,11 @@ func _add_or_improve_card_to_active_cards(card_to_add: Card) -> void:
 		if card.name == card_to_add.name:
 			if not card.is_max_level():
 				card.lvl += 1
+				GlobalLogger.debug("'" + _player_owner.name + "' Upgrading card | " + card_to_add.name + " | " + str(card.lvl), GlobalLogger.Category.DECK)
 			else:
-				push_error("PlayerDeck: Trying to upgrade an already maximized card - ", card_to_add.name)
+				GlobalLogger.error("'" + _player_owner.name + "' Trying to upgrade an already maximized card | " + card_to_add.name, GlobalLogger.Category.DECK)
 			return
+	GlobalLogger.debug("'" + _player_owner.name + "' Adding new card | " + card_to_add.name + " | " + str(card_to_add.lvl), GlobalLogger.Category.DECK)
 	_active_cards.append(card_to_add)
 	if _cards_dictionary.has(card_to_add.family):
 		_cards_dictionary[card_to_add.family].append(card_to_add)

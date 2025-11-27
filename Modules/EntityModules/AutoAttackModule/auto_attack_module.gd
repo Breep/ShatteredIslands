@@ -93,8 +93,6 @@ func _consume_modifiers(projectile_stats: ProjectileStats) -> void:
 
 func _on_auto_attack_timer_timeout() -> void:
 	var target = _owner.target_module.get_target(_attack_strategy)
-	if _owner is Character and PlayerManager.get_local_player() == _owner.player:
-		print("AA: target=", target)
 	current_target = target
 	if target == null: return
 	_auto_attack(target)
