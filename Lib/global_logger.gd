@@ -69,23 +69,22 @@ const LEVEL_PREFIX_TEMPLATES : Dictionary [Level, String] = {
 }
 
 #region ============================== Configuration ==============================
-var current_level: Level = Level.TRACE
-var current_categories: Array[Category] = [
-	#Category.DEFAULT,
-	#Category.NET,
-	#Category.GLOBAL_MANAGER,
-	#Category.ROUND_MANAGER,
-	#Category.CARD_SHOP,
-	#Category.AI,
-	#Category.GAME,
-	#Category.HERO_SELECTOR,
-	#Category.PLAYER_MANAGER,
-	#Category.DECK,
-	#Category.FIGHTING_ISLAND,
-	#Category.ORACLE_SHOP,
-	#Category.STAT_MODIFIER,
-	Category.GLOBAL_FIGHTING_MANAGER,
-]
+var current_categories_level: Dictionary[Category, Level] = {
+	Category.DEFAULT: Level.WARN,
+	Category.NET: Level.TRACE,
+	Category.GLOBAL_MANAGER: Level.WARN,
+	Category.ROUND_MANAGER: Level.WARN,
+	Category.CARD_SHOP: Level.WARN,
+	Category.AI: Level.WARN,
+	Category.GAME: Level.WARN,
+	Category.HERO_SELECTOR: Level.WARN,
+	Category.PLAYER_MANAGER: Level.WARN,
+	Category.DECK: Level.DEBUG,
+	Category.FIGHTING_ISLAND: Level.WARN,
+	Category.ORACLE_SHOP: Level.WARN,
+	Category.STAT_MODIFIER: Level.DEBUG,
+	Category.GLOBAL_FIGHTING_MANAGER: Level.TRACE,
+}
 #endregion
 
 #region ============================== Private variables ==============================
@@ -140,15 +139,13 @@ func _get_rich_prefix() -> String:
 		return RICH_PREFIX_TEMPLATES[GameType.SOLO]
 
 
-func _is_category_active(cat: Category) -> bool:
-	if current_categories.is_empty(): return true
-	if current_categories.has(cat): return true
-	return false
+func _is_category_active(cat: Category, log_level: Level) -> bool:
+	var cat_level: Level = current_categories_level.get(cat, Level.WARN)
+	return log_level >= cat_level
 
 
 func _log(cat: Category, level: Level, msg: String) -> void:
-	if level < current_level: return
-	if not _is_category_active(cat): return
+	if not _is_category_active(cat, level): return
 	match level:
 		Level.TRACE: 
 			print_rich(_get_rich_prefix() + "[color=gray]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")

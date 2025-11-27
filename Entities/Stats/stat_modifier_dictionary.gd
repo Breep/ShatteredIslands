@@ -25,7 +25,7 @@ func recompute_stats() -> void:
 
 
 func register_modifier(stat_modifier: StatModifier) -> void:
-	GlobalLogger.trace("register_modifier() | " + stat_modifier.id, GlobalLogger.Category.STAT_MODIFIER)
+	GlobalLogger.debug("register_modifier() | " + stat_modifier.id, GlobalLogger.Category.STAT_MODIFIER)
 	var stat_type: EntityStats.StatType = stat_modifier.stat_type
 	if stat_type != _stat_type:
 		GlobalLogger.error("Trying to register a modifier for an other stat type |" + str(stat_type) + " | " + str(_stat_type), GlobalLogger.Category.STAT_MODIFIER)
@@ -44,7 +44,7 @@ func register_modifier(stat_modifier: StatModifier) -> void:
 
 
 func update_modifier(stat_modifier: StatModifier) -> void:
-	GlobalLogger.trace("update_modifier() | " + stat_modifier.id, GlobalLogger.Category.STAT_MODIFIER)
+	GlobalLogger.debug("update_modifier() | " + stat_modifier.id, GlobalLogger.Category.STAT_MODIFIER)
 	var stat_type: EntityStats.StatType = stat_modifier.stat_type
 	if stat_type != _stat_type:
 		GlobalLogger.error("Trying to update a modifier for an other stat type | " + str(stat_type) + " | " + str(_stat_type), GlobalLogger.Category.STAT_MODIFIER)
@@ -59,7 +59,7 @@ func update_modifier(stat_modifier: StatModifier) -> void:
 
 
 func unregister_modifier(stat_modifier: StatModifier) -> void:
-	GlobalLogger.trace("unregister_modifier() | " + stat_modifier.id, GlobalLogger.Category.STAT_MODIFIER)
+	GlobalLogger.debug("unregister_modifier() | " + stat_modifier.id, GlobalLogger.Category.STAT_MODIFIER)
 	var stat_type: EntityStats.StatType = stat_modifier.stat_type
 	if stat_type != _stat_type:
 		GlobalLogger.error("Trying to unregister a modifier for an other stat type | " + str(stat_type) + str(_stat_type), GlobalLogger.Category.STAT_MODIFIER)
@@ -85,12 +85,12 @@ func auto_cleanup() -> void:
 		for action_type: Utils.ActionType in _modifiers_per_action_type.keys():
 			for modifier: StatModifier in _modifiers_per_action_type[action_type].values().duplicate():
 				if modifier.auto_cleanup:
-					GlobalLogger.trace("Auto cleaning | " + modifier.id, GlobalLogger.Category.STAT_MODIFIER)
+					GlobalLogger.debug("Auto cleaning | " + modifier.id, GlobalLogger.Category.STAT_MODIFIER)
 					_modifiers_per_action_type[action_type].erase(modifier.id)
 	else:
 		for modifier: StatModifier in _modifiers.values().duplicate():
 			if modifier.auto_cleanup:
-				GlobalLogger.trace("Auto cleaning | " + modifier.id, GlobalLogger.Category.STAT_MODIFIER)
+				GlobalLogger.debug("Auto cleaning | " + modifier.id, GlobalLogger.Category.STAT_MODIFIER)
 				_modifiers.erase(modifier.id)
 
 # ============================== Private functions ==============================
