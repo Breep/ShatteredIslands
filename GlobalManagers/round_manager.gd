@@ -60,7 +60,7 @@ func clear() -> void:
 
 func get_current_round_battles() -> Array[Battle]:
 	current_round += 1
-	print("[", multiplayer.get_unique_id(), "] STARTING A NEW ROUND: ", current_round, " | Players left: ", PlayerManager.get_alive_players().size())
+	GlobalLogger.debug("Starting a new round: " + str(current_round) + " | Players left: " + str(PlayerManager.get_alive_players().size()), GlobalLogger.Category.ROUND_MANAGER)
 	battle_history[current_round] = BattleHistory.new()
 	battle_history[current_round].round_id = current_round
 	battles.clear()
@@ -74,7 +74,7 @@ func get_current_round_battles() -> Array[Battle]:
 
 
 func register_battle_result(battle_id: int, winner_teams_order: Array[int]) -> void:
-	print("[", multiplayer.get_unique_id(), "] register_battle_result()")
+	GlobalLogger.trace("register_battle_result()", GlobalLogger.Category.ROUND_MANAGER)
 	if battles.is_empty(): return
 	var battle_result := BattleResult.new()
 	battle_result.battle_id = battle_id
@@ -118,7 +118,7 @@ func starting_round_player_changes() -> void:
 # Handle all changes affecting players at end of round: damage taken by loosing a fight
 func ending_round_player_changes() -> void:
 	if not multiplayer.is_server():
-		printerr("RoundManager: A client should not run this code ending_round_player_changes()")
+		GlobalLogger.error("A client should not run this code ending_round_player_changes()", GlobalLogger.Category.ROUND_MANAGER)
 		return
 	
 	# Not all FightingArea reported their fight result yet (There is a race of signals)
@@ -152,7 +152,7 @@ func ending_round_player_changes() -> void:
 @rpc("any_peer", "call_remote", "reliable")
 func _ask_current_round_battles(peer_id: int) -> void:
 	if not multiplayer.is_server():
-		printerr("Only the server can answer the current round battles")
+		GlobalLogger.error("Only the server can answer the current round battles", GlobalLogger.Category.ROUND_MANAGER)
 		return
 	
 	if not _is_ready:
