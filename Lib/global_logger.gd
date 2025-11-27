@@ -43,7 +43,7 @@ const PREFIX_TEMPLATES : Dictionary [GameType, String] = {
 }
 
 const RICH_PREFIX_TEMPLATES : Dictionary [GameType, String] = {
-	GameType.SOLO:   "[color=brown][SOLO][/color]   ",
+	GameType.SOLO:   "[color=purple][SOLO][/color]   ",
 	GameType.SERVER: "[color=blue][SERVER][/color] ",
 	GameType.CLIENT: "[color=green][CLIENT][/color] "
 }
@@ -126,8 +126,15 @@ func _is_category_active(cat: Category) -> bool:
 func _log(cat: Category, level: Level, msg: String) -> void:
 	if level < current_level: return
 	if not _is_category_active(cat): return
-	if level == Level.ERROR:
-		printerr(_get_prefix() + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg)
-	else:
-		print_rich(_get_rich_prefix() + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg)
+	match level:
+		Level.TRACE: 
+			print_rich(_get_rich_prefix() + "[color=gray]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
+		Level.DEBUG:
+			print_rich(_get_rich_prefix() + "[color=white]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
+		Level.INFO:
+			print_rich(_get_rich_prefix() + "[color=white]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
+		Level.WARN:
+			print_rich(_get_rich_prefix() + "[color=yellow]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
+		Level.ERROR:
+			print_rich(_get_rich_prefix() + "[color=red]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 #endregion

@@ -44,6 +44,7 @@ func init(families: Array[Family], rules: GameRules) -> void:
 # Calling ServerCardShop is different from client and server as there are multiple players at the same time on the server (1 human + n bots)
 
 func try_refresh_shop_for_player(player: Player, is_free: bool) -> Array[Card]:
+	GlobalLogger.trace("try_refresh_shop_for_player() | " + player.name + " | " + str(is_free), GlobalLogger.Category.CARD_SHOP)
 	if multiplayer.is_server():
 		return await _server_try_refresh_shop_for_player(player, is_free)
 	else:
@@ -51,6 +52,7 @@ func try_refresh_shop_for_player(player: Player, is_free: bool) -> Array[Card]:
 
 
 func try_buy_card_from_player_shop(player: Player, card: Card) -> bool:
+	GlobalLogger.trace("try_buy_card_from_player_shop() | " + player.name + " | " + card.name, GlobalLogger.Category.CARD_SHOP)
 	if multiplayer.is_server():
 		return _server_try_buy_card_from_player_shop(player, card)
 	else:
@@ -58,6 +60,7 @@ func try_buy_card_from_player_shop(player: Player, card: Card) -> bool:
 
 
 func try_buy_random_card_for_player(player: Player) -> Card:
+	GlobalLogger.trace("try_buy_random_card_for_player() | " + player.name, GlobalLogger.Category.CARD_SHOP)
 	if multiplayer.is_server():
 		return _server_try_buy_random_card_for_player(player)
 	else:

@@ -222,6 +222,7 @@ func _add_player(player_name: String, id: int, is_bot: bool, serialized_player: 
 		if is_bot:
 			var player_bot_ai: PlayerBotAI = load("res://Player/PlayerBotAI/player_bot_ai.tscn").instantiate()
 			player_bot_ai.player = new_player
+			new_player.gold = 0 # TODO REMOVE ME
 			player_bot_ai.name = "PlayerBotAI_" + str(new_player.id)
 			add_child(player_bot_ai)
 		

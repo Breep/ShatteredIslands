@@ -35,9 +35,18 @@ func _ready() -> void:
 
 # Try to buy a card for the player owner of this shop, It will ask the server for permission
 func try_buy_card(card: Card) -> bool:
-	if !_is_enabled or player.gold < 100: return false
+	if !_is_enabled:
+		GlobalLogger.warn("Card shop is disabled", GlobalLogger.Category.CARD_SHOP)
+		shop_tried_to_buy_card.emit()
+		return false
+	
+	var card_price: int = 100
+	if player.gold < card_price:
+		GlobalLogger.warn("Not enought gold to buy this card | " + card.name + "(" + str(player.gold) + "<" + str(card_price) + ")", GlobalLogger.Category.CARD_SHOP)
+		shop_tried_to_buy_card.emit()
+		return false
 	if not cards_displayed.has(card):
-		printerr("CardShop: Can't buy this card [", card.name, "]: it's not in the cards displayed in the shop")
+		GlobalLogger.error("Can't buy this card [" + card.name + "]: it's not in the cards displayed in the shop", GlobalLogger.Category.CARD_SHOP)
 		shop_tried_to_buy_card.emit()
 		return false
 	
@@ -52,16 +61,29 @@ func try_buy_card(card: Card) -> bool:
 # ============================== REFRESH CARD SHOP ==============================
 
 func try_refresh_shop_cards() -> void:
-	if !_is_enabled or player.gold < 20:
+	if !_is_enabled:
+		GlobalLogger.warn("Card shop is disabled", GlobalLogger.Category.CARD_SHOP)
 		shop_tried_to_refresh.emit()
 		return
+	
+	var refresh_price: int = 20
+	if player.gold < refresh_price:
+		GlobalLogger.warn("Not enought gold to refesh the shop"+ "(" + str(player.gold) + "<" + str(refresh_price) + ")", GlobalLogger.Category.CARD_SHOP)
+		shop_tried_to_refresh.emit()
+		return
+	
 	await _refresh_shop_cards(false)
 	shop_tried_to_refresh.emit()
 
 
 # Try to buy a random card for the player owner of this shop, It will ask the server for permission
 func try_buy_random_card() -> bool:
-	if !_is_enabled or player.gold < 90: 
+	if !_is_enabled:
+		GlobalLogger.warn("Card shop is disabled", GlobalLogger.Category.CARD_SHOP)
+		shop_tried_to_buy_random_card.emit()
+		return false
+	if player.gold < 90:
+		GlobalLogger.warn("Not enought gold to buy a random card", GlobalLogger.Category.CARD_SHOP)
 		shop_tried_to_buy_random_card.emit()
 		return false
 	var card: Card = await ServerCardShop.try_buy_random_card_for_player(player)
@@ -80,7 +102,7 @@ func _adapt_cards_lvl_to_player() -> void:
 
 func _refresh_shop_cards(is_free: bool) -> void:
 	if player.deck == null:
-		printerr("CardShop: Can't update shop cards, there is no player_deck")
+		GlobalLogger.error("Can't update shop cards, there is no player_deck", GlobalLogger.Category.CARD_SHOP)
 		return
 	
 	cards_displayed = await ServerCardShop.try_refresh_shop_for_player(player, is_free)
