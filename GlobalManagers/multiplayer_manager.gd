@@ -12,11 +12,19 @@ enum PeerType {
 const DEFAULT_SERVER_IP = "127.0.0.1"
 const DEFAULT_SERVER_PORT = 4242
 
-var 
+var auto_start_time: float = 3.0
+var auto_start_activated: bool = true
+var expected_clients: int = 1
+
+var _clients_number: int = 0
 
 # ============================== Node base function ==============================
 #server --headless --auto-start=3 --expected_clients=1
 func _ready() -> void:
+	auto_start_time = float(_get_cmd_arg("auto-start", "0"))
+	expected_clients = int(_get_cmd_arg("expected_clients", "1"))
+	
+	
 	if "--server" in OS.get_cmdline_args(): #SERVER
 		_start_server(DEFAULT_SERVER_PORT)
 		multiplayer.peer_connected.connect(_on_peer_connected)
@@ -32,8 +40,25 @@ func try_connect(ip: String, port: int) -> bool:
 
 # ============================== Private function ==============================
 
+func _check_args(args: PackedStringArray) -> void:
+	for arg in args:
+		print(arg)
+		#match arg:
+			#"--headless":
+				#print("Lanching headless server")
+			#"--"
+
+func _get_cmd_arg(key: String, default: String = "") -> String:
+	for arg in OS.get_cmdline_args():
+		if arg.begins_with("--" + key + "="):
+			return arg.get_slice("=", 1)
+	return default
+
+
 func _start_server(port: int) -> void:
-	print("MultiplayerManager: Starting server - ", port)
+	print("[SERVER_DEBUG] MultiplayerManager: Starting server - ", port)
+	print("[SERVER_DEBUG] MultiplayerManager: Expecting ", expected_clients, " clients")
+	print("[SERVER_DEBUG] MultiplayerManager: Auto starting game after ", auto_start_time, "s")
 	_add_peer(PeerType.SERVER, port)
 
 
@@ -58,7 +83,11 @@ func _add_peer(peerType: PeerType, port: int, ip: String = "") -> bool:
 
 func _on_peer_connected(id):
 	if not multiplayer.is_server(): return
-	print("MultiplayerManager: ", id, " connected !")
+	_clients_number += 1
+	print("[SERVER_DEBUG], MultiplayerManager: A client [", id, "] connected (", _clients_number, "/", expected_clients, ")")
+	if _clients_number >= expected_clients:
+		print("[SERVER_DEBUG] MultiplayerManager: All clients are connected, starting the countdown (", auto_start_time, ")")
+		Utils.create_one_shot_timer(self, auto_start_time, _on_auto_start_timeout, true)
 
 
 func _on_peer_disconnected(id):
@@ -69,8 +98,13 @@ func _on_peer_disconnected(id):
 
 func _on_connected_to_server():
 	if multiplayer.is_server(): return
-	print("MultiplayerManager: [", multiplayer.get_unique_id(), "] Connected to server !")
 
 
 func _on_connection_failed():
 	printerr("MultiplayerManager: Connection failed !")
+
+
+func _on_auto_start_timeout() -> void:
+	while PlayerManager.players.size() < PlayerManager.MAX_PLAYERS:
+		PlayerManager.add_bot()
+	GameManager.start_game.rpc()

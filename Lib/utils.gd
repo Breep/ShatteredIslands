@@ -121,6 +121,18 @@ func create_perpetual_timer(node: Node, wait_time: float, callback: Callable, au
 	return timer
 
 
+func create_one_shot_timer(node: Node, wait_time: float, callback: Callable, autostart: bool = false) -> Timer:
+	var timer := Timer.new()
+	timer.wait_time = wait_time
+	timer.one_shot = false
+	node.add_child(timer)
+	timer.timeout.connect(callback)
+	timer.timeout.connect(func(): timer.queue_free())
+	if autostart:
+		timer.start()
+	return timer
+
+
 func is_randomize_modifier_active(chance_in_percent: float) -> bool:
 	return rng.randf_range(0, 100) <= chance_in_percent
 
