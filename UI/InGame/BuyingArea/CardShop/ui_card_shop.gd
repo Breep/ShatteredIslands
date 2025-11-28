@@ -101,7 +101,7 @@ func _on_card_shop_card_bought(card: Card) -> void:
 
 
 func _on_local_player_death(_player: Player) -> void:
-	GlobalLogger.debug("Lock card shop for " + _local_player.name, GlobalLogger.Category.CARD_SHOP)
+	Verbose.debug("Lock card shop for " + _local_player.name, Verbose.Category.CARD_SHOP)
 	set_inactive()
 	_is_locked = true
 

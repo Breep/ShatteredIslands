@@ -42,7 +42,7 @@ config/icon="uid://hl4bi74ds0b0"
 
 [autoload]
 
-GlobalLogger="*res://Lib/global_logger.gd"
+Verbose="*res://Lib/verbose.gd"
 Utils="*res://Lib/utils.gd"
 GameManager="*res://GlobalManagers/game_manager.gd"
 ServerCardShop="*res://GlobalManagers/server_card_shop.gd"

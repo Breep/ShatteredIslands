@@ -34,14 +34,14 @@ func clear() -> void:
 
 func start() -> void:
 	if not multiplayer.is_server(): return
-	GlobalLogger.debug("START", GlobalLogger.Category.GLOBAL_FIGHTING_MANAGER)
+	Verbose.debug("START", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
 	_players_running_playback = PlayerManager.get_human_players().values().duplicate()
 
 
 func register_fighting_manager(fighting_manager: FightingManager):
-	GlobalLogger.trace("register_fighting_manager() | " + str(fighting_manager.get_path()), GlobalLogger.Category.GLOBAL_FIGHTING_MANAGER)
+	Verbose.trace("register_fighting_manager() | " + str(fighting_manager.get_path()), Verbose.Category.GLOBAL_FIGHTING_MANAGER)
 	if _fighting_managers.has(fighting_manager):
-		GlobalLogger.error("FightingManager[" + str(fighting_manager) + "] already registered !", GlobalLogger.Category.GLOBAL_FIGHTING_MANAGER)
+		Verbose.error("FightingManager[" + str(fighting_manager) + "] already registered !", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
 		return
 	
 	_fighting_managers.append(fighting_manager)
@@ -50,9 +50,9 @@ func register_fighting_manager(fighting_manager: FightingManager):
 
 
 func unregister_fighting_manager(fighting_manager: FightingManager):
-	GlobalLogger.trace("unregister_fighting_manager() | " + str(fighting_manager.get_path()), GlobalLogger.Category.GLOBAL_FIGHTING_MANAGER)
+	Verbose.trace("unregister_fighting_manager() | " + str(fighting_manager.get_path()), Verbose.Category.GLOBAL_FIGHTING_MANAGER)
 	if not _fighting_managers.has(fighting_manager):
-		GlobalLogger.error("FightingManager[" + str(fighting_manager) + "] is not registered !", GlobalLogger.Category.GLOBAL_FIGHTING_MANAGER)
+		Verbose.error("FightingManager[" + str(fighting_manager) + "] is not registered !", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
 		return
 	
 	_fighting_managers.erase(fighting_manager)
@@ -62,7 +62,7 @@ func unregister_fighting_manager(fighting_manager: FightingManager):
 
 func _on_game_manager_game_state_changed(new_state) -> void:
 	if new_state == Game.GameState.FIGHTING_CELEBRATING:
-		GlobalLogger.debug("FINISHED", GlobalLogger.Category.GLOBAL_FIGHTING_MANAGER)
+		Verbose.debug("FINISHED", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
 		# START the watchdog timer on server
 		if multiplayer.is_server(): _wait_for_all_players_to_finish_playback()
 		else: _notice_playback_is_over.rpc_id(1)
@@ -71,7 +71,7 @@ func _on_game_manager_game_state_changed(new_state) -> void:
 signal _all_players_playback_finished()
 func _wait_for_all_players_to_finish_playback() -> void:
 	if not multiplayer.is_server(): return
-	GlobalLogger.debug("Waiting for clients to finish their playback", GlobalLogger.Category.GLOBAL_FIGHTING_MANAGER)
+	Verbose.debug("Waiting for clients to finish their playback", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
 	if GameManager.game_type != GameManager.GameType.SOLO and not _players_running_playback.is_empty():
 		await _all_players_playback_finished
 	_finish_all_fights.rpc()
@@ -80,18 +80,18 @@ func _wait_for_all_players_to_finish_playback() -> void:
 @rpc("authority", "call_local")
 func _finish_all_fights() -> void:
 	all_fights_are_over.emit()
-	GlobalLogger.debug("Finishing GFM, returning to main game loop", GlobalLogger.Category.GLOBAL_FIGHTING_MANAGER)
+	Verbose.debug("Finishing GFM, returning to main game loop", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
 	_players_running_playback.clear()
 
 
 @rpc("any_peer", "call_remote")
 func _notice_playback_is_over() -> void:
 	var peer_id: int = multiplayer.get_remote_sender_id()
-	GlobalLogger.debug("Player(" + str(peer_id) + ") finished its playback", GlobalLogger.Category.GLOBAL_FIGHTING_MANAGER)
+	Verbose.debug("Player(" + str(peer_id) + ") finished its playback", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
 	if _players_running_playback.has(PlayerManager.players[peer_id]):
 		_players_running_playback.erase(PlayerManager.players[peer_id])
 	else:
-		GlobalLogger.error("Player(" + str(peer_id) + ") notice playback is finished but is not listed", GlobalLogger.Category.GLOBAL_FIGHTING_MANAGER)
+		Verbose.error("Player(" + str(peer_id) + ") notice playback is finished but is not listed", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
 	
 	if _players_running_playback.is_empty():
 		_all_players_playback_finished.emit()
@@ -100,7 +100,7 @@ func _notice_playback_is_over() -> void:
 
 func _fighting_manager_fighting_is_over(fighting_manager: FightingManager, _winner_teams_order: Array[int]) -> void:
 	if not _current_active_fighting_managers.has(fighting_manager):
-		GlobalLogger.error("An unexpected FightingArea signal 'a fight is over' [" + str(fighting_manager.get_path()) + "]", GlobalLogger.Category.GLOBAL_FIGHTING_MANAGER)
+		Verbose.error("An unexpected FightingArea signal 'a fight is over' [" + str(fighting_manager.get_path()) + "]", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
 		return
 	_current_active_fighting_managers.erase(fighting_manager)
 	if _current_active_fighting_managers.is_empty():
@@ -109,7 +109,7 @@ func _fighting_manager_fighting_is_over(fighting_manager: FightingManager, _winn
 
 func _on_fighting_manager_fight_is_ready_to_be_started(fighting_manager: FightingManager) -> void:
 	if _current_active_fighting_managers.has(fighting_manager):
-		GlobalLogger.error("A fight is starting more than once at the same time on the same FightingArea [" + str(fighting_manager.get_path()) + "]", GlobalLogger.Category.GLOBAL_FIGHTING_MANAGER)
+		Verbose.error("A fight is starting more than once at the same time on the same FightingArea [" + str(fighting_manager.get_path()) + "]", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
 		return
 	_current_active_fighting_managers.append(fighting_manager)
 
