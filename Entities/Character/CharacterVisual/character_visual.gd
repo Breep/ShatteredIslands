@@ -13,6 +13,10 @@ extends Node3D
 @export var _health_bar: ColorRect
 @export var _mana_bar: ColorRect
 
+@export_group("Stack Counters")
+@export var _ignite_label: Label
+@export var _necrosis_label: Label
+
 @export_group("External Nodes")
 @export var _owner_entity: Entity
 
@@ -45,8 +49,13 @@ func _ready() -> void:
 				stats.mana_changed.connect(_on_mana_changed)
 			if stats.has_signal("mana_max_changed"):
 				stats.mana_max_changed.connect(_on_mana_max_changed)
-	
-
+		if "ignite_stacks" in stats: _update_ignite_label(stats.ignite_stacks)
+		if "necrosis_stacks" in stats: _update_necrosis_label(stats.necrosis_stacks)
+		if stats.has_signal("ignite_stacks_changed"):
+			stats.ignite_stacks_changed.connect(_update_ignite_label)
+			
+		if stats.has_signal("necrosis_stacks_changed"):
+			stats.necrosis_stacks_changed.connect(_update_necrosis_label)
 # ============================== Public ==============================
 
 func set_camera(camera: Camera3D) -> void:
@@ -64,11 +73,28 @@ func update_mana_bar(mana: float, mana_max: float) -> void:
 	if not _mana_bar or not _mana_bar.material:
 		return
 	var ratio = clamp(float(mana) / float(mana_max), 0.0, 1.0)
-	# Note : On utilise toujours "HealthAmount" et "MaxHealth" comme noms de paramètres
-	# car on réutilise le même code Shader. Le shader ne sait pas que c'est de la mana,
 	_mana_bar.material.set_shader_parameter("HealthAmount", ratio)
 	_mana_bar.material.set_shader_parameter("MaxHealth", float(mana_max))
 
+func _update_ignite_label(amount: int) -> void:
+	if not _ignite_label: return
+	if amount > 0:
+		_ignite_label.text = str(amount)
+		_ignite_label.show()
+	else:
+		_ignite_label.hide()
+
+func _update_necrosis_label(amount: int) -> void:
+	print("VISUAL REÇU : Nécrose = ", amount) # <--- AJOUTE ÇA
+	if not _necrosis_label:
+		print("ERREUR : Label Nécrose manquant dans l'inspecteur !")
+		return
+	if amount > 0:
+		_necrosis_label.text = str(amount)
+		_necrosis_label.show()
+	else:
+		_necrosis_label.hide()
+		
 func damage_popup(amount: float, damage_type: Utils.DamageType, is_critic: bool = false):
 	var popup: DamagePopUp = Shared.DAMAGE_POPUP_SCENE.instantiate()
 	var offset = Vector3(randf_range(-0.5, 0.5), randf_range(-0.5, 0.5), 0) 

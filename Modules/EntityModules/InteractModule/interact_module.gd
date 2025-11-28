@@ -64,6 +64,8 @@ func take_condition_stacks(stacks_number: float, stack_type: Utils.StackType, is
 			_owner.stats.armor_stacks += stacks_number
 		Utils.StackType.REGEN:
 			_owner.stats.regen_stacks += stacks_number
+		Utils.StackType.NECROSIS:
+			_owner.stats.necrosis_stacks += stacks_number
 	_owner.signal_interaction_received(source, Utils.stack_to_action(stack_type), action_id, stacks_number, is_critical)
 	return stacks_number
 #endregion
@@ -94,6 +96,7 @@ func take_cleanse(value: float, is_critical: bool, action_id: StringName, source
 		var candidates: Array[Utils.StackType] = []
 		if _owner.stats.ignite_stacks > 0: candidates.append(Utils.StackType.IGNITE)
 		if _owner.stats.poison_stacks > 0: candidates.append(Utils.StackType.POISON)
+		if _owner.stats.necrosis_stacks > 0: candidates.append(Utils.StackType.NECROSIS)
 		if candidates.is_empty():
 			break
 		var stack_chosen: Utils.StackType = candidates[randi() % candidates.size()]
@@ -105,6 +108,9 @@ func take_cleanse(value: float, is_critical: bool, action_id: StringName, source
 			Utils.StackType.POISON:
 				to_remove = min(to_remove, _owner.stats.poison_stacks)
 				_owner.stats.poison_stacks -= to_remove
+			Utils.StackType.NECROSIS:
+				to_remove = min(to_remove, _owner.stats.necrosis_stacks)
+				_owner.stats.necrosis_stacks -= to_remove
 		remaining -= to_remove
 		removed += to_remove
 	_owner.signal_interaction_received(source, Utils.ActionType.UTILITY_CLEANSE, action_id, removed, is_critical)

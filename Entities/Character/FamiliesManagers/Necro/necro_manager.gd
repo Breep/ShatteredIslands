@@ -135,7 +135,6 @@ func _on_putrid_touch_timer_timeout() -> void:
 	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
 	if target == null: return
 	_owner.inflict_condition_stacks(target, _necro_stats.necro_putrid_touch_stacks, Utils.StackType.NECROSIS, "Putrid Touch")
-	print("[NECROSIS DEBUG putrid]")
 #endregion
 
 #region ===== RAISE DEAD =====
