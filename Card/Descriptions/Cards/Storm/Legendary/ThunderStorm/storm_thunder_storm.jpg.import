@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cletn1ok63kkm"
-path="res://.godot/imported/storm_thunder_storm.jpg-1220f372800a92c98980667b6c93e8a0.ctex"
+path="res://.godot/imported/storm_thunder_storm.jpg-4997468823688ad5a108edab8a5948b1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Card/Descriptions/Cards/Storm/Legendary/storm_thunder_storm.jpg"
-dest_files=["res://.godot/imported/storm_thunder_storm.jpg-1220f372800a92c98980667b6c93e8a0.ctex"]
+source_file="res://Card/Descriptions/Cards/Storm/Legendary/ThunderStorm/storm_thunder_storm.jpg"
+dest_files=["res://.godot/imported/storm_thunder_storm.jpg-4997468823688ad5a108edab8a5948b1.ctex"]
 
 [params]
 
