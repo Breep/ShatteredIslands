@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://cnba6juwvfqyn"]
+
+[ext_resource type="Script" uid="uid://bpb624rrac526" path="res://Card/Descriptions/Cards/Storm/Legendary/storm_thunder_storm.gd" id="1_bfel8"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_h43yj"]
+[ext_resource type="Texture2D" uid="uid://cletn1ok63kkm" path="res://Card/Descriptions/Cards/Storm/Legendary/storm_thunder_storm.jpg" id="1_oefuq"]
+
+[sub_resource type="Resource" id="Resource_oefuq"]
+script = ExtResource("1_bfel8")
+_duration_bonus = Array[float]([2.0])
+metadata/_custom_type_script = "uid://bpb624rrac526"
+
+[resource]
+script = ExtResource("1_h43yj")
+name = "THUNDER STORM"
+picture = ExtResource("1_oefuq")
+family = 4
+rarity = 3
+player_upgrade = SubResource("Resource_oefuq")
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

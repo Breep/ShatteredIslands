@@ -28,6 +28,11 @@ var thunder_berserker_penalty_per_rank: float
 #endregion
 
 #region Legendary Card
+
+# [THUNDER STORM]
+var thunder_storm_activated: bool
+var thunder_storm_duration_bonus: float
+
 #endregion
 
 var periodic_vulnerability_activated: bool # True if the player has at least one of this card

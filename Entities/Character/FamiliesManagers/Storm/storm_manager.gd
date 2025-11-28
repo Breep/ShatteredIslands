@@ -27,8 +27,8 @@ const RANK_POINT_TRESHOLDS: Dictionary[Rank, float] = {
 	Rank.S: 50.0
 }
 
-const RANK_S_DURATION: float = 1
-const RANK_S_LIGHTNING_COOLDOWN: float = 0.2
+const RANK_S_DURATION: float = 1.6
+const RANK_S_LIGHTNING_COOLDOWN: float = 0.4
 
 # --- STATS PASSIVES (Dépendent du Niveau de la famille [0, 1, 2, 3, 4]) ---
 const GLOBAL_CRIT_MULTIPLIER_BOOSTS: Array[float] = [25.0, 50.0, 75.0, 100.0]
@@ -237,7 +237,11 @@ func _on_current_rank_changed() -> void:
 		_apply_thunder_berserker_penalty()
 	match _current_rank:
 		Rank.S:
-			_rank_s_duration_timer.wait_time = RANK_S_DURATION
+			var duration: float = RANK_S_DURATION
+			# [THUNDER STORM]
+			if _storm_stats.thunder_storm_activated:
+				duration += _storm_stats.thunder_storm_duration_bonus
+			_rank_s_duration_timer.wait_time = duration
 			_rank_s_duration_timer.start()
 			_lightning_spam_timer.start()
 		_:
