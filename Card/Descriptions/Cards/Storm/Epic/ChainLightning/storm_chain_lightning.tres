@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_kaglu"]
 script = ExtResource("2_kcamy")
-_dist_factor = Array[float]([80.0, 100.0])
+_dist_factor = Array[float]([10.0, 15.0])
 _chance_percent = Array[float]([100.0, 100.0])
 metadata/_custom_type_script = "uid://6in7yxqsmu2i"
 

@@ -1,22 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dhvsorf2dulas"]
+[gd_scene load_steps=3 format=3 uid="uid://dhvsorf2dulas"]
 
 [ext_resource type="Script" uid="uid://4apiata34ali" path="res://SpellsAndProjectiles/Spells/ChainLightning/spell_chain_lightning.gd" id="1_upfbn"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_upfbn"]
-albedo_color = Color(6.7383053e-06, 0.94696134, 0.9507846, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_p37df"]
-top_radius = 0.1
-bottom_radius = 0.1
-height = 1.0
+[ext_resource type="PackedScene" uid="uid://m765ltpoywo8" path="res://SpellsAndProjectiles/Spells/ChainLightning/Visual/spell_chain_lightning_visual.tscn" id="2_tix8t"]
 
 [node name="SpellChainLightning" type="Node3D"]
 script = ExtResource("1_upfbn")
 
-[node name="SpellChainLightningVisual" type="Node3D" parent="."]
-
-[node name="LightningBeam" type="MeshInstance3D" parent="SpellChainLightningVisual"]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_upfbn")
-mesh = SubResource("CylinderMesh_p37df")
+[node name="SpellChainLightningVisual" parent="." instance=ExtResource("2_tix8t")]

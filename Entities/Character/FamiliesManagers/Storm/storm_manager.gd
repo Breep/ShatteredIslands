@@ -225,11 +225,9 @@ func _apply_thunder_berserker_penalty() -> void:
 
 # [CHAIN LIGHTNING]
 func _apply_chain_lightning_effect(hit_victim: Entity, original_damage: float) -> void:
-	print("DEBUG: Critique détecté !") # 1. 
 	if hit_victim == null or not is_instance_valid(hit_victim): return
 	
 	var enemies: Array[Entity] = _owner.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ENEMIES)
-	print("DEBUG: Nombre d'ennemis trouvés : ", enemies.size()) # 2. Combien d'ennemis ?
 	if enemies.is_empty(): return
 	
 	var furthest_enemy: Entity = null
@@ -245,20 +243,13 @@ func _apply_chain_lightning_effect(hit_victim: Entity, original_damage: float) -
 				furthest_enemy = enemy
 	
 	if furthest_enemy == null:
-		print("DEBUG: Pas d'ennemi assez loin trouvé !") # 3. Échec ici ?
 		return
-	
-	print("DEBUG: Cible trouvée ! Lancement du sort sur ", furthest_enemy.name) # 4. Succès ?
-	# 2. Calcul des dégâts
 	var distance: float = sqrt(max_dist_sq)
-	# Petit clamp de sécurité pour éviter des dégâts absurdes si l'ennemi est à 500m
 	distance = min(distance, 50.0) 
-	
 	var factor: float = _storm_stats.chain_lightning_dist_factor
 	var damage_multiplier: float = (factor * distance) / 100.0
 	var final_damage: float = original_damage * damage_multiplier
 	
-	# 3. Configuration du sort
 	var spell_modifiers: Dictionary = {
 		Spell.ChainLightningModifier.DAMAGE: final_damage,
 		Spell.ChainLightningModifier.BOUNCE_COUNT: 3, # Par exemple

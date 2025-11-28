@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://m765ltpoywo8"]
+
+[ext_resource type="Script" uid="uid://ca100gg2fy7kn" path="res://SpellsAndProjectiles/Spells/ChainLightning/Visual/spell_chain_lightning_visual.gd" id="1_xid47"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_upfbn"]
+albedo_color = Color(6.7383053e-06, 0.94696134, 0.9507846, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_p37df"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 1.0
+
+[node name="SpellChainLightningVisual" type="Node3D"]
+script = ExtResource("1_xid47")
+
+[node name="LightningBeam" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_upfbn")
+mesh = SubResource("CylinderMesh_p37df")
