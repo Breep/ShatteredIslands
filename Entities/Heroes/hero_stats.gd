@@ -81,7 +81,7 @@ extends Resource
 	Utils.ActionType.STACK_NECROSIS: 0,
 }
 
-@export var strenght: Dictionary[Utils.ActionType, float] = {
+@export var strength: Dictionary[Utils.ActionType, float] = {
 	Utils.ActionType.DAMAGE_PHYSICAL: 0,
 	Utils.ActionType.DAMAGE_MAGICAL: 0,
 	Utils.ActionType.DAMAGE_POISON: 0,
