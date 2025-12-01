@@ -127,7 +127,7 @@ func _on_before_heal_necrosis(cb_vars: Dictionary) -> void:
 		print("[NECROSIS DEBUG] Heal AFTER: ", new_heal)
 		print("--------------------------------------------------")
 		cb_vars[key_amount] = new_heal
-		_owner.stats.necrosis_stacks = max(0, _owner.stats.necrosis_stacks - 1)
+	_owner.stats.necrosis_stacks = max(0, _owner.stats.necrosis_stacks - 1)
 #endregion
 
 #region ===== PUTRID TOUCH =====
