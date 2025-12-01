@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_elkss"]
 [ext_resource type="Script" uid="uid://dundt3e2waax6" path="res://UI/InGame/FightingArea/DebugEntityStats/ui_debug_entity_stats.gd" id="2_1nfrh"]
-[ext_resource type="Script" uid="uid://xgjmhhke0a8p" path="res://VFX/VFEZ-godot-main/vfez_material_2d.gd" id="2_pkwb5"]
+[ext_resource type="Script" uid="uid://o4m1vk8f267i" path="res://VFX/VFEZ-godot-main/vfez_material_2d.gd" id="2_pkwb5"]
 [ext_resource type="Texture2D" uid="uid://bspoqf8u52o66" path="res://Card/2D/CardLayout/Data/card_mask.png" id="3_scgag"]
 
 [sub_resource type="Shader" id="Shader_1nfrh"]
@@ -98,7 +98,7 @@ metadata/_custom_type_script = "uid://xgjmhhke0a8p"
 gradient = SubResource("Gradient_pkwb5")
 fill_to = Vector2(1, 1)
 
-[node name="DebugEntityStats" type="Control" node_paths=PackedStringArray("_health_max_label", "_mana_max_label", "_ad_label", "_as_label", "_critical_chance_labels", "_critical_multiplier_labels", "_dodge_labels", "_resistance_labels", "_vulnerability_labels", "_strenght_labels", "_weakness_labels", "_entity_name_label")]
+[node name="DebugEntityStats" type="Control" node_paths=PackedStringArray("_health_max_label", "_mana_max_label", "_ad_label", "_as_label", "_critical_chance_labels", "_critical_multiplier_labels", "_dodge_labels", "_resistance_labels", "_vulnerability_labels", "_strength_labels", "_weakness_labels", "_entity_name_label")]
 custom_minimum_size = Vector2(600, 550)
 layout_mode = 3
 anchors_preset = 0
@@ -178,7 +178,7 @@ _vulnerability_labels = {
 10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnRegen"),
 11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnNecrosis")
 }
-_strenght_labels = {
+_strength_labels = {
 0: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtPhysical"),
 1: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtMagical"),
 2: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtPoison"),

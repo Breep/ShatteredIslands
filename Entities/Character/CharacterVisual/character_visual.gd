@@ -12,6 +12,7 @@ extends Node3D
 @export_group("Local Nodes")
 @export var _health_bar: ColorRect
 @export var _mana_bar: ColorRect
+@export var _shield_bar: ColorRect
 
 @export_group("Stack Counters")
 @export var _ignite_label: Label
@@ -39,6 +40,8 @@ func _ready() -> void:
 		_health_bar.material = _health_bar.material.duplicate()
 	if _mana_bar and _mana_bar.material:
 		_mana_bar.material = _mana_bar.material.duplicate()
+	if _shield_bar and _shield_bar.material:
+		_shield_bar.material = _shield_bar.material.duplicate()
 	if _owner_entity:
 		var stats = _owner_entity.stats
 		update_health_bar(_owner_entity.stats.health, _owner_entity.stats.health_max)
@@ -51,11 +54,15 @@ func _ready() -> void:
 				stats.mana_max_changed.connect(_on_mana_max_changed)
 		if "ignite_stacks" in stats: _update_ignite_label(stats.ignite_stacks)
 		if "necrosis_stacks" in stats: _update_necrosis_label(stats.necrosis_stacks)
+		if "armor_stacks" in stats: 
+			_update_shield_bar(stats.armor_stacks, stats.health_max)
+		if stats.has_signal("health_max_changed"): stats.health_max_changed.connect(_on_health_max_changed)
 		if stats.has_signal("ignite_stacks_changed"):
 			stats.ignite_stacks_changed.connect(_update_ignite_label)
-			
 		if stats.has_signal("necrosis_stacks_changed"):
 			stats.necrosis_stacks_changed.connect(_update_necrosis_label)
+		if stats.has_signal("armor_stacks_changed"):
+			stats.armor_stacks_changed.connect(_on_armor_changed)
 # ============================== Public ==============================
 
 func set_camera(camera: Camera3D) -> void:
@@ -76,6 +83,13 @@ func update_mana_bar(mana: float, mana_max: float) -> void:
 	_mana_bar.material.set_shader_parameter("HealthAmount", ratio)
 	_mana_bar.material.set_shader_parameter("MaxHealth", float(mana_max))
 
+func _update_shield_bar(armor_amount: float, max_health: float) -> void:
+	if not _shield_bar or not _shield_bar.material: return
+	var ratio = 0.0
+	if max_health > 0:
+		ratio = clamp(float(armor_amount) / float(max_health), 0.0, 1.0)
+	_shield_bar.material.set_shader_parameter("fill_amount", ratio)
+	
 func _update_ignite_label(amount: int) -> void:
 	if not _ignite_label: return
 	if amount > 0:
@@ -133,3 +147,10 @@ func _on_mana_changed(new_value: int) -> void:
 
 func _on_mana_max_changed(new_max: int) -> void:
 	update_mana_bar(_owner_entity.stats.mana, new_max)
+
+func _on_armor_changed(new_amount: float) -> void:
+	_update_shield_bar(new_amount, _owner_entity.stats.health_max)
+
+func _on_health_max_changed(new_max: int) -> void:
+	update_health_bar(_owner_entity.stats.health, new_max)
+	_update_shield_bar(_owner_entity.stats.armor_stacks, new_max)

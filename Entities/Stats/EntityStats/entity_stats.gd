@@ -16,7 +16,7 @@ enum StatType {
 	CRIT_MULT_GLOBAL,
 	RESISTANCE,
 	VULNERABILITY,
-	STRENGHT,
+	STRENGTH,
 	WEAKNESS,
 	DODGE
 	}
@@ -179,9 +179,9 @@ signal vulnerability_changed(new_vulnerability: float, action_type: Utils.Action
 var _vulnerabilities: Dictionary[Utils.ActionType, float]
 #endregion
 
-#region ============================== Strenght ==============================
-signal strenght_changed(new_strenght: float, action_type: Utils.ActionType)
-var _strenghts: Dictionary[Utils.ActionType, float]
+#region ============================== strength ==============================
+signal strength_changed(new_strength: float, action_type: Utils.ActionType)
+var _strengths: Dictionary[Utils.ActionType, float]
 #endregion
 
 #region ============================== Weakness ==============================
@@ -217,7 +217,7 @@ func reset_from_hero(hero: Hero, lvl: int) -> void:
 		_resistances[action_type] = hero.stats[lvl].resistances.get(action_type, 0.0)
 		_vulnerabilities[action_type] = hero.stats[lvl].vulnerabilities.get(action_type, 0.0)
 		_dodges[action_type] = hero.stats[lvl].dodges.get(action_type, 0.0)
-		_strenghts[action_type] = hero.stats[lvl].strenght.get(action_type, 0.0)
+		_strengths[action_type] = hero.stats[lvl].strength.get(action_type, 0.0)
 		_weaknesses[action_type] = hero.stats[lvl].weakness.get(action_type, 0.0)
 	
 	has_been_reset.emit()
@@ -237,7 +237,7 @@ func get_stat(stat_type: StatType, action_type: Utils.ActionType = Utils.ActionT
 		EntityStats.StatType.RESISTANCE: return _resistances.get(action_type, 0.0)
 		EntityStats.StatType.VULNERABILITY: return _vulnerabilities.get(action_type, 0.0)
 		EntityStats.StatType.DODGE: return _dodges.get(action_type, 0.0)
-		EntityStats.StatType.STRENGHT: return _strenghts.get(action_type, 0.0)
+		EntityStats.StatType.STRENGTH: return _strengths.get(action_type, 0.0)
 		EntityStats.StatType.WEAKNESS: return _weaknesses.get(action_type, 0.0)
 		_:
 			printerr("EntityStats: get_stat() - Unknown stat type [", stat_type, "]")
@@ -268,9 +268,9 @@ func update_stat(stat_type: StatType, value: float, action_type: Utils.ActionTyp
 		EntityStats.StatType.DODGE:
 			_dodges[action_type] = value
 			dodge_changed.emit(value, action_type)
-		EntityStats.StatType.STRENGHT:
-			_strenghts[action_type] = value
-			strenght_changed.emit(value, action_type)
+		EntityStats.StatType.STRENGTH:
+			_strengths[action_type] = value
+			strength_changed.emit(value, action_type)
 		EntityStats.StatType.WEAKNESS:
 			_weaknesses[action_type] = value
 			weakness_changed.emit(value, action_type)

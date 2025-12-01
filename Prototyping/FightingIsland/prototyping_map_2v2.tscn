@@ -133,7 +133,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("25_f2umu")
 
-[node name="PlayerStats" parent="Control" node_paths=PackedStringArray("_critical_chance_labels", "_critical_multiplier_labels", "_dodge_labels", "_resistance_labels", "_vulnerability_labels", "_strenght_labels", "_weakness_labels") instance=ExtResource("9_5t2nw")]
+[node name="PlayerStats" parent="Control" node_paths=PackedStringArray("_critical_chance_labels", "_critical_multiplier_labels", "_dodge_labels", "_resistance_labels", "_vulnerability_labels", "_weakness_labels") instance=ExtResource("9_5t2nw")]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = -297.0
@@ -209,20 +209,6 @@ _vulnerability_labels = {
 9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnPoisonStack"),
 10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnRegen"),
 11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnNecrosis")
-}
-_strenght_labels = {
-0: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtPhysical"),
-1: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtMagical"),
-2: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtPoison"),
-3: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtHeal"),
-4: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtStun"),
-5: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtCleanse"),
-6: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtDispell"),
-7: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtShield"),
-8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtIgnite"),
-9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtPoisonStack"),
-10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtRegen"),
-11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtNecrosis")
 }
 _weakness_labels = {
 0: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessPhysical"),
