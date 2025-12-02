@@ -12,85 +12,16 @@
 [ext_resource type="Resource" uid="uid://vkyl862t2h5d" path="res://Entities/Heroes/DarkKnight/Skills/g2_mega_strike.tres" id="9_0fu0u"]
 [ext_resource type="Resource" uid="uid://dwgxfevvu8dti" path="res://Entities/Heroes/DarkKnight/Skills/p_super_strike.tres" id="10_y7u6o"]
 [ext_resource type="Resource" uid="uid://dbsddpfwj0xba" path="res://Entities/Heroes/DarkKnight/Skills/u_dark_storm.tres" id="11_4hyio"]
-
-[sub_resource type="Resource" id="Resource_hluaq"]
-script = ExtResource("3_hluaq")
-mana_regen = 5.0
-attack_damage = 12
-attack_speed = 0.6
-metadata/_custom_type_script = "uid://2py6kv5aqgem"
-
-[sub_resource type="Resource" id="Resource_m1110"]
-script = ExtResource("3_hluaq")
-health_max = 1120
-mana_regen = 6.0
-attack_damage = 25
-attack_speed = 0.7
-metadata/_custom_type_script = "uid://2py6kv5aqgem"
-
-[sub_resource type="Resource" id="Resource_0sst8"]
-script = ExtResource("3_hluaq")
-health_max = 1320
-mana_regen = 7.0
-attack_damage = 28
-attack_speed = 0.77
-metadata/_custom_type_script = "uid://2py6kv5aqgem"
-
-[sub_resource type="Resource" id="Resource_rgh8h"]
-script = ExtResource("3_hluaq")
-health_max = 1600
-mana_regen = 8.0
-attack_damage = 31
-attack_speed = 0.83
-metadata/_custom_type_script = "uid://2py6kv5aqgem"
-
-[sub_resource type="Resource" id="Resource_ry2px"]
-script = ExtResource("3_hluaq")
-health_max = 1960
-mana_regen = 9.0
-attack_damage = 34
-attack_speed = 0.89
-metadata/_custom_type_script = "uid://2py6kv5aqgem"
-
-[sub_resource type="Resource" id="Resource_npj6x"]
-script = ExtResource("3_hluaq")
-health_max = 2400
-mana_regen = 10.0
-attack_damage = 37
-attack_speed = 0.95
-metadata/_custom_type_script = "uid://2py6kv5aqgem"
-
-[sub_resource type="Resource" id="Resource_uqnwy"]
-script = ExtResource("3_hluaq")
-health_max = 2960
-mana_regen = 11.0
-attack_damage = 40
-attack_speed = 1.02
-metadata/_custom_type_script = "uid://2py6kv5aqgem"
-
-[sub_resource type="Resource" id="Resource_ylsnw"]
-script = ExtResource("3_hluaq")
-health_max = 3640
-mana_regen = 12.0
-attack_damage = 43
-attack_speed = 1.08
-metadata/_custom_type_script = "uid://2py6kv5aqgem"
-
-[sub_resource type="Resource" id="Resource_f1ben"]
-script = ExtResource("3_hluaq")
-health_max = 4440
-mana_regen = 13.0
-attack_damage = 46
-attack_speed = 1.15
-metadata/_custom_type_script = "uid://2py6kv5aqgem"
-
-[sub_resource type="Resource" id="Resource_mngad"]
-script = ExtResource("3_hluaq")
-health_max = 5440
-mana_regen = 14.0
-attack_damage = 50
-attack_speed = 1.23
-metadata/_custom_type_script = "uid://2py6kv5aqgem"
+[ext_resource type="Resource" uid="uid://0kx7gomigbv0" path="res://Entities/Heroes/DarkKnight/Stats/dark_knight_lvl_1.tres" id="13_ec2v6"]
+[ext_resource type="Resource" uid="uid://dl656mopqc7ou" path="res://Entities/Heroes/DarkKnight/Stats/dark_knight_lvl_2.tres" id="14_4eec3"]
+[ext_resource type="Resource" uid="uid://djaaxit4mne0s" path="res://Entities/Heroes/DarkKnight/Stats/dark_knight_lvl_3.tres" id="15_bdgmw"]
+[ext_resource type="Resource" uid="uid://bwrfdwwok1mm1" path="res://Entities/Heroes/DarkKnight/Stats/dark_knight_lvl_4.tres" id="16_gdfuu"]
+[ext_resource type="Resource" uid="uid://7yxwlqivhg66" path="res://Entities/Heroes/DarkKnight/Stats/dark_knight_lvl_5.tres" id="17_g8upe"]
+[ext_resource type="Resource" uid="uid://c7sakinx6b6ry" path="res://Entities/Heroes/DarkKnight/Stats/dark_knight_lvl_6.tres" id="18_mgv6c"]
+[ext_resource type="Resource" uid="uid://dy57s0pxuappa" path="res://Entities/Heroes/DarkKnight/Stats/dark_knight_lvl_7.tres" id="19_x2tno"]
+[ext_resource type="Resource" uid="uid://bx86qa050n0pk" path="res://Entities/Heroes/DarkKnight/Stats/dark_knight_lvl_8.tres" id="20_kuyv4"]
+[ext_resource type="Resource" uid="uid://cbwsw2bkf10j0" path="res://Entities/Heroes/DarkKnight/Stats/dark_knight_lvl_9.tres" id="21_glle3"]
+[ext_resource type="Resource" uid="uid://joywl3kf6smv" path="res://Entities/Heroes/DarkKnight/Stats/dark_knight_lvl_10.tres" id="22_4dncs"]
 
 [resource]
 script = ExtResource("1_2ttjg")
@@ -99,16 +30,16 @@ id = 1
 portrait = ExtResource("1_hluaq")
 description = "Autrefois, Aeron Vantaal était l’orgueil de la Maison Vantaal, une lignée de nobles guerriers dévoués à la Lumière. Héritier d’une tradition de paladins, il portait l’armure étincelante de ses ancêtres et menait les troupes royales au nom de la justice. Sa famille régnait sur l’une des cités flottantes les plus prospères du Grand Skyland, avant le Cataclysme.Mais lors de la guerre finale, les Vantaal furent trahis. Un sort interdit frappa leur île, la précipitant dans l’abîme. Aeron survécut — mais la Lumière qui brûlait en lui fut arrachée et remplacée par un vide froid et affamé. Certains murmurent qu’il conclut un pacte avec une entité du Néant pour remonter des profondeurs, en échange de son âme. Son armure se noircit, ses yeux se teintèrent de rouge, et sa force prit racine dans une colère inextinguible.La magie sombre qui le traverse amplifie ses frappes à mesure qu’il combat, sa rage nourrissant une vitesse meurtrière. Sa Tempête Noire n’est autre que l’écho du sort qui anéantit sa maison, arraché et dompté pour être projeté contre ses ennemis.Aujourd’hui, Aeron erre de taverne en taverne, participant aux Tournois des Îles Brisées non pour la gloire, mais pour une seule raison : accumuler or et influence jusqu’à retrouver ceux qui ont causé la chute des Vantaal… et leur rendre la justice des ténèbres."
 stats = Dictionary[int, ExtResource("3_hluaq")]({
-1: SubResource("Resource_hluaq"),
-2: SubResource("Resource_m1110"),
-3: SubResource("Resource_0sst8"),
-4: SubResource("Resource_rgh8h"),
-5: SubResource("Resource_ry2px"),
-6: SubResource("Resource_npj6x"),
-7: SubResource("Resource_uqnwy"),
-8: SubResource("Resource_ylsnw"),
-9: SubResource("Resource_f1ben"),
-10: SubResource("Resource_mngad")
+1: ExtResource("13_ec2v6"),
+2: ExtResource("14_4eec3"),
+3: ExtResource("15_bdgmw"),
+4: ExtResource("16_gdfuu"),
+5: ExtResource("17_g8upe"),
+6: ExtResource("18_mgv6c"),
+7: ExtResource("19_x2tno"),
+8: ExtResource("20_kuyv4"),
+9: ExtResource("21_glle3"),
+10: ExtResource("22_4dncs")
 })
 skills = Dictionary[int, ExtResource("4_f1ben")]({
 0: ExtResource("4_mngad"),
