@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhvsorf2dulas"]
+
+[ext_resource type="Script" uid="uid://4apiata34ali" path="res://SpellsAndProjectiles/Spells/ChainLightning/spell_chain_lightning.gd" id="1_upfbn"]
+[ext_resource type="PackedScene" uid="uid://m765ltpoywo8" path="res://SpellsAndProjectiles/Spells/ChainLightning/Visual/spell_chain_lightning_visual.tscn" id="2_tix8t"]
+
+[node name="SpellChainLightning" type="Node3D"]
+script = ExtResource("1_upfbn")
+
+[node name="SpellChainLightningVisual" parent="." instance=ExtResource("2_tix8t")]

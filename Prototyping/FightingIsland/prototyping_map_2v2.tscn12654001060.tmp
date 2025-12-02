@@ -1,0 +1,258 @@
+[gd_scene load_steps=32 format=3 uid="uid://f2n7hccdooke"]
+
+[ext_resource type="Script" uid="uid://bu48b2v401db2" path="res://Prototyping/FightingIsland/prototyping_map.gd" id="1_oc45v"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="2_5t2nw"]
+[ext_resource type="PackedScene" uid="uid://drcuyohos0doa" path="res://FloatingIsland/FightingIsland/fighting_island.tscn" id="2_xvkv2"]
+[ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Entities/Character/character.tscn" id="3_doj2u"]
+[ext_resource type="Material" uid="uid://2wlal7g5718r" path="res://VFX/Shaders/Sky/stylized_shader_night.tres" id="4_3ldpt"]
+[ext_resource type="Resource" uid="uid://vefirtk44fxp" path="res://Card/Descriptions/Cards/Fire/Rare/EndOfTheWorld/fire_end_of_the_world.tres" id="4_5t2nw"]
+[ext_resource type="Resource" uid="uid://dc5r8wy0vfksm" path="res://Card/Descriptions/Cards/Fire/Common/KuiperBelt/fire_kuiper_belt.tres" id="5_y3vk0"]
+[ext_resource type="Resource" uid="uid://bcxp6eg6bwam0" path="res://Card/Descriptions/Cards/Fire/Common/TitansProtection/fire_titans_protection.tres" id="6_a1wsu"]
+[ext_resource type="Resource" uid="uid://du0o8udb4adn5" path="res://Card/Descriptions/Cards/Defense/Rare/ShieldThrow/shieldomatic_shield_throw.tres" id="7_4gryv"]
+[ext_resource type="Resource" uid="uid://d26wrf73bpc87" path="res://Card/Descriptions/Cards/Fire/Common/ConsummingTheStar/fire_consuming_the_star.tres" id="8_4gryv"]
+[ext_resource type="Resource" uid="uid://b3ohguwihk7x3" path="res://Card/Descriptions/Cards/Fire/Common/ExpanseUniverse/fire_expanse_universe.tres" id="8_4ych6"]
+[ext_resource type="PackedScene" uid="uid://ci5cxqmyimurq" path="res://UI/InGame/FightingArea/DebugEntityStats/ui_debug_entity_stats.tscn" id="9_5t2nw"]
+[ext_resource type="Resource" uid="uid://dnxmyxqxal6sw" path="res://Card/Descriptions/Cards/Defense/Common/AvengersAssemble/shieldomatic_avengers_assemble.tres" id="9_nlwjv"]
+[ext_resource type="Resource" uid="uid://lypcpcn4pc4a" path="res://Card/Descriptions/Cards/Light/Common/HolyTouch/light_holy_touch.tres" id="9_q4r27"]
+[ext_resource type="Resource" uid="uid://bwrcib7p2yf2x" path="res://Card/Descriptions/Cards/Fire/Common/Scorpius/fire_scorpius.tres" id="9_qouoy"]
+[ext_resource type="Resource" uid="uid://cj0r7d80wkhg0" path="res://Card/Descriptions/Cards/Fire/Common/OrbitalStation/fire_orbital_station.tres" id="10_58xxc"]
+[ext_resource type="Resource" uid="uid://mr4x6u0j5sbf" path="res://Card/Descriptions/Cards/Defense/Common/EnergyBarrier/shieldomatic_energy_barrier.tres" id="10_cyskk"]
+[ext_resource type="Resource" uid="uid://c3qf5odp5y6ap" path="res://Card/Descriptions/Cards/Light/Common/LifeSpring/light_life_spring.tres" id="10_qouoy"]
+[ext_resource type="PackedScene" uid="uid://bhxhqex1pbh2p" path="res://UI/InGame/FightingArea/ui_fighting_area.tscn" id="11_blmm3"]
+[ext_resource type="Resource" uid="uid://cki0jkayic783" path="res://Card/Descriptions/Cards/Storm/Common/Storm Battery/storm_storm_battery.tres" id="11_lx1e4"]
+[ext_resource type="Resource" uid="uid://c88cqm481bhcu" path="res://Card/Descriptions/Cards/Defense/Common/ShieldRush/shieldomatic_shield_rush.tres" id="11_q4r27"]
+[ext_resource type="Resource" uid="uid://c2fbdsokd2ayt" path="res://Card/Descriptions/Cards/Defense/Epic/AegisResonator/shieldomatic_aegis_resonator.tres" id="12_qouoy"]
+[ext_resource type="Resource" uid="uid://cpla6nuggduya" path="res://Card/Descriptions/Cards/Storm/Epic/ChainLightning/storm_chain_lightning.tres" id="12_upgkc"]
+[ext_resource type="Resource" uid="uid://kbmlikqifik1" path="res://Card/Descriptions/Cards/Storm/Rare/StormBreaker/storm_storm_breaker.tres" id="17_7n5st"]
+[ext_resource type="Resource" uid="uid://dnwa5apxanb8j" path="res://Card/Descriptions/Cards/Necro/Common/PutridTouch/necro_putrid_touch.tres" id="19_mmcok"]
+[ext_resource type="Script" uid="uid://nhqk1783r4d1" path="res://GlobalManagers/ActionMeter/Viewer/ui_entity_bds_registry.gd" id="25_f2umu"]
+[ext_resource type="PackedScene" uid="uid://cs66hky7o30da" path="res://GlobalManagers/ActionMeter/Viewer/ui_entity_bds_registry.tscn" id="26_5jp0x"]
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_4fa74"]
+
+[sub_resource type="FogMaterial" id="FogMaterial_7w4nr"]
+albedo = Color(0.299504, 0.876198, 0.915194, 1)
+emission = Color(0.544485, 0.202056, 0.230078, 1)
+height_falloff = 0.678472
+edge_fade = 0.69644
+density_texture = SubResource("NoiseTexture3D_4fa74")
+
+[sub_resource type="Sky" id="Sky_ciybh"]
+sky_material = ExtResource("4_3ldpt")
+
+[sub_resource type="Environment" id="Environment_gs0rq"]
+background_mode = 2
+sky = SubResource("Sky_ciybh")
+ambient_light_source = 2
+ambient_light_color = Color(0.45098, 0.333333, 0.309804, 1)
+ambient_light_energy = 0.5
+tonemap_mode = 2
+sdfgi_enabled = true
+glow_enabled = true
+glow_bloom = 0.2
+fog_light_color = Color(0.175414, 0.565791, 0.908127, 1)
+fog_light_energy = 0.05
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+
+[node name="PrototypingMap" type="Node3D" node_paths=PackedStringArray("_characters", "_floating_island")]
+script = ExtResource("1_oc45v")
+_player1_cards = Array[ExtResource("2_5t2nw")]([ExtResource("8_4ych6"), ExtResource("4_5t2nw"), ExtResource("5_y3vk0"), ExtResource("6_a1wsu"), ExtResource("7_4gryv"), ExtResource("8_4gryv"), ExtResource("9_qouoy"), ExtResource("10_58xxc"), ExtResource("11_lx1e4"), ExtResource("12_upgkc"), ExtResource("19_mmcok")])
+_player2_cards = Array[ExtResource("2_5t2nw")]([ExtResource("9_q4r27"), ExtResource("10_qouoy")])
+_player3_cards = Array[ExtResource("2_5t2nw")]([ExtResource("9_nlwjv"), ExtResource("10_cyskk"), ExtResource("11_q4r27"), ExtResource("12_qouoy"), ExtResource("7_4gryv"), ExtResource("17_7n5st"), ExtResource("19_mmcok")])
+_player4_cards = Array[ExtResource("2_5t2nw")]([ExtResource("9_nlwjv"), ExtResource("10_cyskk"), ExtResource("11_q4r27"), ExtResource("17_7n5st"), ExtResource("19_mmcok")])
+_characters = [NodePath("Character1"), NodePath("Character2"), NodePath("Character3"), NodePath("Character4")]
+_floating_island = NodePath("FightingIsland")
+_battle_type = 1
+
+[node name="FightingIsland" parent="." instance=ExtResource("2_xvkv2")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.2303977, 6.5307064, 13.025312)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.88089, 0.0799744, 0.466517, -0.360914, 0.751164, 0.552716, -0.306227, -0.655254, 0.690556, 0, 52.8971, 0)
+shadow_enabled = true
+
+[node name="FogVolume" type="FogVolume" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.26962, 0.223571, 5.01905)
+size = Vector3(4.52728, 4.15, 8.08638)
+material = SubResource("FogMaterial_7w4nr")
+
+[node name="WorldEnvironment2" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_gs0rq")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0.2, 5.7)
+light_color = Color(0.846952, 0.2959, 0.736692, 1)
+light_volumetric_fog_energy = 6.642
+light_specular = 4.879
+
+[node name="Character1" parent="." instance=ExtResource("3_doj2u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.34606, 0, 2.12149)
+hero_id = 1
+id = 1
+team = 1
+battle_id = 1
+
+[node name="Character2" parent="." instance=ExtResource("3_doj2u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.03813, 0, -2.59736)
+hero_id = 1
+id = 2
+team = 1
+battle_id = 1
+
+[node name="Character3" parent="." instance=ExtResource("3_doj2u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.167192, 2.02964, -10.1344)
+hero_id = 1
+id = 4
+team = 2
+battle_id = 1
+
+[node name="Character4" parent="." instance=ExtResource("3_doj2u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6354, 2.03525, -6.30828)
+hero_id = 1
+id = 3
+team = 2
+battle_id = 1
+
+[node name="UIFightingArea" parent="." instance=ExtResource("11_blmm3")]
+unique_name_in_owner = true
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("25_f2umu")
+
+[node name="PlayerStats" parent="Control" node_paths=PackedStringArray("_critical_chance_labels", "_critical_multiplier_labels", "_dodge_labels", "_resistance_labels", "_vulnerability_labels", "_strenght_labels", "_weakness_labels") instance=ExtResource("9_5t2nw")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -297.0
+offset_top = -339.0
+offset_right = 303.0
+offset_bottom = 211.0
+_critical_chance_labels = {
+0: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCPhysical"),
+1: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCMagical"),
+2: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCPoison"),
+3: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCHeal"),
+4: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCStun"),
+5: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCCleanse"),
+6: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCDispell"),
+7: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCShield"),
+8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCIgnite"),
+9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCPoisonStack"),
+10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCRegen"),
+11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCNecrosis")
+}
+_critical_multiplier_labels = {
+0: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMPhysical"),
+1: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMMagical"),
+2: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMPoison"),
+3: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMHeal"),
+4: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMStun"),
+5: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMCleanse"),
+6: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMDispell"),
+7: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMShield"),
+8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMIgnite"),
+9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMPoisonStack"),
+10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMRegen"),
+11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMNecrosis")
+}
+_dodge_labels = {
+0: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgePhysical"),
+1: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeMagical"),
+2: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgePoison"),
+3: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeHeal"),
+4: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeStun"),
+5: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeCleanse"),
+6: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeDispell"),
+7: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeShield"),
+8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeIgnite"),
+9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgePoisonStack"),
+10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeRegen"),
+11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeNecrosis")
+}
+_resistance_labels = {
+0: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistPhysical"),
+1: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistMagical"),
+2: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistPoison"),
+3: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistHeal"),
+4: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistStun"),
+5: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistCleanse"),
+6: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistDispell"),
+7: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistShield"),
+8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistIgnite"),
+9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistPoisonStack"),
+10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistRegen"),
+11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistNecrosis")
+}
+_vulnerability_labels = {
+0: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnPhysical"),
+1: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnMagical"),
+2: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnPoison"),
+3: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnHeal"),
+4: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnStun"),
+5: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnCleanse"),
+6: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnDispell"),
+7: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnShield"),
+8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnIgnite"),
+9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnPoisonStack"),
+10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnRegen"),
+11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnNecrosis")
+}
+_strenght_labels = {
+0: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtPhysical"),
+1: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtMagical"),
+2: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtPoison"),
+3: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtHeal"),
+4: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtStun"),
+5: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtCleanse"),
+6: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtDispell"),
+7: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtShield"),
+8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtIgnite"),
+9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtPoisonStack"),
+10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtRegen"),
+11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtNecrosis")
+}
+_weakness_labels = {
+0: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessPhysical"),
+1: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessMagical"),
+2: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessPoison"),
+3: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessHeal"),
+4: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessStun"),
+5: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessCleanse"),
+6: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessDispell"),
+7: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessShield"),
+8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessIgnite"),
+9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessPoisonStack"),
+10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessRegen"),
+11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessNecrosis")
+}
+
+[node name="EntityBDSRegistry" parent="Control" node_paths=PackedStringArray("_ui_battle_data_stats_panels") instance=ExtResource("26_5jp0x")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 532.0
+offset_top = -514.0
+offset_right = 932.0
+offset_bottom = -214.0
+_ui_battle_data_stats_panels = {
+0: NodePath("TabContainer/Damage Done"),
+1: NodePath("TabContainer/Damage Taken"),
+2: NodePath("TabContainer/Heal Done"),
+3: NodePath("TabContainer/Heal Received"),
+4: NodePath("TabContainer/Stack Inflicted"),
+5: NodePath("TabContainer/Stack Taken"),
+6: NodePath("TabContainer/Misc Done"),
+7: NodePath("TabContainer/Misc Taken")
+}

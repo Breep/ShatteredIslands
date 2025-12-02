@@ -1,9 +1,8 @@
 [gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://vp6me5c6eynh"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_8k4vm"]
-[ext_resource type="Script" uid="uid://ckybfmf46mcpc" path="res://Card/Descriptions/Cards/Storm/Epic/storm_thunder_berserker.gd" id="1_q5rc8"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_mx6d5"]
+[ext_resource type="Texture2D" uid="uid://ba4xmd3bq5hfo" path="res://Card/Descriptions/Cards/Storm/Epic/ThunderBerserker/storm_thunder_berserker.jpg" id="1_mx6d5"]
+[ext_resource type="Script" uid="uid://ckybfmf46mcpc" path="res://Card/Descriptions/Cards/Storm/Epic/ThunderBerserker/storm_thunder_berserker.gd" id="1_q5rc8"]
 
 [sub_resource type="Resource" id="Resource_1ne8u"]
 script = ExtResource("1_q5rc8")
@@ -15,7 +14,7 @@ metadata/_custom_type_script = "uid://ckybfmf46mcpc"
 [resource]
 script = ExtResource("1_8k4vm")
 name = "Thunder Berserker"
-picture = SubResource("PlaceholderTexture2D_mx6d5")
+picture = ExtResource("1_mx6d5")
 family = 4
 rarity = 2
 player_upgrade = SubResource("Resource_1ne8u")

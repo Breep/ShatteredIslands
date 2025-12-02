@@ -18,16 +18,24 @@ var storm_battery_mana_gain: float
 #endregion
 
 #region Epic Card
-
 # [THUNDER BERSERKER]
 var thunder_berserker_activated: bool
 var thunder_berserker_start_boost: float     
 var thunder_berserker_delay: float        
 var thunder_berserker_penalty_per_rank: float 
 
+# [CHAIN LIGHTNING]
+var chain_lightning_activated: bool
+var chain_lightning_dist_factor: float # Le pourcentage par unité de distance
+var chain_lightning_chance_percent: float
 #endregion
 
 #region Legendary Card
+
+# [THUNDER STORM]
+var thunder_storm_activated: bool
+var thunder_storm_duration_bonus: float
+
 #endregion
 
 var periodic_vulnerability_activated: bool # True if the player has at least one of this card

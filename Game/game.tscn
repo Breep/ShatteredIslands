@@ -1,17 +1,17 @@
 [gd_scene load_steps=13 format=3 uid="uid://oimyi4iueoda"]
 
 [ext_resource type="Script" uid="uid://blljr68c4u466" path="res://Game/game.gd" id="1_7r6pw"]
+[ext_resource type="Material" uid="uid://dfelty2iqo12a" path="res://VFX/Shaders/Sky/stylized_shader_day.tres" id="2_kul4i"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Tool/SpawnPoint/spawn_point.tscn" id="3_i1e5p"]
 [ext_resource type="PackedScene" uid="uid://di34xfy5cli15" path="res://Tool/Cameras/FreeFly/free_fly_camera.tscn" id="3_t03ty"]
 [ext_resource type="PackedScene" uid="uid://bbn7yt4y0lu6q" path="res://Game/SceneSwitcher/scene_switcher.tscn" id="3_vifcx"]
 [ext_resource type="PackedScene" uid="uid://drcuyohos0doa" path="res://FloatingIsland/FightingIsland/fighting_island.tscn" id="5_vifcx"]
-[ext_resource type="Material" uid="uid://2wlal7g5718r" path="res://VFX/Shaders/Sky/stylized_shader_night.tres" id="6_7gi1t"]
 [ext_resource type="PackedScene" uid="uid://7u3ksm0e4v61" path="res://FloatingIsland/BuyingIsland/buying_island.tscn" id="6_flgk0"]
 [ext_resource type="PackedScene" uid="uid://cbd5jq0bp7fef" path="res://Game/HeroSelector/HeroSelector.tscn" id="8_xfil1"]
 [ext_resource type="PackedScene" uid="uid://dv3kwc5eeyuk2" path="res://UI/InGame/Game/ui_game.tscn" id="9_kul4i"]
 
 [sub_resource type="Sky" id="Sky_7gi1t"]
-sky_material = ExtResource("6_7gi1t")
+sky_material = ExtResource("2_kul4i")
 
 [sub_resource type="Environment" id="Environment_flgk0"]
 background_mode = 2
@@ -49,7 +49,7 @@ transform = Transform3D(0.471889, 0, 0.881658, -0.0862491, 0.995204, 0.0461631, 
 environment = SubResource("Environment_flgk0")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Light"]
-transform = Transform3D(0.567362, -0.153111, -0.809109, 0.448204, 0.881688, 0.147444, 0.690807, -0.4463, 0.568861, 0, 24.845, 62.0824)
+transform = Transform3D(0.56736183, -0.15311082, -0.8091092, 0.44820377, 0.88168746, 0.14744337, 0.6908067, -0.44629964, 0.56886053, -25.012697, 36.497246, 17.776993)
 shadow_enabled = true
 
 [node name="Secondary" type="Node3D" parent="Light"]

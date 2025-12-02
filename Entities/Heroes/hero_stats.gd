@@ -81,7 +81,7 @@ extends Resource
 	Utils.ActionType.STACK_NECROSIS: 0,
 }
 
-@export var strenght: Dictionary[Utils.ActionType, float] = {
+@export var strength: Dictionary[Utils.ActionType, float] = {
 	Utils.ActionType.DAMAGE_PHYSICAL: 0,
 	Utils.ActionType.DAMAGE_MAGICAL: 0,
 	Utils.ActionType.DAMAGE_POISON: 0,
@@ -110,3 +110,20 @@ extends Resource
 	Utils.ActionType.STACK_REGEN: 0,
 	Utils.ActionType.STACK_NECROSIS: 0,
 }
+
+func apply_json_data(data: Dictionary) -> void:
+	for key in data:
+		if not key in self:
+			continue
+		var value = data[key]
+		if typeof(value) != TYPE_DICTIONARY:
+			set(key, value)
+		else:
+			var target_dict: Dictionary = get(key)
+			var source_dict: Dictionary = value
+			for action_name in source_dict:
+				if action_name in Utils.ActionType:
+					var enum_index = Utils.ActionType[action_name]
+					target_dict[enum_index] = source_dict[action_name]
+				else:
+					push_warning("ActionType inconnu : " + action_name)

@@ -80,7 +80,7 @@ extends Control
 	Utils.ActionType.STACK_NECROSIS: null
 }
 
-@export var _strenght_labels: Dictionary [Utils.ActionType, Label] = {
+@export var _strength_labels: Dictionary [Utils.ActionType, Label] = {
 	Utils.ActionType.DAMAGE_PHYSICAL: null,
 	Utils.ActionType.DAMAGE_MAGICAL: null,
 	Utils.ActionType.DAMAGE_POISON: null,
@@ -141,8 +141,8 @@ func _connect_to_signals() -> void:
 		_owner_entity.stats.resistance_changed.connect(_on_owner_entity_resist_changed)
 	if not _owner_entity.stats.vulnerability_changed.is_connected(_on_owner_entity_vuln_changed):
 		_owner_entity.stats.vulnerability_changed.connect(_on_owner_entity_vuln_changed)
-	if not _owner_entity.stats.strenght_changed.is_connected(_on_owner_entity_strenght_changed):
-		_owner_entity.stats.strenght_changed.connect(_on_owner_entity_strenght_changed)
+	if not _owner_entity.stats.strength_changed.is_connected(_on_owner_entity_strength_changed):
+		_owner_entity.stats.strength_changed.connect(_on_owner_entity_strength_changed)
 	if not _owner_entity.stats.weakness_changed.is_connected(_on_owner_entity_weakness_changed):
 		_owner_entity.stats.weakness_changed.connect(_on_owner_entity_weakness_changed)
 
@@ -166,8 +166,8 @@ func _disconnect_from_signals() -> void:
 		_owner_entity.stats.resistance_changed.disconnect(_on_owner_entity_resist_changed)
 	if _owner_entity.stats.vulnerability_changed.is_connected(_on_owner_entity_vuln_changed):
 		_owner_entity.stats.vulnerability_changed.disconnect(_on_owner_entity_vuln_changed)
-	if _owner_entity.stats.strenght_changed.is_connected(_on_owner_entity_strenght_changed):
-		_owner_entity.stats.strenght_changed.disconnect(_on_owner_entity_strenght_changed)
+	if _owner_entity.stats.strength_changed.is_connected(_on_owner_entity_strength_changed):
+		_owner_entity.stats.strength_changed.disconnect(_on_owner_entity_strength_changed)
 	if _owner_entity.stats.weakness_changed.is_connected(_on_owner_entity_weakness_changed):
 		_owner_entity.stats.weakness_changed.disconnect(_on_owner_entity_weakness_changed)
 
@@ -183,7 +183,7 @@ func _update_layout() -> void:
 		_dodge_labels[action_type].text = str(int(_owner_entity.stats.get_stat(EntityStats.StatType.DODGE, action_type)))
 		_resistance_labels[action_type].text = str(int(_owner_entity.stats.get_stat(EntityStats.StatType.RESISTANCE, action_type)))
 		_vulnerability_labels[action_type].text = str(int(_owner_entity.stats.get_stat(EntityStats.StatType.VULNERABILITY, action_type)))
-		_strenght_labels[action_type].text = str(int(_owner_entity.stats.get_stat(EntityStats.StatType.STRENGHT, action_type)))
+		_strength_labels[action_type].text = str(int(_owner_entity.stats.get_stat(EntityStats.StatType.STRENGTH, action_type)))
 		_weakness_labels[action_type].text = str(int(_owner_entity.stats.get_stat(EntityStats.StatType.WEAKNESS, action_type)))
 	_entity_name_label.text = _owner_entity.name
 
@@ -225,8 +225,8 @@ func _on_owner_entity_vuln_changed(new_vuln: float, action_type: Utils.ActionTyp
 	_vulnerability_labels[action_type].text = str(int(new_vuln))
 
 
-func _on_owner_entity_strenght_changed(new_strenght: float, action_type: Utils.ActionType) -> void:
-	_strenght_labels[action_type].text = str(int(new_strenght))
+func _on_owner_entity_strength_changed(new_strength: float, action_type: Utils.ActionType) -> void:
+	_strength_labels[action_type].text = str(int(new_strength))
 
 
 func _on_owner_entity_weakness_changed(new_weakness: float, action_type: Utils.ActionType) -> void:

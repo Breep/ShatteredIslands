@@ -27,8 +27,8 @@ const RANK_POINT_TRESHOLDS: Dictionary[Rank, float] = {
 	Rank.S: 50.0
 }
 
-const RANK_S_DURATION: float = 1
-const RANK_S_LIGHTNING_COOLDOWN: float = 0.2
+const RANK_S_DURATION: float = 1.6
+const RANK_S_LIGHTNING_COOLDOWN: float = 0.4
 
 # --- STATS PASSIVES (Dépendent du Niveau de la famille [0, 1, 2, 3, 4]) ---
 const GLOBAL_CRIT_MULTIPLIER_BOOSTS: Array[float] = [25.0, 50.0, 75.0, 100.0]
@@ -222,6 +222,43 @@ func _apply_thunder_berserker_penalty() -> void:
 	_owner.stats_manager.update_modifier(mod)
 #endregion
 
+
+# [CHAIN LIGHTNING]
+func _apply_chain_lightning_effect(hit_victim: Entity, original_damage: float) -> void:
+	if hit_victim == null or not is_instance_valid(hit_victim): return
+	
+	var enemies: Array[Entity] = _owner.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ENEMIES)
+	if enemies.is_empty(): return
+	
+	var furthest_enemy: Entity = null
+	var max_dist_sq: float = -1.0
+	var victim_pos = hit_victim.global_position # On calcule depuis la victime !
+	
+	# 1. Trouver le plus loin DEPUIS LA VICTIME
+	for enemy in enemies:
+		if is_instance_valid(enemy) and enemy != hit_victim and not enemy.is_dead:
+			var dist_sq = victim_pos.distance_squared_to(enemy.global_position)
+			if dist_sq > max_dist_sq:
+				max_dist_sq = dist_sq
+				furthest_enemy = enemy
+	
+	if furthest_enemy == null:
+		return
+	var distance: float = sqrt(max_dist_sq)
+	distance = min(distance, 50.0) 
+	var factor: float = _storm_stats.chain_lightning_dist_factor
+	var damage_multiplier: float = (factor * distance) / 100.0
+	var final_damage: float = original_damage * damage_multiplier
+	
+	var spell_modifiers: Dictionary = {
+		Spell.ChainLightningModifier.DAMAGE: final_damage,
+		Spell.ChainLightningModifier.BOUNCE_COUNT: 3, # Par exemple
+		Spell.ChainLightningModifier.BOUNCE_RANGE: 150.0,
+		Spell.ChainLightningModifier.DAMAGE_DECAY_PERCENT: 10.0,
+		"start_position": victim_pos 
+	}
+	_owner.cast_spell(furthest_enemy, Spell.Type.CHAIN_LIGHTNING, spell_modifiers)
+	
 #region ============================== Callbacks functions ==============================
 
 func _on_current_rank_changed() -> void:
@@ -237,7 +274,11 @@ func _on_current_rank_changed() -> void:
 		_apply_thunder_berserker_penalty()
 	match _current_rank:
 		Rank.S:
-			_rank_s_duration_timer.wait_time = RANK_S_DURATION
+			var duration: float = RANK_S_DURATION
+			# [THUNDER STORM]
+			if _storm_stats.thunder_storm_activated:
+				duration += _storm_stats.thunder_storm_duration_bonus
+			_rank_s_duration_timer.wait_time = duration
 			_rank_s_duration_timer.start()
 			_lightning_spam_timer.start()
 		_:
@@ -251,15 +292,20 @@ func _on_rank_s_timer_timeout() -> void:
 	_current_rank = Rank.D
 
 func _on_owner_critical_action_done(_entity_ref: Entity, _target: Entity, _action_type: Utils.ActionType, base_value: float, real_value: float) -> void:
-	if _current_rank == Rank.S: return 
-	
-	_current_point += _get_crit_point(base_value, real_value)
-	
-	if _current_point >= RANK_POINT_TRESHOLDS[Rank.S]: _current_rank = Rank.S
-	elif _current_point >= RANK_POINT_TRESHOLDS[Rank.A]: _current_rank = Rank.A
-	elif _current_point >= RANK_POINT_TRESHOLDS[Rank.B]: _current_rank = Rank.B
-	elif _current_point >= RANK_POINT_TRESHOLDS[Rank.C]: _current_rank = Rank.C
-	
+	# [CHAIN LIGHTNING]
+	if _storm_stats.chain_lightning_activated:
+		var chance: float = _storm_stats.chain_lightning_chance_percent
+		if Utils.is_randomize_modifier_active(chance):
+			_apply_chain_lightning_effect(_target, real_value)
+	# [RANK]
+	if _current_rank != Rank.S:
+		_current_point += _get_crit_point(base_value, real_value)
+		
+		if _current_point >= RANK_POINT_TRESHOLDS[Rank.S]: _current_rank = Rank.S
+		elif _current_point >= RANK_POINT_TRESHOLDS[Rank.A]: _current_rank = Rank.A
+		elif _current_point >= RANK_POINT_TRESHOLDS[Rank.B]: _current_rank = Rank.B
+		elif _current_point >= RANK_POINT_TRESHOLDS[Rank.C]: _current_rank = Rank.C
+			
 func _on_thunder_berserker_timeout() -> void:
 	_thunder_berserker_penalty_active = true
 	
