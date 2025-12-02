@@ -77,10 +77,10 @@ func _apply_auto_attack(battle_log: Dictionary) -> void:
 	#var modifier: Dictionary = battle_log[BattleLog.Main.MODIFIER]
 	#print("[", multiplayer.get_unique_id(), "] BattleReader: Auto-attack: ", source_id, "->", target_id)
 	if not _entity_manager.entities.has(source_id):
-		printerr("[", multiplayer.get_unique_id(), "] BattleReader: Auto-attack: Unknown source !")
+		Verbose.error("BattleReader: Auto-attack: Unknown source !", Verbose.Category.BATTLE_SYNC)
 		return
 	if not _entity_manager.entities.has(target_id):
-		printerr("[", multiplayer.get_unique_id(), "] BattleReader: Auto-attack: Unknown target !")
+		Verbose.error("BattleReader: Auto-attack: Unknown target !", Verbose.Category.BATTLE_SYNC)
 		return
 	var source: Entity = _entity_manager.entities[source_id]
 	var target: Entity = _entity_manager.entities[target_id]
@@ -96,7 +96,7 @@ func _apply_damage_taken(battle_log: Dictionary) -> void:
 	var modifier: Dictionary = battle_log[BattleLog.Main.MODIFIER]
 	#print("[", multiplayer.get_unique_id(), "] BattleReader: Damage taken: ", source_id, ":", damage)
 	if not _entity_manager.entities.has(source_id):
-		printerr("[", multiplayer.get_unique_id(), "] BattleReader: Damage taken: Unknown source !")
+		Verbose.error("BattleReader: Damage taken: Unknown source !", Verbose.Category.BATTLE_SYNC)
 		return
 	var source: Entity = _entity_manager.entities[source_id]
 	source.take_damage(damage, damage_type, modifier[BattleLog.Modifier.CRITICAL], "TODO")
@@ -108,10 +108,10 @@ func _apply_spell_casted(battle_log: Dictionary) -> void:
 	var target_id: int = battle_log[BattleLog.Main.TARGET]
 	var spell_type: Spell.Type = battle_log[BattleLog.Main.SPELL_TYPE]
 	if not _entity_manager.entities.has(source_id):
-		printerr("[", multiplayer.get_unique_id(), "] BattleReader: Spell casted: Unknown source !")
+		Verbose.error("BattleReader: Spell casted: Unknown source !", Verbose.Category.BATTLE_SYNC)
 		return
 	if not _entity_manager.entities.has(target_id):
-		printerr("[", multiplayer.get_unique_id(), "] BattleReader: Spell casted: Unknown target !")
+		Verbose.error("BattleReader: Spell casted: Unknown target !", Verbose.Category.BATTLE_SYNC)
 		return
 	var source: Entity = _entity_manager.entities[source_id]
 	var target: Entity = _entity_manager.entities[target_id]
@@ -124,7 +124,7 @@ func _apply_stack_taken(battle_log: Dictionary) -> void:
 	var stack_type: Utils.StackType = battle_log[BattleLog.Main.STACK_TYPE]
 	var stack_number: int = battle_log[BattleLog.Main.STACK_NUMBER]
 	if not _entity_manager.entities.has(source_id):
-		printerr("[", multiplayer.get_unique_id(), "] BattleReader: Stack taken: Unknown source !")
+		Verbose.error("BattleReader: Stack taken: Unknown source !", Verbose.Category.BATTLE_SYNC)
 		return
 	var source: Entity = _entity_manager.entities[source_id]
 	source.take_condition_stacks(stack_number, stack_type, false, "TODO")

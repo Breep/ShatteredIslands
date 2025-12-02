@@ -160,6 +160,7 @@ func dispell(_target: Entity, _value: float, _action_id: StringName) -> void:
 	printerr("Entity: virtual dispell() called [", get_path(), "]")
 #endregion
 
+
 #region ===== Interaction [VIRTUAL]
 func take_damage(_damage: float, _damage_type: Utils.DamageType, _is_critical: bool, _action_id: StringName, _source: Entity = null) -> float:
 	printerr("Entity: virtual take_damage() called [", get_path(), "]")
@@ -184,12 +185,3 @@ func take_dispell(_value: float, _is_critical: bool, _action_id: StringName, _so
 	printerr("Entity: virtual take_dispell() called [", get_path(), "]")
 	return -1.0
 #endregion
-
-# ============================== Private functions ==============================
-
-func _recursive_propagate_signal(node: Node, signal_name: String) -> void:
-	if node == null: return
-	if node.has_signal(signal_name):
-		node.emit_signal(signal_name, self)
-	else:
-		_recursive_propagate_signal(node.get_parent(), signal_name)

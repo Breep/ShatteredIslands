@@ -73,8 +73,7 @@ func _add_peer(peerType: PeerType, port: int, ip: String = "") -> bool:
 
 # ============================== Callbacks ==============================
 
-func _on_peer_connected(id):
-	if not multiplayer.is_server(): return
+func _on_peer_connected(id: int) -> void:
 	_clients_number += 1
 	Verbose.info("MultiplayerManager: A client [" + str(id) + "] connected (" + str(_clients_number) + "/" + str(expected_clients) + ")", Verbose.Category.NET)
 	if _clients_number >= expected_clients:
@@ -82,21 +81,22 @@ func _on_peer_connected(id):
 		Utils.create_one_shot_timer(self, auto_start_time, _on_auto_start_timeout, true)
 
 
-func _on_peer_disconnected(id):
-	if not multiplayer.is_server(): return
-	print("MultiplayerManager: ", id, " disconnected !")
+func _on_peer_disconnected(id: int) -> void:
+	Verbose.info(str(id) + " disconnected !", Verbose.Category.NET)
 	PlayerManager.kick_from_game(id)
 
 
-func _on_connected_to_server():
+func _on_connected_to_server() -> void:
+	Verbose.info("Connected to server", Verbose.Category.NET)
 	if multiplayer.is_server(): return
 
 
 func _on_connection_failed():
-	printerr("MultiplayerManager: Connection failed !")
+	Verbose.info("Connection failed !", Verbose.Category.NET)
 
 
 func _on_auto_start_timeout() -> void:
+	Verbose.debug("Starting the game !", Verbose.Category.NET)
 	while PlayerManager.players.size() < PlayerManager.MAX_PLAYERS:
 		PlayerManager.add_bot()
 	GameManager.start_game.rpc()

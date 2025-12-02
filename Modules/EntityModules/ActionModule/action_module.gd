@@ -17,6 +17,7 @@ const SNAKE_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Poison/Sna
 # ============================== Public functions ==============================
 
 func connect_to_spawn_manager(spawn_manager: SpawnManager) -> void:
+	Verbose.debug("connect_to_spawn_manager() | " + str(spawn_manager), Verbose.Category.ENTITY_MODULE)
 	if spawn_manager == null:
 		printerr("ActionModule: Trying to connect to a <null> SpawnManager")
 		return

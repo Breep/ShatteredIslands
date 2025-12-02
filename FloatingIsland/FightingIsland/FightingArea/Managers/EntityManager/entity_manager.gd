@@ -59,13 +59,13 @@ func _register_entity(entity: Entity) -> void:
 	if entity is Character:
 		_characters[entity.id] = entity
 	
-	if multiplayer.is_server():
-		entity.damage_taken.connect(_on_entity_damage_taken)
-		entity.spell_casted.connect(_on_entity_spell_casted)
-		entity.stack_taken.connect(_on_entity_stack_taken)
-		entity.action_done.connect(_on_entity_action_done)
-		entity.died.connect(_on_entity_died)
-		entity.connect_to_fighting_area(_fighting_area)
+	
+	entity.damage_taken.connect(_on_entity_damage_taken)
+	entity.spell_casted.connect(_on_entity_spell_casted)
+	entity.stack_taken.connect(_on_entity_stack_taken)
+	entity.action_done.connect(_on_entity_action_done)
+	entity.died.connect(_on_entity_died)
+	entity.connect_to_fighting_area(_fighting_area)
 
 
 func _kick_entity(entity: Entity) -> void:

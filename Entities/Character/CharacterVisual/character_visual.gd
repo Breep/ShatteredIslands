@@ -17,14 +17,7 @@ extends Node3D
 
 @onready var _rank_visualizer: UIRankViewer = %RankViewer
 
-var _camera: Camera3D # If defined, the visual will look at it
-
 # ============================== Node base functions ==============================
-
-func _process(_delta: float) -> void:
-	if _camera != null:
-		look_at(_camera.global_position)
-
 
 func _ready() -> void:
 	_owner_entity.damage_taken.connect(_on_owner_entity_damage_taken)
@@ -36,13 +29,8 @@ func _ready() -> void:
 	
 	if _owner_entity:
 		update_health_bar(_owner_entity.stats.health, _owner_entity.stats.health_max)
-	
-	
 
 # ============================== Public ==============================
-
-func set_camera(camera: Camera3D) -> void:
-	_camera = camera
 
 
 func update_health_bar(health: float, health_max: float) -> void:
@@ -78,7 +66,7 @@ func damage_popup(amount: float, damage_type: Utils.DamageType, is_critic: bool 
 			popup.global_position = _heal_popup_spawn.global_position + offset
 			popup.outline_modulate(Color8(51, 255, 153, 255))
 	
-	if _camera != null: popup.look_at(_camera.global_position)
+	popup.look_at(get_viewport().get_camera_3d().global_position)
 
 # ============================== Callbacks ==============================
 

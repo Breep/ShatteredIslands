@@ -29,6 +29,9 @@ enum Category {
 	DECK,
 	FIGHTING_ISLAND,
 	STAT_MODIFIER,
+	ENTITY_MODULE,
+	CHARACTER,
+	BATTLE_SYNC,
 }
 
 const CATEGORY_PREFIX_TEMPLATES : Dictionary [Category, String] = {
@@ -46,6 +49,9 @@ const CATEGORY_PREFIX_TEMPLATES : Dictionary [Category, String] = {
 	Category.ORACLE_SHOP:             "(XP_SHOP   ) ",
 	Category.STAT_MODIFIER:           "(STAT_MOD  ) ",
 	Category.GLOBAL_FIGHTING_MANAGER: "(GFM       ) ",
+	Category.ENTITY_MODULE:           "(ENT_MODULE) ",
+	Category.CHARACTER:               "(CHARACTER ) ",
+	Category.BATTLE_SYNC:             "(BATTLESYNC) ",
 }
 
 const PREFIX_TEMPLATES : Dictionary [GameType, String] = {
@@ -70,26 +76,33 @@ const LEVEL_PREFIX_TEMPLATES : Dictionary [Level, String] = {
 
 #region ============================== Configuration ==============================
 var current_categories_level: Dictionary[Category, Level] = {
-	Category.DEFAULT: Level.WARN,
-	Category.NET: Level.TRACE,
-	Category.GLOBAL_MANAGER: Level.DEBUG,
-	Category.ROUND_MANAGER: Level.WARN,
-	Category.CARD_SHOP: Level.WARN,
-	Category.AI: Level.WARN,
-	Category.GAME: Level.WARN,
-	Category.HERO_SELECTOR: Level.WARN,
-	Category.PLAYER_MANAGER: Level.WARN,
-	Category.DECK: Level.WARN,
-	Category.FIGHTING_ISLAND: Level.WARN,
-	Category.ORACLE_SHOP: Level.WARN,
-	Category.STAT_MODIFIER: Level.DEBUG,
-	Category.GLOBAL_FIGHTING_MANAGER: Level.DEBUG,
+	Category.DEFAULT:                 Level.WARN,
+	Category.NET:                     Level.TRACE,
+	Category.GLOBAL_MANAGER:          Level.DEBUG,
+	Category.ROUND_MANAGER:           Level.WARN,
+	Category.CARD_SHOP:               Level.WARN,
+	Category.AI:                      Level.WARN,
+	Category.GAME:                    Level.WARN,
+	Category.HERO_SELECTOR:           Level.WARN,
+	Category.PLAYER_MANAGER:          Level.WARN,
+	Category.DECK:                    Level.WARN,
+	Category.FIGHTING_ISLAND:         Level.WARN,
+	Category.ORACLE_SHOP:             Level.WARN,
+	Category.STAT_MODIFIER:           Level.WARN,
+	Category.GLOBAL_FIGHTING_MANAGER: Level.WARN,
+	Category.ENTITY_MODULE:           Level.WARN,
+	Category.CHARACTER:               Level.WARN,
+	Category.BATTLE_SYNC:             Level.WARN
 }
 #endregion
+
+
 
 #region ============================== Private variables ==============================
 var _is_server: bool = false
 #endregion
+
+
 
 #region ============================== Public function ==============================
 func trace(msg: String, cat: Category = Category.DEFAULT) -> void:

@@ -40,8 +40,6 @@ func start_fight(characters: Array[Character], battle_type: Battle.BattleType, b
 	Verbose.debug("Starting a fight | " + str(battle_id), Verbose.Category.FIGHTING_ISLAND)
 	_fighting_area.start_fight(characters, battle_type, battle_id)
 	_current_characters = characters
-	for character in _current_characters:
-		character.set_lookat_camera(_camera)
 	_force_local_player_camera_on_island()
 
 
