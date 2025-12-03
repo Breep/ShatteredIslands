@@ -117,7 +117,8 @@ battle_id = 1
 [node name="UIFightingArea" parent="." instance=ExtResource("11_blmm3")]
 unique_name_in_owner = true
 
-[node name="Control" type="Control" parent="."]
+[node name="UIProto" type="Control" parent="."]
+unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -133,7 +134,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("25_f2umu")
 
-[node name="PlayerStats" parent="Control" node_paths=PackedStringArray("_critical_chance_labels", "_critical_multiplier_labels", "_dodge_labels", "_resistance_labels", "_vulnerability_labels", "_strength_labels", "_weakness_labels") instance=ExtResource("9_5t2nw")]
+[node name="PlayerStats" parent="UIProto" node_paths=PackedStringArray("_critical_chance_labels", "_critical_multiplier_labels", "_dodge_labels", "_resistance_labels", "_vulnerability_labels", "_strength_labels", "_weakness_labels") instance=ExtResource("9_5t2nw")]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = -297.0
@@ -239,7 +240,7 @@ _weakness_labels = {
 11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessNecrosis")
 }
 
-[node name="EntityBDSRegistry" parent="Control" node_paths=PackedStringArray("_ui_battle_data_stats_panels") instance=ExtResource("26_5jp0x")]
+[node name="EntityBDSRegistry" parent="UIProto" node_paths=PackedStringArray("_ui_battle_data_stats_panels") instance=ExtResource("26_5jp0x")]
 unique_name_in_owner = true
 layout_mode = 1
 offset_left = 532.0

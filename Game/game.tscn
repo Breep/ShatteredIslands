@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://oimyi4iueoda"]
 
 [ext_resource type="Script" uid="uid://blljr68c4u466" path="res://Game/game.gd" id="1_7r6pw"]
-[ext_resource type="Material" uid="uid://dfelty2iqo12a" path="res://VFX/Shaders/Sky/stylized_shader_day.tres" id="2_kul4i"]
+[ext_resource type="Material" uid="uid://2wlal7g5718r" path="res://VFX/Shaders/Sky/stylized_shader_night.tres" id="2_kul4i"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Tool/SpawnPoint/spawn_point.tscn" id="3_i1e5p"]
 [ext_resource type="PackedScene" uid="uid://di34xfy5cli15" path="res://Tool/Cameras/FreeFly/free_fly_camera.tscn" id="3_t03ty"]
 [ext_resource type="PackedScene" uid="uid://bbn7yt4y0lu6q" path="res://Game/SceneSwitcher/scene_switcher.tscn" id="3_vifcx"]

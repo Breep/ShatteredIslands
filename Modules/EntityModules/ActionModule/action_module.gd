@@ -57,23 +57,27 @@ func direct_attack_percent(target: Entity, damage_percent: float, damage_type: U
 
 # Create a projectile to attack the target - Apply cards damages multiplier if there are some
 func build_projectile_attack(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> AttackCommand:
-	if not multiplayer.is_server(): return
-	if target == null: return
-	var physical_multiplier = _get_crit_multiplier(Utils.ActionType.DAMAGE_PHYSICAL)
-	projectile_stats.physical_is_critical = physical_multiplier["is_critical"]
-	projectile_stats.physical_base_damage = projectile_stats.physical_damage_flat * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_PHYSICAL)
-	projectile_stats.physical_damage_flat = projectile_stats.physical_base_damage * physical_multiplier["multiplier"]
-	#projectile_stats.physical_damage_percent *= physical_multiplier["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_PHYSICAL)
+	if target == null:
+		Verbose.warn("build_projectile_attack() -> No target", Verbose.Category.ENTITY_MODULE)
+		return
 	
-	var magical_multiplier = _get_crit_multiplier(Utils.ActionType.DAMAGE_MAGICAL)
-	projectile_stats.magical_is_critical = magical_multiplier["is_critical"]
-	projectile_stats.magical_base_damage = projectile_stats.magical_damage_flat * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_MAGICAL)
-	projectile_stats.magical_damage_flat = projectile_stats.magical_base_damage * magical_multiplier["multiplier"]
-	#projectile_stats.magical_damage_percent *= magical_multiplier["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_MAGICAL)
+	if multiplayer.is_server():
+		var physical_multiplier = _get_crit_multiplier(Utils.ActionType.DAMAGE_PHYSICAL)
+		projectile_stats.physical_is_critical = physical_multiplier["is_critical"]
+		projectile_stats.physical_base_damage = projectile_stats.physical_damage_flat * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_PHYSICAL)
+		projectile_stats.physical_damage_flat = projectile_stats.physical_base_damage * physical_multiplier["multiplier"]
+		#projectile_stats.physical_damage_percent *= physical_multiplier["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_PHYSICAL)
+		
+		var magical_multiplier = _get_crit_multiplier(Utils.ActionType.DAMAGE_MAGICAL)
+		projectile_stats.magical_is_critical = magical_multiplier["is_critical"]
+		projectile_stats.magical_base_damage = projectile_stats.magical_damage_flat * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_MAGICAL)
+		projectile_stats.magical_damage_flat = projectile_stats.magical_base_damage * magical_multiplier["multiplier"]
+		#projectile_stats.magical_damage_percent *= magical_multiplier["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_MAGICAL)
+		
+		var poison_stacks_multiplier = _get_crit_multiplier(Utils.ActionType.DAMAGE_POISON)
+		projectile_stats.poison_stacks_is_critical = poison_stacks_multiplier["is_critical"]
+		projectile_stats.poison_stacks *= poison_stacks_multiplier["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.STACK_POISON)
 	
-	var poison_stacks_multiplier = _get_crit_multiplier(Utils.ActionType.DAMAGE_POISON)
-	projectile_stats.poison_stacks_is_critical = poison_stacks_multiplier["is_critical"]
-	projectile_stats.poison_stacks *= poison_stacks_multiplier["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.STACK_POISON)
 	return AttackCommand.new().setup(target, projectile_type, projectile_spawn, projectile_stats)
 
 

@@ -85,7 +85,8 @@ light_specular = 4.879
 [node name="UIFightingArea" parent="." instance=ExtResource("7_wwtbg")]
 unique_name_in_owner = true
 
-[node name="Control" type="Control" parent="."]
+[node name="UIProto" type="Control" parent="."]
+unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -100,7 +101,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="PlayerStats" parent="Control" node_paths=PackedStringArray("_critical_chance_labels", "_critical_multiplier_labels", "_dodge_labels", "_resistance_labels", "_vulnerability_labels", "_strenght_labels", "_weakness_labels") instance=ExtResource("11_e0xek")]
+[node name="PlayerStats" parent="UIProto" node_paths=PackedStringArray("_critical_chance_labels", "_critical_multiplier_labels", "_dodge_labels", "_resistance_labels", "_vulnerability_labels", "_strength_labels", "_weakness_labels") instance=ExtResource("11_e0xek")]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
@@ -186,7 +187,7 @@ _vulnerability_labels = {
 10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnRegen"),
 11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnNecrosis")
 }
-_strenght_labels = {
+_strength_labels = {
 0: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtPhysical"),
 1: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtMagical"),
 2: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtPoison"),
@@ -215,7 +216,7 @@ _weakness_labels = {
 11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessNecrosis")
 }
 
-[node name="EntityBDSRegistry" parent="Control" node_paths=PackedStringArray("_ui_battle_data_stats_panels") instance=ExtResource("10_kngc2")]
+[node name="EntityBDSRegistry" parent="UIProto" node_paths=PackedStringArray("_ui_battle_data_stats_panels") instance=ExtResource("10_kngc2")]
 unique_name_in_owner = true
 layout_mode = 1
 offset_left = 491.0

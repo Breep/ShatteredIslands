@@ -115,6 +115,7 @@ func direct_attack(target: Entity, damage: float, damage_type: Utils.DamageType,
 func direct_attack_percent(target: Entity, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier, action_id: StringName) -> void:
 	_action_module.direct_attack_percent(target, damage_percent, damage_type, percent_modifier, action_id)
 
+
 var _pending_attacks: Array[AttackCommand]
 func projectile_attack(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	if projectile_type == Projectile.ProjectileType.AUTO_ATTACK:
@@ -122,18 +123,22 @@ func projectile_attack(target: Entity, projectile_type: Projectile.ProjectileTyp
 		if attack_cmd == null:
 			Verbose.error("Can't create an AttackCommand | " + entity_name, Verbose.Category.CHARACTER)
 			return
-		_pending_attacks.append(attack_cmd)
+		if _pending_attacks.is_empty(): _pending_attacks.append(attack_cmd)
+		else: _pending_attacks[0] = attack_cmd
 		auto_attack_started.emit(projectile_stats.physical_is_critical)
 	else:
 		_action_module.projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
 
 func _on_anim_events_manager_attack_hit_frame() -> void:
 	if _pending_attacks.is_empty():
-		Verbose.error("AA anim hit frame but no pending attacks " + entity_name, Verbose.Category.CHARACTER)
+		# Can be empty if it's an critical strike, both hands attacks -> TODO: Maybe see if there is a better way
+		#Verbose.error("AA anim hit frame but no pending attacks " + entity_name, Verbose.Category.CHARACTER)
 		return
 	var attack_cmd: AttackCommand = _pending_attacks.pop_front()
 	if !is_instance_valid(attack_cmd.target) or attack_cmd.target.is_queued_for_deletion(): return
+	look_at_target_y_only(attack_cmd.target.global_position)
 	_action_module.projectile_attack(attack_cmd.target, attack_cmd.projectile_type, attack_cmd.spawn_node, attack_cmd.stats)
+
 
 func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary = {}) -> void:
 	_action_module.cast_spell(target, spell_type, spell_modifier)

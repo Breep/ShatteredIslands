@@ -85,7 +85,8 @@ func _apply_auto_attack(battle_log: Dictionary) -> void:
 	var source: Entity = _entity_manager.entities[source_id]
 	var target: Entity = _entity_manager.entities[target_id]
 	var projectile_spawn: Node3D = source.get_auto_attack_spawn()
-	_spawn_manager.spawn_projectile(source, target, Projectile.ProjectileType.AUTO_ATTACK, projectile_spawn, ProjectileStats.new())
+	source.projectile_attack(target, Projectile.ProjectileType.AUTO_ATTACK, projectile_spawn, ProjectileStats.new())
+	#_spawn_manager.spawn_projectile(source, target, Projectile.ProjectileType.AUTO_ATTACK, projectile_spawn, ProjectileStats.new())
 
 
 #{"time":0.1, "type":"damage_taken", "source":1, "modifier":{"critical":true}}

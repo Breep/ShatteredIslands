@@ -18,6 +18,7 @@ extends Node3D
 @export var _battle_type: Battle.BattleType
 
 @onready var _ui_fighting_area: UIFightingArea = %UIFightingArea
+@onready var _ui_proto: Control = %UIProto
 
 @onready var _ui_player_stats: UIDebugEntityStats = %PlayerStats
 @onready var _ui_entity_bds_registry: UIEntityBDSRegistry = %EntityBDSRegistry
@@ -61,7 +62,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event.is_action_pressed("scene_switch_6") and _characters.size() > 5: _ui_player_stats.connect_entity(_characters[5])
 		if event.is_action_pressed("scene_switch_7") and _characters.size() > 6: _ui_player_stats.connect_entity(_characters[6])
 		if event.is_action_pressed("scene_switch_8") and _characters.size() > 7: _ui_player_stats.connect_entity(_characters[7])
-		
+		if event.is_action_pressed("hide_ui"):
+			_ui_fighting_area.visible = not _ui_fighting_area.visible
+			_ui_proto.visible = not _ui_proto.visible
+		if event.is_action_pressed("hide_3d_ui"):
+			for character: Character in _characters:
+				character._character_visual.visible = not character._character_visual.visible
 
 
 func _init_players() -> void:
