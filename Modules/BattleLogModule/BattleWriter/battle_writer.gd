@@ -27,6 +27,7 @@ func _ready() -> void:
 	_fighting_area.spell_casted.connect(_on_fighting_area_spell_casted)
 	_fighting_area.stack_taken.connect(_on_fighting_area_stack_taken)
 	_fighting_area.action_done.connect(_on_fighting_area_action_done)
+	_fighting_area.interaction_received.connect(_on_fighting_area_interaction_received)
 
 # ============================== Public functions ==============================
 
@@ -118,6 +119,27 @@ func _log_action_done(source: Entity, target: Entity, action_type: Utils.ActionT
 	}
 	
 	_battle_logs.append(data)
+
+
+func _log_interaction_received(receiver: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
+	Verbose.trace("_log_interaction_received() | " + str(receiver) + " | " + str(source), Verbose.Category.BATTLE_WRITER)
+	
+	if not is_instance_valid(receiver):
+		Verbose.warn("_log_action_done() -> receiver invalid", Verbose.Category.BATTLE_WRITER)
+		return
+	
+	var data: Dictionary = {
+		BattleLog.Main.TIME: _get_time(),
+		BattleLog.Main.TYPE: BattleLog.Type.INTERACTION_RECEIVED,
+		BattleLog.Main.ACTION_TYPE: action_type,
+		BattleLog.Main.ACTION_ID: action_id,
+		BattleLog.Main.VALUE: value,
+		BattleLog.Main.CRITICAL: is_critical,
+		BattleLog.Main.RECEIVER: receiver.id,
+		BattleLog.Main.SOURCE: source.id if source != null else -1,
+	}
+	
+	_battle_logs.append(data)
 #endregion
 
 func _get_time() -> float:
@@ -162,8 +184,8 @@ func _on_fighting_area_stack_taken(source: Entity, stack_type: Utils.StackType, 
 	_log_stack_taken(source, stack_type, stack_number, is_critical)
 
 
-func _on_interaction_received(entity_ref: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
-	pass
+func _on_fighting_area_interaction_received(receiver: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
+	_log_interaction_received(receiver, source, action_type, action_id, value, is_critical)
 
 
 func _on_fighting_area_action_done(source: Entity, target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:

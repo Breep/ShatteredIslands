@@ -3,6 +3,10 @@ extends Node3D
 
 # ============================== Signals ==============================
 
+signal interaction_received(entity_ref: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool)
+func signal_interaction_received(entity_ref: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
+	interaction_received.emit(entity_ref, source, action_type, action_id, value, is_critical)
+
 signal action_done(source: Entity, target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool)
 func signal_action_done(source: Entity, target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
 	action_done.emit(source, target, action_type, action_id, value, is_critical)

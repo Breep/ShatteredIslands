@@ -102,9 +102,9 @@ var current_categories_level: Dictionary[Category, Level] = {
 	Category.CHARACTER:               Level.WARN,
 	Category.BATTLE_SYNC:             Level.WARN,
 	Category.BATTLE_READER:           Level.WARN,
-	Category.BATTLE_WRITER:           Level.WARN,
+	Category.BATTLE_WRITER:           Level.TRACE,
 	Category.ENTITY_MANAGER:          Level.WARN,
-	Category.ENTITY:                  Level.TRACE
+	Category.ENTITY:                  Level.WARN
 }
 #endregion
 

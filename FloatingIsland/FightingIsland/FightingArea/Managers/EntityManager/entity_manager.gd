@@ -45,6 +45,8 @@ func clear() -> void:
 				entity.died.disconnect(_on_entity_died)
 			if entity.action_done.is_connected(_on_entity_action_done):
 				entity.action_done.disconnect(_on_entity_action_done)
+			if entity.interaction_received.is_connected(_on_entity_interaction_received):
+				entity.interaction_received.disconnect(_on_entity_interaction_received)
 	_entities.clear()
 	_characters.clear()
 
@@ -72,6 +74,7 @@ func _register_entity(entity: Entity) -> void:
 	entity.spell_casted.connect(_on_entity_spell_casted)
 	entity.stack_taken.connect(_on_entity_stack_taken)
 	entity.action_done.connect(_on_entity_action_done)
+	entity.interaction_received.connect(_on_entity_interaction_received)
 	entity.died.connect(_on_entity_died)
 	entity.connect_to_fighting_area(_fighting_area)
 
@@ -82,6 +85,7 @@ func _kick_entity(entity: Entity) -> void:
 	if entity.stack_taken.is_connected(_on_entity_stack_taken): entity.stack_taken.disconnect(_on_entity_stack_taken)
 	if entity.died.is_connected(_on_entity_died): entity.died.disconnect(_on_entity_died)
 	if entity.action_done.is_connected(_on_entity_action_done): entity.action_done.disconnect(_on_entity_action_done)
+	if entity.interaction_received.is_connected(_on_entity_interaction_received): entity.action_done.disconnect(_on_entity_interaction_received)
 	entities.erase(entity.id)
 	if _characters.has(entity.id): _characters.erase(entity.id)
 
@@ -109,6 +113,10 @@ func _on_entity_stack_taken(entity: Entity, stack_type: Utils.StackType, stack_n
 
 func _on_entity_action_done(source: Entity, target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
 	_fighting_area.signal_action_done(source, target, action_type, action_id, value, is_critical)
+
+
+func _on_entity_interaction_received(entity_ref: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
+	_fighting_area.signal_interaction_received(entity_ref, source, action_type, action_id, value, is_critical)
 
 
 func _on_entity_died(entity: Entity) -> void:

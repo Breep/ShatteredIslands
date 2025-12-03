@@ -7,6 +7,7 @@ enum Type {
 	SPELL_CASTED,
 	STACK_TAKEN,
 	ACTION_DONE,
+	INTERACTION_RECEIVED
 }
 
 enum Modifier {
@@ -26,6 +27,7 @@ enum Main {
 	TYPE,
 	SOURCE,
 	TARGET,
+	RECEIVER,
 	MODIFIER,
 	DAMAGE,
 	DAMAGE_TYPE,

@@ -12,13 +12,19 @@ signal interaction_received(entity_ref: Entity, source: Entity, action_type: Uti
 func signal_interaction_received(source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
 	interaction_received.emit(self, source, action_type, action_id, value, is_critical)
 	bds_registry.register_interaction(action_id, action_type, value, is_critical)
+	if source != null:
+		Verbose.trace("Interaction received | '" + entity_name + "' [" + str(id) + "] | '" + source.entity_name + "' [" + str(source.id) + "] | " + \
+						Utils.ActionType.keys()[action_type] + " | " + action_id + " | " + str(value) + " | " + str(is_critical), Verbose.Category.ENTITY)
+	else:
+		Verbose.trace("Interaction received | " + entity_name + " [" + str(id) + "] | 'Unknown source'[-1] | " + \
+						Utils.ActionType.keys()[action_type] + " | " + action_id + " | " + str(value) + " | " + str(is_critical), Verbose.Category.ENTITY)
 
 signal action_done(entity_ref: Entity, target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool)
 func signal_action_done(target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
 	action_done.emit(self, target, action_type, action_id, value, is_critical)
 	bds_registry.register_action(action_id, action_type, value, is_critical)
-	Verbose.trace("Action done | " + entity_name + " [" + str(id) + "] | " + target.entity_name + " [" + str(target.id) + "] | " + \
-					Utils.ActionType.keys()[action_type] + " | " + action_id + " | " + str(value) + " | " + str(is_critical), Verbose.Category.ENTITY)
+	#Verbose.trace("Action done | " + entity_name + " [" + str(id) + "] | " + target.entity_name + " [" + str(target.id) + "] | " + \
+					#Utils.ActionType.keys()[action_type] + " | " + action_id + " | " + str(value) + " | " + str(is_critical), Verbose.Category.ENTITY)
 
 signal critical_action_done(entity_ref: Entity, target: Entity, action_type: Utils.ActionType, base_value: float, real_value: float)
 func signal_critical_action_done(target: Entity, action_type: Utils.ActionType, base_value: float, real_value: float) -> void:
