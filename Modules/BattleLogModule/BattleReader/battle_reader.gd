@@ -7,7 +7,6 @@ extends Node
 
 @export_group("External nodes")
 @export var _entity_manager: EntityManager
-@export var _spawn_manager: SpawnManager
 
 # ============================== Private variables ==============================
 
@@ -70,23 +69,16 @@ func _apply_log(battle_log: Dictionary) -> void:
 
 # ============================== Logs applied ==============================
 
- #{"time":0.1, "type":"auto_attack", "source":1, "target":2, "modifier":{"critical":true, "poison":false, "ignite":false, "instability":true}}
+#{"time":0.1, "type":"auto_attack", "source":1, "target":2, "modifier":{"critical":true, "poison":false, "ignite":false, "instability":true}}
 func _apply_auto_attack(battle_log: Dictionary) -> void:
-	var source_id: int = battle_log[BattleLog.Main.SOURCE]
-	var target_id: int = battle_log[BattleLog.Main.TARGET]
-	#var modifier: Dictionary = battle_log[BattleLog.Main.MODIFIER]
-	#print("[", multiplayer.get_unique_id(), "] BattleReader: Auto-attack: ", source_id, "->", target_id)
-	if not _entity_manager.entities.has(source_id):
-		Verbose.error("BattleReader: Auto-attack: Unknown source !", Verbose.Category.BATTLE_SYNC)
-		return
-	if not _entity_manager.entities.has(target_id):
-		Verbose.error("BattleReader: Auto-attack: Unknown target !", Verbose.Category.BATTLE_SYNC)
-		return
-	var source: Entity = _entity_manager.entities[source_id]
-	var target: Entity = _entity_manager.entities[target_id]
+	var source_id: int = battle_log.get(BattleLog.Main.SOURCE, -1)
+	var target_id: int = battle_log.get(BattleLog.Main.TARGET, -1)
+	Verbose.trace("Auto-attack: " + str(source_id) + "->" + str(target_id), Verbose.Category.BATTLE_READER)
+	var source: Entity = _entity_manager.get_entity(source_id)
+	var target: Entity = _entity_manager.get_entity(target_id)
+	if source == null or target == null: return
 	var projectile_spawn: Node3D = source.get_auto_attack_spawn()
 	source.projectile_attack(target, Projectile.ProjectileType.AUTO_ATTACK, projectile_spawn, ProjectileStats.new())
-	#_spawn_manager.spawn_projectile(source, target, Projectile.ProjectileType.AUTO_ATTACK, projectile_spawn, ProjectileStats.new())
 
 
 #{"time":0.1, "type":"damage_taken", "source":1, "modifier":{"critical":true}}

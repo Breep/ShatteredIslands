@@ -23,7 +23,7 @@ var _is_active: bool = false
 
 func _ready() -> void:
 	if _scanner_area == null:
-		printerr("EntityManager: Scanning area unset [", get_path(), "]")
+		Verbose.error("Scanning area unset [" + str(get_path()) + "]", Verbose.Category.ENTITY_MANAGER)
 		return
 	
 	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
@@ -47,6 +47,14 @@ func clear() -> void:
 				entity.action_done.disconnect(_on_entity_action_done)
 	_entities.clear()
 	_characters.clear()
+
+
+func get_entity(entity_id: int) -> Entity:
+	if not _entities.has(entity_id):
+		Verbose.error("Can't find specified entity | " + str(entity_id) + " | " + str(_entities.keys()), Verbose.Category.ENTITY_MANAGER)
+		return null
+	
+	return _entities[entity_id]
 
 # ============================== Private functions ==============================
 

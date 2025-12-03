@@ -32,18 +32,20 @@ enum Category {
 	ENTITY_MODULE,
 	CHARACTER,
 	BATTLE_SYNC,
+	BATTLE_READER,
+	ENTITY_MANAGER,
 }
 
 const CATEGORY_PREFIX_TEMPLATES : Dictionary [Category, String] = {
 	Category.DEFAULT:                 "(          ) ",
 	Category.NET:                     "(NET       ) ",
-	Category.GLOBAL_MANAGER:          "(GAME_M    ) ",
-	Category.ROUND_MANAGER:           "(ROUND_M   ) ",
+	Category.GLOBAL_MANAGER:          "(GAME_MAN  ) ",
+	Category.ROUND_MANAGER:           "(ROUND_MAN ) ",
 	Category.CARD_SHOP:               "(CARD_SHOP ) ",
 	Category.AI:                      "(AI        ) ",
 	Category.GAME:                    "(GAME      ) ",
 	Category.HERO_SELECTOR:           "(HERO_SLCT ) ",
-	Category.PLAYER_MANAGER:          "(PLAYER_M  ) ",
+	Category.PLAYER_MANAGER:          "(PLAYER_MAN) ",
 	Category.DECK:                    "(DECK      ) ",
 	Category.FIGHTING_ISLAND:         "(FIGHT_ISLD) ",
 	Category.ORACLE_SHOP:             "(XP_SHOP   ) ",
@@ -52,6 +54,8 @@ const CATEGORY_PREFIX_TEMPLATES : Dictionary [Category, String] = {
 	Category.ENTITY_MODULE:           "(ENT_MODULE) ",
 	Category.CHARACTER:               "(CHARACTER ) ",
 	Category.BATTLE_SYNC:             "(BATTLESYNC) ",
+	Category.BATTLE_READER:           "(BATTLEREAD) ",
+	Category.ENTITY_MANAGER:          "(ENTITY_MAN) "
 }
 
 const PREFIX_TEMPLATES : Dictionary [GameType, String] = {
@@ -92,7 +96,9 @@ var current_categories_level: Dictionary[Category, Level] = {
 	Category.GLOBAL_FIGHTING_MANAGER: Level.WARN,
 	Category.ENTITY_MODULE:           Level.WARN,
 	Category.CHARACTER:               Level.WARN,
-	Category.BATTLE_SYNC:             Level.WARN
+	Category.BATTLE_SYNC:             Level.WARN,
+	Category.BATTLE_READER:           Level.WARN,
+	Category.ENTITY_MANAGER:          Level.WARN,
 }
 #endregion
 
