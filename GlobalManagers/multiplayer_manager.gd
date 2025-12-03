@@ -84,6 +84,9 @@ func _on_peer_connected(id: int) -> void:
 func _on_peer_disconnected(id: int) -> void:
 	Verbose.info(str(id) + " disconnected !", Verbose.Category.NET)
 	PlayerManager.kick_from_game(id)
+	if PlayerManager.get_human_players().is_empty():
+		Verbose.warn("No more human in my game -> SHUTTING DOWN !", Verbose.Category.NET)
+		get_tree().quit()
 
 
 func _on_connected_to_server() -> void:
