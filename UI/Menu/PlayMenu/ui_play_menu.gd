@@ -23,7 +23,7 @@ func _on_join_button_pressed() -> void:
 
 
 func _on_connected_to_server():
-	GlobalLogger.debug("PlayMenu: [" + str(multiplayer.get_unique_id()) + "] Connected to server !")
+	Verbose.debug("PlayMenu: [" + str(multiplayer.get_unique_id()) + "] Connected to server !")
 	_client_message.show()
 	_sub_play_menu.hide()
 	
@@ -32,10 +32,10 @@ func _on_connected_to_server():
 	
 	var res = await PlayerManager.join_game(multiplayer.get_unique_id(), _player_name_edit.text)
 	if res[PlayerManager.JoinGameKeys.RESPONSE] == true:
-		GlobalLogger.info("PlayMenu: [" + str(multiplayer.get_unique_id()) + "] Joined the game !")
+		Verbose.info("PlayMenu: [" + str(multiplayer.get_unique_id()) + "] Joined the game !")
 		_client_message.text = "Waiting for SERVER to start the game"
 	else:
-		GlobalLogger.error("[" + str(multiplayer.get_unique_id()) + "] Can't join the game ! -> " + res[PlayerManager.JoinGameKeys.REASON])
+		Verbose.error("[" + str(multiplayer.get_unique_id()) + "] Can't join the game ! -> " + res[PlayerManager.JoinGameKeys.REASON])
 		_client_message.add_theme_color_override("font_color", Color(1, 0, 0))
 		_client_message.text = res[PlayerManager.JoinGameKeys.REASON]
 

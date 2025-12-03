@@ -18,7 +18,7 @@ var _server_response: ServerResponse
 # ============================== Public functions ==============================
 
 func try_buy_xp(player: Player) -> bool:
-	GlobalLogger.trace("try_buy_xp() | " + player.name, GlobalLogger.Category.ORACLE_SHOP)
+	Verbose.trace("try_buy_xp() | " + player.name, Verbose.Category.ORACLE_SHOP)
 	if multiplayer.is_server():
 		return _server_try_buy_xp(player)
 	else:
@@ -27,13 +27,13 @@ func try_buy_xp(player: Player) -> bool:
 # ============================== Private functions ==============================
 
 func _server_try_buy_xp(player: Player) -> bool:
-	GlobalLogger.trace("_server_try_buy_xp() | " + player.name, GlobalLogger.Category.ORACLE_SHOP)
+	Verbose.trace("_server_try_buy_xp() | " + player.name, Verbose.Category.ORACLE_SHOP)
 	if player.gold < GameManager.game_rules.buy_xp_price:
-		GlobalLogger.warn("Player:" + player.name + " is not rich enough (" + str(player.gold) + "<" + str(GameManager.game_rules.buy_xp_price), GlobalLogger.Category.ORACLE_SHOP)
+		Verbose.warn("Player:" + player.name + " is not rich enough (" + str(player.gold) + "<" + str(GameManager.game_rules.buy_xp_price), Verbose.Category.ORACLE_SHOP)
 		return false
 	
 	if player.lvl == 10:
-		GlobalLogger.warn("Player: " + player.name + " has already max xp", GlobalLogger.Category.ORACLE_SHOP)
+		Verbose.warn("Player: " + player.name + " has already max xp", Verbose.Category.ORACLE_SHOP)
 		return false
 	
 	player.xp += GameManager.game_rules.xp_per_oracle_buy
@@ -43,17 +43,17 @@ func _server_try_buy_xp(player: Player) -> bool:
 
 signal _answer_buy_xp_received()
 func _client_try_buy_xp() -> bool:
-	GlobalLogger.trace("_client_try_buy_xp()", GlobalLogger.Category.ORACLE_SHOP)
+	Verbose.trace("_client_try_buy_xp()", Verbose.Category.ORACLE_SHOP)
 	_ask_buy_xp.rpc_id(SERVER_ID)
 	await _answer_buy_xp_received
 	
 	match _server_response:
 		ServerResponse.OK: return true
 		ServerResponse.NOT_ENOUGHT_MONEY:
-			GlobalLogger.warn("Not enought money", GlobalLogger.Category.ORACLE_SHOP)
+			Verbose.warn("Not enought money", Verbose.Category.ORACLE_SHOP)
 			return false
 		ServerResponse.XP_ALREADY_MAX:
-			GlobalLogger.warn("Player XP is already max", GlobalLogger.Category.ORACLE_SHOP)
+			Verbose.warn("Player XP is already max", Verbose.Category.ORACLE_SHOP)
 			return false
 	
 	# Unreachable
@@ -62,18 +62,18 @@ func _client_try_buy_xp() -> bool:
 
 @rpc("any_peer", "call_remote", "reliable")
 func _ask_buy_xp() -> void:
-	GlobalLogger.trace("_ask_buy_xp()", GlobalLogger.Category.ORACLE_SHOP)
+	Verbose.trace("_ask_buy_xp()", Verbose.Category.ORACLE_SHOP)
 	if not multiplayer.is_server(): return
 	var peer_id: int = multiplayer.get_remote_sender_id()
 	var player: Player = PlayerManager.players[peer_id]
 	
 	if player.gold < GameManager.game_rules.buy_xp_price:
-		GlobalLogger.warn("Peer." + str(peer_id) + " is not rich enough (" + str(player.gold) + "<" + str(GameManager.game_rules.buy_xp_price), GlobalLogger.Category.ORACLE_SHOP)
+		Verbose.warn("Peer." + str(peer_id) + " is not rich enough (" + str(player.gold) + "<" + str(GameManager.game_rules.buy_xp_price), Verbose.Category.ORACLE_SHOP)
 		_answer_buy_card_from_player_shop.rpc_id(peer_id, ServerResponse.NOT_ENOUGHT_MONEY)
 		return
 	
 	if player.lvl == 10:
-		GlobalLogger.warn("Peer." + str(peer_id) + " has already max xp")
+		Verbose.warn("Peer." + str(peer_id) + " has already max xp")
 		_answer_buy_card_from_player_shop.rpc_id(peer_id, ServerResponse.XP_ALREADY_MAX)
 		return
 	

@@ -23,9 +23,9 @@ func _ready() -> void:
 	if not multiplayer.is_server(): queue_free() # Only the server writes battle logs
 	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 	_fighting_area.projectile_spawned.connect(_on_fighting_area_projectile_spawned)
-	_fighting_area.damage_taken.connect(_on_fighting_area_damage_taken)
 	_fighting_area.spell_casted.connect(_on_fighting_area_spell_casted)
-	_fighting_area.stack_taken.connect(_on_fighting_area_stack_taken)
+	_fighting_area.action_done.connect(_on_fighting_area_action_done)
+	_fighting_area.interaction_received.connect(_on_fighting_area_interaction_received)
 
 # ============================== Public functions ==============================
 
@@ -37,6 +37,7 @@ func get_current_logs() -> Array[Dictionary]:
 
 # ============================== Private functions ==============================
 
+#region logs
 #{"time":0.1, "type":"auto_attack", "source":1, "target":2, "modifier":{"critical":true, "poison":false, "ignite":false, "instability":true}}
 func _log_attack(source: Entity, target: Entity,
 				critical: bool = false, poison: bool = false, ignite: bool = false, instability: bool = false) -> void:
@@ -55,21 +56,7 @@ func _log_attack(source: Entity, target: Entity,
 	_battle_logs.append(data)
 
 
-func _log_damage_taken(source: Entity, damage: float, damage_type: Utils.DamageType, critical: bool) -> void:
-	var data: Dictionary = {
-		BattleLog.Main.TIME: _get_time(),
-		BattleLog.Main.TYPE: BattleLog.Type.DAMAGE_TAKEN,
-		BattleLog.Main.SOURCE: source.id,
-		BattleLog.Main.DAMAGE: damage,
-		BattleLog.Main.DAMAGE_TYPE: damage_type,
-		BattleLog.Main.MODIFIER: {
-			BattleLog.Modifier.CRITICAL: critical,
-		}
-	}
-	_battle_logs.append(data)
-
-
-func _log_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type) -> void:
+func _log_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary) -> void:
 	if source == null or target == null: return
 	var data: Dictionary = {
 		BattleLog.Main.TIME: _get_time(),
@@ -77,23 +64,54 @@ func _log_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type) -
 		BattleLog.Main.SOURCE: source.id,
 		BattleLog.Main.TARGET: target.id,
 		BattleLog.Main.SPELL_TYPE: spell_type,
+		BattleLog.Main.SPELL_MODIFIER: spell_modifier
 	}
 	_battle_logs.append(data)
 
 
-func _log_stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: float, is_critical: bool) -> void:
+func _log_action_done(source: Entity, target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
+	if not is_instance_valid(source):
+		Verbose.warn("_log_action_done() -> source invalid", Verbose.Category.BATTLE_WRITER)
+		return
+	
+	if not is_instance_valid(target):
+		Verbose.warn("_log_action_done() -> target invalid", Verbose.Category.BATTLE_WRITER)
+		return
+	
 	var data: Dictionary = {
 		BattleLog.Main.TIME: _get_time(),
-		BattleLog.Main.TYPE: BattleLog.Type.STACK_TAKEN,
-		BattleLog.Main.STACK_TYPE: stack_type,
-		BattleLog.Main.STACK_NUMBER: stack_number,
+		BattleLog.Main.TYPE: BattleLog.Type.ACTION_DONE,
+		BattleLog.Main.ACTION_TYPE: action_type,
+		BattleLog.Main.ACTION_ID: action_id,
+		BattleLog.Main.VALUE: value,
+		BattleLog.Main.CRITICAL: is_critical,
 		BattleLog.Main.SOURCE: source.id,
-		BattleLog.Main.MODIFIER: {
-			BattleLog.Modifier.CRITICAL: is_critical
-		}
+		BattleLog.Main.TARGET: target.id
 	}
+	
 	_battle_logs.append(data)
 
+
+func _log_interaction_received(receiver: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
+	Verbose.trace("_log_interaction_received() | " + str(receiver) + " | " + str(source), Verbose.Category.BATTLE_WRITER)
+	
+	if not is_instance_valid(receiver):
+		Verbose.warn("_log_action_done() -> receiver invalid", Verbose.Category.BATTLE_WRITER)
+		return
+	
+	var data: Dictionary = {
+		BattleLog.Main.TIME: _get_time(),
+		BattleLog.Main.TYPE: BattleLog.Type.INTERACTION_RECEIVED,
+		BattleLog.Main.ACTION_TYPE: action_type,
+		BattleLog.Main.ACTION_ID: action_id,
+		BattleLog.Main.VALUE: value,
+		BattleLog.Main.CRITICAL: is_critical,
+		BattleLog.Main.RECEIVER: receiver.id,
+		BattleLog.Main.SOURCE: source.id if source != null else -1,
+	}
+	
+	_battle_logs.append(data)
+#endregion
 
 func _get_time() -> float:
 	if _is_accelerated_fight:
@@ -125,13 +143,13 @@ func _on_fighting_area_projectile_spawned(source: Entity, target: Entity, projec
 					projectile_modifiers.has(Projectile.ProjectileEffect.INSTABILITY))
 
 
-func _on_fighting_area_damage_taken(source: Entity, damage: float, damage_type: Utils.DamageType, is_critical: bool, _blocked_by_armor: bool) -> void:
-	_log_damage_taken(source, damage, damage_type, is_critical)
+func _on_fighting_area_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary) -> void:
+	_log_spell_casted(source, target, spell_type, spell_modifier)
 
 
-func _on_fighting_area_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type) -> void:
-	_log_spell_casted(source, target, spell_type)
+func _on_fighting_area_interaction_received(receiver: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
+	_log_interaction_received(receiver, source, action_type, action_id, value, is_critical)
 
 
-func _on_fighting_area_stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: float, is_critical: bool) -> void:
-	_log_stack_taken(source, stack_type, stack_number, is_critical)
+func _on_fighting_area_action_done(source: Entity, target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
+	_log_action_done(source, target, action_type, action_id, value, is_critical)

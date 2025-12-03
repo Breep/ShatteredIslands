@@ -51,7 +51,7 @@ func _ready() -> void:
 # ============================== Private functions ==============================
 
 func _start_game() -> void:
-	GlobalLogger.debug("Starting game", GlobalLogger.Category.GAME)
+	Verbose.debug("Starting game", Verbose.Category.GAME)
 	GameManager.update_game_state(GameState.STARTING, true)
 	_spawn_fighting_islands()
 	_start_hero_selection()
@@ -62,12 +62,12 @@ func _start_hero_selection() -> void:
 
 
 func _start_new_round() ->void:
-	GlobalLogger.debug("Start new round", GlobalLogger.Category.GAME)
+	Verbose.debug("Start new round", Verbose.Category.GAME)
 	_current_round_player_id_islands.clear()
 	
 	if GameManager.is_end_of_game():
 		GameManager.update_game_state(GameState.FINISHED, true)
-		GlobalLogger.debug("Looks like we have a winner ! Congrats " + PlayerManager.get_alive_players().values()[0].name, GlobalLogger.Category.GAME)
+		Verbose.debug("Looks like we have a winner ! Congrats " + PlayerManager.get_alive_players().values()[0].name, Verbose.Category.GAME)
 		return
 	
 	_current_round_battles = await RoundManager.get_current_round_battles()
@@ -78,7 +78,7 @@ func _start_new_round() ->void:
 
 
 func _start_buying_phase() -> void:
-	GlobalLogger.debug("Start BUYING !", GlobalLogger.Category.GAME)
+	Verbose.debug("Start BUYING !", Verbose.Category.GAME)
 	_scene_switcher.set_island_active_only(_buying_island)
 	_buying_island.start_buying_phase(_current_round_battles)
 	GameManager.game_state_timer.wait_time = GameManager.game_rules.duration_buying_phase
@@ -86,7 +86,7 @@ func _start_buying_phase() -> void:
 
 
 func _start_fighting_phase() -> void:
-	GlobalLogger.debug("Start fights !", GlobalLogger.Category.GAME)
+	Verbose.debug("Start fights !", Verbose.Category.GAME)
 	var battles: Array[Battle] = _current_round_battles
 	for i in battles.size():
 		var characters: Array[Character]
@@ -146,19 +146,19 @@ func _end_buying_round() -> void:
 # ============================== Callbacks ==============================
 
 func _on_buying_island_buying_phase_finished() -> void:
-	GlobalLogger.debug("BUYING PHASE ENDED", GlobalLogger.Category.GAME)
+	Verbose.debug("BUYING PHASE ENDED", Verbose.Category.GAME)
 	_start_fighting_phase()
 	_buying_island.cleanup()
 
 
 func _on_hero_selector_all_heroes_picked() -> void:
-	GlobalLogger.debug("BUYING AREA ALL HEROES PICKED", GlobalLogger.Category.GAME)
+	Verbose.debug("BUYING AREA ALL HEROES PICKED", Verbose.Category.GAME)
 	_spawn_all_characters()
 	GameManager.update_game_state(Game.GameState.INITIATING_NEW_ROUND)
 
 
 func _on_global_fighting_manager_all_fights_are_over() -> void:
-	GlobalLogger.debug("ALL FIGHTS ARE OVER", GlobalLogger.Category.GAME)
+	Verbose.debug("ALL FIGHTS ARE OVER", Verbose.Category.GAME)
 	await PlayerManager.sync_point(PlayerManager.SyncID.FIGHTING_PHASE)
 	await RoundManager.ending_round_player_changes()
 	await PlayerManager.sync_point(PlayerManager.SyncID.ROUND_ENDING)

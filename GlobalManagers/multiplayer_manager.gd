@@ -23,7 +23,7 @@ func _ready() -> void:
 	auto_start_time = float(_get_cmd_arg("auto-start", "0"))
 	expected_clients = int(_get_cmd_arg("expected_clients", "1"))
 	
-	GlobalLogger.info("Starting multiplayer manager", GlobalLogger.Category.NET)
+	Verbose.info("Starting multiplayer manager", Verbose.Category.NET)
 	
 	if "--server" in OS.get_cmdline_args(): #SERVER
 		_start_server(DEFAULT_SERVER_PORT)
@@ -48,9 +48,9 @@ func _get_cmd_arg(key: String, default: String = "") -> String:
 
 
 func _start_server(port: int) -> void:
-	GlobalLogger.info("MultiplayerManager: Starting , server - " + str(port), GlobalLogger.Category.NET)
-	GlobalLogger.info("MultiplayerManager: Expecting " + str(expected_clients) + " clients", GlobalLogger.Category.NET)
-	GlobalLogger.info("MultiplayerManager: Auto starting game after " + str(auto_start_time) + "s", GlobalLogger.Category.NET)
+	Verbose.info("MultiplayerManager: Starting , server - " + str(port), Verbose.Category.NET)
+	Verbose.info("MultiplayerManager: Expecting " + str(expected_clients) + " clients", Verbose.Category.NET)
+	Verbose.info("MultiplayerManager: Auto starting game after " + str(auto_start_time) + "s", Verbose.Category.NET)
 	_add_peer(PeerType.SERVER, port)
 
 
@@ -64,7 +64,7 @@ func _add_peer(peerType: PeerType, port: int, ip: String = "") -> bool:
 		error = peer.create_client(address, port)
 	
 	if error != OK:
-		GlobalLogger.error("MultiplayerManager: Cannot add peer: " + str(error), GlobalLogger.Category.NET)
+		Verbose.error("MultiplayerManager: Cannot add peer: " + str(error), Verbose.Category.NET)
 		return false
 	
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
@@ -73,30 +73,33 @@ func _add_peer(peerType: PeerType, port: int, ip: String = "") -> bool:
 
 # ============================== Callbacks ==============================
 
-func _on_peer_connected(id):
-	if not multiplayer.is_server(): return
+func _on_peer_connected(id: int) -> void:
 	_clients_number += 1
-	GlobalLogger.info("MultiplayerManager: A client [" + str(id) + "] connected (" + str(_clients_number) + "/" + str(expected_clients) + ")", GlobalLogger.Category.NET)
+	Verbose.info("MultiplayerManager: A client [" + str(id) + "] connected (" + str(_clients_number) + "/" + str(expected_clients) + ")", Verbose.Category.NET)
 	if _clients_number >= expected_clients:
-		GlobalLogger.info("MultiplayerManager: All clients are connected, starting the countdown (" + str(auto_start_time) + ")", GlobalLogger.Category.NET)
+		Verbose.info("MultiplayerManager: All clients are connected, starting the countdown (" + str(auto_start_time) + ")", Verbose.Category.NET)
 		Utils.create_one_shot_timer(self, auto_start_time, _on_auto_start_timeout, true)
 
 
-func _on_peer_disconnected(id):
-	if not multiplayer.is_server(): return
-	print("MultiplayerManager: ", id, " disconnected !")
+func _on_peer_disconnected(id: int) -> void:
+	Verbose.info(str(id) + " disconnected !", Verbose.Category.NET)
 	PlayerManager.kick_from_game(id)
+	if PlayerManager.get_human_players().is_empty():
+		Verbose.warn("No more human in my game -> SHUTTING DOWN !", Verbose.Category.NET)
+		get_tree().quit()
 
 
-func _on_connected_to_server():
+func _on_connected_to_server() -> void:
+	Verbose.info("Connected to server", Verbose.Category.NET)
 	if multiplayer.is_server(): return
 
 
 func _on_connection_failed():
-	printerr("MultiplayerManager: Connection failed !")
+	Verbose.info("Connection failed !", Verbose.Category.NET)
 
 
 func _on_auto_start_timeout() -> void:
+	Verbose.debug("Starting the game !", Verbose.Category.NET)
 	while PlayerManager.players.size() < PlayerManager.MAX_PLAYERS:
 		PlayerManager.add_bot()
 	GameManager.start_game.rpc()

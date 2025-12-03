@@ -37,11 +37,9 @@ func _ready() -> void:
 # Spawn all characters on the FightingArea according to the battle
 # Connect all characters to the FightingArea of the FloatingIsland
 func start_fight(characters: Array[Character], battle_type: Battle.BattleType, battle_id: int = -1) -> void:
-	GlobalLogger.debug("Starting a fight | " + str(battle_id), GlobalLogger.Category.FIGHTING_ISLAND)
+	Verbose.debug("Starting a fight | " + str(battle_id), Verbose.Category.FIGHTING_ISLAND)
 	_fighting_area.start_fight(characters, battle_type, battle_id)
 	_current_characters = characters
-	for character in _current_characters:
-		character.set_lookat_camera(_camera)
 	_force_local_player_camera_on_island()
 
 

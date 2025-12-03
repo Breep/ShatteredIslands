@@ -176,7 +176,7 @@ func _init_hero_pickup_order() -> void:
 @rpc("any_peer", "call_remote")
 func _ask_hero_pickup_order(peer_id: int) -> void:
 	if not multiplayer.is_server():
-		GlobalLogger.error("Only the server can choose the hero pickup order", GlobalLogger.Category.GLOBAL_MANAGER)
+		Verbose.error("Only the server can choose the hero pickup order", Verbose.Category.GLOBAL_MANAGER)
 		return
 	
 	if not _hero_pickup_order_ready:
@@ -200,7 +200,7 @@ func _answer_hero_pickup_order(hero_pickup_order_player_ids: Array[int]) -> void
 @rpc("any_peer", "call_remote")
 func _ask_get_n_random_heroes(peer_id: int) -> void:
 	if not multiplayer.is_server():
-		GlobalLogger.error("Only server should be asked for random heroes", GlobalLogger.Category.GLOBAL_MANAGER)
+		Verbose.error("Only server should be asked for random heroes", Verbose.Category.GLOBAL_MANAGER)
 		return
 	
 	if not _game_heroes_ready:
@@ -278,50 +278,50 @@ func _on_game_state_changed(new_state) -> void:
 	_game_state_timer.stop()
 	match new_state:
 		Game.GameState.BUYING:
-			GlobalLogger.debug("[State=BUYING] (" + str(_game_rules.duration_buying_phase) + "s)", GlobalLogger.Category.GLOBAL_MANAGER)
+			Verbose.debug("[State=BUYING] (" + str(_game_rules.duration_buying_phase) + "s)", Verbose.Category.GLOBAL_MANAGER)
 			_game_state_timer.wait_time = _game_rules.duration_buying_phase
 			_game_state_timer.start()
 		
 		Game.GameState.FIGHTING_POSITIONING:
-			GlobalLogger.debug("[State=FIGHTING_POSITIONING] (" + str(_game_rules.duration_fighting_positioning) + "s)", GlobalLogger.Category.GLOBAL_MANAGER)
+			Verbose.debug("[State=FIGHTING_POSITIONING] (" + str(_game_rules.duration_fighting_positioning) + "s)", Verbose.Category.GLOBAL_MANAGER)
 			_game_state_timer.wait_time = _game_rules.duration_fighting_positioning
 			_game_state_timer.start()
 		
 		Game.GameState.FIGHTING_COUNTDOWN:
-			GlobalLogger.debug("[State=FIGHTING_COUNTDOWN] (" + str(_game_rules.duration_fighting_countdown) + "s)", GlobalLogger.Category.GLOBAL_MANAGER)
+			Verbose.debug("[State=FIGHTING_COUNTDOWN] (" + str(_game_rules.duration_fighting_countdown) + "s)", Verbose.Category.GLOBAL_MANAGER)
 			_game_state_timer.wait_time = _game_rules.duration_fighting_countdown
 			_game_state_timer.start()
 		
 		Game.GameState.FIGHTING_NORMAL:
-			GlobalLogger.debug("[State=FIGHTING_NORMAL] (" + str(_game_rules.duration_fighting_normal) + "s)", GlobalLogger.Category.GLOBAL_MANAGER)
+			Verbose.debug("[State=FIGHTING_NORMAL] (" + str(_game_rules.duration_fighting_normal) + "s)", Verbose.Category.GLOBAL_MANAGER)
 			_game_state_timer.wait_time = _game_rules.duration_fighting_normal
 			_game_state_timer.start()
 		
 		Game.GameState.FIGHTING_ACCELERATED:
-			GlobalLogger.debug("[State=FIGHTING_ACCELERATED] (" + str(_game_rules.duration_fighting_accelerated) + "s)", GlobalLogger.Category.GLOBAL_MANAGER)
+			Verbose.debug("[State=FIGHTING_ACCELERATED] (" + str(_game_rules.duration_fighting_accelerated) + "s)", Verbose.Category.GLOBAL_MANAGER)
 			Engine.time_scale = ACCELERATED_FIGHT_TIME_SCALE
 			_game_state_timer.wait_time = _game_rules.duration_fighting_accelerated
 			_game_state_timer.start()
 		
 		Game.GameState.FIGHTING_CELEBRATING:
-			GlobalLogger.debug("[State=FIGHTING_CELEBRATING] (" + str(_game_rules.duration_fighting_celebrating) + "s)", GlobalLogger.Category.GLOBAL_MANAGER)
+			Verbose.debug("[State=FIGHTING_CELEBRATING] (" + str(_game_rules.duration_fighting_celebrating) + "s)", Verbose.Category.GLOBAL_MANAGER)
 			Engine.time_scale = 1.0
 			_game_state_timer.wait_time = _game_rules.duration_fighting_celebrating
 			_game_state_timer.start()
 		
 		Game.GameState.FIGHTING_FINISHED:
-			GlobalLogger.debug("[State=FIGHTING_FINISHED]", GlobalLogger.Category.GLOBAL_MANAGER)
+			Verbose.debug("[State=FIGHTING_FINISHED]", Verbose.Category.GLOBAL_MANAGER)
 			_game_state_timer.wait_time = _game_rules.duration_fighting_finished
 			_game_state_timer.start()
 		
 		Game.GameState.STARTING:
-			GlobalLogger.debug("[State=STARTING]", GlobalLogger.Category.GLOBAL_MANAGER)
+			Verbose.debug("[State=STARTING]", Verbose.Category.GLOBAL_MANAGER)
 		Game.GameState.INITIATING_NEW_ROUND:
-			GlobalLogger.debug("[State=INITIATING_NEW_ROUND]", GlobalLogger.Category.GLOBAL_MANAGER)
+			Verbose.debug("[State=INITIATING_NEW_ROUND]", Verbose.Category.GLOBAL_MANAGER)
 		Game.GameState.FINISHED:
-			GlobalLogger.debug("[State=FINISHED]", GlobalLogger.Category.GLOBAL_MANAGER)
+			Verbose.debug("[State=FINISHED]", Verbose.Category.GLOBAL_MANAGER)
 		Game.GameState.UNDEF:
-			GlobalLogger.debug("[State=UNDEF]", GlobalLogger.Category.GLOBAL_MANAGER)
+			Verbose.debug("[State=UNDEF]", Verbose.Category.GLOBAL_MANAGER)
 #endregion
 	
 	

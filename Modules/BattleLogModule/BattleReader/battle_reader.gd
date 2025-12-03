@@ -7,7 +7,6 @@ extends Node
 
 @export_group("External nodes")
 @export var _entity_manager: EntityManager
-@export var _spawn_manager: SpawnManager
 
 # ============================== Private variables ==============================
 
@@ -57,74 +56,123 @@ func _stop_playback() -> void:
 
 
 func _apply_log(battle_log: Dictionary) -> void:
-	var type: BattleLog.Type = battle_log[BattleLog.Main.TYPE]
+	var type: BattleLog.Type = battle_log.get(BattleLog.Main.TYPE, -1)
 	match type:
-		BattleLog.Type.AUTO_ATTACK:
-			_apply_auto_attack(battle_log)
-		BattleLog.Type.DAMAGE_TAKEN:
-			_apply_damage_taken(battle_log)
-		BattleLog.Type.SPELL_CASTED:
-			_apply_spell_casted(battle_log)
-		BattleLog.Type.STACK_TAKEN:
-			_apply_stack_taken(battle_log)
+		BattleLog.Type.AUTO_ATTACK:          _apply_auto_attack(battle_log)
+		BattleLog.Type.SPELL_CASTED:         _apply_spell_casted(battle_log)
+		BattleLog.Type.ACTION_DONE:          _apply_action_done(battle_log)
+		BattleLog.Type.INTERACTION_RECEIVED: _apply_interaction_received(battle_log)
+		_: Verbose.warn("Unknown battle_log type received | " + str(type), Verbose.Category.BATTLE_READER)
 
 # ============================== Logs applied ==============================
 
- #{"time":0.1, "type":"auto_attack", "source":1, "target":2, "modifier":{"critical":true, "poison":false, "ignite":false, "instability":true}}
+#{"time":0.1, "type":"auto_attack", "source":1, "target":2, "modifier":{"critical":true, "poison":false, "ignite":false, "instability":true}}
 func _apply_auto_attack(battle_log: Dictionary) -> void:
-	var source_id: int = battle_log[BattleLog.Main.SOURCE]
-	var target_id: int = battle_log[BattleLog.Main.TARGET]
-	#var modifier: Dictionary = battle_log[BattleLog.Main.MODIFIER]
-	#print("[", multiplayer.get_unique_id(), "] BattleReader: Auto-attack: ", source_id, "->", target_id)
-	if not _entity_manager.entities.has(source_id):
-		printerr("[", multiplayer.get_unique_id(), "] BattleReader: Auto-attack: Unknown source !")
-		return
-	if not _entity_manager.entities.has(target_id):
-		printerr("[", multiplayer.get_unique_id(), "] BattleReader: Auto-attack: Unknown target !")
-		return
-	var source: Entity = _entity_manager.entities[source_id]
-	var target: Entity = _entity_manager.entities[target_id]
+	var source_id: int = battle_log.get(BattleLog.Main.SOURCE, -1)
+	var target_id: int = battle_log.get(BattleLog.Main.TARGET, -1)
+	Verbose.trace("Auto-attack: " + str(source_id) + "->" + str(target_id), Verbose.Category.BATTLE_READER)
+	var source: Entity = _entity_manager.get_entity(source_id)
+	var target: Entity = _entity_manager.get_entity(target_id)
+	if source == null or target == null: return
 	var projectile_spawn: Node3D = source.get_auto_attack_spawn()
-	_spawn_manager.spawn_projectile(source, target, Projectile.ProjectileType.AUTO_ATTACK, projectile_spawn, ProjectileStats.new())
-
-
-#{"time":0.1, "type":"damage_taken", "source":1, "modifier":{"critical":true}}
-func _apply_damage_taken(battle_log: Dictionary) -> void:
-	var source_id: int = battle_log[BattleLog.Main.SOURCE]
-	var damage: int = battle_log [BattleLog.Main.DAMAGE]
-	var damage_type: Utils.DamageType = battle_log[BattleLog.Main.DAMAGE_TYPE]
-	var modifier: Dictionary = battle_log[BattleLog.Main.MODIFIER]
-	#print("[", multiplayer.get_unique_id(), "] BattleReader: Damage taken: ", source_id, ":", damage)
-	if not _entity_manager.entities.has(source_id):
-		printerr("[", multiplayer.get_unique_id(), "] BattleReader: Damage taken: Unknown source !")
-		return
-	var source: Entity = _entity_manager.entities[source_id]
-	source.take_damage(damage, damage_type, modifier[BattleLog.Modifier.CRITICAL], "TODO")
+	source.projectile_attack(target, Projectile.ProjectileType.AUTO_ATTACK, projectile_spawn, ProjectileStats.new())
 
 
 #{"time":0.1, "type":"spell_casted", "source":1, "target":2, "spell_type":<spell_type>}
 func _apply_spell_casted(battle_log: Dictionary) -> void:
-	var source_id: int = battle_log[BattleLog.Main.SOURCE]
-	var target_id: int = battle_log[BattleLog.Main.TARGET]
-	var spell_type: Spell.Type = battle_log[BattleLog.Main.SPELL_TYPE]
-	if not _entity_manager.entities.has(source_id):
-		printerr("[", multiplayer.get_unique_id(), "] BattleReader: Spell casted: Unknown source !")
-		return
-	if not _entity_manager.entities.has(target_id):
-		printerr("[", multiplayer.get_unique_id(), "] BattleReader: Spell casted: Unknown target !")
-		return
-	var source: Entity = _entity_manager.entities[source_id]
-	var target: Entity = _entity_manager.entities[target_id]
-	source.cast_spell(target, spell_type, {})
+	var source_id: int = battle_log.get(BattleLog.Main.SOURCE, -1)
+	var source: Entity = _entity_manager.get_entity(source_id)
+	if source == null: return
+	
+	var target_id: int = battle_log.get(BattleLog.Main.TARGET, -1)
+	var target: Entity = _entity_manager.get_entity(target_id) if target_id != -1 else null
+	
+	var spell_type: Spell.Type = battle_log.get(BattleLog.Main.SPELL_TYPE, -1)
+	var spell_modifier: Dictionary = battle_log.get(BattleLog.Main.SPELL_MODIFIER, {})
+	
+	source.cast_spell(target, spell_type, spell_modifier)
 
 
-#{"time":0.1, "source":1, "stack_type":<stack_type>, "stack_number":42}
-func _apply_stack_taken(battle_log: Dictionary) -> void:
-	var source_id: int = battle_log[BattleLog.Main.SOURCE]
-	var stack_type: Utils.StackType = battle_log[BattleLog.Main.STACK_TYPE]
-	var stack_number: int = battle_log[BattleLog.Main.STACK_NUMBER]
-	if not _entity_manager.entities.has(source_id):
-		printerr("[", multiplayer.get_unique_id(), "] BattleReader: Stack taken: Unknown source !")
+#region ACTION/INTERACTION
+#var data: Dictionary = {
+	#BattleLog.Main.TIME: _get_time(),
+	#BattleLog.Main.TYPE: BattleLog.Type.ACTION_DONE,
+	#BattleLog.Main.ACTION_TYPE: action_type,
+	#BattleLog.Main.ACTION_ID: action_id,
+	#BattleLog.Main.VALUE: value,
+	#BattleLog.Main.CRITICAL: is_critical,
+	#BattleLog.Main.SOURCE: source.id,
+	#BattleLog.Main.TARGET: target.id
+#}
+func _apply_action_done(battle_log: Dictionary) -> void:
+	var source_id: int = battle_log.get(BattleLog.Main.SOURCE, -1)
+	var source: Entity = _entity_manager.get_entity(source_id)
+	if source == null:
+		Verbose.error("_apply_action_done() -> Unknown source")
 		return
-	var source: Entity = _entity_manager.entities[source_id]
-	source.take_condition_stacks(stack_number, stack_type, false, "TODO")
+	
+	var target_id: int = battle_log.get(BattleLog.Main.TARGET, -1)
+	var target: Entity = _entity_manager.get_entity(target_id)
+	if target == null:
+		Verbose.error("_apply_action_done() -> Unknown target")
+		return
+	
+	var action_type: Utils.ActionType = battle_log.get(BattleLog.Main.ACTION_TYPE, -1)
+	var action_id: StringName = battle_log.get(BattleLog.Main.ACTION_ID, "Unknown action")
+	var value: float = battle_log.get(BattleLog.Main.VALUE, -1)
+	var is_critical: bool = battle_log.get(BattleLog.Main.CRITICAL, false)
+	
+	source.signal_action_done(target, action_type, action_id, value, is_critical)
+
+
+#var data: Dictionary = {
+	#BattleLog.Main.TIME: _get_time(),
+	#BattleLog.Main.TYPE: BattleLog.Type.ACTION_DONE,
+	#BattleLog.Main.ACTION_TYPE: action_type,
+	#BattleLog.Main.ACTION_ID: action_id,
+	#BattleLog.Main.VALUE: value,
+	#BattleLog.Main.CRITICAL: is_critical,
+	#BattleLog.Main.RECEIVER: receiver.id,
+	#BattleLog.Main.SOURCE: source.id if source != null else -1,
+#}
+func _apply_interaction_received(battle_log: Dictionary) -> void:
+	var receiver_id: int = battle_log.get(BattleLog.Main.RECEIVER, -1)
+	var receiver: Entity = _entity_manager.get_entity(receiver_id)
+	if receiver == null:
+		Verbose.error("_apply_interaction_received() -> Unknown receiver")
+		return
+	
+	var source_id: int = battle_log.get(BattleLog.Main.TARGET, -1)
+	var source: Entity = _entity_manager.get_entity(source_id) if source_id != -1 else null
+	
+	var action_type: Utils.ActionType = battle_log.get(BattleLog.Main.ACTION_TYPE, -1)
+	var action_id: StringName = battle_log.get(BattleLog.Main.ACTION_ID, "Unknown action")
+	var value: float = battle_log.get(BattleLog.Main.VALUE, -1)
+	var is_critical: bool = battle_log.get(BattleLog.Main.CRITICAL, false)
+	
+	_map_interaction(receiver, source, action_type, action_id, value, is_critical)
+#endregion
+
+
+# ============================== Action/Interaction Mapping ==============================
+
+func _map_interaction(receiver: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
+	match action_type:
+		Utils.ActionType.DAMAGE_PHYSICAL: receiver.take_damage(value, Utils.DamageType.PHYSICAL, is_critical, action_id, source)
+		Utils.ActionType.DAMAGE_MAGICAL: receiver.take_damage(value, Utils.DamageType.MAGICAL, is_critical, action_id, source)
+		Utils.ActionType.DAMAGE_POISON: receiver.take_damage(value, Utils.DamageType.POISON, is_critical, action_id, source)
+		Utils.ActionType.UTILITY_HEAL: receiver.take_heal(value, is_critical, action_id, source)
+		Utils.ActionType.UTILITY_STUN: Verbose.warn("Stun not implemented", Verbose.Category.BATTLE_READER)
+		Utils.ActionType.UTILITY_CLEANSE: receiver.take_cleanse(value, is_critical, action_id, source)
+		Utils.ActionType.UTILITY_DISPELL: receiver.take_dispell(value, is_critical, action_id, source)
+		Utils.ActionType.STACK_ARMOR: receiver.take_condition_stacks(value, Utils.StackType.ARMOR, is_critical, action_id, source)
+		Utils.ActionType.STACK_IGNITE: receiver.take_condition_stacks(value, Utils.StackType.IGNITE, is_critical, action_id, source)
+		Utils.ActionType.STACK_POISON: receiver.take_condition_stacks(value, Utils.StackType.POISON, is_critical, action_id, source)
+		Utils.ActionType.STACK_REGEN: receiver.take_condition_stacks(value, Utils.StackType.REGEN, is_critical, action_id, source)
+		Utils.ActionType.STACK_NECROSIS: receiver.take_condition_stacks(value, Utils.StackType.NECROSIS, is_critical, action_id, source)
+
+
+
+
+
+ 

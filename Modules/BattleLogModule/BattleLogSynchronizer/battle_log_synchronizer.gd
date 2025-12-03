@@ -25,6 +25,7 @@ func _ready() -> void:
 func _on_synchronizer_timer_timeout() -> void:
 	var new_logs: Array[Dictionary] = _battle_writer.get_current_logs()
 	if not new_logs.is_empty():
+		Verbose.debug("Sending battle logs | " + str(new_logs.size()), Verbose.Category.BATTLE_SYNC)
 		_sync_battle_log.rpc(new_logs)
 
 
@@ -48,5 +49,6 @@ func _on_game_manager_game_state_changed(state: Game.GameState) -> void:
 
 @rpc("authority", "call_remote", "reliable")
 func _sync_battle_log(logs: Array[Dictionary]) -> void:
+	Verbose.debug("Receiving battle logs | " + str(logs.size()), Verbose.Category.BATTLE_SYNC)
 	_battle_logs += logs
 	_battle_reader.add_log(logs)

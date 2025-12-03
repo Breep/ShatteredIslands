@@ -1,32 +1,30 @@
 class_name Character
 extends Entity
 
-# ============================== Editor-only tools ==============================
-
+#region ============================== Editor-only tools ==============================
 const _HEROES_3D: Dictionary[Hero.HeroId, PackedScene] = {
 	Hero.HeroId.UNDEF: preload("res://Entities/Heroes/Undef/undef.tscn"),
 	Hero.HeroId.DARK_KNIGHT: preload("res://Entities/Heroes/DarkKnight/dark_knight.tscn"),
 }
+#endregion
 
-# ============================== Signal ==============================
-
+#region ============================== Signal ==============================
 signal fight_is_won()
 signal fight_is_lost()
 signal aa_done()
-#signal fight_is_lost()
 signal ultimate_casted()
+#endregion
 
-# ============================== Enums ==============================
-
+#region ============================== Enums ==============================
 enum FightingState {
 	POSITIONING,
 	FIGHTING,
 	CELEBRATING,
 	UNDEF
 }
+#endregion
 
-# ============================== Fighting State ==============================
-
+#region ============================== Fighting State ==============================
 signal fighting_state_changed(new_fighting_state: FightingState)
 var fighting_state: FightingState:
 	get: return _fighting_state
@@ -34,9 +32,9 @@ var fighting_state: FightingState:
 		if value != _fighting_state:
 			_fighting_state = value
 			fighting_state_changed.emit(_fighting_state)
+#endregion
 
-# ============================== Export ==============================
-
+#region ============================== Export ==============================
 @export_group("Network")
 @export_subgroup("Variables")
 @export var owner_player_id: int # ID of the player owner of this character
@@ -66,17 +64,17 @@ var _hero_id := Hero.HeroId.UNDEF
 @export_group("Modules")
 @export var _clickable_module: ClickableModule
 @export var _clickable_feedback: ClickableSelectionFeedback
+#endregion
 
-# ============================== Public variables ==============================
-
+#region ============================== Public variables ==============================
 var player: Player
+#endregion
 
-# ============================== Private variables ==============================
-
+#region ============================== Private variables ==============================
 var _fighting_state: FightingState = FightingState.UNDEF
+#endregion
 
-# ============================== Public functions ==============================
-
+#region ============================== Public functions ==============================
 func apply_cards_upgrade(deck: PlayerDeck) -> void:
 	if not is_node_ready(): return
 	base_stats.reset_from_hero(_hero_3D.hero, player.lvl)
@@ -94,10 +92,6 @@ func connect_to_fighting_area(fighting_area: FightingArea) -> void:
 	fighting_area.fighting_manager.fight_is_over.connect(_on_fighting_manager_fight_is_over, CONNECT_ONE_SHOT)
 
 
-func set_lookat_camera(camera: Camera3D) -> void:
-	_character_visual.set_camera(camera)
-
-
 func on_active_island() -> void: # TODO Should be a signal no ?
 	_character_visual.show()
 
@@ -112,6 +106,7 @@ func get_auto_attack_spawn() -> Node3D:
 
 func get_rank_changed_signal() -> Signal:
 	return _character_logic.get_rank_changed_signal()
+#endregion
 
 #region ===== Actions =====
 func direct_attack(target: Entity, damage: float, damage_type: Utils.DamageType, action_id: StringName) -> void:
@@ -120,25 +115,30 @@ func direct_attack(target: Entity, damage: float, damage_type: Utils.DamageType,
 func direct_attack_percent(target: Entity, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier, action_id: StringName) -> void:
 	_action_module.direct_attack_percent(target, damage_percent, damage_type, percent_modifier, action_id)
 
+
 var _pending_attacks: Array[AttackCommand]
 func projectile_attack(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	if projectile_type == Projectile.ProjectileType.AUTO_ATTACK:
 		var attack_cmd: AttackCommand = _action_module.build_projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
 		if attack_cmd == null:
-			#push_error("[Character] Can't create an AttackCommand [", entity_name)
+			Verbose.error("Can't create an AttackCommand | " + entity_name, Verbose.Category.CHARACTER)
 			return
-		_pending_attacks.append(attack_cmd)
+		if _pending_attacks.is_empty(): _pending_attacks.append(attack_cmd)
+		else: _pending_attacks[0] = attack_cmd
 		auto_attack_started.emit(projectile_stats.physical_is_critical)
 	else:
 		_action_module.projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
 
 func _on_anim_events_manager_attack_hit_frame() -> void:
 	if _pending_attacks.is_empty():
-		#push_error("[Character] AA anim hit frame but no pending attacks [", entity_name)
+		# Can be empty if it's an critical strike, both hands attacks -> TODO: Maybe see if there is a better way
+		#Verbose.error("AA anim hit frame but no pending attacks " + entity_name, Verbose.Category.CHARACTER)
 		return
 	var attack_cmd: AttackCommand = _pending_attacks.pop_front()
 	if !is_instance_valid(attack_cmd.target) or attack_cmd.target.is_queued_for_deletion(): return
+	look_at_target_y_only(attack_cmd.target.global_position)
 	_action_module.projectile_attack(attack_cmd.target, attack_cmd.projectile_type, attack_cmd.spawn_node, attack_cmd.stats)
+
 
 func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary = {}) -> void:
 	_action_module.cast_spell(target, spell_type, spell_modifier)
@@ -189,8 +189,7 @@ func take_dispell(value: float, is_critical: bool, action_id: StringName, source
 	return _interact_module.take_dispell(value, is_critical, action_id, source)
 #endregion
 
-# ============================== Node base functions ==============================
-
+#region ============================== Node base functions ==============================
 func _ready() -> void:
 	if owner_player_id != 0:
 		player = PlayerManager.players[owner_player_id]
@@ -228,9 +227,9 @@ func _ready() -> void:
 	
 	_character_visual.update_health_bar(stats.health, stats.health_max)
 	entity_name = player.name + "_" + _hero_3D.name
+#endregion
 
-# ============================== Private functions ==============================
-
+#region ============================== Private functions ==============================
 func _reset() -> void:
 	apply_cards_upgrade(player.deck)
 
@@ -246,17 +245,15 @@ func _update_hero() -> void:
 	_character_visual.position.y = hero_height + 1
 	add_child(_hero_3D)
 	_clickable_module.update_mesh([_hero_3D])
+#endregion
 
-# ============================== Private ==============================
-
+#region ============================== Private ==============================
 func _handle_death() -> void:
 	died.emit(self)
 	_is_dead = true
+#endregion
 
-# ============================== Module callbacks ==============================
-
-# ============================== Other callbacks ==============================
-
+#region ============================== Other callbacks ==============================
 func _on_fighting_manager_fight_is_over(_fighting_manager, _winner_team) -> void:
 	_character_logic.stop()
 
@@ -317,3 +314,4 @@ func _on_player_lvl_changed(_self_ref: Player, _new_lvl: int) -> void:
  
 func _on_aa_module_attack_done() -> void:
 	aa_done.emit()
+#endregion

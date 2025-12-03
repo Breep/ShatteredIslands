@@ -23,14 +23,7 @@ extends Node3D
 
 @onready var _rank_visualizer: UIRankViewer = %RankViewer
 
-var _camera: Camera3D # If defined, the visual will look at it
-
 # ============================== Node base functions ==============================
-
-func _process(_delta: float) -> void:
-	if _camera != null:
-		look_at(_camera.global_position)
-
 
 func _ready() -> void:
 	_owner_entity.damage_taken.connect(_on_owner_entity_damage_taken)
@@ -65,10 +58,6 @@ func _ready() -> void:
 			stats.armor_stacks_changed.connect(_on_armor_changed)
 # ============================== Public ==============================
 
-func set_camera(camera: Camera3D) -> void:
-	_camera = camera
-
-
 func update_health_bar(health: float, health_max: float) -> void:
 	if not _health_bar or not _health_bar.material:
 		return
@@ -89,7 +78,7 @@ func _update_shield_bar(armor_amount: float, max_health: float) -> void:
 	if max_health > 0:
 		ratio = clamp(float(armor_amount) / float(max_health), 0.0, 1.0)
 	_shield_bar.material.set_shader_parameter("fill_amount", ratio)
-	
+
 func _update_ignite_label(amount: int) -> void:
 	if not _ignite_label: return
 	if amount > 0:
@@ -99,21 +88,19 @@ func _update_ignite_label(amount: int) -> void:
 		_ignite_label.hide()
 
 func _update_necrosis_label(amount: int) -> void:
-	print("VISUAL REÇU : Nécrose = ", amount) # <--- AJOUTE ÇA
 	if not _necrosis_label:
-		print("ERREUR : Label Nécrose manquant dans l'inspecteur !")
 		return
 	if amount > 0:
 		_necrosis_label.text = str(amount)
 		_necrosis_label.show()
 	else:
 		_necrosis_label.hide()
-		
+
 func damage_popup(amount: float, damage_type: Utils.DamageType, is_critic: bool = false):
 	var popup: DamagePopUp = Shared.DAMAGE_POPUP_SCENE.instantiate()
 	var offset = Vector3(randf_range(-0.5, 0.5), randf_range(-0.5, 0.5), 0) 
 	popup.set_value(amount)
-	get_tree().current_scene.add_child(popup)
+	add_child(popup)
 	
 	if is_critic:
 		popup.modulate(Color8(95, 20, 28, 255))
@@ -131,7 +118,7 @@ func damage_popup(amount: float, damage_type: Utils.DamageType, is_critic: bool 
 			popup.global_position = _heal_popup_spawn.global_position + offset
 			popup.outline_modulate(Color8(51, 255, 153, 255))
 	
-	if _camera != null: popup.look_at(_camera.global_position)
+	popup.look_at(get_viewport().get_camera_3d().global_position)
 
 # ============================== Callbacks ==============================
 

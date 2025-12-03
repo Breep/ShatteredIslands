@@ -3,6 +3,10 @@ extends Node3D
 
 # ============================== Signals ==============================
 
+signal interaction_received(entity_ref: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool)
+func signal_interaction_received(entity_ref: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
+	interaction_received.emit(entity_ref, source, action_type, action_id, value, is_critical)
+
 signal action_done(source: Entity, target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool)
 func signal_action_done(source: Entity, target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
 	action_done.emit(source, target, action_type, action_id, value, is_critical)
@@ -11,17 +15,9 @@ signal projectile_spawned(source: Entity, target: Entity, projectile_type: Proje
 func signal_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.ProjectileType, projectile_modifiers: Array[Projectile.ProjectileEffect]) -> void:
 	projectile_spawned.emit(source, target, projectile_type, projectile_modifiers)
 
-signal damage_taken(source: Entity, damage: float, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool)
-func signal_damage_taken(source: Entity, damage: float, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool) -> void:
-	damage_taken.emit(source, damage, damage_type, is_critical, blocked_by_armor)
-
-signal spell_casted(source: Entity, target: Entity, spell_type: Spell.Type)
-func signal_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type) -> void:
-	spell_casted.emit(source, target, spell_type)
-
-signal stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: float, is_critical: bool)
-func signal_stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: float, is_critical: bool) -> void:
-	stack_taken.emit(source, stack_type, stack_number, is_critical)
+signal spell_casted(source: Entity, target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary)
+func signal_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary) -> void:
+	spell_casted.emit(source, target, spell_type, spell_modifier)
 
 signal entity_died(victim: Entity)
 func signal_entity_died(victim: Entity) -> void:

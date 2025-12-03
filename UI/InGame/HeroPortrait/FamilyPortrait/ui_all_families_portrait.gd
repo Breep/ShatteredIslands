@@ -62,7 +62,7 @@ func hide_families() -> void:
 
 func init_portait_families(families: Array[Family]) -> void:
 	if families.size() > _family_portraits.size():
-		GlobalLogger.error("UIAllFamiliesPortrait: Too many active families at once")
+		Verbose.error("UIAllFamiliesPortrait: Too many active families at once")
 		return
 	for i: int in _family_portraits.size():
 		_family_portraits[i].init(families[i])

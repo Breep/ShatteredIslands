@@ -36,17 +36,17 @@ func _ready() -> void:
 # Try to buy a card for the player owner of this shop, It will ask the server for permission
 func try_buy_card(card: Card) -> bool:
 	if !_is_enabled:
-		GlobalLogger.warn("Card shop is disabled", GlobalLogger.Category.CARD_SHOP)
+		Verbose.warn("Card shop is disabled", Verbose.Category.CARD_SHOP)
 		shop_tried_to_buy_card.emit()
 		return false
 	
 	var card_price: int = 100
 	if player.gold < card_price:
-		GlobalLogger.warn("Not enought gold to buy this card | " + card.name + "(" + str(player.gold) + "<" + str(card_price) + ")", GlobalLogger.Category.CARD_SHOP)
+		Verbose.warn("Not enought gold to buy this card | " + card.name + "(" + str(player.gold) + "<" + str(card_price) + ")", Verbose.Category.CARD_SHOP)
 		shop_tried_to_buy_card.emit()
 		return false
 	if not cards_displayed.has(card):
-		GlobalLogger.error("Can't buy this card [" + card.name + "]: it's not in the cards displayed in the shop", GlobalLogger.Category.CARD_SHOP)
+		Verbose.error("Can't buy this card [" + card.name + "]: it's not in the cards displayed in the shop", Verbose.Category.CARD_SHOP)
 		shop_tried_to_buy_card.emit()
 		return false
 	
@@ -62,13 +62,13 @@ func try_buy_card(card: Card) -> bool:
 
 func try_refresh_shop_cards() -> void:
 	if !_is_enabled:
-		GlobalLogger.warn("Card shop is disabled", GlobalLogger.Category.CARD_SHOP)
+		Verbose.warn("Card shop is disabled", Verbose.Category.CARD_SHOP)
 		shop_tried_to_refresh.emit()
 		return
 	
 	var refresh_price: int = 20
 	if player.gold < refresh_price:
-		GlobalLogger.warn("Not enought gold to refesh the shop"+ "(" + str(player.gold) + "<" + str(refresh_price) + ")", GlobalLogger.Category.CARD_SHOP)
+		Verbose.warn("Not enought gold to refesh the shop"+ "(" + str(player.gold) + "<" + str(refresh_price) + ")", Verbose.Category.CARD_SHOP)
 		shop_tried_to_refresh.emit()
 		return
 	
@@ -79,11 +79,11 @@ func try_refresh_shop_cards() -> void:
 # Try to buy a random card for the player owner of this shop, It will ask the server for permission
 func try_buy_random_card() -> bool:
 	if !_is_enabled:
-		GlobalLogger.warn("Card shop is disabled", GlobalLogger.Category.CARD_SHOP)
+		Verbose.warn("Card shop is disabled", Verbose.Category.CARD_SHOP)
 		shop_tried_to_buy_random_card.emit()
 		return false
 	if player.gold < 90:
-		GlobalLogger.warn("Not enought gold to buy a random card", GlobalLogger.Category.CARD_SHOP)
+		Verbose.warn("Not enought gold to buy a random card", Verbose.Category.CARD_SHOP)
 		shop_tried_to_buy_random_card.emit()
 		return false
 	var card: Card = await ServerCardShop.try_buy_random_card_for_player(player)
@@ -102,7 +102,7 @@ func _adapt_cards_lvl_to_player() -> void:
 
 func _refresh_shop_cards(is_free: bool) -> void:
 	if player.deck == null:
-		GlobalLogger.error("Can't update shop cards, there is no player_deck", GlobalLogger.Category.CARD_SHOP)
+		Verbose.error("Can't update shop cards, there is no player_deck", Verbose.Category.CARD_SHOP)
 		return
 	
 	cards_displayed = await ServerCardShop.try_refresh_shop_for_player(player, is_free)

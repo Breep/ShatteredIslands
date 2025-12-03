@@ -58,11 +58,11 @@ func _add_or_improve_card_to_active_cards(card_to_add: Card) -> void:
 		if card.name == card_to_add.name:
 			if not card.is_max_level():
 				card.lvl += 1
-				GlobalLogger.debug("'" + _player_owner.name + "' Upgrading card | " + card_to_add.name + " | " + str(card.lvl), GlobalLogger.Category.DECK)
+				Verbose.debug("'" + _player_owner.name + "' Upgrading card | " + card_to_add.name + " | " + str(card.lvl), Verbose.Category.DECK)
 			else:
-				GlobalLogger.error("'" + _player_owner.name + "' Trying to upgrade an already maximized card | " + card_to_add.name, GlobalLogger.Category.DECK)
+				Verbose.error("'" + _player_owner.name + "' Trying to upgrade an already maximized card | " + card_to_add.name, Verbose.Category.DECK)
 			return
-	GlobalLogger.debug("'" + _player_owner.name + "' Adding new card | " + card_to_add.name + " | " + str(card_to_add.lvl), GlobalLogger.Category.DECK)
+	Verbose.debug("'" + _player_owner.name + "' Adding new card | " + card_to_add.name + " | " + str(card_to_add.lvl), Verbose.Category.DECK)
 	_active_cards.append(card_to_add)
 	if _cards_dictionary.has(card_to_add.family):
 		_cards_dictionary[card_to_add.family].append(card_to_add)

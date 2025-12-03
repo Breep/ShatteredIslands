@@ -25,15 +25,15 @@ func recompute_stats() -> void:
 
 
 func register_modifier(stat_modifier: StatModifier) -> void:
-	GlobalLogger.debug("register_modifier() | " + stat_modifier.id, GlobalLogger.Category.STAT_MODIFIER)
+	Verbose.debug("register_modifier() | " + stat_modifier.id, Verbose.Category.STAT_MODIFIER)
 	var stat_type: EntityStats.StatType = stat_modifier.stat_type
 	if stat_type != _stat_type:
-		GlobalLogger.error("Trying to register a modifier for an other stat type |" + str(stat_type) + " | " + str(_stat_type), GlobalLogger.Category.STAT_MODIFIER)
+		Verbose.error("Trying to register a modifier for an other stat type |" + str(stat_type) + " | " + str(_stat_type), Verbose.Category.STAT_MODIFIER)
 		return
 	
 	var modifier_id: String = stat_modifier.id
 	if _modifiers.has(modifier_id):
-		GlobalLogger.error("Register - Already known stat modifier | id=" + modifier_id + " | " + str(_stat_type), GlobalLogger.Category.STAT_MODIFIER)
+		Verbose.error("Register - Already known stat modifier | id=" + modifier_id + " | " + str(_stat_type), Verbose.Category.STAT_MODIFIER)
 		return
 	
 	if _is_multiple_stats():
@@ -44,10 +44,10 @@ func register_modifier(stat_modifier: StatModifier) -> void:
 
 
 func update_modifier(stat_modifier: StatModifier) -> void:
-	GlobalLogger.debug("update_modifier() | " + stat_modifier.id, GlobalLogger.Category.STAT_MODIFIER)
+	Verbose.debug("update_modifier() | " + stat_modifier.id, Verbose.Category.STAT_MODIFIER)
 	var stat_type: EntityStats.StatType = stat_modifier.stat_type
 	if stat_type != _stat_type:
-		GlobalLogger.error("Trying to update a modifier for an other stat type | " + str(stat_type) + " | " + str(_stat_type), GlobalLogger.Category.STAT_MODIFIER)
+		Verbose.error("Trying to update a modifier for an other stat type | " + str(stat_type) + " | " + str(_stat_type), Verbose.Category.STAT_MODIFIER)
 		return
 	
 	var modifier_id: String = stat_modifier.id
@@ -59,21 +59,21 @@ func update_modifier(stat_modifier: StatModifier) -> void:
 
 
 func unregister_modifier(stat_modifier: StatModifier) -> void:
-	GlobalLogger.debug("unregister_modifier() | " + stat_modifier.id, GlobalLogger.Category.STAT_MODIFIER)
+	Verbose.debug("unregister_modifier() | " + stat_modifier.id, Verbose.Category.STAT_MODIFIER)
 	var stat_type: EntityStats.StatType = stat_modifier.stat_type
 	if stat_type != _stat_type:
-		GlobalLogger.error("Trying to unregister a modifier for an other stat type | " + str(stat_type) + str(_stat_type), GlobalLogger.Category.STAT_MODIFIER)
+		Verbose.error("Trying to unregister a modifier for an other stat type | " + str(stat_type) + str(_stat_type), Verbose.Category.STAT_MODIFIER)
 		return
 	
 	var modifier_id: String = stat_modifier.id
 	if _is_multiple_stats():
 		if not _modifiers_per_action_type[stat_modifier.action_type].has(modifier_id):
-			GlobalLogger.error("Unregister - Unknown multiple stats modifier | " + str(modifier_id) + str(_stat_type), GlobalLogger.Category.STAT_MODIFIER)
+			Verbose.error("Unregister - Unknown multiple stats modifier | " + str(modifier_id) + str(_stat_type), Verbose.Category.STAT_MODIFIER)
 			return
 		_modifiers_per_action_type[stat_modifier.action_type].erase(modifier_id)
 	else:
 		if not _modifiers.has(modifier_id):
-			GlobalLogger.error("Unregister - Unknown stat modifier | " + modifier_id +  " | " +  str(_stat_type), GlobalLogger.Category.STAT_MODIFIER)
+			Verbose.error("Unregister - Unknown stat modifier | " + modifier_id +  " | " +  str(_stat_type), Verbose.Category.STAT_MODIFIER)
 			return
 		_modifiers.erase(modifier_id)
 	
@@ -85,18 +85,18 @@ func auto_cleanup() -> void:
 		for action_type: Utils.ActionType in _modifiers_per_action_type.keys():
 			for modifier: StatModifier in _modifiers_per_action_type[action_type].values().duplicate():
 				if modifier.auto_cleanup:
-					GlobalLogger.debug("Auto cleaning | " + modifier.id, GlobalLogger.Category.STAT_MODIFIER)
+					Verbose.debug("Auto cleaning | " + modifier.id, Verbose.Category.STAT_MODIFIER)
 					_modifiers_per_action_type[action_type].erase(modifier.id)
 	else:
 		for modifier: StatModifier in _modifiers.values().duplicate():
 			if modifier.auto_cleanup:
-				GlobalLogger.debug("Auto cleaning | " + modifier.id, GlobalLogger.Category.STAT_MODIFIER)
+				Verbose.debug("Auto cleaning | " + modifier.id, Verbose.Category.STAT_MODIFIER)
 				_modifiers.erase(modifier.id)
 
 # ============================== Private functions ==============================
 
 func _recompute_stats() -> void:
-	GlobalLogger.trace("_recompute_stats()", GlobalLogger.Category.STAT_MODIFIER)
+	Verbose.trace("_recompute_stats()", Verbose.Category.STAT_MODIFIER)
 	if _is_multiple_stats():
 		_recompute_multiple_stats()
 	else:

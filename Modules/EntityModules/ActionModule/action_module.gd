@@ -18,6 +18,7 @@ const SNAKE_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Poison/Sna
 # ============================== Public functions ==============================
 
 func connect_to_spawn_manager(spawn_manager: SpawnManager) -> void:
+	Verbose.debug("connect_to_spawn_manager() | " + str(spawn_manager), Verbose.Category.ENTITY_MODULE)
 	if spawn_manager == null:
 		printerr("ActionModule: Trying to connect to a <null> SpawnManager")
 		return
@@ -56,23 +57,27 @@ func direct_attack_percent(target: Entity, damage_percent: float, damage_type: U
 
 # Create a projectile to attack the target - Apply cards damages multiplier if there are some
 func build_projectile_attack(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> AttackCommand:
-	if not multiplayer.is_server(): return
-	if target == null: return
-	var physical_multiplier = _get_crit_multiplier(Utils.ActionType.DAMAGE_PHYSICAL)
-	projectile_stats.physical_is_critical = physical_multiplier["is_critical"]
-	projectile_stats.physical_base_damage = projectile_stats.physical_damage_flat * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_PHYSICAL)
-	projectile_stats.physical_damage_flat = projectile_stats.physical_base_damage * physical_multiplier["multiplier"]
-	#projectile_stats.physical_damage_percent *= physical_multiplier["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_PHYSICAL)
+	if target == null:
+		Verbose.warn("build_projectile_attack() -> No target", Verbose.Category.ENTITY_MODULE)
+		return
 	
-	var magical_multiplier = _get_crit_multiplier(Utils.ActionType.DAMAGE_MAGICAL)
-	projectile_stats.magical_is_critical = magical_multiplier["is_critical"]
-	projectile_stats.magical_base_damage = projectile_stats.magical_damage_flat * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_MAGICAL)
-	projectile_stats.magical_damage_flat = projectile_stats.magical_base_damage * magical_multiplier["multiplier"]
-	#projectile_stats.magical_damage_percent *= magical_multiplier["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_MAGICAL)
+	if multiplayer.is_server():
+		var physical_multiplier = _get_crit_multiplier(Utils.ActionType.DAMAGE_PHYSICAL)
+		projectile_stats.physical_is_critical = physical_multiplier["is_critical"]
+		projectile_stats.physical_base_damage = projectile_stats.physical_damage_flat * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_PHYSICAL)
+		projectile_stats.physical_damage_flat = projectile_stats.physical_base_damage * physical_multiplier["multiplier"]
+		#projectile_stats.physical_damage_percent *= physical_multiplier["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_PHYSICAL)
+		
+		var magical_multiplier = _get_crit_multiplier(Utils.ActionType.DAMAGE_MAGICAL)
+		projectile_stats.magical_is_critical = magical_multiplier["is_critical"]
+		projectile_stats.magical_base_damage = projectile_stats.magical_damage_flat * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_MAGICAL)
+		projectile_stats.magical_damage_flat = projectile_stats.magical_base_damage * magical_multiplier["multiplier"]
+		#projectile_stats.magical_damage_percent *= magical_multiplier["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_MAGICAL)
+		
+		var poison_stacks_multiplier = _get_crit_multiplier(Utils.ActionType.DAMAGE_POISON)
+		projectile_stats.poison_stacks_is_critical = poison_stacks_multiplier["is_critical"]
+		projectile_stats.poison_stacks *= poison_stacks_multiplier["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.STACK_POISON)
 	
-	var poison_stacks_multiplier = _get_crit_multiplier(Utils.ActionType.DAMAGE_POISON)
-	projectile_stats.poison_stacks_is_critical = poison_stacks_multiplier["is_critical"]
-	projectile_stats.poison_stacks *= poison_stacks_multiplier["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.STACK_POISON)
 	return AttackCommand.new().setup(target, projectile_type, projectile_spawn, projectile_stats)
 
 
@@ -183,79 +188,79 @@ func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictiona
 
 
 func _cast_meteor(target: Entity, spell_modifier: Dictionary) -> void:
-	if target == null: return
-	_owner.signal_spell_casted(target, Spell.Type.METEOR)
+	if target == null:
+		Verbose.error("_cast_meteor() -> No target", Verbose.Category.ENTITY_MODULE)
+		return
+	_owner.signal_spell_casted(target, Spell.Type.METEOR, spell_modifier)
 	var meteor: Meteor = METEOR_SCENE.instantiate()
-	if multiplayer.is_server():
-		var damage_percent: float = spell_modifier.get(Spell.MeteorModifier.DAMAGE_PERCENT, 0)
-		var radius: float = spell_modifier.get(Spell.MeteorModifier.RADIUS, 1)
-		var on_hit_callbacks: Array = spell_modifier.get(Spell.MeteorModifier.ON_HIT_CALLBACKS, [])
-		meteor.init(target, damage_percent, radius, on_hit_callbacks, _owner)
-	else:
-		meteor.init(target, 0, 1.0, [], _owner)
+	var damage_percent: float = spell_modifier.get(Spell.MeteorModifier.DAMAGE_PERCENT, 0)
+	var radius: float = spell_modifier.get(Spell.MeteorModifier.RADIUS, 1)
+	var on_hit_callbacks: Array = spell_modifier.get(Spell.MeteorModifier.ON_HIT_CALLBACKS, [])
+	meteor.init(target, damage_percent, radius, on_hit_callbacks, _owner)
 	_spawn_manager.spawn_spell(meteor)
 
 
 func _cast_dark_storm(target: Entity, spell_modifier: Dictionary) -> void:
-	if target == null: return
-	_owner.signal_spell_casted(target, Spell.Type.DARK_STORM)
+	if target == null:
+		Verbose.error("_cast_dark_storm() -> No target", Verbose.Category.ENTITY_MODULE)
+		return
+	_owner.signal_spell_casted(target, Spell.Type.DARK_STORM, spell_modifier)
 	var dark_storm: DarkStorm = DARK_STORM_SCENE.instantiate()
-	if multiplayer.is_server():
-		var damage: int = spell_modifier[Spell.DarkStormModifier.DAMAGE]
-		var period: float = spell_modifier[Spell.DarkStormModifier.PERIOD]
-		var lifespan: float = spell_modifier[Spell.DarkStormModifier.LIFESPAN]
-		var pain_stack_percent: float = spell_modifier[Spell.DarkStormModifier.PAIN_STACK_PERCENT]
-		dark_storm.init(target, damage, period, lifespan, _owner, pain_stack_percent)
-	else:
-		dark_storm.init(target, 0, 0, 0, _owner)
+	var damage: int = spell_modifier[Spell.DarkStormModifier.DAMAGE]
+	var period: float = spell_modifier[Spell.DarkStormModifier.PERIOD]
+	var lifespan: float = spell_modifier[Spell.DarkStormModifier.LIFESPAN]
+	var pain_stack_percent: float = spell_modifier[Spell.DarkStormModifier.PAIN_STACK_PERCENT]
+	dark_storm.init(target, damage, period, lifespan, _owner, pain_stack_percent)
 	_spawn_manager.spawn_spell(dark_storm)
 
 
 func _cast_contagion(spell_modifier: Dictionary) -> void:
-	_owner.signal_spell_casted(_owner, Spell.Type.CONTAGION)
+	_owner.signal_spell_casted(_owner, Spell.Type.CONTAGION, spell_modifier)
 	var contagion: ContagionSpellArea = CONTAGION_SPELL_SCENE.instantiate()
-	if multiplayer.is_server():
-		var radius: float = spell_modifier[Spell.ContagionModifier.RADIUS]
-		var spread_percent: float = spell_modifier[Spell.ContagionModifier.SPREAD_PERCENT]
-		contagion.init(_owner, radius, spread_percent)
+	var radius: float = spell_modifier[Spell.ContagionModifier.RADIUS]
+	var spread_percent: float = spell_modifier[Spell.ContagionModifier.SPREAD_PERCENT]
+	contagion.init(_owner, radius, spread_percent)
 	_spawn_manager.spawn_spell(contagion)
 
 
 func _cast_shroom(target: Entity, spell_modifier: Dictionary) -> void:
-	_owner.signal_spell_casted(_owner, Spell.Type.CONTAGION)
+	_owner.signal_spell_casted(_owner, Spell.Type.CONTAGION, spell_modifier)
 	var shroom: Shroom = SHROOM_SPELL_SCENE.instantiate()
-	if multiplayer.is_server():
-		var radius: float = spell_modifier[Spell.ShroomModifier.RADIUS]
-		var life_time: float = spell_modifier[Spell.ShroomModifier.LIFE_TIME]
-		var damage: int = spell_modifier[Spell.ShroomModifier.DAMAGE]
-		shroom.init(_owner, target, damage, radius, life_time)
+	var radius: float = spell_modifier[Spell.ShroomModifier.RADIUS]
+	var life_time: float = spell_modifier[Spell.ShroomModifier.LIFE_TIME]
+	var damage: int = spell_modifier[Spell.ShroomModifier.DAMAGE]
+	shroom.init(_owner, target, damage, radius, life_time)
 	_spawn_manager.spawn_spell(shroom)
 
 
 func _cast_death_fog(spell_modifier: Dictionary) -> void:
-	_owner.signal_spell_casted(_owner, Spell.Type.DEATH_FOG)
+	_owner.signal_spell_casted(_owner, Spell.Type.DEATH_FOG, spell_modifier)
 	var death_fog: DeathFog = DEATH_FOG_SCENE.instantiate()
-	if multiplayer.is_server():
-		var grow_speed: float = spell_modifier[Spell.DeathFogModifier.GROW_SPEED]
-		var tick_period: float = spell_modifier[Spell.DeathFogModifier.TICK_PERIOD]
-		var damage_multiplier: float = spell_modifier[Spell.DeathFogModifier.DAMAGE_MULTIPLIER]
-		death_fog.init(_owner, grow_speed, tick_period, damage_multiplier)
+	var grow_speed: float = spell_modifier[Spell.DeathFogModifier.GROW_SPEED]
+	var tick_period: float = spell_modifier[Spell.DeathFogModifier.TICK_PERIOD]
+	var damage_multiplier: float = spell_modifier[Spell.DeathFogModifier.DAMAGE_MULTIPLIER]
+	death_fog.init(_owner, grow_speed, tick_period, damage_multiplier)
 	_spawn_manager.spawn_spell(death_fog)
 
 
 func _cast_lightning(target: Entity, spell_modifier: Dictionary) -> void:
-	_owner.signal_spell_casted(target, Spell.Type.LIGHTNING)
+	if target == null:
+		Verbose.error("_cast_lightning() -> No target", Verbose.Category.ENTITY_MODULE)
+		return
+	_owner.signal_spell_casted(target, Spell.Type.LIGHTNING, spell_modifier)
 	var lightning: SpellLightning = LIGHTNING_SCENE.instantiate()
-	if multiplayer.is_server():
-		var damage: float = spell_modifier[Spell.LightningModifier.DAMAGE]
-		lightning.init(_owner, target, damage)
+	var damage: float = spell_modifier[Spell.LightningModifier.DAMAGE]
+	lightning.init(_owner, target, damage)
 	_spawn_manager.spawn_spell(lightning)
 
+
 func _cast_chain_lightning(target: Entity, spell_modifier: Dictionary) -> void:
-	_owner.signal_spell_casted(target, Spell.Type.CHAIN_LIGHTNING)
+	if target == null:
+		Verbose.error("_cast_chain_lightning() -> No target", Verbose.Category.ENTITY_MODULE)
+		return
+	_owner.signal_spell_casted(target, Spell.Type.CHAIN_LIGHTNING, spell_modifier)
 	var chain_lightning: SpellChainLightning = CHAIN_LIGHTNING_SCENE.instantiate()
-	if multiplayer.is_server():
-		chain_lightning.init(_owner, target, spell_modifier)
+	chain_lightning.init(_owner, target, spell_modifier)
 	_spawn_manager.spawn_spell(chain_lightning)
 	
 #endregion

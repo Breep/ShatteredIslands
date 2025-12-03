@@ -66,12 +66,12 @@ func _ready() -> void:
 	_hero_animation_player.attack_done.connect(_on_hero_animation_player_attack_done)
 
 
-func _process(_delta: float) -> void:
-	if not _is_fighting: return
-	if _character_owner == null or _character_owner.target_module == null: return
-	var closest_enemy: Entity = _character_owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
-	if closest_enemy != null:
-		_character_owner.look_at_target_y_only(closest_enemy.global_position)
+#func _process(_delta: float) -> void:
+	#if not _is_fighting: return
+	#if _character_owner == null or _character_owner.target_module == null: return
+	#var closest_enemy: Entity = _character_owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
+	#if closest_enemy != null:
+		#_character_owner.look_at_target_y_only(closest_enemy.global_position)
 
 
 func _on_character_owner_fighting_state_changed(new_state: Character.FightingState) -> void:
