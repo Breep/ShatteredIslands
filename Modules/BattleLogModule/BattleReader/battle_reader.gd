@@ -59,9 +59,7 @@ func _apply_log(battle_log: Dictionary) -> void:
 	var type: BattleLog.Type = battle_log.get(BattleLog.Main.TYPE, -1)
 	match type:
 		BattleLog.Type.AUTO_ATTACK:          _apply_auto_attack(battle_log)
-		BattleLog.Type.DAMAGE_TAKEN:        pass#_apply_damage_taken(battle_log)
 		BattleLog.Type.SPELL_CASTED:         _apply_spell_casted(battle_log)
-		BattleLog.Type.STACK_TAKEN:         pass#_apply_stack_taken(battle_log)
 		BattleLog.Type.ACTION_DONE:          _apply_action_done(battle_log)
 		BattleLog.Type.INTERACTION_RECEIVED: _apply_interaction_received(battle_log)
 		_: Verbose.warn("Unknown battle_log type received | " + str(type), Verbose.Category.BATTLE_READER)
@@ -120,6 +118,7 @@ func _apply_stack_taken(battle_log: Dictionary) -> void:
 	source.take_condition_stacks(stack_number, stack_type, false, "TODO")
 
 
+#region ACTION/INTERACTION
 #var data: Dictionary = {
 	#BattleLog.Main.TIME: _get_time(),
 	#BattleLog.Main.TYPE: BattleLog.Type.ACTION_DONE,
@@ -176,14 +175,26 @@ func _apply_interaction_received(battle_log: Dictionary) -> void:
 	var value: float = battle_log.get(BattleLog.Main.VALUE, -1)
 	var is_critical: bool = battle_log.get(BattleLog.Main.CRITICAL, false)
 	
-	receiver.signal_interaction_received(source, action_type, action_id, value, is_critical)
+	_map_interaction(receiver, source, action_type, action_id, value, is_critical)
+#endregion
 
 
+# ============================== Action/Interaction Mapping ==============================
 
-
-
-
-
+func _map_interaction(receiver: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
+	match action_type:
+		Utils.ActionType.DAMAGE_PHYSICAL: receiver.take_damage(value, Utils.DamageType.PHYSICAL, is_critical, action_id, source)
+		Utils.ActionType.DAMAGE_MAGICAL: receiver.take_damage(value, Utils.DamageType.MAGICAL, is_critical, action_id, source)
+		Utils.ActionType.DAMAGE_POISON: receiver.take_damage(value, Utils.DamageType.POISON, is_critical, action_id, source)
+		Utils.ActionType.UTILITY_HEAL: receiver.take_heal(value, is_critical, action_id, source)
+		Utils.ActionType.UTILITY_STUN: Verbose.warn("Stun not implemented", Verbose.Category.BATTLE_READER)
+		Utils.ActionType.UTILITY_CLEANSE: receiver.take_cleanse(value, is_critical, action_id, source)
+		Utils.ActionType.UTILITY_DISPELL: receiver.take_dispell(value, is_critical, action_id, source)
+		Utils.ActionType.STACK_ARMOR: receiver.take_condition_stacks(value, Utils.StackType.ARMOR, is_critical, action_id, source)
+		Utils.ActionType.STACK_IGNITE: receiver.take_condition_stacks(value, Utils.StackType.IGNITE, is_critical, action_id, source)
+		Utils.ActionType.STACK_POISON: receiver.take_condition_stacks(value, Utils.StackType.POISON, is_critical, action_id, source)
+		Utils.ActionType.STACK_REGEN: receiver.take_condition_stacks(value, Utils.StackType.REGEN, is_critical, action_id, source)
+		Utils.ActionType.STACK_NECROSIS: receiver.take_condition_stacks(value, Utils.StackType.NECROSIS, is_critical, action_id, source)
 
 
 

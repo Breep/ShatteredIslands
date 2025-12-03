@@ -23,9 +23,7 @@ func _ready() -> void:
 	if not multiplayer.is_server(): queue_free() # Only the server writes battle logs
 	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 	_fighting_area.projectile_spawned.connect(_on_fighting_area_projectile_spawned)
-	_fighting_area.damage_taken.connect(_on_fighting_area_damage_taken)
 	_fighting_area.spell_casted.connect(_on_fighting_area_spell_casted)
-	_fighting_area.stack_taken.connect(_on_fighting_area_stack_taken)
 	_fighting_area.action_done.connect(_on_fighting_area_action_done)
 	_fighting_area.interaction_received.connect(_on_fighting_area_interaction_received)
 
@@ -172,16 +170,8 @@ func _on_fighting_area_projectile_spawned(source: Entity, target: Entity, projec
 					projectile_modifiers.has(Projectile.ProjectileEffect.INSTABILITY))
 
 
-func _on_fighting_area_damage_taken(source: Entity, damage: float, damage_type: Utils.DamageType, is_critical: bool, _blocked_by_armor: bool) -> void:
-	_log_damage_taken(source, damage, damage_type, is_critical)
-
-
 func _on_fighting_area_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type) -> void:
 	_log_spell_casted(source, target, spell_type)
-
-
-func _on_fighting_area_stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: float, is_critical: bool) -> void:
-	_log_stack_taken(source, stack_type, stack_number, is_critical)
 
 
 func _on_fighting_area_interaction_received(receiver: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
