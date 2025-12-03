@@ -9,8 +9,6 @@ var _necro_stats: FamilyNecroStats # Ref to the owner necro stats
 
 # ============================== Local nodes ==============================
 
-@onready var _necro_tick_timer: Timer = %NecroTickTimer 
-
 # ============================== Node base functions ==============================
 
 func _ready() -> void:

@@ -15,9 +15,9 @@ signal projectile_spawned(source: Entity, target: Entity, projectile_type: Proje
 func signal_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.ProjectileType, projectile_modifiers: Array[Projectile.ProjectileEffect]) -> void:
 	projectile_spawned.emit(source, target, projectile_type, projectile_modifiers)
 
-signal spell_casted(source: Entity, target: Entity, spell_type: Spell.Type)
-func signal_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type) -> void:
-	spell_casted.emit(source, target, spell_type)
+signal spell_casted(source: Entity, target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary)
+func signal_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary) -> void:
+	spell_casted.emit(source, target, spell_type, spell_modifier)
 
 signal entity_died(victim: Entity)
 func signal_entity_died(victim: Entity) -> void:

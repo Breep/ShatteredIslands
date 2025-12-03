@@ -38,9 +38,9 @@ signal heal_taken(entity_ref: Entity, heal_amount: float, is_critical: bool)
 func signal_heal_taken(heal_amount: float, is_critical: bool) -> void:
 	heal_taken.emit(self, heal_amount, is_critical)
 
-signal spell_casted(source: Entity, target: Entity, spell_type: Spell.Type)
-func signal_spell_casted(target: Entity, spell_type: Spell.Type) -> void:
-	spell_casted.emit(self, target, spell_type)
+signal spell_casted(source: Entity, target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary)
+func signal_spell_casted(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary) -> void:
+	spell_casted.emit(self, target, spell_type, spell_modifier)
 
 signal stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: float, is_critical: bool)
 func signal_stack_taken(stack_type: Utils.StackType, stack_number: float, is_critical: bool) -> void:

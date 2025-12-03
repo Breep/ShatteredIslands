@@ -77,7 +77,7 @@ func _kick_entity(entity: Entity) -> void:
 	if entity.spell_casted.is_connected(_on_entity_spell_casted): entity.spell_casted.disconnect(_on_entity_spell_casted)
 	if entity.died.is_connected(_on_entity_died): entity.died.disconnect(_on_entity_died)
 	if entity.action_done.is_connected(_on_entity_action_done): entity.action_done.disconnect(_on_entity_action_done)
-	if entity.interaction_received.is_connected(_on_entity_interaction_received): entity.action_done.disconnect(_on_entity_interaction_received)
+	if entity.interaction_received.is_connected(_on_entity_interaction_received): entity.interaction_received.disconnect(_on_entity_interaction_received)
 	entities.erase(entity.id)
 	if _characters.has(entity.id): _characters.erase(entity.id)
 
@@ -91,8 +91,8 @@ func _on_game_manager_game_state_changed(game_state: Game.GameState) -> void:
 		_is_active = true
 
 
-func _on_entity_spell_casted(entity: Entity, target: Entity, spell_type: Spell.Type) -> void:
-	_fighting_area.signal_spell_casted(entity, target, spell_type)
+func _on_entity_spell_casted(entity: Entity, target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary) -> void:
+	_fighting_area.signal_spell_casted(entity, target, spell_type, spell_modifier)
 
 
 func _on_entity_action_done(source: Entity, target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:

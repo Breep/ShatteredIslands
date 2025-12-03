@@ -56,21 +56,7 @@ func _log_attack(source: Entity, target: Entity,
 	_battle_logs.append(data)
 
 
-func _log_damage_taken(source: Entity, damage: float, damage_type: Utils.DamageType, critical: bool) -> void:
-	var data: Dictionary = {
-		BattleLog.Main.TIME: _get_time(),
-		BattleLog.Main.TYPE: BattleLog.Type.DAMAGE_TAKEN,
-		BattleLog.Main.SOURCE: source.id,
-		BattleLog.Main.DAMAGE: damage,
-		BattleLog.Main.DAMAGE_TYPE: damage_type,
-		BattleLog.Main.MODIFIER: {
-			BattleLog.Modifier.CRITICAL: critical,
-		}
-	}
-	_battle_logs.append(data)
-
-
-func _log_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type) -> void:
+func _log_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary) -> void:
 	if source == null or target == null: return
 	var data: Dictionary = {
 		BattleLog.Main.TIME: _get_time(),
@@ -78,20 +64,7 @@ func _log_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type) -
 		BattleLog.Main.SOURCE: source.id,
 		BattleLog.Main.TARGET: target.id,
 		BattleLog.Main.SPELL_TYPE: spell_type,
-	}
-	_battle_logs.append(data)
-
-
-func _log_stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: float, is_critical: bool) -> void:
-	var data: Dictionary = {
-		BattleLog.Main.TIME: _get_time(),
-		BattleLog.Main.TYPE: BattleLog.Type.STACK_TAKEN,
-		BattleLog.Main.STACK_TYPE: stack_type,
-		BattleLog.Main.STACK_NUMBER: stack_number,
-		BattleLog.Main.SOURCE: source.id,
-		BattleLog.Main.MODIFIER: {
-			BattleLog.Modifier.CRITICAL: is_critical
-		}
+		BattleLog.Main.SPELL_MODIFIER: spell_modifier
 	}
 	_battle_logs.append(data)
 
@@ -170,8 +143,8 @@ func _on_fighting_area_projectile_spawned(source: Entity, target: Entity, projec
 					projectile_modifiers.has(Projectile.ProjectileEffect.INSTABILITY))
 
 
-func _on_fighting_area_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type) -> void:
-	_log_spell_casted(source, target, spell_type)
+func _on_fighting_area_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary) -> void:
+	_log_spell_casted(source, target, spell_type, spell_modifier)
 
 
 func _on_fighting_area_interaction_received(receiver: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:

@@ -78,44 +78,19 @@ func _apply_auto_attack(battle_log: Dictionary) -> void:
 	source.projectile_attack(target, Projectile.ProjectileType.AUTO_ATTACK, projectile_spawn, ProjectileStats.new())
 
 
-#{"time":0.1, "type":"damage_taken", "source":1, "modifier":{"critical":true}}
-func _apply_damage_taken(battle_log: Dictionary) -> void:
-	var source_id: int = battle_log.get(BattleLog.Main.SOURCE, -1)
-	var damage: int = battle_log.get(BattleLog.Main.DAMAGE, -1)
-	var damage_type: Utils.DamageType = battle_log.get(BattleLog.Main.DAMAGE_TYPE, Utils.DamageType.PHYSICAL)
-	var modifier: Dictionary = battle_log.get(BattleLog.Main.MODIFIER, {})
-	Verbose.trace("Damage taken: "  + str(source_id) + ":" + str(damage), Verbose.Category.BATTLE_READER)
-	var source: Entity = _entity_manager.get_entity(source_id)
-	if source == null: return
-	source.take_damage(damage, damage_type, modifier.get(BattleLog.Modifier.CRITICAL, false), "TODO")
-
-
 #{"time":0.1, "type":"spell_casted", "source":1, "target":2, "spell_type":<spell_type>}
 func _apply_spell_casted(battle_log: Dictionary) -> void:
-	var source_id: int = battle_log[BattleLog.Main.SOURCE]
-	var target_id: int = battle_log[BattleLog.Main.TARGET]
-	var spell_type: Spell.Type = battle_log[BattleLog.Main.SPELL_TYPE]
-	if not _entity_manager.entities.has(source_id):
-		Verbose.error("BattleReader: Spell casted: Unknown source !", Verbose.Category.BATTLE_SYNC)
-		return
-	if not _entity_manager.entities.has(target_id):
-		Verbose.error("BattleReader: Spell casted: Unknown target !", Verbose.Category.BATTLE_SYNC)
-		return
-	var source: Entity = _entity_manager.entities[source_id]
-	var target: Entity = _entity_manager.entities[target_id]
-	source.cast_spell(target, spell_type, {})
-
-
-#{"time":0.1, "source":1, "stack_type":<stack_type>, "stack_number":42}
-func _apply_stack_taken(battle_log: Dictionary) -> void:
-	var source_id: int = battle_log[BattleLog.Main.SOURCE]
-	var stack_type: Utils.StackType = battle_log[BattleLog.Main.STACK_TYPE]
-	var stack_number: int = battle_log[BattleLog.Main.STACK_NUMBER]
-	if not _entity_manager.entities.has(source_id):
-		Verbose.error("BattleReader: Stack taken: Unknown source !", Verbose.Category.BATTLE_SYNC)
-		return
-	var source: Entity = _entity_manager.entities[source_id]
-	source.take_condition_stacks(stack_number, stack_type, false, "TODO")
+	var source_id: int = battle_log.get(BattleLog.Main.SOURCE, -1)
+	var source: Entity = _entity_manager.get_entity(source_id)
+	if source == null: return
+	
+	var target_id: int = battle_log.get(BattleLog.Main.TARGET, -1)
+	var target: Entity = _entity_manager.get_entity(target_id) if target_id != -1 else null
+	
+	var spell_type: Spell.Type = battle_log.get(BattleLog.Main.SPELL_TYPE, -1)
+	var spell_modifier: Dictionary = battle_log.get(BattleLog.Main.SPELL_MODIFIER, {})
+	
+	source.cast_spell(target, spell_type, spell_modifier)
 
 
 #region ACTION/INTERACTION
