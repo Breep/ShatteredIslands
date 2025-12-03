@@ -5,7 +5,8 @@ enum Type {
 	AUTO_ATTACK,
 	DAMAGE_TAKEN,
 	SPELL_CASTED,
-	STACK_TAKEN
+	STACK_TAKEN,
+	ACTION_DONE,
 }
 
 enum Modifier {
@@ -18,6 +19,10 @@ enum Modifier {
 
 enum Main {
 	TIME,
+	ACTION_TYPE,
+	ACTION_ID,
+	VALUE,
+	CRITICAL,
 	TYPE,
 	SOURCE,
 	TARGET,

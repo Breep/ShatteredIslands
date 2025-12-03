@@ -31,8 +31,10 @@ enum Category {
 	STAT_MODIFIER,
 	ENTITY_MODULE,
 	CHARACTER,
+	ENTITY,
 	BATTLE_SYNC,
 	BATTLE_READER,
+	BATTLE_WRITER,
 	ENTITY_MANAGER,
 }
 
@@ -53,8 +55,10 @@ const CATEGORY_PREFIX_TEMPLATES : Dictionary [Category, String] = {
 	Category.GLOBAL_FIGHTING_MANAGER: "(GFM       ) ",
 	Category.ENTITY_MODULE:           "(ENT_MODULE) ",
 	Category.CHARACTER:               "(CHARACTER ) ",
+	Category.ENTITY:                  "(ENTITY    ) ",
 	Category.BATTLE_SYNC:             "(BATTLESYNC) ",
 	Category.BATTLE_READER:           "(BATTLEREAD) ",
+	Category.BATTLE_WRITER:           "(BATTLEWRIT) ",
 	Category.ENTITY_MANAGER:          "(ENTITY_MAN) "
 }
 
@@ -97,8 +101,10 @@ var current_categories_level: Dictionary[Category, Level] = {
 	Category.ENTITY_MODULE:           Level.WARN,
 	Category.CHARACTER:               Level.WARN,
 	Category.BATTLE_SYNC:             Level.WARN,
-	Category.BATTLE_READER:           Level.TRACE,
+	Category.BATTLE_READER:           Level.WARN,
+	Category.BATTLE_WRITER:           Level.WARN,
 	Category.ENTITY_MANAGER:          Level.WARN,
+	Category.ENTITY:                  Level.TRACE
 }
 #endregion
 

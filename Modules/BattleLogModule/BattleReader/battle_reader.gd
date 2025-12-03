@@ -56,7 +56,7 @@ func _stop_playback() -> void:
 
 
 func _apply_log(battle_log: Dictionary) -> void:
-	var type: BattleLog.Type = battle_log[BattleLog.Main.TYPE]
+	var type: BattleLog.Type = battle_log.get(BattleLog.Main.TYPE, -1)
 	match type:
 		BattleLog.Type.AUTO_ATTACK:
 			_apply_auto_attack(battle_log)
@@ -66,6 +66,10 @@ func _apply_log(battle_log: Dictionary) -> void:
 			_apply_spell_casted(battle_log)
 		BattleLog.Type.STACK_TAKEN:
 			_apply_stack_taken(battle_log)
+		BattleLog.Type.ACTION_DONE:
+			_apply_action_done(battle_log)
+		_:
+			Verbose.warn("Unknown battle_log type received | " + str(type), Verbose.Category.BATTLE_READER)
 
 # ============================== Logs applied ==============================
 
@@ -119,3 +123,50 @@ func _apply_stack_taken(battle_log: Dictionary) -> void:
 		return
 	var source: Entity = _entity_manager.entities[source_id]
 	source.take_condition_stacks(stack_number, stack_type, false, "TODO")
+
+
+#var data: Dictionary = {
+	#BattleLog.Main.TIME: _get_time(),
+	#BattleLog.Main.TYPE: BattleLog.Type.ACTION_DONE,
+	#BattleLog.Main.ACTION_TYPE: action_type,
+	#BattleLog.Main.ACTION_ID: action_id,
+	#BattleLog.Main.VALUE: value,
+	#BattleLog.Main.CRITICAL: is_critical,
+	#BattleLog.Main.SOURCE: source.id,
+	#BattleLog.Main.TARGET: target.id
+#}
+func _apply_action_done(battle_log: Dictionary) -> void:
+	var source_id: int = battle_log.get(BattleLog.Main.SOURCE, -1)
+	var source: Entity = _entity_manager.get_entity(source_id)
+	if source == null:
+		Verbose.error("_apply_action_done() -> Unknown source")
+		return
+	
+	var target_id: int = battle_log.get(BattleLog.Main.TARGET, -1)
+	var target: Entity = _entity_manager.get_entity(target_id)
+	if target == null:
+		Verbose.error("_apply_action_done() -> Unknown target")
+		return
+	
+	var action_type: Utils.ActionType = battle_log.get(BattleLog.Main.ACTION_TYPE, -1)
+	var action_id: StringName = battle_log.get(BattleLog.Main.ACTION_ID, "Unknown action")
+	var value: float = battle_log.get(BattleLog.Main.VALUE, -1)
+	var is_critical: bool = battle_log.get(BattleLog.Main.CRITICAL, false)
+	
+	source.signal_action_done(target, action_type, action_id, value, is_critical)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

@@ -26,6 +26,7 @@ func _ready() -> void:
 	_fighting_area.damage_taken.connect(_on_fighting_area_damage_taken)
 	_fighting_area.spell_casted.connect(_on_fighting_area_spell_casted)
 	_fighting_area.stack_taken.connect(_on_fighting_area_stack_taken)
+	_fighting_area.action_done.connect(_on_fighting_area_action_done)
 
 # ============================== Public functions ==============================
 
@@ -37,6 +38,7 @@ func get_current_logs() -> Array[Dictionary]:
 
 # ============================== Private functions ==============================
 
+#region logs
 #{"time":0.1, "type":"auto_attack", "source":1, "target":2, "modifier":{"critical":true, "poison":false, "ignite":false, "instability":true}}
 func _log_attack(source: Entity, target: Entity,
 				critical: bool = false, poison: bool = false, ignite: bool = false, instability: bool = false) -> void:
@@ -95,6 +97,29 @@ func _log_stack_taken(source: Entity, stack_type: Utils.StackType, stack_number:
 	_battle_logs.append(data)
 
 
+func _log_action_done(source: Entity, target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
+	if not is_instance_valid(source):
+		Verbose.warn("_log_action_done() -> source invalid", Verbose.Category.BATTLE_WRITER)
+		return
+	
+	if not is_instance_valid(target):
+		Verbose.warn("_log_action_done() -> target invalid", Verbose.Category.BATTLE_WRITER)
+		return
+	
+	var data: Dictionary = {
+		BattleLog.Main.TIME: _get_time(),
+		BattleLog.Main.TYPE: BattleLog.Type.ACTION_DONE,
+		BattleLog.Main.ACTION_TYPE: action_type,
+		BattleLog.Main.ACTION_ID: action_id,
+		BattleLog.Main.VALUE: value,
+		BattleLog.Main.CRITICAL: is_critical,
+		BattleLog.Main.SOURCE: source.id,
+		BattleLog.Main.TARGET: target.id
+	}
+	
+	_battle_logs.append(data)
+#endregion
+
 func _get_time() -> float:
 	if _is_accelerated_fight:
 		return _normal_fight_duration + ((Time.get_ticks_msec() as float) / 1000.0 - _accelerated_fight_start_time)# / GlobalFightingManager.ACCELERATED_FIGHT_TIME_SCALE
@@ -135,3 +160,11 @@ func _on_fighting_area_spell_casted(source: Entity, target: Entity, spell_type: 
 
 func _on_fighting_area_stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: float, is_critical: bool) -> void:
 	_log_stack_taken(source, stack_type, stack_number, is_critical)
+
+
+func _on_interaction_received(entity_ref: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
+	pass
+
+
+func _on_fighting_area_action_done(source: Entity, target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
+	_log_action_done(source, target, action_type, action_id, value, is_critical)

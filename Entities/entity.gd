@@ -17,6 +17,8 @@ signal action_done(entity_ref: Entity, target: Entity, action_type: Utils.Action
 func signal_action_done(target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
 	action_done.emit(self, target, action_type, action_id, value, is_critical)
 	bds_registry.register_action(action_id, action_type, value, is_critical)
+	Verbose.trace("Action done | " + entity_name + " [" + str(id) + "] | " + target.entity_name + " [" + str(target.id) + "] | " + \
+					Utils.ActionType.keys()[action_type] + " | " + action_id + " | " + str(value) + " | " + str(is_critical), Verbose.Category.ENTITY)
 
 signal critical_action_done(entity_ref: Entity, target: Entity, action_type: Utils.ActionType, base_value: float, real_value: float)
 func signal_critical_action_done(target: Entity, action_type: Utils.ActionType, base_value: float, real_value: float) -> void:
@@ -185,3 +187,5 @@ func take_dispell(_value: float, _is_critical: bool, _action_id: StringName, _so
 	printerr("Entity: virtual take_dispell() called [", get_path(), "]")
 	return -1.0
 #endregion
+
+# ============================== Private functions ==============================
