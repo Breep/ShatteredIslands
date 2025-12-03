@@ -83,16 +83,14 @@ func _apply_auto_attack(battle_log: Dictionary) -> void:
 
 #{"time":0.1, "type":"damage_taken", "source":1, "modifier":{"critical":true}}
 func _apply_damage_taken(battle_log: Dictionary) -> void:
-	var source_id: int = battle_log[BattleLog.Main.SOURCE]
-	var damage: int = battle_log [BattleLog.Main.DAMAGE]
-	var damage_type: Utils.DamageType = battle_log[BattleLog.Main.DAMAGE_TYPE]
-	var modifier: Dictionary = battle_log[BattleLog.Main.MODIFIER]
-	#print("[", multiplayer.get_unique_id(), "] BattleReader: Damage taken: ", source_id, ":", damage)
-	if not _entity_manager.entities.has(source_id):
-		Verbose.error("BattleReader: Damage taken: Unknown source !", Verbose.Category.BATTLE_SYNC)
-		return
-	var source: Entity = _entity_manager.entities[source_id]
-	source.take_damage(damage, damage_type, modifier[BattleLog.Modifier.CRITICAL], "TODO")
+	var source_id: int = battle_log.get(BattleLog.Main.SOURCE, -1)
+	var damage: int = battle_log.get(BattleLog.Main.DAMAGE, -1)
+	var damage_type: Utils.DamageType = battle_log.get(BattleLog.Main.DAMAGE_TYPE, Utils.DamageType.PHYSICAL)
+	var modifier: Dictionary = battle_log.get(BattleLog.Main.MODIFIER, {})
+	Verbose.trace("Damage taken: "  + str(source_id) + ":" + str(damage), Verbose.Category.BATTLE_READER)
+	var source: Entity = _entity_manager.get_entity(source_id)
+	if source == null: return
+	source.take_damage(damage, damage_type, modifier.get(BattleLog.Modifier.CRITICAL, false), "TODO")
 
 
 #{"time":0.1, "type":"spell_casted", "source":1, "target":2, "spell_type":<spell_type>}
