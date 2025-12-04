@@ -71,7 +71,7 @@ func _start_new_round() ->void:
 		return
 	
 	_current_round_battles = await RoundManager.get_current_round_battles()
-	_init_current_round_player_id_islands(_current_round_battles.size())
+	await _init_current_round_player_id_islands(_current_round_battles.size())
 	RoundManager.starting_round_player_changes()
 	await PlayerManager.sync_point(PlayerManager.SyncID.ROUND_SETUP)
 	GameManager.update_game_state(Game.GameState.BUYING)
@@ -101,14 +101,26 @@ func _start_fighting_phase() -> void:
 
 # ============================== Random islands functions ==============================
 
-# Automatically sync with MultiplayerSynchronizer
+signal _current_round_player_id_islands_received
 func _init_current_round_player_id_islands(islands_number: int) -> void:
-	if not multiplayer.is_server(): return
-	var alive_players: Array[Player] = PlayerManager.get_alive_players().values().duplicate()
-	for i in islands_number:
-		var random_player: Player = alive_players.pick_random()
-		_current_round_player_id_islands.append(random_player.id)
-		alive_players.erase(random_player)
+	Verbose.trace("_init_current_round_player_id_islands() | " + str(islands_number), Verbose.Category.GAME)
+	if not multiplayer.is_server():
+		if _current_round_player_id_islands.is_empty():
+			await _current_round_player_id_islands_received
+	else:
+		var alive_players: Array[Player] = PlayerManager.get_alive_players().values().duplicate()
+		for i in islands_number:
+			var random_player: Player = alive_players.pick_random()
+			_current_round_player_id_islands.append(random_player.id)
+			alive_players.erase(random_player)
+		_current_round_player_id_islands_sync.rpc(_current_round_player_id_islands)
+	Verbose.trace("_init_current_round_player_id_islands() | " + str(_current_round_player_id_islands), Verbose.Category.GAME)
+
+
+@rpc("authority", "call_remote", "reliable")
+func _current_round_player_id_islands_sync(current_round_player_id_islands: Array[int]) -> void:
+	_current_round_player_id_islands = current_round_player_id_islands
+	_current_round_player_id_islands_received.emit()
 
 # ============================== Spawn functions ==============================
 

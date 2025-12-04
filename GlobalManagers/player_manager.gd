@@ -132,8 +132,8 @@ func add_bot() -> void:
 signal __all_players_syncronized()
 var __all_players_synchronized_for_sync_id: Dictionary[int, bool] # Key=SyncID, Value=<True if all players are synchronized>
 var __number_of_players_syncronized: Dictionary[int, int] # Key=SyncID, Value=<Number of players ready>
-func sync_point(sync_id: int) -> void:
-	Verbose.debug("sync_point() | " + str(sync_id), Verbose.Category.PLAYER_MANAGER)
+func sync_point(sync_id: SyncID) -> void:
+	Verbose.debug("sync_point() | " + str(SyncID.keys()[sync_id]), Verbose.Category.NET)
 	_client_ready.rpc_id(1, sync_id)
 	if not __all_players_synchronized_for_sync_id.has(sync_id) or __all_players_synchronized_for_sync_id[sync_id] == false:
 		await __all_players_syncronized
@@ -143,8 +143,8 @@ func sync_point(sync_id: int) -> void:
 
 
 @rpc("any_peer", "call_local")
-func _client_ready(sync_id) -> void:
-	Verbose.trace("_client_ready() | " + str(sync_id), Verbose.Category.PLAYER_MANAGER)
+func _client_ready(sync_id: SyncID) -> void:
+	Verbose.trace("_client_ready() | " + str(SyncID.keys()[sync_id]), Verbose.Category.NET)
 	if not multiplayer.is_server():
 		return
 	
@@ -158,8 +158,8 @@ func _client_ready(sync_id) -> void:
 
 
 @rpc("authority", "call_local")
-func _all_clients_ready(sync_id: int) -> void:
-	Verbose.trace("_all_clients_ready() | " + str(sync_id), Verbose.Category.PLAYER_MANAGER)
+func _all_clients_ready(sync_id: SyncID) -> void:
+	Verbose.trace("_all_clients_ready() | " + str(SyncID.keys()[sync_id]), Verbose.Category.NET)
 	__all_players_synchronized_for_sync_id[sync_id] = true
 	__all_players_syncronized.emit()
 

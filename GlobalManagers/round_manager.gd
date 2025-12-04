@@ -60,6 +60,7 @@ func clear() -> void:
 
 func get_current_round_battles() -> Array[Battle]:
 	current_round += 1
+	Verbose.trace("get_current_round_battles() | " + str(current_round), Verbose.Category.ROUND_MANAGER)
 	Verbose.debug("Starting a new round: " + str(current_round) + " | Players left: " + str(PlayerManager.get_alive_players().size()), Verbose.Category.ROUND_MANAGER)
 	battle_history[current_round] = BattleHistory.new()
 	battle_history[current_round].round_id = current_round
@@ -70,6 +71,7 @@ func get_current_round_battles() -> Array[Battle]:
 		_ask_current_round_battles.rpc_id(1, multiplayer.get_unique_id())
 		await _server_answered
 	
+	Verbose.trace("get_current_round_battles() | " + str(current_round) + " | " + str(battles.values()), Verbose.Category.ROUND_MANAGER)
 	return battles.values()
 
 

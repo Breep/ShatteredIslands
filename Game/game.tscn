@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://oimyi4iueoda"]
+[gd_scene load_steps=12 format=3 uid="uid://oimyi4iueoda"]
 
 [ext_resource type="Script" uid="uid://blljr68c4u466" path="res://Game/game.gd" id="1_7r6pw"]
 [ext_resource type="Material" uid="uid://2wlal7g5718r" path="res://VFX/Shaders/Sky/stylized_shader_night.tres" id="2_kul4i"]
@@ -27,11 +27,6 @@ fog_light_color = Color(0.175414, 0.565791, 0.908127, 1)
 fog_light_energy = 0.05
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.0
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_7gi1t"]
-properties/0/path = NodePath(".:_current_round_player_id_islands")
-properties/0/spawn = true
-properties/0/replication_mode = 2
 
 [node name="Game" type="Node3D" node_paths=PackedStringArray("_buying_island", "_scene_switcher", "_hero_selector", "_node_fighting_islands", "_node_characters", "_islands_spawn_points")]
 script = ExtResource("1_7r6pw")
@@ -163,9 +158,6 @@ mouse_filter = 2
 
 [node name="UIGame" parent="UI" instance=ExtResource("9_kul4i")]
 layout_mode = 1
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_7gi1t")
 
 [node name="BuyingAreaTimer" type="Timer" parent="."]
 unique_name_in_owner = true
