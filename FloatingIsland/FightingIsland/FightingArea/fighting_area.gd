@@ -67,6 +67,7 @@ func _ready() -> void:
 # Spawn all characters on the FightingArea according to the battle
 # Connect all characters to this FightingArea
 func start_fight(characters: Array[Character], battle_type: Battle.BattleType, battle_id: int = -1) -> void:
+	Verbose.debug("Starting a fight | " + str(Battle.BattleType.keys()[battle_type]) + " | " + str(characters.size()) + " | " + str(battle_id), Verbose.Category.FIGHTING_AREA)
 	var character_spawner: CharacterSpawner = _set_fighting_floor(battle_type)
 	if character_spawner == null:
 		printerr("FightingArea: No CharacterSpawner for this battle type: ", battle_type)

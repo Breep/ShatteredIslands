@@ -21,6 +21,7 @@ enum Category {
 	ROUND_MANAGER,
 	PLAYER_MANAGER,
 	GLOBAL_FIGHTING_MANAGER,
+	CHARACTER_SPAWNER,
 	CARD_SHOP,
 	ORACLE_SHOP,
 	AI,
@@ -36,6 +37,7 @@ enum Category {
 	BATTLE_READER,
 	BATTLE_WRITER,
 	ENTITY_MANAGER,
+	FIGHTING_AREA,
 }
 
 const CATEGORY_PREFIX_TEMPLATES : Dictionary [Category, String] = {
@@ -59,7 +61,9 @@ const CATEGORY_PREFIX_TEMPLATES : Dictionary [Category, String] = {
 	Category.BATTLE_SYNC:             "(BATTLESYNC) ",
 	Category.BATTLE_READER:           "(BATTLEREAD) ",
 	Category.BATTLE_WRITER:           "(BATTLEWRIT) ",
-	Category.ENTITY_MANAGER:          "(ENTITY_MAN) "
+	Category.ENTITY_MANAGER:          "(ENTITY_MAN) ",
+	Category.CHARACTER_SPAWNER:       "(CHAR_SPAWN) ",
+	Category.FIGHTING_AREA:           "(FIGHT_AREA) ",
 }
 
 const PREFIX_TEMPLATES : Dictionary [GameType, String] = {
@@ -105,6 +109,8 @@ var current_categories_level: Dictionary[Category, Level] = {
 	Category.BATTLE_READER:           Level.WARN,
 	Category.BATTLE_WRITER:           Level.WARN,
 	Category.ENTITY_MANAGER:          Level.WARN,
+	Category.CHARACTER_SPAWNER:       Level.TRACE,
+	Category.FIGHTING_AREA:           Level.TRACE,
 }
 #endregion
 

@@ -20,6 +20,7 @@ func _ready() -> void:
 
 # Reparent characters into the node_to_spawn_into node and teleport them on the FightingArea
 func spawn_characters(characters: Array[Character], node_to_spawn_into: Node3D) -> void:
+	Verbose.debug("Spawning Characters | " + str(characters.size()), Verbose.Category.CHARACTER_SPAWNER)
 	var _available_spawn_points: Array[SpawnPoint] = _spawn_points.duplicate()
 	for character in characters:
 		_spawn_character(character, _available_spawn_points, node_to_spawn_into)
@@ -29,7 +30,7 @@ func spawn_characters(characters: Array[Character], node_to_spawn_into: Node3D) 
 # spawn an already instatiated character on the _entities_node at a spawn location available
 func _spawn_character(character: Character, available_spawn_locations: Array[SpawnPoint], node_to_spawn_into: Node3D) -> bool:
 	if character == null:
-		printerr("SpawnManager: Trying to spawn a <null> Character")
+		Verbose.error("Trying to spawn a <null> Character", Verbose.Category.CHARACTER_SPAWNER)
 		return false
 	
 	for spawn_point in available_spawn_locations:
@@ -40,5 +41,5 @@ func _spawn_character(character: Character, available_spawn_locations: Array[Spa
 			available_spawn_locations.erase(spawn_point)
 			return true
 	
-	printerr("SpawnManager: No more available spawn point for ", character.name, " [Team#", character.team, "]")
+	Verbose.error("No more available spawn point for " + character.name + " [Team#" + str(character.team) + "]", Verbose.Category.CHARACTER_SPAWNER)
 	return false 

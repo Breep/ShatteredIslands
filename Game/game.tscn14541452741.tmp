@@ -1,0 +1,169 @@
+[gd_scene load_steps=12 format=3 uid="uid://oimyi4iueoda"]
+
+[ext_resource type="Script" uid="uid://blljr68c4u466" path="res://Game/game.gd" id="1_7r6pw"]
+[ext_resource type="Material" uid="uid://2wlal7g5718r" path="res://VFX/Shaders/Sky/stylized_shader_night.tres" id="2_kul4i"]
+[ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Tool/SpawnPoint/spawn_point.tscn" id="3_i1e5p"]
+[ext_resource type="PackedScene" uid="uid://di34xfy5cli15" path="res://Tool/Cameras/FreeFly/free_fly_camera.tscn" id="3_t03ty"]
+[ext_resource type="PackedScene" uid="uid://bbn7yt4y0lu6q" path="res://Game/SceneSwitcher/scene_switcher.tscn" id="3_vifcx"]
+[ext_resource type="PackedScene" uid="uid://drcuyohos0doa" path="res://FloatingIsland/FightingIsland/fighting_island.tscn" id="5_vifcx"]
+[ext_resource type="PackedScene" uid="uid://7u3ksm0e4v61" path="res://FloatingIsland/BuyingIsland/buying_island.tscn" id="6_flgk0"]
+[ext_resource type="PackedScene" uid="uid://cbd5jq0bp7fef" path="res://Game/HeroSelector/HeroSelector.tscn" id="8_xfil1"]
+[ext_resource type="PackedScene" uid="uid://dv3kwc5eeyuk2" path="res://UI/InGame/Game/ui_game.tscn" id="9_kul4i"]
+
+[sub_resource type="Sky" id="Sky_7gi1t"]
+sky_material = ExtResource("2_kul4i")
+
+[sub_resource type="Environment" id="Environment_flgk0"]
+background_mode = 2
+sky = SubResource("Sky_7gi1t")
+ambient_light_source = 2
+ambient_light_color = Color(0.45098, 0.333333, 0.309804, 1)
+ambient_light_energy = 0.5
+tonemap_mode = 2
+sdfgi_enabled = true
+glow_enabled = true
+glow_bloom = 0.2
+fog_light_color = Color(0.175414, 0.565791, 0.908127, 1)
+fog_light_energy = 0.05
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+
+[node name="Game" type="Node3D" node_paths=PackedStringArray("_buying_island", "_scene_switcher", "_hero_selector", "_node_fighting_islands", "_node_characters", "_islands_spawn_points")]
+script = ExtResource("1_7r6pw")
+_buying_island = NodePath("BuyingIsland")
+_scene_switcher = NodePath("SceneSwitcher")
+_hero_selector = NodePath("HeroSelector")
+_node_fighting_islands = NodePath("FightingIslands")
+_node_characters = NodePath("Characters")
+_islands_spawn_points = [NodePath("IslandSpawns/CenterPoint1/SpawnPoint1"), NodePath("IslandSpawns/CenterPoint2/SpawnPoint2"), NodePath("IslandSpawns/CenterPoint3/SpawnPoint3"), NodePath("IslandSpawns/CenterPoint4/SpawnPoint4"), NodePath("IslandSpawns/CenterPoint5/SpawnPoint5"), NodePath("IslandSpawns/CenterPoint6/SpawnPoint6"), NodePath("IslandSpawns/CenterPoint7/SpawnPoint7"), NodePath("IslandSpawns/CenterPoint8/SpawnPoint8")]
+
+[node name="Light" type="Node3D" parent="."]
+transform = Transform3D(0.471889, 0, 0.881658, -0.0862491, 0.995204, 0.0461631, -0.877429, -0.0978261, 0.469626, 0, 0, 0)
+
+[node name="WorldEnvironment2" type="WorldEnvironment" parent="Light"]
+environment = SubResource("Environment_flgk0")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Light"]
+transform = Transform3D(0.56736183, -0.15311082, -0.8091092, 0.44820377, 0.88168746, 0.14744337, 0.6908067, -0.44629964, 0.56886053, -25.012697, 36.497246, 17.776993)
+shadow_enabled = true
+
+[node name="Secondary" type="Node3D" parent="Light"]
+
+[node name="BuyingIsland" parent="." instance=ExtResource("6_flgk0")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -29.8858, 0)
+
+[node name="IslandSpawns" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="CenterPoint1" type="Node3D" parent="IslandSpawns"]
+
+[node name="SpawnPoint1" parent="IslandSpawns/CenterPoint1" instance=ExtResource("3_i1e5p")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100, 0, 0)
+
+[node name="FightingIsland" parent="IslandSpawns/CenterPoint1/SpawnPoint1" instance=ExtResource("5_vifcx")]
+
+[node name="CenterPoint2" type="Node3D" parent="IslandSpawns"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0)
+
+[node name="SpawnPoint2" parent="IslandSpawns/CenterPoint2" instance=ExtResource("3_i1e5p")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100, 20, 0)
+
+[node name="FightingIsland" parent="IslandSpawns/CenterPoint2/SpawnPoint2" instance=ExtResource("5_vifcx")]
+
+[node name="CenterPoint3" type="Node3D" parent="IslandSpawns"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="SpawnPoint3" parent="IslandSpawns/CenterPoint3" instance=ExtResource("3_i1e5p")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100, 0, 0)
+
+[node name="FightingIsland" parent="IslandSpawns/CenterPoint3/SpawnPoint3" instance=ExtResource("5_vifcx")]
+
+[node name="CenterPoint4" type="Node3D" parent="IslandSpawns"]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 0, 0, 0)
+
+[node name="SpawnPoint4" parent="IslandSpawns/CenterPoint4" instance=ExtResource("3_i1e5p")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100, -20, 0)
+
+[node name="FightingIsland" parent="IslandSpawns/CenterPoint4/SpawnPoint4" instance=ExtResource("5_vifcx")]
+
+[node name="CenterPoint5" type="Node3D" parent="IslandSpawns"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="SpawnPoint5" parent="IslandSpawns/CenterPoint5" instance=ExtResource("3_i1e5p")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100, 0, 0)
+
+[node name="FightingIsland" parent="IslandSpawns/CenterPoint5/SpawnPoint5" instance=ExtResource("5_vifcx")]
+
+[node name="CenterPoint6" type="Node3D" parent="IslandSpawns"]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 0, 0, 0)
+
+[node name="SpawnPoint6" parent="IslandSpawns/CenterPoint6" instance=ExtResource("3_i1e5p")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100, 20, 0)
+
+[node name="FightingIsland" parent="IslandSpawns/CenterPoint6/SpawnPoint6" instance=ExtResource("5_vifcx")]
+
+[node name="CenterPoint7" type="Node3D" parent="IslandSpawns"]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0)
+
+[node name="SpawnPoint7" parent="IslandSpawns/CenterPoint7" instance=ExtResource("3_i1e5p")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100, 0, 0)
+
+[node name="FightingIsland" parent="IslandSpawns/CenterPoint7/SpawnPoint7" instance=ExtResource("5_vifcx")]
+
+[node name="CenterPoint8" type="Node3D" parent="IslandSpawns"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0, 0)
+
+[node name="SpawnPoint8" parent="IslandSpawns/CenterPoint8" instance=ExtResource("3_i1e5p")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100, -20, 0)
+
+[node name="FightingIsland" parent="IslandSpawns/CenterPoint8/SpawnPoint8" instance=ExtResource("5_vifcx")]
+
+[node name="FreeFlyCamera" parent="." instance=ExtResource("3_t03ty")]
+transform = Transform3D(0.899588, -0.308751, 0.308891, 0, 0.707267, 0.706946, -0.436739, -0.635961, 0.636249, 0.0513108, 8.01942, 3.7451)
+fov = 35.0
+
+[node name="FightingAreaSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://drcuyohos0doa")
+spawn_path = NodePath("../FightingIslands")
+
+[node name="CharacterSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://bbnioyc6ti8wn")
+spawn_path = NodePath("../Characters")
+
+[node name="FightingIslands" type="Node3D" parent="."]
+
+[node name="Characters" type="Node3D" parent="."]
+
+[node name="SceneSwitcher" parent="." node_paths=PackedStringArray("buying_island") instance=ExtResource("3_vifcx")]
+buying_island = NodePath("../BuyingIsland")
+
+[node name="HeroSelector" parent="." node_paths=PackedStringArray("_ui_hero_picking_screen") instance=ExtResource("8_xfil1")]
+_ui_hero_picking_screen = NodePath("../UI/UIGame/HeroPickingScreen")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Tooltips" type="Control" parent="UI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="UIGame" parent="UI" instance=ExtResource("9_kul4i")]
+layout_mode = 1
+
+[node name="BuyingAreaTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 20.0
+one_shot = true
+
+[connection signal="timeout" from="BuyingAreaTimer" to="." method="_on_buying_area_timer_timeout"]
+
+[editable path="UI/UIGame"]
