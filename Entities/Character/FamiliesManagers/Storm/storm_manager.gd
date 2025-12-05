@@ -64,6 +64,9 @@ var _lightning_spam_timer: Timer
 # [LIGHTNING FOOTWORK]
 var _lightning_footwork_current_bonus: float = 0.0
 
+# [EYE OF THE CYCLONE]
+var _eye_of_the_cyclone_accumulated_bonus: float = 0.0
+
 # [THUNDER BERSERKER]
 
 # [THUNDER BERSERKER]
@@ -93,6 +96,8 @@ func start() -> void:
 	# [THUNDER BERSERKER]
 	_thunder_berserker_penalty_active = false
 	_thunder_berserker_accumulated_penalty = 0.0
+	# [EYE OF THE CYCLONE]
+	_eye_of_the_cyclone_accumulated_bonus = 0.0
 
 func stop() -> void:
 	if _lightning_spam_timer:
@@ -307,6 +312,22 @@ func _apply_dynamo_effect() -> void:
 	var final_shield: float = base_shield * rank_mult
 	if final_shield > 0:
 		_owner.inflict_condition_stacks(_owner, final_shield, Utils.StackType.ARMOR, "Dynamo")
+		
+# [EYE OF THE CYCLONE]
+func _apply_eye_of_the_cyclone_effect() -> void:
+	var max_hp_bonus: float = _owner.base_stats.health_max * (_storm_stats.eye_of_the_cyclone_max_hp_percent / 100.0)
+	_eye_of_the_cyclone_accumulated_bonus += max_hp_bonus
+	
+	var mod := StatModifier.new()
+	mod.id = "Eye of the Cyclone"
+	mod.stat_type = EntityStats.StatType.HEALTH_MAX
+	mod.calc_type = StatModifier.CalcType.ADD
+	mod.value = _eye_of_the_cyclone_accumulated_bonus
+	mod.tags = [StatModifier.TagType.CARD]
+	_owner.stats_manager.register_modifier(mod)
+	
+	_owner.heal(_owner, max_hp_bonus, "Eye of the Cyclone")
+
 #endregion
 
 
@@ -368,9 +389,11 @@ func _on_current_rank_changed() -> void:
 			# [THUNDER STORM]
 			if _storm_stats.thunder_storm_activated:
 				duration += _storm_stats.thunder_storm_duration_bonus
-			# [QUICKCHARGE]
-			if _storm_stats.quickcharge_activated:
-				duration += _storm_stats.quickcharge_duration_bonus
+				
+			# [EYE OF THE CYCLONE]
+			if _storm_stats.eye_of_the_cyclone_activated:
+				_apply_eye_of_the_cyclone_effect()
+
 			_rank_s_duration_timer.wait_time = duration
 			_rank_s_duration_timer.start()
 			_lightning_spam_timer.start()
@@ -398,7 +421,13 @@ func _on_owner_critical_action_done(_entity_ref: Entity, _target: Entity, _actio
 
 	# [RANK]
 	if _current_rank != Rank.S:
-		_current_point += _get_crit_point(base_value, real_value)
+		var points_gained: float = _get_crit_point(base_value, real_value)
+		
+		# [QUICKCHARGE]
+		if _storm_stats.quickcharge_activated:
+			points_gained *= (1.0 + _storm_stats.quickcharge_grind_percent / 100.0)
+			
+		_current_point += points_gained
 		
 		if _current_point >= RANK_POINT_TRESHOLDS[Rank.S]: _current_rank = Rank.S
 		elif _current_point >= RANK_POINT_TRESHOLDS[Rank.A]: _current_rank = Rank.A

@@ -1,7 +1,7 @@
 class_name StormQuickcharge
 extends CharacterUpgrade
 
-@export var _base_duration_bonus: Array[float]
+@export var _base_grind_percent: Array[float]
 @export var _rarity: Card.Rarity = Card.Rarity.COMMON
 
 func apply(stats: FamiliesStats, cardlvl: int) -> void:
@@ -10,7 +10,7 @@ func apply(stats: FamiliesStats, cardlvl: int) -> void:
 		return
 	
 	stats.storm.quickcharge_activated = true
-	stats.storm.quickcharge_duration_bonus = _base_duration_bonus[cardlvl - 1]
+	stats.storm.quickcharge_grind_percent = _base_grind_percent[cardlvl - 1]
 
 
 func get_description(cardlvl: int) -> String:
@@ -18,4 +18,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Quickcharge: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "Increase Rank S duration by " + str(_base_duration_bonus[cardlvl - 1]) + " sec"
+	return "Increase rank grind by " + str(_base_grind_percent[cardlvl - 1]) + "%"

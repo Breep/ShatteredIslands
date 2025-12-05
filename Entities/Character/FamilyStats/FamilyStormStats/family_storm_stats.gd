@@ -16,7 +16,16 @@ var lightning_footwork_dodge_increase: float
 
 # [QUICKCHARGE]
 var quickcharge_activated: bool
-var quickcharge_duration_bonus: float
+var quickcharge_grind_percent: float
+
+# [LIGHTNING ROD]
+var lightning_rod_activated: bool
+var lightning_rod_reduction: float
+var lightning_rod_hp_threshold: float
+
+# [EYE OF THE CYCLONE]
+var eye_of_the_cyclone_activated: bool
+var eye_of_the_cyclone_max_hp_percent: float
 
 # [STORM BREAKER]
 var storm_breaker_activated: bool
