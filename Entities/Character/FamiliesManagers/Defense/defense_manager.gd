@@ -104,11 +104,19 @@ func get_reduced_damage_taken_from_armor(damage: float, damage_type: Utils.Damag
 	var damage_reduction = min(damage, _owner.stats.armor_stacks)
 	var damage_reduced = damage - damage_reduction
 	
-	# On réduit l'armure
-	_owner.stats.armor_stacks -= damage_reduction
-		
-	# Logique des cartes sur perte d'armure
-	_reflecto_belt_effect(damage_reduction)
+	# [ABSORPTION MATRIX]
+	var consume_armor = true
+	if _defense_stats.absorption_matrix_activated:
+		if Utils.is_randomize_modifier_active(_defense_stats.absorption_matrix_chance):
+			consume_armor = false
+			# Potential feedback here
+	
+	if consume_armor:
+		# On réduit l'armure
+		_owner.stats.armor_stacks -= damage_reduction
+			
+		# Logique des cartes sur perte d'armure
+		_reflecto_belt_effect(damage_reduction)
 	
 	return damage_reduced
 

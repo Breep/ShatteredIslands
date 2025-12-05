@@ -61,6 +61,10 @@ var shield_throw_threshold: float
 var shield_throw_damage: float
 var shield_throw_return_shield: float
 
+# [ABSORPTION MATRIX]
+var absorption_matrix_activated: bool
+var absorption_matrix_chance: float
+
 #endregion
 
 #region Epic Card
