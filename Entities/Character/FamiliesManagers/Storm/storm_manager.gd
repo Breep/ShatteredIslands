@@ -300,7 +300,7 @@ func _apply_eye_of_the_cyclone_effect() -> void:
 	mod.calc_type = StatModifier.CalcType.ADD
 	mod.value = _eye_of_the_cyclone_accumulated_bonus
 	mod.tags = [StatModifier.TagType.CARD]
-	_owner.stats_manager.register_modifier(mod)
+	_owner.stats_manager.update_modifier(mod)
 	
 	_owner.heal(_owner, max_hp_bonus, "Eye of the Cyclone")
 
