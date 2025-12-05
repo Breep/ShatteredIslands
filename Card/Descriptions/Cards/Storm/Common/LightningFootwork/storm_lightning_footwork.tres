@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Card" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://Card/Templates/card.gd" id="1_template"]
+[ext_resource type="Script" path="res://Card/Descriptions/Cards/Storm/Common/LightningFootwork/storm_lightning_footwork.gd" id="2_script"]
+
+[sub_resource type="Resource" id="Resource_upgrade"]
+script = ExtResource("2_script")
+_base_dodge_increase = Array[float]([4.0, 6.0, 8.0, 10.0, 15.0])
+_rarity = 0
+
+[resource]
+script = ExtResource("1_template")
+name = "Lightning Footwork"
+family = 4
+player_upgrade = SubResource("Resource_upgrade")

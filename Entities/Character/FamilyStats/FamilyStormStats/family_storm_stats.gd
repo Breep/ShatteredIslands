@@ -10,6 +10,10 @@ var faraday_crit_chance_boost: float
 var violent_overload_activated: bool
 var violent_overload_crit_mult_boost: float
 
+# [LIGHTNING FOOTWORK]
+var lightning_footwork_activated: bool
+var lightning_footwork_dodge_increase: float
+
 # [STORM BREAKER]
 var storm_breaker_activated: bool
 var storm_breaker_base_reduction_percent: float

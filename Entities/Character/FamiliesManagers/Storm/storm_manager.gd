@@ -61,6 +61,11 @@ var _current_point: float = 0.0
 var _storm_breaker_memory: Dictionary = {}
 var _lightning_spam_timer: Timer
 
+# [LIGHTNING FOOTWORK]
+var _lightning_footwork_current_bonus: float = 0.0
+
+# [THUNDER BERSERKER]
+
 # [THUNDER BERSERKER]
 var _thunder_berserker_penalty_active: bool = false
 var _thunder_berserker_accumulated_penalty: float = 0.0
@@ -81,6 +86,7 @@ func start() -> void:
 	for timer in _optional_timers:
 		timer.start()
 	_add_stat_modifiers()
+	_add_action_modifiers()
 	_storm_breaker_memory.clear()
 	_current_point = 0
 	_current_rank = Rank.D
@@ -155,6 +161,16 @@ func _add_stat_modifiers() -> void:
 			mod.tags = [StatModifier.TagType.CARD]
 			mod.value = _storm_stats.violent_overload_crit_mult_boost
 			_owner.stats_manager.register_modifier(mod)
+
+	# [LIGHTNING FOOTWORK]
+	if _storm_stats.lightning_footwork_activated:
+		var mod := StatModifier.new()
+		mod.id = "Lightning Footwork"
+		mod.stat_type = EntityStats.StatType.DODGE
+		mod.calc_type = StatModifier.CalcType.ADD
+		mod.value = _lightning_footwork_current_bonus
+		mod.tags = [StatModifier.TagType.CARD]
+		_owner.stats_manager.register_modifier(mod)
 		
 	#var current_lvl: int = _storm_stats.level 
 	#current_lvl = clamp(current_lvl, 0, GLOBAL_CRIT_CHANCE_BOOSTS.size() - 1)
@@ -178,6 +194,20 @@ func _add_stat_modifiers() -> void:
 		#crit_multiplier_boost.value = GLOBAL_CRIT_MULTIPLIER_BOOSTS[current_lvl]
 		#_owner.stats_manager.update_modifier(crit_multiplier_boost)
 		
+#endregion
+
+#region action modifier
+
+func _add_action_modifiers() -> void:
+	# [LIGHTNING FOOTWORK]
+	if _storm_stats.lightning_footwork_activated:
+		var action_modifier := ActionModifier.new()
+		action_modifier.action_type = ActionModifier.ActionType.DODGE
+		action_modifier.id = "Lightning Footwork"
+		action_modifier.is_one_time_effect = false
+		action_modifier.after_action_logic_callback = _on_dodge_lightning_footwork
+		_owner.action_modifiers_manager.register_modifier(action_modifier)
+
 #endregion
 
 #region actions logic
@@ -242,6 +272,21 @@ func _apply_thunder_berserker_penalty() -> void:
 	mod.stat_type = EntityStats.StatType.CRIT_MULT
 	mod.calc_type = StatModifier.CalcType.ADD
 	mod.value = - (_thunder_berserker_accumulated_penalty)
+	mod.tags = [StatModifier.TagType.CARD]
+	var mod := StatModifier.new()
+	mod.id = "Thunder Berserker Penalty"
+	mod.stat_type = EntityStats.StatType.CRIT_MULT
+	mod.calc_type = StatModifier.CalcType.ADD
+	mod.value = - (_thunder_berserker_accumulated_penalty)
+	mod.tags = [StatModifier.TagType.CARD]
+	_owner.stats_manager.update_modifier(mod)
+
+func _update_lightning_footwork_modifier() -> void:
+	var mod := StatModifier.new()
+	mod.id = "Lightning Footwork"
+	mod.stat_type = EntityStats.StatType.DODGE
+	mod.calc_type = StatModifier.CalcType.ADD
+	mod.value = _lightning_footwork_current_bonus
 	mod.tags = [StatModifier.TagType.CARD]
 	_owner.stats_manager.update_modifier(mod)
 
@@ -342,6 +387,12 @@ func _on_owner_critical_action_done(_entity_ref: Entity, _target: Entity, _actio
 		var chance: float = _storm_stats.chain_lightning_chance_percent
 		if Utils.is_randomize_modifier_active(chance):
 			_apply_chain_lightning_effect(_target, real_value)
+			
+	# [LIGHTNING FOOTWORK]
+	if _storm_stats.lightning_footwork_activated:
+		_lightning_footwork_current_bonus += _storm_stats.lightning_footwork_dodge_increase
+		_update_lightning_footwork_modifier()
+
 	# [RANK]
 	if _current_rank != Rank.S:
 		_current_point += _get_crit_point(base_value, real_value)
@@ -353,5 +404,11 @@ func _on_owner_critical_action_done(_entity_ref: Entity, _target: Entity, _actio
 			
 func _on_thunder_berserker_timeout() -> void:
 	_thunder_berserker_penalty_active = true
-	
+
+func _on_dodge_lightning_footwork(_cb_vars: Dictionary) -> void:
+	# [LIGHTNING FOOTWORK]
+	_lightning_footwork_current_bonus = 0.0
+	_update_lightning_footwork_modifier()
+
+
 #endregion
