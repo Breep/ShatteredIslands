@@ -232,6 +232,11 @@ func _call_the_lightning() -> void:
 	var final_percent: float = base_percent * rank_mult
 	var damage: float = _owner.stats.attack_damage * final_percent / 100.0
 	_owner.cast_spell(target, Spell.Type.LIGHTNING, {Spell.LightningModifier.DAMAGE: damage})
+	
+	# [ELECTROCUTE]
+	if _storm_stats.electrocute_activated:
+		if Utils.is_randomize_modifier_active(_storm_stats.electrocute_chance):
+			_owner.inflict_condition_stacks(target, _storm_stats.electrocute_necrosis_amount, Utils.StackType.NECROSIS, "Electrocute")
 
 # [STORM BREAKER]
 func _apply_storm_breaker_effect() -> void:

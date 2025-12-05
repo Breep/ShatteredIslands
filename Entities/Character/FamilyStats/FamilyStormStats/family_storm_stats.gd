@@ -14,6 +14,11 @@ var violent_overload_crit_mult_boost: float
 var lightning_footwork_activated: bool
 var lightning_footwork_dodge_increase: float
 
+# [ELECTROCUTE]
+var electrocute_activated: bool
+var electrocute_chance: float
+var electrocute_necrosis_amount: float
+
 # [QUICKCHARGE]
 var quickcharge_activated: bool
 var quickcharge_grind_percent: float
