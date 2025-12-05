@@ -14,6 +14,10 @@ var violent_overload_crit_mult_boost: float
 var lightning_footwork_activated: bool
 var lightning_footwork_dodge_increase: float
 
+# [QUICKCHARGE]
+var quickcharge_activated: bool
+var quickcharge_duration_bonus: float
+
 # [STORM BREAKER]
 var storm_breaker_activated: bool
 var storm_breaker_base_reduction_percent: float

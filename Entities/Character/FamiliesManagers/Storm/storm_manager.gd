@@ -368,6 +368,9 @@ func _on_current_rank_changed() -> void:
 			# [THUNDER STORM]
 			if _storm_stats.thunder_storm_activated:
 				duration += _storm_stats.thunder_storm_duration_bonus
+			# [QUICKCHARGE]
+			if _storm_stats.quickcharge_activated:
+				duration += _storm_stats.quickcharge_duration_bonus
 			_rank_s_duration_timer.wait_time = duration
 			_rank_s_duration_timer.start()
 			_lightning_spam_timer.start()
