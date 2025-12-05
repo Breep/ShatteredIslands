@@ -2,10 +2,13 @@ class_name FamilyStormStats
 extends FamilyStats
 
 #region Common Card
+# [FARADAY]
+var faraday_activated: bool
+var faraday_crit_chance_boost: float
 
 # [STORM BREAKER]
 var storm_breaker_activated: bool
-var storm_breaker_base_reduction_percent: float 
+var storm_breaker_base_reduction_percent: float
 
 # [STORM BATTERY]
 var storm_battery_activated: bool
@@ -14,15 +17,18 @@ var storm_battery_mana_gain: float
 #endregion
 
 #region Rare Card
-
+# [DYNAMO]
+var dynamo_activated: bool
+var dynamo_regen: float
+var dynamo_shield: float
 #endregion
 
 #region Epic Card
 # [THUNDER BERSERKER]
 var thunder_berserker_activated: bool
-var thunder_berserker_start_boost: float     
-var thunder_berserker_delay: float        
-var thunder_berserker_penalty_per_rank: float 
+var thunder_berserker_start_boost: float
+var thunder_berserker_delay: float
+var thunder_berserker_penalty_per_rank: float
 
 # [CHAIN LIGHTNING]
 var chain_lightning_activated: bool

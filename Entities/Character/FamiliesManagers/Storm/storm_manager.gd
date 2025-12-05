@@ -110,7 +110,7 @@ func _create_optional_timers() -> void:
 		tb_timer.wait_time = _storm_stats.thunder_berserker_delay
 		tb_timer.one_shot = true
 		tb_timer.timeout.connect(_on_thunder_berserker_timeout)
-		add_child(tb_timer) 
+		add_child(tb_timer)
 		_optional_timers.append(tb_timer)
 
 func _clear_optional_timers() -> void:
@@ -131,6 +131,18 @@ func _add_stat_modifiers() -> void:
 		mod.value = _storm_stats.thunder_berserker_start_boost
 		mod.tags = [StatModifier.TagType.CARD]
 		_owner.stats_manager.register_modifier(mod)
+		
+	# [FARADAY]
+	if _storm_stats.faraday_activated:
+		for action_type in Utils.get_all_actions():
+			var mod := StatModifier.new()
+			mod.stat_type = EntityStats.StatType.CRIT_CHANCE
+			mod.action_type = action_type
+			mod.calc_type = StatModifier.CalcType.ADD
+			mod.id = "Faraday"
+			mod.tags = [StatModifier.TagType.CARD]
+			mod.value = _storm_stats.faraday_crit_chance_boost
+			_owner.stats_manager.register_modifier(mod)
 		
 	#var current_lvl: int = _storm_stats.level 
 	#current_lvl = clamp(current_lvl, 0, GLOBAL_CRIT_CHANCE_BOOSTS.size() - 1)
@@ -172,7 +184,7 @@ func _call_the_lightning() -> void:
 	var rank_mult: float = RANK_VALUE_MULTIPLIERS.get(_current_rank, 1.0)
 	var final_percent: float = base_percent * rank_mult
 	var damage: float = _owner.stats.attack_damage * final_percent / 100.0
-	_owner.cast_spell(target, Spell.Type.LIGHTNING, { Spell.LightningModifier.DAMAGE: damage })
+	_owner.cast_spell(target, Spell.Type.LIGHTNING, {Spell.LightningModifier.DAMAGE: damage})
 
 # [STORM BREAKER]
 func _apply_storm_breaker_effect() -> void:
@@ -216,10 +228,28 @@ func _apply_thunder_berserker_penalty() -> void:
 	var mod := StatModifier.new()
 	mod.id = "Thunder Berserker Penalty"
 	mod.stat_type = EntityStats.StatType.CRIT_MULT
-	mod.calc_type = StatModifier.CalcType.ADD 
-	mod.value = -(_thunder_berserker_accumulated_penalty)
+	mod.calc_type = StatModifier.CalcType.ADD
+	mod.value = - (_thunder_berserker_accumulated_penalty)
 	mod.tags = [StatModifier.TagType.CARD]
 	_owner.stats_manager.update_modifier(mod)
+
+# [DYNAMO]
+func _apply_dynamo_effect() -> void:
+	if _owner == null or not is_instance_valid(_owner): return
+	
+	var rank_mult: float = RANK_VALUE_MULTIPLIERS.get(_current_rank, 1.0)
+	
+	# Regen
+	var base_regen: float = _storm_stats.dynamo_regen
+	var final_regen: float = base_regen * rank_mult
+	if final_regen > 0:
+		_owner.inflict_condition_stacks(_owner, final_regen, Utils.StackType.REGEN, "Dynamo")
+		
+	# Shield
+	var base_shield: float = _storm_stats.dynamo_shield
+	var final_shield: float = base_shield * rank_mult
+	if final_shield > 0:
+		_owner.inflict_condition_stacks(_owner, final_shield, Utils.StackType.ARMOR, "Dynamo")
 #endregion
 
 
@@ -245,7 +275,7 @@ func _apply_chain_lightning_effect(hit_victim: Entity, original_damage: float) -
 	if furthest_enemy == null:
 		return
 	var distance: float = sqrt(max_dist_sq)
-	distance = min(distance, 50.0) 
+	distance = min(distance, 50.0)
 	var factor: float = _storm_stats.chain_lightning_dist_factor
 	var damage_multiplier: float = (factor * distance) / 100.0
 	var final_damage: float = original_damage * damage_multiplier
@@ -255,7 +285,7 @@ func _apply_chain_lightning_effect(hit_victim: Entity, original_damage: float) -
 		Spell.ChainLightningModifier.BOUNCE_COUNT: 3, # Par exemple
 		Spell.ChainLightningModifier.BOUNCE_RANGE: 150.0,
 		Spell.ChainLightningModifier.DAMAGE_DECAY_PERCENT: 10.0,
-		"start_position": victim_pos 
+		"start_position": victim_pos
 	}
 	_owner.cast_spell(furthest_enemy, Spell.Type.CHAIN_LIGHTNING, spell_modifiers)
 	
@@ -269,6 +299,9 @@ func _on_current_rank_changed() -> void:
 	# [STORM BATTERY]
 	if _storm_stats.storm_battery_activated:
 		_apply_storm_battery_effect()
+	# [DYNAMO]
+	if _storm_stats.dynamo_activated:
+		_apply_dynamo_effect()
 	# [THUNDER BERSERKER] (Pénalité sur Grind)
 	if _storm_stats.thunder_berserker_activated and _thunder_berserker_penalty_active:
 		_apply_thunder_berserker_penalty()
