@@ -46,6 +46,10 @@ var protective_dome_armor_percent: float
 var avengers_assemble_activated: bool
 var avengers_assemble_crit_chance: float
 
+# [TOXIC FILTRATION LAYER]
+var toxic_filtration_layer_activated: bool
+var toxic_filtration_layer_efficiency: float
+
 #endregion
 
 #region Rare Card

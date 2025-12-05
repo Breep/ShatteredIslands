@@ -6,8 +6,8 @@
 
 [sub_resource type="Resource" id="Resource_ij4m6"]
 script = ExtResource("2_aldef")
-_poison_stacks = Array[int]([30, 10, 15, 20, 25])
-_period = Array[float]([10.0, 1.8, 1.6, 1.4, 0.7])
+_poison_stacks = Array[int]([5, 10, 15, 20, 25])
+_period = Array[float]([2.0, 1.8, 1.6, 1.4, 0.7])
 metadata/_custom_type_script = "uid://1k2khgqbc78a"
 
 [resource]

@@ -78,6 +78,27 @@ func stop() -> void:
 
 func get_reduced_damage_taken_from_armor(damage: float, damage_type: Utils.DamageType) -> float:
 	if damage_type == Utils.DamageType.POISON:
+		# [TOXIC FILTRATION LAYER]
+		if _defense_stats.toxic_filtration_layer_activated:
+			var efficiency: float = _defense_stats.toxic_filtration_layer_efficiency
+			# We limit the blocking by the efficiency
+			# Usual implementation for "Shield block poison with X% value":
+			# It means X% of the incoming poison damage is treated as blockable by armor.
+			
+			var amount_blockable = damage * (efficiency / 100.0)
+			var amount_bypassing = damage - amount_blockable
+			
+			var damage_reduction = min(amount_blockable, _owner.stats.armor_stacks)
+			var damage_after_armor = amount_blockable - damage_reduction
+			
+			_owner.stats.armor_stacks -= damage_reduction
+			
+			# Logic cards on armor loss (Reflecto Belt etc)
+			if damage_reduction > 0:
+				_reflecto_belt_effect(damage_reduction)
+			
+			return amount_bypassing + damage_after_armor
+			
 		return damage
 		
 	var damage_reduction = min(damage, _owner.stats.armor_stacks)
