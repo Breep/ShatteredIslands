@@ -1,15 +1,16 @@
-[gd_resource type="Resource" script_class="Card" load_steps=4 format=3]
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://dtclhv8aaqrbk"]
 
-[ext_resource type="Script" path="res://Card/Templates/card.gd" id="1_template"]
-[ext_resource type="Script" path="res://Card/Descriptions/Cards/Storm/Common/Quickcharge/storm_quickcharge.gd" id="2_script"]
+[ext_resource type="Texture2D" uid="uid://cfvvs2g0qi6n3" path="res://Card/Descriptions/Cards/Storm/Common/Quickcharge/storm_quick_charge.jpg" id="1_r7bhl"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_template"]
+[ext_resource type="Script" uid="uid://518q5n4xejla" path="res://Card/Descriptions/Cards/Storm/Common/Quickcharge/storm_quickcharge.gd" id="2_script"]
 
 [sub_resource type="Resource" id="Resource_upgrade"]
 script = ExtResource("2_script")
-_base_grind_percent = Array[float]([5.0, 10.0, 15.0, 20.0, 25.0])
-_rarity = 0
+_base_grind_percent = Array[float]([1500.0, 10.0, 15.0, 20.0, 25.0])
 
 [resource]
 script = ExtResource("1_template")
 name = "Quickcharge"
+picture = ExtResource("1_r7bhl")
 family = 4
 player_upgrade = SubResource("Resource_upgrade")

@@ -40,7 +40,7 @@ func _process_single_hero(hero_id: String, entries: Array) -> void:
 	var snake_name = hero_id.to_snake_case() # Ex: DarkKnight -> dark_knight
 	
 	# Chemins
-	var hero_folder = HEROES_ROOT_DIR + hero_id + "/" 
+	var hero_folder = HEROES_ROOT_DIR + hero_id + "/"
 	var stats_folder = hero_folder + "Stats/"
 	var main_res_path = hero_folder + snake_name + ".tres"
 
@@ -68,23 +68,26 @@ func _process_single_hero(hero_id: String, entries: Array) -> void:
 		
 	print("🔄 Mise à jour de : ", hero_id)
 	
+	# On vide le dictionnaire existant pour ne garder que les specs du JSON
+	main_hero_res.stats.clear()
+	
 	# Génération des fichiers de stats pour chaque niveau
 	for entry in entries:
 		var level = int(entry["level"])
 		
 		# Création des données (Livre page X)
 		var new_stats = HeroStats.new()
-		new_stats.apply_json_data(entry) 
+		new_stats.apply_json_data(entry)
 		
 		# Sauvegarde du fichier individuel
 		var stats_filename = snake_name + "_lvl_" + str(level) + ".tres"
 		var final_stats_path = stats_folder + stats_filename
 		ResourceSaver.save(new_stats, final_stats_path)
 		
-		# Injection dans ton fichier Hero (Livre complet)
+	# Injection dans ton fichier Hero (Livre complet)
 		# Note : on utilise .stats (minuscule) comme dans ton code source
 		var loaded_stats = ResourceLoader.load(final_stats_path)
-		main_hero_res.stats[level] = loaded_stats
+		main_hero_res.stats[level - 1] = loaded_stats
 		
 	# Sauvegarde finale du Hero
 	ResourceSaver.save(main_hero_res, main_res_path)

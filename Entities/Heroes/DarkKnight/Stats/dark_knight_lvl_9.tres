@@ -6,9 +6,10 @@
 script = ExtResource("1_sti6k")
 health_max = 3080
 mana_max = 120
-attack_speed = 0.6
+mana_regen = 3.1
+attack_speed = 1.2
 critical_chances = Dictionary[int, float]({
-0: 21.0,
+0: 31.0,
 1: 0.0,
 2: 0.0,
 3: 0.0,

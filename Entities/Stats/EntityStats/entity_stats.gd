@@ -194,7 +194,7 @@ func get_stacks_number() -> float:
 	return _poison_stacks + _ignite_stacks + _armor_stacks + _regen_stacks + _necrosis_stacks
 
 
-func get_debuf_stacks_number() -> float :
+func get_debuf_stacks_number() -> float:
 	return _poison_stacks + _ignite_stacks + _necrosis_stacks
 
 

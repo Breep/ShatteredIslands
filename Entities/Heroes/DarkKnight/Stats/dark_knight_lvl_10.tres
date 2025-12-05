@@ -6,11 +6,11 @@
 script = ExtResource("1_gmss8")
 health_max = 3660
 mana_max = 120
-mana_regen = 2.1
+mana_regen = 3.2
 attack_damage = 21
-attack_speed = 0.6
+attack_speed = 1.2
 critical_chances = Dictionary[int, float]({
-0: 22.0,
+0: 32.0,
 1: 0.0,
 2: 0.0,
 3: 0.0,
