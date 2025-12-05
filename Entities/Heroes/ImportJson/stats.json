@@ -3,7 +3,7 @@
 	"hero_id": "DarkKnight",
 	"level": 1,
 	"health_max": 600,
-	"mana_max": 100,
+	"mana_max": 120,
 	"mana_regen": 1.6,
 	"attack_damage": 12,
 	"attack_speed": 0.6,
@@ -36,9 +36,9 @@
 	  "STACK_NECROSIS": 100
 	},
 	"resistances": {
-	  "DAMAGE_PHYSICAL": 10,
-	  "DAMAGE_MAGICAL": 10,
-	  "DAMAGE_POISON": 5,
+	  "DAMAGE_PHYSICAL": 15,
+	  "DAMAGE_MAGICAL": 15,
+	  "DAMAGE_POISON": 0,
 	  "UTILITY_HEAL": 0,
 	  "UTILITY_STUN": 0,
 	  "UTILITY_CLEANSE": 0,
@@ -109,13 +109,13 @@
   {
 	"hero_id": "DarkKnight",
 	"level": 2,
-	"health_max": 800,
-	"mana_max": 100,
-	"mana_regen": 1.6,
+	"health_max": 700,
+	"mana_max": 120,
+	"mana_regen": 1.7000000000000002,
 	"attack_damage": 13,
 	"attack_speed": 0.6,
 	"critical_chances": {
-	  "DAMAGE_PHYSICAL": 12,
+	  "DAMAGE_PHYSICAL": 14,
 	  "DAMAGE_MAGICAL": 0,
 	  "DAMAGE_POISON": 0,
 	  "UTILITY_HEAL": 0,
@@ -143,9 +143,9 @@
 	  "STACK_NECROSIS": 100
 	},
 	"resistances": {
-	  "DAMAGE_PHYSICAL": 12,
-	  "DAMAGE_MAGICAL": 12,
-	  "DAMAGE_POISON": 5,
+	  "DAMAGE_PHYSICAL": 19.158883083359672,
+	  "DAMAGE_MAGICAL": 20.19860385419959,
+	  "DAMAGE_POISON": 0,
 	  "UTILITY_HEAL": 0,
 	  "UTILITY_STUN": 0,
 	  "UTILITY_CLEANSE": 0,
@@ -171,7 +171,7 @@
 	  "STACK_NECROSIS": 0
 	},
 	"dodges": {
-	  "DAMAGE_PHYSICAL": 8,
+	  "DAMAGE_PHYSICAL": 7,
 	  "DAMAGE_MAGICAL": 0,
 	  "DAMAGE_POISON": 0,
 	  "UTILITY_HEAL": 0,
@@ -216,13 +216,13 @@
   {
 	"hero_id": "DarkKnight",
 	"level": 3,
-	"health_max": 1000,
-	"mana_max": 100,
-	"mana_regen": 1.6,
+	"health_max": 860,
+	"mana_max": 120,
+	"mana_regen": 1.7000000000000002,
 	"attack_damage": 14,
 	"attack_speed": 0.6,
 	"critical_chances": {
-	  "DAMAGE_PHYSICAL": 12,
+	  "DAMAGE_PHYSICAL": 15,
 	  "DAMAGE_MAGICAL": 0,
 	  "DAMAGE_POISON": 0,
 	  "UTILITY_HEAL": 0,
@@ -250,9 +250,9 @@
 	  "STACK_NECROSIS": 100
 	},
 	"resistances": {
-	  "DAMAGE_PHYSICAL": 14,
-	  "DAMAGE_MAGICAL": 14,
-	  "DAMAGE_POISON": 5,
+	  "DAMAGE_PHYSICAL": 21.59167373200866,
+	  "DAMAGE_MAGICAL": 23.239592165010826,
+	  "DAMAGE_POISON": 0,
 	  "UTILITY_HEAL": 0,
 	  "UTILITY_STUN": 0,
 	  "UTILITY_CLEANSE": 0,
@@ -278,7 +278,7 @@
 	  "STACK_NECROSIS": 0
 	},
 	"dodges": {
-	  "DAMAGE_PHYSICAL": 9,
+	  "DAMAGE_PHYSICAL": 7,
 	  "DAMAGE_MAGICAL": 0,
 	  "DAMAGE_POISON": 0,
 	  "UTILITY_HEAL": 0,
@@ -323,13 +323,13 @@
   {
 	"hero_id": "DarkKnight",
 	"level": 4,
-	"health_max": 1200,
-	"mana_max": 100,
-	"mana_regen": 1.6,
+	"health_max": 1080,
+	"mana_max": 120,
+	"mana_regen": 1.8,
 	"attack_damage": 15,
 	"attack_speed": 0.6,
 	"critical_chances": {
-	  "DAMAGE_PHYSICAL": 12,
+	  "DAMAGE_PHYSICAL": 16,
 	  "DAMAGE_MAGICAL": 0,
 	  "DAMAGE_POISON": 0,
 	  "UTILITY_HEAL": 0,
@@ -357,9 +357,9 @@
 	  "STACK_NECROSIS": 100
 	},
 	"resistances": {
-	  "DAMAGE_PHYSICAL": 16,
-	  "DAMAGE_MAGICAL": 16,
-	  "DAMAGE_POISON": 5,
+	  "DAMAGE_PHYSICAL": 23.317766166719345,
+	  "DAMAGE_MAGICAL": 25.39720770839918,
+	  "DAMAGE_POISON": 0,
 	  "UTILITY_HEAL": 0,
 	  "UTILITY_STUN": 0,
 	  "UTILITY_CLEANSE": 0,
@@ -385,7 +385,7 @@
 	  "STACK_NECROSIS": 0
 	},
 	"dodges": {
-	  "DAMAGE_PHYSICAL": 10,
+	  "DAMAGE_PHYSICAL": 7,
 	  "DAMAGE_MAGICAL": 0,
 	  "DAMAGE_POISON": 0,
 	  "UTILITY_HEAL": 0,
@@ -430,13 +430,13 @@
   {
 	"hero_id": "DarkKnight",
 	"level": 5,
-	"health_max": 1400,
-	"mana_max": 100,
-	"mana_regen": 1.6,
+	"health_max": 1360,
+	"mana_max": 120,
+	"mana_regen": 1.8,
 	"attack_damage": 16,
 	"attack_speed": 0.6,
 	"critical_chances": {
-	  "DAMAGE_PHYSICAL": 12,
+	  "DAMAGE_PHYSICAL": 17,
 	  "DAMAGE_MAGICAL": 0,
 	  "DAMAGE_POISON": 0,
 	  "UTILITY_HEAL": 0,
@@ -464,9 +464,9 @@
 	  "STACK_NECROSIS": 100
 	},
 	"resistances": {
-	  "DAMAGE_PHYSICAL": 18,
-	  "DAMAGE_MAGICAL": 18,
-	  "DAMAGE_POISON": 5,
+	  "DAMAGE_PHYSICAL": 24.656627474604605,
+	  "DAMAGE_MAGICAL": 27.070784343255752,
+	  "DAMAGE_POISON": 0,
 	  "UTILITY_HEAL": 0,
 	  "UTILITY_STUN": 0,
 	  "UTILITY_CLEANSE": 0,
@@ -492,7 +492,7 @@
 	  "STACK_NECROSIS": 0
 	},
 	"dodges": {
-	  "DAMAGE_PHYSICAL": 11,
+	  "DAMAGE_PHYSICAL": 7,
 	  "DAMAGE_MAGICAL": 0,
 	  "DAMAGE_POISON": 0,
 	  "UTILITY_HEAL": 0,
@@ -537,13 +537,13 @@
   {
 	"hero_id": "DarkKnight",
 	"level": 6,
-	"health_max": 1600,
-	"mana_max": 100,
-	"mana_regen": 1.6,
+	"health_max": 1700,
+	"mana_max": 120,
+	"mana_regen": 1.9000000000000001,
 	"attack_damage": 17,
 	"attack_speed": 0.6,
 	"critical_chances": {
-	  "DAMAGE_PHYSICAL": 12,
+	  "DAMAGE_PHYSICAL": 18,
 	  "DAMAGE_MAGICAL": 0,
 	  "DAMAGE_POISON": 0,
 	  "UTILITY_HEAL": 0,
@@ -571,9 +571,9 @@
 	  "STACK_NECROSIS": 100
 	},
 	"resistances": {
-	  "DAMAGE_PHYSICAL": 20,
-	  "DAMAGE_MAGICAL": 20,
-	  "DAMAGE_POISON": 5,
+	  "DAMAGE_PHYSICAL": 25.750556815368327,
+	  "DAMAGE_MAGICAL": 28.438196019210412,
+	  "DAMAGE_POISON": 0,
 	  "UTILITY_HEAL": 0,
 	  "UTILITY_STUN": 0,
 	  "UTILITY_CLEANSE": 0,
@@ -599,7 +599,7 @@
 	  "STACK_NECROSIS": 0
 	},
 	"dodges": {
-	  "DAMAGE_PHYSICAL": 12,
+	  "DAMAGE_PHYSICAL": 7,
 	  "DAMAGE_MAGICAL": 0,
 	  "DAMAGE_POISON": 0,
 	  "UTILITY_HEAL": 0,
@@ -644,13 +644,13 @@
   {
 	"hero_id": "DarkKnight",
 	"level": 7,
-	"health_max": 1800,
-	"mana_max": 100,
-	"mana_regen": 1.6,
+	"health_max": 2100,
+	"mana_max": 120,
+	"mana_regen": 1.9000000000000001,
 	"attack_damage": 18,
 	"attack_speed": 0.6,
 	"critical_chances": {
-	  "DAMAGE_PHYSICAL": 12,
+	  "DAMAGE_PHYSICAL": 19,
 	  "DAMAGE_MAGICAL": 0,
 	  "DAMAGE_POISON": 0,
 	  "UTILITY_HEAL": 0,
@@ -678,9 +678,9 @@
 	  "STACK_NECROSIS": 100
 	},
 	"resistances": {
-	  "DAMAGE_PHYSICAL": 22,
-	  "DAMAGE_MAGICAL": 22,
-	  "DAMAGE_POISON": 5,
+	  "DAMAGE_PHYSICAL": 26.67546089433188,
+	  "DAMAGE_MAGICAL": 29.59432611791485,
+	  "DAMAGE_POISON": 0,
 	  "UTILITY_HEAL": 0,
 	  "UTILITY_STUN": 0,
 	  "UTILITY_CLEANSE": 0,
@@ -706,7 +706,7 @@
 	  "STACK_NECROSIS": 0
 	},
 	"dodges": {
-	  "DAMAGE_PHYSICAL": 13,
+	  "DAMAGE_PHYSICAL": 7,
 	  "DAMAGE_MAGICAL": 0,
 	  "DAMAGE_POISON": 0,
 	  "UTILITY_HEAL": 0,
@@ -751,13 +751,13 @@
   {
 	"hero_id": "DarkKnight",
 	"level": 8,
-	"health_max": 2000,
-	"mana_max": 100,
-	"mana_regen": 1.6,
+	"health_max": 2560,
+	"mana_max": 120,
+	"mana_regen": 2,
 	"attack_damage": 19,
 	"attack_speed": 0.6,
 	"critical_chances": {
-	  "DAMAGE_PHYSICAL": 12,
+	  "DAMAGE_PHYSICAL": 20,
 	  "DAMAGE_MAGICAL": 0,
 	  "DAMAGE_POISON": 0,
 	  "UTILITY_HEAL": 0,
@@ -785,9 +785,9 @@
 	  "STACK_NECROSIS": 100
 	},
 	"resistances": {
-	  "DAMAGE_PHYSICAL": 24,
-	  "DAMAGE_MAGICAL": 24,
-	  "DAMAGE_POISON": 5,
+	  "DAMAGE_PHYSICAL": 27.476649250079017,
+	  "DAMAGE_MAGICAL": 30.595811562598772,
+	  "DAMAGE_POISON": 0,
 	  "UTILITY_HEAL": 0,
 	  "UTILITY_STUN": 0,
 	  "UTILITY_CLEANSE": 0,
@@ -813,7 +813,7 @@
 	  "STACK_NECROSIS": 0
 	},
 	"dodges": {
-	  "DAMAGE_PHYSICAL": 14,
+	  "DAMAGE_PHYSICAL": 7,
 	  "DAMAGE_MAGICAL": 0,
 	  "DAMAGE_POISON": 0,
 	  "UTILITY_HEAL": 0,
@@ -858,13 +858,13 @@
   {
 	"hero_id": "DarkKnight",
 	"level": 9,
-	"health_max": 2200,
-	"mana_max": 100,
-	"mana_regen": 1.6,
+	"health_max": 3080,
+	"mana_max": 120,
+	"mana_regen": 2,
 	"attack_damage": 20,
 	"attack_speed": 0.6,
 	"critical_chances": {
-	  "DAMAGE_PHYSICAL": 12,
+	  "DAMAGE_PHYSICAL": 21,
 	  "DAMAGE_MAGICAL": 0,
 	  "DAMAGE_POISON": 0,
 	  "UTILITY_HEAL": 0,
@@ -892,9 +892,9 @@
 	  "STACK_NECROSIS": 100
 	},
 	"resistances": {
-	  "DAMAGE_PHYSICAL": 26,
-	  "DAMAGE_MAGICAL": 26,
-	  "DAMAGE_POISON": 5,
+	  "DAMAGE_PHYSICAL": 28.18334746401732,
+	  "DAMAGE_MAGICAL": 31.47918433002165,
+	  "DAMAGE_POISON": 0,
 	  "UTILITY_HEAL": 0,
 	  "UTILITY_STUN": 0,
 	  "UTILITY_CLEANSE": 0,
@@ -920,7 +920,7 @@
 	  "STACK_NECROSIS": 0
 	},
 	"dodges": {
-	  "DAMAGE_PHYSICAL": 15,
+	  "DAMAGE_PHYSICAL": 7,
 	  "DAMAGE_MAGICAL": 0,
 	  "DAMAGE_POISON": 0,
 	  "UTILITY_HEAL": 0,
@@ -965,13 +965,13 @@
   {
 	"hero_id": "DarkKnight",
 	"level": 10,
-	"health_max": 2400,
-	"mana_max": 100,
-	"mana_regen": 1.6,
+	"health_max": 3660,
+	"mana_max": 120,
+	"mana_regen": 2.1,
 	"attack_damage": 21,
 	"attack_speed": 0.6,
 	"critical_chances": {
-	  "DAMAGE_PHYSICAL": 12,
+	  "DAMAGE_PHYSICAL": 22,
 	  "DAMAGE_MAGICAL": 0,
 	  "DAMAGE_POISON": 0,
 	  "UTILITY_HEAL": 0,
@@ -999,9 +999,9 @@
 	  "STACK_NECROSIS": 100
 	},
 	"resistances": {
-	  "DAMAGE_PHYSICAL": 28,
-	  "DAMAGE_MAGICAL": 28,
-	  "DAMAGE_POISON": 5,
+	  "DAMAGE_PHYSICAL": 28.815510557964277,
+	  "DAMAGE_MAGICAL": 32.26938819745534,
+	  "DAMAGE_POISON": 0,
 	  "UTILITY_HEAL": 0,
 	  "UTILITY_STUN": 0,
 	  "UTILITY_CLEANSE": 0,
@@ -1027,7 +1027,7 @@
 	  "STACK_NECROSIS": 0
 	},
 	"dodges": {
-	  "DAMAGE_PHYSICAL": 16,
+	  "DAMAGE_PHYSICAL": 7,
 	  "DAMAGE_MAGICAL": 0,
 	  "DAMAGE_POISON": 0,
 	  "UTILITY_HEAL": 0,

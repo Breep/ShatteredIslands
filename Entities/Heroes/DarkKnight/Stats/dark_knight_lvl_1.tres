@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_5pd1e")
 health_max = 600
+mana_max = 120
 mana_regen = 1.6
 attack_damage = 12
 attack_speed = 0.6
@@ -23,9 +24,9 @@ critical_chances = Dictionary[int, float]({
 11: 0.0
 })
 resistances = Dictionary[int, float]({
-0: 10.0,
-1: 10.0,
-2: 5.0,
+0: 15.0,
+1: 15.0,
+2: 0.0,
 3: 0.0,
 4: 0.0,
 5: 0.0,

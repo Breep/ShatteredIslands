@@ -4,12 +4,13 @@
 
 [resource]
 script = ExtResource("1_iwtgg")
-health_max = 1400
-mana_regen = 1.6
+health_max = 1360
+mana_max = 120
+mana_regen = 1.8
 attack_damage = 16
 attack_speed = 0.6
 critical_chances = Dictionary[int, float]({
-0: 12.0,
+0: 17.0,
 1: 0.0,
 2: 0.0,
 3: 0.0,
@@ -23,9 +24,9 @@ critical_chances = Dictionary[int, float]({
 11: 0.0
 })
 resistances = Dictionary[int, float]({
-0: 18.0,
-1: 18.0,
-2: 5.0,
+0: 24.656627474604605,
+1: 27.070784343255752,
+2: 0.0,
 3: 0.0,
 4: 0.0,
 5: 0.0,
@@ -37,7 +38,7 @@ resistances = Dictionary[int, float]({
 11: 0.0
 })
 dodges = Dictionary[int, float]({
-0: 11.0,
+0: 7.0,
 1: 0.0,
 2: 0.0,
 3: 0.0,

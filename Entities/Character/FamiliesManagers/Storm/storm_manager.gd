@@ -177,28 +177,6 @@ func _add_stat_modifiers() -> void:
 		mod.tags = [StatModifier.TagType.CARD]
 		_owner.stats_manager.register_modifier(mod)
 		
-	#var current_lvl: int = _storm_stats.level 
-	#current_lvl = clamp(current_lvl, 0, GLOBAL_CRIT_CHANCE_BOOSTS.size() - 1)
-	#for action_type in Utils.get_all_actions():
-		## 1. Crit Chance 
-		#var crit_chance_boost := StatModifier.new()
-		#crit_chance_boost.stat_type = EntityStats.StatType.CRIT_CHANCE
-		#crit_chance_boost.action_type = action_type
-		#crit_chance_boost.calc_type = StatModifier.CalcType.ADD
-		#crit_chance_boost.id = "Lightning passive Chance"
-		#crit_chance_boost.tags = [StatModifier.TagType.FAMILY]
-		#crit_chance_boost.value = GLOBAL_CRIT_CHANCE_BOOSTS[current_lvl] 
-		#_owner.stats_manager.update_modifier(crit_chance_boost)
-		## 2. Crit Multiplier
-		#var crit_multiplier_boost := StatModifier.new()
-		#crit_multiplier_boost.stat_type = EntityStats.StatType.CRIT_MULT
-		#crit_multiplier_boost.action_type = action_type
-		#crit_multiplier_boost.calc_type = StatModifier.CalcType.ADD
-		#crit_multiplier_boost.id = "Lightning passive Mult"
-		#crit_multiplier_boost.tags = [StatModifier.TagType.FAMILY]
-		#crit_multiplier_boost.value = GLOBAL_CRIT_MULTIPLIER_BOOSTS[current_lvl]
-		#_owner.stats_manager.update_modifier(crit_multiplier_boost)
-		
 #endregion
 
 #region action modifier
@@ -276,13 +254,6 @@ func _apply_storm_battery_effect() -> void:
 # [THUNDER BERSERKER]
 func _apply_thunder_berserker_penalty() -> void:
 	_thunder_berserker_accumulated_penalty += _storm_stats.thunder_berserker_penalty_per_rank
-	
-	var mod := StatModifier.new()
-	mod.id = "Thunder Berserker Penalty"
-	mod.stat_type = EntityStats.StatType.CRIT_MULT
-	mod.calc_type = StatModifier.CalcType.ADD
-	mod.value = - (_thunder_berserker_accumulated_penalty)
-	mod.tags = [StatModifier.TagType.CARD]
 	var mod := StatModifier.new()
 	mod.id = "Thunder Berserker Penalty"
 	mod.stat_type = EntityStats.StatType.CRIT_MULT
@@ -334,7 +305,6 @@ func _apply_eye_of_the_cyclone_effect() -> void:
 	_owner.heal(_owner, max_hp_bonus, "Eye of the Cyclone")
 
 #endregion
-
 
 # [CHAIN LIGHTNING]
 func _apply_chain_lightning_effect(hit_victim: Entity, original_damage: float) -> void:
