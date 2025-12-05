@@ -45,7 +45,7 @@ func take_damage_percent(damage_percent: float, percent_modifier: Utils.PercentM
 			hp = _owner.stats.health
 		Utils.PercentModifier.LOST_HP:
 			hp = _owner.stats.health_max - _owner.stats.health
-	var damage = hp * damage_percent  / 100.0
+	var damage = hp * damage_percent / 100.0
 	return take_damage(damage, damage_type, is_critical, action_id, source)
 #endregion
 
@@ -75,8 +75,22 @@ func take_heal(heal_amount: float, is_critical: bool, action_id: StringName, sou
 		if _is_dodged(Utils.ActionType.UTILITY_HEAL):
 			return 0.0
 		heal_amount *= _get_resistance_vulnerability_multiplier(Utils.ActionType.UTILITY_HEAL)
-	_owner.stats.health += heal_amount
-	_owner.signal_heal_taken(heal_amount, is_critical)
+	
+	# Necrosis logic
+	var necrosis_stacks: float = _owner.stats.necrosis_stacks
+	if necrosis_stacks > 0:
+		var absorbed_amount: float = min(heal_amount, necrosis_stacks)
+		_owner.stats.necrosis_stacks -= absorbed_amount
+		heal_amount -= absorbed_amount
+		
+		# Feedback for absorption (optional but good for clarity)
+		if absorbed_amount > 0:
+			_owner.signal_stack_taken(Utils.StackType.NECROSIS, -absorbed_amount, false)
+
+	if heal_amount > 0:
+		_owner.stats.health += heal_amount
+		_owner.signal_heal_taken(heal_amount, is_critical)
+	
 	_owner.signal_interaction_received(source, Utils.ActionType.UTILITY_HEAL, action_id, heal_amount, is_critical)
 	return heal_amount
 #endregion
@@ -100,7 +114,7 @@ func take_cleanse(value: float, is_critical: bool, action_id: StringName, source
 		if candidates.is_empty():
 			break
 		var stack_chosen: Utils.StackType = candidates[randi() % candidates.size()]
-		var to_remove: int =  min(CLEANSE_PACK_SIZE, remaining)
+		var to_remove: int = min(CLEANSE_PACK_SIZE, remaining)
 		match stack_chosen:
 			Utils.StackType.IGNITE:
 				to_remove = min(to_remove, _owner.stats.ignite_stacks)

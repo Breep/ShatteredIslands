@@ -25,10 +25,9 @@ func start() -> void:
 	_add_stack_modifiers()
 	
 
-
 func stop() -> void:
 	_clear_stack_modifiers()
-	_clear_action_modifiers() 
+	_clear_action_modifiers()
 	for spell in _optional_spells:
 		spell.queue_free()
 	_clear_optional_timers()
@@ -42,7 +41,6 @@ func _on_battle_start() -> void:
 
 #region optional timer
 func _create_optional_timers() -> void:
-	
 	# [PUTRID TOUCH]
 	if _necro_stats.necro_putrid_touch_activated:
 		_optional_timers.append(Utils.create_perpetual_timer(self, _necro_stats.necro_putrid_touch_period, _on_putrid_touch_timer_timeout, true))
@@ -60,25 +58,11 @@ func _add_stat_modifiers() -> void:
 
 #region actions modifier (NECROSIS LOGIC HERE)
 func _add_action_modifiers() -> void:
-	# [NECROSIS MECHANIC]
-	if true: 
-		var action_modifier := ActionModifier.new()
-		action_modifier.action_type = ActionModifier.ActionType.HEAL 
-		action_modifier.id = "Necrosis Anti-Heal"
-		action_modifier.tags = [ActionModifier.TagType.CARD]
-		action_modifier.is_one_time_effect = false
-		action_modifier.before_action_logic_callback = _on_before_heal_necrosis
-		_owner.action_modifiers_manager.register_modifier(action_modifier)
+	pass
 
 
 func _clear_action_modifiers() -> void:
-	# [NECROSIS MECHANIC]
-	if true:
-		var action_modifier := ActionModifier.new()
-		action_modifier.id = "Necrosis Anti-Heal"
-		action_modifier.action_type = ActionModifier.ActionType.HEAL
-		action_modifier.before_action_logic_callback = _on_before_heal_necrosis
-		_owner.action_modifiers_manager.unregister_modifier(action_modifier)
+	pass
 #endregion
 
 #region on inflict stacks modifier
@@ -103,30 +87,6 @@ func _lanch_optional_spells() -> void:
 
 # ============================== Callbacks functions ==============================
 
-#region ===== NECROSIS LOGIC =====
-# [NECROSIS]
-func _on_before_heal_necrosis(cb_vars: Dictionary) -> void:
-	if not cb_vars.has(ActionModifier.VarType.TARGET): return
-	var target: Entity = cb_vars[ActionModifier.VarType.TARGET]
-	if target != _owner: return
-	if _owner.stats.necrosis_stacks <= 0: return
-	var stack_count: int = _owner.stats.necrosis_stacks
-	var reduction_percentage: float = float(stack_count) * 0.10
-	if reduction_percentage > 1.0: reduction_percentage = 1.0
-	var key_amount = ActionModifier.VarType.STACK_VALUE
-	if cb_vars.has(key_amount):
-		var current_heal = cb_vars[key_amount]
-		var new_heal = current_heal * (1.0 - reduction_percentage)
-		print("--------------------------------------------------")
-		print("[NECROSIS DEBUG] Target: ", _owner.name)
-		print("[NECROSIS DEBUG] Stacks count: ", stack_count)
-		print("[NECROSIS DEBUG] Reduction: ", reduction_percentage * 100, "%")
-		print("[NECROSIS DEBUG] Heal BEFORE: ", current_heal)
-		print("[NECROSIS DEBUG] Heal AFTER: ", new_heal)
-		print("--------------------------------------------------")
-		cb_vars[key_amount] = new_heal
-	_owner.stats.necrosis_stacks = max(0, _owner.stats.necrosis_stacks - 1)
-#endregion
 
 #region ===== PUTRID TOUCH =====
 func _on_putrid_touch_timer_timeout() -> void:
