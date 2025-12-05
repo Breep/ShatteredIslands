@@ -6,6 +6,10 @@ extends FamilyStats
 var faraday_activated: bool
 var faraday_crit_chance_boost: float
 
+# [VIOLENT OVERLOAD]
+var violent_overload_activated: bool
+var violent_overload_crit_mult_boost: float
+
 # [STORM BREAKER]
 var storm_breaker_activated: bool
 var storm_breaker_base_reduction_percent: float

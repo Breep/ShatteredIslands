@@ -143,6 +143,18 @@ func _add_stat_modifiers() -> void:
 			mod.tags = [StatModifier.TagType.CARD]
 			mod.value = _storm_stats.faraday_crit_chance_boost
 			_owner.stats_manager.register_modifier(mod)
+			
+	# [VIOLENT OVERLOAD]
+	if _storm_stats.violent_overload_activated:
+		for action_type in Utils.get_all_actions():
+			var mod := StatModifier.new()
+			mod.stat_type = EntityStats.StatType.CRIT_MULT
+			mod.action_type = action_type
+			mod.calc_type = StatModifier.CalcType.ADD
+			mod.id = "Violent Overload"
+			mod.tags = [StatModifier.TagType.CARD]
+			mod.value = _storm_stats.violent_overload_crit_mult_boost
+			_owner.stats_manager.register_modifier(mod)
 		
 	#var current_lvl: int = _storm_stats.level 
 	#current_lvl = clamp(current_lvl, 0, GLOBAL_CRIT_CHANCE_BOOSTS.size() - 1)
