@@ -3,6 +3,11 @@ extends FamilyStats
 
 #region Common Card
 
+# [REACTIVE COVER]
+var reactive_cover_activated: bool
+var reactive_cover_chance: float
+var reactive_cover_shield_amount: float
+
 # [EVASIVE BARRIER]
 var evasive_barrier_activated: bool
 var evasive_barrier_dodge_increase: float
@@ -29,9 +34,9 @@ var shield_rush_amount: float
 
 # [REFLECTO BELT]
 var reflecto_belt_activated: bool
-var reflecto_belt_shield_threshold: float 
-var reflecto_belt_attacks_count: int     
-var reflecto_belt_damage_percent: float  
+var reflecto_belt_shield_threshold: float
+var reflecto_belt_attacks_count: int
+var reflecto_belt_damage_percent: float
 
 # [PROTECTIVE DOME]
 var protective_dome_activated: bool

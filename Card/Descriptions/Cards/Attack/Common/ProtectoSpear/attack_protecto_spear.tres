@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Card" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://Card/Templates/card.gd" id="1_template"]
+[ext_resource type="Script" path="res://Card/Descriptions/Cards/Attack/Common/ProtectoSpear/attack_protecto_spear.gd" id="2_script"]
+
+[sub_resource type="Resource" id="Resource_upgrade"]
+script = ExtResource("2_script")
+_base_chance = Array[float]([10.0, 15.0, 20.0, 25.0, 35.0])
+_base_shield_amount = Array[float]([5.0, 5.0, 5.0, 5.0, 5.0])
+_rarity = 0
+
+[resource]
+script = ExtResource("1_template")
+name = "Protecto'Spear"
+family = 0
+player_upgrade = SubResource("Resource_upgrade")

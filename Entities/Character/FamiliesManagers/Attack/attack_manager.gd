@@ -59,12 +59,21 @@ func _create_optional_timers() -> void:
 func _clear_optional_timers() -> void:
 	for timer in _optional_timers:
 		timer.queue_free()
-	_optional_timers.clear()		
+	_optional_timers.clear()
 #endregion
 
 #region aa modifier
 
 func _add_attack_modifiers() -> void:
+	# [PROTECTO'SPEAR]
+	if _attack_stats.protectospear_activated:
+		var aa_modifier := AutoAttackModifier.new()
+		aa_modifier.id = "Protecto'Spear"
+		aa_modifier.tags = [AutoAttackModifier.TagType.CARD]
+		aa_modifier.on_attack_logic_callback = _on_auto_attack_protectospear
+		aa_modifier.is_one_time_effect = false
+		_owner.auto_attack_modifier_registry.register_modifier(aa_modifier)
+		
 	# [RUSTY DAGGER]
 	if _attack_stats.rusty_dagger_activated:
 		var aa_modifier := AutoAttackModifier.new()
@@ -120,6 +129,10 @@ func _add_attack_modifiers() -> void:
 		_owner.auto_attack_modifier_registry.register_modifier(aa_modifier)
 		
 func _clear_attack_modifiers() -> void:
+	# [PROTECTO'SPEAR]
+	if _attack_stats.protectospear_activated:
+		_owner.auto_attack_modifier_registry.unregister_modifier("Protecto'Spear")
+		
 	# [RUSTY DAGGER]
 	if _attack_stats.rusty_dagger_activated:
 		_owner.auto_attack_modifier_registry.unregister_modifier("Rusty Dagger")
@@ -246,14 +259,14 @@ func _on_dodge_fight_back(_cb_vars: Dictionary) -> void:
 
 # [SCORCHING BLADE]
 func _on_auto_attack_scorching_blade(cb_vars: Dictionary) -> void:
-	if not cb_vars.has(ActionModifier.VarType.TARGET): 
+	if not cb_vars.has(ActionModifier.VarType.TARGET):
 		printerr("Scorching Blade: cb_vars n'a pas de TARGET")
 		return
 	var target: Entity = cb_vars[ActionModifier.VarType.TARGET]
 	if target == null or not is_instance_valid(target):
 		return
 	
-	if not cb_vars.has(ActionModifier.VarType.PHYSICAL_DAMAGE): 
+	if not cb_vars.has(ActionModifier.VarType.PHYSICAL_DAMAGE):
 		printerr("Scorching Blade: cb_vars n'a pas de DAMAGE")
 		return
 	var damage_dealt: int = cb_vars[ActionModifier.VarType.PHYSICAL_DAMAGE]
@@ -266,7 +279,7 @@ func _on_auto_attack_scorching_blade(cb_vars: Dictionary) -> void:
 
 # [RUSTY DAGGER]
 func _on_auto_attack_rusty_dagger(cb_vars: Dictionary) -> void:
-	if not cb_vars.has(AutoAttackModifier.VarType.PROJECTILE_STATS): 
+	if not cb_vars.has(AutoAttackModifier.VarType.PROJECTILE_STATS):
 		printerr("Rusty Dagger: cb_vars n'a pas de PROJECTILE_STATS")
 		return
 	var proj_stats: ProjectileStats = cb_vars[AutoAttackModifier.VarType.PROJECTILE_STATS]
@@ -277,11 +290,11 @@ func _on_auto_attack_rusty_dagger(cb_vars: Dictionary) -> void:
 
 # [SCORCHING BLADE]
 func _on_hit_scorching_blade(cb_vars: Dictionary) -> void:
-	if not cb_vars.has(AutoAttackModifier.VarType.PHYSICAL_DAMAGE): 
+	if not cb_vars.has(AutoAttackModifier.VarType.PHYSICAL_DAMAGE):
 		printerr("Scorching Blade (on_hit): cb_vars n'a pas de PHYSICAL_DAMAGE")
 		return
 	var damage_dealt: int = cb_vars[AutoAttackModifier.VarType.PHYSICAL_DAMAGE]
-	if not cb_vars.has(AutoAttackModifier.VarType.TARGET): 
+	if not cb_vars.has(AutoAttackModifier.VarType.TARGET):
 		printerr("Scorching Blade (on_hit): cb_vars n'a pas de TARGET")
 		return
 	var target: Entity = cb_vars[AutoAttackModifier.VarType.TARGET]
@@ -297,7 +310,7 @@ func _on_hit_scorching_blade(cb_vars: Dictionary) -> void:
 func _on_auto_attack_surgical_knife(_cb_vars: Dictionary) -> void:
 	var chance: float = _attack_stats.surgical_knife_chance
 	if not Utils.is_randomize_modifier_active(chance):
-		return 
+		return
 	var amount_to_cleanse: float = _attack_stats.surgical_knife_cleanse_amount
 	_owner.cleanse(_owner, amount_to_cleanse, "Surgical Knife")
 
@@ -306,7 +319,7 @@ func _on_auto_attack_healing_crossbow(_cb_vars: Dictionary) -> void:
 	# [HEALING CROSSBOW]
 	var chance: float = _attack_stats.healing_crossbow_chance
 	if not Utils.is_randomize_modifier_active(chance):
-		return 
+		return
 	var heal_amount: float = _attack_stats.healing_crossbow_heal_amount
 	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
 	if target == null:
@@ -340,8 +353,15 @@ func _on_hit_arcane_staff(_cb_vars: Dictionary) -> void:
 	# [ARCANE STAFF]
 	var chance: float = _attack_stats.arcane_staff_chance
 	if not Utils.is_randomize_modifier_active(chance):
-		return 
+		return
 
 	var mana_gain: float = _attack_stats.arcane_staff_mana_gain
 	if mana_gain > 0:
 		_owner.stats.mana += mana_gain
+
+
+# [PROTECTO'SPEAR]
+func _on_auto_attack_protectospear(_cb_vars: Dictionary) -> void:
+	var chance: float = _attack_stats.protectospear_chance
+	if Utils.is_randomize_modifier_active(chance):
+		_owner.inflict_condition_stacks(_owner, _attack_stats.protectospear_shield_amount, Utils.StackType.ARMOR, "Protecto'Spear")

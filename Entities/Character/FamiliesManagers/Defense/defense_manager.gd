@@ -42,6 +42,11 @@ func start() -> void:
 			_owner.stats.armor_stacks_changed.connect(_on_owner_armor_stacks_changed)
 		_update_protective_dome_modifier(_owner.stats.armor_stacks)
 	
+	# [REACTIVE COVER]
+	if _defense_stats.reactive_cover_activated:
+		if not _owner.damage_taken.is_connected(_on_owner_damage_taken):
+			_owner.damage_taken.connect(_on_owner_damage_taken)
+	
 	# [SHIELD THROW]
 	if _defense_stats.shield_throw_activated:
 		_shield_throw_accumulated = 0
@@ -61,12 +66,18 @@ func stop() -> void:
 	# [REFLECTO BELT] Nettoyage
 	if _defense_stats.reflecto_belt_activated and _is_reflecto_belt_activated:
 		_owner.auto_attack_modifier_registry.unregister_modifier("Reflecto Belt")
+		
+	# [REACTIVE COVER]
+	if _defense_stats.reactive_cover_activated:
+		if _owner.damage_taken.is_connected(_on_owner_damage_taken):
+			_owner.damage_taken.disconnect(_on_owner_damage_taken)
+			
 	_clear_optional_timers()
 
 # --- Fonctions appelées par le système de dégâts ---
 
 func get_reduced_damage_taken_from_armor(damage: float, damage_type: Utils.DamageType) -> float:
-	if damage_type == Utils.DamageType.POISON: 
+	if damage_type == Utils.DamageType.POISON:
 		return damage
 		
 	var damage_reduction = min(damage, _owner.stats.armor_stacks)
@@ -105,7 +116,6 @@ func _add_action_modifiers() -> void:
 #
 
 
-
 func _clear_action_modifiers() -> void:
 	# [EVASIVE BARRIER]
 	if _defense_stats.evasive_barrier_activated:
@@ -133,7 +143,7 @@ func _add_stat_modifiers() -> void:
 		var mod := StatModifier.new()
 		mod.id = "Avengers Assemble"
 		mod.stat_type = EntityStats.StatType.CRIT_CHANCE
-		mod.action_type = Utils.ActionType.STACK_ARMOR 
+		mod.action_type = Utils.ActionType.STACK_ARMOR
 		mod.calc_type = StatModifier.CalcType.ADD
 		mod.value = _defense_stats.avengers_assemble_crit_chance
 		mod.tags = [StatModifier.TagType.CARD]
@@ -188,7 +198,7 @@ func _clear_optional_timers() -> void:
 func _reflecto_belt_effect(armor_lost: int) -> void:
 	if not _defense_stats.reflecto_belt_activated: return
 	_reflecto_belt_accumulated_loss += armor_lost
-	if  _reflecto_belt_accumulated_loss >= _defense_stats.reflecto_belt_shield_threshold:
+	if _reflecto_belt_accumulated_loss >= _defense_stats.reflecto_belt_shield_threshold:
 		_reflecto_belt_accumulated_loss -= _defense_stats.reflecto_belt_shield_threshold
 		_reflecto_belt_attacks_left += _defense_stats.reflecto_belt_attacks_count
 		if _is_reflecto_belt_activated == false:
@@ -214,10 +224,10 @@ func _update_protective_dome_modifier(current_armor: float) -> void:
 	mod.id = "Protective Dome"
 	mod.stat_type = EntityStats.StatType.RESISTANCE
 	mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
-	mod.tags = [StatModifier.TagType.CARD] 
+	mod.tags = [StatModifier.TagType.CARD]
 	
 	if current_armor > 0:
-		mod.calc_type = StatModifier.CalcType.ADD 
+		mod.calc_type = StatModifier.CalcType.ADD
 		mod.value = _defense_stats.protective_dome_armor_percent
 		_owner.stats_manager.register_modifier(mod)
 	else:
@@ -248,11 +258,11 @@ func _trigger_shield_throw_start() -> void:
 	var proj_stats := ProjectileStats.new()
 	
 	proj_stats.is_bouncing = true
-	proj_stats.bounces_remaining = 20 
+	proj_stats.bounces_remaining = 20
 	
 	proj_stats.on_hit_logic_callbacks.append(_on_hit_shield_throw)
 	
-	var p_type = Projectile.ProjectileType.AUTO_ATTACK 
+	var p_type = Projectile.ProjectileType.AUTO_ATTACK
 	if "SHIELD_THROW" in Projectile.ProjectileType: p_type = Projectile.ProjectileType.SHIELD_THROW
 	
 	_owner.projectile_attack(target, p_type, _owner._turret._projectile_spawn_point, proj_stats)
@@ -319,7 +329,7 @@ func _on_magnetic_siphon_timer_timeout() -> void:
 	var target: Entity = _owner.target_module.get_target(TargetModule.TargettingStrategy.HIGHEST_SHIELD_ENEMIES_HERO)
 	
 	if target == null or not is_instance_valid(target):
-		return	
+		return
 	var highest_shield: float = target.stats.armor_stacks
 	if highest_shield <= 0:
 		return
@@ -363,7 +373,7 @@ func _on_hit_shield_throw(cb_vars: Dictionary) -> void:
 	if target == null or not is_instance_valid(target): return
 	
 	var damage: float = _defense_stats.shield_throw_damage
-	if damage > 0: 
+	if damage > 0:
 		_owner.direct_attack(target, damage, Utils.DamageType.MAGICAL, "Shield Throw")
 	
 	var shield_return: float = _defense_stats.shield_throw_return_shield
@@ -371,3 +381,10 @@ func _on_hit_shield_throw(cb_vars: Dictionary) -> void:
 		_owner.inflict_condition_stacks(_owner, shield_return, Utils.StackType.ARMOR, "Shield Throw")
 		_shield_throw_last_armor = _owner.stats.armor_stacks
 		
+# [REACTIVE COVER]
+func _on_owner_damage_taken(_entity: Entity, damage: float, _damage_type: Utils.DamageType, _is_crit: bool, _is_blocked: bool) -> void:
+	if damage <= 0: return
+	
+	var chance: float = _defense_stats.reactive_cover_chance
+	if Utils.is_randomize_modifier_active(chance):
+		_owner.inflict_condition_stacks(_owner, _defense_stats.reactive_cover_shield_amount, Utils.StackType.ARMOR, "Reactive Cover")
