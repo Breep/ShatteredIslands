@@ -3,6 +3,7 @@ extends Module
 
 @export var _defense_manager: DefenseManager
 
+
 var _dodge_number: int = 0
 
 # ============================== Node base functions ==============================
@@ -24,7 +25,8 @@ func take_damage(damage: float, damage_type: Utils.DamageType, is_critical: bool
 		
 		damage_before_armor = damage
 		if _defense_manager != null: damage = _defense_manager.get_reduced_damage_taken_from_armor(damage, damage_type) # Reduce flat of PHYSIC AND MAGIC damage
-	
+
+
 	_owner.stats.health -= damage
 	if damage > 0 or (damage_before_armor == 0 and damage == 0):
 		_owner.signal_damage_taken(damage, damage_type, is_critical, false)

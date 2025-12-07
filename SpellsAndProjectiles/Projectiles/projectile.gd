@@ -4,11 +4,11 @@ extends Area3D
 # ============================== Enums ==============================
 
 enum ProjectileEffect {
-	POISON,       # Add poison stacks
-	INSTABILITY,  # Add instability stacks
-	CRITIC,       # Do more physical damage
-	BOUNCE,       # Will bounce to an other target keeping all current stats
-	IGNITE        # Do more damage bases on target current hp
+	POISON, # Add poison stacks
+	INSTABILITY, # Add instability stacks
+	CRITIC, # Do more physical damage
+	BOUNCE, # Will bounce to an other target keeping all current stats
+	IGNITE # Do more damage bases on target current hp
 }
 
 enum ProjectileType {
@@ -21,9 +21,9 @@ enum ProjectileType {
 
 enum TrajectoryType {
 	STRAIGHT,
-	ARC,           # Sinusoidal height over straight interpolation
-	BEZIER,        # Quadratic Bezier curve with control point height
-	ZIGZAG,        # Lateral sine wobble while advancing
+	ARC, # Sinusoidal height over straight interpolation
+	BEZIER, # Quadratic Bezier curve with control point height
+	ZIGZAG, # Lateral sine wobble while advancing
 	HOMING_SMOOTH, # Smooth-turn homing (rate-limited steering)
 }
 
@@ -44,15 +44,15 @@ const _DAMAGE_MIN: int = 1
 @export var stats: ProjectileStats
 
 var _trajectory_type: TrajectoryType = TrajectoryType.STRAIGHT
-var _speed: float = 20.0                         # Base forward speed (units/s)
-var _lifetime_max: float = 6.0                   # Safety fuse
-var _arc_height: float = 2.0                     # Peak height (world units)
-var _bezier_control_height: float = 5.0          # Control point height for BEZIER
-var _randomize_arc_by: float = 0.5               # ± randomness on height
-var _zigzag_amplitude: float = 0.5              # Lateral offset amplitude
-var _zigzag_frequency: float = 5.0               # Cycles per second along the path
-var _turn_rate_deg_per_s: float = 360.0          # Max turn speed
-var _homing_retarget_each_frame: bool = true     # If false, homes to snapshot
+var _speed: float = 20.0 # Base forward speed (units/s)
+var _lifetime_max: float = 6.0 # Safety fuse
+var _arc_height: float = 2.0 # Peak height (world units)
+var _bezier_control_height: float = 5.0 # Control point height for BEZIER
+var _randomize_arc_by: float = 0.5 # ± randomness on height
+var _zigzag_amplitude: float = 0.5 # Lateral offset amplitude
+var _zigzag_frequency: float = 5.0 # Cycles per second along the path
+var _turn_rate_deg_per_s: float = 360.0 # Max turn speed
+var _homing_retarget_each_frame: bool = true # If false, homes to snapshot
 
 # ============================== Private ==============================
 
@@ -136,7 +136,7 @@ func _on_body_entered(body: Node3D) -> void:
 	
 		if stats.poison_stacks > 0:
 			if source != null: source.inflict_condition_stacks(target, stats.poison_stacks, Utils.StackType.POISON, "AUTO ATTACK")
-			else: target.take_condition_stacks(stats.poison_stacks, Utils.StackType.POISON, stats.poison_stacks_is_critical, "AUTO ATTACK",)
+			else: target.take_condition_stacks(stats.poison_stacks, Utils.StackType.POISON, stats.poison_stacks_is_critical, "AUTO ATTACK", )
 		
 		# --- CALLBACKS ---
 		for cb: Callable in stats.on_hit_logic_callbacks:
@@ -160,7 +160,7 @@ func _on_body_entered(body: Node3D) -> void:
 				_hit_history)
 			
 			if new_target != null:
-				_set_target(new_target) 
+				_set_target(new_target)
 				return
 		
 		queue_free()
@@ -185,6 +185,9 @@ func _update_visual() -> void:
 	var visual: Node3D = _projectile_conf.visual_scene.instantiate()
 	_visual_node.add_child(visual)
 
+func set_target(new_target: Entity) -> void:
+	_set_target(new_target)
+
 func _set_target(new_target: Entity) -> void:
 	if target:
 		if target.died.is_connected(_on_target_died):
@@ -206,7 +209,7 @@ func _snapshot_target_and_prepare_path() -> void:
 	_start_target_snapshot = target.global_position + _vertical_offset * Vector3.UP
 	var dist := _start_pos.distance_to(_start_target_snapshot)
 	_travel_time = max(0.001, dist / max(0.001, _speed))
-	_dir_snapshot = ( _start_target_snapshot - _start_pos ).normalized()
+	_dir_snapshot = (_start_target_snapshot - _start_pos).normalized()
 
 func _move_toward_target(delta: float) -> void:
 	if target == null:

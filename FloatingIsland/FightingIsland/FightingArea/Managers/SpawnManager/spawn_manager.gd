@@ -39,7 +39,7 @@ func spawn_projectile(source: Entity, target: Entity, projectile_type: Projectil
 	projectile.projectile_type = projectile_type
 	
 	var modifiers: Array[Projectile.ProjectileEffect] = []
-	_fighting_area.signal_projectile_spawned(source, target, projectile_type, modifiers)
+	_fighting_area.signal_projectile_spawned(source, target, projectile_type, modifiers, projectile)
 	_projectile_counter += 1
 	_projectiles_node.add_child(projectile)
 
@@ -49,11 +49,11 @@ func spawn_spell(spell: Node3D) -> void:
 
 
 func spawn_entity(entity: Entity, entity_spawn_global_position: Vector3) -> void:
-	if entity == null: 
+	if entity == null:
 		push_error("SpawnManager: Trying to spawn a <null> entity")
 		return
 	_entities_node.add_child(entity)
-	if entity_spawn_global_position != null: 
+	if entity_spawn_global_position != null:
 		entity.global_position = entity_spawn_global_position
 
 # ============================== Private functions ==============================
@@ -73,4 +73,3 @@ func _on_game_manager_game_state_changed(state: Game.GameState) -> void:
 
 func _on_fighting_area_fighting_manager_fight_is_over(_self_ref: FightingManager, _winner_teams_order: Array[int]) -> void:
 	_clear_all()
- 

@@ -65,6 +65,11 @@ var shield_throw_return_shield: float
 var absorption_matrix_activated: bool
 var absorption_matrix_chance: float
 
+# [AETHER REDIRECTOR]
+var aether_redirector_activated: bool
+var aether_redirector_period: float
+var aether_redirector_shield_amount: float
+
 #endregion
 
 #region Epic Card

@@ -68,6 +68,7 @@ var _hero_id := Hero.HeroId.UNDEF
 
 #region ============================== Public variables ==============================
 var player: Player
+var fighting_area: FightingArea
 #endregion
 
 #region ============================== Private variables ==============================
@@ -86,8 +87,9 @@ func apply_cards_upgrade(deck: PlayerDeck) -> void:
 		card.player_upgrade.apply(families_stats, card.lvl)
 
 
-func connect_to_fighting_area(fighting_area: FightingArea) -> void:
+func connect_to_fighting_area(fighting_area_ref: FightingArea) -> void:
 	_reset()
+	fighting_area = fighting_area_ref
 	_character_logic.connect_to_fighting_area(fighting_area)
 	fighting_area.fighting_manager.fight_is_over.connect(_on_fighting_manager_fight_is_over, CONNECT_ONE_SHOT)
 
@@ -106,6 +108,7 @@ func get_auto_attack_spawn() -> Node3D:
 
 func get_rank_changed_signal() -> Signal:
 	return _character_logic.get_rank_changed_signal()
+
 #endregion
 
 #region ===== Actions =====
@@ -236,7 +239,7 @@ func _reset() -> void:
 
 func _update_hero() -> void:
 	if not is_node_ready(): return
-	if _hero_3D != null: 
+	if _hero_3D != null:
 		_hero_3D.queue_free()
 	_hero_3D = _HEROES_3D[hero_id].instantiate()
 	_hero_3D.character_owner = self

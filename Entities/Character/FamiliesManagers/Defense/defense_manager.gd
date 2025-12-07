@@ -17,6 +17,10 @@ var _shield_throw_accumulated: int = 0
 var _shield_throw_last_armor: int = 0
 var _shield_throw_lock: bool = false # Pour éviter que le gain du bouclier qui revient ne déclenche un nouveau lancer
 
+# [AETHER REDIRECTOR]
+var _aether_redirector_timer: Timer
+var _aether_redirector_ready: bool = true
+
 
 # ============================== Node base functions ==============================
 
@@ -56,6 +60,27 @@ func start() -> void:
 		if not _owner.stats.armor_stacks_changed.is_connected(_on_owner_armor_stacks_changed):
 			_owner.stats.armor_stacks_changed.connect(_on_owner_armor_stacks_changed)
 
+	# [AETHER REDIRECTOR]
+	if _defense_stats.aether_redirector_activated:
+		_aether_redirector_ready = true
+		_aether_redirector_timer = Timer.new()
+		_aether_redirector_timer.one_shot = true
+		_aether_redirector_timer.timeout.connect(_on_aether_redirector_cooldown_finished)
+		add_child(_aether_redirector_timer)
+		
+	# [AETHER REDIRECTOR]
+	if _defense_stats.aether_redirector_activated:
+		_aether_redirector_ready = true
+		_aether_redirector_timer = Timer.new()
+		_aether_redirector_timer.one_shot = true
+		_aether_redirector_timer.timeout.connect(_on_aether_redirector_cooldown_finished)
+		add_child(_aether_redirector_timer)
+		
+		# Connect to FightingArea
+		if _owner.fighting_area != null:
+			if not _owner.fighting_area.projectile_spawned.is_connected(_on_projectile_spawned_aether_redirector):
+				_owner.fighting_area.projectile_spawned.connect(_on_projectile_spawned_aether_redirector)
+
 
 func stop() -> void:
 	# [SHIELD THROW]
@@ -71,7 +96,21 @@ func stop() -> void:
 	if _defense_stats.reactive_cover_activated:
 		if _owner.damage_taken.is_connected(_on_owner_damage_taken):
 			_owner.damage_taken.disconnect(_on_owner_damage_taken)
-			
+	
+	# [AETHER REDIRECTOR]
+	if _aether_redirector_timer != null:
+		_aether_redirector_timer.queue_free()
+		_aether_redirector_timer = null
+	# [AETHER REDIRECTOR]
+	if _aether_redirector_timer != null:
+		_aether_redirector_timer.queue_free()
+		_aether_redirector_timer = null
+	
+	if _owner.fighting_area != null:
+		if _owner.fighting_area.projectile_spawned.is_connected(_on_projectile_spawned_aether_redirector):
+			_owner.fighting_area.projectile_spawned.disconnect(_on_projectile_spawned_aether_redirector)
+
+
 	_clear_optional_timers()
 
 # --- Fonctions appelées par le système de dégâts ---
@@ -417,3 +456,28 @@ func _on_owner_damage_taken(_entity: Entity, damage: float, _damage_type: Utils.
 	var chance: float = _defense_stats.reactive_cover_chance
 	if Utils.is_randomize_modifier_active(chance):
 		_owner.inflict_condition_stacks(_owner, _defense_stats.reactive_cover_shield_amount, Utils.StackType.ARMOR, "Reactive Cover")
+
+# [AETHER REDIRECTOR]
+# [AETHER REDIRECTOR]
+func _on_projectile_spawned_aether_redirector(source: Entity, target: Entity, projectile_type: Projectile.ProjectileType, _modifiers: Array[Projectile.ProjectileEffect], projectile: Projectile) -> void:
+	if not _aether_redirector_ready: return
+	if projectile_type == Projectile.ProjectileType.AUTO_ATTACK: return # Ignore AA
+	
+	# Check if target is an ally (and not self)
+	if target == _owner or target.team != _owner.team: return
+	
+	# Redirect
+	print("[AETHER REDIRECTOR] Redirecting projectile from ", target.entity_name, " to self")
+	
+	_aether_redirector_ready = false
+	_aether_redirector_timer.start(_defense_stats.aether_redirector_period)
+	
+	projectile.set_target(_owner)
+	
+	# Gain Shield
+	print("[AETHER REDIRECTOR] Applying shield: ", _defense_stats.aether_redirector_shield_amount)
+	_owner.inflict_condition_stacks(_owner, _defense_stats.aether_redirector_shield_amount, Utils.StackType.ARMOR, "Aether Redirector")
+
+
+func _on_aether_redirector_cooldown_finished() -> void:
+	_aether_redirector_ready = true

@@ -115,7 +115,7 @@ func _log_interaction_received(receiver: Entity, source: Entity, action_type: Ut
 
 func _get_time() -> float:
 	if _is_accelerated_fight:
-		return _normal_fight_duration + ((Time.get_ticks_msec() as float) / 1000.0 - _accelerated_fight_start_time)# / GlobalFightingManager.ACCELERATED_FIGHT_TIME_SCALE
+		return _normal_fight_duration + ((Time.get_ticks_msec() as float) / 1000.0 - _accelerated_fight_start_time) # / GlobalFightingManager.ACCELERATED_FIGHT_TIME_SCALE
 	else:
 		return ((Time.get_ticks_msec() as float) / 1000.0 - _start_time)
 
@@ -134,7 +134,7 @@ func _on_game_manager_game_state_changed(state: Game.GameState) -> void:
 			_is_accelerated_fight = true
 
 
-func _on_fighting_area_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.ProjectileType, projectile_modifiers: Array[Projectile.ProjectileEffect]) -> void:
+func _on_fighting_area_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.ProjectileType, projectile_modifiers: Array[Projectile.ProjectileEffect], _projectile: Projectile) -> void:
 	if projectile_type == Projectile.ProjectileType.AUTO_ATTACK:
 		_log_attack(source, target,
 					projectile_modifiers.has(Projectile.ProjectileEffect.CRITIC),
