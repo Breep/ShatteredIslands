@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://serenityrejuvenativefaith"]
+
+[ext_resource type="Script" path="res://Card/Descriptions/Cards/Serenity/Epic/RejuvenativeFaith/serenity_rejuvenative_faith.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+_base_chance = Array[float]([20.0, 30.0, 40.0, 50.0, 60.0])
+_base_amount = Array[float]([0.5, 0.5, 0.5, 0.5, 0.5])
+name = "Rejuvenative Faith"
+description = ""
+texture_path = "res://Assets/Textures/Icons/Skills/Serenity/rejuvenative_faith.png"
+rarity = 2
+family = 3
+max_level = 5

@@ -3,6 +3,19 @@ extends FamilyStats
 
 #region Common Cards
 
+# [HOLY ORB]
+var holy_orb_activated: bool
+var holy_orb_cooldown: float
+var holy_orb_damage: float
+var holy_orb_heal: float
+var holy_orb_speed: float
+var holy_orb_duration: float
+
+# [REJUVENATIVE FAITH]
+var rejuvenative_faith_activated: bool
+var rejuvenative_faith_chance: Array[float]
+var rejuvenative_faith_amount: Array[float]
+
 # [HOLY TOUCH]
 var holy_touch_activated: bool # True if the player has at least one of this card
 var holy_touch_period: float # tick rate (/s)

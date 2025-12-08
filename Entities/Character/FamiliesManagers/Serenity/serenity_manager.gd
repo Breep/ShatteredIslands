@@ -43,9 +43,24 @@ func start() -> void:
 			if not ally.stats.health_changed.is_connected(_on_divine_intervention_health_changed):
 				ally.stats.health_changed.connect(_on_divine_intervention_health_changed.bind(ally))
 
+	# [REJUVENATIVE FAITH]
+	if _serenity_stats.rejuvenative_faith_activated:
+		if not _owner.interaction_received.is_connected(_on_interaction_received_rejuvenative_faith):
+			_owner.interaction_received.connect(_on_interaction_received_rejuvenative_faith)
+
 	
+func _stop_divine_intervention() -> void:
+	if _owner.stats.health_changed.is_connected(_on_divine_intervention_health_changed):
+		_owner.stats.health_changed.disconnect(_on_divine_intervention_health_changed)
+
+func _stop_rejuvenative_faith() -> void:
+	if _owner.interaction_received.is_connected(_on_interaction_received_rejuvenative_faith):
+		_owner.interaction_received.disconnect(_on_interaction_received_rejuvenative_faith)
+
 func stop() -> void:
 	_regen_tick_timer.stop()
+	_stop_divine_intervention()
+	_stop_rejuvenative_faith()
 	_clear_optional_timers()
 	
 	# [DIVINE INTERVENTION]
@@ -208,6 +223,34 @@ func _on_hit_holy_orb(cb_vars: Dictionary, damage: float, heal: float) -> void:
 		# Ally: Heal
 		# Projectile doesn't heal by default
 		target.take_heal(heal, false, "Holy Orb", _owner)
+
+# [REJUVENATIVE FAITH]
+func _on_interaction_received_rejuvenative_faith(_target: Entity, _source: Entity, action_type: Utils.ActionType, _action_id: StringName, value: float, _is_critical: bool) -> void:
+	# Check if action is CLEANSE or DISPELL
+	if action_type != Utils.ActionType.UTILITY_CLEANSE and action_type != Utils.ActionType.UTILITY_DISPELL:
+		return
+	
+	if value <= 0: return
+	
+	# Chance logic
+	# Use array index 0 for now as 'level' is not tracked in stats directly. 
+	# Ideally should track card level or family level.
+	# Using index 0 as safe default or max? User usually provides 5 values.
+	# Let's use index 0.
+	# Or, since 'apply' sets the array, implies the manager has access to the full array.
+	var chance: float = 20.0
+	if not _serenity_stats.rejuvenative_faith_chance.is_empty():
+		chance = _serenity_stats.rejuvenative_faith_chance[0] # Using level 1 as default
+	
+	if Utils.is_randomize_modifier_active(chance):
+		var amount: float = 0.5
+		if not _serenity_stats.rejuvenative_faith_amount.is_empty():
+			amount = _serenity_stats.rejuvenative_faith_amount[0]
+			
+		# Apply Regen: amount per stack removed
+		var regen_amount: float = value * amount
+		if regen_amount > 0:
+			_owner.inflict_condition_stacks(_owner, regen_amount, Utils.StackType.REGEN, "Rejuvenative Faith")
 
 #endregion
 
