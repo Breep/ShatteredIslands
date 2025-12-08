@@ -228,21 +228,10 @@ func _on_interaction_received_rejuvenative_faith(_target: Entity, _source: Entit
 		return
 	
 	if value <= 0: return
-	
-	# Chance logic
-	# Use array index 0 for now as 'level' is not tracked in stats directly. 
-	# Ideally should track card level or family level.
-	# Using index 0 as safe default or max? User usually provides 5 values.
-	# Let's use index 0.
-	# Or, since 'apply' sets the array, implies the manager has access to the full array.
-	var chance: float = 20.0
-	if not _serenity_stats.rejuvenative_faith_chance.is_empty():
-		chance = _serenity_stats.rejuvenative_faith_chance[0] # Using level 1 as default
+	var chance: float = _serenity_stats.rejuvenative_faith_chance
 	
 	if Utils.is_randomize_modifier_active(chance):
-		var amount: float = 0.5
-		if not _serenity_stats.rejuvenative_faith_amount.is_empty():
-			amount = _serenity_stats.rejuvenative_faith_amount[0]
+		var amount: float = _serenity_stats.rejuvenative_faith_amount
 			
 		# Apply Regen: amount per stack removed
 		var regen_amount: float = value * amount
@@ -330,14 +319,10 @@ func _on_action_done_warm_aura(_entity_ref: Entity, target: Entity, action_type:
 	if target == null or not is_instance_valid(target) or target.is_dead: return
 	
 	# Check Chance
-	var chance: float = 20.0
-	if not _serenity_stats.warm_aura_chance.is_empty():
-		chance = _serenity_stats.warm_aura_chance[0] # Use index 0 as default
+	var chance: float = _serenity_stats.warm_aura_chance
 		
 	if Utils.is_randomize_modifier_active(chance):
-		var amount: float = 1.0
-		if not _serenity_stats.warm_aura_cleanse_amount.is_empty():
-			amount = _serenity_stats.warm_aura_cleanse_amount[0]
+		var amount: float = _serenity_stats.warm_aura_cleanse_amount
 
 		_owner.cleanse(target, amount, "Warm Aura")
 #endregion
@@ -348,9 +333,7 @@ func _on_action_overhealed_overflowing_light(_entity_ref: Entity, target: Entity
 	if amount <= 0: return
 	if target == null or not is_instance_valid(target) or target.is_dead: return
 	
-	var shield_percent: float = 0.0
-	if not _serenity_stats.overflowing_light_shield_percent.is_empty():
-		shield_percent = _serenity_stats.overflowing_light_shield_percent[0] # Use index 0 as default
+	var shield_percent: float = _serenity_stats.overflowing_light_shield_percent
 		
 	if shield_percent > 0:
 		var shield_amount = amount * (shield_percent / 100.0)
