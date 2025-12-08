@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://holyorbvisual"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gold"]
+albedo_color = Color(1, 0.84, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.84, 0, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+material = SubResource("StandardMaterial3D_gold")
+radius = 0.5
+height = 1.0
+
+[node name="HolyOrbVisual" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_1")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(1, 0.8, 0.2, 1)
+light_energy = 2.0
+omni_range = 5.0

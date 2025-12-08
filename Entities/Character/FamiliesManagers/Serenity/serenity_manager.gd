@@ -155,6 +155,62 @@ func _holy_touch_timer_timeout() -> void:
 	_owner.heal(target, _serenity_stats.holy_touch_amount, "Holy Touch")
 #endregion
 
+#region ============== HOLY ORB ==================
+func _holy_orb_timer_timeout() -> void:
+	# [HOLY ORB]
+	# We want to throw the orb FORWARD.
+	# The Projectile system with BOOMERANG trajectory uses 'target' to determine initial direction 
+	# if we don't have a specific target entity.
+	# However, Projectile.gd _snapshot_target_and_prepare_path() uses target.global_position.
+	# If we pass _owner as target, it will just aim at self (zero direction).
+	# This is a limitation of the current Projectile system which is Target-centric.
+	# Workaround: Create a dummy "target position" forward of the player.
+	# But Projectile expects an ENTITY target.
+	# Alternative: _owner.projectile_attack usually launches at a target.
+	# If we want a skillshot, we might need a dummy target or modification to Projectile to accept Vector3 target.
+	# But given the constraints, let's look at Shield Throw. It targets an enemy.
+	# Holy Orb is a skillshot? "travels forward".
+	# If I use _owner as target, and offset the Start Position? No.
+	# If I modify Projectile to support 'direction' instead of 'target'? Too risky given 'Projectile.gd' complexity.
+	# Trick: Use a "Virtual Target" or simply find the farthest enemy in front?
+	# "Travels forward" implies player rotation.
+	# Let's try to pass 'null' as target to projectile? No, Projectile.gd checks 'if target == null: return'.
+	# Okay, I'll use a temporary dummy entity or similar? No, that's messy.
+	# Shield Throw: 'get_target(CLOSEST_ENEMY)'.
+	# If I target the CLOSEST_ENEMY in front?
+	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
+	
+	# If no enemy, we might want to cast it anyway?
+	# If no enemy, maybe just cast forward? But Projectile NEEDS a target entity.
+	
+	# I will just target the closest enemy for now. If no enemy, it won't cast (common validation).
+	if target == null: return
+	
+	var proj_stats := ProjectileStats.new()
+	var damage: float = _serenity_stats.holy_orb_damage
+	var heal: float = _serenity_stats.holy_orb_heal
+	
+	proj_stats.on_hit_logic_callbacks.append(_on_hit_holy_orb.bind(damage, heal))
+	
+	# ProjectileType.HOLY_ORB
+	_owner.projectile_attack(target, Projectile.ProjectileType.HOLY_ORB, _owner._turret._projectile_spawn_point, proj_stats)
+
+func _on_hit_holy_orb(cb_vars: Dictionary, damage: float, heal: float) -> void:
+	if not cb_vars.has(AutoAttackModifier.VarType.TARGET): return
+	var target: Entity = cb_vars[AutoAttackModifier.VarType.TARGET]
+	if target == null or not is_instance_valid(target): return
+	
+	if target.team != _owner.team:
+		# Enemy: True Damage
+		# Projectile default damage is 0 because we didn't set physical/magical in stats
+		target.take_damage(damage, Utils.DamageType.TRUE, false, "Holy Orb", _owner)
+	else:
+		# Ally: Heal
+		# Projectile doesn't heal by default
+		target.take_heal(heal, false, "Holy Orb", _owner)
+
+#endregion
+
 
 #region ============== LIFE SPRING ==================
 func _life_spring_timer_timeout() -> void:

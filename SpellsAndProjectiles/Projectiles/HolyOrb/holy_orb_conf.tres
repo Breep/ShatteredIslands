@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ProjectileConf" load_steps=3 format=3 uid="uid://holyorbconf"]
+
+[ext_resource type="Script" uid="uid://dad8gpwjaprib" path="res://SpellsAndProjectiles/Projectiles/projectile_conf_template.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://holyorbvisual" path="res://SpellsAndProjectiles/Projectiles/HolyOrb/holy_orb_visual.tscn" id="2_visual"]
+
+[resource]
+script = ExtResource("1_script")
+visual_scene = ExtResource("2_visual")
+trajectory_type = 5
+speed = 8.0
+lifetime_max = 3.0
+arc_height = 0.0
+bezier_control_height = 0.0
+randomize_arc_by = 0.0
+zigzag_amplitude = 0.0
+zigzag_frequency = 0.0
+turn_rate_deg_per_s = 360.0
+homing_retarget_each_frame = true
+metadata/_custom_type_script = "uid://dad8gpwjaprib"

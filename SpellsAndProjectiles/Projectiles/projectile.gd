@@ -16,7 +16,8 @@ enum ProjectileType {
 	VENOMOUS_DART,
 	SNAKE,
 	COSMIC_BOLT,
-	SHIELD_THROW
+	SHIELD_THROW,
+	HOLY_ORB
 }
 
 enum TrajectoryType {
@@ -25,6 +26,7 @@ enum TrajectoryType {
 	BEZIER, # Quadratic Bezier curve with control point height
 	ZIGZAG, # Lateral sine wobble while advancing
 	HOMING_SMOOTH, # Smooth-turn homing (rate-limited steering)
+	BOOMERANG # Fly straight, then return to caster
 }
 
 const PROJECTILE_CONF_REF: Dictionary[ProjectileType, ProjectileConf] = {
@@ -32,7 +34,8 @@ const PROJECTILE_CONF_REF: Dictionary[ProjectileType, ProjectileConf] = {
 	ProjectileType.VENOMOUS_DART: preload("res://SpellsAndProjectiles/Projectiles/VenomousDart/venomous_dart_conf.tres"),
 	ProjectileType.SNAKE: preload("res://SpellsAndProjectiles/Projectiles/Snake/snake_proj_conf.tres"),
 	ProjectileType.COSMIC_BOLT: preload("res://SpellsAndProjectiles/Projectiles/CosmicBolt/cosmic_bolt_conf.tres"),
-	ProjectileType.SHIELD_THROW: preload("res://SpellsAndProjectiles/Projectiles/ShieldThrow/shield_throw_conf.tres")
+	ProjectileType.SHIELD_THROW: preload("res://SpellsAndProjectiles/Projectiles/ShieldThrow/shield_throw_conf.tres"),
+	ProjectileType.HOLY_ORB: preload("res://SpellsAndProjectiles/Projectiles/HolyOrb/holy_orb_conf.tres")
 }
 
 # ============================== Constants / Exports ==============================
@@ -59,6 +62,8 @@ var _homing_retarget_each_frame: bool = true # If false, homes to snapshot
 var source: Entity
 var target: Entity
 var projectile_type: ProjectileType = ProjectileType.AUTO_ATTACK
+
+var _is_returning_flag: bool = false # Helper for Boomerang history reset
 
 var _projectile_conf: ProjectileConf
 
@@ -100,12 +105,23 @@ func _process(delta: float) -> void:
 	_move_toward_target(delta)
 
 func _on_body_entered(body: Node3D) -> void:
-	if target == null:
-		return
-	
-	if body is Entity and body == target:
+	var is_valid_hit: bool = false
+	if body is Entity:
+		if body == target:
+			is_valid_hit = true
+		elif stats.is_piercing or _trajectory_type == TrajectoryType.BOOMERANG:
+			if body.team != source.team or _trajectory_type == TrajectoryType.BOOMERANG: # Allow hitting allies for boomerang heal?
+				is_valid_hit = true
+				
+	if is_valid_hit:
+		# Check history
+		if body in _hit_history: return
+		
 		# 1. On ajoute la cible actuelle à l'historique
-		_hit_history.append(target)
+		_hit_history.append(body)
+		
+		# Use 'body' as the effective target for damage/effects
+		var hit_target: Entity = body
 		
 		var physical_damage_done_flat: float
 		if not multiplayer.is_server():
@@ -114,20 +130,21 @@ func _on_body_entered(body: Node3D) -> void:
 	
 		var physical_damage: float = stats.physical_damage_flat
 		if physical_damage > 0:
-			physical_damage_done_flat = target.take_damage(
+			physical_damage_done_flat = hit_target.take_damage(
 				physical_damage,
 				Utils.DamageType.PHYSICAL,
 				stats.physical_is_critical,
 				"AUTO ATTACK",
 				source,
 			)
-		source.signal_action_done(target, Utils.ActionType.DAMAGE_PHYSICAL, "AUTO ATTACK", physical_damage_done_flat, stats.physical_is_critical)
+		source.signal_action_done(hit_target, Utils.ActionType.DAMAGE_PHYSICAL, "AUTO ATTACK", physical_damage_done_flat, stats.physical_is_critical)
 		if stats.physical_is_critical:
-			source.signal_critical_action_done(target, Utils.ActionType.DAMAGE_PHYSICAL, stats.physical_base_damage, physical_damage_done_flat)
+			source.signal_critical_action_done(hit_target, Utils.ActionType.DAMAGE_PHYSICAL, stats.physical_base_damage, physical_damage_done_flat)
+	
 	
 		var magical_damage: float = stats.magical_damage_flat
 		if magical_damage > 0:
-			target.take_damage(
+			hit_target.take_damage(
 				magical_damage,
 				Utils.DamageType.MAGICAL,
 				stats.magical_is_critical,
@@ -135,15 +152,15 @@ func _on_body_entered(body: Node3D) -> void:
 				source)
 	
 		if stats.poison_stacks > 0:
-			if source != null: source.inflict_condition_stacks(target, stats.poison_stacks, Utils.StackType.POISON, "AUTO ATTACK")
-			else: target.take_condition_stacks(stats.poison_stacks, Utils.StackType.POISON, stats.poison_stacks_is_critical, "AUTO ATTACK", )
+			if source != null: source.inflict_condition_stacks(hit_target, stats.poison_stacks, Utils.StackType.POISON, "AUTO ATTACK")
+			else: hit_target.take_condition_stacks(stats.poison_stacks, Utils.StackType.POISON, stats.poison_stacks_is_critical, "AUTO ATTACK", )
 		
 		# --- CALLBACKS ---
 		for cb: Callable in stats.on_hit_logic_callbacks:
 			if cb.is_valid():
 				cb.call({
 					AutoAttackModifier.VarType.PHYSICAL_DAMAGE: physical_damage_done_flat,
-					AutoAttackModifier.VarType.TARGET: target
+					AutoAttackModifier.VarType.TARGET: hit_target
 					})
 		for cb: Callable in stats.on_hit_visual_callbacks:
 			if cb.is_valid():
@@ -155,7 +172,7 @@ func _on_body_entered(body: Node3D) -> void:
 		if stats.is_bouncing and stats.bounces_remaining > 0:
 			stats.bounces_remaining -= 1
 			var new_target: Entity = source.target_module.get_target_from(
-				target.global_position,
+				hit_target.global_position,
 				TargetModule.TargettingFromStrategy.CLOSEST_ENEMY,
 				_hit_history)
 			
@@ -163,7 +180,8 @@ func _on_body_entered(body: Node3D) -> void:
 				_set_target(new_target)
 				return
 		
-		queue_free()
+		if not stats.is_piercing and _trajectory_type != TrajectoryType.BOOMERANG:
+			queue_free()
 
 # ============================== Private functions ==============================
 
@@ -228,6 +246,8 @@ func _move_toward_target(delta: float) -> void:
 			_move_zigzag(delta)
 		TrajectoryType.HOMING_SMOOTH:
 			_move_homing_smooth(delta)
+		TrajectoryType.BOOMERANG:
+			_move_boomerang(delta)
 
 func _move_straight(delta: float) -> void:
 	var tgt := target.global_position + _vertical_offset * Vector3.UP
@@ -289,6 +309,44 @@ func _move_homing_smooth(delta: float) -> void:
 	_velocity = new_dir * _speed
 	global_position += _velocity * delta
 	look_at(global_position + _velocity)
+
+func _move_boomerang(delta: float) -> void:
+	# BOOMERANG Logic:
+	# Phase 1: Move straight forward (relative to start direction) for half lifetime
+	# Phase 2: Move towards source (caster)
+	if _life < _lifetime_max / 2.0:
+		# Going forward
+		# We use _dir_snapshot which is calculated at start as (target - start).normalized()
+		# For Boomerang, 'target' implies the direction we want to throw.
+		# If target is self (caster), this might be weird if we don't have an offset.
+		# Ideally, for Boomerang, we travel along _dir_snapshot.
+		# If _dir_snapshot is zero/invalid, default to forward of visual node? 
+		# No, _dir_snapshot is set in _snapshot_target_and_prepare_path.
+		global_position += _dir_snapshot * _speed * delta
+		look_at(global_position + _dir_snapshot)
+	else:
+		# Check if we just switched phases (approx) to clear history
+		if abs(_life - (_lifetime_max / 2.0)) < delta * 1.5:
+			# Reset history once for return trip
+			if not _is_returning_flag:
+				_is_returning_flag = true
+				_hit_history.clear()
+
+		# Returning
+		if source == null or not is_instance_valid(source):
+			queue_free()
+			return
+			
+		var return_dir = global_position.direction_to(source.global_position)
+		global_position += return_dir * _speed * delta
+		
+		# Face return direction
+		if return_dir.length_squared() > 0.001:
+			look_at(global_position + return_dir)
+			
+		# Check return arrival
+		if global_position.distance_squared_to(source.global_position) < 1.0:
+			queue_free()
 
 # ============================== Callbacks ==============================
 
