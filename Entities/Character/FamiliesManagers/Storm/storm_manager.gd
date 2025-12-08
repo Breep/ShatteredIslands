@@ -99,8 +99,6 @@ func start() -> void:
 	# [EYE OF THE CYCLONE]
 	_eye_of_the_cyclone_accumulated_bonus = 0.0
 
-# ============================== Private functions ==============================
-
 func stop() -> void:
 	_stop_lightning_rod()
 

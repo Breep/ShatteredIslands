@@ -92,6 +92,9 @@ func _create_optional_timers() -> void:
 	# [PURIFYING FLAME]
 	if _serenity_stats.purifying_flame_activated:
 		_optional_timers.append(Utils.create_perpetual_timer(self, _serenity_stats.purifying_flame_period, _purifying_flame_timer_timeout, true))
+	# [LUMINESCENT SURGE]
+	if _serenity_stats.luminescent_surge_activated:
+		_optional_timers.append(Utils.create_perpetual_timer(self, _serenity_stats.luminescent_surge_period, _luminescent_surge_timer_timeout, true))
 
 #endregion
 
@@ -284,8 +287,42 @@ func _on_dodge_graceful_step(_cb_vars: Dictionary) -> void:
 		_owner.inflict_condition_stacks(target, _serenity_stats.graceful_step_regen, Utils.StackType.REGEN, "Graceful Step")
 #endregion
 
-#region ==============  ==================
-
+#region ============== LUMINESCENT SURGE ==================
+func _luminescent_surge_timer_timeout() -> void:
+	# [LUMINESCENT SURGE]
+	var allies: Array[Entity] = _owner.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES)
+	# Filter invalid
+	var valid_allies: Array[Entity] = []
+	for ally in allies:
+		if ally != null and is_instance_valid(ally) and not ally.is_dead:
+			valid_allies.append(ally)
+			
+	# Sort by lowest HP percent
+	valid_allies.sort_custom(func(a, b):
+		var a_ratio = a.stats.health / a.stats.health_max
+		var b_ratio = b.stats.health / b.stats.health_max
+		return a_ratio < b_ratio
+	)
+	
+	var count = min(_serenity_stats.luminescent_surge_target_count, valid_allies.size())
+	for i in range(count):
+		var ally = valid_allies[i]
+		var max_hp = ally.stats.health_max
+		var current_hp = ally.stats.health
+		var lost_hp = max_hp - current_hp
+		
+		if lost_hp > 0:
+			var heal_amount = lost_hp * (_serenity_stats.luminescent_surge_heal_percent / 100.0)
+			if heal_amount > 0:
+				_owner.heal(ally, heal_amount, "Luminescent Surge")
+				
+		# Apply Regen if below threshold
+		if max_hp > 0:
+			var hp_percent = (current_hp / max_hp) * 100.0
+			if hp_percent < _serenity_stats.luminescent_surge_hp_threshold_percent:
+				var regen = _serenity_stats.luminescent_surge_regen_amount
+				if regen > 0:
+					_owner.inflict_condition_stacks(ally, regen, Utils.StackType.REGEN, "Luminescent Surge")
 
 #endregion
 

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://serenityrejuvenativefaith"]
+[gd_resource type="Resource" load_steps=2 format=3]
 
 [ext_resource type="Script" path="res://Card/Descriptions/Cards/Serenity/Epic/RejuvenativeFaith/serenity_rejuvenative_faith.gd" id="1_script"]
 

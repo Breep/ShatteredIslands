@@ -44,6 +44,13 @@ var purifying_flame_cleanse_amount: float # Amount
 
 
 #region Rare Card
+# [LUMINESCENT SURGE]
+var luminescent_surge_activated: bool
+var luminescent_surge_period: float
+var luminescent_surge_target_count: int
+var luminescent_surge_heal_percent: float
+var luminescent_surge_regen_amount: float
+var luminescent_surge_hp_threshold_percent: float
 #endregion
 
 #region Epic Card
