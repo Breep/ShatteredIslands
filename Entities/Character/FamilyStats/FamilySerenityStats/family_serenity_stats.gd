@@ -40,6 +40,11 @@ var purifying_flame_activated: bool # True if the player has at least one of thi
 var purifying_flame_period: float # tick rate (/s)
 var purifying_flame_cleanse_amount: float # Amount
 
+# [WARM AURA]
+var warm_aura_activated: bool
+var warm_aura_chance: Array[float]
+var warm_aura_cleanse_amount: Array[float]
+
 #endregion
 
 

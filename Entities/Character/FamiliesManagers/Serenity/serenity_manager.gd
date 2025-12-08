@@ -48,6 +48,11 @@ func start() -> void:
 		if not _owner.interaction_received.is_connected(_on_interaction_received_rejuvenative_faith):
 			_owner.interaction_received.connect(_on_interaction_received_rejuvenative_faith)
 
+	# [WARM AURA]
+	if _serenity_stats.warm_aura_activated:
+		if not _owner.action_done.is_connected(_on_action_done_warm_aura):
+			_owner.action_done.connect(_on_action_done_warm_aura)
+
 	
 func _stop_divine_intervention() -> void:
 	if _owner.stats.health_changed.is_connected(_on_divine_intervention_health_changed):
@@ -57,10 +62,15 @@ func _stop_rejuvenative_faith() -> void:
 	if _owner.interaction_received.is_connected(_on_interaction_received_rejuvenative_faith):
 		_owner.interaction_received.disconnect(_on_interaction_received_rejuvenative_faith)
 
+func _stop_warm_aura() -> void:
+	if _owner.action_done.is_connected(_on_action_done_warm_aura):
+		_owner.action_done.disconnect(_on_action_done_warm_aura)
+
 func stop() -> void:
 	_regen_tick_timer.stop()
 	_stop_divine_intervention()
 	_stop_rejuvenative_faith()
+	_stop_warm_aura()
 	_clear_optional_timers()
 	
 	# [DIVINE INTERVENTION]
@@ -324,6 +334,27 @@ func _luminescent_surge_timer_timeout() -> void:
 				if regen > 0:
 					_owner.inflict_condition_stacks(ally, regen, Utils.StackType.REGEN, "Luminescent Surge")
 
+#endregion
+
+
+#region ============== WARM AURA ==================
+func _on_action_done_warm_aura(_entity_ref: Entity, target: Entity, action_type: Utils.ActionType, _action_id: StringName, _value: float, _is_critical: bool) -> void:
+	# Check if action is HEAL
+	if action_type != Utils.ActionType.UTILITY_HEAL: return
+	
+	if target == null or not is_instance_valid(target) or target.is_dead: return
+	
+	# Check Chance
+	var chance: float = 20.0
+	if not _serenity_stats.warm_aura_chance.is_empty():
+		chance = _serenity_stats.warm_aura_chance[0] # Use index 0 as default
+		
+	if Utils.is_randomize_modifier_active(chance):
+		var amount: float = 1.0
+		if not _serenity_stats.warm_aura_cleanse_amount.is_empty():
+			amount = _serenity_stats.warm_aura_cleanse_amount[0]
+			
+		_owner.cleanse(target, amount, "Warm Aura")
 #endregion
 
 #region ============== REGEN ==================
