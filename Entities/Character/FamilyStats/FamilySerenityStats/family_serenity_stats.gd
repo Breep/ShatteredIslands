@@ -45,6 +45,10 @@ var warm_aura_activated: bool
 var warm_aura_chance: Array[float]
 var warm_aura_cleanse_amount: Array[float]
 
+# [OVERFLOWING LIGHT]
+var overflowing_light_activated: bool
+var overflowing_light_shield_percent: Array[float]
+
 #endregion
 
 

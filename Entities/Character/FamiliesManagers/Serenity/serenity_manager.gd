@@ -53,35 +53,20 @@ func start() -> void:
 		if not _owner.action_done.is_connected(_on_action_done_warm_aura):
 			_owner.action_done.connect(_on_action_done_warm_aura)
 
+	# [OVERFLOWING LIGHT]
+	if _serenity_stats.overflowing_light_activated:
+		if not _owner.action_overhealed.is_connected(_on_action_overhealed_overflowing_light):
+			_owner.action_overhealed.connect(_on_action_overhealed_overflowing_light)
+
 	
-func _stop_divine_intervention() -> void:
-	if _owner.stats.health_changed.is_connected(_on_divine_intervention_health_changed):
-		_owner.stats.health_changed.disconnect(_on_divine_intervention_health_changed)
-
-func _stop_rejuvenative_faith() -> void:
-	if _owner.interaction_received.is_connected(_on_interaction_received_rejuvenative_faith):
-		_owner.interaction_received.disconnect(_on_interaction_received_rejuvenative_faith)
-
-func _stop_warm_aura() -> void:
-	if _owner.action_done.is_connected(_on_action_done_warm_aura):
-		_owner.action_done.disconnect(_on_action_done_warm_aura)
-
 func stop() -> void:
 	_regen_tick_timer.stop()
 	_stop_divine_intervention()
 	_stop_rejuvenative_faith()
 	_stop_warm_aura()
+	_stop_overflowing_light()
 	_clear_optional_timers()
-	
-	# [DIVINE INTERVENTION]
-	if _serenity_stats.divine_intervention_activated:
-		var allies: Array[Entity] = _owner.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES)
-		for ally in allies:
-			if ally == null or not is_instance_valid(ally): continue
-			if ally.stats.health_changed.is_connected(_on_divine_intervention_health_changed):
-				ally.stats.health_changed.disconnect(_on_divine_intervention_health_changed)
 
-	
 # ============================== Private functions ==============================
 
 #region optional timer
@@ -171,6 +156,26 @@ func _add_action_modifiers() -> void:
 
 #region others card
 
+func _stop_divine_intervention() -> void:
+	if _serenity_stats.divine_intervention_activated:
+		var allies: Array[Entity] = _owner.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES)
+		for ally in allies:
+			if ally == null or not is_instance_valid(ally): continue
+			if ally.stats.health_changed.is_connected(_on_divine_intervention_health_changed):
+				ally.stats.health_changed.disconnect(_on_divine_intervention_health_changed)
+
+func _stop_rejuvenative_faith() -> void:
+	if _owner.interaction_received.is_connected(_on_interaction_received_rejuvenative_faith):
+		_owner.interaction_received.disconnect(_on_interaction_received_rejuvenative_faith)
+
+func _stop_warm_aura() -> void:
+	if _owner.action_done.is_connected(_on_action_done_warm_aura):
+		_owner.action_done.disconnect(_on_action_done_warm_aura)
+
+func _stop_overflowing_light() -> void:
+	if _owner.action_overhealed.is_connected(_on_action_overhealed_overflowing_light):
+		_owner.action_overhealed.disconnect(_on_action_overhealed_overflowing_light)
+
 #endregion
 
 # ============================== Callbacks functions ==============================
@@ -186,26 +191,6 @@ func _holy_touch_timer_timeout() -> void:
 #region ============== HOLY ORB ==================
 func _holy_orb_timer_timeout() -> void:
 	# [HOLY ORB]
-	# We want to throw the orb FORWARD.
-	# The Projectile system with BOOMERANG trajectory uses 'target' to determine initial direction 
-	# if we don't have a specific target entity.
-	# However, Projectile.gd _snapshot_target_and_prepare_path() uses target.global_position.
-	# If we pass _owner as target, it will just aim at self (zero direction).
-	# This is a limitation of the current Projectile system which is Target-centric.
-	# Workaround: Create a dummy "target position" forward of the player.
-	# But Projectile expects an ENTITY target.
-	# Alternative: _owner.projectile_attack usually launches at a target.
-	# If we want a skillshot, we might need a dummy target or modification to Projectile to accept Vector3 target.
-	# But given the constraints, let's look at Shield Throw. It targets an enemy.
-	# Holy Orb is a skillshot? "travels forward".
-	# If I use _owner as target, and offset the Start Position? No.
-	# If I modify Projectile to support 'direction' instead of 'target'? Too risky given 'Projectile.gd' complexity.
-	# Trick: Use a "Virtual Target" or simply find the farthest enemy in front?
-	# "Travels forward" implies player rotation.
-	# Let's try to pass 'null' as target to projectile? No, Projectile.gd checks 'if target == null: return'.
-	# Okay, I'll use a temporary dummy entity or similar? No, that's messy.
-	# Shield Throw: 'get_target(CLOSEST_ENEMY)'.
-	# If I target the CLOSEST_ENEMY in front?
 	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
 	
 	# If no enemy, we might want to cast it anyway?
@@ -355,6 +340,24 @@ func _on_action_done_warm_aura(_entity_ref: Entity, target: Entity, action_type:
 			amount = _serenity_stats.warm_aura_cleanse_amount[0]
 			
 		_owner.cleanse(target, amount, "Warm Aura")
+#endregion
+
+#endregion
+
+#region ============== OVERFLOWING LIGHT ==================
+func _on_action_overhealed_overflowing_light(_entity_ref: Entity, target: Entity, amount: float) -> void:
+	# [OVERFLOWING LIGHT]
+	if amount <= 0: return
+	if target == null or not is_instance_valid(target) or target.is_dead: return
+	
+	var shield_percent: float = 0.0
+	if not _serenity_stats.overflowing_light_shield_percent.is_empty():
+		shield_percent = _serenity_stats.overflowing_light_shield_percent[0] # Use index 0 as default
+		
+	if shield_percent > 0:
+		var shield_amount = amount * (shield_percent / 100.0)
+		if shield_amount > 0:
+			_owner.inflict_condition_stacks(target, shield_amount, Utils.StackType.ARMOR, "Overflowing Light")
 #endregion
 
 #region ============== REGEN ==================

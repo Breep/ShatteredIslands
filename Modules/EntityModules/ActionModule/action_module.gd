@@ -51,7 +51,7 @@ func direct_attack_percent(target: Entity, damage_percent: float, damage_type: U
 			hp = target.stats.health
 		Utils.PercentModifier.LOST_HP:
 			hp = target.stats.health_max - _owner.stats.health
-	var damage: float = hp * damage_percent  / 100.0
+	var damage: float = hp * damage_percent / 100.0
 	direct_attack(target, damage, damage_type, action_id)
 
 
@@ -91,7 +91,6 @@ func _spawn_projectile(target: Entity, projectile_type: Projectile.ProjectileTyp
 #endregion
 
 
-
 #region ============================== Heal ==============================
 # [Server only]
 func heal(target: Entity, heal_amount: float, action_id: StringName) -> void:
@@ -101,6 +100,11 @@ func heal(target: Entity, heal_amount: float, action_id: StringName) -> void:
 	var crit_multiplier = _get_crit_multiplier(Utils.ActionType.UTILITY_HEAL)
 	heal_amount = heal_amount_before_crit * crit_multiplier["multiplier"]
 	var heal_taken: float = target.take_heal(heal_amount, crit_multiplier["is_critical"], action_id, _owner)
+	
+	var overheal_amount: float = heal_amount - heal_taken
+	if overheal_amount > 0:
+		_owner.signal_action_overhealed(target, overheal_amount)
+		
 	if crit_multiplier["is_critical"]:
 		_owner.signal_critical_action_done(target, Utils.ActionType.UTILITY_HEAL, heal_amount_before_crit, heal_taken)
 	_owner.signal_action_done(target, Utils.ActionType.UTILITY_HEAL, action_id, heal_taken, crit_multiplier["is_critical"])
@@ -120,7 +124,6 @@ func heal_percent(target: Entity, percent: float, percent_modifier: Utils.Percen
 	var heal_amount: float = (percent * hp as float) / 100.0
 	heal(target, heal_amount, action_id)
 #endregion
-
 
 
 #region ============================== Condition stacks ==============================
@@ -144,7 +147,6 @@ func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: 
 		_owner.signal_critical_action_done(target, Utils.stack_to_action(stack_type), stacks_number_before_crit, stacks_taken)
 	_owner.signal_action_done(target, Utils.stack_to_action(stack_type), action_id, stacks_taken, crit_multiplier["is_critical"])
 #endregion
-
 
 
 #region ============================== Cleanse and Dispell ==============================
@@ -171,7 +173,6 @@ func dispell(target: Entity, value: float, action_id: StringName) -> void:
 		_owner.signal_critical_action_done(target, Utils.ActionType.UTILITY_DISPELL, value_before_crit, stack_removed)
 	_owner.signal_action_done(target, Utils.ActionType.UTILITY_DISPELL, action_id, value, crit_multiplier["is_critical"])
 #endregion
-
 
 
 #region ============================== Spells ==============================
@@ -266,7 +267,6 @@ func _cast_chain_lightning(target: Entity, spell_modifier: Dictionary) -> void:
 #endregion
 
 
-
 #region  ============================== Summon ==============================
 func summon_entity(entity_type: Entity.EntityType, entity_spawn_global_position: Vector3, entity_modifier: Dictionary) -> void:
 	if _spawn_manager == null:
@@ -274,7 +274,7 @@ func summon_entity(entity_type: Entity.EntityType, entity_spawn_global_position:
 		return
 	match entity_type:
 		Entity.EntityType.CHARACTER: print("Summon a character ? I think not !")
-		Entity.EntityType.SNAKE_BARREL:  _summon_snake_barrel(entity_spawn_global_position, entity_modifier)
+		Entity.EntityType.SNAKE_BARREL: _summon_snake_barrel(entity_spawn_global_position, entity_modifier)
 		Entity.EntityType.SNAKE: _summon_snake(entity_spawn_global_position, entity_modifier)
 
 
@@ -297,7 +297,6 @@ func _summon_snake(entity_spawn_global_position: Vector3, _entity_modifier: Dict
 #endregion
 
 
-
 #region ===== Private functions
 func _get_crit_multiplier(action_type: Utils.ActionType) -> Dictionary:
 	var is_critical: bool = false
@@ -308,7 +307,7 @@ func _get_crit_multiplier(action_type: Utils.ActionType) -> Dictionary:
 		is_critical = true
 		crit_multiplier_percent = _owner.stats.get_stat(EntityStats.StatType.CRIT_MULT, action_type)
 	
-	return { "multiplier": remap(crit_multiplier_percent, 0, 100, 1, 2), "is_critical": is_critical }
+	return {"multiplier": remap(crit_multiplier_percent, 0, 100, 1, 2), "is_critical": is_critical}
 
 func _get_strenght_weakness_multiplier(action_type: Utils.ActionType) -> float:
 	var strenght: float = _owner.stats.get_stat(EntityStats.StatType.STRENGTH, action_type)

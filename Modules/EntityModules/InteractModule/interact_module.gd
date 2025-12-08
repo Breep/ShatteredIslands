@@ -92,12 +92,15 @@ func take_heal(heal_amount: float, is_critical: bool, action_id: StringName, sou
 		if absorbed_amount > 0:
 			_owner.signal_stack_taken(Utils.StackType.NECROSIS, -absorbed_amount, false)
 
+	var initial_health: float = _owner.stats.health
 	if heal_amount > 0:
 		_owner.stats.health += heal_amount
 		_owner.signal_heal_taken(heal_amount, is_critical)
 	
+	var effective_heal: float = _owner.stats.health - initial_health
+	
 	_owner.signal_interaction_received(source, Utils.ActionType.UTILITY_HEAL, action_id, heal_amount, is_critical)
-	return heal_amount
+	return effective_heal
 #endregion
 
 #region ============================== Cleanse/Dispell ==============================

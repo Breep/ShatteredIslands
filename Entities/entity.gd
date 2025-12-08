@@ -26,6 +26,10 @@ func signal_action_done(target: Entity, action_type: Utils.ActionType, action_id
 	Verbose.trace("Action done | " + entity_name + " [" + str(id) + "] | " + target.entity_name + " [" + str(target.id) + "] | " + \
 					Utils.ActionType.keys()[action_type] + " | " + action_id + " | " + str(value) + " | " + str(is_critical), Verbose.Category.ENTITY)
 
+signal action_overhealed(entity_ref: Entity, target: Entity, amount: float)
+func signal_action_overhealed(target: Entity, amount: float) -> void:
+	action_overhealed.emit(self, target, amount)
+
 signal critical_action_done(entity_ref: Entity, target: Entity, action_type: Utils.ActionType, base_value: float, real_value: float)
 func signal_critical_action_done(target: Entity, action_type: Utils.ActionType, base_value: float, real_value: float) -> void:
 	critical_action_done.emit(self, target, action_type, base_value, real_value)
