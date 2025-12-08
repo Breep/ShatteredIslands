@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://5nrlnrpmgseo"
-path="res://.godot/imported/fire_titans_protection.jpg-848b159fae0d12c82b3f7b9f9818311e.ctex"
+path="res://.godot/imported/fire_titans_protection.jpg-ac32aaa4704515dd1b7e509a9875dbbd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Card/Descriptions/Cards/Fire/Common/TitansProtection/fire_titans_protection.jpg"
-dest_files=["res://.godot/imported/fire_titans_protection.jpg-848b159fae0d12c82b3f7b9f9818311e.ctex"]
+source_file="res://Card/Descriptions/Cards/Fire/Common/Quasar/fire_titans_protection.jpg"
+dest_files=["res://.godot/imported/fire_titans_protection.jpg-ac32aaa4704515dd1b7e509a9875dbbd.ctex"]
 
 [params]
 

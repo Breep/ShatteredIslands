@@ -1,14 +1,24 @@
-[gd_resource type="Resource" script_class="Family" load_steps=6 format=3 uid="uid://djjcx0kdvmr5f"]
+[gd_resource type="Resource" script_class="Family" load_steps=16 format=3 uid="uid://djjcx0kdvmr5f"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_kkrq8"]
 [ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://Card/Templates/family.gd" id="2_ad662"]
 [ext_resource type="Resource" uid="uid://kbmlikqifik1" path="res://Card/Descriptions/Cards/Storm/Rare/StormBreaker/storm_storm_breaker.tres" id="2_k3wcx"]
 [ext_resource type="Texture2D" uid="uid://ctng6xf3suweb" path="res://Card/Descriptions/Families/Icons/storm.png" id="2_xw4lb"]
 [ext_resource type="Resource" uid="uid://cki0jkayic783" path="res://Card/Descriptions/Cards/Storm/Common/Storm Battery/storm_storm_battery.tres" id="3_l7wou"]
+[ext_resource type="Resource" uid="uid://bp2rry4m26npn" path="res://Card/Descriptions/Cards/Storm/Common/EyeOfTheCyclone/storm_eye_of_the_cyclone.tres" id="4_75unv"]
+[ext_resource type="Resource" uid="uid://cvotvjg1tq3fy" path="res://Card/Descriptions/Cards/Storm/Common/Faraday/storm_faraday.tres" id="5_htowo"]
+[ext_resource type="Resource" path="res://Card/Descriptions/Cards/Storm/Common/LightningFootwork/storm_lightning_footwork.tres" id="6_xhkb7"]
+[ext_resource type="Resource" uid="uid://dtclhv8aaqrbk" path="res://Card/Descriptions/Cards/Storm/Common/Quickcharge/storm_quickcharge.tres" id="7_17cfn"]
+[ext_resource type="Resource" uid="uid://lltb3d0x5w6a" path="res://Card/Descriptions/Cards/Storm/Common/ViolentOverload/storm_violent_overload.tres" id="8_clxh8"]
+[ext_resource type="Resource" uid="uid://cpla6nuggduya" path="res://Card/Descriptions/Cards/Storm/Epic/ChainLightning/storm_chain_lightning.tres" id="9_mofa2"]
+[ext_resource type="Resource" uid="uid://vp6me5c6eynh" path="res://Card/Descriptions/Cards/Storm/Epic/ThunderBerserker/storm_thunder_berserker.tres" id="10_2lknm"]
+[ext_resource type="Resource" uid="uid://cnba6juwvfqyn" path="res://Card/Descriptions/Cards/Storm/Legendary/ThunderStorm/storm_thunder_storm.tres" id="11_l5u5k"]
+[ext_resource type="Resource" uid="uid://c020vjgxbnd02" path="res://Card/Descriptions/Cards/Storm/Rare/Dynamo/storm_dynamo.tres" id="12_u8506"]
+[ext_resource type="Resource" uid="uid://c4b578ugnm8p5" path="res://Card/Descriptions/Cards/Storm/Rare/Electrocute/storm_electrocute.tres" id="13_jm20g"]
 
 [resource]
 script = ExtResource("2_ad662")
-cards = Array[ExtResource("1_kkrq8")]([ExtResource("2_k3wcx"), ExtResource("3_l7wou")])
+cards = Array[ExtResource("1_kkrq8")]([ExtResource("2_k3wcx"), ExtResource("3_l7wou"), ExtResource("4_75unv"), ExtResource("5_htowo"), ExtResource("6_xhkb7"), ExtResource("7_17cfn"), ExtResource("8_clxh8"), ExtResource("9_mofa2"), ExtResource("10_2lknm"), ExtResource("11_l5u5k"), ExtResource("12_u8506"), ExtResource("13_jm20g")])
 icon = ExtResource("2_xw4lb")
 family_name = "Storm"
 family_type = 4

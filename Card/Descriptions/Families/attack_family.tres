@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Family" load_steps=14 format=3 uid="uid://cbmvayb0bb72n"]
+[gd_resource type="Resource" script_class="Family" load_steps=15 format=3 uid="uid://cbmvayb0bb72n"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_4dvmk"]
 [ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://Card/Templates/family.gd" id="2_m6yig"]
@@ -13,10 +13,11 @@
 [ext_resource type="Resource" uid="uid://dxr7p12a3u5s0" path="res://Card/Descriptions/Cards/Attack/Common/RustyDagger/attack_rusty_dagger.tres" id="10_cg3dx"]
 [ext_resource type="Resource" uid="uid://qm75h7gw2hgn" path="res://Card/Descriptions/Cards/Attack/Common/HealingCrossbow/attack_healing_crossbow.tres" id="11_eobhs"]
 [ext_resource type="Resource" uid="uid://dpnpvtk3elac0" path="res://Card/Descriptions/Cards/Attack/Common/ScorchingBlade/attack_scorching_blade.tres" id="11_gthbg"]
+[ext_resource type="Resource" uid="uid://dm4yi57mem0b4" path="res://Card/Descriptions/Cards/Attack/Common/ProtectoSpear/attack_protecto_spear.tres" id="12_gthbg"]
 
 [resource]
 script = ExtResource("2_m6yig")
-cards = Array[ExtResource("1_4dvmk")]([ExtResource("5_cg3dx"), ExtResource("7_eobhs"), ExtResource("9_ypjtd"), ExtResource("5_gthbg"), ExtResource("10_cg3dx"), ExtResource("11_gthbg"), ExtResource("8_cg3dx"), ExtResource("4_xkvlw"), ExtResource("2_m74lt"), ExtResource("11_eobhs")])
+cards = Array[ExtResource("1_4dvmk")]([ExtResource("5_cg3dx"), ExtResource("7_eobhs"), ExtResource("9_ypjtd"), ExtResource("5_gthbg"), ExtResource("10_cg3dx"), ExtResource("11_gthbg"), ExtResource("8_cg3dx"), ExtResource("4_xkvlw"), ExtResource("2_m74lt"), ExtResource("11_eobhs"), ExtResource("12_gthbg")])
 icon = ExtResource("9_m74lt")
 family_name = "Attack"
 family_type = 1
