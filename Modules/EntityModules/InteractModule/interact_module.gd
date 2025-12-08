@@ -23,6 +23,9 @@ func take_damage(damage: float, damage_type: Utils.DamageType, is_critical: bool
 			return 0
 		damage *= _get_resistance_vulnerability_multiplier(Utils.damage_to_action(damage_type))
 		
+		if is_critical:
+			damage *= _get_crit_resistance_multiplier(Utils.damage_to_action(damage_type))
+		
 		damage_before_armor = damage
 		if _defense_manager != null: damage = _defense_manager.get_reduced_damage_taken_from_armor(damage, damage_type) # Reduce flat of PHYSIC AND MAGIC damage
 
@@ -180,6 +183,12 @@ func _get_resistance_vulnerability_multiplier(action_type: Utils.ActionType) -> 
 	var res: float = _owner.stats.get_stat(EntityStats.StatType.RESISTANCE, action_type)
 	var vuln: float = _owner.stats.get_stat(EntityStats.StatType.VULNERABILITY, action_type)
 	return (100 + vuln) / (100 + res)
+
+func _get_crit_resistance_multiplier(action_type: Utils.ActionType) -> float:
+	var res: float = _owner.stats.get_stat(EntityStats.StatType.CRIT_RESISTANCE, action_type)
+	# Assuming standard resistance formula: 100 / (100 + res)
+	# If we want to support "Crit Vulnerability" later, we could add it here too.
+	return 100.0 / (100.0 + res)
 #endregion
 
 

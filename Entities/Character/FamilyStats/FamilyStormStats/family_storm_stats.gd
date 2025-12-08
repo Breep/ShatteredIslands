@@ -16,8 +16,8 @@ var lightning_footwork_dodge_increase: float
 
 # [ELECTROCUTE]
 var electrocute_activated: bool
-var electrocute_chance: float
-var electrocute_necrosis_amount: float
+var electrocute_chance: Array[float]
+var electrocute_necrosis_amount: Array[float]
 
 # [QUICKCHARGE]
 var quickcharge_activated: bool
@@ -25,8 +25,8 @@ var quickcharge_grind_percent: float
 
 # [LIGHTNING ROD]
 var lightning_rod_activated: bool
-var lightning_rod_reduction: float
-var lightning_rod_hp_threshold: float
+var lightning_rod_resistance_amount: float
+var lightning_rod_hp_threshold_percent: float
 
 # [EYE OF THE CYCLONE]
 var eye_of_the_cyclone_activated: bool

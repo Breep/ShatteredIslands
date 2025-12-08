@@ -99,7 +99,11 @@ func start() -> void:
 	# [EYE OF THE CYCLONE]
 	_eye_of_the_cyclone_accumulated_bonus = 0.0
 
+# ============================== Private functions ==============================
+
 func stop() -> void:
+	_stop_lightning_rod()
+
 	if _lightning_spam_timer:
 		_lightning_spam_timer.stop()
 	_clear_optional_timers()
@@ -177,6 +181,12 @@ func _add_stat_modifiers() -> void:
 		mod.tags = [StatModifier.TagType.CARD]
 		_owner.stats_manager.register_modifier(mod)
 		
+	# [LIGHTNING ROD]
+	if _storm_stats.lightning_rod_activated:
+		if not _owner.stats.health_changed.is_connected(_on_lightning_rod_health_changed):
+			_owner.stats.health_changed.connect(_on_lightning_rod_health_changed)
+		_on_lightning_rod_health_changed(_owner.stats.health) # Initial check
+		
 #endregion
 
 #region action modifier
@@ -238,7 +248,12 @@ func _apply_storm_breaker_effect() -> void:
 	mod.tags = [StatModifier.TagType.CARD]
 	target.stats_manager.update_modifier(mod)
 
-# [STORM BATTERY]
+# [LIGHTNING ROD]
+func _stop_lightning_rod() -> void:
+	if _owner.stats.health_changed.is_connected(_on_lightning_rod_health_changed):
+		_owner.stats.health_changed.disconnect(_on_lightning_rod_health_changed)
+	_apply_lightning_rod_modifier(false)
+
 func _apply_storm_battery_effect() -> void:
 	if _owner == null or not is_instance_valid(_owner): return
 	
@@ -303,6 +318,34 @@ func _apply_eye_of_the_cyclone_effect() -> void:
 	_owner.stats_manager.update_modifier(mod)
 	
 	_owner.heal(_owner, max_hp_bonus, "Eye of the Cyclone")
+
+# [LIGHTNING ROD]
+func _on_lightning_rod_health_changed(new_health: float) -> void:
+	if not _storm_stats.lightning_rod_activated: return
+	if _owner.stats.health_max == 0: return
+	
+	var percent: float = (new_health / _owner.stats.health_max) * 100.0
+	
+	if percent > _storm_stats.lightning_rod_hp_threshold_percent:
+		_apply_lightning_rod_modifier(true)
+	else:
+		_apply_lightning_rod_modifier(false)
+
+func _apply_lightning_rod_modifier(enabled: bool) -> void:
+	var mod_id: String = "Lightning Rod"
+	if enabled:
+		for action_type in Utils.get_all_actions():
+			var mod := StatModifier.new()
+			mod.id = mod_id + str(action_type)
+			mod.stat_type = EntityStats.StatType.CRIT_RESISTANCE
+			mod.action_type = action_type
+			mod.calc_type = StatModifier.CalcType.ADD
+			mod.value = _storm_stats.lightning_rod_resistance_amount
+			mod.tags = [StatModifier.TagType.CARD]
+			_owner.stats_manager.register_modifier(mod)
+	else:
+		for action_type in Utils.get_all_actions():
+			_owner.stats_manager.remove_modifier(mod_id + str(action_type))
 
 #endregion
 

@@ -18,7 +18,8 @@ enum StatType {
 	VULNERABILITY,
 	STRENGTH,
 	WEAKNESS,
-	DODGE
+	DODGE,
+	CRIT_RESISTANCE
 	}
 #endregion
 
@@ -166,6 +167,9 @@ var _necrosis_stacks: float = 0
 #region ============================== Resistances ==============================
 signal resistance_changed(new_resistance: float, action_type: Utils.ActionType)
 var _resistances: Dictionary[Utils.ActionType, float]
+
+signal crit_resistance_changed(new_crit_resistance: float, action_type: Utils.ActionType)
+var _crit_resistances: Dictionary[Utils.ActionType, float]
 #endregion
 
 
@@ -219,6 +223,7 @@ func reset_from_hero(hero: Hero, lvl: int) -> void:
 		_dodges[action_type] = hero.stats[lvl].dodges.get(action_type, 0.0)
 		_strengths[action_type] = hero.stats[lvl].strength.get(action_type, 0.0)
 		_weaknesses[action_type] = hero.stats[lvl].weakness.get(action_type, 0.0)
+		_crit_resistances[action_type] = hero.stats[lvl].crit_resistances.get(action_type, 0.0)
 	
 	has_been_reset.emit()
 
@@ -239,6 +244,7 @@ func get_stat(stat_type: StatType, action_type: Utils.ActionType = Utils.ActionT
 		EntityStats.StatType.DODGE: return _dodges.get(action_type, 0.0)
 		EntityStats.StatType.STRENGTH: return _strengths.get(action_type, 0.0)
 		EntityStats.StatType.WEAKNESS: return _weaknesses.get(action_type, 0.0)
+		EntityStats.StatType.CRIT_RESISTANCE: return _crit_resistances.get(action_type, 0.0)
 		_:
 			printerr("EntityStats: get_stat() - Unknown stat type [", stat_type, "]")
 			return 0.0
@@ -274,5 +280,8 @@ func update_stat(stat_type: StatType, value: float, action_type: Utils.ActionTyp
 		EntityStats.StatType.WEAKNESS:
 			_weaknesses[action_type] = value
 			weakness_changed.emit(value, action_type)
+		EntityStats.StatType.CRIT_RESISTANCE:
+			_crit_resistances[action_type] = value
+			crit_resistance_changed.emit(value, action_type)
 		_: printerr("EntityStats: get_stat() - Unknown stat type [", stat_type, "]")
 #endregion
