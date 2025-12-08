@@ -338,10 +338,8 @@ func _on_action_done_warm_aura(_entity_ref: Entity, target: Entity, action_type:
 		var amount: float = 1.0
 		if not _serenity_stats.warm_aura_cleanse_amount.is_empty():
 			amount = _serenity_stats.warm_aura_cleanse_amount[0]
-			
-		_owner.cleanse(target, amount, "Warm Aura")
-#endregion
 
+		_owner.cleanse(target, amount, "Warm Aura")
 #endregion
 
 #region ============== OVERFLOWING LIGHT ==================

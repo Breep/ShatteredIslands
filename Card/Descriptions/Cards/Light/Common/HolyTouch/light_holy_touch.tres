@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_epg00"]
 script = ExtResource("2_7r5a3")
-_heal_amount = Array[int]([10, 20, 30, 40, 50])
+_heal_amount = Array[int]([15, 30, 45, 60, 75])
 _period = Array[float]([1.2, 1.2, 1.2, 1.2, 1.2])
 metadata/_custom_type_script = "uid://tswgfdudffa2"
 
@@ -16,5 +16,4 @@ name = "Holy Touch"
 picture = ExtResource("1_xf8j7")
 family = 5
 player_upgrade = SubResource("Resource_epg00")
-lvl = 5
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"
