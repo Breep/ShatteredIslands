@@ -19,6 +19,6 @@ func get_description(cardlvl: int) -> String:
 		printerr("Lightning Rod: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	var t = Utils.format_float(_base_threshold[cardlvl - 1], 0)
-	var r = Utils.format_float(_base_resistance[cardlvl - 1], 0)
+	var t = str(_base_threshold[cardlvl - 1]).pad_decimals(0)
+	var r = str(_base_resistance[cardlvl - 1]).pad_decimals(0)
 	return "While above " + t + "% HP, gain " + r + " Critical Resistance."

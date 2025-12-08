@@ -13,8 +13,8 @@ var holy_orb_duration: float
 
 # [REJUVENATIVE FAITH]
 var rejuvenative_faith_activated: bool
-var rejuvenative_faith_chance: Array[float]
-var rejuvenative_faith_amount: Array[float]
+var rejuvenative_faith_chance: float
+var rejuvenative_faith_amount: float
 
 # [HOLY TOUCH]
 var holy_touch_activated: bool # True if the player has at least one of this card
@@ -42,12 +42,12 @@ var purifying_flame_cleanse_amount: float # Amount
 
 # [WARM AURA]
 var warm_aura_activated: bool
-var warm_aura_chance: Array[float]
-var warm_aura_cleanse_amount: Array[float]
+var warm_aura_chance: float
+var warm_aura_cleanse_amount: float
 
 # [OVERFLOWING LIGHT]
 var overflowing_light_activated: bool
-var overflowing_light_shield_percent: Array[float]
+var overflowing_light_shield_percent: float
 
 #endregion
 

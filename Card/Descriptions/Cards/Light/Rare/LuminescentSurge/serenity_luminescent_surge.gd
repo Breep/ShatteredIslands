@@ -26,10 +26,10 @@ func get_description(cardlvl: int) -> String:
 		printerr("Luminescent Surge: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	var period = Utils.format_float(_base_period[cardlvl - 1], 1)
+	var period = str(_base_period[cardlvl - 1]).pad_decimals(1)
 	var targets = str(_base_target_count[cardlvl - 1])
-	var heal_pct = Utils.format_float(_base_heal_percent[cardlvl - 1], 0)
-	var regen = Utils.format_float(_base_regen_amount[cardlvl - 1], 0)
-	var thresh = Utils.format_float(_base_hp_threshold[cardlvl - 1], 0)
+	var heal_pct = str(_base_heal_percent[cardlvl - 1]).pad_decimals(0)
+	var regen = str(_base_regen_amount[cardlvl - 1]).pad_decimals(0)
+	var thresh = str(_base_hp_threshold[cardlvl - 1]).pad_decimals(0)
 	
 	return "Every " + period + " sec, Heal up to " + targets + " allies for " + heal_pct + "% lost HP. Apply " + regen + " regen if target below " + thresh + "% HP"

@@ -18,6 +18,6 @@ func get_description(cardlvl: int) -> String:
 		printerr("Overflowing Light: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	var pct = Utils.format_float(_base_shield_percent[cardlvl - 1], 0)
+	var pct = str(_base_shield_percent[cardlvl - 1]).pad_decimals(0)
 	
 	return pct + "% overheal convert into shield."

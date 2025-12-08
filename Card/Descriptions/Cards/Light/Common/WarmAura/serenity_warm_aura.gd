@@ -20,7 +20,7 @@ func get_description(cardlvl: int) -> String:
 		printerr("Warm Aura: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	var c = Utils.format_float(_base_chance[cardlvl - 1], 0)
-	var a = Utils.format_float(_base_cleanse_amount[cardlvl - 1], 0)
+	var c = str(_base_chance[cardlvl - 1]).pad_decimals(0)
+	var a = str(_base_cleanse_amount[cardlvl - 1]).pad_decimals(0)
 	
 	return "On heal, " + c + "% chance to cleanse " + a + " on target."

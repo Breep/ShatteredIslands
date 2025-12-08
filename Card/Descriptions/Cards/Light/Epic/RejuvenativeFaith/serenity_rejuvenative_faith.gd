@@ -19,6 +19,6 @@ func get_description(cardlvl: int) -> String:
 		printerr("Rejuvenative Faith: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	var c = Utils.format_float(_base_chance[cardlvl - 1], 0)
-	var a = Utils.format_float(_base_amount[cardlvl - 1], 1)
+	var c = str(_base_chance[cardlvl - 1]).pad_decimals(0)
+	var a = str(_base_amount[cardlvl - 1]).pad_decimals(1)
 	return c + "% chance to apply " + a + " Regen for each stack dispelled or cleansed."
