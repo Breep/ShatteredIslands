@@ -10,6 +10,8 @@ const REGEN_DECAY_PERCENT: float = 10.0
 const REGEN_DECAY_HP_THRESHOLD: float = 50.0
 # ============================== Private variables ==============================
 
+var _divine_intervention_triggered: bool = false
+
 var _serenity_stats: FamilySerenityStats # Ref to the owner heal stats
 
 #[REGEN]
@@ -29,13 +31,31 @@ func start() -> void:
 		timer.start()
 	_add_action_modifiers()
 	_add_stat_modifiers()
+	_add_stat_modifiers()
 	_regen_tick_timer.start()
 	
+	# [DIVINE INTERVENTION]
+	if _serenity_stats.divine_intervention_activated:
+		_divine_intervention_triggered = false
+		var allies: Array[Entity] = _owner.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES)
+		for ally in allies:
+			if ally == null or not is_instance_valid(ally): continue
+			if not ally.stats.health_changed.is_connected(_on_divine_intervention_health_changed):
+				ally.stats.health_changed.connect(_on_divine_intervention_health_changed.bind(ally))
 
+	
 func stop() -> void:
 	_regen_tick_timer.stop()
 	_clear_optional_timers()
 	
+	# [DIVINE INTERVENTION]
+	if _serenity_stats.divine_intervention_activated:
+		var allies: Array[Entity] = _owner.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES)
+		for ally in allies:
+			if ally == null or not is_instance_valid(ally): continue
+			if ally.stats.health_changed.is_connected(_on_divine_intervention_health_changed):
+				ally.stats.health_changed.disconnect(_on_divine_intervention_health_changed)
+
 	
 # ============================== Private functions ==============================
 
@@ -50,7 +70,7 @@ func _clear_optional_timers() -> void:
 func _create_optional_timers() -> void:
 	# [holy touch]
 	if _serenity_stats.holy_touch_activated:
-		_optional_timers.append(Utils.create_perpetual_timer(self,_serenity_stats.holy_touch_period,_holy_touch_timer_timeout,true))
+		_optional_timers.append(Utils.create_perpetual_timer(self, _serenity_stats.holy_touch_period, _holy_touch_timer_timeout, true))
 	# [LIFE SPRING]
 	if _serenity_stats.life_spring_activated:
 		_optional_timers.append(Utils.create_perpetual_timer(self, _serenity_stats.life_spring_period, _life_spring_timer_timeout, true))
@@ -110,7 +130,6 @@ func _add_stat_modifiers() -> void:
 #region action modifier
 
 func _add_action_modifiers() -> void:
-
 	# [GRACEFUL STEP]
 	if _serenity_stats.graceful_step_activated:
 		var action_modifier := ActionModifier.new()
@@ -129,7 +148,7 @@ func _add_action_modifiers() -> void:
 # ============================== Callbacks functions ==============================
 
 #region ============== HOLY TOUCH ==================
-func _holy_touch_timer_timeout() -> void: 
+func _holy_touch_timer_timeout() -> void:
 	# [HOLY TOUCH]
 	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
 	if target == null: return
@@ -141,7 +160,7 @@ func _holy_touch_timer_timeout() -> void:
 func _life_spring_timer_timeout() -> void:
 	# [LIFE SPRING]
 	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
-	if target == null: 
+	if target == null:
 		return
 	_owner.inflict_condition_stacks(target, _serenity_stats.life_spring_regen_amount, Utils.StackType.REGEN, "Life Spring")
 #endregion
@@ -151,7 +170,7 @@ func _life_spring_timer_timeout() -> void:
 func _purifying_flame_timer_timeout() -> void:
 	# [PURIFYING FLAME]
 	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ALLY_INCLUDING_SELF)
-	if target == null: 
+	if target == null:
 		return
 	var amount_to_cleanse: float = _serenity_stats.purifying_flame_cleanse_amount
 	_owner.cleanse(target, amount_to_cleanse, "Purifying Flame")
@@ -183,4 +202,33 @@ func _on_regen_tick_timer_timeout() -> void:
 			var decay: int = int(regen_stacks * (REGEN_DECAY_PERCENT / 100.0))
 			decay = clampi(decay, 1, decay)
 			_owner.stats.regen_stacks -= decay
+#endregion
+
+#region ============== DIVINE INTERVENTION ==================
+func _on_divine_intervention_health_changed(_new_val: float, ally: Entity) -> void:
+	if _divine_intervention_triggered: return
+	if ally == null or not is_instance_valid(ally): return
+	
+	var max_hp: float = ally.stats.health_max
+	if max_hp <= 0: return
+	
+	var threshold_percent: float = _serenity_stats.divine_intervention_hp_threshold_percent
+	var current_percent: float = (ally.stats.health / max_hp) * 100.0
+	
+	if current_percent <= threshold_percent:
+		_divine_intervention_triggered = true
+		
+		# Full cleanse (using a very high value to ensure clearing everything)
+		ally.cleanse(ally, 9999.0, "Divine Intervention")
+		
+		# Apply Regen
+		var regen_amount: float = _serenity_stats.divine_intervention_regen_amount
+		ally.inflict_condition_stacks(ally, regen_amount, Utils.StackType.REGEN, "Divine Intervention")
+		
+		# Optional: Disconnect signals to save performance since it's one-time
+		var allies: Array[Entity] = _owner.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES)
+		for a in allies:
+			if a != null and is_instance_valid(a):
+				if a.stats.health_changed.is_connected(_on_divine_intervention_health_changed):
+					a.stats.health_changed.disconnect(_on_divine_intervention_health_changed)
 #endregion

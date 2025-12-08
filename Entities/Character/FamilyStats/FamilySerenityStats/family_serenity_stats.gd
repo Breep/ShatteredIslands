@@ -9,12 +9,12 @@ var holy_touch_period: float # tick rate (/s)
 var holy_touch_amount: float # Amount of heal done to an ally every periodic_heal_period
 
 # [GRACEFUL STEP]
-var graceful_step_activated: bool # True if the player has at least one of this card 
-var graceful_step_increase_dodge: float #augmente les chances de dodges
-var graceful_step_regen: float #amount regen applied
+var graceful_step_activated: bool # True if the player has at least one of this card
+var graceful_step_increase_dodge: float # augmente les chances de dodges
+var graceful_step_regen: float # amount regen applied
 
 # [LIFE SPRING]
-var life_spring_activated: bool  #True if the player has at least one of this card
+var life_spring_activated: bool # True if the player has at least one of this card
 var life_spring_regen_amount: float # Amount of regen applied to an ally every periodic_heal_period
 var life_spring_period: float # tick rate (/s)
 
@@ -37,6 +37,12 @@ var purifying_flame_cleanse_amount: float # Amount
 #endregion
 
 #region Legendary Card
+
+# [DIVINE INTERVENTION]
+var divine_intervention_activated: bool
+var divine_intervention_hp_threshold_percent: float
+var divine_intervention_regen_amount: float
+
 #endregion
 
 # CACA a supprimer 
