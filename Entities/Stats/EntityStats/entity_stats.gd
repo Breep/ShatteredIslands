@@ -159,7 +159,6 @@ var _necrosis_stacks: float = 0
 		if value < 0: value = 0
 		if value == _necrosis_stacks: return
 		_necrosis_stacks = max(0, value)
-		print("DEBUG: Necrosis changée à : ", _necrosis_stacks)
 		necrosis_stacks_changed.emit(_necrosis_stacks)
 
 #endregion

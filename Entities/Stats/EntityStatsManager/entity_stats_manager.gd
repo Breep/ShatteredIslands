@@ -8,7 +8,7 @@ extends Node
 
 # ============================== Private variables ==============================
 
-@onready var _stats_modifiers_dictionaries: Dictionary [EntityStats.StatType, StatModifierDictionary] = {
+@onready var _stats_modifiers_dictionaries: Dictionary[EntityStats.StatType, StatModifierDictionary] = {
 	# Single stats
 	EntityStats.StatType.HEALTH_MAX: StatModifierDictionary.new(),
 	EntityStats.StatType.HEALTH: StatModifierDictionary.new(),
@@ -26,6 +26,7 @@ extends Node
 	EntityStats.StatType.DODGE: StatModifierDictionary.new(),
 	EntityStats.StatType.STRENGTH: StatModifierDictionary.new(),
 	EntityStats.StatType.WEAKNESS: StatModifierDictionary.new(),
+	EntityStats.StatType.CRIT_RESISTANCE: StatModifierDictionary.new(),
 }
 
 # ============================== Node base functions ==============================
@@ -51,6 +52,14 @@ func update_modifier(stat_modifier: StatModifier) -> void:
 func unregister_modifier(stat_modifier: StatModifier) -> void:
 	var stat_type: EntityStats.StatType = stat_modifier.stat_type
 	_stats_modifiers_dictionaries[stat_type].unregister_modifier(stat_modifier)
+
+
+func remove_modifier(stat_type: EntityStats.StatType, id: String, action_type: Utils.ActionType = Utils.ActionType.DAMAGE_PHYSICAL) -> void:
+	var dummy := StatModifier.new()
+	dummy.stat_type = stat_type
+	dummy.id = id
+	dummy.action_type = action_type
+	unregister_modifier(dummy)
 
 # ============================== Private functions ==============================
 

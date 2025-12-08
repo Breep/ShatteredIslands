@@ -27,7 +27,7 @@
 [ext_resource type="Resource" uid="uid://bp2rry4m26npn" path="res://Card/Descriptions/Cards/Storm/Common/EyeOfTheCyclone/storm_eye_of_the_cyclone.tres" id="15_tlods"]
 [ext_resource type="Resource" uid="uid://dtclhv8aaqrbk" path="res://Card/Descriptions/Cards/Storm/Common/Quickcharge/storm_quickcharge.tres" id="16_arhhx"]
 [ext_resource type="Resource" uid="uid://kbmlikqifik1" path="res://Card/Descriptions/Cards/Storm/Rare/StormBreaker/storm_storm_breaker.tres" id="17_7n5st"]
-[ext_resource type="Resource" uid="uid://ceejbf6x7fcyp" path="res://Card/Descriptions/Cards/Defense/Rare/AetherRedirector/defense_aether_redirector.tres" id="18_cj02a"]
+[ext_resource type="Resource" uid="uid://d0kg80jq8cr18" path="res://Card/Descriptions/Cards/Light/Rare/LuminescentSurge/serenity_luminescent_surge.tres" id="18_cj02a"]
 [ext_resource type="Resource" uid="uid://dvpdubk0btegx" path="res://Card/Descriptions/Cards/Poison/Common/PoisonFlask/poison_poison_flask.tres" id="18_me75i"]
 [ext_resource type="Resource" uid="uid://dnwa5apxanb8j" path="res://Card/Descriptions/Cards/Necro/Common/PutridTouch/necro_putrid_touch.tres" id="19_mmcok"]
 [ext_resource type="Script" uid="uid://nhqk1783r4d1" path="res://GlobalManagers/ActionMeter/Viewer/ui_entity_bds_registry.gd" id="25_f2umu"]
@@ -160,7 +160,8 @@ _critical_chance_labels = {
 8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCIgnite"),
 9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCPoisonStack"),
 10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCRegen"),
-11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCNecrosis")
+11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCNecrosis"),
+12: null
 }
 _critical_multiplier_labels = {
 0: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMPhysical"),
@@ -174,7 +175,8 @@ _critical_multiplier_labels = {
 8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMIgnite"),
 9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMPoisonStack"),
 10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMRegen"),
-11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMNecrosis")
+11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMNecrosis"),
+12: null
 }
 _dodge_labels = {
 0: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgePhysical"),
@@ -188,7 +190,8 @@ _dodge_labels = {
 8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeIgnite"),
 9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgePoisonStack"),
 10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeRegen"),
-11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeNecrosis")
+11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeNecrosis"),
+12: null
 }
 _resistance_labels = {
 0: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistPhysical"),
@@ -202,7 +205,8 @@ _resistance_labels = {
 8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistIgnite"),
 9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistPoisonStack"),
 10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistRegen"),
-11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistNecrosis")
+11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistNecrosis"),
+12: null
 }
 _vulnerability_labels = {
 0: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnPhysical"),
@@ -216,7 +220,8 @@ _vulnerability_labels = {
 8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnIgnite"),
 9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnPoisonStack"),
 10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnRegen"),
-11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnNecrosis")
+11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnNecrosis"),
+12: null
 }
 _strength_labels = {
 0: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtPhysical"),
@@ -230,7 +235,8 @@ _strength_labels = {
 8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtIgnite"),
 9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtPoisonStack"),
 10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtRegen"),
-11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtNecrosis")
+11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtNecrosis"),
+12: null
 }
 _weakness_labels = {
 0: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessPhysical"),
@@ -244,7 +250,8 @@ _weakness_labels = {
 8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessIgnite"),
 9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessPoisonStack"),
 10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessRegen"),
-11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessNecrosis")
+11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessNecrosis"),
+12: null
 }
 
 [node name="EntityBDSRegistry" parent="UIProto" node_paths=PackedStringArray("_ui_battle_data_stats_panels") instance=ExtResource("26_5jp0x")]

@@ -215,8 +215,7 @@ func _on_hit_holy_orb(cb_vars: Dictionary, damage: float, heal: float) -> void:
 	
 	if target.team != _owner.team:
 		# Enemy: True Damage
-		# Projectile default damage is 0 because we didn't set physical/magical in stats
-		target.take_damage(damage, Utils.DamageType.TRUE, false, "Holy Orb", _owner)
+		target.take_damage(damage, Utils.DamageType.MAGICAL, false, "Holy Orb", _owner)
 	else:
 		# Ally: Heal
 		# Projectile doesn't heal by default
@@ -300,6 +299,7 @@ func _luminescent_surge_timer_timeout() -> void:
 	)
 	
 	var count = min(_serenity_stats.luminescent_surge_target_count, valid_allies.size())
+	
 	for i in range(count):
 		var ally = valid_allies[i]
 		var max_hp = ally.stats.health_max

@@ -9,7 +9,6 @@ func apply(stats: FamiliesStats, cardlvl: int) -> void:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
 		printerr("Electrocute: Wrong cardlvl: ", cardlvl)
 		return
-	
 	stats.storm.electrocute_activated = true
 	stats.storm.electrocute_chance = _base_chance[cardlvl - 1]
 	stats.storm.electrocute_necrosis_amount = _base_necrosis_amount[cardlvl - 1]

@@ -73,7 +73,7 @@ func unregister_modifier(stat_modifier: StatModifier) -> void:
 		_modifiers_per_action_type[stat_modifier.action_type].erase(modifier_id)
 	else:
 		if not _modifiers.has(modifier_id):
-			Verbose.error("Unregister - Unknown stat modifier | " + modifier_id +  " | " +  str(_stat_type), Verbose.Category.STAT_MODIFIER)
+			Verbose.error("Unregister - Unknown stat modifier | " + modifier_id + " | " + str(_stat_type), Verbose.Category.STAT_MODIFIER)
 			return
 		_modifiers.erase(modifier_id)
 	
@@ -136,4 +136,7 @@ func _is_multiple_stats() -> bool:
 			or _stat_type == EntityStats.StatType.CRIT_MULT \
 			or _stat_type == EntityStats.StatType.RESISTANCE \
 			or _stat_type == EntityStats.StatType.VULNERABILITY \
-			or _stat_type == EntityStats.StatType.DODGE
+			or _stat_type == EntityStats.StatType.DODGE \
+			or _stat_type == EntityStats.StatType.CRIT_RESISTANCE \
+			or _stat_type == EntityStats.StatType.STRENGTH \
+			or _stat_type == EntityStats.StatType.WEAKNESS

@@ -16,8 +16,8 @@ var lightning_footwork_dodge_increase: float
 
 # [ELECTROCUTE]
 var electrocute_activated: bool
-var electrocute_chance: Array[float]
-var electrocute_necrosis_amount: Array[float]
+var electrocute_chance: float
+var electrocute_necrosis_amount: float
 
 # [QUICKCHARGE]
 var quickcharge_activated: bool

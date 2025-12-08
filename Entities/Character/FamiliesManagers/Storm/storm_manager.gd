@@ -247,6 +247,8 @@ func _apply_storm_breaker_effect() -> void:
 	target.stats_manager.update_modifier(mod)
 
 # [LIGHTNING ROD]
+var _lightning_rod_is_active: bool = false
+
 func _stop_lightning_rod() -> void:
 	if _owner.stats.health_changed.is_connected(_on_lightning_rod_health_changed):
 		_owner.stats.health_changed.disconnect(_on_lightning_rod_health_changed)
@@ -330,6 +332,9 @@ func _on_lightning_rod_health_changed(new_health: float) -> void:
 		_apply_lightning_rod_modifier(false)
 
 func _apply_lightning_rod_modifier(enabled: bool) -> void:
+	if enabled == _lightning_rod_is_active: return
+	_lightning_rod_is_active = enabled
+	
 	var mod_id: String = "Lightning Rod"
 	if enabled:
 		for action_type in Utils.get_all_actions():
@@ -343,7 +348,7 @@ func _apply_lightning_rod_modifier(enabled: bool) -> void:
 			_owner.stats_manager.register_modifier(mod)
 	else:
 		for action_type in Utils.get_all_actions():
-			_owner.stats_manager.remove_modifier(mod_id + str(action_type))
+			_owner.stats_manager.remove_modifier(EntityStats.StatType.CRIT_RESISTANCE, mod_id + str(action_type), action_type)
 
 #endregion
 
