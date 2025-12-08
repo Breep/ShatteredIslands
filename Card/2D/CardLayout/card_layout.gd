@@ -27,12 +27,15 @@ func update_content(card: Card) -> void:
 	_card = card
 	if is_node_ready():
 		_update_card_layout(card)
+	else:
+		_update_card_layout.call_deferred(card)
 
 # ============================== Private functions ==============================
 
 func _update_card_layout(card: Card) -> void:
+	Verbose.trace("_update_card_layout() | " + card.name, Verbose.Category.CARD_LAYOUT)
 	if card == null:
-		push_error("CardLayout: Trying to update a <null> card")
+		Verbose.error("Trying to update a <null> card", Verbose.Category.CARD_LAYOUT)
 		return
 	_card_name_label.text = card.name
 	_card_desc_label.text_raw = card.player_upgrade.get_description(card.lvl)

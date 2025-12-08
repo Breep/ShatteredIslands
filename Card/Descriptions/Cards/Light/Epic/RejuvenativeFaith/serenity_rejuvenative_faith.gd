@@ -11,8 +11,8 @@ func apply(stats: FamiliesStats, cardlvl: int) -> void:
 		return
 	
 	stats.serenity.rejuvenative_faith_activated = true
-	stats.serenity.rejuvenative_faith_chance = _base_chance
-	stats.serenity.rejuvenative_faith_amount = _base_amount
+	stats.serenity.rejuvenative_faith_chance = _base_chance[cardlvl - 1]
+	stats.serenity.rejuvenative_faith_amount = _base_amount[cardlvl - 1]
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
