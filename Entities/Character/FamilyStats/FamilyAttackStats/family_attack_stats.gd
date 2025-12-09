@@ -78,6 +78,10 @@ var storm_hammer_chance: float # % of chance for an auto-attack to bounce
 #endregion
 
 #region Legendary Card
+# [RUSSIAN ROULETTE]
+var attack_russian_roulette_activated: bool
+var attack_russian_roulette_min_percent: float
+var attack_russian_roulette_max_percent: float
 #endregion
 
 

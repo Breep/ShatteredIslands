@@ -14,10 +14,11 @@
 [ext_resource type="Resource" uid="uid://qm75h7gw2hgn" path="res://Card/Descriptions/Cards/Attack/Common/HealingCrossbow/attack_healing_crossbow.tres" id="11_eobhs"]
 [ext_resource type="Resource" uid="uid://dpnpvtk3elac0" path="res://Card/Descriptions/Cards/Attack/Common/ScorchingBlade/attack_scorching_blade.tres" id="11_gthbg"]
 [ext_resource type="Resource" uid="uid://dm4yi57mem0b4" path="res://Card/Descriptions/Cards/Attack/Common/ProtectoSpear/attack_protecto_spear.tres" id="12_gthbg"]
+[ext_resource type="Resource" path="res://Card/Descriptions/Cards/Attack/Legendary/RussianRoulette/attack_russian_roulette.tres" id="13_rr"]
 
 [resource]
 script = ExtResource("2_m6yig")
-cards = Array[ExtResource("1_4dvmk")]([ExtResource("5_cg3dx"), ExtResource("7_eobhs"), ExtResource("9_ypjtd"), ExtResource("5_gthbg"), ExtResource("10_cg3dx"), ExtResource("11_gthbg"), ExtResource("8_cg3dx"), ExtResource("4_xkvlw"), ExtResource("2_m74lt"), ExtResource("11_eobhs"), ExtResource("12_gthbg")])
+cards = Array[ExtResource("1_4dvmk")]([ExtResource("5_cg3dx"), ExtResource("7_eobhs"), ExtResource("9_ypjtd"), ExtResource("5_gthbg"), ExtResource("10_cg3dx"), ExtResource("11_gthbg"), ExtResource("8_cg3dx"), ExtResource("4_xkvlw"), ExtResource("2_m74lt"), ExtResource("11_eobhs"), ExtResource("12_gthbg"), ExtResource("13_rr")])
 icon = ExtResource("9_m74lt")
 family_name = "Attack"
 family_type = 1

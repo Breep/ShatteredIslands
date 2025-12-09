@@ -126,6 +126,14 @@ func _add_attack_modifiers() -> void:
 		aa_modifier.tags = [AutoAttackModifier.TagType.CARD]
 		aa_modifier.on_hit_logic_callback = _on_hit_arcane_staff
 		aa_modifier.is_one_time_effect = false
+		
+	# [RUSSIAN ROULETTE]
+	if _attack_stats.attack_russian_roulette_activated:
+		var aa_modifier := AutoAttackModifier.new()
+		aa_modifier.id = "Russian Roulette"
+		aa_modifier.tags = [AutoAttackModifier.TagType.CARD]
+		aa_modifier.on_attack_logic_callback = _on_russian_roulette_attack
+		aa_modifier.is_one_time_effect = false
 		_owner.auto_attack_modifier_registry.register_modifier(aa_modifier)
 		
 func _clear_attack_modifiers() -> void:
@@ -156,6 +164,10 @@ func _clear_attack_modifiers() -> void:
 	# [ARCANE STAFF]
 	if _attack_stats.arcane_staff_activated:
 		_owner.auto_attack_modifier_registry.unregister_modifier("Arcane Staff")
+
+	# [RUSSIAN ROULETTE]
+	if _attack_stats.attack_russian_roulette_activated:
+		_owner.auto_attack_modifier_registry.unregister_modifier("Russian Roulette")
 		
 #endregion
 
@@ -365,3 +377,18 @@ func _on_auto_attack_protectospear(_cb_vars: Dictionary) -> void:
 	var chance: float = _attack_stats.protectospear_chance
 	if Utils.is_randomize_modifier_active(chance):
 		_owner.inflict_condition_stacks(_owner, _attack_stats.protectospear_shield_amount, Utils.StackType.ARMOR, "Protecto'Spear")
+
+
+# [RUSSIAN ROULETTE]
+func _on_russian_roulette_attack(cb_vars: Dictionary) -> void:
+	if not cb_vars.has(AutoAttackModifier.VarType.PROJECTILE_STATS):
+		printerr("Russian Roulette: cb_vars n'a pas de PROJECTILE_STATS")
+		return
+	var proj_stats: ProjectileStats = cb_vars[AutoAttackModifier.VarType.PROJECTILE_STATS]
+	
+	var min_p: float = _attack_stats.attack_russian_roulette_min_percent
+	var max_p: float = _attack_stats.attack_russian_roulette_max_percent
+	
+	var multiplier: float = randf_range(min_p, max_p) / 100.0
+	
+	proj_stats.physical_damage_flat *= multiplier
