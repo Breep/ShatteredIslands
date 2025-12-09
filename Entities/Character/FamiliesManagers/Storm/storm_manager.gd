@@ -404,6 +404,11 @@ func _on_current_rank_changed() -> void:
 	# [THUNDER BERSERKER] (Pénalité sur Grind)
 	if _storm_stats.thunder_berserker_activated and _thunder_berserker_penalty_active:
 		_apply_thunder_berserker_penalty()
+		
+	# [SCHRODINGER STORM]
+	if _storm_stats.schrodinger_storm_activated:
+		_apply_schrodinger_storm_effect()
+		
 	match _current_rank:
 		Rank.S:
 			var duration: float = RANK_S_DURATION
@@ -463,5 +468,51 @@ func _on_dodge_lightning_footwork(_cb_vars: Dictionary) -> void:
 	_lightning_footwork_current_bonus = 0.0
 	_update_lightning_footwork_modifier()
 
+
+#region action modifier
+
+# [SCHRODINGER STORM]
+func _apply_schrodinger_storm_effect() -> void:
+	# 1. Pick Random Entity (Ally or Enemy)
+	# 50/50 chance for Ally vs Enemy
+	var target_is_ally: bool = randf() < 0.5
+	var target: Entity = null
+	
+	if target_is_ally:
+		target = _owner.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ALLY_INCLUDING_SELF)
+	else:
+		target = _owner.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
+		
+	if target == null or not is_instance_valid(target) or target.is_dead: return
+	
+	var base_amount: float = _storm_stats.schrodinger_storm_amount
+	var stack_type: Utils.StackType
+	var final_amount: float = base_amount
+	
+	if target_is_ally:
+		# Good Stacks: ARMOR, REGEN
+		# 50/50 split
+		if randf() < 0.5:
+			stack_type = Utils.StackType.ARMOR
+			final_amount *= 2.0 # Multiplier x2
+		else:
+			stack_type = Utils.StackType.REGEN
+			final_amount *= 1.0 # Multiplier x1
+	else:
+		# Bad Stacks: IGNITE, NECROSIS, POISON
+		# 33/33/33 split
+		var roll: float = randf()
+		if roll < 0.33:
+			stack_type = Utils.StackType.IGNITE
+			final_amount *= 2.0 # Multiplier x2
+		elif roll < 0.66:
+			stack_type = Utils.StackType.NECROSIS
+			final_amount *= 2.0 # Multiplier x2
+		else:
+			stack_type = Utils.StackType.POISON
+			final_amount *= 0.5 # Multiplier x0.5
+			
+	if final_amount > 0:
+		_owner.inflict_condition_stacks(target, final_amount, stack_type, "Schrödinger's Storm")
 
 #endregion
