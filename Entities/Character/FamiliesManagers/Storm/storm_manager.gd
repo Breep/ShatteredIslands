@@ -239,7 +239,7 @@ func _call_the_lightning() -> void:
 # [STORM BREAKER]
 func _apply_storm_breaker_effect() -> void:
 	var target: Entity = _owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
-	if target == null or not is_instance_valid(target): return
+	if target == null or not is_instance_valid(target) or target.stats_manager == null: return
 	var rank_mult: float = RANK_VALUE_MULTIPLIERS.get(_current_rank, 1.0)
 	var base_percent: float = _storm_stats.storm_breaker_base_reduction_percent
 	var added_percent: float = base_percent * rank_mult

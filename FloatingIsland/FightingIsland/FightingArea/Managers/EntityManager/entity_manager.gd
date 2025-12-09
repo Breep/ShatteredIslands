@@ -59,7 +59,7 @@ func get_entity(entity_id: int) -> Entity:
 
 func _register_entity(entity: Entity) -> void:
 	if _entities.has(entity.id):
-		Verbose.error("Entity " + entity.name + " is already registered [" + str(get_path()) + "]", Verbose.Category.ENTITY_MANAGER)
+		Verbose.error("Entity " + entity.name + " (" + str(entity.id) + ") is already registered. Existing: " + _entities[entity.id].name + " [" + str(get_path()) + "]", Verbose.Category.ENTITY_MANAGER)
 		return
 	
 	_entities[entity.id] = entity

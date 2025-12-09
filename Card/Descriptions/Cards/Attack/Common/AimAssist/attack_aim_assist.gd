@@ -9,8 +9,8 @@ func apply(stats: FamiliesStats, cardlvl: int) -> void:
 		printerr("Aim Assist: Wrong cardlvl: ", cardlvl)
 		return
 	
-	stats.attack.attack_aim_assist_activated = true
-	stats.attack.attack_aim_assist_bonus_per_card = _bonus_ad_per_card[cardlvl - 1]
+	stats.auto_attack.attack_aim_assist_activated = true
+	stats.auto_attack.attack_aim_assist_bonus_per_card = _bonus_ad_per_card[cardlvl - 1]
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:

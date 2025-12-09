@@ -11,7 +11,7 @@ _summon_interval = Array[float]([10.0])
 _shield_amount = Array[int]([100])
 _shield_interval = Array[float]([1.0])
 _target_count = Array[int]([2])
-_max_health = Array[int]([1])
+_max_health = Array[int]([400])
 _initial_shield = Array[int]([150])
 
 [resource]

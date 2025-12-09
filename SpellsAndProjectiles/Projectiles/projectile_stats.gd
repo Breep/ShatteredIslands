@@ -19,5 +19,8 @@ var is_piercing: bool = false # If true, passes through enemies
 var poison_stacks: float # Number of poison stacks within the projectile
 var poison_stacks_is_critical: bool
 
+var necrosis_stacks: float # Number of necrosis stacks within the projectile
+var necrosis_stacks_is_critical: bool
+
 var on_hit_logic_callbacks: Array[Callable] # var: Dictionary
 var on_hit_visual_callbacks: Array[Callable] # var: Dictionary

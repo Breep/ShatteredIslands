@@ -37,14 +37,14 @@ func _ready() -> void:
 # ============================== Private ==============================
 
 func _update_health_bar(health: float, max_health: float) -> void:
-	print("DEBUG - SET BAR ", health, " / ", max_health)
+	# print("DEBUG - SET BAR ", health, " / ", max_health)
 	_health_bar.set_max_value(max_health)
 	_health_bar.set_bar_value(health)
 
 
 func _damage_popup(amount: float, damage_type: Utils.DamageType, is_critic: bool = false):
 	var popup: DamagePopUp = Shared.DAMAGE_POPUP_SCENE.instantiate()
-	var offset = Vector3(randf_range(-0.5, 0.5), randf_range(-0.5, 0.5), 0) 
+	var offset = Vector3(randf_range(-0.5, 0.5), randf_range(-0.5, 0.5), 0)
 	popup.set_value(amount)
 	get_tree().current_scene.add_child(popup)
 	
