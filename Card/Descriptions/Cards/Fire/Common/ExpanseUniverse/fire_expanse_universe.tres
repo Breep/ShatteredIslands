@@ -15,6 +15,6 @@ metadata/_custom_type_script = "uid://c1cycap2yrxuj"
 script = ExtResource("3_5ffm5")
 name = "Expanse Universe"
 picture = ExtResource("1_v85bu")
-family = 3
+families = Array[int]([3])
 player_upgrade = SubResource("Resource_yobeh")
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

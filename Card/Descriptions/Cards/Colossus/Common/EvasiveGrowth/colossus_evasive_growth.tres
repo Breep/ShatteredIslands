@@ -14,6 +14,6 @@ metadata/_custom_type_script = "uid://dm1x0oi152gfo"
 script = ExtResource("1_adgwi")
 name = "Evasive Growth"
 picture = ExtResource("1_ka6c0")
-family = 6
+families = Array[int]([6])
 player_upgrade = SubResource("Resource_ka6c0")
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

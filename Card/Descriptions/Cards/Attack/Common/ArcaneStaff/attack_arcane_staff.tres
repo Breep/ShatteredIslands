@@ -14,6 +14,6 @@ metadata/_custom_type_script = "uid://bo4kgn08w15vy"
 script = ExtResource("1_nm6f3")
 name = "Arcane Staff"
 picture = ExtResource("1_yfmdl")
-family = 1
+families = Array[int]([1, 8])
 player_upgrade = SubResource("Resource_02kof")
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

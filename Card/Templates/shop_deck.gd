@@ -10,7 +10,7 @@ func construct_shop_deck(families: Array[Family], game_rules: GameRules) -> void
 	_card_pile.clear()
 	var uid: int = 0
 	for family in families:
-		for card in family.cards:
+		for card in families[0].cards:
 			var number_of_cards_to_add: int
 			match card.rarity:
 				Card.Rarity.COMMON: number_of_cards_to_add = game_rules.common_number
@@ -39,13 +39,13 @@ func remove_from_available_cards(card_to_remove: Card) -> void:
 
 func _update_available_cards_composition(new_cards: Array[Card], removed_cards: Array[Card]) -> void:
 	for card in new_cards:
-		if available_cards_composition.has(card.family):
-			available_cards_composition[card.family] += 1
+		if available_cards_composition.has(card.families[0]):
+			available_cards_composition[card.families[0]] += 1
 		else:
-			available_cards_composition[card.family] = 1
+			available_cards_composition[card.families[0]] = 1
 	
 	for card in removed_cards:
-		available_cards_composition[card.family] -= 1
+		available_cards_composition[card.families[0]] -= 1
 	
 	available_cards_composition_changed.emit(available_cards_composition)
 

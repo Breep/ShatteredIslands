@@ -12,5 +12,5 @@ _base_crit_mult_boost = Array[float]([10.0, 20.0, 30.0, 40.0, 50.0])
 script = ExtResource("1_template")
 name = "Violent Overload"
 picture = ExtResource("1_eetrq")
-family = 4
+families = Array[int]([4])
 player_upgrade = SubResource("Resource_upgrade")

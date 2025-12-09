@@ -13,6 +13,6 @@ metadata/_custom_type_script = "uid://gpbhlq6yi8ty"
 script = ExtResource("1_m4356")
 name = "Protetive dome"
 picture = ExtResource("1_kmq2y")
-family = 2
+families = Array[int]([2])
 player_upgrade = SubResource("Resource_kmq2y")
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

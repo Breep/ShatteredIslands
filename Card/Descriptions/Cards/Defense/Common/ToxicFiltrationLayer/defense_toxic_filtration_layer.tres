@@ -12,5 +12,5 @@ _base_efficiency = Array[float]([20.0, 30.0, 40.0, 50.0, 70.0])
 script = ExtResource("1_card_template")
 name = "Toxic Filtration Layer"
 picture = ExtResource("1_a2mxx")
-family = 2
+families = Array[int]([2, 7])
 player_upgrade = SubResource("Resource_upgrade")

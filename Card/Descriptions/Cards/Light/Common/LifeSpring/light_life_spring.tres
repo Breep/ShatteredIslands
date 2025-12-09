@@ -14,6 +14,6 @@ metadata/_custom_type_script = "uid://x2bc4gpho4jt"
 script = ExtResource("1_if6hk")
 name = "Life Spring"
 picture = ExtResource("1_eptq0")
-family = 5
+families = Array[int]([5])
 player_upgrade = SubResource("Resource_eptq0")
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

@@ -16,6 +16,6 @@ metadata/_custom_type_script = "uid://bmb03fcdh2kgs"
 script = ExtResource("1_tuqjb")
 name = "Reflecto Belt"
 picture = ExtResource("1_18q5t")
-family = 2
+families = Array[int]([2, 1])
 player_upgrade = SubResource("Resource_rtxvx")
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

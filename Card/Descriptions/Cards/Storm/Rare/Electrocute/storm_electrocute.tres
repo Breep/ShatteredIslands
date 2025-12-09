@@ -13,5 +13,5 @@ _base_necrosis_amount = Array[float]([2.0, 4.0, 6.0])
 script = ExtResource("1_template")
 name = "Electrocute"
 picture = ExtResource("1_y41vx")
-family = 4
+families = Array[int]([4, 4, 11])
 player_upgrade = SubResource("Resource_upgrade")

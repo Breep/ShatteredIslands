@@ -14,6 +14,6 @@ metadata/_custom_type_script = "uid://ybpnkcveh61t"
 script = ExtResource("1_u5f6w")
 name = "Avengers Assemble"
 picture = ExtResource("1_wb46e")
-family = 2
+families = Array[int]([2, 4])
 player_upgrade = SubResource("Resource_epane")
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

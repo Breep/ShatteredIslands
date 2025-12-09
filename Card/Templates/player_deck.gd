@@ -64,10 +64,10 @@ func _add_or_improve_card_to_active_cards(card_to_add: Card) -> void:
 			return
 	Verbose.debug("'" + _player_owner.name + "' Adding new card | " + card_to_add.name + " | " + str(card_to_add.lvl), Verbose.Category.DECK)
 	_active_cards.append(card_to_add)
-	if _cards_dictionary.has(card_to_add.family):
-		_cards_dictionary[card_to_add.family].append(card_to_add)
+	if _cards_dictionary.has(card_to_add.families[0]):
+		_cards_dictionary[card_to_add.families[0]].append(card_to_add)
 	else:
-		_cards_dictionary[card_to_add.family] = [card_to_add]
+		_cards_dictionary[card_to_add.families[0]] = [card_to_add]
 
 
 func _specific_add(card_to_add: Card) -> void:

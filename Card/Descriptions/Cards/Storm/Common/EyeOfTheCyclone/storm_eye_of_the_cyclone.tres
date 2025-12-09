@@ -12,5 +12,5 @@ _base_max_hp_percent_bonus = Array[float]([7.0, 8.0, 9.0, 10.0, 11.0])
 script = ExtResource("1_template")
 name = "Eye of the Cyclone"
 picture = ExtResource("1_wnj5j")
-family = 4
+families = Array[int]([4, 6])
 player_upgrade = SubResource("Resource_upgrade")
