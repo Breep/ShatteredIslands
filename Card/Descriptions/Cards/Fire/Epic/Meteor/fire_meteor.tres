@@ -16,6 +16,7 @@ script = ExtResource("1_71aee")
 name = "Meteor"
 picture = ExtResource("1_61wps")
 rarity = 1
+families = Array[int]([3])
 player_upgrade = SubResource("Resource_pn366")
 lvl = 2
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

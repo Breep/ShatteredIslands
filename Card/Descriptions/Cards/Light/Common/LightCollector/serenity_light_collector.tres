@@ -13,4 +13,5 @@ _regen_per_card = Array[float]([1.0, 2.0, 3.0, 4.0, 5.0])
 script = ExtResource("1_card")
 name = "Light Collector"
 picture = SubResource("PlaceholderTexture2D_dg7at")
+families = Array[int]([5])
 player_upgrade = SubResource("Resource_light_collector")

@@ -14,4 +14,5 @@ script = ExtResource("1_script")
 name = "Apocalypse"
 picture = SubResource("PlaceholderTexture2D_dhrxl")
 rarity = 3
+families = Array[int]([3])
 player_upgrade = SubResource("Resource_apocalypse")

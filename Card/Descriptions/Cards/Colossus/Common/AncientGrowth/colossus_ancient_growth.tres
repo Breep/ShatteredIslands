@@ -14,5 +14,6 @@ metadata/_custom_type_script = "uid://b073yn3ybubj2"
 script = ExtResource("1_o6hwe")
 name = "Ancient Growth"
 picture = ExtResource("1_7hkqd")
+families = Array[int]([6])
 player_upgrade = SubResource("Resource_3rf7c")
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

@@ -13,4 +13,5 @@ _bonus_ad_per_card = Array[float]([1.0, 1.5, 2.0, 2.5, 3.0])
 script = ExtResource("1_card")
 name = "Aim Assist"
 picture = SubResource("PlaceholderTexture2D_s0lq6")
+families = Array[int]([1])
 player_upgrade = SubResource("Resource_aim_assist")

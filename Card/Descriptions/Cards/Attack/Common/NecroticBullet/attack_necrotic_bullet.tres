@@ -15,4 +15,5 @@ script = ExtResource("1_script")
 name = "Necrotic Bullet"
 picture = SubResource("PlaceholderTexture2D_srgdc")
 rarity = 1
+families = Array[int]([1])
 player_upgrade = SubResource("Resource_necrotic")

@@ -14,4 +14,5 @@ script = ExtResource("1_script")
 name = "Cosmo'Politan"
 picture = SubResource("PlaceholderTexture2D_gfewo")
 rarity = 1
+families = Array[int]([3])
 player_upgrade = SubResource("Resource_cosmopolitan")

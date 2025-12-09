@@ -14,4 +14,5 @@ script = ExtResource("1_script")
 name = "Radiant Overflow"
 picture = SubResource("PlaceholderTexture2D_xvfe6")
 rarity = 1
+families = Array[int]([5])
 player_upgrade = SubResource("Resource_radiant")
