@@ -54,6 +54,9 @@ var nuke_ignite: float # ignite stack inflicted
 #endregion
 
 #region Legendary Card
+# [APOCALYPSE]
+var fire_apocalypse_activated: bool
+var fire_apocalypse_damage_ratio: float
 #endregion
 
 
