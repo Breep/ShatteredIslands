@@ -13,10 +13,11 @@
 [ext_resource type="Resource" uid="uid://clgymh43ug76g" path="res://Card/Descriptions/Cards/Light/Epic/RejuvenativeFaith/serenity_rejuvenative_faith.tres" id="9_ntam1"]
 [ext_resource type="Resource" uid="uid://c5nv7uoog3n3n" path="res://Card/Descriptions/Cards/Light/Legendary/DivineIntervention/serenity_divine_intervention.tres" id="10_ml7j6"]
 [ext_resource type="Resource" uid="uid://d0kg80jq8cr18" path="res://Card/Descriptions/Cards/Light/Rare/LuminescentSurge/serenity_luminescent_surge.tres" id="11_j6vka"]
+[ext_resource type="Resource" path="res://Card/Descriptions/Cards/Serenity/Common/CorruptedLight/serenity_corrupted_light.tres" id="12_clight"]
 
 [resource]
 script = ExtResource("2_11cd3")
-cards = Array[ExtResource("1_8oghy")]([ExtResource("2_ao7hk"), ExtResource("3_ao7hk"), ExtResource("4_4ants"), ExtResource("5_kfew5"), ExtResource("6_bdd31"), ExtResource("7_yt7xe"), ExtResource("8_52uhi"), ExtResource("9_ntam1"), ExtResource("10_ml7j6"), ExtResource("11_j6vka")])
+cards = Array[ExtResource("1_8oghy")]([ExtResource("2_ao7hk"), ExtResource("3_ao7hk"), ExtResource("4_4ants"), ExtResource("5_kfew5"), ExtResource("6_bdd31"), ExtResource("7_yt7xe"), ExtResource("8_52uhi"), ExtResource("9_ntam1"), ExtResource("10_ml7j6"), ExtResource("11_j6vka"), ExtResource("12_clight")])
 icon = ExtResource("2_1sm61")
 family_name = "Serenity"
 family_type = 5

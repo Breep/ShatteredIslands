@@ -58,6 +58,11 @@ func start() -> void:
 		if not _owner.action_overhealed.is_connected(_on_action_overhealed_overflowing_light):
 			_owner.action_overhealed.connect(_on_action_overhealed_overflowing_light)
 
+	# [CORRUPTED LIGHT]
+	if _serenity_stats.serenity_corrupted_light_activated:
+		if not _owner.action_done.is_connected(_on_action_done_corrupted_light):
+			_owner.action_done.connect(_on_action_done_corrupted_light)
+
 	
 func stop() -> void:
 	_regen_tick_timer.stop()
@@ -65,6 +70,7 @@ func stop() -> void:
 	_stop_rejuvenative_faith()
 	_stop_warm_aura()
 	_stop_overflowing_light()
+	_stop_corrupted_light()
 	_clear_optional_timers()
 
 # ============================== Private functions ==============================
@@ -175,6 +181,10 @@ func _stop_warm_aura() -> void:
 func _stop_overflowing_light() -> void:
 	if _owner.action_overhealed.is_connected(_on_action_overhealed_overflowing_light):
 		_owner.action_overhealed.disconnect(_on_action_overhealed_overflowing_light)
+
+func _stop_corrupted_light() -> void:
+	if _owner.action_done.is_connected(_on_action_done_corrupted_light):
+		_owner.action_done.disconnect(_on_action_done_corrupted_light)
 
 #endregion
 
@@ -339,6 +349,27 @@ func _on_action_overhealed_overflowing_light(_entity_ref: Entity, target: Entity
 		var shield_amount = amount * (shield_percent / 100.0)
 		if shield_amount > 0:
 			_owner.inflict_condition_stacks(target, shield_amount, Utils.StackType.ARMOR, "Overflowing Light")
+#endregion
+
+#region ============== CORRUPTED LIGHT ==================
+func _on_action_done_corrupted_light(_entity_ref: Entity, _target: Entity, action_type: Utils.ActionType, _action_id: StringName, value: float, _is_critical: bool) -> void:
+	# Check if action is HEAL
+	if action_type != Utils.ActionType.UTILITY_HEAL: return
+	if value <= 0: return
+
+	var conversion_percent: float = _serenity_stats.serenity_corrupted_light_conversion_percent
+	if conversion_percent <= 0: return
+	
+	var damage_amount: float = value * (conversion_percent / 100.0)
+	if damage_amount <= 0: return
+	
+	var enemy = _owner.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
+	if enemy == null: 
+		# print("DEBUG: Corrupted Light - No enemy found")
+		return
+		
+	# print("DEBUG: Corrupted Light - Dealing ", damage_amount, " to ", enemy.name)
+	_owner.direct_attack(enemy, damage_amount, Utils.DamageType.MAGICAL, "Corrupted Light")
 #endregion
 
 #region ============== REGEN ==================

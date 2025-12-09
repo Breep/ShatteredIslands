@@ -49,6 +49,10 @@ var warm_aura_cleanse_amount: float
 var overflowing_light_activated: bool
 var overflowing_light_shield_percent: float
 
+# [CORRUPTED LIGHT]
+var serenity_corrupted_light_activated: bool
+var serenity_corrupted_light_conversion_percent: float
+
 #endregion
 
 
