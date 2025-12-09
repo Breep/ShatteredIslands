@@ -46,6 +46,44 @@ func _on_stats_health_changed(new_health: int) -> void:
 		signal_death()
 		queue_free()
 
+const GENERATOR_BEAM_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Defense/FieldGenerator/field_generator_beam.tscn")
+
+var _current_targets: Array[Entity] = []
+var _beams: Dictionary = {} # { entity_id (int) : FieldGeneratorBeam }
+
+func _process(delta: float) -> void:
+	for target in _current_targets:
+		if target == null or not is_instance_valid(target) or target.is_dead:
+			continue
+			
+		if not _beams.has(target.id):
+			var beam = GENERATOR_BEAM_SCENE.instantiate()
+			add_child(beam)
+			_beams[target.id] = beam
+			
+		var beam_instance = _beams[target.id]
+		# Start from slightly above center to target center (or slightly above)
+		var start = global_position + Vector3(0, 1.0, 0)
+		var end = target.global_position + Vector3(0, 0.5, 0) # Approx center/chest
+		beam_instance.update_beam(start, end)
+		
+	# Cleanup beams for lost targets
+	var targets_ids = []
+	for t in _current_targets:
+		if t and is_instance_valid(t):
+			targets_ids.append(t.id)
+			
+	var ids_to_remove = []
+	for id in _beams:
+		if not id in targets_ids:
+			ids_to_remove.append(id)
+			
+	for id in ids_to_remove:
+		if is_instance_valid(_beams[id]):
+			_beams[id].queue_free()
+		_beams.erase(id)
+
+
 func _on_shield_timer_timeout() -> void:
 	# Shield closest allies
 	var allies: Array[Entity] = target_module.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES)
@@ -60,10 +98,12 @@ func _on_shield_timer_timeout() -> void:
 		return global_position.distance_squared_to(a.global_position) < global_position.distance_squared_to(b.global_position)
 	)
 	
+	_current_targets.clear()
 	var count = 0
 	for ally in valid_allies:
 		if count >= _target_count: break
 		_action_module.inflict_condition_stacks(ally, _shield_amount, Utils.StackType.ARMOR, "Field Generator")
+		_current_targets.append(ally)
 		count += 1
 
 #region ===== Action / Interaction Delegation
