@@ -99,6 +99,10 @@ func _add_meteor_modifiers() -> void:
 	# [APOCALYPSE]
 	if _fire_stats.fire_apocalypse_activated:
 		_meteor_modifiers.append(_on_apocalypse_meteor_hit)
+		
+	# [COSMO'POLITAN]
+	if _fire_stats.fire_cosmopolitan_activated:
+		_meteor_modifiers.append(_on_cosmopolitan_meteor_hit)
 
 func _clear_meteor_modifiers() -> void:
 	_meteor_modifiers.clear()
@@ -314,6 +318,31 @@ func _on_apocalypse_meteor_hit(cb_vars: Dictionary) -> void:
 		if ignite_stacks > 0:
 			var bonus_damage = ignite_stacks * ratio
 			_owner.direct_attack(entity, bonus_damage, Utils.DamageType.MAGICAL, "Apocalypse")
+#endregion
+
+		if ignite_stacks > 0:
+			var bonus_damage = ignite_stacks * ratio
+			_owner.direct_attack(entity, bonus_damage, Utils.DamageType.MAGICAL, "Apocalypse")
+#endregion
+
+#region ========== COSMO'POLITAN ==========
+# [COSMO'POLITAN]
+func _on_cosmopolitan_meteor_hit(cb_vars: Dictionary) -> void:
+	var _entities_inside: Array = cb_vars.get(Meteor.VarType.ENTITIES_INSIDE, [])
+	var damage_percent: float = cb_vars.get(Meteor.VarType.DAMAGE_PERCENT, 0.0)
+	
+	# Filter actual targets (enemies)
+	var targets: Array[Entity] = []
+	for entity: Entity in _entities_inside:
+		if entity != null and is_instance_valid(entity) and not entity.is_dead and entity.team != _owner.team:
+			targets.append(entity)
+			
+	if targets.size() == 1:
+		var target = targets[0]
+		var bonus_ratio: float = _fire_stats.fire_cosmopolitan_bonus_damage_ratio
+		var extra_damage_percent: float = damage_percent * bonus_ratio
+		
+		_owner.direct_attack_percent(target, extra_damage_percent, Utils.DamageType.MAGICAL, Utils.PercentModifier.MAX_HP, "Cosmo'Politan")
 #endregion
 
 # ============================== PASSIF ==============================

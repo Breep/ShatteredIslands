@@ -42,6 +42,10 @@ var cosmic_bolt_period: float
 var cosmic_bolt_damage_per_stack: float # Multiplicateur de dégâts
 var cosmic_bolt_bounce_chance_per_stack: float # Multiplicateur de chance
 
+# [COSMO'POLITAN]
+var fire_cosmopolitan_activated: bool
+var fire_cosmopolitan_bonus_damage_ratio: float
+
 # [END OF THE WORLD]
 var end_of_the_world_activated: bool # True if the player has at least one of this card
 var end_of_the_world_stack_multiplier: float # Ignite stack multiplier to trigger the card
