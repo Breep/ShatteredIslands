@@ -219,6 +219,18 @@ func _call_the_lightning() -> void:
 	var damage: float = _owner.stats.attack_damage * final_percent / 100.0
 	_owner.cast_spell(target, Spell.Type.LIGHTNING, {Spell.LightningModifier.DAMAGE: damage})
 	
+	# [DYNAMO]
+	if _storm_stats.dynamo_activated:
+		_apply_dynamo_effect()
+
+	# [STORM BREAKER]
+	if _storm_stats.storm_breaker_activated:
+		_apply_storm_breaker_effect()
+		
+	# [STORM BATTERY]
+	if _storm_stats.storm_battery_activated:
+		_apply_storm_battery_effect()
+	
 	# [ELECTROCUTE]
 	if _storm_stats.electrocute_activated:
 		if Utils.is_randomize_modifier_active(_storm_stats.electrocute_chance):
@@ -376,8 +388,9 @@ func _apply_chain_lightning_effect(hit_victim: Entity, original_damage: float) -
 	var distance: float = sqrt(max_dist_sq)
 	distance = min(distance, 50.0)
 	var factor: float = _storm_stats.chain_lightning_dist_factor
+	var rank_mult: float = RANK_VALUE_MULTIPLIERS.get(_current_rank, 1.0)
 	var damage_multiplier: float = (factor * distance) / 100.0
-	var final_damage: float = original_damage * damage_multiplier
+	var final_damage: float = original_damage * damage_multiplier * rank_mult
 	
 	var spell_modifiers: Dictionary = {
 		Spell.ChainLightningModifier.DAMAGE: final_damage,
@@ -392,15 +405,6 @@ func _apply_chain_lightning_effect(hit_victim: Entity, original_damage: float) -
 
 func _on_current_rank_changed() -> void:
 	_call_the_lightning()
-	# [STORM BREAKER]
-	if _storm_stats.storm_breaker_activated:
-		_apply_storm_breaker_effect()
-	# [STORM BATTERY]
-	if _storm_stats.storm_battery_activated:
-		_apply_storm_battery_effect()
-	# [DYNAMO]
-	if _storm_stats.dynamo_activated:
-		_apply_dynamo_effect()
 	# [THUNDER BERSERKER] (Pénalité sur Grind)
 	if _storm_stats.thunder_berserker_activated and _thunder_berserker_penalty_active:
 		_apply_thunder_berserker_penalty()
@@ -485,9 +489,10 @@ func _apply_schrodinger_storm_effect() -> void:
 		
 	if target == null or not is_instance_valid(target) or target.is_dead: return
 	
+	var rank_mult: float = RANK_VALUE_MULTIPLIERS.get(_current_rank, 1.0)
 	var base_amount: float = _storm_stats.schrodinger_storm_amount
 	var stack_type: Utils.StackType
-	var final_amount: float = base_amount
+	var final_amount: float = base_amount * rank_mult
 	
 	if target_is_ally:
 		# Good Stacks: ARMOR, REGEN
