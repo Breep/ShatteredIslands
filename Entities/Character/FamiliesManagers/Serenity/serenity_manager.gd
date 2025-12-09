@@ -384,6 +384,24 @@ func _on_action_overhealed_overflowing_light(_entity_ref: Entity, target: Entity
 			_owner.inflict_condition_stacks(target, shield_amount, Utils.StackType.ARMOR, "Overflowing Light")
 #endregion
 
+#region ============== RADIANT OVERFLOW ==================
+func _on_before_heal_radiant_overflow(cb_vars: Dictionary) -> void:
+	# [RADIANT OVERFLOW]
+	if not cb_vars.has(ActionModifier.VarType.TARGET) or not cb_vars.has(ActionModifier.VarType.HEAL_AMOUNT):
+		return
+		
+	var target = cb_vars[ActionModifier.VarType.TARGET]
+	if target == null or not is_instance_valid(target): return
+	
+	var regen_stacks: float = target.stats.regen_stacks
+	if regen_stacks <= 0: return
+	
+	var ratio: float = _serenity_stats.serenity_radiant_overflow_ratio
+	var increase_percent: float = regen_stacks * ratio
+	
+	cb_vars[ActionModifier.VarType.HEAL_AMOUNT] *= (1.0 + increase_percent)
+#endregion
+
 #region ============== CORRUPTED LIGHT ==================
 func _on_action_done_corrupted_light(_entity_ref: Entity, _target: Entity, action_type: Utils.ActionType, _action_id: StringName, value: float, _is_critical: bool) -> void:
 	# Check if action is HEAL

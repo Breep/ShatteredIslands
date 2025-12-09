@@ -53,9 +53,6 @@ var overflowing_light_shield_percent: float
 var serenity_corrupted_light_activated: bool
 var serenity_corrupted_light_conversion_percent: float
 
-# [CORRUPTED LIGHT]
-var serenity_corrupted_light_activated: bool
-var serenity_corrupted_light_conversion_percent: float
 
 # [LIGHT COLLECTOR]
 var light_collector_activated: bool
@@ -69,7 +66,6 @@ var luminescent_surge_activated: bool
 var luminescent_surge_period: float
 var luminescent_surge_target_count: int
 var luminescent_surge_heal_percent: float
-var luminescent_surge_regen_amount: float
 var luminescent_surge_regen_amount: float
 var luminescent_surge_hp_threshold_percent: float
 

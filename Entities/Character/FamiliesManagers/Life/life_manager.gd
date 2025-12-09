@@ -271,4 +271,3 @@ func _on_ancient_growth_timer_timeout() -> void:
 	mod.value = _ancient_growth_total_bonus
 	mod.tags = [StatModifier.TagType.CARD]
 	_owner.stats_manager.update_modifier(mod)
-

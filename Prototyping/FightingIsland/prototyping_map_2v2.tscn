@@ -28,11 +28,11 @@
 [ext_resource type="Resource" uid="uid://dtclhv8aaqrbk" path="res://Card/Descriptions/Cards/Storm/Common/Quickcharge/storm_quickcharge.tres" id="16_arhhx"]
 [ext_resource type="Resource" uid="uid://kbmlikqifik1" path="res://Card/Descriptions/Cards/Storm/Rare/StormBreaker/storm_storm_breaker.tres" id="17_7n5st"]
 [ext_resource type="Resource" uid="uid://d0kg80jq8cr18" path="res://Card/Descriptions/Cards/Light/Rare/LuminescentSurge/serenity_luminescent_surge.tres" id="18_cj02a"]
-[ext_resource type="Resource" uid="uid://dvpdubk0btegx" path="res://Card/Descriptions/Cards/Poison/Common/PoisonFlask/poison_poison_flask.tres" id="18_me75i"]
 [ext_resource type="Resource" uid="uid://dnwa5apxanb8j" path="res://Card/Descriptions/Cards/Necro/Common/PutridTouch/necro_putrid_touch.tres" id="19_mmcok"]
 [ext_resource type="Resource" uid="uid://b1tjb84nxwa6a" path="res://Card/Descriptions/Cards/Light/Common/WarmAura/serenity_warm_aura.tres" id="19_p3qq1"]
 [ext_resource type="Resource" uid="uid://b0vxjhrs71sxg" path="res://Card/Descriptions/Cards/Light/Common/OverflowingLight/serenity_overflowing_light.tres" id="21_rodki"]
 [ext_resource type="Resource" uid="uid://y1a7qansj8bu" path="res://Card/Descriptions/Cards/Storm/Common/LightningFootwork/storm_lightning_footwork.tres" id="22_eqikj"]
+[ext_resource type="Resource" uid="uid://c7vmqb7h1a62e" path="res://Card/Descriptions/Cards/Defense/Legendary/FieldGenerator/defense_field_generator.tres" id="22_nao3x"]
 [ext_resource type="Script" uid="uid://nhqk1783r4d1" path="res://GlobalManagers/ActionMeter/Viewer/ui_entity_bds_registry.gd" id="25_f2umu"]
 [ext_resource type="PackedScene" uid="uid://cs66hky7o30da" path="res://GlobalManagers/ActionMeter/Viewer/ui_entity_bds_registry.tscn" id="26_5jp0x"]
 [ext_resource type="Resource" uid="uid://cwywvggm7tovg" path="res://Card/Descriptions/Cards/Defense/Common/ToxicFiltrationLayer/defense_toxic_filtration_layer.tres" id="26_cj02a"]
@@ -67,7 +67,7 @@ volumetric_fog_density = 0.0
 
 [node name="PrototypingMap" type="Node3D" node_paths=PackedStringArray("_characters", "_floating_island")]
 script = ExtResource("1_oc45v")
-_player1_cards = Array[ExtResource("2_5t2nw")]([ExtResource("8_4ych6"), ExtResource("4_5t2nw"), ExtResource("5_y3vk0"), ExtResource("6_a1wsu"), ExtResource("7_4gryv"), ExtResource("8_4gryv"), ExtResource("9_qouoy"), ExtResource("10_58xxc"), ExtResource("11_lx1e4"), ExtResource("12_upgkc"), ExtResource("19_mmcok"), ExtResource("14_3k7as"), ExtResource("15_tlods"), ExtResource("16_arhhx"), ExtResource("18_me75i"), ExtResource("18_cj02a"), ExtResource("19_p3qq1"), ExtResource("9_q4r27"), ExtResource("21_rodki"), ExtResource("22_eqikj")])
+_player1_cards = Array[ExtResource("2_5t2nw")]([ExtResource("8_4ych6"), ExtResource("4_5t2nw"), ExtResource("5_y3vk0"), ExtResource("6_a1wsu"), ExtResource("7_4gryv"), ExtResource("8_4gryv"), ExtResource("9_qouoy"), ExtResource("10_58xxc"), ExtResource("11_lx1e4"), ExtResource("12_upgkc"), ExtResource("19_mmcok"), ExtResource("14_3k7as"), ExtResource("15_tlods"), ExtResource("16_arhhx"), ExtResource("18_cj02a"), ExtResource("19_p3qq1"), ExtResource("9_q4r27"), ExtResource("21_rodki"), ExtResource("22_eqikj"), ExtResource("22_nao3x")])
 _player2_cards = Array[ExtResource("2_5t2nw")]([ExtResource("9_q4r27"), ExtResource("10_qouoy")])
 _player3_cards = Array[ExtResource("2_5t2nw")]([ExtResource("9_nlwjv"), ExtResource("10_cyskk"), ExtResource("11_q4r27"), ExtResource("12_qouoy"), ExtResource("7_4gryv"), ExtResource("17_7n5st"), ExtResource("19_mmcok"), ExtResource("26_cj02a"), ExtResource("27_cj02a")])
 _player4_cards = Array[ExtResource("2_5t2nw")]([ExtResource("9_nlwjv"), ExtResource("10_cyskk"), ExtResource("11_q4r27"), ExtResource("17_7n5st"), ExtResource("19_mmcok"), ExtResource("26_cj02a"), ExtResource("7_4gryv")])

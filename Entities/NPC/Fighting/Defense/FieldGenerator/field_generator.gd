@@ -13,6 +13,8 @@ var _shield_interval: float = 1.0
 var _target_count: int = 2
 var _initial_shield: int = 150
 
+var _shield_timer: Timer
+
 func init(max_health: int, shield_amount: int, shield_interval: float, initial_shield: int, target_count: int) -> void:
 	_max_health = max_health
 	_shield_amount = shield_amount
