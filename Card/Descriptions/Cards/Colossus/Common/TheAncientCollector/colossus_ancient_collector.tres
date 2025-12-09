@@ -13,5 +13,4 @@ _amount_per_card = Array[float]([1000.0, 15.0, 20.0, 25.0, 30.0])
 script = ExtResource("1_card_template")
 name = "The Ancient Collector"
 picture = SubResource("PlaceholderTexture2D_bdonc")
-family = 6
 player_upgrade = SubResource("Resource_ancient_collector")

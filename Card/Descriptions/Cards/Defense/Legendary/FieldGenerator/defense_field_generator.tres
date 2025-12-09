@@ -18,6 +18,6 @@ _initial_shield = Array[int]([150])
 script = ExtResource("1_card_script")
 name = "Field Generator"
 picture = SubResource("PlaceholderTexture2D_4frrm")
-family = 2
+families = Array[int]([2])
 rarity = 3
 player_upgrade = SubResource("Resource_upgrade")

@@ -13,6 +13,5 @@ _ratio = Array[float]([0.01, 0.02, 0.04])
 script = ExtResource("1_script")
 name = "Radiant Overflow"
 picture = SubResource("PlaceholderTexture2D_xvfe6")
-family = 5
 rarity = 1
 player_upgrade = SubResource("Resource_radiant")

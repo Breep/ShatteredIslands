@@ -12,18 +12,18 @@
 [ext_resource type="Resource" uid="uid://dxr7p12a3u5s0" path="res://Card/Descriptions/Cards/Attack/Common/RustyDagger/attack_rusty_dagger.tres" id="9_bh88q"]
 [ext_resource type="Texture2D" uid="uid://b78s362n5bu6" path="res://Card/Descriptions/Families/Icons/turret.png" id="9_m74lt"]
 [ext_resource type="Resource" uid="uid://dpnpvtk3elac0" path="res://Card/Descriptions/Cards/Attack/Common/ScorchingBlade/attack_scorching_blade.tres" id="10_aq1hw"]
-[ext_resource type="Resource" uid="uid://cvkv7hq8nsvks" path="res://Card/Descriptions/Cards/Attack/Common/TitanAxe/attack_titan_axe.tres" id="11_v0m22"]
 [ext_resource type="Resource" uid="uid://ctm6ojtt36a88" path="res://Card/Descriptions/Cards/Attack/Common/TwinBlade/attack_twin_blade.tres" id="12_m0m1f"]
 [ext_resource type="Resource" uid="uid://c526xnq31ipht" path="res://Card/Descriptions/Cards/Attack/DoubleEdgeSword/attack_double_edge_sword.tres" id="13_j4n54"]
 [ext_resource type="Resource" uid="uid://3vjmnbpyyjyk" path="res://Card/Descriptions/Cards/Attack/Epic/GatlingGun/attack_gatling_gun.tres" id="14_d48eo"]
 [ext_resource type="Resource" uid="uid://dq5i43mqjqg38" path="res://Card/Descriptions/Cards/Attack/Epic/StormHammer/attack_storm_hammer.tres" id="15_53lib"]
 [ext_resource type="Resource" uid="uid://b1hnvijka2dfw" path="res://Card/Descriptions/Cards/Attack/Legendary/RussianRoulette/attack_russian_roulette.tres" id="16_21jcm"]
 [ext_resource type="Resource" uid="uid://b76twqciou5cu" path="res://Card/Descriptions/Cards/Attack/Rare/BladeRush/attack_blade_rush.tres" id="17_pgyqe"]
+[ext_resource type="Resource" path="res://Card/Descriptions/Cards/Attack/Common/TitanAxe/attack_titan_axe.tres" id="18_pxftt"]
 [ext_resource type="Resource" uid="uid://5vemx42gusi2" path="res://Card/Descriptions/Cards/Attack/Rare/SurgicalKnife/attack_surgical_knife.tres" id="18_x260t"]
 
 [resource]
 script = ExtResource("2_m6yig")
-cards = Array[ExtResource("1_4dvmk")]([ExtResource("2_pxftt"), ExtResource("3_hfo1r"), ExtResource("4_3gyb5"), ExtResource("5_5yvjh"), ExtResource("6_o6pym"), ExtResource("7_4yplm"), ExtResource("8_4xqgf"), ExtResource("9_bh88q"), ExtResource("10_aq1hw"), ExtResource("11_v0m22"), ExtResource("12_m0m1f"), ExtResource("13_j4n54"), ExtResource("14_d48eo"), ExtResource("15_53lib"), ExtResource("16_21jcm"), ExtResource("17_pgyqe"), ExtResource("18_x260t")])
+cards = Array[ExtResource("1_4dvmk")]([ExtResource("2_pxftt"), ExtResource("3_hfo1r"), ExtResource("4_3gyb5"), ExtResource("5_5yvjh"), ExtResource("6_o6pym"), ExtResource("7_4yplm"), ExtResource("8_4xqgf"), ExtResource("9_bh88q"), ExtResource("10_aq1hw"), ExtResource("12_m0m1f"), ExtResource("13_j4n54"), ExtResource("14_d48eo"), ExtResource("15_53lib"), ExtResource("16_21jcm"), ExtResource("17_pgyqe"), ExtResource("18_x260t"), ExtResource("18_pxftt")])
 icon = ExtResource("9_m74lt")
 family_name = "Attack"
 family_type = 1
