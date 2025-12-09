@@ -9,10 +9,11 @@
 [ext_resource type="Resource" uid="uid://cj72i47u7d1nu" path="res://Card/Descriptions/Cards/Colossus/Common/Proteins/colossus_proteins.tres" id="5_4cji8"]
 [ext_resource type="Resource" uid="uid://b6rcxah2x0aqm" path="res://Card/Descriptions/Cards/Colossus/Common/BearStrenght/colossus_bear_strength.tres" id="6_4aec1"]
 [ext_resource type="Resource" uid="uid://bdq8el3f8q22o" path="res://Card/Descriptions/Cards/Colossus/Common/TitansProtection/colossus_titans_protection.tres" id="7_cam05"]
+[ext_resource type="Resource" path="res://Card/Descriptions/Cards/Life/Common/TheAncientCollector/colossus_ancient_collector.tres" id="8_anc_col"]
 
 [resource]
 script = ExtResource("2_upugm")
-cards = Array[ExtResource("1_f2mb4")]([ExtResource("2_m8e2k"), ExtResource("3_rt3ai"), ExtResource("4_gsofw"), ExtResource("5_4cji8"), ExtResource("6_4aec1"), ExtResource("7_cam05")])
+cards = Array[ExtResource("1_f2mb4")]([ExtResource("2_m8e2k"), ExtResource("3_rt3ai"), ExtResource("4_gsofw"), ExtResource("5_4cji8"), ExtResource("6_4aec1"), ExtResource("7_cam05"), ExtResource("8_anc_col")])
 icon = ExtResource("2_sor6b")
 family_name = "Colossus"
 family_type = 6
