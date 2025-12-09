@@ -94,13 +94,22 @@ var stack_manager: StackManager
 enum EntityType {
 	CHARACTER,
 	SNAKE_BARREL,
-	SNAKE
+	SNAKE,
+	FIELD_GENERATOR
 }
 
 enum SnakeBarrelModifier {
 	SNAKE_NUMBER,
 	SNAKE_POISON_STACKS,
 	MAX_HEALTH
+}
+
+enum FieldGeneratorModifier {
+	MAX_HEALTH,
+	SHIELD_AMOUNT,
+	SHIELD_INTERVAL,
+	INITIAL_SHIELD,
+	TARGET_COUNT
 }
 
 # ============================== Constants ==============================

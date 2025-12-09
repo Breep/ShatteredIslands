@@ -60,6 +60,13 @@ func start() -> void:
 		if not _owner.stats.armor_stacks_changed.is_connected(_on_owner_armor_stacks_changed):
 			_owner.stats.armor_stacks_changed.connect(_on_owner_armor_stacks_changed)
 
+	# [FIELD GENERATOR]
+	if _defense_stats.defense_field_generator_activated:
+		# Summon one at start
+		_summon_field_generator()
+		# Periodic
+		_optional_timers.append(Utils.create_perpetual_timer(self, _defense_stats.defense_field_generator_summon_interval, _summon_field_generator, true))
+
 	# [AETHER REDIRECTOR]
 	if _defense_stats.aether_redirector_activated:
 		_aether_redirector_ready = true
@@ -481,3 +488,22 @@ func _on_projectile_spawned_aether_redirector(source: Entity, target: Entity, pr
 
 func _on_aether_redirector_cooldown_finished() -> void:
 	_aether_redirector_ready = true
+
+
+# [FIELD GENERATOR]
+func _summon_field_generator() -> void:
+	if _owner == null or not is_instance_valid(_owner): return
+	
+	var summon_pos = _owner.global_position
+	# Slight offset maybe?
+	summon_pos += Vector3(randf_range(-2, 2), 0, randf_range(-2, 2))
+	
+	var mods: Dictionary = {
+		Entity.FieldGeneratorModifier.SHIELD_AMOUNT: _defense_stats.defense_field_generator_shield_amount,
+		Entity.FieldGeneratorModifier.SHIELD_INTERVAL: _defense_stats.defense_field_generator_shield_interval,
+		Entity.FieldGeneratorModifier.INITIAL_SHIELD: _defense_stats.defense_field_generator_initial_shield,
+		Entity.FieldGeneratorModifier.MAX_HEALTH: _defense_stats.defense_field_generator_max_health,
+		Entity.FieldGeneratorModifier.TARGET_COUNT: _defense_stats.defense_field_generator_target_count
+	}
+	
+	_owner.summon_entity(Entity.EntityType.FIELD_GENERATOR, summon_pos, mods)
