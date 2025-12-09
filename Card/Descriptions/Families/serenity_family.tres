@@ -17,7 +17,7 @@
 
 [resource]
 script = ExtResource("2_11cd3")
-cards = Array[ExtResource("1_8oghy")]([ExtResource("2_ao7hk"), ExtResource("3_ao7hk"), ExtResource("4_4ants"), ExtResource("5_kfew5"), ExtResource("6_bdd31"), ExtResource("7_yt7xe"), ExtResource("8_52uhi"), ExtResource("9_ntam1"), ExtResource("10_ml7j6"), ExtResource("11_j6vka"), ExtResource("12_clight")])
+cards = Array[ExtResource("1_8oghy")]([ExtResource("2_ao7hk"), ExtResource("3_ao7hk"), ExtResource("4_4ants"), ExtResource("5_kfew5"), ExtResource("6_bdd31"), ExtResource("7_yt7xe"), ExtResource("8_52uhi"), ExtResource("9_ntam1"), ExtResource("10_ml7j6"), ExtResource("11_j6vka"), ExtResource("12_clight"), "res://Card/Descriptions/Cards/Light/Rare/RadiantOverflow/serenity_radiant_overflow.tres"])
 icon = ExtResource("2_1sm61")
 family_name = "Serenity"
 family_type = 5

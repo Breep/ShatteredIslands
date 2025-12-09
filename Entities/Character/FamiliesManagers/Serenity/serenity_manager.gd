@@ -162,6 +162,15 @@ func _add_action_modifiers() -> void:
 		action_modifier.after_action_logic_callback = _on_dodge_graceful_step
 		_owner.action_modifiers_manager.register_modifier(action_modifier)
 
+	# [RADIANT OVERFLOW]
+	if _serenity_stats.serenity_radiant_overflow_activated:
+		var action_modifier := ActionModifier.new()
+		action_modifier.action_type = ActionModifier.ActionType.HEAL
+		action_modifier.id = "Radiant Overflow"
+		action_modifier.is_one_time_effect = false
+		action_modifier.before_action_logic_callback = _on_before_heal_radiant_overflow
+		_owner.action_modifiers_manager.register_modifier(action_modifier)
+
 #endregion
 
 #region others card
@@ -388,7 +397,7 @@ func _on_action_done_corrupted_light(_entity_ref: Entity, _target: Entity, actio
 	if damage_amount <= 0: return
 	
 	var enemy = _owner.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
-	if enemy == null: 
+	if enemy == null:
 		# print("DEBUG: Corrupted Light - No enemy found")
 		return
 		

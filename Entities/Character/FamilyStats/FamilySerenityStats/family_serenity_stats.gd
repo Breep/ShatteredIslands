@@ -70,7 +70,12 @@ var luminescent_surge_period: float
 var luminescent_surge_target_count: int
 var luminescent_surge_heal_percent: float
 var luminescent_surge_regen_amount: float
+var luminescent_surge_regen_amount: float
 var luminescent_surge_hp_threshold_percent: float
+
+#[RADIANT OVERFLOW]
+var serenity_radiant_overflow_activated: bool
+var serenity_radiant_overflow_ratio: float
 #endregion
 
 #region Epic Card
