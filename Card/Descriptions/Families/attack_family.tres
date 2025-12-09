@@ -19,7 +19,7 @@
 
 [resource]
 script = ExtResource("2_m6yig")
-cards = Array[ExtResource("1_4dvmk")]([ExtResource("5_cg3dx"), ExtResource("7_eobhs"), ExtResource("9_ypjtd"), ExtResource("5_gthbg"), ExtResource("10_cg3dx"), ExtResource("11_gthbg"), ExtResource("8_cg3dx"), ExtResource("4_xkvlw"), ExtResource("2_m74lt"), ExtResource("11_eobhs"), ExtResource("12_gthbg"), ExtResource("13_rr"), ExtResource("14_ta")])
+cards = Array[ExtResource("1_4dvmk")]([ExtResource("5_cg3dx"), ExtResource("7_eobhs"), ExtResource("9_ypjtd"), ExtResource("5_gthbg"), ExtResource("10_cg3dx"), ExtResource("11_gthbg"), ExtResource("8_cg3dx"), ExtResource("4_xkvlw"), ExtResource("2_m74lt"), ExtResource("11_eobhs"), ExtResource("12_gthbg"), ExtResource("13_rr"), ExtResource("14_ta"), "res://Card/Descriptions/Cards/Attack/Common/NecroticBullet/attack_necrotic_bullet.tres"])
 icon = ExtResource("9_m74lt")
 family_name = "Attack"
 family_type = 1

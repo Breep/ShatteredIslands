@@ -136,6 +136,16 @@ func _add_attack_modifiers() -> void:
 		aa_modifier.is_one_time_effect = false
 		_owner.auto_attack_modifier_registry.register_modifier(aa_modifier)
 		
+		
+	# [NECROTIC BULLET]
+	if _attack_stats.necrotic_bullet_activated:
+		var aa_modifier := AutoAttackModifier.new()
+		aa_modifier.id = "Necrotic Bullet"
+		aa_modifier.tags = [AutoAttackModifier.TagType.CARD]
+		aa_modifier.on_attack_logic_callback = _on_auto_attack_necrotic_bullet
+		aa_modifier.is_one_time_effect = false
+		_owner.auto_attack_modifier_registry.register_modifier(aa_modifier)
+		
 func _clear_attack_modifiers() -> void:
 	# [PROTECTO'SPEAR]
 	if _attack_stats.protectospear_activated:
@@ -168,6 +178,10 @@ func _clear_attack_modifiers() -> void:
 	# [RUSSIAN ROULETTE]
 	if _attack_stats.attack_russian_roulette_activated:
 		_owner.auto_attack_modifier_registry.unregister_modifier("Russian Roulette")
+
+	# [NECROTIC BULLET]
+	if _attack_stats.necrotic_bullet_activated:
+		_owner.auto_attack_modifier_registry.unregister_modifier("Necrotic Bullet")
 		
 #endregion
 
@@ -317,6 +331,19 @@ func _on_auto_attack_rusty_dagger(cb_vars: Dictionary) -> void:
 	if Utils.is_randomize_modifier_active(chance):
 		proj_stats.poison_stacks += _attack_stats.rusty_dagger_poison_stacks
 
+	if Utils.is_randomize_modifier_active(chance):
+		proj_stats.poison_stacks += _attack_stats.rusty_dagger_poison_stacks
+
+
+# [NECROTIC BULLET]
+func _on_auto_attack_necrotic_bullet(cb_vars: Dictionary) -> void:
+	if not cb_vars.has(AutoAttackModifier.VarType.PROJECTILE_STATS):
+		printerr("Necrotic Bullet: cb_vars n'a pas de PROJECTILE_STATS")
+		return
+	var proj_stats: ProjectileStats = cb_vars[AutoAttackModifier.VarType.PROJECTILE_STATS]
+	var chance: float = _attack_stats.necrotic_bullet_chance
+	if Utils.is_randomize_modifier_active(chance):
+		proj_stats.necrosis_stacks += _attack_stats.necrotic_bullet_necrosis_stacks
 
 # [SCORCHING BLADE]
 func _on_hit_scorching_blade(cb_vars: Dictionary) -> void:

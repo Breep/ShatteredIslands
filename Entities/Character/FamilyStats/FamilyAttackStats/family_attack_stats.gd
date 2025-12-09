@@ -52,6 +52,11 @@ var healing_crossbow_heal_amount: float
 
 
 var double_edge_sword_activated: bool # True if this skill is activated
+
+# [NECROTIC BULLET]
+var necrotic_bullet_activated: bool
+var necrotic_bullet_chance: float
+var necrotic_bullet_necrosis_stacks: float
 #endregion
 
 #region Rare Card
