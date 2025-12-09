@@ -219,6 +219,18 @@ func _call_the_lightning() -> void:
 	var damage: float = _owner.stats.attack_damage * final_percent / 100.0
 	_owner.cast_spell(target, Spell.Type.LIGHTNING, {Spell.LightningModifier.DAMAGE: damage})
 	
+	# [DYNAMO]
+	if _storm_stats.dynamo_activated:
+		_apply_dynamo_effect()
+
+	# [STORM BREAKER]
+	if _storm_stats.storm_breaker_activated:
+		_apply_storm_breaker_effect()
+		
+	# [STORM BATTERY]
+	if _storm_stats.storm_battery_activated:
+		_apply_storm_battery_effect()
+	
 	# [ELECTROCUTE]
 	if _storm_stats.electrocute_activated:
 		if Utils.is_randomize_modifier_active(_storm_stats.electrocute_chance):
@@ -227,7 +239,7 @@ func _call_the_lightning() -> void:
 # [STORM BREAKER]
 func _apply_storm_breaker_effect() -> void:
 	var target: Entity = _owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
-	if target == null or not is_instance_valid(target): return
+	if target == null or not is_instance_valid(target) or target.stats_manager == null: return
 	var rank_mult: float = RANK_VALUE_MULTIPLIERS.get(_current_rank, 1.0)
 	var base_percent: float = _storm_stats.storm_breaker_base_reduction_percent
 	var added_percent: float = base_percent * rank_mult
@@ -376,8 +388,9 @@ func _apply_chain_lightning_effect(hit_victim: Entity, original_damage: float) -
 	var distance: float = sqrt(max_dist_sq)
 	distance = min(distance, 50.0)
 	var factor: float = _storm_stats.chain_lightning_dist_factor
+	var rank_mult: float = RANK_VALUE_MULTIPLIERS.get(_current_rank, 1.0)
 	var damage_multiplier: float = (factor * distance) / 100.0
-	var final_damage: float = original_damage * damage_multiplier
+	var final_damage: float = original_damage * damage_multiplier * rank_mult
 	
 	var spell_modifiers: Dictionary = {
 		Spell.ChainLightningModifier.DAMAGE: final_damage,
@@ -392,18 +405,14 @@ func _apply_chain_lightning_effect(hit_victim: Entity, original_damage: float) -
 
 func _on_current_rank_changed() -> void:
 	_call_the_lightning()
-	# [STORM BREAKER]
-	if _storm_stats.storm_breaker_activated:
-		_apply_storm_breaker_effect()
-	# [STORM BATTERY]
-	if _storm_stats.storm_battery_activated:
-		_apply_storm_battery_effect()
-	# [DYNAMO]
-	if _storm_stats.dynamo_activated:
-		_apply_dynamo_effect()
 	# [THUNDER BERSERKER] (Pénalité sur Grind)
 	if _storm_stats.thunder_berserker_activated and _thunder_berserker_penalty_active:
 		_apply_thunder_berserker_penalty()
+		
+	# [SCHRODINGER STORM]
+	if _storm_stats.schrodinger_storm_activated:
+		_apply_schrodinger_storm_effect()
+		
 	match _current_rank:
 		Rank.S:
 			var duration: float = RANK_S_DURATION
@@ -463,5 +472,52 @@ func _on_dodge_lightning_footwork(_cb_vars: Dictionary) -> void:
 	_lightning_footwork_current_bonus = 0.0
 	_update_lightning_footwork_modifier()
 
+
+#region action modifier
+
+# [SCHRODINGER STORM]
+func _apply_schrodinger_storm_effect() -> void:
+	# 1. Pick Random Entity (Ally or Enemy)
+	# 50/50 chance for Ally vs Enemy
+	var target_is_ally: bool = randf() < 0.5
+	var target: Entity = null
+	
+	if target_is_ally:
+		target = _owner.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ALLY_INCLUDING_SELF)
+	else:
+		target = _owner.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
+		
+	if target == null or not is_instance_valid(target) or target.is_dead: return
+	
+	var rank_mult: float = RANK_VALUE_MULTIPLIERS.get(_current_rank, 1.0)
+	var base_amount: float = _storm_stats.schrodinger_storm_amount
+	var stack_type: Utils.StackType
+	var final_amount: float = base_amount * rank_mult
+	
+	if target_is_ally:
+		# Good Stacks: ARMOR, REGEN
+		# 50/50 split
+		if randf() < 0.5:
+			stack_type = Utils.StackType.ARMOR
+			final_amount *= 2.0 # Multiplier x2
+		else:
+			stack_type = Utils.StackType.REGEN
+			final_amount *= 1.0 # Multiplier x1
+	else:
+		# Bad Stacks: IGNITE, NECROSIS, POISON
+		# 33/33/33 split
+		var roll: float = randf()
+		if roll < 0.33:
+			stack_type = Utils.StackType.IGNITE
+			final_amount *= 2.0 # Multiplier x2
+		elif roll < 0.66:
+			stack_type = Utils.StackType.NECROSIS
+			final_amount *= 2.0 # Multiplier x2
+		else:
+			stack_type = Utils.StackType.POISON
+			final_amount *= 0.5 # Multiplier x0.5
+			
+	if final_amount > 0:
+		_owner.inflict_condition_stacks(target, final_amount, stack_type, "Schrödinger's Storm")
 
 #endregion

@@ -54,7 +54,7 @@ func _on_battle_start() -> void:
 	if _fire_stats.nuke_activated:
 		var targets: Array[Entity] = _owner.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ENEMIES)
 		for target: Entity in targets:
-			_owner.inflict_condition_stacks(target,_fire_stats.nuke_ignite,Utils.StackType.IGNITE, "Nuke")
+			_owner.inflict_condition_stacks(target, _fire_stats.nuke_ignite, Utils.StackType.IGNITE, "Nuke")
 #endregion
 
 #region optional timer
@@ -95,6 +95,14 @@ func _add_meteor_modifiers() -> void:
 	# [SCORPIUS]
 	if _fire_stats.scorpius_activated:
 		_meteor_modifiers.append(_on_scorpius_meteor_hit)
+
+	# [APOCALYPSE]
+	if _fire_stats.fire_apocalypse_activated:
+		_meteor_modifiers.append(_on_apocalypse_meteor_hit)
+		
+	# [COSMO'POLITAN]
+	if _fire_stats.fire_cosmopolitan_activated:
+		_meteor_modifiers.append(_on_cosmopolitan_meteor_hit)
 
 func _clear_meteor_modifiers() -> void:
 	_meteor_modifiers.clear()
@@ -226,10 +234,10 @@ func _on_titans_protection_meteor_hit(_cb_vars: Dictionary) -> void:
 	if amount > 0:
 		_titans_protection_accumulated_hp += amount
 		var mod := StatModifier.new()
-		mod.id = "Fire Titan Protection" 
+		mod.id = "Fire Titan Protection"
 		mod.stat_type = EntityStats.StatType.HEALTH_MAX
 		mod.calc_type = StatModifier.CalcType.ADD
-		mod.value = _titans_protection_accumulated_hp 
+		mod.value = _titans_protection_accumulated_hp
 		mod.tags = [StatModifier.TagType.CARD]
 		_owner.stats_manager.update_modifier(mod)
 #endregion
@@ -255,7 +263,7 @@ func _on_cosmic_bolt_timer_timeout() -> void:
 func _shoot_cosmic_bolt(target: Entity) -> void:
 	if target == null or not is_instance_valid(target): return
 	var proj_stats := ProjectileStats.new()
-	proj_stats.is_bouncing = false 
+	proj_stats.is_bouncing = false
 	proj_stats.on_hit_logic_callbacks.append(_on_hit_cosmic_bolt)
 	_owner.projectile_attack(target, Projectile.ProjectileType.COSMIC_BOLT, _owner._turret._projectile_spawn_point, proj_stats)
 
@@ -296,6 +304,47 @@ func _on_end_of_the_world_meteor_hit(cb_vars: Dictionary) -> void:
 			entity.stats.health = 0
 #endregion
 
+#region ========== APOCALYPSE ==========
+# [APOCALYPSE]
+func _on_apocalypse_meteor_hit(cb_vars: Dictionary) -> void:
+	var _entities_inside: Array = cb_vars.get(Meteor.VarType.ENTITIES_INSIDE, [])
+	var ratio: float = _fire_stats.fire_apocalypse_damage_ratio
+	
+	for entity: Entity in _entities_inside:
+		if entity == null or not is_instance_valid(entity) or entity.is_dead: continue
+		if entity.team == _owner.team: continue
+		
+		var ignite_stacks = entity.stats.ignite_stacks
+		if ignite_stacks > 0:
+			var bonus_damage = ignite_stacks * ratio
+			_owner.direct_attack(entity, bonus_damage, Utils.DamageType.MAGICAL, "Apocalypse")
+#endregion
+
+		if ignite_stacks > 0:
+			var bonus_damage = ignite_stacks * ratio
+			_owner.direct_attack(entity, bonus_damage, Utils.DamageType.MAGICAL, "Apocalypse")
+#endregion
+
+#region ========== COSMO'POLITAN ==========
+# [COSMO'POLITAN]
+func _on_cosmopolitan_meteor_hit(cb_vars: Dictionary) -> void:
+	var _entities_inside: Array = cb_vars.get(Meteor.VarType.ENTITIES_INSIDE, [])
+	var damage_percent: float = cb_vars.get(Meteor.VarType.DAMAGE_PERCENT, 0.0)
+	
+	# Filter actual targets (enemies)
+	var targets: Array[Entity] = []
+	for entity: Entity in _entities_inside:
+		if entity != null and is_instance_valid(entity) and not entity.is_dead and entity.team != _owner.team:
+			targets.append(entity)
+			
+	if targets.size() == 1:
+		var target = targets[0]
+		var bonus_ratio: float = _fire_stats.fire_cosmopolitan_bonus_damage_ratio
+		var extra_damage_percent: float = damage_percent * bonus_ratio
+		
+		_owner.direct_attack_percent(target, extra_damage_percent, Utils.DamageType.MAGICAL, Utils.PercentModifier.MAX_HP, "Cosmo'Politan")
+#endregion
+
 # ============================== PASSIF ==============================
 
  #region ==========  PASSIVE ==========
@@ -309,7 +358,7 @@ func _on_inflict_condition_ignite(cb_vars: Dictionary) -> void:
 	if stack_type != Utils.StackType.IGNITE: return
 	for i in stack_value:
 		if Utils.is_randomize_modifier_active(2):
-			_owner.cast_spell(target,Spell.Type.METEOR,{
+			_owner.cast_spell(target, Spell.Type.METEOR, {
 					Spell.MeteorModifier.DAMAGE_PERCENT: 5.0,
 					Spell.MeteorModifier.RADIUS: 3.0,
 					Spell.MeteorModifier.ON_HIT_CALLBACKS: _meteor_modifiers

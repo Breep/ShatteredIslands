@@ -49,6 +49,14 @@ var warm_aura_cleanse_amount: float
 var overflowing_light_activated: bool
 var overflowing_light_shield_percent: float
 
+# [CORRUPTED LIGHT]
+var serenity_corrupted_light_activated: bool
+var serenity_corrupted_light_conversion_percent: float
+
+
+# [LIGHT COLLECTOR]
+var light_collector_activated: bool
+var light_collector_regen_amount: float
 #endregion
 
 
@@ -60,6 +68,10 @@ var luminescent_surge_target_count: int
 var luminescent_surge_heal_percent: float
 var luminescent_surge_regen_amount: float
 var luminescent_surge_hp_threshold_percent: float
+
+#[RADIANT OVERFLOW]
+var serenity_radiant_overflow_activated: bool
+var serenity_radiant_overflow_ratio: float
 #endregion
 
 #region Epic Card

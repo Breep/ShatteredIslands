@@ -58,6 +58,15 @@ func start() -> void:
 		if not _owner.action_overhealed.is_connected(_on_action_overhealed_overflowing_light):
 			_owner.action_overhealed.connect(_on_action_overhealed_overflowing_light)
 
+	# [CORRUPTED LIGHT]
+	if _serenity_stats.serenity_corrupted_light_activated:
+		if not _owner.action_done.is_connected(_on_action_done_corrupted_light):
+			_owner.action_done.connect(_on_action_done_corrupted_light)
+			
+	# [LIGHT COLLECTOR]
+	if _serenity_stats.light_collector_activated:
+		_apply_light_collector()
+
 	
 func stop() -> void:
 	_regen_tick_timer.stop()
@@ -65,6 +74,7 @@ func stop() -> void:
 	_stop_rejuvenative_faith()
 	_stop_warm_aura()
 	_stop_overflowing_light()
+	_stop_corrupted_light()
 	_clear_optional_timers()
 
 # ============================== Private functions ==============================
@@ -152,6 +162,15 @@ func _add_action_modifiers() -> void:
 		action_modifier.after_action_logic_callback = _on_dodge_graceful_step
 		_owner.action_modifiers_manager.register_modifier(action_modifier)
 
+	# [RADIANT OVERFLOW]
+	if _serenity_stats.serenity_radiant_overflow_activated:
+		var action_modifier := ActionModifier.new()
+		action_modifier.action_type = ActionModifier.ActionType.HEAL
+		action_modifier.id = "Radiant Overflow"
+		action_modifier.is_one_time_effect = false
+		action_modifier.before_action_logic_callback = _on_before_heal_radiant_overflow
+		_owner.action_modifiers_manager.register_modifier(action_modifier)
+
 #endregion
 
 #region others card
@@ -175,6 +194,30 @@ func _stop_warm_aura() -> void:
 func _stop_overflowing_light() -> void:
 	if _owner.action_overhealed.is_connected(_on_action_overhealed_overflowing_light):
 		_owner.action_overhealed.disconnect(_on_action_overhealed_overflowing_light)
+
+func _stop_corrupted_light() -> void:
+	if _owner.action_done.is_connected(_on_action_done_corrupted_light):
+		_owner.action_done.disconnect(_on_action_done_corrupted_light)
+
+# [LIGHT COLLECTOR]
+func _apply_light_collector() -> void:
+	if not _serenity_stats.light_collector_activated: return
+	
+	var count: int = 0
+	if _player and _player.deck:
+		count = _player.deck.get_unique_card_count(Family.FamilyType.SERENITY)
+	else:
+		push_warning("SerenityManager: _player or deck is null for Light Collector")
+		return
+		
+	var amount_per_card: float = _serenity_stats.light_collector_regen_amount
+	var total_regen: float = count * amount_per_card
+	
+	if total_regen > 0:
+		var allies: Array[Entity] = _owner.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES)
+		for ally in allies:
+			if ally != null and is_instance_valid(ally) and not ally.is_dead:
+				_owner.inflict_condition_stacks(ally, total_regen, Utils.StackType.REGEN, "Light Collector")
 
 #endregion
 
@@ -339,6 +382,45 @@ func _on_action_overhealed_overflowing_light(_entity_ref: Entity, target: Entity
 		var shield_amount = amount * (shield_percent / 100.0)
 		if shield_amount > 0:
 			_owner.inflict_condition_stacks(target, shield_amount, Utils.StackType.ARMOR, "Overflowing Light")
+#endregion
+
+#region ============== RADIANT OVERFLOW ==================
+func _on_before_heal_radiant_overflow(cb_vars: Dictionary) -> void:
+	# [RADIANT OVERFLOW]
+	if not cb_vars.has(ActionModifier.VarType.TARGET) or not cb_vars.has(ActionModifier.VarType.HEAL_AMOUNT):
+		return
+		
+	var target = cb_vars[ActionModifier.VarType.TARGET]
+	if target == null or not is_instance_valid(target): return
+	
+	var regen_stacks: float = target.stats.regen_stacks
+	if regen_stacks <= 0: return
+	
+	var ratio: float = _serenity_stats.serenity_radiant_overflow_ratio
+	var increase_percent: float = regen_stacks * ratio
+	
+	cb_vars[ActionModifier.VarType.HEAL_AMOUNT] *= (1.0 + increase_percent)
+#endregion
+
+#region ============== CORRUPTED LIGHT ==================
+func _on_action_done_corrupted_light(_entity_ref: Entity, _target: Entity, action_type: Utils.ActionType, _action_id: StringName, value: float, _is_critical: bool) -> void:
+	# Check if action is HEAL
+	if action_type != Utils.ActionType.UTILITY_HEAL: return
+	if value <= 0: return
+
+	var conversion_percent: float = _serenity_stats.serenity_corrupted_light_conversion_percent
+	if conversion_percent <= 0: return
+	
+	var damage_amount: float = value * (conversion_percent / 100.0)
+	if damage_amount <= 0: return
+	
+	var enemy = _owner.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
+	if enemy == null:
+		# print("DEBUG: Corrupted Light - No enemy found")
+		return
+		
+	# print("DEBUG: Corrupted Light - Dealing ", damage_amount, " to ", enemy.name)
+	_owner.direct_attack(enemy, damage_amount, Utils.DamageType.MAGICAL, "Corrupted Light")
 #endregion
 
 #region ============== REGEN ==================

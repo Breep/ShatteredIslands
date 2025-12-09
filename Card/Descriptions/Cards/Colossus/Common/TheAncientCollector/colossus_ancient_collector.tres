@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://b6j3wpi41auhr"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_card_template"]
+[ext_resource type="Script" uid="uid://883goe4ixa30" path="res://Card/Descriptions/Cards/Colossus/Common/TheAncientCollector/colossus_ancient_collector.gd" id="2_script"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_bdonc"]
+
+[sub_resource type="Resource" id="Resource_ancient_collector"]
+script = ExtResource("2_script")
+_amount_per_card = Array[float]([1000.0, 15.0, 20.0, 25.0, 30.0])
+
+[resource]
+script = ExtResource("1_card_template")
+name = "The Ancient Collector"
+picture = SubResource("PlaceholderTexture2D_bdonc")
+family = 6
+player_upgrade = SubResource("Resource_ancient_collector")

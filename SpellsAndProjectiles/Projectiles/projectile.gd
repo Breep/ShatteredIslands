@@ -154,6 +154,10 @@ func _on_body_entered(body: Node3D) -> void:
 		if stats.poison_stacks > 0:
 			if source != null: source.inflict_condition_stacks(hit_target, stats.poison_stacks, Utils.StackType.POISON, "AUTO ATTACK")
 			else: hit_target.take_condition_stacks(stats.poison_stacks, Utils.StackType.POISON, stats.poison_stacks_is_critical, "AUTO ATTACK", )
+			
+		if stats.necrosis_stacks > 0:
+			if source != null: source.inflict_condition_stacks(hit_target, stats.necrosis_stacks, Utils.StackType.NECROSIS, "AUTO ATTACK")
+			else: hit_target.take_condition_stacks(stats.necrosis_stacks, Utils.StackType.NECROSIS, stats.necrosis_stacks_is_critical, "AUTO ATTACK", )
 		
 		# --- CALLBACKS ---
 		for cb: Callable in stats.on_hit_logic_callbacks:

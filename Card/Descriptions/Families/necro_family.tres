@@ -1,12 +1,13 @@
-[gd_resource type="Resource" script_class="Family" load_steps=4 format=3 uid="uid://b3vqgxyoo4150"]
+[gd_resource type="Resource" script_class="Family" load_steps=5 format=3 uid="uid://b3vqgxyoo4150"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_c0xxk"]
+[ext_resource type="Resource" uid="uid://dnwa5apxanb8j" path="res://Card/Descriptions/Cards/Necro/Common/PutridTouch/necro_putrid_touch.tres" id="2_3vha4"]
 [ext_resource type="Texture2D" uid="uid://b8pst2jcoqsyc" path="res://Card/Descriptions/Families/Icons/necrose.png" id="2_egdka"]
 [ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://Card/Templates/family.gd" id="2_f061f"]
 
 [resource]
 script = ExtResource("2_f061f")
-cards = Array[ExtResource("1_c0xxk")]([])
+cards = Array[ExtResource("1_c0xxk")]([ExtResource("2_3vha4")])
 icon = ExtResource("2_egdka")
 family_name = "Necrosis"
 family_type = 11

@@ -126,6 +126,24 @@ func _add_attack_modifiers() -> void:
 		aa_modifier.tags = [AutoAttackModifier.TagType.CARD]
 		aa_modifier.on_hit_logic_callback = _on_hit_arcane_staff
 		aa_modifier.is_one_time_effect = false
+		
+	# [RUSSIAN ROULETTE]
+	if _attack_stats.attack_russian_roulette_activated:
+		var aa_modifier := AutoAttackModifier.new()
+		aa_modifier.id = "Russian Roulette"
+		aa_modifier.tags = [AutoAttackModifier.TagType.CARD]
+		aa_modifier.on_attack_logic_callback = _on_russian_roulette_attack
+		aa_modifier.is_one_time_effect = false
+		_owner.auto_attack_modifier_registry.register_modifier(aa_modifier)
+		
+		
+	# [NECROTIC BULLET]
+	if _attack_stats.necrotic_bullet_activated:
+		var aa_modifier := AutoAttackModifier.new()
+		aa_modifier.id = "Necrotic Bullet"
+		aa_modifier.tags = [AutoAttackModifier.TagType.CARD]
+		aa_modifier.on_attack_logic_callback = _on_auto_attack_necrotic_bullet
+		aa_modifier.is_one_time_effect = false
 		_owner.auto_attack_modifier_registry.register_modifier(aa_modifier)
 		
 func _clear_attack_modifiers() -> void:
@@ -156,6 +174,14 @@ func _clear_attack_modifiers() -> void:
 	# [ARCANE STAFF]
 	if _attack_stats.arcane_staff_activated:
 		_owner.auto_attack_modifier_registry.unregister_modifier("Arcane Staff")
+
+	# [RUSSIAN ROULETTE]
+	if _attack_stats.attack_russian_roulette_activated:
+		_owner.auto_attack_modifier_registry.unregister_modifier("Russian Roulette")
+
+	# [NECROTIC BULLET]
+	if _attack_stats.necrotic_bullet_activated:
+		_owner.auto_attack_modifier_registry.unregister_modifier("Necrotic Bullet")
 		
 #endregion
 
@@ -188,6 +214,24 @@ func _add_stat_modifiers() -> void:
 		stat_modifier.stat_type = EntityStats.StatType.AA_SPEED
 		stat_modifier.calc_type = StatModifier.CalcType.MULT
 		stat_modifier.value = _attack_stats.twin_blade_speed / 100.0
+		stat_modifier.tags = [StatModifier.TagType.CARD]
+		_owner.stats_manager.register_modifier(stat_modifier)
+	
+	# [AIM ASSIST]
+	if _attack_stats.attack_aim_assist_activated:
+		var stat_modifier := StatModifier.new()
+		stat_modifier.id = "Aim Assist"
+		stat_modifier.stat_type = EntityStats.StatType.AD
+		stat_modifier.calc_type = StatModifier.CalcType.ADD
+		
+		# FamilyManager has _player reference which has the deck
+		var count: int = 0
+		if _player and _player.deck:
+			count = _player.deck.get_unique_card_count(Family.FamilyType.ATTACK)
+		else:
+			push_warning("AttackManager: _player or deck is null for Aim Assist")
+			
+		stat_modifier.value = count * _attack_stats.attack_aim_assist_bonus_per_card
 		stat_modifier.tags = [StatModifier.TagType.CARD]
 		_owner.stats_manager.register_modifier(stat_modifier)
 #endregion
@@ -287,6 +331,19 @@ func _on_auto_attack_rusty_dagger(cb_vars: Dictionary) -> void:
 	if Utils.is_randomize_modifier_active(chance):
 		proj_stats.poison_stacks += _attack_stats.rusty_dagger_poison_stacks
 
+	if Utils.is_randomize_modifier_active(chance):
+		proj_stats.poison_stacks += _attack_stats.rusty_dagger_poison_stacks
+
+
+# [NECROTIC BULLET]
+func _on_auto_attack_necrotic_bullet(cb_vars: Dictionary) -> void:
+	if not cb_vars.has(AutoAttackModifier.VarType.PROJECTILE_STATS):
+		printerr("Necrotic Bullet: cb_vars n'a pas de PROJECTILE_STATS")
+		return
+	var proj_stats: ProjectileStats = cb_vars[AutoAttackModifier.VarType.PROJECTILE_STATS]
+	var chance: float = _attack_stats.necrotic_bullet_chance
+	if Utils.is_randomize_modifier_active(chance):
+		proj_stats.necrosis_stacks += _attack_stats.necrotic_bullet_necrosis_stacks
 
 # [SCORCHING BLADE]
 func _on_hit_scorching_blade(cb_vars: Dictionary) -> void:
@@ -365,3 +422,18 @@ func _on_auto_attack_protectospear(_cb_vars: Dictionary) -> void:
 	var chance: float = _attack_stats.protectospear_chance
 	if Utils.is_randomize_modifier_active(chance):
 		_owner.inflict_condition_stacks(_owner, _attack_stats.protectospear_shield_amount, Utils.StackType.ARMOR, "Protecto'Spear")
+
+
+# [RUSSIAN ROULETTE]
+func _on_russian_roulette_attack(cb_vars: Dictionary) -> void:
+	if not cb_vars.has(AutoAttackModifier.VarType.PROJECTILE_STATS):
+		printerr("Russian Roulette: cb_vars n'a pas de PROJECTILE_STATS")
+		return
+	var proj_stats: ProjectileStats = cb_vars[AutoAttackModifier.VarType.PROJECTILE_STATS]
+	
+	var min_p: float = _attack_stats.attack_russian_roulette_min_percent
+	var max_p: float = _attack_stats.attack_russian_roulette_max_percent
+	
+	var multiplier: float = randf_range(min_p, max_p) / 100.0
+	
+	proj_stats.physical_damage_flat *= multiplier

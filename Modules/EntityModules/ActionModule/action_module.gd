@@ -14,6 +14,7 @@ const CHAIN_LIGHTNING_SCENE: PackedScene = preload("res://SpellsAndProjectiles/S
 
 const SNAKE_BARREL_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Poison/SnakeBarrel/snake_barrel.tscn")
 const SNAKE_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Poison/Snake/snake.tscn")
+const FIELD_GENERATOR_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Defense/FieldGenerator/field_generator.tscn")
 
 # ============================== Public functions ==============================
 
@@ -96,6 +97,17 @@ func _spawn_projectile(target: Entity, projectile_type: Projectile.ProjectileTyp
 func heal(target: Entity, heal_amount: float, action_id: StringName) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
+	
+	if _owner.action_modifiers_manager != null:
+		var modifiers_dict: Dictionary = {
+			ActionModifier.VarType.HEAL_AMOUNT: heal_amount,
+			ActionModifier.VarType.TARGET: target
+		}
+		for modifier: ActionModifier in _owner.action_modifiers_manager.get_all_modifiers(ActionModifier.ActionType.HEAL):
+			if modifier.before_action_logic_callback.is_valid():
+				modifier.before_action_logic_callback.call(modifiers_dict)
+		heal_amount = modifiers_dict[ActionModifier.VarType.HEAL_AMOUNT]
+	
 	var heal_amount_before_crit: float = heal_amount * _get_strenght_weakness_multiplier(Utils.ActionType.UTILITY_HEAL)
 	var crit_multiplier = _get_crit_multiplier(Utils.ActionType.UTILITY_HEAL)
 	heal_amount = heal_amount_before_crit * crit_multiplier["multiplier"]
@@ -276,6 +288,7 @@ func summon_entity(entity_type: Entity.EntityType, entity_spawn_global_position:
 		Entity.EntityType.CHARACTER: print("Summon a character ? I think not !")
 		Entity.EntityType.SNAKE_BARREL: _summon_snake_barrel(entity_spawn_global_position, entity_modifier)
 		Entity.EntityType.SNAKE: _summon_snake(entity_spawn_global_position, entity_modifier)
+		Entity.EntityType.FIELD_GENERATOR: _summon_field_generator(entity_spawn_global_position, entity_modifier)
 
 
 func _summon_snake_barrel(entity_spawn_global_position: Vector3, entity_modifier: Dictionary) -> void:
@@ -294,6 +307,20 @@ func _summon_snake(entity_spawn_global_position: Vector3, _entity_modifier: Dict
 	snake.team = _owner.team
 	_spawn_manager.spawn_entity(snake, entity_spawn_global_position)
 	print("SUMMON SNAKE")
+	
+	
+func _summon_field_generator(entity_spawn_global_position: Vector3, entity_modifier: Dictionary) -> void:
+	var field_generator: FieldGenerator = FIELD_GENERATOR_SCENE.instantiate()
+	if multiplayer.is_server():
+		var max_health: int = entity_modifier.get(Entity.FieldGeneratorModifier.MAX_HEALTH, 1)
+		var shield_amount: int = entity_modifier.get(Entity.FieldGeneratorModifier.SHIELD_AMOUNT, 100)
+		var shield_interval: float = entity_modifier.get(Entity.FieldGeneratorModifier.SHIELD_INTERVAL, 1.0)
+		var initial_shield: int = entity_modifier.get(Entity.FieldGeneratorModifier.INITIAL_SHIELD, 150)
+		var target_count: int = entity_modifier.get(Entity.FieldGeneratorModifier.TARGET_COUNT, 2)
+		field_generator.init(max_health, shield_amount, shield_interval, initial_shield, target_count)
+	
+	field_generator.team = _owner.team
+	_spawn_manager.spawn_entity(field_generator, entity_spawn_global_position)
 #endregion
 
 

@@ -159,6 +159,24 @@ func _add_stat_modifiers() -> void:
 		poison_mod.tags = [StatModifier.TagType.CARD]
 		_owner.stats_manager.register_modifier(poison_mod)
 		
+	# [ANCIENT COLLECTOR]
+	if _life_stats.ancient_collector_activated:
+		var mod := StatModifier.new()
+		mod.id = "The Ancient Collector"
+		mod.stat_type = EntityStats.StatType.HEALTH_MAX
+		mod.calc_type = StatModifier.CalcType.ADD
+		
+		# Get unique colossus card count
+		# FamilyManager has _player reference which has the deck
+		if _player and _player.deck:
+			var colossus_count: int = _player.deck.get_unique_card_count(Family.FamilyType.LIFE)
+			mod.value = colossus_count * _life_stats.ancient_collector_amount_per_card
+		else:
+			push_warning("LifeManager: _player or deck is null for Ancient Collector")
+		
+		mod.tags = [StatModifier.TagType.CARD]
+		_owner.stats_manager.register_modifier(mod)
+		
 #endregion
 
 #region action modifier

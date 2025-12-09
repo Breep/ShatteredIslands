@@ -18,4 +18,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Storm Breaker: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "Each [[RANK]] grind applies " + str(_base_reduction_percent[cardlvl - 1]) + "% * Rank Value [[VULNERABILITY]] to target."
+	return "Each Lightning cast applies " + str(_base_reduction_percent[cardlvl - 1]) + "% * Rank Value [[VULNERABILITY]] to target."

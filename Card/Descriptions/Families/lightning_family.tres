@@ -6,7 +6,6 @@
 
 [resource]
 script = ExtResource("2_rxul7")
-cards = Array[ExtResource("1_6u3rc")]([])
 icon = ExtResource("2_kcyl1")
 family_name = "Lightning"
 family_type = 10

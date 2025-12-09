@@ -18,4 +18,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Storm Battery: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "Each [[RANK]] grind generates " + str(_base_mana_gain[cardlvl - 1]) + " * (Rank Value) mana"
+	return "Each Lightning cast generates " + str(_base_mana_gain[cardlvl - 1]) + " * (Rank Value) mana"

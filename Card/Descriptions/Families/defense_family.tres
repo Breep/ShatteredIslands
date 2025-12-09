@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Family" load_steps=12 format=3 uid="uid://dw66lnwee8ruk"]
+[gd_resource type="Resource" script_class="Family" load_steps=18 format=3 uid="uid://dw66lnwee8ruk"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_yud7m"]
 [ext_resource type="Resource" uid="uid://dnxmyxqxal6sw" path="res://Card/Descriptions/Cards/Defense/Common/AvengersAssemble/shieldomatic_avengers_assemble.tres" id="2_7cbwc"]
@@ -7,14 +7,20 @@
 [ext_resource type="Resource" uid="uid://c3rq8k7pj84qi" path="res://Card/Descriptions/Cards/Defense/Common/EvasiveBarrier/shieldomatic_evasive_barrier.tres" id="4_ybs4r"]
 [ext_resource type="Resource" uid="uid://by5tud5u1y87o" path="res://Card/Descriptions/Cards/Defense/Common/ForceField/shieldomatic_force_field.tres" id="5_spcg6"]
 [ext_resource type="Resource" uid="uid://ch6lrtduf0q25" path="res://Card/Descriptions/Cards/Defense/Common/MagneticSyphon/shieldomatic_magnetic_syphon.tres" id="6_dcgsq"]
-[ext_resource type="Resource" uid="uid://by2fg3cyrvuja" path="res://Card/Descriptions/Cards/Defense/Common/ReflectoBelt/defense_reflecto_belt.tres" id="7_p63yt"]
+[ext_resource type="Resource" uid="uid://r3rk3cnyponr" path="res://Card/Descriptions/Cards/Defense/Common/ProtectiveDome/shieldomatic_protective_dome.tres" id="7_adttv"]
+[ext_resource type="Resource" uid="uid://coqupis51li0i" path="res://Card/Descriptions/Cards/Defense/Common/ReactiveCover/defense_reactive_cover.tres" id="8_0vd2r"]
 [ext_resource type="Resource" uid="uid://c88cqm481bhcu" path="res://Card/Descriptions/Cards/Defense/Common/ShieldRush/shieldomatic_shield_rush.tres" id="8_adttv"]
 [ext_resource type="Resource" uid="uid://c2fbdsokd2ayt" path="res://Card/Descriptions/Cards/Defense/Epic/AegisResonator/shieldomatic_aegis_resonator.tres" id="9_0vd2r"]
+[ext_resource type="Resource" uid="uid://cwywvggm7tovg" path="res://Card/Descriptions/Cards/Defense/Common/ToxicFiltrationLayer/defense_toxic_filtration_layer.tres" id="10_0vhvt"]
+[ext_resource type="Resource" uid="uid://c7vmqb7h1a62e" path="res://Card/Descriptions/Cards/Defense/Legendary/FieldGenerator/defense_field_generator.tres" id="10_field_gen"]
+[ext_resource type="Resource" uid="uid://dn12dex5vaxb1" path="res://Card/Descriptions/Cards/Defense/Rare/AbsorptionMatrix/defense_absorption_matrix.tres" id="13_mogah"]
 [ext_resource type="Texture2D" uid="uid://dlbjl8ihicpc8" path="res://Card/Descriptions/Families/Icons/defense.png" id="13_spcg6"]
+[ext_resource type="Resource" uid="uid://ceejbf6x7fcyp" path="res://Card/Descriptions/Cards/Defense/Rare/AetherRedirector/defense_aether_redirector.tres" id="14_vagij"]
+[ext_resource type="Resource" uid="uid://du0o8udb4adn5" path="res://Card/Descriptions/Cards/Defense/Rare/ShieldThrow/shieldomatic_shield_throw.tres" id="15_lhiy4"]
 
 [resource]
 script = ExtResource("3_p2pe3")
-cards = Array[ExtResource("1_yud7m")]([ExtResource("2_7cbwc"), ExtResource("3_jrdhl"), ExtResource("4_ybs4r"), ExtResource("5_spcg6"), ExtResource("6_dcgsq"), ExtResource("7_p63yt"), ExtResource("8_adttv"), ExtResource("9_0vd2r")])
+cards = Array[ExtResource("1_yud7m")]([ExtResource("2_7cbwc"), ExtResource("3_jrdhl"), ExtResource("4_ybs4r"), ExtResource("5_spcg6"), ExtResource("6_dcgsq"), ExtResource("7_adttv"), ExtResource("8_0vd2r"), ExtResource("8_adttv"), ExtResource("10_0vhvt"), ExtResource("9_0vd2r"), ExtResource("10_field_gen"), ExtResource("13_mogah"), ExtResource("14_vagij"), ExtResource("15_lhiy4")])
 icon = ExtResource("13_spcg6")
 family_name = "Defense"
 family_type = 2
