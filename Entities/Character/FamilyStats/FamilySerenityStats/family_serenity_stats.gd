@@ -53,6 +53,13 @@ var overflowing_light_shield_percent: float
 var serenity_corrupted_light_activated: bool
 var serenity_corrupted_light_conversion_percent: float
 
+# [CORRUPTED LIGHT]
+var serenity_corrupted_light_activated: bool
+var serenity_corrupted_light_conversion_percent: float
+
+# [LIGHT COLLECTOR]
+var light_collector_activated: bool
+var light_collector_regen_amount: float
 #endregion
 
 

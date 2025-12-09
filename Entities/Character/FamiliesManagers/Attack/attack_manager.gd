@@ -202,6 +202,24 @@ func _add_stat_modifiers() -> void:
 		stat_modifier.value = _attack_stats.twin_blade_speed / 100.0
 		stat_modifier.tags = [StatModifier.TagType.CARD]
 		_owner.stats_manager.register_modifier(stat_modifier)
+	
+	# [AIM ASSIST]
+	if _attack_stats.attack_aim_assist_activated:
+		var stat_modifier := StatModifier.new()
+		stat_modifier.id = "Aim Assist"
+		stat_modifier.stat_type = EntityStats.StatType.AD
+		stat_modifier.calc_type = StatModifier.CalcType.ADD
+		
+		# FamilyManager has _player reference which has the deck
+		var count: int = 0
+		if _player and _player.deck:
+			count = _player.deck.get_unique_card_count(Family.FamilyType.ATTACK)
+		else:
+			push_warning("AttackManager: _player or deck is null for Aim Assist")
+			
+		stat_modifier.value = count * _attack_stats.attack_aim_assist_bonus_per_card
+		stat_modifier.tags = [StatModifier.TagType.CARD]
+		_owner.stats_manager.register_modifier(stat_modifier)
 #endregion
 
 #region action modifier

@@ -62,6 +62,10 @@ func start() -> void:
 	if _serenity_stats.serenity_corrupted_light_activated:
 		if not _owner.action_done.is_connected(_on_action_done_corrupted_light):
 			_owner.action_done.connect(_on_action_done_corrupted_light)
+			
+	# [LIGHT COLLECTOR]
+	if _serenity_stats.light_collector_activated:
+		_apply_light_collector()
 
 	
 func stop() -> void:
@@ -185,6 +189,26 @@ func _stop_overflowing_light() -> void:
 func _stop_corrupted_light() -> void:
 	if _owner.action_done.is_connected(_on_action_done_corrupted_light):
 		_owner.action_done.disconnect(_on_action_done_corrupted_light)
+
+# [LIGHT COLLECTOR]
+func _apply_light_collector() -> void:
+	if not _serenity_stats.light_collector_activated: return
+	
+	var count: int = 0
+	if _player and _player.deck:
+		count = _player.deck.get_unique_card_count(Family.FamilyType.SERENITY)
+	else:
+		push_warning("SerenityManager: _player or deck is null for Light Collector")
+		return
+		
+	var amount_per_card: float = _serenity_stats.light_collector_regen_amount
+	var total_regen: float = count * amount_per_card
+	
+	if total_regen > 0:
+		var allies: Array[Entity] = _owner.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES)
+		for ally in allies:
+			if ally != null and is_instance_valid(ally) and not ally.is_dead:
+				_owner.inflict_condition_stacks(ally, total_regen, Utils.StackType.REGEN, "Light Collector")
 
 #endregion
 

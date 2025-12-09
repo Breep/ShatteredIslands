@@ -82,6 +82,10 @@ var storm_hammer_chance: float # % of chance for an auto-attack to bounce
 var attack_russian_roulette_activated: bool
 var attack_russian_roulette_min_percent: float
 var attack_russian_roulette_max_percent: float
+
+# [AIM ASSIST]
+var attack_aim_assist_activated: bool
+var attack_aim_assist_bonus_per_card: float
 #endregion
 
 
