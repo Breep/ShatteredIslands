@@ -12,8 +12,8 @@ func apply(stats: FamiliesStats, cardlvl: int) -> void:
 		return
 	
 	stats.serenity.warm_aura_activated = true
-	stats.serenity.warm_aura_chance = _base_chance
-	stats.serenity.warm_aura_cleanse_amount = _base_cleanse_amount
+	stats.serenity.warm_aura_chance = _base_chance[cardlvl - 1]
+	stats.serenity.warm_aura_cleanse_amount = _base_cleanse_amount[cardlvl - 1]
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
