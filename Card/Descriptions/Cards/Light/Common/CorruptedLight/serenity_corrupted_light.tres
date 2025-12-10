@@ -13,6 +13,6 @@ _conversion_percent = Array[int]([20, 40, 60, 80, 100])
 script = ExtResource("1_template")
 name = "Corrupted Light"
 picture = SubResource("PlaceholderTexture2D_e5ov8")
-rarity = 1
 families = Array[int]([5])
+rarity = 1
 player_upgrade = SubResource("Resource_upgrade")

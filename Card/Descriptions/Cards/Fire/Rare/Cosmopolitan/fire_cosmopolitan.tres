@@ -13,6 +13,6 @@ _bonus_damage_ratio = Array[float]([3.0, 5.0, 7.0])
 script = ExtResource("1_script")
 name = "Cosmo'Politan"
 picture = SubResource("PlaceholderTexture2D_gfewo")
-rarity = 1
 families = Array[int]([3])
+rarity = 1
 player_upgrade = SubResource("Resource_cosmopolitan")
