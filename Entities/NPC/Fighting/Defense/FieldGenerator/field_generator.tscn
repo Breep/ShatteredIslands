@@ -1,0 +1,47 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://Entities/NPC/Fighting/Defense/FieldGenerator/field_generator.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://fe7g12v4g3lb" path="res://Entities/NPC/Fighting/Poison/SnakeBarrel/snake_barrel_visual.tscn" id="2_visual"]
+[ext_resource type="PackedScene" uid="uid://cjqhs57x28gtu" path="res://Entities/Stats/EntityStats/entity_stats.tscn" id="3_stats"]
+[ext_resource type="PackedScene" uid="uid://bbwmtb5op8clu" path="res://Modules/EntityModules/InteractModule/interact_module.tscn" id="4_interact"]
+[ext_resource type="PackedScene" uid="uid://jwk6d3k8w3k5" path="res://Entities/Stats/EntityInfoPanel3D/entity_info_panel_3d.tscn" id="5_info"]
+[ext_resource type="PackedScene" uid="uid://617x5c1qrdpg" path="res://Modules/EntityModules/ActionModule/action_module.tscn" id="6_action"]
+[ext_resource type="PackedScene" uid="uid://n30ifkjad344" path="res://Modules/EntityModules/TargetModule/target_module.tscn" id="7_target"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_main"]
+height = 2.0
+radius = 1.0
+
+[node name="FieldGenerator" type="CharacterBody3D" node_paths=PackedStringArray("stats", "target_module")]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("1_script")
+entity_name = "Field Generator"
+stats = NodePath("EntityStats")
+target_module = NodePath("TargetModule")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_main")
+
+[node name="Visual" parent="." instance=ExtResource("2_visual")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="EntityStats" parent="." instance=ExtResource("3_stats")]
+health_max = 1
+
+[node name="InteractModule" parent="." node_paths=PackedStringArray("_owner") instance=ExtResource("4_interact")]
+unique_name_in_owner = true
+_owner = NodePath("..")
+
+[node name="ActionModule" parent="." node_paths=PackedStringArray("_owner") instance=ExtResource("6_action")]
+unique_name_in_owner = true
+_owner = NodePath("..")
+
+[node name="EntityInfoPanel3d" parent="." node_paths=PackedStringArray("_owner_entity") instance=ExtResource("5_info")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+_owner_entity = NodePath("..")
+
+[node name="TargetModule" parent="." node_paths=PackedStringArray("_owner") instance=ExtResource("7_target")]
+_owner = NodePath("..")

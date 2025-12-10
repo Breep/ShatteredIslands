@@ -13,6 +13,6 @@ metadata/_custom_type_script = "uid://bco8h8xegp6bs"
 script = ExtResource("1_h7puq")
 name = "Scorching Blade"
 picture = ExtResource("1_i8f3f")
-family = 1
+families = Array[int]([1, 3])
 player_upgrade = SubResource("Resource_i8f3f")
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

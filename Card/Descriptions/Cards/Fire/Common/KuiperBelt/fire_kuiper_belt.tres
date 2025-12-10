@@ -13,6 +13,6 @@ metadata/_custom_type_script = "uid://2oq516jgd0ld"
 script = ExtResource("1_dh6en")
 name = "Kuiper Belt"
 picture = ExtResource("1_ee887")
-family = 3
+families = Array[int]([3, 2])
 player_upgrade = SubResource("Resource_xok7n")
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

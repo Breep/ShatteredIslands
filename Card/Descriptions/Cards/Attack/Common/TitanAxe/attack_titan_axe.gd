@@ -5,7 +5,7 @@ extends CharacterUpgrade
 @export var _damage_percent: Array[float] # Damage buff in % of target hp max
 
 func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
-	if cardlvl < 1 or cardlvl > 5:
+	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[Card.Rarity.COMMON]:
 		printerr("Wrong cardlvl: ", cardlvl)
 		return
 	
@@ -15,8 +15,9 @@ func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
 
 
 func get_description(cardlvl: int) -> String:
-	if cardlvl < 1 or cardlvl > 5:
-		printerr("Wrong cardlvl: ", cardlvl)
+	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[Card.Rarity.COMMON]:
 		return "ERROR"
 	
-	return "[center]Every " + str(_attack_number) + " attacks, increase damage by " + str(_damage_percent[cardlvl - 1]) + "% of target max HP [/center]"
+	var pct = str(_damage_percent[cardlvl - 1]).pad_decimals(1)
+	
+	return "Every " + str(_attack_number) + " attacks, increase damage by " + pct + "% of target max HP."

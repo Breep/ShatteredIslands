@@ -13,5 +13,5 @@ _base_shield_amount = Array[float]([10.0, 15.0, 20.0, 25.0, 30.0])
 script = ExtResource("1_template")
 name = "Reactive Cover"
 picture = ExtResource("1_cu4ly")
-family = 2
+families = Array[int]([2])
 player_upgrade = SubResource("Resource_upgrade")

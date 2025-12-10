@@ -14,6 +14,6 @@ metadata/_custom_type_script = "uid://b5vp3gyky2psq"
 script = ExtResource("1_y384u")
 name = "Orbital Station"
 picture = ExtResource("1_4j42q")
-family = 3
+families = Array[int]([3, 4])
 player_upgrade = SubResource("Resource_nmbcg")
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

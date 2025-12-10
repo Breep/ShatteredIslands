@@ -13,6 +13,6 @@ metadata/_custom_type_script = "uid://u8oqkdykpgty"
 script = ExtResource("1_iu8p0")
 name = "Proteins"
 picture = ExtResource("1_h8ej3")
-family = 6
+families = Array[int]([6])
 player_upgrade = SubResource("Resource_soto3")
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

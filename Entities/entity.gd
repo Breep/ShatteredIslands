@@ -94,13 +94,22 @@ var stack_manager: StackManager
 enum EntityType {
 	CHARACTER,
 	SNAKE_BARREL,
-	SNAKE
+	SNAKE,
+	FIELD_GENERATOR
 }
 
 enum SnakeBarrelModifier {
 	SNAKE_NUMBER,
 	SNAKE_POISON_STACKS,
 	MAX_HEALTH
+}
+
+enum FieldGeneratorModifier {
+	MAX_HEALTH,
+	SHIELD_AMOUNT,
+	SHIELD_INTERVAL,
+	INITIAL_SHIELD,
+	TARGET_COUNT
 }
 
 # ============================== Constants ==============================
@@ -115,6 +124,7 @@ static var instance_count: int = 0
 
 func _init() -> void:
 	id = instance_count
+	print("DEBUG: Entity Init ", self, " ID: ", id, " -> ", instance_count, " (Next: ", instance_count + 1, ")")
 	instance_count += 1
 
 

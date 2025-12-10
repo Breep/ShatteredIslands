@@ -15,6 +15,6 @@ metadata/_custom_type_script = "uid://bsluy2l4ea67j"
 script = ExtResource("1_6miog")
 name = "Venomous Darts"
 picture = ExtResource("1_qqb1e")
-family = 7
+families = Array[int]([7])
 player_upgrade = SubResource("Resource_ass6p")
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

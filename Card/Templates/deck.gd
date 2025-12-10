@@ -23,10 +23,10 @@ func add_card(card_to_add: Card) -> void:
 			printerr("Deck: Adding an already existing card into a deck [", card_to_add.uid, "-", card_to_add.name, "]")
 			return
 		_card_pile[card_to_add.uid] = card_to_add
-		if _families_count.has(card_to_add.family):
-			_families_count[card_to_add.family] += 1
+		if _families_count.has(card_to_add.families[0]):
+			_families_count[card_to_add.families[0]] += 1
 		else:
-			_families_count[card_to_add.family] = 1
+			_families_count[card_to_add.families[0]] = 1
 	_specific_add(card_to_add)
 
 
@@ -35,8 +35,8 @@ func remove_card(card_to_remove: Card) -> void:
 		printerr("Can't remove a null card")
 	elif card_to_remove in _card_pile:
 		_card_pile.erase(card_to_remove)
-		if _families_count.has(card_to_remove.family):
-			_families_count[card_to_remove.family] -= 1
+		if _families_count.has(card_to_remove.families[0]):
+			_families_count[card_to_remove.families[0]] -= 1
 
 
 func size():
@@ -137,7 +137,7 @@ func _legacy_draw_n_card(number_of_cards_to_draw: int) -> Array[Card]:
 func _get_all_cards_of_rarity(rarity: Card.Rarity, family_type: Family.FamilyType, cards: Array[Card]) -> Array[Card]:
 	var cards_matching_rarity: Array[Card]
 	for card: Card in cards:
-		if card.family == family_type and card.rarity == rarity:
+		if card.families[0] == family_type and card.rarity == rarity:
 			cards_matching_rarity.append(card)
 	return cards_matching_rarity
 

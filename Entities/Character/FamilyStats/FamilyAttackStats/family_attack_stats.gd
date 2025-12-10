@@ -52,6 +52,11 @@ var healing_crossbow_heal_amount: float
 
 
 var double_edge_sword_activated: bool # True if this skill is activated
+
+# [NECROTIC BULLET]
+var necrotic_bullet_activated: bool
+var necrotic_bullet_chance: float
+var necrotic_bullet_necrosis_stacks: float
 #endregion
 
 #region Rare Card
@@ -78,6 +83,14 @@ var storm_hammer_chance: float # % of chance for an auto-attack to bounce
 #endregion
 
 #region Legendary Card
+# [RUSSIAN ROULETTE]
+var attack_russian_roulette_activated: bool
+var attack_russian_roulette_min_percent: float
+var attack_russian_roulette_max_percent: float
+
+# [AIM ASSIST]
+var attack_aim_assist_activated: bool
+var attack_aim_assist_bonus_per_card: float
 #endregion
 
 

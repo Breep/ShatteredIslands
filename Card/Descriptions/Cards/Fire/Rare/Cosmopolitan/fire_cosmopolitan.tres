@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://dai3n8w7n58re"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://dpjj57ig80qwd" path="res://Card/Descriptions/Cards/Fire/Rare/Cosmopolitan/fire_cosmopolitan.gd" id="2_sub_resource"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_gfewo"]
+
+[sub_resource type="Resource" id="Resource_cosmopolitan"]
+script = ExtResource("2_sub_resource")
+_bonus_damage_ratio = Array[float]([3.0, 5.0, 7.0])
+
+[resource]
+script = ExtResource("1_script")
+name = "Cosmo'Politan"
+picture = SubResource("PlaceholderTexture2D_gfewo")
+rarity = 1
+families = Array[int]([3])
+player_upgrade = SubResource("Resource_cosmopolitan")

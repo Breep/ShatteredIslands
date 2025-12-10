@@ -40,6 +40,10 @@ var storm_breaker_base_reduction_percent: float
 var storm_battery_activated: bool
 var storm_battery_mana_gain: float
 
+# [SCHRODINGER STORM]
+var schrodinger_storm_activated: bool
+var schrodinger_storm_amount: float
+
 #endregion
 
 #region Rare Card

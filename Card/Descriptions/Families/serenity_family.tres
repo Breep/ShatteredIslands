@@ -1,22 +1,25 @@
-[gd_resource type="Resource" script_class="Family" load_steps=14 format=3 uid="uid://brvmbafl0cv83"]
+[gd_resource type="Resource" script_class="Family" load_steps=17 format=3 uid="uid://brvmbafl0cv83"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_8oghy"]
 [ext_resource type="Texture2D" uid="uid://ckifdy6fknspj" path="res://Card/Descriptions/Families/Icons/serenity.png" id="2_1sm61"]
 [ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://Card/Templates/family.gd" id="2_11cd3"]
-[ext_resource type="Resource" uid="uid://lypcpcn4pc4a" path="res://Card/Descriptions/Cards/Light/Common/HolyTouch/light_holy_touch.tres" id="2_ao7hk"]
-[ext_resource type="Resource" uid="uid://dtuljjoqfnos0" path="res://Card/Descriptions/Cards/Light/Common/GracefulStep/light_graceful_step.tres" id="3_ao7hk"]
-[ext_resource type="Resource" uid="uid://c3qf5odp5y6ap" path="res://Card/Descriptions/Cards/Light/Common/LifeSpring/light_life_spring.tres" id="4_4ants"]
-[ext_resource type="Resource" uid="uid://b173drhdl327x" path="res://Card/Descriptions/Cards/Light/Rare/PurifyingFlame/light_purifying_flame.tres" id="5_kfew5"]
-[ext_resource type="Resource" uid="uid://bua42nneh2hjh" path="res://Card/Descriptions/Cards/Light/Common/MiracleLight/light_miracle_light.tres" id="6_bdd31"]
-[ext_resource type="Resource" uid="uid://b0vxjhrs71sxg" path="res://Card/Descriptions/Cards/Light/Common/OverflowingLight/serenity_overflowing_light.tres" id="7_yt7xe"]
-[ext_resource type="Resource" uid="uid://b1tjb84nxwa6a" path="res://Card/Descriptions/Cards/Light/Common/WarmAura/serenity_warm_aura.tres" id="8_52uhi"]
-[ext_resource type="Resource" uid="uid://clgymh43ug76g" path="res://Card/Descriptions/Cards/Light/Epic/RejuvenativeFaith/serenity_rejuvenative_faith.tres" id="9_ntam1"]
-[ext_resource type="Resource" uid="uid://c5nv7uoog3n3n" path="res://Card/Descriptions/Cards/Light/Legendary/DivineIntervention/serenity_divine_intervention.tres" id="10_ml7j6"]
-[ext_resource type="Resource" uid="uid://d0kg80jq8cr18" path="res://Card/Descriptions/Cards/Light/Rare/LuminescentSurge/serenity_luminescent_surge.tres" id="11_j6vka"]
+[ext_resource type="Resource" uid="uid://vw6felcpdbf0" path="res://Card/Descriptions/Cards/Light/Common/CorruptedLight/serenity_corrupted_light.tres" id="2_ml7j6"]
+[ext_resource type="Resource" uid="uid://dtuljjoqfnos0" path="res://Card/Descriptions/Cards/Light/Common/GracefulStep/light_graceful_step.tres" id="3_j6vka"]
+[ext_resource type="Resource" uid="uid://lypcpcn4pc4a" path="res://Card/Descriptions/Cards/Light/Common/HolyTouch/light_holy_touch.tres" id="4_6quem"]
+[ext_resource type="Resource" uid="uid://c3qf5odp5y6ap" path="res://Card/Descriptions/Cards/Light/Common/LifeSpring/light_life_spring.tres" id="5_ix4fn"]
+[ext_resource type="Resource" uid="uid://dcoannjk22iij" path="res://Card/Descriptions/Cards/Light/Common/LightCollector/serenity_light_collector.tres" id="6_ded4i"]
+[ext_resource type="Resource" uid="uid://bua42nneh2hjh" path="res://Card/Descriptions/Cards/Light/Common/MiracleLight/light_miracle_light.tres" id="7_nwh3u"]
+[ext_resource type="Resource" uid="uid://b0vxjhrs71sxg" path="res://Card/Descriptions/Cards/Light/Common/OverflowingLight/serenity_overflowing_light.tres" id="8_8tl7p"]
+[ext_resource type="Resource" uid="uid://b1tjb84nxwa6a" path="res://Card/Descriptions/Cards/Light/Common/WarmAura/serenity_warm_aura.tres" id="9_biek0"]
+[ext_resource type="Resource" uid="uid://clgymh43ug76g" path="res://Card/Descriptions/Cards/Light/Epic/RejuvenativeFaith/serenity_rejuvenative_faith.tres" id="10_byyup"]
+[ext_resource type="Resource" uid="uid://c5nv7uoog3n3n" path="res://Card/Descriptions/Cards/Light/Legendary/DivineIntervention/serenity_divine_intervention.tres" id="11_2n4lu"]
+[ext_resource type="Resource" uid="uid://d0kg80jq8cr18" path="res://Card/Descriptions/Cards/Light/Rare/LuminescentSurge/serenity_luminescent_surge.tres" id="12_28qv4"]
+[ext_resource type="Resource" uid="uid://b173drhdl327x" path="res://Card/Descriptions/Cards/Light/Rare/PurifyingFlame/light_purifying_flame.tres" id="13_ag1v6"]
+[ext_resource type="Resource" uid="uid://b8x3g5j2q4y70" path="res://Card/Descriptions/Cards/Light/Rare/RadiantOverflow/serenity_radiant_overflow.tres" id="14_lmlnp"]
 
 [resource]
 script = ExtResource("2_11cd3")
-cards = Array[ExtResource("1_8oghy")]([ExtResource("2_ao7hk"), ExtResource("3_ao7hk"), ExtResource("4_4ants"), ExtResource("5_kfew5"), ExtResource("6_bdd31"), ExtResource("7_yt7xe"), ExtResource("8_52uhi"), ExtResource("9_ntam1"), ExtResource("10_ml7j6"), ExtResource("11_j6vka")])
+cards = Array[ExtResource("1_8oghy")]([ExtResource("2_ml7j6"), ExtResource("3_j6vka"), ExtResource("4_6quem"), ExtResource("5_ix4fn"), ExtResource("6_ded4i"), ExtResource("7_nwh3u"), ExtResource("8_8tl7p"), ExtResource("9_biek0"), ExtResource("10_byyup"), ExtResource("11_2n4lu"), ExtResource("12_28qv4"), ExtResource("13_ag1v6"), ExtResource("14_lmlnp")])
 icon = ExtResource("2_1sm61")
 family_name = "Serenity"
 family_type = 5

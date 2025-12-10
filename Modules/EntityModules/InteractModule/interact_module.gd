@@ -9,7 +9,8 @@ var _dodge_number: int = 0
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	if _defense_manager == null: printerr("InteractModule: Not linked to a DefenseManager [", get_path(), "]")
+	if _defense_manager == null and _owner is Character:
+		printerr("InteractModule: Not linked to a DefenseManager [", get_path(), "]")
 	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 
 # ============================== Public function ==============================

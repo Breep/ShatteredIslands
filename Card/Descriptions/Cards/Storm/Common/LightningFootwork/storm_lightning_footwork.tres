@@ -13,5 +13,5 @@ _base_dodge_increase = Array[float]([20.0, 6.0, 8.0, 10.0, 15.0])
 script = ExtResource("1_template")
 name = "Lightning Footwork"
 picture = SubResource("PlaceholderTexture2D_bmv85")
-family = 4
+families = Array[int]([4])
 player_upgrade = SubResource("Resource_upgrade")

@@ -40,8 +40,13 @@ func _update_card_layout(card: Card) -> void:
 	_card_name_label.text = card.name
 	_card_desc_label.text_raw = card.player_upgrade.get_description(card.lvl)
 	_card_portrait_texture.texture = card.picture
-	_family_icons[0].texture = Shared.FAMILIES[card.family].icon
 	_bottom_background.modulate = Card.RARITY_COLORS[card.rarity]
+	
+	for i in 5:
+		_family_icon_containers[i].hide()
+	for i in card.families.size():
+		_family_icon_containers[i].show()
+		_family_icons[i].texture = Shared.FAMILIES[card.families[i]].icon
 	
 	for i in 5:
 		_level_containers[i].hide()

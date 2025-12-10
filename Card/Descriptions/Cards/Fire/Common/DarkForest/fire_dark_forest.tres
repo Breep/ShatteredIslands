@@ -14,6 +14,6 @@ metadata/_custom_type_script = "uid://codt4sirjnqh7"
 script = ExtResource("3_5htay")
 name = "Dark Forest"
 picture = ExtResource("1_32p1v")
-family = 3
+families = Array[int]([3])
 player_upgrade = SubResource("Resource_omhxh")
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

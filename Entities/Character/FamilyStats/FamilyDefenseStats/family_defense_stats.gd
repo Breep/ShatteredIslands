@@ -82,6 +82,16 @@ var aegis_resonator_total_shield: float
 #endregion
 
 #region Legendary Card
+
+# [FIELD GENERATOR]
+var defense_field_generator_activated: bool
+var defense_field_generator_summon_interval: float
+var defense_field_generator_shield_amount: float
+var defense_field_generator_shield_interval: float
+var defense_field_generator_target_count: int
+var defense_field_generator_max_health: int
+var defense_field_generator_initial_shield: int
+
 #endregion
 
 @export_group("Dual Shield")

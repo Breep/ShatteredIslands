@@ -14,6 +14,6 @@ metadata/_custom_type_script = "uid://tswgfdudffa2"
 script = ExtResource("1_v43a7")
 name = "Holy Touch"
 picture = ExtResource("1_xf8j7")
-family = 5
+families = Array[int]([5])
 player_upgrade = SubResource("Resource_epg00")
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

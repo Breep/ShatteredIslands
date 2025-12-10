@@ -20,4 +20,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Dynamo: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
-	return "Each [[RANK]] grind apply " + str(_base_regen[cardlvl - 1]) + " regen and " + str(_base_shield[cardlvl - 1]) + " shield."
+	return "Each Lightning cast apply " + str(_base_regen[cardlvl - 1]) + " regen and " + str(_base_shield[cardlvl - 1]) + " shield."

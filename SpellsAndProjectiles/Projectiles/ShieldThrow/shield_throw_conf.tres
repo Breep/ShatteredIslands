@@ -7,5 +7,5 @@
 script = ExtResource("1_h5t7d")
 visual_scene = ExtResource("2_4olc6")
 trajectory_type = 4
-speed = 5.0
+speed = 10.0
 metadata/_custom_type_script = "uid://dad8gpwjaprib"

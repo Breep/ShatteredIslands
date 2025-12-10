@@ -13,6 +13,6 @@ metadata/_custom_type_script = "uid://bre033jc30lr7"
 script = ExtResource("1_aeacc")
 name = "Shield Rush"
 picture = ExtResource("1_tcq60")
-family = 2
+families = Array[int]([2])
 player_upgrade = SubResource("Resource_t7xpg")
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

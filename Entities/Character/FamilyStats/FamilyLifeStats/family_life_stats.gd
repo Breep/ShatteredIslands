@@ -27,6 +27,10 @@ var ancient_growth_activated: bool
 var ancient_growth_period: float
 var ancient_growth_amount: float
 
+# [THE ANCIENT COLLECTOR]
+var ancient_collector_activated: bool
+var ancient_collector_amount_per_card: float
+
 #endregion
 
 #region Rare Cards

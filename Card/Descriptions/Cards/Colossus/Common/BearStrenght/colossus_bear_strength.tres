@@ -14,6 +14,6 @@ metadata/_custom_type_script = "uid://6y21jw46g3hf"
 script = ExtResource("3_hl1tk")
 name = "Bear Strength"
 picture = ExtResource("1_cisb5")
-family = 6
+families = Array[int]([6, 1])
 player_upgrade = SubResource("Resource_lura4")
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

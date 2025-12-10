@@ -14,6 +14,6 @@ metadata/_custom_type_script = "uid://cpr50srkhv4a3"
 script = ExtResource("1_2llxi")
 name = "Graceful Step"
 picture = ExtResource("1_1ds76")
-family = 5
+families = Array[int]([5])
 player_upgrade = SubResource("Resource_5lysk")
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

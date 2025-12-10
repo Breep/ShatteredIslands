@@ -14,6 +14,6 @@ metadata/_custom_type_script = "uid://uiyqfsgg1lfo"
 script = ExtResource("1_5mypg")
 name = "Fight Back"
 picture = ExtResource("1_b144d")
-family = 1
+families = Array[int]([1])
 player_upgrade = SubResource("Resource_ov13x")
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

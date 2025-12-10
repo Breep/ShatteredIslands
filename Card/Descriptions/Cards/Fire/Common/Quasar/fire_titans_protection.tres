@@ -13,6 +13,6 @@ metadata/_custom_type_script = "uid://dywv3qds1kclj"
 script = ExtResource("1_1nbnc")
 name = "Quasar"
 picture = ExtResource("1_3qpta")
-family = 3
+families = Array[int]([3, 6])
 player_upgrade = SubResource("Resource_wmyop")
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

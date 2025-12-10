@@ -51,6 +51,26 @@ func get_family_points(family_type: Family.FamilyType) -> int:
 		family_points += value * card.lvl
 	return family_points
 
+
+func get_unique_card_count(family_type_or_list = null) -> int:
+	# If null or UNDEF, return total unique cards (active deck size)
+	if family_type_or_list == null or family_type_or_list == Family.FamilyType.UNDEF:
+		return _active_cards.size()
+	
+	# If Array, sum up counts for each family
+	if family_type_or_list is Array:
+		var total_count: int = 0
+		for type in family_type_or_list:
+			if _cards_dictionary.has(type):
+				total_count += _cards_dictionary[type].size()
+		return total_count
+		
+	# If Single Enum
+	if _cards_dictionary.has(family_type_or_list):
+		return _cards_dictionary[family_type_or_list].size()
+		
+	return 0
+
 # ============================== Private function ==============================
 
 func _add_or_improve_card_to_active_cards(card_to_add: Card) -> void:
@@ -64,10 +84,10 @@ func _add_or_improve_card_to_active_cards(card_to_add: Card) -> void:
 			return
 	Verbose.debug("'" + _player_owner.name + "' Adding new card | " + card_to_add.name + " | " + str(card_to_add.lvl), Verbose.Category.DECK)
 	_active_cards.append(card_to_add)
-	if _cards_dictionary.has(card_to_add.family):
-		_cards_dictionary[card_to_add.family].append(card_to_add)
+	if _cards_dictionary.has(card_to_add.families[0]):
+		_cards_dictionary[card_to_add.families[0]].append(card_to_add)
 	else:
-		_cards_dictionary[card_to_add.family] = [card_to_add]
+		_cards_dictionary[card_to_add.families[0]] = [card_to_add]
 
 
 func _specific_add(card_to_add: Card) -> void:

@@ -12,5 +12,5 @@ _base_crit_chance_boost = Array[float]([2.0, 4.0, 6.0, 8.0, 10.0])
 script = ExtResource("1_template")
 name = "Faraday"
 picture = ExtResource("1_rvffv")
-family = 4
+families = Array[int]([4])
 player_upgrade = SubResource("Resource_upgrade")
