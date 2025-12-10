@@ -146,7 +146,8 @@ var _armor_stacks: float = 0
 # Array of Dictionaries: { "amount": float, "stack_infos": Array[StackInfo] }
 var _regen_buffer: Array[Dictionary] = []
 var _regen_cursor: int = 0
-const REGEN_BUFFER_SIZE: int = 15
+const REGEN_BUFFER_SIZE: int = 20
+var regen_duration_bonus: int = 0
 
 signal regen_stacks_changed(new_regen_stacks: float)
 var _regen_stacks: float = 0
@@ -220,6 +221,7 @@ func add_regen_stack(amount: float, duration: int, source: Entity, action_id: St
 	if amount <= 0: return
 	if _regen_buffer.is_empty(): init_regen_buffer()
 	
+	duration += regen_duration_bonus
 	duration = clampi(duration, 1, REGEN_BUFFER_SIZE - 1)
 	
 	# Add to current total

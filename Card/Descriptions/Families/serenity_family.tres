@@ -17,9 +17,11 @@
 [ext_resource type="Resource" uid="uid://b173drhdl327x" path="res://Card/Descriptions/Cards/Light/Rare/PurifyingFlame/light_purifying_flame.tres" id="13_ag1v6"]
 [ext_resource type="Resource" uid="uid://b8x3g5j2q4y70" path="res://Card/Descriptions/Cards/Light/Rare/RadiantOverflow/serenity_radiant_overflow.tres" id="14_lmlnp"]
 
+[ext_resource type="Resource" uid="uid://c8m8k2x1j6n4y" path="res://Card/Descriptions/Cards/Light/Common/DivineRegenerator/serenity_divine_regenerator.tres" id="15_new"]
+
 [resource]
 script = ExtResource("2_11cd3")
-cards = Array[ExtResource("1_8oghy")]([ExtResource("2_ml7j6"), ExtResource("3_j6vka"), ExtResource("4_6quem"), ExtResource("5_ix4fn"), ExtResource("6_ded4i"), ExtResource("7_nwh3u"), ExtResource("8_8tl7p"), ExtResource("9_biek0"), ExtResource("10_byyup"), ExtResource("11_2n4lu"), ExtResource("12_28qv4"), ExtResource("13_ag1v6"), ExtResource("14_lmlnp")])
+cards = Array[ExtResource("1_8oghy")]([ExtResource("2_ml7j6"), ExtResource("3_j6vka"), ExtResource("4_6quem"), ExtResource("5_ix4fn"), ExtResource("6_ded4i"), ExtResource("7_nwh3u"), ExtResource("8_8tl7p"), ExtResource("9_biek0"), ExtResource("10_byyup"), ExtResource("11_2n4lu"), ExtResource("12_28qv4"), ExtResource("13_ag1v6"), ExtResource("14_lmlnp"), ExtResource("15_new")])
 icon = ExtResource("2_1sm61")
 family_name = "Serenity"
 family_type = 5

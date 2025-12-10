@@ -5,9 +5,6 @@ extends FamilyManager
 
 const PACIFY_DAMAGE_REDUCTION_PERCENT: float = 50 # Percentage of damage reduction when pacified
 
-#[REGEN]
-# const REGEN_DECAY_PERCENT: float = 10.0
-# const REGEN_DECAY_HP_THRESHOLD: float = 50.0
 # ============================== Private variables ==============================
 # ============================== Private variables ==============================
 
@@ -67,6 +64,10 @@ func start() -> void:
 	# [LIGHT COLLECTOR]
 	if _serenity_stats.light_collector_activated:
 		_apply_light_collector()
+		
+	# [DIVINE REGENERATOR]
+	if _serenity_stats.divine_regenerator_activated:
+		_owner.stats.regen_duration_bonus = _serenity_stats.divine_regenerator_bonus_duration
 
 	
 func stop() -> void:

@@ -84,6 +84,10 @@ var divine_intervention_activated: bool
 var divine_intervention_hp_threshold_percent: float
 var divine_intervention_regen_amount: float
 
+# [DIVINE REGENERATOR]
+var divine_regenerator_activated: bool
+var divine_regenerator_bonus_duration: int
+
 #endregion
 
 # CACA a supprimer 
