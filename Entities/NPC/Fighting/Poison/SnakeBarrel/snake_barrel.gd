@@ -9,8 +9,8 @@ func projectile_attack(target: Entity, projectile_type: Projectile.ProjectileTyp
 	_action_module.projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
 
 
-func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Utils.StackType, action_id: StringName) -> void:
-	_action_module.inflict_condition_stacks(target, stacks_number, stack_type, action_id)
+func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Utils.StackType, action_id: StringName, duration: float = 5.0) -> void:
+	_action_module.inflict_condition_stacks(target, stacks_number, stack_type, action_id, duration)
 
 
 #region ===== Interaction
@@ -20,8 +20,8 @@ func take_damage(damage: float, damage_type: Utils.DamageType, is_critical: bool
 func take_damage_percent(percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> void:
 	_interact_module.take_damage_percent(percent, percent_modifier, damage_type, is_critical, action_id, source)
 
-func take_condition_stacks(stacks_number: float, stack_type: Utils.StackType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	return _interact_module.take_condition_stacks(stacks_number, stack_type, is_critical, action_id, source)
+func take_condition_stacks(stacks_number: float, stack_type: Utils.StackType, is_critical: bool, action_id: StringName, source: Entity = null, duration: float = 5.0) -> float:
+	return _interact_module.take_condition_stacks(stacks_number, stack_type, is_critical, action_id, source, duration)
 
 func take_heal(heal_amount: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
 	return _interact_module.take_heal(heal_amount, is_critical, action_id, source)
@@ -87,21 +87,3 @@ func _spawn_snakes(snake_number: int) -> void:
 		spawn_node.position = Vector3(rng.randf_range(-spread, spread), rng.randf_range(0, spread), rng.randf_range(-spread, spread))
 		projectile_attack(target, Projectile.ProjectileType.SNAKE, spawn_node, projectile_stats)
 	queue_free()
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		 

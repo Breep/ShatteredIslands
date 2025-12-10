@@ -69,6 +69,8 @@ var _hero_id := Hero.HeroId.UNDEF
 #region ============================== Public variables ==============================
 var player: Player
 var fighting_area: FightingArea
+var visual: CharacterVisual:
+	get: return _character_visual
 #endregion
 
 #region ============================== Private variables ==============================

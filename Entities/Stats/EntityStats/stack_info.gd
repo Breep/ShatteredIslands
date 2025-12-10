@@ -1,7 +1,7 @@
 class_name StackInfo
 extends Resource
 
-@export var source: Entity
+var source: Entity
 @export var value: float
 @export var action_id: StringName
 

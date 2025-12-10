@@ -7,12 +7,12 @@
 
 [sub_resource type="Resource" id="Resource_upgrade"]
 script = ExtResource("2_player_upgrade")
-_summon_interval = Array[float]([10.0])
-_shield_amount = Array[int]([100])
+_summon_interval = Array[float]([12.0])
+_shield_amount = Array[int]([50])
 _shield_interval = Array[float]([1.0])
 _target_count = Array[int]([2])
-_max_health = Array[int]([400])
-_initial_shield = Array[int]([150])
+_max_health = Array[int]([50])
+_initial_shield = Array[int]([200])
 
 [resource]
 script = ExtResource("1_card_script")
