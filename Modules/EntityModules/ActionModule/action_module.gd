@@ -153,11 +153,7 @@ func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: 
 			ActionModifier.VarType.TARGET: target,
 			ActionModifier.VarType.DURATION: duration
 		}
-		for condition_modifier: ActionModifier in _owner.action_modifiers_manager.get_all_modifiers(ActionModifier.ActionType.INFLICT_CONDITION): # Using get_all instead of consume to allow multiple bonuses? Or consume? Revert to get_all as passive shouldn't consume? Wait, original logic used consume. Let's stick to get_all for passives usually, but original code had consume. I'll use get_all for support passive to be safe, or check original intenion. Original was consume_all_modifiers.
-			# Actually for stats/passives we usually keep them. "Consume" implies one-time.
-			# Divine Regenerator is permanent. So get_all is better if it's not registered as one-time.
-			# But let's check how it's registered.
-			# For now, I'll use the dictionary approach and then call take_condition_stacks with modified values.
+		for condition_modifier: ActionModifier in _owner.action_modifiers_manager.get_all_modifiers(ActionModifier.ActionType.INFLICT_CONDITION):
 			if condition_modifier.before_action_logic_callback.is_valid():
 				condition_modifier.before_action_logic_callback.call(modifiers_dict)
 		
@@ -165,7 +161,7 @@ func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: 
 		stacks_number = modifiers_dict[ActionModifier.VarType.STACK_VALUE]
 		var old_duration = duration
 		duration = modifiers_dict[ActionModifier.VarType.DURATION]
-		# if duration != old_duration: print("DEBUG: ActionModule Duration Modified: ", old_duration, " -> ", duration)
+
 		
 	var stacks_taken: float = target.take_condition_stacks(stacks_number, stack_type, crit_multiplier["is_critical"], action_id, _owner, duration)
 	if crit_multiplier["is_critical"]:
