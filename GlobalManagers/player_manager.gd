@@ -129,6 +129,7 @@ func add_bot() -> void:
 
 # ============================== RPC - SYNC POINT ==============================
 
+#TODO Improve this so it doesn't count the client number but has a client table that can be checked (more secure)
 signal __all_players_syncronized()
 var __all_players_synchronized_for_sync_id: Dictionary[int, bool] # Key=SyncID, Value=<True if all players are synchronized>
 var __number_of_players_syncronized: Dictionary[int, int] # Key=SyncID, Value=<Number of players ready>

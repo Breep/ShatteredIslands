@@ -181,8 +181,3 @@ func _on_game_manager_game_state_changed(game_state: GameState) -> void:
 		GameState.INITIATING_NEW_ROUND: _start_new_round()
 		GameState.BUYING: _start_buying_phase()
 		GameState.FIGHTING_POSITIONING: _start_fighting_phase()
-
-
-func _on_buying_area_timer_timeout() -> void:
-	if multiplayer.is_server():
-		_end_buying_round.rpc()

@@ -261,7 +261,7 @@ func _on_game_state_timer_timeout() -> void:
 			await PlayerManager.sync_point(PlayerManager.SyncID.BUYING_PHASE)
 			game_state = Game.GameState.FIGHTING_POSITIONING
 		Game.GameState.FIGHTING_POSITIONING: # End of POSITIONING State
-			if __prototyping or game_type == GameType.SOLO:
+			if __prototyping or game_type == GameType.SOLO or not multiplayer.is_server():
 				game_state = Game.GameState.FIGHTING_COUNTDOWN # Trigger COUNTDOWN STATE for prototyping map
 			else:
 				game_state = Game.GameState.FIGHTING_NORMAL # Trigger FIGHT directly on server

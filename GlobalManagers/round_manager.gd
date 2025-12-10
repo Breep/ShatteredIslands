@@ -50,7 +50,7 @@ signal _battles_chosen()
 # [Client only] Is emit when server has answered the local client request
 signal _server_answered()
 
-var battles: Dictionary[int, Battle] = {}
+var _battles: Dictionary[int, Battle] = {}
 
 # ============================== Public functions ==============================
 
@@ -60,30 +60,34 @@ func clear() -> void:
 
 func get_current_round_battles() -> Array[Battle]:
 	current_round += 1
-	Verbose.trace("get_current_round_battles() | " + str(current_round), Verbose.Category.ROUND_MANAGER)
-	Verbose.debug("Starting a new round: " + str(current_round) + " | Players left: " + str(PlayerManager.get_alive_players().size()), Verbose.Category.ROUND_MANAGER)
+	Verbose.debug("Get current round battles: " + str(current_round) + " | Players left: " + str(PlayerManager.get_alive_players().size()), Verbose.Category.ROUND_MANAGER)
 	battle_history[current_round] = BattleHistory.new()
 	battle_history[current_round].round_id = current_round
-	battles.clear()
+	_battles.clear()
 	if multiplayer.is_server():
 		_init_current_round_battles()
 	else:
-		_ask_current_round_battles.rpc_id(1, multiplayer.get_unique_id())
+		_ask_current_round_battles.rpc_id(1)
 		await _server_answered
 	
-	Verbose.trace("get_current_round_battles() | " + str(current_round) + " | " + str(battles.values()), Verbose.Category.ROUND_MANAGER)
-	return battles.values()
+	# Debug
+	if Verbose.current_categories_level[Verbose.Category.ROUND_MANAGER] == Verbose.Level.TRACE:
+		var battle_types_str: String = ""
+		for i in _battles.size():
+			battle_types_str += " " + Battle.BattleType.keys()[_battles[i].battle_type]
+		Verbose.trace("get_current_round_battles() | " + str(current_round) + " |" + battle_types_str, Verbose.Category.ROUND_MANAGER)
+	return _battles.values()
 
 
 func register_battle_result(battle_id: int, winner_teams_order: Array[int]) -> void:
 	Verbose.trace("register_battle_result()", Verbose.Category.ROUND_MANAGER)
-	if battles.is_empty(): return
+	if _battles.is_empty(): return
 	var battle_result := BattleResult.new()
 	battle_result.battle_id = battle_id
-	battle_result.battle_type = battles[battle_id].battle_type
+	battle_result.battle_type = _battles[battle_id].battle_type
 	
 	for team_id in winner_teams_order:
-		for player in battles[battle_id].players:
+		for player in _battles[battle_id].players:
 			if player.team == team_id:
 				if not battle_result.players.has(team_id):
 					battle_result.players[team_id] = [player]
@@ -91,7 +95,7 @@ func register_battle_result(battle_id: int, winner_teams_order: Array[int]) -> v
 					battle_result.players[team_id].append(player)
 	
 	battle_history[current_round].battle_results.append(battle_result)
-	if battle_history[current_round].battle_results.size() == battles.size():
+	if battle_history[current_round].battle_results.size() == _battles.size():
 		_current_round_battle_history_is_ready.emit()
 
 
@@ -124,7 +128,7 @@ func ending_round_player_changes() -> void:
 		return
 	
 	# Not all FightingArea reported their fight result yet (There is a race of signals)
-	if battle_history[current_round].battle_results.size() != battles.size():
+	if battle_history[current_round].battle_results.size() < _battles.size():
 		await _current_round_battle_history_is_ready
 	
 	for battle_result in battle_history[current_round].battle_results:
@@ -152,16 +156,17 @@ func ending_round_player_changes() -> void:
 # ============================== RPC - Ask/Answer current round battle ==============================
 
 @rpc("any_peer", "call_remote", "reliable")
-func _ask_current_round_battles(peer_id: int) -> void:
+func _ask_current_round_battles() -> void:
 	if not multiplayer.is_server():
-		Verbose.error("Only the server can answer the current round battles", Verbose.Category.ROUND_MANAGER)
+		Verbose.error("Only the server can answer the current round _battles", Verbose.Category.ROUND_MANAGER)
 		return
 	
+	var peer_id: int = multiplayer.get_remote_sender_id()
 	if not _is_ready:
 		await _battles_chosen
 	
 	var serialized_battles: Array[Dictionary]
-	for battle in battles.values():
+	for battle in _battles.values():
 		serialized_battles.append(battle.serialized())
 	_anwser_current_round_battles.rpc_id(peer_id, serialized_battles)
 
@@ -170,12 +175,12 @@ func _ask_current_round_battles(peer_id: int) -> void:
 func _anwser_current_round_battles(serialized_battles: Array[Dictionary]) -> void:
 	for serialized_battle in serialized_battles:
 		var battle := Battle.new_from_serialized(serialized_battle)
-		battles[battle.id] = battle
+		_battles[battle.id] = battle
 	_server_answered.emit()
 
 # ============================== Private functions ==============================
 
-# Get a random set of battles according to the alive players number
+# Get a random set of _battles according to the alive players number
 # Fill the battle with random players and sort them in team randomly
 func _init_current_round_battles() -> void:
 	var alive_players = PlayerManager.get_alive_players().duplicate()
@@ -187,7 +192,7 @@ func _init_current_round_battles() -> void:
 		var battle := Battle.new_from_category(battle_category)
 		battle.fill_with_players(alive_players)
 		battle.id = battle_id
-		battles[battle.id] = battle
+		_battles[battle.id] = battle
 		battle_id += 1
 	
 	_is_ready = true

@@ -14,7 +14,6 @@ signal all_fights_are_over()
 var _fighting_managers: Array[FightingManager]
 var _current_active_fighting_managers: Array[FightingManager]
 
-
 # ====== SERVER ONLY
 
 var _players_running_playback: Array[Player]
