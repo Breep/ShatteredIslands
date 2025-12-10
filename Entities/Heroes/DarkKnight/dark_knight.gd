@@ -43,6 +43,8 @@ extends Hero3D
 @export var _mega_strike_max_charge: int = 10
 @export var _mega_strike_damage_percent: float = 500.0
 
+signal super_strike_charges_changed(current: int, max: int)
+
 # ============================== Private variables ==============================
 
 var _super_strike_charges: int = 0
@@ -64,6 +66,14 @@ func _ready() -> void:
 	
 	_skill_manager = _character_owner.player.skill_manager
 	_skill_manager.skill_picked.connect(_on_skill_manager_skill_picked)
+	
+	# Initial emit
+	var max_charge: int = _mega_strike_max_charge if _mega_strike_activated else _super_strike_max_charge
+	super_strike_charges_changed.emit(_super_strike_charges, max_charge)
+	
+	# Connect to visual
+	if _character_owner.visual.has_method("update_resource_points"):
+		super_strike_charges_changed.connect(_character_owner.visual.update_resource_points)
 
 # ============================== Public function ==============================
 
@@ -137,6 +147,8 @@ func _register_spark_of_light() -> void:
 func _on_character_owner_aa_done() -> void:
 	var max_charge: int = _mega_strike_max_charge if _mega_strike_activated else _super_strike_max_charge
 	_super_strike_charges = (_super_strike_charges + 1) % (max_charge + 1)
+	super_strike_charges_changed.emit(_super_strike_charges, max_charge)
+	
 	var stat_modifier := StatModifier.new()
 	stat_modifier.id = "Super Strike"
 	stat_modifier.stat_type = EntityStats.StatType.AD

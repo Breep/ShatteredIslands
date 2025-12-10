@@ -25,6 +25,9 @@ extends Node3D
 
 @onready var _rank_visualizer: UIRankViewer = %RankViewer
 
+@export var _resource_points_container: HBoxContainer
+
+
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
@@ -167,3 +170,33 @@ func _on_armor_changed(new_amount: float) -> void:
 func _on_health_max_changed(new_max: int) -> void:
 	update_health_bar(_owner_entity.stats.health, new_max)
 	_update_shield_bar(_owner_entity.stats.armor_stacks, new_max)
+
+# ============================== Resources Visualization ==============================
+## Update the resource points display (e.g. for Dark Knight combo points)
+## Creates simple visual points if needed.
+func update_resource_points(current: int, max_val: int) -> void:
+	if not _resource_points_container: return
+	
+	# Create points if count mismatch
+	var child_count = _resource_points_container.get_child_count()
+	if child_count != max_val:
+		for child in _resource_points_container.get_children():
+			child.queue_free()
+		
+		# Create new points
+		for i in range(max_val):
+			var point = ColorRect.new()
+			point.custom_minimum_size = Vector2(10, 10)
+			point.color = Color.GRAY
+			# Optional: make it round if we had a texture or shader, sticking to simple rect for now
+			# unless I add a stylebox.
+			_resource_points_container.add_child(point)
+	
+	# Update status
+	var children = _resource_points_container.get_children()
+	for i in range(children.size()):
+		var point: ColorRect = children[i] as ColorRect
+		if i < current:
+			point.color = Color.ORANGE # Active Color
+		else:
+			point.color = Color(0.2, 0.2, 0.2, 0.5) # Inactive Color
