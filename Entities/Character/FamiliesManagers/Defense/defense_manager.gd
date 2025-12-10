@@ -21,6 +21,9 @@ var _shield_throw_lock: bool = false # Pour éviter que le gain du bouclier qui 
 var _aether_redirector_timer: Timer
 var _aether_redirector_ready: bool = true
 
+# [PROTECTIVE DOME]
+var _protective_dome_modifier_active: bool = false
+
 
 # ============================== Node base functions ==============================
 
@@ -42,6 +45,7 @@ func start() -> void:
 	
 	# [PROTECTIVE DOME]
 	if _defense_stats.protective_dome_activated:
+		_protective_dome_modifier_active = false
 		if not _owner.stats.armor_stacks_changed.is_connected(_on_owner_armor_stacks_changed):
 			_owner.stats.armor_stacks_changed.connect(_on_owner_armor_stacks_changed)
 		_update_protective_dome_modifier(_owner.stats.armor_stacks)
@@ -302,11 +306,15 @@ func _update_protective_dome_modifier(current_armor: float) -> void:
 	mod.tags = [StatModifier.TagType.CARD]
 	
 	if current_armor > 0:
-		mod.calc_type = StatModifier.CalcType.ADD
-		mod.value = _defense_stats.protective_dome_armor_percent
-		_owner.stats_manager.register_modifier(mod)
+		if not _protective_dome_modifier_active:
+			mod.calc_type = StatModifier.CalcType.ADD
+			mod.value = _defense_stats.protective_dome_armor_percent
+			_owner.stats_manager.register_modifier(mod)
+			_protective_dome_modifier_active = true
 	else:
-		_owner.stats_manager.unregister_modifier(mod)
+		if _protective_dome_modifier_active:
+			_owner.stats_manager.unregister_modifier(mod)
+			_protective_dome_modifier_active = false
 #endregion
 
 #region ===== SHIELD THROW =====

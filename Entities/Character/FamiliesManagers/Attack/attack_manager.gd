@@ -126,6 +126,7 @@ func _add_attack_modifiers() -> void:
 		aa_modifier.tags = [AutoAttackModifier.TagType.CARD]
 		aa_modifier.on_hit_logic_callback = _on_hit_arcane_staff
 		aa_modifier.is_one_time_effect = false
+		_owner.auto_attack_modifier_registry.register_modifier(aa_modifier)
 		
 	# [RUSSIAN ROULETTE]
 	if _attack_stats.attack_russian_roulette_activated:
