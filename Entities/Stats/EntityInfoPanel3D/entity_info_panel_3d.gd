@@ -10,6 +10,7 @@ extends Node3D
 
 @onready var _entity_name_label: Label = %EntityNameLabel
 @onready var _health_bar: FlexibleProgressBar = %HealthBar
+var _armor_bar: FlexibleProgressBar
 
 @export_group("External Nodes")
 @export var _owner_entity: Entity
@@ -33,6 +34,22 @@ func _ready() -> void:
 	_update_health_bar(_owner_entity.stats.health, _owner_entity.stats.health_max)
 	if _health_bar.material != null:
 		_health_bar.material = _health_bar.material.duplicate(true)
+	
+	# Armor bar setup
+	_armor_bar = _health_bar.duplicate()
+	_health_bar.get_parent().add_child(_armor_bar)
+	_armor_bar.name = "ArmorBar"
+	_health_bar.get_parent().move_child(_armor_bar, _health_bar.get_index() + 1)
+	
+	if _armor_bar.material != null:
+		_armor_bar.material = _armor_bar.material.duplicate(true)
+		_armor_bar.material.set_shader_parameter("filled_color", Color(0.7, 0.7, 0.75, 1.0)) # Shield color
+		
+	# Connect armor signal
+	_owner_entity.stats.armor_stacks_changed.connect(_on_entity_armor_stacks_changed)
+	
+	# Initial update
+	_update_armor_bar(_owner_entity.stats.armor_stacks, _owner_entity.stats.health_max)
 
 # ============================== Private ==============================
 
@@ -82,3 +99,13 @@ func _on_own_entity_health_change(health: int) -> void:
 
 func _on_own_entity_max_health_change(max_health: int) -> void:
 	_update_health_bar(_owner_entity.stats.health, max_health)
+	_armor_bar.set_max_value(max_health)
+
+
+func _update_armor_bar(armor: float, max_health: float) -> void:
+	_armor_bar.set_max_value(max_health)
+	_armor_bar.set_bar_value(armor)
+
+
+func _on_entity_armor_stacks_changed(armor: int) -> void:
+	_update_armor_bar(armor, _owner_entity.stats.health_max)
