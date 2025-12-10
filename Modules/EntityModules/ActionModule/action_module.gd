@@ -140,7 +140,7 @@ func heal_percent(target: Entity, percent: float, percent_modifier: Utils.Percen
 
 #region ============================== Condition stacks ==============================
 # [Server only]
-func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Utils.StackType, action_id: StringName) -> void:
+func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Utils.StackType, action_id: StringName, duration: float = 5.0) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
 	var stacks_number_before_crit: float = stacks_number * _get_strenght_weakness_multiplier(Utils.stack_to_action(stack_type))
@@ -154,7 +154,7 @@ func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: 
 					ActionModifier.VarType.STACK_TYPE: stack_type,
 					ActionModifier.VarType.TARGET: target
 				})
-	var stacks_taken: float = target.take_condition_stacks(stacks_number, stack_type, crit_multiplier["is_critical"], action_id, _owner)
+	var stacks_taken: float = target.take_condition_stacks(stacks_number, stack_type, crit_multiplier["is_critical"], action_id, _owner, duration)
 	if crit_multiplier["is_critical"]:
 		_owner.signal_critical_action_done(target, Utils.stack_to_action(stack_type), stacks_number_before_crit, stacks_taken)
 	_owner.signal_action_done(target, Utils.stack_to_action(stack_type), action_id, stacks_taken, crit_multiplier["is_critical"])

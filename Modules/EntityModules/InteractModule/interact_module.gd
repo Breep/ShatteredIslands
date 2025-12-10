@@ -56,7 +56,7 @@ func take_damage_percent(damage_percent: float, percent_modifier: Utils.PercentM
 #endregion
 
 #region ============================== Condition stacks ==============================
-func take_condition_stacks(stacks_number: float, stack_type: Utils.StackType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
+func take_condition_stacks(stacks_number: float, stack_type: Utils.StackType, is_critical: bool, action_id: StringName, source: Entity = null, duration: float = 5.0) -> float:
 	if _owner.stats.health <= 0 or _owner.is_dead: return -1.0
 	if multiplayer.is_server():
 		if _is_dodged(Utils.stack_to_action(stack_type)):
@@ -67,7 +67,7 @@ func take_condition_stacks(stacks_number: float, stack_type: Utils.StackType, is
 		Utils.StackType.POISON: _owner.stats.poison_stacks += stacks_number
 		Utils.StackType.IGNITE: _owner.stats.ignite_stacks += stacks_number
 		Utils.StackType.ARMOR: _owner.stats.armor_stacks += stacks_number
-		Utils.StackType.REGEN: _owner.stats.regen_stacks += stacks_number
+		Utils.StackType.REGEN: _owner.stats.add_regen_stack(stacks_number, int(duration), source, action_id)
 		Utils.StackType.NECROSIS: _owner.stats.necrosis_stacks += stacks_number
 	_owner.signal_stack_taken(stack_type, stacks_number, is_critical)
 	_owner.signal_interaction_received(source, Utils.stack_to_action(stack_type), action_id, stacks_number, is_critical)

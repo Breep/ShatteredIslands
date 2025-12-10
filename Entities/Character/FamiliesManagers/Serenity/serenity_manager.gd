@@ -6,8 +6,9 @@ extends FamilyManager
 const PACIFY_DAMAGE_REDUCTION_PERCENT: float = 50 # Percentage of damage reduction when pacified
 
 #[REGEN]
-const REGEN_DECAY_PERCENT: float = 10.0
-const REGEN_DECAY_HP_THRESHOLD: float = 50.0
+# const REGEN_DECAY_PERCENT: float = 10.0
+# const REGEN_DECAY_HP_THRESHOLD: float = 50.0
+# ============================== Private variables ==============================
 # ============================== Private variables ==============================
 
 var _divine_intervention_triggered: bool = false
@@ -424,17 +425,15 @@ func _on_action_done_corrupted_light(_entity_ref: Entity, _target: Entity, actio
 #endregion
 
 #region ============== REGEN ==================
+#region ============== REGEN ==================
 func _on_regen_tick_timer_timeout() -> void:
+	# Tick Buffer (Expires old stacks)
+	_owner.stats.tick_regen()
+	
+	# Apply Healing
 	var regen_stacks: float = _owner.stats.regen_stacks
 	if regen_stacks > 0:
 		_owner.heal(_owner, regen_stacks, "Regen")
-		var max_hp: float = _owner.stats.health_max
-		if max_hp <= 0: return
-		var current_hp_percent: float = (_owner.stats.health / max_hp) * 100.0
-		if current_hp_percent > REGEN_DECAY_HP_THRESHOLD:
-			var decay: int = int(regen_stacks * (REGEN_DECAY_PERCENT / 100.0))
-			decay = clampi(decay, 1, decay)
-			_owner.stats.regen_stacks -= decay
 #endregion
 
 #region ============== DIVINE INTERVENTION ==================

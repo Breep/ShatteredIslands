@@ -169,7 +169,7 @@ func heal(_target: Entity, _heal_amount: float, _action_id: StringName) -> void:
 func heal_percent(_target: Entity, _percent: float, _percent_modifier: Utils.PercentModifier, _action_id: StringName) -> void:
 	printerr("Entity: virtual heal_percent() called [", get_path(), "]")
 
-func inflict_condition_stacks(_target: Entity, _stacks_number: float, _stack_type: Utils.StackType, _action_id: StringName) -> void:
+func inflict_condition_stacks(_target: Entity, _stacks_number: float, _stack_type: Utils.StackType, _action_id: StringName, _duration: float = 5.0) -> void:
 	printerr("Entity: virtual inflict_condition_stacks() called [", get_path(), "]")
 
 func summon_entity(_entity_type: EntityType, _entity_spawn_global_position: Vector3, _entity_modifier: Dictionary) -> void:
@@ -191,7 +191,7 @@ func take_damage(_damage: float, _damage_type: Utils.DamageType, _is_critical: b
 func take_damage_percent(_percent: float, _percent_modifier: Utils.PercentModifier, _damage_type: Utils.DamageType, _is_critical: bool, _action_id: StringName, _source: Entity = null) -> void:
 	printerr("Entity: virtual take_damage_percent() called [", get_path(), "]")
 
-func take_condition_stacks(_stacks_number: float, _stack_type: Utils.StackType, _is_critical: bool, _action_id: StringName, _source: Entity = null) -> float:
+func take_condition_stacks(_stacks_number: float, _stack_type: Utils.StackType, _is_critical: bool, _action_id: StringName, _source: Entity = null, _duration: float = 5.0) -> float:
 	printerr("Entity: virtual take_condition_stack() called [", get_path(), "]")
 	return -1.0
 
