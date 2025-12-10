@@ -17,6 +17,8 @@ extends Node3D
 @export_group("Stack Counters")
 @export var _ignite_label: Label
 @export var _necrosis_label: Label
+@export var _poison_label: Label
+@export var _regen_label: Label
 
 @export_group("External Nodes")
 @export var _owner_entity: Entity
@@ -47,7 +49,7 @@ func _ready() -> void:
 				stats.mana_max_changed.connect(_on_mana_max_changed)
 		if "ignite_stacks" in stats: _update_ignite_label(stats.ignite_stacks)
 		if "necrosis_stacks" in stats: _update_necrosis_label(stats.necrosis_stacks)
-		if "armor_stacks" in stats: 
+		if "armor_stacks" in stats:
 			_update_shield_bar(stats.armor_stacks, stats.health_max)
 		if stats.has_signal("health_max_changed"): stats.health_max_changed.connect(_on_health_max_changed)
 		if stats.has_signal("ignite_stacks_changed"):
@@ -56,6 +58,14 @@ func _ready() -> void:
 			stats.necrosis_stacks_changed.connect(_update_necrosis_label)
 		if stats.has_signal("armor_stacks_changed"):
 			stats.armor_stacks_changed.connect(_on_armor_changed)
+		if stats.has_signal("poison_stacks_changed"):
+			stats.poison_stacks_changed.connect(_update_poison_label)
+		if stats.has_signal("regen_stacks_changed"):
+			stats.regen_stacks_changed.connect(_update_regen_label)
+		
+		# Valid initial update
+		if "poison_stacks" in stats: _update_poison_label(stats.poison_stacks)
+		if "regen_stacks" in stats: _update_regen_label(stats.regen_stacks)
 # ============================== Public ==============================
 
 func update_health_bar(health: float, health_max: float) -> void:
@@ -96,9 +106,25 @@ func _update_necrosis_label(amount: int) -> void:
 	else:
 		_necrosis_label.hide()
 
+func _update_poison_label(amount: float) -> void:
+	if not _poison_label: return
+	if amount > 0:
+		_poison_label.text = str(int(amount))
+		_poison_label.show()
+	else:
+		_poison_label.hide()
+
+func _update_regen_label(amount: float) -> void:
+	if not _regen_label: return
+	if amount > 0:
+		_regen_label.text = str(int(amount))
+		_regen_label.show()
+	else:
+		_regen_label.hide()
+
 func damage_popup(amount: float, damage_type: Utils.DamageType, is_critic: bool = false):
 	var popup: DamagePopUp = Shared.DAMAGE_POPUP_SCENE.instantiate()
-	var offset = Vector3(randf_range(-0.5, 0.5), randf_range(-0.5, 0.5), 0) 
+	var offset = Vector3(randf_range(-0.5, 0.5), randf_range(-0.5, 0.5), 0)
 	popup.set_value(amount)
 	add_child(popup)
 	
