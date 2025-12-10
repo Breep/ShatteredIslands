@@ -147,7 +147,6 @@ var _armor_stacks: float = 0
 var _regen_buffer: Array[Dictionary] = []
 var _regen_cursor: int = 0
 const REGEN_BUFFER_SIZE: int = 20
-var regen_duration_bonus: int = 0
 
 signal regen_stacks_changed(new_regen_stacks: float)
 var _regen_stacks: float = 0
@@ -221,7 +220,7 @@ func add_regen_stack(amount: float, duration: int, source: Entity, action_id: St
 	if amount <= 0: return
 	if _regen_buffer.is_empty(): init_regen_buffer()
 	
-	duration += regen_duration_bonus
+	# duration += regen_duration_bonus # DEPRECATED: Handled by ActionModule modifier now
 	duration = clampi(duration, 1, REGEN_BUFFER_SIZE - 1)
 	
 	# Add to current total
@@ -234,7 +233,7 @@ func add_regen_stack(amount: float, duration: int, source: Entity, action_id: St
 	slot["amount"] += amount
 	(slot["stack_infos"] as Array).append(StackInfo.new(source, amount, action_id))
 	
-	# print("DEBUG: Added Regen ", amount, " | Expires at index ", expiration_index, " (Current: ", _regen_cursor, ")")
+	# print("DEBUG: Added Regen ", amount, " | Duration: ", duration, " | Expires at index ", expiration_index, " (Current: ", _regen_cursor, ")")
 
 
 func tick_regen() -> void:
@@ -249,7 +248,7 @@ func tick_regen() -> void:
 		# Clear slot
 		slot["amount"] = 0.0
 		(slot["stack_infos"] as Array).clear()
-		# print("DEBUG: Expired Regen ", amount_to_expire, " at index ", _regen_cursor)
+		print("DEBUG: Expired Regen ", amount_to_expire, " at index ", _regen_cursor)
 	
 	# Move cursor
 	_regen_cursor = (_regen_cursor + 1) % REGEN_BUFFER_SIZE

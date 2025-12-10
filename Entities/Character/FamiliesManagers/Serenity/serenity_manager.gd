@@ -67,7 +67,12 @@ func start() -> void:
 		
 	# [DIVINE REGENERATOR]
 	if _serenity_stats.divine_regenerator_activated:
-		_owner.stats.regen_duration_bonus = _serenity_stats.divine_regenerator_bonus_duration
+		var action_modifier := ActionModifier.new()
+		action_modifier.action_type = ActionModifier.ActionType.INFLICT_CONDITION
+		action_modifier.id = "Divine Regenerator"
+		action_modifier.is_one_time_effect = false
+		action_modifier.before_action_logic_callback = _on_before_inflict_condition_divine_regenerator
+		_owner.action_modifiers_manager.register_modifier(action_modifier)
 
 	
 func stop() -> void:
@@ -464,4 +469,18 @@ func _on_divine_intervention_health_changed(_new_val: float, ally: Entity) -> vo
 			if a != null and is_instance_valid(a):
 				if a.stats.health_changed.is_connected(_on_divine_intervention_health_changed):
 					a.stats.health_changed.disconnect(_on_divine_intervention_health_changed)
+#endregion
+
+#region ============== DIVINE REGENERATOR ==================
+func _on_before_inflict_condition_divine_regenerator(cb_vars: Dictionary) -> void:
+	# [DIVINE REGENERATOR]
+	if not cb_vars.has(ActionModifier.VarType.STACK_TYPE) or not cb_vars.has(ActionModifier.VarType.DURATION):
+		return
+		
+	var stack_type = cb_vars[ActionModifier.VarType.STACK_TYPE]
+	if stack_type != Utils.StackType.REGEN: return
+	
+	var bonus_duration: int = _serenity_stats.divine_regenerator_bonus_duration
+	# print("DEBUG: Divine Regenerator triggered! Bonus: ", bonus_duration, " | Duration: ", cb_vars[ActionModifier.VarType.DURATION], " -> ", cb_vars[ActionModifier.VarType.DURATION] + bonus_duration)
+	cb_vars[ActionModifier.VarType.DURATION] += bonus_duration
 #endregion
