@@ -49,9 +49,8 @@ _battle_reader = NodePath("../BattleReader")
 [node name="BattleWriter" parent="." node_paths=PackedStringArray("_fighting_area") instance=ExtResource("8_7oplh")]
 _fighting_area = NodePath("..")
 
-[node name="BattleReader" parent="." node_paths=PackedStringArray("_entity_manager", "_spawn_manager") instance=ExtResource("6_w72k1")]
+[node name="BattleReader" parent="." node_paths=PackedStringArray("_entity_manager") instance=ExtResource("6_w72k1")]
 _entity_manager = NodePath("../EntityManager")
-_spawn_manager = NodePath("../SpawnManager")
 
 [node name="SpawnManager" parent="." node_paths=PackedStringArray("_fighting_area", "_entities_node", "_projectiles_node", "_spells_node") instance=ExtResource("5_xgsbs")]
 _fighting_area = NodePath("..")

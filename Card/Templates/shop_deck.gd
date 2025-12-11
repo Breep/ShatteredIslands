@@ -7,10 +7,14 @@ var available_cards_composition: Dictionary[Family.FamilyType, int] # Key=Family
 # ============================== Public function ==============================
 
 func construct_shop_deck(families: Array[Family], game_rules: GameRules) -> void:
+	Verbose.debug("Constructing shop deck | " + str(families.size()), Verbose.Category.SHOP_DECK)
 	_card_pile.clear()
 	var uid: int = 0
+	var total_cards_added: int = 0
 	for family in families:
-		for card in families[0].cards:
+		var total_family_cards_added: int = 0
+		Verbose.trace("Constructing family: " + str(family.family_name), Verbose.Category.SHOP_DECK)
+		for card in family.cards:
 			var number_of_cards_to_add: int
 			match card.rarity:
 				Card.Rarity.COMMON: number_of_cards_to_add = game_rules.common_number
@@ -22,6 +26,10 @@ func construct_shop_deck(families: Array[Family], game_rules: GameRules) -> void
 				ucard.lvl = 1
 				uid += 1
 				add_card(ucard)
+				total_family_cards_added += 1
+		Verbose.trace("Family: " + str(family.family_name) + " constructed | " + str(total_family_cards_added), Verbose.Category.SHOP_DECK)
+		total_cards_added += total_family_cards_added
+	Verbose.debug("Shop deck constructed | total cards = " + str(total_cards_added), Verbose.Category.SHOP_DECK)
 	_update_available_cards_composition(_card_pile.values(), [])
 
 

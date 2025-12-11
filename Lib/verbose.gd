@@ -23,6 +23,7 @@ enum Category {
 	GLOBAL_FIGHTING_MANAGER,
 	CHARACTER_SPAWNER,
 	CARD_SHOP,
+	SHOP_DECK,
 	CARD_LAYOUT,
 	ORACLE_SHOP,
 	AI,
@@ -47,6 +48,7 @@ const CATEGORY_PREFIX_TEMPLATES : Dictionary [Category, String] = {
 	Category.GLOBAL_MANAGER:          "(GAME_MAN  ) ",
 	Category.ROUND_MANAGER:           "(ROUND_MAN ) ",
 	Category.CARD_SHOP:               "(CARD_SHOP ) ",
+	Category.SHOP_DECK:               "(SHOP_DECK ) ",
 	Category.CARD_LAYOUT:             "(CARD_LAY  ) ",
 	Category.AI:                      "(AI        ) ",
 	Category.GAME:                    "(GAME      ) ",
@@ -91,13 +93,14 @@ const LEVEL_PREFIX_TEMPLATES : Dictionary [Level, String] = {
 #region ============================== Configuration ==============================
 var current_categories_level: Dictionary[Category, Level] = {
 	Category.DEFAULT:                 Level.WARN,
-	Category.NET:                     Level.TRACE,
+	Category.NET:                     Level.WARN,
 	Category.GLOBAL_MANAGER:          Level.WARN,
 	Category.ROUND_MANAGER:           Level.WARN,
-	Category.CARD_SHOP:               Level.WARN,
-	Category.CARD_LAYOUT:             Level.TRACE,
+	Category.CARD_SHOP:               Level.TRACE,
+	Category.SHOP_DECK:               Level.TRACE,
+	Category.CARD_LAYOUT:             Level.WARN,
 	Category.AI:                      Level.WARN,
-	Category.GAME:                    Level.TRACE,
+	Category.GAME:                    Level.WARN,
 	Category.HERO_SELECTOR:           Level.WARN,
 	Category.PLAYER_MANAGER:          Level.WARN,
 	Category.DECK:                    Level.WARN,
@@ -112,8 +115,8 @@ var current_categories_level: Dictionary[Category, Level] = {
 	Category.BATTLE_READER:           Level.WARN,
 	Category.BATTLE_WRITER:           Level.WARN,
 	Category.ENTITY_MANAGER:          Level.WARN,
-	Category.CHARACTER_SPAWNER:       Level.TRACE,
-	Category.FIGHTING_AREA:           Level.TRACE,
+	Category.CHARACTER_SPAWNER:       Level.WARN,
+	Category.FIGHTING_AREA:           Level.WARN,
 }
 #endregion
 
