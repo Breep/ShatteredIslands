@@ -31,7 +31,7 @@
 [ext_resource type="Resource" uid="uid://cq4vk1axdaj4u" path="res://Card/Descriptions/Cards/Storm/Common/SchrodingerStorm/storm_schrodinger_storm.tres" id="20_p3qq1"]
 [ext_resource type="Resource" uid="uid://b8x3g5j2q4y70" path="res://Card/Descriptions/Cards/Light/Rare/RadiantOverflow/serenity_radiant_overflow.tres" id="21_eqikj"]
 [ext_resource type="Resource" uid="uid://dtuljjoqfnos0" path="res://Card/Descriptions/Cards/Light/Common/GracefulStep/light_graceful_step.tres" id="22_3i0vm"]
-[ext_resource type="Resource" uid="uid://ceriu6ydblll8" path="res://Card/Descriptions/Cards/Attack/Common/NecroticBullet/attack_necrotic_bullet.tres" id="22_eqikj"]
+[ext_resource type="Resource" uid="uid://ceriu6ydblll8" path="res://Card/Descriptions/Cards/Attack/Rare/NecroticBullet/attack_necrotic_bullet.tres" id="22_eqikj"]
 [ext_resource type="Resource" uid="uid://c7vmqb7h1a62e" path="res://Card/Descriptions/Cards/Defense/Legendary/FieldGenerator/defense_field_generator.tres" id="22_nao3x"]
 [ext_resource type="Resource" uid="uid://dai3n8w7n58re" path="res://Card/Descriptions/Cards/Fire/Rare/Cosmopolitan/fire_cosmopolitan.tres" id="22_o2he2"]
 [ext_resource type="Resource" uid="uid://dcoannjk22iij" path="res://Card/Descriptions/Cards/Light/Common/LightCollector/serenity_light_collector.tres" id="23_4lkue"]
