@@ -20,8 +20,8 @@ func setup(stat_type: EntityStats.StatType, entity_stat_ref: EntityStats, entity
 		_modifiers_per_action_type[action_type] = {}
 
 
-func recompute_stats() -> void:
-	_recompute_stats()
+func recompute_stats(for_action_type: Utils.ActionType = Utils.ActionType.DAMAGE_PHYSICAL, is_targeted: bool = false) -> void:
+	_recompute_stats(for_action_type, is_targeted)
 
 
 func register_modifier(stat_modifier: StatModifier) -> void:
@@ -38,9 +38,10 @@ func register_modifier(stat_modifier: StatModifier) -> void:
 	
 	if _is_multiple_stats():
 		_modifiers_per_action_type[stat_modifier.action_type][modifier_id] = stat_modifier
+		_recompute_stats(stat_modifier.action_type, true)
 	else:
 		_modifiers[modifier_id] = stat_modifier
-	_recompute_stats()
+		_recompute_stats()
 
 
 func update_modifier(stat_modifier: StatModifier) -> void:
@@ -53,9 +54,10 @@ func update_modifier(stat_modifier: StatModifier) -> void:
 	var modifier_id: String = stat_modifier.id
 	if _is_multiple_stats():
 		_modifiers_per_action_type[stat_modifier.action_type][modifier_id] = stat_modifier
+		_recompute_stats(stat_modifier.action_type, true)
 	else:
 		_modifiers[modifier_id] = stat_modifier
-	_recompute_stats()
+		_recompute_stats()
 
 
 func unregister_modifier(stat_modifier: StatModifier) -> void:
@@ -71,34 +73,46 @@ func unregister_modifier(stat_modifier: StatModifier) -> void:
 			Verbose.error("Unregister - Unknown multiple stats modifier | " + str(modifier_id) + str(_stat_type), Verbose.Category.STAT_MODIFIER)
 			return
 		_modifiers_per_action_type[stat_modifier.action_type].erase(modifier_id)
+		_recompute_stats(stat_modifier.action_type, true)
 	else:
 		if not _modifiers.has(modifier_id):
 			Verbose.error("Unregister - Unknown stat modifier | " + modifier_id + " | " + str(_stat_type), Verbose.Category.STAT_MODIFIER)
 			return
 		_modifiers.erase(modifier_id)
-	
-	_recompute_stats()
+		_recompute_stats()
 
 
 func auto_cleanup() -> void:
 	if _is_multiple_stats():
+		var actions_to_recompute: Array[Utils.ActionType] = []
 		for action_type: Utils.ActionType in _modifiers_per_action_type.keys():
+			var dirty: bool = false
 			for modifier: StatModifier in _modifiers_per_action_type[action_type].values().duplicate():
 				if modifier.auto_cleanup:
 					Verbose.debug("Auto cleaning | " + modifier.id, Verbose.Category.STAT_MODIFIER)
 					_modifiers_per_action_type[action_type].erase(modifier.id)
+					dirty = true
+			if dirty:
+				actions_to_recompute.append(action_type)
+		
+		for action_type in actions_to_recompute:
+			_recompute_stats(action_type, true)
 	else:
+		var dirty: bool = false
 		for modifier: StatModifier in _modifiers.values().duplicate():
 			if modifier.auto_cleanup:
 				Verbose.debug("Auto cleaning | " + modifier.id, Verbose.Category.STAT_MODIFIER)
 				_modifiers.erase(modifier.id)
+				dirty = true
+		if dirty:
+			_recompute_stats()
 
 # ============================== Private functions ==============================
 
-func _recompute_stats() -> void:
+func _recompute_stats(for_action_type: Utils.ActionType = Utils.ActionType.DAMAGE_PHYSICAL, is_targeted: bool = false) -> void:
 	Verbose.trace("_recompute_stats()", Verbose.Category.STAT_MODIFIER)
 	if _is_multiple_stats():
-		_recompute_multiple_stats()
+		_recompute_multiple_stats(for_action_type, is_targeted)
 	else:
 		_recompute_single_stats()
 
@@ -116,19 +130,26 @@ func _recompute_single_stats() -> void:
 	_entity_stats_ref.update_stat(_stat_type, new_stat)
 
 
-func _recompute_multiple_stats() -> void:
-	for action_type: Utils.ActionType in Utils.get_all_actions():
-		var mods: Dictionary = _modifiers_per_action_type[action_type]
-		var add: float = 0.0
-		var mul: float = 0.0
-		for modifier: StatModifier in mods.values():
-			if modifier.calc_type == StatModifier.CalcType.ADD:
-				add += modifier.value
-			elif modifier.calc_type == StatModifier.CalcType.MULT:
-				mul += modifier.value
-		var base_stat = _entity_base_stats_ref.get_stat(_stat_type, action_type)
-		var new_stat = (base_stat + add) * (1.0 + mul)
-		_entity_stats_ref.update_stat(_stat_type, new_stat, action_type)
+func _recompute_multiple_stats(for_action_type: Utils.ActionType, is_targeted: bool) -> void:
+	if is_targeted:
+		_recompute_specific_action_stat(for_action_type)
+	else:
+		for action_type: Utils.ActionType in Utils.get_all_actions():
+			_recompute_specific_action_stat(action_type)
+
+
+func _recompute_specific_action_stat(action_type: Utils.ActionType) -> void:
+	var mods: Dictionary = _modifiers_per_action_type[action_type]
+	var add: float = 0.0
+	var mul: float = 0.0
+	for modifier: StatModifier in mods.values():
+		if modifier.calc_type == StatModifier.CalcType.ADD:
+			add += modifier.value
+		elif modifier.calc_type == StatModifier.CalcType.MULT:
+			mul += modifier.value
+	var base_stat = _entity_base_stats_ref.get_stat(_stat_type, action_type)
+	var new_stat = (base_stat + add) * (1.0 + mul)
+	_entity_stats_ref.update_stat(_stat_type, new_stat, action_type)
 
 
 func _is_multiple_stats() -> bool:
