@@ -3,20 +3,6 @@ extends Node3D
 
 # ============================== Enum ==============================
 
-enum GameState {
-	STARTING,
-	INITIATING_NEW_ROUND,
-	BUYING,
-	FIGHTING_POSITIONING,
-	FIGHTING_COUNTDOWN,
-	FIGHTING_NORMAL,
-	FIGHTING_ACCELERATED,
-	FIGHTING_CELEBRATING,
-	FIGHTING_FINISHED,
-	FINISHED,
-	UNDEF
-}
-
 var _fighting_islands: Dictionary[int, FightingIsland] # [player_id, FightingIslands]
 var _current_round_battles: Array[Battle]
 
@@ -52,7 +38,7 @@ func _ready() -> void:
 
 func _start_game() -> void:
 	Verbose.debug("Starting game", Verbose.Category.GAME)
-	GameManager.update_game_state(GameState.STARTING, true)
+	GameManager.game_state = GameManager.GameState.STARTING
 	_spawn_fighting_islands()
 	_start_hero_selection()
 
@@ -65,8 +51,8 @@ func _start_new_round() ->void:
 	Verbose.debug("Start new round", Verbose.Category.GAME)
 	_current_round_player_id_islands.clear()
 	
-	if GameManager.is_end_of_game():
-		GameManager.update_game_state(GameState.FINISHED, true)
+	if GameManager.is_end_of_game(): # TODO Rien à faire ici ça, à corriger
+		GameManager.game_state = GameManager.GameState.FINISHED
 		Verbose.debug("Looks like we have a winner ! Congrats " + PlayerManager.get_alive_players().values()[0].name, Verbose.Category.GAME)
 		return
 	
@@ -74,7 +60,7 @@ func _start_new_round() ->void:
 	await _init_current_round_player_id_islands(_current_round_battles.size())
 	RoundManager.starting_round_player_changes()
 	await PlayerManager.sync_point(PlayerManager.SyncID.ROUND_SETUP)
-	GameManager.update_game_state(Game.GameState.BUYING)
+	GameManager.game_state = GameManager.GameState.BUYING # TODO Peut-être revoir ça ? Envoyer un signal et laisser le GameManager changer ses états tout seul ?
 
 
 func _start_buying_phase() -> void:
@@ -151,10 +137,6 @@ func _spawn_all_characters() -> void:
 		_node_characters.add_child(character)
 		player.character = character
 
-@rpc("authority", "call_local")
-func _end_buying_round() -> void:
-	_on_buying_island_buying_phase_finished()
-
 # ============================== Callbacks ==============================
 
 func _on_buying_island_buying_phase_finished() -> void:
@@ -166,18 +148,19 @@ func _on_buying_island_buying_phase_finished() -> void:
 func _on_hero_selector_all_heroes_picked() -> void:
 	Verbose.debug("BUYING AREA ALL HEROES PICKED", Verbose.Category.GAME)
 	_spawn_all_characters()
-	GameManager.update_game_state(Game.GameState.INITIATING_NEW_ROUND)
+	GameManager.game_state = GameManager.GameState.INIT_ROUND
 
 
-func _on_global_fighting_manager_all_fights_are_over() -> void:
+func _on_global_fighting_manager_all_fights_are_over() -> void: # TODO Pareil ça devrait être le GameManager qui gère ça
 	Verbose.debug("ALL FIGHTS ARE OVER", Verbose.Category.GAME)
 	await PlayerManager.sync_point(PlayerManager.SyncID.FIGHTING_PHASE)
 	await RoundManager.ending_round_player_changes()
 	await PlayerManager.sync_point(PlayerManager.SyncID.ROUND_ENDING)
 
 
-func _on_game_manager_game_state_changed(game_state: GameState) -> void:
+func _on_game_manager_game_state_changed(game_state: GameManager.GameState) -> void:
 	match game_state:
-		GameState.INITIATING_NEW_ROUND: _start_new_round()
-		GameState.BUYING: _start_buying_phase()
-		GameState.FIGHTING_POSITIONING: _start_fighting_phase()
+		GameManager.GameState.INIT_ROUND: _start_new_round()
+		GameManager.GameState.BUYING: _start_buying_phase()
+		GameManager.GameState.FIGHTING: _start_fighting_phase()
+		GameManager.GameState.ENDING_ROUND: await RoundManager.ending_round_player_changes()
