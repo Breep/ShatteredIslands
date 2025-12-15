@@ -137,13 +137,15 @@ func _clear_optional_timers() -> void:
 func _add_stat_modifiers() -> void:
 	# [THUNDER BERSERKER] - Boost Initial
 	if _storm_stats.thunder_berserker_activated:
-		var mod := StatModifier.new()
-		mod.id = "Thunder Berserker Boost"
-		mod.stat_type = EntityStats.StatType.CRIT_MULT
-		mod.calc_type = StatModifier.CalcType.ADD
-		mod.value = _storm_stats.thunder_berserker_start_boost
-		mod.tags = [StatModifier.TagType.CARD]
-		_owner.stats_manager.register_modifier(mod)
+		for action_type in Utils.get_all_actions():
+			var mod := StatModifier.new()
+			mod.id = "Thunder Berserker Boost"
+			mod.stat_type = EntityStats.StatType.CRIT_MULT
+			mod.action_type = action_type
+			mod.calc_type = StatModifier.CalcType.ADD
+			mod.value = _storm_stats.thunder_berserker_start_boost
+			mod.tags = [StatModifier.TagType.CARD]
+			_owner.stats_manager.register_modifier(mod)
 		
 	# [FARADAY]
 	if _storm_stats.faraday_activated:
@@ -249,14 +251,16 @@ func _apply_storm_breaker_effect() -> void:
 		current_total = _storm_breaker_memory[target]
 	var new_total: float = current_total + added_percent
 	_storm_breaker_memory[target] = new_total
-	var mod := StatModifier.new()
-	mod.id = "Storm Breaker"
-	mod.stat_type = EntityStats.StatType.VULNERABILITY
-	mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
-	mod.calc_type = StatModifier.CalcType.ADD
-	mod.value = new_total
-	mod.tags = [StatModifier.TagType.CARD]
-	target.stats_manager.update_modifier(mod)
+	
+	for action_type in Utils.get_all_actions():
+		var mod := StatModifier.new()
+		mod.id = "Storm Breaker"
+		mod.stat_type = EntityStats.StatType.VULNERABILITY
+		mod.action_type = action_type
+		mod.calc_type = StatModifier.CalcType.ADD
+		mod.value = new_total
+		mod.tags = [StatModifier.TagType.CARD]
+		target.stats_manager.update_modifier(mod)
 
 # [LIGHTNING ROD]
 var _lightning_rod_is_active: bool = false
@@ -281,13 +285,16 @@ func _apply_storm_battery_effect() -> void:
 # [THUNDER BERSERKER]
 func _apply_thunder_berserker_penalty() -> void:
 	_thunder_berserker_accumulated_penalty += _storm_stats.thunder_berserker_penalty_per_rank
-	var mod := StatModifier.new()
-	mod.id = "Thunder Berserker Penalty"
-	mod.stat_type = EntityStats.StatType.CRIT_MULT
-	mod.calc_type = StatModifier.CalcType.ADD
-	mod.value = - (_thunder_berserker_accumulated_penalty)
-	mod.tags = [StatModifier.TagType.CARD]
-	_owner.stats_manager.update_modifier(mod)
+	
+	for action_type in Utils.get_all_actions():
+		var mod := StatModifier.new()
+		mod.id = "Thunder Berserker Penalty"
+		mod.stat_type = EntityStats.StatType.CRIT_MULT
+		mod.action_type = action_type
+		mod.calc_type = StatModifier.CalcType.ADD
+		mod.value = - (_thunder_berserker_accumulated_penalty)
+		mod.tags = [StatModifier.TagType.CARD]
+		_owner.stats_manager.update_modifier(mod)
 
 func _update_lightning_footwork_modifier() -> void:
 	var mod := StatModifier.new()
