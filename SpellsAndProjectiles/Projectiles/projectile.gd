@@ -112,7 +112,7 @@ func _on_body_entered(body: Node3D) -> void:
 		elif stats.is_piercing or _trajectory_type == TrajectoryType.BOOMERANG:
 			if body.team != source.team or _trajectory_type == TrajectoryType.BOOMERANG: # Allow hitting allies for boomerang heal?
 				is_valid_hit = true
-				
+	
 	if is_valid_hit:
 		# Check history
 		if body in _hit_history: return
@@ -137,9 +137,10 @@ func _on_body_entered(body: Node3D) -> void:
 				"AUTO ATTACK",
 				source,
 			)
-		source.signal_action_done(hit_target, Utils.ActionType.DAMAGE_PHYSICAL, "AUTO ATTACK", physical_damage_done_flat, stats.physical_is_critical)
-		if stats.physical_is_critical:
-			source.signal_critical_action_done(hit_target, Utils.ActionType.DAMAGE_PHYSICAL, stats.physical_base_damage, physical_damage_done_flat)
+		if is_instance_valid(source):
+			source.signal_action_done(hit_target, Utils.ActionType.DAMAGE_PHYSICAL, "AUTO ATTACK", physical_damage_done_flat, stats.physical_is_critical)
+			if stats.physical_is_critical:
+				source.signal_critical_action_done(hit_target, Utils.ActionType.DAMAGE_PHYSICAL, stats.physical_base_damage, physical_damage_done_flat)
 	
 	
 		var magical_damage: float = stats.magical_damage_flat
@@ -152,6 +153,7 @@ func _on_body_entered(body: Node3D) -> void:
 				source)
 	
 		if stats.poison_stacks > 0:
+			print("THERE IS POISON ON THIS PROJECTILE !!!!")
 			if source != null: source.inflict_condition_stacks(hit_target, stats.poison_stacks, Utils.StackType.POISON, "AUTO ATTACK")
 			else: hit_target.take_condition_stacks(stats.poison_stacks, Utils.StackType.POISON, stats.poison_stacks_is_critical, "AUTO ATTACK", )
 			
