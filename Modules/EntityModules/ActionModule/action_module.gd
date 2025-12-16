@@ -159,14 +159,24 @@ func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: 
 		
 		# Update values from modifiers
 		stacks_number = modifiers_dict[ActionModifier.VarType.STACK_VALUE]
-		var old_duration = duration
 		duration = modifiers_dict[ActionModifier.VarType.DURATION]
-
-		
+	
+	
 	var stacks_taken: float = target.take_condition_stacks(stacks_number, stack_type, crit_multiplier["is_critical"], action_id, _owner, duration)
 	if crit_multiplier["is_critical"]:
 		_owner.signal_critical_action_done(target, Utils.stack_to_action(stack_type), stacks_number_before_crit, stacks_taken)
 	_owner.signal_action_done(target, Utils.stack_to_action(stack_type), action_id, stacks_taken, crit_multiplier["is_critical"])
+	
+	if _owner.action_modifiers_manager != null:
+		var modifiers_dict: Dictionary = {
+			ActionModifier.VarType.STACK_VALUE: stacks_number,
+			ActionModifier.VarType.STACK_TYPE: stack_type,
+			ActionModifier.VarType.TARGET: target,
+			ActionModifier.VarType.DURATION: duration
+		}
+		for condition_modifier: ActionModifier in _owner.action_modifiers_manager.get_all_modifiers(ActionModifier.ActionType.INFLICT_CONDITION):
+			if condition_modifier.after_action_logic_callback.is_valid():
+				condition_modifier.after_action_logic_callback.call(modifiers_dict)
 #endregion
 
 
