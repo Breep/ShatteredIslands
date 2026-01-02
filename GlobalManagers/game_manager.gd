@@ -4,7 +4,7 @@ extends Node
 
 # ============================== Enum ==============================
 
-enum GameType {
+enum GameType { # Hello captain Hook
 	UNDEF,
 	SOLO,
 	MULTIPLAYER
