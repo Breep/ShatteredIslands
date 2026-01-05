@@ -20,16 +20,6 @@ enum GameState {
 	FINISHED,
 }
 
-enum FightingPhaseState {
-	UNDEF,
-	POSITIONING,
-	COUNTDOWN,
-	NORMAL,
-	ACCELERATED,
-	CELEBRATING,
-	FINISHED,
-}
-
 # ============================== Constants ==============================
 
 const HEROES_NUMBER: int = 8
@@ -107,6 +97,7 @@ func _ready() -> void:
 	add_child(_game_state_timer)
 	game_state_changed.connect(_on_game_state_changed)
 	_game_state_timer.timeout.connect(_on_game_state_timer_timeout)
+	GlobalFightingManager.all_fights_are_over.connect(_on_gfm_all_fights_are_over)
 
 # ============================== Public function ==============================
 
@@ -304,58 +295,22 @@ func _on_game_state_changed(new_state) -> void:
 			_game_state_timer.start()
 		GameState.ENDING_ROUND:
 			Verbose.debug("[State=ENDING_ROUND]", Verbose.Category.GLOBAL_MANAGER)
+			await PlayerManager.sync_point(PlayerManager.SyncID.FIGHTING_PHASE)
+			await RoundManager.ending_round_player_changes()
+			await PlayerManager.sync_point(PlayerManager.SyncID.ROUND_ENDING)
+			_game_state = GameState.INIT_ROUND
 		GameState.FINISHED:
 			Verbose.debug("[State=FINISHED]", Verbose.Category.GLOBAL_MANAGER)
+
+
+func _on_gfm_all_fights_are_over() -> void:
+	Verbose.trace("GFM signals that all fights are over")
+	if _game_state != GameState.FIGHTING:
+		Verbose.error("GFM signals that all fights are over but the GameManager state isn't on FIGHTING", Verbose.Category.GLOBAL_MANAGER)
+		return
+	_game_state_timer.stop()
+	_game_state = GameState.ENDING_ROUND
 #endregion
-
-	
-# Game.GameState.FIGHTING_POSITIONING: # End of POSITIONING State
-# 			if __prototyping or game_type == GameType.SOLO or not multiplayer.is_server():
-# 				game_state = Game.GameState.FIGHTING_COUNTDOWN # Trigger COUNTDOWN STATE for prototyping map
-# 			else:
-# 				game_state = Game.GameState.FIGHTING_NORMAL # Trigger FIGHT directly on server
-
-# GameState.FIGHTING_COUNTDOWN: game_state = Game.GameState.FIGHTING_NORMAL
-# 		GameState.FIGHTING_NORMAL: game_state = Game.GameState.FIGHTING_ACCELERATED
-# 		GameState.FIGHTING_ACCELERATED: game_state = Game.GameState.FIGHTING_CELEBRATING
-# 		GameState.FIGHTING_CELEBRATING: game_state = GameState.FIGHTING_FINISHED
-# 		GameState.FIGHTING_FINISHED: game_state = GameState.INITIATING_NEW_ROUND
-
-	
-		# Game.GameState.FIGHTING_POSITIONING:
-		# 	Verbose.debug("[State=FIGHTING_POSITIONING] (" + str(_game_rules.duration_fighting_positioning) + "s)", Verbose.Category.GLOBAL_MANAGER)
-		# 	_game_state_timer.wait_time = _game_rules.duration_fighting_positioning
-		# 	_game_state_timer.start()
-		
-		# Game.GameState.FIGHTING_COUNTDOWN:
-		# 	Verbose.debug("[State=FIGHTING_COUNTDOWN] (" + str(_game_rules.duration_fighting_countdown) + "s)", Verbose.Category.GLOBAL_MANAGER)
-		# 	_game_state_timer.wait_time = _game_rules.duration_fighting_countdown
-		# 	_game_state_timer.start()
-		
-		# Game.GameState.FIGHTING_NORMAL:
-		# 	Verbose.debug("[State=FIGHTING_NORMAL] (" + str(_game_rules.duration_fighting_normal) + "s)", Verbose.Category.GLOBAL_MANAGER)
-		# 	_game_state_timer.wait_time = _game_rules.duration_fighting_normal
-		# 	_game_state_timer.start()
-		
-		# Game.GameState.FIGHTING_ACCELERATED:
-		# 	Verbose.debug("[State=FIGHTING_ACCELERATED] (" + str(_game_rules.duration_fighting_accelerated) + "s)", Verbose.Category.GLOBAL_MANAGER)
-		# 	Engine.time_scale = ACCELERATED_FIGHT_TIME_SCALE
-		# 	_game_state_timer.wait_time = _game_rules.duration_fighting_accelerated
-		# 	_game_state_timer.start()
-		
-		# Game.GameState.FIGHTING_CELEBRATING:
-		# 	Verbose.debug("[State=FIGHTING_CELEBRATING] (" + str(_game_rules.duration_fighting_celebrating) + "s)", Verbose.Category.GLOBAL_MANAGER)
-		# 	Engine.time_scale = 1.0
-		# 	_game_state_timer.wait_time = _game_rules.duration_fighting_celebrating
-		# 	_game_state_timer.start()
-		
-		# Game.GameState.FIGHTING_FINISHED:
-		# 	Verbose.debug("[State=FIGHTING_FINISHED]", Verbose.Category.GLOBAL_MANAGER)
-		# 	_game_state_timer.wait_time = _game_rules.duration_fighting_finished
-		# 	_game_state_timer.start()
-	
-	
-	
 	
 	
 	

@@ -83,12 +83,13 @@ func _kick_entity(entity: Entity) -> void:
 
 # ============================== Callbacks ==============================
 
-func _on_game_manager_game_state_changed(game_state: Game.GameState) -> void:
-	if game_state == Game.GameState.BUYING:
-		_is_active = false
-		clear()
-	if game_state == Game.GameState.FIGHTING_POSITIONING:
-		_is_active = true
+func _on_game_manager_game_state_changed(game_state: GameManager.GameState) -> void:
+	match game_state:
+		GameManager.GameState.BUYING:
+			_is_active = false
+			clear()
+		GameManager.GameState.FIGHTING:
+			_is_active = true
 
 
 func _on_entity_spell_casted(entity: Entity, target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary) -> void:

@@ -7,44 +7,43 @@ extends Node
 # On Start() call, will connect to all character on the local FightingArea death signals
 # Will notify that the fight is over (either one team is alive or the GameManager says it's over)
 
-# ============================== Signals ==============================
-
+#region ============================== Signals ==============================
 signal fight_is_over(self_ref: FightingManager, winner_teams_order: Array[int]) # The Array is from Looser to Winner [4th, 3rd, 2nd, 1st]
 signal fight_is_ready_to_be_started(self_ref: FightingManager)
+#endregion
 
-# ============================== Public variables ==============================
-
+#region ============================== Public variables ==============================
 var battle_id: int = -1 # Set by the parent
+#endregion
 
-# ============================== Private variables ==============================
-
+#region ============================== Private variables ==============================
 # All fighting characters sorted by team
 var _characters_dictionary: Dictionary[int, Array] # [int, Array[Character]] Key=team_id, value=team members
 var _alive_characters_dictionary: Dictionary[int, Array] # [int, Array[Character]] Key=team_id, value=team members
 var _lowest_hp_teams_order: Array[int] # Array of teams in order of death [2, 3, 4] means team 2 died first, then 3 and then 4
 var _is_active: bool = false
+#endregion
 
-# ============================== Node base functions ==============================
-
+#region ============================== Node base functions ==============================
 func _enter_tree() -> void:
 	GlobalFightingManager.register_fighting_manager(self)
-	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
+	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
 
 
 func _exit_tree() -> void:
 	GlobalFightingManager.unregister_fighting_manager(self)
+#endregion
 
-# ============================== Public functions ==============================
-
+#region ============================== Public functions ==============================
 func start(characters: Array[Character]) -> void:
 	_is_active = true
 	_setup_characters_dictionary(characters)
 	_connect_to_characters_signals()
 	fight_is_ready_to_be_started.emit(self)
+#endregion
 
-# ============================== Private functions ==============================
-
-func _setup_characters_dictionary(characters) -> void:
+#region ============================== Private functions ==============================
+func _setup_characters_dictionary(characters: Array[Character]) -> void:
 	for character in characters:
 		if _characters_dictionary.has(character.team):
 			_characters_dictionary[character.team].append(character)
@@ -56,15 +55,13 @@ func _setup_characters_dictionary(characters) -> void:
 
 func _connect_to_characters_signals() -> void:
 	for team_members in _characters_dictionary.values():
-		for member in team_members:
-			var character: Character = member
+		for character: Character in team_members:
 			character.died.connect(_on_character_died, CONNECT_ONE_SHOT)
 
 
 func _disconnect_from_characters_signals() -> void:
 	for team_members in _characters_dictionary.values():
-		for member in team_members:
-			var character: Character = member
+		for character: Character in team_members:
 			if character.died.is_connected(_on_character_died):
 				character.died.disconnect(_on_character_died)
 
@@ -92,7 +89,7 @@ func _get_teams_total_hp() -> Dictionary[int, float]:
 	return teams_total_hp
 
 
-# Return the teams order sorted by hp (lowest to highest)
+# Return the teams order sorted by hp (lowest to highest) [[Loosers], [], [], [], [Winners]]
 # If several teams are already at 0, they should be already sorted in the array by _is_only_one_team_alive()
 func _get_winner_teams_order() -> Array[int]:
 	var teams_total_hp: Dictionary[int, float] = _get_teams_total_hp()
@@ -128,9 +125,9 @@ func _cleanup() -> void:
 	_characters_dictionary.clear()
 	_alive_characters_dictionary.clear()
 	_lowest_hp_teams_order.clear()
+#endregion
 
-# ============================== Callbacks ==============================
-
+#region ============================== Callbacks ==============================
 func _on_character_died(who: Character) -> void:
 	for team_members in _alive_characters_dictionary.values():
 		team_members.erase(who)
@@ -139,11 +136,12 @@ func _on_character_died(who: Character) -> void:
 		_stop_fighting_manager()
 
 
-func _on_game_manager_game_state_changed(new_state: Game.GameState) -> void:
+func _on_gfm_fighting_phase_state_changed(new_state: GlobalFightingManager.FightingPhaseState) -> void:
 	if not _is_active: return
-	if new_state == Game.GameState.FIGHTING_CELEBRATING:
-		_stop_fighting_manager()
-
+	match new_state:
+		GlobalFightingManager.FightingPhaseState.CELEBRATING:
+			_stop_fighting_manager()
+#endregion
 
 
 

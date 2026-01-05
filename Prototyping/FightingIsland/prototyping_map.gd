@@ -32,18 +32,17 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	GameManager.init()
 	_add_player_cards()
-	_floating_island.start_fight(_characters, _battle_type)
+	_floating_island.init_fight(_characters, _battle_type)
 	GameManager.game_rules.duration_fighting_positioning = 0.5
 	GameManager.game_rules.duration_fighting_countdown = 0.5
 	GameManager.game_rules.duration_fighting_normal = 240.0
-	GameManager.game_state = Game.GameState.FIGHTING_POSITIONING
+	GameManager.game_state = GameManager.GameState.FIGHTING
 	GlobalFightingManager.start()
 	_floating_island.set_active()
 	_ui_fighting_area.update_content(_floating_island._fighting_area)
 	_ui_fighting_area.set_active()
 	_ui_player_stats.hide()
 	_ui_player_stats.connect_entity(_characters[0])
-	
 	_ui_entity_bds_registry.connect_entity_bds_registry(_characters[0].bds_registry)
 
 

@@ -463,7 +463,8 @@ func _on_hit_shield_throw(cb_vars: Dictionary) -> void:
 	if shield_return > 0:
 		_owner.inflict_condition_stacks(_owner, shield_return, Utils.StackType.ARMOR, "Shield Throw")
 		_shield_throw_last_armor = _owner.stats.armor_stacks
-		
+
+
 # [REACTIVE COVER]
 func _on_owner_damage_taken(_entity: Entity, damage: float, _damage_type: Utils.DamageType, _is_crit: bool, _is_blocked: bool) -> void:
 	if damage <= 0: return
@@ -472,7 +473,7 @@ func _on_owner_damage_taken(_entity: Entity, damage: float, _damage_type: Utils.
 	if Utils.is_randomize_modifier_active(chance):
 		_owner.inflict_condition_stacks(_owner, _defense_stats.reactive_cover_shield_amount, Utils.StackType.ARMOR, "Reactive Cover")
 
-# [AETHER REDIRECTOR]
+
 # [AETHER REDIRECTOR]
 func _on_projectile_spawned_aether_redirector(source: Entity, target: Entity, projectile_type: Projectile.ProjectileType, _modifiers: Array[Projectile.ProjectileEffect], projectile: Projectile) -> void:
 	if not _aether_redirector_ready: return

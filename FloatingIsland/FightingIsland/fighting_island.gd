@@ -17,7 +17,6 @@ var _player_owner_id: int = -1
 
 @export_group("Local Nodes")
 @export var _fighting_area: FightingArea
-@export var _camera: Camera3D
 
 # ============================== private variables ==============================
 
@@ -36,9 +35,9 @@ func _ready() -> void:
 
 # Spawn all characters on the FightingArea according to the battle
 # Connect all characters to the FightingArea of the FloatingIsland
-func start_fight(characters: Array[Character], battle_type: Battle.BattleType, battle_id: int = -1) -> void:
+func init_fight(characters: Array[Character], battle_type: Battle.BattleType, battle_id: int = -1) -> void:
 	Verbose.debug("Starting a fight | " + str(battle_id), Verbose.Category.FIGHTING_ISLAND)
-	_fighting_area.start_fight(characters, battle_type, battle_id)
+	_fighting_area.init_fight(characters, battle_type, battle_id)
 	_current_characters = characters
 	_force_local_player_camera_on_island()
 
@@ -80,8 +79,8 @@ func _update_player_ref(player_id: int) -> void:
 
 # ============================== Callback functions ==============================
 
-func _on_game_manager_game_state_changed(game_state: Game.GameState) -> void:
-	if game_state == Game.GameState.BUYING:
+func _on_game_manager_game_state_changed(game_state: GameManager.GameState) -> void:
+	if game_state == GameManager.GameState.BUYING:
 		_current_characters.clear()
 
 

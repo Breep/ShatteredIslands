@@ -124,7 +124,7 @@ static var instance_count: int = 0
 
 func _init() -> void:
 	id = instance_count
-	print("DEBUG: Entity Init ", self, " ID: ", id, " -> ", instance_count, " (Next: ", instance_count + 1, ")")
+	#print("DEBUG: Entity Init ", self, " ID: ", id, " -> ", instance_count, " (Next: ", instance_count + 1, ")")
 	instance_count += 1
 
 

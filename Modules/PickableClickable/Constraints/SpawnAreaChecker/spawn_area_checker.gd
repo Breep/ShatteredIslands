@@ -36,7 +36,7 @@ var _owner_team_spawn_area_overlapping_counter: int = 0: # Number of pickable co
 
 func _ready() -> void:
 	hide()
-	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
+	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
 
 
 func _set_active() -> void:
@@ -68,7 +68,7 @@ func _on_area_entered(area: Area3D) -> void:
 
 func _on_area_exited(area: Area3D) -> void:
 	if not area is SpawnArea:
-		printerr("A non SPawnArea area is using the SpawnArea mask: ", area.get_path())
+		printerr("A non SpawnArea area is using the SpawnArea mask: ", area.get_path())
 		return
 	var spawn_area: SpawnArea = area
 	if spawn_area.team == team:
@@ -77,8 +77,9 @@ func _on_area_exited(area: Area3D) -> void:
 		_other_team_spawn_area_overlapping_counter -= 1
 
 
-func _on_game_manager_game_state_changed(game_state: Game.GameState) -> void:
-	if game_state == Game.GameState.FIGHTING_POSITIONING:
-		_set_active()
-	elif game_state == Game.GameState.FIGHTING_CELEBRATING:
-		_set_inactive()
+func _on_gfm_fighting_phase_state_changed(fighting_phase_state: GlobalFightingManager.FightingPhaseState) -> void:
+	match fighting_phase_state:
+		GlobalFightingManager.FightingPhaseState.POSITIONING:
+			_set_active()
+		GlobalFightingManager.FightingPhaseState.CELEBRATING:
+			_set_inactive()

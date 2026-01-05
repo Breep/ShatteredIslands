@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bbnioyc6ti8wn"]
+[gd_scene load_steps=18 format=3 uid="uid://bbnioyc6ti8wn"]
 
 [ext_resource type="Script" uid="uid://dsiet7v8tbihn" path="res://Entities/Character/character.gd" id="1_a1h5o"]
 [ext_resource type="PackedScene" uid="uid://cf4y1g6c4ia6w" path="res://Entities/Character/CharacterVisual/character_visual.tscn" id="2_xasj2"]
@@ -35,20 +35,11 @@ properties/4/path = NodePath(".:hero_id")
 properties/4/spawn = true
 properties/4/replication_mode = 0
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_h7fwd"]
-properties/0/path = NodePath(".:position")
-properties/0/spawn = true
-properties/0/replication_mode = 2
-properties/1/path = NodePath(".:rotation")
-properties/1/spawn = true
-properties/1/replication_mode = 2
-
-[node name="Character" type="CharacterBody3D" node_paths=PackedStringArray("_movement_synchronizer", "_character_visual", "_character_logic", "_turret", "_collision_shape", "_interact_module", "_action_module", "anim_events_manager", "families_stats", "_clickable_module", "_clickable_feedback", "stats", "base_stats", "stats_manager", "auto_attack_modifier_registry", "target_module")]
+[node name="Character" type="CharacterBody3D" node_paths=PackedStringArray("_character_visual", "_character_logic", "_turret", "_collision_shape", "_interact_module", "_action_module", "anim_events_manager", "families_stats", "_clickable_module", "_clickable_feedback", "stats", "base_stats", "stats_manager", "auto_attack_modifier_registry", "target_module")]
 collision_layer = 16
 collision_mask = 16
 motion_mode = 1
 script = ExtResource("1_a1h5o")
-_movement_synchronizer = NodePath("MovementSynchronizer")
 _character_visual = NodePath("CharacterVisual")
 _character_logic = NodePath("CharacterLogic")
 _turret = NodePath("TurretCenterPoint/Turret")
@@ -195,9 +186,6 @@ color = Color(0.909681, 0, 0.246544, 1)
 replication_interval = 1.0
 delta_interval = 1.0
 replication_config = SubResource("SceneReplicationConfig_5ed6q")
-
-[node name="MovementSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_h7fwd")
 
 [editable path="CharacterLogic"]
 [editable path="TurretCenterPoint/Turret"]

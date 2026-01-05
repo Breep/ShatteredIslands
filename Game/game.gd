@@ -1,41 +1,32 @@
 class_name Game
 extends Node3D
 
-# ============================== Enum ==============================
-
+#region ============================== Private variables ==============================
 var _fighting_islands: Dictionary[int, FightingIsland] # [player_id, FightingIslands]
 var _current_round_battles: Array[Battle]
+var _current_round_player_id_islands: Array[int] # player_id
+#endregion
 
-# ============================== Network Export ==============================
-
-@export_group("Network")
-@export var _current_round_player_id_islands: Array[int] # player_id
-
-# ============================== Local nodes ==============================
-
+#region ============================== Local nodes ==============================
 @export_group("Local Nodes")
 @export var _buying_island: BuyingIsland
 @export var _scene_switcher: SceneSwitcher
 @export var _hero_selector: HeroSelector
-
 @export var _node_fighting_islands: Node3D # Network spawn of FloatingIslands TODO (Spawn Island from the player Island)
 @export var _node_characters: Node3D # Network spawn of Characters
-
 @export var _islands_spawn_points: Array[SpawnPoint]
-
 @onready var _island_spawns_to_be_removed: Node3D = %IslandSpawns
+#endregion
 
-# ============================== Node base functions ==============================
-
+#region ============================== Node base functions ==============================
 func _ready() -> void:
 	_hero_selector.all_heroes_picked.connect(_on_hero_selector_all_heroes_picked)
 	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
-	GlobalFightingManager.all_fights_are_over.connect(_on_global_fighting_manager_all_fights_are_over)
 	Shared.scene_switcher = _scene_switcher
 	_start_game()
+#endregion
 
-# ============================== Private functions ==============================
-
+#region ============================== Private functions ==============================
 func _start_game() -> void:
 	Verbose.debug("Starting game", Verbose.Category.GAME)
 	GameManager.game_state = GameManager.GameState.STARTING
@@ -81,9 +72,10 @@ func _start_fighting_phase() -> void:
 			characters.append(player.character)
 		var player_id: int = _current_round_player_id_islands[i]
 		var fighting_island: FightingIsland = PlayerManager.players[player_id].fighting_island
-		fighting_island.start_fight(characters, battles[i].battle_type, battles[i].id)
+		fighting_island.init_fight(characters, battles[i].battle_type, battles[i].id)
 	# Start fight on each island
 	GlobalFightingManager.start()
+#endregion
 
 # ============================== Random islands functions ==============================
 
@@ -108,8 +100,7 @@ func _current_round_player_id_islands_sync(current_round_player_id_islands: Arra
 	_current_round_player_id_islands = current_round_player_id_islands
 	_current_round_player_id_islands_received.emit()
 
-# ============================== Spawn functions ==============================
-
+#region ============================== Spawn functions ==============================
 func _spawn_fighting_islands() -> void:
 	if multiplayer.is_server():
 		var i:int = 0
@@ -136,9 +127,9 @@ func _spawn_all_characters() -> void:
 		character.name = "Character_" + player.hero.name + "_" + player.name
 		_node_characters.add_child(character)
 		player.character = character
+#endregion
 
-# ============================== Callbacks ==============================
-
+#region ============================== Callbacks ==============================
 func _on_buying_island_buying_phase_finished() -> void:
 	Verbose.debug("BUYING PHASE ENDED", Verbose.Category.GAME)
 	_start_fighting_phase()
@@ -151,16 +142,9 @@ func _on_hero_selector_all_heroes_picked() -> void:
 	GameManager.game_state = GameManager.GameState.INIT_ROUND
 
 
-func _on_global_fighting_manager_all_fights_are_over() -> void: # TODO Pareil ça devrait être le GameManager qui gère ça
-	Verbose.debug("ALL FIGHTS ARE OVER", Verbose.Category.GAME)
-	await PlayerManager.sync_point(PlayerManager.SyncID.FIGHTING_PHASE)
-	await RoundManager.ending_round_player_changes()
-	await PlayerManager.sync_point(PlayerManager.SyncID.ROUND_ENDING)
-
-
 func _on_game_manager_game_state_changed(game_state: GameManager.GameState) -> void:
 	match game_state:
 		GameManager.GameState.INIT_ROUND: _start_new_round()
 		GameManager.GameState.BUYING: _start_buying_phase()
 		GameManager.GameState.FIGHTING: _start_fighting_phase()
-		GameManager.GameState.ENDING_ROUND: await RoundManager.ending_round_player_changes()
+#endregion

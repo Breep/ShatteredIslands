@@ -88,15 +88,15 @@ func _on_character_owner_died(_self_ref: Entity) -> void:
 	_animation_tree.set(PARAM_TRANSITION_FIGHTING, VALUE_TRANSITION_FIGHTING_DIE)
 
 
-func _on_game_manager_game_stated_changed(game_state: Game.GameState) -> void:
+func _on_game_manager_game_stated_changed(game_state: GameManager.GameState) -> void:
 	match game_state:
-		Game.GameState.UNDEF:
+		GameManager.GameState.UNDEF:
 			_animation_tree.set(PARAM_TRANSITION_GLOBAL, VALUE_TRANSITION_GLOBAL_TPOSE)
-		Game.GameState.BUYING:
+		GameManager.GameState.BUYING:
 			_animation_tree.set(PARAM_TRANSITION_GLOBAL, VALUE_TRANSITION_GLOBAL_SITTING)
 			_start_buying_area_animation()
 			_weapons_node.hide()
-		Game.GameState.FIGHTING_POSITIONING:
+		GameManager.GameState.FIGHTING:
 			_idle_variation_timer.stop()
 			_animation_tree.set(PARAM_TRANSITION_GLOBAL, VALUE_TRANSITION_GLOBAL_FIGHTING)
 			_animation_tree.set(PARAM_TRANSITION_FIGHTING, VALUE_TRANSITION_FIGHTING_IDLE)

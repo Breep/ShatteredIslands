@@ -26,7 +26,7 @@ var _is_active: bool = false
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
+	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
 	hide()
 
 # ============================== Public functions ==============================
@@ -75,9 +75,9 @@ func _set_layout_2v2(characters: Array[Character]) -> void:
 
 # ============================== Callbacks ==============================
 
-func _on_game_manager_game_state_changed(game_state: Game.GameState) -> void:
-	match game_state:
-		Game.GameState.FIGHTING_COUNTDOWN:
+func _on_gfm_fighting_phase_state_changed(fighting_phase_state: GlobalFightingManager.FightingPhaseState) -> void:
+	match fighting_phase_state:
+		GlobalFightingManager.FightingPhaseState.COUNTDOWN:
 			_ui_countdown.start(int(GameManager.game_rules.duration_fighting_countdown), "FIGHT")
 
 

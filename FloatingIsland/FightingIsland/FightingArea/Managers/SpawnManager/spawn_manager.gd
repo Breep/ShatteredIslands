@@ -66,8 +66,8 @@ func _clear_all() -> void:
 
 # ============================== Callbacks ==============================
 
-func _on_game_manager_game_state_changed(state: Game.GameState) -> void:
-	if state == Game.GameState.BUYING:
+func _on_game_manager_game_state_changed(state: GameManager.GameState) -> void:
+	if state == GameManager.GameState.BUYING:
 		_clear_all()
 
 

@@ -248,7 +248,6 @@ func tick_regen() -> void:
 		# Clear slot
 		slot["amount"] = 0.0
 		(slot["stack_infos"] as Array).clear()
-		print("DEBUG: Expired Regen ", amount_to_expire, " at index ", _regen_cursor)
 	
 	# Move cursor
 	_regen_cursor = (_regen_cursor + 1) % REGEN_BUFFER_SIZE

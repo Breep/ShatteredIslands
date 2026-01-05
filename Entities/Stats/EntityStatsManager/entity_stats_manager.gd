@@ -75,7 +75,7 @@ func _on_entity_base_stats_has_been_reset() -> void:
 		smd.recompute_stats()
 
 
-func _on_game_manager_game_state_changed(game_state: Game.GameState) -> void:
+func _on_game_manager_game_state_changed(game_state: GameManager.GameState) -> void:
 	match game_state:
-		Game.GameState.FIGHTING_FINISHED:
+		GameManager.GameState.ENDING_ROUND:
 			_auto_cleanup_all()

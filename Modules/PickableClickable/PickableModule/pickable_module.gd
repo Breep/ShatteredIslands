@@ -43,7 +43,7 @@ func _ready() -> void:
 	else:
 		_is_on_owner_spawn_area = true
 	
-	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
+	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
 
 # ============================== Public functions ==============================
 
@@ -126,13 +126,11 @@ func _on_spawn_area_checker_other_team_spawn_area_freed() -> void:
 	_is_on_other_spawn_area = false
 
 
-func _on_game_manager_game_state_changed(game_state: Game.GameState) -> void:
+func _on_gfm_fighting_phase_state_changed(fighting_phase_state: GlobalFightingManager.FightingPhaseState) -> void:
 	if _spawn_area_checker == null: return
-	match game_state:
-		Game.GameState.FIGHTING_POSITIONING:
+	match fighting_phase_state:
+		GlobalFightingManager.FightingPhaseState.POSITIONING:
 			pickable_locked = false
 			_spawn_area_checker.team = _owner.team
-		Game.GameState.FIGHTING_COUNTDOWN:
+		_:
 			pickable_locked = true
-		Game.GameState.FIGHTING_NORMAL:
-			pickable_locked = true 

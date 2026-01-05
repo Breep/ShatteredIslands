@@ -45,9 +45,6 @@ var _hero_id := Hero.HeroId.UNDEF
 		if value == _hero_id or value < 0: return
 		_hero_id = value
 
-@export_subgroup("Synchronizer")
-@export var _movement_synchronizer: MultiplayerSynchronizer
-
 @export_group("Local Nodes")
 @export var _character_visual: CharacterVisual
 @export var _character_logic: CharacterLogic
@@ -210,6 +207,7 @@ func _ready() -> void:
 	
 	
 	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
+	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
 	Events.player_won_a_fight.connect(_on_events_player_won_a_fight)
 	Events.player_lost_a_fight.connect(_on_events_player_lost_a_fight)
 	Events.entity_cliked.connect(_on_events_entity_clicked)
@@ -263,30 +261,23 @@ func _on_fighting_manager_fight_is_over(_fighting_manager, _winner_team) -> void
 	_character_logic.stop()
 
 
-func _on_game_manager_game_state_changed(game_state: Game.GameState) -> void:
+func _on_gfm_fighting_phase_state_changed(fighting_phase_state: GlobalFightingManager.FightingPhaseState) -> void:
+	match fighting_phase_state:
+		GlobalFightingManager.FightingPhaseState.POSITIONING:
+			fighting_state = FightingState.POSITIONING
+		GlobalFightingManager.FightingPhaseState.NORMAL:
+			fighting_state = FightingState.FIGHTING
+		GlobalFightingManager.FightingPhaseState.CELEBRATING:
+			fighting_state = FightingState.CELEBRATING
+
+
+func _on_game_manager_game_state_changed(game_state: GameManager.GameState) -> void:
 	match game_state:
-		Game.GameState.BUYING:
+		GameManager.GameState.BUYING:
 			_pending_attacks.clear()
 			_is_dead = false
 			_character_visual.hide()
 			if _turret != null: _turret.hide()
-		Game.GameState.FIGHTING_POSITIONING:
-			fighting_state = FightingState.POSITIONING
-			if not player.is_bot:
-				_movement_synchronizer.set_multiplayer_authority(player.id)
-				set_multiplayer_authority(player.id)
-			else:
-				_movement_synchronizer.set_multiplayer_authority(1)
-				set_multiplayer_authority(1)
-			_character_visual.show()
-			if _turret != null: _turret.show()
-		Game.GameState.FIGHTING_COUNTDOWN:
-			_movement_synchronizer.set_multiplayer_authority(-1)
-			set_multiplayer_authority(-1)
-		Game.GameState.FIGHTING_NORMAL:
-			fighting_state = FightingState.FIGHTING
-		Game.GameState.FIGHTING_CELEBRATING:
-			fighting_state = FightingState.CELEBRATING
 
 
 func _on_stats_health_changed(new_health: int) -> void:

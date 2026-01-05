@@ -44,7 +44,7 @@ func _auto_cleanup_all() -> void:
 
 # ============================== Callbacks ==============================
 
-func _on_game_manager_game_state_changed(game_state: Game.GameState) -> void:
+func _on_game_manager_game_state_changed(game_state: GameManager.GameState) -> void:
 	match game_state:
-		Game.GameState.FIGHTING_FINISHED:
+		GameManager.GameState.ENDING_ROUND:
 			_auto_cleanup_all()

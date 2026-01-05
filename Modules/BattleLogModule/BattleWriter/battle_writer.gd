@@ -21,7 +21,9 @@ var _is_accelerated_fight: bool = false
 
 func _ready() -> void:
 	if not multiplayer.is_server(): queue_free() # Only the server writes battle logs
-	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
+	
+	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
+	
 	_fighting_area.projectile_spawned.connect(_on_fighting_area_projectile_spawned)
 	_fighting_area.spell_casted.connect(_on_fighting_area_spell_casted)
 	_fighting_area.action_done.connect(_on_fighting_area_action_done)
@@ -121,14 +123,14 @@ func _get_time() -> float:
 
 # ============================== Callbacks ==============================
 
-func _on_game_manager_game_state_changed(state: Game.GameState) -> void:
+func _on_gfm_fighting_phase_state_changed(state: GlobalFightingManager.FightingPhaseState) -> void:
 	match state:
-		Game.GameState.FIGHTING_POSITIONING:
+		GlobalFightingManager.FightingPhaseState.UNDEF:
 			_battle_logs.clear()
-		Game.GameState.FIGHTING_NORMAL:
+		GlobalFightingManager.FightingPhaseState.NORMAL:
 			_start_time = (Time.get_ticks_msec() as float) / 1000.0
 			_is_accelerated_fight = false
-		Game.GameState.FIGHTING_ACCELERATED:
+		GlobalFightingManager.FightingPhaseState.ACCELERATED:
 			_normal_fight_duration = _get_time()
 			_accelerated_fight_start_time = (Time.get_ticks_msec() as float) / 1000.0
 			_is_accelerated_fight = true

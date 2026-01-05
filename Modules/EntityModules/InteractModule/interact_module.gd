@@ -197,7 +197,7 @@ func _get_crit_resistance_multiplier(action_type: Utils.ActionType) -> float:
 
 
 #region ============================== Callbacks ==============================
-func _on_game_manager_game_state_changed(game_state: Game.GameState) -> void:
+func _on_game_manager_game_state_changed(game_state: GameManager.GameState) -> void:
 	match game_state:
-		Game.GameState.FIGHTING_POSITIONING: _dodge_number = 0
+		GameManager.GameState.FIGHTING: _dodge_number = 0
 #endregion

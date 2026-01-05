@@ -18,7 +18,7 @@ var _battle_logs: Array[Dictionary] = [] # [CLIENT ONLY]
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
+	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
 
 # ============================== Callbacks functions ============================== [SERVER ONLY]
 
@@ -29,14 +29,14 @@ func _on_synchronizer_timer_timeout() -> void:
 		_sync_battle_log.rpc(new_logs)
 
 
-func _on_game_manager_game_state_changed(state: Game.GameState) -> void:
+func _on_gfm_fighting_phase_state_changed(state: GlobalFightingManager.FightingPhaseState) -> void:
 	match state:
-		Game.GameState.BUYING:
+		GlobalFightingManager.FightingPhaseState.UNDEF:
 			_battle_logs.clear()
-		Game.GameState.FIGHTING_NORMAL:
+		GlobalFightingManager.FightingPhaseState.NORMAL:
 			if multiplayer.is_server():
 				_synchronizer_timer.start()
-		Game.GameState.FIGHTING_CELEBRATING: # TODO Si erreur de synchro sur les derniers event d'un combat, c'est surement une race ici
+		GlobalFightingManager.FightingPhaseState.FINISHED: # TODO Si erreur de synchro sur les derniers event d'un combat, c'est surement une race ici
 			if multiplayer.is_server():
 				_synchronizer_timer.stop()
 				var new_logs: Array[Dictionary] = _battle_writer.get_current_logs()

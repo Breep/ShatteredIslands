@@ -153,7 +153,6 @@ func _on_body_entered(body: Node3D) -> void:
 				source)
 	
 		if stats.poison_stacks > 0:
-			print("THERE IS POISON ON THIS PROJECTILE !!!!")
 			if source != null: source.inflict_condition_stacks(hit_target, stats.poison_stacks, Utils.StackType.POISON, "AUTO ATTACK")
 			else: hit_target.take_condition_stacks(stats.poison_stacks, Utils.StackType.POISON, stats.poison_stacks_is_critical, "AUTO ATTACK", )
 			
