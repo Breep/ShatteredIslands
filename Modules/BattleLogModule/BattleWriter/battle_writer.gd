@@ -125,8 +125,6 @@ func _get_time() -> float:
 
 func _on_gfm_fighting_phase_state_changed(state: GlobalFightingManager.FightingPhaseState) -> void:
 	match state:
-		GlobalFightingManager.FightingPhaseState.UNDEF:
-			_battle_logs.clear()
 		GlobalFightingManager.FightingPhaseState.NORMAL:
 			_start_time = (Time.get_ticks_msec() as float) / 1000.0
 			_is_accelerated_fight = false
@@ -134,6 +132,8 @@ func _on_gfm_fighting_phase_state_changed(state: GlobalFightingManager.FightingP
 			_normal_fight_duration = _get_time()
 			_accelerated_fight_start_time = (Time.get_ticks_msec() as float) / 1000.0
 			_is_accelerated_fight = true
+		GlobalFightingManager.FightingPhaseState.FINISHED:
+			_battle_logs.clear()
 
 
 func _on_fighting_area_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.ProjectileType, projectile_modifiers: Array[Projectile.ProjectileEffect], _projectile: Projectile) -> void:
