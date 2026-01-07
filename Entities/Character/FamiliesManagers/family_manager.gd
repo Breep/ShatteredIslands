@@ -4,6 +4,8 @@ extends Node
 @export var _owner: Character # Ref to character owner
 @export var _action_module: ActionModule
 
+var _player: Player # TODO Check how to get this
+
 var _optional_timers: Array[Timer]
 var _optional_spells: Array[Node]
 

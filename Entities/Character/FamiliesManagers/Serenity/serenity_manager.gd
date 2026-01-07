@@ -216,7 +216,7 @@ func _apply_light_collector() -> void:
 	else:
 		push_warning("SerenityManager: _player or deck is null for Light Collector")
 		return
-		
+	
 	var amount_per_card: float = _serenity_stats.light_collector_regen_amount
 	var total_regen: float = count * amount_per_card
 	

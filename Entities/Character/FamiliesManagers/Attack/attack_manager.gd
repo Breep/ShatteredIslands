@@ -231,7 +231,7 @@ func _add_stat_modifiers() -> void:
 			count = _player.deck.get_unique_card_count(Family.FamilyType.ATTACK)
 		else:
 			push_warning("AttackManager: _player or deck is null for Aim Assist")
-			
+		
 		stat_modifier.value = count * _attack_stats.attack_aim_assist_bonus_per_card
 		stat_modifier.tags = [StatModifier.TagType.CARD]
 		_owner.stats_manager.register_modifier(stat_modifier)
