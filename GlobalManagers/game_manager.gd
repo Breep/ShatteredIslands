@@ -86,7 +86,7 @@ signal _heroes_choosen()
 # [Client only] Is emit when server has answered the local client request
 signal _server_answered()
 
-var _random_heroes_ref: Array[Hero.HeroId]
+var _random_heroes_ref: Array[HeroDesc.HeroId]
 
 # ============================== Node base functions ==============================
 
@@ -135,14 +135,14 @@ func start_solo_game() -> void:
 	start_game()
 
 
-func get_current_game_heroes() -> Array[Hero]:
+func get_current_game_heroes() -> Array[HeroDesc]:
 	if multiplayer.is_server():
 		_init_current_current_game_heroes(HEROES_NUMBER)
 	else:
 		_ask_get_n_random_heroes.rpc_id(1, multiplayer.get_unique_id())
 		await _server_answered
 	
-	var random_heroes: Array[Hero]
+	var random_heroes: Array[HeroDesc]
 	for hero_ref in _random_heroes_ref:
 		random_heroes.append(Shared.HEROES[hero_ref])
 	
@@ -227,7 +227,7 @@ func _ask_get_n_random_heroes(peer_id: int) -> void:
 
 
 @rpc("authority", "call_remote")
-func _answer_get_n_random_heroes(heroes_ref: Array[Hero.HeroId]) -> void:
+func _answer_get_n_random_heroes(heroes_ref: Array[HeroDesc.HeroId]) -> void:
 	_random_heroes_ref = heroes_ref
 	_server_answered.emit()
 #endregion
@@ -237,10 +237,10 @@ func _answer_get_n_random_heroes(heroes_ref: Array[Hero.HeroId]) -> void:
 func _init_current_current_game_heroes(_heroes_number: int) -> void:
 	# TODO Disabled for the moment
 	#if heroes_number <= 0 or heroes_number > Shared.HEROES.size():
-		#printerr("Hero: Wrong heroes_number: ", heroes_number)
+		#printerr("HeroDesc: Wrong heroes_number: ", heroes_number)
 		#return
 	
-	#var heroes_ref: Array[Hero.HeroId]
+	#var heroes_ref: Array[HeroDesc.HeroId]
 	#for hero_ref in Shared.HEROES.keys():
 		#heroes_ref.append(hero_ref)
 	#
@@ -251,7 +251,7 @@ func _init_current_current_game_heroes(_heroes_number: int) -> void:
 		#_random_heroes_ref.append(heroes_ref.get(random_index))
 		#heroes_ref.remove_at(random_index)
 	
-	_random_heroes_ref.append(Hero.HeroId.DARK_KNIGHT)
+	_random_heroes_ref.append(HeroDesc.HeroId.DARK_KNIGHT)
 	_heroes_choosen.emit()
 	_game_heroes_ready = true
 

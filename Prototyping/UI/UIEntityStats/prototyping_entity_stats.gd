@@ -39,11 +39,11 @@ func _ready() -> void:
 	_character.player = Player.new()
 	_character.player.skill_manager = SkillManager.new()
 	_character.player.character = _character
-	_character.hero_id = Hero.HeroId.DARK_KNIGHT
+	_character.hero_id = HeroDesc.HeroId.DARK_KNIGHT
 	
 	add_child(_character)
-	_character.base_stats.reset_from_hero(Shared.HEROES[Hero.HeroId.DARK_KNIGHT], 10)
-	_character.stats.reset_from_hero(Shared.HEROES[Hero.HeroId.DARK_KNIGHT], 10)
+	_character.base_stats.reset_from_hero(Shared.HEROES[HeroDesc.HeroId.DARK_KNIGHT], 10)
+	_character.stats.reset_from_hero(Shared.HEROES[HeroDesc.HeroId.DARK_KNIGHT], 10)
 	_entity_stats_left.connect_entity(_character)
 	_entity_stats_right.connect_entity(_character)
 

@@ -18,7 +18,7 @@ func _run() -> void:
 		push_error("Erreur de lecture du JSON.")
 		return
 
-	print("--- Début de l'injection dans les ressources Hero ---")
+	print("--- Début de l'injection dans les ressources HeroDesc ---")
 
 	# Regroupement des données par ID de héros
 	var data_per_hero = {}
@@ -54,16 +54,16 @@ func _process_single_hero(hero_id: String, entries: Array) -> void:
 		dir.make_dir_recursive(stats_folder) # Création auto du dossier Stats
 
 	if not FileAccess.file_exists(main_res_path):
-		print("⚠️ Ressource Hero introuvable : ", main_res_path)
+		print("⚠️ Ressource HeroDesc introuvable : ", main_res_path)
 		return
 
-	# Chargement de la ressource "Hero"
+	# Chargement de la ressource "HeroDesc"
 	var main_hero_res = ResourceLoader.load(main_res_path)
 	
-	# Vérification que la variable 'stats' existe bien dans ton script Hero
+	# Vérification que la variable 'stats' existe bien dans ton script HeroDesc
 	if not "stats" in main_hero_res:
 		print("ERREUR : La variable 'stats' est introuvable dans ", main_res_path)
-		print("Vérifie que ton script Hero a bien '@export var stats: Dictionary'")
+		print("Vérifie que ton script HeroDesc a bien '@export var stats: Dictionary'")
 		return
 		
 	print("🔄 Mise à jour de : ", hero_id)
@@ -84,11 +84,11 @@ func _process_single_hero(hero_id: String, entries: Array) -> void:
 		var final_stats_path = stats_folder + stats_filename
 		ResourceSaver.save(new_stats, final_stats_path)
 		
-	# Injection dans ton fichier Hero (Livre complet)
+	# Injection dans ton fichier HeroDesc (Livre complet)
 		# Note : on utilise .stats (minuscule) comme dans ton code source
 		var loaded_stats = ResourceLoader.load(final_stats_path)
 		main_hero_res.stats[level - 1] = loaded_stats
 		
-	# Sauvegarde finale du Hero
+	# Sauvegarde finale du HeroDesc
 	ResourceSaver.save(main_hero_res, main_res_path)
-	print("✅ Hero mis à jour : ", main_res_path)
+	print("✅ HeroDesc mis à jour : ", main_res_path)

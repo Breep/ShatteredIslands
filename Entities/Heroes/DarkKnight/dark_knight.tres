@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Hero" load_steps=23 format=3 uid="uid://by3bwbvf4ekcd"]
 
-[ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://Entities/Heroes/hero.gd" id="1_2ttjg"]
+[ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://Entities/Heroes/hero_desc.gd" id="1_2ttjg"]
 [ext_resource type="Texture2D" uid="uid://difeq0pm3hgjs" path="res://Data/Heroes/Portraits/darkknight2.png" id="1_hluaq"]
 [ext_resource type="Script" uid="uid://2py6kv5aqgem" path="res://Entities/Heroes/hero_stats.gd" id="3_hluaq"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://Entities/Heroes/skill.gd" id="4_f1ben"]

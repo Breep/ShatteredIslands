@@ -67,9 +67,9 @@ var xp: int:
 		_check_lvl_up()
 		xp_changed.emit(self, _xp)
 
-signal hero_changed(self_ref: Player, new_hero: Hero)
-var _hero: Hero
-var hero: Hero:
+signal hero_changed(self_ref: Player, new_hero: HeroDesc)
+var _hero: HeroDesc
+var hero: HeroDesc:
 	get: return _hero
 	set(value):
 		if _hero == value: return

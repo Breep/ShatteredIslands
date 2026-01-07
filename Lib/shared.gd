@@ -1,8 +1,8 @@
 extends Node
 
-var HEROES: Dictionary[Hero.HeroId, Hero] = {
-	Hero.HeroId.UNDEF: load("res://Entities/Heroes/Undef/undef.tres"),
-	Hero.HeroId.DARK_KNIGHT: load("res://Entities/Heroes/DarkKnight/dark_knight.tres"),
+var HEROES: Dictionary[HeroDesc.HeroId, HeroDesc] = {
+	HeroDesc.HeroId.UNDEF: load("res://Entities/Heroes/Undef/undef.tres"),
+	HeroDesc.HeroId.DARK_KNIGHT: load("res://Entities/Heroes/DarkKnight/dark_knight.tres"),
 }
 
 var FAMILIES: Dictionary[Family.FamilyType, Family] = {

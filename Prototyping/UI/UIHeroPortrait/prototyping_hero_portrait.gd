@@ -6,7 +6,7 @@ extends Control
 @export var _cards_viewer: UICardsViewer
 
 @export var _families: Array[Family]
-@export var _hero: Hero
+@export var _hero: HeroDesc
 
 # ============================== Private variables ==============================
 

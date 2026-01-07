@@ -19,7 +19,7 @@ enum SelectionType {
 
 # ============================== Private variables ==============================
 
-var _available_heroes: Array[Hero]
+var _available_heroes: Array[HeroDesc]
 var _heroes_ready: int
 var _selection_type: SelectionType = SelectionType.MULTIPLE
 
@@ -33,7 +33,7 @@ func _ready() -> void:
 # ============================== Public functions ==============================
 
 func start() -> void:
-	var heroes: Array[Hero] = await GameManager.get_current_game_heroes()
+	var heroes: Array[HeroDesc] = await GameManager.get_current_game_heroes()
 	
 	_available_heroes = heroes.duplicate()
 	_ui_hero_picking_screen.show()
@@ -77,7 +77,7 @@ func _start_hero_selection() -> void:
 
 # TODO check if the client is taking an available hero in the server
 @rpc("any_peer", "call_local", "reliable")
-func _pick_hero_multiple(player_id: int, hero_id: Hero.HeroId) -> void:
+func _pick_hero_multiple(player_id: int, hero_id: HeroDesc.HeroId) -> void:
 	PlayerManager.players[player_id].hero = Shared.HEROES[hero_id]
 	_player_hero_picked.emit()
 
@@ -100,16 +100,16 @@ func _start_player_turn_to_pick(player_id: int) -> void:
 			_ui_hero_picking_screen.update_bottom_player_name(player_picking.name, false)
 
 
-func _get_random_hero_and_wait_random_duration() -> Hero:
+func _get_random_hero_and_wait_random_duration() -> HeroDesc:
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	await get_tree().create_timer(rng.randf_range(0.1, 0.5)).timeout
-	var random_hero: Hero = _available_heroes.pick_random()
+	var random_hero: HeroDesc = _available_heroes.pick_random()
 	return random_hero
 
 
 @rpc("any_peer", "call_local", "reliable")
-func _pick_hero_unique(player_id: int, hero_id: Hero.HeroId) -> void:
+func _pick_hero_unique(player_id: int, hero_id: HeroDesc.HeroId) -> void:
 	_available_heroes.erase(Shared.HEROES[hero_id])
 	PlayerManager.players[player_id].hero = Shared.HEROES[hero_id]
 	_ui_hero_picking_screen.make_hero_unavailable(Shared.HEROES[hero_id])
@@ -117,7 +117,7 @@ func _pick_hero_unique(player_id: int, hero_id: Hero.HeroId) -> void:
 
 # ============================== Callbacks ==============================
 
-func _on_ui_hero_picking_screen_hero_locked(hero: Hero) -> void:
+func _on_ui_hero_picking_screen_hero_locked(hero: HeroDesc) -> void:
 	if hero == null: return
 	if _selection_type == SelectionType.UNIQUE:
 		_pick_hero_unique.rpc(multiplayer.get_unique_id(), hero.id)

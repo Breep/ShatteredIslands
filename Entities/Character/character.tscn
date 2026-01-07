@@ -28,13 +28,11 @@ properties/4/path = NodePath(".:hero_id")
 properties/4/spawn = true
 properties/4/replication_mode = 0
 
-[node name="Character" type="CharacterBody3D" node_paths=PackedStringArray("_character_visual", "_character_logic", "_collision_shape", "_interact_module", "_action_module", "anim_events_manager", "families_stats", "_clickable_module", "_clickable_feedback", "stats", "base_stats", "stats_manager", "auto_attack_modifier_registry", "target_module")]
+[node name="Character" type="CharacterBody3D" node_paths=PackedStringArray("_character_visual", "_character_logic", "_collision_shape", "_interact_module", "_action_module", "anim_events_manager", "families_stats", "stats", "base_stats", "stats_manager", "auto_attack_modifier_registry", "target_module")]
 collision_layer = 16
 collision_mask = 16
 motion_mode = 1
 script = ExtResource("1_a1h5o")
-owner_player_id = null
-hero_id = null
 _character_visual = NodePath("CharacterVisual")
 _character_logic = NodePath("CharacterLogic")
 _collision_shape = NodePath("CollisionShape3D")
@@ -42,12 +40,6 @@ _interact_module = NodePath("CharacterLogic/Modules/InteractModule")
 _action_module = NodePath("CharacterLogic/Modules/ActionModule")
 anim_events_manager = NodePath("AnimEventsManager")
 families_stats = NodePath("FamiliesStats")
-_clickable_module = NodePath("")
-_clickable_feedback = NodePath("")
-id = null
-team = null
-battle_id = null
-entity_name = null
 stats = NodePath("Stats/CurrentStats")
 base_stats = NodePath("Stats/BaseStats")
 stats_manager = NodePath("Stats/StatsManager")

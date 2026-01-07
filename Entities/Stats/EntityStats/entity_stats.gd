@@ -261,7 +261,7 @@ func get_buf_stacks_number() -> float:
 	return _armor_stacks + _regen_stacks
 
 
-func reset_from_hero(hero: Hero, lvl: int) -> void:
+func reset_from_hero_desc(hero: HeroDesc, lvl: int) -> void:
 	health_max = hero.stats[lvl].health_max
 	health = health_max
 	mana_max = hero.stats[lvl].mana_max

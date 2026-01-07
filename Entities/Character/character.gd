@@ -2,15 +2,13 @@ class_name Character
 extends Entity
 
 #region ============================== Editor-only tools ==============================
-const _HEROES_3D: Dictionary[Hero.HeroId, PackedScene] = {
-	Hero.HeroId.UNDEF: preload("res://Entities/Heroes/Undef/undef.tscn"),
-	Hero.HeroId.DARK_KNIGHT: preload("res://Entities/Heroes/DarkKnight/dark_knight.tscn"),
+const _HEROES_3D: Dictionary[HeroDesc.HeroId, PackedScene] = {
+	HeroDesc.HeroId.UNDEF: preload("res://Entities/Heroes/Undef/undef.tscn"),
+	HeroDesc.HeroId.DARK_KNIGHT: preload("res://Entities/Heroes/DarkKnight/dark_knight.tscn"),
 }
 #endregion
 
 #region ============================== Signal ==============================
-signal fight_is_won()
-signal fight_is_lost()
 signal aa_done()
 signal ultimate_casted()
 #endregion
@@ -37,8 +35,8 @@ var fighting_state: FightingState:
 #region ============================== Export ==============================
 @export_group("Network")
 @export_subgroup("Variables")
-var _hero_id := Hero.HeroId.UNDEF
-@export var hero_id: Hero.HeroId: # ID of the hero this character represent
+var _hero_id := HeroDesc.HeroId.UNDEF
+@export var hero_id: HeroDesc.HeroId: # ID of the hero this character represent
 	get: return _hero_id
 	set(value):
 		if value == _hero_id or value < 0: return

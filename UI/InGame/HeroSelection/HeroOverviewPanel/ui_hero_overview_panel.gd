@@ -18,13 +18,13 @@ func _ready() -> void:
 
 # ============================== Public functions ==============================
 
-func display_hero_information(hero: Hero) -> void:
+func display_hero_information(hero: HeroDesc) -> void:
 	_content_container.show()
 	_update_content(hero)
 
 # ============================== Private functions ==============================
 
-func _update_content(hero: Hero) -> void:
+func _update_content(hero: HeroDesc) -> void:
 	_hero_name_label.text = hero.name
 	_hero_portrait.texture = hero.portrait
 	var stats := EntityStats.new()

@@ -163,7 +163,7 @@ func _on_character_owner_aa_done() -> void:
 		if _spark_of_light_activated:
 			_register_spark_of_light()
 
-# ============================== Hero specific callbacks ==============================
+# ============================== HeroDesc specific callbacks ==============================
 
 # ===== SUPER STRIKE
 

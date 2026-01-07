@@ -31,7 +31,7 @@ func _ready() -> void:
 # ============================== Public functions ==============================
 
 func update_content(player: Player, current_stats: EntityStats) -> void:
-	var hero: Hero = player.hero
+	var hero: HeroDesc = player.hero
 	_player_name_label.text = str(player.name)
 	_hero_name_label.text = str(hero.name)
 	_statistic_container.update_stats(current_stats)

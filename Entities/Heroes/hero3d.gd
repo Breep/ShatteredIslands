@@ -2,7 +2,7 @@ class_name Hero3D
 extends StaticBody3D
 
 @export_group("Configuration")
-@export var hero: Hero
+@export var hero: HeroDesc
 
 @export_group("Local Nodes")
 @export var collision_shape: CollisionShape3D

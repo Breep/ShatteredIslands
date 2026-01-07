@@ -18,14 +18,14 @@ enum TargettingStrategy {
 	
 	# ------- HIGHEST HP (Absolute Value) -------
 	HIGHEST_HP_ENEMY,       # Enemy with highest current HP
-	HIGHEST_HP_HERO_ENEMY,  # Enemy Hero with highest current HP
+	HIGHEST_HP_HERO_ENEMY,  # Enemy HeroDesc with highest current HP
 	
 	# ------- LOWEST HP % (Percentage) -------
 	LOWEST_HP_PERCENT_ENEMY, # Enemy with lowest HP percentage
 	
 	# ------- HIGHEST HP % (Percentage) -------
 	HIGHEST_HP_PERCENT_ENEMY,      # Enemy with highest HP percentage
-	HIGHEST_HP_PERCENT_HERO_ENEMY, # Enemy Hero with highest HP percentage
+	HIGHEST_HP_PERCENT_HERO_ENEMY, # Enemy HeroDesc with highest HP percentage
 	
 	# ------- RANDOM -------
 	RANDOM, # Random entity except self (can be null)

@@ -56,7 +56,7 @@ func _setup_local_nodes() -> void:
 
 # ============================== Callbacks ==============================
 
-func _on_player_hero_changed(_player: Player, hero: Hero) -> void:
+func _on_player_hero_changed(_player: Player, hero: HeroDesc) -> void:
 	_hero_portrait_button.set_texture(player.hero.portrait)
 
 

@@ -50,7 +50,7 @@ func _ready() -> void:
 # ============================== Public functions ==============================
 
 func update_content(player: Player) -> void:
-	var hero: Hero = player.hero
+	var hero: HeroDesc = player.hero
 	_hex_portrait_button.set_texture(hero.portrait)
 	_ui_in_game_player_viewer.update_content(player)
 	_ui_all_families_portrait.update_content(player)

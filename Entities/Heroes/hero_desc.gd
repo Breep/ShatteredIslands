@@ -1,4 +1,4 @@
-class_name Hero
+class_name HeroDesc
 extends Resource
 
 # ============================== Enum ==============================
