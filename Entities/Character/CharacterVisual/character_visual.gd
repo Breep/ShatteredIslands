@@ -8,6 +8,7 @@ extends Node3D
 @export var _magic_popup_spawn: SpawnPoint
 @export var _poison_popup_spawn: SpawnPoint
 @export var _heal_popup_spawn: SpawnPoint
+@export var _pure_popup_spawn: SpawnPoint
 
 @export_group("Local Nodes")
 @export var _health_bar: ColorRect
@@ -146,6 +147,10 @@ func damage_popup(amount: float, damage_type: Utils.DamageType, is_critic: bool 
 		Utils.DamageType.HEAL:
 			popup.global_position = _heal_popup_spawn.global_position + offset
 			popup.outline_modulate(Color8(51, 255, 153, 255))
+		Utils.DamageType.PURE:
+			popup.global_position = _pure_popup_spawn.global_position + offset
+			popup.outline_modulate(Color.DARK_GOLDENROD)
+		
 	
 	popup.look_at(get_viewport().get_camera_3d().global_position)
 

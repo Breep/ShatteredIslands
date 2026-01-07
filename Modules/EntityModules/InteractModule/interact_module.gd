@@ -19,7 +19,7 @@ func _ready() -> void:
 func take_damage(damage: float, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
 	if _owner.stats.health <= 0 or _owner.is_dead: return 0
 	var damage_before_armor: float = 0
-	if multiplayer.is_server():
+	if damage_type != Utils.DamageType.PURE and multiplayer.is_server():
 		if _is_dodged(Utils.damage_to_action(damage_type)):
 			return 0
 		damage *= _get_resistance_vulnerability_multiplier(Utils.damage_to_action(damage_type))

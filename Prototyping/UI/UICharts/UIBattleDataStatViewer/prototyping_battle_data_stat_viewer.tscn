@@ -45,6 +45,10 @@ text = "ADD Magical damage"
 layout_mode = 2
 text = "ADD poison damage"
 
+[node name="AddPureDamageButton" type="Button" parent="ProtoBattleDataStatViewer"]
+layout_mode = 2
+text = "ADD pure damage"
+
 [node name="ProtoBattleDataStatsPanel" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 698.0
@@ -132,6 +136,7 @@ text = "Add MISC_RECEIVED BSD"
 [connection signal="pressed" from="ProtoBattleDataStatViewer/AddPhysicalDamageButton" to="." method="_on_add_physical_damage_button_pressed"]
 [connection signal="pressed" from="ProtoBattleDataStatViewer/AddMagicalDamageButton" to="." method="_on_add_magical_damage_button_pressed"]
 [connection signal="pressed" from="ProtoBattleDataStatViewer/AddPoisonDamageButton" to="." method="_on_add_poison_damage_button_pressed"]
+[connection signal="pressed" from="ProtoBattleDataStatViewer/AddPureDamageButton" to="." method="_on_add_pure_damage_button_pressed"]
 [connection signal="pressed" from="ProtoBattleDataStatsPanel/AddBDSButton" to="." method="_on_add_bds_button_pressed"]
 [connection signal="pressed" from="ProtoBattleDataStatsPanel/AddRandomValue" to="." method="_on_add_random_value_pressed"]
 [connection signal="pressed" from="VBoxContainer/AddDamageDoneButton" to="." method="_on_add_damage_done_button_pressed"]

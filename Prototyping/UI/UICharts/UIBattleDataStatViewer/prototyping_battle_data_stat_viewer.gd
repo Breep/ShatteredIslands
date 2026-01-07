@@ -19,6 +19,10 @@ func _on_add_magical_damage_button_pressed() -> void:
 
 func _on_add_poison_damage_button_pressed() -> void:
 	_bds.register_action(Utils.ActionType.DAMAGE_POISON, 10)
+
+
+func _on_add_pure_damage_button_pressed() -> void:
+	_bds.register_action(Utils.ActionType.DAMAGE_PURE, 12)
 #endregion
 
 #region ============================== Battle data stats panel ==============================

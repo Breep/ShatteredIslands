@@ -356,7 +356,7 @@ func _get_crit_multiplier(action_type: Utils.ActionType) -> Dictionary:
 	return {"multiplier": remap(crit_multiplier_percent, 0, 100, 1, 2), "is_critical": is_critical}
 
 func _get_strenght_weakness_multiplier(action_type: Utils.ActionType) -> float:
-	var strenght: float = _owner.stats.get_stat(EntityStats.StatType.STRENGTH, action_type)
+	var strength: float = _owner.stats.get_stat(EntityStats.StatType.STRENGTH, action_type)
 	var weakness: float = _owner.stats.get_stat(EntityStats.StatType.WEAKNESS, action_type)
-	return (100.0 + strenght) / (100.0 + weakness)
+	return (100.0 + strength) / (100.0 + weakness)
 #endregion
