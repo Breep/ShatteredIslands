@@ -1,17 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://bbnioyc6ti8wn"]
+[gd_scene load_steps=11 format=3 uid="uid://bbnioyc6ti8wn"]
 
 [ext_resource type="Script" uid="uid://dsiet7v8tbihn" path="res://Entities/Character/character.gd" id="1_a1h5o"]
 [ext_resource type="PackedScene" uid="uid://cf4y1g6c4ia6w" path="res://Entities/Character/CharacterVisual/character_visual.tscn" id="2_xasj2"]
 [ext_resource type="PackedScene" uid="uid://qgjyscmtp6t3" path="res://Entities/Character/CharacterLogic/character_logic.tscn" id="3_4th1x"]
 [ext_resource type="PackedScene" uid="uid://biqqopaoa3486" path="res://Entities/Character/CharacterStats/families_stats.tscn" id="3_b3hxd"]
 [ext_resource type="PackedScene" uid="uid://cjqhs57x28gtu" path="res://Entities/Stats/EntityStats/entity_stats.tscn" id="4_dhfj1"]
-[ext_resource type="PackedScene" uid="uid://dqrhym1sskng8" path="res://Entities/Turret/turret.tscn" id="4_roimm"]
-[ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="5_an1mw"]
-[ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://Modules/PickableClickable/PickableModule/pickable_module.tscn" id="7_h7fwd"]
-[ext_resource type="PackedScene" uid="uid://c8630px7dwlvh" path="res://Modules/PickableClickable/Constraints/PickableCollider/pickable_collider.tscn" id="8_b3hxd"]
-[ext_resource type="PackedScene" uid="uid://dyyf8nhixlubs" path="res://Modules/PickableClickable/Constraints/SpawnAreaChecker/spawn_area_checker.tscn" id="9_dhfj1"]
-[ext_resource type="PackedScene" uid="uid://bg5efhnq0erdv" path="res://Modules/PickableClickable/ClickableModule/clickable_module.tscn" id="9_sjrcw"]
-[ext_resource type="PackedScene" uid="uid://cp34ya8q3861m" path="res://Modules/PickableClickable/VisualFeedback/clickable_selection_feedback.tscn" id="13_jwnrq"]
 [ext_resource type="PackedScene" uid="uid://chxhutes821g8" path="res://Entities/Stats/EntityStatsManager/entity_stats_manager.tscn" id="14_6s1v2"]
 [ext_resource type="PackedScene" uid="uid://cyp7s6axjgfdt" path="res://Modules/EntityModules/AutoAttackModule/AutoAttackManager/auto_attack_modifier_registry.tscn" id="15_liv0f"]
 [ext_resource type="PackedScene" uid="uid://b64wu2s6lpcv7" path="res://Entities/AnimEventsManager/anim_events_manager.tscn" id="16_s266u"]
@@ -35,21 +28,26 @@ properties/4/path = NodePath(".:hero_id")
 properties/4/spawn = true
 properties/4/replication_mode = 0
 
-[node name="Character" type="CharacterBody3D" node_paths=PackedStringArray("_character_visual", "_character_logic", "_turret", "_collision_shape", "_interact_module", "_action_module", "anim_events_manager", "families_stats", "_clickable_module", "_clickable_feedback", "stats", "base_stats", "stats_manager", "auto_attack_modifier_registry", "target_module")]
+[node name="Character" type="CharacterBody3D" node_paths=PackedStringArray("_character_visual", "_character_logic", "_collision_shape", "_interact_module", "_action_module", "anim_events_manager", "families_stats", "_clickable_module", "_clickable_feedback", "stats", "base_stats", "stats_manager", "auto_attack_modifier_registry", "target_module")]
 collision_layer = 16
 collision_mask = 16
 motion_mode = 1
 script = ExtResource("1_a1h5o")
+owner_player_id = null
+hero_id = null
 _character_visual = NodePath("CharacterVisual")
 _character_logic = NodePath("CharacterLogic")
-_turret = NodePath("TurretCenterPoint/Turret")
 _collision_shape = NodePath("CollisionShape3D")
 _interact_module = NodePath("CharacterLogic/Modules/InteractModule")
 _action_module = NodePath("CharacterLogic/Modules/ActionModule")
 anim_events_manager = NodePath("AnimEventsManager")
 families_stats = NodePath("FamiliesStats")
-_clickable_module = NodePath("ClickableModule")
-_clickable_feedback = NodePath("ClickableSelectionFeedback")
+_clickable_module = NodePath("")
+_clickable_feedback = NodePath("")
+id = null
+team = null
+battle_id = null
+entity_name = null
 stats = NodePath("Stats/CurrentStats")
 base_stats = NodePath("Stats/BaseStats")
 stats_manager = NodePath("Stats/StatsManager")
@@ -113,7 +111,7 @@ _owner = NodePath("../../..")
 _owner = NodePath("../../..")
 
 [node name="AutoAttackModule" parent="CharacterLogic/Modules" index="3" node_paths=PackedStringArray("_projectile_spawn", "_owner")]
-_projectile_spawn = NodePath("../../../TurretCenterPoint/Turret/SpawnPoint")
+_projectile_spawn = NodePath("")
 _owner = NodePath("../../..")
 
 [node name="TargetModule" parent="CharacterLogic/Modules" index="4" node_paths=PackedStringArray("_owner")]
@@ -147,45 +145,9 @@ _owner = NodePath("../../..")
 _owner = NodePath("../../..")
 _action_module = NodePath("../../Modules/ActionModule")
 
-[node name="TurretCenterPoint" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.36537, 0)
-visible = false
-
-[node name="Turret" parent="TurretCenterPoint" node_paths=PackedStringArray("_auto_attack_module") instance=ExtResource("4_roimm")]
-transform = Transform3D(0.495, 0, 0, 0, 0.495, 0, 0, 0, 0.495, 1.10818, -0.0624669, 0)
-visible = false
-_auto_attack_module = NodePath("../../CharacterLogic/Modules/AutoAttackModule")
-
-[node name="TurretVisual" parent="TurretCenterPoint/Turret" index="0"]
-transform = Transform3D(-1.61732e-08, 0, -0.37, 0, 0.37, 0, 0.37, 0, -1.61732e-08, 0, 0, -0.966609)
-
-[node name="SpawnPoint" parent="TurretCenterPoint/Turret" index="1"]
-transform = Transform3D(0.5799994, 0, 0, 0, 0.5799994, 0, 0, 0, 0.5799994, -2.1106486, -4.5066633, -5.144084)
-
-[node name="AnimHoveringModule" parent="TurretCenterPoint/Turret" node_paths=PackedStringArray("_owner") instance=ExtResource("5_an1mw")]
-_owner = NodePath("..")
-_hover_power = 0.2
-_hover_period = 2.0
-
-[node name="PickableModule" parent="." node_paths=PackedStringArray("_owner", "_pickable_collider", "_spawn_area_checker") instance=ExtResource("7_h7fwd")]
-_owner = NodePath("..")
-_pickable_collider = NodePath("../PickableCollider")
-_spawn_area_checker = NodePath("../SpawnAreaChecker")
-
-[node name="ClickableModule" parent="." node_paths=PackedStringArray("_owner") instance=ExtResource("9_sjrcw")]
-_owner = NodePath("..")
-
-[node name="ClickableSelectionFeedback" parent="." instance=ExtResource("13_jwnrq")]
-color = Color(0.909681, 0, 0.246544, 1)
-
-[node name="PickableCollider" parent="." instance=ExtResource("8_b3hxd")]
-
-[node name="SpawnAreaChecker" parent="." instance=ExtResource("9_dhfj1")]
-
 [node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_interval = 1.0
 delta_interval = 1.0
 replication_config = SubResource("SceneReplicationConfig_5ed6q")
 
 [editable path="CharacterLogic"]
-[editable path="TurretCenterPoint/Turret"]

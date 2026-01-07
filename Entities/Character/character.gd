@@ -37,7 +37,6 @@ var fighting_state: FightingState:
 #region ============================== Export ==============================
 @export_group("Network")
 @export_subgroup("Variables")
-@export var owner_player_id: int # ID of the player owner of this character
 var _hero_id := Hero.HeroId.UNDEF
 @export var hero_id: Hero.HeroId: # ID of the hero this character represent
 	get: return _hero_id
@@ -57,14 +56,9 @@ var _hero_id := Hero.HeroId.UNDEF
 
 @export_group("Stats")
 @export var families_stats: FamiliesStats
-
-@export_group("Modules")
-@export var _clickable_module: ClickableModule
-@export var _clickable_feedback: ClickableSelectionFeedback
 #endregion
 
 #region ============================== Public variables ==============================
-var player: Player
 var fighting_area: FightingArea
 var visual: CharacterVisual:
 	get: return _character_visual
@@ -75,19 +69,7 @@ var _fighting_state: FightingState = FightingState.UNDEF
 #endregion
 
 #region ============================== Public functions ==============================
-func apply_cards_upgrade(deck: PlayerDeck) -> void:
-	if not is_node_ready(): return
-	base_stats.reset_from_hero(_hero_3D.hero, player.lvl)
-	stats.armor_stacks = 0
-	stats.ignite_stacks = 0
-	stats.poison_stacks = 0
-	stats.regen_stacks = 0
-	for card in deck.get_active_deck():
-		card.player_upgrade.apply(families_stats, card.lvl)
-
-
 func connect_to_fighting_area(fighting_area_ref: FightingArea) -> void:
-	_reset()
 	fighting_area = fighting_area_ref
 	_character_logic.connect_to_fighting_area(fighting_area)
 	fighting_area.fighting_manager.fight_is_over.connect(_on_fighting_manager_fight_is_over, CONNECT_ONE_SHOT)
@@ -192,51 +174,28 @@ func take_dispell(value: float, is_critical: bool, action_id: StringName, source
 #endregion
 
 #region ============================== Node base functions ==============================
-func _ready() -> void:
-	if owner_player_id != 0:
-		player = PlayerManager.players[owner_player_id]
-		player.character = self
-	
-	player.lvl_changed.connect(_on_player_lvl_changed)
-	
-	_character_logic.connect_to_player(player)
-	
+func _ready() -> void:	
 	if battle_id == -1:
 		_character_visual.hide()
 		if _turret != null: _turret.hide()
 	
-	
 	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
-	Events.player_won_a_fight.connect(_on_events_player_won_a_fight)
-	Events.player_lost_a_fight.connect(_on_events_player_lost_a_fight)
-	Events.entity_cliked.connect(_on_events_entity_clicked)
 	
 	_update_hero()
-	if player != null: apply_cards_upgrade(player.deck)
 	
 	stats.health_changed.connect(_on_stats_health_changed)
 	
 	var aa_module: AutoAttackModule = _character_logic.modules[Module.ModuleType.AUTOATTACK]
 	aa_module.attack_done.connect(_on_aa_module_attack_done)
 	
-	if player == PlayerManager.get_local_player():
-		_clickable_feedback.color = Color.DARK_BLUE
-		_clickable_feedback.set_active()
-	else:
-		_clickable_feedback.color = Color.CRIMSON
-	
 	anim_events_manager.attack_hit_frame.connect(_on_anim_events_manager_attack_hit_frame)
 	
 	_character_visual.update_health_bar(stats.health, stats.health_max)
-	entity_name = player.name + "_" + _hero_3D.name
+	entity_name = _hero_3D.name
 #endregion
 
 #region ============================== Private functions ==============================
-func _reset() -> void:
-	apply_cards_upgrade(player.deck)
-
-
 func _update_hero() -> void:
 	if not is_node_ready(): return
 	if _hero_3D != null:
@@ -247,7 +206,6 @@ func _update_hero() -> void:
 	var hero_height: float = (_collision_shape.shape as CapsuleShape3D).height
 	_character_visual.position.y = hero_height + 1
 	add_child(_hero_3D)
-	_clickable_module.update_mesh([_hero_3D])
 #endregion
 
 #region ============================== Private ==============================
@@ -284,28 +242,6 @@ func _on_stats_health_changed(new_health: int) -> void:
 	if _character_visual != null: _character_visual.update_health_bar(new_health, stats.health_max)
 	if new_health <= 0:
 		signal_death()
-
-
-func _on_events_player_won_a_fight(winner: Player) -> void:
-	if winner == player:
-		fight_is_won.emit()
-
-
-func _on_events_player_lost_a_fight(looser: Player) -> void:
-	if looser == player:
-		fight_is_lost.emit()
-
-
-func _on_events_entity_clicked(entity: Entity) -> void:
-	if player == PlayerManager.get_local_player(): return
-	if not entity == self:
-		_clickable_feedback.set_inactive()
-	else:
-		_clickable_feedback.set_active()
-
-
-func _on_player_lvl_changed(_self_ref: Player, _new_lvl: int) -> void:
-	apply_cards_upgrade(player.deck)
 
  
 func _on_aa_module_attack_done() -> void:

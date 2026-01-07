@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqno5p3aprq7f"]
+
+[ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Entities/Character/character.tscn" id="1_icvx6"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_d4u4x"]
+size = Vector2(20, 20)
+
+[node name="PrototypingEntity" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("QuadMesh_d4u4x")
+
+[node name="Character" parent="." instance=ExtResource("1_icvx6")]

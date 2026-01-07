@@ -188,7 +188,9 @@ func _apply_all_cards_upgrades() -> void:
 	if deck == null or character == null:
 		printerr("Player: Can't apply cards upgrades")
 		return
-	character.apply_cards_upgrade(deck)
+	for card in deck.get_active_deck():
+		card.player_upgrade.apply(character.families_stats, card.lvl)
+
 
 
 func _check_lvl_up() -> void:
