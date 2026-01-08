@@ -51,7 +51,7 @@ func direct_attack_percent(target: Entity, damage_percent: float, damage_type: U
 		Utils.PercentModifier.CURRENT_HP:
 			hp = target.stats.health
 		Utils.PercentModifier.LOST_HP:
-			hp = target.stats.health_max - _owner.stats.health
+			hp = target.stats.health_max - target.stats.health
 	var damage: float = hp * damage_percent / 100.0
 	direct_attack(target, damage, damage_type, action_id)
 

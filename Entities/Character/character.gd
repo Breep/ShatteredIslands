@@ -46,7 +46,6 @@ var _hero_id := HeroDesc.HeroId.UNDEF
 @export var _character_visual: CharacterVisual
 @export var _character_logic: CharacterLogic
 @export var _turret: Turret
-@export var _hero_3D: Hero3D
 @export var _collision_shape: CollisionShape3D
 @export var _interact_module: InteractModule
 @export var _action_module: ActionModule
@@ -70,7 +69,6 @@ var _fighting_state: FightingState = FightingState.UNDEF
 func connect_to_fighting_area(fighting_area_ref: FightingArea) -> void:
 	fighting_area = fighting_area_ref
 	_character_logic.connect_to_fighting_area(fighting_area)
-	fighting_area.fighting_manager.fight_is_over.connect(_on_fighting_manager_fight_is_over, CONNECT_ONE_SHOT)
 
 
 func on_active_island() -> void: # TODO Should be a signal no ?
@@ -127,7 +125,7 @@ func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictiona
 
 func cast_ultimate() -> void:
 	ultimate_casted.emit()
-	_hero_3D.cast_ultimate()
+	#_hero_3D.cast_ultimate()
 
 func heal(target: Entity, heal_amount: float, action_id: StringName) -> void:
 	_action_module.heal(target, heal_amount, action_id)
@@ -138,8 +136,8 @@ func heal_percent(target: Entity, percent: float, percent_modifier: Utils.Percen
 func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Utils.StackType, action_id: StringName, duration: float = 5.0) -> void:
 	_action_module.inflict_condition_stacks(target, stacks_number, stack_type, action_id, duration)
 
-func ultimate() -> void:
-	_hero_3D.ultimate()
+#func ultimate() -> void:
+	#_hero_3D.ultimate()
 
 func summon_entity(entity_type: EntityType, entity_spawn_global_position: Vector3, entity_modifier: Dictionary) -> void:
 	_action_module.summon_entity(entity_type, entity_spawn_global_position, entity_modifier)
@@ -180,7 +178,6 @@ func _ready() -> void:
 	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
 	
-	_update_hero()
 	
 	stats.health_changed.connect(_on_stats_health_changed)
 	
@@ -190,20 +187,10 @@ func _ready() -> void:
 	anim_events_manager.attack_hit_frame.connect(_on_anim_events_manager_attack_hit_frame)
 	
 	_character_visual.update_health_bar(stats.health, stats.health_max)
-	entity_name = _hero_3D.name
 #endregion
 
 #region ============================== Private functions ==============================
-func _update_hero() -> void:
-	if not is_node_ready(): return
-	if _hero_3D != null:
-		_hero_3D.queue_free()
-	_hero_3D = _HEROES_3D[hero_id].instantiate()
-	_hero_3D.character_owner = self
-	_collision_shape.shape = _hero_3D.collision_shape.shape.duplicate() # Update Collider
-	var hero_height: float = (_collision_shape.shape as CapsuleShape3D).height
-	_character_visual.position.y = hero_height + 1
-	add_child(_hero_3D)
+
 #endregion
 
 #region ============================== Private ==============================
@@ -213,10 +200,6 @@ func _handle_death() -> void:
 #endregion
 
 #region ============================== Other callbacks ==============================
-func _on_fighting_manager_fight_is_over(_fighting_manager, _winner_team) -> void:
-	_character_logic.stop()
-
-
 func _on_gfm_fighting_phase_state_changed(fighting_phase_state: GlobalFightingManager.FightingPhaseState) -> void:
 	match fighting_phase_state:
 		GlobalFightingManager.FightingPhaseState.POSITIONING:

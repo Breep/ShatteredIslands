@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bbnioyc6ti8wn"]
+[gd_scene load_steps=9 format=3 uid="uid://bbnioyc6ti8wn"]
 
 [ext_resource type="Script" uid="uid://dsiet7v8tbihn" path="res://Entities/Character/character.gd" id="1_a1h5o"]
 [ext_resource type="PackedScene" uid="uid://cf4y1g6c4ia6w" path="res://Entities/Character/CharacterVisual/character_visual.tscn" id="2_xasj2"]
@@ -6,29 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://biqqopaoa3486" path="res://Entities/Character/CharacterStats/families_stats.tscn" id="3_b3hxd"]
 [ext_resource type="PackedScene" uid="uid://cjqhs57x28gtu" path="res://Entities/Stats/EntityStats/entity_stats.tscn" id="4_dhfj1"]
 [ext_resource type="PackedScene" uid="uid://chxhutes821g8" path="res://Entities/Stats/EntityStatsManager/entity_stats_manager.tscn" id="14_6s1v2"]
-[ext_resource type="PackedScene" uid="uid://cyp7s6axjgfdt" path="res://Modules/EntityModules/AutoAttackModule/AutoAttackManager/auto_attack_modifier_registry.tscn" id="15_liv0f"]
 [ext_resource type="PackedScene" uid="uid://b64wu2s6lpcv7" path="res://Entities/AnimEventsManager/anim_events_manager.tscn" id="16_s266u"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rxegs"]
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5ed6q"]
-properties/0/path = NodePath(".:owner_player_id")
-properties/0/spawn = true
-properties/0/replication_mode = 0
-properties/1/path = NodePath(".:id")
-properties/1/spawn = true
-properties/1/replication_mode = 0
-properties/2/path = NodePath(".:team")
-properties/2/spawn = true
-properties/2/replication_mode = 2
-properties/3/path = NodePath(".:battle_id")
-properties/3/spawn = true
-properties/3/replication_mode = 2
-properties/4/path = NodePath(".:hero_id")
-properties/4/spawn = true
-properties/4/replication_mode = 0
-
-[node name="Character" type="CharacterBody3D" node_paths=PackedStringArray("_character_visual", "_character_logic", "_collision_shape", "_interact_module", "_action_module", "anim_events_manager", "families_stats", "stats", "base_stats", "stats_manager", "auto_attack_modifier_registry", "target_module")]
+[node name="Character" type="CharacterBody3D" node_paths=PackedStringArray("_character_visual", "_character_logic", "_collision_shape", "_interact_module", "_action_module", "anim_events_manager", "families_stats", "stats", "base_stats", "stats_manager", "target_module")]
 collision_layer = 16
 collision_mask = 16
 motion_mode = 1
@@ -43,7 +25,6 @@ families_stats = NodePath("FamiliesStats")
 stats = NodePath("Stats/CurrentStats")
 base_stats = NodePath("Stats/BaseStats")
 stats_manager = NodePath("Stats/StatsManager")
-auto_attack_modifier_registry = NodePath("AutoAttackModifierRegistry")
 target_module = NodePath("CharacterLogic/Modules/TargetModule")
 
 [node name="Stats" type="Node" parent="."]
@@ -55,8 +36,6 @@ _entity_stats = NodePath("../CurrentStats")
 _entity_base_stats = NodePath("../BaseStats")
 
 [node name="BaseStats" parent="Stats" instance=ExtResource("4_dhfj1")]
-
-[node name="AutoAttackModifierRegistry" parent="." instance=ExtResource("15_liv0f")]
 
 [node name="AnimEventsManager" parent="." instance=ExtResource("16_s266u")]
 
@@ -102,8 +81,7 @@ _owner = NodePath("../../..")
 [node name="InteractModule" parent="CharacterLogic/Modules" index="2" node_paths=PackedStringArray("_owner")]
 _owner = NodePath("../../..")
 
-[node name="AutoAttackModule" parent="CharacterLogic/Modules" index="3" node_paths=PackedStringArray("_projectile_spawn", "_owner")]
-_projectile_spawn = NodePath("")
+[node name="AutoAttackModule" parent="CharacterLogic/Modules" index="3" node_paths=PackedStringArray("_owner")]
 _owner = NodePath("../../..")
 
 [node name="TargetModule" parent="CharacterLogic/Modules" index="4" node_paths=PackedStringArray("_owner")]
@@ -136,10 +114,5 @@ _owner = NodePath("../../..")
 [node name="NecroManager" parent="CharacterLogic/FamiliesManagers" index="8" node_paths=PackedStringArray("_owner", "_action_module")]
 _owner = NodePath("../../..")
 _action_module = NodePath("../../Modules/ActionModule")
-
-[node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_interval = 1.0
-delta_interval = 1.0
-replication_config = SubResource("SceneReplicationConfig_5ed6q")
 
 [editable path="CharacterLogic"]

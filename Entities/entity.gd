@@ -1,8 +1,9 @@
 class_name Entity
 extends CharacterBody3D
 
-# ============================== Signals ==============================
+# == VIRTUAL CLASS ==
 
+#region ============================== Signals ==============================
 signal died(self_ref: Entity)
 func signal_death() -> void:
 	_is_dead = true
@@ -53,15 +54,19 @@ func signal_stack_taken(stack_type: Utils.StackType, stack_number: float, is_cri
 signal auto_attack_started(is_critical: bool)
 func signal_auto_attack_started(is_critical: bool) -> void:
 	auto_attack_started.emit(is_critical)
+#endregion
 
+#region ============================== Default Standard Nodes ==============================
+const DEFAULT_TARGET_MODULE_SCENE: PackedScene = preload("res://Modules/EntityModules/TargetModule/target_module.tscn")
+#endregion
 
-# ============================== Public variables ==============================
-
+#region ============================== Public variables ==============================
 var _is_dead: bool = false
 var is_dead: bool:
 	get: return _is_dead
+#endregion
 
-# ============================== Export (Network) ==============================
+# ============================== Export ==============================
 
 @export_group("Network")
 @export var id: int = -1 # Multiplayer ID of the entity
@@ -71,19 +76,19 @@ var is_dead: bool:
 
 # ============================== Local Nodes ==============================
 
-@export_group("Stats")
+
+@export_group("Optional configuration")
+@export_subgroup("Stats")
 @export var stats: EntityStats
 @export var base_stats: EntityStats
 @export var stats_manager: EntityStatsManager
 
-@export_group("Registry")
-@export var auto_attack_modifier_registry: AutoAttackModifierRegistry
-
-@export_group("Logic")
+@export_subgroup("Modules")
 @export var target_module: TargetModule
 
+var auto_attack_modifier_registry: AutoAttackModifierRegistry
 var action_modifiers_manager: ActionModifiersManager
-var stack_manager: StackManager
+var stack_manager: StackManager # TODO
 
 @onready var bds_registry := EntityBDSRegistry.new(entity_name)
 
@@ -129,7 +134,12 @@ func _init() -> void:
 
 
 func _enter_tree() -> void:
+	auto_attack_modifier_registry = AutoAttackModifierRegistry.new()
 	action_modifiers_manager = ActionModifiersManager.new()
+	# Add default module if not already added
+	if target_module == null:
+		target_module = DEFAULT_TARGET_MODULE_SCENE.instantiate().init(self)
+		add_child(target_module)
 
 # ============================== Public functions ==============================
 

@@ -1,12 +1,7 @@
 class_name AutoAttackModifierRegistry
-extends Node
+extends Resource
 
 var _auto_attack_modifiers: Dictionary[StringName, AutoAttackModifier]
-
-# ============================== Node base functions ==============================
-
-func _ready() -> void:
-	pass
 
 # ============================== Public functions ==============================
 
