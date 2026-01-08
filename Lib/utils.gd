@@ -6,6 +6,7 @@ enum ActionType {
 	DAMAGE_PHYSICAL,
 	DAMAGE_MAGICAL,
 	DAMAGE_POISON,
+	DAMAGE_PURE,
 	UTILITY_HEAL,
 	UTILITY_STUN,
 	UTILITY_CLEANSE,
@@ -21,6 +22,7 @@ enum DamageType {
 	PHYSICAL,
 	MAGICAL,
 	POISON,
+	PURE,
 	HEAL,
 }
 
@@ -49,6 +51,7 @@ enum AttackType {
 const DAMAGE_COLORS: Dictionary[DamageType, Color] = {
 	DamageType.PHYSICAL: Color.WHITE,
 	DamageType.MAGICAL: Color.DARK_BLUE,
+	DamageType.PURE: Color.DARK_GOLDENROD,
 	DamageType.POISON: Color.WEB_GREEN,
 	DamageType.HEAL: Color.AQUAMARINE
 }
@@ -90,6 +93,7 @@ func damage_to_action(damage_type: DamageType) -> ActionType:
 		DamageType.PHYSICAL: return ActionType.DAMAGE_PHYSICAL
 		DamageType.MAGICAL: return ActionType.DAMAGE_MAGICAL
 		DamageType.POISON: return ActionType.DAMAGE_POISON
+		DamageType.PURE: return ActionType.DAMAGE_PURE
 		_: return ActionType.DAMAGE_PHYSICAL
 
 
@@ -98,6 +102,7 @@ func get_all_actions() -> Array[ActionType]:
 		ActionType.DAMAGE_PHYSICAL,
 		ActionType.DAMAGE_MAGICAL,
 		ActionType.DAMAGE_POISON,
+		ActionType.DAMAGE_PURE,
 		ActionType.UTILITY_HEAL,
 		ActionType.UTILITY_STUN,
 		ActionType.UTILITY_CLEANSE,

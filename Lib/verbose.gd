@@ -41,6 +41,7 @@ enum Category {
 	BATTLE_WRITER,
 	ENTITY_MANAGER,
 	FIGHTING_AREA,
+	BDS_REGISTERY,
 }
 
 const CATEGORY_PREFIX_TEMPLATES : Dictionary [Category, String] = {
@@ -70,6 +71,7 @@ const CATEGORY_PREFIX_TEMPLATES : Dictionary [Category, String] = {
 	Category.ENTITY_MANAGER:          "(ENTITY_MAN) ",
 	Category.CHARACTER_SPAWNER:       "(CHAR_SPAWN) ",
 	Category.FIGHTING_AREA:           "(FIGHT_AREA) ",
+	Category.BDS_REGISTERY:           "(BDS_REG   ) ",
 }
 
 const PREFIX_TEMPLATES : Dictionary [GameType, String] = {
@@ -120,6 +122,7 @@ var current_categories_level: Dictionary[Category, Level] = {
 	Category.ENTITY_MANAGER:          Level.WARN,
 	Category.CHARACTER_SPAWNER:       Level.WARN,
 	Category.FIGHTING_AREA:           Level.WARN,
+	Category.BDS_REGISTERY:           Level.WARN,
 }
 #endregion
 

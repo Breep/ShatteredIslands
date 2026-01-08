@@ -112,99 +112,106 @@ _critical_chance_labels = {
 0: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCPhysical"),
 1: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCMagical"),
 2: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCPoison"),
-3: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCHeal"),
-4: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCStun"),
-5: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCCleanse"),
-6: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCDispell"),
-7: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCShield"),
-8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCIgnite"),
-9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCPoisonStack"),
-10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCRegen"),
-11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCNecrosis")
+3: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCPure"),
+4: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCHeal"),
+5: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCStun"),
+6: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCCleanse"),
+7: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCDispell"),
+8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCShield"),
+9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCIgnite"),
+10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCPoisonStack"),
+11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCRegen"),
+12: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCNecrosis")
 }
 _critical_multiplier_labels = {
 0: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMPhysical"),
 1: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMMagical"),
 2: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMPoison"),
-3: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMHeal"),
-4: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMStun"),
-5: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMCleanse"),
-6: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMDispell"),
-7: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMShield"),
-8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMIgnite"),
-9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMPoisonStack"),
-10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMRegen"),
-11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMNecrosis")
+3: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMPure"),
+4: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMHeal"),
+5: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMStun"),
+6: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMCleanse"),
+7: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMDispell"),
+8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMShield"),
+9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMIgnite"),
+10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMPoisonStack"),
+11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMRegen"),
+12: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMNecrosis")
 }
 _dodge_labels = {
 0: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgePhysical"),
 1: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeMagical"),
 2: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgePoison"),
-3: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeHeal"),
-4: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeStun"),
-5: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeCleanse"),
-6: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeDispell"),
-7: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeShield"),
-8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeIgnite"),
-9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgePoisonStack"),
-10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeRegen"),
-11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeNecrosis")
+3: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgePure"),
+4: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeHeal"),
+5: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeStun"),
+6: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeCleanse"),
+7: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeDispell"),
+8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeShield"),
+9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeIgnite"),
+10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgePoisonStack"),
+11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeRegen"),
+12: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeNecrosis")
 }
 _resistance_labels = {
 0: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistPhysical"),
 1: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistMagical"),
 2: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistPoison"),
-3: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistHeal"),
-4: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistStun"),
-5: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistCleanse"),
-6: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistDispell"),
-7: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistShield"),
-8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistIgnite"),
-9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistPoisonStack"),
-10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistRegen"),
-11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistNecrosis")
+3: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistPure"),
+4: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistHeal"),
+5: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistStun"),
+6: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistCleanse"),
+7: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistDispell"),
+8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistShield"),
+9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistIgnite"),
+10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistPoisonStack"),
+11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistRegen"),
+12: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistNecrosis")
 }
 _vulnerability_labels = {
 0: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnPhysical"),
 1: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnMagical"),
 2: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnPoison"),
-3: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnHeal"),
-4: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnStun"),
-5: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnCleanse"),
-6: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnDispell"),
-7: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnShield"),
-8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnIgnite"),
-9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnPoisonStack"),
-10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnRegen"),
-11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnNecrosis")
+3: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnPure"),
+4: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnHeal"),
+5: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnStun"),
+6: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnCleanse"),
+7: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnDispell"),
+8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnShield"),
+9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnIgnite"),
+10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnPoisonStack"),
+11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnRegen"),
+12: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnNecrosis")
 }
 _strength_labels = {
 0: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtPhysical"),
 1: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtMagical"),
 2: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtPoison"),
-3: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtHeal"),
-4: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtStun"),
-5: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtCleanse"),
-6: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtDispell"),
-7: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtShield"),
-8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtIgnite"),
-9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtPoisonStack"),
-10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtRegen"),
-11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtNecrosis")
+3: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtPure"),
+4: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtHeal"),
+5: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtStun"),
+6: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtCleanse"),
+7: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtDispell"),
+8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtShield"),
+9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtIgnite"),
+10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtPoisonStack"),
+11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtRegen"),
+12: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtNecrosis")
 }
 _weakness_labels = {
 0: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessPhysical"),
 1: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessMagical"),
 2: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessPoison"),
-3: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessHeal"),
-4: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessStun"),
-5: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessCleanse"),
-6: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessDispell"),
-7: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessShield"),
-8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessIgnite"),
-9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessPoisonStack"),
-10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessRegen"),
-11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessNecrosis")
+3: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessPure"),
+4: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessHeal"),
+5: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessStun"),
+6: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessCleanse"),
+7: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessDispell"),
+8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessShield"),
+9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessIgnite"),
+10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessPoisonStack"),
+11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessRegen"),
+12: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessNecrosis")
 }
 _entity_name_label = NodePath("MarginContainer/Control/EntityNameLabel")
 
@@ -357,62 +364,67 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Physical" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer"]
+[node name="ATPhysical" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Damage Physical"
 vertical_alignment = 1
 
-[node name="Physical2" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer"]
+[node name="ATMagical" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Damage Magical"
 vertical_alignment = 1
 
-[node name="Physical3" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer"]
+[node name="ATPoison" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Damage Poison"
 vertical_alignment = 1
 
-[node name="Physical4" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer"]
+[node name="ATPure" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "DAMAGE PURE"
+vertical_alignment = 1
+
+[node name="ATHeal" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Utility Heal"
 vertical_alignment = 1
 
-[node name="Physical5" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer"]
+[node name="ATStun" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Utility Stun"
 vertical_alignment = 1
 
-[node name="Physical6" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer"]
+[node name="ATCleanse" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Utility Cleanse"
 vertical_alignment = 1
 
-[node name="Physical7" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer"]
+[node name="ATDispell" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Utility Dispell"
 vertical_alignment = 1
 
-[node name="Physical8" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer"]
+[node name="ATShield" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Stack Shield"
 vertical_alignment = 1
 
-[node name="Physical9" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer"]
+[node name="ATIgnite" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Stack Ignite"
 vertical_alignment = 1
 
-[node name="Physical10" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer"]
+[node name="ATPoison2" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Stack Poison"
 vertical_alignment = 1
 
-[node name="Physical11" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer"]
+[node name="ATRegen" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Stack Regen"
 vertical_alignment = 1
 
-[node name="Physical12" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer"]
+[node name="ATNecrosis" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Stack Necrosis"
 vertical_alignment = 1
@@ -457,6 +469,12 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="CCPoison" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CCPure" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "0"
 horizontal_alignment = 1
@@ -561,6 +579,12 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="CMPure" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="CMHeal" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "0"
@@ -654,6 +678,12 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="DodgePoison" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DodgePure" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "0"
 horizontal_alignment = 1
@@ -757,6 +787,12 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="ResistPure" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="ResistHeal" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "0"
@@ -850,6 +886,12 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="VulnPoison" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VulnPure" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "0"
 horizontal_alignment = 1
@@ -953,6 +995,12 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="StrenghtPure" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="StrenghtHeal" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "0"
@@ -1046,6 +1094,12 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="WeaknessPoison" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WeaknessPure" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "0"
 horizontal_alignment = 1

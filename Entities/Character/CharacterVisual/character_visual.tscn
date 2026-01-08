@@ -98,12 +98,13 @@ outline_color = Color(0, 0, 0, 1)
 shadow_size = 10
 shadow_color = Color(0, 0, 0, 0.90700006)
 
-[node name="CharacterVisual" type="Node3D" node_paths=PackedStringArray("_physical_popup_spawn", "_magic_popup_spawn", "_poison_popup_spawn", "_heal_popup_spawn", "_health_bar", "_mana_bar", "_shield_bar", "_ignite_label", "_necrosis_label", "_poison_label", "_regen_label", "_resource_points_container")]
+[node name="CharacterVisual" type="Node3D" node_paths=PackedStringArray("_physical_popup_spawn", "_magic_popup_spawn", "_poison_popup_spawn", "_heal_popup_spawn", "_pure_popup_spawn", "_health_bar", "_mana_bar", "_shield_bar", "_ignite_label", "_necrosis_label", "_poison_label", "_regen_label", "_resource_points_container")]
 script = ExtResource("1_8fkrf")
 _physical_popup_spawn = NodePath("PopUpSpawns/PhysicalDamageCenter/SpawnPoint")
 _magic_popup_spawn = NodePath("PopUpSpawns/PoisonDamageCenter/SpawnPoint2")
 _poison_popup_spawn = NodePath("PopUpSpawns/MagicDamageCenter/SpawnPoint3")
 _heal_popup_spawn = NodePath("PopUpSpawns/HealCenter/SpawnPoint4")
+_pure_popup_spawn = NodePath("PopUpSpawns/PureDamageCenter/SpawnPoint3")
 _health_bar = NodePath("TopUI/Sprite3D/SubViewport/HealthBar")
 _mana_bar = NodePath("TopUI/Sprite3D/SubViewport/ManaBar")
 _shield_bar = NodePath("TopUI/Sprite3D/SubViewport/ShieldBar")
@@ -269,7 +270,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 [node name="VisualToBeDestroyed" parent="PopUpSpawns/HealCenter/SpawnPoint4" index="0"]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 
+[node name="PureDamageCenter" type="Node3D" parent="PopUpSpawns"]
+transform = Transform3D(-4.371137e-08, -0.9999996, 0, 0.9999996, -4.371137e-08, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="SpawnPoint3" parent="PopUpSpawns/PureDamageCenter" instance=ExtResource("5_xieti")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="VisualToBeDestroyed" parent="PopUpSpawns/PureDamageCenter/SpawnPoint3" index="0"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+
 [editable path="PopUpSpawns/PhysicalDamageCenter/SpawnPoint"]
 [editable path="PopUpSpawns/PoisonDamageCenter/SpawnPoint2"]
 [editable path="PopUpSpawns/MagicDamageCenter/SpawnPoint3"]
 [editable path="PopUpSpawns/HealCenter/SpawnPoint4"]
+[editable path="PopUpSpawns/PureDamageCenter/SpawnPoint3"]

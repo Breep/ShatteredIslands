@@ -30,6 +30,7 @@ _hover_period = 10.0
 [node name="UIMainMenu" parent="." instance=ExtResource("2_8c8b4")]
 
 [node name="Tavern_Animated" parent="." instance=ExtResource("7_5g5lb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5412097, 0.7726619, 0.4266317)
 
 [node name="Node3D" type="Node3D" parent="Tavern_Animated"]
 

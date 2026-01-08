@@ -16,6 +16,7 @@ class BattleDataStatDictionary extends Resource:
 		_new_bds_added_signal = new_bds_added_signal
 	
 	func register_action(action_id: StringName, action_type: Utils.ActionType, value: float, _is_critical: bool) -> void:
+		Verbose.trace("Register action "+action_id + " " + str(value),Verbose.Category.BDS_REGISTERY)
 		if not battle_data_stats.has(action_id):
 			battle_data_stats[action_id] = BattleDataStat.new(action_id, _bds_type)
 			_new_bds_added_signal.emit(battle_data_stats[action_id])

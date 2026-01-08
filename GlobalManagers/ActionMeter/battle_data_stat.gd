@@ -7,6 +7,7 @@ const ACTION_COLORS: Dictionary[Utils.ActionType, Color] = {
 	Utils.ActionType.DAMAGE_PHYSICAL: Color.GRAY,
 	Utils.ActionType.DAMAGE_MAGICAL: Color.DARK_BLUE,
 	Utils.ActionType.DAMAGE_POISON: Color.DARK_GREEN,
+	Utils.ActionType.DAMAGE_PURE: Color.DARK_GOLDENROD,
 	Utils.ActionType.UTILITY_HEAL: Color.MEDIUM_AQUAMARINE,
 	Utils.ActionType.UTILITY_STUN: Color.WEB_PURPLE,
 	Utils.ActionType.UTILITY_CLEANSE: Color.CORAL,
@@ -73,8 +74,8 @@ func register_action(action_type: Utils.ActionType, value: float) -> void:
 #region ============================== Static functions ==============================
 static func battle_data_stat_type_to_action_types(bds_type: Type) -> Array[Utils.ActionType]:
 	match bds_type:
-		Type.DAMAGE_DONE:     return [Utils.ActionType.DAMAGE_PHYSICAL, Utils.ActionType.DAMAGE_MAGICAL, Utils.ActionType.DAMAGE_POISON]
-		Type.DAMAGE_RECEIVED: return [Utils.ActionType.DAMAGE_PHYSICAL, Utils.ActionType.DAMAGE_MAGICAL, Utils.ActionType.DAMAGE_POISON]
+		Type.DAMAGE_DONE:     return [Utils.ActionType.DAMAGE_PHYSICAL, Utils.ActionType.DAMAGE_MAGICAL, Utils.ActionType.DAMAGE_POISON, Utils.ActionType.DAMAGE_PURE]
+		Type.DAMAGE_RECEIVED: return [Utils.ActionType.DAMAGE_PHYSICAL, Utils.ActionType.DAMAGE_MAGICAL, Utils.ActionType.DAMAGE_POISON, Utils.ActionType.DAMAGE_PURE]
 		Type.HEAL_DONE:     return [Utils.ActionType.UTILITY_HEAL]
 		Type.HEAL_RECEIVED: return [Utils.ActionType.UTILITY_HEAL]
 		Type.STACK_INFLICTED: return [Utils.ActionType.STACK_ARMOR, Utils.ActionType.STACK_IGNITE, Utils.ActionType.STACK_POISON,
@@ -91,6 +92,7 @@ static func action_type_to_battle_data_stat_type(action_type: Utils.ActionType, 
 		Utils.ActionType.DAMAGE_PHYSICAL: return Type.DAMAGE_DONE     if meta_type == MetaType.ACTION else Type.DAMAGE_RECEIVED
 		Utils.ActionType.DAMAGE_MAGICAL:  return Type.DAMAGE_DONE     if meta_type == MetaType.ACTION else Type.DAMAGE_RECEIVED
 		Utils.ActionType.DAMAGE_POISON:   return Type.DAMAGE_DONE     if meta_type == MetaType.ACTION else Type.DAMAGE_RECEIVED
+		Utils.ActionType.DAMAGE_PURE:     return Type.DAMAGE_DONE     if meta_type == MetaType.ACTION else Type.DAMAGE_RECEIVED
 		Utils.ActionType.UTILITY_HEAL:    return Type.HEAL_DONE       if meta_type == MetaType.ACTION else Type.HEAL_RECEIVED
 		Utils.ActionType.UTILITY_STUN:    return Type.MISC_DONE       if meta_type == MetaType.ACTION else Type.MISC_RECEIVED
 		Utils.ActionType.UTILITY_CLEANSE: return Type.MISC_DONE       if meta_type == MetaType.ACTION else Type.MISC_RECEIVED
