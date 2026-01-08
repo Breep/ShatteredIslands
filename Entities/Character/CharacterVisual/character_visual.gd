@@ -27,7 +27,6 @@ extends Node3D
 
 @export var _resource_points_container: HBoxContainer
 
-
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
@@ -45,7 +44,6 @@ func _ready() -> void:
 		update_health_bar(_owner_entity.stats.health, _owner_entity.stats.health_max)
 		if "mana" in stats and "mana_max" in stats:
 			update_mana_bar(stats.mana, stats.mana_max)
-			
 			if stats.has_signal("mana_changed"):
 				stats.mana_changed.connect(_on_mana_changed)
 			if stats.has_signal("mana_max_changed"):

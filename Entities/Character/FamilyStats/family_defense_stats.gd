@@ -2,7 +2,6 @@ class_name FamilyDefenseStats
 extends FamilyStats
 
 #region Common Card
-
 # [REACTIVE COVER]
 var reactive_cover_activated: bool
 var reactive_cover_chance: float
@@ -49,12 +48,9 @@ var avengers_assemble_crit_chance: float
 # [TOXIC FILTRATION LAYER]
 var toxic_filtration_layer_activated: bool
 var toxic_filtration_layer_efficiency: float
-
 #endregion
 
 #region Rare Card
-
-
 # [SHIELD THROW]
 var shield_throw_activated: bool
 var shield_throw_threshold: float
@@ -69,20 +65,16 @@ var absorption_matrix_chance: float
 var aether_redirector_activated: bool
 var aether_redirector_period: float
 var aether_redirector_shield_amount: float
-
 #endregion
 
 #region Epic Card
-
 # [AEGIS RESONATOR]
 var aegis_resonator_activated: bool
 var aegis_resonator_period: float
 var aegis_resonator_total_shield: float
-
 #endregion
 
 #region Legendary Card
-
 # [FIELD GENERATOR]
 var defense_field_generator_activated: bool
 var defense_field_generator_summon_interval: float
@@ -91,7 +83,6 @@ var defense_field_generator_shield_interval: float
 var defense_field_generator_target_count: int
 var defense_field_generator_max_health: int
 var defense_field_generator_initial_shield: int
-
 #endregion
 
 @export_group("Dual Shield")

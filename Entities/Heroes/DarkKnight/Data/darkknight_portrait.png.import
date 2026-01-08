@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://difeq0pm3hgjs"
-path="res://.godot/imported/darkknight2.png-b40951742cc7bb24061045dfe5d924c8.ctex"
+path="res://.godot/imported/darkknight_portrait.png-8bd520b90f56d01f623b24c10e77f1e3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Data/Heroes/Portraits/darkknight2.png"
-dest_files=["res://.godot/imported/darkknight2.png-b40951742cc7bb24061045dfe5d924c8.ctex"]
+source_file="res://Entities/Heroes/DarkKnight/Data/darkknight_portrait.png"
+dest_files=["res://.godot/imported/darkknight_portrait.png-8bd520b90f56d01f623b24c10e77f1e3.ctex"]
 
 [params]
 

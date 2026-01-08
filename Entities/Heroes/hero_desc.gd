@@ -16,8 +16,6 @@ enum HeroId {
 @export_multiline var description: String
 @export var stats: Dictionary[int, HeroStats]
 @export var aa_projectile_type: Projectile.ProjectileType
-@export var model: PackedScene
-
 @export var skills: Dictionary[Skill.SkillID, Skill]
 
 # ============================== Public functions ==============================

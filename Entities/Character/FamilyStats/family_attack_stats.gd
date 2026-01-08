@@ -2,7 +2,6 @@ class_name FamilyAttackStats
 extends FamilyStats
 
 #region Common Card
-
 # [PROTECTO'SPEAR]
 var protectospear_activated: bool
 var protectospear_chance: float
@@ -60,16 +59,13 @@ var necrotic_bullet_necrosis_stacks: float
 #endregion
 
 #region Rare Card
-
 # [SURGICAL KNIFE]
 var surgical_knife_activated: bool # True if this skill is activated
 var surgical_knife_chance: float # Chance to proc the curative knife
 var surgical_knife_cleanse_amount: float # Number of negative stacks removed
-
 #endregion
 
 #region Epic Card
-
 # [GATLING GUN]
 var gatling_gun_activated: bool # True if this skill is activated
 var gatling_gun_min: float # Min value of the attack speed increased overtime
@@ -79,7 +75,6 @@ var gatling_gun_duration: float # Time needed to go from min to max attack speed
 # [STORM HAMMER]
 var storm_hammer_activated: bool # True if this skill is activated
 var storm_hammer_chance: float # % of chance for an auto-attack to bounce
-
 #endregion
 
 #region Legendary Card

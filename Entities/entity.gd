@@ -64,6 +64,11 @@ const DEFAULT_TARGET_MODULE_SCENE: PackedScene = preload("res://Modules/EntityMo
 var _is_dead: bool = false
 var is_dead: bool:
 	get: return _is_dead
+
+var target_module: TargetModule
+var auto_attack_modifier_registry: AutoAttackModifierRegistry
+var action_modifiers_manager: ActionModifiersManager
+var stack_manager: StackManager # TODO
 #endregion
 
 # ============================== Export ==============================
@@ -83,18 +88,15 @@ var is_dead: bool:
 @export var base_stats: EntityStats
 @export var stats_manager: EntityStatsManager
 
-@export_subgroup("Modules")
-@export var target_module: TargetModule
-
-var auto_attack_modifier_registry: AutoAttackModifierRegistry
-var action_modifiers_manager: ActionModifiersManager
-var stack_manager: StackManager # TODO
-
 @onready var bds_registry := EntityBDSRegistry.new(entity_name)
 
-# ============================== Private variables ==============================
-
-# ============================== Enums ==============================
+#region ============================== Enums ==============================
+enum FightingState {
+	POSITIONING,
+	FIGHTING,
+	CELEBRATING,
+	UNDEF
+}
 
 enum EntityType {
 	CHARACTER,
@@ -116,33 +118,44 @@ enum FieldGeneratorModifier {
 	INITIAL_SHIELD,
 	TARGET_COUNT
 }
+#endregion
 
-# ============================== Constants ==============================
+#region ============================== Fighting State ==============================
+signal fighting_state_changed(new_fighting_state: FightingState)
+var _fighting_state: FightingState = FightingState.UNDEF
+var fighting_state: FightingState:
+	get: return _fighting_state
+	set(value):
+		if value != _fighting_state:
+			_fighting_state = value
+			fighting_state_changed.emit(_fighting_state)
+#endregion
 
-const SIGNAL_NAME_SPAWNED: String = "spawned"
-
-# ============================== Static variables ==============================
-
+#region ============================== Static variables ==============================
 static var instance_count: int = 0
+#endregion
 
-# ============================== Node base functions ==============================
-
+#region ============================== Node base functions ==============================
 func _init() -> void:
-	id = instance_count
 	#print("DEBUG: Entity Init ", self, " ID: ", id, " -> ", instance_count, " (Next: ", instance_count + 1, ")")
+	id = instance_count
 	instance_count += 1
 
 
 func _enter_tree() -> void:
+	_entity_enter_tree()
+
+
+func _entity_enter_tree() -> void:
 	auto_attack_modifier_registry = AutoAttackModifierRegistry.new()
 	action_modifiers_manager = ActionModifiersManager.new()
 	# Add default module if not already added
 	if target_module == null:
 		target_module = DEFAULT_TARGET_MODULE_SCENE.instantiate().init(self)
 		add_child(target_module)
+#endregion
 
-# ============================== Public functions ==============================
-
+#region ============================== Public functions ==============================
 func look_at_target_y_only(target_position: Vector3):
 	var direction = target_position - global_position
 	direction.y = 0
@@ -156,6 +169,7 @@ func get_auto_attack_spawn() -> Node3D:
 
 func connect_to_fighting_area(_fighting_area: FightingArea) -> void:
 	printerr("Entity: virtual connect_to_fighting_area() called [", get_path(), "]")
+#endregion
 
 #region ===== Actions [VIRTUAL]
 func direct_attack(_target: Entity, _damage: float, _damage_type: Utils.DamageType, _action_id: StringName) -> void:
@@ -192,7 +206,6 @@ func dispell(_target: Entity, _value: float, _action_id: StringName) -> void:
 	printerr("Entity: virtual dispell() called [", get_path(), "]")
 #endregion
 
-
 #region ===== Interaction [VIRTUAL]
 func take_damage(_damage: float, _damage_type: Utils.DamageType, _is_critical: bool, _action_id: StringName, _source: Entity = null) -> float:
 	printerr("Entity: virtual take_damage() called [", get_path(), "]")
@@ -218,4 +231,5 @@ func take_dispell(_value: float, _is_critical: bool, _action_id: StringName, _so
 	return -1.0
 #endregion
 
-# ============================== Private functions ==============================
+#region ============================== Private functions ==============================
+#endregion
