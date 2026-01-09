@@ -243,7 +243,7 @@ func _add_body_as_entity(body: Node3D) -> void:
 	if entity.team == _owner.team: _allies.append(entity)
 	else: _enemies.append(entity)
 	_entities.append(entity)
-	if entity is Character: 
+	if entity is Hero: 
 		if entity.team == _owner.team: _ally_heroes.append(entity)
 		else: _enemy_heroes.append(entity)
 		_heroes.append(entity)

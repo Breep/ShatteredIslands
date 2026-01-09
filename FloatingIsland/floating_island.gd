@@ -16,7 +16,7 @@ func _ready() -> void:
 
 # Spawn all characters on the FightingArea according to the battle
 # Connect all characters to the FightingArea of the FloatingIsland
-func start_fight(_characters: Array[Character], _battle_type: Battle.BattleType) -> void: # VIRTUAL
+func start_fight(_heroes: Array[Hero], _battle_type: Battle.BattleType) -> void: # VIRTUAL
 	pass
 
 

@@ -4,7 +4,7 @@ extends Node
 # ============================== Description ==============================
 #
 # Local FightingManager, register itself to the GlobalFightingManager
-# On Start() call, will connect to all character on the local FightingArea death signals
+# On Start() call, will connect to all heroes on the local FightingArea death signals
 # Will notify that the fight is over (either one team is alive or the GameManager says it's over)
 
 #region ============================== Signals ==============================
@@ -17,9 +17,9 @@ var battle_id: int = -1 # Set by the parent
 #endregion
 
 #region ============================== Private variables ==============================
-# All fighting characters sorted by team
-var _characters_dictionary: Dictionary[int, Array] # [int, Array[Character]] Key=team_id, value=team members
-var _alive_characters_dictionary: Dictionary[int, Array] # [int, Array[Character]] Key=team_id, value=team members
+# All fighting heroes sorted by team
+var _heroes_dictionary: Dictionary[int, Array] # [int, Array[Hero]] Key=team_id, value=team members
+var _alive_heroes_dictionary: Dictionary[int, Array] # [int, Array[Hero]] Key=team_id, value=team members
 var _lowest_hp_teams_order: Array[int] # Array of teams in order of death [2, 3, 4] means team 2 died first, then 3 and then 4
 var _is_active: bool = false
 #endregion
@@ -35,42 +35,42 @@ func _exit_tree() -> void:
 #endregion
 
 #region ============================== Public functions ==============================
-func start(characters: Array[Character]) -> void:
+func start(heroes: Array[Hero]) -> void:
 	_is_active = true
-	_setup_characters_dictionary(characters)
-	_connect_to_characters_signals()
+	_setup_heroes_dictionary(heroes)
+	_connect_to_heroes_signals()
 	fight_is_ready_to_be_started.emit(self)
 #endregion
 
 #region ============================== Private functions ==============================
-func _setup_characters_dictionary(characters: Array[Character]) -> void:
-	for character in characters:
-		if _characters_dictionary.has(character.team):
-			_characters_dictionary[character.team].append(character)
-			_alive_characters_dictionary[character.team].append(character)
+func _setup_heroes_dictionary(heroes: Array[Hero]) -> void:
+	for hero: Hero in heroes:
+		if _heroes_dictionary.has(hero.team):
+			_heroes_dictionary[hero.team].append(hero)
+			_alive_heroes_dictionary[hero.team].append(hero)
 		else:
-			_characters_dictionary[character.team] = [character]
-			_alive_characters_dictionary[character.team] = [character]
+			_heroes_dictionary[hero.team] = [hero]
+			_alive_heroes_dictionary[hero.team] = [hero]
 
 
-func _connect_to_characters_signals() -> void:
-	for team_members in _characters_dictionary.values():
-		for character: Character in team_members:
-			character.died.connect(_on_character_died, CONNECT_ONE_SHOT)
+func _connect_to_heroes_signals() -> void:
+	for team_members in _heroes_dictionary.values():
+		for hero: Hero in team_members:
+			hero.died.connect(_on_hero_died, CONNECT_ONE_SHOT)
 
 
-func _disconnect_from_characters_signals() -> void:
-	for team_members in _characters_dictionary.values():
-		for character: Character in team_members:
-			if character.died.is_connected(_on_character_died):
-				character.died.disconnect(_on_character_died)
+func _disconnect_from_heroes_signals() -> void:
+	for team_members in _heroes_dictionary.values():
+		for hero: Hero in team_members:
+			if hero.died.is_connected(_on_hero_died):
+				hero.died.disconnect(_on_hero_died)
 
 
 # Check if there is only one team alive, also add into the _lowest_hp_teams_order the team_id of a newly dead team
 func _is_only_one_team_alive() -> bool:
 	var teams_alived_counter: int = 0
-	for team_id in _alive_characters_dictionary.keys():
-		if _alive_characters_dictionary[team_id].size() > 0:
+	for team_id in _alive_heroes_dictionary.keys():
+		if _alive_heroes_dictionary[team_id].size() > 0:
 			teams_alived_counter += 1
 		elif not _lowest_hp_teams_order.has(team_id):
 			_lowest_hp_teams_order.append(team_id)
@@ -81,11 +81,11 @@ func _is_only_one_team_alive() -> bool:
 # return Dictionary[team_id, total_hp]
 func _get_teams_total_hp() -> Dictionary[int, float]:
 	var teams_total_hp: Dictionary[int, float]
-	for team_id in _characters_dictionary.keys():
+	for team_id in _heroes_dictionary.keys():
 		teams_total_hp[team_id] = 0
-		for member in _characters_dictionary[team_id]:
-			var character: Character = member
-			teams_total_hp[team_id] += character.stats.health
+		for member in _heroes_dictionary[team_id]:
+			var hero: Hero = member
+			teams_total_hp[team_id] += hero.stats.health
 	return teams_total_hp
 
 
@@ -105,16 +105,16 @@ func _get_winner_teams_order() -> Array[int]:
 
 func _stop_fighting_manager() -> void:
 	_is_active = false
-	_disconnect_from_characters_signals()
+	_disconnect_from_heroes_signals()
 	var winner_teams_order: Array[int] = _get_winner_teams_order()
-	for member in _characters_dictionary[winner_teams_order[winner_teams_order.size() - 1]]:
-		var character: Character = member
-		if PlayerManager.players.has(character.owner_player_id):
-			Events.signal_player_won_a_fight(PlayerManager.players[character.owner_player_id])
-	for member in _characters_dictionary[winner_teams_order[0]]:
-		var character: Character = member
-		if PlayerManager.players.has(character.owner_player_id):
-			Events.signal_player_lost_a_fight(PlayerManager.players[character.owner_player_id])
+	for member in _heroes_dictionary[winner_teams_order[winner_teams_order.size() - 1]]:
+		var hero: Hero = member
+		if PlayerManager.players.has(hero.owner_player_id):
+			Events.signal_player_won_a_fight(PlayerManager.players[hero.owner_player_id])
+	for member in _heroes_dictionary[winner_teams_order[0]]:
+		var hero: Hero = member
+		if PlayerManager.players.has(hero.owner_player_id):
+			Events.signal_player_lost_a_fight(PlayerManager.players[hero.owner_player_id])
 	fight_is_over.emit(self, winner_teams_order)
 	_cleanup()
 
@@ -122,14 +122,14 @@ func _stop_fighting_manager() -> void:
 func _cleanup() -> void:
 	battle_id = -1
 	_is_active = false
-	_characters_dictionary.clear()
-	_alive_characters_dictionary.clear()
+	_heroes_dictionary.clear()
+	_alive_heroes_dictionary.clear()
 	_lowest_hp_teams_order.clear()
 #endregion
 
 #region ============================== Callbacks ==============================
-func _on_character_died(who: Character) -> void:
-	for team_members in _alive_characters_dictionary.values():
+func _on_hero_died(who: Hero) -> void:
+	for team_members in _alive_heroes_dictionary.values():
 		team_members.erase(who)
 	
 	if _is_only_one_team_alive():

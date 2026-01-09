@@ -36,7 +36,7 @@ func connect_to_players(players: Array[Player]) -> void:
 	
 	var avaible_spawns: Array[SpawnPoint] = _hero_spawns.duplicate()
 	for player in players:
-		_spawn_player_character(player, avaible_spawns)
+		_spawn_player_hero(player, avaible_spawns)
 
 
 func cleanup() -> void:
@@ -45,13 +45,13 @@ func cleanup() -> void:
 
 # ============================== Private functions ==============================
 
-func _spawn_player_character(player: Player, avaible_spawns: Array[SpawnPoint]) -> void:
-	var character: Character = player.character
+func _spawn_player_hero(player: Player, avaible_spawns: Array[SpawnPoint]) -> void: # TODO: Entity rework -> spawn heroes
+	var hero: Hero = player.hero
 	for spawn_point in avaible_spawns:
 		if spawn_point.team == player.team:
-			reparent_entity.rpc(character.get_path(), _entities_node.get_path())
-			character.global_rotation = spawn_point.global_rotation
-			character.global_position = spawn_point.global_position
+			reparent_entity.rpc(hero.get_path(), _entities_node.get_path())
+			hero.global_rotation = spawn_point.global_rotation
+			hero.global_position = spawn_point.global_position
 			avaible_spawns.erase(spawn_point)
 			_coin_piles_dictionary[spawn_point].connect_to_player(player)
 

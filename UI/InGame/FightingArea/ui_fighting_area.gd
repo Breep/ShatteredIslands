@@ -33,10 +33,10 @@ func _ready() -> void:
 
 func update_content(fighting_area: FightingArea) -> void:
 	var battle_type: Battle.BattleType = fighting_area.get_battle_type()
-	var characters: Array[Character] = fighting_area.get_fighting_characters()
+	var heroes: Array[Hero] = fighting_area.get_fighting_heroes()
 	match battle_type:
-		Battle.BattleType.VS_1: _set_layout_1v1(characters)
-		Battle.BattleType.VS_2: _set_layout_2v2(characters)
+		Battle.BattleType.VS_1: _set_layout_1v1(heroes)
+		Battle.BattleType.VS_2: _set_layout_2v2(heroes)
 
 
 func set_active() -> void:
@@ -52,26 +52,26 @@ func set_inactive() -> void:
 
 # ============================== Private functions ==============================
 
-func _set_layout_1v1(characters: Array[Character]) -> void:
-	if characters.is_empty():
-		push_warning("UIFightingArea: There is no characters in the 1v1 fighting area")
+func _set_layout_1v1(heroes: Array[Hero]) -> void:
+	if heroes.is_empty():
+		push_warning("UIFightingArea: There is no heroes in the 1v1 fighting area")
 		return
 	_layout_1v1.show()
 	_layout_2v2.hide()
-	_ui_entity_stats_left.connect_entity(characters[0])
-	_ui_entity_stats_right.connect_entity(characters[1])
+	_ui_entity_stats_left.connect_entity(heroes[0])
+	_ui_entity_stats_right.connect_entity(heroes[1])
 
 
-func _set_layout_2v2(characters: Array[Character]) -> void:
-	if characters.is_empty():
-		push_warning("UIFightingArea: There is no characters in the 2v2 fighting area")
+func _set_layout_2v2(heroes: Array[Hero]) -> void:
+	if heroes.is_empty():
+		push_warning("UIFightingArea: There is no heroes in the 2v2 fighting area")
 		return
 	_layout_2v2.show()
 	_layout_1v1.hide()
-	_ui_entity_stats_left1.connect_entity(characters[0])
-	_ui_entity_stats_left2.connect_entity(characters[1])
-	_ui_entity_stats_right1.connect_entity(characters[2])
-	_ui_entity_stats_right2.connect_entity(characters[3])
+	_ui_entity_stats_left1.connect_entity(heroes[0])
+	_ui_entity_stats_left2.connect_entity(heroes[1])
+	_ui_entity_stats_right1.connect_entity(heroes[2])
+	_ui_entity_stats_right2.connect_entity(heroes[3])
 
 # ============================== Callbacks ==============================
 

@@ -1,7 +1,7 @@
 class_name CharacterLogic
 extends Node
 
-@export var _source: Character
+@export var _source: Hero
 
 @export var modules: Dictionary[Module.ModuleType, Module]
 @export var families_managers: Dictionary[Family.FamilyType, FamilyManager]
@@ -15,8 +15,8 @@ func _enter_tree() -> void:
 	target_module = modules[Module.ModuleType.TARGET]
 
 
-func _ready() -> void:
-	_source.fighting_state_changed.connect(_on_source_fighting_state_changed)
+#func _ready() -> void:
+	#_source.fighting_state_changed.connect(_on_source_fighting_state_changed)
 
 
 func connect_to_fighting_area(fighting_area: FightingArea) -> void:
@@ -49,15 +49,15 @@ func stop() -> void:
 	modules[Module.ModuleType.AUTOATTACK].stop()
 
 
-func _on_source_fighting_state_changed(new_state: Character.FightingState) -> void:
-	match new_state:
-		Character.FightingState.POSITIONING:
-			target_module.start()
-		Character.FightingState.FIGHTING:
-			start()
-		Character.FightingState.CELEBRATING:
-			target_module.stop()
-			stop()
+#func _on_source_fighting_state_changed(new_state: Character.FightingState) -> void:
+	#match new_state:
+		#Character.FightingState.POSITIONING:
+			#target_module.start()
+		#Character.FightingState.FIGHTING:
+			#start()
+		#Character.FightingState.CELEBRATING:
+			#target_module.stop()
+			#stop()
 
 
 

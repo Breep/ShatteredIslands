@@ -1,18 +1,18 @@
-[gd_scene load_steps=16 format=3 uid="uid://cf4y1g6c4ia6w"]
+[gd_scene load_steps=16 format=3 uid="uid://jwk6d3k8w3k5"]
 
-[ext_resource type="Script" uid="uid://c03q2h4ty3455" path="res://Entities/Character/CharacterVisual/character_visual.gd" id="1_8fkrf"]
-[ext_resource type="PackedScene" uid="uid://bx7rkwxhqecme" path="res://Entities/Character/FamiliesManagers/Storm/RankViewer/ui_rank_viewer.tscn" id="3_mq6lt"]
-[ext_resource type="Shader" uid="uid://dncf64el86tmc" path="res://VFX/VFX_2D/UI/character_shield_bar.gdshader" id="3_t0h31"]
-[ext_resource type="Shader" uid="uid://cpwpy0o14me32" path="res://VFX/VFX_2D/UI/character_mana_bar.gdshader" id="3_xieti"]
-[ext_resource type="Shader" uid="uid://cxvdhkkjpr75e" path="res://VFX/VFX_2D/UI/character_health_bar.gdshader" id="5_j51p7"]
-[ext_resource type="FontFile" uid="uid://b3ceq6nwnmlhq" path="res://Data/font/LuckiestGuy-Regular.ttf" id="5_t0h31"]
-[ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Tool/SpawnPoint/spawn_point.tscn" id="5_xieti"]
+[ext_resource type="Script" uid="uid://2d7jma0q2tf4" path="res://Entities/EntityInfoPanel3D/entity_info_panel_3d.gd" id="1_pmsqe"]
+[ext_resource type="Shader" uid="uid://cxvdhkkjpr75e" path="res://VFX/VFX_2D/UI/character_health_bar.gdshader" id="2_dl6gv"]
+[ext_resource type="Shader" uid="uid://dncf64el86tmc" path="res://VFX/VFX_2D/UI/character_shield_bar.gdshader" id="3_ay4cy"]
+[ext_resource type="Shader" uid="uid://cpwpy0o14me32" path="res://VFX/VFX_2D/UI/character_mana_bar.gdshader" id="4_frffg"]
+[ext_resource type="PackedScene" uid="uid://bx7rkwxhqecme" path="res://Entities/Character/FamiliesManagers/Storm/RankViewer/ui_rank_viewer.tscn" id="5_11he6"]
+[ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Tool/SpawnPoint/spawn_point.tscn" id="5_ay4cy"]
+[ext_resource type="FontFile" uid="uid://b3ceq6nwnmlhq" path="res://Data/font/LuckiestGuy-Regular.ttf" id="6_bb7r7"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_j51p7"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_cxmdf"]
 viewport_path = NodePath("TopUI/Sprite3D/SubViewport")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_t0h31"]
-shader = ExtResource("5_j51p7")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5jlv7"]
+shader = ExtResource("2_dl6gv")
 shader_parameter/HealthAmount = 0.6
 shader_parameter/MaxHealth = 2500.0
 shader_parameter/HealthColor = Color(0.11, 0.64, 0.08, 1)
@@ -29,8 +29,8 @@ shader_parameter/BorderColor = Color(0.05, 0.05, 0.05, 1)
 shader_parameter/BorderThicknessPx = 4.00000019
 shader_parameter/CornerRadius = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lcsu5"]
-shader = ExtResource("3_t0h31")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_igduo"]
+shader = ExtResource("3_ay4cy")
 shader_parameter/shield_color = Color(0, 0.8, 1, 1)
 shader_parameter/alpha_intensity = 0.5
 shader_parameter/brightness = 1.2
@@ -44,8 +44,8 @@ shader_parameter/scanline_opacity = 0.3
 shader_parameter/pulse_speed = 2.0
 shader_parameter/pulse_intensity = 0.1
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_j51p7"]
-shader = ExtResource("3_xieti")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5gjjt"]
+shader = ExtResource("4_frffg")
 shader_parameter/HealthAmount = 0.6
 shader_parameter/MaxHealth = 100.0
 shader_parameter/HealthColor = Color(0.07936228, 0.53142947, 0.9445547, 1)
@@ -62,8 +62,8 @@ shader_parameter/BorderColor = Color(0.05, 0.05, 0.05, 1)
 shader_parameter/BorderThicknessPx = 4.00000019
 shader_parameter/CornerRadius = 0.0
 
-[sub_resource type="LabelSettings" id="LabelSettings_t0h31"]
-font = ExtResource("5_t0h31")
+[sub_resource type="LabelSettings" id="LabelSettings_tthwl"]
+font = ExtResource("6_bb7r7")
 font_size = 64
 font_color = Color(0.17036611, 0.3791831, 0.094002105, 1)
 outline_size = 5
@@ -71,8 +71,8 @@ outline_color = Color(0, 0, 0, 1)
 shadow_size = 10
 shadow_color = Color(0, 0, 0, 0.90700006)
 
-[sub_resource type="LabelSettings" id="LabelSettings_lcsu5"]
-font = ExtResource("5_t0h31")
+[sub_resource type="LabelSettings" id="LabelSettings_hbqfw"]
+font = ExtResource("6_bb7r7")
 font_size = 64
 font_color = Color(0.9941506, 0, 0.13833565, 1)
 outline_size = 5
@@ -80,8 +80,8 @@ outline_color = Color(0, 0, 0, 1)
 shadow_size = 10
 shadow_color = Color(0, 0, 0, 0.90700006)
 
-[sub_resource type="LabelSettings" id="LabelSettings_x7t4m"]
-font = ExtResource("5_t0h31")
+[sub_resource type="LabelSettings" id="LabelSettings_em71x"]
+font = ExtResource("6_bb7r7")
 font_size = 64
 font_color = Color(0.55784565, 0.02140875, 0.7750617, 1)
 outline_size = 5
@@ -89,8 +89,8 @@ outline_color = Color(0, 0, 0, 1)
 shadow_size = 10
 shadow_color = Color(0, 0, 0, 0.90700006)
 
-[sub_resource type="LabelSettings" id="LabelSettings_hw4gc"]
-font = ExtResource("5_t0h31")
+[sub_resource type="LabelSettings" id="LabelSettings_2sxxm"]
+font = ExtResource("6_bb7r7")
 font_size = 64
 font_color = Color(0.33715135, 0.912314, 0.28493494, 1)
 outline_size = 5
@@ -98,11 +98,11 @@ outline_color = Color(0, 0, 0, 1)
 shadow_size = 10
 shadow_color = Color(0, 0, 0, 0.90700006)
 
-[node name="CharacterVisual" type="Node3D" node_paths=PackedStringArray("_physical_popup_spawn", "_magic_popup_spawn", "_poison_popup_spawn", "_heal_popup_spawn", "_health_bar", "_mana_bar", "_shield_bar", "_ignite_label", "_necrosis_label", "_poison_label", "_regen_label", "_resource_points_container")]
-script = ExtResource("1_8fkrf")
+[node name="EntityInfoPanel3d" type="Node3D" node_paths=PackedStringArray("_physical_popup_spawn", "_magic_popup_spawn", "_poison_popup_spawn", "_heal_popup_spawn", "_health_bar", "_mana_bar", "_shield_bar", "_ignite_label", "_necrosis_label", "_poison_label", "_regen_label", "_resource_points_container")]
+script = ExtResource("1_pmsqe")
 _physical_popup_spawn = NodePath("PopUpSpawns/PhysicalDamageCenter/SpawnPoint")
-_magic_popup_spawn = NodePath("PopUpSpawns/PoisonDamageCenter/SpawnPoint2")
-_poison_popup_spawn = NodePath("PopUpSpawns/MagicDamageCenter/SpawnPoint3")
+_magic_popup_spawn = NodePath("PopUpSpawns/MagicDamageCenter/SpawnPoint3")
+_poison_popup_spawn = NodePath("PopUpSpawns/PoisonDamageCenter/SpawnPoint2")
 _heal_popup_spawn = NodePath("PopUpSpawns/HealCenter/SpawnPoint4")
 _health_bar = NodePath("TopUI/Sprite3D/SubViewport/HealthBar")
 _mana_bar = NodePath("TopUI/Sprite3D/SubViewport/ManaBar")
@@ -119,7 +119,7 @@ _resource_points_container = NodePath("TopUI/Sprite3D/SubViewport/ComboContainer
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 billboard = 1
 texture_filter = 2
-texture = SubResource("ViewportTexture_j51p7")
+texture = SubResource("ViewportTexture_cxmdf")
 
 [node name="SubViewport" type="SubViewport" parent="TopUI/Sprite3D"]
 disable_3d = true
@@ -128,7 +128,7 @@ size = Vector2i(650, 220)
 render_target_update_mode = 4
 
 [node name="HealthBar" type="ColorRect" parent="TopUI/Sprite3D/SubViewport"]
-material = SubResource("ShaderMaterial_t0h31")
+material = SubResource("ShaderMaterial_5jlv7")
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
@@ -143,7 +143,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ShieldBar" type="ColorRect" parent="TopUI/Sprite3D/SubViewport"]
-material = SubResource("ShaderMaterial_lcsu5")
+material = SubResource("ShaderMaterial_igduo")
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
@@ -158,7 +158,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ManaBar" type="ColorRect" parent="TopUI/Sprite3D/SubViewport"]
-material = SubResource("ShaderMaterial_j51p7")
+material = SubResource("ShaderMaterial_5gjjt")
 custom_minimum_size = Vector2(512, 15)
 anchors_preset = -1
 anchor_left = 0.5
@@ -173,7 +173,7 @@ grow_vertical = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="RankViewer" parent="TopUI/Sprite3D/SubViewport" instance=ExtResource("3_mq6lt")]
+[node name="RankViewer" parent="TopUI/Sprite3D/SubViewport" instance=ExtResource("5_11he6")]
 unique_name_in_owner = true
 texture_filter = 4
 anchors_preset = -1
@@ -198,27 +198,27 @@ theme_override_constants/separation = 24
 layout_mode = 2
 size_flags_horizontal = 3
 text = "122"
-label_settings = SubResource("LabelSettings_t0h31")
+label_settings = SubResource("LabelSettings_tthwl")
 horizontal_alignment = 2
 
 [node name="IgniteLabel" type="Label" parent="TopUI/Sprite3D/SubViewport/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "122"
-label_settings = SubResource("LabelSettings_lcsu5")
+label_settings = SubResource("LabelSettings_hbqfw")
 
 [node name="NecrosisLabel" type="Label" parent="TopUI/Sprite3D/SubViewport/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "122"
-label_settings = SubResource("LabelSettings_x7t4m")
+label_settings = SubResource("LabelSettings_em71x")
 horizontal_alignment = 2
 
 [node name="RegenLabel" type="Label" parent="TopUI/Sprite3D/SubViewport/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "122"
-label_settings = SubResource("LabelSettings_hw4gc")
+label_settings = SubResource("LabelSettings_2sxxm")
 horizontal_alignment = 2
 
 [node name="ComboContainer" type="HBoxContainer" parent="TopUI/Sprite3D/SubViewport"]
@@ -236,7 +236,7 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -1.
 
 [node name="PhysicalDamageCenter" type="Node3D" parent="PopUpSpawns"]
 
-[node name="SpawnPoint" parent="PopUpSpawns/PhysicalDamageCenter" instance=ExtResource("5_xieti")]
+[node name="SpawnPoint" parent="PopUpSpawns/PhysicalDamageCenter" instance=ExtResource("5_ay4cy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 
 [node name="VisualToBeDestroyed" parent="PopUpSpawns/PhysicalDamageCenter/SpawnPoint" index="0"]
@@ -245,7 +245,7 @@ transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 [node name="PoisonDamageCenter" type="Node3D" parent="PopUpSpawns"]
 transform = Transform3D(0.5, -0.866025, 0, 0.866025, 0.5, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="SpawnPoint2" parent="PopUpSpawns/PoisonDamageCenter" instance=ExtResource("5_xieti")]
+[node name="SpawnPoint2" parent="PopUpSpawns/PoisonDamageCenter" instance=ExtResource("5_ay4cy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 
 [node name="VisualToBeDestroyed" parent="PopUpSpawns/PoisonDamageCenter/SpawnPoint2" index="0"]
@@ -254,7 +254,7 @@ transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 [node name="MagicDamageCenter" type="Node3D" parent="PopUpSpawns"]
 transform = Transform3D(-0.5, -0.866025, 0, 0.866025, -0.5, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="SpawnPoint3" parent="PopUpSpawns/MagicDamageCenter" instance=ExtResource("5_xieti")]
+[node name="SpawnPoint3" parent="PopUpSpawns/MagicDamageCenter" instance=ExtResource("5_ay4cy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 
 [node name="VisualToBeDestroyed" parent="PopUpSpawns/MagicDamageCenter/SpawnPoint3" index="0"]
@@ -263,7 +263,7 @@ transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 [node name="HealCenter" type="Node3D" parent="PopUpSpawns"]
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="SpawnPoint4" parent="PopUpSpawns/HealCenter" instance=ExtResource("5_xieti")]
+[node name="SpawnPoint4" parent="PopUpSpawns/HealCenter" instance=ExtResource("5_ay4cy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 
 [node name="VisualToBeDestroyed" parent="PopUpSpawns/HealCenter/SpawnPoint4" index="0"]

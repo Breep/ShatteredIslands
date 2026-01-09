@@ -37,27 +37,27 @@ const PARAM_ONE_SHOT_SITTING: String = "parameters/one_shot_sitting/request"
 @onready var _rng := RandomNumberGenerator.new()
 @onready var _idle_variation_timer: Timer = %IdleVariationTimer 
 
-var _character_owner: Character
-var character_owner: Character:
-	get: return _character_owner
+var _hero_owner: Hero
+var character_owner: Hero:
+	get: return _hero_owner
 	set(value):
-		if value == _character_owner: return
-		_character_owner = value
+		if value == _hero_owner: return
+		_hero_owner = value
 
 var _is_fighting: bool = false
 
 func _ready() -> void:
-	if _character_owner == null:
+	if _hero_owner == null:
 		push_warning("HeroAnimator: No character owner")
 		return
 	
 	_rng.randomize()
-	_character_owner.died.connect(_on_character_owner_died)
-	_character_owner.fight_is_won.connect(_on_character_owner_fight_is_won)
-	_character_owner.fight_is_lost.connect(_on_character_owner_fight_is_lost)
-	_character_owner.fighting_state_changed.connect(_on_character_owner_fighting_state_changed)
-	_character_owner.auto_attack_started.connect(_on_character_owner_auto_attack_started)
-	_character_owner.ultimate_casted.connect(_on_character_owner_ultimate_casted)
+	_hero_owner.died.connect(_on_character_owner_died)
+	_hero_owner.fight_is_won.connect(_on_character_owner_fight_is_won)
+	_hero_owner.fight_is_lost.connect(_on_character_owner_fight_is_lost)
+	_hero_owner.fighting_state_changed.connect(_on_character_owner_fighting_state_changed)
+	_hero_owner.auto_attack_started.connect(_on_character_owner_auto_attack_started)
+	_hero_owner.ultimate_casted.connect(_on_character_owner_ultimate_casted)
 	
 	GameManager.game_state_changed.connect(_on_game_manager_game_stated_changed)
 	
@@ -68,19 +68,19 @@ func _ready() -> void:
 
 #func _process(_delta: float) -> void:
 	#if not _is_fighting: return
-	#if _character_owner == null or _character_owner.target_module == null: return
-	#var closest_enemy: Entity = _character_owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
+	#if _hero_owner == null or _hero_owner.target_module == null: return
+	#var closest_enemy: Entity = _hero_owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
 	#if closest_enemy != null:
-		#_character_owner.look_at_target_y_only(closest_enemy.global_position)
+		#_hero_owner.look_at_target_y_only(closest_enemy.global_position)
 
 
-func _on_character_owner_fighting_state_changed(new_state: Character.FightingState) -> void:
+func _on_character_owner_fighting_state_changed(new_state: Hero.FightingState) -> void:
 	match new_state:
-		Character.FightingState.POSITIONING:
+		Hero.FightingState.POSITIONING:
 			pass
-		Character.FightingState.FIGHTING:
+		Hero.FightingState.FIGHTING:
 			_is_fighting = true
-		Character.FightingState.CELEBRATING:
+		Hero.FightingState.CELEBRATING:
 			_is_fighting = false
 
 
@@ -136,7 +136,7 @@ func _on_idle_variation_timer_timeout() -> void:
 
 
 func _on_hero_animation_player_attack_done() -> void:
-	_character_owner.anim_events_manager.attack_hit_frame.emit()
+	_hero_owner.anim_events_manager.attack_hit_frame.emit()
 
 
  

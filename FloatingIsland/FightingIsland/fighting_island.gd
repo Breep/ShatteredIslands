@@ -20,7 +20,7 @@ var _player_owner_id: int = -1
 
 # ============================== private variables ==============================
 
-var _current_characters: Array[Character]
+var _current_heroes: Array[Hero]
 var _is_active: bool = false
 
 # ============================== Node base functions ==============================
@@ -33,12 +33,12 @@ func _ready() -> void:
 
 # ============================== Public functions ==============================
 
-# Spawn all characters on the FightingArea according to the battle
-# Connect all characters to the FightingArea of the FloatingIsland
-func init_fight(characters: Array[Character], battle_type: Battle.BattleType, battle_id: int = -1) -> void:
+# Spawn all heroes on the FightingArea according to the battle
+# Connect all heroes to the FightingArea of the FloatingIsland
+func init_fight(heroes: Array[Hero], battle_type: Battle.BattleType, battle_id: int = -1) -> void:
 	Verbose.debug("Starting a fight | " + str(battle_id), Verbose.Category.FIGHTING_ISLAND)
-	_fighting_area.init_fight(characters, battle_type, battle_id)
-	_current_characters = characters
+	_fighting_area.init_fight(heroes, battle_type, battle_id)
+	_current_heroes = heroes
 	_force_local_player_camera_on_island()
 
 
@@ -47,7 +47,7 @@ func set_active() -> void:
 	if _is_active: return
 	_is_active = true
 	_center_point_camera.set_active()
-	for character in _current_characters:
+	for character in _current_heroes:
 		character.on_active_island()
 
 
@@ -56,7 +56,7 @@ func set_inactive() -> void:
 	if not _is_active: return
 	_is_active = false
 	_center_point_camera.set_inactive()
-	for character in _current_characters:
+	for character in _current_heroes:
 		character.on_inactive_island()
 
 
@@ -67,8 +67,8 @@ func get_fighting_area() -> FightingArea:
 
 func _force_local_player_camera_on_island() -> void:
 	if GameManager.game_type != GameManager.GameType.SOLO and multiplayer.is_server(): return
-	if _current_characters.is_empty(): return
-	for character in _current_characters:
+	if _current_heroes.is_empty(): return
+	for character in _current_heroes:
 		if character.player == PlayerManager.get_local_player():
 			Shared.scene_switcher.set_island_active_only(self)
 
@@ -81,7 +81,7 @@ func _update_player_ref(player_id: int) -> void:
 
 func _on_game_manager_game_state_changed(game_state: GameManager.GameState) -> void:
 	if game_state == GameManager.GameState.BUYING:
-		_current_characters.clear()
+		_current_heroes.clear()
 
 
 

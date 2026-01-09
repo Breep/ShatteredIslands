@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3]
 
-[ext_resource type="Script" path="res://Entities/NPC/Fighting/Defense/FieldGenerator/field_generator.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://cl757ua1nwcpr" path="res://Entities/NPC/Fighting/Defense/FieldGenerator/field_generator.gd" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://fe7g12v4g3lb" path="res://Entities/NPC/Fighting/Poison/SnakeBarrel/snake_barrel_visual.tscn" id="2_visual"]
 [ext_resource type="PackedScene" uid="uid://cjqhs57x28gtu" path="res://Entities/Stats/EntityStats/entity_stats.tscn" id="3_stats"]
 [ext_resource type="PackedScene" uid="uid://bbwmtb5op8clu" path="res://Modules/EntityModules/InteractModule/interact_module.tscn" id="4_interact"]
-[ext_resource type="PackedScene" uid="uid://jwk6d3k8w3k5" path="res://Entities/Stats/EntityInfoPanel3D/entity_info_panel_3d.tscn" id="5_info"]
+[ext_resource type="PackedScene" uid="uid://jwk6d3k8w3k5" path="res://Entities/EntityInfoPanel3D/entity_info_panel_3d.tscn" id="5_info"]
 [ext_resource type="PackedScene" uid="uid://617x5c1qrdpg" path="res://Modules/EntityModules/ActionModule/action_module.tscn" id="6_action"]
 [ext_resource type="PackedScene" uid="uid://n30ifkjad344" path="res://Modules/EntityModules/TargetModule/target_module.tscn" id="7_target"]
 

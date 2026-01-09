@@ -1,4 +1,4 @@
-class_name CharacterVisual
+class_name EntityInfoPanel3D
 extends Node3D
 
 # ============================== Local scene nodes ==============================
@@ -20,12 +20,13 @@ extends Node3D
 @export var _poison_label: Label
 @export var _regen_label: Label
 
+@export_group("Misc")
+@export var _resource_points_container: HBoxContainer
+
 @export_group("External Nodes")
 @export var _owner_entity: Entity
 
 @onready var _rank_visualizer: UIRankViewer = %RankViewer
-
-@export var _resource_points_container: HBoxContainer
 
 # ============================== Node base functions ==============================
 

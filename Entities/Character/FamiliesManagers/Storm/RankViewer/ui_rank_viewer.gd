@@ -31,7 +31,7 @@ const RANK_ASSETS = {
 	}
 }
 
-var _owner_character: Character
+var _owner_hero: Hero
 var _pulse_tween: Tween
 var _rank_gradients: Dictionary = {}
 
@@ -47,16 +47,16 @@ func _ready() -> void:
 	_rank_icon.pivot_offset = _rank_icon.size / 2
 
 func connect_entity(entity: Entity) -> void:
-	if entity == null or not (entity is Character):
+	if entity == null or not (entity is Hero):
 		hide()
 		return
 	
-	var new_character: Character = entity as Character
-	if _owner_character != null and _owner_character.get_rank_changed_signal().is_connected(_on_rank_changed):
-		_owner_character.get_rank_changed_signal().disconnect(_on_rank_changed)
+	var new_hero: Hero = entity as Hero
+	if _owner_hero != null and _owner_hero.get_rank_changed_signal().is_connected(_on_rank_changed):
+		_owner_hero.get_rank_changed_signal().disconnect(_on_rank_changed)
 	
-	_owner_character = new_character
-	_owner_character.get_rank_changed_signal().connect(_on_rank_changed)
+	_owner_hero = new_hero
+	_owner_hero.get_rank_changed_signal().connect(_on_rank_changed)
 
 func _on_rank_changed(new_rank: StormManager.Rank) -> void:
 	show()

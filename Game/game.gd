@@ -66,13 +66,13 @@ func _start_fighting_phase() -> void:
 	Verbose.debug("Start fights !", Verbose.Category.GAME)
 	var battles: Array[Battle] = _current_round_battles
 	for i in battles.size():
-		var characters: Array[Character]
-		for player in battles[i].players:
+		var heroes: Array[Hero]
+		for player: Player in battles[i].players:
 			player.character.battle_id = battles[i].id
-			characters.append(player.character)
+			heroes.append(player.character)
 		var player_id: int = _current_round_player_id_islands[i]
 		var fighting_island: FightingIsland = PlayerManager.players[player_id].fighting_island
-		fighting_island.init_fight(characters, battles[i].battle_type, battles[i].id)
+		fighting_island.init_fight(heroes, battles[i].battle_type, battles[i].id)
 	# Start fight on each island
 	GlobalFightingManager.start()
 #endregion
@@ -121,7 +121,7 @@ func _spawn_fighting_islands() -> void:
 func _spawn_all_characters() -> void:
 	if not multiplayer.is_server(): return
 	for player in PlayerManager.players.values():
-		var character: Character = preload("res://Entities/Character/character.tscn").instantiate()
+		var character: Hero = preload("res://Entities/Hero/character.tscn").instantiate()
 		character.owner_player_id = player.id
 		character.hero_id = player.hero.id
 		character.name = "Character_" + player.hero.name + "_" + player.name

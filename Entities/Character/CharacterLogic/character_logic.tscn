@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://br00pidd4svpc" path="res://Entities/Character/FamiliesManagers/Mana/mana_manager.tscn" id="14_lbs17"]
 [ext_resource type="PackedScene" uid="uid://cgujm6jcrfljy" path="res://Entities/Character/FamiliesManagers/Necro/necro_manager.tscn" id="15_owd27"]
 
-[node name="CharacterLogic" type="Node3D" node_paths=PackedStringArray("modules", "families_managers")]
+[node name="CharacterLogic" type="Node3D" node_paths=PackedStringArray("modules")]
 script = ExtResource("1_0s7d1")
 modules = {
 0: NodePath("Modules/MovementModule"),
@@ -24,17 +24,6 @@ modules = {
 2: NodePath("Modules/InteractModule"),
 3: NodePath("Modules/AutoAttackModule"),
 4: NodePath("Modules/TargetModule")
-}
-families_managers = {
-1: NodePath("FamiliesManagers/AttackManager"),
-2: NodePath("FamiliesManagers/DefenseManager"),
-3: NodePath("FamiliesManagers/FireManager"),
-4: NodePath("FamiliesManagers/StormManager"),
-5: NodePath("FamiliesManagers/SerenityManager"),
-6: NodePath("FamiliesManagers/LifeManager"),
-7: NodePath("FamiliesManagers/PoisonManager"),
-8: NodePath("FamiliesManagers/ManaManager"),
-11: NodePath("FamiliesManagers/NecroManager")
 }
 
 [node name="Modules" type="Node3D" parent="."]
