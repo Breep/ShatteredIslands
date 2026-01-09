@@ -1,5 +1,5 @@
 class_name SerenityLightCollector
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _regen_per_card: Array[float]
 @export var _rarity: Card.Rarity = Card.Rarity.COMMON

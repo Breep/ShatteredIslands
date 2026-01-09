@@ -174,7 +174,7 @@ func _is_dodged(action_type: Utils.ActionType) -> bool:
 	var dodge_chance: float = _owner.stats.get_stat(EntityStats.StatType.DODGE, action_type)
 	if Utils.is_randomize_modifier_active(dodge_chance):
 		_dodge_number += 1
-		for dodge_modifier: ActionModifier in _owner.action_modifiers_manager.consume_all_modifiers(ActionModifier.ActionType.DODGE):
+		for dodge_modifier: ActionModifier in _owner.action_modifiers_registry.consume_all_modifiers(ActionModifier.ActionType.DODGE):
 			if dodge_modifier.after_action_logic_callback.is_valid():
 				dodge_modifier.after_action_logic_callback.call({
 					ActionModifier.VarType.DODGE_NUMBER: _dodge_number

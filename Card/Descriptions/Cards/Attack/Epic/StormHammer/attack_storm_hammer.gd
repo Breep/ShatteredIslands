@@ -1,5 +1,5 @@
 class_name StormHammer
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _chance_percent: Array[float]
 @export var _rarity: Card.Rarity = Card.Rarity.EPIC

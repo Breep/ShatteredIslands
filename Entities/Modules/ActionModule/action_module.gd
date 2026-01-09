@@ -98,12 +98,12 @@ func heal(target: Entity, heal_amount: float, action_id: StringName) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
 	
-	if _owner.action_modifiers_manager != null:
+	if _owner.action_modifiers_registry != null:
 		var modifiers_dict: Dictionary = {
 			ActionModifier.VarType.HEAL_AMOUNT: heal_amount,
 			ActionModifier.VarType.TARGET: target
 		}
-		for modifier: ActionModifier in _owner.action_modifiers_manager.get_all_modifiers(ActionModifier.ActionType.HEAL):
+		for modifier: ActionModifier in _owner.action_modifiers_registry.get_all_modifiers(ActionModifier.ActionType.HEAL):
 			if modifier.before_action_logic_callback.is_valid():
 				modifier.before_action_logic_callback.call(modifiers_dict)
 		heal_amount = modifiers_dict[ActionModifier.VarType.HEAL_AMOUNT]
@@ -146,14 +146,14 @@ func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: 
 	var stacks_number_before_crit: float = stacks_number * _get_strenght_weakness_multiplier(Utils.stack_to_action(stack_type))
 	var crit_multiplier = _get_crit_multiplier(Utils.stack_to_action(stack_type))
 	stacks_number = stacks_number_before_crit * crit_multiplier["multiplier"]
-	if _owner.action_modifiers_manager != null:
+	if _owner.action_modifiers_registry != null:
 		var modifiers_dict: Dictionary = {
 			ActionModifier.VarType.STACK_VALUE: stacks_number,
 			ActionModifier.VarType.STACK_TYPE: stack_type,
 			ActionModifier.VarType.TARGET: target,
 			ActionModifier.VarType.DURATION: duration
 		}
-		for condition_modifier: ActionModifier in _owner.action_modifiers_manager.get_all_modifiers(ActionModifier.ActionType.INFLICT_CONDITION):
+		for condition_modifier: ActionModifier in _owner.action_modifiers_registry.get_all_modifiers(ActionModifier.ActionType.INFLICT_CONDITION):
 			if condition_modifier.before_action_logic_callback.is_valid():
 				condition_modifier.before_action_logic_callback.call(modifiers_dict)
 		
@@ -167,14 +167,14 @@ func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: 
 		_owner.signal_critical_action_done(target, Utils.stack_to_action(stack_type), stacks_number_before_crit, stacks_taken)
 	_owner.signal_action_done(target, Utils.stack_to_action(stack_type), action_id, stacks_taken, crit_multiplier["is_critical"])
 	
-	if _owner.action_modifiers_manager != null:
+	if _owner.action_modifiers_registry != null:
 		var modifiers_dict: Dictionary = {
 			ActionModifier.VarType.STACK_VALUE: stacks_number,
 			ActionModifier.VarType.STACK_TYPE: stack_type,
 			ActionModifier.VarType.TARGET: target,
 			ActionModifier.VarType.DURATION: duration
 		}
-		for condition_modifier: ActionModifier in _owner.action_modifiers_manager.get_all_modifiers(ActionModifier.ActionType.INFLICT_CONDITION):
+		for condition_modifier: ActionModifier in _owner.action_modifiers_registry.get_all_modifiers(ActionModifier.ActionType.INFLICT_CONDITION):
 			if condition_modifier.after_action_logic_callback.is_valid():
 				condition_modifier.after_action_logic_callback.call(modifiers_dict)
 #endregion

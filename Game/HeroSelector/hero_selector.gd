@@ -78,7 +78,7 @@ func _start_hero_selection() -> void:
 # TODO check if the client is taking an available hero in the server
 @rpc("any_peer", "call_local", "reliable")
 func _pick_hero_multiple(player_id: int, hero_id: HeroDesc.HeroId) -> void:
-	PlayerManager.players[player_id].hero = Shared.HEROES[hero_id]
+	PlayerManager.players[player_id].hero_desc = Shared.HEROES[hero_id]
 	_player_hero_picked.emit()
 
 # ============================== UNIQUE HERO SELECTION BEHAVIOUR ==============================
@@ -111,7 +111,7 @@ func _get_random_hero_and_wait_random_duration() -> HeroDesc:
 @rpc("any_peer", "call_local", "reliable")
 func _pick_hero_unique(player_id: int, hero_id: HeroDesc.HeroId) -> void:
 	_available_heroes.erase(Shared.HEROES[hero_id])
-	PlayerManager.players[player_id].hero = Shared.HEROES[hero_id]
+	PlayerManager.players[player_id].hero_desc = Shared.HEROES[hero_id]
 	_ui_hero_picking_screen.make_hero_unavailable(Shared.HEROES[hero_id])
 	_player_hero_picked.emit()
 

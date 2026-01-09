@@ -20,37 +20,22 @@ const MANA_MANAGER_SCENE: PackedScene = preload("res://Entities/Heroes/_Shared/F
 const NECRO_MANAGER_SCENE: PackedScene = preload("res://Entities/Heroes/_Shared/FamiliesManagers/Necro/necro_manager.tscn")
 #endregion
 
+#region ============================== Export ==============================
 @export_group("Configuration")
 @export var hero_desc: HeroDesc
 
 @export_group("Local Nodes")
 @export var _hero_animator: HeroAnimator
 
-#region ============================== Export ==============================
-@export_group("Network")
-@export_subgroup("Variables")
-var _hero_id := HeroDesc.HeroId.UNDEF
-@export var hero_id: HeroDesc.HeroId: # ID of the hero this character represent
-	get: return _hero_id
-	set(value):
-		if value == _hero_id or value < 0: return
-		_hero_id = value
-
-@export_group("Local Nodes")
-@export var _entity_info_panel_3d: EntityInfoPanel3D
+@export_subgroup("Optional")
 @export var _character_logic: CharacterLogic
-
 @export var _interact_module: InteractModule
 @export var _action_module: ActionModule
-
 @export var anim_events_manager: AnimEventsManager
 #endregion
 
 #region ============================== Public variables ==============================
 var fighting_area: FightingArea
-var visual: EntityInfoPanel3D:
-	get: return _entity_info_panel_3d
-
 var families_stats: FamiliesStats
 #endregion
 
@@ -62,14 +47,6 @@ var _skill_manager: SkillManager
 func connect_to_fighting_area(fighting_area_ref: FightingArea) -> void:
 	fighting_area = fighting_area_ref
 	_character_logic.connect_to_fighting_area(fighting_area)
-
-
-func on_active_island() -> void: # TODO Should be a signal no ?
-	_entity_info_panel_3d.show()
-
-
-func on_inactive_island() -> void:
-	_entity_info_panel_3d.hide()
 
 
 func get_auto_attack_spawn() -> Node3D:
@@ -169,7 +146,10 @@ func _enter_tree() -> void:
 
 func _hero_enter_tree() -> void:
 	_entity_enter_tree()
+	
 	families_stats = FamiliesStats.new()
+	
+	# Add Family Managers
 	add_child(DEFENSE_MANAGER_SCENE.instantiate().init(self))
 	add_child(FIRE_MANAGER_SCENE.instantiate().init(self))
 	add_child(LIFE_MANAGER_SCENE.instantiate().init(self))
@@ -179,6 +159,15 @@ func _hero_enter_tree() -> void:
 	add_child(ATTACK_MANAGER_SCENE.instantiate().init(self))
 	add_child(MANA_MANAGER_SCENE.instantiate().init(self))
 	add_child(NECRO_MANAGER_SCENE.instantiate().init(self))
+	
+	# Add Action/Interact Modules
+	if _interact_module == null:
+		_interact_module = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.ACTION].instantiate().init(self)
+		add_child(_interact_module)
+	
+	if _action_module == null:
+		_action_module = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.INTERACT].instantiate().init(self)
+		add_child(_action_module)
 
 
 func _ready() -> void:

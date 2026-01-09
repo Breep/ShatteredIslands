@@ -47,8 +47,6 @@ func set_active() -> void:
 	if _is_active: return
 	_is_active = true
 	_center_point_camera.set_active()
-	for character in _current_heroes:
-		character.on_active_island()
 
 
 func set_inactive() -> void:
@@ -56,8 +54,6 @@ func set_inactive() -> void:
 	if not _is_active: return
 	_is_active = false
 	_center_point_camera.set_inactive()
-	for character in _current_heroes:
-		character.on_inactive_island()
 
 
 func get_fighting_area() -> FightingArea:

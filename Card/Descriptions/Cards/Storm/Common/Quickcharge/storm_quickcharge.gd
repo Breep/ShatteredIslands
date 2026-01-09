@@ -1,5 +1,5 @@
 class_name StormQuickcharge
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _base_grind_percent: Array[float]
 @export var _rarity: Card.Rarity = Card.Rarity.COMMON

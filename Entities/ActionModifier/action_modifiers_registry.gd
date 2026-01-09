@@ -1,4 +1,4 @@
-class_name ActionModifiersManager
+class_name ActionModifiersRegistry
 extends Resource
 
 # Hold all kind of callbacks that wil be called when the entity do something (attack, inflict_condition, heal, move, die, dodge)

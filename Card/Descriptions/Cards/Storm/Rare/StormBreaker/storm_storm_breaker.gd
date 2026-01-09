@@ -1,5 +1,5 @@
 class_name StormStormBreaker
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _base_reduction_percent: Array[float]
 @export var _rarity: Card.Rarity = Card.Rarity.COMMON

@@ -1,5 +1,5 @@
 class_name DefenseShieldThrow
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _threshold: Array[float]
 @export var _damage: Array[float]

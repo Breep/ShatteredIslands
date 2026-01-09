@@ -1,5 +1,5 @@
 class_name ColossusVitalPulse
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _period: Array[float] 
 @export var _damage_percent: Array[float]

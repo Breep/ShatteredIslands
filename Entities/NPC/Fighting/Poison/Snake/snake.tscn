@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://0qhx51rq53um" path="res://Entities/NPC/Fighting/Poison/Snake/snake.gd" id="1_v4viv"]
 [ext_resource type="PackedScene" uid="uid://dqg0p41xhlwb7" path="res://Entities/NPC/Fighting/Poison/Snake/snake_visual.tscn" id="2_61c56"]
 [ext_resource type="PackedScene" uid="uid://cjqhs57x28gtu" path="res://Entities/Stats/EntityStats/entity_stats.tscn" id="3_ynu0g"]
-[ext_resource type="PackedScene" uid="uid://d0g0xkyr876lc" path="res://Modules/EntityModules/MovementModule/movement_module.tscn" id="4_r5ru1"]
+[ext_resource type="PackedScene" uid="uid://d0g0xkyr876lc" path="res://Entities/Modules/MovementModule/movement_module.tscn" id="4_r5ru1"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_61c56"]
 radius = 0.2

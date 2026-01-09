@@ -1,5 +1,5 @@
 class_name DefenseMagneticSiphon
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _period: Array[float]
 @export var _steal_percent: Array[float]

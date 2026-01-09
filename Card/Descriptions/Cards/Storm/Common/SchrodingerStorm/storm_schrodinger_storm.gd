@@ -1,5 +1,5 @@
 class_name StormSchrodingerStorm
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _stacks: Array[float]
 @export var _rarity: Card.Rarity = Card.Rarity.COMMON

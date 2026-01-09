@@ -56,10 +56,6 @@ func signal_auto_attack_started(is_critical: bool) -> void:
 	auto_attack_started.emit(is_critical)
 #endregion
 
-#region ============================== Default Standard Nodes ==============================
-const DEFAULT_TARGET_MODULE_SCENE: PackedScene = preload("res://Modules/EntityModules/TargetModule/target_module.tscn")
-#endregion
-
 #region ============================== Public variables ==============================
 var _is_dead: bool = false
 var is_dead: bool:
@@ -67,13 +63,12 @@ var is_dead: bool:
 
 var target_module: TargetModule
 var auto_attack_modifier_registry: AutoAttackModifierRegistry
-var action_modifiers_manager: ActionModifiersManager
+var action_modifiers_registry: ActionModifiersRegistry
 var stack_manager: StackManager # TODO
 #endregion
 
 # ============================== Export ==============================
 
-@export_group("Network")
 @export var id: int = -1 # Multiplayer ID of the entity
 @export var team: int = -1 # Team number of the entity
 @export var battle_id: int = -1 # The id of the battle the entity is in
@@ -81,8 +76,12 @@ var stack_manager: StackManager # TODO
 
 # ============================== Local Nodes ==============================
 
-
 @export_group("Optional configuration")
+@export_subgroup("UI 3D")
+@export var _entity_info_panel_3d: EntityInfoPanel3D
+var visual: EntityInfoPanel3D:
+	get: return _entity_info_panel_3d
+
 @export_subgroup("Stats")
 @export var stats: EntityStats
 @export var base_stats: EntityStats
@@ -147,11 +146,13 @@ func _enter_tree() -> void:
 
 
 func _entity_enter_tree() -> void:
+	# Default Modifier Registries
 	auto_attack_modifier_registry = AutoAttackModifierRegistry.new()
-	action_modifiers_manager = ActionModifiersManager.new()
+	action_modifiers_registry = ActionModifiersRegistry.new()
+	
 	# Add default module if not already added
 	if target_module == null:
-		target_module = DEFAULT_TARGET_MODULE_SCENE.instantiate().init(self)
+		target_module = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.TARGET].instantiate().init(self)
 		add_child(target_module)
 #endregion
 

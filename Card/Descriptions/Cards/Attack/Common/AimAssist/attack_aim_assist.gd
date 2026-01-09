@@ -1,5 +1,5 @@
 class_name AttackAimAssist
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _bonus_ad_per_card: Array[float]
 @export var _rarity: Card.Rarity = Card.Rarity.COMMON

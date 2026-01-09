@@ -1,5 +1,5 @@
 class_name FireCosmicBolt
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _damage_per_stack: Array[float]
 @export var _bounce_chance_per_stack: Array[float]

@@ -69,7 +69,7 @@ func start() -> void:
 		action_modifier.id = "Divine Regenerator"
 		action_modifier.is_one_time_effect = false
 		action_modifier.before_action_logic_callback = _on_before_inflict_condition_divine_regenerator
-		_owner.action_modifiers_manager.register_modifier(action_modifier)
+		_owner.action_modifiers_registry.register_modifier(action_modifier)
 
 	
 func stop() -> void:
@@ -164,7 +164,7 @@ func _add_action_modifiers() -> void:
 		action_modifier.id = "Graceful Step"
 		action_modifier.is_one_time_effect = false
 		action_modifier.after_action_logic_callback = _on_dodge_graceful_step
-		_owner.action_modifiers_manager.register_modifier(action_modifier)
+		_owner.action_modifiers_registry.register_modifier(action_modifier)
 
 	# [RADIANT OVERFLOW]
 	if _serenity_stats.serenity_radiant_overflow_activated:
@@ -173,7 +173,7 @@ func _add_action_modifiers() -> void:
 		action_modifier.id = "Radiant Overflow"
 		action_modifier.is_one_time_effect = false
 		action_modifier.before_action_logic_callback = _on_before_heal_radiant_overflow
-		_owner.action_modifiers_manager.register_modifier(action_modifier)
+		_owner.action_modifiers_registry.register_modifier(action_modifier)
 
 #endregion
 

@@ -1,5 +1,5 @@
 class_name FireOrbitalStation
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _crit_chance: Array[float]
 @export var _rarity: Card.Rarity = Card.Rarity.EPIC

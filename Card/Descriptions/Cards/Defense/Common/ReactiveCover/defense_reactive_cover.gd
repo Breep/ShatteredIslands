@@ -1,5 +1,5 @@
 class_name DefenseReactiveCover
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _base_chance: Array[float]
 @export var _base_shield_amount: Array[float]

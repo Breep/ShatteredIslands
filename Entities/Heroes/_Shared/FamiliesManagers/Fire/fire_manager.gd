@@ -145,7 +145,7 @@ func _add_action_modifiers() -> void:
 		action_modifier.id = "Dark Forest"
 		action_modifier.is_one_time_effect = false
 		action_modifier.after_action_logic_callback = _on_dodge_dark_forest
-		_owner.action_modifiers_manager.register_modifier(action_modifier)
+		_owner.action_modifiers_registry.register_modifier(action_modifier)
 
 #endregion
 
@@ -159,7 +159,7 @@ func _add_stack_modifiers() -> void:
 		stack_modifier.tags = [ActionModifier.TagType.CARD]
 		stack_modifier.after_action_logic_callback = _on_inflict_condition_ignite
 		stack_modifier.is_one_time_effect = false
-		_owner.action_modifiers_manager.register_modifier(stack_modifier)
+		_owner.action_modifiers_registry.register_modifier(stack_modifier)
 
 
 func _clear_stack_modifiers() -> void:
@@ -171,7 +171,7 @@ func _clear_stack_modifiers() -> void:
 		stack_modifier.tags = [ActionModifier.TagType.CARD]
 		stack_modifier.after_action_logic_callback = _on_inflict_condition_ignite
 		stack_modifier.is_one_time_effect = false
-		_owner.action_modifiers_manager.unregister_modifier(stack_modifier)
+		_owner.action_modifiers_registry.unregister_modifier(stack_modifier)
 #endregion
 
 #region others cards

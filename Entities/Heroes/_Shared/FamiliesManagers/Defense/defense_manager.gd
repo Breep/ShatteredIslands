@@ -191,7 +191,7 @@ func _add_action_modifiers() -> void:
 		action_modifier.id = "Evasive Barrier"
 		action_modifier.is_one_time_effect = false
 		action_modifier.after_action_logic_callback = _on_dodge_evasive_barrier
-		_owner.action_modifiers_manager.register_modifier(action_modifier)
+		_owner.action_modifiers_registry.register_modifier(action_modifier)
 #
 
 
@@ -201,7 +201,7 @@ func _clear_action_modifiers() -> void:
 		var action_modifier := ActionModifier.new()
 		action_modifier.action_type = ActionModifier.ActionType.DODGE
 		action_modifier.id = "Evasive Barrier"
-		_owner.action_modifiers_manager.unregister_modifier(action_modifier)
+		_owner.action_modifiers_registry.unregister_modifier(action_modifier)
 #
 #endregion
 

@@ -1,5 +1,5 @@
 class_name PoisonPoisonFlask
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _poison_stacks: Array[int]
 @export var _period: Array[float]

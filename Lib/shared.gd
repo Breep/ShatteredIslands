@@ -20,6 +20,14 @@ var FAMILIES: Dictionary[Family.FamilyType, Family] = {
 	Family.FamilyType.SHADOW: load("res://Card/Descriptions/Families/shadow_family.tres")
 }
 
+var ENTITY_MODULE_SCENES: Dictionary[Module.ModuleType, PackedScene] = {
+	Module.ModuleType.MOVEMENT: load("res://Entities/Modules/MovementModule/movement_module.tscn"),
+	Module.ModuleType.ACTION: load("res://Entities/Modules/ActionModule/action_module.tscn"),
+	Module.ModuleType.INTERACT: load("res://Entities/Modules/InteractModule/interact_module.tscn"),
+	Module.ModuleType.AUTOATTACK: load("res://Entities/Modules/AutoAttackModule/auto_attack_module.tscn"),
+	Module.ModuleType.TARGET: load("res://Entities/Modules/TargetModule/target_module.tscn")
+}
+
 var DAMAGE_POPUP_SCENE: PackedScene = load("res://UI/3D/DamagePopup/damage_popup.tscn")
 
 var scene_switcher: SceneSwitcher

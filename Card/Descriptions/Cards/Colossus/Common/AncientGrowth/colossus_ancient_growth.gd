@@ -1,5 +1,5 @@
 class_name ColossusAncientGrowth
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _hp_increase: Array[float]
 @export var _period: Array[float]

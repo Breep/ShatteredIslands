@@ -1,5 +1,5 @@
 class_name AttackNecroticBullet
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _chance: Array[int]
 @export var _necrosis_stacks: Array[int]

@@ -1,5 +1,5 @@
 class_name StormLightningFootwork
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _base_dodge_increase: Array[float]
 @export var _rarity: Card.Rarity = Card.Rarity.COMMON

@@ -1,5 +1,5 @@
 class_name FireScorpius
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _poison_stacks: Array[float]
 @export var _rarity: Card.Rarity = Card.Rarity.COMMON

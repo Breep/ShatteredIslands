@@ -1,5 +1,5 @@
 class_name SerenityDivineRegenerator
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _bonus_duration: Array[int]
 

@@ -104,15 +104,14 @@ var _attack_speed: float # Attack per second
 @export_group("Critic")
 signal critical_chance_changed(new_critical_chance: float, critical_type: Utils.ActionType)
 signal critical_multiplier_changed(new_critical_multiplier: float, critical_type: Utils.ActionType) # in %
-var _critical_chances: Dictionary[Utils.ActionType, float]
-var _critical_multipliers: Dictionary[Utils.ActionType, float]
+@export var _critical_chances: Dictionary[Utils.ActionType, float]
+@export var _critical_multipliers: Dictionary[Utils.ActionType, float]
 #endregion
 
 #region ============================== Condition Stacks ==============================
-@export_group("Condition Stacks")
 signal poison_stacks_changed(new_poison_stacks: float)
 var _poison_stacks: float = 0
-@export var poison_stacks: float:
+var poison_stacks: float:
 	get: return _poison_stacks
 	set(value):
 		if value < 0: value = 0
@@ -123,7 +122,7 @@ var _poison_stacks: float = 0
 
 signal ignite_stacks_changed(new_ignite_stacks: float)
 var _ignite_stacks: float
-@export var ignite_stacks: float:
+var ignite_stacks: float:
 	get: return _ignite_stacks
 	set(value):
 		if value < 0: value = 0
@@ -134,7 +133,7 @@ var _ignite_stacks: float
 
 signal armor_stacks_changed(new_armor_stacks: float)
 var _armor_stacks: float = 0
-@export var armor_stacks: float:
+var armor_stacks: float:
 	get: return _armor_stacks
 	set(value):
 		if value == _armor_stacks: return
@@ -150,11 +149,10 @@ const REGEN_BUFFER_SIZE: int = 20
 
 signal regen_stacks_changed(new_regen_stacks: float)
 var _regen_stacks: float = 0
-@export var regen_stacks: float:
+var regen_stacks: float:
 	get: return _regen_stacks
 	set(value):
 		if value == _regen_stacks: return
-		var diff = value - _regen_stacks
 		_regen_stacks = max(0, value)
 		regen_stacks_changed.emit(_regen_stacks)
 		
@@ -164,43 +162,46 @@ var _regen_stacks: float = 0
 
 signal necrosis_stacks_changed(new_necrosis_stacks: float)
 var _necrosis_stacks: float = 0
-@export var necrosis_stacks: float:
+var necrosis_stacks: float:
 	get: return _necrosis_stacks
 	set(value):
 		if value < 0: value = 0
 		if value == _necrosis_stacks: return
 		_necrosis_stacks = max(0, value)
 		necrosis_stacks_changed.emit(_necrosis_stacks)
-
 #endregion
 
 #region ============================== Resistances ==============================
+@export_group("Resistance")
 signal resistance_changed(new_resistance: float, action_type: Utils.ActionType)
-var _resistances: Dictionary[Utils.ActionType, float]
+@export var _resistances: Dictionary[Utils.ActionType, float]
 
 signal crit_resistance_changed(new_crit_resistance: float, action_type: Utils.ActionType)
-var _crit_resistances: Dictionary[Utils.ActionType, float]
+@export var _crit_resistances: Dictionary[Utils.ActionType, float]
 #endregion
 
-
 #region ============================== Dodge ==============================
+@export_group("Dodge")
 signal dodge_changed(new_dodge: float, action_type: Utils.ActionType)
-var _dodges: Dictionary[Utils.ActionType, float]
+@export var _dodges: Dictionary[Utils.ActionType, float]
 #endregion
 
 #region ============================== Vulnerability ==============================
+@export_group("Vulnerability")
 signal vulnerability_changed(new_vulnerability: float, action_type: Utils.ActionType)
-var _vulnerabilities: Dictionary[Utils.ActionType, float]
+@export var _vulnerabilities: Dictionary[Utils.ActionType, float]
 #endregion
 
-#region ============================== strength ==============================
+#region ============================== Strength ==============================
+@export_group("Strength")
 signal strength_changed(new_strength: float, action_type: Utils.ActionType)
-var _strengths: Dictionary[Utils.ActionType, float]
+@export var _strengths: Dictionary[Utils.ActionType, float]
 #endregion
 
 #region ============================== Weakness ==============================
+@export_group("Weakness")
 signal weakness_changed(new_weakness: float, action_type: Utils.ActionType)
-var _weaknesses: Dictionary[Utils.ActionType, float]
+@export var _weaknesses: Dictionary[Utils.ActionType, float]
 #endregion
 
 #region ============================== Public functions ==============================

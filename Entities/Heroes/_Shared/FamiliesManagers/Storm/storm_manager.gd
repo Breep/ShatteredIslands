@@ -197,7 +197,7 @@ func _add_action_modifiers() -> void:
 		action_modifier.id = "Lightning Footwork"
 		action_modifier.is_one_time_effect = false
 		action_modifier.after_action_logic_callback = _on_dodge_lightning_footwork
-		_owner.action_modifiers_manager.register_modifier(action_modifier)
+		_owner.action_modifiers_registry.register_modifier(action_modifier)
 
 #endregion
 

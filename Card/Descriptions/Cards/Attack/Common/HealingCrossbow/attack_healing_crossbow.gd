@@ -1,5 +1,5 @@
 class_name HealingCrossbow
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _chance: Array[float] 
 @export var _heal_amount: Array[float]

@@ -1,5 +1,5 @@
 class_name DefenseFieldGenerator
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _summon_interval: Array[float]
 @export var _shield_amount: Array[int]

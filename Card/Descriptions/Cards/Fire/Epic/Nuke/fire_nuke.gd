@@ -1,5 +1,5 @@
 class_name FireNuke
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _ignite_stacks: Array[int]
 

@@ -1,5 +1,5 @@
 class_name ScorchingBlade
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _damage_percent: Array[float] 
 

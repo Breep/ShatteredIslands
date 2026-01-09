@@ -1,5 +1,5 @@
 class_name DefenseToxicFiltrationLayer
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _base_efficiency: Array[float]
 @export var _rarity: Card.Rarity = Card.Rarity.COMMON

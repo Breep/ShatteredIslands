@@ -1,5 +1,5 @@
 class_name LightPurifyingFlame
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _cleanse_amount: Array[float]
 @export var _period: Array[float]

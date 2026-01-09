@@ -1,4 +1,4 @@
-class_name CharacterUpgrade
+class_name HeroUpgrade
 extends Resource
 
 enum VarType {
@@ -9,12 +9,12 @@ enum VarType {
 }
 
 func apply(_stats: FamiliesStats, _cardLvl: int) -> void:
-	push_warning("[CharacterUpgrade] call virtual apply()")
+	push_warning("[HeroUpgrade] call virtual apply()")
 	pass
 
 
 func get_description(_cardlvl: int) -> String:
-	push_warning("[CharacterUpgrade] call virtual get_description()")
+	push_warning("[HeroUpgrade] call virtual get_description()")
 	return ""
 
 

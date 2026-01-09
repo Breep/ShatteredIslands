@@ -1,5 +1,5 @@
 class_name SerenityWarmAura
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _base_chance: Array[float]
 @export var _base_cleanse_amount: Array[float]

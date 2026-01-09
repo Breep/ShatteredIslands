@@ -49,7 +49,7 @@ func _add_stack_modifiers() -> void:
 		stack_modifier.tags = [ActionModifier.TagType.CARD]
 		stack_modifier.after_action_logic_callback = _on_inflict_condition_hot_pot
 		stack_modifier.is_one_time_effect = false
-		_owner.action_modifiers_manager.register_modifier(stack_modifier)
+		_owner.action_modifiers_registry.register_modifier(stack_modifier)
 	
 	# [ROTTING MILK]
 	if _poison_stats.poison_rotting_milk_activated:
@@ -59,7 +59,7 @@ func _add_stack_modifiers() -> void:
 		stack_modifier.tags = [ActionModifier.TagType.CARD]
 		stack_modifier.after_action_logic_callback = _on_inflict_condition_rotting_milk
 		stack_modifier.is_one_time_effect = false
-		_owner.action_modifiers_manager.register_modifier(stack_modifier)
+		_owner.action_modifiers_registry.register_modifier(stack_modifier)
 	
 	# [CORROSION ACTIVATED]
 	if _poison_stats.poison_corrosion_activated:
@@ -69,7 +69,7 @@ func _add_stack_modifiers() -> void:
 		stack_modifier.tags = [ActionModifier.TagType.CARD]
 		stack_modifier.after_action_logic_callback = _on_inflict_condition_corrosion
 		stack_modifier.is_one_time_effect = false
-		_owner.action_modifiers_manager.register_modifier(stack_modifier)
+		_owner.action_modifiers_registry.register_modifier(stack_modifier)
 	
 	# [FAMILY PASSIVE]
 	if false:
@@ -79,7 +79,7 @@ func _add_stack_modifiers() -> void:
 		stack_modifier.tags = [ActionModifier.TagType.CARD]
 		stack_modifier.after_action_logic_callback = _on_inflict_condition_poison
 		stack_modifier.is_one_time_effect = false
-		_owner.action_modifiers_manager.register_modifier(stack_modifier)
+		_owner.action_modifiers_registry.register_modifier(stack_modifier)
 
 
 func _clear_stack_modifiers() -> void:
@@ -91,7 +91,7 @@ func _clear_stack_modifiers() -> void:
 		stack_modifier.tags = [ActionModifier.TagType.CARD]
 		stack_modifier.after_action_logic_callback = _on_inflict_condition_hot_pot
 		stack_modifier.is_one_time_effect = false
-		_owner.action_modifiers_manager.unregister_modifier(stack_modifier)
+		_owner.action_modifiers_registry.unregister_modifier(stack_modifier)
 	
 	# [ROTTING MILK]
 	if _poison_stats.poison_rotting_milk_activated:
@@ -101,7 +101,7 @@ func _clear_stack_modifiers() -> void:
 		stack_modifier.tags = [ActionModifier.TagType.CARD]
 		stack_modifier.after_action_logic_callback = _on_inflict_condition_rotting_milk
 		stack_modifier.is_one_time_effect = false
-		_owner.action_modifiers_manager.unregister_modifier(stack_modifier)
+		_owner.action_modifiers_registry.unregister_modifier(stack_modifier)
 	
 	# [CORROSION ACTIVATED]
 	if _poison_stats.poison_corrosion_activated:
@@ -111,7 +111,7 @@ func _clear_stack_modifiers() -> void:
 		stack_modifier.tags = [ActionModifier.TagType.CARD]
 		stack_modifier.after_action_logic_callback = _on_inflict_condition_corrosion
 		stack_modifier.is_one_time_effect = false
-		_owner.action_modifiers_manager.unregister_modifier(stack_modifier)
+		_owner.action_modifiers_registry.unregister_modifier(stack_modifier)
 	
 	# [FAMILY PASSIVE]
 	if false:
@@ -121,7 +121,7 @@ func _clear_stack_modifiers() -> void:
 		stack_modifier.tags = [ActionModifier.TagType.CARD]
 		stack_modifier.after_action_logic_callback = _on_inflict_condition_poison
 		stack_modifier.is_one_time_effect = false
-		_owner.action_modifiers_manager.unregister_modifier(stack_modifier)
+		_owner.action_modifiers_registry.unregister_modifier(stack_modifier)
 #endregion
 
 #region ===== STAT MODIFIERS =====
