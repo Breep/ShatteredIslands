@@ -24,9 +24,9 @@ extends Control
 @onready var _entity_stats_left: UIEntityStats = %EntityStatsLeft
 @onready var _entity_stats_right: UIEntityStats = %EntityStatsRight
 
-const CHARACTER_SCENE : PackedScene = preload("res://Entities/Character/character.tscn")
+const DARK_KNIGHT_SCENE : PackedScene = preload("res://Entities/Heroes/DarkKnight/dark_knight.tscn")
 
-var _character: Character
+var _dark_knight: DarkKnight
 
 @onready var _rng:= RandomNumberGenerator.new()
 
@@ -35,27 +35,24 @@ const UI_LABEL_POPUP_SCENE: PackedScene = preload("res://UI/InGame/FightingArea/
 func _ready() -> void:
 	_rng.randomize()
 	
-	_character = CHARACTER_SCENE.instantiate()
-	_character.player = Player.new()
-	_character.player.skill_manager = SkillManager.new()
-	_character.player.character = _character
-	_character.hero_id = HeroDesc.HeroId.DARK_KNIGHT
+	_dark_knight = DARK_KNIGHT_SCENE.instantiate()
+	_dark_knight.hero_id = HeroDesc.HeroId.DARK_KNIGHT
 	
-	add_child(_character)
-	_character.base_stats.reset_from_hero(Shared.HEROES[HeroDesc.HeroId.DARK_KNIGHT], 10)
-	_character.stats.reset_from_hero(Shared.HEROES[HeroDesc.HeroId.DARK_KNIGHT], 10)
-	_entity_stats_left.connect_entity(_character)
-	_entity_stats_right.connect_entity(_character)
+	add_child(_dark_knight)
+	_dark_knight.base_stats.reset_from_hero(Shared.HEROES[HeroDesc.HeroId.DARK_KNIGHT], 10)
+	_dark_knight.stats.reset_from_hero(Shared.HEROES[HeroDesc.HeroId.DARK_KNIGHT], 10)
+	_entity_stats_left.connect_entity(_dark_knight)
+	_entity_stats_right.connect_entity(_dark_knight)
 
 
 #region Start/Stop Battle
 func _on_start_battle_pressed() -> void:
-	_character.fighting_state = Character.FightingState.POSITIONING
-	_character.fighting_state = Character.FightingState.FIGHTING
+	_dark_knight.fighting_state = Hero.FightingState.POSITIONING
+	_dark_knight.fighting_state = Hero.FightingState.FIGHTING
 
 
 func _on_end_battle_pressed() -> void:
-	_character.fighting_state = Character.FightingState.CELEBRATING
+	_dark_knight.fighting_state = Hero.FightingState.CELEBRATING
 #endregion
 
 #region Stacks
@@ -63,60 +60,60 @@ func _on_end_battle_pressed() -> void:
 func _on_add_poison_button_pressed() -> void:
 	var poison_stacks: int = int(_poison_stacks_text_edit.text)
 	if poison_stacks >= 0:
-		_character.take_condition_stacks(poison_stacks, Utils.StackType.POISON, false, "Proto")
+		_dark_knight.take_condition_stacks(poison_stacks, Utils.StackType.POISON, false, "Proto")
 
 func _on_add_poison_button_critical_pressed() -> void:
 	var poison_stacks: int = int(_poison_stacks_text_edit.text)
 	if poison_stacks >= 0:
-		_character.take_condition_stacks(poison_stacks*2, Utils.StackType.POISON, true, "Proto")
+		_dark_knight.take_condition_stacks(poison_stacks*2, Utils.StackType.POISON, true, "Proto")
 
 func _on_reset_poison_button_pressed() -> void:
-	_character.stats.poison_stacks = 0
+	_dark_knight.stats.poison_stacks = 0
 #endregion
 
 #region ===== STACKS -> ARMOR
 func _on_add_armor_button_pressed() -> void:
 	var armor_stacks: int = int(_armor_stacks_text_edit.text)
 	if armor_stacks >= 0:
-		_character.take_condition_stacks(armor_stacks, Utils.StackType.ARMOR, false, "Proto")
+		_dark_knight.take_condition_stacks(armor_stacks, Utils.StackType.ARMOR, false, "Proto")
 
 func _on_add_armor_button_critical_pressed() -> void:
 	var armor_stacks: int = int(_armor_stacks_text_edit.text)
 	if armor_stacks >= 0:
-		_character.take_condition_stacks(armor_stacks*2, Utils.StackType.ARMOR, true, "Proto")
+		_dark_knight.take_condition_stacks(armor_stacks*2, Utils.StackType.ARMOR, true, "Proto")
 
 func _on_reset_armor_button_pressed() -> void:
-	_character.stats.armor_stacks = 0
+	_dark_knight.stats.armor_stacks = 0
 #endregion
 
 #region ===== STACKS -> IGNITE
 func _on_add_ignite_button_pressed() -> void:
 	var ignite_stacks: int = int(_ignite_stacks_text_edit.text)
 	if ignite_stacks >= 0:
-		_character.take_condition_stacks(ignite_stacks, Utils.StackType.IGNITE, false, "Proto")
+		_dark_knight.take_condition_stacks(ignite_stacks, Utils.StackType.IGNITE, false, "Proto")
 
 func _on_add_ignite_button_critical_pressed() -> void:
 	var ignite_stacks: int = int(_ignite_stacks_text_edit.text)
 	if ignite_stacks >= 0:
-		_character.take_condition_stacks(ignite_stacks*2, Utils.StackType.IGNITE, true, "Proto")
+		_dark_knight.take_condition_stacks(ignite_stacks*2, Utils.StackType.IGNITE, true, "Proto")
 
 func _on_reset_ignite_button_pressed() -> void:
-	_character.stats.ignite_stacks = 0
+	_dark_knight.stats.ignite_stacks = 0
 #endregion
 
 #region ===== STACKS -> REGEN
 func _on_add_regen_button_pressed() -> void:
 	var regen_stacks: int = int(_regen_stacks_text_edit.text)
 	if regen_stacks >= 0:
-		_character.take_condition_stacks(regen_stacks, Utils.StackType.REGEN, false, "Proto")
+		_dark_knight.take_condition_stacks(regen_stacks, Utils.StackType.REGEN, false, "Proto")
 
 func _on_add_regen_button_critical_pressed() -> void:
 	var regen_stacks: int = int(_regen_stacks_text_edit.text)
 	if regen_stacks >= 0:
-		_character.take_condition_stacks(regen_stacks*2, Utils.StackType.REGEN, true, "Proto")
+		_dark_knight.take_condition_stacks(regen_stacks*2, Utils.StackType.REGEN, true, "Proto")
 
 func _on_reset_regen_button_pressed() -> void:
-	_character.stats.regen_stacks = 0
+	_dark_knight.stats.regen_stacks = 0
 #endregion
 #endregion
 
@@ -125,28 +122,28 @@ func _on_deal_physical_damage_button_pressed() -> void:
 	var damage_raw := int(_damage_text_edit.text)
 	var variation := int(_variation_text_edit.text)
 	var damage: int = _rng.randi_range(clampi(damage_raw - variation, 0, 10000), clampi(damage_raw + variation, 0, 10000))
-	_character.take_damage(damage, Utils.DamageType.PHYSICAL, false, "Proto")
+	_dark_knight.take_damage(damage, Utils.DamageType.PHYSICAL, false, "Proto")
 
 
 func _on_deal_critical_damage_button_pressed() -> void:
 	var damage_raw := int(_damage_text_edit.text)
 	var variation := int(_variation_text_edit.text)
 	var damage: int = _rng.randi_range(clampi(damage_raw - variation, 0, 10000), clampi(damage_raw + variation, 0, 10000))
-	_character.take_damage(damage*2, Utils.DamageType.PHYSICAL, true, "Proto")
+	_dark_knight.take_damage(damage*2, Utils.DamageType.PHYSICAL, true, "Proto")
 
 
 func _on_deal_magical_damage_button_pressed() -> void:
 	var damage_raw := int(_magical_text_edit.text)
 	var variation := int(_magical_variation_text_edit.text)
 	var damage: int = _rng.randi_range(clampi(damage_raw - variation, 0, 10000), clampi(damage_raw + variation, 0, 10000))
-	_character.take_damage(damage, Utils.DamageType.MAGICAL, false, "Proto")
+	_dark_knight.take_damage(damage, Utils.DamageType.MAGICAL, false, "Proto")
 
 
 func _on_deal_magical_damage_critical_pressed() -> void:
 	var damage_raw := int(_magical_text_edit.text)
 	var variation := int(_magical_variation_text_edit.text)
 	var damage: int = _rng.randi_range(clampi(damage_raw - variation, 0, 10000), clampi(damage_raw + variation, 0, 10000))
-	_character.take_damage(damage*2, Utils.DamageType.MAGICAL, true, "Proto")
+	_dark_knight.take_damage(damage*2, Utils.DamageType.MAGICAL, true, "Proto")
 #endregion
 
 #region Mana
@@ -162,12 +159,12 @@ func _on_set_max_mana_button_pressed() -> void:
 func _on_set_current_health_button_pressed() -> void:
 	var health: int = int(_current_health_text_edit.text)
 	if health >= 0:
-		_character.stats.health = health
+		_dark_knight.stats.health = health
 
 func _on_set_max_health_button_pressed() -> void:
 	var max_health: int = int(_max_health_text_edit.text)
 	if max_health >= 0:
-		_character.stats.health_max = max_health
+		_dark_knight.stats.health_max = max_health
 #endregion
 
 
@@ -175,12 +172,12 @@ func _on_set_max_health_button_pressed() -> void:
 func _on_heal_button_pressed() -> void:
 	var heal: int = int(_heal_text_edit.text)
 	if heal >= 0:
-		_character.take_heal(heal, false, "Proto")
+		_dark_knight.take_heal(heal, false, "Proto")
 
 func _on_heal_button_critical_pressed() -> void:
 	var heal: int = int(_heal_text_edit.text)
 	if heal >= 0:
-		_character.take_heal(heal*2, true, "Proto")
+		_dark_knight.take_heal(heal*2, true, "Proto")
 #endregion
 
 #region Random POPUP

@@ -28,14 +28,12 @@ fog_light_energy = 0.05
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.0
 
-[node name="Game" type="Node3D" node_paths=PackedStringArray("_buying_island", "_scene_switcher", "_hero_selector", "_node_fighting_islands", "_node_characters", "_islands_spawn_points")]
+[node name="Game" type="Node3D" node_paths=PackedStringArray("_buying_island", "_scene_switcher", "_hero_selector", "_node_fighting_islands")]
 script = ExtResource("1_7r6pw")
 _buying_island = NodePath("BuyingIsland")
 _scene_switcher = NodePath("SceneSwitcher")
 _hero_selector = NodePath("HeroSelector")
 _node_fighting_islands = NodePath("FightingIslands")
-_node_characters = NodePath("Characters")
-_islands_spawn_points = [NodePath("IslandSpawns/CenterPoint1/SpawnPoint1"), NodePath("IslandSpawns/CenterPoint2/SpawnPoint2"), NodePath("IslandSpawns/CenterPoint3/SpawnPoint3"), NodePath("IslandSpawns/CenterPoint4/SpawnPoint4"), NodePath("IslandSpawns/CenterPoint5/SpawnPoint5"), NodePath("IslandSpawns/CenterPoint6/SpawnPoint6"), NodePath("IslandSpawns/CenterPoint7/SpawnPoint7"), NodePath("IslandSpawns/CenterPoint8/SpawnPoint8")]
 
 [node name="Light" type="Node3D" parent="."]
 transform = Transform3D(0.471889, 0, 0.881658, -0.0862491, 0.995204, 0.0461631, -0.877429, -0.0978261, 0.469626, 0, 0, 0)
@@ -127,13 +125,7 @@ fov = 35.0
 _spawnable_scenes = PackedStringArray("uid://drcuyohos0doa")
 spawn_path = NodePath("../FightingIslands")
 
-[node name="CharacterSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://bbnioyc6ti8wn")
-spawn_path = NodePath("../Characters")
-
 [node name="FightingIslands" type="Node3D" parent="."]
-
-[node name="Characters" type="Node3D" parent="."]
 
 [node name="SceneSwitcher" parent="." node_paths=PackedStringArray("buying_island") instance=ExtResource("3_vifcx")]
 buying_island = NodePath("../BuyingIsland")

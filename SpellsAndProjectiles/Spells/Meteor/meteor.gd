@@ -39,12 +39,12 @@ func _ready() -> void:
 	
 
 func _on_impact_effect_area_body_entered(body: Node3D) -> void:
-	if body is Character:
+	if body is Entity:
 		_entities_inside.append(body)
 
 
 func _on_impact_effect_area_body_exited(body: Node3D) -> void:
-	if body is Character:
+	if body is Entity:
 		_entities_inside.erase(body)
 
 

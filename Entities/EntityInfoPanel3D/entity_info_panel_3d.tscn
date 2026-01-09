@@ -4,7 +4,7 @@
 [ext_resource type="Shader" uid="uid://cxvdhkkjpr75e" path="res://VFX/VFX_2D/UI/character_health_bar.gdshader" id="2_dl6gv"]
 [ext_resource type="Shader" uid="uid://dncf64el86tmc" path="res://VFX/VFX_2D/UI/character_shield_bar.gdshader" id="3_ay4cy"]
 [ext_resource type="Shader" uid="uid://cpwpy0o14me32" path="res://VFX/VFX_2D/UI/character_mana_bar.gdshader" id="4_frffg"]
-[ext_resource type="PackedScene" uid="uid://bx7rkwxhqecme" path="res://Entities/Character/FamiliesManagers/Storm/RankViewer/ui_rank_viewer.tscn" id="5_11he6"]
+[ext_resource type="PackedScene" uid="uid://bx7rkwxhqecme" path="res://Entities/Heroes/_Shared/FamiliesManagers/Storm/RankViewer/ui_rank_viewer.tscn" id="5_11he6"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Tool/SpawnPoint/spawn_point.tscn" id="5_ay4cy"]
 [ext_resource type="FontFile" uid="uid://b3ceq6nwnmlhq" path="res://Data/font/LuckiestGuy-Regular.ttf" id="6_bb7r7"]
 

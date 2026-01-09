@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="HeroDesc" load_steps=15 format=3 uid="uid://bkksjgh6p542o"]
 
 [ext_resource type="Texture2D" uid="uid://difeq0pm3hgjs" path="res://Entities/Heroes/DarkKnight/Data/darkknight_portrait.png" id="1_aqqbn"]
-[ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://Entities/Heroes/hero_desc.gd" id="1_hluaq"]
-[ext_resource type="Script" uid="uid://2py6kv5aqgem" path="res://Entities/Heroes/hero_stats.gd" id="3_hluaq"]
-[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://Entities/Heroes/skill.gd" id="4_f1ben"]
+[ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://Entities/Heroes/_Shared/hero_desc.gd" id="1_hluaq"]
+[ext_resource type="Script" uid="uid://2py6kv5aqgem" path="res://Entities/Heroes/_Shared/hero_stats.gd" id="3_hluaq"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://Entities/Heroes/_Shared/skill.gd" id="4_f1ben"]
 [ext_resource type="Resource" uid="uid://0kx7gomigbv0" path="res://Entities/Heroes/DarkKnight/Stats/dark_knight_lvl_1.tres" id="13_ec2v6"]
 [ext_resource type="Resource" uid="uid://dl656mopqc7ou" path="res://Entities/Heroes/DarkKnight/Stats/dark_knight_lvl_2.tres" id="14_4eec3"]
 [ext_resource type="Resource" uid="uid://djaaxit4mne0s" path="res://Entities/Heroes/DarkKnight/Stats/dark_knight_lvl_3.tres" id="15_bdgmw"]

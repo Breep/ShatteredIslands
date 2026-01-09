@@ -116,17 +116,6 @@ func _spawn_fighting_islands() -> void:
 			_fighting_islands[player.id] = fighting_island
 			i += 1
 	_island_spawns_to_be_removed.queue_free()
-
-
-func _spawn_all_characters() -> void:
-	if not multiplayer.is_server(): return
-	for player in PlayerManager.players.values():
-		var character: Hero = preload("res://Entities/Hero/character.tscn").instantiate()
-		character.owner_player_id = player.id
-		character.hero_id = player.hero.id
-		character.name = "Character_" + player.hero.name + "_" + player.name
-		_node_characters.add_child(character)
-		player.character = character
 #endregion
 
 #region ============================== Callbacks ==============================
@@ -138,7 +127,6 @@ func _on_buying_island_buying_phase_finished() -> void:
 
 func _on_hero_selector_all_heroes_picked() -> void:
 	Verbose.debug("BUYING AREA ALL HEROES PICKED", Verbose.Category.GAME)
-	_spawn_all_characters()
 	GameManager.game_state = GameManager.GameState.INIT_ROUND
 
 
