@@ -133,7 +133,7 @@ func _add_stat_modifiers() -> void:
 		mod.stat_type = EntityStats.StatType.RESISTANCE
 		mod.action_type = Utils.ActionType.DAMAGE_POISON
 		mod.id = "Antidote"
-		_owner.stats_manager.register_modifier(mod)
+		_owner.stat_modifiers_registry.register_modifier(mod)
 
 #endregion
 

@@ -1,37 +1,39 @@
-class_name EntityStatsManager
-extends Node
+class_name EntityStatModifiersRegistry
+extends Resource
 
 # ============================== Export - Entity stats ==============================
 
-@export var _entity_stats: EntityStats
-@export var _entity_base_stats: EntityStats
+var _entity_stats: EntityStats
+var _entity_base_stats: EntityStats
 
 # ============================== Private variables ==============================
 
-@onready var _stats_modifiers_dictionaries: Dictionary[EntityStats.StatType, StatModifierDictionary] = {
-	# Single stats
-	EntityStats.StatType.HEALTH_MAX: StatModifierDictionary.new(),
-	EntityStats.StatType.HEALTH: StatModifierDictionary.new(),
-	EntityStats.StatType.MANA_MAX: StatModifierDictionary.new(),
-	EntityStats.StatType.MANA: StatModifierDictionary.new(),
-	EntityStats.StatType.MANA_REGEN: StatModifierDictionary.new(),
-	EntityStats.StatType.AD: StatModifierDictionary.new(),
-	EntityStats.StatType.AA_SPEED: StatModifierDictionary.new(),
-	
-	# Multiple stats
-	EntityStats.StatType.CRIT_CHANCE: StatModifierDictionary.new(),
-	EntityStats.StatType.CRIT_MULT: StatModifierDictionary.new(),
-	EntityStats.StatType.RESISTANCE: StatModifierDictionary.new(),
-	EntityStats.StatType.VULNERABILITY: StatModifierDictionary.new(),
-	EntityStats.StatType.DODGE: StatModifierDictionary.new(),
-	EntityStats.StatType.STRENGTH: StatModifierDictionary.new(),
-	EntityStats.StatType.WEAKNESS: StatModifierDictionary.new(),
-	EntityStats.StatType.CRIT_RESISTANCE: StatModifierDictionary.new(),
-}
+var _stats_modifiers_dictionaries: Dictionary[EntityStats.StatType, StatModifierDictionary]
 
 # ============================== Node base functions ==============================
 
-func _ready() -> void:
+func _init(base_stats: EntityStats, current_stats: EntityStats) -> void:
+	# Single stats
+	_stats_modifiers_dictionaries[EntityStats.StatType.HEALTH_MAX] = StatModifierDictionary.new()
+	_stats_modifiers_dictionaries[EntityStats.StatType.HEALTH] = StatModifierDictionary.new()
+	_stats_modifiers_dictionaries[EntityStats.StatType.MANA_MAX] = StatModifierDictionary.new()
+	_stats_modifiers_dictionaries[EntityStats.StatType.MANA] = StatModifierDictionary.new()
+	_stats_modifiers_dictionaries[EntityStats.StatType.MANA_REGEN] = StatModifierDictionary.new()
+	_stats_modifiers_dictionaries[EntityStats.StatType.AD] = StatModifierDictionary.new()
+	_stats_modifiers_dictionaries[EntityStats.StatType.AA_SPEED] = StatModifierDictionary.new()
+	
+	# Multiple stats
+	_stats_modifiers_dictionaries[EntityStats.StatType.CRIT_CHANCE] = StatModifierDictionary.new()
+	_stats_modifiers_dictionaries[EntityStats.StatType.CRIT_MULT] = StatModifierDictionary.new()
+	_stats_modifiers_dictionaries[EntityStats.StatType.RESISTANCE] = StatModifierDictionary.new()
+	_stats_modifiers_dictionaries[EntityStats.StatType.VULNERABILITY] = StatModifierDictionary.new()
+	_stats_modifiers_dictionaries[EntityStats.StatType.DODGE] = StatModifierDictionary.new()
+	_stats_modifiers_dictionaries[EntityStats.StatType.STRENGTH] = StatModifierDictionary.new()
+	_stats_modifiers_dictionaries[EntityStats.StatType.WEAKNESS] = StatModifierDictionary.new()
+	_stats_modifiers_dictionaries[EntityStats.StatType.CRIT_RESISTANCE] = StatModifierDictionary.new()
+	
+	_entity_base_stats = base_stats
+	_entity_stats = current_stats
 	_entity_base_stats.has_been_reset.connect(_on_entity_base_stats_has_been_reset)
 	for stat_type: EntityStats.StatType in _stats_modifiers_dictionaries.keys():
 		_stats_modifiers_dictionaries[stat_type].setup(stat_type, _entity_stats, _entity_base_stats)

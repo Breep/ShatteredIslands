@@ -196,7 +196,7 @@ func _add_stat_modifiers() -> void:
 		mod.stat_type = EntityStats.StatType.DODGE
 		mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
 		mod.id = "Fight Back"
-		_owner.stats_manager.register_modifier(mod)
+		_owner.stat_modifiers_registry.register_modifier(mod)
 	
 	# [DIAMOND SWORD]
 	if _attack_stats.diamond_sword_activated:
@@ -206,7 +206,7 @@ func _add_stat_modifiers() -> void:
 		stat_modifier.calc_type = StatModifier.CalcType.ADD
 		stat_modifier.value = _attack_stats.diamond_sword_attack
 		stat_modifier.tags = [StatModifier.TagType.CARD]
-		_owner.stats_manager.register_modifier(stat_modifier)
+		_owner.stat_modifiers_registry.register_modifier(stat_modifier)
 	
 	# [TWIN BLADE]
 	if _attack_stats.twin_blade_activated:
@@ -216,7 +216,7 @@ func _add_stat_modifiers() -> void:
 		stat_modifier.calc_type = StatModifier.CalcType.MULT
 		stat_modifier.value = _attack_stats.twin_blade_speed / 100.0
 		stat_modifier.tags = [StatModifier.TagType.CARD]
-		_owner.stats_manager.register_modifier(stat_modifier)
+		_owner.stat_modifiers_registry.register_modifier(stat_modifier)
 	
 	# [AIM ASSIST]
 	if _attack_stats.attack_aim_assist_activated:
@@ -234,7 +234,7 @@ func _add_stat_modifiers() -> void:
 		
 		stat_modifier.value = count * _attack_stats.attack_aim_assist_bonus_per_card
 		stat_modifier.tags = [StatModifier.TagType.CARD]
-		_owner.stats_manager.register_modifier(stat_modifier)
+		_owner.stat_modifiers_registry.register_modifier(stat_modifier)
 #endregion
 
 #region action modifier
@@ -259,7 +259,7 @@ func _apply_blade_rush() -> void:
 	stat_modifier.calc_type = StatModifier.CalcType.ADD
 	stat_modifier.value = _attack_stats.blade_rush_damage
 	stat_modifier.tags = [StatModifier.TagType.CARD]
-	_owner.stats_manager.register_modifier(stat_modifier)
+	_owner.stat_modifiers_registry.register_modifier(stat_modifier)
 	
 	var duration = _attack_stats.blade_rush_duration
 	var timer := Timer.new()
@@ -284,7 +284,7 @@ func _on_gatling_gun_timer_timeout() -> void:
 	stat_modifier.calc_type = StatModifier.CalcType.MULT
 	stat_modifier.value = gatling_speed_boost / 100.0
 	stat_modifier.tags = [StatModifier.TagType.CARD]
-	_owner.stats_manager.update_modifier(stat_modifier)
+	_owner.stat_modifiers_registry.update_modifier(stat_modifier)
 
 
 # [FIGHT BACK]
@@ -299,7 +299,7 @@ func _on_dodge_fight_back(_cb_vars: Dictionary) -> void:
 	stat_modifier.calc_type = StatModifier.CalcType.ADD
 	stat_modifier.value = _dodge_number * _attack_stats.fight_back_increase_attack_damage
 	stat_modifier.tags = [StatModifier.TagType.CARD]
-	_owner.stats_manager.update_modifier(stat_modifier)
+	_owner.stat_modifiers_registry.update_modifier(stat_modifier)
 
 
 # [SCORCHING BLADE]
@@ -390,7 +390,7 @@ func _on_blade_rush_timeout() -> void:
 	var mod := StatModifier.new()
 	mod.id = "Blade Rush"
 	mod.stat_type = EntityStats.StatType.AD
-	_owner.stats_manager.unregister_modifier(mod)
+	_owner.stat_modifiers_registry.unregister_modifier(mod)
 
 
 func _on_attack_storm_hammer(cb_vars: Dictionary) -> void:

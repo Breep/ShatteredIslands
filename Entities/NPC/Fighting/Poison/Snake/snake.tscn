@@ -1,17 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://drxkhoqpwnnyl"]
+[gd_scene load_steps=5 format=3 uid="uid://drxkhoqpwnnyl"]
 
 [ext_resource type="Script" uid="uid://0qhx51rq53um" path="res://Entities/NPC/Fighting/Poison/Snake/snake.gd" id="1_v4viv"]
 [ext_resource type="PackedScene" uid="uid://dqg0p41xhlwb7" path="res://Entities/NPC/Fighting/Poison/Snake/snake_visual.tscn" id="2_61c56"]
-[ext_resource type="PackedScene" uid="uid://cjqhs57x28gtu" path="res://Entities/Stats/EntityStats/entity_stats.tscn" id="3_ynu0g"]
 [ext_resource type="PackedScene" uid="uid://d0g0xkyr876lc" path="res://Entities/Modules/MovementModule/movement_module.tscn" id="4_r5ru1"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_61c56"]
 radius = 0.2
 
-[node name="Snake" type="CharacterBody3D" node_paths=PackedStringArray("stats")]
+[node name="Snake" type="CharacterBody3D"]
 script = ExtResource("1_v4viv")
 entity_name = "Snake"
-stats = NodePath("EntityStats")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09924334, 0)
@@ -20,9 +18,6 @@ shape = SubResource("SphereShape3D_61c56")
 [node name="SnakeVisual" parent="." instance=ExtResource("2_61c56")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
-
-[node name="EntityStats" parent="." instance=ExtResource("3_ynu0g")]
-health_max = 1
 
 [node name="MovementManager" parent="." node_paths=PackedStringArray("_owner") instance=ExtResource("4_r5ru1")]
 _owner = NodePath("..")

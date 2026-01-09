@@ -56,14 +56,23 @@ func signal_auto_attack_started(is_critical: bool) -> void:
 	auto_attack_started.emit(is_critical)
 #endregion
 
+#region ============================== Constants ==============================
+
+#endregion
+
 #region ============================== Public variables ==============================
 var _is_dead: bool = false
 var is_dead: bool:
 	get: return _is_dead
 
+var stats: EntityStats
+
 var target_module: TargetModule
+
 var auto_attack_modifier_registry: AutoAttackModifierRegistry
 var action_modifiers_registry: ActionModifiersRegistry
+var stat_modifiers_registry: EntityStatModifiersRegistry
+
 var stack_manager: StackManager # TODO
 #endregion
 
@@ -77,15 +86,11 @@ var stack_manager: StackManager # TODO
 # ============================== Local Nodes ==============================
 
 @export_group("Optional configuration")
-@export_subgroup("UI 3D")
 @export var _entity_info_panel_3d: EntityInfoPanel3D
 var visual: EntityInfoPanel3D:
 	get: return _entity_info_panel_3d
 
-@export_subgroup("Stats")
-@export var stats: EntityStats
 @export var base_stats: EntityStats
-@export var stats_manager: EntityStatsManager
 
 @onready var bds_registry := EntityBDSRegistry.new(entity_name)
 
@@ -146,9 +151,15 @@ func _enter_tree() -> void:
 
 
 func _entity_enter_tree() -> void:
+	# Stats
+	stats = EntityStats.new()
+	if base_stats == null:
+		base_stats = EntityStats.new()
+	
 	# Default Modifier Registries
 	auto_attack_modifier_registry = AutoAttackModifierRegistry.new()
 	action_modifiers_registry = ActionModifiersRegistry.new()
+	stat_modifiers_registry = EntityStatModifiersRegistry.new(base_stats, stats)
 	
 	# Add default module if not already added
 	if target_module == null:

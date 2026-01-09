@@ -121,7 +121,7 @@ func _add_stat_modifiers() -> void:
 		mod.stat_type = EntityStats.StatType.DODGE
 		mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
 		mod.id = "Dark Forest"
-		_owner.stats_manager.register_modifier(mod)
+		_owner.stat_modifiers_registry.register_modifier(mod)
 		
 	# [ORBITAL STATION]
 	if _fire_stats.orbital_station_activated:
@@ -132,7 +132,7 @@ func _add_stat_modifiers() -> void:
 		mod.calc_type = StatModifier.CalcType.ADD
 		mod.value = _fire_stats.orbital_station_crit_chance
 		mod.tags = [StatModifier.TagType.CARD]
-		_owner.stats_manager.register_modifier(mod)
+		_owner.stat_modifiers_registry.register_modifier(mod)
 
 #endregion
 
@@ -239,7 +239,7 @@ func _on_titans_protection_meteor_hit(_cb_vars: Dictionary) -> void:
 		mod.calc_type = StatModifier.CalcType.ADD
 		mod.value = _titans_protection_accumulated_hp
 		mod.tags = [StatModifier.TagType.CARD]
-		_owner.stats_manager.update_modifier(mod)
+		_owner.stat_modifiers_registry.update_modifier(mod)
 #endregion
 
 #region ========== KUIPER BELT ==========

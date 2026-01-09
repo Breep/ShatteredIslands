@@ -1,5 +1,5 @@
 class_name EntityStats
-extends Node
+extends Resource
 
 #region ============================== Enum ==============================
 enum StatType {
@@ -262,7 +262,7 @@ func get_buf_stacks_number() -> float:
 	return _armor_stacks + _regen_stacks
 
 
-func reset_from_hero_desc(hero: HeroDesc, lvl: int) -> void:
+func reset_from_hero_desc(hero: HeroDesc, lvl: int) -> EntityStats:
 	health_max = hero.stats[lvl].health_max
 	health = health_max
 	mana_max = hero.stats[lvl].mana_max
@@ -282,6 +282,7 @@ func reset_from_hero_desc(hero: HeroDesc, lvl: int) -> void:
 		_crit_resistances[action_type] = hero.stats[lvl].crit_resistances.get(action_type, 0.0)
 	
 	has_been_reset.emit()
+	return self
 
 
 func get_stat(stat_type: StatType, action_type: Utils.ActionType = Utils.ActionType.DAMAGE_PHYSICAL) -> float:

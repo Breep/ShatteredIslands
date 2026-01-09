@@ -143,7 +143,7 @@ func _add_stat_modifiers() -> void:
 		mod.calc_type = StatModifier.CalcType.ADD
 		mod.value = _storm_stats.thunder_berserker_start_boost
 		mod.tags = [StatModifier.TagType.CARD]
-		_owner.stats_manager.register_modifier(mod)
+		_owner.stat_modifiers_registry.register_modifier(mod)
 		
 	# [FARADAY]
 	if _storm_stats.faraday_activated:
@@ -155,7 +155,7 @@ func _add_stat_modifiers() -> void:
 			mod.id = "Faraday"
 			mod.tags = [StatModifier.TagType.CARD]
 			mod.value = _storm_stats.faraday_crit_chance_boost
-			_owner.stats_manager.register_modifier(mod)
+			_owner.stat_modifiers_registry.register_modifier(mod)
 			
 	# [VIOLENT OVERLOAD]
 	if _storm_stats.violent_overload_activated:
@@ -167,7 +167,7 @@ func _add_stat_modifiers() -> void:
 			mod.id = "Violent Overload"
 			mod.tags = [StatModifier.TagType.CARD]
 			mod.value = _storm_stats.violent_overload_crit_mult_boost
-			_owner.stats_manager.register_modifier(mod)
+			_owner.stat_modifiers_registry.register_modifier(mod)
 
 	# [LIGHTNING FOOTWORK]
 	if _storm_stats.lightning_footwork_activated:
@@ -177,7 +177,7 @@ func _add_stat_modifiers() -> void:
 		mod.calc_type = StatModifier.CalcType.ADD
 		mod.value = _lightning_footwork_current_bonus
 		mod.tags = [StatModifier.TagType.CARD]
-		_owner.stats_manager.register_modifier(mod)
+		_owner.stat_modifiers_registry.register_modifier(mod)
 		
 	# [LIGHTNING ROD]
 	if _storm_stats.lightning_rod_activated:
@@ -239,7 +239,7 @@ func _call_the_lightning() -> void:
 # [STORM BREAKER]
 func _apply_storm_breaker_effect() -> void:
 	var target: Entity = _owner.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
-	if target == null or not is_instance_valid(target) or target.stats_manager == null: return
+	if target == null or not is_instance_valid(target) or target.stat_modifiers_registry == null: return
 	var rank_mult: float = RANK_VALUE_MULTIPLIERS.get(_current_rank, 1.0)
 	var base_percent: float = _storm_stats.storm_breaker_base_reduction_percent
 	var added_percent: float = base_percent * rank_mult
@@ -256,7 +256,7 @@ func _apply_storm_breaker_effect() -> void:
 	mod.calc_type = StatModifier.CalcType.ADD
 	mod.value = new_total
 	mod.tags = [StatModifier.TagType.CARD]
-	target.stats_manager.update_modifier(mod)
+	target.stat_modifiers_registry.update_modifier(mod)
 
 # [LIGHTNING ROD]
 var _lightning_rod_is_active: bool = false
@@ -287,7 +287,7 @@ func _apply_thunder_berserker_penalty() -> void:
 	mod.calc_type = StatModifier.CalcType.ADD
 	mod.value = - (_thunder_berserker_accumulated_penalty)
 	mod.tags = [StatModifier.TagType.CARD]
-	_owner.stats_manager.update_modifier(mod)
+	_owner.stat_modifiers_registry.update_modifier(mod)
 
 func _update_lightning_footwork_modifier() -> void:
 	var mod := StatModifier.new()
@@ -296,7 +296,7 @@ func _update_lightning_footwork_modifier() -> void:
 	mod.calc_type = StatModifier.CalcType.ADD
 	mod.value = _lightning_footwork_current_bonus
 	mod.tags = [StatModifier.TagType.CARD]
-	_owner.stats_manager.update_modifier(mod)
+	_owner.stat_modifiers_registry.update_modifier(mod)
 
 # [DYNAMO]
 func _apply_dynamo_effect() -> void:
@@ -327,7 +327,7 @@ func _apply_eye_of_the_cyclone_effect() -> void:
 	mod.calc_type = StatModifier.CalcType.ADD
 	mod.value = _eye_of_the_cyclone_accumulated_bonus
 	mod.tags = [StatModifier.TagType.CARD]
-	_owner.stats_manager.update_modifier(mod)
+	_owner.stat_modifiers_registry.update_modifier(mod)
 	
 	_owner.heal(_owner, max_hp_bonus, "Eye of the Cyclone")
 
@@ -357,10 +357,10 @@ func _apply_lightning_rod_modifier(enabled: bool) -> void:
 			mod.calc_type = StatModifier.CalcType.ADD
 			mod.value = _storm_stats.lightning_rod_resistance_amount
 			mod.tags = [StatModifier.TagType.CARD]
-			_owner.stats_manager.register_modifier(mod)
+			_owner.stat_modifiers_registry.register_modifier(mod)
 	else:
 		for action_type in Utils.get_all_actions():
-			_owner.stats_manager.remove_modifier(EntityStats.StatType.CRIT_RESISTANCE, mod_id + str(action_type), action_type)
+			_owner.stat_modifiers_registry.remove_modifier(EntityStats.StatType.CRIT_RESISTANCE, mod_id + str(action_type), action_type)
 
 #endregion
 

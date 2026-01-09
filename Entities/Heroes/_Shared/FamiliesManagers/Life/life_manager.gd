@@ -88,7 +88,7 @@ func _add_stat_modifiers() -> void:
 		mod.stat_type = EntityStats.StatType.DODGE
 		mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
 		mod.id = "Evasive Growth"
-		_owner.stats_manager.register_modifier(mod)
+		_owner.stat_modifiers_registry.register_modifier(mod)
 		
 	# [PROTEINS]
 	if _life_stats.proteins_activated:
@@ -99,7 +99,7 @@ func _add_stat_modifiers() -> void:
 		mod.value = _life_stats.proteins_max_hp_increase
 		mod.tags = [StatModifier.TagType.CARD]
 
-		_owner.stats_manager.register_modifier(mod)
+		_owner.stat_modifiers_registry.register_modifier(mod)
 		_owner.stats.health += _life_stats.proteins_max_hp_increase
 		
 	# [BEAR STRENGTH]
@@ -110,7 +110,7 @@ func _add_stat_modifiers() -> void:
 		as_mod.calc_type = StatModifier.CalcType.MULT
 		as_mod.value = -(_life_stats.bear_strength_as_reduction / 100.0)
 		as_mod.tags = [StatModifier.TagType.CARD]
-		_owner.stats_manager.register_modifier(as_mod)
+		_owner.stat_modifiers_registry.register_modifier(as_mod)
 		
 		var ad_mod := StatModifier.new()
 		ad_mod.id = "Bear Strength AD"
@@ -122,7 +122,7 @@ func _add_stat_modifiers() -> void:
 		ad_mod.value = max_hp * (percent / 100.0)
 		
 		ad_mod.tags = [StatModifier.TagType.CARD]
-		_owner.stats_manager.register_modifier(ad_mod)
+		_owner.stat_modifiers_registry.register_modifier(ad_mod)
 		
 	# [CRYSTAL MOUNTAIN]
 	if _life_stats.crystal_mountain_activated:
@@ -136,7 +136,7 @@ func _add_stat_modifiers() -> void:
 		phys_mod.calc_type = StatModifier.CalcType.ADD
 		phys_mod.value = defense_val
 		phys_mod.tags = [StatModifier.TagType.CARD]
-		_owner.stats_manager.register_modifier(phys_mod)
+		_owner.stat_modifiers_registry.register_modifier(phys_mod)
 		
 		# 2. Résistance MAGIQUE
 		var magic_mod := StatModifier.new()
@@ -147,7 +147,7 @@ func _add_stat_modifiers() -> void:
 		magic_mod.calc_type = StatModifier.CalcType.ADD
 		magic_mod.value = defense_val
 		magic_mod.tags = [StatModifier.TagType.CARD]
-		_owner.stats_manager.register_modifier(magic_mod)
+		_owner.stat_modifiers_registry.register_modifier(magic_mod)
 		
 		# 3. Résistance POISON
 		var poison_mod := StatModifier.new()
@@ -157,7 +157,7 @@ func _add_stat_modifiers() -> void:
 		poison_mod.calc_type = StatModifier.CalcType.ADD
 		poison_mod.value = defense_val
 		poison_mod.tags = [StatModifier.TagType.CARD]
-		_owner.stats_manager.register_modifier(poison_mod)
+		_owner.stat_modifiers_registry.register_modifier(poison_mod)
 		
 	# [ANCIENT COLLECTOR]
 	if _life_stats.ancient_collector_activated:
@@ -175,7 +175,7 @@ func _add_stat_modifiers() -> void:
 			push_warning("LifeManager: _player or deck is null for Ancient Collector")
 		
 		mod.tags = [StatModifier.TagType.CARD]
-		_owner.stats_manager.register_modifier(mod)
+		_owner.stat_modifiers_registry.register_modifier(mod)
 		
 #endregion
 
@@ -270,4 +270,4 @@ func _on_ancient_growth_timer_timeout() -> void:
 	mod.calc_type = StatModifier.CalcType.ADD
 	mod.value = _ancient_growth_total_bonus
 	mod.tags = [StatModifier.TagType.CARD]
-	_owner.stats_manager.update_modifier(mod)
+	_owner.stat_modifiers_registry.update_modifier(mod)

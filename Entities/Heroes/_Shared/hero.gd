@@ -23,6 +23,7 @@ const NECRO_MANAGER_SCENE: PackedScene = preload("res://Entities/Heroes/_Shared/
 #region ============================== Export ==============================
 @export_group("Configuration")
 @export var hero_desc: HeroDesc
+@export_range(1, 10, 1) var level: int = 1
 
 @export_group("Local Nodes")
 @export var _hero_animator: HeroAnimator
@@ -142,14 +143,16 @@ func take_dispell(value: float, is_critical: bool, action_id: StringName, source
 #region ============================== Node base functions ==============================
 func _enter_tree() -> void:
 	_hero_enter_tree()
+	_entity_enter_tree()
 
 
 func _hero_enter_tree() -> void:
-	_entity_enter_tree()
+	# Configure stats
+	if base_stats == null and hero_desc != null:
+		base_stats = EntityStats.new().reset_from_hero_desc(hero_desc, level)
 	
+	# Add Family Managers and Family stats
 	families_stats = FamiliesStats.new()
-	
-	# Add Family Managers
 	add_child(DEFENSE_MANAGER_SCENE.instantiate().init(self))
 	add_child(FIRE_MANAGER_SCENE.instantiate().init(self))
 	add_child(LIFE_MANAGER_SCENE.instantiate().init(self))
@@ -171,6 +174,10 @@ func _hero_enter_tree() -> void:
 
 
 func _ready() -> void:
+	_hero_ready()
+
+
+func _hero_ready() -> void:
 	if battle_id == -1:
 		_entity_info_panel_3d.hide()
 	

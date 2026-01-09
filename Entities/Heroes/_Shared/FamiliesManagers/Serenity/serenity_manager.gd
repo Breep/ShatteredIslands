@@ -117,7 +117,7 @@ func _add_stat_modifiers() -> void:
 		mod.stat_type = EntityStats.StatType.DODGE
 		mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
 		mod.id = "Graceful Step"
-		_owner.stats_manager.register_modifier(mod)
+		_owner.stat_modifiers_registry.register_modifier(mod)
 		
 	# [MIRACLE LIGHT]
 	if _serenity_stats.miracle_light_activated:
@@ -131,7 +131,7 @@ func _add_stat_modifiers() -> void:
 		heal_mod.calc_type = StatModifier.CalcType.ADD
 		heal_mod.value = crit_bonus
 		heal_mod.tags = [StatModifier.TagType.CARD]
-		_owner.stats_manager.register_modifier(heal_mod)
+		_owner.stat_modifiers_registry.register_modifier(heal_mod)
 		
 		# 2. Bonus pour CLEANSE
 		var cleanse_mod := StatModifier.new()
@@ -141,7 +141,7 @@ func _add_stat_modifiers() -> void:
 		cleanse_mod.calc_type = StatModifier.CalcType.ADD
 		cleanse_mod.value = crit_bonus
 		cleanse_mod.tags = [StatModifier.TagType.CARD]
-		_owner.stats_manager.register_modifier(cleanse_mod)
+		_owner.stat_modifiers_registry.register_modifier(cleanse_mod)
 		
 		# 3. Bonus pour REGEN
 		var regen_mod := StatModifier.new()
@@ -151,7 +151,7 @@ func _add_stat_modifiers() -> void:
 		regen_mod.calc_type = StatModifier.CalcType.ADD
 		regen_mod.value = crit_bonus
 		regen_mod.tags = [StatModifier.TagType.CARD]
-		_owner.stats_manager.register_modifier(regen_mod)
+		_owner.stat_modifiers_registry.register_modifier(regen_mod)
 		
 
 #region action modifier

@@ -215,7 +215,7 @@ func _add_stat_modifiers() -> void:
 		mod.calc_type = StatModifier.CalcType.ADD
 		mod.value = _defense_stats.evasive_barrier_dodge_increase
 		mod.tags = [StatModifier.TagType.CARD]
-		_owner.stats_manager.register_modifier(mod)
+		_owner.stat_modifiers_registry.register_modifier(mod)
 		
 	# [AVENGERS ASSEMBLE]
 	if _defense_stats.avengers_assemble_activated:
@@ -226,7 +226,7 @@ func _add_stat_modifiers() -> void:
 		mod.calc_type = StatModifier.CalcType.ADD
 		mod.value = _defense_stats.avengers_assemble_crit_chance
 		mod.tags = [StatModifier.TagType.CARD]
-		_owner.stats_manager.register_modifier(mod)
+		_owner.stat_modifiers_registry.register_modifier(mod)
 
 
 func _clear_stat_modifiers() -> void:
@@ -235,7 +235,7 @@ func _clear_stat_modifiers() -> void:
 		var mod := StatModifier.new()
 		mod.id = "Evasive Barrier"
 		mod.stat_type = EntityStats.StatType.DODGE
-		_owner.stats_manager.unregister_modifier(mod)
+		_owner.stat_modifiers_registry.unregister_modifier(mod)
 		
 	# [AVENGERS ASSEMBLE]
 	if _defense_stats.avengers_assemble_activated:
@@ -243,7 +243,7 @@ func _clear_stat_modifiers() -> void:
 		mod.id = "Avengers Assemble"
 		mod.stat_type = EntityStats.StatType.CRIT_CHANCE
 		mod.action_type = Utils.ActionType.STACK_ARMOR
-		_owner.stats_manager.unregister_modifier(mod)
+		_owner.stat_modifiers_registry.unregister_modifier(mod)
 		
 #endregion
 
@@ -309,11 +309,11 @@ func _update_protective_dome_modifier(current_armor: float) -> void:
 		if not _protective_dome_modifier_active:
 			mod.calc_type = StatModifier.CalcType.ADD
 			mod.value = _defense_stats.protective_dome_armor_percent
-			_owner.stats_manager.register_modifier(mod)
+			_owner.stat_modifiers_registry.register_modifier(mod)
 			_protective_dome_modifier_active = true
 	else:
 		if _protective_dome_modifier_active:
-			_owner.stats_manager.unregister_modifier(mod)
+			_owner.stat_modifiers_registry.unregister_modifier(mod)
 			_protective_dome_modifier_active = false
 #endregion
 

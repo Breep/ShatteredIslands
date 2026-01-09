@@ -23,7 +23,7 @@ func get_description(cardlvl: int) -> String:
 func _on_purchase(cb_vars: Dictionary) -> void:
 	if not cb_vars.has(VarType.STAT_MODIFIERS_MANAGER): return
 	if not cb_vars.has(VarType.FAMILIES_STATS): return
-	var stat_modifier_manager: EntityStatsManager = cb_vars[VarType.STAT_MODIFIERS_MANAGER]
+	var stat_modifier_manager: EntityStatModifiersRegistry = cb_vars[VarType.STAT_MODIFIERS_MANAGER]
 	var poison_stats: FamilyPoisonStats = cb_vars[VarType.STAT_MODIFIERS_MANAGER].poison
 	var mod := StatModifier.new()
 	mod.calc_type = StatModifier.CalcType.ADD
