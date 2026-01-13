@@ -96,9 +96,10 @@ var visual: EntityInfoPanel3D:
 
 #region ============================== Enums ==============================
 enum FightingState {
-	POSITIONING,
+	IDLE,
 	FIGHTING,
 	CELEBRATING,
+	DEAD,
 	UNDEF
 }
 

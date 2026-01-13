@@ -30,7 +30,7 @@ signal has_been_reset()
 #region ============================== Health ==============================
 @export_group("Health")
 signal health_max_changed(new_health_max: float)
-var _health_max: float # Maximum health of the character (Can't be heal over this)
+var _health_max: float = 100 # Maximum health of the character (Can't be heal over this)
 @export var health_max: float:
 	get: return _health_max
 	set(value):

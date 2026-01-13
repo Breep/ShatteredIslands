@@ -16,10 +16,6 @@ func stop() -> void:
 	_owner.stats.mana = 0
 
 
-func _specific_init() -> void:
-	_mana_tick_timer.wait_time = _timer_wait_time
-
-
 func _on_mana_tick_timer_timeout() -> void:
 	var inc: float = _owner.stats.mana_regen * _timer_wait_time
 	_owner.stats.mana += inc

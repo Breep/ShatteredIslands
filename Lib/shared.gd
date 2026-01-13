@@ -28,6 +28,18 @@ var ENTITY_MODULE_SCENES: Dictionary[Module.ModuleType, PackedScene] = {
 	Module.ModuleType.TARGET: load("res://Entities/Modules/TargetModule/target_module.tscn")
 }
 
+var FAMILY_MANAGER_SCENES: Dictionary[Family.FamilyType, PackedScene] = {
+	Family.FamilyType.DEFENSE: load("res://Entities/Heroes/_Shared/FamiliesManagers/Defense/defense_manager.tscn"),
+	Family.FamilyType.FIRE: load("res://Entities/Heroes/_Shared/FamiliesManagers/Fire/fire_manager.tscn"),
+	Family.FamilyType.LIFE: load("res://Entities/Heroes/_Shared/FamiliesManagers/Life/life_manager.tscn"),
+	Family.FamilyType.POISON: load("res://Entities/Heroes/_Shared/FamiliesManagers/Poison/poison_manager.tscn"),
+	Family.FamilyType.SERENITY: load("res://Entities/Heroes/_Shared/FamiliesManagers/Serenity/serenity_manager.tscn"),
+	Family.FamilyType.STORM: load("res://Entities/Heroes/_Shared/FamiliesManagers/Storm/storm_manager.tscn"),
+	Family.FamilyType.ATTACK: load("res://Entities/Heroes/_Shared/FamiliesManagers/Attack/attack_manager.tscn"),
+	Family.FamilyType.MANA: load("res://Entities/Heroes/_Shared/FamiliesManagers/Mana/mana_manager.tscn"),
+	Family.FamilyType.NECROSIS: load("res://Entities/Heroes/_Shared/FamiliesManagers/Necro/necro_manager.tscn"),
+}
+
 var DAMAGE_POPUP_SCENE: PackedScene = load("res://UI/3D/DamagePopup/damage_popup.tscn")
 
 var scene_switcher: SceneSwitcher

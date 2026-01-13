@@ -1,15 +1,99 @@
-[gd_scene load_steps=3 format=3 uid="uid://dqno5p3aprq7f"]
+[gd_scene load_steps=7 format=3 uid="uid://dqno5p3aprq7f"]
 
+[ext_resource type="Script" uid="uid://brd0wxqwulj8y" path="res://Prototyping/Entity/prototyping_entity.gd" id="1_6kn6i"]
 [ext_resource type="PackedScene" uid="uid://c48aqh8mlb7lc" path="res://Entities/Heroes/DarkKnight/dark_knight.tscn" id="1_icvx6"]
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="2_083cp"]
+[ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://UI/Tool/Misc/hover_boost_button.gd" id="3_6kn6i"]
+[ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_egh8k"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_d4u4x"]
 size = Vector2(20, 20)
 
 [node name="PrototypingEntity" type="Node3D"]
+script = ExtResource("1_6kn6i")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 mesh = SubResource("QuadMesh_d4u4x")
 
-[node name="DarkKnight" parent="." instance=ExtResource("1_icvx6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.084029675, 2.3841858e-07, 3.035501)
+[node name="Entities" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="DarkKnight" parent="Entities" instance=ExtResource("1_icvx6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0013899803, 7.1525574e-07, 4.619981)
+team = 1
+
+[node name="DarkKnight2" parent="Entities" instance=ExtResource("1_icvx6")]
+transform = Transform3D(-0.99893624, 0, 0.04611278, 0, 1, 0, -0.04611278, 0, -0.99893624, -0.032851696, -4.7683716e-07, -5.1778226)
+team = 2
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_083cp")
+
+[node name="GlobalCommandsControl" type="Control" parent="Control"]
+anchors_preset = 0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 320.0
+offset_bottom = 181.0
+
+[node name="Panel" type="Panel" parent="Control/GlobalCommandsControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/GlobalCommandsControl/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/GlobalCommandsControl/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+text = "GLOBAL COMMANDS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartFightButton" type="Button" parent="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Start FIGHT"
+script = ExtResource("3_6kn6i")
+
+[node name="StopFightButton" type="Button" parent="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Stop FIght"
+script = ExtResource("3_6kn6i")
+
+[node name="ResetFightButton" type="Button" parent="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Reset FIGHT"
+script = ExtResource("3_6kn6i")
+
+[node name="CenterPointCamera" parent="." instance=ExtResource("4_egh8k")]
+
+[connection signal="pressed" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StartFightButton" to="." method="_on_start_fight_button_pressed"]
+[connection signal="pressed" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StopFightButton" to="." method="_on_stop_fight_button_pressed"]
+[connection signal="pressed" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/ResetFightButton" to="." method="_on_reset_fight_button_pressed"]

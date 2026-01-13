@@ -8,18 +8,6 @@ signal aa_done()
 signal ultimate_casted()
 #endregion
 
-#region ============================== Family Managers ==============================
-const DEFENSE_MANAGER_SCENE: PackedScene = preload("res://Entities/Heroes/_Shared/FamiliesManagers/Defense/defense_manager.tscn")
-const FIRE_MANAGER_SCENE: PackedScene = preload("res://Entities/Heroes/_Shared/FamiliesManagers/Fire/fire_manager.tscn")
-const LIFE_MANAGER_SCENE: PackedScene = preload("res://Entities/Heroes/_Shared/FamiliesManagers/Life/life_manager.tscn")
-const POISON_MANAGER_SCENE: PackedScene = preload("res://Entities/Heroes/_Shared/FamiliesManagers/Poison/poison_manager.tscn")
-const SERENITY_MANAGER_SCENE: PackedScene = preload("res://Entities/Heroes/_Shared/FamiliesManagers/Serenity/serenity_manager.tscn")
-const STORM_MANAGER_SCENE: PackedScene = preload("res://Entities/Heroes/_Shared/FamiliesManagers/Storm/storm_manager.tscn")
-const ATTACK_MANAGER_SCENE: PackedScene = preload("res://Entities/Heroes/_Shared/FamiliesManagers/Attack/attack_manager.tscn")
-const MANA_MANAGER_SCENE: PackedScene = preload("res://Entities/Heroes/_Shared/FamiliesManagers/Mana/mana_manager.tscn")
-const NECRO_MANAGER_SCENE: PackedScene = preload("res://Entities/Heroes/_Shared/FamiliesManagers/Necro/necro_manager.tscn")
-#endregion
-
 #region ============================== Export ==============================
 @export_group("Configuration")
 @export var hero_desc: HeroDesc
@@ -28,10 +16,9 @@ const NECRO_MANAGER_SCENE: PackedScene = preload("res://Entities/Heroes/_Shared/
 @export_group("Local Nodes")
 @export var _hero_animator: HeroAnimator
 
+
 @export_subgroup("Optional")
-@export var _character_logic: CharacterLogic
-@export var _interact_module: InteractModule
-@export var _action_module: ActionModule
+
 @export var anim_events_manager: AnimEventsManager
 #endregion
 
@@ -41,21 +28,30 @@ var families_stats: FamiliesStats
 #endregion
 
 #region ============================== Private variables ==============================
+var _interact_module: InteractModule
+var _action_module: ActionModule
+var _auto_attack_module: AutoAttackModule
+
 var _skill_manager: SkillManager
+var _family_managers: Array[FamilyManager]
 #endregion
 
 #region ============================== Public functions ==============================
 func connect_to_fighting_area(fighting_area_ref: FightingArea) -> void:
+	if fighting_area_ref == null:
+		Verbose.error("Trying to connect a null fighting area to a Hero", Verbose.Category.HERO)
+		return
+	
 	fighting_area = fighting_area_ref
-	_character_logic.connect_to_fighting_area(fighting_area)
+	_action_module.connect_to_spawn_manager(fighting_area.spawn_manager)
 
 
 func get_auto_attack_spawn() -> Node3D:
 	return self
 
 
-func get_rank_changed_signal() -> Signal:
-	return _character_logic.get_rank_changed_signal()
+#func get_rank_changed_signal() -> Signal: # TODO
+	#return _character_logic.get_rank_changed_signal()
 #endregion
 
 #region ===== Actions =====
@@ -107,9 +103,6 @@ func heal_percent(target: Entity, percent: float, percent_modifier: Utils.Percen
 func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Utils.StackType, action_id: StringName, duration: float = 5.0) -> void:
 	_action_module.inflict_condition_stacks(target, stacks_number, stack_type, action_id, duration)
 
-#func ultimate() -> void:
-	#_hero_3D.ultimate()
-
 func summon_entity(entity_type: EntityType, entity_spawn_global_position: Vector3, entity_modifier: Dictionary) -> void:
 	_action_module.summon_entity(entity_type, entity_spawn_global_position, entity_modifier)
 
@@ -153,17 +146,11 @@ func _hero_enter_tree() -> void:
 	
 	# Add Family Managers and Family stats
 	families_stats = FamiliesStats.new()
-	add_child(DEFENSE_MANAGER_SCENE.instantiate().init(self))
-	add_child(FIRE_MANAGER_SCENE.instantiate().init(self))
-	add_child(LIFE_MANAGER_SCENE.instantiate().init(self))
-	add_child(POISON_MANAGER_SCENE.instantiate().init(self))
-	add_child(SERENITY_MANAGER_SCENE.instantiate().init(self))
-	add_child(STORM_MANAGER_SCENE.instantiate().init(self))
-	add_child(ATTACK_MANAGER_SCENE.instantiate().init(self))
-	add_child(MANA_MANAGER_SCENE.instantiate().init(self))
-	add_child(NECRO_MANAGER_SCENE.instantiate().init(self))
+	for family_type: Family.FamilyType in Shared.FAMILY_MANAGER_SCENES.keys():
+		_family_managers[family_type] = Shared.FAMILY_MANAGER_SCENES[family_type].instantiate().init(self)
+		add_child(_family_managers[family_type])
 	
-	# Add Action/Interact Modules
+	# Add Action/Interact/AutoAttack Modules
 	if _interact_module == null:
 		_interact_module = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.ACTION].instantiate().init(self)
 		add_child(_interact_module)
@@ -171,6 +158,10 @@ func _hero_enter_tree() -> void:
 	if _action_module == null:
 		_action_module = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.INTERACT].instantiate().init(self)
 		add_child(_action_module)
+	
+	if _auto_attack_module == null:
+		_auto_attack_module = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.AUTOATTACK].instantiate().init(self)
+		add_child(_auto_attack_module)
 
 
 func _ready() -> void:
@@ -186,8 +177,7 @@ func _hero_ready() -> void:
 	
 	stats.health_changed.connect(_on_stats_health_changed)
 	
-	var aa_module: AutoAttackModule = _character_logic.modules[Module.ModuleType.AUTOATTACK]
-	aa_module.attack_done.connect(_on_aa_module_attack_done)
+	_auto_attack_module.attack_done.connect(_on_aa_module_attack_done)
 	
 	anim_events_manager.attack_hit_frame.connect(_on_anim_events_manager_attack_hit_frame)
 	
@@ -208,7 +198,7 @@ func _handle_death() -> void:
 func _on_gfm_fighting_phase_state_changed(fighting_phase_state: GlobalFightingManager.FightingPhaseState) -> void:
 	match fighting_phase_state:
 		GlobalFightingManager.FightingPhaseState.POSITIONING:
-			fighting_state = FightingState.POSITIONING
+			fighting_state = FightingState.IDLE
 		GlobalFightingManager.FightingPhaseState.NORMAL:
 			fighting_state = FightingState.FIGHTING
 		GlobalFightingManager.FightingPhaseState.CELEBRATING:

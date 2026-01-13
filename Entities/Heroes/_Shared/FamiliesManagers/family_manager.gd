@@ -11,14 +11,11 @@ var _optional_spells: Array[Node]
 func _ready() -> void:
 	if _owner == null:
 		printerr("FamilyManager: Need a character owner [", get_path(), "]")
-	
-	_optional_spells.clear()
-	_optional_timers.clear()
+		queue_free()
 
 
 func init(hero_owner: Hero) -> FamilyManager:
 	_owner = hero_owner
-	_specific_init()
 	return self
 
 
@@ -28,7 +25,3 @@ func start() -> void:
 
 func stop() -> void:
 	printerr("FamilyManager: virtual stop() called [", get_path(), "]")
-
-
-func _specific_init() -> void:
-	pass
