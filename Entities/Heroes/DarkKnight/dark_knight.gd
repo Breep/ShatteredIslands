@@ -59,7 +59,12 @@ const SUPER_STRIKE_ON_ATTACK_SCENE: PackedScene = preload("res://Entities/Heroes
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	aa_done.connect(_on_character_owner_aa_done)
+	_dark_knight_ready()
+	_hero_ready()
+
+
+func _dark_knight_ready() -> void:
+	aa_done.connect(_on_aa_done)
 	
 	if _cataclysm_activated:
 		_on_cataclysm_activation()
@@ -144,7 +149,7 @@ func _register_spark_of_light() -> void:
 
 # ============================== Callback ==============================
 
-func _on_character_owner_aa_done() -> void:
+func _on_aa_done() -> void:
 	var max_charge: int = _mega_strike_max_charge if _mega_strike_activated else _super_strike_max_charge
 	_super_strike_charges = (_super_strike_charges + 1) % (max_charge + 1)
 	super_strike_charges_changed.emit(_super_strike_charges, max_charge)
@@ -153,7 +158,7 @@ func _on_character_owner_aa_done() -> void:
 	stat_modifier.id = "Super Strike"
 	stat_modifier.stat_type = EntityStats.StatType.AD
 	stat_modifier.calc_type = StatModifier.CalcType.ADD
-	stat_modifier.value = _super_strike_factor * _super_strike_charges # TODO -> * _character_owner.player.lvl
+	stat_modifier.value = _super_strike_factor * _super_strike_charges # TODO -> * player_owner.lvl
 	stat_modifier.tags = [StatModifier.TagType.HERO]
 	stat_modifiers_registry.update_modifier(stat_modifier)
 	if _is_next_attack_super_strike():

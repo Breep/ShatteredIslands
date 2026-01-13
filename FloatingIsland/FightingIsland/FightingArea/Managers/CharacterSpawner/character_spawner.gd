@@ -1,5 +1,5 @@
 extends Node
-class_name CharacterSpawner
+class_name HeroSpawner
 
 # ============================== Signal ==============================
 
@@ -19,8 +19,8 @@ func _ready() -> void:
 # ============================== Public function ==============================
 
 # Reparent heroes into the node_to_spawn_into node and teleport them on the FightingArea
-func spawn_characters(heroes: Array[Hero], node_to_spawn_into: Node3D) -> void:
-	Verbose.debug("Spawning Characters | " + str(heroes.size()), Verbose.Category.CHARACTER_SPAWNER)
+func spawn_heroes(heroes: Array[Hero], node_to_spawn_into: Node3D) -> void:
+	Verbose.debug("Spawning Heroes | " + str(heroes.size()), Verbose.Category.HERO_SPAWNER)
 	var _available_spawn_points: Array[SpawnPoint] = _spawn_points.duplicate()
 	for hero: Hero in heroes:
 		_spawn_hero(hero, _available_spawn_points, node_to_spawn_into)
@@ -30,7 +30,7 @@ func spawn_characters(heroes: Array[Hero], node_to_spawn_into: Node3D) -> void:
 # spawn an already instatiated hero on the _entities_node at a spawn location available
 func _spawn_hero(hero: Hero, available_spawn_locations: Array[SpawnPoint], node_to_spawn_into: Node3D) -> bool:
 	if hero == null:
-		Verbose.error("Trying to spawn a <null> Hero", Verbose.Category.CHARACTER_SPAWNER)
+		Verbose.error("Trying to spawn a <null> Hero", Verbose.Category.HERO_SPAWNER)
 		return false
 	
 	for spawn_point: SpawnPoint in available_spawn_locations:
@@ -41,5 +41,5 @@ func _spawn_hero(hero: Hero, available_spawn_locations: Array[SpawnPoint], node_
 			available_spawn_locations.erase(spawn_point)
 			return true
 	
-	Verbose.error("No more available spawn point for " + hero.name + " [Team#" + str(hero.team) + "]", Verbose.Category.CHARACTER_SPAWNER)
+	Verbose.error("No more available spawn point for " + hero.name + " [Team#" + str(hero.team) + "]", Verbose.Category.HERO_SPAWNER)
 	return false 

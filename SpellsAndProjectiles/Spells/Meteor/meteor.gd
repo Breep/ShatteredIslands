@@ -3,7 +3,7 @@ extends Node3D
 
 var _on_hit_callbacks: Array
 
-var _entities_inside: Array[Entity] # Array of all character inside the area
+var _entities_inside: Array[Entity] # Array of all Entities inside the area
 
 var _owner: Entity # Owner of this healing fire area
 var _target: Entity

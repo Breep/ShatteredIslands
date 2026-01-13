@@ -10,7 +10,7 @@ var _optional_spells: Array[Node]
 
 func _ready() -> void:
 	if _owner == null:
-		printerr("FamilyManager: Need a character owner [", get_path(), "]")
+		printerr("FamilyManager: Need a hero owner [", get_path(), "]")
 		queue_free()
 
 

@@ -90,7 +90,7 @@ func stop() -> void:
 	_scanning_area.monitoring = false
 
 
-# Get target of the owned character from a given strategy
+# Get target of the owned entity from a given strategy
 func get_target(targetting_strategy: TargettingStrategy) -> Entity:
 	match targetting_strategy:
 # --- DISTANCE ---
@@ -124,20 +124,20 @@ func get_target(targetting_strategy: TargettingStrategy) -> Entity:
 	return null
 
 
-# Get closest character of "from_character" who is an enemy of source
-func get_closest_enemy_from(from_character: Entity) -> Entity:
+# Get closest entity of "from_entity" who is an enemy of source
+func get_closest_enemy_from(from_entity: Entity) -> Entity:
 	if _enemies.is_empty():
 		return null
 	
 	var enemies_copy: Array[Entity] = _enemies.duplicate()
-	enemies_copy.erase(from_character)
+	enemies_copy.erase(from_entity)
 	if enemies_copy.is_empty():
 		return null
 	
 	var closest_enemy = enemies_copy[0]
 	for enemy in enemies_copy:
-		var enemy_distance = (enemy.global_position - from_character.global_position).length_squared()
-		var closest_enemy_distance = (closest_enemy.global_position - from_character.global_position).length_squared()
+		var enemy_distance = (enemy.global_position - from_entity.global_position).length_squared()
+		var closest_enemy_distance = (closest_enemy.global_position - from_entity.global_position).length_squared()
 		if enemy_distance < closest_enemy_distance:
 			closest_enemy = enemy
 	
@@ -190,13 +190,13 @@ func get_targets(strategy: MultipleTargettingStrategy, radius: float = -1.0) -> 
 # ============================== Private functions ==============================
 
 # Filters alive, removes excluded, removes untargetable
-func _filter_candidates(entities: Array[Entity], excluded_character: Entity) -> Array[Entity]:
+func _filter_candidates(entities: Array[Entity], excluded_entity: Entity) -> Array[Entity]:
 	if entities.is_empty():
 		return []
 	
 	var candidates = _get_alive_entities(entities)
-	if excluded_character != null:
-		candidates.erase(excluded_character)
+	if excluded_entity != null:
+		candidates.erase(excluded_entity)
 	
 	if candidates.is_empty():
 		return []
@@ -204,12 +204,12 @@ func _filter_candidates(entities: Array[Entity], excluded_character: Entity) -> 
 	return _get_array_without_untargetable_targets(candidates)
 
 
-func _get_highest_shield(entities: Array[Entity], excluded_character: Entity) -> Entity:
+func _get_highest_shield(entities: Array[Entity], excluded_entity: Entity) -> Entity:
 	if entities.is_empty():
 		return null
 	
 	var entities_copy: Array[Entity] = _get_alive_entities(entities).duplicate()
-	entities_copy.erase(excluded_character)
+	entities_copy.erase(excluded_entity)
 	if entities_copy.is_empty():
 		return null
 	
@@ -259,12 +259,12 @@ func _clear() -> void:
 
 # ============================== Target strategy functions ==============================
 
-func _get_closest(entities: Array[Entity], excluded_character: Entity) -> Entity:
+func _get_closest(entities: Array[Entity], excluded_entity: Entity) -> Entity:
 	if entities.is_empty():
 		return null
 	
 	var entities_copy: Array[Entity] = _get_alive_entities(entities).duplicate()
-	entities_copy.erase(excluded_character)
+	entities_copy.erase(excluded_entity)
 	if entities_copy.is_empty():
 		return null
 	
@@ -272,21 +272,21 @@ func _get_closest(entities: Array[Entity], excluded_character: Entity) -> Entity
 	if entities_copy.is_empty():
 		return null
 	
-	var closest_character = entities_copy[0]
-	for character in entities_copy:
-		if character != _owner:
-			if (character.position - _owner.position).length_squared() < (closest_character.position - _owner.position).length_squared():
-				closest_character = character
+	var closest_entity = entities_copy[0]
+	for entity in entities_copy:
+		if entity != _owner:
+			if (entity.position - _owner.position).length_squared() < (closest_entity.position - _owner.position).length_squared():
+				closest_entity = entity
 	
-	return closest_character
+	return closest_entity
 
 
-func _get_farthest(entities: Array[Entity], excluded_character: Entity) -> Entity:
+func _get_farthest(entities: Array[Entity], excluded_entity: Entity) -> Entity:
 	if entities.is_empty():
 		return null
 	
 	var entities_copy: Array[Entity] = _get_alive_entities(entities).duplicate()
-	entities_copy.erase(excluded_character)
+	entities_copy.erase(excluded_entity)
 	if entities_copy.is_empty():
 		return null
 	
@@ -294,17 +294,17 @@ func _get_farthest(entities: Array[Entity], excluded_character: Entity) -> Entit
 	if entities_copy.is_empty():
 		return null
 	
-	var farthest_character = entities_copy[0]
-	for character in entities_copy:
-		if character != _owner:
-			if (character.global_position - _owner.global_position).length_squared() > (farthest_character.global_position - _owner.global_position).length_squared():
-				farthest_character = character
+	var farthest_entity = entities_copy[0]
+	for entity in entities_copy:
+		if entity != _owner:
+			if (entity.global_position - _owner.global_position).length_squared() > (farthest_entity.global_position - _owner.global_position).length_squared():
+				farthest_entity = entity
 	
-	return farthest_character
+	return farthest_entity
 
 
-func _get_lowest_hp(entities: Array[Entity], excluded_character: Entity) -> Entity:
-	var candidates = _filter_candidates(entities, excluded_character)
+func _get_lowest_hp(entities: Array[Entity], excluded_entity: Entity) -> Entity:
+	var candidates = _filter_candidates(entities, excluded_entity)
 	if candidates.is_empty(): return null
 	
 	var target = candidates[0]
@@ -314,8 +314,8 @@ func _get_lowest_hp(entities: Array[Entity], excluded_character: Entity) -> Enti
 	return target
 
 
-func _get_highest_hp(entities: Array[Entity], excluded_character: Entity) -> Entity:
-	var candidates = _filter_candidates(entities, excluded_character)
+func _get_highest_hp(entities: Array[Entity], excluded_entity: Entity) -> Entity:
+	var candidates = _filter_candidates(entities, excluded_entity)
 	if candidates.is_empty(): return null
 	
 	var target = candidates[0]
@@ -325,8 +325,8 @@ func _get_highest_hp(entities: Array[Entity], excluded_character: Entity) -> Ent
 	return target
 
 
-func _get_lowest_hp_percent(entities: Array[Entity], excluded_character: Entity) -> Entity:
-	var candidates = _filter_candidates(entities, excluded_character)
+func _get_lowest_hp_percent(entities: Array[Entity], excluded_entity: Entity) -> Entity:
+	var candidates = _filter_candidates(entities, excluded_entity)
 	if candidates.is_empty(): return null
 	
 	var target = candidates[0]
@@ -340,8 +340,8 @@ func _get_lowest_hp_percent(entities: Array[Entity], excluded_character: Entity)
 	return target
 
 
-func _get_highest_hp_percent(entities: Array[Entity], excluded_character: Entity) -> Entity:
-	var candidates = _filter_candidates(entities, excluded_character)
+func _get_highest_hp_percent(entities: Array[Entity], excluded_entity: Entity) -> Entity:
+	var candidates = _filter_candidates(entities, excluded_entity)
 	if candidates.is_empty(): return null
 	
 	var target = candidates[0]
@@ -355,14 +355,14 @@ func _get_highest_hp_percent(entities: Array[Entity], excluded_character: Entity
 	return target
 
 
-func _get_random(entities: Array[Entity], excluded_character: Entity) -> Entity:
+func _get_random(entities: Array[Entity], excluded_entity: Entity) -> Entity:
 	if entities.is_empty():
 		return null
 	
 	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 	rng.randomize()
 	var entities_copy: Array[Entity] = _get_alive_entities(entities).duplicate()
-	entities_copy.erase(excluded_character)
+	entities_copy.erase(excluded_entity)
 	if entities_copy.is_empty():
 		return null
 	

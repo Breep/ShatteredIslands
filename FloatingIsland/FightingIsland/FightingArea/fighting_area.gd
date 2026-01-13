@@ -68,13 +68,13 @@ func _ready() -> void:
 # Connect all heroes to this FightingArea
 func init_fight(heroes: Array[Hero], battle_type: Battle.BattleType, battle_id: int = -1) -> void:
 	Verbose.debug("Initiating a fight | " + str(Battle.BattleType.keys()[battle_type]) + " | " + str(heroes.size()) + " | " + str(battle_id), Verbose.Category.FIGHTING_AREA)
-	var character_spawner: CharacterSpawner = _set_fighting_floor(battle_type)
-	if character_spawner == null:
-		printerr("FightingArea: No CharacterSpawner for this battle type: ", battle_type)
+	var hero_spawner: HeroSpawner = _set_fighting_floor(battle_type)
+	if hero_spawner == null:
+		printerr("FightingArea: No HeroSpawner for this battle type: ", battle_type)
 		return
 	
 	_entity_manager.clear()
-	character_spawner.spawn_characters(heroes, _entities_node)
+	hero_spawner.spawn_heroes(heroes, _entities_node)
 	
 	_heroes = heroes
 	_battle_type = battle_type
@@ -103,7 +103,7 @@ func _ready_checks() -> bool:
 	return true
 
 
-func _set_fighting_floor(battle_type: Battle.BattleType) -> CharacterSpawner:
+func _set_fighting_floor(battle_type: Battle.BattleType) -> HeroSpawner:
 	for fighting_floor in _fighting_floors.values():
 		fighting_floor.set_inactive()
 	return _fighting_floors[battle_type].set_active()

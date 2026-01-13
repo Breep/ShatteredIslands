@@ -13,7 +13,6 @@ var _current_round_player_id_islands: Array[int] # player_id
 @export var _scene_switcher: SceneSwitcher
 @export var _hero_selector: HeroSelector
 @export var _node_fighting_islands: Node3D # Network spawn of FloatingIslands TODO (Spawn Island from the player Island)
-@export var _node_characters: Node3D # Network spawn of Characters
 @export var _islands_spawn_points: Array[SpawnPoint]
 @onready var _island_spawns_to_be_removed: Node3D = %IslandSpawns
 #endregion
@@ -68,8 +67,8 @@ func _start_fighting_phase() -> void:
 	for i in battles.size():
 		var heroes: Array[Hero]
 		for player: Player in battles[i].players:
-			player.character.battle_id = battles[i].id
-			heroes.append(player.character)
+			player.hero.battle_id = battles[i].id
+			heroes.append(player.hero)
 		var player_id: int = _current_round_player_id_islands[i]
 		var fighting_island: FightingIsland = PlayerManager.players[player_id].fighting_island
 		fighting_island.init_fight(heroes, battles[i].battle_type, battles[i].id)

@@ -51,7 +51,7 @@ func get_auto_attack_spawn() -> Node3D:
 
 
 #func get_rank_changed_signal() -> Signal: # TODO
-	#return _character_logic.get_rank_changed_signal()
+	#return _get_rank_changed_signal()
 #endregion
 
 #region ===== Actions =====
@@ -68,7 +68,7 @@ func projectile_attack(target: Entity, projectile_type: Projectile.ProjectileTyp
 	if projectile_type == Projectile.ProjectileType.AUTO_ATTACK:
 		var attack_cmd: AttackCommand = _action_module.build_projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
 		if attack_cmd == null:
-			Verbose.error("Can't create an AttackCommand | " + entity_name, Verbose.Category.CHARACTER)
+			Verbose.error("Can't create an AttackCommand | " + entity_name, Verbose.Category.HERO)
 			return
 		if _pending_attacks.is_empty(): _pending_attacks.append(attack_cmd)
 		else: _pending_attacks[0] = attack_cmd
@@ -80,7 +80,6 @@ func projectile_attack(target: Entity, projectile_type: Projectile.ProjectileTyp
 func _on_anim_events_manager_attack_hit_frame() -> void:
 	if _pending_attacks.is_empty():
 		# Can be empty if it's an critical strike, both hands attacks -> TODO: Maybe see if there is a better way
-		#Verbose.error("AA anim hit frame but no pending attacks " + entity_name, Verbose.Category.CHARACTER)
 		return
 	var attack_cmd: AttackCommand = _pending_attacks.pop_front()
 	if !is_instance_valid(attack_cmd.target) or attack_cmd.target.is_queued_for_deletion(): return

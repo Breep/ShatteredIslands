@@ -92,15 +92,3 @@ var attack_aim_assist_bonus_per_card: float
 # [DOUBLE EDGE SWORD]
 var double_edge_sword_damage_percent: int # % of damage increased
 var double_edge_sword_attacks_number: int # Number oof attacks boosted
-
-var double_attack_chance: float # % of chance to proc a double attack
-
-
-var fire_attack_activated: bool # If the fire attack is activated
-var fire_attack_damage: float # Damage done in addition to normal auto attack (in % of current enemy hp)
-var fire_attack_period: int # Number of auto attacks between 2 fire_attack
-var fire_attack_triggered: bool # Tell the projectile to activate its "FIRE" condition (it is set by the character)
-
-var increase_max_hp_activated: bool # If the increase max hp is activated
-var increase_max_hp_amount: int # Amount of max hp increased every increase_max_hp_period auto attack
-var increase_max_hp_period: int # Number of auto attacks between 2 increase_max_hp

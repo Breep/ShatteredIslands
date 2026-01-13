@@ -104,7 +104,7 @@ enum FightingState {
 }
 
 enum EntityType {
-	CHARACTER,
+	HERO,
 	SNAKE_BARREL,
 	SNAKE,
 	FIELD_GENERATOR

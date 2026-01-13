@@ -304,7 +304,6 @@ func summon_entity(entity_type: Entity.EntityType, entity_spawn_global_position:
 		push_error("ActionModule: Can't summon an entity if no SpawnManager is linked to me [", get_path(), "]")
 		return
 	match entity_type:
-		Entity.EntityType.CHARACTER: print("Summon a character ? I think not !")
 		Entity.EntityType.SNAKE_BARREL: _summon_snake_barrel(entity_spawn_global_position, entity_modifier)
 		Entity.EntityType.SNAKE: _summon_snake(entity_spawn_global_position, entity_modifier)
 		Entity.EntityType.FIELD_GENERATOR: _summon_field_generator(entity_spawn_global_position, entity_modifier)

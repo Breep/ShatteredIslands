@@ -10,7 +10,7 @@ extends Node3D
 @export var _player7_cards: Array[Card]
 @export var _player8_cards: Array[Card]
 
-@export_group("Characters")
+@export_group("Heroes")
 @export var _heroes: Array[Hero]
 
 @export_group("Battle")
@@ -66,7 +66,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			_ui_proto.visible = not _ui_proto.visible
 		if event.is_action_pressed("hide_3d_ui"):
 			for hero: Hero in _heroes:
-				hero._character_visual.visible = not hero._character_visual.visible
+				hero._entity_info_panel_3d.visible = not hero._entity_info_panel_3d.visible
 
 
 func _init_players() -> void:
