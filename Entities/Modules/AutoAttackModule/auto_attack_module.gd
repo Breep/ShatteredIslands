@@ -8,7 +8,7 @@ signal target_changed(new_target: Entity)
 
 # ============================== Export variables ==============================
 
-@export var _projectile_spawn: SpawnPoint
+@export var _projectile_spawn: Node3D
 
 # ============================== Public variables ==============================
 
@@ -41,6 +41,13 @@ var current_target: Entity:
 # ============================== Node base function ==============================
 
 func _ready() -> void:
+	if _owner == null:
+		Verbose.error("Auto attack module needs an owner (Entity)", Verbose.Category.ENTITY_MODULE)
+		return
+	
+	if _projectile_spawn == null:
+		_projectile_spawn = _owner
+	
 	_owner.stats.attack_speed_changed.connect(_on_owner_stats_attack_speed_changed)
 	_owner.died.connect(_on_owner_died)
 

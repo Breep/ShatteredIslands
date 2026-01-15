@@ -56,7 +56,7 @@ func connect_entity(entity: Entity) -> void:
 		_owner_hero.get_rank_changed_signal().disconnect(_on_rank_changed)
 	
 	_owner_hero = new_hero
-	_owner_hero.get_rank_changed_signal().connect(_on_rank_changed)
+	#_owner_hero.get_rank_changed_signal().connect(_on_rank_changed) # TODO
 
 func _on_rank_changed(new_rank: StormManager.Rank) -> void:
 	show()

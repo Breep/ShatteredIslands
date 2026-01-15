@@ -18,8 +18,6 @@ signal ultimate_casted()
 
 
 @export_subgroup("Optional")
-
-@export var anim_events_manager: AnimEventsManager
 #endregion
 
 #region ============================== Public variables ==============================
@@ -33,7 +31,7 @@ var _action_module: ActionModule
 var _auto_attack_module: AutoAttackModule
 
 var _skill_manager: SkillManager
-var _family_managers: Array[FamilyManager]
+var _family_managers: Dictionary[Family.FamilyType, FamilyManager]
 #endregion
 
 #region ============================== Public functions ==============================
@@ -77,7 +75,7 @@ func projectile_attack(target: Entity, projectile_type: Projectile.ProjectileTyp
 		_action_module.projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
 
 
-func _on_anim_events_manager_attack_hit_frame() -> void:
+func _on_hero_animator_attack_hit_frame() -> void:
 	if _pending_attacks.is_empty():
 		# Can be empty if it's an critical strike, both hands attacks -> TODO: Maybe see if there is a better way
 		return
@@ -146,20 +144,26 @@ func _hero_enter_tree() -> void:
 	# Add Family Managers and Family stats
 	families_stats = FamiliesStats.new()
 	for family_type: Family.FamilyType in Shared.FAMILY_MANAGER_SCENES.keys():
-		_family_managers[family_type] = Shared.FAMILY_MANAGER_SCENES[family_type].instantiate().init(self)
+		var family_manager: FamilyManager = Shared.FAMILY_MANAGER_SCENES[family_type].instantiate() as FamilyManager
+		_family_managers[family_type] = family_manager.init(self)
 		add_child(_family_managers[family_type])
 	
 	# Add Action/Interact/AutoAttack Modules
 	if _interact_module == null:
-		_interact_module = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.ACTION].instantiate().init(self)
+		var module: InteractModule = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.INTERACT].instantiate()
+		_interact_module = module.init(self)
 		add_child(_interact_module)
 	
 	if _action_module == null:
-		_action_module = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.INTERACT].instantiate().init(self)
+		var module: ActionModule = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.ACTION].instantiate()
+		_action_module = module.init(self)
 		add_child(_action_module)
+		if _spawn_manager != null:
+			_action_module.connect_to_spawn_manager(_spawn_manager)
 	
 	if _auto_attack_module == null:
-		_auto_attack_module = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.AUTOATTACK].instantiate().init(self)
+		var module: AutoAttackModule = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.AUTOATTACK].instantiate()
+		_auto_attack_module = module.init(self)
 		add_child(_auto_attack_module)
 
 
@@ -168,23 +172,34 @@ func _ready() -> void:
 
 
 func _hero_ready() -> void:
-	if battle_id == -1:
-		_entity_info_panel_3d.hide()
-	
 	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
 	
 	stats.health_changed.connect(_on_stats_health_changed)
-	
+	fighting_state_changed.connect(_on_fighting_state_changed)
 	_auto_attack_module.attack_done.connect(_on_aa_module_attack_done)
-	
-	anim_events_manager.attack_hit_frame.connect(_on_anim_events_manager_attack_hit_frame)
+	_hero_animator.attack_hit_frame.connect(_on_hero_animator_attack_hit_frame)
 	
 	_entity_info_panel_3d.update_health_bar(stats.health, stats.health_max)
+	
 #endregion
 
 #region ============================== Private functions ==============================
-
+func _on_fighting_state_changed(new_fighting_state: FightingState) -> void:
+	match new_fighting_state:
+		FightingState.IDLE:
+			target_module.stop()
+			_auto_attack_module.stop()
+			for family_manager: FamilyManager in _family_managers.values():
+				family_manager.stop()
+		FightingState.FIGHTING:
+			target_module.start()
+			_auto_attack_module.start()
+			for family_manager: FamilyManager in _family_managers.values():
+				family_manager.start()
+		FightingState.CELEBRATING: pass
+		FightingState.DEAD: pass
+		FightingState.UNDEF: pass
 #endregion
 
 #region ============================== Private ==============================

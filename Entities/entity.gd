@@ -91,6 +91,7 @@ var visual: EntityInfoPanel3D:
 	get: return _entity_info_panel_3d
 
 @export var base_stats: EntityStats
+@export var _spawn_manager: SpawnManager
 
 @onready var bds_registry := EntityBDSRegistry.new(entity_name)
 

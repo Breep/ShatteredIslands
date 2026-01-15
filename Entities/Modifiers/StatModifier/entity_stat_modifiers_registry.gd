@@ -37,6 +37,7 @@ func _init(base_stats: EntityStats, current_stats: EntityStats) -> void:
 	_entity_base_stats.has_been_reset.connect(_on_entity_base_stats_has_been_reset)
 	for stat_type: EntityStats.StatType in _stats_modifiers_dictionaries.keys():
 		_stats_modifiers_dictionaries[stat_type].setup(stat_type, _entity_stats, _entity_base_stats)
+		_stats_modifiers_dictionaries[stat_type].recompute_stats()
 	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 
 # ============================== Public functions ==============================

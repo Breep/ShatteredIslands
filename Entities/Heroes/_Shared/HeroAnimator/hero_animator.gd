@@ -1,9 +1,12 @@
 class_name HeroAnimator
 extends Node
 
+signal attack_hit_frame()
+
 @export var _animation_tree: AnimationTree
 @export var _weapons_node: Node3D
 @export var _hero_animation_player: HeroAnimationPlayer
+@export var _hero_owner: Hero
 
 #region AnimatorTree parameters
 const PARAM_TRANSITION_GLOBAL: String = "parameters/transition_global/transition_request"
@@ -37,24 +40,17 @@ const PARAM_ONE_SHOT_SITTING: String = "parameters/one_shot_sitting/request"
 @onready var _rng := RandomNumberGenerator.new()
 @onready var _idle_variation_timer: Timer = %IdleVariationTimer 
 
-var _hero_owner: Hero
-var hero_owner: Hero:
-	get: return _hero_owner
-	set(value):
-		if value == _hero_owner: return
-		_hero_owner = value
-
 var _is_fighting: bool = false
 
 func _ready() -> void:
 	if _hero_owner == null:
-		push_warning("HeroAnimator: No hero owner")
+		Verbose.error("HeroAnimator: No hero owner", Verbose.Category.HERO)
 		return
 	
 	_rng.randomize()
 	_hero_owner.died.connect(_on_hero_owner_died)
-	_hero_owner.fight_is_won.connect(_on_hero_owner_fight_is_won)
-	_hero_owner.fight_is_lost.connect(_on_hero_owner_fight_is_lost)
+	#_hero_owner.fight_is_won.connect(_on_hero_owner_fight_is_won)
+	#_hero_owner.fight_is_lost.connect(_on_hero_owner_fight_is_lost)
 	_hero_owner.fighting_state_changed.connect(_on_hero_owner_fighting_state_changed)
 	_hero_owner.auto_attack_started.connect(_on_hero_owner_auto_attack_started)
 	_hero_owner.ultimate_casted.connect(_on_hero_owner_ultimate_casted)
@@ -113,8 +109,8 @@ func _on_hero_owner_auto_attack_started(is_critical: bool) -> void:
 	if use_right_hand: _animation_tree.set(PARAM_BLEND_ATTACK, 1.0)
 	else: _animation_tree.set(PARAM_BLEND_ATTACK, 0.0)
 	if is_critical: _animation_tree.set(PARAM_BLEND_ATTACK, 0.5)
-	_animation_tree.set(PARAM_SCALE_ATTACK_LEFT, 1.0 + hero_owner.stats.attack_speed)
-	_animation_tree.set(PARAM_SCALE_ATTACK_RIGHT, 1.0 + hero_owner.stats.attack_speed)
+	_animation_tree.set(PARAM_SCALE_ATTACK_LEFT, 1.0 + _hero_owner.stats.attack_speed)
+	_animation_tree.set(PARAM_SCALE_ATTACK_RIGHT, 1.0 + _hero_owner.stats.attack_speed)
 	_animation_tree.set(PARAM_ONE_SHOT_ATTACK, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 
@@ -134,7 +130,5 @@ func _on_idle_variation_timer_timeout() -> void:
 
 
 func _on_hero_animation_player_attack_done() -> void:
-	_hero_owner.anim_events_manager.attack_hit_frame.emit()
-
-
+	attack_hit_frame.emit()
  

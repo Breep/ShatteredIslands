@@ -17,6 +17,7 @@ func stop() -> void:
 
 
 func _on_mana_tick_timer_timeout() -> void:
+	if _owner.stats.mana_max <= 0: return
 	var inc: float = _owner.stats.mana_regen * _timer_wait_time
 	_owner.stats.mana += inc
 	
