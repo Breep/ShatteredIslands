@@ -23,6 +23,8 @@ extends Node3D
 @onready var _ui_player_stats: UIDebugEntityStats = %PlayerStats
 @onready var _ui_entity_bds_registry: UIEntityBDSRegistry = %EntityBDSRegistry
 
+var _players: Array[Player] = []
+
 # add a way to show stats when player press tabs button (input mapped on "see_stats")
 
 func _enter_tree() -> void:
@@ -75,20 +77,21 @@ func _init_players() -> void:
 		player.name = "Player" + str(i+1)
 		player.id = 1
 		player.hero = _heroes[i]
-		player.hero.name = player.name
-		player.hero.player = player
+		player.hero.entity_name = player.name
+		# Note: hero.player reference removed - no longer exists in new architecture
 		player.skill_manager = SkillManager.new()
+		_players.append(player)
 
 
 func _add_player_cards() -> void:
 	var players_cards: Array[Array] = [
 		_player1_cards, _player2_cards, _player3_cards, _player4_cards, _player5_cards, _player6_cards,_player7_cards, _player8_cards
 	]
-	
-	for i: int in _heroes.size():
-		_heroes[i].player.skill_manager.init(_heroes[i].player)
+
+	for i: int in _players.size():
+		_players[i].skill_manager.init(_players[i])
 		var uid: int = 0
 		for card: Card in players_cards[i]:
 			card.uid = uid
 			uid += 1
-			_heroes[i].player.deck.add_card(card)
+			_players[i].deck.add_card(card)

@@ -263,6 +263,8 @@ func get_buf_stacks_number() -> float:
 
 
 func reset_from_hero_desc(hero: HeroDesc, lvl: int) -> EntityStats:
+	if lvl < 1 or lvl > 10: return self
+	
 	health_max = hero.stats[lvl].health_max
 	health = health_max
 	mana_max = hero.stats[lvl].mana_max

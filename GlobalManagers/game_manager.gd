@@ -107,6 +107,11 @@ func clear() -> void:
 	_random_heroes_ref.clear()
 	ServerCardShop.clear()
 
+	# Reset complete du state
+	__game_state = GameState.UNDEF
+	if _game_state_timer != null:
+		_game_state_timer.stop()
+
 
 func init() -> void:
 	_game_rules = load("res://Game/GameRules/normal_game_rules.tres")

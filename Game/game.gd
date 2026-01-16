@@ -50,6 +50,10 @@ func _start_new_round() ->void:
 	await _init_current_round_player_id_islands(_current_round_battles.size())
 	RoundManager.starting_round_player_changes()
 	await PlayerManager.sync_point(PlayerManager.SyncID.ROUND_SETUP)
+
+	# Create heroes for buying phase
+	PlayerManager.create_all_heroes()
+
 	GameManager.game_state = GameManager.GameState.BUYING # TODO Peut-être revoir ça ? Envoyer un signal et laisser le GameManager changer ses états tout seul ?
 
 
@@ -63,6 +67,10 @@ func _start_buying_phase() -> void:
 
 func _start_fighting_phase() -> void:
 	Verbose.debug("Start fights !", Verbose.Category.GAME)
+
+	# Create heroes for fighting phase
+	PlayerManager.create_all_heroes()
+
 	var battles: Array[Battle] = _current_round_battles
 	for i in battles.size():
 		var heroes: Array[Hero]
@@ -120,8 +128,12 @@ func _spawn_fighting_islands() -> void:
 #region ============================== Callbacks ==============================
 func _on_buying_island_buying_phase_finished() -> void:
 	Verbose.debug("BUYING PHASE ENDED", Verbose.Category.GAME)
-	_start_fighting_phase()
 	_buying_island.cleanup()
+
+	# Destroy heroes from buying phase before fighting phase
+	PlayerManager.destroy_all_heroes()
+
+	_start_fighting_phase()
 
 
 func _on_hero_selector_all_heroes_picked() -> void:

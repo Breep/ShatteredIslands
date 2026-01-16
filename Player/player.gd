@@ -95,7 +95,7 @@ var health: int:
 		health_changed.emit(self, _health)
 		if _health <= 0: # TODO Change this by a pile of corpse is funnier
 			death.emit(self)
-			hero.queue_free()
+			# Hero cleanup is now handled by global lifecycle management
 
 signal gold_changed(self_ref: Player, new_gold: int)
 var _gold: int

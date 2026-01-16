@@ -9,6 +9,7 @@ extends Control
 @export var _crit_chance_label: Label
 
 func update_stats(stats: EntityStats) -> void:
+	if stats == null: return
 	_max_health_label.text = str(stats.health_max)
 	_mana_regen_label.text = str(stats.mana_regen)
 	_dodge_label.text = str(20) + "%"

@@ -33,9 +33,13 @@ func _spawn_hero(hero: Hero, available_spawn_locations: Array[SpawnPoint], node_
 		Verbose.error("Trying to spawn a <null> Hero", Verbose.Category.HERO_SPAWNER)
 		return false
 	
+	if hero.is_inside_tree():
+		Verbose.warn("Hero " + hero.entity_name + " already in tree, this shouldn't happen", Verbose.Category.HERO_SPAWNER)
+		return false
+	
 	for spawn_point: SpawnPoint in available_spawn_locations:
 		if spawn_point.team == hero.team:
-			hero.reparent(node_to_spawn_into)
+			node_to_spawn_into.add_child(hero)
 			hero.global_position = spawn_point.global_position
 			hero.global_rotation = spawn_point.global_rotation
 			available_spawn_locations.erase(spawn_point)

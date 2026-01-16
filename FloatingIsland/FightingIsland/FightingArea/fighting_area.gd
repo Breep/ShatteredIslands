@@ -70,7 +70,7 @@ func init_fight(heroes: Array[Hero], battle_type: Battle.BattleType, battle_id: 
 	Verbose.debug("Initiating a fight | " + str(Battle.BattleType.keys()[battle_type]) + " | " + str(heroes.size()) + " | " + str(battle_id), Verbose.Category.FIGHTING_AREA)
 	var hero_spawner: HeroSpawner = _set_fighting_floor(battle_type)
 	if hero_spawner == null:
-		printerr("FightingArea: No HeroSpawner for this battle type: ", battle_type)
+		Verbose.error("FightingArea: No HeroSpawner for this battle type: " + str(Battle.BattleType.keys()[battle_type]), Verbose.Category.FIGHTING_AREA)
 		return
 	
 	_entity_manager.clear()

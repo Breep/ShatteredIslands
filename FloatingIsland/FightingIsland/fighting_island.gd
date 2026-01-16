@@ -64,9 +64,13 @@ func get_fighting_area() -> FightingArea:
 func _force_local_player_camera_on_island() -> void:
 	if GameManager.game_type != GameManager.GameType.SOLO and multiplayer.is_server(): return
 	if _current_heroes.is_empty(): return
+	var local_player: Player = PlayerManager.get_local_player()
+	if local_player == null: return
+
 	for hero: Hero in _current_heroes:
-		if hero.player == PlayerManager.get_local_player():
+		if hero.entity_name == local_player.name: # TODO rework cette mosntruosité
 			Shared.scene_switcher.set_island_active_only(self)
+			break
 
 
 func _update_player_ref(player_id: int) -> void:

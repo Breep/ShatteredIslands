@@ -53,7 +53,7 @@ func connect_entity(entity: Entity) -> void:
 
 #region Signals
 func _disconnect_old_signals() -> void:
-	if _entity == null: return
+	if _entity == null or _entity.stats == null: return
 	if _entity.stats.health_changed.is_connected(_on_entity_health_changed):
 		_entity.stats.health_changed.disconnect(_on_entity_health_changed)
 	if _entity.stats.health_max_changed.is_connected(_on_entity_max_health_changed):
@@ -79,7 +79,7 @@ func _disconnect_old_signals() -> void:
 
 
 func _connect_new_signals() -> void:
-	if _entity == null: return
+	if _entity == null or _entity.stats == null: return
 	_entity.stats.health_changed.connect(_on_entity_health_changed)
 	_entity.stats.health_max_changed.connect(_on_entity_max_health_changed)
 	_entity.stats.mana_changed.connect(_on_entity_mana_changed)
@@ -95,19 +95,16 @@ func _connect_new_signals() -> void:
 
 
 func _update_layout() -> void:
-	if _entity == null: return
+	if _entity == null or _entity.stats == null: return
 	_health_bar.max_health = _entity.stats.health_max
 	_health_bar.current_health = _entity.stats.health
 	_health_bar.poison_stacks = _entity.stats.poison_stacks
 	_health_bar.armor_stacks = _entity.stats.armor_stacks
 	if _entity is Hero:
 		var hero: Hero = _entity
-		if hero.player != null:
-			_player_name_label.text = hero.player.name
-		else:
-			_player_name_label.text = hero.name
+		_player_name_label.text = hero.entity_name
 	else:
-		_player_name_label.text = _entity.name
+		_player_name_label.text = _entity.entity_name
 	_mirror_ui()
 
 

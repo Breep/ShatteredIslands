@@ -5,6 +5,11 @@ var HEROES: Dictionary[HeroDesc.HeroId, HeroDesc] = {
 	HeroDesc.HeroId.DARK_KNIGHT: load("res://Entities/Heroes/DarkKnight/dark_knight.tres"),
 }
 
+var HERO_SCENES: Dictionary[HeroDesc.HeroId, PackedScene] = {
+	HeroDesc.HeroId.UNDEF: load("res://Entities/Heroes/Undef/undef.tscn"),
+	HeroDesc.HeroId.DARK_KNIGHT: load("res://Entities/Heroes/DarkKnight/dark_knight.tscn"),
+}
+
 var FAMILIES: Dictionary[Family.FamilyType, Family] = {
 	Family.FamilyType.ATTACK: load("res://Card/Descriptions/Families/attack_family.tres"),
 	Family.FamilyType.DEFENSE: load("res://Card/Descriptions/Families/defense_family.tres"),

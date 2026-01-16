@@ -37,10 +37,10 @@ func _ready() -> void:
 	
 	_dark_knight = DARK_KNIGHT_SCENE.instantiate()
 	_dark_knight.hero_id = HeroDesc.HeroId.DARK_KNIGHT
-	
+
 	add_child(_dark_knight)
-	_dark_knight.base_stats.reset_from_hero(Shared.HEROES[HeroDesc.HeroId.DARK_KNIGHT], 10)
-	_dark_knight.stats.reset_from_hero(Shared.HEROES[HeroDesc.HeroId.DARK_KNIGHT], 10)
+	_dark_knight.base_stats.reset_from_hero_desc(Shared.HEROES[HeroDesc.HeroId.DARK_KNIGHT], 10)
+	_dark_knight.stats.reset_from_hero_desc(Shared.HEROES[HeroDesc.HeroId.DARK_KNIGHT], 10)
 	_entity_stats_left.connect_entity(_dark_knight)
 	_entity_stats_right.connect_entity(_dark_knight)
 

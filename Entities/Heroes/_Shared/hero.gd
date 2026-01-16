@@ -131,16 +131,22 @@ func take_dispell(value: float, is_critical: bool, action_id: StringName, source
 #endregion
 
 #region ============================== Node base functions ==============================
+func _init() -> void:
+	_hero_init()
+	_entity_init()
+
+func _hero_init() -> void:
+	# Configure stats
+	if base_stats == null and hero_desc != null:
+		base_stats = EntityStats.new().reset_from_hero_desc(hero_desc, level)
+
+
 func _enter_tree() -> void:
 	_hero_enter_tree()
 	_entity_enter_tree()
 
 
-func _hero_enter_tree() -> void:
-	# Configure stats
-	if base_stats == null and hero_desc != null:
-		base_stats = EntityStats.new().reset_from_hero_desc(hero_desc, level)
-	
+func _hero_enter_tree() -> void:	
 	# Add Family Managers and Family stats
 	families_stats = FamiliesStats.new()
 	for family_type: Family.FamilyType in Shared.FAMILY_MANAGER_SCENES.keys():
@@ -174,14 +180,30 @@ func _ready() -> void:
 func _hero_ready() -> void:
 	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
-	
+
 	stats.health_changed.connect(_on_stats_health_changed)
 	fighting_state_changed.connect(_on_fighting_state_changed)
 	_auto_attack_module.attack_done.connect(_on_aa_module_attack_done)
 	_hero_animator.attack_hit_frame.connect(_on_hero_animator_attack_hit_frame)
-	
+
 	_entity_info_panel_3d.update_health_bar(stats.health, stats.health_max)
-	
+
+
+func _exit_tree() -> void:
+	# Disconnect all signals to avoid ghost references
+	if GameManager.game_state_changed.is_connected(_on_game_manager_game_state_changed):
+		GameManager.game_state_changed.disconnect(_on_game_manager_game_state_changed)
+	if GlobalFightingManager.fighting_phase_state_changed.is_connected(_on_gfm_fighting_phase_state_changed):
+		GlobalFightingManager.fighting_phase_state_changed.disconnect(_on_gfm_fighting_phase_state_changed)
+	if stats != null and stats.health_changed.is_connected(_on_stats_health_changed):
+		stats.health_changed.disconnect(_on_stats_health_changed)
+	if fighting_state_changed.is_connected(_on_fighting_state_changed):
+		fighting_state_changed.disconnect(_on_fighting_state_changed)
+	if _auto_attack_module != null and _auto_attack_module.attack_done.is_connected(_on_aa_module_attack_done):
+		_auto_attack_module.attack_done.disconnect(_on_aa_module_attack_done)
+	if _hero_animator != null and _hero_animator.attack_hit_frame.is_connected(_on_hero_animator_attack_hit_frame):
+		_hero_animator.attack_hit_frame.disconnect(_on_hero_animator_attack_hit_frame)
+
 #endregion
 
 #region ============================== Private functions ==============================

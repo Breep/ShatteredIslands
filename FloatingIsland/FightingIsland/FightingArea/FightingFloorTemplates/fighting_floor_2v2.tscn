@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bhv0dmum15mp1" path="res://FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor.gd" id="1_t4soe"]
 [ext_resource type="PackedScene" uid="uid://dibux7uwcsatj" path="res://FloatingIsland/FightingIsland/FightingArea/SpawnArea/spawn_area.tscn" id="2_t4soe"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Tool/SpawnPoint/spawn_point.tscn" id="3_xaoa7"]
-[ext_resource type="PackedScene" uid="uid://cc8wss5swf76b" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/CharacterSpawner/character_spawner.tscn" id="4_dxj2d"]
+[ext_resource type="PackedScene" uid="uid://cc8wss5swf76b" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/HeroSpawner/hero_spawner.tscn" id="4_dxj2d"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2v0uu"]
 size = Vector3(10, 0.1, 10)
@@ -38,10 +38,10 @@ size = Vector3(20, 1, 10)
 [sub_resource type="BoxShape3D" id="BoxShape3D_g25ar"]
 size = Vector3(20, 1, 10)
 
-[node name="FightingFloor_2v2" type="Node3D" node_paths=PackedStringArray("_visual_to_be_destroyed", "_character_spawner", "_spawn_areas")]
+[node name="FightingFloor_2v2" type="Node3D" node_paths=PackedStringArray("_visual_to_be_destroyed", "_hero_spawner", "_spawn_areas")]
 script = ExtResource("1_t4soe")
 _visual_to_be_destroyed = NodePath("Floor/FloorMesh3D")
-_character_spawner = NodePath("CharacterSpawner")
+_hero_spawner = NodePath("HeroSpawner")
 _spawn_areas = [NodePath("SpawnArea"), NodePath("SpawnArea2")]
 
 [node name="SpawnArea" parent="." node_paths=PackedStringArray("_visual_to_be_destroyed") instance=ExtResource("2_t4soe")]
@@ -101,5 +101,5 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
 shape = SubResource("BoxShape3D_g25ar")
 
-[node name="CharacterSpawner" parent="." node_paths=PackedStringArray("_spawn_points") instance=ExtResource("4_dxj2d")]
+[node name="HeroSpawner" parent="." node_paths=PackedStringArray("_spawn_points") instance=ExtResource("4_dxj2d")]
 _spawn_points = [NodePath("../SpawnArea/SpawnPoint"), NodePath("../SpawnArea/SpawnPoint2"), NodePath("../SpawnArea2/SpawnPoint3"), NodePath("../SpawnArea2/SpawnPoint4")]

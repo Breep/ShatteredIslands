@@ -41,9 +41,10 @@ enum Category {
 	BATTLE_WRITER,
 	ENTITY_MANAGER,
 	FIGHTING_AREA,
+	TABLE,
 }
 
-const CATEGORY_PREFIX_TEMPLATES : Dictionary [Category, String] = {
+const CATEGORY_PREFIX_TEMPLATES: Dictionary[Category, String] = {
 	Category.DEFAULT:                 "(          ) ",
 	Category.NET:                     "(NET       ) ",
 	Category.GLOBAL_MANAGER:          "(GAME_MAN  ) ",
@@ -68,23 +69,24 @@ const CATEGORY_PREFIX_TEMPLATES : Dictionary [Category, String] = {
 	Category.BATTLE_READER:           "(BATTLEREAD) ",
 	Category.BATTLE_WRITER:           "(BATTLEWRIT) ",
 	Category.ENTITY_MANAGER:          "(ENTITY_MAN) ",
-	Category.HERO_SPAWNER:       "(CHAR_SPAWN) ",
+	Category.HERO_SPAWNER:            "(CHAR_SPAWN) ",
 	Category.FIGHTING_AREA:           "(FIGHT_AREA) ",
+	Category.TABLE:                   "(TABLE     ) ",
 }
 
-const PREFIX_TEMPLATES : Dictionary [GameType, String] = {
+const PREFIX_TEMPLATES: Dictionary[GameType, String] = {
 	GameType.SOLO:   "[SOLO] ",
 	GameType.SERVER: "[SERVER] ",
 	GameType.CLIENT: "[CLIENT] "
 }
 
-const RICH_PREFIX_TEMPLATES : Dictionary [GameType, String] = {
+const RICH_PREFIX_TEMPLATES: Dictionary[GameType, String] = {
 	GameType.SOLO:   "[color=purple][SOLO][/color] ",
 	GameType.SERVER: "[color=blue][SERVER][/color] ",
 	GameType.CLIENT: "[color=green][CLIENT][/color] "
 }
 
-const LEVEL_PREFIX_TEMPLATES : Dictionary [Level, String] = {
+const LEVEL_PREFIX_TEMPLATES: Dictionary[Level, String] = {
 	Level.TRACE: "<TRACE> ",
 	Level.DEBUG: "<DEBUG> ",
 	Level.INFO:  "<INFO > ",
@@ -118,8 +120,9 @@ var current_categories_level: Dictionary[Category, Level] = {
 	Category.BATTLE_READER:           Level.WARN,
 	Category.BATTLE_WRITER:           Level.WARN,
 	Category.ENTITY_MANAGER:          Level.WARN,
-	Category.HERO_SPAWNER:       Level.WARN,
+	Category.HERO_SPAWNER:            Level.WARN,
 	Category.FIGHTING_AREA:           Level.WARN,
+	Category.TABLE:                   Level.WARN,
 }
 #endregion
 

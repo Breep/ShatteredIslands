@@ -143,16 +143,13 @@ static var instance_count: int = 0
 
 #region ============================== Node base functions ==============================
 func _init() -> void:
-	#print("DEBUG: Entity Init ", self, " ID: ", id, " -> ", instance_count, " (Next: ", instance_count + 1, ")")
+	_entity_init()
+
+
+func _entity_init() -> void:
 	id = instance_count
-	instance_count += 1
-
-
-func _enter_tree() -> void:
-	_entity_enter_tree()
-
-
-func _entity_enter_tree() -> void:
+	instance_count += 1	
+	
 	# Stats
 	stats = EntityStats.new()
 	if base_stats == null:
@@ -162,7 +159,13 @@ func _entity_enter_tree() -> void:
 	auto_attack_modifier_registry = AutoAttackModifierRegistry.new()
 	action_modifiers_registry = ActionModifiersRegistry.new()
 	stat_modifiers_registry = EntityStatModifiersRegistry.new(base_stats, stats)
-	
+
+
+func _enter_tree() -> void:
+	_entity_enter_tree()
+
+
+func _entity_enter_tree() -> void:	
 	# Add default module if not already added
 	if target_module == null:
 		target_module = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.TARGET].instantiate().init(self)

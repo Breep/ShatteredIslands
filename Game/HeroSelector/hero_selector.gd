@@ -61,9 +61,9 @@ func _start_multiple_hero_selection_behaviour() -> void:
 		_start_hero_selection.rpc()
 		for player in PlayerManager.players.values():
 			if player.is_bot:
-				player.hero = await _get_random_hero_and_wait_random_duration()
-				Verbose.debug("Player " + player.name + " picked " + player.hero.name, Verbose.Category.HERO_SELECTOR)
-				_pick_hero_multiple.rpc(player.id, player.hero.id)
+				var picked_hero_desc: HeroDesc = await _get_random_hero_and_wait_random_duration()
+				Verbose.debug("Player " + player.name + " picked " + picked_hero_desc.name, Verbose.Category.HERO_SELECTOR)
+				_pick_hero_multiple.rpc(player.id, picked_hero_desc.id)
 
 # ============================== MULTIPLE HERO SELECTION BEHAVIOUR ==============================
 
@@ -89,9 +89,9 @@ func _start_player_turn_to_pick(player_id: int) -> void:
 	if multiplayer.is_server():
 		_ui_hero_picking_screen.update_bottom_player_name(player_picking.name, false)
 		if player_picking.is_bot:
-			player_picking.hero = await _get_random_hero_and_wait_random_duration()
-			Verbose.debug("Player " + player_picking.name + " picked " + player_picking.hero.name, Verbose.Category.HERO_SELECTOR)
-			_pick_hero_unique.rpc(player_picking.id, player_picking.hero.id)
+			var picked_hero_desc: HeroDesc = await _get_random_hero_and_wait_random_duration()
+			Verbose.debug("Player " + player_picking.name + " picked " + picked_hero_desc.name, Verbose.Category.HERO_SELECTOR)
+			_pick_hero_unique.rpc(player_picking.id, picked_hero_desc.id)
 	else:
 		if player_picking == PlayerManager.get_local_player():
 			_ui_hero_picking_screen.update_bottom_player_name(player_picking.name, true)
