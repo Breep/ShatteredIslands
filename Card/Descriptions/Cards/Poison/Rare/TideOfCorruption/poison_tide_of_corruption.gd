@@ -1,5 +1,5 @@
 class_name PoisonTideOfCorruption
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _multiplier: Array[float]
 @export var _period: Array[float]

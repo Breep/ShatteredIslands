@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://chxhutes821g8"]
-
-[ext_resource type="Script" uid="uid://t4yb0afpvo0h" path="res://Entities/Stats/EntityStatsManager/entity_stats_manager.gd" id="1_opntx"]
-
-[node name="EntityStatsManager" type="Node"]
-script = ExtResource("1_opntx")

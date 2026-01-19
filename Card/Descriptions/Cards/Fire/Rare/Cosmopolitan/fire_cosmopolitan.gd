@@ -1,5 +1,5 @@
 class_name FireCosmopolitan
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _bonus_damage_ratio: Array[float]
 

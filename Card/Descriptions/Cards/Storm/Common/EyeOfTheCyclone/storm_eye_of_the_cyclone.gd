@@ -1,5 +1,5 @@
 class_name StormEyeOfTheCyclone
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _base_max_hp_percent_bonus: Array[float]
 @export var _rarity: Card.Rarity = Card.Rarity.COMMON

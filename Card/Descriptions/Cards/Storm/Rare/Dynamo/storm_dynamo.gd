@@ -1,5 +1,5 @@
 class_name StormDynamo
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _base_regen: Array[float]
 @export var _base_shield: Array[float]

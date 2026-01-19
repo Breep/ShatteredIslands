@@ -33,16 +33,16 @@ func _on_events_local_player_is_dead() -> void:
 	_ui_result.show_result(player_place)
 
 
-func _on_game_manager_game_state_changed(game_state: Game.GameState) -> void:
+func _on_game_manager_game_state_changed(game_state: GameManager.GameState) -> void:
 	match game_state:
-		Game.GameState.STARTING:
+		GameManager.GameState.STARTING:
 			_ui_buying_area.hide()
 			_ui_persistant.hide()
-		Game.GameState.INITIATING_NEW_ROUND:
+		GameManager.GameState.INIT_ROUND:
 			_ui_persistant.show()
-		Game.GameState.FIGHTING_FINISHED:
+		GameManager.GameState.ENDING_ROUND:
 			_ui_transition_screen.start_transition(GameManager.game_rules.duration_fighting_finished * 2)
-		Game.GameState.FINISHED:
+		GameManager.GameState.FINISHED:
 			var local_player: Player = PlayerManager.get_local_player()
 			var player_place: int = PlayerManager.get_player_current_place(local_player)
 			_ui_result.show_result(player_place)

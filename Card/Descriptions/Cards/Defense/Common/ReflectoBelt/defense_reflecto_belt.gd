@@ -1,5 +1,5 @@
 class_name DefenseReflectoBelt
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _shield_threshold: Array[float]
 @export var _attacks_count: Array[float] # Note: Array[float] pour le scaling, on convertira en int

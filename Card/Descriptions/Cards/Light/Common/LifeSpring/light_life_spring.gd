@@ -1,5 +1,5 @@
 class_name LightLifeSpring
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _regen_amount: Array[float]
 @export var _period: Array[float]

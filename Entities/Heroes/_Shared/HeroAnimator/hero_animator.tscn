@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpqtocfge7ott"]
+
+[ext_resource type="Script" uid="uid://cav7t10fod45b" path="res://Entities/Heroes/_Shared/HeroAnimator/hero_animator.gd" id="1_d2lat"]
+
+[node name="HeroAnimator" type="Node"]
+script = ExtResource("1_d2lat")
+
+[node name="IdleVariationTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true

@@ -1,5 +1,5 @@
 class_name SerenityOverflowingLight
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _base_shield_percent: Array[float]
 

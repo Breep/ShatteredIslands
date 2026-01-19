@@ -1,5 +1,5 @@
 class_name AttackGatlingGun
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _attack_speed_min: Array[float] # % Attack speed minimum
 @export var _attack_speed_max: Array[float] # % Attack speed maximum

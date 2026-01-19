@@ -1,5 +1,5 @@
 class_name DefenseForceField
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _period: Array[float]
 @export var _lost_hp_percent: Array[float]

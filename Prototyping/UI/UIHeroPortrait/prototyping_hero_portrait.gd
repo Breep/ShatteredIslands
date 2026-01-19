@@ -6,7 +6,7 @@ extends Control
 @export var _cards_viewer: UICardsViewer
 
 @export var _families: Array[Family]
-@export var _hero: Hero
+@export var _hero_desc: HeroDesc
 
 # ============================== Private variables ==============================
 
@@ -26,10 +26,8 @@ func _ready() -> void:
 	
 	_player.name = "Breep"
 	_player.deck = PlayerDeck.new(_player)
-	_player.hero = _hero
-	_player.character = Character.new()
-	_player.character.stats = EntityStats.new()
-	_player.character.stats.reset_from_hero(_player.hero, 1)
+	_player.hero_desc = _hero_desc
+	_player.Hero = Hero.new()
 	_player.skill_manager = SkillManager.new()
 	_player.skill_manager.init(_player)
 	PlayerManager.players[multiplayer.get_unique_id()] = _player

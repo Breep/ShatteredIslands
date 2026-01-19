@@ -1,7 +1,7 @@
 class_name UIHeroPickingScreen
 extends Control
 
-signal hero_locked(hero: Hero)
+signal hero_locked(hero: HeroDesc)
 
 var _tween: Tween
 
@@ -13,7 +13,7 @@ var _ui_hero_portrait_button: PackedScene = preload("res://UI/InGame/HeroSelecti
 @onready var _lock_hero_button: Button = %LockHeroButton
 @onready var _hero_overview_panel: UIHeroOverviewPanel = %UiHeroOverviewPanel
 
-var _selected_hero: Hero
+var _selected_hero: HeroDesc
 
 # ============================== Node base functions ==============================
 
@@ -24,7 +24,7 @@ func _ready() -> void:
 
 # ============================== Public functions ==============================
 
-func make_hero_unavailable(hero: Hero) -> void:
+func make_hero_unavailable(hero: HeroDesc) -> void:
 	for child in _grid_container.get_children():
 		var hero_portrait_button: UIHeroPortraitButton = child
 		if hero_portrait_button.hero == hero:
@@ -36,7 +36,7 @@ func open_hero_selection() -> void:
 	_lock_hero_button.disabled = false
 
 
-func update_heroes(heroes: Array[Hero]) -> void:
+func update_heroes(heroes: Array[HeroDesc]) -> void:
 	for hero in heroes:
 		var hero_portrait: UIHeroPortraitButton = _ui_hero_portrait_button.instantiate()
 		hero_portrait.hero = hero
@@ -71,7 +71,7 @@ func _blink_player_turn_label() -> void:
 
 # ============================== Callbacks ==============================
 
-func _on_hero_portrait_selected(hero: Hero) ->void:
+func _on_hero_portrait_selected(hero: HeroDesc) ->void:
 	_selected_hero = hero
 	_hero_overview_panel.display_hero_information(hero)
 

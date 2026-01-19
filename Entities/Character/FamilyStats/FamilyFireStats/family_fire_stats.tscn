@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8v7hshggywb0"]
-
-[ext_resource type="Script" uid="uid://tyf44orcb6hr" path="res://Entities/Character/FamilyStats/FamilyFireStats/family_fire_stats.gd" id="1_k7i72"]
-
-[node name="FamilyFireStats" type="Node"]
-script = ExtResource("1_k7i72")

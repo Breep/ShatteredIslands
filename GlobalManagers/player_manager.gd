@@ -55,10 +55,47 @@ var _join_server_reason: String
 # ============================== Public functions ==============================
 
 func clear() -> void:
+	# Destroy all hero instances before clearing
+	destroy_all_heroes()
+
+	# Disconnect all player signals
+	for player in players.values():
+		_disconnect_player_signals(player)
+
 	players.clear()
 	dead_players.clear()
 	for child in get_children():
 		child.queue_free()
+
+
+func create_all_heroes() -> void:
+	Verbose.debug("Creating hero instances for all players", Verbose.Category.PLAYER_MANAGER)
+	for player in players.values():
+		if player.hero_desc == null:
+			Verbose.error("Player " + player.name + " has no hero_desc", Verbose.Category.PLAYER_MANAGER)
+			continue
+
+		# Si le hero existe déjà, le détruire d'abord
+		if player.hero != null and is_instance_valid(player.hero):
+			player.hero.queue_free()
+
+		# Créer nouveau hero
+		player.hero = Shared.HERO_SCENES[player.hero_desc.id].instantiate()
+		player.hero.hero_desc = player.hero_desc
+		player.hero.level = player.lvl
+		player.hero.team = player.team
+		player.hero.entity_name = player.name
+		player.hero.battle_id = -1
+
+		Verbose.debug("Created hero " + player.hero.entity_name + " for player " + player.name, Verbose.Category.PLAYER_MANAGER)
+
+
+func destroy_all_heroes() -> void:
+	Verbose.debug("Destroying all hero instances", Verbose.Category.PLAYER_MANAGER)
+	for player in players.values():
+		if player.hero != null and is_instance_valid(player.hero):
+			player.hero.queue_free()
+			player.hero = null
 
 # ============================== Public getter ==============================
 
@@ -258,6 +295,25 @@ func _connect_to_signals(player: Player) -> void:
 	player.xp_changed.connect(_on_player_xp_changed)
 	player.lvl_changed.connect(_on_player_lvl_changed)
 	player.death.connect(_on_player_death)
+
+
+func _disconnect_player_signals(player: Player) -> void:
+	if player.health_changed.is_connected(_on_player_health_changed):
+		player.health_changed.disconnect(_on_player_health_changed)
+	if player.max_health_changed.is_connected(_on_player_max_health_changed):
+		player.max_health_changed.disconnect(_on_player_max_health_changed)
+	if player.damage_changed.is_connected(_on_player_damage_changed):
+		player.damage_changed.disconnect(_on_player_damage_changed)
+	if player.hero_changed.is_connected(_on_player_hero_changed):
+		player.hero_changed.disconnect(_on_player_hero_changed)
+	if player.gold_changed.is_connected(_on_player_gold_changed):
+		player.gold_changed.disconnect(_on_player_gold_changed)
+	if player.xp_changed.is_connected(_on_player_xp_changed):
+		player.xp_changed.disconnect(_on_player_xp_changed)
+	if player.lvl_changed.is_connected(_on_player_lvl_changed):
+		player.lvl_changed.disconnect(_on_player_lvl_changed)
+	if player.death.is_connected(_on_player_death):
+		player.death.disconnect(_on_player_death)
 
 
 @rpc("authority", "call_remote")

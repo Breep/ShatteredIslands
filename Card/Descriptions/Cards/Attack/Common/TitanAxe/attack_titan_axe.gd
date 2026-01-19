@@ -1,5 +1,5 @@
 class_name AttackTitanAxe
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _attack_number: int # Attack number needed to proc the damage buff
 @export var _damage_percent: Array[float] # Damage buff in % of target hp max

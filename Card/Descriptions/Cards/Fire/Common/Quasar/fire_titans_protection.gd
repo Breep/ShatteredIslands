@@ -1,5 +1,5 @@
 class_name FireTitansProtection
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _hp_amount: Array[float]
 @export var _rarity: Card.Rarity = Card.Rarity.COMMON

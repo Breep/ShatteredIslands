@@ -1,5 +1,5 @@
 class_name FireEndOfTheWorld
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _stack_multiplier: Array[float]
 @export var _rarity: Card.Rarity = Card.Rarity.RARE

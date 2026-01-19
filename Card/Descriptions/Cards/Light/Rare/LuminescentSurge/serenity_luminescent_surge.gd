@@ -1,5 +1,5 @@
 class_name SerenityLuminescentSurge
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _base_period: Array[float]
 @export var _base_target_count: Array[int]

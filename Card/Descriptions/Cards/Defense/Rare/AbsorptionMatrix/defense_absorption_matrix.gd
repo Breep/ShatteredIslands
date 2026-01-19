@@ -1,5 +1,5 @@
 class_name DefenseAbsorptionMatrix
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _base_chance: Array[float]
 @export var _rarity: Card.Rarity = Card.Rarity.RARE

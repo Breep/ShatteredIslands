@@ -22,7 +22,7 @@ func cleanup() -> void:
 	_buying_area.cleanup()
 
 
-# Spawn all characters on the BuyingArea according to the battle
+# Spawn all heroes on the BuyingArea according to the battle
 func start_buying_phase(battles: Array[Battle]) -> void:
 	_buying_area.start_round(battles)
 

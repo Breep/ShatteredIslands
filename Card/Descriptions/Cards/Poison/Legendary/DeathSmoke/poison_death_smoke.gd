@@ -1,5 +1,5 @@
 class_name PoisonDeathSmoke
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _period: Array[float]
 @export var _multiplayer: Array[float]

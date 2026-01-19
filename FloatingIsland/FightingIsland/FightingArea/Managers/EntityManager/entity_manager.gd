@@ -13,9 +13,9 @@ var _entities: Dictionary[int, Entity] # Key=Entity id, Value=Entity ref
 var entities: Dictionary[int, Entity]:
 	get: return _entities
 
-var _characters: Dictionary[int, Character] # Key=Entity id, Value=Character ref
-var characters: Dictionary[int, Character]:
-	get: return _characters
+var _heroes: Dictionary[int, Hero] # Key=Entity id, Value=Hero ref
+var heroes: Dictionary[int, Hero]:
+	get: return _heroes
 
 var _is_active: bool = false
 
@@ -45,7 +45,7 @@ func clear() -> void:
 			if entity.interaction_received.is_connected(_on_entity_interaction_received):
 				entity.interaction_received.disconnect(_on_entity_interaction_received)
 	_entities.clear()
-	_characters.clear()
+	_heroes.clear()
 
 
 func get_entity(entity_id: int) -> Entity:
@@ -63,8 +63,8 @@ func _register_entity(entity: Entity) -> void:
 		return
 	
 	_entities[entity.id] = entity
-	if entity is Character:
-		_characters[entity.id] = entity
+	if entity is Hero:
+		_heroes[entity.id] = entity
 	
 	entity.spell_casted.connect(_on_entity_spell_casted)
 	entity.action_done.connect(_on_entity_action_done)
@@ -79,16 +79,17 @@ func _kick_entity(entity: Entity) -> void:
 	if entity.action_done.is_connected(_on_entity_action_done): entity.action_done.disconnect(_on_entity_action_done)
 	if entity.interaction_received.is_connected(_on_entity_interaction_received): entity.interaction_received.disconnect(_on_entity_interaction_received)
 	entities.erase(entity.id)
-	if _characters.has(entity.id): _characters.erase(entity.id)
+	if _heroes.has(entity.id): _heroes.erase(entity.id)
 
 # ============================== Callbacks ==============================
 
-func _on_game_manager_game_state_changed(game_state: Game.GameState) -> void:
-	if game_state == Game.GameState.BUYING:
-		_is_active = false
-		clear()
-	if game_state == Game.GameState.FIGHTING_POSITIONING:
-		_is_active = true
+func _on_game_manager_game_state_changed(game_state: GameManager.GameState) -> void:
+	match game_state:
+		GameManager.GameState.BUYING:
+			_is_active = false
+			clear()
+		GameManager.GameState.FIGHTING:
+			_is_active = true
 
 
 func _on_entity_spell_casted(entity: Entity, target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary) -> void:

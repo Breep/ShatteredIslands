@@ -1,9 +1,8 @@
-[gd_scene load_steps=51 format=3 uid="uid://f2n7hccdooke"]
+[gd_scene load_steps=50 format=3 uid="uid://f2n7hccdooke"]
 
 [ext_resource type="Script" uid="uid://bu48b2v401db2" path="res://Prototyping/FightingIsland/prototyping_map.gd" id="1_oc45v"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="2_5t2nw"]
 [ext_resource type="PackedScene" uid="uid://drcuyohos0doa" path="res://FloatingIsland/FightingIsland/fighting_island.tscn" id="2_xvkv2"]
-[ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Entities/Character/character.tscn" id="3_doj2u"]
 [ext_resource type="Material" uid="uid://2wlal7g5718r" path="res://VFX/Shaders/Sky/stylized_shader_night.tres" id="4_3ldpt"]
 [ext_resource type="Resource" uid="uid://vefirtk44fxp" path="res://Card/Descriptions/Cards/Fire/Rare/EndOfTheWorld/fire_end_of_the_world.tres" id="4_5t2nw"]
 [ext_resource type="Resource" uid="uid://dc5r8wy0vfksm" path="res://Card/Descriptions/Cards/Fire/Common/KuiperBelt/fire_kuiper_belt.tres" id="5_y3vk0"]
@@ -80,7 +79,7 @@ _player1_cards = Array[ExtResource("2_5t2nw")]([ExtResource("8_4ych6"), ExtResou
 _player2_cards = Array[ExtResource("2_5t2nw")]([ExtResource("9_q4r27"), ExtResource("10_qouoy"), ExtResource("21_eqikj"), ExtResource("22_3i0vm"), ExtResource("23_4lkue"), ExtResource("24_5cdqt"), ExtResource("25_o3kpj"), ExtResource("19_p3qq1"), ExtResource("26_qqr46"), ExtResource("27_7xldn"), ExtResource("28_cwex7"), ExtResource("29_xmvpm"), ExtResource("21_eqikj"), ExtResource("30_4lkue")])
 _player3_cards = Array[ExtResource("2_5t2nw")]([ExtResource("9_nlwjv"), ExtResource("10_cyskk"), ExtResource("11_q4r27"), ExtResource("12_qouoy"), ExtResource("7_4gryv"), ExtResource("17_7n5st"), ExtResource("19_mmcok"), ExtResource("26_cj02a"), ExtResource("27_cj02a")])
 _player4_cards = Array[ExtResource("2_5t2nw")]([ExtResource("9_nlwjv"), ExtResource("10_cyskk"), ExtResource("11_q4r27"), ExtResource("17_7n5st"), ExtResource("19_mmcok"), ExtResource("26_cj02a"), ExtResource("7_4gryv"), ExtResource("22_nao3x")])
-_characters = [NodePath("Character1"), NodePath("Character2"), NodePath("Character3"), NodePath("Character4")]
+_characters = [NodePath(""), NodePath(""), NodePath(""), NodePath("")]
 _floating_island = NodePath("FightingIsland")
 _battle_type = 1
 
@@ -104,34 +103,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0.2, 5.7)
 light_color = Color(0.846952, 0.2959, 0.736692, 1)
 light_volumetric_fog_energy = 6.642
 light_specular = 4.879
-
-[node name="Character1" parent="." instance=ExtResource("3_doj2u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.34606, 0, 2.12149)
-hero_id = 1
-id = 1
-team = 1
-battle_id = 1
-
-[node name="Character2" parent="." instance=ExtResource("3_doj2u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.03813, 0, -2.59736)
-hero_id = 1
-id = 2
-team = 1
-battle_id = 1
-
-[node name="Character3" parent="." instance=ExtResource("3_doj2u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.167192, 2.02964, -10.1344)
-hero_id = 1
-id = 4
-team = 2
-battle_id = 1
-
-[node name="Character4" parent="." instance=ExtResource("3_doj2u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6354, 2.03525, -6.30828)
-hero_id = 1
-id = 3
-team = 2
-battle_id = 1
 
 [node name="UIFightingArea" parent="." instance=ExtResource("11_blmm3")]
 unique_name_in_owner = true

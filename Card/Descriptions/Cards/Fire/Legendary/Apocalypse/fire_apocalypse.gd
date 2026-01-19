@@ -1,5 +1,5 @@
 class_name FireApocalypse
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _damage_ratio: Array[float]
 

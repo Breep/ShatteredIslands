@@ -1,5 +1,5 @@
 class_name PoisonShrooms
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _damage: Array[int]
 @export var _life_time: Array[float]

@@ -1,5 +1,5 @@
 class_name AttackProtectoSpear
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _base_chance: Array[float]
 @export var _base_shield_amount: Array[float]

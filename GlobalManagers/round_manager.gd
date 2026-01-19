@@ -123,12 +123,15 @@ func starting_round_player_changes() -> void:
 # [Server Only]
 # Handle all changes affecting players at end of round: damage taken by loosing a fight
 func ending_round_player_changes() -> void:
+	Verbose.trace("ending_round_player_changes() - BEGIN", Verbose.Category.ROUND_MANAGER)
 	if not multiplayer.is_server():
 		Verbose.error("A client should not run this code ending_round_player_changes()", Verbose.Category.ROUND_MANAGER)
 		return
 	
 	# Not all FightingArea reported their fight result yet (There is a race of signals)
 	if battle_history[current_round].battle_results.size() < _battles.size():
+		Verbose.trace("ending_round_player_changes() -> Waiting for all results [" + str(battle_history[current_round].battle_results.size()) + "/" \
+						+ str(_battles.size()) + "]", Verbose.Category.ROUND_MANAGER)
 		await _current_round_battle_history_is_ready
 	
 	for battle_result in battle_history[current_round].battle_results:
@@ -152,6 +155,7 @@ func ending_round_player_changes() -> void:
 														-GameManager.game_rules.damage_max_diff_win_lose,
 														GameManager.game_rules.damage_max_diff_win_lose)
 			looser.health -= floor(winner_team_damage as float / winners.size() as float)
+	Verbose.trace("ending_round_player_changes() - END", Verbose.Category.ROUND_MANAGER)
 
 # ============================== RPC - Ask/Answer current round battle ==============================
 

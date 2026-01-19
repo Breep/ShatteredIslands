@@ -1,5 +1,5 @@
 class_name StormChainLightning
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _dist_factor: Array[float]
 @export var _chance_percent: Array[float] # <--- NOUVEL EXPORT

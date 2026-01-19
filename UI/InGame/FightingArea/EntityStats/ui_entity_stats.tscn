@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bccnumgm5v1f8" path="res://UI/InGame/FightingArea/EntityStats/HealthBar/ui_health_bar.tscn" id="3_b0dtw"]
 [ext_resource type="Shader" uid="uid://bngl8v6o10lds" path="res://UI/Tool/Misc/2d_flexible_progress_bar.gdshader" id="3_tdusk"]
 [ext_resource type="Script" uid="uid://chcmgrh1l6vyn" path="res://UI/Tool/Misc/flexible_progress_bar.gd" id="6_5f36r"]
-[ext_resource type="PackedScene" uid="uid://bx7rkwxhqecme" path="res://Entities/Character/FamiliesManagers/Storm/RankViewer/ui_rank_viewer.tscn" id="7_y44ja"]
+[ext_resource type="PackedScene" uid="uid://bx7rkwxhqecme" path="res://Entities/Heroes/_Shared/FamiliesManagers/Storm/RankViewer/ui_rank_viewer.tscn" id="7_y44ja"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_5f36r"]
 viewport_path = NodePath("VBoxContainer/ManaBarContainer/SubViewport")

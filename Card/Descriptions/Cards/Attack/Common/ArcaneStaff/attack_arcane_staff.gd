@@ -1,5 +1,5 @@
 class_name AttackArcaneStaff
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _chance_percent: Array[float]
 @export var _mana_gain: Array[float]

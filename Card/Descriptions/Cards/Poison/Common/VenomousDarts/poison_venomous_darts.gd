@@ -1,5 +1,5 @@
 class_name PoisonVenomousDarts
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _period: Array[float]
 @export var _multiplier: Array[float]

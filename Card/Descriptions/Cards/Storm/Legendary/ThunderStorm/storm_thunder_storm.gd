@@ -1,5 +1,5 @@
 class_name StormThunderStorm
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _duration_bonus: Array[float]
 @export var _rarity: Card.Rarity = Card.Rarity.LEGENDARY

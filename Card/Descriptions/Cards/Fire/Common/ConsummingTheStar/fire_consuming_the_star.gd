@@ -1,5 +1,5 @@
 class_name FireConsumingTheStar
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _mana_burn: Array[float]
 @export var _rarity: Card.Rarity = Card.Rarity.RARE

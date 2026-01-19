@@ -1,5 +1,5 @@
 class_name DefenseProtectiveDome
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _armor_percent: Array[float]
 @export var _rarity: Card.Rarity = Card.Rarity.COMMON

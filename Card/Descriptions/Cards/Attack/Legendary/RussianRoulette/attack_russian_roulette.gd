@@ -1,5 +1,5 @@
 class_name AttackRussianRoulette
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _min_percent: Array[int]
 @export var _max_percent: Array[int]

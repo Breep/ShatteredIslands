@@ -1,8 +1,7 @@
 class_name Player
 extends Resource
 
-# ============================== Enum ==============================
-
+#region ============================== Enum ==============================
 enum SerializedField {
 	NAME,
 	ID,
@@ -15,9 +14,9 @@ enum SerializedField {
 	XP,
 	IS_BOT,
 }
+#endregion
 
-# ============================== Variables ==============================
-
+#region ============================== Variables ==============================
 var name: String # Nickname of the player
 var id: int # Multiplayer id
 
@@ -26,7 +25,7 @@ var is_bot: bool # If the player is a fake player (a bot controlled by the serve
 var ready: bool # If this player is ready to continue the game flow (Used to sync players with server)
 
 var deck: PlayerDeck
-var character: Character
+var hero: Hero
 var fighting_island: FightingIsland
 
 var win_streak: int
@@ -46,7 +45,7 @@ var team: int:
 	get: return _team
 	set(value):
 		_team = value
-		if character != null: character.team = _team
+		if hero != null: hero.team = _team
 
 signal lvl_changed(self_ref: Player, new_lvl: int)
 var _lvl: int = 1
@@ -67,14 +66,14 @@ var xp: int:
 		_check_lvl_up()
 		xp_changed.emit(self, _xp)
 
-signal hero_changed(self_ref: Player, new_hero: Hero)
-var _hero: Hero
-var hero: Hero:
-	get: return _hero
+signal hero_changed(self_ref: Player, new_hero: HeroDesc)
+var _hero_desc: HeroDesc
+var hero_desc: HeroDesc:
+	get: return _hero_desc
 	set(value):
-		if _hero == value: return
-		_hero = value
-		hero_changed.emit(self, _hero)
+		if _hero_desc == value: return
+		_hero_desc = value
+		hero_changed.emit(self, _hero_desc)
 
 signal max_health_changed(self_ref: Player, new_max_health: int)
 var _max_health: int
@@ -96,7 +95,7 @@ var health: int:
 		health_changed.emit(self, _health)
 		if _health <= 0: # TODO Change this by a pile of corpse is funnier
 			death.emit(self)
-			character.queue_free()
+			# Hero cleanup is now handled by global lifecycle management
 
 signal gold_changed(self_ref: Player, new_gold: int)
 var _gold: int
@@ -115,9 +114,9 @@ var damage: int:
 		if _damage == value: return
 		_damage = value
 		damage_changed.emit(self, _damage)
+#endregion
 
-# ============================== Static functions ==============================
-
+#region ============================== Static functions ==============================
 static func new_from_serialized(serialized_data: Dictionary) -> Player:
 	var player := Player.new()
 	player.skill_manager = SkillManager.new()
@@ -127,14 +126,14 @@ static func new_from_serialized(serialized_data: Dictionary) -> Player:
 	player.health = serialized_data[SerializedField.HEALTH]
 	player.max_health = serialized_data[SerializedField.MAX_HEALTH]
 	player.damage = serialized_data[SerializedField.DAMAGE]
-	player.hero = Shared.HEROES[serialized_data[SerializedField.HERO]]
+	player.hero_desc = Shared.HEROES[serialized_data[SerializedField.HERO]]
 	player.gold = serialized_data[SerializedField.GOLD]
 	player.is_bot = serialized_data[SerializedField.IS_BOT]
 	player.xp = serialized_data[SerializedField.XP]
 	return player
+#endregion
 
-# ============================== Public functions ==============================
-
+#region ============================== Public functions ==============================
 func serialized() -> Dictionary:
 	var serialized_version = {
 		SerializedField.NAME: name,
@@ -143,7 +142,7 @@ func serialized() -> Dictionary:
 		SerializedField.HEALTH: health,
 		SerializedField.MAX_HEALTH: max_health,
 		SerializedField.DAMAGE: damage,
-		SerializedField.HERO: 0 if hero == null else hero.id,
+		SerializedField.HERO: 0 if hero_desc == null else hero_desc.id,
 		SerializedField.GOLD: gold,
 		SerializedField.IS_BOT: is_bot,
 		SerializedField.XP: xp,
@@ -158,23 +157,10 @@ func update_from_serialized(serialized_data: Dictionary) -> void:
 	health = serialized_data[SerializedField.HEALTH]
 	max_health = serialized_data[SerializedField.MAX_HEALTH]
 	damage = serialized_data[SerializedField.DAMAGE]
-	hero = Shared.HEROES[serialized_data[SerializedField.HERO]]
+	hero_desc = Shared.HEROES[serialized_data[SerializedField.HERO]]
 	gold = serialized_data[SerializedField.GOLD]
 	is_bot = serialized_data[SerializedField.IS_BOT]
 	xp = serialized_data[SerializedField.XP]
-
-
-func spawn_character(spawn_node: Node3D, spawn_point: SpawnPoint) -> Character:
-	if character != null: character.queue_free()
-	var new_character: Character = preload("res://Entities/Character/character.tscn").instantiate()
-	new_character.owner_player_id = id
-	new_character.hero_id = hero.id
-	new_character.name = "Character_" + hero.name
-	character = new_character
-	spawn_node.add_child(character)
-	character.global_rotation = spawn_point.global_rotation
-	character.global_position = spawn_point.global_position
-	return character
 
 # ============================== Resource base functions ==============================
 
@@ -185,10 +171,12 @@ func _init() -> void:
 # ============================== Private functions ==============================
 
 func _apply_all_cards_upgrades() -> void:
-	if deck == null or character == null:
+	if deck == null or hero == null:
 		printerr("Player: Can't apply cards upgrades")
 		return
-	character.apply_cards_upgrade(deck)
+	for card in deck.get_active_deck():
+		card.player_upgrade.apply(hero.families_stats, card.lvl)
+
 
 
 func _check_lvl_up() -> void:

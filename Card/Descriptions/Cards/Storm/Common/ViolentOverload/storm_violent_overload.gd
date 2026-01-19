@@ -1,5 +1,5 @@
 class_name StormViolentOverload
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _base_crit_mult_boost: Array[float]
 @export var _rarity: Card.Rarity = Card.Rarity.COMMON

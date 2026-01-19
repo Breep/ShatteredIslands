@@ -1,5 +1,5 @@
 class_name StormThunderBerserker
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _start_boost: Array[float]
 @export var _delay: Array[float]

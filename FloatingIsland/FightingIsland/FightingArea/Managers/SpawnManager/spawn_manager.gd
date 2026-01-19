@@ -23,7 +23,8 @@ var _projectile_counter: int = 0
 
 func _ready() -> void:
 	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
-	_fighting_area.fighting_manager.fight_is_over.connect(_on_fighting_area_fighting_manager_fight_is_over)
+	if _fighting_area != null:
+		_fighting_area.fighting_manager.fight_is_over.connect(_on_fighting_area_fighting_manager_fight_is_over)
 
 # ============================== Public function ==============================
 
@@ -39,7 +40,8 @@ func spawn_projectile(source: Entity, target: Entity, projectile_type: Projectil
 	projectile.projectile_type = projectile_type
 	
 	var modifiers: Array[Projectile.ProjectileEffect] = []
-	_fighting_area.signal_projectile_spawned(source, target, projectile_type, modifiers, projectile)
+	if _fighting_area != null:
+		_fighting_area.signal_projectile_spawned(source, target, projectile_type, modifiers, projectile)
 	_projectile_counter += 1
 	_projectiles_node.add_child(projectile)
 
@@ -66,8 +68,8 @@ func _clear_all() -> void:
 
 # ============================== Callbacks ==============================
 
-func _on_game_manager_game_state_changed(state: Game.GameState) -> void:
-	if state == Game.GameState.BUYING:
+func _on_game_manager_game_state_changed(state: GameManager.GameState) -> void:
+	if state == GameManager.GameState.BUYING:
 		_clear_all()
 
 

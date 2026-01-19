@@ -1,5 +1,5 @@
 class_name FireMeteor
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _period: float
 @export var _ignite_stacks: Array[int]

@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c8r3n1505sg3s"]
-
-[ext_resource type="Script" uid="uid://c1ocx878u7kue" path="res://Entities/Character/FamilyStats/FamilyDefenseStats/family_defense_stats.gd" id="1_j0w3g"]
-
-[node name="FamilyDefenseStats" type="Node"]
-script = ExtResource("1_j0w3g")
