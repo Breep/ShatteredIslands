@@ -133,6 +133,7 @@ var current_categories_level: Dictionary[Category, Level] = {
 
 #region ============================== Private variables ==============================
 var _is_server: bool = false
+var _get_stamp: bool = true
 #endregion
 
 
@@ -191,16 +192,23 @@ func _is_category_active(cat: Category, log_level: Level) -> bool:
 
 
 func _log(cat: Category, level: Level, msg: String) -> void:
+	
+	var time_stamp: String = ""
+	
+	if _get_stamp:
+		time_stamp = " " + str(Time.get_ticks_msec()) + " "
+	
 	if not _is_category_active(cat, level): return
+	
 	match level:
 		Level.TRACE: 
-			print_rich(_get_rich_prefix() + "[color=gray]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
+			print_rich(_get_rich_prefix() + time_stamp + "[color=gray]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 		Level.DEBUG:
-			print_rich(_get_rich_prefix() + "[color=white]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
+			print_rich(_get_rich_prefix() + time_stamp + "[color=white]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 		Level.INFO:
-			print_rich(_get_rich_prefix() + "[color=white]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
+			print_rich(_get_rich_prefix()  + time_stamp  + "[color=white]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 		Level.WARN:
-			print_rich(_get_rich_prefix() + "[color=yellow]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
+			print_rich(_get_rich_prefix()  + time_stamp  + "[color=yellow]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 		Level.ERROR:
-			print_rich(_get_rich_prefix() + "[color=red]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
+			print_rich(_get_rich_prefix()  + time_stamp  + "[color=red]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 #endregion
