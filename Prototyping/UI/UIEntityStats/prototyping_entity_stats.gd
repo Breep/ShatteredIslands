@@ -47,7 +47,6 @@ func _ready() -> void:
 
 #region Start/Stop Battle
 func _on_start_battle_pressed() -> void:
-	_dark_knight.fighting_state = Hero.FightingState.POSITIONING
 	_dark_knight.fighting_state = Hero.FightingState.FIGHTING
 
 
