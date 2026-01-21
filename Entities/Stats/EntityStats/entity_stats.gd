@@ -287,6 +287,14 @@ func reset_from_hero_desc(hero: HeroDesc, lvl: int) -> EntityStats:
 	return self
 
 
+func reset_from_self() -> EntityStats:
+	if health == 0 and health_max > 0:
+		health = health_max
+	if mana == 0 and mana_max > 0:
+		mana = 0
+	return self
+
+
 func get_stat(stat_type: StatType, action_type: Utils.ActionType = Utils.ActionType.DAMAGE_PHYSICAL) -> float:
 	match stat_type:
 		EntityStats.StatType.HEALTH_MAX: return float(_health_max)

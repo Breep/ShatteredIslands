@@ -29,7 +29,7 @@ signal ultimate_casted()
 #endregion
 
 #region ============================== Public variables ==============================
-var display_mode: DisplayMode = DisplayMode.BUYING_PHASE
+var display_mode: DisplayMode = DisplayMode.PREVIEW
 var fighting_area: FightingArea
 var families_stats: FamiliesStats
 #endregion

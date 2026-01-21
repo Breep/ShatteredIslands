@@ -19,6 +19,8 @@ func _ready() -> void:
 func _on_start_fight_button_pressed() -> void:
 	for entity: Entity in _entities:
 		entity.fighting_state = Entity.FightingState.FIGHTING
+		if entity is Hero:
+			entity.set_display_mode(Hero.DisplayMode.FIGHTING_PHASE)
 
 
 func _on_stop_fight_button_pressed() -> void:
@@ -27,5 +29,5 @@ func _on_stop_fight_button_pressed() -> void:
 
 
 func _on_reset_fight_button_pressed() -> void:
-	pass # Replace with function body.
+	get_tree().reload_current_scene()
 #endregion

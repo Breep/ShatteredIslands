@@ -159,18 +159,11 @@ func _entity_init() -> void:
 	
 	# Stats
 	stats = EntityStats.new()
-	
-	# Use custom_base_stats if defined, otherwise create new one
-	if custom_base_stats != null:
-		_base_stats = custom_base_stats
-		Verbose.debug("Entity [" + entity_name + "] using custom_base_stats", Verbose.Category.ENTITY)
-	else:
-		_base_stats = EntityStats.new()
+	_base_stats = EntityStats.new()
 	
 	# Default Modifier Registries
 	auto_attack_modifier_registry = AutoAttackModifierRegistry.new()
 	action_modifiers_registry = ActionModifiersRegistry.new()
-	stat_modifiers_registry = EntityStatModifiersRegistry.new(_base_stats, stats)
 
 
 func _enter_tree() -> void:
@@ -178,6 +171,15 @@ func _enter_tree() -> void:
 
 
 func _entity_enter_tree() -> void:
+	# Stats registry needs to be created after _init() because custom_base_stats is not available in _init()
+	if custom_base_stats != null:
+		_base_stats = custom_base_stats
+		_base_stats.reset_from_self()
+		Verbose.debug("Entity [" + entity_name + "] using custom_base_stats", Verbose.Category.ENTITY)
+	else:
+		_base_stats = EntityStats.new()
+	stat_modifiers_registry = EntityStatModifiersRegistry.new(_base_stats, stats)
+	
 	# Add default module if not already added
 	if target_module == null:
 		target_module = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.TARGET].instantiate().init(self)

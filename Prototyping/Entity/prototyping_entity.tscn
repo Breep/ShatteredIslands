@@ -13,8 +13,8 @@ size = Vector2(20, 20)
 
 [sub_resource type="Resource" id="Resource_cpqow"]
 script = ExtResource("3_cpqow")
-health_max = 100000.0
-attack_damage = 40.0
+health_max = 10000.0
+attack_damage = 100.0
 attack_speed = 2.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
@@ -33,7 +33,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0013899803, 7.1525574e-07,
 team = 1
 _spawn_manager = NodePath("../../SpawnManager")
 
-[node name="DarkKnight2" parent="Entities" node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
+[node name="DarkKnightSOLO" parent="Entities" node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
 transform = Transform3D(-0.99893624, 0, 0.04611278, 0, 1, 0, -0.04611278, 0, -0.99893624, -0.032851696, -4.7683716e-07, -5.1778226)
 team = 2
 custom_base_stats = SubResource("Resource_cpqow")
