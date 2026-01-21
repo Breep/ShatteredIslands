@@ -46,4 +46,4 @@ func _spawn_hero(hero: Hero, available_spawn_locations: Array[SpawnPoint], node_
 			return true
 	
 	Verbose.error("No more available spawn point for " + hero.name + " [Team#" + str(hero.team) + "]", Verbose.Category.HERO_SPAWNER)
-	return false 
+	return false

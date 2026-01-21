@@ -22,7 +22,7 @@ enum JoinGameKeys {
 # ============================== Constants ==============================
 
 # Bot names and their fake peer_id
-const BOT_INFOS: Dictionary [int, String] = {
+const BOT_INFOS: Dictionary[int, String] = {
 	-10: "Spide Ren'heure",
 	-20: "Alex_Supertramp",
 	-30: "Pwet",
@@ -68,8 +68,8 @@ func clear() -> void:
 		child.queue_free()
 
 
-func create_all_heroes() -> void:
-	Verbose.debug("Creating hero instances for all players", Verbose.Category.PLAYER_MANAGER)
+func create_all_heroes(display_mode: Hero.DisplayMode = Hero.DisplayMode.PREVIEW) -> void:
+	Verbose.debug("Creating hero instances for all players with display_mode: " + str(Hero.DisplayMode.keys()[display_mode]), Verbose.Category.PLAYER_MANAGER)
 	for player in players.values():
 		if player.hero_desc == null:
 			Verbose.error("Player " + player.name + " has no hero_desc", Verbose.Category.PLAYER_MANAGER)
@@ -79,8 +79,8 @@ func create_all_heroes() -> void:
 		if player.hero != null and is_instance_valid(player.hero):
 			player.hero.queue_free()
 
-		# Créer nouveau hero
-		player.hero = Shared.HERO_SCENES[player.hero_desc.id].instantiate()
+		# Créer nouveau hero avec le display_mode spécifié
+		player.hero = Shared.HERO_SCENES[player.hero_desc.id].instantiate().init(display_mode)
 		player.hero.hero_desc = player.hero_desc
 		player.hero.level = player.lvl
 		player.hero.team = player.team
@@ -211,17 +211,17 @@ func _ask_join_game(peer_id: int, player_name: String) -> void:
 		return
 	
 	if players.size() >= MAX_PLAYERS:
-		printerr("[id:", multiplayer.get_unique_id(),"] Too many players")
+		printerr("[id:", multiplayer.get_unique_id(), "] Too many players")
 		_answer_join_game.rpc_id(peer_id, false, "Too many players")
 		return
 	
 	for player in players.values():
 		if player.name == player_name:
-			printerr("[id:", multiplayer.get_unique_id(),"] A player with the same name has already joined")
+			printerr("[id:", multiplayer.get_unique_id(), "] A player with the same name has already joined")
 			_answer_join_game.rpc_id(peer_id, false, "A player with the same name has already joined")
 			return
 		elif player.id == peer_id:
-			printerr("[id:", multiplayer.get_unique_id(),"] Player already exist")
+			printerr("[id:", multiplayer.get_unique_id(), "] Player already exist")
 			_answer_join_game.rpc_id(peer_id, false, "Player already in the game")
 			return
 	
@@ -370,14 +370,3 @@ func _on_player_death(player: Player) -> void:
 	player.round_of_death = RoundManager.current_round
 	player.is_dead = true
 	dead_players[player.id] = player
-
-
-
-
-
-
-
-
-
-
- 

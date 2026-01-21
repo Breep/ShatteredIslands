@@ -38,7 +38,7 @@ const PARAM_ONE_SHOT_SITTING: String = "parameters/one_shot_sitting/request"
 #endregion
 
 @onready var _rng := RandomNumberGenerator.new()
-@onready var _idle_variation_timer: Timer = %IdleVariationTimer 
+@onready var _idle_variation_timer: Timer = %IdleVariationTimer
 
 var _is_fighting: bool = false
 
@@ -54,8 +54,6 @@ func _ready() -> void:
 	_hero_owner.fighting_state_changed.connect(_on_hero_owner_fighting_state_changed)
 	_hero_owner.auto_attack_started.connect(_on_hero_owner_auto_attack_started)
 	_hero_owner.ultimate_casted.connect(_on_hero_owner_ultimate_casted)
-	
-	GameManager.game_state_changed.connect(_on_game_manager_game_stated_changed)
 	
 	_idle_variation_timer.timeout.connect(_on_idle_variation_timer_timeout)
 	
@@ -82,19 +80,21 @@ func _on_hero_owner_died(_self_ref: Entity) -> void:
 	_animation_tree.set(PARAM_TRANSITION_FIGHTING, VALUE_TRANSITION_FIGHTING_DIE)
 
 
-func _on_game_manager_game_stated_changed(game_state: GameManager.GameState) -> void:
-	match game_state:
-		GameManager.GameState.UNDEF:
-			_animation_tree.set(PARAM_TRANSITION_GLOBAL, VALUE_TRANSITION_GLOBAL_TPOSE)
-		GameManager.GameState.BUYING:
+func apply_display_mode(display_mode: Hero.DisplayMode) -> void:
+	match display_mode:
+		Hero.DisplayMode.BUYING_PHASE:
 			_animation_tree.set(PARAM_TRANSITION_GLOBAL, VALUE_TRANSITION_GLOBAL_SITTING)
 			_start_buying_area_animation()
 			_weapons_node.hide()
-		GameManager.GameState.FIGHTING:
+		Hero.DisplayMode.FIGHTING_PHASE:
 			_idle_variation_timer.stop()
 			_animation_tree.set(PARAM_TRANSITION_GLOBAL, VALUE_TRANSITION_GLOBAL_FIGHTING)
 			_animation_tree.set(PARAM_TRANSITION_FIGHTING, VALUE_TRANSITION_FIGHTING_IDLE)
 			_weapons_node.show()
+		Hero.DisplayMode.PREVIEW:
+			_idle_variation_timer.stop()
+			_animation_tree.set(PARAM_TRANSITION_GLOBAL, VALUE_TRANSITION_GLOBAL_TPOSE)
+			_weapons_node.hide()
 
 
 func _on_hero_owner_fight_is_won() -> void:
@@ -123,7 +123,6 @@ func _start_buying_area_animation() -> void:
 	_idle_variation_timer.start()
 
 
-
 func _on_idle_variation_timer_timeout() -> void:
 	_animation_tree.set(PARAM_ONE_SHOT_SITTING, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	_start_buying_area_animation()
@@ -131,4 +130,3 @@ func _on_idle_variation_timer_timeout() -> void:
 
 func _on_hero_animation_player_attack_done() -> void:
 	attack_hit_frame.emit()
- 

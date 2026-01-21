@@ -3,6 +3,14 @@ extends Entity
 
 # == VIRTUAL CLASS ==
 
+#region ============================== Enums ==============================
+enum DisplayMode {
+	BUYING_PHASE, # Interface cachée (buying phase / bench)
+	FIGHTING_PHASE, # Interface visible (combat)
+	PREVIEW # Mode prévisualisation (shop, etc.)
+}
+#endregion
+
 #region ============================== Signal ==============================
 signal aa_done()
 signal ultimate_casted()
@@ -21,6 +29,7 @@ signal ultimate_casted()
 #endregion
 
 #region ============================== Public variables ==============================
+var display_mode: DisplayMode = DisplayMode.BUYING_PHASE
 var fighting_area: FightingArea
 var families_stats: FamiliesStats
 #endregion
@@ -35,6 +44,20 @@ var _family_managers: Dictionary[Family.FamilyType, FamilyManager]
 #endregion
 
 #region ============================== Public functions ==============================
+func init(hero_display_mode: DisplayMode = DisplayMode.BUYING_PHASE, fighting_area_ref: FightingArea = null) -> Hero:
+	display_mode = hero_display_mode
+	
+	if fighting_area_ref != null:
+		connect_to_fighting_area(fighting_area_ref)
+	
+	return self
+
+
+func set_display_mode(mode: DisplayMode) -> void:
+	display_mode = mode
+	_apply_display_mode()
+
+
 func connect_to_fighting_area(fighting_area_ref: FightingArea) -> void:
 	if fighting_area_ref == null:
 		Verbose.error("Trying to connect a null fighting area to a Hero", Verbose.Category.HERO)
@@ -146,7 +169,7 @@ func _enter_tree() -> void:
 	_entity_enter_tree()
 
 
-func _hero_enter_tree() -> void:	
+func _hero_enter_tree() -> void:
 	# Add Family Managers and Family stats
 	families_stats = FamiliesStats.new()
 	for family_type: Family.FamilyType in Shared.FAMILY_MANAGER_SCENES.keys():
@@ -178,7 +201,6 @@ func _ready() -> void:
 
 
 func _hero_ready() -> void:
-	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
 
 	stats.health_changed.connect(_on_stats_health_changed)
@@ -187,12 +209,11 @@ func _hero_ready() -> void:
 	_hero_animator.attack_hit_frame.connect(_on_hero_animator_attack_hit_frame)
 
 	_entity_info_panel_3d.update_health_bar(stats.health, stats.health_max)
+	_apply_display_mode()
 
 
 func _exit_tree() -> void:
 	# Disconnect all signals to avoid ghost references
-	if GameManager.game_state_changed.is_connected(_on_game_manager_game_state_changed):
-		GameManager.game_state_changed.disconnect(_on_game_manager_game_state_changed)
 	if GlobalFightingManager.fighting_phase_state_changed.is_connected(_on_gfm_fighting_phase_state_changed):
 		GlobalFightingManager.fighting_phase_state_changed.disconnect(_on_gfm_fighting_phase_state_changed)
 	if stats != null and stats.health_changed.is_connected(_on_stats_health_changed):
@@ -225,6 +246,18 @@ func _on_fighting_state_changed(new_fighting_state: FightingState) -> void:
 #endregion
 
 #region ============================== Private ==============================
+func _apply_display_mode() -> void:
+	match display_mode:
+		DisplayMode.BUYING_PHASE, DisplayMode.PREVIEW:
+			_entity_info_panel_3d.hide()
+		DisplayMode.FIGHTING_PHASE:
+			_entity_info_panel_3d.show()
+	
+	# Update animator (weapons + animations)
+	if _hero_animator != null:
+		_hero_animator.apply_display_mode(display_mode)
+
+
 func _handle_death() -> void:
 	died.emit(self)
 	_is_dead = true
@@ -239,14 +272,6 @@ func _on_gfm_fighting_phase_state_changed(fighting_phase_state: GlobalFightingMa
 			fighting_state = FightingState.FIGHTING
 		GlobalFightingManager.FightingPhaseState.CELEBRATING:
 			fighting_state = FightingState.CELEBRATING
-
-
-func _on_game_manager_game_state_changed(game_state: GameManager.GameState) -> void:
-	match game_state:
-		GameManager.GameState.BUYING:
-			_is_dead = false
-			_pending_attacks.clear()
-			_entity_info_panel_3d.hide()
 
 
 func _on_stats_health_changed(new_health: int) -> void:

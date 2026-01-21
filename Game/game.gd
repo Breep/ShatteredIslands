@@ -37,7 +37,7 @@ func _start_hero_selection() -> void:
 	_hero_selector.start()
 
 
-func _start_new_round() ->void:
+func _start_new_round() -> void:
 	Verbose.debug("Start new round", Verbose.Category.GAME)
 	_current_round_player_id_islands.clear()
 	
@@ -51,8 +51,8 @@ func _start_new_round() ->void:
 	RoundManager.starting_round_player_changes()
 	await PlayerManager.sync_point(PlayerManager.SyncID.ROUND_SETUP)
 
-	# Create heroes for buying phase
-	PlayerManager.create_all_heroes()
+	# Create heroes for buying phase (UI hidden)
+	PlayerManager.create_all_heroes(Hero.DisplayMode.BUYING_PHASE)
 
 	GameManager.game_state = GameManager.GameState.BUYING # TODO Peut-être revoir ça ? Envoyer un signal et laisser le GameManager changer ses états tout seul ?
 
@@ -68,8 +68,8 @@ func _start_buying_phase() -> void:
 func _start_fighting_phase() -> void:
 	Verbose.debug("Start fights !", Verbose.Category.GAME)
 
-	# Create heroes for fighting phase
-	PlayerManager.create_all_heroes()
+	# Create heroes for fighting phase (UI visible)
+	PlayerManager.create_all_heroes(Hero.DisplayMode.FIGHTING_PHASE)
 
 	var battles: Array[Battle] = _current_round_battles
 	for i in battles.size():
@@ -110,7 +110,7 @@ func _current_round_player_id_islands_sync(current_round_player_id_islands: Arra
 #region ============================== Spawn functions ==============================
 func _spawn_fighting_islands() -> void:
 	if multiplayer.is_server():
-		var i:int = 0
+		var i: int = 0
 		for player in PlayerManager.players.values():
 			var spawn_point: SpawnPoint = _islands_spawn_points[i]
 			var fighting_island: FightingIsland = preload("res://FloatingIsland/FightingIsland/fighting_island.tscn").instantiate()
