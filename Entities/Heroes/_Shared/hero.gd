@@ -159,9 +159,8 @@ func _init() -> void:
 	_entity_init()
 
 func _hero_init() -> void:
-	# Configure stats
-	if base_stats == null and hero_desc != null:
-		base_stats = EntityStats.new().reset_from_hero_desc(hero_desc, level)
+	# Stats initialization is deferred to _hero_ready() to properly detect manual base_stats override
+	pass
 
 
 func _enter_tree() -> void:
@@ -201,6 +200,15 @@ func _ready() -> void:
 
 
 func _hero_ready() -> void:
+	# Initialize base_stats from hero_desc if not using custom_base_stats
+	if custom_base_stats == null and hero_desc != null and base_stats != null:
+		base_stats.reset_from_hero_desc(hero_desc, level)
+	
+	# Validate hero configuration
+	if hero_desc == null and custom_base_stats == null:
+		Verbose.error("Hero instantiated without hero_desc AND without custom_base_stats!", Verbose.Category.HERO)
+		return
+	
 	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
 
 	stats.health_changed.connect(_on_stats_health_changed)

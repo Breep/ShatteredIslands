@@ -11,7 +11,10 @@ extends Node3D
 @export var _player8_cards: Array[Card]
 
 @export_group("Heroes")
-@export var _heroes: Array[Hero]
+@export var _hero_descs: Array[HeroDesc]
+@export var _hero_teams: Array[int] = [0, 0, 0, 0, 1, 1, 1, 1] # Team assignment for each hero
+
+var _heroes: Array[Hero] = [] # Dynamically instantiated heroes
 
 @export_group("Battle")
 @export var _floating_island: FightingIsland
@@ -28,11 +31,18 @@ var _players: Array[Player] = []
 # add a way to show stats when player press tabs button (input mapped on "see_stats")
 
 func _enter_tree() -> void:
-	_init_players()
+	pass # Players will be initialized after heroes are created
 
 
 func _ready() -> void:
 	GameManager.init()
+	
+	# Instantiate heroes dynamically from HeroDesc
+	_instantiate_heroes()
+	
+	# Initialize players with the created heroes
+	_init_players()
+	
 	_add_player_cards()
 	_floating_island.init_fight(_heroes, _battle_type)
 	GameManager.game_rules.duration_fighting_positioning = 0.5
@@ -71,10 +81,32 @@ func _unhandled_input(event: InputEvent) -> void:
 				hero._entity_info_panel_3d.visible = not hero._entity_info_panel_3d.visible
 
 
+func _instantiate_heroes() -> void:
+	for i: int in _hero_descs.size():
+		var hero_desc: HeroDesc = _hero_descs[i]
+		if hero_desc == null:
+			Verbose.warn("HeroDesc at index " + str(i) + " is null, skipping", Verbose.Category.DEFAULT)
+			continue
+		
+		# Instantiate hero with FIGHTING_PHASE display mode for prototyping
+		var hero: Hero = Shared.HERO_SCENES[hero_desc.id].instantiate().init(Hero.DisplayMode.FIGHTING_PHASE)
+		hero.level = 1
+		hero.entity_name = "Player" + str(i + 1)
+		
+		# Assign team (default to index-based if array is too small)
+		if i < _hero_teams.size():
+			hero.team = _hero_teams[i]
+		else:
+			hero.team = i % 2 # Default: alternate between team 0 and 1
+		
+		_heroes.append(hero)
+		Verbose.debug("Created hero: " + hero.entity_name + " (Team " + str(hero.team) + ")", Verbose.Category.DEFAULT)
+
+
 func _init_players() -> void:
 	for i: int in _heroes.size():
 		var player: Player = Player.new()
-		player.name = "Player" + str(i+1)
+		player.name = "Player" + str(i + 1)
 		player.id = 1
 		player.hero = _heroes[i]
 		player.hero.entity_name = player.name
@@ -85,7 +117,7 @@ func _init_players() -> void:
 
 func _add_player_cards() -> void:
 	var players_cards: Array[Array] = [
-		_player1_cards, _player2_cards, _player3_cards, _player4_cards, _player5_cards, _player6_cards,_player7_cards, _player8_cards
+		_player1_cards, _player2_cards, _player3_cards, _player4_cards, _player5_cards, _player6_cards, _player7_cards, _player8_cards
 	]
 
 	for i: int in _players.size():

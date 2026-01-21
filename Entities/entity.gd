@@ -90,7 +90,14 @@ var stack_manager: StackManager # TODO
 var visual: EntityInfoPanel3D:
 	get: return _entity_info_panel_3d
 
-@export var base_stats: EntityStats
+# Custom base_stats override for quick testing (optional)
+# If defined, this will be used instead of auto-generated base_stats
+@export var custom_base_stats: EntityStats
+
+var _base_stats: EntityStats # Private, use base_stats property to access
+var base_stats: EntityStats:
+	get: return _base_stats
+
 @export var _spawn_manager: SpawnManager
 
 @onready var bds_registry := EntityBDSRegistry.new(entity_name)
@@ -148,24 +155,29 @@ func _init() -> void:
 
 func _entity_init() -> void:
 	id = instance_count
-	instance_count += 1	
+	instance_count += 1
 	
 	# Stats
 	stats = EntityStats.new()
-	if base_stats == null:
-		base_stats = EntityStats.new()
+	
+	# Use custom_base_stats if defined, otherwise create new one
+	if custom_base_stats != null:
+		_base_stats = custom_base_stats
+		Verbose.debug("Entity [" + entity_name + "] using custom_base_stats", Verbose.Category.ENTITY)
+	else:
+		_base_stats = EntityStats.new()
 	
 	# Default Modifier Registries
 	auto_attack_modifier_registry = AutoAttackModifierRegistry.new()
 	action_modifiers_registry = ActionModifiersRegistry.new()
-	stat_modifiers_registry = EntityStatModifiersRegistry.new(base_stats, stats)
+	stat_modifiers_registry = EntityStatModifiersRegistry.new(_base_stats, stats)
 
 
 func _enter_tree() -> void:
 	_entity_enter_tree()
 
 
-func _entity_enter_tree() -> void:	
+func _entity_enter_tree() -> void:
 	# Add default module if not already added
 	if target_module == null:
 		target_module = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.TARGET].instantiate().init(self)

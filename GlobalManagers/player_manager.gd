@@ -81,7 +81,6 @@ func create_all_heroes(display_mode: Hero.DisplayMode = Hero.DisplayMode.PREVIEW
 
 		# Créer nouveau hero avec le display_mode spécifié
 		player.hero = Shared.HERO_SCENES[player.hero_desc.id].instantiate().init(display_mode)
-		player.hero.hero_desc = player.hero_desc
 		player.hero.level = player.lvl
 		player.hero.team = player.team
 		player.hero.entity_name = player.name
