@@ -37,6 +37,7 @@ func _ready() -> void:
 	_rank_visualizer.connect_entity(_owner_entity)
 	if _health_bar and _health_bar.material:
 		_health_bar.material = _health_bar.material.duplicate()
+		_set_health_bar_color_by_team()
 	if _mana_bar and _mana_bar.material:
 		_mana_bar.material = _mana_bar.material.duplicate()
 	if _shield_bar and _shield_bar.material:
@@ -208,3 +209,37 @@ func update_resource_points(current: int, max_val: int) -> void:
 			point.color = Color.ORANGE # Active Color
 		else:
 			point.color = Color(0.2, 0.2, 0.2, 0.5) # Inactive Color
+
+# ============================== Private ==============================
+
+func _set_health_bar_color_by_team() -> void:
+	if not _health_bar or not _health_bar.material or not _owner_entity:
+		return
+	
+	# Determine the color based on team affiliation
+	var health_color: Color
+	var local_player: Player = PlayerManager.get_local_player()
+	
+	if local_player == null:
+		# Fallback to default green if no local player
+		health_color = Color(0.11, 0.64, 0.08, 1.0)
+	elif _owner_entity is Hero:
+		var hero: Hero = _owner_entity as Hero
+		# Check if this hero belongs to the local player
+		if local_player.hero == hero:
+			# Local player: green-yellow
+			health_color = Color.GREEN_YELLOW
+		elif hero.team == local_player.team:
+			# Ally: green
+			health_color = Color(0.11, 0.64, 0.08, 1.0)
+		else:
+			# Enemy: red
+			health_color = Color(0.8, 0.1, 0.1, 1.0)
+	else:
+		# For non-hero entities, use team-based logic only
+		if _owner_entity.team == local_player.team:
+			health_color = Color(0.11, 0.64, 0.08, 1.0)  # Ally green
+		else:
+			health_color = Color(0.8, 0.1, 0.1, 1.0)  # Enemy red
+	
+	_health_bar.material.set_shader_parameter("HealthColor", health_color)

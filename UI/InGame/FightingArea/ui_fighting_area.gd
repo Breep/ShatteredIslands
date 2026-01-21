@@ -53,6 +53,9 @@ func set_inactive() -> void:
 # ============================== Private functions ==============================
 
 func _set_layout_1v1(heroes: Array[Hero]) -> void:
+	_layout_1v1.hide()
+	_layout_2v2.hide() # TODO: Remove this
+	return
 	if heroes.is_empty():
 		push_warning("UIFightingArea: There is no heroes in the 1v1 fighting area")
 		return
@@ -63,6 +66,9 @@ func _set_layout_1v1(heroes: Array[Hero]) -> void:
 
 
 func _set_layout_2v2(heroes: Array[Hero]) -> void:
+	_layout_1v1.hide()
+	_layout_2v2.hide() # TODO: Remove this
+	return
 	if heroes.is_empty():
 		push_warning("UIFightingArea: There is no heroes in the 2v2 fighting area")
 		return
