@@ -1,5 +1,5 @@
 class_name FireExpanseUniverse
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _ignite_stacks: Array[float]
 @export var _period: Array[float]

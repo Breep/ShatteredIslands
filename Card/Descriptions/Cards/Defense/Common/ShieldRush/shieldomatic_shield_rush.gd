@@ -1,5 +1,5 @@
 class_name DefenseShieldRush
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _shield_amount: Array[float]
 @export var _rarity: Card.Rarity = Card.Rarity.COMMON

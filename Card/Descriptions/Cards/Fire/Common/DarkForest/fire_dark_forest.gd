@@ -1,5 +1,5 @@
 class_name FireDarkForest
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _increase_dodge: Array[float] 
 @export var _ignite_stacks: Array[float]

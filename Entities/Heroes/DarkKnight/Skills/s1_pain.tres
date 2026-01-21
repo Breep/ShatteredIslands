@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://tws8irvjtsk8"]
 
-[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://Entities/Heroes/skill.gd" id="1_st347"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://Entities/Heroes/_Shared/skill.gd" id="1_st347"]
 [ext_resource type="Texture2D" uid="uid://g4isbydrxh2l" path="res://Entities/Heroes/DarkKnight/Data/s1_pain.png" id="1_ykt3a"]
 
 [resource]

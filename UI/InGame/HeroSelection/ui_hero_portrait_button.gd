@@ -3,12 +3,12 @@ extends Control
 
 # ============================== Signals ==============================
 
-signal selected(selected_hero: Hero)
+signal selected(selected_hero: HeroDesc)
 
 # ============================== Public variables ==============================
 
-var _hero: Hero
-var hero: Hero:
+var _hero: HeroDesc
+var hero: HeroDesc:
 	get: return _hero
 	set(value):
 		if _hero == value: return

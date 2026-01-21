@@ -39,11 +39,19 @@ func set_inactive() -> void:
 # ============================== Callbacks ==============================
 
 func _on_events_entity_clicked(_entity: Entity) -> void:
-	if not _entity is Character: return
-	var character: Character = _entity
-	if character.player == PlayerManager.get_local_player(): return
+	if not _entity is Hero: return
+	var hero: Hero = _entity
 	_ui_selected_player_hero_portrait.show()
-	_ui_selected_player_hero_portrait.update_content(character.player)
+
+	# Find player matching this hero
+	var matching_player: Player = null
+	for player in PlayerManager.players.values():
+		if player.hero == hero:
+			matching_player = player
+			break
+
+	if matching_player != null:
+		_ui_selected_player_hero_portrait.update_content(matching_player)
 
 
 func _on_events_furniture_clicked(furniture: Furniture) -> void:

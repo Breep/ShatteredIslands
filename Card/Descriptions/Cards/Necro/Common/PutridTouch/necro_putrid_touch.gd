@@ -1,5 +1,5 @@
 class_name NecroPutridTouch
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _stacks: Array[int]
 @export var _period: Array[float]

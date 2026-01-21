@@ -1,5 +1,5 @@
 class_name PoisonContagion
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _percent: Array[float]
 @export var _radius: Array[float]

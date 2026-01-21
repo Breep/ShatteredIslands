@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c5ji8s1iic5v8"]
+[gd_scene load_steps=19 format=3 uid="uid://c5ji8s1iic5v8"]
 
 [ext_resource type="Script" uid="uid://bu48b2v401db2" path="res://Prototyping/FightingIsland/prototyping_map.gd" id="1_vksg0"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="2_vksg0"]
@@ -8,7 +8,6 @@
 [ext_resource type="Resource" uid="uid://cy81mom0x466q" path="res://Card/Descriptions/Cards/Light/Common/DivineRegenerator/serenity_divine_regenerator.tres" id="5_sp80o"]
 [ext_resource type="Resource" uid="uid://c3qf5odp5y6ap" path="res://Card/Descriptions/Cards/Light/Common/LifeSpring/light_life_spring.tres" id="6_pc3mw"]
 [ext_resource type="PackedScene" uid="uid://drcuyohos0doa" path="res://FloatingIsland/FightingIsland/fighting_island.tscn" id="6_sp80o"]
-[ext_resource type="PackedScene" uid="uid://bbnioyc6ti8wn" path="res://Entities/Character/character.tscn" id="7_pc3mw"]
 [ext_resource type="PackedScene" uid="uid://bhxhqex1pbh2p" path="res://UI/InGame/FightingArea/ui_fighting_area.tscn" id="7_wwtbg"]
 [ext_resource type="Resource" uid="uid://dvpdubk0btegx" path="res://Card/Descriptions/Cards/Poison/Common/PoisonFlask/poison_poison_flask.tres" id="8_0en4y"]
 [ext_resource type="Material" uid="uid://2wlal7g5718r" path="res://VFX/Shaders/Sky/stylized_shader_night.tres" id="8_qw25r"]
@@ -47,7 +46,7 @@ volumetric_fog_density = 0.0
 script = ExtResource("1_vksg0")
 _player1_cards = Array[ExtResource("2_vksg0")]([ExtResource("3_dlg3x"), ExtResource("4_e0xek"), ExtResource("5_sp80o"), ExtResource("6_pc3mw")])
 _player2_cards = Array[ExtResource("2_vksg0")]([ExtResource("5_7wmtn"), ExtResource("8_0en4y"), ExtResource("9_m1op8")])
-_characters = [NodePath("DarkKnight"), NodePath("Character2")]
+_characters = [NodePath(""), NodePath("")]
 _floating_island = NodePath("FightingIsland")
 
 [node name="FightingIsland" parent="." instance=ExtResource("6_sp80o")]
@@ -56,20 +55,6 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.0566
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.88089, 0.0799744, 0.466517, -0.360914, 0.751164, 0.552716, -0.306227, -0.655254, 0.690556, 0, 52.8971, 0)
 shadow_enabled = true
-
-[node name="DarkKnight" parent="." instance=ExtResource("7_pc3mw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.34606, 0, 5.12149)
-hero_id = 1
-id = 0
-team = 1
-battle_id = 1
-
-[node name="Character2" parent="." instance=ExtResource("7_pc3mw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03813, 0, -4.59736)
-hero_id = 1
-id = 1
-team = 2
-battle_id = 1
 
 [node name="FogVolume" type="FogVolume" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.26962, 0.223571, 5.01905)

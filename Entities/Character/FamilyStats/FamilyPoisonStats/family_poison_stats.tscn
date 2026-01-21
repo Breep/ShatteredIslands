@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://ehef70fmv550"]
-
-[ext_resource type="Script" uid="uid://bbm4qg0c7wf0i" path="res://Entities/Character/FamilyStats/FamilyPoisonStats/family_poison_stats.gd" id="1_o76p6"]
-
-[node name="FamilyPoisonStats" type="Node"]
-script = ExtResource("1_o76p6")

@@ -4,10 +4,20 @@ extends Node
 
 # ============================== Enum ==============================
 
-enum GameType {
+enum GameType { # Hello captain Hook
 	UNDEF,
 	SOLO,
 	MULTIPLAYER
+}
+
+enum GameState {
+	UNDEF,
+	STARTING,
+	INIT_ROUND,
+	BUYING,
+	FIGHTING,
+	ENDING_ROUND,
+	FINISHED,
 }
 
 # ============================== Constants ==============================
@@ -33,18 +43,24 @@ var _game_state_timer: Timer
 var game_state_timer: Timer:
 	get: return _game_state_timer
 
-signal game_state_changed(game_state: Game.GameState)
-var _game_state: Game.GameState
-var game_state: Game.GameState:
-	get: return _game_state
+signal game_state_changed(new_game_state: GameState)
+var __game_state := GameState.UNDEF
+var _game_state: GameState:
+	get: return __game_state
 	set(value):
-		if _game_state == value: return
+		if __game_state == value: return
+		__game_state = value
+		_sync_game_state.rpc(__game_state)
+		game_state_changed.emit(__game_state)
+var game_state: GameState:
+	get: return __game_state
+	set(value):
+		if not multiplayer.is_server(): return
 		_game_state = value
-		game_state_changed.emit(_game_state)
 
 # ============================== Private variables ==============================
 
-var __prototyping: bool = false
+# var __prototyping: bool = false
 
 var _game_scene: PackedScene = load("res://Game/game.tscn")
 
@@ -70,7 +86,7 @@ signal _heroes_choosen()
 # [Client only] Is emit when server has answered the local client request
 signal _server_answered()
 
-var _random_heroes_ref: Array[Hero.HeroId]
+var _random_heroes_ref: Array[HeroDesc.HeroId]
 
 # ============================== Node base functions ==============================
 
@@ -81,6 +97,7 @@ func _ready() -> void:
 	add_child(_game_state_timer)
 	game_state_changed.connect(_on_game_state_changed)
 	_game_state_timer.timeout.connect(_on_game_state_timer_timeout)
+	GlobalFightingManager.all_fights_are_over.connect(_on_gfm_all_fights_are_over)
 
 # ============================== Public function ==============================
 
@@ -89,6 +106,11 @@ func clear() -> void:
 	_active_families.clear()
 	_random_heroes_ref.clear()
 	ServerCardShop.clear()
+
+	# Reset complete du state
+	__game_state = GameState.UNDEF
+	if _game_state_timer != null:
+		_game_state_timer.stop()
 
 
 func init() -> void:
@@ -118,14 +140,14 @@ func start_solo_game() -> void:
 	start_game()
 
 
-func get_current_game_heroes() -> Array[Hero]:
+func get_current_game_heroes() -> Array[HeroDesc]:
 	if multiplayer.is_server():
 		_init_current_current_game_heroes(HEROES_NUMBER)
 	else:
 		_ask_get_n_random_heroes.rpc_id(1, multiplayer.get_unique_id())
 		await _server_answered
 	
-	var random_heroes: Array[Hero]
+	var random_heroes: Array[HeroDesc]
 	for hero_ref in _random_heroes_ref:
 		random_heroes.append(Shared.HEROES[hero_ref])
 	
@@ -210,7 +232,7 @@ func _ask_get_n_random_heroes(peer_id: int) -> void:
 
 
 @rpc("authority", "call_remote")
-func _answer_get_n_random_heroes(heroes_ref: Array[Hero.HeroId]) -> void:
+func _answer_get_n_random_heroes(heroes_ref: Array[HeroDesc.HeroId]) -> void:
 	_random_heroes_ref = heroes_ref
 	_server_answered.emit()
 #endregion
@@ -220,10 +242,10 @@ func _answer_get_n_random_heroes(heroes_ref: Array[Hero.HeroId]) -> void:
 func _init_current_current_game_heroes(_heroes_number: int) -> void:
 	# TODO Disabled for the moment
 	#if heroes_number <= 0 or heroes_number > Shared.HEROES.size():
-		#printerr("Hero: Wrong heroes_number: ", heroes_number)
+		#printerr("HeroDesc: Wrong heroes_number: ", heroes_number)
 		#return
 	
-	#var heroes_ref: Array[Hero.HeroId]
+	#var heroes_ref: Array[HeroDesc.HeroId]
 	#for hero_ref in Shared.HEROES.keys():
 		#heroes_ref.append(hero_ref)
 	#
@@ -234,102 +256,66 @@ func _init_current_current_game_heroes(_heroes_number: int) -> void:
 		#_random_heroes_ref.append(heroes_ref.get(random_index))
 		#heroes_ref.remove_at(random_index)
 	
-	_random_heroes_ref.append(Hero.HeroId.DARK_KNIGHT)
+	_random_heroes_ref.append(HeroDesc.HeroId.DARK_KNIGHT)
 	_heroes_choosen.emit()
 	_game_heroes_ready = true
 
 
-func _player_health_compare(player_a: Player, player_b: Player) -> bool:
-	return player_a.health >= player_b.health
-
-
 #region GAME STATE
-@rpc("authority", "call_remote")
-func _sync_state(server_game_state: Game.GameState) -> void:
-	game_state = server_game_state
-
-
-func update_game_state(new_game_state: Game.GameState, need_to_sync: bool = false) -> void:
-	game_state = new_game_state
-	if need_to_sync:
-		_sync_state(game_state)
+@rpc("authority", "call_remote", "reliable")
+func _sync_game_state(server_game_state: GameState) -> void:
+	Verbose.debug("Sync game state | " + str(GameState.keys()[server_game_state]), Verbose.Category.GLOBAL_MANAGER)
+	_game_state = server_game_state
 
 
 func _on_game_state_timer_timeout() -> void:
-	match game_state:
-		Game.GameState.BUYING:
+	match _game_state:
+		GameState.BUYING:
 			await PlayerManager.sync_point(PlayerManager.SyncID.BUYING_PHASE)
-			game_state = Game.GameState.FIGHTING_POSITIONING
-		Game.GameState.FIGHTING_POSITIONING: # End of POSITIONING State
-			if __prototyping or game_type == GameType.SOLO or not multiplayer.is_server():
-				game_state = Game.GameState.FIGHTING_COUNTDOWN # Trigger COUNTDOWN STATE for prototyping map
-			else:
-				game_state = Game.GameState.FIGHTING_NORMAL # Trigger FIGHT directly on server
-		
-		Game.GameState.FIGHTING_COUNTDOWN: game_state = Game.GameState.FIGHTING_NORMAL
-		Game.GameState.FIGHTING_NORMAL: game_state = Game.GameState.FIGHTING_ACCELERATED
-		Game.GameState.FIGHTING_ACCELERATED: game_state = Game.GameState.FIGHTING_CELEBRATING
-		Game.GameState.FIGHTING_CELEBRATING: game_state = Game.GameState.FIGHTING_FINISHED
-		Game.GameState.FIGHTING_FINISHED: game_state = Game.GameState.INITIATING_NEW_ROUND
+			_game_state = GameState.FIGHTING
+		GameState.FIGHTING:
+			Verbose.warn("Fighting phase watchdog triggered", Verbose.Category.GLOBAL_MANAGER)
+			_game_state = GameState.ENDING_ROUND
 
 
-# Start Timers
 func _on_game_state_changed(new_state) -> void:
 	_game_state_timer.stop()
 	match new_state:
-		Game.GameState.BUYING:
+		GameState.UNDEF:
+			Verbose.debug("[State=UNDEF]", Verbose.Category.GLOBAL_MANAGER)
+		GameState.STARTING:
+			Verbose.debug("[State=STARTING]", Verbose.Category.GLOBAL_MANAGER)
+		GameState.INIT_ROUND:
+			Verbose.debug("[State=INIT_ROUND]", Verbose.Category.GLOBAL_MANAGER)
+		GameState.BUYING:
 			Verbose.debug("[State=BUYING] (" + str(_game_rules.duration_buying_phase) + "s)", Verbose.Category.GLOBAL_MANAGER)
 			_game_state_timer.wait_time = _game_rules.duration_buying_phase
 			_game_state_timer.start()
-		
-		Game.GameState.FIGHTING_POSITIONING:
-			Verbose.debug("[State=FIGHTING_POSITIONING] (" + str(_game_rules.duration_fighting_positioning) + "s)", Verbose.Category.GLOBAL_MANAGER)
-			_game_state_timer.wait_time = _game_rules.duration_fighting_positioning
+		GameState.FIGHTING:
+			Verbose.debug("[State=FIGHTING]", Verbose.Category.GLOBAL_MANAGER)
+			var watchdog_time: float = _game_rules.duration_fighting_positioning + _game_rules.duration_fighting_countdown + _game_rules.duration_fighting_normal
+			watchdog_time += _game_rules.duration_fighting_accelerated + _game_rules.duration_fighting_celebrating + _game_rules.duration_fighting_finished
+			watchdog_time += 10 # MAGIC NUMBER => TODO define it ?
+			_game_state_timer.wait_time = watchdog_time
 			_game_state_timer.start()
-		
-		Game.GameState.FIGHTING_COUNTDOWN:
-			Verbose.debug("[State=FIGHTING_COUNTDOWN] (" + str(_game_rules.duration_fighting_countdown) + "s)", Verbose.Category.GLOBAL_MANAGER)
-			_game_state_timer.wait_time = _game_rules.duration_fighting_countdown
-			_game_state_timer.start()
-		
-		Game.GameState.FIGHTING_NORMAL:
-			Verbose.debug("[State=FIGHTING_NORMAL] (" + str(_game_rules.duration_fighting_normal) + "s)", Verbose.Category.GLOBAL_MANAGER)
-			_game_state_timer.wait_time = _game_rules.duration_fighting_normal
-			_game_state_timer.start()
-		
-		Game.GameState.FIGHTING_ACCELERATED:
-			Verbose.debug("[State=FIGHTING_ACCELERATED] (" + str(_game_rules.duration_fighting_accelerated) + "s)", Verbose.Category.GLOBAL_MANAGER)
-			Engine.time_scale = ACCELERATED_FIGHT_TIME_SCALE
-			_game_state_timer.wait_time = _game_rules.duration_fighting_accelerated
-			_game_state_timer.start()
-		
-		Game.GameState.FIGHTING_CELEBRATING:
-			Verbose.debug("[State=FIGHTING_CELEBRATING] (" + str(_game_rules.duration_fighting_celebrating) + "s)", Verbose.Category.GLOBAL_MANAGER)
-			Engine.time_scale = 1.0
-			_game_state_timer.wait_time = _game_rules.duration_fighting_celebrating
-			_game_state_timer.start()
-		
-		Game.GameState.FIGHTING_FINISHED:
-			Verbose.debug("[State=FIGHTING_FINISHED]", Verbose.Category.GLOBAL_MANAGER)
-			_game_state_timer.wait_time = _game_rules.duration_fighting_finished
-			_game_state_timer.start()
-		
-		Game.GameState.STARTING:
-			Verbose.debug("[State=STARTING]", Verbose.Category.GLOBAL_MANAGER)
-		Game.GameState.INITIATING_NEW_ROUND:
-			Verbose.debug("[State=INITIATING_NEW_ROUND]", Verbose.Category.GLOBAL_MANAGER)
-		Game.GameState.FINISHED:
+		GameState.ENDING_ROUND:
+			Verbose.debug("[State=ENDING_ROUND]", Verbose.Category.GLOBAL_MANAGER)
+			await PlayerManager.sync_point(PlayerManager.SyncID.FIGHTING_PHASE)
+			await RoundManager.ending_round_player_changes()
+			await PlayerManager.sync_point(PlayerManager.SyncID.ROUND_ENDING)
+			_game_state = GameState.INIT_ROUND
+		GameState.FINISHED:
 			Verbose.debug("[State=FINISHED]", Verbose.Category.GLOBAL_MANAGER)
-		Game.GameState.UNDEF:
-			Verbose.debug("[State=UNDEF]", Verbose.Category.GLOBAL_MANAGER)
+
+
+func _on_gfm_all_fights_are_over() -> void:
+	Verbose.trace("GFM signals that all fights are over")
+	if _game_state != GameState.FIGHTING:
+		Verbose.error("GFM signals that all fights are over but the GameManager state isn't on FIGHTING", Verbose.Category.GLOBAL_MANAGER)
+		return
+	_game_state_timer.stop()
+	_game_state = GameState.ENDING_ROUND
 #endregion
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

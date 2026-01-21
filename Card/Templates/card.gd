@@ -33,7 +33,7 @@ const RARITY_CARD_VALUE: Dictionary[Rarity, int] = {
 @export var picture : Texture2D
 @export var families: Array[Family.FamilyType]
 @export var rarity : Rarity
-@export var player_upgrade: CharacterUpgrade
+@export var player_upgrade: HeroUpgrade
 @export var lvl : int = 1
 
 func is_max_level() -> bool:

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://vkyl862t2h5d"]
 
 [ext_resource type="Texture2D" uid="uid://cljgrwgbsbfa2" path="res://Entities/Heroes/DarkKnight/Data/g2_mega_strike.jpeg" id="1_4n7wf"]
-[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://Entities/Heroes/skill.gd" id="1_4n501"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://Entities/Heroes/_Shared/skill.gd" id="1_4n501"]
 
 [resource]
 script = ExtResource("1_4n501")

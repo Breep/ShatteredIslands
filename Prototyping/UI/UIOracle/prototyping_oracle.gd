@@ -1,6 +1,6 @@
 extends Control
 
-@export var _hero_id: Hero.HeroId
+@export var _hero_id: HeroDesc.HeroId
 
 func _enter_tree() -> void:
 	GameManager.init()

@@ -1,8 +1,9 @@
 class_name Entity
 extends CharacterBody3D
 
-# ============================== Signals ==============================
+# == VIRTUAL CLASS ==
 
+#region ============================== Signals ==============================
 signal died(self_ref: Entity)
 func signal_death() -> void:
 	_is_dead = true
@@ -53,17 +54,30 @@ func signal_stack_taken(stack_type: Utils.StackType, stack_number: float, is_cri
 signal auto_attack_started(is_critical: bool)
 func signal_auto_attack_started(is_critical: bool) -> void:
 	auto_attack_started.emit(is_critical)
+#endregion
 
+#region ============================== Constants ==============================
 
-# ============================== Public variables ==============================
+#endregion
 
+#region ============================== Public variables ==============================
 var _is_dead: bool = false
 var is_dead: bool:
 	get: return _is_dead
 
-# ============================== Export (Network) ==============================
+var stats: EntityStats
 
-@export_group("Network")
+var target_module: TargetModule
+
+var auto_attack_modifier_registry: AutoAttackModifierRegistry
+var action_modifiers_registry: ActionModifiersRegistry
+var stat_modifiers_registry: EntityStatModifiersRegistry
+
+var stack_manager: StackManager # TODO
+#endregion
+
+# ============================== Export ==============================
+
 @export var id: int = -1 # Multiplayer ID of the entity
 @export var team: int = -1 # Team number of the entity
 @export var battle_id: int = -1 # The id of the battle the entity is in
@@ -71,28 +85,27 @@ var is_dead: bool:
 
 # ============================== Local Nodes ==============================
 
-@export_group("Stats")
-@export var stats: EntityStats
+@export_group("Optional configuration")
+@export var _entity_info_panel_3d: EntityInfoPanel3D
+var visual: EntityInfoPanel3D:
+	get: return _entity_info_panel_3d
+
 @export var base_stats: EntityStats
-@export var stats_manager: EntityStatsManager
-
-@export_group("Registry")
-@export var auto_attack_modifier_registry: AutoAttackModifierRegistry
-
-@export_group("Logic")
-@export var target_module: TargetModule
-
-var action_modifiers_manager: ActionModifiersManager
-var stack_manager: StackManager
+@export var _spawn_manager: SpawnManager
 
 @onready var bds_registry := EntityBDSRegistry.new(entity_name)
 
-# ============================== Private variables ==============================
-
-# ============================== Enums ==============================
+#region ============================== Enums ==============================
+enum FightingState {
+	IDLE,
+	FIGHTING,
+	CELEBRATING,
+	DEAD,
+	UNDEF
+}
 
 enum EntityType {
-	CHARACTER,
+	HERO,
 	SNAKE_BARREL,
 	SNAKE,
 	FIELD_GENERATOR
@@ -111,28 +124,55 @@ enum FieldGeneratorModifier {
 	INITIAL_SHIELD,
 	TARGET_COUNT
 }
+#endregion
 
-# ============================== Constants ==============================
+#region ============================== Fighting State ==============================
+signal fighting_state_changed(new_fighting_state: FightingState)
+var _fighting_state: FightingState = FightingState.UNDEF
+var fighting_state: FightingState:
+	get: return _fighting_state
+	set(value):
+		if value != _fighting_state:
+			_fighting_state = value
+			fighting_state_changed.emit(_fighting_state)
+#endregion
 
-const SIGNAL_NAME_SPAWNED: String = "spawned"
-
-# ============================== Static variables ==============================
-
+#region ============================== Static variables ==============================
 static var instance_count: int = 0
+#endregion
 
-# ============================== Node base functions ==============================
-
+#region ============================== Node base functions ==============================
 func _init() -> void:
+	_entity_init()
+
+
+func _entity_init() -> void:
 	id = instance_count
-	print("DEBUG: Entity Init ", self, " ID: ", id, " -> ", instance_count, " (Next: ", instance_count + 1, ")")
-	instance_count += 1
+	instance_count += 1	
+	
+	# Stats
+	stats = EntityStats.new()
+	if base_stats == null:
+		base_stats = EntityStats.new()
+	
+	# Default Modifier Registries
+	auto_attack_modifier_registry = AutoAttackModifierRegistry.new()
+	action_modifiers_registry = ActionModifiersRegistry.new()
+	stat_modifiers_registry = EntityStatModifiersRegistry.new(base_stats, stats)
 
 
 func _enter_tree() -> void:
-	action_modifiers_manager = ActionModifiersManager.new()
+	_entity_enter_tree()
 
-# ============================== Public functions ==============================
 
+func _entity_enter_tree() -> void:	
+	# Add default module if not already added
+	if target_module == null:
+		target_module = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.TARGET].instantiate().init(self)
+		add_child(target_module)
+#endregion
+
+#region ============================== Public functions ==============================
 func look_at_target_y_only(target_position: Vector3):
 	var direction = target_position - global_position
 	direction.y = 0
@@ -146,6 +186,7 @@ func get_auto_attack_spawn() -> Node3D:
 
 func connect_to_fighting_area(_fighting_area: FightingArea) -> void:
 	printerr("Entity: virtual connect_to_fighting_area() called [", get_path(), "]")
+#endregion
 
 #region ===== Actions [VIRTUAL]
 func direct_attack(_target: Entity, _damage: float, _damage_type: Utils.DamageType, _action_id: StringName) -> void:
@@ -182,7 +223,6 @@ func dispell(_target: Entity, _value: float, _action_id: StringName) -> void:
 	printerr("Entity: virtual dispell() called [", get_path(), "]")
 #endregion
 
-
 #region ===== Interaction [VIRTUAL]
 func take_damage(_damage: float, _damage_type: Utils.DamageType, _is_critical: bool, _action_id: StringName, _source: Entity = null) -> float:
 	printerr("Entity: virtual take_damage() called [", get_path(), "]")
@@ -208,4 +248,5 @@ func take_dispell(_value: float, _is_critical: bool, _action_id: StringName, _so
 	return -1.0
 #endregion
 
-# ============================== Private functions ==============================
+#region ============================== Private functions ==============================
+#endregion

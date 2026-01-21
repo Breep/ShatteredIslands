@@ -29,7 +29,7 @@ func signal_entity_died(victim: Entity) -> void:
 
 # ============================== Private variables ==============================
 
-var _characters: Array[Character]
+var _heroes: Array[Hero]
 var _battle_type: Battle.BattleType
 
 # ============================== Public variables ==============================
@@ -64,27 +64,27 @@ func _ready() -> void:
 
 # ============================== Public functions ==============================
 
-# Spawn all characters on the FightingArea according to the battle
-# Connect all characters to this FightingArea
-func start_fight(characters: Array[Character], battle_type: Battle.BattleType, battle_id: int = -1) -> void:
-	Verbose.debug("Starting a fight | " + str(Battle.BattleType.keys()[battle_type]) + " | " + str(characters.size()) + " | " + str(battle_id), Verbose.Category.FIGHTING_AREA)
-	var character_spawner: CharacterSpawner = _set_fighting_floor(battle_type)
-	if character_spawner == null:
-		printerr("FightingArea: No CharacterSpawner for this battle type: ", battle_type)
+# Spawn all heroes on the FightingArea according to the battle
+# Connect all heroes to this FightingArea
+func init_fight(heroes: Array[Hero], battle_type: Battle.BattleType, battle_id: int = -1) -> void:
+	Verbose.debug("Initiating a fight | " + str(Battle.BattleType.keys()[battle_type]) + " | " + str(heroes.size()) + " | " + str(battle_id), Verbose.Category.FIGHTING_AREA)
+	var hero_spawner: HeroSpawner = _set_fighting_floor(battle_type)
+	if hero_spawner == null:
+		Verbose.error("FightingArea: No HeroSpawner for this battle type: " + str(Battle.BattleType.keys()[battle_type]), Verbose.Category.FIGHTING_AREA)
 		return
 	
 	_entity_manager.clear()
-	character_spawner.spawn_characters(characters, _entities_node)
+	hero_spawner.spawn_heroes(heroes, _entities_node)
 	
-	_characters = characters
+	_heroes = heroes
 	_battle_type = battle_type
 	_current_battle_id = battle_id
 	_fighting_manager.fight_is_over.connect(_on_fighting_manager_fight_is_over, CONNECT_ONE_SHOT)
-	_fighting_manager.start(characters)
+	_fighting_manager.start(heroes)
 
 
-func get_fighting_characters() -> Array[Character]:
-	return _characters
+func get_fighting_heroes() -> Array[Hero]:
+	return _heroes
 
 func get_battle_type() -> Battle.BattleType:
 	return _battle_type
@@ -103,7 +103,7 @@ func _ready_checks() -> bool:
 	return true
 
 
-func _set_fighting_floor(battle_type: Battle.BattleType) -> CharacterSpawner:
+func _set_fighting_floor(battle_type: Battle.BattleType) -> HeroSpawner:
 	for fighting_floor in _fighting_floors.values():
 		fighting_floor.set_inactive()
 	return _fighting_floors[battle_type].set_active()
@@ -112,5 +112,5 @@ func _set_fighting_floor(battle_type: Battle.BattleType) -> CharacterSpawner:
 
 func _on_fighting_manager_fight_is_over(_unused: FightingManager, winner_teams_order: Array[int]) -> void:
 	if _current_battle_id < 0: return
-	_characters.clear()
+	_heroes.clear()
 	RoundManager.register_battle_result(_current_battle_id, winner_teams_order)

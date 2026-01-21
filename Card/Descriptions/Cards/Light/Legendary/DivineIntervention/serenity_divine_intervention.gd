@@ -1,5 +1,5 @@
 class_name SerenityDivineIntervention
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _base_hp_threshold_percent: Array[float]
 @export var _base_regen_amount: Array[float]

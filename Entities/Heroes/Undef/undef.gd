@@ -1,1 +1,1 @@
-extends Hero3D
+extends Hero

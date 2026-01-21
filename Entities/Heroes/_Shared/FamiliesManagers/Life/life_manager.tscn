@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://6holmj326e1y"]
+
+[ext_resource type="Script" uid="uid://csxhlxqa2jriy" path="res://Entities/Heroes/_Shared/FamiliesManagers/Life/life_manager.gd" id="1_d5ogk"]
+
+[node name="LifeManager" type="Node"]
+script = ExtResource("1_d5ogk")

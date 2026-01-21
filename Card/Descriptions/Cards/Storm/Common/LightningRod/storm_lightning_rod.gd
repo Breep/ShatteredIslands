@@ -1,5 +1,5 @@
 class_name StormLightningRod
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _base_threshold: Array[float]
 @export var _base_resistance: Array[float]

@@ -1,5 +1,5 @@
 class_name AttackBladeRush
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _damage_increase: Array[float] 
 @export var _duration: Array[float]

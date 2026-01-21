@@ -1,5 +1,5 @@
 class_name StormFaraday
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _base_crit_chance_boost: Array[float]
 @export var _rarity: Card.Rarity = Card.Rarity.COMMON

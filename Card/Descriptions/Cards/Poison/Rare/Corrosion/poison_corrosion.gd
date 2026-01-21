@@ -1,5 +1,5 @@
 class_name PoisonCorrosion
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _buff_stacks: Array[int]
 

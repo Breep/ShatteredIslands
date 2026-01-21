@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvihi4los882b"]
+
+[ext_resource type="Script" uid="uid://b52v7m3liy1d1" path="res://Entities/Heroes/_Shared/FamiliesManagers/Poison/poison_manager.gd" id="1_ueowk"]
+
+[node name="PoisonManager" type="Node"]
+script = ExtResource("1_ueowk")
+
+[node name="PoisonTickTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[connection signal="timeout" from="PoisonTickTimer" to="." method="_on_poison_tick_timer_timeout"]

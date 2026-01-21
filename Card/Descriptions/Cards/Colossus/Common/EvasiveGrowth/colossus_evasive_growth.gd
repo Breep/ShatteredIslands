@@ -1,5 +1,5 @@
 class_name ColossusEvasiveGrowth
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _increase_dodge: Array[float] 
 @export var _increase_max_hp: Array[float]

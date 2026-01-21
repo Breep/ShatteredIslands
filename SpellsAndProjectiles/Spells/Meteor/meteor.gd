@@ -3,7 +3,7 @@ extends Node3D
 
 var _on_hit_callbacks: Array
 
-var _entities_inside: Array[Entity] # Array of all character inside the area
+var _entities_inside: Array[Entity] # Array of all Entities inside the area
 
 var _owner: Entity # Owner of this healing fire area
 var _target: Entity
@@ -39,12 +39,12 @@ func _ready() -> void:
 	
 
 func _on_impact_effect_area_body_entered(body: Node3D) -> void:
-	if body is Character:
+	if body is Entity:
 		_entities_inside.append(body)
 
 
 func _on_impact_effect_area_body_exited(body: Node3D) -> void:
-	if body is Character:
+	if body is Entity:
 		_entities_inside.erase(body)
 
 

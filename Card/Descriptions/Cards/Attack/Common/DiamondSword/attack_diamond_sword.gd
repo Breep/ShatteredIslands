@@ -1,5 +1,5 @@
 class_name AttackDiamondSword
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _damage: Array[int] # damage increase
 @export var _rarity: Card.Rarity = Card.Rarity.COMMON

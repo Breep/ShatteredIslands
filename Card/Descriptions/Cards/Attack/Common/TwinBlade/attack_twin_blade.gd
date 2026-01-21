@@ -1,5 +1,5 @@
 class_name TwinBlade
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _attack_speed_percent: Array[float] 
 

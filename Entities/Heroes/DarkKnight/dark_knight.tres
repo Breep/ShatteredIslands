@@ -1,17 +1,17 @@
-[gd_resource type="Resource" script_class="Hero" load_steps=23 format=3 uid="uid://by3bwbvf4ekcd"]
+[gd_resource type="Resource" script_class="HeroDesc" load_steps=23 format=3 uid="uid://bkksjgh6p542o"]
 
-[ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://Entities/Heroes/hero.gd" id="1_2ttjg"]
-[ext_resource type="Texture2D" uid="uid://difeq0pm3hgjs" path="res://Data/Heroes/Portraits/darkknight2.png" id="1_hluaq"]
-[ext_resource type="Script" uid="uid://2py6kv5aqgem" path="res://Entities/Heroes/hero_stats.gd" id="3_hluaq"]
-[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://Entities/Heroes/skill.gd" id="4_f1ben"]
-[ext_resource type="Resource" uid="uid://bulji3na650gb" path="res://Entities/Heroes/DarkKnight/Skills/b1_spark_of_light.tres" id="4_mngad"]
-[ext_resource type="Resource" uid="uid://bts22443uo7i3" path="res://Entities/Heroes/DarkKnight/Skills/b2_corruption.tres" id="5_m1h0u"]
-[ext_resource type="Resource" uid="uid://tws8irvjtsk8" path="res://Entities/Heroes/DarkKnight/Skills/s1_pain.tres" id="6_aqqbn"]
-[ext_resource type="Resource" uid="uid://budjocpe7prm0" path="res://Entities/Heroes/DarkKnight/Skills/s2_cataclysm.tres" id="7_pb84q"]
-[ext_resource type="Resource" uid="uid://b0xsyfnk0uofn" path="res://Entities/Heroes/DarkKnight/Skills/g1_mana_strike.tres" id="8_2bb52"]
-[ext_resource type="Resource" uid="uid://vkyl862t2h5d" path="res://Entities/Heroes/DarkKnight/Skills/g2_mega_strike.tres" id="9_0fu0u"]
-[ext_resource type="Resource" uid="uid://dwgxfevvu8dti" path="res://Entities/Heroes/DarkKnight/Skills/p_super_strike.tres" id="10_y7u6o"]
-[ext_resource type="Resource" uid="uid://dbsddpfwj0xba" path="res://Entities/Heroes/DarkKnight/Skills/u_dark_storm.tres" id="11_4hyio"]
+[ext_resource type="Texture2D" uid="uid://difeq0pm3hgjs" path="res://Entities/Heroes/DarkKnight/Data/darkknight_portrait.png" id="1_aqqbn"]
+[ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://Entities/Heroes/_Shared/hero_desc.gd" id="1_hluaq"]
+[ext_resource type="Script" uid="uid://2py6kv5aqgem" path="res://Entities/Heroes/_Shared/hero_stats.gd" id="3_hluaq"]
+[ext_resource type="Resource" uid="uid://bulji3na650gb" path="res://Entities/Heroes/DarkKnight/Skills/b1_spark_of_light.tres" id="4_ec2v6"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://Entities/Heroes/_Shared/skill.gd" id="4_f1ben"]
+[ext_resource type="Resource" uid="uid://bts22443uo7i3" path="res://Entities/Heroes/DarkKnight/Skills/b2_corruption.tres" id="5_4eec3"]
+[ext_resource type="Resource" uid="uid://tws8irvjtsk8" path="res://Entities/Heroes/DarkKnight/Skills/s1_pain.tres" id="6_bdgmw"]
+[ext_resource type="Resource" uid="uid://budjocpe7prm0" path="res://Entities/Heroes/DarkKnight/Skills/s2_cataclysm.tres" id="7_gdfuu"]
+[ext_resource type="Resource" uid="uid://b0xsyfnk0uofn" path="res://Entities/Heroes/DarkKnight/Skills/g1_mana_strike.tres" id="8_g8upe"]
+[ext_resource type="Resource" uid="uid://vkyl862t2h5d" path="res://Entities/Heroes/DarkKnight/Skills/g2_mega_strike.tres" id="9_mgv6c"]
+[ext_resource type="Resource" uid="uid://dwgxfevvu8dti" path="res://Entities/Heroes/DarkKnight/Skills/p_super_strike.tres" id="10_x2tno"]
+[ext_resource type="Resource" uid="uid://dbsddpfwj0xba" path="res://Entities/Heroes/DarkKnight/Skills/u_dark_storm.tres" id="11_kuyv4"]
 [ext_resource type="Resource" uid="uid://0kx7gomigbv0" path="res://Entities/Heroes/DarkKnight/Stats/dark_knight_lvl_1.tres" id="13_ec2v6"]
 [ext_resource type="Resource" uid="uid://dl656mopqc7ou" path="res://Entities/Heroes/DarkKnight/Stats/dark_knight_lvl_2.tres" id="14_4eec3"]
 [ext_resource type="Resource" uid="uid://djaaxit4mne0s" path="res://Entities/Heroes/DarkKnight/Stats/dark_knight_lvl_3.tres" id="15_bdgmw"]
@@ -24,31 +24,31 @@
 [ext_resource type="Resource" uid="uid://joywl3kf6smv" path="res://Entities/Heroes/DarkKnight/Stats/dark_knight_lvl_10.tres" id="22_4dncs"]
 
 [resource]
-script = ExtResource("1_2ttjg")
+script = ExtResource("1_hluaq")
 name = "Dark Knight"
 id = 1
-portrait = ExtResource("1_hluaq")
-description = "Autrefois, Aeron Vantaal était l’orgueil de la Maison Vantaal, une lignée de nobles guerriers dévoués à la Lumière. Héritier d’une tradition de paladins, il portait l’armure étincelante de ses ancêtres et menait les troupes royales au nom de la justice. Sa famille régnait sur l’une des cités flottantes les plus prospères du Grand Skyland, avant le Cataclysme.Mais lors de la guerre finale, les Vantaal furent trahis. Un sort interdit frappa leur île, la précipitant dans l’abîme. Aeron survécut — mais la Lumière qui brûlait en lui fut arrachée et remplacée par un vide froid et affamé. Certains murmurent qu’il conclut un pacte avec une entité du Néant pour remonter des profondeurs, en échange de son âme. Son armure se noircit, ses yeux se teintèrent de rouge, et sa force prit racine dans une colère inextinguible.La magie sombre qui le traverse amplifie ses frappes à mesure qu’il combat, sa rage nourrissant une vitesse meurtrière. Sa Tempête Noire n’est autre que l’écho du sort qui anéantit sa maison, arraché et dompté pour être projeté contre ses ennemis.Aujourd’hui, Aeron erre de taverne en taverne, participant aux Tournois des Îles Brisées non pour la gloire, mais pour une seule raison : accumuler or et influence jusqu’à retrouver ceux qui ont causé la chute des Vantaal… et leur rendre la justice des ténèbres."
+portrait = ExtResource("1_aqqbn")
+description = "bla bla bla"
 stats = Dictionary[int, ExtResource("3_hluaq")]({
-0: ExtResource("13_ec2v6"),
-1: ExtResource("14_4eec3"),
-2: ExtResource("15_bdgmw"),
-3: ExtResource("16_gdfuu"),
-4: ExtResource("17_g8upe"),
-5: ExtResource("18_mgv6c"),
-6: ExtResource("19_x2tno"),
-7: ExtResource("20_kuyv4"),
-8: ExtResource("21_glle3"),
-9: ExtResource("22_4dncs")
+1: ExtResource("13_ec2v6"),
+2: ExtResource("14_4eec3"),
+3: ExtResource("15_bdgmw"),
+4: ExtResource("16_gdfuu"),
+5: ExtResource("17_g8upe"),
+6: ExtResource("18_mgv6c"),
+7: ExtResource("19_x2tno"),
+8: ExtResource("20_kuyv4"),
+9: ExtResource("21_glle3"),
+10: ExtResource("22_4dncs")
 })
 skills = Dictionary[int, ExtResource("4_f1ben")]({
-0: ExtResource("4_mngad"),
-1: ExtResource("5_m1h0u"),
-2: ExtResource("6_aqqbn"),
-3: ExtResource("7_pb84q"),
-4: ExtResource("8_2bb52"),
-5: ExtResource("9_0fu0u"),
-6: ExtResource("10_y7u6o"),
-7: ExtResource("11_4hyio")
+0: ExtResource("4_ec2v6"),
+1: ExtResource("5_4eec3"),
+2: ExtResource("6_bdgmw"),
+3: ExtResource("7_gdfuu"),
+4: ExtResource("8_g8upe"),
+5: ExtResource("9_mgv6c"),
+6: ExtResource("10_x2tno"),
+7: ExtResource("11_kuyv4")
 })
 metadata/_custom_type_script = "uid://dtcjta70luxvr"

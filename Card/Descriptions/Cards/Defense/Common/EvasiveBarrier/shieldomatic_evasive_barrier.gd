@@ -1,5 +1,5 @@
 class_name DefenseEvasiveBarrier
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _dodge_increase: Array[float]
 @export var _shield_gain: Array[float]

@@ -1,5 +1,5 @@
 class_name AttackFightBack
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _increase_dodge: Array[float] 
 @export var _increase_attack_damage: Array[float]

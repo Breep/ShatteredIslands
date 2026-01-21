@@ -1,8 +1,13 @@
 extends Node
 
-var HEROES: Dictionary[Hero.HeroId, Hero] = {
-	Hero.HeroId.UNDEF: load("res://Entities/Heroes/Undef/undef.tres"),
-	Hero.HeroId.DARK_KNIGHT: load("res://Entities/Heroes/DarkKnight/dark_knight.tres"),
+var HEROES: Dictionary[HeroDesc.HeroId, HeroDesc] = {
+	HeroDesc.HeroId.UNDEF: load("res://Entities/Heroes/Undef/undef.tres"),
+	HeroDesc.HeroId.DARK_KNIGHT: load("res://Entities/Heroes/DarkKnight/dark_knight.tres"),
+}
+
+var HERO_SCENES: Dictionary[HeroDesc.HeroId, PackedScene] = {
+	HeroDesc.HeroId.UNDEF: load("res://Entities/Heroes/Undef/undef.tscn"),
+	HeroDesc.HeroId.DARK_KNIGHT: load("res://Entities/Heroes/DarkKnight/dark_knight.tscn"),
 }
 
 var FAMILIES: Dictionary[Family.FamilyType, Family] = {
@@ -18,6 +23,26 @@ var FAMILIES: Dictionary[Family.FamilyType, Family] = {
 	Family.FamilyType.LIGHTNING: load("res://Card/Descriptions/Families/lightning_family.tres"),
 	Family.FamilyType.NECROSIS: load("res://Card/Descriptions/Families/necro_family.tres"),
 	Family.FamilyType.SHADOW: load("res://Card/Descriptions/Families/shadow_family.tres")
+}
+
+var ENTITY_MODULE_SCENES: Dictionary[Module.ModuleType, PackedScene] = {
+	Module.ModuleType.MOVEMENT: load("res://Entities/Modules/MovementModule/movement_module.tscn"),
+	Module.ModuleType.ACTION: load("res://Entities/Modules/ActionModule/action_module.tscn"),
+	Module.ModuleType.INTERACT: load("res://Entities/Modules/InteractModule/interact_module.tscn"),
+	Module.ModuleType.AUTOATTACK: load("res://Entities/Modules/AutoAttackModule/auto_attack_module.tscn"),
+	Module.ModuleType.TARGET: load("res://Entities/Modules/TargetModule/target_module.tscn")
+}
+
+var FAMILY_MANAGER_SCENES: Dictionary[Family.FamilyType, PackedScene] = {
+	Family.FamilyType.DEFENSE: load("res://Entities/Heroes/_Shared/FamiliesManagers/Defense/defense_manager.tscn"),
+	Family.FamilyType.FIRE: load("res://Entities/Heroes/_Shared/FamiliesManagers/Fire/fire_manager.tscn"),
+	Family.FamilyType.LIFE: load("res://Entities/Heroes/_Shared/FamiliesManagers/Life/life_manager.tscn"),
+	Family.FamilyType.POISON: load("res://Entities/Heroes/_Shared/FamiliesManagers/Poison/poison_manager.tscn"),
+	Family.FamilyType.SERENITY: load("res://Entities/Heroes/_Shared/FamiliesManagers/Serenity/serenity_manager.tscn"),
+	Family.FamilyType.STORM: load("res://Entities/Heroes/_Shared/FamiliesManagers/Storm/storm_manager.tscn"),
+	Family.FamilyType.ATTACK: load("res://Entities/Heroes/_Shared/FamiliesManagers/Attack/attack_manager.tscn"),
+	Family.FamilyType.MANA: load("res://Entities/Heroes/_Shared/FamiliesManagers/Mana/mana_manager.tscn"),
+	Family.FamilyType.NECROSIS: load("res://Entities/Heroes/_Shared/FamiliesManagers/Necro/necro_manager.tscn"),
 }
 
 var DAMAGE_POPUP_SCENE: PackedScene = load("res://UI/3D/DamagePopup/damage_popup.tscn")

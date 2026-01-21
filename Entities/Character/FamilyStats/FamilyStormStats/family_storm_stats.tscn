@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://yu2r81qedhap"]
-
-[ext_resource type="Script" uid="uid://dl6ku1sa6x0n7" path="res://Entities/Character/FamilyStats/FamilyStormStats/family_storm_stats.gd" id="1_yh4we"]
-
-[node name="FamilyStormStats" type="Node"]
-script = ExtResource("1_yh4we")

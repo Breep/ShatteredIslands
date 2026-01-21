@@ -1,5 +1,5 @@
 class_name LightGracefulStep
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _increase_dodge: Array[float]
 @export var _amount_regen: Array[float]

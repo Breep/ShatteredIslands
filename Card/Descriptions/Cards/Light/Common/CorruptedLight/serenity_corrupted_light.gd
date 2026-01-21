@@ -1,5 +1,5 @@
 class_name SerenityCorruptedLight
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _conversion_percent: Array[int]
 

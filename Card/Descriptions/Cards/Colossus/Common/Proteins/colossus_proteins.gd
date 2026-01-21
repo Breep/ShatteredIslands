@@ -1,5 +1,5 @@
 class_name ColossusProteins
-extends CharacterUpgrade
+extends HeroUpgrade
 
 @export var _max_hp_increase: Array[float]
 @export var _rarity: Card.Rarity = Card.Rarity.COMMON

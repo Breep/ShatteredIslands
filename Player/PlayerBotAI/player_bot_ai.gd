@@ -55,8 +55,8 @@ func _buy_a_card() -> void:
 	_card_shop.try_buy_card(card)
 
 
-func _on_game_manager_game_state_changed(new_game_state: Game.GameState) -> void:
-	if new_game_state == Game.GameState.BUYING:
+func _on_game_manager_game_state_changed(new_game_state: GameManager.GameState) -> void:
+	if new_game_state == GameManager.GameState.BUYING:
 		_dumb_buying_area()
 	else:
 		_wake_up_timer.stop()
