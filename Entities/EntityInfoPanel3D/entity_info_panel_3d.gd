@@ -54,6 +54,7 @@ func _ready() -> void:
 		if "necrosis_stacks" in stats: _update_necrosis_label(stats.necrosis_stacks)
 		if "armor_stacks" in stats:
 			_update_shield_bar(stats.armor_stacks, stats.health_max)
+		if stats.has_signal("health_changed"): stats.health_changed.connect(_on_health_changed)
 		if stats.has_signal("health_max_changed"): stats.health_max_changed.connect(_on_health_max_changed)
 		if stats.has_signal("ignite_stacks_changed"):
 			stats.ignite_stacks_changed.connect(_update_ignite_label)
@@ -170,6 +171,9 @@ func _on_mana_max_changed(new_max: int) -> void:
 
 func _on_armor_changed(new_amount: float) -> void:
 	_update_shield_bar(new_amount, _owner_entity.stats.health_max)
+
+func _on_health_changed(new_health: int) -> void:
+	update_health_bar(new_health, _owner_entity.stats.health_max)
 
 func _on_health_max_changed(new_max: int) -> void:
 	update_health_bar(_owner_entity.stats.health, new_max)
