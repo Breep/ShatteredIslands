@@ -17,6 +17,7 @@ func _ready() -> void:
 # ============================== Public functions ==============================
 
 func start() -> void:
+	Verbose.debug("PoisonManager start", Verbose.Category.FAMILY_MANAGER)
 	_lanch_optional_spells()
 	_create_optional_timers()
 	_add_attack_modifiers()
@@ -25,6 +26,7 @@ func start() -> void:
 
 
 func stop() -> void:
+	Verbose.debug("PoisonManager stop", Verbose.Category.FAMILY_MANAGER)
 	for spell in _optional_spells:
 		spell.queue_free()
 	_clear_stack_modifiers()

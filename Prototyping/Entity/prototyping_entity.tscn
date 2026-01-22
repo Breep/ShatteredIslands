@@ -1,25 +1,38 @@
-[gd_scene load_steps=10 format=3 uid="uid://dqno5p3aprq7f"]
+[gd_scene load_steps=15 format=3 uid="uid://dqno5p3aprq7f"]
 
 [ext_resource type="Script" uid="uid://brd0wxqwulj8y" path="res://Prototyping/Entity/prototyping_entity.gd" id="1_6kn6i"]
 [ext_resource type="PackedScene" uid="uid://c48aqh8mlb7lc" path="res://Entities/Heroes/DarkKnight/dark_knight.tscn" id="1_icvx6"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="2_083cp"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="3_5hdqt"]
 [ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://UI/Tool/Misc/hover_boost_button.gd" id="3_6kn6i"]
-[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/Stats/EntityStats/entity_stats.gd" id="3_cpqow"]
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_egh8k"]
+[ext_resource type="Texture2D" uid="uid://yekknulevsvb" path="res://Card/Descriptions/Cards/Poison/Common/PoisonFlask/portrait_poison_flask.png" id="4_urbv6"]
+[ext_resource type="Script" uid="uid://1k2khgqbc78a" path="res://Card/Descriptions/Cards/Poison/Common/PoisonFlask/poison_poison_flask.gd" id="5_oonkp"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
+[ext_resource type="Script" uid="uid://nkraydv4mdse" path="res://Card/Templates/player_deck.gd" id="6_fl2p6"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_d4u4x"]
 size = Vector2(20, 20)
 
-[sub_resource type="Resource" id="Resource_cpqow"]
-script = ExtResource("3_cpqow")
-health_max = 10000.0
-attack_damage = 100.0
-attack_speed = 2.0
-_critical_chances = Dictionary[int, float]({
-0: 100.0
-})
-metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+[sub_resource type="Resource" id="Resource_ij4m6"]
+script = ExtResource("5_oonkp")
+_poison_stacks = Array[int]([1, 2, 3, 4, 6])
+_period = Array[float]([2.0, 1.8, 1.6, 1.4, 0.7])
+metadata/_custom_type_script = "uid://1k2khgqbc78a"
+
+[sub_resource type="Resource" id="Resource_m73qc"]
+script = ExtResource("3_5hdqt")
+name = "Poison Flask"
+picture = ExtResource("4_urbv6")
+families = Array[int]([7])
+player_upgrade = SubResource("Resource_ij4m6")
+lvl = 5
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"
+
+[sub_resource type="Resource" id="Resource_urbv6"]
+script = ExtResource("6_fl2p6")
+_active_cards = Array[ExtResource("3_5hdqt")]([SubResource("Resource_m73qc")])
+metadata/_custom_type_script = "uid://nkraydv4mdse"
 
 [node name="PrototypingEntity" type="Node3D"]
 script = ExtResource("1_6kn6i")
@@ -33,8 +46,13 @@ unique_name_in_owner = true
 
 [node name="DarkKnightSOLO" parent="Entities" node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
 transform = Transform3D(-0.99893624, 0, 0.04611278, 0, 1, 0, -0.04611278, 0, -0.99893624, -0.032851696, -4.7683716e-07, -5.1778226)
+_custom_deck = SubResource("Resource_urbv6")
 team = 2
-custom_base_stats = SubResource("Resource_cpqow")
+_spawn_manager = NodePath("../../SpawnManager")
+
+[node name="DarkKnight" parent="Entities" node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13703918, 0, 5.1590967)
+team = 1
 _spawn_manager = NodePath("../../SpawnManager")
 
 [node name="Control" type="Control" parent="."]
@@ -120,9 +138,6 @@ _spells_node = NodePath("../Node3D3")
 [node name="Node3D2" type="Node3D" parent="."]
 
 [node name="Node3D3" type="Node3D" parent="."]
-
-[node name="DarkKnight" parent="." instance=ExtResource("1_icvx6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13703918, 0, 5.1590967)
 
 [connection signal="pressed" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StartFightButton" to="." method="_on_start_fight_button_pressed"]
 [connection signal="pressed" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StopFightButton" to="." method="_on_stop_fight_button_pressed"]

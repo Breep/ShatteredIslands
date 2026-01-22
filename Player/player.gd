@@ -165,7 +165,7 @@ func update_from_serialized(serialized_data: Dictionary) -> void:
 # ============================== Resource base functions ==============================
 
 func _init() -> void:
-	deck = PlayerDeck.new(self)
+	deck = PlayerDeck.new().init(self)
 	deck.has_changed.connect(_on_deck_has_changed)
 
 # ============================== Private functions ==============================
@@ -176,7 +176,6 @@ func _apply_all_cards_upgrades() -> void:
 		return
 	for card in deck.get_active_deck():
 		card.player_upgrade.apply(hero.families_stats, card.lvl)
-
 
 
 func _check_lvl_up() -> void:
@@ -191,20 +190,3 @@ func _check_lvl_up() -> void:
 func _on_deck_has_changed() -> void:
 	#print("Player[", name, "]: Deck has changed")
 	_apply_all_cards_upgrades()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 

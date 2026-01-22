@@ -19,6 +19,18 @@ func init(entity: Entity) -> StackHandlerModule:
 	_entity_owner = entity
 	return self
 
+func start() -> void:
+	if _entity_owner == null: return
+	if not multiplayer.is_server(): return
+	_poison_tick_timer.start()
+	_ignite_tick_timer.start()
+
+func stop() -> void:
+	if _entity_owner == null: return
+	if not multiplayer.is_server(): return
+	_poison_tick_timer.stop()
+	_ignite_tick_timer.stop()
+
 # ============================== Callbacks functions ==============================
 
 func _on_poison_tick_timer_timeout() -> void:

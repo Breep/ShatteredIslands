@@ -24,14 +24,14 @@ signal ultimate_casted()
 @export_group("Local Nodes")
 @export var _hero_animator: HeroAnimator
 
-
-@export_subgroup("Optional")
-#endregion
+@export_group("Optional")
+@export var _custom_deck: PlayerDeck
 
 #region ============================== Public variables ==============================
 var display_mode: DisplayMode = DisplayMode.PREVIEW
 var fighting_area: FightingArea
 var families_stats: FamiliesStats
+var deck: PlayerDeck
 #endregion
 
 #region ============================== Private variables ==============================
@@ -44,7 +44,7 @@ var _family_managers: Dictionary[Family.FamilyType, FamilyManager]
 #endregion
 
 #region ============================== Public functions ==============================
-func init(hero_display_mode: DisplayMode = DisplayMode.BUYING_PHASE, fighting_area_ref: FightingArea = null) -> Hero:
+func init(hero_display_mode: DisplayMode = DisplayMode.PREVIEW, fighting_area_ref: FightingArea = null) -> Hero:
 	display_mode = hero_display_mode
 	
 	if fighting_area_ref != null:
@@ -200,14 +200,21 @@ func _ready() -> void:
 
 
 func _hero_ready() -> void:
-	# Initialize base_stats from hero_desc if not using custom_base_stats
-	if custom_base_stats == null and hero_desc != null and base_stats != null:
-		base_stats.reset_from_hero_desc(hero_desc, level)
+	# Custom Deck (must be assigned here, not in _enter_tree, because @export vars aren't loaded yet there)
+	if _custom_deck != null:
+		deck = _custom_deck
 	
 	# Validate hero configuration
 	if hero_desc == null and custom_base_stats == null:
 		Verbose.error("Hero instantiated without hero_desc AND without custom_base_stats!", Verbose.Category.HERO)
 		return
+	
+	# Initialize base_stats from hero_desc if not using custom_base_stats
+	if custom_base_stats == null and hero_desc != null and base_stats != null:
+		base_stats.reset_from_hero_desc(hero_desc, level)
+	
+	if deck != null:
+		_apply_all_cards_upgrades()
 	
 	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
 
@@ -243,11 +250,13 @@ func _on_fighting_state_changed(new_fighting_state: FightingState) -> void:
 			_auto_attack_module.stop()
 			for family_manager: FamilyManager in _family_managers.values():
 				family_manager.stop()
+			_stack_handler_module.stop()
 		FightingState.FIGHTING:
 			target_module.start()
 			_auto_attack_module.start()
 			for family_manager: FamilyManager in _family_managers.values():
 				family_manager.start()
+			_stack_handler_module.start()
 		FightingState.CELEBRATING: pass
 		FightingState.DEAD: pass
 		FightingState.UNDEF: pass
@@ -264,6 +273,16 @@ func _apply_display_mode() -> void:
 	# Update animator (weapons + animations)
 	if _hero_animator != null:
 		_hero_animator.apply_display_mode(display_mode)
+
+
+func _apply_all_cards_upgrades() -> void:
+	Verbose.debug("Applying all cards upgrades", Verbose.Category.HERO)
+	if deck == null:
+		Verbose.error("Can't apply card upgrade, the deck is null", Verbose.Category.HERO)
+		return
+	
+	for card: Card in deck.get_active_deck():
+		card.player_upgrade.apply(families_stats, card.lvl)
 
 
 func _handle_death() -> void:
@@ -283,7 +302,6 @@ func _on_gfm_fighting_phase_state_changed(fighting_phase_state: GlobalFightingMa
 
 
 func _on_stats_health_changed(new_health: int) -> void:
-	if _entity_info_panel_3d != null: _entity_info_panel_3d.update_health_bar(new_health, stats.health_max)
 	if new_health <= 0:
 		signal_death()
 
