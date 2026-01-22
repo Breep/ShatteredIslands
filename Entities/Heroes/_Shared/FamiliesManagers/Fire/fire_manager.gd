@@ -14,8 +14,6 @@ var _titans_protection_accumulated_hp: float = 0.0
 
 # ============================== Local nodes ==============================
 
-@onready var _ignite_timer: Timer = %IgniteTimer
-
 const _IGNITE_DECAY_PERCENT: float = 10.0
 const _IGNITE_PERCENT_PER_STACK: float = 0.05
 
@@ -29,7 +27,6 @@ func _ready() -> void:
 func start() -> void:
 	_create_optional_timers()
 	_lanch_optional_spells()
-	_ignite_timer.start()
 	_on_battle_start()
 	_add_stat_modifiers()
 	_add_action_modifiers()
@@ -43,7 +40,6 @@ func stop() -> void:
 	_clear_stack_modifiers()
 	for spell in _optional_spells:
 		spell.queue_free()
-	_ignite_timer.stop()
 	_clear_optional_timers()
 
 
@@ -363,17 +359,4 @@ func _on_inflict_condition_ignite(cb_vars: Dictionary) -> void:
 					Spell.MeteorModifier.RADIUS: 3.0,
 					Spell.MeteorModifier.ON_HIT_CALLBACKS: _meteor_modifiers
 					})
-#endregion
-
-#region ===== DECAY =====
-#[DECAY]
-func _on_ignite_timer_timeout() -> void:
-	if _owner.stats.ignite_stacks > 0:
-		var percent: float = _IGNITE_PERCENT_PER_STACK * _owner.stats.ignite_stacks
-		_owner.take_damage_percent(percent, Utils.PercentModifier.MAX_HP, Utils.DamageType.MAGICAL, false, "Ignite Periodic Damage")
-	
-	var decay: int = (_owner.stats.ignite_stacks * _IGNITE_DECAY_PERCENT / 100.0) as int
-	decay = clampi(decay, 1, decay)
-	_owner.stats.ignite_stacks -= decay
-	
 #endregion
