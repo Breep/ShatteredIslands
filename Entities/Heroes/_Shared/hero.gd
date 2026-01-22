@@ -200,6 +200,7 @@ func _ready() -> void:
 
 
 func _hero_ready() -> void:
+	Verbose.debug("Hero [" + entity_name + "] ready", Verbose.Category.HERO)
 	# Custom Deck (must be assigned here, not in _enter_tree, because @export vars aren't loaded yet there)
 	if _custom_deck != null:
 		deck = _custom_deck
@@ -219,12 +220,14 @@ func _hero_ready() -> void:
 	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
 
 	stats.health_changed.connect(_on_stats_health_changed)
-	fighting_state_changed.connect(_on_fighting_state_changed)
+	fighting_state_changed.connect(_on_hero_fighting_state_changed)
 	_auto_attack_module.attack_done.connect(_on_aa_module_attack_done)
 	_hero_animator.attack_hit_frame.connect(_on_hero_animator_attack_hit_frame)
 
 	_entity_info_panel_3d.update_health_bar(stats.health, stats.health_max)
 	_apply_display_mode()
+
+	_entity_ready()
 
 
 func _exit_tree() -> void:
@@ -233,8 +236,8 @@ func _exit_tree() -> void:
 		GlobalFightingManager.fighting_phase_state_changed.disconnect(_on_gfm_fighting_phase_state_changed)
 	if stats != null and stats.health_changed.is_connected(_on_stats_health_changed):
 		stats.health_changed.disconnect(_on_stats_health_changed)
-	if fighting_state_changed.is_connected(_on_fighting_state_changed):
-		fighting_state_changed.disconnect(_on_fighting_state_changed)
+	if fighting_state_changed.is_connected(_on_hero_fighting_state_changed):
+		fighting_state_changed.disconnect(_on_hero_fighting_state_changed)
 	if _auto_attack_module != null and _auto_attack_module.attack_done.is_connected(_on_aa_module_attack_done):
 		_auto_attack_module.attack_done.disconnect(_on_aa_module_attack_done)
 	if _hero_animator != null and _hero_animator.attack_hit_frame.is_connected(_on_hero_animator_attack_hit_frame):
@@ -243,20 +246,16 @@ func _exit_tree() -> void:
 #endregion
 
 #region ============================== Private functions ==============================
-func _on_fighting_state_changed(new_fighting_state: FightingState) -> void:
+func _on_hero_fighting_state_changed(new_fighting_state: FightingState) -> void:
 	match new_fighting_state:
 		FightingState.IDLE:
-			target_module.stop()
 			_auto_attack_module.stop()
 			for family_manager: FamilyManager in _family_managers.values():
 				family_manager.stop()
-			_stack_handler_module.stop()
 		FightingState.FIGHTING:
-			target_module.start()
 			_auto_attack_module.start()
 			for family_manager: FamilyManager in _family_managers.values():
 				family_manager.start()
-			_stack_handler_module.start()
 		FightingState.CELEBRATING: pass
 		FightingState.DEAD: pass
 		FightingState.UNDEF: pass

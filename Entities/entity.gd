@@ -190,6 +190,15 @@ func _entity_enter_tree() -> void:
 	if _stack_handler_module == null:
 		_stack_handler_module = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.STACK_HANDLER].instantiate().init(self)
 		add_child(_stack_handler_module)
+
+
+func _ready() -> void:
+	_entity_ready()
+
+
+func _entity_ready() -> void:
+	Verbose.debug("Entity [" + entity_name + "] ready", Verbose.Category.ENTITY)
+	fighting_state_changed.connect(_on_entity_fighting_state_changed)
 #endregion
 
 #region ============================== Public functions ==============================
@@ -269,4 +278,16 @@ func take_dispell(_value: float, _is_critical: bool, _action_id: StringName, _so
 #endregion
 
 #region ============================== Private functions ==============================
+func _on_entity_fighting_state_changed(new_fighting_state: FightingState) -> void:
+	Verbose.debug("Entity [" + entity_name + "] fighting state changed to [" + str(FightingState.keys()[new_fighting_state]) + "]", Verbose.Category.ENTITY)
+	match new_fighting_state:
+		FightingState.IDLE:
+			target_module.stop()
+			_stack_handler_module.stop()
+		FightingState.FIGHTING:
+			target_module.start()
+			_stack_handler_module.start()
+		FightingState.CELEBRATING: pass
+		FightingState.DEAD: pass
+		FightingState.UNDEF: pass
 #endregion

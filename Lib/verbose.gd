@@ -118,7 +118,7 @@ var current_categories_level: Dictionary[Category, Level] = {
 	Category.STAT_MODIFIER: Level.WARN,
 	Category.GLOBAL_FIGHTING_MANAGER: Level.WARN,
 	Category.ENTITY_MODULE: Level.WARN,
-	Category.ENTITY: Level.WARN,
+	Category.ENTITY: Level.DEBUG,
 	Category.HERO: Level.DEBUG,
 	Category.BATTLE_SYNC: Level.WARN,
 	Category.BATTLE_READER: Level.WARN,

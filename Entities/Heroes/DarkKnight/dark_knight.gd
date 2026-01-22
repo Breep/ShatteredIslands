@@ -60,7 +60,6 @@ const SUPER_STRIKE_ON_ATTACK_SCENE: PackedScene = preload("res://Entities/Heroes
 
 func _ready() -> void:
 	_dark_knight_ready()
-	_hero_ready()
 
 
 func _dark_knight_ready() -> void:
@@ -79,6 +78,8 @@ func _dark_knight_ready() -> void:
 	# Connect to visual
 	if visual.has_method("update_resource_points"):
 		super_strike_charges_changed.connect(visual.update_resource_points)
+	
+	_hero_ready()
 
 # ============================== Public function ==============================
 
