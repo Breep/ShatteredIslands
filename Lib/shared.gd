@@ -30,7 +30,8 @@ var ENTITY_MODULE_SCENES: Dictionary[Module.ModuleType, PackedScene] = {
 	Module.ModuleType.ACTION: load("res://Entities/Modules/ActionModule/action_module.tscn"),
 	Module.ModuleType.INTERACT: load("res://Entities/Modules/InteractModule/interact_module.tscn"),
 	Module.ModuleType.AUTOATTACK: load("res://Entities/Modules/AutoAttackModule/auto_attack_module.tscn"),
-	Module.ModuleType.TARGET: load("res://Entities/Modules/TargetModule/target_module.tscn")
+	Module.ModuleType.TARGET: load("res://Entities/Modules/TargetModule/target_module.tscn"),
+	Module.ModuleType.STACK_HANDLER: load("res://Entities/Modules/StackHandlerModule/stack_handler_module.tscn")
 }
 
 var FAMILY_MANAGER_SCENES: Dictionary[Family.FamilyType, PackedScene] = {
@@ -56,11 +57,3 @@ const LAYER_FLOOR: int = 1 << 3
 const LAYER_ENTITIES: int = 1 << 4
 const LAYER_PICKABLE_CONSTRAINT: int = 1 << 5
 const LAYER_FURNITURE: int = 1 << 6
-
-
-
-
-
-
-
- 

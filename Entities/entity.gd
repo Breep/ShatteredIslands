@@ -56,52 +56,6 @@ func signal_auto_attack_started(is_critical: bool) -> void:
 	auto_attack_started.emit(is_critical)
 #endregion
 
-#region ============================== Constants ==============================
-
-#endregion
-
-#region ============================== Public variables ==============================
-var _is_dead: bool = false
-var is_dead: bool:
-	get: return _is_dead
-
-var stats: EntityStats
-
-var target_module: TargetModule
-
-var auto_attack_modifier_registry: AutoAttackModifierRegistry
-var action_modifiers_registry: ActionModifiersRegistry
-var stat_modifiers_registry: EntityStatModifiersRegistry
-
-var stack_manager: StackManager # TODO
-#endregion
-
-# ============================== Export ==============================
-
-@export var id: int = -1 # Multiplayer ID of the entity
-@export var team: int = -1 # Team number of the entity
-@export var battle_id: int = -1 # The id of the battle the entity is in
-@export var entity_name: String = "<entity name>"
-
-# ============================== Local Nodes ==============================
-
-@export_group("Optional configuration")
-@export var _entity_info_panel_3d: EntityInfoPanel3D
-var visual: EntityInfoPanel3D:
-	get: return _entity_info_panel_3d
-
-# Custom base_stats override for quick testing (optional)
-# If defined, this will be used instead of auto-generated base_stats
-@export var custom_base_stats: EntityStats
-
-var _base_stats: EntityStats # Private, use base_stats property to access
-var base_stats: EntityStats:
-	get: return _base_stats
-
-@export var _spawn_manager: SpawnManager
-
-@onready var bds_registry := EntityBDSRegistry.new(entity_name)
-
 #region ============================== Enums ==============================
 enum FightingState {
 	IDLE,
@@ -132,6 +86,54 @@ enum FieldGeneratorModifier {
 	TARGET_COUNT
 }
 #endregion
+
+#region ============================== Constants ==============================
+
+#endregion
+
+#region ============================== Public variables ==============================
+var _is_dead: bool = false
+var is_dead: bool:
+	get: return _is_dead
+
+var stats: EntityStats
+
+var target_module: TargetModule
+
+var auto_attack_modifier_registry: AutoAttackModifierRegistry
+var action_modifiers_registry: ActionModifiersRegistry
+var stat_modifiers_registry: EntityStatModifiersRegistry
+#endregion
+
+#region ============================== Private variables ==============================
+var _stack_handler_module: StackHandlerModule
+#endregion
+
+#region ============================== Export ==============================
+@export var id: int = -1 # Multiplayer ID of the entity
+@export var team: int = -1 # Team number of the entity
+@export var battle_id: int = -1 # The id of the battle the entity is in
+@export var entity_name: String = "<entity name>"
+#endregion
+
+# ============================== Local Nodes ==============================
+
+@export_group("Optional configuration")
+@export var _entity_info_panel_3d: EntityInfoPanel3D
+var visual: EntityInfoPanel3D:
+	get: return _entity_info_panel_3d
+
+# Custom base_stats override for quick testing (optional)
+# If defined, this will be used instead of auto-generated base_stats
+@export var custom_base_stats: EntityStats
+
+var _base_stats: EntityStats # Private, use base_stats property to access
+var base_stats: EntityStats:
+	get: return _base_stats
+
+@export var _spawn_manager: SpawnManager
+
+@onready var bds_registry := EntityBDSRegistry.new(entity_name)
 
 #region ============================== Fighting State ==============================
 signal fighting_state_changed(new_fighting_state: FightingState)
@@ -184,6 +186,10 @@ func _entity_enter_tree() -> void:
 	if target_module == null:
 		target_module = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.TARGET].instantiate().init(self)
 		add_child(target_module)
+
+	if _stack_handler_module == null:
+		_stack_handler_module = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.STACK_HANDLER].instantiate().init(self)
+		add_child(_stack_handler_module)
 #endregion
 
 #region ============================== Public functions ==============================

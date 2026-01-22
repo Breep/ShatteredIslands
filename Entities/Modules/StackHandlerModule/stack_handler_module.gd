@@ -1,4 +1,4 @@
-class_name StackManager
+class_name StackHandlerModule
 extends Node
 
 # ============================== Private variables ==============================
@@ -10,12 +10,12 @@ var IGNITE_DECAY: float = 20.0
 
 # ============================== Local nodes ==============================
 
-#@onready var _poison_tick_timer: Timer = %PoisonTickTimer
-#@onready var _ignite_tick_timer: Timer = %IgniteTickTimer
+@onready var _poison_tick_timer: Timer = %PoisonTickTimer
+@onready var _ignite_tick_timer: Timer = %IgniteTickTimer
 
 # ============================== Public functions ==============================
 
-func init(entity: Entity) -> StackManager:
+func init(entity: Entity) -> StackHandlerModule:
 	_entity_owner = entity
 	return self
 

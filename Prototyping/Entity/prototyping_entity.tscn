@@ -16,6 +16,9 @@ script = ExtResource("3_cpqow")
 health_max = 10000.0
 attack_damage = 100.0
 attack_speed = 2.0
+_critical_chances = Dictionary[int, float]({
+0: 100.0
+})
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [node name="PrototypingEntity" type="Node3D"]
@@ -28,70 +31,10 @@ mesh = SubResource("QuadMesh_d4u4x")
 [node name="Entities" type="Node3D" parent="."]
 unique_name_in_owner = true
 
-[node name="DarkKnight" parent="Entities" node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0013899803, 7.1525574e-07, 4.619981)
-team = 1
-_spawn_manager = NodePath("../../SpawnManager")
-
 [node name="DarkKnightSOLO" parent="Entities" node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
 transform = Transform3D(-0.99893624, 0, 0.04611278, 0, 1, 0, -0.04611278, 0, -0.99893624, -0.032851696, -4.7683716e-07, -5.1778226)
 team = 2
 custom_base_stats = SubResource("Resource_cpqow")
-_spawn_manager = NodePath("../../SpawnManager")
-
-[node name="DarkKnight3" parent="Entities" node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.390593, -2.3841858e-07, 5.996132)
-team = 1
-_spawn_manager = NodePath("../../SpawnManager")
-
-[node name="DarkKnight4" parent="Entities" node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.446773, -2.3841858e-07, 7.0322304)
-team = 1
-_spawn_manager = NodePath("../../SpawnManager")
-
-[node name="DarkKnight5" parent="Entities" node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8205514, 1.66893e-06, 6.378456)
-team = 1
-_spawn_manager = NodePath("../../SpawnManager")
-
-[node name="DarkKnight6" parent="Entities" node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1443267, 7.1525574e-07, 2.762393)
-team = 1
-_spawn_manager = NodePath("../../SpawnManager")
-
-[node name="DarkKnight12" parent="Entities" node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1930728, 1.66893e-06, 1.5481892)
-team = 1
-_spawn_manager = NodePath("../../SpawnManager")
-
-[node name="DarkKnight13" parent="Entities" node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.858272, 7.1525574e-07, 4.267679)
-team = 1
-_spawn_manager = NodePath("../../SpawnManager")
-
-[node name="DarkKnight14" parent="Entities" node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.280565, 7.1525574e-07, 8.309522)
-team = 1
-_spawn_manager = NodePath("../../SpawnManager")
-
-[node name="DarkKnight15" parent="Entities" node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7963824, -2.3841858e-07, 2.3884516)
-team = 1
-_spawn_manager = NodePath("../../SpawnManager")
-
-[node name="DarkKnight16" parent="Entities" node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2897058, 1.66893e-06, 7.609128)
-team = 1
-_spawn_manager = NodePath("../../SpawnManager")
-
-[node name="DarkKnight17" parent="Entities" node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7185655, 7.1525574e-07, 8.115796)
-team = 1
-_spawn_manager = NodePath("../../SpawnManager")
-
-[node name="DarkKnight18" parent="Entities" node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5738807, 7.1525574e-07, 3.5470467)
-team = 1
 _spawn_manager = NodePath("../../SpawnManager")
 
 [node name="Control" type="Control" parent="."]
@@ -177,6 +120,9 @@ _spells_node = NodePath("../Node3D3")
 [node name="Node3D2" type="Node3D" parent="."]
 
 [node name="Node3D3" type="Node3D" parent="."]
+
+[node name="DarkKnight" parent="." instance=ExtResource("1_icvx6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13703918, 0, 5.1590967)
 
 [connection signal="pressed" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StartFightButton" to="." method="_on_start_fight_button_pressed"]
 [connection signal="pressed" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StopFightButton" to="." method="_on_stop_fight_button_pressed"]

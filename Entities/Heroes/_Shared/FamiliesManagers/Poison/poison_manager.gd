@@ -9,10 +9,6 @@ var _poison_stats: FamilyPoisonStats # Ref to the owner poison stats
 
 # ============================== Spells scenes ==============================
 
-# ============================== Local scenes ==============================
-
-@onready var _poison_tick_timer:Timer = %PoisonTickTimer
-
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
@@ -26,13 +22,11 @@ func start() -> void:
 	_add_attack_modifiers()
 	_add_stat_modifiers()
 	_add_stack_modifiers()
-	_poison_tick_timer.start()
 
 
 func stop() -> void:
 	for spell in _optional_spells:
 		spell.queue_free()
-	_poison_tick_timer.stop()
 	_clear_stack_modifiers()
 	_clear_attack_modifiers()
 	_clear_optional_timers()
@@ -161,7 +155,7 @@ func _create_optional_timers() -> void:
 	
 	# [SHROOMS]
 	if _poison_stats.poison_shrooms_activated:
-		_optional_timers.append(Utils.create_perpetual_timer(self , _poison_stats.poison_shrooms_period, _on_shrooms_timer_timeout, true))
+		_optional_timers.append(Utils.create_perpetual_timer(self, _poison_stats.poison_shrooms_period, _on_shrooms_timer_timeout, true))
 
 
 func _clear_optional_timers() -> void:
@@ -193,13 +187,6 @@ func _lanch_optional_spells() -> void:
 		_owner.cast_spell(_owner, Spell.Type.DEATH_FOG, spell_modifier)
 
 # ============================== Callbacks functions ==============================
-
-# Handle poison stacks and damage on _owner
-func _on_poison_tick_timer_timeout() -> void:
-	if not multiplayer.is_server(): return
-	if _owner.stats.poison_stacks > 0:
-		_owner.take_damage(_owner.stats.poison_stacks, Utils.DamageType.POISON, false, "Poison Periodic Damage")
-
 
 # [POISON FLASK]
 func _on_poison_flask_timer_timeout() -> void:
@@ -271,7 +258,7 @@ func _summon_snake_barrel() -> void:
 	var dx := rng.randf_range(-half_w, half_w)
 	var dz := rng.randf_range(-half_d, half_d)
 
-	var summon_modifier :Dictionary = {
+	var summon_modifier: Dictionary = {
 		Entity.SnakeBarrelModifier.SNAKE_NUMBER: _poison_stats.poison_snake_barrel_snake_number,
 		Entity.SnakeBarrelModifier.SNAKE_POISON_STACKS: _poison_stats.poison_snake_barrel_snake_poison_stacks,
 		Entity.SnakeBarrelModifier.MAX_HEALTH: _poison_stats.poison_snake_barrel_health
