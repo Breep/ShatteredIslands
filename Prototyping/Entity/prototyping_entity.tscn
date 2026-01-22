@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dqno5p3aprq7f"]
+[gd_scene load_steps=21 format=3 uid="uid://dqno5p3aprq7f"]
 
 [ext_resource type="Script" uid="uid://brd0wxqwulj8y" path="res://Prototyping/Entity/prototyping_entity.gd" id="1_6kn6i"]
 [ext_resource type="PackedScene" uid="uid://c48aqh8mlb7lc" path="res://Entities/Heroes/DarkKnight/dark_knight.tscn" id="1_icvx6"]
@@ -6,34 +6,33 @@
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="3_5hdqt"]
 [ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://UI/Tool/Misc/hover_boost_button.gd" id="3_6kn6i"]
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_egh8k"]
-[ext_resource type="Texture2D" uid="uid://yekknulevsvb" path="res://Card/Descriptions/Cards/Poison/Common/PoisonFlask/portrait_poison_flask.png" id="4_urbv6"]
-[ext_resource type="Script" uid="uid://1k2khgqbc78a" path="res://Card/Descriptions/Cards/Poison/Common/PoisonFlask/poison_poison_flask.gd" id="5_oonkp"]
+[ext_resource type="Script" uid="uid://csrm5mc1gxijs" path="res://Card/Descriptions/Cards/Light/Common/DivineRegenerator/serenity_divine_regenerator.gd" id="5_urbv6"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
 [ext_resource type="Script" uid="uid://nkraydv4mdse" path="res://Card/Templates/player_deck.gd" id="6_fl2p6"]
+[ext_resource type="Resource" uid="uid://c3qf5odp5y6ap" path="res://Card/Descriptions/Cards/Light/Common/LifeSpring/light_life_spring.tres" id="6_oonkp"]
 [ext_resource type="Texture2D" uid="uid://dsshpniufwm1f" path="res://Card/Descriptions/Cards/Fire/Common/ExpanseUniverse/fire_expanse_universe.png" id="7_urbv6"]
 [ext_resource type="Script" uid="uid://c1cycap2yrxuj" path="res://Card/Descriptions/Cards/Fire/Common/ExpanseUniverse/fire_expanse_universe.gd" id="8_oonkp"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_d4u4x"]
 size = Vector2(20, 20)
 
-[sub_resource type="Resource" id="Resource_ij4m6"]
-script = ExtResource("5_oonkp")
-_poison_stacks = Array[int]([1, 2, 3, 4, 6])
-_period = Array[float]([2.0, 1.8, 1.6, 1.4, 0.7])
-metadata/_custom_type_script = "uid://1k2khgqbc78a"
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_icon"]
 
-[sub_resource type="Resource" id="Resource_m73qc"]
+[sub_resource type="Resource" id="Resource_upgrade"]
+script = ExtResource("5_urbv6")
+_bonus_duration = Array[int]([1, 2, 3, 4, 5])
+
+[sub_resource type="Resource" id="Resource_vbhu7"]
 script = ExtResource("3_5hdqt")
-name = "Poison Flask"
-picture = ExtResource("4_urbv6")
-families = Array[int]([7])
-player_upgrade = SubResource("Resource_ij4m6")
+name = "Divine Regenerator"
+picture = SubResource("PlaceholderTexture2D_icon")
+families = Array[int]([5])
+player_upgrade = SubResource("Resource_upgrade")
 lvl = 5
-metadata/_custom_type_script = "uid://dc86gt0exdo1a"
 
 [sub_resource type="Resource" id="Resource_urbv6"]
 script = ExtResource("6_fl2p6")
-_active_cards = Array[ExtResource("3_5hdqt")]([SubResource("Resource_m73qc")])
+_active_cards = Array[ExtResource("3_5hdqt")]([ExtResource("6_oonkp"), SubResource("Resource_vbhu7")])
 metadata/_custom_type_script = "uid://nkraydv4mdse"
 
 [sub_resource type="Resource" id="Resource_yobeh"]
@@ -49,7 +48,7 @@ name = "Expanse Universe"
 picture = ExtResource("7_urbv6")
 families = Array[int]([3])
 player_upgrade = SubResource("Resource_yobeh")
-lvl = 5
+lvl = 3
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"
 
 [sub_resource type="Resource" id="Resource_oonkp"]
@@ -153,15 +152,15 @@ transform = Transform3D(0.022652432, 0, 0.9997434, 0, 1, 0, -0.9997434, 0, 0.022
 transform = Transform3D(0.58026236, 0.15287416, -0.79995316, 0, 0.98222506, 0.18770704, 0.8144296, -0.10891933, 0.56994826, -0.7068796, 0, 0)
 
 [node name="SpawnManager" parent="." node_paths=PackedStringArray("_entities_node", "_projectiles_node", "_spells_node") instance=ExtResource("6_egh8k")]
-_entities_node = NodePath("../Node1")
-_projectiles_node = NodePath("../Node3D2")
-_spells_node = NodePath("../Node3D3")
+_entities_node = NodePath("../SpawnEntities")
+_projectiles_node = NodePath("../SpawnProjectiles")
+_spells_node = NodePath("../SpawnSpells")
 
-[node name="Node1" type="Node3D" parent="."]
+[node name="SpawnEntities" type="Node3D" parent="."]
 
-[node name="Node3D2" type="Node3D" parent="."]
+[node name="SpawnProjectiles" type="Node3D" parent="."]
 
-[node name="Node3D3" type="Node3D" parent="."]
+[node name="SpawnSpells" type="Node3D" parent="."]
 
 [connection signal="pressed" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StartFightButton" to="." method="_on_start_fight_button_pressed"]
 [connection signal="pressed" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StopFightButton" to="." method="_on_stop_fight_button_pressed"]

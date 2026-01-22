@@ -141,24 +141,13 @@ var armor_stacks: float:
 		armor_stacks_changed.emit(_armor_stacks)
 
 
-# Ring Buffer for Regen
-# Array of Dictionaries: { "amount": float, "stack_infos": Array[StackInfo] }
-var _regen_buffer: Array[Dictionary] = []
-var _regen_cursor: int = 0
-const REGEN_BUFFER_SIZE: int = 20
-
+# Regen Stack
+var _regen_stack: RegenStack = RegenStack.new()
 signal regen_stacks_changed(new_regen_stacks: float)
-var _regen_stacks: float = 0
 var regen_stacks: float:
-	get: return _regen_stacks
+	get: return _regen_stack.total_stacks
 	set(value):
-		if value == _regen_stacks: return
-		_regen_stacks = max(0, value)
-		regen_stacks_changed.emit(_regen_stacks)
-		
-		# If set directly to 0 (e.g. Dispell), clear buffer
-		if _regen_stacks == 0 and not _regen_buffer.is_empty():
-			init_regen_buffer()
+		regen_stacks_changed.emit(_regen_stack.total_stacks)
 
 signal necrosis_stacks_changed(new_necrosis_stacks: float)
 var _necrosis_stacks: float = 0
@@ -206,52 +195,15 @@ signal weakness_changed(new_weakness: float, action_type: Utils.ActionType)
 
 #region ============================== Public functions ==============================
 func get_stacks_number() -> float:
-	return _poison_stacks + _ignite_stacks + _armor_stacks + _regen_stacks + _necrosis_stacks
-
-
-func init_regen_buffer() -> void:
-	_regen_buffer.clear()
-	_regen_buffer.resize(REGEN_BUFFER_SIZE)
-	for i in range(REGEN_BUFFER_SIZE):
-		_regen_buffer[i] = {"amount": 0.0, "stack_infos": []}
-	_regen_cursor = 0
+	return _poison_stacks + _ignite_stacks + _armor_stacks + _regen_stack.total_stacks + _necrosis_stacks
 
 
 func add_regen_stack(amount: float, duration: int, source: Entity, action_id: StringName) -> void:
-	if amount <= 0: return
-	if _regen_buffer.is_empty(): init_regen_buffer()
-	
-	# duration += regen_duration_bonus # DEPRECATED: Handled by ActionModule modifier now
-	duration = clampi(duration, 1, REGEN_BUFFER_SIZE - 1)
-	
-	# Add to current total
-	regen_stacks += amount
-	
-	# Schedule expiration
-	var expiration_index: int = (_regen_cursor + duration) % REGEN_BUFFER_SIZE
-	var slot: Dictionary = _regen_buffer[expiration_index]
-	
-	slot["amount"] += amount
-	(slot["stack_infos"] as Array).append(StackInfo.new(source, amount, action_id))
-	
-	# print("DEBUG: Added Regen ", amount, " | Duration: ", duration, " | Expires at index ", expiration_index, " (Current: ", _regen_cursor, ")")
+	regen_stacks = _regen_stack.add_stack(amount, duration, source, action_id)
 
 
 func tick_regen() -> void:
-	if _regen_buffer.is_empty(): return
-	
-	# Process expiration at current cursor
-	var slot: Dictionary = _regen_buffer[_regen_cursor]
-	var amount_to_expire: float = slot["amount"]
-	
-	if amount_to_expire > 0:
-		regen_stacks -= amount_to_expire
-		# Clear slot
-		slot["amount"] = 0.0
-		(slot["stack_infos"] as Array).clear()
-	
-	# Move cursor
-	_regen_cursor = (_regen_cursor + 1) % REGEN_BUFFER_SIZE
+	regen_stacks = _regen_stack.tick()
 
 
 func get_debuf_stacks_number() -> float:
@@ -259,7 +211,7 @@ func get_debuf_stacks_number() -> float:
 
 
 func get_buf_stacks_number() -> float:
-	return _armor_stacks + _regen_stacks
+	return _armor_stacks + _regen_stack.total_stacks
 
 
 func reset_from_hero_desc(hero: HeroDesc, lvl: int) -> EntityStats:

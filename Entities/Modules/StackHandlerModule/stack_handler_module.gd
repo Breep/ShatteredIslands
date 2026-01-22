@@ -12,6 +12,7 @@ var IGNITE_DECAY: float = 20.0
 
 @onready var _poison_tick_timer: Timer = %PoisonTickTimer
 @onready var _ignite_tick_timer: Timer = %IgniteTickTimer
+@onready var _regen_tick_timer: Timer = %RegenTickTimer
 
 # ============================== Public functions ==============================
 
@@ -24,12 +25,14 @@ func start() -> void:
 	if not multiplayer.is_server(): return
 	_poison_tick_timer.start()
 	_ignite_tick_timer.start()
+	_regen_tick_timer.start()
 
 func stop() -> void:
 	if _entity_owner == null: return
 	if not multiplayer.is_server(): return
 	_poison_tick_timer.stop()
 	_ignite_tick_timer.stop()
+	_regen_tick_timer.stop()
 
 # ============================== Callbacks functions ==============================
 
@@ -49,3 +52,13 @@ func _on_ignite_tick_timer_timeout() -> void:
 	var decay: int = (_entity_owner.stats.ignite_stacks * IGNITE_DECAY / 100.0) as int
 	decay = clampi(decay, 1, decay)
 	_entity_owner.stats.ignite_stacks -= decay
+
+
+func _on_regen_tick_timer_timeout() -> void:
+	# Tick Buffer (Expires old stacks)
+	_entity_owner.stats.tick_regen()
+	
+	# Apply Healing
+	var regen_stacks: float = _entity_owner.stats.regen_stacks
+	if regen_stacks > 0:
+		_entity_owner.heal(_entity_owner, regen_stacks, "Regen")

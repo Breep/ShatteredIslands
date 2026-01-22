@@ -9,9 +9,6 @@ var _divine_intervention_triggered: bool = false
 
 var _serenity_stats: FamilySerenityStats # Ref to the owner heal stats
 
-#[REGEN]
-@onready var _regen_tick_timer: Timer = %RegenTickTimer
-
 # ============================== Spells scenes ==============================
 
 # ============================== Public functions ==============================
@@ -27,8 +24,7 @@ func start() -> void:
 	_add_action_modifiers()
 	_add_stat_modifiers()
 	_add_stat_modifiers()
-	_regen_tick_timer.start()
-	
+		
 	# [DIVINE INTERVENTION]
 	if _serenity_stats.divine_intervention_activated:
 		_divine_intervention_triggered = false
@@ -73,7 +69,6 @@ func start() -> void:
 
 	
 func stop() -> void:
-	_regen_tick_timer.stop()
 	_stop_divine_intervention()
 	_stop_rejuvenative_faith()
 	_stop_warm_aura()
@@ -425,18 +420,6 @@ func _on_action_done_corrupted_light(_entity_ref: Entity, _target: Entity, actio
 		
 	# print("DEBUG: Corrupted Light - Dealing ", damage_amount, " to ", enemy.name)
 	_owner.direct_attack(enemy, damage_amount, Utils.DamageType.MAGICAL, "Corrupted Light")
-#endregion
-
-#region ============== REGEN ==================
-#region ============== REGEN ==================
-func _on_regen_tick_timer_timeout() -> void:
-	# Tick Buffer (Expires old stacks)
-	_owner.stats.tick_regen()
-	
-	# Apply Healing
-	var regen_stacks: float = _owner.stats.regen_stacks
-	if regen_stacks > 0:
-		_owner.heal(_owner, regen_stacks, "Regen")
 #endregion
 
 #region ============== DIVINE INTERVENTION ==================
