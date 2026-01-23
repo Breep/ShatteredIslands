@@ -103,6 +103,7 @@ var target_module: TargetModule
 var auto_attack_modifier_registry: AutoAttackModifierRegistry
 var action_modifiers_registry: ActionModifiersRegistry
 var stat_modifiers_registry: EntityStatModifiersRegistry
+var stack_modifiers_registry: StackModifiersRegistry
 #endregion
 
 #region ============================== Private variables ==============================
@@ -166,6 +167,7 @@ func _entity_init() -> void:
 	# Default Modifier Registries
 	auto_attack_modifier_registry = AutoAttackModifierRegistry.new()
 	action_modifiers_registry = ActionModifiersRegistry.new()
+	stack_modifiers_registry = StackModifiersRegistry.new()
 
 
 func _enter_tree() -> void:
