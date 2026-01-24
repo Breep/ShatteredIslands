@@ -39,12 +39,13 @@ func tick() -> float:
 
 
 func get_reduced_damage_taken(damage: float, damage_type: Utils.DamageType) -> float:
-	var efficiency: float = _efficiencies.get(damage_type, 0.0)
-	if efficiency == 0:
-		return damage
+	if _total_stacks <= 0: return damage
 	
-	var blockable_damage: float = _total_stacks * efficiency
-	var damage_reduction: float = min(damage, blockable_damage)
+	var efficiency: float = _efficiencies.get(damage_type, 0.0)
+	if efficiency == 0: return damage
+	
+	var blockable_damage: float = _total_stacks
+	var damage_reduction: float = min(damage, blockable_damage) * efficiency
 	var damage_reduced: float = damage - damage_reduction
 	
 	# Check if shield is consumed (Absorption Matrix logic)
@@ -52,7 +53,7 @@ func get_reduced_damage_taken(damage: float, damage_type: Utils.DamageType) -> f
 		return damage_reduced
 	
 	# Consume shield
-	var shield_broken_amount: float = damage_reduction / efficiency
+	var shield_broken_amount: float = damage_reduction
 	_total_stacks -= shield_broken_amount
 	shield_stack_broken.emit(shield_broken_amount)
 	return damage_reduced

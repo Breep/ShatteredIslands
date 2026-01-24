@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_card_template"]
 [ext_resource type="Script" uid="uid://cmj4l5m1j0g2p" path="res://Card/Descriptions/Cards/Defense/Common/ToxicFiltrationLayer/defense_toxic_filtration_layer.gd" id="2_upgrade_logic"]
 
-[sub_resource type="Resource" id="Resource_upgrade"]
+[sub_resource type="Resource" id="Resource_m26y3"]
 script = ExtResource("2_upgrade_logic")
 _base_efficiency = Array[float]([20.0, 30.0, 40.0, 50.0, 70.0])
 
@@ -13,4 +13,4 @@ script = ExtResource("1_card_template")
 name = "Toxic Filtration Layer"
 picture = ExtResource("1_a2mxx")
 families = Array[int]([2, 7])
-player_upgrade = SubResource("Resource_upgrade")
+player_upgrade = SubResource("Resource_m26y3")
