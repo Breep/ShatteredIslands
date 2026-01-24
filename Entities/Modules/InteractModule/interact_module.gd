@@ -50,6 +50,7 @@ func take_damage_percent(damage_percent: float, percent_modifier: Utils.PercentM
 	return take_damage(damage, damage_type, is_critical, action_id, source)
 #endregion
 
+
 #region ============================== Condition stacks ==============================
 func take_condition_stacks(stacks_number: float, stack_type: Utils.StackType, is_critical: bool, action_id: StringName, source: Entity = null, duration: float = 5.0) -> float:
 	if _owner.stats.health <= 0 or _owner.is_dead: return -1.0
@@ -67,6 +68,7 @@ func take_condition_stacks(stacks_number: float, stack_type: Utils.StackType, is
 	_owner.signal_interaction_received(source, Utils.stack_to_action(stack_type), action_id, stacks_number, is_critical)
 	return stacks_number
 #endregion
+
 
 #region ============================== Heal ==============================
 func take_heal(heal_amount: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:

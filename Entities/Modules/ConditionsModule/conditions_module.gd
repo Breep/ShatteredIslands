@@ -14,6 +14,7 @@ signal ignite_stacks_changed(new_value: float)
 signal shield_stacks_changed(new_value: float)
 signal regen_stacks_changed(new_value: float)
 signal necrosis_stacks_changed(new_value: float)
+signal shield_stack_broken(amount: float)
 #endregion
 
 #region ============================== Private variables ==============================
@@ -61,6 +62,7 @@ func init(owner: Entity) -> ConditionsModule:
 	_shield_stack.stacks_changed.connect(_on_shield_stacks_changed)
 	_regen_stack.stacks_changed.connect(_on_regen_stacks_changed)
 	_necrosis_stack.stacks_changed.connect(_on_necrosis_stacks_changed)
+	_shield_stack.shield_stack_broken.connect(_on_shield_stack_broken)
 	
 	return self
 
@@ -182,4 +184,8 @@ func _on_regen_stacks_changed(new_value: float) -> void:
 
 func _on_necrosis_stacks_changed(new_value: float) -> void:
 	necrosis_stacks_changed.emit(new_value)
+
+
+func _on_shield_stack_broken(amount: float) -> void:
+	shield_stack_broken.emit(amount)
 #endregion

@@ -24,11 +24,11 @@ var _aether_redirector_ready: bool = true
 # [PROTECTIVE DOME]
 var _protective_dome_modifier_active: bool = false
 
-
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
 	_defense_stats = _owner.families_stats.defense
+	_owner.conditions.shield_stack_broken.connect(_on_owner_shield_stack_broken)
 
 # ============================== Public functions ==============================
 
@@ -112,10 +112,6 @@ func stop() -> void:
 	if _aether_redirector_timer != null:
 		_aether_redirector_timer.queue_free()
 		_aether_redirector_timer = null
-	# [AETHER REDIRECTOR]
-	if _aether_redirector_timer != null:
-		_aether_redirector_timer.queue_free()
-		_aether_redirector_timer = null
 	
 	if _owner.fighting_area != null:
 		if _owner.fighting_area.projectile_spawned.is_connected(_on_projectile_spawned_aether_redirector):
@@ -123,53 +119,6 @@ func stop() -> void:
 
 
 	_clear_optional_timers()
-
-# --- Fonctions appelées par le système de dégâts ---
-
-func get_reduced_damage_taken_from_armor(damage: float, damage_type: Utils.DamageType) -> float:
-	if damage_type == Utils.DamageType.POISON:
-		# [TOXIC FILTRATION LAYER]
-		if _defense_stats.toxic_filtration_layer_activated:
-			var efficiency: float = _defense_stats.toxic_filtration_layer_efficiency
-			# We limit the blocking by the efficiency
-			# Usual implementation for "Shield block poison with X% value":
-			# It means X% of the incoming poison damage is treated as blockable by armor.
-			
-			var amount_blockable = damage * (efficiency / 100.0)
-			var amount_bypassing = damage - amount_blockable
-			
-			var damage_reduction = min(amount_blockable, _owner.conditions.shield_stacks)
-			var damage_after_armor = amount_blockable - damage_reduction
-			
-			_owner.conditions.shield_stacks -= damage_reduction
-			
-			# Logic cards on armor loss (Reflecto Belt etc)
-			if damage_reduction > 0:
-				_reflecto_belt_effect(damage_reduction)
-			
-			return amount_bypassing + damage_after_armor
-			
-		return damage
-		
-	var damage_reduction = min(damage, _owner.conditions.shield_stacks)
-	var damage_reduced = damage - damage_reduction
-	
-	# [ABSORPTION MATRIX]
-	var consume_armor = true
-	if _defense_stats.absorption_matrix_activated:
-		if Utils.is_randomize_modifier_active(_defense_stats.absorption_matrix_chance):
-			consume_armor = false
-			# Potential feedback here
-	
-	if consume_armor:
-		# On réduit l'armure
-		_owner.conditions.shield_stacks -= damage_reduction
-			
-		# Logique des cartes sur perte d'armure
-		_reflecto_belt_effect(damage_reduction)
-	
-	return damage_reduced
-
 
 # ============================== Private functions ==============================
 
@@ -274,9 +223,9 @@ func _clear_optional_timers() -> void:
 
 #region ===== OTHER LOGIC =====
 # [REFLECTO BELT]
-func _reflecto_belt_effect(armor_lost: int) -> void:
+func _reflecto_belt_effect(shield_stacks_lost: float) -> void:
 	if not _defense_stats.reflecto_belt_activated: return
-	_reflecto_belt_accumulated_loss += armor_lost
+	_reflecto_belt_accumulated_loss += shield_stacks_lost
 	if _reflecto_belt_accumulated_loss >= _defense_stats.reflecto_belt_shield_threshold:
 		_reflecto_belt_accumulated_loss -= _defense_stats.reflecto_belt_shield_threshold
 		_reflecto_belt_attacks_left += _defense_stats.reflecto_belt_attacks_count
@@ -353,6 +302,9 @@ func _trigger_shield_throw_start() -> void:
 
 # ============================== Callbacks functions ==============================
 
+func _on_owner_shield_stack_broken(shield_stacks_lost: float) -> void:
+	_reflecto_belt_effect(shield_stacks_lost)
+
 # [REFLECTO BELT]
 func _on_attack_reflecto_belt_consumption(_cb_vars: Dictionary) -> void:
 	_reflecto_belt_attacks_left -= 1
@@ -421,7 +373,7 @@ func _on_magnetic_siphon_timer_timeout() -> void:
 	var steal_amount: float = highest_shield * percent / 100.0
 	if steal_amount <= 0:
 		return
-		
+	
 	#TODO changer le steal quand il y aura des modificateurs a cet effet
 	target.conditions.shield_stacks -= steal_amount
 	_owner.inflict_condition_stacks(_owner, steal_amount, Utils.StackType.SHIELD, "Magnetic Siphon")

@@ -11,8 +11,8 @@
 [ext_resource type="Script" uid="uid://nkraydv4mdse" path="res://Card/Templates/player_deck.gd" id="6_fl2p6"]
 [ext_resource type="Resource" uid="uid://c3qf5odp5y6ap" path="res://Card/Descriptions/Cards/Light/Common/LifeSpring/light_life_spring.tres" id="6_oonkp"]
 [ext_resource type="Resource" uid="uid://dvpdubk0btegx" path="res://Card/Descriptions/Cards/Poison/Common/PoisonFlask/poison_poison_flask.tres" id="6_vbhu7"]
-[ext_resource type="Texture2D" uid="uid://dsshpniufwm1f" path="res://Card/Descriptions/Cards/Fire/Common/ExpanseUniverse/fire_expanse_universe.png" id="7_urbv6"]
-[ext_resource type="Script" uid="uid://c1cycap2yrxuj" path="res://Card/Descriptions/Cards/Fire/Common/ExpanseUniverse/fire_expanse_universe.gd" id="8_oonkp"]
+[ext_resource type="Texture2D" uid="uid://dibhj1of0c2qx" path="res://Card/Descriptions/Cards/Defense/Common/ShieldRush/shieldomatic_shield_rush.png" id="8_oonkp"]
+[ext_resource type="Script" uid="uid://bre033jc30lr7" path="res://Card/Descriptions/Cards/Defense/Common/ShieldRush/shieldomatic_shield_rush.gd" id="9_fl2p6"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_d4u4x"]
 size = Vector2(20, 20)
@@ -36,25 +36,23 @@ script = ExtResource("6_fl2p6")
 _active_cards = Array[ExtResource("3_5hdqt")]([ExtResource("6_oonkp"), SubResource("Resource_vbhu7"), ExtResource("6_vbhu7")])
 metadata/_custom_type_script = "uid://nkraydv4mdse"
 
-[sub_resource type="Resource" id="Resource_yobeh"]
-script = ExtResource("8_oonkp")
-_ignite_stacks = Array[float]([4.0, 8.0, 12.0, 16.0, 20.0])
-_period = Array[float]([1.0, 1.0, 1.0, 1.0, 1.0])
-_rarity = 0
-metadata/_custom_type_script = "uid://c1cycap2yrxuj"
+[sub_resource type="Resource" id="Resource_t7xpg"]
+script = ExtResource("9_fl2p6")
+_shield_amount = Array[float]([100.0, 150.0, 200.0, 250.0, 400.0])
+metadata/_custom_type_script = "uid://bre033jc30lr7"
 
-[sub_resource type="Resource" id="Resource_fl2p6"]
+[sub_resource type="Resource" id="Resource_3bpsj"]
 script = ExtResource("3_5hdqt")
-name = "Expanse Universe"
-picture = ExtResource("7_urbv6")
-families = Array[int]([3])
-player_upgrade = SubResource("Resource_yobeh")
-lvl = 3
+name = "Shield Rush"
+picture = ExtResource("8_oonkp")
+families = Array[int]([2])
+player_upgrade = SubResource("Resource_t7xpg")
+lvl = 5
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"
 
 [sub_resource type="Resource" id="Resource_oonkp"]
 script = ExtResource("6_fl2p6")
-_active_cards = Array[ExtResource("3_5hdqt")]([SubResource("Resource_fl2p6")])
+_active_cards = Array[ExtResource("3_5hdqt")]([SubResource("Resource_3bpsj")])
 metadata/_custom_type_script = "uid://nkraydv4mdse"
 
 [node name="PrototypingEntity" type="Node3D"]
