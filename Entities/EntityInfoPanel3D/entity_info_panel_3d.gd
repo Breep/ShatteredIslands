@@ -32,9 +32,17 @@ extends Node3D
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
+	# Early validation - crash if misconfigured
+	if not _owner_entity:
+		Verbose.error("EntityInfoPanel3D: _owner_entity is null! This node is misconfigured.", Verbose.Category.ENTITY)
+		return
+	
+	# Connect entity signals
 	_owner_entity.damage_taken.connect(_on_owner_entity_damage_taken)
 	_owner_entity.heal_taken.connect(_on_owner_entity_heal_taken)
 	_rank_visualizer.connect_entity(_owner_entity)
+	
+	# Duplicate materials to avoid shared material issues
 	if _health_bar and _health_bar.material:
 		_health_bar.material = _health_bar.material.duplicate()
 		_set_health_bar_color_by_team()
@@ -42,35 +50,33 @@ func _ready() -> void:
 		_mana_bar.material = _mana_bar.material.duplicate()
 	if _shield_bar and _shield_bar.material:
 		_shield_bar.material = _shield_bar.material.duplicate()
-	if _owner_entity:
-		var stats = _owner_entity.stats
-		update_health_bar(_owner_entity.stats.health, _owner_entity.stats.health_max)
-		if "mana" in stats and "mana_max" in stats:
-			update_mana_bar(stats.mana, stats.mana_max)
-			if stats.has_signal("mana_changed"):
-				stats.mana_changed.connect(_on_mana_changed)
-			if stats.has_signal("mana_max_changed"):
-				stats.mana_max_changed.connect(_on_mana_max_changed)
-		if "ignite_stacks" in _owner_entity.conditions: _update_ignite_label(_owner_entity.conditions.ignite_stacks)
-		if "necrosis_stacks" in _owner_entity.conditions: _update_necrosis_label(_owner_entity.conditions.necrosis_stacks)
-		if "shield_stacks" in _owner_entity.conditions:
-			_update_shield_bar(_owner_entity.conditions.shield_stacks, stats.health_max)
-		if stats.has_signal("health_changed"): stats.health_changed.connect(_on_health_changed)
-		if stats.has_signal("health_max_changed"): stats.health_max_changed.connect(_on_health_max_changed)
-		if _owner_entity.conditions.has_signal("ignite_stacks_changed"):
-			_owner_entity.conditions.ignite_stacks_changed.connect(_update_ignite_label)
-		if _owner_entity.conditions.has_signal("necrosis_stacks_changed"):
-			_owner_entity.conditions.necrosis_stacks_changed.connect(_update_necrosis_label)
-		if _owner_entity.conditions.has_signal("shield_stacks_changed"):
-			_owner_entity.conditions.shield_stacks_changed.connect(_on_armor_changed)
-		if _owner_entity.conditions.has_signal("poison_stacks_changed"):
-			_owner_entity.conditions.poison_stacks_changed.connect(_update_poison_label)
-		if _owner_entity.conditions.has_signal("regen_stacks_changed"):
-			_owner_entity.conditions.regen_stacks_changed.connect(_update_regen_label)
-		
-		# Valid initial update
-		if "poison_stacks" in _owner_entity.conditions: _update_poison_label(_owner_entity.conditions.poison_stacks)
-		if "regen_stacks" in _owner_entity.conditions: _update_regen_label(_owner_entity.conditions.regen_stacks)
+	
+	var stats = _owner_entity.stats
+	var conditions = _owner_entity.conditions
+	
+	# Initialize health/mana bars
+	update_health_bar(stats.health, stats.health_max)
+	update_mana_bar(stats.mana, stats.mana_max)
+	
+	# Connect stat signals
+	stats.health_changed.connect(_on_health_changed)
+	stats.health_max_changed.connect(_on_health_max_changed)
+	stats.mana_changed.connect(_on_mana_changed)
+	stats.mana_max_changed.connect(_on_mana_max_changed)
+	
+	# Initialize stack displays
+	_update_ignite_label(conditions.ignite_stacks)
+	_update_necrosis_label(conditions.necrosis_stacks)
+	_update_poison_label(conditions.poison_stacks)
+	_update_regen_label(conditions.regen_stacks)
+	_update_shield_bar(conditions.shield_stacks, stats.health_max)
+	
+	# Connect condition signals
+	conditions.ignite_stacks_changed.connect(_update_ignite_label)
+	conditions.necrosis_stacks_changed.connect(_update_necrosis_label)
+	conditions.shield_stacks_changed.connect(_on_armor_changed)
+	conditions.poison_stacks_changed.connect(_update_poison_label)
+	conditions.regen_stacks_changed.connect(_update_regen_label)
 # ============================== Public ==============================
 
 func update_health_bar(health: float, health_max: float) -> void:
