@@ -26,7 +26,7 @@ func _ready() -> void:
 	_visual.scale = Vector3.ZERO
 	stats.health_max = _max_health
 	stats.health = stats.health_max
-	stats.shield_stacks = _initial_shield
+	conditions.add_stack(Stack.Type.SHIELD, _shield_amount, self, "Field Generator")
 	stats.health_changed.connect(_on_stats_health_changed)
 	
 	# Visual pop

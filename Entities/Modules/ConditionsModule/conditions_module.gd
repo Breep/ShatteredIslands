@@ -43,7 +43,6 @@ var ignite_stacks: float:
 
 var shield_stacks: float:
 	get: return _shield_stack.total_stacks
-	set(value): _shield_stack._total_stacks = value  # Direct setter for legacy code
 
 var regen_stacks: float:
 	get: return _regen_stack.total_stacks
