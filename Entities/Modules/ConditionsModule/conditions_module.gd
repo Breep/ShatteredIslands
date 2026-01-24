@@ -96,6 +96,11 @@ func _get_stack(type: Stack.Type) -> Stack:
 			return null
 
 
+## Get the shield stack instance for configuration (e.g., setting efficiencies)
+func get_shield_stack() -> ShieldStack:
+	return _shield_stack
+
+
 ## Add stacks to an entity
 func add_stack(stack_type: Stack.Type, value: float, source: Entity, action_id: StringName, mod: Dictionary = {}) -> void:
 	var stack = _get_stack(stack_type)

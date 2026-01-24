@@ -124,6 +124,18 @@ func stop() -> void:
 
 #region ===== BATTLE START EFFECTS =====
 func _lanch_on_battle_start_effects() -> void:
+	# Configure shield behavior based on active cards
+	var shield_stack: ShieldStack = _owner.conditions.get_shield_stack()
+	
+	# [TOXIC FILTRATION LAYER] - Allow shield to block poison damage
+	if _defense_stats.toxic_filtration_layer_activated:
+		var efficiency: float = _defense_stats.toxic_filtration_layer_efficiency / 100.0
+		shield_stack.set_efficiency(Utils.DamageType.POISON, efficiency)
+	
+	# [ABSORPTION MATRIX] - Chance to not consume shield
+	if _defense_stats.absorption_matrix_activated:
+		shield_stack.set_free_use_chance(_defense_stats.absorption_matrix_chance)
+	
 	# [SHIELD RUSH]
 	if _defense_stats.shield_rush_activated:
 		if _owner != null and is_instance_valid(_owner):
