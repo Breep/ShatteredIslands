@@ -380,7 +380,7 @@ func _on_action_overhealed_overflowing_light(_entity_ref: Entity, target: Entity
 	if shield_percent > 0:
 		var shield_amount = amount * (shield_percent / 100.0)
 		if shield_amount > 0:
-			_owner.inflict_condition_stacks(target, shield_amount, Utils.StackType.ARMOR, "Overflowing Light")
+			_owner.inflict_condition_stacks(target, shield_amount, Utils.StackType.SHIELD, "Overflowing Light")
 #endregion
 
 #region ============== RADIANT OVERFLOW ==================
@@ -392,7 +392,7 @@ func _on_before_heal_radiant_overflow(cb_vars: Dictionary) -> void:
 	var target = cb_vars[ActionModifier.VarType.TARGET]
 	if target == null or not is_instance_valid(target): return
 	
-	var regen_stacks: float = target.stats.regen_stacks
+	var regen_stacks: float = target.conditions.regen_stacks
 	if regen_stacks <= 0: return
 	
 	var ratio: float = _serenity_stats.serenity_radiant_overflow_ratio

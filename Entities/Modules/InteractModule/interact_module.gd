@@ -1,17 +1,12 @@
 class_name InteractModule
 extends Module
 
-@export var _defense_manager: DefenseManager
-
-
 var _dodge_number: int = 0
 
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	if _defense_manager == null and _owner is Hero:
-		printerr("InteractModule: Not linked to a DefenseManager [", get_path(), "]")
-	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
+	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed) #TODO Remove this or add RESET
 
 # ============================== Public function ==============================
 
@@ -28,7 +23,7 @@ func take_damage(damage: float, damage_type: Utils.DamageType, is_critical: bool
 			damage *= _get_crit_resistance_multiplier(Utils.damage_to_action(damage_type))
 		
 		damage_before_armor = damage
-		if _defense_manager != null: damage = _defense_manager.get_reduced_damage_taken_from_armor(damage, damage_type) # Reduce flat of PHYSIC AND MAGIC damage
+		damage = _owner.conditions.get_shield_reduced_damage(damage, damage_type) # Reduce flat of PHYSIC AND MAGIC damage
 
 
 	_owner.stats.health -= damage
@@ -63,12 +58,11 @@ func take_condition_stacks(stacks_number: float, stack_type: Utils.StackType, is
 			return 0.0
 		stacks_number *= _get_resistance_vulnerability_multiplier(Utils.stack_to_action(stack_type))
 	
-	match stack_type:
-		Utils.StackType.POISON: _owner.stats.poison_stacks += stacks_number
-		Utils.StackType.IGNITE: _owner.stats.ignite_stacks += stacks_number
-		Utils.StackType.ARMOR: _owner.stats.armor_stacks += stacks_number
-		Utils.StackType.REGEN: _owner.stats.add_regen_stack(stacks_number, int(duration), source, action_id)
-		Utils.StackType.NECROSIS: _owner.stats.necrosis_stacks += stacks_number
+	var stack_enum: Stack.Type = _utils_stack_to_stack_type(stack_type)
+	var mod: Dictionary = {}
+	if stack_type == Utils.StackType.REGEN:
+		mod[Stack.ModifierType.DURATION] = int(duration)
+	_owner.conditions.add_stack(stack_enum, stacks_number, source, action_id, mod)
 	_owner.signal_stack_taken(stack_type, stacks_number, is_critical)
 	_owner.signal_interaction_received(source, Utils.stack_to_action(stack_type), action_id, stacks_number, is_critical)
 	return stacks_number
@@ -83,10 +77,10 @@ func take_heal(heal_amount: float, is_critical: bool, action_id: StringName, sou
 		heal_amount *= _get_resistance_vulnerability_multiplier(Utils.ActionType.UTILITY_HEAL)
 	
 	# Necrosis logic
-	var necrosis_stacks: float = _owner.stats.necrosis_stacks
+	var necrosis_stacks: float = _owner.conditions.necrosis_stacks
 	if necrosis_stacks > 0:
 		var absorbed_amount: float = min(heal_amount, necrosis_stacks)
-		_owner.stats.necrosis_stacks -= absorbed_amount
+		_owner.conditions.remove_stack(Stack.Type.NECROSIS, absorbed_amount)
 		heal_amount -= absorbed_amount
 		
 		# Feedback for absorption (optional but good for clarity)
@@ -115,25 +109,25 @@ func take_cleanse(value: float, is_critical: bool, action_id: StringName, source
 	
 	var remaining: int = int(total_to_dispell)
 	var removed: int = 0
-	while remaining > 0 and _owner.stats.get_debuf_stacks_number() > 0:
+	while remaining > 0 and _owner.conditions.get_debuff_stacks() > 0:
 		var candidates: Array[Utils.StackType] = []
-		if _owner.stats.ignite_stacks > 0: candidates.append(Utils.StackType.IGNITE)
-		if _owner.stats.poison_stacks > 0: candidates.append(Utils.StackType.POISON)
-		if _owner.stats.necrosis_stacks > 0: candidates.append(Utils.StackType.NECROSIS)
+		if _owner.conditions.ignite_stacks > 0: candidates.append(Utils.StackType.IGNITE)
+		if _owner.conditions.poison_stacks > 0: candidates.append(Utils.StackType.POISON)
+		if _owner.conditions.necrosis_stacks > 0: candidates.append(Utils.StackType.NECROSIS)
 		if candidates.is_empty():
 			break
 		var stack_chosen: Utils.StackType = candidates[randi() % candidates.size()]
 		var to_remove: int = min(CLEANSE_PACK_SIZE, remaining)
 		match stack_chosen:
 			Utils.StackType.IGNITE:
-				to_remove = min(to_remove, _owner.stats.ignite_stacks)
-				_owner.stats.ignite_stacks -= to_remove
+				to_remove = min(to_remove, _owner.conditions.ignite_stacks)
+				_owner.conditions.remove_stack(Stack.Type.IGNITE, to_remove)
 			Utils.StackType.POISON:
-				to_remove = min(to_remove, _owner.stats.poison_stacks)
-				_owner.stats.poison_stacks -= to_remove
+				to_remove = min(to_remove, _owner.conditions.poison_stacks)
+				_owner.conditions.remove_stack(Stack.Type.POISON, to_remove)
 			Utils.StackType.NECROSIS:
-				to_remove = min(to_remove, _owner.stats.necrosis_stacks)
-				_owner.stats.necrosis_stacks -= to_remove
+				to_remove = min(to_remove, _owner.conditions.necrosis_stacks)
+				_owner.conditions.remove_stack(Stack.Type.NECROSIS, to_remove)
 		remaining -= to_remove
 		removed += to_remove
 	_owner.signal_interaction_received(source, Utils.ActionType.UTILITY_CLEANSE, action_id, removed, is_critical)
@@ -148,21 +142,21 @@ func take_dispell(value: float, is_critical: bool, action_id: StringName, source
 	
 	var remaining: int = int(total_to_dispell)
 	var removed: int = 0
-	while remaining > 0 and _owner.stats.get_buf_stacks_number() > 0:
+	while remaining > 0 and _owner.conditions.get_buff_stacks() > 0:
 		var candidates: Array[Utils.StackType] = []
-		if _owner.stats.armor_stacks > 0: candidates.append(Utils.StackType.ARMOR)
-		if _owner.stats.regen_stacks > 0: candidates.append(Utils.StackType.REGEN)
+		if _owner.conditions.shield_stacks > 0: candidates.append(Utils.StackType.SHIELD)
+		if _owner.conditions.regen_stacks > 0: candidates.append(Utils.StackType.REGEN)
 		if candidates.is_empty():
 			break
 		var stack_chosen: Utils.StackType = candidates[randi() % candidates.size()]
 		var to_remove: int = min(CLEANSE_PACK_SIZE, remaining)
 		match stack_chosen:
-			Utils.StackType.ARMOR:
-				to_remove = min(to_remove, _owner.stats.armor_stacks)
-				_owner.stats.armor_stacks -= to_remove
+			Utils.StackType.SHIELD:
+				to_remove = min(to_remove, _owner.conditions.shield_stacks)
+				_owner.conditions.remove_stack(Stack.Type.SHIELD, to_remove)
 			Utils.StackType.REGEN:
-				to_remove = min(to_remove, _owner.stats.regen_stacks)
-				_owner.stats.regen_stacks -= to_remove
+				to_remove = min(to_remove, _owner.conditions.regen_stacks)
+				_owner.conditions.remove_stack(Stack.Type.REGEN, to_remove)
 		remaining -= to_remove
 		removed += to_remove
 	_owner.signal_interaction_received(source, Utils.ActionType.UTILITY_DISPELL, action_id, removed, is_critical)
@@ -193,6 +187,19 @@ func _get_crit_resistance_multiplier(action_type: Utils.ActionType) -> float:
 	# Assuming standard resistance formula: 100 / (100 + res)
 	# If we want to support "Crit Vulnerability" later, we could add it here too.
 	return 100.0 / (100.0 + res)
+
+
+## Helper to convert Utils.StackType to Stack.Type
+func _utils_stack_to_stack_type(utils_type: Utils.StackType) -> Stack.Type:
+	match utils_type:
+		Utils.StackType.POISON: return Stack.Type.POISON
+		Utils.StackType.IGNITE: return Stack.Type.IGNITE
+		Utils.StackType.SHIELD: return Stack.Type.SHIELD
+		Utils.StackType.REGEN: return Stack.Type.REGEN
+		Utils.StackType.NECROSIS: return Stack.Type.NECROSIS
+		_:
+			printerr("InteractModule: Unknown Utils.StackType [", utils_type, "]")
+			return Stack.Type.POISON
 #endregion
 
 

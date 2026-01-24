@@ -46,9 +46,9 @@ func start() -> void:
 	# [PROTECTIVE DOME]
 	if _defense_stats.protective_dome_activated:
 		_protective_dome_modifier_active = false
-		if not _owner.stats.armor_stacks_changed.is_connected(_on_owner_armor_stacks_changed):
-			_owner.stats.armor_stacks_changed.connect(_on_owner_armor_stacks_changed)
-		_update_protective_dome_modifier(_owner.stats.armor_stacks)
+		if not _owner.conditions.shield_stacks_changed.is_connected(_on_owner_shield_stacks_changed):
+			_owner.conditions.shield_stacks_changed.connect(_on_owner_shield_stacks_changed)
+		_update_protective_dome_modifier(_owner.conditions.shield_stacks)
 	
 	# [REACTIVE COVER]
 	if _defense_stats.reactive_cover_activated:
@@ -58,11 +58,11 @@ func start() -> void:
 	# [SHIELD THROW]
 	if _defense_stats.shield_throw_activated:
 		_shield_throw_accumulated = 0
-		_shield_throw_last_armor = _owner.stats.armor_stacks
+		_shield_throw_last_armor = _owner.conditions.shield_stacks
 		_shield_throw_lock = false
 		
-		if not _owner.stats.armor_stacks_changed.is_connected(_on_owner_armor_stacks_changed):
-			_owner.stats.armor_stacks_changed.connect(_on_owner_armor_stacks_changed)
+		if not _owner.conditions.shield_stacks_changed.is_connected(_on_owner_shield_stacks_changed):
+			_owner.conditions.shield_stacks_changed.connect(_on_owner_shield_stacks_changed)
 
 	# [FIELD GENERATOR]
 	if _defense_stats.defense_field_generator_activated:
@@ -96,8 +96,8 @@ func start() -> void:
 func stop() -> void:
 	# [SHIELD THROW]
 	if _defense_stats.shield_throw_activated:
-		if _owner.stats.armor_stacks_changed.is_connected(_on_owner_armor_stacks_changed):
-			_owner.stats.armor_stacks_changed.disconnect(_on_owner_armor_stacks_changed)
+		if _owner.conditions.shield_stacks_changed.is_connected(_on_owner_shield_stacks_changed):
+			_owner.conditions.shield_stacks_changed.disconnect(_on_owner_shield_stacks_changed)
 	
 	# [REFLECTO BELT] Nettoyage
 	if _defense_stats.reflecto_belt_activated and _is_reflecto_belt_activated:
@@ -138,10 +138,10 @@ func get_reduced_damage_taken_from_armor(damage: float, damage_type: Utils.Damag
 			var amount_blockable = damage * (efficiency / 100.0)
 			var amount_bypassing = damage - amount_blockable
 			
-			var damage_reduction = min(amount_blockable, _owner.stats.armor_stacks)
+			var damage_reduction = min(amount_blockable, _owner.conditions.shield_stacks)
 			var damage_after_armor = amount_blockable - damage_reduction
 			
-			_owner.stats.armor_stacks -= damage_reduction
+			_owner.conditions.shield_stacks -= damage_reduction
 			
 			# Logic cards on armor loss (Reflecto Belt etc)
 			if damage_reduction > 0:
@@ -151,7 +151,7 @@ func get_reduced_damage_taken_from_armor(damage: float, damage_type: Utils.Damag
 			
 		return damage
 		
-	var damage_reduction = min(damage, _owner.stats.armor_stacks)
+	var damage_reduction = min(damage, _owner.conditions.shield_stacks)
 	var damage_reduced = damage - damage_reduction
 	
 	# [ABSORPTION MATRIX]
@@ -163,7 +163,7 @@ func get_reduced_damage_taken_from_armor(damage: float, damage_type: Utils.Damag
 	
 	if consume_armor:
 		# On réduit l'armure
-		_owner.stats.armor_stacks -= damage_reduction
+		_owner.conditions.shield_stacks -= damage_reduction
 			
 		# Logique des cartes sur perte d'armure
 		_reflecto_belt_effect(damage_reduction)
@@ -179,7 +179,7 @@ func _lanch_on_battle_start_effects() -> void:
 	if _defense_stats.shield_rush_activated:
 		if _owner != null and is_instance_valid(_owner):
 			var amount: int = int(_defense_stats.shield_rush_amount)
-			_owner.inflict_condition_stacks(_owner, amount, Utils.StackType.ARMOR, "Shield Rush")
+			_owner.inflict_condition_stacks(_owner, amount, Utils.StackType.SHIELD, "Shield Rush")
 #endregion
 
 #region ===== ACTION MODIFIERS =====
@@ -222,7 +222,7 @@ func _add_stat_modifiers() -> void:
 		var mod := StatModifier.new()
 		mod.id = "Avengers Assemble"
 		mod.stat_type = EntityStats.StatType.CRIT_CHANCE
-		mod.action_type = Utils.ActionType.STACK_ARMOR
+		mod.action_type = Utils.ActionType.STACK_SHIELD
 		mod.calc_type = StatModifier.CalcType.ADD
 		mod.value = _defense_stats.avengers_assemble_crit_chance
 		mod.tags = [StatModifier.TagType.CARD]
@@ -242,7 +242,7 @@ func _clear_stat_modifiers() -> void:
 		var mod := StatModifier.new()
 		mod.id = "Avengers Assemble"
 		mod.stat_type = EntityStats.StatType.CRIT_CHANCE
-		mod.action_type = Utils.ActionType.STACK_ARMOR
+		mod.action_type = Utils.ActionType.STACK_SHIELD
 		_owner.stat_modifiers_registry.unregister_modifier(mod)
 		
 #endregion
@@ -375,7 +375,7 @@ func _on_force_field_timer_timeout() -> void:
 		var percent: float = _defense_stats.force_field_lost_hp_percent
 		var armor_gain: int = int(float(lost_hp) * (percent / 100.0))
 		if armor_gain > 0:
-			_owner.inflict_condition_stacks(_owner, armor_gain, Utils.StackType.ARMOR, "Force Field")
+			_owner.inflict_condition_stacks(_owner, armor_gain, Utils.StackType.SHIELD, "Force Field")
 
 
 func _on_dodge_evasive_barrier(_cb_vars: Dictionary) -> void:
@@ -383,7 +383,7 @@ func _on_dodge_evasive_barrier(_cb_vars: Dictionary) -> void:
 	if _owner == null or not is_instance_valid(_owner): return
 	
 	var amount: float = _defense_stats.evasive_barrier_shield_gain
-	_owner.inflict_condition_stacks(_owner, amount, Utils.StackType.ARMOR, "Evasive Barrier")
+	_owner.inflict_condition_stacks(_owner, amount, Utils.StackType.SHIELD, "Evasive Barrier")
 
 
 func _on_energy_barrier_timer_timeout() -> void:
@@ -392,10 +392,10 @@ func _on_energy_barrier_timer_timeout() -> void:
 		return
 		
 	var amount: int = int(_defense_stats.energy_barrier_shield_amount)
-	_owner.inflict_condition_stacks(_owner, amount, Utils.StackType.ARMOR, "Energy Barrier")
+	_owner.inflict_condition_stacks(_owner, amount, Utils.StackType.SHIELD, "Energy Barrier")
 
 
-func _on_owner_armor_stacks_changed(new_val: int) -> void:
+func _on_owner_shield_stacks_changed(new_val: int) -> void:
 	# [PROTECTIVE DOME]
 	if _defense_stats.protective_dome_activated:
 		_update_protective_dome_modifier(new_val)
@@ -413,7 +413,7 @@ func _on_magnetic_siphon_timer_timeout() -> void:
 	
 	if target == null or not is_instance_valid(target):
 		return
-	var highest_shield: float = target.stats.armor_stacks
+	var highest_shield: float = target.conditions.shield_stacks
 	if highest_shield <= 0:
 		return
 
@@ -423,8 +423,8 @@ func _on_magnetic_siphon_timer_timeout() -> void:
 		return
 		
 	#TODO changer le steal quand il y aura des modificateurs a cet effet
-	target.stats.armor_stacks -= steal_amount
-	_owner.inflict_condition_stacks(_owner, steal_amount, Utils.StackType.ARMOR, "Magnetic Siphon")
+	target.conditions.shield_stacks -= steal_amount
+	_owner.inflict_condition_stacks(_owner, steal_amount, Utils.StackType.SHIELD, "Magnetic Siphon")
 	
 func _on_aegis_resonator_timer_timeout() -> void:
 	# [AEGIS RESONATOR]
@@ -444,9 +444,9 @@ func _on_aegis_resonator_timer_timeout() -> void:
 	for ally in allies:
 		if ally != null and is_instance_valid(ally):
 			if ally == _owner:
-				_owner.inflict_condition_stacks(_owner, shield_per_ally, Utils.StackType.ARMOR, "Resonator")
+				_owner.inflict_condition_stacks(_owner, shield_per_ally, Utils.StackType.SHIELD, "Resonator")
 			else:
-				ally.stats.armor_stacks += shield_per_ally
+				ally.conditions.shield_stacks += shield_per_ally
 
 
 # [SHIELD THROW] - Impact
@@ -461,8 +461,8 @@ func _on_hit_shield_throw(cb_vars: Dictionary) -> void:
 	
 	var shield_return: float = _defense_stats.shield_throw_return_shield
 	if shield_return > 0:
-		_owner.inflict_condition_stacks(_owner, shield_return, Utils.StackType.ARMOR, "Shield Throw")
-		_shield_throw_last_armor = _owner.stats.armor_stacks
+		_owner.inflict_condition_stacks(_owner, shield_return, Utils.StackType.SHIELD, "Shield Throw")
+		_shield_throw_last_armor = _owner.conditions.shield_stacks
 
 
 # [REACTIVE COVER]
@@ -471,7 +471,7 @@ func _on_owner_damage_taken(_entity: Entity, damage: float, _damage_type: Utils.
 	
 	var chance: float = _defense_stats.reactive_cover_chance
 	if Utils.is_randomize_modifier_active(chance):
-		_owner.inflict_condition_stacks(_owner, _defense_stats.reactive_cover_shield_amount, Utils.StackType.ARMOR, "Reactive Cover")
+		_owner.inflict_condition_stacks(_owner, _defense_stats.reactive_cover_shield_amount, Utils.StackType.SHIELD, "Reactive Cover")
 
 
 # [AETHER REDIRECTOR]
@@ -492,7 +492,7 @@ func _on_projectile_spawned_aether_redirector(source: Entity, target: Entity, pr
 	
 	# Gain Shield
 	print("[AETHER REDIRECTOR] Applying shield: ", _defense_stats.aether_redirector_shield_amount)
-	_owner.inflict_condition_stacks(_owner, _defense_stats.aether_redirector_shield_amount, Utils.StackType.ARMOR, "Aether Redirector")
+	_owner.inflict_condition_stacks(_owner, _defense_stats.aether_redirector_shield_amount, Utils.StackType.SHIELD, "Aether Redirector")
 
 
 func _on_aether_redirector_cooldown_finished() -> void:

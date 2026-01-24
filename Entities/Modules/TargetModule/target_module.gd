@@ -220,7 +220,7 @@ func _get_highest_shield(entities: Array[Entity], excluded_entity: Entity) -> En
 	var highest_shield_entity = entities_copy[0]
 	for entity in entities_copy:
 		if entity != _owner:
-			if entity.stats.armor_stacks > highest_shield_entity.stats.armor_stacks :
+			if entity.conditions.shield_stacks > highest_shield_entity.conditions.shield_stacks :
 				highest_shield_entity = entity
 	
 	return highest_shield_entity

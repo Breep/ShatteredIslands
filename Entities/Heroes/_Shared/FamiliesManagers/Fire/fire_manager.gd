@@ -244,7 +244,7 @@ func _on_kuiper_belt_meteor_hit(_cb_vars: Dictionary) -> void:
 	if _owner == null or not is_instance_valid(_owner): return
 	var amount: int = int(_fire_stats.kuiper_belt_shield_amount)
 	if amount > 0:
-		_owner.inflict_condition_stacks(_owner, amount, Utils.StackType.ARMOR, "Kuiper Belt")
+		_owner.inflict_condition_stacks(_owner, amount, Utils.StackType.SHIELD, "Kuiper Belt")
 #endregion
 
 #region ========== COSMIC BOLT ==========
@@ -271,7 +271,7 @@ func _on_hit_cosmic_bolt(cb_vars: Dictionary) -> void:
 	if target == null or not is_instance_valid(target) or target.is_queued_for_deletion(): return
 	
 	# --- 1. Dégâts ---
-	var ignite_stacks: float = target.stats.ignite_stacks
+	var ignite_stacks: float = target.conditions.ignite_stacks
 	var dmg_mult: float = _fire_stats.cosmic_bolt_damage_per_stack
 	var damage: float = ignite_stacks * dmg_mult
 	
@@ -294,7 +294,7 @@ func _on_end_of_the_world_meteor_hit(cb_vars: Dictionary) -> void:
 	var _entities_inside: Array = cb_vars.get(Meteor.VarType.ENTITIES_INSIDE, [])
 	for entity: Entity in _entities_inside:
 		var hp = entity.stats.health
-		var ignite_stacks = entity.stats.ignite_stacks
+		var ignite_stacks = entity.conditions.ignite_stacks
 		var stack_multiplier = _fire_stats.end_of_the_world_stack_multiplier
 		if entity.team != _owner.team and hp <= ignite_stacks * stack_multiplier:
 			entity.stats.health = 0
@@ -310,7 +310,7 @@ func _on_apocalypse_meteor_hit(cb_vars: Dictionary) -> void:
 		if entity == null or not is_instance_valid(entity) or entity.is_dead: continue
 		if entity.team == _owner.team: continue
 		
-		var ignite_stacks = entity.stats.ignite_stacks
+		var ignite_stacks = entity.conditions.ignite_stacks
 		if ignite_stacks > 0:
 			var bonus_damage = ignite_stacks * ratio
 			_owner.direct_attack(entity, bonus_damage, Utils.DamageType.MAGICAL, "Apocalypse")

@@ -166,7 +166,7 @@ func _map_interaction(receiver: Entity, source: Entity, action_type: Utils.Actio
 		Utils.ActionType.UTILITY_STUN: Verbose.warn("Stun not implemented", Verbose.Category.BATTLE_READER)
 		Utils.ActionType.UTILITY_CLEANSE: receiver.take_cleanse(value, is_critical, action_id, source)
 		Utils.ActionType.UTILITY_DISPELL: receiver.take_dispell(value, is_critical, action_id, source)
-		Utils.ActionType.STACK_ARMOR: receiver.take_condition_stacks(value, Utils.StackType.ARMOR, is_critical, action_id, source)
+		Utils.ActionType.STACK_SHIELD: receiver.take_condition_stacks(value, Utils.StackType.SHIELD, is_critical, action_id, source)
 		Utils.ActionType.STACK_IGNITE: receiver.take_condition_stacks(value, Utils.StackType.IGNITE, is_critical, action_id, source)
 		Utils.ActionType.STACK_POISON: receiver.take_condition_stacks(value, Utils.StackType.POISON, is_critical, action_id, source)
 		Utils.ActionType.STACK_REGEN: receiver.take_condition_stacks(value, Utils.StackType.REGEN, is_critical, action_id, source)

@@ -314,7 +314,7 @@ func _apply_dynamo_effect() -> void:
 	var base_shield: float = _storm_stats.dynamo_shield
 	var final_shield: float = base_shield * rank_mult
 	if final_shield > 0:
-		_owner.inflict_condition_stacks(_owner, final_shield, Utils.StackType.ARMOR, "Dynamo")
+		_owner.inflict_condition_stacks(_owner, final_shield, Utils.StackType.SHIELD, "Dynamo")
 		
 # [EYE OF THE CYCLONE]
 func _apply_eye_of_the_cyclone_effect() -> void:
@@ -498,7 +498,7 @@ func _apply_schrodinger_storm_effect() -> void:
 		# Good Stacks: ARMOR, REGEN
 		# 50/50 split
 		if randf() < 0.5:
-			stack_type = Utils.StackType.ARMOR
+			stack_type = Utils.StackType.SHIELD
 			final_amount *= 2.0 # Multiplier x2
 		else:
 			stack_type = Utils.StackType.REGEN

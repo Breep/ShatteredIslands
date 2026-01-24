@@ -45,7 +45,7 @@ func _on_deal_damage_button_pressed() -> void:
 		var armor_stacks_lost: int = min(damage, _armor_stacks)
 		_health -= (damage - armor_stacks_lost)
 		_armor_stacks -= armor_stacks_lost
-		_ui_health_bar.armor_stacks = _armor_stacks
+		_ui_health_bar.shield_stacks = _armor_stacks
 		_ui_health_bar.current_health = _health
 
 
@@ -59,4 +59,4 @@ func _on_armor_button_pressed() -> void:
 	var armor_stacks:= int(_armor_stacks_text_edit.text)
 	if armor_stacks >= 0:
 		_armor_stacks = armor_stacks
-		_ui_health_bar.armor_stacks = armor_stacks
+		_ui_health_bar.shield_stacks = armor_stacks

@@ -15,14 +15,15 @@ var _buffer: Array[Dictionary] = []
 var _cursor: int = 0
 
 #region ============================== Public functions ==============================
-func add_stack(amount: float, duration: int, source: Entity, action_id: StringName) -> float:
+func add_stack(amount: float, source: Entity = null, action_id: StringName = "", mod: Dictionary = {}) -> float:
+	var duration: int = mod.get(Stack.ModifierType.DURATION, 1)
 	if amount <= 0: return total_stacks
 	if _buffer.is_empty(): _init_buffer()
 	
 	duration = clampi(duration, 1, BUFFER_SIZE - 1)
 	
 	# Add to current total
-	total_stacks += amount
+	_total_stacks += amount
 	
 	# Schedule expiration
 	var expiration_index: int = (_cursor + duration) % BUFFER_SIZE
@@ -41,7 +42,7 @@ func tick() -> float:
 	var amount_to_expire: float = slot[AMOUNT]
 	
 	if amount_to_expire > 0:
-		total_stacks -= amount_to_expire
+		_total_stacks -= amount_to_expire
 		# Clear slot
 		slot[AMOUNT] = 0.0
 		(slot[STACK_INFOS] as Array).clear()

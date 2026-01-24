@@ -51,26 +51,26 @@ func _ready() -> void:
 				stats.mana_changed.connect(_on_mana_changed)
 			if stats.has_signal("mana_max_changed"):
 				stats.mana_max_changed.connect(_on_mana_max_changed)
-		if "ignite_stacks" in stats: _update_ignite_label(stats.ignite_stacks)
-		if "necrosis_stacks" in stats: _update_necrosis_label(stats.necrosis_stacks)
-		if "armor_stacks" in stats:
-			_update_shield_bar(stats.armor_stacks, stats.health_max)
+		if "ignite_stacks" in _owner_entity.conditions: _update_ignite_label(_owner_entity.conditions.ignite_stacks)
+		if "necrosis_stacks" in _owner_entity.conditions: _update_necrosis_label(_owner_entity.conditions.necrosis_stacks)
+		if "shield_stacks" in _owner_entity.conditions:
+			_update_shield_bar(_owner_entity.conditions.shield_stacks, stats.health_max)
 		if stats.has_signal("health_changed"): stats.health_changed.connect(_on_health_changed)
 		if stats.has_signal("health_max_changed"): stats.health_max_changed.connect(_on_health_max_changed)
-		if stats.has_signal("ignite_stacks_changed"):
-			stats.ignite_stacks_changed.connect(_update_ignite_label)
-		if stats.has_signal("necrosis_stacks_changed"):
-			stats.necrosis_stacks_changed.connect(_update_necrosis_label)
-		if stats.has_signal("armor_stacks_changed"):
-			stats.armor_stacks_changed.connect(_on_armor_changed)
-		if stats.has_signal("poison_stacks_changed"):
-			stats.poison_stacks_changed.connect(_update_poison_label)
-		if stats.has_signal("regen_stacks_changed"):
-			stats.regen_stacks_changed.connect(_update_regen_label)
+		if _owner_entity.conditions.has_signal("ignite_stacks_changed"):
+			_owner_entity.conditions.ignite_stacks_changed.connect(_update_ignite_label)
+		if _owner_entity.conditions.has_signal("necrosis_stacks_changed"):
+			_owner_entity.conditions.necrosis_stacks_changed.connect(_update_necrosis_label)
+		if _owner_entity.conditions.has_signal("shield_stacks_changed"):
+			_owner_entity.conditions.shield_stacks_changed.connect(_on_armor_changed)
+		if _owner_entity.conditions.has_signal("poison_stacks_changed"):
+			_owner_entity.conditions.poison_stacks_changed.connect(_update_poison_label)
+		if _owner_entity.conditions.has_signal("regen_stacks_changed"):
+			_owner_entity.conditions.regen_stacks_changed.connect(_update_regen_label)
 		
 		# Valid initial update
-		if "poison_stacks" in stats: _update_poison_label(stats.poison_stacks)
-		if "regen_stacks" in stats: _update_regen_label(stats.regen_stacks)
+		if "poison_stacks" in _owner_entity.conditions: _update_poison_label(_owner_entity.conditions.poison_stacks)
+		if "regen_stacks" in _owner_entity.conditions: _update_regen_label(_owner_entity.conditions.regen_stacks)
 # ============================== Public ==============================
 
 func update_health_bar(health: float, health_max: float) -> void:
@@ -150,8 +150,7 @@ func damage_popup(amount: float, damage_type: Utils.DamageType, is_critic: bool 
 			popup.outline_modulate(Color8(51, 255, 153, 255))
 		Utils.DamageType.PURE:
 			popup.global_position = _pure_popup_spawn.global_position + offset
-			popup.outline_modulate(Color.DARK_GOLDENROD)
-		
+			popup.outline_modulate(Color.DARK_GOLDENROD)		
 	
 	popup.look_at(get_viewport().get_camera_3d().global_position)
 
@@ -159,7 +158,6 @@ func damage_popup(amount: float, damage_type: Utils.DamageType, is_critic: bool 
 
 func _on_owner_entity_damage_taken(_entity_ref: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool, _blocked_by_armor) -> void:
 	damage_popup(damage, damage_type, is_critical)
-
 
 func _on_owner_entity_heal_taken(_entity_ref: Entity, heal_amount: int, is_critical: bool) -> void:
 	damage_popup(heal_amount, Utils.DamageType.HEAL, is_critical)
@@ -178,7 +176,7 @@ func _on_health_changed(new_health: int) -> void:
 
 func _on_health_max_changed(new_max: int) -> void:
 	update_health_bar(_owner_entity.stats.health, new_max)
-	_update_shield_bar(_owner_entity.stats.armor_stacks, new_max)
+	_update_shield_bar(_owner_entity.conditions.shield_stacks, new_max)
 
 # ============================== Resources Visualization ==============================
 ## Update the resource points display (e.g. for Dark Knight combo points)

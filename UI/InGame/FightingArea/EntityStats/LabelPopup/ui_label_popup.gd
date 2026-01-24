@@ -94,7 +94,7 @@ func _ready() -> void:
 	else:
 		vmove = VMoveType.DOWN
 		_label.text = "" + str(_value)
-		if _stack_type == Utils.StackType.ARMOR or _stack_type == Utils.StackType.REGEN:
+		if _stack_type == Utils.StackType.SHIELD or _stack_type == Utils.StackType.REGEN:
 			hmove = HMoveType.LEFT
 		else:
 			hmove = HMoveType.RIGHT

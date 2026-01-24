@@ -108,57 +108,7 @@ signal critical_multiplier_changed(new_critical_multiplier: float, critical_type
 @export var _critical_multipliers: Dictionary[Utils.ActionType, float]
 #endregion
 
-#region ============================== Condition Stacks ==============================
-signal poison_stacks_changed(new_poison_stacks: float)
-var _poison_stacks: float = 0
-var poison_stacks: float:
-	get: return _poison_stacks
-	set(value):
-		if value < 0: value = 0
-		if value == _poison_stacks: return
-		_poison_stacks = max(0, value)
-		poison_stacks_changed.emit(_poison_stacks)
 
-
-signal ignite_stacks_changed(new_ignite_stacks: float)
-var _ignite_stacks: float
-var ignite_stacks: float:
-	get: return _ignite_stacks
-	set(value):
-		if value < 0: value = 0
-		if value == _ignite_stacks: return
-		_ignite_stacks = max(0, value)
-		ignite_stacks_changed.emit(_ignite_stacks)
-
-
-signal armor_stacks_changed(new_armor_stacks: float)
-var _armor_stacks: float = 0
-var armor_stacks: float:
-	get: return _armor_stacks
-	set(value):
-		if value == _armor_stacks: return
-		_armor_stacks = max(0, value)
-		armor_stacks_changed.emit(_armor_stacks)
-
-
-# Regen Stack
-var _regen_stack: RegenStack = RegenStack.new()
-signal regen_stacks_changed(new_regen_stacks: float)
-var regen_stacks: float:
-	get: return _regen_stack.total_stacks
-	set(value):
-		regen_stacks_changed.emit(_regen_stack.total_stacks)
-
-signal necrosis_stacks_changed(new_necrosis_stacks: float)
-var _necrosis_stacks: float = 0
-var necrosis_stacks: float:
-	get: return _necrosis_stacks
-	set(value):
-		if value < 0: value = 0
-		if value == _necrosis_stacks: return
-		_necrosis_stacks = max(0, value)
-		necrosis_stacks_changed.emit(_necrosis_stacks)
-#endregion
 
 #region ============================== Resistances ==============================
 @export_group("Resistance")
@@ -194,26 +144,6 @@ signal weakness_changed(new_weakness: float, action_type: Utils.ActionType)
 #endregion
 
 #region ============================== Public functions ==============================
-func get_stacks_number() -> float:
-	return _poison_stacks + _ignite_stacks + _armor_stacks + _regen_stack.total_stacks + _necrosis_stacks
-
-
-func add_regen_stack(amount: float, duration: int, source: Entity, action_id: StringName) -> void:
-	regen_stacks = _regen_stack.add_stack(amount, duration, source, action_id)
-
-
-func tick_regen() -> void:
-	regen_stacks = _regen_stack.tick()
-
-
-func get_debuf_stacks_number() -> float:
-	return _poison_stacks + _ignite_stacks + _necrosis_stacks
-
-
-func get_buf_stacks_number() -> float:
-	return _armor_stacks + _regen_stack.total_stacks
-
-
 func reset_from_hero_desc(hero: HeroDesc, lvl: int) -> EntityStats:
 	if lvl < 1 or lvl > 10: return self
 	

@@ -98,6 +98,8 @@ var is_dead: bool:
 
 var stats: EntityStats
 
+var conditions: ConditionsModule
+
 var target_module: TargetModule
 
 var auto_attack_modifier_registry: AutoAttackModifierRegistry
@@ -107,7 +109,6 @@ var stack_modifiers_registry: StackModifiersRegistry
 #endregion
 
 #region ============================== Private variables ==============================
-var _stack_handler_module: StackHandlerModule
 #endregion
 
 #region ============================== Export ==============================
@@ -189,9 +190,10 @@ func _entity_enter_tree() -> void:
 		target_module = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.TARGET].instantiate().init(self)
 		add_child(target_module)
 
-	if _stack_handler_module == null:
-		_stack_handler_module = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.STACK_HANDLER].instantiate().init(self)
-		add_child(_stack_handler_module)
+	# Initialize conditions module (includes stack handling and timers)
+	if conditions == null:
+		conditions = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.CONDITIONS].instantiate().init(self)
+		add_child(conditions)
 
 
 func _ready() -> void:
@@ -285,10 +287,10 @@ func _on_entity_fighting_state_changed(new_fighting_state: FightingState) -> voi
 	match new_fighting_state:
 		FightingState.IDLE:
 			target_module.stop()
-			_stack_handler_module.stop()
+			conditions.stop()
 		FightingState.FIGHTING:
 			target_module.start()
-			_stack_handler_module.start()
+			conditions.start()
 		FightingState.CELEBRATING: pass
 		FightingState.DEAD: pass
 		FightingState.UNDEF: pass
