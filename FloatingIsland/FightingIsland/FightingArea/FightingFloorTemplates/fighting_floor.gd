@@ -6,6 +6,11 @@ extends Node3D
 @export var _hero_spawner: HeroSpawner
 @export var _spawn_areas: Array[SpawnArea]
 
+# Arena zones for spawn location system
+@export var _team_zones: Dictionary[int, Area3D] = {}
+@export var _center_zone: Area3D = null
+@export var _full_arena_zone: Area3D = null
+
 var _is_active: bool = false
 
 func _ready() -> void:

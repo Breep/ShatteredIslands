@@ -467,10 +467,6 @@ func _on_aether_redirector_cooldown_finished() -> void:
 func _summon_field_generator() -> void:
 	if _owner == null or not is_instance_valid(_owner): return
 	
-	var summon_pos = _owner.global_position
-	# Slight offset maybe?
-	summon_pos += Vector3(randf_range(-2, 2), 0, randf_range(-2, 2))
-	
 	var mods: Dictionary = {
 		Entity.FieldGeneratorModifier.SHIELD_AMOUNT: _defense_stats.defense_field_generator_shield_amount,
 		Entity.FieldGeneratorModifier.SHIELD_INTERVAL: _defense_stats.defense_field_generator_shield_interval,
@@ -479,4 +475,6 @@ func _summon_field_generator() -> void:
 		Entity.FieldGeneratorModifier.TARGET_COUNT: _defense_stats.defense_field_generator_target_count
 	}
 	
-	_owner.summon_entity(Entity.EntityType.FIELD_GENERATOR, summon_pos, mods)
+	# Use new spawn location system - spawn near owner with randomization
+	var spawn_config := SpawnLocationConfig.create_entity_relative(_owner, 2.0)
+	_owner.summon_entity(Entity.EntityType.FIELD_GENERATOR, spawn_config, mods)

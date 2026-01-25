@@ -174,8 +174,11 @@ func _apply_all_cards_upgrades() -> void:
 	if deck == null or hero == null:
 		printerr("Player: Can't apply cards upgrades")
 		return
-	for card in deck.get_active_deck():
-		card.player_upgrade.apply(hero.families_stats, card.lvl)
+	if hero.is_node_ready():
+		for card in deck.get_active_deck():
+			card.player_upgrade.apply(hero.families_stats, card.lvl)
+	else:
+		hero.deck = deck
 
 
 func _check_lvl_up() -> void:

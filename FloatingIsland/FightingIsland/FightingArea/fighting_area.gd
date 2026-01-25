@@ -52,6 +52,10 @@ var entity_manager: EntityManager:
 var fighting_event_registry: FightingEventRegistry:
 	get: return _fighting_event_registry
 
+@export var _arena_zone_manager: ArenaZoneManager
+var arena_zone_manager: ArenaZoneManager:
+	get: return _arena_zone_manager
+
 @export var _fighting_floors: Dictionary[Battle.BattleType, FightingFloor]
 
 @export var _entities_node: Node3D
@@ -106,7 +110,18 @@ func _ready_checks() -> bool:
 func _set_fighting_floor(battle_type: Battle.BattleType) -> HeroSpawner:
 	for fighting_floor in _fighting_floors.values():
 		fighting_floor.set_inactive()
-	return _fighting_floors[battle_type].set_active()
+	var fighting_floor := _fighting_floors[battle_type]
+	var hero_spawner := fighting_floor.set_active()
+	
+	# Initialize arena zone manager with zones from fighting floor
+	if _arena_zone_manager != null:
+		_arena_zone_manager.initialize(
+			fighting_floor._team_zones,
+			fighting_floor._center_zone,
+			fighting_floor._full_arena_zone
+		)
+	
+	return hero_spawner
 
 # ============================== Callbacks ==============================
 

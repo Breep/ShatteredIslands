@@ -244,7 +244,7 @@ func heal_percent(_target: Entity, _percent: float, _percent_modifier: Utils.Per
 func inflict_condition_stacks(_target: Entity, _stacks_number: float, _stack_type: Utils.StackType, _action_id: StringName, _duration: float = 5.0) -> void:
 	printerr("Entity: virtual inflict_condition_stacks() called [", get_path(), "]")
 
-func summon_entity(_entity_type: EntityType, _entity_spawn_global_position: Vector3, _entity_modifier: Dictionary) -> void:
+func summon_entity(_entity_type: EntityType, _spawn_config: SpawnLocationConfig, _entity_modifier: Dictionary) -> void:
 	printerr("Entity: virtual summon_entity() called [", get_path(), "]")
 
 func cleanse(_target: Entity, _value: float, _action_id: StringName) -> void:

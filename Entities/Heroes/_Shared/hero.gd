@@ -123,8 +123,8 @@ func heal_percent(target: Entity, percent: float, percent_modifier: Utils.Percen
 func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Utils.StackType, action_id: StringName, duration: float = 5.0) -> void:
 	_action_module.inflict_condition_stacks(target, stacks_number, stack_type, action_id, duration)
 
-func summon_entity(entity_type: EntityType, entity_spawn_global_position: Vector3, entity_modifier: Dictionary) -> void:
-	_action_module.summon_entity(entity_type, entity_spawn_global_position, entity_modifier)
+func summon_entity(entity_type: EntityType, spawn_config: SpawnLocationConfig, entity_modifier: Dictionary) -> void:
+	_action_module.summon_entity(entity_type, spawn_config, entity_modifier)
 
 func cleanse(target: Entity, value: float, action_id: StringName) -> void:
 	_action_module.cleanse(target, value, action_id)

@@ -32,8 +32,8 @@ func take_cleanse(value: float, is_critical: bool, action_id: StringName, source
 func take_dispell(value: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
 	return _interact_module.take_dispell(value, is_critical, action_id, source)
 
-func summon_entity(entity_type: EntityType, entity_spawn_global_position: Vector3, entity_modifier: Dictionary) -> void:
-	_action_module.summon_entity(entity_type, entity_spawn_global_position, entity_modifier)
+func summon_entity(entity_type: EntityType, spawn_config: SpawnLocationConfig, entity_modifier: Dictionary) -> void:
+	_action_module.summon_entity(entity_type, spawn_config, entity_modifier)
 #endregion
 
 var _max_health: int = 100

@@ -108,9 +108,9 @@ func _init_players() -> void:
 		var player: Player = Player.new()
 		player.name = "Player" + str(i + 1)
 		player.id = 1
+		player.hero_desc = _hero_descs[i]
 		player.hero = _heroes[i]
 		player.hero.entity_name = player.name
-		# Note: hero.player reference removed - no longer exists in new architecture
 		player.skill_manager = SkillManager.new()
 		_players.append(player)
 
