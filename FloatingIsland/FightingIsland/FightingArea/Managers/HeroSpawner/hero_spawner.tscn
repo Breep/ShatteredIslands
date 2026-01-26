@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" uid="uid://bemiiwkhphhbi" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/HeroSpawner/hero_spawner.gd" id="1_1scsa"]
 
-[node name="CharacterSpawner" type="Node"]
+[node name="HeroSpawner" type="Node"]
 script = ExtResource("1_1scsa")
