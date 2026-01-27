@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dqno5p3aprq7f"]
+[gd_scene load_steps=34 format=3 uid="uid://dqno5p3aprq7f"]
 
 [ext_resource type="Script" uid="uid://brd0wxqwulj8y" path="res://Prototyping/Entity/prototyping_entity.gd" id="1_6kn6i"]
 [ext_resource type="PackedScene" uid="uid://c48aqh8mlb7lc" path="res://Entities/Heroes/DarkKnight/dark_knight.tscn" id="1_icvx6"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://cmj4l5m1j0g2p" path="res://Card/Descriptions/Cards/Defense/Common/ToxicFiltrationLayer/defense_toxic_filtration_layer.gd" id="11_3bpsj"]
 [ext_resource type="Texture2D" uid="uid://dhtqdohppanui" path="res://Card/Descriptions/Cards/Defense/Rare/AbsorptionMatrix/shieldomatic_absorption_matrix.jpg" id="13_ko5bb"]
 [ext_resource type="Script" uid="uid://j3so7dsgb78a" path="res://Card/Descriptions/Cards/Defense/Rare/AbsorptionMatrix/defense_absorption_matrix.gd" id="14_x0odd"]
+[ext_resource type="PackedScene" uid="uid://dp4x7wkxd6i2q" path="res://Prototyping/Entity/EntityController/entity_controller.tscn" id="19_x0odd"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_d4u4x"]
 size = Vector2(20, 20)
@@ -111,7 +112,7 @@ mesh = SubResource("QuadMesh_d4u4x")
 unique_name_in_owner = true
 
 [node name="DarkKnightSOLO" parent="Entities" node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
-transform = Transform3D(-0.99893624, 0, 0.04611278, 0, 1, 0, -0.04611278, 0, -0.99893624, -0.032851696, -4.7683716e-07, -5.1778226)
+transform = Transform3D(-0.99893624, 0, 0.04611278, 0, 1, 0, -0.04611278, 0, -0.99893624, -0.012811184, -4.7683716e-07, -3.9436398)
 _custom_deck = SubResource("Resource_urbv6")
 team = 2
 _spawn_manager = NodePath("../../SpawnManager")
@@ -205,6 +206,9 @@ _spells_node = NodePath("../SpawnSpells")
 [node name="SpawnProjectiles" type="Node3D" parent="."]
 
 [node name="SpawnSpells" type="Node3D" parent="."]
+
+[node name="EntityController" parent="." node_paths=PackedStringArray("entity_owner") instance=ExtResource("19_x0odd")]
+entity_owner = NodePath("../Entities/DarkKnightSOLO")
 
 [connection signal="pressed" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StartFightButton" to="." method="_on_start_fight_button_pressed"]
 [connection signal="pressed" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StopFightButton" to="." method="_on_stop_fight_button_pressed"]
