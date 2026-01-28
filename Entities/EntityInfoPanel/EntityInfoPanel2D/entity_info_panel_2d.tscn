@@ -1,0 +1,900 @@
+[gd_scene load_steps=19 format=3 uid="uid://r0gwl8xepcsf"]
+
+[ext_resource type="Script" uid="uid://ufg37agp63bq" path="res://Entities/EntityInfoPanel/EntityInfoPanel2D/entity_info_panel_2d.gd" id="1_dgv81"]
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_vq80f"]
+[ext_resource type="Shader" uid="uid://cxvdhkkjpr75e" path="res://VFX/VFX_2D/UI/character_health_bar.gdshader" id="1_w5qwx"]
+[ext_resource type="Shader" uid="uid://dncf64el86tmc" path="res://VFX/VFX_2D/UI/character_shield_bar.gdshader" id="2_vq80f"]
+[ext_resource type="Texture2D" uid="uid://8onux3p1rx86" path="res://Card/Descriptions/Families/Icons/fire icon.png" id="4_dgv81"]
+[ext_resource type="PackedScene" uid="uid://bx7rkwxhqecme" path="res://Entities/Heroes/_Shared/FamiliesManagers/Storm/RankViewer/ui_rank_viewer.tscn" id="4_jyfhv"]
+[ext_resource type="Texture2D" uid="uid://cwqdngpmbcnck" path="res://Card/Descriptions/Families/Icons/poison.png" id="6_r7eas"]
+[ext_resource type="Texture2D" uid="uid://ckifdy6fknspj" path="res://Card/Descriptions/Families/Icons/serenity.png" id="7_pf7ij"]
+[ext_resource type="Texture2D" uid="uid://b8pst2jcoqsyc" path="res://Card/Descriptions/Families/Icons/necrose.png" id="8_oki6c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r7eas"]
+shader = ExtResource("1_w5qwx")
+shader_parameter/HealthAmount = 0.6
+shader_parameter/MaxHealth = 2500.0
+shader_parameter/HealthColor = Color(0.11, 0.64, 0.08, 1)
+shader_parameter/BackgroundColor = Color(0.15, 0.15, 0.15, 0.8)
+shader_parameter/EnableShimmer = true
+shader_parameter/ShimmerSpeed = 0.2530000120175
+shader_parameter/ShimmerStrength = 0.0400000019
+shader_parameter/VolumeStrength = 0.05600000266
+shader_parameter/LineColor = Color(0, 0, 0, 0)
+shader_parameter/LineThickness = 0.10000000149012
+shader_parameter/Height100 = 0.0
+shader_parameter/Height500 = 0.0
+shader_parameter/BorderColor = Color(0.05, 0.05, 0.05, 1)
+shader_parameter/BorderThicknessPx = 0.0
+shader_parameter/CornerRadius = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pf7ij"]
+shader = ExtResource("2_vq80f")
+shader_parameter/shield_color = Color(0, 0.8, 1, 1)
+shader_parameter/alpha_intensity = 0.5
+shader_parameter/brightness = 1.2
+shader_parameter/fill_amount = 1.0
+shader_parameter/fill_smoothness = 0.02
+shader_parameter/noise_scale = 1.0
+shader_parameter/energy_speed = Vector2(0.2, 0.5)
+shader_parameter/scanline_count = 50.0
+shader_parameter/scanline_speed = -2.0
+shader_parameter/scanline_opacity = 0.3
+shader_parameter/pulse_speed = 2.0
+shader_parameter/pulse_intensity = 0.1
+
+[sub_resource type="Shader" id="Shader_w5qwx"]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+// --- 1. DONNÉES DE VIE ---
+group_uniforms Health_Data;
+uniform float HealthAmount : hint_range(0,1) = 0.6;
+uniform float MaxHealth = 2500.0;
+group_uniforms;
+
+// --- 2. COULEURS ---
+group_uniforms Colors;
+uniform vec4 HealthColor : source_color = vec4(0.11, 0.64, 0.08, 1.0);
+uniform vec4 BackgroundColor : source_color = vec4(0.15, 0.15, 0.15, 0.8); // Alpha baissé par défaut
+group_uniforms;
+
+// --- 3. EFFET SHIMMER ---
+group_uniforms Shimmer_Effect;
+uniform bool EnableShimmer = true;
+uniform float ShimmerSpeed : hint_range(0.0, 5.0) = 1.5;
+uniform float ShimmerStrength : hint_range(0.0, 1.0) = 0.3;
+uniform float VolumeStrength : hint_range(0.0, 1.0) = 0.4;
+group_uniforms;
+
+// --- 4. LIGNES GRILLE (NETTES) ---
+group_uniforms Lines_Grid;
+uniform vec4 LineColor : source_color = vec4(0.0, 0.0, 0.0, 1.0);
+uniform float LineThickness : hint_range(0.1, 5.0) = 1.0; // Épaisseur en pixels
+uniform float Height100 : hint_range(0.0, 1.0) = 0.25;
+uniform float Height500 : hint_range(0.0, 1.0) = 0.50;
+group_uniforms;
+
+// --- 5. BORDURE (NETTE) ---
+group_uniforms Border;
+uniform vec4 BorderColor : source_color = vec4(0.05, 0.05, 0.05, 1.0);
+uniform float BorderThicknessPx : hint_range(0.0, 10.0) = 2.0; // Épaisseur en pixels
+group_uniforms;
+
+// --- 6. COINS ARRONDIS (NOUVEAU !) ---
+group_uniforms Corners;
+// Le rayon de l'arrondi. Attention, c'est en espace UV (0.0 à 0.5 max).
+// Des valeurs très petites (ex: 0.05) suffisent souvent.
+uniform float CornerRadius : hint_range(0.0, 0.5) = 0.05;
+group_uniforms;
+
+// Fonction utilitaire pour calculer une boîte arrondie
+float rounded_box_sdf(vec2 center_pos, vec2 size, float radius) {
+    return length(max(abs(center_pos) - size + radius, 0.0)) - radius;
+}
+
+void fragment() {
+    // Calcul de la largeur d'un pixel en UV pour la netteté
+    vec2 pixel_size_uv = vec2(fwidth(UV.x), fwidth(UV.y));
+    float aa_width = pixel_size_uv.x;
+
+    // ===============================
+    // A. REMPLISSAGE & VOLUME
+    // ===============================
+    // Remplissage net
+    float fill_mask = 1.0 - smoothstep(HealthAmount - aa_width, HealthAmount + aa_width, UV.x);
+
+    // Gradient de volume
+    float internal_gradient = 1.0 - abs(UV.y - 0.5) * VolumeStrength * 2.0;
+    vec3 health_rgb = HealthColor.rgb * internal_gradient;
+
+    // ===============================
+    // B. SHIMMER
+    // ===============================
+    if (EnableShimmer) {
+        float shimmer_pos = fract((TIME * ShimmerSpeed) - UV.x * 0.5 - UV.y * 0.2);
+        float shimmer_mask = smoothstep(0.45, 0.5, shimmer_pos) * (1.0 - smoothstep(0.5, 0.55, shimmer_pos));
+        health_rgb += vec3(1.0) * shimmer_mask * ShimmerStrength;
+    }
+
+    vec4 final_health_color = vec4(health_rgb, HealthColor.a);
+    vec4 final_color = mix(BackgroundColor, final_health_color, fill_mask);
+
+    // ===============================
+    // C. LIGNES GRILLE (CORRIGÉES POUR ÊTRE NETTES)
+    // ===============================
+    float hp_at_pixel = UV.x * MaxHealth;
+    // On calcule la demi-largeur voulue en PV
+    float half_line_width_hp = (LineThickness * pixel_size_uv.x * MaxHealth) * 0.5;
+    // Zone d'anti-aliasing (1 pixel de large en PV)
+    float aa_hp = pixel_size_uv.x * MaxHealth;
+
+    // Calcul 500
+    float dist_500 = abs(mod(hp_at_pixel, 500.0));
+    dist_500 = min(dist_500, 500.0 - dist_500);
+    // Coupure nette avec anti-aliasing sur le bord seulement
+    float mask_500 = smoothstep(half_line_width_hp + aa_hp, half_line_width_hp, dist_500);
+
+    // Calcul 100
+    float dist_100 = abs(mod(hp_at_pixel, 100.0));
+    dist_100 = min(dist_100, 100.0 - dist_100);
+    float mask_100 = smoothstep(half_line_width_hp + aa_hp, half_line_width_hp, dist_100);
+
+    float line_alpha = 0.0;
+    if (mask_500 > 0.01 && UV.y < Height500) line_alpha = mask_500;
+    else if (mask_100 > 0.01 && UV.y < Height100) line_alpha = mask_100;
+    if (UV.x < aa_width * 2.0) line_alpha = 0.0;
+
+    final_color = mix(final_color, LineColor, line_alpha);
+
+    // ===============================
+    // D. BORDURE (CORRIGÉE POUR ÊTRE NETTE)
+    // ===============================
+    // On convertit l'épaisseur en pixels vers l'espace UV
+    vec2 border_width_uv = BorderThicknessPx * pixel_size_uv;
+
+    // Utilisation de step() pour une coupure parfaitement nette (pixelisée)
+    // Si vous voulez un léger lissage, remplacez step(a,b) par smoothstep(a, a+pixel_size_uv.x, b)
+    float border_mask_x = step(UV.x, border_width_uv.x) + step(1.0 - border_width_uv.x, UV.x);
+    float border_mask_y = step(UV.y, border_width_uv.y) + step(1.0 - border_width_uv.y, UV.y);
+    float final_border_mask = clamp(border_mask_x + border_mask_y, 0.0, 1.0);
+
+    final_color = mix(final_color, BorderColor, final_border_mask);
+
+    // ===============================
+    // E. COINS ARRONDIS (DÉCOUPE FINALE)
+    // ===============================
+    // On centre les UVs de -0.5 à 0.5
+    vec2 centered_uv = UV - 0.5;
+    // On calcule la distance par rapport à une boîte arrondie théorique
+    // On réduit légèrement la taille (0.5 - aa) pour que l'anti-aliasing ne touche pas le bord du ColorRect
+    float dist_to_rounded_edge = rounded_box_sdf(centered_uv, vec2(0.5 - pixel_size_uv.x), CornerRadius);
+
+    // Création du masque : 1 à l'intérieur, 0 à l'extérieur, avec un bord lisse
+    // On utilise une largeur d'anti-aliasing moyenne entre X et Y
+    float avg_aa = (pixel_size_uv.x + pixel_size_uv.y) * 0.5;
+    float rounded_mask = 1.0 - smoothstep(0.0, avg_aa * 1.5, dist_to_rounded_edge);
+
+    // On multiplie l'alpha final par ce masque pour découper les coins
+    final_color.a *= rounded_mask;
+
+    // SORTIE FINALE
+    COLOR = final_color;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vq80f"]
+shader = SubResource("Shader_w5qwx")
+shader_parameter/HealthAmount = 0.0
+shader_parameter/MaxHealth = 2500.0
+shader_parameter/HealthColor = Color(0.10980392, 0.6392157, 0.078431375, 0)
+shader_parameter/BackgroundColor = Color(0.15, 0.15, 0.15, 0)
+shader_parameter/EnableShimmer = true
+shader_parameter/ShimmerSpeed = 1.5
+shader_parameter/ShimmerStrength = 0.3
+shader_parameter/VolumeStrength = 0.4
+shader_parameter/LineColor = Color(0, 0, 0, 1)
+shader_parameter/LineThickness = 1.0
+shader_parameter/Height100 = 0.25
+shader_parameter/Height500 = 0.5
+shader_parameter/BorderColor = Color(0.05, 0.05, 0.05, 1)
+shader_parameter/BorderThicknessPx = 2.0
+shader_parameter/CornerRadius = 0.05
+
+[sub_resource type="Shader" id="Shader_mjn55"]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+// --- 1. DONNÉES DE VIE ---
+group_uniforms Health_Data;
+uniform float HealthAmount : hint_range(0,1) = 0.6;
+uniform float MaxHealth = 2500.0;
+group_uniforms;
+
+// --- 2. COULEURS ---
+group_uniforms Colors;
+uniform vec4 HealthColor : source_color = vec4(0.11, 0.64, 0.08, 1.0);
+uniform vec4 BackgroundColor : source_color = vec4(0.15, 0.15, 0.15, 0.8); // Alpha baissé par défaut
+group_uniforms;
+
+// --- 3. EFFET SHIMMER ---
+group_uniforms Shimmer_Effect;
+uniform bool EnableShimmer = true;
+uniform float ShimmerSpeed : hint_range(0.0, 5.0) = 1.5;
+uniform float ShimmerStrength : hint_range(0.0, 1.0) = 0.3;
+uniform float VolumeStrength : hint_range(0.0, 1.0) = 0.4;
+group_uniforms;
+
+// --- 4. LIGNES GRILLE (NETTES) ---
+group_uniforms Lines_Grid;
+uniform vec4 LineColor : source_color = vec4(0.0, 0.0, 0.0, 1.0);
+uniform float LineThickness : hint_range(0.1, 5.0) = 1.0; // Épaisseur en pixels
+uniform float Height100 : hint_range(0.0, 1.0) = 0.25;
+uniform float Height500 : hint_range(0.0, 1.0) = 0.50;
+group_uniforms;
+
+// --- 5. BORDURE (NETTE) ---
+group_uniforms Border;
+uniform vec4 BorderColor : source_color = vec4(0.05, 0.05, 0.05, 1.0);
+uniform float BorderThicknessPx : hint_range(0.0, 10.0) = 2.0; // Épaisseur en pixels
+group_uniforms;
+
+// --- 6. COINS ARRONDIS (NOUVEAU !) ---
+group_uniforms Corners;
+// Le rayon de l'arrondi. Attention, c'est en espace UV (0.0 à 0.5 max).
+// Des valeurs très petites (ex: 0.05) suffisent souvent.
+uniform float CornerRadius : hint_range(0.0, 0.5) = 0.05;
+group_uniforms;
+
+// Fonction utilitaire pour calculer une boîte arrondie
+float rounded_box_sdf(vec2 center_pos, vec2 size, float radius) {
+    return length(max(abs(center_pos) - size + radius, 0.0)) - radius;
+}
+
+void fragment() {
+    // Calcul de la largeur d'un pixel en UV pour la netteté
+    vec2 pixel_size_uv = vec2(fwidth(UV.x), fwidth(UV.y));
+    float aa_width = pixel_size_uv.x;
+
+    // ===============================
+    // A. REMPLISSAGE & VOLUME
+    // ===============================
+    // Remplissage net
+    float fill_mask = 1.0 - smoothstep(HealthAmount - aa_width, HealthAmount + aa_width, UV.x);
+
+    // Gradient de volume
+    float internal_gradient = 1.0 - abs(UV.y - 0.5) * VolumeStrength * 2.0;
+    vec3 health_rgb = HealthColor.rgb * internal_gradient;
+
+    // ===============================
+    // B. SHIMMER
+    // ===============================
+    if (EnableShimmer) {
+        float shimmer_pos = fract((TIME * ShimmerSpeed) - UV.x * 0.5 - UV.y * 0.2);
+        float shimmer_mask = smoothstep(0.45, 0.5, shimmer_pos) * (1.0 - smoothstep(0.5, 0.55, shimmer_pos));
+        health_rgb += vec3(1.0) * shimmer_mask * ShimmerStrength;
+    }
+
+    vec4 final_health_color = vec4(health_rgb, HealthColor.a);
+    vec4 final_color = mix(BackgroundColor, final_health_color, fill_mask);
+
+    // ===============================
+    // C. LIGNES GRILLE (CORRIGÉES POUR ÊTRE NETTES)
+    // ===============================
+    float hp_at_pixel = UV.x * MaxHealth;
+    // On calcule la demi-largeur voulue en PV
+    float half_line_width_hp = (LineThickness * pixel_size_uv.x * MaxHealth) * 0.5;
+    // Zone d'anti-aliasing (1 pixel de large en PV)
+    float aa_hp = pixel_size_uv.x * MaxHealth;
+
+    // Calcul 500
+    float dist_500 = abs(mod(hp_at_pixel, 500.0));
+    dist_500 = min(dist_500, 500.0 - dist_500);
+    // Coupure nette avec anti-aliasing sur le bord seulement
+    float mask_500 = smoothstep(half_line_width_hp + aa_hp, half_line_width_hp, dist_500);
+
+    // Calcul 100
+    float dist_100 = abs(mod(hp_at_pixel, 100.0));
+    dist_100 = min(dist_100, 100.0 - dist_100);
+    float mask_100 = smoothstep(half_line_width_hp + aa_hp, half_line_width_hp, dist_100);
+
+    float line_alpha = 0.0;
+    if (mask_500 > 0.01 && UV.y < Height500) line_alpha = mask_500;
+    else if (mask_100 > 0.01 && UV.y < Height100) line_alpha = mask_100;
+    if (UV.x < aa_width * 2.0) line_alpha = 0.0;
+
+    final_color = mix(final_color, LineColor, line_alpha);
+
+    // ===============================
+    // D. BORDURE (CORRIGÉE POUR ÊTRE NETTE)
+    // ===============================
+    // On convertit l'épaisseur en pixels vers l'espace UV
+    vec2 border_width_uv = BorderThicknessPx * pixel_size_uv;
+
+    // Utilisation de step() pour une coupure parfaitement nette (pixelisée)
+    // Si vous voulez un léger lissage, remplacez step(a,b) par smoothstep(a, a+pixel_size_uv.x, b)
+    float border_mask_x = step(UV.x, border_width_uv.x) + step(1.0 - border_width_uv.x, UV.x);
+    float border_mask_y = step(UV.y, border_width_uv.y) + step(1.0 - border_width_uv.y, UV.y);
+    float final_border_mask = clamp(border_mask_x + border_mask_y, 0.0, 1.0);
+
+    final_color = mix(final_color, BorderColor, final_border_mask);
+
+    // ===============================
+    // E. COINS ARRONDIS (DÉCOUPE FINALE)
+    // ===============================
+    // On centre les UVs de -0.5 à 0.5
+    vec2 centered_uv = UV - 0.5;
+    // On calcule la distance par rapport à une boîte arrondie théorique
+    // On réduit légèrement la taille (0.5 - aa) pour que l'anti-aliasing ne touche pas le bord du ColorRect
+    float dist_to_rounded_edge = rounded_box_sdf(centered_uv, vec2(0.5 - pixel_size_uv.x), CornerRadius);
+
+    // Création du masque : 1 à l'intérieur, 0 à l'extérieur, avec un bord lisse
+    // On utilise une largeur d'anti-aliasing moyenne entre X et Y
+    float avg_aa = (pixel_size_uv.x + pixel_size_uv.y) * 0.5;
+    float rounded_mask = 1.0 - smoothstep(0.0, avg_aa * 1.5, dist_to_rounded_edge);
+
+    // On multiplie l'alpha final par ce masque pour découper les coins
+    final_color.a *= rounded_mask;
+
+    // SORTIE FINALE
+    COLOR = final_color;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jyfhv"]
+shader = SubResource("Shader_mjn55")
+shader_parameter/HealthAmount = 0.6
+shader_parameter/MaxHealth = 100.0
+shader_parameter/HealthColor = Color(0.07936228, 0.53142947, 0.9445547, 1)
+shader_parameter/BackgroundColor = Color(0.15, 0.15, 0.15, 0.8)
+shader_parameter/EnableShimmer = true
+shader_parameter/ShimmerSpeed = 0.2530000120175
+shader_parameter/ShimmerStrength = 0.0400000019
+shader_parameter/VolumeStrength = 0.05600000266
+shader_parameter/LineColor = Color(0, 0, 0, 1)
+shader_parameter/LineThickness = 1.0
+shader_parameter/Height100 = 0.250000011875
+shader_parameter/Height500 = 0.50000002375
+shader_parameter/BorderColor = Color(0.05, 0.05, 0.05, 1)
+shader_parameter/BorderThicknessPx = 3.0000001425
+shader_parameter/CornerRadius = 0.0
+
+[sub_resource type="Shader" id="Shader_dgv81"]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+// --- 1. DONNÉES DE VIE ---
+group_uniforms Health_Data;
+uniform float HealthAmount : hint_range(0,1) = 0.6;
+uniform float MaxHealth = 2500.0;
+group_uniforms;
+
+// --- 2. COULEURS ---
+group_uniforms Colors;
+uniform vec4 HealthColor : source_color = vec4(0.11, 0.64, 0.08, 1.0);
+uniform vec4 BackgroundColor : source_color = vec4(0.15, 0.15, 0.15, 0.8); // Alpha baissé par défaut
+group_uniforms;
+
+// --- 3. EFFET SHIMMER ---
+group_uniforms Shimmer_Effect;
+uniform bool EnableShimmer = true;
+uniform float ShimmerSpeed : hint_range(0.0, 5.0) = 1.5;
+uniform float ShimmerStrength : hint_range(0.0, 1.0) = 0.3;
+uniform float VolumeStrength : hint_range(0.0, 1.0) = 0.4;
+group_uniforms;
+
+// --- 4. LIGNES GRILLE (NETTES) ---
+group_uniforms Lines_Grid;
+uniform vec4 LineColor : source_color = vec4(0.0, 0.0, 0.0, 1.0);
+uniform float LineThickness : hint_range(0.1, 5.0) = 1.0; // Épaisseur en pixels
+uniform float Height100 : hint_range(0.0, 1.0) = 0.25;
+uniform float Height500 : hint_range(0.0, 1.0) = 0.50;
+group_uniforms;
+
+// --- 5. BORDURE (NETTE) ---
+group_uniforms Border;
+uniform vec4 BorderColor : source_color = vec4(0.05, 0.05, 0.05, 1.0);
+uniform float BorderThicknessPx : hint_range(0.0, 10.0) = 2.0; // Épaisseur en pixels
+group_uniforms;
+
+// --- 6. COINS ARRONDIS (NOUVEAU !) ---
+group_uniforms Corners;
+// Le rayon de l'arrondi. Attention, c'est en espace UV (0.0 à 0.5 max).
+// Des valeurs très petites (ex: 0.05) suffisent souvent.
+uniform float CornerRadius : hint_range(0.0, 0.5) = 0.05;
+group_uniforms;
+
+// Fonction utilitaire pour calculer une boîte arrondie
+float rounded_box_sdf(vec2 center_pos, vec2 size, float radius) {
+    return length(max(abs(center_pos) - size + radius, 0.0)) - radius;
+}
+
+void fragment() {
+    // Calcul de la largeur d'un pixel en UV pour la netteté
+    vec2 pixel_size_uv = vec2(fwidth(UV.x), fwidth(UV.y));
+    float aa_width = pixel_size_uv.x;
+
+    // ===============================
+    // A. REMPLISSAGE & VOLUME
+    // ===============================
+    // Remplissage net
+    float fill_mask = 1.0 - smoothstep(HealthAmount - aa_width, HealthAmount + aa_width, UV.x);
+
+    // Gradient de volume
+    float internal_gradient = 1.0 - abs(UV.y - 0.5) * VolumeStrength * 2.0;
+    vec3 health_rgb = HealthColor.rgb * internal_gradient;
+
+    // ===============================
+    // B. SHIMMER
+    // ===============================
+    if (EnableShimmer) {
+        float shimmer_pos = fract((TIME * ShimmerSpeed) - UV.x * 0.5 - UV.y * 0.2);
+        float shimmer_mask = smoothstep(0.45, 0.5, shimmer_pos) * (1.0 - smoothstep(0.5, 0.55, shimmer_pos));
+        health_rgb += vec3(1.0) * shimmer_mask * ShimmerStrength;
+    }
+
+    vec4 final_health_color = vec4(health_rgb, HealthColor.a);
+    vec4 final_color = mix(BackgroundColor, final_health_color, fill_mask);
+
+    // ===============================
+    // C. LIGNES GRILLE (CORRIGÉES POUR ÊTRE NETTES)
+    // ===============================
+    float hp_at_pixel = UV.x * MaxHealth;
+    // On calcule la demi-largeur voulue en PV
+    float half_line_width_hp = (LineThickness * pixel_size_uv.x * MaxHealth) * 0.5;
+    // Zone d'anti-aliasing (1 pixel de large en PV)
+    float aa_hp = pixel_size_uv.x * MaxHealth;
+
+    // Calcul 500
+    float dist_500 = abs(mod(hp_at_pixel, 500.0));
+    dist_500 = min(dist_500, 500.0 - dist_500);
+    // Coupure nette avec anti-aliasing sur le bord seulement
+    float mask_500 = smoothstep(half_line_width_hp + aa_hp, half_line_width_hp, dist_500);
+
+    // Calcul 100
+    float dist_100 = abs(mod(hp_at_pixel, 100.0));
+    dist_100 = min(dist_100, 100.0 - dist_100);
+    float mask_100 = smoothstep(half_line_width_hp + aa_hp, half_line_width_hp, dist_100);
+
+    float line_alpha = 0.0;
+    if (mask_500 > 0.01 && UV.y < Height500) line_alpha = mask_500;
+    else if (mask_100 > 0.01 && UV.y < Height100) line_alpha = mask_100;
+    if (UV.x < aa_width * 2.0) line_alpha = 0.0;
+
+    final_color = mix(final_color, LineColor, line_alpha);
+
+    // ===============================
+    // D. BORDURE (CORRIGÉE POUR ÊTRE NETTE)
+    // ===============================
+    // On convertit l'épaisseur en pixels vers l'espace UV
+    vec2 border_width_uv = BorderThicknessPx * pixel_size_uv;
+
+    // Utilisation de step() pour une coupure parfaitement nette (pixelisée)
+    // Si vous voulez un léger lissage, remplacez step(a,b) par smoothstep(a, a+pixel_size_uv.x, b)
+    float border_mask_x = step(UV.x, border_width_uv.x) + step(1.0 - border_width_uv.x, UV.x);
+    float border_mask_y = step(UV.y, border_width_uv.y) + step(1.0 - border_width_uv.y, UV.y);
+    float final_border_mask = clamp(border_mask_x + border_mask_y, 0.0, 1.0);
+
+    final_color = mix(final_color, BorderColor, final_border_mask);
+
+    // ===============================
+    // E. COINS ARRONDIS (DÉCOUPE FINALE)
+    // ===============================
+    // On centre les UVs de -0.5 à 0.5
+    vec2 centered_uv = UV - 0.5;
+    // On calcule la distance par rapport à une boîte arrondie théorique
+    // On réduit légèrement la taille (0.5 - aa) pour que l'anti-aliasing ne touche pas le bord du ColorRect
+    float dist_to_rounded_edge = rounded_box_sdf(centered_uv, vec2(0.5 - pixel_size_uv.x), CornerRadius);
+
+    // Création du masque : 1 à l'intérieur, 0 à l'extérieur, avec un bord lisse
+    // On utilise une largeur d'anti-aliasing moyenne entre X et Y
+    float avg_aa = (pixel_size_uv.x + pixel_size_uv.y) * 0.5;
+    float rounded_mask = 1.0 - smoothstep(0.0, avg_aa * 1.5, dist_to_rounded_edge);
+
+    // On multiplie l'alpha final par ce masque pour découper les coins
+    final_color.a *= rounded_mask;
+
+    // SORTIE FINALE
+    COLOR = final_color;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oki6c"]
+shader = SubResource("Shader_dgv81")
+shader_parameter/HealthAmount = 0.6
+shader_parameter/MaxHealth = 100.0
+shader_parameter/HealthColor = Color(0.6684067, 0.5688536, 0.235113, 1)
+shader_parameter/BackgroundColor = Color(0.15, 0.15, 0.15, 0.8)
+shader_parameter/EnableShimmer = true
+shader_parameter/ShimmerSpeed = 0.2530000120175
+shader_parameter/ShimmerStrength = 0.0400000019
+shader_parameter/VolumeStrength = 0.05600000266
+shader_parameter/LineColor = Color(0, 0, 0, 1)
+shader_parameter/LineThickness = 1.0
+shader_parameter/Height100 = 0.250000011875
+shader_parameter/Height500 = 0.50000002375
+shader_parameter/BorderColor = Color(0.05, 0.05, 0.05, 1)
+shader_parameter/BorderThicknessPx = 0.0
+shader_parameter/CornerRadius = 0.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_f48wy"]
+font_size = 30
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 0.90700006)
+
+[node name="EntityInfoPanel2d" type="Control" node_paths=PackedStringArray("_health_bar", "_mana_bar", "_shield_bar", "_grid_bar", "_ignite_label", "_necrosis_label", "_poison_label", "_regen_label", "_ignite_control", "_necrosis_control", "_poison_control", "_regen_control", "_entity_label", "_resource_points_container")]
+custom_minimum_size = Vector2(1000, 250)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1000.0
+offset_bottom = 250.0
+script = ExtResource("1_dgv81")
+_health_bar = NodePath("MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/HealthManaStatusContainer/HealthBar")
+_mana_bar = NodePath("MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/HealthManaStatusContainer/ManaBar")
+_shield_bar = NodePath("MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/HealthManaStatusContainer/HealthBar/ShieldBar")
+_grid_bar = NodePath("MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/HealthManaStatusContainer/HealthBar/GridColorRect")
+_ignite_label = NodePath("MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/IgniteControl/MarginContainer/IgniteContainer/IgniteLabel")
+_necrosis_label = NodePath("MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/NecrosisControl/MarginContainer/NecrosisContainer/NecrosisLabel")
+_poison_label = NodePath("MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/PoisonControl/MarginContainer/PoisonContainer/PoisonLabel")
+_regen_label = NodePath("MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/RegenControl/MarginContainer/RegenContainer/RegenLabel")
+_ignite_control = NodePath("MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/IgniteControl")
+_necrosis_control = NodePath("MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/NecrosisControl")
+_poison_control = NodePath("MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/PoisonControl")
+_regen_control = NodePath("MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/RegenControl")
+_entity_label = NodePath("MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/Control/EntityLabel")
+_resource_points_container = NodePath("UIEntityInfoPanel2D/ComboContainer")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="LeftPanel" type="Control" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/HBoxContainer/LeftPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.36078432, 1, 1)
+
+[node name="RankViewer" parent="MarginContainer/HBoxContainer/LeftPanel" instance=ExtResource("4_jyfhv")]
+unique_name_in_owner = true
+visible = false
+texture_filter = 4
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 250.0
+offset_bottom = 250.0
+size_flags_horizontal = 3
+
+[node name="MiddlePanel" type="Control" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/HBoxContainer/MiddlePanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 0.47058824, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/MiddlePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="EntityLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.6
+theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/bold_font_size = 30
+bbcode_enabled = true
+text = "[color=Black][b]Entity Name[/b][/color]"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HealthManaStatusContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+theme_override_constants/separation = 0
+
+[node name="HealthBar" type="ColorRect" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/HealthManaStatusContainer"]
+material = SubResource("ShaderMaterial_r7eas")
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.65
+
+[node name="ShieldBar" type="ColorRect" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/HealthManaStatusContainer/HealthBar"]
+material = SubResource("ShaderMaterial_pf7ij")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GridColorRect" type="ColorRect" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/HealthManaStatusContainer/HealthBar"]
+material = SubResource("ShaderMaterial_vq80f")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ManaBar" type="ColorRect" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/HealthManaStatusContainer"]
+material = SubResource("ShaderMaterial_jyfhv")
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Control" type="Control" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/HealthManaStatusContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="StatusControl" type="Control" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/HealthManaStatusContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="StatusBar" type="ColorRect" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/HealthManaStatusContainer/StatusControl"]
+material = SubResource("ShaderMaterial_oki6c")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+
+[node name="StacksContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+theme_override_constants/separation = 30
+
+[node name="IgniteControl" type="Control" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/IgniteControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="IgniteContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/IgniteControl/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = -10
+
+[node name="IgniteIcon" type="TextureRect" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/IgniteControl/MarginContainer/IgniteContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_dgv81")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="IgniteLabel" type="Label" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/IgniteControl/MarginContainer/IgniteContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "122"
+label_settings = SubResource("LabelSettings_f48wy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PoisonControl" type="Control" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/PoisonControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="PoisonContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/PoisonControl/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = -10
+
+[node name="PoisonIcon" type="TextureRect" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/PoisonControl/MarginContainer/PoisonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("6_r7eas")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="PoisonLabel" type="Label" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/PoisonControl/MarginContainer/PoisonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "122"
+label_settings = SubResource("LabelSettings_f48wy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RegenControl" type="Control" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/RegenControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="RegenContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/RegenControl/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = -10
+
+[node name="RegenIcon" type="TextureRect" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/RegenControl/MarginContainer/RegenContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("7_pf7ij")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="RegenLabel" type="Label" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/RegenControl/MarginContainer/RegenContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "122"
+label_settings = SubResource("LabelSettings_f48wy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NecrosisControl" type="Control" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/NecrosisControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="NecrosisContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/NecrosisControl/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = -10
+
+[node name="NecrosisIcon" type="TextureRect" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/NecrosisControl/MarginContainer/NecrosisContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("8_oki6c")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="NecrosisLabel" type="Label" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/NecrosisControl/MarginContainer/NecrosisContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "122"
+label_settings = SubResource("LabelSettings_f48wy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightPanel" type="Control" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="ColorRectRightPanel" type="ColorRect" parent="MarginContainer/HBoxContainer/RightPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.27058825, 1, 1, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/RightPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="Control" type="Control" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.6
+
+[node name="ControlTemp" type="Control" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="UIEntityInfoPanel2D" type="Control" parent="."]
+visible = false
+custom_minimum_size = Vector2(650, 220)
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("1_vq80f")
+
+[node name="ComboContainer" type="HBoxContainer" parent="UIEntityInfoPanel2D"]
+visible = false
+layout_mode = 0
+offset_left = 664.1
+offset_top = 120.2
+offset_right = 1176.1
+offset_bottom = 120.2
+theme_override_constants/separation = 20

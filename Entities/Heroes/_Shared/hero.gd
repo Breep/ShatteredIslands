@@ -224,7 +224,6 @@ func _hero_ready() -> void:
 	_auto_attack_module.attack_done.connect(_on_aa_module_attack_done)
 	_hero_animator.attack_hit_frame.connect(_on_hero_animator_attack_hit_frame)
 
-	_entity_info_panel_3d.update_health_bar(stats.health, stats.health_max)
 	_apply_display_mode()
 
 	_entity_ready()

@@ -1,5 +1,5 @@
 class_name UIRankViewer
-extends Control
+extends MarginContainer
 
 
 @export_group("Rank Colors")
@@ -69,7 +69,7 @@ func _on_rank_changed(new_rank: StormManager.Rank) -> void:
 		_start_pulsing_s_rank()
 		if _shader_mat: _shader_mat.set_shader_parameter("speed", 0.3)
 	else:
-		if _shader_mat: 
+		if _shader_mat:
 			_shader_mat.set_shader_parameter("speed", 0.3)
 			_shader_mat.set_shader_parameter("brilliance", 1.2)
 
