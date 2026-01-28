@@ -105,6 +105,9 @@ var target_module: TargetModule
 var auto_attack_modifier_registry: AutoAttackModifierRegistry
 var action_modifiers_registry: ActionModifiersRegistry
 var stat_modifiers_registry: EntityStatModifiersRegistry
+
+# Controls whether auto-attack module should start when entering FIGHTING state
+var auto_attack_enabled: bool = true
 #endregion
 
 #region ============================== Private variables ==============================

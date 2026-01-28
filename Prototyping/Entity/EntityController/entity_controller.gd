@@ -2,6 +2,8 @@ extends Node
 
 @export var entity_owner: Entity
 
+@onready var _entity_name_label: Label = %EntityNameLabel
+
 @onready var _direct_attack_edit: TextEdit = %DirectAttackEdit
 @onready var _direct_attack_percent_edit: TextEdit = %DirectAttackPercentEdit
 @onready var _heal_edit: TextEdit = %HealEdit
@@ -13,6 +15,7 @@ extends Node
 @onready var _damage_choice_percent: OptionButton = %DamageChoicePercent
 @onready var _stack_type_choice: OptionButton = %StackTypeChoice
 @onready var _percent_modifier_choice: OptionButton = %PercentModifierChoice
+@onready var _health_percent_modifier_choice: OptionButton = %HealthPercentModifierChoice
 
 @onready var _targeting_strat_choice: OptionButton = %TargetingStratChoice
 @onready var _target_label: RichTextLabel = %TargetLabel
@@ -20,6 +23,14 @@ extends Node
 var _target: Entity
 
 func _ready() -> void:
+	# Clear all dropdowns to prevent duplicates
+	_targeting_strat_choice.clear()
+	_damage_choice.clear()
+	_damage_choice_percent.clear()
+	_stack_type_choice.clear()
+	_percent_modifier_choice.clear()
+	_health_percent_modifier_choice.clear()
+	
 	# Populate targeting strategy dropdown
 	var i: int = 0
 	for targeting_strategy: String in TargetModule.TargettingStrategy.keys():
@@ -44,9 +55,39 @@ func _ready() -> void:
 	for percent_modifier: String in Utils.PercentModifier.keys():
 		_percent_modifier_choice.add_item(percent_modifier, i)
 		i += 1
+	
+	# Populate health percent modifier dropdown
+	i = 0
+	for health_percent_modifier: String in Utils.PercentModifier.keys():
+		_health_percent_modifier_choice.add_item(health_percent_modifier, i)
+		i += 1
+	
+	if entity_owner != null:
+		_entity_name_label.text = entity_owner.entity_name
+
+
+func _refresh_target() -> void:
+	"""Refreshes the target based on the currently selected targeting strategy."""
+	if entity_owner == null or entity_owner.target_module == null:
+		printerr("EntityController: entity_owner or target_module is null")
+		_target_label.text = "Error: No entity_owner"
+		_target = null
+		return
+	
+	var targeting_strategy: TargetModule.TargettingStrategy = _targeting_strat_choice.get_selected_id() as TargetModule.TargettingStrategy
+	_target = entity_owner.target_module.get_target(targeting_strategy)
+	
+	if _target != null:
+		_target_label.text = "Target: " + _target.entity_name + " [ID:" + str(_target.id) + "]"
+		print("DEBUG: Target refreshed - ", _target.entity_name, " using strategy: ", TargetModule.TargettingStrategy.keys()[targeting_strategy])
+	else:
+		_target_label.text = "[color=red]<undefined>[/color]"
+		print("DEBUG: No target found using strategy: ", TargetModule.TargettingStrategy.keys()[targeting_strategy])
 
 
 func _on_attack_button_pressed() -> void:
+	_refresh_target()
+	
 	if _target == null:
 		printerr("EntityController: No target selected for direct_attack")
 		return
@@ -65,6 +106,8 @@ func _on_attack_button_pressed() -> void:
 
 
 func _on_attack_percent_button_pressed() -> void:
+	_refresh_target()
+	
 	if _target == null:
 		printerr("EntityController: No target selected for direct_attack_percent")
 		return
@@ -84,6 +127,8 @@ func _on_attack_percent_button_pressed() -> void:
 
 
 func _on_heal_button_pressed() -> void:
+	_refresh_target()
+	
 	if _target == null:
 		printerr("EntityController: No target selected for heal")
 		return
@@ -101,6 +146,8 @@ func _on_heal_button_pressed() -> void:
 
 
 func _on_heal_percent_button_pressed() -> void:
+	_refresh_target()
+	
 	if _target == null:
 		printerr("EntityController: No target selected for heal_percent")
 		return
@@ -119,6 +166,8 @@ func _on_heal_percent_button_pressed() -> void:
 
 
 func _on_inflict_condition_button_pressed() -> void:
+	_refresh_target()
+	
 	if _target == null:
 		printerr("EntityController: No target selected for inflict_condition_stacks")
 		return
@@ -144,6 +193,8 @@ func _on_inflict_condition_button_pressed() -> void:
 
 
 func _on_cleanse_button_pressed() -> void:
+	_refresh_target()
+	
 	if _target == null:
 		printerr("EntityController: No target selected for cleanse")
 		return
@@ -161,6 +212,8 @@ func _on_cleanse_button_pressed() -> void:
 
 
 func _on_dispell_button_pressed() -> void:
+	_refresh_target()
+	
 	if _target == null:
 		printerr("EntityController: No target selected for dispell")
 		return

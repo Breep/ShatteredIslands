@@ -17,20 +17,20 @@ enum TargettingStrategy {
 	LOWEST_HP_ALLY_INCLUDING_SELF, # Lowest hp ally (in % of max life)
 	
 	# ------- HIGHEST HP (Absolute Value) -------
-	HIGHEST_HP_ENEMY,       # Enemy with highest current HP
-	HIGHEST_HP_HERO_ENEMY,  # Enemy HeroDesc with highest current HP
+	HIGHEST_HP_ENEMY, # Enemy with highest current HP
+	HIGHEST_HP_HERO_ENEMY, # Enemy HeroDesc with highest current HP
 	
 	# ------- LOWEST HP % (Percentage) -------
 	LOWEST_HP_PERCENT_ENEMY, # Enemy with lowest HP percentage
 	
 	# ------- HIGHEST HP % (Percentage) -------
-	HIGHEST_HP_PERCENT_ENEMY,      # Enemy with highest HP percentage
+	HIGHEST_HP_PERCENT_ENEMY, # Enemy with highest HP percentage
 	HIGHEST_HP_PERCENT_HERO_ENEMY, # Enemy HeroDesc with highest HP percentage
 	
 	# ------- RANDOM -------
 	RANDOM, # Random entity except self (can be null)
 	RANDOM_ENEMY, # Random enemy (can be null)
-	RANDOM_HERO_ENEMY, #random enemy hero, (can be null)
+	RANDOM_HERO_ENEMY, # random enemy hero, (can be null)
 	RANDOM_ALLY, # Random ally except self (can be null)
 	RANDOM_ALLY_INCLUDING_SELF, # Random ally
 	
@@ -92,6 +92,11 @@ func stop() -> void:
 
 # Get target of the owned entity from a given strategy
 func get_target(targetting_strategy: TargettingStrategy) -> Entity:
+	Verbose.debug("TargetModule: Getting target from strategy: " + TargettingStrategy.keys()[targetting_strategy], Verbose.Category.ENTITY_MODULE)
+	if _owner == null:
+		Verbose.error("TargetModule need a ref to its owner", Verbose.Category.ENTITY_MODULE)
+		return null
+	
 	match targetting_strategy:
 # --- DISTANCE ---
 		TargettingStrategy.CLOSEST: return _get_closest(_entities, _owner)
@@ -220,7 +225,7 @@ func _get_highest_shield(entities: Array[Entity], excluded_entity: Entity) -> En
 	var highest_shield_entity = entities_copy[0]
 	for entity in entities_copy:
 		if entity != _owner:
-			if entity.conditions.shield_stacks > highest_shield_entity.conditions.shield_stacks :
+			if entity.conditions.shield_stacks > highest_shield_entity.conditions.shield_stacks:
 				highest_shield_entity = entity
 	
 	return highest_shield_entity
@@ -243,7 +248,7 @@ func _add_body_as_entity(body: Node3D) -> void:
 	if entity.team == _owner.team: _allies.append(entity)
 	else: _enemies.append(entity)
 	_entities.append(entity)
-	if entity is Hero: 
+	if entity is Hero:
 		if entity.team == _owner.team: _ally_heroes.append(entity)
 		else: _enemy_heroes.append(entity)
 		_heroes.append(entity)
@@ -374,7 +379,7 @@ func _get_random(entities: Array[Entity], excluded_entity: Entity) -> Entity:
 	if entities_copy.is_empty():
 		return null
 	
-	return entities_copy[rng.randi_range(0, entities_copy.size()-1)]
+	return entities_copy[rng.randi_range(0, entities_copy.size() - 1)]
 
 
 func _get_array_without_untargetable_targets(entities: Array[Entity]) -> Array[Entity]:
@@ -439,4 +444,4 @@ func _on_scanning_area_body_exited(body: Node3D) -> void:
 	var entity: Entity = body
 	if entity.team == _owner.team and _allies.has(entity): _allies.erase(entity)
 	elif entity.team == _owner.team and _enemies.has(entity): _enemies.append(entity)
-	if _entities.has(entity):  _enemies.erase(entity)
+	if _entities.has(entity): _enemies.erase(entity)

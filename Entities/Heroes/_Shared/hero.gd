@@ -253,7 +253,8 @@ func _on_hero_fighting_state_changed(new_fighting_state: FightingState) -> void:
 			for family_manager: FamilyManager in _family_managers.values():
 				family_manager.stop()
 		FightingState.FIGHTING:
-			_auto_attack_module.start()
+			if auto_attack_enabled:
+				_auto_attack_module.start()
 			for family_manager: FamilyManager in _family_managers.values():
 				family_manager.start()
 		FightingState.CELEBRATING: pass
