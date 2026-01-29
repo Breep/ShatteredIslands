@@ -158,7 +158,7 @@ func _on_heal_percent_button_pressed() -> void:
 		return
 	
 	var percent: float = percent_text.to_float()
-	var percent_modifier: Utils.PercentModifier = _percent_modifier_choice.get_selected_id() as Utils.PercentModifier
+	var percent_modifier: Utils.PercentModifier = _health_percent_modifier_choice.get_selected_id() as Utils.PercentModifier
 	var action_id: StringName = &"test_heal_percent"
 	
 	entity_owner.heal_percent(_target, percent, percent_modifier, action_id)

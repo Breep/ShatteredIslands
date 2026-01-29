@@ -132,7 +132,7 @@ func heal_percent(target: Entity, percent: float, percent_modifier: Utils.Percen
 		Utils.PercentModifier.CURRENT_HP:
 			hp = target.stats.health
 		Utils.PercentModifier.LOST_HP:
-			hp = target.stats.health_max - _owner.stats.health
+			hp = target.stats.health_max - target.stats.health
 	var heal_amount: float = (percent * hp as float) / 100.0
 	heal(target, heal_amount, action_id)
 #endregion

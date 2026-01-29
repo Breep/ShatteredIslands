@@ -1,105 +1,16 @@
-[gd_scene load_steps=35 format=3 uid="uid://dqno5p3aprq7f"]
+[gd_scene load_steps=11 format=3 uid="uid://dqno5p3aprq7f"]
 
 [ext_resource type="Script" uid="uid://brd0wxqwulj8y" path="res://Prototyping/Entity/prototyping_entity.gd" id="1_6kn6i"]
 [ext_resource type="PackedScene" uid="uid://c48aqh8mlb7lc" path="res://Entities/Heroes/DarkKnight/dark_knight.tscn" id="1_icvx6"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="2_083cp"]
-[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="3_5hdqt"]
 [ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://UI/Tool/Misc/hover_boost_button.gd" id="3_6kn6i"]
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_egh8k"]
-[ext_resource type="Script" uid="uid://csrm5mc1gxijs" path="res://Card/Descriptions/Cards/Light/Common/DivineRegenerator/serenity_divine_regenerator.gd" id="5_urbv6"]
-[ext_resource type="Texture2D" uid="uid://yekknulevsvb" path="res://Card/Descriptions/Cards/Poison/Common/PoisonFlask/portrait_poison_flask.png" id="6_3bpsj"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
-[ext_resource type="Script" uid="uid://nkraydv4mdse" path="res://Card/Templates/player_deck.gd" id="6_fl2p6"]
-[ext_resource type="Resource" uid="uid://c3qf5odp5y6ap" path="res://Card/Descriptions/Cards/Light/Common/LifeSpring/light_life_spring.tres" id="6_oonkp"]
-[ext_resource type="Script" uid="uid://1k2khgqbc78a" path="res://Card/Descriptions/Cards/Poison/Common/PoisonFlask/poison_poison_flask.gd" id="7_m26y3"]
-[ext_resource type="Texture2D" uid="uid://dibhj1of0c2qx" path="res://Card/Descriptions/Cards/Defense/Common/ShieldRush/shieldomatic_shield_rush.png" id="8_oonkp"]
-[ext_resource type="Script" uid="uid://bre033jc30lr7" path="res://Card/Descriptions/Cards/Defense/Common/ShieldRush/shieldomatic_shield_rush.gd" id="9_fl2p6"]
-[ext_resource type="Texture2D" uid="uid://k5v6yll4kd20" path="res://Card/Descriptions/Cards/Defense/Common/ToxicFiltrationLayer/shieldomatic_toxic_filtration_layer_.jpg" id="10_vbhu7"]
-[ext_resource type="Script" uid="uid://cmj4l5m1j0g2p" path="res://Card/Descriptions/Cards/Defense/Common/ToxicFiltrationLayer/defense_toxic_filtration_layer.gd" id="11_3bpsj"]
-[ext_resource type="Texture2D" uid="uid://dhtqdohppanui" path="res://Card/Descriptions/Cards/Defense/Rare/AbsorptionMatrix/shieldomatic_absorption_matrix.jpg" id="13_ko5bb"]
-[ext_resource type="Script" uid="uid://j3so7dsgb78a" path="res://Card/Descriptions/Cards/Defense/Rare/AbsorptionMatrix/defense_absorption_matrix.gd" id="14_x0odd"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/Stats/EntityStats/entity_stats.gd" id="15_x0odd"]
+[ext_resource type="PackedScene" uid="uid://dp4x7wkxd6i2q" path="res://Prototyping/Entity/EntityController/entity_controller.tscn" id="19_x0odd"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_d4u4x"]
 size = Vector2(20, 20)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_icon"]
-
-[sub_resource type="Resource" id="Resource_upgrade"]
-script = ExtResource("5_urbv6")
-_bonus_duration = Array[int]([1, 2, 3, 4, 5])
-
-[sub_resource type="Resource" id="Resource_vbhu7"]
-script = ExtResource("3_5hdqt")
-name = "Divine Regenerator"
-picture = SubResource("PlaceholderTexture2D_icon")
-families = Array[int]([5])
-player_upgrade = SubResource("Resource_upgrade")
-lvl = 5
-
-[sub_resource type="Resource" id="Resource_ij4m6"]
-script = ExtResource("7_m26y3")
-_poison_stacks = Array[int]([1, 2, 3, 4, 6])
-_period = Array[float]([2.0, 1.8, 1.6, 1.4, 0.7])
-metadata/_custom_type_script = "uid://1k2khgqbc78a"
-
-[sub_resource type="Resource" id="Resource_x0odd"]
-script = ExtResource("3_5hdqt")
-name = "Poison Flask"
-picture = ExtResource("6_3bpsj")
-families = Array[int]([7])
-player_upgrade = SubResource("Resource_ij4m6")
-lvl = 2
-metadata/_custom_type_script = "uid://dc86gt0exdo1a"
-
-[sub_resource type="Resource" id="Resource_urbv6"]
-script = ExtResource("6_fl2p6")
-_active_cards = Array[ExtResource("3_5hdqt")]([ExtResource("6_oonkp"), SubResource("Resource_vbhu7"), SubResource("Resource_x0odd")])
-metadata/_custom_type_script = "uid://nkraydv4mdse"
-
-[sub_resource type="Resource" id="Resource_t7xpg"]
-script = ExtResource("9_fl2p6")
-_shield_amount = Array[float]([100.0, 150.0, 200.0, 250.0, 400.0])
-metadata/_custom_type_script = "uid://bre033jc30lr7"
-
-[sub_resource type="Resource" id="Resource_3bpsj"]
-script = ExtResource("3_5hdqt")
-name = "Shield Rush"
-picture = ExtResource("8_oonkp")
-families = Array[int]([2])
-player_upgrade = SubResource("Resource_t7xpg")
-lvl = 5
-metadata/_custom_type_script = "uid://dc86gt0exdo1a"
-
-[sub_resource type="Resource" id="Resource_m26y3"]
-script = ExtResource("11_3bpsj")
-_base_efficiency = Array[float]([20.0, 30.0, 40.0, 50.0, 70.0])
-
-[sub_resource type="Resource" id="Resource_ko5bb"]
-script = ExtResource("3_5hdqt")
-name = "Toxic Filtration Layer"
-picture = ExtResource("10_vbhu7")
-families = Array[int]([2, 7])
-player_upgrade = SubResource("Resource_m26y3")
-lvl = 3
-
-[sub_resource type="Resource" id="Resource_xwdjj"]
-script = ExtResource("14_x0odd")
-_base_chance = Array[float]([7.0, 10.0, 50.0])
-
-[sub_resource type="Resource" id="Resource_ywmf2"]
-script = ExtResource("3_5hdqt")
-name = "Absorption Matrix"
-picture = ExtResource("13_ko5bb")
-families = Array[int]([2, 2])
-rarity = 1
-player_upgrade = SubResource("Resource_xwdjj")
-lvl = 3
-
-[sub_resource type="Resource" id="Resource_oonkp"]
-script = ExtResource("6_fl2p6")
-_active_cards = Array[ExtResource("3_5hdqt")]([SubResource("Resource_3bpsj"), SubResource("Resource_ko5bb"), SubResource("Resource_ywmf2")])
-metadata/_custom_type_script = "uid://nkraydv4mdse"
 
 [sub_resource type="Resource" id="Resource_xl213"]
 script = ExtResource("15_x0odd")
@@ -120,13 +31,11 @@ unique_name_in_owner = true
 
 [node name="DarkKnightSOLO" parent="Entities" node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
 transform = Transform3D(-0.99893624, 0, 0.04611278, 0, 1, 0, -0.04611278, 0, -0.99893624, -0.012811184, -4.7683716e-07, -3.9436398)
-_custom_deck = SubResource("Resource_urbv6")
 team = 2
 _spawn_manager = NodePath("../../SpawnManager")
 
 [node name="DarkKnight" parent="Entities" node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13703918, 0, 5.1590967)
-_custom_deck = SubResource("Resource_oonkp")
 team = 1
 custom_base_stats = SubResource("Resource_xl213")
 _spawn_manager = NodePath("../../SpawnManager")
