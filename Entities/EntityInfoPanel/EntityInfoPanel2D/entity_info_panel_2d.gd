@@ -1,25 +1,22 @@
-class_name EntityInfoPanel3D
-extends Node3D
-
-# ============================== Local scene nodes ==============================
-
-@export_group("Popup Spawns")
-@export var _physical_popup_spawn: SpawnPoint
-@export var _magic_popup_spawn: SpawnPoint
-@export var _poison_popup_spawn: SpawnPoint
-@export var _heal_popup_spawn: SpawnPoint
-@export var _pure_popup_spawn: SpawnPoint
+class_name EntityInfoPanel2D
+extends Control
 
 @export_group("Local Nodes")
 @export var _health_bar: ColorRect
 @export var _mana_bar: ColorRect
 @export var _shield_bar: ColorRect
+@export var _grid_bar: ColorRect
 
 @export_group("Stack Counters")
 @export var _ignite_label: Label
 @export var _necrosis_label: Label
 @export var _poison_label: Label
 @export var _regen_label: Label
+@export var _ignite_control: Control
+@export var _necrosis_control: Control
+@export var _poison_control: Control
+@export var _regen_control: Control
+@export var _entity_label: RichTextLabel
 
 @export_group("Misc")
 @export var _resource_points_container: HBoxContainer
@@ -29,18 +26,16 @@ extends Node3D
 
 @onready var _rank_visualizer: UIRankViewer = %RankViewer
 
-# ============================== Node base functions ==============================
-
+# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# Early validation - crash if misconfigured
-	if not _owner_entity:
-		Verbose.error("EntityInfoPanel3D: _owner_entity is null! This node is misconfigured.", Verbose.Category.ENTITY)
-		return
-	
 	# Connect entity signals
-	_owner_entity.damage_taken.connect(_on_owner_entity_damage_taken)
-	_owner_entity.heal_taken.connect(_on_owner_entity_heal_taken)
 	_rank_visualizer.connect_entity(_owner_entity)
+	
+	# Hide Stacks control on start
+	_ignite_control.hide()
+	_necrosis_control.hide()
+	_poison_control.hide()
+	_regen_control.hide()
 	
 	# Duplicate materials to avoid shared material issues
 	if _health_bar and _health_bar.material:
@@ -50,9 +45,15 @@ func _ready() -> void:
 		_mana_bar.material = _mana_bar.material.duplicate()
 	if _shield_bar and _shield_bar.material:
 		_shield_bar.material = _shield_bar.material.duplicate()
+	if _grid_bar and _grid_bar.material:
+		_grid_bar.material = _grid_bar.material.duplicate()
 	
 	var stats = _owner_entity.stats
 	var conditions = _owner_entity.conditions
+	var entity_name = _owner_entity.name
+	
+	# Initialize entity name
+	_update_entity_label(entity_name)
 	
 	# Initialize health/mana bars
 	update_health_bar(stats.health, stats.health_max)
@@ -77,7 +78,9 @@ func _ready() -> void:
 	conditions.shield_stacks_changed.connect(_on_armor_changed)
 	conditions.poison_stacks_changed.connect(_update_poison_label)
 	conditions.regen_stacks_changed.connect(_update_regen_label)
-# ============================== Public ==============================
+
+func init(entity: Entity) -> void:
+	_owner_entity = entity
 
 func update_health_bar(health: float, health_max: float) -> void:
 	if not _health_bar or not _health_bar.material:
@@ -85,6 +88,7 @@ func update_health_bar(health: float, health_max: float) -> void:
 	var ratio = clamp(float(health) / float(health_max), 0.0, 1.0)
 	_health_bar.material.set_shader_parameter("HealthAmount", ratio)
 	_health_bar.material.set_shader_parameter("MaxHealth", float(health_max))
+	_grid_bar.material.set_shader_parameter("MaxHealth", float(health_max))
 
 func update_mana_bar(mana: float, mana_max: float) -> void:
 	if not _mana_bar or not _mana_bar.material:
@@ -105,7 +109,9 @@ func _update_ignite_label(amount: int) -> void:
 	if amount > 0:
 		_ignite_label.text = str(amount)
 		_ignite_label.show()
+		_ignite_control.show()
 	else:
+		_ignite_control.hide()
 		_ignite_label.hide()
 
 func _update_necrosis_label(amount: int) -> void:
@@ -114,7 +120,9 @@ func _update_necrosis_label(amount: int) -> void:
 	if amount > 0:
 		_necrosis_label.text = str(amount)
 		_necrosis_label.show()
+		_necrosis_control.show()
 	else:
+		_necrosis_label.hide()
 		_necrosis_label.hide()
 
 func _update_poison_label(amount: float) -> void:
@@ -122,51 +130,24 @@ func _update_poison_label(amount: float) -> void:
 	if amount > 0:
 		_poison_label.text = str(int(amount))
 		_poison_label.show()
+		_poison_control.show()
 	else:
 		_poison_label.hide()
+		_poison_control.hide()
 
 func _update_regen_label(amount: float) -> void:
 	if not _regen_label: return
 	if amount > 0:
 		_regen_label.text = str(int(amount))
 		_regen_label.show()
+		_regen_control.show()
 	else:
 		_regen_label.hide()
+		_regen_control.hide()
 
-func damage_popup(amount: float, damage_type: Utils.DamageType, is_critic: bool = false):
-	var popup: DamagePopUp = Shared.DAMAGE_POPUP_SCENE.instantiate()
-	var offset = Vector3(randf_range(-0.5, 0.5), randf_range(-0.5, 0.5), 0)
-	popup.set_value(amount)
-	add_child(popup)
-	
-	if is_critic:
-		popup.modulate(Color8(95, 20, 28, 255))
-	
-	match damage_type:
-		Utils.DamageType.POISON:
-			popup.global_position = _poison_popup_spawn.global_position + offset
-			popup.outline_modulate(Color8(20, 95, 28, 255))
-		Utils.DamageType.PHYSICAL:
-			popup.global_position = _physical_popup_spawn.global_position + offset
-		Utils.DamageType.MAGICAL:
-			popup.global_position = _magic_popup_spawn.global_position + offset
-			popup.outline_modulate(Color8(0, 0, 204, 255))
-		Utils.DamageType.HEAL:
-			popup.global_position = _heal_popup_spawn.global_position + offset
-			popup.outline_modulate(Color8(51, 255, 153, 255))
-		Utils.DamageType.PURE:
-			popup.global_position = _pure_popup_spawn.global_position + offset
-			popup.outline_modulate(Color.DARK_GOLDENROD)		
-	
-	popup.look_at(get_viewport().get_camera_3d().global_position)
-
-# ============================== Callbacks ==============================
-
-func _on_owner_entity_damage_taken(_entity_ref: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool, _blocked_by_armor) -> void:
-	damage_popup(damage, damage_type, is_critical)
-
-func _on_owner_entity_heal_taken(_entity_ref: Entity, heal_amount: int, is_critical: bool) -> void:
-	damage_popup(heal_amount, Utils.DamageType.HEAL, is_critical)
+func _update_entity_label(entity_name: String) -> void:
+	if not _entity_label: return
+	_entity_label.text = entity_name
 
 func _on_mana_changed(new_value: int) -> void:
 	update_mana_bar(new_value, _owner_entity.stats.mana_max)

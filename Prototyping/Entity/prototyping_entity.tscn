@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dqno5p3aprq7f"]
+[gd_scene load_steps=35 format=3 uid="uid://dqno5p3aprq7f"]
 
 [ext_resource type="Script" uid="uid://brd0wxqwulj8y" path="res://Prototyping/Entity/prototyping_entity.gd" id="1_6kn6i"]
 [ext_resource type="PackedScene" uid="uid://c48aqh8mlb7lc" path="res://Entities/Heroes/DarkKnight/dark_knight.tscn" id="1_icvx6"]
@@ -18,7 +18,7 @@
 [ext_resource type="Script" uid="uid://cmj4l5m1j0g2p" path="res://Card/Descriptions/Cards/Defense/Common/ToxicFiltrationLayer/defense_toxic_filtration_layer.gd" id="11_3bpsj"]
 [ext_resource type="Texture2D" uid="uid://dhtqdohppanui" path="res://Card/Descriptions/Cards/Defense/Rare/AbsorptionMatrix/shieldomatic_absorption_matrix.jpg" id="13_ko5bb"]
 [ext_resource type="Script" uid="uid://j3so7dsgb78a" path="res://Card/Descriptions/Cards/Defense/Rare/AbsorptionMatrix/defense_absorption_matrix.gd" id="14_x0odd"]
-[ext_resource type="PackedScene" uid="uid://dp4x7wkxd6i2q" path="res://Prototyping/Entity/EntityController/entity_controller.tscn" id="19_x0odd"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/Stats/EntityStats/entity_stats.gd" id="15_x0odd"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_d4u4x"]
 size = Vector2(20, 20)
@@ -101,6 +101,13 @@ script = ExtResource("6_fl2p6")
 _active_cards = Array[ExtResource("3_5hdqt")]([SubResource("Resource_3bpsj"), SubResource("Resource_ko5bb"), SubResource("Resource_ywmf2")])
 metadata/_custom_type_script = "uid://nkraydv4mdse"
 
+[sub_resource type="Resource" id="Resource_xl213"]
+script = ExtResource("15_x0odd")
+health_max = 5000.0
+attack_damage = 25.0
+attack_speed = 3.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
 [node name="PrototypingEntity" type="Node3D"]
 script = ExtResource("1_6kn6i")
 
@@ -121,6 +128,7 @@ _spawn_manager = NodePath("../../SpawnManager")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13703918, 0, 5.1590967)
 _custom_deck = SubResource("Resource_oonkp")
 team = 1
+custom_base_stats = SubResource("Resource_xl213")
 _spawn_manager = NodePath("../../SpawnManager")
 
 [node name="Control" type="Control" parent="."]
