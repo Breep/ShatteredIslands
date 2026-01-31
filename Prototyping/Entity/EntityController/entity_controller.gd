@@ -20,6 +20,13 @@ extends Node
 @onready var _targeting_strat_choice: OptionButton = %TargetingStratChoice
 @onready var _target_label: RichTextLabel = %TargetLabel
 
+@onready var _projectile_type_choice: OptionButton = %ProjectileTypeChoice
+
+@onready var _speed_text_edit: TextEdit = %SpeedTextEdit
+@onready var _physical_damage_text_edit: TextEdit = %PhysicalDamageTextEdit
+@onready var _magical_damage_text_edit: TextEdit = %MagicalDamageTextEdit
+@onready var _bounce_text_edit: TextEdit = %BounceTextEdit
+
 var _target: Entity
 
 func _ready() -> void:
@@ -30,6 +37,7 @@ func _ready() -> void:
 	_stack_type_choice.clear()
 	_percent_modifier_choice.clear()
 	_health_percent_modifier_choice.clear()
+	_projectile_type_choice.clear()
 	
 	# Populate targeting strategy dropdown
 	var i: int = 0
@@ -60,6 +68,12 @@ func _ready() -> void:
 	i = 0
 	for health_percent_modifier: String in Utils.PercentModifier.keys():
 		_health_percent_modifier_choice.add_item(health_percent_modifier, i)
+		i += 1
+	
+	# Populate projectile type dropdown
+	i = 0
+	for projectile_type: String in Projectile.ProjectileType.keys():
+		_projectile_type_choice.add_item(projectile_type, i)
 		i += 1
 	
 	if entity_owner != null:
@@ -245,3 +259,41 @@ func _on_targeting_strat_choice_item_selected(index: int) -> void:
 	else:
 		_target_label.text = "Target: None (strategy returned null)"
 		print("DEBUG: No target found using strategy: ", TargetModule.TargettingStrategy.keys()[targeting_strategy])
+
+
+func _on_projectile_attack_button_pressed() -> void:
+	_refresh_target()
+	
+	if _target == null:
+		printerr("EntityController: No target selected for projectile_attack")
+		return
+	
+	if entity_owner == null:
+		printerr("EntityController: No entity_owner for projectile_attack")
+		return
+	
+	var projectile_type: Projectile.ProjectileType = _projectile_type_choice.get_selected_id() as Projectile.ProjectileType
+	var projectile_spawn: Node3D = entity_owner.get_auto_attack_spawn()
+	var projectile_stats: ProjectileStats = ProjectileStats.new()
+	
+	# Build stats from UI inputs
+	var speed_text: String = _speed_text_edit.text.strip_edges()
+	projectile_stats.speed = speed_text.to_int() if not speed_text.is_empty() else 20
+	
+	var physical_damage_text: String = _physical_damage_text_edit.text.strip_edges()
+	projectile_stats.physical_damage_flat = physical_damage_text.to_float() if not physical_damage_text.is_empty() else 0.0
+	projectile_stats.physical_is_critical = false
+	
+	var magical_damage_text: String = _magical_damage_text_edit.text.strip_edges()
+	projectile_stats.magical_damage_flat = magical_damage_text.to_float() if not magical_damage_text.is_empty() else 0.0
+	projectile_stats.magical_is_critical = false
+	
+	var bounce_text: String = _bounce_text_edit.text.strip_edges()
+	var bounce_count: int = bounce_text.to_int() if not bounce_text.is_empty() else 0
+	projectile_stats.is_bouncing = bounce_count > 0
+	projectile_stats.bounces_remaining = bounce_count
+	
+	entity_owner.projectile_attack(_target, projectile_type, projectile_spawn, projectile_stats)
+	print("DEBUG: projectile_attack called - Target: ", _target.entity_name, " | Type: ", Projectile.ProjectileType.keys()[projectile_type], 
+		" | Speed: ", projectile_stats.speed, " | Physical: ", projectile_stats.physical_damage_flat, 
+		" | Magical: ", projectile_stats.magical_damage_flat, " | Bounces: ", projectile_stats.bounces_remaining)

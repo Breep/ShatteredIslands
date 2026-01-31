@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://dp4x7wkxd6i2q"]
+[gd_scene load_steps=7 format=3 uid="uid://dp4x7wkxd6i2q"]
 
 [ext_resource type="Script" uid="uid://bhylo5w46jmwa" path="res://Prototyping/Entity/EntityController/entity_controller.gd" id="1_hsjxk"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_n8l2h"]
 [ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://UI/Tool/Misc/hover_boost_button.gd" id="2_ta2cq"]
 [ext_resource type="Script" uid="uid://bfrk08fr5vuck" path="res://Prototyping/Entity/EntityController/entity_controller_ui.gd" id="2_x177y"]
 [ext_resource type="Texture2D" uid="uid://ck0ou2taonm18" path="res://Prototyping/Entity/AllActionPrototyping/target_icon.png" id="4_j3d5q"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_hsjxk"]
+font_size = 14
 
 [node name="EntityController" type="Node"]
 script = ExtResource("1_hsjxk")
@@ -24,19 +27,20 @@ grow_vertical = 2
 theme = ExtResource("1_n8l2h")
 script = ExtResource("2_x177y")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="EntityControllerUI"]
+[node name="ScrollContainer" type="ScrollContainer" parent="EntityControllerUI"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1.0
-offset_top = 3.0
-offset_right = -1.0
-offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="EntityNameLabel" type="Label" parent="EntityControllerUI/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="EntityControllerUI/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="EntityNameLabel" type="Label" parent="EntityControllerUI/ScrollContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
@@ -44,11 +48,11 @@ text = "Entity Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TargetModuleControl" type="Control" parent="EntityControllerUI/VBoxContainer"]
+[node name="TargetModuleControl" type="Control" parent="EntityControllerUI/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="EntityControllerUI/VBoxContainer/TargetModuleControl"]
+[node name="ColorRect" type="ColorRect" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -57,7 +61,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.41960785, 0.41960785, 0.41960785, 0.87058824)
 
-[node name="MarginContainer" type="MarginContainer" parent="EntityControllerUI/VBoxContainer/TargetModuleControl"]
+[node name="MarginContainer" type="MarginContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -69,66 +73,75 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="EntityControllerUI/VBoxContainer/TargetModuleControl/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleControl/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="EntityControllerUI/VBoxContainer/TargetModuleControl/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleControl/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "TARGET MODULE"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="EntityControllerUI/VBoxContainer/TargetModuleControl/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleControl/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="DamageTypeVBox" type="VBoxContainer" parent="EntityControllerUI/VBoxContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="DamageTypeVBox" type="VBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TargetingStratLabel" type="Label" parent="EntityControllerUI/VBoxContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer/DamageTypeVBox"]
+[node name="TargetingStratLabel" type="Label" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer/DamageTypeVBox"]
 layout_mode = 2
 size_flags_vertical = 6
 text = "Targeting Strategy"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TargetingStratChoice" type="OptionButton" parent="EntityControllerUI/VBoxContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer/DamageTypeVBox"]
+[node name="TargetingStratChoice" type="OptionButton" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer/DamageTypeVBox"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
 expand_icon = true
 
-[node name="MarginContainer" type="MarginContainer" parent="EntityControllerUI/VBoxContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="EntityControllerUI/VBoxContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="EntityControllerUI/VBoxContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TextureRect" type="TextureRect" parent="EntityControllerUI/VBoxContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("4_j3d5q")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="TargetLabel" type="RichTextLabel" parent="EntityControllerUI/VBoxContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="TargetLabel" type="RichTextLabel" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 bbcode_enabled = true
 text = "[color=red]<undefined>[/color]"
 
-[node name="DirectAttackControl" type="Control" parent="EntityControllerUI/VBoxContainer"]
+[node name="DirectAttackFoldableContainer" type="FoldableContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+folded = true
+title = "DIRECT ATTACK"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer"]
+visible = false
+layout_mode = 2
+
+[node name="DirectAttackControl" type="Control" parent="EntityControllerUI/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="EntityControllerUI/VBoxContainer/DirectAttackControl"]
+[node name="ColorRect" type="ColorRect" parent="EntityControllerUI/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -137,7 +150,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.41960785, 0.41960785, 0.41960785, 0.87058824)
 
-[node name="MarginContainer" type="MarginContainer" parent="EntityControllerUI/VBoxContainer/DirectAttackControl"]
+[node name="MarginContainer" type="MarginContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -149,55 +162,55 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="EntityControllerUI/VBoxContainer/DirectAttackControl/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackControl/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="EntityControllerUI/VBoxContainer/DirectAttackControl/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="EntityControllerUI/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackControl/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Direct Attack"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="EntityControllerUI/VBoxContainer/DirectAttackControl/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackControl/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="DamageTypeVBox" type="VBoxContainer" parent="EntityControllerUI/VBoxContainer/DirectAttackControl/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="DamageTypeVBox" type="VBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackControl/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="DamageTypeLabel" type="Label" parent="EntityControllerUI/VBoxContainer/DirectAttackControl/MarginContainer/VBoxContainer/HBoxContainer/DamageTypeVBox"]
+[node name="DamageTypeLabel" type="Label" parent="EntityControllerUI/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackControl/MarginContainer/VBoxContainer/HBoxContainer/DamageTypeVBox"]
 layout_mode = 2
 size_flags_vertical = 6
 text = "Damage Type"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DamageChoice" type="OptionButton" parent="EntityControllerUI/VBoxContainer/DirectAttackControl/MarginContainer/VBoxContainer/HBoxContainer/DamageTypeVBox"]
+[node name="DamageChoice" type="OptionButton" parent="EntityControllerUI/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackControl/MarginContainer/VBoxContainer/HBoxContainer/DamageTypeVBox"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
 expand_icon = true
 
-[node name="DirectAttackEdit" type="TextEdit" parent="EntityControllerUI/VBoxContainer/DirectAttackControl/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="DirectAttackEdit" type="TextEdit" parent="EntityControllerUI/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackControl/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "10"
 placeholder_text = "Damage number"
 
-[node name="AttackButton" type="Button" parent="EntityControllerUI/VBoxContainer/DirectAttackControl/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="AttackButton" type="Button" parent="EntityControllerUI/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackControl/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Attack"
 script = ExtResource("2_ta2cq")
 
-[node name="DirectAttackPercentControl" type="Control" parent="EntityControllerUI/VBoxContainer"]
+[node name="DirectAttackPercentControl" type="Control" parent="EntityControllerUI/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="EntityControllerUI/VBoxContainer/DirectAttackPercentControl"]
+[node name="ColorRect" type="ColorRect" parent="EntityControllerUI/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackPercentControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -206,7 +219,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.41960785, 0.41960785, 0.41960785, 0.87058824)
 
-[node name="MarginContainer" type="MarginContainer" parent="EntityControllerUI/VBoxContainer/DirectAttackPercentControl"]
+[node name="MarginContainer" type="MarginContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackPercentControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -218,73 +231,82 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="EntityControllerUI/VBoxContainer/DirectAttackPercentControl/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackPercentControl/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="EntityControllerUI/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="EntityControllerUI/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Direct Attack Percent"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="EntityControllerUI/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="DamageTypeVBox" type="VBoxContainer" parent="EntityControllerUI/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="DamageTypeVBox" type="VBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="DamageTypeLabel" type="Label" parent="EntityControllerUI/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer/DamageTypeVBox"]
+[node name="DamageTypeLabel" type="Label" parent="EntityControllerUI/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer/DamageTypeVBox"]
 layout_mode = 2
 size_flags_vertical = 6
 text = "Damage Type"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DamageChoicePercent" type="OptionButton" parent="EntityControllerUI/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer/DamageTypeVBox"]
+[node name="DamageChoicePercent" type="OptionButton" parent="EntityControllerUI/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer/DamageTypeVBox"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
 expand_icon = true
 
-[node name="PercentTypeVBox" type="VBoxContainer" parent="EntityControllerUI/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="PercentTypeVBox" type="VBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PercentModifierLabel" type="Label" parent="EntityControllerUI/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer/PercentTypeVBox"]
+[node name="PercentModifierLabel" type="Label" parent="EntityControllerUI/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer/PercentTypeVBox"]
 layout_mode = 2
 size_flags_vertical = 6
 text = "Percent Type"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PercentModifierChoice" type="OptionButton" parent="EntityControllerUI/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer/PercentTypeVBox"]
+[node name="PercentModifierChoice" type="OptionButton" parent="EntityControllerUI/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer/PercentTypeVBox"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
 expand_icon = true
 
-[node name="DirectAttackPercentEdit" type="TextEdit" parent="EntityControllerUI/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="DirectAttackPercentEdit" type="TextEdit" parent="EntityControllerUI/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "10"
 placeholder_text = "Damage number"
 
-[node name="AttackPercentButton" type="Button" parent="EntityControllerUI/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="AttackPercentButton" type="Button" parent="EntityControllerUI/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Attack"
 script = ExtResource("2_ta2cq")
 
-[node name="HealControl" type="Control" parent="EntityControllerUI/VBoxContainer"]
+[node name="HealFoldableContainer" type="FoldableContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+folded = true
+title = "HEAL"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/HealFoldableContainer"]
+visible = false
+layout_mode = 2
+
+[node name="HealControl" type="Control" parent="EntityControllerUI/ScrollContainer/VBoxContainer/HealFoldableContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="EntityControllerUI/VBoxContainer/HealControl"]
+[node name="ColorRect" type="ColorRect" parent="EntityControllerUI/ScrollContainer/VBoxContainer/HealFoldableContainer/VBoxContainer/HealControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -293,7 +315,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.41960785, 0.41960785, 0.41960785, 0.87058824)
 
-[node name="MarginContainer" type="MarginContainer" parent="EntityControllerUI/VBoxContainer/HealControl"]
+[node name="MarginContainer" type="MarginContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/HealFoldableContainer/VBoxContainer/HealControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -305,37 +327,37 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="EntityControllerUI/VBoxContainer/HealControl/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/HealFoldableContainer/VBoxContainer/HealControl/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="EntityControllerUI/VBoxContainer/HealControl/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="EntityControllerUI/ScrollContainer/VBoxContainer/HealFoldableContainer/VBoxContainer/HealControl/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Heal"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="EntityControllerUI/VBoxContainer/HealControl/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/HealFoldableContainer/VBoxContainer/HealControl/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HealEdit" type="TextEdit" parent="EntityControllerUI/VBoxContainer/HealControl/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="HealEdit" type="TextEdit" parent="EntityControllerUI/ScrollContainer/VBoxContainer/HealFoldableContainer/VBoxContainer/HealControl/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "10"
 placeholder_text = "Damage number"
 
-[node name="HealButton" type="Button" parent="EntityControllerUI/VBoxContainer/HealControl/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="HealButton" type="Button" parent="EntityControllerUI/ScrollContainer/VBoxContainer/HealFoldableContainer/VBoxContainer/HealControl/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "HEAL"
 script = ExtResource("2_ta2cq")
 
-[node name="HealPercentControl" type="Control" parent="EntityControllerUI/VBoxContainer"]
+[node name="HealPercentControl" type="Control" parent="EntityControllerUI/ScrollContainer/VBoxContainer/HealFoldableContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="EntityControllerUI/VBoxContainer/HealPercentControl"]
+[node name="ColorRect" type="ColorRect" parent="EntityControllerUI/ScrollContainer/VBoxContainer/HealFoldableContainer/VBoxContainer/HealPercentControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -344,7 +366,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.41960785, 0.41960785, 0.41960785, 0.87058824)
 
-[node name="MarginContainer" type="MarginContainer" parent="EntityControllerUI/VBoxContainer/HealPercentControl"]
+[node name="MarginContainer" type="MarginContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/HealFoldableContainer/VBoxContainer/HealPercentControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -356,55 +378,64 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="EntityControllerUI/VBoxContainer/HealPercentControl/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/HealFoldableContainer/VBoxContainer/HealPercentControl/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="EntityControllerUI/VBoxContainer/HealPercentControl/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="EntityControllerUI/ScrollContainer/VBoxContainer/HealFoldableContainer/VBoxContainer/HealPercentControl/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "HEAL PERCENT"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="EntityControllerUI/VBoxContainer/HealPercentControl/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/HealFoldableContainer/VBoxContainer/HealPercentControl/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="PercentTypeVBox" type="VBoxContainer" parent="EntityControllerUI/VBoxContainer/HealPercentControl/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="PercentTypeVBox" type="VBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/HealFoldableContainer/VBoxContainer/HealPercentControl/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PercentModifierLabel" type="Label" parent="EntityControllerUI/VBoxContainer/HealPercentControl/MarginContainer/VBoxContainer/HBoxContainer/PercentTypeVBox"]
+[node name="PercentModifierLabel" type="Label" parent="EntityControllerUI/ScrollContainer/VBoxContainer/HealFoldableContainer/VBoxContainer/HealPercentControl/MarginContainer/VBoxContainer/HBoxContainer/PercentTypeVBox"]
 layout_mode = 2
 size_flags_vertical = 6
 text = "Percent Type"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HealthPercentModifierChoice" type="OptionButton" parent="EntityControllerUI/VBoxContainer/HealPercentControl/MarginContainer/VBoxContainer/HBoxContainer/PercentTypeVBox"]
+[node name="HealthPercentModifierChoice" type="OptionButton" parent="EntityControllerUI/ScrollContainer/VBoxContainer/HealFoldableContainer/VBoxContainer/HealPercentControl/MarginContainer/VBoxContainer/HBoxContainer/PercentTypeVBox"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
 expand_icon = true
 
-[node name="HealPercentEdit" type="TextEdit" parent="EntityControllerUI/VBoxContainer/HealPercentControl/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="HealPercentEdit" type="TextEdit" parent="EntityControllerUI/ScrollContainer/VBoxContainer/HealFoldableContainer/VBoxContainer/HealPercentControl/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "10"
 placeholder_text = "Damage number"
 
-[node name="HealPercentButton" type="Button" parent="EntityControllerUI/VBoxContainer/HealPercentControl/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="HealPercentButton" type="Button" parent="EntityControllerUI/ScrollContainer/VBoxContainer/HealFoldableContainer/VBoxContainer/HealPercentControl/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "HEAL"
 script = ExtResource("2_ta2cq")
 
-[node name="InflictConditionStackControl" type="Control" parent="EntityControllerUI/VBoxContainer"]
+[node name="SCDFoldableContainer" type="FoldableContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+folded = true
+title = "STACK | CLEANSE | DISPELL"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/SCDFoldableContainer"]
+visible = false
+layout_mode = 2
+
+[node name="InflictConditionStackControl" type="Control" parent="EntityControllerUI/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="EntityControllerUI/VBoxContainer/InflictConditionStackControl"]
+[node name="ColorRect" type="ColorRect" parent="EntityControllerUI/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/InflictConditionStackControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -413,7 +444,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.41960785, 0.41960785, 0.41960785, 0.87058824)
 
-[node name="MarginContainer" type="MarginContainer" parent="EntityControllerUI/VBoxContainer/InflictConditionStackControl"]
+[node name="MarginContainer" type="MarginContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/InflictConditionStackControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -425,56 +456,56 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="EntityControllerUI/VBoxContainer/InflictConditionStackControl/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/InflictConditionStackControl/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="EntityControllerUI/VBoxContainer/InflictConditionStackControl/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="EntityControllerUI/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/InflictConditionStackControl/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Inflict condition stack"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="EntityControllerUI/VBoxContainer/InflictConditionStackControl/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/InflictConditionStackControl/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="DamageTypeVBox" type="VBoxContainer" parent="EntityControllerUI/VBoxContainer/InflictConditionStackControl/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="DamageTypeVBox" type="VBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/InflictConditionStackControl/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="DamageTypeLabel" type="Label" parent="EntityControllerUI/VBoxContainer/InflictConditionStackControl/MarginContainer/VBoxContainer/HBoxContainer/DamageTypeVBox"]
+[node name="DamageTypeLabel" type="Label" parent="EntityControllerUI/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/InflictConditionStackControl/MarginContainer/VBoxContainer/HBoxContainer/DamageTypeVBox"]
 layout_mode = 2
 size_flags_vertical = 6
 text = "Stack Type"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StackTypeChoice" type="OptionButton" parent="EntityControllerUI/VBoxContainer/InflictConditionStackControl/MarginContainer/VBoxContainer/HBoxContainer/DamageTypeVBox"]
+[node name="StackTypeChoice" type="OptionButton" parent="EntityControllerUI/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/InflictConditionStackControl/MarginContainer/VBoxContainer/HBoxContainer/DamageTypeVBox"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
 expand_icon = true
 
-[node name="InflictConditionEdit" type="TextEdit" parent="EntityControllerUI/VBoxContainer/InflictConditionStackControl/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="InflictConditionEdit" type="TextEdit" parent="EntityControllerUI/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/InflictConditionStackControl/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "10"
 placeholder_text = "Damage number"
 
-[node name="InflictConditionButton" type="Button" parent="EntityControllerUI/VBoxContainer/InflictConditionStackControl/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="InflictConditionButton" type="Button" parent="EntityControllerUI/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/InflictConditionStackControl/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "INFLICT
 CONDITION"
 script = ExtResource("2_ta2cq")
 
-[node name="CleanseDispellControl" type="Control" parent="EntityControllerUI/VBoxContainer"]
+[node name="CleanseDispellControl" type="Control" parent="EntityControllerUI/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="EntityControllerUI/VBoxContainer/CleanseDispellControl"]
+[node name="ColorRect" type="ColorRect" parent="EntityControllerUI/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/CleanseDispellControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -483,7 +514,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.41960785, 0.41960785, 0.41960785, 0.87058824)
 
-[node name="MarginContainer" type="MarginContainer" parent="EntityControllerUI/VBoxContainer/CleanseDispellControl"]
+[node name="MarginContainer" type="MarginContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/CleanseDispellControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -495,43 +526,241 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="EntityControllerUI/VBoxContainer/CleanseDispellControl/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/CleanseDispellControl/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="EntityControllerUI/VBoxContainer/CleanseDispellControl/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="EntityControllerUI/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/CleanseDispellControl/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Cleanse /DISPELL"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="EntityControllerUI/VBoxContainer/CleanseDispellControl/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/CleanseDispellControl/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="CleanseDispellEdit" type="TextEdit" parent="EntityControllerUI/VBoxContainer/CleanseDispellControl/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="CleanseDispellEdit" type="TextEdit" parent="EntityControllerUI/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/CleanseDispellControl/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "10"
 placeholder_text = "Damage number"
 
-[node name="CleanseButton" type="Button" parent="EntityControllerUI/VBoxContainer/CleanseDispellControl/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="CleanseButton" type="Button" parent="EntityControllerUI/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/CleanseDispellControl/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "CLEANSE"
 script = ExtResource("2_ta2cq")
 
-[node name="DispellButton" type="Button" parent="EntityControllerUI/VBoxContainer/CleanseDispellControl/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="DispellButton" type="Button" parent="EntityControllerUI/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/CleanseDispellControl/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "DISPELL"
 script = ExtResource("2_ta2cq")
 
-[connection signal="item_selected" from="EntityControllerUI/VBoxContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer/DamageTypeVBox/TargetingStratChoice" to="." method="_on_targeting_strat_choice_item_selected"]
-[connection signal="pressed" from="EntityControllerUI/VBoxContainer/DirectAttackControl/MarginContainer/VBoxContainer/HBoxContainer/AttackButton" to="." method="_on_attack_button_pressed"]
-[connection signal="pressed" from="EntityControllerUI/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer/AttackPercentButton" to="." method="_on_attack_percent_button_pressed"]
-[connection signal="pressed" from="EntityControllerUI/VBoxContainer/HealControl/MarginContainer/VBoxContainer/HBoxContainer/HealButton" to="." method="_on_heal_button_pressed"]
-[connection signal="pressed" from="EntityControllerUI/VBoxContainer/HealPercentControl/MarginContainer/VBoxContainer/HBoxContainer/HealPercentButton" to="." method="_on_heal_percent_button_pressed"]
-[connection signal="pressed" from="EntityControllerUI/VBoxContainer/InflictConditionStackControl/MarginContainer/VBoxContainer/HBoxContainer/InflictConditionButton" to="." method="_on_inflict_condition_button_pressed"]
-[connection signal="pressed" from="EntityControllerUI/VBoxContainer/CleanseDispellControl/MarginContainer/VBoxContainer/HBoxContainer/CleanseButton" to="." method="_on_cleanse_button_pressed"]
-[connection signal="pressed" from="EntityControllerUI/VBoxContainer/CleanseDispellControl/MarginContainer/VBoxContainer/HBoxContainer/DispellButton" to="." method="_on_dispell_button_pressed"]
+[node name="ProjectileFoldableContainer" type="FoldableContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+title = "PROJECTILE ATTACK"
+
+[node name="ProjectileAttackControl" type="Control" parent="EntityControllerUI/ScrollContainer/VBoxContainer/ProjectileFoldableContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="EntityControllerUI/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.41960785, 0.41960785, 0.41960785, 0.87058824)
+
+[node name="MarginContainer" type="MarginContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="EntityControllerUI/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Projectile Attack"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ProjectileTypeVBox" type="VBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="ProjectileTypeLabel" type="Label" parent="EntityControllerUI/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileTypeVBox"]
+layout_mode = 2
+text = "Projectile Type"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProjectileTypeChoice" type="OptionButton" parent="EntityControllerUI/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileTypeVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+expand_icon = true
+
+[node name="ProjectileParamControl" type="Control" parent="EntityControllerUI/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="EntityControllerUI/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer"]
+layout_mode = 2
+text = "Projectile Parameters"
+label_settings = SubResource("LabelSettings_hsjxk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AllProjectileParamVBox" type="VBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SpeedControl" type="Control" parent="EntityControllerUI/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllProjectileParamVBox"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllProjectileParamVBox/SpeedControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="EntityControllerUI/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllProjectileParamVBox/SpeedControl/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Speed"
+
+[node name="SpeedTextEdit" type="TextEdit" parent="EntityControllerUI/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllProjectileParamVBox/SpeedControl/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "20"
+
+[node name="PhysicalDamageControl" type="Control" parent="EntityControllerUI/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllProjectileParamVBox"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllProjectileParamVBox/PhysicalDamageControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="EntityControllerUI/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllProjectileParamVBox/PhysicalDamageControl/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 9
+text = "Physical damage"
+vertical_alignment = 1
+
+[node name="PhysicalDamageTextEdit" type="TextEdit" parent="EntityControllerUI/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllProjectileParamVBox/PhysicalDamageControl/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "10"
+
+[node name="MagicalDamageControl2" type="Control" parent="EntityControllerUI/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllProjectileParamVBox"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllProjectileParamVBox/MagicalDamageControl2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="EntityControllerUI/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllProjectileParamVBox/MagicalDamageControl2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 9
+text = "Magical damage"
+vertical_alignment = 1
+
+[node name="MagicalDamageTextEdit" type="TextEdit" parent="EntityControllerUI/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllProjectileParamVBox/MagicalDamageControl2/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "0"
+
+[node name="BounceControl" type="Control" parent="EntityControllerUI/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllProjectileParamVBox"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllProjectileParamVBox/BounceControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="EntityControllerUI/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllProjectileParamVBox/BounceControl/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 10
+text = "Bounce"
+
+[node name="BounceTextEdit" type="TextEdit" parent="EntityControllerUI/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllProjectileParamVBox/BounceControl/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "0"
+
+[node name="ProjectileAttackButton" type="Button" parent="EntityControllerUI/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 35
+text = "SHOOT"
+script = ExtResource("2_ta2cq")
+
+[connection signal="item_selected" from="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer/DamageTypeVBox/TargetingStratChoice" to="." method="_on_targeting_strat_choice_item_selected"]
+[connection signal="pressed" from="EntityControllerUI/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackControl/MarginContainer/VBoxContainer/HBoxContainer/AttackButton" to="." method="_on_attack_button_pressed"]
+[connection signal="pressed" from="EntityControllerUI/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer/AttackPercentButton" to="." method="_on_attack_percent_button_pressed"]
+[connection signal="pressed" from="EntityControllerUI/ScrollContainer/VBoxContainer/HealFoldableContainer/VBoxContainer/HealControl/MarginContainer/VBoxContainer/HBoxContainer/HealButton" to="." method="_on_heal_button_pressed"]
+[connection signal="pressed" from="EntityControllerUI/ScrollContainer/VBoxContainer/HealFoldableContainer/VBoxContainer/HealPercentControl/MarginContainer/VBoxContainer/HBoxContainer/HealPercentButton" to="." method="_on_heal_percent_button_pressed"]
+[connection signal="pressed" from="EntityControllerUI/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/InflictConditionStackControl/MarginContainer/VBoxContainer/HBoxContainer/InflictConditionButton" to="." method="_on_inflict_condition_button_pressed"]
+[connection signal="pressed" from="EntityControllerUI/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/CleanseDispellControl/MarginContainer/VBoxContainer/HBoxContainer/CleanseButton" to="." method="_on_cleanse_button_pressed"]
+[connection signal="pressed" from="EntityControllerUI/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/CleanseDispellControl/MarginContainer/VBoxContainer/HBoxContainer/DispellButton" to="." method="_on_dispell_button_pressed"]
+[connection signal="pressed" from="EntityControllerUI/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileAttackButton" to="." method="_on_projectile_attack_button_pressed"]
