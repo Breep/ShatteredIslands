@@ -27,6 +27,16 @@ extends Node
 @onready var _magical_damage_text_edit: TextEdit = %MagicalDamageTextEdit
 @onready var _bounce_text_edit: TextEdit = %BounceTextEdit
 
+@onready var _spell_type_choice: OptionButton = %SpellTypeChoice
+@onready var _spell_param1_label: Label = %Param1Label
+@onready var _spell_param1_edit: TextEdit = %Param1TextEdit
+@onready var _spell_param2_label: Label = %Param2Label
+@onready var _spell_param2_edit: TextEdit = %Param2TextEdit
+@onready var _spell_param3_label: Label = %Param3Label
+@onready var _spell_param3_edit: TextEdit = %Param3TextEdit
+@onready var _spell_param4_label: Label = %Param4Label
+@onready var _spell_param4_edit: TextEdit = %Param4TextEdit
+
 var _target: Entity
 
 func _ready() -> void:
@@ -38,6 +48,7 @@ func _ready() -> void:
 	_percent_modifier_choice.clear()
 	_health_percent_modifier_choice.clear()
 	_projectile_type_choice.clear()
+	_spell_type_choice.clear()
 	
 	# Populate targeting strategy dropdown
 	var i: int = 0
@@ -75,6 +86,15 @@ func _ready() -> void:
 	for projectile_type: String in Projectile.ProjectileType.keys():
 		_projectile_type_choice.add_item(projectile_type, i)
 		i += 1
+	
+	# Populate spell type dropdown
+	i = 0
+	for spell_type: String in Spell.Type.keys():
+		_spell_type_choice.add_item(spell_type, i)
+		i += 1
+	
+	# Initialize spell parameters with default (METEOR)
+	_update_spell_parameters(Spell.Type.METEOR)
 	
 	if entity_owner != null:
 		_entity_name_label.text = entity_owner.entity_name
@@ -297,3 +317,132 @@ func _on_projectile_attack_button_pressed() -> void:
 	print("DEBUG: projectile_attack called - Target: ", _target.entity_name, " | Type: ", Projectile.ProjectileType.keys()[projectile_type], 
 		" | Speed: ", projectile_stats.speed, " | Physical: ", projectile_stats.physical_damage_flat, 
 		" | Magical: ", projectile_stats.magical_damage_flat, " | Bounces: ", projectile_stats.bounces_remaining)
+
+
+func _update_spell_parameters(spell_type: Spell.Type) -> void:
+	"""Updates the parameter labels and visibility based on selected spell type."""
+	var param_configs: Array[Dictionary] = []
+	
+	match spell_type:
+		Spell.Type.METEOR:
+			param_configs = [
+				{"label": "Damage %", "default": "5"},
+				{"label": "Radius", "default": "5"},
+				{"label": "(Callbacks)", "default": "0"},
+				{"label": "(Unused)", "default": "0"}
+			]
+		Spell.Type.DARK_STORM:
+			param_configs = [
+				{"label": "Damage", "default": "10"},
+				{"label": "Period", "default": "1.0"},
+				{"label": "Lifespan", "default": "5.0"},
+				{"label": "Pain Stack %", "default": "10"}
+			]
+		Spell.Type.CONTAGION:
+			param_configs = [
+				{"label": "Radius", "default": "10"},
+				{"label": "Spread %", "default": "50"},
+				{"label": "(Unused)", "default": "0"},
+				{"label": "(Unused)", "default": "0"}
+			]
+		Spell.Type.SHROOM:
+			param_configs = [
+				{"label": "Radius", "default": "5"},
+				{"label": "Damage", "default": "20"},
+				{"label": "Life Time", "default": "10.0"},
+				{"label": "(Unused)", "default": "0"}
+			]
+		Spell.Type.DEATH_FOG:
+			param_configs = [
+				{"label": "Grow Speed", "default": "1.0"},
+				{"label": "Tick Period", "default": "1.0"},
+				{"label": "Dmg Multiplier", "default": "1.0"},
+				{"label": "(Unused)", "default": "0"}
+			]
+		Spell.Type.LIGHTNING:
+			param_configs = [
+				{"label": "Damage", "default": "100"},
+				{"label": "(Unused)", "default": "0"},
+				{"label": "(Unused)", "default": "0"},
+				{"label": "(Unused)", "default": "0"}
+			]
+		Spell.Type.CHAIN_LIGHTNING:
+			param_configs = [
+				{"label": "Damage", "default": "50"},
+				{"label": "Bounce Count", "default": "3"},
+				{"label": "Bounce Range", "default": "10"},
+				{"label": "Dmg Decay %", "default": "20"}
+			]
+	
+	# Apply configurations
+	var labels: Array[Label] = [_spell_param1_label, _spell_param2_label, _spell_param3_label, _spell_param4_label]
+	var edits: Array[TextEdit] = [_spell_param1_edit, _spell_param2_edit, _spell_param3_edit, _spell_param4_edit]
+	
+	for i in range(4):
+		if i < param_configs.size():
+			labels[i].text = param_configs[i]["label"]
+			edits[i].text = param_configs[i]["default"]
+			labels[i].get_parent().get_parent().visible = true
+		else:
+			labels[i].get_parent().get_parent().visible = false
+
+
+func _on_spell_type_choice_item_selected(index: int) -> void:
+	"""Called when spell type dropdown selection changes."""
+	var spell_type: Spell.Type = index as Spell.Type
+	_update_spell_parameters(spell_type)
+	print("DEBUG: Spell type changed to: ", Spell.Type.keys()[spell_type])
+
+
+func _on_cast_spell_button_pressed() -> void:
+	_refresh_target()
+	
+	if _target == null:
+		printerr("EntityController: No target selected for cast_spell")
+		return
+	
+	if entity_owner == null:
+		printerr("EntityController: No entity_owner for cast_spell")
+		return
+	
+	var spell_type: Spell.Type = _spell_type_choice.get_selected_id() as Spell.Type
+	var spell_modifier: Dictionary = {}
+	
+	# Build spell_modifier dictionary based on spell type
+	match spell_type:
+		Spell.Type.METEOR:
+			spell_modifier[Spell.MeteorModifier.DAMAGE_PERCENT] = _spell_param1_edit.text.to_float()
+			spell_modifier[Spell.MeteorModifier.RADIUS] = _spell_param2_edit.text.to_float()
+			# ON_HIT_CALLBACKS would be handled separately if needed
+		
+		Spell.Type.DARK_STORM:
+			spell_modifier[Spell.DarkStormModifier.DAMAGE] = _spell_param1_edit.text.to_float()
+			spell_modifier[Spell.DarkStormModifier.PERIOD] = _spell_param2_edit.text.to_float()
+			spell_modifier[Spell.DarkStormModifier.LIFESPAN] = _spell_param3_edit.text.to_float()
+			spell_modifier[Spell.DarkStormModifier.PAIN_STACK_PERCENT] = _spell_param4_edit.text.to_float()
+		
+		Spell.Type.CONTAGION:
+			spell_modifier[Spell.ContagionModifier.RADIUS] = _spell_param1_edit.text.to_float()
+			spell_modifier[Spell.ContagionModifier.SPREAD_PERCENT] = _spell_param2_edit.text.to_float()
+		
+		Spell.Type.SHROOM:
+			spell_modifier[Spell.ShroomModifier.RADIUS] = _spell_param1_edit.text.to_float()
+			spell_modifier[Spell.ShroomModifier.DAMAGE] = _spell_param2_edit.text.to_float()
+			spell_modifier[Spell.ShroomModifier.LIFE_TIME] = _spell_param3_edit.text.to_float()
+		
+		Spell.Type.DEATH_FOG:
+			spell_modifier[Spell.DeathFogModifier.GROW_SPEED] = _spell_param1_edit.text.to_float()
+			spell_modifier[Spell.DeathFogModifier.TICK_PERIOD] = _spell_param2_edit.text.to_float()
+			spell_modifier[Spell.DeathFogModifier.DAMAGE_MULTIPLIER] = _spell_param3_edit.text.to_float()
+		
+		Spell.Type.LIGHTNING:
+			spell_modifier[Spell.LightningModifier.DAMAGE] = _spell_param1_edit.text.to_float()
+		
+		Spell.Type.CHAIN_LIGHTNING:
+			spell_modifier[Spell.ChainLightningModifier.DAMAGE] = _spell_param1_edit.text.to_float()
+			spell_modifier[Spell.ChainLightningModifier.BOUNCE_COUNT] = int(_spell_param2_edit.text.to_float())
+			spell_modifier[Spell.ChainLightningModifier.BOUNCE_RANGE] = _spell_param3_edit.text.to_float()
+			spell_modifier[Spell.ChainLightningModifier.DAMAGE_DECAY_PERCENT] = _spell_param4_edit.text.to_float()
+	
+	entity_owner.cast_spell(_target, spell_type, spell_modifier)
+	print("DEBUG: cast_spell called - Target: ", _target.entity_name, " | Spell: ", Spell.Type.keys()[spell_type], " | Modifiers: ", spell_modifier)

@@ -48,11 +48,15 @@ text = "Entity Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TargetModuleControl" type="Control" parent="EntityControllerUI/ScrollContainer/VBoxContainer"]
+[node name="TargetModuleFoldableContainer" type="FoldableContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+title = "TARGET MODULE"
+
+[node name="TargetModuleControl" type="Control" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleFoldableContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleControl"]
+[node name="ColorRect" type="ColorRect" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleFoldableContainer/TargetModuleControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -61,7 +65,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.41960785, 0.41960785, 0.41960785, 0.87058824)
 
-[node name="MarginContainer" type="MarginContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleControl"]
+[node name="MarginContainer" type="MarginContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleFoldableContainer/TargetModuleControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -73,60 +77,62 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleControl/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleFoldableContainer/TargetModuleControl/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleControl/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleFoldableContainer/TargetModuleControl/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "TARGET MODULE"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleControl/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleFoldableContainer/TargetModuleControl/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="DamageTypeVBox" type="VBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="DamageTypeVBox" type="VBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleFoldableContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TargetingStratLabel" type="Label" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer/DamageTypeVBox"]
+[node name="TargetingStratLabel" type="Label" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleFoldableContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer/DamageTypeVBox"]
 layout_mode = 2
 size_flags_vertical = 6
 text = "Targeting Strategy"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TargetingStratChoice" type="OptionButton" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer/DamageTypeVBox"]
+[node name="TargetingStratChoice" type="OptionButton" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleFoldableContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer/DamageTypeVBox"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
 expand_icon = true
 
-[node name="MarginContainer" type="MarginContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleFoldableContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleFoldableContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleFoldableContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TextureRect" type="TextureRect" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleFoldableContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("4_j3d5q")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="TargetLabel" type="RichTextLabel" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="TargetLabel" type="RichTextLabel" parent="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleFoldableContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 bbcode_enabled = true
 text = "[color=red]<undefined>[/color]"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="DirectAttackFoldableContainer" type="FoldableContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -560,9 +566,11 @@ script = ExtResource("2_ta2cq")
 
 [node name="ProjectileFoldableContainer" type="FoldableContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer"]
 layout_mode = 2
+folded = true
 title = "PROJECTILE ATTACK"
 
 [node name="ProjectileAttackControl" type="Control" parent="EntityControllerUI/ScrollContainer/VBoxContainer/ProjectileFoldableContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 
@@ -755,7 +763,209 @@ theme_override_font_sizes/font_size = 35
 text = "SHOOT"
 script = ExtResource("2_ta2cq")
 
-[connection signal="item_selected" from="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer/DamageTypeVBox/TargetingStratChoice" to="." method="_on_targeting_strat_choice_item_selected"]
+[node name="CastSpellFoldableContainer" type="FoldableContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+title = "CAST SPELL"
+
+[node name="CastSpellControl" type="Control" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.41960785, 0.41960785, 0.41960785, 0.87058824)
+
+[node name="MarginContainer" type="MarginContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "CAST SPELL"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SpellTypeVBox" type="VBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="SpellTypeLabel" type="Label" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer/SpellTypeVBox"]
+layout_mode = 2
+text = "Spell Type"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpellTypeChoice" type="OptionButton" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer/SpellTypeVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+expand_icon = true
+
+[node name="ProjectileParamControl" type="Control" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer"]
+layout_mode = 2
+text = "Spell Parameters"
+label_settings = SubResource("LabelSettings_hsjxk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AllProjectileParamVBox" type="VBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Param1" type="Control" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllProjectileParamVBox"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllProjectileParamVBox/Param1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Param1Label" type="Label" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllProjectileParamVBox/Param1/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 10
+text = "Param 1"
+
+[node name="Param1TextEdit" type="TextEdit" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllProjectileParamVBox/Param1/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "20"
+
+[node name="Param2" type="Control" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllProjectileParamVBox"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllProjectileParamVBox/Param2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Param2Label" type="Label" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllProjectileParamVBox/Param2/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 10
+text = "Param 2"
+vertical_alignment = 1
+
+[node name="Param2TextEdit" type="TextEdit" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllProjectileParamVBox/Param2/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "10"
+
+[node name="Param3" type="Control" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllProjectileParamVBox"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllProjectileParamVBox/Param3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Param3Label" type="Label" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllProjectileParamVBox/Param3/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 10
+text = "PARAM 3"
+vertical_alignment = 1
+
+[node name="Param3TextEdit" type="TextEdit" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllProjectileParamVBox/Param3/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "0"
+
+[node name="Param4" type="Control" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllProjectileParamVBox"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllProjectileParamVBox/Param4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Param4Label" type="Label" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllProjectileParamVBox/Param4/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 10
+text = "PARAM 4"
+
+[node name="Param4TextEdit" type="TextEdit" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllProjectileParamVBox/Param4/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "0"
+
+[node name="ProjectileAttackButton" type="Button" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 35
+text = "CAST"
+script = ExtResource("2_ta2cq")
+
+[connection signal="item_selected" from="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleFoldableContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer/DamageTypeVBox/TargetingStratChoice" to="." method="_on_targeting_strat_choice_item_selected"]
 [connection signal="pressed" from="EntityControllerUI/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackControl/MarginContainer/VBoxContainer/HBoxContainer/AttackButton" to="." method="_on_attack_button_pressed"]
 [connection signal="pressed" from="EntityControllerUI/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer/AttackPercentButton" to="." method="_on_attack_percent_button_pressed"]
 [connection signal="pressed" from="EntityControllerUI/ScrollContainer/VBoxContainer/HealFoldableContainer/VBoxContainer/HealControl/MarginContainer/VBoxContainer/HBoxContainer/HealButton" to="." method="_on_heal_button_pressed"]
@@ -764,3 +974,5 @@ script = ExtResource("2_ta2cq")
 [connection signal="pressed" from="EntityControllerUI/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/CleanseDispellControl/MarginContainer/VBoxContainer/HBoxContainer/CleanseButton" to="." method="_on_cleanse_button_pressed"]
 [connection signal="pressed" from="EntityControllerUI/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/CleanseDispellControl/MarginContainer/VBoxContainer/HBoxContainer/DispellButton" to="." method="_on_dispell_button_pressed"]
 [connection signal="pressed" from="EntityControllerUI/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileAttackButton" to="." method="_on_projectile_attack_button_pressed"]
+[connection signal="item_selected" from="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer/SpellTypeVBox/SpellTypeChoice" to="." method="_on_spell_type_choice_item_selected"]
+[connection signal="pressed" from="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileAttackButton" to="." method="_on_cast_spell_button_pressed"]

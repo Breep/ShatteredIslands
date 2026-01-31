@@ -76,6 +76,24 @@ team = 1
 custom_base_stats = SubResource("Resource_xl213")
 _spawn_manager = NodePath("../../SpawnManager")
 
+[node name="DarkKnight8" parent="Entities" node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.677886, 0, 1.9581113)
+team = 1
+custom_base_stats = SubResource("Resource_xl213")
+_spawn_manager = NodePath("../../SpawnManager")
+
+[node name="DarkKnight9" parent="Entities" node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9757657, 0, 1.9554577)
+team = 1
+custom_base_stats = SubResource("Resource_xl213")
+_spawn_manager = NodePath("../../SpawnManager")
+
+[node name="DarkKnight10" parent="Entities" node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.31928444, 0, 1.1059611)
+team = 1
+custom_base_stats = SubResource("Resource_xl213")
+_spawn_manager = NodePath("../../SpawnManager")
+
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
