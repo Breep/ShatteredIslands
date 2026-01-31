@@ -765,9 +765,11 @@ script = ExtResource("2_ta2cq")
 
 [node name="CastSpellFoldableContainer" type="FoldableContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer"]
 layout_mode = 2
+folded = true
 title = "CAST SPELL"
 
 [node name="CastSpellControl" type="Control" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 
@@ -965,6 +967,56 @@ theme_override_font_sizes/font_size = 35
 text = "CAST"
 script = ExtResource("2_ta2cq")
 
+[node name="CastUltimateFoldableContainer" type="FoldableContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+folded = true
+title = "CAST ULTIMATE"
+
+[node name="CastUltimateControl" type="Control" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastUltimateFoldableContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastUltimateFoldableContainer/CastUltimateControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.41960785, 0.41960785, 0.41960785, 0.87058824)
+
+[node name="MarginContainer" type="MarginContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastUltimateFoldableContainer/CastUltimateControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastUltimateFoldableContainer/CastUltimateControl/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastUltimateFoldableContainer/CastUltimateControl/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "CAST ULTIMATE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastUltimateFoldableContainer/CastUltimateControl/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CastUltimateButton" type="Button" parent="EntityControllerUI/ScrollContainer/VBoxContainer/CastUltimateFoldableContainer/CastUltimateControl/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "CAST"
+script = ExtResource("2_ta2cq")
+
 [connection signal="item_selected" from="EntityControllerUI/ScrollContainer/VBoxContainer/TargetModuleFoldableContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer/DamageTypeVBox/TargetingStratChoice" to="." method="_on_targeting_strat_choice_item_selected"]
 [connection signal="pressed" from="EntityControllerUI/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackControl/MarginContainer/VBoxContainer/HBoxContainer/AttackButton" to="." method="_on_attack_button_pressed"]
 [connection signal="pressed" from="EntityControllerUI/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer/AttackPercentButton" to="." method="_on_attack_percent_button_pressed"]
@@ -976,3 +1028,4 @@ script = ExtResource("2_ta2cq")
 [connection signal="pressed" from="EntityControllerUI/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileAttackButton" to="." method="_on_projectile_attack_button_pressed"]
 [connection signal="item_selected" from="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer/SpellTypeVBox/SpellTypeChoice" to="." method="_on_spell_type_choice_item_selected"]
 [connection signal="pressed" from="EntityControllerUI/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileAttackButton" to="." method="_on_cast_spell_button_pressed"]
+[connection signal="pressed" from="EntityControllerUI/ScrollContainer/VBoxContainer/CastUltimateFoldableContainer/CastUltimateControl/MarginContainer/VBoxContainer/HBoxContainer/CastUltimateButton" to="." method="_on_cast_ultimate_button_pressed"]

@@ -32,6 +32,10 @@ var display_mode: DisplayMode = DisplayMode.PREVIEW
 var fighting_area: FightingArea
 var families_stats: FamiliesStats
 var deck: PlayerDeck
+
+# Controls whether auto-attack module should start when entering FIGHTING state
+var auto_attack_enabled: bool = true
+var family_managers_enabled: bool = true
 #endregion
 
 #region ============================== Private variables ==============================
@@ -254,8 +258,9 @@ func _on_hero_fighting_state_changed(new_fighting_state: FightingState) -> void:
 		FightingState.FIGHTING:
 			if auto_attack_enabled:
 				_auto_attack_module.start()
-			for family_manager: FamilyManager in _family_managers.values():
-				family_manager.start()
+			if family_managers_enabled:
+				for family_manager: FamilyManager in _family_managers.values():
+					family_manager.start()
 		FightingState.CELEBRATING: pass
 		FightingState.DEAD: pass
 		FightingState.UNDEF: pass

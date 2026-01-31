@@ -314,8 +314,8 @@ func _on_projectile_attack_button_pressed() -> void:
 	projectile_stats.bounces_remaining = bounce_count
 	
 	entity_owner.projectile_attack(_target, projectile_type, projectile_spawn, projectile_stats)
-	print("DEBUG: projectile_attack called - Target: ", _target.entity_name, " | Type: ", Projectile.ProjectileType.keys()[projectile_type], 
-		" | Speed: ", projectile_stats.speed, " | Physical: ", projectile_stats.physical_damage_flat, 
+	print("DEBUG: projectile_attack called - Target: ", _target.entity_name, " | Type: ", Projectile.ProjectileType.keys()[projectile_type],
+		" | Speed: ", projectile_stats.speed, " | Physical: ", projectile_stats.physical_damage_flat,
 		" | Magical: ", projectile_stats.magical_damage_flat, " | Bounces: ", projectile_stats.bounces_remaining)
 
 
@@ -446,3 +446,12 @@ func _on_cast_spell_button_pressed() -> void:
 	
 	entity_owner.cast_spell(_target, spell_type, spell_modifier)
 	print("DEBUG: cast_spell called - Target: ", _target.entity_name, " | Spell: ", Spell.Type.keys()[spell_type], " | Modifiers: ", spell_modifier)
+
+
+func _on_cast_ultimate_button_pressed() -> void:
+	if entity_owner == null:
+		printerr("EntityController: No entity_owner for cast_ultimate")
+		return
+	
+	entity_owner.cast_ultimate()
+	print("DEBUG: cast_ultimate called")

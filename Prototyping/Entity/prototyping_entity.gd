@@ -19,6 +19,7 @@ func _on_start_fight_button_pressed() -> void:
 	for entity: Entity in _entities:
 		# Disable auto-attack for manual control during prototyping
 		entity.auto_attack_enabled = false
+		entity.family_managers_enabled = false
 		entity.fighting_state = Entity.FightingState.FIGHTING
 		if entity is Hero:
 			entity.set_display_mode(Hero.DisplayMode.FIGHTING_PHASE)

@@ -81,10 +81,9 @@ var _thunder_berserker_accumulated_penalty: float = 0.0
 
 func _ready() -> void:
 	_storm_stats = _owner.families_stats.storm
-	_owner.critical_action_done.connect(_on_owner_critical_action_done)
-	
 
 func start() -> void:
+	_owner.critical_action_done.connect(_on_owner_critical_action_done)
 	_create_optional_timers()
 	for timer in _optional_timers:
 		timer.start()
@@ -404,6 +403,9 @@ func _apply_chain_lightning_effect(hit_victim: Entity, original_damage: float) -
 #region ============================== Callbacks functions ==============================
 
 func _on_current_rank_changed() -> void:
+	if _lightning_spam_timer == null:
+		return
+	
 	_call_the_lightning()
 	# [THUNDER BERSERKER] (Pénalité sur Grind)
 	if _storm_stats.thunder_berserker_activated and _thunder_berserker_penalty_active:
