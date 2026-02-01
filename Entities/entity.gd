@@ -56,45 +56,6 @@ func signal_auto_attack_started(is_critical: bool) -> void:
 	auto_attack_started.emit(is_critical)
 #endregion
 
-#region ============================== Constants ==============================
-
-#endregion
-
-#region ============================== Public variables ==============================
-var _is_dead: bool = false
-var is_dead: bool:
-	get: return _is_dead
-
-var stats: EntityStats
-
-var target_module: TargetModule
-
-var auto_attack_modifier_registry: AutoAttackModifierRegistry
-var action_modifiers_registry: ActionModifiersRegistry
-var stat_modifiers_registry: EntityStatModifiersRegistry
-
-var stack_manager: StackManager # TODO
-#endregion
-
-# ============================== Export ==============================
-
-@export var id: int = -1 # Multiplayer ID of the entity
-@export var team: int = -1 # Team number of the entity
-@export var battle_id: int = -1 # The id of the battle the entity is in
-@export var entity_name: String = "<entity name>"
-
-# ============================== Local Nodes ==============================
-
-@export_group("Optional configuration")
-@export var _entity_info_panel_3d: EntityInfoPanel3D
-var visual: EntityInfoPanel3D:
-	get: return _entity_info_panel_3d
-
-@export var base_stats: EntityStats
-@export var _spawn_manager: SpawnManager
-
-@onready var bds_registry := EntityBDSRegistry.new(entity_name)
-
 #region ============================== Enums ==============================
 enum FightingState {
 	IDLE,
@@ -126,6 +87,55 @@ enum FieldGeneratorModifier {
 }
 #endregion
 
+#region ============================== Constants ==============================
+
+#endregion
+
+#region ============================== Public variables ==============================
+var _is_dead: bool = false
+var is_dead: bool:
+	get: return _is_dead
+
+var stats: EntityStats
+
+var conditions: ConditionsModule
+
+var target_module: TargetModule
+
+var auto_attack_modifier_registry: AutoAttackModifierRegistry
+var action_modifiers_registry: ActionModifiersRegistry
+var stat_modifiers_registry: EntityStatModifiersRegistry
+#endregion
+
+#region ============================== Private variables ==============================
+#endregion
+
+#region ============================== Export ==============================
+@export var id: int = -1 # Multiplayer ID of the entity
+@export var team: int = -1 # Team number of the entity
+@export var battle_id: int = -1 # The id of the battle the entity is in
+@export var entity_name: String = "<entity name>"
+#endregion
+
+# ============================== Local Nodes ==============================
+
+@export_group("Optional configuration")
+@export var _entity_info_panel_3d: EntityInfoPanel3D
+var visual: EntityInfoPanel3D:
+	get: return _entity_info_panel_3d
+
+# Custom base_stats override for quick testing (optional)
+# If defined, this will be used instead of auto-generated base_stats
+@export var custom_base_stats: EntityStats
+
+var _base_stats: EntityStats # Private, use base_stats property to access
+var base_stats: EntityStats:
+	get: return _base_stats
+
+@export var _spawn_manager: SpawnManager
+
+@onready var bds_registry := EntityBDSRegistry.new(entity_name)
+
 #region ============================== Fighting State ==============================
 signal fighting_state_changed(new_fighting_state: FightingState)
 var _fighting_state: FightingState = FightingState.UNDEF
@@ -148,28 +158,49 @@ func _init() -> void:
 
 func _entity_init() -> void:
 	id = instance_count
-	instance_count += 1	
+	instance_count += 1
 	
 	# Stats
 	stats = EntityStats.new()
-	if base_stats == null:
-		base_stats = EntityStats.new()
+	_base_stats = EntityStats.new()
 	
 	# Default Modifier Registries
 	auto_attack_modifier_registry = AutoAttackModifierRegistry.new()
 	action_modifiers_registry = ActionModifiersRegistry.new()
-	stat_modifiers_registry = EntityStatModifiersRegistry.new(base_stats, stats)
 
 
 func _enter_tree() -> void:
 	_entity_enter_tree()
 
 
-func _entity_enter_tree() -> void:	
+func _entity_enter_tree() -> void:
+	# Stats registry needs to be created after _init() because custom_base_stats is not available in _init()
+	if custom_base_stats != null:
+		_base_stats = custom_base_stats
+		_base_stats.reset_from_self()
+		Verbose.debug("Entity [" + entity_name + "] using custom_base_stats", Verbose.Category.ENTITY)
+	else:
+		_base_stats = EntityStats.new()
+	stat_modifiers_registry = EntityStatModifiersRegistry.new(_base_stats, stats)
+	
 	# Add default module if not already added
 	if target_module == null:
 		target_module = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.TARGET].instantiate().init(self)
 		add_child(target_module)
+
+	# Initialize conditions module (includes stack handling and timers)
+	if conditions == null:
+		conditions = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.CONDITIONS].instantiate().init(self)
+		add_child(conditions)
+
+
+func _ready() -> void:
+	_entity_ready()
+
+
+func _entity_ready() -> void:
+	Verbose.debug("Entity [" + entity_name + "] ready", Verbose.Category.ENTITY)
+	fighting_state_changed.connect(_on_entity_fighting_state_changed)
 #endregion
 
 #region ============================== Public functions ==============================
@@ -213,7 +244,7 @@ func heal_percent(_target: Entity, _percent: float, _percent_modifier: Utils.Per
 func inflict_condition_stacks(_target: Entity, _stacks_number: float, _stack_type: Utils.StackType, _action_id: StringName, _duration: float = 5.0) -> void:
 	printerr("Entity: virtual inflict_condition_stacks() called [", get_path(), "]")
 
-func summon_entity(_entity_type: EntityType, _entity_spawn_global_position: Vector3, _entity_modifier: Dictionary) -> void:
+func summon_entity(_entity_type: EntityType, _spawn_config: SpawnLocationConfig, _entity_modifier: Dictionary) -> void:
 	printerr("Entity: virtual summon_entity() called [", get_path(), "]")
 
 func cleanse(_target: Entity, _value: float, _action_id: StringName) -> void:
@@ -249,4 +280,16 @@ func take_dispell(_value: float, _is_critical: bool, _action_id: StringName, _so
 #endregion
 
 #region ============================== Private functions ==============================
+func _on_entity_fighting_state_changed(new_fighting_state: FightingState) -> void:
+	Verbose.debug("Entity [" + entity_name + "] fighting state changed to [" + str(FightingState.keys()[new_fighting_state]) + "]", Verbose.Category.ENTITY)
+	match new_fighting_state:
+		FightingState.IDLE:
+			target_module.stop()
+			conditions.stop()
+		FightingState.FIGHTING:
+			target_module.start()
+			conditions.start()
+		FightingState.CELEBRATING: pass
+		FightingState.DEAD: pass
+		FightingState.UNDEF: pass
 #endregion

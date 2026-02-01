@@ -422,7 +422,7 @@ func _on_hit_arcane_staff(_cb_vars: Dictionary) -> void:
 func _on_auto_attack_protectospear(_cb_vars: Dictionary) -> void:
 	var chance: float = _attack_stats.protectospear_chance
 	if Utils.is_randomize_modifier_active(chance):
-		_owner.inflict_condition_stacks(_owner, _attack_stats.protectospear_shield_amount, Utils.StackType.ARMOR, "Protecto'Spear")
+		_owner.inflict_condition_stacks(_owner, _attack_stats.protectospear_shield_amount, Utils.StackType.SHIELD, "Protecto'Spear")
 
 
 # [RUSSIAN ROULETTE]

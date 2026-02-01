@@ -132,7 +132,7 @@ func heal_percent(target: Entity, percent: float, percent_modifier: Utils.Percen
 		Utils.PercentModifier.CURRENT_HP:
 			hp = target.stats.health
 		Utils.PercentModifier.LOST_HP:
-			hp = target.stats.health_max - _owner.stats.health
+			hp = target.stats.health_max - target.stats.health
 	var heal_amount: float = (percent * hp as float) / 100.0
 	heal(target, heal_amount, action_id)
 #endregion
@@ -299,17 +299,26 @@ func _cast_chain_lightning(target: Entity, spell_modifier: Dictionary) -> void:
 
 
 #region  ============================== Summon ==============================
-func summon_entity(entity_type: Entity.EntityType, entity_spawn_global_position: Vector3, entity_modifier: Dictionary) -> void:
+func summon_entity(entity_type: Entity.EntityType, spawn_config: SpawnLocationConfig, entity_modifier: Dictionary) -> void:
 	if _spawn_manager == null:
 		push_error("ActionModule: Can't summon an entity if no SpawnManager is linked to me [", get_path(), "]")
 		return
+	
+	# Get arena zone manager from owner's fighting area
+	var arena_zone_manager: ArenaZoneManager = null
+	if _owner is Hero and _owner.fighting_area != null:
+		arena_zone_manager = _owner.fighting_area.arena_zone_manager
+	
+	# Resolve spawn position with owner's team
+	var spawn_position := spawn_config.resolve(arena_zone_manager, _owner.team)
+	
 	match entity_type:
-		Entity.EntityType.SNAKE_BARREL: _summon_snake_barrel(entity_spawn_global_position, entity_modifier)
-		Entity.EntityType.SNAKE: _summon_snake(entity_spawn_global_position, entity_modifier)
-		Entity.EntityType.FIELD_GENERATOR: _summon_field_generator(entity_spawn_global_position, entity_modifier)
+		Entity.EntityType.SNAKE_BARREL: _summon_snake_barrel(spawn_position, entity_modifier)
+		Entity.EntityType.SNAKE: _summon_snake(spawn_position, entity_modifier)
+		Entity.EntityType.FIELD_GENERATOR: _summon_field_generator(spawn_position, entity_modifier)
 
 
-func _summon_snake_barrel(entity_spawn_global_position: Vector3, entity_modifier: Dictionary) -> void:
+func _summon_snake_barrel(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
 	var snake_barrel: SnakeBarrel = SNAKE_BARREL_SCENE.instantiate()
 	if multiplayer.is_server():
 		var snake_number: int = entity_modifier[Entity.SnakeBarrelModifier.SNAKE_NUMBER]
@@ -317,17 +326,17 @@ func _summon_snake_barrel(entity_spawn_global_position: Vector3, entity_modifier
 		var max_health: int = entity_modifier[Entity.SnakeBarrelModifier.MAX_HEALTH]
 		snake_barrel.init(snake_number, snake_poison_stacks, max_health)
 	snake_barrel.team = _owner.team
-	_spawn_manager.spawn_entity(snake_barrel, entity_spawn_global_position)
+	_spawn_manager.spawn_entity(snake_barrel, spawn_position)
 
 
-func _summon_snake(entity_spawn_global_position: Vector3, _entity_modifier: Dictionary) -> void:
+func _summon_snake(spawn_position: Vector3, _entity_modifier: Dictionary) -> void:
 	var snake: Snake = SNAKE_SCENE.instantiate()
 	snake.team = _owner.team
-	_spawn_manager.spawn_entity(snake, entity_spawn_global_position)
+	_spawn_manager.spawn_entity(snake, spawn_position)
 	print("SUMMON SNAKE")
 	
 	
-func _summon_field_generator(entity_spawn_global_position: Vector3, entity_modifier: Dictionary) -> void:
+func _summon_field_generator(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
 	var field_generator: FieldGenerator = FIELD_GENERATOR_SCENE.instantiate()
 	if multiplayer.is_server():
 		var max_health: int = entity_modifier.get(Entity.FieldGeneratorModifier.MAX_HEALTH, 1)
@@ -338,7 +347,7 @@ func _summon_field_generator(entity_spawn_global_position: Vector3, entity_modif
 		field_generator.init(max_health, shield_amount, shield_interval, initial_shield, target_count)
 	
 	field_generator.team = _owner.team
-	_spawn_manager.spawn_entity(field_generator, entity_spawn_global_position)
+	_spawn_manager.spawn_entity(field_generator, spawn_position)
 #endregion
 
 

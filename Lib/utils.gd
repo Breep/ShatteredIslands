@@ -11,7 +11,7 @@ enum ActionType {
 	UTILITY_STUN,
 	UTILITY_CLEANSE,
 	UTILITY_DISPELL,
-	STACK_ARMOR,
+	STACK_SHIELD,
 	STACK_IGNITE,
 	STACK_POISON,
 	STACK_REGEN,
@@ -34,7 +34,7 @@ enum PercentModifier {
 
 enum StackType {
 	POISON,
-	ARMOR,
+	SHIELD,
 	IGNITE,
 	REGEN,
 	NECROSIS
@@ -58,7 +58,7 @@ const DAMAGE_COLORS: Dictionary[DamageType, Color] = {
 
 const STACK_COLORS: Dictionary[StackType, Color] = {
 	StackType.POISON: Color.WEB_GREEN,
-	StackType.ARMOR: Color.SADDLE_BROWN,
+	StackType.SHIELD: Color.SADDLE_BROWN,
 	StackType.IGNITE: Color.DARK_RED,
 	StackType.REGEN: Color.AQUAMARINE,
 	StackType.NECROSIS: Color.REBECCA_PURPLE
@@ -81,7 +81,7 @@ func _ready() -> void:
 func stack_to_action(stack_type: StackType) -> ActionType:
 	match stack_type:
 		StackType.POISON: return ActionType.STACK_POISON
-		StackType.ARMOR: return ActionType.STACK_ARMOR
+		StackType.SHIELD: return ActionType.STACK_SHIELD
 		StackType.IGNITE: return ActionType.STACK_IGNITE
 		StackType.REGEN: return ActionType.STACK_REGEN
 		StackType.NECROSIS: return ActionType.STACK_NECROSIS
@@ -107,7 +107,7 @@ func get_all_actions() -> Array[ActionType]:
 		ActionType.UTILITY_STUN,
 		ActionType.UTILITY_CLEANSE,
 		ActionType.UTILITY_DISPELL,
-		ActionType.STACK_ARMOR,
+		ActionType.STACK_SHIELD,
 		ActionType.STACK_IGNITE,
 		ActionType.STACK_POISON,
 		ActionType.STACK_REGEN,

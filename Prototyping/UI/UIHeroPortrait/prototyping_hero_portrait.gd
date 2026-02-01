@@ -25,7 +25,7 @@ func _ready() -> void:
 	_rng.randomize()
 	
 	_player.name = "Breep"
-	_player.deck = PlayerDeck.new(_player)
+	_player.deck = PlayerDeck.new().init(_player)
 	_player.hero_desc = _hero_desc
 	_player.Hero = Hero.new()
 	_player.skill_manager = SkillManager.new()
@@ -54,6 +54,6 @@ func _on_add_xp_pressed() -> void:
 
 
 func _on_add_card_pressed() -> void:
-	var cards:Array[Card] = _shop_deck.draw_n_cards(1, _player.deck)
+	var cards: Array[Card] = _shop_deck.draw_n_cards(1, _player.deck)
 	_player.deck.add_card(cards[0])
 	_cards_viewer.update_content(_player.deck.get_active_deck())

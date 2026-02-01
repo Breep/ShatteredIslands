@@ -81,10 +81,9 @@ var _thunder_berserker_accumulated_penalty: float = 0.0
 
 func _ready() -> void:
 	_storm_stats = _owner.families_stats.storm
-	_owner.critical_action_done.connect(_on_owner_critical_action_done)
-	
 
 func start() -> void:
+	_owner.critical_action_done.connect(_on_owner_critical_action_done)
 	_create_optional_timers()
 	for timer in _optional_timers:
 		timer.start()
@@ -314,7 +313,7 @@ func _apply_dynamo_effect() -> void:
 	var base_shield: float = _storm_stats.dynamo_shield
 	var final_shield: float = base_shield * rank_mult
 	if final_shield > 0:
-		_owner.inflict_condition_stacks(_owner, final_shield, Utils.StackType.ARMOR, "Dynamo")
+		_owner.inflict_condition_stacks(_owner, final_shield, Utils.StackType.SHIELD, "Dynamo")
 		
 # [EYE OF THE CYCLONE]
 func _apply_eye_of_the_cyclone_effect() -> void:
@@ -404,6 +403,9 @@ func _apply_chain_lightning_effect(hit_victim: Entity, original_damage: float) -
 #region ============================== Callbacks functions ==============================
 
 func _on_current_rank_changed() -> void:
+	if _lightning_spam_timer == null:
+		return
+	
 	_call_the_lightning()
 	# [THUNDER BERSERKER] (Pénalité sur Grind)
 	if _storm_stats.thunder_berserker_activated and _thunder_berserker_penalty_active:
@@ -498,7 +500,7 @@ func _apply_schrodinger_storm_effect() -> void:
 		# Good Stacks: ARMOR, REGEN
 		# 50/50 split
 		if randf() < 0.5:
-			stack_type = Utils.StackType.ARMOR
+			stack_type = Utils.StackType.SHIELD
 			final_amount *= 2.0 # Multiplier x2
 		else:
 			stack_type = Utils.StackType.REGEN

@@ -77,12 +77,12 @@ func _on_add_damage_received_button_pressed() -> void:
 
 
 func _on_add_stack_inflicted_button_pressed() -> void:
-	_entity_bds_registry.register_action("TEST" + str(_bds_number), Utils.ActionType.STACK_ARMOR, 10, false)
+	_entity_bds_registry.register_action("TEST" + str(_bds_number), Utils.ActionType.STACK_SHIELD, 10, false)
 	_bds_number += 1
 
 
 func _on_add_stack_received_button_pressed() -> void:
-	_entity_bds_registry.register_interaction("TEST" + str(_bds_number), Utils.ActionType.STACK_ARMOR, 10, false)
+	_entity_bds_registry.register_interaction("TEST" + str(_bds_number), Utils.ActionType.STACK_SHIELD, 10, false)
 	_bds_number += 1
 
 

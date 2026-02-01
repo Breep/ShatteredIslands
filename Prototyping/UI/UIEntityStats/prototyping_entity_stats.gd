@@ -47,7 +47,6 @@ func _ready() -> void:
 
 #region Start/Stop Battle
 func _on_start_battle_pressed() -> void:
-	_dark_knight.fighting_state = Hero.FightingState.POSITIONING
 	_dark_knight.fighting_state = Hero.FightingState.FIGHTING
 
 
@@ -68,22 +67,22 @@ func _on_add_poison_button_critical_pressed() -> void:
 		_dark_knight.take_condition_stacks(poison_stacks*2, Utils.StackType.POISON, true, "Proto")
 
 func _on_reset_poison_button_pressed() -> void:
-	_dark_knight.stats.poison_stacks = 0
+	_dark_knight.conditions.poison_stacks = 0
 #endregion
 
 #region ===== STACKS -> ARMOR
 func _on_add_armor_button_pressed() -> void:
 	var armor_stacks: int = int(_armor_stacks_text_edit.text)
 	if armor_stacks >= 0:
-		_dark_knight.take_condition_stacks(armor_stacks, Utils.StackType.ARMOR, false, "Proto")
+		_dark_knight.take_condition_stacks(armor_stacks, Utils.StackType.SHIELD, false, "Proto")
 
 func _on_add_armor_button_critical_pressed() -> void:
 	var armor_stacks: int = int(_armor_stacks_text_edit.text)
 	if armor_stacks >= 0:
-		_dark_knight.take_condition_stacks(armor_stacks*2, Utils.StackType.ARMOR, true, "Proto")
+		_dark_knight.take_condition_stacks(armor_stacks*2, Utils.StackType.SHIELD, true, "Proto")
 
 func _on_reset_armor_button_pressed() -> void:
-	_dark_knight.stats.armor_stacks = 0
+	_dark_knight.conditions.shield_stacks = 0
 #endregion
 
 #region ===== STACKS -> IGNITE
@@ -98,7 +97,7 @@ func _on_add_ignite_button_critical_pressed() -> void:
 		_dark_knight.take_condition_stacks(ignite_stacks*2, Utils.StackType.IGNITE, true, "Proto")
 
 func _on_reset_ignite_button_pressed() -> void:
-	_dark_knight.stats.ignite_stacks = 0
+	_dark_knight.conditions.ignite_stacks = 0
 #endregion
 
 #region ===== STACKS -> REGEN
@@ -113,7 +112,7 @@ func _on_add_regen_button_critical_pressed() -> void:
 		_dark_knight.take_condition_stacks(regen_stacks*2, Utils.StackType.REGEN, true, "Proto")
 
 func _on_reset_regen_button_pressed() -> void:
-	_dark_knight.stats.regen_stacks = 0
+	_dark_knight.conditions.regen_stacks = 0
 #endregion
 #endregion
 
@@ -191,7 +190,7 @@ const STACK_TYPES: Array[Utils.StackType] = [
 	Utils.StackType.POISON,
 	Utils.StackType.IGNITE,
 	Utils.StackType.REGEN,
-	Utils.StackType.ARMOR,
+	Utils.StackType.SHIELD,
 ]
 func _on_random_popup_button_pressed() -> void:
 	if (_rng.randi() % 2 == 0):

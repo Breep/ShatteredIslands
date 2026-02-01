@@ -2,16 +2,19 @@ class_name PlayerDeck
 extends Deck
 
 var _player_owner: Player
+var _owner_name: String
 
-var _active_cards: Array[Card]
+@export var _active_cards: Array[Card]
 var _cards_dictionary: Dictionary[Family.FamilyType, Array] # FamilyType:Array[Cards]
 
 signal has_changed()
 
 # ============================== Node base functions ==============================
 
-func _init(player_owner: Player) -> void:
+func init(player_owner: Player) -> PlayerDeck:
 	_player_owner = player_owner
+	_owner_name = player_owner.name
+	return self
 
 # ============================== Public function ==============================
 
@@ -78,11 +81,11 @@ func _add_or_improve_card_to_active_cards(card_to_add: Card) -> void:
 		if card.name == card_to_add.name:
 			if not card.is_max_level():
 				card.lvl += 1
-				Verbose.debug("'" + _player_owner.name + "' Upgrading card | " + card_to_add.name + " | " + str(card.lvl), Verbose.Category.DECK)
+				Verbose.debug("'" + _owner_name + "' Upgrading card | " + card_to_add.name + " | " + str(card.lvl), Verbose.Category.DECK)
 			else:
-				Verbose.error("'" + _player_owner.name + "' Trying to upgrade an already maximized card | " + card_to_add.name, Verbose.Category.DECK)
+				Verbose.error("'" + _owner_name + "' Trying to upgrade an already maximized card | " + card_to_add.name, Verbose.Category.DECK)
 			return
-	Verbose.debug("'" + _player_owner.name + "' Adding new card | " + card_to_add.name + " | " + str(card_to_add.lvl), Verbose.Category.DECK)
+	Verbose.debug("'" + _owner_name + "' Adding new card | " + card_to_add.name + " | " + str(card_to_add.lvl), Verbose.Category.DECK)
 	_active_cards.append(card_to_add)
 	if _cards_dictionary.has(card_to_add.families[0]):
 		_cards_dictionary[card_to_add.families[0]].append(card_to_add)

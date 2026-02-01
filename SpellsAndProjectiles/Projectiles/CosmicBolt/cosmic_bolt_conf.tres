@@ -8,4 +8,6 @@ script = ExtResource("1_017w0")
 projectile_type = 3
 visual_scene = ExtResource("2_ogeen")
 trajectory_type = 2
+zigzag_amplitude = 0.0
+zigzag_frequency = 0.0
 metadata/_custom_type_script = "uid://dad8gpwjaprib"

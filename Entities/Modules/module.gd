@@ -6,7 +6,8 @@ enum ModuleType {
 	ACTION,
 	INTERACT,
 	AUTOATTACK,
-	TARGET
+	TARGET,
+	CONDITIONS
 }
 
 @export var _owner: Entity # Owner of the module

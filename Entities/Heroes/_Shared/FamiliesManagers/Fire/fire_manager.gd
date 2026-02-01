@@ -14,8 +14,6 @@ var _titans_protection_accumulated_hp: float = 0.0
 
 # ============================== Local nodes ==============================
 
-@onready var _ignite_timer: Timer = %IgniteTimer
-
 const _IGNITE_DECAY_PERCENT: float = 10.0
 const _IGNITE_PERCENT_PER_STACK: float = 0.05
 
@@ -29,7 +27,6 @@ func _ready() -> void:
 func start() -> void:
 	_create_optional_timers()
 	_lanch_optional_spells()
-	_ignite_timer.start()
 	_on_battle_start()
 	_add_stat_modifiers()
 	_add_action_modifiers()
@@ -43,7 +40,6 @@ func stop() -> void:
 	_clear_stack_modifiers()
 	for spell in _optional_spells:
 		spell.queue_free()
-	_ignite_timer.stop()
 	_clear_optional_timers()
 
 
@@ -248,7 +244,7 @@ func _on_kuiper_belt_meteor_hit(_cb_vars: Dictionary) -> void:
 	if _owner == null or not is_instance_valid(_owner): return
 	var amount: int = int(_fire_stats.kuiper_belt_shield_amount)
 	if amount > 0:
-		_owner.inflict_condition_stacks(_owner, amount, Utils.StackType.ARMOR, "Kuiper Belt")
+		_owner.inflict_condition_stacks(_owner, amount, Utils.StackType.SHIELD, "Kuiper Belt")
 #endregion
 
 #region ========== COSMIC BOLT ==========
@@ -275,7 +271,7 @@ func _on_hit_cosmic_bolt(cb_vars: Dictionary) -> void:
 	if target == null or not is_instance_valid(target) or target.is_queued_for_deletion(): return
 	
 	# --- 1. Dégâts ---
-	var ignite_stacks: float = target.stats.ignite_stacks
+	var ignite_stacks: float = target.conditions.ignite_stacks
 	var dmg_mult: float = _fire_stats.cosmic_bolt_damage_per_stack
 	var damage: float = ignite_stacks * dmg_mult
 	
@@ -298,7 +294,7 @@ func _on_end_of_the_world_meteor_hit(cb_vars: Dictionary) -> void:
 	var _entities_inside: Array = cb_vars.get(Meteor.VarType.ENTITIES_INSIDE, [])
 	for entity: Entity in _entities_inside:
 		var hp = entity.stats.health
-		var ignite_stacks = entity.stats.ignite_stacks
+		var ignite_stacks = entity.conditions.ignite_stacks
 		var stack_multiplier = _fire_stats.end_of_the_world_stack_multiplier
 		if entity.team != _owner.team and hp <= ignite_stacks * stack_multiplier:
 			entity.stats.health = 0
@@ -314,7 +310,7 @@ func _on_apocalypse_meteor_hit(cb_vars: Dictionary) -> void:
 		if entity == null or not is_instance_valid(entity) or entity.is_dead: continue
 		if entity.team == _owner.team: continue
 		
-		var ignite_stacks = entity.stats.ignite_stacks
+		var ignite_stacks = entity.conditions.ignite_stacks
 		if ignite_stacks > 0:
 			var bonus_damage = ignite_stacks * ratio
 			_owner.direct_attack(entity, bonus_damage, Utils.DamageType.MAGICAL, "Apocalypse")
@@ -363,17 +359,4 @@ func _on_inflict_condition_ignite(cb_vars: Dictionary) -> void:
 					Spell.MeteorModifier.RADIUS: 3.0,
 					Spell.MeteorModifier.ON_HIT_CALLBACKS: _meteor_modifiers
 					})
-#endregion
-
-#region ===== DECAY =====
-#[DECAY]
-func _on_ignite_timer_timeout() -> void:
-	if _owner.stats.ignite_stacks > 0:
-		var percent: float = _IGNITE_PERCENT_PER_STACK * _owner.stats.ignite_stacks
-		_owner.take_damage_percent(percent, Utils.PercentModifier.MAX_HP, Utils.DamageType.MAGICAL, false, "Ignite Periodic Damage")
-	
-	var decay: int = (_owner.stats.ignite_stacks * _IGNITE_DECAY_PERCENT / 100.0) as int
-	decay = clampi(decay, 1, decay)
-	_owner.stats.ignite_stacks -= decay
-	
 #endregion

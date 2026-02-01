@@ -9,10 +9,6 @@ var _poison_stats: FamilyPoisonStats # Ref to the owner poison stats
 
 # ============================== Spells scenes ==============================
 
-# ============================== Local scenes ==============================
-
-@onready var _poison_tick_timer:Timer = %PoisonTickTimer
-
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
@@ -21,18 +17,18 @@ func _ready() -> void:
 # ============================== Public functions ==============================
 
 func start() -> void:
+	Verbose.debug("PoisonManager start", Verbose.Category.FAMILY_MANAGER)
 	_lanch_optional_spells()
 	_create_optional_timers()
 	_add_attack_modifiers()
 	_add_stat_modifiers()
 	_add_stack_modifiers()
-	_poison_tick_timer.start()
 
 
 func stop() -> void:
+	Verbose.debug("PoisonManager stop", Verbose.Category.FAMILY_MANAGER)
 	for spell in _optional_spells:
 		spell.queue_free()
-	_poison_tick_timer.stop()
 	_clear_stack_modifiers()
 	_clear_attack_modifiers()
 	_clear_optional_timers()
@@ -161,7 +157,7 @@ func _create_optional_timers() -> void:
 	
 	# [SHROOMS]
 	if _poison_stats.poison_shrooms_activated:
-		_optional_timers.append(Utils.create_perpetual_timer(self , _poison_stats.poison_shrooms_period, _on_shrooms_timer_timeout, true))
+		_optional_timers.append(Utils.create_perpetual_timer(self, _poison_stats.poison_shrooms_period, _on_shrooms_timer_timeout, true))
 
 
 func _clear_optional_timers() -> void:
@@ -194,13 +190,6 @@ func _lanch_optional_spells() -> void:
 
 # ============================== Callbacks functions ==============================
 
-# Handle poison stacks and damage on _owner
-func _on_poison_tick_timer_timeout() -> void:
-	if not multiplayer.is_server(): return
-	if _owner.stats.poison_stacks > 0:
-		_owner.take_damage(_owner.stats.poison_stacks, Utils.DamageType.POISON, false, "Poison Periodic Damage")
-
-
 # [POISON FLASK]
 func _on_poison_flask_timer_timeout() -> void:
 	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
@@ -230,7 +219,7 @@ func _on_hit_venomous_logic_callback(cb_vars: Dictionary) -> void:
 	if not cb_vars.has(AutoAttackModifier.VarType.TARGET): return
 	var target: Entity = cb_vars[AutoAttackModifier.VarType.TARGET]
 	if target == null or target.is_queued_for_deletion(): return
-	var damage := int(float(target.stats.poison_stacks) * _poison_stats.poison_venomous_darts_multiplier)
+	var damage := int(float(target.conditions.poison_stacks) * _poison_stats.poison_venomous_darts_multiplier)
 	_owner.direct_attack(target, damage, Utils.DamageType.PHYSICAL, "Venomous Darts")
 #endregion
 
@@ -262,21 +251,15 @@ func _on_snake_barrel_timer_timeout() -> void:
 	_summon_snake_barrel()
 
 func _summon_snake_barrel() -> void:
-	var center := Vector3(0, 0, 0)
-	var half_w := FIGHTING_AREA_SIZE.x * 0.1
-	var half_d := FIGHTING_AREA_SIZE.y * 0.5
-
-	var rng := RandomNumberGenerator.new()
-	rng.randomize()
-	var dx := rng.randf_range(-half_w, half_w)
-	var dz := rng.randf_range(-half_d, half_d)
-
-	var summon_modifier :Dictionary = {
+	var summon_modifier: Dictionary = {
 		Entity.SnakeBarrelModifier.SNAKE_NUMBER: _poison_stats.poison_snake_barrel_snake_number,
 		Entity.SnakeBarrelModifier.SNAKE_POISON_STACKS: _poison_stats.poison_snake_barrel_snake_poison_stacks,
 		Entity.SnakeBarrelModifier.MAX_HEALTH: _poison_stats.poison_snake_barrel_health
 	}
-	_owner.summon_entity(Entity.EntityType.SNAKE_BARREL, _owner.to_global(Vector3(center.x + dx, center.y, center.z + dz)), summon_modifier)
+	
+	# Use new spawn location system - spawn on ally side with randomization
+	var spawn_config := SpawnLocationConfig.create_ally_side(0)
+	_owner.summon_entity(Entity.EntityType.SNAKE_BARREL, spawn_config, summon_modifier)
 #endregion
  
 # ============================== Callbacks functions ==============================

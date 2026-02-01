@@ -128,6 +128,10 @@ func ending_round_player_changes() -> void:
 		Verbose.error("A client should not run this code ending_round_player_changes()", Verbose.Category.ROUND_MANAGER)
 		return
 	
+	if battle_history.is_empty():
+		Verbose.warn("No battle_history: PROTOTYPING ?", Verbose.Category.ROUND_MANAGER)
+		return
+	
 	# Not all FightingArea reported their fight result yet (There is a race of signals)
 	if battle_history[current_round].battle_results.size() < _battles.size():
 		Verbose.trace("ending_round_player_changes() -> Waiting for all results [" + str(battle_history[current_round].battle_results.size()) + "/" \

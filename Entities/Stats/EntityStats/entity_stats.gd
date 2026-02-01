@@ -108,68 +108,7 @@ signal critical_multiplier_changed(new_critical_multiplier: float, critical_type
 @export var _critical_multipliers: Dictionary[Utils.ActionType, float]
 #endregion
 
-#region ============================== Condition Stacks ==============================
-signal poison_stacks_changed(new_poison_stacks: float)
-var _poison_stacks: float = 0
-var poison_stacks: float:
-	get: return _poison_stacks
-	set(value):
-		if value < 0: value = 0
-		if value == _poison_stacks: return
-		_poison_stacks = max(0, value)
-		poison_stacks_changed.emit(_poison_stacks)
 
-
-signal ignite_stacks_changed(new_ignite_stacks: float)
-var _ignite_stacks: float
-var ignite_stacks: float:
-	get: return _ignite_stacks
-	set(value):
-		if value < 0: value = 0
-		if value == _ignite_stacks: return
-		_ignite_stacks = max(0, value)
-		ignite_stacks_changed.emit(_ignite_stacks)
-
-
-signal armor_stacks_changed(new_armor_stacks: float)
-var _armor_stacks: float = 0
-var armor_stacks: float:
-	get: return _armor_stacks
-	set(value):
-		if value == _armor_stacks: return
-		_armor_stacks = max(0, value)
-		armor_stacks_changed.emit(_armor_stacks)
-
-
-# Ring Buffer for Regen
-# Array of Dictionaries: { "amount": float, "stack_infos": Array[StackInfo] }
-var _regen_buffer: Array[Dictionary] = []
-var _regen_cursor: int = 0
-const REGEN_BUFFER_SIZE: int = 20
-
-signal regen_stacks_changed(new_regen_stacks: float)
-var _regen_stacks: float = 0
-var regen_stacks: float:
-	get: return _regen_stacks
-	set(value):
-		if value == _regen_stacks: return
-		_regen_stacks = max(0, value)
-		regen_stacks_changed.emit(_regen_stacks)
-		
-		# If set directly to 0 (e.g. Dispell), clear buffer
-		if _regen_stacks == 0 and not _regen_buffer.is_empty():
-			init_regen_buffer()
-
-signal necrosis_stacks_changed(new_necrosis_stacks: float)
-var _necrosis_stacks: float = 0
-var necrosis_stacks: float:
-	get: return _necrosis_stacks
-	set(value):
-		if value < 0: value = 0
-		if value == _necrosis_stacks: return
-		_necrosis_stacks = max(0, value)
-		necrosis_stacks_changed.emit(_necrosis_stacks)
-#endregion
 
 #region ============================== Resistances ==============================
 @export_group("Resistance")
@@ -205,63 +144,6 @@ signal weakness_changed(new_weakness: float, action_type: Utils.ActionType)
 #endregion
 
 #region ============================== Public functions ==============================
-func get_stacks_number() -> float:
-	return _poison_stacks + _ignite_stacks + _armor_stacks + _regen_stacks + _necrosis_stacks
-
-
-func init_regen_buffer() -> void:
-	_regen_buffer.clear()
-	_regen_buffer.resize(REGEN_BUFFER_SIZE)
-	for i in range(REGEN_BUFFER_SIZE):
-		_regen_buffer[i] = {"amount": 0.0, "stack_infos": []}
-	_regen_cursor = 0
-
-
-func add_regen_stack(amount: float, duration: int, source: Entity, action_id: StringName) -> void:
-	if amount <= 0: return
-	if _regen_buffer.is_empty(): init_regen_buffer()
-	
-	# duration += regen_duration_bonus # DEPRECATED: Handled by ActionModule modifier now
-	duration = clampi(duration, 1, REGEN_BUFFER_SIZE - 1)
-	
-	# Add to current total
-	regen_stacks += amount
-	
-	# Schedule expiration
-	var expiration_index: int = (_regen_cursor + duration) % REGEN_BUFFER_SIZE
-	var slot: Dictionary = _regen_buffer[expiration_index]
-	
-	slot["amount"] += amount
-	(slot["stack_infos"] as Array).append(StackInfo.new(source, amount, action_id))
-	
-	# print("DEBUG: Added Regen ", amount, " | Duration: ", duration, " | Expires at index ", expiration_index, " (Current: ", _regen_cursor, ")")
-
-
-func tick_regen() -> void:
-	if _regen_buffer.is_empty(): return
-	
-	# Process expiration at current cursor
-	var slot: Dictionary = _regen_buffer[_regen_cursor]
-	var amount_to_expire: float = slot["amount"]
-	
-	if amount_to_expire > 0:
-		regen_stacks -= amount_to_expire
-		# Clear slot
-		slot["amount"] = 0.0
-		(slot["stack_infos"] as Array).clear()
-	
-	# Move cursor
-	_regen_cursor = (_regen_cursor + 1) % REGEN_BUFFER_SIZE
-
-
-func get_debuf_stacks_number() -> float:
-	return _poison_stacks + _ignite_stacks + _necrosis_stacks
-
-
-func get_buf_stacks_number() -> float:
-	return _armor_stacks + _regen_stacks
-
-
 func reset_from_hero_desc(hero: HeroDesc, lvl: int) -> EntityStats:
 	if lvl < 1 or lvl > 10: return self
 	
@@ -284,6 +166,14 @@ func reset_from_hero_desc(hero: HeroDesc, lvl: int) -> EntityStats:
 		_crit_resistances[action_type] = hero.stats[lvl].crit_resistances.get(action_type, 0.0)
 	
 	has_been_reset.emit()
+	return self
+
+
+func reset_from_self() -> EntityStats:
+	if health == 0 and health_max > 0:
+		health = health_max
+	if mana == 0 and mana_max > 0:
+		mana = 0
 	return self
 
 

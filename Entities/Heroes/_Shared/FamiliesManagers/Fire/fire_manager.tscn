@@ -4,9 +4,3 @@
 
 [node name="FireManager" type="Node"]
 script = ExtResource("1_7a5by")
-
-[node name="IgniteTimer" type="Timer" parent="."]
-unique_name_in_owner = true
-wait_time = 1.5
-
-[connection signal="timeout" from="IgniteTimer" to="." method="_on_ignite_timer_timeout"]

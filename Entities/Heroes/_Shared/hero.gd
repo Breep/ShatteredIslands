@@ -3,6 +3,14 @@ extends Entity
 
 # == VIRTUAL CLASS ==
 
+#region ============================== Enums ==============================
+enum DisplayMode {
+	BUYING_PHASE, # Interface cachée (buying phase / bench)
+	FIGHTING_PHASE, # Interface visible (combat)
+	PREVIEW # Mode prévisualisation (shop, etc.)
+}
+#endregion
+
 #region ============================== Signal ==============================
 signal aa_done()
 signal ultimate_casted()
@@ -16,13 +24,18 @@ signal ultimate_casted()
 @export_group("Local Nodes")
 @export var _hero_animator: HeroAnimator
 
-
-@export_subgroup("Optional")
-#endregion
+@export_group("Optional")
+@export var _custom_deck: PlayerDeck
 
 #region ============================== Public variables ==============================
+var display_mode: DisplayMode = DisplayMode.PREVIEW
 var fighting_area: FightingArea
 var families_stats: FamiliesStats
+var deck: PlayerDeck
+
+# Controls whether auto-attack module should start when entering FIGHTING state
+var auto_attack_enabled: bool = true
+var family_managers_enabled: bool = true
 #endregion
 
 #region ============================== Private variables ==============================
@@ -35,6 +48,20 @@ var _family_managers: Dictionary[Family.FamilyType, FamilyManager]
 #endregion
 
 #region ============================== Public functions ==============================
+func init(hero_display_mode: DisplayMode = DisplayMode.PREVIEW, fighting_area_ref: FightingArea = null) -> Hero:
+	display_mode = hero_display_mode
+	
+	if fighting_area_ref != null:
+		connect_to_fighting_area(fighting_area_ref)
+	
+	return self
+
+
+func set_display_mode(mode: DisplayMode) -> void:
+	display_mode = mode
+	_apply_display_mode()
+
+
 func connect_to_fighting_area(fighting_area_ref: FightingArea) -> void:
 	if fighting_area_ref == null:
 		Verbose.error("Trying to connect a null fighting area to a Hero", Verbose.Category.HERO)
@@ -100,8 +127,8 @@ func heal_percent(target: Entity, percent: float, percent_modifier: Utils.Percen
 func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Utils.StackType, action_id: StringName, duration: float = 5.0) -> void:
 	_action_module.inflict_condition_stacks(target, stacks_number, stack_type, action_id, duration)
 
-func summon_entity(entity_type: EntityType, entity_spawn_global_position: Vector3, entity_modifier: Dictionary) -> void:
-	_action_module.summon_entity(entity_type, entity_spawn_global_position, entity_modifier)
+func summon_entity(entity_type: EntityType, spawn_config: SpawnLocationConfig, entity_modifier: Dictionary) -> void:
+	_action_module.summon_entity(entity_type, spawn_config, entity_modifier)
 
 func cleanse(target: Entity, value: float, action_id: StringName) -> void:
 	_action_module.cleanse(target, value, action_id)
@@ -136,9 +163,8 @@ func _init() -> void:
 	_entity_init()
 
 func _hero_init() -> void:
-	# Configure stats
-	if base_stats == null and hero_desc != null:
-		base_stats = EntityStats.new().reset_from_hero_desc(hero_desc, level)
+	# Stats initialization is deferred to _hero_ready() to properly detect manual base_stats override
+	pass
 
 
 func _enter_tree() -> void:
@@ -146,7 +172,7 @@ func _enter_tree() -> void:
 	_entity_enter_tree()
 
 
-func _hero_enter_tree() -> void:	
+func _hero_enter_tree() -> void:
 	# Add Family Managers and Family stats
 	families_stats = FamiliesStats.new()
 	for family_type: Family.FamilyType in Shared.FAMILY_MANAGER_SCENES.keys():
@@ -178,27 +204,43 @@ func _ready() -> void:
 
 
 func _hero_ready() -> void:
-	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
+	Verbose.debug("Hero [" + entity_name + "] ready", Verbose.Category.HERO)
+	# Custom Deck (must be assigned here, not in _enter_tree, because @export vars aren't loaded yet there)
+	if _custom_deck != null:
+		deck = _custom_deck
+	
+	# Validate hero configuration
+	if hero_desc == null and custom_base_stats == null:
+		Verbose.error("Hero instantiated without hero_desc AND without custom_base_stats!", Verbose.Category.HERO)
+		return
+	
+	# Initialize base_stats from hero_desc if not using custom_base_stats
+	if custom_base_stats == null and hero_desc != null and base_stats != null:
+		base_stats.reset_from_hero_desc(hero_desc, level)
+	
+	if deck != null:
+		_apply_all_cards_upgrades()
+	
 	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
 
 	stats.health_changed.connect(_on_stats_health_changed)
-	fighting_state_changed.connect(_on_fighting_state_changed)
+	fighting_state_changed.connect(_on_hero_fighting_state_changed)
 	_auto_attack_module.attack_done.connect(_on_aa_module_attack_done)
 	_hero_animator.attack_hit_frame.connect(_on_hero_animator_attack_hit_frame)
 
-	_entity_info_panel_3d.update_health_bar(stats.health, stats.health_max)
+	_apply_display_mode()
+
+	_entity_ready()
 
 
 func _exit_tree() -> void:
 	# Disconnect all signals to avoid ghost references
-	if GameManager.game_state_changed.is_connected(_on_game_manager_game_state_changed):
-		GameManager.game_state_changed.disconnect(_on_game_manager_game_state_changed)
 	if GlobalFightingManager.fighting_phase_state_changed.is_connected(_on_gfm_fighting_phase_state_changed):
 		GlobalFightingManager.fighting_phase_state_changed.disconnect(_on_gfm_fighting_phase_state_changed)
 	if stats != null and stats.health_changed.is_connected(_on_stats_health_changed):
 		stats.health_changed.disconnect(_on_stats_health_changed)
-	if fighting_state_changed.is_connected(_on_fighting_state_changed):
-		fighting_state_changed.disconnect(_on_fighting_state_changed)
+	if fighting_state_changed.is_connected(_on_hero_fighting_state_changed):
+		fighting_state_changed.disconnect(_on_hero_fighting_state_changed)
 	if _auto_attack_module != null and _auto_attack_module.attack_done.is_connected(_on_aa_module_attack_done):
 		_auto_attack_module.attack_done.disconnect(_on_aa_module_attack_done)
 	if _hero_animator != null and _hero_animator.attack_hit_frame.is_connected(_on_hero_animator_attack_hit_frame):
@@ -207,24 +249,46 @@ func _exit_tree() -> void:
 #endregion
 
 #region ============================== Private functions ==============================
-func _on_fighting_state_changed(new_fighting_state: FightingState) -> void:
+func _on_hero_fighting_state_changed(new_fighting_state: FightingState) -> void:
 	match new_fighting_state:
 		FightingState.IDLE:
-			target_module.stop()
 			_auto_attack_module.stop()
 			for family_manager: FamilyManager in _family_managers.values():
 				family_manager.stop()
 		FightingState.FIGHTING:
-			target_module.start()
-			_auto_attack_module.start()
-			for family_manager: FamilyManager in _family_managers.values():
-				family_manager.start()
+			if auto_attack_enabled:
+				_auto_attack_module.start()
+			if family_managers_enabled:
+				for family_manager: FamilyManager in _family_managers.values():
+					family_manager.start()
 		FightingState.CELEBRATING: pass
 		FightingState.DEAD: pass
 		FightingState.UNDEF: pass
 #endregion
 
 #region ============================== Private ==============================
+func _apply_display_mode() -> void:
+	match display_mode:
+		DisplayMode.BUYING_PHASE, DisplayMode.PREVIEW:
+			_entity_info_panel_3d.hide()
+		DisplayMode.FIGHTING_PHASE:
+			_entity_info_panel_3d.show()
+	
+	# Update animator (weapons + animations)
+	if _hero_animator != null:
+		_hero_animator.apply_display_mode(display_mode)
+
+
+func _apply_all_cards_upgrades() -> void:
+	Verbose.debug("Applying all cards upgrades", Verbose.Category.HERO)
+	if deck == null:
+		Verbose.error("Can't apply card upgrade, the deck is null", Verbose.Category.HERO)
+		return
+	
+	for card: Card in deck.get_active_deck():
+		card.player_upgrade.apply(families_stats, card.lvl)
+
+
 func _handle_death() -> void:
 	died.emit(self)
 	_is_dead = true
@@ -241,16 +305,7 @@ func _on_gfm_fighting_phase_state_changed(fighting_phase_state: GlobalFightingMa
 			fighting_state = FightingState.CELEBRATING
 
 
-func _on_game_manager_game_state_changed(game_state: GameManager.GameState) -> void:
-	match game_state:
-		GameManager.GameState.BUYING:
-			_is_dead = false
-			_pending_attacks.clear()
-			_entity_info_panel_3d.hide()
-
-
 func _on_stats_health_changed(new_health: int) -> void:
-	if _entity_info_panel_3d != null: _entity_info_panel_3d.update_health_bar(new_health, stats.health_max)
 	if new_health <= 0:
 		signal_death()
 

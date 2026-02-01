@@ -75,7 +75,7 @@ func _on_damage_tick_timer_timeout() -> void:
 		if _source != null and entity.team != _source.team:
 			var damage: float = _damage
 			if _pain_percent > 0.0:
-				damage = damage * (1.0 + entity.stats.get_stacks_number() * _pain_percent / 100.0)
+				damage = damage * (1.0 + entity.conditions.get_total_stacks() * _pain_percent / 100.0)
 			_source.direct_attack(entity, int(round(damage)), Utils.DamageType.PHYSICAL, "Dark Storm")
 
 
