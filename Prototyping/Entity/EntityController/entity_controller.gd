@@ -1,6 +1,7 @@
 extends Node
 
 @export var entity_owner: Entity
+@export var spawn_summon_localizer: Node3D
 
 @onready var _entity_name_label: Label = %EntityNameLabel
 
@@ -37,7 +38,29 @@ extends Node
 @onready var _spell_param4_label: Label = %Param4Label
 @onready var _spell_param4_edit: TextEdit = %Param4TextEdit
 
+@onready var _entity_type_choice: OptionButton = %EntityTypeChoice
+@onready var _spawn_type_choice: OptionButton = %SpawnTypeChoice
+
+@onready var _entity_param1_label: Label = %EntityParam1Label
+@onready var _entity_param1_edit: TextEdit = %EntityParam1TextEdit
+@onready var _entity_param2_label: Label = %EntityParam2Label
+@onready var _entity_param2_edit: TextEdit = %EntityParam2TextEdit
+@onready var _entity_param3_label: Label = %EntityParam3Label
+@onready var _entity_param3_edit: TextEdit = %EntityParam3TextEdit
+@onready var _entity_param4_label: Label = %EntityParam4Label
+@onready var _entity_param4_edit: TextEdit = %EntityParam4TextEdit
+@onready var _entity_param5_label: Label = %EntityParam5Label
+@onready var _entity_param5_edit: TextEdit = %EntityParam5TextEdit
+@onready var _entity_param6_label: Label = %EntityParam6Label
+@onready var _entity_param6_edit: TextEdit = %EntityParam6TextEdit
+
+@onready var _random_radius_edit: TextEdit = %RandomRadiusTextEdit
+@onready var _entity_choice: OptionButton = %EntityChoice
+@onready var _team_edit: TextEdit = %TeamTextEdit
+@onready var _spawn_localizer_show_button: CheckButton = %SpawnLocalizerShowButton
+
 var _target: Entity
+var _all_entities: Array[Entity] = [] # Cached list of all entities for entity choice dropdown
 
 func _ready() -> void:
 	# Clear all dropdowns to prevent duplicates
@@ -93,8 +116,31 @@ func _ready() -> void:
 		_spell_type_choice.add_item(spell_type, i)
 		i += 1
 	
+	# Populate entity type dropdown
+	i = 0
+	for entity_type: String in Entity.EntityType.keys():
+		_entity_type_choice.add_item(entity_type, i)
+		i += 1
+	
+	# Populate spawn type dropdown
+	i = 0
+	for spawn_type: String in SpawnLocationConfig.LocationType.keys():
+		_spawn_type_choice.add_item(spawn_type, i)
+		i += 1
+	
 	# Initialize spell parameters with default (METEOR)
 	_update_spell_parameters(Spell.Type.METEOR)
+	
+	# Initialize entity parameters with default (SNAKE_BARREL)
+	_update_entity_parameters(Entity.EntityType.SNAKE_BARREL)
+	
+	# Initialize spawn parameters with default (EXACT)
+	_update_spawn_parameters(SpawnLocationConfig.LocationType.EXACT)
+	
+	# Hide spawn_summon_localizer by default and uncheck the button
+	if spawn_summon_localizer != null:
+		spawn_summon_localizer.visible = false
+	_spawn_localizer_show_button.button_pressed = false
 	
 	if entity_owner != null:
 		_entity_name_label.text = entity_owner.entity_name
@@ -455,3 +501,219 @@ func _on_cast_ultimate_button_pressed() -> void:
 	
 	entity_owner.cast_ultimate()
 	print("DEBUG: cast_ultimate called")
+
+
+func _update_entity_parameters(entity_type: Entity.EntityType) -> void:
+	"""Updates the parameter labels and visibility based on selected entity type."""
+	var param_configs: Array[Dictionary] = []
+	
+	match entity_type:
+		Entity.EntityType.HERO:
+			# Heroes don't have modifiers in the summon context
+			param_configs = []
+		
+		Entity.EntityType.SNAKE_BARREL:
+			param_configs = [
+				{"label": "Snake Number", "default": "3"},
+				{"label": "Snake Poison", "default": "5"},
+				{"label": "Max Health", "default": "100"},
+				{"label": "(Unused)", "default": "0"},
+				{"label": "(Unused)", "default": "0"},
+				{"label": "(Unused)", "default": "0"}
+			]
+		
+		Entity.EntityType.SNAKE:
+			# Snakes don't have modifiers
+			param_configs = []
+		
+		Entity.EntityType.FIELD_GENERATOR:
+			param_configs = [
+				{"label": "Max Health", "default": "200"},
+				{"label": "Shield Amount", "default": "50"},
+				{"label": "Shield Interval", "default": "3.0"},
+				{"label": "Initial Shield", "default": "1"},
+				{"label": "Target Count", "default": "3"},
+				{"label": "(Unused)", "default": "0"}
+			]
+	
+	# Apply configurations
+	var labels: Array[Label] = [
+		_entity_param1_label, _entity_param2_label, _entity_param3_label,
+		_entity_param4_label, _entity_param5_label, _entity_param6_label
+	]
+	var edits: Array[TextEdit] = [
+		_entity_param1_edit, _entity_param2_edit, _entity_param3_edit,
+		_entity_param4_edit, _entity_param5_edit, _entity_param6_edit
+	]
+	
+	for i in range(6):
+		if i < param_configs.size():
+			labels[i].text = param_configs[i]["label"]
+			edits[i].text = param_configs[i]["default"]
+			labels[i].get_parent().get_parent().visible = true
+		else:
+			labels[i].get_parent().get_parent().visible = false
+
+
+func _on_entity_type_choice_item_selected(index: int) -> void:
+	"""Called when entity type dropdown selection changes."""
+	var entity_type: Entity.EntityType = index as Entity.EntityType
+	_update_entity_parameters(entity_type)
+	print("DEBUG: Entity type changed to: ", Entity.EntityType.keys()[entity_type])
+
+
+func _on_spawn_type_choice_item_selected(index: int) -> void:
+	"""Called when spawn type dropdown selection changes."""
+	var spawn_type: SpawnLocationConfig.LocationType = index as SpawnLocationConfig.LocationType
+	_update_spawn_parameters(spawn_type)
+	print("DEBUG: Spawn type changed to: ", SpawnLocationConfig.LocationType.keys()[spawn_type])
+
+
+func _update_spawn_parameters(spawn_type: SpawnLocationConfig.LocationType) -> void:
+	"""Updates the spawn parameter visibility based on selected spawn type."""
+	# Get references to parameter containers
+	var random_radius_container: Control = _random_radius_edit.get_parent().get_parent()
+	var entity_choice_container: Control = _entity_choice.get_parent().get_parent()
+	var team_container: Control = _team_edit.get_parent().get_parent()
+	
+	# Hide all by default
+	random_radius_container.visible = false
+	entity_choice_container.visible = false
+	team_container.visible = false
+	
+	match spawn_type:
+		SpawnLocationConfig.LocationType.EXACT:
+			# Show random radius only
+			random_radius_container.visible = true
+		
+		SpawnLocationConfig.LocationType.ARENA_CENTER:
+			# Show random radius only
+			random_radius_container.visible = true
+		
+		SpawnLocationConfig.LocationType.TEAM_ZONE:
+			# Show random radius and team
+			random_radius_container.visible = true
+			team_container.visible = true
+		
+		SpawnLocationConfig.LocationType.ENTITY:
+			# Show random radius and entity choice
+			random_radius_container.visible = true
+			entity_choice_container.visible = true
+			# Populate entity choice dropdown
+			_populate_entity_choices()
+		
+		SpawnLocationConfig.LocationType.RANDOM_ARENA:
+			# Show random radius only
+			random_radius_container.visible = true
+
+
+func _populate_entity_choices() -> void:
+	"""Populates the entity choice dropdown with all available entities."""
+	_entity_choice.clear()
+	_all_entities.clear()
+	
+	if entity_owner == null or entity_owner.target_module == null:
+		printerr("EntityController: Cannot populate entity choices - entity_owner or target_module is null")
+		return
+	
+	# Get all entities using the target module
+	var all_entities: Array[Entity] = entity_owner.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ALL)
+	
+	if all_entities.is_empty():
+		print("DEBUG: No entities found for entity choice dropdown")
+		_entity_choice.add_item("<No entities available>", -1)
+		return
+	
+	# Store entities and add each to the dropdown
+	_all_entities = all_entities
+	for i in range(_all_entities.size()):
+		var entity: Entity = _all_entities[i]
+		var display_name: String = entity.entity_name + " [ID:" + str(entity.id) + "]"
+		_entity_choice.add_item(display_name, i)
+	
+	print("DEBUG: Populated entity choice with ", _all_entities.size(), " entities")
+
+
+func _on_spawn_localizer_show_button_toggled(toggled_on: bool) -> void:
+	"""Called when the spawn localizer show button is toggled."""
+	if spawn_summon_localizer != null:
+		spawn_summon_localizer.visible = toggled_on
+		print("DEBUG: Spawn localizer visibility set to: ", toggled_on)
+	else:
+		print("DEBUG: spawn_summon_localizer is null, cannot toggle visibility")
+
+
+func _on_summon_entity_button_pressed() -> void:
+	if entity_owner == null:
+		printerr("EntityController: No entity_owner for summon_entity")
+		return
+	
+	var entity_type: Entity.EntityType = _entity_type_choice.get_selected_id() as Entity.EntityType
+	var spawn_type: SpawnLocationConfig.LocationType = _spawn_type_choice.get_selected_id() as SpawnLocationConfig.LocationType
+	
+	# Build SpawnLocationConfig
+	var spawn_config := SpawnLocationConfig.new()
+	spawn_config.location_type = spawn_type
+	
+	# Configure spawn parameters based on spawn type
+	var random_radius: float = _random_radius_edit.text.to_float()
+	spawn_config.randomization_radius = random_radius
+	
+	match spawn_type:
+		SpawnLocationConfig.LocationType.EXACT:
+			# spawn_summon_localizer is only required for EXACT spawn type
+			if spawn_summon_localizer == null:
+				printerr("EntityController: spawn_summon_localizer is required for EXACT spawn type")
+				return
+			spawn_config.exact_position = spawn_summon_localizer.global_position
+		
+		SpawnLocationConfig.LocationType.ARENA_CENTER:
+			# No additional config needed
+			pass
+		
+		SpawnLocationConfig.LocationType.TEAM_ZONE:
+			var team: int = _team_edit.text.to_int()
+			spawn_config.team = team
+		
+		SpawnLocationConfig.LocationType.ENTITY:
+			# Use the selected entity from dropdown
+			var selected_index: int = _entity_choice.get_selected_id()
+			if selected_index >= 0 and selected_index < _all_entities.size():
+				spawn_config.target_entity = _all_entities[selected_index]
+			else:
+				printerr("EntityController: Invalid entity selection for ENTITY spawn type")
+				# Fallback to spawn_summon_localizer
+				spawn_config.target_entity = spawn_summon_localizer
+		
+		SpawnLocationConfig.LocationType.RANDOM_ARENA:
+			# No additional config needed
+			pass
+	
+	# Build entity_modifier dictionary based on entity type
+	var entity_modifier: Dictionary = {}
+	
+	match entity_type:
+		Entity.EntityType.HERO:
+			# Heroes don't have modifiers in summon context
+			pass
+		
+		Entity.EntityType.SNAKE_BARREL:
+			entity_modifier[Entity.SnakeBarrelModifier.SNAKE_NUMBER] = int(_entity_param1_edit.text.to_float())
+			entity_modifier[Entity.SnakeBarrelModifier.SNAKE_POISON_STACKS] = _entity_param2_edit.text.to_float()
+			entity_modifier[Entity.SnakeBarrelModifier.MAX_HEALTH] = _entity_param3_edit.text.to_float()
+		
+		Entity.EntityType.SNAKE:
+			# Snakes don't have modifiers
+			pass
+		
+		Entity.EntityType.FIELD_GENERATOR:
+			entity_modifier[Entity.FieldGeneratorModifier.MAX_HEALTH] = _entity_param1_edit.text.to_float()
+			entity_modifier[Entity.FieldGeneratorModifier.SHIELD_AMOUNT] = _entity_param2_edit.text.to_float()
+			entity_modifier[Entity.FieldGeneratorModifier.SHIELD_INTERVAL] = _entity_param3_edit.text.to_float()
+			entity_modifier[Entity.FieldGeneratorModifier.INITIAL_SHIELD] = int(_entity_param4_edit.text.to_float())
+			entity_modifier[Entity.FieldGeneratorModifier.TARGET_COUNT] = int(_entity_param5_edit.text.to_float())
+	
+	entity_owner.summon_entity(entity_type, spawn_config, entity_modifier)
+	print("DEBUG: summon_entity called - Type: ", Entity.EntityType.keys()[entity_type],
+		" | Spawn: ", SpawnLocationConfig.LocationType.keys()[spawn_type],
+		" | Modifiers: ", entity_modifier)
