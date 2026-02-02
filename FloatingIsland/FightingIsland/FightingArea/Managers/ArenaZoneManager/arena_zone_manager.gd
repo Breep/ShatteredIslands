@@ -25,7 +25,7 @@ var _is_initialized: bool = false
 ## team_zones: Dictionary mapping team number to Area3D zone
 ## center_zone: Area3D for the center zone (optional)
 ## full_arena_zone: Area3D for the full arena (optional)
-func initialize(team_zones: Dictionary[int, Area3D], center_zone: Area3D = null, full_arena_zone: Area3D = null) -> void:
+func init(team_zones: Dictionary[int, Area3D], center_zone: Area3D = null, full_arena_zone: Area3D = null) -> void:
 	_team_zones = team_zones
 	_center_zone = center_zone
 	_full_arena_zone = full_arena_zone

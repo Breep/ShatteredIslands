@@ -6,9 +6,10 @@ extends Node3D
 @export var _hero_spawner: HeroSpawner
 
 # Arena zones for spawn location system
-@export var _team_zones: Dictionary[int, Area3D] = {}
-@export var _center_zone: Area3D = null
-@export var _full_arena_zone: Area3D = null
+@export_group("Local Nodes")
+@export var team_zones: Dictionary[int, Area3D] = {}
+@export var center_zone: Area3D = null
+@export var full_arena_zone: Area3D = null
 
 var _is_active: bool = false
 

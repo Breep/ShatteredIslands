@@ -310,8 +310,7 @@ func summon_entity(entity_type: Entity.EntityType, spawn_config: SpawnLocationCo
 	if _owner is Hero and _owner.fighting_area != null:
 		arena_zone_manager = _owner.fighting_area.arena_zone_manager
 	
-	# Resolve spawn position with owner's team
-	var spawn_position := spawn_config.resolve(arena_zone_manager, _owner.team)
+	var spawn_position := spawn_config.resolve(arena_zone_manager)
 	
 	match entity_type:
 		Entity.EntityType.SNAKE_BARREL: _summon_snake_barrel(spawn_position, entity_modifier)

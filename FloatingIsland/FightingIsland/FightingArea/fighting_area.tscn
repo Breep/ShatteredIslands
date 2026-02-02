@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c66yw4go2ykwa"]
+[gd_scene format=3 uid="uid://c66yw4go2ykwa"]
 
 [ext_resource type="Script" uid="uid://cd8u3lm3xa8c4" path="res://FloatingIsland/FightingIsland/FightingArea/fighting_area.gd" id="1_t74of"]
 [ext_resource type="PackedScene" uid="uid://pyrw8lacvly2" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/EntityManager/entity_manager.tscn" id="2_wtb7j"]
@@ -11,9 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://c6oxeboe353od" path="res://FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor_2v2.tscn" id="6_yyfcp"]
 [ext_resource type="PackedScene" uid="uid://dbbpa637es0uf" path="res://FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor_ffa13.tscn" id="7_hqxx4"]
 [ext_resource type="PackedScene" uid="uid://1h20y2oaj3fm" path="res://Modules/BattleLogModule/BattleWriter/battle_writer.tscn" id="8_7oplh"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_w72k1"]
-size = Vector3(20, 5, 10)
+[ext_resource type="PackedScene" uid="uid://dvuq5n41nak3u" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.tscn" id="9_8iy5v"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6wjnm"]
 size = Vector3(20, 5, 1)
@@ -21,11 +19,12 @@ size = Vector3(20, 5, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_7oplh"]
 size = Vector3(1, 5, 10)
 
-[node name="FightingArea" type="Node3D" node_paths=PackedStringArray("_spawn_manager", "_fighting_manager", "_entity_manager", "_fighting_floors", "_entities_node")]
+[node name="FightingArea" type="Node3D" unique_id=2072382245 node_paths=PackedStringArray("_spawn_manager", "_fighting_manager", "_entity_manager", "_arena_zone_manager", "_fighting_floors", "_entities_node")]
 script = ExtResource("1_t74of")
 _spawn_manager = NodePath("SpawnManager")
 _fighting_manager = NodePath("FightingManager")
 _entity_manager = NodePath("EntityManager")
+_arena_zone_manager = NodePath("ArenaZoneManager")
 _fighting_floors = {
 0: NodePath("FightingFloorTemplates/FightingFloor_1v1"),
 1: NodePath("FightingFloorTemplates/FightingFloor_2v2"),
@@ -33,86 +32,79 @@ _fighting_floors = {
 }
 _entities_node = NodePath("Entities")
 
-[node name="EntityManager" parent="." node_paths=PackedStringArray("_fighting_area", "_scanner_area") instance=ExtResource("2_wtb7j")]
-_fighting_area = NodePath("..")
-_scanner_area = NodePath("../ScanningArea")
-
-[node name="FightingManager" parent="." instance=ExtResource("3_yyfcp")]
-
-[node name="FightingEventRegistry" parent="." node_paths=PackedStringArray("_fighting_area") instance=ExtResource("4_w72k1")]
+[node name="EntityManager" parent="." unique_id=1828737280 node_paths=PackedStringArray("_fighting_area") instance=ExtResource("2_wtb7j")]
 _fighting_area = NodePath("..")
 
-[node name="BattleLogSynchronizer" parent="." node_paths=PackedStringArray("_battle_writer", "_battle_reader") instance=ExtResource("4_327ee")]
+[node name="FightingManager" parent="." unique_id=588752297 instance=ExtResource("3_yyfcp")]
+
+[node name="FightingEventRegistry" parent="." unique_id=1188909047 node_paths=PackedStringArray("_fighting_area") instance=ExtResource("4_w72k1")]
+_fighting_area = NodePath("..")
+
+[node name="BattleLogSynchronizer" parent="." unique_id=270102463 node_paths=PackedStringArray("_battle_writer", "_battle_reader") instance=ExtResource("4_327ee")]
 _battle_writer = NodePath("../BattleWriter")
 _battle_reader = NodePath("../BattleReader")
 
-[node name="BattleWriter" parent="." node_paths=PackedStringArray("_fighting_area") instance=ExtResource("8_7oplh")]
+[node name="BattleWriter" parent="." unique_id=464563403 node_paths=PackedStringArray("_fighting_area") instance=ExtResource("8_7oplh")]
 _fighting_area = NodePath("..")
 
-[node name="BattleReader" parent="." node_paths=PackedStringArray("_entity_manager") instance=ExtResource("6_w72k1")]
+[node name="BattleReader" parent="." unique_id=750019197 node_paths=PackedStringArray("_entity_manager") instance=ExtResource("6_w72k1")]
 _entity_manager = NodePath("../EntityManager")
 
-[node name="SpawnManager" parent="." node_paths=PackedStringArray("_fighting_area", "_entities_node", "_projectiles_node", "_spells_node") instance=ExtResource("5_xgsbs")]
+[node name="SpawnManager" parent="." unique_id=1829480780 node_paths=PackedStringArray("_fighting_area", "_entities_node", "_projectiles_node", "_spells_node") instance=ExtResource("5_xgsbs")]
 _fighting_area = NodePath("..")
 _entities_node = NodePath("../Entities")
 _projectiles_node = NodePath("../Projectiles")
 _spells_node = NodePath("../Spells")
 
-[node name="FightingFloorTemplates" type="Node3D" parent="."]
+[node name="ArenaZoneManager" parent="." unique_id=641704685 instance=ExtResource("9_8iy5v")]
 
-[node name="FightingFloor_1v1" parent="FightingFloorTemplates" instance=ExtResource("5_2akj6")]
+[node name="FightingFloorTemplates" type="Node3D" parent="." unique_id=2027780914]
 
-[node name="FightingFloor_2v2" parent="FightingFloorTemplates" instance=ExtResource("6_yyfcp")]
+[node name="FightingFloor_1v1" parent="FightingFloorTemplates" unique_id=1587238691 instance=ExtResource("5_2akj6")]
+
+[node name="FightingFloor_2v2" parent="FightingFloorTemplates" unique_id=1759052820 instance=ExtResource("6_yyfcp")]
 visible = false
 
-[node name="FightingFloor_ffa13" parent="FightingFloorTemplates" instance=ExtResource("7_hqxx4")]
+[node name="FightingFloor_ffa13" parent="FightingFloorTemplates" unique_id=273186181 instance=ExtResource("7_hqxx4")]
 visible = false
 
-[node name="ScanningArea" type="Area3D" parent="."]
-collision_layer = 0
-collision_mask = 16
-monitorable = false
+[node name="Entities" type="Node3D" parent="." unique_id=118314100]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ScanningArea"]
-shape = SubResource("BoxShape3D_w72k1")
+[node name="Characters" type="Node3D" parent="." unique_id=882450834]
 
-[node name="Entities" type="Node3D" parent="."]
+[node name="Projectiles" type="Node3D" parent="." unique_id=791637699]
 
-[node name="Characters" type="Node3D" parent="."]
+[node name="Spells" type="Node3D" parent="." unique_id=869075719]
 
-[node name="Projectiles" type="Node3D" parent="."]
+[node name="Walls" type="Node3D" parent="." unique_id=1302516025]
 
-[node name="Spells" type="Node3D" parent="."]
-
-[node name="Walls" type="Node3D" parent="."]
-
-[node name="Wall1" type="Area3D" parent="Walls" groups=["WALL"]]
+[node name="Wall1" type="Area3D" parent="Walls" unique_id=674264125 groups=["WALL"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.5)
 monitoring = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall1"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall1" unique_id=733637753]
 shape = SubResource("BoxShape3D_6wjnm")
 
-[node name="Wall2" type="Area3D" parent="Walls" groups=["WALL"]]
+[node name="Wall2" type="Area3D" parent="Walls" unique_id=505905737 groups=["WALL"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.5)
 monitoring = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall2" unique_id=1692352486]
 shape = SubResource("BoxShape3D_6wjnm")
 
-[node name="Wall3" type="Area3D" parent="Walls" groups=["WALL"]]
+[node name="Wall3" type="Area3D" parent="Walls" unique_id=674664821 groups=["WALL"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, 0, 0)
 monitoring = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall3"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall3" unique_id=1529558537]
 shape = SubResource("BoxShape3D_7oplh")
 
-[node name="Wall4" type="Area3D" parent="Walls" groups=["WALL"]]
+[node name="Wall4" type="Area3D" parent="Walls" unique_id=430265196 groups=["WALL"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, 0)
 monitoring = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall4"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall4" unique_id=268536224]
 shape = SubResource("BoxShape3D_7oplh")
 
-[node name="CharacterSynchronizer" type="MultiplayerSpawner" parent="."]
+[node name="CharacterSynchronizer" type="MultiplayerSpawner" parent="." unique_id=126086143]
 spawn_path = NodePath("../Characters")

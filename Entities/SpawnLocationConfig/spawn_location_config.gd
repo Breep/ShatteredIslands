@@ -19,7 +19,7 @@ var location_type: LocationType = LocationType.EXACT
 ## Exact global position (used when location_type is EXACT)
 var exact_position: Vector3 = Vector3.ZERO
 
-## Team number for team zone spawning (used when location_type is TEAM_ZONE)
+## Team id for team zone spawning (used when location_type is TEAM_ZONE)
 var team: int = 0
 
 ## Target entity for relative positioning (used when location_type is ENTITY)
@@ -32,9 +32,8 @@ var randomization_radius: float = 0.0
 
 ## Resolve the spawn location to an actual Vector3 position
 ## arena_zone_manager: The ArenaZoneManager to use for zone-based spawning
-## owner_team: The team of the entity doing the summoning (used for TEAM_ZONE with team=-1)
 ## Returns: The resolved global position
-func resolve(arena_zone_manager: ArenaZoneManager, owner_team: int = 0) -> Vector3:
+func resolve(arena_zone_manager: ArenaZoneManager) -> Vector3:
 	var base_position := Vector3.ZERO
 	
 	match location_type:
@@ -51,9 +50,7 @@ func resolve(arena_zone_manager: ArenaZoneManager, owner_team: int = 0) -> Vecto
 			if arena_zone_manager == null:
 				printerr("SpawnLocationConfig: ArenaZoneManager required for TEAM_ZONE")
 				return Vector3.ZERO
-			# If team is -1, use owner's team
-			var target_team := team if team >= 0 else owner_team
-			base_position = arena_zone_manager.get_random_position_for_team(target_team)
+			base_position = arena_zone_manager.get_random_position_for_team(team)
 		
 		LocationType.ENTITY:
 			if target_entity == null:
@@ -72,8 +69,11 @@ func resolve(arena_zone_manager: ArenaZoneManager, owner_team: int = 0) -> Vecto
 			return Vector3.ZERO
 	
 	# Apply randomization if specified
-	if arena_zone_manager != null and randomization_radius > 0.0:
-		return arena_zone_manager.apply_randomization(base_position, randomization_radius)
+	if randomization_radius > 0.0:
+		if arena_zone_manager != null:
+			return arena_zone_manager.apply_randomization(base_position, randomization_radius)
+		else:
+			return _apply_randomization(base_position, randomization_radius)
 	
 	return base_position
 
@@ -130,3 +130,18 @@ static func create_random_arena(randomization: float = 0.0) -> SpawnLocationConf
 	config.location_type = LocationType.RANDOM_ARENA
 	config.randomization_radius = randomization
 	return config
+
+func _apply_randomization(position: Vector3, radius: float) -> Vector3:
+	if radius <= 0.0:
+		return position
+	
+	var random_angle := randf() * TAU
+	var random_distance := randf() * radius
+	
+	var offset := Vector3(
+		cos(random_angle) * random_distance,
+		0.0,  # Keep Y unchanged
+		sin(random_angle) * random_distance
+	)
+	
+	return position + offset
