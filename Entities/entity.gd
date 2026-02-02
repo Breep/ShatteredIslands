@@ -69,7 +69,8 @@ enum EntityType {
 	HERO,
 	SNAKE_BARREL,
 	SNAKE,
-	FIELD_GENERATOR
+	FIELD_GENERATOR,
+	CHICKEN
 }
 
 enum SnakeBarrelModifier {

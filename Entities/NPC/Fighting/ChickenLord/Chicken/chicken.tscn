@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://xup3guwehhoc"]
+
+[ext_resource type="Script" uid="uid://l4sahik8i4w1" path="res://Entities/NPC/Fighting/ChickenLord/Chicken/chicken.gd" id="1_k573r"]
+[ext_resource type="PackedScene" uid="uid://ctj0phpdgq5iu" path="res://Entities/NPC/Fighting/ChickenLord/Chicken/chicken_visual.tscn" id="2_k573r"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/Stats/EntityStats/entity_stats.gd" id="2_x7yny"]
+[ext_resource type="PackedScene" uid="uid://jwk6d3k8w3k5" path="res://Entities/EntityInfoPanel/EntityInfoPanel3D/entity_info_panel_3d.tscn" id="4_x7yny"]
+
+[sub_resource type="Resource" id="Resource_x7yny"]
+script = ExtResource("2_x7yny")
+health_max = 1000.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x7yny"]
+radius = 0.421875
+height = 0.84375
+
+[node name="Chicken" type="CharacterBody3D" unique_id=2109615854]
+script = ExtResource("1_k573r")
+custom_base_stats = SubResource("Resource_x7yny")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1928783995]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41943443, 0)
+shape = SubResource("CapsuleShape3D_x7yny")
+
+[node name="ChickenVisual" parent="." unique_id=530887194 instance=ExtResource("2_k573r")]
+
+[node name="EntityInfoPanel3d" parent="." unique_id=2123434308 node_paths=PackedStringArray("_owner_entity") instance=ExtResource("4_x7yny")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.0746297, 0)
+_owner_entity = NodePath("..")

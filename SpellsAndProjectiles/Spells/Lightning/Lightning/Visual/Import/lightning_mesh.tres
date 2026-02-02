@@ -1,4 +1,4 @@
-[gd_resource type="ArrayMesh" load_steps=9 format=4 uid="uid://dtsr0t0nqnwji"]
+[gd_resource type="ArrayMesh" format=4 uid="uid://dtsr0t0nqnwji"]
 
 [ext_resource type="Shader" uid="uid://cxeti1rlxyraa" path="res://SpellsAndProjectiles/Spells/Lightning/Lightning/Visual/Shaders/particle_lightning_shader.tres" id="1_lpyso"]
 [ext_resource type="Shader" uid="uid://xu48v8w703p" path="res://SpellsAndProjectiles/Spells/Lightning/Lightning/Visual/Shaders/particle_mark_shader.tres" id="2_bl203"]
