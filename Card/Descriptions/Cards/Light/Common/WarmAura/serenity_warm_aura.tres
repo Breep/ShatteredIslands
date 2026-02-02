@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://b1tjb84nxwa6a"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://b1tjb84nxwa6a"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_template"]
 [ext_resource type="Script" uid="uid://cd52qoe7maia8" path="res://Card/Descriptions/Cards/Light/Common/WarmAura/serenity_warm_aura.gd" id="2_script"]

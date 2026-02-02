@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://cmri5y5lsw4pe"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cmri5y5lsw4pe"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_nm6f3"]
 [ext_resource type="Texture2D" uid="uid://dgbmyuh4hugxu" path="res://Card/Descriptions/Cards/Attack/Common/ArcaneStaff/attack_arcane_staff.png" id="1_yfmdl"]

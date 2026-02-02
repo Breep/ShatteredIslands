@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://bj3e4jhk5i7ab"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://bj3e4jhk5i7ab"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_2pji5"]
 [ext_resource type="Texture2D" uid="uid://co2qx4mqq8x1n" path="res://Card/Descriptions/Cards/Poison/Common/RottingMilk/portrait_rotting_milk.png" id="1_ra12r"]

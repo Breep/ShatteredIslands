@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://cq4vk1axdaj4u"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cq4vk1axdaj4u"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_card"]
 [ext_resource type="Script" uid="uid://b4adhawsq12gm" path="res://Card/Descriptions/Cards/Storm/Common/SchrodingerStorm/storm_schrodinger_storm.gd" id="2_script"]

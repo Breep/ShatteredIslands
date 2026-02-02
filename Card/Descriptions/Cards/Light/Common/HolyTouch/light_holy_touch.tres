@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://lypcpcn4pc4a"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://lypcpcn4pc4a"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_v43a7"]
 [ext_resource type="Texture2D" uid="uid://dni7nok7g6p3j" path="res://Card/Descriptions/Cards/Light/Common/HolyTouch/portrait_holy_touch.png" id="1_xf8j7"]

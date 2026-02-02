@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://cx8ghn5qu8ot6"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cx8ghn5qu8ot6"]
 
 [ext_resource type="Texture2D" uid="uid://tuwewl8ngbqu" path="res://Card/Descriptions/Cards/Fire/Common/DarkForest/fire_dark_forest.png" id="1_32p1v"]
 [ext_resource type="Script" uid="uid://codt4sirjnqh7" path="res://Card/Descriptions/Cards/Fire/Common/DarkForest/fire_dark_forest.gd" id="2_m1x01"]

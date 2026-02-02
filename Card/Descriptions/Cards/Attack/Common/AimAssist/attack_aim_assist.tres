@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://lvbuorya4vkq"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://lvbuorya4vkq"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_card"]
 [ext_resource type="Script" uid="uid://1t4br83fwalp" path="res://Card/Descriptions/Cards/Attack/Common/AimAssist/attack_aim_assist.gd" id="2_script"]

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://b6rcxah2x0aqm"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://b6rcxah2x0aqm"]
 
 [ext_resource type="Texture2D" uid="uid://dyigti30af6ys" path="res://Card/Descriptions/Cards/Colossus/Common/BearStrenght/colossus_bear_strength.png" id="1_cisb5"]
 [ext_resource type="Script" uid="uid://6y21jw46g3hf" path="res://Card/Descriptions/Cards/Colossus/Common/BearStrenght/colossus_bear_strength.gd" id="2_jectr"]

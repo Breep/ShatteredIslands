@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://r3rk3cnyponr"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://r3rk3cnyponr"]
 
 [ext_resource type="Script" uid="uid://gpbhlq6yi8ty" path="res://Card/Descriptions/Cards/Defense/Common/ProtectiveDome/shieldomatic_protective_dome.gd" id="1_e60rh"]
 [ext_resource type="Texture2D" uid="uid://d18itcbwexbpl" path="res://Card/Descriptions/Cards/Defense/Common/ProtectiveDome/shieldomatic_protective_dome.png" id="1_kmq2y"]

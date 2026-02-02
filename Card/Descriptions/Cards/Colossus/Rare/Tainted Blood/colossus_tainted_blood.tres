@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://b62a25wa2mjlv"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://b62a25wa2mjlv"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_8w70h"]
 [ext_resource type="Texture2D" uid="uid://dxss3ukecvweq" path="res://Card/Descriptions/Cards/Colossus/Rare/Tainted Blood/colossus_tainted_blood.jpg.png" id="1_exk8y"]

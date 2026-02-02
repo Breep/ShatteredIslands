@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://b76twqciou5cu"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://b76twqciou5cu"]
 
 [ext_resource type="Script" uid="uid://bd4dbqvvv4j0o" path="res://Card/Descriptions/Cards/Attack/Rare/BladeRush/attack_blade_rush.gd" id="1_jm0ul"]
 [ext_resource type="Texture2D" uid="uid://bfh4hie68jo4t" path="res://Card/Descriptions/Cards/Attack/Rare/BladeRush/attack_blade_rush.png" id="1_lr76t"]

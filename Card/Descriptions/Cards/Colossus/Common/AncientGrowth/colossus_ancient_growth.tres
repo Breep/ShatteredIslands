@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://c4ls6c4ycmk0t"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://c4ls6c4ycmk0t"]
 
 [ext_resource type="Texture2D" uid="uid://b1rgumqb5qsrj" path="res://Card/Descriptions/Cards/Colossus/Common/AncientGrowth/colossus_ancient_growth.png" id="1_7hkqd"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_o6hwe"]

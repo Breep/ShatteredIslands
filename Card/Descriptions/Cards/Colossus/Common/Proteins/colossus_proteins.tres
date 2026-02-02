@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://cj72i47u7d1nu"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cj72i47u7d1nu"]
 
 [ext_resource type="Texture2D" uid="uid://djutxmtawlnav" path="res://Card/Descriptions/Cards/Colossus/Common/Proteins/colossus_proteins_.png" id="1_h8ej3"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_iu8p0"]

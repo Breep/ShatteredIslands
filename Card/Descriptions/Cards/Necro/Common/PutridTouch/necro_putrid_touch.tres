@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://dnwa5apxanb8j"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://dnwa5apxanb8j"]
 
 [ext_resource type="Script" uid="uid://muo4wd721c3x" path="res://Card/Descriptions/Cards/Necro/Common/PutridTouch/necro_putrid_touch.gd" id="1_logic"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="3_base"]

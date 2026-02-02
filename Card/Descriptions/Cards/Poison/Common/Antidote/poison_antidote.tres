@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://db0b7kkosks20"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://db0b7kkosks20"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_deq0v"]
 [ext_resource type="Texture2D" uid="uid://ce5ub2nmu7n25" path="res://Card/Descriptions/Cards/Poison/Common/Antidote/portrait_antidote.png" id="1_n6870"]

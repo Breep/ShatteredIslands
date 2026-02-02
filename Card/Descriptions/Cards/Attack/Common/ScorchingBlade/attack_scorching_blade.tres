@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://dpnpvtk3elac0"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://dpnpvtk3elac0"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_h7puq"]
 [ext_resource type="Texture2D" uid="uid://spphpwsefj" path="res://Card/Descriptions/Cards/Attack/Common/ScorchingBlade/attack_scorching_blade.png" id="1_i8f3f"]

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://cywh2kajy8jg3"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cywh2kajy8jg3"]
 
 [ext_resource type="Script" uid="uid://dm1x0oi152gfo" path="res://Card/Descriptions/Cards/Colossus/Common/EvasiveGrowth/colossus_evasive_growth.gd" id="1_5686c"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_adgwi"]

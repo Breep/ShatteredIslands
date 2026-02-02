@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://vw6felcpdbf0"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://vw6felcpdbf0"]
 
 [ext_resource type="Script" uid="uid://haa5v3x7chok" path="res://Card/Descriptions/Cards/Light/Common/CorruptedLight/serenity_corrupted_light.gd" id="1_script"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_template"]

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://e4sl6p15d3rj"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://e4sl6p15d3rj"]
 
 [ext_resource type="Texture2D" uid="uid://ch6vw6du1rkse" path="res://Card/Descriptions/Cards/Poison/Rare/Corrosion/portrait_corrosion.png" id="1_2ey3a"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_xd5d5"]

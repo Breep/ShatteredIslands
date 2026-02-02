@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://b0vxjhrs71sxg"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://b0vxjhrs71sxg"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_template"]
 [ext_resource type="Script" uid="uid://b28t7k5allmwe" path="res://Card/Descriptions/Cards/Light/Common/OverflowingLight/serenity_overflowing_light.gd" id="2_script"]

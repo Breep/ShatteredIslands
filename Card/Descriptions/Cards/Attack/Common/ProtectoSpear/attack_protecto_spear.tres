@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://dm4yi57mem0b4"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://dm4yi57mem0b4"]
 
 [ext_resource type="Texture2D" uid="uid://dhsx6i82dxpid" path="res://Card/Descriptions/Cards/Attack/Common/ProtectoSpear/attack_protecto_spear.png" id="1_mr5na"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_template"]
