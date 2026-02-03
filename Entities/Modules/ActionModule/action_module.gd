@@ -355,6 +355,9 @@ func _summon_field_generator(spawn_position: Vector3, entity_modifier: Dictionar
 func _summon_chicken(spawn_position: Vector3, _entity_modifier: Dictionary) -> void:
 	var chicken: Chicken = CHICKEN_SCENE.instantiate()
 	chicken.team = _owner.team
+	chicken.fighting_state = _owner.fighting_state
+	chicken._spawn_manager = _spawn_manager # Monstruosité à vite rework
+	chicken._arena_zone_manager = _arena_zone_manager
 	_spawn_manager.spawn_entity(chicken, spawn_position)
 #endregion
 

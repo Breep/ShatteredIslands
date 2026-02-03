@@ -19,7 +19,28 @@
 script = ExtResource("15_x0odd")
 health_max = 5000.0
 attack_damage = 25.0
-attack_speed = 3.0
+attack_speed = 0.7
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_fl2p6"]
+script = ExtResource("15_x0odd")
+health_max = 5000.0
+attack_damage = 25.0
+attack_speed = 1.1
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_vbhu7"]
+script = ExtResource("15_x0odd")
+health_max = 5000.0
+attack_damage = 25.0
+attack_speed = 0.5
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="Resource" id="Resource_3bpsj"]
+script = ExtResource("15_x0odd")
+health_max = 5000.0
+attack_damage = 25.0
+attack_speed = 0.8
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m73qc"]
@@ -57,21 +78,21 @@ _arena_zone_manager = NodePath("../../ArenaZoneManager")
 [node name="DarkKnight3" parent="Entities" unique_id=775240683 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("1_icvx6")]
 transform = Transform3D(-0.8359702, 0, 0.54877484, 0, 1, 0, -0.54877484, 0, -0.8359702, 4.387443, 0, -6.40211)
 team = 3
-custom_base_stats = SubResource("Resource_xl213")
+custom_base_stats = SubResource("Resource_fl2p6")
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
 
 [node name="DarkKnight4" parent="Entities" unique_id=1906413560 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("1_icvx6")]
 transform = Transform3D(-0.5246547, 0, -0.85131514, 0, 1, 0, 0.85131514, 0, -0.5246547, -4.850088, 0, -6.6217995)
 team = 4
-custom_base_stats = SubResource("Resource_xl213")
+custom_base_stats = SubResource("Resource_vbhu7")
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
 
 [node name="DarkKnight5" parent="Entities" unique_id=829130979 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("1_icvx6")]
 transform = Transform3D(0.37224275, 0, -0.9281354, 0, 1, 0, 0.9281354, 0, 0.37224275, -7.5075235, -9.536743e-07, 2.2651072)
 team = 5
-custom_base_stats = SubResource("Resource_xl213")
+custom_base_stats = SubResource("Resource_3bpsj")
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
 

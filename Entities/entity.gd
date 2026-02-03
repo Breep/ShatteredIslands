@@ -129,10 +129,7 @@ var _base_stats: EntityStats # Private, use base_stats property to access
 var visual: EntityInfoPanel3D:
 	get: return _entity_info_panel_3d
 
-# Custom base_stats override for quick testing (optional)
-# If defined, this will be used instead of auto-generated base_stats
 @export var custom_base_stats: EntityStats
-
 @export var _spawn_manager: SpawnManager
 @export var _arena_zone_manager: ArenaZoneManager
 
