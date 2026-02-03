@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://bkwylok1rm33p"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://bkwylok1rm33p"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_6miog"]
 [ext_resource type="Texture2D" uid="uid://27vejwopd07c" path="res://Card/Descriptions/Cards/Poison/Common/VenomousDarts/portrait_venom_darts.png" id="1_qqb1e"]

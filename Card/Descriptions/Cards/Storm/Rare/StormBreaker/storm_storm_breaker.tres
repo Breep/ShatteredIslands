@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://kbmlikqifik1"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://kbmlikqifik1"]
 
 [ext_resource type="Script" uid="uid://sdkefcyuqtp7" path="res://Card/Descriptions/Cards/Storm/Rare/StormBreaker/storm_storm_breaker.gd" id="1_krxx5"]
 [ext_resource type="Texture2D" uid="uid://by0kkcp7onvge" path="res://Card/Descriptions/Cards/Storm/Rare/StormBreaker/storm_storm_breaker.jpg" id="1_mm6t8"]

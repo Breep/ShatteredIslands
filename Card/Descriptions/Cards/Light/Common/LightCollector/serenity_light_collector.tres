@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://dcoannjk22iij"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://dcoannjk22iij"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_card"]
 [ext_resource type="Script" uid="uid://biubp05gakuhr" path="res://Card/Descriptions/Cards/Light/Common/LightCollector/serenity_light_collector.gd" id="2_script"]

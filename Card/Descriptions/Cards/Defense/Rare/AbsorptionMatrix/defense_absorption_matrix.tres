@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://dn12dex5vaxb1"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://dn12dex5vaxb1"]
 
 [ext_resource type="Texture2D" uid="uid://dhtqdohppanui" path="res://Card/Descriptions/Cards/Defense/Rare/AbsorptionMatrix/shieldomatic_absorption_matrix.jpg" id="1_6sx4m"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_card_template"]

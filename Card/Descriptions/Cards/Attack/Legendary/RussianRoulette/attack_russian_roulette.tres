@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://b1hnvijka2dfw"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://b1hnvijka2dfw"]
 
 [ext_resource type="Script" uid="uid://df27b7unj5lxp" path="res://Card/Descriptions/Cards/Attack/Legendary/RussianRoulette/attack_russian_roulette.gd" id="1_script"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_template"]

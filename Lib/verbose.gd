@@ -45,6 +45,7 @@ enum Category {
 	FIGHTING_AREA,
 	BDS_REGISTERY,
 	TABLE,
+	SPAWN_LOCATION_CONFIG,
 }
 
 const CATEGORY_PREFIX_TEMPLATES: Dictionary[Category, String] = {
@@ -78,6 +79,7 @@ const CATEGORY_PREFIX_TEMPLATES: Dictionary[Category, String] = {
 	Category.FAMILY_MANAGER: "(FAMILY_MAN) ",
 	Category.BDS_REGISTERY: "(BDS_REG   ) ",
 	Category.TABLE: "(TABLE     ) ",
+	Category.SPAWN_LOCATION_CONFIG: "(SPAWN_LOC ) ",
 }
 
 const PREFIX_TEMPLATES: Dictionary[GameType, String] = {
@@ -132,6 +134,7 @@ var current_categories_level: Dictionary[Category, Level] = {
 	Category.FIGHTING_AREA: Level.WARN,
 	Category.BDS_REGISTERY: Level.WARN,
 	Category.TABLE: Level.WARN,
+	Category.SPAWN_LOCATION_CONFIG: Level.WARN,
 }
 #endregion
 

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://dtqhilutyn471"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://dtqhilutyn471"]
 
 [ext_resource type="Texture2D" uid="uid://jnvlk0d7bcar" path="res://Card/Descriptions/Cards/Poison/Common/HotPot/portrait_hot_pot.png" id="1_monbk"]
 [ext_resource type="Script" uid="uid://hrp0l8fctrln" path="res://Card/Descriptions/Cards/Poison/Common/HotPot/poison_hot_pot.gd" id="2_whajc"]

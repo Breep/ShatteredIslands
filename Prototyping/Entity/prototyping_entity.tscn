@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://UI/Tool/Misc/hover_boost_button.gd" id="3_6kn6i"]
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_egh8k"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
+[ext_resource type="PackedScene" uid="uid://dvuq5n41nak3u" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.tscn" id="8_fl2p6"]
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://Modules/PickableClickable/PickableModule/pickable_module.tscn" id="9_614kc"]
 [ext_resource type="PackedScene" uid="uid://bg5efhnq0erdv" path="res://Modules/PickableClickable/ClickableModule/clickable_module.tscn" id="10_m73qc"]
 [ext_resource type="PackedScene" uid="uid://blncvfes4f2y7" path="res://Prototyping/Entity/AllActionPrototyping/testing_floorffa5.tscn" id="11_5hdqt"]
@@ -40,34 +41,39 @@ script = ExtResource("1_6kn6i")
 [node name="Entities" type="Node3D" parent="." unique_id=38016860]
 unique_name_in_owner = true
 
-[node name="DarkKnight1" parent="Entities" unique_id=353718081 node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
+[node name="DarkKnight1" parent="Entities" unique_id=353718081 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("1_icvx6")]
 transform = Transform3D(0.9946579, 0, 0.10322651, 0, 1, 0, -0.10322651, 0, 0.9946579, 0.07346773, -4.7683716e-07, 7.8182755)
 team = 1
 _spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
 
-[node name="DarkKnight2" parent="Entities" unique_id=1010378661 node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
+[node name="DarkKnight2" parent="Entities" unique_id=1010378661 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("1_icvx6")]
 transform = Transform3D(-0.059724454, 0, 0.9982149, 0, 1, 0, -0.9982149, 0, -0.059724454, 7.5962777, 4.7683716e-07, 2.3270931)
 team = 2
 custom_base_stats = SubResource("Resource_xl213")
 _spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
 
-[node name="DarkKnight3" parent="Entities" unique_id=775240683 node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
+[node name="DarkKnight3" parent="Entities" unique_id=775240683 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("1_icvx6")]
 transform = Transform3D(-0.8359702, 0, 0.54877484, 0, 1, 0, -0.54877484, 0, -0.8359702, 4.387443, 0, -6.40211)
 team = 3
 custom_base_stats = SubResource("Resource_xl213")
 _spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
 
-[node name="DarkKnight4" parent="Entities" unique_id=1906413560 node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
+[node name="DarkKnight4" parent="Entities" unique_id=1906413560 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("1_icvx6")]
 transform = Transform3D(-0.5246547, 0, -0.85131514, 0, 1, 0, 0.85131514, 0, -0.5246547, -4.850088, 0, -6.6217995)
 team = 4
 custom_base_stats = SubResource("Resource_xl213")
 _spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
 
-[node name="DarkKnight5" parent="Entities" unique_id=829130979 node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
+[node name="DarkKnight5" parent="Entities" unique_id=829130979 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("1_icvx6")]
 transform = Transform3D(0.37224275, 0, -0.9281354, 0, 1, 0, 0.9281354, 0, 0.37224275, -7.5075235, -9.536743e-07, 2.2651072)
 team = 5
 custom_base_stats = SubResource("Resource_xl213")
 _spawn_manager = NodePath("../../SpawnManager")
+_arena_zone_manager = NodePath("../../ArenaZoneManager")
 
 [node name="Control" type="Control" parent="." unique_id=1104542732]
 layout_mode = 3
@@ -143,6 +149,18 @@ transform = Transform3D(0.022652432, 0, 0.9997434, 0, 1, 0, -0.9997434, 0, 0.022
 _entities_node = NodePath("../SpawnEntities")
 _projectiles_node = NodePath("../SpawnProjectiles")
 _spells_node = NodePath("../SpawnSpells")
+
+[node name="ArenaZoneManager" parent="." unique_id=641704685 node_paths=PackedStringArray("_team_zones", "_center_zone", "_full_arena_zone") instance=ExtResource("8_fl2p6")]
+_team_zones = {
+1: NodePath("../TestingFloorFFA5/CenterNode3D/Center1/Team1Area"),
+2: NodePath("../TestingFloorFFA5/CenterNode3D/Center2/Team2Area"),
+3: NodePath("../TestingFloorFFA5/CenterNode3D/Center3/Team3Area"),
+4: NodePath("../TestingFloorFFA5/CenterNode3D/Center4/Team4Area"),
+5: NodePath("../TestingFloorFFA5/CenterNode3D/Center5/Team5Area")
+}
+_center_zone = NodePath("../TestingFloorFFA5/CenterArea")
+_full_arena_zone = NodePath("../TestingFloorFFA5/FloorArea")
+_is_initialized = true
 
 [node name="SpawnEntities" type="Node3D" parent="." unique_id=1850617918]
 

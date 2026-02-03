@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://bu2qwhn65ehi"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://bu2qwhn65ehi"]
 
 [ext_resource type="Texture2D" uid="uid://byi0eabn1lsix" path="res://Card/Descriptions/Cards/Fire/Epic/Nuke/portrait_nuke.png" id="1_an3vv"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_jbq81"]

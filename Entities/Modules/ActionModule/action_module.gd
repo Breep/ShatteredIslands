@@ -2,6 +2,7 @@ class_name ActionModule
 extends Module
 
 var _spawn_manager: SpawnManager
+var _arena_zone_manager: ArenaZoneManager
 
 const METEOR_SCENE: PackedScene = preload("res://SpellsAndProjectiles/Spells/Meteor/meteor.tscn")
 const DARK_STORM_SCENE: PackedScene = preload("res://SpellsAndProjectiles/Spells/DarkStorm/dark_storm.tscn")
@@ -22,10 +23,16 @@ const CHICKEN_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/ChickenL
 func connect_to_spawn_manager(spawn_manager: SpawnManager) -> void:
 	Verbose.debug("connect_to_spawn_manager() | " + str(spawn_manager), Verbose.Category.ENTITY_MODULE)
 	if spawn_manager == null:
-		printerr("ActionModule: Trying to connect to a <null> SpawnManager")
+		Verbose.error("Trying to connect to a <null> SpawnManager", Verbose.Category.ENTITY_MODULE)
 		return
 	
 	_spawn_manager = spawn_manager
+
+func connect_to_arena_zone_manager(arena_zone_manager: ArenaZoneManager) -> void:
+	if arena_zone_manager == null:
+		Verbose.error("Trying to connect to a <null> ArenaZoneManager", Verbose.Category.ENTITY_MODULE)
+		return
+	_arena_zone_manager = arena_zone_manager
 
 #region ============================== Attack ==============================
 # Instantly attack the target - Apply cards damages multiplier if there are some
@@ -305,12 +312,7 @@ func summon_entity(entity_type: Entity.EntityType, spawn_config: SpawnLocationCo
 		push_error("ActionModule: Can't summon an entity if no SpawnManager is linked to me [", get_path(), "]")
 		return
 	
-	# Get arena zone manager from owner's fighting area
-	var arena_zone_manager: ArenaZoneManager = null
-	if _owner is Hero and _owner.fighting_area != null:
-		arena_zone_manager = _owner.fighting_area.arena_zone_manager
-	
-	var spawn_position := spawn_config.resolve(arena_zone_manager)
+	var spawn_position := spawn_config.resolve(_arena_zone_manager)
 	
 	match entity_type:
 		Entity.EntityType.SNAKE_BARREL: _summon_snake_barrel(spawn_position, entity_modifier)

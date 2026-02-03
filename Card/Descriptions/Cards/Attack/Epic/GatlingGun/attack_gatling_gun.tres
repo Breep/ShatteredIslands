@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://3vjmnbpyyjyk"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://3vjmnbpyyjyk"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_rxnni"]
 [ext_resource type="Texture2D" uid="uid://dlblucvhjqc34" path="res://Data/Assets/Card/Portraits/Attack/attack_gattling_gun.png" id="1_simcp"]

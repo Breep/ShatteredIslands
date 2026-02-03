@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://cki0jkayic783"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cki0jkayic783"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_5rjur"]
 [ext_resource type="Texture2D" uid="uid://dfhhct5auuotx" path="res://Card/Descriptions/Cards/Storm/Common/Storm Battery/storm_storm_battery.jpg" id="1_7h0nn"]

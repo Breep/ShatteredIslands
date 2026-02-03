@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://by5tud5u1y87o"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://by5tud5u1y87o"]
 
 [ext_resource type="Texture2D" uid="uid://psnthd75twnn" path="res://Card/Descriptions/Cards/Defense/Common/ForceField/shieldomatic_force_field.png" id="1_n4itg"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_svenj"]

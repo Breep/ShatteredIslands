@@ -77,28 +77,27 @@ script = ExtResource("1_2rxxx")
 _hero_spawner = NodePath("CharacterSpawner")
 
 [node name="FloorArea" type="Area3D" parent="." unique_id=2121644269]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5351479, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FloorArea" unique_id=493050158]
 shape = SubResource("BoxShape3D_g4xe2")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="FloorArea" unique_id=1440029104]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 mesh = SubResource("BoxMesh_ptbj1")
 
 [node name="CharacterSpawner" parent="." unique_id=872212538 node_paths=PackedStringArray("_spawn_points") instance=ExtResource("2_ycx5f")]
 _spawn_points = [NodePath("../CenterNode3D/Center1/Team1Area/SpawnPoint1"), NodePath("../CenterNode3D/Center2/Team2Area/SpawnPoint2"), NodePath("../CenterNode3D/Center3/Team3Area/SpawnPoint3"), NodePath("../CenterNode3D/Center4/Team4Area/SpawnPoint4"), NodePath("../CenterNode3D/Center5/Team5Area/SpawnPoint5")]
 
 [node name="CenterArea" type="Area3D" parent="." unique_id=987179195]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CenterArea" unique_id=1817107153]
 shape = SubResource("CylinderShape3D_gusl2")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CenterArea" unique_id=409198330]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.95, 0)
 mesh = SubResource("CylinderMesh_qdlkt")
 
 [node name="CenterNode3D" type="Node3D" parent="." unique_id=21817098]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
 [node name="Center1" type="Node3D" parent="CenterNode3D" unique_id=337183783]
 
@@ -109,6 +108,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
 shape = SubResource("CylinderShape3D_ptbj1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CenterNode3D/Center1/Team1Area" unique_id=1030576179]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.95, 0)
 layers = 512
 mesh = SubResource("CylinderMesh_fwb8b")
 
@@ -133,6 +133,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
 shape = SubResource("CylinderShape3D_ptbj1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CenterNode3D/Center2/Team2Area" unique_id=826441766]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.95, 0)
 layers = 512
 mesh = SubResource("CylinderMesh_nlfyh")
 
@@ -158,6 +159,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
 shape = SubResource("CylinderShape3D_ptbj1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CenterNode3D/Center3/Team3Area" unique_id=1581609339]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.95, 0)
 layers = 512
 mesh = SubResource("CylinderMesh_m17tb")
 
@@ -182,6 +184,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
 shape = SubResource("CylinderShape3D_ptbj1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CenterNode3D/Center4/Team4Area" unique_id=2064288510]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.95, 0)
 layers = 512
 mesh = SubResource("CylinderMesh_d0tiy")
 
@@ -206,6 +209,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
 shape = SubResource("CylinderShape3D_ptbj1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CenterNode3D/Center5/Team5Area" unique_id=1937256180]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.95, 0)
 layers = 512
 mesh = SubResource("CylinderMesh_xujrc")
 

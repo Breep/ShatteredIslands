@@ -106,9 +106,13 @@ var target_module: TargetModule
 var auto_attack_modifier_registry: AutoAttackModifierRegistry
 var action_modifiers_registry: ActionModifiersRegistry
 var stat_modifiers_registry: EntityStatModifiersRegistry
+
+var base_stats: EntityStats:
+	get: return _base_stats
 #endregion
 
 #region ============================== Private variables ==============================
+var _base_stats: EntityStats # Private, use base_stats property to access
 #endregion
 
 #region ============================== Export ==============================
@@ -129,11 +133,8 @@ var visual: EntityInfoPanel3D:
 # If defined, this will be used instead of auto-generated base_stats
 @export var custom_base_stats: EntityStats
 
-var _base_stats: EntityStats # Private, use base_stats property to access
-var base_stats: EntityStats:
-	get: return _base_stats
-
 @export var _spawn_manager: SpawnManager
+@export var _arena_zone_manager: ArenaZoneManager
 
 @onready var bds_registry := EntityBDSRegistry.new(entity_name)
 

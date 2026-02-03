@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://unfr47gd88os"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://unfr47gd88os"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_fxwd2"]
 [ext_resource type="Texture2D" uid="uid://vj0eycrtv4pb" path="res://Card/Descriptions/Cards/Poison/Epic/Shrooms/06_shrooms.png" id="1_y8bx5"]

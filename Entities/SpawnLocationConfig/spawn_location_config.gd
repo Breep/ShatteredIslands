@@ -42,30 +42,30 @@ func resolve(arena_zone_manager: ArenaZoneManager) -> Vector3:
 		
 		LocationType.ARENA_CENTER:
 			if arena_zone_manager == null:
-				printerr("SpawnLocationConfig: ArenaZoneManager required for ARENA_CENTER")
+				Verbose.error("ArenaZoneManager required for ARENA_CENTER", Verbose.Category.SPAWN_LOCATION_CONFIG)
 				return Vector3.ZERO
 			base_position = arena_zone_manager.get_center_zone_center()
 		
 		LocationType.TEAM_ZONE:
 			if arena_zone_manager == null:
-				printerr("SpawnLocationConfig: ArenaZoneManager required for TEAM_ZONE")
+				Verbose.error("ArenaZoneManager required for TEAM_ZONE", Verbose.Category.SPAWN_LOCATION_CONFIG)
 				return Vector3.ZERO
 			base_position = arena_zone_manager.get_random_position_for_team(team)
 		
 		LocationType.ENTITY:
 			if target_entity == null:
-				printerr("SpawnLocationConfig: target_entity required for ENTITY location type")
+				Verbose.error("target_entity required for ENTITY location type", Verbose.Category.SPAWN_LOCATION_CONFIG)
 				return Vector3.ZERO
 			base_position = target_entity.global_position
 		
 		LocationType.RANDOM_ARENA:
 			if arena_zone_manager == null:
-				printerr("SpawnLocationConfig: ArenaZoneManager required for RANDOM_ARENA")
+				Verbose.error("ArenaZoneManager required for RANDOM_ARENA", Verbose.Category.SPAWN_LOCATION_CONFIG)
 				return Vector3.ZERO
 			base_position = arena_zone_manager.get_random_position_in_arena()
 		
 		_:
-			printerr("SpawnLocationConfig: Unknown location type")
+			Verbose.error("Unknown location type", Verbose.Category.SPAWN_LOCATION_CONFIG)
 			return Vector3.ZERO
 	
 	# Apply randomization if specified

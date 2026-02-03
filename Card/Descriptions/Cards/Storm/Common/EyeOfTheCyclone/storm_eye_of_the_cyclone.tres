@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://bp2rry4m26npn"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://bp2rry4m26npn"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_template"]
 [ext_resource type="Texture2D" uid="uid://5bxwil1a2iic" path="res://Card/Descriptions/Cards/Storm/Common/EyeOfTheCyclone/storm_eye_of_the_cyclone.jpg" id="1_wnj5j"]

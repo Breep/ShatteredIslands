@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://cjlgjeiu5bb3g"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cjlgjeiu5bb3g"]
 
 [ext_resource type="Texture2D" uid="uid://c0grgn5kfacp3" path="res://Card/Descriptions/Cards/Poison/Legendary/DeathSmoke/portrait_death_smoke.png" id="1_gscfb"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_kl7m4"]

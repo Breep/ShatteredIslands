@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://c88cqm481bhcu"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://c88cqm481bhcu"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_aeacc"]
 [ext_resource type="Texture2D" uid="uid://dibhj1of0c2qx" path="res://Card/Descriptions/Cards/Defense/Common/ShieldRush/shieldomatic_shield_rush.png" id="1_tcq60"]

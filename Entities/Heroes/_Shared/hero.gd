@@ -69,6 +69,7 @@ func connect_to_fighting_area(fighting_area_ref: FightingArea) -> void:
 	
 	fighting_area = fighting_area_ref
 	_action_module.connect_to_spawn_manager(fighting_area.spawn_manager)
+	_action_module.connect_to_arena_zone_manager(fighting_area.arena_zone_manager)
 
 
 func get_auto_attack_spawn() -> Node3D:
@@ -192,6 +193,8 @@ func _hero_enter_tree() -> void:
 		add_child(_action_module)
 		if _spawn_manager != null:
 			_action_module.connect_to_spawn_manager(_spawn_manager)
+		if _arena_zone_manager != null:
+			_action_module.connect_to_arena_zone_manager(_arena_zone_manager)
 	
 	if _auto_attack_module == null:
 		var module: AutoAttackModule = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.AUTOATTACK].instantiate()
@@ -245,7 +248,6 @@ func _exit_tree() -> void:
 		_auto_attack_module.attack_done.disconnect(_on_aa_module_attack_done)
 	if _hero_animator != null and _hero_animator.attack_hit_frame.is_connected(_on_hero_animator_attack_hit_frame):
 		_hero_animator.attack_hit_frame.disconnect(_on_hero_animator_attack_hit_frame)
-
 #endregion
 
 #region ============================== Private functions ==============================

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://dvpdubk0btegx"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://dvpdubk0btegx"]
 
 [ext_resource type="Texture2D" uid="uid://yekknulevsvb" path="res://Card/Descriptions/Cards/Poison/Common/PoisonFlask/portrait_poison_flask.png" id="1_ufqyo"]
 [ext_resource type="Script" uid="uid://1k2khgqbc78a" path="res://Card/Descriptions/Cards/Poison/Common/PoisonFlask/poison_poison_flask.gd" id="2_aldef"]

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://cqpsc1s0ykjx2"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cqpsc1s0ykjx2"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_script"]
 [ext_resource type="Script" uid="uid://d2tiokyuvpjjr" path="res://Card/Descriptions/Cards/Fire/Legendary/Apocalypse/fire_apocalypse.gd" id="2_sub_resource"]

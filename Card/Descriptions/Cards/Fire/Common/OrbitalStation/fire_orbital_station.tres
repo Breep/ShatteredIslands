@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://cj0r7d80wkhg0"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cj0r7d80wkhg0"]
 
 [ext_resource type="Texture2D" uid="uid://x1nd4rf2qjgw" path="res://Card/Descriptions/Cards/Fire/Common/OrbitalStation/fire_orbital_station.png" id="1_4j42q"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_y384u"]

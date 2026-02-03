@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://lyy1665stx5d"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://lyy1665stx5d"]
 
 [ext_resource type="Texture2D" uid="uid://bajx1q0uer845" path="res://Card/Descriptions/Cards/Colossus/Rare/CrystalMountain/colossus_crystal_mountain.png" id="1_1ql3a"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_pvac3"]

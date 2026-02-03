@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://cvotvjg1tq3fy"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cvotvjg1tq3fy"]
 
 [ext_resource type="Texture2D" uid="uid://cmqofknb81gie" path="res://Card/Descriptions/Cards/Storm/Common/Faraday/storm_faraday.jpg" id="1_rvffv"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_template"]

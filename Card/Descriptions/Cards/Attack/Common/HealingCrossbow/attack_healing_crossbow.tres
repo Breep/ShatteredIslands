@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://qm75h7gw2hgn"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://qm75h7gw2hgn"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_ckkh8"]
 [ext_resource type="Texture2D" uid="uid://dab5w5p4vwsor" path="res://Data/Assets/Card/Portraits/Attack/attack_healing_crossbow.png" id="1_jocew"]
