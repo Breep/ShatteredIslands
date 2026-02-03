@@ -1,9 +1,13 @@
 [gd_scene format=3 uid="uid://blncvfes4f2y7"]
 
-[ext_resource type="Script" uid="uid://bhv0dmum15mp1" path="res://FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor.gd" id="1_p4olv"]
-[ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Tool/SpawnPoint/spawn_point.tscn" id="2_g4xe2"]
-[ext_resource type="PackedScene" uid="uid://cc8wss5swf76b" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/HeroSpawner/hero_spawner.tscn" id="3_gusl2"]
-[ext_resource type="Texture2D" uid="uid://bpnolt2ws0tqn" path="res://Card/Descriptions/Families/Icons/chicken_lord.png" id="4_ptbj1"]
+[ext_resource type="Script" uid="uid://bhv0dmum15mp1" path="res://FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor.gd" id="1_2rxxx"]
+[ext_resource type="PackedScene" uid="uid://cc8wss5swf76b" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/HeroSpawner/hero_spawner.tscn" id="2_ycx5f"]
+[ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Tool/SpawnPoint/spawn_point.tscn" id="3_6fhtx"]
+[ext_resource type="Texture2D" uid="uid://saklno6cx0ej" path="res://Prototyping/Entity/AllActionPrototyping/Data/1.png" id="4_ir0yt"]
+[ext_resource type="Texture2D" uid="uid://cj5spe0fskygg" path="res://Prototyping/Entity/AllActionPrototyping/Data/2.png" id="5_b3oap"]
+[ext_resource type="Texture2D" uid="uid://d0xhvi2jp4wg3" path="res://Prototyping/Entity/AllActionPrototyping/Data/3.png" id="6_pxfix"]
+[ext_resource type="Texture2D" uid="uid://c6gae8x4h0o07" path="res://Prototyping/Entity/AllActionPrototyping/Data/4.png" id="7_c0lya"]
+[ext_resource type="Texture2D" uid="uid://cusff0c47lkcg" path="res://Prototyping/Entity/AllActionPrototyping/Data/5.png" id="8_vhakc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_g4xe2"]
 size = Vector3(25, 1, 25)
@@ -68,18 +72,9 @@ material = SubResource("StandardMaterial3D_ys4o5")
 top_radius = 3.0
 bottom_radius = 3.0
 
-[node name="TestingFloorFFA5" type="Node3D" unique_id=283551194 node_paths=PackedStringArray("_hero_spawner", "_team_zones", "_center_zone", "_full_arena_zone")]
-script = ExtResource("1_p4olv")
+[node name="TestingFloorFFA5" type="Node3D" unique_id=283551194 node_paths=PackedStringArray("_hero_spawner")]
+script = ExtResource("1_2rxxx")
 _hero_spawner = NodePath("CharacterSpawner")
-_team_zones = {
-1: NodePath("CenterNode3D/Center1/Team1Area"),
-2: NodePath("CenterNode3D/Center2/Team2Area"),
-3: NodePath("CenterNode3D/Center3/Team3Area"),
-4: NodePath("CenterNode3D/Center4/Team4Area"),
-5: NodePath("CenterNode3D/Center5/Team5Area")
-}
-_center_zone = NodePath("CenterArea")
-_full_arena_zone = NodePath("FloorArea")
 
 [node name="FloorArea" type="Area3D" parent="." unique_id=2121644269]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5351479, 0)
@@ -90,7 +85,7 @@ shape = SubResource("BoxShape3D_g4xe2")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="FloorArea" unique_id=1440029104]
 mesh = SubResource("BoxMesh_ptbj1")
 
-[node name="CharacterSpawner" parent="." unique_id=872212538 node_paths=PackedStringArray("_spawn_points") instance=ExtResource("3_gusl2")]
+[node name="CharacterSpawner" parent="." unique_id=872212538 node_paths=PackedStringArray("_spawn_points") instance=ExtResource("2_ycx5f")]
 _spawn_points = [NodePath("../CenterNode3D/Center1/Team1Area/SpawnPoint1"), NodePath("../CenterNode3D/Center2/Team2Area/SpawnPoint2"), NodePath("../CenterNode3D/Center3/Team3Area/SpawnPoint3"), NodePath("../CenterNode3D/Center4/Team4Area/SpawnPoint4"), NodePath("../CenterNode3D/Center5/Team5Area/SpawnPoint5")]
 
 [node name="CenterArea" type="Area3D" parent="." unique_id=987179195]
@@ -114,17 +109,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
 shape = SubResource("CylinderShape3D_ptbj1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CenterNode3D/Center1/Team1Area" unique_id=1030576179]
+layers = 512
 mesh = SubResource("CylinderMesh_fwb8b")
 
-[node name="SpawnPoint1" parent="CenterNode3D/Center1/Team1Area" unique_id=933717393 instance=ExtResource("2_g4xe2")]
+[node name="SpawnPoint1" parent="CenterNode3D/Center1/Team1Area" unique_id=933717393 instance=ExtResource("3_6fhtx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="Decal" type="Decal" parent="CenterNode3D/Center1/Team1Area" unique_id=570494541]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.007955551, 3.0100067, -0.0754621)
-size = Vector3(2, 5.260254, 2)
-texture_albedo = ExtResource("4_ptbj1")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+size = Vector3(4, 5.26, 4)
+texture_albedo = ExtResource("4_ir0yt")
 upper_fade = 1e-05
 lower_fade = 1e-05
+cull_mask = 512
 
 [node name="Center2" type="Node3D" parent="CenterNode3D" unique_id=1639903339]
 transform = Transform3D(0.30901697, 0, 0.95105654, 0, 1, 0, -0.95105654, 0, 0.30901697, 0, 0, 0)
@@ -136,10 +133,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
 shape = SubResource("CylinderShape3D_ptbj1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CenterNode3D/Center2/Team2Area" unique_id=826441766]
+layers = 512
 mesh = SubResource("CylinderMesh_nlfyh")
 
-[node name="SpawnPoint2" parent="CenterNode3D/Center2/Team2Area" unique_id=1327356028 instance=ExtResource("2_g4xe2")]
+[node name="SpawnPoint2" parent="CenterNode3D/Center2/Team2Area" unique_id=1327356028 instance=ExtResource("3_6fhtx")]
 transform = Transform3D(0.30901697, 0, -0.95105654, 0, 1, 0, 0.95105654, 0, 0.30901697, 0, 1, 0)
+
+[node name="Decal" type="Decal" parent="CenterNode3D/Center2/Team2Area" unique_id=1724292548]
+transform = Transform3D(0.30901697, 0, -0.95105654, 0, 1, 0, 0.95105654, 0, 0.30901697, 0, 3, 0)
+layers = 512
+size = Vector3(4, 5.26, 4)
+texture_albedo = ExtResource("5_b3oap")
+upper_fade = 1e-05
+lower_fade = 1e-05
+cull_mask = 512
 
 [node name="Center3" type="Node3D" parent="CenterNode3D" unique_id=1191788827]
 transform = Transform3D(-0.80901706, 0, 0.5877852, 0, 1, 0, -0.5877852, 0, -0.80901706, 0, 0, 0)
@@ -151,10 +158,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
 shape = SubResource("CylinderShape3D_ptbj1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CenterNode3D/Center3/Team3Area" unique_id=1581609339]
+layers = 512
 mesh = SubResource("CylinderMesh_m17tb")
 
-[node name="SpawnPoint3" parent="CenterNode3D/Center3/Team3Area" unique_id=1909113329 instance=ExtResource("2_g4xe2")]
+[node name="SpawnPoint3" parent="CenterNode3D/Center3/Team3Area" unique_id=1909113329 instance=ExtResource("3_6fhtx")]
 transform = Transform3D(0.30901697, 0, -0.95105654, 0, 1, 0, 0.95105654, 0, 0.30901697, 0, 1, 0)
+
+[node name="Decal" type="Decal" parent="CenterNode3D/Center3/Team3Area" unique_id=959320272]
+transform = Transform3D(-0.80901706, 0, -0.5877852, 0, 1, 0, 0.5877852, 0, -0.80901706, 0, 3, 0)
+size = Vector3(4, 5.26, 4)
+texture_albedo = ExtResource("6_pxfix")
+upper_fade = 1e-05
+lower_fade = 1e-05
+cull_mask = 512
 
 [node name="Center4" type="Node3D" parent="CenterNode3D" unique_id=1749071442]
 transform = Transform3D(-0.80901694, 0, -0.58778536, 0, 1, 0, 0.58778536, 0, -0.80901694, 0, 0, 0)
@@ -166,10 +182,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
 shape = SubResource("CylinderShape3D_ptbj1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CenterNode3D/Center4/Team4Area" unique_id=2064288510]
+layers = 512
 mesh = SubResource("CylinderMesh_d0tiy")
 
-[node name="SpawnPoint4" parent="CenterNode3D/Center4/Team4Area" unique_id=1210440080 instance=ExtResource("2_g4xe2")]
+[node name="SpawnPoint4" parent="CenterNode3D/Center4/Team4Area" unique_id=1210440080 instance=ExtResource("3_6fhtx")]
 transform = Transform3D(0.30901697, 0, -0.95105654, 0, 1, 0, 0.95105654, 0, 0.30901697, 0, 1, 0)
+
+[node name="Decal" type="Decal" parent="CenterNode3D/Center4/Team4Area" unique_id=1913264169]
+transform = Transform3D(-0.80901706, 0, 0.5877852, 0, 1, 0, -0.5877852, 0, -0.80901706, 0, 3, 0)
+size = Vector3(4, 5.26, 4)
+texture_albedo = ExtResource("7_c0lya")
+upper_fade = 1e-05
+lower_fade = 1e-05
+cull_mask = 512
 
 [node name="Center5" type="Node3D" parent="CenterNode3D" unique_id=853946546]
 transform = Transform3D(0.30901712, 0, -0.9510565, 0, 1, 0, 0.9510565, 0, 0.30901712, 0, 0, 0)
@@ -181,7 +206,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
 shape = SubResource("CylinderShape3D_ptbj1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CenterNode3D/Center5/Team5Area" unique_id=1937256180]
+layers = 512
 mesh = SubResource("CylinderMesh_xujrc")
 
-[node name="SpawnPoint5" parent="CenterNode3D/Center5/Team5Area" unique_id=795969434 instance=ExtResource("2_g4xe2")]
+[node name="SpawnPoint5" parent="CenterNode3D/Center5/Team5Area" unique_id=795969434 instance=ExtResource("3_6fhtx")]
 transform = Transform3D(0.30901697, 0, -0.95105654, 0, 1, 0, 0.95105654, 0, 0.30901697, 0, 1, 0)
+
+[node name="Decal" type="Decal" parent="CenterNode3D/Center5/Team5Area" unique_id=647980165]
+transform = Transform3D(0.30901697, 0, 0.95105654, 0, 1, 0, -0.95105654, 0, 0.30901697, 0, 3, 0)
+size = Vector3(4, 5.26, 4)
+texture_albedo = ExtResource("8_vhakc")
+upper_fade = 1e-05
+lower_fade = 1e-05
+cull_mask = 512
