@@ -91,6 +91,7 @@ folder_colors={
 "res://Player/": "yellow",
 "res://Prototyping/": "gray",
 "res://SpellsAndProjectiles/": "blue",
+"res://Test/Test cecilia/": "pink",
 "res://TestTODO_TOTRASH/": "red",
 "res://Tool/": "green",
 "res://UI/": "pink",
