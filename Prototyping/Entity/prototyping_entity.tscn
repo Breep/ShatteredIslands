@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dqno5p3aprq7f"]
+[gd_scene format=3 uid="uid://dqno5p3aprq7f"]
 
 [ext_resource type="Script" uid="uid://brd0wxqwulj8y" path="res://Prototyping/Entity/prototyping_entity.gd" id="1_6kn6i"]
 [ext_resource type="PackedScene" uid="uid://c48aqh8mlb7lc" path="res://Entities/Heroes/DarkKnight/dark_knight.tscn" id="1_icvx6"]
@@ -8,11 +8,11 @@
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://Modules/PickableClickable/PickableModule/pickable_module.tscn" id="9_614kc"]
 [ext_resource type="PackedScene" uid="uid://bg5efhnq0erdv" path="res://Modules/PickableClickable/ClickableModule/clickable_module.tscn" id="10_m73qc"]
+[ext_resource type="PackedScene" uid="uid://blncvfes4f2y7" path="res://Prototyping/Entity/AllActionPrototyping/testing_floorffa5.tscn" id="11_5hdqt"]
+[ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://Tool/QuickAnims/anim_rotating_module.tscn" id="12_oonkp"]
+[ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="13_fl2p6"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/Stats/EntityStats/entity_stats.gd" id="15_x0odd"]
 [ext_resource type="PackedScene" uid="uid://dp4x7wkxd6i2q" path="res://Prototyping/Entity/EntityController/entity_controller.tscn" id="19_x0odd"]
-
-[sub_resource type="QuadMesh" id="QuadMesh_d4u4x"]
-size = Vector2(20, 20)
 
 [sub_resource type="Resource" id="Resource_xl213"]
 script = ExtResource("15_x0odd")
@@ -34,58 +34,42 @@ height = 5.0
 height = 5.0
 radius = 0.2
 
-[node name="PrototypingEntity" type="Node3D"]
+[node name="PrototypingEntity" type="Node3D" unique_id=1287034780]
 script = ExtResource("1_6kn6i")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
-mesh = SubResource("QuadMesh_d4u4x")
-
-[node name="Entities" type="Node3D" parent="."]
+[node name="Entities" type="Node3D" parent="." unique_id=38016860]
 unique_name_in_owner = true
 
-[node name="DarkKnightSOLO" parent="Entities" node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
-transform = Transform3D(-0.99893624, 0, 0.04611278, 0, 1, 0, -0.04611278, 0, -0.99893624, -0.012811184, -4.7683716e-07, -3.9436398)
+[node name="DarkKnight1" parent="Entities" unique_id=353718081 node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
+transform = Transform3D(0.9946579, 0, 0.10322651, 0, 1, 0, -0.10322651, 0, 0.9946579, 0.07346773, -4.7683716e-07, 7.8182755)
+team = 1
+_spawn_manager = NodePath("../../SpawnManager")
+
+[node name="DarkKnight2" parent="Entities" unique_id=1010378661 node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
+transform = Transform3D(-0.059724454, 0, 0.9982149, 0, 1, 0, -0.9982149, 0, -0.059724454, 7.5962777, 4.7683716e-07, 2.3270931)
 team = 2
-_spawn_manager = NodePath("../../SpawnManager")
-
-[node name="DarkKnight" parent="Entities" node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088338, 0, 1.8938003)
-team = 1
 custom_base_stats = SubResource("Resource_xl213")
 _spawn_manager = NodePath("../../SpawnManager")
 
-[node name="DarkKnight2" parent="Entities" node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.156896, 4.7683716e-07, 6.696279)
-team = 1
+[node name="DarkKnight3" parent="Entities" unique_id=775240683 node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
+transform = Transform3D(-0.8359702, 0, 0.54877484, 0, 1, 0, -0.54877484, 0, -0.8359702, 4.387443, 0, -6.40211)
+team = 3
 custom_base_stats = SubResource("Resource_xl213")
 _spawn_manager = NodePath("../../SpawnManager")
 
-[node name="DarkKnight3" parent="Entities" node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.518603, 0, 2.3850782)
-team = 1
+[node name="DarkKnight4" parent="Entities" unique_id=1906413560 node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
+transform = Transform3D(-0.5246547, 0, -0.85131514, 0, 1, 0, 0.85131514, 0, -0.5246547, -4.850088, 0, -6.6217995)
+team = 4
 custom_base_stats = SubResource("Resource_xl213")
 _spawn_manager = NodePath("../../SpawnManager")
 
-[node name="DarkKnight4" parent="Entities" node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.125479, 0, 8.316463)
-team = 1
+[node name="DarkKnight5" parent="Entities" unique_id=829130979 node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
+transform = Transform3D(0.37224275, 0, -0.9281354, 0, 1, 0, 0.9281354, 0, 0.37224275, -7.5075235, -9.536743e-07, 2.2651072)
+team = 5
 custom_base_stats = SubResource("Resource_xl213")
 _spawn_manager = NodePath("../../SpawnManager")
 
-[node name="DarkKnight5" parent="Entities" node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5297441, 0, 6.794646)
-team = 1
-custom_base_stats = SubResource("Resource_xl213")
-_spawn_manager = NodePath("../../SpawnManager")
-
-[node name="DarkKnight6" parent="Entities" node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("1_icvx6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.086206, 0, 6.5718307)
-team = 1
-custom_base_stats = SubResource("Resource_xl213")
-_spawn_manager = NodePath("../../SpawnManager")
-
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=1104542732]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -95,14 +79,14 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("2_083cp")
 
-[node name="GlobalCommandsControl" type="Control" parent="Control"]
+[node name="GlobalCommandsControl" type="Control" parent="Control" unique_id=738247091]
 anchors_preset = 0
 offset_left = 24.0
 offset_top = 24.0
 offset_right = 320.0
 offset_bottom = 181.0
 
-[node name="Panel" type="Panel" parent="Control/GlobalCommandsControl"]
+[node name="Panel" type="Panel" parent="Control/GlobalCommandsControl" unique_id=1653859956]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -110,7 +94,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/GlobalCommandsControl/Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/GlobalCommandsControl/Panel" unique_id=228849344]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -122,10 +106,10 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/GlobalCommandsControl/Panel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/GlobalCommandsControl/Panel/MarginContainer" unique_id=528893688]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=2109792230]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 32
@@ -133,64 +117,138 @@ text = "GLOBAL COMMANDS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StartFightButton" type="Button" parent="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer"]
+[node name="StartFightButton" type="Button" parent="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=2115662025]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Trigger Fighting State"
 script = ExtResource("3_6kn6i")
 
-[node name="StopFightButton" type="Button" parent="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer"]
+[node name="StopFightButton" type="Button" parent="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=1052993556]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Trigger Idle state"
 script = ExtResource("3_6kn6i")
 
-[node name="ResetFightButton" type="Button" parent="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer"]
+[node name="ResetFightButton" type="Button" parent="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=948612650]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Reset SCENE"
 script = ExtResource("3_6kn6i")
 
-[node name="CenterPointCamera" parent="." instance=ExtResource("4_egh8k")]
+[node name="CenterPointCamera" parent="." unique_id=842815466 instance=ExtResource("4_egh8k")]
 unique_name_in_owner = true
 transform = Transform3D(0.022652432, 0, 0.9997434, 0, 1, 0, -0.9997434, 0, 0.022652432, 0, 0, 0)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.58026236, 0.15287416, -0.79995316, 0, 0.98222506, 0.18770704, 0.8144296, -0.10891933, 0.56994826, -0.7068796, 0, 0)
-
-[node name="SpawnManager" parent="." node_paths=PackedStringArray("_entities_node", "_projectiles_node", "_spells_node") instance=ExtResource("6_egh8k")]
+[node name="SpawnManager" parent="." unique_id=562272433 node_paths=PackedStringArray("_entities_node", "_projectiles_node", "_spells_node") instance=ExtResource("6_egh8k")]
 _entities_node = NodePath("../SpawnEntities")
 _projectiles_node = NodePath("../SpawnProjectiles")
 _spells_node = NodePath("../SpawnSpells")
 
-[node name="SpawnEntities" type="Node3D" parent="."]
+[node name="SpawnEntities" type="Node3D" parent="." unique_id=1850617918]
 
-[node name="SpawnProjectiles" type="Node3D" parent="."]
+[node name="SpawnProjectiles" type="Node3D" parent="." unique_id=2042389318]
 
-[node name="SpawnSpells" type="Node3D" parent="."]
+[node name="SpawnSpells" type="Node3D" parent="." unique_id=810701074]
 
-[node name="EntityController" parent="." node_paths=PackedStringArray("entity_owner", "spawn_summon_localizer") instance=ExtResource("19_x0odd")]
-entity_owner = NodePath("../Entities/DarkKnightSOLO")
+[node name="EntityController" parent="." unique_id=1995738742 node_paths=PackedStringArray("entity_owner", "spawn_summon_localizer") instance=ExtResource("19_x0odd")]
+entity_owner = NodePath("../Entities/DarkKnight1")
 spawn_summon_localizer = NodePath("../SpawnLocaliser")
 
-[node name="SpawnLocaliser" type="StaticBody3D" parent="."]
+[node name="SpawnLocaliser" type="StaticBody3D" parent="." unique_id=2103681594]
 collision_layer = 64
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SpawnLocaliser"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SpawnLocaliser" unique_id=2131096925]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 mesh = SubResource("CylinderMesh_m73qc")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnLocaliser"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnLocaliser" unique_id=1026829353]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 shape = SubResource("CylinderShape3D_5hdqt")
 
-[node name="PickableModule" parent="SpawnLocaliser" node_paths=PackedStringArray("_owner") instance=ExtResource("9_614kc")]
+[node name="PickableModule" parent="SpawnLocaliser" unique_id=1622352735 node_paths=PackedStringArray("_owner") instance=ExtResource("9_614kc")]
 _owner = NodePath("..")
 
-[node name="ClickableModule" parent="SpawnLocaliser" node_paths=PackedStringArray("_nodes_where_to_find_meshs", "_owner") instance=ExtResource("10_m73qc")]
+[node name="ClickableModule" parent="SpawnLocaliser" unique_id=1507041719 node_paths=PackedStringArray("_nodes_where_to_find_meshs", "_owner") instance=ExtResource("10_m73qc")]
 _nodes_where_to_find_meshs = [NodePath("../MeshInstance3D")]
 _owner = NodePath("..")
+
+[node name="TestingFloorFFA5" parent="." unique_id=283551194 instance=ExtResource("11_5hdqt")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Lights" type="Node3D" parent="." unique_id=1694597283]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lights" unique_id=688220262]
+transform = Transform3D(0.58026236, 0.15287416, -0.79995316, 0, 0.98222506, 0.18770702, 0.8144296, -0.10891932, 0.56994826, -0.7068796, 0, 0)
+
+[node name="CenterLights" type="Node3D" parent="Lights" unique_id=1701824597]
+
+[node name="CenterLight1" type="Node3D" parent="Lights/CenterLights" unique_id=2004058400]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights/CenterLights/CenterLight1" unique_id=1406605121]
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0, 5, 20)
+spot_range = 50.0
+spot_attenuation = 0.1
+spot_angle = 20.0
+
+[node name="CenterLight2" type="Node3D" parent="Lights/CenterLights" unique_id=1236962993]
+transform = Transform3D(0.49999997, 0, 0.86602545, 0, 1, 0, -0.86602545, 0, 0.49999997, 0, 0, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights/CenterLights/CenterLight2" unique_id=64483900]
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0, 5, 20)
+spot_range = 50.0
+spot_attenuation = 0.1
+spot_angle = 20.0
+
+[node name="CenterLight3" type="Node3D" parent="Lights/CenterLights" unique_id=782812267]
+transform = Transform3D(-0.50000006, 0, 0.8660254, 0, 1, 0, -0.8660254, 0, -0.50000006, 0, 0, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights/CenterLights/CenterLight3" unique_id=1813051011]
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0, 5, 20)
+spot_range = 50.0
+spot_attenuation = 0.1
+spot_angle = 20.0
+
+[node name="CenterLight4" type="Node3D" parent="Lights/CenterLights" unique_id=909932420]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights/CenterLights/CenterLight4" unique_id=1297619836]
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0, 5, 20)
+spot_range = 50.0
+spot_attenuation = 0.1
+spot_angle = 20.0
+
+[node name="CenterLight5" type="Node3D" parent="Lights/CenterLights" unique_id=171982763]
+transform = Transform3D(-0.4999999, 0, -0.86602545, 0, 1, 0, 0.86602545, 0, -0.4999999, 0, 0, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights/CenterLights/CenterLight5" unique_id=1673076472]
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0, 5, 20)
+spot_range = 50.0
+spot_attenuation = 0.1
+spot_angle = 20.0
+
+[node name="CenterLight6" type="Node3D" parent="Lights/CenterLights" unique_id=403316870]
+transform = Transform3D(0.4999999, 0, -0.86602545, 0, 1, 0, 0.86602545, 0, 0.4999999, 0, 0, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights/CenterLights/CenterLight6" unique_id=394980520]
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0, 5, 20)
+spot_range = 50.0
+spot_attenuation = 0.1
+spot_angle = 20.0
+
+[node name="AnimRotatingModule" parent="Lights/CenterLights" unique_id=176673634 node_paths=PackedStringArray("_owner") instance=ExtResource("12_oonkp")]
+_owner = NodePath("..")
+_rot_axis = 1
+_rot_period = 100.0
+_rot_max = 360.0
+_rot_full = true
+
+[node name="AnimHoveringModule" parent="Lights/CenterLights" unique_id=339025588 node_paths=PackedStringArray("_owner") instance=ExtResource("13_fl2p6")]
+_owner = NodePath("..")
+_hover_power = 1.0
+_hover_period = 100.0
 
 [connection signal="pressed" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StartFightButton" to="." method="_on_start_fight_button_pressed"]
 [connection signal="pressed" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StopFightButton" to="." method="_on_stop_fight_button_pressed"]
 [connection signal="pressed" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/ResetFightButton" to="." method="_on_reset_fight_button_pressed"]
+
+[editable path="TestingFloorFFA5"]

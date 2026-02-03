@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=11 format=3 uid="uid://d2cgt83o6qjed"]
+[gd_resource type="VisualShader" format=3 uid="uid://d2cgt83o6qjed"]
 
 [sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_75qnw"]
 operator = 2
@@ -38,71 +38,6 @@ parameter_name = "Texture_offset"
 default_value_enabled = true
 
 [resource]
-code = "shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, depth_test_default, cull_back, diffuse_lambert, specular_schlick_ggx, unshaded;
-
-uniform vec2 Texture_Scale = vec2(1.000000, 1.000000);
-uniform vec2 Texture_offset = vec2(0.000000, 0.000000);
-uniform sampler2D Disolver_Texture : source_color;
-uniform float Proximity_Fade = 1.0;
-uniform sampler2D depth_tex_frg_3 : hint_depth_texture;
-
-
-
-void fragment() {
-// Input:2
-	vec4 n_out2p0 = COLOR;
-	float n_out2p4 = n_out2p0.a;
-
-
-// Vector2Parameter:8
-	vec2 n_out8p0 = Texture_Scale;
-
-
-// Vector2Parameter:9
-	vec2 n_out9p0 = Texture_offset;
-
-
-// UVFunc:7
-	vec2 n_out7p0 = (UV - n_out9p0) * n_out8p0 + n_out9p0;
-
-
-	vec4 n_out5p0;
-// Texture2D:5
-	n_out5p0 = texture(Disolver_Texture, n_out7p0);
-	float n_out5p1 = n_out5p0.r;
-
-
-// SmoothStep:6
-	float n_in6p1 = 1.00000;
-	float n_out6p0 = smoothstep(n_out2p4, n_in6p1, n_out5p1);
-
-
-// FloatParameter:11
-	float n_out11p0 = Proximity_Fade;
-
-
-	float n_out3p0;
-// ProximityFade:3
-	{
-		float __depth_tex = texture(depth_tex_frg_3, SCREEN_UV).r;
-		vec4 __depth_world_pos = INV_PROJECTION_MATRIX * vec4(SCREEN_UV * 2.0 - 1.0, __depth_tex, 1.0);
-		__depth_world_pos.xyz /= __depth_world_pos.w;
-		n_out3p0 = clamp(1.0 - smoothstep(__depth_world_pos.z + n_out11p0, __depth_world_pos.z, VERTEX.z), 0.0, 1.0);
-	}
-
-
-// FloatOp:10
-	float n_out10p0 = n_out6p0 * n_out3p0;
-
-
-// Output:0
-	ALBEDO = vec3(n_out2p0.xyz);
-	ALPHA = n_out10p0;
-
-
-}
-"
 flags/unshaded = true
 nodes/fragment/0/position = Vector2(620, 140)
 nodes/fragment/2/node = SubResource("VisualShaderNodeInput_nkdxp")

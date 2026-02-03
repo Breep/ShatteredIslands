@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://dxpjm0adafggu"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dxpjm0adafggu"]
 
 [ext_resource type="Shader" uid="uid://cg360ibka81fv" path="res://VFX/VFX_3D/Import/Firebolt/fireball_particles.gdshader" id="1_t548c"]
 [ext_resource type="Texture2D" uid="uid://ctsh8mkic2xte" path="res://VFX/VFX_3D/Import/Firebolt/fire_particles_gradient.tres" id="2_mdlqx"]

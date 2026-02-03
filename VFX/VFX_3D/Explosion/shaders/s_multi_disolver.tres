@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=23 format=3 uid="uid://dp4ffi7pqnpmw"]
+[gd_resource type="VisualShader" format=3 uid="uid://dp4ffi7pqnpmw"]
 
 [ext_resource type="Texture2D" uid="uid://d0wnxm0dha821" path="res://VFX/VFX_3D/Explosion/textures/T_big_sparks.jpg" id="1_7lqi4"]
 
@@ -108,95 +108,6 @@ linked_parent_graph_frame = 24
 op_type = 1
 
 [resource]
-code = "shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, depth_test_default, cull_disabled, diffuse_lambert, specular_schlick_ggx, unshaded;
-
-uniform bool Use_Texture_color = false;
-uniform sampler2D Texture_1D : source_color, repeat_disable;
-uniform sampler2D Gradient_1D_Color : source_color, repeat_disable;
-uniform vec4 Color : source_color;
-uniform sampler2D Texture_Disolver : source_color;
-uniform sampler2D curve_frg_13 : repeat_disable;
-uniform sampler2D tex_frg_15 : source_color;
-
-
-
-void fragment() {
-// BooleanParameter:20
-	bool n_out20p0 = Use_Texture_color;
-
-
-	vec4 n_out17p0;
-// Texture2D:17
-	n_out17p0 = texture(Texture_1D, UV);
-	float n_out17p1 = n_out17p0.r;
-
-
-	vec4 n_out22p0;
-// Texture2D:22
-	n_out22p0 = texture(Gradient_1D_Color, vec2(n_out17p1));
-
-
-// ColorParameter:14
-	vec4 n_out14p0 = Color;
-
-
-	vec3 n_out19p0;
-// Switch:19
-	n_out19p0 = mix(vec3(n_out14p0.xyz), vec3(n_out22p0.xyz), float(n_out20p0));
-
-
-// Input:3
-	vec4 n_out3p0 = COLOR;
-	float n_out3p1 = n_out3p0.r;
-	float n_out3p4 = n_out3p0.a;
-
-
-	vec4 n_out26p0;
-// Texture2D:26
-	n_out26p0 = texture(Texture_Disolver, UV);
-	float n_out26p1 = n_out26p0.r;
-
-
-// SmoothStep:5
-	float n_in5p1 = 1.00000;
-	float n_out5p0 = smoothstep(n_out3p4, n_in5p1, n_out26p1);
-
-
-// Input:8
-	vec2 n_out8p0 = UV;
-
-
-// CurveTexture:13
-	float n_out13p0 = texture(curve_frg_13, vec2(n_out3p1)).r;
-
-
-// VectorCompose:12
-	float n_in12p1 = 0.00000;
-	vec2 n_out12p0 = vec2(n_out13p0, n_in12p1);
-
-
-// MultiplyAdd:9
-	vec2 n_in9p1 = vec2(0.25000, 1.00000);
-	vec2 n_out9p0 = fma(n_out8p0, n_in9p1, n_out12p0);
-
-
-// Texture2D:15
-	vec4 n_out15p0 = texture(tex_frg_15, n_out9p0);
-	float n_out15p1 = n_out15p0.r;
-
-
-// FloatOp:7
-	float n_out7p0 = n_out5p0 * n_out15p1;
-
-
-// Output:0
-	ALBEDO = n_out19p0;
-	ALPHA = n_out7p0;
-
-
-}
-"
 modes/cull = 2
 flags/unshaded = true
 nodes/fragment/0/position = Vector2(340, 360)

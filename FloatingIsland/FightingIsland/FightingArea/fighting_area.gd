@@ -115,10 +115,10 @@ func _set_fighting_floor(battle_type: Battle.BattleType) -> HeroSpawner:
 	
 	# Initialize arena zone manager with zones from fighting floor
 	if _arena_zone_manager != null:
-		_arena_zone_manager.initialize(
-			fighting_floor._team_zones,
-			fighting_floor._center_zone,
-			fighting_floor._full_arena_zone
+		_arena_zone_manager.init(
+			fighting_floor.team_zones,
+			fighting_floor.center_zone,
+			fighting_floor.full_arena_zone
 		)
 	
 	return hero_spawner

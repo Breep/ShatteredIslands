@@ -15,6 +15,7 @@ const CHAIN_LIGHTNING_SCENE: PackedScene = preload("res://SpellsAndProjectiles/S
 const SNAKE_BARREL_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Poison/SnakeBarrel/snake_barrel.tscn")
 const SNAKE_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Poison/Snake/snake.tscn")
 const FIELD_GENERATOR_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Defense/FieldGenerator/field_generator.tscn")
+const CHICKEN_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/ChickenLord/Chicken/chicken.tscn")
 
 # ============================== Public functions ==============================
 
@@ -309,13 +310,13 @@ func summon_entity(entity_type: Entity.EntityType, spawn_config: SpawnLocationCo
 	if _owner is Hero and _owner.fighting_area != null:
 		arena_zone_manager = _owner.fighting_area.arena_zone_manager
 	
-	# Resolve spawn position with owner's team
-	var spawn_position := spawn_config.resolve(arena_zone_manager, _owner.team)
+	var spawn_position := spawn_config.resolve(arena_zone_manager)
 	
 	match entity_type:
 		Entity.EntityType.SNAKE_BARREL: _summon_snake_barrel(spawn_position, entity_modifier)
 		Entity.EntityType.SNAKE: _summon_snake(spawn_position, entity_modifier)
 		Entity.EntityType.FIELD_GENERATOR: _summon_field_generator(spawn_position, entity_modifier)
+		Entity.EntityType.CHICKEN: _summon_chicken(spawn_position, entity_modifier)
 
 
 func _summon_snake_barrel(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
@@ -333,9 +334,8 @@ func _summon_snake(spawn_position: Vector3, _entity_modifier: Dictionary) -> voi
 	var snake: Snake = SNAKE_SCENE.instantiate()
 	snake.team = _owner.team
 	_spawn_manager.spawn_entity(snake, spawn_position)
-	print("SUMMON SNAKE")
-	
-	
+
+
 func _summon_field_generator(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
 	var field_generator: FieldGenerator = FIELD_GENERATOR_SCENE.instantiate()
 	if multiplayer.is_server():
@@ -348,6 +348,12 @@ func _summon_field_generator(spawn_position: Vector3, entity_modifier: Dictionar
 	
 	field_generator.team = _owner.team
 	_spawn_manager.spawn_entity(field_generator, spawn_position)
+
+
+func _summon_chicken(spawn_position: Vector3, _entity_modifier: Dictionary) -> void:
+	var chicken: Chicken = CHICKEN_SCENE.instantiate()
+	chicken.team = _owner.team
+	_spawn_manager.spawn_entity(chicken, spawn_position)
 #endregion
 
 
