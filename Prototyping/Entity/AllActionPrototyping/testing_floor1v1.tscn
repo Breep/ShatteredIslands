@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://blncvfes4f2y7"]
+[gd_scene format=3 uid="uid://blncvfes4f2y7"]
 
 [ext_resource type="Script" uid="uid://bhv0dmum15mp1" path="res://FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor.gd" id="1_p4olv"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Tool/SpawnPoint/spawn_point.tscn" id="2_g4xe2"]

@@ -6,6 +6,7 @@ extends Resource
 @export var common_number: int = 25
 @export var rare_number: int = 10
 @export var epic_number: int = 5
+@export var legendary_number: int = 3
 
 @export_subgroup("Family rules")
 @export var rarity_card_values: Dictionary[Card.Rarity, int] = {
