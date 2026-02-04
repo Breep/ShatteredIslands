@@ -24,8 +24,6 @@ var fighting_area: FightingArea
 #endregion
 
 #region ============================== Private variables ==============================
-var _interact_module: InteractModule
-var _action_module: ActionModule
 #endregion
 
 #region ============================== Public functions ==============================
@@ -50,15 +48,7 @@ func get_auto_attack_spawn() -> Node3D:
 	return self
 #endregion
 
-#region ===== Actions =====
-func direct_attack(target: Entity, damage: float, damage_type: Utils.DamageType, action_id: StringName) -> void:
-	_action_module.direct_attack(target, damage, damage_type, action_id)
-
-
-func direct_attack_percent(target: Entity, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier, action_id: StringName) -> void:
-	_action_module.direct_attack_percent(target, damage_percent, damage_type, percent_modifier, action_id)
-
-
+#region ===== Actions (Summon-specific overrides) =====
 var _pending_attacks: Array[AttackCommand]
 func projectile_attack(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	if projectile_type == Projectile.ProjectileType.AUTO_ATTACK:
@@ -83,49 +73,6 @@ func _on_animation_module_attack_hit_frame() -> void:
 	_action_module.projectile_attack(attack_cmd.target, attack_cmd.projectile_type, attack_cmd.spawn_node, attack_cmd.stats)
 
 
-func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary = {}) -> void:
-	_action_module.cast_spell(target, spell_type, spell_modifier)
-
-func cast_ultimate() -> void:
-	pass
-
-func heal(target: Entity, heal_amount: float, action_id: StringName) -> void:
-	_action_module.heal(target, heal_amount, action_id)
-
-func heal_percent(target: Entity, percent: float, percent_modifier: Utils.PercentModifier, action_id: StringName) -> void:
-	_action_module.heal_percent(target, percent, percent_modifier, action_id)
-
-func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Utils.StackType, action_id: StringName, duration: float = 5.0) -> void:
-	_action_module.inflict_condition_stacks(target, stacks_number, stack_type, action_id, duration)
-
-func summon_entity(entity_type: EntityType, spawn_config: SpawnLocationConfig, entity_modifier: Dictionary) -> void:
-	_action_module.summon_entity(entity_type, spawn_config, entity_modifier)
-
-func cleanse(target: Entity, value: float, action_id: StringName) -> void:
-	_action_module.cleanse(target, value, action_id)
-
-func dispell(target: Entity, value: float, action_id: StringName) -> void:
-	_action_module.dispell(target, value, action_id)
-#endregion
-
-#region ===== Interaction =====
-func take_damage(damage: float, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	return _interact_module.take_damage(damage, damage_type, is_critical, action_id, source)
-
-func take_damage_percent(percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> void:
-	_interact_module.take_damage_percent(percent, percent_modifier, damage_type, is_critical, action_id, source)
-
-func take_condition_stacks(stacks_number: float, stack_type: Utils.StackType, is_critical: bool, action_id: StringName, source: Entity = null, duration: float = 5.0) -> float:
-	return _interact_module.take_condition_stacks(stacks_number, stack_type, is_critical, action_id, source, duration)
-
-func take_heal(heal_amount: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	return _interact_module.take_heal(heal_amount, is_critical, action_id, source)
-
-func take_cleanse(value: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	return _interact_module.take_cleanse(value, is_critical, action_id, source)
-
-func take_dispell(value: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	return _interact_module.take_dispell(value, is_critical, action_id, source)
 #endregion
 
 #region ============================== Node base functions ==============================
@@ -144,27 +91,8 @@ func _enter_tree() -> void:
 
 
 func _summon_enter_tree() -> void:
-	# Add Action/Interact/AutoAttack Modules
-	if _interact_module == null:
-		var module: InteractModule = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.INTERACT].instantiate()
-		_interact_module = module.init(self)
-		add_child(_interact_module)
-	
-	if _action_module == null:
-		var module: ActionModule = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.ACTION].instantiate()
-		_action_module = module.init(self)
-		add_child(_action_module)
-		if _spawn_manager != null:
-			_action_module.connect_to_spawn_manager(_spawn_manager)
-		if _arena_zone_manager != null:
-			_action_module.connect_to_arena_zone_manager(_arena_zone_manager)
-	
-	if _auto_attack_module == null:
-		var module: AutoAttackModule = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.AUTOATTACK].instantiate()
-		_auto_attack_module = module.init(self)
-		add_child(_auto_attack_module)
-
-
+	# No modules to instantiate - inherited from Entity
+	pass
 func _ready() -> void:
 	_summon_ready()
 

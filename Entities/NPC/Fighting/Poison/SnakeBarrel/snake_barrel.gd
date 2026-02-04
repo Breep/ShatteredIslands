@@ -1,40 +1,7 @@
 class_name SnakeBarrel
 extends Entity
 
-@onready var _interact_module: InteractModule = %InteractModule
-@onready var _action_module: ActionModule = %ActionModule
 @onready var _snake_barrel_visual: Node3D = %SnakeBarrelVisual
-
-func projectile_attack(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
-	_action_module.projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
-
-
-func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Utils.StackType, action_id: StringName, duration: float = 5.0) -> void:
-	_action_module.inflict_condition_stacks(target, stacks_number, stack_type, action_id, duration)
-
-
-#region ===== Interaction
-func take_damage(damage: float, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	return _interact_module.take_damage(damage, damage_type, is_critical, action_id, source)
-
-func take_damage_percent(percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> void:
-	_interact_module.take_damage_percent(percent, percent_modifier, damage_type, is_critical, action_id, source)
-
-func take_condition_stacks(stacks_number: float, stack_type: Utils.StackType, is_critical: bool, action_id: StringName, source: Entity = null, duration: float = 5.0) -> float:
-	return _interact_module.take_condition_stacks(stacks_number, stack_type, is_critical, action_id, source, duration)
-
-func take_heal(heal_amount: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	return _interact_module.take_heal(heal_amount, is_critical, action_id, source)
-
-func take_cleanse(value: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	return _interact_module.take_cleanse(value, is_critical, action_id, source)
-
-func take_dispell(value: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	return _interact_module.take_dispell(value, is_critical, action_id, source)
-
-func summon_entity(entity_type: EntityType, spawn_config: SpawnLocationConfig, entity_modifier: Dictionary) -> void:
-	_action_module.summon_entity(entity_type, spawn_config, entity_modifier)
-#endregion
 
 var _max_health: int = 100
 var _snake_number: int = 10
@@ -48,8 +15,6 @@ func init(snake_number: int, snake_poison_stacks: int, max_health: int) -> void:
 
 func connect_to_fighting_area(fighting_area: FightingArea) -> void:
 	_action_module.connect_to_spawn_manager(fighting_area.spawn_manager)
-
-
 func _ready() -> void:
 	_snake_barrel_visual.scale = Vector3.ZERO
 	stats.health_max = _max_health
