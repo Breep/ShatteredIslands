@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://10uprmyjca05" path="res://Prototyping/Cardshop/prototyping_cards_shop.gd" id="1_a1n5c"]
 [ext_resource type="PackedScene" uid="uid://dj7bvdysxgxe6" path="res://Card/2D/CardsViewer/ui_cards_viewer.tscn" id="2_d78dm"]
 
-[node name="PrototypingCardsShop" type="Node" unique_id=1240633937]
+[node name="PrototypingCardsShop" type="Node" unique_id=1240633937 node_paths=PackedStringArray("_last_draw_value_labels", "_last_draw_value_ratio_labels", "_draw_value_labels", "_draw_value_ratio_labels")]
 script = ExtResource("1_a1n5c")
 _active_families = Dictionary[int, bool]({
 1: true,
@@ -19,12 +19,36 @@ _active_families = Dictionary[int, bool]({
 11: true,
 12: true
 })
+_last_draw_value_labels = {
+0: NodePath("Control/DropResultsContainer/LastDrawLabel/CommonLastDropLabel"),
+1: NodePath("Control/DropResultsContainer/LastDrawLabel/RareLastDropLabel"),
+2: NodePath("Control/DropResultsContainer/LastDrawLabel/EpicLastDropLabel"),
+3: NodePath("Control/DropResultsContainer/LastDrawLabel/LegendaryLastDropLabel")
+}
+_last_draw_value_ratio_labels = {
+0: NodePath("Control/DropResultsContainer/VBoxContainer3/CommonLastDropRatioLabel"),
+1: NodePath("Control/DropResultsContainer/VBoxContainer3/RareLastDropRatioLabel"),
+2: NodePath("Control/DropResultsContainer/VBoxContainer3/EpicLastDropRatioLabel"),
+3: NodePath("Control/DropResultsContainer/VBoxContainer3/LegendaryLastDropRatioLabel")
+}
+_draw_value_labels = {
+0: NodePath("Control/DropResultsContainer/VBoxContainer4/CommonDropLabel"),
+1: NodePath("Control/DropResultsContainer/VBoxContainer4/RareDropLabel"),
+2: NodePath("Control/DropResultsContainer/VBoxContainer4/EpicDropLabel"),
+3: NodePath("Control/DropResultsContainer/VBoxContainer4/LegendaryDropLabel")
+}
+_draw_value_ratio_labels = {
+0: NodePath("Control/DropResultsContainer/VBoxContainer5/CommonDropRatioLabel"),
+1: NodePath("Control/DropResultsContainer/VBoxContainer5/RareDropRatioLabel"),
+2: NodePath("Control/DropResultsContainer/VBoxContainer5/EpicDropRatioLabel"),
+3: NodePath("Control/DropResultsContainer/VBoxContainer5/LegendaryDropRatioLabel")
+}
 
 [node name="Control" type="Control" parent="." unique_id=183798319]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 923.0
-offset_bottom = 392.0
+offset_right = 1434.0
+offset_bottom = 837.0
 
 [node name="ColorRect" type="ColorRect" parent="Control" unique_id=594613333]
 layout_mode = 1
@@ -40,8 +64,8 @@ unique_name_in_owner = true
 layout_mode = 0
 offset_left = 4.0
 offset_top = 55.0
-offset_right = 469.0
-offset_bottom = 405.0
+offset_right = 467.0
+offset_bottom = 546.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=1506623589]
 layout_mode = 0
@@ -193,6 +217,181 @@ offset_left = 109.0
 offset_top = 38.0
 offset_right = 211.0
 offset_bottom = 61.0
+
+[node name="DropResultsContainer" type="HBoxContainer" parent="Control" unique_id=1068418269]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.356
+anchor_top = 0.462
+anchor_right = 0.356
+anchor_bottom = 0.462
+offset_left = -0.5039978
+offset_top = 0.30599976
+offset_right = 273.496
+offset_bottom = 39.306
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/DropResultsContainer" unique_id=202603893]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Control/DropResultsContainer/VBoxContainer" unique_id=1503919773]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.89851165, 0.9466668, 7.70092e-07, 1)
+text = "Rarity"
+
+[node name="Label2" type="Label" parent="Control/DropResultsContainer/VBoxContainer" unique_id=196466692]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8980392, 0.94509804, 0, 1)
+text = "Common"
+
+[node name="Label3" type="Label" parent="Control/DropResultsContainer/VBoxContainer" unique_id=1846131368]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8980392, 0.94509804, 0, 1)
+text = "Rare"
+
+[node name="Label4" type="Label" parent="Control/DropResultsContainer/VBoxContainer" unique_id=383391742]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8980392, 0.94509804, 0, 1)
+text = "Epic"
+
+[node name="Label5" type="Label" parent="Control/DropResultsContainer/VBoxContainer" unique_id=1874155940]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8980392, 0.94509804, 0, 1)
+text = "Legendary"
+
+[node name="LastDrawLabel" type="VBoxContainer" parent="Control/DropResultsContainer" unique_id=1565952471]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.79
+
+[node name="Label" type="Label" parent="Control/DropResultsContainer/LastDrawLabel" unique_id=928231655]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+text = "Drop last draw:"
+
+[node name="CommonLastDropLabel" type="Label" parent="Control/DropResultsContainer/LastDrawLabel" unique_id=1797043567]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+horizontal_alignment = 2
+
+[node name="RareLastDropLabel" type="Label" parent="Control/DropResultsContainer/LastDrawLabel" unique_id=1599271130]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+horizontal_alignment = 2
+
+[node name="EpicLastDropLabel" type="Label" parent="Control/DropResultsContainer/LastDrawLabel" unique_id=577928516]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+horizontal_alignment = 2
+
+[node name="LegendaryLastDropLabel" type="Label" parent="Control/DropResultsContainer/LastDrawLabel" unique_id=701903533]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+horizontal_alignment = 2
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Control/DropResultsContainer" unique_id=2035570866]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/DropResultsContainer/VBoxContainer3" unique_id=1537943218]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+text = "Drop last draw (%):"
+
+[node name="CommonLastDropRatioLabel" type="Label" parent="Control/DropResultsContainer/VBoxContainer3" unique_id=131090717]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "0"
+horizontal_alignment = 2
+
+[node name="RareLastDropRatioLabel" type="Label" parent="Control/DropResultsContainer/VBoxContainer3" unique_id=1641210266]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "0"
+horizontal_alignment = 2
+
+[node name="EpicLastDropRatioLabel" type="Label" parent="Control/DropResultsContainer/VBoxContainer3" unique_id=477926288]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "0"
+horizontal_alignment = 2
+
+[node name="LegendaryLastDropRatioLabel" type="Label" parent="Control/DropResultsContainer/VBoxContainer3" unique_id=746270626]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "0"
+horizontal_alignment = 2
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="Control/DropResultsContainer" unique_id=1429489372]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/DropResultsContainer/VBoxContainer4" unique_id=1591919914]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+text = "Drop draw:"
+
+[node name="CommonDropLabel" type="Label" parent="Control/DropResultsContainer/VBoxContainer4" unique_id=1810037228]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+horizontal_alignment = 2
+
+[node name="RareDropLabel" type="Label" parent="Control/DropResultsContainer/VBoxContainer4" unique_id=292417429]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+horizontal_alignment = 2
+
+[node name="EpicDropLabel" type="Label" parent="Control/DropResultsContainer/VBoxContainer4" unique_id=933125543]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+horizontal_alignment = 2
+
+[node name="LegendaryDropLabel" type="Label" parent="Control/DropResultsContainer/VBoxContainer4" unique_id=50048687]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+horizontal_alignment = 2
+
+[node name="VBoxContainer5" type="VBoxContainer" parent="Control/DropResultsContainer" unique_id=256467148]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/DropResultsContainer/VBoxContainer5" unique_id=1316950707]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+text = "Drop draw (%):"
+
+[node name="CommonDropRatioLabel" type="Label" parent="Control/DropResultsContainer/VBoxContainer5" unique_id=1824029411]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+horizontal_alignment = 2
+
+[node name="RareDropRatioLabel" type="Label" parent="Control/DropResultsContainer/VBoxContainer5" unique_id=338996926]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+horizontal_alignment = 2
+
+[node name="EpicDropRatioLabel" type="Label" parent="Control/DropResultsContainer/VBoxContainer5" unique_id=1609689839]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+horizontal_alignment = 2
+
+[node name="LegendaryDropRatioLabel" type="Label" parent="Control/DropResultsContainer/VBoxContainer5" unique_id=30903834]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+horizontal_alignment = 2
 
 [connection signal="pressed" from="Control/VBoxContainer/HBoxContainer/DrawCardsButton" to="." method="_on_draw_cards_button_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/HBoxContainer2/ResetButton" to="." method="_on_reset_button_pressed"]

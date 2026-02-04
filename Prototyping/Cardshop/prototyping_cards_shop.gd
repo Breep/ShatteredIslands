@@ -10,6 +10,37 @@ extends Node
 @export_group("Family")
 @export var _active_families: Dictionary[Family.FamilyType, bool]
 
+@export_group("Local Node")
+@export var _last_draw_value_labels: Dictionary[Card.Rarity, Label]
+@export var _last_draw_value_ratio_labels: Dictionary[Card.Rarity, Label]
+@export var _draw_value_labels: Dictionary[Card.Rarity, Label]
+@export var _draw_value_ratio_labels: Dictionary[Card.Rarity, Label]
+
+var _last_draw_values: Dictionary[Card.Rarity, float] = {
+	Card.Rarity.COMMON : 0,
+	Card.Rarity.RARE : 0,
+	Card.Rarity.EPIC : 0,
+	Card.Rarity.LEGENDARY : 0,
+}
+var _last_draw_value_ratios: Dictionary[Card.Rarity, float] = {
+	Card.Rarity.COMMON : 0,
+	Card.Rarity.RARE : 0,
+	Card.Rarity.EPIC : 0,
+	Card.Rarity.LEGENDARY : 0,
+}
+var _draw_values: Dictionary[Card.Rarity, float] = {
+	Card.Rarity.COMMON : 0,
+	Card.Rarity.RARE : 0,
+	Card.Rarity.EPIC : 0,
+	Card.Rarity.LEGENDARY : 0,
+}
+var _draw_value_ratios: Dictionary[Card.Rarity, float] = {
+	Card.Rarity.COMMON : 0,
+	Card.Rarity.RARE : 0,
+	Card.Rarity.EPIC : 0,
+	Card.Rarity.LEGENDARY : 0,
+}
+
 @onready var _family_popup: OptionButton = %FamilyPopup
 @onready var _time_label: Label = %TimeLabel
 
@@ -25,6 +56,8 @@ extends Node
 
 @onready var _cards_drawn: Label = %CardsDrawnLabel
 @onready var _shopdeck_cards_remaining_label: Label = %ShopDeckCardsRemainingLabel
+
+var total_cards_size: int
 
 var _FAMILIES_REF: Dictionary[Family.FamilyType, Family] = {
 	Family.FamilyType.ATTACK: load("res://Card/Descriptions/Families/attack_family.tres") as Family,
@@ -79,13 +112,16 @@ func _on_reset_button_pressed() -> void:
 
 
 func _on_draw_cards_button_pressed() -> void:
+	
+	# Clear last draw
+	for card_rarity in _last_draw_values.keys() :
+		_last_draw_values[card_rarity] = 0
+		_last_draw_value_ratios[card_rarity] = 0
+	
 	var start_time := Time.get_ticks_usec()
 	
 	#function draw
 	var cards: Array[Card] = _shop_deck.draw_n_cards(int(_cards_drawn_number.value))
-	#for card: Card in cards:
-		#_shop_deck.remove_from_available_cards(card)
-	
 	
 	# Time measurement of the draw function
 	var end_time := Time.get_ticks_usec()
@@ -96,8 +132,34 @@ func _on_draw_cards_button_pressed() -> void:
 	else:
 		_time_label.text = str(duration_usec) + "usec"
 	
+	# Drop results in table
+	var card_size = 0
+	
+	for card in cards :
+		card_size += 1
+		_last_draw_values[card.rarity] += 1
+		_last_draw_value_ratios[card.rarity] += 1
+		
+		_draw_values[card.rarity] += 1
+		_draw_value_ratios[card.rarity] += 1
+	
+	total_cards_size += card_size
+	print(card_size)
+	print(total_cards_size)
+	
+	for card_rarity in _last_draw_values.keys() :
+		_last_draw_value_ratios[card_rarity] = (_last_draw_value_ratios[card_rarity]/card_size)*100
+		#_draw_value_ratios[card_rarity] = (_draw_value_ratios[card_rarity]/total_cards_size)*100
+		
+		_last_draw_value_labels[card_rarity].text = str(_last_draw_values[card_rarity])
+		_last_draw_value_ratio_labels[card_rarity].text = str(_last_draw_value_ratios[card_rarity])
+		
+		_draw_value_labels[card_rarity].text = str(_draw_values[card_rarity])
+		_draw_value_ratio_labels[card_rarity].text = str((_draw_value_ratios[card_rarity]/total_cards_size)*100)
+	
+	
 	_ui_cards_viewer.update_content(cards)
-	_cards_drawn.text = str(cards.size())
+	_cards_drawn.text = str(card_size)
 	_shopdeck_cards_remaining_label.text =  str(_shop_deck.size())
 
 
