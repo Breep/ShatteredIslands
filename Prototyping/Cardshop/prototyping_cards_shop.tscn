@@ -1,0 +1,199 @@
+[gd_scene format=3 uid="uid://cpuhljj3s78ro"]
+
+[ext_resource type="Script" uid="uid://10uprmyjca05" path="res://Prototyping/Cardshop/prototyping_cards_shop.gd" id="1_a1n5c"]
+[ext_resource type="PackedScene" uid="uid://dj7bvdysxgxe6" path="res://Card/2D/CardsViewer/ui_cards_viewer.tscn" id="2_d78dm"]
+
+[node name="PrototypingCardsShop" type="Node" unique_id=1240633937]
+script = ExtResource("1_a1n5c")
+_active_families = Dictionary[int, bool]({
+1: true,
+2: true,
+3: true,
+4: true,
+5: true,
+6: true,
+7: true,
+8: true,
+9: true,
+10: true,
+11: true,
+12: true
+})
+
+[node name="Control" type="Control" parent="." unique_id=183798319]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 923.0
+offset_bottom = 392.0
+
+[node name="ColorRect" type="ColorRect" parent="Control" unique_id=594613333]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.83, 0.83, 0.64705884)
+
+[node name="UICardsViewer" parent="Control" unique_id=303247800 instance=ExtResource("2_d78dm")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 4.0
+offset_top = 55.0
+offset_right = 469.0
+offset_bottom = 405.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=1506623589]
+layout_mode = 0
+offset_left = 498.0
+offset_right = 808.0
+offset_bottom = 336.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/VBoxContainer" unique_id=1030016995]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer" unique_id=1604403452]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DrawCardsButton" type="Button" parent="Control/VBoxContainer/HBoxContainer" unique_id=1418903951]
+layout_mode = 2
+text = "Draw cards"
+
+[node name="CardNumberSpinBox" type="SpinBox" parent="Control/VBoxContainer/HBoxContainer" unique_id=2130051336]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/VBoxContainer/HBoxContainer" unique_id=254111840]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=2083368982]
+layout_mode = 2
+text = "Time spent:"
+
+[node name="TimeLabel" type="Label" parent="Control/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1314584339]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/VBoxContainer" unique_id=1610481708]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ResetButton" type="Button" parent="Control/VBoxContainer/HBoxContainer2" unique_id=765463538]
+layout_mode = 2
+text = "Reset"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/VBoxContainer/HBoxContainer2" unique_id=755264216]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer2/VBoxContainer" unique_id=1846980856]
+layout_mode = 2
+text = "Custom chance (%)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer/HBoxContainer2/VBoxContainer" unique_id=601534702]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer" unique_id=4134923]
+layout_mode = 2
+text = "Use custom chance:"
+
+[node name="CustomChanceCheckBox" type="CheckBox" parent="Control/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer" unique_id=743745753]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CustomChanceCommonContainer" type="HBoxContainer" parent="Control/VBoxContainer/HBoxContainer2/VBoxContainer" unique_id=1848784767]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer2/VBoxContainer/CustomChanceCommonContainer" unique_id=1715505855]
+layout_mode = 2
+text = "Common   "
+
+[node name="CommonSpinBox" type="SpinBox" parent="Control/VBoxContainer/HBoxContainer2/VBoxContainer/CustomChanceCommonContainer" unique_id=1326307453]
+layout_mode = 2
+
+[node name="CustomChanceRareContainer" type="HBoxContainer" parent="Control/VBoxContainer/HBoxContainer2/VBoxContainer" unique_id=742377464]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer2/VBoxContainer/CustomChanceRareContainer" unique_id=1586591461]
+layout_mode = 2
+text = "Rare           "
+
+[node name="RareSpinBox" type="SpinBox" parent="Control/VBoxContainer/HBoxContainer2/VBoxContainer/CustomChanceRareContainer" unique_id=26281218]
+layout_mode = 2
+
+[node name="CustomChanceEpicContainer" type="HBoxContainer" parent="Control/VBoxContainer/HBoxContainer2/VBoxContainer" unique_id=966026552]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer2/VBoxContainer/CustomChanceEpicContainer" unique_id=512683592]
+layout_mode = 2
+text = "Epic            "
+
+[node name="EpicSpinBox" type="SpinBox" parent="Control/VBoxContainer/HBoxContainer2/VBoxContainer/CustomChanceEpicContainer" unique_id=1353531444]
+layout_mode = 2
+
+[node name="CustomChanceLegendaryContainer" type="HBoxContainer" parent="Control/VBoxContainer/HBoxContainer2/VBoxContainer" unique_id=2066445878]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer2/VBoxContainer/CustomChanceLegendaryContainer" unique_id=606955012]
+layout_mode = 2
+text = "Legendary"
+
+[node name="LegendarySpinBox" type="SpinBox" parent="Control/VBoxContainer/HBoxContainer2/VBoxContainer/CustomChanceLegendaryContainer" unique_id=117701689]
+layout_mode = 2
+
+[node name="FamilyLevelContainer" type="HBoxContainer" parent="Control/VBoxContainer" unique_id=2010298441]
+layout_mode = 2
+
+[node name="FamilyPopup" type="OptionButton" parent="Control/VBoxContainer/FamilyLevelContainer" unique_id=1916156450]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Control/VBoxContainer" unique_id=1446467102]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer3" unique_id=1944631751]
+layout_mode = 2
+text = "Cards remaining in shopdeck:"
+
+[node name="ShopDeckCardsRemainingLabel" type="Label" parent="Control/VBoxContainer/HBoxContainer3" unique_id=357596219]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control" unique_id=828514588]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 2.0
+offset_right = 502.0
+offset_bottom = 61.0
+theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "[b]Result[/b]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Control" unique_id=653709929]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 21.0
+offset_right = 104.0
+offset_bottom = 44.0
+text = "Cards drawn:"
+
+[node name="CardsDrawnLabel" type="Label" parent="Control" unique_id=90345468]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 109.0
+offset_top = 38.0
+offset_right = 211.0
+offset_bottom = 61.0
+
+[connection signal="pressed" from="Control/VBoxContainer/HBoxContainer/DrawCardsButton" to="." method="_on_draw_cards_button_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/HBoxContainer2/ResetButton" to="." method="_on_reset_button_pressed"]
+[connection signal="toggled" from="Control/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/CustomChanceCheckBox" to="." method="_on_custom_chance_check_box_toggled"]
