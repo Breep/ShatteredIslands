@@ -81,17 +81,40 @@ func get_auto_attack_spawn() -> Node3D:
 
 #region ===== Actions (Hero-specific overrides) =====
 var _pending_attacks: Array[AttackCommand]
-func projectile_attack(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
-	if projectile_type == Projectile.ProjectileType.AUTO_ATTACK:
-		var attack_cmd: AttackCommand = _action_module.build_projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
-		if attack_cmd == null:
-			Verbose.error("Can't create an AttackCommand | " + entity_name, Verbose.Category.HERO)
-			return
-		if _pending_attacks.is_empty(): _pending_attacks.append(attack_cmd)
-		else: _pending_attacks[0] = attack_cmd
-		auto_attack_started.emit(projectile_stats.physical_is_critical)
+
+# Auto-attack with animation synchronization
+func attack(target: Entity) -> void:
+	if target == null:
+		return
+	
+	# Get auto-attack stats with modifiers from AutoAttackModule
+	var projectile_spawn := get_auto_attack_spawn()
+	var projectile_stats := _auto_attack_module.prepare_projectile_stats()
+	
+	# Build attack command with modifiers
+	var attack_cmd: AttackCommand = _action_module.build_projectile_attack(
+		target,
+		Projectile.ProjectileType.AUTO_ATTACK,
+		projectile_spawn,
+		projectile_stats
+	)
+	
+	if attack_cmd == null:
+		Verbose.error("Can't create an AttackCommand | " + entity_name, Verbose.Category.HERO)
+		return
+	
+	# Store for execution on animation hit frame
+	if _pending_attacks.is_empty():
+		_pending_attacks.append(attack_cmd)
 	else:
-		_action_module.projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
+		_pending_attacks[0] = attack_cmd
+	
+	# Trigger animation
+	auto_attack_started.emit(projectile_stats.physical_is_critical)
+
+# Instant projectile attack (spells, abilities) - no animation
+func projectile_attack(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
+	_action_module.projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
 
 
 func _on_hero_animator_attack_hit_frame() -> void:

@@ -61,6 +61,14 @@ func start() -> void:
 func stop() -> void:
 	_auto_attack_timer.stop()
 
+
+func prepare_projectile_stats() -> ProjectileStats:
+	var projectile_stats := ProjectileStats.new()
+	projectile_stats.physical_damage_flat = _owner.stats.attack_damage
+	projectile_stats.speed = 15
+	_consume_modifiers(projectile_stats)
+	return projectile_stats
+
 # ============================== Private functions ==============================
 
 func _set_auto_attack_speed(new_attack_speed: float) -> void:
@@ -72,12 +80,7 @@ func _set_auto_attack_speed(new_attack_speed: float) -> void:
 
 
 func _auto_attack(target: Entity) -> void:
-	var projectile_stats := ProjectileStats.new()
-	projectile_stats.physical_damage_flat = _owner.stats.attack_damage
-	projectile_stats.speed = 15
-	_consume_modifiers(projectile_stats)
-	_owner.projectile_attack(target, Projectile.ProjectileType.AUTO_ATTACK, _projectile_spawn, projectile_stats)
-	
+	_owner.attack(target)
 	attack_done.emit()
 
 
@@ -88,9 +91,9 @@ func _consume_modifiers(projectile_stats: ProjectileStats) -> void:
 		add += aa_modifier.damage_flat
 		mul += aa_modifier.damage_mult
 		if aa_modifier.on_attack_logic_callback.is_valid():
-			aa_modifier.on_attack_logic_callback.call({AutoAttackModifier.VarType.PROJECTILE_STATS:projectile_stats})
+			aa_modifier.on_attack_logic_callback.call({AutoAttackModifier.VarType.PROJECTILE_STATS: projectile_stats})
 		if aa_modifier.on_attack_visual_callback.is_valid():
-			aa_modifier.on_attack_visual_callback.call({AutoAttackModifier.VarType.VISUAL_POS:_projectile_spawn.global_position})
+			aa_modifier.on_attack_visual_callback.call({AutoAttackModifier.VarType.VISUAL_POS: _projectile_spawn.global_position})
 		projectile_stats.on_hit_logic_callbacks.append(aa_modifier.on_hit_logic_callback)
 		projectile_stats.on_hit_visual_callbacks.append(aa_modifier.on_hit_visual_callback)
 	projectile_stats.physical_damage_flat += int(add)
@@ -111,22 +114,3 @@ func _on_owner_stats_attack_speed_changed(new_attack_speed: float) -> void:
 
 func _on_owner_died(_unused) -> void:
 	stop()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 

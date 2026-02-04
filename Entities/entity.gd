@@ -268,6 +268,9 @@ func direct_damage(target: Entity, damage: float, damage_type: Utils.DamageType,
 func direct_damage_percent(target: Entity, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier, action_id: StringName) -> void:
 	_action_module.direct_damage_percent(target, damage_percent, damage_type, percent_modifier, action_id)
 
+func attack(_target: Entity) -> void:
+	printerr("Entity: attack() called but not implemented [", get_path(), "]")
+
 func projectile_attack(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	_action_module.projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
 
