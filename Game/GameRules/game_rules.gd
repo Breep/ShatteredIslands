@@ -32,6 +32,16 @@ extends Resource
 	4: [],
 }
 
+@export_subgroup("Drop Rates")
+## Key: Family Level, Value: Dictionary[Card.Rarity, int] (Percentage)
+@export var drop_rates_by_family_level: Dictionary[int, Dictionary] = {
+	0: {Card.Rarity.COMMON: 100, Card.Rarity.RARE: 0, Card.Rarity.EPIC: 0, Card.Rarity.LEGENDARY: 0},
+	1: {Card.Rarity.COMMON: 70, Card.Rarity.RARE: 30, Card.Rarity.EPIC: 0, Card.Rarity.LEGENDARY: 0},
+	2: {Card.Rarity.COMMON: 65, Card.Rarity.RARE: 25, Card.Rarity.EPIC: 10, Card.Rarity.LEGENDARY: 0},
+	3: {Card.Rarity.COMMON: 60, Card.Rarity.RARE: 20, Card.Rarity.EPIC: 15, Card.Rarity.LEGENDARY: 5},
+	4: {Card.Rarity.COMMON: 50, Card.Rarity.RARE: 20, Card.Rarity.EPIC: 20, Card.Rarity.LEGENDARY: 10},
+}
+
 @export_group("Card shop rules")
 @export_subgroup("Card price")
 @export var common_price: int = 100

@@ -154,6 +154,17 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 
+[node name="HBoxContainer3" type="HBoxContainer" parent="Control/VBoxContainer" unique_id=1446467102]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer3" unique_id=1944631751]
+layout_mode = 2
+text = "Cards remaining in shopdeck:"
+
+[node name="ShopDeckCardsRemainingLabel" type="Label" parent="Control/VBoxContainer/HBoxContainer3" unique_id=357596219]
+unique_name_in_owner = true
+layout_mode = 2
+
 [node name="RichTextLabel" type="RichTextLabel" parent="Control" unique_id=828514588]
 layout_mode = 0
 offset_left = 4.0

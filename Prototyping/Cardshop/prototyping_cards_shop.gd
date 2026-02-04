@@ -24,6 +24,7 @@ extends Node
 @onready var _families: Array[Family]
 
 @onready var _cards_drawn: Label = %CardsDrawnLabel
+@onready var _shopdeck_cards_remaining_label: Label = %ShopDeckCardsRemainingLabel
 
 var _FAMILIES_REF: Dictionary[Family.FamilyType, Family] = {
 	Family.FamilyType.ATTACK: load("res://Card/Descriptions/Families/attack_family.tres") as Family,
@@ -54,8 +55,7 @@ func _ready() -> void:
 	# Init custom chance use
 	_custom_chance_bool = _custom_check_box.button_pressed
 	
-	# Init the shop deck
-	#_shop_deck.construct_shop_deck()
+	
 
 func _populate_family_popup() -> void:
 	for family_type: Family.FamilyType in _active_families.keys():
@@ -98,6 +98,7 @@ func _on_draw_cards_button_pressed() -> void:
 	
 	_ui_cards_viewer.update_content(cards)
 	_cards_drawn.text = str(cards.size())
+	_shopdeck_cards_remaining_label.text =  str(_shop_deck.size())
 
 
 
