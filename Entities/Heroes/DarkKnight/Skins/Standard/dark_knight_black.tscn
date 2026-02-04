@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://dv0rauvoaxb0y"]
+[gd_scene format=4 uid="uid://dv0rauvoaxb0y"]
 
 [ext_resource type="Animation" uid="uid://bkjf2t6rrahy4" path="res://Data/Anim/Anim darkknight/set up anim darkknight/attack.res" id="1_ev5cg"]
 [ext_resource type="Animation" uid="uid://vpgc54gujnc7" path="res://Data/Anim/Anim darkknight/set up anim darkknight/dance.res" id="2_u72c2"]
@@ -11,7 +11,7 @@
 [ext_resource type="Animation" uid="uid://dlyppd0imq07p" path="res://Data/Anim/Anim darkknight/set up anim darkknight/sitting.res" id="9_r85ju"]
 [ext_resource type="Animation" uid="uid://dl1wvubcwpiql" path="res://Data/Anim/Anim darkknight/set up anim darkknight/sitting 2.res" id="10_3b782"]
 [ext_resource type="Animation" uid="uid://w5fwwfses5t5" path="res://Data/Anim/Anim darkknight/set up anim darkknight/ultimate.res" id="11_1e00o"]
-[ext_resource type="Script" uid="uid://6apn73v3opln" path="res://Entities/Heroes/_Shared/hero_animation_player.gd" id="13_2t6p1"]
+[ext_resource type="Script" uid="uid://cnwr3o67xobtt" path="res://Entities/Modules/AnimationModule/entity_animation_player.gd" id="12_u72c2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5rnk0"]
 resource_name = "Material.001"
@@ -3237,11 +3237,11 @@ _data = {
 &"ultimate": ExtResource("11_1e00o")
 }
 
-[node name="darkknight_black" type="Node3D"]
+[node name="darkknight_black" type="Node3D" unique_id=779218945]
 
-[node name="rig" type="Node3D" parent="."]
+[node name="rig" type="Node3D" parent="." unique_id=93346782]
 
-[node name="Skeleton3D" type="Skeleton3D" parent="rig"]
+[node name="Skeleton3D" type="Skeleton3D" parent="rig" unique_id=435237510]
 bones/0/name = "c_pos"
 bones/0/parent = -1
 bones/0/rest = Transform3D(-1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0)
@@ -5063,53 +5063,51 @@ bones/259/position = Vector3(1.7505329, 1.5330532, -0.043082416)
 bones/259/rotation = Quaternion(0.41906118, 0.52551496, 0.7385547, 0.0525231)
 bones/259/scale = Vector3(0.9999996, 0.99999994, 0.9999995)
 
-[node name="Cube_008" type="MeshInstance3D" parent="rig/Skeleton3D"]
+[node name="Cube_008" type="MeshInstance3D" parent="rig/Skeleton3D" unique_id=1468609257]
 mesh = SubResource("ArrayMesh_n82r0")
 skin = SubResource("Skin_qsm0a")
 
-[node name="Cube_009" type="MeshInstance3D" parent="rig/Skeleton3D"]
+[node name="Cube_009" type="MeshInstance3D" parent="rig/Skeleton3D" unique_id=382008896]
 mesh = SubResource("ArrayMesh_kfhhh")
 skin = SubResource("Skin_qsm0a")
 
-[node name="Cube_011" type="MeshInstance3D" parent="rig/Skeleton3D"]
+[node name="Cube_011" type="MeshInstance3D" parent="rig/Skeleton3D" unique_id=62486523]
 mesh = SubResource("ArrayMesh_0kik4")
 skin = SubResource("Skin_qsm0a")
 
-[node name="Cube_013" type="MeshInstance3D" parent="rig/Skeleton3D"]
+[node name="Cube_013" type="MeshInstance3D" parent="rig/Skeleton3D" unique_id=5718231]
 mesh = SubResource("ArrayMesh_lsvgs")
 skin = SubResource("Skin_qsm0a")
 
-[node name="Cube_015" type="MeshInstance3D" parent="rig/Skeleton3D"]
+[node name="Cube_015" type="MeshInstance3D" parent="rig/Skeleton3D" unique_id=1456240984]
 mesh = SubResource("ArrayMesh_ue1gm")
 skin = SubResource("Skin_qsm0a")
 
-[node name="Cube_018" type="MeshInstance3D" parent="rig/Skeleton3D"]
+[node name="Cube_018" type="MeshInstance3D" parent="rig/Skeleton3D" unique_id=2051316358]
 mesh = SubResource("ArrayMesh_rveo7")
 skin = SubResource("Skin_qsm0a")
 
-[node name="Cube_020" type="MeshInstance3D" parent="rig/Skeleton3D"]
+[node name="Cube_020" type="MeshInstance3D" parent="rig/Skeleton3D" unique_id=590089660]
 mesh = SubResource("ArrayMesh_s63dq")
 skin = SubResource("Skin_qsm0a")
 
-[node name="Cube_038" type="MeshInstance3D" parent="rig/Skeleton3D"]
+[node name="Cube_038" type="MeshInstance3D" parent="rig/Skeleton3D" unique_id=2053621997]
 mesh = SubResource("ArrayMesh_akvdx")
 skin = SubResource("Skin_qsm0a")
 
-[node name="Cube_039" type="MeshInstance3D" parent="rig/Skeleton3D"]
+[node name="Cube_039" type="MeshInstance3D" parent="rig/Skeleton3D" unique_id=1277482926]
 mesh = SubResource("ArrayMesh_cm7y0")
 skin = SubResource("Skin_qsm0a")
 
-[node name="Cube_041" type="MeshInstance3D" parent="rig/Skeleton3D"]
+[node name="Cube_041" type="MeshInstance3D" parent="rig/Skeleton3D" unique_id=661212998]
 mesh = SubResource("ArrayMesh_3k4nj")
 skin = SubResource("Skin_qsm0a")
 
-[node name="Weapons" type="MeshInstance3D" parent="rig/Skeleton3D"]
+[node name="Weapons" type="MeshInstance3D" parent="rig/Skeleton3D" unique_id=994702626]
 mesh = SubResource("ArrayMesh_l6xkq")
 skin = SubResource("Skin_qsm0a")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_kwrhy")
-}
-autoplay = "idle fix"
-script = ExtResource("13_2t6p1")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=412282001]
+libraries/ = SubResource("AnimationLibrary_kwrhy")
+autoplay = &"idle fix"
+script = ExtResource("12_u72c2")

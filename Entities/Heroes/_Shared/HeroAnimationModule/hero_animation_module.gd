@@ -24,6 +24,7 @@ func _ready() -> void:
 
 # Override auto attack to add blend logic (left/right hand + critical)
 func _on_entity_owner_auto_attack_started(is_critical: bool) -> void:
+	Verbose.debug("Auto attack started", Verbose.Category.ENTITY_ANIMATION)
 	var use_right_hand: bool = _rng.randf_range(0.0, 1.0) < 0.5
 	if use_right_hand:
 		_animation_tree.set(PARAM_BLEND_ATTACK, 1.0)
@@ -45,12 +46,10 @@ func apply_display_mode(display_mode: Hero.DisplayMode) -> void:
 			_start_buying_area_animation()
 			_weapons_node.hide()
 		Hero.DisplayMode.FIGHTING_PHASE:
-			_idle_variation_timer.stop()
 			_animation_tree.set(PARAM_TRANSITION_GLOBAL, VALUE_TRANSITION_GLOBAL_FIGHTING)
 			_animation_tree.set(PARAM_TRANSITION_FIGHTING, VALUE_TRANSITION_FIGHTING_IDLE)
 			_weapons_node.show()
 		Hero.DisplayMode.PREVIEW:
-			_idle_variation_timer.stop()
 			_animation_tree.set(PARAM_TRANSITION_GLOBAL, VALUE_TRANSITION_GLOBAL_TPOSE)
 			_weapons_node.hide()
 
