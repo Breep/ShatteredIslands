@@ -21,9 +21,6 @@ signal ultimate_casted()
 @export var hero_desc: HeroDesc
 @export_range(1, 10, 1) var level: int = 1
 
-@export_group("Local Nodes")
-@export var _hero_animation_module: HeroAnimationModule
-
 @export_group("Optional")
 @export var _custom_deck: PlayerDeck
 
@@ -39,7 +36,9 @@ var family_managers_enabled: bool = true
 #endregion
 
 #region ============================== Private variables ==============================
-var _auto_attack_module: AutoAttackModule
+# Typed reference to parent's _animation_module
+var _hero_animation: HeroAnimationModule:
+	get: return _animation_module as HeroAnimationModule
 
 var _skill_manager: SkillManager
 var _family_managers: Dictionary[Family.FamilyType, FamilyManager]
@@ -80,51 +79,10 @@ func get_auto_attack_spawn() -> Node3D:
 #endregion
 
 #region ===== Actions (Hero-specific overrides) =====
-var _pending_attacks: Array[AttackCommand]
-
-# Auto-attack with animation synchronization
-func attack(target: Entity) -> void:
-	if target == null:
-		return
-	
-	# Get auto-attack stats with modifiers from AutoAttackModule
-	var projectile_spawn := get_auto_attack_spawn()
-	var projectile_stats := _auto_attack_module.prepare_projectile_stats()
-	
-	# Build attack command with modifiers
-	var attack_cmd: AttackCommand = _action_module.build_projectile_attack(
-		target,
-		Projectile.ProjectileType.AUTO_ATTACK,
-		projectile_spawn,
-		projectile_stats
-	)
-	
-	if attack_cmd == null:
-		Verbose.error("Can't create an AttackCommand | " + entity_name, Verbose.Category.HERO)
-		return
-	
-	# Store for execution on animation hit frame
-	if _pending_attacks.is_empty():
-		_pending_attacks.append(attack_cmd)
-	else:
-		_pending_attacks[0] = attack_cmd
-	
-	# Trigger animation
-	auto_attack_started.emit(projectile_stats.physical_is_critical)
 
 # Instant projectile attack (spells, abilities) - no animation
 func projectile_attack(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	_action_module.projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
-
-
-func _on_hero_animation_module_attack_hit_frame() -> void:
-	if _pending_attacks.is_empty():
-		# Can be empty if it's an critical strike, both hands attacks -> TODO: Maybe see if there is a better way
-		return
-	var attack_cmd: AttackCommand = _pending_attacks.pop_front()
-	if !is_instance_valid(attack_cmd.target) or attack_cmd.target.is_queued_for_deletion(): return
-	look_at_target_y_only(attack_cmd.target.global_position)
-	_action_module.projectile_attack(attack_cmd.target, attack_cmd.projectile_type, attack_cmd.spawn_node, attack_cmd.stats)
 
 
 func cast_ultimate() -> void:
@@ -189,7 +147,6 @@ func _hero_ready() -> void:
 	stats.health_changed.connect(_on_stats_health_changed)
 	fighting_state_changed.connect(_on_hero_fighting_state_changed)
 	_auto_attack_module.attack_done.connect(_on_aa_module_attack_done)
-	_hero_animation_module.attack_hit_frame.connect(_on_hero_animation_module_attack_hit_frame)
 
 	_apply_display_mode()
 
@@ -206,8 +163,6 @@ func _exit_tree() -> void:
 		fighting_state_changed.disconnect(_on_hero_fighting_state_changed)
 	if _auto_attack_module != null and _auto_attack_module.attack_done.is_connected(_on_aa_module_attack_done):
 		_auto_attack_module.attack_done.disconnect(_on_aa_module_attack_done)
-	if _hero_animation_module != null and _hero_animation_module.attack_hit_frame.is_connected(_on_hero_animation_module_attack_hit_frame):
-		_hero_animation_module.attack_hit_frame.disconnect(_on_hero_animation_module_attack_hit_frame)
 #endregion
 
 #region ============================== Private functions ==============================
@@ -237,8 +192,8 @@ func _apply_display_mode() -> void:
 			_entity_info_panel_3d.show()
 	
 	# Update animator (weapons + animations)
-	if _hero_animation_module != null:
-		_hero_animation_module.apply_display_mode(display_mode)
+	if _hero_animation != null:
+		_hero_animation.apply_display_mode(display_mode)
 
 
 func _apply_all_cards_upgrades() -> void:

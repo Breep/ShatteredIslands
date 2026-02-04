@@ -113,6 +113,7 @@ var base_stats: EntityStats:
 
 #region ============================== Private variables ==============================
 var _base_stats: EntityStats # Private, use base_stats property to access
+var _auto_attack_module: AutoAttackModule # Optional, can be null
 var _action_module: ActionModule
 var _interact_module: InteractModule
 #endregion
@@ -127,6 +128,7 @@ var _interact_module: InteractModule
 # ============================== Local Nodes ==============================
 
 @export_group("Optional configuration")
+@export var _animation_module: AnimationModule
 @export var _entity_info_panel_3d: EntityInfoPanel3D
 var visual: EntityInfoPanel3D:
 	get: return _entity_info_panel_3d
@@ -215,6 +217,10 @@ func _ready() -> void:
 func _entity_ready() -> void:
 	Verbose.debug("Entity [" + entity_name + "] ready", Verbose.Category.ENTITY)
 	fighting_state_changed.connect(_on_entity_fighting_state_changed)
+	
+	# Connect AnimationModule if present
+	if _animation_module != null:
+		_animation_module.attack_hit_frame.connect(_on_animation_module_attack_hit_frame)
 #endregion
 
 #region ============================== Public functions ==============================
@@ -268,8 +274,48 @@ func direct_damage(target: Entity, damage: float, damage_type: Utils.DamageType,
 func direct_damage_percent(target: Entity, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier, action_id: StringName) -> void:
 	_action_module.direct_damage_percent(target, damage_percent, damage_type, percent_modifier, action_id)
 
-func attack(_target: Entity) -> void:
-	printerr("Entity: attack() called but not implemented [", get_path(), "]")
+# Auto-attack with animation synchronization (if AnimationModule present)
+var _pending_attacks: Array[AttackCommand]
+
+func attack(target: Entity) -> void:
+	if target == null or _auto_attack_module == null:
+		return
+	
+	# Get auto-attack stats with modifiers from AutoAttackModule
+	var projectile_spawn := get_auto_attack_spawn()
+	var projectile_stats := _auto_attack_module.prepare_projectile_stats()
+	
+	# Build attack command with modifiers
+	var attack_cmd: AttackCommand = _action_module.build_projectile_attack(
+		target,
+		Projectile.ProjectileType.AUTO_ATTACK,
+		projectile_spawn,
+		projectile_stats
+	)
+	
+	if attack_cmd == null:
+		Verbose.error("Can't create an AttackCommand | " + entity_name, Verbose.Category.ENTITY)
+		return
+	
+	# If AnimationModule is present, store for execution on hit frame
+	if _animation_module != null:
+		# Store for execution on animation hit frame
+		if _pending_attacks.is_empty():
+			_pending_attacks.append(attack_cmd)
+		else:
+			_pending_attacks[0] = attack_cmd
+		
+		# Trigger animation
+		auto_attack_started.emit(projectile_stats.physical_is_critical)
+	else:
+		# No animation module - execute immediately
+		look_at_target_y_only(attack_cmd.target.global_position)
+		_action_module.projectile_attack(
+			attack_cmd.target,
+			attack_cmd.projectile_type,
+			attack_cmd.spawn_node,
+			attack_cmd.stats
+		)
 
 func projectile_attack(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	_action_module.projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
@@ -288,6 +334,21 @@ func heal_percent(target: Entity, percent: float, percent_modifier: Utils.Percen
 
 func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Utils.StackType, action_id: StringName, duration: float = 5.0) -> void:
 	_action_module.inflict_condition_stacks(target, stacks_number, stack_type, action_id, duration)
+
+
+func _on_animation_module_attack_hit_frame() -> void:
+	if _pending_attacks.is_empty():
+		return
+	var attack_cmd: AttackCommand = _pending_attacks.pop_front()
+	if !is_instance_valid(attack_cmd.target) or attack_cmd.target.is_queued_for_deletion():
+		return
+	look_at_target_y_only(attack_cmd.target.global_position)
+	_action_module.projectile_attack(
+		attack_cmd.target,
+		attack_cmd.projectile_type,
+		attack_cmd.spawn_node,
+		attack_cmd.stats
+	)
 
 func summon_entity(entity_type: EntityType, spawn_config: SpawnLocationConfig, entity_modifier: Dictionary) -> void:
 	_action_module.summon_entity(entity_type, spawn_config, entity_modifier)
