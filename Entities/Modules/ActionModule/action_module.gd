@@ -25,10 +25,10 @@ func connect_to_spawn_manager(spawn_manager: SpawnManager) -> void:
 	if spawn_manager == null:
 		Verbose.error("Trying to connect to a <null> SpawnManager", Verbose.Category.ENTITY_MODULE)
 		return
-	
 	_spawn_manager = spawn_manager
 
 func connect_to_arena_zone_manager(arena_zone_manager: ArenaZoneManager) -> void:
+	Verbose.debug("connect_to_arena_zone_manager() | " + str(arena_zone_manager), Verbose.Category.ENTITY_MODULE)
 	if arena_zone_manager == null:
 		Verbose.error("Trying to connect to a <null> ArenaZoneManager", Verbose.Category.ENTITY_MODULE)
 		return

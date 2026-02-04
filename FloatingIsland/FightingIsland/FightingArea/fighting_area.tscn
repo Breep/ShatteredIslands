@@ -13,11 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://1h20y2oaj3fm" path="res://Modules/BattleLogModule/BattleWriter/battle_writer.tscn" id="8_7oplh"]
 [ext_resource type="PackedScene" uid="uid://dvuq5n41nak3u" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.tscn" id="9_8iy5v"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_6wjnm"]
-size = Vector3(20, 5, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_7oplh"]
-size = Vector3(1, 5, 10)
+[sub_resource type="BoxShape3D" id="BoxShape3D_8iy5v"]
+size = Vector3(20, 5, 10)
 
 [node name="FightingArea" type="Node3D" unique_id=2072382245 node_paths=PackedStringArray("_spawn_manager", "_fighting_manager", "_entity_manager", "_arena_zone_manager", "_fighting_floors", "_entities_node")]
 script = ExtResource("1_t74of")
@@ -32,8 +29,9 @@ _fighting_floors = {
 }
 _entities_node = NodePath("Entities")
 
-[node name="EntityManager" parent="." unique_id=1828737280 node_paths=PackedStringArray("_fighting_area") instance=ExtResource("2_wtb7j")]
+[node name="EntityManager" parent="." unique_id=1828737280 node_paths=PackedStringArray("_fighting_area", "_scanner_area") instance=ExtResource("2_wtb7j")]
 _fighting_area = NodePath("..")
+_scanner_area = NodePath("../ScannerArea3D")
 
 [node name="FightingManager" parent="." unique_id=588752297 instance=ExtResource("3_yyfcp")]
 
@@ -76,35 +74,12 @@ visible = false
 
 [node name="Spells" type="Node3D" parent="." unique_id=869075719]
 
-[node name="Walls" type="Node3D" parent="." unique_id=1302516025]
-
-[node name="Wall1" type="Area3D" parent="Walls" unique_id=674264125 groups=["WALL"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.5)
-monitoring = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall1" unique_id=733637753]
-shape = SubResource("BoxShape3D_6wjnm")
-
-[node name="Wall2" type="Area3D" parent="Walls" unique_id=505905737 groups=["WALL"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.5)
-monitoring = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall2" unique_id=1692352486]
-shape = SubResource("BoxShape3D_6wjnm")
-
-[node name="Wall3" type="Area3D" parent="Walls" unique_id=674664821 groups=["WALL"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, 0, 0)
-monitoring = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall3" unique_id=1529558537]
-shape = SubResource("BoxShape3D_7oplh")
-
-[node name="Wall4" type="Area3D" parent="Walls" unique_id=430265196 groups=["WALL"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, 0)
-monitoring = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall4" unique_id=268536224]
-shape = SubResource("BoxShape3D_7oplh")
-
 [node name="CharacterSynchronizer" type="MultiplayerSpawner" parent="." unique_id=126086143]
 spawn_path = NodePath("../Characters")
+
+[node name="ScannerArea3D" type="Area3D" parent="." unique_id=1453503564]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ScannerArea3D" unique_id=1351499465]
+shape = SubResource("BoxShape3D_8iy5v")

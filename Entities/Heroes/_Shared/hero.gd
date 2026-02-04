@@ -63,6 +63,7 @@ func set_display_mode(mode: DisplayMode) -> void:
 
 
 func connect_to_fighting_area(fighting_area_ref: FightingArea) -> void:
+	Verbose.debug("Connecting to fighting area", Verbose.Category.HERO)
 	if fighting_area_ref == null:
 		Verbose.error("Trying to connect a null fighting area to a Hero", Verbose.Category.HERO)
 		return
