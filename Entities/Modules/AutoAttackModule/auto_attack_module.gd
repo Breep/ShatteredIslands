@@ -80,7 +80,7 @@ func _set_auto_attack_speed(new_attack_speed: float) -> void:
 
 
 func _auto_attack(target: Entity) -> void:
-	_owner.attack(target)
+	_owner.auto_attack(target)
 	attack_done.emit()
 
 

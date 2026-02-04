@@ -277,7 +277,7 @@ func direct_damage_percent(target: Entity, damage_percent: float, damage_type: U
 # Auto-attack with animation synchronization (if AnimationModule present)
 var _pending_attacks: Array[AttackCommand]
 
-func attack(target: Entity) -> void:
+func auto_attack(target: Entity) -> void:
 	if target == null or _auto_attack_module == null:
 		return
 	
