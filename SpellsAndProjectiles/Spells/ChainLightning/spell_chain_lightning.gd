@@ -4,7 +4,7 @@ extends Node3D
 const VISUAL_SCENE = preload("res://SpellsAndProjectiles/Spells/ChainLightning/Visual/spell_chain_lightning_visual.tscn")
 const HEIGHT_OFFSET: Vector3 = Vector3(0, 1.0, 0)
 const MODIFIER_START_POS = "start_position"
-const BOUNCE_DELAY: float = 0.2 
+const BOUNCE_DELAY: float = 0.2
 const LIFETIME_MAX: float = 5.0
 
 var _source: Entity
@@ -45,7 +45,7 @@ func _process_zap(target: Entity) -> void:
 	
 	# Dégâts
 	if _source != null:
-		_source.direct_attack(target, _damage, Utils.DamageType.MAGICAL, "Chain Lightning")
+		_source.direct_damage(target, _damage, Utils.DamageType.MAGICAL, "Chain Lightning")
 	else:
 		target.take_damage(_damage, Utils.DamageType.MAGICAL, false, "Chain Lightning")
 	
@@ -57,7 +57,7 @@ func _process_zap(target: Entity) -> void:
 		var next_target = _find_next_target(target)
 		
 		if next_target != null:
-			_spawn_beam_effect(target.global_position + HEIGHT_OFFSET, next_target.global_position + HEIGHT_OFFSET)	
+			_spawn_beam_effect(target.global_position + HEIGHT_OFFSET, next_target.global_position + HEIGHT_OFFSET)
 			await get_tree().create_timer(BOUNCE_DELAY).timeout
 			_process_zap(next_target)
 		else:

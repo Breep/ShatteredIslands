@@ -34,9 +34,8 @@ func connect_to_arena_zone_manager(arena_zone_manager: ArenaZoneManager) -> void
 		return
 	_arena_zone_manager = arena_zone_manager
 
-#region ============================== Attack ==============================
 # Instantly attack the target - Apply cards damages multiplier if there are some
-func direct_attack(target: Entity, damage: float, damage_type: Utils.DamageType, action_id: StringName) -> void:
+func direct_damage(target: Entity, damage: float, damage_type: Utils.DamageType, action_id: StringName) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
 	var damage_before_crit: float = damage * _get_strenght_weakness_multiplier(Utils.damage_to_action(damage_type))
@@ -49,7 +48,7 @@ func direct_attack(target: Entity, damage: float, damage_type: Utils.DamageType,
 
 
 # Instantly attack the target - Apply cards damages multiplier if there are some
-func direct_attack_percent(target: Entity, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier, action_id: StringName) -> void:
+func direct_damage_percent(target: Entity, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier, action_id: StringName) -> void:
 	if not multiplayer.is_server(): return
 	if target == null: return
 	var hp: float
@@ -61,7 +60,7 @@ func direct_attack_percent(target: Entity, damage_percent: float, damage_type: U
 		Utils.PercentModifier.LOST_HP:
 			hp = target.stats.health_max - target.stats.health
 	var damage: float = hp * damage_percent / 100.0
-	direct_attack(target, damage, damage_type, action_id)
+	direct_damage(target, damage, damage_type, action_id)
 
 
 # Create a projectile to attack the target - Apply cards damages multiplier if there are some

@@ -5,8 +5,8 @@ extends Node
 
 @onready var _entity_name_label: Label = %EntityNameLabel
 
-@onready var _direct_attack_edit: TextEdit = %DirectAttackEdit
-@onready var _direct_attack_percent_edit: TextEdit = %DirectAttackPercentEdit
+@onready var _direct_damage_edit: TextEdit = %DirectAttackEdit
+@onready var _direct_damage_percent_edit: TextEdit = %DirectAttackPercentEdit
 @onready var _heal_edit: TextEdit = %HealEdit
 @onready var _heal_percent_edit: TextEdit = %HealPercentEdit
 @onready var _inflict_condition_edit: TextEdit = %InflictConditionEdit
@@ -169,30 +169,30 @@ func _on_attack_button_pressed() -> void:
 	_refresh_target()
 	
 	if _target == null:
-		printerr("EntityController: No target selected for direct_attack")
+		printerr("EntityController: No target selected for direct_damage")
 		return
 	
-	var damage_text: String = _direct_attack_edit.text.strip_edges()
+	var damage_text: String = _direct_damage_edit.text.strip_edges()
 	if damage_text.is_empty():
 		printerr("EntityController: No damage value provided")
 		return
 	
 	var damage: float = damage_text.to_float()
 	var damage_type: Utils.DamageType = _damage_choice.get_selected_id() as Utils.DamageType
-	var action_id: StringName = &"test_direct_attack"
+	var action_id: StringName = &"test_direct_damage"
 	
-	entity_owner.direct_attack(_target, damage, damage_type, action_id)
-	print("DEBUG: direct_attack called - Target: ", _target.entity_name, " | Damage: ", damage, " | Type: ", Utils.DamageType.keys()[damage_type])
+	entity_owner.direct_damage(_target, damage, damage_type, action_id)
+	print("DEBUG: direct_damage called - Target: ", _target.entity_name, " | Damage: ", damage, " | Type: ", Utils.DamageType.keys()[damage_type])
 
 
 func _on_attack_percent_button_pressed() -> void:
 	_refresh_target()
 	
 	if _target == null:
-		printerr("EntityController: No target selected for direct_attack_percent")
+		printerr("EntityController: No target selected for direct_damage_percent")
 		return
 	
-	var percent_text: String = _direct_attack_percent_edit.text.strip_edges()
+	var percent_text: String = _direct_damage_percent_edit.text.strip_edges()
 	if percent_text.is_empty():
 		printerr("EntityController: No percent value provided")
 		return
@@ -200,10 +200,10 @@ func _on_attack_percent_button_pressed() -> void:
 	var damage_percent: float = percent_text.to_float()
 	var damage_type: Utils.DamageType = _damage_choice_percent.get_selected_id() as Utils.DamageType
 	var percent_modifier: Utils.PercentModifier = _percent_modifier_choice.get_selected_id() as Utils.PercentModifier
-	var action_id: StringName = &"test_direct_attack_percent"
+	var action_id: StringName = &"test_direct_damage_percent"
 	
-	entity_owner.direct_attack_percent(_target, damage_percent, damage_type, percent_modifier, action_id)
-	print("DEBUG: direct_attack_percent called - Target: ", _target.entity_name, " | Percent: ", damage_percent, "% | Type: ", Utils.DamageType.keys()[damage_type], " | Modifier: ", Utils.PercentModifier.keys()[percent_modifier])
+	entity_owner.direct_damage_percent(_target, damage_percent, damage_type, percent_modifier, action_id)
+	print("DEBUG: direct_damage_percent called - Target: ", _target.entity_name, " | Percent: ", damage_percent, "% | Type: ", Utils.DamageType.keys()[damage_type], " | Modifier: ", Utils.PercentModifier.keys()[percent_modifier])
 
 
 func _on_heal_button_pressed() -> void:

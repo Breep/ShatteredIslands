@@ -419,7 +419,7 @@ func _on_action_done_corrupted_light(_entity_ref: Entity, _target: Entity, actio
 		return
 		
 	# print("DEBUG: Corrupted Light - Dealing ", damage_amount, " to ", enemy.name)
-	_owner.direct_attack(enemy, damage_amount, Utils.DamageType.MAGICAL, "Corrupted Light")
+	_owner.direct_damage(enemy, damage_amount, Utils.DamageType.MAGICAL, "Corrupted Light")
 #endregion
 
 #region ============== DIVINE INTERVENTION ==================

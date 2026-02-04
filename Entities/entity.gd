@@ -234,11 +234,11 @@ func connect_to_fighting_area(_fighting_area: FightingArea) -> void:
 #endregion
 
 #region ===== Actions (Default implementations - can be overridden)
-func direct_attack(target: Entity, damage: float, damage_type: Utils.DamageType, action_id: StringName) -> void:
-	_action_module.direct_attack(target, damage, damage_type, action_id)
+func direct_damage(target: Entity, damage: float, damage_type: Utils.DamageType, action_id: StringName) -> void:
+	_action_module.direct_damage(target, damage, damage_type, action_id)
 
-func direct_attack_percent(target: Entity, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier, action_id: StringName) -> void:
-	_action_module.direct_attack_percent(target, damage_percent, damage_type, percent_modifier, action_id)
+func direct_damage_percent(target: Entity, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier, action_id: StringName) -> void:
+	_action_module.direct_damage_percent(target, damage_percent, damage_type, percent_modifier, action_id)
 
 func projectile_attack(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	_action_module.projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)

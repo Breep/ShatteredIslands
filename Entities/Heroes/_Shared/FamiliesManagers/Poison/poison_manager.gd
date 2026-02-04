@@ -220,7 +220,7 @@ func _on_hit_venomous_logic_callback(cb_vars: Dictionary) -> void:
 	var target: Entity = cb_vars[AutoAttackModifier.VarType.TARGET]
 	if target == null or target.is_queued_for_deletion(): return
 	var damage := int(float(target.conditions.poison_stacks) * _poison_stats.poison_venomous_darts_multiplier)
-	_owner.direct_attack(target, damage, Utils.DamageType.PHYSICAL, "Venomous Darts")
+	_owner.direct_damage(target, damage, Utils.DamageType.PHYSICAL, "Venomous Darts")
 #endregion
 
 #region TIDE OF CORRUPTION

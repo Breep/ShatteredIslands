@@ -79,7 +79,6 @@ func _clear_optional_timers() -> void:
 #region stats modifier
 
 func _add_stat_modifiers() -> void:
-	
 	# [EVASIVE GROWTH]
 	if _life_stats.evasive_growth_activated:
 		var mod := StatModifier.new()
@@ -108,7 +107,7 @@ func _add_stat_modifiers() -> void:
 		as_mod.id = "Bear Strength AS"
 		as_mod.stat_type = EntityStats.StatType.AA_SPEED
 		as_mod.calc_type = StatModifier.CalcType.MULT
-		as_mod.value = -(_life_stats.bear_strength_as_reduction / 100.0)
+		as_mod.value = - (_life_stats.bear_strength_as_reduction / 100.0)
 		as_mod.tags = [StatModifier.TagType.CARD]
 		_owner.stat_modifiers_registry.register_modifier(as_mod)
 		
@@ -143,7 +142,7 @@ func _add_stat_modifiers() -> void:
 		magic_mod.id = "Crystal Mountain (Magic)"
 		magic_mod.stat_type = EntityStats.StatType.RESISTANCE
 		# Vérifie que c'est bien le bon ActionType pour la magie
-		magic_mod.action_type = Utils.ActionType.DAMAGE_MAGICAL 
+		magic_mod.action_type = Utils.ActionType.DAMAGE_MAGICAL
 		magic_mod.calc_type = StatModifier.CalcType.ADD
 		magic_mod.value = defense_val
 		magic_mod.tags = [StatModifier.TagType.CARD]
@@ -222,7 +221,7 @@ func _vital_pulse_timer_timeout() -> void:
 		return
 	for target in targets:
 		if target != null and is_instance_valid(target):
-			_owner.direct_attack(target, damage, Utils.DamageType.PHYSICAL, "Vital Pulse")
+			_owner.direct_damage(target, damage, Utils.DamageType.PHYSICAL, "Vital Pulse")
 
 
 # [TAINTED BLOOD]
@@ -234,7 +233,7 @@ func _on_tainted_blood_timer_timeout() -> void:
 	var max_hp: float = _owner.stats.health_max
 	var current_hp: float = _owner.stats.health
 	var lost_hp: float = max_hp - current_hp
-	if lost_hp <= 0: return 
+	if lost_hp <= 0: return
 	
 	var percent: float = _life_stats.tainted_blood_lost_hp_percent
 	var stacks: float = lost_hp * (percent / 100.0)

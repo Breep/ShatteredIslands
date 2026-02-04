@@ -421,7 +421,7 @@ func _on_hit_shield_throw(cb_vars: Dictionary) -> void:
 	
 	var damage: float = _defense_stats.shield_throw_damage
 	if damage > 0:
-		_owner.direct_attack(target, damage, Utils.DamageType.MAGICAL, "Shield Throw")
+		_owner.direct_damage(target, damage, Utils.DamageType.MAGICAL, "Shield Throw")
 	
 	var shield_return: float = _defense_stats.shield_throw_return_shield
 	if shield_return > 0:

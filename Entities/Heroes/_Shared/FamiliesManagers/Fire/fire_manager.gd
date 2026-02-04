@@ -276,7 +276,7 @@ func _on_hit_cosmic_bolt(cb_vars: Dictionary) -> void:
 	var damage: float = ignite_stacks * dmg_mult
 	
 	if damage > 0:
-		_owner.direct_attack(target, damage, Utils.DamageType.MAGICAL, "Cosmic Bolt")
+		_owner.direct_damage(target, damage, Utils.DamageType.MAGICAL, "Cosmic Bolt")
 	
 	# --- 2. Rebond ---
 	var chance_mult: float = _fire_stats.cosmic_bolt_bounce_chance_per_stack
@@ -313,12 +313,12 @@ func _on_apocalypse_meteor_hit(cb_vars: Dictionary) -> void:
 		var ignite_stacks = entity.conditions.ignite_stacks
 		if ignite_stacks > 0:
 			var bonus_damage = ignite_stacks * ratio
-			_owner.direct_attack(entity, bonus_damage, Utils.DamageType.MAGICAL, "Apocalypse")
+			_owner.direct_damage(entity, bonus_damage, Utils.DamageType.MAGICAL, "Apocalypse")
 #endregion
 
 		if ignite_stacks > 0:
 			var bonus_damage = ignite_stacks * ratio
-			_owner.direct_attack(entity, bonus_damage, Utils.DamageType.MAGICAL, "Apocalypse")
+			_owner.direct_damage(entity, bonus_damage, Utils.DamageType.MAGICAL, "Apocalypse")
 #endregion
 
 #region ========== COSMO'POLITAN ==========
@@ -338,7 +338,7 @@ func _on_cosmopolitan_meteor_hit(cb_vars: Dictionary) -> void:
 		var bonus_ratio: float = _fire_stats.fire_cosmopolitan_bonus_damage_ratio
 		var extra_damage_percent: float = damage_percent * bonus_ratio
 		
-		_owner.direct_attack_percent(target, extra_damage_percent, Utils.DamageType.MAGICAL, Utils.PercentModifier.MAX_HP, "Cosmo'Politan")
+		_owner.direct_damage_percent(target, extra_damage_percent, Utils.DamageType.MAGICAL, Utils.PercentModifier.MAX_HP, "Cosmo'Politan")
 #endregion
 
 # ============================== PASSIF ==============================
