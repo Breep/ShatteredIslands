@@ -50,10 +50,14 @@ func spawn_spell(spell: Node3D) -> void:
 	_spells_node.add_child(spell)
 
 
-func spawn_entity(entity: Entity, entity_spawn_global_position: Vector3) -> void:
+func spawn_entity(entity: Entity, entity_spawn_global_position: Vector3, context: EntityContext = null) -> void:
 	if entity == null:
 		push_error("SpawnManager: Trying to spawn a <null> entity")
 		return
+	
+	if context != null:
+		entity.apply_context(context)
+	
 	_entities_node.add_child(entity)
 	if entity_spawn_global_position != null:
 		entity.global_position = entity_spawn_global_position

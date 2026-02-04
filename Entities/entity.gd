@@ -229,6 +229,34 @@ func get_auto_attack_spawn() -> Node3D:
 	return self
 
 
+func get_context() -> EntityContext:
+	var ctx := EntityContext.new()
+	ctx.team = team
+	ctx.battle_id = battle_id
+	ctx.spawn_manager = _spawn_manager
+	ctx.arena_zone_manager = _arena_zone_manager
+	ctx.fighting_state = fighting_state
+	return ctx
+
+
+func apply_context(context: EntityContext) -> void:
+	# Apply public fields (could also use context.apply_to(self) but explicit is clearer)
+	team = context.team
+	battle_id = context.battle_id
+	fighting_state = context.fighting_state
+	
+	# Apply private fields
+	_spawn_manager = context.spawn_manager
+	_arena_zone_manager = context.arena_zone_manager
+	
+	# Connect action module to managers if available
+	if _action_module != null:
+		if context.spawn_manager != null:
+			_action_module.connect_to_spawn_manager(context.spawn_manager)
+		if context.arena_zone_manager != null:
+			_action_module.connect_to_arena_zone_manager(context.arena_zone_manager)
+
+
 func connect_to_fighting_area(_fighting_area: FightingArea) -> void:
 	printerr("Entity: virtual connect_to_fighting_area() called [", get_path(), "]")
 #endregion

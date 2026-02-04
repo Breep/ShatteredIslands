@@ -327,14 +327,12 @@ func _summon_snake_barrel(spawn_position: Vector3, entity_modifier: Dictionary) 
 		var snake_poison_stacks: int = entity_modifier[Entity.SnakeBarrelModifier.SNAKE_POISON_STACKS]
 		var max_health: int = entity_modifier[Entity.SnakeBarrelModifier.MAX_HEALTH]
 		snake_barrel.init(snake_number, snake_poison_stacks, max_health)
-	snake_barrel.team = _owner.team
-	_spawn_manager.spawn_entity(snake_barrel, spawn_position)
+	_spawn_manager.spawn_entity(snake_barrel, spawn_position, _owner.get_context())
 
 
 func _summon_snake(spawn_position: Vector3, _entity_modifier: Dictionary) -> void:
 	var snake: Snake = SNAKE_SCENE.instantiate()
-	snake.team = _owner.team
-	_spawn_manager.spawn_entity(snake, spawn_position)
+	_spawn_manager.spawn_entity(snake, spawn_position, _owner.get_context())
 
 
 func _summon_field_generator(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
@@ -347,17 +345,12 @@ func _summon_field_generator(spawn_position: Vector3, entity_modifier: Dictionar
 		var target_count: int = entity_modifier.get(Entity.FieldGeneratorModifier.TARGET_COUNT, 2)
 		field_generator.init(max_health, shield_amount, shield_interval, initial_shield, target_count)
 	
-	field_generator.team = _owner.team
-	_spawn_manager.spawn_entity(field_generator, spawn_position)
+	_spawn_manager.spawn_entity(field_generator, spawn_position, _owner.get_context())
 
 
 func _summon_chicken(spawn_position: Vector3, _entity_modifier: Dictionary) -> void:
 	var chicken: Chicken = CHICKEN_SCENE.instantiate()
-	chicken.team = _owner.team
-	chicken.fighting_state = _owner.fighting_state
-	chicken._spawn_manager = _spawn_manager # Monstruosité à vite rework
-	chicken._arena_zone_manager = _arena_zone_manager
-	_spawn_manager.spawn_entity(chicken, spawn_position)
+	_spawn_manager.spawn_entity(chicken, spawn_position, _owner.get_context())
 #endregion
 
 
