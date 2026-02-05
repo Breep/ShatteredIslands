@@ -1,6 +1,13 @@
 class_name AutoAttackModule
 extends Module
 
+# ============================== Enums ==============================
+
+enum AttackPhase {
+	COOLDOWN, # Waiting for cooldown before next attack
+	ATTACKING # Attack in progress, waiting for completion
+}
+
 # ============================== Signals ==============================
 
 signal attack_done()
@@ -25,6 +32,7 @@ var attack_speed: float:
 #var _forced_target: Entity # TODO Unused now, maybe for a futur hero that can taunt ?
 var _attack_strategy: TargetModule.TargettingStrategy = TargetModule.TargettingStrategy.RANDOM_ENEMY # The algo used to find the target
 
+var _current_phase: AttackPhase = AttackPhase.COOLDOWN
 
 var _current_target: Entity
 var current_target: Entity:
@@ -50,6 +58,10 @@ func _ready() -> void:
 	
 	_owner.stats.attack_speed_changed.connect(_on_owner_stats_attack_speed_changed)
 	_owner.died.connect(_on_owner_died)
+	_owner.auto_attack_completed.connect(_on_owner_auto_attack_completed)
+	
+	# Configure timer as one-shot
+	_auto_attack_timer.one_shot = true
 
 # ============================== Public functions ==============================
 
@@ -80,8 +92,8 @@ func _set_auto_attack_speed(new_attack_speed: float) -> void:
 
 
 func _auto_attack(target: Entity) -> void:
-	_owner.attack(target)
-	attack_done.emit()
+	_current_phase = AttackPhase.ATTACKING
+	_owner.auto_attack(target)
 
 
 func _consume_modifiers(projectile_stats: ProjectileStats) -> void:
@@ -102,9 +114,17 @@ func _consume_modifiers(projectile_stats: ProjectileStats) -> void:
 # ============================== Callbacks functions ==============================
 
 func _on_auto_attack_timer_timeout() -> void:
+	# Only launch attack if we're in COOLDOWN phase
+	if _current_phase != AttackPhase.COOLDOWN:
+		return
+	
 	var target = _owner.target_module.get_target(_attack_strategy)
 	current_target = target
-	if target == null: return
+	if target == null:
+		# No target, restart cooldown timer
+		_auto_attack_timer.start()
+		return
+	
 	_auto_attack(target)
 
 
@@ -114,3 +134,11 @@ func _on_owner_stats_attack_speed_changed(new_attack_speed: float) -> void:
 
 func _on_owner_died(_unused) -> void:
 	stop()
+
+
+func _on_owner_auto_attack_completed() -> void:
+	# Attack is complete, return to COOLDOWN phase and restart timer
+	if _current_phase == AttackPhase.ATTACKING:
+		_current_phase = AttackPhase.COOLDOWN
+		attack_done.emit()
+		_auto_attack_timer.start()

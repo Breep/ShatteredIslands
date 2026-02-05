@@ -2,6 +2,9 @@ extends Node3D
 
 var _entities: Array[Entity]
 
+@export var _auto_attack_enabled: bool = false
+@export var _family_managers_enabled: bool = false
+
 @onready var _entities_node: Node3D = %Entities
 @onready var _center_point_camera: CenterPointCamera = %CenterPointCamera
 
@@ -18,8 +21,8 @@ func _ready() -> void:
 func _on_start_fight_button_pressed() -> void:
 	for entity: Entity in _entities:
 		# Disable auto-attack for manual control during prototyping
-		entity.auto_attack_enabled = true
-		entity.family_managers_enabled = false
+		entity.auto_attack_enabled = _auto_attack_enabled
+		entity.family_managers_enabled = _family_managers_enabled
 		entity.fighting_state = Entity.FightingState.FIGHTING
 		if entity is Hero:
 			entity.set_display_mode(Hero.DisplayMode.FIGHTING_PHASE)

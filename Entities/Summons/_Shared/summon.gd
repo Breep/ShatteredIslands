@@ -14,10 +14,8 @@ signal aa_done()
 @export_group("Configuration")
 
 @export_group("Local Nodes")
-@export var _animation_module: AnimationModule
 
 @export_group("Optional")
-@export var _auto_attack_module: AutoAttackModule
 
 #region ============================== Public variables ==============================
 var fighting_area: FightingArea
@@ -49,53 +47,6 @@ func get_auto_attack_spawn() -> Node3D:
 #endregion
 
 #region ===== Actions (Summon-specific overrides) =====
-var _pending_attacks: Array[AttackCommand]
-
-# Auto-attack with animation synchronization
-func attack(target: Entity) -> void:
-	if target == null:
-		return
-	
-	# Get auto-attack stats with modifiers from AutoAttackModule
-	var projectile_spawn := get_auto_attack_spawn()
-	var projectile_stats := _auto_attack_module.prepare_projectile_stats()
-	
-	# Build attack command with modifiers
-	var attack_cmd: AttackCommand = _action_module.build_projectile_attack(
-		target,
-		Projectile.ProjectileType.AUTO_ATTACK,
-		projectile_spawn,
-		projectile_stats
-	)
-	
-	if attack_cmd == null:
-		Verbose.error("Can't create an AttackCommand | " + entity_name, Verbose.Category.HERO)
-		return
-	
-	# Store for execution on animation hit frame
-	if _pending_attacks.is_empty():
-		_pending_attacks.append(attack_cmd)
-	else:
-		_pending_attacks[0] = attack_cmd
-	
-	# Trigger animation
-	auto_attack_started.emit(projectile_stats.physical_is_critical)
-
-# Instant projectile attack (spells, abilities) - no animation
-func projectile_attack(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
-	_action_module.projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
-
-
-func _on_animation_module_attack_hit_frame() -> void:
-	if _pending_attacks.is_empty():
-		# Can be empty if it's an critical strike, both hands attacks -> TODO: Maybe see if there is a better way
-		return
-	var attack_cmd: AttackCommand = _pending_attacks.pop_front()
-	if !is_instance_valid(attack_cmd.target) or attack_cmd.target.is_queued_for_deletion(): return
-	look_at_target_y_only(attack_cmd.target.global_position)
-	_action_module.projectile_attack(attack_cmd.target, attack_cmd.projectile_type, attack_cmd.spawn_node, attack_cmd.stats)
-
-
 #endregion
 
 #region ============================== Node base functions ==============================
@@ -114,8 +65,11 @@ func _enter_tree() -> void:
 
 
 func _summon_enter_tree() -> void:
-	# No modules to instantiate - inherited from Entity
-	pass
+	# Add AutoAttack Module
+	if _auto_attack_module == null:
+		var module: AutoAttackModule = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.AUTOATTACK].instantiate()
+		_auto_attack_module = module.init(self)
+		add_child(_auto_attack_module)
 func _ready() -> void:
 	_summon_ready()
 
@@ -128,7 +82,6 @@ func _summon_ready() -> void:
 	stats.health_changed.connect(_on_stats_health_changed)
 	fighting_state_changed.connect(_on_summon_fighting_state_changed)
 	_auto_attack_module.attack_done.connect(_on_aa_module_attack_done)
-	_animation_module.attack_hit_frame.connect(_on_animation_module_attack_hit_frame)
 	
 	_auto_attack_module.start()
 	_entity_ready()

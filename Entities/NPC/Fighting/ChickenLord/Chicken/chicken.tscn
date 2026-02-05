@@ -12,6 +12,8 @@
 [sub_resource type="Resource" id="Resource_x7yny"]
 script = ExtResource("2_x7yny")
 health_max = 10.0
+auto_attack_type = 1
+attack_range = 1.0
 attack_damage = 5.0
 attack_speed = 1.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
@@ -158,12 +160,11 @@ nodes/one_shot_idle/node = SubResource("AnimationNodeOneShot_5c32l")
 nodes/one_shot_idle/position = Vector2(60, 260)
 node_connections = [&"output", 0, &"transition_global", &"transition_fighting", 0, &"one_shot_idle", &"transition_fighting", 1, &"scale_walk", &"transition_fighting", 2, &"scale_run", &"transition_fighting", 3, &"scale_dance", &"transition_fighting", 4, &"scale_die", &"scale_dance", 0, &"anim_dance", &"scale_die", 0, &"anim_die", &"scale_idle", 0, &"anim_idle", &"one_shot_attack", 0, &"transition_fighting", &"one_shot_attack", 1, &"scale_attack", &"scale_run", 0, &"anim_run", &"one_shot_ultimate", 0, &"one_shot_attack", &"one_shot_ultimate", 1, &"scale_ultimate", &"scale_attack", 0, &"anim_attack", &"scale_walk", 0, &"anim_walk", &"scale_ultimate", 0, &"anim_ultimate", &"scale_idle_var", 0, &"anim_idle_var", &"transition_global", 0, &"anim_TPOSE", &"transition_global", 1, &"one_shot_ultimate", &"one_shot_idle", 0, &"scale_idle", &"one_shot_idle", 1, &"scale_idle_var"]
 
-[node name="Chicken" type="CharacterBody3D" unique_id=2109615854 node_paths=PackedStringArray("_animation_module", "_auto_attack_module", "_entity_info_panel_3d")]
+[node name="Chicken" type="CharacterBody3D" unique_id=2109615854 node_paths=PackedStringArray("_animation_module", "_entity_info_panel_3d")]
 collision_layer = 16
-collision_mask = 16
+collision_mask = 0
 script = ExtResource("1_k573r")
 _animation_module = NodePath("AnimationModule")
-_auto_attack_module = NodePath("AutoAttackModule")
 _entity_info_panel_3d = NodePath("EntityInfoPanel3d")
 custom_base_stats = SubResource("Resource_x7yny")
 
@@ -173,6 +174,23 @@ shape = SubResource("CapsuleShape3D_x7yny")
 
 [node name="ChickenVisual" parent="." unique_id=530887194 instance=ExtResource("2_k573r")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="Skeleton3D" parent="ChickenVisual" index="0" unique_id=416118163]
+bones/1/position = Vector3(0, 0.047381032, -0.004717756)
+bones/1/rotation = Quaternion(-0.7071016, 0.7071016, 0.0027074562, 0.002722331)
+bones/1/scale = Vector3(1, 1, 1.0026101)
+bones/2/rotation = Quaternion(0.83199865, 0.04164722, -0.5494833, -0.064124875)
+bones/3/rotation = Quaternion(0.96720886, 9.047426e-08, 0.2539824, -3.064464e-07)
+bones/4/rotation = Quaternion(-5.5819182e-08, 0.007207892, -2.9695197e-09, 0.999974)
+bones/5/rotation = Quaternion(-3.773232e-06, 0.9361406, -9.886281e-06, 0.35162592)
+bones/7/position = Vector3(0.06718646, -0.0814189, 0.026344841)
+bones/7/rotation = Quaternion(3.626069e-06, -0.38353658, 9.600184e-06, 0.9235257)
+bones/8/rotation = Quaternion(0.9932081, -1.5955072e-06, -0.11635131, 1.4483898e-05)
+bones/9/rotation = Quaternion(4.0781128e-08, -0.60039806, -2.2802024e-07, 0.79970133)
+bones/10/position = Vector3(0.06718645, 0.08142003, 0.026341427)
+bones/10/rotation = Quaternion(-7.0842357e-06, -0.9583842, -3.7334617e-06, 0.28548184)
+bones/11/rotation = Quaternion(0.9932081, 1.7259497e-06, -0.11635134, -1.4468616e-05)
+bones/12/rotation = Quaternion(4.817537e-08, -0.60039806, 2.3136849e-07, 0.79970133)
 
 [node name="AnimationPlayer" parent="ChickenVisual" index="1" unique_id=777400876]
 script = ExtResource("4_qjgos")

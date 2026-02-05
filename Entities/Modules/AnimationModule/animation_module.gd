@@ -6,6 +6,10 @@ signal attack_hit_frame()
 const IDLE_VAR_TIMER_MIN_WAIT_TIME: float = 5.0
 const IDLE_VAR_TIMER_MAX_WAIT_TIME: float = 15.0
 
+# Speed thresholds for animation transitions
+const WALK_SPEED_THRESHOLD: float = 0.1
+const RUN_SPEED_THRESHOLD: float = 5.0
+
 @export var _animation_tree: AnimationTree
 @export var _animation_player: EntityAnimationPlayer
 @export var _entity_owner: Entity
@@ -43,6 +47,7 @@ const PARAM_ONE_SHOT_SITTING: String = "parameters/one_shot_sitting/request"
 @onready var _rng := RandomNumberGenerator.new()
 
 var _idle_variation_timer: Timer
+var _current_movement_state: String = VALUE_TRANSITION_FIGHTING_IDLE
 
 func _ready() -> void:
 	if _entity_owner == null:
@@ -66,6 +71,28 @@ func _ready() -> void:
 	
 	_animation_tree.set(PARAM_TRANSITION_GLOBAL, VALUE_TRANSITION_GLOBAL_FIGHTING)
 	_animation_tree.set(PARAM_TRANSITION_FIGHTING, VALUE_TRANSITION_FIGHTING_IDLE)
+
+
+func _process(_delta: float) -> void:
+	if _entity_owner == null:
+		return
+	
+	# Check entity velocity to determine movement animation
+	var velocity_magnitude: float = _entity_owner.velocity.length()
+	
+	var target_state: String = VALUE_TRANSITION_FIGHTING_IDLE
+	
+	if velocity_magnitude >= RUN_SPEED_THRESHOLD:
+		target_state = VALUE_TRANSITION_FIGHTING_RUN
+	elif velocity_magnitude >= WALK_SPEED_THRESHOLD:
+		target_state = VALUE_TRANSITION_FIGHTING_WALK
+	else:
+		target_state = VALUE_TRANSITION_FIGHTING_IDLE
+	
+	# Only update if state changed
+	if target_state != _current_movement_state:
+		_current_movement_state = target_state
+		_animation_tree.set(PARAM_TRANSITION_FIGHTING, target_state)
 
 #region signals
 func _on_entity_owner_fighting_state_changed(new_state: Entity.FightingState) -> void:
