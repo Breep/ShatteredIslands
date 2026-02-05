@@ -120,6 +120,11 @@ var _base_stats: EntityStats # Private, use base_stats property to access
 var _auto_attack_module: AutoAttackModule # Optional, can be null
 var _action_module: ActionModule
 var _interact_module: InteractModule
+var _movement_module: MovementModule # Optional, can be null
+
+# Approach target for auto-attacks
+var _is_approaching_target: bool = false
+var _approach_target: Entity = null
 #endregion
 
 #region ============================== Export ==============================
@@ -212,7 +217,10 @@ func _entity_enter_tree() -> void:
 	if _interact_module == null:
 		_interact_module = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.INTERACT].instantiate().init(self)
 		add_child(_interact_module)
-
+	
+	if _movement_module == null:
+		_movement_module = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.MOVEMENT].instantiate().init(self)
+		add_child(_movement_module)
 
 func _ready() -> void:
 	_entity_ready()
@@ -222,9 +230,33 @@ func _entity_ready() -> void:
 	Verbose.debug("Entity [" + entity_name + "] ready", Verbose.Category.ENTITY)
 	fighting_state_changed.connect(_on_entity_fighting_state_changed)
 	
-	# Connect AnimationModule if present
 	if _animation_module != null:
 		_animation_module.attack_hit_frame.connect(_on_animation_module_attack_hit_frame)
+
+
+func _process(_delta: float) -> void:
+	# Check if we're approaching a target and if we're now in range
+	if _is_approaching_target and _approach_target != null:
+		# Check if target is still valid
+		if not is_instance_valid(_approach_target) or _approach_target.is_queued_for_deletion() or _approach_target.is_dead:
+			# Target died/disappeared, stop approaching
+			Verbose.debug("Target died/disappeared during approach", Verbose.Category.ENTITY)
+			_stop_approaching()
+			signal_auto_attack_completed()
+			return
+		
+		# Debug: log distance and range
+		var distance: float = global_position.distance_to(_approach_target.global_position)
+		var attack_range: float = stats.attack_range
+		Verbose.debug("Approaching... Distance: " + str(distance) + " | Range: " + str(attack_range), Verbose.Category.ENTITY)
+		
+		# Check if we're now in range
+		if target_module.is_in_attack_range(_approach_target):
+			# We're in range! Stop movement and launch the attack
+			Verbose.debug("Now in range! Launching attack", Verbose.Category.ENTITY)
+			_stop_approaching()
+			# Call auto_attack again, this time we'll be in range
+			auto_attack(_approach_target)
 #endregion
 
 #region ============================== Public functions ==============================
@@ -288,8 +320,17 @@ func auto_attack(target: Entity) -> void:
 	
 	# Check range (-1 = unlimited)
 	if stats.attack_range >= 0 and not target_module.is_in_attack_range(target):
-		# TODO: Future - Handle movement to get in range
-		return
+		# Target is out of range, start approaching if we have a MovementModule
+		if _movement_module != null:
+			_is_approaching_target = true
+			_approach_target = target
+			_movement_module.follow_entity(target)
+			# Don't emit auto_attack_completed yet, we're approaching
+			return
+		else:
+			# No MovementModule, can't approach - complete attack immediately
+			signal_auto_attack_completed()
+			return
 	
 	# Look at target at START of attack
 	look_at_target_y_only(target.global_position)
@@ -430,6 +471,13 @@ func take_dispell(value: float, is_critical: bool, action_id: StringName, source
 #endregion
 
 #region ============================== Private functions ==============================
+func _stop_approaching() -> void:
+	_is_approaching_target = false
+	_approach_target = null
+	if _movement_module != null:
+		_movement_module.stop_following()
+
+
 func _on_entity_fighting_state_changed(new_fighting_state: FightingState) -> void:
 	Verbose.debug("Entity [" + entity_name + "] fighting state changed to [" + str(FightingState.keys()[new_fighting_state]) + "]", Verbose.Category.ENTITY)
 	match new_fighting_state:

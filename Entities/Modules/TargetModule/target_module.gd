@@ -195,6 +195,9 @@ func get_targets(strategy: MultipleTargettingStrategy, radius: float = -1.0) -> 
 
 ## Check if entity is within attack range
 func is_in_attack_range(entity: Entity) -> bool:
+	# -1 means unlimited range
+	if _owner.stats.attack_range < 0:
+		return true
 	return entity.global_position.distance_squared_to(_owner.global_position) <= _owner.stats.attack_range * _owner.stats.attack_range
 
 
