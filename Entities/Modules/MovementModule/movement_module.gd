@@ -43,6 +43,8 @@ func stop_following() -> void:
 	_follow_entity = false
 	_target_entity = null
 	_is_moving = false
+	# Reset velocity so animation can return to idle
+	_owner.velocity = Vector3.ZERO
 
 
 func _process(delta: float) -> void:
@@ -65,9 +67,12 @@ func _move_toward_target(delta: float):
 	if _target_position == null or _owner.global_position.distance_to(_target_position) < 0.1:
 		if not _follow_entity:
 			_is_moving = false
+			# Reset velocity so animation can return to idle
+			_owner.velocity = Vector3.ZERO
 		return
 	
 	var direction: Vector3 = (_target_position - _owner.global_position).normalized()
+	_owner.look_at_target_y_only(_target_position)
 	_owner.velocity = direction * _get_move_speed() * delta
 	_owner.move_and_slide()
 

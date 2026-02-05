@@ -240,20 +240,13 @@ func _process(_delta: float) -> void:
 		# Check if target is still valid
 		if not is_instance_valid(_approach_target) or _approach_target.is_queued_for_deletion() or _approach_target.is_dead:
 			# Target died/disappeared, stop approaching
-			Verbose.debug("Target died/disappeared during approach", Verbose.Category.ENTITY)
 			_stop_approaching()
 			signal_auto_attack_completed()
 			return
 		
-		# Debug: log distance and range
-		var distance: float = global_position.distance_to(_approach_target.global_position)
-		var attack_range: float = stats.attack_range
-		Verbose.debug("Approaching... Distance: " + str(distance) + " | Range: " + str(attack_range), Verbose.Category.ENTITY)
-		
 		# Check if we're now in range
 		if target_module.is_in_attack_range(_approach_target):
 			# We're in range! Stop movement and launch the attack
-			Verbose.debug("Now in range! Launching attack", Verbose.Category.ENTITY)
 			# IMPORTANT: Save target before _stop_approaching() sets it to null
 			var target_to_attack: Entity = _approach_target
 			_stop_approaching()

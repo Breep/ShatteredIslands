@@ -35,6 +35,7 @@ func _init(base_stats: EntityStats, current_stats: EntityStats) -> void:
 	
 	_entity_base_stats = base_stats
 	_entity_stats = current_stats
+	_entity_stats.auto_attack_type = _entity_base_stats.auto_attack_type
 	_entity_base_stats.has_been_reset.connect(_on_entity_base_stats_has_been_reset)
 	for stat_type: EntityStats.StatType in _stats_modifiers_dictionaries.keys():
 		_stats_modifiers_dictionaries[stat_type].setup(stat_type, _entity_stats, _entity_base_stats)
