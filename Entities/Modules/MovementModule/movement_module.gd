@@ -18,6 +18,13 @@ func set_target_position(target_position: Vector3) -> void:
 	_is_moving = true
 
 
+func move_to_entity(entity: Entity) -> void:
+	if entity:
+		set_target_position(entity.global_position)
+	else:
+		printerr("MovementModule.move_to_entity: entity is null")
+
+
 func _process(delta: float) -> void:
 	if _is_stopped:
 		return
@@ -38,5 +45,4 @@ func _move_toward_target(delta: float):
 
 
 func _get_move_speed() -> float:
-	var move_speed: float = _owner.stats.move_speed
-	return move_speed
+	return _owner.stats.move_speed
