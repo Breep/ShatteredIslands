@@ -91,7 +91,7 @@ func _ready() -> void:
 	if target:
 		target.died.connect(_on_target_died)
 	_start_pos = global_position
-	_vertical_offset = 1.0 + Utils.rng.randf_range(-_vertical_spread, _vertical_spread)
+	_vertical_offset =  0.1 + Utils.rng.randf_range(0, _vertical_spread) #Utils.rng.randf_range(-_vertical_spread, _vertical_spread)
 	_projectile_conf = PROJECTILE_CONF_REF[projectile_type]
 	_update_conf()
 	_update_visual()
@@ -127,7 +127,6 @@ func _on_body_entered(body: Node3D) -> void:
 		if not multiplayer.is_server():
 			queue_free()
 			return
-	
 		var physical_damage: float = stats.physical_damage_flat
 		if physical_damage > 0:
 			physical_damage_done_flat = hit_target.take_damage(
