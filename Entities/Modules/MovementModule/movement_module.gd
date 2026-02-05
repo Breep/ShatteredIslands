@@ -47,13 +47,13 @@ func stop_following() -> void:
 	_owner.velocity = Vector3.ZERO
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if _is_stopped:
 		return
-	_move_toward_target(delta)
+	_move_toward_target()
 
 
-func _move_toward_target(delta: float):
+func _move_toward_target() -> void:
 	if not _is_moving:
 		return
 	
@@ -73,9 +73,10 @@ func _move_toward_target(delta: float):
 	
 	var direction: Vector3 = (_target_position - _owner.global_position).normalized()
 	_owner.look_at_target_y_only(_target_position)
-	_owner.velocity = direction * _get_move_speed() * delta
+	# Velocity should be in units per second, move_and_slide handles delta internally
+	_owner.velocity = direction * _get_move_speed()
 	_owner.move_and_slide()
 
 
 func _get_move_speed() -> float:
-	return 1000.0
+	return 10 # _owner.stats.move_speed

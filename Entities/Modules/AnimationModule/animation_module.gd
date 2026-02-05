@@ -83,7 +83,6 @@ func _process(_delta: float) -> void:
 	var target_state: String = VALUE_TRANSITION_FIGHTING_IDLE
 	
 	if velocity_magnitude >= RUN_SPEED_THRESHOLD:
-		print(velocity_magnitude)
 		target_state = VALUE_TRANSITION_FIGHTING_RUN
 	elif velocity_magnitude >= WALK_SPEED_THRESHOLD:
 		target_state = VALUE_TRANSITION_FIGHTING_WALK
