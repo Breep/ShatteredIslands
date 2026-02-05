@@ -717,3 +717,13 @@ func _on_summon_entity_button_pressed() -> void:
 	print("DEBUG: summon_entity called - Type: ", Entity.EntityType.keys()[entity_type],
 		" | Spawn: ", SpawnLocationConfig.LocationType.keys()[spawn_type],
 		" | Modifiers: ", entity_modifier)
+
+
+func _on_auto_attack_button_pressed() -> void:
+	if entity_owner == null:
+		printerr("EntityController: No entity_owner for cast_ultimate")
+		return
+	
+	_refresh_target()
+	entity_owner.auto_attack(_target)
+	print("DEBUG: auto_attack called")
