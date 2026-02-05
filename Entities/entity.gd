@@ -254,9 +254,11 @@ func _process(_delta: float) -> void:
 		if target_module.is_in_attack_range(_approach_target):
 			# We're in range! Stop movement and launch the attack
 			Verbose.debug("Now in range! Launching attack", Verbose.Category.ENTITY)
+			# IMPORTANT: Save target before _stop_approaching() sets it to null
+			var target_to_attack: Entity = _approach_target
 			_stop_approaching()
 			# Call auto_attack again, this time we'll be in range
-			auto_attack(_approach_target)
+			auto_attack(target_to_attack)
 #endregion
 
 #region ============================== Public functions ==============================
@@ -316,6 +318,7 @@ var _pending_melee_attacks: Array[MeleeAttackCommand]
 
 func auto_attack(target: Entity) -> void:
 	if target == null or _auto_attack_module == null:
+		printerr("Can't auto attack | " + entity_name)
 		return
 	
 	# Check range (-1 = unlimited)
