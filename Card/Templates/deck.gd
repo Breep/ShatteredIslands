@@ -14,6 +14,8 @@ var families_count: Dictionary[Family.FamilyType, int]:
 func get_card(uid: int) -> Card:
 	return _card_pile[uid] if _card_pile.has(uid) else null
 
+func get_cards_raw() -> Array[Card]:
+	return _card_pile.values()
 
 func add_card(card_to_add: Card) -> void:
 	if card_to_add == null:

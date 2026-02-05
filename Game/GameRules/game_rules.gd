@@ -3,10 +3,12 @@ extends Resource
 
 @export_group("Cards rules")
 @export_subgroup("Cards number")
-@export var common_number: int = 25
-@export var rare_number: int = 10
-@export var epic_number: int = 5
-@export var legendary_number: int = 3
+@export var rarity_card_numbers: Dictionary[Card.Rarity, int] = {
+	Card.Rarity.COMMON: 25,
+	Card.Rarity.RARE: 10,
+	Card.Rarity.EPIC: 5,
+	Card.Rarity.LEGENDARY: 3,
+}
 
 @export_subgroup("Family rules")
 @export var rarity_card_values: Dictionary[Card.Rarity, int] = {
@@ -47,6 +49,7 @@ extends Resource
 @export var common_price: int = 100
 @export var rare_price: int = 100
 @export var epic_price: int = 100
+@export var legendary_price: int = 100
 
 @export_group("Oracle shop rules")
 @export var buy_xp_price: int = 50
