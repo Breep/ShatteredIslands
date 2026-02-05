@@ -450,8 +450,6 @@ func _get_random(entities: Array[Entity], excluded_entity: Entity) -> Entity:
 	if entities.is_empty():
 		return null
 	
-	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
-	rng.randomize()
 	var entities_copy: Array[Entity] = _get_alive_entities(entities).duplicate()
 	entities_copy.erase(excluded_entity)
 	if entities_copy.is_empty():
@@ -461,17 +459,13 @@ func _get_random(entities: Array[Entity], excluded_entity: Entity) -> Entity:
 	if entities_copy.is_empty():
 		return null
 	
-	entities_copy = _get_array_without_untargetable_targets(entities_copy)
-	if entities_copy.is_empty():
-		return null
-	
-	return entities_copy[rng.randi_range(0, entities_copy.size() - 1)]
+	return entities_copy.pick_random()
 
 
 func _get_array_without_untargetable_targets(entities: Array[Entity]) -> Array[Entity]:
-	var entities_copy: Array[Entity] = entities.duplicate()
+	# var entities_copy: Array[Entity] = entities.duplicate()
 	# TODO Here it was for shadow untargetable. Maybe some heroes will have untargetable ultimate
-	return entities_copy
+	return entities
 
 # ============================== "Target from" strategies functions ==============================
 

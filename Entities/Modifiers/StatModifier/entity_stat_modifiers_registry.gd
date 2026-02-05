@@ -21,6 +21,7 @@ func _init(base_stats: EntityStats, current_stats: EntityStats) -> void:
 	_stats_modifiers_dictionaries[EntityStats.StatType.MANA_REGEN] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.AD] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.AA_SPEED] = StatModifierDictionary.new()
+	_stats_modifiers_dictionaries[EntityStats.StatType.ATTACK_RANGE] = StatModifierDictionary.new()
 	
 	# Multiple stats
 	_stats_modifiers_dictionaries[EntityStats.StatType.CRIT_CHANCE] = StatModifierDictionary.new()

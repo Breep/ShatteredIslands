@@ -10,6 +10,7 @@ enum StatType {
 	MANA_REGEN,
 	AD,
 	AA_SPEED,
+	ATTACK_RANGE,
 	CRIT_CHANCE,
 	CRIT_CHANCE_GLOBAL,
 	CRIT_MULT,
@@ -200,6 +201,7 @@ func get_stat(stat_type: StatType, action_type: Utils.ActionType = Utils.ActionT
 		EntityStats.StatType.MANA_REGEN: return _mana_regen
 		EntityStats.StatType.AD: return float(_attack_damage)
 		EntityStats.StatType.AA_SPEED: return _attack_speed
+		EntityStats.StatType.ATTACK_RANGE: return _attack_range
 		EntityStats.StatType.CRIT_CHANCE: return _critical_chances.get(action_type, 0.0)
 		EntityStats.StatType.CRIT_MULT: return _critical_multipliers.get(action_type, 100.0)
 		EntityStats.StatType.RESISTANCE: return _resistances.get(action_type, 0.0)
@@ -222,6 +224,7 @@ func update_stat(stat_type: StatType, value: float, action_type: Utils.ActionTyp
 		EntityStats.StatType.MANA_REGEN: mana_regen = value
 		EntityStats.StatType.AD: attack_damage = value
 		EntityStats.StatType.AA_SPEED: attack_speed = value
+		EntityStats.StatType.ATTACK_RANGE: attack_range = value
 		EntityStats.StatType.CRIT_CHANCE:
 			_critical_chances[action_type] = value
 			critical_chance_changed.emit(value, action_type)
