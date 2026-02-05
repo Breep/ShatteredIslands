@@ -54,6 +54,10 @@ func signal_stack_taken(stack_type: Utils.StackType, stack_number: float, is_cri
 signal auto_attack_started(is_critical: bool)
 func signal_auto_attack_started(is_critical: bool) -> void:
 	auto_attack_started.emit(is_critical)
+
+signal auto_attack_completed()
+func signal_auto_attack_completed() -> void:
+	auto_attack_completed.emit()
 #endregion
 
 #region ============================== Enums ==============================
@@ -326,6 +330,8 @@ func _ranged_auto_attack(target: Entity) -> void:
 			attack_cmd.spawn_node,
 			attack_cmd.stats
 		)
+		# No animation, attack completes immediately
+		signal_auto_attack_completed()
 
 
 func _melee_auto_attack(target: Entity) -> void:
@@ -340,6 +346,8 @@ func _melee_auto_attack(target: Entity) -> void:
 		auto_attack_started.emit(attack_stats.physical_is_critical)
 	else:
 		_execute_melee_attack(melee_cmd)
+		# No animation, attack completes immediately
+		signal_auto_attack_completed()
 
 
 func _execute_melee_attack(cmd: MeleeAttackCommand) -> void:
@@ -388,6 +396,8 @@ func _on_animation_module_attack_hit_frame() -> void:
 	if not _pending_melee_attacks.is_empty():
 		var melee_cmd: MeleeAttackCommand = _pending_melee_attacks.pop_front()
 		_execute_melee_attack(melee_cmd)
+	
+	signal_auto_attack_completed()
 
 func summon_entity(entity_type: EntityType, spawn_config: SpawnLocationConfig, entity_modifier: Dictionary) -> void:
 	_action_module.summon_entity(entity_type, spawn_config, entity_modifier)

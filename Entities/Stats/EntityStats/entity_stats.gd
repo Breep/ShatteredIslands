@@ -159,7 +159,7 @@ signal weakness_changed(new_weakness: float, action_type: Utils.ActionType)
 #region ============================== Public functions ==============================
 func reset_from_hero_desc(hero: HeroDesc, lvl: int) -> EntityStats:
 	if lvl < 1 or lvl > 10:
-		Verbose.error("reset_from_hero_desc() - Invalid hero level [" + lvl + "]", Verbose.Category.ENTITY)
+		Verbose.error("reset_from_hero_desc() - Invalid hero level [" + str(lvl) + "]", Verbose.Category.ENTITY)
 		return self
 	
 	health_max = hero.stats[lvl].health_max
