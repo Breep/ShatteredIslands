@@ -118,7 +118,7 @@ func _on_auto_attack_timer_timeout() -> void:
 	if _current_phase != AttackPhase.COOLDOWN:
 		return
 	
-	var target = _owner.target_module.get_target_in_range(_attack_strategy)
+	var target = _owner.target_module.get_target(_attack_strategy)
 	current_target = target
 	if target == null:
 		# No target, restart cooldown timer
