@@ -12,9 +12,8 @@
 [sub_resource type="Resource" id="Resource_x7yny"]
 script = ExtResource("2_x7yny")
 health_max = 10.0
-auto_attack_type = 1
-attack_range = 1.0
-attack_damage = 5.0
+attack_range = 6.0
+attack_damage = 3.0
 attack_speed = 1.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
@@ -160,10 +159,11 @@ nodes/one_shot_idle/node = SubResource("AnimationNodeOneShot_5c32l")
 nodes/one_shot_idle/position = Vector2(60, 260)
 node_connections = [&"output", 0, &"transition_global", &"transition_fighting", 0, &"one_shot_idle", &"transition_fighting", 1, &"scale_walk", &"transition_fighting", 2, &"scale_run", &"transition_fighting", 3, &"scale_dance", &"transition_fighting", 4, &"scale_die", &"scale_dance", 0, &"anim_dance", &"scale_die", 0, &"anim_die", &"scale_idle", 0, &"anim_idle", &"one_shot_attack", 0, &"transition_fighting", &"one_shot_attack", 1, &"scale_attack", &"scale_run", 0, &"anim_run", &"one_shot_ultimate", 0, &"one_shot_attack", &"one_shot_ultimate", 1, &"scale_ultimate", &"scale_attack", 0, &"anim_attack", &"scale_walk", 0, &"anim_walk", &"scale_ultimate", 0, &"anim_ultimate", &"scale_idle_var", 0, &"anim_idle_var", &"transition_global", 0, &"anim_TPOSE", &"transition_global", 1, &"one_shot_ultimate", &"one_shot_idle", 0, &"scale_idle", &"one_shot_idle", 1, &"scale_idle_var"]
 
-[node name="Chicken" type="CharacterBody3D" unique_id=2109615854 node_paths=PackedStringArray("_animation_module", "_entity_info_panel_3d")]
+[node name="Chicken" type="CharacterBody3D" unique_id=2109615854 node_paths=PackedStringArray("_visual_3d", "_animation_module", "_entity_info_panel_3d")]
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("1_k573r")
+_visual_3d = NodePath("ChickenVisual")
 _animation_module = NodePath("AnimationModule")
 _entity_info_panel_3d = NodePath("EntityInfoPanel3d")
 custom_base_stats = SubResource("Resource_x7yny")

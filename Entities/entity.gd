@@ -58,10 +58,15 @@ func signal_auto_attack_started(is_critical: bool) -> void:
 signal auto_attack_completed()
 func signal_auto_attack_completed() -> void:
 	auto_attack_completed.emit()
+
+signal spawn_completed()
+func signal_spawn_completed() -> void:
+	spawn_completed.emit()
 #endregion
 
 #region ============================== Enums ==============================
 enum FightingState {
+	SPAWNING,
 	IDLE,
 	FIGHTING,
 	CELEBRATING,
@@ -125,12 +130,23 @@ var _movement_module: MovementModule # Optional, can be null
 # Approach target for auto-attacks
 var _is_approaching_target: bool = false
 var _approach_target: Entity = null
+
+# Spawn system
+var _original_collision_layer: int = 0
+var _original_fighting_state: FightingState = FightingState.UNDEF
+var _is_spawning: bool = false
+var _spawn_tween: Tween = null
 #endregion
 
 #region ============================== Export ==============================
 @export var id: int = -1 # Multiplayer ID of the entity
 @export var team: int = -1 # Team number of the entity
 @export var battle_id: int = -1 # The id of the battle the entity is in
+
+# Spawn settings
+@export var _visual_3d: Node3D # Visual node for spawn animation
+@export var spawn_duration: float = 0.5 # Duration of spawn animation in seconds
+@export var skip_spawn_animation: bool = false # Skip spawn animation for instant spawn
 @export var entity_name: String = "<entity name>"
 #endregion
 
@@ -221,6 +237,11 @@ func _entity_enter_tree() -> void:
 	if _movement_module == null:
 		_movement_module = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.MOVEMENT].instantiate().init(self)
 		add_child(_movement_module)
+	
+	_original_collision_layer = collision_layer
+	_original_fighting_state = fighting_state
+	collision_layer = 0
+	_is_spawning = true
 
 func _ready() -> void:
 	_entity_ready()
@@ -232,6 +253,9 @@ func _entity_ready() -> void:
 	
 	if _animation_module != null:
 		_animation_module.attack_hit_frame.connect(_on_animation_module_attack_hit_frame)
+	
+	# Start spawn sequence instead of starting modules directly
+	_start_spawn()
 
 
 func _process(_delta: float) -> void:
@@ -472,6 +496,52 @@ func _stop_approaching() -> void:
 	_approach_target = null
 	if _movement_module != null:
 		_movement_module.stop_following()
+
+
+# ============================== Spawn system ==============================
+func _start_spawn() -> void:
+	"""Initiate spawn sequence - set state to SPAWNING and play animation."""
+	fighting_state = FightingState.SPAWNING
+	Verbose.debug("Entity [" + entity_name + "] starting spawn", Verbose.Category.ENTITY)
+	
+	if skip_spawn_animation:
+		_complete_spawn()
+		return
+	
+	# Call virtual animation function (can be overridden by children)
+	_play_spawn_animation()
+
+
+func _play_spawn_animation() -> void:
+	"""
+	Virtual function: Play spawn animation.
+	Override this in child classes for custom spawn animations.
+	Default: Bounce scale animation on _visual_3d.
+	"""
+	if _visual_3d != null:
+		_visual_3d.scale = Vector3.ZERO
+		_spawn_tween = create_tween()
+		_spawn_tween.set_ease(Tween.EASE_OUT)
+		_spawn_tween.set_trans(Tween.TRANS_BACK)
+		_spawn_tween.tween_property(_visual_3d, "scale", Vector3.ONE, spawn_duration)
+		_spawn_tween.finished.connect(_complete_spawn)
+	else:
+		# No visual node, complete immediately
+		Verbose.warn("Entity [" + entity_name + "] has no _visual_3d for spawn animation", Verbose.Category.ENTITY)
+		_complete_spawn()
+
+
+func _complete_spawn() -> void:
+	"""Complete spawn sequence - restore collision, start modules, transition to FIGHTING."""
+	_is_spawning = false
+	
+	# Restore collision layer for targetability
+	collision_layer = _original_collision_layer
+	fighting_state = _original_fighting_state
+	
+	# Transition to fighting state
+	signal_spawn_completed()
+	Verbose.debug("Entity [" + entity_name + "] spawn completed", Verbose.Category.ENTITY)
 
 
 func _on_entity_fighting_state_changed(new_fighting_state: FightingState) -> void:
