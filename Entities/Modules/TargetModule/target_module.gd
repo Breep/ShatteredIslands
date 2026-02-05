@@ -65,9 +65,20 @@ var _heroes: Array[Entity] # All heroes
 var _enemy_heroes: Array[Entity] # All heroes enemies
 var _ally_heroes: Array[Entity] # All heroes allies
 
+# Attack range detection
+var _entities_in_attack_range: Array[Entity]
+var _enemies_in_attack_range: Array[Entity]
+var _allies_in_attack_range: Array[Entity]
+var _heroes_in_attack_range: Array[Entity]
+var _enemy_heroes_in_attack_range: Array[Entity]
+var _ally_heroes_in_attack_range: Array[Entity]
+var _attack_range_enabled: bool = false
+
 # ============================== Local nodes ==============================
 
 @onready var _scanning_area: Area3D = %ScanningArea
+@onready var _attack_range_area: Area3D = %AttackRangeArea
+@onready var _attack_range_shape: CollisionShape3D = %AttackRangeShape
 
 # ============================== Node base functions ==============================
 
@@ -75,6 +86,13 @@ func _ready() -> void:
 	if _owner == null:
 		printerr("TargetModule: TargetModule need a ref to its owner")
 		return
+	
+	# Connect attack range signals
+	_attack_range_area.body_entered.connect(_on_attack_range_body_entered)
+	_attack_range_area.body_exited.connect(_on_attack_range_body_exited)
+	
+	# Listen to attack range stat changes
+	_owner.stats.attack_range_changed.connect(_on_owner_attack_range_changed)
 
 # ============================== Public functions ==============================
 
@@ -84,10 +102,21 @@ func start() -> void:
 	var bodies: Array[Node3D] = _scanning_area.get_overlapping_bodies()
 	for body in bodies:
 		_add_body_as_entity(body)
+	
+	# Only enable attack range area if range is limited (> 0)
+	if _owner.stats.attack_range > 0:
+		_attack_range_enabled = true
+		_update_attack_range_size()
+		_attack_range_area.monitoring = true
+	else:
+		_attack_range_enabled = false
+		_attack_range_area.monitoring = false
 
 
 func stop() -> void:
 	_scanning_area.monitoring = false
+	_attack_range_area.monitoring = false
+	_entities_in_attack_range.clear()
 
 
 # Get target of the owned entity from a given strategy
@@ -127,6 +156,63 @@ func get_target(targetting_strategy: TargettingStrategy) -> Entity:
 		
 	push_error("TargetModule: Undef strategy for the TargetModule")
 	return null
+
+
+## Get target using strategy, filtered by attack range
+## Returns null if no valid target in range
+func get_target_in_range(targetting_strategy: TargettingStrategy) -> Entity:
+	if not _attack_range_enabled:
+		# No range limit, use normal targeting
+		return get_target(targetting_strategy)
+	
+	match targetting_strategy:
+		# --- DISTANCE ---
+		TargettingStrategy.CLOSEST: return _get_closest(_entities_in_attack_range, _owner)
+		TargettingStrategy.CLOSEST_ENEMY: return _get_closest(_enemies_in_attack_range, null)
+		TargettingStrategy.CLOSEST_ALLY: return _get_closest(_allies_in_attack_range, _owner)
+		TargettingStrategy.FARTHEST: return _get_farthest(_entities_in_attack_range, _owner)
+		TargettingStrategy.FARTHEST_ENEMY: return _get_farthest(_enemies_in_attack_range, null)
+		TargettingStrategy.FARTHEST_ALLY: return _get_farthest(_allies_in_attack_range, _owner)
+		
+		# --- RANDOM ---
+		TargettingStrategy.RANDOM: return _get_random(_entities_in_attack_range, _owner)
+		TargettingStrategy.RANDOM_ENEMY: return _get_random(_enemies_in_attack_range, null)
+		TargettingStrategy.RANDOM_HERO_ENEMY: return _get_random(_enemy_heroes_in_attack_range, null)
+		TargettingStrategy.RANDOM_ALLY: return _get_random(_allies_in_attack_range, _owner)
+		TargettingStrategy.RANDOM_ALLY_INCLUDING_SELF: return _get_random(_allies_in_attack_range, null)
+		
+		# --- HP ---
+		TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF: return _get_lowest_hp(_allies_in_attack_range, null)
+		TargettingStrategy.HIGHEST_HP_ENEMY: return _get_highest_hp(_enemies_in_attack_range, null)
+		TargettingStrategy.HIGHEST_HP_HERO_ENEMY: return _get_highest_hp(_enemy_heroes_in_attack_range, null)
+		TargettingStrategy.LOWEST_HP_PERCENT_ENEMY: return _get_lowest_hp_percent(_enemies_in_attack_range, null)
+		TargettingStrategy.HIGHEST_HP_PERCENT_ENEMY: return _get_highest_hp_percent(_enemies_in_attack_range, null)
+		TargettingStrategy.HIGHEST_HP_PERCENT_HERO_ENEMY: return _get_highest_hp_percent(_enemy_heroes_in_attack_range, null)
+		
+		# --- SHIELD ---
+		TargettingStrategy.HIGHEST_SHIELD_ENEMIES_HERO: return _get_highest_shield(_enemy_heroes_in_attack_range, _owner)
+		TargettingStrategy.HIGHEST_SHIELD_ALLIES_HERO: return _get_highest_shield(_ally_heroes_in_attack_range, null)
+	
+	push_error("TargetModule: Undef strategy for get_target_in_range()")
+	return null
+
+
+## Check if entity is within attack range
+func is_in_attack_range(entity: Entity) -> bool:
+	if not _attack_range_enabled:
+		return true # Unlimited range
+	return _entities_in_attack_range.has(entity)
+
+
+## Get enemies within attack range
+func get_enemies_in_attack_range() -> Array[Entity]:
+	if not _attack_range_enabled:
+		return _enemies.duplicate()
+	var result: Array[Entity]
+	for entity in _entities_in_attack_range:
+		if entity.team != _owner.team:
+			result.append(entity)
+	return result
 
 
 # Get closest entity of "from_entity" who is an enemy of source
@@ -445,3 +531,62 @@ func _on_scanning_area_body_exited(body: Node3D) -> void:
 	if entity.team == _owner.team and _allies.has(entity): _allies.erase(entity)
 	elif entity.team == _owner.team and _enemies.has(entity): _enemies.append(entity)
 	if _entities.has(entity): _enemies.erase(entity)
+
+
+# ============================== Attack Range Callbacks ==============================
+func _update_attack_range_size() -> void:
+	if _owner.stats == null:
+		return
+	var sphere := SphereShape3D.new()
+	sphere.radius = _owner.stats.attack_range
+	_attack_range_shape.shape = sphere
+
+
+func _on_attack_range_body_entered(body: Node3D) -> void:
+	if not body is Entity or body == _owner:
+		return
+	var entity: Entity = body
+	_entities_in_attack_range.append(entity)
+	if entity.team == _owner.team:
+		_allies_in_attack_range.append(entity)
+	else:
+		_enemies_in_attack_range.append(entity)
+	if entity is Hero:
+		_heroes_in_attack_range.append(entity)
+		if entity.team == _owner.team:
+			_ally_heroes_in_attack_range.append(entity)
+		else:
+			_enemy_heroes_in_attack_range.append(entity)
+
+
+func _on_attack_range_body_exited(body: Node3D) -> void:
+	if not body is Entity:
+		return
+	var entity: Entity = body
+	_entities_in_attack_range.erase(entity)
+	_enemies_in_attack_range.erase(entity)
+	_allies_in_attack_range.erase(entity)
+	_heroes_in_attack_range.erase(entity)
+	_enemy_heroes_in_attack_range.erase(entity)
+	_ally_heroes_in_attack_range.erase(entity)
+
+
+func _on_owner_attack_range_changed(new_range: float) -> void:
+	# Clear all attack range arrays
+	_entities_in_attack_range.clear()
+	_enemies_in_attack_range.clear()
+	_allies_in_attack_range.clear()
+	_heroes_in_attack_range.clear()
+	_enemy_heroes_in_attack_range.clear()
+	_ally_heroes_in_attack_range.clear()
+	
+	if new_range > 0:
+		_attack_range_enabled = true
+		_update_attack_range_size()
+		_attack_range_area.monitoring = true
+		# Rescan entities in range
+		for body in _attack_range_area.get_overlapping_bodies():
+			_on_attack_range_body_entered(body)
+	else:
+		_attack_range_enabled = false
+		_attack_range_area.monitoring = false

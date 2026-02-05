@@ -276,16 +276,32 @@ func direct_damage_percent(target: Entity, damage_percent: float, damage_type: U
 
 # Auto-attack with animation synchronization (if AnimationModule present)
 var _pending_attacks: Array[AttackCommand]
+var _pending_melee_attacks: Array[MeleeAttackCommand]
 
 func auto_attack(target: Entity) -> void:
 	if target == null or _auto_attack_module == null:
 		return
 	
-	# Get auto-attack stats with modifiers from AutoAttackModule
+	# Check range (-1 = unlimited)
+	if stats.attack_range >= 0 and not target_module.is_in_attack_range(target):
+		# TODO: Future - Handle movement to get in range
+		return
+	
+	# Look at target at START of attack
+	look_at_target_y_only(target.global_position)
+	
+	# Branch based on attack type
+	match stats.auto_attack_type:
+		EntityStats.AutoAttackType.RANGED:
+			_ranged_auto_attack(target)
+		EntityStats.AutoAttackType.MELEE:
+			_melee_auto_attack(target)
+
+
+func _ranged_auto_attack(target: Entity) -> void:
 	var projectile_spawn := get_auto_attack_spawn()
 	var projectile_stats := _auto_attack_module.prepare_projectile_stats()
 	
-	# Build attack command with modifiers
 	var attack_cmd: AttackCommand = _action_module.build_projectile_attack(
 		target,
 		Projectile.ProjectileType.AUTO_ATTACK,
@@ -297,25 +313,44 @@ func auto_attack(target: Entity) -> void:
 		Verbose.error("Can't create an AttackCommand | " + entity_name, Verbose.Category.ENTITY)
 		return
 	
-	# If AnimationModule is present, store for execution on hit frame
 	if _animation_module != null:
-		# Store for execution on animation hit frame
 		if _pending_attacks.is_empty():
 			_pending_attacks.append(attack_cmd)
 		else:
 			_pending_attacks[0] = attack_cmd
-		
-		# Trigger animation
 		auto_attack_started.emit(projectile_stats.physical_is_critical)
 	else:
-		# No animation module - execute immediately
-		look_at_target_y_only(attack_cmd.target.global_position)
 		_action_module.projectile_attack(
 			attack_cmd.target,
 			attack_cmd.projectile_type,
 			attack_cmd.spawn_node,
 			attack_cmd.stats
 		)
+
+
+func _melee_auto_attack(target: Entity) -> void:
+	var attack_stats := _auto_attack_module.prepare_projectile_stats()
+	var melee_cmd := MeleeAttackCommand.new(target, attack_stats)
+	
+	if _animation_module != null:
+		if _pending_melee_attacks.is_empty():
+			_pending_melee_attacks.append(melee_cmd)
+		else:
+			_pending_melee_attacks[0] = melee_cmd
+		auto_attack_started.emit(attack_stats.physical_is_critical)
+	else:
+		_execute_melee_attack(melee_cmd)
+
+
+func _execute_melee_attack(cmd: MeleeAttackCommand) -> void:
+	if !is_instance_valid(cmd.target) or cmd.target.is_queued_for_deletion():
+		return
+	_action_module.direct_damage(
+		cmd.target,
+		cmd.stats.physical_damage_flat,
+		Utils.DamageType.PHYSICAL,
+		&"auto_attack"
+	)
 
 func projectile_attack(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	_action_module.projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
@@ -337,18 +372,22 @@ func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: 
 
 
 func _on_animation_module_attack_hit_frame() -> void:
-	if _pending_attacks.is_empty():
-		return
-	var attack_cmd: AttackCommand = _pending_attacks.pop_front()
-	if !is_instance_valid(attack_cmd.target) or attack_cmd.target.is_queued_for_deletion():
-		return
-	look_at_target_y_only(attack_cmd.target.global_position)
-	_action_module.projectile_attack(
-		attack_cmd.target,
-		attack_cmd.projectile_type,
-		attack_cmd.spawn_node,
-		attack_cmd.stats
-	)
+	# Handle ranged attacks (projectile)
+	if not _pending_attacks.is_empty():
+		var attack_cmd: AttackCommand = _pending_attacks.pop_front()
+		if !is_instance_valid(attack_cmd.target) or attack_cmd.target.is_queued_for_deletion():
+			return
+		_action_module.projectile_attack(
+			attack_cmd.target,
+			attack_cmd.projectile_type,
+			attack_cmd.spawn_node,
+			attack_cmd.stats
+		)
+	
+	# Handle melee attacks (direct damage)
+	if not _pending_melee_attacks.is_empty():
+		var melee_cmd: MeleeAttackCommand = _pending_melee_attacks.pop_front()
+		_execute_melee_attack(melee_cmd)
 
 func summon_entity(entity_type: EntityType, spawn_config: SpawnLocationConfig, entity_modifier: Dictionary) -> void:
 	_action_module.summon_entity(entity_type, spawn_config, entity_modifier)

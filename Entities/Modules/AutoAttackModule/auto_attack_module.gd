@@ -102,7 +102,7 @@ func _consume_modifiers(projectile_stats: ProjectileStats) -> void:
 # ============================== Callbacks functions ==============================
 
 func _on_auto_attack_timer_timeout() -> void:
-	var target = _owner.target_module.get_target(_attack_strategy)
+	var target = _owner.target_module.get_target_in_range(_attack_strategy)
 	current_target = target
 	if target == null: return
 	_auto_attack(target)

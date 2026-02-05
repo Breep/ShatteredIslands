@@ -80,7 +80,20 @@ var _mana_regen: float # mana/s
 #endregion
 
 #region ============================== Auto-Attack ==============================
-@export_group("Attack damage")
+enum AutoAttackType {RANGED, MELEE}
+
+@export_group("Attack")
+@export var auto_attack_type: AutoAttackType = AutoAttackType.RANGED
+
+signal attack_range_changed(new_attack_range: float)
+var _attack_range: float = -1.0 # -1 = unlimited range (default)
+@export var attack_range: float:
+	get: return _attack_range
+	set(value):
+		if value == _attack_range: return
+		_attack_range = value
+		attack_range_changed.emit(_attack_range)
+
 signal attack_damage_changed(new_attack_damage: float)
 var _attack_damage: float # Damage of auto attack
 @export var attack_damage: float:
@@ -107,7 +120,6 @@ signal critical_multiplier_changed(new_critical_multiplier: float, critical_type
 @export var _critical_chances: Dictionary[Utils.ActionType, float]
 @export var _critical_multipliers: Dictionary[Utils.ActionType, float]
 #endregion
-
 
 
 #region ============================== Resistances ==============================
@@ -154,6 +166,8 @@ func reset_from_hero_desc(hero: HeroDesc, lvl: int) -> EntityStats:
 	mana_regen = hero.stats[lvl].mana_regen
 	attack_damage = hero.stats[lvl].attack_damage
 	attack_speed = hero.stats[lvl].attack_speed
+	attack_range = -1.0 # TODO add to hero_stats
+	auto_attack_type = AutoAttackType.MELEE # TODO add to hero_stats
 	
 	for action_type: Utils.ActionType in Utils.get_all_actions():
 		_critical_chances[action_type] = hero.stats[lvl].critical_chances.get(action_type, 0.0)
