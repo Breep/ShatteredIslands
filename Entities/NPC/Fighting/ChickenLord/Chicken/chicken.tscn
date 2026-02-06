@@ -165,6 +165,7 @@ collision_layer = 16
 collision_mask = 0
 script = ExtResource("1_k573r")
 _visual_3d = NodePath("ChickenVisual")
+entity_name = "Chicken"
 _animation_module = NodePath("AnimationModule")
 _entity_info_panel_3d = NodePath("EntityInfoPanel3d")
 custom_base_stats = SubResource("Resource_x7yny")

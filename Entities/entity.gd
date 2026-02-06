@@ -5,9 +5,6 @@ extends CharacterBody3D
 
 #region ============================== Signals ==============================
 signal died(self_ref: Entity)
-func signal_death() -> void:
-	_is_dead = true
-	died.emit(self)
 
 signal interaction_received(entity_ref: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool)
 func signal_interaction_received(source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
@@ -256,8 +253,18 @@ func _entity_ready() -> void:
 	if _animation_module != null:
 		_animation_module.attack_hit_frame.connect(_on_animation_module_attack_hit_frame)
 	
+	stats.health_changed.connect(_on_stats_health_changed)
 	# Start spawn sequence instead of starting modules directly
 	_start_spawn()
+
+
+func _exit_tree() -> void:
+	_entity_exit_tree()
+
+
+func _entity_exit_tree() -> void:
+	if stats != null and stats.health_changed.is_connected(_on_stats_health_changed):
+		stats.health_changed.disconnect(_on_stats_health_changed)
 
 
 func _process(_delta: float) -> void:
@@ -563,6 +570,19 @@ func _on_entity_fighting_state_changed(new_fighting_state: FightingState) -> voi
 				target_module.start()
 				conditions.start()
 		FightingState.CELEBRATING: pass
-		FightingState.DEAD: pass
+		FightingState.DEAD:
+			target_module.stop()
+			conditions.stop()
+			if _entity_info_panel_3d != null:
+				_entity_info_panel_3d.hide()
 		FightingState.UNDEF: pass
+
+
+func _on_stats_health_changed(new_health: int) -> void:
+	if new_health <= 0:
+		Verbose.debug("Entity [" + entity_name + "] health died", Verbose.Category.ENTITY)
+		_stop_approaching()
+		fighting_state = FightingState.DEAD
+		_is_dead = true
+		died.emit(self)
 #endregion

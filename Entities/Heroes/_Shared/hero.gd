@@ -221,11 +221,6 @@ func _on_gfm_fighting_phase_state_changed(fighting_phase_state: GlobalFightingMa
 		GlobalFightingManager.FightingPhaseState.CELEBRATING:
 			fighting_state = FightingState.CELEBRATING
 
-
-func _on_stats_health_changed(new_health: int) -> void:
-	if new_health <= 0:
-		signal_death()
-
  
 func _on_aa_module_attack_done() -> void:
 	aa_done.emit()

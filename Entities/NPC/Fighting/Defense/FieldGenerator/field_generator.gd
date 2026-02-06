@@ -25,7 +25,6 @@ func _ready() -> void:
 	stats.health_max = _max_health
 	stats.health = stats.health_max
 	conditions.add_stack(Stack.Type.SHIELD, _shield_amount, self, "Field Generator")
-	stats.health_changed.connect(_on_stats_health_changed)
 	
 	# Visual pop
 	var pop := create_tween()
@@ -40,11 +39,6 @@ func _ready() -> void:
 		_shield_timer.timeout.connect(_on_shield_timer_timeout)
 		add_child(_shield_timer)
 		_shield_timer.start()
-
-func _on_stats_health_changed(new_health: int) -> void:
-	if new_health <= 0:
-		signal_death()
-		queue_free()
 
 const GENERATOR_BEAM_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Defense/FieldGenerator/field_generator_beam.tscn")
 

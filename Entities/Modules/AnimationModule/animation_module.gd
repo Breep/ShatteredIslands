@@ -48,6 +48,7 @@ const PARAM_ONE_SHOT_SITTING: String = "parameters/one_shot_sitting/request"
 
 var _idle_variation_timer: Timer
 var _current_movement_state: String = VALUE_TRANSITION_FIGHTING_IDLE
+var _lock_animation: bool = false
 
 func _ready() -> void:
 	if _entity_owner == null:
@@ -74,6 +75,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	if _lock_animation: return
 	if _entity_owner == null:
 		return
 	
@@ -99,6 +101,7 @@ func _on_entity_owner_fighting_state_changed(new_state: Entity.FightingState) ->
 	match new_state:
 		Entity.FightingState.FIGHTING: pass
 		Entity.FightingState.CELEBRATING: pass
+		Entity.FightingState.DEAD: _lock_animation = true
 
 
 func _on_entity_owner_died(_self_ref: Entity) -> void:
@@ -106,37 +109,45 @@ func _on_entity_owner_died(_self_ref: Entity) -> void:
 
 
 func _on_entity_owner_fight_is_won() -> void:
+	if _lock_animation: return
 	_animation_tree.set(PARAM_TRANSITION_FIGHTING, VALUE_TRANSITION_FIGHTING_DANCE)
 
 
 func _on_entity_owner_fight_is_lost() -> void:
+	if _lock_animation: return
 	_animation_tree.set(PARAM_TRANSITION_FIGHTING, VALUE_TRANSITION_FIGHTING_DIE)
 
 
 func _on_entity_owner_auto_attack_started(is_critical: bool) -> void:
+	if _lock_animation: return
 	_animation_tree.set(PARAM_SCALE_ATTACK, 1.0 + _entity_owner.stats.attack_speed)
 	_animation_tree.set(PARAM_ONE_SHOT_ATTACK, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 
 func _on_entity_owner_ultimate_casted() -> void:
+	if _lock_animation: return
 	_animation_tree.set(PARAM_ONE_SHOT_ULTIMATE, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 
 func _on_idle_variation_timer_timeout() -> void:
+	if _lock_animation: return
 	_animation_tree.set(PARAM_ONE_SHOT_SITTING, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	_restart_idle_variation_animation()
 
 
 func _on_entity_animation_player_attack_done() -> void:
+	if _lock_animation: return
 	attack_hit_frame.emit()
 
 
 func _on_animation_player_attack_done() -> void:
+	if _lock_animation: return
 	attack_hit_frame.emit()
 #endregion
 
 #region private methods
 func _restart_idle_variation_animation() -> void:
+	if _lock_animation: return
 	_idle_variation_timer.wait_time = _rng.randf_range(IDLE_VAR_TIMER_MIN_WAIT_TIME, IDLE_VAR_TIMER_MAX_WAIT_TIME)
 	_idle_variation_timer.start()
 #endregion

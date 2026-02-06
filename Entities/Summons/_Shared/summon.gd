@@ -70,6 +70,8 @@ func _summon_enter_tree() -> void:
 		var module: AutoAttackModule = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.AUTOATTACK].instantiate()
 		_auto_attack_module = module.init(self)
 		add_child(_auto_attack_module)
+
+
 func _ready() -> void:
 	_summon_ready()
 
@@ -79,7 +81,6 @@ func _summon_ready() -> void:
 	
 	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
 
-	stats.health_changed.connect(_on_stats_health_changed)
 	fighting_state_changed.connect(_on_summon_fighting_state_changed)
 	_auto_attack_module.attack_done.connect(_on_aa_module_attack_done)
 	
@@ -88,11 +89,14 @@ func _summon_ready() -> void:
 
 
 func _exit_tree() -> void:
+	_summon_exit_tree()
+	_entity_exit_tree()
+
+
+func _summon_exit_tree() -> void:
 	# Disconnect all signals to avoid ghost references
 	if GlobalFightingManager.fighting_phase_state_changed.is_connected(_on_gfm_fighting_phase_state_changed):
 		GlobalFightingManager.fighting_phase_state_changed.disconnect(_on_gfm_fighting_phase_state_changed)
-	if stats != null and stats.health_changed.is_connected(_on_stats_health_changed):
-		stats.health_changed.disconnect(_on_stats_health_changed)
 	if fighting_state_changed.is_connected(_on_summon_fighting_state_changed):
 		fighting_state_changed.disconnect(_on_summon_fighting_state_changed)
 	if _auto_attack_module != null and _auto_attack_module.attack_done.is_connected(_on_aa_module_attack_done):
@@ -129,11 +133,6 @@ func _on_gfm_fighting_phase_state_changed(fighting_phase_state: GlobalFightingMa
 			fighting_state = FightingState.FIGHTING
 		GlobalFightingManager.FightingPhaseState.CELEBRATING:
 			fighting_state = FightingState.CELEBRATING
-
-
-func _on_stats_health_changed(new_health: int) -> void:
-	if new_health <= 0:
-		signal_death()
 
  
 func _on_aa_module_attack_done() -> void:

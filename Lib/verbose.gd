@@ -126,7 +126,7 @@ var current_categories_level: Dictionary[Category, Level] = {
 	Category.STAT_MODIFIER: Level.WARN,
 	Category.STACK_MODIFIER: Level.WARN,
 	Category.GLOBAL_FIGHTING_MANAGER: Level.WARN,
-	Category.ENTITY_ANIMATION: Level.DEBUG,
+	Category.ENTITY_ANIMATION: Level.WARN,
 	Category.ENTITY_MODULE: Level.WARN,
 	Category.ENTITY: Level.DEBUG,
 	Category.HERO: Level.WARN,
@@ -135,12 +135,12 @@ var current_categories_level: Dictionary[Category, Level] = {
 	Category.BATTLE_WRITER: Level.WARN,
 	Category.ENTITY_MANAGER: Level.WARN,
 	Category.HERO_SPAWNER: Level.WARN,
-	Category.FAMILY_MANAGER: Level.DEBUG,
+	Category.FAMILY_MANAGER: Level.WARN,
 	Category.FIGHTING_AREA: Level.WARN,
 	Category.BDS_REGISTERY: Level.WARN,
 	Category.TABLE: Level.WARN,
 	Category.SPAWN_LOCATION_CONFIG: Level.WARN,
-	Category.TARGET_MODULE: Level.TRACE,
+	Category.TARGET_MODULE: Level.WARN,
 }
 #endregion
 

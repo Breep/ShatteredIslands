@@ -79,4 +79,4 @@ func _move_toward_target() -> void:
 
 
 func _get_move_speed() -> float:
-	return 10 # _owner.stats.move_speed
+	return 5 # _owner.stats.move_speed
