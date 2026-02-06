@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bk603mav6k516" path="res://Entities/NPC/Fighting/ChickenLord/Chicken/chicken_animator.gd" id="5_tpk7p"]
 [ext_resource type="PackedScene" uid="uid://b6yg1bhhmnicr" path="res://Entities/Modules/AutoAttackModule/auto_attack_module.tscn" id="6_ufl4b"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Tool/SpawnPoint/spawn_point.tscn" id="7_qjgos"]
+[ext_resource type="AnimationNodeBlendTree" uid="uid://bcmrpt8xmj883" path="res://Entities/NPC/Fighting/default_blendtree.tres" id="8_i1jde"]
 
 [sub_resource type="Resource" id="Resource_x7yny"]
 script = ExtResource("2_x7yny")
@@ -21,144 +22,6 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x7yny"]
 radius = 0.421875
 height = 0.84375
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3dwlx"]
-animation = &"Default Take"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5c32l"]
-animation = &"Attack"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ds2a6"]
-animation = &"Run"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l2r0u"]
-animation = &"Death"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ufk4g"]
-animation = &"Idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3htvw"]
-animation = &"Default Take"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_x7yny"]
-animation = &"Run"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_whq83"]
-animation = &"Attack"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tpk7p"]
-animation = &"Walk"
-
-[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_3dwlx"]
-fadein_time = 0.1
-fadeout_time = 0.1
-
-[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_5c32l"]
-fadein_time = 0.2
-fadeout_time = 0.2
-
-[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_6527l"]
-fadein_time = 0.1
-fadeout_time = 0.1
-
-[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_vgqdx"]
-
-[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_v2uq4"]
-
-[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_6527l"]
-
-[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_x0r43"]
-
-[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_xsepk"]
-
-[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_tpk7p"]
-
-[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_46hic"]
-
-[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_x7yny"]
-
-[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_5qtoa"]
-xfade_time = 0.5
-input_0/name = "Idle"
-input_0/auto_advance = false
-input_0/break_loop_at_end = false
-input_0/reset = true
-input_1/name = "Walk"
-input_1/auto_advance = false
-input_1/break_loop_at_end = false
-input_1/reset = true
-input_2/name = "Run"
-input_2/auto_advance = false
-input_2/break_loop_at_end = false
-input_2/reset = true
-input_3/name = "Dance"
-input_3/auto_advance = false
-input_3/break_loop_at_end = false
-input_3/reset = true
-input_4/name = "Die"
-input_4/auto_advance = false
-input_4/break_loop_at_end = false
-input_4/reset = true
-
-[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_502n4"]
-xfade_time = 0.5
-input_0/name = "TPOSE"
-input_0/auto_advance = false
-input_0/break_loop_at_end = false
-input_0/reset = true
-input_1/name = "Fighting"
-input_1/auto_advance = false
-input_1/break_loop_at_end = false
-input_1/reset = true
-
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ufl4b"]
-graph_offset = Vector2(375.90198, 187.6055)
-nodes/output/position = Vector2(2240, 580)
-nodes/anim_dance/node = SubResource("AnimationNodeAnimation_ds2a6")
-nodes/anim_dance/position = Vector2(-360, 1140)
-nodes/anim_die/node = SubResource("AnimationNodeAnimation_l2r0u")
-nodes/anim_die/position = Vector2(-360, 1340)
-nodes/anim_idle/node = SubResource("AnimationNodeAnimation_ufk4g")
-nodes/anim_idle/position = Vector2(-380, 200)
-nodes/anim_TPOSE/node = SubResource("AnimationNodeAnimation_3dwlx")
-nodes/anim_TPOSE/position = Vector2(1080, 240)
-nodes/transition_fighting/node = SubResource("AnimationNodeTransition_5qtoa")
-nodes/transition_fighting/position = Vector2(440, 720)
-nodes/scale_dance/node = SubResource("AnimationNodeTimeScale_v2uq4")
-nodes/scale_dance/position = Vector2(-220, 1140)
-nodes/scale_die/node = SubResource("AnimationNodeTimeScale_6527l")
-nodes/scale_die/position = Vector2(-220, 1340)
-nodes/scale_idle/node = SubResource("AnimationNodeTimeScale_x0r43")
-nodes/scale_idle/position = Vector2(-220, 200)
-nodes/one_shot_attack/node = SubResource("AnimationNodeOneShot_3dwlx")
-nodes/one_shot_attack/position = Vector2(840, 920)
-nodes/anim_attack/node = SubResource("AnimationNodeAnimation_5c32l")
-nodes/anim_attack/position = Vector2(420, 1160)
-nodes/anim_run/node = SubResource("AnimationNodeAnimation_x7yny")
-nodes/anim_run/position = Vector2(-380, 840)
-nodes/scale_run/node = SubResource("AnimationNodeTimeScale_tpk7p")
-nodes/scale_run/position = Vector2(-200, 840)
-nodes/one_shot_ultimate/node = SubResource("AnimationNodeOneShot_6527l")
-nodes/one_shot_ultimate/position = Vector2(1260, 940)
-nodes/scale_attack/node = SubResource("AnimationNodeTimeScale_vgqdx")
-nodes/scale_attack/position = Vector2(580, 1160)
-nodes/scale_walk/node = SubResource("AnimationNodeTimeScale_x7yny")
-nodes/scale_walk/position = Vector2(-200, 640)
-nodes/anim_ultimate/node = SubResource("AnimationNodeAnimation_whq83")
-nodes/anim_ultimate/position = Vector2(820, 1300)
-nodes/scale_ultimate/node = SubResource("AnimationNodeTimeScale_46hic")
-nodes/scale_ultimate/position = Vector2(980, 1300)
-nodes/anim_idle_var/node = SubResource("AnimationNodeAnimation_3htvw")
-nodes/anim_idle_var/position = Vector2(-380, 380)
-nodes/scale_idle_var/node = SubResource("AnimationNodeTimeScale_xsepk")
-nodes/scale_idle_var/position = Vector2(-220, 380)
-nodes/anim_walk/node = SubResource("AnimationNodeAnimation_tpk7p")
-nodes/anim_walk/position = Vector2(-380, 640)
-nodes/transition_global/node = SubResource("AnimationNodeTransition_502n4")
-nodes/transition_global/position = Vector2(1680, 560)
-nodes/one_shot_idle/node = SubResource("AnimationNodeOneShot_5c32l")
-nodes/one_shot_idle/position = Vector2(60, 260)
-node_connections = [&"output", 0, &"transition_global", &"transition_fighting", 0, &"one_shot_idle", &"transition_fighting", 1, &"scale_walk", &"transition_fighting", 2, &"scale_run", &"transition_fighting", 3, &"scale_dance", &"transition_fighting", 4, &"scale_die", &"scale_dance", 0, &"anim_dance", &"scale_die", 0, &"anim_die", &"scale_idle", 0, &"anim_idle", &"one_shot_attack", 0, &"transition_fighting", &"one_shot_attack", 1, &"scale_attack", &"scale_run", 0, &"anim_run", &"one_shot_ultimate", 0, &"one_shot_attack", &"one_shot_ultimate", 1, &"scale_ultimate", &"scale_attack", 0, &"anim_attack", &"scale_walk", 0, &"anim_walk", &"scale_ultimate", 0, &"anim_ultimate", &"scale_idle_var", 0, &"anim_idle_var", &"transition_global", 0, &"anim_TPOSE", &"transition_global", 1, &"one_shot_ultimate", &"one_shot_idle", 0, &"scale_idle", &"one_shot_idle", 1, &"scale_idle_var"]
 
 [node name="Chicken" type="CharacterBody3D" unique_id=2109615854 node_paths=PackedStringArray("_visual_3d", "_animation_module", "_entity_info_panel_3d")]
 collision_layer = 16
@@ -178,21 +41,21 @@ shape = SubResource("CapsuleShape3D_x7yny")
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="ChickenVisual" index="0" unique_id=416118163]
-bones/1/position = Vector3(0, 0.047381032, -0.004717756)
+bones/1/position = Vector3(0, 0.047381032, 0.025282245)
 bones/1/rotation = Quaternion(-0.7071016, 0.7071016, 0.0027074562, 0.002722331)
 bones/1/scale = Vector3(1, 1, 1.0026101)
-bones/2/rotation = Quaternion(0.83199865, 0.04164722, -0.5494833, -0.064124875)
-bones/3/rotation = Quaternion(0.96720886, 9.047426e-08, 0.2539824, -3.064464e-07)
-bones/4/rotation = Quaternion(-5.5819182e-08, 0.007207892, -2.9695197e-09, 0.999974)
+bones/2/rotation = Quaternion(0.8344415, -5.6795907e-06, -0.5510966, 8.903665e-06)
+bones/3/rotation = Quaternion(0.96720886, 8.184627e-08, 0.2539824, -3.0418073e-07)
+bones/4/rotation = Quaternion(-5.536811e-08, 0.0072078905, -2.113779e-09, 0.9999741)
 bones/5/rotation = Quaternion(-3.773232e-06, 0.9361406, -9.886281e-06, 0.35162592)
-bones/7/position = Vector3(0.06718646, -0.0814189, 0.026344841)
-bones/7/rotation = Quaternion(3.626069e-06, -0.38353658, 9.600184e-06, 0.9235257)
-bones/8/rotation = Quaternion(0.9932081, -1.5955072e-06, -0.11635131, 1.4483898e-05)
-bones/9/rotation = Quaternion(4.0781128e-08, -0.60039806, -2.2802024e-07, 0.79970133)
-bones/10/position = Vector3(0.06718645, 0.08142003, 0.026341427)
-bones/10/rotation = Quaternion(-7.0842357e-06, -0.9583842, -3.7334617e-06, 0.28548184)
-bones/11/rotation = Quaternion(0.9932081, 1.7259497e-06, -0.11635134, -1.4468616e-05)
-bones/12/rotation = Quaternion(4.817537e-08, -0.60039806, 2.3136849e-07, 0.79970133)
+bones/7/position = Vector3(0.06718646, -0.0814189, 0.026344845)
+bones/7/rotation = Quaternion(2.7037765e-06, -0.7286475, 1.8201396e-05, 0.68488896)
+bones/8/rotation = Quaternion(0.9932081, -1.5955072e-06, -0.11635132, 1.4483898e-05)
+bones/9/rotation = Quaternion(4.0781124e-08, -0.60039806, -2.2802033e-07, 0.79970133)
+bones/10/position = Vector3(0.06718645, 0.08142003, 0.02634143)
+bones/10/rotation = Quaternion(-1.7054314e-05, -0.7286475, -2.8190655e-06, 0.68488896)
+bones/11/rotation = Quaternion(0.9932081, 1.7259488e-06, -0.116351314, -1.4468617e-05)
+bones/12/rotation = Quaternion(1.5295967e-07, -0.4917123, 1.5807893e-07, 0.8707578)
 
 [node name="AnimationPlayer" parent="ChickenVisual" index="1" unique_id=777400876]
 script = ExtResource("4_qjgos")
@@ -213,7 +76,7 @@ _owner = NodePath("..")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=2080904651]
 root_node = NodePath("../ChickenVisual")
-tree_root = SubResource("AnimationNodeBlendTree_ufl4b")
+tree_root = ExtResource("8_i1jde")
 anim_player = NodePath("../ChickenVisual/AnimationPlayer")
 parameters/transition_fighting/current_state = "Idle"
 parameters/transition_fighting/transition_request = ""

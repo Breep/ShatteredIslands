@@ -1,0 +1,139 @@
+[gd_resource type="AnimationNodeBlendTree" format=3 uid="uid://bcmrpt8xmj883"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3dwlx"]
+animation = &"Default Take"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5c32l"]
+animation = &"Attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ds2a6"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l2r0u"]
+animation = &"Death"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ufk4g"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3htvw"]
+animation = &"Default Take"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_x7yny"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_whq83"]
+animation = &"Attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tpk7p"]
+animation = &"Walk"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_3dwlx"]
+fadein_time = 0.1
+fadeout_time = 0.1
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_5c32l"]
+fadein_time = 0.2
+fadeout_time = 0.2
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_6527l"]
+fadein_time = 0.1
+fadeout_time = 0.1
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_vgqdx"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_v2uq4"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_6527l"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_x0r43"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_xsepk"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_tpk7p"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_46hic"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_x7yny"]
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_5qtoa"]
+xfade_time = 0.5
+input_0/name = "Idle"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Walk"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+input_2/name = "Run"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
+input_3/name = "Dance"
+input_3/auto_advance = false
+input_3/break_loop_at_end = false
+input_3/reset = true
+input_4/name = "Die"
+input_4/auto_advance = false
+input_4/break_loop_at_end = false
+input_4/reset = true
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_502n4"]
+xfade_time = 0.5
+input_0/name = "TPOSE"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Fighting"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+
+[resource]
+graph_offset = Vector2(-228.97937, -0.16023254)
+nodes/output/position = Vector2(2240, 580)
+nodes/anim_dance/node = SubResource("AnimationNodeAnimation_ds2a6")
+nodes/anim_dance/position = Vector2(-360, 1140)
+nodes/anim_die/node = SubResource("AnimationNodeAnimation_l2r0u")
+nodes/anim_die/position = Vector2(-360, 1340)
+nodes/anim_idle/node = SubResource("AnimationNodeAnimation_ufk4g")
+nodes/anim_idle/position = Vector2(-380, 200)
+nodes/anim_TPOSE/node = SubResource("AnimationNodeAnimation_3dwlx")
+nodes/anim_TPOSE/position = Vector2(1080, 240)
+nodes/transition_fighting/node = SubResource("AnimationNodeTransition_5qtoa")
+nodes/transition_fighting/position = Vector2(440, 720)
+nodes/scale_dance/node = SubResource("AnimationNodeTimeScale_v2uq4")
+nodes/scale_dance/position = Vector2(-220, 1140)
+nodes/scale_die/node = SubResource("AnimationNodeTimeScale_6527l")
+nodes/scale_die/position = Vector2(-220, 1340)
+nodes/scale_idle/node = SubResource("AnimationNodeTimeScale_x0r43")
+nodes/scale_idle/position = Vector2(-220, 200)
+nodes/one_shot_attack/node = SubResource("AnimationNodeOneShot_3dwlx")
+nodes/one_shot_attack/position = Vector2(840, 920)
+nodes/anim_attack/node = SubResource("AnimationNodeAnimation_5c32l")
+nodes/anim_attack/position = Vector2(420, 1160)
+nodes/anim_run/node = SubResource("AnimationNodeAnimation_x7yny")
+nodes/anim_run/position = Vector2(-380, 840)
+nodes/scale_run/node = SubResource("AnimationNodeTimeScale_tpk7p")
+nodes/scale_run/position = Vector2(-200, 840)
+nodes/one_shot_ultimate/node = SubResource("AnimationNodeOneShot_6527l")
+nodes/one_shot_ultimate/position = Vector2(1260, 940)
+nodes/scale_attack/node = SubResource("AnimationNodeTimeScale_vgqdx")
+nodes/scale_attack/position = Vector2(580, 1160)
+nodes/scale_walk/node = SubResource("AnimationNodeTimeScale_x7yny")
+nodes/scale_walk/position = Vector2(-200, 640)
+nodes/anim_ultimate/node = SubResource("AnimationNodeAnimation_whq83")
+nodes/anim_ultimate/position = Vector2(820, 1300)
+nodes/scale_ultimate/node = SubResource("AnimationNodeTimeScale_46hic")
+nodes/scale_ultimate/position = Vector2(980, 1300)
+nodes/anim_idle_var/node = SubResource("AnimationNodeAnimation_3htvw")
+nodes/anim_idle_var/position = Vector2(-380, 380)
+nodes/scale_idle_var/node = SubResource("AnimationNodeTimeScale_xsepk")
+nodes/scale_idle_var/position = Vector2(-220, 380)
+nodes/anim_walk/node = SubResource("AnimationNodeAnimation_tpk7p")
+nodes/anim_walk/position = Vector2(-380, 640)
+nodes/transition_global/node = SubResource("AnimationNodeTransition_502n4")
+nodes/transition_global/position = Vector2(1680, 560)
+nodes/one_shot_idle/node = SubResource("AnimationNodeOneShot_5c32l")
+nodes/one_shot_idle/position = Vector2(60, 260)
+node_connections = [&"output", 0, &"transition_global", &"transition_fighting", 0, &"one_shot_idle", &"transition_fighting", 1, &"scale_walk", &"transition_fighting", 2, &"scale_run", &"transition_fighting", 3, &"scale_dance", &"transition_fighting", 4, &"scale_die", &"scale_dance", 0, &"anim_dance", &"scale_die", 0, &"anim_die", &"scale_idle", 0, &"anim_idle", &"one_shot_attack", 0, &"transition_fighting", &"one_shot_attack", 1, &"scale_attack", &"scale_run", 0, &"anim_run", &"one_shot_ultimate", 0, &"one_shot_attack", &"one_shot_ultimate", 1, &"scale_ultimate", &"scale_attack", 0, &"anim_attack", &"scale_walk", 0, &"anim_walk", &"scale_ultimate", 0, &"anim_ultimate", &"scale_idle_var", 0, &"anim_idle_var", &"transition_global", 0, &"anim_TPOSE", &"transition_global", 1, &"one_shot_ultimate", &"one_shot_idle", 0, &"scale_idle", &"one_shot_idle", 1, &"scale_idle_var"]

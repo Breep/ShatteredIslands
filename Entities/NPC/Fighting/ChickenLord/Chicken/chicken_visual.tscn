@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://ctj0phpdgq5iu"]
 
-[ext_resource type="Texture2D" uid="uid://opwnfxta0ova" path="res://Entities/NPC/Fighting/ChickenLord/Chicken/chicken_diffuse.png" id="1_obnro"]
+[ext_resource type="Texture2D" uid="uid://opwnfxta0ova" path="res://Entities/NPC/Fighting/ChickenLord/Chicken/Data/chicken_diffuse.png" id="1_obnro"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ykqu3"]
 albedo_texture = ExtResource("1_obnro")

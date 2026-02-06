@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://opwnfxta0ova"
-path.s3tc="res://.godot/imported/chicken_diffuse.png-b8b071dd30bd92a3eb30e6c1f413f41a.s3tc.ctex"
+path.s3tc="res://.godot/imported/chicken_diffuse.png-3bc6574ebdd19ebfb30171dbe3c74f28.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Entities/NPC/Fighting/ChickenLord/Chicken/chicken_diffuse.png"
-dest_files=["res://.godot/imported/chicken_diffuse.png-b8b071dd30bd92a3eb30e6c1f413f41a.s3tc.ctex"]
+source_file="res://Entities/NPC/Fighting/ChickenLord/Chicken/Data/chicken_diffuse.png"
+dest_files=["res://.godot/imported/chicken_diffuse.png-3bc6574ebdd19ebfb30171dbe3c74f28.s3tc.ctex"]
 
 [params]
 

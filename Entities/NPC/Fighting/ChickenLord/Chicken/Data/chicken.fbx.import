@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dsmhxv1cq75qk"
-path="res://.godot/imported/chicken.fbx-697d89bcf2635877c9672e5035989104.scn"
+path="res://.godot/imported/chicken.fbx-cbff3174ccbdd4c0e2e8f49d9077be7a.scn"
 
 [deps]
 
-source_file="res://Entities/NPC/Fighting/ChickenLord/Chicken/chicken.fbx"
-dest_files=["res://.godot/imported/chicken.fbx-697d89bcf2635877c9672e5035989104.scn"]
+source_file="res://Entities/NPC/Fighting/ChickenLord/Chicken/Data/chicken.fbx"
+dest_files=["res://.godot/imported/chicken.fbx-cbff3174ccbdd4c0e2e8f49d9077be7a.scn"]
 
 [params]
 

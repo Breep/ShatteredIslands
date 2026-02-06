@@ -1,23 +1,95 @@
-[gd_scene load_steps=5 format=3 uid="uid://drxkhoqpwnnyl"]
+[gd_scene format=3 uid="uid://drxkhoqpwnnyl"]
 
 [ext_resource type="Script" uid="uid://0qhx51rq53um" path="res://Entities/NPC/Fighting/Poison/Snake/snake.gd" id="1_v4viv"]
-[ext_resource type="PackedScene" uid="uid://dqg0p41xhlwb7" path="res://Entities/NPC/Fighting/Poison/Snake/snake_visual.tscn" id="2_61c56"]
+[ext_resource type="PackedScene" uid="uid://c56dr1ix2y718" path="res://Entities/NPC/Fighting/Poison/Snake/snake_visual.tscn" id="2_61c56"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/Stats/EntityStats/entity_stats.gd" id="2_ptbxe"]
+[ext_resource type="PackedScene" uid="uid://jwk6d3k8w3k5" path="res://Entities/EntityInfoPanel/EntityInfoPanel3D/entity_info_panel_3d.tscn" id="4_duvd4"]
 [ext_resource type="PackedScene" uid="uid://d0g0xkyr876lc" path="res://Entities/Modules/MovementModule/movement_module.tscn" id="4_r5ru1"]
+[ext_resource type="AnimationNodeBlendTree" uid="uid://b4tn0mt3xrcep" path="res://Entities/NPC/Fighting/Poison/Snake/snake_blendtree.tres" id="5_duvd4"]
+[ext_resource type="PackedScene" uid="uid://b6yg1bhhmnicr" path="res://Entities/Modules/AutoAttackModule/auto_attack_module.tscn" id="6_jkgwq"]
+[ext_resource type="Script" uid="uid://cnwr3o67xobtt" path="res://Entities/Modules/AnimationModule/entity_animation_player.gd" id="6_obplm"]
+[ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Tool/SpawnPoint/spawn_point.tscn" id="7_jendl"]
+[ext_resource type="Script" uid="uid://dbu0yi2foobod" path="res://Entities/Modules/AnimationModule/animation_module.gd" id="9_ptbxe"]
+
+[sub_resource type="Resource" id="Resource_6o6k5"]
+script = ExtResource("2_ptbxe")
+health_max = 100.0
+auto_attack_type = 1
+attack_range = 1.0
+attack_damage = 10.0
+attack_speed = 2.0
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_61c56"]
 radius = 0.2
 
-[node name="Snake" type="CharacterBody3D"]
+[node name="Snake" type="CharacterBody3D" unique_id=21219754 node_paths=PackedStringArray("_visual_3d", "_animation_module", "_entity_info_panel_3d")]
+collision_layer = 16
+collision_mask = 0
 script = ExtResource("1_v4viv")
+_visual_3d = NodePath("SnakeVisual")
 entity_name = "Snake"
+_animation_module = NodePath("AnimationModule")
+_entity_info_panel_3d = NodePath("EntityInfoPanel3d")
+custom_base_stats = SubResource("Resource_6o6k5")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1208773448]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09924334, 0)
 shape = SubResource("SphereShape3D_61c56")
 
-[node name="SnakeVisual" parent="." instance=ExtResource("2_61c56")]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
-
-[node name="MovementManager" parent="." node_paths=PackedStringArray("_owner") instance=ExtResource("4_r5ru1")]
+[node name="MovementManager" parent="." unique_id=2070445016 node_paths=PackedStringArray("_owner") instance=ExtResource("4_r5ru1")]
 _owner = NodePath("..")
+
+[node name="SnakeVisual" parent="." unique_id=114647546 instance=ExtResource("2_61c56")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="AnimationPlayer" parent="SnakeVisual" index="1" unique_id=269182265]
+script = ExtResource("6_obplm")
+
+[node name="EntityInfoPanel3d" parent="." unique_id=1224095838 node_paths=PackedStringArray("_owner_entity") instance=ExtResource("4_duvd4")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.49329233, 0)
+_owner_entity = NodePath("..")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1999766066]
+root_node = NodePath("../SnakeVisual")
+tree_root = ExtResource("5_duvd4")
+anim_player = NodePath("../SnakeVisual/AnimationPlayer")
+parameters/transition_fighting/current_state = "Idle"
+parameters/transition_fighting/transition_request = ""
+parameters/transition_fighting/current_index = 0
+parameters/scale_dance/scale = 1.0
+parameters/scale_die/scale = 1.0
+parameters/scale_idle/scale = 1.0
+parameters/one_shot_attack/active = false
+parameters/one_shot_attack/internal_active = false
+parameters/one_shot_attack/request = 0
+parameters/scale_run/scale = 2.0
+parameters/one_shot_ultimate/active = false
+parameters/one_shot_ultimate/internal_active = false
+parameters/one_shot_ultimate/request = 0
+parameters/scale_attack/scale = 1.0
+parameters/scale_walk/scale = 1.0
+parameters/scale_ultimate/scale = 1.0
+parameters/scale_idle_var/scale = 1.0
+parameters/transition_global/current_state = "TPOSE"
+parameters/transition_global/transition_request = ""
+parameters/transition_global/current_index = 0
+parameters/one_shot_idle/active = false
+parameters/one_shot_idle/internal_active = false
+parameters/one_shot_idle/request = 0
+
+[node name="AutoAttackModule" parent="." unique_id=671072149 node_paths=PackedStringArray("_projectile_spawn", "_owner") instance=ExtResource("6_jkgwq")]
+_projectile_spawn = NodePath("../SpawnPoint")
+_owner = NodePath("..")
+
+[node name="SpawnPoint" parent="." unique_id=1555949001 instance=ExtResource("7_jendl")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.1665993, -0.31571835)
+
+[node name="AnimationModule" type="Node" parent="." unique_id=1057903503 node_paths=PackedStringArray("_animation_tree", "_animation_player", "_entity_owner")]
+script = ExtResource("9_ptbxe")
+_animation_tree = NodePath("../AnimationTree")
+_animation_player = NodePath("../SnakeVisual/AnimationPlayer")
+_entity_owner = NodePath("..")
+metadata/_custom_type_script = "uid://dbu0yi2foobod"
+
+[editable path="SnakeVisual"]
