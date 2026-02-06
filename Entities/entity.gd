@@ -426,10 +426,10 @@ func _execute_melee_attack(cmd: MeleeAttackCommand) -> void:
 	for cb: Callable in cmd.stats.on_hit_callbacks:
 		if cb.is_valid():
 			cb.call({
-				"source": self,
-				"target": cmd.target,
-				"projectile": null,
-				"position": global_position
+				AutoAttackModifier.VarType.SOURCE: self,
+				AutoAttackModifier.VarType.TARGET: cmd.target,
+				AutoAttackModifier.VarType.PROJECTILE: null,
+				AutoAttackModifier.VarType.POSITION: global_position
 			})
 
 func projectile_attack(target: Entity, projectile_type: Projectile.Type, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:

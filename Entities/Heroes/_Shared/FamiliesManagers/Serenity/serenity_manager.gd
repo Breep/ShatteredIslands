@@ -250,17 +250,18 @@ func _holy_orb_timer_timeout() -> void:
 	#_owner.projectile_attack(target, Projectile.Type.HOLY_ORB, _owner._turret._projectile_spawn_point, proj_stats) # TODO Make it a spell
 
 func _on_hit_holy_orb(cb_vars: Dictionary, damage: float, heal: float) -> void:
-	if not cb_vars.has(AutoAttackModifier.VarType.TARGET): return
-	var target: Entity = cb_vars[AutoAttackModifier.VarType.TARGET]
-	if target == null or not is_instance_valid(target): return
-	
-	if target.team != _owner.team:
-		# Enemy: True Damage
-		target.take_damage(damage, Utils.DamageType.MAGICAL, false, "Holy Orb", _owner)
-	else:
-		# Ally: Heal
-		# Projectile doesn't heal by default
-		target.take_heal(heal, false, "Holy Orb", _owner)
+	pass # TODO rework this with spell
+	#if not cb_vars.has(AutoAttackModifier.VarType.TARGET): return
+	#var target: Entity = cb_vars[AutoAttackModifier.VarType.TARGET]
+	#if target == null or not is_instance_valid(target): return
+	#
+	#if target.team != _owner.team:
+		## Enemy: True Damage
+		#target.take_damage(damage, Utils.DamageType.MAGICAL, false, "Holy Orb", _owner)
+	#else:
+		## Ally: Heal
+		## Projectile doesn't heal by default
+		#target.take_heal(heal, false, "Holy Orb", _owner)
 
 # [REJUVENATIVE FAITH]
 func _on_interaction_received_rejuvenative_faith(_target: Entity, _source: Entity, action_type: Utils.ActionType, _action_id: StringName, value: float, _is_critical: bool) -> void:

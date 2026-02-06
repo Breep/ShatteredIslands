@@ -324,44 +324,47 @@ func _on_auto_attack_scorching_blade(cb_vars: Dictionary) -> void:
 
 # [RUSTY DAGGER]
 func _on_auto_attack_rusty_dagger(cb_vars: Dictionary) -> void:
-	if not cb_vars.has(AutoAttackModifier.VarType.PROJECTILE_STATS):
-		printerr("Rusty Dagger: cb_vars n'a pas de PROJECTILE_STATS")
-		return
-	var proj_stats: ProjectileStats = cb_vars[AutoAttackModifier.VarType.PROJECTILE_STATS]
-	var chance: float = _attack_stats.rusty_dagger_chance
-	if Utils.is_randomize_modifier_active(chance):
-		proj_stats.poison_stacks += _attack_stats.rusty_dagger_poison_stacks
+	pass # TODO rework this with direct callback
+	#if not cb_vars.has(AutoAttackModifier.VarType.PROJECTILE_STATS):
+	# 	printerr("Rusty Dagger: cb_vars n'a pas de PROJECTILE_STATS")
+	# 	return
+	# var proj_stats: ProjectileStats = cb_vars[AutoAttackModifier.VarType.PROJECTILE_STATS]
+	# var chance: float = _attack_stats.rusty_dagger_chance
+	#if Utils.is_randomize_modifier_active(chance):
+		#proj_stats.poison_stacks += _attack_stats.rusty_dagger_poison_stacks
 
-	if Utils.is_randomize_modifier_active(chance):
-		proj_stats.poison_stacks += _attack_stats.rusty_dagger_poison_stacks
+	#if Utils.is_randomize_modifier_active(chance):
+		#proj_stats.poison_stacks += _attack_stats.rusty_dagger_poison_stacks
 
 
 # [NECROTIC BULLET]
 func _on_auto_attack_necrotic_bullet(cb_vars: Dictionary) -> void:
-	if not cb_vars.has(AutoAttackModifier.VarType.PROJECTILE_STATS):
-		printerr("Necrotic Bullet: cb_vars n'a pas de PROJECTILE_STATS")
-		return
-	var proj_stats: ProjectileStats = cb_vars[AutoAttackModifier.VarType.PROJECTILE_STATS]
-	var chance: float = _attack_stats.necrotic_bullet_chance
-	if Utils.is_randomize_modifier_active(chance):
-		proj_stats.necrosis_stacks += _attack_stats.necrotic_bullet_necrosis_stacks
+	pass # TODO rework this with direct callback
+	#if not cb_vars.has(AutoAttackModifier.VarType.PROJECTILE_STATS):
+		# printerr("Necrotic Bullet: cb_vars n'a pas de PROJECTILE_STATS")
+		# return
+	# var proj_stats: ProjectileStats = cb_vars[AutoAttackModifier.VarType.PROJECTILE_STATS]
+	# var chance: float = _attack_stats.necrotic_bullet_chance
+	#if Utils.is_randomize_modifier_active(chance):
+		#proj_stats.necrosis_stacks += _attack_stats.necrotic_bullet_necrosis_stacks
 
 # [SCORCHING BLADE]
 func _on_hit_scorching_blade(cb_vars: Dictionary) -> void:
-	if not cb_vars.has(AutoAttackModifier.VarType.PHYSICAL_DAMAGE):
-		printerr("Scorching Blade (on_hit): cb_vars n'a pas de PHYSICAL_DAMAGE")
-		return
-	var damage_dealt: int = cb_vars[AutoAttackModifier.VarType.PHYSICAL_DAMAGE]
-	if not cb_vars.has(AutoAttackModifier.VarType.TARGET):
-		printerr("Scorching Blade (on_hit): cb_vars n'a pas de TARGET")
-		return
-	var target: Entity = cb_vars[AutoAttackModifier.VarType.TARGET]
-	if target == null or not is_instance_valid(target):
-		return
-	var percent: float = _attack_stats.scorching_blade_damage_percent
-	var ignite_stacks: float = (damage_dealt as float) * (percent / 100.0)
-	if ignite_stacks > 0:
-		_owner.inflict_condition_stacks(target, ignite_stacks, Utils.StackType.IGNITE, "Scorching Blade")
+	pass # TODO rework this with direct callback
+	#if not cb_vars.has(AutoAttackModifier.VarType.PHYSICAL_DAMAGE):
+		# printerr("Scorching Blade (on_hit): cb_vars n'a pas de PHYSICAL_DAMAGE")
+		# return
+	# var damage_dealt: int = cb_vars[AutoAttackModifier.VarType.PHYSICAL_DAMAGE]
+	#if not cb_vars.has(AutoAttackModifier.VarType.TARGET):
+		# printerr("Scorching Blade (on_hit): cb_vars n'a pas de TARGET")
+		# return
+	# var target: Entity = cb_vars[AutoAttackModifier.VarType.TARGET]
+	#if target == null or not is_instance_valid(target):
+		# return
+	# var percent: float = _attack_stats.scorching_blade_damage_percent
+	# var ignite_stacks: float = (damage_dealt as float) * (percent / 100.0)
+	#if ignite_stacks > 0:
+		# _owner.inflict_condition_stacks(target, ignite_stacks, Utils.StackType.IGNITE, "Scorching Blade")
 
 
 # [SURGICAL KNIFE]
@@ -395,16 +398,17 @@ func _on_blade_rush_timeout() -> void:
 
 func _on_attack_storm_hammer(cb_vars: Dictionary) -> void:
 	# [STORM HAMMER]
-	var chance: float = _attack_stats.storm_hammer_chance
-	if not Utils.is_randomize_modifier_active(chance):
-		return
+	pass # TODO rework this with direct callback
+	# var chance: float = _attack_stats.storm_hammer_chance
+	# if not Utils.is_randomize_modifier_active(chance):
+	# 	return
 
-	if not cb_vars.has(AutoAttackModifier.VarType.PROJECTILE_STATS):
-		printerr("Storm Hammer (on_hit): cb_vars n'a pas de TARGET")
-		return
+	# if not cb_vars.has(AutoAttackModifier.VarType.PROJECTILE_STATS):
+	# 	printerr("Storm Hammer (on_hit): cb_vars n'a pas de TARGET")
+	# 	return
 		
-	var projectile_stat: ProjectileStats = cb_vars[AutoAttackModifier.VarType.PROJECTILE_STATS]
-	projectile_stat.is_bouncing = true
+	# var projectile_stat: ProjectileStats = cb_vars[AutoAttackModifier.VarType.PROJECTILE_STATS]
+	# projectile_stat.is_bouncing = true
 
 
 func _on_hit_arcane_staff(_cb_vars: Dictionary) -> void:
@@ -427,14 +431,15 @@ func _on_auto_attack_protectospear(_cb_vars: Dictionary) -> void:
 
 # [RUSSIAN ROULETTE]
 func _on_russian_roulette_attack(cb_vars: Dictionary) -> void:
-	if not cb_vars.has(AutoAttackModifier.VarType.PROJECTILE_STATS):
-		printerr("Russian Roulette: cb_vars n'a pas de PROJECTILE_STATS")
-		return
-	var proj_stats: ProjectileStats = cb_vars[AutoAttackModifier.VarType.PROJECTILE_STATS]
+	pass # TODO rework this with direct callback
+	# if not cb_vars.has(AutoAttackModifier.VarType.PROJECTILE_STATS):
+	# 	printerr("Russian Roulette: cb_vars n'a pas de PROJECTILE_STATS")
+	# 	return
+	# var proj_stats: ProjectileStats = cb_vars[AutoAttackModifier.VarType.PROJECTILE_STATS]
 	
-	var min_p: float = _attack_stats.attack_russian_roulette_min_percent
-	var max_p: float = _attack_stats.attack_russian_roulette_max_percent
+	# var min_p: float = _attack_stats.attack_russian_roulette_min_percent
+	# var max_p: float = _attack_stats.attack_russian_roulette_max_percent
 	
-	var multiplier: float = randf_range(min_p, max_p) / 100.0
+	# var multiplier: float = randf_range(min_p, max_p) / 100.0
 	
-	proj_stats.physical_damage_flat *= multiplier
+	# proj_stats.physical_damage_flat *= multiplier

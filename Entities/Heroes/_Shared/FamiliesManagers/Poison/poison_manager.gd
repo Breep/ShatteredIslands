@@ -199,10 +199,12 @@ func _on_poison_flask_timer_timeout() -> void:
 
 
 func _on_rusty_dagger_logic_callback(cb_vars: Dictionary) -> void:
-	if not cb_vars.has(AutoAttackModifier.VarType.PROJECTILE_STATS): return
-	var proj_stats: ProjectileStats = cb_vars[AutoAttackModifier.VarType.PROJECTILE_STATS]
-	if Utils.is_randomize_modifier_active(_poison_stats.poison_rusty_dagger_chance):
-		proj_stats.poison_stacks += _poison_stats.poison_rusty_dagger_stacks
+	pass
+	# TODO rework this with direct callback
+	#if not cb_vars.has(AutoAttackModifier.VarType.PROJECTILE_STATS): return
+	# var proj_stats: ProjectileStats = cb_vars[AutoAttackModifier.VarType.PROJECTILE_STATS]
+	#if Utils.is_randomize_modifier_active(_poison_stats.poison_rusty_dagger_chance):
+		# proj_stats.poison_stacks += _poison_stats.poison_rusty_dagger_stacks
 
 
 #region VENOMOUS DARTS

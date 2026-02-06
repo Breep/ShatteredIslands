@@ -82,8 +82,8 @@ func prepare_projectile_stats() -> ProjectileStats:
 	
 	# Create damage callback
 	projectile_stats.on_hit_callbacks.append(func(data: Dictionary):
-		var hit_target: Entity = data["target"]
-		var hit_source: Entity = data["source"]
+		var hit_target: Entity = data[AutoAttackModifier.VarType.TARGET]
+		var hit_source: Entity = data[AutoAttackModifier.VarType.SOURCE]
 		if hit_source and hit_target:
 			hit_source.direct_damage(hit_target, physical_damage, Utils.DamageType.PHYSICAL, &"auto_attack")
 	)
@@ -110,9 +110,9 @@ func _consume_modifiers(projectile_stats: ProjectileStats) -> void:
 	for aa_modifier: AutoAttackModifier in _owner.auto_attack_modifier_registry.consume_all_modifiers():
 		# Execute on-attack callbacks
 		if aa_modifier.on_attack_logic_callback.is_valid():
-			aa_modifier.on_attack_logic_callback.call({AutoAttackModifier.VarType.PROJECTILE_STATS: projectile_stats})
+			aa_modifier.on_attack_logic_callback.call({})
 		if aa_modifier.on_attack_visual_callback.is_valid():
-			aa_modifier.on_attack_visual_callback.call({AutoAttackModifier.VarType.VISUAL_POS: _projectile_spawn.global_position})
+			aa_modifier.on_attack_visual_callback.call({})
 		
 		# Add on-hit callbacks to projectile
 		if aa_modifier.on_hit_logic_callback.is_valid():

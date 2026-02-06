@@ -87,10 +87,10 @@ func _on_body_entered(body: Node3D) -> void:
 	for cb: Callable in _stats.on_hit_callbacks:
 		if cb.is_valid():
 			cb.call({
-				"source": _source,
-				"target": hit_target,
-				"projectile": self,
-				"position": global_position
+				AutoAttackModifier.VarType.SOURCE: _source,
+				AutoAttackModifier.VarType.TARGET: hit_target,
+				AutoAttackModifier.VarType.PROJECTILE: self,
+				AutoAttackModifier.VarType.POSITION: global_position
 			})
 	
 	# Handle bouncing if remaining bounces

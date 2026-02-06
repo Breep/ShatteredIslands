@@ -2200,6 +2200,7 @@ mesh = SubResource("ArrayMesh_iy70d")
 skin = SubResource("Skin_7rq34")
 
 [node name="Fire_001" type="MeshInstance3D" parent="Skeleton3D" unique_id=2108342651]
+visible = false
 mesh = SubResource("ArrayMesh_fhrpl")
 skin = SubResource("Skin_aek7a")
 
@@ -2208,6 +2209,7 @@ mesh = SubResource("ArrayMesh_ld3d2")
 skin = SubResource("Skin_1s26o")
 
 [node name="Fire" type="MeshInstance3D" parent="Skeleton3D" unique_id=1532146326]
+visible = false
 mesh = SubResource("ArrayMesh_xth20")
 skin = SubResource("Skin_hfxre")
 

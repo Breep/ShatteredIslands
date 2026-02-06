@@ -179,8 +179,8 @@ func _on_attack_super_strike_logic_callback(_cb_vars: Dictionary) -> void:
 
 
 func _on_attack_super_strike_visual_callback(cb_vars: Dictionary) -> void:
-	if not cb_vars.has(AutoAttackModifier.VarType.VISUAL_POS): return
-	var gpos: Vector3 = cb_vars[AutoAttackModifier.VarType.VISUAL_POS]
+	if not cb_vars.has(AutoAttackModifier.VarType.POSITION): return
+	var gpos: Vector3 = cb_vars[AutoAttackModifier.VarType.POSITION]
 	var explosion = SUPER_STRIKE_ON_ATTACK_SCENE.instantiate()
 	add_child(explosion)
 	explosion.global_position = gpos
@@ -191,8 +191,8 @@ func _on_hit_super_strike_logic_callback(_cb_vars: Dictionary) -> void:
 
 
 func _on_hit_super_strike_visual_callback(cb_vars: Dictionary) -> void:
-	if not cb_vars.has(AutoAttackModifier.VarType.VISUAL_POS): return
-	var gpos: Vector3 = cb_vars[AutoAttackModifier.VarType.VISUAL_POS]
+	if not cb_vars.has(AutoAttackModifier.VarType.POSITION): return
+	var gpos: Vector3 = cb_vars[AutoAttackModifier.VarType.POSITION]
 	var explosion = SUPER_STRIKE_ON_ATTACK_SCENE.instantiate()
 	add_child(explosion)
 	explosion.global_position = gpos
@@ -200,18 +200,20 @@ func _on_hit_super_strike_visual_callback(cb_vars: Dictionary) -> void:
 # ===== MANA STRIKE
 
 func _on_hit_mana_strike_logic_callback(cb_vars: Dictionary) -> void:
-	if not cb_vars.has(AutoAttackModifier.VarType.PHYSICAL_DAMAGE): return
-	var damage: int = cb_vars[AutoAttackModifier.VarType.PHYSICAL_DAMAGE]
-	var mana_inc: float = float(damage) * (_mana_strike_percent / 100.0)
-	stats.mana += mana_inc
+	pass # TODO rework this
+	#if not cb_vars.has(AutoAttackModifier.VarType.PHYSICAL_DAMAGE): return
+	#var damage: int = cb_vars[AutoAttackModifier.VarType.PHYSICAL_DAMAGE]
+	#var mana_inc: float = float(damage) * (_mana_strike_percent / 100.0)
+	#stats.mana += mana_inc
 
 # ===== SPARK OF LIGHT
 
 func _on_hit_spark_of_light_logic_callback(cb_vars: Dictionary) -> void:
-	if not cb_vars.has(AutoAttackModifier.VarType.PHYSICAL_DAMAGE): return
-	var damage: int = cb_vars[AutoAttackModifier.VarType.PHYSICAL_DAMAGE]
-	var health_inc: float = float(damage) * (_spark_of_light_percent / 100.0)
-	heal(self, health_inc, "Spark of Light")
+	pass # TODO rework this
+	#if not cb_vars.has(AutoAttackModifier.VarType.PHYSICAL_DAMAGE): return
+	#var damage: int = cb_vars[AutoAttackModifier.VarType.PHYSICAL_DAMAGE]
+	#var health_inc: float = float(damage) * (_spark_of_light_percent / 100.0)
+	#heal(self, health_inc, "Spark of Light")
 
 # ===== CATACLYSM
 

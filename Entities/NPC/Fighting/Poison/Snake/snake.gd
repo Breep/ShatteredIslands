@@ -1,2 +1,17 @@
 class_name Snake
 extends Summon
+
+func _ready() -> void:
+	var mod := AutoAttackModifier.new()
+	mod.id = "Snake Poison"
+	mod.is_one_time_effect = false
+	mod.on_hit_logic_callback = func(cb_vars: Dictionary) -> void:
+		if not cb_vars.has(AutoAttackModifier.VarType.TARGET): return
+		var target: Entity = cb_vars[AutoAttackModifier.VarType.TARGET]
+		if target == null or target.is_queued_for_deletion(): return
+		inflict_condition_stacks(target, 1, Utils.StackType.POISON, "Snake")
+		
+	auto_attack_modifier_registry.register_modifier(mod)
+	print("Snake registered")
+	
+	super._ready()
