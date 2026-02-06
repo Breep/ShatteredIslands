@@ -106,6 +106,10 @@ var _is_dead: bool = false
 var is_dead: bool:
 	get: return _is_dead
 
+var _is_targetable: bool = true
+var is_targetable: bool:
+	get: return _is_targetable
+
 var stats: EntityStats
 
 var conditions: ConditionsModule
@@ -132,7 +136,6 @@ var _is_approaching_target: bool = false
 var _approach_target: Entity = null
 
 # Spawn system
-var _original_collision_layer: int = 0
 var _original_fighting_state: FightingState = FightingState.UNDEF
 var _is_spawning: bool = false
 var _spawn_tween: Tween = null
@@ -238,9 +241,8 @@ func _entity_enter_tree() -> void:
 		_movement_module = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.MOVEMENT].instantiate().init(self)
 		add_child(_movement_module)
 	
-	_original_collision_layer = collision_layer
 	_original_fighting_state = fighting_state
-	collision_layer = 0
+	_is_targetable = false  # Prevent targeting during spawn
 	_is_spawning = true
 
 func _ready() -> void:
@@ -532,12 +534,17 @@ func _play_spawn_animation() -> void:
 
 
 func _complete_spawn() -> void:
-	"""Complete spawn sequence - restore collision, start modules, transition to FIGHTING."""
+	Verbose.debug("Entity [" + entity_name + "] completing spawn", Verbose.Category.ENTITY)
 	_is_spawning = false
 	
-	# Restore collision layer for targetability
-	collision_layer = _original_collision_layer
+	# Restore targetability
+	_is_targetable = true
 	fighting_state = _original_fighting_state
+	
+	# Start modules now that collision_layer is restored
+	if fighting_state == FightingState.FIGHTING:
+		target_module.start()
+		conditions.start()
 	
 	# Transition to fighting state
 	signal_spawn_completed()
@@ -551,8 +558,10 @@ func _on_entity_fighting_state_changed(new_fighting_state: FightingState) -> voi
 			target_module.stop()
 			conditions.stop()
 		FightingState.FIGHTING:
-			target_module.start()
-			conditions.start()
+			# Only start modules if not spawning (collision_layer would be 0)
+			if not _is_spawning:
+				target_module.start()
+				conditions.start()
 		FightingState.CELEBRATING: pass
 		FightingState.DEAD: pass
 		FightingState.UNDEF: pass

@@ -79,6 +79,7 @@ func _ready() -> void:
 # ============================== Public functions ==============================
 
 func start() -> void:
+	Verbose.debug("TargetModule: Starting", Verbose.Category.TARGET_MODULE)
 	_clear()
 	_scanning_area.monitoring = true
 	var bodies: Array[Node3D] = _scanning_area.get_overlapping_bodies()
@@ -87,6 +88,7 @@ func start() -> void:
 
 
 func stop() -> void:
+	Verbose.debug("TargetModule: Stopping", Verbose.Category.TARGET_MODULE)
 	_scanning_area.monitoring = false
 
 
@@ -250,10 +252,11 @@ func _get_alive_entities(entities: Array[Entity]) -> Array[Entity]:
 
 func _add_body_as_entity(body: Node3D) -> void:
 	if not body is Entity:
-		push_error("TargetModule: A body detected by a TargetModule has an Entity mask but is not an entity: [", body.get_path(), "]")
+		Verbose.error("A body detected by a TargetModule has an Entity mask but is not an entity: " + str(body.get_path()), Verbose.Category.TARGET_MODULE)
 		return
 	
 	var entity: Entity = body
+	Verbose.trace("Adding entity: " + entity.name, Verbose.Category.TARGET_MODULE)
 	if entity.team == _owner.team: _allies.append(entity)
 	else: _enemies.append(entity)
 	_entities.append(entity)
@@ -386,9 +389,11 @@ func _get_random(entities: Array[Entity], excluded_entity: Entity) -> Entity:
 
 
 func _get_array_without_untargetable_targets(entities: Array[Entity]) -> Array[Entity]:
-	# var entities_copy: Array[Entity] = entities.duplicate()
-	# TODO Here it was for shadow untargetable. Maybe some heroes will have untargetable ultimate
-	return entities
+	var targetable_entities: Array[Entity] = []
+	for entity in entities:
+		if entity.is_targetable:
+			targetable_entities.append(entity)
+	return targetable_entities
 
 # ============================== "Target from" strategies functions ==============================
 
