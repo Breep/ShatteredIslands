@@ -11,9 +11,9 @@ signal action_done(source: Entity, target: Entity, action_type: Utils.ActionType
 func signal_action_done(source: Entity, target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
 	action_done.emit(source, target, action_type, action_id, value, is_critical)
 
-signal projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.ProjectileType, projectile_modifiers: Array[Projectile.ProjectileEffect], projectile: Projectile)
-func signal_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.ProjectileType, projectile_modifiers: Array[Projectile.ProjectileEffect], projectile: Projectile) -> void:
-	projectile_spawned.emit(source, target, projectile_type, projectile_modifiers, projectile)
+signal projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.Type, projectile: Projectile)
+func signal_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.Type, projectile_modifiers: Array, projectile: Projectile) -> void:
+	projectile_spawned.emit(source, target, projectile_type, projectile)
 
 signal spell_casted(source: Entity, target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary)
 func signal_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary) -> void:

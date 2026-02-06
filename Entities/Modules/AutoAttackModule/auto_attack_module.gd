@@ -76,8 +76,18 @@ func stop() -> void:
 
 func prepare_projectile_stats() -> ProjectileStats:
 	var projectile_stats := ProjectileStats.new()
-	projectile_stats.physical_damage_flat = _owner.stats.attack_damage
-	projectile_stats.speed = 15
+	
+	# Store damage value for callback
+	var physical_damage := _owner.stats.attack_damage
+	
+	# Create damage callback
+	projectile_stats.on_hit_callbacks.append(func(data: Dictionary):
+		var hit_target: Entity = data["target"]
+		var hit_source: Entity = data["source"]
+		if hit_source and hit_target:
+			hit_source.direct_damage(hit_target, physical_damage, Utils.DamageType.PHYSICAL, &"auto_attack")
+	)
+	
 	_consume_modifiers(projectile_stats)
 	return projectile_stats
 
@@ -97,19 +107,18 @@ func _auto_attack(target: Entity) -> void:
 
 
 func _consume_modifiers(projectile_stats: ProjectileStats) -> void:
-	var add: float = 0.0
-	var mul: float = 0.0
 	for aa_modifier: AutoAttackModifier in _owner.auto_attack_modifier_registry.consume_all_modifiers():
-		add += aa_modifier.damage_flat
-		mul += aa_modifier.damage_mult
+		# Execute on-attack callbacks
 		if aa_modifier.on_attack_logic_callback.is_valid():
 			aa_modifier.on_attack_logic_callback.call({AutoAttackModifier.VarType.PROJECTILE_STATS: projectile_stats})
 		if aa_modifier.on_attack_visual_callback.is_valid():
 			aa_modifier.on_attack_visual_callback.call({AutoAttackModifier.VarType.VISUAL_POS: _projectile_spawn.global_position})
-		projectile_stats.on_hit_logic_callbacks.append(aa_modifier.on_hit_logic_callback)
-		projectile_stats.on_hit_visual_callbacks.append(aa_modifier.on_hit_visual_callback)
-	projectile_stats.physical_damage_flat += int(add)
-	projectile_stats.physical_damage_flat *= (1 + mul)
+		
+		# Add on-hit callbacks to projectile
+		if aa_modifier.on_hit_logic_callback.is_valid():
+			projectile_stats.on_hit_callbacks.append(aa_modifier.on_hit_logic_callback)
+		if aa_modifier.on_hit_visual_callback.is_valid():
+			projectile_stats.on_hit_callbacks.append(aa_modifier.on_hit_visual_callback)
 
 # ============================== Callbacks functions ==============================
 

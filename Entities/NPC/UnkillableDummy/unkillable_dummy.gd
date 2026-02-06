@@ -22,8 +22,6 @@ var _target_health: float = 0.0
 
 # ============================== Modules ==============================
 
-@onready var _interact_module: InteractModule = %InteractModule
-
 # ============================== Node base functions ==============================
 
 func _ready() -> void:

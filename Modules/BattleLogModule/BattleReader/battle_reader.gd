@@ -76,7 +76,7 @@ func _apply_auto_attack(battle_log: Dictionary) -> void:
 	var target: Entity = _entity_manager.get_entity(target_id)
 	if source == null or target == null: return
 	var projectile_spawn: Node3D = source.get_auto_attack_spawn()
-	source.projectile_attack(target, Projectile.ProjectileType.AUTO_ATTACK, projectile_spawn, ProjectileStats.new())
+	#source.projectile_attack(target, Projectile.ProjectileType.AUTO_ATTACK, projectile_spawn, ProjectileStats.new()) # TODO use auto attack api
 
 
 #{"time":0.1, "type":"spell_casted", "source":1, "target":2, "spell_type":<spell_type>}

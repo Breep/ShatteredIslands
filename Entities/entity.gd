@@ -378,7 +378,7 @@ func _ranged_auto_attack(target: Entity) -> void:
 	
 	var attack_cmd: AttackCommand = _action_module.build_projectile_attack(
 		target,
-		Projectile.ProjectileType.AUTO_ATTACK,
+		Projectile.Type.SHADOW_BOLT,
 		projectile_spawn,
 		projectile_stats
 	)
@@ -392,7 +392,7 @@ func _ranged_auto_attack(target: Entity) -> void:
 			_pending_attacks.append(attack_cmd)
 		else:
 			_pending_attacks[0] = attack_cmd
-		auto_attack_started.emit(projectile_stats.physical_is_critical)
+		auto_attack_started.emit(false)
 	else:
 		_action_module.projectile_attack(
 			attack_cmd.target,
@@ -413,7 +413,7 @@ func _melee_auto_attack(target: Entity) -> void:
 			_pending_melee_attacks.append(melee_cmd)
 		else:
 			_pending_melee_attacks[0] = melee_cmd
-		auto_attack_started.emit(attack_stats.physical_is_critical)
+		auto_attack_started.emit(false)
 	else:
 		_execute_melee_attack(melee_cmd)
 		# No animation, attack completes immediately
@@ -423,14 +423,16 @@ func _melee_auto_attack(target: Entity) -> void:
 func _execute_melee_attack(cmd: MeleeAttackCommand) -> void:
 	if !is_instance_valid(cmd.target) or cmd.target.is_queued_for_deletion():
 		return
-	_action_module.direct_damage(
-		cmd.target,
-		cmd.stats.physical_damage_flat,
-		Utils.DamageType.PHYSICAL,
-		&"auto_attack"
-	)
+	for cb: Callable in cmd.stats.on_hit_callbacks:
+		if cb.is_valid():
+			cb.call({
+				"source": self,
+				"target": cmd.target,
+				"projectile": null,
+				"position": global_position
+			})
 
-func projectile_attack(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
+func projectile_attack(target: Entity, projectile_type: Projectile.Type, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	_action_module.projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
 
 func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary = {}) -> void:

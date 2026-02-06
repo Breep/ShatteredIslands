@@ -46,6 +46,14 @@ var FAMILY_MANAGER_SCENES: Dictionary[Family.FamilyType, PackedScene] = {
 	Family.FamilyType.NECROSIS: load("res://Entities/Heroes/_Shared/FamiliesManagers/Necro/necro_manager.tscn"),
 }
 
+var PROJECTILE_SCENES: Dictionary[Projectile.Type, PackedScene] = {
+	Projectile.Type.SHADOW_BOLT: load("res://SpellsAndProjectiles/Projectiles/ShadowBolt/shadow_bolt_projectile.tscn"),
+	Projectile.Type.VENOMOUS_DART: load("res://SpellsAndProjectiles/Projectiles/VenomousDart/venomous_dart_projectile.tscn"),
+	Projectile.Type.SNAKE: load("res://SpellsAndProjectiles/Projectiles/Snake/snake_projectile.tscn"),
+	Projectile.Type.COSMIC_BOLT: load("res://SpellsAndProjectiles/Projectiles/CosmicBolt/cosmic_bolt_projectile.tscn"),
+	Projectile.Type.SHIELD_THROW: load("res://SpellsAndProjectiles/Projectiles/ShieldThrow/shield_throw_projectile.tscn"),
+}
+
 var DAMAGE_POPUP_SCENE: PackedScene = load("res://UI/3D/DamagePopup/damage_popup.tscn")
 
 var scene_switcher: SceneSwitcher

@@ -48,6 +48,7 @@ enum Category {
 	TABLE,
 	SPAWN_LOCATION_CONFIG,
 	TARGET_MODULE,
+	PROJECTILE,
 }
 
 const CATEGORY_PREFIX_TEMPLATES: Dictionary[Category, String] = {
@@ -84,6 +85,7 @@ const CATEGORY_PREFIX_TEMPLATES: Dictionary[Category, String] = {
 	Category.TABLE: "(TABLE     ) ",
 	Category.SPAWN_LOCATION_CONFIG: "(SPAWN_LOC ) ",
 	Category.TARGET_MODULE: "(TARGET_MOD) ",
+	Category.PROJECTILE: "(PROJECTILE) ",
 }
 
 const PREFIX_TEMPLATES: Dictionary[GameType, String] = {
@@ -141,6 +143,7 @@ var current_categories_level: Dictionary[Category, Level] = {
 	Category.TABLE: Level.WARN,
 	Category.SPAWN_LOCATION_CONFIG: Level.WARN,
 	Category.TARGET_MODULE: Level.WARN,
+	Category.PROJECTILE: Level.TRACE,
 }
 #endregion
 

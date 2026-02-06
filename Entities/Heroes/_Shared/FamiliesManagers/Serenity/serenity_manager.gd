@@ -247,8 +247,7 @@ func _holy_orb_timer_timeout() -> void:
 	
 	proj_stats.on_hit_logic_callbacks.append(_on_hit_holy_orb.bind(damage, heal))
 	
-	# ProjectileType.HOLY_ORB
-	_owner.projectile_attack(target, Projectile.ProjectileType.HOLY_ORB, _owner._turret._projectile_spawn_point, proj_stats)
+	#_owner.projectile_attack(target, Projectile.Type.HOLY_ORB, _owner._turret._projectile_spawn_point, proj_stats) # TODO Make it a spell
 
 func _on_hit_holy_orb(cb_vars: Dictionary, damage: float, heal: float) -> void:
 	if not cb_vars.has(AutoAttackModifier.VarType.TARGET): return

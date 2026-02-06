@@ -1,10 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://bxqb2r5cdt3gw"]
+[gd_scene format=3 uid="uid://bxqb2r5cdt3gw"]
 
-[ext_resource type="ArrayMesh" uid="uid://djrkf0hipcltl" path="res://SpellsAndProjectiles/Projectiles/ProjectileVisual/DarknessProjectile/utils/m_fireb_blast.obj" id="2_0417p"]
-[ext_resource type="Shader" uid="uid://btx1eos8uuvop" path="res://SpellsAndProjectiles/Projectiles/ProjectileVisual/DarknessProjectile/utils/s_FireHead_TypeK.tres" id="2_wpxvg"]
-[ext_resource type="Texture2D" uid="uid://s786l5dbky4s" path="res://SpellsAndProjectiles/Projectiles/ProjectileVisual/DarknessProjectile/utils/T_VFX_Noise_531.png" id="3_wol6i"]
-[ext_resource type="ArrayMesh" uid="uid://b7fwd41uyo6p3" path="res://SpellsAndProjectiles/Projectiles/ProjectileVisual/DarknessProjectile/utils/sm_half_sphere.obj" id="4_866jm"]
-[ext_resource type="Shader" uid="uid://bpf8re2if2yu3" path="res://SpellsAndProjectiles/Projectiles/ProjectileVisual/DarknessProjectile/utils/s_FireHeader.tres" id="5_bfdnn"]
+[ext_resource type="Shader" uid="uid://btx1eos8uuvop" path="res://SpellsAndProjectiles/Projectiles/ShadowBolt/utils/s_FireHead_TypeK.tres" id="1_btcsk"]
+[ext_resource type="ArrayMesh" uid="uid://djrkf0hipcltl" path="res://SpellsAndProjectiles/Projectiles/ShadowBolt/utils/m_fireb_blast.obj" id="2_frwai"]
+[ext_resource type="Texture2D" uid="uid://s786l5dbky4s" path="res://SpellsAndProjectiles/Projectiles/ShadowBolt/utils/T_VFX_Noise_531.png" id="3_r488k"]
+[ext_resource type="ArrayMesh" uid="uid://b7fwd41uyo6p3" path="res://SpellsAndProjectiles/Projectiles/ShadowBolt/utils/sm_half_sphere.obj" id="4_82hwc"]
+[ext_resource type="Shader" uid="uid://bpf8re2if2yu3" path="res://SpellsAndProjectiles/Projectiles/ShadowBolt/utils/s_FireHeader.tres" id="5_7khv7"]
 
 [sub_resource type="Gradient" id="Gradient_offnt"]
 offsets = PackedFloat32Array(0.188925, 0.299674, 0.34202)
@@ -34,7 +34,7 @@ repeat = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g4jbv"]
 render_priority = 0
-shader = ExtResource("2_wpxvg")
+shader = ExtResource("1_btcsk")
 shader_parameter/Fire_Scale = Vector2(1, 1)
 shader_parameter/Fire_Speed = Vector2(0, 2.5)
 shader_parameter/Fire_Texture = SubResource("GradientTexture2D_2p5eh")
@@ -46,10 +46,10 @@ shader_parameter/Proximity_Fade = 0.1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xr350"]
 render_priority = -1
-shader = ExtResource("2_wpxvg")
+shader = ExtResource("1_btcsk")
 shader_parameter/Fire_Scale = Vector2(1, 1)
 shader_parameter/Fire_Speed = Vector2(0.1, 3)
-shader_parameter/Fire_Texture = ExtResource("3_wol6i")
+shader_parameter/Fire_Texture = ExtResource("3_r488k")
 shader_parameter/Gradient_Substract = SubResource("GradientTexture2D_vi3ha")
 shader_parameter/Color_Dissipation = 1.0
 shader_parameter/Color_1D_Gradient = SubResource("GradientTexture1D_76w13")
@@ -81,7 +81,7 @@ repeat = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sx6jh"]
 render_priority = 0
-shader = ExtResource("2_wpxvg")
+shader = ExtResource("1_btcsk")
 shader_parameter/Fire_Scale = Vector2(2, 1)
 shader_parameter/Fire_Speed = Vector2(3.5, 0)
 shader_parameter/Fire_Texture = SubResource("GradientTexture2D_443v4")
@@ -93,48 +93,47 @@ shader_parameter/Proximity_Fade = 0.1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_le01h"]
 render_priority = -1
-shader = ExtResource("5_bfdnn")
+shader = ExtResource("5_7khv7")
 shader_parameter/Color = Color(0.5, 0.3, 3, 1)
 shader_parameter/Fresnel = 10.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_0cmvw"]
 height = 1.2
 
-[node name="VFX_DarknessProjectile" type="Node3D"]
+[node name="ShadowBoltVisual" type="Node3D" unique_id=317708016]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
-[node name="FBHead" type="MeshInstance3D" parent="."]
+[node name="FBHead" type="MeshInstance3D" parent="." unique_id=1831868194]
 transform = Transform3D(-0.7, 0, -6.11959e-08, 0, 0.7, 0, 6.11959e-08, 0, -0.7, 0, 0, 0.0107827)
-visible = false
 sorting_offset = 1.0
 material_override = SubResource("ShaderMaterial_g4jbv")
 cast_shadow = 0
-mesh = ExtResource("2_0417p")
+mesh = ExtResource("2_frwai")
 skeleton = NodePath("../../..")
 
-[node name="FBHead2inner" type="MeshInstance3D" parent="."]
+[node name="FBHead2inner" type="MeshInstance3D" parent="." unique_id=1662935805]
 transform = Transform3D(-0.3, 0, -6.99382e-08, 0, 0.3, 0, 2.62268e-08, 0, -0.8, 0, 0, 0.531972)
 sorting_offset = 1.0
 material_override = SubResource("ShaderMaterial_xr350")
 cast_shadow = 0
-mesh = ExtResource("2_0417p")
+mesh = ExtResource("2_frwai")
 skeleton = NodePath("../../..")
 
-[node name="FBHead3outside" type="MeshInstance3D" parent="."]
+[node name="FBHead3outside" type="MeshInstance3D" parent="." unique_id=1772351262]
 transform = Transform3D(-0.5, 0, -1.26126e-07, 0, 0.5, 0, 4.37114e-08, 0, -1.44271, 0, 0, 0.813338)
 sorting_offset = 1.0
 material_override = SubResource("ShaderMaterial_sx6jh")
 cast_shadow = 0
-mesh = ExtResource("4_866jm")
+mesh = ExtResource("4_82hwc")
 skeleton = NodePath("../../..")
 
-[node name="MBall" type="MeshInstance3D" parent="."]
+[node name="MBall" type="MeshInstance3D" parent="." unique_id=2059600860]
 transform = Transform3D(1.02163, 0, 0, 0, -5.79461e-08, -1, 0, 1.32565, -4.37114e-08, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_le01h")
 cast_shadow = 0
 mesh = SubResource("SphereMesh_0cmvw")
 skeleton = NodePath("../..")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=325240982]
 visible = false
 light_color = Color(0.160784, 0.301961, 1, 1)

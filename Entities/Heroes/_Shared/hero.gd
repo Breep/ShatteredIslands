@@ -81,7 +81,7 @@ func get_auto_attack_spawn() -> Node3D:
 #region ===== Actions (Hero-specific overrides) =====
 
 # Instant projectile attack (spells, abilities) - no animation
-func projectile_attack(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
+func projectile_attack(target: Entity, projectile_type: Projectile.Type, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	_action_module.projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
 
 

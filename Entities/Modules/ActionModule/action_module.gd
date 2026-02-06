@@ -64,36 +64,22 @@ func direct_damage_percent(target: Entity, damage_percent: float, damage_type: U
 
 
 # Create a projectile to attack the target - Apply cards damages multiplier if there are some
-func build_projectile_attack(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> AttackCommand:
+func build_projectile_attack(target: Entity, projectile_type: Projectile.Type, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> AttackCommand:
 	if target == null:
 		Verbose.warn("build_projectile_attack() -> No target", Verbose.Category.ENTITY_MODULE)
-		return
+		return null
 	
-	if multiplayer.is_server():
-		var physical_multiplier = _get_crit_multiplier(Utils.ActionType.DAMAGE_PHYSICAL)
-		projectile_stats.physical_is_critical = physical_multiplier["is_critical"]
-		projectile_stats.physical_base_damage = projectile_stats.physical_damage_flat * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_PHYSICAL)
-		projectile_stats.physical_damage_flat = projectile_stats.physical_base_damage * physical_multiplier["multiplier"]
-		#projectile_stats.physical_damage_percent *= physical_multiplier["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_PHYSICAL)
-		
-		var magical_multiplier = _get_crit_multiplier(Utils.ActionType.DAMAGE_MAGICAL)
-		projectile_stats.magical_is_critical = magical_multiplier["is_critical"]
-		projectile_stats.magical_base_damage = projectile_stats.magical_damage_flat * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_MAGICAL)
-		projectile_stats.magical_damage_flat = projectile_stats.magical_base_damage * magical_multiplier["multiplier"]
-		#projectile_stats.magical_damage_percent *= magical_multiplier["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.DAMAGE_MAGICAL)
-		
-		var poison_stacks_multiplier = _get_crit_multiplier(Utils.ActionType.DAMAGE_POISON)
-		projectile_stats.poison_stacks_is_critical = poison_stacks_multiplier["is_critical"]
-		projectile_stats.poison_stacks *= poison_stacks_multiplier["multiplier"] * _get_strenght_weakness_multiplier(Utils.ActionType.STACK_POISON)
+	# Callbacks in projectile_stats already handle damage
+	# No need to manipulate stats here anymore
 	
 	return AttackCommand.new().setup(target, projectile_type, projectile_spawn, projectile_stats)
 
 
-func projectile_attack(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
+func projectile_attack(target: Entity, projectile_type: Projectile.Type, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	_spawn_manager.spawn_projectile(_owner, target, projectile_type, projectile_spawn, projectile_stats)
 
 
-func _spawn_projectile(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
+func _spawn_projectile(target: Entity, projectile_type: Projectile.Type, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	if target == null: return
 	_spawn_manager.spawn_projectile(_owner, target, projectile_type, projectile_spawn, projectile_stats)
 #endregion

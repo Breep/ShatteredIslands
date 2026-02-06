@@ -65,7 +65,6 @@ radius = 0.2
 
 [node name="PrototypingEntity" type="Node3D" unique_id=1287034780]
 script = ExtResource("1_6kn6i")
-_auto_attack_enabled = true
 
 [node name="Entities" type="Node3D" parent="." unique_id=38016860]
 unique_name_in_owner = true

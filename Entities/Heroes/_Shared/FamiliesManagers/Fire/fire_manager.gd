@@ -261,7 +261,7 @@ func _shoot_cosmic_bolt(target: Entity) -> void:
 	var proj_stats := ProjectileStats.new()
 	proj_stats.is_bouncing = false
 	proj_stats.on_hit_logic_callbacks.append(_on_hit_cosmic_bolt)
-	_owner.projectile_attack(target, Projectile.ProjectileType.COSMIC_BOLT, _owner._turret._projectile_spawn_point, proj_stats)
+	_owner.projectile_attack(target, Projectile.Type.COSMIC_BOLT, _owner._turret._projectile_spawn_point, proj_stats)
 
 
 # [COSMIC BOLT] - Logique à l'impact

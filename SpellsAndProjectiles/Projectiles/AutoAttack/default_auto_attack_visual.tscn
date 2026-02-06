@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://d37wg3mc76fs7"]
-
-[ext_resource type="Script" uid="uid://das1uwpjnev5l" path="res://VFX/VFX_3D/Import/Firebolt/projectile_turret_visual.gd" id="1_wuwu6"]
-[ext_resource type="PackedScene" uid="uid://bxqb2r5cdt3gw" path="res://SpellsAndProjectiles/Projectiles/ProjectileVisual/DarknessProjectile/VFX_Darkness_projectile.tscn" id="2_k5ied"]
-
-[node name="Projectile_turret_visual" type="Node3D"]
-script = ExtResource("1_wuwu6")
-
-[node name="VFX_DarknessProjectile" parent="." instance=ExtResource("2_k5ied")]

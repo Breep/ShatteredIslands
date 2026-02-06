@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://s786l5dbky4s"
-path.s3tc="res://.godot/imported/T_VFX_Noise_531.png-15f2298228ccc27d33daca4235bc42fa.s3tc.ctex"
+path.s3tc="res://.godot/imported/T_VFX_Noise_531.png-fe469ba099eff6a713f58ebb9938092d.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://SpellsAndProjectiles/Projectiles/ProjectileVisual/DarknessProjectile/utils/T_VFX_Noise_531.png"
-dest_files=["res://.godot/imported/T_VFX_Noise_531.png-15f2298228ccc27d33daca4235bc42fa.s3tc.ctex"]
+source_file="res://SpellsAndProjectiles/Projectiles/ShadowBolt/utils/T_VFX_Noise_531.png"
+dest_files=["res://.godot/imported/T_VFX_Noise_531.png-fe469ba099eff6a713f58ebb9938092d.s3tc.ctex"]
 
 [params]
 

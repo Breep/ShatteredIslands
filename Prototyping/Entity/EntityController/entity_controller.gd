@@ -106,7 +106,7 @@ func _ready() -> void:
 	
 	# Populate projectile type dropdown
 	i = 0
-	for projectile_type: String in Projectile.ProjectileType.keys():
+	for projectile_type: String in Projectile.Type.keys():
 		_projectile_type_choice.add_item(projectile_type, i)
 		i += 1
 	
@@ -338,7 +338,7 @@ func _on_projectile_attack_button_pressed() -> void:
 		printerr("EntityController: No entity_owner for projectile_attack")
 		return
 	
-	var projectile_type: Projectile.ProjectileType = _projectile_type_choice.get_selected_id() as Projectile.ProjectileType
+	var projectile_type: Projectile.Type = _projectile_type_choice.get_selected_id() as Projectile.Type
 	var projectile_spawn: Node3D = entity_owner.get_auto_attack_spawn()
 	var projectile_stats: ProjectileStats = ProjectileStats.new()
 	
@@ -346,23 +346,12 @@ func _on_projectile_attack_button_pressed() -> void:
 	var speed_text: String = _speed_text_edit.text.strip_edges()
 	projectile_stats.speed = speed_text.to_int() if not speed_text.is_empty() else 20
 	
-	var physical_damage_text: String = _physical_damage_text_edit.text.strip_edges()
-	projectile_stats.physical_damage_flat = physical_damage_text.to_float() if not physical_damage_text.is_empty() else 0.0
-	projectile_stats.physical_is_critical = false
-	
-	var magical_damage_text: String = _magical_damage_text_edit.text.strip_edges()
-	projectile_stats.magical_damage_flat = magical_damage_text.to_float() if not magical_damage_text.is_empty() else 0.0
-	projectile_stats.magical_is_critical = false
-	
 	var bounce_text: String = _bounce_text_edit.text.strip_edges()
 	var bounce_count: int = bounce_text.to_int() if not bounce_text.is_empty() else 0
-	projectile_stats.is_bouncing = bounce_count > 0
 	projectile_stats.bounces_remaining = bounce_count
 	
 	entity_owner.projectile_attack(_target, projectile_type, projectile_spawn, projectile_stats)
-	print("DEBUG: projectile_attack called - Target: ", _target.entity_name, " | Type: ", Projectile.ProjectileType.keys()[projectile_type],
-		" | Speed: ", projectile_stats.speed, " | Physical: ", projectile_stats.physical_damage_flat,
-		" | Magical: ", projectile_stats.magical_damage_flat, " | Bounces: ", projectile_stats.bounces_remaining)
+	print("DEBUG: projectile_attack called - Target: ", _target.entity_name, " | Type: ", Projectile.Type.keys()[projectile_type])
 
 
 func _update_spell_parameters(spell_type: Spell.Type) -> void:

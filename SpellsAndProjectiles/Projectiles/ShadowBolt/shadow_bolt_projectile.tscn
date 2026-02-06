@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://dqs4ecrf1crf0"]
+
+[ext_resource type="Script" uid="uid://qj7o0ua13hm5" path="res://SpellsAndProjectiles/Projectiles/ShadowBolt/shadow_bolt_projectile.gd" id="1_r7ned"]
+[ext_resource type="PackedScene" uid="uid://bxqb2r5cdt3gw" path="res://SpellsAndProjectiles/Projectiles/ShadowBolt/shadow_bolt_visual.tscn" id="2_aw37j"]
+[ext_resource type="Script" uid="uid://xr3esthqo6re" path="res://SpellsAndProjectiles/Projectiles/Trajectories/straight_trajectory.gd" id="2_bwhe2"]
+
+[sub_resource type="Resource" id="Resource_risn7"]
+script = ExtResource("2_bwhe2")
+speed = 15.0
+metadata/_custom_type_script = "uid://xr3esthqo6re"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_r7ned"]
+radius = 0.2
+
+[node name="ShadowBoltProjectile" type="Area3D" unique_id=1758999821]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("1_r7ned")
+trajectory = SubResource("Resource_risn7")
+
+[node name="ShadowBoldVisual" parent="." unique_id=317708016 instance=ExtResource("2_aw37j")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=370180917]
+shape = SubResource("SphereShape3D_r7ned")

@@ -306,10 +306,7 @@ func _trigger_shield_throw_start() -> void:
 	
 	proj_stats.on_hit_logic_callbacks.append(_on_hit_shield_throw)
 	
-	var p_type = Projectile.ProjectileType.AUTO_ATTACK
-	if "SHIELD_THROW" in Projectile.ProjectileType: p_type = Projectile.ProjectileType.SHIELD_THROW
-	
-	_owner.projectile_attack(target, p_type, _owner._turret._projectile_spawn_point, proj_stats)
+	_owner.projectile_attack(target, Projectile.Type.SHIELD_THROW, _owner._turret._projectile_spawn_point, proj_stats)
 #endregion
 
 # ============================== Callbacks functions ==============================
@@ -439,9 +436,10 @@ func _on_owner_damage_taken(_entity: Entity, damage: float, _damage_type: Utils.
 
 
 # [AETHER REDIRECTOR]
-func _on_projectile_spawned_aether_redirector(source: Entity, target: Entity, projectile_type: Projectile.ProjectileType, _modifiers: Array[Projectile.ProjectileEffect], projectile: Projectile) -> void:
+func _on_projectile_spawned_aether_redirector(source: Entity, target: Entity, projectile_type: Projectile.Type, _modifiers: Array, projectile: Projectile) -> void:
 	if not _aether_redirector_ready: return
-	if projectile_type == Projectile.ProjectileType.AUTO_ATTACK: return # Ignore AA
+	# Ignore auto-attacks, only redirect spells
+	if projectile_type == Projectile.Type.SHADOW_BOLT: return # Ignore AA # TODO change that
 	
 	# Check if target is an ally (and not self)
 	if target == _owner or target.team != _owner.team: return

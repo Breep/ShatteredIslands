@@ -28,20 +28,21 @@ func _ready() -> void:
 
 # ============================== Public function ==============================
 
-func spawn_projectile(source: Entity, target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
-	var projectile: Projectile = preload("res://SpellsAndProjectiles/Projectiles/projectile.tscn").instantiate()
-	projectile.name = "Projectile_" + str(_projectile_counter)
-	projectile.position = _projectiles_node.to_local(projectile_spawn.global_position)
-	projectile.stats = projectile_stats
-	projectile.source = source
-	projectile.target = target
-	projectile.battle_id = battle_id
-	projectile.id = _projectile_counter
-	projectile.projectile_type = projectile_type
+func spawn_projectile(source: Entity, target: Entity, projectile_type: Projectile.Type, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
+	# Get the correct projectile scene
+	var projectile_scene: PackedScene = Shared.PROJECTILE_SCENES[projectile_type]
+	if not projectile_scene:
+		push_error("SpawnManager: No scene found for projectile type ", projectile_type)
+		return
 	
-	var modifiers: Array[Projectile.ProjectileEffect] = []
+	var projectile: Projectile = projectile_scene.instantiate()
+	projectile.name = "Projectile_" + str(_projectile_counter)
+	projectile.init(source, target, projectile_stats)
+	projectile.position = _projectiles_node.to_local(projectile_spawn.global_position)
+	
 	if _fighting_area != null:
-		_fighting_area.signal_projectile_spawned(source, target, projectile_type, modifiers, projectile)
+		_fighting_area.signal_projectile_spawned(source, target, projectile_type, [], projectile)
+	
 	_projectile_counter += 1
 	_projectiles_node.add_child(projectile)
 

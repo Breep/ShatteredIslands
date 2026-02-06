@@ -42,5 +42,5 @@ func _spawn_snakes(snake_number: int) -> void:
 		var target = target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
 		if target == null: return
 		spawn_node.position = Vector3(rng.randf_range(-spread, spread), rng.randf_range(0, spread), rng.randf_range(-spread, spread))
-		projectile_attack(target, Projectile.ProjectileType.SNAKE, spawn_node, projectile_stats)
+		projectile_attack(target, Projectile.Type.SNAKE, spawn_node, projectile_stats)
 	queue_free()

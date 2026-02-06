@@ -212,7 +212,7 @@ func _on_venomous_darts_timer_timeout() -> void:
 		if target == null: return
 		var projectile_stats := ProjectileStats.new()
 		projectile_stats.on_hit_logic_callbacks.append(_on_hit_venomous_logic_callback)
-		_owner.projectile_attack(target, Projectile.ProjectileType.VENOMOUS_DART, _owner._turret._projectile_spawn_point, projectile_stats)
+		_owner.projectile_attack(target, Projectile.Type.VENOMOUS_DART, _owner._turret._projectile_spawn_point, projectile_stats)
 
 
 func _on_hit_venomous_logic_callback(cb_vars: Dictionary) -> void:
