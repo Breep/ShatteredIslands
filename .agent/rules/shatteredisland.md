@@ -20,9 +20,14 @@ description: Rules for Shattered Islands development
 ## Coding Standards (GDScript)
 - **Typing**: Strong typing is required (e.g., `Array[int]`, `float`, `FamilyStats`). Avoid `var` without type inference.
 - **Naming**: `class_name` must be PascalCase and match the snake_case filename (e.g. `poison_flask.gd` -> `class_name PoisonFlask`).
-- **Debug**: 
-  - Use `printerr()` for errors (e.g. invalid levels). 
-  - Use `print("DEBUG: ...")` for temporary debugging.
+- **Dictionary Keys**: 
+  - **NEVER** use string literals as dictionary keys (e.g., `dict["key"]`)
+  - **ALWAYS** use Enums for dictionary keys (e.g., `dict[KeyType.KEY]`)
+  - Exception: Only use strings when explicitly requested
+- **Debug/Logging**: 
+  - Use `Verbose` API (`verbose.gd`) for all logging
+  - Add categories as needed in `Verbose.Category`
+  - Use `Verbose.debug()`, `Verbose.warn()`, `Verbose.error()` instead of `print()`, `printerr()`
 - **Formatting**: Use `.pad_decimals(0)` for displaying integer-like floats in strings.
 - **Rich Text**: Use tags for descriptions (e.g. `[[POISON_STACK]]`).
 - **Encapsulation**:
