@@ -25,6 +25,15 @@ description: Rules for Shattered Islands development
   - Use `print("DEBUG: ...")` for temporary debugging.
 - **Formatting**: Use `.pad_decimals(0)` for displaying integer-like floats in strings.
 - **Rich Text**: Use tags for descriptions (e.g. `[[POISON_STACK]]`).
+- **Encapsulation**:
+  - **NEVER** call a private function/variable (starting with `_`) from another class
+  - Exception: `super._function()` is allowed
+  - Exception: In `Prototyping/` directory, private access is allowed for rapid testing
+- **Scene Tree Communication**:
+  - Parent nodes **CAN** call child node functions
+  - Child nodes **CANNOT** call parent node functions directly
+  - Children communicate with parents via **signals only**
+  - Example: `ActionModule` emits signals, `Entity` listens and handles them
 
 ## Godot Specifics
 - **IDs**: **NEVER** manually assign `uid` or `id`. Let the engine handle it.
