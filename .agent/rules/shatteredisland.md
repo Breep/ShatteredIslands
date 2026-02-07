@@ -33,3 +33,11 @@ description: Rules for Shattered Islands development
 ## Workflows
 - **New Cards**: **ALWAYS** follow the workflow at `.agent/workflows/add_new_card.md` to ensure all steps (Files, Stats, Manager) are covered.
 - **New Spells**: **ALWAYS** follow the workflow at `.agent/workflows/add_new_spell.md`, strictly adhering to the Meteor pattern (Visuals separated).
+
+## Safety Rules
+- **Git Commands**: 
+  - **NEVER** execute destructive git commands like `git checkout -- .`, `git reset --hard`, `git clean -fd` without **explicit, clear approval** from the user.
+  - **NEVER** assume it's safe to discard uncommitted changes.
+  - If you need to undo changes, **ALWAYS** suggest the command and ask for confirmation first.
+  - Prefer targeted operations (single file) over blanket operations (entire repository).
+
