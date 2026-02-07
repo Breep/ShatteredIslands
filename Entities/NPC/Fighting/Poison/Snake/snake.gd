@@ -12,6 +12,4 @@ func _ready() -> void:
 		inflict_condition_stacks(target, 1, Utils.StackType.POISON, "Snake")
 		
 	auto_attack_modifier_registry.register_modifier(mod)
-	print("Snake registered")
-	
 	super._ready()

@@ -107,26 +107,25 @@ var _is_targetable: bool = true
 var is_targetable: bool:
 	get: return _is_targetable
 
+var visual: EntityInfoPanel3D: # TODO Rename this
+	get: return _entity_info_panel_3d
+
+# Auto loaded extensions
 var stats: EntityStats
-
 var conditions: ConditionsModule
-
 var target_module: TargetModule
-
 var auto_attack_modifier_registry: AutoAttackModifierRegistry
 var action_modifiers_registry: ActionModifiersRegistry
 var stat_modifiers_registry: EntityStatModifiersRegistry
-
 var base_stats: EntityStats:
 	get: return _base_stats
 #endregion
 
 #region ============================== Private variables ==============================
-var _base_stats: EntityStats # Private, use base_stats property to access
-var _auto_attack_module: AutoAttackModule # Optional, can be null
+# Auto loaded extensions
 var _action_module: ActionModule
+var _base_stats: EntityStats # Private, use base_stats property to access
 var _interact_module: InteractModule
-var _movement_module: MovementModule # Optional, can be null
 
 # Approach target for auto-attacks
 var _is_approaching_target: bool = false
@@ -142,25 +141,29 @@ var _spawn_tween: Tween = null
 @export var id: int = -1 # Multiplayer ID of the entity
 @export var team: int = -1 # Team number of the entity
 @export var battle_id: int = -1 # The id of the battle the entity is in
-
-# Spawn settings
-@export var _visual_3d: Node3D # Visual node for spawn animation
-@export var spawn_duration: float = 0.5 # Duration of spawn animation in seconds
-@export var skip_spawn_animation: bool = false # Skip spawn animation for instant spawn
 @export var entity_name: String = "<entity name>"
-#endregion
-
-# ============================== Local Nodes ==============================
 
 @export_group("Optional configuration")
-@export var _animation_module: AnimationModule
-@export var _entity_info_panel_3d: EntityInfoPanel3D
-var visual: EntityInfoPanel3D:
-	get: return _entity_info_panel_3d
-
 @export var custom_base_stats: EntityStats
+
+@export_subgroup("Modules")
+@export var _auto_attack_module: AutoAttackModule # Optional, can be null
+@export var _movement_module: MovementModule # Optional, can be null
+
+@export_subgroup("Visual")
+@export var _visual_3d: Node3D # Visual node for spawn animation
+@export var _entity_info_panel_3d: EntityInfoPanel3D
+
+@export_subgroup("Visual/Animation")
+@export var _animation_module: AnimationModule
+@export var spawn_duration: float = 0.5 # Duration of spawn animation in seconds
+@export var skip_spawn_animation: bool = false # Skip spawn animation for instant spawn
+
+@export_subgroup("Prototyping")
 @export var _spawn_manager: SpawnManager
 @export var _arena_zone_manager: ArenaZoneManager
+@export var auto_attack_enabled: bool = true
+#endregion
 
 @onready var bds_registry := EntityBDSRegistry.new(entity_name)
 
@@ -181,10 +184,6 @@ static var instance_count: int = 0
 
 #region ============================== Node base functions ==============================
 func _init() -> void:
-	_entity_init()
-
-
-func _entity_init() -> void:
 	id = instance_count
 	instance_count += 1
 	
@@ -198,10 +197,6 @@ func _entity_init() -> void:
 
 
 func _enter_tree() -> void:
-	_entity_enter_tree()
-
-
-func _entity_enter_tree() -> void:
 	# Stats registry needs to be created after _init() because custom_base_stats is not available in _init()
 	if custom_base_stats != null:
 		_base_stats = custom_base_stats
@@ -243,26 +238,19 @@ func _entity_enter_tree() -> void:
 	_is_spawning = true
 
 func _ready() -> void:
-	_entity_ready()
-
-
-func _entity_ready() -> void:
 	Verbose.debug("Entity [" + entity_name + "] ready", Verbose.Category.ENTITY)
-	fighting_state_changed.connect(_on_entity_fighting_state_changed)
+	fighting_state_changed.connect(_on_fighting_state_changed)
 	
 	if _animation_module != null:
 		_animation_module.attack_hit_frame.connect(_on_animation_module_attack_hit_frame)
 	
 	stats.health_changed.connect(_on_stats_health_changed)
+	died.connect(_on_died)
 	# Start spawn sequence instead of starting modules directly
 	_start_spawn()
 
 
 func _exit_tree() -> void:
-	_entity_exit_tree()
-
-
-func _entity_exit_tree() -> void:
 	if stats != null and stats.health_changed.is_connected(_on_stats_health_changed):
 		stats.health_changed.disconnect(_on_stats_health_changed)
 
@@ -327,8 +315,14 @@ func apply_context(context: EntityContext) -> void:
 			_action_module.connect_to_arena_zone_manager(context.arena_zone_manager)
 
 
-func connect_to_fighting_area(_fighting_area: FightingArea) -> void:
-	printerr("Entity: virtual connect_to_fighting_area() called [", get_path(), "]")
+func connect_to_fighting_area(fighting_area_ref: FightingArea) -> void:
+	Verbose.debug("Connecting to fighting area", Verbose.Category.ENTITY)
+	if fighting_area_ref == null:
+		Verbose.error("Trying to connect a null fighting area to an Entity", Verbose.Category.ENTITY)
+		return
+	
+	_action_module.connect_to_spawn_manager(fighting_area_ref.spawn_manager)
+	_action_module.connect_to_arena_zone_manager(fighting_area_ref.arena_zone_manager)
 #endregion
 
 #region ===== Actions (Default implementations - can be overridden)
@@ -545,46 +539,40 @@ func _play_spawn_animation() -> void:
 func _complete_spawn() -> void:
 	Verbose.debug("Entity [" + entity_name + "] completing spawn", Verbose.Category.ENTITY)
 	_is_spawning = false
-	
-	# Restore targetability
 	_is_targetable = true
 	fighting_state = _original_fighting_state
-	
-	# Start modules now that collision_layer is restored
-	if fighting_state == FightingState.FIGHTING:
-		target_module.start()
-		conditions.start()
-	
-	# Transition to fighting state
 	signal_spawn_completed()
 	Verbose.debug("Entity [" + entity_name + "] spawn completed", Verbose.Category.ENTITY)
 
 
-func _on_entity_fighting_state_changed(new_fighting_state: FightingState) -> void:
+func _on_fighting_state_changed(new_fighting_state: FightingState) -> void:
 	Verbose.debug("Entity [" + entity_name + "] fighting state changed to [" + str(FightingState.keys()[new_fighting_state]) + "]", Verbose.Category.ENTITY)
 	match new_fighting_state:
 		FightingState.IDLE:
-			target_module.stop()
-			conditions.stop()
+			if target_module != null: target_module.stop()
+			if conditions != null: conditions.stop()
+			if _auto_attack_module != null: _auto_attack_module.stop()
 		FightingState.FIGHTING:
-			# Only start modules if not spawning (collision_layer would be 0)
-			if not _is_spawning:
-				target_module.start()
-				conditions.start()
+			if target_module != null: target_module.start()
+			if conditions != null: conditions.start()
+			if _auto_attack_module != null and auto_attack_enabled: _auto_attack_module.start()
 		FightingState.CELEBRATING: pass
 		FightingState.DEAD:
-			target_module.stop()
-			conditions.stop()
-			if _entity_info_panel_3d != null:
-				_entity_info_panel_3d.hide()
+			if target_module != null: target_module.stop()
+			if conditions != null: conditions.stop()
+			if _entity_info_panel_3d != null: _entity_info_panel_3d.hide()
+			if _auto_attack_module != null: _auto_attack_module.stop()
 		FightingState.UNDEF: pass
 
 
 func _on_stats_health_changed(new_health: int) -> void:
 	if new_health <= 0:
-		Verbose.debug("Entity [" + entity_name + "] health died", Verbose.Category.ENTITY)
-		_stop_approaching()
-		fighting_state = FightingState.DEAD
-		_is_dead = true
 		died.emit(self)
+
+
+func _on_died(_entity: Entity) -> void:
+	Verbose.debug("Entity [" + entity_name + "] died", Verbose.Category.ENTITY)
+	_stop_approaching()
+	fighting_state = FightingState.DEAD
+	_is_dead = true
 #endregion

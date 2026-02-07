@@ -59,11 +59,7 @@ const SUPER_STRIKE_ON_ATTACK_SCENE: PackedScene = preload("res://Entities/Heroes
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	_dark_knight_ready()
-
-
-func _dark_knight_ready() -> void:
-	aa_done.connect(_on_aa_done)
+	auto_attack_completed.connect(_on_auto_attack_completed)
 	
 	if _cataclysm_activated:
 		_on_cataclysm_activation()
@@ -79,7 +75,7 @@ func _dark_knight_ready() -> void:
 	if visual.has_method("update_resource_points"):
 		super_strike_charges_changed.connect(visual.update_resource_points)
 	
-	_hero_ready()
+	super._ready()
 
 # ============================== Public function ==============================
 
@@ -150,7 +146,7 @@ func _register_spark_of_light() -> void:
 
 # ============================== Callback ==============================
 
-func _on_aa_done() -> void:
+func _on_auto_attack_completed() -> void:
 	var max_charge: int = _mega_strike_max_charge if _mega_strike_activated else _super_strike_max_charge
 	_super_strike_charges = (_super_strike_charges + 1) % (max_charge + 1)
 	super_strike_charges_changed.emit(_super_strike_charges, max_charge)

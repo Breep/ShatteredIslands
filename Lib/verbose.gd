@@ -39,6 +39,7 @@ enum Category {
 	ENTITY_MODULE,
 	ENTITY,
 	HERO,
+	SUMMON,
 	BATTLE_SYNC,
 	BATTLE_READER,
 	BATTLE_WRITER,
@@ -74,6 +75,7 @@ const CATEGORY_PREFIX_TEMPLATES: Dictionary[Category, String] = {
 	Category.ENTITY_MODULE: "(ENT_MODULE) ",
 	Category.ENTITY: "(ENTITY    ) ",
 	Category.HERO: "(HERO      ) ",
+	Category.SUMMON: "(SUMMON    ) ",
 	Category.BATTLE_SYNC: "(BATTLESYNC) ",
 	Category.BATTLE_READER: "(BATTLEREAD) ",
 	Category.BATTLE_WRITER: "(BATTLEWRIT) ",
@@ -132,6 +134,7 @@ var current_categories_level: Dictionary[Category, Level] = {
 	Category.ENTITY_MODULE: Level.WARN,
 	Category.ENTITY: Level.DEBUG,
 	Category.HERO: Level.WARN,
+	Category.SUMMON: Level.WARN,
 	Category.BATTLE_SYNC: Level.WARN,
 	Category.BATTLE_READER: Level.WARN,
 	Category.BATTLE_WRITER: Level.WARN,
@@ -143,7 +146,7 @@ var current_categories_level: Dictionary[Category, Level] = {
 	Category.TABLE: Level.WARN,
 	Category.SPAWN_LOCATION_CONFIG: Level.WARN,
 	Category.TARGET_MODULE: Level.WARN,
-	Category.PROJECTILE: Level.TRACE,
+	Category.PROJECTILE: Level.WARN,
 }
 #endregion
 

@@ -101,7 +101,6 @@ input_2/break_loop_at_end = false
 input_2/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_2g30f"]
-graph_offset = Vector2(244.96625, 139.58414)
 nodes/output/position = Vector2(2080, 600)
 nodes/anim_dance/node = SubResource("AnimationNodeAnimation_ds2a6")
 nodes/anim_dance/position = Vector2(-600, 820)
@@ -153,15 +152,15 @@ nodes/one_shot_idle/node = SubResource("AnimationNodeOneShot_5c32l")
 nodes/one_shot_idle/position = Vector2(-700, 380)
 node_connections = [&"output", 0, &"transition_global", &"transition_fighting", 0, &"one_shot_idle", &"transition_fighting", 1, &"scale_dance", &"transition_fighting", 2, &"scale_die", &"scale_dance", 0, &"anim_dance", &"scale_die", 0, &"anim_die", &"scale_idle", 0, &"anim_idle", &"one_shot_attack", 0, &"transition_fighting", &"one_shot_attack", 1, &"blend_attack", &"blend_attack", 0, &"scale_attack_left", &"blend_attack", 1, &"scale_attack_right", &"one_shot_ultimate", 0, &"one_shot_attack", &"one_shot_ultimate", 1, &"scale_ultimate", &"scale_attack_left", 0, &"anim_attack_left", &"scale_attack_right", 0, &"anim_attack_right", &"scale_ultimate", 0, &"anim_ultimate", &"scale_idle_var", 0, &"anim_idle_var", &"one_shot_sitting", 0, &"anim_sitting", &"one_shot_sitting", 1, &"anim_sitting_var", &"transition_global", 0, &"anim_TPOSE", &"transition_global", 1, &"one_shot_sitting", &"transition_global", 2, &"one_shot_ultimate", &"one_shot_idle", 0, &"scale_idle", &"one_shot_idle", 1, &"scale_idle_var"]
 
-[node name="DarkKnight" type="CharacterBody3D" unique_id=937625230 node_paths=PackedStringArray("_visual_3d", "_animation_module", "_entity_info_panel_3d")]
+[node name="DarkKnight" type="CharacterBody3D" unique_id=937625230 node_paths=PackedStringArray("_visual_3d", "_entity_info_panel_3d", "_animation_module")]
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("1_ufk4g")
 hero_desc = ExtResource("2_502n4")
-_visual_3d = NodePath("darkknight_black")
 entity_name = "DarkKnight"
-_animation_module = NodePath("HeroAnimationModule")
+_visual_3d = NodePath("darkknight_black")
 _entity_info_panel_3d = NodePath("Visual/EntityInfoPanel3d")
+_animation_module = NodePath("HeroAnimationModule")
 metadata/_custom_type_script = "uid://crybfqxtiik6d"
 
 [node name="Visual" type="Node3D" parent="." unique_id=344330336]

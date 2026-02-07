@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b6yg1bhhmnicr" path="res://Entities/Modules/AutoAttackModule/auto_attack_module.tscn" id="6_ufl4b"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Tool/SpawnPoint/spawn_point.tscn" id="7_qjgos"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://bcmrpt8xmj883" path="res://Entities/NPC/Fighting/default_blendtree.tres" id="8_i1jde"]
+[ext_resource type="PackedScene" uid="uid://d0g0xkyr876lc" path="res://Entities/Modules/MovementModule/movement_module.tscn" id="10_xni8n"]
 
 [sub_resource type="Resource" id="Resource_x7yny"]
 script = ExtResource("2_x7yny")
@@ -23,15 +24,17 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 radius = 0.421875
 height = 0.84375
 
-[node name="Chicken" type="CharacterBody3D" unique_id=2109615854 node_paths=PackedStringArray("_visual_3d", "_animation_module", "_entity_info_panel_3d")]
+[node name="Chicken" type="CharacterBody3D" unique_id=2109615854 node_paths=PackedStringArray("_auto_attack_module", "_movement_module", "_visual_3d", "_entity_info_panel_3d", "_animation_module")]
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("1_k573r")
-_visual_3d = NodePath("ChickenVisual")
 entity_name = "Chicken"
-_animation_module = NodePath("AnimationModule")
-_entity_info_panel_3d = NodePath("EntityInfoPanel3d")
 custom_base_stats = SubResource("Resource_x7yny")
+_auto_attack_module = NodePath("AutoAttackModule")
+_movement_module = NodePath("MovementModule")
+_visual_3d = NodePath("ChickenVisual")
+_entity_info_panel_3d = NodePath("EntityInfoPanel3d")
+_animation_module = NodePath("AnimationModule")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1928783995]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41943443, 0)
@@ -41,21 +44,21 @@ shape = SubResource("CapsuleShape3D_x7yny")
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="ChickenVisual" index="0" unique_id=416118163]
-bones/1/position = Vector3(0, 0.047381032, 0.025282245)
+bones/1/position = Vector3(0, 0.047381032, -0.004717756)
 bones/1/rotation = Quaternion(-0.7071016, 0.7071016, 0.0027074562, 0.002722331)
 bones/1/scale = Vector3(1, 1, 1.0026101)
-bones/2/rotation = Quaternion(0.8344415, -5.6795907e-06, -0.5510966, 8.903665e-06)
-bones/3/rotation = Quaternion(0.96720886, 8.184627e-08, 0.2539824, -3.0418073e-07)
-bones/4/rotation = Quaternion(-5.536811e-08, 0.0072078905, -2.113779e-09, 0.9999741)
+bones/2/rotation = Quaternion(0.83199865, 0.04164722, -0.5494833, -0.064124875)
+bones/3/rotation = Quaternion(0.96720886, 9.047426e-08, 0.2539824, -3.064464e-07)
+bones/4/rotation = Quaternion(-5.5819182e-08, 0.007207892, -2.9695197e-09, 0.999974)
 bones/5/rotation = Quaternion(-3.773232e-06, 0.9361406, -9.886281e-06, 0.35162592)
-bones/7/position = Vector3(0.06718646, -0.0814189, 0.026344845)
-bones/7/rotation = Quaternion(2.7037765e-06, -0.7286475, 1.8201396e-05, 0.68488896)
-bones/8/rotation = Quaternion(0.9932081, -1.5955072e-06, -0.11635132, 1.4483898e-05)
-bones/9/rotation = Quaternion(4.0781124e-08, -0.60039806, -2.2802033e-07, 0.79970133)
-bones/10/position = Vector3(0.06718645, 0.08142003, 0.02634143)
-bones/10/rotation = Quaternion(-1.7054314e-05, -0.7286475, -2.8190655e-06, 0.68488896)
-bones/11/rotation = Quaternion(0.9932081, 1.7259488e-06, -0.116351314, -1.4468617e-05)
-bones/12/rotation = Quaternion(1.5295967e-07, -0.4917123, 1.5807893e-07, 0.8707578)
+bones/7/position = Vector3(0.06718646, -0.0814189, 0.026344841)
+bones/7/rotation = Quaternion(3.626069e-06, -0.38353658, 9.600184e-06, 0.9235257)
+bones/8/rotation = Quaternion(0.9932081, -1.5955072e-06, -0.11635131, 1.4483898e-05)
+bones/9/rotation = Quaternion(4.0781128e-08, -0.60039806, -2.2802024e-07, 0.79970133)
+bones/10/position = Vector3(0.06718645, 0.08142003, 0.026341427)
+bones/10/rotation = Quaternion(-7.0842357e-06, -0.9583842, -3.7334617e-06, 0.28548184)
+bones/11/rotation = Quaternion(0.9932081, 1.7259497e-06, -0.11635134, -1.4468616e-05)
+bones/12/rotation = Quaternion(4.817537e-08, -0.60039806, 2.3136849e-07, 0.79970133)
 
 [node name="AnimationPlayer" parent="ChickenVisual" index="1" unique_id=777400876]
 script = ExtResource("4_qjgos")
@@ -104,5 +107,8 @@ parameters/one_shot_idle/request = 0
 
 [node name="AASpawnPoint" parent="." unique_id=1596130037 instance=ExtResource("7_qjgos")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.00037944317, 0.38287425, -0.5151825)
+
+[node name="MovementModule" parent="." unique_id=1929250225 node_paths=PackedStringArray("_owner") instance=ExtResource("10_xni8n")]
+_owner = NodePath("..")
 
 [editable path="ChickenVisual"]

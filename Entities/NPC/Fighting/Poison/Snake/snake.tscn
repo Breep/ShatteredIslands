@@ -23,26 +23,23 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 [sub_resource type="SphereShape3D" id="SphereShape3D_61c56"]
 radius = 0.2
 
-[node name="Snake" type="CharacterBody3D" unique_id=21219754 node_paths=PackedStringArray("_visual_3d", "_animation_module", "_entity_info_panel_3d")]
+[node name="Snake" type="CharacterBody3D" unique_id=21219754 node_paths=PackedStringArray("_auto_attack_module", "_movement_module", "_visual_3d", "_entity_info_panel_3d", "_animation_module")]
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("1_v4viv")
-id = null
-team = null
-battle_id = null
-_visual_3d = NodePath("SnakeVisual")
-spawn_duration = null
-skip_spawn_animation = null
 entity_name = "Snake"
-_animation_module = NodePath("AnimationModule")
-_entity_info_panel_3d = NodePath("EntityInfoPanel3d")
 custom_base_stats = SubResource("Resource_6o6k5")
+_auto_attack_module = NodePath("AutoAttackModule")
+_movement_module = NodePath("MovementModule")
+_visual_3d = NodePath("SnakeVisual")
+_entity_info_panel_3d = NodePath("EntityInfoPanel3d")
+_animation_module = NodePath("AnimationModule")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1208773448]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09924334, 0)
 shape = SubResource("SphereShape3D_61c56")
 
-[node name="MovementManager" parent="." unique_id=2070445016 node_paths=PackedStringArray("_owner") instance=ExtResource("4_r5ru1")]
+[node name="MovementModule" parent="." unique_id=2070445016 node_paths=PackedStringArray("_owner") instance=ExtResource("4_r5ru1")]
 _owner = NodePath("..")
 
 [node name="SnakeVisual" parent="." unique_id=114647546 instance=ExtResource("2_61c56")]
