@@ -101,10 +101,10 @@ func _on_entity_owner_fighting_state_changed(new_state: Entity.FightingState) ->
 	match new_state:
 		Entity.FightingState.FIGHTING: pass
 		Entity.FightingState.CELEBRATING: pass
-		Entity.FightingState.DEAD: _lock_animation = true
 
 
 func _on_entity_owner_died(_self_ref: Entity) -> void:
+	_lock_animation = true  # Lock animation when dead
 	_animation_tree.set(PARAM_TRANSITION_FIGHTING, VALUE_TRANSITION_FIGHTING_DIE)
 
 

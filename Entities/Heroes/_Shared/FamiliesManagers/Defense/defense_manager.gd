@@ -113,9 +113,9 @@ func stop() -> void:
 		_aether_redirector_timer.queue_free()
 		_aether_redirector_timer = null
 	
-	if _owner.fighting_area != null:
-		if _owner.fighting_area.projectile_spawned.is_connected(_on_projectile_spawned_aether_redirector):
-			_owner.fighting_area.projectile_spawned.disconnect(_on_projectile_spawned_aether_redirector)
+	#if _owner.fighting_area != null:
+		#if _owner.fighting_area.projectile_spawned.is_connected(_on_projectile_spawned_aether_redirector):
+			#_owner.fighting_area.projectile_spawned.disconnect(_on_projectile_spawned_aether_redirector)
 
 
 	_clear_optional_timers()

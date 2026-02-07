@@ -118,9 +118,6 @@ func _on_fighting_state_changed(new_fighting_state: FightingState) -> void:
 				for family_manager: FamilyManager in _family_managers.values():
 					family_manager.start()
 		FightingState.CELEBRATING: pass
-		FightingState.DEAD:
-			for family_manager: FamilyManager in _family_managers.values():
-				family_manager.stop()
 		FightingState.UNDEF: pass
 #endregion
 
@@ -145,11 +142,6 @@ func _apply_all_cards_upgrades() -> void:
 	
 	for card: Card in deck.get_active_deck():
 		card.player_upgrade.apply(families_stats, card.lvl)
-
-
-func _handle_death() -> void:
-	died.emit(self)
-	_is_dead = true
 #endregion
 
 #region ============================== Other callbacks ==============================

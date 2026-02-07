@@ -49,6 +49,7 @@ enum Category {
 	TABLE,
 	SPAWN_LOCATION_CONFIG,
 	TARGET_MODULE,
+	MOVEMENT_MODULE,
 	PROJECTILE,
 }
 
@@ -87,6 +88,7 @@ const CATEGORY_PREFIX_TEMPLATES: Dictionary[Category, String] = {
 	Category.TABLE: "(TABLE     ) ",
 	Category.SPAWN_LOCATION_CONFIG: "(SPAWN_LOC ) ",
 	Category.TARGET_MODULE: "(TARGET_MOD) ",
+	Category.MOVEMENT_MODULE: "(MOVE_MOD  ) ",
 	Category.PROJECTILE: "(PROJECTILE) ",
 }
 
@@ -131,7 +133,7 @@ var current_categories_level: Dictionary[Category, Level] = {
 	Category.STACK_MODIFIER: Level.WARN,
 	Category.GLOBAL_FIGHTING_MANAGER: Level.WARN,
 	Category.ENTITY_ANIMATION: Level.WARN,
-	Category.ENTITY_MODULE: Level.WARN,
+	Category.ENTITY_MODULE: Level.DEBUG,
 	Category.ENTITY: Level.DEBUG,
 	Category.HERO: Level.WARN,
 	Category.SUMMON: Level.WARN,
@@ -145,7 +147,8 @@ var current_categories_level: Dictionary[Category, Level] = {
 	Category.BDS_REGISTERY: Level.WARN,
 	Category.TABLE: Level.WARN,
 	Category.SPAWN_LOCATION_CONFIG: Level.WARN,
-	Category.TARGET_MODULE: Level.WARN,
+	Category.TARGET_MODULE: Level.DEBUG,
+	Category.MOVEMENT_MODULE: Level.DEBUG,
 	Category.PROJECTILE: Level.WARN,
 }
 #endregion

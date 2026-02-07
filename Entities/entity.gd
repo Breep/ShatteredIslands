@@ -62,13 +62,25 @@ func signal_spawn_completed() -> void:
 #endregion
 
 #region ============================== Enums ==============================
+enum LifeState {
+	ALIVE,
+	DEAD
+}
+
 enum FightingState {
 	SPAWNING,
 	IDLE,
 	FIGHTING,
 	CELEBRATING,
-	DEAD,
 	UNDEF
+}
+
+enum StatusState {
+	STUNNED,
+	UNTARGETABLE,
+	INVINCIBLE,
+	FROZEN,
+	SILENCED
 }
 
 enum EntityType {
@@ -99,10 +111,6 @@ enum FieldGeneratorModifier {
 #endregion
 
 #region ============================== Public variables ==============================
-var _is_dead: bool = false
-var is_dead: bool:
-	get: return _is_dead
-
 var _is_targetable: bool = true
 var is_targetable: bool:
 	get: return _is_targetable
@@ -167,15 +175,47 @@ var _spawn_tween: Tween = null
 
 @onready var bds_registry := EntityBDSRegistry.new(entity_name)
 
+#region ============================== Life State ==============================
+signal life_state_changed(new_life_state: LifeState)
+var _life_state: LifeState = LifeState.ALIVE
+var life_state: LifeState:
+	get: return _life_state
+	set(value):
+		if value != _life_state:
+			_life_state = value
+			life_state_changed.emit(_life_state)
+#endregion
+
 #region ============================== Fighting State ==============================
 signal fighting_state_changed(new_fighting_state: FightingState)
 var _fighting_state: FightingState = FightingState.UNDEF
+var _initial_fighting_state_from_context: FightingState = FightingState.UNDEF  # Stored during apply_context
 var fighting_state: FightingState:
 	get: return _fighting_state
 	set(value):
 		if value != _fighting_state:
 			_fighting_state = value
 			fighting_state_changed.emit(_fighting_state)
+#endregion
+
+#region ============================== Status States ==============================
+var status_states: Array[StatusState] = []
+
+func has_status(status: StatusState) -> bool:
+	return status_states.has(status)
+
+func add_status(status: StatusState) -> void:
+	if not status_states.has(status):
+		status_states.append(status)
+
+func remove_status(status: StatusState) -> void:
+	status_states.erase(status)
+
+func is_alive() -> bool:
+	return life_state == LifeState.ALIVE
+
+func is_dead() -> bool:
+	return life_state == LifeState.DEAD
 #endregion
 
 #region ============================== Static variables ==============================
@@ -233,7 +273,6 @@ func _enter_tree() -> void:
 		_movement_module = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.MOVEMENT].instantiate().init(self)
 		add_child(_movement_module)
 	
-	_original_fighting_state = fighting_state
 	_is_targetable = false  # Prevent targeting during spawn
 	_is_spawning = true
 
@@ -246,7 +285,17 @@ func _ready() -> void:
 	
 	stats.health_changed.connect(_on_stats_health_changed)
 	died.connect(_on_died)
-	# Start spawn sequence instead of starting modules directly
+	
+	# Save the target fighting_state from context (or current if no context)
+	# Don't apply it yet - let spawn sequence handle state transitions
+	if _initial_fighting_state_from_context != FightingState.UNDEF:
+		_original_fighting_state = _initial_fighting_state_from_context
+	else:
+		# Entity placed manually in scene, use current fighting_state (likely UNDEF)
+		# Default to IDLE if undefined
+		_original_fighting_state = fighting_state if fighting_state != FightingState.UNDEF else FightingState.IDLE
+	
+	# Start spawn sequence - this will set SPAWNING, then restore _original_fighting_state
 	_start_spawn()
 
 
@@ -293,7 +342,9 @@ func get_context() -> EntityContext:
 	ctx.battle_id = battle_id
 	ctx.spawn_manager = _spawn_manager
 	ctx.arena_zone_manager = _arena_zone_manager
-	ctx.fighting_state = fighting_state
+	ctx.life_state = LifeState.ALIVE  # Summons always spawn alive
+	ctx.fighting_state = fighting_state  # Inherit parent's state
+	Verbose.debug("Entity [" + entity_name + "] creating context with fighting_state [" + str(FightingState.keys()[fighting_state]) + "]", Verbose.Category.ENTITY)
 	return ctx
 
 
@@ -301,7 +352,12 @@ func apply_context(context: EntityContext) -> void:
 	# Apply public fields (could also use context.apply_to(self) but explicit is clearer)
 	team = context.team
 	battle_id = context.battle_id
-	fighting_state = context.fighting_state
+	life_state = context.life_state
+	
+	# Store fighting_state but DON'T apply it yet
+	# We'll apply it in _ready() after connecting the fighting_state_changed signal
+	_initial_fighting_state_from_context = context.fighting_state
+	Verbose.debug("Entity [" + entity_name + "] received fighting_state [" + str(FightingState.keys()[context.fighting_state]) + "] from context", Verbose.Category.ENTITY)
 	
 	# Apply private fields
 	_spawn_manager = context.spawn_manager
@@ -505,7 +561,6 @@ func _stop_approaching() -> void:
 
 # ============================== Spawn system ==============================
 func _start_spawn() -> void:
-	"""Initiate spawn sequence - set state to SPAWNING and play animation."""
 	fighting_state = FightingState.SPAWNING
 	Verbose.debug("Entity [" + entity_name + "] starting spawn", Verbose.Category.ENTITY)
 	
@@ -518,11 +573,6 @@ func _start_spawn() -> void:
 
 
 func _play_spawn_animation() -> void:
-	"""
-	Virtual function: Play spawn animation.
-	Override this in child classes for custom spawn animations.
-	Default: Bounce scale animation on _visual_3d.
-	"""
 	if _visual_3d != null:
 		_visual_3d.scale = Vector3.ZERO
 		_spawn_tween = create_tween()
@@ -552,16 +602,13 @@ func _on_fighting_state_changed(new_fighting_state: FightingState) -> void:
 			if target_module != null: target_module.stop()
 			if conditions != null: conditions.stop()
 			if _auto_attack_module != null: _auto_attack_module.stop()
+			if _movement_module != null: _movement_module.stop()
 		FightingState.FIGHTING:
 			if target_module != null: target_module.start()
 			if conditions != null: conditions.start()
 			if _auto_attack_module != null and auto_attack_enabled: _auto_attack_module.start()
+			if _movement_module != null: _movement_module.start()
 		FightingState.CELEBRATING: pass
-		FightingState.DEAD:
-			if target_module != null: target_module.stop()
-			if conditions != null: conditions.stop()
-			if _entity_info_panel_3d != null: _entity_info_panel_3d.hide()
-			if _auto_attack_module != null: _auto_attack_module.stop()
 		FightingState.UNDEF: pass
 
 
@@ -573,6 +620,13 @@ func _on_stats_health_changed(new_health: int) -> void:
 func _on_died(_entity: Entity) -> void:
 	Verbose.debug("Entity [" + entity_name + "] died", Verbose.Category.ENTITY)
 	_stop_approaching()
-	fighting_state = FightingState.DEAD
-	_is_dead = true
+	life_state = LifeState.DEAD  # Set life state
+	fighting_state = FightingState.IDLE  # Stop fighting
+	
+	# Visual and module cleanup
+	if target_module != null: target_module.stop()
+	if conditions != null: conditions.stop()
+	if _auto_attack_module != null: _auto_attack_module.stop()
+	if _movement_module != null: _movement_module.stop()
+	if _entity_info_panel_3d != null: _entity_info_panel_3d.hide()
 #endregion

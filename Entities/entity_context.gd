@@ -9,4 +9,5 @@ var team: int = -1
 var battle_id: int = -1
 var spawn_manager: SpawnManager
 var arena_zone_manager: ArenaZoneManager
+var life_state: Entity.LifeState = Entity.LifeState.ALIVE  # Summons inherit ALIVE by default
 var fighting_state: Entity.FightingState = Entity.FightingState.UNDEF

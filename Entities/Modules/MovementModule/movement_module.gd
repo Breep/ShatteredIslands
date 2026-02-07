@@ -10,14 +10,17 @@ var _target_entity: Entity = null
 var _follow_entity: bool = false
 
 func start() -> void:
+	Verbose.debug("start", Verbose.Category.MOVEMENT_MODULE)
 	_is_stopped = false
 
 
 func stop() -> void:
+	Verbose.debug("stop", Verbose.Category.MOVEMENT_MODULE)
 	_is_stopped = true
 
 
 func set_target_position(target_position: Vector3) -> void:
+	Verbose.debug("set_target_position", Verbose.Category.MOVEMENT_MODULE)
 	_target_position = target_position
 	_is_moving = true
 
@@ -26,20 +29,21 @@ func move_to_entity(entity: Entity) -> void:
 	if entity:
 		set_target_position(entity.global_position)
 	else:
-		printerr("MovementModule.move_to_entity: entity is null")
+		Verbose.error("move_to_entity: entity is null", Verbose.Category.MOVEMENT_MODULE)
 
 
 func follow_entity(entity: Entity) -> void:
-	Verbose.debug("Start following entity", Verbose.Category.ENTITY_MODULE)
+	Verbose.debug("follow_entity", Verbose.Category.MOVEMENT_MODULE)
 	if entity:
 		_target_entity = entity
 		_follow_entity = true
 		_is_moving = true
 	else:
-		printerr("MovementModule.follow_entity: entity is null")
+		Verbose.error("follow_entity: entity is null", Verbose.Category.MOVEMENT_MODULE)
 
 
 func stop_following() -> void:
+	Verbose.debug("stop_following", Verbose.Category.MOVEMENT_MODULE)
 	_follow_entity = false
 	_target_entity = null
 	_is_moving = false

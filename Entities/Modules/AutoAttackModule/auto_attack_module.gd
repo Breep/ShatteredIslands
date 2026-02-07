@@ -66,11 +66,13 @@ func _ready() -> void:
 # ============================== Public functions ==============================
 
 func start() -> void:
+	Verbose.debug("Auto attack module started for " + _owner.entity_name, Verbose.Category.ENTITY_MODULE)
 	attack_speed = _owner.stats.attack_speed
 	_auto_attack_timer.start()
 
 
 func stop() -> void:
+	Verbose.debug("Auto attack module stopped for " + _owner.entity_name, Verbose.Category.ENTITY_MODULE)
 	_auto_attack_timer.stop()
 
 
