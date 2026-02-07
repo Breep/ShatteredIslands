@@ -14,7 +14,6 @@ signal damage_taken(entity_ref: Entity, damage: float, damage_type: Utils.Damage
 signal heal_taken(entity_ref: Entity, heal_amount: float, is_critical: bool)
 signal spell_casted(entity_ref: Entity, target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary)
 signal stack_taken(entity_ref: Entity, stack_type: Utils.StackType, stack_number: float, is_critical: bool)
-signal auto_attack_started(entity_ref: Entity, is_critical: bool)
 signal auto_attack_completed(entity_ref: Entity)
 signal spawn_completed(entity_ref: Entity)
 #endregion
@@ -93,9 +92,7 @@ var _action_module: ActionModule
 var _base_stats: EntityStats # Private, use base_stats property to access
 var _interact_module: InteractModule
 
-# Approach target for auto-attacks
-var _is_approaching_target: bool = false
-var _approach_target: Entity = null
+
 
 # Spawn system
 var _original_fighting_state: FightingState = FightingState.UNDEF
@@ -234,52 +231,33 @@ func _enter_tree() -> void:
 	_is_targetable = false  # Prevent targeting during spawn
 	_is_spawning = true
 
+
 func _ready() -> void:
 	Verbose.debug("Entity [" + entity_name + "] ready", Verbose.Category.ENTITY)
 	fighting_state_changed.connect(_on_fighting_state_changed)
 	
-	if _animation_module != null:
-		_animation_module.attack_hit_frame.connect(_on_animation_module_attack_hit_frame)
-	
 	stats.health_changed.connect(_on_stats_health_changed)
 	died.connect(_on_died)
 	
-	# Save the target fighting_state from context (or current if no context)
-	# Don't apply it yet - let spawn sequence handle state transitions
+	# TODO CHECK THIS ??
 	if _initial_fighting_state_from_context != FightingState.UNDEF:
 		_original_fighting_state = _initial_fighting_state_from_context
 	else:
-		# Entity placed manually in scene, use current fighting_state (likely UNDEF)
-		# Default to IDLE if undefined
 		_original_fighting_state = fighting_state if fighting_state != FightingState.UNDEF else FightingState.IDLE
 	
-	# Start spawn sequence - this will set SPAWNING, then restore _original_fighting_state
+	if _auto_attack_module != null:
+		_auto_attack_module.connect_modules(_movement_module, _action_module, _animation_module)
+	
+	# Connect interdependent modules
+	if _animation_module != null:
+		_animation_module.connect_modules(_auto_attack_module)
+	
 	_start_spawn()
 
 
 func _exit_tree() -> void:
 	if stats != null and stats.health_changed.is_connected(_on_stats_health_changed):
 		stats.health_changed.disconnect(_on_stats_health_changed)
-
-
-func _process(_delta: float) -> void:
-	# Check if we're approaching a target and if we're now in range
-	if _is_approaching_target and _approach_target != null:
-		# Check if target is still valid
-		if not is_instance_valid(_approach_target) or _approach_target.is_queued_for_deletion() or _approach_target.is_dead:
-			# Target died/disappeared, stop approaching
-			_stop_approaching()
-			auto_attack_completed.emit(self)
-			return
-		
-		# Check if we're now in range
-		if target_module.is_in_attack_range(_approach_target):
-			# We're in range! Stop movement and launch the attack
-			# IMPORTANT: Save target before _stop_approaching() sets it to null
-			var target_to_attack: Entity = _approach_target
-			_stop_approaching()
-			# Call auto_attack again, this time we'll be in range
-			auto_attack(target_to_attack)
 #endregion
 
 #region ============================== Public functions ==============================
@@ -307,26 +285,17 @@ func get_context() -> EntityContext:
 
 
 func apply_context(context: EntityContext) -> void:
-	# Apply public fields (could also use context.apply_to(self) but explicit is clearer)
 	team = context.team
 	battle_id = context.battle_id
 	life_state = context.life_state
-	
-	# Store fighting_state but DON'T apply it yet
-	# We'll apply it in _ready() after connecting the fighting_state_changed signal
 	_initial_fighting_state_from_context = context.fighting_state
-	Verbose.debug("Entity [" + entity_name + "] received fighting_state [" + str(FightingState.keys()[context.fighting_state]) + "] from context", Verbose.Category.ENTITY)
-	
-	# Apply private fields
 	_spawn_manager = context.spawn_manager
 	_arena_zone_manager = context.arena_zone_manager
-	
-	# Connect action module to managers if available
 	if _action_module != null:
-		if context.spawn_manager != null:
-			_action_module.connect_to_spawn_manager(context.spawn_manager)
-		if context.arena_zone_manager != null:
-			_action_module.connect_to_arena_zone_manager(context.arena_zone_manager)
+		if _spawn_manager != null: _action_module.connect_to_spawn_manager(_spawn_manager)
+		if _arena_zone_manager != null: _action_module.connect_to_arena_zone_manager(_arena_zone_manager)
+	
+	Verbose.debug("Entity [" + entity_name + "] received fighting_state [" + str(FightingState.keys()[context.fighting_state]) + "] from context", Verbose.Category.ENTITY)
 
 
 func connect_to_fighting_area(fighting_area_ref: FightingArea) -> void:
@@ -365,95 +334,10 @@ func direct_damage_percent(target: Entity, damage_percent: float, damage_type: U
 	
 	action_done.emit(target, action_type, action_id, result[ActionModule.ResultKey.VALUE], result[ActionModule.ResultKey.IS_CRITICAL])
 
-# Auto-attack with animation synchronization (if AnimationModule present)
-var _pending_attacks: Array[AttackCommand]
-var _pending_melee_attacks: Array[MeleeAttackCommand]
 
 func auto_attack(target: Entity) -> void:
-	if target == null or _auto_attack_module == null:
-		printerr("Can't auto attack | " + entity_name)
-		return
-	
-	# Check range (-1 = unlimited)
-	if stats.attack_range >= 0 and not target_module.is_in_attack_range(target):
-		# Target is out of range, start approaching if we have a MovementModule
-		if _movement_module != null:
-			_is_approaching_target = true
-			_approach_target = target
-			_movement_module.follow_entity(target)
-			return
-		else:
-			auto_attack_completed.emit(self)
-			return
-	
-	# Look at target at START of attack
-	look_at_target_y_only(target.global_position)
-	
-	# Branch based on attack type
-	match stats.auto_attack_type:
-		EntityStats.AutoAttackType.RANGED:
-			_ranged_auto_attack(target)
-		EntityStats.AutoAttackType.MELEE:
-			_melee_auto_attack(target)
-
-
-func _ranged_auto_attack(target: Entity) -> void:
-	var projectile_spawn := get_auto_attack_spawn()
-	var projectile_stats := _auto_attack_module.prepare_projectile_stats()
-	
-	var attack_cmd: AttackCommand = _action_module.build_projectile_attack(
-		target,
-		Projectile.Type.SHADOW_BOLT,
-		projectile_spawn,
-		projectile_stats
-	)
-	
-	if attack_cmd == null:
-		Verbose.error("Can't create an AttackCommand | " + entity_name, Verbose.Category.ENTITY)
-		return
-	
-	if _animation_module != null:
-		if _pending_attacks.is_empty():
-			_pending_attacks.append(attack_cmd)
-		else:
-			_pending_attacks[0] = attack_cmd
-		auto_attack_started.emit(false)
-	else:
-		_action_module.projectile_attack(
-			attack_cmd.target,
-			attack_cmd.projectile_type,
-			attack_cmd.spawn_node,
-			attack_cmd.stats
-		)
-		auto_attack_completed.emit(self)
-
-
-func _melee_auto_attack(target: Entity) -> void:
-	var attack_stats := _auto_attack_module.prepare_projectile_stats()
-	var melee_cmd := MeleeAttackCommand.new(target, attack_stats)
-	
-	if _animation_module != null:
-		if _pending_melee_attacks.is_empty():
-			_pending_melee_attacks.append(melee_cmd)
-		else:
-			_pending_melee_attacks[0] = melee_cmd
-		auto_attack_started.emit(false)
-	else:
-		_execute_melee_attack(melee_cmd)
-		auto_attack_completed.emit(self)
-
-
-func _execute_melee_attack(cmd: MeleeAttackCommand) -> void:
-	if !is_instance_valid(cmd.target) or cmd.target.is_queued_for_deletion():
-		return
-	for cb: Callable in cmd.stats.on_hit_callbacks:
-		if cb.is_valid():
-			cb.call({
-				AutoAttackModifier.VarType.SOURCE: self,
-				AutoAttackModifier.VarType.TARGET: cmd.target,
-				AutoAttackModifier.VarType.PROJECTILE: null,
-				AutoAttackModifier.VarType.POSITION: global_position
-			})
+	if _auto_attack_module == null: return
+	_auto_attack_module.execute_auto_attack(target)
 
 
 func projectile_attack(target: Entity, projectile_type: Projectile.Type, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
@@ -513,25 +397,7 @@ func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: 
 	action_done.emit(target, action_type, action_id, result[ActionModule.ResultKey.VALUE], result[ActionModule.ResultKey.IS_CRITICAL])
 
 
-func _on_animation_module_attack_hit_frame() -> void:
-	# Handle ranged attacks (projectile)
-	if not _pending_attacks.is_empty():
-		var attack_cmd: AttackCommand = _pending_attacks.pop_front()
-		if !is_instance_valid(attack_cmd.target) or attack_cmd.target.is_queued_for_deletion():
-			return
-		_action_module.projectile_attack(
-			attack_cmd.target,
-			attack_cmd.projectile_type,
-			attack_cmd.spawn_node,
-			attack_cmd.stats
-		)
-	
-	# Handle melee attacks (direct damage)
-	if not _pending_melee_attacks.is_empty():
-		var melee_cmd: MeleeAttackCommand = _pending_melee_attacks.pop_front()
-		_execute_melee_attack(melee_cmd)
-	
-	auto_attack_completed.emit(self)
+
 
 
 func summon_entity(entity_type: EntityType, spawn_config: SpawnLocationConfig, entity_modifier: Dictionary) -> void:
@@ -652,11 +518,6 @@ func take_dispell(value: float, is_critical: bool, action_id: StringName, source
 #endregion
 
 #region ============================== Private functions ==============================
-func _stop_approaching() -> void:
-	_is_approaching_target = false
-	_approach_target = null
-	if _movement_module != null:
-		_movement_module.stop_following()
 
 
 #region ============================== Spawn system ==============================
@@ -719,7 +580,6 @@ func _on_stats_health_changed(new_health: int) -> void:
 
 func _on_died(_entity: Entity) -> void:
 	Verbose.debug("Entity [" + entity_name + "] died", Verbose.Category.ENTITY)
-	_stop_approaching()
 	life_state = LifeState.DEAD  # Set life state
 	fighting_state = FightingState.IDLE  # Stop fighting
 	

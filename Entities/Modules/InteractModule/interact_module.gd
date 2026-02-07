@@ -21,7 +21,7 @@ func _ready() -> void:
 
 #region ============================== Damage ==============================
 func take_damage(damage: float, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> Dictionary:
-	if _owner.stats.health <= 0 or _owner.is_dead: return {}
+	if _owner.stats.health <= 0 or _owner.is_dead(): return {}
 	var damage_before_armor: float = 0
 	if damage_type != Utils.DamageType.PURE and multiplayer.is_server():
 		if _is_dodged(Utils.damage_to_action(damage_type)):
@@ -64,7 +64,7 @@ func take_damage_percent(damage_percent: float, percent_modifier: Utils.PercentM
 
 #region ============================== Condition stacks ==============================
 func take_condition_stacks(stacks_number: float, stack_type: Utils.StackType, is_critical: bool, action_id: StringName, source: Entity = null, duration: float = 5.0) -> Dictionary:
-	if _owner.stats.health <= 0 or _owner.is_dead: return {}
+	if _owner.stats.health <= 0 or _owner.is_dead(): return {}
 	if multiplayer.is_server():
 		if _is_dodged(Utils.stack_to_action(stack_type)):
 			return {ResultKey.DODGED: true}
@@ -85,7 +85,7 @@ func take_condition_stacks(stacks_number: float, stack_type: Utils.StackType, is
 
 #region ============================== Heal ==============================
 func take_heal(heal_amount: float, is_critical: bool, action_id: StringName, source: Entity = null) -> Dictionary:
-	if _owner.stats.health <= 0 or _owner.is_dead: return {}
+	if _owner.stats.health <= 0 or _owner.is_dead(): return {}
 	if multiplayer.is_server():
 		if _is_dodged(Utils.ActionType.UTILITY_HEAL):
 			return {ResultKey.DODGED: true}

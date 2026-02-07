@@ -245,7 +245,7 @@ func _get_highest_shield(entities: Array[Entity], excluded_entity: Entity) -> En
 func _get_alive_entities(entities: Array[Entity]) -> Array[Entity]:
 	var alive_entities: Array[Entity]
 	for entity in entities:
-		if is_instance_valid(entity) and not entity.is_dead:
+		if is_instance_valid(entity) and not entity.is_dead():
 			alive_entities.append(entity)
 	return alive_entities
 

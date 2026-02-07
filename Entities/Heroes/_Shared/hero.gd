@@ -79,7 +79,7 @@ func _enter_tree() -> void:
 		var module: AutoAttackModule = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.AUTOATTACK].instantiate()
 		_auto_attack_module = module.init(self)
 		add_child(_auto_attack_module)
-
+	
 	super._enter_tree()
 
 

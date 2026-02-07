@@ -56,22 +56,24 @@ func _ready() -> void:
 		return
 	
 	_rng.randomize()
-	
 	_idle_variation_timer = Timer.new()
 	add_child(_idle_variation_timer)
-	_idle_variation_timer.name = "IdleVariationTimer"
+	_idle_variation_timer.wait_time = _rng.randf_range(IDLE_VAR_TIMER_MIN_WAIT_TIME, IDLE_VAR_TIMER_MAX_WAIT_TIME)
+	_idle_variation_timer.timeout.connect(_on_idle_variation_timer_timeout)
+	_idle_variation_timer.start()
 	
 	_entity_owner.died.connect(_on_entity_owner_died)
-	_entity_owner.auto_attack_started.connect(_on_entity_owner_auto_attack_started)
-
 	_entity_owner.fighting_state_changed.connect(_on_entity_owner_fighting_state_changed)
 	
 	_animation_player.attack_done.connect(_on_animation_player_attack_done)
 	
-	_idle_variation_timer.timeout.connect(_on_idle_variation_timer_timeout)
-	
 	_animation_tree.set(PARAM_TRANSITION_GLOBAL, VALUE_TRANSITION_GLOBAL_FIGHTING)
 	_animation_tree.set(PARAM_TRANSITION_FIGHTING, VALUE_TRANSITION_FIGHTING_IDLE)
+
+
+func connect_modules(auto_attack_module: AutoAttackModule) -> void:
+	if auto_attack_module != null:
+		auto_attack_module.attack_started.connect(_on_entity_owner_auto_attack_started)
 
 
 func _process(_delta: float) -> void:
@@ -118,7 +120,8 @@ func _on_entity_owner_fight_is_lost() -> void:
 	_animation_tree.set(PARAM_TRANSITION_FIGHTING, VALUE_TRANSITION_FIGHTING_DIE)
 
 
-func _on_entity_owner_auto_attack_started(is_critical: bool) -> void:
+func _on_entity_owner_auto_attack_started() -> void:
+	Verbose.debug("Auto attack started", Verbose.Category.ENTITY_ANIMATION)
 	if _lock_animation: return
 	_animation_tree.set(PARAM_SCALE_ATTACK, 1.0 + _entity_owner.stats.attack_speed)
 	_animation_tree.set(PARAM_ONE_SHOT_ATTACK, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)

@@ -22,16 +22,14 @@ func _ready() -> void:
 		hero.fighting_state_changed.connect(_on_hero_fighting_state_changed)
 
 
-# Override auto attack to add blend logic (left/right hand + critical)
-func _on_entity_owner_auto_attack_started(is_critical: bool) -> void:
+# Override auto attack to add blend logic (left/right hand)
+func _on_entity_owner_auto_attack_started() -> void:
 	Verbose.debug("Auto attack started", Verbose.Category.ENTITY_ANIMATION)
 	var use_right_hand: bool = _rng.randf_range(0.0, 1.0) < 0.5
 	if use_right_hand:
 		_animation_tree.set(PARAM_BLEND_ATTACK, 1.0)
 	else:
 		_animation_tree.set(PARAM_BLEND_ATTACK, 0.0)
-	if is_critical:
-		_animation_tree.set(PARAM_BLEND_ATTACK, 0.5)
 	
 	_animation_tree.set(PARAM_SCALE_ATTACK_LEFT, 1.0 + _entity_owner.stats.attack_speed)
 	_animation_tree.set(PARAM_SCALE_ATTACK_RIGHT, 1.0 + _entity_owner.stats.attack_speed)
