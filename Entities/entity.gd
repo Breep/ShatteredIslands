@@ -5,60 +5,18 @@ extends CharacterBody3D
 
 #region ============================== Signals ==============================
 signal died(self_ref: Entity)
-
 signal interaction_received(entity_ref: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool)
-func signal_interaction_received(source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
-	interaction_received.emit(self, source, action_type, action_id, value, is_critical)
-	bds_registry.register_interaction(action_id, action_type, value, is_critical)
-	if source != null:
-		Verbose.trace("Interaction received | '" + entity_name + "' [" + str(id) + "] | '" + source.entity_name + "' [" + str(source.id) + "] | " + \
-						Utils.ActionType.keys()[action_type] + " | " + action_id + " | " + str(value) + " | " + str(is_critical), Verbose.Category.ENTITY)
-	else:
-		Verbose.trace("Interaction received | " + entity_name + " [" + str(id) + "] | 'Unknown source'[-1] | " + \
-						Utils.ActionType.keys()[action_type] + " | " + action_id + " | " + str(value) + " | " + str(is_critical), Verbose.Category.ENTITY)
-
 signal action_done(entity_ref: Entity, target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool)
-func signal_action_done(target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
-	action_done.emit(self, target, action_type, action_id, value, is_critical)
-	bds_registry.register_action(action_id, action_type, value, is_critical)
-	Verbose.trace("Action done | " + entity_name + " [" + str(id) + "] | " + target.entity_name + " [" + str(target.id) + "] | " + \
-					Utils.ActionType.keys()[action_type] + " | " + action_id + " | " + str(value) + " | " + str(is_critical), Verbose.Category.ENTITY)
-
+signal action_dodged(entity_ref: Entity, source: Entity, action_type: Utils.ActionType)
+signal critical_action_done(entity_ref: Entity, target: Entity, action_type: Utils.ActionType, value_before_crit: float, value_after_crit: float)
 signal action_overhealed(entity_ref: Entity, target: Entity, amount: float)
-func signal_action_overhealed(target: Entity, amount: float) -> void:
-	action_overhealed.emit(self, target, amount)
-
-signal critical_action_done(entity_ref: Entity, target: Entity, action_type: Utils.ActionType, base_value: float, real_value: float)
-func signal_critical_action_done(target: Entity, action_type: Utils.ActionType, base_value: float, real_value: float) -> void:
-	critical_action_done.emit(self, target, action_type, base_value, real_value)
-
 signal damage_taken(entity_ref: Entity, damage: float, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool)
-func signal_damage_taken(damage: float, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool) -> void:
-	damage_taken.emit(self, damage, damage_type, is_critical, blocked_by_armor)
-
 signal heal_taken(entity_ref: Entity, heal_amount: float, is_critical: bool)
-func signal_heal_taken(heal_amount: float, is_critical: bool) -> void:
-	heal_taken.emit(self, heal_amount, is_critical)
-
-signal spell_casted(source: Entity, target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary)
-func signal_spell_casted(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary) -> void:
-	spell_casted.emit(self, target, spell_type, spell_modifier)
-
-signal stack_taken(source: Entity, stack_type: Utils.StackType, stack_number: float, is_critical: bool)
-func signal_stack_taken(stack_type: Utils.StackType, stack_number: float, is_critical: bool) -> void:
-	stack_taken.emit(self, stack_type, stack_number, is_critical)
-
-signal auto_attack_started(is_critical: bool)
-func signal_auto_attack_started(is_critical: bool) -> void:
-	auto_attack_started.emit(is_critical)
-
-signal auto_attack_completed()
-func signal_auto_attack_completed() -> void:
-	auto_attack_completed.emit()
-
-signal spawn_completed()
-func signal_spawn_completed() -> void:
-	spawn_completed.emit()
+signal spell_casted(entity_ref: Entity, target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary)
+signal stack_taken(entity_ref: Entity, stack_type: Utils.StackType, stack_number: float, is_critical: bool)
+signal auto_attack_started(entity_ref: Entity, is_critical: bool)
+signal auto_attack_completed(entity_ref: Entity)
+signal spawn_completed(entity_ref: Entity)
 #endregion
 
 #region ============================== Enums ==============================
@@ -311,7 +269,7 @@ func _process(_delta: float) -> void:
 		if not is_instance_valid(_approach_target) or _approach_target.is_queued_for_deletion() or _approach_target.is_dead:
 			# Target died/disappeared, stop approaching
 			_stop_approaching()
-			signal_auto_attack_completed()
+			auto_attack_completed.emit(self)
 			return
 		
 		# Check if we're now in range
@@ -383,10 +341,29 @@ func connect_to_fighting_area(fighting_area_ref: FightingArea) -> void:
 
 #region ===== Actions (Default implementations - can be overridden)
 func direct_damage(target: Entity, damage: float, damage_type: Utils.DamageType, action_id: StringName) -> void:
-	_action_module.direct_damage(target, damage, damage_type, action_id)
+	if _action_module == null: return
+	var result: Dictionary = _action_module.direct_damage(target, damage, damage_type, action_id)
+	if result.is_empty(): return
+	
+	var action_type: Utils.ActionType = Utils.damage_to_action(damage_type)
+	
+	if result[ActionModule.ResultKey.IS_CRITICAL]:
+		critical_action_done.emit(target, action_type, result[ActionModule.ResultKey.BASE_VALUE], result[ActionModule.ResultKey.VALUE])
+	
+	action_done.emit(target, action_type, action_id, result[ActionModule.ResultKey.VALUE], result[ActionModule.ResultKey.IS_CRITICAL])
+
 
 func direct_damage_percent(target: Entity, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier, action_id: StringName) -> void:
-	_action_module.direct_damage_percent(target, damage_percent, damage_type, percent_modifier, action_id)
+	if _action_module == null: return
+	var result: Dictionary = _action_module.direct_damage_percent(target, damage_percent, damage_type, percent_modifier, action_id)
+	if result.is_empty(): return
+	
+	var action_type: Utils.ActionType = Utils.damage_to_action(damage_type)
+	
+	if result[ActionModule.ResultKey.IS_CRITICAL]:
+		critical_action_done.emit(target, action_type, result[ActionModule.ResultKey.BASE_VALUE], result[ActionModule.ResultKey.VALUE])
+	
+	action_done.emit(target, action_type, action_id, result[ActionModule.ResultKey.VALUE], result[ActionModule.ResultKey.IS_CRITICAL])
 
 # Auto-attack with animation synchronization (if AnimationModule present)
 var _pending_attacks: Array[AttackCommand]
@@ -404,11 +381,9 @@ func auto_attack(target: Entity) -> void:
 			_is_approaching_target = true
 			_approach_target = target
 			_movement_module.follow_entity(target)
-			# Don't emit auto_attack_completed yet, we're approaching
 			return
 		else:
-			# No MovementModule, can't approach - complete attack immediately
-			signal_auto_attack_completed()
+			auto_attack_completed.emit(self)
 			return
 	
 	# Look at target at START of attack
@@ -450,8 +425,7 @@ func _ranged_auto_attack(target: Entity) -> void:
 			attack_cmd.spawn_node,
 			attack_cmd.stats
 		)
-		# No animation, attack completes immediately
-		signal_auto_attack_completed()
+		auto_attack_completed.emit(self)
 
 
 func _melee_auto_attack(target: Entity) -> void:
@@ -466,8 +440,7 @@ func _melee_auto_attack(target: Entity) -> void:
 		auto_attack_started.emit(false)
 	else:
 		_execute_melee_attack(melee_cmd)
-		# No animation, attack completes immediately
-		signal_auto_attack_completed()
+		auto_attack_completed.emit(self)
 
 
 func _execute_melee_attack(cmd: MeleeAttackCommand) -> void:
@@ -482,23 +455,62 @@ func _execute_melee_attack(cmd: MeleeAttackCommand) -> void:
 				AutoAttackModifier.VarType.POSITION: global_position
 			})
 
+
 func projectile_attack(target: Entity, projectile_type: Projectile.Type, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	_action_module.projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
 
+
 func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary = {}) -> void:
+	if _action_module == null: return
 	_action_module.cast_spell(target, spell_type, spell_modifier)
+	spell_casted.emit(target, spell_type, spell_modifier)
+
 
 func cast_ultimate() -> void:
 	printerr("Entity: cast_ultimate() called but not implemented [", get_path(), "]")
 
+
 func heal(target: Entity, heal_amount: float, action_id: StringName) -> void:
-	_action_module.heal(target, heal_amount, action_id)
+	if _action_module == null: return
+	var result: Dictionary = _action_module.heal(target, heal_amount, action_id)
+	if result.is_empty(): return
+	
+	# Check for overheal (calculated by module)
+	if result.get(ActionModule.ResultKey.OVERHEAL, 0.0) > 0:
+		action_overhealed.emit(target, result[ActionModule.ResultKey.OVERHEAL])
+	
+	if result[ActionModule.ResultKey.IS_CRITICAL]:
+		critical_action_done.emit(target, Utils.ActionType.UTILITY_HEAL, result[ActionModule.ResultKey.BASE_VALUE], result[ActionModule.ResultKey.VALUE])
+	
+	action_done.emit(target, Utils.ActionType.UTILITY_HEAL, action_id, result[ActionModule.ResultKey.VALUE], result[ActionModule.ResultKey.IS_CRITICAL])
+
 
 func heal_percent(target: Entity, percent: float, percent_modifier: Utils.PercentModifier, action_id: StringName) -> void:
-	_action_module.heal_percent(target, percent, percent_modifier, action_id)
+	if _action_module == null: return
+	var result: Dictionary = _action_module.heal_percent(target, percent, percent_modifier, action_id)
+	if result.is_empty(): return
+	
+	# Check for overheal
+	if result.get(ActionModule.ResultKey.OVERHEAL, 0.0) > 0:
+		action_overhealed.emit(target, result[ActionModule.ResultKey.OVERHEAL])
+	
+	if result[ActionModule.ResultKey.IS_CRITICAL]:
+		critical_action_done.emit(target, Utils.ActionType.UTILITY_HEAL, result[ActionModule.ResultKey.BASE_VALUE], result[ActionModule.ResultKey.VALUE])
+	
+	action_done.emit(target, Utils.ActionType.UTILITY_HEAL, action_id, result[ActionModule.ResultKey.VALUE], result[ActionModule.ResultKey.IS_CRITICAL])
+
 
 func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Utils.StackType, action_id: StringName, duration: float = 5.0) -> void:
-	_action_module.inflict_condition_stacks(target, stacks_number, stack_type, action_id, duration)
+	if _action_module == null: return
+	var result: Dictionary = _action_module.inflict_condition_stacks(target, stacks_number, stack_type, action_id, duration)
+	if result.is_empty(): return
+	
+	var action_type: Utils.ActionType = Utils.stack_to_action(stack_type)
+	
+	if result[ActionModule.ResultKey.IS_CRITICAL]:
+		critical_action_done.emit(target, action_type, result[ActionModule.ResultKey.BASE_VALUE], result[ActionModule.ResultKey.VALUE])
+	
+	action_done.emit(target, action_type, action_id, result[ActionModule.ResultKey.VALUE], result[ActionModule.ResultKey.IS_CRITICAL])
 
 
 func _on_animation_module_attack_hit_frame() -> void:
@@ -519,36 +531,124 @@ func _on_animation_module_attack_hit_frame() -> void:
 		var melee_cmd: MeleeAttackCommand = _pending_melee_attacks.pop_front()
 		_execute_melee_attack(melee_cmd)
 	
-	signal_auto_attack_completed()
+	auto_attack_completed.emit(self)
+
 
 func summon_entity(entity_type: EntityType, spawn_config: SpawnLocationConfig, entity_modifier: Dictionary) -> void:
 	_action_module.summon_entity(entity_type, spawn_config, entity_modifier)
 
+
 func cleanse(target: Entity, value: float, action_id: StringName) -> void:
-	_action_module.cleanse(target, value, action_id)
+	if _action_module == null: return
+	var result: Dictionary = _action_module.cleanse(target, value, action_id)
+	if result.is_empty(): return
+	
+	if result[ActionModule.ResultKey.IS_CRITICAL]:
+		critical_action_done.emit(target, Utils.ActionType.UTILITY_CLEANSE, result[ActionModule.ResultKey.BASE_VALUE], result[ActionModule.ResultKey.VALUE])
+	
+	action_done.emit(target, Utils.ActionType.UTILITY_CLEANSE, action_id, result[ActionModule.ResultKey.VALUE], result[ActionModule.ResultKey.IS_CRITICAL])
+
 
 func dispell(target: Entity, value: float, action_id: StringName) -> void:
-	_action_module.dispell(target, value, action_id)
+	if _action_module == null: return
+	var result: Dictionary = _action_module.dispell(target, value, action_id)
+	if result.is_empty(): return
+	
+	if result[ActionModule.ResultKey.IS_CRITICAL]:
+		critical_action_done.emit(target, Utils.ActionType.UTILITY_DISPELL, result[ActionModule.ResultKey.BASE_VALUE], result[ActionModule.ResultKey.VALUE])
+	
+	action_done.emit(target, Utils.ActionType.UTILITY_DISPELL, action_id, result[ActionModule.ResultKey.VALUE], result[ActionModule.ResultKey.IS_CRITICAL])
 #endregion
 
 #region ===== Interaction (Default implementations - can be overridden)
 func take_damage(damage: float, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	return _interact_module.take_damage(damage, damage_type, is_critical, action_id, source)
+	if _interact_module == null: return 0.0
+	var result: Dictionary = _interact_module.take_damage(damage, damage_type, is_critical, action_id, source)
+	if result.is_empty(): return 0.0
+	
+	if result.get(InteractModule.ResultKey.DODGED, false):
+		action_dodged.emit(self, source, Utils.damage_to_action(damage_type))
+		return 0.0
+	
+	var real_damage: float = result[InteractModule.ResultKey.VALUE]
+	var blocked_by_armor: bool = result.get(InteractModule.ResultKey.BLOCKED_BY_ARMOR, false)
+	
+	if real_damage > 0 or (not blocked_by_armor and real_damage == 0):
+		damage_taken.emit(self, real_damage, damage_type, is_critical, false)
+	
+	interaction_received.emit(self, source, Utils.damage_to_action(damage_type), action_id, real_damage, is_critical)
+	return real_damage
 
-func take_damage_percent(percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> void:
-	_interact_module.take_damage_percent(percent, percent_modifier, damage_type, is_critical, action_id, source)
+
+func take_damage_percent(percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
+	if _interact_module == null: return 0.0
+	var result: Dictionary = _interact_module.take_damage_percent(percent, percent_modifier, damage_type, is_critical, action_id, source)
+	if result.is_empty(): return 0.0
+	
+	if result.get(InteractModule.ResultKey.DODGED, false):
+		action_dodged.emit(self, source, Utils.damage_to_action(damage_type))
+		return 0.0
+	
+	var real_damage: float = result[InteractModule.ResultKey.VALUE]
+	var blocked_by_armor: bool = result.get(InteractModule.ResultKey.BLOCKED_BY_ARMOR, false)
+	
+	if real_damage > 0 or (not blocked_by_armor and real_damage == 0):
+		damage_taken.emit(self, real_damage, damage_type, is_critical, false)
+	
+	interaction_received.emit(self, source, Utils.damage_to_action(damage_type), action_id, real_damage, is_critical)
+	return real_damage
+
 
 func take_condition_stacks(stacks_number: float, stack_type: Utils.StackType, is_critical: bool, action_id: StringName, source: Entity = null, duration: float = 5.0) -> float:
-	return _interact_module.take_condition_stacks(stacks_number, stack_type, is_critical, action_id, source, duration)
+	if _interact_module == null: return 0.0
+	var result: Dictionary = _interact_module.take_condition_stacks(stacks_number, stack_type, is_critical, action_id, source, duration)
+	if result.is_empty(): return 0.0
+	
+	if result.get(InteractModule.ResultKey.DODGED, false):
+		action_dodged.emit(self, source, Utils.stack_to_action(stack_type))
+		return 0.0
+	
+	var stacks_applied: float = result[InteractModule.ResultKey.VALUE]
+	stack_taken.emit(self, stack_type, stacks_applied, is_critical)
+	interaction_received.emit(self, source, Utils.stack_to_action(stack_type), action_id, stacks_applied, is_critical)
+	return stacks_applied
+
 
 func take_heal(heal_amount: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	return _interact_module.take_heal(heal_amount, is_critical, action_id, source)
+	if _interact_module == null: return 0.0
+	var result: Dictionary = _interact_module.take_heal(heal_amount, is_critical, action_id, source)
+	if result.is_empty(): return 0.0
+	
+	if result.get(InteractModule.ResultKey.DODGED, false):
+		action_dodged.emit(self, source, Utils.ActionType.UTILITY_HEAL)
+		return 0.0
+	
+	var effective_heal: float = result[InteractModule.ResultKey.VALUE]
+	if effective_heal > 0:
+		heal_taken.emit(self, effective_heal, is_critical)
+	
+	interaction_received.emit(self, source, Utils.ActionType.UTILITY_HEAL, action_id, effective_heal, is_critical)
+	return effective_heal
+
 
 func take_cleanse(value: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	return _interact_module.take_cleanse(value, is_critical, action_id, source)
+	if _interact_module == null: return 0.0
+	var result: Dictionary = _interact_module.take_cleanse(value, is_critical, action_id, source)
+	if result.is_empty(): return 0.0
+	
+	var removed: float = result[InteractModule.ResultKey.VALUE]
+	interaction_received.emit(self, source, Utils.ActionType.UTILITY_CLEANSE, action_id, removed, is_critical)
+	return removed
+
 
 func take_dispell(value: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	return _interact_module.take_dispell(value, is_critical, action_id, source)
+	if _interact_module == null: return 0.0
+	var result: Dictionary = _interact_module.take_dispell(value, is_critical, action_id, source)
+	if result.is_empty(): return 0.0
+	
+	var removed: float = result[InteractModule.ResultKey.VALUE]
+	interaction_received.emit(self, source, Utils.ActionType.UTILITY_DISPELL, action_id, removed, is_critical)
+	return removed
 #endregion
 
 #region ============================== Private functions ==============================
@@ -559,7 +659,7 @@ func _stop_approaching() -> void:
 		_movement_module.stop_following()
 
 
-# ============================== Spawn system ==============================
+#region ============================== Spawn system ==============================
 func _start_spawn() -> void:
 	fighting_state = FightingState.SPAWNING
 	Verbose.debug("Entity [" + entity_name + "] starting spawn", Verbose.Category.ENTITY)
@@ -591,9 +691,9 @@ func _complete_spawn() -> void:
 	_is_spawning = false
 	_is_targetable = true
 	fighting_state = _original_fighting_state
-	signal_spawn_completed()
+	spawn_completed.emit(self)
 	Verbose.debug("Entity [" + entity_name + "] spawn completed", Verbose.Category.ENTITY)
-
+#endregion
 
 func _on_fighting_state_changed(new_fighting_state: FightingState) -> void:
 	Verbose.debug("Entity [" + entity_name + "] fighting state changed to [" + str(FightingState.keys()[new_fighting_state]) + "]", Verbose.Category.ENTITY)

@@ -1,6 +1,15 @@
 class_name InteractModule
 extends Module
 
+# ============================== Enums ==============================
+
+enum ResultKey {
+	VALUE,              # Damage/heal/stacks received
+	IS_CRITICAL,        # Whether the action was critical
+	BLOCKED_BY_ARMOR,   # For damage only - was armor applied
+	DODGED,             # True if action was dodged
+}
+
 var _dodge_number: int = 0
 
 # ============================== Node base functions ==============================
@@ -11,12 +20,12 @@ func _ready() -> void:
 # ============================== Public function ==============================
 
 #region ============================== Damage ==============================
-func take_damage(damage: float, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	if _owner.stats.health <= 0 or _owner.is_dead: return 0
+func take_damage(damage: float, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> Dictionary:
+	if _owner.stats.health <= 0 or _owner.is_dead: return {}
 	var damage_before_armor: float = 0
 	if damage_type != Utils.DamageType.PURE and multiplayer.is_server():
 		if _is_dodged(Utils.damage_to_action(damage_type)):
-			return 0
+			return {ResultKey.DODGED: true}
 		damage *= _get_resistance_vulnerability_multiplier(Utils.damage_to_action(damage_type))
 		
 		if is_critical:
@@ -27,16 +36,18 @@ func take_damage(damage: float, damage_type: Utils.DamageType, is_critical: bool
 
 
 	_owner.stats.health -= damage
-	if damage > 0 or (damage_before_armor == 0 and damage == 0):
-		_owner.signal_damage_taken(damage, damage_type, is_critical, false)
-	_owner.signal_interaction_received(source, Utils.damage_to_action(damage_type), action_id, damage, is_critical)
-	return damage
+	
+	return {
+		ResultKey.VALUE: damage,
+		ResultKey.IS_CRITICAL: is_critical,
+		ResultKey.BLOCKED_BY_ARMOR: damage_before_armor > damage,
+	}
 
 
-func take_damage_percent(damage_percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
+func take_damage_percent(damage_percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> Dictionary:
 	if not multiplayer.is_server():
 		Verbose.warn("take_damage_percent() should not be called by clients", Verbose.Category.ENTITY_MODULE)
-		return 0
+		return {}
 	
 	var hp: float
 	match percent_modifier:
@@ -52,11 +63,11 @@ func take_damage_percent(damage_percent: float, percent_modifier: Utils.PercentM
 
 
 #region ============================== Condition stacks ==============================
-func take_condition_stacks(stacks_number: float, stack_type: Utils.StackType, is_critical: bool, action_id: StringName, source: Entity = null, duration: float = 5.0) -> float:
-	if _owner.stats.health <= 0 or _owner.is_dead: return -1.0
+func take_condition_stacks(stacks_number: float, stack_type: Utils.StackType, is_critical: bool, action_id: StringName, source: Entity = null, duration: float = 5.0) -> Dictionary:
+	if _owner.stats.health <= 0 or _owner.is_dead: return {}
 	if multiplayer.is_server():
 		if _is_dodged(Utils.stack_to_action(stack_type)):
-			return 0.0
+			return {ResultKey.DODGED: true}
 		stacks_number *= _get_resistance_vulnerability_multiplier(Utils.stack_to_action(stack_type))
 	
 	var stack_enum: Stack.Type = _utils_stack_to_stack_type(stack_type)
@@ -64,46 +75,46 @@ func take_condition_stacks(stacks_number: float, stack_type: Utils.StackType, is
 	if stack_type == Utils.StackType.REGEN:
 		mod[Stack.ModifierType.DURATION] = int(duration)
 	_owner.conditions.add_stack(stack_enum, stacks_number, source, action_id, mod)
-	_owner.signal_stack_taken(stack_type, stacks_number, is_critical)
-	_owner.signal_interaction_received(source, Utils.stack_to_action(stack_type), action_id, stacks_number, is_critical)
-	return stacks_number
+	
+	return {
+		ResultKey.VALUE: stacks_number,
+		ResultKey.IS_CRITICAL: is_critical,
+	}
 #endregion
 
 
 #region ============================== Heal ==============================
-func take_heal(heal_amount: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	if _owner.stats.health <= 0 or _owner.is_dead: return -1.0
+func take_heal(heal_amount: float, is_critical: bool, action_id: StringName, source: Entity = null) -> Dictionary:
+	if _owner.stats.health <= 0 or _owner.is_dead: return {}
 	if multiplayer.is_server():
 		if _is_dodged(Utils.ActionType.UTILITY_HEAL):
-			return 0.0
+			return {ResultKey.DODGED: true}
 		heal_amount *= _get_resistance_vulnerability_multiplier(Utils.ActionType.UTILITY_HEAL)
 	
 	# Necrosis logic
 	var necrosis_stacks: float = _owner.conditions.necrosis_stacks
+	var absorbed_by_necrosis: float = 0.0
 	if necrosis_stacks > 0:
-		var absorbed_amount: float = min(heal_amount, necrosis_stacks)
-		_owner.conditions.remove_stack(Stack.Type.NECROSIS, absorbed_amount)
-		heal_amount -= absorbed_amount
-		
-		# Feedback for absorption (optional but good for clarity)
-		if absorbed_amount > 0:
-			_owner.signal_stack_taken(Utils.StackType.NECROSIS, -absorbed_amount, false)
+		absorbed_by_necrosis = min(heal_amount, necrosis_stacks)
+		_owner.conditions.remove_stack(Stack.Type.NECROSIS, absorbed_by_necrosis)
+		heal_amount -= absorbed_by_necrosis
 
 	var initial_health: float = _owner.stats.health
 	if heal_amount > 0:
 		_owner.stats.health += heal_amount
-		_owner.signal_heal_taken(heal_amount, is_critical)
 	
 	var effective_heal: float = _owner.stats.health - initial_health
 	
-	_owner.signal_interaction_received(source, Utils.ActionType.UTILITY_HEAL, action_id, heal_amount, is_critical)
-	return effective_heal
+	return {
+		ResultKey.VALUE: effective_heal,
+		ResultKey.IS_CRITICAL: is_critical,
+	}
 #endregion
 
 #region ============================== Cleanse/Dispell ==============================
 # Removes debufs
 const CLEANSE_PACK_SIZE: int = 2
-func take_cleanse(value: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
+func take_cleanse(value: float, is_critical: bool, action_id: StringName, source: Entity = null) -> Dictionary:
 	var total_to_dispell: float = value
 	
 	if multiplayer.is_server():
@@ -132,12 +143,15 @@ func take_cleanse(value: float, is_critical: bool, action_id: StringName, source
 				_owner.conditions.remove_stack(Stack.Type.NECROSIS, to_remove)
 		remaining -= to_remove
 		removed += to_remove
-	_owner.signal_interaction_received(source, Utils.ActionType.UTILITY_CLEANSE, action_id, removed, is_critical)
-	return float(removed)
+	
+	return {
+		ResultKey.VALUE: float(removed),
+		ResultKey.IS_CRITICAL: is_critical,
+	}
 
 # Removes bufs
 const DISPELL_PACK_SIZE: int = 2
-func take_dispell(value: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
+func take_dispell(value: float, is_critical: bool, action_id: StringName, source: Entity = null) -> Dictionary:
 	var total_to_dispell: float = value
 	if multiplayer.is_server():
 		total_to_dispell *= value * _get_resistance_vulnerability_multiplier(Utils.ActionType.UTILITY_DISPELL)
@@ -161,8 +175,11 @@ func take_dispell(value: float, is_critical: bool, action_id: StringName, source
 				_owner.conditions.remove_stack(Stack.Type.REGEN, to_remove)
 		remaining -= to_remove
 		removed += to_remove
-	_owner.signal_interaction_received(source, Utils.ActionType.UTILITY_DISPELL, action_id, removed, is_critical)
-	return float(removed)
+	
+	return {
+		ResultKey.VALUE: float(removed),
+		ResultKey.IS_CRITICAL: is_critical,
+	}
 #endregion
 
 #region ============================== Private functions ==============================

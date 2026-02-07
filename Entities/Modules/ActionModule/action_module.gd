@@ -18,6 +18,15 @@ const SNAKE_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Poison/Sna
 const FIELD_GENERATOR_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Defense/FieldGenerator/field_generator.tscn")
 const CHICKEN_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/ChickenLord/Chicken/chicken.tscn")
 
+# ============================== Enums ==============================
+
+enum ResultKey {
+	VALUE,           # Final result (damage_done, heal_taken, stacks_applied, etc.)
+	IS_CRITICAL,     # Whether the action was critical
+	BASE_VALUE,      # Value before crit (for critical_action_done signal)
+	OVERHEAL,        # Overheal amount (heal functions only)
+}
+
 # ============================== Public functions ==============================
 
 func connect_to_spawn_manager(spawn_manager: SpawnManager) -> void:
@@ -35,22 +44,26 @@ func connect_to_arena_zone_manager(arena_zone_manager: ArenaZoneManager) -> void
 	_arena_zone_manager = arena_zone_manager
 
 # Instantly attack the target - Apply cards damages multiplier if there are some
-func direct_damage(target: Entity, damage: float, damage_type: Utils.DamageType, action_id: StringName) -> void:
-	if not multiplayer.is_server(): return
-	if target == null: return
+func direct_damage(target: Entity, damage: float, damage_type: Utils.DamageType, action_id: StringName) -> Dictionary:
+	if not multiplayer.is_server(): return {}
+	if target == null: return {}
+	
 	var damage_before_crit: float = damage * _get_strenght_weakness_multiplier(Utils.damage_to_action(damage_type))
 	var crit_multiplier = _get_crit_multiplier(Utils.damage_to_action(damage_type))
 	damage = damage_before_crit * crit_multiplier["multiplier"]
 	var damage_done: float = target.take_damage(damage, damage_type, crit_multiplier["is_critical"], action_id, _owner)
-	if crit_multiplier["is_critical"]:
-		_owner.signal_critical_action_done(target, Utils.damage_to_action(damage_type), damage_before_crit, damage_done)
-	_owner.signal_action_done(target, Utils.damage_to_action(damage_type), action_id, damage_done, crit_multiplier["is_critical"])
+	
+	return {
+		ResultKey.VALUE: damage_done,
+		ResultKey.IS_CRITICAL: crit_multiplier["is_critical"],
+		ResultKey.BASE_VALUE: damage_before_crit,
+	}
 
 
 # Instantly attack the target - Apply cards damages multiplier if there are some
-func direct_damage_percent(target: Entity, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier, action_id: StringName) -> void:
-	if not multiplayer.is_server(): return
-	if target == null: return
+func direct_damage_percent(target: Entity, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier, action_id: StringName) -> Dictionary:
+	if not multiplayer.is_server(): return {}
+	if target == null: return {}
 	var hp: float
 	match percent_modifier:
 		Utils.PercentModifier.MAX_HP:
@@ -60,7 +73,7 @@ func direct_damage_percent(target: Entity, damage_percent: float, damage_type: U
 		Utils.PercentModifier.LOST_HP:
 			hp = target.stats.health_max - target.stats.health
 	var damage: float = hp * damage_percent / 100.0
-	direct_damage(target, damage, damage_type, action_id)
+	return direct_damage(target, damage, damage_type, action_id)
 
 
 # Create a projectile to attack the target - Apply cards damages multiplier if there are some
@@ -87,9 +100,9 @@ func _spawn_projectile(target: Entity, projectile_type: Projectile.Type, project
 
 #region ============================== Heal ==============================
 # [Server only]
-func heal(target: Entity, heal_amount: float, action_id: StringName) -> void:
-	if not multiplayer.is_server(): return
-	if target == null: return
+func heal(target: Entity, heal_amount: float, action_id: StringName) -> Dictionary:
+	if not multiplayer.is_server(): return {}
+	if target == null: return {}
 	
 	if _owner.action_modifiers_registry != null:
 		var modifiers_dict: Dictionary = {
@@ -107,17 +120,18 @@ func heal(target: Entity, heal_amount: float, action_id: StringName) -> void:
 	var heal_taken: float = target.take_heal(heal_amount, crit_multiplier["is_critical"], action_id, _owner)
 	
 	var overheal_amount: float = heal_amount - heal_taken
-	if overheal_amount > 0:
-		_owner.signal_action_overhealed(target, overheal_amount)
-		
-	if crit_multiplier["is_critical"]:
-		_owner.signal_critical_action_done(target, Utils.ActionType.UTILITY_HEAL, heal_amount_before_crit, heal_taken)
-	_owner.signal_action_done(target, Utils.ActionType.UTILITY_HEAL, action_id, heal_taken, crit_multiplier["is_critical"])
+	
+	return {
+		ResultKey.VALUE: heal_taken,
+		ResultKey.IS_CRITICAL: crit_multiplier["is_critical"],
+		ResultKey.BASE_VALUE: heal_amount_before_crit,
+		ResultKey.OVERHEAL: overheal_amount,
+	}
 
 
-func heal_percent(target: Entity, percent: float, percent_modifier: Utils.PercentModifier, action_id: StringName) -> void:
-	if not multiplayer.is_server(): return
-	if target == null: return
+func heal_percent(target: Entity, percent: float, percent_modifier: Utils.PercentModifier, action_id: StringName) -> Dictionary:
+	if not multiplayer.is_server(): return {}
+	if target == null: return {}
 	var hp: float
 	match percent_modifier:
 		Utils.PercentModifier.MAX_HP:
@@ -127,15 +141,14 @@ func heal_percent(target: Entity, percent: float, percent_modifier: Utils.Percen
 		Utils.PercentModifier.LOST_HP:
 			hp = target.stats.health_max - target.stats.health
 	var heal_amount: float = (percent * hp as float) / 100.0
-	heal(target, heal_amount, action_id)
+	return heal(target, heal_amount, action_id)
 #endregion
 
 
-#region ============================== Condition stacks ==============================
 # [Server only]
-func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Utils.StackType, action_id: StringName, duration: float = 5.0) -> void:
-	if not multiplayer.is_server(): return
-	if target == null: return
+func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Utils.StackType, action_id: StringName, duration: float = 5.0) -> Dictionary:
+	if not multiplayer.is_server(): return {}
+	if target == null: return {}
 	var stacks_number_before_crit: float = stacks_number * _get_strenght_weakness_multiplier(Utils.stack_to_action(stack_type))
 	var crit_multiplier = _get_crit_multiplier(Utils.stack_to_action(stack_type))
 	stacks_number = stacks_number_before_crit * crit_multiplier["multiplier"]
@@ -156,9 +169,6 @@ func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: 
 	
 	
 	var stacks_taken: float = target.take_condition_stacks(stacks_number, stack_type, crit_multiplier["is_critical"], action_id, _owner, duration)
-	if crit_multiplier["is_critical"]:
-		_owner.signal_critical_action_done(target, Utils.stack_to_action(stack_type), stacks_number_before_crit, stacks_taken)
-	_owner.signal_action_done(target, Utils.stack_to_action(stack_type), action_id, stacks_taken, crit_multiplier["is_critical"])
 	
 	if _owner.action_modifiers_registry != null:
 		var modifiers_dict: Dictionary = {
@@ -170,32 +180,44 @@ func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: 
 		for condition_modifier: ActionModifier in _owner.action_modifiers_registry.get_all_modifiers(ActionModifier.ActionType.INFLICT_CONDITION):
 			if condition_modifier.after_action_logic_callback.is_valid():
 				condition_modifier.after_action_logic_callback.call(modifiers_dict)
+	
+	return {
+		ResultKey.VALUE: stacks_taken,
+		ResultKey.IS_CRITICAL: crit_multiplier["is_critical"],
+		ResultKey.BASE_VALUE: stacks_number_before_crit,
+	}
 #endregion
 
 
 #region ============================== Cleanse and Dispell ==============================
 # Removes debuf
-func cleanse(target: Entity, value: float, action_id: StringName) -> void:
-	if target == null or target.is_queued_for_deletion(): return
+func cleanse(target: Entity, value: float, action_id: StringName) -> Dictionary:
+	if target == null or target.is_queued_for_deletion(): return {}
 	var value_before_crit: float = value * _get_strenght_weakness_multiplier(Utils.ActionType.UTILITY_CLEANSE)
 	var crit_multiplier: Dictionary = _get_crit_multiplier(Utils.ActionType.UTILITY_CLEANSE)
 	value = value_before_crit * crit_multiplier["multiplier"]
 	var stack_removed: float = target.take_cleanse(value, crit_multiplier["is_critical"], action_id, _owner)
-	if crit_multiplier["is_critical"]:
-		_owner.signal_critical_action_done(target, Utils.ActionType.UTILITY_CLEANSE, value_before_crit, stack_removed)
-	_owner.signal_action_done(target, Utils.ActionType.UTILITY_CLEANSE, action_id, value, crit_multiplier["is_critical"])
+	
+	return {
+		ResultKey.VALUE: stack_removed,
+		ResultKey.IS_CRITICAL: crit_multiplier["is_critical"],
+		ResultKey.BASE_VALUE: value_before_crit,
+	}
 
 
 #Removes buf
-func dispell(target: Entity, value: float, action_id: StringName) -> void:
-	if target == null or target.is_queued_for_deletion(): return
+func dispell(target: Entity, value: float, action_id: StringName) -> Dictionary:
+	if target == null or target.is_queued_for_deletion(): return {}
 	var value_before_crit: float = value * _get_strenght_weakness_multiplier(Utils.ActionType.UTILITY_DISPELL)
 	var crit_multiplier: Dictionary = _get_crit_multiplier(Utils.ActionType.UTILITY_DISPELL)
 	value = value_before_crit * crit_multiplier["multiplier"]
 	var stack_removed: float = target.take_dispell(value, crit_multiplier["is_critical"], action_id, _owner)
-	if crit_multiplier["is_critical"]:
-		_owner.signal_critical_action_done(target, Utils.ActionType.UTILITY_DISPELL, value_before_crit, stack_removed)
-	_owner.signal_action_done(target, Utils.ActionType.UTILITY_DISPELL, action_id, value, crit_multiplier["is_critical"])
+	
+	return {
+		ResultKey.VALUE: stack_removed,
+		ResultKey.IS_CRITICAL: crit_multiplier["is_critical"],
+		ResultKey.BASE_VALUE: value_before_crit,
+	}
 #endregion
 
 
@@ -216,7 +238,6 @@ func _cast_meteor(target: Entity, spell_modifier: Dictionary) -> void:
 	if target == null:
 		Verbose.error("_cast_meteor() -> No target", Verbose.Category.ENTITY_MODULE)
 		return
-	_owner.signal_spell_casted(target, Spell.Type.METEOR, spell_modifier)
 	var meteor: Meteor = METEOR_SCENE.instantiate()
 	var damage_percent: float = spell_modifier.get(Spell.MeteorModifier.DAMAGE_PERCENT, 0)
 	var radius: float = spell_modifier.get(Spell.MeteorModifier.RADIUS, 1)
@@ -229,7 +250,6 @@ func _cast_dark_storm(target: Entity, spell_modifier: Dictionary) -> void:
 	if target == null:
 		Verbose.error("_cast_dark_storm() -> No target", Verbose.Category.ENTITY_MODULE)
 		return
-	_owner.signal_spell_casted(target, Spell.Type.DARK_STORM, spell_modifier)
 	var dark_storm: DarkStorm = DARK_STORM_SCENE.instantiate()
 	var damage: int = spell_modifier[Spell.DarkStormModifier.DAMAGE]
 	var period: float = spell_modifier[Spell.DarkStormModifier.PERIOD]
@@ -240,7 +260,6 @@ func _cast_dark_storm(target: Entity, spell_modifier: Dictionary) -> void:
 
 
 func _cast_contagion(spell_modifier: Dictionary) -> void:
-	_owner.signal_spell_casted(_owner, Spell.Type.CONTAGION, spell_modifier)
 	var contagion: ContagionSpellArea = CONTAGION_SPELL_SCENE.instantiate()
 	var radius: float = spell_modifier[Spell.ContagionModifier.RADIUS]
 	var spread_percent: float = spell_modifier[Spell.ContagionModifier.SPREAD_PERCENT]
@@ -249,7 +268,6 @@ func _cast_contagion(spell_modifier: Dictionary) -> void:
 
 
 func _cast_shroom(target: Entity, spell_modifier: Dictionary) -> void:
-	_owner.signal_spell_casted(_owner, Spell.Type.CONTAGION, spell_modifier)
 	var shroom: Shroom = SHROOM_SPELL_SCENE.instantiate()
 	var radius: float = spell_modifier[Spell.ShroomModifier.RADIUS]
 	var life_time: float = spell_modifier[Spell.ShroomModifier.LIFE_TIME]
@@ -259,7 +277,6 @@ func _cast_shroom(target: Entity, spell_modifier: Dictionary) -> void:
 
 
 func _cast_death_fog(spell_modifier: Dictionary) -> void:
-	_owner.signal_spell_casted(_owner, Spell.Type.DEATH_FOG, spell_modifier)
 	var death_fog: DeathFog = DEATH_FOG_SCENE.instantiate()
 	var grow_speed: float = spell_modifier[Spell.DeathFogModifier.GROW_SPEED]
 	var tick_period: float = spell_modifier[Spell.DeathFogModifier.TICK_PERIOD]
@@ -272,7 +289,6 @@ func _cast_lightning(target: Entity, spell_modifier: Dictionary) -> void:
 	if target == null:
 		Verbose.error("_cast_lightning() -> No target", Verbose.Category.ENTITY_MODULE)
 		return
-	_owner.signal_spell_casted(target, Spell.Type.LIGHTNING, spell_modifier)
 	var lightning: SpellLightning = LIGHTNING_SCENE.instantiate()
 	var damage: float = spell_modifier[Spell.LightningModifier.DAMAGE]
 	lightning.init(_owner, target, damage)
@@ -283,7 +299,6 @@ func _cast_chain_lightning(target: Entity, spell_modifier: Dictionary) -> void:
 	if target == null:
 		Verbose.error("_cast_chain_lightning() -> No target", Verbose.Category.ENTITY_MODULE)
 		return
-	_owner.signal_spell_casted(target, Spell.Type.CHAIN_LIGHTNING, spell_modifier)
 	var chain_lightning: SpellChainLightning = CHAIN_LIGHTNING_SCENE.instantiate()
 	chain_lightning.init(_owner, target, spell_modifier)
 	_spawn_manager.spawn_spell(chain_lightning)
