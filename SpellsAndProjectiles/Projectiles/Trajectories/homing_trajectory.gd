@@ -12,7 +12,7 @@ var _velocity: Vector3
 
 
 func _on_init() -> void:
-	var target_pos := _target.global_position + Vector3.UP * vertical_offset
+	var target_pos := _target.get_collision_center()
 	_velocity = (target_pos - _start_pos).normalized() * speed
 
 
@@ -23,11 +23,11 @@ func update(delta: float) -> void:
 	# Determine desired direction
 	var desired_dir: Vector3
 	if retarget_each_frame:
-		var target_pos := _target.global_position + Vector3.UP * vertical_offset
+		var target_pos := _target.get_collision_center()
 		desired_dir = (target_pos - _projectile.global_position).normalized()
 	else:
 		# Home toward initial snapshot position
-		var target_snapshot := _target.global_position + Vector3.UP * vertical_offset
+		var target_snapshot := _target.get_collision_center()
 		desired_dir = (target_snapshot - _projectile.global_position).normalized()
 	
 	# Current direction

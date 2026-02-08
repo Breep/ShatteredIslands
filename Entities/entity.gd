@@ -277,6 +277,21 @@ func look_at_target_y_only(target_position: Vector3):
 
 func get_auto_attack_spawn() -> Node3D:
 	return self
+
+
+func get_collision_center() -> Vector3:
+	"""Returns the center of the entity's collision box for accurate projectile targeting."""
+	# Search for a CollisionShape3D in the entity's children
+	for child in get_children():
+		if child is CollisionShape3D:
+			var collision_shape: CollisionShape3D = child
+			if collision_shape.shape:
+				# Return the global position of the collision shape
+				# This accounts for the shape's offset from the entity's pivot
+				return collision_shape.global_position
+	
+	# Fallback to global position if no collision shape found
+	return global_position
 #endregion
 
 #region ============================== Context ==============================

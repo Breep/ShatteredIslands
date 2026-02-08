@@ -14,7 +14,7 @@ var _life: float = 0.0
 
 func _on_init() -> void:
 	# Calculate the initial direction (away from source toward target)
-	var target_pos := _target.global_position + Vector3.UP * vertical_offset
+	var target_pos := _target.get_collision_center()
 	_direction = (target_pos - _start_pos).normalized()
 
 

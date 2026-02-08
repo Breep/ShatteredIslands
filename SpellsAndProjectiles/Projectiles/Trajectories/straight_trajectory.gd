@@ -11,7 +11,7 @@ func update(delta: float) -> void:
 	if not is_instance_valid(_projectile): return
 	if not _target or not is_instance_valid(_target): return
 	
-	var target_pos: Vector3 = _target.global_position + Vector3.UP * vertical_offset
+	var target_pos: Vector3 = _target.get_collision_center()
 	var direction: Vector3 = (target_pos - _projectile.global_position).normalized()
 	
 	_projectile.global_position += direction * speed * delta

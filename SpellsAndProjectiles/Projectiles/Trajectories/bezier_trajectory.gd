@@ -15,7 +15,7 @@ var _height_variation: float
 
 
 func _on_init() -> void:
-	_target_snapshot = _target.global_position + Vector3.UP * vertical_offset
+	_target_snapshot = _target.get_collision_center()
 	var distance := _start_pos.distance_to(_target_snapshot)
 	_travel_time = max(0.001, distance / max(0.001, speed))
 	_height_variation = randf_range(-randomize_by, randomize_by)
@@ -43,7 +43,7 @@ func update(delta: float) -> void:
 
 
 func _on_retarget() -> void:
-	_target_snapshot = _target.global_position + Vector3.UP * vertical_offset
+	_target_snapshot = _target.get_collision_center()
 	var distance := _start_pos.distance_to(_target_snapshot)
 	_travel_time = max(0.001, distance / max(0.001, speed))
 	_height_variation = randf_range(-randomize_by, randomize_by)
