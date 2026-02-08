@@ -41,7 +41,6 @@ var _current_phase: AttackPhase = AttackPhase.COOLDOWN
 
 # Module references (optional)
 var _movement_module: MovementModule = null
-var _action_module: ActionModule = null
 var _animation_module = null  # AnimationModule, but no typing to avoid circular dependency
 
 # Approach management
@@ -81,9 +80,8 @@ func _ready() -> void:
 	_auto_attack_timer.one_shot = true
 
 
-func connect_modules(movement_module: MovementModule, action_module: ActionModule, animation_module: AnimationModule) -> void:
+func connect_modules(movement_module: MovementModule, animation_module: AnimationModule) -> void:
 	_movement_module = movement_module
-	_action_module = action_module
 	_animation_module = animation_module
 	
 	# Connect to AnimationModule hit frame signal
@@ -108,13 +106,11 @@ func on_ranged_animation_hit() -> void:
 		return
 	
 	var attack_cmd = _pending_attacks.pop_front()
-	if _action_module != null:
-		_action_module.projectile_attack(
-			attack_cmd.target,
-			attack_cmd.projectile_type,
-			attack_cmd.spawn_node,
-			attack_cmd.stats
-		)
+	_owner.projectile_attack(
+		attack_cmd.target,
+		attack_cmd.projectile_type,
+		attack_cmd.spawn_node,
+		attack_cmd.stats)
 
 
 func on_melee_animation_hit() -> void:
@@ -174,15 +170,10 @@ func execute_auto_attack(target: Entity) -> void:
 
 
 func _execute_ranged_attack(target: Entity) -> void:
-	if _action_module == null:
-		Verbose.error("No ActionModule available for ranged attack", Verbose.Category.ENTITY_MODULE)
-		attack_completed.emit()
-		return
-	
 	var projectile_spawn: Node3D = _projectile_spawn if _projectile_spawn != null else _owner
 	var projectile_stats: ProjectileStats = prepare_projectile_stats()
 	
-	var attack_cmd = _action_module.build_projectile_attack(
+	var attack_cmd = AttackCommand.new().setup(
 		target,
 		Projectile.Type.SHADOW_BOLT,
 		projectile_spawn,
@@ -204,7 +195,7 @@ func _execute_ranged_attack(target: Entity) -> void:
 		attack_started.emit()
 	else:
 		# No animation, spawn projectile immediately
-		_action_module.projectile_attack(
+		_owner.projectile_attack(
 			attack_cmd.target,
 			attack_cmd.projectile_type,
 			attack_cmd.spawn_node,

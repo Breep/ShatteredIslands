@@ -42,39 +42,6 @@ func _ready() -> void:
 
 # ============================== Interaction ==============================
 
-func take_damage(damage: float, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	var damage_taken := _interact_module.take_damage(damage, damage_type, is_critical, action_id, source)
-	
-	# Start healing after a delay if not already healing
-	if damage_taken > 0 and not _is_healing:
-		_start_healing_after_delay()
-	
-	return damage_taken
-
-
-func take_damage_percent(percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> void:
-	_interact_module.take_damage_percent(percent, percent_modifier, damage_type, is_critical, action_id, source)
-	
-	# Start healing after a delay if not already healing
-	if not _is_healing:
-		_start_healing_after_delay()
-
-
-func take_condition_stacks(stacks_number: float, stack_type: Utils.StackType, is_critical: bool, action_id: StringName, source: Entity = null, duration: float = 5.0) -> float:
-	return _interact_module.take_condition_stacks(stacks_number, stack_type, is_critical, action_id, source, duration)
-
-
-func take_heal(heal_amount: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	return _interact_module.take_heal(heal_amount, is_critical, action_id, source)
-
-
-func take_cleanse(value: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	return _interact_module.take_cleanse(value, is_critical, action_id, source)
-
-
-func take_dispell(value: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	return _interact_module.take_dispell(value, is_critical, action_id, source)
-
 
 # ============================== Private functions ==============================
 

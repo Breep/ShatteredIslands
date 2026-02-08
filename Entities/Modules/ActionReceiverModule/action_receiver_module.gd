@@ -7,6 +7,7 @@ enum ResultKey {
 	VALUE,              # Damage/heal/stacks received
 	IS_CRITICAL,        # Whether the action was critical
 	BLOCKED_BY_ARMOR,   # Whether damage was reduced by armor
+	DODGED,             # Whether the action was dodged
 }
 
 # ============================== Private variables ==============================

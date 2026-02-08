@@ -76,18 +76,6 @@ func direct_damage_percent(target: Entity, damage_percent: float, damage_type: U
 	return direct_damage(target, damage, damage_type, action_id)
 
 
-# Create a projectile to attack the target - Apply cards damages multiplier if there are some
-func build_projectile_attack(target: Entity, projectile_type: Projectile.Type, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> AttackCommand:
-	if target == null:
-		Verbose.warn("build_projectile_attack() -> No target", Verbose.Category.ENTITY_MODULE)
-		return null
-	
-	# Callbacks in projectile_stats already handle damage
-	# No need to manipulate stats here anymore
-	
-	return AttackCommand.new().setup(target, projectile_type, projectile_spawn, projectile_stats)
-
-
 func projectile_attack(target: Entity, projectile_type: Projectile.Type, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	_spawn_manager.spawn_projectile(_owner, target, projectile_type, projectile_spawn, projectile_stats)
 
