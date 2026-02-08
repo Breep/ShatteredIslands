@@ -614,6 +614,10 @@ func _connect_module_dependencies() -> void:
 	if _auto_attack_sender != null:
 		_auto_attack_sender.connect_modules(_movement_module, _animation_module)
 	
+	# Connect periodic module with auto attack sender
+	if _auto_attack_periodic_module != null and _auto_attack_sender != null:
+		_auto_attack_periodic_module.connect_modules(_auto_attack_sender)
+	
 	if _animation_module != null:
 		_animation_module.connect_modules(_auto_attack_sender)
 #endregion
@@ -626,10 +630,12 @@ func _on_fighting_state_changed(new_fighting_state: FightingState) -> void:
 			if target_module != null: target_module.stop()
 			if conditions != null: conditions.stop()
 			if _movement_module != null: _movement_module.stop()
+			if _auto_attack_periodic_module != null and auto_attack_enabled: _auto_attack_periodic_module.stop()
 		FightingState.FIGHTING:
 			if target_module != null: target_module.start()
 			if conditions != null: conditions.start()
 			if _movement_module != null: _movement_module.start()
+			if _auto_attack_periodic_module != null and auto_attack_enabled: _auto_attack_periodic_module.start()
 		FightingState.CELEBRATING: pass
 		FightingState.UNDEF: pass
 
@@ -648,5 +654,6 @@ func _on_died(_entity: Entity) -> void:
 	if target_module != null: target_module.stop()
 	if conditions != null: conditions.stop()
 	if _movement_module != null: _movement_module.stop()
+	if _auto_attack_periodic_module != null and auto_attack_enabled: _auto_attack_periodic_module.stop()
 	if _entity_info_panel_3d != null: _entity_info_panel_3d.hide()
 #endregion

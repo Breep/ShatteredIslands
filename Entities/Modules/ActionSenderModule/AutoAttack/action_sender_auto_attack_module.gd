@@ -131,6 +131,10 @@ func stop_approaching() -> void:
 func _check_range_and_approach(target: Entity) -> bool:
 	var distance: float = _owner.global_position.distance_to(target.global_position)
 	
+	# Infinite range (attack_range <= 0) - always in range
+	if _owner.stats.attack_range <= 0:
+		return true
+	
 	# In range - can attack
 	if distance <= _owner.stats.attack_range:
 		return true
@@ -179,6 +183,7 @@ func _execute_ranged_attack(target: Entity) -> void:
 			attack_cmd.spawn_node,
 			attack_cmd.stats
 		)
+		_owner.auto_attack_completed.emit(_owner)
 		attack_completed.emit()
 
 
@@ -198,6 +203,7 @@ func _execute_melee_attack(target: Entity) -> void:
 	else:
 		# No animation, execute immediately
 		_process_melee_hit(melee_data)
+		_owner.auto_attack_completed.emit(_owner)
 		attack_completed.emit()
 
 

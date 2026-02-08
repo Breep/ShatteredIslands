@@ -93,9 +93,9 @@ func _process(_delta: float) -> void:
 			_auto_attack_timer.start()
 			return
 		
-		# Check if now in range
+		# Check if now in range (or infinite range)
 		var distance: float = _owner.global_position.distance_to(approach_target.global_position)
-		if distance <= _owner.stats.attack_range:
+		if _owner.stats.attack_range <= 0 or distance <= _owner.stats.attack_range:
 			# In range! Stop approach and attack
 			var target_to_attack: Entity = approach_target
 			_auto_attack_module.stop_approaching()
@@ -128,6 +128,6 @@ func _on_owner_died(_unused) -> void:
 	stop()
 
 
-func _on_owner_auto_attack_completed() -> void:
-	# Attack attempt complete, restart timer
+func _on_owner_auto_attack_completed(_entity: Entity) -> void:
+	print("DEBUG AutoAttackPeriodicModule: _on_owner_auto_attack_completed")
 	_auto_attack_timer.start()

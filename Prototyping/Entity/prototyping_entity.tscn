@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://c48aqh8mlb7lc" path="res://Entities/Heroes/DarkKnight/dark_knight.tscn" id="1_icvx6"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="2_083cp"]
 [ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://UI/Tool/Misc/hover_boost_button.gd" id="3_6kn6i"]
-[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/Stats/EntityStats/entity_stats.gd" id="3_fl2p6"]
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_egh8k"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
 [ext_resource type="PackedScene" uid="uid://dvuq5n41nak3u" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.tscn" id="8_fl2p6"]
@@ -14,14 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://Tool/QuickAnims/anim_rotating_module.tscn" id="12_oonkp"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="13_fl2p6"]
 [ext_resource type="PackedScene" uid="uid://dp4x7wkxd6i2q" path="res://Prototyping/Entity/EntityController/entity_controller.tscn" id="19_x0odd"]
-
-[sub_resource type="Resource" id="Resource_vbhu7"]
-script = ExtResource("3_fl2p6")
-health_max = 5000.0
-attack_range = 40.0
-attack_damage = 50.0
-attack_speed = 0.5
-metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m73qc"]
 albedo_color = Color(0.97405916, 0, 0.8521372, 1)
@@ -38,6 +29,7 @@ radius = 0.2
 
 [node name="PrototypingEntity" type="Node3D" unique_id=1287034780]
 script = ExtResource("1_6kn6i")
+_auto_attack_enabled = true
 
 [node name="Entities" type="Node3D" parent="." unique_id=38016860]
 unique_name_in_owner = true
@@ -45,7 +37,6 @@ unique_name_in_owner = true
 [node name="DarkKnight1" parent="Entities" unique_id=353718081 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("1_icvx6")]
 transform = Transform3D(0.9946579, 0, 0.10322651, 0, 1, 0, -0.10322651, 0, 0.9946579, 0.07346773, -4.7683716e-07, 7.8182755)
 team = 1
-custom_base_stats = SubResource("Resource_vbhu7")
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
 
