@@ -96,10 +96,6 @@ func _on_shield_timer_timeout() -> void:
 	var count = 0
 	for ally in valid_allies:
 		if count >= _target_count: break
-		_action_module.inflict_condition_stacks(ally, _shield_amount, Utils.StackType.SHIELD, "Field Generator")
+		inflict_condition_stacks(ally, _shield_amount, Utils.StackType.SHIELD, "Field Generator")
 		_current_targets.append(ally)
 		count += 1
-
-
-func connect_to_fighting_area(fighting_area: FightingArea) -> void:
-	_action_module.connect_to_spawn_manager(fighting_area.spawn_manager)

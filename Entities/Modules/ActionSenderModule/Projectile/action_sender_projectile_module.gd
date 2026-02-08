@@ -12,14 +12,6 @@ func connect_to_spawn_manager(spawn_manager: SpawnManager) -> void:
 	_spawn_manager = spawn_manager
 
 
-func build_projectile_attack(target: Entity, projectile_type: Projectile.Type, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> AttackCommand:
-	if target == null:
-		Verbose.warn("build_projectile_attack() -> No target", Verbose.Category.ENTITY_MODULE)
-		return null
-	
-	return AttackCommand.new().setup(target, projectile_type, projectile_spawn, projectile_stats)
-
-
 func projectile_attack(target: Entity, projectile_type: Projectile.Type, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	if _spawn_manager == null:
 		Verbose.error("No SpawnManager connected", Verbose.Category.ENTITY_MODULE)

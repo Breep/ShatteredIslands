@@ -6,10 +6,8 @@
 [ext_resource type="Script" uid="uid://cnwr3o67xobtt" path="res://Entities/Modules/AnimationModule/entity_animation_player.gd" id="4_qjgos"]
 [ext_resource type="PackedScene" uid="uid://jwk6d3k8w3k5" path="res://Entities/EntityInfoPanel/EntityInfoPanel3D/entity_info_panel_3d.tscn" id="4_x7yny"]
 [ext_resource type="Script" uid="uid://bk603mav6k516" path="res://Entities/NPC/Fighting/ChickenLord/Chicken/chicken_animator.gd" id="5_tpk7p"]
-[ext_resource type="PackedScene" uid="uid://b6yg1bhhmnicr" path="res://Entities/Modules/AutoAttackModule/auto_attack_module.tscn" id="6_ufl4b"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Tool/SpawnPoint/spawn_point.tscn" id="7_qjgos"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://bcmrpt8xmj883" path="res://Entities/NPC/Fighting/default_blendtree.tres" id="8_i1jde"]
-[ext_resource type="PackedScene" uid="uid://d0g0xkyr876lc" path="res://Entities/Modules/MovementModule/movement_module.tscn" id="10_xni8n"]
 
 [sub_resource type="Resource" id="Resource_x7yny"]
 script = ExtResource("2_x7yny")
@@ -24,14 +22,13 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 radius = 0.421875
 height = 0.84375
 
-[node name="Chicken" type="CharacterBody3D" unique_id=2109615854 node_paths=PackedStringArray("_auto_attack_module", "_movement_module", "_visual_3d", "_entity_info_panel_3d", "_animation_module")]
+[node name="Chicken" type="CharacterBody3D" unique_id=2109615854 node_paths=PackedStringArray("_visual_3d", "_entity_info_panel_3d", "_animation_module")]
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("1_k573r")
 entity_name = "Chicken"
 custom_base_stats = SubResource("Resource_x7yny")
-_auto_attack_module = NodePath("AutoAttackModule")
-_movement_module = NodePath("MovementModule")
+_auto_loaded_modules = Array[int]([1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 3, 0])
 _visual_3d = NodePath("ChickenVisual")
 _entity_info_panel_3d = NodePath("EntityInfoPanel3d")
 _animation_module = NodePath("AnimationModule")
@@ -73,10 +70,6 @@ _animation_tree = NodePath("../AnimationTree")
 _animation_player = NodePath("../ChickenVisual/AnimationPlayer")
 _entity_owner = NodePath("..")
 
-[node name="AutoAttackModule" parent="." unique_id=640884535 node_paths=PackedStringArray("_projectile_spawn", "_owner") instance=ExtResource("6_ufl4b")]
-_projectile_spawn = NodePath("../AASpawnPoint")
-_owner = NodePath("..")
-
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=2080904651]
 root_node = NodePath("../ChickenVisual")
 tree_root = ExtResource("8_i1jde")
@@ -107,8 +100,5 @@ parameters/one_shot_idle/request = 0
 
 [node name="AASpawnPoint" parent="." unique_id=1596130037 instance=ExtResource("7_qjgos")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.00037944317, 0.38287425, -0.5151825)
-
-[node name="MovementModule" parent="." unique_id=1929250225 node_paths=PackedStringArray("_owner") instance=ExtResource("10_xni8n")]
-_owner = NodePath("..")
 
 [editable path="ChickenVisual"]

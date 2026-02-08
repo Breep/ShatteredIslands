@@ -74,12 +74,6 @@ func _enter_tree() -> void:
 		_family_managers[family_type] = family_manager.init(self)
 		add_child(_family_managers[family_type])
 	
-	# Add AutoAttack Module
-	if _auto_attack_module == null:
-		var module: AutoAttackModule = Shared.ENTITY_MODULE_SCENES[Module.ModuleType.AUTOATTACK].instantiate()
-		_auto_attack_module = module.init(self)
-		add_child(_auto_attack_module)
-	
 	super._enter_tree()
 
 

@@ -71,7 +71,7 @@ func _ready() -> void:
 	_animation_tree.set(PARAM_TRANSITION_FIGHTING, VALUE_TRANSITION_FIGHTING_IDLE)
 
 
-func connect_modules(auto_attack_module: AutoAttackModule) -> void:
+func connect_modules(auto_attack_module: ActionSenderAutoAttackModule) -> void:
 	if auto_attack_module != null:
 		auto_attack_module.attack_started.connect(_on_entity_owner_auto_attack_started)
 

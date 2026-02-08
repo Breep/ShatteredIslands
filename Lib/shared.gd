@@ -27,11 +27,23 @@ var FAMILIES: Dictionary[Family.FamilyType, Family] = {
 
 var ENTITY_MODULE_SCENES: Dictionary[Module.ModuleType, PackedScene] = {
 	Module.ModuleType.MOVEMENT: load("res://Entities/Modules/MovementModule/movement_module.tscn"),
-	Module.ModuleType.ACTION: load("res://Entities/Modules/ActionModule/action_module.tscn"),
-	Module.ModuleType.INTERACT: load("res://Entities/Modules/InteractModule/interact_module.tscn"),
-	Module.ModuleType.AUTOATTACK: load("res://Entities/Modules/AutoAttackModule/auto_attack_module.tscn"),
 	Module.ModuleType.TARGET: load("res://Entities/Modules/TargetModule/target_module.tscn"),
-	Module.ModuleType.CONDITIONS: load("res://Entities/Modules/ConditionsModule/conditions_module.tscn")
+	Module.ModuleType.CONDITIONS: load("res://Entities/Modules/ConditionsModule/conditions_module.tscn"),
+	Module.ModuleType.AUTO_ATTACK_PERIODIC_MODULE: load("res://Entities/Modules/AutoAttackPeriodicModule/auto_attack_periodic_module.tscn"),
+	
+	Module.ModuleType.ACTION_SENDER_DAMAGE: load("res://Entities/Modules/ActionSenderModule/Damage/action_sender_damage_module.tscn"),
+	Module.ModuleType.ACTION_SENDER_HEAL: load("res://Entities/Modules/ActionSenderModule/Heal/action_sender_heal_module.tscn"),
+	Module.ModuleType.ACTION_SENDER_ADD_STACK: load("res://Entities/Modules/ActionSenderModule/AddStack/action_sender_add_stack_module.tscn"),
+	Module.ModuleType.ACTION_SENDER_REMOVE_STACK: load("res://Entities/Modules/ActionSenderModule/RemoveStack/action_sender_remove_stack_module.tscn"),
+	Module.ModuleType.ACTION_SENDER_PROJECTILE: load("res://Entities/Modules/ActionSenderModule/Projectile/action_sender_projectile_module.tscn"),
+	Module.ModuleType.ACTION_SENDER_SPELL: load("res://Entities/Modules/ActionSenderModule/Spell/action_sender_spell_module.tscn"),
+	Module.ModuleType.ACTION_SENDER_SUMMON: load("res://Entities/Modules/ActionSenderModule/Summon/action_sender_summon_module.tscn"),
+	Module.ModuleType.ACTION_SENDER_AUTO_ATTACK: load("res://Entities/Modules/ActionSenderModule/AutoAttack/action_sender_auto_attack_module.tscn"),
+	
+	Module.ModuleType.ACTION_RECEIVER_DAMAGE: load("res://Entities/Modules/ActionReceiverModule/Damage/action_receiver_damage_module.tscn"),
+	Module.ModuleType.ACTION_RECEIVER_HEAL: load("res://Entities/Modules/ActionReceiverModule/Heal/action_receiver_heal_module.tscn"),
+	Module.ModuleType.ACTION_RECEIVER_ADD_STACK: load("res://Entities/Modules/ActionReceiverModule/AddStack/action_receiver_add_stack_module.tscn"),
+	Module.ModuleType.ACTION_RECEIVER_REMOVE_STACK: load("res://Entities/Modules/ActionReceiverModule/RemoveStack/action_receiver_remove_stack_module.tscn"),
 }
 
 var FAMILY_MANAGER_SCENES: Dictionary[Family.FamilyType, PackedScene] = {

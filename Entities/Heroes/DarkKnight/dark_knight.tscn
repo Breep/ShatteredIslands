@@ -157,8 +157,9 @@ collision_layer = 16
 collision_mask = 16
 script = ExtResource("1_ufk4g")
 hero_desc = ExtResource("2_502n4")
-entity_name = "DarkKnight"
-_visual_3d = NodePath("darkknight_black")
+entity_name = "Dark Knight"
+_auto_loaded_modules = Array[int]([1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 3])
+_visual_3d = NodePath("DarkKnightVisual")
 _entity_info_panel_3d = NodePath("Visual/EntityInfoPanel3d")
 _animation_module = NodePath("HeroAnimationModule")
 metadata/_custom_type_script = "uid://crybfqxtiik6d"
@@ -169,10 +170,10 @@ metadata/_custom_type_script = "uid://crybfqxtiik6d"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.020075, 0)
 _owner_entity = NodePath("../..")
 
-[node name="darkknight_black" parent="." unique_id=2041897312 instance=ExtResource("3_5c32l")]
+[node name="DarkKnightVisual" parent="." unique_id=2041897312 instance=ExtResource("3_5c32l")]
 transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0, 0, 0)
 
-[node name="Skeleton3D" parent="darkknight_black/rig" parent_id_path=PackedInt32Array(2041897312, 93346782) index="0" unique_id=435237510]
+[node name="Skeleton3D" parent="DarkKnightVisual/rig" parent_id_path=PackedInt32Array(2041897312, 93346782) index="0" unique_id=435237510]
 bones/0/rotation = Quaternion(0, 0.70710677, 0.70710677, 0)
 bones/2/rotation = Quaternion(5.338507e-08, 0.70710695, 0.7071066, 5.338509e-08)
 bones/5/rotation = Quaternion(1, 1.8973538e-19, 3.413358e-06, -5.68453e-14)
@@ -245,9 +246,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0114746, 0)
 shape = SubResource("CapsuleShape3D_rxegs")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=386582721]
-root_node = NodePath("../darkknight_black")
+root_node = NodePath("../DarkKnightVisual")
 tree_root = SubResource("AnimationNodeBlendTree_2g30f")
-anim_player = NodePath("../darkknight_black/AnimationPlayer")
+anim_player = NodePath("../DarkKnightVisual/AnimationPlayer")
 parameters/transition_fighting/current_state = "Idle"
 parameters/transition_fighting/transition_request = ""
 parameters/transition_fighting/current_index = 0
@@ -276,9 +277,9 @@ parameters/one_shot_idle/internal_active = false
 parameters/one_shot_idle/request = 0
 
 [node name="HeroAnimationModule" parent="." unique_id=1712717212 node_paths=PackedStringArray("_weapons_node", "_animation_tree", "_animation_player", "_entity_owner") instance=ExtResource("10_3dwlx")]
-_weapons_node = NodePath("../darkknight_black/rig/Skeleton3D/Weapons")
+_weapons_node = NodePath("../DarkKnightVisual/rig/Skeleton3D/Weapons")
 _animation_tree = NodePath("../AnimationTree")
-_animation_player = NodePath("../darkknight_black/AnimationPlayer")
+_animation_player = NodePath("../DarkKnightVisual/AnimationPlayer")
 _entity_owner = NodePath("..")
 
-[editable path="darkknight_black"]
+[editable path="DarkKnightVisual"]

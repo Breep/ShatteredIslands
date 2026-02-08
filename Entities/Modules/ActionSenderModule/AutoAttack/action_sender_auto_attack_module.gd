@@ -24,7 +24,6 @@ var _current_phase: AttackPhase = AttackPhase.COOLDOWN
 
 # Module references (set via connect_modules)
 var _movement_module: MovementModule = null
-var _projectile_module: ActionSenderProjectileModule = null
 var _animation_module = null  # AnimationModule, but no typing to avoid circular dependency
 
 # Approach management
@@ -37,9 +36,8 @@ var _pending_melee_attacks: Array = []  # Array of melee attack data
 
 # ============================== Public functions ==============================
 
-func connect_modules(movement_module: MovementModule, projectile_module: ActionSenderProjectileModule, animation_module: AnimationModule) -> void:
+func connect_modules(movement_module: MovementModule, animation_module: AnimationModule) -> void:
 	_movement_module = movement_module
-	_projectile_module = projectile_module
 	_animation_module = animation_module
 	
 	# Connect to AnimationModule hit frame signal
@@ -74,13 +72,12 @@ func on_ranged_animation_hit() -> void:
 		return
 	
 	var attack_cmd = _pending_attacks.pop_front()
-	if _projectile_module != null:
-		_projectile_module.projectile_attack(
-			attack_cmd.target,
-			attack_cmd.projectile_type,
-			attack_cmd.spawn_node,
-			attack_cmd.stats
-		)
+	_owner.projectile_attack(
+		attack_cmd.target,
+		attack_cmd.projectile_type,
+		attack_cmd.spawn_node,
+		attack_cmd.stats
+	)
 
 
 func on_melee_animation_hit() -> void:
@@ -154,15 +151,10 @@ func _check_range_and_approach(target: Entity) -> bool:
 
 
 func _execute_ranged_attack(target: Entity) -> void:
-	if _projectile_module == null:
-		Verbose.error("No ProjectileModule available for ranged attack", Verbose.Category.ENTITY_MODULE)
-		attack_completed.emit()
-		return
-	
 	var projectile_spawn: Node3D = _projectile_spawn if _projectile_spawn != null else _owner
 	var projectile_stats: ProjectileStats = prepare_projectile_stats()
 	
-	var attack_cmd = _projectile_module.build_projectile_attack(
+	var attack_cmd = AttackCommand.new().setup(
 		target,
 		Projectile.Type.SHADOW_BOLT,
 		projectile_spawn,
@@ -174,7 +166,6 @@ func _execute_ranged_attack(target: Entity) -> void:
 		attack_completed.emit()
 		return
 	
-	# If has animation module, delay projectile spawn until animation hits
 	if _animation_module != null:
 		if _pending_attacks.is_empty():
 			_pending_attacks.append(attack_cmd)
@@ -182,8 +173,7 @@ func _execute_ranged_attack(target: Entity) -> void:
 			_pending_attacks[0] = attack_cmd
 		attack_started.emit()
 	else:
-		# No animation, spawn projectile immediately
-		_projectile_module.projectile_attack(
+		_owner.projectile_attack(
 			attack_cmd.target,
 			attack_cmd.projectile_type,
 			attack_cmd.spawn_node,
@@ -199,7 +189,6 @@ func _execute_melee_attack(target: Entity) -> void:
 		"stats": attack_stats
 	}
 	
-	# If has animation module, delay execution until animation hits
 	if _animation_module != null:
 		if _pending_melee_attacks.is_empty():
 			_pending_melee_attacks.append(melee_data)

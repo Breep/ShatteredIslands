@@ -1,4 +1,4 @@
-class_name AutoAttackPeriodicManager
+class_name AutoAttackPeriodicModule
 extends Module
 
 # ============================== Signals ==============================
