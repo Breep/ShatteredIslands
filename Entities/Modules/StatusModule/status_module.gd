@@ -7,11 +7,14 @@ signal status_added(status_type: Status.Type, duration: float)
 signal status_removed(status_type: Status.Type)
 
 # Status-specific signals (emitted when status is first applied or fully removed)
-signal stunned_changed(is_active: bool)
-signal taunted_changed(is_active: bool)
-signal silenced_changed(is_active: bool)
-signal invulnerable_changed(is_active: bool)
-signal untargetable_changed(is_active: bool)
+signal stunned_changed(is_active: bool, duration: float)
+signal taunted_changed(is_active: bool, duration: float)
+signal silenced_changed(is_active: bool, duration: float)
+signal invulnerable_changed(is_active: bool, duration: float)
+signal untargetable_changed(is_active: bool, duration: float)
+
+# ============================== Public variables ==============================
+
 
 # ============================== Private variables ==============================
 
@@ -23,6 +26,14 @@ var _remaining_durations: Dictionary[Status.Type, float]
 @onready var _silence_timer: Timer = %SilenceTimer
 @onready var _invulnerable_timer: Timer = %InvulnerableTimer
 @onready var _untargetable_timer: Timer = %UntargetableTimer
+
+@onready var _timers: Dictionary[Status.Type, Timer] = {
+	Status.Type.STUN: %StunTimer,
+	Status.Type.TAUNT: %StunTimer,
+	Status.Type.SILENCE: %StunTimer,
+	Status.Type.INVULNERABLE: %StunTimer,
+	Status.Type.UNTARGETABLE: %StunTimer
+}
 
 # ============================== Public functions ==============================
 
@@ -55,15 +66,36 @@ func get_remaining_time(status_type: Status.Type) -> float:
 func add_status(status_type: Status.Type, duration: float, source: Entity) -> void:
 	var was_inactive: bool = _remaining_durations[status_type] <= 0.0
 	
-	# "Best only" behavior: keep the longest duration
-	if duration > _remaining_durations[status_type]:
-		_remaining_durations[status_type] = duration
-	
-	status_added.emit(status_type, duration)
+	match status_type:
+		Status.Type.STUN:
+			if duration > _stun_timer.time_left:
+				_stun_timer.stop()
+				_stun_timer.wait_time = duration
+				_stun_timer.start()
+		Status.Type.TAUNT:
+			if duration > _taunt_timer.time_left:
+				_taunt_timer.stop()
+				_taunt_timer.wait_time = duration
+				_taunt_timer.start()
+		Status.Type.SILENCE:
+			if duration > _silence_timer.time_left:
+				_silence_timer.stop()
+				_silence_timer.wait_time = duration
+				_silence_timer.start()
+		Status.Type.UNTARGETABLE:
+			if duration > _untargetable_timer.time_left:
+				_untargetable_timer.stop()
+				_untargetable_timer.wait_time = duration
+				_untargetable_timer.start()
+		Status.Type.INVULNERABLE:
+			if duration > _invulnerable_timer.time_left:
+				_invulnerable_timer.stop()
+				_invulnerable_timer.wait_time = duration
+				_invulnerable_timer.start()
 	
 	# Emit status-specific signal only if newly applied
 	if was_inactive:
-		_emit_status_changed(status_type, true)
+		_emit_status_changed(status_type, true, duration)
 
 
 func remove_status(status_type: Status.Type) -> void:
@@ -72,31 +104,35 @@ func remove_status(status_type: Status.Type) -> void:
 	
 	_remaining_durations[status_type] = 0.0
 	status_removed.emit(status_type)
-	_emit_status_changed(status_type, false)
-
-
-# ============================== Node functions ==============================
-
-func _process(delta: float) -> void:
-	for status_type: Status.Type in Status.Type.values():
-		if _remaining_durations[status_type] <= 0.0:
-			continue
-		
-		_remaining_durations[status_type] -= delta
-		
-		# Check if status just expired
-		if _remaining_durations[status_type] <= 0.0:
-			_remaining_durations[status_type] = 0.0
-			status_removed.emit(status_type)
-			_emit_status_changed(status_type, false)
+	_emit_status_changed(status_type, false, 0.0)
 
 
 # ============================== Private functions ==============================
 
-func _emit_status_changed(status_type: Status.Type, is_active: bool) -> void:
+func _emit_status_changed(status_type: Status.Type, is_active: bool, duration: float) -> void:
 	match status_type:
-		Status.Type.STUN: stunned_changed.emit(is_active)
-		Status.Type.TAUNT: taunted_changed.emit(is_active)
-		Status.Type.SILENCE: silenced_changed.emit(is_active)
-		Status.Type.INVULNERABLE: invulnerable_changed.emit(is_active)
-		Status.Type.UNTARGETABLE: untargetable_changed.emit(is_active)
+		Status.Type.STUN: stunned_changed.emit(is_active, duration)
+		Status.Type.TAUNT: taunted_changed.emit(is_active, duration)
+		Status.Type.SILENCE: silenced_changed.emit(is_active, duration)
+		Status.Type.INVULNERABLE: invulnerable_changed.emit(is_active, duration)
+		Status.Type.UNTARGETABLE: untargetable_changed.emit(is_active, duration)
+
+
+func _on_stun_timer_timeout() -> void:
+	pass # Replace with function body.
+
+
+func _on_silence_timer_timeout() -> void:
+	pass # Replace with function body.
+
+
+func _on_taunt_timer_timeout() -> void:
+	pass # Replace with function body.
+
+
+func _on_untargetable_timer_timeout() -> void:
+	pass # Replace with function body.
+
+
+func _on_invulnerability_timer_timeout() -> void:
+	pass # Replace with function body.

@@ -1,6 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://c3status_module"]
+[gd_scene format=3 uid="uid://taendsg8gy4u"]
 
-[ext_resource type="Script" path="res://Entities/Modules/StatusModule/status_module.gd" id="1_status"]
+[ext_resource type="Script" uid="uid://b1qb2gmdhvcvq" path="res://Entities/Modules/StatusModule/status_module.gd" id="1_status"]
 
-[node name="StatusModule" type="Node"]
+[node name="StatusModule" type="Node" unique_id=1486844463]
 script = ExtResource("1_status")
+
+[node name="StunTimer" type="Timer" parent="." unique_id=114352711]
+unique_name_in_owner = true
+
+[node name="SilenceTimer" type="Timer" parent="." unique_id=980311031]
+unique_name_in_owner = true
+
+[node name="TauntTimer" type="Timer" parent="." unique_id=2014684345]
+unique_name_in_owner = true
+
+[node name="UntargetableTimer" type="Timer" parent="." unique_id=1381796298]
+unique_name_in_owner = true
+
+[node name="InvulnerabilityTimer" type="Timer" parent="." unique_id=1324428754]
+unique_name_in_owner = true
+
+[connection signal="timeout" from="StunTimer" to="." method="_on_stun_timer_timeout"]
+[connection signal="timeout" from="SilenceTimer" to="." method="_on_silence_timer_timeout"]
+[connection signal="timeout" from="TauntTimer" to="." method="_on_taunt_timer_timeout"]
+[connection signal="timeout" from="UntargetableTimer" to="." method="_on_untargetable_timer_timeout"]
+[connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]

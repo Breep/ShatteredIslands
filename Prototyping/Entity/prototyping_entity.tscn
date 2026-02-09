@@ -158,6 +158,8 @@ text = "Family Managers"
 [node name="CenterPointCamera" parent="." unique_id=842815466 instance=ExtResource("4_egh8k")]
 unique_name_in_owner = true
 transform = Transform3D(0.022652432, 0, 0.9997434, 0, 1, 0, -0.9997434, 0, 0.022652432, 0, 0, 0)
+_zoom_min = 1.0
+_zoom_max = 100.0
 
 [node name="SpawnManager" parent="." unique_id=562272433 node_paths=PackedStringArray("_entities_node", "_projectiles_node", "_spells_node") instance=ExtResource("6_egh8k")]
 _entities_node = NodePath("../SpawnEntities")

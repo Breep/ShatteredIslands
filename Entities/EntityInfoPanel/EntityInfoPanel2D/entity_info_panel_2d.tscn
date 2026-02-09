@@ -521,7 +521,7 @@ outline_color = Color(0, 0, 0, 1)
 shadow_size = 10
 shadow_color = Color(0, 0, 0, 0.90700006)
 
-[node name="EntityInfoPanel2d" type="Control" unique_id=2069438949 node_paths=PackedStringArray("_entity_label", "_health_bar", "_mana_bar", "_shield_bar", "_grid_bar", "_ignite_control", "_ignite_label", "_necrosis_control", "_necrosis_label", "_poison_control", "_poison_label", "_regen_control", "_regen_label", "_stunned_control", "_stunned_label", "_taunted_control", "_taunted_label", "_silenced_control", "_silenced_label", "_invulnerable_control", "_invulnerable_label", "_untargetable_control", "_untargetable_label", "_resource_points_container")]
+[node name="EntityInfoPanel2d" type="Control" unique_id=2069438949 node_paths=PackedStringArray("_entity_label", "_health_bar", "_mana_bar", "_shield_bar", "_grid_bar", "_ignite_control", "_ignite_label", "_necrosis_control", "_necrosis_label", "_poison_control", "_poison_label", "_regen_control", "_regen_label", "_stun_control", "_stun_label", "_stun_progress_bar", "_taunt_control", "_taunt_label", "_taunt_progress_bar", "_silence_control", "_silence_label", "_silence_progress_bar", "_invulnerable_control", "_invulnerable_label", "_invulnerable_progress_bar", "_untargetable_control", "_untargetable_label", "_untargetable_progress_bar", "_resource_points_container")]
 custom_minimum_size = Vector2(1000, 250)
 layout_mode = 3
 anchors_preset = 0
@@ -541,16 +541,21 @@ _poison_control = NodePath("MarginContainer/HBoxContainer/MiddlePanel/VBoxContai
 _poison_label = NodePath("MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/PoisonControl/MarginContainer/PoisonContainer/PoisonLabel")
 _regen_control = NodePath("MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/RegenControl")
 _regen_label = NodePath("MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/RegenControl/MarginContainer/RegenContainer/RegenLabel")
-_stunned_control = NodePath("MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/StunControl")
-_stunned_label = NodePath("MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/StunControl/MarginContainer/VBoxContainer/ProgressBar/StunValueLabel")
-_taunted_control = NodePath("MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/TauntControl")
-_taunted_label = NodePath("MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/TauntControl/MarginContainer/VBoxContainer/ProgressBar/TauntValueLabel")
-_silenced_control = NodePath("MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/SilenceControl")
-_silenced_label = NodePath("MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/SilenceControl/MarginContainer/VBoxContainer/ProgressBar/SilenceValueLabel")
+_stun_control = NodePath("MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/StunControl")
+_stun_label = NodePath("MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/StunControl/MarginContainer/VBoxContainer/StunProgressBar/StunValueLabel")
+_stun_progress_bar = NodePath("MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/StunControl/MarginContainer/VBoxContainer/StunProgressBar")
+_taunt_control = NodePath("MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/TauntControl")
+_taunt_label = NodePath("MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/TauntControl/MarginContainer/VBoxContainer/TauntProgressBar/TauntValueLabel")
+_taunt_progress_bar = NodePath("MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/TauntControl/MarginContainer/VBoxContainer/TauntProgressBar")
+_silence_control = NodePath("MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/SilenceControl")
+_silence_label = NodePath("MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/SilenceControl/MarginContainer/VBoxContainer/SilenceProgressBar/SilenceValueLabel")
+_silence_progress_bar = NodePath("MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/SilenceControl/MarginContainer/VBoxContainer/SilenceProgressBar")
 _invulnerable_control = NodePath("MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/InvulnerableControl")
-_invulnerable_label = NodePath("MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/InvulnerableControl/MarginContainer/VBoxContainer/ProgressBar/InvulnerableValueLabel")
+_invulnerable_label = NodePath("MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/InvulnerableControl/MarginContainer/VBoxContainer/InvulnerableProgressBar/InvulnerableValueLabel")
+_invulnerable_progress_bar = NodePath("MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/InvulnerableControl/MarginContainer/VBoxContainer/InvulnerableProgressBar")
 _untargetable_control = NodePath("MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/UntargetableControl")
-_untargetable_label = NodePath("MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/UntargetableControl/MarginContainer/VBoxContainer/ProgressBar/UntargetableValueLabel")
+_untargetable_label = NodePath("MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/UntargetableControl/MarginContainer/VBoxContainer/UntargetableProgressBar/UntargetableValueLabel")
+_untargetable_progress_bar = NodePath("MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/UntargetableControl/MarginContainer/VBoxContainer/UntargetableProgressBar")
 _resource_points_container = NodePath("UIEntityInfoPanel2D/ComboContainer")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1092260174]
@@ -914,7 +919,7 @@ text = "STUN"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/StunControl/MarginContainer/VBoxContainer" unique_id=1635168862]
+[node name="StunProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/StunControl/MarginContainer/VBoxContainer" unique_id=1635168862]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -922,7 +927,7 @@ size_flags_stretch_ratio = 2.0
 value = 42.0
 show_percentage = false
 
-[node name="StunValueLabel" type="Label" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/StunControl/MarginContainer/VBoxContainer/ProgressBar" unique_id=1875844900]
+[node name="StunValueLabel" type="Label" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/StunControl/MarginContainer/VBoxContainer/StunProgressBar" unique_id=1875844900]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -962,7 +967,7 @@ text = "TAUNT"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/TauntControl/MarginContainer/VBoxContainer" unique_id=1218343789]
+[node name="TauntProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/TauntControl/MarginContainer/VBoxContainer" unique_id=1218343789]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -970,7 +975,7 @@ size_flags_stretch_ratio = 2.0
 value = 42.0
 show_percentage = false
 
-[node name="TauntValueLabel" type="Label" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/TauntControl/MarginContainer/VBoxContainer/ProgressBar" unique_id=1292411253]
+[node name="TauntValueLabel" type="Label" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/TauntControl/MarginContainer/VBoxContainer/TauntProgressBar" unique_id=1292411253]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1010,7 +1015,7 @@ text = "SILENCE"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/SilenceControl/MarginContainer/VBoxContainer" unique_id=1024941188]
+[node name="SilenceProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/SilenceControl/MarginContainer/VBoxContainer" unique_id=1024941188]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1018,7 +1023,7 @@ size_flags_stretch_ratio = 2.0
 value = 42.0
 show_percentage = false
 
-[node name="SilenceValueLabel" type="Label" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/SilenceControl/MarginContainer/VBoxContainer/ProgressBar" unique_id=1336440426]
+[node name="SilenceValueLabel" type="Label" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/SilenceControl/MarginContainer/VBoxContainer/SilenceProgressBar" unique_id=1336440426]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1058,7 +1063,7 @@ text = "UNTARGETABLE"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/UntargetableControl/MarginContainer/VBoxContainer" unique_id=1841255482]
+[node name="UntargetableProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/UntargetableControl/MarginContainer/VBoxContainer" unique_id=1841255482]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1066,7 +1071,7 @@ size_flags_stretch_ratio = 2.0
 value = 42.0
 show_percentage = false
 
-[node name="UntargetableValueLabel" type="Label" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/UntargetableControl/MarginContainer/VBoxContainer/ProgressBar" unique_id=609097924]
+[node name="UntargetableValueLabel" type="Label" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/UntargetableControl/MarginContainer/VBoxContainer/UntargetableProgressBar" unique_id=609097924]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1106,7 +1111,7 @@ text = "INVULNERABLE"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/InvulnerableControl/MarginContainer/VBoxContainer" unique_id=696653272]
+[node name="InvulnerableProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/InvulnerableControl/MarginContainer/VBoxContainer" unique_id=696653272]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -1114,7 +1119,7 @@ size_flags_stretch_ratio = 2.0
 value = 42.0
 show_percentage = false
 
-[node name="InvulnerableValueLabel" type="Label" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/InvulnerableControl/MarginContainer/VBoxContainer/ProgressBar" unique_id=88065954]
+[node name="InvulnerableValueLabel" type="Label" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/InvulnerableControl/MarginContainer/VBoxContainer/InvulnerableProgressBar" unique_id=88065954]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

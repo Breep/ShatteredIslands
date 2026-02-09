@@ -32,21 +32,25 @@ const COLOR_TEAM_ENEMY = Color(1, 1, 1, 1)
 
 @export_subgroup("Status")
 @export_subgroup("Status/Stun")
-@export var _stunned_control: Control
-@export var _stunned_label: Label
+@export var _stun_control: Control
+@export var _stun_label: Label
+@export var _stun_progress_bar: ProgressBar
 @export_subgroup("Status/Taunt")
-@export var _taunted_control: Control
-@export var _taunted_label: Label
+@export var _taunt_control: Control
+@export var _taunt_label: Label
+@export var _taunt_progress_bar: ProgressBar
 @export_subgroup("Status/Silence")
-@export var _silenced_control: Control
-@export var _silenced_label: Label
+@export var _silence_control: Control
+@export var _silence_label: Label
+@export var _silence_progress_bar: ProgressBar
 @export_subgroup("Status/Invulnerability")
 @export var _invulnerable_control: Control
 @export var _invulnerable_label: Label
+@export var _invulnerable_progress_bar: ProgressBar
 @export_subgroup("Status/Untargetable")
 @export var _untargetable_control: Control
 @export var _untargetable_label: Label
-
+@export var _untargetable_progress_bar: ProgressBar
 
 @export_subgroup("Misc")
 @export var _resource_points_container: HBoxContainer
@@ -117,7 +121,16 @@ func _ready() -> void:
 	status.silenced_changed.connect(_on_status_silenced_changed)
 	status.invulnerable_changed.connect(_on_status_invulnerable_changed)
 	status.untargetable_changed.connect(_on_status_untargetable_changed)
+
+
+func _process(delta: float) -> void:
+	var status = _owner_entity.status_module
 	
+	_stun_progress_bar.value = status.get_remaining_time(Status.Type.STUN)
+	_taunt_progress_bar.value = status.get_remaining_time(Status.Type.TAUNT)
+	_silence_progress_bar.value = status.get_remaining_time(Status.Type.SILENCE)
+	_invulnerable_progress_bar.value = status.get_remaining_time(Status.Type.INVULNERABLE)
+	_untargetable_progress_bar.value = status.get_remaining_time(Status.Type.UNTARGETABLE)
 #endregion
 
 #region ============================== Public API ==============================
@@ -212,19 +225,19 @@ func _on_health_max_changed(new_max: int) -> void:
 	_update_shield_bar(_owner_entity.conditions.shield_stacks, new_max)
 
 func _on_status_stunned_changed(is_active: bool) -> void:
-	if not _stunned_control: return
-	if is_active: _stunned_control.show()
-	else: _stunned_control.hide()
+	if not _stun_control: return
+	if is_active: _stun_control.show()
+	else: _stun_control.hide()
 
 func _on_status_taunted_changed(is_active: bool) -> void:
-	if not _taunted_control: return
-	if is_active: _taunted_control.show()
-	else: _taunted_control.hide()
+	if not _taunt_control: return
+	if is_active: _taunt_control.show()
+	else: _taunt_control.hide()
 
 func _on_status_silenced_changed(is_active: bool) -> void:
-	if not _silenced_control: return
-	if is_active: _silenced_control.show()
-	else: _silenced_control.hide()
+	if not _silence_control: return
+	if is_active: _silence_control.show()
+	else: _silence_control.hide()
 
 func _on_status_invulnerable_changed(is_active: bool) -> void:
 	if not _invulnerable_control: return
