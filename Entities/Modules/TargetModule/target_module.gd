@@ -110,21 +110,21 @@ func get_target(targetting_strategy: TargettingStrategy) -> Entity:
 		
 		# --- RANDOM ---
 		TargettingStrategy.RANDOM: return _get_random(_entities, _owner)
-		TargettingStrategy.RANDOM_ENEMY: return _get_random(_enemies, null)
-		TargettingStrategy.RANDOM_HERO_ENEMY: return _get_random(_enemy_heroes, null)
+		TargettingStrategy.RANDOM_ENEMY: return _get_random(_enemies, null, true)
+		TargettingStrategy.RANDOM_HERO_ENEMY: return _get_random(_enemy_heroes, null, true)
 		TargettingStrategy.RANDOM_ALLY: return _get_random(_allies, _owner)
 		TargettingStrategy.RANDOM_ALLY_INCLUDING_SELF: return _get_random(_allies, null)
 		
 		# --- HP ---
 		TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF: return _get_lowest_hp(_allies, null)
-		TargettingStrategy.HIGHEST_HP_ENEMY: return _get_highest_hp(_enemies, null)
-		TargettingStrategy.HIGHEST_HP_HERO_ENEMY: return _get_highest_hp(_enemy_heroes, null)
-		TargettingStrategy.LOWEST_HP_PERCENT_ENEMY: return _get_lowest_hp_percent(_enemies, null)
-		TargettingStrategy.HIGHEST_HP_PERCENT_ENEMY: return _get_highest_hp_percent(_enemies, null)
-		TargettingStrategy.HIGHEST_HP_PERCENT_HERO_ENEMY: return _get_highest_hp_percent(_enemy_heroes, null)
+		TargettingStrategy.HIGHEST_HP_ENEMY: return _get_highest_hp(_enemies, null, true)
+		TargettingStrategy.HIGHEST_HP_HERO_ENEMY: return _get_highest_hp(_enemy_heroes, null, true)
+		TargettingStrategy.LOWEST_HP_PERCENT_ENEMY: return _get_lowest_hp_percent(_enemies, null, true)
+		TargettingStrategy.HIGHEST_HP_PERCENT_ENEMY: return _get_highest_hp_percent(_enemies, null, true)
+		TargettingStrategy.HIGHEST_HP_PERCENT_HERO_ENEMY: return _get_highest_hp_percent(_enemy_heroes, null, true)
 		
 		# --- SHIELD ---
-		TargettingStrategy.HIGHEST_SHIELD_ENEMIES_HERO: return _get_highest_shield(_enemy_heroes, _owner)
+		TargettingStrategy.HIGHEST_SHIELD_ENEMIES_HERO: return _get_highest_shield(_enemy_heroes, _owner, true)
 		TargettingStrategy.HIGHEST_SHIELD_ALLIES_HERO: return _get_highest_shield(_ally_heroes, null)
 		
 	push_error("TargetModule: Undef strategy for the TargetModule")
@@ -205,8 +205,8 @@ func is_in_attack_range(entity: Entity) -> bool:
 
 # ============================== Private functions ==============================
 
-# Filters alive, removes excluded, removes untargetable
-func _filter_candidates(entities: Array[Entity], excluded_entity: Entity) -> Array[Entity]:
+# Filters alive, removes excluded, removes untargetable, prioritizes taunted
+func _filter_candidates(entities: Array[Entity], excluded_entity: Entity, prioritize_taunted: bool = false) -> Array[Entity]:
 	if entities.is_empty():
 		return []
 	
@@ -217,24 +217,24 @@ func _filter_candidates(entities: Array[Entity], excluded_entity: Entity) -> Arr
 	if candidates.is_empty():
 		return []
 	
-	return _get_array_without_untargetable_targets(candidates)
+	candidates = _get_array_without_untargetable_targets(candidates)
+	
+	# Prioritize taunted targets if requested (for enemy targeting)
+	if prioritize_taunted:
+		var taunted := _get_taunted_targets(candidates)
+		if not taunted.is_empty():
+			return taunted
+	
+	return candidates
 
 
-func _get_highest_shield(entities: Array[Entity], excluded_entity: Entity) -> Entity:
-	if entities.is_empty():
+func _get_highest_shield(entities: Array[Entity], excluded_entity: Entity, prioritize_taunted: bool = false) -> Entity:
+	var candidates := _filter_candidates(entities, excluded_entity, prioritize_taunted)
+	if candidates.is_empty():
 		return null
 	
-	var entities_copy: Array[Entity] = _get_alive_entities(entities).duplicate()
-	entities_copy.erase(excluded_entity)
-	if entities_copy.is_empty():
-		return null
-	
-	entities_copy = _get_array_without_untargetable_targets(entities_copy)
-	if entities_copy.is_empty():
-		return null
-	
-	var highest_shield_entity = entities_copy[0]
-	for entity in entities_copy:
+	var highest_shield_entity = candidates[0]
+	for entity in candidates:
 		if entity != _owner:
 			if entity.conditions.shield_stacks > highest_shield_entity.conditions.shield_stacks:
 				highest_shield_entity = entity
@@ -289,6 +289,11 @@ func _get_closest(entities: Array[Entity], excluded_entity: Entity) -> Entity:
 	if entities_copy.is_empty():
 		return null
 	
+	# Prioritize taunted targets for enemy targeting
+	var taunted := _get_taunted_targets(entities_copy)
+	if not taunted.is_empty():
+		entities_copy = taunted
+	
 	var closest_entity = entities_copy[0]
 	for entity in entities_copy:
 		if entity != _owner:
@@ -320,8 +325,8 @@ func _get_farthest(entities: Array[Entity], excluded_entity: Entity) -> Entity:
 	return farthest_entity
 
 
-func _get_lowest_hp(entities: Array[Entity], excluded_entity: Entity) -> Entity:
-	var candidates = _filter_candidates(entities, excluded_entity)
+func _get_lowest_hp(entities: Array[Entity], excluded_entity: Entity, prioritize_taunted: bool = false) -> Entity:
+	var candidates = _filter_candidates(entities, excluded_entity, prioritize_taunted)
 	if candidates.is_empty(): return null
 	
 	var target = candidates[0]
@@ -331,8 +336,8 @@ func _get_lowest_hp(entities: Array[Entity], excluded_entity: Entity) -> Entity:
 	return target
 
 
-func _get_highest_hp(entities: Array[Entity], excluded_entity: Entity) -> Entity:
-	var candidates = _filter_candidates(entities, excluded_entity)
+func _get_highest_hp(entities: Array[Entity], excluded_entity: Entity, prioritize_taunted: bool = false) -> Entity:
+	var candidates = _filter_candidates(entities, excluded_entity, prioritize_taunted)
 	if candidates.is_empty(): return null
 	
 	var target = candidates[0]
@@ -342,8 +347,8 @@ func _get_highest_hp(entities: Array[Entity], excluded_entity: Entity) -> Entity
 	return target
 
 
-func _get_lowest_hp_percent(entities: Array[Entity], excluded_entity: Entity) -> Entity:
-	var candidates = _filter_candidates(entities, excluded_entity)
+func _get_lowest_hp_percent(entities: Array[Entity], excluded_entity: Entity, prioritize_taunted: bool = false) -> Entity:
+	var candidates = _filter_candidates(entities, excluded_entity, prioritize_taunted)
 	if candidates.is_empty(): return null
 	
 	var target = candidates[0]
@@ -357,8 +362,8 @@ func _get_lowest_hp_percent(entities: Array[Entity], excluded_entity: Entity) ->
 	return target
 
 
-func _get_highest_hp_percent(entities: Array[Entity], excluded_entity: Entity) -> Entity:
-	var candidates = _filter_candidates(entities, excluded_entity)
+func _get_highest_hp_percent(entities: Array[Entity], excluded_entity: Entity, prioritize_taunted: bool = false) -> Entity:
+	var candidates = _filter_candidates(entities, excluded_entity, prioritize_taunted)
 	if candidates.is_empty(): return null
 	
 	var target = candidates[0]
@@ -372,20 +377,12 @@ func _get_highest_hp_percent(entities: Array[Entity], excluded_entity: Entity) -
 	return target
 
 
-func _get_random(entities: Array[Entity], excluded_entity: Entity) -> Entity:
-	if entities.is_empty():
+func _get_random(entities: Array[Entity], excluded_entity: Entity, prioritize_taunted: bool = false) -> Entity:
+	var candidates := _filter_candidates(entities, excluded_entity, prioritize_taunted)
+	if candidates.is_empty():
 		return null
 	
-	var entities_copy: Array[Entity] = _get_alive_entities(entities).duplicate()
-	entities_copy.erase(excluded_entity)
-	if entities_copy.is_empty():
-		return null
-	
-	entities_copy = _get_array_without_untargetable_targets(entities_copy)
-	if entities_copy.is_empty():
-		return null
-	
-	return entities_copy.pick_random()
+	return candidates.pick_random()
 
 
 func _get_array_without_untargetable_targets(entities: Array[Entity]) -> Array[Entity]:
@@ -394,6 +391,14 @@ func _get_array_without_untargetable_targets(entities: Array[Entity]) -> Array[E
 		if entity.is_targetable:
 			targetable_entities.append(entity)
 	return targetable_entities
+
+
+func _get_taunted_targets(entities: Array[Entity]) -> Array[Entity]:
+	var taunted: Array[Entity] = []
+	for entity in entities:
+		if entity.status_module != null and entity.status_module.has_status(Status.Type.TAUNT):
+			taunted.append(entity)
+	return taunted
 
 # ============================== "Target from" strategies functions ==============================
 

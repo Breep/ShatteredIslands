@@ -16,7 +16,12 @@ const ACTION_COLORS: Dictionary[Utils.ActionType, Color] = {
 	Utils.ActionType.STACK_IGNITE: Color.DARK_RED,
 	Utils.ActionType.STACK_POISON: Color.DARK_GREEN,
 	Utils.ActionType.STACK_REGEN: Color.MEDIUM_AQUAMARINE,
-	Utils.ActionType.STACK_NECROSIS: Color.REBECCA_PURPLE
+	Utils.ActionType.STACK_NECROSIS: Color.REBECCA_PURPLE,
+	Utils.ActionType.STATUS_STUN: Color.YELLOW,
+	Utils.ActionType.STATUS_TAUNT: Color.ORANGE,
+	Utils.ActionType.STATUS_SILENCE: Color.DIM_GRAY,
+	Utils.ActionType.STATUS_INVULNERABLE: Color.GOLD,
+	Utils.ActionType.STATUS_UNTARGETABLE: Color.LIGHT_SLATE_GRAY,
 }
 
 const TYPE_NAMES: Dictionary[Type, String] = {
@@ -82,8 +87,12 @@ static func battle_data_stat_type_to_action_types(bds_type: Type) -> Array[Utils
 										Utils.ActionType.STACK_REGEN, Utils.ActionType.STACK_NECROSIS]
 		Type.STACK_RECEIVED:  return [Utils.ActionType.STACK_SHIELD, Utils.ActionType.STACK_IGNITE, Utils.ActionType.STACK_POISON,
 										Utils.ActionType.STACK_REGEN, Utils.ActionType.STACK_NECROSIS]
-		Type.MISC_DONE:     return [Utils.ActionType.UTILITY_STUN, Utils.ActionType.UTILITY_CLEANSE, Utils.ActionType.UTILITY_DISPELL]
-		Type.MISC_RECEIVED: return [Utils.ActionType.UTILITY_STUN, Utils.ActionType.UTILITY_CLEANSE, Utils.ActionType.UTILITY_DISPELL]
+		Type.MISC_DONE:     return [Utils.ActionType.UTILITY_STUN, Utils.ActionType.UTILITY_CLEANSE, Utils.ActionType.UTILITY_DISPELL,
+										Utils.ActionType.STATUS_STUN, Utils.ActionType.STATUS_TAUNT, Utils.ActionType.STATUS_SILENCE,
+										Utils.ActionType.STATUS_INVULNERABLE, Utils.ActionType.STATUS_UNTARGETABLE]
+		Type.MISC_RECEIVED: return [Utils.ActionType.UTILITY_STUN, Utils.ActionType.UTILITY_CLEANSE, Utils.ActionType.UTILITY_DISPELL,
+										Utils.ActionType.STATUS_STUN, Utils.ActionType.STATUS_TAUNT, Utils.ActionType.STATUS_SILENCE,
+										Utils.ActionType.STATUS_INVULNERABLE, Utils.ActionType.STATUS_UNTARGETABLE]
 		_: return []
 
 
@@ -102,6 +111,11 @@ static func action_type_to_battle_data_stat_type(action_type: Utils.ActionType, 
 		Utils.ActionType.STACK_POISON:    return Type.STACK_INFLICTED if meta_type == MetaType.ACTION else Type.STACK_RECEIVED
 		Utils.ActionType.STACK_REGEN:     return Type.STACK_INFLICTED if meta_type == MetaType.ACTION else Type.STACK_RECEIVED
 		Utils.ActionType.STACK_NECROSIS:  return Type.STACK_INFLICTED if meta_type == MetaType.ACTION else Type.STACK_RECEIVED
+		Utils.ActionType.STATUS_STUN:     return Type.MISC_DONE       if meta_type == MetaType.ACTION else Type.MISC_RECEIVED
+		Utils.ActionType.STATUS_TAUNT:    return Type.MISC_DONE       if meta_type == MetaType.ACTION else Type.MISC_RECEIVED
+		Utils.ActionType.STATUS_SILENCE:  return Type.MISC_DONE       if meta_type == MetaType.ACTION else Type.MISC_RECEIVED
+		Utils.ActionType.STATUS_INVULNERABLE: return Type.MISC_DONE   if meta_type == MetaType.ACTION else Type.MISC_RECEIVED
+		Utils.ActionType.STATUS_UNTARGETABLE: return Type.MISC_DONE   if meta_type == MetaType.ACTION else Type.MISC_RECEIVED
 		_:
 			push_error("BattleDataStat: action_type_to_battle_data_stat_type() -> Unknown action_type")
 			return Type.DAMAGE_DONE

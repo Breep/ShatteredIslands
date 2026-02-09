@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3receiver_status"]
+
+[ext_resource type="Script" path="res://Entities/Modules/ActionReceiverModule/Status/action_receiver_status_module.gd" id="1_status"]
+
+[node name="ActionReceiverStatusModule" type="Node"]
+script = ExtResource("1_status")

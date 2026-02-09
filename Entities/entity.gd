@@ -107,6 +107,11 @@ var _damage_receiver: ActionReceiverDamageModule
 var _heal_receiver: ActionReceiverHealModule
 var _add_stack_receiver: ActionReceiverAddStackModule
 var _remove_stack_receiver: ActionReceiverRemoveStackModule
+var _status_receiver: ActionReceiverStatusModule
+var _status_sender: ActionSenderStatusModule
+
+# Status module
+var status_module: StatusModule
 
 # Spawn system
 var _original_fighting_state: FightingState = FightingState.UNDEF
@@ -126,6 +131,7 @@ var _spawn_tween: Tween = null
 @export var _auto_loaded_modules: Array[Module.ModuleType] = [
 	Module.ModuleType.TARGET,
 	Module.ModuleType.CONDITIONS,
+	Module.ModuleType.STATUS,
 	Module.ModuleType.ACTION_SENDER_DAMAGE,
 	Module.ModuleType.ACTION_SENDER_HEAL,
 	Module.ModuleType.ACTION_SENDER_ADD_STACK,
@@ -134,10 +140,12 @@ var _spawn_tween: Tween = null
 	Module.ModuleType.ACTION_SENDER_SPELL,
 	Module.ModuleType.ACTION_SENDER_SUMMON,
 	Module.ModuleType.ACTION_SENDER_AUTO_ATTACK,
+	Module.ModuleType.ACTION_SENDER_STATUS,
 	Module.ModuleType.ACTION_RECEIVER_DAMAGE,
 	Module.ModuleType.ACTION_RECEIVER_HEAL,
 	Module.ModuleType.ACTION_RECEIVER_ADD_STACK,
 	Module.ModuleType.ACTION_RECEIVER_REMOVE_STACK,
+	Module.ModuleType.ACTION_RECEIVER_STATUS,
 ]
 
 @export_subgroup("Visual")
@@ -183,10 +191,10 @@ var fighting_state: FightingState:
 #region ============================== Status States ==============================
 var status_states: Array[StatusState] = []
 
-func has_status(status: StatusState) -> bool:
+func has_status_state(status: StatusState) -> bool:
 	return status_states.has(status)
 
-func add_status(status: StatusState) -> void:
+func add_status_state(status: StatusState) -> void:
 	if not status_states.has(status):
 		status_states.append(status)
 
@@ -378,11 +386,17 @@ func auto_attack(target: Entity) -> void:
 
 func projectile_attack(target: Entity, projectile_type: Projectile.Type, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	if _projectile_sender == null: return
+	if is_silenced():
+		Verbose.debug("Entity [" + entity_name + "] projectile blocked by SILENCE", Verbose.Category.ENTITY)
+		return
 	_projectile_sender.projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
 
 
 func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary = {}) -> void:
 	if _spell_sender == null: return
+	if is_silenced():
+		Verbose.debug("Entity [" + entity_name + "] spell blocked by SILENCE", Verbose.Category.ENTITY)
+		return
 	_spell_sender.cast_spell(target, spell_type, spell_modifier)
 	spell_casted.emit(target, spell_type, spell_modifier)
 
@@ -436,6 +450,9 @@ func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: 
 
 func summon_entity(entity_type: EntityType, spawn_config: SpawnLocationConfig, entity_modifier: Dictionary) -> void:
 	if _summon_sender == null: return
+	if is_silenced():
+		Verbose.debug("Entity [" + entity_name + "] summon blocked by SILENCE", Verbose.Category.ENTITY)
+		return
 	_summon_sender.summon_entity(entity_type, spawn_config, entity_modifier)
 
 
@@ -459,11 +476,45 @@ func dispell(target: Entity, value: float, action_id: StringName) -> void:
 		critical_action_done.emit(target, Utils.ActionType.UTILITY_DISPELL, result[ActionSenderModule.ResultKey.BASE_VALUE], result[ActionSenderModule.ResultKey.VALUE])
 	
 	action_done.emit(target, Utils.ActionType.UTILITY_DISPELL, action_id, result[ActionSenderModule.ResultKey.VALUE], result[ActionSenderModule.ResultKey.IS_CRITICAL])
+
+
+func inflict_status(target: Entity, status_type: Status.Type, duration: float, action_id: StringName) -> void:
+	if _status_sender == null: return
+	var result: Dictionary = _status_sender.inflict_status(target, status_type, duration, action_id)
+	if result.is_empty(): return
+	
+	var action_type: Utils.ActionType = Utils.status_to_action(status_type)
+	action_done.emit(target, action_type, action_id, result[ActionSenderModule.ResultKey.VALUE], false)
+#endregion
+
+
+#region ============================== Status Checks ==============================
+func is_stunned() -> bool:
+	if status_module == null: return false
+	return status_module.has_status(Status.Type.STUN)
+
+
+func is_silenced() -> bool:
+	if status_module == null: return false
+	return status_module.has_status(Status.Type.SILENCE)
+
+
+func is_invulnerable() -> bool:
+	if status_module == null: return false
+	return status_module.has_status(Status.Type.INVULNERABLE)
+
+
+func has_status(status_type: Status.Type) -> bool:
+	if status_module == null: return false
+	return status_module.has_status(status_type)
 #endregion
 
 #region ============================== Action Receivers ==============================
 func take_damage(damage: float, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
 	if _damage_receiver == null: return 0.0
+	if is_invulnerable():
+		Verbose.debug("Entity [" + entity_name + "] damage blocked by INVULNERABLE", Verbose.Category.ENTITY)
+		return 0.0
 	var result: Dictionary = _damage_receiver.take_damage(damage, damage_type, is_critical, action_id, source)
 	if result.is_empty(): return 0.0
 	
@@ -550,6 +601,17 @@ func take_dispell(value: float, is_critical: bool, action_id: StringName, source
 	var removed: float = result[ActionReceiverModule.ResultKey.VALUE]
 	interaction_received.emit(self, source, Utils.ActionType.UTILITY_DISPELL, action_id, removed, is_critical)
 	return removed
+
+
+func take_status(status_type: Status.Type, duration: float, action_id: StringName, source: Entity) -> float:
+	if _status_receiver == null: return 0.0
+	var result: Dictionary = _status_receiver.take_status(status_type, duration, action_id, source)
+	if result.is_empty(): return 0.0
+	
+	var actual_duration: float = result[ActionReceiverModule.ResultKey.VALUE]
+	var action_type: Utils.ActionType = Utils.status_to_action(status_type)
+	interaction_received.emit(self, source, action_type, action_id, actual_duration, false)
+	return actual_duration
 #endregion
 
 
@@ -619,6 +681,9 @@ func _auto_load_modules() -> void:
 			Module.ModuleType.ACTION_RECEIVER_HEAL: _heal_receiver = module
 			Module.ModuleType.ACTION_RECEIVER_ADD_STACK: _add_stack_receiver = module
 			Module.ModuleType.ACTION_RECEIVER_REMOVE_STACK: _remove_stack_receiver = module
+			Module.ModuleType.ACTION_RECEIVER_STATUS: _status_receiver = module
+			Module.ModuleType.ACTION_SENDER_STATUS: _status_sender = module
+			Module.ModuleType.STATUS: status_module = module
 			Module.ModuleType.AUTO_ATTACK_PERIODIC_MODULE: _auto_attack_periodic_module = module
 		
 		add_child(module)
