@@ -1,10 +1,6 @@
 class_name StatusModule
 extends Module
 
-## Manages temporary status effects applied to an entity
-## Uses "best only" behavior: only the longest remaining duration is kept
-## This module ONLY manages durations and emits signals - it does NOT apply effects
-
 # ============================== Signals ==============================
 
 signal status_added(status_type: Status.Type, duration: float)
@@ -21,6 +17,12 @@ signal untargetable_changed(is_active: bool)
 
 # Dictionary[Status.Type, float] - Remaining duration for each status (0 = inactive)
 var _remaining_durations: Dictionary[Status.Type, float]
+
+@onready var _stun_timer: Timer = %StunTimer
+@onready var _taunt_timer: Timer = %TauntTimer
+@onready var _silence_timer: Timer = %SilenceTimer
+@onready var _invulnerable_timer: Timer = %InvulnerableTimer
+@onready var _untargetable_timer: Timer = %UntargetableTimer
 
 # ============================== Public functions ==============================
 

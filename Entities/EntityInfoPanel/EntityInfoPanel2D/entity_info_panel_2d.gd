@@ -1,32 +1,63 @@
 class_name EntityInfoPanel2D
 extends Control
 
+#region ============================== Constants =============================
+const COLOR_TEAM_LOCAL = Color(1, 1, 1, 1)
+const COLOR_TEAM_ENEMY = Color(1, 1, 1, 1)
+#endregion
+
+#region ============================== Export ==============================
 @export_group("Local Nodes")
+@export var _entity_label: RichTextLabel
+
+@export_subgroup("Bars")
 @export var _health_bar: ColorRect
 @export var _mana_bar: ColorRect
 @export var _shield_bar: ColorRect
 @export var _grid_bar: ColorRect
 
-@export_group("Stack Counters")
-@export var _ignite_label: Label
-@export var _necrosis_label: Label
-@export var _poison_label: Label
-@export var _regen_label: Label
+@export_subgroup("Stack Counters")
+@export_subgroup("Stack Counters/Ignite")
 @export var _ignite_control: Control
+@export var _ignite_label: Label
+@export_subgroup("Stack Counters/Necrosis")
 @export var _necrosis_control: Control
+@export var _necrosis_label: Label
+@export_subgroup("Stack Counters/Poison")
 @export var _poison_control: Control
+@export var _poison_label: Label
+@export_subgroup("Stack Counters/Regen")
 @export var _regen_control: Control
-@export var _entity_label: RichTextLabel
+@export var _regen_label: Label
 
-@export_group("Misc")
+@export_subgroup("Status")
+@export_subgroup("Status/Stun")
+@export var _stunned_control: Control
+@export var _stunned_label: Label
+@export_subgroup("Status/Taunt")
+@export var _taunted_control: Control
+@export var _taunted_label: Label
+@export_subgroup("Status/Silence")
+@export var _silenced_control: Control
+@export var _silenced_label: Label
+@export_subgroup("Status/Invulnerability")
+@export var _invulnerable_control: Control
+@export var _invulnerable_label: Label
+@export_subgroup("Status/Untargetable")
+@export var _untargetable_control: Control
+@export var _untargetable_label: Label
+
+
+@export_subgroup("Misc")
 @export var _resource_points_container: HBoxContainer
 
 @export_group("External Nodes")
 @export var _owner_entity: Entity
+#endregion
 
 @onready var _rank_visualizer: UIRankViewer = %RankViewer
 
-# Called when the node enters the scene tree for the first time.
+#region ============================== Node base functions ==============================
 func _ready() -> void:
 	# Connect entity signals
 	_rank_visualizer.connect_entity(_owner_entity)
@@ -51,13 +82,14 @@ func _ready() -> void:
 	var stats = _owner_entity.stats
 	var conditions = _owner_entity.conditions
 	var entity_name = _owner_entity.name
+	var status = _owner_entity.status_module
 	
 	# Initialize entity name
 	_update_entity_label(entity_name)
 	
 	# Initialize health/mana bars
-	update_health_bar(stats.health, stats.health_max)
-	update_mana_bar(stats.mana, stats.mana_max)
+	_update_health_bar(stats.health, stats.health_max)
+	_update_mana_bar(stats.mana, stats.mana_max)
 	
 	# Connect stat signals
 	stats.health_changed.connect(_on_health_changed)
@@ -78,11 +110,23 @@ func _ready() -> void:
 	conditions.shield_stacks_changed.connect(_on_armor_changed)
 	conditions.poison_stacks_changed.connect(_update_poison_label)
 	conditions.regen_stacks_changed.connect(_update_regen_label)
+	
+	# Connect status signals
+	status.stunned_changed.connect(_on_status_stunned_changed)
+	status.taunted_changed.connect(_on_status_taunted_changed)
+	status.silenced_changed.connect(_on_status_silenced_changed)
+	status.invulnerable_changed.connect(_on_status_invulnerable_changed)
+	status.untargetable_changed.connect(_on_status_untargetable_changed)
+	
+#endregion
 
+#region ============================== Public API ==============================
 func init(entity: Entity) -> void:
 	_owner_entity = entity
+#endregion
 
-func update_health_bar(health: float, health_max: float) -> void:
+#region ============================== Private API =============================
+func _update_health_bar(health: float, health_max: float) -> void:
 	if not _health_bar or not _health_bar.material:
 		return
 	var ratio = clamp(float(health) / float(health_max), 0.0, 1.0)
@@ -90,7 +134,7 @@ func update_health_bar(health: float, health_max: float) -> void:
 	_health_bar.material.set_shader_parameter("MaxHealth", float(health_max))
 	_grid_bar.material.set_shader_parameter("MaxHealth", float(health_max))
 
-func update_mana_bar(mana: float, mana_max: float) -> void:
+func _update_mana_bar(mana: float, mana_max: float) -> void:
 	if not _mana_bar or not _mana_bar.material:
 		return
 	var ratio = clamp(float(mana) / float(mana_max), 0.0, 1.0)
@@ -148,24 +192,53 @@ func _update_regen_label(amount: float) -> void:
 func _update_entity_label(entity_name: String) -> void:
 	if not _entity_label: return
 	_entity_label.text = entity_name
+#endregion
 
+#region ============================== Callbacks =============================
 func _on_mana_changed(new_value: int) -> void:
-	update_mana_bar(new_value, _owner_entity.stats.mana_max)
+	_update_mana_bar(new_value, _owner_entity.stats.mana_max)
 
 func _on_mana_max_changed(new_max: int) -> void:
-	update_mana_bar(_owner_entity.stats.mana, new_max)
+	_update_mana_bar(_owner_entity.stats.mana, new_max)
 
 func _on_armor_changed(new_amount: float) -> void:
 	_update_shield_bar(new_amount, _owner_entity.stats.health_max)
 
 func _on_health_changed(new_health: int) -> void:
-	update_health_bar(new_health, _owner_entity.stats.health_max)
+	_update_health_bar(new_health, _owner_entity.stats.health_max)
 
 func _on_health_max_changed(new_max: int) -> void:
-	update_health_bar(_owner_entity.stats.health, new_max)
+	_update_health_bar(_owner_entity.stats.health, new_max)
 	_update_shield_bar(_owner_entity.conditions.shield_stacks, new_max)
 
-# ============================== Resources Visualization ==============================
+func _on_status_stunned_changed(is_active: bool) -> void:
+	if not _stunned_control: return
+	if is_active: _stunned_control.show()
+	else: _stunned_control.hide()
+
+func _on_status_taunted_changed(is_active: bool) -> void:
+	if not _taunted_control: return
+	if is_active: _taunted_control.show()
+	else: _taunted_control.hide()
+
+func _on_status_silenced_changed(is_active: bool) -> void:
+	if not _silenced_control: return
+	if is_active: _silenced_control.show()
+	else: _silenced_control.hide()
+
+func _on_status_invulnerable_changed(is_active: bool) -> void:
+	if not _invulnerable_control: return
+	if is_active: _invulnerable_control.show()
+	else: _invulnerable_control.hide()
+
+func _on_status_untargetable_changed(is_active: bool) -> void:
+	if not _untargetable_control: return
+	if is_active: _untargetable_control.show()
+	else: _untargetable_control.hide()
+#endregion
+
+#region ============================== Resources Visualization ==============================
+# TODO MONSTRUOSITE A DETRUIRE
 ## Update the resource points display (e.g. for Dark Knight combo points)
 ## Creates simple visual points if needed.
 func update_resource_points(current: int, max_val: int) -> void:

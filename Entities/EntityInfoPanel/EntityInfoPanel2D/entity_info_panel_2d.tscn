@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://r0gwl8xepcsf"]
+[gd_scene format=3 uid="uid://r0gwl8xepcsf"]
 
 [ext_resource type="Script" uid="uid://ufg37agp63bq" path="res://Entities/EntityInfoPanel/EntityInfoPanel2D/entity_info_panel_2d.gd" id="1_dgv81"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_vq80f"]
@@ -521,29 +521,39 @@ outline_color = Color(0, 0, 0, 1)
 shadow_size = 10
 shadow_color = Color(0, 0, 0, 0.90700006)
 
-[node name="EntityInfoPanel2d" type="Control" node_paths=PackedStringArray("_health_bar", "_mana_bar", "_shield_bar", "_grid_bar", "_ignite_label", "_necrosis_label", "_poison_label", "_regen_label", "_ignite_control", "_necrosis_control", "_poison_control", "_regen_control", "_entity_label", "_resource_points_container")]
+[node name="EntityInfoPanel2d" type="Control" unique_id=2069438949 node_paths=PackedStringArray("_entity_label", "_health_bar", "_mana_bar", "_shield_bar", "_grid_bar", "_ignite_control", "_ignite_label", "_necrosis_control", "_necrosis_label", "_poison_control", "_poison_label", "_regen_control", "_regen_label", "_stunned_control", "_stunned_label", "_taunted_control", "_taunted_label", "_silenced_control", "_silenced_label", "_invulnerable_control", "_invulnerable_label", "_untargetable_control", "_untargetable_label", "_resource_points_container")]
 custom_minimum_size = Vector2(1000, 250)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1000.0
 offset_bottom = 250.0
 script = ExtResource("1_dgv81")
+_entity_label = NodePath("MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/Control/EntityLabel")
 _health_bar = NodePath("MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/HealthManaStatusContainer/HealthBar")
 _mana_bar = NodePath("MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/HealthManaStatusContainer/ManaBar")
 _shield_bar = NodePath("MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/HealthManaStatusContainer/HealthBar/ShieldBar")
 _grid_bar = NodePath("MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/HealthManaStatusContainer/HealthBar/GridColorRect")
-_ignite_label = NodePath("MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/IgniteControl/MarginContainer/IgniteContainer/IgniteLabel")
-_necrosis_label = NodePath("MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/NecrosisControl/MarginContainer/NecrosisContainer/NecrosisLabel")
-_poison_label = NodePath("MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/PoisonControl/MarginContainer/PoisonContainer/PoisonLabel")
-_regen_label = NodePath("MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/RegenControl/MarginContainer/RegenContainer/RegenLabel")
 _ignite_control = NodePath("MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/IgniteControl")
+_ignite_label = NodePath("MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/IgniteControl/MarginContainer/IgniteContainer/IgniteLabel")
 _necrosis_control = NodePath("MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/NecrosisControl")
+_necrosis_label = NodePath("MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/NecrosisControl/MarginContainer/NecrosisContainer/NecrosisLabel")
 _poison_control = NodePath("MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/PoisonControl")
+_poison_label = NodePath("MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/PoisonControl/MarginContainer/PoisonContainer/PoisonLabel")
 _regen_control = NodePath("MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/RegenControl")
-_entity_label = NodePath("MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/Control/EntityLabel")
+_regen_label = NodePath("MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/RegenControl/MarginContainer/RegenContainer/RegenLabel")
+_stunned_control = NodePath("MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/StunControl")
+_stunned_label = NodePath("MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/StunControl/MarginContainer/VBoxContainer/ProgressBar/StunValueLabel")
+_taunted_control = NodePath("MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/TauntControl")
+_taunted_label = NodePath("MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/TauntControl/MarginContainer/VBoxContainer/ProgressBar/TauntValueLabel")
+_silenced_control = NodePath("MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/SilenceControl")
+_silenced_label = NodePath("MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/SilenceControl/MarginContainer/VBoxContainer/ProgressBar/SilenceValueLabel")
+_invulnerable_control = NodePath("MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/InvulnerableControl")
+_invulnerable_label = NodePath("MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/InvulnerableControl/MarginContainer/VBoxContainer/ProgressBar/InvulnerableValueLabel")
+_untargetable_control = NodePath("MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/UntargetableControl")
+_untargetable_label = NodePath("MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/UntargetableControl/MarginContainer/VBoxContainer/ProgressBar/UntargetableValueLabel")
 _resource_points_container = NodePath("UIEntityInfoPanel2D/ComboContainer")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1092260174]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -552,7 +562,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=664960381]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -564,15 +574,15 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=2019517187]
 layout_mode = 2
 
-[node name="LeftPanel" type="Control" parent="MarginContainer/HBoxContainer"]
+[node name="LeftPanel" type="Control" parent="MarginContainer/HBoxContainer" unique_id=358993621]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/HBoxContainer/LeftPanel"]
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/HBoxContainer/LeftPanel" unique_id=1662823350]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -582,7 +592,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 0.36078432, 1, 1)
 
-[node name="RankViewer" parent="MarginContainer/HBoxContainer/LeftPanel" instance=ExtResource("4_jyfhv")]
+[node name="RankViewer" parent="MarginContainer/HBoxContainer/LeftPanel" unique_id=2106995445 instance=ExtResource("4_jyfhv")]
 unique_name_in_owner = true
 visible = false
 texture_filter = 4
@@ -596,14 +606,16 @@ offset_left = -6.0
 offset_top = -6.0
 offset_right = 250.0
 offset_bottom = 250.0
+grow_horizontal = 1
+grow_vertical = 1
 size_flags_horizontal = 3
 
-[node name="MiddlePanel" type="Control" parent="MarginContainer/HBoxContainer"]
+[node name="MiddlePanel" type="Control" parent="MarginContainer/HBoxContainer" unique_id=542689681]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/HBoxContainer/MiddlePanel"]
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/HBoxContainer/MiddlePanel" unique_id=849993753]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -613,7 +625,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 0.47058824, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/MiddlePanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/MiddlePanel" unique_id=377793]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -621,12 +633,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Control" type="Control" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer"]
+[node name="Control" type="Control" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer" unique_id=1637743710]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
 
-[node name="EntityLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/Control"]
+[node name="EntityLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/Control" unique_id=1428609204]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -643,20 +655,20 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HealthManaStatusContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer"]
+[node name="HealthManaStatusContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer" unique_id=1191281864]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.4
 theme_override_constants/separation = 0
 
-[node name="HealthBar" type="ColorRect" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/HealthManaStatusContainer"]
+[node name="HealthBar" type="ColorRect" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/HealthManaStatusContainer" unique_id=1151382258]
 material = SubResource("ShaderMaterial_r7eas")
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.65
 
-[node name="ShieldBar" type="ColorRect" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/HealthManaStatusContainer/HealthBar"]
+[node name="ShieldBar" type="ColorRect" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/HealthManaStatusContainer/HealthBar" unique_id=929148763]
 material = SubResource("ShaderMaterial_pf7ij")
 layout_mode = 1
 anchors_preset = 15
@@ -667,7 +679,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="GridColorRect" type="ColorRect" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/HealthManaStatusContainer/HealthBar"]
+[node name="GridColorRect" type="ColorRect" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/HealthManaStatusContainer/HealthBar" unique_id=946520633]
 material = SubResource("ShaderMaterial_vq80f")
 layout_mode = 1
 anchors_preset = 15
@@ -676,24 +688,24 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ManaBar" type="ColorRect" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/HealthManaStatusContainer"]
+[node name="ManaBar" type="ColorRect" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/HealthManaStatusContainer" unique_id=911812448]
 material = SubResource("ShaderMaterial_jyfhv")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
 
-[node name="Control" type="Control" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/HealthManaStatusContainer"]
+[node name="Control" type="Control" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/HealthManaStatusContainer" unique_id=2126078222]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.05
 
-[node name="StatusControl" type="Control" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/HealthManaStatusContainer"]
+[node name="StatusControl" type="Control" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/HealthManaStatusContainer" unique_id=558177772]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.1
 
-[node name="StatusBar" type="ColorRect" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/HealthManaStatusContainer/StatusControl"]
+[node name="StatusBar" type="ColorRect" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/HealthManaStatusContainer/StatusControl" unique_id=1646988743]
 material = SubResource("ShaderMaterial_oki6c")
 layout_mode = 1
 anchors_preset = 15
@@ -705,18 +717,18 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.4
 
-[node name="StacksContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer"]
+[node name="StacksContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer" unique_id=1147869933]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.3
 theme_override_constants/separation = 30
 
-[node name="IgniteControl" type="Control" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer"]
+[node name="IgniteControl" type="Control" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer" unique_id=1787201452]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/IgniteControl"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/IgniteControl" unique_id=351546793]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -725,18 +737,18 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_bottom = 10
 
-[node name="IgniteContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/IgniteControl/MarginContainer"]
+[node name="IgniteContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/IgniteControl/MarginContainer" unique_id=652565098]
 layout_mode = 2
 theme_override_constants/separation = -10
 
-[node name="IgniteIcon" type="TextureRect" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/IgniteControl/MarginContainer/IgniteContainer"]
+[node name="IgniteIcon" type="TextureRect" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/IgniteControl/MarginContainer/IgniteContainer" unique_id=1069324051]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("4_dgv81")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="IgniteLabel" type="Label" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/IgniteControl/MarginContainer/IgniteContainer"]
+[node name="IgniteLabel" type="Label" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/IgniteControl/MarginContainer/IgniteContainer" unique_id=1313719179]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "122"
@@ -744,11 +756,11 @@ label_settings = SubResource("LabelSettings_f48wy")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PoisonControl" type="Control" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer"]
+[node name="PoisonControl" type="Control" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer" unique_id=538294093]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/PoisonControl"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/PoisonControl" unique_id=1606581528]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -757,18 +769,18 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_bottom = 10
 
-[node name="PoisonContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/PoisonControl/MarginContainer"]
+[node name="PoisonContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/PoisonControl/MarginContainer" unique_id=856703045]
 layout_mode = 2
 theme_override_constants/separation = -10
 
-[node name="PoisonIcon" type="TextureRect" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/PoisonControl/MarginContainer/PoisonContainer"]
+[node name="PoisonIcon" type="TextureRect" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/PoisonControl/MarginContainer/PoisonContainer" unique_id=521681434]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("6_r7eas")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="PoisonLabel" type="Label" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/PoisonControl/MarginContainer/PoisonContainer"]
+[node name="PoisonLabel" type="Label" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/PoisonControl/MarginContainer/PoisonContainer" unique_id=165759801]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "122"
@@ -776,11 +788,11 @@ label_settings = SubResource("LabelSettings_f48wy")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RegenControl" type="Control" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer"]
+[node name="RegenControl" type="Control" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer" unique_id=1602417520]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/RegenControl"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/RegenControl" unique_id=2092853812]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -789,18 +801,18 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_bottom = 10
 
-[node name="RegenContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/RegenControl/MarginContainer"]
+[node name="RegenContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/RegenControl/MarginContainer" unique_id=2045462137]
 layout_mode = 2
 theme_override_constants/separation = -10
 
-[node name="RegenIcon" type="TextureRect" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/RegenControl/MarginContainer/RegenContainer"]
+[node name="RegenIcon" type="TextureRect" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/RegenControl/MarginContainer/RegenContainer" unique_id=428794747]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("7_pf7ij")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="RegenLabel" type="Label" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/RegenControl/MarginContainer/RegenContainer"]
+[node name="RegenLabel" type="Label" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/RegenControl/MarginContainer/RegenContainer" unique_id=323484394]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "122"
@@ -808,11 +820,11 @@ label_settings = SubResource("LabelSettings_f48wy")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="NecrosisControl" type="Control" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer"]
+[node name="NecrosisControl" type="Control" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer" unique_id=486655993]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/NecrosisControl"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/NecrosisControl" unique_id=1647380050]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -821,18 +833,18 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_bottom = 10
 
-[node name="NecrosisContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/NecrosisControl/MarginContainer"]
+[node name="NecrosisContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/NecrosisControl/MarginContainer" unique_id=328331377]
 layout_mode = 2
 theme_override_constants/separation = -10
 
-[node name="NecrosisIcon" type="TextureRect" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/NecrosisControl/MarginContainer/NecrosisContainer"]
+[node name="NecrosisIcon" type="TextureRect" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/NecrosisControl/MarginContainer/NecrosisContainer" unique_id=867261748]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("8_oki6c")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="NecrosisLabel" type="Label" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/NecrosisControl/MarginContainer/NecrosisContainer"]
+[node name="NecrosisLabel" type="Label" parent="MarginContainer/HBoxContainer/MiddlePanel/VBoxContainer/StacksContainer/NecrosisControl/MarginContainer/NecrosisContainer" unique_id=909706979]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "122"
@@ -840,12 +852,12 @@ label_settings = SubResource("LabelSettings_f48wy")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RightPanel" type="Control" parent="MarginContainer/HBoxContainer"]
+[node name="RightPanel" type="Control" parent="MarginContainer/HBoxContainer" unique_id=2098286068]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 
-[node name="ColorRectRightPanel" type="ColorRect" parent="MarginContainer/HBoxContainer/RightPanel"]
+[node name="ColorRectRightPanel" type="ColorRect" parent="MarginContainer/HBoxContainer/RightPanel" unique_id=192586463]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -855,7 +867,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.27058825, 1, 1, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/RightPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/RightPanel" unique_id=1272899514]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -864,25 +876,261 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer" unique_id=186944927]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer" unique_id=839269700]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
+alignment = 1
 
-[node name="Control" type="Control" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="StunControl" type="Control" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1842623316]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-size_flags_vertical = 3
 size_flags_stretch_ratio = 0.6
 
-[node name="ControlTemp" type="Control" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/StunControl" unique_id=1673782877]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/StunControl/MarginContainer" unique_id=1985151785]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/StunControl/MarginContainer/VBoxContainer" unique_id=1180809907]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.5
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 9
+text = "STUN"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="UIEntityInfoPanel2D" type="Control" parent="."]
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/StunControl/MarginContainer/VBoxContainer" unique_id=1635168862]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+value = 42.0
+show_percentage = false
+
+[node name="StunValueLabel" type="Label" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/StunControl/MarginContainer/VBoxContainer/ProgressBar" unique_id=1875844900]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "4.2s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TauntControl" type="Control" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer" unique_id=894598711]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_stretch_ratio = 0.6
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/TauntControl" unique_id=890267451]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/TauntControl/MarginContainer" unique_id=1153342386]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/TauntControl/MarginContainer/VBoxContainer" unique_id=19241845]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 9
+text = "TAUNT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/TauntControl/MarginContainer/VBoxContainer" unique_id=1218343789]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+value = 42.0
+show_percentage = false
+
+[node name="TauntValueLabel" type="Label" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/TauntControl/MarginContainer/VBoxContainer/ProgressBar" unique_id=1292411253]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "4.2s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SilenceControl" type="Control" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer" unique_id=2008002998]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_stretch_ratio = 0.6
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/SilenceControl" unique_id=806394455]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/SilenceControl/MarginContainer" unique_id=611444438]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/SilenceControl/MarginContainer/VBoxContainer" unique_id=1384846466]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 9
+text = "SILENCE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/SilenceControl/MarginContainer/VBoxContainer" unique_id=1024941188]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+value = 42.0
+show_percentage = false
+
+[node name="SilenceValueLabel" type="Label" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/SilenceControl/MarginContainer/VBoxContainer/ProgressBar" unique_id=1336440426]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "4.2s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UntargetableControl" type="Control" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer" unique_id=75523704]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_stretch_ratio = 0.6
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/UntargetableControl" unique_id=1464669926]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/UntargetableControl/MarginContainer" unique_id=447430581]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/UntargetableControl/MarginContainer/VBoxContainer" unique_id=2024765510]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 9
+text = "UNTARGETABLE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/UntargetableControl/MarginContainer/VBoxContainer" unique_id=1841255482]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+value = 42.0
+show_percentage = false
+
+[node name="UntargetableValueLabel" type="Label" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/UntargetableControl/MarginContainer/VBoxContainer/ProgressBar" unique_id=609097924]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "4.2s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InvulnerableControl" type="Control" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer" unique_id=949256350]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_stretch_ratio = 0.6
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/InvulnerableControl" unique_id=105023325]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/InvulnerableControl/MarginContainer" unique_id=209582153]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/InvulnerableControl/MarginContainer/VBoxContainer" unique_id=1730717264]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 9
+text = "INVULNERABLE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/InvulnerableControl/MarginContainer/VBoxContainer" unique_id=696653272]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 2.0
+value = 42.0
+show_percentage = false
+
+[node name="InvulnerableValueLabel" type="Label" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer/VBoxContainer/InvulnerableControl/MarginContainer/VBoxContainer/ProgressBar" unique_id=88065954]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "4.2s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ControlTemp" type="Control" parent="MarginContainer/HBoxContainer/RightPanel/MarginContainer/HBoxContainer" unique_id=737581649]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.0
+
+[node name="UIEntityInfoPanel2D" type="Control" parent="." unique_id=1941538727]
 visible = false
 custom_minimum_size = Vector2(650, 220)
 anchors_preset = 0
@@ -890,7 +1138,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 theme = ExtResource("1_vq80f")
 
-[node name="ComboContainer" type="HBoxContainer" parent="UIEntityInfoPanel2D"]
+[node name="ComboContainer" type="HBoxContainer" parent="UIEntityInfoPanel2D" unique_id=1767688789]
 visible = false
 layout_mode = 0
 offset_left = 664.1
