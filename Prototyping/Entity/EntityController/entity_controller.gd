@@ -59,6 +59,9 @@ extends Node
 @onready var _team_edit: TextEdit = %TeamTextEdit
 @onready var _spawn_localizer_show_button: CheckButton = %SpawnLocalizerShowButton
 
+@onready var _inflict_status_choice: OptionButton = %StatusTypeChoice
+@onready var _inflict_status_duration_edit: TextEdit = %InflictStatusDurationEdit
+
 var _target: Entity
 var _all_entities: Array[Entity] = [] # Cached list of all entities for entity choice dropdown
 
@@ -126,6 +129,12 @@ func _ready() -> void:
 	i = 0
 	for spawn_type: String in SpawnLocationConfig.LocationType.keys():
 		_spawn_type_choice.add_item(spawn_type, i)
+		i += 1
+	
+	# Populate inflict status dropdown
+	i = 0
+	for status_type: String in Status.Type.keys():
+		_inflict_status_choice.add_item(status_type, i)
 		i += 1
 	
 	# Initialize spell parameters with default (METEOR)
@@ -716,3 +725,23 @@ func _on_auto_attack_button_pressed() -> void:
 	_refresh_target()
 	entity_owner.auto_attack(_target)
 	print("DEBUG: auto_attack called")
+
+
+func _on_inflict_status_button_pressed() -> void:
+	_refresh_target()
+	
+	if _target == null:
+		printerr("EntityController: No target selected for inflict_status")
+		return
+	
+	var status_text: String = _inflict_status_duration_edit.text.strip_edges()
+	if status_text.is_empty():
+		printerr("EntityController: No status duration provided")
+		return
+	
+	var status_type: Status.Type = _inflict_status_choice.get_selected_id() as Status.Type
+	var status_duration: float = status_text.to_float()
+	var action_id: StringName = &"test_inflict_status"
+	
+	entity_owner.inflict_status(_target, status_type, status_duration, action_id)
+	print("DEBUG: inflict_status called - Target: ", _target.entity_name, " | Type: ", Status.Type.keys()[status_type], " | Duration: ", status_duration)

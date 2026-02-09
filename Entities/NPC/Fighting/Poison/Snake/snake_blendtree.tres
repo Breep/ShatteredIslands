@@ -1,4 +1,4 @@
-[gd_resource type="AnimationNodeBlendTree" format=3 uid="uid://b4tn0mt3xrcep"]
+[gd_resource type="AnimationNodeBlendTree" format=3 uid="uid://brnwae0xxk00f"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3dwlx"]
 animation = &"Default Take"

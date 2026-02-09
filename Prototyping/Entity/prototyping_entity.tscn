@@ -130,6 +130,26 @@ size_flags_vertical = 3
 text = "Reset SCENE"
 script = ExtResource("3_6kn6i")
 
+[node name="MarginContainer" type="MarginContainer" parent="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=1290145158]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/MarginContainer" unique_id=539222233]
+layout_mode = 2
+alignment = 1
+
+[node name="AutoAttackCheckButton" type="CheckButton" parent="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=2050907256]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Auto Attacks"
+
+[node name="FamilyManagersCheckButton" type="CheckButton" parent="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=2102497392]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Family Managers"
+
 [node name="CenterPointCamera" parent="." unique_id=842815466 instance=ExtResource("4_egh8k")]
 unique_name_in_owner = true
 transform = Transform3D(0.022652432, 0, 0.9997434, 0, 1, 0, -0.9997434, 0, 0.022652432, 0, 0, 0)
@@ -257,5 +277,7 @@ _hover_period = 100.0
 [connection signal="pressed" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StartFightButton" to="." method="_on_start_fight_button_pressed"]
 [connection signal="pressed" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StopFightButton" to="." method="_on_stop_fight_button_pressed"]
 [connection signal="pressed" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/ResetFightButton" to="." method="_on_reset_fight_button_pressed"]
+[connection signal="toggled" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/AutoAttackCheckButton" to="." method="_on_auto_attack_check_button_toggled"]
+[connection signal="toggled" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/FamilyManagersCheckButton" to="." method="_on_family_managers_check_button_toggled"]
 
 [editable path="TestingFloorFFA5"]

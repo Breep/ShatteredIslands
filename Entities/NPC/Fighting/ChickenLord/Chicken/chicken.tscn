@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://jwk6d3k8w3k5" path="res://Entities/EntityInfoPanel/EntityInfoPanel3D/entity_info_panel_3d.tscn" id="4_x7yny"]
 [ext_resource type="Script" uid="uid://bk603mav6k516" path="res://Entities/NPC/Fighting/ChickenLord/Chicken/chicken_animator.gd" id="5_tpk7p"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Tool/SpawnPoint/spawn_point.tscn" id="7_qjgos"]
-[ext_resource type="AnimationNodeBlendTree" uid="uid://bcmrpt8xmj883" path="res://Entities/NPC/Fighting/default_blendtree.tres" id="8_i1jde"]
+[ext_resource type="AnimationNodeBlendTree" uid="uid://cgr3043y4f2ee" path="res://Entities/NPC/Fighting/default_blendtree.tres" id="8_i1jde"]
 
 [sub_resource type="Resource" id="Resource_x7yny"]
 script = ExtResource("2_x7yny")
@@ -28,7 +28,7 @@ collision_mask = 0
 script = ExtResource("1_k573r")
 entity_name = "Chicken"
 custom_base_stats = SubResource("Resource_x7yny")
-_auto_loaded_modules = Array[int]([1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 3, 0])
+_auto_loaded_modules = Array[int]([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 0, 4])
 _visual_3d = NodePath("ChickenVisual")
 _entity_info_panel_3d = NodePath("EntityInfoPanel3d")
 _animation_module = NodePath("AnimationModule")

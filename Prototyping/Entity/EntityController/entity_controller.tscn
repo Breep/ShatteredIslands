@@ -145,9 +145,11 @@ vertical_alignment = 1
 
 [node name="DirectAttackFoldableContainer" type="FoldableContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1041636963]
 layout_mode = 2
+folded = true
 title = "DIRECT DAMAGE"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer" unique_id=1655201892]
+visible = false
 layout_mode = 2
 
 [node name="DirectAttackControl" type="Control" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer" unique_id=1286328941]
@@ -188,18 +190,35 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="DamageTypeVBox" type="VBoxContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackControl/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1853570436]
+[node name="ColorRect" type="ColorRect" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackControl/MarginContainer/VBoxContainer/HBoxContainer" unique_id=512021080]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.1882353, 0.1882353, 0.1882353, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect" unique_id=32992899]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="DamageTypeVBox" type="VBoxContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect/MarginContainer" unique_id=1853570436]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="DamageTypeLabel" type="Label" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackControl/MarginContainer/VBoxContainer/HBoxContainer/DamageTypeVBox" unique_id=987950138]
+[node name="DamageTypeLabel" type="Label" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect/MarginContainer/DamageTypeVBox" unique_id=987950138]
 layout_mode = 2
 size_flags_vertical = 6
 text = "Damage Type"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DamageChoice" type="OptionButton" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackControl/MarginContainer/VBoxContainer/HBoxContainer/DamageTypeVBox" unique_id=1662727255]
+[node name="DamageChoice" type="OptionButton" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect/MarginContainer/DamageTypeVBox" unique_id=1662727255]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -257,36 +276,70 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="DamageTypeVBox" type="VBoxContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1758974865]
+[node name="ColorRect" type="ColorRect" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1476360447]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.1882353, 0.1882353, 0.1882353, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect" unique_id=903818612]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="DamageTypeVBox" type="VBoxContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect/MarginContainer" unique_id=1758974865]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="DamageTypeLabel" type="Label" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer/DamageTypeVBox" unique_id=1789901149]
+[node name="DamageTypeLabel" type="Label" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect/MarginContainer/DamageTypeVBox" unique_id=1789901149]
 layout_mode = 2
 size_flags_vertical = 6
 text = "Damage Type"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DamageChoicePercent" type="OptionButton" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer/DamageTypeVBox" unique_id=2037782360]
+[node name="DamageChoicePercent" type="OptionButton" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect/MarginContainer/DamageTypeVBox" unique_id=2037782360]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
 expand_icon = true
 
-[node name="PercentTypeVBox" type="VBoxContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1703893926]
+[node name="ColorRect2" type="ColorRect" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1005763321]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.1882353, 0.1882353, 0.1882353, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect2" unique_id=669108014]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="PercentTypeVBox" type="VBoxContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect2/MarginContainer" unique_id=1703893926]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PercentModifierLabel" type="Label" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer/PercentTypeVBox" unique_id=1964439914]
+[node name="PercentModifierLabel" type="Label" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect2/MarginContainer/PercentTypeVBox" unique_id=1964439914]
 layout_mode = 2
 size_flags_vertical = 6
 text = "Percent Type"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PercentModifierChoice" type="OptionButton" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer/PercentTypeVBox" unique_id=570249576]
+[node name="PercentModifierChoice" type="OptionButton" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackPercentControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect2/MarginContainer/PercentTypeVBox" unique_id=570249576]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -308,9 +361,11 @@ script = ExtResource("2_ta2cq")
 
 [node name="CastUltimateFoldableContainer2" type="FoldableContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer" unique_id=416443788]
 layout_mode = 2
+folded = true
 title = "AUTO ATTACK"
 
 [node name="CastUltimateControl" type="Control" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/CastUltimateFoldableContainer2" unique_id=1169011138]
+visible = false
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 
@@ -453,18 +508,35 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="PercentTypeVBox" type="VBoxContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/HealFoldableContainer/VBoxContainer/HealPercentControl/MarginContainer/VBoxContainer/HBoxContainer" unique_id=291626028]
+[node name="ColorRect" type="ColorRect" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/HealFoldableContainer/VBoxContainer/HealPercentControl/MarginContainer/VBoxContainer/HBoxContainer" unique_id=327999197]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.1882353, 0.1882353, 0.1882353, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/HealFoldableContainer/VBoxContainer/HealPercentControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect" unique_id=2067490026]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="PercentTypeVBox" type="VBoxContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/HealFoldableContainer/VBoxContainer/HealPercentControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect/MarginContainer" unique_id=291626028]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PercentModifierLabel" type="Label" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/HealFoldableContainer/VBoxContainer/HealPercentControl/MarginContainer/VBoxContainer/HBoxContainer/PercentTypeVBox" unique_id=1231534263]
+[node name="PercentModifierLabel" type="Label" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/HealFoldableContainer/VBoxContainer/HealPercentControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect/MarginContainer/PercentTypeVBox" unique_id=1231534263]
 layout_mode = 2
 size_flags_vertical = 6
 text = "Percent Type"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HealthPercentModifierChoice" type="OptionButton" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/HealFoldableContainer/VBoxContainer/HealPercentControl/MarginContainer/VBoxContainer/HBoxContainer/PercentTypeVBox" unique_id=801012656]
+[node name="HealthPercentModifierChoice" type="OptionButton" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/HealFoldableContainer/VBoxContainer/HealPercentControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect/MarginContainer/PercentTypeVBox" unique_id=801012656]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -531,18 +603,35 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="DamageTypeVBox" type="VBoxContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/InflictConditionStackControl/MarginContainer/VBoxContainer/HBoxContainer" unique_id=71220190]
+[node name="ColorRect" type="ColorRect" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/InflictConditionStackControl/MarginContainer/VBoxContainer/HBoxContainer" unique_id=745911482]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.1882353, 0.1882353, 0.1882353, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/InflictConditionStackControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect" unique_id=614101034]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="StackTypeVBox" type="VBoxContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/InflictConditionStackControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect/MarginContainer" unique_id=71220190]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="DamageTypeLabel" type="Label" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/InflictConditionStackControl/MarginContainer/VBoxContainer/HBoxContainer/DamageTypeVBox" unique_id=1036011849]
+[node name="StackTypeLabel" type="Label" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/InflictConditionStackControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect/MarginContainer/StackTypeVBox" unique_id=1036011849]
 layout_mode = 2
 size_flags_vertical = 6
 text = "Stack Type"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StackTypeChoice" type="OptionButton" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/InflictConditionStackControl/MarginContainer/VBoxContainer/HBoxContainer/DamageTypeVBox" unique_id=1044477042]
+[node name="StackTypeChoice" type="OptionButton" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/InflictConditionStackControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect/MarginContainer/StackTypeVBox" unique_id=1044477042]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -554,7 +643,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "10"
-placeholder_text = "Damage number"
+placeholder_text = "Stack number"
 
 [node name="InflictConditionButton" type="Button" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/InflictConditionStackControl/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1457406567]
 layout_mode = 2
@@ -606,7 +695,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "10"
-placeholder_text = "Damage number"
+placeholder_text = "Stack number"
 
 [node name="CleanseButton" type="Button" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/CleanseDispellControl/MarginContainer/VBoxContainer/HBoxContainer" unique_id=449731657]
 layout_mode = 2
@@ -618,6 +707,102 @@ script = ExtResource("2_ta2cq")
 layout_mode = 2
 size_flags_horizontal = 3
 text = "DISPELL"
+script = ExtResource("2_ta2cq")
+
+[node name="StatusFoldableContainer" type="FoldableContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1473532008]
+layout_mode = 2
+folded = true
+title = "STATUS"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/StatusFoldableContainer" unique_id=1799548373]
+visible = false
+layout_mode = 2
+
+[node name="InflictStatusControl" type="Control" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/StatusFoldableContainer/VBoxContainer" unique_id=1210395116]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/StatusFoldableContainer/VBoxContainer/InflictStatusControl" unique_id=402282927]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.41960785, 0.41960785, 0.41960785, 0.87058824)
+
+[node name="MarginContainer" type="MarginContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/StatusFoldableContainer/VBoxContainer/InflictStatusControl" unique_id=1268813580]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/StatusFoldableContainer/VBoxContainer/InflictStatusControl/MarginContainer" unique_id=291592486]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/StatusFoldableContainer/VBoxContainer/InflictStatusControl/MarginContainer/VBoxContainer" unique_id=1902170246]
+layout_mode = 2
+text = "Inflict status"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/StatusFoldableContainer/VBoxContainer/InflictStatusControl/MarginContainer/VBoxContainer" unique_id=573327095]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/StatusFoldableContainer/VBoxContainer/InflictStatusControl/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1256388495]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.1882353, 0.1882353, 0.1882353, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/StatusFoldableContainer/VBoxContainer/InflictStatusControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect" unique_id=1781312226]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="DamageTypeVBox" type="VBoxContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/StatusFoldableContainer/VBoxContainer/InflictStatusControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect/MarginContainer" unique_id=2060978322]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StatusTypeLabel" type="Label" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/StatusFoldableContainer/VBoxContainer/InflictStatusControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect/MarginContainer/DamageTypeVBox" unique_id=199390992]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Status Type"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatusTypeChoice" type="OptionButton" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/StatusFoldableContainer/VBoxContainer/InflictStatusControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect/MarginContainer/DamageTypeVBox" unique_id=1974042428]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+expand_icon = true
+
+[node name="InflictStatusDurationEdit" type="TextEdit" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/StatusFoldableContainer/VBoxContainer/InflictStatusControl/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1465689872]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "10"
+placeholder_text = "Duration (s)"
+
+[node name="InflictStatusButton" type="Button" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/StatusFoldableContainer/VBoxContainer/InflictStatusControl/MarginContainer/VBoxContainer/HBoxContainer" unique_id=643279637]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "INFLICT
+STATUS"
 script = ExtResource("2_ta2cq")
 
 [node name="ProjectileFoldableContainer" type="FoldableContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer" unique_id=446407877]
@@ -664,18 +849,35 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ProjectileTypeVBox" type="VBoxContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer" unique_id=511022472]
+[node name="ColorRect" type="ColorRect" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1868335279]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.1882353, 0.1882353, 0.1882353, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect" unique_id=1749705002]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ProjectileTypeVBox" type="VBoxContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect/MarginContainer" unique_id=511022472]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="ProjectileTypeLabel" type="Label" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileTypeVBox" unique_id=839920134]
+[node name="ProjectileTypeLabel" type="Label" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect/MarginContainer/ProjectileTypeVBox" unique_id=839920134]
 layout_mode = 2
 text = "Projectile Type"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ProjectileTypeChoice" type="OptionButton" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileTypeVBox" unique_id=1622772734]
+[node name="ProjectileTypeChoice" type="OptionButton" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect/MarginContainer/ProjectileTypeVBox" unique_id=1622772734]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -867,18 +1069,35 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="SpellTypeVBox" type="VBoxContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1051810611]
+[node name="ColorRect" type="ColorRect" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer" unique_id=106421200]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.1882353, 0.1882353, 0.1882353, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect" unique_id=1879098848]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="SpellTypeVBox" type="VBoxContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect/MarginContainer" unique_id=1051810611]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="SpellTypeLabel" type="Label" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer/SpellTypeVBox" unique_id=884491876]
+[node name="SpellTypeLabel" type="Label" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect/MarginContainer/SpellTypeVBox" unique_id=884491876]
 layout_mode = 2
 text = "Spell Type"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SpellTypeChoice" type="OptionButton" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer/SpellTypeVBox" unique_id=938190404]
+[node name="SpellTypeChoice" type="OptionButton" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect/MarginContainer/SpellTypeVBox" unique_id=938190404]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1083,9 +1302,11 @@ script = ExtResource("2_ta2cq")
 
 [node name="SummonEntityFoldableContainer" type="FoldableContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer" unique_id=2063361332]
 layout_mode = 2
+folded = true
 title = "SUMMON ENTITY"
 
 [node name="SummonEntityControl" type="Control" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer" unique_id=193134845]
+visible = false
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 
@@ -1143,18 +1364,35 @@ label_settings = SubResource("LabelSettings_j3d5q")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="EntityTypeVBox" type="VBoxContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/SummonParamControl/VBoxContainer" unique_id=1487118833]
+[node name="ColorRect" type="ColorRect" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/SummonParamControl/VBoxContainer" unique_id=799236474]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+color = Color(0.1882353, 0.1882353, 0.1882353, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/SummonParamControl/VBoxContainer/ColorRect" unique_id=1452325791]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="EntityTypeVBox" type="VBoxContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/SummonParamControl/VBoxContainer/ColorRect/MarginContainer" unique_id=1487118833]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="EntityTypeLabel" type="Label" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/SummonParamControl/VBoxContainer/EntityTypeVBox" unique_id=1698212667]
+[node name="EntityTypeLabel" type="Label" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/SummonParamControl/VBoxContainer/ColorRect/MarginContainer/EntityTypeVBox" unique_id=1698212667]
 layout_mode = 2
 text = "Entity Type"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="EntityTypeChoice" type="OptionButton" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/SummonParamControl/VBoxContainer/EntityTypeVBox" unique_id=1052483294]
+[node name="EntityTypeChoice" type="OptionButton" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/SummonParamControl/VBoxContainer/ColorRect/MarginContainer/EntityTypeVBox" unique_id=1052483294]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1363,18 +1601,35 @@ label_settings = SubResource("LabelSettings_hsjxk")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SpawnTypeVBox" type="VBoxContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer" unique_id=1930098572]
+[node name="ColorRect" type="ColorRect" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer" unique_id=854732722]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+color = Color(0.1882353, 0.1882353, 0.1882353, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ColorRect" unique_id=1695889801]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="SpawnTypeVBox" type="VBoxContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ColorRect/MarginContainer" unique_id=1930098572]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="SpawnTypeLabel" type="Label" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/SpawnTypeVBox" unique_id=1777406348]
+[node name="SpawnTypeLabel" type="Label" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ColorRect/MarginContainer/SpawnTypeVBox" unique_id=1777406348]
 layout_mode = 2
 text = "Spawn Type"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SpawnTypeChoice" type="OptionButton" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/SpawnTypeVBox" unique_id=932819402]
+[node name="SpawnTypeChoice" type="OptionButton" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ColorRect/MarginContainer/SpawnTypeVBox" unique_id=932819402]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1511,11 +1766,12 @@ script = ExtResource("2_ta2cq")
 [connection signal="pressed" from="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/InflictConditionStackControl/MarginContainer/VBoxContainer/HBoxContainer/InflictConditionButton" to="." method="_on_inflict_condition_button_pressed"]
 [connection signal="pressed" from="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/CleanseDispellControl/MarginContainer/VBoxContainer/HBoxContainer/CleanseButton" to="." method="_on_cleanse_button_pressed"]
 [connection signal="pressed" from="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SCDFoldableContainer/VBoxContainer/CleanseDispellControl/MarginContainer/VBoxContainer/HBoxContainer/DispellButton" to="." method="_on_dispell_button_pressed"]
+[connection signal="pressed" from="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/StatusFoldableContainer/VBoxContainer/InflictStatusControl/MarginContainer/VBoxContainer/HBoxContainer/InflictStatusButton" to="." method="_on_inflict_status_button_pressed"]
 [connection signal="pressed" from="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/ProjectileFoldableContainer/ProjectileAttackControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileAttackButton" to="." method="_on_projectile_attack_button_pressed"]
-[connection signal="item_selected" from="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer/SpellTypeVBox/SpellTypeChoice" to="." method="_on_spell_type_choice_item_selected"]
+[connection signal="item_selected" from="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect/MarginContainer/SpellTypeVBox/SpellTypeChoice" to="." method="_on_spell_type_choice_item_selected"]
 [connection signal="pressed" from="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileAttackButton" to="." method="_on_cast_spell_button_pressed"]
 [connection signal="pressed" from="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/CastUltimateFoldableContainer/CastUltimateControl/MarginContainer/VBoxContainer/HBoxContainer/CastUltimateButton" to="." method="_on_cast_ultimate_button_pressed"]
-[connection signal="item_selected" from="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/SummonParamControl/VBoxContainer/EntityTypeVBox/EntityTypeChoice" to="." method="_on_entity_type_choice_item_selected"]
-[connection signal="item_selected" from="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/SpawnTypeVBox/SpawnTypeChoice" to="." method="_on_spawn_type_choice_item_selected"]
+[connection signal="item_selected" from="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/SummonParamControl/VBoxContainer/ColorRect/MarginContainer/EntityTypeVBox/EntityTypeChoice" to="." method="_on_entity_type_choice_item_selected"]
+[connection signal="item_selected" from="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ColorRect/MarginContainer/SpawnTypeVBox/SpawnTypeChoice" to="." method="_on_spawn_type_choice_item_selected"]
 [connection signal="toggled" from="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllSpawnParamVBox/Param3/HBoxContainer/SpawnLocalizerShowButton" to="." method="_on_spawn_localizer_show_button_toggled"]
 [connection signal="pressed" from="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/SummonEntityButton" to="." method="_on_summon_entity_button_pressed"]
