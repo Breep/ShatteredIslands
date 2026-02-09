@@ -139,12 +139,4 @@ func _apply_all_cards_upgrades() -> void:
 #endregion
 
 #region ============================== Other callbacks ==============================
-func _on_gfm_fighting_phase_state_changed(fighting_phase_state: GlobalFightingManager.FightingPhaseState) -> void:
-	match fighting_phase_state:
-		GlobalFightingManager.FightingPhaseState.POSITIONING:
-			fighting_state = FightingState.IDLE
-		GlobalFightingManager.FightingPhaseState.NORMAL:
-			fighting_state = FightingState.FIGHTING
-		GlobalFightingManager.FightingPhaseState.CELEBRATING:
-			fighting_state = FightingState.CELEBRATING
 #endregion

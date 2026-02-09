@@ -250,6 +250,7 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	Verbose.debug("Entity [" + entity_name + "] ready", Verbose.Category.ENTITY)
 	fighting_state_changed.connect(_on_fighting_state_changed)
+	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
 	
 	stats.health_changed.connect(_on_stats_health_changed)
 	died.connect(_on_died)
@@ -342,14 +343,13 @@ func connect_to_fighting_area(fighting_area_ref: FightingArea) -> void:
 		Verbose.error("Trying to connect a null fighting area to an Entity", Verbose.Category.ENTITY)
 		return
 	
-	# Connect all receiver modules to fighting area managers
-	var receivers: Array[ActionReceiverModule] = [
-		_damage_receiver, _heal_receiver, _add_stack_receiver, _remove_stack_receiver
-	]
-	for module in receivers:
-		if module == null: continue
-		module.connect_to_spawn_manager(fighting_area_ref.spawn_manager)
-		module.connect_to_arena_zone_manager(fighting_area_ref.arena_zone_manager)
+	if _projectile_sender != null:
+		_projectile_sender.connect_to_spawn_manager(fighting_area_ref.spawn_manager)
+	if _spell_sender != null:
+		_spell_sender.connect_to_spawn_manager(fighting_area_ref.spawn_manager)
+	if _summon_sender != null:
+		_summon_sender.connect_to_spawn_manager(fighting_area_ref.spawn_manager)
+		_summon_sender.connect_to_arena_zone_manager(fighting_area_ref.arena_zone_manager)
 #endregion
 
 #region ============================== Action Senders ==============================
@@ -735,4 +735,14 @@ func _on_died(_entity: Entity) -> void:
 	if _movement_module != null: _movement_module.stop()
 	if _auto_attack_periodic_module != null and auto_attack_enabled: _auto_attack_periodic_module.stop()
 	if _entity_info_panel_3d != null: _entity_info_panel_3d.hide()
+
+
+func _on_gfm_fighting_phase_state_changed(fighting_phase_state: GlobalFightingManager.FightingPhaseState) -> void:
+	match fighting_phase_state:
+		GlobalFightingManager.FightingPhaseState.POSITIONING:
+			fighting_state = FightingState.IDLE
+		GlobalFightingManager.FightingPhaseState.NORMAL:
+			fighting_state = FightingState.FIGHTING
+		GlobalFightingManager.FightingPhaseState.CELEBRATING:
+			fighting_state = FightingState.CELEBRATING
 #endregion
