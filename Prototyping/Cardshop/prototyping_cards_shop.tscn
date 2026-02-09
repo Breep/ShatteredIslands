@@ -5,6 +5,10 @@
 
 [node name="PrototypingCardsShop" type="Node" unique_id=1240633937 node_paths=PackedStringArray("_last_draw_value_labels", "_last_draw_value_ratio_labels", "_draw_value_labels", "_draw_value_ratio_labels")]
 script = ExtResource("1_a1n5c")
+common_number = 100
+rare_number = 100
+epic_number = 100
+legendary_number = 100
 _active_families = Dictionary[int, bool]({
 1: true,
 2: true,
@@ -85,7 +89,29 @@ size_flags_vertical = 3
 layout_mode = 2
 text = "Draw cards"
 
-[node name="CardNumberSpinBox" type="SpinBox" parent="Control/VBoxContainer/HBoxContainer" unique_id=2130051336]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/VBoxContainer/HBoxContainer" unique_id=1526053590]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=927647927]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=531436823]
+layout_mode = 2
+text = "Number to draw:      "
+
+[node name="CardNumberSpinBox" type="SpinBox" parent="Control/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=2130051336]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1020801565]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2" unique_id=386768203]
+layout_mode = 2
+text = "Number of iteration:"
+
+[node name="IterationNumberSpinBox" type="SpinBox" parent="Control/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2" unique_id=490795428]
 unique_name_in_owner = true
 layout_mode = 2
 alignment = 1

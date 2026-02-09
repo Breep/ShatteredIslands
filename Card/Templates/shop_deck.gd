@@ -80,11 +80,13 @@ func draw_cards_for_player(player: Player, count: int, player_available_pool: Di
 		
 		# Si aucune carte disponible pour cette rareté, essayer la rareté inférieure
 		if available_cards.is_empty():
-			rarity = _get_fallback_rarity(rarity, player_available_pool)
-			if rarity != Card.Rarity.COMMON: # Retry avec la nouvelle rareté
-				available_cards = player_available_pool.get(rarity, []).filter(
-					func(c): return not c.name in already_drawn_names
+			if rarity != Card.Rarity.COMMON:
+				# Retry avec la nouvelle rareté
+				rarity = _get_fallback_rarity(rarity, player_available_pool)
+				available_cards = player_available_pool.get(rarity, [] as Array[Card]).filter(
+				func(c): return not c.name in already_drawn_names
 				)
+				print(available_cards)
 		
 		# Si toujours rien, arrêter le tirage
 		if available_cards.is_empty():
@@ -182,7 +184,7 @@ func _get_fallback_rarity(rarity: Card.Rarity, pool: Dictionary[Card.Rarity, Arr
 			return fallback_rarity
 	return Card.Rarity.COMMON
 
-func _drop_rate_to_threshold(drop_rates: Dictionary[Card.Rarity, float]) -> Dictionary[Card.Rarity, float]:
+func _drop_rate_to_threshold(drop_rates: Dictionary) -> Dictionary[Card.Rarity, float]:
 	var thresholds: Dictionary[Card.Rarity, float]
 	thresholds[Card.Rarity.COMMON] = drop_rates[Card.Rarity.COMMON]
 	thresholds[Card.Rarity.RARE] = thresholds[Card.Rarity.COMMON] + drop_rates[Card.Rarity.RARE]
