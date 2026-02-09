@@ -146,7 +146,7 @@ func _register_spark_of_light() -> void:
 
 # ============================== Callback ==============================
 
-func _on_auto_attack_completed() -> void:
+func _on_auto_attack_completed(_entity: Entity) -> void:
 	var max_charge: int = _mega_strike_max_charge if _mega_strike_activated else _super_strike_max_charge
 	_super_strike_charges = (_super_strike_charges + 1) % (max_charge + 1)
 	super_strike_charges_changed.emit(_super_strike_charges, max_charge)

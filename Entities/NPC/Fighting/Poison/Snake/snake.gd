@@ -9,7 +9,6 @@ func _ready() -> void:
 		if not cb_vars.has(AutoAttackModifier.VarType.TARGET): return
 		var target: Entity = cb_vars[AutoAttackModifier.VarType.TARGET]
 		if target == null or target.is_queued_for_deletion(): return
-		print("INFLICT POISON SNAKE")
 		inflict_condition_stacks(target, 1, Utils.StackType.POISON, "Snake")
 		
 	auto_attack_modifier_registry.register_modifier(mod)

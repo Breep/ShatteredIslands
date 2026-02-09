@@ -728,7 +728,6 @@ func _on_stats_health_changed(new_health: int) -> void:
 func _on_died(_entity: Entity) -> void:
 	Verbose.debug("Entity [" + entity_name + "] died", Verbose.Category.ENTITY)
 	life_state = LifeState.DEAD  # Set life state
-	fighting_state = FightingState.IDLE  # Stop fighting
 	
 	# Visual and module cleanup
 	if target_module != null: target_module.stop()
