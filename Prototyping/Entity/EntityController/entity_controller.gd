@@ -359,7 +359,7 @@ func _on_projectile_attack_button_pressed() -> void:
 	var bounce_count: int = bounce_text.to_int() if not bounce_text.is_empty() else 0
 	projectile_stats.bounces_remaining = bounce_count
 	
-	entity_owner.projectile_attack(_target, projectile_type, projectile_spawn, projectile_stats)
+	entity_owner.projectile_attack(_target, projectile_type, projectile_spawn, projectile_stats, false)
 	print("DEBUG: projectile_attack called - Target: ", _target.entity_name, " | Type: ", Projectile.Type.keys()[projectile_type])
 
 

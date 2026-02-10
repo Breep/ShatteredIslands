@@ -12,7 +12,11 @@ func connect_to_spawn_manager(spawn_manager: SpawnManager) -> void:
 	_spawn_manager = spawn_manager
 
 
-func projectile_attack(target: Entity, projectile_type: Projectile.Type, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
+func projectile_attack(target: Entity, projectile_type: Projectile.Type, projectile_spawn: Node3D, projectile_stats: ProjectileStats, is_auto_attack: bool = false) -> void:
+	if not is_auto_attack and _owner.status_module.has_status(Status.Type.SILENCE):
+		Verbose.debug("Projectile blocked by SILENCE on " + _owner.entity_name, Verbose.Category.ENTITY_MODULE)
+		return
+
 	if _spawn_manager == null:
 		Verbose.error("No SpawnManager connected", Verbose.Category.ENTITY_MODULE)
 		return

@@ -179,7 +179,7 @@ var life_state: LifeState:
 #region ============================== Fighting State ==============================
 signal fighting_state_changed(new_fighting_state: FightingState)
 var _fighting_state: FightingState = FightingState.UNDEF
-var _initial_fighting_state_from_context: FightingState = FightingState.UNDEF  # Stored during apply_context
+var _initial_fighting_state_from_context: FightingState = FightingState.UNDEF # Stored during apply_context
 var fighting_state: FightingState:
 	get: return _fighting_state
 	set(value):
@@ -213,8 +213,6 @@ static var instance_count: int = 0
 #endregion
 
 
-
-
 # ============================== Node base functions ==============================
 
 #region ============================== Init ==============================
@@ -244,7 +242,7 @@ func _enter_tree() -> void:
 	# Auto-load modules from the _auto_loaded_modules list
 	_auto_load_modules()
 	
-	_is_targetable = false  # Prevent targeting during spawn
+	_is_targetable = false # Prevent targeting during spawn
 
 
 func _ready() -> void:
@@ -271,8 +269,6 @@ func _exit_tree() -> void:
 	if stats != null and stats.health_changed.is_connected(_on_stats_health_changed):
 		stats.health_changed.disconnect(_on_stats_health_changed)
 #endregion
-
-
 
 
 # ============================== Public functions ==============================
@@ -310,8 +306,8 @@ func get_context() -> EntityContext:
 	ctx.battle_id = battle_id
 	ctx.spawn_manager = _spawn_manager
 	ctx.arena_zone_manager = _arena_zone_manager
-	ctx.life_state = LifeState.ALIVE  # Summons always spawn alive
-	ctx.fighting_state = fighting_state  # Inherit parent's state
+	ctx.life_state = LifeState.ALIVE # Summons always spawn alive
+	ctx.fighting_state = fighting_state # Inherit parent's state
 	Verbose.debug("Entity [" + entity_name + "] creating context with fighting_state [" + str(FightingState.keys()[fighting_state]) + "]", Verbose.Category.ENTITY)
 	return ctx
 
@@ -384,19 +380,13 @@ func auto_attack(target: Entity) -> void:
 	_auto_attack_sender.execute_auto_attack(target)
 
 
-func projectile_attack(target: Entity, projectile_type: Projectile.Type, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
+func projectile_attack(target: Entity, projectile_type: Projectile.Type, projectile_spawn: Node3D, projectile_stats: ProjectileStats, is_auto_attack: bool = false) -> void:
 	if _projectile_sender == null: return
-	if is_silenced():
-		Verbose.debug("Entity [" + entity_name + "] projectile blocked by SILENCE", Verbose.Category.ENTITY)
-		return
-	_projectile_sender.projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
+	_projectile_sender.projectile_attack(target, projectile_type, projectile_spawn, projectile_stats, is_auto_attack)
 
 
 func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary = {}) -> void:
 	if _spell_sender == null: return
-	if is_silenced():
-		Verbose.debug("Entity [" + entity_name + "] spell blocked by SILENCE", Verbose.Category.ENTITY)
-		return
 	_spell_sender.cast_spell(target, spell_type, spell_modifier)
 	spell_casted.emit(target, spell_type, spell_modifier)
 
@@ -450,9 +440,6 @@ func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: 
 
 func summon_entity(entity_type: EntityType, spawn_config: SpawnLocationConfig, entity_modifier: Dictionary) -> void:
 	if _summon_sender == null: return
-	if is_silenced():
-		Verbose.debug("Entity [" + entity_name + "] summon blocked by SILENCE", Verbose.Category.ENTITY)
-		return
 	_summon_sender.summon_entity(entity_type, spawn_config, entity_modifier)
 
 
@@ -615,8 +602,6 @@ func take_status(status_type: Status.Type, duration: float, action_id: StringNam
 #endregion
 
 
-
-
 # ============================== Private functions ==============================
 
 #region ============================== Spawn system ==============================
@@ -727,7 +712,7 @@ func _on_stats_health_changed(new_health: int) -> void:
 
 func _on_died(_entity: Entity) -> void:
 	Verbose.debug("Entity [" + entity_name + "] died", Verbose.Category.ENTITY)
-	life_state = LifeState.DEAD  # Set life state
+	life_state = LifeState.DEAD # Set life state
 	
 	# Visual and module cleanup
 	if target_module != null: target_module.stop()

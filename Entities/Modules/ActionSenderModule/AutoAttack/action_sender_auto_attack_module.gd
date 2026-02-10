@@ -4,15 +4,15 @@ extends ActionSenderModule
 # ============================== Enums ==============================
 
 enum AttackPhase {
-	COOLDOWN,     # Waiting for cooldown before next attack
-	APPROACHING,  # Moving towards target
-	ATTACKING     # Attack in progress, waiting for completion
+	COOLDOWN, # Waiting for cooldown before next attack
+	APPROACHING, # Moving towards target
+	ATTACKING # Attack in progress, waiting for completion
 }
 
 # ============================== Signals ==============================
 
-signal attack_started()  # Animation started
-signal attack_completed()  # Attack cycle complete, ready for next attack
+signal attack_started() # Animation started
+signal attack_completed() # Attack cycle complete, ready for next attack
 
 # ============================== Export variables ==============================
 
@@ -24,15 +24,15 @@ var _current_phase: AttackPhase = AttackPhase.COOLDOWN
 
 # Module references (set via connect_modules)
 var _movement_module: MovementModule = null
-var _animation_module = null  # AnimationModule, but no typing to avoid circular dependency
+var _animation_module = null # AnimationModule, but no typing to avoid circular dependency
 
 # Approach management
 var _is_approaching: bool = false
 var _approach_target: Entity = null
 
 # Pending attacks (for animations)
-var _pending_attacks: Array = []  # Array of AttackCommand
-var _pending_melee_attacks: Array = []  # Array of melee attack data
+var _pending_attacks: Array = [] # Array of AttackCommand
+var _pending_melee_attacks: Array = [] # Array of melee attack data
 
 # ============================== Public functions ==============================
 
@@ -53,7 +53,7 @@ func execute_auto_attack(target: Entity) -> void:
 	
 	# Check range and possibly start approaching
 	if not _check_range_and_approach(target):
-		return  # Out of range, approach started or failed
+		return # Out of range, approach started or failed
 	
 	# Look at target
 	if _owner != null:
@@ -76,7 +76,8 @@ func on_ranged_animation_hit() -> void:
 		attack_cmd.target,
 		attack_cmd.projectile_type,
 		attack_cmd.spawn_node,
-		attack_cmd.stats
+		attack_cmd.stats,
+		true
 	)
 
 
@@ -181,7 +182,8 @@ func _execute_ranged_attack(target: Entity) -> void:
 			attack_cmd.target,
 			attack_cmd.projectile_type,
 			attack_cmd.spawn_node,
-			attack_cmd.stats
+			attack_cmd.stats,
+			true
 		)
 		_owner.auto_attack_completed.emit(_owner)
 		attack_completed.emit()
