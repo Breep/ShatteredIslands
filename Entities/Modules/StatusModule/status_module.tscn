@@ -7,18 +7,23 @@ script = ExtResource("1_status")
 
 [node name="StunTimer" type="Timer" parent="." unique_id=114352711]
 unique_name_in_owner = true
+one_shot = true
 
 [node name="SilenceTimer" type="Timer" parent="." unique_id=980311031]
 unique_name_in_owner = true
+one_shot = true
 
 [node name="TauntTimer" type="Timer" parent="." unique_id=2014684345]
 unique_name_in_owner = true
+one_shot = true
 
 [node name="UntargetableTimer" type="Timer" parent="." unique_id=1381796298]
 unique_name_in_owner = true
+one_shot = true
 
 [node name="InvulnerabilityTimer" type="Timer" parent="." unique_id=1324428754]
 unique_name_in_owner = true
+one_shot = true
 
 [connection signal="timeout" from="StunTimer" to="." method="_on_stun_timer_timeout"]
 [connection signal="timeout" from="SilenceTimer" to="." method="_on_silence_timer_timeout"]

@@ -193,9 +193,9 @@ shader_parameter/ShimmerSpeed = 1.5
 shader_parameter/ShimmerStrength = 0.3
 shader_parameter/VolumeStrength = 0.4
 shader_parameter/LineColor = Color(0, 0, 0, 1)
-shader_parameter/LineThickness = 1.0
+shader_parameter/LineThickness = 2.00000009174012
 shader_parameter/Height100 = 0.25
-shader_parameter/Height500 = 0.5
+shader_parameter/Height500 = 0.750000035625
 shader_parameter/BorderColor = Color(0.05, 0.05, 0.05, 1)
 shader_parameter/BorderThicknessPx = 2.0
 shader_parameter/CornerRadius = 0.05
@@ -520,6 +520,35 @@ outline_size = 5
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 10
 shadow_color = Color(0, 0, 0, 0.90700006)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dgv81"]
+bg_color = Color(0.4509804, 0.42745098, 0.28235295, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7eas"]
+bg_color = Color(0.6313726, 0.60784316, 0.42745098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pf7ij"]
+bg_color = Color(0.52583873, 0.3494535, 0.25543147, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oki6c"]
+bg_color = Color(0.75973415, 0.5441477, 0.43074965, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8wr0g"]
+bg_color = Color(0.47691005, 0.27664146, 0.45570308, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f48wy"]
+bg_color = Color(0.7427911, 0.50858885, 0.7148456, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yp77x"]
+bg_color = Color(0.34407574, 0.34407577, 0.3440756, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ey4du"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3oxod"]
+bg_color = Color(0.22511575, 0.39111486, 0.4080905, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sk3qv"]
+bg_color = Color(0.4163691, 0.64576226, 0.6693581, 1)
 
 [node name="EntityInfoPanel2d" type="Control" unique_id=2069438949 node_paths=PackedStringArray("_entity_label", "_health_bar", "_mana_bar", "_shield_bar", "_grid_bar", "_ignite_control", "_ignite_label", "_necrosis_control", "_necrosis_label", "_poison_control", "_poison_label", "_regen_control", "_regen_label", "_stun_control", "_stun_label", "_stun_progress_bar", "_taunt_control", "_taunt_label", "_taunt_progress_bar", "_silence_control", "_silence_label", "_silence_progress_bar", "_invulnerable_control", "_invulnerable_label", "_invulnerable_progress_bar", "_untargetable_control", "_untargetable_label", "_untargetable_progress_bar", "_resource_points_container")]
 custom_minimum_size = Vector2(1000, 250)
@@ -861,6 +890,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
+theme = ExtResource("1_vq80f")
 
 [node name="ColorRectRightPanel" type="ColorRect" parent="MarginContainer/HBoxContainer/RightPanel" unique_id=192586463]
 visible = false
@@ -924,6 +954,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
+theme_override_styles/background = SubResource("StyleBoxFlat_dgv81")
+theme_override_styles/fill = SubResource("StyleBoxFlat_r7eas")
 value = 42.0
 show_percentage = false
 
@@ -972,6 +1004,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
+theme_override_styles/background = SubResource("StyleBoxFlat_pf7ij")
+theme_override_styles/fill = SubResource("StyleBoxFlat_oki6c")
 value = 42.0
 show_percentage = false
 
@@ -1020,6 +1054,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
+theme_override_styles/background = SubResource("StyleBoxFlat_8wr0g")
+theme_override_styles/fill = SubResource("StyleBoxFlat_f48wy")
 value = 42.0
 show_percentage = false
 
@@ -1068,6 +1104,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
+theme_override_styles/background = SubResource("StyleBoxFlat_yp77x")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ey4du")
 value = 42.0
 show_percentage = false
 
@@ -1116,6 +1154,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 size_flags_stretch_ratio = 2.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3oxod")
+theme_override_styles/fill = SubResource("StyleBoxFlat_sk3qv")
 value = 42.0
 show_percentage = false
 

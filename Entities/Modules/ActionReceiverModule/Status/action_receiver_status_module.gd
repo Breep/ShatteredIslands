@@ -13,7 +13,7 @@ func take_status(status_type: Status.Type, duration: float, action_id: StringNam
 		}
 	
 	# Apply the status
-	_owner.status_module.add_status(status_type, duration, source)
+	_owner.status_module.add_status(status_type, duration)
 	
 	# Register in BDS
 	var action_type: Utils.ActionType = Utils.status_to_action(status_type)

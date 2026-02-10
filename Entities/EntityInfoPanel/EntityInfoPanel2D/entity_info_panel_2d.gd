@@ -2,8 +2,9 @@ class_name EntityInfoPanel2D
 extends Control
 
 #region ============================== Constants =============================
-const COLOR_TEAM_LOCAL = Color(1, 1, 1, 1)
-const COLOR_TEAM_ENEMY = Color(1, 1, 1, 1)
+const COLOR_PLAYER_LOCAL = Color.CADET_BLUE
+const COLOR_TEAM_ALLY = Color.WEB_GREEN
+const COLOR_TEAM_ENEMY = Color.DARK_RED
 #endregion
 
 #region ============================== Export ==============================
@@ -60,6 +61,12 @@ const COLOR_TEAM_ENEMY = Color(1, 1, 1, 1)
 #endregion
 
 @onready var _rank_visualizer: UIRankViewer = %RankViewer
+
+var _stun_needs_update: bool = false
+var _taunt_needs_update: bool = false
+var _silence_needs_update: bool = false
+var _invulnerable_needs_update: bool = false
+var _untargetable_needs_update: bool = false
 
 #region ============================== Node base functions ==============================
 func _ready() -> void:
@@ -122,15 +129,19 @@ func _ready() -> void:
 	status.invulnerable_changed.connect(_on_status_invulnerable_changed)
 	status.untargetable_changed.connect(_on_status_untargetable_changed)
 
+	_stun_control.hide()
+	_taunt_control.hide()
+	_silence_control.hide()
+	_invulnerable_control.hide()
+	_untargetable_control.hide()
+
 
 func _process(delta: float) -> void:
-	var status = _owner_entity.status_module
-	
-	_stun_progress_bar.value = status.get_remaining_time(Status.Type.STUN)
-	_taunt_progress_bar.value = status.get_remaining_time(Status.Type.TAUNT)
-	_silence_progress_bar.value = status.get_remaining_time(Status.Type.SILENCE)
-	_invulnerable_progress_bar.value = status.get_remaining_time(Status.Type.INVULNERABLE)
-	_untargetable_progress_bar.value = status.get_remaining_time(Status.Type.UNTARGETABLE)
+	_update_stun_info()
+	_update_taunt_info()
+	_update_silence_info()
+	_update_invulnerable_info()
+	_update_untargetable_info()
 #endregion
 
 #region ============================== Public API ==============================
@@ -202,52 +213,148 @@ func _update_regen_label(amount: float) -> void:
 		_regen_label.hide()
 		_regen_control.hide()
 
+
 func _update_entity_label(entity_name: String) -> void:
 	if not _entity_label: return
 	_entity_label.text = entity_name
+
+
+func _update_stun_info() -> void:
+	if not _stun_needs_update: return
+	var status: StatusModule = _owner_entity.status_module
+	var duration: float = status.get_remaining_time(Status.Type.STUN)
+	_stun_label.text = str(duration).pad_decimals(1)
+	_stun_progress_bar.value = duration
+
+
+func _update_taunt_info() -> void:
+	if not _taunt_needs_update: return
+	var status: StatusModule = _owner_entity.status_module
+	var duration: float = status.get_remaining_time(Status.Type.TAUNT)
+	_taunt_label.text = str(duration).pad_decimals(1)
+	_taunt_progress_bar.value = duration
+
+
+func _update_silence_info() -> void:
+	if not _silence_needs_update: return
+	var status: StatusModule = _owner_entity.status_module
+	var duration: float = status.get_remaining_time(Status.Type.SILENCE)
+	_silence_label.text = str(duration).pad_decimals(1)
+	_silence_progress_bar.value = duration
+
+
+func _update_invulnerable_info() -> void:
+	if not _invulnerable_needs_update: return
+	var status: StatusModule = _owner_entity.status_module
+	var duration: float = status.get_remaining_time(Status.Type.INVULNERABLE)
+	_invulnerable_label.text = str(duration).pad_decimals(1)
+	_invulnerable_progress_bar.value = duration
+
+
+func _update_untargetable_info() -> void:
+	if not _untargetable_needs_update: return
+	var status: StatusModule = _owner_entity.status_module
+	var duration: float = status.get_remaining_time(Status.Type.UNTARGETABLE)
+	_untargetable_label.text = str(duration).pad_decimals(1)
+	_untargetable_progress_bar.value = duration
 #endregion
 
 #region ============================== Callbacks =============================
 func _on_mana_changed(new_value: int) -> void:
 	_update_mana_bar(new_value, _owner_entity.stats.mana_max)
 
+
 func _on_mana_max_changed(new_max: int) -> void:
 	_update_mana_bar(_owner_entity.stats.mana, new_max)
+
 
 func _on_armor_changed(new_amount: float) -> void:
 	_update_shield_bar(new_amount, _owner_entity.stats.health_max)
 
+
 func _on_health_changed(new_health: int) -> void:
 	_update_health_bar(new_health, _owner_entity.stats.health_max)
+
 
 func _on_health_max_changed(new_max: int) -> void:
 	_update_health_bar(_owner_entity.stats.health, new_max)
 	_update_shield_bar(_owner_entity.conditions.shield_stacks, new_max)
 
-func _on_status_stunned_changed(is_active: bool) -> void:
+
+func _on_status_stunned_changed(is_active: bool, duration: float, infinite: bool) -> void:
 	if not _stun_control: return
-	if is_active: _stun_control.show()
-	else: _stun_control.hide()
+	if is_active:
+		_stun_control.show()
+		_stun_progress_bar.max_value = duration
+		if infinite:
+			_stun_needs_update = false
+			_stun_label.text = "INF"
+		else:
+			_stun_needs_update = true
+	else:
+		_stun_control.hide()
+		_stun_needs_update = false
+	_stun_progress_bar.value = duration
 
-func _on_status_taunted_changed(is_active: bool) -> void:
+
+func _on_status_taunted_changed(is_active: bool, duration: float, infinite: bool) -> void:
 	if not _taunt_control: return
-	if is_active: _taunt_control.show()
-	else: _taunt_control.hide()
+	if is_active:
+		_taunt_control.show()
+		_taunt_progress_bar.max_value = duration
+		if infinite:
+			_taunt_needs_update = false
+			_taunt_label.text = "INF"
+		else:
+			_taunt_needs_update = true
+	else:
+		_taunt_control.hide()
+		_taunt_needs_update = false
 
-func _on_status_silenced_changed(is_active: bool) -> void:
+
+func _on_status_silenced_changed(is_active: bool, duration: float, infinite: bool) -> void:
 	if not _silence_control: return
-	if is_active: _silence_control.show()
-	else: _silence_control.hide()
+	if is_active:
+		_silence_control.show()
+		_silence_progress_bar.max_value = duration
+		if infinite:
+			_silence_needs_update = false
+			_silence_label.text = "INF"
+		else:
+			_silence_needs_update = true
+	else:
+		_silence_control.hide()
+		_silence_needs_update = false
 
-func _on_status_invulnerable_changed(is_active: bool) -> void:
+
+func _on_status_invulnerable_changed(is_active: bool, duration: float, infinite: bool) -> void:
 	if not _invulnerable_control: return
-	if is_active: _invulnerable_control.show()
-	else: _invulnerable_control.hide()
+	if is_active:
+		_invulnerable_control.show()
+		_invulnerable_progress_bar.max_value = duration
+		if infinite:
+			_invulnerable_needs_update = false
+			_invulnerable_label.text = "INF"
+		else:
+			_invulnerable_needs_update = true
+	else:
+		_invulnerable_control.hide()
+		_invulnerable_needs_update = false
 
-func _on_status_untargetable_changed(is_active: bool) -> void:
+
+func _on_status_untargetable_changed(is_active: bool, duration: float, infinite: bool) -> void:
 	if not _untargetable_control: return
-	if is_active: _untargetable_control.show()
-	else: _untargetable_control.hide()
+	if is_active:
+		_untargetable_control.show()
+		_untargetable_progress_bar.max_value = duration
+		if infinite:
+			_untargetable_needs_update = false
+			_untargetable_label.text = "INF"
+		else:
+			_untargetable_needs_update = true
+	else:
+		_untargetable_control.hide()
+		_untargetable_needs_update = false
 #endregion
 
 #region ============================== Resources Visualization ==============================
@@ -287,30 +394,17 @@ func _set_health_bar_color_by_team() -> void:
 	if not _health_bar or not _health_bar.material or not _owner_entity:
 		return
 	
-	# Determine the color based on team affiliation
 	var health_color: Color
 	var local_player: Player = PlayerManager.get_local_player()
-	
 	if local_player == null:
-		# Fallback to default green if no local player
-		health_color = Color(0.11, 0.64, 0.08, 1.0)
+		health_color = COLOR_TEAM_ALLY
 	elif _owner_entity is Hero:
 		var hero: Hero = _owner_entity as Hero
-		# Check if this hero belongs to the local player
-		if local_player.hero == hero:
-			# Local player: green-yellow
-			health_color = Color.GREEN_YELLOW
-		elif hero.team == local_player.team:
-			# Ally: green
-			health_color = Color(0.11, 0.64, 0.08, 1.0)
-		else:
-			# Enemy: red
-			health_color = Color(0.8, 0.1, 0.1, 1.0)
+		if local_player.hero == hero: health_color = COLOR_PLAYER_LOCAL
+		elif hero.team == local_player.team: health_color = COLOR_TEAM_ALLY
+		else: health_color = COLOR_TEAM_ENEMY
 	else:
-		# For non-hero entities, use team-based logic only
-		if _owner_entity.team == local_player.team:
-			health_color = Color(0.11, 0.64, 0.08, 1.0)  # Ally green
-		else:
-			health_color = Color(0.8, 0.1, 0.1, 1.0)  # Enemy red
+		if _owner_entity.team == local_player.team: health_color = COLOR_TEAM_ALLY
+		else: health_color = COLOR_TEAM_ENEMY
 	
 	_health_bar.material.set_shader_parameter("HealthColor", health_color)
