@@ -189,18 +189,6 @@ var fighting_state: FightingState:
 #endregion
 
 #region ============================== Status States ==============================
-var status_states: Array[StatusState] = []
-
-func has_status_state(status: StatusState) -> bool:
-	return status_states.has(status)
-
-func add_status_state(status: StatusState) -> void:
-	if not status_states.has(status):
-		status_states.append(status)
-
-func remove_status(status: StatusState) -> void:
-	status_states.erase(status)
-
 func is_alive() -> bool:
 	return life_state == LifeState.ALIVE
 
@@ -246,7 +234,12 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
+	# Connect to status signals
+	if status_module != null:
+		status_module.stunned_changed.connect(_on_stunned_changed)
+	
 	Verbose.debug("Entity [" + entity_name + "] ready", Verbose.Category.ENTITY)
+
 	fighting_state_changed.connect(_on_fighting_state_changed)
 	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
 	
@@ -731,3 +724,12 @@ func _on_gfm_fighting_phase_state_changed(fighting_phase_state: GlobalFightingMa
 		GlobalFightingManager.FightingPhaseState.CELEBRATING:
 			fighting_state = FightingState.CELEBRATING
 #endregion
+
+
+func _on_stunned_changed(is_active: bool, _duration: float, _infinite: bool) -> void:
+	_on_stunned(is_active)
+
+
+func _on_stunned(is_active: bool) -> void:
+	# Virtual method to be overridden by child classes (e.g. Hero)
+	pass

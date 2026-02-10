@@ -25,3 +25,26 @@ func start() -> void:
 
 func stop() -> void:
 	printerr("FamilyManager: virtual stop() called [", get_path(), "]")
+
+
+var _paused_timers: Dictionary = {}
+
+func pause() -> void:
+	for timer: Timer in _optional_timers:
+		if not is_instance_valid(timer) or timer.is_queued_for_deletion():
+			continue
+			
+		if not timer.is_stopped():
+			_paused_timers[timer] = timer.time_left
+			timer.stop()
+
+
+func resume() -> void:
+	for timer: Timer in _paused_timers.keys():
+		if not is_instance_valid(timer) or timer.is_queued_for_deletion():
+			continue
+			
+		var time_left: float = _paused_timers[timer]
+		timer.start(time_left)
+	
+	_paused_timers.clear()

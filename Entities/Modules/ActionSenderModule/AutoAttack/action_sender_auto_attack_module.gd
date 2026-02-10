@@ -43,6 +43,9 @@ func connect_modules(movement_module: MovementModule, animation_module: Animatio
 	# Connect to AnimationModule hit frame signal
 	if _animation_module != null:
 		_animation_module.attack_hit_frame.connect(_on_animation_module_attack_hit_frame)
+	
+	if _owner.status_module != null:
+		_owner.status_module.stunned_changed.connect(_on_owner_stunned_changed)
 
 
 func execute_auto_attack(target: Entity) -> void:
@@ -51,45 +54,36 @@ func execute_auto_attack(target: Entity) -> void:
 		attack_completed.emit()
 		return
 	
-	# Check range and possibly start approaching
+	if _owner.status_module.has_status(Status.Type.STUN):
+		attack_completed.emit()
+		return
+	
 	if not _check_range_and_approach(target):
 		return # Out of range, approach started or failed
 	
-	# Look at target
 	if _owner != null:
 		_owner.look_at_target_y_only(target.global_position)
 	
 	_current_phase = AttackPhase.ATTACKING
 	
-	# Dispatch to correct attack type
 	match _owner.stats.auto_attack_type:
-		EntityStats.AutoAttackType.RANGED: _execute_ranged_attack(target)
-		EntityStats.AutoAttackType.MELEE: _execute_melee_attack(target)
+		EntityStats.AutoAttackType.RANGED: _start_ranged_attack(target)
+		EntityStats.AutoAttackType.MELEE: _start_melee_attack(target)
 
 
-func on_ranged_animation_hit() -> void:
-	if _pending_attacks.is_empty():
-		return
+func _cancel_attack() -> void:
+	stop_approaching()
+	_pending_attacks.clear()
+	_pending_melee_attacks.clear()
+	_current_phase = AttackPhase.COOLDOWN
 	
-	var attack_cmd = _pending_attacks.pop_front()
-	_owner.projectile_attack(
-		attack_cmd.target,
-		attack_cmd.projectile_type,
-		attack_cmd.spawn_node,
-		attack_cmd.stats,
-		true
-	)
-
-
-func on_melee_animation_hit() -> void:
-	if _pending_melee_attacks.is_empty():
-		return
+	if _animation_module != null:
+		_animation_module.stop_attack_animation()
 	
-	var melee_data: Dictionary = _pending_melee_attacks.pop_front()
-	_process_melee_hit(melee_data)
+	attack_completed.emit()
 
 
-func prepare_projectile_stats() -> ProjectileStats:
+func _prepare_projectile_stats() -> ProjectileStats:
 	var projectile_stats := ProjectileStats.new()
 	
 	# Store damage value for callback
@@ -105,10 +99,6 @@ func prepare_projectile_stats() -> ProjectileStats:
 	
 	_consume_modifiers(projectile_stats)
 	return projectile_stats
-
-
-func get_current_phase() -> AttackPhase:
-	return _current_phase
 
 
 func is_approaching() -> bool:
@@ -155,9 +145,9 @@ func _check_range_and_approach(target: Entity) -> bool:
 	return false
 
 
-func _execute_ranged_attack(target: Entity) -> void:
+func _start_ranged_attack(target: Entity) -> void:
 	var projectile_spawn: Node3D = _projectile_spawn if _projectile_spawn != null else _owner
-	var projectile_stats: ProjectileStats = prepare_projectile_stats()
+	var projectile_stats: ProjectileStats = _prepare_projectile_stats()
 	
 	var attack_cmd = AttackCommand.new().setup(
 		target,
@@ -189,8 +179,8 @@ func _execute_ranged_attack(target: Entity) -> void:
 		attack_completed.emit()
 
 
-func _execute_melee_attack(target: Entity) -> void:
-	var attack_stats: ProjectileStats = prepare_projectile_stats()
+func _start_melee_attack(target: Entity) -> void:
+	var attack_stats: ProjectileStats = _prepare_projectile_stats()
 	var melee_data := {
 		"target": target,
 		"stats": attack_stats
@@ -248,9 +238,36 @@ func _on_animation_module_attack_hit_frame() -> void:
 	# Called when animation reaches hit frame
 	match _owner.stats.auto_attack_type:
 		EntityStats.AutoAttackType.RANGED:
-			on_ranged_animation_hit()
+			_on_ranged_animation_hit()
 		EntityStats.AutoAttackType.MELEE:
-			on_melee_animation_hit()
+			_on_melee_animation_hit()
 	
 	# Signal completion so module can restart cooldown
 	_owner.auto_attack_completed.emit(_owner)
+
+
+func _on_ranged_animation_hit() -> void:
+	if _pending_attacks.is_empty():
+		return
+	
+	var attack_cmd = _pending_attacks.pop_front()
+	_owner.projectile_attack(
+		attack_cmd.target,
+		attack_cmd.projectile_type,
+		attack_cmd.spawn_node,
+		attack_cmd.stats,
+		true
+	)
+
+
+func _on_melee_animation_hit() -> void:
+	if _pending_melee_attacks.is_empty():
+		return
+	
+	var melee_data: Dictionary = _pending_melee_attacks.pop_front()
+	_process_melee_hit(melee_data)
+
+
+func _on_owner_stunned_changed(is_active: bool, _duration: float, _infinite: bool) -> void:
+	if is_active:
+		_cancel_attack()

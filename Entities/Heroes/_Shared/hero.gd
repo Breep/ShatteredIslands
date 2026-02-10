@@ -139,4 +139,11 @@ func _apply_all_cards_upgrades() -> void:
 #endregion
 
 #region ============================== Other callbacks ==============================
+func _on_stunned(is_active: bool) -> void:
+	if is_active:
+		for family_manager: FamilyManager in _family_managers.values():
+			family_manager.pause()
+	else:
+		for family_manager: FamilyManager in _family_managers.values():
+			family_manager.resume()
 #endregion
