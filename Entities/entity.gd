@@ -70,7 +70,10 @@ enum FieldGeneratorModifier {
 #region ============================== Public variables ==============================
 var _is_targetable: bool = true
 var is_targetable: bool:
-	get: return _is_targetable
+	get:
+		if status_module != null:
+			return not status_module.has_status(Status.Type.UNTARGETABLE)
+		return _is_targetable
 
 var visual: EntityInfoPanel3D: # TODO Rename this
 	get: return _entity_info_panel_3d
