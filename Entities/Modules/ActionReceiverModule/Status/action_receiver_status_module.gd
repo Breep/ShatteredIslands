@@ -12,6 +12,13 @@ func take_status(status_type: Status.Type, duration: float, action_id: StringNam
 			ActionReceiverModule.ResultKey.IS_CRITICAL: false
 		}
 	
+	if Status.is_negative_status(status_type) and _owner.status_module.has_status(Status.Type.INVULNERABLE):
+		return {
+			ActionReceiverModule.ResultKey.VALUE: 0.0,
+			ActionReceiverModule.ResultKey.IS_CRITICAL: false,
+			ActionReceiverModule.ResultKey.INVULNERABLE: true
+		}
+	
 	# Apply the status
 	_owner.status_module.add_status(status_type, duration)
 	
