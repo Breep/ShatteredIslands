@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c5cnytoj4ignx"]
 
-[ext_resource type="PackedScene" uid="uid://cp8ob13fokxnp" path="res://SpellsAndProjectiles/Projectiles/Snake/snake_visual.tscn" id="1_47gm0"]
-[ext_resource type="Script" uid="uid://1d1aihiiqel3" path="res://SpellsAndProjectiles/Projectiles/Snake/snake_projectile.gd" id="1_s52sc"]
+[ext_resource type="PackedScene" uid="uid://cp8ob13fokxnp" path="res://SpellsAndProjectiles/Projectiles/Poison/Snake/snake_visual.tscn" id="1_47gm0"]
+[ext_resource type="Script" uid="uid://1d1aihiiqel3" path="res://SpellsAndProjectiles/Projectiles/Poison/Snake/snake_projectile.gd" id="1_s52sc"]
 [ext_resource type="Script" uid="uid://bfsdl2usla732" path="res://SpellsAndProjectiles/Projectiles/Trajectories/zigzag_trajectory.gd" id="2_brmf3"]
 
 [sub_resource type="Resource" id="Resource_5y17h"]

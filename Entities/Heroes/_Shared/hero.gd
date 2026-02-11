@@ -136,6 +136,23 @@ func _apply_all_cards_upgrades() -> void:
 	
 	for card: Card in deck.get_active_deck():
 		card.player_upgrade.apply(families_stats, card.lvl)
+		_apply_periodic_callbacks(card)
+#endregion
+
+
+# TMP TMP TMP TODO OLALA
+var _timers: Array[Timer]
+func _apply_periodic_callbacks(card: Card) -> void:
+	if card.player_upgrade.periodic_callback.is_valid():
+		var timer: Timer = Timer.new()
+		timer.timeout.connect(card.player_upgrade.periodic_callback.bind({
+			HeroUpgrade.VarType.HERO_OWNER: self,
+		}))
+		timer.wait_time = card.player_upgrade.periodic_callback_wait_time
+		timer.one_shot = false
+		_timers.append(timer)
+		add_child(timer)
+		timer.start()
 #endregion
 
 #region ============================== Other callbacks ==============================

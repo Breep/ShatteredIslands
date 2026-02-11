@@ -143,10 +143,6 @@ func _clear_attack_modifiers() -> void:
 #endregion
 
 func _create_optional_timers() -> void:
-	# [POISON FLASK]
-	if _poison_stats.poison_flask_activated:
-		_optional_timers.append(Utils.create_perpetual_timer(self, _poison_stats.poison_flask_period, _on_poison_flask_timer_timeout, true))
-	
 	# [VENOMOUS DARTS]
 	if _poison_stats.poison_venomous_darts_activated:
 		_optional_timers.append(Utils.create_perpetual_timer(self, _poison_stats.poison_venomous_darts_period, _on_venomous_darts_timer_timeout, true))
@@ -189,14 +185,6 @@ func _lanch_optional_spells() -> void:
 		_owner.cast_spell(_owner, Spell.Type.DEATH_FOG, spell_modifier)
 
 # ============================== Callbacks functions ==============================
-
-# [POISON FLASK]
-func _on_poison_flask_timer_timeout() -> void:
-	var target = _owner.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
-	if target == null: return
-	var poison_stacks = _poison_stats.poison_flask_stacks
-	_owner.inflict_condition_stacks(target, poison_stacks, Utils.StackType.POISON, "Poison Flask")
-
 
 func _on_rusty_dagger_logic_callback(cb_vars: Dictionary) -> void:
 	pass
