@@ -38,11 +38,13 @@ func unregister(id: StringName) -> void:
 
 func start_all() -> void:
 	for id: StringName in _timers.keys():
+		Verbose.debug("Starting [" + id + "] periodic timer")
 		_timers[id].start()
 
 
 func stop_all() -> void:
 	for id: StringName in _timers.keys():
+		Verbose.debug("Stopping [" + id + "] periodic timer")
 		_timers[id].stop()
 	_paused_timers.clear()
 
