@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://c2fbdsokd2ayt"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://c2fbdsokd2ayt"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_3bkb0"]
 [ext_resource type="Texture2D" uid="uid://2o2rsjtula7w" path="res://Card/Descriptions/Cards/Defense/Epic/AegisResonator/shieldomatic_aegis_resonator.webp" id="1_kbf8l"]

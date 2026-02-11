@@ -15,7 +15,12 @@ enum ActionType {
 	STACK_IGNITE,
 	STACK_POISON,
 	STACK_REGEN,
-	STACK_NECROSIS
+	STACK_NECROSIS,
+	STATUS_STUN,
+	STATUS_TAUNT,
+	STATUS_SILENCE,
+	STATUS_INVULNERABLE,
+	STATUS_UNTARGETABLE,
 }
 
 enum DamageType {
@@ -97,6 +102,16 @@ func damage_to_action(damage_type: DamageType) -> ActionType:
 		_: return ActionType.DAMAGE_PHYSICAL
 
 
+func status_to_action(status_type: Status.Type) -> ActionType:
+	match status_type:
+		Status.Type.STUN: return ActionType.STATUS_STUN
+		Status.Type.TAUNT: return ActionType.STATUS_TAUNT
+		Status.Type.SILENCE: return ActionType.STATUS_SILENCE
+		Status.Type.INVULNERABLE: return ActionType.STATUS_INVULNERABLE
+		Status.Type.UNTARGETABLE: return ActionType.STATUS_UNTARGETABLE
+		_: return ActionType.STATUS_STUN
+
+
 func get_all_actions() -> Array[ActionType]:
 	return [
 		ActionType.DAMAGE_PHYSICAL,
@@ -111,7 +126,12 @@ func get_all_actions() -> Array[ActionType]:
 		ActionType.STACK_IGNITE,
 		ActionType.STACK_POISON,
 		ActionType.STACK_REGEN,
-		ActionType.STACK_NECROSIS
+		ActionType.STACK_NECROSIS,
+		ActionType.STATUS_STUN,
+		ActionType.STATUS_TAUNT,
+		ActionType.STATUS_SILENCE,
+		ActionType.STATUS_INVULNERABLE,
+		ActionType.STATUS_UNTARGETABLE,
 	]
 #endregion
 

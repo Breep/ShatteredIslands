@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://c020vjgxbnd02"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://c020vjgxbnd02"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_template"]
 [ext_resource type="Script" uid="uid://ddv6aglnvpvm" path="res://Card/Descriptions/Cards/Storm/Rare/Dynamo/storm_dynamo.gd" id="2_script"]

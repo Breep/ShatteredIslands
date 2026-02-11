@@ -1,8 +1,6 @@
 class_name FieldGenerator
 extends Entity
 
-@onready var _interact_module: InteractModule = %InteractModule
-@onready var _action_module: ActionModule = %ActionModule
 @onready var _visual: Node3D = %Visual
 
 var _max_health: int = 1
@@ -27,7 +25,6 @@ func _ready() -> void:
 	stats.health_max = _max_health
 	stats.health = stats.health_max
 	conditions.add_stack(Stack.Type.SHIELD, _shield_amount, self, "Field Generator")
-	stats.health_changed.connect(_on_stats_health_changed)
 	
 	# Visual pop
 	var pop := create_tween()
@@ -42,11 +39,6 @@ func _ready() -> void:
 		_shield_timer.timeout.connect(_on_shield_timer_timeout)
 		add_child(_shield_timer)
 		_shield_timer.start()
-
-func _on_stats_health_changed(new_health: int) -> void:
-	if new_health <= 0:
-		signal_death()
-		queue_free()
 
 const GENERATOR_BEAM_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Defense/FieldGenerator/field_generator_beam.tscn")
 
@@ -104,32 +96,6 @@ func _on_shield_timer_timeout() -> void:
 	var count = 0
 	for ally in valid_allies:
 		if count >= _target_count: break
-		_action_module.inflict_condition_stacks(ally, _shield_amount, Utils.StackType.SHIELD, "Field Generator")
+		inflict_condition_stacks(ally, _shield_amount, Utils.StackType.SHIELD, "Field Generator")
 		_current_targets.append(ally)
 		count += 1
-
-#region ===== Action / Interaction Delegation
-func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Utils.StackType, action_id: StringName, duration: float = 5.0) -> void:
-	_action_module.inflict_condition_stacks(target, stacks_number, stack_type, action_id, duration)
-
-func take_damage(damage: float, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	return _interact_module.take_damage(damage, damage_type, is_critical, action_id, source)
-
-func take_damage_percent(percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> void:
-	_interact_module.take_damage_percent(percent, percent_modifier, damage_type, is_critical, action_id, source)
-
-func take_condition_stacks(stacks_number: float, stack_type: Utils.StackType, is_critical: bool, action_id: StringName, source: Entity = null, duration: float = 5.0) -> float:
-	return _interact_module.take_condition_stacks(stacks_number, stack_type, is_critical, action_id, source, duration)
-
-func take_heal(heal_amount: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	return _interact_module.take_heal(heal_amount, is_critical, action_id, source)
-
-func take_cleanse(value: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	return _interact_module.take_cleanse(value, is_critical, action_id, source)
-
-func take_dispell(value: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	return _interact_module.take_dispell(value, is_critical, action_id, source)
-#endregion
-
-func connect_to_fighting_area(fighting_area: FightingArea) -> void:
-	_action_module.connect_to_spawn_manager(fighting_area.spawn_manager)

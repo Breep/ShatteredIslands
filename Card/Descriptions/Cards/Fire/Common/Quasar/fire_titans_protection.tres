@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://bcxp6eg6bwam0"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://bcxp6eg6bwam0"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_1nbnc"]
 [ext_resource type="Texture2D" uid="uid://5nrlnrpmgseo" path="res://Card/Descriptions/Cards/Fire/Common/Quasar/fire_titans_protection.jpg" id="1_3qpta"]

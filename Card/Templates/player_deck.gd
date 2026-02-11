@@ -8,6 +8,7 @@ var _owner_name: String
 var _cards_dictionary: Dictionary[Family.FamilyType, Array] # FamilyType:Array[Cards]
 
 signal has_changed()
+signal family_leveled_up(family_type: Family.FamilyType, new_level: int)
 
 # ============================== Node base functions ==============================
 
@@ -94,5 +95,15 @@ func _add_or_improve_card_to_active_cards(card_to_add: Card) -> void:
 
 
 func _specific_add(card_to_add: Card) -> void:
+	var old_points: int = get_family_points(card_to_add.families[0])
+	var old_level: int = GameManager.game_rules.get_family_level(old_points)
+	
 	_add_or_improve_card_to_active_cards(card_to_add)
+	
+	var new_points: int = get_family_points(card_to_add.families[0])
+	var new_level: int = GameManager.game_rules.get_family_level(new_points)
+	
+	if new_level > old_level:
+		family_leveled_up.emit(card_to_add.families[0], new_level)
+	
 	has_changed.emit()

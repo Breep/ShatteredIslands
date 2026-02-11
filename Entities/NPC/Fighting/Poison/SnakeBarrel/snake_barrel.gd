@@ -1,70 +1,17 @@
 class_name SnakeBarrel
-extends Entity
+extends Summon
 
-@onready var _interact_module: InteractModule = %InteractModule
-@onready var _action_module: ActionModule = %ActionModule
 @onready var _snake_barrel_visual: Node3D = %SnakeBarrelVisual
-
-func projectile_attack(target: Entity, projectile_type: Projectile.ProjectileType, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
-	_action_module.projectile_attack(target, projectile_type, projectile_spawn, projectile_stats)
-
-
-func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Utils.StackType, action_id: StringName, duration: float = 5.0) -> void:
-	_action_module.inflict_condition_stacks(target, stacks_number, stack_type, action_id, duration)
-
-
-#region ===== Interaction
-func take_damage(damage: float, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	return _interact_module.take_damage(damage, damage_type, is_critical, action_id, source)
-
-func take_damage_percent(percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> void:
-	_interact_module.take_damage_percent(percent, percent_modifier, damage_type, is_critical, action_id, source)
-
-func take_condition_stacks(stacks_number: float, stack_type: Utils.StackType, is_critical: bool, action_id: StringName, source: Entity = null, duration: float = 5.0) -> float:
-	return _interact_module.take_condition_stacks(stacks_number, stack_type, is_critical, action_id, source, duration)
-
-func take_heal(heal_amount: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	return _interact_module.take_heal(heal_amount, is_critical, action_id, source)
-
-func take_cleanse(value: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	return _interact_module.take_cleanse(value, is_critical, action_id, source)
-
-func take_dispell(value: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	return _interact_module.take_dispell(value, is_critical, action_id, source)
-
-func summon_entity(entity_type: EntityType, spawn_config: SpawnLocationConfig, entity_modifier: Dictionary) -> void:
-	_action_module.summon_entity(entity_type, spawn_config, entity_modifier)
-#endregion
 
 var _max_health: int = 100
 var _snake_number: int = 10
 var _snake_poison_stacks: int = 10
 
-func init(snake_number: int, snake_poison_stacks: int, max_health: int) -> void:
+func init(snake_number: int, snake_poison_stacks: int, max_health: int) -> Summon:
 	_max_health = max_health
 	_snake_number = snake_number
 	_snake_poison_stacks = snake_poison_stacks
-
-
-func connect_to_fighting_area(fighting_area: FightingArea) -> void:
-	_action_module.connect_to_spawn_manager(fighting_area.spawn_manager)
-
-
-func _ready() -> void:
-	_snake_barrel_visual.scale = Vector3.ZERO
-	stats.health_max = _max_health
-	stats.health = stats.health_max
-	stats.health_changed.connect(_on_stats_health_changed)
-	var pop := create_tween()
-	pop.tween_property(_snake_barrel_visual, "scale", Vector3.ONE * 1.25, 0.08)
-	pop.tween_property(_snake_barrel_visual, "scale", Vector3.ONE * 1, 0.08)
-
-
-func _on_stats_health_changed(new_health: int) -> void:
-	if new_health <= 0:
-		signal_death()
-		_animate_death()
-		_spawn_snakes(_snake_number)
+	return self
 
 
 func _animate_death() -> void:
@@ -74,16 +21,13 @@ func _animate_death() -> void:
 
 
 func _spawn_snakes(snake_number: int) -> void:
-	var spread: float = 1.5
-	var rng := RandomNumberGenerator.new()
-	rng.randomize()
-	var spawn_node := Node3D.new()
-	add_child(spawn_node)
+	var spawn_location_config := SpawnLocationConfig.create_entity_relative(self, 1.5)
 	for i in snake_number:
-		var projectile_stats := ProjectileStats.new()
-		projectile_stats.poison_stacks = _snake_poison_stacks
-		var target = target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
-		if target == null: return
-		spawn_node.position = Vector3(rng.randf_range(-spread, spread), rng.randf_range(0, spread), rng.randf_range(-spread, spread))
-		projectile_attack(target, Projectile.ProjectileType.SNAKE, spawn_node, projectile_stats)
+		summon_entity(Entity.EntityType.SNAKE, spawn_location_config, {})
 	queue_free()
+
+
+func _on_died(_entity: Entity) -> void:
+	super._on_died(_entity)
+	_animate_death()
+	_spawn_snakes(_snake_number)

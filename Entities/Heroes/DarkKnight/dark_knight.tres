@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="HeroDesc" load_steps=23 format=3 uid="uid://bkksjgh6p542o"]
+[gd_resource type="Resource" script_class="HeroDesc" format=3 uid="uid://bkksjgh6p542o"]
 
 [ext_resource type="Texture2D" uid="uid://difeq0pm3hgjs" path="res://Entities/Heroes/DarkKnight/Data/darkknight_portrait.png" id="1_aqqbn"]
 [ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://Entities/Heroes/_Shared/hero_desc.gd" id="1_hluaq"]

@@ -35,9 +35,11 @@ enum Category {
 	ACTION_MODIFIER,
 	STAT_MODIFIER,
 	STACK_MODIFIER,
+	ENTITY_ANIMATION,
 	ENTITY_MODULE,
 	ENTITY,
 	HERO,
+	SUMMON,
 	BATTLE_SYNC,
 	BATTLE_READER,
 	BATTLE_WRITER,
@@ -45,6 +47,10 @@ enum Category {
 	FIGHTING_AREA,
 	BDS_REGISTERY,
 	TABLE,
+	SPAWN_LOCATION_CONFIG,
+	TARGET_MODULE,
+	MOVEMENT_MODULE,
+	PROJECTILE,
 }
 
 const CATEGORY_PREFIX_TEMPLATES: Dictionary[Category, String] = {
@@ -66,9 +72,11 @@ const CATEGORY_PREFIX_TEMPLATES: Dictionary[Category, String] = {
 	Category.STAT_MODIFIER: "(STAT_MOD  ) ",
 	Category.STACK_MODIFIER: "(STACK_MOD ) ",
 	Category.GLOBAL_FIGHTING_MANAGER: "(GFM       ) ",
+	Category.ENTITY_ANIMATION: "(ENT_ANIM  ) ",
 	Category.ENTITY_MODULE: "(ENT_MODULE) ",
 	Category.ENTITY: "(ENTITY    ) ",
 	Category.HERO: "(HERO      ) ",
+	Category.SUMMON: "(SUMMON    ) ",
 	Category.BATTLE_SYNC: "(BATTLESYNC) ",
 	Category.BATTLE_READER: "(BATTLEREAD) ",
 	Category.BATTLE_WRITER: "(BATTLEWRIT) ",
@@ -78,6 +86,10 @@ const CATEGORY_PREFIX_TEMPLATES: Dictionary[Category, String] = {
 	Category.FAMILY_MANAGER: "(FAMILY_MAN) ",
 	Category.BDS_REGISTERY: "(BDS_REG   ) ",
 	Category.TABLE: "(TABLE     ) ",
+	Category.SPAWN_LOCATION_CONFIG: "(SPAWN_LOC ) ",
+	Category.TARGET_MODULE: "(TARGET_MOD) ",
+	Category.MOVEMENT_MODULE: "(MOVE_MOD  ) ",
+	Category.PROJECTILE: "(PROJECTILE) ",
 }
 
 const PREFIX_TEMPLATES: Dictionary[GameType, String] = {
@@ -120,18 +132,24 @@ var current_categories_level: Dictionary[Category, Level] = {
 	Category.STAT_MODIFIER: Level.WARN,
 	Category.STACK_MODIFIER: Level.WARN,
 	Category.GLOBAL_FIGHTING_MANAGER: Level.WARN,
+	Category.ENTITY_ANIMATION: Level.WARN,
 	Category.ENTITY_MODULE: Level.DEBUG,
 	Category.ENTITY: Level.DEBUG,
-	Category.HERO: Level.DEBUG,
+	Category.HERO: Level.WARN,
+	Category.SUMMON: Level.WARN,
 	Category.BATTLE_SYNC: Level.WARN,
 	Category.BATTLE_READER: Level.WARN,
 	Category.BATTLE_WRITER: Level.WARN,
 	Category.ENTITY_MANAGER: Level.WARN,
 	Category.HERO_SPAWNER: Level.WARN,
-	Category.FAMILY_MANAGER: Level.DEBUG,
+	Category.FAMILY_MANAGER: Level.WARN,
 	Category.FIGHTING_AREA: Level.WARN,
 	Category.BDS_REGISTERY: Level.WARN,
 	Category.TABLE: Level.WARN,
+	Category.SPAWN_LOCATION_CONFIG: Level.WARN,
+	Category.TARGET_MODULE: Level.DEBUG,
+	Category.MOVEMENT_MODULE: Level.DEBUG,
+	Category.PROJECTILE: Level.WARN,
 }
 #endregion
 

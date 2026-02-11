@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cefmhkgcawmad"]
+
+[ext_resource type="Script" uid="uid://tbd5eqhlmwx3" path="res://Entities/Modules/ActionSenderModule/RemoveStack/action_sender_remove_stack_module.gd" id="1_mivdb"]
+
+[node name="ActionSenderRemoveStackModule" type="Node" unique_id=852633412]
+script = ExtResource("1_mivdb")

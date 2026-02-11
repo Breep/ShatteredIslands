@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://cwywvggm7tovg"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cwywvggm7tovg"]
 
 [ext_resource type="Texture2D" uid="uid://k5v6yll4kd20" path="res://Card/Descriptions/Cards/Defense/Common/ToxicFiltrationLayer/shieldomatic_toxic_filtration_layer_.jpg" id="1_a2mxx"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_card_template"]

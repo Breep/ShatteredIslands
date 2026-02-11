@@ -199,10 +199,12 @@ func _on_poison_flask_timer_timeout() -> void:
 
 
 func _on_rusty_dagger_logic_callback(cb_vars: Dictionary) -> void:
-	if not cb_vars.has(AutoAttackModifier.VarType.PROJECTILE_STATS): return
-	var proj_stats: ProjectileStats = cb_vars[AutoAttackModifier.VarType.PROJECTILE_STATS]
-	if Utils.is_randomize_modifier_active(_poison_stats.poison_rusty_dagger_chance):
-		proj_stats.poison_stacks += _poison_stats.poison_rusty_dagger_stacks
+	pass
+	# TODO rework this with direct callback
+	#if not cb_vars.has(AutoAttackModifier.VarType.PROJECTILE_STATS): return
+	# var proj_stats: ProjectileStats = cb_vars[AutoAttackModifier.VarType.PROJECTILE_STATS]
+	#if Utils.is_randomize_modifier_active(_poison_stats.poison_rusty_dagger_chance):
+		# proj_stats.poison_stacks += _poison_stats.poison_rusty_dagger_stacks
 
 
 #region VENOMOUS DARTS
@@ -212,7 +214,7 @@ func _on_venomous_darts_timer_timeout() -> void:
 		if target == null: return
 		var projectile_stats := ProjectileStats.new()
 		projectile_stats.on_hit_logic_callbacks.append(_on_hit_venomous_logic_callback)
-		_owner.projectile_attack(target, Projectile.ProjectileType.VENOMOUS_DART, _owner._turret._projectile_spawn_point, projectile_stats)
+		_owner.projectile_attack(target, Projectile.Type.VENOMOUS_DART, _owner._turret._projectile_spawn_point, projectile_stats)
 
 
 func _on_hit_venomous_logic_callback(cb_vars: Dictionary) -> void:
@@ -220,7 +222,7 @@ func _on_hit_venomous_logic_callback(cb_vars: Dictionary) -> void:
 	var target: Entity = cb_vars[AutoAttackModifier.VarType.TARGET]
 	if target == null or target.is_queued_for_deletion(): return
 	var damage := int(float(target.conditions.poison_stacks) * _poison_stats.poison_venomous_darts_multiplier)
-	_owner.direct_attack(target, damage, Utils.DamageType.PHYSICAL, "Venomous Darts")
+	_owner.direct_damage(target, damage, Utils.DamageType.PHYSICAL, "Venomous Darts")
 #endregion
 
 #region TIDE OF CORRUPTION

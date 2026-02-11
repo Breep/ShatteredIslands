@@ -20,11 +20,25 @@ description: Rules for Shattered Islands development
 ## Coding Standards (GDScript)
 - **Typing**: Strong typing is required (e.g., `Array[int]`, `float`, `FamilyStats`). Avoid `var` without type inference.
 - **Naming**: `class_name` must be PascalCase and match the snake_case filename (e.g. `poison_flask.gd` -> `class_name PoisonFlask`).
-- **Debug**: 
-  - Use `printerr()` for errors (e.g. invalid levels). 
-  - Use `print("DEBUG: ...")` for temporary debugging.
+- **Dictionary Keys**: 
+  - **NEVER** use string literals as dictionary keys (e.g., `dict["key"]`)
+  - **ALWAYS** use Enums for dictionary keys (e.g., `dict[KeyType.KEY]`)
+  - Exception: Only use strings when explicitly requested
+- **Debug/Logging**: 
+  - Use `Verbose` API (`verbose.gd`) for all logging
+  - Add categories as needed in `Verbose.Category`
+  - Use `Verbose.debug()`, `Verbose.warn()`, `Verbose.error()` instead of `print()`, `printerr()`
 - **Formatting**: Use `.pad_decimals(0)` for displaying integer-like floats in strings.
 - **Rich Text**: Use tags for descriptions (e.g. `[[POISON_STACK]]`).
+- **Encapsulation**:
+  - **NEVER** call a private function/variable (starting with `_`) from another class
+  - Exception: `super._function()` is allowed
+  - Exception: In `Prototyping/` directory, private access is allowed for rapid testing
+- **Scene Tree Communication**:
+  - Parent nodes **CAN** call child node functions
+  - Child nodes **CANNOT** call parent node functions directly
+  - Children communicate with parents via **signals only**
+  - Example: `ActionModule` emits signals, `Entity` listens and handles them
 
 ## Godot Specifics
 - **IDs**: **NEVER** manually assign `uid` or `id`. Let the engine handle it.
@@ -33,3 +47,11 @@ description: Rules for Shattered Islands development
 ## Workflows
 - **New Cards**: **ALWAYS** follow the workflow at `.agent/workflows/add_new_card.md` to ensure all steps (Files, Stats, Manager) are covered.
 - **New Spells**: **ALWAYS** follow the workflow at `.agent/workflows/add_new_spell.md`, strictly adhering to the Meteor pattern (Visuals separated).
+
+## Safety Rules
+- **Git Commands**: 
+  - **NEVER** execute destructive git commands like `git checkout -- .`, `git reset --hard`, `git clean -fd` without **explicit, clear approval** from the user.
+  - **NEVER** assume it's safe to discard uncommitted changes.
+  - If you need to undo changes, **ALWAYS** suggest the command and ask for confirmation first.
+  - Prefer targeted operations (single file) over blanket operations (entire repository).
+

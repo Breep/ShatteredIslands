@@ -136,13 +136,16 @@ func _on_gfm_fighting_phase_state_changed(state: GlobalFightingManager.FightingP
 			_battle_logs.clear()
 
 
-func _on_fighting_area_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.ProjectileType, projectile_modifiers: Array[Projectile.ProjectileEffect], _projectile: Projectile) -> void:
-	if projectile_type == Projectile.ProjectileType.AUTO_ATTACK:
-		_log_attack(source, target,
-					projectile_modifiers.has(Projectile.ProjectileEffect.CRITIC),
-					projectile_modifiers.has(Projectile.ProjectileEffect.POISON),
-					projectile_modifiers.has(Projectile.ProjectileEffect.IGNITE),
-					projectile_modifiers.has(Projectile.ProjectileEffect.INSTABILITY))
+func _on_fighting_area_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.Type, _projectile: Projectile) -> void:
+	# Note: Projectile effects like critic/poison/ignite are now handled via callbacks
+	# and are no longer tracked as enum flags
+	pass # TODO use auto attack api
+	#if source.is_ally and projectile_type == Projectile.Type.AUTO_ATTACK:
+		#_log_attack(source, target,
+				#false, # is_critic (no longer tracked here)
+				#false, # has_poison
+				#false, # has_ignite
+				#false) # has_instability
 
 
 func _on_fighting_area_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary) -> void:

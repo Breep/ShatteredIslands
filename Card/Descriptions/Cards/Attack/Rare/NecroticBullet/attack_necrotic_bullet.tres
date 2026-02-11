@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://ceriu6ydblll8"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://ceriu6ydblll8"]
 
 [ext_resource type="Script" uid="uid://pqjtqk0hgk3f" path="res://Card/Descriptions/Cards/Attack/Rare/NecroticBullet/attack_necrotic_bullet.gd" id="1_tuptm"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="2_1maqp"]

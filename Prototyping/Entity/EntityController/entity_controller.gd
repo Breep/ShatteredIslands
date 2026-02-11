@@ -5,8 +5,8 @@ extends Node
 
 @onready var _entity_name_label: Label = %EntityNameLabel
 
-@onready var _direct_attack_edit: TextEdit = %DirectAttackEdit
-@onready var _direct_attack_percent_edit: TextEdit = %DirectAttackPercentEdit
+@onready var _direct_damage_edit: TextEdit = %DirectAttackEdit
+@onready var _direct_damage_percent_edit: TextEdit = %DirectAttackPercentEdit
 @onready var _heal_edit: TextEdit = %HealEdit
 @onready var _heal_percent_edit: TextEdit = %HealPercentEdit
 @onready var _inflict_condition_edit: TextEdit = %InflictConditionEdit
@@ -59,6 +59,9 @@ extends Node
 @onready var _team_edit: TextEdit = %TeamTextEdit
 @onready var _spawn_localizer_show_button: CheckButton = %SpawnLocalizerShowButton
 
+@onready var _inflict_status_choice: OptionButton = %StatusTypeChoice
+@onready var _inflict_status_duration_edit: TextEdit = %InflictStatusDurationEdit
+
 var _target: Entity
 var _all_entities: Array[Entity] = [] # Cached list of all entities for entity choice dropdown
 
@@ -106,7 +109,7 @@ func _ready() -> void:
 	
 	# Populate projectile type dropdown
 	i = 0
-	for projectile_type: String in Projectile.ProjectileType.keys():
+	for projectile_type: String in Projectile.Type.keys():
 		_projectile_type_choice.add_item(projectile_type, i)
 		i += 1
 	
@@ -126,6 +129,12 @@ func _ready() -> void:
 	i = 0
 	for spawn_type: String in SpawnLocationConfig.LocationType.keys():
 		_spawn_type_choice.add_item(spawn_type, i)
+		i += 1
+	
+	# Populate inflict status dropdown
+	i = 0
+	for status_type: String in Status.Type.keys():
+		_inflict_status_choice.add_item(status_type, i)
 		i += 1
 	
 	# Initialize spell parameters with default (METEOR)
@@ -169,30 +178,30 @@ func _on_attack_button_pressed() -> void:
 	_refresh_target()
 	
 	if _target == null:
-		printerr("EntityController: No target selected for direct_attack")
+		printerr("EntityController: No target selected for direct_damage")
 		return
 	
-	var damage_text: String = _direct_attack_edit.text.strip_edges()
+	var damage_text: String = _direct_damage_edit.text.strip_edges()
 	if damage_text.is_empty():
 		printerr("EntityController: No damage value provided")
 		return
 	
 	var damage: float = damage_text.to_float()
 	var damage_type: Utils.DamageType = _damage_choice.get_selected_id() as Utils.DamageType
-	var action_id: StringName = &"test_direct_attack"
+	var action_id: StringName = &"test_direct_damage"
 	
-	entity_owner.direct_attack(_target, damage, damage_type, action_id)
-	print("DEBUG: direct_attack called - Target: ", _target.entity_name, " | Damage: ", damage, " | Type: ", Utils.DamageType.keys()[damage_type])
+	entity_owner.direct_damage(_target, damage, damage_type, action_id)
+	print("DEBUG: direct_damage called - Target: ", _target.entity_name, " | Damage: ", damage, " | Type: ", Utils.DamageType.keys()[damage_type])
 
 
 func _on_attack_percent_button_pressed() -> void:
 	_refresh_target()
 	
 	if _target == null:
-		printerr("EntityController: No target selected for direct_attack_percent")
+		printerr("EntityController: No target selected for direct_damage_percent")
 		return
 	
-	var percent_text: String = _direct_attack_percent_edit.text.strip_edges()
+	var percent_text: String = _direct_damage_percent_edit.text.strip_edges()
 	if percent_text.is_empty():
 		printerr("EntityController: No percent value provided")
 		return
@@ -200,10 +209,10 @@ func _on_attack_percent_button_pressed() -> void:
 	var damage_percent: float = percent_text.to_float()
 	var damage_type: Utils.DamageType = _damage_choice_percent.get_selected_id() as Utils.DamageType
 	var percent_modifier: Utils.PercentModifier = _percent_modifier_choice.get_selected_id() as Utils.PercentModifier
-	var action_id: StringName = &"test_direct_attack_percent"
+	var action_id: StringName = &"test_direct_damage_percent"
 	
-	entity_owner.direct_attack_percent(_target, damage_percent, damage_type, percent_modifier, action_id)
-	print("DEBUG: direct_attack_percent called - Target: ", _target.entity_name, " | Percent: ", damage_percent, "% | Type: ", Utils.DamageType.keys()[damage_type], " | Modifier: ", Utils.PercentModifier.keys()[percent_modifier])
+	entity_owner.direct_damage_percent(_target, damage_percent, damage_type, percent_modifier, action_id)
+	print("DEBUG: direct_damage_percent called - Target: ", _target.entity_name, " | Percent: ", damage_percent, "% | Type: ", Utils.DamageType.keys()[damage_type], " | Modifier: ", Utils.PercentModifier.keys()[percent_modifier])
 
 
 func _on_heal_button_pressed() -> void:
@@ -338,7 +347,7 @@ func _on_projectile_attack_button_pressed() -> void:
 		printerr("EntityController: No entity_owner for projectile_attack")
 		return
 	
-	var projectile_type: Projectile.ProjectileType = _projectile_type_choice.get_selected_id() as Projectile.ProjectileType
+	var projectile_type: Projectile.Type = _projectile_type_choice.get_selected_id() as Projectile.Type
 	var projectile_spawn: Node3D = entity_owner.get_auto_attack_spawn()
 	var projectile_stats: ProjectileStats = ProjectileStats.new()
 	
@@ -346,23 +355,12 @@ func _on_projectile_attack_button_pressed() -> void:
 	var speed_text: String = _speed_text_edit.text.strip_edges()
 	projectile_stats.speed = speed_text.to_int() if not speed_text.is_empty() else 20
 	
-	var physical_damage_text: String = _physical_damage_text_edit.text.strip_edges()
-	projectile_stats.physical_damage_flat = physical_damage_text.to_float() if not physical_damage_text.is_empty() else 0.0
-	projectile_stats.physical_is_critical = false
-	
-	var magical_damage_text: String = _magical_damage_text_edit.text.strip_edges()
-	projectile_stats.magical_damage_flat = magical_damage_text.to_float() if not magical_damage_text.is_empty() else 0.0
-	projectile_stats.magical_is_critical = false
-	
 	var bounce_text: String = _bounce_text_edit.text.strip_edges()
 	var bounce_count: int = bounce_text.to_int() if not bounce_text.is_empty() else 0
-	projectile_stats.is_bouncing = bounce_count > 0
 	projectile_stats.bounces_remaining = bounce_count
 	
 	entity_owner.projectile_attack(_target, projectile_type, projectile_spawn, projectile_stats)
-	print("DEBUG: projectile_attack called - Target: ", _target.entity_name, " | Type: ", Projectile.ProjectileType.keys()[projectile_type],
-		" | Speed: ", projectile_stats.speed, " | Physical: ", projectile_stats.physical_damage_flat,
-		" | Magical: ", projectile_stats.magical_damage_flat, " | Bounces: ", projectile_stats.bounces_remaining)
+	print("DEBUG: projectile_attack called - Target: ", _target.entity_name, " | Type: ", Projectile.Type.keys()[projectile_type])
 
 
 func _update_spell_parameters(spell_type: Spell.Type) -> void:
@@ -717,3 +715,33 @@ func _on_summon_entity_button_pressed() -> void:
 	print("DEBUG: summon_entity called - Type: ", Entity.EntityType.keys()[entity_type],
 		" | Spawn: ", SpawnLocationConfig.LocationType.keys()[spawn_type],
 		" | Modifiers: ", entity_modifier)
+
+
+func _on_auto_attack_button_pressed() -> void:
+	if entity_owner == null:
+		printerr("EntityController: No entity_owner for cast_ultimate")
+		return
+	
+	_refresh_target()
+	entity_owner.auto_attack(_target)
+	print("DEBUG: auto_attack called")
+
+
+func _on_inflict_status_button_pressed() -> void:
+	_refresh_target()
+	
+	if _target == null:
+		printerr("EntityController: No target selected for inflict_status")
+		return
+	
+	var status_text: String = _inflict_status_duration_edit.text.strip_edges()
+	if status_text.is_empty():
+		printerr("EntityController: No status duration provided")
+		return
+	
+	var status_type: Status.Type = _inflict_status_choice.get_selected_id() as Status.Type
+	var status_duration: float = status_text.to_float()
+	var action_id: StringName = &"test_inflict_status"
+	
+	entity_owner.inflict_status(_target, status_type, status_duration, action_id)
+	print("DEBUG: inflict_status called - Target: ", _target.entity_name, " | Type: ", Status.Type.keys()[status_type], " | Duration: ", status_duration)

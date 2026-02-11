@@ -1,5 +1,5 @@
 class_name ConditionsModule
-extends Node
+extends Module
 
 ## Manages temporary conditions (stacks) applied to an entity
 ## Handles stack instances, periodic ticking, and damage/healing logic
@@ -18,9 +18,6 @@ signal shield_stack_broken(amount: float)
 #endregion
 
 #region ============================== Private variables ==============================
-var _owner: Entity
-
-# Stack instances
 var _poison_stack: SimpleStack = SimpleStack.new()
 var _ignite_stack: IgniteStack = IgniteStack.new()
 var _shield_stack: ShieldStack = ShieldStack.new()
@@ -53,8 +50,8 @@ var necrosis_stacks: float:
 #endregion
 
 #region ============================== Public functions ==============================
-func init(owner: Entity) -> ConditionsModule:
-	_owner = owner
+func init(entity_owner: Entity) -> ConditionsModule:
+	super.init(entity_owner)
 	
 	# Connect to stack signals for re-emission
 	_poison_stack.stacks_changed.connect(_on_poison_stacks_changed)

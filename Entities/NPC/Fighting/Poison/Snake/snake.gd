@@ -1,24 +1,15 @@
 class_name Snake
-extends Entity
-
-@onready var _snake_visual: Node3D = %SnakeVisual
-
-func _on_stats_health_changed(new_health: int) -> void:
-	if new_health <= 0:
-		signal_death()
-		_animate_death()
-
+extends Summon
 
 func _ready() -> void:
-	_snake_visual.scale = Vector3.ZERO
-	stats.health = stats.health_max
-	stats.health_changed.connect(_on_stats_health_changed)
-	var pop := create_tween()
-	pop.tween_property(_snake_visual, "scale", Vector3.ONE * 1.25, 0.08)
-	pop.tween_property(_snake_visual, "scale", Vector3.ONE * 1, 0.08)
-
-
-func _animate_death() -> void:
-	var pop := create_tween()
-	pop.tween_property(_snake_visual, "scale", Vector3.ONE * 1.25, 0.08)
-	pop.tween_property(_snake_visual, "scale", Vector3.ZERO, 0.08)
+	var mod := AutoAttackModifier.new()
+	mod.id = "Snake Poison"
+	mod.is_one_time_effect = false
+	mod.on_hit_logic_callback = func(cb_vars: Dictionary) -> void:
+		if not cb_vars.has(AutoAttackModifier.VarType.TARGET): return
+		var target: Entity = cb_vars[AutoAttackModifier.VarType.TARGET]
+		if target == null or target.is_queued_for_deletion(): return
+		inflict_condition_stacks(target, 1, Utils.StackType.POISON, "Snake")
+		
+	auto_attack_modifier_registry.register_modifier(mod)
+	super._ready()

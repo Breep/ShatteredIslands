@@ -10,6 +10,7 @@ enum StatType {
 	MANA_REGEN,
 	AD,
 	AA_SPEED,
+	ATTACK_RANGE,
 	CRIT_CHANCE,
 	CRIT_CHANCE_GLOBAL,
 	CRIT_MULT,
@@ -80,7 +81,20 @@ var _mana_regen: float # mana/s
 #endregion
 
 #region ============================== Auto-Attack ==============================
-@export_group("Attack damage")
+enum AutoAttackType {RANGED, MELEE}
+
+@export_group("Attack")
+@export var auto_attack_type: AutoAttackType = AutoAttackType.RANGED
+
+signal attack_range_changed(new_attack_range: float)
+var _attack_range: float = -1.0 # -1 = unlimited range (default)
+@export var attack_range: float:
+	get: return _attack_range
+	set(value):
+		if value == _attack_range: return
+		_attack_range = value
+		attack_range_changed.emit(_attack_range)
+
 signal attack_damage_changed(new_attack_damage: float)
 var _attack_damage: float # Damage of auto attack
 @export var attack_damage: float:
@@ -107,7 +121,6 @@ signal critical_multiplier_changed(new_critical_multiplier: float, critical_type
 @export var _critical_chances: Dictionary[Utils.ActionType, float]
 @export var _critical_multipliers: Dictionary[Utils.ActionType, float]
 #endregion
-
 
 
 #region ============================== Resistances ==============================
@@ -145,7 +158,9 @@ signal weakness_changed(new_weakness: float, action_type: Utils.ActionType)
 
 #region ============================== Public functions ==============================
 func reset_from_hero_desc(hero: HeroDesc, lvl: int) -> EntityStats:
-	if lvl < 1 or lvl > 10: return self
+	if lvl < 1 or lvl > 10:
+		Verbose.error("reset_from_hero_desc() - Invalid hero level [" + str(lvl) + "]", Verbose.Category.ENTITY)
+		return self
 	
 	health_max = hero.stats[lvl].health_max
 	health = health_max
@@ -154,6 +169,8 @@ func reset_from_hero_desc(hero: HeroDesc, lvl: int) -> EntityStats:
 	mana_regen = hero.stats[lvl].mana_regen
 	attack_damage = hero.stats[lvl].attack_damage
 	attack_speed = hero.stats[lvl].attack_speed
+	attack_range = hero.stats[lvl].attack_range
+	auto_attack_type = hero.stats[lvl].auto_attack_type
 	
 	for action_type: Utils.ActionType in Utils.get_all_actions():
 		_critical_chances[action_type] = hero.stats[lvl].critical_chances.get(action_type, 0.0)
@@ -186,6 +203,7 @@ func get_stat(stat_type: StatType, action_type: Utils.ActionType = Utils.ActionT
 		EntityStats.StatType.MANA_REGEN: return _mana_regen
 		EntityStats.StatType.AD: return float(_attack_damage)
 		EntityStats.StatType.AA_SPEED: return _attack_speed
+		EntityStats.StatType.ATTACK_RANGE: return _attack_range
 		EntityStats.StatType.CRIT_CHANCE: return _critical_chances.get(action_type, 0.0)
 		EntityStats.StatType.CRIT_MULT: return _critical_multipliers.get(action_type, 100.0)
 		EntityStats.StatType.RESISTANCE: return _resistances.get(action_type, 0.0)
@@ -208,6 +226,7 @@ func update_stat(stat_type: StatType, value: float, action_type: Utils.ActionTyp
 		EntityStats.StatType.MANA_REGEN: mana_regen = value
 		EntityStats.StatType.AD: attack_damage = value
 		EntityStats.StatType.AA_SPEED: attack_speed = value
+		EntityStats.StatType.ATTACK_RANGE: attack_range = value
 		EntityStats.StatType.CRIT_CHANCE:
 			_critical_chances[action_type] = value
 			critical_chance_changed.emit(value, action_type)

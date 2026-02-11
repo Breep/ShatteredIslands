@@ -13,11 +13,12 @@ enum ZoneType {
 
 # ============================== Private variables ==============================
 
-var _team_zones: Dictionary[int, Area3D] = {}
-var _center_zone: Area3D = null
-var _full_arena_zone: Area3D = null
+@export_group("Optional")
+@export var _team_zones: Dictionary[int, Area3D] = {}
+@export var _center_zone: Area3D = null
+@export var _full_arena_zone: Area3D = null
 
-var _is_initialized: bool = false
+@export var _is_initialized: bool = false
 
 # ============================== Public functions ==============================
 

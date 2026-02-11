@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bd30qmtgnma2p"]
+[gd_scene format=3 uid="uid://bd30qmtgnma2p"]
 
 [ext_resource type="Script" uid="uid://d30k2yor5okgu" path="res://Prototyping/Camera/prototyping_camera.gd" id="1_t812x"]
 [ext_resource type="PackedScene" uid="uid://bg5efhnq0erdv" path="res://Modules/PickableClickable/ClickableModule/clickable_module.tscn" id="3_25bs0"]
@@ -41,16 +41,16 @@ material = SubResource("StandardMaterial3D_vrfg7")
 material = SubResource("StandardMaterial3D_r1l57")
 size = Vector2(20, 20)
 
-[node name="PrototypingCamera" type="Node3D" node_paths=PackedStringArray("_center_point_camera")]
+[node name="PrototypingCamera" type="Node3D" unique_id=1711585288 node_paths=PackedStringArray("_center_point_camera")]
 script = ExtResource("1_t812x")
 _center_point_camera = NodePath("CenterPointCamera")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=77487580]
 environment = SubResource("Environment_bi2n1")
 
-[node name="Lights" type="Node3D" parent="."]
+[node name="Lights" type="Node3D" parent="." unique_id=2027845782]
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights" unique_id=1861028586]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 5, 2.5)
 light_color = Color(0.337255, 0.00392157, 0.737255, 1)
 light_energy = 2.0
@@ -58,7 +58,7 @@ shadow_enabled = true
 omni_range = 100.0
 omni_attenuation = 0.4
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
+[node name="OmniLight3D2" type="OmniLight3D" parent="Lights" unique_id=890801781]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 5, -2.5)
 light_color = Color(0.639216, 0.439216, 0.94902, 1)
 light_energy = 2.0
@@ -66,7 +66,7 @@ shadow_enabled = true
 omni_range = 100.0
 omni_attenuation = 0.4
 
-[node name="OmniLight3D4" type="OmniLight3D" parent="Lights"]
+[node name="OmniLight3D4" type="OmniLight3D" parent="Lights" unique_id=774235276]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 5, 2.5)
 light_color = Color(0.12549, 0.270588, 0.886275, 1)
 light_energy = 2.0
@@ -74,7 +74,7 @@ shadow_enabled = true
 omni_range = 100.0
 omni_attenuation = 0.4
 
-[node name="OmniLight3D5" type="OmniLight3D" parent="Lights"]
+[node name="OmniLight3D5" type="OmniLight3D" parent="Lights" unique_id=780053384]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 5, -2.5)
 light_color = Color(0.0196078, 1, 0.811765, 1)
 light_energy = 2.0
@@ -82,81 +82,81 @@ shadow_enabled = true
 omni_range = 100.0
 omni_attenuation = 0.4
 
-[node name="Pickables" type="Node3D" parent="."]
+[node name="Pickables" type="Node3D" parent="." unique_id=148739169]
 
-[node name="PickableA" type="StaticBody3D" parent="Pickables"]
+[node name="PickableA" type="StaticBody3D" parent="Pickables" unique_id=740957337]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -2.7826796)
 collision_layer = 17
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Pickables/PickableA"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pickables/PickableA" unique_id=1537129042]
 mesh = SubResource("BoxMesh_jy07b")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Pickables/PickableA"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pickables/PickableA" unique_id=390153446]
 shape = SubResource("BoxShape3D_pxrnd")
 
-[node name="ClickableModule" parent="Pickables/PickableA" node_paths=PackedStringArray("_nodes_where_to_find_meshs", "_owner") instance=ExtResource("3_25bs0")]
+[node name="ClickableModule" parent="Pickables/PickableA" unique_id=908711177 node_paths=PackedStringArray("_nodes_where_to_find_meshs", "_owner") instance=ExtResource("3_25bs0")]
 _nodes_where_to_find_meshs = [NodePath("..")]
 _owner = NodePath("..")
 
-[node name="PickableModule" parent="Pickables/PickableA" node_paths=PackedStringArray("_owner") instance=ExtResource("4_jy07b")]
+[node name="PickableModule" parent="Pickables/PickableA" unique_id=358779575 node_paths=PackedStringArray("_owner") instance=ExtResource("4_jy07b")]
 _owner = NodePath("..")
 
-[node name="PickableA2" type="StaticBody3D" parent="Pickables"]
+[node name="PickableA2" type="StaticBody3D" parent="Pickables" unique_id=1381169210]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7319403, 0.5, 1.1503565)
 collision_layer = 17
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Pickables/PickableA2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pickables/PickableA2" unique_id=615601626]
 mesh = SubResource("BoxMesh_ttdeo")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Pickables/PickableA2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pickables/PickableA2" unique_id=49634789]
 shape = SubResource("BoxShape3D_pxrnd")
 
-[node name="ClickableModule" parent="Pickables/PickableA2" node_paths=PackedStringArray("_nodes_where_to_find_meshs", "_owner") instance=ExtResource("3_25bs0")]
+[node name="ClickableModule" parent="Pickables/PickableA2" unique_id=393406082 node_paths=PackedStringArray("_nodes_where_to_find_meshs", "_owner") instance=ExtResource("3_25bs0")]
 _nodes_where_to_find_meshs = [NodePath("..")]
 _owner = NodePath("..")
 
-[node name="PickableModule" parent="Pickables/PickableA2" node_paths=PackedStringArray("_owner") instance=ExtResource("4_jy07b")]
+[node name="PickableModule" parent="Pickables/PickableA2" unique_id=814371262 node_paths=PackedStringArray("_owner") instance=ExtResource("4_jy07b")]
 _owner = NodePath("..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Pickables"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Pickables" unique_id=1124590520]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.54204, 0, -1.94321)
 collision_layer = 64
 
-[node name="Table" parent="Pickables/StaticBody3D" instance=ExtResource("5_vrfg7")]
+[node name="Table" parent="Pickables/StaticBody3D" unique_id=894366955 instance=ExtResource("5_vrfg7")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Pickables/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pickables/StaticBody3D" unique_id=572315602]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.458618, -0.0370483)
 shape = SubResource("BoxShape3D_vrfg7")
 
-[node name="ClickableModule" parent="Pickables/StaticBody3D" node_paths=PackedStringArray("_nodes_where_to_find_meshs", "_owner") instance=ExtResource("3_25bs0")]
+[node name="ClickableModule" parent="Pickables/StaticBody3D" unique_id=1017902283 node_paths=PackedStringArray("_nodes_where_to_find_meshs", "_owner") instance=ExtResource("3_25bs0")]
 _nodes_where_to_find_meshs = [NodePath("../Table")]
 _owner = NodePath("..")
 _scale_div_grow = 0.01
 
-[node name="PickableModule" parent="Pickables/StaticBody3D" node_paths=PackedStringArray("_owner") instance=ExtResource("4_jy07b")]
+[node name="PickableModule" parent="Pickables/StaticBody3D" unique_id=1314523772 node_paths=PackedStringArray("_owner") instance=ExtResource("4_jy07b")]
 _owner = NodePath("..")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=147809667]
 transform = Transform3D(-0.395546, 0.91825, -0.018994, -0.614275, -0.249117, 0.748737, 0.682796, 0.307827, 0.662595, 13.7948, 5.51448, 4.41668)
 
-[node name="CenterPointCamera" parent="." instance=ExtResource("6_vrfg7")]
+[node name="CenterPointCamera" parent="." unique_id=691734568 instance=ExtResource("6_vrfg7")]
 
-[node name="Node3D" type="Node3D" parent="."]
+[node name="Node3D" type="Node3D" parent="." unique_id=187902948]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8385696, 2.3841858e-07, 1.3014617)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Node3D"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D" unique_id=2034305000]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("6_r1l57")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/StaticBody3D" unique_id=390299020]
 shape = SubResource("CapsuleShape3D_pxrnd")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D" unique_id=353844892]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_r1l57")
 skeleton = NodePath("../StaticBody3D")
 
-[node name="Floor" type="MeshInstance3D" parent="."]
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=463649376]
 mesh = SubResource("PlaneMesh_h813j")
 
 [editable path="Pickables/StaticBody3D/Table"]

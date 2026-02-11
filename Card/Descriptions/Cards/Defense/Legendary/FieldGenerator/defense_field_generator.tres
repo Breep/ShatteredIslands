@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://c7vmqb7h1a62e"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://c7vmqb7h1a62e"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_card_script"]
 [ext_resource type="Script" uid="uid://dqetvyyf4gdvh" path="res://Card/Descriptions/Cards/Defense/Legendary/FieldGenerator/defense_field_generator.gd" id="2_player_upgrade"]
