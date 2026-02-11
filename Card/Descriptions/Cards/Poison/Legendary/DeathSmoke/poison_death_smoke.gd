@@ -2,7 +2,7 @@ class_name PoisonDeathSmoke
 extends HeroUpgrade
 
 @export var _period: Array[float]
-@export var _multiplayer: Array[float]
+@export var _multiplier: Array[float]
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[Card.Rarity.LEGENDARY]:
@@ -10,7 +10,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		return
 
 	var period: float = _period[card_lvl - 1]
-	var multiplier: float = _multiplayer[card_lvl - 1]
+	var multiplier: float = _multiplier[card_lvl - 1]
 
 	ctx.battle_callbacks.register_battle_start(&"Death Fog", func() -> void:
 		var spell_modifier: Dictionary = {
@@ -28,4 +28,4 @@ func get_description(cardlvl: int) -> String:
 		return "ERROR"
 
 	return "At the start of the fight, surrond the battefield with gas. Then the gas speads slowly toward the middle. Entities inside" \
-			+ " takes " + str(_multiplayer)
+			+ " takes " + str(_multiplier)
