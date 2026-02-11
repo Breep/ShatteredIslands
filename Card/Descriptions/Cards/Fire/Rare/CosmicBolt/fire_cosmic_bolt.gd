@@ -6,20 +6,52 @@ extends HeroUpgrade
 @export var _period: Array[float]
 @export var _rarity: Card.Rarity = Card.Rarity.RARE
 
-func apply(stats: FamiliesStats, cardlvl: int) -> void:
-	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("Cosmic Bolt: Wrong cardlvl: ", cardlvl)
+func apply_card(ctx: CardContext, card_lvl: int) -> void:
+	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
+		printerr("Cosmic Bolt: Wrong card_lvl: ", card_lvl)
 		return
-	
-	stats.fire.cosmic_bolt_activated = true
-	stats.fire.cosmic_bolt_damage_per_stack = _damage_per_stack[cardlvl - 1]
-	stats.fire.cosmic_bolt_bounce_chance_per_stack = _bounce_chance_per_stack[cardlvl - 1]
-	stats.fire.cosmic_bolt_period = _period[cardlvl - 1]
+
+	var dmg_per_stack: float = _damage_per_stack[card_lvl - 1]
+	var bounce_chance: float = _bounce_chance_per_stack[card_lvl - 1]
+	var period: float = _period[card_lvl - 1]
+
+	# Self-referencing lambda for recursive bounce via Array[Callable] trick
+	var shoot_ref: Array[Callable] = []
+
+	var shoot := func(target: Entity) -> void:
+		if target == null or not is_instance_valid(target): return
+		var proj_stats := ProjectileStats.new()
+		proj_stats.is_bouncing = false
+		proj_stats.on_hit_logic_callbacks.append(func(cb_vars: Dictionary) -> void:
+			if not cb_vars.has(AutoAttackModifier.VarType.TARGET): return
+			var hit_target: Entity = cb_vars[AutoAttackModifier.VarType.TARGET]
+			if hit_target == null or not is_instance_valid(hit_target) or hit_target.is_queued_for_deletion(): return
+
+			var ignite_stacks: float = hit_target.conditions.ignite_stacks
+			var damage: float = ignite_stacks * dmg_per_stack
+			if damage > 0:
+				ctx.hero.direct_damage(hit_target, damage, Utils.DamageType.MAGICAL, &"Cosmic Bolt")
+
+			var bc: float = float(ignite_stacks) * bounce_chance
+			if Utils.is_randomize_modifier_active(bc):
+				var new_target: Entity = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
+				if new_target != null:
+					shoot_ref[0].call(new_target)
+		)
+		ctx.hero.projectile_attack(target, Projectile.Type.COSMIC_BOLT, ctx.hero._turret._projectile_spawn_point, proj_stats)
+
+	shoot_ref.append(shoot)
+
+	ctx.periodic_timers.register(&"Cosmic Bolt", period, func() -> void:
+		var target: Entity = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.HIGHEST_HP_ENEMY)
+		if target == null: return
+		shoot_ref[0].call(target)
+	)
 
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
 		printerr("Cosmic Bolt: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
-	
+
 	return "Every " + str(_period[cardlvl - 1]) + "s, fire a bolt. Deals " + str(_damage_per_stack[cardlvl - 1]) + " damage per [[IGNITE]] stack. " + str(_bounce_chance_per_stack[cardlvl - 1]) + "% chance per [[IGNITE]] stack to bounce."
