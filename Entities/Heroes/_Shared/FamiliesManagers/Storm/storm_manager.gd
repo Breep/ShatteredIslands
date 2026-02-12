@@ -111,8 +111,7 @@ func _get_crit_point(default_damage: float, real_damage: float) -> float:
 func _call_the_lightning() -> void:
 	var target: Entity = _owner.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
 	if target == null: return
-	#TODO adapté avec le niveau de famille
-	var current_lvl: int = 1
+	var current_lvl: int = level
 	var base_percent: float = BASE_LIGHTNING_DAMAGE_PERCENT[current_lvl]
 	var rank_mult: float = RANK_VALUE_MULTIPLIERS.get(_current_rank, 1.0)
 	var final_percent: float = base_percent * rank_mult
