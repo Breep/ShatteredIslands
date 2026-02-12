@@ -28,6 +28,10 @@ func _ready() -> void:
 
 # ============================== Public function ==============================
 
+func get_live_projectiles() -> Array[Node]:
+	return _projectiles_node.get_children()
+
+
 func spawn_projectile(source: Entity, target: Entity, projectile_type: Projectile.Type, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	# Get the correct projectile scene
 	var projectile_scene: PackedScene = Shared.PROJECTILE_SCENES[projectile_type]

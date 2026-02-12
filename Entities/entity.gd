@@ -87,6 +87,8 @@ var action_modifiers_registry: ActionModifiersRegistry
 var stat_modifiers_registry: EntityStatModifiersRegistry
 var base_stats: EntityStats:
 	get: return _base_stats
+var spawn_manager: SpawnManager:
+	get: return _spawn_manager
 #endregion
 
 #region ============================== Private variables ==============================
