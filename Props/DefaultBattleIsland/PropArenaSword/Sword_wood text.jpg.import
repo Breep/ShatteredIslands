@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dj30kmg7bqylg"
-path.s3tc="res://.godot/imported/ROCKS_LOWPOLY_lambert1_BaseColor.png-00bde6a216e18111d656dfcf3484f8eb.s3tc.ctex"
+uid="uid://diopxqga0ksf2"
+path.s3tc="res://.godot/imported/Sword_wood text.jpg-85308831f3471cdd26955e237d77c296.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "faf86380638b3e6d8cf0327cf27e6567"
+}
 
 [deps]
 
-source_file="res://Props/Arena/ROCKS_LOWPOLY_lambert1_BaseColor.png"
-dest_files=["res://.godot/imported/ROCKS_LOWPOLY_lambert1_BaseColor.png-00bde6a216e18111d656dfcf3484f8eb.s3tc.ctex"]
+source_file="res://Props/DefaultBattleIsland/PropArenaSword/Sword_wood text.jpg"
+dest_files=["res://.godot/imported/Sword_wood text.jpg-85308831f3471cdd26955e237d77c296.s3tc.ctex"]
 
 [params]
 
