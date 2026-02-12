@@ -158,7 +158,8 @@ func _compute_family_levels() -> void:
 			_family_managers[family_type].level = _override_family_levels[family_type]
 		elif deck != null:
 			var points: int = deck.get_family_points(family_type)
-			_family_managers[family_type].level = GameManager.game_rules.get_family_level(points)
+			if GameManager.game_rules != null:
+				_family_managers[family_type].level = GameManager.game_rules.get_family_level(points)
 
 
 func _apply_all_cards_upgrades() -> void:

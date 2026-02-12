@@ -5,7 +5,8 @@
       "Bash(xargs:*)",
       "Bash(git ls-tree:*)",
       "Bash(git commit:*)",
-      "Bash(git status:*)"
+      "Bash(git status:*)",
+      "Bash(find:*)"
     ]
   }
 }
