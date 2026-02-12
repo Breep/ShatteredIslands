@@ -106,7 +106,7 @@ func _ready() -> void:
 		base_stats.reset_from_hero_desc(hero_desc, level)
 
 	# Build card context for the new card system
-	_card_context = CardContext.create(self, stat_modifiers_registry, action_modifiers_registry, periodic_timer_registry, battle_callback_registry)
+	_card_context = CardContext.create(self, stat_modifiers_registry, action_modifiers_registry, auto_attack_modifier_registry, periodic_timer_registry, battle_callback_registry)
 
 	if deck != null:
 		_apply_all_cards_upgrades()
