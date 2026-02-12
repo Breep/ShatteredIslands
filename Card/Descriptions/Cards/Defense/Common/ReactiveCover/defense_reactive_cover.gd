@@ -5,19 +5,34 @@ extends HeroUpgrade
 @export var _base_shield_amount: Array[float]
 @export var _rarity: Card.Rarity = Card.Rarity.COMMON
 
-func apply(stats: FamiliesStats, cardlvl: int) -> void:
-	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("Reactive Cover: Wrong cardlvl: ", cardlvl)
+
+func apply_card(ctx: CardContext, card_lvl: int) -> void:
+	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
+		printerr("Reactive Cover: Wrong card_lvl: ", card_lvl)
 		return
-	
-	stats.defense.reactive_cover_activated = true
-	stats.defense.reactive_cover_chance = _base_chance[cardlvl - 1]
-	stats.defense.reactive_cover_shield_amount = _base_shield_amount[cardlvl - 1]
+
+	var chance: float = _base_chance[card_lvl - 1]
+	var shield_amount: float = _base_shield_amount[card_lvl - 1]
+
+	var _on_damage_taken := func(_entity: Entity, damage: float, _damage_type: Utils.DamageType, _is_crit: bool, _is_blocked: bool) -> void:
+		if damage <= 0:
+			return
+		if Utils.is_randomize_modifier_active(chance):
+			ctx.hero.inflict_condition_stacks(ctx.hero, shield_amount, Utils.StackType.SHIELD, &"Reactive Cover")
+
+	ctx.battle_callbacks.register_battle_start(&"Reactive Cover", func() -> void:
+		if not ctx.hero.damage_taken.is_connected(_on_damage_taken):
+			ctx.hero.damage_taken.connect(_on_damage_taken)
+	)
+	ctx.battle_callbacks.register_battle_end(&"Reactive Cover", func() -> void:
+		if ctx.hero.damage_taken.is_connected(_on_damage_taken):
+			ctx.hero.damage_taken.disconnect(_on_damage_taken)
+	)
 
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
 		printerr("Reactive Cover: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
-	
+
 	return "When you take damage, " + str(_base_chance[cardlvl - 1]) + "% chance to gain " + str(_base_shield_amount[cardlvl - 1]) + " shield"
