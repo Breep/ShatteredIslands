@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://10uprmyjca05" path="res://Prototyping/Cardshop/prototyping_cards_shop.gd" id="1_a1n5c"]
 [ext_resource type="PackedScene" uid="uid://dj7bvdysxgxe6" path="res://Card/2D/CardsViewer/ui_cards_viewer.tscn" id="2_d78dm"]
 
-[node name="PrototypingCardsShop" type="Node" unique_id=1240633937 node_paths=PackedStringArray("_last_draw_value_labels", "_last_draw_value_ratio_labels", "_draw_value_labels", "_draw_value_ratio_labels")]
+[node name="PrototypingCardsShop" type="Node" unique_id=1240633937]
 script = ExtResource("1_a1n5c")
 common_number = 100
 rare_number = 100
@@ -23,30 +23,6 @@ _active_families = Dictionary[int, bool]({
 11: true,
 12: true
 })
-_last_draw_value_labels = {
-0: NodePath("Control/DropResultsContainer/LastDrawLabel/CommonLastDropLabel"),
-1: NodePath("Control/DropResultsContainer/LastDrawLabel/RareLastDropLabel"),
-2: NodePath("Control/DropResultsContainer/LastDrawLabel/EpicLastDropLabel"),
-3: NodePath("Control/DropResultsContainer/LastDrawLabel/LegendaryLastDropLabel")
-}
-_last_draw_value_ratio_labels = {
-0: NodePath("Control/DropResultsContainer/VBoxContainer3/CommonLastDropRatioLabel"),
-1: NodePath("Control/DropResultsContainer/VBoxContainer3/RareLastDropRatioLabel"),
-2: NodePath("Control/DropResultsContainer/VBoxContainer3/EpicLastDropRatioLabel"),
-3: NodePath("Control/DropResultsContainer/VBoxContainer3/LegendaryLastDropRatioLabel")
-}
-_draw_value_labels = {
-0: NodePath("Control/DropResultsContainer/VBoxContainer4/CommonDropLabel"),
-1: NodePath("Control/DropResultsContainer/VBoxContainer4/RareDropLabel"),
-2: NodePath("Control/DropResultsContainer/VBoxContainer4/EpicDropLabel"),
-3: NodePath("Control/DropResultsContainer/VBoxContainer4/LegendaryDropLabel")
-}
-_draw_value_ratio_labels = {
-0: NodePath("Control/DropResultsContainer/VBoxContainer5/CommonDropRatioLabel"),
-1: NodePath("Control/DropResultsContainer/VBoxContainer5/RareDropRatioLabel"),
-2: NodePath("Control/DropResultsContainer/VBoxContainer5/EpicDropRatioLabel"),
-3: NodePath("Control/DropResultsContainer/VBoxContainer5/LegendaryDropRatioLabel")
-}
 
 [node name="Control" type="Control" parent="." unique_id=183798319]
 layout_mode = 3

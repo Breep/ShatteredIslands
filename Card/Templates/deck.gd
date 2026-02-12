@@ -29,14 +29,13 @@ func add_card(card_to_add: Card) -> void:
 			_families_count[card_to_add.families[0]] += 1
 		else:
 			_families_count[card_to_add.families[0]] = 1
-	_specific_add(card_to_add)
 
 
 func remove_card(card_to_remove: Card) -> void:
 	if card_to_remove == null:
 		printerr("Can't remove a null card")
-	elif card_to_remove in _card_pile:
-		_card_pile.erase(card_to_remove)
+	elif card_to_remove in _card_pile.values():
+		_card_pile.erase(card_to_remove.uid)
 		if _families_count.has(card_to_remove.families[0]):
 			_families_count[card_to_remove.families[0]] -= 1
 
@@ -150,9 +149,6 @@ func _get_all_cards_of_rarities_of_family_type(rarities: Array[Card.Rarity], fam
 		cards_matching_rarities.append_array(_get_all_cards_of_rarity(rarity, family_type, cards))
 	return cards_matching_rarities
 
-
-func _specific_add(_card_to_add: Card) -> void:
-	pass
 
 
 

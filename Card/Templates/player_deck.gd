@@ -7,8 +7,14 @@ var _owner_name: String
 @export var _active_cards: Array[Card]
 var _cards_dictionary: Dictionary[Family.FamilyType, Array] # FamilyType:Array[Cards]
 
+var _family_levels: Dictionary[Family.FamilyType, int]
+var _family_points: Dictionary[Family.FamilyType, int]
+
+var _max_level_cards: Array[Card]
+
 signal has_changed()
 signal family_leveled_up(family_type: Family.FamilyType, new_level: int)
+signal card_maxed(card: Card)
 
 # ============================== Node base functions ==============================
 
@@ -47,14 +53,11 @@ func get_card_lvl(card_to_get_lvl: Card) -> int:
 			return card.lvl
 	return 0
 
+func get_family_points(family_type: Family.FamilyType) -> int: 
+	return _family_points.get(family_type, 0)
 
-func get_family_points(family_type: Family.FamilyType) -> int:
-	var family_points: int = 0
-	for card: Card in _cards_dictionary.get(family_type, []):
-		var value: int = Card.RARITY_CARD_VALUE[card.rarity]
-		family_points += value * card.lvl
-	return family_points
-
+func get_family_level(family_type: Family.FamilyType) -> int:
+	return _family_levels.get(family_type, 0)
 
 func get_unique_card_count(family_type_or_list = null) -> int:
 	# If null or UNDEF, return total unique cards (active deck size)
@@ -75,35 +78,43 @@ func get_unique_card_count(family_type_or_list = null) -> int:
 		
 	return 0
 
+func add_card(card_to_add: Card) -> void:
+	super.add_card(card_to_add)
+	_add_or_improve_card_to_active_cards(card_to_add)
+	
 # ============================== Private function ==============================
 
 func _add_or_improve_card_to_active_cards(card_to_add: Card) -> void:
 	for card in _active_cards:
 		if card.name == card_to_add.name:
 			if not card.is_max_level():
+				_update_family_points_and_level(card_to_add)
+				has_changed.emit()
 				card.lvl += 1
 				Verbose.debug("'" + _owner_name + "' Upgrading card | " + card_to_add.name + " | " + str(card.lvl), Verbose.Category.DECK)
+				if card.is_max_level():
+					card_maxed.emit(card)
+				
 			else:
 				Verbose.error("'" + _owner_name + "' Trying to upgrade an already maximized card | " + card_to_add.name, Verbose.Category.DECK)
-			return
+			return 
 	Verbose.debug("'" + _owner_name + "' Adding new card | " + card_to_add.name + " | " + str(card_to_add.lvl), Verbose.Category.DECK)
 	_active_cards.append(card_to_add)
+	_update_family_points_and_level(card_to_add)
+	has_changed.emit()
 	if _cards_dictionary.has(card_to_add.families[0]):
 		_cards_dictionary[card_to_add.families[0]].append(card_to_add)
 	else:
 		_cards_dictionary[card_to_add.families[0]] = [card_to_add]
 
 
-func _specific_add(card_to_add: Card) -> void:
-	var old_points: int = get_family_points(card_to_add.families[0])
-	var old_level: int = GameManager.game_rules.get_family_level(old_points)
-	
-	_add_or_improve_card_to_active_cards(card_to_add)
-	
-	var new_points: int = get_family_points(card_to_add.families[0])
-	var new_level: int = GameManager.game_rules.get_family_level(new_points)
-	
-	if new_level > old_level:
-		family_leveled_up.emit(card_to_add.families[0], new_level)
-	
-	has_changed.emit()
+func _update_family_points_and_level(card: Card) -> void:
+	for family_type: Family.FamilyType in card.points.keys():
+		if _family_points.has(family_type):
+			_family_points[family_type] += card.points[family_type]
+		else:
+			_family_points[family_type] = card.points[family_type]
+		var old_level = _family_levels.get(family_type, 0)
+		_family_levels[family_type] = GameManager.game_rules.get_family_level(_family_points[family_type])
+		if old_level < _family_levels[family_type]:
+			family_leveled_up.emit(family_type, _family_levels[family_type])

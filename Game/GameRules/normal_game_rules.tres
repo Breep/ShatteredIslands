@@ -4,6 +4,12 @@
 
 [resource]
 script = ExtResource("1_8i4ne")
+rarity_card_numbers = Dictionary[int, int]({
+0: 10,
+1: 2,
+2: 2,
+3: 2
+})
 gold_starting_game = 10000000
 xp_per_family_lvl = 0
 xp_per_levels = Dictionary[int, int]({
