@@ -12,8 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://Modules/PickableClickable/PickableModule/pickable_module.tscn" id="9_614kc"]
 [ext_resource type="PackedScene" uid="uid://bg5efhnq0erdv" path="res://Modules/PickableClickable/ClickableModule/clickable_module.tscn" id="10_m73qc"]
 [ext_resource type="PackedScene" uid="uid://blncvfes4f2y7" path="res://Prototyping/Entity/AllActionPrototyping/testing_floorffa5.tscn" id="11_5hdqt"]
-[ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://Tool/QuickAnims/anim_rotating_module.tscn" id="12_oonkp"]
-[ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="13_fl2p6"]
 [ext_resource type="PackedScene" uid="uid://dp4x7wkxd6i2q" path="res://Prototyping/Entity/EntityController/entity_controller.tscn" id="19_x0odd"]
 
 [sub_resource type="Resource" id="Resource_3bpsj"]
@@ -216,77 +214,8 @@ _owner = NodePath("..")
 [node name="TestingFloorFFA5" parent="." unique_id=283551194 instance=ExtResource("11_5hdqt")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 
-[node name="Lights" type="Node3D" parent="." unique_id=1694597283]
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lights" unique_id=688220262]
-transform = Transform3D(0.58026236, 0.15287416, -0.79995316, 0, 0.98222506, 0.18770702, 0.8144296, -0.10891932, 0.56994826, -0.7068796, 0, 0)
-
-[node name="CenterLights" type="Node3D" parent="Lights" unique_id=1701824597]
-
-[node name="CenterLight1" type="Node3D" parent="Lights/CenterLights" unique_id=2004058400]
-
-[node name="SpotLight3D" type="SpotLight3D" parent="Lights/CenterLights/CenterLight1" unique_id=1406605121]
-transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0, 5, 20)
-spot_range = 50.0
-spot_attenuation = 0.1
-spot_angle = 20.0
-
-[node name="CenterLight2" type="Node3D" parent="Lights/CenterLights" unique_id=1236962993]
-transform = Transform3D(0.49999997, 0, 0.86602545, 0, 1, 0, -0.86602545, 0, 0.49999997, 0, 0, 0)
-
-[node name="SpotLight3D" type="SpotLight3D" parent="Lights/CenterLights/CenterLight2" unique_id=64483900]
-transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0, 5, 20)
-spot_range = 50.0
-spot_attenuation = 0.1
-spot_angle = 20.0
-
-[node name="CenterLight3" type="Node3D" parent="Lights/CenterLights" unique_id=782812267]
-transform = Transform3D(-0.50000006, 0, 0.8660254, 0, 1, 0, -0.8660254, 0, -0.50000006, 0, 0, 0)
-
-[node name="SpotLight3D" type="SpotLight3D" parent="Lights/CenterLights/CenterLight3" unique_id=1813051011]
-transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0, 5, 20)
-spot_range = 50.0
-spot_attenuation = 0.1
-spot_angle = 20.0
-
-[node name="CenterLight4" type="Node3D" parent="Lights/CenterLights" unique_id=909932420]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
-
-[node name="SpotLight3D" type="SpotLight3D" parent="Lights/CenterLights/CenterLight4" unique_id=1297619836]
-transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0, 5, 20)
-spot_range = 50.0
-spot_attenuation = 0.1
-spot_angle = 20.0
-
-[node name="CenterLight5" type="Node3D" parent="Lights/CenterLights" unique_id=171982763]
-transform = Transform3D(-0.4999999, 0, -0.86602545, 0, 1, 0, 0.86602545, 0, -0.4999999, 0, 0, 0)
-
-[node name="SpotLight3D" type="SpotLight3D" parent="Lights/CenterLights/CenterLight5" unique_id=1673076472]
-transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0, 5, 20)
-spot_range = 50.0
-spot_attenuation = 0.1
-spot_angle = 20.0
-
-[node name="CenterLight6" type="Node3D" parent="Lights/CenterLights" unique_id=403316870]
-transform = Transform3D(0.4999999, 0, -0.86602545, 0, 1, 0, 0.86602545, 0, 0.4999999, 0, 0, 0)
-
-[node name="SpotLight3D" type="SpotLight3D" parent="Lights/CenterLights/CenterLight6" unique_id=394980520]
-transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0, 5, 20)
-spot_range = 50.0
-spot_attenuation = 0.1
-spot_angle = 20.0
-
-[node name="AnimRotatingModule" parent="Lights/CenterLights" unique_id=176673634 node_paths=PackedStringArray("_owner") instance=ExtResource("12_oonkp")]
-_owner = NodePath("..")
-_rot_axis = 1
-_rot_period = 100.0
-_rot_max = 360.0
-_rot_full = true
-
-[node name="AnimHoveringModule" parent="Lights/CenterLights" unique_id=339025588 node_paths=PackedStringArray("_owner") instance=ExtResource("13_fl2p6")]
-_owner = NodePath("..")
-_hover_power = 1.0
-_hover_period = 100.0
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=688220262]
+transform = Transform3D(0.20953494, 0.9711535, -0.11382448, -0.5411095, 0.2121261, 0.8137586, 0.8144296, -0.10891935, 0.56994826, -0.7068796, -10.037087, 0)
 
 [connection signal="pressed" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StartFightButton" to="." method="_on_start_fight_button_pressed"]
 [connection signal="pressed" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StopFightButton" to="." method="_on_stop_fight_button_pressed"]

@@ -161,7 +161,7 @@ func _on_rank_s_timer_timeout() -> void:
 
 
 func _on_owner_critical_action_done(_entity_ref: Entity, _target: Entity, _action_type: Utils.ActionType, base_value: float, real_value: float) -> void:
-	# Iterate on_crit_callbacks registered by cards
+	# TODO Make cards listen to this signal like they do for action_done
 	for cb: Callable in _storm_stats.on_crit_callbacks:
 		cb.call(_target, base_value, real_value)
 
