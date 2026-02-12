@@ -1,70 +1,20 @@
 class_name FamilyFireStats
 extends FamilyStats
 
-#region Common Card
-# [DARK FOREST]
-var dark_forest_activated: bool
-var dark_forest_increase_dodge: float
-var dark_forest_ignite_stacks: float
+## Fire family stats — per-card flags have been removed.
+## Card logic is now self-contained in each HeroUpgrade via CardContext registries.
 
-# [EXPANSE UNIVERSE]
-var expanse_universe_activated: bool
-var expanse_universe_ignite_stacks: float
-var expanse_universe_period: float
+# Shared meteor modifier callbacks — cards append, FireManager reads when casting meteors
+var meteor_modifiers: Array[Callable] = []
 
-# [KUIPER BELT]
-var kuiper_belt_activated: bool
-var kuiper_belt_shield_amount: float
+# [TITANS PROTECTION] cumulative HP increase tracking (reset by FireManager on stop)
+var titans_protection_accumulated_hp: float = 0.0
 
-# [TITANS PROTECTION]
-var titans_protection_activated: bool
-var titans_protection_hp_amount: float
-
-# [CONSUMING THE STAR]
-var consuming_the_star_activated: bool
-var consuming_the_star_mana_burn: float
-
-# [SCORPIUS]
-var scorpius_activated: bool
-var scorpius_poison_stacks: float
-
-# [ORBITAL STATION]
-var orbital_station_activated: bool
-var orbital_station_crit_chance: float
-
-#endregion
-
-
-#region Rare Card
-# [COSMIC BOLT]
-var cosmic_bolt_activated: bool
-var cosmic_bolt_period: float
-var cosmic_bolt_damage_per_stack: float # Multiplicateur de dégâts
-var cosmic_bolt_bounce_chance_per_stack: float # Multiplicateur de chance
-
-# [COSMO'POLITAN]
-var fire_cosmopolitan_activated: bool
-var fire_cosmopolitan_bonus_damage_ratio: float
-
-# [END OF THE WORLD]
-var end_of_the_world_activated: bool # True if the player has at least one of this card
-var end_of_the_world_stack_multiplier: float # Ignite stack multiplier to trigger the card
-#endregion
-
-#region Epic Card
-# [NUKE]
-var nuke_activated: bool # True if the player has at least one of this card
-var nuke_ignite: float # ignite stack inflicted
-#endregion
-
-#region Legendary Card
-# [APOCALYPSE]
-var fire_apocalypse_activated: bool
-var fire_apocalypse_damage_ratio: float
-#endregion
-
+# [METEOR] Family passive configuration — set by the Meteor card, defaults used by passive
+var meteor_damage_percent: float = 5.0
+var meteor_radius: float = 3.0
 
 @export_group("Firebolt")
-@export var firebolt_activated: bool # True if the player has at least one of this card
-@export var firebolt_damage: float # Damage of the firebolt (in % of enemy current hp)
-@export var firebolt_period: float # Period of time between 2 firebolts (in s)
+@export var firebolt_activated: bool
+@export var firebolt_damage: float
+@export var firebolt_period: float

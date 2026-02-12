@@ -24,6 +24,7 @@ signal ultimate_casted()
 @export_subgroup("Prototyping")
 @export var _custom_deck: PlayerDeck
 @export var family_managers_enabled: bool = true
+@export var _override_family_levels: Dictionary[Family.FamilyType, int] = {}
 
 #region ============================== Public variables ==============================
 var display_mode: DisplayMode = DisplayMode.PREVIEW
@@ -105,8 +106,11 @@ func _ready() -> void:
 	if custom_base_stats == null and hero_desc != null and base_stats != null:
 		base_stats.reset_from_hero_desc(hero_desc, level)
 
+	# Compute family levels from deck (or use overrides for prototyping)
+	_compute_family_levels()
+
 	# Build card context for the new card system
-	_card_context = CardContext.create(self, stat_modifiers_registry, action_modifiers_registry, periodic_timer_registry, battle_callback_registry)
+	_card_context = CardContext.create(self, stat_modifiers_registry, action_modifiers_registry, auto_attack_modifier_registry, periodic_timer_registry, battle_callback_registry)
 
 	if deck != null:
 		_apply_all_cards_upgrades()
@@ -146,6 +150,16 @@ func _apply_display_mode() -> void:
 	# Update animator (weapons + animations)
 	if _hero_animation != null:
 		_hero_animation.apply_display_mode(display_mode)
+
+
+func _compute_family_levels() -> void:
+	for family_type: Family.FamilyType in _family_managers:
+		if _override_family_levels.has(family_type):
+			_family_managers[family_type].level = _override_family_levels[family_type]
+		elif deck != null:
+			var points: int = deck.get_family_points(family_type)
+			if GameManager.game_rules != null:
+				_family_managers[family_type].level = GameManager.game_rules.get_family_level(points)
 
 
 func _apply_all_cards_upgrades() -> void:

@@ -1,22 +1,39 @@
 class_name AttackSurgicalKnife
 extends HeroUpgrade
 
-@export var _chance: Array[float] 
+@export var _chance: Array[float]
 @export var _cleanse_amount: Array[float]
+@export var _rarity: Card.Rarity = Card.Rarity.RARE
 
-func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
-	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[Card.Rarity.RARE]:
-		printerr("Surgical Knife: Wrong cardlvl: ", cardlvl)
+
+func apply_card(ctx: CardContext, card_lvl: int) -> void:
+	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
+		printerr("Surgical Knife: Wrong card_lvl: ", card_lvl)
 		return
-	
-	stats.auto_attack.surgical_knife_activated = true
-	stats.auto_attack.surgical_knife_chance = _chance[cardlvl - 1]
-	stats.auto_attack.surgical_knife_cleanse_amount = _cleanse_amount[cardlvl - 1]
+
+	var chance: float = _chance[card_lvl - 1]
+	var amount: float = _cleanse_amount[card_lvl - 1]
+
+	var aa_mod := AutoAttackModifier.new()
+	aa_mod.id = &"Surgical Knife"
+	aa_mod.tags = [AutoAttackModifier.TagType.CARD]
+	aa_mod.is_one_time_effect = false
+	aa_mod.on_attack_logic_callback = func(_cb_vars: Dictionary) -> void:
+		if not Utils.is_randomize_modifier_active(chance):
+			return
+		ctx.hero.cleanse(ctx.hero, amount, &"Surgical Knife")
+
+	ctx.battle_callbacks.register_battle_start(&"Surgical Knife", func() -> void:
+		ctx.auto_attack_modifiers.register_modifier(aa_mod)
+	)
+	ctx.battle_callbacks.register_battle_end(&"Surgical Knife", func() -> void:
+		ctx.auto_attack_modifiers.unregister_modifier(&"Surgical Knife")
+	)
 
 
 func get_description(cardlvl: int) -> String:
-	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[Card.Rarity.RARE]:
+	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
 		printerr("Surgical Knife: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
-	
+
 	return str(_chance[cardlvl - 1]) + "% chance to cleanse " + str(_cleanse_amount[cardlvl - 1]) + " self negative stack(s) on attack."

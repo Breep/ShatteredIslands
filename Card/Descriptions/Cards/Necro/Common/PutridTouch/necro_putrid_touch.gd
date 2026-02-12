@@ -5,19 +5,25 @@ extends HeroUpgrade
 @export var _period: Array[float]
 @export var _rarity: Card.Rarity = Card.Rarity.COMMON
 
-func apply(stats: FamiliesStats, cardlvl: int) -> void:
-	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("Putrid Touch: Wrong cardlvl: ", cardlvl)
+
+func apply_card(ctx: CardContext, card_lvl: int) -> void:
+	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
+		printerr("Putrid Touch: Wrong card_lvl: ", card_lvl)
 		return
-	
-	stats.necro.necro_putrid_touch_activated = true
-	stats.necro.necro_putrid_touch_stacks = _stacks[cardlvl - 1]
-	stats.necro.necro_putrid_touch_period = _period[cardlvl - 1]
+
+	var stacks: int = _stacks[card_lvl - 1]
+	var period: float = _period[card_lvl - 1]
+
+	ctx.periodic_timers.register(&"Putrid Touch", period, func() -> void:
+		var target: Entity = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
+		if target == null: return
+		ctx.hero.inflict_condition_stacks(target, stacks, Utils.StackType.NECROSIS, &"Putrid Touch")
+	)
 
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
 		printerr("Putrid Touch: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
-	
+
 	return "Every " + str(_period[cardlvl - 1]) + "s, apply " + str(_stacks[cardlvl - 1]) + " stacks of [[NECROSIS]] to a random enemy."
