@@ -74,12 +74,14 @@ var _lightning_spam_timer: Timer
 func _ready() -> void:
 	_storm_stats = _owner.families_stats.storm
 
+
 func start() -> void:
 	_owner.critical_action_done.connect(_on_owner_critical_action_done)
 	_create_lightning_spam_timer()
 	_storm_stats.storm_breaker_memory.clear()
 	_current_point = 0
 	_current_rank = Rank.D
+
 
 func stop() -> void:
 	if _owner.critical_action_done.is_connected(_on_owner_critical_action_done):
@@ -99,10 +101,12 @@ func _create_lightning_spam_timer() -> void:
 	_lightning_spam_timer.timeout.connect(_on_lightning_spam_timer_timeout)
 	add_child(_lightning_spam_timer)
 
+
 func _get_crit_point(default_damage: float, real_damage: float) -> float:
 	if real_damage < 0: return 0
 	if default_damage < 1.0: return CRIT_POINT_DEFAULT
 	return CRIT_POINT_DEFAULT + (real_damage / default_damage) * CRIT_POINT_MULT
+
 
 func _call_the_lightning() -> void:
 	var target: Entity = _owner.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
@@ -146,12 +150,15 @@ func _on_current_rank_changed() -> void:
 		_:
 			_lightning_spam_timer.stop()
 
+
 func _on_lightning_spam_timer_timeout() -> void:
 	_call_the_lightning()
+
 
 func _on_rank_s_timer_timeout() -> void:
 	_current_point = 0
 	_current_rank = Rank.D
+
 
 func _on_owner_critical_action_done(_entity_ref: Entity, _target: Entity, _action_type: Utils.ActionType, base_value: float, real_value: float) -> void:
 	# Iterate on_crit_callbacks registered by cards

@@ -19,7 +19,7 @@ enum TagType {
 # ============================== Public variables ==============================
 
 var stat_type: EntityStats.StatType
-var action_type: Utils.ActionType # Used for action specific stats
+var action_type: Utils.ActionType # Used for action specific stats (For multiStats like Crit or DODGE)
 var id: StringName
 var calc_type: CalcType
 var value: float
