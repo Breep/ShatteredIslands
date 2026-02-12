@@ -15,3 +15,6 @@ name = "Light Collector"
 picture = SubResource("PlaceholderTexture2D_dg7at")
 families = Array[int]([5])
 player_upgrade = SubResource("Resource_light_collector")
+points = Dictionary[int, int]({
+5: 1
+})

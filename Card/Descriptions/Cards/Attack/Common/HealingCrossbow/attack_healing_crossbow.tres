@@ -16,5 +16,9 @@ name = "Healing Crossbow"
 picture = ExtResource("1_jocew")
 families = Array[int]([1, 5])
 player_upgrade = SubResource("Resource_kjnav")
+points = Dictionary[int, int]({
+1: 1,
+5: 1
+})
 lvl = 5
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

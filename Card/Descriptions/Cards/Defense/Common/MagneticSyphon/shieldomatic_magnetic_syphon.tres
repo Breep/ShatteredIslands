@@ -16,4 +16,8 @@ name = "Magnetic Syphon"
 picture = ExtResource("1_imfsi")
 families = Array[int]([2, 1])
 player_upgrade = SubResource("Resource_w33t8")
+points = Dictionary[int, int]({
+1: 1,
+2: 1
+})
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

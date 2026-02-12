@@ -15,4 +15,7 @@ name = "Diamond Sword"
 picture = ExtResource("1_o82qw")
 families = Array[int]([1])
 player_upgrade = SubResource("Resource_re7yq")
+points = Dictionary[int, int]({
+1: 1
+})
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

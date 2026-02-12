@@ -17,3 +17,7 @@ picture = SubResource("PlaceholderTexture2D_srgdc")
 families = Array[int]([1, 11])
 rarity = 1
 player_upgrade = SubResource("Resource_necrotic")
+points = Dictionary[int, int]({
+1: 1,
+11: 1
+})

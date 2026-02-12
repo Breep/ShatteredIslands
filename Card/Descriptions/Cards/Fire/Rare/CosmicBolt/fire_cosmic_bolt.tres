@@ -15,7 +15,10 @@ metadata/_custom_type_script = "uid://4klad06ppdmg"
 script = ExtResource("1_mrle8")
 name = "Cosmic Bolt"
 picture = ExtResource("1_dmfxw")
-families = Array[int]([3, 3])
+families = Array[int]([3])
 rarity = 1
 player_upgrade = SubResource("Resource_0un7i")
+points = Dictionary[int, int]({
+3: 2
+})
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

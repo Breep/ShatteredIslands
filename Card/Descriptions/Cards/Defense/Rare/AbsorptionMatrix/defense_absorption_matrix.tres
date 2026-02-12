@@ -12,6 +12,9 @@ _base_chance = Array[float]([7.0, 10.0, 50.0])
 script = ExtResource("1_card_template")
 name = "Absorption Matrix"
 picture = ExtResource("1_6sx4m")
-families = Array[int]([2, 2])
+families = Array[int]([2])
 rarity = 1
 player_upgrade = SubResource("Resource_xwdjj")
+points = Dictionary[int, int]({
+2: 2
+})

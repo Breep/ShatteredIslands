@@ -14,6 +14,9 @@ _base_shield = Array[float]([50.0, 60.0, 70.0])
 script = ExtResource("1_card_template")
 name = "Aether Redirector"
 picture = SubResource("PlaceholderTexture2D_lek2h")
-families = Array[int]([2, 2])
+families = Array[int]([2])
 rarity = 1
 player_upgrade = SubResource("Resource_upgrade")
+points = Dictionary[int, int]({
+2: 2
+})

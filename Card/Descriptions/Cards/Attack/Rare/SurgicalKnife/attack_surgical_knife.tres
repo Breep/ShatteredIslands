@@ -14,7 +14,10 @@ metadata/_custom_type_script = "uid://briloju0g5b45"
 script = ExtResource("1_3yipl")
 name = "Curative Knife"
 picture = ExtResource("1_bie7h")
-families = Array[int]([1, 1])
+families = Array[int]([1])
 rarity = 1
 player_upgrade = SubResource("Resource_3280w")
+points = Dictionary[int, int]({
+1: 2
+})
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

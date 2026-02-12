@@ -17,5 +17,9 @@ name = "Force Field"
 picture = ExtResource("1_n4itg")
 families = Array[int]([2, 6])
 player_upgrade = SubResource("Resource_0hj2g")
+points = Dictionary[int, int]({
+2: 1,
+6: 1
+})
 lvl = 5
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

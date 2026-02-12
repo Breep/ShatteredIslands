@@ -14,7 +14,10 @@ metadata/_custom_type_script = "uid://6in7yxqsmu2i"
 script = ExtResource("1_hblx7")
 name = "Chain Lightning"
 picture = ExtResource("1_64hei")
-families = Array[int]([4, 4, 4])
+families = Array[int]([4])
 rarity = 2
 player_upgrade = SubResource("Resource_kaglu")
+points = Dictionary[int, int]({
+4: 3
+})
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

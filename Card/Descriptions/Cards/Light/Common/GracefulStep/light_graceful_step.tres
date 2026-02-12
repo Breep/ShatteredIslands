@@ -16,4 +16,7 @@ name = "Graceful Step"
 picture = ExtResource("1_1ds76")
 families = Array[int]([5])
 player_upgrade = SubResource("Resource_5lysk")
+points = Dictionary[int, int]({
+5: 1
+})
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

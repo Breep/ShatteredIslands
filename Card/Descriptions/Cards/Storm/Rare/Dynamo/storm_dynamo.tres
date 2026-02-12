@@ -16,3 +16,8 @@ name = "Dynamo"
 picture = SubResource("PlaceholderTexture2D_01jkn")
 families = Array[int]([4, 5, 2])
 player_upgrade = SubResource("Resource_upgrade")
+points = Dictionary[int, int]({
+2: 1,
+4: 1,
+5: 1
+})

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Family" load_steps=18 format=3 uid="uid://dw66lnwee8ruk"]
+[gd_resource type="Resource" script_class="Family" format=3 uid="uid://dw66lnwee8ruk"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_yud7m"]
 [ext_resource type="Resource" uid="uid://dnxmyxqxal6sw" path="res://Card/Descriptions/Cards/Defense/Common/AvengersAssemble/shieldomatic_avengers_assemble.tres" id="2_7cbwc"]

@@ -16,4 +16,7 @@ name = "Life Spring"
 picture = ExtResource("1_eptq0")
 families = Array[int]([5])
 player_upgrade = SubResource("Resource_eptq0")
+points = Dictionary[int, int]({
+5: 1
+})
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

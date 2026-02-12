@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://d26wrf73bpc87"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://d26wrf73bpc87"]
 
 [ext_resource type="Texture2D" uid="uid://hutgbpqkqcb2" path="res://Card/Descriptions/Cards/Fire/Common/ConsummingTheStar/fire_consuming_the_star.png" id="1_4gsxf"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_21jm8"]
@@ -15,4 +15,8 @@ name = "Consuming The Star"
 picture = ExtResource("1_4gsxf")
 families = Array[int]([3, 8])
 player_upgrade = SubResource("Resource_7sv01")
+points = Dictionary[int, int]({
+3: 1,
+8: 1
+})
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

@@ -16,4 +16,8 @@ name = "Orbital Station"
 picture = ExtResource("1_4j42q")
 families = Array[int]([3, 4])
 player_upgrade = SubResource("Resource_nmbcg")
+points = Dictionary[int, int]({
+3: 1,
+4: 1
+})
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

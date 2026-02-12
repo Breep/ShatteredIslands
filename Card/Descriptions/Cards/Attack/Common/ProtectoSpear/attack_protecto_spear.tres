@@ -15,3 +15,7 @@ name = "Protecto'Spear"
 picture = ExtResource("1_mr5na")
 families = Array[int]([1, 2])
 player_upgrade = SubResource("Resource_upgrade")
+points = Dictionary[int, int]({
+1: 1,
+2: 1
+})

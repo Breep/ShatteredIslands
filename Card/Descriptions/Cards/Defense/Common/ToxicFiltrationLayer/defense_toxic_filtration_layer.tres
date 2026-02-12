@@ -14,3 +14,7 @@ name = "Toxic Filtration Layer"
 picture = ExtResource("1_a2mxx")
 families = Array[int]([2, 7])
 player_upgrade = SubResource("Resource_m26y3")
+points = Dictionary[int, int]({
+2: 1,
+7: 1
+})

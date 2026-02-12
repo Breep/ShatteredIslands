@@ -16,4 +16,7 @@ name = "Evasive Growth"
 picture = ExtResource("1_ka6c0")
 families = Array[int]([6])
 player_upgrade = SubResource("Resource_ka6c0")
+points = Dictionary[int, int]({
+6: 1
+})
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

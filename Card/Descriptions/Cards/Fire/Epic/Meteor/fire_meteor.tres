@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://cdr51p56pftqi"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cdr51p56pftqi"]
 
 [ext_resource type="Texture2D" uid="uid://c5uqdlixv1t8a" path="res://Data/Assets/Card/Portraits/Fire/card_portrait_fire_meteor.png" id="1_61wps"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_71aee"]
@@ -15,8 +15,11 @@ metadata/_custom_type_script = "uid://qpy43lrfpomj"
 script = ExtResource("1_71aee")
 name = "Meteor"
 picture = ExtResource("1_61wps")
-rarity = 1
 families = Array[int]([3])
+rarity = 1
 player_upgrade = SubResource("Resource_pn366")
+points = Dictionary[int, int]({
+3: 3
+})
 lvl = 2
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

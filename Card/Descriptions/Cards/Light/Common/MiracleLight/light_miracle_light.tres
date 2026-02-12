@@ -15,4 +15,8 @@ name = "Miracle Light"
 picture = ExtResource("1_kep51")
 families = Array[int]([5, 10])
 player_upgrade = SubResource("Resource_d7ugv")
+points = Dictionary[int, int]({
+5: 1,
+10: 1
+})
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

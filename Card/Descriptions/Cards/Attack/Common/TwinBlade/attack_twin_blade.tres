@@ -15,5 +15,8 @@ name = "Twin Blade"
 picture = ExtResource("1_hf1xf")
 families = Array[int]([1])
 player_upgrade = SubResource("Resource_us67u")
+points = Dictionary[int, int]({
+1: 1
+})
 lvl = 5
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

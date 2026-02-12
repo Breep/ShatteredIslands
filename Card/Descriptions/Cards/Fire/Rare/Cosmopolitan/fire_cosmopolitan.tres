@@ -16,3 +16,6 @@ picture = SubResource("PlaceholderTexture2D_gfewo")
 families = Array[int]([3])
 rarity = 1
 player_upgrade = SubResource("Resource_cosmopolitan")
+points = Dictionary[int, int]({
+3: 2
+})
