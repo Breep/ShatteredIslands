@@ -25,20 +25,8 @@ var shop_deck: ShopDeck
 
 # [Server only] Used to know if the server can start to answer clients
 var _is_ready: bool = false
-
-# [Server only]
-# Pool de cartes disponibles par joueur, organisé par rareté uniquement
-# Permet un tirage O(1) une fois la rareté déterminée
-var _player_available_cards: Dictionary[int, Dictionary] # Dictionary[Card.Rarity, Array[Card]]
-# {
-#   player_id_1: {
-#     COMMON: [Card, Card, Card, ...],
-#     RARE: [Card, Card, ...],
-#     EPIC: [Card, ...],
-#     LEGENDARY: [Card, Card, Card]
-#   },
-#   player_id_2: { ... }
-# }
+var _game_rules: GameRules
+var _families: Array[Family]
 
 # [Server only] Dictionary of all cards distributed in all player shop
 var _cards_in_player_shop: Dictionary[int, Array] # { player_id, Array[Card] }
@@ -51,9 +39,11 @@ func clear() -> void:
 
 
 func init(families: Array[Family], rules: GameRules) -> void:
+	_game_rules = rules
+	_families = families
 	_construct_shop_deck(families, rules)
 	_init_cards_in_player_shop()
-
+	
 # ============================== Public functions ==============================
 # Calling ServerCardShop is different from client and server as there are multiple players at the same time on the server (1 human + n bots)
 
@@ -66,7 +56,7 @@ func try_refresh_shop_for_player(player: Player, is_free: bool) -> Array[Card]:
 
 
 func try_buy_card_from_player_shop(player: Player, card: Card) -> bool:
-	Verbose.trace("try_buy_card_from_player_shop() | " + player.name + " | " + card.name, Verbose.Category.CARD_SHOP)
+	Verbose.debug("try_buy_card_from_player_shop() | " + player.name + " | " + card.name + " | " + str(card.uid), Verbose.Category.CARD_SHOP)
 	if multiplayer.is_server():
 		return _server_try_buy_card_from_player_shop(player, card)
 	else:
@@ -80,31 +70,12 @@ func try_buy_random_card_for_player(player: Player) -> Card:
 	else:
 		return await _client_try_buy_random_card_for_player()
 
-# Remet toutes les cartes d'un joueur éliminé dans le pool
-func return_player_cards_to_pool(player: Player) -> void:
-	var cards_to_return: Array[Card] = player.deck.get_cards_raw()
-	for card in cards_to_return:
-		# Remettre la carte au niveau 1
-		var base_card: Card = card.duplicate()
-		base_card.lvl = 1
-		# Ajouter au pool global
-		shop_deck.add_card(base_card)
-		# Mettre à jour les pools de tous les joueurs vivants
-	for player_id in _player_available_cards.keys():
-		if PlayerManager.players[player_id].is_alive:
-			_player_available_cards[player_id] = _build_player_available_pool(PlayerManager.players[player_id])
-
 # ============================== Private function ==============================
-
-# ========== INIT SERVER CARD SHOP
 
 func _init_cards_in_player_shop() -> void:
 	Verbose.trace("INIT CARDS IN PLAYER SHOP -> " + str(PlayerManager.players.keys()), Verbose.Category.CARD_SHOP)
 	for player_id in PlayerManager.players.keys():
 		_cards_in_player_shop[player_id] = []
-		_player_available_cards[player_id] = _build_player_available_pool(PlayerManager.players[player_id])
-		PlayerManager.players[player_id].deck.family_leveled_up.connect(_on_player_family_leveled_up)
-
 
 func _construct_shop_deck(families: Array[Family], rules: GameRules) -> void:
 	Verbose.trace("_construct_shop_deck() | " + str(families.size()), Verbose.Category.CARD_SHOP)
@@ -114,14 +85,10 @@ func _construct_shop_deck(families: Array[Family], rules: GameRules) -> void:
 	_shop_deck_shuffled.emit()
 
 # ========== DRAW
-
 func _server_draw_n_cards(player: Player, number_of_cards_to_draw: int) -> Array[Card]:
 	Verbose.trace("_server_draw_n_cards() | " + player.name + " | " + str(number_of_cards_to_draw), Verbose.Category.CARD_SHOP)
 	if not _is_ready: await _shop_deck_shuffled
-	var cards_drawn = shop_deck.draw_n_cards(number_of_cards_to_draw, player.deck)
-	for card in cards_drawn:
-		for available_cards in _player_available_cards.values():
-			available_cards[card.rarity].erase(card)
+	var cards_drawn = shop_deck.draw_cards_for_player(player, number_of_cards_to_draw)
 	
 	return cards_drawn
 
@@ -140,7 +107,6 @@ func _server_try_buy_card_from_player_shop(player: Player, card_to_buy: Card) ->
 	_cards_in_player_shop[player.id].erase(card_to_buy)
 	player.deck.add_card(card_to_buy)
 	player.gold -= 100
-	shop_deck.remove_from_available_cards(card_to_buy)
 	return true
 
 
@@ -185,7 +151,6 @@ func _ask_buy_card_from_player_shop(card_uid: int) -> void:
 	_cards_in_player_shop[peer_id].erase(card_to_buy)
 	PlayerManager.players[peer_id].deck.add_card(card_to_buy)
 	PlayerManager.players[peer_id].gold -= 100
-	shop_deck.remove_from_available_cards(card_to_buy)
 	_answer_buy_card_from_player_shop.rpc_id(peer_id, ServerResponse.OK)
 
 
@@ -202,7 +167,7 @@ func _server_try_buy_random_card_for_player(player: Player) -> Card:
 	if player.gold < 90:
 		Verbose.warn("ServerCardShop: (" + player.name + ") Not enought money", Verbose.Category.CARD_SHOP)
 		return null
-	var cards: Array[Card] = shop_deck.draw_n_cards(1, player.deck)
+	var cards: Array[Card] = shop_deck.draw_cards_for_player(player, 1)
 	if cards.is_empty():
 		Verbose.warn("ServerCardShop: (" + player.name + ") No more random card from the server", Verbose.Category.CARD_SHOP)
 		return null
@@ -235,7 +200,7 @@ func _ask_buy_random_card_from_all() -> void:
 	if player.gold < 90:
 		_answer_buy_random_card_from_all(-1, ServerResponse.NOT_ENOUGHT_MONEY)
 		return
-	var cards: Array[Card] = shop_deck.draw_n_cards(1, player.deck)
+	var cards: Array[Card] = shop_deck.draw_cards_for_player(player, 1)
 	player.deck.add_card(cards[0])
 	player.gold -= 90
 	_answer_buy_random_card_from_all.rpc_id(peer_id, cards[0].uid, ServerResponse.OK)
@@ -318,52 +283,3 @@ func _get_card_in_array(uid: int, cards: Array[Card]) -> Card:
 		if card.uid == uid:
 			return card
 	return null
-
-func _build_player_available_pool(player: Player) -> Dictionary[Card.Rarity, Array]:
-	var player_pool: Dictionary[Card.Rarity, Array] = {}
-	
-	# Parcourir toutes les familles actives
-	for family in GameManager.active_families:
-		var family_type: Family.FamilyType = family.family_type
-		
-		# Calculer le niveau du joueur dans cette famille
-		var family_points: int = player.deck.get_family_points(family_type)
-		var family_level: int = GameManager.game_rules.get_family_level(family_points)
-		
-		# Récupérer les raretés débloquées
-		var locked_rarities: Array[Card.Rarity] = GameManager.game_rules.get_locked_rarities(family_level)
-		
-		# Ajouter les cartes de cette famille aux raretés débloquées
-		for rarity in shop_deck.get_rarities_for_family(family_type):
-			# Ignorer les raretés verrouillées
-			if rarity in locked_rarities:
-				continue
-			
-			# Initialiser l'array pour cette rareté
-			if not player_pool.has(rarity):
-				player_pool[rarity] = []
-			
-			# Ajouter toutes les cartes de cette famille/rareté
-			# (on ne copie QUE les références, pas les objets)
-			player_pool[rarity].append_array(shop_deck.get_cards_for_rarity_for_family(family_type, rarity))
-	
-	# Retirer les cartes déjà au niveau max pour ce joueur
-	_remove_max_level_cards_from_pool(player, player_pool)
-	
-	return player_pool
-
-func _remove_max_level_cards_from_pool(player: Player, player_pool: Dictionary[Card.Rarity, Array]) -> void:
-	var max_lvl_cards: Array[Card] = player.deck.get_max_lvl_cards()
-	for max_card in max_lvl_cards:
-		for rarity in player_pool.keys():
-			var i: int = player_pool[rarity].size() - 1
-			while i >= 0:
-				if player_pool[rarity][i].name == max_card.name:
-					player_pool[rarity].remove_at(i)
-					i -= 1
-
-func _on_player_family_leveled_up(player: Player, family_type: Family.FamilyType, new_level: int) -> void:
-	Verbose.debug("%s leveled up %s to %d" % [player.name, family_type, new_level], Verbose.Category.CARD_SHOP)
-	
-	# Reconstruire le pool du joueur pour inclure les nouvelles raretés
-	_player_available_cards[player.id] = _build_player_available_pool(player)
