@@ -10,10 +10,10 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
 		printerr("Aether Redirector: Wrong card_lvl: ", card_lvl)
 		return
-
+	
 	var period: float = _base_period[card_lvl - 1]
 	var shield_amount: float = _base_shield[card_lvl - 1]
-
+	
 	var _scan_and_redirect := func() -> void:
 		if not is_instance_valid(ctx.hero) or ctx.hero.is_dead():
 			return
@@ -34,7 +34,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 				&"Aether Redirector"
 			)
 			return
-
+	
 	ctx.periodic_timers.register(&"Aether Redirector", period, _scan_and_redirect)
 
 

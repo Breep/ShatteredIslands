@@ -11,7 +11,7 @@ func direct_damage(target: Entity, damage: float, damage_type: Utils.DamageType,
 	var crit_multiplier: Dictionary = _get_crit_multiplier(Utils.damage_to_action(damage_type))
 	damage = damage_before_crit * crit_multiplier["multiplier"]
 	var damage_done: float = target.take_damage(damage, damage_type, crit_multiplier["is_critical"], action_id, _owner)
-	
+
 	return {
 		ResultKey.VALUE: damage_done,
 		ResultKey.IS_CRITICAL: crit_multiplier["is_critical"],

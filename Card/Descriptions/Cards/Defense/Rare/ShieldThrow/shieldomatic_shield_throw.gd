@@ -24,7 +24,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		var proj_stats := ProjectileStats.new()
 		proj_stats.is_bouncing = true
 		proj_stats.bounces_remaining = 20
-		proj_stats.on_hit_logic_callbacks.append(func(cb_vars: Dictionary) -> void:
+		proj_stats.on_hit_callbacks.append(func(cb_vars: Dictionary) -> void:
 			if not cb_vars.has(AutoAttackModifier.VarType.TARGET):
 				return
 			var hit_target: Entity = cb_vars[AutoAttackModifier.VarType.TARGET]

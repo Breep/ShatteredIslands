@@ -134,7 +134,6 @@ func _on_owner_died(_unused) -> void:
 
 
 func _on_owner_auto_attack_completed(_entity: Entity) -> void:
-	print("DEBUG AutoAttackPeriodicModule: _on_owner_auto_attack_completed")
 	_auto_attack_timer.start()
 
 

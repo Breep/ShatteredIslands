@@ -26,18 +26,18 @@ var _stats: ProjectileStats
 var _hit_history: Array[Entity] = []
 var _life: float = 0.0
 
+func add_bounce(additional_bounces: float) -> void:
+	_stats.bounces_remaining += additional_bounces
 
-## Returns the current target of this projectile.
+
 func get_target() -> Entity:
 	return _target
 
 
-## Returns the source entity that fired this projectile.
 func get_source() -> Entity:
 	return _source
 
 
-## Initialize the projectile with _source, _target, and _stats.
 ## Must be called before adding to scene tree.
 func init(p_source: Entity, p_target: Entity, p_stats: ProjectileStats) -> Projectile:
 	_source = p_source

@@ -11,15 +11,15 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		printerr("Russian Roulette: Wrong card_lvl: ", card_lvl)
 		return
 
-	var _min_p: int = _min_percent[card_lvl - 1]
-	var _max_p: int = _max_percent[card_lvl - 1]
+	var min_p: int = _min_percent[card_lvl - 1]
+	var max_p: int = _max_percent[card_lvl - 1]
 
 	var aa_mod := AutoAttackModifier.new()
 	aa_mod.id = &"Russian Roulette"
 	aa_mod.tags = [AutoAttackModifier.TagType.CARD]
 	aa_mod.is_one_time_effect = false
-	aa_mod.on_attack_logic_callback = func(_cb_vars: Dictionary) -> void:
-		pass # TODO: rework with direct callback (damage multiplier)
+	aa_mod.damage_modifier_callback = func(cb_vars: Dictionary) -> void:
+		cb_vars[AutoAttackModifier.VarType.DAMAGE_MUL] += Utils.get_randf_range(min_p, max_p)
 
 	ctx.battle_callbacks.register_battle_start(&"Russian Roulette", func() -> void:
 		ctx.auto_attack_modifiers.register_modifier(aa_mod)

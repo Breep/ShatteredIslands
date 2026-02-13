@@ -18,16 +18,13 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	aa_mod.id = &"Surgical Knife"
 	aa_mod.tags = [AutoAttackModifier.TagType.CARD]
 	aa_mod.is_one_time_effect = false
-	aa_mod.on_attack_logic_callback = func(_cb_vars: Dictionary) -> void:
+	aa_mod.additional_effect_callback = func(_cb_vars: Dictionary) -> void:
 		if not Utils.is_randomize_modifier_active(chance):
 			return
 		ctx.hero.cleanse(ctx.hero, amount, &"Surgical Knife")
 
 	ctx.battle_callbacks.register_battle_start(&"Surgical Knife", func() -> void:
 		ctx.auto_attack_modifiers.register_modifier(aa_mod)
-	)
-	ctx.battle_callbacks.register_battle_end(&"Surgical Knife", func() -> void:
-		ctx.auto_attack_modifiers.unregister_modifier(&"Surgical Knife")
 	)
 
 

@@ -11,15 +11,18 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		printerr("Necrotic Bullet: Wrong card_lvl: ", card_lvl)
 		return
 
-	var _chance_val: float = float(_chance[card_lvl - 1])
-	var _stacks: float = float(_necrosis_stacks[card_lvl - 1])
+	var chance: float = float(_chance[card_lvl - 1])
+	var stacks: float = float(_necrosis_stacks[card_lvl - 1])
 
 	var aa_mod := AutoAttackModifier.new()
 	aa_mod.id = &"Necrotic Bullet"
 	aa_mod.tags = [AutoAttackModifier.TagType.CARD]
 	aa_mod.is_one_time_effect = false
-	aa_mod.on_attack_logic_callback = func(_cb_vars: Dictionary) -> void:
-		pass # TODO: rework with direct callback
+	aa_mod.additional_effect_callback = func(cb_vars: Dictionary) -> void:
+		if not Utils.is_randomize_modifier_active(chance): return
+		var target = cb_vars.get(AutoAttackModifier.VarType.TARGET)
+		if target == null or not is_instance_valid(target): return
+		ctx.hero.inflict_condition_stacks(target, stacks, Utils.StackType.NECROSIS, &"Necrotic Bullet")
 
 	ctx.battle_callbacks.register_battle_start(&"Necrotic Bullet", func() -> void:
 		ctx.auto_attack_modifiers.register_modifier(aa_mod)

@@ -9,25 +9,25 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[Card.Rarity.COMMON]:
 		printerr("Venomous Darts: Wrong card_lvl: ", card_lvl)
 		return
-
+	
 	var multiplier: float = _multiplier[card_lvl - 1]
 	var darts_number: int = _darts_number[card_lvl - 1]
 	var period: float = _period[card_lvl - 1]
-
+	
 	var on_hit_callback := func(cb_vars: Dictionary) -> void:
 		if not cb_vars.has(ProjectileStats.VarType.TARGET): return
 		var target: Entity = cb_vars[ProjectileStats.VarType.TARGET]
-		if target == null or target.is_queued_for_deletion(): return
-		var damage := int(float(target.conditions.poison_stacks) * multiplier)
+		if target == null or not is_instance_valid(target): return
+		var damage := float(target.conditions.poison_stacks) * multiplier
 		ctx.hero.direct_damage(target, damage, Utils.DamageType.PHYSICAL, &"Venomous Darts")
-
+	
 	ctx.periodic_timers.register(&"Venomous Darts", period, func() -> void:
 		for i in darts_number:
 			var target: Entity = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
 			if target == null: return
 			var projectile_stats := ProjectileStats.new()
-			projectile_stats.on_hit_logic_callbacks.append(on_hit_callback)
-			ctx.hero.projectile_attack(target, Projectile.Type.VENOMOUS_DART, ctx.hero._turret._projectile_spawn_point, projectile_stats)
+			projectile_stats.on_hit_callbacks.append(on_hit_callback)
+			ctx.hero.projectile_attack(target, Projectile.Type.VENOMOUS_DART, ctx.hero, projectile_stats)
 	)
 
 

@@ -13,19 +13,20 @@ enum TagType {
 enum VarType { # Variable types of the callbacks dictionary
 	SOURCE,
 	TARGET,
-	PROJECTILE,
-	POSITION
+	POSITION,
+	DAMAGE,
+	DAMAGE_ADD,
+	DAMAGE_MUL,
+	PROJECTILE
 }
 
 # ============================== Public variables ==============================
 
 var id: StringName
-var damage_flat: float
-var damage_mult: float
+var add: float # Flat damage add
+var mul: float # % damage mult
 var tags: Array[TagType]
 var is_one_time_effect: bool = true
 
-var on_attack_logic_callback := Callable() # var: Dictionary
-var on_attack_visual_callback := Callable() # var: Dictionary
-var on_hit_logic_callback := Callable() # var: Dictionary
-var on_hit_visual_callback := Callable() # var: Dictionary
+var damage_modifier_callback := Callable()
+var additional_effect_callback := Callable() # var: Dictionary

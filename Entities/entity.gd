@@ -347,10 +347,10 @@ func connect_to_fighting_area(fighting_area_ref: FightingArea) -> void:
 #endregion
 
 #region ============================== Action Senders ==============================
-func direct_damage(target: Entity, damage: float, damage_type: Utils.DamageType, action_id: StringName) -> void:
-	if _damage_sender == null: return
+func direct_damage(target: Entity, damage: float, damage_type: Utils.DamageType, action_id: StringName) -> float:
+	if _damage_sender == null: return 0
 	var result: Dictionary = _damage_sender.direct_damage(target, damage, damage_type, action_id)
-	if result.is_empty(): return
+	if result.is_empty(): return 0
 	
 	var action_type: Utils.ActionType = Utils.damage_to_action(damage_type)
 	
@@ -358,12 +358,13 @@ func direct_damage(target: Entity, damage: float, damage_type: Utils.DamageType,
 		critical_action_done.emit(target, action_type, result[ActionSenderModule.ResultKey.BASE_VALUE], result[ActionSenderModule.ResultKey.VALUE])
 	
 	action_done.emit(target, action_type, action_id, result[ActionSenderModule.ResultKey.VALUE], result[ActionSenderModule.ResultKey.IS_CRITICAL])
+	return result[ActionSenderModule.ResultKey.VALUE]
 
 
-func direct_damage_percent(target: Entity, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier, action_id: StringName) -> void:
-	if _damage_sender == null: return
+func direct_damage_percent(target: Entity, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier, action_id: StringName) -> float:
+	if _damage_sender == null: return 0
 	var result: Dictionary = _damage_sender.direct_damage_percent(target, damage_percent, damage_type, percent_modifier, action_id)
-	if result.is_empty(): return
+	if result.is_empty(): return 0
 	
 	var action_type: Utils.ActionType = Utils.damage_to_action(damage_type)
 	
@@ -371,6 +372,7 @@ func direct_damage_percent(target: Entity, damage_percent: float, damage_type: U
 		critical_action_done.emit(target, action_type, result[ActionSenderModule.ResultKey.BASE_VALUE], result[ActionSenderModule.ResultKey.VALUE])
 	
 	action_done.emit(target, action_type, action_id, result[ActionSenderModule.ResultKey.VALUE], result[ActionSenderModule.ResultKey.IS_CRITICAL])
+	return result[ActionSenderModule.ResultKey.VALUE]
 
 
 func auto_attack(target: Entity) -> void:

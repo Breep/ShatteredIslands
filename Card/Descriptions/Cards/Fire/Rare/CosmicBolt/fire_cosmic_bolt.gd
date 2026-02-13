@@ -21,8 +21,8 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if target == null or not is_instance_valid(target): return
 		var proj_stats := ProjectileStats.new()
 		proj_stats.on_hit_callbacks.append(func(cb_vars: Dictionary) -> void:
-			if not cb_vars.has(AutoAttackModifier.VarType.TARGET): return
-			var hit_target: Entity = cb_vars[AutoAttackModifier.VarType.TARGET]
+			if not cb_vars.has(ProjectileStats.VarType.TARGET): return
+			var hit_target: Entity = cb_vars[ProjectileStats.VarType.TARGET]
 			if hit_target == null or not is_instance_valid(hit_target) or hit_target.is_queued_for_deletion(): return
 			
 			var ignite_stacks: float = hit_target.conditions.ignite_stacks
@@ -30,11 +30,10 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			if damage > 0:
 				ctx.hero.direct_damage(hit_target, damage, Utils.DamageType.MAGICAL, &"Cosmic Bolt")
 			
-			#var bc: float = float(ignite_stacks) * bounce_chance
-			#if Utils.is_randomize_modifier_active(bc):
-				#var new_target: Entity = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
-				#if new_target != null:
-					#shoot_ref[0].call(new_target)
+			var bc: float = float(ignite_stacks) * bounce_chance
+			if Utils.is_randomize_modifier_active(bc):
+				var projectile: Projectile = cb_vars[ProjectileStats.VarType.PROJECTILE]
+				projectile.add_bounce(1)
 		)
 		ctx.hero.projectile_attack(target, Projectile.Type.COSMIC_BOLT, ctx.hero, proj_stats)
 	)
