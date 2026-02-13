@@ -98,10 +98,10 @@ func _on_body_entered(body: Node3D) -> void:
 	for cb: Callable in _stats.on_hit_callbacks:
 		if cb.is_valid():
 			cb.call({
-				AutoAttackModifier.VarType.SOURCE: _source,
-				AutoAttackModifier.VarType.TARGET: hit_target,
-				AutoAttackModifier.VarType.PROJECTILE: self,
-				AutoAttackModifier.VarType.POSITION: global_position
+				ProjectileStats.VarType.SOURCE: _source,
+				ProjectileStats.VarType.TARGET: hit_target,
+				ProjectileStats.VarType.PROJECTILE: self,
+				ProjectileStats.VarType.POSITION: global_position
 			})
 	
 	# Handle bouncing if remaining bounces
@@ -112,8 +112,6 @@ func _on_body_entered(body: Node3D) -> void:
 		queue_free()
 
 
-## Redirect this projectile to a new target.
-## Handles died-signal reconnection and trajectory update.
 func retarget(new_target: Entity) -> void:
 	if new_target == null or not is_instance_valid(new_target):
 		return

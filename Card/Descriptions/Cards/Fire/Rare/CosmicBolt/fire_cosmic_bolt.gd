@@ -10,15 +10,14 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
 		printerr("Cosmic Bolt: Wrong card_lvl: ", card_lvl)
 		return
-
+	
 	var dmg_per_stack: float = _damage_per_stack[card_lvl - 1]
-	var bounce_chance: float = _bounce_chance_per_stack[card_lvl - 1] # TODO
+	var bounce_chance: float = _bounce_chance_per_stack[card_lvl - 1]
 	var period: float = _period[card_lvl - 1]
-
-	# Self-referencing lambda for recursive bounce via Array[Callable] trick
-	var shoot_ref: Array[Callable] = []
-
-	var shoot := func(target: Entity) -> void:
+	
+	ctx.periodic_timers.register(&"Cosmic Bolt", period, func() -> void:
+		var target: Entity = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.HIGHEST_HP_ENEMY)
+		if target == null: return
 		if target == null or not is_instance_valid(target): return
 		var proj_stats := ProjectileStats.new()
 		proj_stats.on_hit_callbacks.append(func(cb_vars: Dictionary) -> void:
@@ -38,13 +37,6 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 					#shoot_ref[0].call(new_target)
 		)
 		ctx.hero.projectile_attack(target, Projectile.Type.COSMIC_BOLT, ctx.hero, proj_stats)
-
-	shoot_ref.append(shoot)
-
-	ctx.periodic_timers.register(&"Cosmic Bolt", period, func() -> void:
-		var target: Entity = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.HIGHEST_HP_ENEMY)
-		if target == null: return
-		shoot_ref[0].call(target)
 	)
 
 

@@ -15,8 +15,8 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var period: float = _period[card_lvl - 1]
 
 	var on_hit_callback := func(cb_vars: Dictionary) -> void:
-		if not cb_vars.has(AutoAttackModifier.VarType.TARGET): return
-		var target: Entity = cb_vars[AutoAttackModifier.VarType.TARGET]
+		if not cb_vars.has(ProjectileStats.VarType.TARGET): return
+		var target: Entity = cb_vars[ProjectileStats.VarType.TARGET]
 		if target == null or target.is_queued_for_deletion(): return
 		var damage := int(float(target.conditions.poison_stacks) * multiplier)
 		ctx.hero.direct_damage(target, damage, Utils.DamageType.PHYSICAL, &"Venomous Darts")

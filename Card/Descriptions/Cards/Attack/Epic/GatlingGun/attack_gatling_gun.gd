@@ -8,6 +8,9 @@ extends HeroUpgrade
 
 const GATLING_TICK: float = 1.0
 
+enum {
+	START_TIME
+}
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
@@ -18,14 +21,14 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var speed_max: float = _attack_speed_max[card_lvl - 1]
 	var duration: float = _duration
 
-	var state := {&"start_time_ms": 0}
+	var state := {START_TIME: 0}
 
 	ctx.battle_callbacks.register_battle_start(&"Gatling Gun", func() -> void:
-		state[&"start_time_ms"] = Time.get_ticks_msec()
+		state[START_TIME] = Time.get_ticks_msec()
 	)
 
 	ctx.periodic_timers.register(&"Gatling Gun", GATLING_TICK, func() -> void:
-		var time_elapsed: float = (Time.get_ticks_msec() - state[&"start_time_ms"]) / 1000.0
+		var time_elapsed: float = (Time.get_ticks_msec() - state[START_TIME]) / 1000.0
 		var attack_speed_boost: float = remap(time_elapsed, 0, duration, speed_min, speed_max)
 		var clamped_boost: float = clampf(attack_speed_boost, speed_min, speed_max)
 
@@ -44,5 +47,5 @@ func get_description(cardlvl: int) -> String:
 		printerr("Gatling Gun: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "[center]Increase auto-attack speed from " + str(_attack_speed_min[cardlvl - 1]) + " to " + str(_attack_speed_max[cardlvl - 1]) + \
-			" during " + str(_duration) + "s[/center]"
+	return "Increase auto-attack speed from " + str(_attack_speed_min[cardlvl - 1]) + " to " + str(_attack_speed_max[cardlvl - 1]) + \
+			" during " + str(_duration) + "s"
