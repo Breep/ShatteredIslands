@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dlh177khgltfq"]
 
-[ext_resource type="Script" uid="uid://ct18pr47rutto" path="res://Game/CardShop/card_shop.gd" id="1_kj3nm"]
+[ext_resource type="Script" uid="uid://ct18pr47rutto" path="res://Game/CardShop/player_card_shop.gd" id="1_kj3nm"]
 
 [node name="CardShop" type="Node"]
 script = ExtResource("1_kj3nm")

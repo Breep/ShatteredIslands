@@ -105,7 +105,7 @@ func clear() -> void:
 	_game_type = GameType.UNDEF
 	_active_families.clear()
 	_random_heroes_ref.clear()
-	ServerCardShop.clear()
+	CardShopManager.clear()
 
 	# Reset complete du state
 	__game_state = GameState.UNDEF
@@ -160,7 +160,7 @@ func get_active_families() -> Array[Family]:
 
 @rpc("any_peer", "call_local")
 func start_game() -> void:
-	ServerCardShop.init(_active_families, _game_rules)
+	CardShopManager.init(_active_families, _game_rules)
 	get_tree().change_scene_to_packed(_game_scene)
 
 # TODO: Move all 4 bellow functions into HeroSelector

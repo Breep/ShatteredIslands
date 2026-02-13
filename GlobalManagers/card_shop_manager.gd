@@ -45,7 +45,7 @@ func init(families: Array[Family], rules: GameRules) -> void:
 	_init_cards_in_player_shop()
 	
 # ============================== Public functions ==============================
-# Calling ServerCardShop is different from client and server as there are multiple players at the same time on the server (1 human + n bots)
+# Calling CardShopManager is different from client and server as there are multiple players at the same time on the server (1 human + n bots)
 
 func try_refresh_shop_for_player(player: Player, is_free: bool) -> Array[Card]:
 	Verbose.trace("try_refresh_shop_for_player() | " + player.player_name + " | " + str(is_free), Verbose.Category.CARD_SHOP)
@@ -121,10 +121,10 @@ func _client_try_buy_card_from_player_shop(card: Card) -> bool:
 			PlayerManager.get_local_player().deck.add_card(card)
 			return true
 		ServerResponse.NOT_ENOUGHT_MONEY:
-			Verbose.warn("ServerCardShop: Not enought money", Verbose.Category.CARD_SHOP)
+			Verbose.warn("CardShopManager: Not enought money", Verbose.Category.CARD_SHOP)
 			return false
 		ServerResponse.CARD_NOT_BUYABLE:
-			Verbose.error("ServerCardShop: I can't buy this card [" + card.name + "]", Verbose.Category.CARD_SHOP)
+			Verbose.error("CardShopManager: I can't buy this card [" + card.name + "]", Verbose.Category.CARD_SHOP)
 			return false
 	
 	# Unreachable
@@ -165,11 +165,11 @@ func _answer_buy_card_from_player_shop(server_response: ServerResponse) -> void:
 func _server_try_buy_random_card_for_player(player: Player) -> Card:
 	Verbose.trace("_server_try_buy_random_card_for_player() | " + player.player_name)
 	if player.gold < 90:
-		Verbose.warn("ServerCardShop: (" + player.player_name + ") Not enought money", Verbose.Category.CARD_SHOP)
+		Verbose.warn("CardShopManager: (" + player.player_name + ") Not enought money", Verbose.Category.CARD_SHOP)
 		return null
 	var cards: Array[Card] = shop_deck.draw_cards_for_player(player, 1)
 	if cards.is_empty():
-		Verbose.warn("ServerCardShop: (" + player.player_name + ") No more random card from the server", Verbose.Category.CARD_SHOP)
+		Verbose.warn("CardShopManager: (" + player.player_name + ") No more random card from the server", Verbose.Category.CARD_SHOP)
 		return null
 	player.deck.add_card(cards[0])
 	player.gold -= 90
@@ -186,7 +186,7 @@ func _client_try_buy_random_card_for_player() -> Card:
 		ServerResponse.OK:
 			PlayerManager.get_local_player().deck.add_card(_random_card_bought)
 		ServerResponse.NOT_ENOUGHT_MONEY:
-			Verbose.warn("ServerCardShop: Not enought money", Verbose.Category.CARD_SHOP)
+			Verbose.warn("CardShopManager: Not enought money", Verbose.Category.CARD_SHOP)
 	return _random_card_bought
 
 

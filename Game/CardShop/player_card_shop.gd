@@ -1,4 +1,4 @@
-class_name CardShop
+class_name PlayerCardShop
 extends Node
 
 # ============================== Signals ==============================
@@ -50,7 +50,7 @@ func try_buy_card(card: Card) -> bool:
 		shop_tried_to_buy_card.emit()
 		return false
 	
-	var buy_ok = await ServerCardShop.try_buy_card_from_player_shop(player, card)
+	var buy_ok = await CardShopManager.try_buy_card_from_player_shop(player, card)
 	if buy_ok:
 		await _refresh_shop_cards(true)
 		card_bought.emit(card)
@@ -86,7 +86,7 @@ func try_buy_random_card() -> bool:
 		Verbose.warn("Not enought gold to buy a random card", Verbose.Category.CARD_SHOP)
 		shop_tried_to_buy_random_card.emit()
 		return false
-	var card: Card = await ServerCardShop.try_buy_random_card_for_player(player)
+	var card: Card = await CardShopManager.try_buy_random_card_for_player(player)
 	if card != null:
 		await _refresh_shop_cards(true)
 		card_bought.emit(card)
@@ -105,7 +105,7 @@ func _refresh_shop_cards(is_free: bool) -> void:
 		Verbose.error("Can't update shop cards, there is no player_deck", Verbose.Category.CARD_SHOP)
 		return
 	
-	cards_displayed = await ServerCardShop.try_refresh_shop_for_player(player, is_free)
+	cards_displayed = await CardShopManager.try_refresh_shop_for_player(player, is_free)
 	_adapt_cards_lvl_to_player()
 	shop_refreshed.emit(cards_displayed)
 

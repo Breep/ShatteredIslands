@@ -10,7 +10,7 @@ const MAX_WAIT_TIME: float = 2.1
 var player: Player # Player Ref this BotAI is linked to
 
 @export var _wake_up_timer: Timer # Every timer tick, bot wakes up, figure out what to do, then go to sleep again (wait_time is random)
-var _card_shop: CardShop
+var _card_shop: PlayerCardShop
 
 var _rng: RandomNumberGenerator
 var _economy_strategy: EconomyStrategy
@@ -27,7 +27,7 @@ func _ready() -> void:
 		queue_free()
 		return
 
-	_card_shop = get_parent().get_node("CardShop") as CardShop
+	_card_shop = get_parent().get_node("CardShop") as PlayerCardShop
 	if _card_shop == null:
 		Verbose.error("PlayerBotAI: No CardShop sibling found under parent Player", Verbose.Category.AI)
 		queue_free()
