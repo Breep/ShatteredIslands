@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://cqhytnfptgffm"]
+
+[ext_resource type="PackedScene" uid="uid://dvhawwpxtn8gt" path="res://Props/DefaultBattleIsland/PropArenaArch/Arch.glb" id="1_7r86d"]
+
+[node name="Arch" unique_id=1780154321 instance=ExtResource("1_7r86d")]

@@ -50,6 +50,7 @@ func _dumb_buying_area() -> void:
 
 
 func _buy_a_card() -> void:
+	return
 	if _card_shop.cards_displayed.is_empty():
 		return
 	

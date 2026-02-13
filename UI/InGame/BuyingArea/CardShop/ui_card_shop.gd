@@ -82,8 +82,12 @@ func _reconnect_to_cards_signals() -> void:
 
 
 func _update_shop_cards_displayed_visual(cards: Array[Card]) -> void:
+	for i in _card_buttons.size():
+		_card_buttons[i].hide()
 	for i in cards.size():
 		_card_buttons[i].update_visual(cards[i])
+		_card_buttons[i].show()
+
 
 # ============================== Callbacks ==============================
 
