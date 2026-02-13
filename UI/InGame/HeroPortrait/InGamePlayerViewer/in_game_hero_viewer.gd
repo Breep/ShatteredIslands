@@ -32,7 +32,7 @@ func _ready() -> void:
 
 func update_content(player: Player, current_stats: EntityStats) -> void:
 	var hero_desc: HeroDesc = player.hero_desc
-	_player_name_label.text = str(player.name)
+	_player_name_label.text = str(player.player_name)
 	_hero_name_label.text = str(hero_desc.name)
 	_statistic_container.update_stats(current_stats)
 	_skills_container.update_content(hero_desc.skills)

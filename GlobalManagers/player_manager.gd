@@ -21,6 +21,8 @@ enum JoinGameKeys {
 
 # ============================== Constants ==============================
 
+const PLAYER_SCENE: PackedScene = preload("res://Player/player.tscn")
+
 # Bot names and their fake peer_id
 const BOT_INFOS: Dictionary[int, String] = {
 	-10: "Spide Ren'heure",
@@ -58,21 +60,23 @@ func clear() -> void:
 	# Destroy all hero instances before clearing
 	destroy_all_heroes()
 
-	# Disconnect all player signals
+	# Free all Player nodes (they are children of PlayerManager)
 	for player in players.values():
-		_disconnect_player_signals(player)
+		if is_instance_valid(player):
+			player.queue_free()
+	for player in dead_players.values():
+		if is_instance_valid(player) and not players.has(player.id):
+			player.queue_free()
 
 	players.clear()
 	dead_players.clear()
-	for child in get_children():
-		child.queue_free()
 
 
 func create_all_heroes(display_mode: Hero.DisplayMode = Hero.DisplayMode.PREVIEW) -> void:
 	Verbose.debug("Creating hero instances for all players with display_mode: " + str(Hero.DisplayMode.keys()[display_mode]), Verbose.Category.PLAYER_MANAGER)
 	for player in players.values():
 		if player.hero_desc == null:
-			Verbose.error("Player " + player.name + " has no hero_desc", Verbose.Category.PLAYER_MANAGER)
+			Verbose.error("Player " + player.player_name + " has no hero_desc", Verbose.Category.PLAYER_MANAGER)
 			continue
 
 		# Si le hero existe déjà, le détruire d'abord
@@ -83,10 +87,10 @@ func create_all_heroes(display_mode: Hero.DisplayMode = Hero.DisplayMode.PREVIEW
 		player.hero = Shared.HERO_SCENES[player.hero_desc.id].instantiate().init(display_mode)
 		player.hero.level = player.lvl
 		player.hero.team = player.team
-		player.hero.entity_name = player.name
+		player.hero.entity_name = player.player_name
 		player.hero.battle_id = -1
 
-		Verbose.debug("Created hero " + player.hero.entity_name + " for player " + player.name, Verbose.Category.PLAYER_MANAGER)
+		Verbose.debug("Created hero " + player.hero.entity_name + " for player " + player.player_name, Verbose.Category.PLAYER_MANAGER)
 
 
 func destroy_all_heroes() -> void:
@@ -100,7 +104,6 @@ func destroy_all_heroes() -> void:
 
 func get_local_player() -> Player:
 	if not players.has(multiplayer.get_unique_id()):
-		#printerr("PlayerManager: No local player for player_id=", multiplayer.get_unique_id())
 		return null
 	return players[multiplayer.get_unique_id()]
 
@@ -137,11 +140,11 @@ func join_game(peer_id: int, player_name: String) -> Dictionary:
 	if multiplayer.is_server() and GameManager.game_type != GameManager.GameType.SOLO:
 		Verbose.error("PlayerManager: Server can't be a player")
 		return {JoinGameKeys.RESPONSE: false, JoinGameKeys.REASON: "Server can't be a player"}
-	
+
 	_ask_join_game.rpc_id(1, peer_id, player_name)
 	if not _join_server_has_answered:
 		await _join_server_answered
-	
+
 	_join_server_has_answered = false
 	if _join_server_response == true:
 		return {JoinGameKeys.RESPONSE: true, JoinGameKeys.REASON: "OK"}
@@ -159,9 +162,9 @@ func add_bot() -> void:
 	for player in players.values():
 		if player.is_bot:
 			bot_infos.erase(player.id)
-	
+
 	var bot_id = bot_infos.keys().pick_random()
-	_add_player(BOT_INFOS[bot_id], bot_id, true, {})
+	_add_player(BOT_INFOS[bot_id], bot_id, true)
 
 # ============================== RPC - SYNC POINT ==============================
 
@@ -174,7 +177,7 @@ func sync_point(sync_id: SyncID) -> void:
 	_client_ready.rpc_id(1, sync_id)
 	if not __all_players_synchronized_for_sync_id.has(sync_id) or __all_players_synchronized_for_sync_id[sync_id] == false:
 		await __all_players_syncronized
-	
+
 	__number_of_players_syncronized[sync_id] = 0
 	__all_players_synchronized_for_sync_id[sync_id] = false
 
@@ -184,12 +187,12 @@ func _client_ready(sync_id: SyncID) -> void:
 	Verbose.trace("_client_ready() | " + str(SyncID.keys()[sync_id]), Verbose.Category.NET)
 	if not multiplayer.is_server():
 		return
-	
+
 	if __number_of_players_syncronized.has(sync_id):
 		__number_of_players_syncronized[sync_id] += 1
 	else:
 		__number_of_players_syncronized[sync_id] = 1
-	
+
 	if __number_of_players_syncronized[sync_id] >= multiplayer.get_peers().size() + 1:
 		_all_clients_ready.rpc(sync_id)
 
@@ -208,14 +211,14 @@ func _ask_join_game(peer_id: int, player_name: String) -> void:
 	if not multiplayer.is_server():
 		printerr("PlayerManager: Only the server should be asked to join the game")
 		return
-	
+
 	if players.size() >= MAX_PLAYERS:
 		printerr("[id:", multiplayer.get_unique_id(), "] Too many players")
 		_answer_join_game.rpc_id(peer_id, false, "Too many players")
 		return
-	
+
 	for player in players.values():
-		if player.name == player_name:
+		if player.player_name == player_name:
 			printerr("[id:", multiplayer.get_unique_id(), "] A player with the same name has already joined")
 			_answer_join_game.rpc_id(peer_id, false, "A player with the same name has already joined")
 			return
@@ -223,9 +226,9 @@ func _ask_join_game(peer_id: int, player_name: String) -> void:
 			printerr("[id:", multiplayer.get_unique_id(), "] Player already exist")
 			_answer_join_game.rpc_id(peer_id, false, "Player already in the game")
 			return
-	
+
 	_answer_join_game.rpc_id(peer_id, true, "OK")
-	_add_player(player_name, peer_id, false, {})
+	_add_player(player_name, peer_id, false)
 
 
 @rpc("authority", "call_local")
@@ -239,86 +242,52 @@ func _answer_join_game(response: int, reason: String) -> void:
 # ============================== Private functions ==============================
 
 # Add a player to the list of players
-# If this is called on the server, the server will transmit this to every other players
-# TODO Improve this so it only send not known players to players
+# Server creates the Player node with full data, then tells clients to create a matching node.
+# The MultiplayerSynchronizer on each Player node handles property sync automatically.
 @rpc("authority", "call_remote")
-func _add_player(player_name: String, id: int, is_bot: bool, serialized_player: Dictionary) -> void:
+func _add_player(player_name: String, id: int, is_bot: bool) -> void:
 	Verbose.trace("_add_player() | " + player_name + " | id=" + str(id) + " | " + str(is_bot), Verbose.Category.PLAYER_MANAGER)
-	
+
 	if players.has(id) or players.size() >= MAX_PLAYERS:
 		return
-	
+
+	var new_player: Player = PLAYER_SCENE.instantiate()
+	new_player.init_player()
+	new_player.name = "Player_" + str(id)
+	new_player.player_name = player_name
+	new_player.id = id
+	new_player.is_bot = is_bot
+
 	if multiplayer.is_server():
-		var new_player := Player.new()
 		new_player.skill_manager = SkillManager.new()
 		new_player.skill_manager.init(new_player)
-		new_player.name = player_name
-		new_player.id = id
-		new_player.is_bot = is_bot
 		new_player.damage = 1
 		new_player.lvl = 1
 		new_player.gold = GameManager.game_rules.gold_starting_game
 		new_player.max_health = GameManager.game_rules.player_starting_health
 		new_player.health = GameManager.game_rules.player_starting_health
-		_connect_to_signals(new_player)
-		if is_bot:
-			var player_bot_ai: PlayerBotAI = load("res://Player/PlayerBotAI/player_bot_ai.tscn").instantiate()
-			player_bot_ai.player = new_player
-			player_bot_ai.name = "PlayerBotAI_" + str(new_player.id)
-			add_child(player_bot_ai)
-		
-		players[id] = new_player
-	else:
-		players[id] = Player.new_from_serialized(serialized_player)
-	
+		new_player.death.connect(_on_player_death)
+
+	players[id] = new_player
+	add_child(new_player)
+	new_player.setup_components()
 	player_added.emit(id)
-	
+
+	# Server broadcasts to all clients so they create matching nodes
 	if multiplayer.is_server():
 		for player: Player in players.values():
-			_add_player.rpc(player.name, player.id, player.is_bot, player.serialized())
+			_add_player.rpc(player.player_name, player.id, player.is_bot)
 
 
 @rpc("authority", "call_local")
 func _remove_player(peer_id: int) -> void:
 	Verbose.trace("_remove_player() | " + str(peer_id), Verbose.Category.PLAYER_MANAGER)
+	if players.has(peer_id):
+		var player: Player = players[peer_id]
+		if is_instance_valid(player):
+			player.queue_free()
+		players.erase(peer_id)
 	player_removed.emit(peer_id)
-	players.erase(peer_id)
-
-
-func _connect_to_signals(player: Player) -> void:
-	player.health_changed.connect(_on_player_health_changed)
-	player.max_health_changed.connect(_on_player_max_health_changed)
-	player.damage_changed.connect(_on_player_damage_changed)
-	player.hero_changed.connect(_on_player_hero_changed)
-	player.gold_changed.connect(_on_player_gold_changed)
-	player.xp_changed.connect(_on_player_xp_changed)
-	player.lvl_changed.connect(_on_player_lvl_changed)
-	player.death.connect(_on_player_death)
-
-
-func _disconnect_player_signals(player: Player) -> void:
-	if player.health_changed.is_connected(_on_player_health_changed):
-		player.health_changed.disconnect(_on_player_health_changed)
-	if player.max_health_changed.is_connected(_on_player_max_health_changed):
-		player.max_health_changed.disconnect(_on_player_max_health_changed)
-	if player.damage_changed.is_connected(_on_player_damage_changed):
-		player.damage_changed.disconnect(_on_player_damage_changed)
-	if player.hero_changed.is_connected(_on_player_hero_changed):
-		player.hero_changed.disconnect(_on_player_hero_changed)
-	if player.gold_changed.is_connected(_on_player_gold_changed):
-		player.gold_changed.disconnect(_on_player_gold_changed)
-	if player.xp_changed.is_connected(_on_player_xp_changed):
-		player.xp_changed.disconnect(_on_player_xp_changed)
-	if player.lvl_changed.is_connected(_on_player_lvl_changed):
-		player.lvl_changed.disconnect(_on_player_lvl_changed)
-	if player.death.is_connected(_on_player_death):
-		player.death.disconnect(_on_player_death)
-
-
-@rpc("authority", "call_remote")
-func _sync_player(serialized_player: Dictionary) -> void:
-	var player: Player = players[serialized_player[Player.SerializedField.ID]]
-	player.update_from_serialized(serialized_player)
 
 
 # Return true if player1 is better than player2
@@ -333,35 +302,6 @@ func _compare_player(player1: Player, player2: Player) -> bool:
 				return player1.health > player2.health
 		else: # Both player are alive
 			return player1.health > player2.health
-
-# ============================== Serialization Callbacks ==============================
-
-func _on_player_health_changed(player: Player, _unused) -> void:
-	_sync_player.rpc(player.serialized())
-
-
-func _on_player_max_health_changed(player: Player, _unused) -> void:
-	_sync_player.rpc(player.serialized())
-
-
-func _on_player_damage_changed(player: Player, _unused) -> void:
-	_sync_player.rpc(player.serialized())
-
-
-func _on_player_hero_changed(player: Player, _unused) -> void:
-	_sync_player.rpc(player.serialized())
-
-
-func _on_player_gold_changed(player: Player, _unused) -> void:
-	_sync_player.rpc(player.serialized())
-
-
-func _on_player_xp_changed(player: Player, _unused) -> void:
-	_sync_player.rpc(player.serialized())
-
-
-func _on_player_lvl_changed(player: Player, _unused) -> void:
-	_sync_player.rpc(player.serialized())
 
 # ============================== Callbacks ==============================
 

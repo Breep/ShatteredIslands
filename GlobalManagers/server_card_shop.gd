@@ -58,7 +58,7 @@ func init(families: Array[Family], rules: GameRules) -> void:
 # Calling ServerCardShop is different from client and server as there are multiple players at the same time on the server (1 human + n bots)
 
 func try_refresh_shop_for_player(player: Player, is_free: bool) -> Array[Card]:
-	Verbose.trace("try_refresh_shop_for_player() | " + player.name + " | " + str(is_free), Verbose.Category.CARD_SHOP)
+	Verbose.trace("try_refresh_shop_for_player() | " + player.player_name + " | " + str(is_free), Verbose.Category.CARD_SHOP)
 	if multiplayer.is_server():
 		return await _server_try_refresh_shop_for_player(player, is_free)
 	else:
@@ -66,7 +66,7 @@ func try_refresh_shop_for_player(player: Player, is_free: bool) -> Array[Card]:
 
 
 func try_buy_card_from_player_shop(player: Player, card: Card) -> bool:
-	Verbose.trace("try_buy_card_from_player_shop() | " + player.name + " | " + card.name, Verbose.Category.CARD_SHOP)
+	Verbose.trace("try_buy_card_from_player_shop() | " + player.player_name + " | " + card.name, Verbose.Category.CARD_SHOP)
 	if multiplayer.is_server():
 		return _server_try_buy_card_from_player_shop(player, card)
 	else:
@@ -74,7 +74,7 @@ func try_buy_card_from_player_shop(player: Player, card: Card) -> bool:
 
 
 func try_buy_random_card_for_player(player: Player) -> Card:
-	Verbose.trace("try_buy_random_card_for_player() | " + player.name, Verbose.Category.CARD_SHOP)
+	Verbose.trace("try_buy_random_card_for_player() | " + player.player_name, Verbose.Category.CARD_SHOP)
 	if multiplayer.is_server():
 		return _server_try_buy_random_card_for_player(player)
 	else:
@@ -116,7 +116,7 @@ func _construct_shop_deck(families: Array[Family], rules: GameRules) -> void:
 # ========== DRAW
 
 func _server_draw_n_cards(player: Player, number_of_cards_to_draw: int) -> Array[Card]:
-	Verbose.trace("_server_draw_n_cards() | " + player.name + " | " + str(number_of_cards_to_draw), Verbose.Category.CARD_SHOP)
+	Verbose.trace("_server_draw_n_cards() | " + player.player_name + " | " + str(number_of_cards_to_draw), Verbose.Category.CARD_SHOP)
 	if not _is_ready: await _shop_deck_shuffled
 	var cards_drawn = shop_deck.draw_n_cards(number_of_cards_to_draw, player.deck)
 	for card in cards_drawn:
@@ -128,7 +128,7 @@ func _server_draw_n_cards(player: Player, number_of_cards_to_draw: int) -> Array
 # ========== BUY A CARD FROM PLAYER CARD SHOP
 
 func _server_try_buy_card_from_player_shop(player: Player, card_to_buy: Card) -> bool:
-	Verbose.trace("_server_try_buy_card_from_player_shop() | " + player.name + " | " + card_to_buy.name, Verbose.Category.CARD_SHOP)
+	Verbose.trace("_server_try_buy_card_from_player_shop() | " + player.player_name + " | " + card_to_buy.name, Verbose.Category.CARD_SHOP)
 	if not card_to_buy in _cards_in_player_shop[player.id]:
 		Verbose.error("Peer." + str(player.id) + " tries to buy a card not displayed in his shop [" + card_to_buy.name + "]", Verbose.Category.CARD_SHOP)
 		return false
@@ -198,13 +198,13 @@ func _answer_buy_card_from_player_shop(server_response: ServerResponse) -> void:
 # ========== BUY RANDOM CARD
 
 func _server_try_buy_random_card_for_player(player: Player) -> Card:
-	Verbose.trace("_server_try_buy_random_card_for_player() | " + player.name)
+	Verbose.trace("_server_try_buy_random_card_for_player() | " + player.player_name)
 	if player.gold < 90:
-		Verbose.warn("ServerCardShop: (" + player.name + ") Not enought money", Verbose.Category.CARD_SHOP)
+		Verbose.warn("ServerCardShop: (" + player.player_name + ") Not enought money", Verbose.Category.CARD_SHOP)
 		return null
 	var cards: Array[Card] = shop_deck.draw_n_cards(1, player.deck)
 	if cards.is_empty():
-		Verbose.warn("ServerCardShop: (" + player.name + ") No more random card from the server", Verbose.Category.CARD_SHOP)
+		Verbose.warn("ServerCardShop: (" + player.player_name + ") No more random card from the server", Verbose.Category.CARD_SHOP)
 		return null
 	player.deck.add_card(cards[0])
 	player.gold -= 90
@@ -251,7 +251,7 @@ func _answer_buy_random_card_from_all(card_uid: int, server_response: ServerResp
 # ========== REFRESH PLAYER CARD SHOP
 
 func _server_try_refresh_shop_for_player(player: Player, is_free: bool) -> Array[Card]:
-	Verbose.trace("_server_try_refresh_shop_for_player() | " + player.name + " | " + str(is_free), Verbose.Category.CARD_SHOP)
+	Verbose.trace("_server_try_refresh_shop_for_player() | " + player.player_name + " | " + str(is_free), Verbose.Category.CARD_SHOP)
 	var can_refresh: bool = false
 	if is_free:
 		can_refresh = true
@@ -363,7 +363,7 @@ func _remove_max_level_cards_from_pool(player: Player, player_pool: Dictionary[C
 					i -= 1
 
 func _on_player_family_leveled_up(player: Player, family_type: Family.FamilyType, new_level: int) -> void:
-	Verbose.debug("%s leveled up %s to %d" % [player.name, family_type, new_level], Verbose.Category.CARD_SHOP)
+	Verbose.debug("%s leveled up %s to %d" % [player.player_name, family_type, new_level], Verbose.Category.CARD_SHOP)
 	
 	# Reconstruire le pool du joueur pour inclure les nouvelles raretés
 	_player_available_cards[player.id] = _build_player_available_pool(player)

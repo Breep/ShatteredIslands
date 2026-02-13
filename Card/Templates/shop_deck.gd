@@ -88,7 +88,7 @@ func draw_cards_for_player(player: Player, count: int, player_available_pool: Di
 		
 		# Si toujours rien, arrêter le tirage
 		if available_cards.is_empty():
-			Verbose.warn("No more cards available for player %s" % player.name, Verbose.Category.CARD_SHOP)
+			Verbose.warn("No more cards available for player %s" % player.player_name, Verbose.Category.CARD_SHOP)
 			break
 		
 		# ÉTAPE 3 : Tirer une carte aléatoire

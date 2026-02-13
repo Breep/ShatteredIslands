@@ -43,7 +43,7 @@ func _start_new_round() -> void:
 	
 	if GameManager.is_end_of_game(): # TODO Rien à faire ici ça, à corriger
 		GameManager.game_state = GameManager.GameState.FINISHED
-		Verbose.debug("Looks like we have a winner ! Congrats " + PlayerManager.get_alive_players().values()[0].name, Verbose.Category.GAME)
+		Verbose.debug("Looks like we have a winner ! Congrats " + PlayerManager.get_alive_players().values()[0].player_name, Verbose.Category.GAME)
 		return
 	
 	_current_round_battles = await RoundManager.get_current_round_battles()
@@ -115,7 +115,7 @@ func _spawn_fighting_islands() -> void:
 			var spawn_point: SpawnPoint = _islands_spawn_points[i]
 			var fighting_island: FightingIsland = preload("res://FloatingIsland/FightingIsland/fighting_island.tscn").instantiate()
 			fighting_island.player_owner_id = player.id
-			fighting_island.name = "FightingIsland_" + player.name
+			fighting_island.name = "FightingIsland_" + player.player_name
 			_node_fighting_islands.add_child(fighting_island)
 			fighting_island.global_position = spawn_point.global_position
 			fighting_island.global_rotation = spawn_point.global_rotation
