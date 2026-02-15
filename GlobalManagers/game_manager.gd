@@ -54,9 +54,6 @@ var _game_state: GameState:
 		game_state_changed.emit(__game_state)
 var game_state: GameState:
 	get: return __game_state
-	set(value):
-		if not multiplayer.is_server(): return
-		_game_state = value
 
 # ============================== Private variables ==============================
 
@@ -100,6 +97,13 @@ func _ready() -> void:
 	GlobalFightingManager.all_fights_are_over.connect(_on_gfm_all_fights_are_over)
 
 # ============================== Public function ==============================
+
+## Request a game state transition. Only the server can change state.
+## Game.gd and other scenes should call this instead of setting game_state directly.
+func request_state_transition(new_state: GameState) -> void:
+	if not multiplayer.is_server(): return
+	_game_state = new_state
+
 
 func clear() -> void:
 	_game_type = GameType.UNDEF

@@ -28,7 +28,7 @@ func _ready() -> void:
 #region ============================== Private functions ==============================
 func _start_game() -> void:
 	Verbose.debug("Starting game", Verbose.Category.GAME)
-	GameManager.game_state = GameManager.GameState.STARTING
+	GameManager.request_state_transition(GameManager.GameState.STARTING)
 	_spawn_fighting_islands()
 	_start_hero_selection()
 
@@ -42,7 +42,7 @@ func _start_new_round() -> void:
 	_current_round_player_id_islands.clear()
 	
 	if GameManager.is_end_of_game(): # TODO Rien à faire ici ça, à corriger
-		GameManager.game_state = GameManager.GameState.FINISHED
+		GameManager.request_state_transition(GameManager.GameState.FINISHED)
 		Verbose.debug("Looks like we have a winner ! Congrats " + PlayerManager.get_alive_players().values()[0].player_name, Verbose.Category.GAME)
 		return
 	
@@ -54,7 +54,7 @@ func _start_new_round() -> void:
 	# Create heroes for buying phase (UI hidden)
 	PlayerManager.create_all_heroes(Hero.DisplayMode.BUYING_PHASE)
 
-	GameManager.game_state = GameManager.GameState.BUYING # TODO Peut-être revoir ça ? Envoyer un signal et laisser le GameManager changer ses états tout seul ?
+	GameManager.request_state_transition(GameManager.GameState.BUYING)
 
 
 func _start_buying_phase() -> void:
@@ -138,7 +138,7 @@ func _on_buying_island_buying_phase_finished() -> void:
 
 func _on_hero_selector_all_heroes_picked() -> void:
 	Verbose.debug("BUYING AREA ALL HEROES PICKED", Verbose.Category.GAME)
-	GameManager.game_state = GameManager.GameState.INIT_ROUND
+	GameManager.request_state_transition(GameManager.GameState.INIT_ROUND)
 
 
 func _on_game_manager_game_state_changed(game_state: GameManager.GameState) -> void:

@@ -48,7 +48,7 @@ func _ready() -> void:
 	GameManager.game_rules.duration_fighting_positioning = 0.5
 	GameManager.game_rules.duration_fighting_countdown = 0.5
 	GameManager.game_rules.duration_fighting_normal = 240.0
-	GameManager.game_state = GameManager.GameState.FIGHTING
+	GameManager.request_state_transition(GameManager.GameState.FIGHTING)
 	GlobalFightingManager.start()
 	_floating_island.set_active()
 	_ui_fighting_area.update_content(_floating_island._fighting_area)
