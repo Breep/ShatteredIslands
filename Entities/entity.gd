@@ -395,6 +395,10 @@ func cast_ultimate() -> void:
 	printerr("Entity: cast_ultimate() called but not implemented [", get_path(), "]")
 
 
+func signal_action_done(target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
+	action_done.emit(self, target, action_type, action_id, value, is_critical)
+
+
 func heal(target: Entity, heal_amount: float, action_id: StringName) -> void:
 	if _heal_sender == null: return
 	var result: Dictionary = _heal_sender.heal(target, heal_amount, action_id)
