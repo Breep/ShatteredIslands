@@ -302,7 +302,6 @@ func _on_game_state_changed(new_state) -> void:
 			Verbose.debug("[State=ENDING_ROUND]", Verbose.Category.GLOBAL_MANAGER)
 			await PlayerManager.sync_point(PlayerManager.SyncID.FIGHTING_PHASE)
 			await RoundManager.ending_round_player_changes()
-			await PlayerManager.sync_point(PlayerManager.SyncID.ROUND_ENDING)
 			_game_state = GameState.INIT_ROUND
 		GameState.FINISHED:
 			Verbose.debug("[State=FINISHED]", Verbose.Category.GLOBAL_MANAGER)

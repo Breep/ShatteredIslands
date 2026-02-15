@@ -11,7 +11,6 @@ enum SyncID {
 	ROUND_SETUP,
 	BUYING_PHASE,
 	FIGHTING_PHASE,
-	ROUND_ENDING
 }
 
 enum JoinGameKeys {
