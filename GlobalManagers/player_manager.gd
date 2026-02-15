@@ -54,6 +54,9 @@ var _join_server_reason: String
 
 # ============================== Node base functions ==============================
 
+func _ready() -> void:
+	player_removed.connect(_on_player_removed_sync_check)
+
 # ============================== Public functions ==============================
 
 func clear() -> void:
@@ -168,40 +171,82 @@ func add_bot() -> void:
 
 # ============================== RPC - SYNC POINT ==============================
 
-#TODO Improve this so it doesn't count the client number but has a client table that can be checked (more secure)
-signal __all_players_syncronized()
-var __all_players_synchronized_for_sync_id: Dictionary[int, bool] # Key=SyncID, Value=<True if all players are synchronized>
-var __number_of_players_syncronized: Dictionary[int, int] # Key=SyncID, Value=<Number of players ready>
+const SYNC_POINT_TIMEOUT: float = 15.0
+
+signal __sync_point_resolved(sync_id: SyncID)
+var __players_ready_for_sync: Dictionary[int, Dictionary] # Key=SyncID, Value=Dictionary[int(player_id), bool]
+
 func sync_point(sync_id: SyncID) -> void:
 	Verbose.debug("sync_point() | " + str(SyncID.keys()[sync_id]), Verbose.Category.NET)
 	_client_ready.rpc_id(1, sync_id)
-	if not __all_players_synchronized_for_sync_id.has(sync_id) or __all_players_synchronized_for_sync_id[sync_id] == false:
-		await __all_players_syncronized
 
-	__number_of_players_syncronized[sync_id] = 0
-	__all_players_synchronized_for_sync_id[sync_id] = false
+	if not _is_sync_resolved(sync_id):
+		# Watchdog: force resolution after timeout (server only)
+		var watchdog: SceneTreeTimer = get_tree().create_timer(SYNC_POINT_TIMEOUT)
+		watchdog.timeout.connect(func():
+			if not _is_sync_resolved(sync_id) and multiplayer.is_server():
+				Verbose.warn("sync_point TIMEOUT for " + SyncID.keys()[sync_id] + " — forcing progression", Verbose.Category.NET)
+				_all_clients_ready.rpc(sync_id)
+		)
+		# Wait for resolution (either all peers ready, disconnect auto-resolve, or timeout)
+		while not _is_sync_resolved(sync_id):
+			await __sync_point_resolved
+
+	# Reset for next use
+	__players_ready_for_sync.erase(sync_id)
+
+
+func _is_sync_resolved(sync_id: SyncID) -> bool:
+	if not __players_ready_for_sync.has(sync_id):
+		return false
+	var expected_ids: Array[int] = _get_expected_sync_player_ids()
+	for player_id in expected_ids:
+		if not __players_ready_for_sync[sync_id].has(player_id):
+			return false
+	return true
+
+
+func _get_expected_sync_player_ids() -> Array[int]:
+	var ids: Array[int]
+	for player_id in players.keys():
+		ids.append(player_id)
+	return ids
 
 
 @rpc("any_peer", "call_local")
 func _client_ready(sync_id: SyncID) -> void:
-	Verbose.trace("_client_ready() | " + str(SyncID.keys()[sync_id]), Verbose.Category.NET)
 	if not multiplayer.is_server():
 		return
 
-	if __number_of_players_syncronized.has(sync_id):
-		__number_of_players_syncronized[sync_id] += 1
-	else:
-		__number_of_players_syncronized[sync_id] = 1
+	var peer_id: int = multiplayer.get_remote_sender_id()
+	Verbose.trace("_client_ready() | " + str(SyncID.keys()[sync_id]) + " | peer=" + str(peer_id), Verbose.Category.NET)
 
-	if __number_of_players_syncronized[sync_id] >= multiplayer.get_peers().size() + 1:
+	if not __players_ready_for_sync.has(sync_id):
+		__players_ready_for_sync[sync_id] = {}
+	__players_ready_for_sync[sync_id][peer_id] = true
+
+	if _is_sync_resolved(sync_id):
 		_all_clients_ready.rpc(sync_id)
 
 
 @rpc("authority", "call_local")
 func _all_clients_ready(sync_id: SyncID) -> void:
 	Verbose.trace("_all_clients_ready() | " + str(SyncID.keys()[sync_id]), Verbose.Category.NET)
-	__all_players_synchronized_for_sync_id[sync_id] = true
-	__all_players_syncronized.emit()
+	# Mark all expected players as ready to resolve the await
+	var expected_ids: Array[int] = _get_expected_sync_player_ids()
+	if not __players_ready_for_sync.has(sync_id):
+		__players_ready_for_sync[sync_id] = {}
+	for player_id in expected_ids:
+		__players_ready_for_sync[sync_id][player_id] = true
+	__sync_point_resolved.emit(sync_id)
+
+
+func _on_player_removed_sync_check(peer_id: int) -> void:
+	# When a player disconnects, check if any pending sync_point is now resolved
+	for sync_id in __players_ready_for_sync.keys():
+		if _is_sync_resolved(sync_id) and multiplayer.is_server():
+			Verbose.debug("sync_point auto-resolved after player " + str(peer_id) + " disconnect | " + SyncID.keys()[sync_id], Verbose.Category.NET)
+			_all_clients_ready.rpc(sync_id)
 
 # ============================== RPC - Ask/Answer Join game ==============================
 
