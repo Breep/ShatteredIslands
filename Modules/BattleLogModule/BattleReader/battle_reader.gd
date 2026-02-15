@@ -21,6 +21,7 @@ var _is_playing: bool = false
 func _ready() -> void:
 	if multiplayer.is_server(): queue_free() # Only clients read battle logs
 	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
+	GlobalFightingManager.all_fights_are_over.connect(_on_gfm_all_fights_are_over)
 
 
 func _process(_delta: float) -> void:
@@ -42,7 +43,11 @@ func _on_gfm_fighting_phase_state_changed(state: GlobalFightingManager.FightingP
 			_start_playback()
 		GlobalFightingManager.FightingPhaseState.FINISHED:
 			_stop_playback()
-			_battle_logs.clear()
+
+
+func _on_gfm_all_fights_are_over() -> void:
+	_battle_logs.clear()
+	_current_index = 0
 
 # ============================== Private function ==============================
 
