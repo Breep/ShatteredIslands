@@ -283,7 +283,3 @@ func _get_card_in_array(uid: int, cards: Array[Card]) -> Card:
 		if card.uid == uid:
 			return card
 	return null
-
-
-func _build_player_available_pool(player: Player) -> Dictionary[Card.Rarity, Array]:
-	var player_pool: Dictionary[Card.Rarity, Array] = {}

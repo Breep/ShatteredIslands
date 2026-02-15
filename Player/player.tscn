@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene format=3 uid="uid://l0wccedon063"]
 
 [ext_resource type="Script" uid="uid://baw670mmvnce4" path="res://Player/player.gd" id="1_player"]
 
@@ -17,28 +17,28 @@ properties/3/spawn = true
 properties/3/replication_mode = 0
 properties/4/path = NodePath(".:health")
 properties/4/spawn = false
-properties/4/replication_mode = 0
+properties/4/replication_mode = 2
 properties/5/path = NodePath(".:max_health")
 properties/5/spawn = false
-properties/5/replication_mode = 0
+properties/5/replication_mode = 2
 properties/6/path = NodePath(".:gold")
 properties/6/spawn = false
-properties/6/replication_mode = 0
+properties/6/replication_mode = 2
 properties/7/path = NodePath(".:xp")
 properties/7/spawn = false
-properties/7/replication_mode = 0
+properties/7/replication_mode = 2
 properties/8/path = NodePath(".:lvl")
 properties/8/spawn = false
-properties/8/replication_mode = 0
+properties/8/replication_mode = 2
 properties/9/path = NodePath(".:damage")
 properties/9/spawn = false
-properties/9/replication_mode = 0
+properties/9/replication_mode = 2
 properties/10/path = NodePath(".:hero_desc_id")
 properties/10/spawn = true
 properties/10/replication_mode = 0
 
-[node name="Player" type="Node"]
+[node name="Player" type="Node" unique_id=205370990]
 script = ExtResource("1_player")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=684565284]
 replication_config = SubResource("SceneReplicationConfig_player")
