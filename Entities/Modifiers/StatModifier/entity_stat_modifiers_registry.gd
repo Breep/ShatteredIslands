@@ -118,6 +118,7 @@ class StatModifierDictionary extends Resource:
 			_entity_stats_ref.update_stat(EntityStats.StatType.RESISTANCE, mag_res + new_stat, Utils.ActionType.DAMAGE_MAGICAL)
 			_entity_stats_ref.update_stat(EntityStats.StatType.RESISTANCE, poi_res + new_stat, Utils.ActionType.DAMAGE_POISON)
 
+
 	func _recompute_multiple_stats() -> void:
 		for action_type: Utils.ActionType in Utils.get_all_actions():
 			var mods: Dictionary = _modifiers_per_action_type[action_type]
