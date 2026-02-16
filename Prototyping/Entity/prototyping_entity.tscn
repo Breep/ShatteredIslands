@@ -31,6 +31,11 @@ mana_regen = 2.0
 attack_range = -1.0
 attack_damage = 10.0
 attack_speed = 2.0
+_life_steals = Dictionary[int, float]({
+0: 50.0
+})
+block = 10.0
+defence = 100.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m73qc"]

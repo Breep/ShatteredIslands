@@ -10,7 +10,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	# Reduce attack speed
 	var as_mod := StatModifier.new()
 	as_mod.id = &"Bear Strength AS"
-	as_mod.stat_type = EntityStats.StatType.AA_SPEED
+	as_mod.stat_type = EntityStats.StatType.AS
 	as_mod.calc_type = StatModifier.CalcType.MULT
 	as_mod.value = -(_as_reduction[card_lvl - 1] / 100.0)
 	as_mod.tags = [StatModifier.TagType.CARD]

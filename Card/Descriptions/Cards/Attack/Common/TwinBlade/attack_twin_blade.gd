@@ -12,7 +12,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 	var mod := StatModifier.new()
 	mod.id = &"Twin Blade"
-	mod.stat_type = EntityStats.StatType.AA_SPEED
+	mod.stat_type = EntityStats.StatType.AS
 	mod.calc_type = StatModifier.CalcType.MULT
 	mod.value = _attack_speed_percent[card_lvl - 1] / 100.0
 	mod.tags = [StatModifier.TagType.CARD]

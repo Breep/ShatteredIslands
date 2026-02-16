@@ -11,7 +11,8 @@ func direct_damage(target: Entity, damage: float, damage_type: Utils.DamageType,
 	var crit_multiplier: Dictionary = _get_crit_multiplier(Utils.damage_to_action(damage_type))
 	damage = damage_before_crit * crit_multiplier["multiplier"]
 	var damage_done: float = target.take_damage(damage, damage_type, crit_multiplier["is_critical"], action_id, _owner)
-
+	_handle_life_steal(damage_done, damage_type)
+	
 	return {
 		ResultKey.VALUE: damage_done,
 		ResultKey.IS_CRITICAL: crit_multiplier["is_critical"],
@@ -32,3 +33,10 @@ func direct_damage_percent(target: Entity, damage_percent: float, damage_type: U
 			hp = target.stats.health_max - target.stats.health
 	var damage: float = hp * damage_percent / 100.0
 	return direct_damage(target, damage, damage_type, action_id)
+
+
+func _handle_life_steal(damage_done: float, damage_type: Utils.DamageType) -> void:
+	var life_steal: float = _owner.stats.get_stat(EntityStats.StatType.LIFESTEAL, Utils.damage_to_action(damage_type))
+	var heal: float = damage_done * life_steal / 100.0
+	if heal >= 1:
+		_owner.heal(_owner, heal, &"Life Steal")

@@ -12,20 +12,23 @@ func take_damage(damage: float, damage_type: Utils.DamageType, is_critical: bool
 			ResultKey.IS_CRITICAL: false,
 			ResultKey.INVULNERABLE: true
 		}
-
+	
 	var damage_before_armor: float = 0
 	if damage_type != Utils.DamageType.PURE and multiplayer.is_server():
 		if _is_dodged(Utils.damage_to_action(damage_type)):
 			return {ResultKey.DODGED: true}
+		if _owner.stats.block >= 1: # TODO Add a signal
+			_owner.stats.block -= 1
+			return {
+			ResultKey.VALUE: 0.0,
+			ResultKey.IS_CRITICAL: false,
+		}
 		damage *= _get_resistance_vulnerability_multiplier(Utils.damage_to_action(damage_type))
-		
 		if is_critical:
 			damage *= _get_crit_resistance_multiplier(Utils.damage_to_action(damage_type))
-		
 		damage_before_armor = damage
 		damage = _owner.conditions.get_shield_reduced_damage(damage, damage_type)
-
-
+	
 	_owner.stats.health -= damage
 	
 	return {
