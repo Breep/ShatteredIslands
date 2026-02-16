@@ -61,12 +61,11 @@ func _start_buying_phase() -> void:
 	Verbose.debug("Start BUYING !", Verbose.Category.GAME)
 	_scene_switcher.set_island_active_only(_buying_island)
 	_buying_island.start_buying_phase(_current_round_battles)
-	GameManager.game_state_timer.wait_time = GameManager.game_rules.duration_buying_phase
-	GameManager.game_state_timer.start()
 
 
 func _start_fighting_phase() -> void:
 	Verbose.debug("Start fights !", Verbose.Category.GAME)
+	_buying_island.cleanup()
 
 	# Create heroes for fighting phase (UI visible)
 	PlayerManager.create_all_heroes(Hero.DisplayMode.FIGHTING_PHASE)
@@ -126,16 +125,6 @@ func _spawn_fighting_islands() -> void:
 #endregion
 
 #region ============================== Callbacks ==============================
-func _on_buying_island_buying_phase_finished() -> void:
-	Verbose.debug("BUYING PHASE ENDED", Verbose.Category.GAME)
-	_buying_island.cleanup()
-
-	# Destroy heroes from buying phase before fighting phase
-	PlayerManager.destroy_all_heroes()
-
-	_start_fighting_phase()
-
-
 func _on_hero_selector_all_heroes_picked() -> void:
 	Verbose.debug("BUYING AREA ALL HEROES PICKED", Verbose.Category.GAME)
 	GameManager.request_state_transition(GameManager.GameState.INIT_ROUND)
