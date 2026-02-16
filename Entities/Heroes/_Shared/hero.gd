@@ -135,7 +135,11 @@ func _on_fighting_state_changed(new_fighting_state: FightingState) -> void:
 				periodic_timer_registry.start_all()
 				for family_manager: FamilyManager in _family_managers.values():
 					family_manager.start()
-		FightingState.CELEBRATING: pass
+		FightingState.CELEBRATING:
+			periodic_timer_registry.stop_all()
+			battle_callback_registry.execute_battle_end()
+			for family_manager: FamilyManager in _family_managers.values():
+				family_manager.stop()
 		FightingState.UNDEF: pass
 #endregion
 

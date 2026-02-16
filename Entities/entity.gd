@@ -705,7 +705,11 @@ func _on_fighting_state_changed(new_fighting_state: FightingState) -> void:
 			if conditions != null: conditions.start()
 			if _movement_module != null: _movement_module.start()
 			if _auto_attack_periodic_module != null and auto_attack_enabled: _auto_attack_periodic_module.start()
-		FightingState.CELEBRATING: pass
+		FightingState.CELEBRATING:
+			if target_module != null: target_module.stop()
+			if conditions != null: conditions.stop()
+			if _movement_module != null: _movement_module.stop()
+			if _auto_attack_periodic_module != null: _auto_attack_periodic_module.stop()
 		FightingState.UNDEF: pass
 
 
