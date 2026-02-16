@@ -172,7 +172,7 @@ func add_bot() -> void:
 
 # ============================== RPC - SYNC POINT ==============================
 
-const SYNC_POINT_TIMEOUT: float = 0.1 # TODO FIX THIS in solo !!
+const SYNC_POINT_TIMEOUT: float = 15
 
 signal __sync_point_resolved(sync_id: SyncID)
 var __players_ready_for_sync: Dictionary[int, Dictionary] # Key=SyncID, Value=Dictionary[int(player_id), bool]
@@ -209,7 +209,7 @@ func _is_sync_resolved(sync_id: SyncID) -> bool:
 
 func _get_expected_sync_player_ids() -> Array[int]:
 	var ids: Array[int]
-	for player_id in players.keys():
+	for player_id in get_human_players().keys():
 		ids.append(player_id)
 	return ids
 
