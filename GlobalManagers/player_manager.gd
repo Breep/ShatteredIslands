@@ -77,7 +77,7 @@ func clear() -> void:
 
 func create_all_heroes(display_mode: Hero.DisplayMode = Hero.DisplayMode.PREVIEW) -> void:
 	Verbose.debug("Creating hero instances for all players with display_mode: " + str(Hero.DisplayMode.keys()[display_mode]), Verbose.Category.PLAYER_MANAGER)
-	for player in players.values():
+	for player: Player in players.values():
 		if player.hero_desc == null:
 			Verbose.error("Player " + player.player_name + " has no hero_desc", Verbose.Category.PLAYER_MANAGER)
 			continue
@@ -93,6 +93,7 @@ func create_all_heroes(display_mode: Hero.DisplayMode = Hero.DisplayMode.PREVIEW
 		player.hero.team = player.team
 		player.hero.entity_name = player.player_name
 		player.hero.battle_id = -1
+		player.hero.deck = player.deck
 
 		Verbose.debug("Created hero " + player.hero.entity_name + " (id=" + str(player.hero.id) + ") for player " + player.player_name, Verbose.Category.PLAYER_MANAGER)
 
