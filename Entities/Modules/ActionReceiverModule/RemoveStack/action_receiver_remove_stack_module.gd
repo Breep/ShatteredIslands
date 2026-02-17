@@ -6,7 +6,7 @@ const DISPELL_PACK_SIZE: int = 2
 
 # ============================== Public functions ==============================
 
-func take_cleanse(value: float, is_critical: bool, action_id: StringName, source: Entity = null) -> Dictionary:
+func take_cleanse(value: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
 	var total_to_dispell: float = value
 	
 	if multiplayer.is_server():
@@ -36,13 +36,11 @@ func take_cleanse(value: float, is_critical: bool, action_id: StringName, source
 		remaining -= to_remove
 		removed += to_remove
 	
-	return {
-		ResultKey.VALUE: float(removed),
-		ResultKey.IS_CRITICAL: is_critical,
-	}
+	_owner.interaction_received.emit(source, Utils.ActionType.UTILITY_CLEANSE, action_id, removed, is_critical)
+	return removed
 
 
-func take_dispell(value: float, is_critical: bool, action_id: StringName, source: Entity = null) -> Dictionary:
+func take_dispell(value: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
 	var total_to_dispell: float = value
 	if multiplayer.is_server():
 		total_to_dispell *= value * _get_resistance_vulnerability_multiplier(Utils.ActionType.UTILITY_DISPELL)
@@ -67,7 +65,5 @@ func take_dispell(value: float, is_critical: bool, action_id: StringName, source
 		remaining -= to_remove
 		removed += to_remove
 	
-	return {
-		ResultKey.VALUE: float(removed),
-		ResultKey.IS_CRITICAL: is_critical,
-	}
+	_owner.interaction_received.emit(source, Utils.ActionType.UTILITY_CLEANSE, action_id, removed, is_critical)
+	return removed

@@ -127,8 +127,6 @@ func _apply_action_done(battle_log: Dictionary) -> void:
 	var action_id: StringName = battle_log.get(BattleLog.Main.ACTION_ID, "Unknown action")
 	var value: float = battle_log.get(BattleLog.Main.VALUE, -1)
 	var is_critical: bool = battle_log.get(BattleLog.Main.CRITICAL, false)
-	
-	source.signal_action_done(target, action_type, action_id, value, is_critical)
 
 
 #var data: Dictionary = {
