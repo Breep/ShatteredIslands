@@ -45,7 +45,7 @@ func spawn_projectile(source: Entity, target: Entity, projectile_type: Projectil
 	projectile.position = _projectiles_node.to_local(projectile_spawn.global_position)
 	
 	if _fighting_area != null:
-		_fighting_area.signal_projectile_spawned(source, target, projectile_type, [], projectile)
+		_fighting_area.signal_projectile_spawned(source, target, projectile_type, projectile)
 	
 	_projectile_counter += 1
 	_projectiles_node.add_child(projectile)

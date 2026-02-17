@@ -57,8 +57,6 @@ var game_state: GameState:
 
 # ============================== Private variables ==============================
 
-# var __prototyping: bool = false
-
 var _game_scene: PackedScene = load("res://Game/game.tscn")
 
 var _FAMILIES_REF: Dictionary[Family.FamilyType, Family] = {

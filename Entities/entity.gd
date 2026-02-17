@@ -5,15 +5,24 @@ extends CharacterBody3D
 
 #region ============================== Signals ==============================
 signal died(self_ref: Entity)
+@warning_ignore("unused_signal")
 signal interaction_received(source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool)
+@warning_ignore("unused_signal")
 signal action_done(target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool)
+@warning_ignore("unused_signal")
 signal action_dodged(source: Entity, action_type: Utils.ActionType)
+@warning_ignore("unused_signal")
 signal critical_action_done(target: Entity, action_type: Utils.ActionType, value_before_crit: float, value_after_crit: float)
+@warning_ignore("unused_signal")
 signal action_overhealed(target: Entity, amount: float)
+@warning_ignore("unused_signal")
 signal damage_taken(damage: float, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool)
+@warning_ignore("unused_signal")
 signal heal_taken(heal_amount: float, is_critical: bool)
 signal spell_casted(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary)
+@warning_ignore("unused_signal")
 signal stack_taken(stack_type: Utils.StackType, stack_number: float, is_critical: bool)
+@warning_ignore("unused_signal")
 signal auto_attack_completed()
 signal spawn_completed()
 #endregion
@@ -361,9 +370,8 @@ func direct_damage(target: Entity, damage: float, damage_type: Utils.DamageType,
 func direct_damage_percent(target: Entity, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier, action_id: StringName) -> float:
 	return _damage_sender.direct_damage_percent(target, damage_percent, damage_type, percent_modifier, action_id) if _damage_sender != null else 0.0
 
-func auto_attack(target: Entity) -> void:
-	if _auto_attack_sender == null: return
-	_auto_attack_sender.execute_auto_attack(target)
+func auto_attack(target: Entity) -> bool:
+	return _auto_attack_sender.execute_auto_attack(target) if _auto_attack_sender != null else false
 
 func projectile_attack(target: Entity, projectile_type: Projectile.Type, projectile_spawn: Node3D, projectile_stats: ProjectileStats, is_auto_attack: bool = false) -> void:
 	if _projectile_sender == null: return

@@ -15,8 +15,6 @@ var attack_speed: float:
 		_attack_speed = value
 		_set_auto_attack_speed(_attack_speed)
 
-var _paused_time_left: float = -1.0
-
 var _attack_strategy: TargetModule.TargettingStrategy = TargetModule.TargettingStrategy.RANDOM_ENEMY
 
 var _current_target: Entity

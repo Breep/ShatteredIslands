@@ -10,7 +10,7 @@ var _cards_dictionary: Dictionary[Family.FamilyType, Array] # FamilyType:Array[C
 var _family_levels: Dictionary[Family.FamilyType, int]
 var _family_points: Dictionary[Family.FamilyType, int]
 
-var _max_level_cards: Array[Card]
+#var _max_level_cards: Array[Card] # TODO Fill this
 
 signal has_changed()
 signal family_leveled_up(family_type: Family.FamilyType, new_level: int)

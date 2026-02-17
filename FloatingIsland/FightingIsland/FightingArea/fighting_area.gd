@@ -12,7 +12,7 @@ func signal_action_done(source: Entity, target: Entity, action_type: Utils.Actio
 	action_done.emit(source, target, action_type, action_id, value, is_critical)
 
 signal projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.Type, projectile: Projectile)
-func signal_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.Type, projectile_modifiers: Array, projectile: Projectile) -> void:
+func signal_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.Type, projectile: Projectile) -> void:
 	projectile_spawned.emit(source, target, projectile_type, projectile)
 
 signal spell_casted(source: Entity, target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary)

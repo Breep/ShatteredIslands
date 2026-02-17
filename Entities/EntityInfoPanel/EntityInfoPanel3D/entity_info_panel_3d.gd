@@ -30,7 +30,7 @@ func _ready() -> void:
 	# Connect entity signals
 	_owner_entity.damage_taken.connect(_on_owner_entity_damage_taken)
 	_owner_entity.heal_taken.connect(_on_owner_entity_heal_taken)
-	
+
 # ============================== Public ==============================
 
 func damage_popup(amount: float, damage_type: Utils.DamageType, is_critic: bool = false):

@@ -45,7 +45,7 @@ const GENERATOR_BEAM_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/D
 var _current_targets: Array[Entity] = []
 var _beams: Dictionary = {} # { entity_id (int) : FieldGeneratorBeam }
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	for target in _current_targets:
 		if target == null or not is_instance_valid(target) or target.is_dead:
 			continue
@@ -68,14 +68,14 @@ func _process(delta: float) -> void:
 			targets_ids.append(t.id)
 			
 	var ids_to_remove = []
-	for id in _beams:
-		if not id in targets_ids:
+	for target_id in _beams:
+		if not target_id in targets_ids:
 			ids_to_remove.append(id)
 			
-	for id in ids_to_remove:
-		if is_instance_valid(_beams[id]):
-			_beams[id].queue_free()
-		_beams.erase(id)
+	for target_id in ids_to_remove:
+		if is_instance_valid(_beams[target_id]):
+			_beams[target_id].queue_free()
+		_beams.erase(target_id)
 
 
 func _on_shield_timer_timeout() -> void:

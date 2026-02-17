@@ -24,7 +24,7 @@ func set_free_use_chance(chance: float) -> void:
 	_free_use_chance = clamp(chance, 0.0, 100.0)
 
 
-func add_stack(amount: float, source: Entity = null, action_id: StringName = "", mod: Dictionary = {}) -> float:
+func add_stack(amount: float, _source: Entity = null, _action_id: StringName = "", _mod: Dictionary = {}) -> float:
 	_total_stacks += amount
 	return _total_stacks
 

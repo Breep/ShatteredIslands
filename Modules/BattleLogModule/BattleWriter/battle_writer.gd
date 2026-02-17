@@ -136,7 +136,7 @@ func _on_gfm_fighting_phase_state_changed(state: GlobalFightingManager.FightingP
 			_battle_logs.clear()
 
 
-func _on_fighting_area_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.Type, _projectile: Projectile) -> void:
+func _on_fighting_area_projectile_spawned(_source: Entity, _target: Entity, _projectile_type: Projectile.Type, _projectile: Projectile) -> void:
 	# Note: Projectile effects like critic/poison/ignite are now handled via callbacks
 	# and are no longer tracked as enum flags
 	pass # TODO use auto attack api
