@@ -110,7 +110,6 @@ func _prepare_projectile_stats() -> ProjectileStats:
 		if hit_source and hit_target:
 			damage_done = hit_source.direct_damage(hit_target, damage, Utils.DamageType.PHYSICAL, &"auto_attack")
 		
-		print("AA damage_done - ", damage_done)
 		for additional_callback in additional_callbacks:
 			additional_callback.call({
 				AutoAttackModifier.VarType.SOURCE: hit_source,

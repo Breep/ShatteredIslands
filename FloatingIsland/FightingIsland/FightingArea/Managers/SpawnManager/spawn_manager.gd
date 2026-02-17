@@ -59,17 +59,13 @@ func spawn_entity(entity: Entity, entity_spawn_global_position: Vector3, context
 	if entity == null:
 		push_error("SpawnManager: Trying to spawn a <null> entity")
 		return
-
-	# Assign a server-authoritative network ID
-	# NOTE: Summons are only spawned on the server (combat simulation is server-only).
-	# Clients don't have these entities, so battle logs referencing summon IDs will fail
-	# to resolve on clients until a summon replication system is implemented.
+	
 	if entity.id == -1:
 		entity.id = Entity.generate_network_id()
-
+	
 	if context != null:
 		entity.apply_context(context)
-
+	
 	_entities_node.add_child(entity)
 	if entity_spawn_global_position != null:
 		entity.global_position = entity_spawn_global_position

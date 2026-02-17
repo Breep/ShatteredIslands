@@ -10,7 +10,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 	var conversion: float = float(_conversion_percent[card_lvl - 1])
 
-	var _on_action_done := func(_entity_ref: Entity, _target: Entity, action_type: Utils.ActionType, _action_id: StringName, value: float, _is_critical: bool) -> void:
+	var _on_action_done := func(_target: Entity, action_type: Utils.ActionType, _action_id: StringName, value: float, _is_critical: bool) -> void:
 		if action_type != Utils.ActionType.UTILITY_HEAL: return
 		if value <= 0: return
 		var damage_amount: float = value * (conversion / 100.0)
