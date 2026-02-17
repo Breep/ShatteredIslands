@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://boar3vpg4cofg"]
+
+[ext_resource type="PackedScene" uid="uid://b55pddxlsthc1" path="res://Props/DefaultBattleIsland/PropArenaArena/Props_Arena_temporairearene.fbx" id="1_34bkp"]
+
+[node name="Props_Arena_temporairearene" unique_id=753120639 instance=ExtResource("1_34bkp")]

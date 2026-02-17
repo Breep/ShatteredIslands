@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://l0wccedon063"]
+
+[ext_resource type="Script" uid="uid://baw670mmvnce4" path="res://Player/player.gd" id="1_player"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_player"]
+properties/0/path = NodePath(".:player_name")
+properties/0/spawn = true
+properties/0/replication_mode = 0
+properties/1/path = NodePath(".:id")
+properties/1/spawn = true
+properties/1/replication_mode = 0
+properties/2/path = NodePath(".:is_bot")
+properties/2/spawn = true
+properties/2/replication_mode = 0
+properties/3/path = NodePath(".:team")
+properties/3/spawn = true
+properties/3/replication_mode = 0
+properties/4/path = NodePath(".:health")
+properties/4/spawn = false
+properties/4/replication_mode = 2
+properties/5/path = NodePath(".:max_health")
+properties/5/spawn = false
+properties/5/replication_mode = 2
+properties/6/path = NodePath(".:gold")
+properties/6/spawn = false
+properties/6/replication_mode = 2
+properties/7/path = NodePath(".:xp")
+properties/7/spawn = false
+properties/7/replication_mode = 2
+properties/8/path = NodePath(".:lvl")
+properties/8/spawn = false
+properties/8/replication_mode = 2
+properties/9/path = NodePath(".:damage")
+properties/9/spawn = false
+properties/9/replication_mode = 2
+properties/10/path = NodePath(".:hero_desc_id")
+properties/10/spawn = true
+properties/10/replication_mode = 0
+
+[node name="Player" type="Node" unique_id=205370990]
+script = ExtResource("1_player")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=684565284]
+replication_config = SubResource("SceneReplicationConfig_player")

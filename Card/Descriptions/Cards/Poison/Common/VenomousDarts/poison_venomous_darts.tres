@@ -17,4 +17,7 @@ name = "Venomous Darts"
 picture = ExtResource("1_qqb1e")
 families = Array[int]([7])
 player_upgrade = SubResource("Resource_ass6p")
+points = Dictionary[int, int]({
+7: 1
+})
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

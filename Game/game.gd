@@ -28,7 +28,7 @@ func _ready() -> void:
 #region ============================== Private functions ==============================
 func _start_game() -> void:
 	Verbose.debug("Starting game", Verbose.Category.GAME)
-	GameManager.game_state = GameManager.GameState.STARTING
+	GameManager.request_state_transition(GameManager.GameState.STARTING)
 	_spawn_fighting_islands()
 	_start_hero_selection()
 
@@ -42,8 +42,8 @@ func _start_new_round() -> void:
 	_current_round_player_id_islands.clear()
 	
 	if GameManager.is_end_of_game(): # TODO Rien à faire ici ça, à corriger
-		GameManager.game_state = GameManager.GameState.FINISHED
-		Verbose.debug("Looks like we have a winner ! Congrats " + PlayerManager.get_alive_players().values()[0].name, Verbose.Category.GAME)
+		GameManager.request_state_transition(GameManager.GameState.FINISHED)
+		Verbose.debug("Looks like we have a winner ! Congrats " + PlayerManager.get_alive_players().values()[0].player_name, Verbose.Category.GAME)
 		return
 	
 	_current_round_battles = await RoundManager.get_current_round_battles()
@@ -54,19 +54,18 @@ func _start_new_round() -> void:
 	# Create heroes for buying phase (UI hidden)
 	PlayerManager.create_all_heroes(Hero.DisplayMode.BUYING_PHASE)
 
-	GameManager.game_state = GameManager.GameState.BUYING # TODO Peut-être revoir ça ? Envoyer un signal et laisser le GameManager changer ses états tout seul ?
+	GameManager.request_state_transition(GameManager.GameState.BUYING)
 
 
 func _start_buying_phase() -> void:
 	Verbose.debug("Start BUYING !", Verbose.Category.GAME)
 	_scene_switcher.set_island_active_only(_buying_island)
 	_buying_island.start_buying_phase(_current_round_battles)
-	GameManager.game_state_timer.wait_time = GameManager.game_rules.duration_buying_phase
-	GameManager.game_state_timer.start()
 
 
 func _start_fighting_phase() -> void:
 	Verbose.debug("Start fights !", Verbose.Category.GAME)
+	_buying_island.cleanup()
 
 	# Create heroes for fighting phase (UI visible)
 	PlayerManager.create_all_heroes(Hero.DisplayMode.FIGHTING_PHASE)
@@ -115,7 +114,7 @@ func _spawn_fighting_islands() -> void:
 			var spawn_point: SpawnPoint = _islands_spawn_points[i]
 			var fighting_island: FightingIsland = preload("res://FloatingIsland/FightingIsland/fighting_island.tscn").instantiate()
 			fighting_island.player_owner_id = player.id
-			fighting_island.name = "FightingIsland_" + player.name
+			fighting_island.name = "FightingIsland_" + player.player_name
 			_node_fighting_islands.add_child(fighting_island)
 			fighting_island.global_position = spawn_point.global_position
 			fighting_island.global_rotation = spawn_point.global_rotation
@@ -126,19 +125,9 @@ func _spawn_fighting_islands() -> void:
 #endregion
 
 #region ============================== Callbacks ==============================
-func _on_buying_island_buying_phase_finished() -> void:
-	Verbose.debug("BUYING PHASE ENDED", Verbose.Category.GAME)
-	_buying_island.cleanup()
-
-	# Destroy heroes from buying phase before fighting phase
-	PlayerManager.destroy_all_heroes()
-
-	_start_fighting_phase()
-
-
 func _on_hero_selector_all_heroes_picked() -> void:
 	Verbose.debug("BUYING AREA ALL HEROES PICKED", Verbose.Category.GAME)
-	GameManager.game_state = GameManager.GameState.INIT_ROUND
+	GameManager.request_state_transition(GameManager.GameState.INIT_ROUND)
 
 
 func _on_game_manager_game_state_changed(game_state: GameManager.GameState) -> void:

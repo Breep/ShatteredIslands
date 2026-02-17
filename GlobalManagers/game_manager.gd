@@ -54,9 +54,6 @@ var _game_state: GameState:
 		game_state_changed.emit(__game_state)
 var game_state: GameState:
 	get: return __game_state
-	set(value):
-		if not multiplayer.is_server(): return
-		_game_state = value
 
 # ============================== Private variables ==============================
 
@@ -101,11 +98,18 @@ func _ready() -> void:
 
 # ============================== Public function ==============================
 
+## Request a game state transition. Only the server can change state.
+## Game.gd and other scenes should call this instead of setting game_state directly.
+func request_state_transition(new_state: GameState) -> void:
+	if not multiplayer.is_server(): return
+	_game_state = new_state
+
+
 func clear() -> void:
 	_game_type = GameType.UNDEF
 	_active_families.clear()
 	_random_heroes_ref.clear()
-	ServerCardShop.clear()
+	CardShopManager.clear()
 
 	# Reset complete du state
 	__game_state = GameState.UNDEF
@@ -160,7 +164,7 @@ func get_active_families() -> Array[Family]:
 
 @rpc("any_peer", "call_local")
 func start_game() -> void:
-	ServerCardShop.init(_active_families, _game_rules)
+	CardShopManager.init(_active_families, _game_rules)
 	get_tree().change_scene_to_packed(_game_scene)
 
 # TODO: Move all 4 bellow functions into HeroSelector
@@ -302,7 +306,6 @@ func _on_game_state_changed(new_state) -> void:
 			Verbose.debug("[State=ENDING_ROUND]", Verbose.Category.GLOBAL_MANAGER)
 			await PlayerManager.sync_point(PlayerManager.SyncID.FIGHTING_PHASE)
 			await RoundManager.ending_round_player_changes()
-			await PlayerManager.sync_point(PlayerManager.SyncID.ROUND_ENDING)
 			_game_state = GameState.INIT_ROUND
 		GameState.FINISHED:
 			Verbose.debug("[State=FINISHED]", Verbose.Category.GLOBAL_MANAGER)

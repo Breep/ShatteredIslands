@@ -18,7 +18,7 @@ var _server_response: ServerResponse
 # ============================== Public functions ==============================
 
 func try_buy_xp(player: Player) -> bool:
-	Verbose.trace("try_buy_xp() | " + player.name, Verbose.Category.ORACLE_SHOP)
+	Verbose.trace("try_buy_xp() | " + player.player_name, Verbose.Category.ORACLE_SHOP)
 	if multiplayer.is_server():
 		return _server_try_buy_xp(player)
 	else:
@@ -27,13 +27,13 @@ func try_buy_xp(player: Player) -> bool:
 # ============================== Private functions ==============================
 
 func _server_try_buy_xp(player: Player) -> bool:
-	Verbose.trace("_server_try_buy_xp() | " + player.name, Verbose.Category.ORACLE_SHOP)
+	Verbose.trace("_server_try_buy_xp() | " + player.player_name, Verbose.Category.ORACLE_SHOP)
 	if player.gold < GameManager.game_rules.buy_xp_price:
-		Verbose.warn("Player:" + player.name + " is not rich enough (" + str(player.gold) + "<" + str(GameManager.game_rules.buy_xp_price), Verbose.Category.ORACLE_SHOP)
+		Verbose.warn("Player:" + player.player_name + " is not rich enough (" + str(player.gold) + "<" + str(GameManager.game_rules.buy_xp_price), Verbose.Category.ORACLE_SHOP)
 		return false
 	
 	if player.lvl == 10:
-		Verbose.warn("Player: " + player.name + " has already max xp", Verbose.Category.ORACLE_SHOP)
+		Verbose.warn("Player: " + player.player_name + " has already max xp", Verbose.Category.ORACLE_SHOP)
 		return false
 	
 	player.xp += GameManager.game_rules.xp_per_oracle_buy

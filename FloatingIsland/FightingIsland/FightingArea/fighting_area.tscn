@@ -58,10 +58,18 @@ _spells_node = NodePath("../Spells")
 
 [node name="FightingFloorTemplates" type="Node3D" parent="." unique_id=2027780914]
 
-[node name="FightingFloor_1v1" parent="FightingFloorTemplates" unique_id=1587238691 instance=ExtResource("5_2akj6")]
+[node name="FightingFloor_1v1" parent="FightingFloorTemplates" unique_id=1587238691 node_paths=PackedStringArray("team_zones") instance=ExtResource("5_2akj6")]
+team_zones = {
+1: NodePath("SpawnArea"),
+2: NodePath("SpawnArea2")
+}
 
-[node name="FightingFloor_2v2" parent="FightingFloorTemplates" unique_id=1759052820 instance=ExtResource("6_yyfcp")]
+[node name="FightingFloor_2v2" parent="FightingFloorTemplates" unique_id=1759052820 node_paths=PackedStringArray("team_zones") instance=ExtResource("6_yyfcp")]
 visible = false
+team_zones = {
+1: NodePath("SpawnArea"),
+2: NodePath("SpawnArea2")
+}
 
 [node name="FightingFloor_ffa13" parent="FightingFloorTemplates" unique_id=273186181 instance=ExtResource("7_hqxx4")]
 visible = false

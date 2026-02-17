@@ -28,6 +28,10 @@ func _ready() -> void:
 
 # ============================== Public function ==============================
 
+func get_live_projectiles() -> Array[Node]:
+	return _projectiles_node.get_children()
+
+
 func spawn_projectile(source: Entity, target: Entity, projectile_type: Projectile.Type, projectile_spawn: Node3D, projectile_stats: ProjectileStats) -> void:
 	# Get the correct projectile scene
 	var projectile_scene: PackedScene = Shared.PROJECTILE_SCENES[projectile_type]
@@ -55,6 +59,9 @@ func spawn_entity(entity: Entity, entity_spawn_global_position: Vector3, context
 	if entity == null:
 		push_error("SpawnManager: Trying to spawn a <null> entity")
 		return
+	
+	if entity.id == -1:
+		entity.id = Entity.generate_network_id()
 	
 	if context != null:
 		entity.apply_context(context)

@@ -6,7 +6,6 @@
 
 [sub_resource type="Resource" id="Resource_s7mnt"]
 script = ExtResource("2_0gtlb")
-speed = 10.0
 metadata/_custom_type_script = "uid://dlww5csbnicq8"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_yu3xq"]

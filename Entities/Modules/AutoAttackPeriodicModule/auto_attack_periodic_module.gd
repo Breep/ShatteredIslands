@@ -129,12 +129,11 @@ func _on_owner_stats_attack_speed_changed(new_attack_speed: float) -> void:
 	attack_speed = new_attack_speed
 
 
-func _on_owner_died(_unused) -> void:
+func _on_owner_died() -> void:
 	stop()
 
 
 func _on_owner_auto_attack_completed(_entity: Entity) -> void:
-	print("DEBUG AutoAttackPeriodicModule: _on_owner_auto_attack_completed")
 	_auto_attack_timer.start()
 
 

@@ -183,7 +183,7 @@ func _update_layout() -> void:
 	_health_max_label.text = str(_owner_entity.stats.get_stat(EntityStats.StatType.HEALTH_MAX))
 	_mana_max_label.text = str(_owner_entity.stats.get_stat(EntityStats.StatType.MANA_MAX))
 	_ad_label.text = str(_owner_entity.stats.get_stat(EntityStats.StatType.AD))
-	_as_label.text = str(_owner_entity.stats.get_stat(EntityStats.StatType.AA_SPEED))
+	_as_label.text = str(_owner_entity.stats.get_stat(EntityStats.StatType.AS))
 	for action_type: Utils.ActionType in Utils.get_all_actions():
 		_critical_chance_labels[action_type].text = str(int(_owner_entity.stats.get_stat(EntityStats.StatType.CRIT_CHANCE, action_type)))
 		_critical_multiplier_labels[action_type].text = str(int(_owner_entity.stats.get_stat(EntityStats.StatType.CRIT_MULT, action_type)))

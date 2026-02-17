@@ -56,7 +56,7 @@ func _setup_heroes_dictionary(heroes: Array[Hero]) -> void:
 func _connect_to_heroes_signals() -> void:
 	for team_members in _heroes_dictionary.values():
 		for hero: Hero in team_members:
-			hero.died.connect(_on_hero_died, CONNECT_ONE_SHOT)
+			hero.died.connect(_on_hero_died.bind(hero), CONNECT_ONE_SHOT)
 
 
 func _disconnect_from_heroes_signals() -> void:

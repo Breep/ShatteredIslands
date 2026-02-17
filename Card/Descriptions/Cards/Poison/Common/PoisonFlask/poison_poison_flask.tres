@@ -16,4 +16,7 @@ name = "Poison Flask"
 picture = ExtResource("1_ufqyo")
 families = Array[int]([7])
 player_upgrade = SubResource("Resource_ij4m6")
+points = Dictionary[int, int]({
+7: 1
+})
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

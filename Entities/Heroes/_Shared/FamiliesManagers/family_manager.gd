@@ -2,8 +2,7 @@ class_name FamilyManager
 extends Node
 
 var _owner: Hero # Ref to Hero owner
-
-var _player: Player # TODO Check how to get this
+var level: int = 0 # Family level (0-4), computed from deck or overridden via prototyping
 
 var _optional_timers: Array[Timer]
 var _optional_spells: Array[Node]
