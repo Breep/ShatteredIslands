@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dbbpa637es0uf"]
+[gd_scene format=3 uid="uid://dbbpa637es0uf"]
 
 [ext_resource type="Script" uid="uid://bhv0dmum15mp1" path="res://FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor.gd" id="1_6j5cd"]
 [ext_resource type="PackedScene" uid="uid://dibux7uwcsatj" path="res://FloatingIsland/FightingIsland/FightingArea/SpawnArea/spawn_area.tscn" id="3_1158a"]
@@ -49,13 +49,25 @@ size = Vector3(20, 1, 10)
 [sub_resource type="BoxShape3D" id="BoxShape3D_6j5cd"]
 size = Vector3(20, 1, 10)
 
-[node name="FightingFloor_ffa13" type="Node3D" node_paths=PackedStringArray("_visual_to_be_destroyed", "_hero_spawner", "_spawn_areas")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_72v03"]
+size = Vector3(4, 1, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vdql0"]
+size = Vector3(20, 1, 10)
+
+[node name="FightingFloor_ffa13" type="Node3D" unique_id=512388701 node_paths=PackedStringArray("_visual_to_be_destroyed", "_hero_spawner", "team_zones", "center_zone", "full_arena_zone")]
 script = ExtResource("1_6j5cd")
 _visual_to_be_destroyed = NodePath("Floor/FloorMesh3D")
 _hero_spawner = NodePath("HeroSpawner")
-_spawn_areas = [NodePath("SpawnArea"), NodePath("SpawnArea2"), NodePath("SpawnArea3")]
+team_zones = {
+1: NodePath("SpawnArea"),
+2: NodePath("SpawnArea2"),
+3: NodePath("SpawnArea3")
+}
+center_zone = NodePath("CenterArea")
+full_arena_zone = NodePath("FullArea")
 
-[node name="SpawnArea" parent="." node_paths=PackedStringArray("_visual_to_be_destroyed") instance=ExtResource("3_1158a")]
+[node name="SpawnArea" parent="." unique_id=35260394 node_paths=PackedStringArray("_visual_to_be_destroyed") instance=ExtResource("3_1158a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.333)
 collision_layer = 4
 collision_mask = 0
@@ -64,16 +76,16 @@ monitorable = false
 team = 1
 _visual_to_be_destroyed = NodePath("MeshInstance3D")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnArea" unique_id=605181048]
 shape = SubResource("BoxShape3D_05r3l")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SpawnArea"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SpawnArea" unique_id=67925101]
 mesh = SubResource("BoxMesh_dhmms")
 
-[node name="SpawnPoint" parent="SpawnArea" instance=ExtResource("4_ch78g")]
+[node name="SpawnPoint" parent="SpawnArea" unique_id=1504720276 instance=ExtResource("4_ch78g")]
 team = 1
 
-[node name="SpawnArea2" parent="." node_paths=PackedStringArray("_visual_to_be_destroyed") instance=ExtResource("3_1158a")]
+[node name="SpawnArea2" parent="." unique_id=2126963958 node_paths=PackedStringArray("_visual_to_be_destroyed") instance=ExtResource("3_1158a")]
 collision_layer = 4
 collision_mask = 0
 monitoring = false
@@ -81,16 +93,16 @@ monitorable = false
 team = 2
 _visual_to_be_destroyed = NodePath("MeshInstance3D")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnArea2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnArea2" unique_id=1986393302]
 shape = SubResource("BoxShape3D_s5mjc")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SpawnArea2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SpawnArea2" unique_id=1189229921]
 mesh = SubResource("BoxMesh_qkrr5")
 
-[node name="SpawnPoint2" parent="SpawnArea2" instance=ExtResource("4_ch78g")]
+[node name="SpawnPoint2" parent="SpawnArea2" unique_id=1539775835 instance=ExtResource("4_ch78g")]
 team = 2
 
-[node name="SpawnArea3" parent="." node_paths=PackedStringArray("_visual_to_be_destroyed") instance=ExtResource("3_1158a")]
+[node name="SpawnArea3" parent="." unique_id=32669562 node_paths=PackedStringArray("_visual_to_be_destroyed") instance=ExtResource("3_1158a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.333)
 collision_layer = 4
 collision_mask = 0
@@ -99,25 +111,36 @@ monitorable = false
 team = 3
 _visual_to_be_destroyed = NodePath("MeshInstance3D")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnArea3"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnArea3" unique_id=2124686331]
 shape = SubResource("BoxShape3D_ltado")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SpawnArea3"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SpawnArea3" unique_id=932331044]
 mesh = SubResource("BoxMesh_5uiyh")
 
-[node name="SpawnPoint3" parent="SpawnArea3" instance=ExtResource("4_ch78g")]
+[node name="SpawnPoint3" parent="SpawnArea3" unique_id=75756064 instance=ExtResource("4_ch78g")]
 team = 3
 
-[node name="Floor" type="StaticBody3D" parent="."]
+[node name="Floor" type="StaticBody3D" parent="." unique_id=1780206468]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 collision_layer = 8
 
-[node name="FloorMesh3D" type="MeshInstance3D" parent="Floor"]
+[node name="FloorMesh3D" type="MeshInstance3D" parent="Floor" unique_id=681758613]
 mesh = SubResource("BoxMesh_e78ti")
 skeleton = NodePath("../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=297447323]
 shape = SubResource("BoxShape3D_6j5cd")
 
-[node name="HeroSpawner" parent="." node_paths=PackedStringArray("_spawn_points") instance=ExtResource("4_72v03")]
+[node name="HeroSpawner" parent="." unique_id=1616323723 node_paths=PackedStringArray("_spawn_points") instance=ExtResource("4_72v03")]
 _spawn_points = [NodePath("../SpawnArea/SpawnPoint"), NodePath("../SpawnArea2/SpawnPoint2"), NodePath("../SpawnArea3/SpawnPoint3")]
+
+[node name="CenterArea" type="Area3D" parent="." unique_id=19780693]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CenterArea" unique_id=1350276283]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.041809082, 0, -0.0413208)
+shape = SubResource("BoxShape3D_72v03")
+
+[node name="FullArea" type="Area3D" parent="." unique_id=1097774213]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FullArea" unique_id=95110812]
+shape = SubResource("BoxShape3D_vdql0")

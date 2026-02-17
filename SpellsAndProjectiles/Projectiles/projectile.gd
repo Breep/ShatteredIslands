@@ -144,5 +144,5 @@ func _handle_bounce(from_target: Entity) -> void:
 		queue_free()
 
 
-func _on_target_died(_who) -> void:
+func _on_target_died() -> void:
 	queue_free()

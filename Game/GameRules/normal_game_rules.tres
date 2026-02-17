@@ -4,7 +4,6 @@
 
 [resource]
 script = ExtResource("1_8i4ne")
-gold_starting_game = 3000
 xp_per_family_lvl = 0
 xp_per_levels = Dictionary[int, int]({
 1: 6,
@@ -18,6 +17,6 @@ xp_per_levels = Dictionary[int, int]({
 9: 50,
 10: 100
 })
+duration_buying_phase = 30.0
 duration_fighting_positioning = 1.0
 duration_fighting_normal = 30.0
-duration_fighting_celebrating = 1.0

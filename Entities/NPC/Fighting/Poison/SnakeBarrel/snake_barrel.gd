@@ -27,7 +27,7 @@ func _spawn_snakes(snake_number: int) -> void:
 	queue_free()
 
 
-func _on_died(_entity: Entity) -> void:
-	super._on_died(_entity)
+func _on_died() -> void:
+	super._on_died()
 	_animate_death()
 	_spawn_snakes(_snake_number)

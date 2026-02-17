@@ -552,7 +552,7 @@ func _on_stats_health_changed(new_health: int) -> void:
 		died.emit()
 
 
-func _on_died(_entity: Entity) -> void:
+func _on_died() -> void:
 	Verbose.debug("Entity [" + entity_name + "] died", Verbose.Category.ENTITY)
 	life_state = LifeState.DEAD # Set life state
 	

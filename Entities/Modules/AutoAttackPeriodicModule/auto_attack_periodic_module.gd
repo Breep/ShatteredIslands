@@ -129,7 +129,7 @@ func _on_owner_stats_attack_speed_changed(new_attack_speed: float) -> void:
 	attack_speed = new_attack_speed
 
 
-func _on_owner_died(_unused) -> void:
+func _on_owner_died() -> void:
 	stop()
 
 
