@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://Modules/PickableClickable/PickableModule/pickable_module.tscn" id="9_614kc"]
 [ext_resource type="PackedScene" uid="uid://bg5efhnq0erdv" path="res://Modules/PickableClickable/ClickableModule/clickable_module.tscn" id="10_m73qc"]
 [ext_resource type="PackedScene" uid="uid://blncvfes4f2y7" path="res://Prototyping/Entity/AllActionPrototyping/testing_floorffa5.tscn" id="11_5hdqt"]
+[ext_resource type="PackedScene" uid="uid://boar3vpg4cofg" path="res://Props/DefaultBattleIsland/PropArenaArena/prop_arena_arena.tscn" id="18_ko5bb"]
 [ext_resource type="PackedScene" uid="uid://dp4x7wkxd6i2q" path="res://Prototyping/Entity/EntityController/entity_controller.tscn" id="19_x0odd"]
 
 [sub_resource type="Resource" id="Resource_xl213"]
@@ -55,12 +56,10 @@ radius = 0.2
 script = ExtResource("1_6kn6i")
 _auto_attack_enabled = true
 
-[node name="Node3D" type="Node3D" parent="." unique_id=368493937]
-
-[node name="Entities" type="Node3D" parent="Node3D" unique_id=38016860]
+[node name="Entities" type="Node3D" parent="." unique_id=38016860]
 unique_name_in_owner = true
 
-[node name="DarkKnight1" parent="Node3D/Entities" unique_id=353718081 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("1_icvx6")]
+[node name="DarkKnight1" parent="Entities" unique_id=353718081 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("1_icvx6")]
 transform = Transform3D(0.9946579, 0, 0.10322651, 0, 1, 0, -0.10322651, 0, 0.9946579, 0.07346773, -4.7683716e-07, 7.8182755)
 _custom_deck = SubResource("Resource_xl213")
 team = 1
@@ -68,31 +67,31 @@ custom_base_stats = SubResource("Resource_m26y3")
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
 
-[node name="DarkKnight2" parent="Node3D/Entities" unique_id=1010378661 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("1_icvx6")]
+[node name="DarkKnight2" parent="Entities" unique_id=1010378661 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("1_icvx6")]
 transform = Transform3D(-0.059724454, 0, 0.9982149, 0, 1, 0, -0.9982149, 0, -0.059724454, 7.5962777, 4.7683716e-07, 2.3270931)
 team = 2
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
 
-[node name="DarkKnight3" parent="Node3D/Entities" unique_id=775240683 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("1_icvx6")]
+[node name="DarkKnight3" parent="Entities" unique_id=775240683 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("1_icvx6")]
 transform = Transform3D(-0.8359702, 0, 0.54877484, 0, 1, 0, -0.54877484, 0, -0.8359702, 4.387443, 0, -6.40211)
 team = 3
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
 
-[node name="DarkKnight4" parent="Node3D/Entities" unique_id=1906413560 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("1_icvx6")]
+[node name="DarkKnight4" parent="Entities" unique_id=1906413560 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("1_icvx6")]
 transform = Transform3D(-0.5246547, 0, -0.85131514, 0, 1, 0, 0.85131514, 0, -0.5246547, -4.850088, 0, -6.6217995)
 team = 4
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
 
-[node name="DarkKnight5" parent="Node3D/Entities" unique_id=829130979 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("1_icvx6")]
+[node name="DarkKnight5" parent="Entities" unique_id=829130979 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("1_icvx6")]
 transform = Transform3D(0.37224275, 0, -0.9281354, 0, 1, 0, 0.9281354, 0, 0.37224275, -7.5075235, -9.536743e-07, 2.2651072)
 team = 5
 _spawn_manager = NodePath("../../SpawnManager")
 _arena_zone_manager = NodePath("../../ArenaZoneManager")
 
-[node name="Control" type="Control" parent="Node3D" unique_id=1104542732]
+[node name="Control" type="Control" parent="." unique_id=1104542732]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -102,14 +101,14 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("2_083cp")
 
-[node name="GlobalCommandsControl" type="Control" parent="Node3D/Control" unique_id=738247091]
+[node name="GlobalCommandsControl" type="Control" parent="Control" unique_id=738247091]
 anchors_preset = 0
 offset_left = 24.0
 offset_top = 24.0
 offset_right = 320.0
 offset_bottom = 181.0
 
-[node name="Panel" type="Panel" parent="Node3D/Control/GlobalCommandsControl" unique_id=1653859956]
+[node name="Panel" type="Panel" parent="Control/GlobalCommandsControl" unique_id=1653859956]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -117,7 +116,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Node3D/Control/GlobalCommandsControl/Panel" unique_id=228849344]
+[node name="MarginContainer" type="MarginContainer" parent="Control/GlobalCommandsControl/Panel" unique_id=228849344]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -129,10 +128,10 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer" unique_id=528893688]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/GlobalCommandsControl/Panel/MarginContainer" unique_id=528893688]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=2109792230]
+[node name="Label" type="Label" parent="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=2109792230]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 32
@@ -140,56 +139,56 @@ text = "GLOBAL COMMANDS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StartFightButton" type="Button" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=2115662025]
+[node name="StartFightButton" type="Button" parent="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=2115662025]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Trigger Fighting State"
 script = ExtResource("3_6kn6i")
 
-[node name="StopFightButton" type="Button" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=1052993556]
+[node name="StopFightButton" type="Button" parent="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=1052993556]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Trigger Idle state"
 script = ExtResource("3_6kn6i")
 
-[node name="ResetFightButton" type="Button" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=948612650]
+[node name="ResetFightButton" type="Button" parent="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=948612650]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Reset SCENE"
 script = ExtResource("3_6kn6i")
 
-[node name="MarginContainer" type="MarginContainer" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=1290145158]
+[node name="MarginContainer" type="MarginContainer" parent="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer" unique_id=1290145158]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_right = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/MarginContainer" unique_id=539222233]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/MarginContainer" unique_id=539222233]
 layout_mode = 2
 alignment = 1
 
-[node name="AutoAttackCheckButton" type="CheckButton" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=2050907256]
+[node name="AutoAttackCheckButton" type="CheckButton" parent="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=2050907256]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Auto Attacks"
 
-[node name="FamilyManagersCheckButton" type="CheckButton" parent="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=2102497392]
+[node name="FamilyManagersCheckButton" type="CheckButton" parent="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=2102497392]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Family Managers"
 
-[node name="CenterPointCamera" parent="Node3D" unique_id=842815466 instance=ExtResource("4_egh8k")]
+[node name="CenterPointCamera" parent="." unique_id=842815466 instance=ExtResource("4_egh8k")]
 unique_name_in_owner = true
 transform = Transform3D(0.022652432, 0, 0.9997434, 0, 1, 0, -0.9997434, 0, 0.022652432, 0, 0, 0)
 _zoom_min = 1.0
 _zoom_max = 100.0
 
-[node name="SpawnManager" parent="Node3D" unique_id=562272433 node_paths=PackedStringArray("_entities_node", "_projectiles_node", "_spells_node") instance=ExtResource("6_egh8k")]
+[node name="SpawnManager" parent="." unique_id=562272433 node_paths=PackedStringArray("_entities_node", "_projectiles_node", "_spells_node") instance=ExtResource("6_egh8k")]
 _entities_node = NodePath("../SpawnEntities")
 _projectiles_node = NodePath("../SpawnProjectiles")
 _spells_node = NodePath("../SpawnSpells")
 
-[node name="ArenaZoneManager" parent="Node3D" unique_id=641704685 node_paths=PackedStringArray("_team_zones", "_center_zone", "_full_arena_zone") instance=ExtResource("8_fl2p6")]
+[node name="ArenaZoneManager" parent="." unique_id=641704685 node_paths=PackedStringArray("_team_zones", "_center_zone", "_full_arena_zone") instance=ExtResource("8_fl2p6")]
 _team_zones = {
 1: NodePath("../TestingFloorFFA5/CenterNode3D/Center1/Team1Area"),
 2: NodePath("../TestingFloorFFA5/CenterNode3D/Center2/Team2Area"),
@@ -201,44 +200,68 @@ _center_zone = NodePath("../TestingFloorFFA5/CenterArea")
 _full_arena_zone = NodePath("../TestingFloorFFA5/FloorArea")
 _is_initialized = true
 
-[node name="SpawnEntities" type="Node3D" parent="Node3D" unique_id=1850617918]
+[node name="SpawnEntities" type="Node3D" parent="." unique_id=1850617918]
 
-[node name="SpawnProjectiles" type="Node3D" parent="Node3D" unique_id=2042389318]
+[node name="SpawnProjectiles" type="Node3D" parent="." unique_id=2042389318]
 
-[node name="SpawnSpells" type="Node3D" parent="Node3D" unique_id=810701074]
+[node name="SpawnSpells" type="Node3D" parent="." unique_id=810701074]
 
-[node name="EntityController" parent="Node3D" unique_id=1995738742 node_paths=PackedStringArray("entity_owner", "spawn_summon_localizer") instance=ExtResource("19_x0odd")]
+[node name="EntityController" parent="." unique_id=1995738742 node_paths=PackedStringArray("entity_owner", "spawn_summon_localizer") instance=ExtResource("19_x0odd")]
 entity_owner = NodePath("../Entities/DarkKnight1")
 spawn_summon_localizer = NodePath("../SpawnLocaliser")
 
-[node name="SpawnLocaliser" type="StaticBody3D" parent="Node3D" unique_id=2103681594]
+[node name="SpawnLocaliser" type="StaticBody3D" parent="." unique_id=2103681594]
 collision_layer = 64
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/SpawnLocaliser" unique_id=2131096925]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SpawnLocaliser" unique_id=2131096925]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 mesh = SubResource("CylinderMesh_m73qc")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/SpawnLocaliser" unique_id=1026829353]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnLocaliser" unique_id=1026829353]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 shape = SubResource("CylinderShape3D_5hdqt")
 
-[node name="PickableModule" parent="Node3D/SpawnLocaliser" unique_id=1622352735 node_paths=PackedStringArray("_owner") instance=ExtResource("9_614kc")]
+[node name="PickableModule" parent="SpawnLocaliser" unique_id=1622352735 node_paths=PackedStringArray("_owner") instance=ExtResource("9_614kc")]
 _owner = NodePath("..")
 
-[node name="ClickableModule" parent="Node3D/SpawnLocaliser" unique_id=1507041719 node_paths=PackedStringArray("_nodes_where_to_find_meshs", "_owner") instance=ExtResource("10_m73qc")]
+[node name="ClickableModule" parent="SpawnLocaliser" unique_id=1507041719 node_paths=PackedStringArray("_nodes_where_to_find_meshs", "_owner") instance=ExtResource("10_m73qc")]
 _nodes_where_to_find_meshs = [NodePath("../MeshInstance3D")]
 _owner = NodePath("..")
 
-[node name="TestingFloorFFA5" parent="Node3D" unique_id=283551194 instance=ExtResource("11_5hdqt")]
+[node name="TestingFloorFFA5" parent="." unique_id=283551194 instance=ExtResource("11_5hdqt")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D" unique_id=688220262]
+[node name="MeshInstance3D" parent="TestingFloorFFA5/FloorArea" parent_id_path=PackedInt32Array(283551194, 2121644269) index="1" unique_id=1440029104]
+visible = false
+
+[node name="MeshInstance3D" parent="TestingFloorFFA5/CenterArea" parent_id_path=PackedInt32Array(283551194, 987179195) index="1" unique_id=409198330]
+visible = false
+
+[node name="MeshInstance3D" parent="TestingFloorFFA5/CenterNode3D/Center1/Team1Area" parent_id_path=PackedInt32Array(283551194, 155190666) index="1" unique_id=1030576179]
+visible = false
+
+[node name="MeshInstance3D" parent="TestingFloorFFA5/CenterNode3D/Center2/Team2Area" parent_id_path=PackedInt32Array(283551194, 1034680613) index="1" unique_id=826441766]
+visible = false
+
+[node name="MeshInstance3D" parent="TestingFloorFFA5/CenterNode3D/Center3/Team3Area" parent_id_path=PackedInt32Array(283551194, 1349800311) index="1" unique_id=1581609339]
+visible = false
+
+[node name="MeshInstance3D" parent="TestingFloorFFA5/CenterNode3D/Center4/Team4Area" parent_id_path=PackedInt32Array(283551194, 2088771533) index="1" unique_id=2064288510]
+visible = false
+
+[node name="MeshInstance3D" parent="TestingFloorFFA5/CenterNode3D/Center5/Team5Area" parent_id_path=PackedInt32Array(283551194, 2136403487) index="1" unique_id=1937256180]
+visible = false
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=688220262]
 transform = Transform3D(0.20953494, 0.9711535, -0.11382448, -0.5411095, 0.2121261, 0.8137586, 0.8144296, -0.10891936, 0.56994826, -0.7068796, -10.037087, 0)
 
-[connection signal="pressed" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StartFightButton" to="." method="_on_start_fight_button_pressed"]
-[connection signal="pressed" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StopFightButton" to="." method="_on_stop_fight_button_pressed"]
-[connection signal="pressed" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/ResetFightButton" to="." method="_on_reset_fight_button_pressed"]
-[connection signal="toggled" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/AutoAttackCheckButton" to="." method="_on_auto_attack_check_button_toggled"]
-[connection signal="toggled" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/FamilyManagersCheckButton" to="." method="_on_family_managers_check_button_toggled"]
+[node name="Props_Arena_temporairearene" parent="." unique_id=753120639 instance=ExtResource("18_ko5bb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.573431, 0)
 
-[editable path="Node3D/TestingFloorFFA5"]
+[connection signal="pressed" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StartFightButton" to="." method="_on_start_fight_button_pressed"]
+[connection signal="pressed" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StopFightButton" to="." method="_on_stop_fight_button_pressed"]
+[connection signal="pressed" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/ResetFightButton" to="." method="_on_reset_fight_button_pressed"]
+[connection signal="toggled" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/AutoAttackCheckButton" to="." method="_on_auto_attack_check_button_toggled"]
+[connection signal="toggled" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/FamilyManagersCheckButton" to="." method="_on_family_managers_check_button_toggled"]
+
+[editable path="TestingFloorFFA5"]
