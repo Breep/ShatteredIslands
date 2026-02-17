@@ -56,7 +56,7 @@ func damage_popup(amount: float, damage_type: Utils.DamageType, is_critic: bool 
 			popup.outline_modulate(Color8(51, 255, 153, 255))
 		Utils.DamageType.PURE:
 			popup.global_position = _pure_popup_spawn.global_position + offset
-			popup.outline_modulate(Color.DARK_GOLDENROD)		
+			popup.outline_modulate(Color.DARK_GOLDENROD)
 	
 	popup.look_at(get_viewport().get_camera_3d().global_position)
 

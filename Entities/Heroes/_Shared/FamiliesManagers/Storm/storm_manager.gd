@@ -103,6 +103,7 @@ func _create_lightning_spam_timer() -> void:
 
 
 func _get_crit_point(default_damage: float, real_damage: float) -> float:
+	if level < 1: return 0
 	if real_damage < 0: return 0
 	if default_damage < 1.0: return CRIT_POINT_DEFAULT
 	return CRIT_POINT_DEFAULT + (real_damage / default_damage) * CRIT_POINT_MULT

@@ -14,7 +14,7 @@ func take_cleanse(value: float, is_critical: bool, action_id: StringName, source
 	
 	var remaining: int = int(total_to_dispell)
 	var removed: int = 0
-	while remaining > 0 and _owner.conditions.get_debuff_stacks() > 0:
+	while remaining > _owner.conditions.get_debuff_stacks():
 		var candidates: Array[Utils.StackType] = []
 		if _owner.conditions.ignite_stacks > 0: candidates.append(Utils.StackType.IGNITE)
 		if _owner.conditions.poison_stacks > 0: candidates.append(Utils.StackType.POISON)
@@ -47,7 +47,7 @@ func take_dispell(value: float, is_critical: bool, action_id: StringName, source
 	
 	var remaining: int = int(total_to_dispell)
 	var removed: int = 0
-	while remaining > 0 and _owner.conditions.get_buff_stacks() > 0:
+	while remaining > _owner.conditions.get_buff_stacks():
 		var candidates: Array[Utils.StackType] = []
 		if _owner.conditions.shield_stacks > 0: candidates.append(Utils.StackType.SHIELD)
 		if _owner.conditions.regen_stacks > 0: candidates.append(Utils.StackType.REGEN)

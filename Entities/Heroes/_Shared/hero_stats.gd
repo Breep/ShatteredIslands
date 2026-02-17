@@ -8,11 +8,11 @@ extends Resource
 @export var attack_power: int = 0
 @export var attack_speed: float = 0.5
 @export var attack_range: float = -1.0
-@export var defence: float = 50
+@export var defence: float = 0
 @export var block: float = 0
 @export var auto_attack_type: EntityStats.AutoAttackType = EntityStats.AutoAttackType.RANGED
 @export var critical_chances: Dictionary[Utils.ActionType, float] = {
-	Utils.ActionType.DAMAGE_PHYSICAL: 50,
+	Utils.ActionType.DAMAGE_PHYSICAL: 10,
 	Utils.ActionType.DAMAGE_MAGICAL: 0,
 	Utils.ActionType.DAMAGE_POISON: 0,
 	Utils.ActionType.UTILITY_HEAL: 0,

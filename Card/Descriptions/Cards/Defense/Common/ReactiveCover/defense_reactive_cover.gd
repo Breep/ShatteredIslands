@@ -14,7 +14,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var chance: float = _base_chance[card_lvl - 1]
 	var shield_amount: float = _base_shield_amount[card_lvl - 1]
 
-	var _on_damage_taken := func(_entity: Entity, damage: float, _damage_type: Utils.DamageType, _is_crit: bool, _is_blocked: bool) -> void:
+	var _on_damage_taken := func(damage: float, _damage_type: Utils.DamageType, _is_crit: bool, _is_blocked: bool) -> void:
 		if damage <= 0:
 			return
 		if Utils.is_randomize_modifier_active(chance):
