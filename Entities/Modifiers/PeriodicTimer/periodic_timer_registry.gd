@@ -11,8 +11,7 @@ var _paused_timers: Dictionary[StringName, float] = {} # id -> time_left
 
 func register(id: StringName, period: float, callback: Callable, autostart: bool = false) -> void:
 	if _timers.has(id):
-		push_warning("[PeriodicTimerRegistry] Timer already registered: ", id)
-		return
+		unregister(id)
 
 	var timer := Timer.new()
 	timer.wait_time = period
