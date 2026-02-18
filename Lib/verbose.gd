@@ -117,8 +117,8 @@ const LEVEL_PREFIX_TEMPLATES: Dictionary[Level, String] = {
 #region ============================== Configuration ==============================
 var current_categories_level: Dictionary[Category, Level] = {
 	Category.DEFAULT: Level.WARN,
-	Category.NET: Level.WARN,
-	Category.GLOBAL_MANAGER: Level.WARN,
+	Category.NET: Level.TRACE,
+	Category.GLOBAL_MANAGER: Level.DEBUG,
 	Category.ROUND_MANAGER: Level.WARN,
 	Category.CARD_SHOP: Level.WARN,
 	Category.CARD: Level.DEBUG,
@@ -134,9 +134,9 @@ var current_categories_level: Dictionary[Category, Level] = {
 	Category.ACTION_MODIFIER: Level.WARN,
 	Category.STAT_MODIFIER: Level.WARN,
 	Category.STACK_MODIFIER: Level.WARN,
-	Category.GLOBAL_FIGHTING_MANAGER: Level.WARN,
+	Category.GLOBAL_FIGHTING_MANAGER: Level.DEBUG,
 	Category.ENTITY_ANIMATION: Level.WARN,
-	Category.ENTITY_MODULE: Level.WARN,
+	Category.ENTITY_MODULE: Level.DEBUG,
 	Category.ENTITY: Level.DEBUG,
 	Category.HERO: Level.WARN,
 	Category.SUMMON: Level.WARN,

@@ -15,11 +15,12 @@ var _battle_logs: Array[Dictionary] = []
 var _start_time: float
 var _current_index: int = 0
 var _is_playing: bool = false
+var simulated_delay_ms: int = 0
 
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	if multiplayer.is_server(): queue_free() # Only clients read battle logs
+	#if multiplayer.is_server(): queue_free() # Only clients read battle logs
 	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
 	GlobalFightingManager.all_fights_are_over.connect(_on_gfm_all_fights_are_over)
 
@@ -34,7 +35,13 @@ func _process(_delta: float) -> void:
 # ============================== Public function ==============================
 
 func add_log(logs: Array[Dictionary]) -> void:
+	if simulated_delay_ms > 0:
+		await get_tree().create_timer(simulated_delay_ms / 1000.0).timeout
 	_battle_logs += logs
+
+
+func get_all_logs() -> Array[Dictionary]:
+	return _battle_logs
 
 
 func _on_gfm_fighting_phase_state_changed(state: GlobalFightingManager.FightingPhaseState) -> void:
@@ -64,9 +71,9 @@ func _stop_playback() -> void:
 func _apply_log(battle_log: Dictionary) -> void:
 	var type: BattleLog.Type = battle_log.get(BattleLog.Main.TYPE, -1)
 	match type:
-		BattleLog.Type.AUTO_ATTACK:          _apply_auto_attack(battle_log)
-		BattleLog.Type.SPELL_CASTED:         _apply_spell_casted(battle_log)
-		BattleLog.Type.ACTION_DONE:          _apply_action_done(battle_log)
+		BattleLog.Type.AUTO_ATTACK: _apply_auto_attack(battle_log)
+		BattleLog.Type.SPELL_CASTED: _apply_spell_casted(battle_log)
+		BattleLog.Type.ACTION_DONE: _apply_action_done(battle_log)
 		BattleLog.Type.INTERACTION_RECEIVED: _apply_interaction_received(battle_log)
 		_: Verbose.warn("Unknown battle_log type received | " + str(type), Verbose.Category.BATTLE_READER)
 
@@ -173,9 +180,3 @@ func _map_interaction(receiver: Entity, source: Entity, action_type: Utils.Actio
 		Utils.ActionType.STACK_POISON: receiver.take_condition_stacks(value, Utils.StackType.POISON, is_critical, action_id, source)
 		Utils.ActionType.STACK_REGEN: receiver.take_condition_stacks(value, Utils.StackType.REGEN, is_critical, action_id, source)
 		Utils.ActionType.STACK_NECROSIS: receiver.take_condition_stacks(value, Utils.StackType.NECROSIS, is_critical, action_id, source)
-
-
-
-
-
- 

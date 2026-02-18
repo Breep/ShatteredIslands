@@ -24,8 +24,6 @@ extends Node
 @onready var _projectile_type_choice: OptionButton = %ProjectileTypeChoice
 
 @onready var _speed_text_edit: TextEdit = %SpeedTextEdit
-@onready var _physical_damage_text_edit: TextEdit = %PhysicalDamageTextEdit
-@onready var _magical_damage_text_edit: TextEdit = %MagicalDamageTextEdit
 @onready var _bounce_text_edit: TextEdit = %BounceTextEdit
 
 @onready var _spell_type_choice: OptionButton = %SpellTypeChoice
@@ -167,7 +165,7 @@ func _refresh_target() -> void:
 	_target = entity_owner.target_module.get_target(targeting_strategy)
 	
 	if _target != null:
-		_target_label.text = "Target: " + _target.entity_name + " [ID:" + str(_target.id) + "]"
+		_target_label.text = "Target: " + _target.entity_name + " [ID:" + str(_target.uid) + "]"
 		print("DEBUG: Target refreshed - ", _target.entity_name, " using strategy: ", TargetModule.TargettingStrategy.keys()[targeting_strategy])
 	else:
 		_target_label.text = "[color=red]<undefined>[/color]"
@@ -329,7 +327,7 @@ func _on_targeting_strat_choice_item_selected(index: int) -> void:
 	_target = entity_owner.target_module.get_target(targeting_strategy)
 	
 	if _target != null:
-		_target_label.text = "Target: " + _target.entity_name + " [ID:" + str(_target.id) + "]"
+		_target_label.text = "Target: " + _target.entity_name + " [ID:" + str(_target.uid) + "]"
 		print("DEBUG: Target selected - ", _target.entity_name, " using strategy: ", TargetModule.TargettingStrategy.keys()[targeting_strategy])
 	else:
 		_target_label.text = "Target: None (strategy returned null)"
@@ -337,30 +335,31 @@ func _on_targeting_strat_choice_item_selected(index: int) -> void:
 
 
 func _on_projectile_attack_button_pressed() -> void:
-	_refresh_target()
 	
-	if _target == null:
-		printerr("EntityController: No target selected for projectile_attack")
-		return
-	
-	if entity_owner == null:
-		printerr("EntityController: No entity_owner for projectile_attack")
-		return
-	
-	var projectile_type: Projectile.Type = _projectile_type_choice.get_selected_id() as Projectile.Type
-	var projectile_spawn: Node3D = entity_owner.get_auto_attack_spawn()
-	var projectile_stats: ProjectileStats = ProjectileStats.new()
-	
-	# Build stats from UI inputs
-	var speed_text: String = _speed_text_edit.text.strip_edges()
-	projectile_stats.speed = speed_text.to_int() if not speed_text.is_empty() else 20
-	
-	var bounce_text: String = _bounce_text_edit.text.strip_edges()
-	var bounce_count: int = bounce_text.to_int() if not bounce_text.is_empty() else 0
-	projectile_stats.bounces_remaining = bounce_count
-	
-	entity_owner.projectile_attack(_target, projectile_type, projectile_spawn, projectile_stats, false)
-	print("DEBUG: projectile_attack called - Target: ", _target.entity_name, " | Type: ", Projectile.Type.keys()[projectile_type])
+	for i in 1:
+		_refresh_target()
+		if _target == null:
+			printerr("EntityController: No target selected for projectile_attack")
+			return
+		
+		if entity_owner == null:
+			printerr("EntityController: No entity_owner for projectile_attack")
+			return
+		
+		var projectile_type: Projectile.Type = _projectile_type_choice.get_selected_id() as Projectile.Type
+		var projectile_spawn: Node3D = entity_owner.get_auto_attack_spawn()
+		var projectile_stats: ProjectileStats = ProjectileStats.new()
+		
+		# Build stats from UI inputs
+		var speed_text: String = _speed_text_edit.text.strip_edges()
+		projectile_stats.speed = speed_text.to_int() if not speed_text.is_empty() else 20
+		
+		var bounce_text: String = _bounce_text_edit.text.strip_edges()
+		var bounce_count: int = bounce_text.to_int() if not bounce_text.is_empty() else 0
+		projectile_stats.bounces_remaining = bounce_count
+		
+		entity_owner.projectile_attack(_target, projectile_type, projectile_spawn, projectile_stats, false)
+		print("DEBUG: projectile_attack called - Target: ", _target.entity_name, " | Type: ", Projectile.Type.keys()[projectile_type])
 
 
 func _update_spell_parameters(spell_type: Spell.Type) -> void:
@@ -626,7 +625,7 @@ func _populate_entity_choices() -> void:
 	_all_entities = all_entities
 	for i in range(_all_entities.size()):
 		var entity: Entity = _all_entities[i]
-		var display_name: String = entity.entity_name + " [ID:" + str(entity.id) + "]"
+		var display_name: String = entity.entity_name + " [ID:" + str(entity.uid) + "]"
 		_entity_choice.add_item(display_name, i)
 	
 	print("DEBUG: Populated entity choice with ", _all_entities.size(), " entities")

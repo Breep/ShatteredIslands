@@ -20,7 +20,7 @@ var _is_accelerated_fight: bool = false
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	if not multiplayer.is_server(): queue_free() # Only the server writes battle logs
+	#if not multiplayer.is_server(): queue_free() # Only the server writes battle logs
 	
 	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
 	
@@ -36,6 +36,10 @@ func get_current_logs() -> Array[Dictionary]:
 	var new_logs: Array[Dictionary] = _battle_logs.slice(_last_log_index_sent)
 	_last_log_index_sent = _battle_logs.size()
 	return new_logs
+
+
+func get_all_logs() -> Array[Dictionary]:
+	return _battle_logs
 
 # ============================== Private functions ==============================
 

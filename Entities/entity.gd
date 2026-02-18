@@ -465,7 +465,8 @@ func _play_spawn_animation() -> void:
 func _complete_spawn() -> void:
 	Verbose.debug("Entity [" + entity_name + "] completing spawn", Verbose.Category.ENTITY)
 	_is_targetable = true
-	fighting_state = _original_fighting_state
+	if _fighting_state != FightingState.FIGHTING:
+		fighting_state = _original_fighting_state
 	spawn_completed.emit()
 	Verbose.debug("Entity [" + entity_name + "] spawn completed", Verbose.Category.ENTITY)
 #endregion
