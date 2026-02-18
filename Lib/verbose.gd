@@ -136,8 +136,8 @@ var current_categories_level: Dictionary[Category, Level] = {
 	Category.STACK_MODIFIER: Level.WARN,
 	Category.GLOBAL_FIGHTING_MANAGER: Level.DEBUG,
 	Category.ENTITY_ANIMATION: Level.WARN,
-	Category.ENTITY_MODULE: Level.DEBUG,
-	Category.ENTITY: Level.DEBUG,
+	Category.ENTITY_MODULE: Level.WARN,
+	Category.ENTITY: Level.WARN,
 	Category.HERO: Level.WARN,
 	Category.SUMMON: Level.WARN,
 	Category.BATTLE_SYNC: Level.WARN,
@@ -224,13 +224,18 @@ func _log(cat: Category, level: Level, msg: String) -> void:
 	
 	match level:
 		Level.TRACE:
+			Console.print(_get_rich_prefix() + "[color=gray]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 			print_rich(_get_rich_prefix() + time_stamp + "[color=gray]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 		Level.DEBUG:
+			Console.print(_get_rich_prefix() + "[color=white]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 			print_rich(_get_rich_prefix() + time_stamp + "[color=white]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 		Level.INFO:
+			Console.print(_get_rich_prefix() + "[color=white]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 			print_rich(_get_rich_prefix() + time_stamp + "[color=white]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 		Level.WARN:
+			Console.print(_get_rich_prefix() + "[color=yellow]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 			print_rich(_get_rich_prefix() + time_stamp + "[color=yellow]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 		Level.ERROR:
+			Console.print(_get_rich_prefix() + "[color=red]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 			print_rich(_get_rich_prefix() + time_stamp + "[color=red]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 #endregion
