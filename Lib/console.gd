@@ -53,9 +53,6 @@ func update_ui_style():
 	label.add_theme_font_size_override("bold_font_size", current_font_size)
 
 func print(msg: Variant):
-	# Affiche toujours dans la console système (F12 / Éditeur)
-	print(msg) 
-	
 	if label:
 		var time = "[color=gray]" + Time.get_time_string_from_system() + "[/color] "
 		var line = time + "[color=yellow][b]>[/b][/color] " + str(msg) + "\n"
