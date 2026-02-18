@@ -58,8 +58,6 @@ var arena_zone_manager: ArenaZoneManager:
 
 @export var _fighting_floors: Dictionary[Battle.BattleType, FightingFloor]
 
-@export var _entities_node: Node3D
-
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
@@ -72,13 +70,13 @@ func _ready() -> void:
 # Connect all heroes to this FightingArea
 func init_fight(heroes: Array[Hero], battle_type: Battle.BattleType, battle_id: int = -1) -> void:
 	Verbose.debug("Initiating a fight | " + str(Battle.BattleType.keys()[battle_type]) + " | " + str(heroes.size()) + " | " + str(battle_id), Verbose.Category.FIGHTING_AREA)
-	var hero_spawner: HeroSpawner = _set_fighting_floor(battle_type)
+	var hero_spawner: HeroSpawner = _set_fighting_floor(battle_type).init(spawn_manager)
 	if hero_spawner == null:
 		Verbose.error("FightingArea: No HeroSpawner for this battle type: " + str(Battle.BattleType.keys()[battle_type]), Verbose.Category.FIGHTING_AREA)
 		return
 	
 	_entity_manager.clear()
-	hero_spawner.spawn_heroes(heroes, _entities_node)
+	hero_spawner.spawn_heroes(heroes)
 	
 	_heroes = heroes
 	_battle_type = battle_type

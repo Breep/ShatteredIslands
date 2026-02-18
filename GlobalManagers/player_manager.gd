@@ -72,7 +72,6 @@ func clear() -> void:
 
 	players.clear()
 	dead_players.clear()
-	Entity.reset_network_ids()
 
 
 func create_all_heroes(display_mode: Hero.DisplayMode = Hero.DisplayMode.PREVIEW) -> void:
@@ -88,14 +87,13 @@ func create_all_heroes(display_mode: Hero.DisplayMode = Hero.DisplayMode.PREVIEW
 
 		# Créer nouveau hero avec le display_mode spécifié
 		player.hero = Shared.HERO_SCENES[player.hero_desc.id].instantiate().init(display_mode)
-		player.hero.id = Entity.generate_network_id()
 		player.hero.level = player.lvl
 		player.hero.team = player.team
 		player.hero.entity_name = player.player_name
 		player.hero.battle_id = -1
 		player.hero.deck = player.deck
 
-		Verbose.debug("Created hero " + player.hero.entity_name + " (id=" + str(player.hero.id) + ") for player " + player.player_name, Verbose.Category.PLAYER_MANAGER)
+		Verbose.debug("Created hero " + player.hero.entity_name + " (id=" + str(player.hero.uid) + ") for player " + player.player_name, Verbose.Category.PLAYER_MANAGER)
 
 
 func destroy_all_heroes() -> void:

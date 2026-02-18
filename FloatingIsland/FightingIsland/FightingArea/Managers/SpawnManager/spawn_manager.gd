@@ -18,6 +18,7 @@ var battle_id: int = -1 # Set by the parent
 # ============================== Private variables ==============================
 
 var _projectile_counter: int = 0
+var _entity_counter: int = 0
 
 # ============================== Node base functions ==============================
 
@@ -60,8 +61,9 @@ func spawn_entity(entity: Entity, entity_spawn_global_position: Vector3, context
 		push_error("SpawnManager: Trying to spawn a <null> entity")
 		return
 	
-	if entity.id == -1:
-		entity.id = Entity.generate_network_id()
+	if entity.uid == -1:
+		entity.uid = _entity_counter
+		_entity_counter += 1
 	
 	if context != null:
 		entity.apply_context(context)

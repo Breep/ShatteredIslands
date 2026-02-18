@@ -77,6 +77,8 @@ enum FieldGeneratorModifier {
 #endregion
 
 #region ============================== Public variables ==============================
+var uid: int = -1 # Multiplayer ID of the entity
+
 var _is_targetable: bool = true
 var is_targetable: bool:
 	get:
@@ -133,7 +135,6 @@ var _spawn_tween: Tween = null
 #endregion
 
 #region ============================== Export ==============================
-@export var id: int = -1 # Multiplayer ID of the entity
 @export var team: int = -1 # Team number of the entity
 @export var battle_id: int = -1 # The id of the battle the entity is in
 @export var entity_name: String = "<entity name>"
@@ -210,26 +211,10 @@ func is_dead() -> bool:
 	return life_state == LifeState.DEAD
 #endregion
 
-#region ============================== Static variables ==============================
-## Server-authoritative ID counter. Only the server should call generate_network_id().
-static var _next_network_id: int = 0
-
-static func generate_network_id() -> int:
-	var assigned_id: int = _next_network_id
-	_next_network_id += 1
-	return assigned_id
-
-static func reset_network_ids() -> void:
-	_next_network_id = 0
-#endregion
-
-
 # ============================== Node base functions ==============================
 
 #region ============================== Init ==============================
 func _init() -> void:
-	# id stays at default (-1) until assigned by the server
-
 	# Stats
 	stats = EntityStats.new()
 	_base_stats = EntityStats.new()
@@ -260,7 +245,7 @@ func _ready() -> void:
 	if status_module != null:
 		status_module.stunned_changed.connect(_on_stunned_changed)
 	
-	Verbose.debug("Entity [" + entity_name + "] ready", Verbose.Category.ENTITY)
+	Verbose.debug("Entity [" + entity_name + "_" + str(uid) + "] ready", Verbose.Category.ENTITY)
 
 	fighting_state_changed.connect(_on_fighting_state_changed)
 	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)

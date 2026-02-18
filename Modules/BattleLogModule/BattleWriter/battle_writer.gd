@@ -46,8 +46,8 @@ func _log_attack(source: Entity, target: Entity,
 	var data: Dictionary = {
 		BattleLog.Main.TIME: _get_time(),
 		BattleLog.Main.TYPE: BattleLog.Type.AUTO_ATTACK,
-		BattleLog.Main.SOURCE: source.id,
-		BattleLog.Main.TARGET: target.id,
+		BattleLog.Main.SOURCE: source.uid,
+		BattleLog.Main.TARGET: target.uid,
 		BattleLog.Main.MODIFIER: {
 			BattleLog.Modifier.CRITICAL: critical,
 			BattleLog.Modifier.POISON: poison,
@@ -63,8 +63,8 @@ func _log_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type, s
 	var data: Dictionary = {
 		BattleLog.Main.TIME: _get_time(),
 		BattleLog.Main.TYPE: BattleLog.Type.SPELL_CASTED,
-		BattleLog.Main.SOURCE: source.id,
-		BattleLog.Main.TARGET: target.id,
+		BattleLog.Main.SOURCE: source.uid,
+		BattleLog.Main.TARGET: target.uid,
 		BattleLog.Main.SPELL_TYPE: spell_type,
 		BattleLog.Main.SPELL_MODIFIER: spell_modifier
 	}
@@ -87,8 +87,8 @@ func _log_action_done(source: Entity, target: Entity, action_type: Utils.ActionT
 		BattleLog.Main.ACTION_ID: action_id,
 		BattleLog.Main.VALUE: value,
 		BattleLog.Main.CRITICAL: is_critical,
-		BattleLog.Main.SOURCE: source.id,
-		BattleLog.Main.TARGET: target.id
+		BattleLog.Main.SOURCE: source.uid,
+		BattleLog.Main.TARGET: target.uid
 	}
 	
 	_battle_logs.append(data)
@@ -108,8 +108,8 @@ func _log_interaction_received(receiver: Entity, source: Entity, action_type: Ut
 		BattleLog.Main.ACTION_ID: action_id,
 		BattleLog.Main.VALUE: value,
 		BattleLog.Main.CRITICAL: is_critical,
-		BattleLog.Main.RECEIVER: receiver.id,
-		BattleLog.Main.SOURCE: source.id if source != null else -1,
+		BattleLog.Main.RECEIVER: receiver.uid,
+		BattleLog.Main.SOURCE: source.uid if source != null else -1,
 	}
 	
 	_battle_logs.append(data)

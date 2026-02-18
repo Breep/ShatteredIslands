@@ -53,9 +53,9 @@ func _process(_delta: float) -> void:
 		if not _beams.has(target.id):
 			var beam = GENERATOR_BEAM_SCENE.instantiate()
 			add_child(beam)
-			_beams[target.id] = beam
+			_beams[target.uid] = beam
 			
-		var beam_instance = _beams[target.id]
+		var beam_instance = _beams[target.uid]
 		# Start from slightly above center to target center (or slightly above)
 		var start = global_position + Vector3(0, 1.0, 0)
 		var end = target.global_position + Vector3(0, 0.5, 0) # Approx center/chest
@@ -65,12 +65,12 @@ func _process(_delta: float) -> void:
 	var targets_ids = []
 	for t in _current_targets:
 		if t and is_instance_valid(t):
-			targets_ids.append(t.id)
+			targets_ids.append(t.uid)
 			
 	var ids_to_remove = []
 	for target_id in _beams:
 		if not target_id in targets_ids:
-			ids_to_remove.append(id)
+			ids_to_remove.append(uid)
 			
 	for target_id in ids_to_remove:
 		if is_instance_valid(_beams[target_id]):
