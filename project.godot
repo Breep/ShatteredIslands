@@ -60,6 +60,7 @@ SimpleGrass="*res://addons/simplegrasstextured/singleton.tscn"
 MultiplayerManager="*res://GlobalManagers/multiplayer_manager.gd"
 GlobalGameManager="*res://GlobalManagers/global_game_manager.gd"
 Shared="*res://Lib/shared.gd"
+Debug="*uid://woc06wbtruty"
 
 [debug]
 

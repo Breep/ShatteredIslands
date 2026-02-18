@@ -22,6 +22,7 @@ func _enter_tree() -> void:
 	_entity_info_panel_2d.init(_owner_entity)
 
 func _ready() -> void:
+	Debug.set_target(self)
 	# Early validation - crash if misconfigured
 	if not _owner_entity:
 		Verbose.error("EntityInfoPanel3D: _owner_entity is null! This node is misconfigured.", Verbose.Category.ENTITY)

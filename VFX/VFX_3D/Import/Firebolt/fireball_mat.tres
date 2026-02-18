@@ -11,7 +11,7 @@ gradient = SubResource("Gradient_vbn7x")
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_l1u0b"]
 
 [resource]
-resource_local_to_scene = true
+resource_local_to_scene = false
 render_priority = 0
 shader = ExtResource("1_4s1gb")
 shader_parameter/voronoi_sampler = SubResource("NoiseTexture2D_l1u0b")

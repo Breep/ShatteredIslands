@@ -646,75 +646,76 @@ func _on_summon_entity_button_pressed() -> void:
 		printerr("EntityController: No entity_owner for summon_entity")
 		return
 	
-	var entity_type: Entity.EntityType = _entity_type_choice.get_selected_id() as Entity.EntityType
-	var spawn_type: SpawnLocationConfig.LocationType = _spawn_type_choice.get_selected_id() as SpawnLocationConfig.LocationType
-	
-	# Build SpawnLocationConfig
-	var spawn_config := SpawnLocationConfig.new()
-	spawn_config.location_type = spawn_type
-	
-	# Configure spawn parameters based on spawn type
-	var random_radius: float = _random_radius_edit.text.to_float()
-	spawn_config.randomization_radius = random_radius
-	
-	match spawn_type:
-		SpawnLocationConfig.LocationType.EXACT:
-			# spawn_summon_localizer is only required for EXACT spawn type
-			if spawn_summon_localizer == null:
-				printerr("EntityController: spawn_summon_localizer is required for EXACT spawn type")
-				return
-			spawn_config.exact_position = spawn_summon_localizer.global_position
+	for i in 10:
+		var entity_type: Entity.EntityType = _entity_type_choice.get_selected_id() as Entity.EntityType
+		var spawn_type: SpawnLocationConfig.LocationType = _spawn_type_choice.get_selected_id() as SpawnLocationConfig.LocationType
 		
-		SpawnLocationConfig.LocationType.ARENA_CENTER:
-			# No additional config needed
-			pass
+		# Build SpawnLocationConfig
+		var spawn_config := SpawnLocationConfig.new()
+		spawn_config.location_type = spawn_type
 		
-		SpawnLocationConfig.LocationType.TEAM_ZONE:
-			var team: int = _team_edit.text.to_int()
-			spawn_config.team = team
+		# Configure spawn parameters based on spawn type
+		var random_radius: float = _random_radius_edit.text.to_float()
+		spawn_config.randomization_radius = random_radius
 		
-		SpawnLocationConfig.LocationType.ENTITY:
-			# Use the selected entity from dropdown
-			var selected_index: int = _entity_choice.get_selected_id()
-			if selected_index >= 0 and selected_index < _all_entities.size():
-				spawn_config.target_entity = _all_entities[selected_index]
-			else:
-				printerr("EntityController: Invalid entity selection for ENTITY spawn type")
-				# Fallback to spawn_summon_localizer
-				spawn_config.target_entity = spawn_summon_localizer
+		match spawn_type:
+			SpawnLocationConfig.LocationType.EXACT:
+				# spawn_summon_localizer is only required for EXACT spawn type
+				if spawn_summon_localizer == null:
+					printerr("EntityController: spawn_summon_localizer is required for EXACT spawn type")
+					return
+				spawn_config.exact_position = spawn_summon_localizer.global_position
+			
+			SpawnLocationConfig.LocationType.ARENA_CENTER:
+				# No additional config needed
+				pass
+			
+			SpawnLocationConfig.LocationType.TEAM_ZONE:
+				var team: int = _team_edit.text.to_int()
+				spawn_config.team = team
+			
+			SpawnLocationConfig.LocationType.ENTITY:
+				# Use the selected entity from dropdown
+				var selected_index: int = _entity_choice.get_selected_id()
+				if selected_index >= 0 and selected_index < _all_entities.size():
+					spawn_config.target_entity = _all_entities[selected_index]
+				else:
+					printerr("EntityController: Invalid entity selection for ENTITY spawn type")
+					# Fallback to spawn_summon_localizer
+					spawn_config.target_entity = spawn_summon_localizer
+			
+			SpawnLocationConfig.LocationType.RANDOM_ARENA:
+				# No additional config needed
+				pass
 		
-		SpawnLocationConfig.LocationType.RANDOM_ARENA:
-			# No additional config needed
-			pass
-	
-	# Build entity_modifier dictionary based on entity type
-	var entity_modifier: Dictionary = {}
-	
-	match entity_type:
-		Entity.EntityType.HERO:
-			# Heroes don't have modifiers in summon context
-			pass
+		# Build entity_modifier dictionary based on entity type
+		var entity_modifier: Dictionary = {}
 		
-		Entity.EntityType.SNAKE_BARREL:
-			entity_modifier[Entity.SnakeBarrelModifier.SNAKE_NUMBER] = int(_entity_param1_edit.text.to_float())
-			entity_modifier[Entity.SnakeBarrelModifier.SNAKE_POISON_STACKS] = _entity_param2_edit.text.to_float()
-			entity_modifier[Entity.SnakeBarrelModifier.MAX_HEALTH] = _entity_param3_edit.text.to_float()
+		match entity_type:
+			Entity.EntityType.HERO:
+				# Heroes don't have modifiers in summon context
+				pass
+			
+			Entity.EntityType.SNAKE_BARREL:
+				entity_modifier[Entity.SnakeBarrelModifier.SNAKE_NUMBER] = int(_entity_param1_edit.text.to_float())
+				entity_modifier[Entity.SnakeBarrelModifier.SNAKE_POISON_STACKS] = _entity_param2_edit.text.to_float()
+				entity_modifier[Entity.SnakeBarrelModifier.MAX_HEALTH] = _entity_param3_edit.text.to_float()
+			
+			Entity.EntityType.SNAKE:
+				# Snakes don't have modifiers
+				pass
+			
+			Entity.EntityType.FIELD_GENERATOR:
+				entity_modifier[Entity.FieldGeneratorModifier.MAX_HEALTH] = _entity_param1_edit.text.to_float()
+				entity_modifier[Entity.FieldGeneratorModifier.SHIELD_AMOUNT] = _entity_param2_edit.text.to_float()
+				entity_modifier[Entity.FieldGeneratorModifier.SHIELD_INTERVAL] = _entity_param3_edit.text.to_float()
+				entity_modifier[Entity.FieldGeneratorModifier.INITIAL_SHIELD] = int(_entity_param4_edit.text.to_float())
+				entity_modifier[Entity.FieldGeneratorModifier.TARGET_COUNT] = int(_entity_param5_edit.text.to_float())
 		
-		Entity.EntityType.SNAKE:
-			# Snakes don't have modifiers
-			pass
-		
-		Entity.EntityType.FIELD_GENERATOR:
-			entity_modifier[Entity.FieldGeneratorModifier.MAX_HEALTH] = _entity_param1_edit.text.to_float()
-			entity_modifier[Entity.FieldGeneratorModifier.SHIELD_AMOUNT] = _entity_param2_edit.text.to_float()
-			entity_modifier[Entity.FieldGeneratorModifier.SHIELD_INTERVAL] = _entity_param3_edit.text.to_float()
-			entity_modifier[Entity.FieldGeneratorModifier.INITIAL_SHIELD] = int(_entity_param4_edit.text.to_float())
-			entity_modifier[Entity.FieldGeneratorModifier.TARGET_COUNT] = int(_entity_param5_edit.text.to_float())
-	
-	entity_owner.summon_entity(entity_type, spawn_config, entity_modifier)
-	print("DEBUG: summon_entity called - Type: ", Entity.EntityType.keys()[entity_type],
-		" | Spawn: ", SpawnLocationConfig.LocationType.keys()[spawn_type],
-		" | Modifiers: ", entity_modifier)
+		entity_owner.summon_entity(entity_type, spawn_config, entity_modifier)
+		print("DEBUG: summon_entity called - Type: ", Entity.EntityType.keys()[entity_type],
+			" | Spawn: ", SpawnLocationConfig.LocationType.keys()[spawn_type],
+			" | Modifiers: ", entity_modifier)
 
 
 func _on_auto_attack_button_pressed() -> void:
