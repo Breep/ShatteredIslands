@@ -21,13 +21,13 @@ var _is_accelerated_fight: bool = false
 
 func _ready() -> void:
 	#if not multiplayer.is_server(): queue_free() # Only the server writes battle logs
-	
 	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
 	
 	_fighting_area.projectile_spawned.connect(_on_fighting_area_projectile_spawned)
 	_fighting_area.spell_casted.connect(_on_fighting_area_spell_casted)
 	_fighting_area.action_done.connect(_on_fighting_area_action_done)
 	_fighting_area.interaction_received.connect(_on_fighting_area_interaction_received)
+	_fighting_area.entity_spawned.connect(_on_fighting_area_entity_spawned)
 
 # ============================== Public functions ==============================
 
@@ -117,6 +117,30 @@ func _log_interaction_received(receiver: Entity, source: Entity, action_type: Ut
 	}
 	
 	_battle_logs.append(data)
+
+
+func _log_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.Type) -> void:
+	if not is_instance_valid(source) or not is_instance_valid(target): return
+	var data: Dictionary = {
+		BattleLog.Main.TIME: _get_time(),
+		BattleLog.Main.TYPE: BattleLog.Type.PROJECTILE_SPAWNED,
+		BattleLog.Main.SOURCE: source.uid,
+		BattleLog.Main.TARGET: target.uid,
+		BattleLog.Main.PROJECTILE_TYPE: projectile_type
+	}
+	_battle_logs.append(data)
+
+
+func _log_entity_spawned(entity: Entity, entity_type: Entity.EntityType, entity_modifier: Dictionary) -> void:
+	if not is_instance_valid(entity): return
+	var data: Dictionary = {
+		BattleLog.Main.TIME: _get_time(),
+		BattleLog.Main.TYPE: BattleLog.Type.ENTITY_SPAWNED,
+		BattleLog.Main.UID: entity.uid,
+		BattleLog.Main.ENTITY_TYPE: entity_type,
+		BattleLog.Main.ENTITY_MODIFIER: entity_modifier
+	}
+	_battle_logs.append(data)
 #endregion
 
 func _get_time() -> float:
@@ -140,16 +164,12 @@ func _on_gfm_fighting_phase_state_changed(state: GlobalFightingManager.FightingP
 			_battle_logs.clear()
 
 
-func _on_fighting_area_projectile_spawned(_source: Entity, _target: Entity, _projectile_type: Projectile.Type, _projectile: Projectile) -> void:
-	# Note: Projectile effects like critic/poison/ignite are now handled via callbacks
-	# and are no longer tracked as enum flags
-	pass # TODO use auto attack api
-	#if source.is_ally and projectile_type == Projectile.Type.AUTO_ATTACK:
-		#_log_attack(source, target,
-				#false, # is_critic (no longer tracked here)
-				#false, # has_poison
-				#false, # has_ignite
-				#false) # has_instability
+func _on_fighting_area_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.Type, _projectile: Projectile) -> void:
+	_log_projectile_spawned(source, target, projectile_type)
+
+
+func _on_fighting_area_entity_spawned(entity: Entity, entity_type: Entity.EntityType, entity_modifier: Dictionary) -> void:
+	_log_entity_spawned(entity, entity_type, entity_modifier)
 
 
 func _on_fighting_area_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary) -> void:

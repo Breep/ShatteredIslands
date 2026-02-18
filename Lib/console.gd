@@ -2,7 +2,7 @@ extends CanvasLayer
 
 var label: RichTextLabel
 var panel: PanelContainer
-var current_font_size: int = 16
+var current_font_size: int = 10
 
 # --- RÉGLAGES ---
 var max_lines: int = 1000 # Limite par défaut
@@ -31,6 +31,8 @@ func _ready():
 	label.scroll_following = true 
 	
 	update_ui_style()
+	
+	hide()
 
 func _input(event):
 	if event is InputEventKey and event.pressed and event.alt_pressed and event.ctrl_pressed:

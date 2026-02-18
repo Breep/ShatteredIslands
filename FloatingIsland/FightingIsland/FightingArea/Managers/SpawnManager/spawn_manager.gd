@@ -56,7 +56,7 @@ func spawn_spell(spell: Node3D) -> void:
 	_spells_node.add_child(spell)
 
 
-func spawn_entity(entity: Entity, entity_spawn_global_position: Vector3, context: EntityContext = null) -> void:
+func spawn_entity(entity: Entity, entity_spawn_global_position: Vector3, context: EntityContext = null, entity_type: Entity.EntityType = Entity.EntityType.HERO, entity_modifier: Dictionary = {}) -> void:
 	if entity == null:
 		push_error("SpawnManager: Trying to spawn a <null> entity")
 		return
@@ -71,6 +71,9 @@ func spawn_entity(entity: Entity, entity_spawn_global_position: Vector3, context
 	_entities_node.add_child(entity)
 	if entity_spawn_global_position != null:
 		entity.global_position = entity_spawn_global_position
+	
+	if _fighting_area != null:
+		_fighting_area.signal_entity_spawned(entity, entity_type, entity_modifier)
 
 # ============================== Private functions ==============================
 

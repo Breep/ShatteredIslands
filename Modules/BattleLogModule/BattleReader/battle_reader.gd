@@ -153,6 +153,8 @@ func _apply_interaction_received(battle_log: Dictionary) -> void:
 	var value: float = battle_log.get(BattleLog.Main.VALUE, -1)
 	var is_critical: bool = battle_log.get(BattleLog.Main.CRITICAL, false)
 	
+	Verbose.trace("Interaction received: " + str(source_id) + "->" + str(receiver_id) + " | " + str(Utils.ActionType.keys()[action_type]) \
+					+" | " + str(action_id) + " | " + str(value) + " | " + str(is_critical), Verbose.Category.BATTLE_READER)
 	_map_interaction(receiver, source, action_type, action_id, value, is_critical)
 #endregion
 

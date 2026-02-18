@@ -23,6 +23,10 @@ signal entity_died(victim: Entity)
 func signal_entity_died(victim: Entity) -> void:
 	entity_died.emit(victim)
 
+signal entity_spawned(entity: Entity, entity_type: Entity.EntityType, entity_modifier: Dictionary)
+func signal_entity_spawned(entity: Entity, entity_type: Entity.EntityType, entity_modifier: Dictionary) -> void:
+	entity_spawned.emit(entity, entity_type, entity_modifier)
+
 # ============================== Network Export variables ==============================
 
 @export var _current_battle_id: int = -1

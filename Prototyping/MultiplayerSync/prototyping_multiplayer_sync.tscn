@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://dpno572i8q886"]
 
 [ext_resource type="Script" uid="uid://bbao0icvwulgm" path="res://Prototyping/MultiplayerSync/prototyping_multiplayer_sync.gd" id="1_proto"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="2_ppaad"]
 [ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://Entities/Heroes/_Shared/hero_desc.gd" id="3_hdesc"]
+[ext_resource type="Resource" uid="uid://dvpdubk0btegx" path="res://Card/Descriptions/Cards/Poison/Common/PoisonFlask/poison_poison_flask.tres" id="3_yt7r3"]
 [ext_resource type="Resource" uid="uid://bkksjgh6p542o" path="res://Entities/Heroes/DarkKnight/dark_knight.tres" id="4_dk"]
 [ext_resource type="PackedScene" uid="uid://drcuyohos0doa" path="res://FloatingIsland/FightingIsland/fighting_island.tscn" id="6_island"]
 [ext_resource type="PackedScene" uid="uid://bhxhqex1pbh2p" path="res://UI/InGame/FightingArea/ui_fighting_area.tscn" id="7_uifa"]
@@ -26,6 +28,7 @@ fog_light_energy = 0.05
 
 [node name="PrototypingMultiplayerSync" type="Node3D" unique_id=1363701184 node_paths=PackedStringArray("_floating_island")]
 script = ExtResource("1_proto")
+_player1_cards = Array[ExtResource("2_ppaad")]([ExtResource("3_yt7r3")])
 _hero_descs = Array[ExtResource("3_hdesc")]([ExtResource("4_dk"), ExtResource("4_dk")])
 _floating_island = NodePath("FightingIsland")
 

@@ -141,7 +141,7 @@ var current_categories_level: Dictionary[Category, Level] = {
 	Category.HERO: Level.WARN,
 	Category.SUMMON: Level.WARN,
 	Category.BATTLE_SYNC: Level.WARN,
-	Category.BATTLE_READER: Level.WARN,
+	Category.BATTLE_READER: Level.TRACE,
 	Category.BATTLE_WRITER: Level.WARN,
 	Category.ENTITY_MANAGER: Level.WARN,
 	Category.HERO_SPAWNER: Level.WARN,
