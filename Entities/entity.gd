@@ -222,9 +222,11 @@ func _init() -> void:
 	# Default Modifier Registries
 	auto_attack_modifier_registry = AutoAttackModifierRegistry.new()
 	action_modifiers_registry = ActionModifiersRegistry.new()
+	Verbose.trace("Entity [" + entity_name + "_" + str(uid) + "] init", Verbose.Category.ENTITY)
 
 
 func _enter_tree() -> void:
+	Verbose.trace("Entity [" + entity_name + "_" + str(uid) + "] enter_tree", Verbose.Category.ENTITY)
 	# Stats registry needs to be created after _init() because custom_base_stats is not available in _init()
 	if custom_base_stats != null:
 		_base_stats = custom_base_stats
@@ -245,7 +247,7 @@ func _ready() -> void:
 	if status_module != null:
 		status_module.stunned_changed.connect(_on_stunned_changed)
 	
-	Verbose.debug("Entity [" + entity_name + "_" + str(uid) + "] ready", Verbose.Category.ENTITY)
+	Verbose.trace("Entity [" + entity_name + "_" + str(uid) + "] ready", Verbose.Category.ENTITY)
 
 	fighting_state_changed.connect(_on_fighting_state_changed)
 	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
@@ -297,6 +299,10 @@ func get_collision_center() -> Vector3:
 	
 	# Fallback to global position if no collision shape found
 	return global_position
+
+
+func process_tick() -> void:
+	pass
 #endregion
 
 #region ============================== Context ==============================
@@ -504,7 +510,6 @@ func _auto_load_modules() -> void:
 			Module.ModuleType.AUTO_ATTACK_PERIODIC_MODULE: _auto_attack_periodic_module = module
 		
 		add_child(module)
-		Verbose.debug("Entity [" + entity_name + "] auto-loaded module: " + Module.ModuleType.keys()[module_type], Verbose.Category.ENTITY)
 
 
 func _connect_module_dependencies() -> void:

@@ -23,7 +23,7 @@ extends Node3D
 @export var _hero_teams: Array[int] = [1, 2]
 
 @export_group("Battle")
-@export var _floating_island: FightingIsland
+@export var _fighting_island_scene: PackedScene
 @export var _battle_type: Battle.BattleType
 
 @export_group("Sync Settings")
@@ -34,6 +34,7 @@ extends Node3D
 
 var _heroes: Array[Hero] = []
 var _players: Array[Player] = []
+var _floating_island: FightingIsland
 
 # ============================== Onready nodes ==============================
 
@@ -102,6 +103,8 @@ func _setup_network() -> void:
 func _on_client_connected(_peer_id: int) -> void:
 	Verbose.info("Proto Sync: Client connected!", Verbose.Category.NET)
 	_sync_debug_panel.set_client_connected(true)
+	_floating_island = _fighting_island_scene.instantiate() as FightingIsland
+	add_child(_floating_island)
 
 
 func _on_client_disconnected(_peer_id: int) -> void:
@@ -112,6 +115,8 @@ func _on_client_disconnected(_peer_id: int) -> void:
 func _on_connected_to_server() -> void:
 	Verbose.info("Proto Sync: Connected to server! Waiting for fight start...", Verbose.Category.NET)
 	_sync_debug_panel.set_client_connected(true)
+	_floating_island = _fighting_island_scene.instantiate() as FightingIsland
+	add_child(_floating_island)
 
 
 func _on_start_fight_requested() -> void:

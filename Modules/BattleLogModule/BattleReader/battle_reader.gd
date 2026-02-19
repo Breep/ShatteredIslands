@@ -11,8 +11,6 @@ extends Node
 # ============================== Private variables ==============================
 
 var _battle_logs: Array[Dictionary] = []
-
-var _start_time: float
 var _current_index: int = 0
 var _is_playing: bool = false
 var simulated_delay_ms: int = 0
@@ -20,14 +18,16 @@ var simulated_delay_ms: int = 0
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	#if multiplayer.is_server(): queue_free() # Only clients read battle logs
+	if multiplayer.is_server():
+		queue_free()
+		return # Only clients read battle logs
 	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
 	GlobalFightingManager.all_fights_are_over.connect(_on_gfm_all_fights_are_over)
 
 
 func _process(_delta: float) -> void:
 	if not _is_playing or _current_index >= _battle_logs.size(): return
-	var elapsed_time: float = (Time.get_ticks_msec() as float) / 1000.0 - _start_time
+	var elapsed_time: float = (Time.get_ticks_msec() as float) / 1000.0 - GlobalFightingManager.fight_start_time
 	while _current_index < _battle_logs.size() and _battle_logs[_current_index][BattleLog.Main.TIME] <= elapsed_time:
 		_apply_log(_battle_logs[_current_index])
 		_current_index += 1
@@ -59,7 +59,6 @@ func _on_gfm_all_fights_are_over() -> void:
 # ============================== Private function ==============================
 
 func _start_playback() -> void:
-	_start_time = (Time.get_ticks_msec() as float) / 1000.0
 	_current_index = 0
 	_is_playing = true
 

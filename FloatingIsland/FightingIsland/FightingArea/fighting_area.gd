@@ -65,6 +65,7 @@ var arena_zone_manager: ArenaZoneManager:
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
+	fighting_manager.init(spawn_manager)
 	if _ready_checks() != true:
 		return
 

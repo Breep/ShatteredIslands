@@ -12,7 +12,7 @@ extends Node
 
 var _battle_logs: Array[Dictionary]
 var _last_log_index_sent: int = 0
-var _start_time: float
+var _is_recording: bool = false
 var _normal_fight_duration: float
 var _accelerated_fight_start_time: float
 var _is_accelerated_fight: bool = false
@@ -20,7 +20,9 @@ var _is_accelerated_fight: bool = false
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	#if not multiplayer.is_server(): queue_free() # Only the server writes battle logs
+	if not multiplayer.is_server():
+		queue_free()
+		return # Only the server writes battle logs
 	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
 	
 	_fighting_area.projectile_spawned.connect(_on_fighting_area_projectile_spawned)
@@ -59,7 +61,7 @@ func _log_attack(source: Entity, target: Entity,
 			BattleLog.Modifier.INSTABILITY: instability
 		}
 	}
-	_battle_logs.append(data)
+	_append_log(data)
 
 
 func _log_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary) -> void:
@@ -72,7 +74,7 @@ func _log_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type, s
 		BattleLog.Main.SPELL_TYPE: spell_type,
 		BattleLog.Main.SPELL_MODIFIER: spell_modifier
 	}
-	_battle_logs.append(data)
+	_append_log(data)
 
 
 func _log_action_done(source: Entity, target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
@@ -95,7 +97,7 @@ func _log_action_done(source: Entity, target: Entity, action_type: Utils.ActionT
 		BattleLog.Main.TARGET: target.uid
 	}
 	
-	_battle_logs.append(data)
+	_append_log(data)
 
 
 func _log_interaction_received(receiver: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
@@ -116,7 +118,7 @@ func _log_interaction_received(receiver: Entity, source: Entity, action_type: Ut
 		BattleLog.Main.SOURCE: source.uid if source != null else -1,
 	}
 	
-	_battle_logs.append(data)
+	_append_log(data)
 
 
 func _log_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.Type) -> void:
@@ -128,7 +130,7 @@ func _log_projectile_spawned(source: Entity, target: Entity, projectile_type: Pr
 		BattleLog.Main.TARGET: target.uid,
 		BattleLog.Main.PROJECTILE_TYPE: projectile_type
 	}
-	_battle_logs.append(data)
+	_append_log(data)
 
 
 func _log_entity_spawned(entity: Entity, entity_type: Entity.EntityType, entity_modifier: Dictionary) -> void:
@@ -140,27 +142,33 @@ func _log_entity_spawned(entity: Entity, entity_type: Entity.EntityType, entity_
 		BattleLog.Main.ENTITY_TYPE: entity_type,
 		BattleLog.Main.ENTITY_MODIFIER: entity_modifier
 	}
-	_battle_logs.append(data)
+	_append_log(data)
 #endregion
+
+
+func _append_log(data: Dictionary) -> void:
+	if not _is_recording: return
+	_battle_logs.append(data)
 
 func _get_time() -> float:
 	if _is_accelerated_fight:
-		return _normal_fight_duration + ((Time.get_ticks_msec() as float) / 1000.0 - _accelerated_fight_start_time) # / GlobalFightingManager.ACCELERATED_FIGHT_TIME_SCALE
+		return _normal_fight_duration + ((Time.get_ticks_msec() as float) / 1000.0 - _accelerated_fight_start_time)
 	else:
-		return ((Time.get_ticks_msec() as float) / 1000.0 - _start_time)
+		return (Time.get_ticks_msec() as float) / 1000.0 - GlobalFightingManager.fight_start_time
 
 # ============================== Callbacks ==============================
 
 func _on_gfm_fighting_phase_state_changed(state: GlobalFightingManager.FightingPhaseState) -> void:
 	match state:
 		GlobalFightingManager.FightingPhaseState.NORMAL:
-			_start_time = (Time.get_ticks_msec() as float) / 1000.0
+			_is_recording = true
 			_is_accelerated_fight = false
 		GlobalFightingManager.FightingPhaseState.ACCELERATED:
 			_normal_fight_duration = _get_time()
 			_accelerated_fight_start_time = (Time.get_ticks_msec() as float) / 1000.0
 			_is_accelerated_fight = true
 		GlobalFightingManager.FightingPhaseState.FINISHED:
+			_is_recording = false
 			_battle_logs.clear()
 
 

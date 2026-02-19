@@ -71,6 +71,8 @@ func cast_ultimate() -> void:
 	ultimate_casted.emit()
 #endregion
 
+func process_tick() -> void:
+	periodic_timer_registry.process_tick()
 
 #region ============================== Node base functions ==============================
 func _enter_tree() -> void:

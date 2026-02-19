@@ -137,7 +137,7 @@ var current_categories_level: Dictionary[Category, Level] = {
 	Category.GLOBAL_FIGHTING_MANAGER: Level.DEBUG,
 	Category.ENTITY_ANIMATION: Level.WARN,
 	Category.ENTITY_MODULE: Level.WARN,
-	Category.ENTITY: Level.WARN,
+	Category.ENTITY: Level.TRACE,
 	Category.HERO: Level.WARN,
 	Category.SUMMON: Level.WARN,
 	Category.BATTLE_SYNC: Level.WARN,
@@ -195,7 +195,7 @@ func _ready() -> void:
 #region ============================== Public function ==============================
 func _get_prefix() -> String:
 	if _is_server: return PREFIX_TEMPLATES[GameType.SERVER]
-	if not multiplayer.is_server():
+	if multiplayer and not multiplayer.is_server():
 		return PREFIX_TEMPLATES[GameType.CLIENT]
 	else:
 		return PREFIX_TEMPLATES[GameType.SOLO]
@@ -203,7 +203,7 @@ func _get_prefix() -> String:
 
 func _get_rich_prefix() -> String:
 	if _is_server: return RICH_PREFIX_TEMPLATES[GameType.SERVER]
-	if not multiplayer.is_server():
+	if multiplayer and not multiplayer.is_server():
 		return RICH_PREFIX_TEMPLATES[GameType.CLIENT]
 	else:
 		return RICH_PREFIX_TEMPLATES[GameType.SOLO]
