@@ -90,8 +90,6 @@ func _instantiate_heroes() -> void:
 		
 		# Instantiate hero with FIGHTING_PHASE display mode for prototyping
 		var hero: Hero = Shared.HERO_SCENES[hero_desc.id].instantiate().init(Hero.DisplayMode.FIGHTING_PHASE)
-		hero.id = Entity.generate_network_id()
-		hero.level = 1
 		hero.entity_name = "Player" + str(i + 1)
 		
 		# Assign team (default to index-based if array is too small)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c5ji8s1iic5v8"]
+[gd_scene format=3 uid="uid://c5ji8s1iic5v8"]
 
 [ext_resource type="Script" uid="uid://bu48b2v401db2" path="res://Prototyping/FightingIsland/prototyping_map.gd" id="1_vksg0"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="2_kngc2"]
@@ -6,7 +6,6 @@
 [ext_resource type="Resource" uid="uid://bkksjgh6p542o" path="res://Entities/Heroes/DarkKnight/dark_knight.tres" id="3_dlg3x"]
 [ext_resource type="Resource" uid="uid://cu7ymo37wp14y" path="res://Card/Descriptions/Cards/Poison/Epic/SnakeBarrel/poison_snake_barrel.tres" id="3_e0xek"]
 [ext_resource type="PackedScene" uid="uid://drcuyohos0doa" path="res://FloatingIsland/FightingIsland/fighting_island.tscn" id="6_sp80o"]
-[ext_resource type="PackedScene" uid="uid://bhxhqex1pbh2p" path="res://UI/InGame/FightingArea/ui_fighting_area.tscn" id="7_wwtbg"]
 [ext_resource type="Material" uid="uid://2wlal7g5718r" path="res://VFX/Shaders/Sky/stylized_shader_night.tres" id="8_qw25r"]
 [ext_resource type="PackedScene" uid="uid://cs66hky7o30da" path="res://GlobalManagers/ActionMeter/Viewer/ui_entity_bds_registry.tscn" id="10_kngc2"]
 [ext_resource type="PackedScene" uid="uid://ci5cxqmyimurq" path="res://UI/InGame/FightingArea/DebugEntityStats/ui_debug_entity_stats.tscn" id="11_e0xek"]
@@ -38,38 +37,35 @@ fog_light_energy = 0.05
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.0
 
-[node name="PrototypingMap" type="Node3D" node_paths=PackedStringArray("_floating_island")]
+[node name="PrototypingMap" type="Node3D" unique_id=831863063 node_paths=PackedStringArray("_floating_island")]
 script = ExtResource("1_vksg0")
 _player1_cards = Array[ExtResource("2_kngc2")]([ExtResource("3_e0xek")])
 _hero_descs = Array[ExtResource("2_vksg0")]([ExtResource("3_dlg3x"), ExtResource("3_dlg3x")])
 _hero_teams = Array[int]([1, 2, 0, 0, 1, 1, 1, 1])
 _floating_island = NodePath("FightingIsland")
 
-[node name="FightingIsland" parent="." instance=ExtResource("6_sp80o")]
+[node name="FightingIsland" parent="." unique_id=1301753607 instance=ExtResource("6_sp80o")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.056681156, -0.10216141, 0.17525864)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1113167414]
 transform = Transform3D(0.88089, 0.0799744, 0.466517, -0.360914, 0.751164, 0.552716, -0.306227, -0.655254, 0.690556, 0, 52.8971, 0)
 shadow_enabled = true
 
-[node name="FogVolume" type="FogVolume" parent="."]
+[node name="FogVolume" type="FogVolume" parent="." unique_id=1785778344]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.26962, 0.223571, 5.01905)
 size = Vector3(4.52728, 4.15, 8.08638)
 material = SubResource("FogMaterial_7w4nr")
 
-[node name="WorldEnvironment2" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment2" type="WorldEnvironment" parent="." unique_id=1256254217]
 environment = SubResource("Environment_gs0rq")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=3875107]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0.2, 5.7)
 light_color = Color(0.846952, 0.2959, 0.736692, 1)
 light_volumetric_fog_energy = 6.642
 light_specular = 4.879
 
-[node name="UIFightingArea" parent="." instance=ExtResource("7_wwtbg")]
-unique_name_in_owner = true
-
-[node name="UIProto" type="Control" parent="."]
+[node name="UIProto" type="Control" parent="." unique_id=2000496642]
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 8
@@ -85,7 +81,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="PlayerStats" parent="UIProto" node_paths=PackedStringArray("_critical_chance_labels", "_critical_multiplier_labels", "_dodge_labels", "_resistance_labels", "_vulnerability_labels", "_strength_labels", "_weakness_labels") instance=ExtResource("11_e0xek")]
+[node name="PlayerStats" parent="UIProto" unique_id=1102733214 node_paths=PackedStringArray("_critical_chance_labels", "_critical_multiplier_labels", "_dodge_labels", "_resistance_labels", "_vulnerability_labels", "_strength_labels", "_weakness_labels") instance=ExtResource("11_e0xek")]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
@@ -207,7 +203,7 @@ _weakness_labels = {
 12: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessNecrosis")
 }
 
-[node name="EntityBDSRegistry" parent="UIProto" node_paths=PackedStringArray("_ui_battle_data_stats_panels") instance=ExtResource("10_kngc2")]
+[node name="EntityBDSRegistry" parent="UIProto" unique_id=2072725904 node_paths=PackedStringArray("_ui_battle_data_stats_panels") instance=ExtResource("10_kngc2")]
 unique_name_in_owner = true
 layout_mode = 1
 offset_left = 491.0

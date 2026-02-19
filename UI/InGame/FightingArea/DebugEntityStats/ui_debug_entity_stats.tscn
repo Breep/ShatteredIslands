@@ -1,140 +1,124 @@
 [gd_scene format=3 uid="uid://ci5cxqmyimurq"]
 
-[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_elkss"]
 [ext_resource type="Script" uid="uid://dundt3e2waax6" path="res://UI/InGame/FightingArea/DebugEntityStats/ui_debug_entity_stats.gd" id="2_1nfrh"]
 
-[sub_resource type="Gradient" id="Gradient_pkwb5"]
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_scgag"]
-gradient = SubResource("Gradient_pkwb5")
-fill_to = Vector2(1, 1)
-
 [node name="DebugEntityStats" type="Control" unique_id=669658583 node_paths=PackedStringArray("_health_max_label", "_mana_max_label", "_ad_label", "_as_label", "_critical_chance_labels", "_critical_multiplier_labels", "_dodge_labels", "_resistance_labels", "_vulnerability_labels", "_strength_labels", "_weakness_labels", "_entity_name_label")]
-custom_minimum_size = Vector2(600, 550)
+custom_minimum_size = Vector2(700, 700)
 layout_mode = 3
 anchors_preset = 0
-theme = ExtResource("1_elkss")
+offset_right = 600.0
+offset_bottom = 550.0
 script = ExtResource("2_1nfrh")
-_health_max_label = NodePath("MarginContainer/Control/VBoxContainer/StandardStats/VBoxContainer/VBoxContainer/HealthMaxLabel")
-_mana_max_label = NodePath("MarginContainer/Control/VBoxContainer/StandardStats/VBoxContainer/VBoxContainer2/ManaMaxLabel")
-_ad_label = NodePath("MarginContainer/Control/VBoxContainer/StandardStats/VBoxContainer/VBoxContainer3/AttackDamageLabel")
-_as_label = NodePath("MarginContainer/Control/VBoxContainer/StandardStats/VBoxContainer/VBoxContainer4/AttackSpeedLabel")
+_health_max_label = NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/LeftSoloStats/Health/MarginContainer/VBoxContainer/HealthValueLabel")
+_mana_max_label = NodePath("")
+_ad_label = NodePath("")
+_as_label = NodePath("")
 _critical_chance_labels = {
-0: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCPhysical"),
-1: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCMagical"),
-2: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCPoison"),
-3: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCPure"),
-4: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCHeal"),
-5: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCStun"),
-6: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCCleanse"),
-7: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCDispell"),
-8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCShield"),
-9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCIgnite"),
-10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCPoisonStack"),
-11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCRegen"),
-12: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer/CCNecrosis")
+0: NodePath(""),
+1: NodePath(""),
+2: NodePath(""),
+3: NodePath(""),
+4: NodePath(""),
+5: NodePath(""),
+6: NodePath(""),
+7: NodePath(""),
+8: NodePath(""),
+9: NodePath(""),
+10: NodePath(""),
+11: NodePath(""),
+12: NodePath("")
 }
 _critical_multiplier_labels = {
-0: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMPhysical"),
-1: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMMagical"),
-2: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMPoison"),
-3: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMPure"),
-4: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMHeal"),
-5: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMStun"),
-6: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMCleanse"),
-7: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMDispell"),
-8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMShield"),
-9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMIgnite"),
-10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMPoisonStack"),
-11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMRegen"),
-12: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer/CMNecrosis")
+0: NodePath(""),
+1: NodePath(""),
+2: NodePath(""),
+3: NodePath(""),
+4: NodePath(""),
+5: NodePath(""),
+6: NodePath(""),
+7: NodePath(""),
+8: NodePath(""),
+9: NodePath(""),
+10: NodePath(""),
+11: NodePath(""),
+12: NodePath("")
 }
 _dodge_labels = {
-0: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgePhysical"),
-1: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeMagical"),
-2: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgePoison"),
-3: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgePure"),
-4: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeHeal"),
-5: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeStun"),
-6: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeCleanse"),
-7: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeDispell"),
-8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeShield"),
-9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeIgnite"),
-10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgePoisonStack"),
-11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeRegen"),
-12: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer/DodgeNecrosis")
+0: NodePath(""),
+1: NodePath(""),
+2: NodePath(""),
+3: NodePath(""),
+4: NodePath(""),
+5: NodePath(""),
+6: NodePath(""),
+7: NodePath(""),
+8: NodePath(""),
+9: NodePath(""),
+10: NodePath(""),
+11: NodePath(""),
+12: NodePath("")
 }
 _resistance_labels = {
-0: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistPhysical"),
-1: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistMagical"),
-2: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistPoison"),
-3: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistPure"),
-4: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistHeal"),
-5: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistStun"),
-6: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistCleanse"),
-7: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistDispell"),
-8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistShield"),
-9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistIgnite"),
-10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistPoisonStack"),
-11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistRegen"),
-12: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer/ResistNecrosis")
+0: NodePath(""),
+1: NodePath(""),
+2: NodePath(""),
+3: NodePath(""),
+4: NodePath(""),
+5: NodePath(""),
+6: NodePath(""),
+7: NodePath(""),
+8: NodePath(""),
+9: NodePath(""),
+10: NodePath(""),
+11: NodePath(""),
+12: NodePath("")
 }
 _vulnerability_labels = {
-0: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnPhysical"),
-1: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnMagical"),
-2: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnPoison"),
-3: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnPure"),
-4: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnHeal"),
-5: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnStun"),
-6: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnCleanse"),
-7: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnDispell"),
-8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnShield"),
-9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnIgnite"),
-10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnPoisonStack"),
-11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnRegen"),
-12: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer/VulnNecrosis")
+0: NodePath(""),
+1: NodePath(""),
+2: NodePath(""),
+3: NodePath(""),
+4: NodePath(""),
+5: NodePath(""),
+6: NodePath(""),
+7: NodePath(""),
+8: NodePath(""),
+9: NodePath(""),
+10: NodePath(""),
+11: NodePath(""),
+12: NodePath("")
 }
 _strength_labels = {
-0: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtPhysical"),
-1: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtMagical"),
-2: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtPoison"),
-3: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtPure"),
-4: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtHeal"),
-5: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtStun"),
-6: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtCleanse"),
-7: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtDispell"),
-8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtShield"),
-9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtIgnite"),
-10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtPoisonStack"),
-11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtRegen"),
-12: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer/StrenghtNecrosis")
+0: NodePath(""),
+1: NodePath(""),
+2: NodePath(""),
+3: NodePath(""),
+4: NodePath(""),
+5: NodePath(""),
+6: NodePath(""),
+7: NodePath(""),
+8: NodePath(""),
+9: NodePath(""),
+10: NodePath(""),
+11: NodePath(""),
+12: NodePath("")
 }
 _weakness_labels = {
-0: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessPhysical"),
-1: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessMagical"),
-2: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessPoison"),
-3: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessPure"),
-4: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessHeal"),
-5: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessStun"),
-6: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessCleanse"),
-7: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessDispell"),
-8: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessShield"),
-9: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessIgnite"),
-10: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessPoisonStack"),
-11: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessRegen"),
-12: NodePath("MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer/WeaknessNecrosis")
+0: NodePath(""),
+1: NodePath(""),
+2: NodePath(""),
+3: NodePath(""),
+4: NodePath(""),
+5: NodePath(""),
+6: NodePath(""),
+7: NodePath(""),
+8: NodePath(""),
+9: NodePath(""),
+10: NodePath(""),
+11: NodePath(""),
+12: NodePath("")
 }
-_entity_name_label = NodePath("MarginContainer/Control/EntityNameLabel")
-
-[node name="TextureRect" type="TextureRect" parent="." unique_id=613114255]
-modulate = Color(1, 1, 1, 0.23529412)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture2D_scgag")
+_entity_name_label = NodePath("MarginContainer/ScrollContainer/Control/VBoxContainer/EntityNameLabel")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=608138173]
 layout_mode = 1
@@ -148,10 +132,15 @@ theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 25
 
-[node name="Control" type="Control" parent="MarginContainer" unique_id=1040837435]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer" unique_id=1741513050]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control" unique_id=1728953176]
+[node name="Control" type="Control" parent="MarginContainer/ScrollContainer" unique_id=1040837435]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer/Control" unique_id=1728953176]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -160,925 +149,1971 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
 
-[node name="StandardStats" type="Control" parent="MarginContainer/Control/VBoxContainer" unique_id=963809133]
-custom_minimum_size = Vector2(0, 100)
+[node name="EntityNameLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer" unique_id=1226062340]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Entity name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SoloStats" type="HBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer" unique_id=102398597]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="LeftSoloStats" type="VBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats" unique_id=1518303080]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Health" type="Control" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/LeftSoloStats" unique_id=195867607]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control/VBoxContainer/StandardStats" unique_id=1518303080]
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/LeftSoloStats/Health" unique_id=263427644]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0.45490196, 0.45490196, 0.45490196, 0.47843137)
 
-[node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer/Control/VBoxContainer/StandardStats/VBoxContainer" unique_id=1372199380]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/LeftSoloStats/Health" unique_id=1900265854]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/LeftSoloStats/Health/MarginContainer" unique_id=1372199380]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/Control/VBoxContainer/StandardStats/VBoxContainer/VBoxContainer" unique_id=1912582689]
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/LeftSoloStats/Health/MarginContainer/VBoxContainer" unique_id=1912582689]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-size_flags_horizontal = 3
-text = "Health max"
+text = "Health Max"
 vertical_alignment = 1
 
-[node name="HealthMaxLabel" type="Label" parent="MarginContainer/Control/VBoxContainer/StandardStats/VBoxContainer/VBoxContainer" unique_id=1494972947]
+[node name="HealthValueLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/LeftSoloStats/Health/MarginContainer/VBoxContainer" unique_id=1494972947]
 layout_mode = 2
-size_flags_horizontal = 3
 text = "1000"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="VBoxContainer2" type="HBoxContainer" parent="MarginContainer/Control/VBoxContainer/StandardStats/VBoxContainer" unique_id=1759957443]
+[node name="Mana" type="Control" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/LeftSoloStats" unique_id=215656846]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/Control/VBoxContainer/StandardStats/VBoxContainer/VBoxContainer2" unique_id=314470704]
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/LeftSoloStats/Mana" unique_id=1112702130]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.32544094, 0.3254409, 0.32544082, 0.47843137)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/LeftSoloStats/Mana" unique_id=348183182]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/LeftSoloStats/Mana/MarginContainer" unique_id=1837323490]
 layout_mode = 2
-size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/LeftSoloStats/Mana/MarginContainer/VBoxContainer" unique_id=965118002]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
 text = "Mana Max"
 vertical_alignment = 1
 
-[node name="ManaMaxLabel" type="Label" parent="MarginContainer/Control/VBoxContainer/StandardStats/VBoxContainer/VBoxContainer2" unique_id=585373627]
+[node name="ManaValueLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/LeftSoloStats/Mana/MarginContainer/VBoxContainer" unique_id=1950110260]
 layout_mode = 2
-size_flags_horizontal = 3
 text = "100"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="VBoxContainer3" type="HBoxContainer" parent="MarginContainer/Control/VBoxContainer/StandardStats/VBoxContainer" unique_id=1473638811]
+[node name="AD" type="Control" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/LeftSoloStats" unique_id=2030649489]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/Control/VBoxContainer/StandardStats/VBoxContainer/VBoxContainer3" unique_id=1860277611]
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/LeftSoloStats/AD" unique_id=306373450]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.45490196, 0.45490196, 0.45490196, 0.47843137)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/LeftSoloStats/AD" unique_id=1642687694]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/LeftSoloStats/AD/MarginContainer" unique_id=498654357]
 layout_mode = 2
-size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/LeftSoloStats/AD/MarginContainer/VBoxContainer" unique_id=115146632]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
 text = "AD"
 vertical_alignment = 1
 
-[node name="AttackDamageLabel" type="Label" parent="MarginContainer/Control/VBoxContainer/StandardStats/VBoxContainer/VBoxContainer3" unique_id=19520629]
+[node name="ADValueLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/LeftSoloStats/AD/MarginContainer/VBoxContainer" unique_id=1899868050]
 layout_mode = 2
-size_flags_horizontal = 3
 text = "20"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="VBoxContainer4" type="HBoxContainer" parent="MarginContainer/Control/VBoxContainer/StandardStats/VBoxContainer" unique_id=1309644937]
+[node name="Range" type="Control" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/LeftSoloStats" unique_id=54834732]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/Control/VBoxContainer/StandardStats/VBoxContainer/VBoxContainer4" unique_id=1133656172]
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/LeftSoloStats/Range" unique_id=491217880]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.32544094, 0.3254409, 0.32544082, 0.47843137)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/LeftSoloStats/Range" unique_id=884554066]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/LeftSoloStats/Range/MarginContainer" unique_id=1346066811]
 layout_mode = 2
-size_flags_horizontal = 3
-text = "AS"
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/LeftSoloStats/Range/MarginContainer/VBoxContainer" unique_id=1044523314]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Range"
 vertical_alignment = 1
 
-[node name="AttackSpeedLabel" type="Label" parent="MarginContainer/Control/VBoxContainer/StandardStats/VBoxContainer/VBoxContainer4" unique_id=1623843048]
+[node name="RangeValueLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/LeftSoloStats/Range/MarginContainer/VBoxContainer" unique_id=336836486]
 layout_mode = 2
-size_flags_horizontal = 3
-text = "1.0"
+text = "40"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="MultipleStats" type="Control" parent="MarginContainer/Control/VBoxContainer" unique_id=1712258025]
-custom_minimum_size = Vector2(0, 300)
+[node name="AS" type="Control" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/LeftSoloStats" unique_id=1062660883]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
-size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Control/VBoxContainer/MultipleStats" unique_id=1179271945]
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/LeftSoloStats/AS" unique_id=2134306920]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0.45490196, 0.45490196, 0.45490196, 0.47843137)
 
-[node name="ActionType" type="Control" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer" unique_id=1706085354]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType" unique_id=1715889390]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/LeftSoloStats/AS" unique_id=1957206151]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 10
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
 
-[node name="Label" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer" unique_id=793182644]
-custom_minimum_size = Vector2(0, 40)
+[node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/LeftSoloStats/AS/MarginContainer" unique_id=1772785327]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "Action Types"
-horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/LeftSoloStats/AS/MarginContainer/VBoxContainer" unique_id=2101046387]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "AS"
 vertical_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer" unique_id=1982179629]
+[node name="ASValueLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/LeftSoloStats/AS/MarginContainer/VBoxContainer" unique_id=1464690113]
 layout_mode = 2
-size_flags_vertical = 3
-
-[node name="ATPhysical" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer" unique_id=1682384631]
-layout_mode = 2
-text = "Damage Physical"
+text = "1.32"
+horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="ATMagical" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer" unique_id=163526482]
-layout_mode = 2
-text = "Damage Magical"
-vertical_alignment = 1
-
-[node name="ATPoison" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer" unique_id=266776692]
-layout_mode = 2
-text = "Damage Poison"
-vertical_alignment = 1
-
-[node name="ATPure" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer" unique_id=584915097]
-layout_mode = 2
-text = "DAMAGE PURE"
-vertical_alignment = 1
-
-[node name="ATHeal" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer" unique_id=477952813]
-layout_mode = 2
-text = "Utility Heal"
-vertical_alignment = 1
-
-[node name="ATStun" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer" unique_id=2140266046]
-layout_mode = 2
-text = "Utility Stun"
-vertical_alignment = 1
-
-[node name="ATCleanse" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer" unique_id=898289613]
-layout_mode = 2
-text = "Utility Cleanse"
-vertical_alignment = 1
-
-[node name="ATDispell" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer" unique_id=1262571660]
-layout_mode = 2
-text = "Utility Dispell"
-vertical_alignment = 1
-
-[node name="ATShield" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer" unique_id=1862399677]
-layout_mode = 2
-text = "Stack Shield"
-vertical_alignment = 1
-
-[node name="ATIgnite" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer" unique_id=819438509]
-layout_mode = 2
-text = "Stack Ignite"
-vertical_alignment = 1
-
-[node name="ATPoison2" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer" unique_id=1416257187]
-layout_mode = 2
-text = "Stack Poison"
-vertical_alignment = 1
-
-[node name="ATRegen" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer" unique_id=924322209]
-layout_mode = 2
-text = "Stack Regen"
-vertical_alignment = 1
-
-[node name="ATNecrosis" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/ActionType/VBoxContainer/VBoxContainer" unique_id=1779931583]
-layout_mode = 2
-text = "Stack Necrosis"
-vertical_alignment = 1
-
-[node name="CriticalChance" type="Control" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer" unique_id=1364397325]
-custom_minimum_size = Vector2(50, 0)
+[node name="RightSoloStats" type="VBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats" unique_id=861892678]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance" unique_id=1280356272]
+[node name="Defence" type="Control" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/RightSoloStats" unique_id=19350512]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/RightSoloStats/Defence" unique_id=1376076193]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 10
+color = Color(0.45490196, 0.45490196, 0.45490196, 0.47843137)
 
-[node name="Label" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer" unique_id=1570721751]
-custom_minimum_size = Vector2(0, 40)
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/RightSoloStats/Defence" unique_id=930257894]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/RightSoloStats/Defence/MarginContainer" unique_id=1707784596]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/RightSoloStats/Defence/MarginContainer/VBoxContainer" unique_id=1450378879]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Defence"
+vertical_alignment = 1
+
+[node name="DefenceValueLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/RightSoloStats/Defence/MarginContainer/VBoxContainer" unique_id=906242088]
+layout_mode = 2
+text = "30"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="ManaRegen" type="Control" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/RightSoloStats" unique_id=849527199]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/RightSoloStats/ManaRegen" unique_id=1621370092]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.32544094, 0.3254409, 0.32544082, 0.47843137)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/RightSoloStats/ManaRegen" unique_id=1324653792]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/RightSoloStats/ManaRegen/MarginContainer" unique_id=1340264670]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/RightSoloStats/ManaRegen/MarginContainer/VBoxContainer" unique_id=1083948349]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Mana Regen"
+vertical_alignment = 1
+
+[node name="ManaRegenValueLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/RightSoloStats/ManaRegen/MarginContainer/VBoxContainer" unique_id=1582244814]
+layout_mode = 2
+text = "1.3"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Block" type="Control" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/RightSoloStats" unique_id=256336944]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/RightSoloStats/Block" unique_id=408288834]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.45490196, 0.45490196, 0.45490196, 0.47843137)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/RightSoloStats/Block" unique_id=646019038]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/RightSoloStats/Block/MarginContainer" unique_id=325579745]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/RightSoloStats/Block/MarginContainer/VBoxContainer" unique_id=512205427]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Block"
+vertical_alignment = 1
+
+[node name="BlockValueLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/RightSoloStats/Block/MarginContainer/VBoxContainer" unique_id=1388773293]
+layout_mode = 2
+text = "10"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="AP" type="Control" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/RightSoloStats" unique_id=1241416723]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/RightSoloStats/AP" unique_id=1402505146]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.32544094, 0.3254409, 0.32544082, 0.47843137)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/RightSoloStats/AP" unique_id=1098368443]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/RightSoloStats/AP/MarginContainer" unique_id=1665483723]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/RightSoloStats/AP/MarginContainer/VBoxContainer" unique_id=716172222]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "AP"
+vertical_alignment = 1
+
+[node name="APValueLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/RightSoloStats/AP/MarginContainer/VBoxContainer" unique_id=1741170521]
+layout_mode = 2
+text = "30"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="GlobalCrit" type="Control" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/RightSoloStats" unique_id=142237257]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/RightSoloStats/GlobalCrit" unique_id=283229003]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.45490196, 0.45490196, 0.45490196, 0.47843137)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/RightSoloStats/GlobalCrit" unique_id=1414341409]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/RightSoloStats/GlobalCrit/MarginContainer" unique_id=1936297282]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/RightSoloStats/GlobalCrit/MarginContainer/VBoxContainer" unique_id=314025826]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Global Crit"
+vertical_alignment = 1
+
+[node name="GlobalCritValueLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/SoloStats/RightSoloStats/GlobalCrit/MarginContainer/VBoxContainer" unique_id=2131927364]
+layout_mode = 2
+text = "5"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MultipleStats" type="VBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer" unique_id=1741423033]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Titles" type="Control" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats" unique_id=1887246004]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Titles" unique_id=597707470]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1584723, 0.15847233, 0.15847224, 0.47843137)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Titles" unique_id=817812303]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Titles" type="HBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Titles/MarginContainer" unique_id=1751883581]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="NameLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Titles/MarginContainer/Titles" unique_id=261182573]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
-text = "Crit
-Chance"
-horizontal_alignment = 1
-vertical_alignment = 1
+text = "Name"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer" unique_id=1745428538]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="CCPhysical" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer" unique_id=398072626]
-layout_mode = 2
-text = "15"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CCMagical" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer" unique_id=1270986087]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CCPoison" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer" unique_id=1829492574]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CCPure" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer" unique_id=1320770810]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CCHeal" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer" unique_id=1339721607]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CCStun" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer" unique_id=1130545201]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CCCleanse" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer" unique_id=512953326]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CCDispell" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer" unique_id=43878366]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CCShield" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer" unique_id=1384029646]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CCIgnite" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer" unique_id=1546109553]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CCPoisonStack" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer" unique_id=680859160]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CCRegen" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer" unique_id=953591296]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CCNecrosis" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalChance/VBoxContainer/VBoxContainer" unique_id=805422387]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CriticalMult" type="Control" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer" unique_id=255082797]
+[node name="CritChanceLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Titles/MarginContainer/Titles" unique_id=172787590]
 custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult" unique_id=1385562899]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 10
-
-[node name="Label" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer" unique_id=534461979]
-custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
-text = "Crit
-Mult"
-horizontal_alignment = 1
-vertical_alignment = 1
+text = "Crit %"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer" unique_id=1948895822]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="CMPhysical" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer" unique_id=1948424799]
-layout_mode = 2
-text = "15"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CMMagical" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer" unique_id=1114111704]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CMPoison" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer" unique_id=1594016287]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CMPure" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer" unique_id=1367239895]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CMHeal" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer" unique_id=1023227993]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CMStun" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer" unique_id=1176012718]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CMCleanse" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer" unique_id=275473297]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CMDispell" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer" unique_id=2026933142]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CMShield" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer" unique_id=1840095634]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CMIgnite" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer" unique_id=667948477]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CMPoisonStack" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer" unique_id=910379718]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CMRegen" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer" unique_id=1965461908]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CMNecrosis" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/CriticalMult/VBoxContainer/VBoxContainer" unique_id=414365936]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Dodge" type="Control" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer" unique_id=184023056]
+[node name="CritMultiplierLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Titles/MarginContainer/Titles" unique_id=657593294]
 custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge" unique_id=1960617806]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 10
-
-[node name="Label" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer" unique_id=1514596756]
-custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
-text = "Dodge"
-horizontal_alignment = 1
-vertical_alignment = 1
+text = "Crit x"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer" unique_id=1303393749]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="DodgePhysical" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer" unique_id=916512996]
-layout_mode = 2
-text = "15"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="DodgeMagical" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer" unique_id=62284406]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="DodgePoison" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer" unique_id=953824441]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="DodgePure" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer" unique_id=718563949]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="DodgeHeal" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer" unique_id=215644725]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="DodgeStun" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer" unique_id=1627501246]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="DodgeCleanse" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer" unique_id=354787291]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="DodgeDispell" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer" unique_id=927386202]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="DodgeShield" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer" unique_id=894394291]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="DodgeIgnite" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer" unique_id=1459548614]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="DodgePoisonStack" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer" unique_id=218629917]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="DodgeRegen" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer" unique_id=508731149]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="DodgeNecrosis" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Dodge/VBoxContainer/VBoxContainer" unique_id=1296553766]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Resistance" type="Control" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer" unique_id=1230092582]
+[node name="CritResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Titles/MarginContainer/Titles" unique_id=1788323406]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 10
+text = "Crit res"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance" unique_id=392270939]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 10
-
-[node name="Label" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer" unique_id=1082734027]
-custom_minimum_size = Vector2(0, 40)
+[node name="ResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Titles/MarginContainer/Titles" unique_id=346852295]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "Resist"
-horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer" unique_id=1875621742]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="ResistPhysical" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer" unique_id=1793101439]
-layout_mode = 2
-text = "15"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ResistMagical" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer" unique_id=445371310]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ResistPoison" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer" unique_id=718346419]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ResistPure" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer" unique_id=1675737110]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ResistHeal" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer" unique_id=1794458448]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ResistStun" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer" unique_id=291669304]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ResistCleanse" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer" unique_id=909481185]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ResistDispell" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer" unique_id=788884773]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ResistShield" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer" unique_id=284778207]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ResistIgnite" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer" unique_id=393845850]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ResistPoisonStack" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer" unique_id=1890618609]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ResistRegen" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer" unique_id=1513055455]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ResistNecrosis" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Resistance/VBoxContainer/VBoxContainer" unique_id=783489137]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Vulnerability" type="Control" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer" unique_id=1009163369]
+[node name="VulnerabilityLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Titles/MarginContainer/Titles" unique_id=635619294]
 custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability" unique_id=287899374]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 10
-
-[node name="Label" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer" unique_id=861037403]
-custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "Vuln"
-horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer" unique_id=713478336]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="VulnPhysical" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer" unique_id=401159257]
-layout_mode = 2
-text = "15"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="VulnMagical" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer" unique_id=861442072]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="VulnPoison" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer" unique_id=1690377460]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="VulnPure" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer" unique_id=1373775668]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="VulnHeal" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer" unique_id=2088601364]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="VulnStun" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer" unique_id=171634945]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="VulnCleanse" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer" unique_id=1927569251]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="VulnDispell" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer" unique_id=1051132480]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="VulnShield" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer" unique_id=2004613352]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="VulnIgnite" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer" unique_id=1648947168]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="VulnPoisonStack" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer" unique_id=551031714]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="VulnRegen" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer" unique_id=1299615983]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="VulnNecrosis" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Vulnerability/VBoxContainer/VBoxContainer" unique_id=279767739]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Strenght" type="Control" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer" unique_id=955152814]
+[node name="StrengthLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Titles/MarginContainer/Titles" unique_id=300184955]
 custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght" unique_id=270795218]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 10
-
-[node name="Label" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer" unique_id=1115970794]
-custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
-text = "Strenght"
-horizontal_alignment = 1
-vertical_alignment = 1
+text = "Strength"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer" unique_id=1505870777]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="StrenghtPhysical" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer" unique_id=480236923]
-layout_mode = 2
-text = "15"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="StrenghtMagical" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer" unique_id=36183714]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="StrenghtPoison" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer" unique_id=889202092]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="StrenghtPure" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer" unique_id=138905357]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="StrenghtHeal" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer" unique_id=1111502160]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="StrenghtStun" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer" unique_id=557772851]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="StrenghtCleanse" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer" unique_id=1223072618]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="StrenghtDispell" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer" unique_id=640116454]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="StrenghtShield" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer" unique_id=1989773364]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="StrenghtIgnite" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer" unique_id=136511310]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="StrenghtPoisonStack" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer" unique_id=1223318814]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="StrenghtRegen" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer" unique_id=915398106]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="StrenghtNecrosis" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Strenght/VBoxContainer/VBoxContainer" unique_id=727471692]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Weakness" type="Control" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer" unique_id=459784234]
+[node name="WeaknessLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Titles/MarginContainer/Titles" unique_id=255014347]
 custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness" unique_id=1665575269]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 10
-
-[node name="Label" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer" unique_id=1645227454]
-custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "Weakness"
-horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer" unique_id=734866398]
+[node name="DodgeLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Titles/MarginContainer/Titles" unique_id=217648705]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-size_flags_vertical = 3
+theme_override_font_sizes/font_size = 10
+text = "Dodge"
 
-[node name="WeaknessPhysical" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer" unique_id=1039433729]
+[node name="LifeSteal" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Titles/MarginContainer/Titles" unique_id=535800033]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-text = "15"
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_font_sizes/font_size = 10
+text = "Life steal"
 
-[node name="WeaknessMagical" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer" unique_id=1420588226]
+[node name="Damage" type="VBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats" unique_id=641940737]
 layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_constants/separation = 0
 
-[node name="WeaknessPoison" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer" unique_id=1824098278]
+[node name="DamagePhysical" type="Control" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage" unique_id=2081453512]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="WeaknessPure" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer" unique_id=1068704645]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="WeaknessHeal" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer" unique_id=1566360552]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="WeaknessStun" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer" unique_id=1048094223]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="WeaknessCleanse" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer" unique_id=2145651759]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="WeaknessDispell" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer" unique_id=115053835]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="WeaknessShield" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer" unique_id=236513044]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="WeaknessIgnite" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer" unique_id=1715441753]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="WeaknessPoisonStack" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer" unique_id=1883948318]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="WeaknessRegen" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer" unique_id=1123323711]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="WeaknessNecrosis" type="Label" parent="MarginContainer/Control/VBoxContainer/MultipleStats/HBoxContainer/Weakness/VBoxContainer/VBoxContainer" unique_id=1578311697]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="EntityNameLabel" type="Label" parent="MarginContainer/Control" unique_id=1226062340]
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePhysical" unique_id=129563390]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -41.0
-offset_right = 41.0
-offset_bottom = 21.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 30
-text = "PLAYER NAME"
-horizontal_alignment = 1
-vertical_alignment = 1
+grow_vertical = 2
+color = Color(0.32544094, 0.3254409, 0.32544082, 0.47843137)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePhysical" unique_id=1134299315]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Titles" type="HBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePhysical/MarginContainer" unique_id=1399100499]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="NameLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePhysical/MarginContainer/Titles" unique_id=893705624]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Damage physical"
+
+[node name="CritChanceLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePhysical/MarginContainer/Titles" unique_id=1241410407]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="CritMultiplierLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePhysical/MarginContainer/Titles" unique_id=1594387591]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="CritResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePhysical/MarginContainer/Titles" unique_id=2078752145]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="ResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePhysical/MarginContainer/Titles" unique_id=1869654447]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="VulnerabilityLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePhysical/MarginContainer/Titles" unique_id=1370921291]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="StrengthLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePhysical/MarginContainer/Titles" unique_id=922616778]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="WeaknessLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePhysical/MarginContainer/Titles" unique_id=1823502222]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="DodgeLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePhysical/MarginContainer/Titles" unique_id=506785997]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="LifeSteal" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePhysical/MarginContainer/Titles" unique_id=301972902]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="DamageMagical" type="Control" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage" unique_id=1678723136]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamageMagical" unique_id=837665094]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.45490196, 0.45490196, 0.45490196, 0.47843137)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamageMagical" unique_id=748013418]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Titles" type="HBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamageMagical/MarginContainer" unique_id=414648774]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="NameLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamageMagical/MarginContainer/Titles" unique_id=2070319813]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Damage magical"
+
+[node name="CritChanceLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamageMagical/MarginContainer/Titles" unique_id=1140716430]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="CritMultiplierLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamageMagical/MarginContainer/Titles" unique_id=1183579114]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="CritResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamageMagical/MarginContainer/Titles" unique_id=1419218235]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="ResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamageMagical/MarginContainer/Titles" unique_id=1493241939]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="VulnerabilityLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamageMagical/MarginContainer/Titles" unique_id=97682544]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="StrengthLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamageMagical/MarginContainer/Titles" unique_id=1570730260]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="WeaknessLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamageMagical/MarginContainer/Titles" unique_id=76474061]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="DodgeLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamageMagical/MarginContainer/Titles" unique_id=2017642088]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="LifeSteal" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamageMagical/MarginContainer/Titles" unique_id=1493098836]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="DamagePoison" type="Control" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage" unique_id=589719943]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePoison" unique_id=645623490]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.32544094, 0.3254409, 0.32544082, 0.47843137)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePoison" unique_id=557026822]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Titles" type="HBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePoison/MarginContainer" unique_id=2100995824]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="NameLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePoison/MarginContainer/Titles" unique_id=1737592527]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Damage poison"
+
+[node name="CritChanceLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePoison/MarginContainer/Titles" unique_id=894406072]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="CritMultiplierLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePoison/MarginContainer/Titles" unique_id=903927378]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="CritResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePoison/MarginContainer/Titles" unique_id=315537088]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="ResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePoison/MarginContainer/Titles" unique_id=789921825]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="VulnerabilityLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePoison/MarginContainer/Titles" unique_id=1558880568]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="StrengthLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePoison/MarginContainer/Titles" unique_id=165946863]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="WeaknessLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePoison/MarginContainer/Titles" unique_id=1845932236]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="DodgeLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePoison/MarginContainer/Titles" unique_id=1822814138]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="LifeSteal" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePoison/MarginContainer/Titles" unique_id=965207631]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="DamagePure" type="Control" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage" unique_id=84957138]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePure" unique_id=1232448427]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.45490196, 0.45490196, 0.45490196, 0.47843137)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePure" unique_id=1007831065]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Titles" type="HBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePure/MarginContainer" unique_id=79646797]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="NameLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePure/MarginContainer/Titles" unique_id=1861073479]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Damage pure"
+
+[node name="CritChanceLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePure/MarginContainer/Titles" unique_id=1388294049]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="CritMultiplierLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePure/MarginContainer/Titles" unique_id=685692992]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="CritResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePure/MarginContainer/Titles" unique_id=416099457]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="ResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePure/MarginContainer/Titles" unique_id=271167381]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="VulnerabilityLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePure/MarginContainer/Titles" unique_id=1387681806]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="StrengthLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePure/MarginContainer/Titles" unique_id=878724482]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="WeaknessLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePure/MarginContainer/Titles" unique_id=1229185759]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="DodgeLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePure/MarginContainer/Titles" unique_id=463497227]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="LifeSteal" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Damage/DamagePure/MarginContainer/Titles" unique_id=152041098]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="Utility" type="VBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats" unique_id=918719712]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="UtilityHeal" type="Control" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility" unique_id=1111330793]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityHeal" unique_id=1617543380]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.32544094, 0.3254409, 0.32544082, 0.47843137)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityHeal" unique_id=1454088013]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Titles" type="HBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityHeal/MarginContainer" unique_id=955418579]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="NameLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityHeal/MarginContainer/Titles" unique_id=315217394]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Heal"
+
+[node name="CritChanceLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityHeal/MarginContainer/Titles" unique_id=1866173314]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="CritMultiplierLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityHeal/MarginContainer/Titles" unique_id=1795616466]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="CritResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityHeal/MarginContainer/Titles" unique_id=1754723334]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="ResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityHeal/MarginContainer/Titles" unique_id=1020426517]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="VulnerabilityLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityHeal/MarginContainer/Titles" unique_id=392600349]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="StrengthLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityHeal/MarginContainer/Titles" unique_id=1119318065]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="WeaknessLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityHeal/MarginContainer/Titles" unique_id=1799654419]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="DodgeLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityHeal/MarginContainer/Titles" unique_id=85711916]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="LifeSteal" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityHeal/MarginContainer/Titles" unique_id=714814011]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="UtilityCleanse" type="Control" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility" unique_id=522834771]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityCleanse" unique_id=1589890444]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.45490196, 0.45490196, 0.45490196, 0.47843137)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityCleanse" unique_id=933449182]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Titles" type="HBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityCleanse/MarginContainer" unique_id=994751259]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="NameLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityCleanse/MarginContainer/Titles" unique_id=903135073]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Cleanse"
+
+[node name="CritChanceLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityCleanse/MarginContainer/Titles" unique_id=1491413904]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="CritMultiplierLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityCleanse/MarginContainer/Titles" unique_id=1929463910]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="CritResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityCleanse/MarginContainer/Titles" unique_id=1104128296]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="ResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityCleanse/MarginContainer/Titles" unique_id=1900567442]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="VulnerabilityLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityCleanse/MarginContainer/Titles" unique_id=463258493]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="StrengthLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityCleanse/MarginContainer/Titles" unique_id=29387929]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="WeaknessLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityCleanse/MarginContainer/Titles" unique_id=611340083]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="DodgeLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityCleanse/MarginContainer/Titles" unique_id=247028903]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="LifeSteal" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityCleanse/MarginContainer/Titles" unique_id=1506362539]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="UtilityDispell" type="Control" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility" unique_id=745096445]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityDispell" unique_id=485181948]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.32544094, 0.3254409, 0.32544082, 0.47843137)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityDispell" unique_id=47751734]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Titles" type="HBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityDispell/MarginContainer" unique_id=1914899178]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="NameLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityDispell/MarginContainer/Titles" unique_id=298263319]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Dispell"
+
+[node name="CritChanceLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityDispell/MarginContainer/Titles" unique_id=738903479]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="CritMultiplierLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityDispell/MarginContainer/Titles" unique_id=473773218]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="CritResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityDispell/MarginContainer/Titles" unique_id=1054551684]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="ResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityDispell/MarginContainer/Titles" unique_id=579141384]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="VulnerabilityLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityDispell/MarginContainer/Titles" unique_id=907256577]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="StrengthLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityDispell/MarginContainer/Titles" unique_id=1730351208]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="WeaknessLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityDispell/MarginContainer/Titles" unique_id=238343792]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="DodgeLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityDispell/MarginContainer/Titles" unique_id=31569607]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="LifeSteal" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Utility/UtilityDispell/MarginContainer/Titles" unique_id=1826859377]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="Stacks" type="VBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats" unique_id=1086059046]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="StackPoison" type="Control" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks" unique_id=397533906]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackPoison" unique_id=237775149]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.45490196, 0.45490196, 0.45490196, 0.47843137)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackPoison" unique_id=1008184582]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Titles" type="HBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackPoison/MarginContainer" unique_id=479554326]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="NameLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackPoison/MarginContainer/Titles" unique_id=1460274392]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Stack Poison"
+
+[node name="CritChanceLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackPoison/MarginContainer/Titles" unique_id=572022469]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="CritMultiplierLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackPoison/MarginContainer/Titles" unique_id=582061702]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="CritResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackPoison/MarginContainer/Titles" unique_id=601062278]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="ResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackPoison/MarginContainer/Titles" unique_id=620081086]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="VulnerabilityLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackPoison/MarginContainer/Titles" unique_id=2090959532]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="StrengthLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackPoison/MarginContainer/Titles" unique_id=229492798]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="WeaknessLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackPoison/MarginContainer/Titles" unique_id=1239358735]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="DodgeLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackPoison/MarginContainer/Titles" unique_id=1377467523]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="LifeSteal" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackPoison/MarginContainer/Titles" unique_id=148969641]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="StackIgnite" type="Control" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks" unique_id=1680738987]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackIgnite" unique_id=1826627966]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.32544094, 0.3254409, 0.32544082, 0.47843137)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackIgnite" unique_id=1611681563]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Titles" type="HBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackIgnite/MarginContainer" unique_id=1356054160]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="NameLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackIgnite/MarginContainer/Titles" unique_id=798031280]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Stack Ignite"
+
+[node name="CritChanceLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackIgnite/MarginContainer/Titles" unique_id=1985027191]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="CritMultiplierLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackIgnite/MarginContainer/Titles" unique_id=770728626]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="CritResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackIgnite/MarginContainer/Titles" unique_id=1959527401]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="ResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackIgnite/MarginContainer/Titles" unique_id=791511195]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="VulnerabilityLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackIgnite/MarginContainer/Titles" unique_id=898624618]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="StrengthLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackIgnite/MarginContainer/Titles" unique_id=2074762873]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="WeaknessLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackIgnite/MarginContainer/Titles" unique_id=494091101]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="DodgeLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackIgnite/MarginContainer/Titles" unique_id=972034156]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="LifeSteal" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackIgnite/MarginContainer/Titles" unique_id=704588203]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="StackShield" type="Control" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks" unique_id=475128385]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackShield" unique_id=1350508154]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.45490196, 0.45490196, 0.45490196, 0.47843137)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackShield" unique_id=1092329559]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Titles" type="HBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackShield/MarginContainer" unique_id=272278079]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="NameLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackShield/MarginContainer/Titles" unique_id=711894805]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Stack Shield"
+
+[node name="CritChanceLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackShield/MarginContainer/Titles" unique_id=771318159]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="CritMultiplierLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackShield/MarginContainer/Titles" unique_id=984222443]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="CritResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackShield/MarginContainer/Titles" unique_id=1221705225]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="ResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackShield/MarginContainer/Titles" unique_id=206254136]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="VulnerabilityLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackShield/MarginContainer/Titles" unique_id=998188264]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="StrengthLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackShield/MarginContainer/Titles" unique_id=795300112]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="WeaknessLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackShield/MarginContainer/Titles" unique_id=1215022404]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="DodgeLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackShield/MarginContainer/Titles" unique_id=952070297]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="LifeSteal" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackShield/MarginContainer/Titles" unique_id=553476301]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="StackRegen" type="Control" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks" unique_id=1919847476]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackRegen" unique_id=1868583678]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.32544094, 0.3254409, 0.32544082, 0.47843137)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackRegen" unique_id=733081040]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Titles" type="HBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackRegen/MarginContainer" unique_id=1828264128]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="NameLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackRegen/MarginContainer/Titles" unique_id=1862344609]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Stack Regen"
+
+[node name="CritChanceLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackRegen/MarginContainer/Titles" unique_id=1735749991]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="CritMultiplierLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackRegen/MarginContainer/Titles" unique_id=310254237]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="CritResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackRegen/MarginContainer/Titles" unique_id=1183403745]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="ResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackRegen/MarginContainer/Titles" unique_id=1873151198]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="VulnerabilityLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackRegen/MarginContainer/Titles" unique_id=1807663828]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="StrengthLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackRegen/MarginContainer/Titles" unique_id=1839953785]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="WeaknessLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackRegen/MarginContainer/Titles" unique_id=575713930]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="DodgeLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackRegen/MarginContainer/Titles" unique_id=704066664]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="LifeSteal" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackRegen/MarginContainer/Titles" unique_id=579153325]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="StackNecrosis" type="Control" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks" unique_id=487101569]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackNecrosis" unique_id=1004576196]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.45490196, 0.45490196, 0.45490196, 0.47843137)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackNecrosis" unique_id=81977775]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Titles" type="HBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackNecrosis/MarginContainer" unique_id=2055318494]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="NameLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackNecrosis/MarginContainer/Titles" unique_id=1088545144]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Stack Necrosis"
+
+[node name="CritChanceLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackNecrosis/MarginContainer/Titles" unique_id=248251049]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="CritMultiplierLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackNecrosis/MarginContainer/Titles" unique_id=1583414118]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="CritResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackNecrosis/MarginContainer/Titles" unique_id=2001607171]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="ResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackNecrosis/MarginContainer/Titles" unique_id=994434439]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="VulnerabilityLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackNecrosis/MarginContainer/Titles" unique_id=1903967485]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="StrengthLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackNecrosis/MarginContainer/Titles" unique_id=51345701]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="WeaknessLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackNecrosis/MarginContainer/Titles" unique_id=1269033308]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="DodgeLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackNecrosis/MarginContainer/Titles" unique_id=1568580138]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="LifeSteal" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Stacks/StackNecrosis/MarginContainer/Titles" unique_id=253378317]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="Status" type="VBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats" unique_id=1277403979]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="StatusStun" type="Control" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status" unique_id=800897868]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusStun" unique_id=1604445940]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.32544094, 0.3254409, 0.32544082, 0.47843137)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusStun" unique_id=708832754]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Titles" type="HBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusStun/MarginContainer" unique_id=1749237287]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="NameLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusStun/MarginContainer/Titles" unique_id=518560587]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Status Stun"
+
+[node name="CritChanceLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusStun/MarginContainer/Titles" unique_id=902204082]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="CritMultiplierLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusStun/MarginContainer/Titles" unique_id=2116807441]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="CritResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusStun/MarginContainer/Titles" unique_id=1943141950]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="ResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusStun/MarginContainer/Titles" unique_id=127450919]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="VulnerabilityLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusStun/MarginContainer/Titles" unique_id=112697169]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="StrengthLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusStun/MarginContainer/Titles" unique_id=746154733]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="WeaknessLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusStun/MarginContainer/Titles" unique_id=640350663]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="DodgeLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusStun/MarginContainer/Titles" unique_id=834294938]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="LifeSteal" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusStun/MarginContainer/Titles" unique_id=702721407]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="StatusTaunt" type="Control" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status" unique_id=1964663064]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusTaunt" unique_id=1134553261]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.45490196, 0.45490196, 0.45490196, 0.47843137)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusTaunt" unique_id=92873785]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Titles" type="HBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusTaunt/MarginContainer" unique_id=1735547877]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="NameLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusTaunt/MarginContainer/Titles" unique_id=1235005851]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Status Taunt"
+
+[node name="CritChanceLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusTaunt/MarginContainer/Titles" unique_id=1602058669]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="CritMultiplierLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusTaunt/MarginContainer/Titles" unique_id=132532654]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="CritResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusTaunt/MarginContainer/Titles" unique_id=1698961003]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="ResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusTaunt/MarginContainer/Titles" unique_id=1667182987]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="VulnerabilityLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusTaunt/MarginContainer/Titles" unique_id=1859256353]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="StrengthLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusTaunt/MarginContainer/Titles" unique_id=1736583987]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="WeaknessLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusTaunt/MarginContainer/Titles" unique_id=1318699094]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="DodgeLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusTaunt/MarginContainer/Titles" unique_id=1905571468]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="LifeSteal" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusTaunt/MarginContainer/Titles" unique_id=1387968951]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="StatusSilence" type="Control" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status" unique_id=1928471346]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusSilence" unique_id=1275445867]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.32544094, 0.3254409, 0.32544082, 0.47843137)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusSilence" unique_id=1818327042]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Titles" type="HBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusSilence/MarginContainer" unique_id=168615229]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="NameLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusSilence/MarginContainer/Titles" unique_id=1012359874]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Status Silence"
+
+[node name="CritChanceLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusSilence/MarginContainer/Titles" unique_id=63819244]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="CritMultiplierLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusSilence/MarginContainer/Titles" unique_id=1146586267]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="CritResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusSilence/MarginContainer/Titles" unique_id=1590239849]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="ResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusSilence/MarginContainer/Titles" unique_id=914982786]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="VulnerabilityLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusSilence/MarginContainer/Titles" unique_id=2006192579]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="StrengthLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusSilence/MarginContainer/Titles" unique_id=492092471]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="WeaknessLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusSilence/MarginContainer/Titles" unique_id=1313420240]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="DodgeLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusSilence/MarginContainer/Titles" unique_id=439521363]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="LifeSteal" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusSilence/MarginContainer/Titles" unique_id=1787629058]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="StatusInvulnerable" type="Control" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status" unique_id=33567600]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusInvulnerable" unique_id=1429377527]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.45490196, 0.45490196, 0.45490196, 0.47843137)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusInvulnerable" unique_id=1086820616]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Titles" type="HBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusInvulnerable/MarginContainer" unique_id=172569286]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="NameLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusInvulnerable/MarginContainer/Titles" unique_id=2137153732]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Status Invulnerable"
+
+[node name="CritChanceLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusInvulnerable/MarginContainer/Titles" unique_id=1696056857]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="CritMultiplierLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusInvulnerable/MarginContainer/Titles" unique_id=1912319616]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="CritResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusInvulnerable/MarginContainer/Titles" unique_id=1207856088]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="ResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusInvulnerable/MarginContainer/Titles" unique_id=1436708024]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="VulnerabilityLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusInvulnerable/MarginContainer/Titles" unique_id=1239012466]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="StrengthLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusInvulnerable/MarginContainer/Titles" unique_id=1261928312]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="WeaknessLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusInvulnerable/MarginContainer/Titles" unique_id=1686109824]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="DodgeLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusInvulnerable/MarginContainer/Titles" unique_id=1299204232]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="LifeSteal" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusInvulnerable/MarginContainer/Titles" unique_id=1898665147]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="StatusUntargetable" type="Control" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status" unique_id=579174405]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusUntargetable" unique_id=1751731809]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.32544094, 0.3254409, 0.32544082, 0.47843137)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusUntargetable" unique_id=635299625]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Titles" type="HBoxContainer" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusUntargetable/MarginContainer" unique_id=196274364]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="NameLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusUntargetable/MarginContainer/Titles" unique_id=1096970671]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Status Untargetable"
+
+[node name="CritChanceLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusUntargetable/MarginContainer/Titles" unique_id=1386816791]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="CritMultiplierLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusUntargetable/MarginContainer/Titles" unique_id=1815664561]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="CritResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusUntargetable/MarginContainer/Titles" unique_id=926509209]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="ResistLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusUntargetable/MarginContainer/Titles" unique_id=8889514]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="VulnerabilityLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusUntargetable/MarginContainer/Titles" unique_id=573969460]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="StrengthLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusUntargetable/MarginContainer/Titles" unique_id=699276756]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="WeaknessLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusUntargetable/MarginContainer/Titles" unique_id=571572671]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="DodgeLabel" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusUntargetable/MarginContainer/Titles" unique_id=535515213]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="LifeSteal" type="Label" parent="MarginContainer/ScrollContainer/Control/VBoxContainer/MultipleStats/Status/StatusUntargetable/MarginContainer/Titles" unique_id=2124417703]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
