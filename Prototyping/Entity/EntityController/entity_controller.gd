@@ -151,6 +151,8 @@ func _ready() -> void:
 	
 	if entity_owner != null:
 		_entity_name_label.text = entity_owner.entity_name
+	
+	Events.entity_cliked.connect(_on_entity_clicked)
 
 
 func _refresh_target() -> void:
@@ -745,3 +747,7 @@ func _on_inflict_status_button_pressed() -> void:
 	
 	entity_owner.inflict_status(_target, status_type, status_duration, action_id)
 	print("DEBUG: inflict_status called - Target: ", _target.entity_name, " | Type: ", Status.Type.keys()[status_type], " | Duration: ", status_duration)
+
+
+func _on_entity_clicked(entity: Entity) -> void:
+	entity_owner = entity

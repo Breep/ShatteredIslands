@@ -261,6 +261,8 @@ func _ready() -> void:
 	else:
 		_original_fighting_state = fighting_state if fighting_state != FightingState.UNDEF else FightingState.IDLE
 	
+	input_event.connect(_on_input_event)
+	
 	# Connect module interdependencies
 	_connect_module_dependencies()
 	
@@ -580,3 +582,10 @@ func _on_stunned_changed(is_active: bool, _duration: float, _infinite: bool) -> 
 
 func _on_stunned(_is_active: bool) -> void:
 	pass
+
+
+func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			Events.entity_cliked.emit(self)
+			Verbose.debug("L'entité " + entity_name + " a été cliquée !", Verbose.Category.ENTITY)
