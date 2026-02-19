@@ -85,10 +85,10 @@ func _ready() -> void:
 	# Check game rules in inspector
 	_check_game_rules()
 	GameManager.init()
-	ServerCardShop.init(_families, _game_rules)
+	CardShopManager.init(_families, _game_rules)
 	
 	_shop_deck.construct_shop_deck(_families, _game_rules)
-	_player_available_pool = ServerCardShop._build_player_available_pool(_player)
+	_player_available_pool = CardShopManager._build_player_available_pool(_player)
 	
 	# Init custom chance use
 	_custom_chance_bool = _custom_check_box.button_pressed

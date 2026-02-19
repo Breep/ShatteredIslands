@@ -13,13 +13,10 @@ class CardPool extends RefCounted:
 	func add_card(card: Card) -> void:
 		if not pool.has(card.rarity): return
 		pool[card.rarity].cards.append(card)
-		print("_global_card_pools" + " add " + card.name + " | " + str(card.uid) + " in his pool")
-		
+	
 	func remove_card(card: Card) -> void:
 		if not pool.has(card.rarity): return
 		pool[card.rarity].cards.erase(card)
-		print("_global_card_pools" + " remove " + card.name + " | " + str(card.uid) + " of his pool")
-		print("_global_card_pools", card.uid, " size: ", pool[card.rarity].cards.size(), " ", Card.Rarity.keys()[card.rarity])
 
 class PlayerPool extends CardPool:
 	var _player: Player
@@ -55,16 +52,16 @@ class PlayerPool extends CardPool:
 		pool[rarity].cards.append_array(_shop_deck.get_cards_for_rarity_for_family(family_type, rarity))
 		return
 	
+	
 	func add_card(card: Card) -> void:
 		if not pool.has(card.rarity): return
 		pool[card.rarity].cards.append(card)
-		print("Player " + _player.name + " add " + card.name + " | " + str(card.uid) + " in his pool")
-		
+	
+	
 	func remove_card(card: Card) -> void:
 		if not pool.has(card.rarity): return
 		pool[card.rarity].cards.erase(card)
-		print("Player " + _player.name + " remove " + card.name + " | " + str(card.uid) + " of his pool")
-		print("Player ", _player.name, " remove ", card.uid, " size: ", pool[card.rarity].cards.size(), " ", Card.Rarity.keys()[card.rarity])
+	
 	
 	func _on_card_maxed(card: Card) -> void:
 		Verbose.debug("%s is maxed" % [card.name], Verbose.Category.CARD_SHOP)
@@ -73,6 +70,7 @@ class PlayerPool extends CardPool:
 			if pool[card.rarity].cards[i].name == card.name:
 				pool[card.rarity].cards.remove_at(i)
 			i -= 1
+	
 	
 	func _on_family_leveled_up(family_type: Family.FamilyType, new_level: int) -> void:
 		Verbose.debug("%s leveled up %s to %d" % [_player.name, family_type, new_level], Verbose.Category.CARD_SHOP)
@@ -163,7 +161,7 @@ func draw_cards_for_player(player: Player, count: int) -> Array[Card]:
 		
 		# Si toujours rien, arrêter le tirage
 		if available_cards.is_empty():
-			Verbose.warn("No more cards available for player %s" % player.name, Verbose.Category.CARD_SHOP)
+			Verbose.warn("No more cards available for player %s" % player.player_name, Verbose.Category.CARD_SHOP)
 			break
 		
 		# ÉTAPE 3 : Tirer une carte aléatoire
@@ -179,7 +177,6 @@ func draw_cards_for_player(player: Player, count: int) -> Array[Card]:
 	return drawn_cards
 
 func add_card(card_to_add: Card) -> void:
-	print("Shopdeck add " + card_to_add.name + " | " + str(card_to_add.uid) + " of his pool")
 	super.add_card(card_to_add)
 	var family_type: Family.FamilyType = card_to_add.families[0]
 	_global_card_pools[family_type].add_card(card_to_add)
@@ -187,7 +184,6 @@ func add_card(card_to_add: Card) -> void:
 		pool.add_card(card_to_add)
 
 func remove_card(card_to_remove: Card) -> void:
-	print("Shopdeck remove " + card_to_remove.name + " | " + str(card_to_remove.uid) + " of his pool")
 	super.remove_card(card_to_remove)
 	var family_type: Family.FamilyType = card_to_remove.families[0]
 	_global_card_pools[family_type].remove_card(card_to_remove)

@@ -86,18 +86,40 @@ func _cancel_attack() -> void:
 func _prepare_projectile_stats() -> ProjectileStats:
 	var projectile_stats := ProjectileStats.new()
 	
-	# Store damage value for callback
-	var physical_damage: float = _owner.stats.attack_damage
-	
 	# Create damage callback
+	var damage_modifiers_callbacks: Array[Callable]
+	var additional_callbacks: Array[Callable]
+	_consume_modifiers(damage_modifiers_callbacks, additional_callbacks)
 	projectile_stats.on_hit_callbacks.append(func(data: Dictionary):
-		var hit_target: Entity = data[AutoAttackModifier.VarType.TARGET]
-		var hit_source: Entity = data[AutoAttackModifier.VarType.SOURCE]
+		var hit_target: Entity = data[ProjectileStats.VarType.TARGET]
+		var hit_source: Entity = data[ProjectileStats.VarType.SOURCE]
+		
+		var mod = {
+			AutoAttackModifier.VarType.SOURCE: hit_source,
+			AutoAttackModifier.VarType.TARGET: hit_target,
+			AutoAttackModifier.VarType.DAMAGE_ADD: 0,
+			AutoAttackModifier.VarType.DAMAGE_MUL: 100,
+		}
+		for damage_modifiers_callback in damage_modifiers_callbacks:
+			damage_modifiers_callback.call(mod)
+		
+		var add: float = mod[AutoAttackModifier.VarType.DAMAGE_ADD]
+		var mul: float = mod[AutoAttackModifier.VarType.DAMAGE_MUL]
+		var damage: float = ( _owner.stats.attack_damage + add) * (mul / 100.0)
+		var damage_done: float = 0
 		if hit_source and hit_target:
-			hit_source.direct_damage(hit_target, physical_damage, Utils.DamageType.PHYSICAL, &"auto_attack")
+			damage_done = hit_source.direct_damage(hit_target, damage, Utils.DamageType.PHYSICAL, &"auto_attack")
+		
+		for additional_callback in additional_callbacks:
+			additional_callback.call({
+				AutoAttackModifier.VarType.SOURCE: hit_source,
+				AutoAttackModifier.VarType.TARGET: hit_target,
+				AutoAttackModifier.VarType.POSITION: data[ProjectileStats.VarType.POSITION],
+				AutoAttackModifier.VarType.DAMAGE: damage_done,
+				AutoAttackModifier.VarType.PROJECTILE: data[ProjectileStats.VarType.PROJECTILE],
+			})
 	)
 	
-	_consume_modifiers(projectile_stats)
 	return projectile_stats
 
 
@@ -210,26 +232,19 @@ func _process_melee_hit(melee_data: Dictionary) -> void:
 	for cb: Callable in stats.on_hit_callbacks:
 		if cb.is_valid():
 			cb.call({
-				AutoAttackModifier.VarType.SOURCE: _owner,
-				AutoAttackModifier.VarType.TARGET: target,
-				AutoAttackModifier.VarType.PROJECTILE: null,
-				AutoAttackModifier.VarType.POSITION: _owner.global_position
+				ProjectileStats.VarType.SOURCE: _owner,
+				ProjectileStats.VarType.TARGET: target,
+				ProjectileStats.VarType.PROJECTILE: null,
+				ProjectileStats.VarType.POSITION: _owner.global_position
 			})
 
 
-func _consume_modifiers(projectile_stats: ProjectileStats) -> void:
+func _consume_modifiers(damage_modifier_callbacks: Array[Callable], additional_callbacks: Array[Callable]) -> void:
 	for aa_modifier: AutoAttackModifier in _owner.auto_attack_modifier_registry.consume_all_modifiers():
-		# Execute on-attack callbacks
-		if aa_modifier.on_attack_logic_callback.is_valid():
-			aa_modifier.on_attack_logic_callback.call({})
-		if aa_modifier.on_attack_visual_callback.is_valid():
-			aa_modifier.on_attack_visual_callback.call({})
-		
-		# Add on-hit callbacks to projectile
-		if aa_modifier.on_hit_logic_callback.is_valid():
-			projectile_stats.on_hit_callbacks.append(aa_modifier.on_hit_logic_callback)
-		if aa_modifier.on_hit_visual_callback.is_valid():
-			projectile_stats.on_hit_callbacks.append(aa_modifier.on_hit_visual_callback)
+		if aa_modifier.additional_effect_callback.is_valid():
+			additional_callbacks.append(aa_modifier.additional_effect_callback)
+		if aa_modifier.damage_modifier_callback.is_valid():
+			damage_modifier_callbacks.append(aa_modifier.damage_modifier_callback)
 
 
 # ============================== Callbacks ==============================

@@ -5,20 +5,18 @@ extends HeroUpgrade
 @export var _ignite_stacks: Array[int]
 @export var _damage_per_stack: Array[float]
 
-func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
-	if cardlvl < 1 or cardlvl > 3:
-		printerr("Wrong cardlvl: ", cardlvl, " - ", get_class())
+func apply_card(ctx: CardContext, card_lvl: int) -> void:
+	if card_lvl < 1 or card_lvl > 3:
+		printerr("Wrong card_lvl: ", card_lvl, " - ", get_class())
 		return
-	
-	stats.fire.meteor_activated = true
-	stats.fire.meteor_ignite_stacks = _ignite_stacks[cardlvl - 1]
-	stats.fire.meteor_damage_per_stack = _damage_per_stack[cardlvl - 1]
-	stats.fire.meteor_period = _period
+
+	var fire_stats: FamilyFireStats = ctx.hero.families_stats.fire
+	fire_stats.meteor_damage_percent = _damage_per_stack[card_lvl - 1]
 
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > 3:
 		printerr("Wrong cardlvl: ", cardlvl, " - ", get_class())
 		return "ERROR"
-	
+
 	return ""

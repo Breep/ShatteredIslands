@@ -48,7 +48,7 @@ func _ready() -> void:
 	GameManager.game_rules.duration_fighting_positioning = 0.5
 	GameManager.game_rules.duration_fighting_countdown = 0.5
 	GameManager.game_rules.duration_fighting_normal = 240.0
-	GameManager.game_state = GameManager.GameState.FIGHTING
+	GameManager.request_state_transition(GameManager.GameState.FIGHTING)
 	GlobalFightingManager.start()
 	_floating_island.set_active()
 	_ui_fighting_area.update_content(_floating_island._fighting_area)
@@ -90,6 +90,7 @@ func _instantiate_heroes() -> void:
 		
 		# Instantiate hero with FIGHTING_PHASE display mode for prototyping
 		var hero: Hero = Shared.HERO_SCENES[hero_desc.id].instantiate().init(Hero.DisplayMode.FIGHTING_PHASE)
+		hero.id = Entity.generate_network_id()
 		hero.level = 1
 		hero.entity_name = "Player" + str(i + 1)
 		
@@ -104,15 +105,19 @@ func _instantiate_heroes() -> void:
 
 
 func _init_players() -> void:
+	var player_scene: PackedScene = preload("res://Player/player.tscn")
 	for i: int in _heroes.size():
-		var player: Player = Player.new()
-		player.name = "Player" + str(i + 1)
+		var player: Player = player_scene.instantiate()
+		player.init_player()
+		player.player_name = "Player" + str(i + 1)
+		player.name = "Player_" + str(i + 1)
 		player.id = 1
 		player.hero_desc = _hero_descs[i]
 		player.hero = _heroes[i]
-		player.hero.entity_name = player.name
+		player.hero.entity_name = player.player_name
 		player.skill_manager = SkillManager.new()
 		_players.append(player)
+		add_child(player)
 
 
 func _add_player_cards() -> void:

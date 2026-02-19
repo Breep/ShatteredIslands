@@ -11,7 +11,7 @@ extends Control
 # ============================== Private variables ==============================
 
 @onready var _rng := RandomNumberGenerator.new()
-@onready var _player := Player.new()
+var _player: Player
 
 @onready var _shop_deck := ShopDeck.new()
 
@@ -23,13 +23,16 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	_rng.randomize()
-	
-	_player.name = "Breep"
-	_player.deck = PlayerDeck.new().init(_player)
+
+	var player_scene: PackedScene = preload("res://Player/player.tscn")
+	_player = player_scene.instantiate()
+	_player.init_player()
+	_player.player_name = "Breep"
+	_player.name = "Player_proto"
 	_player.hero_desc = _hero_desc
-	_player.Hero = Hero.new()
 	_player.skill_manager = SkillManager.new()
 	_player.skill_manager.init(_player)
+	add_child(_player)
 	PlayerManager.players[multiplayer.get_unique_id()] = _player
 	
 	_ui_hero_portrait.update_content(_player)

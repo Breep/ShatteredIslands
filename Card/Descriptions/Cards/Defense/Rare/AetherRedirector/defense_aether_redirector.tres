@@ -7,7 +7,7 @@
 
 [sub_resource type="Resource" id="Resource_upgrade"]
 script = ExtResource("2_upgrade_logic")
-_base_period = Array[float]([3.0, 2.5, 2.0])
+_base_period = Array[float]([0.5, 2.5, 2.0])
 _base_shield = Array[float]([50.0, 60.0, 70.0])
 
 [resource]

@@ -152,7 +152,7 @@ var current_categories_level: Dictionary[Category, Level] = {
 	Category.SPAWN_LOCATION_CONFIG: Level.WARN,
 	Category.TARGET_MODULE: Level.WARN,
 	Category.MOVEMENT_MODULE: Level.WARN,
-	Category.PROJECTILE: Level.TRACE,
+	Category.PROJECTILE: Level.WARN,
 }
 #endregion
 

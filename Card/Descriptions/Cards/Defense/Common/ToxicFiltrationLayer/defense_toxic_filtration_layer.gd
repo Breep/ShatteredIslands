@@ -4,18 +4,23 @@ extends HeroUpgrade
 @export var _base_efficiency: Array[float]
 @export var _rarity: Card.Rarity = Card.Rarity.COMMON
 
-func apply(stats: FamiliesStats, cardlvl: int) -> void:
-	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("Toxic Filtration Layer: Wrong cardlvl: ", cardlvl)
+
+func apply_card(ctx: CardContext, card_lvl: int) -> void:
+	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
+		printerr("Toxic Filtration Layer: Wrong card_lvl: ", card_lvl)
 		return
-	
-	stats.defense.toxic_filtration_layer_activated = true
-	stats.defense.toxic_filtration_layer_efficiency = _base_efficiency[cardlvl - 1]
+
+	var efficiency: float = _base_efficiency[card_lvl - 1] / 100.0
+
+	ctx.battle_callbacks.register_battle_start(&"Toxic Filtration Layer", func() -> void:
+		var shield_stack: ShieldStack = ctx.hero.conditions.get_shield_stack()
+		shield_stack.set_efficiency(Utils.DamageType.POISON, efficiency)
+	)
 
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
 		printerr("Toxic Filtration Layer: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
-	
+
 	return "Shield can block poison damage with " + str(_base_efficiency[cardlvl - 1]) + "% value"

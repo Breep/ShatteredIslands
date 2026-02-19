@@ -1,21 +1,27 @@
 class_name AttackDiamondSword
 extends HeroUpgrade
 
-@export var _damage: Array[int] # damage increase
+@export var _damage: Array[int]
 @export var _rarity: Card.Rarity = Card.Rarity.COMMON
 
-func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
-	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("Wrong cardlvl: ", cardlvl)
+
+func apply_card(ctx: CardContext, card_lvl: int) -> void:
+	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
+		printerr("Diamond Sword: Wrong card_lvl: ", card_lvl)
 		return
-	
-	stats.auto_attack.diamond_sword_activated = true
-	stats.auto_attack.diamond_sword_attack = _damage[cardlvl - 1]
+
+	var mod := StatModifier.new()
+	mod.id = &"Diamond Sword"
+	mod.stat_type = EntityStats.StatType.AD
+	mod.calc_type = StatModifier.CalcType.ADD
+	mod.value = _damage[card_lvl - 1]
+	mod.tags = [StatModifier.TagType.CARD]
+	ctx.stat_modifiers.register_modifier(mod)
 
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("Wrong cardlvl: ", cardlvl)
+		printerr("Diamond Sword: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
-	
+
 	return "[center]Increase turret damage by " + str(_damage[cardlvl - 1]) + ".[/center]"

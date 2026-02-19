@@ -5,14 +5,26 @@ extends HeroUpgrade
 @export var _mana_gain: Array[float]
 @export var _rarity: Card.Rarity = Card.Rarity.COMMON
 
-func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
-	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("Arcane Staff: Wrong cardlvl: ", cardlvl)
+
+func apply_card(ctx: CardContext, card_lvl: int) -> void:
+	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
+		printerr("Arcane Staff: Wrong card_lvl: ", card_lvl)
 		return
 	
-	stats.auto_attack.arcane_staff_activated = true
-	stats.auto_attack.arcane_staff_chance = _chance_percent[cardlvl - 1]
-	stats.auto_attack.arcane_staff_mana_gain = _mana_gain[cardlvl - 1]
+	var chance: float = _chance_percent[card_lvl - 1]
+	var mana: float = _mana_gain[card_lvl - 1]
+
+	var aa_mod := AutoAttackModifier.new()
+	aa_mod.id = &"Arcane Staff"
+	aa_mod.tags = [AutoAttackModifier.TagType.CARD]
+	aa_mod.is_one_time_effect = false
+	aa_mod.additional_effect_callback = func(_cb_vars: Dictionary) -> void:
+		if not Utils.is_randomize_modifier_active(chance): return
+		if mana >= 0: ctx.hero.stats.mana += mana
+	
+	ctx.battle_callbacks.register_battle_start(&"Arcane Staff", func() -> void:
+		ctx.auto_attack_modifiers.register_modifier(aa_mod)
+	)
 
 
 func get_description(cardlvl: int) -> String:

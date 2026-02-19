@@ -5,17 +5,17 @@ extends CharacterBody3D
 
 #region ============================== Signals ==============================
 signal died(self_ref: Entity)
-signal interaction_received(entity_ref: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool)
-signal action_done(entity_ref: Entity, target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool)
-signal action_dodged(entity_ref: Entity, source: Entity, action_type: Utils.ActionType)
-signal critical_action_done(entity_ref: Entity, target: Entity, action_type: Utils.ActionType, value_before_crit: float, value_after_crit: float)
-signal action_overhealed(entity_ref: Entity, target: Entity, amount: float)
-signal damage_taken(entity_ref: Entity, damage: float, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool)
-signal heal_taken(entity_ref: Entity, heal_amount: float, is_critical: bool)
-signal spell_casted(entity_ref: Entity, target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary)
-signal stack_taken(entity_ref: Entity, stack_type: Utils.StackType, stack_number: float, is_critical: bool)
-signal auto_attack_completed(entity_ref: Entity)
-signal spawn_completed(entity_ref: Entity)
+signal interaction_received(source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool)
+signal action_done(target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool)
+signal action_dodged(source: Entity, action_type: Utils.ActionType)
+signal critical_action_done(target: Entity, action_type: Utils.ActionType, value_before_crit: float, value_after_crit: float)
+signal action_overhealed(target: Entity, amount: float)
+signal damage_taken(damage: float, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool)
+signal heal_taken(heal_amount: float, is_critical: bool)
+signal spell_casted(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary)
+signal stack_taken(stack_type: Utils.StackType, stack_number: float, is_critical: bool)
+signal auto_attack_completed()
+signal spawn_completed()
 #endregion
 
 #region ============================== Enums ==============================
@@ -87,6 +87,8 @@ var action_modifiers_registry: ActionModifiersRegistry
 var stat_modifiers_registry: EntityStatModifiersRegistry
 var base_stats: EntityStats:
 	get: return _base_stats
+var spawn_manager: SpawnManager:
+	get: return _spawn_manager
 #endregion
 
 #region ============================== Private variables ==============================
@@ -200,7 +202,16 @@ func is_dead() -> bool:
 #endregion
 
 #region ============================== Static variables ==============================
-static var instance_count: int = 0
+## Server-authoritative ID counter. Only the server should call generate_network_id().
+static var _next_network_id: int = 0
+
+static func generate_network_id() -> int:
+	var assigned_id: int = _next_network_id
+	_next_network_id += 1
+	return assigned_id
+
+static func reset_network_ids() -> void:
+	_next_network_id = 0
 #endregion
 
 
@@ -208,9 +219,8 @@ static var instance_count: int = 0
 
 #region ============================== Init ==============================
 func _init() -> void:
-	id = instance_count
-	instance_count += 1
-	
+	# id stays at default (-1) until assigned by the server
+
 	# Stats
 	stats = EntityStats.new()
 	_base_stats = EntityStats.new()
@@ -345,256 +355,88 @@ func connect_to_fighting_area(fighting_area_ref: FightingArea) -> void:
 #endregion
 
 #region ============================== Action Senders ==============================
-func direct_damage(target: Entity, damage: float, damage_type: Utils.DamageType, action_id: StringName) -> void:
-	if _damage_sender == null: return
-	var result: Dictionary = _damage_sender.direct_damage(target, damage, damage_type, action_id)
-	if result.is_empty(): return
-	
-	var action_type: Utils.ActionType = Utils.damage_to_action(damage_type)
-	
-	if result[ActionSenderModule.ResultKey.IS_CRITICAL]:
-		critical_action_done.emit(target, action_type, result[ActionSenderModule.ResultKey.BASE_VALUE], result[ActionSenderModule.ResultKey.VALUE])
-	
-	action_done.emit(target, action_type, action_id, result[ActionSenderModule.ResultKey.VALUE], result[ActionSenderModule.ResultKey.IS_CRITICAL])
+func direct_damage(target: Entity, damage: float, damage_type: Utils.DamageType, action_id: StringName) -> float:
+	return _damage_sender.direct_damage(target, damage, damage_type, action_id) if _damage_sender != null else 0.0
 
-
-func direct_damage_percent(target: Entity, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier, action_id: StringName) -> void:
-	if _damage_sender == null: return
-	var result: Dictionary = _damage_sender.direct_damage_percent(target, damage_percent, damage_type, percent_modifier, action_id)
-	if result.is_empty(): return
-	
-	var action_type: Utils.ActionType = Utils.damage_to_action(damage_type)
-	
-	if result[ActionSenderModule.ResultKey.IS_CRITICAL]:
-		critical_action_done.emit(target, action_type, result[ActionSenderModule.ResultKey.BASE_VALUE], result[ActionSenderModule.ResultKey.VALUE])
-	
-	action_done.emit(target, action_type, action_id, result[ActionSenderModule.ResultKey.VALUE], result[ActionSenderModule.ResultKey.IS_CRITICAL])
-
+func direct_damage_percent(target: Entity, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier, action_id: StringName) -> float:
+	return _damage_sender.direct_damage_percent(target, damage_percent, damage_type, percent_modifier, action_id) if _damage_sender != null else 0.0
 
 func auto_attack(target: Entity) -> void:
 	if _auto_attack_sender == null: return
 	_auto_attack_sender.execute_auto_attack(target)
 
-
 func projectile_attack(target: Entity, projectile_type: Projectile.Type, projectile_spawn: Node3D, projectile_stats: ProjectileStats, is_auto_attack: bool = false) -> void:
 	if _projectile_sender == null: return
 	_projectile_sender.projectile_attack(target, projectile_type, projectile_spawn, projectile_stats, is_auto_attack)
-
 
 func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary = {}) -> void:
 	if _spell_sender == null: return
 	_spell_sender.cast_spell(target, spell_type, spell_modifier)
 	spell_casted.emit(target, spell_type, spell_modifier)
 
-
 func cast_ultimate() -> void:
 	printerr("Entity: cast_ultimate() called but not implemented [", get_path(), "]")
 
+func heal(target: Entity, heal_amount: float, action_id: StringName) -> float:
+	return _heal_sender.heal(target, heal_amount, action_id) if _heal_sender != null else 0.0
 
-func heal(target: Entity, heal_amount: float, action_id: StringName) -> void:
-	if _heal_sender == null: return
-	var result: Dictionary = _heal_sender.heal(target, heal_amount, action_id)
-	if result.is_empty(): return
-	
-	# Check for overheal (calculated by module)
-	if result.get(ActionSenderModule.ResultKey.OVERHEAL, 0.0) > 0:
-		action_overhealed.emit(target, result[ActionSenderModule.ResultKey.OVERHEAL])
-	
-	if result[ActionSenderModule.ResultKey.IS_CRITICAL]:
-		critical_action_done.emit(target, Utils.ActionType.UTILITY_HEAL, result[ActionSenderModule.ResultKey.BASE_VALUE], result[ActionSenderModule.ResultKey.VALUE])
-	
-	action_done.emit(target, Utils.ActionType.UTILITY_HEAL, action_id, result[ActionSenderModule.ResultKey.VALUE], result[ActionSenderModule.ResultKey.IS_CRITICAL])
+func heal_percent(target: Entity, percent: float, percent_modifier: Utils.PercentModifier, action_id: StringName) -> float:
+	return _heal_sender.heal_percent(target, percent, percent_modifier, action_id) if _heal_sender != null else 0.0
 
-
-func heal_percent(target: Entity, percent: float, percent_modifier: Utils.PercentModifier, action_id: StringName) -> void:
-	if _heal_sender == null: return
-	var result: Dictionary = _heal_sender.heal_percent(target, percent, percent_modifier, action_id)
-	if result.is_empty(): return
-	
-	# Check for overheal
-	if result.get(ActionSenderModule.ResultKey.OVERHEAL, 0.0) > 0:
-		action_overhealed.emit(target, result[ActionSenderModule.ResultKey.OVERHEAL])
-	
-	if result[ActionSenderModule.ResultKey.IS_CRITICAL]:
-		critical_action_done.emit(target, Utils.ActionType.UTILITY_HEAL, result[ActionSenderModule.ResultKey.BASE_VALUE], result[ActionSenderModule.ResultKey.VALUE])
-	
-	action_done.emit(target, Utils.ActionType.UTILITY_HEAL, action_id, result[ActionSenderModule.ResultKey.VALUE], result[ActionSenderModule.ResultKey.IS_CRITICAL])
-
-
-func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Utils.StackType, action_id: StringName, duration: float = 5.0) -> void:
-	if _add_stack_sender == null: return
-	var result: Dictionary = _add_stack_sender.inflict_condition_stacks(target, stacks_number, stack_type, action_id, duration)
-	if result.is_empty(): return
-	
-	var action_type: Utils.ActionType = Utils.stack_to_action(stack_type)
-	
-	if result[ActionSenderModule.ResultKey.IS_CRITICAL]:
-		critical_action_done.emit(target, action_type, result[ActionSenderModule.ResultKey.BASE_VALUE], result[ActionSenderModule.ResultKey.VALUE])
-	
-	action_done.emit(target, action_type, action_id, result[ActionSenderModule.ResultKey.VALUE], result[ActionSenderModule.ResultKey.IS_CRITICAL])
-
+func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Utils.StackType, action_id: StringName, duration: float = 5.0) -> float:
+	return _add_stack_sender.inflict_condition_stacks(target, stacks_number, stack_type, action_id, duration) if _add_stack_sender != null else 0.0
 
 func summon_entity(entity_type: EntityType, spawn_config: SpawnLocationConfig, entity_modifier: Dictionary) -> void:
 	if _summon_sender == null: return
 	_summon_sender.summon_entity(entity_type, spawn_config, entity_modifier)
 
+func cleanse(target: Entity, value: float, action_id: StringName) -> float:
+	return _remove_stack_sender.cleanse(target, value, action_id) if _remove_stack_sender != null else 0.0
 
-func cleanse(target: Entity, value: float, action_id: StringName) -> void:
-	if _remove_stack_sender == null: return
-	var result: Dictionary = _remove_stack_sender.cleanse(target, value, action_id)
-	if result.is_empty(): return
-	
-	if result[ActionSenderModule.ResultKey.IS_CRITICAL]:
-		critical_action_done.emit(target, Utils.ActionType.UTILITY_CLEANSE, result[ActionSenderModule.ResultKey.BASE_VALUE], result[ActionSenderModule.ResultKey.VALUE])
-	
-	action_done.emit(target, Utils.ActionType.UTILITY_CLEANSE, action_id, result[ActionSenderModule.ResultKey.VALUE], result[ActionSenderModule.ResultKey.IS_CRITICAL])
+func dispell(target: Entity, value: float, action_id: StringName) -> float:
+	return _remove_stack_sender.dispell(target, value, action_id) if _remove_stack_sender != null else 0.0
 
-
-func dispell(target: Entity, value: float, action_id: StringName) -> void:
-	if _remove_stack_sender == null: return
-	var result: Dictionary = _remove_stack_sender.dispell(target, value, action_id)
-	if result.is_empty(): return
-	
-	if result[ActionSenderModule.ResultKey.IS_CRITICAL]:
-		critical_action_done.emit(target, Utils.ActionType.UTILITY_DISPELL, result[ActionSenderModule.ResultKey.BASE_VALUE], result[ActionSenderModule.ResultKey.VALUE])
-	
-	action_done.emit(target, Utils.ActionType.UTILITY_DISPELL, action_id, result[ActionSenderModule.ResultKey.VALUE], result[ActionSenderModule.ResultKey.IS_CRITICAL])
+func inflict_status(target: Entity, status_type: Status.Type, duration: float, action_id: StringName) -> float:
+	return _status_sender.inflict_status(target, status_type, duration, action_id) if _status_sender != null else 0.0
+#endregion
 
 
-func inflict_status(target: Entity, status_type: Status.Type, duration: float, action_id: StringName) -> void:
-	if _status_sender == null: return
-	var result: Dictionary = _status_sender.inflict_status(target, status_type, duration, action_id)
-	if result.is_empty(): return
-	
-	var action_type: Utils.ActionType = Utils.status_to_action(status_type)
-	action_done.emit(target, action_type, action_id, result[ActionSenderModule.ResultKey.VALUE], false)
+#region ============================== Action Receivers ==============================
+func take_damage(damage: float, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
+	return _damage_receiver.take_damage(damage, damage_type, is_critical, action_id, source) if _damage_receiver != null else 0.0
+
+func take_damage_percent(percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
+	return _damage_receiver.take_damage_percent(percent, percent_modifier, damage_type, is_critical, action_id, source) if _damage_receiver != null else 0.0
+
+func take_condition_stacks(stacks_number: float, stack_type: Utils.StackType, is_critical: bool, action_id: StringName, source: Entity = null, duration: float = 5.0) -> float:
+	return _add_stack_receiver.take_condition_stacks(stacks_number, stack_type, is_critical, action_id, source, duration) if _add_stack_receiver != null else 0.0
+
+func take_heal(heal_amount: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
+	return _heal_receiver.take_heal(heal_amount, is_critical, action_id, source) if _heal_receiver != null else 0.0
+
+func take_cleanse(value: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
+	return _remove_stack_receiver.take_cleanse(value, is_critical, action_id, source) if _remove_stack_receiver != null else 0.0
+
+func take_dispell(value: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
+	return _remove_stack_receiver.take_dispell(value, is_critical, action_id, source) if _remove_stack_receiver != null else 0.0
+
+func take_status(status_type: Status.Type, duration: float, action_id: StringName, source: Entity) -> float:
+	return _status_receiver.take_status(status_type, duration, action_id, source) if _status_receiver != null else 0.0
 #endregion
 
 
 #region ============================== Status Checks ==============================
 func is_stunned() -> bool:
-	if status_module == null: return false
-	return status_module.has_status(Status.Type.STUN)
-
+	return status_module.has_status(Status.Type.STUN) if status_module != null else false
 
 func is_silenced() -> bool:
-	if status_module == null: return false
-	return status_module.has_status(Status.Type.SILENCE)
-
+	return status_module.has_status(Status.Type.SILENCE) if status_module != null else false
 
 func is_invulnerable() -> bool:
-	if status_module == null: return false
-	return status_module.has_status(Status.Type.INVULNERABLE)
-
+	return status_module.has_status(Status.Type.INVULNERABLE) if status_module != null else false
 
 func has_status(status_type: Status.Type) -> bool:
-	if status_module == null: return false
-	return status_module.has_status(status_type)
-#endregion
-
-#region ============================== Action Receivers ==============================
-func take_damage(damage: float, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	if _damage_receiver == null: return 0.0
-	if is_invulnerable():
-		Verbose.debug("Entity [" + entity_name + "] damage blocked by INVULNERABLE", Verbose.Category.ENTITY)
-		return 0.0
-	var result: Dictionary = _damage_receiver.take_damage(damage, damage_type, is_critical, action_id, source)
-	if result.is_empty(): return 0.0
-	
-	if result.get(ActionReceiverModule.ResultKey.DODGED, false):
-		action_dodged.emit(self, source, Utils.damage_to_action(damage_type))
-		return 0.0
-	
-	var real_damage: float = result[ActionReceiverModule.ResultKey.VALUE]
-	var blocked_by_armor: bool = result.get(ActionReceiverModule.ResultKey.BLOCKED_BY_ARMOR, false)
-	
-	if real_damage > 0 or (not blocked_by_armor and real_damage == 0):
-		damage_taken.emit(self, real_damage, damage_type, is_critical, false)
-	
-	interaction_received.emit(self, source, Utils.damage_to_action(damage_type), action_id, real_damage, is_critical)
-	return real_damage
-
-
-func take_damage_percent(percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	if _damage_receiver == null: return 0.0
-	var result: Dictionary = _damage_receiver.take_damage_percent(percent, percent_modifier, damage_type, is_critical, action_id, source)
-	if result.is_empty(): return 0.0
-	
-	if result.get(ActionReceiverModule.ResultKey.DODGED, false):
-		action_dodged.emit(self, source, Utils.damage_to_action(damage_type))
-		return 0.0
-	
-	var real_damage: float = result[ActionReceiverModule.ResultKey.VALUE]
-	var blocked_by_armor: bool = result.get(ActionReceiverModule.ResultKey.BLOCKED_BY_ARMOR, false)
-	
-	if real_damage > 0 or (not blocked_by_armor and real_damage == 0):
-		damage_taken.emit(self, real_damage, damage_type, is_critical, false)
-	
-	interaction_received.emit(self, source, Utils.damage_to_action(damage_type), action_id, real_damage, is_critical)
-	return real_damage
-
-
-func take_condition_stacks(stacks_number: float, stack_type: Utils.StackType, is_critical: bool, action_id: StringName, source: Entity = null, duration: float = 5.0) -> float:
-	if _add_stack_receiver == null: return 0.0
-	var result: Dictionary = _add_stack_receiver.take_condition_stacks(stacks_number, stack_type, is_critical, action_id, source, duration)
-	if result.is_empty(): return 0.0
-	
-	if result.get(ActionReceiverModule.ResultKey.DODGED, false):
-		action_dodged.emit(self, source, Utils.stack_to_action(stack_type))
-		return 0.0
-	
-	var stacks_applied: float = result[ActionReceiverModule.ResultKey.VALUE]
-	stack_taken.emit(self, stack_type, stacks_applied, is_critical)
-	interaction_received.emit(self, source, Utils.stack_to_action(stack_type), action_id, stacks_applied, is_critical)
-	return stacks_applied
-
-
-func take_heal(heal_amount: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	if _heal_receiver == null: return 0.0
-	var result: Dictionary = _heal_receiver.take_heal(heal_amount, is_critical, action_id, source)
-	if result.is_empty(): return 0.0
-	
-	if result.get(ActionReceiverModule.ResultKey.DODGED, false):
-		action_dodged.emit(self, source, Utils.ActionType.UTILITY_HEAL)
-		return 0.0
-	
-	var effective_heal: float = result[ActionReceiverModule.ResultKey.VALUE]
-	if effective_heal > 0:
-		heal_taken.emit(self, effective_heal, is_critical)
-	
-	interaction_received.emit(self, source, Utils.ActionType.UTILITY_HEAL, action_id, effective_heal, is_critical)
-	return effective_heal
-
-
-func take_cleanse(value: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	if _remove_stack_receiver == null: return 0.0
-	var result: Dictionary = _remove_stack_receiver.take_cleanse(value, is_critical, action_id, source)
-	if result.is_empty(): return 0.0
-	
-	var removed: float = result[ActionReceiverModule.ResultKey.VALUE]
-	interaction_received.emit(self, source, Utils.ActionType.UTILITY_CLEANSE, action_id, removed, is_critical)
-	return removed
-
-
-func take_dispell(value: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
-	if _remove_stack_receiver == null: return 0.0
-	var result: Dictionary = _remove_stack_receiver.take_dispell(value, is_critical, action_id, source)
-	if result.is_empty(): return 0.0
-	
-	var removed: float = result[ActionReceiverModule.ResultKey.VALUE]
-	interaction_received.emit(self, source, Utils.ActionType.UTILITY_DISPELL, action_id, removed, is_critical)
-	return removed
-
-
-func take_status(status_type: Status.Type, duration: float, action_id: StringName, source: Entity) -> float:
-	if _status_receiver == null: return 0.0
-	var result: Dictionary = _status_receiver.take_status(status_type, duration, action_id, source)
-	if result.is_empty(): return 0.0
-	
-	var actual_duration: float = result[ActionReceiverModule.ResultKey.VALUE]
-	var action_type: Utils.ActionType = Utils.status_to_action(status_type)
-	interaction_received.emit(self, source, action_type, action_id, actual_duration, false)
-	return actual_duration
+	return status_module.has_status(status_type) if status_module != null else false
 #endregion
 
 
@@ -631,7 +473,7 @@ func _complete_spawn() -> void:
 	Verbose.debug("Entity [" + entity_name + "] completing spawn", Verbose.Category.ENTITY)
 	_is_targetable = true
 	fighting_state = _original_fighting_state
-	spawn_completed.emit(self)
+	spawn_completed.emit()
 	Verbose.debug("Entity [" + entity_name + "] spawn completed", Verbose.Category.ENTITY)
 #endregion
 
@@ -697,16 +539,20 @@ func _on_fighting_state_changed(new_fighting_state: FightingState) -> void:
 			if conditions != null: conditions.start()
 			if _movement_module != null: _movement_module.start()
 			if _auto_attack_periodic_module != null and auto_attack_enabled: _auto_attack_periodic_module.start()
-		FightingState.CELEBRATING: pass
+		FightingState.CELEBRATING:
+			if target_module != null: target_module.stop()
+			if conditions != null: conditions.stop()
+			if _movement_module != null: _movement_module.stop()
+			if _auto_attack_periodic_module != null: _auto_attack_periodic_module.stop()
 		FightingState.UNDEF: pass
 
 
 func _on_stats_health_changed(new_health: int) -> void:
 	if new_health <= 0:
-		died.emit(self)
+		died.emit()
 
 
-func _on_died(_entity: Entity) -> void:
+func _on_died() -> void:
 	Verbose.debug("Entity [" + entity_name + "] died", Verbose.Category.ENTITY)
 	life_state = LifeState.DEAD # Set life state
 	
@@ -733,6 +579,5 @@ func _on_stunned_changed(is_active: bool, _duration: float, _infinite: bool) -> 
 	_on_stunned(is_active)
 
 
-func _on_stunned(is_active: bool) -> void:
-	# Virtual method to be overridden by child classes (e.g. Hero)
+func _on_stunned(_is_active: bool) -> void:
 	pass
