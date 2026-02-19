@@ -589,3 +589,14 @@ func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, n
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			Events.entity_cliked.emit(self)
 			Verbose.debug("L'entité " + entity_name + " a été cliquée !", Verbose.Category.ENTITY)
+			_play_on_click_animation()
+	
+
+var _click_tween: Tween
+func _play_on_click_animation() -> void:
+	if _click_tween != null: _click_tween.stop()
+	_click_tween = create_tween()
+	_click_tween.set_ease(Tween.EASE_OUT)
+	_click_tween.set_trans(Tween.TRANS_BACK)
+	_click_tween.tween_property(_visual_3d, "scale", Vector3(1.2, 1.2, 1.2), 0.1)
+	_click_tween.tween_property(_visual_3d, "scale", Vector3.ONE, 0.1)
