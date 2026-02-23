@@ -304,7 +304,8 @@ func get_collision_center() -> Vector3:
 
 
 func process_tick() -> void:
-	pass
+	if _movement_module != null:
+		_movement_module.process_tick()
 #endregion
 
 #region ============================== Context ==============================

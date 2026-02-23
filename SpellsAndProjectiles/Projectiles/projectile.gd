@@ -3,6 +3,13 @@ extends Area3D
 
 ## Base projectile class that handles collision and callbacks.
 ## Movement is delegated to a ProjectileTrajectory instance.
+## Fully deterministic: uses process_tick() driven by FightingManager, fixed timestep,
+## and math-based distance collision instead of Area3D body_entered signal.
+
+# === CONSTANTS ===
+const TICKS_PER_SECOND: int = 60
+## Squared hit radius in world units (~0.63 unit radius). Adjust per projectile if needed.
+const HIT_DISTANCE_SQ: float = 0.4
 
 # === ENUMS ===
 enum Type {
@@ -26,7 +33,8 @@ var _target: Entity
 var _stats: ProjectileStats
 
 var _hit_history: Array[Entity] = []
-var _life: float = 0.0
+var _life_ticks: int = 0
+var _lifetime_max_ticks: int = 0
 
 func add_bounce(additional_bounces: float) -> void:
 	_stats.bounces_remaining += additional_bounces
@@ -47,14 +55,15 @@ func init(p_source: Entity, p_target: Entity, p_stats: ProjectileStats) -> Proje
 	_stats = p_stats
 	return self
 
-func process_tick() -> void:
-	pass
 
 func _ready() -> void:
 	if _stats == null:
 		Verbose.error("No _stats (null) -> queue_freeing myself", Verbose.Category.PROJECTILE)
 	if _target and _target.died and not _target.died.is_connected(_on_target_died):
 		_target.died.connect(_on_target_died)
+	
+	# Convert lifetime to ticks
+	_lifetime_max_ticks = int(lifetime_max * TICKS_PER_SECOND)
 	
 	# Execute spawn callbacks
 	for cb: Callable in _stats.on_spawn_callbacks:
@@ -69,33 +78,34 @@ func _ready() -> void:
 		Verbose.error("No trajectory assigned to projectile [" + name + "]", Verbose.Category.PROJECTILE)
 		queue_free()
 		return
-	
-	if not body_entered.is_connected(_on_body_entered):
-		body_entered.connect(_on_body_entered)
+	# body_entered signal removed — hit detection is now math-based in process_tick()
 
 
-func _process(delta: float) -> void:
-	_life += delta
-	
-	# Safety timeout
-	if _life > lifetime_max:
+## Called every physics tick by FightingManager (deterministic, fixed timestep).
+func process_tick() -> void:
+	_life_ticks += 1
+	if _life_ticks > _lifetime_max_ticks:
 		queue_free()
 		return
 	
-	# Delegate movement to trajectory
+	# Move using a fixed timestep (1/60s) — same result on every machine
 	if trajectory:
-		trajectory.update(delta)
+		trajectory.update(1.0 / TICKS_PER_SECOND)
+	
+	# Math-based hit detection: no Area3D signals needed
+	_check_hit()
 
 
-func _on_body_entered(body: Node3D) -> void:
-	Verbose.trace("Body entered: " + body.name, Verbose.Category.PROJECTILE)
-	if not body is Entity: return
-	
-	var hit_target: Entity = body
-	
-	if hit_target in _hit_history or hit_target != _target:
-		return
-	
+func _check_hit() -> void:
+	if _target == null or not is_instance_valid(_target): return
+	if _target in _hit_history: return
+	var dist_sq: float = global_position.distance_squared_to(_target.get_collision_center())
+	if dist_sq <= HIT_DISTANCE_SQ:
+		_on_hit(_target)
+
+
+func _on_hit(hit_target: Entity) -> void:
+	Verbose.trace("Hit: " + hit_target.name, Verbose.Category.PROJECTILE)
 	_hit_history.append(hit_target)
 	
 	# Execute all hit callbacks

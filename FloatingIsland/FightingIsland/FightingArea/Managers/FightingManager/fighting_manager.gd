@@ -38,9 +38,14 @@ func _exit_tree() -> void:
 
 func _physics_process(_delta: float) -> void:
 	if not _is_active: return
-	for entity in _spawn_manager.get_entities():
+	# Sort by uid to guarantee identical processing order on all clients (determinism)
+	var entities: Array[Entity] = _spawn_manager.get_entities()
+	entities.sort_custom(func(a: Entity, b: Entity) -> bool: return a.uid < b.uid)
+	for entity in entities:
 		entity.process_tick()
-	for projectile in _spawn_manager.get_projectiles():
+	var projectiles: Array[Projectile] = _spawn_manager.get_projectiles()
+	projectiles.sort_custom(func(a: Projectile, b: Projectile) -> bool: return a.uid < b.uid)
+	for projectile in projectiles:
 		projectile.process_tick()
 #endregion
 

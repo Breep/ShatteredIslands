@@ -61,7 +61,8 @@ func stop_following() -> void:
 	_owner.velocity = Vector3.ZERO
 
 
-func _process(_delta: float) -> void:
+## Called every physics tick by FightingManager (deterministic, fixed 1/60s step).
+func process_tick() -> void:
 	if _is_stopped:
 		return
 	_move_toward_target()
@@ -81,15 +82,12 @@ func _move_toward_target() -> void:
 	if _target_position == null or _owner.global_position.distance_to(_target_position) < 0.1:
 		if not _follow_entity:
 			_is_moving = false
-			# Reset velocity so animation can return to idle
-			_owner.velocity = Vector3.ZERO
 		return
 	
 	var direction: Vector3 = (_target_position - _owner.global_position).normalized()
 	_owner.look_at_target_y_only(_target_position)
-	# Velocity should be in units per second, move_and_slide handles delta internally
-	_owner.velocity = direction * _get_move_speed()
-	_owner.move_and_slide()
+	# Fixed-step displacement: speed (units/s) × (1/60s) — same result on every machine
+	_owner.global_position += direction * (_get_move_speed() / 60.0)
 
 
 func _get_move_speed() -> float:
