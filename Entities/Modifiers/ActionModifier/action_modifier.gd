@@ -34,7 +34,6 @@ static func utils_action_to_action_modifier_action(utils_action: Utils.ActionTyp
 		Utils.ActionType.DAMAGE_POISON: return ActionType.DIRECT_ATTACK
 		Utils.ActionType.DAMAGE_PURE: return ActionType.DIRECT_ATTACK
 		Utils.ActionType.UTILITY_HEAL: return ActionType.HEAL
-		Utils.ActionType.UTILITY_STUN: return ActionType.UNDEF
 		Utils.ActionType.UTILITY_CLEANSE: return ActionType.UNDEF
 		Utils.ActionType.UTILITY_DISPELL: return ActionType.UNDEF
 		Utils.ActionType.STACK_SHIELD: return ActionType.INFLICT_CONDITION

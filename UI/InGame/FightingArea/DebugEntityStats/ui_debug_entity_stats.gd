@@ -1,24 +1,43 @@
 class_name UIDebugEntityStats
 extends Control
 
+@export var _entity_name_label: Label
+
+# === Simple stats (single label each) ===
+@export_group("Simple Stats")
+@export var _health_label: Label
 @export var _health_max_label: Label
+@export var _mana_label: Label
 @export var _mana_max_label: Label
+@export var _mana_regen_label: Label
 @export var _ad_label: Label
 @export var _as_label: Label
+@export var _attack_range_label: Label
+@export var _ap_label: Label
+@export var _defence_label: Label
+@export var _block_label: Label
+@export var _thorn_label: Label
+
+# === Per-ActionType stats (Dictionary[Utils.ActionType, Label]) ===
+@export_group("Per-ActionType Stats")
 @export var _critical_chance_labels: Dictionary [Utils.ActionType, Label] = {
 	Utils.ActionType.DAMAGE_PHYSICAL: null,
 	Utils.ActionType.DAMAGE_MAGICAL: null,
 	Utils.ActionType.DAMAGE_POISON: null,
 	Utils.ActionType.DAMAGE_PURE: null,
 	Utils.ActionType.UTILITY_HEAL: null,
-	Utils.ActionType.UTILITY_STUN: null,
 	Utils.ActionType.UTILITY_CLEANSE: null,
 	Utils.ActionType.UTILITY_DISPELL: null,
 	Utils.ActionType.STACK_SHIELD: null,
 	Utils.ActionType.STACK_IGNITE: null,
 	Utils.ActionType.STACK_POISON: null,
 	Utils.ActionType.STACK_REGEN: null,
-	Utils.ActionType.STACK_NECROSIS: null
+	Utils.ActionType.STACK_NECROSIS: null,
+	Utils.ActionType.STATUS_STUN: null,
+	Utils.ActionType.STATUS_TAUNT: null,
+	Utils.ActionType.STATUS_SILENCE: null,
+	Utils.ActionType.STATUS_INVULNERABLE: null,
+	Utils.ActionType.STATUS_UNTARGETABLE: null
 }
 
 @export var _critical_multiplier_labels: Dictionary [Utils.ActionType, Label] = {
@@ -27,14 +46,18 @@ extends Control
 	Utils.ActionType.DAMAGE_POISON: null,
 	Utils.ActionType.DAMAGE_PURE: null,
 	Utils.ActionType.UTILITY_HEAL: null,
-	Utils.ActionType.UTILITY_STUN: null,
 	Utils.ActionType.UTILITY_CLEANSE: null,
 	Utils.ActionType.UTILITY_DISPELL: null,
 	Utils.ActionType.STACK_SHIELD: null,
 	Utils.ActionType.STACK_IGNITE: null,
 	Utils.ActionType.STACK_POISON: null,
 	Utils.ActionType.STACK_REGEN: null,
-	Utils.ActionType.STACK_NECROSIS: null
+	Utils.ActionType.STACK_NECROSIS: null,
+	Utils.ActionType.STATUS_STUN: null,
+	Utils.ActionType.STATUS_TAUNT: null,
+	Utils.ActionType.STATUS_SILENCE: null,
+	Utils.ActionType.STATUS_INVULNERABLE: null,
+	Utils.ActionType.STATUS_UNTARGETABLE: null
 }
 
 @export var _dodge_labels: Dictionary [Utils.ActionType, Label] = {
@@ -43,14 +66,18 @@ extends Control
 	Utils.ActionType.DAMAGE_POISON: null,
 	Utils.ActionType.DAMAGE_PURE: null,
 	Utils.ActionType.UTILITY_HEAL: null,
-	Utils.ActionType.UTILITY_STUN: null,
 	Utils.ActionType.UTILITY_CLEANSE: null,
 	Utils.ActionType.UTILITY_DISPELL: null,
 	Utils.ActionType.STACK_SHIELD: null,
 	Utils.ActionType.STACK_IGNITE: null,
 	Utils.ActionType.STACK_POISON: null,
 	Utils.ActionType.STACK_REGEN: null,
-	Utils.ActionType.STACK_NECROSIS: null
+	Utils.ActionType.STACK_NECROSIS: null,
+	Utils.ActionType.STATUS_STUN: null,
+	Utils.ActionType.STATUS_TAUNT: null,
+	Utils.ActionType.STATUS_SILENCE: null,
+	Utils.ActionType.STATUS_INVULNERABLE: null,
+	Utils.ActionType.STATUS_UNTARGETABLE: null
 }
 
 @export var _resistance_labels: Dictionary [Utils.ActionType, Label] = {
@@ -59,14 +86,18 @@ extends Control
 	Utils.ActionType.DAMAGE_POISON: null,
 	Utils.ActionType.DAMAGE_PURE: null,
 	Utils.ActionType.UTILITY_HEAL: null,
-	Utils.ActionType.UTILITY_STUN: null,
 	Utils.ActionType.UTILITY_CLEANSE: null,
 	Utils.ActionType.UTILITY_DISPELL: null,
 	Utils.ActionType.STACK_SHIELD: null,
 	Utils.ActionType.STACK_IGNITE: null,
 	Utils.ActionType.STACK_POISON: null,
 	Utils.ActionType.STACK_REGEN: null,
-	Utils.ActionType.STACK_NECROSIS: null
+	Utils.ActionType.STACK_NECROSIS: null,
+	Utils.ActionType.STATUS_STUN: null,
+	Utils.ActionType.STATUS_TAUNT: null,
+	Utils.ActionType.STATUS_SILENCE: null,
+	Utils.ActionType.STATUS_INVULNERABLE: null,
+	Utils.ActionType.STATUS_UNTARGETABLE: null
 }
 
 @export var _vulnerability_labels: Dictionary [Utils.ActionType, Label] = {
@@ -75,14 +106,18 @@ extends Control
 	Utils.ActionType.DAMAGE_POISON: null,
 	Utils.ActionType.DAMAGE_PURE: null,
 	Utils.ActionType.UTILITY_HEAL: null,
-	Utils.ActionType.UTILITY_STUN: null,
 	Utils.ActionType.UTILITY_CLEANSE: null,
 	Utils.ActionType.UTILITY_DISPELL: null,
 	Utils.ActionType.STACK_SHIELD: null,
 	Utils.ActionType.STACK_IGNITE: null,
 	Utils.ActionType.STACK_POISON: null,
 	Utils.ActionType.STACK_REGEN: null,
-	Utils.ActionType.STACK_NECROSIS: null
+	Utils.ActionType.STACK_NECROSIS: null,
+	Utils.ActionType.STATUS_STUN: null,
+	Utils.ActionType.STATUS_TAUNT: null,
+	Utils.ActionType.STATUS_SILENCE: null,
+	Utils.ActionType.STATUS_INVULNERABLE: null,
+	Utils.ActionType.STATUS_UNTARGETABLE: null
 }
 
 @export var _strength_labels: Dictionary [Utils.ActionType, Label] = {
@@ -91,14 +126,18 @@ extends Control
 	Utils.ActionType.DAMAGE_POISON: null,
 	Utils.ActionType.DAMAGE_PURE: null,
 	Utils.ActionType.UTILITY_HEAL: null,
-	Utils.ActionType.UTILITY_STUN: null,
 	Utils.ActionType.UTILITY_CLEANSE: null,
 	Utils.ActionType.UTILITY_DISPELL: null,
 	Utils.ActionType.STACK_SHIELD: null,
 	Utils.ActionType.STACK_IGNITE: null,
 	Utils.ActionType.STACK_POISON: null,
 	Utils.ActionType.STACK_REGEN: null,
-	Utils.ActionType.STACK_NECROSIS: null
+	Utils.ActionType.STACK_NECROSIS: null,
+	Utils.ActionType.STATUS_STUN: null,
+	Utils.ActionType.STATUS_TAUNT: null,
+	Utils.ActionType.STATUS_SILENCE: null,
+	Utils.ActionType.STATUS_INVULNERABLE: null,
+	Utils.ActionType.STATUS_UNTARGETABLE: null
 }
 
 @export var _weakness_labels: Dictionary [Utils.ActionType, Label] = {
@@ -107,19 +146,64 @@ extends Control
 	Utils.ActionType.DAMAGE_POISON: null,
 	Utils.ActionType.DAMAGE_PURE: null,
 	Utils.ActionType.UTILITY_HEAL: null,
-	Utils.ActionType.UTILITY_STUN: null,
 	Utils.ActionType.UTILITY_CLEANSE: null,
 	Utils.ActionType.UTILITY_DISPELL: null,
 	Utils.ActionType.STACK_SHIELD: null,
 	Utils.ActionType.STACK_IGNITE: null,
 	Utils.ActionType.STACK_POISON: null,
 	Utils.ActionType.STACK_REGEN: null,
-	Utils.ActionType.STACK_NECROSIS: null
+	Utils.ActionType.STACK_NECROSIS: null,
+	Utils.ActionType.STATUS_STUN: null,
+	Utils.ActionType.STATUS_TAUNT: null,
+	Utils.ActionType.STATUS_SILENCE: null,
+	Utils.ActionType.STATUS_INVULNERABLE: null,
+	Utils.ActionType.STATUS_UNTARGETABLE: null
 }
 
-@export var _entity_name_label: Label
+@export var _crit_resistance_labels: Dictionary [Utils.ActionType, Label] = {
+	Utils.ActionType.DAMAGE_PHYSICAL: null,
+	Utils.ActionType.DAMAGE_MAGICAL: null,
+	Utils.ActionType.DAMAGE_POISON: null,
+	Utils.ActionType.DAMAGE_PURE: null,
+	Utils.ActionType.UTILITY_HEAL: null,
+	Utils.ActionType.UTILITY_CLEANSE: null,
+	Utils.ActionType.UTILITY_DISPELL: null,
+	Utils.ActionType.STACK_SHIELD: null,
+	Utils.ActionType.STACK_IGNITE: null,
+	Utils.ActionType.STACK_POISON: null,
+	Utils.ActionType.STACK_REGEN: null,
+	Utils.ActionType.STACK_NECROSIS: null,
+	Utils.ActionType.STATUS_STUN: null,
+	Utils.ActionType.STATUS_TAUNT: null,
+	Utils.ActionType.STATUS_SILENCE: null,
+	Utils.ActionType.STATUS_INVULNERABLE: null,
+	Utils.ActionType.STATUS_UNTARGETABLE: null
+}
 
+@export var _life_steal_labels: Dictionary [Utils.ActionType, Label] = {
+	Utils.ActionType.DAMAGE_PHYSICAL: null,
+	Utils.ActionType.DAMAGE_MAGICAL: null,
+	Utils.ActionType.DAMAGE_POISON: null,
+	Utils.ActionType.DAMAGE_PURE: null,
+	Utils.ActionType.UTILITY_HEAL: null,
+	Utils.ActionType.UTILITY_CLEANSE: null,
+	Utils.ActionType.UTILITY_DISPELL: null,
+	Utils.ActionType.STACK_SHIELD: null,
+	Utils.ActionType.STACK_IGNITE: null,
+	Utils.ActionType.STACK_POISON: null,
+	Utils.ActionType.STACK_REGEN: null,
+	Utils.ActionType.STACK_NECROSIS: null,
+	Utils.ActionType.STATUS_STUN: null,
+	Utils.ActionType.STATUS_TAUNT: null,
+	Utils.ActionType.STATUS_SILENCE: null,
+	Utils.ActionType.STATUS_INVULNERABLE: null,
+	Utils.ActionType.STATUS_UNTARGETABLE: null
+}
+
+# === Private ===
 var _owner_entity: Entity
+
+# ============================== Public ==============================
 
 func connect_entity(owner_entity: Entity) -> void:
 	if _owner_entity != null:
@@ -128,113 +212,177 @@ func connect_entity(owner_entity: Entity) -> void:
 	_connect_to_signals()
 	_update_layout()
 
+# ============================== Private ==============================
+
+func _safe_connect(sig: Signal, cb: Callable) -> void:
+	if not sig.is_connected(cb):
+		sig.connect(cb)
+
+
+func _safe_disconnect(sig: Signal, cb: Callable) -> void:
+	if sig.is_connected(cb):
+		sig.disconnect(cb)
+
 
 func _connect_to_signals() -> void:
-	if not _owner_entity.stats.health_max_changed.is_connected(_on_owner_entity_health_max_changed):
-		_owner_entity.stats.health_max_changed.connect(_on_owner_entity_health_max_changed)
-	if not _owner_entity.stats.mana_max_changed.is_connected(_on_owner_entity_max_mana_changed):
-		_owner_entity.stats.mana_max_changed.connect(_on_owner_entity_max_mana_changed)
-	if not _owner_entity.stats.attack_damage_changed.is_connected(_on_owner_entity_ad_changed):
-		_owner_entity.stats.attack_damage_changed.connect(_on_owner_entity_ad_changed)
-	if not _owner_entity.stats.attack_speed_changed.is_connected(_on_owner_entity_as_changed):
-		_owner_entity.stats.attack_speed_changed.connect(_on_owner_entity_as_changed)
-	if not _owner_entity.stats.critical_chance_changed.is_connected(_on_owner_entity_crit_chance_changed):
-		_owner_entity.stats.critical_chance_changed.connect(_on_owner_entity_crit_chance_changed)
-	if not _owner_entity.stats.critical_multiplier_changed.is_connected(_on_owner_entity_crit_mult_changed):
-		_owner_entity.stats.critical_multiplier_changed.connect(_on_owner_entity_crit_mult_changed)
-	if not _owner_entity.stats.dodge_changed.is_connected(_on_owner_entity_dodge_changed):
-		_owner_entity.stats.dodge_changed.connect(_on_owner_entity_dodge_changed)
-	if not _owner_entity.stats.resistance_changed.is_connected(_on_owner_entity_resist_changed):
-		_owner_entity.stats.resistance_changed.connect(_on_owner_entity_resist_changed)
-	if not _owner_entity.stats.vulnerability_changed.is_connected(_on_owner_entity_vuln_changed):
-		_owner_entity.stats.vulnerability_changed.connect(_on_owner_entity_vuln_changed)
-	if not _owner_entity.stats.strength_changed.is_connected(_on_owner_entity_strength_changed):
-		_owner_entity.stats.strength_changed.connect(_on_owner_entity_strength_changed)
-	if not _owner_entity.stats.weakness_changed.is_connected(_on_owner_entity_weakness_changed):
-		_owner_entity.stats.weakness_changed.connect(_on_owner_entity_weakness_changed)
+	var s: EntityStats = _owner_entity.stats
+	# Simple stats
+	_safe_connect(s.health_changed, _on_health_changed)
+	_safe_connect(s.health_max_changed, _on_health_max_changed)
+	_safe_connect(s.mana_changed, _on_mana_changed)
+	_safe_connect(s.mana_max_changed, _on_mana_max_changed)
+	_safe_connect(s.mana_regen_changed, _on_mana_regen_changed)
+	_safe_connect(s.attack_damage_changed, _on_ad_changed)
+	_safe_connect(s.attack_speed_changed, _on_as_changed)
+	_safe_connect(s.attack_range_changed, _on_attack_range_changed)
+	_safe_connect(s.attack_power_changed, _on_ap_changed)
+	_safe_connect(s.defence_changed, _on_defence_changed)
+	_safe_connect(s.block_changed, _on_block_changed)
+	_safe_connect(s.thorn_changed, _on_thorn_changed)
+	# Per-ActionType stats
+	_safe_connect(s.critical_chance_changed, _on_crit_chance_changed)
+	_safe_connect(s.critical_multiplier_changed, _on_crit_mult_changed)
+	_safe_connect(s.dodge_changed, _on_dodge_changed)
+	_safe_connect(s.resistance_changed, _on_resist_changed)
+	_safe_connect(s.vulnerability_changed, _on_vuln_changed)
+	_safe_connect(s.strength_changed, _on_strength_changed)
+	_safe_connect(s.weakness_changed, _on_weakness_changed)
+	_safe_connect(s.crit_resistance_changed, _on_crit_resist_changed)
+	_safe_connect(s.life_steal_changed, _on_life_steal_changed)
 
 
 func _disconnect_from_signals() -> void:
-	if _owner_entity.stats.health_max_changed.is_connected(_on_owner_entity_health_max_changed):
-		_owner_entity.stats.health_max_changed.disconnect(_on_owner_entity_health_max_changed)
-	if _owner_entity.stats.mana_max_changed.is_connected(_on_owner_entity_max_mana_changed):
-		_owner_entity.stats.mana_max_changed.disconnect(_on_owner_entity_max_mana_changed)
-	if _owner_entity.stats.attack_damage_changed.is_connected(_on_owner_entity_ad_changed):
-		_owner_entity.stats.attack_damage_changed.disconnect(_on_owner_entity_ad_changed)
-	if _owner_entity.stats.attack_speed_changed.is_connected(_on_owner_entity_as_changed):
-		_owner_entity.stats.attack_speed_changed.disconnect(_on_owner_entity_as_changed)
-	if _owner_entity.stats.critical_chance_changed.is_connected(_on_owner_entity_crit_chance_changed):
-		_owner_entity.stats.critical_chance_changed.disconnect(_on_owner_entity_crit_chance_changed)
-	if _owner_entity.stats.critical_multiplier_changed.is_connected(_on_owner_entity_crit_mult_changed):
-		_owner_entity.stats.critical_multiplier_changed.disconnect(_on_owner_entity_crit_mult_changed)
-	if _owner_entity.stats.dodge_changed.is_connected(_on_owner_entity_dodge_changed):
-		_owner_entity.stats.dodge_changed.disconnect(_on_owner_entity_dodge_changed)
-	if _owner_entity.stats.resistance_changed.is_connected(_on_owner_entity_resist_changed):
-		_owner_entity.stats.resistance_changed.disconnect(_on_owner_entity_resist_changed)
-	if _owner_entity.stats.vulnerability_changed.is_connected(_on_owner_entity_vuln_changed):
-		_owner_entity.stats.vulnerability_changed.disconnect(_on_owner_entity_vuln_changed)
-	if _owner_entity.stats.strength_changed.is_connected(_on_owner_entity_strength_changed):
-		_owner_entity.stats.strength_changed.disconnect(_on_owner_entity_strength_changed)
-	if _owner_entity.stats.weakness_changed.is_connected(_on_owner_entity_weakness_changed):
-		_owner_entity.stats.weakness_changed.disconnect(_on_owner_entity_weakness_changed)
+	var s: EntityStats = _owner_entity.stats
+	# Simple stats
+	_safe_disconnect(s.health_changed, _on_health_changed)
+	_safe_disconnect(s.health_max_changed, _on_health_max_changed)
+	_safe_disconnect(s.mana_changed, _on_mana_changed)
+	_safe_disconnect(s.mana_max_changed, _on_mana_max_changed)
+	_safe_disconnect(s.mana_regen_changed, _on_mana_regen_changed)
+	_safe_disconnect(s.attack_damage_changed, _on_ad_changed)
+	_safe_disconnect(s.attack_speed_changed, _on_as_changed)
+	_safe_disconnect(s.attack_range_changed, _on_attack_range_changed)
+	_safe_disconnect(s.attack_power_changed, _on_ap_changed)
+	_safe_disconnect(s.defence_changed, _on_defence_changed)
+	_safe_disconnect(s.block_changed, _on_block_changed)
+	_safe_disconnect(s.thorn_changed, _on_thorn_changed)
+	# Per-ActionType stats
+	_safe_disconnect(s.critical_chance_changed, _on_crit_chance_changed)
+	_safe_disconnect(s.critical_multiplier_changed, _on_crit_mult_changed)
+	_safe_disconnect(s.dodge_changed, _on_dodge_changed)
+	_safe_disconnect(s.resistance_changed, _on_resist_changed)
+	_safe_disconnect(s.vulnerability_changed, _on_vuln_changed)
+	_safe_disconnect(s.strength_changed, _on_strength_changed)
+	_safe_disconnect(s.weakness_changed, _on_weakness_changed)
+	_safe_disconnect(s.crit_resistance_changed, _on_crit_resist_changed)
+	_safe_disconnect(s.life_steal_changed, _on_life_steal_changed)
+
+
+func _set_label(label: Label, value: float, decimals: int = 0) -> void:
+	if label != null:
+		label.text = str(value).pad_decimals(decimals)
+
+
+func _set_action_labels(labels: Dictionary, action_type: Utils.ActionType, value: float) -> void:
+	if labels.has(action_type) and labels[action_type] != null:
+		labels[action_type].text = str(value).pad_decimals(0)
 
 
 func _update_layout() -> void:
-	_health_max_label.text = str(_owner_entity.stats.get_stat(EntityStats.StatType.HEALTH_MAX))
-	_mana_max_label.text = str(_owner_entity.stats.get_stat(EntityStats.StatType.MANA_MAX))
-	_ad_label.text = str(_owner_entity.stats.get_stat(EntityStats.StatType.AD))
-	_as_label.text = str(_owner_entity.stats.get_stat(EntityStats.StatType.AS))
+	var s: EntityStats = _owner_entity.stats
+	if _entity_name_label != null:
+		_entity_name_label.text = _owner_entity.name
+
+	# Simple stats
+	_set_label(_health_label, s.get_stat(EntityStats.StatType.HEALTH))
+	_set_label(_health_max_label, s.get_stat(EntityStats.StatType.HEALTH_MAX))
+	_set_label(_mana_label, s.get_stat(EntityStats.StatType.MANA))
+	_set_label(_mana_max_label, s.get_stat(EntityStats.StatType.MANA_MAX))
+	_set_label(_mana_regen_label, s.get_stat(EntityStats.StatType.MANA_REGEN), 2)
+	_set_label(_ad_label, s.get_stat(EntityStats.StatType.AD))
+	_set_label(_as_label, s.get_stat(EntityStats.StatType.AS), 2)
+	_set_label(_attack_range_label, s.get_stat(EntityStats.StatType.ATTACK_RANGE))
+	_set_label(_ap_label, s.get_stat(EntityStats.StatType.AP))
+	_set_label(_defence_label, s.get_stat(EntityStats.StatType.DEFENCE))
+	_set_label(_block_label, s.get_stat(EntityStats.StatType.BLOCK))
+	_set_label(_thorn_label, s.get_stat(EntityStats.StatType.THORN))
+
+	# Per-ActionType stats
 	for action_type: Utils.ActionType in Utils.get_all_actions():
-		_critical_chance_labels[action_type].text = str(int(_owner_entity.stats.get_stat(EntityStats.StatType.CRIT_CHANCE, action_type)))
-		_critical_multiplier_labels[action_type].text = str(int(_owner_entity.stats.get_stat(EntityStats.StatType.CRIT_MULT, action_type)))
-		_dodge_labels[action_type].text = str(int(_owner_entity.stats.get_stat(EntityStats.StatType.DODGE, action_type)))
-		_resistance_labels[action_type].text = str(int(_owner_entity.stats.get_stat(EntityStats.StatType.RESISTANCE, action_type)))
-		_vulnerability_labels[action_type].text = str(int(_owner_entity.stats.get_stat(EntityStats.StatType.VULNERABILITY, action_type)))
-		_strength_labels[action_type].text = str(int(_owner_entity.stats.get_stat(EntityStats.StatType.STRENGTH, action_type)))
-		_weakness_labels[action_type].text = str(int(_owner_entity.stats.get_stat(EntityStats.StatType.WEAKNESS, action_type)))
-	_entity_name_label.text = _owner_entity.name
+		_set_action_labels(_critical_chance_labels, action_type, s.get_stat(EntityStats.StatType.CRIT_CHANCE, action_type))
+		_set_action_labels(_critical_multiplier_labels, action_type, s.get_stat(EntityStats.StatType.CRIT_MULT, action_type))
+		_set_action_labels(_dodge_labels, action_type, s.get_stat(EntityStats.StatType.DODGE, action_type))
+		_set_action_labels(_resistance_labels, action_type, s.get_stat(EntityStats.StatType.RESISTANCE, action_type))
+		_set_action_labels(_vulnerability_labels, action_type, s.get_stat(EntityStats.StatType.VULNERABILITY, action_type))
+		_set_action_labels(_strength_labels, action_type, s.get_stat(EntityStats.StatType.STRENGTH, action_type))
+		_set_action_labels(_weakness_labels, action_type, s.get_stat(EntityStats.StatType.WEAKNESS, action_type))
+		_set_action_labels(_crit_resistance_labels, action_type, s.get_stat(EntityStats.StatType.CRIT_RESISTANCE, action_type))
+		_set_action_labels(_life_steal_labels, action_type, s.get_stat(EntityStats.StatType.LIFESTEAL, action_type))
 
-# Callbacks
+# ============================== Callbacks ==============================
 
-func _on_owner_entity_health_max_changed(new_health_max: int) -> void:
-	_health_max_label.text = str(new_health_max)
+# --- Simple stats ---
+func _on_health_changed(value: float) -> void:
+	_set_label(_health_label, value)
 
+func _on_health_max_changed(value: float) -> void:
+	_set_label(_health_max_label, value)
 
-func _on_owner_entity_max_mana_changed(new_mana_max: int) -> void:
-	_mana_max_label.text = str(new_mana_max)
+func _on_mana_changed(value: float) -> void:
+	_set_label(_mana_label, value)
 
+func _on_mana_max_changed(value: float) -> void:
+	_set_label(_mana_max_label, value)
 
-func _on_owner_entity_ad_changed(new_ad: int) -> void:
-	_ad_label.text = str(new_ad)
+func _on_mana_regen_changed(value: float) -> void:
+	_set_label(_mana_regen_label, value)
 
+func _on_ad_changed(value: float) -> void:
+	_set_label(_ad_label, value)
 
-func _on_owner_entity_as_changed(new_as: float) -> void:
-	_as_label.text = str(new_as)
+func _on_as_changed(value: float) -> void:
+	_set_label(_as_label, value)
 
+func _on_attack_range_changed(value: float) -> void:
+	_set_label(_attack_range_label, value)
 
-func _on_owner_entity_crit_chance_changed(new_critical_chance: float, action_type: Utils.ActionType) -> void:
-	_critical_chance_labels[action_type].text = str(int(new_critical_chance))
+func _on_ap_changed(value: float) -> void:
+	_set_label(_ap_label, value)
 
+func _on_defence_changed(value: float) -> void:
+	_set_label(_defence_label, value)
 
-func _on_owner_entity_crit_mult_changed(new_critical_mult: float, action_type: Utils.ActionType) -> void:
-	_critical_multiplier_labels[action_type].text = str(int(new_critical_mult))
+func _on_block_changed(value: float) -> void:
+	_set_label(_block_label, value)
 
+func _on_thorn_changed(value: float) -> void:
+	_set_label(_thorn_label, value)
 
-func _on_owner_entity_dodge_changed(new_dodge: float, action_type: Utils.ActionType) -> void:
-	_dodge_labels[action_type].text = str(int(new_dodge))
+# --- Per-ActionType stats ---
+func _on_crit_chance_changed(value: float, action_type: Utils.ActionType) -> void:
+	_set_action_labels(_critical_chance_labels, action_type, value)
 
+func _on_crit_mult_changed(value: float, action_type: Utils.ActionType) -> void:
+	_set_action_labels(_critical_multiplier_labels, action_type, value)
 
-func _on_owner_entity_resist_changed(new_resist: float, action_type: Utils.ActionType) -> void:
-	_resistance_labels[action_type].text = str(int(new_resist))
+func _on_dodge_changed(value: float, action_type: Utils.ActionType) -> void:
+	_set_action_labels(_dodge_labels, action_type, value)
 
+func _on_resist_changed(value: float, action_type: Utils.ActionType) -> void:
+	_set_action_labels(_resistance_labels, action_type, value)
 
-func _on_owner_entity_vuln_changed(new_vuln: float, action_type: Utils.ActionType) -> void:
-	_vulnerability_labels[action_type].text = str(int(new_vuln))
+func _on_vuln_changed(value: float, action_type: Utils.ActionType) -> void:
+	_set_action_labels(_vulnerability_labels, action_type, value)
 
+func _on_strength_changed(value: float, action_type: Utils.ActionType) -> void:
+	_set_action_labels(_strength_labels, action_type, value)
 
-func _on_owner_entity_strength_changed(new_strength: float, action_type: Utils.ActionType) -> void:
-	_strength_labels[action_type].text = str(int(new_strength))
+func _on_weakness_changed(value: float, action_type: Utils.ActionType) -> void:
+	_set_action_labels(_weakness_labels, action_type, value)
 
+func _on_crit_resist_changed(value: float, action_type: Utils.ActionType) -> void:
+	_set_action_labels(_crit_resistance_labels, action_type, value)
 
-func _on_owner_entity_weakness_changed(new_weakness: float, action_type: Utils.ActionType) -> void:
-	_weakness_labels[action_type].text = str(int(new_weakness))
+func _on_life_steal_changed(value: float, action_type: Utils.ActionType) -> void:
+	_set_action_labels(_life_steal_labels, action_type, value)
+

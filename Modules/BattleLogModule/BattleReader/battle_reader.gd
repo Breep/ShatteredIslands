@@ -167,7 +167,6 @@ func _map_interaction(receiver: Entity, source: Entity, action_type: Utils.Actio
 		Utils.ActionType.DAMAGE_POISON: receiver.take_damage(value, Utils.DamageType.POISON, is_critical, action_id, source)
 		Utils.ActionType.DAMAGE_PURE: receiver.take_damage(value, Utils.DamageType.PURE, is_critical, action_id, source)
 		Utils.ActionType.UTILITY_HEAL: receiver.take_heal(value, is_critical, action_id, source)
-		Utils.ActionType.UTILITY_STUN: receiver.take_status(Status.Type.STUN, value, action_id, source)
 		Utils.ActionType.UTILITY_CLEANSE: receiver.take_cleanse(value, is_critical, action_id, source)
 		Utils.ActionType.UTILITY_DISPELL: receiver.take_dispell(value, is_critical, action_id, source)
 		Utils.ActionType.STACK_SHIELD: receiver.take_condition_stacks(value, Utils.StackType.SHIELD, is_critical, action_id, source)

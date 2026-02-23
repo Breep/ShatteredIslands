@@ -9,7 +9,6 @@ const ACTION_COLORS: Dictionary[Utils.ActionType, Color] = {
 	Utils.ActionType.DAMAGE_POISON: Color.DARK_GREEN,
 	Utils.ActionType.DAMAGE_PURE: Color.DARK_GOLDENROD,
 	Utils.ActionType.UTILITY_HEAL: Color.MEDIUM_AQUAMARINE,
-	Utils.ActionType.UTILITY_STUN: Color.WEB_PURPLE,
 	Utils.ActionType.UTILITY_CLEANSE: Color.CORAL,
 	Utils.ActionType.UTILITY_DISPELL: Color.ORANGE_RED,
 	Utils.ActionType.STACK_SHIELD: Color.SADDLE_BROWN,
@@ -87,10 +86,10 @@ static func battle_data_stat_type_to_action_types(bds_type: Type) -> Array[Utils
 										Utils.ActionType.STACK_REGEN, Utils.ActionType.STACK_NECROSIS]
 		Type.STACK_RECEIVED:  return [Utils.ActionType.STACK_SHIELD, Utils.ActionType.STACK_IGNITE, Utils.ActionType.STACK_POISON,
 										Utils.ActionType.STACK_REGEN, Utils.ActionType.STACK_NECROSIS]
-		Type.MISC_DONE:     return [Utils.ActionType.UTILITY_STUN, Utils.ActionType.UTILITY_CLEANSE, Utils.ActionType.UTILITY_DISPELL,
+		Type.MISC_DONE:     return [Utils.ActionType.UTILITY_CLEANSE, Utils.ActionType.UTILITY_DISPELL,
 										Utils.ActionType.STATUS_STUN, Utils.ActionType.STATUS_TAUNT, Utils.ActionType.STATUS_SILENCE,
 										Utils.ActionType.STATUS_INVULNERABLE, Utils.ActionType.STATUS_UNTARGETABLE]
-		Type.MISC_RECEIVED: return [Utils.ActionType.UTILITY_STUN, Utils.ActionType.UTILITY_CLEANSE, Utils.ActionType.UTILITY_DISPELL,
+		Type.MISC_RECEIVED: return [Utils.ActionType.UTILITY_CLEANSE, Utils.ActionType.UTILITY_DISPELL,
 										Utils.ActionType.STATUS_STUN, Utils.ActionType.STATUS_TAUNT, Utils.ActionType.STATUS_SILENCE,
 										Utils.ActionType.STATUS_INVULNERABLE, Utils.ActionType.STATUS_UNTARGETABLE]
 		_: return []
@@ -103,7 +102,6 @@ static func action_type_to_battle_data_stat_type(action_type: Utils.ActionType, 
 		Utils.ActionType.DAMAGE_POISON:   return Type.DAMAGE_DONE     if meta_type == MetaType.ACTION else Type.DAMAGE_RECEIVED
 		Utils.ActionType.DAMAGE_PURE:     return Type.DAMAGE_DONE     if meta_type == MetaType.ACTION else Type.DAMAGE_RECEIVED
 		Utils.ActionType.UTILITY_HEAL:    return Type.HEAL_DONE       if meta_type == MetaType.ACTION else Type.HEAL_RECEIVED
-		Utils.ActionType.UTILITY_STUN:    return Type.MISC_DONE       if meta_type == MetaType.ACTION else Type.MISC_RECEIVED
 		Utils.ActionType.UTILITY_CLEANSE: return Type.MISC_DONE       if meta_type == MetaType.ACTION else Type.MISC_RECEIVED
 		Utils.ActionType.UTILITY_DISPELL: return Type.MISC_DONE       if meta_type == MetaType.ACTION else Type.MISC_RECEIVED
 		Utils.ActionType.STACK_SHIELD:     return Type.STACK_INFLICTED if meta_type == MetaType.ACTION else Type.STACK_RECEIVED

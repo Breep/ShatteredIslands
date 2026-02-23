@@ -20,7 +20,6 @@ var _heroes: Array[Hero] = [] # Dynamically instantiated heroes
 @export var _floating_island: FightingIsland
 @export var _battle_type: Battle.BattleType
 
-@onready var _ui_fighting_area: UIFightingArea = %UIFightingArea
 @onready var _ui_proto: Control = %UIProto
 
 @onready var _ui_player_stats: UIDebugEntityStats = %PlayerStats
@@ -51,8 +50,6 @@ func _ready() -> void:
 	GameManager.request_state_transition(GameManager.GameState.FIGHTING)
 	GlobalFightingManager.start()
 	_floating_island.set_active()
-	_ui_fighting_area.update_content(_floating_island._fighting_area)
-	_ui_fighting_area.set_active()
 	_ui_player_stats.hide()
 	_ui_player_stats.connect_entity(_heroes[0])
 	_ui_entity_bds_registry.connect_entity_bds_registry(_heroes[0].bds_registry)
@@ -74,7 +71,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event.is_action_pressed("scene_switch_7") and _heroes.size() > 6: _ui_player_stats.connect_entity(_heroes[6])
 		if event.is_action_pressed("scene_switch_8") and _heroes.size() > 7: _ui_player_stats.connect_entity(_heroes[7])
 		if event.is_action_pressed("hide_ui"):
-			_ui_fighting_area.visible = not _ui_fighting_area.visible
 			_ui_proto.visible = not _ui_proto.visible
 		if event.is_action_pressed("hide_3d_ui"):
 			for hero: Hero in _heroes:
