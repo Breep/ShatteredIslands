@@ -80,7 +80,6 @@ func _ready() -> void:
 
 func start() -> void:
 	Verbose.debug("TargetModule: Starting", Verbose.Category.TARGET_MODULE)
-	_clear()
 	_scanning_area.monitoring = true
 	var bodies: Array[Node3D] = _scanning_area.get_overlapping_bodies()
 	for body in bodies:

@@ -16,7 +16,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 	var _on_action_done := func(target: Entity, action_type: Utils.ActionType, _action_id: StringName, _value: float, _is_critical: bool) -> void:
 		if action_type != Utils.ActionType.UTILITY_HEAL: return
-		if target == null or not is_instance_valid(target) or target.is_dead: return
+		if target == null or not is_instance_valid(target) or target.is_dead(): return
 		if Utils.is_randomize_modifier_active(chance):
 			ctx.hero.cleanse(target, amount, &"Warm Aura")
 

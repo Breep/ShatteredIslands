@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="Family" load_steps=15 format=3 uid="uid://dsbwlgjbtxhh0"]
+[gd_resource type="Resource" script_class="Family" format=3 uid="uid://dsbwlgjbtxhh0"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_l3j17"]
 [ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://Card/Templates/family.gd" id="2_u6eys"]
 [ext_resource type="Resource" uid="uid://b3ohguwihk7x3" path="res://Card/Descriptions/Cards/Fire/Common/ExpanseUniverse/fire_expanse_universe.tres" id="3_5ul4r"]
-[ext_resource type="Resource" uid="uid://bu2qwhn65ehi" path="res://Card/Descriptions/Cards/Fire/Epic/Nuke/fire__nuke.tres" id="3_qr6wv"]
+[ext_resource type="Resource" uid="uid://bu2qwhn65ehi" path="res://Card/Descriptions/Cards/Fire/Epic/Nuke/fire_nuke.tres" id="3_qr6wv"]
 [ext_resource type="Resource" uid="uid://cx8ghn5qu8ot6" path="res://Card/Descriptions/Cards/Fire/Common/DarkForest/fire_dark_forest.tres" id="4_5ul4r"]
 [ext_resource type="Resource" uid="uid://dc5r8wy0vfksm" path="res://Card/Descriptions/Cards/Fire/Common/KuiperBelt/fire_kuiper_belt.tres" id="5_qxssq"]
 [ext_resource type="Resource" uid="uid://cj0r7d80wkhg0" path="res://Card/Descriptions/Cards/Fire/Common/OrbitalStation/fire_orbital_station.tres" id="6_x25x5"]

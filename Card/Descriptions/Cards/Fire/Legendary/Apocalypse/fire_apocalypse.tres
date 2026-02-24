@@ -19,3 +19,4 @@ player_upgrade = SubResource("Resource_apocalypse")
 points = Dictionary[int, int]({
 3: 5
 })
+lvl = 1

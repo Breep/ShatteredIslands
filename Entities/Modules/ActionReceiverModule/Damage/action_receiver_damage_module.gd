@@ -7,7 +7,7 @@ func take_damage(damage: float, damage_type: Utils.DamageType, is_critical: bool
 	if _owner.is_dead(): return 0
 	if _owner.is_invulnerable(): return 0
 	if damage_type != Utils.DamageType.PURE and multiplayer.is_server():
-		if _is_dodged(Utils.damage_to_action(damage_type)):
+		if _is_dodged(Utils.damage_to_action(damage_type), source):
 			_owner.action_dodged.emit(source, Utils.damage_to_action(damage_type))
 			return 0
 		if _is_blocked(): return 0

@@ -19,3 +19,4 @@ player_upgrade = SubResource("Resource_upgrade")
 points = Dictionary[int, int]({
 5: 1
 })
+lvl = 5

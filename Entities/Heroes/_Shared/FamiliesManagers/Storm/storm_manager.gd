@@ -128,7 +128,6 @@ func _call_the_lightning() -> void:
 func _on_current_rank_changed() -> void:
 	if _lightning_spam_timer == null:
 		return
-
 	_call_the_lightning()
 
 	# Iterate on_rank_change_callbacks registered by cards

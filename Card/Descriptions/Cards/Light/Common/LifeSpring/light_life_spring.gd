@@ -24,4 +24,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Life Spring: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Apply " + str(_regen_amount[cardlvl - 1]) + " regen to an ally hero every " + str(_period[cardlvl - 1]) + " sec"
+	return "Apply " + str(_regen_amount[cardlvl - 1]) + " regen to the lowest hp ally hero every " + str(_period[cardlvl - 1]) + " sec"

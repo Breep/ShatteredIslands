@@ -18,3 +18,4 @@ points = Dictionary[int, int]({
 4: 1,
 6: 1
 })
+lvl = 5
