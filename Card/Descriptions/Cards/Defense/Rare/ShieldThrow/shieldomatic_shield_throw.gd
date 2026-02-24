@@ -31,9 +31,9 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			if hit_target == null or not is_instance_valid(hit_target):
 				return
 			if damage > 0:
-				ctx.hero.direct_damage(hit_target, damage, Utils.DamageType.MAGICAL, &"Shield Throw")
+				ctx.hero.direct_damage(hit_target, damage, Utils.ActionType.DAMAGE_MAGICAL, &"Shield Throw")
 			if shield_return > 0:
-				ctx.hero.inflict_condition_stacks(ctx.hero, shield_return, Utils.StackType.SHIELD, &"Shield Throw")
+				ctx.hero.inflict_condition_stacks(ctx.hero, shield_return, Stack.Type.SHIELD, &"Shield Throw")
 				state[&"last_armor"] = ctx.hero.conditions.shield_stacks
 		)
 		ctx.hero.projectile_attack(target, Projectile.Type.SHIELD_THROW, ctx.hero._turret._projectile_spawn_point, proj_stats)

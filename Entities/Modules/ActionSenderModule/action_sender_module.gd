@@ -30,7 +30,7 @@ func _get_strenght_weakness_multiplier(action_type: Utils.ActionType) -> float:
 	return (100.0 + strength) / (100.0 + weakness)
 
 
-func _consume_before_action_modifiers(action_type: ActionModifier.ActionType, modifiers_dict: Dictionary) -> Dictionary:
+func _consume_before_action_modifiers(action_type: Utils.ActionCategory, modifiers_dict: Dictionary) -> Dictionary:
 	if _owner.action_modifiers_registry != null:
 		for modifier: ActionModifier in _owner.action_modifiers_registry.consume_all_modifiers(action_type):
 			if modifier.before_action_logic_callback.is_valid():
@@ -38,7 +38,7 @@ func _consume_before_action_modifiers(action_type: ActionModifier.ActionType, mo
 	return modifiers_dict
 
 
-func _consume_after_action_modifiers(action_type: ActionModifier.ActionType, modifiers_dict: Dictionary) -> Dictionary:
+func _consume_after_action_modifiers(action_type: Utils.ActionCategory, modifiers_dict: Dictionary) -> Dictionary:
 	if _owner.action_modifiers_registry != null:
 		for modifier: ActionModifier in _owner.action_modifiers_registry.consume_all_modifiers(action_type):
 			if modifier.after_action_logic_callback.is_valid():

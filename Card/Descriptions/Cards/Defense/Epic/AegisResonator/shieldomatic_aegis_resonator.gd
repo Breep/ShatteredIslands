@@ -27,7 +27,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		for ally: Entity in allies:
 			if ally != null and is_instance_valid(ally):
 				if ally == ctx.hero:
-					ctx.hero.inflict_condition_stacks(ctx.hero, shield_per_ally, Utils.StackType.SHIELD, &"Resonator")
+					ctx.hero.inflict_condition_stacks(ctx.hero, shield_per_ally, Stack.Type.SHIELD, &"Resonator")
 				else:
 					ally.conditions.shield_stacks += shield_per_ally
 	)

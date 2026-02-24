@@ -17,7 +17,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if damage_amount <= 0: return
 		var enemy: Entity = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
 		if enemy == null: return
-		ctx.hero.direct_damage(enemy, damage_amount, Utils.DamageType.MAGICAL, &"Corrupted Light")
+		ctx.hero.direct_damage(enemy, damage_amount, Utils.ActionType.DAMAGE_MAGICAL, &"Corrupted Light")
 
 	ctx.battle_callbacks.register_battle_start(&"Corrupted Light", func() -> void:
 		if not ctx.hero.action_done.is_connected(_on_action_done):

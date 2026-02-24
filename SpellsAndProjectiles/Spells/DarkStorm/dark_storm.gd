@@ -76,7 +76,7 @@ func _on_damage_tick_timer_timeout() -> void:
 			var damage: float = _damage
 			if _pain_percent > 0.0:
 				damage = damage * (1.0 + entity.conditions.get_total_stacks() * _pain_percent / 100.0)
-			_source.direct_damage(entity, int(round(damage)), Utils.DamageType.PHYSICAL, "Dark Storm")
+			_source.direct_damage(entity, int(round(damage)), Utils.ActionType.DAMAGE_PHYSICAL, "Dark Storm")
 
 
 func _on_lifespan_timer_timeout() -> void:

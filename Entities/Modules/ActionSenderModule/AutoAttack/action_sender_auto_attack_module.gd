@@ -109,7 +109,7 @@ func _prepare_projectile_stats() -> ProjectileStats:
 		var damage: float = ( _owner.stats.attack_damage + add) * (mul / 100.0)
 		var damage_done: float = 0
 		if hit_source and hit_target:
-			damage_done = hit_source.direct_damage(hit_target, damage, Utils.DamageType.PHYSICAL, &"auto_attack")
+			damage_done = hit_source.direct_damage(hit_target, damage, Utils.ActionType.DAMAGE_PHYSICAL, &"auto_attack")
 		
 		for additional_callback in additional_callbacks:
 			additional_callback.call({

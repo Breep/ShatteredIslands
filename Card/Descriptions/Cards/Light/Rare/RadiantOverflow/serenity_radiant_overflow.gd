@@ -11,7 +11,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var ratio: float = _ratio[card_lvl - 1]
 
 	var modifier := ActionModifier.new()
-	modifier.action_type = ActionModifier.ActionType.HEAL
+	modifier.action_type = Utils.ActionCategory.HEAL
 	modifier.id = &"Radiant Overflow"
 	modifier.is_one_time_effect = false
 	modifier.before_action_logic_callback = func(cb_vars: Dictionary) -> void:

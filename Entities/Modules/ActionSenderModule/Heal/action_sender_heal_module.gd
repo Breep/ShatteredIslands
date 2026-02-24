@@ -7,7 +7,7 @@ func heal(target: Entity, value: float, action_id: StringName) -> float:
 	if not is_instance_valid(target): return 0
 	if not multiplayer.is_server(): return 0
 	
-	var modifiers_data: Dictionary = _consume_before_action_modifiers(ActionModifier.ActionType.HEAL, {
+	var modifiers_data: Dictionary = _consume_before_action_modifiers(Utils.ActionCategory.HEAL, {
 		ActionModifier.VarType.HEAL_AMOUNT: value,
 		ActionModifier.VarType.TARGET: target
 	})

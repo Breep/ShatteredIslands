@@ -22,12 +22,13 @@ enum ActionType {
 	STATUS_UNTARGETABLE,
 }
 
-enum DamageType {
-	PHYSICAL,
-	MAGICAL,
-	POISON,
-	PURE,
+enum ActionCategory {
+	DAMAGE,
 	HEAL,
+	STACK,
+	STATUS,
+	UTILITY,
+	DODGE,
 }
 
 enum PercentModifier {
@@ -35,37 +36,15 @@ enum PercentModifier {
 	CURRENT_HP,
 	LOST_HP,
 }
-
-enum StackType {
-	POISON,
-	SHIELD,
-	IGNITE,
-	REGEN,
-	NECROSIS
-}
-
-enum AttackType {
-	UNDEF,
-	AUTO_ATTACK
-}
 #endregion
 
 # ============================== Constants ==============================
-#region Constants
-const DAMAGE_COLORS: Dictionary[DamageType, Color] = {
-	DamageType.PHYSICAL: Color.WHITE,
-	DamageType.MAGICAL: Color.DARK_BLUE,
-	DamageType.PURE: Color.DARK_GOLDENROD,
-	DamageType.POISON: Color.WEB_GREEN,
-	DamageType.HEAL: Color.AQUAMARINE
-}
-
-const STACK_COLORS: Dictionary[StackType, Color] = {
-	StackType.POISON: Color.WEB_GREEN,
-	StackType.SHIELD: Color.SADDLE_BROWN,
-	StackType.IGNITE: Color.DARK_RED,
-	StackType.REGEN: Color.AQUAMARINE,
-	StackType.NECROSIS: Color.REBECCA_PURPLE
+const DAMAGE_COLORS: Dictionary[ActionType, Color] = {
+	ActionType.DAMAGE_PHYSICAL: Color.WHITE,
+	ActionType.DAMAGE_MAGICAL: Color.DARK_BLUE,
+	ActionType.DAMAGE_PURE: Color.DARK_GOLDENROD,
+	ActionType.DAMAGE_POISON: Color.WEB_GREEN,
+	ActionType.UTILITY_HEAL: Color.AQUAMARINE
 }
 #endregion
 
@@ -82,25 +61,6 @@ func _ready() -> void:
 
 # ============================== Public functions ==============================
 #region ===== ACTIONS
-func stack_to_action(stack_type: StackType) -> ActionType:
-	match stack_type:
-		StackType.POISON: return ActionType.STACK_POISON
-		StackType.SHIELD: return ActionType.STACK_SHIELD
-		StackType.IGNITE: return ActionType.STACK_IGNITE
-		StackType.REGEN: return ActionType.STACK_REGEN
-		StackType.NECROSIS: return ActionType.STACK_NECROSIS
-		_: return ActionType.STACK_POISON
-
-
-func damage_to_action(damage_type: DamageType) -> ActionType:
-	match damage_type:
-		DamageType.PHYSICAL: return ActionType.DAMAGE_PHYSICAL
-		DamageType.MAGICAL: return ActionType.DAMAGE_MAGICAL
-		DamageType.POISON: return ActionType.DAMAGE_POISON
-		DamageType.PURE: return ActionType.DAMAGE_PURE
-		_: return ActionType.DAMAGE_PHYSICAL
-
-
 func status_to_action(status_type: Status.Type) -> ActionType:
 	match status_type:
 		Status.Type.STUN: return ActionType.STATUS_STUN
@@ -131,6 +91,25 @@ func get_all_actions() -> Array[ActionType]:
 		ActionType.STATUS_INVULNERABLE,
 		ActionType.STATUS_UNTARGETABLE,
 	]
+
+
+static func get_action_category(action_type: ActionType) -> ActionCategory:
+	match action_type:
+		ActionType.DAMAGE_PHYSICAL, ActionType.DAMAGE_MAGICAL, \
+		ActionType.DAMAGE_POISON, ActionType.DAMAGE_PURE:
+			return ActionCategory.DAMAGE
+		ActionType.UTILITY_HEAL:
+			return ActionCategory.HEAL
+		ActionType.UTILITY_CLEANSE, ActionType.UTILITY_DISPELL:
+			return ActionCategory.UTILITY
+		ActionType.STACK_SHIELD, ActionType.STACK_IGNITE, \
+		ActionType.STACK_POISON, ActionType.STACK_REGEN, ActionType.STACK_NECROSIS:
+			return ActionCategory.STACK
+		ActionType.STATUS_STUN, ActionType.STATUS_TAUNT, \
+		ActionType.STATUS_SILENCE, ActionType.STATUS_INVULNERABLE, ActionType.STATUS_UNTARGETABLE:
+			return ActionCategory.STATUS
+		_:
+			return ActionCategory.UTILITY
 #endregion
 
 func create_perpetual_timer(node: Node, wait_time: float, callback: Callable, autostart: bool = false) -> Timer:
@@ -178,7 +157,3 @@ func recursive_show(node: Node3D):
 			recursive_show(child)
 	if node is Node3D:
 		node.show()
-
-
-func is_negative_stack(damage_type: StackType) -> bool:
-	return damage_type in [StackType.POISON, StackType.IGNITE, StackType.NECROSIS]

@@ -113,7 +113,7 @@ func remove_stack(stack_type: Stack.Type, value: float) -> void:
 
 
 ## Special helper for shield damage reduction
-func get_shield_reduced_damage(damage: float, damage_type: Utils.DamageType) -> float:
+func get_shield_reduced_damage(damage: float, damage_type: Utils.ActionType) -> float:
 	if _shield_stack:
 		return _shield_stack.get_reduced_damage_taken(damage, damage_type)
 	return damage
@@ -139,7 +139,7 @@ func _on_poison_tick_timer_timeout() -> void:
 	if _owner == null: return
 	if not multiplayer.is_server(): return
 	if _poison_stack.total_stacks > 0:
-		_owner.take_damage(_poison_stack.total_stacks, Utils.DamageType.POISON, false, "Poison Periodic")
+		_owner.take_damage(_poison_stack.total_stacks, Utils.ActionType.DAMAGE_POISON, false, "Poison Periodic")
 
 
 func _on_ignite_tick_timer_timeout() -> void:
@@ -149,7 +149,7 @@ func _on_ignite_tick_timer_timeout() -> void:
 	# Apply damage
 	if _ignite_stack.total_stacks > 0:
 		var percent: float = IGNITE_MAXHP_PERCENT * _ignite_stack.total_stacks
-		_owner.take_damage_percent(percent, Utils.PercentModifier.MAX_HP, Utils.DamageType.MAGICAL, false, "Ignite Periodic")
+		_owner.take_damage_percent(percent, Utils.PercentModifier.MAX_HP, Utils.ActionType.DAMAGE_MAGICAL, false, "Ignite Periodic")
 	
 	# Decay stacks
 	_ignite_stack.tick()

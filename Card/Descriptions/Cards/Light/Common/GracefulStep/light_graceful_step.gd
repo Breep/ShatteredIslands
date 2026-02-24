@@ -21,13 +21,13 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	ctx.stat_modifiers.register_modifier(mod)
 
 	var action_mod := ActionModifier.new()
-	action_mod.action_type = ActionModifier.ActionType.DODGE
+	action_mod.action_type = Utils.ActionCategory.DODGE
 	action_mod.id = &"Graceful Step"
 	action_mod.is_one_time_effect = false
 	action_mod.after_action_logic_callback = func(_cb_vars: Dictionary) -> void:
 		var target: Entity = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF)
 		if target != null:
-			ctx.hero.inflict_condition_stacks(target, regen_val, Utils.StackType.REGEN, &"Graceful Step")
+			ctx.hero.inflict_condition_stacks(target, regen_val, Stack.Type.REGEN, &"Graceful Step")
 	ctx.action_modifiers.register_modifier(action_mod)
 
 

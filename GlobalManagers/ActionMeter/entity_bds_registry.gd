@@ -38,11 +38,11 @@ func _init(ename: String) -> void:
 # 3. Dispatch between each Utils.ActionType (DAMAGE_PHYSICAL / DAMAGE_MAGICAL / HEAL / STUN / STACK_POISON / etc...) BattleDataStat.action_meters (float)
 #region ============================== Public functions ==============================
 func register_action(action_id: StringName, action_type: Utils.ActionType, value: float, is_critical: bool) -> void:
-	var bds_type: BattleDataStat.Type = BattleDataStat.action_type_to_battle_data_stat_type(action_type, BattleDataStat.MetaType.ACTION)
+	var bds_type: BattleDataStat.Type = BattleDataStat.action_type_to_battle_data_stat_type(action_type, BattleDataStat.Direction.SENT)
 	data_stat_dictionaries[bds_type].register_action(action_id, action_type, value, is_critical)
 
 
 func register_interaction(action_id: StringName, action_type: Utils.ActionType, value: float, is_critical: bool) -> void:
-	var bds_type: BattleDataStat.Type = BattleDataStat.action_type_to_battle_data_stat_type(action_type, BattleDataStat.MetaType.INTERACTION)
+	var bds_type: BattleDataStat.Type = BattleDataStat.action_type_to_battle_data_stat_type(action_type, BattleDataStat.Direction.RECEIVED)
 	data_stat_dictionaries[bds_type].register_action(action_id, action_type, value, is_critical)
 #endregion

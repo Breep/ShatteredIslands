@@ -21,7 +21,7 @@ func _is_dodged(action_type: Utils.ActionType) -> bool:
 	var dodge_chance: float = _owner.stats.get_stat(EntityStats.StatType.DODGE, action_type)
 	if Utils.is_randomize_modifier_active(dodge_chance):
 		_dodge_number += 1
-		for dodge_modifier: ActionModifier in _owner.action_modifiers_registry.consume_all_modifiers(ActionModifier.ActionType.DODGE):
+		for dodge_modifier: ActionModifier in _owner.action_modifiers_registry.consume_all_modifiers(Utils.ActionCategory.DODGE):
 			if dodge_modifier.after_action_logic_callback.is_valid():
 				dodge_modifier.after_action_logic_callback.call({
 					ActionModifier.VarType.DODGE_NUMBER: _dodge_number
@@ -40,17 +40,6 @@ func _get_crit_resistance_multiplier(action_type: Utils.ActionType) -> float:
 	var res: float = _owner.stats.get_stat(EntityStats.StatType.CRIT_RESISTANCE, action_type)
 	return 100.0 / (100.0 + res)
 
-
-func _utils_stack_to_stack_type(utils_type: Utils.StackType) -> Stack.Type:
-	match utils_type:
-		Utils.StackType.POISON: return Stack.Type.POISON
-		Utils.StackType.IGNITE: return Stack.Type.IGNITE
-		Utils.StackType.SHIELD: return Stack.Type.SHIELD
-		Utils.StackType.REGEN: return Stack.Type.REGEN
-		Utils.StackType.NECROSIS: return Stack.Type.NECROSIS
-		_:
-			Verbose.error("Unknown Utils.StackType [" + str(utils_type) + "]", Verbose.Category.ENTITY_MODULE)
-			return Stack.Type.POISON
 
 # ============================== Callbacks ==============================
 

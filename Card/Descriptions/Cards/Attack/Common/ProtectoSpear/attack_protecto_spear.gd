@@ -20,7 +20,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	aa_mod.is_one_time_effect = false
 	aa_mod.additional_effect_callback = func(_cb_vars: Dictionary) -> void:
 		if Utils.is_randomize_modifier_active(chance):
-			ctx.hero.inflict_condition_stacks(ctx.hero, shield_amount, Utils.StackType.SHIELD, &"Protecto'Spear")
+			ctx.hero.inflict_condition_stacks(ctx.hero, shield_amount, Stack.Type.SHIELD, &"Protecto'Spear")
 
 	ctx.battle_callbacks.register_battle_start(&"Protecto'Spear", func() -> void:
 		ctx.auto_attack_modifiers.register_modifier(aa_mod)

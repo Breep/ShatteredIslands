@@ -45,9 +45,9 @@ enum Type {
 	MISC_RECEIVED
 }
 
-enum MetaType {
-	ACTION,
-	INTERACTION
+enum Direction {
+	SENT,
+	RECEIVED
 }
 
 var id: StringName
@@ -95,25 +95,25 @@ static func battle_data_stat_type_to_action_types(bds_type: Type) -> Array[Utils
 		_: return []
 
 
-static func action_type_to_battle_data_stat_type(action_type: Utils.ActionType, meta_type: MetaType) -> Type:
+static func action_type_to_battle_data_stat_type(action_type: Utils.ActionType, direction: Direction) -> Type:
 	match action_type:
-		Utils.ActionType.DAMAGE_PHYSICAL: return Type.DAMAGE_DONE     if meta_type == MetaType.ACTION else Type.DAMAGE_RECEIVED
-		Utils.ActionType.DAMAGE_MAGICAL:  return Type.DAMAGE_DONE     if meta_type == MetaType.ACTION else Type.DAMAGE_RECEIVED
-		Utils.ActionType.DAMAGE_POISON:   return Type.DAMAGE_DONE     if meta_type == MetaType.ACTION else Type.DAMAGE_RECEIVED
-		Utils.ActionType.DAMAGE_PURE:     return Type.DAMAGE_DONE     if meta_type == MetaType.ACTION else Type.DAMAGE_RECEIVED
-		Utils.ActionType.UTILITY_HEAL:    return Type.HEAL_DONE       if meta_type == MetaType.ACTION else Type.HEAL_RECEIVED
-		Utils.ActionType.UTILITY_CLEANSE: return Type.MISC_DONE       if meta_type == MetaType.ACTION else Type.MISC_RECEIVED
-		Utils.ActionType.UTILITY_DISPELL: return Type.MISC_DONE       if meta_type == MetaType.ACTION else Type.MISC_RECEIVED
-		Utils.ActionType.STACK_SHIELD:     return Type.STACK_INFLICTED if meta_type == MetaType.ACTION else Type.STACK_RECEIVED
-		Utils.ActionType.STACK_IGNITE:    return Type.STACK_INFLICTED if meta_type == MetaType.ACTION else Type.STACK_RECEIVED
-		Utils.ActionType.STACK_POISON:    return Type.STACK_INFLICTED if meta_type == MetaType.ACTION else Type.STACK_RECEIVED
-		Utils.ActionType.STACK_REGEN:     return Type.STACK_INFLICTED if meta_type == MetaType.ACTION else Type.STACK_RECEIVED
-		Utils.ActionType.STACK_NECROSIS:  return Type.STACK_INFLICTED if meta_type == MetaType.ACTION else Type.STACK_RECEIVED
-		Utils.ActionType.STATUS_STUN:     return Type.MISC_DONE       if meta_type == MetaType.ACTION else Type.MISC_RECEIVED
-		Utils.ActionType.STATUS_TAUNT:    return Type.MISC_DONE       if meta_type == MetaType.ACTION else Type.MISC_RECEIVED
-		Utils.ActionType.STATUS_SILENCE:  return Type.MISC_DONE       if meta_type == MetaType.ACTION else Type.MISC_RECEIVED
-		Utils.ActionType.STATUS_INVULNERABLE: return Type.MISC_DONE   if meta_type == MetaType.ACTION else Type.MISC_RECEIVED
-		Utils.ActionType.STATUS_UNTARGETABLE: return Type.MISC_DONE   if meta_type == MetaType.ACTION else Type.MISC_RECEIVED
+		Utils.ActionType.DAMAGE_PHYSICAL: return Type.DAMAGE_DONE     if direction == Direction.SENT else Type.DAMAGE_RECEIVED
+		Utils.ActionType.DAMAGE_MAGICAL:  return Type.DAMAGE_DONE     if direction == Direction.SENT else Type.DAMAGE_RECEIVED
+		Utils.ActionType.DAMAGE_POISON:   return Type.DAMAGE_DONE     if direction == Direction.SENT else Type.DAMAGE_RECEIVED
+		Utils.ActionType.DAMAGE_PURE:     return Type.DAMAGE_DONE     if direction == Direction.SENT else Type.DAMAGE_RECEIVED
+		Utils.ActionType.UTILITY_HEAL:    return Type.HEAL_DONE       if direction == Direction.SENT else Type.HEAL_RECEIVED
+		Utils.ActionType.UTILITY_CLEANSE: return Type.MISC_DONE       if direction == Direction.SENT else Type.MISC_RECEIVED
+		Utils.ActionType.UTILITY_DISPELL: return Type.MISC_DONE       if direction == Direction.SENT else Type.MISC_RECEIVED
+		Utils.ActionType.STACK_SHIELD:     return Type.STACK_INFLICTED if direction == Direction.SENT else Type.STACK_RECEIVED
+		Utils.ActionType.STACK_IGNITE:    return Type.STACK_INFLICTED if direction == Direction.SENT else Type.STACK_RECEIVED
+		Utils.ActionType.STACK_POISON:    return Type.STACK_INFLICTED if direction == Direction.SENT else Type.STACK_RECEIVED
+		Utils.ActionType.STACK_REGEN:     return Type.STACK_INFLICTED if direction == Direction.SENT else Type.STACK_RECEIVED
+		Utils.ActionType.STACK_NECROSIS:  return Type.STACK_INFLICTED if direction == Direction.SENT else Type.STACK_RECEIVED
+		Utils.ActionType.STATUS_STUN:     return Type.MISC_DONE       if direction == Direction.SENT else Type.MISC_RECEIVED
+		Utils.ActionType.STATUS_TAUNT:    return Type.MISC_DONE       if direction == Direction.SENT else Type.MISC_RECEIVED
+		Utils.ActionType.STATUS_SILENCE:  return Type.MISC_DONE       if direction == Direction.SENT else Type.MISC_RECEIVED
+		Utils.ActionType.STATUS_INVULNERABLE: return Type.MISC_DONE   if direction == Direction.SENT else Type.MISC_RECEIVED
+		Utils.ActionType.STATUS_UNTARGETABLE: return Type.MISC_DONE   if direction == Direction.SENT else Type.MISC_RECEIVED
 		_:
 			push_error("BattleDataStat: action_type_to_battle_data_stat_type() -> Unknown action_type")
 			return Type.DAMAGE_DONE

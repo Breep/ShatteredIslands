@@ -16,12 +16,12 @@ signal critical_action_done(target: Entity, action_type: Utils.ActionType, value
 @warning_ignore("unused_signal")
 signal action_overhealed(target: Entity, amount: float)
 @warning_ignore("unused_signal")
-signal damage_taken(damage: float, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool)
+signal damage_taken(damage: float, damage_type: Utils.ActionType, is_critical: bool, blocked_by_armor: bool)
 @warning_ignore("unused_signal")
 signal heal_taken(heal_amount: float, is_critical: bool)
 signal spell_casted(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary)
 @warning_ignore("unused_signal")
-signal stack_taken(stack_type: Utils.StackType, stack_number: float, is_critical: bool)
+signal stack_taken(stack_type: Stack.Type, stack_number: float, is_critical: bool)
 @warning_ignore("unused_signal")
 signal auto_attack_completed()
 signal spawn_completed()
@@ -358,10 +358,10 @@ func connect_to_fighting_area(fighting_area_ref: FightingArea) -> void:
 #endregion
 
 #region ============================== Action Senders ==============================
-func direct_damage(target: Entity, damage: float, damage_type: Utils.DamageType, action_id: StringName) -> float:
+func direct_damage(target: Entity, damage: float, damage_type: Utils.ActionType, action_id: StringName) -> float:
 	return _damage_sender.direct_damage(target, damage, damage_type, action_id) if _damage_sender != null else 0.0
 
-func direct_damage_percent(target: Entity, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier, action_id: StringName) -> float:
+func direct_damage_percent(target: Entity, damage_percent: float, damage_type: Utils.ActionType, percent_modifier: Utils.PercentModifier, action_id: StringName) -> float:
 	return _damage_sender.direct_damage_percent(target, damage_percent, damage_type, percent_modifier, action_id) if _damage_sender != null else 0.0
 
 func auto_attack(target: Entity) -> bool:
@@ -385,7 +385,7 @@ func heal(target: Entity, heal_amount: float, action_id: StringName) -> float:
 func heal_percent(target: Entity, percent: float, percent_modifier: Utils.PercentModifier, action_id: StringName) -> float:
 	return _heal_sender.heal_percent(target, percent, percent_modifier, action_id) if _heal_sender != null else 0.0
 
-func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Utils.StackType, action_id: StringName, duration: float = 5.0) -> float:
+func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Stack.Type, action_id: StringName, duration: float = 5.0) -> float:
 	return _add_stack_sender.inflict_condition_stacks(target, stacks_number, stack_type, action_id, duration) if _add_stack_sender != null else 0.0
 
 func summon_entity(entity_type: EntityType, spawn_config: SpawnLocationConfig, entity_modifier: Dictionary) -> void:
@@ -404,13 +404,13 @@ func inflict_status(target: Entity, status_type: Status.Type, duration: float, a
 
 
 #region ============================== Action Receivers ==============================
-func take_damage(damage: float, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
+func take_damage(damage: float, damage_type: Utils.ActionType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
 	return _damage_receiver.take_damage(damage, damage_type, is_critical, action_id, source) if _damage_receiver != null else 0.0
 
-func take_damage_percent(percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
+func take_damage_percent(percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.ActionType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
 	return _damage_receiver.take_damage_percent(percent, percent_modifier, damage_type, is_critical, action_id, source) if _damage_receiver != null else 0.0
 
-func take_condition_stacks(stacks_number: float, stack_type: Utils.StackType, is_critical: bool, action_id: StringName, source: Entity = null, duration: float = 5.0) -> float:
+func take_condition_stacks(stacks_number: float, stack_type: Stack.Type, is_critical: bool, action_id: StringName, source: Entity = null, duration: float = 5.0) -> float:
 	return _add_stack_receiver.take_condition_stacks(stacks_number, stack_type, is_critical, action_id, source, duration) if _add_stack_receiver != null else 0.0
 
 func take_heal(heal_amount: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:

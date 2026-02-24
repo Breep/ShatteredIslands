@@ -14,11 +14,11 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var chance: float = _base_chance[card_lvl - 1]
 	var shield_amount: float = _base_shield_amount[card_lvl - 1]
 
-	var _on_damage_taken := func(damage: float, _damage_type: Utils.DamageType, _is_crit: bool, _is_blocked: bool) -> void:
+	var _on_damage_taken := func(damage: float, _damage_type: Utils.ActionType, _is_crit: bool, _is_blocked: bool) -> void:
 		if damage <= 0:
 			return
 		if Utils.is_randomize_modifier_active(chance):
-			ctx.hero.inflict_condition_stacks(ctx.hero, shield_amount, Utils.StackType.SHIELD, &"Reactive Cover")
+			ctx.hero.inflict_condition_stacks(ctx.hero, shield_amount, Stack.Type.SHIELD, &"Reactive Cover")
 
 	ctx.battle_callbacks.register_battle_start(&"Reactive Cover", func() -> void:
 		if not ctx.hero.damage_taken.is_connected(_on_damage_taken):

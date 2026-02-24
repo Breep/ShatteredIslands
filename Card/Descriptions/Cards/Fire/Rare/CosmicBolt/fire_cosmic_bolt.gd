@@ -28,7 +28,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			var ignite_stacks: float = hit_target.conditions.ignite_stacks
 			var damage: float = ignite_stacks * dmg_per_stack
 			if damage > 0:
-				ctx.hero.direct_damage(hit_target, damage, Utils.DamageType.MAGICAL, &"Cosmic Bolt")
+				ctx.hero.direct_damage(hit_target, damage, Utils.ActionType.DAMAGE_MAGICAL, &"Cosmic Bolt")
 			
 			var bc: float = float(ignite_stacks) * bounce_chance
 			if Utils.is_randomize_modifier_active(bc):
