@@ -38,7 +38,7 @@ func tick() -> float:
 	return _total_stacks
 
 
-func get_reduced_damage_taken(damage: float, damage_type: Utils.ActionType) -> float:
+func get_reduced_damage_taken(damage: float, damage_type: Utils.ActionType, battle_id: int = -1) -> float:
 	if _total_stacks <= 0: return damage
 	
 	var efficiency: float = _efficiencies.get(damage_type, 0.0)
@@ -49,7 +49,7 @@ func get_reduced_damage_taken(damage: float, damage_type: Utils.ActionType) -> f
 	var damage_reduced: float = damage - damage_reduction
 	
 	# Check if shield is consumed (Absorption Matrix logic)
-	if _free_use_chance > 0 and Utils.is_randomize_modifier_active(_free_use_chance):
+	if _free_use_chance > 0 and Utils.is_randomize_modifier_active(_free_use_chance, battle_id):
 		return damage_reduced
 	
 	# Consume shield

@@ -13,7 +13,7 @@ signal fight_is_ready_to_be_started(self_ref: FightingManager)
 #endregion
 
 #region ============================== Public variables ==============================
-var battle_id: int = -1 # Set by the parent
+var _battle_id: int = -1 # Set by the parent
 #endregion
 
 #region ============================== Private variables ==============================
@@ -22,7 +22,7 @@ var _heroes_dictionary: Dictionary[int, Array] # [int, Array[Hero]] Key=team_id,
 var _alive_heroes_dictionary: Dictionary[int, Array] # [int, Array[Hero]] Key=team_id, value=team members
 var _lowest_hp_teams_order: Array[int] # Array of teams in order of death [2, 3, 4] means team 2 died first, then 3 and then 4
 var _is_active: bool = false
-var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
+
 var _spawn_manager: SpawnManager
 #endregion
 
@@ -53,8 +53,10 @@ func _physics_process(_delta: float) -> void:
 func init(spawn_manager: SpawnManager) -> void:
 	_spawn_manager = spawn_manager
 
-func start(heroes: Array[Hero] = []) -> void:
-	_rng.seed = hash(str(battle_id)) # TODO Make the server generate seeds and send it to clients
+
+func start(battle_id: int, heroes: Array[Hero] = []) -> void:
+	_battle_id = battle_id
+	Utils.register_battle_rng(_battle_id, hash(str(_battle_id))) # TODO Make the server generate seeds and send it to clients
 	_is_active = true
 	_setup_heroes_dictionary(heroes)
 	_connect_to_heroes_signals()
@@ -139,7 +141,8 @@ func _stop_fighting_manager() -> void:
 
 
 func _cleanup() -> void:
-	battle_id = -1
+	Utils.unregister_battle_rng(_battle_id)
+	_battle_id = -1
 	_is_active = false
 	_heroes_dictionary.clear()
 	_alive_heroes_dictionary.clear()

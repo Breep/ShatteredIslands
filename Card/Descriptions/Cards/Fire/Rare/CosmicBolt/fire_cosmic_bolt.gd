@@ -31,7 +31,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 				ctx.hero.direct_damage(hit_target, damage, Utils.ActionType.DAMAGE_MAGICAL, &"Cosmic Bolt")
 			
 			var bc: float = float(ignite_stacks) * bounce_chance
-			if Utils.is_randomize_modifier_active(bc):
+			if Utils.is_randomize_modifier_active(bc, ctx.hero.battle_id):
 				var projectile: Projectile = cb_vars[ProjectileStats.VarType.PROJECTILE]
 				projectile.add_bounce(1)
 		)

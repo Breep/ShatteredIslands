@@ -1,6 +1,8 @@
 class_name ActionSenderModule
 extends Module
 
+static var _crit_check_number: int = -1
+
 # ============================== Enums ==============================
 
 enum ResultKey {
@@ -17,7 +19,8 @@ func _get_crit_multiplier(action_type: Utils.ActionType) -> Dictionary:
 	var crit_chance: float = _owner.stats.get_stat(EntityStats.StatType.CRIT_CHANCE, action_type)
 	var crit_multiplier_percent: float = 0.0
 	
-	if Utils.is_randomize_modifier_active(crit_chance):
+	_crit_check_number += 1
+	if Utils.is_randomize_modifier_active(crit_chance, _owner.battle_id, "crit_check_" + str(_crit_check_number)):
 		is_critical = true
 		crit_multiplier_percent = _owner.stats.get_stat(EntityStats.StatType.CRIT_MULT, action_type)
 	

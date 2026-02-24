@@ -19,7 +19,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	aa_mod.tags = [AutoAttackModifier.TagType.CARD]
 	aa_mod.is_one_time_effect = false
 	aa_mod.additional_effect_callback = func(cb_vars: Dictionary) -> void:
-		if not Utils.is_randomize_modifier_active(chance): return
+		if not Utils.is_randomize_modifier_active(chance, ctx.hero.battle_id): return
 		var target = cb_vars.get(AutoAttackModifier.VarType.TARGET)
 		if target == null or not is_instance_valid(target): return
 		ctx.hero.inflict_condition_stacks(target, stacks, Stack.Type.NECROSIS, &"Necrotic Bullet")

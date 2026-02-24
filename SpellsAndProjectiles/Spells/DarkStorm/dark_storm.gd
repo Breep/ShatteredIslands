@@ -35,9 +35,9 @@ func _ready() -> void:
 		queue_free()
 		return
 	
-	var a: float = Utils.rng.randf_range(0, 1)
-	var b: float = Utils.rng.randf_range(-1, 1)
-	var d: float = Utils.rng.randf_range(-MAX_RANDOM_XY, MAX_RANDOM_XY)
+	var a: float = Utils.get_randf_range(0, 1, _source.battle_id)
+	var b: float = Utils.get_randf_range(-1, 1, _source.battle_id)
+	var d: float = Utils.get_randf_range(-MAX_RANDOM_XY, MAX_RANDOM_XY, _source.battle_id)
 	var vec := Vector3(a, 0, b).normalized()
 	global_position = _target.global_position + d * vec
 	

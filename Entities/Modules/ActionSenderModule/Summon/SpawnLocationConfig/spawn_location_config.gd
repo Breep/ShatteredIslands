@@ -131,12 +131,13 @@ static func create_random_arena(randomization: float = 0.0) -> SpawnLocationConf
 	config.randomization_radius = randomization
 	return config
 
+
 func _apply_randomization(position: Vector3, radius: float) -> Vector3:
 	if radius <= 0.0:
 		return position
 	
-	var random_angle := randf() * TAU
-	var random_distance := randf() * radius
+	var random_angle: float = Utils.get_randf_range(0, TAU, -1, "spawn_location_apply_randomization_1")
+	var random_distance: float = Utils.get_randf_range(0, radius, -1, "spawn_location_apply_randomization_2")
 	
 	var offset := Vector3(
 		cos(random_angle) * random_distance,

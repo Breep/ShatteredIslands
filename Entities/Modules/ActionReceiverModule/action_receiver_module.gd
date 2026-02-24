@@ -1,6 +1,8 @@
 class_name ActionReceiverModule
 extends Module
 
+static var _global_dodge_number: int = 0
+
 # ============================== Enums ==============================
 
 enum ResultKey {
@@ -13,14 +15,15 @@ enum ResultKey {
 
 # ============================== Private variables ==============================
 
-var _dodge_number: int = 0
+var _dodge_number: int = -1
 
 # ============================== Protected functions ==============================
 
 func _is_dodged(action_type: Utils.ActionType) -> bool:
 	var dodge_chance: float = _owner.stats.get_stat(EntityStats.StatType.DODGE, action_type)
-	if Utils.is_randomize_modifier_active(dodge_chance):
-		_dodge_number += 1
+	_dodge_number += 1
+	if Utils.is_randomize_modifier_active(dodge_chance, _owner.battle_id, "dodge_check_" + str(_global_dodge_number)):
+		_global_dodge_number += 1
 		for dodge_modifier: ActionModifier in _owner.action_modifiers_registry.consume_all_modifiers(Utils.ActionCategory.DODGE):
 			if dodge_modifier.after_action_logic_callback.is_valid():
 				dodge_modifier.after_action_logic_callback.call({

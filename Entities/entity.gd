@@ -306,6 +306,8 @@ func get_collision_center() -> Vector3:
 func process_tick() -> void:
 	if _movement_module != null:
 		_movement_module.process_tick()
+	if _auto_attack_periodic_module != null:
+		_auto_attack_periodic_module.process_tick()
 #endregion
 
 #region ============================== Context ==============================

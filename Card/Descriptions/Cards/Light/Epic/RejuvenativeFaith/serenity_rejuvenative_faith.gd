@@ -17,7 +17,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if action_type != Utils.ActionType.UTILITY_CLEANSE and action_type != Utils.ActionType.UTILITY_DISPELL:
 			return
 		if value <= 0: return
-		if Utils.is_randomize_modifier_active(chance):
+		if Utils.is_randomize_modifier_active(chance, ctx.hero.battle_id):
 			var regen_amount: float = value * amount
 			if regen_amount > 0:
 				ctx.hero.inflict_condition_stacks(ctx.hero, regen_amount, Stack.Type.REGEN, &"Rejuvenative Faith")

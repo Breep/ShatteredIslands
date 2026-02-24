@@ -38,7 +38,7 @@ func _on_inflict_condition_ignite(cb_vars: Dictionary) -> void:
 	if target == null: return
 	if stack_type != Stack.Type.IGNITE: return
 	for i in stack_value:
-		if Utils.is_randomize_modifier_active(2):
+		if Utils.is_randomize_modifier_active(2, _owner.battle_id):
 			_owner.cast_spell(target, Spell.Type.METEOR, {
 					Spell.MeteorModifier.DAMAGE_PERCENT: _fire_stats.meteor_damage_percent,
 					Spell.MeteorModifier.RADIUS: _fire_stats.meteor_radius,

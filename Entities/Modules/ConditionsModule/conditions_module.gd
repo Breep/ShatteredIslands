@@ -115,7 +115,7 @@ func remove_stack(stack_type: Stack.Type, value: float) -> void:
 ## Special helper for shield damage reduction
 func get_shield_reduced_damage(damage: float, damage_type: Utils.ActionType) -> float:
 	if _shield_stack:
-		return _shield_stack.get_reduced_damage_taken(damage, damage_type)
+		return _shield_stack.get_reduced_damage_taken(damage, damage_type, _owner.battle_id)
 	return damage
 
 

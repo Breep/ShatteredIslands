@@ -75,19 +75,20 @@ func _ready() -> void:
 # Connect all heroes to this FightingArea
 func init_fight(heroes: Array[Hero], battle_type: Battle.BattleType, battle_id: int = -1) -> void:
 	Verbose.debug("Initiating a fight | " + str(Battle.BattleType.keys()[battle_type]) + " | " + str(heroes.size()) + " | " + str(battle_id), Verbose.Category.FIGHTING_AREA)
-	var hero_spawner: HeroSpawner = _set_fighting_floor(battle_type).init(spawn_manager)
+	_current_battle_id = battle_id
+	_heroes = heroes
+	_battle_type = battle_type
+	
+	var hero_spawner: HeroSpawner = _set_fighting_floor(battle_type).init(spawn_manager, battle_id)
 	if hero_spawner == null:
 		Verbose.error("FightingArea: No HeroSpawner for this battle type: " + str(Battle.BattleType.keys()[battle_type]), Verbose.Category.FIGHTING_AREA)
 		return
 	
+	_fighting_manager.fight_is_over.connect(_on_fighting_manager_fight_is_over, CONNECT_ONE_SHOT)
+	_fighting_manager.start(battle_id, heroes)
+	
 	_entity_manager.clear()
 	hero_spawner.spawn_heroes(heroes)
-	
-	_heroes = heroes
-	_battle_type = battle_type
-	_current_battle_id = battle_id
-	_fighting_manager.fight_is_over.connect(_on_fighting_manager_fight_is_over, CONNECT_ONE_SHOT)
-	_fighting_manager.start(heroes)
 
 
 func get_fighting_heroes() -> Array[Hero]:
@@ -120,6 +121,7 @@ func _set_fighting_floor(battle_type: Battle.BattleType) -> HeroSpawner:
 	if _arena_zone_manager != null:
 		_arena_zone_manager.init(
 			fighting_floor.team_zones,
+			_current_battle_id,
 			fighting_floor.center_zone,
 			fighting_floor.full_arena_zone
 		)

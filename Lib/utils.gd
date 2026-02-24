@@ -50,14 +50,15 @@ const DAMAGE_COLORS: Dictionary[ActionType, Color] = {
 
 # ============================== Public variables ==============================
 
-@onready var rng := RandomNumberGenerator.new()
-
 # ============================== Private variables ==============================
+
+var _battle_rngs: Dictionary[int, RandomNumberGenerator] = {}
+var _global_rng := RandomNumberGenerator.new()
 
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	rng.randomize()
+	_global_rng.randomize()
 
 # ============================== Public functions ==============================
 #region ===== ACTIONS
@@ -135,12 +136,41 @@ func create_one_shot_timer(node: Node, wait_time: float, callback: Callable, aut
 	return timer
 
 
-func is_randomize_modifier_active(chance_in_percent: float) -> bool:
-	return rng.randf_range(0, 100) <= chance_in_percent
+#region ===== RNG
+func register_battle_rng(battle_id: int, seed_value: int) -> void:
+	var battle_rng := RandomNumberGenerator.new()
+	battle_rng.seed = seed_value
+	_battle_rngs[battle_id] = battle_rng
 
 
-func get_randf_range(p_min: float, p_max: float) -> float:
-	return rng.randf_range(p_min, p_max)
+func unregister_battle_rng(battle_id: int) -> void:
+	_battle_rngs.erase(battle_id)
+
+
+func is_randomize_modifier_active(chance_in_percent: float, battle_id: int = -1, id: String = "") -> bool:
+	var r = _get_rng(battle_id).randf_range(0, 100)
+	Verbose.trace("Rand[" + str(battle_id) + "] " + str(r).pad_decimals(5) + " '" + id + "'", Verbose.Category.DEFAULT)
+	return r <= chance_in_percent
+
+
+func pick_random(array: Array, battle_id: int = -1, id: String = "") -> Variant:
+	if array.is_empty(): return null
+	var r = _get_rng(battle_id).randi_range(0, array.size() - 1)
+	Verbose.trace("Rand[" + str(battle_id) + "] " + str(r) + " '" + id + "'", Verbose.Category.DEFAULT)
+	return array[r]
+
+
+func get_randf_range(p_min: float, p_max: float, battle_id: int = -1, id: String = "") -> float:
+	var r: float = _get_rng(battle_id).randf_range(p_min, p_max)
+	Verbose.trace("Rand[" + str(battle_id) + "] " + str(r).pad_decimals(5) + " '" + id + "'", Verbose.Category.DEFAULT)
+	return r
+
+
+func get_randi_range(p_min: int, p_max: int, battle_id: int = -1, id: String = "") -> int:
+	var r: int = _get_rng(battle_id).randi_range(p_min, p_max)
+	Verbose.trace("Rand[" + str(battle_id) + "] " + str(r) + " '" + id + "'", Verbose.Category.DEFAULT)
+	return r
+#endregion
 
 
 func recursive_hide(node: Node3D):
@@ -157,3 +187,9 @@ func recursive_show(node: Node3D):
 			recursive_show(child)
 	if node is Node3D:
 		node.show()
+
+
+func _get_rng(battle_id: int = -1) -> RandomNumberGenerator:
+	if battle_id >= 0 and _battle_rngs.has(battle_id):
+		return _battle_rngs[battle_id]
+	return _global_rng

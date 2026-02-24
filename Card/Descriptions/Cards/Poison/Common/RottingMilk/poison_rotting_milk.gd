@@ -21,7 +21,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if not cb_vars.has(ActionModifier.VarType.STACK_TYPE): return
 		var stack_type: Stack.Type = cb_vars[ActionModifier.VarType.STACK_TYPE]
 		if stack_type != Stack.Type.POISON: return
-		if Utils.is_randomize_modifier_active(chance):
+		if Utils.is_randomize_modifier_active(chance, ctx.hero.battle_id):
 			ctx.hero.inflict_condition_stacks(ctx.hero, regen_stacks, Stack.Type.REGEN, &"Rotting Milk")
 	ctx.action_modifiers.register_modifier(modifier)
 

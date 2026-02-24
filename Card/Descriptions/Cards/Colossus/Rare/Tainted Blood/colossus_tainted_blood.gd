@@ -26,7 +26,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			return
 
 		var stack_type: Stack.Type
-		if Utils.rng.randi() % 2 == 0:
+		if Utils.get_randi_range(1, 2, ctx.hero.battle_id) % 2 == 0:
 			stack_type = Stack.Type.POISON
 		else:
 			stack_type = Stack.Type.IGNITE
