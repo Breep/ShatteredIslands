@@ -6,7 +6,7 @@ extends CharacterBody3D
 #region ============================== Signals ==============================
 signal died(self_ref: Entity)
 @warning_ignore("unused_signal")
-signal interaction_received(source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool)
+signal action_received(source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool)
 @warning_ignore("unused_signal")
 signal action_done(target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool)
 @warning_ignore("unused_signal")

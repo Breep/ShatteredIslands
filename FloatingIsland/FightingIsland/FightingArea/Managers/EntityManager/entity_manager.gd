@@ -42,8 +42,8 @@ func clear() -> void:
 				entity.died.disconnect(_on_entity_died)
 			if entity.action_done.is_connected(_on_entity_action_done):
 				entity.action_done.disconnect(_on_entity_action_done)
-			if entity.interaction_received.is_connected(_on_entity_interaction_received):
-				entity.interaction_received.disconnect(_on_entity_interaction_received)
+			if entity.action_received.is_connected(_on_entity_interaction_received):
+				entity.action_received.disconnect(_on_entity_interaction_received)
 	_entities.clear()
 	_heroes.clear()
 
@@ -68,7 +68,7 @@ func _register_entity(entity: Entity) -> void:
 	
 	entity.spell_casted.connect(_on_entity_spell_casted.bind(entity))
 	entity.action_done.connect(_on_entity_action_done.bind(entity))
-	entity.interaction_received.connect(_on_entity_interaction_received.bind(entity))
+	entity.action_received.connect(_on_entity_interaction_received.bind(entity))
 	entity.died.connect(_on_entity_died.bind(entity))
 	entity.connect_to_fighting_area(_fighting_area)
 
@@ -77,7 +77,7 @@ func _kick_entity(entity: Entity) -> void:
 	if entity.spell_casted.is_connected(_on_entity_spell_casted): entity.spell_casted.disconnect(_on_entity_spell_casted)
 	if entity.died.is_connected(_on_entity_died): entity.died.disconnect(_on_entity_died)
 	if entity.action_done.is_connected(_on_entity_action_done): entity.action_done.disconnect(_on_entity_action_done)
-	if entity.interaction_received.is_connected(_on_entity_interaction_received): entity.interaction_received.disconnect(_on_entity_interaction_received)
+	if entity.action_received.is_connected(_on_entity_interaction_received): entity.action_received.disconnect(_on_entity_interaction_received)
 	entities.erase(entity.uid)
 	if _heroes.has(entity.uid): _heroes.erase(entity.uid)
 

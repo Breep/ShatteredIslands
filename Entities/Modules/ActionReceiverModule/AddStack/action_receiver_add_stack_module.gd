@@ -18,5 +18,5 @@ func take_condition_stacks(stacks_number: float, stack_type: Stack.Type, is_crit
 	
 	_owner.conditions.add_stack(stack_type, stacks_number, source, action_id, mod)
 	_owner.stack_taken.emit(stack_type, stacks_number, is_critical)
-	_owner.interaction_received.emit(source, Stack.to_action(stack_type), action_id, stacks_number, is_critical)
+	_owner.action_received.emit(source, Stack.to_action(stack_type), action_id, stacks_number, is_critical)
 	return stacks_number

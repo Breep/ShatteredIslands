@@ -18,7 +18,7 @@ func take_damage(damage: float, damage_type: Utils.ActionType, is_critical: bool
 		damage = _owner.conditions.get_shield_reduced_damage(damage, damage_type)
 	_owner.stats.health -= damage
 	_owner.damage_taken.emit(damage, damage_type, is_critical, false)
-	_owner.interaction_received.emit(source, damage_type, action_id, damage, is_critical)
+	_owner.action_received.emit(source, damage_type, action_id, damage, is_critical)
 	return damage
 
 

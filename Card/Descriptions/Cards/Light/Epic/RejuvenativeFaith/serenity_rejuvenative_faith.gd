@@ -23,12 +23,12 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 				ctx.hero.inflict_condition_stacks(ctx.hero, regen_amount, Stack.Type.REGEN, &"Rejuvenative Faith")
 
 	ctx.battle_callbacks.register_battle_start(&"Rejuvenative Faith", func() -> void:
-		if not ctx.hero.interaction_received.is_connected(_on_interaction):
-			ctx.hero.interaction_received.connect(_on_interaction)
+		if not ctx.hero.action_received.is_connected(_on_interaction):
+			ctx.hero.action_received.connect(_on_interaction)
 	)
 	ctx.battle_callbacks.register_battle_end(&"Rejuvenative Faith", func() -> void:
-		if ctx.hero.interaction_received.is_connected(_on_interaction):
-			ctx.hero.interaction_received.disconnect(_on_interaction)
+		if ctx.hero.action_received.is_connected(_on_interaction):
+			ctx.hero.action_received.disconnect(_on_interaction)
 	)
 
 

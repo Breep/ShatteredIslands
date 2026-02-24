@@ -37,7 +37,7 @@ func take_cleanse(value: float, is_critical: bool, action_id: StringName, source
 		remaining -= to_remove
 		removed += to_remove
 	
-	_owner.interaction_received.emit(source, Utils.ActionType.UTILITY_CLEANSE, action_id, removed, is_critical)
+	_owner.action_received.emit(source, Utils.ActionType.UTILITY_CLEANSE, action_id, removed, is_critical)
 	return removed
 
 
@@ -66,5 +66,5 @@ func take_dispell(value: float, is_critical: bool, action_id: StringName, source
 		remaining -= to_remove
 		removed += to_remove
 	
-	_owner.interaction_received.emit(source, Utils.ActionType.UTILITY_CLEANSE, action_id, removed, is_critical)
+	_owner.action_received.emit(source, Utils.ActionType.UTILITY_CLEANSE, action_id, removed, is_critical)
 	return removed
