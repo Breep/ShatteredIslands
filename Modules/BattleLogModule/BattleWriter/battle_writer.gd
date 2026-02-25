@@ -51,6 +51,14 @@ func get_all_logs() -> Array[Dictionary]:
 	return _battle_logs
 
 # ============================== Private functions ==============================
+func _create_base_entry() -> Dictionary:
+	var manager = _fighting_area.fighting_manager
+	var tick = manager.current_tick
+	return {
+		"tick": tick,                         # Précision pour le déterminisme
+		"time": snapped(tick / 60.0, 0.001),  # Lisibilité float (basé sur 60 FPS)
+	}
+
 func _save_logs_to_file() -> void:
 	Verbose.debug("Saving battle logs to disk", Verbose.Category.BATTLE_WRITER)
 	if _battle_logs.is_empty():
@@ -87,8 +95,8 @@ func _log_action_done(source: Entity, target: Entity, action_type: Utils.ActionT
 		Verbose.warn("_log_action_done() -> target invalid", Verbose.Category.BATTLE_WRITER)
 		return
 	
-	var data: Dictionary = {
-		"time": _get_time(),
+	var entry = _create_base_entry()
+	entry.merge({
 		"type": "action_done",
 		"action_type": Utils.ActionType.keys()[action_type],
 		"id": action_id,
@@ -96,9 +104,9 @@ func _log_action_done(source: Entity, target: Entity, action_type: Utils.ActionT
 		"critical": is_critical,
 		"source": source.uid,
 		"target": target.uid
-	}
+	})
 	
-	_append_log(data)
+	_append_log(entry)
 
 
 func _log_action_received(receiver: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
@@ -108,8 +116,8 @@ func _log_action_received(receiver: Entity, source: Entity, action_type: Utils.A
 		Verbose.warn("_log_action_done() -> receiver invalid", Verbose.Category.BATTLE_WRITER)
 		return
 	
-	var data: Dictionary = {
-		"time": _get_time(),
+	var entry = _create_base_entry()
+	entry.merge({
 		"type": "action_received",
 		"action_type": Utils.ActionType.keys()[action_type],
 		"id": action_id,
@@ -117,33 +125,34 @@ func _log_action_received(receiver: Entity, source: Entity, action_type: Utils.A
 		"critical": is_critical,
 		"receiver": receiver.uid,
 		"source": source.uid if source != null else -1,
-	}
+	})
 	
-	_append_log(data)
+	_append_log(entry)
 
 
-func _log_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.Type) -> void:
+func _log_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.Type, gpos: Vector3) -> void:
 	if not is_instance_valid(source) or not is_instance_valid(target): return
-	var data: Dictionary = {
-		"time": _get_time(),
+	var entry = _create_base_entry()
+	entry.merge({
 		"type": "projectile_spawned",
 		"source": source.uid,
 		"target": target.uid,
-		"projectile_type": Projectile.Type.keys()[projectile_type]
-	}
-	_append_log(data)
+		"projectile_type": Projectile.Type.keys()[projectile_type],
+		"position": gpos
+	})
+	_append_log(entry)
 
 
-func _log_entity_spawned(entity: Entity, entity_type: Entity.EntityType, entity_modifier: Dictionary) -> void:
+func _log_entity_spawned(entity: Entity, entity_type: Entity.EntityType, gpos: Vector3) -> void:
 	if not is_instance_valid(entity): return
-	var data: Dictionary = {
-		"time": _get_time(),
+	var entry = _create_base_entry()
+	entry.merge({
 		"type": "entity_spawned",
 		"uid": entity.uid,
 		"entity_type": Entity.EntityType.keys()[entity_type],
-		"mod": entity_modifier
-	}
-	_append_log(data)
+		"position": gpos
+	})
+	_append_log(entry)
 #endregion
 
 
@@ -174,12 +183,12 @@ func _on_gfm_fighting_phase_state_changed(state: GlobalFightingManager.FightingP
 			_battle_logs.clear()
 
 
-func _on_fighting_area_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.Type, _projectile: Projectile) -> void:
-	_log_projectile_spawned(source, target, projectile_type)
+func _on_fighting_area_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.Type, _projectile: Projectile, gpos: Vector3) -> void:
+	_log_projectile_spawned(source, target, projectile_type, gpos)
 
 
-func _on_fighting_area_entity_spawned(entity: Entity, entity_type: Entity.EntityType, entity_modifier: Dictionary) -> void:
-	_log_entity_spawned(entity, entity_type, entity_modifier)
+func _on_fighting_area_entity_spawned(entity: Entity, entity_type: Entity.EntityType, gpos: Vector3) -> void:
+	_log_entity_spawned(entity, entity_type, gpos)
 
 
 func _on_fighting_area_action_received(receiver: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:

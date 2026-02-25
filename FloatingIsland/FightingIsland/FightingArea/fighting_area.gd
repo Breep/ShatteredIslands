@@ -3,29 +3,18 @@ extends Node3D
 
 # ============================== Signals ==============================
 
+@warning_ignore("unused_signal")
 signal action_received(entity_ref: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool)
-func signal_interaction_received(entity_ref: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
-	action_received.emit(entity_ref, source, action_type, action_id, value, is_critical)
-
+@warning_ignore("unused_signal")
 signal action_done(source: Entity, target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool)
-func signal_action_done(source: Entity, target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
-	action_done.emit(source, target, action_type, action_id, value, is_critical)
-
-signal projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.Type, projectile: Projectile)
-func signal_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.Type, projectile: Projectile) -> void:
-	projectile_spawned.emit(source, target, projectile_type, projectile)
-
+@warning_ignore("unused_signal")
+signal projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.Type, projectile: Projectile, gpos: Vector3)
+@warning_ignore("unused_signal")
 signal spell_casted(source: Entity, target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary)
-func signal_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary) -> void:
-	spell_casted.emit(source, target, spell_type, spell_modifier)
-
+@warning_ignore("unused_signal")
 signal entity_died(victim: Entity)
-func signal_entity_died(victim: Entity) -> void:
-	entity_died.emit(victim)
-
-signal entity_spawned(entity: Entity, entity_type: Entity.EntityType, entity_modifier: Dictionary)
-func signal_entity_spawned(entity: Entity, entity_type: Entity.EntityType, entity_modifier: Dictionary) -> void:
-	entity_spawned.emit(entity, entity_type, entity_modifier)
+@warning_ignore("unused_signal")
+signal entity_spawned(entity: Entity, entity_type: Entity.EntityType, gpos: Vector3)
 
 # ============================== Network Export variables ==============================
 

@@ -14,6 +14,7 @@ signal fight_is_ready_to_be_started(self_ref: FightingManager)
 
 #region ============================== Public variables ==============================
 var _battle_id: int = -1 # Set by the parent
+var current_tick: int = 0 # Fight tick counter
 #endregion
 
 #region ============================== Private variables ==============================
@@ -47,6 +48,7 @@ func _physics_process(_delta: float) -> void:
 	projectiles.sort_custom(func(a: Projectile, b: Projectile) -> bool: return a.uid < b.uid)
 	for projectile in projectiles:
 		projectile.process_tick()
+	current_tick += 1
 #endregion
 
 #region ============================== Public functions ==============================
@@ -55,6 +57,7 @@ func init(spawn_manager: SpawnManager) -> void:
 
 
 func start(battle_id: int, heroes: Array[Hero] = []) -> void:
+	current_tick = 0
 	_battle_id = battle_id
 	Utils.register_battle_rng(_battle_id, hash(str(_battle_id))) # TODO Make the server generate seeds and send it to clients
 	_is_active = true

@@ -385,4 +385,3 @@ func _on_crit_resist_changed(value: float, action_type: Utils.ActionType) -> voi
 
 func _on_life_steal_changed(value: float, action_type: Utils.ActionType) -> void:
 	_set_action_labels(_life_steal_labels, action_type, value)
-

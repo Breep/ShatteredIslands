@@ -93,19 +93,19 @@ func _on_game_manager_game_state_changed(game_state: GameManager.GameState) -> v
 
 
 func _on_entity_spell_casted(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary, source: Entity) -> void:
-	_fighting_area.signal_spell_casted(source, target, spell_type, spell_modifier)
+	_fighting_area.spell_casted.emit(source, target, spell_type, spell_modifier)
 
 
 func _on_entity_action_done(target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool, source: Entity) -> void:
-	_fighting_area.signal_action_done(source, target, action_type, action_id, value, is_critical)
+	_fighting_area.action_done.emit(source, target, action_type, action_id, value, is_critical)
 
 
 func _on_entity_interaction_received(source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool, entity_ref: Entity) -> void:
-	_fighting_area.signal_interaction_received(entity_ref, source, action_type, action_id, value, is_critical)
+	_fighting_area.action_received.emit(entity_ref, source, action_type, action_id, value, is_critical)
 
 
 func _on_entity_died(entity: Entity) -> void:
-	_fighting_area.signal_entity_died(entity)
+	_fighting_area.entity_died.emit(entity)
 
 
 func _on_scanner_area_body_entered(body: Node3D) -> void:
