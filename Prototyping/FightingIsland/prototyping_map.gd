@@ -126,3 +126,7 @@ func _add_player_cards() -> void:
 			card.uid = uid
 			uid += 1
 			_players[i].deck.add_card(card)
+
+
+func _on_button_pressed() -> void:
+	get_tree().reload_current_scene()

@@ -116,7 +116,7 @@ const LEVEL_PREFIX_TEMPLATES: Dictionary[Level, String] = {
 
 #region ============================== Configuration ==============================
 var current_categories_level: Dictionary[Category, Level] = {
-	Category.DEFAULT: Level.TRACE,
+	Category.DEFAULT: Level.DEBUG,
 	Category.NET: Level.TRACE,
 	Category.GLOBAL_MANAGER: Level.DEBUG,
 	Category.ROUND_MANAGER: Level.WARN,
@@ -218,7 +218,11 @@ func _log(cat: Category, level: Level, msg: String) -> void:
 	var time_stamp: String = ""
 	
 	if _get_stamp:
-		time_stamp = " " + str(Time.get_ticks_msec()) + " "
+		var ticks: int = Time.get_ticks_msec()
+		var mins: int = int(ticks / 60000.0)
+		var secs: int = int(ticks / 1000.0) % 60
+		var msecs: int = ticks % 1000
+		time_stamp = "%02d:%02d:%04d" % [mins, secs, msecs]
 	
 	if not _is_category_active(cat, level): return
 	
