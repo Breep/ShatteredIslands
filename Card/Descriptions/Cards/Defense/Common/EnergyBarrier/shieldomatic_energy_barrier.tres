@@ -16,4 +16,5 @@ name = "Energy Barrier"
 picture = ExtResource("1_rfirt")
 families = Array[int]([2])
 player_upgrade = SubResource("Resource_w1q6s")
+lvl = 5
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

@@ -308,6 +308,8 @@ func process_tick() -> void:
 		_movement_module.process_tick()
 	if _auto_attack_periodic_module != null:
 		_auto_attack_periodic_module.process_tick()
+	if conditions != null:
+		conditions.process_tick()
 #endregion
 
 #region ============================== Context ==============================
@@ -485,7 +487,7 @@ func _complete_spawn() -> void:
 #region ============================== Auto loading ==============================
 func _auto_load_modules() -> void:
 	for module_type in _auto_loaded_modules:
-		var module: Module = Shared.ENTITY_MODULE_SCENES[module_type].instantiate().init(self)
+		var module: Module = Shared.ENTITY_MODULE_SCENES[module_type].instantiate().init(self )
 		match module_type:
 			Module.ModuleType.TARGET: target_module = module
 			Module.ModuleType.CONDITIONS: conditions = module
@@ -590,7 +592,7 @@ func _on_stunned(_is_active: bool) -> void:
 func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
-			Events.entity_cliked.emit(self)
+			Events.entity_cliked.emit(self )
 			Verbose.debug("L'entité " + entity_name + " a été cliquée !", Verbose.Category.ENTITY)
 			_play_on_click_animation()
 	

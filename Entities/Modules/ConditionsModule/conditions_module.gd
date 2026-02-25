@@ -2,10 +2,16 @@ class_name ConditionsModule
 extends Module
 
 ## Manages temporary conditions (stacks) applied to an entity
-## Handles stack instances, periodic ticking, and damage/healing logic
+## Handles stack instances, periodic ticking via deterministic tick counters
 
 #region ============================== Constants ==============================
+const TICKS_PER_SECOND: int = 60
 const IGNITE_MAXHP_PERCENT: float = 0.05
+
+# Tick intervals for periodic effects (in seconds, converted to ticks)
+const POISON_TICK_INTERVAL: float = 1.0
+const IGNITE_TICK_INTERVAL: float = 1.0
+const REGEN_TICK_INTERVAL: float = 1.0
 #endregion
 
 #region ============================== Signals ==============================
@@ -23,12 +29,17 @@ var _ignite_stack: IgniteStack = IgniteStack.new()
 var _shield_stack: ShieldStack = ShieldStack.new()
 var _regen_stack: RegenStack = RegenStack.new()
 var _necrosis_stack: SimpleStack = SimpleStack.new()
-#endregion
 
-#region ============================== Local nodes ==============================
-@onready var _poison_tick_timer: Timer = %PoisonTickTimer
-@onready var _ignite_tick_timer: Timer = %IgniteTickTimer
-@onready var _regen_tick_timer: Timer = %RegenTickTimer
+# Tick-based timing (deterministic)
+var _poison_interval_ticks: int = int(POISON_TICK_INTERVAL * TICKS_PER_SECOND)
+var _ignite_interval_ticks: int = int(IGNITE_TICK_INTERVAL * TICKS_PER_SECOND)
+var _regen_interval_ticks: int = int(REGEN_TICK_INTERVAL * TICKS_PER_SECOND)
+
+var _poison_ticks_remaining: int = 0
+var _ignite_ticks_remaining: int = 0
+var _regen_ticks_remaining: int = 0
+
+var _is_active: bool = false
 #endregion
 
 #region ============================== Public properties ==============================
@@ -66,18 +77,47 @@ func init(entity_owner: Entity) -> ConditionsModule:
 
 func start() -> void:
 	if _owner == null: return
-	if not multiplayer.is_server(): return
-	_poison_tick_timer.start()
-	_ignite_tick_timer.start()
-	_regen_tick_timer.start()
+	_is_active = true
+	_poison_ticks_remaining = _poison_interval_ticks
+	_ignite_ticks_remaining = _ignite_interval_ticks
+	_regen_ticks_remaining = _regen_interval_ticks
 
 
 func stop() -> void:
 	if _owner == null: return
-	if not multiplayer.is_server(): return
-	_poison_tick_timer.stop()
-	_ignite_tick_timer.stop()
-	_regen_tick_timer.stop()
+	_is_active = false
+
+
+## Called every physics tick by Entity.process_tick() (deterministic, fixed 1/60s step).
+func process_tick() -> void:
+	if not _is_active:
+		return
+	if _owner == null:
+		return
+	
+	# Poison tick
+	_poison_ticks_remaining -= 1
+	if _poison_ticks_remaining <= 0:
+		_poison_ticks_remaining = _poison_interval_ticks
+		if _poison_stack.total_stacks > 0:
+			_owner.take_damage(_poison_stack.total_stacks, Utils.ActionType.DAMAGE_POISON, false, "Poison Periodic")
+	
+	# Ignite tick
+	_ignite_ticks_remaining -= 1
+	if _ignite_ticks_remaining <= 0:
+		_ignite_ticks_remaining = _ignite_interval_ticks
+		if _ignite_stack.total_stacks > 0:
+			var percent: float = IGNITE_MAXHP_PERCENT * _ignite_stack.total_stacks
+			_owner.take_damage_percent(percent, Utils.PercentModifier.MAX_HP, Utils.ActionType.DAMAGE_MAGICAL, false, "Ignite Periodic")
+		_ignite_stack.tick()
+	
+	# Regen tick
+	_regen_ticks_remaining -= 1
+	if _regen_ticks_remaining <= 0:
+		_regen_ticks_remaining = _regen_interval_ticks
+		_regen_stack.tick()
+		if _regen_stack.total_stacks > 0:
+			_owner.heal(_owner, _regen_stack.total_stacks, "Regen")
 
 
 ## Get a stack instance by type
@@ -132,39 +172,6 @@ func get_debuff_stacks() -> float:
 ## Get total number of buff stacks
 func get_buff_stacks() -> float:
 	return shield_stacks + regen_stacks
-#endregion
-
-#region ============================== Timer Callbacks ==============================
-func _on_poison_tick_timer_timeout() -> void:
-	if _owner == null: return
-	if not multiplayer.is_server(): return
-	if _poison_stack.total_stacks > 0:
-		_owner.take_damage(_poison_stack.total_stacks, Utils.ActionType.DAMAGE_POISON, false, "Poison Periodic")
-
-
-func _on_ignite_tick_timer_timeout() -> void:
-	if _owner == null: return
-	if not multiplayer.is_server(): return
-	
-	# Apply damage
-	if _ignite_stack.total_stacks > 0:
-		var percent: float = IGNITE_MAXHP_PERCENT * _ignite_stack.total_stacks
-		_owner.take_damage_percent(percent, Utils.PercentModifier.MAX_HP, Utils.ActionType.DAMAGE_MAGICAL, false, "Ignite Periodic")
-	
-	# Decay stacks
-	_ignite_stack.tick()
-
-
-func _on_regen_tick_timer_timeout() -> void:
-	if _owner == null: return
-	if not multiplayer.is_server(): return
-	
-	# Tick Buffer (Expires old stacks)
-	_regen_stack.tick()
-	
-	# Apply Healing
-	if _regen_stack.total_stacks > 0:
-		_owner.heal(_owner, _regen_stack.total_stacks, "Regen")
 #endregion
 
 #region ============================== Signal Re-emission Callbacks ==============================

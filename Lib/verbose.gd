@@ -208,7 +208,7 @@ func _get_rich_prefix() -> String:
 	else:
 		return RICH_PREFIX_TEMPLATES[GameType.SOLO]
 
-
+	
 func _is_category_active(cat: Category, log_level: Level) -> bool:
 	var cat_level: Level = current_categories_level.get(cat, Level.WARN)
 	return log_level >= cat_level

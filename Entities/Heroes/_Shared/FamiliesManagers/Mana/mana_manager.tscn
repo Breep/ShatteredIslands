@@ -1,11 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://br00pidd4svpc"]
+[gd_scene format=3 uid="uid://br00pidd4svpc"]
 
 [ext_resource type="Script" uid="uid://bsedo5cpq45ua" path="res://Entities/Heroes/_Shared/FamiliesManagers/Mana/mana_manager.gd" id="1_ok70t"]
 
-[node name="ManaManager" type="Node"]
+[node name="ManaManager" type="Node" unique_id=885590916]
 script = ExtResource("1_ok70t")
 
-[node name="ManaTickTimer" type="Timer" parent="."]
+[node name="ManaTickTimer" type="Timer" parent="." unique_id=1054073669]
 unique_name_in_owner = true
 wait_time = 0.1
 
