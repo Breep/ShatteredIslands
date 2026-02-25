@@ -46,6 +46,7 @@ config/icon="uid://hl4bi74ds0b0"
 
 [autoload]
 
+Console="*uid://dinahj02x6npw"
 Verbose="*res://Lib/verbose.gd"
 Utils="*res://Lib/utils.gd"
 GameManager="*res://GlobalManagers/game_manager.gd"
