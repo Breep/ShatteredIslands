@@ -1,8 +1,6 @@
 class_name AnimationModule
 extends Node
 
-signal attack_hit_frame()
-
 const IDLE_VAR_TIMER_MIN_WAIT_TIME: float = 5.0
 const IDLE_VAR_TIMER_MAX_WAIT_TIME: float = 15.0
 
@@ -50,6 +48,9 @@ var _idle_variation_timer: Timer
 var _current_movement_state: String = VALUE_TRANSITION_FIGHTING_IDLE
 var _lock_animation: bool = false
 
+# Base attack animation duration (cached on ready)
+var _attack_anim_base_duration: float = 1.6 # Default fallback
+
 func _ready() -> void:
 	if _entity_owner == null:
 		Verbose.error("AnimationModule: No entity owner", Verbose.Category.ENTITY)
@@ -65,7 +66,7 @@ func _ready() -> void:
 	_entity_owner.died.connect(_on_entity_owner_died)
 	_entity_owner.fighting_state_changed.connect(_on_entity_owner_fighting_state_changed)
 	
-	_animation_player.attack_done.connect(_on_animation_player_attack_done)
+	# NOTE: No longer connecting to _animation_player.attack_done — logic is tick-driven
 	
 	_animation_tree.set(PARAM_TRANSITION_GLOBAL, VALUE_TRANSITION_GLOBAL_FIGHTING)
 	_animation_tree.set(PARAM_TRANSITION_FIGHTING, VALUE_TRANSITION_FIGHTING_IDLE)
@@ -124,10 +125,12 @@ func _on_entity_owner_fight_is_lost() -> void:
 	_animation_tree.set(PARAM_TRANSITION_FIGHTING, VALUE_TRANSITION_FIGHTING_DIE)
 
 
-func _on_entity_owner_auto_attack_started() -> void:
-	Verbose.debug("Auto attack started", Verbose.Category.ENTITY_ANIMATION)
+func _on_entity_owner_auto_attack_started(lock_seconds: float) -> void:
+	Verbose.debug("Auto attack started (lock_seconds=" + str(lock_seconds).pad_decimals(2) + ")", Verbose.Category.ENTITY_ANIMATION)
 	if _lock_animation: return
-	_animation_tree.set(PARAM_SCALE_ATTACK, 1.0 + _entity_owner.stats.attack_speed)
+	# Calculate speed_scale so animation fits within lock_seconds
+	var speed_scale: float = _attack_anim_base_duration / lock_seconds if lock_seconds > 0.0 else 1.0
+	_animation_tree.set(PARAM_SCALE_ATTACK, speed_scale)
 	_animation_tree.set(PARAM_ONE_SHOT_ATTACK, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 
@@ -140,16 +143,6 @@ func _on_idle_variation_timer_timeout() -> void:
 	if _lock_animation: return
 	_animation_tree.set(PARAM_ONE_SHOT_SITTING, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	_restart_idle_variation_animation()
-
-
-func _on_entity_animation_player_attack_done() -> void:
-	if _lock_animation: return
-	attack_hit_frame.emit()
-
-
-func _on_animation_player_attack_done() -> void:
-	if _lock_animation: return
-	attack_hit_frame.emit()
 
 
 func stop_attack_animation() -> void:

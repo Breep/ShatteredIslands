@@ -30,8 +30,8 @@ var current_target: Entity:
 			_current_target = value
 
 # Tick-based timing (deterministic)
-var _attack_interval_ticks: int = 60  # Number of ticks between attacks
-var _ticks_remaining: int = 60        # Countdown to next attack
+var _attack_interval_ticks: int = 60 # Number of ticks between attacks
+var _ticks_remaining: int = 60 # Countdown to next attack
 var _is_active: bool = false
 
 # Module references
@@ -47,7 +47,6 @@ func _ready() -> void:
 	# Connect signals
 	_owner.stats.attack_speed_changed.connect(_on_owner_stats_attack_speed_changed)
 	_owner.died.connect(_on_owner_died)
-	_owner.auto_attack_completed.connect(_on_owner_auto_attack_completed)
 	
 	if _owner.status_module != null:
 		_owner.status_module.stunned_changed.connect(_on_owner_stunned_changed)
@@ -55,6 +54,9 @@ func _ready() -> void:
 
 func connect_modules(auto_attack_module: ActionSenderAutoAttackModule) -> void:
 	_auto_attack_module = auto_attack_module
+	# Listen for attack completion to restart cooldown
+	if _auto_attack_module != null:
+		_auto_attack_module.attack_completed.connect(_on_auto_attack_completed)
 
 
 # ============================== Public functions ==============================
@@ -79,6 +81,13 @@ func process_tick() -> void:
 		return
 	
 	if _auto_attack_module == null:
+		return
+	
+	# Advance the attack module tick counter if an attack is in progress
+	_auto_attack_module.process_tick()
+	
+	# If attacking, don't countdown to next attack
+	if _auto_attack_module.is_attacking():
 		return
 	
 	# Check distance during approach
@@ -145,7 +154,7 @@ func _on_owner_died() -> void:
 	stop()
 
 
-func _on_owner_auto_attack_completed(_entity: Entity) -> void:
+func _on_auto_attack_completed() -> void:
 	_ticks_remaining = _attack_interval_ticks
 
 
