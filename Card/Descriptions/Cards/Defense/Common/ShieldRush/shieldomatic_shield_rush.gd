@@ -14,7 +14,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 	ctx.battle_callbacks.register_battle_start(&"Shield Rush", func() -> void:
 		if ctx.hero != null and is_instance_valid(ctx.hero):
-			ctx.hero.inflict_condition_stacks(ctx.hero, amount, Utils.StackType.SHIELD, &"Shield Rush")
+			ctx.hero.inflict_condition_stacks(ctx.hero, amount, Stack.Type.SHIELD, &"Shield Rush")
 	)
 
 

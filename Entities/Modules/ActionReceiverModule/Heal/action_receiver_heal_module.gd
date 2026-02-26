@@ -15,5 +15,5 @@ func take_heal(heal_amount: float, is_critical: bool, action_id: StringName, sou
 		_owner.stats.health += heal_amount
 	var effective_heal: float = _owner.stats.health - initial_health
 	_owner.heal_taken.emit(effective_heal, is_critical)
-	_owner.interaction_received.emit(source, Utils.ActionType.UTILITY_HEAL, action_id, effective_heal, is_critical)
+	_owner.action_received.emit(source, Utils.ActionType.UTILITY_HEAL, action_id, effective_heal, is_critical)
 	return effective_heal

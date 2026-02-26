@@ -23,7 +23,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 	# Action modifier: reset bonus after dodge
 	var action_modifier := ActionModifier.new()
-	action_modifier.action_type = ActionModifier.ActionType.DODGE
+	action_modifier.action_type = Utils.ActionCategory.DODGE
 	action_modifier.id = &"Lightning Footwork"
 	action_modifier.is_one_time_effect = false
 	action_modifier.after_action_logic_callback = func(_cb_vars: Dictionary) -> void:

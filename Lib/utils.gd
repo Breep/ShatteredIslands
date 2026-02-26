@@ -8,7 +8,6 @@ enum ActionType {
 	DAMAGE_POISON,
 	DAMAGE_PURE,
 	UTILITY_HEAL,
-	UTILITY_STUN,
 	UTILITY_CLEANSE,
 	UTILITY_DISPELL,
 	STACK_SHIELD,
@@ -23,12 +22,13 @@ enum ActionType {
 	STATUS_UNTARGETABLE,
 }
 
-enum DamageType {
-	PHYSICAL,
-	MAGICAL,
-	POISON,
-	PURE,
+enum ActionCategory {
+	DAMAGE,
 	HEAL,
+	STACK,
+	STATUS,
+	UTILITY,
+	DODGE,
 }
 
 enum PercentModifier {
@@ -36,72 +36,32 @@ enum PercentModifier {
 	CURRENT_HP,
 	LOST_HP,
 }
-
-enum StackType {
-	POISON,
-	SHIELD,
-	IGNITE,
-	REGEN,
-	NECROSIS
-}
-
-enum AttackType {
-	UNDEF,
-	AUTO_ATTACK
-}
 #endregion
 
 # ============================== Constants ==============================
-#region Constants
-const DAMAGE_COLORS: Dictionary[DamageType, Color] = {
-	DamageType.PHYSICAL: Color.WHITE,
-	DamageType.MAGICAL: Color.DARK_BLUE,
-	DamageType.PURE: Color.DARK_GOLDENROD,
-	DamageType.POISON: Color.WEB_GREEN,
-	DamageType.HEAL: Color.AQUAMARINE
-}
-
-const STACK_COLORS: Dictionary[StackType, Color] = {
-	StackType.POISON: Color.WEB_GREEN,
-	StackType.SHIELD: Color.SADDLE_BROWN,
-	StackType.IGNITE: Color.DARK_RED,
-	StackType.REGEN: Color.AQUAMARINE,
-	StackType.NECROSIS: Color.REBECCA_PURPLE
+const DAMAGE_COLORS: Dictionary[ActionType, Color] = {
+	ActionType.DAMAGE_PHYSICAL: Color.WHITE,
+	ActionType.DAMAGE_MAGICAL: Color.DARK_BLUE,
+	ActionType.DAMAGE_PURE: Color.DARK_GOLDENROD,
+	ActionType.DAMAGE_POISON: Color.WEB_GREEN,
+	ActionType.UTILITY_HEAL: Color.AQUAMARINE
 }
 #endregion
 
 # ============================== Public variables ==============================
 
-@onready var rng := RandomNumberGenerator.new()
-
 # ============================== Private variables ==============================
+
+var _battle_rngs: Dictionary[int, RandomNumberGenerator] = {}
+var _global_rng := RandomNumberGenerator.new()
 
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	rng.randomize()
+	_global_rng.randomize()
 
 # ============================== Public functions ==============================
 #region ===== ACTIONS
-func stack_to_action(stack_type: StackType) -> ActionType:
-	match stack_type:
-		StackType.POISON: return ActionType.STACK_POISON
-		StackType.SHIELD: return ActionType.STACK_SHIELD
-		StackType.IGNITE: return ActionType.STACK_IGNITE
-		StackType.REGEN: return ActionType.STACK_REGEN
-		StackType.NECROSIS: return ActionType.STACK_NECROSIS
-		_: return ActionType.STACK_POISON
-
-
-func damage_to_action(damage_type: DamageType) -> ActionType:
-	match damage_type:
-		DamageType.PHYSICAL: return ActionType.DAMAGE_PHYSICAL
-		DamageType.MAGICAL: return ActionType.DAMAGE_MAGICAL
-		DamageType.POISON: return ActionType.DAMAGE_POISON
-		DamageType.PURE: return ActionType.DAMAGE_PURE
-		_: return ActionType.DAMAGE_PHYSICAL
-
-
 func status_to_action(status_type: Status.Type) -> ActionType:
 	match status_type:
 		Status.Type.STUN: return ActionType.STATUS_STUN
@@ -119,7 +79,6 @@ func get_all_actions() -> Array[ActionType]:
 		ActionType.DAMAGE_POISON,
 		ActionType.DAMAGE_PURE,
 		ActionType.UTILITY_HEAL,
-		ActionType.UTILITY_STUN,
 		ActionType.UTILITY_CLEANSE,
 		ActionType.UTILITY_DISPELL,
 		ActionType.STACK_SHIELD,
@@ -133,6 +92,25 @@ func get_all_actions() -> Array[ActionType]:
 		ActionType.STATUS_INVULNERABLE,
 		ActionType.STATUS_UNTARGETABLE,
 	]
+
+
+static func get_action_category(action_type: ActionType) -> ActionCategory:
+	match action_type:
+		ActionType.DAMAGE_PHYSICAL, ActionType.DAMAGE_MAGICAL, \
+		ActionType.DAMAGE_POISON, ActionType.DAMAGE_PURE:
+			return ActionCategory.DAMAGE
+		ActionType.UTILITY_HEAL:
+			return ActionCategory.HEAL
+		ActionType.UTILITY_CLEANSE, ActionType.UTILITY_DISPELL:
+			return ActionCategory.UTILITY
+		ActionType.STACK_SHIELD, ActionType.STACK_IGNITE, \
+		ActionType.STACK_POISON, ActionType.STACK_REGEN, ActionType.STACK_NECROSIS:
+			return ActionCategory.STACK
+		ActionType.STATUS_STUN, ActionType.STATUS_TAUNT, \
+		ActionType.STATUS_SILENCE, ActionType.STATUS_INVULNERABLE, ActionType.STATUS_UNTARGETABLE:
+			return ActionCategory.STATUS
+		_:
+			return ActionCategory.UTILITY
 #endregion
 
 func create_perpetual_timer(node: Node, wait_time: float, callback: Callable, autostart: bool = false) -> Timer:
@@ -158,12 +136,41 @@ func create_one_shot_timer(node: Node, wait_time: float, callback: Callable, aut
 	return timer
 
 
-func is_randomize_modifier_active(chance_in_percent: float) -> bool:
-	return rng.randf_range(0, 100) <= chance_in_percent
+#region ===== RNG
+func register_battle_rng(battle_id: int, seed_value: int) -> void:
+	var battle_rng := RandomNumberGenerator.new()
+	battle_rng.seed = seed_value
+	_battle_rngs[battle_id] = battle_rng
 
 
-func get_randf_range(p_min: float, p_max: float) -> float:
-	return rng.randf_range(p_min, p_max)
+func unregister_battle_rng(battle_id: int) -> void:
+	_battle_rngs.erase(battle_id)
+
+
+func is_randomize_modifier_active(chance_in_percent: float, battle_id: int = -1, id: String = "") -> bool:
+	var r = _get_rng(battle_id).randf_range(0, 100)
+	Verbose.trace("Rand[" + str(battle_id) + "] " + str(r).pad_decimals(5) + " '" + id + "'", Verbose.Category.DEFAULT)
+	return r <= chance_in_percent
+
+
+func pick_random(array: Array, battle_id: int = -1, id: String = "") -> Variant:
+	if array.is_empty(): return null
+	var r = _get_rng(battle_id).randi_range(0, array.size() - 1)
+	Verbose.trace("Rand[" + str(battle_id) + "] " + str(r) + " '" + id + "'", Verbose.Category.DEFAULT)
+	return array[r]
+
+
+func get_randf_range(p_min: float, p_max: float, battle_id: int = -1, id: String = "") -> float:
+	var r: float = _get_rng(battle_id).randf_range(p_min, p_max)
+	Verbose.trace("Rand[" + str(battle_id) + "] " + str(r).pad_decimals(5) + " '" + id + "'", Verbose.Category.DEFAULT)
+	return r
+
+
+func get_randi_range(p_min: int, p_max: int, battle_id: int = -1, id: String = "") -> int:
+	var r: int = _get_rng(battle_id).randi_range(p_min, p_max)
+	Verbose.trace("Rand[" + str(battle_id) + "] " + str(r) + " '" + id + "'", Verbose.Category.DEFAULT)
+	return r
+#endregion
 
 
 func recursive_hide(node: Node3D):
@@ -182,5 +189,7 @@ func recursive_show(node: Node3D):
 		node.show()
 
 
-func is_negative_stack(damage_type: StackType) -> bool:
-	return damage_type in [StackType.POISON, StackType.IGNITE, StackType.NECROSIS]
+func _get_rng(battle_id: int = -1) -> RandomNumberGenerator:
+	if battle_id >= 0 and _battle_rngs.has(battle_id):
+		return _battle_rngs[battle_id]
+	return _global_rng

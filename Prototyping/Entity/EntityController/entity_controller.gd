@@ -82,14 +82,14 @@ func _ready() -> void:
 	
 	# Populate damage type dropdowns
 	i = 0
-	for damage_type: String in Utils.DamageType.keys():
+	for damage_type: String in Utils.ActionType.keys():
 		_damage_choice.add_item(damage_type, i)
 		_damage_choice_percent.add_item(damage_type, i)
 		i += 1
 	
 	# Populate stack type dropdown
 	i = 0
-	for stack_type: String in Utils.StackType.keys():
+	for stack_type: String in Stack.Type.keys():
 		_stack_type_choice.add_item(stack_type, i)
 		i += 1
 	
@@ -187,11 +187,11 @@ func _on_attack_button_pressed() -> void:
 		return
 	
 	var damage: float = damage_text.to_float()
-	var damage_type: Utils.DamageType = _damage_choice.get_selected_id() as Utils.DamageType
+	var damage_type: Utils.ActionType = _damage_choice.get_selected_id() as Utils.ActionType
 	var action_id: StringName = &"test_direct_damage"
 	
 	entity_owner.direct_damage(_target, damage, damage_type, action_id)
-	print("DEBUG: direct_damage called - Target: ", _target.entity_name, " | Damage: ", damage, " | Type: ", Utils.DamageType.keys()[damage_type])
+	print("DEBUG: direct_damage called - Target: ", _target.entity_name, " | Damage: ", damage, " | Type: ", Utils.ActionType.keys()[damage_type])
 
 
 func _on_attack_percent_button_pressed() -> void:
@@ -207,12 +207,12 @@ func _on_attack_percent_button_pressed() -> void:
 		return
 	
 	var damage_percent: float = percent_text.to_float()
-	var damage_type: Utils.DamageType = _damage_choice_percent.get_selected_id() as Utils.DamageType
+	var damage_type: Utils.ActionType = _damage_choice_percent.get_selected_id() as Utils.ActionType
 	var percent_modifier: Utils.PercentModifier = _percent_modifier_choice.get_selected_id() as Utils.PercentModifier
 	var action_id: StringName = &"test_direct_damage_percent"
 	
 	entity_owner.direct_damage_percent(_target, damage_percent, damage_type, percent_modifier, action_id)
-	print("DEBUG: direct_damage_percent called - Target: ", _target.entity_name, " | Percent: ", damage_percent, "% | Type: ", Utils.DamageType.keys()[damage_type], " | Modifier: ", Utils.PercentModifier.keys()[percent_modifier])
+	print("DEBUG: direct_damage_percent called - Target: ", _target.entity_name, " | Percent: ", damage_percent, "% | Type: ", Utils.ActionType.keys()[damage_type], " | Modifier: ", Utils.PercentModifier.keys()[percent_modifier])
 
 
 func _on_heal_button_pressed() -> void:
@@ -272,13 +272,13 @@ func _on_inflict_condition_button_pressed() -> void:
 		printerr("EntityController: Invalid format. Use: stacks_number[,duration]")
 		return
 	
-	var stack_type: Utils.StackType = _stack_type_choice.get_selected_id() as Utils.StackType
+	var stack_type: Stack.Type = _stack_type_choice.get_selected_id() as Stack.Type
 	var stacks_number: float = parts[0].strip_edges().to_float()
 	var duration: float = 5.0 if parts.size() < 2 else parts[1].strip_edges().to_float()
 	var action_id: StringName = &"test_inflict_condition"
 	
 	entity_owner.inflict_condition_stacks(_target, stacks_number, stack_type, action_id, duration)
-	print("DEBUG: inflict_condition_stacks called - Target: ", _target.entity_name, " | Type: ", Utils.StackType.keys()[stack_type], " | Stacks: ", stacks_number, " | Duration: ", duration)
+	print("DEBUG: inflict_condition_stacks called - Target: ", _target.entity_name, " | Type: ", Stack.Type.keys()[stack_type], " | Stacks: ", stacks_number, " | Duration: ", duration)
 
 
 func _on_cleanse_button_pressed() -> void:

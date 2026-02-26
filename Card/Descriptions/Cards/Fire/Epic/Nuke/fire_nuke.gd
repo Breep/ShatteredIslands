@@ -13,7 +13,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	ctx.battle_callbacks.register_battle_start(&"Nuke", func() -> void:
 		var targets: Array[Entity] = ctx.hero.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ENEMIES)
 		for target: Entity in targets:
-			ctx.hero.inflict_condition_stacks(target, stacks, Utils.StackType.IGNITE, &"Nuke")
+			ctx.hero.inflict_condition_stacks(target, stacks, Stack.Type.IGNITE, &"Nuke")
 	)
 
 

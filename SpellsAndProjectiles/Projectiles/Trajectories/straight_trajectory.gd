@@ -7,12 +7,13 @@ extends ProjectileTrajectory
 @export var vertical_offset: float = 1.0  # Height offset from target position
 
 
-func update(delta: float) -> void:
-	if not is_instance_valid(_projectile): return
-	if not _target or not is_instance_valid(_target): return
+func update(logic_pos: Vector3, delta: float) -> Vector3:
+	if not is_instance_valid(_projectile): return Vector3.ZERO
+	if not _target or not is_instance_valid(_target): return Vector3.ZERO
 	
 	var target_pos: Vector3 = _target.get_collision_center()
-	var direction: Vector3 = (target_pos - _projectile.global_position).normalized()
+	var direction: Vector3 = (target_pos - logic_pos).normalized()
 	
-	_projectile.global_position += direction * speed * delta
+	logic_pos += direction * speed * delta
 	_projectile.look_at(target_pos)
+	return logic_pos

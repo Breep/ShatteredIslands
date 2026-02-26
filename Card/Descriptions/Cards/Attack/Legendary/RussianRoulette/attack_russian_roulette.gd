@@ -19,7 +19,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	aa_mod.tags = [AutoAttackModifier.TagType.CARD]
 	aa_mod.is_one_time_effect = false
 	aa_mod.damage_modifier_callback = func(cb_vars: Dictionary) -> void:
-		cb_vars[AutoAttackModifier.VarType.DAMAGE_MUL] += Utils.get_randf_range(min_p, max_p)
+		cb_vars[AutoAttackModifier.VarType.DAMAGE_MUL] += Utils.get_randf_range(min_p, max_p, ctx.hero.battle_id)
 
 	ctx.battle_callbacks.register_battle_start(&"Russian Roulette", func() -> void:
 		ctx.auto_attack_modifiers.register_modifier(aa_mod)

@@ -28,7 +28,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			return
 		# TODO: use proper steal modifier when available
 		target.conditions.shield_stacks -= steal_amount
-		ctx.hero.inflict_condition_stacks(ctx.hero, steal_amount, Utils.StackType.SHIELD, &"Magnetic Siphon")
+		ctx.hero.inflict_condition_stacks(ctx.hero, steal_amount, Stack.Type.SHIELD, &"Magnetic Siphon")
 	)
 
 

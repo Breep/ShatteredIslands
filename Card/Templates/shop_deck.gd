@@ -165,7 +165,7 @@ func draw_cards_for_player(player: Player, count: int) -> Array[Card]:
 			break
 		
 		# ÉTAPE 3 : Tirer une carte aléatoire
-		var random_index: int = Utils.rng.randi_range(0, available_cards.size() - 1)
+		var random_index: int = Utils.get_randi_range(0, available_cards.size() - 1)
 		var drawn_card: Card = available_cards[random_index]
 		
 		# ÉTAPE 4 : Ajouter à la liste des tirées
@@ -205,7 +205,7 @@ func _get_player_max_family_level(player: Player) -> int:
 
 # Tire une rareté selon les probabilités du niveau
 func _roll_rarity(family_level: int) -> Card.Rarity:
-	var roll: float = Utils.rng.randf_range(0.0, 100.0)
+	var roll: float = Utils.get_randf_range(0.0, 100.0)
 	var thresholds: Dictionary = _drop_rate_to_threshold(GameManager.game_rules.drop_rates_by_family_level[family_level])
 	
 	# Comparaison avec seuils cumulés

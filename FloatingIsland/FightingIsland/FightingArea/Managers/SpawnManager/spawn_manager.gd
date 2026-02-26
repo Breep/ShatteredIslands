@@ -50,7 +50,7 @@ func spawn_entity(entity: Entity, global_pos: Vector3, context: EntityContext = 
 	_active_entities.append(entity)
 	
 	if _fighting_area != null:
-		_fighting_area.signal_entity_spawned(entity, type, {})
+		_fighting_area.entity_spawned.emit(entity, type, entity.global_position)
 
 
 func spawn_spell(spell: Node3D) -> void:
@@ -72,7 +72,8 @@ func spawn_projectile(source: Entity, target: Entity, type: Projectile.Type, spa
 	_active_projectiles.append(proj)
 	
 	if _fighting_area != null:
-		_fighting_area.signal_projectile_spawned(source, target, type, proj)
+		_fighting_area.projectile_spawned.emit(source, target, type, proj, proj.global_position)
+		proj.target_hit.connect(_on_projectile_target_hit.bind(proj.uid))
 
 # ============================== Private functions ==============================
 
@@ -90,5 +91,10 @@ func _on_game_manager_game_state_changed(state: GameManager.GameState) -> void:
 	if state == GameManager.GameState.BUYING:
 		_clear_all()
 
+
 func _on_fight_is_over(_manager, _order) -> void:
 	_clear_all()
+
+
+func _on_projectile_target_hit(target: Entity, gpos: Vector3, projectile_uid: int) -> void:
+	_fighting_area.projectile_target_hit.emit(target, gpos, projectile_uid)

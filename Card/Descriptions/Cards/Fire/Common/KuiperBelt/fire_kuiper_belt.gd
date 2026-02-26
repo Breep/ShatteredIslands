@@ -14,7 +14,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	ctx.hero.families_stats.fire.meteor_modifiers.append(func(_cb_vars: Dictionary) -> void:
 		if ctx.hero == null or not is_instance_valid(ctx.hero): return
 		if shield > 0:
-			ctx.hero.inflict_condition_stacks(ctx.hero, shield, Utils.StackType.SHIELD, &"Kuiper Belt")
+			ctx.hero.inflict_condition_stacks(ctx.hero, shield, Stack.Type.SHIELD, &"Kuiper Belt")
 	)
 
 

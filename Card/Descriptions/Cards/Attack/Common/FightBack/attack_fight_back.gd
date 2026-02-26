@@ -28,7 +28,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 	var action_mod := ActionModifier.new()
 	action_mod.id = &"Fight Back"
-	action_mod.action_type = ActionModifier.ActionType.DODGE
+	action_mod.action_type = Utils.ActionCategory.DODGE
 	action_mod.is_one_time_effect = false
 	action_mod.after_action_logic_callback = func(_cb_vars: Dictionary) -> void:
 		state[&"dodge_count"] += 1

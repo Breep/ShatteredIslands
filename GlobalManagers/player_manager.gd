@@ -304,8 +304,6 @@ func _add_player(player_name: String, id: int, is_bot: bool) -> void:
 	new_player.is_bot = is_bot
 
 	if multiplayer.is_server():
-		new_player.skill_manager = SkillManager.new()
-		new_player.skill_manager.init(new_player)
 		new_player.damage = 1
 		new_player.lvl = 1
 		new_player.gold = GameManager.game_rules.gold_starting_game

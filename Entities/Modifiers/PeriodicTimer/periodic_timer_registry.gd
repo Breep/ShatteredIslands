@@ -9,12 +9,14 @@ class TickEffect:
 	var callback: Callable
 	var is_running: bool = false
 
+const TICKS_PER_SECOND: int = 60
+
 # Liste des effets (on préfère une Array pour un tri stable) 
 var _effects: Array[TickEffect] = []
 
 # Conversion des secondes en ticks (basé sur 60 FPS physiques)
 func _to_ticks(seconds: float) -> int:
-	return int(round(seconds * 60.0))
+	return int(round(seconds * TICKS_PER_SECOND))
 
 func register(id: StringName, period: float, callback: Callable, autostart: bool = false) -> void:
 	unregister(id) # Évite les doublons

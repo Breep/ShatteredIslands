@@ -97,10 +97,10 @@ func _on_add_heal_received_pressed() -> void:
 
 
 func _on_add_misc_done_pressed() -> void:
-	_entity_bds_registry.register_action("TEST" + str(_bds_number), Utils.ActionType.UTILITY_STUN, 10, false)
+	_entity_bds_registry.register_action("TEST" + str(_bds_number), Utils.ActionType.STATUS_STUN, 10, false)
 	_bds_number += 1
 
 
 func _on_add_misc_received_pressed() -> void:
-	_entity_bds_registry.register_interaction("TEST" + str(_bds_number), Utils.ActionType.UTILITY_STUN, 10, false)
+	_entity_bds_registry.register_interaction("TEST" + str(_bds_number), Utils.ActionType.STATUS_STUN, 10, false)
 	_bds_number += 1

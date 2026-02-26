@@ -14,7 +14,7 @@ health_max = 100.0
 auto_attack_type = 1
 attack_range = 1.0
 attack_damage = 10.0
-attack_speed = 2.0
+attack_speed = 0.5
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nh8ax"]
@@ -40,6 +40,42 @@ transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0, 0
 
 [node name="Skeleton3D" parent="SnakeVisual" index="0" unique_id=1323285786]
 animate_physical_bones = false
+bones/1/position = Vector3(0, 0.024999999, -0.02127275)
+bones/1/rotation = Quaternion(0.5, -0.49999997, 0.5000001, -0.49999994)
+bones/2/position = Vector3(0.34159482, -0.04490912, 0.011063997)
+bones/2/rotation = Quaternion(-3.10046e-08, -5.7839934e-08, -0.4533677, 0.8913236)
+bones/3/position = Vector3(-0.29255775, -0.033503555, -0.069951996)
+bones/3/rotation = Quaternion(0.0037412276, -0.7070969, 0.7070969, -0.0037412576)
+bones/3/scale = Vector3(1, 1.0006157, 1)
+bones/4/position = Vector3(0.0082178395, -0.03666419, -2.2127518e-09)
+bones/4/rotation = Quaternion(0.0059987004, 0.20170523, 0.042909272, 0.9784876)
+bones/5/rotation = Quaternion(0.0072903424, 0.08464908, -0.011676491, 0.9963158)
+bones/6/rotation = Quaternion(0.0066921776, -0.047505777, -0.044048123, 0.9978768)
+bones/7/rotation = Quaternion(0.008297137, -0.15313865, -0.03271766, 0.9876281)
+bones/8/rotation = Quaternion(0.009170273, -0.20324016, -0.008171991, 0.97905195)
+bones/9/rotation = Quaternion(0.006795297, -0.18228917, 0.020188512, 0.9830143)
+bones/10/rotation = Quaternion(0.029360881, -0.077158004, 0.039444793, 0.9958056)
+bones/12/rotation = Quaternion(-0.00027001303, 0.08112987, -0.006215995, 0.99668413)
+bones/13/rotation = Quaternion(0.9966841, -0.00621606, 0.08113108, -0.00027084627)
+bones/14/rotation = Quaternion(-9.224625e-08, -1.2622219e-06, 0.038385842, 0.999263)
+bones/15/rotation = Quaternion(1.0005398e-07, -4.5189753e-07, -0.00942377, 0.9999556)
+bones/16/rotation = Quaternion(-5.8470285e-08, 2.5926838e-07, 0.0028080798, 0.99999607)
+bones/17/rotation = Quaternion(-6.9845356e-08, 1.0487278e-06, -3.6647548e-06, 1)
+bones/18/rotation = Quaternion(1.1294114e-07, 1.7294838e-06, 0.0106284665, 0.99994355)
+bones/19/rotation = Quaternion(3.1256963e-08, -0.066228814, -0.010563809, 0.9977486)
+bones/22/position = Vector3(0.02219093, 0.021998556, -5.7916623e-09)
+bones/22/rotation = Quaternion(-0.034892872, 0.054153122, 0.048196472, 0.9967583)
+bones/25/rotation = Quaternion(-1.7297243e-07, 1.479762e-07, 0.99546516, 0.09512678)
+bones/26/rotation = Quaternion(1.5463068e-07, 8.705206e-08, 0.9298639, 0.3679038)
+bones/27/rotation = Quaternion(-0.031429987, -0.0011384081, 0.031749886, 0.99900097)
+bones/31/rotation = Quaternion(0.99900097, 0.03174988, -0.0011387891, -0.031429972)
+bones/32/position = Vector3(0.0082178395, -0.03666419, -2.2127518e-09)
+bones/32/rotation = Quaternion(-0.028148435, 0.70917076, -0.70432, -0.014757473)
+bones/33/rotation = Quaternion(-0.0050889864, 0.07252981, 0.28559142, 0.9555895)
+bones/34/rotation = Quaternion(-0.005960849, 0.0038322909, 0.17125271, 0.9852017)
+bones/35/rotation = Quaternion(-0.00187344, -0.0474827, -0.2353138, 0.9707571)
+bones/36/rotation = Quaternion(-0.0008297819, -0.115726024, -0.351118, 0.9291517)
+bones/37/rotation = Quaternion(-0.011591861, 0.09013758, 0.16512816, 0.9820762)
 
 [node name="AnimationPlayer" parent="SnakeVisual" index="1" unique_id=269182265]
 script = ExtResource("6_obplm")

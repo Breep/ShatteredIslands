@@ -82,7 +82,7 @@ func _draw_random_card_in_array(cards: Array[Card]) -> Card:
 		printerr("The card_pile is empty. Cannot draw a card.")
 		return null
 	
-	var random_index = Utils.rng.randi_range(0, cards.size() - 1)
+	var random_index = Utils.get_randi_range(0, cards.size() - 1)
 	return _draw_card_in_array(random_index, cards)
 
 

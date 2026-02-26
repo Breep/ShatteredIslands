@@ -17,7 +17,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if target == null or not is_instance_valid(target) or target.is_dead: return
 		var shield_amount: float = overheal_amount * (shield_percent / 100.0)
 		if shield_amount > 0:
-			ctx.hero.inflict_condition_stacks(target, shield_amount, Utils.StackType.SHIELD, &"Overflowing Light")
+			ctx.hero.inflict_condition_stacks(target, shield_amount, Stack.Type.SHIELD, &"Overflowing Light")
 
 	ctx.battle_callbacks.register_battle_start(&"Overflowing Light", func() -> void:
 		if not ctx.hero.action_overhealed.is_connected(_on_overhealed):

@@ -36,6 +36,28 @@ enum ModifierType {
 	DURATION,
 }
 
+const COLORS: Dictionary[Type, Color] = {
+	Type.POISON: Color.WEB_GREEN,
+	Type.SHIELD: Color.SADDLE_BROWN,
+	Type.IGNITE: Color.DARK_RED,
+	Type.REGEN: Color.AQUAMARINE,
+	Type.NECROSIS: Color.REBECCA_PURPLE
+}
+
+
+static func is_negative(stack_type: Type) -> bool:
+	return stack_type in [Type.POISON, Type.IGNITE, Type.NECROSIS]
+
+
+static func to_action(stack_type: Type) -> Utils.ActionType:
+	match stack_type:
+		Type.POISON: return Utils.ActionType.STACK_POISON
+		Type.SHIELD: return Utils.ActionType.STACK_SHIELD
+		Type.IGNITE: return Utils.ActionType.STACK_IGNITE
+		Type.REGEN: return Utils.ActionType.STACK_REGEN
+		Type.NECROSIS: return Utils.ActionType.STACK_NECROSIS
+		_: return Utils.ActionType.STACK_POISON
+
 
 ## Add stacks with optional modifiers
 ## Returns the new total stack count

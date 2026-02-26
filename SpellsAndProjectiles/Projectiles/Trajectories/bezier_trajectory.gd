@@ -25,7 +25,7 @@ func _on_init() -> void:
 	_control_point = midpoint + Vector3.UP * (control_height + _height_variation)
 
 
-func update(delta: float) -> void:
+func update(logic_pos: Vector3, delta: float) -> Vector3:
 	_t = min(1.0, _t + delta / _travel_time)
 	
 	# Quadratic Bezier: B(t) = (1-t)²P0 + 2(1-t)tP1 + t²P2
@@ -34,12 +34,13 @@ func update(delta: float) -> void:
 	var b := _control_point.lerp(_target_snapshot, _t)
 	var position := a.lerp(b, _t)
 	
-	_projectile.global_position = position
+	logic_pos = position
 	
 	# Look toward next position for orientation
 	var direction := (b - a).normalized()
 	if direction.length_squared() > 0.001:
 		_projectile.look_at(position + direction)
+	return logic_pos
 
 
 func _on_retarget() -> void:

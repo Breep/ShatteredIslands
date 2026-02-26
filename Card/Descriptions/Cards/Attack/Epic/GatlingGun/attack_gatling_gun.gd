@@ -6,10 +6,10 @@ extends HeroUpgrade
 @export var _duration: float # Duration to go from minimum to maximum attack speed
 @export var _rarity: Card.Rarity = Card.Rarity.EPIC
 
-const GATLING_TICK: float = 1.0
+const GATLING_TICK_PERIOD: float = 1.0
 
 enum {
-	START_TIME
+	GATLING_TICKS
 }
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
@@ -21,14 +21,12 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var speed_max: float = _attack_speed_max[card_lvl - 1]
 	var duration: float = _duration
 
-	var state := {START_TIME: 0}
+	var state: Dictionary = { GATLING_TICKS: 0 }
 
-	ctx.battle_callbacks.register_battle_start(&"Gatling Gun", func() -> void:
-		state[START_TIME] = Time.get_ticks_msec()
-	)
-
-	ctx.periodic_timers.register(&"Gatling Gun", GATLING_TICK, func() -> void:
-		var time_elapsed: float = (Time.get_ticks_msec() - state[START_TIME]) / 1000.0
+	ctx.periodic_timers.register(&"Gatling Gun", GATLING_TICK_PERIOD, func() -> void:
+		state[GATLING_TICKS] += 1
+		var time_elapsed: float = GATLING_TICK_PERIOD * state[GATLING_TICKS]
+		Verbose.debug("Time Elapsed " + str(time_elapsed), Verbose.Category.CARD)
 		var attack_speed_boost: float = remap(time_elapsed, 0, duration, speed_min, speed_max)
 		var clamped_boost: float = clampf(attack_speed_boost, speed_min, speed_max)
 

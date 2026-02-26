@@ -16,7 +16,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var storm_stats: FamilyStormStats = ctx.hero.families_stats.storm
 	storm_stats.on_crit_callbacks.append(
 		func(target: Entity, _base_value: float, real_value: float) -> void:
-			if not Utils.is_randomize_modifier_active(chance): return
+			if not Utils.is_randomize_modifier_active(chance, ctx.hero.battle_id): return
 			if target == null or not is_instance_valid(target): return
 
 			var enemies: Array[Entity] = ctx.hero.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ENEMIES)
