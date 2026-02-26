@@ -88,6 +88,7 @@ func _move_toward_target() -> void:
 	_owner.look_at_target_y_only(_target_position)
 	# Fixed-step displacement: speed (units/s) × (1/60s) — same result on every machine
 	_owner.global_position += direction * (_get_move_speed() / 60.0)
+	_owner.global_position = _owner.global_position.snapped(Vector3(0.01, 0.01, 0.01))
 
 
 func _get_move_speed() -> float:

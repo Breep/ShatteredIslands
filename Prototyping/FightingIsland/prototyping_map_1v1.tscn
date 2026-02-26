@@ -4,15 +4,9 @@
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="2_kngc2"]
 [ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://Entities/Heroes/_Shared/hero_desc.gd" id="2_vksg0"]
 [ext_resource type="Resource" uid="uid://bkksjgh6p542o" path="res://Entities/Heroes/DarkKnight/dark_knight.tres" id="3_dlg3x"]
-[ext_resource type="Resource" uid="uid://b1hnvijka2dfw" path="res://Card/Descriptions/Cards/Attack/Legendary/RussianRoulette/attack_russian_roulette.tres" id="5_m1op8"]
-[ext_resource type="Resource" uid="uid://3vjmnbpyyjyk" path="res://Card/Descriptions/Cards/Attack/Epic/GatlingGun/attack_gatling_gun.tres" id="5_qw25r"]
-[ext_resource type="Resource" uid="uid://mr4x6u0j5sbf" path="res://Card/Descriptions/Cards/Defense/Common/EnergyBarrier/shieldomatic_energy_barrier.tres" id="6_dk3vd"]
+[ext_resource type="Resource" uid="uid://cu7ymo37wp14y" path="res://Card/Descriptions/Cards/Poison/Epic/SnakeBarrel/poison_snake_barrel.tres" id="3_kngc2"]
 [ext_resource type="PackedScene" uid="uid://drcuyohos0doa" path="res://FloatingIsland/FightingIsland/fighting_island.tscn" id="6_sp80o"]
-[ext_resource type="Resource" uid="uid://lypcpcn4pc4a" path="res://Card/Descriptions/Cards/Light/Common/HolyTouch/light_holy_touch.tres" id="7_c7y3a"]
-[ext_resource type="Resource" uid="uid://dvpdubk0btegx" path="res://Card/Descriptions/Cards/Poison/Common/PoisonFlask/poison_poison_flask.tres" id="8_3w3ei"]
 [ext_resource type="Material" uid="uid://2wlal7g5718r" path="res://VFX/Shaders/Sky/stylized_shader_night.tres" id="8_qw25r"]
-[ext_resource type="Resource" uid="uid://bj3e4jhk5i7ab" path="res://Card/Descriptions/Cards/Poison/Common/RottingMilk/poison_rotting_milk.tres" id="9_yjmng"]
-[ext_resource type="Resource" uid="uid://b6rcxah2x0aqm" path="res://Card/Descriptions/Cards/Colossus/Common/BearStrenght/colossus_bear_strength.tres" id="10_0hb3b"]
 [ext_resource type="PackedScene" uid="uid://cs66hky7o30da" path="res://GlobalManagers/ActionMeter/Viewer/ui_entity_bds_registry.tscn" id="10_kngc2"]
 [ext_resource type="PackedScene" uid="uid://ci5cxqmyimurq" path="res://UI/InGame/FightingArea/DebugEntityStats/ui_debug_entity_stats.tscn" id="11_e0xek"]
 
@@ -45,8 +39,7 @@ volumetric_fog_density = 0.0
 
 [node name="PrototypingMap" type="Node3D" unique_id=831863063 node_paths=PackedStringArray("_floating_island")]
 script = ExtResource("1_vksg0")
-_player1_cards = Array[ExtResource("2_kngc2")]([ExtResource("5_m1op8"), ExtResource("6_dk3vd"), ExtResource("5_qw25r")])
-_player2_cards = Array[ExtResource("2_kngc2")]([ExtResource("7_c7y3a"), ExtResource("8_3w3ei"), ExtResource("9_yjmng"), ExtResource("10_0hb3b")])
+_player1_cards = Array[ExtResource("2_kngc2")]([ExtResource("3_kngc2")])
 _hero_descs = Array[ExtResource("2_vksg0")]([ExtResource("3_dlg3x"), ExtResource("3_dlg3x")])
 _hero_teams = Array[int]([1, 2, 0, 0, 1, 1, 1, 1])
 _floating_island = NodePath("FightingIsland")
