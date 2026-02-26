@@ -73,7 +73,7 @@ enum FieldGeneratorModifier {
 #endregion
 
 #region ============================== Constants ==============================
-
+const TICKS_PER_SECOND: int = 60
 #endregion
 
 #region ============================== Public variables ==============================
@@ -132,6 +132,7 @@ var status_module: StatusModule
 # Spawn system
 var _original_fighting_state: FightingState = FightingState.UNDEF
 var _spawn_tween: Tween = null
+var _spawn_ticks_remaining: int = -1
 #endregion
 
 #region ============================== Export ==============================
@@ -310,6 +311,10 @@ func process_tick() -> void:
 		_auto_attack_periodic_module.process_tick()
 	if conditions != null:
 		conditions.process_tick()
+	if _spawn_ticks_remaining > 0:
+		_spawn_ticks_remaining -= 1
+		if _spawn_ticks_remaining == 0:
+			_complete_spawn()
 #endregion
 
 #region ============================== Context ==============================
@@ -457,7 +462,7 @@ func _start_spawn() -> void:
 		_complete_spawn()
 		return
 	
-	# Call virtual animation function (can be overridden by children)
+	_spawn_ticks_remaining = int(spawn_duration * TICKS_PER_SECOND)
 	_play_spawn_animation()
 
 
@@ -468,7 +473,6 @@ func _play_spawn_animation() -> void:
 		_spawn_tween.set_ease(Tween.EASE_OUT)
 		_spawn_tween.set_trans(Tween.TRANS_BACK)
 		_spawn_tween.tween_property(_visual_3d, "scale", Vector3.ONE, spawn_duration)
-		_spawn_tween.finished.connect(_complete_spawn)
 	else:
 		# No visual node, complete immediately
 		Verbose.warn("Entity [" + entity_name + "] has no _visual_3d for spawn animation", Verbose.Category.ENTITY)

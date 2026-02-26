@@ -29,6 +29,7 @@ func _ready() -> void:
 	_fighting_area.action_received.connect(_on_fighting_area_action_received)
 	_fighting_area.projectile_spawned.connect(_on_fighting_area_projectile_spawned)
 	_fighting_area.entity_spawned.connect(_on_fighting_area_entity_spawned)
+	_fighting_area.projectile_target_hit.connect(_on_fighting_area_projectile_target_hit)
 
 
 func _input(event: InputEvent) -> void:
@@ -130,13 +131,14 @@ func _log_action_received(receiver: Entity, source: Entity, action_type: Utils.A
 	_append_log(entry)
 
 
-func _log_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.Type, gpos: Vector3) -> void:
+func _log_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.Type, gpos: Vector3, projectile_uid: int) -> void:
 	if not is_instance_valid(source) or not is_instance_valid(target): return
 	var entry = _create_base_entry()
 	entry.merge({
 		"type": "projectile_spawned",
 		"source": source.uid,
 		"target": target.uid,
+		"projectile_uid": projectile_uid,
 		"projectile_type": Projectile.Type.keys()[projectile_type],
 		"position": gpos
 	})
@@ -150,6 +152,18 @@ func _log_entity_spawned(entity: Entity, entity_type: Entity.EntityType, gpos: V
 		"type": "entity_spawned",
 		"uid": entity.uid,
 		"entity_type": Entity.EntityType.keys()[entity_type],
+		"position": gpos
+	})
+	_append_log(entry)
+
+
+func _log_projectile_target_hit(target: Entity, gpos: Vector3, projectile_uid: int) -> void:
+	if not is_instance_valid(target): return
+	var entry = _create_base_entry()
+	entry.merge({
+		"type": "projectile_target_hit",
+		"target": target.uid,
+		"projectile_uid": projectile_uid,
 		"position": gpos
 	})
 	_append_log(entry)
@@ -183,8 +197,8 @@ func _on_gfm_fighting_phase_state_changed(state: GlobalFightingManager.FightingP
 			_battle_logs.clear()
 
 
-func _on_fighting_area_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.Type, _projectile: Projectile, gpos: Vector3) -> void:
-	_log_projectile_spawned(source, target, projectile_type, gpos)
+func _on_fighting_area_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.Type, projectile: Projectile, gpos: Vector3) -> void:
+	_log_projectile_spawned(source, target, projectile_type, gpos, projectile.uid)
 
 
 func _on_fighting_area_entity_spawned(entity: Entity, entity_type: Entity.EntityType, gpos: Vector3) -> void:
@@ -197,3 +211,7 @@ func _on_fighting_area_action_received(receiver: Entity, source: Entity, action_
 
 func _on_fighting_area_action_done(source: Entity, target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
 	_log_action_done(source, target, action_type, action_id, value, is_critical)
+
+
+func _on_fighting_area_projectile_target_hit(target: Entity, gpos: Vector3, projectile_uid: int) -> void:
+	_log_projectile_target_hit(target, gpos, projectile_uid)

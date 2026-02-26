@@ -1,10 +1,7 @@
 class_name Projectile
 extends Area3D
 
-## Base projectile class that handles collision and callbacks.
-## Movement is delegated to a ProjectileTrajectory instance.
-## Fully deterministic: uses process_tick() driven by FightingManager, fixed timestep,
-## and math-based distance collision instead of Area3D body_entered signal.
+signal target_hit(entity: Entity, gpos: Vector3)
 
 # === CONSTANTS ===
 const TICKS_PER_SECOND: int = 60
@@ -35,6 +32,8 @@ var _stats: ProjectileStats
 var _hit_history: Array[Entity] = []
 var _life_ticks: int = 0
 var _lifetime_max_ticks: int = 0
+var _logic_pos: Vector3
+
 
 func add_bounce(additional_bounces: float) -> void:
 	_stats.bounces_remaining += additional_bounces
@@ -78,35 +77,47 @@ func _ready() -> void:
 		Verbose.error("No trajectory assigned to projectile [" + name + "]", Verbose.Category.PROJECTILE)
 		queue_free()
 		return
-	# body_entered signal removed — hit detection is now math-based in process_tick()
+	
+	_logic_pos = global_position
 
 
-## Called every physics tick by FightingManager (deterministic, fixed timestep).
 func process_tick() -> void:
 	_life_ticks += 1
 	if _life_ticks > _lifetime_max_ticks:
 		queue_free()
 		return
 	
-	# Move using a fixed timestep (1/60s) — same result on every machine
+	var old_pos = _logic_pos
 	if trajectory:
-		trajectory.update(1.0 / TICKS_PER_SECOND)
+		_logic_pos = trajectory.update(_logic_pos, 1.0 / TICKS_PER_SECOND)
+		global_position = _logic_pos.snapped(Vector3(0.01, 0.01, 0.01))
 	
-	# Math-based hit detection: no Area3D signals needed
-	_check_hit()
+	_check_hit(old_pos, _logic_pos)
 
 
-func _check_hit() -> void:
-	if _target == null or not is_instance_valid(_target): return
+func _check_hit(p_from: Vector3, p_to: Vector3) -> void:
+	if not is_instance_valid(_target): return
 	if _target in _hit_history: return
-	var dist_sq: float = global_position.distance_squared_to(_target.get_collision_center())
+	var target_pos: Vector3 = _target.get_collision_center() # T
+	var segment: Vector3 = p_to - p_from # AB
+	var segment_length_sq: float = segment.length_squared()
+	var t: float = 0.0
+	if segment_length_sq > 0:
+		t = (target_pos - p_from).dot(segment) / segment_length_sq # P = t * AB (orthogonal projection)
+		t = clamp(t, 0.0, 1.0) # Restrain to [AB]
+	
+	var closest_point = p_from + segment * t # P
+	var dist_sq = closest_point.distance_squared_to(target_pos)
+	
 	if dist_sq <= HIT_DISTANCE_SQ:
+		global_position = closest_point
 		_on_hit(_target)
 
 
 func _on_hit(hit_target: Entity) -> void:
 	Verbose.trace("Hit: " + hit_target.name, Verbose.Category.PROJECTILE)
 	_hit_history.append(hit_target)
+	target_hit.emit(hit_target, global_position)
 	
 	# Execute all hit callbacks
 	for cb: Callable in _stats.on_hit_callbacks:

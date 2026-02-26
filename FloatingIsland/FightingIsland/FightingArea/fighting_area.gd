@@ -15,6 +15,8 @@ signal spell_casted(source: Entity, target: Entity, spell_type: Spell.Type, spel
 signal entity_died(victim: Entity)
 @warning_ignore("unused_signal")
 signal entity_spawned(entity: Entity, entity_type: Entity.EntityType, gpos: Vector3)
+@warning_ignore("unused_signal")
+signal projectile_target_hit(target: Entity, gpos: Vector3, projectile_uid: int)
 
 # ============================== Network Export variables ==============================
 
