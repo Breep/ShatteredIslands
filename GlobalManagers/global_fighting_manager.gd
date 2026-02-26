@@ -82,6 +82,7 @@ func start() -> void:
 		_players_running_playback = PlayerManager.get_human_players().values().duplicate()
 	_fighting_phase_state = FightingPhaseState.POSITIONING
 
+
 # === Register/Unregister FightingManager
 func register_fighting_manager(fighting_manager: FightingManager):
 	Verbose.trace("register_fighting_manager() | " + str(fighting_manager.get_path()), Verbose.Category.GLOBAL_FIGHTING_MANAGER)
@@ -136,6 +137,8 @@ func _on_fighting_phase_state_changed(new_fighting_phase_state: FightingPhaseSta
 		FightingPhaseState.NORMAL:
 			duration = GameManager.game_rules.duration_fighting_normal
 			Verbose.debug("[State=NORMAL] (" + str(duration) + "s)", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
+			for fighting_manager in _fighting_managers:
+				fighting_manager.start()
 		
 		FightingPhaseState.ACCELERATED:
 			duration = GameManager.game_rules.duration_fighting_accelerated

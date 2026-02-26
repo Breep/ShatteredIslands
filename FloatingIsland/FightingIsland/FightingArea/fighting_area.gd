@@ -54,7 +54,6 @@ var arena_zone_manager: ArenaZoneManager:
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	fighting_manager.init(spawn_manager)
 	if _ready_checks() != true:
 		return
 
@@ -74,7 +73,7 @@ func init_fight(heroes: Array[Hero], battle_type: Battle.BattleType, battle_id: 
 		return
 	
 	_fighting_manager.fight_is_over.connect(_on_fighting_manager_fight_is_over, CONNECT_ONE_SHOT)
-	_fighting_manager.start(battle_id, heroes)
+	fighting_manager.init(spawn_manager, battle_id, heroes)
 	
 	_entity_manager.clear()
 	hero_spawner.spawn_heroes(heroes)
