@@ -5,7 +5,6 @@ extends ActionSenderModule
 
 func direct_damage(target: Entity, damage: float, damage_type: Utils.ActionType, action_id: StringName) -> float:
 	if not is_instance_valid(target): return 0
-	if not multiplayer.is_server(): return 0
 	
 	var base_damage: float = damage * _get_strenght_weakness_multiplier(damage_type)
 	var crit_data: Dictionary = _get_crit_multiplier(damage_type)
