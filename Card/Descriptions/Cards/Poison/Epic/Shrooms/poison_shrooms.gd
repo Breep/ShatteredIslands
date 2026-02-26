@@ -6,23 +6,33 @@ extends HeroUpgrade
 @export var _period: Array[float]
 @export var _radius: Array[float]
 
-func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
-	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[Card.Rarity.EPIC]:
-		printerr("Shrooms: Wrong cardlvl: ", cardlvl)
+func apply_card(ctx: CardContext, card_lvl: int) -> void:
+	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[Card.Rarity.EPIC]:
+		printerr("Shrooms: Wrong card_lvl: ", card_lvl)
 		return
-	
-	stats.poison.poison_shrooms_activated = true
-	stats.poison.poison_shrooms_damage = _damage[cardlvl - 1]
-	stats.poison.poison_shrooms_life_time = _life_time[cardlvl - 1]
-	stats.poison.poison_shrooms_period = _period[cardlvl - 1]
-	stats.poison.poison_shrooms_radius = _radius[cardlvl - 1]
+
+	var damage: int = _damage[card_lvl - 1]
+	var life_time: float = _life_time[card_lvl - 1]
+	var period: float = _period[card_lvl - 1]
+	var radius: float = _radius[card_lvl - 1]
+
+	ctx.periodic_timers.register(&"Shrooms", period, func() -> void:
+		var target: Entity = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
+		if target == null: return
+		var spell_modifier: Dictionary = {
+			Spell.ShroomModifier.RADIUS: radius,
+			Spell.ShroomModifier.DAMAGE: damage,
+			Spell.ShroomModifier.LIFE_TIME: life_time
+		}
+		ctx.hero.cast_spell(target, Spell.Type.SHROOM, spell_modifier)
+	)
 
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[Card.Rarity.EPIC]:
 		printerr("Shrooms: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
-	
+
 	return "Every " + str(_period[cardlvl - 1]) + "s, a shroom grows on a random spot. Shrooms grow for " + str(_life_time[cardlvl - 1]) \
 			+ "s. When fully grown, it explodes dealing " + str(_damage[cardlvl - 1]) + "[[POISON_DAMAGE]] in a " \
 			+ str(_radius[cardlvl - 1]) + "m radius"

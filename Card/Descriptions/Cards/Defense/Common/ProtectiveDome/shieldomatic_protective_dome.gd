@@ -4,18 +4,60 @@ extends HeroUpgrade
 @export var _armor_percent: Array[float]
 @export var _rarity: Card.Rarity = Card.Rarity.COMMON
 
-func apply(stats: FamiliesStats, cardlvl: int) -> void:
-	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("Protective Dome: Wrong cardlvl: ", cardlvl)
+
+func apply_card(ctx: CardContext, card_lvl: int) -> void:
+	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
+		printerr("Protective Dome: Wrong card_lvl: ", card_lvl)
 		return
-	
-	stats.defense.protective_dome_activated = true
-	stats.defense.protective_dome_armor_percent = _armor_percent[cardlvl - 1]
+
+	var resistance_value: float = _armor_percent[card_lvl - 1]
+	var state := {&"is_active": false}
+
+	var _update_modifier := func(current_shield: float) -> void:
+		var mod := StatModifier.new()
+		mod.id = &"Protective Dome"
+		mod.stat_type = EntityStats.StatType.RESISTANCE
+		mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
+		mod.tags = [StatModifier.TagType.CARD]
+
+		if current_shield > 0:
+			if not state[&"is_active"]:
+				mod.calc_type = StatModifier.CalcType.ADD
+				mod.value = resistance_value
+				ctx.stat_modifiers.register_modifier(mod)
+				state[&"is_active"] = true
+		else:
+			if state[&"is_active"]:
+				ctx.stat_modifiers.unregister_modifier(mod)
+				state[&"is_active"] = false
+
+	var _on_shield_changed: Callable
+	_on_shield_changed = func(new_val: int) -> void:
+		_update_modifier.call(float(new_val))
+
+	ctx.battle_callbacks.register_battle_start(&"Protective Dome", func() -> void:
+		state[&"is_active"] = false
+		if not ctx.hero.conditions.shield_stacks_changed.is_connected(_on_shield_changed):
+			ctx.hero.conditions.shield_stacks_changed.connect(_on_shield_changed)
+		_update_modifier.call(float(ctx.hero.conditions.shield_stacks))
+	)
+	ctx.battle_callbacks.register_battle_end(&"Protective Dome", func() -> void:
+		if ctx.hero.conditions.shield_stacks_changed.is_connected(_on_shield_changed):
+			ctx.hero.conditions.shield_stacks_changed.disconnect(_on_shield_changed)
+		# Force deactivate
+		if state[&"is_active"]:
+			var mod := StatModifier.new()
+			mod.id = &"Protective Dome"
+			mod.stat_type = EntityStats.StatType.RESISTANCE
+			mod.action_type = Utils.ActionType.DAMAGE_PHYSICAL
+			ctx.stat_modifiers.unregister_modifier(mod)
+			state[&"is_active"] = false
+	)
 
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
 		printerr("Protective Dome: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
-	
+
 	return "Increase [[ARMOR]] by " + str(_armor_percent[cardlvl - 1]) + "% as long as you have at least 1 point of [[SHIELD]]."

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://gbmiuhc63ji7"]
+[gd_scene format=3 uid="uid://gbmiuhc63ji7"]
 
 [ext_resource type="Script" uid="uid://cmjqaxabnsph4" path="res://Game/MainMenu/main_menu.gd" id="1_ytlrh"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="2_2lp7i"]
@@ -15,26 +15,26 @@
 [ext_resource type="PackedScene" uid="uid://dlqrg6ijwk3i8" path="res://FloatingIsland/BuyingIsland/BuyingArea/Tavern/TavernCenter/Tables/table_1v1.tscn" id="13_8t4xm"]
 [ext_resource type="PackedScene" uid="uid://b4av14wu25x12" path="res://FloatingIsland/BuyingIsland/BuyingArea/Tavern/TavernCenter/Tables/table_2v2.tscn" id="14_3cth7"]
 
-[node name="MainMenu" type="Node3D"]
+[node name="MainMenu" type="Node3D" unique_id=2130831413]
 script = ExtResource("1_ytlrh")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=847718709]
 transform = Transform3D(0.642788, -0.103964, 0.758956, 0, 0.990748, 0.135715, -0.766044, -0.0872363, 0.63684, 12.5115, 4.46165, 16.1699)
 fov = 45.0
 
-[node name="AnimHoveringModule" parent="Camera3D" node_paths=PackedStringArray("_owner") instance=ExtResource("2_2lp7i")]
+[node name="AnimHoveringModule" parent="Camera3D" unique_id=1714114382 node_paths=PackedStringArray("_owner") instance=ExtResource("2_2lp7i")]
 _owner = NodePath("..")
 _hover_power = 0.05
 _hover_period = 10.0
 
-[node name="UIMainMenu" parent="." instance=ExtResource("2_8c8b4")]
+[node name="UIMainMenu" parent="." unique_id=717803460 instance=ExtResource("2_8c8b4")]
 
-[node name="Tavern_Animated" parent="." instance=ExtResource("7_5g5lb")]
+[node name="Tavern_Animated" parent="." unique_id=825757170 instance=ExtResource("7_5g5lb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5412097, 0.7726619, 0.4266317)
 
-[node name="Node3D" type="Node3D" parent="Tavern_Animated"]
+[node name="Node3D" type="Node3D" parent="Tavern_Animated" unique_id=1392951271]
 
-[node name="darkknight_blue" parent="Tavern_Animated/Node3D" instance=ExtResource("5_0ewnc")]
+[node name="darkknight_blue" parent="Tavern_Animated/Node3D" unique_id=1270542018 instance=ExtResource("5_0ewnc")]
 transform = Transform3D(0.71442384, 0, 0.69971323, 0, 1, 0, -0.69971323, 0, 0.71442384, -3.1193302, 0.3158, 3.6884756)
 
 [node name="rig" parent="Tavern_Animated/Node3D/darkknight_blue" index="0"]
@@ -203,46 +203,46 @@ bones/259/rotation = Quaternion(-0.24609578, 0.54834545, 0.7456295, 0.2877341)
 [node name="Weapons" parent="Tavern_Animated/Node3D/darkknight_blue/rig/Skeleton3D" index="10"]
 visible = false
 
-[node name="darkknight_bronze" parent="Tavern_Animated/Node3D" instance=ExtResource("6_h47y2")]
+[node name="darkknight_bronze" parent="Tavern_Animated/Node3D" unique_id=1415168091 instance=ExtResource("6_h47y2")]
 transform = Transform3D(-0.27560455, 0, -0.41718358, 0, 0.5, 0, 0.41718358, 0, -0.27560455, -0.68145096, 0.56043047, 5.2253733)
 
 [node name="Weapons" parent="Tavern_Animated/Node3D/darkknight_bronze/rig/Skeleton3D" index="10"]
 visible = false
 
-[node name="darkknight_gold" parent="Tavern_Animated/Node3D" instance=ExtResource("7_aouoj")]
+[node name="darkknight_gold" parent="Tavern_Animated/Node3D" unique_id=1860243425 instance=ExtResource("7_aouoj")]
 transform = Transform3D(0.167586, 0, -0.4710785, 0, 0.5, 0, 0.4710785, 0, 0.167586, 1.6518452, 0.5371639, -0.8333714)
 
 [node name="Weapons" parent="Tavern_Animated/Node3D/darkknight_gold/rig/Skeleton3D" index="10"]
 visible = false
 
-[node name="darkknight_purple" parent="Tavern_Animated/Node3D" instance=ExtResource("8_ytlrh")]
+[node name="darkknight_purple" parent="Tavern_Animated/Node3D" unique_id=673199532 instance=ExtResource("8_ytlrh")]
 transform = Transform3D(-0.00069811125, 0, -0.49999952, 0, 0.5, 0, 0.49999952, 0, -0.00069811125, 2.1690063, 0.5602072, 0.6854855)
 
 [node name="Weapons" parent="Tavern_Animated/Node3D/darkknight_purple/rig/Skeleton3D" index="10"]
 visible = false
 
-[node name="darkknight_green" parent="Tavern_Animated/Node3D" instance=ExtResource("9_pm3tx")]
+[node name="darkknight_green" parent="Tavern_Animated/Node3D" unique_id=621968735 instance=ExtResource("9_pm3tx")]
 transform = Transform3D(0.3297582, 0, -0.37584507, 0, 0.5, 0, 0.37584507, 0, 0.3297582, -0.3776995, 0.5736128, -4.286636)
 
 [node name="Weapons" parent="Tavern_Animated/Node3D/darkknight_green/rig/Skeleton3D" index="10"]
 visible = false
 
-[node name="darkknight_silver" parent="Tavern_Animated/Node3D" instance=ExtResource("10_c2tj4")]
+[node name="darkknight_silver" parent="Tavern_Animated/Node3D" unique_id=1786339248 instance=ExtResource("10_c2tj4")]
 transform = Transform3D(-0.39287448, 0, 0.30927277, 0, 0.5, 0, -0.30927277, 0, -0.39287448, -2.3666592, 0.56033826, -2.4353495)
 
 [node name="Weapons" parent="Tavern_Animated/Node3D/darkknight_silver/rig/Skeleton3D" index="10"]
 visible = false
 
-[node name="darkknight_white" parent="Tavern_Animated/Node3D" instance=ExtResource("11_thayi")]
+[node name="darkknight_white" parent="Tavern_Animated/Node3D" unique_id=1926904094 instance=ExtResource("11_thayi")]
 transform = Transform3D(-0.2410833, 0, 0.43803978, 0, 0.5, 0, -0.43803978, 0, -0.2410833, 0.24512899, 0.5571692, 1.6530339)
 
 [node name="Weapons" parent="Tavern_Animated/Node3D/darkknight_white/rig/Skeleton3D" index="10"]
 visible = false
 
-[node name="darkknight_black" parent="Tavern_Animated/Node3D" instance=ExtResource("12_fpsp3")]
+[node name="darkknight_black" parent="Tavern_Animated/Node3D" unique_id=901892964 instance=ExtResource("12_fpsp3")]
 transform = Transform3D(-0.10527003, 0, 0.48879263, 0, 0.5, 0, -0.48879263, 0, -0.10527003, -0.09633553, 0.43464088, 0.23024482)
 
-[node name="Skeleton3D" parent="Tavern_Animated/Node3D/darkknight_black/rig" index="0"]
+[node name="Skeleton3D" parent="Tavern_Animated/Node3D/darkknight_black/rig" parent_id_path=PackedInt32Array(901892964, 93346782) index="0" unique_id=435237510]
 bones/8/rotation = Quaternion(-0.015856141, -0.19098902, -0.4500919, 0.8721749)
 bones/9/rotation = Quaternion(-1.4076336e-07, 3.6801882e-08, 0.5716079, 0.82052696)
 bones/14/position = Vector3(0.5477464, 0.3636927, -0.12869398)
@@ -364,16 +364,16 @@ bones/258/rotation = Quaternion(0.24609572, 0.54834545, 0.7456295, -0.28773403)
 bones/259/position = Vector3(0.79084593, 1.8456376, 0.40954402)
 bones/259/rotation = Quaternion(-0.24609578, 0.54834545, 0.7456295, 0.2877341)
 
-[node name="Weapons" parent="Tavern_Animated/Node3D/darkknight_black/rig/Skeleton3D" index="10"]
+[node name="Weapons" parent="Tavern_Animated/Node3D/darkknight_black/rig/Skeleton3D" index="10" unique_id=994702626]
 visible = false
 
-[node name="Table_1v1" parent="Tavern_Animated/Node3D" instance=ExtResource("13_8t4xm")]
+[node name="Table_1v1" parent="Tavern_Animated/Node3D" unique_id=842253899 instance=ExtResource("13_8t4xm")]
 transform = Transform3D(-0.80252594, 0, 0.5966172, 0, 1, 0, -0.5966172, 0, -0.80252594, -1.825104, 0.57994807, 4.596961)
 
-[node name="Table_2v2" parent="Tavern_Animated/Node3D" instance=ExtResource("14_3cth7")]
+[node name="Table_2v2" parent="Tavern_Animated/Node3D" unique_id=1639705554 instance=ExtResource("14_3cth7")]
 transform = Transform3D(0.96019626, 0, 0.2793263, 0, 1, 0, -0.2793263, 0, 0.96019626, 1.0008608, 0.5445416, 0.6000109)
 
-[node name="Table_1v2" parent="Tavern_Animated/Node3D" instance=ExtResource("13_8t4xm")]
+[node name="Table_1v2" parent="Tavern_Animated/Node3D" unique_id=1068378056 instance=ExtResource("13_8t4xm")]
 transform = Transform3D(0.8141155, 0, 0.58070296, 0, 1, 0, -0.58070296, 0, 0.8141155, -1.4311961, 0.55825967, -3.3315463)
 
 [editable path="Tavern_Animated/Node3D/darkknight_blue"]

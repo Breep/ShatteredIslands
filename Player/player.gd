@@ -175,8 +175,9 @@ func _apply_all_cards_upgrades() -> void:
 		printerr("Player: Can't apply cards upgrades")
 		return
 	if hero.is_node_ready():
+		var ctx: CardContext = hero.get_card_context()
 		for card in deck.get_active_deck():
-			card.player_upgrade.apply(hero.families_stats, card.lvl)
+			card.player_upgrade.apply_card(ctx, card.lvl)
 	else:
 		hero.deck = deck
 

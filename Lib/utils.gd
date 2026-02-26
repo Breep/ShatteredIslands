@@ -176,3 +176,7 @@ func recursive_show(node: Node3D):
 			recursive_show(child)
 	if node is Node3D:
 		node.show()
+
+
+func is_negative_stack(damage_type: StackType) -> bool:
+	return damage_type in [StackType.POISON, StackType.IGNITE, StackType.NECROSIS]

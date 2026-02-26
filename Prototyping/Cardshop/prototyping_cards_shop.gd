@@ -45,6 +45,7 @@ var _draw_value_ratios: Dictionary[Card.Rarity, float] = {
 @onready var _time_label: Label = %TimeLabel
 
 @onready var _cards_drawn_number: SpinBox = %CardNumberSpinBox
+@onready var _iteration_number: SpinBox = %IterationNumberSpinBox
 
 @onready var _custom_chance_bool: bool = true
 @onready var _custom_check_box: CheckBox = %CustomChanceCheckBox
@@ -52,7 +53,9 @@ var _draw_value_ratios: Dictionary[Card.Rarity, float] = {
 @onready var _ui_cards_viewer: UICardsViewer = %UICardsViewer
 @onready var _shop_deck := ShopDeck.new()
 @onready var _game_rules := GameRules.new()
+@onready var _player := Player.new()
 @onready var _families: Array[Family]
+@onready var _player_available_pool: Dictionary[Card.Rarity, Array]
 
 @onready var _cards_drawn: Label = %CardsDrawnLabel
 @onready var _shopdeck_cards_remaining_label: Label = %ShopDeckCardsRemainingLabel
@@ -81,9 +84,11 @@ func _ready() -> void:
 	
 	# Check game rules in inspector
 	_check_game_rules()
-	
+	GameManager.init()
+	ServerCardShop.init(_families, _game_rules)
 	
 	_shop_deck.construct_shop_deck(_families, _game_rules)
+	_player_available_pool = ServerCardShop._build_player_available_pool(_player)
 	
 	# Init custom chance use
 	_custom_chance_bool = _custom_check_box.button_pressed
@@ -97,10 +102,10 @@ func _populate_family_popup() -> void:
 			_families.append(_FAMILIES_REF[family_type])
 
 func _check_game_rules() -> void:
-	_game_rules.common_number = common_number
-	_game_rules.rare_number = rare_number
-	_game_rules.epic_number = epic_number
-	_game_rules.legendary_number = legendary_number
+	_game_rules.rarity_card_numbers[Card.Rarity.COMMON] = common_number
+	_game_rules.rarity_card_numbers[Card.Rarity.RARE] = rare_number
+	_game_rules.rarity_card_numbers[Card.Rarity.EPIC] = epic_number
+	_game_rules.rarity_card_numbers[Card.Rarity.LEGENDARY] = legendary_number
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -121,8 +126,14 @@ func _on_draw_cards_button_pressed() -> void:
 	var start_time := Time.get_ticks_usec()
 	
 	#function draw
-	var cards: Array[Card] = _shop_deck.draw_n_cards(int(_cards_drawn_number.value))
-	
+	var cards: Array[Card] = []
+	#var cards: Array[Card] = _shop_deck.draw_n_cards(int(_cards_drawn_number.value))
+	#draw_cards_for_player(player: Player, count: int, player_available_pool: Dictionary[Card.Rarity, Array]) -> Array[Card]:
+	for iteration in int(_iteration_number.value) :
+		#cards.append_array(_shop_deck.draw_n_cards(int(_cards_drawn_number.value)))
+		cards.append_array(_shop_deck.draw_cards_for_player(_player, int(_cards_drawn_number.value), _player_available_pool))
+		#print(iteration, cards, int(_cards_drawn_number.value))
+		
 	# Time measurement of the draw function
 	var end_time := Time.get_ticks_usec()
 	var duration_usec := end_time - start_time
@@ -152,10 +163,10 @@ func _on_draw_cards_button_pressed() -> void:
 		#_draw_value_ratios[card_rarity] = (_draw_value_ratios[card_rarity]/total_cards_size)*100
 		
 		_last_draw_value_labels[card_rarity].text = str(_last_draw_values[card_rarity])
-		_last_draw_value_ratio_labels[card_rarity].text = str(_last_draw_value_ratios[card_rarity])
+		_last_draw_value_ratio_labels[card_rarity].text = str(_last_draw_value_ratios[card_rarity]).pad_decimals(2)
 		
 		_draw_value_labels[card_rarity].text = str(_draw_values[card_rarity])
-		_draw_value_ratio_labels[card_rarity].text = str((_draw_value_ratios[card_rarity]/total_cards_size)*100)
+		_draw_value_ratio_labels[card_rarity].text = str((_draw_value_ratios[card_rarity]/total_cards_size)*100).pad_decimals(2)
 	
 	
 	_ui_cards_viewer.update_content(cards)

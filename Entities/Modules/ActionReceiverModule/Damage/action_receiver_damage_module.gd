@@ -5,6 +5,14 @@ extends ActionReceiverModule
 
 func take_damage(damage: float, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> Dictionary:
 	if _owner.stats.health <= 0 or _owner.is_dead(): return {}
+	
+	if _owner.status_module.has_status(Status.Type.INVULNERABLE):
+		return {
+			ResultKey.VALUE: 0.0,
+			ResultKey.IS_CRITICAL: false,
+			ResultKey.INVULNERABLE: true
+		}
+
 	var damage_before_armor: float = 0
 	if damage_type != Utils.DamageType.PURE and multiplayer.is_server():
 		if _is_dodged(Utils.damage_to_action(damage_type)):

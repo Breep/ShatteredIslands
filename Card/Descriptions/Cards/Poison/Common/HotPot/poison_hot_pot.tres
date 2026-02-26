@@ -16,5 +16,9 @@ name = "Hot Pot"
 picture = ExtResource("1_monbk")
 families = Array[int]([7, 3])
 player_upgrade = SubResource("Resource_xg1u6")
+points = Dictionary[int, int]({
+3: 1,
+7: 1
+})
 lvl = 5
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

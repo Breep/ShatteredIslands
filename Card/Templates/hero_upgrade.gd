@@ -1,26 +1,12 @@
 class_name HeroUpgrade
 extends Resource
 
-enum VarType {
-	ACTION_MODIFIERS_MANAGER,
-	AUTO_ATTACK_MODIFIERS_MANAGER,
-	STAT_MODIFIERS_MANAGER,
-	FAMILIES_STATS,
-}
+## Base class for card effects. Each card's player_upgrade references a concrete subclass.
 
-func apply(_stats: FamiliesStats, _cardLvl: int) -> void:
+func apply_card(_ctx: CardContext, _card_lvl: int) -> void:
 	push_warning("[HeroUpgrade] call virtual apply()")
-	pass
 
 
 func get_description(_cardlvl: int) -> String:
 	push_warning("[HeroUpgrade] call virtual get_description()")
 	return ""
-
-
-var action_modifiers: Array[ActionModifier]
-var auto_attack_modifiers: Array[AutoAttackModifier]
-var on_battle_start: Callable
-var on_battle_end: Callable
-var on_purchase: Callable
-var periodic_callback: Callable
