@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cpe1ja4a2fgwu"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_vybw3"]
+
+[resource]
+script = ExtResource("1_vybw3")
+name = "Rapid Incubation"
+families = Array[int]([9])
+points = Dictionary[int, int]({
+9: 1
+})
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

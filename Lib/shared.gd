@@ -59,6 +59,7 @@ var FAMILY_MANAGER_SCENES: Dictionary[Family.FamilyType, PackedScene] = {
 	Family.FamilyType.ATTACK: load("res://Entities/Heroes/_Shared/FamiliesManagers/Attack/attack_manager.tscn"),
 	Family.FamilyType.MANA: load("res://Entities/Heroes/_Shared/FamiliesManagers/Mana/mana_manager.tscn"),
 	Family.FamilyType.NECROSIS: load("res://Entities/Heroes/_Shared/FamiliesManagers/Necro/necro_manager.tscn"),
+	Family.FamilyType.CHICKEN: load("res://Entities/Heroes/_Shared/FamiliesManagers/Chicken/chicken_manager.tscn"),
 }
 
 var PROJECTILE_SCENES: Dictionary[Projectile.Type, PackedScene] = {
