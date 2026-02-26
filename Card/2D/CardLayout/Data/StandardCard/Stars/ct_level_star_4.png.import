@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dc8asjqeqgkc6"
-path="res://.godot/imported/level_mask.png-b31dec5dfc25dc3b51280c2a35352f87.ctex"
+uid="uid://bp5u3lmsc8fm2"
+path="res://.godot/imported/ct_level_star_4.png-67b9cbff382d1c7821c6e165a9d53d2c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Card/2D/CardLayout/Data/level_mask.png"
-dest_files=["res://.godot/imported/level_mask.png-b31dec5dfc25dc3b51280c2a35352f87.ctex"]
+source_file="res://Card/2D/CardLayout/Data/StandardCard/Stars/ct_level_star_4.png"
+dest_files=["res://.godot/imported/ct_level_star_4.png-67b9cbff382d1c7821c6e165a9d53d2c.ctex"]
 
 [params]
 

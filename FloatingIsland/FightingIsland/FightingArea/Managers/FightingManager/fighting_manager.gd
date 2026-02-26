@@ -22,6 +22,8 @@ var _heroes_dictionary: Dictionary[int, Array] # [int, Array[Hero]] Key=team_id,
 var _alive_heroes_dictionary: Dictionary[int, Array] # [int, Array[Hero]] Key=team_id, value=team members
 var _lowest_hp_teams_order: Array[int] # Array of teams in order of death [2, 3, 4] means team 2 died first, then 3 and then 4
 var _is_active: bool = false
+var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
+var _spawn_manager: SpawnManager
 #endregion
 
 #region ============================== Node base functions ==============================
@@ -32,10 +34,22 @@ func _enter_tree() -> void:
 
 func _exit_tree() -> void:
 	GlobalFightingManager.unregister_fighting_manager(self)
+
+
+func _physics_process(_delta: float) -> void:
+	if not _is_active: return
+	for entity in _spawn_manager.get_entities():
+		entity.process_tick()
+	for projectile in _spawn_manager.get_projectiles():
+		projectile.process_tick()
 #endregion
 
 #region ============================== Public functions ==============================
-func start(heroes: Array[Hero]) -> void:
+func init(spawn_manager: SpawnManager) -> void:
+	_spawn_manager = spawn_manager
+
+func start(heroes: Array[Hero] = []) -> void:
+	_rng.seed = hash(str(battle_id)) # TODO Make the server generate seeds and send it to clients
 	_is_active = true
 	_setup_heroes_dictionary(heroes)
 	_connect_to_heroes_signals()
@@ -107,14 +121,14 @@ func _stop_fighting_manager() -> void:
 	_is_active = false
 	_disconnect_from_heroes_signals()
 	var winner_teams_order: Array[int] = _get_winner_teams_order()
-	for member in _heroes_dictionary[winner_teams_order[winner_teams_order.size() - 1]]:
-		var hero: Hero = member
-		# if PlayerManager.players.has(hero.owner_player_id):
-		# 	Events.signal_player_won_a_fight(PlayerManager.players[hero.owner_player_id]) # TODO rework this
-	for member in _heroes_dictionary[winner_teams_order[0]]:
-		var hero: Hero = member
-		# if PlayerManager.players.has(hero.owner_player_id):
-		# 	Events.signal_player_lost_a_fight(PlayerManager.players[hero.owner_player_id]) # TODO rework this
+	#for member in _heroes_dictionary[winner_teams_order[winner_teams_order.size() - 1]]:
+		#var hero: Hero = member
+		## if PlayerManager.players.has(hero.owner_player_id):
+		## 	Events.signal_player_won_a_fight(PlayerManager.players[hero.owner_player_id]) # TODO rework this
+	#for member in _heroes_dictionary[winner_teams_order[0]]:
+		#var hero: Hero = member
+		## if PlayerManager.players.has(hero.owner_player_id):
+		## 	Events.signal_player_lost_a_fight(PlayerManager.players[hero.owner_player_id]) # TODO rework this
 	fight_is_over.emit(self, winner_teams_order)
 	_cleanup()
 
@@ -142,27 +156,3 @@ func _on_gfm_fighting_phase_state_changed(new_state: GlobalFightingManager.Fight
 		GlobalFightingManager.FightingPhaseState.CELEBRATING:
 			_stop_fighting_manager()
 #endregion
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 

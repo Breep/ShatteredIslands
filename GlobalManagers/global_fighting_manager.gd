@@ -30,6 +30,10 @@ const ACCELERATED_FIGHT_TIME_SCALE = 2.0
 var _fighting_managers: Array[FightingManager]
 var _current_active_fighting_managers: Array[FightingManager]
 
+# Timestamp (in seconds) of the exact moment NORMAL phase started
+# Used as the t=0 reference for BattleWriter and any time-sensitive log consumer
+var fight_start_time: float = 0.0
+
 # /!\ _fighting_phase_state is NOT sync, the server is ahead of time /!\
 var __fighting_phase_state := FightingPhaseState.UNDEF
 var _fighting_phase_state: FightingPhaseState:
@@ -37,6 +41,8 @@ var _fighting_phase_state: FightingPhaseState:
 	set(value):
 		if __fighting_phase_state == value: return
 		__fighting_phase_state = value
+		if value == FightingPhaseState.NORMAL:
+			fight_start_time = Time.get_ticks_msec() / 1000.0
 		fighting_phase_state_changed.emit(__fighting_phase_state)
 
 var __prototyping = false
@@ -108,7 +114,7 @@ func _on_timer_timeout() -> void:
 				_fighting_phase_state = FightingPhaseState.COUNTDOWN
 		FightingPhaseState.COUNTDOWN: _fighting_phase_state = FightingPhaseState.NORMAL
 		FightingPhaseState.NORMAL: _fighting_phase_state = FightingPhaseState.ACCELERATED
-		FightingPhaseState.ACCELERATED: 
+		FightingPhaseState.ACCELERATED:
 			Verbose.debug("Fights are taking too long => Forcing CELEBRATING phase", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
 			_fighting_phase_state = FightingPhaseState.CELEBRATING
 		FightingPhaseState.CELEBRATING: _fighting_phase_state = FightingPhaseState.FINISHED
@@ -209,22 +215,3 @@ func _on_fighting_manager_fight_is_ready_to_be_started(fighting_manager: Fightin
 		return
 	_current_active_fighting_managers.append(fighting_manager)
 #endregion
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 

@@ -136,7 +136,7 @@ func _ready() -> void:
 	_untargetable_control.hide()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	_update_stun_info()
 	_update_taunt_info()
 	_update_silence_info()

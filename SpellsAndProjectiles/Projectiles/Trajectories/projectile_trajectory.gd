@@ -34,7 +34,7 @@ func _on_init() -> void:
 
 ## Update the projectile position and orientation.
 ## Called every frame. MUST be overridden by subclasses.
-func update(delta: float) -> void:
+func update(_delta: float) -> void:
 	push_error("ProjectileTrajectory.update() not implemented in " + get_script().resource_path)
 
 

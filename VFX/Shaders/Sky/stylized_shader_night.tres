@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=13 format=3 uid="uid://2wlal7g5718r"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://2wlal7g5718r"]
 
 [sub_resource type="Shader" id="Shader_a52g0"]
 code = "shader_type sky;

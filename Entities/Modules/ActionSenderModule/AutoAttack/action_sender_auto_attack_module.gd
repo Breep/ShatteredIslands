@@ -48,18 +48,17 @@ func connect_modules(movement_module: MovementModule, animation_module: Animatio
 		_owner.status_module.stunned_changed.connect(_on_owner_stunned_changed)
 
 
-func execute_auto_attack(target: Entity) -> void:
-	if target == null:
-		Verbose.warn("execute_auto_attack: No target", Verbose.Category.ENTITY_MODULE)
+func execute_auto_attack(target: Entity) -> bool:
+	if not is_instance_valid(target):
 		attack_completed.emit()
-		return
+		return false
 	
 	if _owner.status_module.has_status(Status.Type.STUN):
 		attack_completed.emit()
-		return
+		return false
 	
 	if not _check_range_and_approach(target):
-		return # Out of range, approach started or failed
+		return false # Out of range, approach started or failed
 	
 	if _owner != null:
 		_owner.look_at_target_y_only(target.global_position)
@@ -69,6 +68,8 @@ func execute_auto_attack(target: Entity) -> void:
 	match _owner.stats.auto_attack_type:
 		EntityStats.AutoAttackType.RANGED: _start_ranged_attack(target)
 		EntityStats.AutoAttackType.MELEE: _start_melee_attack(target)
+	
+	return true
 
 
 func _cancel_attack() -> void:

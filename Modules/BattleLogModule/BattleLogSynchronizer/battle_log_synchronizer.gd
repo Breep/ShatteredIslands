@@ -15,6 +15,11 @@ extends Node
 
 var _battle_logs: Array[Dictionary] = [] # [CLIENT ONLY]
 
+# ============================== Public functions ==============================
+
+func set_sync_period(period: float) -> void:
+	_synchronizer_timer.wait_time = period
+
 # ============================== Node base functions ==============================
 
 func _ready() -> void:

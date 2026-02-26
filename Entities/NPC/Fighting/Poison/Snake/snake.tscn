@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://0qhx51rq53um" path="res://Entities/NPC/Fighting/Poison/Snake/snake.gd" id="1_v4viv"]
 [ext_resource type="PackedScene" uid="uid://c56dr1ix2y718" path="res://Entities/NPC/Fighting/Poison/Snake/snake_visual.tscn" id="2_61c56"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/Stats/EntityStats/entity_stats.gd" id="2_ptbxe"]
-[ext_resource type="PackedScene" uid="uid://jwk6d3k8w3k5" path="res://Entities/EntityInfoPanel/EntityInfoPanel3D/entity_info_panel_3d.tscn" id="4_duvd4"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://brnwae0xxk00f" path="res://Entities/NPC/Fighting/Poison/Snake/snake_blendtree.tres" id="5_duvd4"]
 [ext_resource type="Script" uid="uid://cnwr3o67xobtt" path="res://Entities/Modules/AnimationModule/entity_animation_player.gd" id="6_obplm"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Tool/SpawnPoint/spawn_point.tscn" id="7_jendl"]
@@ -18,10 +17,11 @@ attack_damage = 10.0
 attack_speed = 2.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_61c56"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nh8ax"]
 radius = 0.2
+height = 1.1748047
 
-[node name="Snake" type="CharacterBody3D" unique_id=21219754 node_paths=PackedStringArray("_visual_3d", "_entity_info_panel_3d", "_animation_module")]
+[node name="Snake" type="CharacterBody3D" unique_id=21219754 node_paths=PackedStringArray("_visual_3d", "_animation_module")]
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("1_v4viv")
@@ -29,22 +29,20 @@ entity_name = "Snake"
 custom_base_stats = SubResource("Resource_6o6k5")
 _auto_loaded_modules = Array[int]([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 4, 0])
 _visual_3d = NodePath("SnakeVisual")
-_entity_info_panel_3d = NodePath("EntityInfoPanel3d")
 _animation_module = NodePath("AnimationModule")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1208773448]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09924334, 0)
-shape = SubResource("SphereShape3D_61c56")
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.18860209, -0.06591797)
+shape = SubResource("CapsuleShape3D_nh8ax")
 
 [node name="SnakeVisual" parent="." unique_id=114647546 instance=ExtResource("2_61c56")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0, 0, 0)
+
+[node name="Skeleton3D" parent="SnakeVisual" index="0" unique_id=1323285786]
+animate_physical_bones = false
 
 [node name="AnimationPlayer" parent="SnakeVisual" index="1" unique_id=269182265]
 script = ExtResource("6_obplm")
-
-[node name="EntityInfoPanel3d" parent="." unique_id=1224095838 node_paths=PackedStringArray("_owner_entity") instance=ExtResource("4_duvd4")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.49329233, 0)
-_owner_entity = NodePath("..")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=1999766066]
 root_node = NodePath("../SnakeVisual")

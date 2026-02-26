@@ -1,12 +1,7 @@
 class_name FireManager
 extends FamilyManager
 
-## Fire family manager — card logic has been migrated to individual HeroUpgrades
-## via CardContext registries. This manager only handles the Celestial Passive
-## (cast meteor on IGNITE application).
-
 var _fire_stats: FamilyFireStats
-
 
 func _ready() -> void:
 	_fire_stats = _owner.families_stats.fire

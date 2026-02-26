@@ -18,6 +18,8 @@ enum Type {
 @export var trajectory: ProjectileTrajectory
 @export var lifetime_max: float = 6.0
 
+var uid: int = -1
+
 # === RUNTIME ===
 var _source: Entity
 var _target: Entity
@@ -45,6 +47,8 @@ func init(p_source: Entity, p_target: Entity, p_stats: ProjectileStats) -> Proje
 	_stats = p_stats
 	return self
 
+func process_tick() -> void:
+	pass
 
 func _ready() -> void:
 	if _stats == null:

@@ -22,6 +22,7 @@ func _enter_tree() -> void:
 	_entity_info_panel_2d.init(_owner_entity)
 
 func _ready() -> void:
+	Debug.set_target(self)
 	# Early validation - crash if misconfigured
 	if not _owner_entity:
 		Verbose.error("EntityInfoPanel3D: _owner_entity is null! This node is misconfigured.", Verbose.Category.ENTITY)
@@ -30,7 +31,7 @@ func _ready() -> void:
 	# Connect entity signals
 	_owner_entity.damage_taken.connect(_on_owner_entity_damage_taken)
 	_owner_entity.heal_taken.connect(_on_owner_entity_heal_taken)
-	
+
 # ============================== Public ==============================
 
 func damage_popup(amount: float, damage_type: Utils.DamageType, is_critic: bool = false):

@@ -12,7 +12,7 @@ extends Node
 
 var _battle_logs: Array[Dictionary]
 var _last_log_index_sent: int = 0
-var _start_time: float
+var _is_recording: bool = false
 var _normal_fight_duration: float
 var _accelerated_fight_start_time: float
 var _is_accelerated_fight: bool = false
@@ -20,14 +20,16 @@ var _is_accelerated_fight: bool = false
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	if not multiplayer.is_server(): queue_free() # Only the server writes battle logs
-	
+	if not multiplayer.is_server():
+		queue_free()
+		return # Only the server writes battle logs
 	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
 	
 	_fighting_area.projectile_spawned.connect(_on_fighting_area_projectile_spawned)
 	_fighting_area.spell_casted.connect(_on_fighting_area_spell_casted)
 	_fighting_area.action_done.connect(_on_fighting_area_action_done)
 	_fighting_area.interaction_received.connect(_on_fighting_area_interaction_received)
+	_fighting_area.entity_spawned.connect(_on_fighting_area_entity_spawned)
 
 # ============================== Public functions ==============================
 
@@ -36,6 +38,10 @@ func get_current_logs() -> Array[Dictionary]:
 	var new_logs: Array[Dictionary] = _battle_logs.slice(_last_log_index_sent)
 	_last_log_index_sent = _battle_logs.size()
 	return new_logs
+
+
+func get_all_logs() -> Array[Dictionary]:
+	return _battle_logs
 
 # ============================== Private functions ==============================
 
@@ -46,8 +52,8 @@ func _log_attack(source: Entity, target: Entity,
 	var data: Dictionary = {
 		BattleLog.Main.TIME: _get_time(),
 		BattleLog.Main.TYPE: BattleLog.Type.AUTO_ATTACK,
-		BattleLog.Main.SOURCE: source.id,
-		BattleLog.Main.TARGET: target.id,
+		BattleLog.Main.SOURCE: source.uid,
+		BattleLog.Main.TARGET: target.uid,
 		BattleLog.Main.MODIFIER: {
 			BattleLog.Modifier.CRITICAL: critical,
 			BattleLog.Modifier.POISON: poison,
@@ -55,7 +61,7 @@ func _log_attack(source: Entity, target: Entity,
 			BattleLog.Modifier.INSTABILITY: instability
 		}
 	}
-	_battle_logs.append(data)
+	_append_log(data)
 
 
 func _log_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary) -> void:
@@ -63,12 +69,12 @@ func _log_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type, s
 	var data: Dictionary = {
 		BattleLog.Main.TIME: _get_time(),
 		BattleLog.Main.TYPE: BattleLog.Type.SPELL_CASTED,
-		BattleLog.Main.SOURCE: source.id,
-		BattleLog.Main.TARGET: target.id,
+		BattleLog.Main.SOURCE: source.uid,
+		BattleLog.Main.TARGET: target.uid,
 		BattleLog.Main.SPELL_TYPE: spell_type,
 		BattleLog.Main.SPELL_MODIFIER: spell_modifier
 	}
-	_battle_logs.append(data)
+	_append_log(data)
 
 
 func _log_action_done(source: Entity, target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
@@ -87,11 +93,11 @@ func _log_action_done(source: Entity, target: Entity, action_type: Utils.ActionT
 		BattleLog.Main.ACTION_ID: action_id,
 		BattleLog.Main.VALUE: value,
 		BattleLog.Main.CRITICAL: is_critical,
-		BattleLog.Main.SOURCE: source.id,
-		BattleLog.Main.TARGET: target.id
+		BattleLog.Main.SOURCE: source.uid,
+		BattleLog.Main.TARGET: target.uid
 	}
 	
-	_battle_logs.append(data)
+	_append_log(data)
 
 
 func _log_interaction_received(receiver: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
@@ -108,44 +114,70 @@ func _log_interaction_received(receiver: Entity, source: Entity, action_type: Ut
 		BattleLog.Main.ACTION_ID: action_id,
 		BattleLog.Main.VALUE: value,
 		BattleLog.Main.CRITICAL: is_critical,
-		BattleLog.Main.RECEIVER: receiver.id,
-		BattleLog.Main.SOURCE: source.id if source != null else -1,
+		BattleLog.Main.RECEIVER: receiver.uid,
+		BattleLog.Main.SOURCE: source.uid if source != null else -1,
 	}
 	
-	_battle_logs.append(data)
+	_append_log(data)
+
+
+func _log_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.Type) -> void:
+	if not is_instance_valid(source) or not is_instance_valid(target): return
+	var data: Dictionary = {
+		BattleLog.Main.TIME: _get_time(),
+		BattleLog.Main.TYPE: BattleLog.Type.PROJECTILE_SPAWNED,
+		BattleLog.Main.SOURCE: source.uid,
+		BattleLog.Main.TARGET: target.uid,
+		BattleLog.Main.PROJECTILE_TYPE: projectile_type
+	}
+	_append_log(data)
+
+
+func _log_entity_spawned(entity: Entity, entity_type: Entity.EntityType, entity_modifier: Dictionary) -> void:
+	if not is_instance_valid(entity): return
+	var data: Dictionary = {
+		BattleLog.Main.TIME: _get_time(),
+		BattleLog.Main.TYPE: BattleLog.Type.ENTITY_SPAWNED,
+		BattleLog.Main.UID: entity.uid,
+		BattleLog.Main.ENTITY_TYPE: entity_type,
+		BattleLog.Main.ENTITY_MODIFIER: entity_modifier
+	}
+	_append_log(data)
 #endregion
+
+
+func _append_log(data: Dictionary) -> void:
+	if not _is_recording: return
+	_battle_logs.append(data)
 
 func _get_time() -> float:
 	if _is_accelerated_fight:
-		return _normal_fight_duration + ((Time.get_ticks_msec() as float) / 1000.0 - _accelerated_fight_start_time) # / GlobalFightingManager.ACCELERATED_FIGHT_TIME_SCALE
+		return _normal_fight_duration + ((Time.get_ticks_msec() as float) / 1000.0 - _accelerated_fight_start_time)
 	else:
-		return ((Time.get_ticks_msec() as float) / 1000.0 - _start_time)
+		return (Time.get_ticks_msec() as float) / 1000.0 - GlobalFightingManager.fight_start_time
 
 # ============================== Callbacks ==============================
 
 func _on_gfm_fighting_phase_state_changed(state: GlobalFightingManager.FightingPhaseState) -> void:
 	match state:
 		GlobalFightingManager.FightingPhaseState.NORMAL:
-			_start_time = (Time.get_ticks_msec() as float) / 1000.0
+			_is_recording = true
 			_is_accelerated_fight = false
 		GlobalFightingManager.FightingPhaseState.ACCELERATED:
 			_normal_fight_duration = _get_time()
 			_accelerated_fight_start_time = (Time.get_ticks_msec() as float) / 1000.0
 			_is_accelerated_fight = true
 		GlobalFightingManager.FightingPhaseState.FINISHED:
+			_is_recording = false
 			_battle_logs.clear()
 
 
 func _on_fighting_area_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.Type, _projectile: Projectile) -> void:
-	# Note: Projectile effects like critic/poison/ignite are now handled via callbacks
-	# and are no longer tracked as enum flags
-	pass # TODO use auto attack api
-	#if source.is_ally and projectile_type == Projectile.Type.AUTO_ATTACK:
-		#_log_attack(source, target,
-				#false, # is_critic (no longer tracked here)
-				#false, # has_poison
-				#false, # has_ignite
-				#false) # has_instability
+	_log_projectile_spawned(source, target, projectile_type)
+
+
+func _on_fighting_area_entity_spawned(entity: Entity, entity_type: Entity.EntityType, entity_modifier: Dictionary) -> void:
+	_log_entity_spawned(entity, entity_type, entity_modifier)
 
 
 func _on_fighting_area_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary) -> void:

@@ -117,8 +117,8 @@ const LEVEL_PREFIX_TEMPLATES: Dictionary[Level, String] = {
 #region ============================== Configuration ==============================
 var current_categories_level: Dictionary[Category, Level] = {
 	Category.DEFAULT: Level.WARN,
-	Category.NET: Level.WARN,
-	Category.GLOBAL_MANAGER: Level.WARN,
+	Category.NET: Level.TRACE,
+	Category.GLOBAL_MANAGER: Level.DEBUG,
 	Category.ROUND_MANAGER: Level.WARN,
 	Category.CARD_SHOP: Level.WARN,
 	Category.CARD: Level.DEBUG,
@@ -134,14 +134,14 @@ var current_categories_level: Dictionary[Category, Level] = {
 	Category.ACTION_MODIFIER: Level.WARN,
 	Category.STAT_MODIFIER: Level.WARN,
 	Category.STACK_MODIFIER: Level.WARN,
-	Category.GLOBAL_FIGHTING_MANAGER: Level.WARN,
+	Category.GLOBAL_FIGHTING_MANAGER: Level.DEBUG,
 	Category.ENTITY_ANIMATION: Level.WARN,
 	Category.ENTITY_MODULE: Level.WARN,
-	Category.ENTITY: Level.WARN,
+	Category.ENTITY: Level.TRACE,
 	Category.HERO: Level.WARN,
 	Category.SUMMON: Level.WARN,
 	Category.BATTLE_SYNC: Level.WARN,
-	Category.BATTLE_READER: Level.WARN,
+	Category.BATTLE_READER: Level.TRACE,
 	Category.BATTLE_WRITER: Level.WARN,
 	Category.ENTITY_MANAGER: Level.WARN,
 	Category.HERO_SPAWNER: Level.WARN,
@@ -195,7 +195,7 @@ func _ready() -> void:
 #region ============================== Public function ==============================
 func _get_prefix() -> String:
 	if _is_server: return PREFIX_TEMPLATES[GameType.SERVER]
-	if not multiplayer.is_server():
+	if multiplayer and not multiplayer.is_server():
 		return PREFIX_TEMPLATES[GameType.CLIENT]
 	else:
 		return PREFIX_TEMPLATES[GameType.SOLO]
@@ -203,7 +203,7 @@ func _get_prefix() -> String:
 
 func _get_rich_prefix() -> String:
 	if _is_server: return RICH_PREFIX_TEMPLATES[GameType.SERVER]
-	if not multiplayer.is_server():
+	if multiplayer and not multiplayer.is_server():
 		return RICH_PREFIX_TEMPLATES[GameType.CLIENT]
 	else:
 		return RICH_PREFIX_TEMPLATES[GameType.SOLO]
@@ -224,13 +224,18 @@ func _log(cat: Category, level: Level, msg: String) -> void:
 	
 	match level:
 		Level.TRACE:
+			Console.print(_get_rich_prefix() + "[color=gray]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 			print_rich(_get_rich_prefix() + time_stamp + "[color=gray]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 		Level.DEBUG:
+			Console.print(_get_rich_prefix() + "[color=white]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 			print_rich(_get_rich_prefix() + time_stamp + "[color=white]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 		Level.INFO:
+			Console.print(_get_rich_prefix() + "[color=white]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 			print_rich(_get_rich_prefix() + time_stamp + "[color=white]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 		Level.WARN:
+			Console.print(_get_rich_prefix() + "[color=yellow]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 			print_rich(_get_rich_prefix() + time_stamp + "[color=yellow]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 		Level.ERROR:
+			Console.print(_get_rich_prefix() + "[color=red]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 			print_rich(_get_rich_prefix() + time_stamp + "[color=red]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 #endregion

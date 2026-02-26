@@ -1,11 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://dnt0yj1cs67ko"]
+[gd_scene format=3 uid="uid://dnt0yj1cs67ko"]
 
 [ext_resource type="Script" uid="uid://bjvvri6i8a1c7" path="res://Modules/BattleLogModule/BattleLogSynchronizer/battle_log_synchronizer.gd" id="1_72uby"]
 
-[node name="BattleLogSynchronizer" type="Node"]
+[node name="BattleLogSynchronizer" type="Node" unique_id=1284527925]
 script = ExtResource("1_72uby")
 
-[node name="SynchronizerTimer" type="Timer" parent="."]
+[node name="SynchronizerTimer" type="Timer" parent="." unique_id=1076660307]
 unique_name_in_owner = true
 
 [connection signal="timeout" from="SynchronizerTimer" to="." method="_on_synchronizer_timer_timeout"]

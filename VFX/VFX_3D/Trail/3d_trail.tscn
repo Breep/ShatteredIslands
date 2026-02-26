@@ -13,7 +13,7 @@
 shader = ExtResource("1_bqhit")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bdx55"]
-resource_local_to_scene = true
+resource_local_to_scene = false
 render_priority = 0
 shader = ExtResource("2_uwni0")
 shader_parameter/tex = ExtResource("5_mbb8d")

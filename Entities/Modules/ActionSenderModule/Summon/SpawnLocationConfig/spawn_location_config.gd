@@ -97,10 +97,10 @@ static func create_arena_center(randomization: float = 0.0) -> SpawnLocationConf
 
 ## Create a config for team zone spawning
 ## team: Team number, or -1 to use the summoner's team
-static func create_team_zone(team: int = -1, randomization: float = 0.0) -> SpawnLocationConfig:
+static func create_team_zone(p_team: int = -1, randomization: float = 0.0) -> SpawnLocationConfig:
 	var config := SpawnLocationConfig.new()
 	config.location_type = LocationType.TEAM_ZONE
-	config.team = team
+	config.team = p_team
 	config.randomization_radius = randomization
 	return config
 

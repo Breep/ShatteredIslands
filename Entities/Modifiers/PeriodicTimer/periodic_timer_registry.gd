@@ -1,72 +1,68 @@
 class_name PeriodicTimerRegistry
 extends Node
 
-## Registry that creates and manages periodic timers on behalf of cards.
-## Cards (Resources) can't own Nodes, so this registry owns the Timer children.
-## Supports pause/resume (for STUN) and full cleanup on battle end.
+# Structure interne pour stocker l'état de chaque effet
+class TickEffect:
+	var id: StringName
+	var period_ticks: int
+	var ticks_left: int
+	var callback: Callable
+	var is_running: bool = false
 
-var _timers: Dictionary[StringName, Timer] = {}
-var _paused_timers: Dictionary[StringName, float] = {} # id -> time_left
+# Liste des effets (on préfère une Array pour un tri stable) 
+var _effects: Array[TickEffect] = []
 
+# Conversion des secondes en ticks (basé sur 60 FPS physiques)
+func _to_ticks(seconds: float) -> int:
+	return int(round(seconds * 60.0))
 
 func register(id: StringName, period: float, callback: Callable, autostart: bool = false) -> void:
-	if _timers.has(id):
-		push_warning("[PeriodicTimerRegistry] Timer already registered: ", id)
-		return
+	unregister(id) # Évite les doublons
 
-	var timer := Timer.new()
-	timer.wait_time = period
-	timer.one_shot = false
-	add_child(timer)
-	timer.timeout.connect(callback)
-	_timers[id] = timer
+	var new_effect = TickEffect.new()
+	new_effect.id = id
+	new_effect.period_ticks = _to_ticks(period)
+	new_effect.ticks_left = new_effect.period_ticks
+	new_effect.callback = callback
+	new_effect.is_running = autostart
 
-	if autostart:
-		timer.start()
-
+	_effects.append(new_effect)
+	# On trie par ID pour garantir que l'ordre d'exécution est identique partout
+	_effects.sort_custom(func(a, b): return a.id < b.id)
 
 func unregister(id: StringName) -> void:
-	if not _timers.has(id):
-		return
+	for i in range(_effects.size() - 1, -1, -1):
+		if _effects[i].id == id:
+			_effects.remove_at(i)
+			break
 
-	var timer: Timer = _timers[id]
-	timer.stop()
-	timer.queue_free()
-	_timers.erase(id)
-	_paused_timers.erase(id)
 
+func process_tick() -> void:
+	for effect in _effects:
+		if not effect.is_running:
+			continue
+			
+		effect.ticks_left -= 1
+
+		if effect.ticks_left <= 0:
+			# L'effet se déclenche
+			effect.callback.call()
+			# On réinitialise avec la période exacte (déterminisme parfait)
+			effect.ticks_left = effect.period_ticks
+
+# --- Méthodes de compatibilité avec ton ancien code ---
 
 func start_all() -> void:
-	for id: StringName in _timers.keys():
-		Verbose.debug("Starting [" + id + "] periodic timer")
-		_timers[id].start()
-
+	for e in _effects: e.is_running = true
 
 func stop_all() -> void:
-	for id: StringName in _timers.keys():
-		Verbose.debug("Stopping [" + id + "] periodic timer")
-		_timers[id].stop()
-	_paused_timers.clear()
-
+	for e in _effects: e.is_running = false
 
 func pause_all() -> void:
-	for id: StringName in _timers.keys():
-		var timer: Timer = _timers[id]
-		if not timer.is_stopped():
-			_paused_timers[id] = timer.time_left
-			timer.stop()
-
+	stop_all() # Plus besoin de stocker time_left, ticks_left est déjà là
 
 func resume_all() -> void:
-	for id: StringName in _timers.keys():
-		if _paused_timers.has(id):
-			_timers[id].start(_paused_timers[id])
-	_paused_timers.clear()
-
+	start_all()
 
 func clear_all() -> void:
-	for id: StringName in _timers.keys():
-		_timers[id].stop()
-		_timers[id].queue_free()
-	_timers.clear()
-	_paused_timers.clear()
+	_effects.clear()

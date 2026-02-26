@@ -12,7 +12,7 @@ func signal_action_done(source: Entity, target: Entity, action_type: Utils.Actio
 	action_done.emit(source, target, action_type, action_id, value, is_critical)
 
 signal projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.Type, projectile: Projectile)
-func signal_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.Type, projectile_modifiers: Array, projectile: Projectile) -> void:
+func signal_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.Type, projectile: Projectile) -> void:
 	projectile_spawned.emit(source, target, projectile_type, projectile)
 
 signal spell_casted(source: Entity, target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary)
@@ -22,6 +22,10 @@ func signal_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type,
 signal entity_died(victim: Entity)
 func signal_entity_died(victim: Entity) -> void:
 	entity_died.emit(victim)
+
+signal entity_spawned(entity: Entity, entity_type: Entity.EntityType, entity_modifier: Dictionary)
+func signal_entity_spawned(entity: Entity, entity_type: Entity.EntityType, entity_modifier: Dictionary) -> void:
+	entity_spawned.emit(entity, entity_type, entity_modifier)
 
 # ============================== Network Export variables ==============================
 
@@ -58,11 +62,10 @@ var arena_zone_manager: ArenaZoneManager:
 
 @export var _fighting_floors: Dictionary[Battle.BattleType, FightingFloor]
 
-@export var _entities_node: Node3D
-
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
+	fighting_manager.init(spawn_manager)
 	if _ready_checks() != true:
 		return
 
@@ -72,13 +75,13 @@ func _ready() -> void:
 # Connect all heroes to this FightingArea
 func init_fight(heroes: Array[Hero], battle_type: Battle.BattleType, battle_id: int = -1) -> void:
 	Verbose.debug("Initiating a fight | " + str(Battle.BattleType.keys()[battle_type]) + " | " + str(heroes.size()) + " | " + str(battle_id), Verbose.Category.FIGHTING_AREA)
-	var hero_spawner: HeroSpawner = _set_fighting_floor(battle_type)
+	var hero_spawner: HeroSpawner = _set_fighting_floor(battle_type).init(spawn_manager)
 	if hero_spawner == null:
 		Verbose.error("FightingArea: No HeroSpawner for this battle type: " + str(Battle.BattleType.keys()[battle_type]), Verbose.Category.FIGHTING_AREA)
 		return
 	
 	_entity_manager.clear()
-	hero_spawner.spawn_heroes(heroes, _entities_node)
+	hero_spawner.spawn_heroes(heroes)
 	
 	_heroes = heroes
 	_battle_type = battle_type

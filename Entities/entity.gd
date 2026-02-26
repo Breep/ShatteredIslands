@@ -5,15 +5,24 @@ extends CharacterBody3D
 
 #region ============================== Signals ==============================
 signal died(self_ref: Entity)
+@warning_ignore("unused_signal")
 signal interaction_received(source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool)
+@warning_ignore("unused_signal")
 signal action_done(target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool)
+@warning_ignore("unused_signal")
 signal action_dodged(source: Entity, action_type: Utils.ActionType)
+@warning_ignore("unused_signal")
 signal critical_action_done(target: Entity, action_type: Utils.ActionType, value_before_crit: float, value_after_crit: float)
+@warning_ignore("unused_signal")
 signal action_overhealed(target: Entity, amount: float)
+@warning_ignore("unused_signal")
 signal damage_taken(damage: float, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool)
+@warning_ignore("unused_signal")
 signal heal_taken(heal_amount: float, is_critical: bool)
 signal spell_casted(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary)
+@warning_ignore("unused_signal")
 signal stack_taken(stack_type: Utils.StackType, stack_number: float, is_critical: bool)
+@warning_ignore("unused_signal")
 signal auto_attack_completed()
 signal spawn_completed()
 #endregion
@@ -68,6 +77,8 @@ enum FieldGeneratorModifier {
 #endregion
 
 #region ============================== Public variables ==============================
+var uid: int = -1 # Multiplayer ID of the entity
+
 var _is_targetable: bool = true
 var is_targetable: bool:
 	get:
@@ -124,7 +135,6 @@ var _spawn_tween: Tween = null
 #endregion
 
 #region ============================== Export ==============================
-@export var id: int = -1 # Multiplayer ID of the entity
 @export var team: int = -1 # Team number of the entity
 @export var battle_id: int = -1 # The id of the battle the entity is in
 @export var entity_name: String = "<entity name>"
@@ -201,26 +211,10 @@ func is_dead() -> bool:
 	return life_state == LifeState.DEAD
 #endregion
 
-#region ============================== Static variables ==============================
-## Server-authoritative ID counter. Only the server should call generate_network_id().
-static var _next_network_id: int = 0
-
-static func generate_network_id() -> int:
-	var assigned_id: int = _next_network_id
-	_next_network_id += 1
-	return assigned_id
-
-static func reset_network_ids() -> void:
-	_next_network_id = 0
-#endregion
-
-
 # ============================== Node base functions ==============================
 
 #region ============================== Init ==============================
 func _init() -> void:
-	# id stays at default (-1) until assigned by the server
-
 	# Stats
 	stats = EntityStats.new()
 	_base_stats = EntityStats.new()
@@ -228,9 +222,11 @@ func _init() -> void:
 	# Default Modifier Registries
 	auto_attack_modifier_registry = AutoAttackModifierRegistry.new()
 	action_modifiers_registry = ActionModifiersRegistry.new()
+	Verbose.trace("Entity [" + entity_name + "_" + str(uid) + "] init", Verbose.Category.ENTITY)
 
 
 func _enter_tree() -> void:
+	Verbose.trace("Entity [" + entity_name + "_" + str(uid) + "] enter_tree", Verbose.Category.ENTITY)
 	# Stats registry needs to be created after _init() because custom_base_stats is not available in _init()
 	if custom_base_stats != null:
 		_base_stats = custom_base_stats
@@ -251,7 +247,7 @@ func _ready() -> void:
 	if status_module != null:
 		status_module.stunned_changed.connect(_on_stunned_changed)
 	
-	Verbose.debug("Entity [" + entity_name + "] ready", Verbose.Category.ENTITY)
+	Verbose.trace("Entity [" + entity_name + "_" + str(uid) + "] ready", Verbose.Category.ENTITY)
 
 	fighting_state_changed.connect(_on_fighting_state_changed)
 	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
@@ -264,6 +260,8 @@ func _ready() -> void:
 		_original_fighting_state = _initial_fighting_state_from_context
 	else:
 		_original_fighting_state = fighting_state if fighting_state != FightingState.UNDEF else FightingState.IDLE
+	
+	input_event.connect(_on_input_event)
 	
 	# Connect module interdependencies
 	_connect_module_dependencies()
@@ -303,6 +301,10 @@ func get_collision_center() -> Vector3:
 	
 	# Fallback to global position if no collision shape found
 	return global_position
+
+
+func process_tick() -> void:
+	pass
 #endregion
 
 #region ============================== Context ==============================
@@ -361,9 +363,8 @@ func direct_damage(target: Entity, damage: float, damage_type: Utils.DamageType,
 func direct_damage_percent(target: Entity, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier, action_id: StringName) -> float:
 	return _damage_sender.direct_damage_percent(target, damage_percent, damage_type, percent_modifier, action_id) if _damage_sender != null else 0.0
 
-func auto_attack(target: Entity) -> void:
-	if _auto_attack_sender == null: return
-	_auto_attack_sender.execute_auto_attack(target)
+func auto_attack(target: Entity) -> bool:
+	return _auto_attack_sender.execute_auto_attack(target) if _auto_attack_sender != null else false
 
 func projectile_attack(target: Entity, projectile_type: Projectile.Type, projectile_spawn: Node3D, projectile_stats: ProjectileStats, is_auto_attack: bool = false) -> void:
 	if _projectile_sender == null: return
@@ -472,7 +473,8 @@ func _play_spawn_animation() -> void:
 func _complete_spawn() -> void:
 	Verbose.debug("Entity [" + entity_name + "] completing spawn", Verbose.Category.ENTITY)
 	_is_targetable = true
-	fighting_state = _original_fighting_state
+	if _fighting_state != FightingState.FIGHTING:
+		fighting_state = _original_fighting_state
 	spawn_completed.emit()
 	Verbose.debug("Entity [" + entity_name + "] spawn completed", Verbose.Category.ENTITY)
 #endregion
@@ -510,7 +512,6 @@ func _auto_load_modules() -> void:
 			Module.ModuleType.AUTO_ATTACK_PERIODIC_MODULE: _auto_attack_periodic_module = module
 		
 		add_child(module)
-		Verbose.debug("Entity [" + entity_name + "] auto-loaded module: " + Module.ModuleType.keys()[module_type], Verbose.Category.ENTITY)
 
 
 func _connect_module_dependencies() -> void:
@@ -581,3 +582,21 @@ func _on_stunned_changed(is_active: bool, _duration: float, _infinite: bool) -> 
 
 func _on_stunned(_is_active: bool) -> void:
 	pass
+
+
+func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			Events.entity_cliked.emit(self)
+			Verbose.debug("L'entité " + entity_name + " a été cliquée !", Verbose.Category.ENTITY)
+			_play_on_click_animation()
+	
+
+var _click_tween: Tween
+func _play_on_click_animation() -> void:
+	if _click_tween != null: _click_tween.stop()
+	_click_tween = create_tween()
+	_click_tween.set_ease(Tween.EASE_OUT)
+	_click_tween.set_trans(Tween.TRANS_BACK)
+	_click_tween.tween_property(_visual_3d, "scale", Vector3(1.2, 1.2, 1.2), 0.1)
+	_click_tween.tween_property(_visual_3d, "scale", Vector3.ONE, 0.1)

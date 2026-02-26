@@ -4,7 +4,7 @@ extends Stack
 ## Simple stack implementation that stores a single float value
 ## Used for: Poison, Necrosis
 
-func add_stack(amount: float, source: Entity = null, action_id: StringName = "", mod: Dictionary = {}) -> float:
+func add_stack(amount: float, _source: Entity = null, _action_id: StringName = "", _mod: Dictionary = {}) -> float:
 	_total_stacks += amount
 	return _total_stacks
 

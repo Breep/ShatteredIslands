@@ -24,8 +24,6 @@ extends Node
 @onready var _projectile_type_choice: OptionButton = %ProjectileTypeChoice
 
 @onready var _speed_text_edit: TextEdit = %SpeedTextEdit
-@onready var _physical_damage_text_edit: TextEdit = %PhysicalDamageTextEdit
-@onready var _magical_damage_text_edit: TextEdit = %MagicalDamageTextEdit
 @onready var _bounce_text_edit: TextEdit = %BounceTextEdit
 
 @onready var _spell_type_choice: OptionButton = %SpellTypeChoice
@@ -153,6 +151,8 @@ func _ready() -> void:
 	
 	if entity_owner != null:
 		_entity_name_label.text = entity_owner.entity_name
+	
+	Events.entity_cliked.connect(_on_entity_clicked)
 
 
 func _refresh_target() -> void:
@@ -167,7 +167,7 @@ func _refresh_target() -> void:
 	_target = entity_owner.target_module.get_target(targeting_strategy)
 	
 	if _target != null:
-		_target_label.text = "Target: " + _target.entity_name + " [ID:" + str(_target.id) + "]"
+		_target_label.text = "Target: " + _target.entity_name + " [ID:" + str(_target.uid) + "]"
 		print("DEBUG: Target refreshed - ", _target.entity_name, " using strategy: ", TargetModule.TargettingStrategy.keys()[targeting_strategy])
 	else:
 		_target_label.text = "[color=red]<undefined>[/color]"
@@ -329,7 +329,7 @@ func _on_targeting_strat_choice_item_selected(index: int) -> void:
 	_target = entity_owner.target_module.get_target(targeting_strategy)
 	
 	if _target != null:
-		_target_label.text = "Target: " + _target.entity_name + " [ID:" + str(_target.id) + "]"
+		_target_label.text = "Target: " + _target.entity_name + " [ID:" + str(_target.uid) + "]"
 		print("DEBUG: Target selected - ", _target.entity_name, " using strategy: ", TargetModule.TargettingStrategy.keys()[targeting_strategy])
 	else:
 		_target_label.text = "Target: None (strategy returned null)"
@@ -337,30 +337,31 @@ func _on_targeting_strat_choice_item_selected(index: int) -> void:
 
 
 func _on_projectile_attack_button_pressed() -> void:
-	_refresh_target()
 	
-	if _target == null:
-		printerr("EntityController: No target selected for projectile_attack")
-		return
-	
-	if entity_owner == null:
-		printerr("EntityController: No entity_owner for projectile_attack")
-		return
-	
-	var projectile_type: Projectile.Type = _projectile_type_choice.get_selected_id() as Projectile.Type
-	var projectile_spawn: Node3D = entity_owner.get_auto_attack_spawn()
-	var projectile_stats: ProjectileStats = ProjectileStats.new()
-	
-	# Build stats from UI inputs
-	var speed_text: String = _speed_text_edit.text.strip_edges()
-	projectile_stats.speed = speed_text.to_int() if not speed_text.is_empty() else 20
-	
-	var bounce_text: String = _bounce_text_edit.text.strip_edges()
-	var bounce_count: int = bounce_text.to_int() if not bounce_text.is_empty() else 0
-	projectile_stats.bounces_remaining = bounce_count
-	
-	entity_owner.projectile_attack(_target, projectile_type, projectile_spawn, projectile_stats, false)
-	print("DEBUG: projectile_attack called - Target: ", _target.entity_name, " | Type: ", Projectile.Type.keys()[projectile_type])
+	for i in 1:
+		_refresh_target()
+		if _target == null:
+			printerr("EntityController: No target selected for projectile_attack")
+			return
+		
+		if entity_owner == null:
+			printerr("EntityController: No entity_owner for projectile_attack")
+			return
+		
+		var projectile_type: Projectile.Type = _projectile_type_choice.get_selected_id() as Projectile.Type
+		var projectile_spawn: Node3D = entity_owner.get_auto_attack_spawn()
+		var projectile_stats: ProjectileStats = ProjectileStats.new()
+		
+		# Build stats from UI inputs
+		var speed_text: String = _speed_text_edit.text.strip_edges()
+		projectile_stats.speed = speed_text.to_int() if not speed_text.is_empty() else 20
+		
+		var bounce_text: String = _bounce_text_edit.text.strip_edges()
+		var bounce_count: int = bounce_text.to_int() if not bounce_text.is_empty() else 0
+		projectile_stats.bounces_remaining = bounce_count
+		
+		entity_owner.projectile_attack(_target, projectile_type, projectile_spawn, projectile_stats, false)
+		print("DEBUG: projectile_attack called - Target: ", _target.entity_name, " | Type: ", Projectile.Type.keys()[projectile_type])
 
 
 func _update_spell_parameters(spell_type: Spell.Type) -> void:
@@ -626,7 +627,7 @@ func _populate_entity_choices() -> void:
 	_all_entities = all_entities
 	for i in range(_all_entities.size()):
 		var entity: Entity = _all_entities[i]
-		var display_name: String = entity.entity_name + " [ID:" + str(entity.id) + "]"
+		var display_name: String = entity.entity_name + " [ID:" + str(entity.uid) + "]"
 		_entity_choice.add_item(display_name, i)
 	
 	print("DEBUG: Populated entity choice with ", _all_entities.size(), " entities")
@@ -646,75 +647,76 @@ func _on_summon_entity_button_pressed() -> void:
 		printerr("EntityController: No entity_owner for summon_entity")
 		return
 	
-	var entity_type: Entity.EntityType = _entity_type_choice.get_selected_id() as Entity.EntityType
-	var spawn_type: SpawnLocationConfig.LocationType = _spawn_type_choice.get_selected_id() as SpawnLocationConfig.LocationType
-	
-	# Build SpawnLocationConfig
-	var spawn_config := SpawnLocationConfig.new()
-	spawn_config.location_type = spawn_type
-	
-	# Configure spawn parameters based on spawn type
-	var random_radius: float = _random_radius_edit.text.to_float()
-	spawn_config.randomization_radius = random_radius
-	
-	match spawn_type:
-		SpawnLocationConfig.LocationType.EXACT:
-			# spawn_summon_localizer is only required for EXACT spawn type
-			if spawn_summon_localizer == null:
-				printerr("EntityController: spawn_summon_localizer is required for EXACT spawn type")
-				return
-			spawn_config.exact_position = spawn_summon_localizer.global_position
+	for i in 10:
+		var entity_type: Entity.EntityType = _entity_type_choice.get_selected_id() as Entity.EntityType
+		var spawn_type: SpawnLocationConfig.LocationType = _spawn_type_choice.get_selected_id() as SpawnLocationConfig.LocationType
 		
-		SpawnLocationConfig.LocationType.ARENA_CENTER:
-			# No additional config needed
-			pass
+		# Build SpawnLocationConfig
+		var spawn_config := SpawnLocationConfig.new()
+		spawn_config.location_type = spawn_type
 		
-		SpawnLocationConfig.LocationType.TEAM_ZONE:
-			var team: int = _team_edit.text.to_int()
-			spawn_config.team = team
+		# Configure spawn parameters based on spawn type
+		var random_radius: float = _random_radius_edit.text.to_float()
+		spawn_config.randomization_radius = random_radius
 		
-		SpawnLocationConfig.LocationType.ENTITY:
-			# Use the selected entity from dropdown
-			var selected_index: int = _entity_choice.get_selected_id()
-			if selected_index >= 0 and selected_index < _all_entities.size():
-				spawn_config.target_entity = _all_entities[selected_index]
-			else:
-				printerr("EntityController: Invalid entity selection for ENTITY spawn type")
-				# Fallback to spawn_summon_localizer
-				spawn_config.target_entity = spawn_summon_localizer
+		match spawn_type:
+			SpawnLocationConfig.LocationType.EXACT:
+				# spawn_summon_localizer is only required for EXACT spawn type
+				if spawn_summon_localizer == null:
+					printerr("EntityController: spawn_summon_localizer is required for EXACT spawn type")
+					return
+				spawn_config.exact_position = spawn_summon_localizer.global_position
+			
+			SpawnLocationConfig.LocationType.ARENA_CENTER:
+				# No additional config needed
+				pass
+			
+			SpawnLocationConfig.LocationType.TEAM_ZONE:
+				var team: int = _team_edit.text.to_int()
+				spawn_config.team = team
+			
+			SpawnLocationConfig.LocationType.ENTITY:
+				# Use the selected entity from dropdown
+				var selected_index: int = _entity_choice.get_selected_id()
+				if selected_index >= 0 and selected_index < _all_entities.size():
+					spawn_config.target_entity = _all_entities[selected_index]
+				else:
+					printerr("EntityController: Invalid entity selection for ENTITY spawn type")
+					# Fallback to spawn_summon_localizer
+					spawn_config.target_entity = spawn_summon_localizer
+			
+			SpawnLocationConfig.LocationType.RANDOM_ARENA:
+				# No additional config needed
+				pass
 		
-		SpawnLocationConfig.LocationType.RANDOM_ARENA:
-			# No additional config needed
-			pass
-	
-	# Build entity_modifier dictionary based on entity type
-	var entity_modifier: Dictionary = {}
-	
-	match entity_type:
-		Entity.EntityType.HERO:
-			# Heroes don't have modifiers in summon context
-			pass
+		# Build entity_modifier dictionary based on entity type
+		var entity_modifier: Dictionary = {}
 		
-		Entity.EntityType.SNAKE_BARREL:
-			entity_modifier[Entity.SnakeBarrelModifier.SNAKE_NUMBER] = int(_entity_param1_edit.text.to_float())
-			entity_modifier[Entity.SnakeBarrelModifier.SNAKE_POISON_STACKS] = _entity_param2_edit.text.to_float()
-			entity_modifier[Entity.SnakeBarrelModifier.MAX_HEALTH] = _entity_param3_edit.text.to_float()
+		match entity_type:
+			Entity.EntityType.HERO:
+				# Heroes don't have modifiers in summon context
+				pass
+			
+			Entity.EntityType.SNAKE_BARREL:
+				entity_modifier[Entity.SnakeBarrelModifier.SNAKE_NUMBER] = int(_entity_param1_edit.text.to_float())
+				entity_modifier[Entity.SnakeBarrelModifier.SNAKE_POISON_STACKS] = _entity_param2_edit.text.to_float()
+				entity_modifier[Entity.SnakeBarrelModifier.MAX_HEALTH] = _entity_param3_edit.text.to_float()
+			
+			Entity.EntityType.SNAKE:
+				# Snakes don't have modifiers
+				pass
+			
+			Entity.EntityType.FIELD_GENERATOR:
+				entity_modifier[Entity.FieldGeneratorModifier.MAX_HEALTH] = _entity_param1_edit.text.to_float()
+				entity_modifier[Entity.FieldGeneratorModifier.SHIELD_AMOUNT] = _entity_param2_edit.text.to_float()
+				entity_modifier[Entity.FieldGeneratorModifier.SHIELD_INTERVAL] = _entity_param3_edit.text.to_float()
+				entity_modifier[Entity.FieldGeneratorModifier.INITIAL_SHIELD] = int(_entity_param4_edit.text.to_float())
+				entity_modifier[Entity.FieldGeneratorModifier.TARGET_COUNT] = int(_entity_param5_edit.text.to_float())
 		
-		Entity.EntityType.SNAKE:
-			# Snakes don't have modifiers
-			pass
-		
-		Entity.EntityType.FIELD_GENERATOR:
-			entity_modifier[Entity.FieldGeneratorModifier.MAX_HEALTH] = _entity_param1_edit.text.to_float()
-			entity_modifier[Entity.FieldGeneratorModifier.SHIELD_AMOUNT] = _entity_param2_edit.text.to_float()
-			entity_modifier[Entity.FieldGeneratorModifier.SHIELD_INTERVAL] = _entity_param3_edit.text.to_float()
-			entity_modifier[Entity.FieldGeneratorModifier.INITIAL_SHIELD] = int(_entity_param4_edit.text.to_float())
-			entity_modifier[Entity.FieldGeneratorModifier.TARGET_COUNT] = int(_entity_param5_edit.text.to_float())
-	
-	entity_owner.summon_entity(entity_type, spawn_config, entity_modifier)
-	print("DEBUG: summon_entity called - Type: ", Entity.EntityType.keys()[entity_type],
-		" | Spawn: ", SpawnLocationConfig.LocationType.keys()[spawn_type],
-		" | Modifiers: ", entity_modifier)
+		entity_owner.summon_entity(entity_type, spawn_config, entity_modifier)
+		print("DEBUG: summon_entity called - Type: ", Entity.EntityType.keys()[entity_type],
+			" | Spawn: ", SpawnLocationConfig.LocationType.keys()[spawn_type],
+			" | Modifiers: ", entity_modifier)
 
 
 func _on_auto_attack_button_pressed() -> void:
@@ -745,3 +747,7 @@ func _on_inflict_status_button_pressed() -> void:
 	
 	entity_owner.inflict_status(_target, status_type, status_duration, action_id)
 	print("DEBUG: inflict_status called - Target: ", _target.entity_name, " | Type: ", Status.Type.keys()[status_type], " | Duration: ", status_duration)
+
+
+func _on_entity_clicked(entity: Entity) -> void:
+	entity_owner = entity

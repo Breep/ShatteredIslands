@@ -58,13 +58,13 @@ func get_entity(entity_id: int) -> Entity:
 # ============================== Private functions ==============================
 
 func _register_entity(entity: Entity) -> void:
-	if _entities.has(entity.id):
-		Verbose.error("Entity " + entity.name + " (" + str(entity.id) + ") is already registered. Existing: " + _entities[entity.id].name + " [" + str(get_path()) + "]", Verbose.Category.ENTITY_MANAGER)
+	if _entities.has(entity.uid):
+		Verbose.error("Entity " + entity.name + " (" + str(entity.uid) + ") is already registered. Existing: " + _entities[entity.uid].name + " [" + str(get_path()) + "]", Verbose.Category.ENTITY_MANAGER)
 		return
 	
-	_entities[entity.id] = entity
+	_entities[entity.uid] = entity
 	if entity is Hero:
-		_heroes[entity.id] = entity
+		_heroes[entity.uid] = entity
 	
 	entity.spell_casted.connect(_on_entity_spell_casted.bind(entity))
 	entity.action_done.connect(_on_entity_action_done.bind(entity))
@@ -78,8 +78,8 @@ func _kick_entity(entity: Entity) -> void:
 	if entity.died.is_connected(_on_entity_died): entity.died.disconnect(_on_entity_died)
 	if entity.action_done.is_connected(_on_entity_action_done): entity.action_done.disconnect(_on_entity_action_done)
 	if entity.interaction_received.is_connected(_on_entity_interaction_received): entity.interaction_received.disconnect(_on_entity_interaction_received)
-	entities.erase(entity.id)
-	if _heroes.has(entity.id): _heroes.erase(entity.id)
+	entities.erase(entity.uid)
+	if _heroes.has(entity.uid): _heroes.erase(entity.uid)
 
 # ============================== Callbacks ==============================
 

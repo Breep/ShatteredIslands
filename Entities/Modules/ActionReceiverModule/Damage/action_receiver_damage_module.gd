@@ -11,6 +11,7 @@ func take_damage(damage: float, damage_type: Utils.DamageType, is_critical: bool
 			_owner.action_dodged.emit(source, Utils.damage_to_action(damage_type))
 			return 0
 		if _is_blocked(): return 0
+		_handle_thorn(source, action_id)
 		damage *= _get_resistance_vulnerability_multiplier(Utils.damage_to_action(damage_type))
 		if is_critical:
 			damage *= _get_crit_resistance_multiplier(Utils.damage_to_action(damage_type))
@@ -39,3 +40,9 @@ func _is_blocked() -> bool:
 		_owner.stats.block -= 1
 		return true
 	return false
+
+
+func _handle_thorn(source: Entity, action_id: StringName) -> void:
+	if action_id != &"auto_attack": return
+	if _owner.stats.thorn >= 1 and is_instance_valid(source):
+		_owner.direct_damage(source, _owner.stats.thorn, Utils.DamageType.PHYSICAL, action_id)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7amwfq46wq4w"
-path="res://.godot/imported/card_outline.png-a597e9762d7af5ca929f9b6e2470cd37.ctex"
+uid="uid://dn4cx5jpgh7ae"
+path="res://.godot/imported/ct_level_star_1.png-89b68dfb8e50854fac783e9b8d19e712.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Card/2D/CardLayout/Data/card_outline.png"
-dest_files=["res://.godot/imported/card_outline.png-a597e9762d7af5ca929f9b6e2470cd37.ctex"]
+source_file="res://Card/2D/CardLayout/Data/StandardCard/Stars/ct_level_star_1.png"
+dest_files=["res://.godot/imported/ct_level_star_1.png-89b68dfb8e50854fac783e9b8d19e712.ctex"]
 
 [params]
 

@@ -115,6 +115,7 @@ func apply_randomization(position: Vector3, radius: float) -> Vector3:
 
 # ============================== Private functions ==============================
 
+#TODO Handle more shapes
 ## Get a random position within an Area3D's collision shape
 func _get_random_position_in_area(area: Area3D) -> Vector3:
 	if area == null:
@@ -142,7 +143,7 @@ func _get_random_position_in_area(area: Area3D) -> Vector3:
 
 
 ## Get a random position within a BoxShape3D
-func _get_random_position_in_box(area_position: Vector3, shape_position: Vector3, box_shape: BoxShape3D) -> Vector3:
+func _get_random_position_in_box(_area_position: Vector3, shape_position: Vector3, box_shape: BoxShape3D) -> Vector3:
 	var size := box_shape.size
 	var half_size := size / 2.0
 	
