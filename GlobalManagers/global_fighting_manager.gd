@@ -137,7 +137,7 @@ func _on_fighting_phase_state_changed(new_fighting_phase_state: FightingPhaseSta
 		FightingPhaseState.NORMAL:
 			duration = GameManager.game_rules.duration_fighting_normal
 			Verbose.debug("[State=NORMAL] (" + str(duration) + "s)", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
-			for fighting_manager in _fighting_managers:
+			for fighting_manager in _current_active_fighting_managers:
 				fighting_manager.start()
 		
 		FightingPhaseState.ACCELERATED:

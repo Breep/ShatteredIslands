@@ -193,7 +193,7 @@ func _on_gfm_fighting_phase_state_changed(state: GlobalFightingManager.FightingP
 			_is_accelerated_fight = true
 		GlobalFightingManager.FightingPhaseState.FINISHED:
 			_is_recording = false
-			_save_logs_to_file()
+			#_save_logs_to_file()
 			_battle_logs.clear()
 
 

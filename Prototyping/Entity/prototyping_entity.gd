@@ -18,8 +18,7 @@ func _ready() -> void:
 	_respawn_entites_with_spawn_manager()
 	
 	_center_point_camera.set_active()
-	_fighting_manager.init(_spawn_manager)
-	_fighting_manager.start(42)
+	_fighting_manager.init(_spawn_manager, 42)
 	_auto_attack_check_button.button_pressed = _auto_attack_enabled
 	_family_managers_check_button.button_pressed = _family_managers_enabled
 

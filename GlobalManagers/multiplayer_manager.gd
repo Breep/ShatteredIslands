@@ -24,7 +24,7 @@ func _ready() -> void:
 		return
 
 	auto_start_time = float(_get_cmd_arg("auto-start", "0"))
-	expected_clients = int(_get_cmd_arg("expected_clients", "1"))
+	expected_clients = int(_get_cmd_arg("expected-clients", "1"))
 	
 	Verbose.info("Starting multiplayer manager", Verbose.Category.NET)
 	

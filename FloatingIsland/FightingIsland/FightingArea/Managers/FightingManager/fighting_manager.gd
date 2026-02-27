@@ -58,12 +58,12 @@ func init(spawn_manager: SpawnManager, battle_id: int, heroes: Array[Hero] = [])
 	Utils.register_battle_rng(_battle_id, hash(str(_battle_id))) # TODO Make the server generate seeds and send it to clients
 	_setup_heroes_dictionary(heroes)
 	_connect_to_heroes_signals()
+	fight_is_ready_to_be_started.emit(self)
 
 
 func start() -> void:
 	current_tick = 0
 	_is_active = true
-	fight_is_ready_to_be_started.emit(self)
 #endregion
 
 #region ============================== Private functions ==============================
