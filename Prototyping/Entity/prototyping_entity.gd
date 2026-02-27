@@ -38,7 +38,8 @@ func _respawn_entites_with_spawn_manager() -> void:
 				"hero_id": child.hero_desc.id,
 				"global_pos": child.global_position,
 				"global_rot": child.global_rotation,
-				"context": child.get_context()
+				"context": child.get_context(),
+				"family_level": child._override_family_levels.duplicate(true)
 			}
 			child.queue_free()
 			
@@ -48,6 +49,7 @@ func _respawn_entites_with_spawn_manager() -> void:
 			hero._custom_deck = entity_data["custom_deck"]
 			hero.team = entity_data["team"]
 			
+			hero._override_family_levels = entity_data["family_level"]
 			_spawn_manager.spawn_entity(hero, entity_data["global_pos"], entity_data["context"])
 			hero.global_rotation = entity_data["global_rot"]
 			_entities.append(hero)
