@@ -173,7 +173,7 @@ var _spawn_ticks_remaining: int = -1
 
 @onready var bds_registry := EntityBDSRegistry.new(entity_name)
 
-#region ============================== Life State ==============================
+#region ============================== Misc State ==============================
 signal life_state_changed(new_life_state: LifeState)
 var _life_state: LifeState = LifeState.ALIVE
 var life_state: LifeState:
@@ -182,9 +182,7 @@ var life_state: LifeState:
 		if value != _life_state:
 			_life_state = value
 			life_state_changed.emit(_life_state)
-#endregion
 
-#region ============================== Fighting State ==============================
 signal fighting_state_changed(new_fighting_state: FightingState)
 var _fighting_state: FightingState = FightingState.UNDEF
 var _initial_fighting_state_from_context: FightingState = FightingState.UNDEF # Stored during apply_context
@@ -194,6 +192,15 @@ var fighting_state: FightingState:
 		if value != _fighting_state:
 			_fighting_state = value
 			fighting_state_changed.emit(_fighting_state)
+
+signal is_moving_changed(state: bool)
+var _is_moving: bool = false
+var is_moving: bool:
+	get: return _is_moving
+	set(value):
+		if value != _is_moving:
+			_is_moving = value
+			is_moving_changed.emit(_is_moving)
 #endregion
 
 #region ============================== Status States ==============================

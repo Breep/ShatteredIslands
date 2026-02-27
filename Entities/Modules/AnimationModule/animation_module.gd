@@ -65,6 +65,7 @@ func _ready() -> void:
 	
 	_entity_owner.died.connect(_on_entity_owner_died)
 	_entity_owner.fighting_state_changed.connect(_on_entity_owner_fighting_state_changed)
+	_entity_owner.is_moving_changed.connect(_on_entity_owner_is_moving_changed)
 	
 	# NOTE: No longer connecting to _animation_player.attack_done — logic is tick-driven
 	
@@ -77,27 +78,9 @@ func connect_modules(auto_attack_module: ActionSenderAutoAttackModule) -> void:
 		auto_attack_module.attack_started.connect(_on_entity_owner_auto_attack_started)
 
 
-func _process(_delta: float) -> void:
-	if _lock_animation: return
-	if _entity_owner == null:
-		return
-	
-	# Check entity velocity to determine movement animation
-	var velocity_magnitude: float = _entity_owner.velocity.length()
-	
-	var target_state: String = VALUE_TRANSITION_FIGHTING_IDLE
-	
-	if velocity_magnitude >= RUN_SPEED_THRESHOLD:
-		target_state = VALUE_TRANSITION_FIGHTING_RUN
-	elif velocity_magnitude >= WALK_SPEED_THRESHOLD:
-		target_state = VALUE_TRANSITION_FIGHTING_WALK
-	else:
-		target_state = VALUE_TRANSITION_FIGHTING_IDLE
-	
-	# Only update if state changed
-	if target_state != _current_movement_state:
-		_current_movement_state = target_state
-		_animation_tree.set(PARAM_TRANSITION_FIGHTING, target_state)
+func stop_attack_animation() -> void:
+	_animation_tree.set(PARAM_ONE_SHOT_ATTACK, AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
+
 
 #region signals
 func _on_entity_owner_fighting_state_changed(new_state: Entity.FightingState) -> void:
@@ -144,10 +127,9 @@ func _on_idle_variation_timer_timeout() -> void:
 	_animation_tree.set(PARAM_ONE_SHOT_SITTING, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	_restart_idle_variation_animation()
 
-
-func stop_attack_animation() -> void:
-	_animation_tree.set(PARAM_ONE_SHOT_ATTACK, AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
-
+func _on_entity_owner_is_moving_changed(is_moving: bool) -> void:
+	if _lock_animation: return
+	_animation_tree.set(PARAM_TRANSITION_FIGHTING, VALUE_TRANSITION_FIGHTING_IDLE if not is_moving else VALUE_TRANSITION_FIGHTING_WALK)
 #endregion
 
 #region private methods
