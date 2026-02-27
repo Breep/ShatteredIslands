@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bxow3cbpwiaom"]
+
+[node name="M_island" unique_id=1630125071]
+
+[node name="Props_Grass2" parent="RootNode/ISLAND/Props_Grass" parent_id_path=PackedInt32Array(119075589) index="0" unique_id=630326241]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.813065, 0)

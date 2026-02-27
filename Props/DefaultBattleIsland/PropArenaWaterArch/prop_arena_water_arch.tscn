@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://bt46vkjqsly1q"]
-
-[ext_resource type="PackedScene" uid="uid://cv3wfryc03qn7" path="res://Props/DefaultBattleIsland/PropArenaWaterArch/Water_arch.glb" id="1_v40pc"]
-
-[node name="Water_arch" unique_id=2125761781 instance=ExtResource("1_v40pc")]
-
-[node name="wather_arch" parent="." index="0" unique_id=1372018065]
-transform = Transform3D(3, 0, 0, 0, -1.3113416e-07, -3, 0, 3, -1.3113416e-07, 0, 0, 0)
