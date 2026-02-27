@@ -41,14 +41,6 @@ enum FightingState {
 	UNDEF
 }
 
-enum StatusState {
-	STUNNED,
-	UNTARGETABLE,
-	INVINCIBLE,
-	FROZEN,
-	SILENCED
-}
-
 enum EntityType {
 	HERO,
 	SNAKE_BARREL,

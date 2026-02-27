@@ -15,6 +15,12 @@ var _entities: Array[Entity]
 
 
 func _ready() -> void:
+	GameManager.init()
+	GameManager.game_rules.duration_fighting_positioning = 0
+	GameManager.game_rules.duration_fighting_countdown = 0
+	GameManager.game_rules.duration_fighting_normal = 240
+	GlobalFightingManager.__prototyping = true
+	
 	_respawn_entites_with_spawn_manager()
 	
 	_center_point_camera.set_active()
@@ -46,6 +52,7 @@ func _respawn_entites_with_spawn_manager() -> void:
 			_spawn_manager.spawn_entity(hero, entity_data["global_pos"], entity_data["context"])
 			hero.global_rotation = entity_data["global_rot"]
 			_entities.append(hero)
+			hero.set_display_mode(Hero.DisplayMode.FIGHTING_PHASE)
 
 # ===== UI =====
 #region Global Commands
@@ -54,9 +61,7 @@ func _on_start_fight_button_pressed() -> void:
 		# Disable auto-attack for manual control during prototyping
 		entity.auto_attack_enabled = _auto_attack_enabled
 		entity.family_managers_enabled = _family_managers_enabled
-		entity.fighting_state = Entity.FightingState.FIGHTING
-		if entity is Hero:
-			entity.set_display_mode(Hero.DisplayMode.FIGHTING_PHASE)
+		GlobalFightingManager.start()
 		_auto_attack_check_button.hide()
 		_family_managers_check_button.hide()
 
