@@ -6,7 +6,7 @@ extends CharacterBody3D
 #region ============================== Signals ==============================
 signal died(self_ref: Entity)
 @warning_ignore("unused_signal")
-signal interaction_received(source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool)
+signal action_received(source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool)
 @warning_ignore("unused_signal")
 signal action_done(target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool)
 @warning_ignore("unused_signal")
@@ -16,12 +16,12 @@ signal critical_action_done(target: Entity, action_type: Utils.ActionType, value
 @warning_ignore("unused_signal")
 signal action_overhealed(target: Entity, amount: float)
 @warning_ignore("unused_signal")
-signal damage_taken(damage: float, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor: bool)
+signal damage_taken(damage: float, damage_type: Utils.ActionType, is_critical: bool, blocked_by_armor: bool)
 @warning_ignore("unused_signal")
 signal heal_taken(heal_amount: float, is_critical: bool)
 signal spell_casted(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary)
 @warning_ignore("unused_signal")
-signal stack_taken(stack_type: Utils.StackType, stack_number: float, is_critical: bool)
+signal stack_taken(stack_type: Stack.Type, stack_number: float, is_critical: bool)
 @warning_ignore("unused_signal")
 signal auto_attack_completed()
 signal spawn_completed()
@@ -39,14 +39,6 @@ enum FightingState {
 	FIGHTING,
 	CELEBRATING,
 	UNDEF
-}
-
-enum StatusState {
-	STUNNED,
-	UNTARGETABLE,
-	INVINCIBLE,
-	FROZEN,
-	SILENCED
 }
 
 enum EntityType {
@@ -73,7 +65,7 @@ enum FieldGeneratorModifier {
 #endregion
 
 #region ============================== Constants ==============================
-
+const TICKS_PER_SECOND: int = 60
 #endregion
 
 #region ============================== Public variables ==============================
@@ -132,6 +124,7 @@ var status_module: StatusModule
 # Spawn system
 var _original_fighting_state: FightingState = FightingState.UNDEF
 var _spawn_tween: Tween = null
+var _spawn_ticks_remaining: int = -1
 #endregion
 
 #region ============================== Export ==============================
@@ -180,7 +173,7 @@ var _spawn_tween: Tween = null
 
 @onready var bds_registry := EntityBDSRegistry.new(entity_name)
 
-#region ============================== Life State ==============================
+#region ============================== Misc State ==============================
 signal life_state_changed(new_life_state: LifeState)
 var _life_state: LifeState = LifeState.ALIVE
 var life_state: LifeState:
@@ -189,9 +182,7 @@ var life_state: LifeState:
 		if value != _life_state:
 			_life_state = value
 			life_state_changed.emit(_life_state)
-#endregion
 
-#region ============================== Fighting State ==============================
 signal fighting_state_changed(new_fighting_state: FightingState)
 var _fighting_state: FightingState = FightingState.UNDEF
 var _initial_fighting_state_from_context: FightingState = FightingState.UNDEF # Stored during apply_context
@@ -201,6 +192,15 @@ var fighting_state: FightingState:
 		if value != _fighting_state:
 			_fighting_state = value
 			fighting_state_changed.emit(_fighting_state)
+
+signal is_moving_changed(state: bool)
+var _is_moving: bool = false
+var is_moving: bool:
+	get: return _is_moving
+	set(value):
+		if value != _is_moving:
+			_is_moving = value
+			is_moving_changed.emit(_is_moving)
 #endregion
 
 #region ============================== Status States ==============================
@@ -304,7 +304,16 @@ func get_collision_center() -> Vector3:
 
 
 func process_tick() -> void:
-	pass
+	if _movement_module != null:
+		_movement_module.process_tick()
+	if _auto_attack_periodic_module != null:
+		_auto_attack_periodic_module.process_tick()
+	if conditions != null:
+		conditions.process_tick()
+	if _spawn_ticks_remaining > 0:
+		_spawn_ticks_remaining -= 1
+		if _spawn_ticks_remaining == 0:
+			_complete_spawn()
 #endregion
 
 #region ============================== Context ==============================
@@ -357,10 +366,10 @@ func connect_to_fighting_area(fighting_area_ref: FightingArea) -> void:
 #endregion
 
 #region ============================== Action Senders ==============================
-func direct_damage(target: Entity, damage: float, damage_type: Utils.DamageType, action_id: StringName) -> float:
+func direct_damage(target: Entity, damage: float, damage_type: Utils.ActionType, action_id: StringName) -> float:
 	return _damage_sender.direct_damage(target, damage, damage_type, action_id) if _damage_sender != null else 0.0
 
-func direct_damage_percent(target: Entity, damage_percent: float, damage_type: Utils.DamageType, percent_modifier: Utils.PercentModifier, action_id: StringName) -> float:
+func direct_damage_percent(target: Entity, damage_percent: float, damage_type: Utils.ActionType, percent_modifier: Utils.PercentModifier, action_id: StringName) -> float:
 	return _damage_sender.direct_damage_percent(target, damage_percent, damage_type, percent_modifier, action_id) if _damage_sender != null else 0.0
 
 func auto_attack(target: Entity) -> bool:
@@ -384,7 +393,7 @@ func heal(target: Entity, heal_amount: float, action_id: StringName) -> float:
 func heal_percent(target: Entity, percent: float, percent_modifier: Utils.PercentModifier, action_id: StringName) -> float:
 	return _heal_sender.heal_percent(target, percent, percent_modifier, action_id) if _heal_sender != null else 0.0
 
-func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Utils.StackType, action_id: StringName, duration: float = 5.0) -> float:
+func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Stack.Type, action_id: StringName, duration: float = 5.0) -> float:
 	return _add_stack_sender.inflict_condition_stacks(target, stacks_number, stack_type, action_id, duration) if _add_stack_sender != null else 0.0
 
 func summon_entity(entity_type: EntityType, spawn_config: SpawnLocationConfig, entity_modifier: Dictionary) -> void:
@@ -403,13 +412,13 @@ func inflict_status(target: Entity, status_type: Status.Type, duration: float, a
 
 
 #region ============================== Action Receivers ==============================
-func take_damage(damage: float, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
+func take_damage(damage: float, damage_type: Utils.ActionType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
 	return _damage_receiver.take_damage(damage, damage_type, is_critical, action_id, source) if _damage_receiver != null else 0.0
 
-func take_damage_percent(percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
+func take_damage_percent(percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.ActionType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
 	return _damage_receiver.take_damage_percent(percent, percent_modifier, damage_type, is_critical, action_id, source) if _damage_receiver != null else 0.0
 
-func take_condition_stacks(stacks_number: float, stack_type: Utils.StackType, is_critical: bool, action_id: StringName, source: Entity = null, duration: float = 5.0) -> float:
+func take_condition_stacks(stacks_number: float, stack_type: Stack.Type, is_critical: bool, action_id: StringName, source: Entity = null, duration: float = 5.0) -> float:
 	return _add_stack_receiver.take_condition_stacks(stacks_number, stack_type, is_critical, action_id, source, duration) if _add_stack_receiver != null else 0.0
 
 func take_heal(heal_amount: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
@@ -452,7 +461,7 @@ func _start_spawn() -> void:
 		_complete_spawn()
 		return
 	
-	# Call virtual animation function (can be overridden by children)
+	_spawn_ticks_remaining = int(spawn_duration * TICKS_PER_SECOND)
 	_play_spawn_animation()
 
 
@@ -463,7 +472,6 @@ func _play_spawn_animation() -> void:
 		_spawn_tween.set_ease(Tween.EASE_OUT)
 		_spawn_tween.set_trans(Tween.TRANS_BACK)
 		_spawn_tween.tween_property(_visual_3d, "scale", Vector3.ONE, spawn_duration)
-		_spawn_tween.finished.connect(_complete_spawn)
 	else:
 		# No visual node, complete immediately
 		Verbose.warn("Entity [" + entity_name + "] has no _visual_3d for spawn animation", Verbose.Category.ENTITY)
@@ -482,7 +490,7 @@ func _complete_spawn() -> void:
 #region ============================== Auto loading ==============================
 func _auto_load_modules() -> void:
 	for module_type in _auto_loaded_modules:
-		var module: Module = Shared.ENTITY_MODULE_SCENES[module_type].instantiate().init(self)
+		var module: Module = Shared.ENTITY_MODULE_SCENES[module_type].instantiate().init(self )
 		match module_type:
 			Module.ModuleType.TARGET: target_module = module
 			Module.ModuleType.CONDITIONS: conditions = module
@@ -567,11 +575,9 @@ func _on_died() -> void:
 
 func _on_gfm_fighting_phase_state_changed(fighting_phase_state: GlobalFightingManager.FightingPhaseState) -> void:
 	match fighting_phase_state:
-		GlobalFightingManager.FightingPhaseState.POSITIONING:
-			fighting_state = FightingState.IDLE
 		GlobalFightingManager.FightingPhaseState.NORMAL:
 			fighting_state = FightingState.FIGHTING
-		GlobalFightingManager.FightingPhaseState.CELEBRATING:
+		GlobalFightingManager.FightingPhaseState.CELEBRATION:
 			fighting_state = FightingState.CELEBRATING
 #endregion
 
@@ -587,7 +593,7 @@ func _on_stunned(_is_active: bool) -> void:
 func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
-			Events.entity_cliked.emit(self)
+			Events.entity_cliked.emit(self )
 			Verbose.debug("L'entité " + entity_name + " a été cliquée !", Verbose.Category.ENTITY)
 			_play_on_click_animation()
 	

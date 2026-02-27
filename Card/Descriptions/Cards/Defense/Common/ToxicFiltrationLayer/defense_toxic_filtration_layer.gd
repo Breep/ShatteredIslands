@@ -14,7 +14,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 	ctx.battle_callbacks.register_battle_start(&"Toxic Filtration Layer", func() -> void:
 		var shield_stack: ShieldStack = ctx.hero.conditions.get_shield_stack()
-		shield_stack.set_efficiency(Utils.DamageType.POISON, efficiency)
+		shield_stack.set_efficiency(Utils.ActionType.DAMAGE_POISON, efficiency)
 	)
 
 

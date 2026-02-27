@@ -34,7 +34,7 @@ func _ready() -> void:
 
 # ============================== Public ==============================
 
-func damage_popup(amount: float, damage_type: Utils.DamageType, is_critic: bool = false):
+func damage_popup(amount: float, damage_type: Utils.ActionType, is_critic: bool = false):
 	var popup: DamagePopUp = Shared.DAMAGE_POPUP_SCENE.instantiate()
 	var offset = Vector3(randf_range(-0.5, 0.5), randf_range(-0.5, 0.5), 0)
 	popup.set_value(amount)
@@ -44,18 +44,18 @@ func damage_popup(amount: float, damage_type: Utils.DamageType, is_critic: bool 
 		popup.modulate(Color8(95, 20, 28, 255))
 	
 	match damage_type:
-		Utils.DamageType.POISON:
+		Utils.ActionType.DAMAGE_POISON:
 			popup.global_position = _poison_popup_spawn.global_position + offset
 			popup.outline_modulate(Color8(20, 95, 28, 255))
-		Utils.DamageType.PHYSICAL:
+		Utils.ActionType.DAMAGE_PHYSICAL:
 			popup.global_position = _physical_popup_spawn.global_position + offset
-		Utils.DamageType.MAGICAL:
+		Utils.ActionType.DAMAGE_MAGICAL:
 			popup.global_position = _magic_popup_spawn.global_position + offset
 			popup.outline_modulate(Color8(0, 0, 204, 255))
-		Utils.DamageType.HEAL:
+		Utils.ActionType.UTILITY_HEAL:
 			popup.global_position = _heal_popup_spawn.global_position + offset
 			popup.outline_modulate(Color8(51, 255, 153, 255))
-		Utils.DamageType.PURE:
+		Utils.ActionType.DAMAGE_PURE:
 			popup.global_position = _pure_popup_spawn.global_position + offset
 			popup.outline_modulate(Color.DARK_GOLDENROD)
 	
@@ -63,8 +63,8 @@ func damage_popup(amount: float, damage_type: Utils.DamageType, is_critic: bool 
 
 # ============================== Callbacks ==============================
 
-func _on_owner_entity_damage_taken(damage: int, damage_type: Utils.DamageType, is_critical: bool, _blocked_by_armor) -> void:
+func _on_owner_entity_damage_taken(damage: int, damage_type: Utils.ActionType, is_critical: bool, _blocked_by_armor) -> void:
 	damage_popup(damage, damage_type, is_critical)
 
 func _on_owner_entity_heal_taken(heal_amount: int, is_critical: bool) -> void:
-	damage_popup(heal_amount, Utils.DamageType.HEAL, is_critical)
+	damage_popup(heal_amount, Utils.ActionType.UTILITY_HEAL, is_critical)

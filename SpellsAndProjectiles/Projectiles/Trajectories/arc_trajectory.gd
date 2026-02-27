@@ -20,7 +20,7 @@ func _on_init() -> void:
 	_height_variation = randf_range(-randomize_by, randomize_by)
 
 
-func update(delta: float) -> void:
+func update(logic_pos: Vector3, delta: float) -> Vector3:
 	_t = min(1.0, _t + delta / _travel_time)
 	
 	# Interpolate along straight line
@@ -28,14 +28,15 @@ func update(delta: float) -> void:
 	
 	# Add sinusoidal height (peaks at t=0.5)
 	var height := (arc_height + _height_variation) * sin(PI * _t)
-	_projectile.global_position = base + Vector3.UP * height
+	logic_pos = base + Vector3.UP * height
 	
 	# Look ahead to next position for smooth orientation
 	var next_t: float = min(1.0, _t + 0.02)
 	var next_base := _start_pos.lerp(_target_snapshot, next_t)
 	var next_height := (arc_height + _height_variation) * sin(PI * next_t)
-	if _projectile.global_position.distance_squared_to(next_base + Vector3.UP * next_height) > 0.01:
+	if logic_pos.distance_squared_to(next_base + Vector3.UP * next_height) > 0.01:
 		_projectile.look_at(next_base + Vector3.UP * next_height)
+	return logic_pos
 
 
 func _on_retarget() -> void:

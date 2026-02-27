@@ -116,10 +116,10 @@ const LEVEL_PREFIX_TEMPLATES: Dictionary[Level, String] = {
 
 #region ============================== Configuration ==============================
 var current_categories_level: Dictionary[Category, Level] = {
-	Category.DEFAULT: Level.WARN,
+	Category.DEFAULT: Level.DEBUG,
 	Category.NET: Level.TRACE,
 	Category.GLOBAL_MANAGER: Level.DEBUG,
-	Category.ROUND_MANAGER: Level.WARN,
+	Category.ROUND_MANAGER: Level.TRACE,
 	Category.CARD_SHOP: Level.WARN,
 	Category.CARD: Level.DEBUG,
 	Category.SHOP_DECK: Level.WARN,
@@ -129,7 +129,7 @@ var current_categories_level: Dictionary[Category, Level] = {
 	Category.HERO_SELECTOR: Level.WARN,
 	Category.PLAYER_MANAGER: Level.WARN,
 	Category.DECK: Level.WARN,
-	Category.FIGHTING_ISLAND: Level.WARN,
+	Category.FIGHTING_ISLAND: Level.DEBUG,
 	Category.ORACLE_SHOP: Level.WARN,
 	Category.ACTION_MODIFIER: Level.WARN,
 	Category.STAT_MODIFIER: Level.WARN,
@@ -141,14 +141,14 @@ var current_categories_level: Dictionary[Category, Level] = {
 	Category.HERO: Level.WARN,
 	Category.SUMMON: Level.WARN,
 	Category.BATTLE_SYNC: Level.WARN,
-	Category.BATTLE_READER: Level.TRACE,
-	Category.BATTLE_WRITER: Level.WARN,
+	Category.BATTLE_READER: Level.WARN,
+	Category.BATTLE_WRITER: Level.DEBUG,
 	Category.ENTITY_MANAGER: Level.WARN,
 	Category.HERO_SPAWNER: Level.WARN,
 	Category.FAMILY_MANAGER: Level.WARN,
 	Category.FIGHTING_AREA: Level.WARN,
 	Category.BDS_REGISTERY: Level.WARN,
-	Category.TABLE: Level.WARN,
+	Category.TABLE: Level.TRACE,
 	Category.SPAWN_LOCATION_CONFIG: Level.WARN,
 	Category.TARGET_MODULE: Level.WARN,
 	Category.MOVEMENT_MODULE: Level.WARN,
@@ -208,7 +208,7 @@ func _get_rich_prefix() -> String:
 	else:
 		return RICH_PREFIX_TEMPLATES[GameType.SOLO]
 
-
+	
 func _is_category_active(cat: Category, log_level: Level) -> bool:
 	var cat_level: Level = current_categories_level.get(cat, Level.WARN)
 	return log_level >= cat_level
@@ -218,7 +218,11 @@ func _log(cat: Category, level: Level, msg: String) -> void:
 	var time_stamp: String = ""
 	
 	if _get_stamp:
-		time_stamp = " " + str(Time.get_ticks_msec()) + " "
+		var ticks: int = Time.get_ticks_msec()
+		var mins: int = int(ticks / 60000.0)
+		var secs: int = int(ticks / 1000.0) % 60
+		var msecs: int = ticks % 1000
+		time_stamp = "%02d:%02d:%04d" % [mins, secs, msecs]
 	
 	if not _is_category_active(cat, level): return
 	

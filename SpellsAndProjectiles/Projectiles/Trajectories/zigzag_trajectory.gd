@@ -30,7 +30,7 @@ func _on_init() -> void:
 	_right_dir = _right_dir.normalized()
 
 
-func update(delta: float) -> void:
+func update(logic_pos: Vector3, delta: float) -> Vector3:
 	_t = min(1.0, _t + delta / _travel_time)
 	
 	# Base position along straight path
@@ -40,10 +40,11 @@ func update(delta: float) -> void:
 	var time_elapsed := _t * _travel_time
 	var lateral_offset := _right_dir * (amplitude * sin(2.0 * PI * frequency * time_elapsed))
 	
-	_projectile.global_position = base + lateral_offset
+	logic_pos = base + lateral_offset
 	
 	# Look roughly forward along the path
 	_projectile.look_at(base + _forward_dir)
+	return logic_pos
 
 
 func _on_retarget() -> void:

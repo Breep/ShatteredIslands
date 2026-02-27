@@ -21,13 +21,13 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	ctx.stat_modifiers.register_modifier(mod)
 
 	var action_mod := ActionModifier.new()
-	action_mod.action_type = ActionModifier.ActionType.DODGE
+	action_mod.action_type = Utils.ActionCategory.DODGE
 	action_mod.id = &"Dark Forest"
 	action_mod.is_one_time_effect = false
 	action_mod.after_action_logic_callback = func(cb_vars: Dictionary) -> void:
 		var target: Entity = cb_vars.get(ActionModifier.VarType.TARGET)
 		if target != null:
-			ctx.hero.inflict_condition_stacks(target, ignite, Utils.StackType.IGNITE, &"Dark Forest")
+			ctx.hero.inflict_condition_stacks(target, ignite, Stack.Type.IGNITE, &"Dark Forest")
 	ctx.action_modifiers.register_modifier(action_mod)
 
 

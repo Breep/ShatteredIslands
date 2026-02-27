@@ -59,12 +59,12 @@ func _on_end_battle_pressed() -> void:
 func _on_add_poison_button_pressed() -> void:
 	var poison_stacks: int = int(_poison_stacks_text_edit.text)
 	if poison_stacks >= 0:
-		_dark_knight.take_condition_stacks(poison_stacks, Utils.StackType.POISON, false, "Proto")
+		_dark_knight.take_condition_stacks(poison_stacks, Stack.Type.POISON, false, "Proto")
 
 func _on_add_poison_button_critical_pressed() -> void:
 	var poison_stacks: int = int(_poison_stacks_text_edit.text)
 	if poison_stacks >= 0:
-		_dark_knight.take_condition_stacks(poison_stacks*2, Utils.StackType.POISON, true, "Proto")
+		_dark_knight.take_condition_stacks(poison_stacks*2, Stack.Type.POISON, true, "Proto")
 
 func _on_reset_poison_button_pressed() -> void:
 	_dark_knight.conditions.poison_stacks = 0
@@ -74,12 +74,12 @@ func _on_reset_poison_button_pressed() -> void:
 func _on_add_armor_button_pressed() -> void:
 	var armor_stacks: int = int(_armor_stacks_text_edit.text)
 	if armor_stacks >= 0:
-		_dark_knight.take_condition_stacks(armor_stacks, Utils.StackType.SHIELD, false, "Proto")
+		_dark_knight.take_condition_stacks(armor_stacks, Stack.Type.SHIELD, false, "Proto")
 
 func _on_add_armor_button_critical_pressed() -> void:
 	var armor_stacks: int = int(_armor_stacks_text_edit.text)
 	if armor_stacks >= 0:
-		_dark_knight.take_condition_stacks(armor_stacks*2, Utils.StackType.SHIELD, true, "Proto")
+		_dark_knight.take_condition_stacks(armor_stacks*2, Stack.Type.SHIELD, true, "Proto")
 
 func _on_reset_armor_button_pressed() -> void:
 	_dark_knight.conditions.shield_stacks = 0
@@ -89,12 +89,12 @@ func _on_reset_armor_button_pressed() -> void:
 func _on_add_ignite_button_pressed() -> void:
 	var ignite_stacks: int = int(_ignite_stacks_text_edit.text)
 	if ignite_stacks >= 0:
-		_dark_knight.take_condition_stacks(ignite_stacks, Utils.StackType.IGNITE, false, "Proto")
+		_dark_knight.take_condition_stacks(ignite_stacks, Stack.Type.IGNITE, false, "Proto")
 
 func _on_add_ignite_button_critical_pressed() -> void:
 	var ignite_stacks: int = int(_ignite_stacks_text_edit.text)
 	if ignite_stacks >= 0:
-		_dark_knight.take_condition_stacks(ignite_stacks*2, Utils.StackType.IGNITE, true, "Proto")
+		_dark_knight.take_condition_stacks(ignite_stacks*2, Stack.Type.IGNITE, true, "Proto")
 
 func _on_reset_ignite_button_pressed() -> void:
 	_dark_knight.conditions.ignite_stacks = 0
@@ -104,12 +104,12 @@ func _on_reset_ignite_button_pressed() -> void:
 func _on_add_regen_button_pressed() -> void:
 	var regen_stacks: int = int(_regen_stacks_text_edit.text)
 	if regen_stacks >= 0:
-		_dark_knight.take_condition_stacks(regen_stacks, Utils.StackType.REGEN, false, "Proto")
+		_dark_knight.take_condition_stacks(regen_stacks, Stack.Type.REGEN, false, "Proto")
 
 func _on_add_regen_button_critical_pressed() -> void:
 	var regen_stacks: int = int(_regen_stacks_text_edit.text)
 	if regen_stacks >= 0:
-		_dark_knight.take_condition_stacks(regen_stacks*2, Utils.StackType.REGEN, true, "Proto")
+		_dark_knight.take_condition_stacks(regen_stacks*2, Stack.Type.REGEN, true, "Proto")
 
 func _on_reset_regen_button_pressed() -> void:
 	_dark_knight.conditions.regen_stacks = 0
@@ -121,28 +121,28 @@ func _on_deal_physical_damage_button_pressed() -> void:
 	var damage_raw := int(_damage_text_edit.text)
 	var variation := int(_variation_text_edit.text)
 	var damage: int = _rng.randi_range(clampi(damage_raw - variation, 0, 10000), clampi(damage_raw + variation, 0, 10000))
-	_dark_knight.take_damage(damage, Utils.DamageType.PHYSICAL, false, "Proto")
+	_dark_knight.take_damage(damage, Utils.ActionType.DAMAGE_PHYSICAL, false, "Proto")
 
 
 func _on_deal_critical_damage_button_pressed() -> void:
 	var damage_raw := int(_damage_text_edit.text)
 	var variation := int(_variation_text_edit.text)
 	var damage: int = _rng.randi_range(clampi(damage_raw - variation, 0, 10000), clampi(damage_raw + variation, 0, 10000))
-	_dark_knight.take_damage(damage*2, Utils.DamageType.PHYSICAL, true, "Proto")
+	_dark_knight.take_damage(damage*2, Utils.ActionType.DAMAGE_PHYSICAL, true, "Proto")
 
 
 func _on_deal_magical_damage_button_pressed() -> void:
 	var damage_raw := int(_magical_text_edit.text)
 	var variation := int(_magical_variation_text_edit.text)
 	var damage: int = _rng.randi_range(clampi(damage_raw - variation, 0, 10000), clampi(damage_raw + variation, 0, 10000))
-	_dark_knight.take_damage(damage, Utils.DamageType.MAGICAL, false, "Proto")
+	_dark_knight.take_damage(damage, Utils.ActionType.DAMAGE_MAGICAL, false, "Proto")
 
 
 func _on_deal_magical_damage_critical_pressed() -> void:
 	var damage_raw := int(_magical_text_edit.text)
 	var variation := int(_magical_variation_text_edit.text)
 	var damage: int = _rng.randi_range(clampi(damage_raw - variation, 0, 10000), clampi(damage_raw + variation, 0, 10000))
-	_dark_knight.take_damage(damage*2, Utils.DamageType.MAGICAL, true, "Proto")
+	_dark_knight.take_damage(damage*2, Utils.ActionType.DAMAGE_MAGICAL, true, "Proto")
 #endregion
 
 #region Mana
@@ -180,28 +180,28 @@ func _on_heal_button_critical_pressed() -> void:
 #endregion
 
 #region Random POPUP
-const DAMAGE_TYPES: Array[Utils.DamageType] = [
-	Utils.DamageType.PHYSICAL,
-	Utils.DamageType.MAGICAL,
-	Utils.DamageType.POISON,
-	Utils.DamageType.HEAL,
+const DAMAGE_TYPES: Array[Utils.ActionType] = [
+	Utils.ActionType.DAMAGE_PHYSICAL,
+	Utils.ActionType.DAMAGE_MAGICAL,
+	Utils.ActionType.DAMAGE_POISON,
+	Utils.ActionType.UTILITY_HEAL,
 ]
-const STACK_TYPES: Array[Utils.StackType] = [
-	Utils.StackType.POISON,
-	Utils.StackType.IGNITE,
-	Utils.StackType.REGEN,
-	Utils.StackType.SHIELD,
+const STACK_TYPES: Array[Stack.Type] = [
+	Stack.Type.POISON,
+	Stack.Type.IGNITE,
+	Stack.Type.REGEN,
+	Stack.Type.SHIELD,
 ]
 func _on_random_popup_button_pressed() -> void:
 	if (_rng.randi() % 2 == 0):
 		var random_value: int = _rng.randi_range(1, 200)
-		var random_type: Utils.DamageType = DAMAGE_TYPES.pick_random()
+		var random_type: Utils.ActionType = DAMAGE_TYPES.pick_random()
 		var is_critical: bool = (_rng.randi() % 5 == 0)
 		var label_popup: LabelPopup = UI_LABEL_POPUP_SCENE.instantiate().setup_damage(random_value, random_type, _popup_positioner.global_position, is_critical)
 		add_child(label_popup)
 	else:
 		var random_value: int = _rng.randi_range(1, 200)
-		var random_type: Utils.DamageType = STACK_TYPES.pick_random()
+		var random_type: Utils.ActionType = STACK_TYPES.pick_random()
 		var is_critical: bool = (_rng.randi() % 5 == 0)
 		var label_popup: LabelPopup = UI_LABEL_POPUP_SCENE.instantiate().setup_stack(random_value, random_type, _popup_positioner.global_position, is_critical)
 		add_child(label_popup)

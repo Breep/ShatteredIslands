@@ -13,7 +13,8 @@ signal fight_is_ready_to_be_started(self_ref: FightingManager)
 #endregion
 
 #region ============================== Public variables ==============================
-var battle_id: int = -1 # Set by the parent
+var _battle_id: int = -1 # Set by the parent
+var current_tick: int = 0 # Fight tick counter
 #endregion
 
 #region ============================== Private variables ==============================
@@ -22,7 +23,7 @@ var _heroes_dictionary: Dictionary[int, Array] # [int, Array[Hero]] Key=team_id,
 var _alive_heroes_dictionary: Dictionary[int, Array] # [int, Array[Hero]] Key=team_id, value=team members
 var _lowest_hp_teams_order: Array[int] # Array of teams in order of death [2, 3, 4] means team 2 died first, then 3 and then 4
 var _is_active: bool = false
-var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
+
 var _spawn_manager: SpawnManager
 #endregion
 
@@ -38,22 +39,31 @@ func _exit_tree() -> void:
 
 func _physics_process(_delta: float) -> void:
 	if not _is_active: return
-	for entity in _spawn_manager.get_entities():
+	# Sort by uid to guarantee identical processing order on all clients (determinism)
+	var entities: Array[Entity] = _spawn_manager.get_entities()
+	entities.sort_custom(func(a: Entity, b: Entity) -> bool: return a.uid < b.uid)
+	for entity in entities:
 		entity.process_tick()
-	for projectile in _spawn_manager.get_projectiles():
+	var projectiles: Array[Projectile] = _spawn_manager.get_projectiles()
+	projectiles.sort_custom(func(a: Projectile, b: Projectile) -> bool: return a.uid < b.uid)
+	for projectile in projectiles:
 		projectile.process_tick()
+	current_tick += 1
 #endregion
 
 #region ============================== Public functions ==============================
-func init(spawn_manager: SpawnManager) -> void:
+func init(spawn_manager: SpawnManager, battle_id: int, heroes: Array[Hero] = []) -> void:
 	_spawn_manager = spawn_manager
-
-func start(heroes: Array[Hero] = []) -> void:
-	_rng.seed = hash(str(battle_id)) # TODO Make the server generate seeds and send it to clients
-	_is_active = true
+	_battle_id = battle_id
+	Utils.register_battle_rng(_battle_id, hash(str(_battle_id))) # TODO Make the server generate seeds and send it to clients
 	_setup_heroes_dictionary(heroes)
 	_connect_to_heroes_signals()
 	fight_is_ready_to_be_started.emit(self)
+
+
+func start() -> void:
+	current_tick = 0
+	_is_active = true
 #endregion
 
 #region ============================== Private functions ==============================
@@ -134,7 +144,8 @@ func _stop_fighting_manager() -> void:
 
 
 func _cleanup() -> void:
-	battle_id = -1
+	Utils.unregister_battle_rng(_battle_id)
+	_battle_id = -1
 	_is_active = false
 	_heroes_dictionary.clear()
 	_alive_heroes_dictionary.clear()
@@ -153,6 +164,6 @@ func _on_hero_died(who: Hero) -> void:
 func _on_gfm_fighting_phase_state_changed(new_state: GlobalFightingManager.FightingPhaseState) -> void:
 	if not _is_active: return
 	match new_state:
-		GlobalFightingManager.FightingPhaseState.CELEBRATING:
+		GlobalFightingManager.FightingPhaseState.CELEBRATION:
 			_stop_fighting_manager()
 #endregion

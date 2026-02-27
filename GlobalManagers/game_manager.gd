@@ -23,7 +23,6 @@ enum GameState {
 # ============================== Constants ==============================
 
 const HEROES_NUMBER: int = 8
-const ACCELERATED_FIGHT_TIME_SCALE = 2.0
 
 # ============================== Public variables ==============================
 
@@ -295,8 +294,8 @@ func _on_game_state_changed(new_state) -> void:
 			_game_state_timer.start()
 		GameState.FIGHTING:
 			Verbose.debug("[State=FIGHTING]", Verbose.Category.GLOBAL_MANAGER)
-			var watchdog_time: float = _game_rules.duration_fighting_positioning + _game_rules.duration_fighting_countdown + _game_rules.duration_fighting_normal
-			watchdog_time += _game_rules.duration_fighting_accelerated + _game_rules.duration_fighting_celebrating + _game_rules.duration_fighting_finished
+			var watchdog_time: float = _game_rules.duration_fighting_countdown + _game_rules.duration_fighting_normal
+			watchdog_time += _game_rules.duration_fighting_special + _game_rules.duration_fighting_celebration + _game_rules.duration_fighting_finished
 			watchdog_time += 10 # MAGIC NUMBER => TODO define it ?
 			_game_state_timer.wait_time = watchdog_time
 			_game_state_timer.start()

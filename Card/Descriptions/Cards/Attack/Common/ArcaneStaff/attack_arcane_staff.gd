@@ -19,7 +19,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	aa_mod.tags = [AutoAttackModifier.TagType.CARD]
 	aa_mod.is_one_time_effect = false
 	aa_mod.additional_effect_callback = func(_cb_vars: Dictionary) -> void:
-		if not Utils.is_randomize_modifier_active(chance): return
+		if not Utils.is_randomize_modifier_active(chance, ctx.hero.battle_id): return
 		if mana >= 0: ctx.hero.stats.mana += mana
 	
 	ctx.battle_callbacks.register_battle_start(&"Arcane Staff", func() -> void:

@@ -30,7 +30,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 				continue
 			projectile.retarget(ctx.hero)
 			ctx.hero.inflict_condition_stacks(
-				ctx.hero, shield_amount, Utils.StackType.SHIELD,
+				ctx.hero, shield_amount, Stack.Type.SHIELD,
 				&"Aether Redirector"
 			)
 			return

@@ -23,16 +23,19 @@ func _ready() -> void:
 
 
 # Override auto attack to add blend logic (left/right hand)
-func _on_entity_owner_auto_attack_started() -> void:
-	Verbose.debug("Auto attack started", Verbose.Category.ENTITY_ANIMATION)
+func _on_entity_owner_auto_attack_started(lock_seconds: float) -> void:
+	Verbose.debug("Auto attack started (lock_seconds=" + str(lock_seconds).pad_decimals(2) + ")", Verbose.Category.ENTITY_ANIMATION)
+	if _lock_animation: return
 	var use_right_hand: bool = _rng.randf_range(0.0, 1.0) < 0.5
 	if use_right_hand:
 		_animation_tree.set(PARAM_BLEND_ATTACK, 1.0)
 	else:
 		_animation_tree.set(PARAM_BLEND_ATTACK, 0.0)
 	
-	_animation_tree.set(PARAM_SCALE_ATTACK_LEFT, 1.0 + _entity_owner.stats.attack_speed)
-	_animation_tree.set(PARAM_SCALE_ATTACK_RIGHT, 1.0 + _entity_owner.stats.attack_speed)
+	# Calculate speed_scale so animation fits within lock_seconds
+	var speed_scale: float = _attack_anim_base_duration / lock_seconds if lock_seconds > 0.0 else 1.0
+	_animation_tree.set(PARAM_SCALE_ATTACK_LEFT, speed_scale)
+	_animation_tree.set(PARAM_SCALE_ATTACK_RIGHT, speed_scale)
 	_animation_tree.set(PARAM_ONE_SHOT_ATTACK, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 

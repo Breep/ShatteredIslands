@@ -22,7 +22,6 @@ var _pickable_collider_overlapping_counter: int = 0: # Number of pickable constr
 func _ready() -> void:
 	hide()
 	_set_inactive()
-	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
 
 
 func _set_active() -> void:
@@ -49,9 +48,3 @@ func _on_area_exited(_area: Area3D) -> void:
 	_pickable_collider_overlapping_counter -= 1
 
 
-func _on_gfm_fighting_phase_state_changed(fighting_phase_state: GlobalFightingManager.FightingPhaseState) -> void:
-	match fighting_phase_state:
-		GlobalFightingManager.FightingPhaseState.POSITIONING:
-			_set_active()
-		_:
-			_set_inactive()

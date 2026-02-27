@@ -18,7 +18,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			var ignite_stacks: float = entity.conditions.ignite_stacks
 			if ignite_stacks > 0:
 				var bonus_damage: float = ignite_stacks * ratio
-				ctx.hero.direct_damage(entity, bonus_damage, Utils.DamageType.MAGICAL, &"Apocalypse")
+				ctx.hero.direct_damage(entity, bonus_damage, Utils.ActionType.DAMAGE_MAGICAL, &"Apocalypse")
 	)
 
 

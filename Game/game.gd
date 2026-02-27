@@ -51,9 +51,7 @@ func _start_new_round() -> void:
 	RoundManager.starting_round_player_changes()
 	await PlayerManager.sync_point(PlayerManager.SyncID.ROUND_SETUP)
 
-	# Create heroes for buying phase (UI hidden)
 	PlayerManager.create_all_heroes(Hero.DisplayMode.BUYING_PHASE)
-
 	GameManager.request_state_transition(GameManager.GameState.BUYING)
 
 

@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://db2anika8bvj8"]
+[gd_scene format=3 uid="uid://db2anika8bvj8"]
 
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_xclh3"]
 [ext_resource type="Script" uid="uid://wsv4m6qf4t76" path="res://UI/InGame/FightingArea/EntityStats/ui_entity_stats.gd" id="2_8ou46"]
-[ext_resource type="Script" uid="uid://bttgnk3bb2a8i" path="res://addons/font_auto_size_labels/auto_size_label.gd" id="3_5f36r"]
 [ext_resource type="PackedScene" uid="uid://bccnumgm5v1f8" path="res://UI/InGame/FightingArea/EntityStats/HealthBar/ui_health_bar.tscn" id="3_b0dtw"]
 [ext_resource type="Shader" uid="uid://bngl8v6o10lds" path="res://UI/Tool/Misc/2d_flexible_progress_bar.gdshader" id="3_tdusk"]
 [ext_resource type="Script" uid="uid://chcmgrh1l6vyn" path="res://UI/Tool/Misc/flexible_progress_bar.gd" id="6_5f36r"]
@@ -73,7 +72,7 @@ shader_parameter/scale = 0.0
 shader_parameter/x_offset = 0.0
 shader_parameter/slant_clip_margin = 0.0
 
-[node name="EntityStats" type="Control"]
+[node name="EntityStats" type="Control" unique_id=1521779658]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -90,7 +89,7 @@ mouse_filter = 1
 theme = ExtResource("1_xclh3")
 script = ExtResource("2_8ou46")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1667972545]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -99,12 +98,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 
-[node name="TopLayer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="TopLayer" type="HBoxContainer" parent="VBoxContainer" unique_id=7582051]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="PlayerNameLabel" type="Label" parent="VBoxContainer/TopLayer"]
+[node name="PlayerNameLabel" type="Label" parent="VBoxContainer/TopLayer" unique_id=1846187994]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
@@ -116,17 +115,13 @@ text = " Breep"
 vertical_alignment = 1
 autowrap_mode = 3
 clip_text = true
-script = ExtResource("3_5f36r")
-_max_size = 100
-_current_font_size = 38
-_editor_defaults_set = true
 
-[node name="RankControl" type="Control" parent="VBoxContainer/TopLayer"]
+[node name="RankControl" type="Control" parent="VBoxContainer/TopLayer" unique_id=1150420755]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="RankViewer" parent="VBoxContainer/TopLayer/RankControl" instance=ExtResource("7_y44ja")]
+[node name="RankViewer" parent="VBoxContainer/TopLayer/RankControl" unique_id=158958459 instance=ExtResource("7_y44ja")]
 unique_name_in_owner = true
 layout_mode = 1
 offset_top = -37.985
@@ -134,34 +129,34 @@ offset_bottom = 12.014999
 scale = Vector2(0.2, 0.2)
 pivot_offset = Vector2(0, 25)
 
-[node name="HealthBar" parent="VBoxContainer" instance=ExtResource("3_b0dtw")]
+[node name="HealthBar" parent="VBoxContainer" unique_id=720570429 instance=ExtResource("3_b0dtw")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ManaBarContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="ManaBarContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=774523321]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
 
-[node name="ManaBarViewportTexture" type="TextureRect" parent="VBoxContainer/ManaBarContainer"]
+[node name="ManaBarViewportTexture" type="TextureRect" parent="VBoxContainer/ManaBarContainer" unique_id=852801258]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 texture = SubResource("ViewportTexture_5f36r")
 expand_mode = 1
 
-[node name="ManaBarEmptySpace" type="Control" parent="VBoxContainer/ManaBarContainer"]
+[node name="ManaBarEmptySpace" type="Control" parent="VBoxContainer/ManaBarContainer" unique_id=374255565]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.2
 
-[node name="SubViewport" type="SubViewport" parent="VBoxContainer/ManaBarContainer"]
+[node name="SubViewport" type="SubViewport" parent="VBoxContainer/ManaBarContainer" unique_id=451499390]
 size = Vector2i(1600, 200)
 
-[node name="ManaProgressBar" type="ColorRect" parent="VBoxContainer/ManaBarContainer/SubViewport"]
+[node name="ManaProgressBar" type="ColorRect" parent="VBoxContainer/ManaBarContainer/SubViewport" unique_id=1248316926]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_y44ja")
 custom_minimum_size = Vector2(1600, 200)
@@ -171,7 +166,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("6_5f36r")
 
-[node name="Popups" type="Control" parent="."]
+[node name="Popups" type="Control" parent="." unique_id=1991903880]
 unique_name_in_owner = true
 anchors_preset = 0
 offset_right = 40.0

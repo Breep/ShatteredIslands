@@ -137,6 +137,10 @@ func setup_components() -> void:
 #endregion
 
 # ============================== Private functions ==============================
+func _init() -> void:
+	skill_manager = SkillManager.new()
+	skill_manager.init(self)
+
 
 func _apply_all_cards_upgrades() -> void:
 	if deck == null or hero == null:

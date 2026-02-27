@@ -27,7 +27,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 		# Full cleanse + apply regen
 		ally.cleanse(ally, 9999.0, &"Divine Intervention")
-		ally.inflict_condition_stacks(ally, regen, Utils.StackType.REGEN, &"Divine Intervention")
+		ally.inflict_condition_stacks(ally, regen, Stack.Type.REGEN, &"Divine Intervention")
 
 		# Disconnect all allies to save performance (one-time trigger)
 		var allies: Array[Entity] = ctx.hero.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES)

@@ -19,10 +19,10 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			if ctx.hero == null or not is_instance_valid(ctx.hero): return
 			var final_regen: float = base_regen * rank_mult
 			if final_regen > 0:
-				ctx.hero.inflict_condition_stacks(ctx.hero, final_regen, Utils.StackType.REGEN, &"Dynamo")
+				ctx.hero.inflict_condition_stacks(ctx.hero, final_regen, Stack.Type.REGEN, &"Dynamo")
 			var final_shield: float = base_shield * rank_mult
 			if final_shield > 0:
-				ctx.hero.inflict_condition_stacks(ctx.hero, final_shield, Utils.StackType.SHIELD, &"Dynamo")
+				ctx.hero.inflict_condition_stacks(ctx.hero, final_shield, Stack.Type.SHIELD, &"Dynamo")
 	)
 
 

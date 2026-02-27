@@ -24,7 +24,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 		for target in targets:
 			if target != null and is_instance_valid(target):
-				ctx.hero.direct_damage(target, damage, Utils.DamageType.PHYSICAL, &"Vital Pulse")
+				ctx.hero.direct_damage(target, damage, Utils.ActionType.DAMAGE_PHYSICAL, &"Vital Pulse")
 	)
 
 

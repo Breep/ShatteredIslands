@@ -26,11 +26,12 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if not _is_playing or _current_index >= _battle_logs.size(): return
-	var elapsed_time: float = (Time.get_ticks_msec() as float) / 1000.0 - GlobalFightingManager.fight_start_time
-	while _current_index < _battle_logs.size() and _battle_logs[_current_index][BattleLog.Main.TIME] <= elapsed_time:
-		_apply_log(_battle_logs[_current_index])
-		_current_index += 1
+	return
+	#if not _is_playing or _current_index >= _battle_logs.size(): return
+	#var elapsed_time: float = (Time.get_ticks_msec() as float) / 1000.0 - GlobalFightingManager.fight_start_time
+	#while _current_index < _battle_logs.size() and _battle_logs[_current_index][BattleLog.Main.TIME] <= elapsed_time:
+		#_apply_log(_battle_logs[_current_index])
+		#_current_index += 1
 
 # ============================== Public function ==============================
 
@@ -162,19 +163,18 @@ func _apply_interaction_received(battle_log: Dictionary) -> void:
 
 func _map_interaction(receiver: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
 	match action_type:
-		Utils.ActionType.DAMAGE_PHYSICAL: receiver.take_damage(value, Utils.DamageType.PHYSICAL, is_critical, action_id, source)
-		Utils.ActionType.DAMAGE_MAGICAL: receiver.take_damage(value, Utils.DamageType.MAGICAL, is_critical, action_id, source)
-		Utils.ActionType.DAMAGE_POISON: receiver.take_damage(value, Utils.DamageType.POISON, is_critical, action_id, source)
-		Utils.ActionType.DAMAGE_PURE: receiver.take_damage(value, Utils.DamageType.PURE, is_critical, action_id, source)
+		Utils.ActionType.DAMAGE_PHYSICAL: receiver.take_damage(value, Utils.ActionType.DAMAGE_PHYSICAL, is_critical, action_id, source)
+		Utils.ActionType.DAMAGE_MAGICAL: receiver.take_damage(value, Utils.ActionType.DAMAGE_MAGICAL, is_critical, action_id, source)
+		Utils.ActionType.DAMAGE_POISON: receiver.take_damage(value, Utils.ActionType.DAMAGE_POISON, is_critical, action_id, source)
+		Utils.ActionType.DAMAGE_PURE: receiver.take_damage(value, Utils.ActionType.DAMAGE_PURE, is_critical, action_id, source)
 		Utils.ActionType.UTILITY_HEAL: receiver.take_heal(value, is_critical, action_id, source)
-		Utils.ActionType.UTILITY_STUN: receiver.take_status(Status.Type.STUN, value, action_id, source)
 		Utils.ActionType.UTILITY_CLEANSE: receiver.take_cleanse(value, is_critical, action_id, source)
 		Utils.ActionType.UTILITY_DISPELL: receiver.take_dispell(value, is_critical, action_id, source)
-		Utils.ActionType.STACK_SHIELD: receiver.take_condition_stacks(value, Utils.StackType.SHIELD, is_critical, action_id, source)
-		Utils.ActionType.STACK_IGNITE: receiver.take_condition_stacks(value, Utils.StackType.IGNITE, is_critical, action_id, source)
-		Utils.ActionType.STACK_POISON: receiver.take_condition_stacks(value, Utils.StackType.POISON, is_critical, action_id, source)
-		Utils.ActionType.STACK_REGEN: receiver.take_condition_stacks(value, Utils.StackType.REGEN, is_critical, action_id, source)
-		Utils.ActionType.STACK_NECROSIS: receiver.take_condition_stacks(value, Utils.StackType.NECROSIS, is_critical, action_id, source)
+		Utils.ActionType.STACK_SHIELD: receiver.take_condition_stacks(value, Stack.Type.SHIELD, is_critical, action_id, source)
+		Utils.ActionType.STACK_IGNITE: receiver.take_condition_stacks(value, Stack.Type.IGNITE, is_critical, action_id, source)
+		Utils.ActionType.STACK_POISON: receiver.take_condition_stacks(value, Stack.Type.POISON, is_critical, action_id, source)
+		Utils.ActionType.STACK_REGEN: receiver.take_condition_stacks(value, Stack.Type.REGEN, is_critical, action_id, source)
+		Utils.ActionType.STACK_NECROSIS: receiver.take_condition_stacks(value, Stack.Type.NECROSIS, is_critical, action_id, source)
 		Utils.ActionType.STATUS_STUN: receiver.take_status(Status.Type.STUN, value, action_id, source)
 		Utils.ActionType.STATUS_TAUNT: receiver.take_status(Status.Type.TAUNT, value, action_id, source)
 		Utils.ActionType.STATUS_SILENCE: receiver.take_status(Status.Type.SILENCE, value, action_id, source)

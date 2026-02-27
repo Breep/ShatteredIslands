@@ -1,11 +1,11 @@
-extends Node
 class_name HeroSpawner
+extends Node
 
 # ============================== Signal ==============================
 
 # ============================== Public variables ==============================
 
-var battle_id: int = -1 # Set by the parent
+var _battle_id: int = -1 # Set by the parent
 
 # ============================== Private variables ==============================
 
@@ -22,8 +22,9 @@ func _ready() -> void:
 
 # ============================== Public function ==============================
 
-func init(spawn_manager: SpawnManager) -> HeroSpawner:
+func init(spawn_manager: SpawnManager, battle_id: int) -> HeroSpawner:
 	_spawn_manager = spawn_manager
+	_battle_id = battle_id
 	return self
 
 # Reparent heroes into the node_to_spawn_into node and teleport them on the FightingArea
@@ -32,6 +33,7 @@ func spawn_heroes(heroes: Array[Hero]) -> void:
 	var _available_spawn_points: Array[SpawnPoint] = _spawn_points.duplicate()
 	for hero: Hero in heroes:
 		_spawn_hero(hero, _available_spawn_points)
+		hero.battle_id = _battle_id
 
 # ============================== Private functions ==============================
 

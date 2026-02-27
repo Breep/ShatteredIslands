@@ -96,6 +96,6 @@ func _on_shield_timer_timeout() -> void:
 	var count = 0
 	for ally in valid_allies:
 		if count >= _target_count: break
-		inflict_condition_stacks(ally, _shield_amount, Utils.StackType.SHIELD, "Field Generator")
+		inflict_condition_stacks(ally, _shield_amount, Stack.Type.SHIELD, "Field Generator")
 		_current_targets.append(ally)
 		count += 1

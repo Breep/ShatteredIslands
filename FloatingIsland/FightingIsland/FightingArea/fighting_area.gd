@@ -3,29 +3,20 @@ extends Node3D
 
 # ============================== Signals ==============================
 
-signal interaction_received(entity_ref: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool)
-func signal_interaction_received(entity_ref: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
-	interaction_received.emit(entity_ref, source, action_type, action_id, value, is_critical)
-
+@warning_ignore("unused_signal")
+signal action_received(entity_ref: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool)
+@warning_ignore("unused_signal")
 signal action_done(source: Entity, target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool)
-func signal_action_done(source: Entity, target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
-	action_done.emit(source, target, action_type, action_id, value, is_critical)
-
-signal projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.Type, projectile: Projectile)
-func signal_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.Type, projectile: Projectile) -> void:
-	projectile_spawned.emit(source, target, projectile_type, projectile)
-
+@warning_ignore("unused_signal")
+signal projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.Type, projectile: Projectile, gpos: Vector3)
+@warning_ignore("unused_signal")
 signal spell_casted(source: Entity, target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary)
-func signal_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary) -> void:
-	spell_casted.emit(source, target, spell_type, spell_modifier)
-
+@warning_ignore("unused_signal")
 signal entity_died(victim: Entity)
-func signal_entity_died(victim: Entity) -> void:
-	entity_died.emit(victim)
-
-signal entity_spawned(entity: Entity, entity_type: Entity.EntityType, entity_modifier: Dictionary)
-func signal_entity_spawned(entity: Entity, entity_type: Entity.EntityType, entity_modifier: Dictionary) -> void:
-	entity_spawned.emit(entity, entity_type, entity_modifier)
+@warning_ignore("unused_signal")
+signal entity_spawned(entity: Entity, entity_type: Entity.EntityType, gpos: Vector3)
+@warning_ignore("unused_signal")
+signal projectile_target_hit(target: Entity, gpos: Vector3, projectile_uid: int)
 
 # ============================== Network Export variables ==============================
 
@@ -65,7 +56,6 @@ var arena_zone_manager: ArenaZoneManager:
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	fighting_manager.init(spawn_manager)
 	if _ready_checks() != true:
 		return
 
@@ -75,19 +65,20 @@ func _ready() -> void:
 # Connect all heroes to this FightingArea
 func init_fight(heroes: Array[Hero], battle_type: Battle.BattleType, battle_id: int = -1) -> void:
 	Verbose.debug("Initiating a fight | " + str(Battle.BattleType.keys()[battle_type]) + " | " + str(heroes.size()) + " | " + str(battle_id), Verbose.Category.FIGHTING_AREA)
-	var hero_spawner: HeroSpawner = _set_fighting_floor(battle_type).init(spawn_manager)
+	_current_battle_id = battle_id
+	_heroes = heroes
+	_battle_type = battle_type
+	
+	var hero_spawner: HeroSpawner = _set_fighting_floor(battle_type).init(spawn_manager, battle_id)
 	if hero_spawner == null:
 		Verbose.error("FightingArea: No HeroSpawner for this battle type: " + str(Battle.BattleType.keys()[battle_type]), Verbose.Category.FIGHTING_AREA)
 		return
 	
+	_fighting_manager.fight_is_over.connect(_on_fighting_manager_fight_is_over, CONNECT_ONE_SHOT)
+	fighting_manager.init(spawn_manager, battle_id, heroes)
+	
 	_entity_manager.clear()
 	hero_spawner.spawn_heroes(heroes)
-	
-	_heroes = heroes
-	_battle_type = battle_type
-	_current_battle_id = battle_id
-	_fighting_manager.fight_is_over.connect(_on_fighting_manager_fight_is_over, CONNECT_ONE_SHOT)
-	_fighting_manager.start(heroes)
 
 
 func get_fighting_heroes() -> Array[Hero]:
@@ -120,6 +111,7 @@ func _set_fighting_floor(battle_type: Battle.BattleType) -> HeroSpawner:
 	if _arena_zone_manager != null:
 		_arena_zone_manager.init(
 			fighting_floor.team_zones,
+			_current_battle_id,
 			fighting_floor.center_zone,
 			fighting_floor.full_arena_zone
 		)

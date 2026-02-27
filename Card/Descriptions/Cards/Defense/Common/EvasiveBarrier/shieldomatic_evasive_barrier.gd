@@ -26,12 +26,12 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	# Action modifier: on dodge → gain shield
 	var action_mod := ActionModifier.new()
 	action_mod.id = &"Evasive Barrier"
-	action_mod.action_type = ActionModifier.ActionType.DODGE
+	action_mod.action_type = Utils.ActionCategory.DODGE
 	action_mod.is_one_time_effect = false
 	action_mod.after_action_logic_callback = func(_cb_vars: Dictionary) -> void:
 		if ctx.hero == null or not is_instance_valid(ctx.hero):
 			return
-		ctx.hero.inflict_condition_stacks(ctx.hero, shield_amount, Utils.StackType.SHIELD, &"Evasive Barrier")
+		ctx.hero.inflict_condition_stacks(ctx.hero, shield_amount, Stack.Type.SHIELD, &"Evasive Barrier")
 	ctx.action_modifiers.register_modifier(action_mod)
 
 

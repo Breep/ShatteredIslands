@@ -189,7 +189,7 @@ func _sort_players_in_team() -> void:
 
 # Pick a random player from players dictionary and remove it from the dictionary
 func _pick_random_player(players_list: Dictionary) -> Player:
-	var player_index = Utils.rng.randi_range(0, players_list.size() - 1)
+	var player_index = Utils.get_randi_range(0, players_list.size() - 1)
 	var player = players_list.values()[player_index]
 	players_list.erase(players_list.find_key(player))
 	return player
@@ -198,5 +198,5 @@ func _pick_random_player(players_list: Dictionary) -> Player:
 # Get a random battle_type from a number of players (If there are 4 players in a fight, it can be either a 2v2 or a 1v1v1v1 for instance)
 static func _get_random_battle_type(battle_category: BattleCategory) -> Battle.BattleType:
 	var battle_types: Array = BATTLES_TYPE_DIC[battle_category]
-	var battle_id = Utils.rng.randi_range(0, battle_types.size() - 1)
+	var battle_id = Utils.get_randi_range(0, battle_types.size() - 1)
 	return battle_types[battle_id]

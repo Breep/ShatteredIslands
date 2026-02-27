@@ -129,9 +129,9 @@ func _on_draw_cards_button_pressed() -> void:
 	var cards: Array[Card] = []
 	#var cards: Array[Card] = _shop_deck.draw_n_cards(int(_cards_drawn_number.value))
 	#draw_cards_for_player(player: Player, count: int, player_available_pool: Dictionary[Card.Rarity, Array]) -> Array[Card]:
-	for iteration in int(_iteration_number.value) :
+	#for iteration in int(_iteration_number.value) :
 		#cards.append_array(_shop_deck.draw_n_cards(int(_cards_drawn_number.value)))
-		cards.append_array(_shop_deck.draw_cards_for_player(_player, int(_cards_drawn_number.value), _player_available_pool))
+		#cards.append_array(_shop_deck.draw_cards_for_player(_player, int(_cards_drawn_number.value), _player_available_pool))
 		#print(iteration, cards, int(_cards_drawn_number.value))
 		
 	# Time measurement of the draw function

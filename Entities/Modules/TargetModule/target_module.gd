@@ -263,6 +263,7 @@ func _add_body_as_entity(body: Node3D) -> void:
 		if entity.team == _owner.team: _ally_heroes.append(entity)
 		else: _enemy_heroes.append(entity)
 		_heroes.append(entity)
+	_sort_all_lists()
 
 
 func _clear() -> void:
@@ -271,7 +272,17 @@ func _clear() -> void:
 	_entities.clear()
 	_heroes.clear()
 	_enemy_heroes.clear()
-	_heroes.clear()
+	_ally_heroes.clear()
+
+
+func _sort_all_lists() -> void:
+	var sort_by_uid := func(a: Entity, b: Entity) -> bool: return a.uid < b.uid
+	_entities.sort_custom(sort_by_uid)
+	_enemies.sort_custom(sort_by_uid)
+	_allies.sort_custom(sort_by_uid)
+	_heroes.sort_custom(sort_by_uid)
+	_enemy_heroes.sort_custom(sort_by_uid)
+	_ally_heroes.sort_custom(sort_by_uid)
 
 # ============================== Target strategy functions ==============================
 
@@ -376,12 +387,14 @@ func _get_highest_hp_percent(entities: Array[Entity], excluded_entity: Entity, p
 	return target
 
 
+static var _random_target_number: int = -1
 func _get_random(entities: Array[Entity], excluded_entity: Entity, prioritize_taunted: bool = false) -> Entity:
 	var candidates := _filter_candidates(entities, excluded_entity, prioritize_taunted)
 	if candidates.is_empty():
 		return null
 	
-	return candidates.pick_random()
+	_random_target_number += 1
+	return Utils.pick_random(candidates, _owner.battle_id, "random_target_" + str(_random_target_number))
 
 
 func _get_array_without_untargetable_targets(entities: Array[Entity]) -> Array[Entity]:
@@ -454,6 +467,9 @@ func _on_scanning_area_body_exited(body: Node3D) -> void:
 		return
 	
 	var entity: Entity = body
-	if entity.team == _owner.team and _allies.has(entity): _allies.erase(entity)
-	elif entity.team == _owner.team and _enemies.has(entity): _enemies.append(entity)
-	if _entities.has(entity): _enemies.erase(entity)
+	if _allies.has(entity): _allies.erase(entity)
+	if _enemies.has(entity): _enemies.erase(entity)
+	if _entities.has(entity): _entities.erase(entity)
+	if _heroes.has(entity): _heroes.erase(entity)
+	if _enemy_heroes.has(entity): _enemy_heroes.erase(entity)
+	if _ally_heroes.has(entity): _ally_heroes.erase(entity)

@@ -12,5 +12,5 @@ func take_status(status_type: Status.Type, duration: float, action_id: StringNam
 	_owner.status_module.add_status(status_type, duration)
 	
 	var action_type: Utils.ActionType = Utils.status_to_action(status_type)
-	_owner.interaction_received.emit(source, action_type, action_id, duration, false)
+	_owner.action_received.emit(source, action_type, action_id, duration, false)
 	return duration

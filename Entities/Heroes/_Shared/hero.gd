@@ -72,6 +72,7 @@ func cast_ultimate() -> void:
 #endregion
 
 func process_tick() -> void:
+	super.process_tick()
 	periodic_timer_registry.process_tick()
 
 #region ============================== Node base functions ==============================

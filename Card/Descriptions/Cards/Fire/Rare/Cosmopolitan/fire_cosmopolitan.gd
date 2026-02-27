@@ -21,7 +21,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 		if targets.size() == 1:
 			var extra_damage_percent: float = damage_percent * bonus_ratio
-			ctx.hero.direct_damage_percent(targets[0], extra_damage_percent, Utils.DamageType.MAGICAL, Utils.PercentModifier.MAX_HP, &"Cosmo'Politan")
+			ctx.hero.direct_damage_percent(targets[0], extra_damage_percent, Utils.ActionType.DAMAGE_MAGICAL, Utils.PercentModifier.MAX_HP, &"Cosmo'Politan")
 	)
 
 
