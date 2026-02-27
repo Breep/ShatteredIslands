@@ -26,11 +26,12 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if not _is_playing or _current_index >= _battle_logs.size(): return
-	var elapsed_time: float = (Time.get_ticks_msec() as float) / 1000.0 - GlobalFightingManager.fight_start_time
-	while _current_index < _battle_logs.size() and _battle_logs[_current_index][BattleLog.Main.TIME] <= elapsed_time:
-		_apply_log(_battle_logs[_current_index])
-		_current_index += 1
+	return
+	#if not _is_playing or _current_index >= _battle_logs.size(): return
+	#var elapsed_time: float = (Time.get_ticks_msec() as float) / 1000.0 - GlobalFightingManager.fight_start_time
+	#while _current_index < _battle_logs.size() and _battle_logs[_current_index][BattleLog.Main.TIME] <= elapsed_time:
+		#_apply_log(_battle_logs[_current_index])
+		#_current_index += 1
 
 # ============================== Public function ==============================
 
