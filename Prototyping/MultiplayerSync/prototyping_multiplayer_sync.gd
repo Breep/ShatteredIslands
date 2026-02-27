@@ -54,7 +54,6 @@ func _ready() -> void:
 	_sync_debug_panel.update_role()
 	
 	GameManager.init()
-	GameManager.game_rules.duration_fighting_positioning = 0.5
 	GameManager.game_rules.duration_fighting_countdown = 3
 	GameManager.game_rules.duration_fighting_normal = 240.0
 

@@ -14,8 +14,8 @@ var _battle_logs: Array[Dictionary]
 var _last_log_index_sent: int = 0
 var _is_recording: bool = false
 var _normal_fight_duration: float
-var _accelerated_fight_start_time: float
-var _is_accelerated_fight: bool = false
+var _special_phase_start_time: float
+var _is_special_phase: bool = false
 
 # ============================== Node base functions ==============================
 
@@ -175,8 +175,8 @@ func _append_log(data: Dictionary) -> void:
 	_battle_logs.append(data)
 
 func _get_time() -> float:
-	if _is_accelerated_fight:
-		return _normal_fight_duration + ((Time.get_ticks_msec() as float) / 1000.0 - _accelerated_fight_start_time)
+	if _is_special_phase:
+		return _normal_fight_duration + ((Time.get_ticks_msec() as float) / 1000.0 - _special_phase_start_time)
 	else:
 		return (Time.get_ticks_msec() as float) / 1000.0 - GlobalFightingManager.fight_start_time
 
@@ -186,11 +186,11 @@ func _on_gfm_fighting_phase_state_changed(state: GlobalFightingManager.FightingP
 	match state:
 		GlobalFightingManager.FightingPhaseState.NORMAL:
 			_is_recording = true
-			_is_accelerated_fight = false
-		GlobalFightingManager.FightingPhaseState.ACCELERATED:
+			_is_special_phase = false
+		GlobalFightingManager.FightingPhaseState.SPECIAL:
 			_normal_fight_duration = _get_time()
-			_accelerated_fight_start_time = (Time.get_ticks_msec() as float) / 1000.0
-			_is_accelerated_fight = true
+			_special_phase_start_time = (Time.get_ticks_msec() as float) / 1000.0
+			_is_special_phase = true
 		GlobalFightingManager.FightingPhaseState.FINISHED:
 			_is_recording = false
 			#_save_logs_to_file()

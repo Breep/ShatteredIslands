@@ -16,7 +16,6 @@ var _entities: Array[Entity]
 
 func _ready() -> void:
 	GameManager.init()
-	GameManager.game_rules.duration_fighting_positioning = 0
 	GameManager.game_rules.duration_fighting_countdown = 0
 	GameManager.game_rules.duration_fighting_normal = 240
 	GlobalFightingManager.__prototyping = true

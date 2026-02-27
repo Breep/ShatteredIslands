@@ -108,11 +108,10 @@ extends Resource
 
 @export_group("Game States Duration")
 @export var duration_buying_phase: float = 20.0
-@export var duration_fighting_positioning: float = 5.0
 @export var duration_fighting_countdown: float = 3.0
 @export var duration_fighting_normal: float = 20.0
-@export var duration_fighting_accelerated: float = 10.0
-@export var duration_fighting_celebrating: float = 3.0
+@export var duration_fighting_special: float = 10.0
+@export var duration_fighting_celebration: float = 3.0
 @export var duration_fighting_finished: float = 1.0
 
 func get_updated_player_damage(player_lvl: int, current_player_win_lose_diff: int, last_round_won: bool, current_round: int) -> int:

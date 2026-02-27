@@ -164,6 +164,6 @@ func _on_hero_died(who: Hero) -> void:
 func _on_gfm_fighting_phase_state_changed(new_state: GlobalFightingManager.FightingPhaseState) -> void:
 	if not _is_active: return
 	match new_state:
-		GlobalFightingManager.FightingPhaseState.CELEBRATING:
+		GlobalFightingManager.FightingPhaseState.CELEBRATION:
 			_stop_fighting_manager()
 #endregion
