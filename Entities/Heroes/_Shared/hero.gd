@@ -59,6 +59,12 @@ func set_display_mode(mode: DisplayMode) -> void:
 	display_mode = mode
 	_apply_display_mode()
 
+func get_families_level() -> Dictionary[Family.FamilyType, int]:
+	var families_level: Dictionary[Family.FamilyType, int]
+	for family_type in _family_managers.keys():
+		families_level[family_type] = _family_managers[family_type].level
+	return families_level
+	
 
 func get_card_context() -> CardContext:
 	return _card_context
