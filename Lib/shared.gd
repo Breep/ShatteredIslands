@@ -81,3 +81,6 @@ const LAYER_FLOOR: int = 1 << 3
 const LAYER_ENTITIES: int = 1 << 4
 const LAYER_PICKABLE_CONSTRAINT: int = 1 << 5
 const LAYER_FURNITURE: int = 1 << 6
+
+func _init() -> void:
+	Verbose.debug("SHARED INIT", Verbose.Category.DEFAULT)

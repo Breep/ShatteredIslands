@@ -51,6 +51,9 @@ var _players_running_playback: Array[Player]
 #endregion
 
 #region ============================== Node base functions ==============================
+func _init() -> void:
+	Verbose.debug("GLOBAL FIGHTING MANAGER INIT", Verbose.Category.DEFAULT)
+
 func _ready() -> void:
 	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 	fighting_phase_state_changed.connect(_on_fighting_phase_state_changed)

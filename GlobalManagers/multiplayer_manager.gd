@@ -18,6 +18,9 @@ var expected_clients: int = 1
 
 var _clients_number: int = 0
 
+func _init() -> void:
+	Verbose.debug("MULTIPLAYER MANAGER INIT", Verbose.Category.DEFAULT)
+
 # ============================== Node base function ==============================
 func _ready() -> void:
 	if "--prototyping" in OS.get_cmdline_args():

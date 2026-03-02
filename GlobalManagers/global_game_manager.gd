@@ -15,3 +15,6 @@ func _clear_all_managers() -> void:
 
 func _init_all_managers() -> void:
 	GameManager.init()
+
+func _init() -> void:
+	Verbose.debug("GLOBAL_GAME_MANAGER INIT", Verbose.Category.DEFAULT)

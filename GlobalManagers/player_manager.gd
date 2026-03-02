@@ -53,6 +53,9 @@ var _join_server_reason: String
 
 # ============================== Node base functions ==============================
 
+func _init() -> void:
+	Verbose.debug("PLAYER MANAGER INIT", Verbose.Category.DEFAULT)
+
 func _ready() -> void:
 	player_removed.connect(_on_player_removed_sync_check)
 

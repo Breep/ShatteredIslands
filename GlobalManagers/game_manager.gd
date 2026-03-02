@@ -56,21 +56,9 @@ var game_state: GameState:
 
 # ============================== Private variables ==============================
 
-var _game_scene: PackedScene = load("res://Game/game.tscn")
+var _game_scene: PackedScene
 
 var _FAMILIES_REF: Dictionary[Family.FamilyType, Family] = {
-	Family.FamilyType.ATTACK: load("res://Card/Descriptions/Families/attack_family.tres") as Family,
-	Family.FamilyType.DEFENSE: load("res://Card/Descriptions/Families/defense_family.tres") as Family,
-	Family.FamilyType.FIRE: load("res://Card/Descriptions/Families/fire_family.tres") as Family,
-	Family.FamilyType.POISON: load("res://Card/Descriptions/Families/poison_family.tres") as Family,
-	Family.FamilyType.STORM: load("res://Card/Descriptions/Families/storm_family.tres") as Family,
-	Family.FamilyType.SERENITY: load("res://Card/Descriptions/Families/serenity_family.tres") as Family,
-	Family.FamilyType.LIFE: load("res://Card/Descriptions/Families/life_family.tres") as Family,
-	Family.FamilyType.MANA: load("res://Card/Descriptions/Families/mana_family.tres") as Family,
-	Family.FamilyType.CHICKEN: load("res://Card/Descriptions/Families/chickenlord_family.tres") as Family,
-	Family.FamilyType.LIGHTNING: load("res://Card/Descriptions/Families/lightning_family.tres") as Family,
-	Family.FamilyType.NECROSIS: load("res://Card/Descriptions/Families/necro_family.tres") as Family,
-	Family.FamilyType.SHADOW: load("res://Card/Descriptions/Families/shadow_family.tres") as Family,
 }
 
 #[Server only]
@@ -83,6 +71,22 @@ signal _server_answered()
 var _random_heroes_ref: Array[HeroDesc.HeroId]
 
 # ============================== Node base functions ==============================
+
+func _init() -> void:
+	Verbose.debug("GAME MANAGER INIT", Verbose.Category.DEFAULT)
+	_FAMILIES_REF[Family.FamilyType.ATTACK] = load("res://Card/Descriptions/Families/attack_family.tres") as Family
+	_FAMILIES_REF[Family.FamilyType.DEFENSE] = load("res://Card/Descriptions/Families/defense_family.tres") as Family
+	_FAMILIES_REF[Family.FamilyType.FIRE] = load("res://Card/Descriptions/Families/fire_family.tres") as Family
+	_FAMILIES_REF[Family.FamilyType.POISON] = load("res://Card/Descriptions/Families/poison_family.tres") as Family
+	_FAMILIES_REF[Family.FamilyType.STORM] = load("res://Card/Descriptions/Families/storm_family.tres") as Family
+	_FAMILIES_REF[Family.FamilyType.SERENITY] = load("res://Card/Descriptions/Families/serenity_family.tres") as Family
+	_FAMILIES_REF[Family.FamilyType.LIFE] = load("res://Card/Descriptions/Families/life_family.tres") as Family
+	_FAMILIES_REF[Family.FamilyType.MANA] = load("res://Card/Descriptions/Families/mana_family.tres") as Family
+	_FAMILIES_REF[Family.FamilyType.CHICKEN] = load("res://Card/Descriptions/Families/chickenlord_family.tres") as Family
+	_FAMILIES_REF[Family.FamilyType.LIGHTNING] = load("res://Card/Descriptions/Families/lightning_family.tres") as Family
+	_FAMILIES_REF[Family.FamilyType.NECROSIS] = load("res://Card/Descriptions/Families/necro_family.tres") as Family
+	_FAMILIES_REF[Family.FamilyType.SHADOW] = load("res://Card/Descriptions/Families/shadow_family.tres") as Family
+	Verbose.debug("GAME MANAGER INIT", Verbose.Category.DEFAULT)
 
 func _ready() -> void:
 	_game_state_timer = Timer.new()
@@ -161,6 +165,7 @@ func get_active_families() -> Array[Family]:
 
 @rpc("any_peer", "call_local")
 func start_game() -> void:
+	_game_scene = load("res://Game/game.tscn")
 	CardShopManager.init(_active_families, _game_rules)
 	get_tree().change_scene_to_packed(_game_scene)
 

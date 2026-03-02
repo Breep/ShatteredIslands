@@ -56,6 +56,8 @@ var _battle_rngs: Dictionary[int, RandomNumberGenerator] = {}
 var _global_rng := RandomNumberGenerator.new()
 
 # ============================== Node base functions ==============================
+func _init() -> void:
+	Verbose.debug("UTILS INIT", Verbose.Category.DEFAULT)
 
 func _ready() -> void:
 	_global_rng.randomize()
