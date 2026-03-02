@@ -7,7 +7,9 @@ var _arena_zone_manager: ArenaZoneManager
 const SNAKE_BARREL_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Poison/SnakeBarrel/snake_barrel.tscn")
 const SNAKE_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Poison/Snake/snake.tscn")
 const FIELD_GENERATOR_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Defense/FieldGenerator/field_generator.tscn")
-const CHICKEN_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/ChickenLord/Chicken/chicken.tscn")
+
+const CHICKEN_BASIC_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/ChickenLord/Chicken/Basic/chicken_basic.tscn")
+const CHICKEN_ATTACK_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/ChickenLord/Chicken/Gifted/ChickenAttack/chicken_attack.tscn")
 
 # ============================== Public functions ==============================
 
@@ -73,6 +75,16 @@ func _summon_field_generator(spawn_position: Vector3, entity_modifier: Dictionar
 	_spawn_manager.spawn_entity(field_generator, spawn_position, _owner.get_context(), Entity.EntityType.FIELD_GENERATOR)
 
 
-func _summon_chicken(spawn_position: Vector3, _entity_modifier: Dictionary) -> void:
-	var chicken: Chicken = CHICKEN_SCENE.instantiate()
+func _summon_chicken(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
+	var chicken: Chicken
+	var chicken_type: Chicken.Type = entity_modifier.get("Type", Chicken.Type.BASIC)
+	match chicken_type:
+		Chicken.Type.BASIC: chicken = CHICKEN_BASIC_SCENE.instantiate()
+		Chicken.Type.GIFTED_ATTACK: 
+			chicken = CHICKEN_ATTACK_SCENE.instantiate()
+			var attack_damage: float = entity_modifier.get("ad", 10)
+			var attack_speed: float = entity_modifier.get("as", 10)
+			(chicken as ChickenAttack).init(attack_damage, attack_speed)
+			
+		
 	_spawn_manager.spawn_entity(chicken, spawn_position, _owner.get_context(), Entity.EntityType.CHICKEN)

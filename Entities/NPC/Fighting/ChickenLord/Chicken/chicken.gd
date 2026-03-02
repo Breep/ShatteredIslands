@@ -1,2 +1,13 @@
 class_name Chicken
 extends Summon
+
+enum Type {
+	BASIC,
+	GIFTED_ATTACK,
+	GIFTED_LIGHTNING,
+	GIFTED_POISON,
+	GIFTED_FIRE,
+	GIFTED_COLOSSUS,
+	GIFTED_LIGHT,
+	GIFTED_SHIELD
+}
