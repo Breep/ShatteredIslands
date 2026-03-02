@@ -28,8 +28,9 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	return
 	#if not _is_playing or _current_index >= _battle_logs.size(): return
-	#var elapsed_time: float = (Time.get_ticks_msec() as float) / 1000.0 - GlobalFightingManager.fight_start_time
-	#while _current_index < _battle_logs.size() and _battle_logs[_current_index][BattleLog.Main.TIME] <= elapsed_time:
+	# Tick-based playback would use GlobalFightingManager.fight_start_tick
+	# and FightingManager.current_tick instead of wall-clock time
+	#while _current_index < _battle_logs.size():
 		#_apply_log(_battle_logs[_current_index])
 		#_current_index += 1
 
