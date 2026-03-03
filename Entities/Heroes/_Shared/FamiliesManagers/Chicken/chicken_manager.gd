@@ -8,9 +8,22 @@ const GIFTED_CHANCES: Array[float] = [0, 25.0, 35.0, 45.0, 55.0]
 const SPAWN_PERIODS: Array[float] = [12.0, 6.0, 5.5, 5.0, 4.5]
 const START_CHICKENS: Array[int] = [0, 2, 3, 4, 6]
 
+# Chicken gifted attack stats
 const GIFTED_AD_RATIOS: Array[float] = [0.15, 0.20, 0.25, 0.3]
 const GIFTED_AS_RATIOS: Array[float] = [0.15, 0.20, 0.25, 0.3]
 
+# Chicken gifted poison stats
+const GIFTED_POISON_RATIO: Array[float] = [0.10, 0.15, 0.20, 0.25]
+const GIFTED_POISON_STACKS: Array[int] = [1, 1, 2, 2]
+
+# Chicken gifted colossus stats
+const GIFTED_COLOSSUS_HPMAX_RATIOS: Array[float] = [0.10, 0.15, 0.20, 0.25]
+
+# Chicken gifted light stats
+const GIFTED_LIGHT_REGEN_RATIOS: Array[float] = [0.04, 0.06, 0.08, 0.10]
+const GIFTED_LIGHT_INHERITED_HEAL: Array[float] = [0.3, 0.5, 0.7, 1.0]
+
+# To roll the type of Chicken Gifted
 const GIFTED_FAMILY_WEIGHTS: Array[float] = [0, 1, 4, 9, 16]
 
 # ============================== Private variables ==============================
@@ -32,8 +45,7 @@ func start() -> void:
 	_families_level = _owner.get_families_level()
 	_init_gifted_types()
 	
-	
-	
+
 	_chicken_number = START_CHICKENS[level]
 	_spawn_chickens()
 	
@@ -85,3 +97,23 @@ func _spawn_chicken(chicken_type: Chicken.Type) -> void:
 				"ad": _owner.stats.attack_damage * GIFTED_AD_RATIOS[_families_level[Family.FamilyType.ATTACK]],
 				"as": _owner.stats.attack_speed * GIFTED_AS_RATIOS[_families_level[Family.FamilyType.ATTACK]],
 				})
+		Chicken.Type.GIFTED_POISON:
+			_owner.summon_entity(Entity.EntityType.CHICKEN, spawn_location_config, {
+				"Type": Chicken.Type.GIFTED_POISON,
+				"ratio": GIFTED_POISON_RATIO[_families_level[Family.FamilyType.POISON]],
+				"number": GIFTED_POISON_STACKS[_families_level[Family.FamilyType.POISON]]
+				})
+		Chicken.Type.GIFTED_COLOSSUS:
+			_owner.summon_entity(Entity.EntityType.CHICKEN, spawn_location_config, {
+				"Type": Chicken.Type.GIFTED_COLOSSUS,
+				"hpmax": _owner.stats.health_max * GIFTED_COLOSSUS_HPMAX_RATIOS[_families_level[Family.FamilyType.LIFE]]
+			})
+		Chicken.Type.GIFTED_LIGHT:
+			var bonus_heal: float = _owner.stats.get_stat(EntityStats.StatType.STRENGTH, Utils.ActionType.UTILITY_HEAL)
+			_owner.summon_entity(Entity.EntityType.CHICKEN, spawn_location_config, {
+				"Type": Chicken.Type.GIFTED_LIGHT,
+				"ratio_regen": GIFTED_LIGHT_REGEN_RATIOS[_families_level[Family.FamilyType.SERENITY]],
+				"inherited_heal_ratio": bonus_heal * GIFTED_LIGHT_INHERITED_HEAL[_families_level[Family.FamilyType.SERENITY]]
+			})
+			print(bonus_heal * GIFTED_LIGHT_INHERITED_HEAL[_families_level[Family.FamilyType.SERENITY]])
+			

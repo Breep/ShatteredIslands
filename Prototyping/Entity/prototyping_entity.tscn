@@ -31,6 +31,9 @@ mana_regen = 2.0
 attack_range = -1.0
 attack_damage = 10.0
 attack_speed = 1.0
+_strengths = Dictionary[int, float]({
+4: 100.0
+})
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="Resource" id="Resource_ko5bb"]
@@ -90,7 +93,9 @@ unique_name_in_owner = true
 transform = Transform3D(0.9946579, 0, 0.10322651, 0, 1, 0, -0.10322651, 0, 0.9946579, 0.07346773, -4.7683716e-07, 7.8182755)
 _custom_deck = SubResource("Resource_x0odd")
 _override_family_levels = Dictionary[int, int]({
-9: 1
+5: 1,
+7: 1,
+9: 4
 })
 team = 1
 custom_base_stats = SubResource("Resource_m26y3")

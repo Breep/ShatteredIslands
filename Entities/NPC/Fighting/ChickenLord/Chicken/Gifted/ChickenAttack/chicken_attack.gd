@@ -7,13 +7,9 @@ var _attack_speed: float
 func init(attack_damage: float, attack_speed: float) -> Summon:
 	_attack_damage = attack_damage
 	_attack_speed = attack_speed
-	
-	
-	
 	return self
 
 func _ready() -> void:
-	super._ready()
 	var mod := StatModifier.new()
 	mod.id = &"Chicken_Attack_ad"
 	mod.stat_type = EntityStats.StatType.AD
@@ -29,3 +25,4 @@ func _ready() -> void:
 	mod2.value = _attack_speed
 	mod2.tags = []
 	stat_modifiers_registry.register_modifier(mod2)
+	super._ready()

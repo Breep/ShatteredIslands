@@ -10,6 +10,9 @@ const FIELD_GENERATOR_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/
 
 const CHICKEN_BASIC_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/ChickenLord/Chicken/Basic/chicken_basic.tscn")
 const CHICKEN_ATTACK_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/ChickenLord/Chicken/Gifted/ChickenAttack/chicken_attack.tscn")
+const CHICKEN_POISON_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/ChickenLord/Chicken/Gifted/ChickenPoison/chicken_poison.tscn")
+const CHICKEN_COLOSSUS_SCENE: PackedScene = preload('res://Entities/NPC/Fighting/ChickenLord/Chicken/Gifted/ChickenColossus/chicken_colossus.tscn')
+const CHICKEN_LIGHT_SCENE: PackedScene = preload('res://Entities/NPC/Fighting/ChickenLord/Chicken/Gifted/ChickenLight/chicken_light.tscn')
 
 # ============================== Public functions ==============================
 
@@ -85,6 +88,17 @@ func _summon_chicken(spawn_position: Vector3, entity_modifier: Dictionary) -> vo
 			var attack_damage: float = entity_modifier.get("ad", 10)
 			var attack_speed: float = entity_modifier.get("as", 10)
 			(chicken as ChickenAttack).init(attack_damage, attack_speed)
-			
-		
+		Chicken.Type.GIFTED_POISON: 
+			chicken = CHICKEN_POISON_SCENE.instantiate()
+			var poison_stack_ratio: float = entity_modifier.get("ratio", 0)
+			var stacks_number: int = entity_modifier.get("number", 1)
+			(chicken as ChickenPoison).init(poison_stack_ratio, stacks_number)
+		Chicken.Type.GIFTED_COLOSSUS:
+			chicken = CHICKEN_COLOSSUS_SCENE.instantiate()
+			var health_max_ratio: float = entity_modifier.get("hpmax", 0)
+			(chicken as ChickenColossus).init(health_max_ratio)
+		Chicken.Type.GIFTED_LIGHT:
+			chicken = CHICKEN_LIGHT_SCENE.instantiate()
+			var ratio_regen: float = entity_modifier.get("ratio_regen", 0)
+			(chicken as ChickenLight).init(ratio_regen)
 	_spawn_manager.spawn_entity(chicken, spawn_position, _owner.get_context(), Entity.EntityType.CHICKEN)

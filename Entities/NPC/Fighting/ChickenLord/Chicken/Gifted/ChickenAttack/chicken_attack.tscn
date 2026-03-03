@@ -20,12 +20,13 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 radius = 0.421875
 height = 0.84375
 
-[node name="ChickenAttack" type="CharacterBody3D" unique_id=2109615854]
+[node name="ChickenAttack" type="CharacterBody3D" unique_id=2109615854 node_paths=PackedStringArray("_visual_3d")]
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("1_2s508")
 custom_base_stats = SubResource("Resource_0ng8s")
 _auto_loaded_modules = Array[int]([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 0, 4])
+_visual_3d = NodePath("ChickenAttackVisual")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1928783995]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41943443, 0)
@@ -69,6 +70,7 @@ parameters/one_shot_idle/request = 0
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.00037944317, 0.38287425, -0.5151825)
 
 [node name="ChickenAttackVisual" parent="." unique_id=142901617 instance=ExtResource("6_15sm5")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="ChickenAttackVisual" index="0" unique_id=416118163]
 bones/1/position = Vector3(0, 0.047381032, -0.004717756)
