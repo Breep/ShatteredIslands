@@ -12,7 +12,6 @@ func start() -> void:
 	_add_stack_modifiers()
 	_fire_stats.titans_protection_accumulated_hp = 0.0
 
-
 func stop() -> void:
 	Verbose.debug("FireManager stop", Verbose.Category.FAMILY_MANAGER)
 	_fire_stats.titans_protection_accumulated_hp = 0.0

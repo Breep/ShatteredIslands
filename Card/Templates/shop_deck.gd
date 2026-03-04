@@ -202,6 +202,7 @@ func _get_player_max_family_level(player: Player) -> int:
 			max_level = level
 	return max_level
 
+#TODO faire le upscale de la rarity (dans le cas où l'on pioce 3 communes, qu'il n'en reste que 2 dans le shop, et que l'on a débloqué les rarity supérieurs)
 
 # Tire une rareté selon les probabilités du niveau
 func _roll_rarity(family_level: int) -> Card.Rarity:

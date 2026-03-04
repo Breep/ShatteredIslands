@@ -13,7 +13,11 @@ metadata/_custom_type_script = "uid://dk45y4m1jvl1h"
 script = ExtResource("1_lk7r7")
 name = "End of the world"
 picture = ExtResource("1_gkpij")
-families = Array[int]([3, 3])
+families = Array[int]([3])
 rarity = 1
 player_upgrade = SubResource("Resource_opk41")
+points = Dictionary[int, int]({
+3: 2
+})
+lvl = 3
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

@@ -16,4 +16,9 @@ name = "Venomous Strike"
 picture = ExtResource("1_ikonv")
 families = Array[int]([1, 7])
 player_upgrade = SubResource("Resource_ukukp")
+points = Dictionary[int, int]({
+1: 1,
+7: 1
+})
+lvl = 5
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

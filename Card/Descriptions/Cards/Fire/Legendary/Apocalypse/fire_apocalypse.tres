@@ -16,3 +16,7 @@ picture = SubResource("PlaceholderTexture2D_dhrxl")
 families = Array[int]([3])
 rarity = 3
 player_upgrade = SubResource("Resource_apocalypse")
+points = Dictionary[int, int]({
+3: 5
+})
+lvl = 1

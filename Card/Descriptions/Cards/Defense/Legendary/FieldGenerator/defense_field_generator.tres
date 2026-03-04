@@ -21,3 +21,6 @@ picture = SubResource("PlaceholderTexture2D_4frrm")
 families = Array[int]([2])
 rarity = 3
 player_upgrade = SubResource("Resource_upgrade")
+points = Dictionary[int, int]({
+2: 5
+})

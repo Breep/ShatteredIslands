@@ -22,7 +22,6 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if target == null:
 			return
 		var proj_stats := ProjectileStats.new()
-		proj_stats.is_bouncing = true
 		proj_stats.bounces_remaining = 20
 		proj_stats.on_hit_callbacks.append(func(cb_vars: Dictionary) -> void:
 			if not cb_vars.has(AutoAttackModifier.VarType.TARGET):
@@ -36,7 +35,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 				ctx.hero.inflict_condition_stacks(ctx.hero, shield_return, Stack.Type.SHIELD, &"Shield Throw")
 				state[&"last_armor"] = ctx.hero.conditions.shield_stacks
 		)
-		ctx.hero.projectile_attack(target, Projectile.Type.SHIELD_THROW, ctx.hero._turret._projectile_spawn_point, proj_stats)
+		ctx.hero.projectile_attack(target, Projectile.Type.SHIELD_THROW, ctx.hero, proj_stats)
 
 	var _on_shield_changed: Callable
 	_on_shield_changed = func(new_val: int) -> void:

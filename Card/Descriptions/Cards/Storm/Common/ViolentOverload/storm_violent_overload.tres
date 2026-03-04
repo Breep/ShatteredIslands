@@ -14,3 +14,6 @@ name = "Violent Overload"
 picture = ExtResource("1_eetrq")
 families = Array[int]([4])
 player_upgrade = SubResource("Resource_upgrade")
+points = Dictionary[int, int]({
+4: 1
+})

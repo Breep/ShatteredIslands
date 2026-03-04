@@ -17,3 +17,6 @@ name = "Putrid Touch"
 picture = SubResource("PlaceholderTexture2D_keeku")
 families = Array[int]([11])
 player_upgrade = SubResource("Resource_keeku")
+points = Dictionary[int, int]({
+11: 1
+})

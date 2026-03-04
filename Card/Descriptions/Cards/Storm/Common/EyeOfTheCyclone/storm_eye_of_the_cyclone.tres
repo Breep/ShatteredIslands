@@ -14,3 +14,8 @@ name = "Eye of the Cyclone"
 picture = ExtResource("1_wnj5j")
 families = Array[int]([4, 6])
 player_upgrade = SubResource("Resource_upgrade")
+points = Dictionary[int, int]({
+4: 1,
+6: 1
+})
+lvl = 5

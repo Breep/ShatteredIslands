@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bffuy78iqihm"]
+
+[ext_resource type="Script" uid="uid://bp6ns4ceo0rk2" path="res://Entities/Heroes/_Shared/FamiliesManagers/Chicken/chicken_manager.gd" id="1_ynw40"]
+
+[node name="ChickenManager" type="Node" unique_id=1386102873]
+script = ExtResource("1_ynw40")

@@ -13,6 +13,9 @@ metadata/_custom_type_script = "uid://c51nb6wkfq4ov"
 script = ExtResource("1_pvac3")
 name = "Crystal Mountain"
 picture = ExtResource("1_1ql3a")
-families = Array[int]([6, 6])
+families = Array[int]([6])
 player_upgrade = SubResource("Resource_2gfvs")
+points = Dictionary[int, int]({
+6: 2
+})
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

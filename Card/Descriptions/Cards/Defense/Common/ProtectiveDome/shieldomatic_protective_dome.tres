@@ -15,4 +15,7 @@ name = "Protetive dome"
 picture = ExtResource("1_kmq2y")
 families = Array[int]([2])
 player_upgrade = SubResource("Resource_kmq2y")
+points = Dictionary[int, int]({
+2: 1
+})
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

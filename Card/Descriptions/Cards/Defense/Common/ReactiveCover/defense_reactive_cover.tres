@@ -15,3 +15,6 @@ name = "Reactive Cover"
 picture = ExtResource("1_cu4ly")
 families = Array[int]([2])
 player_upgrade = SubResource("Resource_upgrade")
+points = Dictionary[int, int]({
+2: 1
+})

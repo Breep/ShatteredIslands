@@ -13,7 +13,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	ctx.hero.families_stats.fire.meteor_modifiers.append(func(cb_vars: Dictionary) -> void:
 		var entities_inside: Array = cb_vars.get(Meteor.VarType.ENTITIES_INSIDE, [])
 		for entity: Entity in entities_inside:
-			if entity == null or not is_instance_valid(entity) or entity.is_dead: continue
+			if entity == null or not is_instance_valid(entity) or entity.is_dead(): continue
 			if entity.team == ctx.hero.team: continue
 			var ignite_stacks: float = entity.conditions.ignite_stacks
 			if ignite_stacks > 0:

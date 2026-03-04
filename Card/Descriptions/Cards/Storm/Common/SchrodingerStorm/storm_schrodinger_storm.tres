@@ -14,3 +14,6 @@ name = "Schrödinger's Storm"
 picture = ExtResource("3_icon")
 families = Array[int]([4])
 player_upgrade = SubResource("Resource_schrod")
+points = Dictionary[int, int]({
+4: 1
+})

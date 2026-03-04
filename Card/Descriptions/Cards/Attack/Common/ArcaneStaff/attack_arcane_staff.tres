@@ -16,4 +16,8 @@ name = "Arcane Staff"
 picture = ExtResource("1_yfmdl")
 families = Array[int]([1, 8])
 player_upgrade = SubResource("Resource_02kof")
+points = Dictionary[int, int]({
+1: 1,
+8: 1
+})
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

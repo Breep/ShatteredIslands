@@ -13,7 +13,11 @@ metadata/_custom_type_script = "uid://sdkefcyuqtp7"
 script = ExtResource("1_qrlbw")
 name = "Storm Breaker"
 picture = ExtResource("1_mm6t8")
-families = Array[int]([1, 8])
+families = Array[int]([4, 8])
 rarity = 1
 player_upgrade = SubResource("Resource_mm6t8")
+points = Dictionary[int, int]({
+4: 1,
+8: 1
+})
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

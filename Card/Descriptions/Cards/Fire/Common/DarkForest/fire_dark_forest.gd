@@ -24,8 +24,8 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	action_mod.action_type = Utils.ActionCategory.DODGE
 	action_mod.id = &"Dark Forest"
 	action_mod.is_one_time_effect = false
-	action_mod.after_action_logic_callback = func(_cb_vars: Dictionary) -> void:
-		var target: Entity = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.CLOSEST_ENEMY)
+	action_mod.after_action_logic_callback = func(cb_vars: Dictionary) -> void:
+		var target: Entity = cb_vars.get(ActionModifier.VarType.TARGET)
 		if target != null:
 			ctx.hero.inflict_condition_stacks(target, ignite, Stack.Type.IGNITE, &"Dark Forest")
 	ctx.action_modifiers.register_modifier(action_mod)
@@ -36,4 +36,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Dark Forest: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Increase dodge by " + str(_increase_dodge[cardlvl - 1]) + ". On dodge, Inflict " + str(_ignite_stacks[cardlvl - 1]) + " [IGNITE STACKS] stack."
+	return "Increase dodge by " + str(_increase_dodge[cardlvl - 1]) + ". On dodge, Inflict " + str(_ignite_stacks[cardlvl - 1]) + " [IGNITE STACKS] stack to attacker."

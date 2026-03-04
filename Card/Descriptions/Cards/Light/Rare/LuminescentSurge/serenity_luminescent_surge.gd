@@ -24,7 +24,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		var allies: Array[Entity] = ctx.hero.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES)
 		var valid_allies: Array[Entity] = []
 		for ally: Entity in allies:
-			if ally != null and is_instance_valid(ally) and not ally.is_dead:
+			if ally != null and is_instance_valid(ally) and not ally.is_dead():
 				valid_allies.append(ally)
 
 		valid_allies.sort_custom(func(a: Entity, b: Entity) -> bool:

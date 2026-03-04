@@ -13,8 +13,11 @@ metadata/_custom_type_script = "uid://e8w40nqo25qg"
 script = ExtResource("1_jbq81")
 name = "Nuke !!!!!"
 picture = ExtResource("1_an3vv")
-families = Array[int]([3, 3, 3])
+families = Array[int]([3])
 rarity = 2
 player_upgrade = SubResource("Resource_c8dli")
+points = Dictionary[int, int]({
+3: 3
+})
 lvl = 2
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

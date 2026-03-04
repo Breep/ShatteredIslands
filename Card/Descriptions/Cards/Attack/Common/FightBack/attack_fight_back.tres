@@ -16,4 +16,7 @@ name = "Fight Back"
 picture = ExtResource("1_b144d")
 families = Array[int]([1])
 player_upgrade = SubResource("Resource_ov13x")
+points = Dictionary[int, int]({
+1: 1
+})
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

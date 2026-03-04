@@ -16,7 +16,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 		var targets: Array[Entity] = []
 		for entity: Entity in entities_inside:
-			if entity != null and is_instance_valid(entity) and not entity.is_dead and entity.team != ctx.hero.team:
+			if entity != null and is_instance_valid(entity) and not entity.is_dead() and entity.team != ctx.hero.team:
 				targets.append(entity)
 
 		if targets.size() == 1:

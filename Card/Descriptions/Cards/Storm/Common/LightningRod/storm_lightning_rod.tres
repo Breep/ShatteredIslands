@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://bfq5kalwldwjr"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://bfq5kalwldwjr"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_card_script"]
 [ext_resource type="Script" uid="uid://bcgx32f3oc7b0" path="res://Card/Descriptions/Cards/Storm/Common/LightningRod/storm_lightning_rod.gd" id="2_upgrade_script"]
@@ -16,3 +16,6 @@ name = "Lightning Rod"
 picture = SubResource("PlaceholderTexture2D_tl3hd")
 families = Array[int]([4])
 player_upgrade = SubResource("Resource_upgrade")
+points = Dictionary[int, int]({
+4: 1
+})
