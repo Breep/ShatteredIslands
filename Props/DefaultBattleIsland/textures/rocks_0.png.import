@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bgqnib1ftp2bt"
-path.s3tc="res://.godot/imported/Item_set_1_0.png-389471774ebe2577258df52960de1739.s3tc.ctex"
+uid="uid://c33bgnduwdtin"
+path.s3tc="res://.godot/imported/rocks_0.png-2d43b7d4e3f02b96ec765dcaa5e242ed.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "a088a7acabbdb2efecf9bbc854b771e9"
+"md5": "00a2562e51185e308968d015a91db3b2"
 }
 
 [deps]
 
-source_file="res://Props/DefaultBattleIsland/Item_set_1_0.png"
-dest_files=["res://.godot/imported/Item_set_1_0.png-389471774ebe2577258df52960de1739.s3tc.ctex"]
+source_file="res://Props/DefaultBattleIsland/textures/rocks_0.png"
+dest_files=["res://.godot/imported/rocks_0.png-2d43b7d4e3f02b96ec765dcaa5e242ed.s3tc.ctex"]
 
 [params]
 
