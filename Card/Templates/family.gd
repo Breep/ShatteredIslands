@@ -27,7 +27,7 @@ const COLORS = {
 	Type.LIGHT: Color(1, 1, 1), # White
 	Type.COLOSSUS: Color(0.737, 0.379, 0.087), # Orange
 	Type.CHICKEN_LORD: Color(0.673, 0.504, 0.032, 1.0), # Yellow
-	Type.NECROSIS: Color(0.518, 0.148, 0.681, 1.0), # Orange
+	Type.NECROSIS: Color(0.518, 0.148, 0.681, 1.0), # Purple
 }
 
 # ============================== Exports ==============================
@@ -37,7 +37,7 @@ const COLORS = {
 @export var family_name: String
 @export var family_type: Type
 @export var color: Color
-@export var description: String = "<Family Description>"
+@export_multiline() var description: String = "<Family Description>"
 
 # ============================== Public variables ==============================
 

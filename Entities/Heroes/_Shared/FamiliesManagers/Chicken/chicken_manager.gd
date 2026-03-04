@@ -69,7 +69,7 @@ func _init_gifted_types() -> void:
 				Family.Type.WARRIOR: _gifted_types.append(Chicken.Type.GIFTED_ATTACK)
 				Family.Type.ARDENT_CELESTIAL: _gifted_types.append(Chicken.Type.GIFTED_FIRE)
 				Family.Type.ENGINEER: _gifted_types.append(Chicken.Type.GIFTED_SHIELD)
-				Family.Type.LIGHTNING: _gifted_types.append(Chicken.Type.GIFTED_LIGHTNING)
+				Family.Type.STORM_CALLER: _gifted_types.append(Chicken.Type.GIFTED_LIGHTNING)
 				Family.Type.LIGHT: _gifted_types.append(Chicken.Type.GIFTED_LIGHT)
 				Family.Type.POISON: _gifted_types.append(Chicken.Type.GIFTED_POISON)
 				Family.Type.COLOSSUS: _gifted_types.append(Chicken.Type.GIFTED_COLOSSUS)

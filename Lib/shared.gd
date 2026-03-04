@@ -11,18 +11,15 @@ var HERO_SCENES: Dictionary[HeroDesc.HeroId, PackedScene] = {
 }
 
 var FAMILIES: Dictionary[Family.Type, Family] = {
-	Family.Type.WARRIOR: load("res://Card/Descriptions/Families/attack_family.tres"),
-	Family.Type.ENGINEER: load("res://Card/Descriptions/Families/defense_family.tres"),
-	Family.Type.ARDENT_CELESTIAL: load("res://Card/Descriptions/Families/fire_family.tres"),
-	Family.Type.STORM_CALLER: load("res://Card/Descriptions/Families/storm_family.tres"),
-	Family.Type.LIGHT: load("res://Card/Descriptions/Families/serenity_family.tres"),
-	Family.Type.COLOSSUS: load("res://Card/Descriptions/Families/life_family.tres"),
+	Family.Type.WARRIOR: load("res://Card/Descriptions/Families/warrior_family.tres"),
+	Family.Type.ENGINEER: load("res://Card/Descriptions/Families/engineer_family.tres"),
+	Family.Type.ARDENT_CELESTIAL: load("res://Card/Descriptions/Families/ardent_celestial_family.tres"),
+	Family.Type.STORM_CALLER: load("res://Card/Descriptions/Families/storm_caller_family.tres"),
+	Family.Type.LIGHT: load("res://Card/Descriptions/Families/light_family.tres"),
+	Family.Type.COLOSSUS: load("res://Card/Descriptions/Families/colossus_family.tres"),
 	Family.Type.POISON: load("res://Card/Descriptions/Families/poison_family.tres"),
-	Family.Type.MANA: load("res://Card/Descriptions/Families/mana_family.tres"),
-	Family.Type.CHICKEN_LORD: load("res://Card/Descriptions/Families/chickenlord_family.tres"),
-	Family.Type.LIGHTNING: load("res://Card/Descriptions/Families/lightning_family.tres"),
+	Family.Type.CHICKEN_LORD: load("res://Card/Descriptions/Families/chicken_lord_family.tres"),
 	Family.Type.NECROSIS: load("res://Card/Descriptions/Families/necro_family.tres"),
-	Family.Type.SHADOW: load("res://Card/Descriptions/Families/shadow_family.tres")
 }
 
 var ENTITY_MODULE_SCENES: Dictionary[Module.ModuleType, PackedScene] = {
@@ -57,7 +54,6 @@ var FAMILY_MANAGER_SCENES: Dictionary[Family.Type, PackedScene] = {
 	Family.Type.LIGHT: load("res://Entities/Heroes/_Shared/FamiliesManagers/Serenity/serenity_manager.tscn"),
 	Family.Type.STORM_CALLER: load("res://Entities/Heroes/_Shared/FamiliesManagers/Storm/storm_manager.tscn"),
 	Family.Type.WARRIOR: load("res://Entities/Heroes/_Shared/FamiliesManagers/Attack/attack_manager.tscn"),
-	Family.Type.MANA: load("res://Entities/Heroes/_Shared/FamiliesManagers/Mana/mana_manager.tscn"),
 	Family.Type.NECROSIS: load("res://Entities/Heroes/_Shared/FamiliesManagers/Necro/necro_manager.tscn"),
 	Family.Type.CHICKEN_LORD: load("res://Entities/Heroes/_Shared/FamiliesManagers/Chicken/chicken_manager.tscn"),
 }
