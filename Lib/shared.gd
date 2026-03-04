@@ -47,15 +47,15 @@ var ENTITY_MODULE_SCENES: Dictionary[Module.ModuleType, PackedScene] = {
 }
 
 var FAMILY_MANAGER_SCENES: Dictionary[Family.Type, PackedScene] = {
-	Family.Type.ENGINEER: load("res://Entities/Heroes/_Shared/FamiliesManagers/Defense/defense_manager.tscn"),
-	Family.Type.ARDENT_CELESTIAL: load("res://Entities/Heroes/_Shared/FamiliesManagers/Fire/fire_manager.tscn"),
-	Family.Type.COLOSSUS: load("res://Entities/Heroes/_Shared/FamiliesManagers/Life/life_manager.tscn"),
+	Family.Type.ENGINEER: load("res://Entities/Heroes/_Shared/FamiliesManagers/Engineer/engineer_manager.tscn"),
+	Family.Type.ARDENT_CELESTIAL: load("res://Entities/Heroes/_Shared/FamiliesManagers/ArdentCelestial/ardent_celestial_manager.tscn"),
+	Family.Type.COLOSSUS: load("res://Entities/Heroes/_Shared/FamiliesManagers/Colossus/colossus_manager.tscn"),
 	Family.Type.POISON: load("res://Entities/Heroes/_Shared/FamiliesManagers/Poison/poison_manager.tscn"),
-	Family.Type.LIGHT: load("res://Entities/Heroes/_Shared/FamiliesManagers/Serenity/serenity_manager.tscn"),
-	Family.Type.STORM_CALLER: load("res://Entities/Heroes/_Shared/FamiliesManagers/Storm/storm_manager.tscn"),
-	Family.Type.WARRIOR: load("res://Entities/Heroes/_Shared/FamiliesManagers/Attack/attack_manager.tscn"),
+	Family.Type.LIGHT: load("res://Entities/Heroes/_Shared/FamiliesManagers/Light/light_manager.tscn"),
+	Family.Type.STORM_CALLER: load("res://Entities/Heroes/_Shared/FamiliesManagers/StormCaller/storm_caller_manager.tscn"),
+	Family.Type.WARRIOR: load("res://Entities/Heroes/_Shared/FamiliesManagers/Warrior/warrior_manager.tscn"),
 	Family.Type.NECROSIS: load("res://Entities/Heroes/_Shared/FamiliesManagers/Necro/necro_manager.tscn"),
-	Family.Type.CHICKEN_LORD: load("res://Entities/Heroes/_Shared/FamiliesManagers/Chicken/chicken_manager.tscn"),
+	Family.Type.CHICKEN_LORD: load("res://Entities/Heroes/_Shared/FamiliesManagers/ChickenLord/chicken_lord_manager.tscn"),
 }
 
 var PROJECTILE_SCENES: Dictionary[Projectile.Type, PackedScene] = {

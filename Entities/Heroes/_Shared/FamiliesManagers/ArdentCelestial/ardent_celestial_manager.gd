@@ -1,4 +1,4 @@
-class_name FireManager
+class_name ArdentCelestialManager
 extends FamilyManager
 
 var _fire_stats: FamilyFireStats
@@ -8,12 +8,12 @@ func _ready() -> void:
 
 
 func start() -> void:
-	Verbose.debug("FireManager start", Verbose.Category.FAMILY_MANAGER)
+	Verbose.debug("ArdentCelestialManager start", Verbose.Category.FAMILY_MANAGER)
 	_add_stack_modifiers()
 	_fire_stats.titans_protection_accumulated_hp = 0.0
 
 func stop() -> void:
-	Verbose.debug("FireManager stop", Verbose.Category.FAMILY_MANAGER)
+	Verbose.debug("ArdentCelestialManager stop", Verbose.Category.FAMILY_MANAGER)
 	_fire_stats.titans_protection_accumulated_hp = 0.0
 
 

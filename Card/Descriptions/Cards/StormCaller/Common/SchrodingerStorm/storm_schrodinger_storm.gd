@@ -13,7 +13,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 	var storm_stats: FamilyStormStats = ctx.hero.families_stats.storm
 	storm_stats.on_rank_change_callbacks.append(
-		func(_rank: StormManager.Rank, rank_mult: float) -> void:
+		func(_rank: StormCallerManager.Rank, rank_mult: float) -> void:
 			# 50/50 chance for Ally vs Enemy
 			var target_is_ally: bool = Utils.get_randf_range(0, 1, ctx.hero.battle_id, "schrodinger_storm_1") < 0.5
 			var target: Entity = null

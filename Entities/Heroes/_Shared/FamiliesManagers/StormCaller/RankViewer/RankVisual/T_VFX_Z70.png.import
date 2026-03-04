@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://nmbfl3s56qyx"
-path="res://.godot/imported/C.png-cef74f25c0a52ef9b69b0fb783dd563e.ctex"
+uid="uid://b5aad44pv3fkl"
+path="res://.godot/imported/T_VFX_Z70.png-8aaf77a97c6929534f264e36e6a258b0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entities/Heroes/_Shared/FamiliesManagers/Storm/RankViewer/RankVisual/C.png"
-dest_files=["res://.godot/imported/C.png-cef74f25c0a52ef9b69b0fb783dd563e.ctex"]
+source_file="res://Entities/Heroes/_Shared/FamiliesManagers/StormCaller/RankViewer/RankVisual/T_VFX_Z70.png"
+dest_files=["res://.godot/imported/T_VFX_Z70.png-8aaf77a97c6929534f264e36e6a258b0.ctex"]
 
 [params]
 

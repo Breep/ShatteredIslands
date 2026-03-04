@@ -1,10 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bx7rkwxhqecme"]
+[gd_scene format=3 uid="uid://bx7rkwxhqecme"]
 
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_nu6nq"]
-[ext_resource type="Script" uid="uid://db3pcdijroyy6" path="res://Entities/Heroes/_Shared/FamiliesManagers/Storm/RankViewer/ui_rank_viewer.gd" id="2_30hed"]
-[ext_resource type="Shader" uid="uid://t37io3g24m3v" path="res://Entities/Heroes/_Shared/FamiliesManagers/Storm/RankViewer/RankVisual/ui_rank.gdshader" id="3_cjlm3"]
+[ext_resource type="Script" uid="uid://db3pcdijroyy6" path="res://Entities/Heroes/_Shared/FamiliesManagers/StormCaller/RankViewer/ui_rank_viewer.gd" id="2_30hed"]
+[ext_resource type="Shader" uid="uid://t37io3g24m3v" path="res://Entities/Heroes/_Shared/FamiliesManagers/StormCaller/RankViewer/RankVisual/ui_rank.gdshader" id="3_cjlm3"]
 [ext_resource type="Texture2D" uid="uid://bd7t7lvmxt7cx" path="res://Data/Texture/Portal/T_VFX_lelu1_tiled.png" id="4_40tqd"]
-[ext_resource type="Texture2D" uid="uid://3f64dln48xk6" path="res://Entities/Heroes/_Shared/FamiliesManagers/Storm/RankViewer/RankVisual/S.png" id="5_5jeys"]
+[ext_resource type="Texture2D" uid="uid://3f64dln48xk6" path="res://Entities/Heroes/_Shared/FamiliesManagers/StormCaller/RankViewer/RankVisual/S.png" id="5_5jeys"]
 
 [sub_resource type="Gradient" id="Gradient_5jeys"]
 offsets = PackedFloat32Array(0.5522388, 1)

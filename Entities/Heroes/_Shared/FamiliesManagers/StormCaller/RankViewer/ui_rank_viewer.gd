@@ -14,20 +14,20 @@ extends MarginContainer
 @export_range(0.0, 1.0) var gradient_lighten_factor: float = 0.5
 
 const RANK_ASSETS = {
-	StormManager.Rank.D: {
-		"tex": preload("res://Entities/Heroes/_Shared/FamiliesManagers/Storm/RankViewer/RankVisual/D.png")
+	StormCallerManager.Rank.D: {
+		"tex": preload("res://Entities/Heroes/_Shared/FamiliesManagers/StormCaller/RankViewer/RankVisual/D.png")
 	},
-	StormManager.Rank.C: {
-		"tex": preload("res://Entities/Heroes/_Shared/FamiliesManagers/Storm/RankViewer/RankVisual/C.png")
+	StormCallerManager.Rank.C: {
+		"tex": preload("res://Entities/Heroes/_Shared/FamiliesManagers/StormCaller/RankViewer/RankVisual/C.png")
 	},
-	StormManager.Rank.B: {
-		"tex": preload("res://Entities/Heroes/_Shared/FamiliesManagers/Storm/RankViewer/RankVisual/B.png")
+	StormCallerManager.Rank.B: {
+		"tex": preload("res://Entities/Heroes/_Shared/FamiliesManagers/StormCaller/RankViewer/RankVisual/B.png")
 	},
-	StormManager.Rank.A: {
-		"tex": preload("res://Entities/Heroes/_Shared/FamiliesManagers/Storm/RankViewer/RankVisual/A.png")
+	StormCallerManager.Rank.A: {
+		"tex": preload("res://Entities/Heroes/_Shared/FamiliesManagers/StormCaller/RankViewer/RankVisual/A.png")
 	},
-	StormManager.Rank.S: {
-		"tex": preload("res://Entities/Heroes/_Shared/FamiliesManagers/Storm/RankViewer/RankVisual/S.png")
+	StormCallerManager.Rank.S: {
+		"tex": preload("res://Entities/Heroes/_Shared/FamiliesManagers/StormCaller/RankViewer/RankVisual/S.png")
 	}
 }
 
@@ -43,7 +43,7 @@ func _ready() -> void:
 		_rank_icon.material = _rank_icon.material.duplicate()
 		_shader_mat = _rank_icon.material as ShaderMaterial
 	_generate_gradients()
-	_apply_rank_visual(StormManager.Rank.D)
+	_apply_rank_visual(StormCallerManager.Rank.D)
 	_rank_icon.pivot_offset = _rank_icon.size / 2
 
 func connect_entity(entity: Entity) -> void:
@@ -58,14 +58,14 @@ func connect_entity(entity: Entity) -> void:
 	_owner_hero = new_hero
 	#_owner_hero.get_rank_changed_signal().connect(_on_rank_changed) # TODO
 
-func _on_rank_changed(new_rank: StormManager.Rank) -> void:
+func _on_rank_changed(new_rank: StormCallerManager.Rank) -> void:
 	show()
 	_stop_pulsing()
 	
 	_apply_rank_visual(new_rank)
 	_play_scale_bump()
 	
-	if new_rank == StormManager.Rank.S:
+	if new_rank == StormCallerManager.Rank.S:
 		_start_pulsing_s_rank()
 		if _shader_mat: _shader_mat.set_shader_parameter("speed", 0.3)
 	else:
@@ -143,16 +143,16 @@ func _stop_pulsing() -> void:
 	if _shader_mat:
 		_shader_mat.set_shader_parameter("min_brightness", 2.0)
 
-func _get_rank_color(rank_enum: StormManager.Rank) -> Color:
+func _get_rank_color(rank_enum: StormCallerManager.Rank) -> Color:
 	match rank_enum:
-		StormManager.Rank.D: return rank_color_D
-		StormManager.Rank.C: return rank_color_C
-		StormManager.Rank.B: return rank_color_B
-		StormManager.Rank.A: return rank_color_A
-		StormManager.Rank.S: return rank_color_S
+		StormCallerManager.Rank.D: return rank_color_D
+		StormCallerManager.Rank.C: return rank_color_C
+		StormCallerManager.Rank.B: return rank_color_B
+		StormCallerManager.Rank.A: return rank_color_A
+		StormCallerManager.Rank.S: return rank_color_S
 		_: return Color.WHITE
 
-func _apply_rank_visual(rank_enum: StormManager.Rank) -> void:
+func _apply_rank_visual(rank_enum: StormCallerManager.Rank) -> void:
 	if not RANK_ASSETS.has(rank_enum):
 		return
 	

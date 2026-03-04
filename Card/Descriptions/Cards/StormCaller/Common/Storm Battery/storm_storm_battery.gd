@@ -13,7 +13,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 	var storm_stats: FamilyStormStats = ctx.hero.families_stats.storm
 	storm_stats.on_lightning_callbacks.append(
-		func(_target: Entity, _rank: StormManager.Rank, rank_mult: float) -> void:
+		func(_target: Entity, _rank: StormCallerManager.Rank, rank_mult: float) -> void:
 			if ctx.hero == null or not is_instance_valid(ctx.hero): return
 			var final_mana: float = base_mana * rank_mult
 			if final_mana > 0:

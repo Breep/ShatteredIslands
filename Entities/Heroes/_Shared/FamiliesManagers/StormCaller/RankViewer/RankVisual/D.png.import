@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3vbda8ht0jsv"
-path="res://.godot/imported/A.png-2850e491cb06e86e3bdb76de6781bb31.ctex"
+uid="uid://yxmyrtb1nj0p"
+path="res://.godot/imported/D.png-f9e74c3b62d0b041620c39b2f756782e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entities/Heroes/_Shared/FamiliesManagers/Storm/RankViewer/RankVisual/A.png"
-dest_files=["res://.godot/imported/A.png-2850e491cb06e86e3bdb76de6781bb31.ctex"]
+source_file="res://Entities/Heroes/_Shared/FamiliesManagers/StormCaller/RankViewer/RankVisual/D.png"
+dest_files=["res://.godot/imported/D.png-f9e74c3b62d0b041620c39b2f756782e.ctex"]
 
 [params]
 

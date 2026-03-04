@@ -1,9 +1,5 @@
-class_name StormManager
+class_name StormCallerManager
 extends FamilyManager
-
-## Storm family manager — rank system D→S + lightning core loop.
-## Per-card logic has been migrated to individual HeroUpgrades via CardContext registries.
-## Cards register callbacks on FamilyStormStats; this manager iterates them.
 
 # ============================== Signals ==============================
 

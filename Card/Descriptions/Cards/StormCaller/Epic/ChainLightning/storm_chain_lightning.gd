@@ -36,7 +36,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			if furthest_enemy == null: return
 			var distance: float = sqrt(max_dist_sq)
 			distance = min(distance, 50.0)
-			var rank_mult: float = StormManager.RANK_VALUE_MULTIPLIERS.get(storm_stats.current_rank, 1.0)
+			var rank_mult: float = StormCallerManager.RANK_VALUE_MULTIPLIERS.get(storm_stats.current_rank, 1.0)
 			var damage_multiplier: float = (factor * distance) / 100.0
 			var final_damage: float = real_value * damage_multiplier * rank_mult
 

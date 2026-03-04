@@ -15,7 +15,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 	var storm_stats: FamilyStormStats = ctx.hero.families_stats.storm
 	storm_stats.on_lightning_callbacks.append(
-		func(target: Entity, _rank: StormManager.Rank, _rank_mult: float) -> void:
+		func(target: Entity, _rank: StormCallerManager.Rank, _rank_mult: float) -> void:
 			if target == null or not is_instance_valid(target): return
 			if Utils.is_randomize_modifier_active(chance, ctx.hero.battle_id):
 				ctx.hero.inflict_condition_stacks(target, necrosis_amount, Stack.Type.NECROSIS, &"Electrocute")

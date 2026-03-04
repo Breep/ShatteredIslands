@@ -4,10 +4,10 @@ extends FamilyStats
 ## Fire family stats — per-card flags have been removed.
 ## Card logic is now self-contained in each HeroUpgrade via CardContext registries.
 
-# Shared meteor modifier callbacks — cards append, FireManager reads when casting meteors
+# Shared meteor modifier callbacks — cards append, ArdentCelestialManager reads when casting meteors
 var meteor_modifiers: Array[Callable] = []
 
-# [TITANS PROTECTION] cumulative HP increase tracking (reset by FireManager on stop)
+# [TITANS PROTECTION] cumulative HP increase tracking (reset by ArdentCelestialManager on stop)
 var titans_protection_accumulated_hp: float = 0.0
 
 # [METEOR] Family passive configuration — set by the Meteor card, defaults used by passive

@@ -1,4 +1,4 @@
-class_name ChickenManager
+class_name ChickenLordManager
 extends FamilyManager
 
 # ============================== Constants ==============================

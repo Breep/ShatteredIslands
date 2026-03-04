@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bext8rh783yay"]
+
+[ext_resource type="Script" uid="uid://41ms8fokkggm" path="res://Entities/Heroes/_Shared/FamiliesManagers/Engineer/engineer_manager.gd" id="1_rws5t"]
+
+[node name="EngineerManager" type="Node" unique_id=1790693809]
+script = ExtResource("1_rws5t")
