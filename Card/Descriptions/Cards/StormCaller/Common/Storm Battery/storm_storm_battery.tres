@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cki0jkayic783"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_5rjur"]
+[ext_resource type="Texture2D" uid="uid://dfhhct5auuotx" path="res://Card/Descriptions/Cards/StormCaller/Common/Storm Battery/storm_storm_battery.jpg" id="1_7h0nn"]
+[ext_resource type="Script" uid="uid://cr8nwavx4dwlk" path="res://Card/Descriptions/Cards/StormCaller/Common/Storm Battery/storm_storm_battery.gd" id="2_hafkj"]
+
+[sub_resource type="Resource" id="Resource_c3xf1"]
+script = ExtResource("2_hafkj")
+_base_mana_gain = Array[float]([1.0, 2.0, 3.0, 4.0, 6.0])
+metadata/_custom_type_script = "uid://cr8nwavx4dwlk"
+
+[resource]
+script = ExtResource("1_5rjur")
+name = "Storm Battery"
+picture = ExtResource("1_7h0nn")
+families = Array[int]([4])
+player_upgrade = SubResource("Resource_c3xf1")
+points = Dictionary[int, int]({
+4: 1
+})
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

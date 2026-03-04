@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cpe1ja4a2fgwu"]
+
+[ext_resource type="Script" uid="uid://bhg0e2wufqq23" path="res://Card/Descriptions/Cards/ChickenLord/Common/chicken_rapid_incubation.gd" id="1_85tsq"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_vybw3"]
+
+[sub_resource type="Resource" id="Resource_hdyv2"]
+script = ExtResource("1_85tsq")
+_timer_decrease = Array[float]([3.0])
+metadata/_custom_type_script = "uid://bhg0e2wufqq23"
+
+[resource]
+script = ExtResource("1_vybw3")
+name = "Rapid Incubation"
+families = Array[int]([9])
+player_upgrade = SubResource("Resource_hdyv2")
+points = Dictionary[int, int]({
+9: 1
+})
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"
