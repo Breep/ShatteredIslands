@@ -62,20 +62,6 @@ var _draw_value_ratios: Dictionary[Card.Rarity, float] = {
 
 var total_cards_size: int
 
-var _FAMILIES_REF: Dictionary[Family.Type, Family] = {
-	Family.Type.WARRIOR: load("res://Card/Descriptions/Families/attack_family.tres") as Family,
-	Family.Type.ENGINEER: load("res://Card/Descriptions/Families/defense_family.tres") as Family,
-	Family.Type.ARDENT_CELESTIAL: load("res://Card/Descriptions/Families/fire_family.tres") as Family,
-	Family.Type.POISON: load("res://Card/Descriptions/Families/poison_family.tres") as Family,
-	Family.Type.STORM_CALLER: load("res://Card/Descriptions/Families/storm_family.tres") as Family,
-	Family.Type.LIGHT: load("res://Card/Descriptions/Families/serenity_family.tres") as Family,
-	Family.Type.COLOSSUS: load("res://Card/Descriptions/Families/life_family.tres") as Family,
-	Family.Type.MANA: load("res://Card/Descriptions/Families/mana_family.tres") as Family,
-	Family.Type.CHICKEN_LORD: load("res://Card/Descriptions/Families/chickenlord_family.tres") as Family,
-	Family.Type.LIGHTNING: load("res://Card/Descriptions/Families/lightning_family.tres") as Family,
-	Family.Type.NECROSIS: load("res://Card/Descriptions/Families/necro_family.tres") as Family,
-	Family.Type.SHADOW: load("res://Card/Descriptions/Families/shadow_family.tres") as Family,
-}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -99,7 +85,7 @@ func _populate_family_popup() -> void:
 	for family_type: Family.Type in _active_families.keys():
 		if _active_families[family_type]:
 			_family_popup.add_item(Family.Type.keys()[family_type])
-			_families.append(_FAMILIES_REF[family_type])
+			_families.append(Shared.FAMILIES[family_type])
 
 func _check_game_rules() -> void:
 	_game_rules.rarity_card_numbers[Card.Rarity.COMMON] = common_number
