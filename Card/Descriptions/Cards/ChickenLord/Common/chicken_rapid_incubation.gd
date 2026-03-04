@@ -6,7 +6,7 @@ extends HeroUpgrade
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var timer_amount: float = _timer_decrease[card_lvl - 1]
-	ctx.hero.families_stats.chicken.spawn_period_decrease = timer_amount
+	ctx.hero.families_stats.chicken_lord.spawn_period_decrease = timer_amount
 
 
 

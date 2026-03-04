@@ -11,7 +11,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 	var multiplier: float = _stack_multiplier[card_lvl - 1]
 
-	ctx.hero.families_stats.fire.meteor_modifiers.append(func(cb_vars: Dictionary) -> void:
+	ctx.hero.families_stats.ardent_celestial.meteor_modifiers.append(func(cb_vars: Dictionary) -> void:
 		var entities_inside: Array = cb_vars.get(Meteor.VarType.ENTITIES_INSIDE, [])
 		for entity: Entity in entities_inside:
 			if entity.team != ctx.hero.team:

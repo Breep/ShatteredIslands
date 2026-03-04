@@ -10,17 +10,17 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		return
 
 	var hp_amount: float = _hp_amount[card_lvl - 1]
-	var fire_stats: FamilyFireStats = ctx.hero.families_stats.fire
+	var ardent_celestial_stats: FamilyArdentCelestialStats = ctx.hero.families_stats.ardent_celestial
 
-	fire_stats.meteor_modifiers.append(func(_cb_vars: Dictionary) -> void:
+	ardent_celestial_stats.meteor_modifiers.append(func(_cb_vars: Dictionary) -> void:
 		if ctx.hero == null or not is_instance_valid(ctx.hero): return
 		if hp_amount > 0:
-			fire_stats.titans_protection_accumulated_hp += hp_amount
+			ardent_celestial_stats.titans_protection_accumulated_hp += hp_amount
 			var mod := StatModifier.new()
 			mod.id = &"Fire Titan Protection"
 			mod.stat_type = EntityStats.StatType.HEALTH_MAX
 			mod.calc_type = StatModifier.CalcType.ADD
-			mod.value = fire_stats.titans_protection_accumulated_hp
+			mod.value = ardent_celestial_stats.titans_protection_accumulated_hp
 			mod.tags = [StatModifier.TagType.CARD]
 			ctx.hero.stat_modifiers_registry.update_modifier(mod)
 	)

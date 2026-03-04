@@ -9,7 +9,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		printerr("Quickcharge: Wrong card_lvl: ", card_lvl)
 		return
 
-	var storm_stats: FamilyStormStats = ctx.hero.families_stats.storm
+	var storm_stats: FamilyStormCallerStats = ctx.hero.families_stats.storm_caller
 	storm_stats.quickcharge_grind_percent = _base_grind_percent[card_lvl - 1]
 
 

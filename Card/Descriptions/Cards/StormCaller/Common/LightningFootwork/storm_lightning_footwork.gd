@@ -38,7 +38,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	ctx.action_modifiers.register_modifier(action_modifier)
 
 	# On crit: accumulate dodge bonus
-	var storm_stats: FamilyStormStats = ctx.hero.families_stats.storm
+	var storm_stats: FamilyStormCallerStats = ctx.hero.families_stats.storm_caller
 	storm_stats.on_crit_callbacks.append(
 		func(_target: Entity, _base_value: float, _real_value: float) -> void:
 			state[&"bonus"] += dodge_increase

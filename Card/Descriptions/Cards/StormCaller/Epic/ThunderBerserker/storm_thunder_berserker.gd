@@ -26,7 +26,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	ctx.stat_modifiers.register_modifier(boost_mod)
 
 	# On rank change: if penalty phase active, accumulate crit mult penalty
-	var storm_stats: FamilyStormStats = ctx.hero.families_stats.storm
+	var storm_stats: FamilyStormCallerStats = ctx.hero.families_stats.storm_caller
 	storm_stats.on_rank_change_callbacks.append(
 		func(_rank: StormCallerManager.Rank, _rank_mult: float) -> void:
 			if not state[&"penalty_active"]: return

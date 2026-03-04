@@ -46,7 +46,7 @@ const RANK_VALUE_MULTIPLIERS: Dictionary[Rank, float] = {
 
 # ============================== Private variables ==============================
 
-var _storm_stats: FamilyStormStats
+var _storm_caller_stats: FamilyStormCallerStats
 
 var __current_rank: Rank = Rank.D
 var _current_rank: Rank:
@@ -54,7 +54,7 @@ var _current_rank: Rank:
 	set(value):
 		if __current_rank == value: return
 		__current_rank = value
-		_storm_stats.current_rank = value
+		_storm_caller_stats.current_rank = value
 		rank_changed.emit(value)
 		_on_current_rank_changed()
 
@@ -68,13 +68,13 @@ var _lightning_spam_timer: Timer
 # ============================== Public functions ==============================
 
 func _ready() -> void:
-	_storm_stats = _owner.families_stats.storm
+	_storm_caller_stats = _owner.families_stats.storm_caller
 
 
 func start() -> void:
 	_owner.critical_action_done.connect(_on_owner_critical_action_done)
 	_create_lightning_spam_timer()
-	_storm_stats.storm_breaker_memory.clear()
+	_storm_caller_stats.storm_breaker_memory.clear()
 	_current_point = 0
 	_current_rank = Rank.D
 
@@ -116,7 +116,7 @@ func _call_the_lightning() -> void:
 	_owner.cast_spell(target, Spell.Type.LIGHTNING, {Spell.LightningModifier.DAMAGE: damage})
 
 	# Iterate on_lightning_callbacks registered by cards
-	for cb: Callable in _storm_stats.on_lightning_callbacks:
+	for cb: Callable in _storm_caller_stats.on_lightning_callbacks:
 		cb.call(target, _current_rank, rank_mult)
 
 # ============================== Callbacks ==============================
@@ -128,15 +128,15 @@ func _on_current_rank_changed() -> void:
 
 	# Iterate on_rank_change_callbacks registered by cards
 	var rank_mult: float = RANK_VALUE_MULTIPLIERS.get(_current_rank, 1.0)
-	for cb: Callable in _storm_stats.on_rank_change_callbacks:
+	for cb: Callable in _storm_caller_stats.on_rank_change_callbacks:
 		cb.call(_current_rank, rank_mult)
 
 	match _current_rank:
 		Rank.S:
-			var duration: float = RANK_S_DURATION + _storm_stats.thunder_storm_duration_bonus
+			var duration: float = RANK_S_DURATION + _storm_caller_stats.thunder_storm_duration_bonus
 
 			# Iterate on_rank_s_callbacks registered by cards
-			for cb: Callable in _storm_stats.on_rank_s_callbacks:
+			for cb: Callable in _storm_caller_stats.on_rank_s_callbacks:
 				cb.call(rank_mult)
 
 			_rank_s_duration_timer.wait_time = duration
@@ -157,7 +157,7 @@ func _on_rank_s_timer_timeout() -> void:
 
 func _on_owner_critical_action_done(_target: Entity, _action_type: Utils.ActionType, base_value: float, real_value: float) -> void:
 	# TODO Make cards listen to this signal like they do for action_done
-	for cb: Callable in _storm_stats.on_crit_callbacks:
+	for cb: Callable in _storm_caller_stats.on_crit_callbacks:
 		cb.call(_target, base_value, real_value)
 
 	# Rank progression
@@ -165,8 +165,8 @@ func _on_owner_critical_action_done(_target: Entity, _action_type: Utils.ActionT
 		var points_gained: float = _get_crit_point(base_value, real_value)
 
 		# Quickcharge multiplier (set by card)
-		if _storm_stats.quickcharge_grind_percent > 0.0:
-			points_gained *= (1.0 + _storm_stats.quickcharge_grind_percent / 100.0)
+		if _storm_caller_stats.quickcharge_grind_percent > 0.0:
+			points_gained *= (1.0 + _storm_caller_stats.quickcharge_grind_percent / 100.0)
 
 		_current_point += points_gained
 

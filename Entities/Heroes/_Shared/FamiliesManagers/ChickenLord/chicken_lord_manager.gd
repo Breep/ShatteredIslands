@@ -33,7 +33,7 @@ const GIFTED_FAMILY_WEIGHTS: Array[float] = [0, 1, 4, 9, 16]
 
 # ============================== Private variables ==============================
 
-var _chicken_stats: FamilyChickenStats
+var _chicken_lord_stats: FamilyChickenLordStats
 var _chicken_number: int
 var _chicken_spawn_period: float
 var _gifted_families_ratio: Dictionary[Family.Type, float]
@@ -42,7 +42,7 @@ var _gifted_types: Array[Chicken.Type]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	_chicken_stats = _owner.families_stats.chicken
+	_chicken_lord_stats = _owner.families_stats.chicken_lord
 
 
 func start() -> void:
@@ -56,7 +56,7 @@ func start() -> void:
 	
 	_chicken_number = 1
 	if level >= 1 :
-		_chicken_spawn_period = SPAWN_PERIODS[level] - _chicken_stats.spawn_period_decrease
+		_chicken_spawn_period = SPAWN_PERIODS[level] - _chicken_lord_stats.spawn_period_decrease
 		_create_chicken_spawn_timer()
 	
 func stop() -> void:

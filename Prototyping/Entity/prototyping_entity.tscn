@@ -92,7 +92,7 @@ _custom_deck = SubResource("Resource_x0odd")
 _override_family_levels = Dictionary[int, int]({
 2: 1,
 7: 1,
-9: 4
+8: 4
 })
 team = 1
 custom_base_stats = SubResource("Resource_m26y3")

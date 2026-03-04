@@ -1,20 +1,20 @@
 class_name ArdentCelestialManager
 extends FamilyManager
 
-var _fire_stats: FamilyFireStats
+var _ardent_celestial_stats: FamilyArdentCelestialStats
 
 func _ready() -> void:
-	_fire_stats = _owner.families_stats.fire
+	_ardent_celestial_stats = _owner.families_stats.ardent_celestial
 
 
 func start() -> void:
 	Verbose.debug("ArdentCelestialManager start", Verbose.Category.FAMILY_MANAGER)
 	_add_stack_modifiers()
-	_fire_stats.titans_protection_accumulated_hp = 0.0
+	_ardent_celestial_stats.titans_protection_accumulated_hp = 0.0
 
 func stop() -> void:
 	Verbose.debug("ArdentCelestialManager stop", Verbose.Category.FAMILY_MANAGER)
-	_fire_stats.titans_protection_accumulated_hp = 0.0
+	_ardent_celestial_stats.titans_protection_accumulated_hp = 0.0
 
 
 #region ========== PASSIVE: Celestial Passive ==========
@@ -39,8 +39,8 @@ func _on_inflict_condition_ignite(cb_vars: Dictionary) -> void:
 	for i in stack_value:
 		if Utils.is_randomize_modifier_active(2, _owner.battle_id):
 			_owner.cast_spell(target, Spell.Type.METEOR, {
-					Spell.MeteorModifier.DAMAGE_PERCENT: _fire_stats.meteor_damage_percent,
-					Spell.MeteorModifier.RADIUS: _fire_stats.meteor_radius,
-					Spell.MeteorModifier.ON_HIT_CALLBACKS: _fire_stats.meteor_modifiers
+					Spell.MeteorModifier.DAMAGE_PERCENT: _ardent_celestial_stats.meteor_damage_percent,
+					Spell.MeteorModifier.RADIUS: _ardent_celestial_stats.meteor_radius,
+					Spell.MeteorModifier.ON_HIT_CALLBACKS: _ardent_celestial_stats.meteor_modifiers
 					})
 #endregion

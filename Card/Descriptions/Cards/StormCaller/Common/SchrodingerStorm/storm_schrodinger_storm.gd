@@ -11,7 +11,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 	var base_amount: float = _stacks[card_lvl - 1]
 
-	var storm_stats: FamilyStormStats = ctx.hero.families_stats.storm
+	var storm_stats: FamilyStormCallerStats = ctx.hero.families_stats.storm_caller
 	storm_stats.on_rank_change_callbacks.append(
 		func(_rank: StormCallerManager.Rank, rank_mult: float) -> void:
 			# 50/50 chance for Ally vs Enemy

@@ -1,9 +1,5 @@
-class_name FamilyStormStats
+class_name FamilyStormCallerStats
 extends FamilyStats
-
-## Storm family stats — per-card fields removed.
-## Card logic is now self-contained in each HeroUpgrade via CardContext registries.
-## Callback arrays are used for cards that hook into the StormCallerManager's core loop.
 
 # --- Callback arrays (populated by cards via apply_card) ---
 var on_lightning_callbacks: Array[Callable] = []    # (target: Entity, rank: StormCallerManager.Rank, rank_mult: float)

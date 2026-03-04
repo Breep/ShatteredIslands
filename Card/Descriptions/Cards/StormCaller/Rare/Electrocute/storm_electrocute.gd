@@ -13,7 +13,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var chance: float = _base_chance[card_lvl - 1]
 	var necrosis_amount: float = _base_necrosis_amount[card_lvl - 1]
 
-	var storm_stats: FamilyStormStats = ctx.hero.families_stats.storm
+	var storm_stats: FamilyStormCallerStats = ctx.hero.families_stats.storm_caller
 	storm_stats.on_lightning_callbacks.append(
 		func(target: Entity, _rank: StormCallerManager.Rank, _rank_mult: float) -> void:
 			if target == null or not is_instance_valid(target): return

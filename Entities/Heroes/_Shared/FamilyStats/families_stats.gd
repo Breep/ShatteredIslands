@@ -1,23 +1,23 @@
 class_name FamiliesStats
 extends Resource
 
-var auto_attack: FamilyAttackStats
-var defense: FamilyDefenseStats
-var fire: FamilyFireStats
-var storm: FamilyStormStats
-var serenity: FamilySerenityStats
-var life: FamilyLifeStats
+var warrior: FamilyWarriorStats
+var engineer: FamilyEngineerStats
+var ardent_celestial: FamilyArdentCelestialStats
+var storm_caller: FamilyStormCallerStats
+var light: FamilyLightStats
+var colossus: FamilyColossusStats
 var poison: FamilyPoisonStats
 var necro: FamilyNecroStats
-var chicken: FamilyChickenStats
+var chicken_lord: FamilyChickenLordStats
 
 func _init() -> void:
-	auto_attack = FamilyAttackStats.new()
-	defense = FamilyDefenseStats.new()
-	fire = FamilyFireStats.new()
-	storm = FamilyStormStats.new()
-	serenity = FamilySerenityStats.new()
-	life = FamilyLifeStats.new()
+	warrior = FamilyWarriorStats.new()
+	engineer = FamilyEngineerStats.new()
+	ardent_celestial = FamilyArdentCelestialStats.new()
+	storm_caller = FamilyStormCallerStats.new()
+	light = FamilyLightStats.new()
+	colossus = FamilyColossusStats.new()
 	poison = FamilyPoisonStats.new()
 	necro = FamilyNecroStats.new()
-	chicken = FamilyChickenStats.new()
+	chicken_lord = FamilyChickenLordStats.new()

@@ -13,7 +13,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var factor: float = _dist_factor[card_lvl - 1]
 	var chance: float = _chance_percent[card_lvl - 1]
 
-	var storm_stats: FamilyStormStats = ctx.hero.families_stats.storm
+	var storm_stats: FamilyStormCallerStats = ctx.hero.families_stats.storm_caller
 	storm_stats.on_crit_callbacks.append(
 		func(target: Entity, _base_value: float, real_value: float) -> void:
 			if not Utils.is_randomize_modifier_active(chance, ctx.hero.battle_id): return

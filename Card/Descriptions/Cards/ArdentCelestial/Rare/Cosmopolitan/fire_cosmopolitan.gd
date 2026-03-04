@@ -10,7 +10,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 	var bonus_ratio: float = _bonus_damage_ratio[card_lvl - 1]
 
-	ctx.hero.families_stats.fire.meteor_modifiers.append(func(cb_vars: Dictionary) -> void:
+	ctx.hero.families_stats.ardent_celestial.meteor_modifiers.append(func(cb_vars: Dictionary) -> void:
 		var entities_inside: Array = cb_vars.get(Meteor.VarType.ENTITIES_INSIDE, [])
 		var damage_percent: float = cb_vars.get(Meteor.VarType.DAMAGE_PERCENT, 0.0)
 
