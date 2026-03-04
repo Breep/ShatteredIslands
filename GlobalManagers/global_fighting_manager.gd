@@ -72,6 +72,11 @@ func _physics_process(_delta: float) -> void:
 
 #region ============================== Public functions ==============================
 func clear() -> void:
+	for fm in _fighting_managers:
+		if fm.fight_is_ready_to_be_started.is_connected(_on_fighting_manager_fight_is_ready_to_be_started):
+			fm.fight_is_ready_to_be_started.disconnect(_on_fighting_manager_fight_is_ready_to_be_started)
+		if fm.fight_is_over.is_connected(_on_fighting_manager_fighting_is_over):
+			fm.fight_is_over.disconnect(_on_fighting_manager_fighting_is_over)
 	_fighting_managers.clear()
 	_current_active_fighting_managers.clear()
 	_players_running_playback.clear()
@@ -98,7 +103,7 @@ func register_fighting_manager(fighting_manager: FightingManager):
 	
 	_fighting_managers.append(fighting_manager)
 	fighting_manager.fight_is_ready_to_be_started.connect(_on_fighting_manager_fight_is_ready_to_be_started)
-	fighting_manager.fight_is_over.connect(_fighting_manager_fighting_is_over)
+	fighting_manager.fight_is_over.connect(_on_fighting_manager_fighting_is_over)
 
 
 func unregister_fighting_manager(fighting_manager: FightingManager):
@@ -108,7 +113,7 @@ func unregister_fighting_manager(fighting_manager: FightingManager):
 		return
 	
 	_fighting_managers.erase(fighting_manager)
-	fighting_manager.fight_is_over.disconnect(_fighting_manager_fighting_is_over)
+	fighting_manager.fight_is_over.disconnect(_on_fighting_manager_fighting_is_over)
 #endregion
 
 #region ============================== State machine ==============================
@@ -204,7 +209,7 @@ func _notice_playback_is_over() -> void:
 #endregion
 
 #region ============================== FightingManager callbacks ==============================
-func _fighting_manager_fighting_is_over(fighting_manager: FightingManager, _winner_teams_order: Array[int]) -> void:
+func _on_fighting_manager_fighting_is_over(fighting_manager: FightingManager, _winner_teams_order: Array[int]) -> void:
 	if not _current_active_fighting_managers.has(fighting_manager):
 		Verbose.error("An unexpected FightingArea signals a fight is over [" + str(fighting_manager.get_path()) + "]", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
 		return
