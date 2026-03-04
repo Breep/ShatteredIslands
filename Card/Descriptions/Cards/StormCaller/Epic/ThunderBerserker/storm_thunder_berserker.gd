@@ -37,7 +37,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			mod.calc_type = StatModifier.CalcType.ADD
 			mod.value = -(state[&"accumulated"])
 			mod.tags = [StatModifier.TagType.CARD]
-			ctx.stat_modifiers.update_modifier(mod)
+			ctx.stat_modifiers.register_modifier(mod)
 	)
 
 	# Battle start: reset state + start delay timer
