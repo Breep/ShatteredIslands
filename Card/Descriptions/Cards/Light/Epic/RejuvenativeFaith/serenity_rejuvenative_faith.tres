@@ -14,6 +14,9 @@ _base_amount = Array[float]([1.0, 1.0, 1.0, 1.0, 1.0])
 script = ExtResource("1_card_script")
 name = "Rejuvenative Faith"
 picture = SubResource("PlaceholderTexture2D_eun75")
-families = Array[int]([5, 5, 5])
+families = Array[int]([5])
 rarity = 2
 player_upgrade = SubResource("Resource_upgrade")
+points = Dictionary[int, int]({
+5: 3
+})

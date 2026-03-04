@@ -22,15 +22,15 @@ enum FightingPhaseState {
 #endregion
 
 #region ============================== Constants ==============================
+const TICKS_PER_SECOND: int = 60
 #endregion
 
 #region ============================== Private variables ==============================
 var _fighting_managers: Array[FightingManager]
 var _current_active_fighting_managers: Array[FightingManager]
 
-# Timestamp (in seconds) of the exact moment NORMAL phase started
-# Used as the t=0 reference for BattleWriter and any time-sensitive log consumer
-var fight_start_time: float = 0.0
+# Tick at which NORMAL phase started (t=0 reference)
+var fight_start_tick: int = 0
 
 # /!\ _fighting_phase_state is NOT sync, the server is ahead of time /!\
 var __fighting_phase_state := FightingPhaseState.UNDEF
@@ -40,26 +40,34 @@ var _fighting_phase_state: FightingPhaseState:
 		if __fighting_phase_state == value: return
 		__fighting_phase_state = value
 		if value == FightingPhaseState.NORMAL:
-			fight_start_time = Time.get_ticks_msec() / 1000.0
+			fight_start_tick = _current_tick
 		fighting_phase_state_changed.emit(__fighting_phase_state)
 
 var __prototyping = false
-var _timer: Timer
+var _is_active: bool = false
+var _phase_ticks_remaining: int = 0
+var _current_tick: int = 0
 
 # ====== SERVER ONLY
 var _players_running_playback: Array[Player]
 #endregion
 
 #region ============================== Node base functions ==============================
+func _init() -> void:
+	Verbose.debug("GLOBAL FIGHTING MANAGER INIT", Verbose.Category.DEFAULT)
+
 func _ready() -> void:
 	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 	fighting_phase_state_changed.connect(_on_fighting_phase_state_changed)
-	
-	_timer = Timer.new()
-	add_child(_timer)
-	_timer.autostart = false
-	_timer.one_shot = true
-	_timer.timeout.connect(_on_timer_timeout)
+	set_physics_process(false)
+
+
+func _physics_process(_delta: float) -> void:
+	if not _is_active: return
+	_current_tick += 1
+	_phase_ticks_remaining -= 1
+	if _phase_ticks_remaining <= 0:
+		_advance_phase()
 #endregion
 
 #region ============================== Public functions ==============================
@@ -67,10 +75,15 @@ func clear() -> void:
 	_fighting_managers.clear()
 	_current_active_fighting_managers.clear()
 	_players_running_playback.clear()
+	_is_active = false
+	_phase_ticks_remaining = 0
+	_current_tick = 0
+	set_physics_process(false)
 
 
 func start() -> void:
 	Verbose.debug("START", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
+	_current_tick = 0
 	if multiplayer.is_server():
 		_players_running_playback = PlayerManager.get_human_players().values().duplicate()
 	_fighting_phase_state = FightingPhaseState.COUNTDOWN
@@ -99,7 +112,7 @@ func unregister_fighting_manager(fighting_manager: FightingManager):
 #endregion
 
 #region ============================== State machine ==============================
-func _on_timer_timeout() -> void:
+func _advance_phase() -> void:
 	match __fighting_phase_state:
 		FightingPhaseState.COUNTDOWN: _fighting_phase_state = FightingPhaseState.NORMAL
 		FightingPhaseState.NORMAL: _fighting_phase_state = FightingPhaseState.SPECIAL
@@ -140,10 +153,15 @@ func _on_fighting_phase_state_changed(new_fighting_phase_state: FightingPhaseSta
 
 		_:
 			Verbose.trace("[State=UNDEF]", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
+			_is_active = false
+			set_physics_process(false)
 			return
 
-	_timer.wait_time = duration
-	_timer.start()
+	_phase_ticks_remaining = int(duration * TICKS_PER_SECOND)
+	_is_active = true
+	set_physics_process(true)
+	if _phase_ticks_remaining == 0:
+		_advance_phase()
 #endregion
 
 func _on_game_manager_game_state_changed(new_game_state: GameManager.GameState) -> void:
@@ -167,7 +185,9 @@ func _finish_all_fights() -> void:
 	all_fights_are_over.emit()
 	Verbose.debug("Finishing GFM", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
 	_players_running_playback.clear()
-	_timer.stop()
+	_is_active = false
+	_phase_ticks_remaining = 0
+	set_physics_process(false)
 
 
 @rpc("any_peer", "call_remote")

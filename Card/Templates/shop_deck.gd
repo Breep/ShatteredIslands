@@ -34,7 +34,7 @@ class PlayerPool extends CardPool:
 		
 	func build() -> PlayerPool:
 		for family in _families:
-			var family_type: Family.FamilyType = family.family_type
+			var family_type: Family.Type = family.family_type
 			var family_points: int = _player.deck.get_family_points(family_type)
 			var family_level: int = _game_rules.get_family_level(family_points)
 			var locked_rarities: Array[Card.Rarity] = _game_rules.get_locked_rarities(family_level)
@@ -46,7 +46,7 @@ class PlayerPool extends CardPool:
 				pool[rarity].cards.append_array(_shop_deck.get_cards_for_rarity_for_family(family_type, rarity))	
 		return self
 		
-	func update(family_type: Family.FamilyType, rarity: Card.Rarity) -> void:
+	func update(family_type: Family.Type, rarity: Card.Rarity) -> void:
 		if not pool.has(rarity):
 			pool[rarity] = CardsArray.new()
 		pool[rarity].cards.append_array(_shop_deck.get_cards_for_rarity_for_family(family_type, rarity))
@@ -72,7 +72,7 @@ class PlayerPool extends CardPool:
 			i -= 1
 	
 	
-	func _on_family_leveled_up(family_type: Family.FamilyType, new_level: int) -> void:
+	func _on_family_leveled_up(family_type: Family.Type, new_level: int) -> void:
 		Verbose.debug("%s leveled up %s to %d" % [_player.name, family_type, new_level], Verbose.Category.CARD_SHOP)
 		if _game_rules.card_rarity_unlocked_by_level.has(new_level):
 			var rarity_unlocked: Card.Rarity = _game_rules.card_rarity_unlocked_by_level[new_level]
@@ -81,11 +81,11 @@ class PlayerPool extends CardPool:
 
 var _player_available_pools: Dictionary[Player, PlayerPool]
 
-signal available_cards_composition_changed(new_family_composition: Dictionary[Family.FamilyType, int])
-var available_cards_composition: Dictionary[Family.FamilyType, int] # Key=FamilyType, Value=number of cards of this family in the available cards
+signal available_cards_composition_changed(new_family_composition: Dictionary[Family.Type, int])
+var available_cards_composition: Dictionary[Family.Type, int] # Key=Type, Value=number of cards of this family in the available cards
 
 # Structure principale : accès direct par famille et rareté
-var _global_card_pools: Dictionary[Family.FamilyType, CardPool] # Dictionary[Card.Rarity, Array[Card]]
+var _global_card_pools: Dictionary[Family.Type, CardPool] # Dictionary[Card.Rarity, Array[Card]]
 
 # ============================== Public function ==============================
 
@@ -98,7 +98,7 @@ func construct_shop_deck(families: Array[Family], game_rules: GameRules) -> void
 	var uid: int = 0
 	var total_cards_added: int = 0
 	for family in families:
-		var family_type: Family.FamilyType = family.family_type
+		var family_type: Family.Type = family.family_type
 		_global_card_pools[family_type] = CardPool.new()
 		var total_family_cards_added: int = 0
 		Verbose.trace("Constructing family: " + str(family.family_name), Verbose.Category.SHOP_DECK)
@@ -121,10 +121,10 @@ func construct_shop_deck(families: Array[Family], game_rules: GameRules) -> void
 	Verbose.debug("Shop deck constructed | total cards = " + str(total_cards_added), Verbose.Category.SHOP_DECK)
 	_init_player_pools(families, game_rules)
 
-func get_rarities_for_family(family_type: Family.FamilyType) -> Array:
+func get_rarities_for_family(family_type: Family.Type) -> Array:
 	return _global_card_pools[family_type].pool.keys()
 
-func get_cards_for_rarity_for_family(family_type: Family.FamilyType, card_rarity: Card.Rarity) -> Array:
+func get_cards_for_rarity_for_family(family_type: Family.Type, card_rarity: Card.Rarity) -> Array:
 	if _global_card_pools.has(family_type) and _global_card_pools[family_type].pool.has(card_rarity):
 		return _global_card_pools[family_type].pool[card_rarity].cards
 	return []
@@ -178,14 +178,14 @@ func draw_cards_for_player(player: Player, count: int) -> Array[Card]:
 
 func add_card(card_to_add: Card) -> void:
 	super.add_card(card_to_add)
-	var family_type: Family.FamilyType = card_to_add.families[0]
+	var family_type: Family.Type = card_to_add.families[0]
 	_global_card_pools[family_type].add_card(card_to_add)
 	for pool: PlayerPool in _player_available_pools.values():
 		pool.add_card(card_to_add)
 
 func remove_card(card_to_remove: Card) -> void:
 	super.remove_card(card_to_remove)
-	var family_type: Family.FamilyType = card_to_remove.families[0]
+	var family_type: Family.Type = card_to_remove.families[0]
 	_global_card_pools[family_type].remove_card(card_to_remove)
 	for pool: PlayerPool in _player_available_pools.values():
 		pool.remove_card(card_to_remove)
@@ -202,6 +202,7 @@ func _get_player_max_family_level(player: Player) -> int:
 			max_level = level
 	return max_level
 
+#TODO faire le upscale de la rarity (dans le cas où l'on pioce 3 communes, qu'il n'en reste que 2 dans le shop, et que l'on a débloqué les rarity supérieurs)
 
 # Tire une rareté selon les probabilités du niveau
 func _roll_rarity(family_level: int) -> Card.Rarity:

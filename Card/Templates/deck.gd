@@ -5,8 +5,8 @@ extends Resource
 
 var _card_pile: Dictionary[int, Card]
 
-var _families_count: Dictionary[Family.FamilyType, int]
-var families_count: Dictionary[Family.FamilyType, int]:
+var _families_count: Dictionary[Family.Type, int]
+var families_count: Dictionary[Family.Type, int]:
 	get: return _families_count
 
 # ============================== Public functions ==============================
@@ -135,7 +135,7 @@ func _legacy_draw_n_card(number_of_cards_to_draw: int) -> Array[Card]:
 	return cards_drawn
 
 
-func _get_all_cards_of_rarity(rarity: Card.Rarity, family_type: Family.FamilyType, cards: Array[Card]) -> Array[Card]:
+func _get_all_cards_of_rarity(rarity: Card.Rarity, family_type: Family.Type, cards: Array[Card]) -> Array[Card]:
 	var cards_matching_rarity: Array[Card]
 	for card: Card in cards:
 		if card.families[0] == family_type and card.rarity == rarity:
@@ -143,7 +143,7 @@ func _get_all_cards_of_rarity(rarity: Card.Rarity, family_type: Family.FamilyTyp
 	return cards_matching_rarity
 
 
-func _get_all_cards_of_rarities_of_family_type(rarities: Array[Card.Rarity], family_type: Family.FamilyType, cards: Array[Card]) -> Array[Card]:
+func _get_all_cards_of_rarities_of_family_type(rarities: Array[Card.Rarity], family_type: Family.Type, cards: Array[Card]) -> Array[Card]:
 	var cards_matching_rarities: Array[Card]
 	for rarity in rarities:
 		cards_matching_rarities.append_array(_get_all_cards_of_rarity(rarity, family_type, cards))

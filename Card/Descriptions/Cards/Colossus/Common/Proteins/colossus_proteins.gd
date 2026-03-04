@@ -16,7 +16,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	mod.tags = [StatModifier.TagType.CARD]
 	ctx.stat_modifiers.register_modifier(mod)
 
-	# Also increase current HP to match (same as original LifeManager logic)
+	# Also increase current HP to match (same as original ColossusManager logic)
 	ctx.hero.stats.health += hp_increase
 
 

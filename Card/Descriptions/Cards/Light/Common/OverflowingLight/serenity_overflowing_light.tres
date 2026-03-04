@@ -15,3 +15,8 @@ name = "Overflowing Light"
 picture = SubResource("PlaceholderTexture2D_hsyqo")
 families = Array[int]([5, 2])
 player_upgrade = SubResource("Resource_upgrade")
+points = Dictionary[int, int]({
+2: 1,
+5: 1
+})
+lvl = 5

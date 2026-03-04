@@ -33,6 +33,7 @@ enum TargettingStrategy {
 	RANDOM_HERO_ENEMY, # random enemy hero, (can be null)
 	RANDOM_ALLY, # Random ally except self (can be null)
 	RANDOM_ALLY_INCLUDING_SELF, # Random ally
+	RANDOM_HERO_ALLY, # Random Hero ally
 	
 	# ------- MISC -------
 	HIGHEST_SHIELD_ENEMIES_HERO, # highest amount of shield among heroes enemies (can be null)
@@ -80,7 +81,6 @@ func _ready() -> void:
 
 func start() -> void:
 	Verbose.debug("TargetModule: Starting", Verbose.Category.TARGET_MODULE)
-	_clear()
 	_scanning_area.monitoring = true
 	var bodies: Array[Node3D] = _scanning_area.get_overlapping_bodies()
 	for body in bodies:
@@ -114,6 +114,7 @@ func get_target(targetting_strategy: TargettingStrategy) -> Entity:
 		TargettingStrategy.RANDOM_HERO_ENEMY: return _get_random(_enemy_heroes, null, true)
 		TargettingStrategy.RANDOM_ALLY: return _get_random(_allies, _owner)
 		TargettingStrategy.RANDOM_ALLY_INCLUDING_SELF: return _get_random(_allies, null)
+		TargettingStrategy.RANDOM_HERO_ALLY: return _get_random(_ally_heroes, null)
 		
 		# --- HP ---
 		TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF: return _get_lowest_hp(_allies, null)

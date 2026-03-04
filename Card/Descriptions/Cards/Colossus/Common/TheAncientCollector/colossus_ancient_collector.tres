@@ -15,3 +15,6 @@ name = "The Ancient Collector"
 picture = SubResource("PlaceholderTexture2D_bdonc")
 families = Array[int]([6])
 player_upgrade = SubResource("Resource_ancient_collector")
+points = Dictionary[int, int]({
+6: 1
+})

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://bhogu6m1synt8"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_laa5u"]
+[ext_resource type="Texture2D" uid="uid://b1e67csr3rjgk" path="res://Card/Descriptions/Cards/Warrior/Common/DiamondSword/attack_diamond_sword.png" id="1_o82qw"]
+[ext_resource type="Script" uid="uid://c0l28wvs8lw87" path="res://Card/Descriptions/Cards/Warrior/Common/DiamondSword/attack_diamond_sword.gd" id="2_cdg13"]
+
+[sub_resource type="Resource" id="Resource_re7yq"]
+script = ExtResource("2_cdg13")
+_damage = Array[int]([5, 10, 15, 20, 40])
+metadata/_custom_type_script = "uid://c0l28wvs8lw87"
+
+[resource]
+script = ExtResource("1_laa5u")
+name = "Diamond Sword"
+picture = ExtResource("1_o82qw")
+families = Array[int]([1])
+player_upgrade = SubResource("Resource_re7yq")
+points = Dictionary[int, int]({
+1: 1
+})
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

@@ -3,33 +3,31 @@ extends Resource
 
 # ============================== Enum ==============================
 
-enum FamilyType {
+enum Type {
 	UNDEF,
-	ATTACK,
-	DEFENSE,
-	FIRE,
-	STORM,
-	SERENITY,
-	LIFE,
+	WARRIOR,
+	ENGINEER,
+	ARDENT_CELESTIAL,
+	STORM_CALLER,
+	LIGHT,
+	COLOSSUS,
 	POISON,
-	MANA,
-	CHICKEN,
-	LIGHTNING,
+	CHICKEN_LORD,
 	NECROSIS,
-	SHADOW
 }
 
 # ============================== Constant ==============================
 
 const COLORS = {
-	FamilyType.ATTACK: Color(0.774, 0.644, 0.085),  # Yellow
-	FamilyType.STORM: Color(0, 0, 1),   # Blue
-	FamilyType.DEFENSE: Color(0.4, 0.26, 0.13),  # Brown
-	FamilyType.FIRE: Color(1, 0, 0),     # Red
-	FamilyType.POISON: Color(0.069, 0.332, 0.106), # Green
-	FamilyType.SERENITY: Color(1, 1, 1), # White
-	FamilyType.LIFE: Color(0.737, 0.379, 0.087), # Orange
-	FamilyType.NECROSIS: Color(0.518, 0.148, 0.681, 1.0), # Orange
+	Type.WARRIOR: Color(0.473, 0.482, 0.464, 1.0),  # Gray
+	Type.STORM_CALLER: Color(0, 0, 1),   # Blue
+	Type.ENGINEER: Color(0.4, 0.26, 0.13),  # Brown
+	Type.ARDENT_CELESTIAL: Color(1, 0, 0),     # Red
+	Type.POISON: Color(0.069, 0.332, 0.106), # Green
+	Type.LIGHT: Color(1, 1, 1), # White
+	Type.COLOSSUS: Color(0.737, 0.379, 0.087), # Orange
+	Type.CHICKEN_LORD: Color(0.673, 0.504, 0.032, 1.0), # Yellow
+	Type.NECROSIS: Color(0.518, 0.148, 0.681, 1.0), # Purple
 }
 
 # ============================== Exports ==============================
@@ -37,9 +35,9 @@ const COLORS = {
 @export var cards: Array[Card] # ALL cards in this game of this family type
 @export var icon: Texture2D
 @export var family_name: String
-@export var family_type: FamilyType
+@export var family_type: Type
 @export var color: Color
-@export var description: String = "<Family Description>"
+@export_multiline() var description: String = "<Family Description>"
 
 # ============================== Public variables ==============================
 

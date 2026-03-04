@@ -1,0 +1,550 @@
+[gd_scene format=3 uid="uid://cner77sto08sv"]
+
+[ext_resource type="Script" uid="uid://bq58sybv1niq" path="res://Prototyping/UI/UIFamiliesPortraits/ui_families_all_main.gd" id="1_upfde"]
+[ext_resource type="PackedScene" uid="uid://2u10cctc6o6i" path="res://Prototyping/UI/UIFamiliesPortraits/ui_family_main.tscn" id="2_rt24c"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_upfde"]
+bg_color = Color(0.60933006, 0.6093301, 0.60933006, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.20871013, 0.20871016, 0.20871013, 1)
+
+[node name="UIFamiliesAllMain" type="Control" unique_id=804888402 node_paths=PackedStringArray("_family_portraits")]
+layout_mode = 3
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 118.0
+grow_vertical = 2
+script = ExtResource("1_upfde")
+_family_portraits = [NodePath("MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family1/HBoxContainer/Family/UIFamilyMain"), NodePath("MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family2/HBoxContainer/Family/UIFamilyMain"), NodePath("MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family3/HBoxContainer/Family/UIFamilyMain"), NodePath("MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family4/HBoxContainer/Family/UIFamilyMain"), NodePath("MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family5/HBoxContainer/Family/UIFamilyMain"), NodePath("MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family6/HBoxContainer/Family/UIFamilyMain"), NodePath("MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family7/HBoxContainer/Family/UIFamilyMain"), NodePath("MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family8/HBoxContainer/Family/UIFamilyMain")]
+
+[node name="ConnectBar" type="ColorRect" parent="." unique_id=736736615]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 443.0
+offset_right = 205.0
+offset_bottom = 453.0
+color = Color(0.20871013, 0.20871016, 0.20871013, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1985283379]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_right = 15
+metadata/_edit_lock_ = true
+
+[node name="MainVBox" type="VBoxContainer" parent="MarginContainer" unique_id=1337414342]
+layout_mode = 2
+alignment = 1
+
+[node name="EnhancedFamilies" type="Control" parent="MarginContainer/MainVBox" unique_id=1216895525]
+layout_mode = 2
+
+[node name="DebugColorRect" type="ColorRect" parent="MarginContainer/MainVBox/EnhancedFamilies" unique_id=1869044538]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.9071358, 0.0007329351, 0.9183959, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MainVBox/EnhancedFamilies" unique_id=156971167]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NormalFamilies" type="Control" parent="MarginContainer/MainVBox" unique_id=1138317449]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DebugColorRect" type="ColorRect" parent="MarginContainer/MainVBox/NormalFamilies" unique_id=1123016416]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.9655172, 8.355499e-05, 0.74290675, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MainVBox/NormalFamilies" unique_id=1737633705]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = -23
+alignment = 1
+
+[node name="Family1" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer" unique_id=1029145385]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family1" unique_id=1419897643]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Family" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family1/HBoxContainer" unique_id=1393602913]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="DebugColorRect" type="ColorRect" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family1/HBoxContainer/Family" unique_id=663316652]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.07682108, 0.655883, 5.7756904e-07, 1)
+
+[node name="Label" type="Label" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family1/HBoxContainer/Family/DebugColorRect" unique_id=921228108]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UIFamilyMain" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family1/HBoxContainer/Family" unique_id=596099329 instance=ExtResource("2_rt24c")]
+layout_mode = 1
+
+[node name="Empty" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family1/HBoxContainer" unique_id=1851792109]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Family2" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer" unique_id=2075307807]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family2" unique_id=117183015]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Empty" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family2/HBoxContainer" unique_id=1153146726]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Family" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family2/HBoxContainer" unique_id=249515431]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="DebugColorRect" type="ColorRect" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family2/HBoxContainer/Family" unique_id=428111809]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.07682108, 0.655883, 5.7756904e-07, 1)
+
+[node name="Label" type="Label" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family2/HBoxContainer/Family/DebugColorRect" unique_id=812354332]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UIFamilyMain" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family2/HBoxContainer/Family" unique_id=1856867208 instance=ExtResource("2_rt24c")]
+layout_mode = 1
+
+[node name="Family3" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer" unique_id=1513703725]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family3" unique_id=1729213465]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Family" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family3/HBoxContainer" unique_id=1646273]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="DebugColorRect" type="ColorRect" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family3/HBoxContainer/Family" unique_id=1017395871]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.07682108, 0.655883, 5.7756904e-07, 1)
+
+[node name="Label" type="Label" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family3/HBoxContainer/Family/DebugColorRect" unique_id=28998117]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UIFamilyMain" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family3/HBoxContainer/Family" unique_id=1795589044 instance=ExtResource("2_rt24c")]
+layout_mode = 1
+
+[node name="Empty" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family3/HBoxContainer" unique_id=1693703111]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Family4" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer" unique_id=1161633453]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family4" unique_id=524577285]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Empty" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family4/HBoxContainer" unique_id=943292351]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Family" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family4/HBoxContainer" unique_id=1501985242]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="DebugColorRect" type="ColorRect" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family4/HBoxContainer/Family" unique_id=1284544285]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.07682108, 0.655883, 5.7756904e-07, 1)
+
+[node name="Label" type="Label" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family4/HBoxContainer/Family/DebugColorRect" unique_id=1947584283]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UIFamilyMain" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family4/HBoxContainer/Family" unique_id=1072634499 instance=ExtResource("2_rt24c")]
+layout_mode = 1
+
+[node name="Family5" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer" unique_id=41196907]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family5" unique_id=821648867]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Family" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family5/HBoxContainer" unique_id=1830831593]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="DebugColorRect" type="ColorRect" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family5/HBoxContainer/Family" unique_id=136085650]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.07682108, 0.655883, 5.7756904e-07, 1)
+
+[node name="Label" type="Label" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family5/HBoxContainer/Family/DebugColorRect" unique_id=1927512465]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UIFamilyMain" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family5/HBoxContainer/Family" unique_id=982206073 instance=ExtResource("2_rt24c")]
+layout_mode = 1
+
+[node name="Empty" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family5/HBoxContainer" unique_id=1268958342]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Family6" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer" unique_id=2114293866]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family6" unique_id=1641659716]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Empty" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family6/HBoxContainer" unique_id=1019233755]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Family" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family6/HBoxContainer" unique_id=1992258385]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="DebugColorRect" type="ColorRect" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family6/HBoxContainer/Family" unique_id=340939304]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.07682108, 0.655883, 5.7756904e-07, 1)
+
+[node name="Label" type="Label" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family6/HBoxContainer/Family/DebugColorRect" unique_id=2071242384]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UIFamilyMain" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family6/HBoxContainer/Family" unique_id=1326932432 instance=ExtResource("2_rt24c")]
+layout_mode = 1
+
+[node name="Family7" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer" unique_id=446240362]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family7" unique_id=65768612]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Family" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family7/HBoxContainer" unique_id=1318715612]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="DebugColorRect" type="ColorRect" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family7/HBoxContainer/Family" unique_id=850827898]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.07682108, 0.655883, 5.7756904e-07, 1)
+
+[node name="Label" type="Label" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family7/HBoxContainer/Family/DebugColorRect" unique_id=1209850366]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UIFamilyMain" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family7/HBoxContainer/Family" unique_id=2120040489 instance=ExtResource("2_rt24c")]
+layout_mode = 1
+
+[node name="Empty" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family7/HBoxContainer" unique_id=1272565203]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Family8" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer" unique_id=1973825263]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family8" unique_id=1397444326]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Empty" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family8/HBoxContainer" unique_id=622403411]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Family" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family8/HBoxContainer" unique_id=1866532734]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="DebugColorRect" type="ColorRect" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family8/HBoxContainer/Family" unique_id=363714766]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.07682108, 0.655883, 5.7756904e-07, 1)
+
+[node name="Label" type="Label" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family8/HBoxContainer/Family/DebugColorRect" unique_id=765909676]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UIFamilyMain" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family8/HBoxContainer/Family" unique_id=467541669 instance=ExtResource("2_rt24c")]
+layout_mode = 1
+
+[node name="InfoPanel" type="Panel" parent="." unique_id=578594225]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 120.0
+offset_top = -177.0
+offset_right = 449.0
+offset_bottom = 151.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_upfde")

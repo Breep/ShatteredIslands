@@ -16,4 +16,7 @@ name = "Ancient Growth"
 picture = ExtResource("1_7hkqd")
 families = Array[int]([6])
 player_upgrade = SubResource("Resource_3rf7c")
+points = Dictionary[int, int]({
+6: 1
+})
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"
