@@ -25,7 +25,7 @@
 script = ExtResource("2_m6yig")
 cards = Array[ExtResource("1_4dvmk")]([ExtResource("2_pxftt"), ExtResource("3_hfo1r"), ExtResource("4_3gyb5"), ExtResource("5_5yvjh"), ExtResource("6_o6pym"), ExtResource("7_4yplm"), ExtResource("8_4xqgf"), ExtResource("9_bh88q"), ExtResource("10_aq1hw"), ExtResource("12_m0m1f"), ExtResource("13_j4n54"), ExtResource("14_d48eo"), ExtResource("15_53lib"), ExtResource("16_21jcm"), ExtResource("17_pgyqe"), ExtResource("18_x260t"), ExtResource("18_pxftt")])
 icon = ExtResource("9_m74lt")
-family_name = "Attack"
+family_name = "Warrior"
 family_type = 1
 color = Color(0.299547, 0.299547, 0.299547, 1)
 metadata/_custom_type_script = "uid://d3wk3nm7f672j"

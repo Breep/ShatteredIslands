@@ -55,7 +55,7 @@ func _get_families_sorted(families_lvl_raw: Dictionary) -> Array[Family.FamilyTy
 
 
 func _get_highest_family_lvl_raw(families_lvl_raw: Dictionary) -> Family.FamilyType:
-	var highest_family: Family.FamilyType = Family.FamilyType.ATTACK
+	var highest_family: Family.FamilyType = Family.FamilyType.WARRIOR
 	var highest_lvl: int = 0
 	for family_type in families_lvl_raw.keys():
 		if families_lvl_raw[family_type] > highest_lvl:

@@ -5,30 +5,28 @@ extends Resource
 
 enum FamilyType {
 	UNDEF,
-	ATTACK,
-	DEFENSE,
-	FIRE,
-	STORM,
-	SERENITY,
-	LIFE,
+	WARRIOR,
+	ENGINEER,
+	ARDENT_CELESTIAL,
+	STORM_CALLER,
+	LIGHT,
+	COLOSSUS,
 	POISON,
-	MANA,
-	CHICKEN,
-	LIGHTNING,
+	CHICKEN_LORD,
 	NECROSIS,
-	SHADOW
 }
 
 # ============================== Constant ==============================
 
 const COLORS = {
-	FamilyType.ATTACK: Color(0.774, 0.644, 0.085),  # Yellow
-	FamilyType.STORM: Color(0, 0, 1),   # Blue
-	FamilyType.DEFENSE: Color(0.4, 0.26, 0.13),  # Brown
-	FamilyType.FIRE: Color(1, 0, 0),     # Red
+	FamilyType.WARRIOR: Color(0.473, 0.482, 0.464, 1.0),  # Gray
+	FamilyType.STORM_CALLER: Color(0, 0, 1),   # Blue
+	FamilyType.ENGINEER: Color(0.4, 0.26, 0.13),  # Brown
+	FamilyType.ARDENT_CELESTIAL: Color(1, 0, 0),     # Red
 	FamilyType.POISON: Color(0.069, 0.332, 0.106), # Green
-	FamilyType.SERENITY: Color(1, 1, 1), # White
-	FamilyType.LIFE: Color(0.737, 0.379, 0.087), # Orange
+	FamilyType.LIGHT: Color(1, 1, 1), # White
+	FamilyType.COLOSSUS: Color(0.737, 0.379, 0.087), # Orange
+	FamilyType.CHICKEN_LORD: Color(0.673, 0.504, 0.032, 1.0), # Yellow
 	FamilyType.NECROSIS: Color(0.518, 0.148, 0.681, 1.0), # Orange
 }
 

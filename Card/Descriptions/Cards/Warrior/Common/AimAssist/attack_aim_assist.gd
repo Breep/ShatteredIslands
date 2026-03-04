@@ -12,7 +12,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 	var count: int = 0
 	if ctx.hero.deck:
-		count = ctx.hero.deck.get_unique_card_count(Family.FamilyType.ATTACK)
+		count = ctx.hero.deck.get_unique_card_count(Family.FamilyType.WARRIOR)
 	else:
 		push_warning("Aim Assist: deck is null")
 

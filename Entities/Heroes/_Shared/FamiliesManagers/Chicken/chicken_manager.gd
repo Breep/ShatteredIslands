@@ -66,13 +66,13 @@ func _init_gifted_types() -> void:
 	for family_type in _families_level:
 		for i in GIFTED_FAMILY_WEIGHTS[_families_level[family_type]]:
 			match family_type:
-				Family.FamilyType.ATTACK: _gifted_types.append(Chicken.Type.GIFTED_ATTACK)
-				Family.FamilyType.FIRE: _gifted_types.append(Chicken.Type.GIFTED_FIRE)
-				Family.FamilyType.DEFENSE: _gifted_types.append(Chicken.Type.GIFTED_SHIELD)
+				Family.FamilyType.WARRIOR: _gifted_types.append(Chicken.Type.GIFTED_ATTACK)
+				Family.FamilyType.ARDENT_CELESTIAL: _gifted_types.append(Chicken.Type.GIFTED_FIRE)
+				Family.FamilyType.ENGINEER: _gifted_types.append(Chicken.Type.GIFTED_SHIELD)
 				Family.FamilyType.LIGHTNING: _gifted_types.append(Chicken.Type.GIFTED_LIGHTNING)
-				Family.FamilyType.SERENITY: _gifted_types.append(Chicken.Type.GIFTED_LIGHT)
+				Family.FamilyType.LIGHT: _gifted_types.append(Chicken.Type.GIFTED_LIGHT)
 				Family.FamilyType.POISON: _gifted_types.append(Chicken.Type.GIFTED_POISON)
-				Family.FamilyType.LIFE: _gifted_types.append(Chicken.Type.GIFTED_COLOSSUS)
+				Family.FamilyType.COLOSSUS: _gifted_types.append(Chicken.Type.GIFTED_COLOSSUS)
 				Family.FamilyType.NECROSIS: _gifted_types.append(Chicken.Type.GIFTED_NECROSIS)
 
 
@@ -99,8 +99,8 @@ func _spawn_chicken(chicken_type: Chicken.Type) -> void:
 		Chicken.Type.GIFTED_ATTACK:
 			_owner.summon_entity(Entity.EntityType.CHICKEN, spawn_location_config, {
 				"Type": Chicken.Type.GIFTED_ATTACK,
-				"ad": _owner.stats.attack_damage * GIFTED_AD_RATIOS[_families_level[Family.FamilyType.ATTACK]-1],
-				"as": _owner.stats.attack_speed * GIFTED_AS_RATIOS[_families_level[Family.FamilyType.ATTACK]-1],
+				"ad": _owner.stats.attack_damage * GIFTED_AD_RATIOS[_families_level[Family.FamilyType.WARRIOR]-1],
+				"as": _owner.stats.attack_speed * GIFTED_AS_RATIOS[_families_level[Family.FamilyType.WARRIOR]-1],
 				})
 		Chicken.Type.GIFTED_POISON:
 			_owner.summon_entity(Entity.EntityType.CHICKEN, spawn_location_config, {
@@ -111,22 +111,22 @@ func _spawn_chicken(chicken_type: Chicken.Type) -> void:
 		Chicken.Type.GIFTED_COLOSSUS:
 			_owner.summon_entity(Entity.EntityType.CHICKEN, spawn_location_config, {
 				"Type": Chicken.Type.GIFTED_COLOSSUS,
-				"hpmax": _owner.stats.health_max * GIFTED_COLOSSUS_HPMAX_RATIOS[_families_level[Family.FamilyType.LIFE]-1]
+				"hpmax": _owner.stats.health_max * GIFTED_COLOSSUS_HPMAX_RATIOS[_families_level[Family.FamilyType.COLOSSUS]-1]
 			})
 		Chicken.Type.GIFTED_LIGHT:
 			var bonus_heal: float = _owner.stats.get_stat(EntityStats.StatType.STRENGTH, Utils.ActionType.UTILITY_HEAL)
 			_owner.summon_entity(Entity.EntityType.CHICKEN, spawn_location_config, {
 				"Type": Chicken.Type.GIFTED_LIGHT,
-				"ratio_regen": GIFTED_LIGHT_REGEN_RATIOS[_families_level[Family.FamilyType.SERENITY]-1],
-				"inherited_heal_ratio": bonus_heal * GIFTED_LIGHT_INHERITED_HEAL[_families_level[Family.FamilyType.SERENITY]-1]
+				"ratio_regen": GIFTED_LIGHT_REGEN_RATIOS[_families_level[Family.FamilyType.LIGHT]-1],
+				"inherited_heal_ratio": bonus_heal * GIFTED_LIGHT_INHERITED_HEAL[_families_level[Family.FamilyType.LIGHT]-1]
 			})
 		Chicken.Type.GIFTED_SHIELD:
 			var bonus_shield: float = _owner.stats.get_stat(EntityStats.StatType.STRENGTH, Utils.ActionType.STACK_SHIELD)
 			_owner.summon_entity(Entity.EntityType.CHICKEN, spawn_location_config, {
 				"Type": Chicken.Type.GIFTED_SHIELD,
-				"shield_per_attack": GIFTED_SHIELD_PER_ATTACK[_families_level[Family.FamilyType.DEFENSE]-1],
-				"bonus_spawn": GIFTED_SHIELD_BONUS_SPAWN[_families_level[Family.FamilyType.DEFENSE]-1],
-				"shield_strength_inherited": bonus_shield * GIFTED_SHIELD_INHERITED_SHIELD[_families_level[Family.FamilyType.DEFENSE]-1]
+				"shield_per_attack": GIFTED_SHIELD_PER_ATTACK[_families_level[Family.FamilyType.ENGINEER]-1],
+				"bonus_spawn": GIFTED_SHIELD_BONUS_SPAWN[_families_level[Family.FamilyType.ENGINEER]-1],
+				"shield_strength_inherited": bonus_shield * GIFTED_SHIELD_INHERITED_SHIELD[_families_level[Family.FamilyType.ENGINEER]-1]
 			})
 			
 			

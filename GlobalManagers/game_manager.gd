@@ -74,15 +74,15 @@ var _random_heroes_ref: Array[HeroDesc.HeroId]
 
 func _init() -> void:
 	Verbose.debug("GAME MANAGER INIT", Verbose.Category.DEFAULT)
-	_FAMILIES_REF[Family.FamilyType.ATTACK] = load("res://Card/Descriptions/Families/attack_family.tres") as Family
-	_FAMILIES_REF[Family.FamilyType.DEFENSE] = load("res://Card/Descriptions/Families/defense_family.tres") as Family
-	_FAMILIES_REF[Family.FamilyType.FIRE] = load("res://Card/Descriptions/Families/fire_family.tres") as Family
+	_FAMILIES_REF[Family.FamilyType.WARRIOR] = load("res://Card/Descriptions/Families/attack_family.tres") as Family
+	_FAMILIES_REF[Family.FamilyType.ENGINEER] = load("res://Card/Descriptions/Families/defense_family.tres") as Family
+	_FAMILIES_REF[Family.FamilyType.ARDENT_CELESTIAL] = load("res://Card/Descriptions/Families/fire_family.tres") as Family
 	_FAMILIES_REF[Family.FamilyType.POISON] = load("res://Card/Descriptions/Families/poison_family.tres") as Family
-	_FAMILIES_REF[Family.FamilyType.STORM] = load("res://Card/Descriptions/Families/storm_family.tres") as Family
-	_FAMILIES_REF[Family.FamilyType.SERENITY] = load("res://Card/Descriptions/Families/serenity_family.tres") as Family
-	_FAMILIES_REF[Family.FamilyType.LIFE] = load("res://Card/Descriptions/Families/life_family.tres") as Family
+	_FAMILIES_REF[Family.FamilyType.STORM_CALLER] = load("res://Card/Descriptions/Families/storm_family.tres") as Family
+	_FAMILIES_REF[Family.FamilyType.LIGHT] = load("res://Card/Descriptions/Families/serenity_family.tres") as Family
+	_FAMILIES_REF[Family.FamilyType.COLOSSUS] = load("res://Card/Descriptions/Families/life_family.tres") as Family
 	_FAMILIES_REF[Family.FamilyType.MANA] = load("res://Card/Descriptions/Families/mana_family.tres") as Family
-	_FAMILIES_REF[Family.FamilyType.CHICKEN] = load("res://Card/Descriptions/Families/chickenlord_family.tres") as Family
+	_FAMILIES_REF[Family.FamilyType.CHICKEN_LORD] = load("res://Card/Descriptions/Families/chickenlord_family.tres") as Family
 	_FAMILIES_REF[Family.FamilyType.LIGHTNING] = load("res://Card/Descriptions/Families/lightning_family.tres") as Family
 	_FAMILIES_REF[Family.FamilyType.NECROSIS] = load("res://Card/Descriptions/Families/necro_family.tres") as Family
 	_FAMILIES_REF[Family.FamilyType.SHADOW] = load("res://Card/Descriptions/Families/shadow_family.tres") as Family
@@ -120,13 +120,13 @@ func clear() -> void:
 
 func init() -> void:
 	_game_rules = load("res://Game/GameRules/normal_game_rules.tres")
-	_active_families.append(_FAMILIES_REF[Family.FamilyType.DEFENSE])
+	_active_families.append(_FAMILIES_REF[Family.FamilyType.ENGINEER])
 	_active_families.append(_FAMILIES_REF[Family.FamilyType.POISON])
-	_active_families.append(_FAMILIES_REF[Family.FamilyType.FIRE])
-	_active_families.append(_FAMILIES_REF[Family.FamilyType.ATTACK])
-	_active_families.append(_FAMILIES_REF[Family.FamilyType.SERENITY])
+	_active_families.append(_FAMILIES_REF[Family.FamilyType.ARDENT_CELESTIAL])
+	_active_families.append(_FAMILIES_REF[Family.FamilyType.WARRIOR])
+	_active_families.append(_FAMILIES_REF[Family.FamilyType.LIGHT])
 	_active_families.append(_FAMILIES_REF[Family.FamilyType.LIGHTNING])
-	_active_families.append(_FAMILIES_REF[Family.FamilyType.LIFE])
+	_active_families.append(_FAMILIES_REF[Family.FamilyType.COLOSSUS])
 	_active_families.append(_FAMILIES_REF[Family.FamilyType.NECROSIS])
 
 

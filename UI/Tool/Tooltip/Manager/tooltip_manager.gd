@@ -71,7 +71,7 @@ extends Node
 	"POISON_DAMAGE":   "[color=%s][url=POISON_DAMAGE]poison damage[/url][/color]"     % THEME.color_html("POISON_COLOR"),
 	"TRUE_DAMAGE":     "[color=%s][url=TRUE_DAMAGE]true damage[/url][/color]"         % THEME.color_html("TRUE_COLOR"),
 
-	# --- DEFENSE ---
+	# --- ENGINEER ---
 	"ARMOR":             "[color=%s][url=ARMOR]armor[/url][/color]"                         % THEME.color_html("DEFENCE_COLOR"),
 	"MR":                "[color=%s][url=MR]magic resistance[/url][/color]"                 % THEME.color_html("MAGICAL_COLOR"),
 	"DODGE":             "[color=%s][url=DODGE]dodge[/url][/color]"                         % THEME.color_html("STAT_COLOR"),
@@ -79,7 +79,7 @@ extends Node
 	"POISON_RESISTANCE": "[color=%s][url=POISON_RESISTANCE]poison resistance[/url][/color]" % THEME.color_html("POISON_COLOR"),
 
 	# --- STATS OFFENSIVES ---
-	"ATTACK":          "[color=%s][url=ATTACK]attack[/url][/color]"                   % THEME.color_html("ATTACK_COLOR"),
+	"WARRIOR":          "[color=%s][url=WARRIOR]attack[/url][/color]"                   % THEME.color_html("ATTACK_COLOR"),
 	"CRIT_CHANCE":     "[color=%s][url=CRIT_CHANCE]crit chance[/url][/color]"         % THEME.color_html("STAT_COLOR"),
 	"CRIT_MULTIPLIER": "[color=%s][url=CRIT_MULTIPLIER]crit multiplier[/url][/color]" % THEME.color_html("STAT_COLOR"),
 
@@ -104,9 +104,9 @@ extends Node
 	"RANK":         "[color=%s][url=RANK]rank[/url][/color]"                 % THEME.color_html("LIGHTNING_COLOR"),
 	"SUMMON":       "[color=%s][url=SUMMON]summon[/url][/color]"             % THEME.color_html("NECRO_COLOR"),
 	"LIGHTNING":    "[color=%s][url=LIGHTNING]lightning[/url][/color]"       % THEME.color_html("LIGHTNING_COLOR"),
-	"SERENITY":     "[color=%s][url=SERENITY]serenity[/url][/color]"         % THEME.color_html("SERENITY_COLOR"),
+	"LIGHT":     "[color=%s][url=LIGHT]serenity[/url][/color]"         % THEME.color_html("SERENITY_COLOR"),
 	"CHICKEN_LORD": "[color=%s][url=CHICKEN_LORD]chicken-lord[/url][/color]" % THEME.color_html("CHICKEN_COLOR"),
-	"LIFE":         "[color=%s][url=LIFE]life[/url][/color]"                 % THEME.color_html("LIFE_COLOR"),
+	"COLOSSUS":         "[color=%s][url=COLOSSUS]life[/url][/color]"                 % THEME.color_html("LIFE_COLOR"),
 	"NECRO":        "[color=%s][url=NECRO]necro[/url][/color]"               % THEME.color_html("NECRO_COLOR"),
 
 	# --- AUTRE ---

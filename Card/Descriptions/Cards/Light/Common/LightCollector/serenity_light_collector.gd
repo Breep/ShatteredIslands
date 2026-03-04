@@ -15,7 +15,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if ctx.hero.deck == null:
 			push_warning("Light Collector: deck is null")
 			return
-		var count: int = ctx.hero.deck.get_unique_card_count(Family.FamilyType.SERENITY)
+		var count: int = ctx.hero.deck.get_unique_card_count(Family.FamilyType.LIGHT)
 		var total_regen: float = count * regen_amount
 		if total_regen <= 0: return
 
