@@ -596,7 +596,7 @@ func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, n
 			Events.entity_cliked.emit(self )
 			Verbose.debug("L'entité " + entity_name + " a été cliquée !", Verbose.Category.ENTITY)
 			_play_on_click_animation()
-	
+
 
 var _click_tween: Tween
 func _play_on_click_animation() -> void:

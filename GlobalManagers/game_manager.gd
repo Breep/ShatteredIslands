@@ -56,7 +56,7 @@ var game_state: GameState:
 
 # ============================== Private variables ==============================
 
-var _game_scene: PackedScene
+var _game_scene: PackedScene = load("res://Game/game.tscn")
 
 var _FAMILIES_REF: Dictionary[Family.FamilyType, Family] = {
 }
@@ -165,7 +165,6 @@ func get_active_families() -> Array[Family]:
 
 @rpc("any_peer", "call_local")
 func start_game() -> void:
-	_game_scene = load("res://Game/game.tscn")
 	CardShopManager.init(_active_families, _game_rules)
 	get_tree().change_scene_to_packed(_game_scene)
 
