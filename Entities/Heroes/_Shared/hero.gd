@@ -13,6 +13,8 @@ enum DisplayMode {
 
 #region ============================== Signal ==============================
 signal ultimate_casted()
+signal fight_is_won()
+signal fight_is_lost()
 #endregion
 
 #region ============================== Export ==============================
@@ -68,11 +70,14 @@ func get_families_level() -> Dictionary[Family.Type, int]:
 
 func get_card_context() -> CardContext:
 	return _card_context
+
+
+func handle_end_of_fight(is_winner: bool) -> void:
+	if is_winner: fight_is_won.emit()
+	else: fight_is_lost.emit()
 #endregion
 
 #region ===== Actions (Hero-specific overrides) =====
-
-# Instant projectile attack (spells, abilities) - no animation
 func cast_ultimate() -> void:
 	ultimate_casted.emit()
 #endregion

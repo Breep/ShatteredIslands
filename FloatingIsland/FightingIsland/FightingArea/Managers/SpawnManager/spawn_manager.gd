@@ -93,7 +93,7 @@ func _on_game_manager_game_state_changed(state: GameManager.GameState) -> void:
 
 
 func _on_fight_is_over(_manager, _order) -> void:
-	_clear_all()
+	pass
 
 
 func _on_projectile_target_hit(target: Entity, gpos: Vector3, projectile_uid: int) -> void:
