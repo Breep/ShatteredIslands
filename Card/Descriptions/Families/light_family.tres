@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="Family" load_steps=17 format=3 uid="uid://brvmbafl0cv83"]
+[gd_resource type="Resource" script_class="Family" format=3 uid="uid://brvmbafl0cv83"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_8oghy"]
-[ext_resource type="Texture2D" uid="uid://ckifdy6fknspj" path="res://Card/Descriptions/Families/Icons/serenity.png" id="2_1sm61"]
+[ext_resource type="Texture2D" uid="uid://ckifdy6fknspj" path="res://Card/Descriptions/Families/Icons/light.png" id="2_1sm61"]
 [ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://Card/Templates/family.gd" id="2_11cd3"]
 [ext_resource type="Resource" uid="uid://vw6felcpdbf0" path="res://Card/Descriptions/Cards/Light/Common/CorruptedLight/serenity_corrupted_light.tres" id="2_ml7j6"]
 [ext_resource type="Resource" uid="uid://dtuljjoqfnos0" path="res://Card/Descriptions/Cards/Light/Common/GracefulStep/light_graceful_step.tres" id="3_j6vka"]

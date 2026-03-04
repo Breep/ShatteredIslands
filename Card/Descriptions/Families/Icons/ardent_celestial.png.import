@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://brqxl08k441d6"
-path="res://.godot/imported/lightning.png-2e9f3e4305a57c005defe940b499d8db.ctex"
+uid="uid://8onux3p1rx86"
+path="res://.godot/imported/ardent_celestial.png-f5f6c3787cac29ef3535c31b60c561f8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Card/Descriptions/Families/Icons/lightning.png"
-dest_files=["res://.godot/imported/lightning.png-2e9f3e4305a57c005defe940b499d8db.ctex"]
+source_file="res://Card/Descriptions/Families/Icons/ardent_celestial.png"
+dest_files=["res://.godot/imported/ardent_celestial.png-f5f6c3787cac29ef3535c31b60c561f8.ctex"]
 
 [params]
 

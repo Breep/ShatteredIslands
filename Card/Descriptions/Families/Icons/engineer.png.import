@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ckifdy6fknspj"
-path="res://.godot/imported/serenity.png-fc06ccb628791026cfff30ea4943c333.ctex"
+uid="uid://dlbjl8ihicpc8"
+path="res://.godot/imported/engineer.png-659217131692084176f948ccdfbfb88b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Card/Descriptions/Families/Icons/serenity.png"
-dest_files=["res://.godot/imported/serenity.png-fc06ccb628791026cfff30ea4943c333.ctex"]
+source_file="res://Card/Descriptions/Families/Icons/engineer.png"
+dest_files=["res://.godot/imported/engineer.png-659217131692084176f948ccdfbfb88b.ctex"]
 
 [params]
 

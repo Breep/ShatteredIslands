@@ -10,7 +10,7 @@
 [ext_resource type="Resource" uid="uid://ceriu6ydblll8" path="res://Card/Descriptions/Cards/Warrior/Rare/NecroticBullet/attack_necrotic_bullet.tres" id="7_4yplm"]
 [ext_resource type="Resource" uid="uid://dm4yi57mem0b4" path="res://Card/Descriptions/Cards/Warrior/Common/ProtectoSpear/attack_protecto_spear.tres" id="8_4xqgf"]
 [ext_resource type="Resource" uid="uid://dxr7p12a3u5s0" path="res://Card/Descriptions/Cards/Warrior/Common/RustyDagger/attack_rusty_dagger.tres" id="9_bh88q"]
-[ext_resource type="Texture2D" uid="uid://b78s362n5bu6" path="res://Card/Descriptions/Families/Icons/turret.png" id="9_m74lt"]
+[ext_resource type="Texture2D" uid="uid://b78s362n5bu6" path="res://Card/Descriptions/Families/Icons/warrior.png" id="9_m74lt"]
 [ext_resource type="Resource" uid="uid://dpnpvtk3elac0" path="res://Card/Descriptions/Cards/Warrior/Common/ScorchingBlade/attack_scorching_blade.tres" id="10_aq1hw"]
 [ext_resource type="Resource" uid="uid://ctm6ojtt36a88" path="res://Card/Descriptions/Cards/Warrior/Common/TwinBlade/attack_twin_blade.tres" id="12_m0m1f"]
 [ext_resource type="Resource" uid="uid://c526xnq31ipht" path="res://Card/Descriptions/Cards/Warrior/DoubleEdgeSword/attack_double_edge_sword.tres" id="13_j4n54"]

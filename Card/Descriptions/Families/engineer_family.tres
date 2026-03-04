@@ -14,7 +14,7 @@
 [ext_resource type="Resource" uid="uid://cwywvggm7tovg" path="res://Card/Descriptions/Cards/Engineer/Common/ToxicFiltrationLayer/defense_toxic_filtration_layer.tres" id="10_0vhvt"]
 [ext_resource type="Resource" uid="uid://c7vmqb7h1a62e" path="res://Card/Descriptions/Cards/Engineer/Legendary/FieldGenerator/defense_field_generator.tres" id="10_field_gen"]
 [ext_resource type="Resource" uid="uid://dn12dex5vaxb1" path="res://Card/Descriptions/Cards/Engineer/Rare/AbsorptionMatrix/defense_absorption_matrix.tres" id="13_mogah"]
-[ext_resource type="Texture2D" uid="uid://dlbjl8ihicpc8" path="res://Card/Descriptions/Families/Icons/defense.png" id="13_spcg6"]
+[ext_resource type="Texture2D" uid="uid://dlbjl8ihicpc8" path="res://Card/Descriptions/Families/Icons/engineer.png" id="13_spcg6"]
 [ext_resource type="Resource" uid="uid://ceejbf6x7fcyp" path="res://Card/Descriptions/Cards/Engineer/Rare/AetherRedirector/defense_aether_redirector.tres" id="14_vagij"]
 [ext_resource type="Resource" uid="uid://du0o8udb4adn5" path="res://Card/Descriptions/Cards/Engineer/Rare/ShieldThrow/shieldomatic_shield_throw.tres" id="15_lhiy4"]
 

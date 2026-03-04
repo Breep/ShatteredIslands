@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_kkrq8"]
 [ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://Card/Templates/family.gd" id="2_ad662"]
 [ext_resource type="Resource" uid="uid://kbmlikqifik1" path="res://Card/Descriptions/Cards/StormCaller/Rare/StormBreaker/storm_storm_breaker.tres" id="2_k3wcx"]
-[ext_resource type="Texture2D" uid="uid://ctng6xf3suweb" path="res://Card/Descriptions/Families/Icons/storm.png" id="2_xw4lb"]
+[ext_resource type="Texture2D" uid="uid://ctng6xf3suweb" path="res://Card/Descriptions/Families/Icons/storm_caller.png" id="2_xw4lb"]
 [ext_resource type="Resource" uid="uid://cki0jkayic783" path="res://Card/Descriptions/Cards/StormCaller/Common/Storm Battery/storm_storm_battery.tres" id="3_l7wou"]
 [ext_resource type="Resource" uid="uid://bp2rry4m26npn" path="res://Card/Descriptions/Cards/StormCaller/Common/EyeOfTheCyclone/storm_eye_of_the_cyclone.tres" id="4_75unv"]
 [ext_resource type="Resource" uid="uid://cvotvjg1tq3fy" path="res://Card/Descriptions/Cards/StormCaller/Common/Faraday/storm_faraday.tres" id="5_htowo"]

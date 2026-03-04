@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_card"]
 [ext_resource type="Script" uid="uid://b4adhawsq12gm" path="res://Card/Descriptions/Cards/StormCaller/Common/SchrodingerStorm/storm_schrodinger_storm.gd" id="2_script"]
-[ext_resource type="Texture2D" uid="uid://ctng6xf3suweb" path="res://Card/Descriptions/Families/Icons/storm.png" id="3_icon"]
+[ext_resource type="Texture2D" uid="uid://ctng6xf3suweb" path="res://Card/Descriptions/Families/Icons/storm_caller.png" id="3_icon"]
 
 [sub_resource type="Resource" id="Resource_schrod"]
 script = ExtResource("2_script")

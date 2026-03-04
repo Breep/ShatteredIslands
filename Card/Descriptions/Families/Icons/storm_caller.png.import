@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://inrfqqaj0ycx"
-path="res://.godot/imported/mana.png-8c19aae7f9297e54418501acbf86732d.ctex"
+uid="uid://ctng6xf3suweb"
+path="res://.godot/imported/storm_caller.png-b0172dd08e029e0326edd3dfedfde6e2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Card/Descriptions/Families/Icons/mana.png"
-dest_files=["res://.godot/imported/mana.png-8c19aae7f9297e54418501acbf86732d.ctex"]
+source_file="res://Card/Descriptions/Families/Icons/storm_caller.png"
+dest_files=["res://.godot/imported/storm_caller.png-b0172dd08e029e0326edd3dfedfde6e2.ctex"]
 
 [params]
 

@@ -1,8 +1,8 @@
-[gd_resource type="Resource" script_class="TooltipTheme" load_steps=6 format=3 uid="uid://dxvbn034enrvj"]
+[gd_resource type="Resource" script_class="TooltipTheme" format=3 uid="uid://dxvbn034enrvj"]
 
 [ext_resource type="Texture2D" uid="uid://bl5f54pvygwuh" path="res://UI/_Themes/Data/book.png" id="2_0gl0c"]
-[ext_resource type="Texture2D" uid="uid://inrfqqaj0ycx" path="res://Card/Descriptions/Families/Icons/mana.png" id="3_0gl0c"]
-[ext_resource type="Texture2D" uid="uid://b78s362n5bu6" path="res://Card/Descriptions/Families/Icons/turret.png" id="4_51tpr"]
+[ext_resource type="Texture2D" path="res://Card/Descriptions/Families/Icons/mana.png" id="3_0gl0c"]
+[ext_resource type="Texture2D" uid="uid://b78s362n5bu6" path="res://Card/Descriptions/Families/Icons/warrior.png" id="4_51tpr"]
 [ext_resource type="Texture2D" uid="uid://cwqdngpmbcnck" path="res://Card/Descriptions/Families/Icons/poison.png" id="5_t0qtx"]
 [ext_resource type="Script" uid="uid://dgukdre62e5bf" path="res://UI/Tool/Tooltip/Theme/tooltip_theme.gd" id="6_fouw8"]
 
