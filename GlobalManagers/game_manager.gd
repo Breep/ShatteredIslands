@@ -58,7 +58,7 @@ var game_state: GameState:
 
 var _game_scene: PackedScene = load("res://Game/game.tscn")
 
-var _FAMILIES_REF: Dictionary[Family.FamilyType, Family] = {
+var _FAMILIES_REF: Dictionary[Family.Type, Family] = {
 }
 
 #[Server only]
@@ -74,18 +74,18 @@ var _random_heroes_ref: Array[HeroDesc.HeroId]
 
 func _init() -> void:
 	Verbose.debug("GAME MANAGER INIT", Verbose.Category.DEFAULT)
-	_FAMILIES_REF[Family.FamilyType.WARRIOR] = load("res://Card/Descriptions/Families/attack_family.tres") as Family
-	_FAMILIES_REF[Family.FamilyType.ENGINEER] = load("res://Card/Descriptions/Families/defense_family.tres") as Family
-	_FAMILIES_REF[Family.FamilyType.ARDENT_CELESTIAL] = load("res://Card/Descriptions/Families/fire_family.tres") as Family
-	_FAMILIES_REF[Family.FamilyType.POISON] = load("res://Card/Descriptions/Families/poison_family.tres") as Family
-	_FAMILIES_REF[Family.FamilyType.STORM_CALLER] = load("res://Card/Descriptions/Families/storm_family.tres") as Family
-	_FAMILIES_REF[Family.FamilyType.LIGHT] = load("res://Card/Descriptions/Families/serenity_family.tres") as Family
-	_FAMILIES_REF[Family.FamilyType.COLOSSUS] = load("res://Card/Descriptions/Families/life_family.tres") as Family
-	_FAMILIES_REF[Family.FamilyType.MANA] = load("res://Card/Descriptions/Families/mana_family.tres") as Family
-	_FAMILIES_REF[Family.FamilyType.CHICKEN_LORD] = load("res://Card/Descriptions/Families/chickenlord_family.tres") as Family
-	_FAMILIES_REF[Family.FamilyType.LIGHTNING] = load("res://Card/Descriptions/Families/lightning_family.tres") as Family
-	_FAMILIES_REF[Family.FamilyType.NECROSIS] = load("res://Card/Descriptions/Families/necro_family.tres") as Family
-	_FAMILIES_REF[Family.FamilyType.SHADOW] = load("res://Card/Descriptions/Families/shadow_family.tres") as Family
+	_FAMILIES_REF[Family.Type.WARRIOR] = load("res://Card/Descriptions/Families/attack_family.tres") as Family
+	_FAMILIES_REF[Family.Type.ENGINEER] = load("res://Card/Descriptions/Families/defense_family.tres") as Family
+	_FAMILIES_REF[Family.Type.ARDENT_CELESTIAL] = load("res://Card/Descriptions/Families/fire_family.tres") as Family
+	_FAMILIES_REF[Family.Type.POISON] = load("res://Card/Descriptions/Families/poison_family.tres") as Family
+	_FAMILIES_REF[Family.Type.STORM_CALLER] = load("res://Card/Descriptions/Families/storm_family.tres") as Family
+	_FAMILIES_REF[Family.Type.LIGHT] = load("res://Card/Descriptions/Families/serenity_family.tres") as Family
+	_FAMILIES_REF[Family.Type.COLOSSUS] = load("res://Card/Descriptions/Families/life_family.tres") as Family
+	_FAMILIES_REF[Family.Type.MANA] = load("res://Card/Descriptions/Families/mana_family.tres") as Family
+	_FAMILIES_REF[Family.Type.CHICKEN_LORD] = load("res://Card/Descriptions/Families/chickenlord_family.tres") as Family
+	_FAMILIES_REF[Family.Type.LIGHTNING] = load("res://Card/Descriptions/Families/lightning_family.tres") as Family
+	_FAMILIES_REF[Family.Type.NECROSIS] = load("res://Card/Descriptions/Families/necro_family.tres") as Family
+	_FAMILIES_REF[Family.Type.SHADOW] = load("res://Card/Descriptions/Families/shadow_family.tres") as Family
 	Verbose.debug("GAME MANAGER INIT", Verbose.Category.DEFAULT)
 
 func _ready() -> void:
@@ -120,14 +120,14 @@ func clear() -> void:
 
 func init() -> void:
 	_game_rules = load("res://Game/GameRules/normal_game_rules.tres")
-	_active_families.append(_FAMILIES_REF[Family.FamilyType.ENGINEER])
-	_active_families.append(_FAMILIES_REF[Family.FamilyType.POISON])
-	_active_families.append(_FAMILIES_REF[Family.FamilyType.ARDENT_CELESTIAL])
-	_active_families.append(_FAMILIES_REF[Family.FamilyType.WARRIOR])
-	_active_families.append(_FAMILIES_REF[Family.FamilyType.LIGHT])
-	_active_families.append(_FAMILIES_REF[Family.FamilyType.LIGHTNING])
-	_active_families.append(_FAMILIES_REF[Family.FamilyType.COLOSSUS])
-	_active_families.append(_FAMILIES_REF[Family.FamilyType.NECROSIS])
+	_active_families.append(_FAMILIES_REF[Family.Type.ENGINEER])
+	_active_families.append(_FAMILIES_REF[Family.Type.POISON])
+	_active_families.append(_FAMILIES_REF[Family.Type.ARDENT_CELESTIAL])
+	_active_families.append(_FAMILIES_REF[Family.Type.WARRIOR])
+	_active_families.append(_FAMILIES_REF[Family.Type.LIGHT])
+	_active_families.append(_FAMILIES_REF[Family.Type.LIGHTNING])
+	_active_families.append(_FAMILIES_REF[Family.Type.COLOSSUS])
+	_active_families.append(_FAMILIES_REF[Family.Type.NECROSIS])
 
 
 #TODO Move into round manager ?

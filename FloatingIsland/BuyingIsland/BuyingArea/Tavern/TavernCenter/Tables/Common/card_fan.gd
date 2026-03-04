@@ -44,8 +44,8 @@ func _update_visual(deck: PlayerDeck):
 			#card_index += 1
 
 
-func _get_families_sorted(families_lvl_raw: Dictionary) -> Array[Family.FamilyType]:
-	var families_sorted: Array[Family.FamilyType]
+func _get_families_sorted(families_lvl_raw: Dictionary) -> Array[Family.Type]:
+	var families_sorted: Array[Family.Type]
 	var families_lvl_raw_duplicated = families_lvl_raw.duplicate()
 	while not families_lvl_raw_duplicated.is_empty():
 		var highest_family = _get_highest_family_lvl_raw(families_lvl_raw_duplicated)
@@ -54,8 +54,8 @@ func _get_families_sorted(families_lvl_raw: Dictionary) -> Array[Family.FamilyTy
 	return families_sorted
 
 
-func _get_highest_family_lvl_raw(families_lvl_raw: Dictionary) -> Family.FamilyType:
-	var highest_family: Family.FamilyType = Family.FamilyType.WARRIOR
+func _get_highest_family_lvl_raw(families_lvl_raw: Dictionary) -> Family.Type:
+	var highest_family: Family.Type = Family.Type.WARRIOR
 	var highest_lvl: int = 0
 	for family_type in families_lvl_raw.keys():
 		if families_lvl_raw[family_type] > highest_lvl:

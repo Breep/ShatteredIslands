@@ -31,10 +31,10 @@ const RARITY_CARD_VALUE: Dictionary[Rarity, int] = {
 
 @export var name : String
 @export var picture : Texture2D
-@export var families: Array[Family.FamilyType]
+@export var families: Array[Family.Type]
 @export var rarity : Rarity
 @export var player_upgrade: HeroUpgrade
-@export var points: Dictionary[Family.FamilyType, int]
+@export var points: Dictionary[Family.Type, int]
 
 var _lvl: int # Current health
 @export_range(1, 5) var lvl: int:
