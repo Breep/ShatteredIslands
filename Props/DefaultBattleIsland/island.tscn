@@ -2,10 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://mesf5wdjbmts" path="res://Props/DefaultBattleIsland/M_island.glb" id="1_sjeyk"]
 [ext_resource type="Texture2D" uid="uid://cpgjovjpnswwl" path="res://Props/DefaultBattleIsland/textures/citrus_orchard_road_puresky_4k.exr" id="2_3smeu"]
-[ext_resource type="PackedScene" uid="uid://cefaxufn0d32h" path="res://Props/DefaultBattleIsland/sword.tscn" id="2_l242m"]
 [ext_resource type="Script" uid="uid://1hqrwl2e0q2r" path="res://Game/MainMenu/torch_light.gd" id="3_47voh"]
 [ext_resource type="PackedScene" uid="uid://dlvl8y5hmo4fq" path="res://Props/DefaultBattleIsland/water_arch.tscn" id="3_xq1xo"]
 [ext_resource type="PackedScene" uid="uid://bekurf4j71rms" path="res://Props/DefaultBattleIsland/arch.tscn" id="4_xq1xo"]
+[ext_resource type="PackedScene" uid="uid://d2n77vyjrpeo5" path="res://Props/DefaultBattleIsland/arenanew.glb" id="7_hodra"]
+[ext_resource type="PackedScene" uid="uid://c8xr41imxkoni" path="res://Props/DefaultBattleIsland/sword_low.tscn" id="7_l4xy5"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_47voh"]
 panorama = ExtResource("2_3smeu")
@@ -25,7 +26,6 @@ sdfgi_enabled = true
 sdfgi_use_occlusion = true
 sdfgi_bounce_feedback = 0.0
 sdfgi_cascades = 3
-glow_enabled = true
 glow_bloom = 0.3
 fog_light_color = Color(0.90526116, 0.6677655, 0.6110546, 1)
 fog_light_energy = 2.0
@@ -38,8 +38,9 @@ volumetric_fog_anisotropy = 0.18
 volumetric_fog_ambient_inject = 0.1
 volumetric_fog_sky_affect = 0.695
 adjustment_enabled = true
-adjustment_contrast = 1.115
-adjustment_saturation = 1.22
+adjustment_brightness = 0.9
+adjustment_contrast = 1.08
+adjustment_saturation = 1.11
 
 [node name="M_island" unique_id=548829764 instance=ExtResource("1_sjeyk")]
 
@@ -62,7 +63,24 @@ shadow_enabled = true
 shadow_bias = 0.231
 shadow_normal_bias = 1.127
 
-[node name="Sword_light" type="OmniLight3D" parent="WorldEnvironment" index="2" unique_id=785199320]
+[node name="Sword_water_light" type="OmniLight3D" parent="WorldEnvironment" index="2" unique_id=1689303030]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6004357, 56.800648, 18.764198)
+light_color = Color(0.8655497, 0.6542222, 0.41229472, 1)
+light_energy = 1.731
+light_indirect_energy = 14.894
+light_volumetric_fog_energy = 28.185
+light_size = 30.0
+light_specular = 16.0
+shadow_enabled = true
+shadow_bias = 0.85
+shadow_opacity = 0.75
+shadow_blur = 5.21
+omni_range = 12.898
+omni_attenuation = 0.469
+script = ExtResource("3_47voh")
+metadata/_custom_type_script = "uid://1hqrwl2e0q2r"
+
+[node name="Sword_light" type="OmniLight3D" parent="WorldEnvironment" index="3" unique_id=785199320]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 54.400723, 14.296207)
 light_color = Color(0.17657873, 0.49904495, 0.6957203, 1)
 light_energy = 5.393
@@ -93,11 +111,14 @@ omni_attenuation = 1.873
 script = ExtResource("3_47voh")
 metadata/_custom_type_script = "uid://1hqrwl2e0q2r"
 
-[node name="Sword_Low" parent="." index="2" unique_id=1264661803 instance=ExtResource("2_l242m")]
-transform = Transform3D(0.091496065, 0.052782726, 0.050071765, 0.015371092, 0.064611204, -0.09619694, -0.071112074, 0.081878595, 0.043631367, -18.337532, 37.966213, 20.276524)
+[node name="Node3D" parent="." index="2" unique_id=1691128380 instance=ExtResource("3_xq1xo")]
+transform = Transform3D(0.013587055, 0, -0.004578358, 0, 0.014337692, 0, 0.004578358, 0, 0.013587055, 20.457678, 45.198814, 27.279613)
 
-[node name="Node3D" parent="." index="3" unique_id=1691128380 instance=ExtResource("3_xq1xo")]
-transform = Transform3D(0.014337693, 0, 0, 0, 0.014337693, 0, 0, 0, 0.014337693, 20.457678, 45.198814, 26.651644)
-
-[node name="Node3D2" parent="." index="4" unique_id=1113933276 instance=ExtResource("4_xq1xo")]
+[node name="Node3D2" parent="." index="3" unique_id=1113933276 instance=ExtResource("4_xq1xo")]
 transform = Transform3D(0.025428865, -0.005918659, 0.012193872, 0, 0.02592342, 0.012582704, -0.013554374, -0.01110378, 0.022876477, -1.2641296, 34.293423, -5.205925)
+
+[node name="arenanew" parent="." index="4" unique_id=909392154 instance=ExtResource("7_hodra")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.104286, 45.587727, 34.040894)
+
+[node name="Sword_Low2" parent="." index="5" unique_id=1192308003 instance=ExtResource("7_l4xy5")]
+transform = Transform3D(0.0862705, 0.06649302, 0.047325466, 0.008783727, 0.060899213, -0.10157638, -0.081141055, 0.077288955, 0.03932132, -19.477627, 36.97007, 19.435114)
