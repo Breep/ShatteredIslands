@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cc8wss5swf76b" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/HeroSpawner/hero_spawner.tscn" id="4_dxj2d"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2v0uu"]
-size = Vector3(10, 0.1, 10)
+size = Vector3(12.5, 0.1, 25)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jxx87"]
 transparency = 1
@@ -14,10 +14,10 @@ albedo_color = Color(0.368627, 0.529412, 1, 0.392157)
 
 [sub_resource type="BoxMesh" id="BoxMesh_dhmms"]
 material = SubResource("StandardMaterial3D_jxx87")
-size = Vector3(10, 0.1, 10)
+size = Vector3(12.5, 0.1, 25)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_57pjl"]
-size = Vector3(10, 0.1, 10)
+size = Vector3(12.5, 0.1, 25)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sk17l"]
 transparency = 1
@@ -25,7 +25,7 @@ albedo_color = Color(0.823701, 0.0889347, 0.335772, 0.392157)
 
 [sub_resource type="BoxMesh" id="BoxMesh_qkrr5"]
 material = SubResource("StandardMaterial3D_sk17l")
-size = Vector3(10, 0.1, 10)
+size = Vector3(12.5, 0.1, 25)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e3h6q"]
 transparency = 1
@@ -33,16 +33,16 @@ albedo_color = Color(1, 1, 1, 0.392157)
 
 [sub_resource type="BoxMesh" id="BoxMesh_81qc3"]
 material = SubResource("StandardMaterial3D_e3h6q")
-size = Vector3(20, 1, 10)
+size = Vector3(25, 1, 25)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_g25ar"]
-size = Vector3(20, 1, 10)
+size = Vector3(25, 1, 25)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dxj2d"]
 size = Vector3(4, 1, 6)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_031cx"]
-size = Vector3(20, 1, 10)
+size = Vector3(25, 1, 25)
 
 [node name="FightingFloor_2v2" type="Node3D" unique_id=1798905686 node_paths=PackedStringArray("_visual_to_be_destroyed", "_hero_spawner", "team_zones", "center_zone", "full_arena_zone")]
 script = ExtResource("1_t4soe")
@@ -56,7 +56,7 @@ center_zone = NodePath("CenterArea")
 full_arena_zone = NodePath("FullArea")
 
 [node name="SpawnArea" parent="." unique_id=1695933186 node_paths=PackedStringArray("_visual_to_be_destroyed") instance=ExtResource("2_t4soe")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.25, 0, 0)
 collision_layer = 4
 collision_mask = 0
 monitoring = false
@@ -71,15 +71,15 @@ shape = SubResource("BoxShape3D_2v0uu")
 mesh = SubResource("BoxMesh_dhmms")
 
 [node name="SpawnPoint" parent="SpawnArea" unique_id=819229068 instance=ExtResource("3_xaoa7")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -2.5)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -5)
 team = 1
 
 [node name="SpawnPoint2" parent="SpawnArea" unique_id=817104144 instance=ExtResource("3_xaoa7")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 2.5)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 5)
 team = 1
 
 [node name="SpawnArea2" parent="." unique_id=1817446121 node_paths=PackedStringArray("_visual_to_be_destroyed") instance=ExtResource("2_t4soe")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.25, 0, 0)
 collision_layer = 4
 collision_mask = 0
 monitoring = false
@@ -94,11 +94,11 @@ shape = SubResource("BoxShape3D_57pjl")
 mesh = SubResource("BoxMesh_qkrr5")
 
 [node name="SpawnPoint3" parent="SpawnArea2" unique_id=1316291176 instance=ExtResource("3_xaoa7")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 2.5)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 5)
 team = 2
 
 [node name="SpawnPoint4" parent="SpawnArea2" unique_id=288750422 instance=ExtResource("3_xaoa7")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -2.5)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -5)
 team = 2
 
 [node name="Floor" type="StaticBody3D" parent="." unique_id=904812447]
