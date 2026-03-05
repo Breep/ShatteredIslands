@@ -21,7 +21,9 @@ sky_material = SubResource("PanoramaSkyMaterial_47voh")
 background_mode = 2
 sky = SubResource("Sky_hodra")
 sky_rotation = Vector3(0, 2.9792771, 0)
-ambient_light_sky_contribution = 0.7
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.79
 reflected_light_source = 2
 tonemap_mode = 2
 sdfgi_enabled = true
@@ -34,17 +36,16 @@ fog_light_energy = 2.0
 fog_sun_scatter = 1.0
 fog_density = 0.0
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.001
-volumetric_fog_albedo = Color(0.41428167, 0.820051, 0.5407458, 1)
+volumetric_fog_density = 0.015
+volumetric_fog_albedo = Color(0.04033878, 0.11912695, 0.2718956, 1)
 volumetric_fog_anisotropy = 0.18
 volumetric_fog_ambient_inject = 0.1
 volumetric_fog_sky_affect = 0.695
 adjustment_enabled = true
-adjustment_brightness = 0.9
-adjustment_contrast = 1.08
-adjustment_saturation = 1.11
+adjustment_contrast = 1.095
+adjustment_saturation = 0.91
 
-[node name="M_island" unique_id=548829764 instance=ExtResource("1_sjeyk")]
+[node name="M_island" unique_id=945829401 instance=ExtResource("1_sjeyk")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." index="0" unique_id=756294558]
 environment = SubResource("Environment_l4xy5")
@@ -57,33 +58,16 @@ light_indirect_energy = 5.0
 light_volumetric_fog_energy = 7.0
 
 [node name="Sun_light" type="DirectionalLight3D" parent="WorldEnvironment" index="1" unique_id=100209582]
-transform = Transform3D(0.4330127, 0.8660255, 0.25000012, 0.7499999, -0.50000006, 0.43301275, 0.5, 1.2672722e-07, -0.8660255, 51, 73, -104)
-light_color = Color(0.8128543, 0.65702295, 0.57295287, 1)
-light_energy = 0.871
+transform = Transform3D(0.13765305, 0.9508776, -0.2772786, -0.917168, 0.22806498, 0.3267855, 0.37397057, 0.20932844, 0.9035086, -14.537055, 80.15106, 33.958176)
+light_color = Color(0.9817961, 0.9185508, 0.7434619, 1)
+light_energy = 0.317
 light_indirect_energy = 1.65
 shadow_enabled = true
 shadow_bias = 0.231
-shadow_normal_bias = 1.127
+shadow_normal_bias = 10.0
 
-[node name="Sword_water_light" type="OmniLight3D" parent="WorldEnvironment" index="2" unique_id=1689303030]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6004357, 56.800648, 18.764198)
-light_color = Color(0.8655497, 0.6542222, 0.41229472, 1)
-light_energy = 1.731
-light_indirect_energy = 14.894
-light_volumetric_fog_energy = 28.185
-light_size = 30.0
-light_specular = 16.0
-shadow_enabled = true
-shadow_bias = 0.85
-shadow_opacity = 0.75
-shadow_blur = 5.21
-omni_range = 12.898
-omni_attenuation = 0.469
-script = ExtResource("3_47voh")
-metadata/_custom_type_script = "uid://1hqrwl2e0q2r"
-
-[node name="Sword_light" type="OmniLight3D" parent="WorldEnvironment" index="3" unique_id=785199320]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 54.400723, 14.296207)
+[node name="Sword_light" type="OmniLight3D" parent="WorldEnvironment" index="2" unique_id=785199320]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.90789, 53.25355, 15.893967)
 light_color = Color(0.17657873, 0.49904495, 0.6957203, 1)
 light_energy = 5.393
 light_indirect_energy = 16.665
@@ -97,7 +81,7 @@ script = ExtResource("3_47voh")
 metadata/_custom_type_script = "uid://1hqrwl2e0q2r"
 
 [node name="Sword_water_light" type="OmniLight3D" parent="WorldEnvironment/Sword_light" index="0" unique_id=1072601478]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.27849, -11.098755, 5.1469345)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.829826, -11.379177, 7.2193947)
 light_color = Color(0.17657873, 0.49904495, 0.6957203, 1)
 light_energy = 9.655
 light_indirect_energy = 11.385
@@ -114,7 +98,7 @@ script = ExtResource("3_47voh")
 metadata/_custom_type_script = "uid://1hqrwl2e0q2r"
 
 [node name="Node3D" parent="." index="2" unique_id=1691128380 instance=ExtResource("3_xq1xo")]
-transform = Transform3D(0.00031452486, 0, -0.014334241, 0, 0.014337692, 0, 0.014334241, 0, 0.00031452486, 16.773863, 45.198814, 28.472273)
+transform = Transform3D(-0.0043924907, 0, 0.01364827, 0, 0.014337691, 0, -0.01364827, 0, -0.0043924907, -24.568016, 45.620148, 14.294867)
 
 [node name="Node3D2" parent="." index="3" unique_id=1113933276 instance=ExtResource("4_xq1xo")]
 transform = Transform3D(0.024393829, -0.005677751, 0.011697542, 0, 0.024868254, 0.012070549, -0.013002668, -0.010651821, 0.021945331, 17.559464, 34.293423, -14.231289)
@@ -123,7 +107,7 @@ transform = Transform3D(0.024393829, -0.005677751, 0.011697542, 0, 0.024868254, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.104286, 45.587727, 34.040894)
 
 [node name="Sword_Low2" parent="." index="5" unique_id=1192308003 instance=ExtResource("7_l4xy5")]
-transform = Transform3D(0.07720417, 0.05950514, 0.042351943, 0.007860628, 0.054499198, -0.090901524, -0.07261378, 0.06916651, 0.035188965, -19.477627, 36.97007, 19.435114)
+transform = Transform3D(0.092564926, -0.027353022, -0.008394797, 0.009646567, 0.05659658, -0.07804294, 0.026937054, 0.073726274, 0.05679575, 15.058615, 39.514935, 23.281088)
 
 [node name="Node3D3" parent="." index="6" unique_id=1261905967 instance=ExtResource("8_l4xy5")]
 transform = Transform3D(0.012364349, 0, 0, 0, 0.012364349, 0, 0, 0, 0.012364349, -19.827795, 48.085934, 31.579554)
@@ -132,4 +116,4 @@ transform = Transform3D(0.012364349, 0, 0, 0, 0.012364349, 0, 0, 0, 0.012364349,
 transform = Transform3D(0.012364349, 0, 0, 0, 0.012364349, 0, 0, 0, 0.012364349, 8.8221855, 48.085934, 31.579554)
 
 [node name="Node3D5" parent="." index="8" unique_id=331763463 instance=ExtResource("9_mmw7b")]
-transform = Transform3D(0.040810082, 0, 0, 0, 0.040810082, 0, 0, 0, 0.040617894, 4.509838, 44.823895, 3.8410873)
+transform = Transform3D(0.036684852, 0, 0.017795516, 0, 0.04081008, 0, -0.017879719, 0, 0.03651209, 4.8898516, 44.210735, 3.8410873)

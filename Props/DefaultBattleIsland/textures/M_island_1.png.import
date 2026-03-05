@@ -2,14 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://msm7vtoulo4s"
+uid="uid://ct2tg4c2bns6e"
 path.s3tc="res://.godot/imported/M_island_1.png-d4ff9d9c21acae8920c4467928d78013.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "1a00995777231825aba966363d1b3705"
+"md5": "32b6b9904325c088a4a70fc3aae76637"
 }
 
 [deps]

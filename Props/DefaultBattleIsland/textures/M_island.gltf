@@ -3,121 +3,121 @@
     {
       "bufferView": 0,
       "componentType": 5125,
-      "count": 1266,
+      "count": 6507,
       "type": "SCALAR"
     },
     {
       "bufferView": 1,
       "componentType": 5126,
-      "count": 778,
+      "count": 2415,
       "max": [
-        2985.25341796875,
-        4706.20654296875,
-        4025.634765625
+        2765.09912109375,
+        4696.2919921875,
+        4012.7021484375
       ],
       "min": [
-        -3974.60009765625,
-        4517.583984375,
-        -684.783569335938
+        -3578.99267578125,
+        -0.000244140625,
+        -974.511596679688
       ],
       "type": "VEC3"
     },
     {
       "bufferView": 2,
       "componentType": 5126,
-      "count": 778,
+      "count": 2415,
       "type": "VEC3"
     },
     {
       "bufferView": 3,
       "componentType": 5126,
-      "count": 778,
+      "count": 2415,
       "type": "VEC4"
     },
     {
       "bufferView": 4,
       "componentType": 5126,
-      "count": 778,
+      "count": 2415,
       "type": "VEC2"
     },
     {
       "bufferView": 5,
       "componentType": 5125,
-      "count": 6507,
+      "count": 687,
       "type": "SCALAR"
     },
     {
       "bufferView": 6,
       "componentType": 5126,
-      "count": 2411,
+      "count": 150,
       "max": [
-        2878.9970703125,
-        4696.29150390625,
-        4012.7021484375
+        2390.916015625,
+        4406.501953125,
+        3920.83837890625
       ],
       "min": [
-        -3847.80883789062,
-        -0.000244140625,
-        -974.511779785156
+        -2652.88525390625,
+        404.493896484375,
+        -156.127197265625
       ],
       "type": "VEC3"
     },
     {
       "bufferView": 7,
       "componentType": 5126,
-      "count": 2411,
+      "count": 150,
       "type": "VEC3"
     },
     {
       "bufferView": 8,
       "componentType": 5126,
-      "count": 2411,
+      "count": 150,
       "type": "VEC4"
     },
     {
       "bufferView": 9,
       "componentType": 5126,
-      "count": 2411,
+      "count": 150,
       "type": "VEC2"
     },
     {
       "bufferView": 10,
       "componentType": 5125,
-      "count": 687,
+      "count": 1266,
       "type": "SCALAR"
     },
     {
       "bufferView": 11,
       "componentType": 5126,
-      "count": 151,
+      "count": 701,
       "max": [
-        2390.91625976562,
-        4406.501953125,
-        3920.83837890625
+        3355.76123046875,
+        92.7138671875,
+        2355.0712890625
       ],
       "min": [
-        -2652.88525390625,
-        404.494140625,
-        -156.127563476562
+        -3221.37841796875,
+        -95.9091796875,
+        -2348.87670898438
       ],
       "type": "VEC3"
     },
     {
       "bufferView": 12,
       "componentType": 5126,
-      "count": 151,
+      "count": 701,
       "type": "VEC3"
     },
     {
       "bufferView": 13,
       "componentType": 5126,
-      "count": 151,
+      "count": 701,
       "type": "VEC4"
     },
     {
       "bufferView": 14,
       "componentType": 5126,
-      "count": 151,
+      "count": 701,
       "type": "VEC2"
     }
   ],
@@ -128,97 +128,97 @@
   "bufferViews": [
     {
       "buffer": 0,
-      "byteLength": 5064,
-      "target": 34963
-    },
-    {
-      "buffer": 0,
-      "byteLength": 9336,
-      "byteOffset": 5064,
-      "target": 34962
-    },
-    {
-      "buffer": 0,
-      "byteLength": 9336,
-      "byteOffset": 14400,
-      "target": 34962
-    },
-    {
-      "buffer": 0,
-      "byteLength": 12448,
-      "byteOffset": 23736,
-      "target": 34962
-    },
-    {
-      "buffer": 0,
-      "byteLength": 6224,
-      "byteOffset": 36184,
-      "target": 34962
-    },
-    {
-      "buffer": 0,
       "byteLength": 26028,
-      "byteOffset": 42408,
       "target": 34963
     },
     {
       "buffer": 0,
-      "byteLength": 28932,
-      "byteOffset": 68436,
+      "byteLength": 28980,
+      "byteOffset": 26028,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 28932,
-      "byteOffset": 97368,
+      "byteLength": 28980,
+      "byteOffset": 55008,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 38576,
-      "byteOffset": 126300,
+      "byteLength": 38640,
+      "byteOffset": 83988,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 19288,
-      "byteOffset": 164876,
+      "byteLength": 19320,
+      "byteOffset": 122628,
       "target": 34962
     },
     {
       "buffer": 0,
       "byteLength": 2748,
-      "byteOffset": 184164,
+      "byteOffset": 141948,
       "target": 34963
     },
     {
       "buffer": 0,
-      "byteLength": 1812,
-      "byteOffset": 186912,
+      "byteLength": 1800,
+      "byteOffset": 144696,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 1812,
-      "byteOffset": 188724,
+      "byteLength": 1800,
+      "byteOffset": 146496,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 2416,
-      "byteOffset": 190536,
+      "byteLength": 2400,
+      "byteOffset": 148296,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 1208,
-      "byteOffset": 192952,
+      "byteLength": 1200,
+      "byteOffset": 150696,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 5064,
+      "byteOffset": 151896,
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 8412,
+      "byteOffset": 156960,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 8412,
+      "byteOffset": 165372,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 11216,
+      "byteOffset": 173784,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 5608,
+      "byteOffset": 185000,
       "target": 34962
     }
   ],
   "buffers": [
     {
-      "byteLength": 194160,
+      "byteLength": 190608,
       "uri": "M_island.bin"
     }
   ],
@@ -309,7 +309,7 @@
   ],
   "meshes": [
     {
-      "name": "Props_Grass",
+      "name": "Props_Arena_Island",
       "primitives": [
         {
           "attributes": {
@@ -319,22 +319,6 @@
             "TEXCOORD_0": 4
           },
           "indices": 0,
-          "material": 0,
-          "mode": 4
-        }
-      ]
-    },
-    {
-      "name": "Props_Arena_Island",
-      "primitives": [
-        {
-          "attributes": {
-            "NORMAL": 7,
-            "POSITION": 6,
-            "TANGENT": 8,
-            "TEXCOORD_0": 9
-          },
-          "indices": 5,
           "material": 2,
           "mode": 4
         }
@@ -345,13 +329,29 @@
       "primitives": [
         {
           "attributes": {
+            "NORMAL": 7,
+            "POSITION": 6,
+            "TANGENT": 8,
+            "TEXCOORD_0": 9
+          },
+          "indices": 5,
+          "material": 1,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Props_Grass",
+      "primitives": [
+        {
+          "attributes": {
             "NORMAL": 12,
             "POSITION": 11,
             "TANGENT": 13,
             "TEXCOORD_0": 14
           },
           "indices": 10,
-          "material": 1,
+          "material": 0,
           "mode": 4
         }
       ]
@@ -375,37 +375,71 @@
         4,
         6
       ],
-      "name": "ISLAND"
+      "name": "ISLAND",
+      "rotation": [
+        -3.7748947079308e-08,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "translation": [
+        -16.6666679382324,
+        -3.5527136788005e-15,
+        -16.6666679382324
+      ]
     },
     {
       "children": [
         3
       ],
-      "name": "Props_Grass"
+      "name": "Props_Arena_Island",
+      "rotation": [
+        -6.61744490042422e-24,
+        0.0,
+        0.0,
+        1.0
+      ]
     },
     {
       "mesh": 0,
-      "name": "Props_Grass"
+      "name": "Props_Arena_Island"
     },
     {
       "children": [
         5
       ],
-      "name": "Props_Arena_Island"
+      "name": "Props_Lake",
+      "rotation": [
+        -6.61744490042422e-24,
+        0.0,
+        0.0,
+        1.0
+      ]
     },
     {
       "mesh": 1,
-      "name": "Props_Arena_Island"
+      "name": "Props_Lake"
     },
     {
       "children": [
         7
       ],
-      "name": "Props_Lake"
+      "name": "Props_Grass",
+      "rotation": [
+        -6.61744490042422e-24,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "translation": [
+        -467.739044189453,
+        4613.49267578125,
+        1687.23010253906
+      ]
     },
     {
       "mesh": 2,
-      "name": "Props_Lake"
+      "name": "Props_Grass"
     }
   ],
   "samplers": [
