@@ -44,7 +44,7 @@ func _spawn_hero(hero: Hero, available_spawn_locations: Array[SpawnPoint]) -> bo
 		return false
 	
 	if hero.is_inside_tree():
-		Verbose.warn("Hero " + hero.entity_name + " already in tree, this shouldn't happen", Verbose.Category.HERO_SPAWNER)
+		Verbose.warn("Hero " + hero.entity_name + " already in tree, this shouldn't happen [ARENA]", Verbose.Category.HERO_SPAWNER)
 		return false
 	
 	for spawn_point: SpawnPoint in available_spawn_locations:

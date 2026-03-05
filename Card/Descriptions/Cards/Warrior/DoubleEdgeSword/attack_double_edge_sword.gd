@@ -14,7 +14,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	aa_mod.id = &"Double Edge Sword"
 	aa_mod.tags = [AutoAttackModifier.TagType.CARD]
 	aa_mod.is_one_time_effect = false
-	aa_mod.on_hit_logic_callback = func(cb_vars: Dictionary) -> void:
+	aa_mod.additional_effect_callback = func(cb_vars: Dictionary) -> void:
 		var target: Entity = cb_vars[AutoAttackModifier.VarType.TARGET]
 		if target != state[&"last_target"]:
 			state[&"last_target"] = target

@@ -23,11 +23,15 @@ func _ready() -> void:
 # ============================== Private functions ==============================
 
 func _connect_all_players(players: Array[Player]) -> void:
-	if _players_portraits.size() != players.size():
-		printerr("UIAllPlayersPortrait: Players number and players portrait number mismatch")
+	if _players_portraits.size() < players.size():
+		printerr("UIAllPlayersPortrait: Too many players")
 		return
 	
 	for i in _players_portraits.size():
+		_players_portraits[i].hide()
+	
+	for i in players.size():
+		_players_portraits[i].show()
 		_players_portraits[i].connect_to_player(players[i])
 		players[i].health_changed.connect(_on_player_health_changed)
 		_player_id_player_portrait_map[players[i].id] = _players_portraits[i]
