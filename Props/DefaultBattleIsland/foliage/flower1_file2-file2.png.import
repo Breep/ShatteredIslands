@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://73aqrxincbiu"
-path.s3tc="res://.godot/imported/arenanew_0.png-1c7400333bad852a4250a4a779f47447.s3tc.ctex"
+uid="uid://g10nkb5gmbu5"
+path.s3tc="res://.godot/imported/flower1_file2-file2.png-4bfef99e76a6d0d7304517e8cfff3832.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "d03afcf870088971e8396c60a5352099"
+"md5": "e6471130a5b1eca89a07fb797a305952"
 }
 
 [deps]
 
-source_file="res://Props/DefaultBattleIsland/arenanew_0.png"
-dest_files=["res://.godot/imported/arenanew_0.png-1c7400333bad852a4250a4a779f47447.s3tc.ctex"]
+source_file="res://Props/DefaultBattleIsland/foliage/flower1_file2-file2.png"
+dest_files=["res://.godot/imported/flower1_file2-file2.png-4bfef99e76a6d0d7304517e8cfff3832.s3tc.ctex"]
 
 [params]
 
