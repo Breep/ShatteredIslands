@@ -13,3 +13,4 @@ func _ready() -> void:
 		
 	auto_attack_modifier_registry.register_modifier(mod)
 	super._ready()
+	

@@ -9,6 +9,10 @@ var _is_stopped: bool = false
 var _target_entity: Entity = null
 var _follow_entity: bool = false
 
+# Rush mode
+var _is_rushing: bool = false
+var _rush_speed: float = 0.0
+
 func start() -> void:
 	Verbose.debug("start", Verbose.Category.MOVEMENT_MODULE)
 	_is_stopped = false
@@ -82,16 +86,34 @@ func _move_toward_target() -> void:
 			return
 		_target_position = _target_entity.global_position
 	
-	if _target_position == null or _owner.global_position.distance_to(_target_position) < 0.1:
+	var speed: float = _rush_speed if _is_rushing else _get_move_speed()
+	var step_distance: float = speed / 60.0
+
+	if _target_position == null or _owner.global_position.distance_to(_target_position) < step_distance:
+		if _is_rushing:
+			_owner.global_position = _target_position
+			_stop_rushing()
 		if not _follow_entity:
 			_is_moving = false
 			_owner.is_moving = false
 		return
-	
+
 	var direction: Vector3 = (_target_position - _owner.global_position).normalized()
 	_owner.look_at_target_y_only(_target_position)
-	_owner.global_position += direction * (_get_move_speed() / 60.0)
+	_owner.global_position += direction * step_distance
 	_owner.global_position = _owner.global_position.snapped(Vector3(0.01, 0.01, 0.01))
+
+
+func rush(speed: float, target_global_position: Vector3) -> void:
+	Verbose.debug("rush", Verbose.Category.MOVEMENT_MODULE)
+	_is_rushing = true
+	_rush_speed = speed
+	set_target_position(target_global_position)
+
+
+func _stop_rushing() -> void:
+	_is_rushing = false
+	_rush_speed = 0.0
 
 
 func _get_move_speed() -> float:
