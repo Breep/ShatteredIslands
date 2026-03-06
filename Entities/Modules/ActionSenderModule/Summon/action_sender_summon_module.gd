@@ -13,7 +13,8 @@ const CHICKEN_ATTACK_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/C
 const CHICKEN_POISON_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/ChickenLord/Chicken/Gifted/ChickenPoison/chicken_poison.tscn")
 const CHICKEN_COLOSSUS_SCENE: PackedScene = preload('res://Entities/NPC/Fighting/ChickenLord/Chicken/Gifted/ChickenColossus/chicken_colossus.tscn')
 const CHICKEN_LIGHT_SCENE: PackedScene = preload('res://Entities/NPC/Fighting/ChickenLord/Chicken/Gifted/ChickenLight/chicken_light.tscn')
-const CHICKEN_SHIELD_SCENE: PackedScene = preload('res://Entities/NPC/Fighting/ChickenLord/Chicken/Gifted/ChickenShield/chicken_shield.tscn')
+const CHICKEN_ENGINEER_SCENE: PackedScene = preload('res://Entities/NPC/Fighting/ChickenLord/Chicken/Gifted/ChickenShield/chicken_shield.tscn')
+const CHICKEN_ARDENT_CELESTIAL_SCENE: PackedScene = preload('res://Entities/NPC/Fighting/ChickenLord/Chicken/Gifted/ChickenArdentCelestial/chicken_ardent_celestial.tscn')
 
 # ============================== Public functions ==============================
 
@@ -103,10 +104,13 @@ func _summon_chicken(spawn_position: Vector3, entity_modifier: Dictionary) -> vo
 			var ratio_regen: float = entity_modifier.get("ratio_regen", 0)
 			var heal_strength_modifier: float = entity_modifier.get("inherited_heal_ratio", 0)
 			(chicken as ChickenLight).init(ratio_regen, heal_strength_modifier)
-		Chicken.Type.GIFTED_SHIELD:
-			chicken = CHICKEN_SHIELD_SCENE.instantiate()
+		Chicken.Type.GIFTED_ENGINEER:
+			chicken = CHICKEN_ENGINEER_SCENE.instantiate()
 			var shield_per_attack: int = entity_modifier.get("shield_per_attack", 0)
 			var bonus_spawn: int = entity_modifier.get("bonus_spawn", 0)
 			var shield_strength_inherited: float = entity_modifier.get("shield_strength_inherited", 0)
 			(chicken as ChickenShield).init(bonus_spawn, shield_per_attack, shield_strength_inherited)
+		Chicken.Type.GIFTED_ARDENT_CELESTIAL:
+			chicken = CHICKEN_ARDENT_CELESTIAL_SCENE.instantiate()
+			
 	_spawn_manager.spawn_entity(chicken, spawn_position, _owner.get_context(), Entity.EntityType.CHICKEN)

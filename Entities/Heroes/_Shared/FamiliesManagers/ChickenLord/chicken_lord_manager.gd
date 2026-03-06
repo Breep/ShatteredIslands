@@ -67,8 +67,8 @@ func _init_gifted_types() -> void:
 		for i in GIFTED_FAMILY_WEIGHTS[_families_level[family_type]]:
 			match family_type:
 				Family.Type.WARRIOR: _gifted_types.append(Chicken.Type.GIFTED_ATTACK)
-				Family.Type.ARDENT_CELESTIAL: _gifted_types.append(Chicken.Type.GIFTED_FIRE)
-				Family.Type.ENGINEER: _gifted_types.append(Chicken.Type.GIFTED_SHIELD)
+				Family.Type.ARDENT_CELESTIAL: _gifted_types.append(Chicken.Type.GIFTED_ARDENT_CELESTIAL)
+				Family.Type.ENGINEER: _gifted_types.append(Chicken.Type.GIFTED_ENGINEER)
 				Family.Type.STORM_CALLER: _gifted_types.append(Chicken.Type.GIFTED_LIGHTNING)
 				Family.Type.LIGHT: _gifted_types.append(Chicken.Type.GIFTED_LIGHT)
 				Family.Type.POISON: _gifted_types.append(Chicken.Type.GIFTED_POISON)
@@ -120,13 +120,17 @@ func _spawn_chicken(chicken_type: Chicken.Type) -> void:
 				"ratio_regen": GIFTED_LIGHT_REGEN_RATIOS[_families_level[Family.Type.LIGHT]-1],
 				"inherited_heal_ratio": bonus_heal * GIFTED_LIGHT_INHERITED_HEAL[_families_level[Family.Type.LIGHT]-1]
 			})
-		Chicken.Type.GIFTED_SHIELD:
+		Chicken.Type.GIFTED_ENGINEER:
 			var bonus_shield: float = _owner.stats.get_stat(EntityStats.StatType.STRENGTH, Utils.ActionType.STACK_SHIELD)
 			_owner.summon_entity(Entity.EntityType.CHICKEN, spawn_location_config, {
-				"Type": Chicken.Type.GIFTED_SHIELD,
+				"Type": Chicken.Type.GIFTED_ENGINEER,
 				"shield_per_attack": GIFTED_SHIELD_PER_ATTACK[_families_level[Family.Type.ENGINEER]-1],
 				"bonus_spawn": GIFTED_SHIELD_BONUS_SPAWN[_families_level[Family.Type.ENGINEER]-1],
 				"shield_strength_inherited": bonus_shield * GIFTED_SHIELD_INHERITED_SHIELD[_families_level[Family.Type.ENGINEER]-1]
 			})
+		Chicken.Type.GIFTED_ARDENT_CELESTIAL:
+				_owner.summon_entity(Entity.EntityType.CHICKEN, spawn_location_config, {
+					"Type": Chicken.Type.GIFTED_ARDENT_CELESTIAL,
+				})
 			
 			
