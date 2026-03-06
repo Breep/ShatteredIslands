@@ -5,10 +5,9 @@ extends FamilyManager
 
 # --- STATS PASSIVES (Dépendent du Niveau de la famille [0, 1, 2, 3, 4]) ---
 const GIFTED_CHANCES: Array[float] = [0, 25.0, 35.0, 45.0, 55.0]
-#const SPAWN_PERIODS: Array[float] = [12.0, 6.0, 5.5, 5.0, 4.5]
-#const START_CHICKENS: Array[int] = [0, 2, 3, 4, 6]
-const SPAWN_PERIODS: Array[float] = [20, 20, 20, 20, 20]
-const START_CHICKENS: Array[int] = [0, 1, 1, 1, 1]
+const SPAWN_PERIODS: Array[float] = [12.0, 6.0, 5.5, 5.0, 4.5]
+const START_CHICKENS: Array[int] = [0, 2, 3, 4, 6]
+
 
 # Chicken gifted attack stats
 const GIFTED_AD_RATIOS: Array[float] = [0.15, 0.20, 0.25, 0.3]
@@ -45,6 +44,7 @@ const GIFTED_FAMILY_WEIGHTS: Array[float] = [0, 1, 4, 9, 16]
 var _chicken_lord_stats: FamilyChickenLordStats
 var _chicken_number: int
 var _chicken_spawn_period: float
+var _gifted_chance: float
 var _gifted_families_ratio: Dictionary[Family.Type, float]
 var _families_level: Dictionary[Family.Type, int]
 var _gifted_types: Array[Chicken.Type]
@@ -59,7 +59,9 @@ func start() -> void:
 	_families_level = _owner.get_families_level()
 	_init_gifted_types()
 	
+	_gifted_chance = GIFTED_CHANCES[level] + _chicken_lord_stats.gifted_chance_increase
 	_chicken_number = START_CHICKENS[level]
+	
 	_spawn_chickens()
 	
 	_chicken_number = 1
@@ -94,8 +96,7 @@ func _create_chicken_spawn_timer() -> void:
 
 
 func _randomize_chicken() -> Chicken.Type:
-	return Chicken.Type.GIFTED_STORM_CALLER
-	if Utils.is_randomize_modifier_active(GIFTED_CHANCES[level], _owner.battle_id):
+	if Utils.is_randomize_modifier_active(_gifted_chance, _owner.battle_id):
 		return Utils.pick_random(_gifted_types, _owner.battle_id)
 	return Chicken.Type.BASIC
 
