@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6j8dakyvffky"
-path.s3tc="res://.godot/imported/grass2_file2-file2.png-1e2742c482d55378c696698b3ff89e89.s3tc.ctex"
+uid="uid://hf3tgrdwn0l6"
+path.s3tc="res://.godot/imported/leafage5_file2-file2.png-4c1b1b31ce8ab23fca3e6fb607526421.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "e6471130a5b1eca89a07fb797a305952"
+"md5": "0dd3beabb9204efdaef98434185f846b"
 }
 
 [deps]
 
-source_file="res://Props/DefaultBattleIsland/foliage/grass2_file2-file2.png"
-dest_files=["res://.godot/imported/grass2_file2-file2.png-1e2742c482d55378c696698b3ff89e89.s3tc.ctex"]
+source_file="res://Props/DefaultBattleIsland/foliage/textures/leafage5_file2-file2.png"
+dest_files=["res://.godot/imported/leafage5_file2-file2.png-4c1b1b31ce8ab23fca3e6fb607526421.s3tc.ctex"]
 
 [params]
 

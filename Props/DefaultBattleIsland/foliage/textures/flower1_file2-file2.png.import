@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hf3tgrdwn0l6"
-path.s3tc="res://.godot/imported/leafage5_file2-file2.png-435211a04d1eace0709960b5a4d7c661.s3tc.ctex"
+uid="uid://g10nkb5gmbu5"
+path.s3tc="res://.godot/imported/flower1_file2-file2.png-5941e1aa14c64faf9e1e13ffcefaa9d6.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://Props/DefaultBattleIsland/foliage/leafage5_file2-file2.png"
-dest_files=["res://.godot/imported/leafage5_file2-file2.png-435211a04d1eace0709960b5a4d7c661.s3tc.ctex"]
+source_file="res://Props/DefaultBattleIsland/foliage/textures/flower1_file2-file2.png"
+dest_files=["res://.godot/imported/flower1_file2-file2.png-5941e1aa14c64faf9e1e13ffcefaa9d6.s3tc.ctex"]
 
 [params]
 

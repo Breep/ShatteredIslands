@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwnlr1c8nyl2b"
-path.s3tc="res://.godot/imported/flower2_file2-file2.png-9d3134eae4ddea9754989b93e1ec052d.s3tc.ctex"
+uid="uid://ctn76qpdxio4x"
+path.s3tc="res://.godot/imported/pinetree_file1.png-654a71fdf456810300f2c8b32e1358af.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://Props/DefaultBattleIsland/foliage/flower2_file2-file2.png"
-dest_files=["res://.godot/imported/flower2_file2-file2.png-9d3134eae4ddea9754989b93e1ec052d.s3tc.ctex"]
+source_file="res://Props/DefaultBattleIsland/foliage/textures/pinetree_file1.png"
+dest_files=["res://.godot/imported/pinetree_file1.png-654a71fdf456810300f2c8b32e1358af.s3tc.ctex"]
 
 [params]
 

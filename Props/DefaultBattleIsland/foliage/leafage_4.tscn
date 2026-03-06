@@ -1,0 +1,51 @@
+[gd_scene format=4 uid="uid://ba7y1g8nfdqoa"]
+
+[ext_resource type="Texture2D" uid="uid://h866d1h6ep4e" path="res://Props/DefaultBattleIsland/foliage/textures/leafage4_file2-file2.png" id="1_pfkpn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x87w1"]
+resource_name = "foliage.003"
+transparency = 4
+cull_mode = 2
+albedo_texture = ExtResource("1_pfkpn")
+roughness = 0.5527864
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_8dbn5"]
+_surfaces = [{
+"aabb": AABB(-384.2871, -137.71796, 3.4676118, 69.12912, 69.01007, 19.099493),
+"format": 34896613377,
+"index_count": 72,
+"index_data": PackedByteArray("DQAAAAwACgANAAwAAAABAAIAAAAOAAEADQAOAAAAAQAOAAMAAwAOAA0AAQADAAQAAwAFAAQAAwANAA8AAwAQAAUABQAQAAYABQAGAAcAEQAQAAMAEQADAA8ABgAQABEADQARAA8ABgARAAkAEQAIAAkADQASABEAEQASAAgACgASAA0ACAASAAoACAAKAAsA"),
+"lods": [14.958181, PackedByteArray("AAABAAIAAQAAAAMAAQADAAQAAwAFAAQABQADAAYABQAGAAcABgADAAgAAAAIAAMABgAIAAkACgAIAAAACAAKAAsACgAAAAwA")],
+"name": "foliage.003",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 19,
+"vertex_data": PackedByteArray("hDGkGf//AAAAAP2QpeoAAMkItk63+AAAIUwmpspAAACCGbbOjdkAAHtOV/cEygAAes5a5ry+AAC4kP//M8AAAP//AW8W1AAANfdIsQTGAACDsacIt/QAAHzmSDEu5QAARm8AAIj+AAADd8s++UYAAMRDJmYERgAArX5xfQAAAAC8h8q+YDwAAPq6b5doPQAAnrJvV8JCAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_jbfxg"]
+resource_name = "leafage4_Mesh_003"
+_surfaces = [{
+"aabb": AABB(-384.2871, -137.71796, 3.4676118, 69.12912, 69.01007, 19.099493),
+"attribute_data": PackedByteArray("cxRlUHggN2WrF2pcfSxqXH0sb2iCODdliERlUE9BalyCOJM7T0FgRHggkzt9LFo4qxdgRBQiYkoUImdWfSxlUOY2Z1bmNmJKfSxgRA=="),
+"format": 34896613399,
+"index_count": 72,
+"index_data": PackedByteArray("DQAAAAwACgANAAwAAAABAAIAAAAOAAEADQAOAAAAAQAOAAMAAwAOAA0AAQADAAQAAwAFAAQAAwANAA8AAwAQAAUABQAQAAYABQAGAAcAEQAQAAMAEQADAA8ABgAQABEADQARAA8ABgARAAkAEQAIAAkADQASABEAEQASAAgACgASAA0ACAASAAoACAAKAAsA"),
+"lods": [14.958181, PackedByteArray("AAABAAIAAQAAAAMAAQADAAQAAwAFAAQABQADAAYABQAGAAcABgADAAgAAAAIAAMABgAIAAkACgAIAAAACAAKAAsACgAAAAwA")],
+"material": SubResource("StandardMaterial3D_x87w1"),
+"name": "foliage.003",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 19,
+"vertex_data": PackedByteArray("hDGkGf//WfYAAP2QperJ98kItk63+Nv+IUwmpspAtPGCGbbOjdk17ntOV/cEyvTres5a5ry+OPa4kP//M8D37f//AW8W1OLwNfdIsQTG6P2DsacIt/Rc53zmSDEu5ZToRm8AAIj+kuwDd8s++Ub278RDJmYERo//rX5xfQAAYP+8h8q+YDys8vq6b5doPQ/+nrJvV8JCLe6vOSBe5d/lti3ctr1S2aqwk9rysQ7SQ6sUyhelIdHIo4MjH0z2IYlKwS6WU9knqk7UNzFYAjTBWBA3nF3pKhFW0s4ZqEck8EsnKLtQ")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_8dbn5")
+
+[node name="leafage4" type="Node3D" unique_id=1545909579]
+
+[node name="Leafage4" type="MeshInstance3D" parent="." unique_id=393973058]
+transform = Transform3D(0.02229644, 0, 0, 0, 0, -0.02229644, 0, 0.02229644, 0, 7.805526, 0.0773154, 2.3166344)
+mesh = SubResource("ArrayMesh_jbfxg")
+skeleton = NodePath("")
