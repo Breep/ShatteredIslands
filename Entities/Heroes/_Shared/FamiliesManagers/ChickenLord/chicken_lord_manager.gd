@@ -60,7 +60,7 @@ func start() -> void:
 	_init_gifted_types()
 	
 	_gifted_chance = GIFTED_CHANCES[level] + _chicken_lord_stats.gifted_chance_increase
-	_chicken_number = START_CHICKENS[level]
+	_chicken_number = START_CHICKENS[level] + _chicken_lord_stats.spawn_number_increase
 	
 	_spawn_chickens()
 	
