@@ -23,6 +23,7 @@ sky = SubResource("Sky_hodra")
 sky_rotation = Vector3(0, 2.9792771, 0)
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_sky_contribution = 0.7
 ambient_light_energy = 0.79
 reflected_light_source = 2
 tonemap_mode = 2
@@ -42,10 +43,11 @@ volumetric_fog_anisotropy = 0.18
 volumetric_fog_ambient_inject = 0.1
 volumetric_fog_sky_affect = 0.695
 adjustment_enabled = true
+adjustment_brightness = 0.9
 adjustment_contrast = 1.095
 adjustment_saturation = 0.91
 
-[node name="M_island" unique_id=945829401 instance=ExtResource("1_sjeyk")]
+[node name="M_island" unique_id=1141969081 instance=ExtResource("1_sjeyk")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." index="0" unique_id=756294558]
 environment = SubResource("Environment_l4xy5")
