@@ -23,14 +23,6 @@ func _on_life_family_button_pressed() -> void:
 	_cards_viewer.update_content(_families[Family.Type.COLOSSUS].cards)
 
 
-func _on_lightning_family_button_pressed() -> void:
-	_cards_viewer.update_content(_families[Family.Type.LIGHTNING].cards)
-
-
-func _on_mana_family_button_pressed() -> void:
-	_cards_viewer.update_content(_families[Family.Type.MANA].cards)
-
-
 func _on_necro_family_button_pressed() -> void:
 	_cards_viewer.update_content(_families[Family.Type.NECROSIS].cards)
 
@@ -41,10 +33,6 @@ func _on_poison_family_button_pressed() -> void:
 
 func _on_serenity_family_button_pressed() -> void:
 	_cards_viewer.update_content(_families[Family.Type.LIGHT].cards)
-
-
-func _on_shadow_family_button_pressed() -> void:
-	_cards_viewer.update_content(_families[Family.Type.SHADOW].cards)
 
 
 func _on_storm_family_button_pressed() -> void:

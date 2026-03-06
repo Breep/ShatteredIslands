@@ -34,7 +34,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		update_mod.calc_type = StatModifier.CalcType.ADD
 		update_mod.value = 0.0
 		update_mod.tags = [StatModifier.TagType.CARD]
-		ctx.stat_modifiers.update_modifier(update_mod)
+		ctx.stat_modifiers.register_modifier(update_mod)
 	ctx.action_modifiers.register_modifier(action_modifier)
 
 	# On crit: accumulate dodge bonus
@@ -48,7 +48,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			update_mod.calc_type = StatModifier.CalcType.ADD
 			update_mod.value = state[&"bonus"]
 			update_mod.tags = [StatModifier.TagType.CARD]
-			ctx.stat_modifiers.update_modifier(update_mod)
+			ctx.stat_modifiers.register_modifier(update_mod)
 	)
 
 

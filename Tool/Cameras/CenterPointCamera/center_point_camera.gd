@@ -55,7 +55,7 @@ func _handle_center_point_rotation(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and _rotating:
 		var delta = event.relative
 		rotate_y(deg_to_rad(-delta.x * _rotation_sensitivity))
-		var x_rotation = -delta.y * _rotation_sensitivity
+		var x_rotation = delta.y * _rotation_sensitivity
 		var new_rotation = rotation_degrees.x + x_rotation
 		# Clamp the vertical rotation to avoid flipping
 		new_rotation = clamp(new_rotation, -80, 80)

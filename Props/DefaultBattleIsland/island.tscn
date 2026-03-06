@@ -1,0 +1,119 @@
+[gd_scene format=3 uid="uid://bxow3cbpwiaom"]
+
+[ext_resource type="PackedScene" uid="uid://mesf5wdjbmts" path="res://Props/DefaultBattleIsland/M_island.glb" id="1_sjeyk"]
+[ext_resource type="Texture2D" uid="uid://cpgjovjpnswwl" path="res://Props/DefaultBattleIsland/textures/citrus_orchard_road_puresky_4k.exr" id="2_3smeu"]
+[ext_resource type="Script" uid="uid://1hqrwl2e0q2r" path="res://Game/MainMenu/torch_light.gd" id="3_47voh"]
+[ext_resource type="PackedScene" uid="uid://dlvl8y5hmo4fq" path="res://Props/DefaultBattleIsland/water_arch.tscn" id="3_xq1xo"]
+[ext_resource type="PackedScene" uid="uid://bekurf4j71rms" path="res://Props/DefaultBattleIsland/arch.tscn" id="4_xq1xo"]
+[ext_resource type="PackedScene" uid="uid://d2n77vyjrpeo5" path="res://Props/DefaultBattleIsland/arenanew.glb" id="7_hodra"]
+[ext_resource type="PackedScene" uid="uid://c8xr41imxkoni" path="res://Props/DefaultBattleIsland/sword_low.tscn" id="7_l4xy5"]
+[ext_resource type="PackedScene" uid="uid://cuovrsmj1wten" path="res://Props/DefaultBattleIsland/caldron.tscn" id="8_l4xy5"]
+[ext_resource type="PackedScene" uid="uid://cqt3r3m8tt0jl" path="res://Props/DefaultBattleIsland/tree.tscn" id="9_mmw7b"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_47voh"]
+panorama = ExtResource("2_3smeu")
+energy_multiplier = 0.6
+
+[sub_resource type="Sky" id="Sky_hodra"]
+sky_material = SubResource("PanoramaSkyMaterial_47voh")
+
+[sub_resource type="Environment" id="Environment_l4xy5"]
+background_mode = 2
+sky = SubResource("Sky_hodra")
+sky_rotation = Vector3(0, 2.9792771, 0)
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.79
+reflected_light_source = 2
+tonemap_mode = 2
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+sdfgi_bounce_feedback = 0.0
+sdfgi_cascades = 3
+glow_bloom = 0.3
+fog_light_color = Color(0.90526116, 0.6677655, 0.6110546, 1)
+fog_light_energy = 2.0
+fog_sun_scatter = 1.0
+fog_density = 0.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.015
+volumetric_fog_albedo = Color(0.04033878, 0.11912695, 0.2718956, 1)
+volumetric_fog_anisotropy = 0.18
+volumetric_fog_ambient_inject = 0.1
+volumetric_fog_sky_affect = 0.695
+adjustment_enabled = true
+adjustment_contrast = 1.095
+adjustment_saturation = 0.91
+
+[node name="M_island" unique_id=945829401 instance=ExtResource("1_sjeyk")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="0" unique_id=756294558]
+environment = SubResource("Environment_l4xy5")
+
+[node name="Rim_light" type="DirectionalLight3D" parent="WorldEnvironment" index="0" unique_id=1145274730]
+transform = Transform3D(0.12940948, -0.24236235, -0.9615164, -0.22414392, 0.9374223, -0.26645645, 0.9659258, 0.25000003, 0.06698728, -40, 0, 33)
+light_color = Color(0.24558765, 0.51532114, 0.48345983, 1)
+light_energy = 0.5
+light_indirect_energy = 5.0
+light_volumetric_fog_energy = 7.0
+
+[node name="Sun_light" type="DirectionalLight3D" parent="WorldEnvironment" index="1" unique_id=100209582]
+transform = Transform3D(0.13765305, 0.9508776, -0.2772786, -0.917168, 0.22806498, 0.3267855, 0.37397057, 0.20932844, 0.9035086, -14.537055, 80.15106, 33.958176)
+light_color = Color(0.9817961, 0.9185508, 0.7434619, 1)
+light_energy = 0.317
+light_indirect_energy = 1.65
+shadow_enabled = true
+shadow_bias = 0.231
+shadow_normal_bias = 10.0
+
+[node name="Sword_light" type="OmniLight3D" parent="WorldEnvironment" index="2" unique_id=785199320]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.90789, 53.25355, 15.893967)
+light_color = Color(0.17657873, 0.49904495, 0.6957203, 1)
+light_energy = 5.393
+light_indirect_energy = 16.665
+light_volumetric_fog_energy = 16.0
+light_specular = 2.736
+shadow_enabled = true
+shadow_bias = 0.85
+shadow_opacity = 0.75
+shadow_blur = 5.21
+script = ExtResource("3_47voh")
+metadata/_custom_type_script = "uid://1hqrwl2e0q2r"
+
+[node name="Sword_water_light" type="OmniLight3D" parent="WorldEnvironment/Sword_light" index="0" unique_id=1072601478]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.829826, -11.379177, 7.2193947)
+light_color = Color(0.17657873, 0.49904495, 0.6957203, 1)
+light_energy = 9.655
+light_indirect_energy = 11.385
+light_volumetric_fog_energy = 28.185
+light_size = 0.463
+light_specular = 2.736
+shadow_enabled = true
+shadow_bias = 0.85
+shadow_opacity = 0.75
+shadow_blur = 5.21
+omni_range = 6.218
+omni_attenuation = 1.873
+script = ExtResource("3_47voh")
+metadata/_custom_type_script = "uid://1hqrwl2e0q2r"
+
+[node name="Node3D" parent="." index="2" unique_id=1691128380 instance=ExtResource("3_xq1xo")]
+transform = Transform3D(-0.0043924907, 0, 0.01364827, 0, 0.014337691, 0, -0.01364827, 0, -0.0043924907, -24.568016, 45.620148, 14.294867)
+
+[node name="Node3D2" parent="." index="3" unique_id=1113933276 instance=ExtResource("4_xq1xo")]
+transform = Transform3D(0.024393829, -0.005677751, 0.011697542, 0, 0.024868254, 0.012070549, -0.013002668, -0.010651821, 0.021945331, 17.559464, 34.293423, -14.231289)
+
+[node name="arenanew" parent="." index="4" unique_id=909392154 instance=ExtResource("7_hodra")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.104286, 45.587727, 34.040894)
+
+[node name="Sword_Low2" parent="." index="5" unique_id=1192308003 instance=ExtResource("7_l4xy5")]
+transform = Transform3D(0.092564926, -0.027353022, -0.008394797, 0.009646567, 0.05659658, -0.07804294, 0.026937054, 0.073726274, 0.05679575, 15.058615, 39.514935, 23.281088)
+
+[node name="Node3D3" parent="." index="6" unique_id=1261905967 instance=ExtResource("8_l4xy5")]
+transform = Transform3D(0.012364349, 0, 0, 0, 0.012364349, 0, 0, 0, 0.012364349, -19.827795, 48.085934, 31.579554)
+
+[node name="Node3D4" parent="." index="7" unique_id=2027917074 instance=ExtResource("8_l4xy5")]
+transform = Transform3D(0.012364349, 0, 0, 0, 0.012364349, 0, 0, 0, 0.012364349, 8.8221855, 48.085934, 31.579554)
+
+[node name="Node3D5" parent="." index="8" unique_id=331763463 instance=ExtResource("9_mmw7b")]
+transform = Transform3D(0.036684852, 0, 0.017795516, 0, 0.04081008, 0, -0.017879719, 0, 0.03651209, 4.8898516, 44.210735, 3.8410873)

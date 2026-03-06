@@ -32,7 +32,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			mod.calc_type = StatModifier.CalcType.ADD
 			mod.value = new_total
 			mod.tags = [StatModifier.TagType.CARD]
-			target.stat_modifiers_registry.update_modifier(mod)
+			target.stat_modifiers_registry.register_modifier(mod)
 	)
 
 

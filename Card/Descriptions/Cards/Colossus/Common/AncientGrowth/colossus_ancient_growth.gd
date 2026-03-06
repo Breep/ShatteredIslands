@@ -23,13 +23,13 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	ctx.battle_callbacks.register_battle_start(&"Ancient Growth", func() -> void:
 		state[&"total_bonus"] = 0.0
 		mod.value = 0.0
-		ctx.stat_modifiers.update_modifier(mod)
+		ctx.stat_modifiers.register_modifier(mod)
 	)
 
 	ctx.periodic_timers.register(&"Ancient Growth", period, func() -> void:
 		state[&"total_bonus"] += hp_amount
 		mod.value = state[&"total_bonus"]
-		ctx.stat_modifiers.update_modifier(mod)
+		ctx.stat_modifiers.register_modifier(mod)
 	)
 
 

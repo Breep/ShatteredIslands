@@ -86,25 +86,11 @@ func stop_attack_animation() -> void:
 func _on_entity_owner_fighting_state_changed(new_state: Entity.FightingState) -> void:
 	match new_state:
 		Entity.FightingState.FIGHTING: pass
-		Entity.FightingState.CELEBRATING:
-			if _entity_owner.is_alive():
-				_on_entity_owner_fight_is_won()
-			else:
-				_on_entity_owner_fight_is_lost()
+		Entity.FightingState.CELEBRATING: pass
 
 
 func _on_entity_owner_died() -> void:
 	_lock_animation = true # Lock animation when dead
-	_animation_tree.set(PARAM_TRANSITION_FIGHTING, VALUE_TRANSITION_FIGHTING_DIE)
-
-
-func _on_entity_owner_fight_is_won() -> void:
-	if _lock_animation: return
-	_animation_tree.set(PARAM_TRANSITION_FIGHTING, VALUE_TRANSITION_FIGHTING_DANCE)
-
-
-func _on_entity_owner_fight_is_lost() -> void:
-	if _lock_animation: return
 	_animation_tree.set(PARAM_TRANSITION_FIGHTING, VALUE_TRANSITION_FIGHTING_DIE)
 
 

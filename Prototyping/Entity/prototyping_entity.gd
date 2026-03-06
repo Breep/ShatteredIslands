@@ -75,6 +75,7 @@ func _on_stop_fight_button_pressed() -> void:
 
 
 func _on_reset_fight_button_pressed() -> void:
+	GlobalFightingManager.clear()
 	get_tree().reload_current_scene()
 #endregion
 

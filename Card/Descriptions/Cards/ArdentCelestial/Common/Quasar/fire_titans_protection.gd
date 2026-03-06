@@ -22,7 +22,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			mod.calc_type = StatModifier.CalcType.ADD
 			mod.value = ardent_celestial_stats.titans_protection_accumulated_hp
 			mod.tags = [StatModifier.TagType.CARD]
-			ctx.hero.stat_modifiers_registry.update_modifier(mod)
+			ctx.hero.stat_modifiers_registry.register_modifier(mod)
 	)
 
 

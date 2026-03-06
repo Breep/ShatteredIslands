@@ -20,6 +20,8 @@ func _ready() -> void:
 	var hero := _entity_owner as Hero
 	if hero:
 		hero.fighting_state_changed.connect(_on_hero_fighting_state_changed)
+		hero.fight_is_won.connect(_on_hero_fight_is_won)
+		hero.fight_is_lost.connect(_on_hero_fight_is_lost)
 
 
 # Override auto attack to add blend logic (left/right hand)
@@ -66,3 +68,13 @@ func _on_hero_fighting_state_changed(new_state: Hero.FightingState) -> void:
 func _start_buying_area_animation() -> void:
 	_idle_variation_timer.wait_time = _rng.randf_range(IDLE_VAR_TIMER_MIN_WAIT_TIME, IDLE_VAR_TIMER_MAX_WAIT_TIME)
 	_idle_variation_timer.start()
+
+
+func _on_hero_fight_is_won() -> void:
+	if _lock_animation: return
+	_animation_tree.set(PARAM_TRANSITION_FIGHTING, VALUE_TRANSITION_FIGHTING_DANCE)
+
+
+func _on_hero_fight_is_lost() -> void:
+	if _lock_animation: return
+	_animation_tree.set(PARAM_TRANSITION_FIGHTING, VALUE_TRANSITION_FIGHTING_DIE)

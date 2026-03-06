@@ -131,14 +131,12 @@ func _stop_fighting_manager() -> void:
 	_is_active = false
 	_disconnect_from_heroes_signals()
 	var winner_teams_order: Array[int] = _get_winner_teams_order()
-	#for member in _heroes_dictionary[winner_teams_order[winner_teams_order.size() - 1]]:
-		#var hero: Hero = member
-		## if PlayerManager.players.has(hero.owner_player_id):
-		## 	Events.signal_player_won_a_fight(PlayerManager.players[hero.owner_player_id]) # TODO rework this
-	#for member in _heroes_dictionary[winner_teams_order[0]]:
-		#var hero: Hero = member
-		## if PlayerManager.players.has(hero.owner_player_id):
-		## 	Events.signal_player_lost_a_fight(PlayerManager.players[hero.owner_player_id]) # TODO rework this
+	for member in _heroes_dictionary[winner_teams_order[winner_teams_order.size() - 1]]:
+		var hero: Hero = member
+		hero.handle_end_of_fight(true)
+	for member in _heroes_dictionary[winner_teams_order[0]]:
+		var hero: Hero = member
+		hero.handle_end_of_fight(false)
 	fight_is_over.emit(self, winner_teams_order)
 	_cleanup()
 

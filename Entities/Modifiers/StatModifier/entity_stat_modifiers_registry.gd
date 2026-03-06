@@ -28,25 +28,6 @@ class StatModifierDictionary extends Resource:
 			return
 		
 		var modifier_id: String = stat_modifier.id
-		if _modifiers.has(modifier_id):
-			Verbose.error("Register - Already known stat modifier | id=" + modifier_id + " | " + str(_stat_type), Verbose.Category.STAT_MODIFIER)
-			return
-		
-		if _is_multiple_stats():
-			_modifiers_per_action_type[stat_modifier.action_type][modifier_id] = stat_modifier
-		else:
-			_modifiers[modifier_id] = stat_modifier
-		_recompute_stats()
-
-
-	func update_modifier(stat_modifier: StatModifier) -> void:
-		Verbose.debug("update_modifier() | " + stat_modifier.id, Verbose.Category.STAT_MODIFIER)
-		var stat_type: EntityStats.StatType = stat_modifier.stat_type
-		if stat_type != _stat_type:
-			Verbose.error("Trying to update a modifier for an other stat type | " + str(stat_type) + " | " + str(_stat_type), Verbose.Category.STAT_MODIFIER)
-			return
-		
-		var modifier_id: String = stat_modifier.id
 		if _is_multiple_stats():
 			_modifiers_per_action_type[stat_modifier.action_type][modifier_id] = stat_modifier
 		else:
@@ -201,11 +182,6 @@ func _init(base_stats: EntityStats, current_stats: EntityStats) -> void:
 func register_modifier(stat_modifier: StatModifier) -> void:
 	var stat_type: EntityStats.StatType = stat_modifier.stat_type
 	_stats_modifiers_dictionaries[stat_type].register_modifier(stat_modifier)
-
-
-func update_modifier(stat_modifier: StatModifier) -> void:
-	var stat_type: EntityStats.StatType = stat_modifier.stat_type
-	_stats_modifiers_dictionaries[stat_type].update_modifier(stat_modifier)
 
 
 func unregister_modifier(stat_modifier: StatModifier) -> void:

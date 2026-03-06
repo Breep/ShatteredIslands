@@ -8,19 +8,20 @@
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_egh8k"]
 [ext_resource type="Resource" uid="uid://cpe1ja4a2fgwu" path="res://Card/Descriptions/Cards/ChickenLord/Common/chicken_rapid_incubation.tres" id="4_m26y3"]
 [ext_resource type="Script" uid="uid://nkraydv4mdse" path="res://Card/Templates/player_deck.gd" id="5_ko5bb"]
+[ext_resource type="Resource" uid="uid://bu2qwhn65ehi" path="res://Card/Descriptions/Cards/ArdentCelestial/Epic/Nuke/fire_nuke.tres" id="5_x0odd"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/Stats/EntityStats/entity_stats.gd" id="6_3bpsj"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
 [ext_resource type="PackedScene" uid="uid://dvuq5n41nak3u" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.tscn" id="8_fl2p6"]
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://Modules/PickableClickable/PickableModule/pickable_module.tscn" id="9_614kc"]
 [ext_resource type="PackedScene" uid="uid://bg5efhnq0erdv" path="res://Modules/PickableClickable/ClickableModule/clickable_module.tscn" id="10_m73qc"]
 [ext_resource type="PackedScene" uid="uid://blncvfes4f2y7" path="res://Prototyping/Entity/AllActionPrototyping/testing_floorffa5.tscn" id="11_5hdqt"]
+[ext_resource type="PackedScene" uid="uid://q7gxxkhg5u54" path="res://FloatingIsland/_Maps/arch_island.tscn" id="17_ko5bb"]
 [ext_resource type="PackedScene" uid="uid://c0l0roxttdtlp" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/FightingManager/fighting_manager.tscn" id="17_m26y3"]
-[ext_resource type="PackedScene" uid="uid://boar3vpg4cofg" path="res://Props/DefaultBattleIsland/PropArenaArena/prop_arena_arena.tscn" id="18_ko5bb"]
 [ext_resource type="PackedScene" uid="uid://dp4x7wkxd6i2q" path="res://Prototyping/Entity/EntityController/entity_controller.tscn" id="19_x0odd"]
 
 [sub_resource type="Resource" id="Resource_x0odd"]
 script = ExtResource("5_ko5bb")
-_active_cards = Array[ExtResource("3_3bpsj")]([ExtResource("4_m26y3")])
+_active_cards = Array[ExtResource("3_3bpsj")]([ExtResource("4_m26y3"), ExtResource("5_x0odd")])
 metadata/_custom_type_script = "uid://nkraydv4mdse"
 
 [sub_resource type="Resource" id="Resource_m26y3"]
@@ -216,9 +217,8 @@ text = "Family Managers"
 
 [node name="CenterPointCamera" parent="." unique_id=842815466 instance=ExtResource("4_egh8k")]
 unique_name_in_owner = true
-transform = Transform3D(0.022652432, 0, 0.9997434, 0, 1, 0, -0.9997434, 0, 0.022652432, 0, 0, 0)
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
 _zoom_min = 1.0
-_zoom_max = 100.0
 
 [node name="SpawnManager" parent="." unique_id=562272433 node_paths=PackedStringArray("_entities_node", "_projectiles_node", "_spells_node") instance=ExtResource("6_egh8k")]
 unique_name_in_owner = true
@@ -278,6 +278,9 @@ visible = false
 [node name="MeshInstance3D" parent="TestingFloorFFA5/CenterNode3D/Center1/Team1Area" parent_id_path=PackedInt32Array(283551194, 155190666) index="1" unique_id=1030576179]
 visible = false
 
+[node name="SpawnPoint1" parent="TestingFloorFFA5/CenterNode3D/Center1/Team1Area" parent_id_path=PackedInt32Array(283551194, 155190666) index="2" unique_id=933717393]
+visible = false
+
 [node name="MeshInstance3D" parent="TestingFloorFFA5/CenterNode3D/Center2/Team2Area" parent_id_path=PackedInt32Array(283551194, 1034680613) index="1" unique_id=826441766]
 visible = false
 
@@ -293,11 +296,11 @@ visible = false
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=688220262]
 transform = Transform3D(0.20953494, 0.9711535, -0.11382448, -0.5411095, 0.2121261, 0.8137586, 0.8144296, -0.10891936, 0.56994826, -0.7068796, -10.037087, 0)
 
-[node name="Props_Arena_temporairearene" parent="." unique_id=753120639 instance=ExtResource("18_ko5bb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.573431, 0)
-
 [node name="FightingManager" parent="." unique_id=1380390082 instance=ExtResource("17_m26y3")]
 unique_name_in_owner = true
+
+[node name="ArchIsland" parent="." unique_id=1045725859 instance=ExtResource("17_ko5bb")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
 [connection signal="pressed" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StartFightButton" to="." method="_on_start_fight_button_pressed"]
 [connection signal="pressed" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StopFightButton" to="." method="_on_stop_fight_button_pressed"]
@@ -305,4 +308,6 @@ unique_name_in_owner = true
 [connection signal="toggled" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/AutoAttackCheckButton" to="." method="_on_auto_attack_check_button_toggled"]
 [connection signal="toggled" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/FamilyManagersCheckButton" to="." method="_on_family_managers_check_button_toggled"]
 
+[editable path="Entities/DarkKnight1"]
+[editable path="Entities/DarkKnight1/DarkKnightVisual"]
 [editable path="TestingFloorFFA5"]
