@@ -36,7 +36,7 @@ func _ready() -> void:
 
 func _setup_local_nodes() -> void:
 	if not is_node_ready() or player == null: return
-	_player_name_label.text = player.name
+	_player_name_label.text = player.player_name
 	if player.hero != null:
 		_hero_portrait_button.set_texture(player.hero.portrait)
 	

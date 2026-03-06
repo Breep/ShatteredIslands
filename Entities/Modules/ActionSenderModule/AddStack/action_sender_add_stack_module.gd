@@ -3,43 +3,32 @@ extends ActionSenderModule
 
 # ============================== Public functions ==============================
 
-func inflict_condition_stacks(target: Entity, stacks_number: float, stack_type: Utils.StackType, action_id: StringName, duration: float = 5.0) -> Dictionary:
-	if not multiplayer.is_server(): return {}
-	if target == null: return {}
+func inflict_condition_stacks(target: Entity, value: float, stack_type: Stack.Type, action_id: StringName, duration: float = 5.0) -> float:
+	if is_instance_valid(target) == null: return 0
 	
-	var stacks_number_before_crit: float = stacks_number * _get_strenght_weakness_multiplier(Utils.stack_to_action(stack_type))
-	var crit_multiplier: Dictionary = _get_crit_multiplier(Utils.stack_to_action(stack_type))
-	stacks_number = stacks_number_before_crit * crit_multiplier["multiplier"]
+	var base_value: float = value * _get_strenght_weakness_multiplier(Stack.to_action(stack_type))
+	var crit_data: Dictionary = _get_crit_multiplier(Stack.to_action(stack_type))
+	value = base_value * crit_data["multiplier"]
 	
-	if _owner.action_modifiers_registry != null:
-		var modifiers_dict: Dictionary = {
-			ActionModifier.VarType.STACK_VALUE: stacks_number,
-			ActionModifier.VarType.STACK_TYPE: stack_type,
-			ActionModifier.VarType.TARGET: target,
-			ActionModifier.VarType.DURATION: duration
-		}
-		for condition_modifier: ActionModifier in _owner.action_modifiers_registry.get_all_modifiers(ActionModifier.ActionType.INFLICT_CONDITION):
-			if condition_modifier.before_action_logic_callback.is_valid():
-				condition_modifier.before_action_logic_callback.call(modifiers_dict)
-		
-		stacks_number = modifiers_dict[ActionModifier.VarType.STACK_VALUE]
-		duration = modifiers_dict[ActionModifier.VarType.DURATION]
+	var modifiers_data: Dictionary = _consume_before_action_modifiers(Utils.ActionCategory.STACK, {
+		ActionModifier.VarType.STACK_VALUE: value,
+		ActionModifier.VarType.STACK_TYPE: stack_type,
+		ActionModifier.VarType.TARGET: target,
+		ActionModifier.VarType.DURATION: duration
+	})
 	
-	var stacks_taken: float = target.take_condition_stacks(stacks_number, stack_type, crit_multiplier["is_critical"], action_id, _owner, duration)
+	value = modifiers_data[ActionModifier.VarType.STACK_VALUE]
+	duration = modifiers_data[ActionModifier.VarType.DURATION]
 	
-	if _owner.action_modifiers_registry != null:
-		var modifiers_dict: Dictionary = {
-			ActionModifier.VarType.STACK_VALUE: stacks_number,
-			ActionModifier.VarType.STACK_TYPE: stack_type,
-			ActionModifier.VarType.TARGET: target,
-			ActionModifier.VarType.DURATION: duration
-		}
-		for condition_modifier: ActionModifier in _owner.action_modifiers_registry.get_all_modifiers(ActionModifier.ActionType.INFLICT_CONDITION):
-			if condition_modifier.after_action_logic_callback.is_valid():
-				condition_modifier.after_action_logic_callback.call(modifiers_dict)
+	var stacks_inflicted: float = target.take_condition_stacks(value, stack_type, crit_data["is_critical"], action_id, _owner, duration)
 	
-	return {
-		ResultKey.VALUE: stacks_taken,
-		ResultKey.IS_CRITICAL: crit_multiplier["is_critical"],
-		ResultKey.BASE_VALUE: stacks_number_before_crit,
-	}
+	_consume_after_action_modifiers(Utils.ActionCategory.STACK, {
+		ActionModifier.VarType.STACK_VALUE: stacks_inflicted,
+		ActionModifier.VarType.STACK_TYPE: stack_type,
+		ActionModifier.VarType.TARGET: target,
+		ActionModifier.VarType.DURATION: duration
+	})
+	
+	_owner.critical_action_done.emit(target, Stack.to_action(stack_type), base_value, stacks_inflicted)
+	_owner.action_done.emit(target, Stack.to_action(stack_type), action_id, stacks_inflicted, crit_data["is_critical"])
+	return stacks_inflicted

@@ -19,15 +19,9 @@ enum VarType { # Variable types of the callbacks dictionary
 	DURATION
 }
 
-enum ActionType {
-	DIRECT_ATTACK,
-	INFLICT_CONDITION,
-	HEAL,
-	DODGE
-}
 
 var id: StringName
-var action_type: ActionType
+var action_type: Utils.ActionCategory
 var tags: Array[TagType]
 var is_one_time_effect: bool = true
 var auto_cleanup: bool = true

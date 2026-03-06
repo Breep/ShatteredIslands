@@ -127,23 +127,22 @@ static func new_from_serialized(serialized_data: Dictionary) -> Battle:
 	battle.name = serialized_data["name"]
 	battle.players_number = serialized_data["players_number"]
 	battle.teams_number = serialized_data["teams_number"]
-	for serialized_player in serialized_data["players"]:
-		var player_id: int = serialized_player[Player.SerializedField.ID]
+	for player_id: int in serialized_data["player_ids"]:
 		battle.players.append(PlayerManager.players[player_id])
 	return battle
 
 
 func serialized() -> Dictionary:
-	var serialized_players: Array[Dictionary]
+	var player_ids: Array[int]
 	for player in players:
-		serialized_players.append(player.serialized())
+		player_ids.append(player.id)
 	var serialized_version = {
 		"id": id,
 		"battle_type": battle_type,
 		"name": name,
 		"players_number": players_number,
 		"teams_number": teams_number,
-		"players": serialized_players
+		"player_ids": player_ids
 	}
 	return serialized_version
 
@@ -190,7 +189,7 @@ func _sort_players_in_team() -> void:
 
 # Pick a random player from players dictionary and remove it from the dictionary
 func _pick_random_player(players_list: Dictionary) -> Player:
-	var player_index = Utils.rng.randi_range(0, players_list.size() - 1)
+	var player_index = Utils.get_randi_range(0, players_list.size() - 1)
 	var player = players_list.values()[player_index]
 	players_list.erase(players_list.find_key(player))
 	return player
@@ -199,5 +198,5 @@ func _pick_random_player(players_list: Dictionary) -> Player:
 # Get a random battle_type from a number of players (If there are 4 players in a fight, it can be either a 2v2 or a 1v1v1v1 for instance)
 static func _get_random_battle_type(battle_category: BattleCategory) -> Battle.BattleType:
 	var battle_types: Array = BATTLES_TYPE_DIC[battle_category]
-	var battle_id = Utils.rng.randi_range(0, battle_types.size() - 1)
+	var battle_id = Utils.get_randi_range(0, battle_types.size() - 1)
 	return battle_types[battle_id]

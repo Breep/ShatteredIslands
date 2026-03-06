@@ -3,7 +3,7 @@ extends Control
 
 # ============================== Signal ==============================
 
-signal family_selected(family_type: Family.FamilyType)
+signal family_selected(family_type: Family.Type)
 
 # ============================== Effects Configuration ==============================
 
@@ -89,7 +89,7 @@ func _connect_new_player(new_player: Player) -> void:
 
 func _update_portrait_families() -> void:
 	_reset_portrait_families()
-	var families_count: Dictionary[Family.FamilyType, int] = _player.deck.families_count
+	var families_count: Dictionary[Family.Type, int] = _player.deck.families_count
 	for family_portrait: UIFamilyPortrait in _family_portraits:
 		for family_type in families_count.keys():
 			if family_portrait.family_type == family_type:
@@ -127,7 +127,7 @@ func _on_portrait_family_selected(portrait_family: UIFamilyPortrait) -> void:
 
 
 func _on_portrait_family_unselected(_portrait_family: UIFamilyPortrait) -> void:
-	family_selected.emit(Family.FamilyType.UNDEF)
+	family_selected.emit(Family.Type.UNDEF)
 
 
 

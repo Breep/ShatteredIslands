@@ -9,7 +9,8 @@ enum StatType {
 	MANA,
 	MANA_REGEN,
 	AD,
-	AA_SPEED,
+	AS,
+	AP,
 	ATTACK_RANGE,
 	CRIT_CHANCE,
 	CRIT_CHANCE_GLOBAL,
@@ -20,7 +21,11 @@ enum StatType {
 	STRENGTH,
 	WEAKNESS,
 	DODGE,
-	CRIT_RESISTANCE
+	CRIT_RESISTANCE,
+	DEFENCE,
+	BLOCK,
+	LIFESTEAL,
+	THORN
 	}
 #endregion
 
@@ -122,7 +127,6 @@ signal critical_multiplier_changed(new_critical_multiplier: float, critical_type
 @export var _critical_multipliers: Dictionary[Utils.ActionType, float]
 #endregion
 
-
 #region ============================== Resistances ==============================
 @export_group("Resistance")
 signal resistance_changed(new_resistance: float, action_type: Utils.ActionType)
@@ -156,6 +160,60 @@ signal weakness_changed(new_weakness: float, action_type: Utils.ActionType)
 @export var _weaknesses: Dictionary[Utils.ActionType, float]
 #endregion
 
+#region ============================== Life steal ==============================
+@export_group("Life Steal")
+signal life_steal_changed(new_life_steal: float, action_type: Utils.ActionType)
+@export var _life_steals: Dictionary[Utils.ActionType, float]
+#endregion
+
+#region ============================== Life steal ==============================
+@export_group("Block")
+signal block_changed(new_life_steal: float)
+var _block: float
+@export var block: float:
+	get: return _block
+	set(value):
+		if value == _block: return
+		_block = value
+		block_changed.emit(_block)
+#endregion
+
+#region ============================== Defence ==============================
+@export_group("Defence")
+signal defence_changed(new_defence: float)
+var _defence: float
+@export var defence: float:
+	get: return _defence
+	set(value):
+		if value == _defence: return
+		_defence = value
+		defence_changed.emit(_defence)
+#endregion
+
+#region ============================== AP ==============================
+@export_group("Attack Power")
+signal attack_power_changed(new_attack_power: float)
+var _attack_power: float
+@export var attack_power: float:
+	get: return _attack_power
+	set(value):
+		if value == _attack_power: return
+		_attack_power = value
+		attack_power_changed.emit(_attack_power)
+#endregion
+
+#region ============================== Thorn ==============================
+@export_group("Thorn")
+signal thorn_changed(new_thorn: float)
+var _thorn: float
+@export var thorn: float:
+	get: return _thorn
+	set(value):
+		if value == _thorn: return
+		_thorn = value
+		thorn_changed.emit(_thorn)
+#endregion
+
 #region ============================== Public functions ==============================
 func reset_from_hero_desc(hero: HeroDesc, lvl: int) -> EntityStats:
 	if lvl < 1 or lvl > 10:
@@ -168,19 +226,24 @@ func reset_from_hero_desc(hero: HeroDesc, lvl: int) -> EntityStats:
 	mana = 0
 	mana_regen = hero.stats[lvl].mana_regen
 	attack_damage = hero.stats[lvl].attack_damage
+	attack_power = hero.stats[lvl].attack_power
 	attack_speed = hero.stats[lvl].attack_speed
 	attack_range = hero.stats[lvl].attack_range
 	auto_attack_type = hero.stats[lvl].auto_attack_type
+	defence = hero.stats[lvl].defence
+	block = hero.stats[lvl].block
+	thorn = hero.stats[lvl].thorn
 	
 	for action_type: Utils.ActionType in Utils.get_all_actions():
-		_critical_chances[action_type] = hero.stats[lvl].critical_chances.get(action_type, 0.0)
-		_critical_multipliers[action_type] = hero.stats[lvl].critical_multipliers.get(action_type, 100.0)
-		_resistances[action_type] = hero.stats[lvl].resistances.get(action_type, 0.0)
-		_vulnerabilities[action_type] = hero.stats[lvl].vulnerabilities.get(action_type, 0.0)
-		_dodges[action_type] = hero.stats[lvl].dodges.get(action_type, 0.0)
-		_strengths[action_type] = hero.stats[lvl].strength.get(action_type, 0.0)
-		_weaknesses[action_type] = hero.stats[lvl].weakness.get(action_type, 0.0)
-		_crit_resistances[action_type] = hero.stats[lvl].crit_resistances.get(action_type, 0.0)
+		_critical_chances[action_type] = hero.stats[lvl].critical_chances.get(action_type, 0)
+		_critical_multipliers[action_type] = hero.stats[lvl].critical_multipliers.get(action_type, 100)
+		_resistances[action_type] = hero.stats[lvl].resistances.get(action_type, 0)
+		_vulnerabilities[action_type] = hero.stats[lvl].vulnerabilities.get(action_type, 0)
+		_dodges[action_type] = hero.stats[lvl].dodges.get(action_type, 0)
+		_strengths[action_type] = hero.stats[lvl].strength.get(action_type, 0)
+		_weaknesses[action_type] = hero.stats[lvl].weakness.get(action_type, 0)
+		_crit_resistances[action_type] = hero.stats[lvl].crit_resistances.get(action_type, 0)
+		_life_steals[action_type] = hero.stats[lvl].life_steals.get(action_type, 0)
 	
 	has_been_reset.emit()
 	return self
@@ -202,19 +265,24 @@ func get_stat(stat_type: StatType, action_type: Utils.ActionType = Utils.ActionT
 		EntityStats.StatType.MANA: return _mana
 		EntityStats.StatType.MANA_REGEN: return _mana_regen
 		EntityStats.StatType.AD: return float(_attack_damage)
-		EntityStats.StatType.AA_SPEED: return _attack_speed
+		EntityStats.StatType.AP: return float(_attack_power)
+		EntityStats.StatType.AS: return _attack_speed
 		EntityStats.StatType.ATTACK_RANGE: return _attack_range
-		EntityStats.StatType.CRIT_CHANCE: return _critical_chances.get(action_type, 0.0)
-		EntityStats.StatType.CRIT_MULT: return _critical_multipliers.get(action_type, 100.0)
-		EntityStats.StatType.RESISTANCE: return _resistances.get(action_type, 0.0)
-		EntityStats.StatType.VULNERABILITY: return _vulnerabilities.get(action_type, 0.0)
-		EntityStats.StatType.DODGE: return _dodges.get(action_type, 0.0)
-		EntityStats.StatType.STRENGTH: return _strengths.get(action_type, 0.0)
-		EntityStats.StatType.WEAKNESS: return _weaknesses.get(action_type, 0.0)
-		EntityStats.StatType.CRIT_RESISTANCE: return _crit_resistances.get(action_type, 0.0)
+		EntityStats.StatType.BLOCK: return float(_block)
+		EntityStats.StatType.DEFENCE: return float(_defence)
+		EntityStats.StatType.THORN: return float(_thorn)
+		EntityStats.StatType.CRIT_CHANCE: return _critical_chances.get(action_type, 0)
+		EntityStats.StatType.CRIT_MULT: return _critical_multipliers.get(action_type, 100)
+		EntityStats.StatType.RESISTANCE: return _resistances.get(action_type, 0)
+		EntityStats.StatType.VULNERABILITY: return _vulnerabilities.get(action_type, 0)
+		EntityStats.StatType.DODGE: return _dodges.get(action_type, 0)
+		EntityStats.StatType.STRENGTH: return _strengths.get(action_type, 0)
+		EntityStats.StatType.WEAKNESS: return _weaknesses.get(action_type, 0)
+		EntityStats.StatType.CRIT_RESISTANCE: return _crit_resistances.get(action_type, 0)
+		EntityStats.StatType.LIFESTEAL: return _life_steals.get(action_type, 0)
 		_:
 			printerr("EntityStats: get_stat() - Unknown stat type [", stat_type, "]")
-			return 0.0
+			return 0
 
 
 func update_stat(stat_type: StatType, value: float, action_type: Utils.ActionType = Utils.ActionType.DAMAGE_PHYSICAL) -> void:
@@ -225,8 +293,12 @@ func update_stat(stat_type: StatType, value: float, action_type: Utils.ActionTyp
 		EntityStats.StatType.MANA: mana = value
 		EntityStats.StatType.MANA_REGEN: mana_regen = value
 		EntityStats.StatType.AD: attack_damage = value
-		EntityStats.StatType.AA_SPEED: attack_speed = value
+		EntityStats.StatType.AP: attack_power = value
+		EntityStats.StatType.AS: attack_speed = value
 		EntityStats.StatType.ATTACK_RANGE: attack_range = value
+		EntityStats.StatType.DEFENCE: defence = value
+		EntityStats.StatType.BLOCK: block = value
+		EntityStats.StatType.THORN: thorn = value
 		EntityStats.StatType.CRIT_CHANCE:
 			_critical_chances[action_type] = value
 			critical_chance_changed.emit(value, action_type)
@@ -251,5 +323,8 @@ func update_stat(stat_type: StatType, value: float, action_type: Utils.ActionTyp
 		EntityStats.StatType.CRIT_RESISTANCE:
 			_crit_resistances[action_type] = value
 			crit_resistance_changed.emit(value, action_type)
+		EntityStats.StatType.LIFESTEAL:
+			_life_steals[action_type] = value
+			life_steal_changed.emit(value, action_type)
 		_: printerr("EntityStats: get_stat() - Unknown stat type [", stat_type, "]")
 #endregion

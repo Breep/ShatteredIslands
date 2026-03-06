@@ -152,11 +152,4 @@ mouse_filter = 2
 [node name="UIGame" parent="UI" instance=ExtResource("9_kul4i")]
 layout_mode = 1
 
-[node name="BuyingAreaTimer" type="Timer" parent="."]
-unique_name_in_owner = true
-wait_time = 20.0
-one_shot = true
-
-[connection signal="timeout" from="BuyingAreaTimer" to="." method="_on_buying_area_timer_timeout"]
-
 [editable path="UI/UIGame"]

@@ -3,28 +3,20 @@ extends ActionReceiverModule
 
 # ============================== Public functions ==============================
 
-func take_condition_stacks(stacks_number: float, stack_type: Utils.StackType, is_critical: bool, action_id: StringName, source: Entity = null, duration: float = 5.0) -> Dictionary:
-	if _owner.stats.health <= 0 or _owner.is_dead(): return {}
-
-	if Utils.is_negative_stack(stack_type) and _owner.status_module.has_status(Status.Type.INVULNERABLE):
-		return {
-			ResultKey.VALUE: 0.0,
-			ResultKey.IS_CRITICAL: false,
-			ResultKey.INVULNERABLE: true
-		}
-
+func take_condition_stacks(stacks_number: float, stack_type: Stack.Type, is_critical: bool, action_id: StringName, source: Entity = null, duration: float = 5.0) -> float:
+	if _owner.is_dead(): return 0
+	if _owner.is_invulnerable() and Stack.is_negative(stack_type): return 0
 	if multiplayer.is_server():
-		if _is_dodged(Utils.stack_to_action(stack_type)):
-			return {ResultKey.DODGED: true}
-		stacks_number *= _get_resistance_vulnerability_multiplier(Utils.stack_to_action(stack_type))
+		if _is_dodged(Stack.to_action(stack_type), source):
+			_owner.action_dodged.emit(source, Stack.to_action(stack_type))
+			return 0
+		stacks_number *= _get_resistance_vulnerability_multiplier(Stack.to_action(stack_type))
 	
-	var stack_enum: Stack.Type = _utils_stack_to_stack_type(stack_type)
 	var mod: Dictionary = {}
-	if stack_type == Utils.StackType.REGEN:
+	if stack_type == Stack.Type.REGEN:
 		mod[Stack.ModifierType.DURATION] = int(duration)
-	_owner.conditions.add_stack(stack_enum, stacks_number, source, action_id, mod)
 	
-	return {
-		ResultKey.VALUE: stacks_number,
-		ResultKey.IS_CRITICAL: is_critical,
-	}
+	_owner.conditions.add_stack(stack_type, stacks_number, source, action_id, mod)
+	_owner.stack_taken.emit(stack_type, stacks_number, is_critical)
+	_owner.action_received.emit(source, Stack.to_action(stack_type), action_id, stacks_number, is_critical)
+	return stacks_number

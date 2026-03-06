@@ -16,7 +16,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 	# Count unique Colossus/Life cards in deck
 	if ctx.hero.deck:
-		var colossus_count: int = ctx.hero.deck.get_unique_card_count(Family.FamilyType.LIFE)
+		var colossus_count: int = ctx.hero.deck.get_unique_card_count(Family.Type.COLOSSUS)
 		mod.value = colossus_count * amount
 	else:
 		push_warning("Ancient Collector: deck is null")

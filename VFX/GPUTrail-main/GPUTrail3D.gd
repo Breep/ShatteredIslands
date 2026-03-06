@@ -99,7 +99,7 @@ func _ready():
 		color_ramp = preload(_DEFAULT_TEXTURE)
 		curve = preload(_DEFAULT_CURVE)
 		
-		draw_pass_1.material.resource_local_to_scene = true
+		draw_pass_1.material.resource_local_to_scene = false
 	
 	length = length
 	vertical_texture = vertical_texture

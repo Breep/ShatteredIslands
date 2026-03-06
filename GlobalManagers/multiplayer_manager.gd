@@ -18,18 +18,24 @@ var expected_clients: int = 1
 
 var _clients_number: int = 0
 
+func _init() -> void:
+	Verbose.debug("MULTIPLAYER MANAGER INIT", Verbose.Category.DEFAULT)
+
 # ============================== Node base function ==============================
 func _ready() -> void:
+	if "--prototyping" in OS.get_cmdline_args():
+		return
+
 	auto_start_time = float(_get_cmd_arg("auto-start", "0"))
-	expected_clients = int(_get_cmd_arg("expected_clients", "1"))
+	expected_clients = int(_get_cmd_arg("expected-clients", "1"))
 	
 	Verbose.info("Starting multiplayer manager", Verbose.Category.NET)
 	
-	if "--server" in OS.get_cmdline_args(): #SERVER
+	if "--server" in OS.get_cmdline_args(): # SERVER
 		_start_server(DEFAULT_SERVER_PORT)
 		multiplayer.peer_connected.connect(_on_peer_connected)
 		multiplayer.peer_disconnected.connect(_on_peer_disconnected)
-	else: #CLIENT ONLY
+	else: # CLIENT ONLY
 		multiplayer.connected_to_server.connect(_on_connected_to_server)
 		multiplayer.connection_failed.connect(_on_connection_failed)
 

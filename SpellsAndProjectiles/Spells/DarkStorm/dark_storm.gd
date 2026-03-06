@@ -35,9 +35,9 @@ func _ready() -> void:
 		queue_free()
 		return
 	
-	var a: float = Utils.rng.randf_range(0, 1)
-	var b: float = Utils.rng.randf_range(-1, 1)
-	var d: float = Utils.rng.randf_range(-MAX_RANDOM_XY, MAX_RANDOM_XY)
+	var a: float = Utils.get_randf_range(0, 1, _source.battle_id)
+	var b: float = Utils.get_randf_range(-1, 1, _source.battle_id)
+	var d: float = Utils.get_randf_range(-MAX_RANDOM_XY, MAX_RANDOM_XY, _source.battle_id)
 	var vec := Vector3(a, 0, b).normalized()
 	global_position = _target.global_position + d * vec
 	
@@ -76,7 +76,7 @@ func _on_damage_tick_timer_timeout() -> void:
 			var damage: float = _damage
 			if _pain_percent > 0.0:
 				damage = damage * (1.0 + entity.conditions.get_total_stacks() * _pain_percent / 100.0)
-			_source.direct_damage(entity, int(round(damage)), Utils.DamageType.PHYSICAL, "Dark Storm")
+			_source.direct_damage(entity, int(round(damage)), Utils.ActionType.DAMAGE_PHYSICAL, "Dark Storm")
 
 
 func _on_lifespan_timer_timeout() -> void:

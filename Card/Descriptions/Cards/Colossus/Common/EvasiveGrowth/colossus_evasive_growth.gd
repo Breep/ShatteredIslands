@@ -21,7 +21,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	# Action modifier: on dodge -> increase max HP
 	var action_mod := ActionModifier.new()
 	action_mod.id = &"Evasive Growth"
-	action_mod.action_type = ActionModifier.ActionType.DODGE
+	action_mod.action_type = Utils.ActionCategory.DODGE
 	action_mod.is_one_time_effect = false
 	action_mod.after_action_logic_callback = func(_cb_vars: Dictionary) -> void:
 		if ctx.hero and is_instance_valid(ctx.hero):

@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://d1oxnd1g75rqh"]
+[gd_scene load_steps=8 format=3 uid="uid://d1oxnd1g75rqh"]
 
 [ext_resource type="Script" uid="uid://8tub4ube48p7" path="res://UI/InGame/BuyingArea/CardShop/ui_card_shop.gd" id="1_xu7re"]
 [ext_resource type="Texture2D" uid="uid://bbcbah5ifbsrw" path="res://UI/_Themes/Data/coin.png" id="3_1gnrk"]
 [ext_resource type="PackedScene" uid="uid://c2psjj8133op3" path="res://Card/2D/CardButton/card_button.tscn" id="4_37vaa"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="5_ahun0"]
 [ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://UI/Tool/Misc/hover_boost_button.gd" id="5_smee4"]
-[ext_resource type="PackedScene" uid="uid://dlh177khgltfq" path="res://Game/CardShop/card_shop.tscn" id="9_ahun0"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xt3ho"]
 blend_mode = 1
@@ -13,7 +12,7 @@ light_mode = 1
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1gnrk"]
 
-[node name="UICardShop" type="Control" node_paths=PackedStringArray("_card_shop", "_card_buttons")]
+[node name="UICardShop" type="Control" node_paths=PackedStringArray("_card_buttons")]
 custom_minimum_size = Vector2(700, 500)
 layout_mode = 3
 anchors_preset = 8
@@ -30,7 +29,6 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("5_ahun0")
 script = ExtResource("1_xu7re")
-_card_shop = NodePath("CardShop")
 _card_buttons = [NodePath("MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer/CardButton"), NodePath("MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer2/CardButton"), NodePath("MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer3/CardButton")]
 
 [node name="MainPanel" type="Control" parent="."]
@@ -433,7 +431,5 @@ mouse_filter = 2
 texture = ExtResource("3_1gnrk")
 expand_mode = 3
 stretch_mode = 5
-
-[node name="CardShop" parent="." instance=ExtResource("9_ahun0")]
 
 [connection signal="pressed" from="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXPButton" to="." method="_on_buy_xp_button_pressed"]

@@ -116,12 +116,12 @@ const LEVEL_PREFIX_TEMPLATES: Dictionary[Level, String] = {
 
 #region ============================== Configuration ==============================
 var current_categories_level: Dictionary[Category, Level] = {
-	Category.DEFAULT: Level.WARN,
+	Category.DEFAULT: Level.DEBUG,
 	Category.NET: Level.WARN,
-	Category.GLOBAL_MANAGER: Level.WARN,
+	Category.GLOBAL_MANAGER: Level.DEBUG,
 	Category.ROUND_MANAGER: Level.WARN,
 	Category.CARD_SHOP: Level.WARN,
-	Category.CARD: Level.DEBUG,
+	Category.CARD: Level.WARN,
 	Category.SHOP_DECK: Level.WARN,
 	Category.CARD_LAYOUT: Level.WARN,
 	Category.AI: Level.WARN,
@@ -134,7 +134,7 @@ var current_categories_level: Dictionary[Category, Level] = {
 	Category.ACTION_MODIFIER: Level.WARN,
 	Category.STAT_MODIFIER: Level.WARN,
 	Category.STACK_MODIFIER: Level.WARN,
-	Category.GLOBAL_FIGHTING_MANAGER: Level.WARN,
+	Category.GLOBAL_FIGHTING_MANAGER: Level.TRACE,
 	Category.ENTITY_ANIMATION: Level.WARN,
 	Category.ENTITY_MODULE: Level.WARN,
 	Category.ENTITY: Level.WARN,
@@ -152,7 +152,7 @@ var current_categories_level: Dictionary[Category, Level] = {
 	Category.SPAWN_LOCATION_CONFIG: Level.WARN,
 	Category.TARGET_MODULE: Level.WARN,
 	Category.MOVEMENT_MODULE: Level.WARN,
-	Category.PROJECTILE: Level.TRACE,
+	Category.PROJECTILE: Level.WARN,
 }
 #endregion
 
@@ -195,7 +195,7 @@ func _ready() -> void:
 #region ============================== Public function ==============================
 func _get_prefix() -> String:
 	if _is_server: return PREFIX_TEMPLATES[GameType.SERVER]
-	if not multiplayer.is_server():
+	if multiplayer and not multiplayer.is_server():
 		return PREFIX_TEMPLATES[GameType.CLIENT]
 	else:
 		return PREFIX_TEMPLATES[GameType.SOLO]
@@ -203,12 +203,12 @@ func _get_prefix() -> String:
 
 func _get_rich_prefix() -> String:
 	if _is_server: return RICH_PREFIX_TEMPLATES[GameType.SERVER]
-	if not multiplayer.is_server():
+	if multiplayer and not multiplayer.is_server():
 		return RICH_PREFIX_TEMPLATES[GameType.CLIENT]
 	else:
 		return RICH_PREFIX_TEMPLATES[GameType.SOLO]
 
-
+	
 func _is_category_active(cat: Category, log_level: Level) -> bool:
 	var cat_level: Level = current_categories_level.get(cat, Level.WARN)
 	return log_level >= cat_level
@@ -218,19 +218,28 @@ func _log(cat: Category, level: Level, msg: String) -> void:
 	var time_stamp: String = ""
 	
 	if _get_stamp:
-		time_stamp = " " + str(Time.get_ticks_msec()) + " "
+		var ticks: int = Time.get_ticks_msec()
+		var mins: int = int(ticks / 60000.0)
+		var secs: int = int(ticks / 1000.0) % 60
+		var msecs: int = ticks % 1000
+		time_stamp = "%02d:%02d:%04d" % [mins, secs, msecs]
 	
 	if not _is_category_active(cat, level): return
 	
 	match level:
 		Level.TRACE:
+			Console.print(_get_rich_prefix() + "[color=gray]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 			print_rich(_get_rich_prefix() + time_stamp + "[color=gray]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 		Level.DEBUG:
+			Console.print(_get_rich_prefix() + "[color=white]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 			print_rich(_get_rich_prefix() + time_stamp + "[color=white]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 		Level.INFO:
+			Console.print(_get_rich_prefix() + "[color=white]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 			print_rich(_get_rich_prefix() + time_stamp + "[color=white]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 		Level.WARN:
+			Console.print(_get_rich_prefix() + "[color=yellow]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 			print_rich(_get_rich_prefix() + time_stamp + "[color=yellow]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 		Level.ERROR:
+			Console.print(_get_rich_prefix() + "[color=red]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 			print_rich(_get_rich_prefix() + time_stamp + "[color=red]" + LEVEL_PREFIX_TEMPLATES[level] + CATEGORY_PREFIX_TEMPLATES[cat] + msg + "[/color]")
 #endregion

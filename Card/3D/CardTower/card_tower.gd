@@ -8,7 +8,7 @@ const MAX_RANDOM_ROTATION:float = 5.0 * 3.14159 / 180.0 # Random movement of the
 
 # ============================== Public variables ==============================
 
-var card_family: Family.FamilyType
+var card_family: Family.Type
 
 var _cards_number: int # Number of coin in the tower
 var cards_number: int:
@@ -47,7 +47,7 @@ func _update_visual(new_cards_number) -> void:
 		printerr("CoinTower: Can't have less than 0 cards in the tower")
 		return
 	
-	if card_family == Family.FamilyType.UNDEF:
+	if card_family == Family.Type.UNDEF:
 		return
 	
 	if new_cards_number > _cards_number:

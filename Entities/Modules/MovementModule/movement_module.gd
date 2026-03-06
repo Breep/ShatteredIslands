@@ -33,6 +33,7 @@ func set_target_position(target_position: Vector3) -> void:
 	Verbose.debug("set_target_position", Verbose.Category.MOVEMENT_MODULE)
 	_target_position = target_position
 	_is_moving = true
+	_owner.is_moving = true
 
 
 func move_to_entity(entity: Entity) -> void:
@@ -48,6 +49,7 @@ func follow_entity(entity: Entity) -> void:
 		_target_entity = entity
 		_follow_entity = true
 		_is_moving = true
+		_owner.is_moving = true
 	else:
 		Verbose.error("follow_entity: entity is null", Verbose.Category.MOVEMENT_MODULE)
 
@@ -57,11 +59,13 @@ func stop_following() -> void:
 	_follow_entity = false
 	_target_entity = null
 	_is_moving = false
+	_owner.is_moving = false
 	# Reset velocity so animation can return to idle
 	_owner.velocity = Vector3.ZERO
 
 
-func _process(_delta: float) -> void:
+## Called every physics tick by FightingManager (deterministic, fixed 1/60s step).
+func process_tick() -> void:
 	if _is_stopped:
 		return
 	_move_toward_target()
@@ -81,15 +85,13 @@ func _move_toward_target() -> void:
 	if _target_position == null or _owner.global_position.distance_to(_target_position) < 0.1:
 		if not _follow_entity:
 			_is_moving = false
-			# Reset velocity so animation can return to idle
-			_owner.velocity = Vector3.ZERO
+			_owner.is_moving = false
 		return
 	
 	var direction: Vector3 = (_target_position - _owner.global_position).normalized()
 	_owner.look_at_target_y_only(_target_position)
-	# Velocity should be in units per second, move_and_slide handles delta internally
-	_owner.velocity = direction * _get_move_speed()
-	_owner.move_and_slide()
+	_owner.global_position += direction * (_get_move_speed() / 60.0)
+	_owner.global_position = _owner.global_position.snapped(Vector3(0.01, 0.01, 0.01))
 
 
 func _get_move_speed() -> float:

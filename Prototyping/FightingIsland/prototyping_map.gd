@@ -20,7 +20,6 @@ var _heroes: Array[Hero] = [] # Dynamically instantiated heroes
 @export var _floating_island: FightingIsland
 @export var _battle_type: Battle.BattleType
 
-@onready var _ui_fighting_area: UIFightingArea = %UIFightingArea
 @onready var _ui_proto: Control = %UIProto
 
 @onready var _ui_player_stats: UIDebugEntityStats = %PlayerStats
@@ -44,15 +43,12 @@ func _ready() -> void:
 	_init_players()
 	
 	_add_player_cards()
-	_floating_island.init_fight(_heroes, _battle_type)
-	GameManager.game_rules.duration_fighting_positioning = 0.5
-	GameManager.game_rules.duration_fighting_countdown = 0.5
+	_floating_island.init_fight(_heroes, _battle_type, 42)
+	GameManager.game_rules.duration_fighting_countdown = 1
 	GameManager.game_rules.duration_fighting_normal = 240.0
-	GameManager.game_state = GameManager.GameState.FIGHTING
+	GameManager.request_state_transition(GameManager.GameState.FIGHTING)
 	GlobalFightingManager.start()
 	_floating_island.set_active()
-	_ui_fighting_area.update_content(_floating_island._fighting_area)
-	_ui_fighting_area.set_active()
 	_ui_player_stats.hide()
 	_ui_player_stats.connect_entity(_heroes[0])
 	_ui_entity_bds_registry.connect_entity_bds_registry(_heroes[0].bds_registry)
@@ -74,7 +70,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event.is_action_pressed("scene_switch_7") and _heroes.size() > 6: _ui_player_stats.connect_entity(_heroes[6])
 		if event.is_action_pressed("scene_switch_8") and _heroes.size() > 7: _ui_player_stats.connect_entity(_heroes[7])
 		if event.is_action_pressed("hide_ui"):
-			_ui_fighting_area.visible = not _ui_fighting_area.visible
 			_ui_proto.visible = not _ui_proto.visible
 		if event.is_action_pressed("hide_3d_ui"):
 			for hero: Hero in _heroes:
@@ -90,7 +85,6 @@ func _instantiate_heroes() -> void:
 		
 		# Instantiate hero with FIGHTING_PHASE display mode for prototyping
 		var hero: Hero = Shared.HERO_SCENES[hero_desc.id].instantiate().init(Hero.DisplayMode.FIGHTING_PHASE)
-		hero.level = 1
 		hero.entity_name = "Player" + str(i + 1)
 		
 		# Assign team (default to index-based if array is too small)
@@ -104,15 +98,19 @@ func _instantiate_heroes() -> void:
 
 
 func _init_players() -> void:
+	var player_scene: PackedScene = preload("res://Player/player.tscn")
 	for i: int in _heroes.size():
-		var player: Player = Player.new()
-		player.name = "Player" + str(i + 1)
+		var player: Player = player_scene.instantiate()
+		player.init_player()
+		player.player_name = "Player" + str(i + 1)
+		player.name = "Player_" + str(i + 1)
 		player.id = 1
 		player.hero_desc = _hero_descs[i]
 		player.hero = _heroes[i]
-		player.hero.entity_name = player.name
+		player.hero.entity_name = player.player_name
 		player.skill_manager = SkillManager.new()
 		_players.append(player)
+		add_child(player)
 
 
 func _add_player_cards() -> void:
@@ -127,3 +125,7 @@ func _add_player_cards() -> void:
 			card.uid = uid
 			uid += 1
 			_players[i].deck.add_card(card)
+
+
+func _on_button_pressed() -> void:
+	get_tree().reload_current_scene()

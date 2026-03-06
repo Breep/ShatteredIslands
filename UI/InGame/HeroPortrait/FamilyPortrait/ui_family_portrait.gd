@@ -15,7 +15,7 @@ signal unselected(self_ref: UIFamilyPortrait)
 
 # ============================== Public variables ==============================
 
-var family_type: Family.FamilyType
+var family_type: Family.Type
 
 var _family_count: int = 0
 var family_count: int:

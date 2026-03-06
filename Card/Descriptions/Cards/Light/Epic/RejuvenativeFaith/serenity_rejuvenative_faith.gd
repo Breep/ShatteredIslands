@@ -17,18 +17,18 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if action_type != Utils.ActionType.UTILITY_CLEANSE and action_type != Utils.ActionType.UTILITY_DISPELL:
 			return
 		if value <= 0: return
-		if Utils.is_randomize_modifier_active(chance):
+		if Utils.is_randomize_modifier_active(chance, ctx.hero.battle_id):
 			var regen_amount: float = value * amount
 			if regen_amount > 0:
-				ctx.hero.inflict_condition_stacks(ctx.hero, regen_amount, Utils.StackType.REGEN, &"Rejuvenative Faith")
+				ctx.hero.inflict_condition_stacks(ctx.hero, regen_amount, Stack.Type.REGEN, &"Rejuvenative Faith")
 
 	ctx.battle_callbacks.register_battle_start(&"Rejuvenative Faith", func() -> void:
-		if not ctx.hero.interaction_received.is_connected(_on_interaction):
-			ctx.hero.interaction_received.connect(_on_interaction)
+		if not ctx.hero.action_received.is_connected(_on_interaction):
+			ctx.hero.action_received.connect(_on_interaction)
 	)
 	ctx.battle_callbacks.register_battle_end(&"Rejuvenative Faith", func() -> void:
-		if ctx.hero.interaction_received.is_connected(_on_interaction):
-			ctx.hero.interaction_received.disconnect(_on_interaction)
+		if ctx.hero.action_received.is_connected(_on_interaction):
+			ctx.hero.action_received.disconnect(_on_interaction)
 	)
 
 

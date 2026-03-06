@@ -18,35 +18,37 @@ func _on_init() -> void:
 	_direction = (target_pos - _start_pos).normalized()
 
 
-func update(delta: float) -> void:
+func update(logic_pos: Vector3, delta: float) -> Vector3:
 	_life += delta
 	
 	var half_lifetime := lifetime * 0.5
 	
 	if _life < half_lifetime:
 		# Phase 1: Fly forward
-		_projectile.global_position += _direction * speed * delta
-		_projectile.look_at(_projectile.global_position + _direction)
+		logic_pos += _direction * speed * delta
+		_projectile.look_at(logic_pos + _direction)
 	else:
 		# Phase 2: Return to source
 		if not _is_returning:
 			_is_returning = true
 			# Note: We could clear hit history here if projectile tracks it
 		
-		if not _source or not is_instance_valid(_source):
+		if not is_instance_valid(_source):
 			# Source disappeared, just continue forward or self-destruct
-			return
+			return logic_pos
 		
-		var return_dir := _projectile.global_position.direction_to(_source.global_position)
-		_projectile.global_position += return_dir * speed * delta
+		var return_dir := logic_pos.direction_to(_source.global_position)
+		logic_pos += return_dir * speed * delta
 		
 		if return_dir.length_squared() > 0.001:
-			_projectile.look_at(_projectile.global_position + return_dir)
+			_projectile.look_at(logic_pos + return_dir)
 		
 		# Check if close enough to source to be "caught"
-		if _projectile.global_position.distance_squared_to(_source.global_position) < 1.0:
+		if logic_pos.distance_squared_to(_source.global_position) < 1.0:
 			# Projectile will be destroyed by the Projectile class
 			pass
+	
+	return logic_pos
 
 
 func _on_retarget() -> void:

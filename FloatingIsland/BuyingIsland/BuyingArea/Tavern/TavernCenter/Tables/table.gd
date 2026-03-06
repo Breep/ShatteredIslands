@@ -48,11 +48,11 @@ func cleanup() -> void:
 func _spawn_player_hero(player: Player, avaible_spawns: Array[SpawnPoint]) -> void:
 	var hero: Hero = player.hero
 	if hero == null:
-		Verbose.error("Player " + player.name + " has no hero instance", Verbose.Category.TABLE)
+		Verbose.error("Player " + player.player_name + " has no hero instance", Verbose.Category.TABLE)
 		return
 
 	if hero.is_inside_tree():
-		Verbose.warn("Hero " + hero.entity_name + " already in tree, this shouldn't happen", Verbose.Category.TABLE)
+		Verbose.warn("Hero " + hero.entity_name + " already in tree, this shouldn't happen [TABLE]", Verbose.Category.TABLE)
 		return
 
 	# Trouver le spawn point correspondant à la team du joueur

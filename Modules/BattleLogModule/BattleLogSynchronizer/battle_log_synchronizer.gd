@@ -15,6 +15,11 @@ extends Node
 
 var _battle_logs: Array[Dictionary] = [] # [CLIENT ONLY]
 
+# ============================== Public functions ==============================
+
+func set_sync_period(period: float) -> void:
+	_synchronizer_timer.wait_time = period
+
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
@@ -34,13 +39,13 @@ func _on_gfm_fighting_phase_state_changed(state: GlobalFightingManager.FightingP
 		GlobalFightingManager.FightingPhaseState.NORMAL:
 			if multiplayer.is_server():
 				_synchronizer_timer.start()
-		GlobalFightingManager.FightingPhaseState.FINISHED: # TODO Si erreur de synchro sur les derniers event d'un combat, c'est surement une race ici
-			_battle_logs.clear()
+		GlobalFightingManager.FightingPhaseState.FINISHED:
 			if multiplayer.is_server():
 				_synchronizer_timer.stop()
 				var new_logs: Array[Dictionary] = _battle_writer.get_current_logs()
 				if not new_logs.is_empty():
 					_sync_battle_log.rpc(new_logs)
+			_battle_logs.clear()
 
 # ============================== Callbacks functions ============================== [CLIENT ONLY]
 

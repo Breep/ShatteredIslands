@@ -106,64 +106,69 @@ func _is_next_attack_super_strike() -> bool:
 
 
 func _register_super_strike() -> void:
-	var aa_modifier := AutoAttackModifier.new()
-	aa_modifier.id = "Super Strike"
-	aa_modifier.damage_mult = _mega_strike_damage_percent / 100.0 if _mega_strike_activated else _super_strike_damage_percent / 100.0
-	aa_modifier.tags = [AutoAttackModifier.TagType.HERO]
-	aa_modifier.on_attack_logic_callback = _on_attack_super_strike_logic_callback
-	aa_modifier.on_attack_visual_callback = _on_attack_super_strike_visual_callback
-	aa_modifier.on_hit_logic_callback = _on_hit_super_strike_logic_callback
-	aa_modifier.on_hit_visual_callback = _on_hit_super_strike_visual_callback
-	auto_attack_modifier_registry.register_modifier(aa_modifier)
+	return
+	#var aa_modifier := AutoAttackModifier.new()
+	#aa_modifier.id = "Super Strike"
+	#aa_modifier.damage_mult = _mega_strike_damage_percent / 100.0 if _mega_strike_activated else _super_strike_damage_percent / 100.0
+	#aa_modifier.tags = [AutoAttackModifier.TagType.HERO]
+	#aa_modifier.on_attack_logic_callback = _on_attack_super_strike_logic_callback
+	#aa_modifier.on_attack_visual_callback = _on_attack_super_strike_visual_callback
+	#aa_modifier.on_hit_logic_callback = _on_hit_super_strike_logic_callback
+	#aa_modifier.on_hit_visual_callback = _on_hit_super_strike_visual_callback
+	#auto_attack_modifier_registry.register_modifier(aa_modifier)
 
 
 func _register_corruption() -> void:
-	_corruption_charges += 1
-	var stat_modifier := StatModifier.new()
-	stat_modifier.id = "Corruption"
-	stat_modifier.stat_type = EntityStats.StatType.AD
-	stat_modifier.calc_type = StatModifier.CalcType.ADD
-	stat_modifier.value = _corruption_charges * _corruption_ad_gain
-	stat_modifier.tags = [StatModifier.TagType.HERO]
-	stat_modifiers_registry.update_modifier(stat_modifier)
+	return
+	#_corruption_charges += 1
+	#var stat_modifier := StatModifier.new()
+	#stat_modifier.id = "Corruption"
+	#stat_modifier.stat_type = EntityStats.StatType.AD
+	#stat_modifier.calc_type = StatModifier.CalcType.ADD
+	#stat_modifier.value = _corruption_charges * _corruption_ad_gain
+	#stat_modifier.tags = [StatModifier.TagType.HERO]
+	#stat_modifiers_registry.register_modifier(stat_modifier)
 
 
 func _register_mana_strike() -> void:
-	var aa_modifier := AutoAttackModifier.new()
-	aa_modifier.id = "Mana Strike"
-	aa_modifier.tags = [AutoAttackModifier.TagType.HERO]
-	aa_modifier.on_hit_logic_callback = _on_hit_mana_strike_logic_callback
-	auto_attack_modifier_registry.register_modifier(aa_modifier)
+	return
+	#var aa_modifier := AutoAttackModifier.new()
+	#aa_modifier.id = "Mana Strike"
+	#aa_modifier.tags = [AutoAttackModifier.TagType.HERO]
+	#aa_modifier.on_hit_logic_callback = _on_hit_mana_strike_logic_callback
+	#auto_attack_modifier_registry.register_modifier(aa_modifier)
 
 
 func _register_spark_of_light() -> void:
-	var aa_modifier := AutoAttackModifier.new()
-	aa_modifier.id = "Spark Of Light"
-	aa_modifier.tags = [AutoAttackModifier.TagType.HERO]
-	aa_modifier.on_hit_logic_callback = _on_hit_spark_of_light_logic_callback
-	auto_attack_modifier_registry.register_modifier(aa_modifier)
+	return
+	#var aa_modifier := AutoAttackModifier.new()
+	#aa_modifier.id = "Spark Of Light"
+	#aa_modifier.tags = [AutoAttackModifier.TagType.HERO]
+	#aa_modifier.on_hit_logic_callback = _on_hit_spark_of_light_logic_callback
+	#auto_attack_modifier_registry.register_modifier(aa_modifier)
 
 
 # ============================== Callback ==============================
 
 func _on_auto_attack_completed(_entity: Entity) -> void:
-	var max_charge: int = _mega_strike_max_charge if _mega_strike_activated else _super_strike_max_charge
-	_super_strike_charges = (_super_strike_charges + 1) % (max_charge + 1)
-	super_strike_charges_changed.emit(_super_strike_charges, max_charge)
-	
-	var stat_modifier := StatModifier.new()
-	stat_modifier.id = "Super Strike"
-	stat_modifier.stat_type = EntityStats.StatType.AD
-	stat_modifier.calc_type = StatModifier.CalcType.ADD
-	stat_modifier.value = _super_strike_factor * _super_strike_charges # TODO -> * player_owner.lvl
-	stat_modifier.tags = [StatModifier.TagType.HERO]
-	stat_modifiers_registry.update_modifier(stat_modifier)
-	if _is_next_attack_super_strike():
-		_register_super_strike()
-		if _mana_strike_activated:
-			_register_mana_strike()
-		if _spark_of_light_activated:
-			_register_spark_of_light()
+	return
+	#var max_charge: int = _mega_strike_max_charge if _mega_strike_activated else _super_strike_max_charge
+	#_super_strike_charges = (_super_strike_charges + 1) % (max_charge + 1)
+	#super_strike_charges_changed.emit(_super_strike_charges, max_charge)
+	#
+	#var stat_modifier := StatModifier.new()
+	#stat_modifier.id = "Super Strike"
+	#stat_modifier.stat_type = EntityStats.StatType.AD
+	#stat_modifier.calc_type = StatModifier.CalcType.ADD
+	#stat_modifier.value = _super_strike_factor * _super_strike_charges # TODO -> * player_owner.lvl
+	#stat_modifier.tags = [StatModifier.TagType.HERO]
+	#stat_modifiers_registry.register_modifier(stat_modifier)
+	#if _is_next_attack_super_strike():
+		#_register_super_strike()
+		#if _mana_strike_activated:
+			#_register_mana_strike()
+		#if _spark_of_light_activated:
+			#_register_spark_of_light()
 
 # ============================== HeroDesc specific callbacks ==============================
 
@@ -220,7 +225,7 @@ func _on_cataclysm_activation() -> void:
 	stat_modifier.calc_type = StatModifier.CalcType.ADD
 	stat_modifier.value = _cataclysm_mana_cost
 	stat_modifier.tags = [StatModifier.TagType.HERO]
-	stat_modifiers_registry.update_modifier(stat_modifier)
+	stat_modifiers_registry.register_modifier(stat_modifier)
 
 # ============================== Skill Manager Callbacks ==============================
 

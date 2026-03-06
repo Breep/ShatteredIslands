@@ -15,4 +15,7 @@ name = "Proteins"
 picture = ExtResource("1_h8ej3")
 families = Array[int]([6])
 player_upgrade = SubResource("Resource_soto3")
+points = Dictionary[int, int]({
+6: 1
+})
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

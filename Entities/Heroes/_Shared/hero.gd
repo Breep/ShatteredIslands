@@ -13,6 +13,8 @@ enum DisplayMode {
 
 #region ============================== Signal ==============================
 signal ultimate_casted()
+signal fight_is_won()
+signal fight_is_lost()
 #endregion
 
 #region ============================== Export ==============================
@@ -24,7 +26,7 @@ signal ultimate_casted()
 @export_subgroup("Prototyping")
 @export var _custom_deck: PlayerDeck
 @export var family_managers_enabled: bool = true
-@export var _override_family_levels: Dictionary[Family.FamilyType, int] = {}
+@export var _override_family_levels: Dictionary[Family.Type, int] = {}
 
 #region ============================== Public variables ==============================
 var display_mode: DisplayMode = DisplayMode.PREVIEW
@@ -42,7 +44,7 @@ var _hero_animation: HeroAnimationModule:
 	get: return _animation_module as HeroAnimationModule
 
 var _skill_manager: SkillManager
-var _family_managers: Dictionary[Family.FamilyType, FamilyManager]
+var _family_managers: Dictionary[Family.Type, FamilyManager]
 #endregion
 
 #region ============================== Public functions ==============================
@@ -59,24 +61,36 @@ func set_display_mode(mode: DisplayMode) -> void:
 	display_mode = mode
 	_apply_display_mode()
 
+func get_families_level() -> Dictionary[Family.Type, int]:
+	var families_level: Dictionary[Family.Type, int]
+	for family_type in _family_managers.keys():
+		families_level[family_type] = _family_managers[family_type].level
+	return families_level
+	
 
 func get_card_context() -> CardContext:
 	return _card_context
+
+
+func handle_end_of_fight(is_winner: bool) -> void:
+	if is_winner: fight_is_won.emit()
+	else: fight_is_lost.emit()
 #endregion
 
 #region ===== Actions (Hero-specific overrides) =====
-
-# Instant projectile attack (spells, abilities) - no animation
 func cast_ultimate() -> void:
 	ultimate_casted.emit()
 #endregion
 
+func process_tick() -> void:
+	super.process_tick()
+	periodic_timer_registry.process_tick()
 
 #region ============================== Node base functions ==============================
 func _enter_tree() -> void:
 	# Add Family Managers and Family stats
 	families_stats = FamiliesStats.new()
-	for family_type: Family.FamilyType in Shared.FAMILY_MANAGER_SCENES.keys():
+	for family_type: Family.Type in Shared.FAMILY_MANAGER_SCENES.keys():
 		var family_manager: FamilyManager = Shared.FAMILY_MANAGER_SCENES[family_type].instantiate() as FamilyManager
 		_family_managers[family_type] = family_manager.init(self)
 		add_child(_family_managers[family_type])
@@ -135,7 +149,11 @@ func _on_fighting_state_changed(new_fighting_state: FightingState) -> void:
 				periodic_timer_registry.start_all()
 				for family_manager: FamilyManager in _family_managers.values():
 					family_manager.start()
-		FightingState.CELEBRATING: pass
+		FightingState.CELEBRATING:
+			periodic_timer_registry.stop_all()
+			battle_callback_registry.execute_battle_end()
+			for family_manager: FamilyManager in _family_managers.values():
+				family_manager.stop()
 		FightingState.UNDEF: pass
 #endregion
 
@@ -153,7 +171,7 @@ func _apply_display_mode() -> void:
 
 
 func _compute_family_levels() -> void:
-	for family_type: Family.FamilyType in _family_managers:
+	for family_type: Family.Type in _family_managers:
 		if _override_family_levels.has(family_type):
 			_family_managers[family_type].level = _override_family_levels[family_type]
 		elif deck != null:

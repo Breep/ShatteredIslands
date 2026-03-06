@@ -8,8 +8,8 @@ var _is_blocked_by_armor: bool = false
 var _global_start_pos: Vector2
 var _color: Color
 var _is_setup: bool = false
-var _damage_type: Utils.DamageType
-var _stack_type: Utils.StackType
+var _damage_type: Utils.ActionType
+var _stack_type: Stack.Type
 var _is_damage: bool = false
 var _is_mirrored: bool = false
 var _value: int
@@ -47,7 +47,7 @@ func mirror(is_mirrored: bool) -> LabelPopup:
 	return self
 
 
-func setup_damage(value: int, damage_type: Utils.DamageType, global_start_pos: Vector2, critical: bool = false, blocked_by_armor: bool = false) -> LabelPopup:
+func setup_damage(value: int, damage_type: Utils.ActionType, global_start_pos: Vector2, critical: bool = false, blocked_by_armor: bool = false) -> LabelPopup:
 	_is_crit = critical
 	_is_blocked_by_armor = blocked_by_armor
 	_global_start_pos = global_start_pos
@@ -59,11 +59,11 @@ func setup_damage(value: int, damage_type: Utils.DamageType, global_start_pos: V
 	return self
 
 
-func setup_stack(value: int, stack_type: Utils.StackType, global_start_pos: Vector2, critical: bool = false) -> LabelPopup:
+func setup_stack(value: int, stack_type: Stack.Type, global_start_pos: Vector2, critical: bool = false) -> LabelPopup:
 	_is_crit = critical
 	_stack_type = stack_type
 	_global_start_pos = global_start_pos
-	_color = Utils.STACK_COLORS[stack_type]
+	_color = Stack.COLORS[stack_type]
 	_value = value
 	_is_damage = false
 	_is_setup = true
@@ -85,7 +85,7 @@ func _ready() -> void:
 	
 	if _is_damage:
 		vmove = VMoveType.UP
-		if _damage_type == Utils.DamageType.HEAL:
+		if _damage_type == Utils.ActionType.UTILITY_HEAL:
 			hmove = HMoveType.LEFT
 			_label.text = "+" + str(_value)
 		else:
@@ -94,7 +94,7 @@ func _ready() -> void:
 	else:
 		vmove = VMoveType.DOWN
 		_label.text = "" + str(_value)
-		if _stack_type == Utils.StackType.SHIELD or _stack_type == Utils.StackType.REGEN:
+		if _stack_type == Stack.Type.SHIELD or _stack_type == Stack.Type.REGEN:
 			hmove = HMoveType.LEFT
 		else:
 			hmove = HMoveType.RIGHT

@@ -3,43 +3,26 @@ extends ActionReceiverModule
 
 # ============================== Public functions ==============================
 
-func take_damage(damage: float, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> Dictionary:
-	if _owner.stats.health <= 0 or _owner.is_dead(): return {}
-	
-	if _owner.status_module.has_status(Status.Type.INVULNERABLE):
-		return {
-			ResultKey.VALUE: 0.0,
-			ResultKey.IS_CRITICAL: false,
-			ResultKey.INVULNERABLE: true
-		}
-
-	var damage_before_armor: float = 0
-	if damage_type != Utils.DamageType.PURE and multiplayer.is_server():
-		if _is_dodged(Utils.damage_to_action(damage_type)):
-			return {ResultKey.DODGED: true}
-		damage *= _get_resistance_vulnerability_multiplier(Utils.damage_to_action(damage_type))
-		
+func take_damage(damage: float, damage_type: Utils.ActionType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
+	if _owner.is_dead(): return 0
+	if _owner.is_invulnerable(): return 0
+	if damage_type != Utils.ActionType.DAMAGE_PURE and multiplayer.is_server():
+		if _is_dodged(damage_type, source):
+			_owner.action_dodged.emit(source, damage_type)
+			return 0
+		if _is_blocked(): return 0
+		_handle_thorn(source, action_id)
+		damage *= _get_resistance_vulnerability_multiplier(damage_type)
 		if is_critical:
-			damage *= _get_crit_resistance_multiplier(Utils.damage_to_action(damage_type))
-		
-		damage_before_armor = damage
+			damage *= _get_crit_resistance_multiplier(damage_type)
 		damage = _owner.conditions.get_shield_reduced_damage(damage, damage_type)
-
-
 	_owner.stats.health -= damage
-	
-	return {
-		ResultKey.VALUE: damage,
-		ResultKey.IS_CRITICAL: is_critical,
-		ResultKey.BLOCKED_BY_ARMOR: damage_before_armor > damage,
-	}
+	_owner.damage_taken.emit(damage, damage_type, is_critical, false)
+	_owner.action_received.emit(source, damage_type, action_id, damage, is_critical)
+	return damage
 
 
-func take_damage_percent(damage_percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.DamageType, is_critical: bool, action_id: StringName, source: Entity = null) -> Dictionary:
-	if not multiplayer.is_server():
-		Verbose.warn("take_damage_percent() should not be called by clients", Verbose.Category.ENTITY_MODULE)
-		return {}
-	
+func take_damage_percent(damage_percent: float, percent_modifier: Utils.PercentModifier, damage_type: Utils.ActionType, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
 	var hp: float
 	match percent_modifier:
 		Utils.PercentModifier.MAX_HP:
@@ -50,3 +33,16 @@ func take_damage_percent(damage_percent: float, percent_modifier: Utils.PercentM
 			hp = _owner.stats.health_max - _owner.stats.health
 	var damage: float = hp * damage_percent / 100.0
 	return take_damage(damage, damage_type, is_critical, action_id, source)
+
+
+func _is_blocked() -> bool:
+	if _owner.stats.block >= 1:
+		_owner.stats.block -= 1
+		return true
+	return false
+
+
+func _handle_thorn(source: Entity, action_id: StringName) -> void:
+	if action_id != &"auto_attack": return
+	if _owner.stats.thorn >= 1 and is_instance_valid(source):
+		_owner.direct_damage(source, _owner.stats.thorn, Utils.ActionType.DAMAGE_PHYSICAL, action_id)

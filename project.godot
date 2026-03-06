@@ -46,10 +46,11 @@ config/icon="uid://hl4bi74ds0b0"
 
 [autoload]
 
+Console="*uid://dinahj02x6npw"
 Verbose="*res://Lib/verbose.gd"
 Utils="*res://Lib/utils.gd"
 GameManager="*res://GlobalManagers/game_manager.gd"
-ServerCardShop="*res://GlobalManagers/server_card_shop.gd"
+CardShopManager="*res://GlobalManagers/card_shop_manager.gd"
 ServerOracleShop="*res://GlobalManagers/server_oracle_shop.gd"
 TooltipManager="*res://UI/Tool/Tooltip/Manager/tooltip_manager.gd"
 Events="*res://Lib/events.gd"
@@ -60,6 +61,7 @@ SimpleGrass="*res://addons/simplegrasstextured/singleton.tscn"
 MultiplayerManager="*res://GlobalManagers/multiplayer_manager.gd"
 GlobalGameManager="*res://GlobalManagers/global_game_manager.gd"
 Shared="*res://Lib/shared.gd"
+Debug="*uid://woc06wbtruty"
 
 [debug]
 
@@ -71,7 +73,6 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/mode=3
 window/size/initial_screen=1
-window/stretch/mode="canvas_items"
 
 [editor_plugins]
 

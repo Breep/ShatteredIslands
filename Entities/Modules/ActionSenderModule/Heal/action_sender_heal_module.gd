@@ -3,38 +3,30 @@ extends ActionSenderModule
 
 # ============================== Public functions ==============================
 
-func heal(target: Entity, heal_amount: float, action_id: StringName) -> Dictionary:
-	if not multiplayer.is_server(): return {}
-	if target == null: return {}
+func heal(target: Entity, value: float, action_id: StringName) -> float:
+	if not is_instance_valid(target): return 0
 	
-	if _owner.action_modifiers_registry != null:
-		var modifiers_dict: Dictionary = {
-			ActionModifier.VarType.HEAL_AMOUNT: heal_amount,
-			ActionModifier.VarType.TARGET: target
-		}
-		for modifier: ActionModifier in _owner.action_modifiers_registry.get_all_modifiers(ActionModifier.ActionType.HEAL):
-			if modifier.before_action_logic_callback.is_valid():
-				modifier.before_action_logic_callback.call(modifiers_dict)
-		heal_amount = modifiers_dict[ActionModifier.VarType.HEAL_AMOUNT]
+	var modifiers_data: Dictionary = _consume_before_action_modifiers(Utils.ActionCategory.HEAL, {
+		ActionModifier.VarType.HEAL_AMOUNT: value,
+		ActionModifier.VarType.TARGET: target
+	})
+	value = modifiers_data[ActionModifier.VarType.HEAL_AMOUNT]
 	
-	var heal_amount_before_crit: float = heal_amount * _get_strenght_weakness_multiplier(Utils.ActionType.UTILITY_HEAL)
-	var crit_multiplier: Dictionary = _get_crit_multiplier(Utils.ActionType.UTILITY_HEAL)
-	heal_amount = heal_amount_before_crit * crit_multiplier["multiplier"]
-	var heal_taken: float = target.take_heal(heal_amount, crit_multiplier["is_critical"], action_id, _owner)
+	var base_value: float = value * _get_strenght_weakness_multiplier(Utils.ActionType.UTILITY_HEAL)
+	var crit_data: Dictionary = _get_crit_multiplier(Utils.ActionType.UTILITY_HEAL)
+	value = base_value * crit_data["multiplier"]
+	var heal_done: float = target.take_heal(value, crit_data["is_critical"], action_id, _owner)
+	var overheal_amount: float = value - heal_done
 	
-	var overheal_amount: float = heal_amount - heal_taken
-	
-	return {
-		ResultKey.VALUE: heal_taken,
-		ResultKey.IS_CRITICAL: crit_multiplier["is_critical"],
-		ResultKey.BASE_VALUE: heal_amount_before_crit,
-		ResultKey.OVERHEAL: overheal_amount,
-	}
+	if overheal_amount > 0:
+		_owner.action_overhealed.emit(target, overheal_amount)
+	if crit_data["is_critical"]:
+		_owner.critical_action_done.emit(target, Utils.ActionType.UTILITY_HEAL, base_value, value)
+	_owner.action_done.emit(target, Utils.ActionType.UTILITY_HEAL, action_id, value, crit_data["is_critical"])
+	return heal_done
 
 
-func heal_percent(target: Entity, percent: float, percent_modifier: Utils.PercentModifier, action_id: StringName) -> Dictionary:
-	if not multiplayer.is_server(): return {}
-	if target == null: return {}
+func heal_percent(target: Entity, percent: float, percent_modifier: Utils.PercentModifier, action_id: StringName) -> float:
 	var hp: float
 	match percent_modifier:
 		Utils.PercentModifier.MAX_HP:

@@ -52,6 +52,11 @@ signal _server_answered()
 
 var _battles: Dictionary[int, Battle] = {}
 
+# ============================== Node base functions ==============================
+
+func _init() -> void:
+	Verbose.debug("ROUND MANAGER INIT", Verbose.Category.DEFAULT)
+
 # ============================== Public functions ==============================
 
 func clear() -> void:
@@ -64,6 +69,7 @@ func get_current_round_battles() -> Array[Battle]:
 	battle_history[current_round] = BattleHistory.new()
 	battle_history[current_round].round_id = current_round
 	_battles.clear()
+	_is_ready = false
 	if multiplayer.is_server():
 		_init_current_round_battles()
 	else:

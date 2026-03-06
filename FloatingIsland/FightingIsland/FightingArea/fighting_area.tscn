@@ -16,7 +16,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_8iy5v"]
 size = Vector3(20, 5, 10)
 
-[node name="FightingArea" type="Node3D" unique_id=2072382245 node_paths=PackedStringArray("_spawn_manager", "_fighting_manager", "_entity_manager", "_arena_zone_manager", "_fighting_floors", "_entities_node")]
+[node name="FightingArea" type="Node3D" unique_id=2072382245 node_paths=PackedStringArray("_spawn_manager", "_fighting_manager", "_entity_manager", "_arena_zone_manager", "_fighting_floors")]
 script = ExtResource("1_t74of")
 _spawn_manager = NodePath("SpawnManager")
 _fighting_manager = NodePath("FightingManager")
@@ -27,7 +27,6 @@ _fighting_floors = {
 1: NodePath("FightingFloorTemplates/FightingFloor_2v2"),
 2: NodePath("FightingFloorTemplates/FightingFloor_ffa13")
 }
-_entities_node = NodePath("Entities")
 
 [node name="EntityManager" parent="." unique_id=1828737280 node_paths=PackedStringArray("_fighting_area", "_scanner_area") instance=ExtResource("2_wtb7j")]
 _fighting_area = NodePath("..")
@@ -58,13 +57,26 @@ _spells_node = NodePath("../Spells")
 
 [node name="FightingFloorTemplates" type="Node3D" parent="." unique_id=2027780914]
 
-[node name="FightingFloor_1v1" parent="FightingFloorTemplates" unique_id=1587238691 instance=ExtResource("5_2akj6")]
-
-[node name="FightingFloor_2v2" parent="FightingFloorTemplates" unique_id=1759052820 instance=ExtResource("6_yyfcp")]
+[node name="FightingFloor_1v1" parent="FightingFloorTemplates" unique_id=1587238691 node_paths=PackedStringArray("team_zones") instance=ExtResource("5_2akj6")]
 visible = false
+team_zones = {
+1: NodePath("SpawnArea"),
+2: NodePath("SpawnArea2")
+}
 
-[node name="FightingFloor_ffa13" parent="FightingFloorTemplates" unique_id=273186181 instance=ExtResource("7_hqxx4")]
+[node name="FightingFloor_2v2" parent="FightingFloorTemplates" unique_id=1759052820 node_paths=PackedStringArray("team_zones") instance=ExtResource("6_yyfcp")]
 visible = false
+team_zones = {
+1: NodePath("SpawnArea"),
+2: NodePath("SpawnArea2")
+}
+
+[node name="FightingFloor_ffa13" parent="FightingFloorTemplates" unique_id=273186181 node_paths=PackedStringArray("team_zones") instance=ExtResource("7_hqxx4")]
+team_zones = {
+1: null,
+2: null,
+3: null
+}
 
 [node name="Entities" type="Node3D" parent="." unique_id=118314100]
 

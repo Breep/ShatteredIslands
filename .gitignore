@@ -17,3 +17,5 @@ mono_crash.*.json
 # IDE configurations
 .vscode/
 .gemini/
+/.claude
+/bin

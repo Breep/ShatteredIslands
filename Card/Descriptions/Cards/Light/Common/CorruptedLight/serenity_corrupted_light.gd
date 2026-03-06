@@ -10,14 +10,14 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 	var conversion: float = float(_conversion_percent[card_lvl - 1])
 
-	var _on_action_done := func(_entity_ref: Entity, _target: Entity, action_type: Utils.ActionType, _action_id: StringName, value: float, _is_critical: bool) -> void:
+	var _on_action_done := func(_target: Entity, action_type: Utils.ActionType, _action_id: StringName, value: float, _is_critical: bool) -> void:
 		if action_type != Utils.ActionType.UTILITY_HEAL: return
 		if value <= 0: return
 		var damage_amount: float = value * (conversion / 100.0)
 		if damage_amount <= 0: return
 		var enemy: Entity = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
 		if enemy == null: return
-		ctx.hero.direct_damage(enemy, damage_amount, Utils.DamageType.MAGICAL, &"Corrupted Light")
+		ctx.hero.direct_damage(enemy, damage_amount, Utils.ActionType.DAMAGE_MAGICAL, &"Corrupted Light")
 
 	ctx.battle_callbacks.register_battle_start(&"Corrupted Light", func() -> void:
 		if not ctx.hero.action_done.is_connected(_on_action_done):

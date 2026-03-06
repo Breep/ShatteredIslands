@@ -15,5 +15,8 @@ metadata/_custom_type_script = "uid://muo4wd721c3x"
 script = ExtResource("3_base")
 name = "Putrid Touch"
 picture = SubResource("PlaceholderTexture2D_keeku")
-families = Array[int]([11])
+families = Array[int]([9])
 player_upgrade = SubResource("Resource_keeku")
+points = Dictionary[int, int]({
+9: 1
+})

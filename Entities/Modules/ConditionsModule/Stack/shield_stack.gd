@@ -3,19 +3,19 @@ extends Stack
 
 signal shield_stack_broken(amount: float)
 
-var _efficiencies: Dictionary[Utils.DamageType, float] = {
-	Utils.DamageType.PHYSICAL: 1.0,
-	Utils.DamageType.MAGICAL: 1.0,
-	Utils.DamageType.POISON: 0.0,
-	Utils.DamageType.PURE: 0.0,
+var _efficiencies: Dictionary[Utils.ActionType, float] = {
+	Utils.ActionType.DAMAGE_PHYSICAL: 1.0,
+	Utils.ActionType.DAMAGE_MAGICAL: 1.0,
+	Utils.ActionType.DAMAGE_POISON: 0.0,
+	Utils.ActionType.DAMAGE_PURE: 0.0,
 }
 
 var _free_use_chance: float = 0.0
 
 
 ## Set the efficiency for blocking a specific damage type (0.0 = no block, 1.0 = full block)
-## Example: set_efficiency(Utils.DamageType.POISON, 0.5) means shield blocks 50% of poison damage
-func set_efficiency(damage_type: Utils.DamageType, efficiency: float) -> void:
+## Example: set_efficiency(Utils.ActionType.DAMAGE_POISON, 0.5) means shield blocks 50% of poison damage
+func set_efficiency(damage_type: Utils.ActionType, efficiency: float) -> void:
 	_efficiencies[damage_type] = clamp(efficiency, 0.0, 1.0)
 
 
@@ -24,7 +24,7 @@ func set_free_use_chance(chance: float) -> void:
 	_free_use_chance = clamp(chance, 0.0, 100.0)
 
 
-func add_stack(amount: float, source: Entity = null, action_id: StringName = "", mod: Dictionary = {}) -> float:
+func add_stack(amount: float, _source: Entity = null, _action_id: StringName = "", _mod: Dictionary = {}) -> float:
 	_total_stacks += amount
 	return _total_stacks
 
@@ -38,7 +38,7 @@ func tick() -> float:
 	return _total_stacks
 
 
-func get_reduced_damage_taken(damage: float, damage_type: Utils.DamageType) -> float:
+func get_reduced_damage_taken(damage: float, damage_type: Utils.ActionType, battle_id: int = -1) -> float:
 	if _total_stacks <= 0: return damage
 	
 	var efficiency: float = _efficiencies.get(damage_type, 0.0)
@@ -49,7 +49,7 @@ func get_reduced_damage_taken(damage: float, damage_type: Utils.DamageType) -> f
 	var damage_reduced: float = damage - damage_reduction
 	
 	# Check if shield is consumed (Absorption Matrix logic)
-	if _free_use_chance > 0 and Utils.is_randomize_modifier_active(_free_use_chance):
+	if _free_use_chance > 0 and Utils.is_randomize_modifier_active(_free_use_chance, battle_id):
 		return damage_reduced
 	
 	# Consume shield

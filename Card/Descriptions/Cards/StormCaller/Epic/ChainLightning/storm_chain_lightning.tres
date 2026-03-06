@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://cpla6nuggduya"]
+
+[ext_resource type="Texture2D" uid="uid://d35olp12i0a8s" path="res://Card/Descriptions/Cards/StormCaller/Epic/ChainLightning/storm_chain_lightning.jpg" id="1_64hei"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_hblx7"]
+[ext_resource type="Script" uid="uid://6in7yxqsmu2i" path="res://Card/Descriptions/Cards/StormCaller/Epic/ChainLightning/storm_chain_lightning.gd" id="2_kcamy"]
+
+[sub_resource type="Resource" id="Resource_kaglu"]
+script = ExtResource("2_kcamy")
+_dist_factor = Array[float]([10.0, 15.0])
+_chance_percent = Array[float]([100.0, 100.0])
+metadata/_custom_type_script = "uid://6in7yxqsmu2i"
+
+[resource]
+script = ExtResource("1_hblx7")
+name = "Chain Lightning"
+picture = ExtResource("1_64hei")
+families = Array[int]([4])
+rarity = 2
+player_upgrade = SubResource("Resource_kaglu")
+points = Dictionary[int, int]({
+4: 3
+})
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

@@ -17,7 +17,7 @@ func _on_scanner_area_body_entered(body: Node3D) -> void:
 		push_error("EntityManager: A body detected has an Entity mask but is not an entity: [", body.get_path(), "]")
 		return
 	var entity: Entity = body
-	entity.died.connect(_on_enemy_died)
+	entity.died.connect(_on_enemy_died.bind(entity))
 
 
 func _on_scanner_area_body_exited(_body: Node3D) -> void:
@@ -36,4 +36,4 @@ func _on_enemy_died(victim: Entity) -> void:
 	
 	var targets: Array[Entity] = victim.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES, _radius)
 	for target in targets:
-		target.take_condition_stacks(poison_stacks, Utils.StackType.POISON, false, "Contagion")
+		target.take_condition_stacks(poison_stacks, Stack.Type.POISON, false, "Contagion")

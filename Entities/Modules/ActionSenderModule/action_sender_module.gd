@@ -1,6 +1,8 @@
 class_name ActionSenderModule
 extends Module
 
+static var _crit_check_number: int = -1
+
 # ============================== Enums ==============================
 
 enum ResultKey {
@@ -17,7 +19,8 @@ func _get_crit_multiplier(action_type: Utils.ActionType) -> Dictionary:
 	var crit_chance: float = _owner.stats.get_stat(EntityStats.StatType.CRIT_CHANCE, action_type)
 	var crit_multiplier_percent: float = 0.0
 	
-	if Utils.is_randomize_modifier_active(crit_chance):
+	_crit_check_number += 1
+	if Utils.is_randomize_modifier_active(crit_chance, _owner.battle_id, "crit_check_" + str(_crit_check_number)):
 		is_critical = true
 		crit_multiplier_percent = _owner.stats.get_stat(EntityStats.StatType.CRIT_MULT, action_type)
 	
@@ -28,3 +31,19 @@ func _get_strenght_weakness_multiplier(action_type: Utils.ActionType) -> float:
 	var strength: float = _owner.stats.get_stat(EntityStats.StatType.STRENGTH, action_type)
 	var weakness: float = _owner.stats.get_stat(EntityStats.StatType.WEAKNESS, action_type)
 	return (100.0 + strength) / (100.0 + weakness)
+
+
+func _consume_before_action_modifiers(action_type: Utils.ActionCategory, modifiers_dict: Dictionary) -> Dictionary:
+	if _owner.action_modifiers_registry != null:
+		for modifier: ActionModifier in _owner.action_modifiers_registry.consume_all_modifiers(action_type):
+			if modifier.before_action_logic_callback.is_valid():
+				modifier.before_action_logic_callback.call(modifiers_dict)
+	return modifiers_dict
+
+
+func _consume_after_action_modifiers(action_type: Utils.ActionCategory, modifiers_dict: Dictionary) -> Dictionary:
+	if _owner.action_modifiers_registry != null:
+		for modifier: ActionModifier in _owner.action_modifiers_registry.consume_all_modifiers(action_type):
+			if modifier.after_action_logic_callback.is_valid():
+				modifier.after_action_logic_callback.call(modifiers_dict)
+	return modifiers_dict
