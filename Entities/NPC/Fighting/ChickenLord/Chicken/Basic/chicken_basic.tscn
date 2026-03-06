@@ -13,7 +13,7 @@ script = ExtResource("2_5weh6")
 health_max = 10.0
 auto_attack_type = 1
 attack_range = 1.0
-attack_damage = 20.0
+attack_damage = 10.0
 attack_speed = 1.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 

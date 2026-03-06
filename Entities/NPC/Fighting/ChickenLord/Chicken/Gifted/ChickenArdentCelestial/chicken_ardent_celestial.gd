@@ -27,7 +27,7 @@ func _on_health_changed(current_health: float) -> void:
 		_auto_attack_periodic_module.stop()
 		_rush_target = target_module.get_target(TargetModule.TargettingStrategy.FARTHEST_ENEMY)
 		if is_instance_valid(_rush_target):
-			_movement_module.rush(10, _rush_target.global_position)
+			_movement_module.rush(10, _rush_target.global_position)	
 
 
 func process_tick() -> void:

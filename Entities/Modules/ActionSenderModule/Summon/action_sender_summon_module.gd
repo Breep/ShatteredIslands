@@ -15,6 +15,7 @@ const CHICKEN_COLOSSUS_SCENE: PackedScene = preload('res://Entities/NPC/Fighting
 const CHICKEN_LIGHT_SCENE: PackedScene = preload('res://Entities/NPC/Fighting/ChickenLord/Chicken/Gifted/ChickenLight/chicken_light.tscn')
 const CHICKEN_ENGINEER_SCENE: PackedScene = preload('res://Entities/NPC/Fighting/ChickenLord/Chicken/Gifted/ChickenShield/chicken_shield.tscn')
 const CHICKEN_ARDENT_CELESTIAL_SCENE: PackedScene = preload('res://Entities/NPC/Fighting/ChickenLord/Chicken/Gifted/ChickenArdentCelestial/chicken_ardent_celestial.tscn')
+const CHICKEN_STORM_CALLER: PackedScene = preload('res://Entities/NPC/Fighting/ChickenLord/Chicken/Gifted/ChickenStormCaller/chicken_storm_caller.tscn')
 
 # ============================== Public functions ==============================
 
@@ -114,5 +115,10 @@ func _summon_chicken(spawn_position: Vector3, entity_modifier: Dictionary) -> vo
 			chicken = CHICKEN_ARDENT_CELESTIAL_SCENE.instantiate()
 			var ignite_stacks: int = entity_modifier.get("ignite_stacks", 0)
 			(chicken as ChickenArdentCelestial).init(ignite_stacks)
+		Chicken.Type.GIFTED_STORM_CALLER:
+			chicken = CHICKEN_STORM_CALLER.instantiate()
+			var crit_chance: float = entity_modifier.get("crit_chance", 0)
+			var crit_mult: float = entity_modifier.get("crit_mult", 0)
+			(chicken as ChickenStormCaller).init(crit_chance, crit_mult)
 			
 	_spawn_manager.spawn_entity(chicken, spawn_position, _owner.get_context(), Entity.EntityType.CHICKEN)
