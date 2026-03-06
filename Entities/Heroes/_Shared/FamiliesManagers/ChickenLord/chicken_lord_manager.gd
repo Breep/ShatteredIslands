@@ -5,8 +5,10 @@ extends FamilyManager
 
 # --- STATS PASSIVES (Dépendent du Niveau de la famille [0, 1, 2, 3, 4]) ---
 const GIFTED_CHANCES: Array[float] = [0, 25.0, 35.0, 45.0, 55.0]
-const SPAWN_PERIODS: Array[float] = [12.0, 6.0, 5.5, 5.0, 4.5]
-const START_CHICKENS: Array[int] = [0, 2, 3, 4, 6]
+#const SPAWN_PERIODS: Array[float] = [12.0, 6.0, 5.5, 5.0, 4.5]
+const SPAWN_PERIODS: Array[float] = [1500, 1500, 1500, 1500, 1500]
+#const START_CHICKENS: Array[int] = [0, 2, 3, 4, 6]
+const START_CHICKENS: Array[int] = [0, 1, 1, 1, 1]
 
 # Chicken gifted attack stats
 const GIFTED_AD_RATIOS: Array[float] = [0.15, 0.20, 0.25, 0.3]
@@ -27,6 +29,9 @@ const GIFTED_LIGHT_INHERITED_HEAL: Array[float] = [0.3, 0.5, 0.7, 1.0]
 const GIFTED_SHIELD_BONUS_SPAWN: Array[int] = [20, 30, 40, 50]
 const GIFTED_SHIELD_PER_ATTACK: Array[int] = [10, 15, 20, 30]
 const GIFTED_SHIELD_INHERITED_SHIELD: Array[float] = [0.3, 0.5, 0.7, 1.0]
+
+# Chicken gifted ardent celestial stats
+const GIFTED_ARDENT_CELESTIAL_IGNITE_STACKS: Array[int] = [10, 15, 20, 30]
 
 # To roll the type of Chicken Gifted
 const GIFTED_FAMILY_WEIGHTS: Array[float] = [0, 1, 4, 9, 16]
@@ -86,6 +91,7 @@ func _create_chicken_spawn_timer() -> void:
 
 
 func _randomize_chicken() -> Chicken.Type:
+	return Chicken.Type.GIFTED_ARDENT_CELESTIAL
 	if Utils.is_randomize_modifier_active(GIFTED_CHANCES[level], _owner.battle_id):
 		return Utils.pick_random(_gifted_types, _owner.battle_id)
 	return Chicken.Type.BASIC
@@ -131,6 +137,7 @@ func _spawn_chicken(chicken_type: Chicken.Type) -> void:
 		Chicken.Type.GIFTED_ARDENT_CELESTIAL:
 				_owner.summon_entity(Entity.EntityType.CHICKEN, spawn_location_config, {
 					"Type": Chicken.Type.GIFTED_ARDENT_CELESTIAL,
+					"ignite_stacks": GIFTED_ARDENT_CELESTIAL_IGNITE_STACKS[_families_level[Family.Type.ARDENT_CELESTIAL]-1]
 				})
 			
 			

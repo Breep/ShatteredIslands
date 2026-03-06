@@ -12,7 +12,6 @@ radius = 0.421875
 height = 0.84375
 
 [node name="ChickenStormCaller" type="CharacterBody3D" unique_id=2109615854]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("1_j8vkg")
@@ -59,6 +58,21 @@ parameters/one_shot_idle/request = 0
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.00037944317, 0.38287425, -0.5151825)
 
 [node name="ChickenStormCallerVisual" parent="." unique_id=142901617 instance=ExtResource("5_11ltj")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="Skeleton3D" parent="ChickenStormCallerVisual" index="0" unique_id=416118163]
+bones/1/position = Vector3(0, 0.047381032, -0.004717756)
+bones/2/rotation = Quaternion(0.83199865, 0.04164722, -0.5494833, -0.064124875)
+bones/3/rotation = Quaternion(0.96720886, 9.047426e-08, 0.2539824, -3.064464e-07)
+bones/4/rotation = Quaternion(-5.5819182e-08, 0.007207892, -2.9695197e-09, 0.999974)
+bones/7/position = Vector3(0.06718646, -0.0814189, 0.026344841)
+bones/7/rotation = Quaternion(3.626069e-06, -0.38353658, 9.600184e-06, 0.9235257)
+bones/8/rotation = Quaternion(0.9932081, -1.5955072e-06, -0.11635131, 1.4483898e-05)
+bones/9/rotation = Quaternion(4.0781128e-08, -0.60039806, -2.2802024e-07, 0.79970133)
+bones/10/position = Vector3(0.06718645, 0.08142003, 0.026341427)
+bones/10/rotation = Quaternion(-7.0842357e-06, -0.9583842, -3.7334617e-06, 0.28548184)
+bones/11/rotation = Quaternion(0.9932081, 1.7259497e-06, -0.11635134, -1.4468616e-05)
+bones/12/rotation = Quaternion(4.817537e-08, -0.60039806, 2.3136849e-07, 0.79970133)
 
 [node name="AnimationPlayer" parent="ChickenStormCallerVisual" index="1" unique_id=777400876]
 script = ExtResource("7_aolgu")

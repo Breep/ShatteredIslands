@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_egh8k"]
 [ext_resource type="Resource" uid="uid://cpe1ja4a2fgwu" path="res://Card/Descriptions/Cards/ChickenLord/Common/chicken_rapid_incubation.tres" id="4_m26y3"]
 [ext_resource type="Script" uid="uid://nkraydv4mdse" path="res://Card/Templates/player_deck.gd" id="5_ko5bb"]
-[ext_resource type="Resource" uid="uid://bu2qwhn65ehi" path="res://Card/Descriptions/Cards/ArdentCelestial/Epic/Nuke/fire_nuke.tres" id="5_x0odd"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/Stats/EntityStats/entity_stats.gd" id="6_3bpsj"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
 [ext_resource type="PackedScene" uid="uid://dvuq5n41nak3u" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.tscn" id="8_fl2p6"]
@@ -21,7 +20,7 @@
 
 [sub_resource type="Resource" id="Resource_x0odd"]
 script = ExtResource("5_ko5bb")
-_active_cards = Array[ExtResource("3_3bpsj")]([ExtResource("4_m26y3"), ExtResource("5_x0odd")])
+_active_cards = Array[ExtResource("3_3bpsj")]([ExtResource("4_m26y3")])
 metadata/_custom_type_script = "uid://nkraydv4mdse"
 
 [sub_resource type="Resource" id="Resource_m26y3"]
@@ -92,7 +91,7 @@ transform = Transform3D(0.9946579, 0, 0.10322651, 0, 1, 0, -0.10322651, 0, 0.994
 _custom_deck = SubResource("Resource_x0odd")
 _override_family_levels = Dictionary[int, int]({
 2: 1,
-7: 1,
+3: 2,
 8: 4
 })
 team = 1

@@ -112,5 +112,7 @@ func _summon_chicken(spawn_position: Vector3, entity_modifier: Dictionary) -> vo
 			(chicken as ChickenShield).init(bonus_spawn, shield_per_attack, shield_strength_inherited)
 		Chicken.Type.GIFTED_ARDENT_CELESTIAL:
 			chicken = CHICKEN_ARDENT_CELESTIAL_SCENE.instantiate()
+			var ignite_stacks: int = entity_modifier.get("ignite_stacks", 0)
+			(chicken as ChickenArdentCelestial).init(ignite_stacks)
 			
 	_spawn_manager.spawn_entity(chicken, spawn_position, _owner.get_context(), Entity.EntityType.CHICKEN)
