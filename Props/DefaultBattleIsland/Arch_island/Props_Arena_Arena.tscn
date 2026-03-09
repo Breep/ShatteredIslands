@@ -1,26 +1,21 @@
 [gd_scene format=4 uid="uid://duk3nfkcrkric"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vkvav"]
-load_path = "res://.godot/imported/arena_Image_0.png-41dc7fec2a019c4241c02b74e77c06ff.s3tc.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gu3wj"]
-load_path = "res://.godot/imported/arena_Image_1.png-97cc3067b74aeae7afa3684048a8c722.s3tc.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cj2nb"]
-load_path = "res://.godot/imported/arena_Image_2.png-5b88865b6026858b1713eaeb3097f64c.s3tc.ctex"
+[ext_resource type="Texture2D" uid="uid://ndyxdbh81hpg" path="res://Props/DefaultBattleIsland/Arch_island/textures/T_arena_BC.png" id="1_5tp8e"]
+[ext_resource type="Texture2D" uid="uid://cbfi1y4t6nt2x" path="res://Props/DefaultBattleIsland/Arch_island/textures/T_arena_R.png" id="2_14hxi"]
+[ext_resource type="Texture2D" uid="uid://cceeodkcmqmly" path="res://Props/DefaultBattleIsland/Arch_island/textures/T_arena_N.png" id="3_wq43t"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cs12v"]
 resource_name = "terrain2"
-albedo_texture = SubResource("CompressedTexture2D_vkvav")
+albedo_texture = ExtResource("1_5tp8e")
 metallic = 1.0
-metallic_texture = SubResource("CompressedTexture2D_gu3wj")
+metallic_texture = ExtResource("2_14hxi")
 metallic_texture_channel = 2
-roughness_texture = SubResource("CompressedTexture2D_gu3wj")
+roughness_texture = ExtResource("2_14hxi")
 roughness_texture_channel = 1
 normal_enabled = true
-normal_texture = SubResource("CompressedTexture2D_cj2nb")
+normal_texture = ExtResource("3_wq43t")
 ao_enabled = true
-ao_texture = SubResource("CompressedTexture2D_gu3wj")
+ao_texture = ExtResource("2_14hxi")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_vjq2m"]
 _surfaces = [{

@@ -1,27 +1,24 @@
 [gd_scene format=4 uid="uid://50kss7e4c2b3"]
 
-[ext_resource type="Texture2D" uid="uid://dk862x035anuc" path="res://Props/DefaultBattleIsland/Arch_island/GLB/Props_Arena_Island_Image_6.png" id="1_cmdcp"]
-[ext_resource type="Texture2D" uid="uid://djm2gt8veylnl" path="res://Props/DefaultBattleIsland/Arch_island/GLB/Props_Arena_Island_Image_7.png" id="2_7vdga"]
-[ext_resource type="Texture2D" uid="uid://ddm8jlcgygvj7" path="res://Props/DefaultBattleIsland/Arch_island/GLB/Props_Arena_Island_Image_8.png" id="3_nupgl"]
-[ext_resource type="Texture2D" uid="uid://brf4bukdgy8pr" path="res://Props/DefaultBattleIsland/Arch_island/GLB/Props_Arena_Island_Image_0.png" id="4_vt5im"]
-[ext_resource type="Texture2D" uid="uid://dvq3p2gjf6ugg" path="res://Props/DefaultBattleIsland/Arch_island/GLB/Props_Arena_Island_Image_1.png" id="5_qoduu"]
-[ext_resource type="Texture2D" uid="uid://oy1cobqktf1m" path="res://Props/DefaultBattleIsland/Arch_island/GLB/Props_Arena_Island_Image_2.png" id="6_nna3p"]
-[ext_resource type="Texture2D" uid="uid://vtcp0edo1pwb" path="res://Props/DefaultBattleIsland/Arch_island/GLB/Props_Arena_Island_Image_3.png" id="7_djfhm"]
-[ext_resource type="Texture2D" uid="uid://05sep3nxjprd" path="res://Props/DefaultBattleIsland/Arch_island/GLB/Props_Arena_Island_Image_4.png" id="8_qrrr8"]
-[ext_resource type="Texture2D" uid="uid://brxnekm55vy1x" path="res://Props/DefaultBattleIsland/Arch_island/GLB/Props_Arena_Island_Image_5.png" id="9_bbsaw"]
+[ext_resource type="Texture2D" uid="uid://bbx7bhgb3ft71" path="res://Props/DefaultBattleIsland/Arch_island/textures/T_Island_rocks_BC.png" id="1_rgl0e"]
+[ext_resource type="Texture2D" uid="uid://ye05xe5y16p2" path="res://Props/DefaultBattleIsland/Arch_island/textures/T_Island_rocks_R.png" id="2_g4o2w"]
+[ext_resource type="Texture2D" uid="uid://bueftrhx184qk" path="res://Props/DefaultBattleIsland/Arch_island/textures/T_Island_rocks_N.png" id="3_cmdcp"]
+[ext_resource type="Texture2D" uid="uid://cygmc3ruppbx0" path="res://Props/DefaultBattleIsland/Arch_island/textures/T_Island_grass_BC.png" id="4_7vdga"]
+[ext_resource type="Texture2D" uid="uid://tpg2iusb62eg" path="res://Props/DefaultBattleIsland/Arch_island/textures/T_Island_grass_R.png" id="5_nupgl"]
+[ext_resource type="Texture2D" uid="uid://dws7i8e7n0co" path="res://Props/DefaultBattleIsland/Arch_island/textures/T_Island_water_BC.png" id="6_vt5im"]
+[ext_resource type="Texture2D" uid="uid://bc3etlf8bk8d7" path="res://Props/DefaultBattleIsland/Arch_island/textures/T_Island_water_R.png" id="7_qoduu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q8m5l"]
 resource_name = "rocks"
-albedo_texture = ExtResource("1_cmdcp")
+albedo_texture = ExtResource("1_rgl0e")
 metallic = 1.0
-metallic_texture = ExtResource("2_7vdga")
+metallic_texture = ExtResource("2_g4o2w")
 metallic_texture_channel = 2
-roughness_texture = ExtResource("2_7vdga")
+roughness_texture = ExtResource("2_g4o2w")
 roughness_texture_channel = 1
 normal_enabled = true
-normal_texture = ExtResource("3_nupgl")
+normal_texture = ExtResource("3_cmdcp")
 ao_enabled = true
-ao_texture = ExtResource("2_7vdga")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_ksbmi"]
 _surfaces = [{
@@ -61,16 +58,14 @@ shadow_mesh = SubResource("ArrayMesh_ksbmi")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_te2o5"]
 resource_name = "grass"
 transparency = 4
-albedo_texture = ExtResource("4_vt5im")
+albedo_texture = ExtResource("4_7vdga")
 metallic = 1.0
-metallic_texture = ExtResource("5_qoduu")
+metallic_texture = ExtResource("5_nupgl")
 metallic_texture_channel = 2
-roughness_texture = ExtResource("5_qoduu")
+roughness_texture = ExtResource("5_nupgl")
 roughness_texture_channel = 1
 normal_enabled = true
-normal_texture = ExtResource("6_nna3p")
 ao_enabled = true
-ao_texture = ExtResource("5_qoduu")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_xlfhd"]
 _surfaces = [{
@@ -110,16 +105,14 @@ shadow_mesh = SubResource("ArrayMesh_xlfhd")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2hxh4"]
 resource_name = "Lake"
 transparency = 4
-albedo_texture = ExtResource("7_djfhm")
+albedo_texture = ExtResource("6_vt5im")
 metallic = 1.0
-metallic_texture = ExtResource("8_qrrr8")
+metallic_texture = ExtResource("7_qoduu")
 metallic_texture_channel = 2
-roughness_texture = ExtResource("8_qrrr8")
+roughness_texture = ExtResource("7_qoduu")
 roughness_texture_channel = 1
 normal_enabled = true
-normal_texture = ExtResource("9_bbsaw")
 ao_enabled = true
-ao_texture = ExtResource("8_qrrr8")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_gi1jw"]
 _surfaces = [{
