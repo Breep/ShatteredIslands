@@ -39,8 +39,7 @@ const GIFTED_STORM_CALLER_CRIT_MULT_RATIO: Array[float] = [0.30, 0.40, 0.50, 0.6
 # To roll the type of Chicken Gifted
 const GIFTED_FAMILY_WEIGHTS: Array[float] = [0, 1, 4, 9, 16]
 
-# ============================== Private variables ==============================
-
+#region ============================== Private variables ==============================
 var _chicken_lord_stats: FamilyChickenLordStats
 var _chicken_number: int
 var _chicken_spawn_period: float
@@ -49,15 +48,20 @@ var _gifted_families_ratio: Dictionary[Family.Type, float]
 var _families_level: Dictionary[Family.Type, int]
 var _gifted_types: Array[Chicken.Type]
 
+var _alive_ally_chickens: Array[Chicken]
+
 var _twins_chance: float # relative to Chicken Twins card
 
-# Called when the node enters the scene tree for the first time.
+var _chicken_died_count: int = 0
+#endregion
+
+#region ============================== Node base function ==============================
 func _ready() -> void:
 	_chicken_lord_stats = _owner.families_stats.chicken_lord
+#endregion
 
-
+#region ============================== public API ==============================
 func start() -> void:
-	
 	_families_level = _owner.get_families_level()
 	_init_gifted_types()
 	
@@ -71,9 +75,17 @@ func start() -> void:
 		_chicken_spawn_period = SPAWN_PERIODS[level] - _chicken_lord_stats.spawn_period_decrease
 		_create_chicken_spawn_timer()
 	
+	_owner.target_module.new_entity_detected.connect(_on_owner_target_module_new_entity_detected)
+	for entity in _owner.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES):
+		if entity is Chicken and entity.team == _owner.team:
+			_register_chicken(entity)
+
+
 func stop() -> void:
 	pass
-	
+#endregion
+
+
 func _init_gifted_types() -> void:
 	for family_type in _families_level:
 		for i in GIFTED_FAMILY_WEIGHTS[_families_level[family_type]]:
@@ -101,14 +113,15 @@ func _create_chicken_spawn_timer() -> void:
 
 func _randomize_chicken() -> Chicken.Type:
 	if Utils.is_randomize_modifier_active(_gifted_chance, _owner.battle_id):
-		return Utils.pick_random(_gifted_types, _owner.battle_id)
+		var chicken_type = Utils.pick_random(_gifted_types, _owner.battle_id)
+		return chicken_type if chicken_type != null else Chicken.Type.BASIC
 	return Chicken.Type.BASIC
 
 
 func _spawn_chicken(chicken_type: Chicken.Type) -> void:
 	var spawn_location_config := SpawnLocationConfig.create_random_arena()
 	match chicken_type:
-		Chicken.Type.BASIC: 
+		Chicken.Type.BASIC:
 			_owner.summon_entity(Entity.EntityType.CHICKEN, spawn_location_config,{})
 		Chicken.Type.GIFTED_ATTACK:
 			_owner.summon_entity(Entity.EntityType.CHICKEN, spawn_location_config, {
@@ -155,4 +168,29 @@ func _spawn_chicken(chicken_type: Chicken.Type) -> void:
 					"crit_chance": crit_chance * GIFTED_STORM_CALLER_CRIT_CHANCE_RATIO[_families_level[Family.Type.STORM_CALLER]-1],
 					"crit_mult": crit_mult * GIFTED_STORM_CALLER_CRIT_MULT_RATIO[_families_level[Family.Type.STORM_CALLER]-1]
 			})
-			
+
+
+func _on_owner_target_module_new_entity_detected(entity: Entity) -> void:
+	if not is_instance_valid(entity):
+		Verbose.error("_on_owner_target_module_new_entity_detected() -> Bad entity", Verbose.Category.FAMILY_MANAGER)
+		return
+	
+	if entity is Chicken and entity.team == _owner.team:
+		_register_chicken(entity)
+
+
+func _register_chicken(chicken: Chicken) -> void:
+	_alive_ally_chickens.append(chicken)
+	chicken.died.connect(_on_chicken_death.bind(chicken), CONNECT_ONE_SHOT)
+
+
+func _on_chicken_death(chicken: Chicken) -> void:
+	_chicken_died_count += 1
+	_alive_ally_chickens.erase(chicken)
+	for cb: Callable in _chicken_lord_stats.on_chicken_death_callbacks:
+		if cb.is_valid():
+			cb.call({
+				FamilyChickenLordStats.CbVars.ALIVE_CHICKENS: _alive_ally_chickens,
+				FamilyChickenLordStats.CbVars.DIED_CHICKEN: chicken
+			})
+	
