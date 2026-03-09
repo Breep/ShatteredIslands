@@ -49,6 +49,8 @@ var _gifted_families_ratio: Dictionary[Family.Type, float]
 var _families_level: Dictionary[Family.Type, int]
 var _gifted_types: Array[Chicken.Type]
 
+var _twins_chance: float # relative to Chicken Twins card
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_chicken_lord_stats = _owner.families_stats.chicken_lord
@@ -88,6 +90,8 @@ func _init_gifted_types() -> void:
 
 func _spawn_chickens() -> void:
 	for i in _chicken_number:
+		if Utils.is_randomize_modifier_active(_twins_chance, _owner.battle_id):
+			_spawn_chicken(_randomize_chicken())
 		_spawn_chicken(_randomize_chicken())
 
 
@@ -151,5 +155,4 @@ func _spawn_chicken(chicken_type: Chicken.Type) -> void:
 					"crit_chance": crit_chance * GIFTED_STORM_CALLER_CRIT_CHANCE_RATIO[_families_level[Family.Type.STORM_CALLER]-1],
 					"crit_mult": crit_mult * GIFTED_STORM_CALLER_CRIT_MULT_RATIO[_families_level[Family.Type.STORM_CALLER]-1]
 			})
-			
 			
