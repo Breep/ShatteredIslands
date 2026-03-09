@@ -492,7 +492,9 @@ func _auto_load_modules() -> void:
 	for module_type in _auto_loaded_modules:
 		var module: Module = Shared.ENTITY_MODULE_SCENES[module_type].instantiate().init(self )
 		match module_type:
-			Module.ModuleType.TARGET: target_module = module
+			Module.ModuleType.TARGET:
+				target_module = module
+				if _spawn_manager != null: target_module.connect_to_spawn_manager(_spawn_manager)
 			Module.ModuleType.CONDITIONS: conditions = module
 			Module.ModuleType.MOVEMENT: _movement_module = module
 			Module.ModuleType.ACTION_SENDER_DAMAGE: _damage_sender = module

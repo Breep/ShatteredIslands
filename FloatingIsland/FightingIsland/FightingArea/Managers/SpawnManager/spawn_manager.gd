@@ -1,6 +1,10 @@
 extends Node
 class_name SpawnManager
 
+# ============================== Signals ==============================
+signal entity_spawned(entity: Entity)
+signal projectile_spawned(projectile: Projectile)
+
 # ============================== Export variables ==============================
 @export var _fighting_area: FightingArea
 @export var _entities_node: Node3D
@@ -49,6 +53,7 @@ func spawn_entity(entity: Entity, global_pos: Vector3, context: EntityContext = 
 	entity.global_position = global_pos
 	_active_entities.append(entity)
 	
+	entity_spawned.emit(entity)
 	if _fighting_area != null:
 		_fighting_area.entity_spawned.emit(entity, type, entity.global_position)
 
@@ -71,6 +76,7 @@ func spawn_projectile(source: Entity, target: Entity, type: Projectile.Type, spa
 	proj._logic_pos = spawn_node.global_position # TODO: OULALA C'EST PAS LEGAL, A CHECK SI LOGIC POS EST VRAIMENT UTILE
 	_active_projectiles.append(proj)
 	
+	projectile_spawned.emit(proj)
 	if _fighting_area != null:
 		_fighting_area.projectile_spawned.emit(source, target, type, proj, proj.global_position)
 		proj.target_hit.connect(_on_projectile_target_hit.bind(proj.uid))
