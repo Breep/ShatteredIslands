@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://b0opqsmhxort7"]
+
+[ext_resource type="PackedScene" uid="uid://50kss7e4c2b3" path="res://Props/DefaultBattleIsland/Arch_island/props_arena_island.tscn" id="1_vk4nd"]
+[ext_resource type="PackedScene" uid="uid://duk3nfkcrkric" path="res://Props/DefaultBattleIsland/Arch_island/props_arena_arena.tscn" id="2_cxbhe"]
+[ext_resource type="PackedScene" uid="uid://do5bslbv5ulo0" path="res://Props/DefaultBattleIsland/Arch_island/props_arena_sword.tscn" id="3_cxbhe"]
+[ext_resource type="PackedScene" uid="uid://c1xnh8xyfmxq4" path="res://Props/DefaultBattleIsland/Arch_island/props_arena_water_arch.tscn" id="4_uwp35"]
+[ext_resource type="PackedScene" uid="uid://brl0bijhhqkd4" path="res://Props/DefaultBattleIsland/Arch_island/props_arena_arch.tscn" id="5_yldyc"]
+[ext_resource type="PackedScene" uid="uid://mgk3gamnqfkn" path="res://Props/DefaultBattleIsland/Arch_island/props_arena_tree.tscn" id="6_6fals"]
+
+[node name="IslandRemake" type="Node3D" unique_id=1888769254]
+
+[node name="Props_Arena_Island" parent="." unique_id=1505016571 instance=ExtResource("1_vk4nd")]
+
+[node name="Arena" parent="." unique_id=1700311485 instance=ExtResource("2_cxbhe")]
+
+[node name="sword" parent="." unique_id=1966000435 instance=ExtResource("3_cxbhe")]
+transform = Transform3D(0.45871902, -0.34390622, 2.7415268, 2.3750443, 1.4691536, -0.21310255, -1.4118792, 2.3596568, 0.5322425, 18.218864, -4.552685, 3.1544456)
+
+[node name="water_arch" parent="." unique_id=1005878970 instance=ExtResource("4_uwp35")]
+transform = Transform3D(0.08644761, 0, 1.3105222, 0, 1.3133702, 0, -1.3105222, 0, 0.08644761, -19.00482, -0.27858496, -3.9157305)
+
+[node name="arch" parent="." unique_id=784284726 instance=ExtResource("5_yldyc")]
+transform = Transform3D(1.6686951, -0.38499537, 1.4004586, -0.04913776, 2.1169279, 0.64050704, -1.4515824, -0.5142395, 1.5882432, 1.0026963, -11.793051, -19.960196)
+
+[node name="tree" parent="." unique_id=192676677 instance=ExtResource("6_6fals")]
+transform = Transform3D(3.3291025, 0, 1.6897539, 0, 3.7333887, 0, -1.6897539, 0, 3.3291025, 19.225664, -0.8503971, -18.311941)
