@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Card" format=3 uid="uid://cpe1ja4a2fgwu"]
 
-[ext_resource type="Script" uid="uid://bhg0e2wufqq23" path="res://Card/Descriptions/Cards/ChickenLord/Common/chicken_rapid_incubation.gd" id="1_85tsq"]
+[ext_resource type="Script" uid="uid://bhg0e2wufqq23" path="res://Card/Descriptions/Cards/ChickenLord/Common/RapidIncubation/chicken_rapid_incubation.gd" id="1_85tsq"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_vybw3"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_puywl"]
