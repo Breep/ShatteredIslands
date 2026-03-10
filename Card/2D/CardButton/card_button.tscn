@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c2psjj8133op3"]
+[gd_scene format=3 uid="uid://c2psjj8133op3"]
 
 [ext_resource type="Script" uid="uid://wf6yt1v2e55m" path="res://Card/2D/CardButton/card_button.gd" id="1_l6wd5"]
 [ext_resource type="Shader" uid="uid://h1sabcy25vtt" path="res://Card/2D/CardButton/3dcard.gdshader" id="2_mmqgw"]
@@ -16,7 +16,8 @@ shader_parameter/inset = 0.800000038
 [sub_resource type="ViewportTexture" id="ViewportTexture_vk20g"]
 viewport_path = NodePath("TextureRect/SubViewport")
 
-[node name="CardButton" type="Control" node_paths=PackedStringArray("_card_layout", "_texture_rect")]
+[node name="CardButton" type="Control" unique_id=1390086147 node_paths=PackedStringArray("_card_layout", "_texture_rect")]
+texture_filter = 2
 layout_mode = 3
 anchor_right = 0.403646
 anchor_bottom = 1.0
@@ -27,7 +28,7 @@ _card_layout = NodePath("TextureRect/SubViewport/CardLayout")
 _texture_rect = NodePath("TextureRect")
 metadata/_edit_use_anchors_ = true
 
-[node name="TextureRect" type="TextureRect" parent="." node_paths=PackedStringArray("viewport")]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=426674366 node_paths=PackedStringArray("viewport")]
 material = SubResource("ShaderMaterial_23gh2")
 layout_mode = 1
 anchors_preset = 15
@@ -43,11 +44,11 @@ script = ExtResource("3_23gh2")
 viewport = NodePath("SubViewport")
 rotation_strength = -0.1
 
-[node name="SubViewport" type="SubViewport" parent="TextureRect"]
+[node name="SubViewport" type="SubViewport" parent="TextureRect" unique_id=2076503836]
 transparent_bg = true
 size = Vector2i(1260, 1760)
 
-[node name="CardLayout" parent="TextureRect/SubViewport" instance=ExtResource("3_cgxxr")]
+[node name="CardLayout" parent="TextureRect/SubViewport" unique_id=1926267675 instance=ExtResource("3_cgxxr")]
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0

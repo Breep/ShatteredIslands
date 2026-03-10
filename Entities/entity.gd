@@ -363,6 +363,8 @@ func connect_to_fighting_area(fighting_area_ref: FightingArea) -> void:
 	if _summon_sender != null:
 		_summon_sender.connect_to_spawn_manager(fighting_area_ref.spawn_manager)
 		_summon_sender.connect_to_arena_zone_manager(fighting_area_ref.arena_zone_manager)
+	if target_module != null:
+		target_module.connect_to_spawn_manager(fighting_area_ref.spawn_manager)
 #endregion
 
 #region ============================== Action Senders ==============================
@@ -492,7 +494,9 @@ func _auto_load_modules() -> void:
 	for module_type in _auto_loaded_modules:
 		var module: Module = Shared.ENTITY_MODULE_SCENES[module_type].instantiate().init(self )
 		match module_type:
-			Module.ModuleType.TARGET: target_module = module
+			Module.ModuleType.TARGET:
+				target_module = module
+				if _spawn_manager != null: target_module.connect_to_spawn_manager(_spawn_manager)
 			Module.ModuleType.CONDITIONS: conditions = module
 			Module.ModuleType.MOVEMENT: _movement_module = module
 			Module.ModuleType.ACTION_SENDER_DAMAGE: _damage_sender = module

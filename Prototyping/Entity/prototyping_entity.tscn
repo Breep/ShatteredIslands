@@ -6,9 +6,9 @@
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="3_3bpsj"]
 [ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://UI/Tool/Misc/hover_boost_button.gd" id="3_6kn6i"]
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_egh8k"]
-[ext_resource type="Resource" uid="uid://cpe1ja4a2fgwu" path="res://Card/Descriptions/Cards/ChickenLord/Common/chicken_rapid_incubation.tres" id="4_m26y3"]
+[ext_resource type="Resource" uid="uid://c2l8gq4i7egtd" path="res://Card/Descriptions/Cards/ChickenLord/Rare/ChickenSwarm/chicken_chicken_swarm.tres" id="4_m26y3"]
 [ext_resource type="Script" uid="uid://nkraydv4mdse" path="res://Card/Templates/player_deck.gd" id="5_ko5bb"]
-[ext_resource type="Resource" uid="uid://bu2qwhn65ehi" path="res://Card/Descriptions/Cards/ArdentCelestial/Epic/Nuke/fire_nuke.tres" id="5_x0odd"]
+[ext_resource type="Resource" uid="uid://dbf44utsd7lc7" path="res://Card/Descriptions/Cards/ChickenLord/Rare/DeathBlock/chicken_death_block.tres" id="5_x0odd"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/Stats/EntityStats/entity_stats.gd" id="6_3bpsj"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
 [ext_resource type="PackedScene" uid="uid://dvuq5n41nak3u" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.tscn" id="8_fl2p6"]
@@ -32,6 +32,9 @@ mana_regen = 2.0
 attack_range = -1.0
 attack_damage = 10.0
 attack_speed = 1.0
+_critical_chances = Dictionary[int, float]({
+0: 90.0
+})
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="Resource" id="Resource_ko5bb"]
@@ -91,8 +94,6 @@ unique_name_in_owner = true
 transform = Transform3D(0.9946579, 0, 0.10322651, 0, 1, 0, -0.10322651, 0, 0.9946579, 0.07346773, -4.7683716e-07, 7.8182755)
 _custom_deck = SubResource("Resource_x0odd")
 _override_family_levels = Dictionary[int, int]({
-2: 1,
-7: 1,
 8: 4
 })
 team = 1

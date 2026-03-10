@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmstx61h3h6ar"]
+[gd_scene format=3 uid="uid://cmstx61h3h6ar"]
 
 [ext_resource type="Script" uid="uid://cc7c0q2xebkyp" path="res://UI/InGame/BuyingArea/ui_buying_area.gd" id="1_5o5p6"]
 [ext_resource type="PackedScene" uid="uid://d1oxnd1g75rqh" path="res://UI/InGame/BuyingArea/CardShop/ui_card_shop.tscn" id="4_dsp03"]
 [ext_resource type="PackedScene" uid="uid://cxlyl8wdndq08" path="res://UI/InGame/HeroPortrait/ui_hero_portrait.tscn" id="7_4kg3l"]
 
-[node name="UIBuyingArea" type="Control"]
+[node name="UIBuyingArea" type="Control" unique_id=511739105]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,7 +14,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_5o5p6")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=491080204]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,19 +24,19 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 
-[node name="TopPanel" type="Control" parent="VBoxContainer"]
+[node name="TopPanel" type="Control" parent="VBoxContainer" unique_id=1858436685]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.1
 mouse_filter = 2
 
-[node name="MiddlePanel" type="Control" parent="VBoxContainer"]
+[node name="MiddlePanel" type="Control" parent="VBoxContainer" unique_id=1562612862]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.8
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MiddlePanel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MiddlePanel" unique_id=1607969467]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -45,19 +45,19 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="LeftPanel" type="Control" parent="VBoxContainer/MiddlePanel/HBoxContainer"]
+[node name="LeftPanel" type="Control" parent="VBoxContainer/MiddlePanel/HBoxContainer" unique_id=1308111667]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.1
 mouse_filter = 2
 
-[node name="MiddlePanel" type="Control" parent="VBoxContainer/MiddlePanel/HBoxContainer"]
+[node name="MiddlePanel" type="Control" parent="VBoxContainer/MiddlePanel/HBoxContainer" unique_id=480098466]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.8
 mouse_filter = 2
 
-[node name="CardShop" parent="VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel" instance=ExtResource("4_dsp03")]
+[node name="CardShop" parent="VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel" unique_id=1333080452 instance=ExtResource("4_dsp03")]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 7
@@ -70,19 +70,19 @@ scale = Vector2(1.5, 1.5)
 pivot_offset = Vector2(350, 500)
 mouse_filter = 0
 
-[node name="RightPanel" type="Control" parent="VBoxContainer/MiddlePanel/HBoxContainer"]
+[node name="RightPanel" type="Control" parent="VBoxContainer/MiddlePanel/HBoxContainer" unique_id=706755013]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.1
 mouse_filter = 2
 
-[node name="BottomPanel" type="Control" parent="VBoxContainer"]
+[node name="BottomPanel" type="Control" parent="VBoxContainer" unique_id=1918040738]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.1
 mouse_filter = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/BottomPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/BottomPanel" unique_id=1820141269]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -94,17 +94,17 @@ theme_override_constants/margin_left = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 25
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/BottomPanel/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/BottomPanel/MarginContainer" unique_id=1774202482]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Control2" type="Control" parent="VBoxContainer/BottomPanel/MarginContainer/HBoxContainer"]
+[node name="Control2" type="Control" parent="VBoxContainer/BottomPanel/MarginContainer/HBoxContainer" unique_id=821390632]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
 mouse_filter = 2
 
-[node name="LocalPlayerHeroPortrait" parent="VBoxContainer/BottomPanel/MarginContainer/HBoxContainer/Control2" instance=ExtResource("7_4kg3l")]
+[node name="LocalPlayerHeroPortrait" parent="VBoxContainer/BottomPanel/MarginContainer/HBoxContainer/Control2" unique_id=806866871 instance=ExtResource("7_4kg3l")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(800, 700)
 layout_mode = 1
@@ -116,23 +116,23 @@ offset_right = 800.0
 grow_horizontal = 1
 grow_vertical = 0
 
-[node name="BottomLeftEmpty" type="Control" parent="VBoxContainer/BottomPanel/MarginContainer/HBoxContainer"]
+[node name="BottomLeftEmpty" type="Control" parent="VBoxContainer/BottomPanel/MarginContainer/HBoxContainer" unique_id=250462639]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="BottomRightEmpty" type="Control" parent="VBoxContainer/BottomPanel/MarginContainer/HBoxContainer"]
+[node name="BottomRightEmpty" type="Control" parent="VBoxContainer/BottomPanel/MarginContainer/HBoxContainer" unique_id=405071881]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="Control" type="Control" parent="VBoxContainer/BottomPanel/MarginContainer/HBoxContainer"]
+[node name="Control" type="Control" parent="VBoxContainer/BottomPanel/MarginContainer/HBoxContainer" unique_id=588925238]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
 mouse_filter = 2
 
-[node name="SelectedPlayerHeroPortrait" parent="VBoxContainer/BottomPanel/MarginContainer/HBoxContainer/Control" instance=ExtResource("7_4kg3l")]
+[node name="SelectedPlayerHeroPortrait" parent="VBoxContainer/BottomPanel/MarginContainer/HBoxContainer/Control" unique_id=1588127544 instance=ExtResource("7_4kg3l")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(800, 700)
 layout_mode = 1
