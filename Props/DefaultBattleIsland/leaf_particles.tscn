@@ -2,6 +2,13 @@
 
 [ext_resource type="Texture2D" uid="uid://ctlrfrnbewi7m" path="res://Data/Texture/ArchIsland/petale noir.png" id="1_nv42w"]
 
+[sub_resource type="Curve" id="Curve_m1k8i"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.8958334, 0.6024183), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_gg2dn"]
+curve = SubResource("Curve_m1k8i")
+
 [sub_resource type="Curve" id="Curve_nv42w"]
 _limits = [-1.0, 1.0, 0.0, 1.0]
 _data = [Vector2(0.010416664, 0.6116643), 0.0, 0.0, 0, 0, Vector2(0.21875, -0.1465149), 0.0, 0.0, 0, 0, Vector2(0.4965278, 0.3527739), 0.0, 0.0, 0, 0, Vector2(0.7534722, -0.62731135), 0.0, 0.0, 0, 0, Vector2(0.9930555, 1), 0.0, 0.0, 0, 0]
@@ -9,13 +16,6 @@ point_count = 5
 
 [sub_resource type="CurveTexture" id="CurveTexture_m1k8i"]
 curve = SubResource("Curve_nv42w")
-
-[sub_resource type="Gradient" id="Gradient_gg2dn"]
-offsets = PackedFloat32Array(0, 0.8816794, 0.9351145, 1)
-colors = PackedColorArray(0.86898494, 0.8689849, 0.8689849, 1, 1, 1, 1, 1, 1, 1, 1, 0.56944436, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_8l3nd"]
-gradient = SubResource("Gradient_gg2dn")
 
 [sub_resource type="Curve" id="Curve_4a8rv"]
 _data = [Vector2(0.013888888, 0.6578948), 0.0, 0.0, 0, 0, Vector2(0.32986113, 0.2140826), 0.0, 0.0, 0, 0, Vector2(1, 0.79658616), 0.0, 0.0, 0, 0]
@@ -31,14 +31,18 @@ emission_box_extents = Vector3(10, 3, 3)
 angle_min = 1.0728835e-05
 angle_max = 90.000015
 angle_curve = SubResource("CurveTexture_m1k8i")
-gravity = Vector3(0, -9, 0)
+gravity = Vector3(0, -7, 0)
+damping_min = 0.2
+damping_max = 0.3
 scale_min = 0.5
 scale_max = 1.1999999
 scale_curve = SubResource("CurveTexture_euo1g")
-color_ramp = SubResource("GradientTexture1D_8l3nd")
-anim_offset_max = 1.0
+alpha_curve = SubResource("CurveTexture_gg2dn")
+anim_offset_min = 0.44669998
+anim_offset_max = 0.44669998
 turbulence_enabled = true
 turbulence_noise_strength = 0.5
+turbulence_noise_speed = Vector3(0, 0, 1)
 turbulence_influence_max = 0.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gg2dn"]
@@ -55,13 +59,12 @@ particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_8l3nd"]
 material = SubResource("StandardMaterial3D_gg2dn")
-size = Vector2(2, 2)
+size = Vector2(3, 3)
 
 [node name="Particule" type="Node3D" unique_id=212154916]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1775107554]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.399086, 0)
-amount = 50
 lifetime = 5.0
 process_material = SubResource("ParticleProcessMaterial_m1k8i")
 draw_pass_1 = SubResource("QuadMesh_8l3nd")
