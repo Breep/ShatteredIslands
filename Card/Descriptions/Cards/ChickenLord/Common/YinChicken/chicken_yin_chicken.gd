@@ -6,9 +6,9 @@ extends HeroUpgrade
 @export var _rarity: Card.Rarity = Card.Rarity.COMMON
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
-	var vulnerable_applications: float = _vulnerable_applications[card_lvl - 1]
+	var vulnerable_application: float = _vulnerable_applications[card_lvl - 1]
 	var chance: float = _chances[card_lvl - 1]
-	ctx.hero.families_stats.chicken_lord.on_chicken_spawned_callbacks.append(func(cb_vars: Dictionary) -> void:
+	ctx.hero.families_stats.chicken_lord.on_chicken_death_callbacks.append(func(cb_vars: Dictionary) -> void:
 		if Utils.is_randomize_modifier_active(chance, ctx.hero.battle_id):
 			var chicken: Chicken = cb_vars.get(FamilyChickenLordStats.CbVars.SELF_CHICKEN)
 			if not is_instance_valid(chicken): return
@@ -19,7 +19,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 					mod.id = "ChickenYin_" + str(chicken.uid)
 					mod.stat_type = EntityStats.StatType.VULNERABILITY
 					mod.action_type = action_type
-					mod.value = vulnerable_applications
+					mod.value = vulnerable_application
 					ennemy.stat_modifiers_registry.register_modifier(mod)
 		)
 

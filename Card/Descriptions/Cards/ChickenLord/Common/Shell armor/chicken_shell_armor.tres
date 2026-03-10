@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://b3y0tqtl0w2xd"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_byj2i"]
+[ext_resource type="Script" uid="uid://upopj2ny7qtc" path="res://Card/Descriptions/Cards/ChickenLord/Common/Shell armor/chicken_shell_armor.gd" id="1_pdvgp"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_j00md"]
+
+[sub_resource type="Resource" id="Resource_eml2t"]
+script = ExtResource("1_pdvgp")
+_block_stacks = Array[int]([1, 2, 3, 4, 6])
+metadata/_custom_type_script = "uid://upopj2ny7qtc"
+
+[resource]
+script = ExtResource("1_byj2i")
+name = "Shell Armor"
+picture = SubResource("PlaceholderTexture2D_j00md")
+families = Array[int]([8])
+player_upgrade = SubResource("Resource_eml2t")
+points = Dictionary[int, int]({
+8: 1
+})
+lvl = 2
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

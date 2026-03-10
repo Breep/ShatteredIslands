@@ -36,7 +36,7 @@ const RARITY_CARD_VALUE: Dictionary[Rarity, int] = {
 @export var player_upgrade: HeroUpgrade
 @export var points: Dictionary[Family.Type, int]
 
-var _lvl: int # Current health
+var _lvl: int = 1 # Current lvl
 @export_range(1, 5) var lvl: int:
 	get: return _lvl
 	set(value):

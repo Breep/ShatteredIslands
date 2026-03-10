@@ -14,3 +14,4 @@ var gifted_chance_increase: float
 var spawn_number_increase: int
 
 var twins_chance: float
+var dodge_inherited: float
