@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cpqldqo5uv5mg"
-path="res://.godot/imported/flower2.glb-46d29e65462e5e836909b33ac4e3c64d.scn"
+uid="uid://bf4g8paxdlpap"
+path="res://.godot/imported/arena.glb-c8f8e802a7cc653eb0c84b290595b20e.scn"
 
 [deps]
 
-source_file="res://Props/DefaultBattleIsland/foliage/flower2.glb"
-dest_files=["res://.godot/imported/flower2.glb-46d29e65462e5e836909b33ac4e3c64d.scn"]
+source_file="res://Props/DefaultBattleIsland/Arch_island/GLB/arena.glb"
+dest_files=["res://.godot/imported/arena.glb-c8f8e802a7cc653eb0c84b290595b20e.scn"]
 
 [params]
 
@@ -24,7 +24,7 @@ nodes/use_node_type_suffixes=true
 meshes/ensure_tangents=true
 meshes/generate_lods=true
 meshes/create_shadow_meshes=true
-meshes/light_baking=1
+meshes/light_baking=2
 meshes/lightmap_texel_size=0.2
 meshes/force_disable_compression=false
 skins/use_named_skins=true
