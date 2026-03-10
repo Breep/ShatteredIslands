@@ -363,6 +363,8 @@ func connect_to_fighting_area(fighting_area_ref: FightingArea) -> void:
 	if _summon_sender != null:
 		_summon_sender.connect_to_spawn_manager(fighting_area_ref.spawn_manager)
 		_summon_sender.connect_to_arena_zone_manager(fighting_area_ref.arena_zone_manager)
+	if target_module != null:
+		target_module.connect_to_spawn_manager(fighting_area_ref.spawn_manager)
 #endregion
 
 #region ============================== Action Senders ==============================
