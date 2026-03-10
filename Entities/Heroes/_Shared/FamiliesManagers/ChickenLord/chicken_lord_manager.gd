@@ -52,7 +52,9 @@ var _alive_ally_chickens: Array[Chicken]
 
 var _twins_chance: float # relative to Chicken Twins card
 
-var _chicken_died_count: int = 0
+var _dead_chicken_count: int
+
+var _alive_chicken_count: int
 #endregion
 
 #region ============================== Node base function ==============================
@@ -101,6 +103,7 @@ func _init_gifted_types() -> void:
 
 
 func _spawn_chickens() -> void:
+	print("spawn chickens ", _chicken_number)
 	for i in _chicken_number:
 		if Utils.is_randomize_modifier_active(_twins_chance, _owner.battle_id):
 			_spawn_chicken(_randomize_chicken())
@@ -108,6 +111,7 @@ func _spawn_chickens() -> void:
 
 
 func _create_chicken_spawn_timer() -> void:
+	print("create chicken spawn timer ", _chicken_spawn_period)
 	_owner.periodic_timer_registry.register(&"Chicken passive", _chicken_spawn_period, _spawn_chickens, true)
 
 
@@ -175,22 +179,38 @@ func _on_owner_target_module_new_entity_detected(entity: Entity) -> void:
 		Verbose.error("_on_owner_target_module_new_entity_detected() -> Bad entity", Verbose.Category.FAMILY_MANAGER)
 		return
 	
-	if entity is Chicken and entity.team == _owner.team:
-		_register_chicken(entity)
+	if entity.team == _owner.team:
+		if entity is Chicken:
+			_register_chicken(entity)
+	
+		for cb: Callable in _chicken_lord_stats.on_ally_spawned_callbacks:
+			if cb.is_valid():
+				cb.call({
+					FamilyChickenLordStats.CbVars.TOTAL_CHICKEN_NUMBER: _alive_chicken_count,
+				})
 
 
 func _register_chicken(chicken: Chicken) -> void:
+	_alive_chicken_count += 1
 	_alive_ally_chickens.append(chicken)
 	chicken.died.connect(_on_chicken_death.bind(chicken), CONNECT_ONE_SHOT)
+	
+	for cb: Callable in _chicken_lord_stats.on_chicken_spawned_callbacks:
+		if cb.is_valid():
+			cb.call({
+				FamilyChickenLordStats.CbVars.ALIVE_CHICKENS: _alive_ally_chickens,
+				FamilyChickenLordStats.CbVars.SELF_CHICKEN: chicken
+			})
 
 
 func _on_chicken_death(chicken: Chicken) -> void:
-	_chicken_died_count += 1
+	_dead_chicken_count -= 1
+	_alive_chicken_count += 1
 	_alive_ally_chickens.erase(chicken)
+	
 	for cb: Callable in _chicken_lord_stats.on_chicken_death_callbacks:
 		if cb.is_valid():
 			cb.call({
 				FamilyChickenLordStats.CbVars.ALIVE_CHICKENS: _alive_ally_chickens,
-				FamilyChickenLordStats.CbVars.DIED_CHICKEN: chicken
+				FamilyChickenLordStats.CbVars.SELF_CHICKEN: chicken
 			})
-	

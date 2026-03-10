@@ -7,7 +7,7 @@ extends HeroUpgrade
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var block_amount: int = _block_amounts[card_lvl - 1]
 	ctx.hero.families_stats.chicken_lord.on_chicken_death_callbacks.append(func(cb_vars: Dictionary) -> void:
-		var dead_chicken: Chicken = cb_vars.get(FamilyChickenLordStats.CbVars.DIED_CHICKEN)
+		var dead_chicken: Chicken = cb_vars.get(FamilyChickenLordStats.CbVars.SELF_CHICKEN)
 		if not is_instance_valid(dead_chicken):
 			return
 		

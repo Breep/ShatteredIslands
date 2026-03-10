@@ -9,8 +9,6 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	ctx.hero.families_stats.chicken_lord.spawn_period_decrease = timer_amount
 
 
-
-
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
 		printerr("Rapid Incubation: Wrong cardlvl: ", cardlvl)
