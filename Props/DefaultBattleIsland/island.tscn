@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bq1das7mbtc76"]
 
-[ext_resource type="PackedScene" uid="uid://50kss7e4c2b3" path="res://Props/DefaultBattleIsland/Arch_island/props_arena_island.tscn" id="1_47voh"]
+[ext_resource type="PackedScene" uid="uid://50kss7e4c2b3" path="res://Props/DefaultBattleIsland/Arch_island/Props_Arena_Island.tscn" id="1_47voh"]
 [ext_resource type="Texture2D" uid="uid://bdah2exdiljlj" path="res://Props/DefaultBattleIsland/textures/qwantani_dusk_2_puresky_4k.exr" id="1_s3v0i"]
-[ext_resource type="PackedScene" uid="uid://duk3nfkcrkric" path="res://Props/DefaultBattleIsland/Arch_island/props_arena_arena.tscn" id="2_hodra"]
+[ext_resource type="PackedScene" uid="uid://duk3nfkcrkric" path="res://Props/DefaultBattleIsland/Arch_island/Props_Arena_Arena.tscn" id="2_hodra"]
 [ext_resource type="PackedScene" uid="uid://do5bslbv5ulo0" path="res://Props/DefaultBattleIsland/Arch_island/props_arena_sword.tscn" id="3_l4xy5"]
 [ext_resource type="PackedScene" uid="uid://c1xnh8xyfmxq4" path="res://Props/DefaultBattleIsland/Arch_island/props_arena_water_arch.tscn" id="4_mmw7b"]
 [ext_resource type="PackedScene" uid="uid://brl0bijhhqkd4" path="res://Props/DefaultBattleIsland/Arch_island/props_arena_arch.tscn" id="5_bvmio"]
@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://dlphue8wpdu1i" path="res://Props/DefaultBattleIsland/Arch_island/props_arena_rock5.tscn" id="21_qfeip"]
 [ext_resource type="PackedScene" uid="uid://3yh15itgn7a6" path="res://Props/DefaultBattleIsland/Arch_island/foliage/props_foliage_pinetree.tscn" id="22_7enyv"]
 [ext_resource type="PackedScene" uid="uid://2cqqpcsdxmc4" path="res://Props/DefaultBattleIsland/Arch_island/foliage/props_foliage_flower2.tscn" id="24_x7fny"]
+[ext_resource type="PackedScene" uid="uid://clyds5sxf0o4w" path="res://Props/DefaultBattleIsland/leaf_particles.tscn" id="26_ht5jp"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_kc47p"]
 panorama = ExtResource("1_s3v0i")
@@ -557,3 +558,5 @@ transform = Transform3D(0.8811002, -0.18846755, 0.9116803, 0.26862764, 1.2533383
 
 [node name="leafage69" parent="." unique_id=1027026254 instance=ExtResource("11_o11l4")]
 transform = Transform3D(1.2221723, -0.07109078, 1.13289, -0.2821172, 1.5934602, 0.404343, -1.0995015, -0.48788267, 1.1555371, 4.2233987, -0.028075129, -17.024212)
+
+[node name="Particule" parent="." unique_id=212154916 instance=ExtResource("26_ht5jp")]

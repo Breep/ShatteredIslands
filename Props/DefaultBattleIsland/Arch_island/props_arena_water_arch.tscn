@@ -1,6 +1,9 @@
 [gd_scene format=4 uid="uid://c1xnh8xyfmxq4"]
 
 [ext_resource type="Material" uid="uid://bro6fsf5vp2we" path="res://Props/DefaultBattleIsland/Arch_island/Material/M_item_set_1.tres" id="1_5jsec"]
+[ext_resource type="Shader" uid="uid://cylgrjdeg1en4" path="res://TestTODO_TOTRASH/mathieu/waterstylized.gdshader" id="2_lgn0t"]
+[ext_resource type="Texture2D" uid="uid://cuvfqk24fneqr" path="res://Data/Texture/2D/T_VFX_N41.PNG" id="3_3lgt5"]
+[ext_resource type="Texture2D" uid="uid://du4v5nuwrratk" path="res://Data/Texture/2D/T_VFX_PerlinNoise_Tiled.png" id="4_472uk"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_re3nc"]
 _surfaces = [{
@@ -35,6 +38,27 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_re3nc")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4xp2w"]
+render_priority = 0
+shader = ExtResource("2_lgn0t")
+shader_parameter/time_speed = 0.1
+shader_parameter/surface_speed = 0.2
+shader_parameter/spin = 0.5
+shader_parameter/brightness = 0.8
+shader_parameter/color_intensity = 0.0
+shader_parameter/horizontal_frequency = 2.0
+shader_parameter/vertical_frequency = 2.0
+shader_parameter/size = 3.0
+shader_parameter/banding_bias = 0.6
+shader_parameter/wave_texture = ExtResource("4_472uk")
+shader_parameter/noise_texture = ExtResource("3_3lgt5")
+shader_parameter/wave_height = 0.5
+shader_parameter/texture_height = 0.5
+shader_parameter/color1 = Color(0.59000057, 0.7611122, 1, 1)
+shader_parameter/color2 = Color(0.274, 0.474, 0.98, 1)
+shader_parameter/color3 = Color(0.059, 0.389, 0.85, 1)
+shader_parameter/color4 = Color(0, 0.267, 1, 1)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_jvplq"]
 _surfaces = [{
@@ -310,6 +334,7 @@ shadow_mesh = SubResource("ArrayMesh_pwe8f")
 transform = Transform3D(0.38747916, 0, 0, 0, 0.38747916, 0, 0, 0, 0.38747916, -2.0002081, 2.7520947, -0.5682408)
 mesh = SubResource("ArrayMesh_pdym0")
 skeleton = NodePath("")
+surface_material_override/0 = SubResource("ShaderMaterial_4xp2w")
 
 [node name="Water_Arch_Low_001" type="MeshInstance3D" parent="." unique_id=705522233]
 transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
