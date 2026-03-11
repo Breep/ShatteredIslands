@@ -51,9 +51,9 @@ func hide_panel() -> void:
 	hide()
 
 
-func update_content(player: Player, family_type: Family.FamilyType = Family.FamilyType.UNDEF) -> void:
+func update_content(player: Player, family_type: Family.Type = Family.Type.UNDEF) -> void:
 	if player == null or player.hero == null: return
-	if family_type == Family.FamilyType.UNDEF:
+	if family_type == Family.Type.UNDEF:
 		_hero_viewer.update_content(player, player.hero.stats)
 		_hero_viewer.show()
 		_family_viewer.hide()

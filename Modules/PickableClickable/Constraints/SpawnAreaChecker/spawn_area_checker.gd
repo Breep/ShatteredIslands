@@ -36,7 +36,7 @@ var _owner_team_spawn_area_overlapping_counter: int = 0: # Number of pickable co
 
 func _ready() -> void:
 	hide()
-	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
+	_set_inactive()
 
 
 func _set_active() -> void:
@@ -77,9 +77,3 @@ func _on_area_exited(area: Area3D) -> void:
 		_other_team_spawn_area_overlapping_counter -= 1
 
 
-func _on_gfm_fighting_phase_state_changed(fighting_phase_state: GlobalFightingManager.FightingPhaseState) -> void:
-	match fighting_phase_state:
-		GlobalFightingManager.FightingPhaseState.POSITIONING:
-			_set_active()
-		GlobalFightingManager.FightingPhaseState.CELEBRATING:
-			_set_inactive()

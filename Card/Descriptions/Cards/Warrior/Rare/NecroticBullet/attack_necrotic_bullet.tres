@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://ceriu6ydblll8"]
+
+[ext_resource type="Script" uid="uid://pqjtqk0hgk3f" path="res://Card/Descriptions/Cards/Warrior/Rare/NecroticBullet/attack_necrotic_bullet.gd" id="1_tuptm"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="2_1maqp"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_srgdc"]
+
+[sub_resource type="Resource" id="Resource_necrotic"]
+script = ExtResource("1_tuptm")
+_chance = Array[int]([30, 30, 30, 30, 30])
+_necrosis_stacks = Array[int]([10, 20, 30, 40, 50])
+
+[resource]
+script = ExtResource("2_1maqp")
+name = "Necrotic Bullet"
+picture = SubResource("PlaceholderTexture2D_srgdc")
+families = Array[int]([1, 11])
+rarity = 1
+player_upgrade = SubResource("Resource_necrotic")
+points = Dictionary[int, int]({
+1: 1,
+11: 1
+})

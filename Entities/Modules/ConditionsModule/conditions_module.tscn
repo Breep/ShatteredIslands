@@ -4,16 +4,3 @@
 
 [node name="ConditionsModule" type="Node"]
 script = ExtResource("1_n2uog")
-
-[node name="PoisonTickTimer" type="Timer" parent="."]
-unique_name_in_owner = true
-
-[node name="IgniteTickTimer" type="Timer" parent="."]
-unique_name_in_owner = true
-
-[node name="RegenTickTimer" type="Timer" parent="."]
-unique_name_in_owner = true
-
-[connection signal="timeout" from="PoisonTickTimer" to="." method="_on_poison_tick_timer_timeout"]
-[connection signal="timeout" from="IgniteTickTimer" to="." method="_on_ignite_tick_timer_timeout"]
-[connection signal="timeout" from="RegenTickTimer" to="." method="_on_regen_tick_timer_timeout"]

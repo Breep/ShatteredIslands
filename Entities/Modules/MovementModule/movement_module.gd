@@ -9,6 +9,10 @@ var _is_stopped: bool = false
 var _target_entity: Entity = null
 var _follow_entity: bool = false
 
+# Rush mode
+var _is_rushing: bool = false
+var _rush_speed: float = 0.0
+
 func start() -> void:
 	Verbose.debug("start", Verbose.Category.MOVEMENT_MODULE)
 	_is_stopped = false
@@ -33,6 +37,7 @@ func set_target_position(target_position: Vector3) -> void:
 	Verbose.debug("set_target_position", Verbose.Category.MOVEMENT_MODULE)
 	_target_position = target_position
 	_is_moving = true
+	_owner.is_moving = true
 
 
 func move_to_entity(entity: Entity) -> void:
@@ -48,6 +53,7 @@ func follow_entity(entity: Entity) -> void:
 		_target_entity = entity
 		_follow_entity = true
 		_is_moving = true
+		_owner.is_moving = true
 	else:
 		Verbose.error("follow_entity: entity is null", Verbose.Category.MOVEMENT_MODULE)
 
@@ -57,11 +63,13 @@ func stop_following() -> void:
 	_follow_entity = false
 	_target_entity = null
 	_is_moving = false
+	_owner.is_moving = false
 	# Reset velocity so animation can return to idle
 	_owner.velocity = Vector3.ZERO
 
 
-func _process(_delta: float) -> void:
+## Called every physics tick by FightingManager (deterministic, fixed 1/60s step).
+func process_tick() -> void:
 	if _is_stopped:
 		return
 	_move_toward_target()
@@ -78,18 +86,34 @@ func _move_toward_target() -> void:
 			return
 		_target_position = _target_entity.global_position
 	
-	if _target_position == null or _owner.global_position.distance_to(_target_position) < 0.1:
+	var speed: float = _rush_speed if _is_rushing else _get_move_speed()
+	var step_distance: float = speed / 60.0
+
+	if _target_position == null or _owner.global_position.distance_to(_target_position) < step_distance:
+		if _is_rushing:
+			_owner.global_position = _target_position
+			_stop_rushing()
 		if not _follow_entity:
 			_is_moving = false
-			# Reset velocity so animation can return to idle
-			_owner.velocity = Vector3.ZERO
+			_owner.is_moving = false
 		return
-	
+
 	var direction: Vector3 = (_target_position - _owner.global_position).normalized()
 	_owner.look_at_target_y_only(_target_position)
-	# Velocity should be in units per second, move_and_slide handles delta internally
-	_owner.velocity = direction * _get_move_speed()
-	_owner.move_and_slide()
+	_owner.global_position += direction * step_distance
+	_owner.global_position = _owner.global_position.snapped(Vector3(0.01, 0.01, 0.01))
+
+
+func rush(speed: float, target_global_position: Vector3) -> void:
+	Verbose.debug("rush", Verbose.Category.MOVEMENT_MODULE)
+	_is_rushing = true
+	_rush_speed = speed
+	set_target_position(target_global_position)
+
+
+func _stop_rushing() -> void:
+	_is_rushing = false
+	_rush_speed = 0.0
 
 
 func _get_move_speed() -> float:

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://q7gxxkhg5u54"]
+
+[ext_resource type="PackedScene" uid="uid://bxow3cbpwiaom" path="res://Props/DefaultBattleIsland/island.tscn" id="1_cci0s"]
+
+[node name="ArchIsland" type="Node3D" unique_id=1045725859]
+
+[node name="M_island" parent="." unique_id=945829401 instance=ExtResource("1_cci0s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6494546, -46.148, -18.694)

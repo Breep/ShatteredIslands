@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://duf3kswv8x14b"]
+[gd_scene format=3 uid="uid://duf3kswv8x14b"]
 
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_gv342"]
 [ext_resource type="Script" uid="uid://cm3wci6x4hsdb" path="res://GlobalManagers/ActionMeter/Viewer/ui_battle_data_stat_viewer.gd" id="2_bg7og"]
-[ext_resource type="Texture2D" uid="uid://b78s362n5bu6" path="res://Card/Descriptions/Families/Icons/turret.png" id="3_l1uag"]
+[ext_resource type="Texture2D" uid="uid://b78s362n5bu6" path="res://Card/Descriptions/Families/Icons/warrior.png" id="3_l1uag"]
 
 [node name="BattleDataStatViewer" type="Control"]
 custom_minimum_size = Vector2(0, 50)

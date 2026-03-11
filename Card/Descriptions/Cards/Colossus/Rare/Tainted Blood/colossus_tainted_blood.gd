@@ -25,11 +25,11 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if stacks <= 0:
 			return
 
-		var stack_type: Utils.StackType
-		if Utils.rng.randi() % 2 == 0:
-			stack_type = Utils.StackType.POISON
+		var stack_type: Stack.Type
+		if Utils.get_randi_range(1, 2, ctx.hero.battle_id) % 2 == 0:
+			stack_type = Stack.Type.POISON
 		else:
-			stack_type = Utils.StackType.IGNITE
+			stack_type = Stack.Type.IGNITE
 			stacks *= 5 # TODO Magic number spotted !
 
 		ctx.hero.inflict_condition_stacks(target, stacks, stack_type, &"Tainted Blood")

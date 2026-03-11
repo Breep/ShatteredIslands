@@ -52,6 +52,11 @@ signal _server_answered()
 
 var _battles: Dictionary[int, Battle] = {}
 
+# ============================== Node base functions ==============================
+
+func _init() -> void:
+	Verbose.debug("ROUND MANAGER INIT", Verbose.Category.DEFAULT)
+
 # ============================== Public functions ==============================
 
 func clear() -> void:

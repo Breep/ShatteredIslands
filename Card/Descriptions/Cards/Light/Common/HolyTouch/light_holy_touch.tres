@@ -16,4 +16,5 @@ name = "Holy Touch"
 picture = ExtResource("1_xf8j7")
 families = Array[int]([5])
 player_upgrade = SubResource("Resource_epg00")
+lvl = 5
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

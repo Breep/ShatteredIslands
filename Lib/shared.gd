@@ -10,19 +10,16 @@ var HERO_SCENES: Dictionary[HeroDesc.HeroId, PackedScene] = {
 	HeroDesc.HeroId.DARK_KNIGHT: load("res://Entities/Heroes/DarkKnight/dark_knight.tscn"),
 }
 
-var FAMILIES: Dictionary[Family.FamilyType, Family] = {
-	Family.FamilyType.ATTACK: load("res://Card/Descriptions/Families/attack_family.tres"),
-	Family.FamilyType.DEFENSE: load("res://Card/Descriptions/Families/defense_family.tres"),
-	Family.FamilyType.FIRE: load("res://Card/Descriptions/Families/fire_family.tres"),
-	Family.FamilyType.STORM: load("res://Card/Descriptions/Families/storm_family.tres"),
-	Family.FamilyType.SERENITY: load("res://Card/Descriptions/Families/serenity_family.tres"),
-	Family.FamilyType.LIFE: load("res://Card/Descriptions/Families/life_family.tres"),
-	Family.FamilyType.POISON: load("res://Card/Descriptions/Families/poison_family.tres"),
-	Family.FamilyType.MANA: load("res://Card/Descriptions/Families/mana_family.tres"),
-	Family.FamilyType.CHICKEN: load("res://Card/Descriptions/Families/chickenlord_family.tres"),
-	Family.FamilyType.LIGHTNING: load("res://Card/Descriptions/Families/lightning_family.tres"),
-	Family.FamilyType.NECROSIS: load("res://Card/Descriptions/Families/necro_family.tres"),
-	Family.FamilyType.SHADOW: load("res://Card/Descriptions/Families/shadow_family.tres")
+var FAMILIES: Dictionary[Family.Type, Family] = {
+	Family.Type.WARRIOR: load("res://Card/Descriptions/Families/warrior_family.tres"),
+	Family.Type.ENGINEER: load("res://Card/Descriptions/Families/engineer_family.tres"),
+	Family.Type.ARDENT_CELESTIAL: load("res://Card/Descriptions/Families/ardent_celestial_family.tres"),
+	Family.Type.STORM_CALLER: load("res://Card/Descriptions/Families/storm_caller_family.tres"),
+	Family.Type.LIGHT: load("res://Card/Descriptions/Families/light_family.tres"),
+	Family.Type.COLOSSUS: load("res://Card/Descriptions/Families/colossus_family.tres"),
+	Family.Type.POISON: load("res://Card/Descriptions/Families/poison_family.tres"),
+	Family.Type.CHICKEN_LORD: load("res://Card/Descriptions/Families/chicken_lord_family.tres"),
+	Family.Type.NECROSIS: load("res://Card/Descriptions/Families/necro_family.tres"),
 }
 
 var ENTITY_MODULE_SCENES: Dictionary[Module.ModuleType, PackedScene] = {
@@ -49,16 +46,16 @@ var ENTITY_MODULE_SCENES: Dictionary[Module.ModuleType, PackedScene] = {
 	Module.ModuleType.ACTION_RECEIVER_STATUS: load("res://Entities/Modules/ActionReceiverModule/Status/action_receiver_status_module.tscn"),
 }
 
-var FAMILY_MANAGER_SCENES: Dictionary[Family.FamilyType, PackedScene] = {
-	Family.FamilyType.DEFENSE: load("res://Entities/Heroes/_Shared/FamiliesManagers/Defense/defense_manager.tscn"),
-	Family.FamilyType.FIRE: load("res://Entities/Heroes/_Shared/FamiliesManagers/Fire/fire_manager.tscn"),
-	Family.FamilyType.LIFE: load("res://Entities/Heroes/_Shared/FamiliesManagers/Life/life_manager.tscn"),
-	Family.FamilyType.POISON: load("res://Entities/Heroes/_Shared/FamiliesManagers/Poison/poison_manager.tscn"),
-	Family.FamilyType.SERENITY: load("res://Entities/Heroes/_Shared/FamiliesManagers/Serenity/serenity_manager.tscn"),
-	Family.FamilyType.STORM: load("res://Entities/Heroes/_Shared/FamiliesManagers/Storm/storm_manager.tscn"),
-	Family.FamilyType.ATTACK: load("res://Entities/Heroes/_Shared/FamiliesManagers/Attack/attack_manager.tscn"),
-	Family.FamilyType.MANA: load("res://Entities/Heroes/_Shared/FamiliesManagers/Mana/mana_manager.tscn"),
-	Family.FamilyType.NECROSIS: load("res://Entities/Heroes/_Shared/FamiliesManagers/Necro/necro_manager.tscn"),
+var FAMILY_MANAGER_SCENES: Dictionary[Family.Type, PackedScene] = {
+	Family.Type.ENGINEER: load("res://Entities/Heroes/_Shared/FamiliesManagers/Engineer/engineer_manager.tscn"),
+	Family.Type.ARDENT_CELESTIAL: load("res://Entities/Heroes/_Shared/FamiliesManagers/ArdentCelestial/ardent_celestial_manager.tscn"),
+	Family.Type.COLOSSUS: load("res://Entities/Heroes/_Shared/FamiliesManagers/Colossus/colossus_manager.tscn"),
+	Family.Type.POISON: load("res://Entities/Heroes/_Shared/FamiliesManagers/Poison/poison_manager.tscn"),
+	Family.Type.LIGHT: load("res://Entities/Heroes/_Shared/FamiliesManagers/Light/light_manager.tscn"),
+	Family.Type.STORM_CALLER: load("res://Entities/Heroes/_Shared/FamiliesManagers/StormCaller/storm_caller_manager.tscn"),
+	Family.Type.WARRIOR: load("res://Entities/Heroes/_Shared/FamiliesManagers/Warrior/warrior_manager.tscn"),
+	Family.Type.NECROSIS: load("res://Entities/Heroes/_Shared/FamiliesManagers/Necro/necro_manager.tscn"),
+	Family.Type.CHICKEN_LORD: load("res://Entities/Heroes/_Shared/FamiliesManagers/ChickenLord/chicken_lord_manager.tscn"),
 }
 
 var PROJECTILE_SCENES: Dictionary[Projectile.Type, PackedScene] = {
@@ -81,3 +78,6 @@ const LAYER_FLOOR: int = 1 << 3
 const LAYER_ENTITIES: int = 1 << 4
 const LAYER_PICKABLE_CONSTRAINT: int = 1 << 5
 const LAYER_FURNITURE: int = 1 << 6
+
+func _init() -> void:
+	Verbose.debug("SHARED INIT", Verbose.Category.DEFAULT)

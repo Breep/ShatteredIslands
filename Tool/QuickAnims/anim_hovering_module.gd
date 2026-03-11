@@ -23,7 +23,7 @@ func _ready():
 		return
 	
 	if _random_start:
-		await get_tree().create_timer(Utils.rng.randf_range(0.0, 2.0)).timeout
+		await get_tree().create_timer(Utils.get_randf_range(0.0, 2.0)).timeout
 	
 	start_hover()
 

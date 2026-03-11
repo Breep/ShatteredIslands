@@ -101,7 +101,7 @@ func _rescale_rigidbody(body: Node3D) -> void:
 		if child is CollisionShape3D:
 			var collision: CollisionShape3D = child
 			var shape: Shape3D = collision.shape.duplicate(true)
-			shape.resource_local_to_scene = true
+			shape.resource_local_to_scene = false
 			print("DEBUG - Rescale rigidbody")
 			if shape is SphereShape3D:
 				print("DEBUG - Rescale rigidbody SPHERE")

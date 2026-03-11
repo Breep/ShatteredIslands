@@ -3,7 +3,7 @@ extends Node3D
 
 # ============================== Constants ==============================
 
-const GOLD_PER_COIN: int = 10 # Number of gold that represent a 3d coin
+const GOLD_PER_COIN: int = 100 # Number of gold that represent a 3d coin
 const MAX_TOWER_HEIGHT_DIFF: int = 2 # Max coin (or height) diff between the highest and lowest tower
 
 # ============================== Export ==============================

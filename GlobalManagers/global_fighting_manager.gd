@@ -3,7 +3,7 @@ extends Node
 # ============================== Description ==============================
 #
 # -- GlobalFightingManager --
-# Handle the differents fighting phases (NORMAL/ACCELERATED/FINISHED) for every other FightingManager
+# Handle the differents fighting phases (COUNTDOWN/NORMAL/SPECIAL/CELEBRATION/FINISHED) for every other FightingManager
 
 #region ============================== Signals ==============================
 signal all_fights_are_over()
@@ -13,22 +13,24 @@ signal fighting_phase_state_changed(new_fighting_phase_state: FightingPhaseState
 #region ============================== Enum ==============================
 enum FightingPhaseState {
 	UNDEF,
-	POSITIONING,
 	COUNTDOWN,
 	NORMAL,
-	ACCELERATED,
-	CELEBRATING,
+	SPECIAL,
+	CELEBRATION,
 	FINISHED,
 }
 #endregion
 
 #region ============================== Constants ==============================
-const ACCELERATED_FIGHT_TIME_SCALE = 2.0
+const TICKS_PER_SECOND: int = 60
 #endregion
 
 #region ============================== Private variables ==============================
 var _fighting_managers: Array[FightingManager]
 var _current_active_fighting_managers: Array[FightingManager]
+
+# Tick at which NORMAL phase started (t=0 reference)
+var fight_start_tick: int = 0
 
 # /!\ _fighting_phase_state is NOT sync, the server is ahead of time /!\
 var __fighting_phase_state := FightingPhaseState.UNDEF
@@ -37,44 +39,60 @@ var _fighting_phase_state: FightingPhaseState:
 	set(value):
 		if __fighting_phase_state == value: return
 		__fighting_phase_state = value
+		if value == FightingPhaseState.NORMAL:
+			fight_start_tick = _current_tick
 		fighting_phase_state_changed.emit(__fighting_phase_state)
 
 var __prototyping = false
-var _skip_countdown: bool = false
-var _timer: Timer
+var _is_active: bool = false
+var _phase_ticks_remaining: int = 0
+var _current_tick: int = 0
 
 # ====== SERVER ONLY
 var _players_running_playback: Array[Player]
 #endregion
 
 #region ============================== Node base functions ==============================
+func _init() -> void:
+	Verbose.debug("GLOBAL FIGHTING MANAGER INIT", Verbose.Category.DEFAULT)
+
 func _ready() -> void:
 	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 	fighting_phase_state_changed.connect(_on_fighting_phase_state_changed)
-	
-	_timer = Timer.new()
-	add_child(_timer)
-	_timer.autostart = false
-	_timer.one_shot = true
-	_timer.timeout.connect(_on_timer_timeout)
+	set_physics_process(false)
+
+
+func _physics_process(_delta: float) -> void:
+	if not _is_active: return
+	_current_tick += 1
+	_phase_ticks_remaining -= 1
+	if _phase_ticks_remaining <= 0:
+		_advance_phase()
 #endregion
 
 #region ============================== Public functions ==============================
 func clear() -> void:
+	for fm in _fighting_managers:
+		if fm.fight_is_ready_to_be_started.is_connected(_on_fighting_manager_fight_is_ready_to_be_started):
+			fm.fight_is_ready_to_be_started.disconnect(_on_fighting_manager_fight_is_ready_to_be_started)
+		if fm.fight_is_over.is_connected(_on_fighting_manager_fighting_is_over):
+			fm.fight_is_over.disconnect(_on_fighting_manager_fighting_is_over)
 	_fighting_managers.clear()
 	_current_active_fighting_managers.clear()
 	_players_running_playback.clear()
+	_is_active = false
+	_phase_ticks_remaining = 0
+	_current_tick = 0
+	set_physics_process(false)
 
 
 func start() -> void:
 	Verbose.debug("START", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
-	if __prototyping or GameManager.game_type == GameManager.GameType.SOLO or not multiplayer.is_server():
-		_skip_countdown = false
-	else:
-		_skip_countdown = true
+	_current_tick = 0
 	if multiplayer.is_server():
 		_players_running_playback = PlayerManager.get_human_players().values().duplicate()
-	_fighting_phase_state = FightingPhaseState.POSITIONING
+	_fighting_phase_state = FightingPhaseState.COUNTDOWN
+
 
 # === Register/Unregister FightingManager
 func register_fighting_manager(fighting_manager: FightingManager):
@@ -85,7 +103,7 @@ func register_fighting_manager(fighting_manager: FightingManager):
 	
 	_fighting_managers.append(fighting_manager)
 	fighting_manager.fight_is_ready_to_be_started.connect(_on_fighting_manager_fight_is_ready_to_be_started)
-	fighting_manager.fight_is_over.connect(_fighting_manager_fighting_is_over)
+	fighting_manager.fight_is_over.connect(_on_fighting_manager_fighting_is_over)
 
 
 func unregister_fighting_manager(fighting_manager: FightingManager):
@@ -95,64 +113,60 @@ func unregister_fighting_manager(fighting_manager: FightingManager):
 		return
 	
 	_fighting_managers.erase(fighting_manager)
-	fighting_manager.fight_is_over.disconnect(_fighting_manager_fighting_is_over)
+	fighting_manager.fight_is_over.disconnect(_on_fighting_manager_fighting_is_over)
 #endregion
 
 #region ============================== State machine ==============================
-func _on_timer_timeout() -> void:
+func _advance_phase() -> void:
 	match __fighting_phase_state:
-		FightingPhaseState.POSITIONING: # End of POSITIONING State
-			if _skip_countdown:
-				_fighting_phase_state = FightingPhaseState.NORMAL # Trigger FIGHT directly on server
-			else:
-				_fighting_phase_state = FightingPhaseState.COUNTDOWN
 		FightingPhaseState.COUNTDOWN: _fighting_phase_state = FightingPhaseState.NORMAL
-		FightingPhaseState.NORMAL: _fighting_phase_state = FightingPhaseState.ACCELERATED
-		FightingPhaseState.ACCELERATED: 
-			Verbose.debug("Fights are taking too long => Forcing CELEBRATING phase", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
-			_fighting_phase_state = FightingPhaseState.CELEBRATING
-		FightingPhaseState.CELEBRATING: _fighting_phase_state = FightingPhaseState.FINISHED
+		FightingPhaseState.NORMAL: _fighting_phase_state = FightingPhaseState.SPECIAL
+		FightingPhaseState.SPECIAL:
+			Verbose.debug("Fights are taking too long => Forcing CELEBRATION phase", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
+			_fighting_phase_state = FightingPhaseState.CELEBRATION
+		FightingPhaseState.CELEBRATION: _fighting_phase_state = FightingPhaseState.FINISHED
 		FightingPhaseState.FINISHED: _fighting_phase_state = FightingPhaseState.UNDEF
 		_: pass
 
 
 func _on_fighting_phase_state_changed(new_fighting_phase_state: FightingPhaseState) -> void:
-	var duration: float = GameManager.game_rules.duration_fighting_positioning
+	var duration: float = 0.0
 	match new_fighting_phase_state:
-		FightingPhaseState.POSITIONING:
-			duration = GameManager.game_rules.duration_fighting_positioning
-			Verbose.debug("[State=POSITIONING] (" + str(duration) + "s)", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
-		
 		FightingPhaseState.COUNTDOWN:
 			duration = GameManager.game_rules.duration_fighting_countdown
 			Verbose.debug("[State=COUNTDOWN] (" + str(duration) + "s)", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
-		
+
 		FightingPhaseState.NORMAL:
 			duration = GameManager.game_rules.duration_fighting_normal
 			Verbose.debug("[State=NORMAL] (" + str(duration) + "s)", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
-		
-		FightingPhaseState.ACCELERATED:
-			duration = GameManager.game_rules.duration_fighting_accelerated
-			Verbose.debug("[State=ACCELERATED] (" + str(duration) + "s)", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
-			Engine.time_scale = ACCELERATED_FIGHT_TIME_SCALE
-		
-		FightingPhaseState.CELEBRATING:
-			duration = GameManager.game_rules.duration_fighting_celebrating
-			Verbose.debug("[State=CELEBRATING] (" + str(duration) + "s)", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
-			Engine.time_scale = 1.0
-		
+			for fighting_manager in _current_active_fighting_managers:
+				fighting_manager.start()
+
+		FightingPhaseState.SPECIAL:
+			duration = GameManager.game_rules.duration_fighting_special
+			Verbose.debug("[State=SPECIAL] (" + str(duration) + "s)", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
+
+		FightingPhaseState.CELEBRATION:
+			duration = GameManager.game_rules.duration_fighting_celebration
+			Verbose.debug("[State=CELEBRATION] (" + str(duration) + "s)", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
+
 		FightingPhaseState.FINISHED:
 			duration = GameManager.game_rules.duration_fighting_finished
 			Verbose.debug("[State=FINISHED] (" + str(duration) + "s)", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
 			if multiplayer.is_server(): _wait_for_all_players_to_finish_playback()
 			else: _notice_playback_is_over.rpc_id(1)
-		
+
 		_:
 			Verbose.trace("[State=UNDEF]", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
+			_is_active = false
+			set_physics_process(false)
 			return
-	
-	_timer.wait_time = duration
-	_timer.start()
+
+	_phase_ticks_remaining = int(duration * TICKS_PER_SECOND)
+	_is_active = true
+	set_physics_process(true)
+	if _phase_ticks_remaining == 0:
+		_advance_phase()
 #endregion
 
 func _on_game_manager_game_state_changed(new_game_state: GameManager.GameState) -> void:
@@ -176,7 +190,9 @@ func _finish_all_fights() -> void:
 	all_fights_are_over.emit()
 	Verbose.debug("Finishing GFM", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
 	_players_running_playback.clear()
-	_timer.stop()
+	_is_active = false
+	_phase_ticks_remaining = 0
+	set_physics_process(false)
 
 
 @rpc("any_peer", "call_remote")
@@ -193,14 +209,14 @@ func _notice_playback_is_over() -> void:
 #endregion
 
 #region ============================== FightingManager callbacks ==============================
-func _fighting_manager_fighting_is_over(fighting_manager: FightingManager, _winner_teams_order: Array[int]) -> void:
+func _on_fighting_manager_fighting_is_over(fighting_manager: FightingManager, _winner_teams_order: Array[int]) -> void:
 	if not _current_active_fighting_managers.has(fighting_manager):
 		Verbose.error("An unexpected FightingArea signals a fight is over [" + str(fighting_manager.get_path()) + "]", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
 		return
 	_current_active_fighting_managers.erase(fighting_manager)
-	if _current_active_fighting_managers.is_empty() and _fighting_phase_state < FightingPhaseState.CELEBRATING:
-		Verbose.debug("All fights are over => Going to CELEBRATING phase", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
-		_fighting_phase_state = FightingPhaseState.CELEBRATING
+	if _current_active_fighting_managers.is_empty() and _fighting_phase_state < FightingPhaseState.CELEBRATION:
+		Verbose.debug("All fights are over => Going to CELEBRATION phase", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
+		_fighting_phase_state = FightingPhaseState.CELEBRATION
 
 
 func _on_fighting_manager_fight_is_ready_to_be_started(fighting_manager: FightingManager) -> void:
@@ -209,22 +225,3 @@ func _on_fighting_manager_fight_is_ready_to_be_started(fighting_manager: Fightin
 		return
 	_current_active_fighting_managers.append(fighting_manager)
 #endregion
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 

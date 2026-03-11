@@ -12,22 +12,29 @@ extends Node
 
 var _battle_logs: Array[Dictionary]
 var _last_log_index_sent: int = 0
-var _start_time: float
-var _normal_fight_duration: float
-var _accelerated_fight_start_time: float
-var _is_accelerated_fight: bool = false
+var _is_recording: bool = false
 
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	if not multiplayer.is_server(): queue_free() # Only the server writes battle logs
-	
+	if not multiplayer.is_server():
+		queue_free()
+		return # Only the server writes battle logs
 	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
 	
-	_fighting_area.projectile_spawned.connect(_on_fighting_area_projectile_spawned)
-	_fighting_area.spell_casted.connect(_on_fighting_area_spell_casted)
 	_fighting_area.action_done.connect(_on_fighting_area_action_done)
-	_fighting_area.interaction_received.connect(_on_fighting_area_interaction_received)
+	_fighting_area.action_received.connect(_on_fighting_area_action_received)
+	_fighting_area.projectile_spawned.connect(_on_fighting_area_projectile_spawned)
+	_fighting_area.entity_spawned.connect(_on_fighting_area_entity_spawned)
+	_fighting_area.projectile_target_hit.connect(_on_fighting_area_projectile_target_hit)
+
+
+func _input(event: InputEvent) -> void:
+	# Détecte Alt + F12
+	if event is InputEventKey and event.pressed:
+		if event.keycode == KEY_F12 and event.alt_pressed:
+			_save_logs_to_file()
+
 
 # ============================== Public functions ==============================
 
@@ -37,40 +44,46 @@ func get_current_logs() -> Array[Dictionary]:
 	_last_log_index_sent = _battle_logs.size()
 	return new_logs
 
+
+func get_all_logs() -> Array[Dictionary]:
+	return _battle_logs
+
 # ============================== Private functions ==============================
+func _create_base_entry() -> Dictionary:
+	var manager = _fighting_area.fighting_manager
+	var tick = manager.current_tick
+	return {
+		"tick": tick,                         # Précision pour le déterminisme
+		"time": snapped(tick / 60.0, 0.001),  # Lisibilité float (basé sur 60 FPS)
+	}
+
+func _save_logs_to_file() -> void:
+	Verbose.debug("Saving battle logs to disk", Verbose.Category.BATTLE_WRITER)
+	if _battle_logs.is_empty():
+		Verbose.warn("Tentative d'exportation de logs vides.", Verbose.Category.BATTLE_WRITER)
+		return
+
+	# Création d'un nom de fichier unique avec horodatage
+	var datetime = Time.get_datetime_dict_from_system()
+	var file_name = "battle_log_%d-%02d-%02d_%02d-%02d-%02d.json" % [
+		datetime.year, datetime.month, datetime.day,
+		datetime.hour, datetime.minute, datetime.second
+	]
+	var path = "user://" + file_name # Enregistre dans l'AppData du projet
+
+	# Conversion des logs en chaîne JSON formatée (avec des tabulations pour la lisibilité)
+	var json_string = JSON.stringify(_battle_logs, "\t")
+	
+	var file = FileAccess.open(path, FileAccess.WRITE)
+	if file:
+		file.store_string(json_string)
+		file.close()
+		print("Logs de bataille enregistrés avec succès dans : ", ProjectSettings.globalize_path(path))
+	else:
+		Verbose.error("Impossible de créer le fichier de log à l'emplacement : " + path, Verbose.Category.BATTLE_WRITER)
+
 
 #region logs
-#{"time":0.1, "type":"auto_attack", "source":1, "target":2, "modifier":{"critical":true, "poison":false, "ignite":false, "instability":true}}
-func _log_attack(source: Entity, target: Entity,
-				critical: bool = false, poison: bool = false, ignite: bool = false, instability: bool = false) -> void:
-	var data: Dictionary = {
-		BattleLog.Main.TIME: _get_time(),
-		BattleLog.Main.TYPE: BattleLog.Type.AUTO_ATTACK,
-		BattleLog.Main.SOURCE: source.id,
-		BattleLog.Main.TARGET: target.id,
-		BattleLog.Main.MODIFIER: {
-			BattleLog.Modifier.CRITICAL: critical,
-			BattleLog.Modifier.POISON: poison,
-			BattleLog.Modifier.IGNITE: ignite,
-			BattleLog.Modifier.INSTABILITY: instability
-		}
-	}
-	_battle_logs.append(data)
-
-
-func _log_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary) -> void:
-	if source == null or target == null: return
-	var data: Dictionary = {
-		BattleLog.Main.TIME: _get_time(),
-		BattleLog.Main.TYPE: BattleLog.Type.SPELL_CASTED,
-		BattleLog.Main.SOURCE: source.id,
-		BattleLog.Main.TARGET: target.id,
-		BattleLog.Main.SPELL_TYPE: spell_type,
-		BattleLog.Main.SPELL_MODIFIER: spell_modifier
-	}
-	_battle_logs.append(data)
-
-
 func _log_action_done(source: Entity, target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
 	if not is_instance_valid(source):
 		Verbose.warn("_log_action_done() -> source invalid", Verbose.Category.BATTLE_WRITER)
@@ -80,81 +93,110 @@ func _log_action_done(source: Entity, target: Entity, action_type: Utils.ActionT
 		Verbose.warn("_log_action_done() -> target invalid", Verbose.Category.BATTLE_WRITER)
 		return
 	
-	var data: Dictionary = {
-		BattleLog.Main.TIME: _get_time(),
-		BattleLog.Main.TYPE: BattleLog.Type.ACTION_DONE,
-		BattleLog.Main.ACTION_TYPE: action_type,
-		BattleLog.Main.ACTION_ID: action_id,
-		BattleLog.Main.VALUE: value,
-		BattleLog.Main.CRITICAL: is_critical,
-		BattleLog.Main.SOURCE: source.id,
-		BattleLog.Main.TARGET: target.id
-	}
+	var entry = _create_base_entry()
+	entry.merge({
+		"type": "action_done",
+		"action_type": Utils.ActionType.keys()[action_type],
+		"id": action_id,
+		"value": value,
+		"critical": is_critical,
+		"source": source.uid,
+		"target": target.uid
+	})
 	
-	_battle_logs.append(data)
+	_append_log(entry)
 
 
-func _log_interaction_received(receiver: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
+func _log_action_received(receiver: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
 	Verbose.trace("_log_interaction_received() | " + str(receiver) + " | " + str(source), Verbose.Category.BATTLE_WRITER)
 	
 	if not is_instance_valid(receiver):
 		Verbose.warn("_log_action_done() -> receiver invalid", Verbose.Category.BATTLE_WRITER)
 		return
 	
-	var data: Dictionary = {
-		BattleLog.Main.TIME: _get_time(),
-		BattleLog.Main.TYPE: BattleLog.Type.INTERACTION_RECEIVED,
-		BattleLog.Main.ACTION_TYPE: action_type,
-		BattleLog.Main.ACTION_ID: action_id,
-		BattleLog.Main.VALUE: value,
-		BattleLog.Main.CRITICAL: is_critical,
-		BattleLog.Main.RECEIVER: receiver.id,
-		BattleLog.Main.SOURCE: source.id if source != null else -1,
-	}
+	var entry = _create_base_entry()
+	entry.merge({
+		"type": "action_received",
+		"action_type": Utils.ActionType.keys()[action_type],
+		"id": action_id,
+		"value": value,
+		"critical": is_critical,
+		"receiver": receiver.uid,
+		"source": source.uid if source != null else -1,
+	})
 	
-	_battle_logs.append(data)
+	_append_log(entry)
+
+
+func _log_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.Type, gpos: Vector3, projectile_uid: int) -> void:
+	if not is_instance_valid(source) or not is_instance_valid(target): return
+	var entry = _create_base_entry()
+	entry.merge({
+		"type": "projectile_spawned",
+		"source": source.uid,
+		"target": target.uid,
+		"projectile_uid": projectile_uid,
+		"projectile_type": Projectile.Type.keys()[projectile_type],
+		"position": gpos
+	})
+	_append_log(entry)
+
+
+func _log_entity_spawned(entity: Entity, entity_type: Entity.EntityType, gpos: Vector3) -> void:
+	if not is_instance_valid(entity): return
+	var entry = _create_base_entry()
+	entry.merge({
+		"type": "entity_spawned",
+		"uid": entity.uid,
+		"entity_type": Entity.EntityType.keys()[entity_type],
+		"position": gpos
+	})
+	_append_log(entry)
+
+
+func _log_projectile_target_hit(target: Entity, gpos: Vector3, projectile_uid: int) -> void:
+	if not is_instance_valid(target): return
+	var entry = _create_base_entry()
+	entry.merge({
+		"type": "projectile_target_hit",
+		"target": target.uid,
+		"projectile_uid": projectile_uid,
+		"position": gpos
+	})
+	_append_log(entry)
 #endregion
 
-func _get_time() -> float:
-	if _is_accelerated_fight:
-		return _normal_fight_duration + ((Time.get_ticks_msec() as float) / 1000.0 - _accelerated_fight_start_time) # / GlobalFightingManager.ACCELERATED_FIGHT_TIME_SCALE
-	else:
-		return ((Time.get_ticks_msec() as float) / 1000.0 - _start_time)
+
+func _append_log(data: Dictionary) -> void:
+	if not _is_recording: return
+	_battle_logs.append(data)
 
 # ============================== Callbacks ==============================
 
 func _on_gfm_fighting_phase_state_changed(state: GlobalFightingManager.FightingPhaseState) -> void:
 	match state:
 		GlobalFightingManager.FightingPhaseState.NORMAL:
-			_start_time = (Time.get_ticks_msec() as float) / 1000.0
-			_is_accelerated_fight = false
-		GlobalFightingManager.FightingPhaseState.ACCELERATED:
-			_normal_fight_duration = _get_time()
-			_accelerated_fight_start_time = (Time.get_ticks_msec() as float) / 1000.0
-			_is_accelerated_fight = true
+			_is_recording = true
 		GlobalFightingManager.FightingPhaseState.FINISHED:
+			_is_recording = false
 			_battle_logs.clear()
 
 
-func _on_fighting_area_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.Type, _projectile: Projectile) -> void:
-	# Note: Projectile effects like critic/poison/ignite are now handled via callbacks
-	# and are no longer tracked as enum flags
-	pass # TODO use auto attack api
-	#if source.is_ally and projectile_type == Projectile.Type.AUTO_ATTACK:
-		#_log_attack(source, target,
-				#false, # is_critic (no longer tracked here)
-				#false, # has_poison
-				#false, # has_ignite
-				#false) # has_instability
+func _on_fighting_area_projectile_spawned(source: Entity, target: Entity, projectile_type: Projectile.Type, projectile: Projectile, gpos: Vector3) -> void:
+	_log_projectile_spawned(source, target, projectile_type, gpos, projectile.uid)
 
 
-func _on_fighting_area_spell_casted(source: Entity, target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary) -> void:
-	_log_spell_casted(source, target, spell_type, spell_modifier)
+func _on_fighting_area_entity_spawned(entity: Entity, entity_type: Entity.EntityType, gpos: Vector3) -> void:
+	_log_entity_spawned(entity, entity_type, gpos)
 
 
-func _on_fighting_area_interaction_received(receiver: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
-	_log_interaction_received(receiver, source, action_type, action_id, value, is_critical)
+func _on_fighting_area_action_received(receiver: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
+	_log_action_received(receiver, source, action_type, action_id, value, is_critical)
 
 
 func _on_fighting_area_action_done(source: Entity, target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
 	_log_action_done(source, target, action_type, action_id, value, is_critical)
+
+
+func _on_fighting_area_projectile_target_hit(target: Entity, gpos: Vector3, projectile_uid: int) -> void:
+	_log_projectile_target_hit(target, gpos, projectile_uid)

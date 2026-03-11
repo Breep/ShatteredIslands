@@ -137,7 +137,7 @@ func _on_minimize_button_pressed() -> void:
 		_minimize_profile()
 
 
-func _on_ui_all_families_portrait_family_selected(family_type: Family.FamilyType) -> void:
+func _on_ui_all_families_portrait_family_selected(family_type: Family.Type) -> void:
 	_ui_in_game_player_viewer.update_content(_player, family_type)
 	if _panel_minimized:
 		_maximize_profile()

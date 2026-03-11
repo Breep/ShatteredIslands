@@ -1,6 +1,8 @@
 class_name ArenaZoneManager
 extends Node
 
+static var _arena_randomization_number: int = -1
+
 # ============================== Signals ==============================
 
 # ============================== Enums ==============================
@@ -20,17 +22,20 @@ enum ZoneType {
 
 @export var _is_initialized: bool = false
 
+@export var _battle_id: int = -1
+
 # ============================== Public functions ==============================
 
 ## Initialize the arena zones from a FightingFloor
 ## team_zones: Dictionary mapping team number to Area3D zone
 ## center_zone: Area3D for the center zone (optional)
 ## full_arena_zone: Area3D for the full arena (optional)
-func init(team_zones: Dictionary[int, Area3D], center_zone: Area3D = null, full_arena_zone: Area3D = null) -> void:
+func init(team_zones: Dictionary[int, Area3D], battle_id: int, center_zone: Area3D = null, full_arena_zone: Area3D = null) -> void:
 	_team_zones = team_zones
 	_center_zone = center_zone
 	_full_arena_zone = full_arena_zone
 	_is_initialized = true
+	_battle_id = battle_id
 	
 	Verbose.debug("ArenaZoneManager initialized with " + str(_team_zones.size()) + " team zones", Verbose.Category.FIGHTING_AREA)
 
@@ -101,10 +106,12 @@ func apply_randomization(position: Vector3, radius: float) -> Vector3:
 	if radius <= 0.0:
 		return position
 	
-	var random_angle := randf() * TAU
-	var random_distance := randf() * radius
+	_arena_randomization_number += 1
+	var random_angle: float = Utils.get_randf_range(0, TAU, _battle_id, "arena_apply_randomization_" + str(_arena_randomization_number))
+	_arena_randomization_number += 1
+	var random_distance: float = Utils.get_randf_range(0, radius, _battle_id, "arena_apply_randomization_" + str(_arena_randomization_number))
 	
-	var offset := Vector3(
+	var offset: Vector3 = Vector3(
 		cos(random_angle) * random_distance,
 		0.0,  # Keep Y unchanged
 		sin(random_angle) * random_distance
@@ -115,6 +122,7 @@ func apply_randomization(position: Vector3, radius: float) -> Vector3:
 
 # ============================== Private functions ==============================
 
+#TODO Handle more shapes
 ## Get a random position within an Area3D's collision shape
 func _get_random_position_in_area(area: Area3D) -> Vector3:
 	if area == null:
@@ -142,13 +150,15 @@ func _get_random_position_in_area(area: Area3D) -> Vector3:
 
 
 ## Get a random position within a BoxShape3D
-func _get_random_position_in_box(area_position: Vector3, shape_position: Vector3, box_shape: BoxShape3D) -> Vector3:
+func _get_random_position_in_box(_area_position: Vector3, shape_position: Vector3, box_shape: BoxShape3D) -> Vector3:
 	var size := box_shape.size
 	var half_size := size / 2.0
-	
-	var random_x := randf_range(-half_size.x, half_size.x)
-	var random_y := 0.0  # Keep at ground level
-	var random_z := randf_range(-half_size.z, half_size.z)
+		
+	_arena_randomization_number += 1
+	var random_x: float = Utils.get_randf_range(-half_size.x, half_size.x, _battle_id, "arena_pos_in_box_" + str(_arena_randomization_number))
+	var random_y: float = 0.0  # Keep at ground level
+	_arena_randomization_number += 1
+	var random_z: float = Utils.get_randf_range(-half_size.z, half_size.z, _battle_id, "arena_pos_in_box_" + str(_arena_randomization_number))
 	
 	# Position relative to the collision shape, then convert to global
 	return shape_position + Vector3(random_x, random_y, random_z)

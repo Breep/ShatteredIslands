@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://2u10cctc6o6i"]
+
+[ext_resource type="BitMap" uid="uid://cgtjgnjuwmx4f" path="res://Prototyping/UI/UIFamiliesPortraits/Data/cercle_mask.png" id="1_546bu"]
+[ext_resource type="Texture2D" uid="uid://bxhthw0dff0br" path="res://Prototyping/UI/UIFamiliesPortraits/Data/cercle.png" id="1_vpo3q"]
+[ext_resource type="Texture2D" uid="uid://nlpxlcyh4ogi" path="res://Prototyping/UI/UIFamiliesPortraits/Data/cercle3.png" id="2_hbh7w"]
+[ext_resource type="Texture2D" uid="uid://c1nh8a043ro8v" path="res://Prototyping/UI/UIFamiliesPortraits/Data/cercle2.png" id="2_v7e4n"]
+[ext_resource type="Texture2D" uid="uid://dfb6pl0mdulgw" path="res://Prototyping/UI/UIFamiliesPortraits/Data/ring.png" id="2_vpo3q"]
+[ext_resource type="Texture2D" uid="uid://d3g076trv1v8r" path="res://Prototyping/UI/UIFamiliesPortraits/Data/FamilyCercles/Numero_rare_1_5_sans_rouille_small.png" id="6_albcw"]
+
+[node name="UIFamilyMain" type="TextureButton" unique_id=1856867208]
+self_modulate = Color(0.40832946, 0.40832946, 0.40832946, 1)
+custom_minimum_size = Vector2(50, 50)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+toggle_mode = true
+texture_normal = ExtResource("1_vpo3q")
+texture_pressed = ExtResource("2_hbh7w")
+texture_hover = ExtResource("2_v7e4n")
+texture_click_mask = ExtResource("1_546bu")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=2091147301]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+value = 47.0
+fill_mode = 4
+nine_patch_stretch = true
+texture_under = ExtResource("2_vpo3q")
+texture_progress = ExtResource("2_vpo3q")
+tint_under = Color(0.20871013, 0.20871016, 0.20871013, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=757025447]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = -12
+theme_override_constants/margin_top = -12
+theme_override_constants/margin_right = -12
+theme_override_constants/margin_bottom = -12
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer" unique_id=955190477]
+texture_filter = 4
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("6_albcw")
+expand_mode = 1
+metadata/_edit_lock_ = true

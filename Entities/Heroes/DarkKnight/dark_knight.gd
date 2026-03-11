@@ -127,7 +127,7 @@ func _register_corruption() -> void:
 	#stat_modifier.calc_type = StatModifier.CalcType.ADD
 	#stat_modifier.value = _corruption_charges * _corruption_ad_gain
 	#stat_modifier.tags = [StatModifier.TagType.HERO]
-	#stat_modifiers_registry.update_modifier(stat_modifier)
+	#stat_modifiers_registry.register_modifier(stat_modifier)
 
 
 func _register_mana_strike() -> void:
@@ -162,7 +162,7 @@ func _on_auto_attack_completed(_entity: Entity) -> void:
 	#stat_modifier.calc_type = StatModifier.CalcType.ADD
 	#stat_modifier.value = _super_strike_factor * _super_strike_charges # TODO -> * player_owner.lvl
 	#stat_modifier.tags = [StatModifier.TagType.HERO]
-	#stat_modifiers_registry.update_modifier(stat_modifier)
+	#stat_modifiers_registry.register_modifier(stat_modifier)
 	#if _is_next_attack_super_strike():
 		#_register_super_strike()
 		#if _mana_strike_activated:
@@ -225,7 +225,7 @@ func _on_cataclysm_activation() -> void:
 	stat_modifier.calc_type = StatModifier.CalcType.ADD
 	stat_modifier.value = _cataclysm_mana_cost
 	stat_modifier.tags = [StatModifier.TagType.HERO]
-	stat_modifiers_registry.update_modifier(stat_modifier)
+	stat_modifiers_registry.register_modifier(stat_modifier)
 
 # ============================== Skill Manager Callbacks ==============================
 

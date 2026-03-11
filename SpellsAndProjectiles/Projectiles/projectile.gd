@@ -1,8 +1,12 @@
 class_name Projectile
 extends Area3D
 
-## Base projectile class that handles collision and callbacks.
-## Movement is delegated to a ProjectileTrajectory instance.
+signal target_hit(entity: Entity, gpos: Vector3)
+
+# === CONSTANTS ===
+const TICKS_PER_SECOND: int = 60
+## Squared hit radius in world units (~0.63 unit radius). Adjust per projectile if needed.
+const HIT_DISTANCE_SQ: float = 0.4
 
 # === ENUMS ===
 enum Type {
@@ -18,13 +22,18 @@ enum Type {
 @export var trajectory: ProjectileTrajectory
 @export var lifetime_max: float = 6.0
 
+var uid: int = -1
+
 # === RUNTIME ===
 var _source: Entity
 var _target: Entity
 var _stats: ProjectileStats
 
 var _hit_history: Array[Entity] = []
-var _life: float = 0.0
+var _life_ticks: int = 0
+var _lifetime_max_ticks: int = 0
+var _logic_pos: Vector3
+
 
 func add_bounce(additional_bounces: float) -> void:
 	_stats.bounces_remaining += additional_bounces
@@ -52,6 +61,9 @@ func _ready() -> void:
 	if _target and _target.died and not _target.died.is_connected(_on_target_died):
 		_target.died.connect(_on_target_died)
 	
+	# Convert lifetime to ticks
+	_lifetime_max_ticks = int(lifetime_max * TICKS_PER_SECOND)
+	
 	# Execute spawn callbacks
 	for cb: Callable in _stats.on_spawn_callbacks:
 		if cb.is_valid():
@@ -66,33 +78,46 @@ func _ready() -> void:
 		queue_free()
 		return
 	
-	if not body_entered.is_connected(_on_body_entered):
-		body_entered.connect(_on_body_entered)
+	_logic_pos = global_position
 
 
-func _process(delta: float) -> void:
-	_life += delta
-	
-	# Safety timeout
-	if _life > lifetime_max:
+func process_tick() -> void:
+	_life_ticks += 1
+	if _life_ticks > _lifetime_max_ticks:
 		queue_free()
 		return
 	
-	# Delegate movement to trajectory
+	var old_pos = _logic_pos
 	if trajectory:
-		trajectory.update(delta)
+		_logic_pos = trajectory.update(_logic_pos, 1.0 / TICKS_PER_SECOND)
+		global_position = _logic_pos.snapped(Vector3(0.01, 0.01, 0.01))
+	
+	_check_hit(old_pos, _logic_pos)
 
 
-func _on_body_entered(body: Node3D) -> void:
-	Verbose.trace("Body entered: " + body.name, Verbose.Category.PROJECTILE)
-	if not body is Entity: return
+func _check_hit(p_from: Vector3, p_to: Vector3) -> void:
+	if not is_instance_valid(_target): return
+	if _target in _hit_history: return
+	var target_pos: Vector3 = _target.get_collision_center() # T
+	var segment: Vector3 = p_to - p_from # AB
+	var segment_length_sq: float = segment.length_squared()
+	var t: float = 0.0
+	if segment_length_sq > 0:
+		t = (target_pos - p_from).dot(segment) / segment_length_sq # P = t * AB (orthogonal projection)
+		t = clamp(t, 0.0, 1.0) # Restrain to [AB]
 	
-	var hit_target: Entity = body
+	var closest_point = p_from + segment * t # P
+	var dist_sq = closest_point.distance_squared_to(target_pos)
 	
-	if hit_target in _hit_history or hit_target != _target:
-		return
-	
+	if dist_sq <= HIT_DISTANCE_SQ:
+		global_position = closest_point
+		_on_hit(_target)
+
+
+func _on_hit(hit_target: Entity) -> void:
+	Verbose.trace("Hit: " + hit_target.name, Verbose.Category.PROJECTILE)
 	_hit_history.append(hit_target)
+	target_hit.emit(hit_target, global_position)
 	
 	# Execute all hit callbacks
 	for cb: Callable in _stats.on_hit_callbacks:

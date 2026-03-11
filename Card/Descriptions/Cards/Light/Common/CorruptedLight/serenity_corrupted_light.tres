@@ -14,5 +14,8 @@ script = ExtResource("1_template")
 name = "Corrupted Light"
 picture = SubResource("PlaceholderTexture2D_e5ov8")
 families = Array[int]([5])
-rarity = 1
 player_upgrade = SubResource("Resource_upgrade")
+points = Dictionary[int, int]({
+5: 1
+})
+lvl = 5

@@ -1,6 +1,10 @@
 class_name TargetModule
 extends Module
 
+# ============================== Signal ==============================
+
+signal new_entity_detected(entity: Entity)
+
 # ============================== Enums ==============================
 enum TargettingStrategy {
 	# ------- CLOSEST -------
@@ -33,6 +37,7 @@ enum TargettingStrategy {
 	RANDOM_HERO_ENEMY, # random enemy hero, (can be null)
 	RANDOM_ALLY, # Random ally except self (can be null)
 	RANDOM_ALLY_INCLUDING_SELF, # Random ally
+	RANDOM_HERO_ALLY, # Random Hero ally
 	
 	# ------- MISC -------
 	HIGHEST_SHIELD_ENEMIES_HERO, # highest amount of shield among heroes enemies (can be null)
@@ -56,18 +61,24 @@ enum TargettingFromStrategy {
 	FARTHEST_ENEMY, # Farthest enemy (can be null)
 	FARTHEST_ALLY, # Farthest ally except self (can be null)
 }
+
 # ============================== Private variables ==============================
 
 var _entities: Array[Entity] # All entities on the fighting scene
 var _enemies: Array[Entity] # All enemies of the owned entity
 var _allies: Array[Entity] # All allies of the owned entity
+
 var _heroes: Array[Entity] # All heroes
 var _enemy_heroes: Array[Entity] # All heroes enemies
 var _ally_heroes: Array[Entity] # All heroes allies
 
+var _entities_dictionary: Dictionary[Entity.EntityType, Array]
+var _allies_dictionary: Dictionary[Entity.EntityType, Array]
+var _enemies_dictionary: Dictionary[Entity.EntityType, Array]
+
 # ============================== Local nodes ==============================
 
-@onready var _scanning_area: Area3D = %ScanningArea
+var _spawn_manager: SpawnManager
 
 # ============================== Node base functions ==============================
 
@@ -76,20 +87,25 @@ func _ready() -> void:
 		printerr("TargetModule: TargetModule need a ref to its owner")
 		return
 
+
+func connect_to_spawn_manager(spawn_manager: SpawnManager) -> void:
+	_spawn_manager = spawn_manager
+
 # ============================== Public functions ==============================
 
 func start() -> void:
 	Verbose.debug("TargetModule: Starting", Verbose.Category.TARGET_MODULE)
-	_clear()
-	_scanning_area.monitoring = true
-	var bodies: Array[Node3D] = _scanning_area.get_overlapping_bodies()
-	for body in bodies:
-		_add_body_as_entity(body)
+	_spawn_manager.entity_spawned.connect(_on_spawn_manager_entity_spawned)
+	var entities: Array[Entity] = _spawn_manager.get_entities()
+	for entity in entities:
+		_add_entity(entity)
 
 
 func stop() -> void:
 	Verbose.debug("TargetModule: Stopping", Verbose.Category.TARGET_MODULE)
-	_scanning_area.monitoring = false
+	if _spawn_manager.entity_spawned.is_connected(_on_spawn_manager_entity_spawned):
+		_spawn_manager.entity_spawned.disconnect(_on_spawn_manager_entity_spawned)
+	_spawn_manager.entity_spawned.connect(_on_spawn_manager_entity_spawned)
 
 
 # Get target of the owned entity from a given strategy
@@ -114,6 +130,7 @@ func get_target(targetting_strategy: TargettingStrategy) -> Entity:
 		TargettingStrategy.RANDOM_HERO_ENEMY: return _get_random(_enemy_heroes, null, true)
 		TargettingStrategy.RANDOM_ALLY: return _get_random(_allies, _owner)
 		TargettingStrategy.RANDOM_ALLY_INCLUDING_SELF: return _get_random(_allies, null)
+		TargettingStrategy.RANDOM_HERO_ALLY: return _get_random(_ally_heroes, null)
 		
 		# --- HP ---
 		TargettingStrategy.LOWEST_HP_ALLY_INCLUDING_SELF: return _get_lowest_hp(_allies, null)
@@ -250,20 +267,23 @@ func _get_alive_entities(entities: Array[Entity]) -> Array[Entity]:
 	return alive_entities
 
 
-func _add_body_as_entity(body: Node3D) -> void:
-	if not body is Entity:
-		Verbose.error("A body detected by a TargetModule has an Entity mask but is not an entity: " + str(body.get_path()), Verbose.Category.TARGET_MODULE)
+func _add_entity(entity: Entity) -> void:
+	if not is_instance_valid(entity):
+		Verbose.error("Invalid add entity", Verbose.Category.TARGET_MODULE)
 		return
 	
-	var entity: Entity = body
-	Verbose.trace("Adding entity: " + entity.name, Verbose.Category.TARGET_MODULE)
+	_entities.append(entity)
 	if entity.team == _owner.team: _allies.append(entity)
 	else: _enemies.append(entity)
-	_entities.append(entity)
+	
+	new_entity_detected.emit(entity)
+	
 	if entity is Hero:
 		if entity.team == _owner.team: _ally_heroes.append(entity)
 		else: _enemy_heroes.append(entity)
 		_heroes.append(entity)
+	
+	_sort_all_lists()
 
 
 func _clear() -> void:
@@ -272,7 +292,17 @@ func _clear() -> void:
 	_entities.clear()
 	_heroes.clear()
 	_enemy_heroes.clear()
-	_heroes.clear()
+	_ally_heroes.clear()
+
+
+func _sort_all_lists() -> void:
+	var sort_by_uid := func(a: Entity, b: Entity) -> bool: return a.uid < b.uid
+	_entities.sort_custom(sort_by_uid)
+	_enemies.sort_custom(sort_by_uid)
+	_allies.sort_custom(sort_by_uid)
+	_heroes.sort_custom(sort_by_uid)
+	_enemy_heroes.sort_custom(sort_by_uid)
+	_ally_heroes.sort_custom(sort_by_uid)
 
 # ============================== Target strategy functions ==============================
 
@@ -377,12 +407,14 @@ func _get_highest_hp_percent(entities: Array[Entity], excluded_entity: Entity, p
 	return target
 
 
+static var _random_target_number: int = -1
 func _get_random(entities: Array[Entity], excluded_entity: Entity, prioritize_taunted: bool = false) -> Entity:
 	var candidates := _filter_candidates(entities, excluded_entity, prioritize_taunted)
 	if candidates.is_empty():
 		return null
 	
-	return candidates.pick_random()
+	_random_target_number += 1
+	return Utils.pick_random(candidates, _owner.battle_id, "random_target_" + str(_random_target_number))
 
 
 func _get_array_without_untargetable_targets(entities: Array[Entity]) -> Array[Entity]:
@@ -445,16 +477,19 @@ func _get_farthest_from(from_pos: Vector3, entities: Array[Entity], exclude_list
 
 
 # ============================== Callback ==============================
-func _on_scanning_area_body_entered(body: Node3D) -> void:
-	_add_body_as_entity(body)
-
-
-func _on_scanning_area_body_exited(body: Node3D) -> void:
+func _on_scanning_area_body_exited(body: Node3D) -> void: # TODO à voir comment on gère les morts / queue_free()
 	if not body is Entity:
 		printerr("TargetModule: A body detected by a TargetModule has a Entity mask but is not an entity: [", body.get_path(), "]")
 		return
 	
 	var entity: Entity = body
-	if entity.team == _owner.team and _allies.has(entity): _allies.erase(entity)
-	elif entity.team == _owner.team and _enemies.has(entity): _enemies.append(entity)
-	if _entities.has(entity): _enemies.erase(entity)
+	if _allies.has(entity): _allies.erase(entity)
+	if _enemies.has(entity): _enemies.erase(entity)
+	if _entities.has(entity): _entities.erase(entity)
+	if _heroes.has(entity): _heroes.erase(entity)
+	if _enemy_heroes.has(entity): _enemy_heroes.erase(entity)
+	if _ally_heroes.has(entity): _ally_heroes.erase(entity)
+
+
+func _on_spawn_manager_entity_spawned(entity: Entity) -> void:
+	_add_entity(entity)

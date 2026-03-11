@@ -1,10 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://bccnumgm5v1f8"]
+[gd_scene format=3 uid="uid://bccnumgm5v1f8"]
 
 [ext_resource type="Script" uid="uid://ccea0ipats5yf" path="res://UI/InGame/FightingArea/EntityStats/HealthBar/ui_health_bar.gd" id="1_k8w14"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_lbpif"]
 [ext_resource type="Shader" uid="uid://bngl8v6o10lds" path="res://UI/Tool/Misc/2d_flexible_progress_bar.gdshader" id="3_kcbmh"]
 [ext_resource type="Script" uid="uid://chcmgrh1l6vyn" path="res://UI/Tool/Misc/flexible_progress_bar.gd" id="3_lbpif"]
-[ext_resource type="Script" uid="uid://bttgnk3bb2a8i" path="res://addons/font_auto_size_labels/auto_size_label.gd" id="5_kcbmh"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_kcbmh"]
 viewport_path = NodePath("SubViewport")
@@ -2036,14 +2035,14 @@ shader_parameter/scale = 0.0
 shader_parameter/x_offset = 0.0
 shader_parameter/slant_clip_margin = 0.0
 
-[node name="HealthBar" type="Control"]
+[node name="HealthBar" type="Control" unique_id=1180558550]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1600.0
 offset_bottom = 200.0
 script = ExtResource("1_k8w14")
 
-[node name="SubHealthBar" type="Control" parent="."]
+[node name="SubHealthBar" type="Control" parent="." unique_id=661184992]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2051,7 +2050,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ProgressBarViewportTexture" type="TextureRect" parent="SubHealthBar"]
+[node name="ProgressBarViewportTexture" type="TextureRect" parent="SubHealthBar" unique_id=586469560]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -2062,7 +2061,7 @@ grow_vertical = 2
 texture = SubResource("ViewportTexture_kcbmh")
 expand_mode = 1
 
-[node name="Segments" type="ColorRect" parent="SubHealthBar"]
+[node name="Segments" type="ColorRect" parent="SubHealthBar" unique_id=1353382021]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_io7js")
 layout_mode = 1
@@ -2074,7 +2073,7 @@ grow_vertical = 2
 size_flags_vertical = 3
 script = ExtResource("3_lbpif")
 
-[node name="LabelsHBox" type="HBoxContainer" parent="SubHealthBar"]
+[node name="LabelsHBox" type="HBoxContainer" parent="SubHealthBar" unique_id=613286506]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -2085,12 +2084,12 @@ grow_vertical = 2
 theme = ExtResource("1_lbpif")
 alignment = 1
 
-[node name="DebufControl" type="Control" parent="SubHealthBar/LabelsHBox"]
+[node name="DebufControl" type="Control" parent="SubHealthBar/LabelsHBox" unique_id=316901500]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="DebufHBox" type="HBoxContainer" parent="SubHealthBar/LabelsHBox/DebufControl"]
+[node name="DebufHBox" type="HBoxContainer" parent="SubHealthBar/LabelsHBox/DebufControl" unique_id=1681400374]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -2100,7 +2099,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
 
-[node name="PoisonLabel" type="Label" parent="SubHealthBar/LabelsHBox/DebufControl/DebufHBox"]
+[node name="PoisonLabel" type="Label" parent="SubHealthBar/LabelsHBox/DebufControl/DebufHBox" unique_id=982271065]
 unique_name_in_owner = true
 modulate = Color(0.26909426, 0.4003629, 0.15316594, 1)
 custom_minimum_size = Vector2(1, 0)
@@ -2114,12 +2113,8 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 clip_text = true
-script = ExtResource("5_kcbmh")
-_max_size = 100
-_current_font_size = 100
-_editor_defaults_set = true
 
-[node name="IgniteLabel" type="Label" parent="SubHealthBar/LabelsHBox/DebufControl/DebufHBox"]
+[node name="IgniteLabel" type="Label" parent="SubHealthBar/LabelsHBox/DebufControl/DebufHBox" unique_id=1110555936]
 unique_name_in_owner = true
 modulate = Color(0.7137228, 0.12336647, 0.18423858, 1)
 custom_minimum_size = Vector2(1, 0)
@@ -2133,17 +2128,13 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 clip_text = true
-script = ExtResource("5_kcbmh")
-_max_size = 100
-_current_font_size = 100
-_editor_defaults_set = true
 
-[node name="HealthControl" type="Control" parent="SubHealthBar/LabelsHBox"]
+[node name="HealthControl" type="Control" parent="SubHealthBar/LabelsHBox" unique_id=489224383]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 
-[node name="HealthLabel" type="Label" parent="SubHealthBar/LabelsHBox/HealthControl"]
+[node name="HealthLabel" type="Label" parent="SubHealthBar/LabelsHBox/HealthControl" unique_id=1577162742]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -2158,17 +2149,13 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 clip_text = true
-script = ExtResource("5_kcbmh")
-_max_size = 100
-_current_font_size = 100
-_editor_defaults_set = true
 
-[node name="BufControl" type="Control" parent="SubHealthBar/LabelsHBox"]
+[node name="BufControl" type="Control" parent="SubHealthBar/LabelsHBox" unique_id=1787301421]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="BufHBox" type="HBoxContainer" parent="SubHealthBar/LabelsHBox/BufControl"]
+[node name="BufHBox" type="HBoxContainer" parent="SubHealthBar/LabelsHBox/BufControl" unique_id=210859231]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -2177,7 +2164,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ArmorLabel" type="Label" parent="SubHealthBar/LabelsHBox/BufControl/BufHBox"]
+[node name="ArmorLabel" type="Label" parent="SubHealthBar/LabelsHBox/BufControl/BufHBox" unique_id=1488644999]
 unique_name_in_owner = true
 modulate = Color(0.59979576, 0.2856071, 0.16820335, 1)
 custom_minimum_size = Vector2(1, 0)
@@ -2191,12 +2178,8 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 clip_text = true
-script = ExtResource("5_kcbmh")
-_max_size = 100
-_current_font_size = 100
-_editor_defaults_set = true
 
-[node name="RegenLabel" type="Label" parent="SubHealthBar/LabelsHBox/BufControl/BufHBox"]
+[node name="RegenLabel" type="Label" parent="SubHealthBar/LabelsHBox/BufControl/BufHBox" unique_id=201968089]
 unique_name_in_owner = true
 modulate = Color(0.34134758, 0.8259478, 0.38493958, 1)
 custom_minimum_size = Vector2(1, 0)
@@ -2210,34 +2193,30 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 clip_text = true
-script = ExtResource("5_kcbmh")
-_max_size = 100
-_current_font_size = 100
-_editor_defaults_set = true
 
-[node name="ArmorBarEndPositioner" type="Control" parent="SubHealthBar"]
+[node name="ArmorBarEndPositioner" type="Control" parent="SubHealthBar" unique_id=627937140]
 unique_name_in_owner = true
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="HealthBarEndPositioner" type="Control" parent="SubHealthBar"]
+[node name="HealthBarEndPositioner" type="Control" parent="SubHealthBar" unique_id=1697902923]
 unique_name_in_owner = true
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="SubViewport" type="SubViewport" parent="."]
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1407062704]
 size = Vector2i(1600, 200)
 
-[node name="Control" type="Control" parent="SubViewport"]
+[node name="Control" type="Control" parent="SubViewport" unique_id=1338930263]
 custom_minimum_size = Vector2(1600, 200)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="HealthBar" type="ColorRect" parent="SubViewport/Control"]
+[node name="HealthBar" type="ColorRect" parent="SubViewport/Control" unique_id=1061274283]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_ej5du")
 layout_mode = 1
@@ -2250,7 +2229,7 @@ script = ExtResource("3_lbpif")
 effect_type = "Drain Solid"
 metadata/_custom_type_script = "uid://chcmgrh1l6vyn"
 
-[node name="PoisonBar" type="ColorRect" parent="SubViewport/Control"]
+[node name="PoisonBar" type="ColorRect" parent="SubViewport/Control" unique_id=898137133]
 unique_name_in_owner = true
 visible = false
 material = SubResource("ShaderMaterial_l8o62")
@@ -2261,7 +2240,7 @@ offset_right = 1120.0
 offset_bottom = 200.0
 color = Color(0.27058825, 0.4, 0.15294118, 1)
 
-[node name="ArmorBar" type="ColorRect" parent="SubViewport/Control"]
+[node name="ArmorBar" type="ColorRect" parent="SubViewport/Control" unique_id=248880309]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_0jmf3")
 layout_mode = 1
@@ -2274,7 +2253,7 @@ script = ExtResource("3_lbpif")
 effect_type = "Drain Solid"
 metadata/_custom_type_script = "uid://chcmgrh1l6vyn"
 
-[node name="IgniteBar" type="ColorRect" parent="SubViewport/Control"]
+[node name="IgniteBar" type="ColorRect" parent="SubViewport/Control" unique_id=1114075491]
 unique_name_in_owner = true
 visible = false
 layout_mode = 0

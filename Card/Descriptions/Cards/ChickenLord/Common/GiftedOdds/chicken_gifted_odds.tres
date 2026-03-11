@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://b8kmfncays4gg"]
+
+[ext_resource type="Script" uid="uid://bk5tnx12xk1ft" path="res://Card/Descriptions/Cards/ChickenLord/Common/GiftedOdds/chicken_gifted_odds.gd" id="1_sxyao"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_woisb"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_woisb"]
+
+[sub_resource type="Resource" id="Resource_fdrpe"]
+script = ExtResource("1_sxyao")
+_gifted_chances_increase = Array[float]([2.0, 4.0, 6.0, 8.0, 10.0])
+metadata/_custom_type_script = "uid://bk5tnx12xk1ft"
+
+[resource]
+script = ExtResource("1_woisb")
+name = "Gifted Odds"
+picture = SubResource("PlaceholderTexture2D_woisb")
+families = Array[int]([8])
+player_upgrade = SubResource("Resource_fdrpe")
+points = Dictionary[int, int]({
+8: 1
+})
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

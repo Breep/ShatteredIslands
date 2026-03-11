@@ -31,6 +31,11 @@ var _families: Array[Family]
 # [Server only] Dictionary of all cards distributed in all player shop
 var _cards_in_player_shop: Dictionary[int, Array] # { player_id, Array[Card] }
 
+# ============================== NOde base functions ==============================
+
+func _init() -> void:
+	Verbose.debug("CARD SHOP MANAGER INIT", Verbose.Category.DEFAULT)
+
 # ============================== Public INIT/CLEAR function ==============================
 
 func clear() -> void:

@@ -1919,6 +1919,7 @@ _data = {
 [node name="SnakeVisual" type="Node3D" unique_id=114647546]
 
 [node name="Skeleton3D" type="Skeleton3D" parent="." unique_id=1323285786]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 bones/0/name = "SnakeRig"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, -1.1920929e-07, 0.99999994, 0, -0.99999994, -1.1920929e-07, 0, 0, 0)

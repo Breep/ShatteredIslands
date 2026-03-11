@@ -16,19 +16,19 @@ func _on_init() -> void:
 	_velocity = (target_pos - _start_pos).normalized() * speed
 
 
-func update(delta: float) -> void:
-	if not _target or not is_instance_valid(_target):
-		return
+func update(logic_pos: Vector3, delta: float) -> Vector3:
+	if not is_instance_valid(_target):
+		return Vector3.ZERO
 	
 	# Determine desired direction
 	var desired_dir: Vector3
 	if retarget_each_frame:
 		var target_pos := _target.get_collision_center()
-		desired_dir = (target_pos - _projectile.global_position).normalized()
+		desired_dir = (target_pos - logic_pos).normalized()
 	else:
 		# Home toward initial snapshot position
 		var target_snapshot := _target.get_collision_center()
-		desired_dir = (target_snapshot - _projectile.global_position).normalized()
+		desired_dir = (target_snapshot - logic_pos).normalized()
 	
 	# Current direction
 	var current_dir: Vector3 = _velocity.normalized()
@@ -43,7 +43,8 @@ func update(delta: float) -> void:
 	
 	_velocity = new_dir * speed
 	_projectile.global_position += _velocity * delta
-	_projectile.look_at(_projectile.global_position + _velocity)
+	_projectile.look_at(logic_pos + _velocity)
+	return logic_pos
 
 
 func _on_retarget() -> void:

@@ -5,15 +5,15 @@ var _player_owner: Player
 var _owner_name: String
 
 @export var _active_cards: Array[Card]
-var _cards_dictionary: Dictionary[Family.FamilyType, Array] # FamilyType:Array[Cards]
+var _cards_dictionary: Dictionary[Family.Type, Array] # Type:Array[Cards]
 
-var _family_levels: Dictionary[Family.FamilyType, int]
-var _family_points: Dictionary[Family.FamilyType, int]
+var _family_levels: Dictionary[Family.Type, int]
+var _family_points: Dictionary[Family.Type, int]
 
-var _max_level_cards: Array[Card]
+#var _max_level_cards: Array[Card] # TODO Fill this
 
 signal has_changed()
-signal family_leveled_up(family_type: Family.FamilyType, new_level: int)
+signal family_leveled_up(family_type: Family.Type, new_level: int)
 signal card_maxed(card: Card)
 
 # ============================== Node base functions ==============================
@@ -29,7 +29,7 @@ func get_active_deck() -> Array[Card]:
 	return _active_cards
 
 
-func get_cards_by_type(family_type: Family.FamilyType) -> Array[Card]:
+func get_cards_by_type(family_type: Family.Type) -> Array[Card]:
 	if _cards_dictionary.has(family_type):
 		var cards_array: Array[Card] # Because nested type is not supported yet, I need to do this shit
 		for card: Card in _cards_dictionary[family_type]:
@@ -53,15 +53,15 @@ func get_card_lvl(card_to_get_lvl: Card) -> int:
 			return card.lvl
 	return 0
 
-func get_family_points(family_type: Family.FamilyType) -> int: 
+func get_family_points(family_type: Family.Type) -> int: 
 	return _family_points.get(family_type, 0)
 
-func get_family_level(family_type: Family.FamilyType) -> int:
+func get_family_level(family_type: Family.Type) -> int:
 	return _family_levels.get(family_type, 0)
 
 func get_unique_card_count(family_type_or_list = null) -> int:
 	# If null or UNDEF, return total unique cards (active deck size)
-	if family_type_or_list == null or family_type_or_list == Family.FamilyType.UNDEF:
+	if family_type_or_list == null or family_type_or_list == Family.Type.UNDEF:
 		return _active_cards.size()
 	
 	# If Array, sum up counts for each family
@@ -109,7 +109,7 @@ func _add_or_improve_card_to_active_cards(card_to_add: Card) -> void:
 
 
 func _update_family_points_and_level(card: Card) -> void:
-	for family_type: Family.FamilyType in card.points.keys():
+	for family_type: Family.Type in card.points.keys():
 		if _family_points.has(family_type):
 			_family_points[family_type] += card.points[family_type]
 		else:

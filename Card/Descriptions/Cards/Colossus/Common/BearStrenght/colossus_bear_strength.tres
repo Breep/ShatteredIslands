@@ -16,4 +16,8 @@ name = "Bear Strength"
 picture = ExtResource("1_cisb5")
 families = Array[int]([6, 1])
 player_upgrade = SubResource("Resource_lura4")
+points = Dictionary[int, int]({
+1: 1,
+6: 1
+})
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

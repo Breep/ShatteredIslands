@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ca8mcplp2va4s"]
+[gd_scene format=3 uid="uid://ca8mcplp2va4s"]
 
 [ext_resource type="Script" uid="uid://cvy50on4evfts" path="res://FloatingIsland/BuyingIsland/BuyingArea/buying_area.gd" id="1_ed4aq"]
 [ext_resource type="PackedScene" uid="uid://ca3wssxlwj4qk" path="res://FloatingIsland/_Maps/tavern_animated.tscn" id="4_4b3p2"]
@@ -19,70 +19,73 @@ size = Vector3(4.67975, 3.34094, 5.56714)
 [sub_resource type="BoxShape3D" id="BoxShape3D_q21af"]
 size = Vector3(4.51068, 4.10291, 6.01385)
 
-[node name="BuyingArea" type="Node3D"]
+[node name="BuyingArea" type="Node3D" unique_id=1844697375]
 script = ExtResource("1_ed4aq")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1510339842]
 replication_config = SubResource("SceneReplicationConfig_jhmrm")
 
-[node name="TavernCenter" parent="." instance=ExtResource("5_4lvlh")]
+[node name="TavernCenter" parent="." unique_id=907981610 instance=ExtResource("5_4lvlh")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0670199, 0.55223, 0.0844293)
 
-[node name="Tavern_Animated" parent="." node_paths=PackedStringArray("_tarven_center") instance=ExtResource("4_4b3p2")]
+[node name="Tavern_Animated" parent="." unique_id=254549637 node_paths=PackedStringArray("_tarven_center") instance=ExtResource("4_4b3p2")]
 unique_name_in_owner = true
 script = ExtResource("4_gi2cy")
 _tarven_center = NodePath("../TavernCenter")
 
-[node name="Furnitures" type="Node3D" parent="."]
+[node name="DirectionalLight3D" parent="Tavern_Animated/tavern/Light" index="0"]
+visible = true
 
-[node name="CardShop" type="StaticBody3D" parent="Furnitures"]
+[node name="Furnitures" type="Node3D" parent="." unique_id=798486155]
+
+[node name="CardShop" type="StaticBody3D" parent="Furnitures" unique_id=1529584426]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.4887, 0, 0.444181)
 collision_layer = 64
 script = ExtResource("6_q21af")
 furniture_type = 2
 
-[node name="CollisionInstance3D" type="CollisionShape3D" parent="Furnitures/CardShop"]
+[node name="CollisionInstance3D" type="CollisionShape3D" parent="Furnitures/CardShop" unique_id=1397341866]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19556, 1.00049, -0.242096)
 shape = SubResource("BoxShape3D_rgybp")
 
-[node name="ClickableModule" parent="Furnitures/CardShop" node_paths=PackedStringArray("_nodes_where_to_find_meshs", "_owner") instance=ExtResource("5_4b3p2")]
+[node name="ClickableModule" parent="Furnitures/CardShop" unique_id=1652365469 node_paths=PackedStringArray("_nodes_where_to_find_meshs", "_owner") instance=ExtResource("5_4b3p2")]
 _nodes_where_to_find_meshs = [NodePath("../../../Tavern_Animated/tavern/Bar main")]
 _owner = NodePath("..")
 _scale_div_grow = 0.01
 
-[node name="Oracle" type="StaticBody3D" parent="Furnitures"]
+[node name="Oracle" type="StaticBody3D" parent="Furnitures" unique_id=101250270]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.60518, 4.76837e-07, -9.1894)
 collision_layer = 64
 script = ExtResource("6_q21af")
 furniture_type = 3
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Furnitures/Oracle"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Furnitures/Oracle" unique_id=632301291]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0448303, 1.17047, 0.244019)
 shape = SubResource("BoxShape3D_4b3p2")
 
-[node name="ClickableModule" parent="Furnitures/Oracle" node_paths=PackedStringArray("_nodes_where_to_find_meshs", "_owner") instance=ExtResource("5_4b3p2")]
+[node name="ClickableModule" parent="Furnitures/Oracle" unique_id=1036491790 node_paths=PackedStringArray("_nodes_where_to_find_meshs", "_owner") instance=ExtResource("5_4b3p2")]
 _nodes_where_to_find_meshs = [NodePath("../../../Tavern_Animated/tavern/Voyante")]
 _owner = NodePath("..")
 _scale_div_grow = 0.01
 
-[node name="StatisticsBoard" type="StaticBody3D" parent="Furnitures"]
+[node name="StatisticsBoard" type="StaticBody3D" parent="Furnitures" unique_id=707368418]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.96004, 0, 9.14184)
 collision_layer = 64
 script = ExtResource("6_q21af")
 furniture_type = 1
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Furnitures/StatisticsBoard"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Furnitures/StatisticsBoard" unique_id=731857698]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.321869, 1.55145, -0.151093)
 shape = SubResource("BoxShape3D_q21af")
 
-[node name="ClickableModule" parent="Furnitures/StatisticsBoard" node_paths=PackedStringArray("_nodes_where_to_find_meshs", "_owner") instance=ExtResource("5_4b3p2")]
+[node name="ClickableModule" parent="Furnitures/StatisticsBoard" unique_id=248886124 node_paths=PackedStringArray("_nodes_where_to_find_meshs", "_owner") instance=ExtResource("5_4b3p2")]
 _nodes_where_to_find_meshs = [NodePath("../../../Tavern_Animated/tavern/XP")]
 _owner = NodePath("..")
 _scale_div_grow = 0.01
 
-[node name="VisualFeedbacks" type="Node3D" parent="."]
+[node name="VisualFeedbacks" type="Node3D" parent="." unique_id=2084290634]
 
-[node name="ShopDeck3DVisual" parent="VisualFeedbacks" instance=ExtResource("6_gi2cy")]
+[node name="ShopDeck3DVisual" parent="VisualFeedbacks" unique_id=1722908050 instance=ExtResource("6_gi2cy")]
 transform = Transform3D(0.000895275, 0, -0.569999, 0, 0.57, 0, 0.569999, 0, 0.000895275, -7.94129, 1.11738, 0.147098)
 
 [editable path="Tavern_Animated"]

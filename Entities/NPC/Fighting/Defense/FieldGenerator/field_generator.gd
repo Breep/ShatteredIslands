@@ -45,7 +45,7 @@ const GENERATOR_BEAM_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/D
 var _current_targets: Array[Entity] = []
 var _beams: Dictionary = {} # { entity_id (int) : FieldGeneratorBeam }
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	for target in _current_targets:
 		if target == null or not is_instance_valid(target) or target.is_dead:
 			continue
@@ -53,9 +53,9 @@ func _process(delta: float) -> void:
 		if not _beams.has(target.id):
 			var beam = GENERATOR_BEAM_SCENE.instantiate()
 			add_child(beam)
-			_beams[target.id] = beam
+			_beams[target.uid] = beam
 			
-		var beam_instance = _beams[target.id]
+		var beam_instance = _beams[target.uid]
 		# Start from slightly above center to target center (or slightly above)
 		var start = global_position + Vector3(0, 1.0, 0)
 		var end = target.global_position + Vector3(0, 0.5, 0) # Approx center/chest
@@ -65,17 +65,17 @@ func _process(delta: float) -> void:
 	var targets_ids = []
 	for t in _current_targets:
 		if t and is_instance_valid(t):
-			targets_ids.append(t.id)
+			targets_ids.append(t.uid)
 			
 	var ids_to_remove = []
-	for id in _beams:
-		if not id in targets_ids:
-			ids_to_remove.append(id)
+	for target_id in _beams:
+		if not target_id in targets_ids:
+			ids_to_remove.append(uid)
 			
-	for id in ids_to_remove:
-		if is_instance_valid(_beams[id]):
-			_beams[id].queue_free()
-		_beams.erase(id)
+	for target_id in ids_to_remove:
+		if is_instance_valid(_beams[target_id]):
+			_beams[target_id].queue_free()
+		_beams.erase(target_id)
 
 
 func _on_shield_timer_timeout() -> void:
@@ -96,6 +96,6 @@ func _on_shield_timer_timeout() -> void:
 	var count = 0
 	for ally in valid_allies:
 		if count >= _target_count: break
-		inflict_condition_stacks(ally, _shield_amount, Utils.StackType.SHIELD, "Field Generator")
+		inflict_condition_stacks(ally, _shield_amount, Stack.Type.SHIELD, "Field Generator")
 		_current_targets.append(ally)
 		count += 1

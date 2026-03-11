@@ -16,5 +16,9 @@ name = "Titan's Protection"
 picture = ExtResource("1_mk17c")
 families = Array[int]([6, 5])
 player_upgrade = SubResource("Resource_b3qsj")
+points = Dictionary[int, int]({
+5: 1,
+6: 1
+})
 lvl = 5
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

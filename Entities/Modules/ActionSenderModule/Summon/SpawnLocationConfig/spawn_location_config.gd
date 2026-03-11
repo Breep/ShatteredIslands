@@ -97,10 +97,10 @@ static func create_arena_center(randomization: float = 0.0) -> SpawnLocationConf
 
 ## Create a config for team zone spawning
 ## team: Team number, or -1 to use the summoner's team
-static func create_team_zone(team: int = -1, randomization: float = 0.0) -> SpawnLocationConfig:
+static func create_team_zone(p_team: int = -1, randomization: float = 0.0) -> SpawnLocationConfig:
 	var config := SpawnLocationConfig.new()
 	config.location_type = LocationType.TEAM_ZONE
-	config.team = team
+	config.team = p_team
 	config.randomization_radius = randomization
 	return config
 
@@ -131,12 +131,13 @@ static func create_random_arena(randomization: float = 0.0) -> SpawnLocationConf
 	config.randomization_radius = randomization
 	return config
 
+
 func _apply_randomization(position: Vector3, radius: float) -> Vector3:
 	if radius <= 0.0:
 		return position
 	
-	var random_angle := randf() * TAU
-	var random_distance := randf() * radius
+	var random_angle: float = Utils.get_randf_range(0, TAU, -1, "spawn_location_apply_randomization_1")
+	var random_distance: float = Utils.get_randf_range(0, radius, -1, "spawn_location_apply_randomization_2")
 	
 	var offset := Vector3(
 		cos(random_angle) * random_distance,

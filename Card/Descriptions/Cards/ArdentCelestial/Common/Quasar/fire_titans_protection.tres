@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://bcxp6eg6bwam0"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_1nbnc"]
+[ext_resource type="Texture2D" uid="uid://5nrlnrpmgseo" path="res://Card/Descriptions/Cards/ArdentCelestial/Common/Quasar/fire_titans_protection.jpg" id="1_3qpta"]
+[ext_resource type="Script" uid="uid://dywv3qds1kclj" path="res://Card/Descriptions/Cards/ArdentCelestial/Common/Quasar/fire_titans_protection.gd" id="2_hce65"]
+
+[sub_resource type="Resource" id="Resource_wmyop"]
+script = ExtResource("2_hce65")
+_hp_amount = Array[float]([10.0, 20.0, 30.0, 40.0, 50.0])
+metadata/_custom_type_script = "uid://dywv3qds1kclj"
+
+[resource]
+script = ExtResource("1_1nbnc")
+name = "Quasar"
+picture = ExtResource("1_3qpta")
+families = Array[int]([3, 6])
+player_upgrade = SubResource("Resource_wmyop")
+points = Dictionary[int, int]({
+3: 1,
+6: 1
+})
+lvl = 5
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

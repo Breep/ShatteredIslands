@@ -18,8 +18,8 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if not cb_vars.has(ProjectileStats.VarType.TARGET): return
 		var target: Entity = cb_vars[ProjectileStats.VarType.TARGET]
 		if target == null or not is_instance_valid(target): return
-		var damage := 1 + float(target.conditions.poison_stacks) * multiplier
-		ctx.hero.direct_damage(target, damage, Utils.DamageType.PHYSICAL, &"Venomous Darts")
+		var damage := 5 + float(target.conditions.poison_stacks) * multiplier
+		ctx.hero.direct_damage(target, damage, Utils.ActionType.DAMAGE_PHYSICAL, &"Venomous Darts")
 	
 	ctx.periodic_timers.register(&"Venomous Darts", period, func() -> void:
 		for i in darts_number:

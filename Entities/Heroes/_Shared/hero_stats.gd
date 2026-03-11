@@ -10,13 +10,13 @@ extends Resource
 @export var attack_range: float = -1.0
 @export var defence: float = 0
 @export var block: float = 0
+@export var thorn: float = 0
 @export var auto_attack_type: EntityStats.AutoAttackType = EntityStats.AutoAttackType.RANGED
 @export var critical_chances: Dictionary[Utils.ActionType, float] = {
 	Utils.ActionType.DAMAGE_PHYSICAL: 10,
 	Utils.ActionType.DAMAGE_MAGICAL: 0,
 	Utils.ActionType.DAMAGE_POISON: 0,
 	Utils.ActionType.UTILITY_HEAL: 0,
-	Utils.ActionType.UTILITY_STUN: 0,
 	Utils.ActionType.UTILITY_CLEANSE: 0,
 	Utils.ActionType.UTILITY_DISPELL: 0,
 	Utils.ActionType.STACK_SHIELD: 0,
@@ -31,7 +31,6 @@ extends Resource
 	Utils.ActionType.DAMAGE_MAGICAL: 100,
 	Utils.ActionType.DAMAGE_POISON: 100,
 	Utils.ActionType.UTILITY_HEAL: 100,
-	Utils.ActionType.UTILITY_STUN: 100,
 	Utils.ActionType.UTILITY_CLEANSE: 100,
 	Utils.ActionType.UTILITY_DISPELL: 100,
 	Utils.ActionType.STACK_SHIELD: 100,
@@ -46,7 +45,6 @@ extends Resource
 	Utils.ActionType.DAMAGE_MAGICAL: 0,
 	Utils.ActionType.DAMAGE_POISON: 0,
 	Utils.ActionType.UTILITY_HEAL: 0,
-	Utils.ActionType.UTILITY_STUN: 0,
 	Utils.ActionType.UTILITY_CLEANSE: 0,
 	Utils.ActionType.UTILITY_DISPELL: 0,
 	Utils.ActionType.STACK_SHIELD: 0,
@@ -61,7 +59,6 @@ extends Resource
 	Utils.ActionType.DAMAGE_MAGICAL: 0,
 	Utils.ActionType.DAMAGE_POISON: 0,
 	Utils.ActionType.UTILITY_HEAL: 0,
-	Utils.ActionType.UTILITY_STUN: 0,
 	Utils.ActionType.UTILITY_CLEANSE: 0,
 	Utils.ActionType.UTILITY_DISPELL: 0,
 	Utils.ActionType.STACK_SHIELD: 0,
@@ -76,7 +73,6 @@ extends Resource
 	Utils.ActionType.DAMAGE_MAGICAL: 0,
 	Utils.ActionType.DAMAGE_POISON: 0,
 	Utils.ActionType.UTILITY_HEAL: 0,
-	Utils.ActionType.UTILITY_STUN: 0,
 	Utils.ActionType.UTILITY_CLEANSE: 0,
 	Utils.ActionType.UTILITY_DISPELL: 0,
 	Utils.ActionType.STACK_SHIELD: 0,
@@ -91,7 +87,6 @@ extends Resource
 	Utils.ActionType.DAMAGE_MAGICAL: 0,
 	Utils.ActionType.DAMAGE_POISON: 0,
 	Utils.ActionType.UTILITY_HEAL: 0,
-	Utils.ActionType.UTILITY_STUN: 0,
 	Utils.ActionType.UTILITY_CLEANSE: 0,
 	Utils.ActionType.UTILITY_DISPELL: 0,
 	Utils.ActionType.STACK_SHIELD: 0,
@@ -106,7 +101,6 @@ extends Resource
 	Utils.ActionType.DAMAGE_MAGICAL: 0,
 	Utils.ActionType.DAMAGE_POISON: 0,
 	Utils.ActionType.UTILITY_HEAL: 0,
-	Utils.ActionType.UTILITY_STUN: 0,
 	Utils.ActionType.UTILITY_CLEANSE: 0,
 	Utils.ActionType.UTILITY_DISPELL: 0,
 	Utils.ActionType.STACK_SHIELD: 0,
@@ -121,7 +115,6 @@ extends Resource
 	Utils.ActionType.DAMAGE_MAGICAL: 0,
 	Utils.ActionType.DAMAGE_POISON: 0,
 	Utils.ActionType.UTILITY_HEAL: 0,
-	Utils.ActionType.UTILITY_STUN: 0,
 	Utils.ActionType.UTILITY_CLEANSE: 0,
 	Utils.ActionType.UTILITY_DISPELL: 0,
 	Utils.ActionType.STACK_SHIELD: 0,
@@ -136,7 +129,6 @@ extends Resource
 	Utils.ActionType.DAMAGE_MAGICAL: 0,
 	Utils.ActionType.DAMAGE_POISON: 0,
 	Utils.ActionType.UTILITY_HEAL: 0,
-	Utils.ActionType.UTILITY_STUN: 0,
 	Utils.ActionType.UTILITY_CLEANSE: 0,
 	Utils.ActionType.UTILITY_DISPELL: 0,
 	Utils.ActionType.STACK_SHIELD: 0,

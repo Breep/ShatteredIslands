@@ -20,7 +20,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			Entity.SnakeBarrelModifier.SNAKE_POISON_STACKS: poison_stacks,
 			Entity.SnakeBarrelModifier.MAX_HEALTH: health
 		}
-		var spawn_config := SpawnLocationConfig.create_arena_center()
+		var spawn_config := SpawnLocationConfig.create_arena_center(10)
 		ctx.hero.summon_entity(Entity.EntityType.SNAKE_BARREL, spawn_config, summon_modifier)
 	)
 

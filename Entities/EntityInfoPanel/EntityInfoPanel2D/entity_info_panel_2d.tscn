@@ -4,10 +4,10 @@
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_vq80f"]
 [ext_resource type="Shader" uid="uid://cxvdhkkjpr75e" path="res://VFX/VFX_2D/UI/character_health_bar.gdshader" id="1_w5qwx"]
 [ext_resource type="Shader" uid="uid://dncf64el86tmc" path="res://VFX/VFX_2D/UI/character_shield_bar.gdshader" id="2_vq80f"]
-[ext_resource type="Texture2D" uid="uid://8onux3p1rx86" path="res://Card/Descriptions/Families/Icons/fire icon.png" id="4_dgv81"]
-[ext_resource type="PackedScene" uid="uid://bx7rkwxhqecme" path="res://Entities/Heroes/_Shared/FamiliesManagers/Storm/RankViewer/ui_rank_viewer.tscn" id="4_jyfhv"]
+[ext_resource type="Texture2D" uid="uid://8onux3p1rx86" path="res://Card/Descriptions/Families/Icons/ardent_celestial.png" id="4_dgv81"]
+[ext_resource type="PackedScene" uid="uid://bx7rkwxhqecme" path="res://Entities/Heroes/_Shared/FamiliesManagers/StormCaller/RankViewer/ui_rank_viewer.tscn" id="4_jyfhv"]
 [ext_resource type="Texture2D" uid="uid://cwqdngpmbcnck" path="res://Card/Descriptions/Families/Icons/poison.png" id="6_r7eas"]
-[ext_resource type="Texture2D" uid="uid://ckifdy6fknspj" path="res://Card/Descriptions/Families/Icons/serenity.png" id="7_pf7ij"]
+[ext_resource type="Texture2D" uid="uid://ckifdy6fknspj" path="res://Card/Descriptions/Families/Icons/light.png" id="7_pf7ij"]
 [ext_resource type="Texture2D" uid="uid://b8pst2jcoqsyc" path="res://Card/Descriptions/Families/Icons/necrose.png" id="8_oki6c"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r7eas"]

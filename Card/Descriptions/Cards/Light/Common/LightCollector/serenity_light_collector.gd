@@ -15,14 +15,14 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if ctx.hero.deck == null:
 			push_warning("Light Collector: deck is null")
 			return
-		var count: int = ctx.hero.deck.get_unique_card_count(Family.FamilyType.SERENITY)
+		var count: int = ctx.hero.deck.get_unique_card_count(Family.Type.LIGHT)
 		var total_regen: float = count * regen_amount
 		if total_regen <= 0: return
 
 		var allies: Array[Entity] = ctx.hero.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES)
 		for ally: Entity in allies:
 			if ally != null and is_instance_valid(ally) and not ally.is_dead:
-				ctx.hero.inflict_condition_stacks(ally, total_regen, Utils.StackType.REGEN, &"Light Collector")
+				ctx.hero.inflict_condition_stacks(ally, total_regen, Stack.Type.REGEN, &"Light Collector")
 	)
 
 
