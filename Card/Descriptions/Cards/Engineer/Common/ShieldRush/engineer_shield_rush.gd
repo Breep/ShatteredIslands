@@ -1,4 +1,4 @@
-class_name DefenseShieldRush
+class_name EngineerShieldRush
 extends HeroUpgrade
 
 @export var _shield_amount: Array[float]

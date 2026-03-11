@@ -1,4 +1,4 @@
-class_name DefenseEvasiveBarrier
+class_name EngineerEvasiveBarrier
 extends HeroUpgrade
 
 @export var _dodge_increase: Array[float]
@@ -27,7 +27,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	action_mod.action_type = Utils.ActionCategory.DODGE
 	action_mod.is_one_time_effect = false
 	action_mod.after_action_logic_callback = func(_cb_vars: Dictionary) -> void:
-		if ctx.hero == null or not is_instance_valid(ctx.hero):
+		if not is_instance_valid(ctx.hero):
 			return
 		ctx.hero.inflict_condition_stacks(ctx.hero, shield_amount, Stack.Type.SHIELD, &"Evasive Barrier")
 	ctx.action_modifiers.register_modifier(action_mod)

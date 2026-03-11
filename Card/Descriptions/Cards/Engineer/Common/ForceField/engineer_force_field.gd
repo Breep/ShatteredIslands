@@ -1,4 +1,4 @@
-class_name DefenseForceField
+class_name EngineerForceField
 extends HeroUpgrade
 
 @export var _period: Array[float]
@@ -13,8 +13,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var percent: float = _lost_hp_percent[card_lvl - 1]
 
 	ctx.periodic_timers.register(&"Force Field", period, func() -> void:
-		if ctx.hero == null or not is_instance_valid(ctx.hero):
-			return
+		if not is_instance_valid(ctx.hero): return
 		var max_hp: float = ctx.hero.stats.health_max
 		var current_hp: float = ctx.hero.stats.health
 		var lost_hp: float = max_hp - current_hp

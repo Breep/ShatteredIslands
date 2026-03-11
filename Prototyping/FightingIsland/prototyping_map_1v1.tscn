@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://Entities/Heroes/_Shared/hero_desc.gd" id="2_vksg0"]
 [ext_resource type="Resource" uid="uid://bkksjgh6p542o" path="res://Entities/Heroes/DarkKnight/dark_knight.tres" id="3_dlg3x"]
 [ext_resource type="Resource" uid="uid://cu7ymo37wp14y" path="res://Card/Descriptions/Cards/Poison/Epic/SnakeBarrel/poison_snake_barrel.tres" id="3_kngc2"]
-[ext_resource type="Resource" uid="uid://c88cqm481bhcu" path="res://Card/Descriptions/Cards/Engineer/Common/ShieldRush/shieldomatic_shield_rush.tres" id="4_e0xek"]
+[ext_resource type="Resource" uid="uid://c88cqm481bhcu" path="res://Card/Descriptions/Cards/Engineer/Common/ShieldRush/engineer_shield_rush.tres" id="4_e0xek"]
 [ext_resource type="Resource" uid="uid://bu2qwhn65ehi" path="res://Card/Descriptions/Cards/ArdentCelestial/Epic/Nuke/fire_nuke.tres" id="5_7wmtn"]
 [ext_resource type="PackedScene" uid="uid://drcuyohos0doa" path="res://FloatingIsland/FightingIsland/fighting_island.tscn" id="6_sp80o"]
 [ext_resource type="Material" uid="uid://2wlal7g5718r" path="res://VFX/Shaders/Sky/stylized_shader_night.tres" id="8_qw25r"]

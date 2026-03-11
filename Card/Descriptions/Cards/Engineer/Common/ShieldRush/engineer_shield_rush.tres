@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Card" format=3 uid="uid://c88cqm481bhcu"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_aeacc"]
-[ext_resource type="Texture2D" uid="uid://dibhj1of0c2qx" path="res://Card/Descriptions/Cards/Engineer/Common/ShieldRush/shieldomatic_shield_rush.png" id="1_tcq60"]
-[ext_resource type="Script" uid="uid://bre033jc30lr7" path="res://Card/Descriptions/Cards/Engineer/Common/ShieldRush/shieldomatic_shield_rush.gd" id="2_7strq"]
+[ext_resource type="Texture2D" uid="uid://dibhj1of0c2qx" path="res://Card/Descriptions/Cards/Engineer/Common/ShieldRush/engineer_shield_rush.png" id="1_tcq60"]
+[ext_resource type="Script" uid="uid://bre033jc30lr7" path="res://Card/Descriptions/Cards/Engineer/Common/ShieldRush/engineer_shield_rush.gd" id="2_7strq"]
 
 [sub_resource type="Resource" id="Resource_t7xpg"]
 script = ExtResource("2_7strq")

@@ -1,4 +1,4 @@
-class_name DefenseEnergyBarrier
+class_name EngineerEnergyBarrier
 extends HeroUpgrade
 
 @export var _shield_amount: Array[float]
