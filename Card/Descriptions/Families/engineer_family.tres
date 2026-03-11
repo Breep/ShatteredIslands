@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://Card/Templates/family.gd" id="3_p2pe3"]
 [ext_resource type="Resource" uid="uid://c3rq8k7pj84qi" path="res://Card/Descriptions/Cards/Engineer/Common/EvasiveBarrier/shieldomatic_evasive_barrier.tres" id="4_ybs4r"]
 [ext_resource type="Resource" uid="uid://by5tud5u1y87o" path="res://Card/Descriptions/Cards/Engineer/Common/ForceField/shieldomatic_force_field.tres" id="5_spcg6"]
-[ext_resource type="Resource" uid="uid://ch6lrtduf0q25" path="res://Card/Descriptions/Cards/Engineer/Common/MagneticSyphon/shieldomatic_magnetic_syphon.tres" id="6_dcgsq"]
+[ext_resource type="Resource" uid="uid://ch6lrtduf0q25" path="res://Card/Descriptions/Cards/Engineer/Common/MagneticSyphon/engineer_magnetic_syphon.tres" id="6_dcgsq"]
 [ext_resource type="Resource" uid="uid://r3rk3cnyponr" path="res://Card/Descriptions/Cards/Engineer/Common/ProtectiveDome/shieldomatic_protective_dome.tres" id="7_adttv"]
 [ext_resource type="Resource" uid="uid://coqupis51li0i" path="res://Card/Descriptions/Cards/Engineer/Common/ReactiveCover/engineer_reactive_cover.tres" id="8_0vd2r"]
 [ext_resource type="Resource" uid="uid://c88cqm481bhcu" path="res://Card/Descriptions/Cards/Engineer/Common/ShieldRush/shieldomatic_shield_rush.tres" id="8_adttv"]

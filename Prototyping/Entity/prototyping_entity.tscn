@@ -6,13 +6,10 @@
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="3_3bpsj"]
 [ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://UI/Tool/Misc/hover_boost_button.gd" id="3_6kn6i"]
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_egh8k"]
-[ext_resource type="Texture2D" uid="uid://dibhj1of0c2qx" path="res://Card/Descriptions/Cards/Engineer/Common/ShieldRush/shieldomatic_shield_rush.png" id="4_ko5bb"]
+[ext_resource type="Resource" uid="uid://ch6lrtduf0q25" path="res://Card/Descriptions/Cards/Engineer/Common/MagneticSyphon/engineer_magnetic_syphon.tres" id="4_m26y3"]
 [ext_resource type="Script" uid="uid://nkraydv4mdse" path="res://Card/Templates/player_deck.gd" id="5_ko5bb"]
-[ext_resource type="Script" uid="uid://bre033jc30lr7" path="res://Card/Descriptions/Cards/Engineer/Common/ShieldRush/shieldomatic_shield_rush.gd" id="5_x0odd"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/Stats/EntityStats/entity_stats.gd" id="6_3bpsj"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
-[ext_resource type="Texture2D" uid="uid://k5v6yll4kd20" path="res://Card/Descriptions/Cards/Engineer/Common/ToxicFiltrationLayer/engineer_toxic_filtration_layer_.jpg" id="6_xwdjj"]
-[ext_resource type="Script" uid="uid://cmj4l5m1j0g2p" path="res://Card/Descriptions/Cards/Engineer/Common/ToxicFiltrationLayer/engineer_toxic_filtration_layer.gd" id="7_ywmf2"]
 [ext_resource type="PackedScene" uid="uid://dvuq5n41nak3u" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.tscn" id="8_fl2p6"]
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://Modules/PickableClickable/PickableModule/pickable_module.tscn" id="9_614kc"]
 [ext_resource type="PackedScene" uid="uid://bg5efhnq0erdv" path="res://Modules/PickableClickable/ClickableModule/clickable_module.tscn" id="10_m73qc"]
@@ -21,42 +18,9 @@
 [ext_resource type="PackedScene" uid="uid://c0l0roxttdtlp" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/FightingManager/fighting_manager.tscn" id="17_m26y3"]
 [ext_resource type="PackedScene" uid="uid://dp4x7wkxd6i2q" path="res://Prototyping/Entity/EntityController/entity_controller.tscn" id="19_x0odd"]
 
-[sub_resource type="Resource" id="Resource_t7xpg"]
-script = ExtResource("5_x0odd")
-_shield_amount = Array[float]([100.0, 150.0, 200.0, 250.0, 400.0])
-metadata/_custom_type_script = "uid://bre033jc30lr7"
-
-[sub_resource type="Resource" id="Resource_rw3ih"]
-script = ExtResource("3_3bpsj")
-name = "Shield Rush"
-picture = ExtResource("4_ko5bb")
-families = Array[int]([2])
-player_upgrade = SubResource("Resource_t7xpg")
-points = Dictionary[int, int]({
-2: 1
-})
-lvl = 5
-metadata/_custom_type_script = "uid://dc86gt0exdo1a"
-
-[sub_resource type="Resource" id="Resource_m26y3"]
-script = ExtResource("7_ywmf2")
-_base_efficiency = Array[float]([20.0, 30.0, 40.0, 50.0, 70.0])
-
-[sub_resource type="Resource" id="Resource_2ob0d"]
-script = ExtResource("3_3bpsj")
-name = "Toxic Filtration Layer"
-picture = ExtResource("6_xwdjj")
-families = Array[int]([2, 7])
-player_upgrade = SubResource("Resource_m26y3")
-points = Dictionary[int, int]({
-2: 1,
-7: 1
-})
-lvl = 4
-
 [sub_resource type="Resource" id="Resource_38sjp"]
 script = ExtResource("5_ko5bb")
-_active_cards = Array[ExtResource("3_3bpsj")]([SubResource("Resource_rw3ih"), SubResource("Resource_2ob0d")])
+_active_cards = Array[ExtResource("3_3bpsj")]([ExtResource("4_m26y3")])
 metadata/_custom_type_script = "uid://nkraydv4mdse"
 
 [sub_resource type="Resource" id="Resource_ycdli"]
