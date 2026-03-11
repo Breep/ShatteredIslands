@@ -4,7 +4,6 @@ extends HeroUpgrade
 @export var _start_boost: Array[float]
 @export var _delay: Array[float]
 @export var _penalty_per_rank: Array[float]
-@export var _rarity: Card.Rarity = Card.Rarity.EPIC
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:

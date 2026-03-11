@@ -4,7 +4,6 @@ extends HeroUpgrade
 @export var _attack_speed_min: Array[float] # % Attack speed minimum
 @export var _attack_speed_max: Array[float] # % Attack speed maximum
 @export var _duration: float # Duration to go from minimum to maximum attack speed
-@export var _rarity: Card.Rarity = Card.Rarity.EPIC
 
 const GATLING_TICK_PERIOD: float = 1.0
 

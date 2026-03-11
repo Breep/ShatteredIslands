@@ -3,8 +3,6 @@ extends HeroUpgrade
 
 @export var _as_reduction: Array[float]
 @export var _hp_to_ad_percent: Array[float]
-@export var _rarity: Card.Rarity = Card.Rarity.COMMON
-
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	# Reduce attack speed

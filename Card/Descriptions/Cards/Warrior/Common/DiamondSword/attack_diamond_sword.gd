@@ -2,8 +2,6 @@ class_name AttackDiamondSword
 extends HeroUpgrade
 
 @export var _damage: Array[int]
-@export var _rarity: Card.Rarity = Card.Rarity.COMMON
-
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
