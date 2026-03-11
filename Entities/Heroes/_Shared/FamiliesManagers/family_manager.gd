@@ -23,9 +23,5 @@ func stop() -> void:
 	printerr("FamilyManager: virtual stop() called [", get_path(), "]")
 
 
-func pause() -> void:
-	pass
-
-
-func resume() -> void:
+func apply_passive() -> void:
 	pass
