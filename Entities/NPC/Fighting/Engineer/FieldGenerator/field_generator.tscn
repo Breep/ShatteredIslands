@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://duktgfjjcgm60"]
 
-[ext_resource type="Script" uid="uid://cl757ua1nwcpr" path="res://Entities/NPC/Fighting/Defense/FieldGenerator/field_generator.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://cl757ua1nwcpr" path="res://Entities/NPC/Fighting/Engineer/FieldGenerator/field_generator.gd" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://fe7g12v4g3lb" path="res://Entities/NPC/Fighting/Poison/SnakeBarrel/snake_barrel_visual.tscn" id="2_visual"]
 [ext_resource type="PackedScene" uid="uid://jwk6d3k8w3k5" path="res://Entities/EntityInfoPanel/EntityInfoPanel3D/entity_info_panel_3d.tscn" id="5_info"]
 

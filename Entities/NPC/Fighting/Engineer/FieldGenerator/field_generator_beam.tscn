@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bwty40vjvecu"]
+[gd_scene format=3 uid="uid://bwty40vjvecu"]
 
-[ext_resource type="Script" uid="uid://cgufn0dfs2blj" path="res://Entities/NPC/Fighting/Defense/FieldGenerator/field_generator_beam.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://cgufn0dfs2blj" path="res://Entities/NPC/Fighting/Engineer/FieldGenerator/field_generator_beam.gd" id="1_script"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_beam"]
 transparency = 1

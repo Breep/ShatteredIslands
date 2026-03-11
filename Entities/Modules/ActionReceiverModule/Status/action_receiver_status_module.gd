@@ -1,7 +1,7 @@
 class_name ActionReceiverStatusModule
 extends ActionReceiverModule
 
-func take_status(status_type: Status.Type, duration: float, action_id: StringName, source: Entity) -> float:
+func take_status(status_type: Status.Type, duration: float, action_id: StringName, source: Entity = null) -> float:
 	if _owner.is_dead(): return 0
 	if _owner.is_invulnerable() and Status.is_negative_status(status_type): return 0
 	
