@@ -106,6 +106,6 @@ func _on_connection_failed():
 
 func _on_auto_start_timeout() -> void:
 	Verbose.debug("Starting the game !", Verbose.Category.NET)
-	while PlayerManager.players.size() < PlayerManager.MAX_PLAYERS:
+	while PlayerManager.players.size() < 5: # PlayerManager.MAX_PLAYERS:
 		PlayerManager.add_bot()
 	GameManager.start_game.rpc()

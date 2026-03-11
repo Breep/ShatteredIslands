@@ -125,7 +125,7 @@ var current_categories_level: Dictionary[Category, Level] = {
 	Category.SHOP_DECK: Level.WARN,
 	Category.CARD_LAYOUT: Level.WARN,
 	Category.AI: Level.WARN,
-	Category.GAME: Level.WARN,
+	Category.GAME: Level.DEBUG,
 	Category.HERO_SELECTOR: Level.WARN,
 	Category.PLAYER_MANAGER: Level.WARN,
 	Category.DECK: Level.WARN,

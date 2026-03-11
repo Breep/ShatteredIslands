@@ -178,6 +178,7 @@ func _on_game_state_changed(new_state) -> void:
 			_game_state_timer.start()
 		GameState.ENDING_ROUND:
 			Verbose.debug("[State=ENDING_ROUND]", Verbose.Category.GLOBAL_MANAGER)
+			await get_tree().create_timer(0.1).timeout # Quick fix to avoid recursive signals
 			await PlayerManager.sync_point(PlayerManager.SyncID.FIGHTING_PHASE)
 			await RoundManager.ending_round_player_changes()
 			_game_state = GameState.INIT_ROUND
