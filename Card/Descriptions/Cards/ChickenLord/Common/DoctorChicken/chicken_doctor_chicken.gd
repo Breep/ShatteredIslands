@@ -14,14 +14,14 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		var target: Entity = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ALLY_INCLUDING_SELF)
 
 		if target == null: return
-		chicken.heal(target, heal_amount, &"Doctor Chicken")
+		target.take_heal(heal_amount, false, &"Doctor Chicken", chicken) 
+		#chicken.heal(target, heal_amount, &"Doctor Chicken")
 		)
 
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("Yang Chicken: Wrong cardlvl: ", cardlvl)
+		printerr("Doctor Chicken: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
-	return "toto"
 	var h: String = str(_heal_amounts[cardlvl - 1]).pad_decimals(0)
 	return "When a friendly chicken is spawned, heal a random ally of " + h + " amount."
