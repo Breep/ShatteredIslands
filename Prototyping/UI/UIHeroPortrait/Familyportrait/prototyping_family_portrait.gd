@@ -8,7 +8,7 @@ extends Control
 var _is_families_portrait_hidden: bool = false
 
 @onready var _rng := RandomNumberGenerator.new()
-@onready var _player := Player.new()
+var _player: Player
 
 func _ready() -> void:
 	_rng.randomize()
@@ -17,8 +17,12 @@ func _ready() -> void:
 	else:
 		_ui_all_families_portrait.show_families()
 	_ui_all_families_portrait.init_portait_families(_families)
-	
-	_player.deck = PlayerDeck.new().init(_player)
+
+	var player_scene: PackedScene = preload("res://Player/player.tscn")
+	_player = player_scene.instantiate()
+	_player.init_player()
+	_player.name = "Player_family_proto"
+	add_child(_player)
 	for family: Family in _families:
 		_player.deck._families_count[family.family_type] = 0
 	

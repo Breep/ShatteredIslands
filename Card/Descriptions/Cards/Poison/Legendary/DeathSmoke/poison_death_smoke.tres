@@ -7,7 +7,7 @@
 [sub_resource type="Resource" id="Resource_bi3sl"]
 script = ExtResource("2_jg1v7")
 _period = Array[float]([1.0])
-_multiplayer = Array[float]([0.5])
+_multiplier = Array[float]([0.5])
 metadata/_custom_type_script = "uid://dg2i2topy8e7v"
 
 [resource]
@@ -17,4 +17,7 @@ picture = ExtResource("1_gscfb")
 families = Array[int]([7, 7, 7, 7, 7])
 rarity = 3
 player_upgrade = SubResource("Resource_bi3sl")
+points = Dictionary[int, int]({
+7: 5
+})
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

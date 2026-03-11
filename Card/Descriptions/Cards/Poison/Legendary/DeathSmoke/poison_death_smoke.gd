@@ -2,22 +2,30 @@ class_name PoisonDeathSmoke
 extends HeroUpgrade
 
 @export var _period: Array[float]
-@export var _multiplayer: Array[float]
+@export var _multiplier: Array[float]
 
-func apply(stats: FamiliesStats, cardlvl: int) -> void: # override
-	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[Card.Rarity.LEGENDARY]:
-		printerr("Death Smoke: Wrong cardlvl: ", cardlvl)
+func apply_card(ctx: CardContext, card_lvl: int) -> void:
+	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[Card.Rarity.LEGENDARY]:
+		printerr("Death Smoke: Wrong card_lvl: ", card_lvl)
 		return
-	
-	stats.poison.poison_death_smoke_activated = true
-	stats.poison.poison_death_smoke_period = _period[cardlvl - 1]
-	stats.poison.poison_death_smoke_multiplier = _multiplayer[cardlvl - 1]
+
+	var period: float = _period[card_lvl - 1]
+	var multiplier: float = _multiplier[card_lvl - 1]
+
+	ctx.battle_callbacks.register_battle_start(&"Death Fog", func() -> void:
+		var spell_modifier: Dictionary = {
+			Spell.DeathFogModifier.GROW_SPEED: 0.2,
+			Spell.DeathFogModifier.TICK_PERIOD: period,
+			Spell.DeathFogModifier.DAMAGE_MULTIPLIER: multiplier,
+		}
+		ctx.hero.cast_spell(ctx.hero, Spell.Type.DEATH_FOG, spell_modifier)
+	)
 
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[Card.Rarity.LEGENDARY]:
 		printerr("Death Smoke: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
-	
+
 	return "At the start of the fight, surrond the battefield with gas. Then the gas speads slowly toward the middle. Entities inside" \
-			+ " takes " + str(_multiplayer)
+			+ " takes " + str(_multiplier)

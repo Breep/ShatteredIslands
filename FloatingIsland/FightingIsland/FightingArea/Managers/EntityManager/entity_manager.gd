@@ -66,10 +66,10 @@ func _register_entity(entity: Entity) -> void:
 	if entity is Hero:
 		_heroes[entity.id] = entity
 	
-	entity.spell_casted.connect(_on_entity_spell_casted)
-	entity.action_done.connect(_on_entity_action_done)
-	entity.interaction_received.connect(_on_entity_interaction_received)
-	entity.died.connect(_on_entity_died)
+	entity.spell_casted.connect(_on_entity_spell_casted.bind(entity))
+	entity.action_done.connect(_on_entity_action_done.bind(entity))
+	entity.interaction_received.connect(_on_entity_interaction_received.bind(entity))
+	entity.died.connect(_on_entity_died.bind(entity))
 	entity.connect_to_fighting_area(_fighting_area)
 
 
@@ -92,15 +92,15 @@ func _on_game_manager_game_state_changed(game_state: GameManager.GameState) -> v
 			_is_active = true
 
 
-func _on_entity_spell_casted(entity: Entity, target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary) -> void:
-	_fighting_area.signal_spell_casted(entity, target, spell_type, spell_modifier)
+func _on_entity_spell_casted(target: Entity, spell_type: Spell.Type, spell_modifier: Dictionary, source: Entity) -> void:
+	_fighting_area.signal_spell_casted(source, target, spell_type, spell_modifier)
 
 
-func _on_entity_action_done(source: Entity, target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
+func _on_entity_action_done(target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool, source: Entity) -> void:
 	_fighting_area.signal_action_done(source, target, action_type, action_id, value, is_critical)
 
 
-func _on_entity_interaction_received(entity_ref: Entity, source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
+func _on_entity_interaction_received(source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool, entity_ref: Entity) -> void:
 	_fighting_area.signal_interaction_received(entity_ref, source, action_type, action_id, value, is_critical)
 
 

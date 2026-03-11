@@ -34,9 +34,18 @@ const RARITY_CARD_VALUE: Dictionary[Rarity, int] = {
 @export var families: Array[Family.FamilyType]
 @export var rarity : Rarity
 @export var player_upgrade: HeroUpgrade
-@export var lvl : int = 1
+@export var points: Dictionary[Family.FamilyType, int]
+
+var _lvl: int # Current health
+@export var lvl: int:
+	get: return _lvl
+	set(value):
+		value = clampi(value, 1, RARITY_MAX_LEVEL[rarity])
+		if value == _lvl: return
+		_lvl = value
+
 
 func is_max_level() -> bool:
-	return lvl == RARITY_MAX_LEVEL[rarity]
+	return _lvl == RARITY_MAX_LEVEL[rarity]
 
 var uid: int

@@ -1,28 +1,11 @@
 class_name Player
-extends Resource
-
-#region ============================== Enum ==============================
-enum SerializedField {
-	NAME,
-	ID,
-	TEAM,
-	HEALTH,
-	MAX_HEALTH,
-	DAMAGE,
-	HERO,
-	GOLD,
-	XP,
-	IS_BOT,
-}
-#endregion
+extends Node
 
 #region ============================== Variables ==============================
-var name: String # Nickname of the player
+var player_name: String # Nickname of the player
 var id: int # Multiplayer id
 
 var is_bot: bool # If the player is a fake player (a bot controlled by the server)
-
-var ready: bool # If this player is ready to continue the game flow (Used to sync players with server)
 
 var deck: PlayerDeck
 var hero: Hero
@@ -73,7 +56,19 @@ var hero_desc: HeroDesc:
 	set(value):
 		if _hero_desc == value: return
 		_hero_desc = value
+		if _hero_desc != null:
+			_hero_desc_id = _hero_desc.id
 		hero_changed.emit(self, _hero_desc)
+
+# Synced integer representation of hero_desc for MultiplayerSynchronizer
+var _hero_desc_id: int = 0
+var hero_desc_id: int:
+	get: return _hero_desc_id
+	set(value):
+		if _hero_desc_id == value: return
+		_hero_desc_id = value
+		if _hero_desc_id != 0 and Shared.HEROES.has(_hero_desc_id):
+			hero_desc = Shared.HEROES[_hero_desc_id]
 
 signal max_health_changed(self_ref: Player, new_max_health: int)
 var _max_health: int
@@ -116,57 +111,30 @@ var damage: int:
 		damage_changed.emit(self, _damage)
 #endregion
 
-#region ============================== Static functions ==============================
-static func new_from_serialized(serialized_data: Dictionary) -> Player:
-	var player := Player.new()
-	player.skill_manager = SkillManager.new()
-	player.name = serialized_data[SerializedField.NAME]
-	player.id = serialized_data[SerializedField.ID]
-	player.team = serialized_data[SerializedField.TEAM]
-	player.health = serialized_data[SerializedField.HEALTH]
-	player.max_health = serialized_data[SerializedField.MAX_HEALTH]
-	player.damage = serialized_data[SerializedField.DAMAGE]
-	player.hero_desc = Shared.HEROES[serialized_data[SerializedField.HERO]]
-	player.gold = serialized_data[SerializedField.GOLD]
-	player.is_bot = serialized_data[SerializedField.IS_BOT]
-	player.xp = serialized_data[SerializedField.XP]
-	return player
-#endregion
-
 #region ============================== Public functions ==============================
-func serialized() -> Dictionary:
-	var serialized_version = {
-		SerializedField.NAME: name,
-		SerializedField.ID: id,
-		SerializedField.TEAM: team,
-		SerializedField.HEALTH: health,
-		SerializedField.MAX_HEALTH: max_health,
-		SerializedField.DAMAGE: damage,
-		SerializedField.HERO: 0 if hero_desc == null else hero_desc.id,
-		SerializedField.GOLD: gold,
-		SerializedField.IS_BOT: is_bot,
-		SerializedField.XP: xp,
-	}
-	return serialized_version
-
-
-func update_from_serialized(serialized_data: Dictionary) -> void:
-	name = serialized_data[SerializedField.NAME]
-	id = serialized_data[SerializedField.ID]
-	team = serialized_data[SerializedField.TEAM]
-	health = serialized_data[SerializedField.HEALTH]
-	max_health = serialized_data[SerializedField.MAX_HEALTH]
-	damage = serialized_data[SerializedField.DAMAGE]
-	hero_desc = Shared.HEROES[serialized_data[SerializedField.HERO]]
-	gold = serialized_data[SerializedField.GOLD]
-	is_bot = serialized_data[SerializedField.IS_BOT]
-	xp = serialized_data[SerializedField.XP]
-
-# ============================== Resource base functions ==============================
-
-func _init() -> void:
+func init_player() -> void:
 	deck = PlayerDeck.new().init(self)
 	deck.has_changed.connect(_on_deck_has_changed)
+
+
+func setup_components() -> void:
+	var is_server := multiplayer.is_server()
+	var is_local := (id == multiplayer.get_unique_id())
+
+	# CardShop: local human player OR bot on server
+	if (is_local and not is_bot) or (is_bot and is_server):
+		var card_shop: PlayerCardShop = preload("res://Game/CardShop/player_card_shop.tscn").instantiate()
+		card_shop.name = "CardShop"
+		card_shop.player = self
+		add_child(card_shop)
+
+	# Bot AI: only on server for bots
+	if is_bot and is_server:
+		var bot_ai: PlayerBotAI = preload("res://Player/PlayerBotAI/player_bot_ai.tscn").instantiate()
+		bot_ai.player = self
+		bot_ai.name = "PlayerBotAI"
+		add_child(bot_ai)
+#endregion
 
 # ============================== Private functions ==============================
 
@@ -175,8 +143,9 @@ func _apply_all_cards_upgrades() -> void:
 		printerr("Player: Can't apply cards upgrades")
 		return
 	if hero.is_node_ready():
+		var ctx: CardContext = hero.get_card_context()
 		for card in deck.get_active_deck():
-			card.player_upgrade.apply(hero.families_stats, card.lvl)
+			card.player_upgrade.apply_card(ctx, card.lvl)
 	else:
 		hero.deck = deck
 
@@ -191,5 +160,4 @@ func _check_lvl_up() -> void:
 # ============================== Callbacks ==============================
 
 func _on_deck_has_changed() -> void:
-	#print("Player[", name, "]: Deck has changed")
 	_apply_all_cards_upgrades()

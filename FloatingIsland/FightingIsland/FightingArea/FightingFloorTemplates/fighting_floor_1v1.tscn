@@ -41,10 +41,16 @@ size = Vector3(4, 1, 6)
 [sub_resource type="BoxShape3D" id="BoxShape3D_bbdnw"]
 size = Vector3(20, 1, 10)
 
-[node name="FightingFloor_1v1" type="Node3D" unique_id=742934201 node_paths=PackedStringArray("_visual_to_be_destroyed", "_hero_spawner")]
+[node name="FightingFloor_1v1" type="Node3D" unique_id=742934201 node_paths=PackedStringArray("_visual_to_be_destroyed", "_hero_spawner", "team_zones", "center_zone", "full_arena_zone")]
 script = ExtResource("1_i0b8l")
 _visual_to_be_destroyed = NodePath("Floor/FloorMesh3D")
 _hero_spawner = NodePath("HeroSpawner")
+team_zones = {
+1: NodePath("SpawnArea"),
+2: NodePath("SpawnArea2")
+}
+center_zone = NodePath("CenterArea")
+full_arena_zone = NodePath("FullArea")
 
 [node name="SpawnArea" parent="." unique_id=1845299317 node_paths=PackedStringArray("_visual_to_be_destroyed") instance=ExtResource("2_1l6d4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)

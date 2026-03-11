@@ -13,7 +13,7 @@ signal card_bought(card: Card)
 
 # ============================== Local scene nodes ==============================
 
-@export var _card_shop: CardShop
+var _card_shop: PlayerCardShop
 @export var _card_buttons: Array[CardButton]
 
 @onready var _refresh_button: Button = %RefreshButton
@@ -31,7 +31,7 @@ func _ready() -> void:
 	
 	_local_player = PlayerManager.get_local_player()
 	_local_player.death.connect(_on_local_player_death)
-	_card_shop.player = _local_player
+	_card_shop = _local_player.get_node("CardShop") as PlayerCardShop
 	
 	_card_shop.shop_refreshed.connect(_on_card_shop_shop_refreshed)
 	_card_shop.card_bought.connect(_on_card_shop_card_bought)
@@ -82,8 +82,12 @@ func _reconnect_to_cards_signals() -> void:
 
 
 func _update_shop_cards_displayed_visual(cards: Array[Card]) -> void:
+	for i in _card_buttons.size():
+		_card_buttons[i].hide()
 	for i in cards.size():
 		_card_buttons[i].update_visual(cards[i])
+		_card_buttons[i].show()
+
 
 # ============================== Callbacks ==============================
 
@@ -101,7 +105,7 @@ func _on_card_shop_card_bought(card: Card) -> void:
 
 
 func _on_local_player_death(_player: Player) -> void:
-	Verbose.debug("Lock card shop for " + _local_player.name, Verbose.Category.CARD_SHOP)
+	Verbose.debug("Lock card shop for " + _local_player.player_name, Verbose.Category.CARD_SHOP)
 	set_inactive()
 	_is_locked = true
 

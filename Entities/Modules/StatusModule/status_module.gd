@@ -1,35 +1,37 @@
 class_name StatusModule
 extends Module
 
-## Manages temporary status effects applied to an entity
-## Uses "best only" behavior: only the longest remaining duration is kept
-## This module ONLY manages durations and emits signals - it does NOT apply effects
-
 # ============================== Signals ==============================
+signal stunned_changed(is_active: bool, duration: float, infinite: bool)
+signal taunted_changed(is_active: bool, duration: float, infinite: bool)
+signal silenced_changed(is_active: bool, duration: float, infinite: bool)
+signal invulnerable_changed(is_active: bool, duration: float, infinite: bool)
+signal untargetable_changed(is_active: bool, duration: float, infinite: bool)
 
-signal status_added(status_type: Status.Type, duration: float)
-signal status_removed(status_type: Status.Type)
-
-# Status-specific signals (emitted when status is first applied or fully removed)
-signal stunned_changed(is_active: bool)
-signal taunted_changed(is_active: bool)
-signal silenced_changed(is_active: bool)
-signal invulnerable_changed(is_active: bool)
-signal untargetable_changed(is_active: bool)
+# ============================== Public variables ==============================
 
 # ============================== Private variables ==============================
 
-# Dictionary[Status.Type, float] - Remaining duration for each status (0 = inactive)
-var _remaining_durations: Dictionary[Status.Type, float]
+@onready var _timers: Dictionary[Status.Type, Timer] = {
+	Status.Type.STUN: %StunTimer,
+	Status.Type.TAUNT: %TauntTimer,
+	Status.Type.SILENCE: %SilenceTimer,
+	Status.Type.INVULNERABLE: %InvulnerabilityTimer,
+	Status.Type.UNTARGETABLE: %UntargetableTimer
+}
+
+@onready var _infinite_status: Dictionary[Status.Type, bool] = {
+	Status.Type.STUN: false,
+	Status.Type.TAUNT: false,
+	Status.Type.SILENCE: false,
+	Status.Type.INVULNERABLE: false,
+	Status.Type.UNTARGETABLE: false
+}
 
 # ============================== Public functions ==============================
 
 func init(entity_owner: Entity) -> StatusModule:
 	super.init(entity_owner)
-	
-	# Initialize all statuses to 0 (inactive)
-	for status_type: Status.Type in Status.Type.values():
-		_remaining_durations[status_type] = 0.0
 	
 	return self
 
@@ -43,58 +45,61 @@ func stop() -> void:
 
 
 func has_status(status_type: Status.Type) -> bool:
-	return _remaining_durations[status_type] > 0.0
+	return _infinite_status[status_type] or _timers[status_type].time_left > 0
 
 
 func get_remaining_time(status_type: Status.Type) -> float:
-	return _remaining_durations[status_type]
+	return _timers[status_type].time_left
 
 
-func add_status(status_type: Status.Type, duration: float, source: Entity) -> void:
-	var was_inactive: bool = _remaining_durations[status_type] <= 0.0
+func add_status(status_type: Status.Type, duration: float) -> void:
+	if duration == -1:
+		_infinite_status[status_type] = true
+		_timers[status_type].stop()
+		_emit_status_changed(status_type, true, 0.0, true)
+		return
 	
-	# "Best only" behavior: keep the longest duration
-	if duration > _remaining_durations[status_type]:
-		_remaining_durations[status_type] = duration
+	if _infinite_status[status_type] == true or duration <= _timers[status_type].time_left:
+		return
 	
-	status_added.emit(status_type, duration)
-	
-	# Emit status-specific signal only if newly applied
-	if was_inactive:
-		_emit_status_changed(status_type, true)
+	_timers[status_type].stop()
+	_timers[status_type].wait_time = duration
+	_timers[status_type].start()
+	_emit_status_changed(status_type, true, duration, false)
 
 
 func remove_status(status_type: Status.Type) -> void:
-	if _remaining_durations[status_type] <= 0.0:
-		return
-	
-	_remaining_durations[status_type] = 0.0
-	status_removed.emit(status_type)
-	_emit_status_changed(status_type, false)
-
-
-# ============================== Node functions ==============================
-
-func _process(delta: float) -> void:
-	for status_type: Status.Type in Status.Type.values():
-		if _remaining_durations[status_type] <= 0.0:
-			continue
-		
-		_remaining_durations[status_type] -= delta
-		
-		# Check if status just expired
-		if _remaining_durations[status_type] <= 0.0:
-			_remaining_durations[status_type] = 0.0
-			status_removed.emit(status_type)
-			_emit_status_changed(status_type, false)
+	_timers[status_type].stop()
+	_infinite_status[status_type] = false
+	_emit_status_changed(status_type, false, 0.0, false)
 
 
 # ============================== Private functions ==============================
 
-func _emit_status_changed(status_type: Status.Type, is_active: bool) -> void:
+func _emit_status_changed(status_type: Status.Type, is_active: bool, duration: float, infinite: bool) -> void:
 	match status_type:
-		Status.Type.STUN: stunned_changed.emit(is_active)
-		Status.Type.TAUNT: taunted_changed.emit(is_active)
-		Status.Type.SILENCE: silenced_changed.emit(is_active)
-		Status.Type.INVULNERABLE: invulnerable_changed.emit(is_active)
-		Status.Type.UNTARGETABLE: untargetable_changed.emit(is_active)
+		Status.Type.STUN: stunned_changed.emit(is_active, duration, infinite)
+		Status.Type.TAUNT: taunted_changed.emit(is_active, duration, infinite)
+		Status.Type.SILENCE: silenced_changed.emit(is_active, duration, infinite)
+		Status.Type.INVULNERABLE: invulnerable_changed.emit(is_active, duration, infinite)
+		Status.Type.UNTARGETABLE: untargetable_changed.emit(is_active, duration, infinite)
+
+
+func _on_stun_timer_timeout() -> void:
+	remove_status(Status.Type.STUN)
+
+
+func _on_silence_timer_timeout() -> void:
+	remove_status(Status.Type.SILENCE)
+
+
+func _on_taunt_timer_timeout() -> void:
+	remove_status(Status.Type.TAUNT)
+
+
+func _on_untargetable_timer_timeout() -> void:
+	remove_status(Status.Type.UNTARGETABLE)
+
+
+func _on_invulnerability_timer_timeout() -> void:
+	remove_status(Status.Type.INVULNERABLE)

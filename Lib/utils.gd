@@ -162,6 +162,10 @@ func is_randomize_modifier_active(chance_in_percent: float) -> bool:
 	return rng.randf_range(0, 100) <= chance_in_percent
 
 
+func get_randf_range(min: float, max: float) -> float:
+	return rng.randf_range(min, max)
+
+
 func recursive_hide(node: Node3D):
 	for child in node.get_children():
 		if child is Node3D:
@@ -176,3 +180,7 @@ func recursive_show(node: Node3D):
 			recursive_show(child)
 	if node is Node3D:
 		node.show()
+
+
+func is_negative_stack(damage_type: StackType) -> bool:
+	return damage_type in [StackType.POISON, StackType.IGNITE, StackType.NECROSIS]

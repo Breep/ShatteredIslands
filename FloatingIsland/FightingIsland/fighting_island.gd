@@ -68,7 +68,7 @@ func _force_local_player_camera_on_island() -> void:
 	if local_player == null: return
 
 	for hero: Hero in _current_heroes:
-		if hero.entity_name == local_player.name: # TODO rework cette mosntruosité
+		if hero.entity_name == local_player.player_name: # TODO rework cette mosntruosité
 			Shared.scene_switcher.set_island_active_only(self)
 			break
 

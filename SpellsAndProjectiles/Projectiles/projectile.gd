@@ -10,7 +10,8 @@ enum Type {
 	VENOMOUS_DART,
 	SNAKE,
 	COSMIC_BOLT,
-	SHIELD_THROW
+	SHIELD_THROW,
+	POISON_FLASK
 }
 
 # === EXPORTS ===
@@ -25,8 +26,18 @@ var _stats: ProjectileStats
 var _hit_history: Array[Entity] = []
 var _life: float = 0.0
 
+func add_bounce(additional_bounces: float) -> void:
+	_stats.bounces_remaining += additional_bounces
 
-## Initialize the projectile with _source, _target, and _stats.
+
+func get_target() -> Entity:
+	return _target
+
+
+func get_source() -> Entity:
+	return _source
+
+
 ## Must be called before adding to scene tree.
 func init(p_source: Entity, p_target: Entity, p_stats: ProjectileStats) -> Projectile:
 	_source = p_source
@@ -87,10 +98,10 @@ func _on_body_entered(body: Node3D) -> void:
 	for cb: Callable in _stats.on_hit_callbacks:
 		if cb.is_valid():
 			cb.call({
-				AutoAttackModifier.VarType.SOURCE: _source,
-				AutoAttackModifier.VarType.TARGET: hit_target,
-				AutoAttackModifier.VarType.PROJECTILE: self,
-				AutoAttackModifier.VarType.POSITION: global_position
+				ProjectileStats.VarType.SOURCE: _source,
+				ProjectileStats.VarType.TARGET: hit_target,
+				ProjectileStats.VarType.PROJECTILE: self,
+				ProjectileStats.VarType.POSITION: global_position
 			})
 	
 	# Handle bouncing if remaining bounces
@@ -101,31 +112,37 @@ func _on_body_entered(body: Node3D) -> void:
 		queue_free()
 
 
+func retarget(new_target: Entity) -> void:
+	if new_target == null or not is_instance_valid(new_target):
+		return
+	if _target and is_instance_valid(_target) and _target.died.is_connected(_on_target_died):
+		_target.died.disconnect(_on_target_died)
+	_target = new_target
+	if _target.died and not _target.died.is_connected(_on_target_died):
+		_target.died.connect(_on_target_died)
+	if trajectory:
+		trajectory.retarget(new_target)
+
+
 func _handle_bounce(from_target: Entity) -> void:
 	_stats.bounces_remaining -= 1
-	
+
 	if not _source or not _source.target_module:
 		queue_free()
 		return
-	
+
 	var new_target := _source.target_module.get_target_from(
 		from_target.global_position,
 		TargetModule.TargettingFromStrategy.CLOSEST_ENEMY,
 		_hit_history
 	)
-	
+
 	if new_target:
-		_target = new_target
-		if _target.died and not _target.died.is_connected(_on_target_died):
-			_target.died.connect(_on_target_died)
-		
-		# Tell trajectory to retarget
-		if trajectory:
-			trajectory.retarget(new_target)
+		retarget(new_target)
 	else:
 		# No valid _target found, destroy projectile
 		queue_free()
 
 
-func _on_target_died(_who) -> void:
+func _on_target_died() -> void:
 	queue_free()

@@ -34,7 +34,8 @@ func update(delta: float) -> void:
 	var next_t: float = min(1.0, _t + 0.02)
 	var next_base := _start_pos.lerp(_target_snapshot, next_t)
 	var next_height := (arc_height + _height_variation) * sin(PI * next_t)
-	_projectile.look_at(next_base + Vector3.UP * next_height)
+	if _projectile.global_position != next_base + Vector3.UP * next_height:
+		_projectile.look_at(next_base + Vector3.UP * next_height)
 
 
 func _on_retarget() -> void:

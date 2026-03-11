@@ -18,5 +18,8 @@ picture = ExtResource("1_de10l")
 families = Array[int]([7, 7, 7])
 rarity = 2
 player_upgrade = SubResource("Resource_jk0e5")
+points = Dictionary[int, int]({
+7: 3
+})
 lvl = 2
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

@@ -15,6 +15,8 @@ var attack_speed: float:
 		_attack_speed = value
 		_set_auto_attack_speed(_attack_speed)
 
+var _paused_time_left: float = -1.0
+
 var _attack_strategy: TargetModule.TargettingStrategy = TargetModule.TargettingStrategy.RANDOM_ENEMY
 
 var _current_target: Entity
@@ -48,6 +50,9 @@ func _ready() -> void:
 	_owner.stats.attack_speed_changed.connect(_on_owner_stats_attack_speed_changed)
 	_owner.died.connect(_on_owner_died)
 	_owner.auto_attack_completed.connect(_on_owner_auto_attack_completed)
+	
+	if _owner.status_module != null:
+		_owner.status_module.stunned_changed.connect(_on_owner_stunned_changed)
 
 
 func connect_modules(auto_attack_module: ActionSenderAutoAttackModule) -> void:
@@ -124,10 +129,16 @@ func _on_owner_stats_attack_speed_changed(new_attack_speed: float) -> void:
 	attack_speed = new_attack_speed
 
 
-func _on_owner_died(_unused) -> void:
+func _on_owner_died() -> void:
 	stop()
 
 
 func _on_owner_auto_attack_completed(_entity: Entity) -> void:
-	print("DEBUG AutoAttackPeriodicModule: _on_owner_auto_attack_completed")
 	_auto_attack_timer.start()
+
+
+func _on_owner_stunned_changed(is_active: bool, _duration: float, _infinite: bool) -> void:
+	if is_active:
+		_auto_attack_timer.stop()
+	else:
+		_auto_attack_timer.start()

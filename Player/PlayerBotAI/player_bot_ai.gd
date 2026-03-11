@@ -10,7 +10,7 @@ const MAX_WAIT_TIME: float = 2.1
 var player: Player # Player Ref this BotAI is linked to
 
 @export var _wake_up_timer: Timer # Every timer tick, bot wakes up, figure out what to do, then go to sleep again (wait_time is random)
-@export var _card_shop: CardShop
+var _card_shop: PlayerCardShop
 
 var _rng: RandomNumberGenerator
 var _economy_strategy: EconomyStrategy
@@ -21,13 +21,15 @@ enum EconomyStrategy {
 }
 
 
-func _enter_tree() -> void:
-	_card_shop.player = player
-
-
 func _ready() -> void:
 	if player == null:
 		Verbose.error("PlayerBotAI: Can't exist without a ref to a player !", Verbose.Category.AI)
+		queue_free()
+		return
+
+	_card_shop = get_parent().get_node("CardShop") as PlayerCardShop
+	if _card_shop == null:
+		Verbose.error("PlayerBotAI: No CardShop sibling found under parent Player", Verbose.Category.AI)
 		queue_free()
 		return
 	
@@ -38,7 +40,7 @@ func _ready() -> void:
 	
 	_economy_strategy = EconomyStrategy.KEEPER if _rng.randi() % 2 == 0 else EconomyStrategy.WASTER
 	var tmp_debug_strat_str: String = "KEEPER" if _economy_strategy == EconomyStrategy.KEEPER else "WASTER"
-	Verbose.debug("PlayerBotAI: Starting AI for " + player.name + "[" + tmp_debug_strat_str + "]", Verbose.Category.AI)
+	Verbose.debug("PlayerBotAI: Starting AI for " + player.player_name + "[" + tmp_debug_strat_str + "]", Verbose.Category.AI)
 
 
 func _dumb_buying_area() -> void:

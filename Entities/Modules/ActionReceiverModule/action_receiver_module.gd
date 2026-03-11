@@ -4,10 +4,11 @@ extends Module
 # ============================== Enums ==============================
 
 enum ResultKey {
-	VALUE,              # Damage/heal/stacks received
-	IS_CRITICAL,        # Whether the action was critical
-	BLOCKED_BY_ARMOR,   # Whether damage was reduced by armor
-	DODGED,             # Whether the action was dodged
+	VALUE, # Damage/heal/stacks received
+	IS_CRITICAL, # Whether the action was critical
+	BLOCKED_BY_ARMOR, # Whether damage was reduced by armor
+	DODGED, # Whether the action was dodged
+	INVULNERABLE, # Whether the action was blocked by invulnerability
 }
 
 # ============================== Private variables ==============================

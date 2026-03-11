@@ -34,6 +34,13 @@ extends Resource
 	4: [],
 }
 
+@export var card_rarity_unlocked_by_level: Dictionary[int, Card.Rarity] = {
+	0: Card.Rarity.COMMON,
+	1: Card.Rarity.RARE,
+	2: Card.Rarity.EPIC,
+	3: Card.Rarity.LEGENDARY,
+}
+
 @export_subgroup("Drop Rates")
 ## Key: Family Level, Value: Dictionary[Card.Rarity, int] (Percentage)
 @export var drop_rates_by_family_level: Dictionary[int, Dictionary] = {

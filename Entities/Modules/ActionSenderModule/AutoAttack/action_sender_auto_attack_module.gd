@@ -4,15 +4,15 @@ extends ActionSenderModule
 # ============================== Enums ==============================
 
 enum AttackPhase {
-	COOLDOWN,     # Waiting for cooldown before next attack
-	APPROACHING,  # Moving towards target
-	ATTACKING     # Attack in progress, waiting for completion
+	COOLDOWN, # Waiting for cooldown before next attack
+	APPROACHING, # Moving towards target
+	ATTACKING # Attack in progress, waiting for completion
 }
 
 # ============================== Signals ==============================
 
-signal attack_started()  # Animation started
-signal attack_completed()  # Attack cycle complete, ready for next attack
+signal attack_started() # Animation started
+signal attack_completed() # Attack cycle complete, ready for next attack
 
 # ============================== Export variables ==============================
 
@@ -24,15 +24,15 @@ var _current_phase: AttackPhase = AttackPhase.COOLDOWN
 
 # Module references (set via connect_modules)
 var _movement_module: MovementModule = null
-var _animation_module = null  # AnimationModule, but no typing to avoid circular dependency
+var _animation_module = null # AnimationModule, but no typing to avoid circular dependency
 
 # Approach management
 var _is_approaching: bool = false
 var _approach_target: Entity = null
 
 # Pending attacks (for animations)
-var _pending_attacks: Array = []  # Array of AttackCommand
-var _pending_melee_attacks: Array = []  # Array of melee attack data
+var _pending_attacks: Array = [] # Array of AttackCommand
+var _pending_melee_attacks: Array = [] # Array of melee attack data
 
 # ============================== Public functions ==============================
 
@@ -43,6 +43,9 @@ func connect_modules(movement_module: MovementModule, animation_module: Animatio
 	# Connect to AnimationModule hit frame signal
 	if _animation_module != null:
 		_animation_module.attack_hit_frame.connect(_on_animation_module_attack_hit_frame)
+	
+	if _owner.status_module != null:
+		_owner.status_module.stunned_changed.connect(_on_owner_stunned_changed)
 
 
 func execute_auto_attack(target: Entity) -> void:
@@ -51,63 +54,73 @@ func execute_auto_attack(target: Entity) -> void:
 		attack_completed.emit()
 		return
 	
-	# Check range and possibly start approaching
-	if not _check_range_and_approach(target):
-		return  # Out of range, approach started or failed
+	if _owner.status_module.has_status(Status.Type.STUN):
+		attack_completed.emit()
+		return
 	
-	# Look at target
+	if not _check_range_and_approach(target):
+		return # Out of range, approach started or failed
+	
 	if _owner != null:
 		_owner.look_at_target_y_only(target.global_position)
 	
 	_current_phase = AttackPhase.ATTACKING
 	
-	# Dispatch to correct attack type
 	match _owner.stats.auto_attack_type:
-		EntityStats.AutoAttackType.RANGED: _execute_ranged_attack(target)
-		EntityStats.AutoAttackType.MELEE: _execute_melee_attack(target)
+		EntityStats.AutoAttackType.RANGED: _start_ranged_attack(target)
+		EntityStats.AutoAttackType.MELEE: _start_melee_attack(target)
 
 
-func on_ranged_animation_hit() -> void:
-	if _pending_attacks.is_empty():
-		return
+func _cancel_attack() -> void:
+	stop_approaching()
+	_pending_attacks.clear()
+	_pending_melee_attacks.clear()
+	_current_phase = AttackPhase.COOLDOWN
 	
-	var attack_cmd = _pending_attacks.pop_front()
-	_owner.projectile_attack(
-		attack_cmd.target,
-		attack_cmd.projectile_type,
-		attack_cmd.spawn_node,
-		attack_cmd.stats
-	)
-
-
-func on_melee_animation_hit() -> void:
-	if _pending_melee_attacks.is_empty():
-		return
+	if _animation_module != null:
+		_animation_module.stop_attack_animation()
 	
-	var melee_data: Dictionary = _pending_melee_attacks.pop_front()
-	_process_melee_hit(melee_data)
+	attack_completed.emit()
 
 
-func prepare_projectile_stats() -> ProjectileStats:
+func _prepare_projectile_stats() -> ProjectileStats:
 	var projectile_stats := ProjectileStats.new()
 	
-	# Store damage value for callback
-	var physical_damage: float = _owner.stats.attack_damage
-	
 	# Create damage callback
+	var damage_modifiers_callbacks: Array[Callable]
+	var additional_callbacks: Array[Callable]
+	_consume_modifiers(damage_modifiers_callbacks, additional_callbacks)
 	projectile_stats.on_hit_callbacks.append(func(data: Dictionary):
-		var hit_target: Entity = data[AutoAttackModifier.VarType.TARGET]
-		var hit_source: Entity = data[AutoAttackModifier.VarType.SOURCE]
+		var hit_target: Entity = data[ProjectileStats.VarType.TARGET]
+		var hit_source: Entity = data[ProjectileStats.VarType.SOURCE]
+		
+		var mod = {
+			AutoAttackModifier.VarType.SOURCE: hit_source,
+			AutoAttackModifier.VarType.TARGET: hit_target,
+			AutoAttackModifier.VarType.DAMAGE_ADD: 0,
+			AutoAttackModifier.VarType.DAMAGE_MUL: 100,
+		}
+		for damage_modifiers_callback in damage_modifiers_callbacks:
+			damage_modifiers_callback.call(mod)
+		
+		var add: float = mod[AutoAttackModifier.VarType.DAMAGE_ADD]
+		var mul: float = mod[AutoAttackModifier.VarType.DAMAGE_MUL]
+		var damage: float = ( _owner.stats.attack_damage + add) * (mul / 100.0)
+		var damage_done: float = 0
 		if hit_source and hit_target:
-			hit_source.direct_damage(hit_target, physical_damage, Utils.DamageType.PHYSICAL, &"auto_attack")
+			damage_done = hit_source.direct_damage(hit_target, damage, Utils.DamageType.PHYSICAL, &"auto_attack")
+		
+		for additional_callback in additional_callbacks:
+			additional_callback.call({
+				AutoAttackModifier.VarType.SOURCE: hit_source,
+				AutoAttackModifier.VarType.TARGET: hit_target,
+				AutoAttackModifier.VarType.POSITION: data[ProjectileStats.VarType.POSITION],
+				AutoAttackModifier.VarType.DAMAGE: damage_done,
+				AutoAttackModifier.VarType.PROJECTILE: data[ProjectileStats.VarType.PROJECTILE],
+			})
 	)
 	
-	_consume_modifiers(projectile_stats)
 	return projectile_stats
-
-
-func get_current_phase() -> AttackPhase:
-	return _current_phase
 
 
 func is_approaching() -> bool:
@@ -154,9 +167,9 @@ func _check_range_and_approach(target: Entity) -> bool:
 	return false
 
 
-func _execute_ranged_attack(target: Entity) -> void:
+func _start_ranged_attack(target: Entity) -> void:
 	var projectile_spawn: Node3D = _projectile_spawn if _projectile_spawn != null else _owner
-	var projectile_stats: ProjectileStats = prepare_projectile_stats()
+	var projectile_stats: ProjectileStats = _prepare_projectile_stats()
 	
 	var attack_cmd = AttackCommand.new().setup(
 		target,
@@ -181,14 +194,15 @@ func _execute_ranged_attack(target: Entity) -> void:
 			attack_cmd.target,
 			attack_cmd.projectile_type,
 			attack_cmd.spawn_node,
-			attack_cmd.stats
+			attack_cmd.stats,
+			true
 		)
 		_owner.auto_attack_completed.emit(_owner)
 		attack_completed.emit()
 
 
-func _execute_melee_attack(target: Entity) -> void:
-	var attack_stats: ProjectileStats = prepare_projectile_stats()
+func _start_melee_attack(target: Entity) -> void:
+	var attack_stats: ProjectileStats = _prepare_projectile_stats()
 	var melee_data := {
 		"target": target,
 		"stats": attack_stats
@@ -218,26 +232,19 @@ func _process_melee_hit(melee_data: Dictionary) -> void:
 	for cb: Callable in stats.on_hit_callbacks:
 		if cb.is_valid():
 			cb.call({
-				AutoAttackModifier.VarType.SOURCE: _owner,
-				AutoAttackModifier.VarType.TARGET: target,
-				AutoAttackModifier.VarType.PROJECTILE: null,
-				AutoAttackModifier.VarType.POSITION: _owner.global_position
+				ProjectileStats.VarType.SOURCE: _owner,
+				ProjectileStats.VarType.TARGET: target,
+				ProjectileStats.VarType.PROJECTILE: null,
+				ProjectileStats.VarType.POSITION: _owner.global_position
 			})
 
 
-func _consume_modifiers(projectile_stats: ProjectileStats) -> void:
+func _consume_modifiers(damage_modifier_callbacks: Array[Callable], additional_callbacks: Array[Callable]) -> void:
 	for aa_modifier: AutoAttackModifier in _owner.auto_attack_modifier_registry.consume_all_modifiers():
-		# Execute on-attack callbacks
-		if aa_modifier.on_attack_logic_callback.is_valid():
-			aa_modifier.on_attack_logic_callback.call({})
-		if aa_modifier.on_attack_visual_callback.is_valid():
-			aa_modifier.on_attack_visual_callback.call({})
-		
-		# Add on-hit callbacks to projectile
-		if aa_modifier.on_hit_logic_callback.is_valid():
-			projectile_stats.on_hit_callbacks.append(aa_modifier.on_hit_logic_callback)
-		if aa_modifier.on_hit_visual_callback.is_valid():
-			projectile_stats.on_hit_callbacks.append(aa_modifier.on_hit_visual_callback)
+		if aa_modifier.additional_effect_callback.is_valid():
+			additional_callbacks.append(aa_modifier.additional_effect_callback)
+		if aa_modifier.damage_modifier_callback.is_valid():
+			damage_modifier_callbacks.append(aa_modifier.damage_modifier_callback)
 
 
 # ============================== Callbacks ==============================
@@ -246,9 +253,36 @@ func _on_animation_module_attack_hit_frame() -> void:
 	# Called when animation reaches hit frame
 	match _owner.stats.auto_attack_type:
 		EntityStats.AutoAttackType.RANGED:
-			on_ranged_animation_hit()
+			_on_ranged_animation_hit()
 		EntityStats.AutoAttackType.MELEE:
-			on_melee_animation_hit()
+			_on_melee_animation_hit()
 	
 	# Signal completion so module can restart cooldown
 	_owner.auto_attack_completed.emit(_owner)
+
+
+func _on_ranged_animation_hit() -> void:
+	if _pending_attacks.is_empty():
+		return
+	
+	var attack_cmd = _pending_attacks.pop_front()
+	_owner.projectile_attack(
+		attack_cmd.target,
+		attack_cmd.projectile_type,
+		attack_cmd.spawn_node,
+		attack_cmd.stats,
+		true
+	)
+
+
+func _on_melee_animation_hit() -> void:
+	if _pending_melee_attacks.is_empty():
+		return
+	
+	var melee_data: Dictionary = _pending_melee_attacks.pop_front()
+	_process_melee_hit(melee_data)
+
+
+func _on_owner_stunned_changed(is_active: bool, _duration: float, _infinite: bool) -> void:
+	if is_active:
+		_cancel_attack()

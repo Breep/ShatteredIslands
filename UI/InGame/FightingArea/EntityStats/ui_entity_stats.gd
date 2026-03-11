@@ -169,7 +169,7 @@ func _on_entity_regen_stacks_changed(regen_stacks: int) -> void:
 #endregion
 
 #region Interaction callbacks
-func _on_entity_damage_taken(_entity_ref: Entity, damage: int, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor) -> void:
+func _on_entity_damage_taken(damage: int, damage_type: Utils.DamageType, is_critical: bool, blocked_by_armor) -> void:
 	var popup_pos: Vector2
 	if blocked_by_armor:
 		popup_pos = _health_bar.get_armor_popup_global_pos()
