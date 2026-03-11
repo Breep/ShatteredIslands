@@ -1,4 +1,4 @@
-class_name DefenseAbsorptionMatrix
+class_name EngineerAbsorptionMatrix
 extends HeroUpgrade
 
 @export var _base_chance: Array[float]

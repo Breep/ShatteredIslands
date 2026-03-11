@@ -1,19 +1,19 @@
 [gd_resource type="Resource" script_class="Card" format=3 uid="uid://dn12dex5vaxb1"]
 
-[ext_resource type="Texture2D" uid="uid://dhtqdohppanui" path="res://Card/Descriptions/Cards/Engineer/Rare/AbsorptionMatrix/shieldomatic_absorption_matrix.jpg" id="1_6sx4m"]
+[ext_resource type="Texture2D" uid="uid://dhtqdohppanui" path="res://Card/Descriptions/Cards/Engineer/Common/AbsorptionMatrix/engineer_absorption_matrix.jpg" id="1_6sx4m"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_card_template"]
-[ext_resource type="Script" uid="uid://j3so7dsgb78a" path="res://Card/Descriptions/Cards/Engineer/Rare/AbsorptionMatrix/defense_absorption_matrix.gd" id="2_upgrade_logic"]
+[ext_resource type="Script" uid="uid://j3so7dsgb78a" path="res://Card/Descriptions/Cards/Engineer/Common/AbsorptionMatrix/engineer_absorption_matrix.gd" id="2_upgrade_logic"]
 
 [sub_resource type="Resource" id="Resource_xwdjj"]
 script = ExtResource("2_upgrade_logic")
-_base_chance = Array[float]([7.0, 10.0, 50.0])
+_base_chance = Array[float]([7.0, 14.0, 21.0, 28.0, 35.0])
+_rarity = 0
 
 [resource]
 script = ExtResource("1_card_template")
 name = "Absorption Matrix"
 picture = ExtResource("1_6sx4m")
 families = Array[int]([2])
-rarity = 1
 player_upgrade = SubResource("Resource_xwdjj")
 points = Dictionary[int, int]({
 2: 2

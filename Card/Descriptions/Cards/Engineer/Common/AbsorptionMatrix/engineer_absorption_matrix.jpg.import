@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://k5v6yll4kd20"
-path="res://.godot/imported/shieldomatic_toxic_filtration_layer_.jpg-450cea56d8e9614edf9d9d8cc14ee148.ctex"
+uid="uid://dhtqdohppanui"
+path="res://.godot/imported/engineer_absorption_matrix.jpg-ff5a7ef4d6dde64a5be3171fa71bd1ff.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Card/Descriptions/Cards/Engineer/Common/ToxicFiltrationLayer/shieldomatic_toxic_filtration_layer_.jpg"
-dest_files=["res://.godot/imported/shieldomatic_toxic_filtration_layer_.jpg-450cea56d8e9614edf9d9d8cc14ee148.ctex"]
+source_file="res://Card/Descriptions/Cards/Engineer/Common/AbsorptionMatrix/engineer_absorption_matrix.jpg"
+dest_files=["res://.godot/imported/engineer_absorption_matrix.jpg-ff5a7ef4d6dde64a5be3171fa71bd1ff.ctex"]
 
 [params]
 

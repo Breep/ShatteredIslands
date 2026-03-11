@@ -1,4 +1,4 @@
-class_name DefenseReactiveCover
+class_name EngineerReactiveCover
 extends HeroUpgrade
 
 @export var _base_chance: Array[float]
@@ -23,10 +23,6 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	ctx.battle_callbacks.register_battle_start(&"Reactive Cover", func() -> void:
 		if not ctx.hero.damage_taken.is_connected(_on_damage_taken):
 			ctx.hero.damage_taken.connect(_on_damage_taken)
-	)
-	ctx.battle_callbacks.register_battle_end(&"Reactive Cover", func() -> void:
-		if ctx.hero.damage_taken.is_connected(_on_damage_taken):
-			ctx.hero.damage_taken.disconnect(_on_damage_taken)
 	)
 
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dhtqdohppanui"
-path="res://.godot/imported/shieldomatic_absorption_matrix.jpg-1069019b2a2fe46071617aa7259fc08e.ctex"
+uid="uid://d2w18hror3yb4"
+path="res://.godot/imported/engineer_avengers_assemble.png-a48122b1c6761bff136f1cf7c0e50235.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Card/Descriptions/Cards/Engineer/Rare/AbsorptionMatrix/shieldomatic_absorption_matrix.jpg"
-dest_files=["res://.godot/imported/shieldomatic_absorption_matrix.jpg-1069019b2a2fe46071617aa7259fc08e.ctex"]
+source_file="res://Card/Descriptions/Cards/Engineer/Common/AvengersAssemble/engineer_avengers_assemble.png"
+dest_files=["res://.godot/imported/engineer_avengers_assemble.png-a48122b1c6761bff136f1cf7c0e50235.ctex"]
 
 [params]
 

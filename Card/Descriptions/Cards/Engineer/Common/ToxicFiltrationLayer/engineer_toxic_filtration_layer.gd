@@ -1,4 +1,4 @@
-class_name DefenseToxicFiltrationLayer
+class_name EngineerToxicFiltrationLayer
 extends HeroUpgrade
 
 @export var _base_efficiency: Array[float]
