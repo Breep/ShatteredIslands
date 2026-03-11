@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://bdakqbydn3ehf"]
 
 [ext_resource type="Material" uid="uid://ft0cklrieugv" path="res://Props/DefaultBattleIsland/Arch_island/Material/M_tree_rocks_braz.tres" id="1_438oo"]
+[ext_resource type="PackedScene" uid="uid://bd0isr001gq4r" path="res://Props/DefaultBattleIsland/Arch_island/VFX/VFX_FirePops_Anime_Blue.tscn" id="1_aka41"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_2cpwl"]
 _surfaces = [{
@@ -39,7 +40,10 @@ shadow_mesh = SubResource("ArrayMesh_2cpwl")
 
 [node name="brasero" type="Node3D" unique_id=1993939989]
 
+[node name="VFX_FirePops_Anime_Blue" parent="." unique_id=641016161 instance=ExtResource("1_aka41")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13393652, 0.8078556, 0.13448858)
+
 [node name="SM_caldron_Low_001" type="MeshInstance3D" parent="." unique_id=273631779]
-transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, -0.06887079, 0.44477862, 0.18272005)
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, -0.10959811, 0.44025677, 0.18076168)
 mesh = SubResource("ArrayMesh_db6m4")
 skeleton = NodePath("")
