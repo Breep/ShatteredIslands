@@ -67,11 +67,3 @@ func _spawn_player_hero(player: Player, avaible_spawns: Array[SpawnPoint]) -> vo
 			return
 
 	Verbose.error("No spawn point found for team " + str(player.team), Verbose.Category.TABLE)
-
-
-@rpc("authority", "call_local")
-func reparent_entity(entity_path: NodePath, new_parent_path: NodePath):
-	var entity = get_node(entity_path)
-	var new_parent = get_node(new_parent_path)
-	if entity and new_parent:
-		entity.reparent(new_parent)

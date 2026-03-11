@@ -17,11 +17,14 @@ anchors_preset = 9
 anchor_bottom = 1.0
 offset_right = 118.0
 grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+pivot_offset_ratio = Vector2(0, 0.5)
 script = ExtResource("1_upfde")
 _family_portraits = [NodePath("MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family1/HBoxContainer/Family/UIFamilyMain"), NodePath("MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family2/HBoxContainer/Family/UIFamilyMain"), NodePath("MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family3/HBoxContainer/Family/UIFamilyMain"), NodePath("MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family4/HBoxContainer/Family/UIFamilyMain"), NodePath("MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family5/HBoxContainer/Family/UIFamilyMain"), NodePath("MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family6/HBoxContainer/Family/UIFamilyMain"), NodePath("MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family7/HBoxContainer/Family/UIFamilyMain"), NodePath("MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family8/HBoxContainer/Family/UIFamilyMain")]
 
 [node name="ConnectBar" type="ColorRect" parent="." unique_id=736736615]
 unique_name_in_owner = true
+visible = false
 layout_mode = 0
 offset_top = 443.0
 offset_right = 205.0
@@ -85,7 +88,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = -23
+theme_override_constants/separation = -18
 alignment = 1
 
 [node name="Family1" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer" unique_id=1029145385]
@@ -142,6 +145,7 @@ layout_mode = 1
 [node name="Empty" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family1/HBoxContainer" unique_id=1851792109]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
 mouse_filter = 2
 
 [node name="Family2" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer" unique_id=2075307807]
@@ -163,6 +167,7 @@ mouse_filter = 2
 [node name="Empty" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family2/HBoxContainer" unique_id=1153146726]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
 mouse_filter = 2
 
 [node name="Family" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family2/HBoxContainer" unique_id=249515431]
@@ -254,6 +259,7 @@ layout_mode = 1
 [node name="Empty" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family3/HBoxContainer" unique_id=1693703111]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
 mouse_filter = 2
 
 [node name="Family4" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer" unique_id=1161633453]
@@ -275,6 +281,7 @@ mouse_filter = 2
 [node name="Empty" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family4/HBoxContainer" unique_id=943292351]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
 mouse_filter = 2
 
 [node name="Family" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family4/HBoxContainer" unique_id=1501985242]
@@ -366,6 +373,7 @@ layout_mode = 1
 [node name="Empty" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family5/HBoxContainer" unique_id=1268958342]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
 mouse_filter = 2
 
 [node name="Family6" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer" unique_id=2114293866]
@@ -387,6 +395,7 @@ mouse_filter = 2
 [node name="Empty" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family6/HBoxContainer" unique_id=1019233755]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
 mouse_filter = 2
 
 [node name="Family" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family6/HBoxContainer" unique_id=1992258385]
@@ -478,6 +487,7 @@ layout_mode = 1
 [node name="Empty" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family7/HBoxContainer" unique_id=1272565203]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
 mouse_filter = 2
 
 [node name="Family8" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer" unique_id=1973825263]
@@ -499,6 +509,7 @@ mouse_filter = 2
 [node name="Empty" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family8/HBoxContainer" unique_id=622403411]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
 mouse_filter = 2
 
 [node name="Family" type="Control" parent="MarginContainer/MainVBox/NormalFamilies/VBoxContainer/Family8/HBoxContainer" unique_id=1866532734]
@@ -538,13 +549,14 @@ layout_mode = 1
 
 [node name="InfoPanel" type="Panel" parent="." unique_id=578594225]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 120.0
-offset_top = -177.0
-offset_right = 449.0
-offset_bottom = 151.0
+offset_left = 146.0
+offset_top = -176.66666
+offset_right = 475.0
+offset_bottom = 151.33337
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_upfde")
