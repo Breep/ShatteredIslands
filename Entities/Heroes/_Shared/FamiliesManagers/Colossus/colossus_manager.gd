@@ -5,6 +5,7 @@ extends FamilyManager
 const HP_MAX_INCREASE: Array[float] = [15.0, 20.0, 35.0, 50.0]
 const SIZE_DEFENSE_INCREASE: Array[float] = [10.0, 20.0, 30.0, 40.0]
 
+
 #region ============================== public API ==============================
 func start() -> void:
 	Verbose.debug("ColossusManager start", Verbose.Category.FAMILY_MANAGER)
@@ -42,6 +43,10 @@ func _start_passive() -> void:
 	_owner.stat_modifiers_registry.register_modifier(mod3)
 	
 	
-	var ratio_scaling: float = 1 + (SIZE_DEFENSE_INCREASE[level - 1] / 100)
-	var vector_scaling: Vector3 = Vector3(ratio_scaling, ratio_scaling, ratio_scaling)
-	_owner.scale = vector_scaling
+	var ratio_scaling: float = _owner.scale[1] + (SIZE_DEFENSE_INCREASE[level - 1] / 100)
+	print(str(ratio_scaling)) # c'est = à 1.X
+	
+	print("Size du dark knight: " + str(_owner.scale)) 
+	_owner.scale = Vector3(ratio_scaling, ratio_scaling, ratio_scaling) 
+	print("Size du dark knight: " + str(_owner.scale))
+	print("Size du dark knight: " + str(_owner.scale[1])) # pas egal à 1.X
