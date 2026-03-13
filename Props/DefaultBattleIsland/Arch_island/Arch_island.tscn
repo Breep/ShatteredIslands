@@ -58,10 +58,9 @@ sdfgi_bounce_feedback = 0.39
 sdfgi_cascades = 1
 sdfgi_min_cell_size = 0.03125
 glow_enabled = true
-glow_intensity = 5.32
+glow_intensity = 2.78
 glow_strength = 0.46
-glow_bloom = 0.3
-glow_blend_mode = 2
+glow_bloom = 0.13
 glow_hdr_scale = 1.0
 fog_mode = 1
 fog_light_color = Color(0.11147597, 0.18064603, 0.38794202, 1)
@@ -71,40 +70,49 @@ fog_aerial_perspective = 0.32
 fog_sky_affect = 0.0
 fog_height = 1024.0
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.0055
-volumetric_fog_albedo = Color(0.7793438, 0.8617986, 0.98495215, 1)
+volumetric_fog_density = 0.003
+volumetric_fog_albedo = Color(0.77058744, 0.78809345, 0.9474047, 1)
 volumetric_fog_emission_energy = 0.0
 volumetric_fog_anisotropy = 0.56
 volumetric_fog_length = 33.88
 adjustment_enabled = true
-adjustment_brightness = 0.93
-adjustment_contrast = 1.155
-adjustment_saturation = 1.13
+adjustment_brightness = 0.95
+adjustment_contrast = 1.25
+adjustment_saturation = 1.07
 
 [node name="IslandRemake" type="Node3D" unique_id=1888769254]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=31111793]
 environment = SubResource("Environment_x7fny")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=1490122868]
-transform = Transform3D(-0.176318, 0.98412967, -0.020007083, 0.072349556, 0.03322735, 0.9968257, 0.9816709, 0.1743109, -0.07706003, 20.563519, 10.99836, -31.757275)
-light_color = Color(0.9929041, 0.96732444, 0.96319014, 1)
-light_energy = 2.379
+[node name="L_Base" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=1490122868]
+transform = Transform3D(-0.7448171, 0.09747739, 0.66011035, 0.5889815, 0.5609823, 0.58172154, -0.3136054, 0.8220688, -0.47524142, 0.37235212, -4.6700974, -2.9861012)
+light_energy = 2.087
 light_indirect_energy = 16.0
 light_volumetric_fog_energy = 4.666
+light_angular_distance = 3.15
 light_bake_mode = 1
 shadow_enabled = true
-shadow_opacity = 0.6
-shadow_blur = 0.5
+shadow_bias = 0.05
+shadow_normal_bias = 0.939
+shadow_transmittance_bias = -1.05
+shadow_opacity = 0.35
+shadow_blur = 0.827
 
-[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=364474426]
+[node name="L_Rim" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=364474426]
 transform = Transform3D(0.830382, 0, -0.55719453, 0, 1, 0, 0.55719453, 0, 0.830382, -39.630978, 0, 20.031944)
-light_color = Color(0.43926278, 0.71953905, 0.9581161, 1)
+light_color = Color(0.45271707, 0.72297376, 0.91598535, 1)
+light_energy = 0.869
 
-[node name="DirectionalLight3D3" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=1600156000]
+[node name="L_back" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=1600156000]
 transform = Transform3D(0.80162966, 0, 0.5978212, 0, 1, 0, -0.5978212, 0, 0.80162966, 46.34609, 0, -38.07856)
 light_color = Color(0.962107, 0.80602366, 0.695401, 1)
-light_energy = 1.261
+light_energy = 0.869
+light_angular_distance = 17.63
+
+[node name="Camera3D" type="Camera3D" parent="WorldEnvironment" unique_id=962265795]
+transform = Transform3D(1, 0, 0, 0, 0.64278764, 0.76604444, 0, -0.76604444, 0.64278764, -0.148, 34.039, 29.309)
+fov = 40.0
 
 [node name="Props_Arena_Island" parent="." unique_id=1505016571 instance=ExtResource("1_vk4nd")]
 transform = Transform3D(1.0005836, 0, 0, 0, 1.0005836, 0, 0, 0, 1.0005836, -0.030916214, -0.0055298805, 0.014993191)
@@ -610,7 +618,7 @@ transform = Transform3D(0.8811002, -0.18846755, 0.9116803, 0.26862764, 1.2533383
 transform = Transform3D(1.2221723, -0.07109078, 1.13289, -0.2821172, 1.5934602, 0.404343, -1.0995015, -0.48788267, 1.1555371, 4.2233987, -0.028075129, -17.024212)
 
 [node name="Particule" parent="." unique_id=212154916 instance=ExtResource("26_b3rpl")]
-transform = Transform3D(0.51544213, 0, 0, 0, 0.51544213, 0, 0, 0, 0.51544213, 15.243535, 8.952049, -8.431133)
+transform = Transform3D(0.51544213, 0, 0, 0, 0.51544213, 0, 0, 0, 0.51544213, 14.762386, 5.781761, -13.368492)
 
 [node name="tree02" parent="." unique_id=55168550 instance=ExtResource("27_wicrg")]
 transform = Transform3D(-43.58937, 0, -0.52008003, 0, 41.503345, 0, 0.54626304, 0, -41.500084, 31.607319, 5.3652925, -17.180136)

@@ -1,24 +1,15 @@
-[gd_scene format=3 uid="uid://bd0isr001gq4r"]
+[gd_scene format=3 uid="uid://co4n7kfk5vv60"]
 
 [ext_resource type="Shader" uid="uid://dogjuxsoaie2v" path="res://Props/DefaultBattleIsland/Arch_island/VFX/s_animated_ds_unlit_bw.gdshader" id="1_r0dek"]
-[ext_resource type="Texture2D" uid="uid://c6vf2jt62yi7w" path="res://Props/DefaultBattleIsland/Arch_island/VFX/T_firex_shot88_billboard_bw.png" id="2_7dlxu"]
 [ext_resource type="ArrayMesh" uid="uid://c67cdh87yovig" path="res://Props/DefaultBattleIsland/Arch_island/VFX/sm_plane_cross1a_thin.obj" id="3_vmxs2"]
-
-[sub_resource type="Gradient" id="Gradient_uch0h"]
-offsets = PackedFloat32Array(0, 0.325301, 0.807229, 1)
-colors = PackedColorArray(0, 0, 0, 0, 0.05, 0.05, 0.05, 0.32549, 0.310617, 0.310617, 0.310617, 0.807229, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_gu006"]
-gradient = SubResource("Gradient_uch0h")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g3e5s"]
 render_priority = 1
 shader = ExtResource("1_r0dek")
-shader_parameter/sprite_sheet = ExtResource("2_7dlxu")
-shader_parameter/gradient_1d_texture = SubResource("GradientTexture1D_gu006")
-shader_parameter/frame_count = Vector2(8, 4)
-shader_parameter/is_loop = false
-shader_parameter/uv_offset = Vector2(0, 0.001)
+shader_parameter/scroll_speed = -0.8
+shader_parameter/uv_scale = Vector2(1, 2)
+shader_parameter/foam_color = Color(1, 1, 1, 0.9)
+shader_parameter/alpha_intensity = 1.0
 
 [sub_resource type="Curve" id="Curve_1jeec"]
 _data = [Vector2(0, 0), 0.0, 1.0, 0, 0, Vector2(1, 1), 1.0, 0.0, 0, 0]

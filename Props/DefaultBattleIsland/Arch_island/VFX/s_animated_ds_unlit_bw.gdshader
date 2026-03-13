@@ -1,39 +1,44 @@
 shader_type spatial;
-render_mode unshaded, cull_disabled;
 
-uniform sampler2D sprite_sheet;
-uniform sampler2D gradient_1d_texture:repeat_disable;
-uniform vec2 frame_count = vec2(4.0, 3.0); // Columns, Rows
-uniform bool is_loop = false;
-uniform vec2 uv_offset = vec2(0.0);
+// On active la transparence (blend_mix + depth_draw_opaque désactivé)
+// et on désactive le backface culling pour voir la cascade des deux côtés
+render_mode blend_mix, depth_draw_opaque, cull_disabled;
 
-varying vec2 anim_UV;
+// --- UNIFORMS (paramètres réglables dans l'inspecteur) ---
 
-void vertex() {
-    // Calculate frame offset (your original method)
-    float last_cell = (frame_count.x * frame_count.y) - 1.0;
-	
-	float timex = COLOR.a;
-	if (is_loop){ timex = TIME;}
-    float frame_index = floor(timex * last_cell);
-    vec2 frame_offset = vec2(
-        mod(frame_index, frame_count.x) / frame_count.x,
-        floor(frame_index / frame_count.x) / frame_count.y
-    );
+// La texture d'écume (PNG avec alpha)
+uniform sampler2D foam_texture : source_color, filter_linear_mipmap, repeat_enable;
 
-    // Apply texture scaling
-    vec2 frame_size = vec2(1.0) / frame_count;
-    anim_UV = (UV * frame_size + frame_offset);
-}
+// Vitesse de défilement vertical (valeur négative = vers le bas)
+uniform float scroll_speed : hint_range(-5.0, 5.0) = -0.8;
+
+// Combien de fois la texture se répète (tiling)
+uniform vec2 uv_scale = vec2(1.0, 2.0);
+
+// Couleur de teinte appliquée à l'écume
+uniform vec4 foam_color : source_color = vec4(1.0, 1.0, 1.0, 0.9);
+
+// Intensité globale de l'opacité
+uniform float alpha_intensity : hint_range(0.0, 2.0) = 1.0;
 
 void fragment() {
-	
-    float img = texture(sprite_sheet, anim_UV+ uv_offset ).r;
-	vec4 tex = texture(gradient_1d_texture,vec2(img));
-    ALBEDO = tex.rgb * COLOR.rgb;
-	
-	float alphad = tex.a;
-	if (is_loop){alphad=alphad*COLOR.a;}
-    ALPHA = alphad;
+    // On scale les UV pour contrôler le tiling
+    vec2 scrolled_uv = UV * uv_scale;
 
+    // On décale les UV sur l'axe Y avec le temps
+    // TIME est une variable intégrée de Godot qui s'incrémente chaque frame
+    scrolled_uv.y += TIME * scroll_speed;
+
+    // On sample la texture d'écume aux UV décalés
+    vec4 foam = texture(foam_texture, scrolled_uv);
+
+    // On applique la couleur de teinte
+    ALBEDO = foam.rgb * foam_color.rgb;
+
+    // L'alpha final = alpha de la texture × alpha de la teinte × intensité
+    ALPHA = foam.a * foam_color.a * alpha_intensity;
+
+    // Optionnel : un peu de rugosité pour capter la lumière
+    ROUGHNESS = 0.6;
+    METALLIC = 0.0;
 }
