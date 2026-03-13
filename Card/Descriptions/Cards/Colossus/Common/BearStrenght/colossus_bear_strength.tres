@@ -8,6 +8,7 @@
 script = ExtResource("2_jectr")
 _as_reduction = Array[float]([7.0, 14.0, 21.0, 28.0, 40.0])
 _hp_to_ad_percent = Array[float]([1.0, 2.0, 3.0, 4.0, 6.0])
+_size_to_ad_percent = Array[float]([30.0, 40.0, 50.0, 60.0, 75.0])
 metadata/_custom_type_script = "uid://6y21jw46g3hf"
 
 [resource]
