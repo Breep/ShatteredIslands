@@ -9,7 +9,7 @@ extends HeroUpgrade
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	
 	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("Energy Barrier: Wrong card_lvl: ", card_lvl)
+		printerr("Seismic Slam: Wrong card_lvl: ", card_lvl)
 		return
 	
 	var period: float = _periods[card_lvl - 1]
