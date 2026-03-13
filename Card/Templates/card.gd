@@ -17,9 +17,9 @@ const RARITY_COLORS: Dictionary[Rarity, Color] = {
 
 const RARITY_MAX_LEVEL: Dictionary[Rarity, int] = {
 	Rarity.COMMON: 5,
-	Rarity.RARE: 3,
-	Rarity.EPIC: 2,
-	Rarity.LEGENDARY: 1,
+	Rarity.RARE: 5,
+	Rarity.EPIC: 3,
+	Rarity.LEGENDARY: 3,
 }
 
 const RARITY_CARD_VALUE: Dictionary[Rarity, int] = {
