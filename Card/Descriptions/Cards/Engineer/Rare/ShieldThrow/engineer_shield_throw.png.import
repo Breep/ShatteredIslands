@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dvt3bjt0pngjx"
-path="res://.godot/imported/shieldomatic_shield_throw.png-d79ec0a80b53a8f30c4d74ff51b0f2f4.ctex"
+path="res://.godot/imported/engineer_shield_throw.png-ee58aa4ebf132311a3a0c8dbc2ce397a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Card/Descriptions/Cards/Engineer/Rare/ShieldThrow/shieldomatic_shield_throw.png"
-dest_files=["res://.godot/imported/shieldomatic_shield_throw.png-d79ec0a80b53a8f30c4d74ff51b0f2f4.ctex"]
+source_file="res://Card/Descriptions/Cards/Engineer/Rare/ShieldThrow/engineer_shield_throw.png"
+dest_files=["res://.godot/imported/engineer_shield_throw.png-ee58aa4ebf132311a3a0c8dbc2ce397a.ctex"]
 
 [params]
 
