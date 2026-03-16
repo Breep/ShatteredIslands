@@ -36,12 +36,15 @@ signal has_been_reset()
 #region ============================== Health ==============================
 @export_group("Health")
 signal health_max_changed(new_health_max: float)
-var _health_max: float = 100 # Maximum health of the entity (Can't be heal over this)
+var _health_max: float # Maximum health of the entity (Can't be heal over this)
 @export var health_max: float:
 	get: return _health_max
 	set(value):
 		if value == _health_max: return
+		var old_health_max: float = _health_max
 		_health_max = value
+		if _health_max > old_health_max: health += _health_max - old_health_max
+		else: health = clampf(health, 0, value)
 		health_max_changed.emit(_health_max)
 
 signal health_changed(new_health: float)

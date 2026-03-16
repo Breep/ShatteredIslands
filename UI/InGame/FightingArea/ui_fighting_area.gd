@@ -37,6 +37,7 @@ func update_content(fighting_area: FightingArea) -> void:
 	match battle_type:
 		Battle.BattleType.VS_1: _set_layout_1v1(heroes)
 		Battle.BattleType.VS_2: _set_layout_2v2(heroes)
+		Battle.BattleType.FFA_SOLO_3: _set_layout_2v2(heroes)
 
 
 func set_active() -> void:

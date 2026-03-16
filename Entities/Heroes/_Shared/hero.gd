@@ -61,6 +61,7 @@ func set_display_mode(mode: DisplayMode) -> void:
 	display_mode = mode
 	_apply_display_mode()
 
+
 func get_families_level() -> Dictionary[Family.Type, int]:
 	var families_level: Dictionary[Family.Type, int]
 	for family_type in _family_managers.keys():
@@ -130,6 +131,8 @@ func _ready() -> void:
 		_apply_all_cards_upgrades()
 
 	_apply_display_mode()
+	for family_manager: FamilyManager in _family_managers.values():
+		family_manager.apply_passive()
 
 	super._ready()
 #endregion

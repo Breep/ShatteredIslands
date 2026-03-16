@@ -4,7 +4,6 @@ extends HeroUpgrade
 @export var _damage_per_stack: Array[float]
 @export var _bounce_chance_per_stack: Array[float]
 @export var _period: Array[float]
-@export var _rarity: Card.Rarity = Card.Rarity.RARE
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:

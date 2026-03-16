@@ -3,7 +3,6 @@ extends HeroUpgrade
 
 @export var _base_hp_threshold_percent: Array[float]
 @export var _base_regen_amount: Array[float]
-@export var _rarity: Card.Rarity = Card.Rarity.LEGENDARY
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:

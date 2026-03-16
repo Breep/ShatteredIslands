@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bwty40vjvecu"]
+
+[ext_resource type="Script" uid="uid://cgufn0dfs2blj" path="res://Entities/NPC/Fighting/Engineer/FieldGenerator/field_generator_beam.gd" id="1_script"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_beam"]
+transparency = 1
+blend_mode = 1
+albedo_color = Color(1, 0.8, 0.2, 0.5)
+emission_enabled = true
+emission = Color(1, 0.6, 0.1, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_beam"]
+top_radius = 0.05
+bottom_radius = 0.05
+height = 1.0
+
+[node name="FieldGeneratorBeam" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+material_override = SubResource("StandardMaterial3D_beam")
+mesh = SubResource("CylinderMesh_beam")

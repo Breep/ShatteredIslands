@@ -2,7 +2,6 @@ class_name ChickenDeathBlock
 extends HeroUpgrade
 
 @export var _block_amounts: Array[int]
-@export var _rarity: Card.Rarity = Card.Rarity.RARE
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var block_amount: int = _block_amounts[card_lvl - 1]

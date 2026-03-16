@@ -46,7 +46,8 @@ enum EntityType {
 	SNAKE_BARREL,
 	SNAKE,
 	FIELD_GENERATOR,
-	CHICKEN
+	CHICKEN,
+	PROTO_SHIELD
 }
 
 enum SnakeBarrelModifier {
@@ -232,8 +233,6 @@ func _enter_tree() -> void:
 		_base_stats = custom_base_stats
 		_base_stats.reset_from_self()
 		Verbose.debug("Entity [" + entity_name + "] using custom_base_stats", Verbose.Category.ENTITY)
-	else:
-		_base_stats = EntityStats.new()
 	stat_modifiers_registry = EntityStatModifiersRegistry.new(_base_stats, stats)
 	
 	# Auto-load modules from the _auto_loaded_modules list
@@ -432,7 +431,7 @@ func take_cleanse(value: float, is_critical: bool, action_id: StringName, source
 func take_dispell(value: float, is_critical: bool, action_id: StringName, source: Entity = null) -> float:
 	return _remove_stack_receiver.take_dispell(value, is_critical, action_id, source) if _remove_stack_receiver != null else 0.0
 
-func take_status(status_type: Status.Type, duration: float, action_id: StringName, source: Entity) -> float:
+func take_status(status_type: Status.Type, duration: float, action_id: StringName, source: Entity = null) -> float:
 	return _status_receiver.take_status(status_type, duration, action_id, source) if _status_receiver != null else 0.0
 #endregion
 

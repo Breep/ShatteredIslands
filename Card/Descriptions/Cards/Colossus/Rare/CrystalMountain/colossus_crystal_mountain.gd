@@ -2,8 +2,6 @@ class_name ColossusCrystalMountain
 extends HeroUpgrade
 
 @export var _defense_increase: Array[float]
-@export var _rarity: Card.Rarity = Card.Rarity.RARE
-
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var defense_val: float = _defense_increase[card_lvl - 1]
