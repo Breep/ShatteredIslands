@@ -39,8 +39,15 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			mod2.value = _dodge_reductions[card_lvl - 1]
 			ctx.stat_modifiers.register_modifier(mod2)
 			
-			var ratio_scaling: float = ctx.hero.scale[1] + (_increase_sizes[card_lvl - 1]/100)
-			ctx.hero.scale = Vector3(ratio_scaling, ratio_scaling, ratio_scaling) 
+			var mod3 := StatModifier.new()
+			mod3.id = &"Evasive Growth"
+			mod3.stat_type = EntityStats.StatType.SCALE
+			mod3.calc_type = StatModifier.CalcType.ADD
+			mod3.value = (_increase_sizes[card_lvl - 1]/100)
+			
+			# Increase visual size
+			var ratio_scaling: float = ctx.hero.visual.scale[1] + (_increase_sizes[card_lvl - 1]/100)
+			ctx.hero.visual.scale = Vector3(ratio_scaling, ratio_scaling, ratio_scaling) 
 			
 	ctx.action_modifiers.register_modifier(action_mod)
 	#TODO scale la défense en fonction de la size, faut il gérer dans le passif?
