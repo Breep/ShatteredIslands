@@ -5,17 +5,8 @@ extends Node3D
 
 func update_beam(from_pos: Vector3, to_pos: Vector3) -> void:
 	if _mesh == null: return
-
-	# Position at midpoint
 	global_position = (from_pos + to_pos) / 2.0
-
-	# Look at target
 	if not from_pos.is_equal_approx(to_pos):
 		look_at(to_pos, Vector3.UP)
-
-	# Rotate to align cylinder: Godot cylinders are Y-up, look_at uses -Z
-	_mesh.rotation_degrees.x = -90
-
-	# Scale height to match distance
 	var distance = from_pos.distance_to(to_pos)
 	_mesh.scale.y = distance

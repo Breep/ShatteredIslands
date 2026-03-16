@@ -21,6 +21,8 @@ var _linked_ally: Entity
 
 var _beam: FortificationDroneBeam
 
+@onready var _fortification_drone_visual: Node3D = %FortificationDroneVisual
+
 func init(shield_amount: float, hp_max: int, shield_per_second: float, respawn_timer: float) -> Summon:
 	_on_spawn_shield_amount = shield_amount
 	_on_spawn_hp_max = hp_max
@@ -51,20 +53,20 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	_update_beam()
 
+
 func _update_beam() -> void:
-	if _linked_ally == null or not is_instance_valid(_linked_ally) or _linked_ally.is_dead():
-		if _beam != null and is_instance_valid(_beam):
+	if not is_instance_valid(_linked_ally):
+		if is_instance_valid(_beam):
 			_beam.visible = false
 		return
 
-	# Lazy-instantiate beam on first use
-	if _beam == null or not is_instance_valid(_beam):
+	if not is_instance_valid(_beam):
 		_beam = BEAM_SCENE.instantiate()
 		add_child(_beam)
 
 	_beam.visible = true
-	var start := global_position + Vector3(0, 1.0, 0)
-	var end := _linked_ally.global_position + Vector3(0, 0.5, 0)
+	var start: Vector3 = _fortification_drone_visual.global_position
+	var end: Vector3 = _linked_ally.get_collision_center()
 	_beam.update_beam(start, end)
 
 
@@ -76,8 +78,8 @@ func _link_to_an_ally(ally: Entity) -> void:
 	if not is_instance_valid(ally): return
 	_unlink_from_current_ally()
 	_linked_ally = ally
-	if _movement_module != null:
-		_movement_module.follow_entity(ally)
+	#if _movement_module != null:
+		#_movement_module.follow_entity(ally)
 
 
 func _periodic_beam_callback() -> void:
