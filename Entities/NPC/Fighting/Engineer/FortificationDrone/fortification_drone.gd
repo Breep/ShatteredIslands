@@ -8,6 +8,8 @@ enum Modifier {
 	RESPAWN_TIMER
 }
 
+const BEAM_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Engineer/FortificationDrone/fortification_drone_beam.tscn")
+
 var periodic_timer_registry: PeriodicTimerRegistry
 
 var _shield_per_second: float
@@ -16,6 +18,8 @@ var _on_spawn_hp_max: float
 var _respawn_timer: float
 
 var _linked_ally: Entity
+
+var _beam: FortificationDroneBeam
 
 func init(shield_amount: float, hp_max: int, shield_per_second: float, respawn_timer: float) -> Summon:
 	_on_spawn_shield_amount = shield_amount
@@ -44,6 +48,26 @@ func _ready() -> void:
 	print("FORTI READY 2")
 
 
+func _process(_delta: float) -> void:
+	_update_beam()
+
+func _update_beam() -> void:
+	if _linked_ally == null or not is_instance_valid(_linked_ally) or _linked_ally.is_dead():
+		if _beam != null and is_instance_valid(_beam):
+			_beam.visible = false
+		return
+
+	# Lazy-instantiate beam on first use
+	if _beam == null or not is_instance_valid(_beam):
+		_beam = BEAM_SCENE.instantiate()
+		add_child(_beam)
+
+	_beam.visible = true
+	var start := global_position + Vector3(0, 1.0, 0)
+	var end := _linked_ally.global_position + Vector3(0, 0.5, 0)
+	_beam.update_beam(start, end)
+
+
 func _unlink_from_current_ally() -> void:
 	if not is_instance_valid(_linked_ally): return
 
@@ -67,7 +91,6 @@ func _on_spawn_completed() -> void:
 	var ally: Entity = target_module.get_target(TargetModule.TargettingStrategy.RANDOM_HERO_ALLY)
 	if ally == null: return
 	_link_to_an_ally(ally)
-
 
 
 
