@@ -255,6 +255,8 @@ func _ready() -> void:
 	stats.health_changed.connect(_on_stats_health_changed)
 	died.connect(_on_died)
 	
+	stats.scale_changed.connect(_on_stats_scale_changed)
+	
 	# TODO CHECK THIS ??
 	if _initial_fighting_state_from_context != FightingState.UNDEF:
 		_original_fighting_state = _initial_fighting_state_from_context
@@ -473,7 +475,7 @@ func _play_spawn_animation() -> void:
 		_spawn_tween = create_tween()
 		_spawn_tween.set_ease(Tween.EASE_OUT)
 		_spawn_tween.set_trans(Tween.TRANS_BACK)
-		_spawn_tween.tween_property(_visual_3d, "scale", Vector3.ONE, spawn_duration)
+		_spawn_tween.tween_property(_visual_3d, "scale", Vector3(stats.scale, stats.scale, stats.scale), spawn_duration)
 	else:
 		# No visual node, complete immediately
 		Verbose.warn("Entity [" + entity_name + "] has no _visual_3d for spawn animation", Verbose.Category.ENTITY)
@@ -563,6 +565,11 @@ func _on_fighting_state_changed(new_fighting_state: FightingState) -> void:
 func _on_stats_health_changed(new_health: int) -> void:
 	if new_health <= 0:
 		died.emit()
+
+
+func _on_stats_scale_changed(new_scale: float) -> void:
+	_visual_3d.scale = Vector3(new_scale, new_scale, new_scale)
+	_entity_info_panel_3d.scale = Vector3(new_scale, new_scale, new_scale)
 
 
 func _on_died() -> void:

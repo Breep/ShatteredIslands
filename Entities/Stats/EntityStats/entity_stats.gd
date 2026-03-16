@@ -218,7 +218,7 @@ var _thorn: float
 #region ============================== Scale ==============================
 @export_group("Scale")
 signal scale_changed(new_scale: float)
-var _scale: float
+var _scale: float = 1.0
 @export var scale: float:
 	get: return _scale
 	set(value):
