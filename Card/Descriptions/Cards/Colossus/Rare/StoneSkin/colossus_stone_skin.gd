@@ -3,9 +3,14 @@ extends HeroUpgrade
 
 @export var _base_thorn_values: Array[float]
 @export var _bonus_thorn_factors: Array[float]
-
+@export var _rarity: Card.Rarity = Card.Rarity.RARE
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
+	
+	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
+		printerr("Stone Skin: Wrong card_lvl: ", card_lvl)
+		return
+	
 	var base_thorn: float = _base_thorn_values[card_lvl - 1]
 	var bonus_thorn_factor: float = _bonus_thorn_factors[card_lvl - 1]
 	

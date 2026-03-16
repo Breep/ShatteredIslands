@@ -7,6 +7,11 @@ extends HeroUpgrade
 
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
+	
+	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
+		printerr("Titan's Protection: Wrong card_lvl: ", card_lvl)
+		return
+	
 	var percent: float = _lost_hp_percent[card_lvl - 1]
 	var period: float = _period[card_lvl - 1]
 

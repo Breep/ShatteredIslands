@@ -4,9 +4,14 @@ extends HeroUpgrade
 @export var _increase_dodge: Array[float]
 @export var _increase_sizes: Array[float]
 @export var _dodge_reductions: Array[int]
-
+@export var _rarity: Card.Rarity = Card.Rarity.COMMON
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
+	
+	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
+		printerr("Stone Skin: Wrong card_lvl: ", card_lvl)
+		return
+		
 	var size_gain: float = _increase_sizes[card_lvl - 1]
 
 	# Stat modifier: increase dodge vs physical damage
