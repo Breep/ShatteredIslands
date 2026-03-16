@@ -96,7 +96,6 @@ func _enter_tree() -> void:
 		_family_managers[family_type] = family_manager.init(self)
 		add_child(_family_managers[family_type])
 
-	# Card system registries
 	periodic_timer_registry = PeriodicTimerRegistry.new()
 	periodic_timer_registry.name = "PeriodicTimerRegistry"
 	add_child(periodic_timer_registry)

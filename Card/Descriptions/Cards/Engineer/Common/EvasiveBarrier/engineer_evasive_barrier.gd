@@ -8,10 +8,10 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
 		printerr("Evasive Barrier: Wrong card_lvl: ", card_lvl)
 		return
-
+	
 	var dodge_value: float = _dodge_increase[card_lvl - 1]
 	var shield_amount: float = _shield_gain[card_lvl - 1]
-
+	
 	# Stat modifier: +dodge
 	var mod := StatModifier.new()
 	mod.id = &"Evasive Barrier"
@@ -20,7 +20,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	mod.value = dodge_value
 	mod.tags = [StatModifier.TagType.CARD]
 	ctx.stat_modifiers.register_modifier(mod)
-
+	
 	# Action modifier: on dodge → gain shield
 	var action_mod := ActionModifier.new()
 	action_mod.id = &"Evasive Barrier"
