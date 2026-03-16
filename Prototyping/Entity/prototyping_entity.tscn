@@ -306,6 +306,4 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0
 [connection signal="toggled" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/AutoAttackCheckButton" to="." method="_on_auto_attack_check_button_toggled"]
 [connection signal="toggled" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/FamilyManagersCheckButton" to="." method="_on_family_managers_check_button_toggled"]
 
-[editable path="Entities/DarkKnight1"]
-[editable path="Entities/DarkKnight1/DarkKnightVisual"]
 [editable path="TestingFloorFFA5"]
