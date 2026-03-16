@@ -1,3 +1,7 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://bc2xt4f5ghbga"]
 
+[ext_resource type="Shader" uid="uid://dxnve8u3qlyhx" path="res://Props/DefaultBattleIsland/Arch_island/VFX/new_shader.gdshader" id="1_gwagc"]
+
 [resource]
+render_priority = 0
+shader = ExtResource("1_gwagc")

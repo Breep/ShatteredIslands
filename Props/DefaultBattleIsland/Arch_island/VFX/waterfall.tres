@@ -16,6 +16,9 @@ output_port_for_preview = 0
 default_input_values = [0, Vector3(1, 1, 1), 1, Vector3(1.25, 1.25, 1.25)]
 operator = 2
 
+[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_vayp8"]
+constant = 0.6
+
 [sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_vayp8"]
 parameter_name = "ColorParameter2"
 default_value_enabled = true
@@ -97,4 +100,6 @@ nodes/fragment/11/node = SubResource("VisualShaderNodeVectorOp_a27n4")
 nodes/fragment/11/position = Vector2(-573.3333, 680)
 nodes/fragment/13/node = SubResource("VisualShaderNodeColorOp_6ynqe")
 nodes/fragment/13/position = Vector2(-893.3333, 920)
-nodes/fragment/connections = PackedInt32Array(2, 0, 4, 0, 5, 0, 3, 0, 6, 0, 5, 2, 8, 0, 7, 0, 9, 0, 8, 2, 3, 0, 10, 0, 7, 0, 10, 1, 10, 0, 4, 1, 4, 0, 11, 0, 13, 0, 11, 1, 11, 0, 0, 0)
+nodes/fragment/14/node = SubResource("VisualShaderNodeFloatConstant_vayp8")
+nodes/fragment/14/position = Vector2(106.666664, 413.33334)
+nodes/fragment/connections = PackedInt32Array(2, 0, 4, 0, 5, 0, 3, 0, 6, 0, 5, 2, 8, 0, 7, 0, 9, 0, 8, 2, 3, 0, 10, 0, 7, 0, 10, 1, 10, 0, 4, 1, 4, 0, 11, 0, 13, 0, 11, 1, 11, 0, 0, 0, 14, 0, 0, 1)

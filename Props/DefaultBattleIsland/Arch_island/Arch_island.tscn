@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://b0opqsmhxort7"]
 
+[ext_resource type="PackedScene" uid="uid://de5j240l0ydp6" path="res://Props/DefaultBattleIsland/Arch_island/VFX/water.tscn" id="1_d4f7a"]
 [ext_resource type="PackedScene" uid="uid://50kss7e4c2b3" path="res://Props/DefaultBattleIsland/Arch_island/Props_Arena_Island.tscn" id="1_vk4nd"]
 [ext_resource type="Texture2D" uid="uid://cpgjovjpnswwl" path="res://Props/DefaultBattleIsland/textures/citrus_orchard_road_puresky_4k.exr" id="1_wicrg"]
 [ext_resource type="PackedScene" uid="uid://duk3nfkcrkric" path="res://Props/DefaultBattleIsland/Arch_island/Props_Arena_Arena.tscn" id="2_cxbhe"]
@@ -82,6 +83,8 @@ adjustment_saturation = 1.07
 
 [node name="IslandRemake" type="Node3D" unique_id=1888769254]
 
+[node name="water" parent="." unique_id=407799303 instance=ExtResource("1_d4f7a")]
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=31111793]
 environment = SubResource("Environment_x7fny")
 
@@ -105,7 +108,7 @@ light_color = Color(0.45271707, 0.72297376, 0.91598535, 1)
 light_energy = 0.869
 
 [node name="L_back" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=1600156000]
-transform = Transform3D(0.80162966, 0, 0.5978212, 0, 1, 0, -0.5978212, 0, 0.80162966, 46.34609, 0, -38.07856)
+transform = Transform3D(0.84288037, 0.52961344, 0.09519556, -0.53025115, 0.7873764, 0.31443954, 0.091576755, -0.31551242, 0.94449234, 46.34609, 0, -38.07856)
 light_color = Color(0.962107, 0.80602366, 0.695401, 1)
 light_energy = 0.869
 light_angular_distance = 17.63
