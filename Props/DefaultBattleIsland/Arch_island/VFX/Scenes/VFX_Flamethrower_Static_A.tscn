@@ -1,0 +1,114 @@
+[gd_scene load_steps=16 format=3 uid="uid://bgoa4vdnswegu"]
+
+[ext_resource type="Material" uid="uid://c71paj8n8xlpw" path="res://VFX/materials/m_fireflameth4.tres" id="1_jefjp"]
+[ext_resource type="ArrayMesh" uid="uid://odpd6yp10lun" path="res://VFX/objects/sm_flamethrower_l2.obj" id="2_bmnch"]
+
+[sub_resource type="Gradient" id="Gradient_6u1e5"]
+offsets = PackedFloat32Array(0.546948, 0.995984)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gl0dj"]
+gradient = SubResource("Gradient_6u1e5")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.504274)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_smadv"]
+render_priority = 4
+transparency = 2
+alpha_scissor_threshold = 0.115
+alpha_antialiasing_mode = 0
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = SubResource("GradientTexture2D_gl0dj")
+
+[sub_resource type="Curve" id="Curve_t70sc"]
+_data = [Vector2(0.542986, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0163807), -0.341316, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_f52sd"]
+texture_mode = 1
+curve = SubResource("Curve_t70sc")
+
+[sub_resource type="Gradient" id="Gradient_uv6q5"]
+interpolation_color_space = 1
+offsets = PackedFloat32Array(0.118357, 0.210145, 1)
+colors = PackedColorArray(0.5, 0.5, 8, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ngo10"]
+gradient = SubResource("Gradient_uv6q5")
+use_hdr = true
+
+[sub_resource type="Curve" id="Curve_b71vj"]
+max_value = 2.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 2), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_lp4fd"]
+_data = [Vector2(0.00678733, 1), 0.0, -1.18854, 0, 0, Vector2(0.997737, 0.129266), -0.245136, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_2kbh0"]
+max_value = 2.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 2), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_hupct"]
+curve_x = SubResource("Curve_b71vj")
+curve_y = SubResource("Curve_lp4fd")
+curve_z = SubResource("Curve_2kbh0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wnt7o"]
+particle_flag_align_y = true
+emission_shape = 2
+emission_sphere_radius = 0.6
+direction = Vector3(0, 1, 0)
+spread = 6.0
+initial_velocity_min = 5.0
+initial_velocity_max = 17.0
+radial_velocity_min = 0.999978
+radial_velocity_max = 2.99998
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -8.0
+linear_accel_max = -3.0
+scale_max = 1.5
+scale_curve = SubResource("CurveXYZTexture_hupct")
+color = Color(2, 1, 0.8, 1)
+color_ramp = SubResource("GradientTexture1D_ngo10")
+alpha_curve = SubResource("CurveTexture_f52sd")
+collision_mode = 1
+collision_friction = 0.21
+collision_bounce = 0.51
+collision_use_scale = true
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_g3jkx"]
+size = 0.03
+sections = 2
+section_length = 0.15
+section_segments = 1
+
+[node name="VFX_Flamethrower_Static_A" type="Node3D"]
+
+[node name="FireTorch_AC9" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.654, -4.37737e-07, 4.31655e-15, 0, -1.26719e-07, -0.654, 9.87513e-08, -2.899, 2.85872e-08, 0, 0, 0)
+layers = 4
+material_override = ExtResource("1_jefjp")
+cast_shadow = 0
+mesh = ExtResource("2_bmnch")
+skeleton = NodePath("../..")
+
+[node name="sparks5" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 2, 0, -1, -8.74228e-08, 0, 0.0696568, -0.941656)
+layers = 8196
+material_override = SubResource("StandardMaterial3D_smadv")
+cast_shadow = 0
+amount = 90
+lifetime = 0.8
+randomness = 1.0
+fixed_fps = 60
+visibility_aabb = AABB(-2.34, -1.08, -0.645, 4.43, 12.23, 1.2)
+process_material = SubResource("ParticleProcessMaterial_wnt7o")
+draw_pass_1 = SubResource("RibbonTrailMesh_g3jkx")
