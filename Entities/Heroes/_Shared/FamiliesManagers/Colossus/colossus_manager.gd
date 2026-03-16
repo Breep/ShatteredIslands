@@ -3,7 +3,7 @@ extends FamilyManager
 
 # --- STATS PASSIVES (Dépendent du Niveau de la famille [0, 1, 2, 3, 4]) ---
 const HP_MAX_INCREASE: Array[float] = [15.0, 20.0, 35.0, 50.0]
-const SIZE_DEFENSE_INCREASE: Array[float] = [10.0, 20.0, 30.0, 40.0]
+const SCALE_DEFENSE_INCREASE: Array[float] = [10.0, 20.0, 30.0, 40.0]
 
 
 #region ============================== public API ==============================
@@ -22,31 +22,35 @@ func _start_passive() -> void:
 
 	# Register the initial stat modifier (value 0 — updated each tick)
 	var mod := StatModifier.new()
-	mod.id = &"Colossus Passive HPMAX"
+	mod.id = &"Colossus Passive"
 	mod.stat_type = EntityStats.StatType.HEALTH_MAX
-	mod.calc_type = StatModifier.CalcType.ADD
-	mod.value = _owner.stats.health_max * (HP_MAX_INCREASE[level - 1] / 100)
+	mod.calc_type = StatModifier.CalcType.MULT
+	mod.value = HP_MAX_INCREASE[level - 1] / 100
 	_owner.stat_modifiers_registry.register_modifier(mod)
 	
-	var mod2 := StatModifier.new()
-	mod2.id = &"Colossus Passive HP"
-	mod2.stat_type = EntityStats.StatType.HEALTH
-	mod2.calc_type = StatModifier.CalcType.ADD
-	mod2.value = _owner.stats.health * (HP_MAX_INCREASE[level - 1] / 100)
-	_owner.stat_modifiers_registry.register_modifier(mod2)
+	var _on_scale_change: Callable
+	_on_scale_change = func(scale: float) -> void:
+		var mod3 := StatModifier.new()
+		mod3.id = &"Colossus Passive"
+		mod3.stat_type = EntityStats.StatType.DEFENCE
+		mod3.calc_type = StatModifier.CalcType.ADD
+		mod3.value = (scale - 1) * 100
+		_owner.stat_modifiers_registry.register_modifier(mod3)
+		
+	_owner.battle_callback_registry.register_battle_start(&"Colossus Passive", func() -> void:
+		if _owner == null or not is_instance_valid(_owner): return
+		if not _owner.stats.scale_changed.is_connected(_on_scale_change):
+			_owner.stats.scale_changed.connect(_on_scale_change)
+		
+	)
 	
-	var mod3 := StatModifier.new()
-	mod3.id = &"Colossus Passive Defense"
-	mod3.stat_type = EntityStats.StatType.DEFENCE
-	mod3.calc_type = StatModifier.CalcType.ADD
-	mod3.value = _owner.stats.defence * (SIZE_DEFENSE_INCREASE[level - 1] / 100)
-	_owner.stat_modifiers_registry.register_modifier(mod3)
+	var mod4 := StatModifier.new()
+	mod4.id = &"Colossus Passive"
+	mod4.stat_type = EntityStats.StatType.SCALE
+	mod4.calc_type = StatModifier.CalcType.ADD
+	mod4.value = SCALE_DEFENSE_INCREASE[level - 1] / 100
+	_owner.stat_modifiers_registry.register_modifier(mod4)
 	
 	
-	var ratio_scaling: float = _owner.scale[1] + (SIZE_DEFENSE_INCREASE[level - 1] / 100)
-	print(str(ratio_scaling)) # c'est = à 1.X
-	
-	print("Size du dark knight: " + str(_owner.scale)) 
-	_owner.scale = Vector3(ratio_scaling, ratio_scaling, ratio_scaling) 
-	print("Size du dark knight: " + str(_owner.scale))
-	print("Size du dark knight: " + str(_owner.scale[1])) # pas egal à 1.X
+	#var ratio_scaling: float = _owner.base_stats.scale + (SCALE_DEFENSE_INCREASE[level - 1] / 100)
+	#_owner.visual.scale = Vector3(ratio_scaling, ratio_scaling, ratio_scaling)
