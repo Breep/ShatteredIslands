@@ -11,6 +11,7 @@ extends Resource
 @export var defence: float = 0
 @export var block: float = 0
 @export var thorn: float = 0
+@export var scale: float = 1.0
 @export var auto_attack_type: EntityStats.AutoAttackType = EntityStats.AutoAttackType.RANGED
 @export var critical_chances: Dictionary[Utils.ActionType, float] = {
 	Utils.ActionType.DAMAGE_PHYSICAL: 10,
