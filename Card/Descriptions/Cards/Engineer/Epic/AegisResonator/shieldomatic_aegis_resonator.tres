@@ -6,8 +6,9 @@
 
 [sub_resource type="Resource" id="Resource_po815"]
 script = ExtResource("2_g3i55")
-_period = Array[float]([8.0, 8.0])
-_total_shield = Array[float]([200.0, 300.0])
+_period = Array[float]([5.0, 5.0, 5.0])
+_shared_shields = Array[float]([300.0, 450.0, 600.0])
+_rarity = 2
 metadata/_custom_type_script = "uid://cmukiiufdo4gw"
 
 [resource]
