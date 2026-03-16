@@ -11,6 +11,7 @@
 [ext_resource type="Resource" uid="uid://nhheckrvkmd2" path="res://Card/Descriptions/Cards/Engineer/Rare/FragileProtocol/engineer_fragile_protocol.tres" id="5_x0odd"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/Stats/EntityStats/entity_stats.gd" id="6_3bpsj"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
+[ext_resource type="Resource" uid="uid://bgx3j85dxco0q" path="res://Card/Descriptions/Cards/Engineer/Rare/BarbedWire/engineer_barbed_wire.tres" id="6_x0odd"]
 [ext_resource type="PackedScene" uid="uid://dvuq5n41nak3u" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.tscn" id="8_fl2p6"]
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://Modules/PickableClickable/PickableModule/pickable_module.tscn" id="9_614kc"]
 [ext_resource type="PackedScene" uid="uid://bg5efhnq0erdv" path="res://Modules/PickableClickable/ClickableModule/clickable_module.tscn" id="10_m73qc"]
@@ -21,7 +22,7 @@
 
 [sub_resource type="Resource" id="Resource_38sjp"]
 script = ExtResource("5_ko5bb")
-_active_cards = Array[ExtResource("3_3bpsj")]([ExtResource("4_m26y3"), ExtResource("5_x0odd")])
+_active_cards = Array[ExtResource("3_3bpsj")]([ExtResource("4_m26y3"), ExtResource("5_x0odd"), ExtResource("6_x0odd")])
 metadata/_custom_type_script = "uid://nkraydv4mdse"
 
 [sub_resource type="Resource" id="Resource_ycdli"]
