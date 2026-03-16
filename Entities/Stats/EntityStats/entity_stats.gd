@@ -25,7 +25,8 @@ enum StatType {
 	DEFENCE,
 	BLOCK,
 	LIFESTEAL,
-	THORN
+	THORN,
+	SCALE
 	}
 #endregion
 
@@ -214,6 +215,18 @@ var _thorn: float
 		thorn_changed.emit(_thorn)
 #endregion
 
+#region ============================== Scale ==============================
+@export_group("Scale")
+signal scale_changed(new_scale: float)
+var _scale: float
+@export var scale: float:
+	get: return _scale
+	set(value):
+		if value == _scale: return
+		_scale = value
+		scale_changed.emit(_scale)
+#endregion
+
 #region ============================== Public functions ==============================
 func reset_from_hero_desc(hero: HeroDesc, lvl: int) -> EntityStats:
 	if lvl < 1 or lvl > 10:
@@ -233,6 +246,7 @@ func reset_from_hero_desc(hero: HeroDesc, lvl: int) -> EntityStats:
 	defence = hero.stats[lvl].defence
 	block = hero.stats[lvl].block
 	thorn = hero.stats[lvl].thorn
+	scale = hero.stats[lvl].scale
 	
 	for action_type: Utils.ActionType in Utils.get_all_actions():
 		_critical_chances[action_type] = hero.stats[lvl].critical_chances.get(action_type, 0)
@@ -271,6 +285,7 @@ func get_stat(stat_type: StatType, action_type: Utils.ActionType = Utils.ActionT
 		EntityStats.StatType.BLOCK: return float(_block)
 		EntityStats.StatType.DEFENCE: return float(_defence)
 		EntityStats.StatType.THORN: return float(_thorn)
+		EntityStats.StatType.SCALE: return float(_scale)
 		EntityStats.StatType.CRIT_CHANCE: return _critical_chances.get(action_type, 0)
 		EntityStats.StatType.CRIT_MULT: return _critical_multipliers.get(action_type, 100)
 		EntityStats.StatType.RESISTANCE: return _resistances.get(action_type, 0)
@@ -299,6 +314,7 @@ func update_stat(stat_type: StatType, value: float, action_type: Utils.ActionTyp
 		EntityStats.StatType.DEFENCE: defence = value
 		EntityStats.StatType.BLOCK: block = value
 		EntityStats.StatType.THORN: thorn = value
+		EntityStats.StatType.SCALE: scale = value
 		EntityStats.StatType.CRIT_CHANCE:
 			_critical_chances[action_type] = value
 			critical_chance_changed.emit(value, action_type)
