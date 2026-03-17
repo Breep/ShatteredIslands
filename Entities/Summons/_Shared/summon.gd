@@ -12,6 +12,9 @@ var summoner: Entity
 #endregion
 
 #region ============================== Public variables ==============================
+func apply_context(context: EntityContext) -> void:
+	summoner = context.entity_owner
+	super.apply_context(context)
 #endregion
 
 #region ============================== Private variables ==============================

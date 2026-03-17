@@ -48,7 +48,8 @@ enum EntityType {
 	FIELD_GENERATOR,
 	CHICKEN,
 	PROTO_SHIELD,
-	FORTIFICATION_DRONE
+	FORTIFICATION_DRONE,
+	AEGIS_BLADE
 }
 
 enum SnakeBarrelModifier {
@@ -336,6 +337,7 @@ func get_context() -> EntityContext:
 	ctx.arena_zone_manager = _arena_zone_manager
 	ctx.life_state = LifeState.ALIVE # Summons always spawn alive
 	ctx.fighting_state = fighting_state # Inherit parent's state
+	ctx.entity_owner = self
 	Verbose.debug("Entity [" + entity_name + "] creating context with fighting_state [" + str(FightingState.keys()[fighting_state]) + "]", Verbose.Category.ENTITY)
 	return ctx
 

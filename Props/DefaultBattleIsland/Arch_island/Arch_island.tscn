@@ -135,6 +135,7 @@ fov = 48.0
 
 [node name="Arena" parent="WorldEnvironment" unique_id=978031092 instance=ExtResource("3_v6pgo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.767658, 0, 15.267077)
+visible = false
 
 [node name="VFX_FireStatic_K1" parent="WorldEnvironment" unique_id=490239612 instance=ExtResource("3_8xm7n")]
 transform = Transform3D(2.4629161, 0, 0, 0, 2.4629161, 0, 0, 0, 2.4629161, -14.015332, 1.4212751, 12.431822)
@@ -143,7 +144,6 @@ transform = Transform3D(2.4629161, 0, 0, 0, 2.4629161, 0, 0, 0, 2.4629161, -14.0
 transform = Transform3D(1.0005836, 0, 0, 0, 1.0005836, 0, 0, 0, 1.0005836, -0.030916214, -0.0055298805, 0.014993191)
 
 [node name="Arena" parent="." unique_id=1700311485 instance=ExtResource("2_cxbhe")]
-visible = false
 
 [node name="sword" parent="." unique_id=1966000435 instance=ExtResource("3_cxbhe")]
 transform = Transform3D(-0.27872533, 0.39018133, 2.8720422, 2.333105, 1.7421422, -0.0102556525, -1.7197323, 2.3002717, -0.47939938, 19.631357, -4.552685, 3.6864839)
