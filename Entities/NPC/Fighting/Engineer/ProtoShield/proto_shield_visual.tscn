@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://i6mui4bkx4tx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pofts"]
+albedo_color = Color(0.4206998, 0.21777177, 4.813075e-08, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_pofts"]
+material = SubResource("StandardMaterial3D_pofts")
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.1
+
+[node name="ProtoShieldVisual" type="Node3D" unique_id=1980159794]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=479151213]
+transform = Transform3D(1, 0, 0, 0, -4.3711392e-08, -3.4568217, 0, 1.0000001, -1.5110247e-07, 0, 0.9734658, 0)
+mesh = SubResource("CylinderMesh_pofts")

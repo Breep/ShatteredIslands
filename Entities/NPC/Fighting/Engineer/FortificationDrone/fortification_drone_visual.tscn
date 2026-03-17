@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://b3f15ldbddrlp"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_viee8"]
+
+[node name="FortificationDroneVisual" type="Node3D" unique_id=50220890]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1486863111]
+mesh = SubResource("SphereMesh_viee8")

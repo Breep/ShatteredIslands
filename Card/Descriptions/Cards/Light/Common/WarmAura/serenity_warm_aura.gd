@@ -4,8 +4,6 @@ extends HeroUpgrade
 @export var _base_chance: Array[float]
 @export var _base_cleanse_amount: Array[float]
 
-@export var _rarity: Card.Rarity = Card.Rarity.COMMON
-
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
 		printerr("Warm Aura: Wrong card_lvl: ", card_lvl)

@@ -2,7 +2,6 @@ class_name ChickenChickenSwarm
 extends HeroUpgrade
 
 @export var _spawn_numbers_increase: Array[int]
-@export var _rarity: Card.Rarity = Card.Rarity.RARE
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var spawn_number_increase: int = _spawn_numbers_increase[card_lvl - 1]

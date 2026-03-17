@@ -172,6 +172,20 @@ func get_randi_range(p_min: int, p_max: int, battle_id: int = -1, id: String = "
 	var r: int = _get_rng(battle_id).randi_range(p_min, p_max)
 	Verbose.trace("Rand[" + str(battle_id) + "] " + str(r) + " '" + id + "'", Verbose.Category.DEFAULT)
 	return r
+
+
+func get_randf_distribution(p_max: float, number_of_values: int, battle_id: int = -1, id: String = "") -> Array[float]:
+	var random_values: Array[int]
+	var total_random_values: float = 0
+	for i in number_of_values:
+		random_values.append( _get_rng(battle_id).randf_range(1.0, 100.0))
+		total_random_values += random_values[i]
+	random_values.sort()
+	var distribution: Array[float]
+	for i in number_of_values:
+		distribution.append(random_values[i] * p_max / total_random_values)
+	Verbose.trace("Rand[" + str(battle_id) + "] " + str(distribution) + " '" + id + "'", Verbose.Category.DEFAULT)
+	return distribution
 #endregion
 
 

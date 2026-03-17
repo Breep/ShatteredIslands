@@ -2,7 +2,6 @@ class_name ChickenRapidIncubation
 extends HeroUpgrade
 
 @export var _timer_decrease: Array[float]
-@export var _rarity: Card.Rarity = Card.Rarity.COMMON
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var timer_amount: float = _timer_decrease[card_lvl - 1]

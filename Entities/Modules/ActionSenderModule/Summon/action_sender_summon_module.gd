@@ -6,7 +6,7 @@ var _arena_zone_manager: ArenaZoneManager
 
 const SNAKE_BARREL_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Poison/SnakeBarrel/snake_barrel.tscn")
 const SNAKE_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Poison/Snake/snake.tscn")
-const FIELD_GENERATOR_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Defense/FieldGenerator/field_generator.tscn")
+const FIELD_GENERATOR_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Engineer/FieldGenerator/field_generator.tscn")
 
 const CHICKEN_BASIC_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/ChickenLord/Chicken/Basic/chicken_basic.tscn")
 const CHICKEN_ATTACK_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/ChickenLord/Chicken/Gifted/ChickenAttack/chicken_attack.tscn")
@@ -16,6 +16,9 @@ const CHICKEN_LIGHT_SCENE: PackedScene = preload('res://Entities/NPC/Fighting/Ch
 const CHICKEN_ENGINEER_SCENE: PackedScene = preload('res://Entities/NPC/Fighting/ChickenLord/Chicken/Gifted/ChickenShield/chicken_shield.tscn')
 const CHICKEN_ARDENT_CELESTIAL_SCENE: PackedScene = preload('res://Entities/NPC/Fighting/ChickenLord/Chicken/Gifted/ChickenArdentCelestial/chicken_ardent_celestial.tscn')
 const CHICKEN_STORM_CALLER: PackedScene = preload('res://Entities/NPC/Fighting/ChickenLord/Chicken/Gifted/ChickenStormCaller/chicken_storm_caller.tscn')
+
+const PROTO_SHIELD_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Engineer/ProtoShield/proto_shield.tscn")
+const FORTIFICATION_DRONE_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Engineer/FortificationDrone/fortification_drone.tscn")
 
 # ============================== Public functions ==============================
 
@@ -52,7 +55,8 @@ func summon_entity(entity_type: Entity.EntityType, spawn_config: SpawnLocationCo
 		Entity.EntityType.SNAKE: _summon_snake(spawn_position, entity_modifier)
 		Entity.EntityType.FIELD_GENERATOR: _summon_field_generator(spawn_position, entity_modifier)
 		Entity.EntityType.CHICKEN: _summon_chicken(spawn_position, entity_modifier)
-
+		Entity.EntityType.PROTO_SHIELD: _summon_proto_shield(spawn_position, entity_modifier)
+		Entity.EntityType.FORTIFICATION_DRONE: _summon_fortification_drone(spawn_position, entity_modifier)
 
 # ============================== Private functions ==============================
 
@@ -122,3 +126,38 @@ func _summon_chicken(spawn_position: Vector3, entity_modifier: Dictionary) -> vo
 			(chicken as ChickenStormCaller).init(crit_chance, crit_mult)
 			
 	_spawn_manager.spawn_entity(chicken, spawn_position, _owner.get_context(), Entity.EntityType.CHICKEN)
+
+
+func _summon_proto_shield(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
+	var proto_shield: ProtoShield = PROTO_SHIELD_SCENE.instantiate()
+	var shield_amount: float = entity_modifier.get(ProtoShield.Modifier.SHIELD, 0)
+	var hp_max: int = entity_modifier.get(ProtoShield.Modifier.HP_MAX, 1)
+	proto_shield.init(shield_amount, hp_max)
+	_spawn_manager.spawn_entity(proto_shield, spawn_position, _owner.get_context())
+
+
+func _summon_fortification_drone(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
+	var fortification_drone: FortificationDrone = FORTIFICATION_DRONE_SCENE.instantiate()
+	var shield_amount: float = entity_modifier.get(FortificationDrone.Modifier.SHIELD, 0)
+	var hp_max: int = entity_modifier.get(FortificationDrone.Modifier.HP_MAX, 1)
+	var shield_per_second: float = entity_modifier.get(FortificationDrone.Modifier.SHIELD_PER_SECOND, 1)
+	var respawn_timer: float = entity_modifier.get(FortificationDrone.Modifier.RESPAWN_TIMER, 10.0)
+	fortification_drone.init(shield_amount, hp_max, shield_per_second, respawn_timer)
+	_spawn_manager.spawn_entity(fortification_drone, spawn_position, _owner.get_context())
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+	
+	
+	
+	

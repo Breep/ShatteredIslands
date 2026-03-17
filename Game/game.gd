@@ -129,6 +129,7 @@ func _on_hero_selector_all_heroes_picked() -> void:
 
 
 func _on_game_manager_game_state_changed(game_state: GameManager.GameState) -> void:
+	Verbose.debug("========= " + str(GameManager.GameState.keys()[game_state]), Verbose.Category.GAME)
 	match game_state:
 		GameManager.GameState.INIT_ROUND: _start_new_round()
 		GameManager.GameState.BUYING: _start_buying_phase()
