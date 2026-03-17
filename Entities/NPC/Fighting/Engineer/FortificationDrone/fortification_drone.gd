@@ -57,6 +57,9 @@ func _update_beam() -> void:
 	var start: Vector3 = _fortification_drone_visual.global_position
 	var end: Vector3 = _linked_ally.get_collision_center()
 	_beam.update_beam(start, end)
+	
+	if _visual_3d != null:
+		_visual_3d.look_at(_linked_ally.get_collision_center())
 
 
 func _unlink_from_current_ally() -> void:

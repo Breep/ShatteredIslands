@@ -3,6 +3,8 @@ extends Entity
 
 # == VIRTUAL CLASS ==
 
+var summoner: Entity
+
 #region ============================== Enums ==============================
 #endregion
 

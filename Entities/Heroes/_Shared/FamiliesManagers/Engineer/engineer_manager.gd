@@ -20,7 +20,7 @@ func stop() -> void:
 
 func apply_passive() -> void:
 	if level >= 1:
-		#_passive_spawn_proto_shield()
+		_passive_spawn_proto_shield()
 		_passive_set_shield_power()
 #endregion
 

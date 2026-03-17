@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dc124wncshpne"]
+
+[ext_resource type="PackedScene" uid="uid://c8xr41imxkoni" path="res://Props/DefaultBattleIsland/sword_low.tscn" id="1_355p2"]
+
+[node name="AegisBladeVisual" type="Node3D" unique_id=687254709]
+
+[node name="Sword_Low" parent="." unique_id=1192308003 instance=ExtResource("1_355p2")]
+transform = Transform3D(-4.3711387e-10, -0.01, -4.3711387e-10, 0, -4.3711387e-10, 0.01, -0.01, 4.3711387e-10, 1.9106855e-17, 0, 0, 0)
