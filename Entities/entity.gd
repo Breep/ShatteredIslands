@@ -48,7 +48,8 @@ enum EntityType {
 	FIELD_GENERATOR,
 	CHICKEN,
 	PROTO_SHIELD,
-	FORTIFICATION_DRONE
+	FORTIFICATION_DRONE,
+	AEGIS_BLADE
 }
 
 enum SnakeBarrelModifier {
@@ -94,6 +95,9 @@ var base_stats: EntityStats:
 	get: return _base_stats
 var spawn_manager: SpawnManager:
 	get: return _spawn_manager
+
+var periodic_timer_registry: PeriodicTimerRegistry
+var battle_callback_registry: BattleCallbackRegistry
 #endregion
 
 #region ============================== Private variables ==============================
@@ -239,6 +243,12 @@ func _enter_tree() -> void:
 	# Auto-load modules from the _auto_loaded_modules list
 	_auto_load_modules()
 	
+	periodic_timer_registry = PeriodicTimerRegistry.new()
+	periodic_timer_registry.name = "PeriodicTimerRegistry"
+	add_child(periodic_timer_registry)
+
+	battle_callback_registry = BattleCallbackRegistry.new()
+	
 	_is_targetable = false # Prevent targeting during spawn
 
 
@@ -316,6 +326,8 @@ func process_tick() -> void:
 		_spawn_ticks_remaining -= 1
 		if _spawn_ticks_remaining == 0:
 			_complete_spawn()
+	if periodic_timer_registry != null:
+		periodic_timer_registry.process_tick()
 #endregion
 
 #region ============================== Context ==============================
@@ -327,6 +339,7 @@ func get_context() -> EntityContext:
 	ctx.arena_zone_manager = _arena_zone_manager
 	ctx.life_state = LifeState.ALIVE # Summons always spawn alive
 	ctx.fighting_state = fighting_state # Inherit parent's state
+	ctx.entity_owner = self
 	Verbose.debug("Entity [" + entity_name + "] creating context with fighting_state [" + str(FightingState.keys()[fighting_state]) + "]", Verbose.Category.ENTITY)
 	return ctx
 
@@ -549,16 +562,22 @@ func _on_fighting_state_changed(new_fighting_state: FightingState) -> void:
 			if conditions != null: conditions.stop()
 			if _movement_module != null: _movement_module.stop()
 			if _auto_attack_periodic_module != null and auto_attack_enabled: _auto_attack_periodic_module.stop()
+			if periodic_timer_registry != null: periodic_timer_registry.stop_all()
+			if battle_callback_registry != null: battle_callback_registry.execute_battle_end()
 		FightingState.FIGHTING:
 			if target_module != null: target_module.start()
 			if conditions != null: conditions.start()
 			if _movement_module != null: _movement_module.start()
 			if _auto_attack_periodic_module != null and auto_attack_enabled: _auto_attack_periodic_module.start()
+			if periodic_timer_registry != null: periodic_timer_registry.start_all()
+			if battle_callback_registry != null: battle_callback_registry.execute_battle_start()
 		FightingState.CELEBRATING:
 			if target_module != null: target_module.stop()
 			if conditions != null: conditions.stop()
 			if _movement_module != null: _movement_module.stop()
 			if _auto_attack_periodic_module != null: _auto_attack_periodic_module.stop()
+			if periodic_timer_registry != null: periodic_timer_registry.stop_all()
+			if battle_callback_registry != null: battle_callback_registry.execute_battle_end()
 		FightingState.UNDEF: pass
 
 

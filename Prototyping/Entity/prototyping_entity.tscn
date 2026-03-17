@@ -8,8 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_egh8k"]
 [ext_resource type="Resource" uid="uid://cywh2kajy8jg3" path="res://Card/Descriptions/Cards/Colossus/Common/EvasiveGrowth/colossus_evasive_growth.tres" id="4_m26y3"]
 [ext_resource type="Script" uid="uid://nkraydv4mdse" path="res://Card/Templates/player_deck.gd" id="5_ko5bb"]
+[ext_resource type="Resource" uid="uid://du0o8udb4adn5" path="res://Card/Descriptions/Cards/Engineer/Rare/ShieldThrow/engineer_shield_throw.tres" id="5_x0odd"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/Stats/EntityStats/entity_stats.gd" id="6_3bpsj"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
+[ext_resource type="Resource" uid="uid://yph6mhvbkj0c" path="res://Card/Descriptions/Cards/Engineer/Legendary/AegisBlade/engineer_aegis_blade.tres" id="6_x0odd"]
 [ext_resource type="PackedScene" uid="uid://dvuq5n41nak3u" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.tscn" id="8_fl2p6"]
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://Modules/PickableClickable/PickableModule/pickable_module.tscn" id="9_614kc"]
 [ext_resource type="PackedScene" uid="uid://bg5efhnq0erdv" path="res://Modules/PickableClickable/ClickableModule/clickable_module.tscn" id="10_m73qc"]
@@ -20,7 +22,7 @@
 
 [sub_resource type="Resource" id="Resource_x0odd"]
 script = ExtResource("5_ko5bb")
-_active_cards = Array[ExtResource("3_3bpsj")]([ExtResource("4_m26y3")])
+_active_cards = Array[ExtResource("3_3bpsj")]([ExtResource("4_m26y3"), ExtResource("5_x0odd"), ExtResource("6_x0odd")])
 metadata/_custom_type_script = "uid://nkraydv4mdse"
 
 [sub_resource type="Resource" id="Resource_m26y3"]
@@ -304,7 +306,7 @@ transform = Transform3D(0.20953494, 0.9711535, -0.11382448, -0.5411095, 0.212126
 unique_name_in_owner = true
 
 [node name="ArchIsland" parent="." unique_id=1045725859 instance=ExtResource("17_ko5bb")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -0.6210389, 0)
 
 [connection signal="pressed" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StartFightButton" to="." method="_on_start_fight_button_pressed"]
 [connection signal="pressed" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StopFightButton" to="." method="_on_stop_fight_button_pressed"]

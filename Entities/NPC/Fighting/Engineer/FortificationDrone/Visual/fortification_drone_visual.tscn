@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://b3f15ldbddrlp"]
+
+[ext_resource type="Script" uid="uid://7y6yv28l2xwe" path="res://Entities/NPC/Fighting/Engineer/FortificationDrone/Visual/fortification_drone_visual.gd" id="1_4dfb3"]
+[ext_resource type="PackedScene" uid="uid://bjsfgs1j8flqp" path="res://Entities/NPC/Fighting/Engineer/FortificationDrone/Data/_shield_4.tscn" id="2_tduhn"]
+[ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://Tool/QuickAnims/anim_rotating_module.tscn" id="3_tduhn"]
+
+[node name="FortificationDroneVisual" type="Node3D" unique_id=50220890]
+script = ExtResource("1_4dfb3")
+
+[node name="_shield_4" parent="." unique_id=438569872 instance=ExtResource("2_tduhn")]
+transform = Transform3D(-1.6724222, 0, -8.742278e-08, 0, 1.6724222, 0, 1.462078e-07, 0, -1, 0, -0.535097, 0)
+
+[node name="AnimRotatingModule" parent="_shield_4" unique_id=1843877249 node_paths=PackedStringArray("_owner") instance=ExtResource("3_tduhn")]
+_owner = NodePath("")
+_rot_axis = 1
+_rot_period = 3.2
+_rot_max = 10.0

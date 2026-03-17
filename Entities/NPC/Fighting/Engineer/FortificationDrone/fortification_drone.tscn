@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b1x3id3yn40a8" path="res://Entities/NPC/Fighting/Engineer/FortificationDrone/fortification_drone.gd" id="1_gc2y3"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/Stats/EntityStats/entity_stats.gd" id="2_d2dv0"]
-[ext_resource type="PackedScene" uid="uid://b3f15ldbddrlp" path="res://Entities/NPC/Fighting/Engineer/FortificationDrone/fortification_drone_visual.tscn" id="2_l6jnf"]
+[ext_resource type="PackedScene" uid="uid://b3f15ldbddrlp" path="res://Entities/NPC/Fighting/Engineer/FortificationDrone/Visual/fortification_drone_visual.tscn" id="2_l6jnf"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="4_07yhp"]
 
 [sub_resource type="Resource" id="Resource_07yhp"]
@@ -24,7 +24,7 @@ shape = SubResource("SphereShape3D_d2dv0")
 
 [node name="FortificationDroneVisual" parent="." unique_id=50220890 instance=ExtResource("2_l6jnf")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8024883, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7997277, 0)
 
 [node name="AnimHoveringModule" parent="FortificationDroneVisual" unique_id=1140988969 node_paths=PackedStringArray("_owner") instance=ExtResource("4_07yhp")]
 _owner = NodePath("..")
