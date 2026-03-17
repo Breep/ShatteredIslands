@@ -74,7 +74,7 @@ func _link_to_an_ally(ally: Entity) -> void:
 func _periodic_beam_callback() -> void:
 	if not is_instance_valid(_linked_ally): return
 	inflict_condition_stacks(_linked_ally, _shield_per_second, Stack.Type.SHIELD, "Fortification Drone")
-	# Activate beam VFX
+	_beam.blink()
 
 
 func _on_spawn_completed() -> void:
