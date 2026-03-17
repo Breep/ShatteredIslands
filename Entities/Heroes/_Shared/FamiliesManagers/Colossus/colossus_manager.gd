@@ -10,15 +10,12 @@ const SCALE_DEFENSE_INCREASE: Array[float] = [10.0, 20.0, 30.0, 40.0]
 func start() -> void:
 	Verbose.debug("ColossusManager start", Verbose.Category.FAMILY_MANAGER)
 	
-	if level >= 1 :
-		_start_passive()
 
 func stop() -> void:
 	Verbose.debug("ColossusManager stop", Verbose.Category.FAMILY_MANAGER)
-#endregion
+	
 
-
-func _start_passive() -> void:
+func apply_passive() -> void:
 
 	# Register the initial stat modifier (value 0 — updated each tick)
 	var mod := StatModifier.new()
@@ -51,3 +48,4 @@ func _start_passive() -> void:
 	mod4.value = SCALE_DEFENSE_INCREASE[level - 1] / 100
 	_owner.stat_modifiers_registry.register_modifier(mod4)
 	
+#endregion

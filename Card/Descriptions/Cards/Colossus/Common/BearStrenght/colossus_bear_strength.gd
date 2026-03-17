@@ -4,7 +4,6 @@ extends HeroUpgrade
 @export var _as_reduction: Array[float]
 @export var _hp_to_ad_percents: Array[float]
 @export var _scale_to_ad_percents: Array[float]
-@export var _rarity: Card.Rarity = Card.Rarity.COMMON
 
 var _hp_to_ad_percent: float 
 var _scale_to_ad_percent: float 
