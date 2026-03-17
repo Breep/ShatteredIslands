@@ -103,6 +103,9 @@ metadata/_edit_lock_ = true
 
 [node name="DarkKnight2" parent="Entities" unique_id=1010378661 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("1_icvx6")]
 transform = Transform3D(-0.059724454, 0, 0.9982149, 0, 1, 0, -0.9982149, 0, -0.059724454, 7.5962777, 4.7683716e-07, 2.3270931)
+_override_family_levels = Dictionary[int, int]({
+8: 4
+})
 team = 2
 custom_base_stats = SubResource("Resource_ko5bb")
 _spawn_manager = NodePath("../../SpawnManager")

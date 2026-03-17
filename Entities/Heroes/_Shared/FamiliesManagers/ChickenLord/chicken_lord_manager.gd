@@ -99,6 +99,9 @@ func _start_passive() -> void:
 	var spawn_period: float = P_PERIODIC_SPAWN_PERIODS[level] - _chicken_lord_stats.spawn_period_decrease # Rajouter un check
 	var chicken_number: int = P_PERIODIC_SPAWN_CHICKEN_NUMBERS[level]
 	_owner.periodic_timer_registry.register(&"Chicken passive", spawn_period, _spawn_n_chickens.bind(chicken_number), true)
+	
+	var spawn_loc := SpawnLocationConfig.create_arena_center()
+	_owner.summon_entity(Entity.EntityType.TREX, spawn_loc, {})
 #endregion
 
 
