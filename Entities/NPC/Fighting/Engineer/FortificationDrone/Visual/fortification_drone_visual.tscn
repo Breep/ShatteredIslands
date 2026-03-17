@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://b3f15ldbddrlp"]
+
+[ext_resource type="Script" uid="uid://7y6yv28l2xwe" path="res://Entities/NPC/Fighting/Engineer/FortificationDrone/Visual/fortification_drone_visual.gd" id="1_4dfb3"]
+[ext_resource type="Material" uid="uid://cenv77yeljt5h" path="res://Entities/NPC/Fighting/Engineer/FortificationDrone/Visual/glitched_3D_shader.tres" id="2_tduhn"]
+[ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://Tool/QuickAnims/anim_rotating_module.tscn" id="3_tduhn"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_viee8"]
+material = ExtResource("2_tduhn")
+
+[node name="FortificationDroneVisual" type="Node3D" unique_id=50220890]
+script = ExtResource("1_4dfb3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1486863111]
+unique_name_in_owner = true
+mesh = SubResource("SphereMesh_viee8")
+
+[node name="AnimRotatingModule" parent="MeshInstance3D" unique_id=1843877249 node_paths=PackedStringArray("_owner") instance=ExtResource("3_tduhn")]
+_owner = NodePath("..")
+_rot_axis = 1
+_rot_period = 3.2
+_rot_max = 10.0

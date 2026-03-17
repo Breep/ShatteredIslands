@@ -8,9 +8,7 @@ enum Modifier {
 	RESPAWN_TIMER
 }
 
-const BEAM_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Engineer/FortificationDrone/fortification_drone_beam.tscn")
-
-var periodic_timer_registry: PeriodicTimerRegistry
+const BEAM_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Engineer/FortificationDrone/Visual/fortification_drone_beam.tscn")
 
 var _shield_per_second: float
 var _on_spawn_shield_amount: float
@@ -31,26 +29,17 @@ func init(shield_amount: float, hp_max: int, shield_per_second: float, respawn_t
 	return self
 
 
-func _enter_tree() -> void:
-	print("FORTI ENTER")
-	periodic_timer_registry = PeriodicTimerRegistry.new()
-	periodic_timer_registry.name = "PeriodicTimerRegistry"
-	add_child(periodic_timer_registry)
-	super._enter_tree()
-
-
 func _ready() -> void:
-	print("FORTI READY")
 	take_condition_stacks(_on_spawn_shield_amount, Stack.Type.SHIELD, false, "Initial shield")
 	_base_stats.health_max = _on_spawn_hp_max
 	_base_stats.reset_from_self()
 	periodic_timer_registry.register("Periodic Shield", 1.0, _periodic_beam_callback)
 	spawn_completed.connect(_on_spawn_completed)
 	super._ready()
-	print("FORTI READY 2")
 
 
-func _process(_delta: float) -> void:
+func process_tick() -> void:
+	super.process_tick()
 	_update_beam()
 
 
