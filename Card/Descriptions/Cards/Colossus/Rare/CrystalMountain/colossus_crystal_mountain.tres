@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_2gfvs"]
 script = ExtResource("2_n1j2v")
-_defense_increase = Array[float]([7.0, 14.0, 21.0])
+_defense_increase = Array[float]([5.0, 10.0, 15.0, 20.0, 25.0])
 metadata/_custom_type_script = "uid://c51nb6wkfq4ov"
 
 [resource]
@@ -18,4 +18,5 @@ player_upgrade = SubResource("Resource_2gfvs")
 points = Dictionary[int, int]({
 6: 2
 })
+lvl = 5
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"
