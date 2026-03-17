@@ -3,8 +3,6 @@ extends HeroUpgrade
 
 @export var _period: Array[float]
 @export var _damage_percent: Array[float]
-@export var _rarity: Card.Rarity = Card.Rarity.EPIC
-
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var percent: float = _damage_percent[card_lvl - 1]

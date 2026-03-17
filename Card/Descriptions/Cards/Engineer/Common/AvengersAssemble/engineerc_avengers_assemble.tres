@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://dnxmyxqxal6sw"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_u5f6w"]
+[ext_resource type="Texture2D" uid="uid://d2w18hror3yb4" path="res://Card/Descriptions/Cards/Engineer/Common/AvengersAssemble/engineer_avengers_assemble.png" id="1_wb46e"]
+[ext_resource type="Script" uid="uid://ybpnkcveh61t" path="res://Card/Descriptions/Cards/Engineer/Common/AvengersAssemble/engineer_avengers_assemble.gd" id="2_y0wnm"]
+
+[sub_resource type="Resource" id="Resource_epane"]
+script = ExtResource("2_y0wnm")
+_crit_chance = Array[float]([10.0, 20.0, 30.0, 40.0, 50.0])
+_rarity = 0
+_rarity = 0
+metadata/_custom_type_script = "uid://ybpnkcveh61t"
+
+[resource]
+script = ExtResource("1_u5f6w")
+name = "Avengers Assemble"
+picture = ExtResource("1_wb46e")
+families = Array[int]([2, 4])
+player_upgrade = SubResource("Resource_epane")
+lvl = 5
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

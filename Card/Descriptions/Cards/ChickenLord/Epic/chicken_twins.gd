@@ -2,7 +2,6 @@ class_name ChickenTwins
 extends HeroUpgrade
 
 @export var _chance: Array[float]
-@export var _rarity: Card.Rarity = Card.Rarity.EPIC
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var chance: float = _chance[card_lvl - 1]

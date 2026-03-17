@@ -1,8 +1,8 @@
 [gd_scene format=4 uid="uid://c8xr41imxkoni"]
 
-[ext_resource type="Texture2D" uid="uid://ddfl765ylntv2" path="res://Props/DefaultBattleIsland/textures/Item_set_1_0.png" id="1_y16n5"]
-[ext_resource type="Texture2D" uid="uid://biiw38s7m48nh" path="res://Props/DefaultBattleIsland/textures/Item_set_1_1.png" id="2_j1v4c"]
-[ext_resource type="Texture2D" uid="uid://bt8webmoso4y8" path="res://Props/DefaultBattleIsland/textures/Item_set_1_2.png" id="3_byj03"]
+[ext_resource type="Texture2D" uid="uid://ddfl765ylntv2" path="res://Props/DefaultBattleIsland/Item_set_1_0.png" id="1_y16n5"]
+[ext_resource type="Texture2D" uid="uid://biiw38s7m48nh" path="res://Props/DefaultBattleIsland/Item_set_1_1.png" id="2_j1v4c"]
+[ext_resource type="Texture2D" uid="uid://bt8webmoso4y8" path="res://Props/DefaultBattleIsland/Item_set_1_2.png" id="3_byj03"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5a6kd"]
 resource_name = "Item_Set_1"
@@ -52,7 +52,6 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_t4bmt")
 
 [node name="Sword_Low" type="Node3D" unique_id=1192308003]
-transform = Transform3D(0, -1.2296562e-07, -2.813125, 4.9971136e-15, 2.813125, -1.2296562e-07, 2.813125, -4.9971136e-15, 2.1843081e-22, 38.025536, 40.85793, 3.6818757)
 
 [node name="Sword_Low2" type="MeshInstance3D" parent="." unique_id=948171517]
 mesh = SubResource("ArrayMesh_574h2")

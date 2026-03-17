@@ -61,6 +61,7 @@ func set_display_mode(mode: DisplayMode) -> void:
 	display_mode = mode
 	_apply_display_mode()
 
+
 func get_families_level() -> Dictionary[Family.Type, int]:
 	var families_level: Dictionary[Family.Type, int]
 	for family_type in _family_managers.keys():
@@ -95,7 +96,6 @@ func _enter_tree() -> void:
 		_family_managers[family_type] = family_manager.init(self)
 		add_child(_family_managers[family_type])
 
-	# Card system registries
 	periodic_timer_registry = PeriodicTimerRegistry.new()
 	periodic_timer_registry.name = "PeriodicTimerRegistry"
 	add_child(periodic_timer_registry)
@@ -130,6 +130,8 @@ func _ready() -> void:
 		_apply_all_cards_upgrades()
 
 	_apply_display_mode()
+	for family_manager: FamilyManager in _family_managers.values():
+		family_manager.apply_passive()
 
 	super._ready()
 #endregion

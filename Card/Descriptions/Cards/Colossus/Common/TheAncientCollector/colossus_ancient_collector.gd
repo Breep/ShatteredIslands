@@ -2,8 +2,6 @@ class_name ColossusAncientCollector
 extends HeroUpgrade
 
 @export var _amount_per_card: Array[float]
-@export var _rarity: Card.Rarity = Card.Rarity.COMMON
-
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var amount: float = _amount_per_card[card_lvl - 1]

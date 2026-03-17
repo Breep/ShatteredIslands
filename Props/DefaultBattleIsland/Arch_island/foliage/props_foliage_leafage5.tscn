@@ -1,0 +1,50 @@
+[gd_scene format=4 uid="uid://bb8nvxm3jqqjs"]
+
+[ext_resource type="Texture2D" uid="uid://lewyp4dd3axw" path="res://Props/DefaultBattleIsland/foliage/textures/leafage6_file2-file2.png" id="1_quxax"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oo1xv"]
+resource_name = "foliage.005"
+transparency = 4
+cull_mode = 2
+albedo_texture = ExtResource("1_quxax")
+roughness = 0.5527864
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_l4845"]
+_surfaces = [{
+"aabb": AABB(-384.2871, -137.71796, -0.49765587, 69.12912, 69.01007, 21.855766),
+"format": 34896613377,
+"index_count": 72,
+"index_data": PackedByteArray("DQABAAIAAwANAAIAAQAEAAUAAQAAAAQADQAAAAEABAAAAA4ADgAAAA0ABAAOAAYADgAHAAYADgANAA8ADgAQAAcABwAQAAoABwAKAAsAEQAQAA4AEQAOAA8ACgAQABEADQARAA8ACgARAAwAEQAIAAwADQASABEAEQASAAgAAwASAA0ACAASAAMACAADAAkA"),
+"lods": [15.978899, PackedByteArray("AAABAAIAAwAAAAIAAQAEAAUAAQAAAAQABAAAAAYAAAAHAAYAAwAIAAAACAADAAkAAAAKAAcAAAAIAAoABwAKAAsACgAIAAwA")],
+"name": "foliage.005",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 19,
+"vertex_data": PackedByteArray("xEMmZpFOAACEMaQZ//8AAEZvAAC3/gAAg7GnCCP2AAAAAP2QVu0AAMkItk6i+QAAghm2zmbeAAB7Tlf30tAAAP//AW+g2QAAfOZIMZDoAAB6zlrm98YAALiQ//8/yAAANfdIsVPNAAADd8s+HFEAACFMJqbzQAAArX5xfQAAAAC8h8q+4DUAAPq6b5dqOAAAnrJvVwhGAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_kexgj"]
+resource_name = "leafage6_Mesh_005"
+lightmap_size_hint = Vector2i(26, 26)
+_surfaces = [{
+"aabb": AABB(-384.2871, -137.71796, -0.49765587, 69.12912, 69.01007, 21.855766),
+"attribute_data": PackedByteArray("g4CCPoTAgz0vTCU/zmG5PtN0Uz6vcK89aUAhP9mJnTzfKF8+sCAwPdpzWz8+Tx8+/yR/PsHAQDyxE3s/K+vEPv8kfz6jZCM+XhEfPtbKFT7fKF8+g2gDPpA2wD4laaI8g4CCPtsg2z23CeQ+fgyePpVqlT6DaAM+T6qXPl/M5z6VapU+rxgvPo9DqDz2Fr0+q0KrPqNkIz7ZiZ083O4gP5VqlT6vcK89ljv+Pmv8AT+oVKg+2yDbPS/msj7fzyY/wRrBPq9wrz1Jsrc+sRN7P7tAuz6DaAM+JboQPlKIWT+oVKg+hMCDPfc2DD8CXjU/u0C7PrAgMD0a+x8/sRN7P6tCqz7BwEA8yctZP/vkWD+VapU+sCAwPVudMT+8/A8/lWqVPrAAsDkVeHo/6RYiPw=="),
+"format": 34359742519,
+"index_count": 72,
+"index_data": PackedByteArray("AAABAAIAAwAAAAIAAQAEAAUAAQAGAAQAAAAGAAEABAAGAAcABwAGAAAABAAHAAgABwAJAAgABwAAAAoABwALAAkACQALAAwACQAMAA0ADgALAAcADgAHAAoADAALAA4AAAAOAAoADAAOAA8ADgAQAA8AAAARAA4ADgARABAAAwARAAAAEAARAAMAEAADABIA"),
+"material": SubResource("StandardMaterial3D_oo1xv"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 19,
+"vertex_data": PackedByteArray("GhOww8SU8cK1qs1APXW5w0/OAsNp3apBkx6xw8y3CcNj/alBCy2ow7BiB8ODIaRBwCTAw/xDxcK0Hp5BF/W+w7z/6MLNhKZBbf62w9Zc3MIruMZAWd21w2rbucJghKFAErO8w+L8o8Lm6pNBEYy1wzEVjsLIpIpBMQqvw+TNz8LAzP6+FNGtw3aSrMIfQ4NA30Okw/Q9l8KR6YNBiZqsw3BqicKXyYRB5OWmw2TKwcLuMopABMSew9bas8J+QYhBOZSdw5aW18JGqJBB1Qaow9BL5MK5Zq9ACgahw6/d+MIT3JpB3yyzByjMb+uqI14gB9I87m8zlwiszqPtXNPqE7jG0umYA6k1Qcqp6xsWEi6vxWbyehPcJjvLlexrE2ze1bp95TEXldkou6TlsyrC7wet5txeB84DCbuD5WfXlPwprKbbIdsI6Sem+thEzQj7m7Nn1db03NsDq97cIvJv1VSpAdof8LIsCLB335zjKx3wunLlcd99Iwu7g+U=")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_l4845")
+
+[node name="leafage6" type="Node3D" unique_id=742185287]
+
+[node name="Leafage6" type="MeshInstance3D" parent="." unique_id=399583483]
+transform = Transform3D(0.014572014, 0, 0, 0, 0, -0.014572014, 0, 0.014572014, 0, 5.101363, -0.0072518485, 1.5140547)
+mesh = SubResource("ArrayMesh_kexgj")
+skeleton = NodePath("")

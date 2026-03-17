@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dfbtndnc5i7ep"]
+
+[ext_resource type="PackedScene" uid="uid://cyolvm34715q" path="res://Props/DefaultBattleIsland/Arch_island/foliage/Models/Trees/treeleafage.fbx" id="1_g7bbv"]
+[ext_resource type="Material" uid="uid://cf1dcxknt1yfg" path="res://Props/DefaultBattleIsland/Arch_island/foliage/Models/Trees/Shaders/m_treeLeaves.tres" id="3_o5m5o"]
+
+[node name="tree02" unique_id=55168550 instance=ExtResource("1_g7bbv")]
+
+[node name="PM3D_Sphere3D1" parent="." index="0" unique_id=750849967]
+material_override = ExtResource("3_o5m5o")
+cast_shadow = 0

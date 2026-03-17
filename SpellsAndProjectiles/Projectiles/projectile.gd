@@ -130,7 +130,7 @@ func _on_hit(hit_target: Entity) -> void:
 			})
 	
 	# Handle bouncing if remaining bounces
-	if _stats.bounces_remaining > 0:
+	if _stats.bounces_remaining >= 1.0:
 		_handle_bounce(hit_target)
 	else:
 		# No more bounces, destroy projectile

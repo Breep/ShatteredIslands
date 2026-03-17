@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://c4iagimuwci0c"]
+
+[ext_resource type="Script" uid="uid://b1x3id3yn40a8" path="res://Entities/NPC/Fighting/Engineer/FortificationDrone/fortification_drone.gd" id="1_gc2y3"]
+[ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/Stats/EntityStats/entity_stats.gd" id="2_d2dv0"]
+[ext_resource type="PackedScene" uid="uid://b3f15ldbddrlp" path="res://Entities/NPC/Fighting/Engineer/FortificationDrone/fortification_drone_visual.tscn" id="2_l6jnf"]
+[ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="4_07yhp"]
+
+[sub_resource type="Resource" id="Resource_07yhp"]
+script = ExtResource("2_d2dv0")
+metadata/_custom_type_script = "uid://bf01q5yq3glxi"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_d2dv0"]
+
+[node name="FortificationDrone" type="CharacterBody3D" unique_id=1381427842 node_paths=PackedStringArray("_visual_3d")]
+script = ExtResource("1_gc2y3")
+custom_base_stats = SubResource("Resource_07yhp")
+_auto_loaded_modules = Array[int]([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 0])
+_visual_3d = NodePath("FortificationDroneVisual")
+metadata/_custom_type_script = "uid://cjfj1jcbiom2x"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1130319820]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7994554, 0)
+shape = SubResource("SphereShape3D_d2dv0")
+
+[node name="FortificationDroneVisual" parent="." unique_id=50220890 instance=ExtResource("2_l6jnf")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8024883, 0)
+
+[node name="AnimHoveringModule" parent="FortificationDroneVisual" unique_id=1140988969 node_paths=PackedStringArray("_owner") instance=ExtResource("4_07yhp")]
+_owner = NodePath("..")
+_hover_power = 0.2
+_hover_period = 1.1

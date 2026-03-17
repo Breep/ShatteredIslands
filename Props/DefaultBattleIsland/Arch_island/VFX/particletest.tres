@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bc2xt4f5ghbga"]
+
+[ext_resource type="Shader" uid="uid://rrqjqsif5vgo" path="res://Props/DefaultBattleIsland/Arch_island/VFX/waterfall.tres" id="1_gwagc"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_gwagc")
+shader_parameter/ColorParameter = Color(0.372549, 0.698039, 0.698039, 1)
+shader_parameter/ColorParameter2 = Color(0.206472, 0.544484, 0.689106, 1)

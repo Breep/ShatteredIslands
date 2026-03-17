@@ -3,7 +3,6 @@ extends HeroUpgrade
 
 @export var _strength_increases: Array[float]
 @export var _chances: Array[float]
-@export var _rarity: Card.Rarity = Card.Rarity.COMMON
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var strength_increase: float = _strength_increases[card_lvl - 1]

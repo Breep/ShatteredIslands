@@ -4,8 +4,6 @@ extends HeroUpgrade
 @export var _shield_threshold: Array[float]
 @export var _attacks_count: Array[float] # Note: Array[float] pour le scaling, on convertira en int
 @export var _damage_percent: Array[float]
-@export var _rarity: Card.Rarity = Card.Rarity.RARE
-
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:

@@ -2,8 +2,6 @@ class_name ColossusProteins
 extends HeroUpgrade
 
 @export var _max_hp_increase: Array[float]
-@export var _rarity: Card.Rarity = Card.Rarity.COMMON
-
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	

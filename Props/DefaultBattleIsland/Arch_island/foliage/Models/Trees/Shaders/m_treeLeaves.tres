@@ -1,0 +1,22 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cf1dcxknt1yfg"]
+
+[ext_resource type="Shader" uid="uid://jecpdwah4gkp" path="res://Props/DefaultBattleIsland/Arch_island/foliage/Models/Trees/Shaders/tree_leaves.gdshader" id="1_nf6j8"]
+[ext_resource type="Texture2D" uid="uid://dylbsuear0h2o" path="res://Props/DefaultBattleIsland/Arch_island/foliage/Models/Trees/Shaders/arbre.png" id="2_imn86"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_nf6j8")
+shader_parameter/alphaTexture = ExtResource("2_imn86")
+shader_parameter/leavesColor = Color(0.61533326, 0.4406054, 0.405937, 1)
+shader_parameter/alphaThreshold = 0.1
+shader_parameter/offsetScale = 0.11810000560247
+shader_parameter/fresnelStrength = 0.1260001009849998
+shader_parameter/fresnelBlend = 0.998
+shader_parameter/fresnelColor = Color(0.909804, 0.478431, 0, 1)
+shader_parameter/WindScale = 9.56100045088762
+shader_parameter/WindSpeed = 4.78000022705
+shader_parameter/WindStrength = 2.0
+shader_parameter/WindDensity = 5.0
+shader_parameter/deactiveGlobalVariation = false
+shader_parameter/clampTop = 0.0
+shader_parameter/clampBottom = -0.99199999962
