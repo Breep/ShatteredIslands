@@ -42,13 +42,8 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			mod3.value = (_increase_sizes[card_lvl - 1]/100) * state[&"iteration"]
 			ctx.stat_modifiers.register_modifier(mod3)
 			
-			print("iteration: ", state[&"iteration"])
 			state[&"iteration"] += 1
-			print("Defense: ", ctx.hero.stats.defence)
-			print("Scale: ", ctx.hero.stats.scale)
-			print("Dodge: ", ctx.hero.stats.get_stat(EntityStats.StatType.DODGE, Utils.ActionType.DAMAGE_PHYSICAL))
 	ctx.action_modifiers.register_modifier(action_mod)
-	#TODO scale la défense en fonction de la size, faut il gérer dans le passif?
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[Card.Rarity.COMMON]:
