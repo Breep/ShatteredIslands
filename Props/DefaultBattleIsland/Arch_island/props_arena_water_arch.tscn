@@ -157,12 +157,12 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_re3nc")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4xp2w"]
-render_priority = 0
+render_priority = 5
 shader = ExtResource("2_lgn0t")
 shader_parameter/time_speed = 0.1
-shader_parameter/surface_speed = 0.2
+shader_parameter/surface_speed = 0.42
 shader_parameter/spin = 0.5
-shader_parameter/brightness = 0.8
+shader_parameter/brightness = 1.575
 shader_parameter/color_intensity = 0.0
 shader_parameter/horizontal_frequency = 2.0
 shader_parameter/vertical_frequency = 2.0
@@ -172,8 +172,8 @@ shader_parameter/wave_texture = ExtResource("4_472uk")
 shader_parameter/noise_texture = ExtResource("3_3lgt5")
 shader_parameter/wave_height = 0.5
 shader_parameter/texture_height = 0.5
-shader_parameter/color1 = Color(0.59000057, 0.7611122, 1, 1)
-shader_parameter/color2 = Color(0.07874604, 0.2582658, 0.9034538, 1)
+shader_parameter/color1 = Color(0.59, 0.761, 1, 1)
+shader_parameter/color2 = Color(0.088507615, 0.51730037, 0.9223636, 1)
 shader_parameter/color3 = Color(0.059, 0.389, 0.85, 1)
 shader_parameter/color4 = Color(0, 0.267, 1, 1)
 
@@ -458,7 +458,7 @@ process_material = SubResource("ParticleProcessMaterial_7l2a5")
 draw_pass_1 = SubResource("SphereMesh_c4g2e")
 
 [node name="drop_001" type="MeshInstance3D" parent="." unique_id=859447980]
-transform = Transform3D(0.38747916, 0, 0, 0, 0.38747916, 0, 0, 0, 0.38747916, -2.0002081, 2.7520947, -0.5682408)
+transform = Transform3D(0.45396549, 0, 0, 0, 0.45396549, 0, 0, 0, 0.45396549, -2.2828958, 2.733704, -0.80847)
 mesh = SubResource("ArrayMesh_pdym0")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_4xp2w")

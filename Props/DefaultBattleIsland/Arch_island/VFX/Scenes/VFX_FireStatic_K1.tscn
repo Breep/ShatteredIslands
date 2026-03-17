@@ -1,8 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://do3ogy3puc8kq"]
+[gd_scene format=3 uid="uid://cg4hqe65owjkt"]
 
-[ext_resource type="Material" uid="uid://dl7bp7amy7g7t" path="res://VFX/materials/m_firetorch44.tres" id="1_s0mq8"]
-[ext_resource type="ArrayMesh" uid="uid://dlwx0ortvlt74" path="res://VFX/objects/sm_teardrop2_high.obj" id="2_jj641"]
-[ext_resource type="Shader" uid="uid://ncbi6cug17fc" path="res://VFX/shaders/s_Disolver_Treshold_p_fc.tres" id="3_0qqdo"]
+[ext_resource type="Material" uid="uid://dl7bp7amy7g7t" path="res://Props/DefaultBattleIsland/Arch_island/VFX/materials/m_firetorch44.tres" id="1_s0mq8"]
+[ext_resource type="ArrayMesh" uid="uid://dlwx0ortvlt74" path="res://Props/DefaultBattleIsland/Arch_island/VFX/objects/sm_teardrop2_high.obj" id="2_jj641"]
+[ext_resource type="Shader" uid="uid://ncbi6cug17fc" path="res://Props/DefaultBattleIsland/Arch_island/VFX/shaders/s_Disolver_Treshold_p_fc.tres" id="3_0qqdo"]
 
 [sub_resource type="Gradient" id="Gradient_dc6oq"]
 offsets = PackedFloat32Array(0.712062, 1)
@@ -29,17 +29,17 @@ texture_mode = 1
 curve = SubResource("Curve_48445")
 
 [sub_resource type="Curve" id="Curve_vcvcc"]
-max_value = 2.0
+_limits = [0.0, 2.0, 0.0, 1.0]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0]
 point_count = 1
 
 [sub_resource type="Curve" id="Curve_plrvl"]
-max_value = 2.0
+_limits = [0.0, 2.0, 0.0, 1.0]
 _data = [Vector2(0, 0.597122), 0.0, 0.0, 0, 0, Vector2(1, 0.166907), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_uy2g2"]
-max_value = 2.0
+_limits = [0.0, 2.0, 0.0, 1.0]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0]
 point_count = 1
 
@@ -68,6 +68,7 @@ emission_ring_axis = Vector3(0, 1, 0)
 emission_ring_height = 0.8
 emission_ring_radius = 0.35
 emission_ring_inner_radius = 0.15
+emission_ring_cone_angle = 90.0
 direction = Vector3(0, 1, 0)
 spread = 0.0
 initial_velocity_min = 0.5
@@ -89,17 +90,18 @@ hue_variation_max = -2.23517e-08
 
 [sub_resource type="QuadMesh" id="QuadMesh_70ve1"]
 
-[node name="VFX_FireStatic_K1" type="Node3D"]
+[node name="VFX_FireStatic_K1" type="Node3D" unique_id=490239612]
 
-[node name="FireTorch_AC" type="MeshInstance3D" parent="."]
+[node name="FireTorch_AC" type="MeshInstance3D" parent="." unique_id=2046164096]
 transform = Transform3D(0.18, 0, 0, 0, 0.24, 0, 0, 0, 0.18, 0, 0, 0)
+visible = false
 layers = 4
 material_override = ExtResource("1_s0mq8")
 cast_shadow = 0
 mesh = ExtResource("2_jj641")
 skeleton = NodePath("../..")
 
-[node name="smallparticles_constant" type="GPUParticles3D" parent="."]
+[node name="smallparticles_constant" type="GPUParticles3D" parent="." unique_id=975027205]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.109389, 0)
 layers = 4
 material_override = SubResource("ShaderMaterial_2i3d6")

@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=14 format=3 uid="uid://cxkv27ubtmir3"]
+[gd_resource type="VisualShader" format=3 uid="uid://cxkv27ubtmir3"]
 
 [sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_lgqg7"]
 default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0, 0, 0, 0)]
@@ -47,81 +47,6 @@ operator = 2
 parameter_name = "PortalColor"
 
 [resource]
-code = "shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_lambert, specular_schlick_ggx, unshaded;
-
-uniform float Color_Intensity;
-uniform vec4 PortalColor : source_color;
-uniform vec2 Speed_X_Y;
-uniform sampler2D Texture_portal : source_color;
-uniform sampler2D Texture2DParameter : source_color;
-
-
-
-void fragment() {
-// FloatParameter:11
-	float n_out11p0 = Color_Intensity;
-
-
-// ColorParameter:9
-	vec4 n_out9p0 = PortalColor;
-
-
-// VectorOp:12
-	vec4 n_out12p0 = vec4(n_out11p0) * n_out9p0;
-
-
-	vec2 n_out3p0;
-// UVPolarCoord:3
-	vec2 n_in3p1 = vec2(0.50000, 0.50000);
-	float n_in3p2 = 1.00000;
-	float n_in3p3 = 1.00000;
-	{
-		vec2 __dir = UV - n_in3p1;
-		float __radius = length(__dir) * 2.0;
-		float __angle = atan(__dir.y, __dir.x) * 1.0 / (PI * 2.0);
-		n_out3p0 = vec2(__radius * n_in3p2, __angle * n_in3p3);
-	}
-
-
-// Input:5
-	float n_out5p0 = TIME;
-
-
-// Vector2Parameter:13
-	vec2 n_out13p0 = Speed_X_Y;
-
-
-// VectorOp:6
-	vec2 n_out6p0 = vec2(n_out5p0) * n_out13p0;
-
-
-// UVFunc:4
-	vec2 n_in4p1 = vec2(1.00000, 1.00000);
-	vec2 n_out4p0 = n_out6p0 * n_in4p1 + n_out3p0;
-
-
-	vec4 n_out15p0;
-// Texture2D:15
-	n_out15p0 = texture(Texture_portal, n_out4p0);
-
-
-// VectorOp:10
-	vec4 n_out10p0 = n_out12p0 * n_out15p0;
-
-
-	vec4 n_out17p0;
-// Texture2D:17
-	n_out17p0 = texture(Texture2DParameter, UV);
-
-
-// Output:0
-	ALBEDO = vec3(n_out10p0.xyz);
-	ALPHA = n_out17p0.x;
-
-
-}
-"
 modes/cull = 2
 flags/unshaded = true
 nodes/fragment/0/position = Vector2(800, 60)
