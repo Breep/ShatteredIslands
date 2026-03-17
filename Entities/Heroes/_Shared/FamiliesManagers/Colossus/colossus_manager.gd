@@ -28,8 +28,8 @@ func _start_passive() -> void:
 	mod.value = HP_MAX_INCREASE[level - 1] / 100
 	_owner.stat_modifiers_registry.register_modifier(mod)
 	
-	var _on_scale_change: Callable
-	_on_scale_change = func(scale: float) -> void:
+	var _on_scale_changed: Callable
+	_on_scale_changed = func(scale: float) -> void:
 		var mod3 := StatModifier.new()
 		mod3.id = &"Colossus Passive"
 		mod3.stat_type = EntityStats.StatType.DEFENCE
@@ -38,9 +38,9 @@ func _start_passive() -> void:
 		_owner.stat_modifiers_registry.register_modifier(mod3)
 		
 	_owner.battle_callback_registry.register_battle_start(&"Colossus Passive", func() -> void:
-		if _owner == null or not is_instance_valid(_owner): return
-		if not _owner.stats.scale_changed.is_connected(_on_scale_change):
-			_owner.stats.scale_changed.connect(_on_scale_change)
+		if not is_instance_valid(_owner): return
+		if not _owner.stats.scale_changed.is_connected(_on_scale_changed):
+			_owner.stats.scale_changed.connect(_on_scale_changed)
 		
 	)
 	
@@ -51,6 +51,3 @@ func _start_passive() -> void:
 	mod4.value = SCALE_DEFENSE_INCREASE[level - 1] / 100
 	_owner.stat_modifiers_registry.register_modifier(mod4)
 	
-	
-	#var ratio_scaling: float = _owner.base_stats.scale + (SCALE_DEFENSE_INCREASE[level - 1] / 100)
-	#_owner.visual.scale = Vector3(ratio_scaling, ratio_scaling, ratio_scaling)

@@ -29,6 +29,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	action_mod.id = &"Evasive Growth"
 	action_mod.action_type = Utils.ActionCategory.DODGE
 	action_mod.is_one_time_effect = false
+	var state := {&"iteration": 1}
 	action_mod.after_action_logic_callback = func(_cb_vars: Dictionary) -> void:
 		if ctx.hero and is_instance_valid(ctx.hero):
 			var mod2 := StatModifier.new()
@@ -36,19 +37,21 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			mod2.stat_type = EntityStats.StatType.DODGE
 			mod2.action_type = Utils.ActionType.DAMAGE_PHYSICAL
 			mod2.calc_type = StatModifier.CalcType.ADD
-			mod2.value = _dodge_reductions[card_lvl - 1]
+			mod2.value = _dodge_reductions[card_lvl - 1] * (state[&"iteration"] * -1)
 			ctx.stat_modifiers.register_modifier(mod2)
 			
 			var mod3 := StatModifier.new()
 			mod3.id = &"Evasive Growth"
 			mod3.stat_type = EntityStats.StatType.SCALE
 			mod3.calc_type = StatModifier.CalcType.ADD
-			mod3.value = (_increase_sizes[card_lvl - 1]/100)
+			mod3.value = (_increase_sizes[card_lvl - 1]/100) * state[&"iteration"]
+			ctx.stat_modifiers.register_modifier(mod3)
 			
-			# Increase visual size
-			var ratio_scaling: float = ctx.hero.visual.scale[1] + (_increase_sizes[card_lvl - 1]/100)
-			ctx.hero.visual.scale = Vector3(ratio_scaling, ratio_scaling, ratio_scaling) 
-			
+			print("iteration: ", state[&"iteration"])
+			state[&"iteration"] += 1
+			print("Defense: ", ctx.hero.stats.defence)
+			print("Scale: ", ctx.hero.stats.scale)
+			print("Dodge: ", ctx.hero.stats.get_stat(EntityStats.StatType.DODGE, Utils.ActionType.DAMAGE_PHYSICAL))
 	ctx.action_modifiers.register_modifier(action_mod)
 	#TODO scale la défense en fonction de la size, faut il gérer dans le passif?
 
