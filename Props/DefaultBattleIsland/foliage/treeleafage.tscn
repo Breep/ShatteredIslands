@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://cf28u44wf4d7y"]
+
+[ext_resource type="PackedScene" uid="uid://gj6psd6jkylc" path="res://Props/DefaultBattleIsland/foliage/tree_leafage.glb" id="1_m3gy1"]
+
+[node name="tree_leafage2" unique_id=94451037 instance=ExtResource("1_m3gy1")]

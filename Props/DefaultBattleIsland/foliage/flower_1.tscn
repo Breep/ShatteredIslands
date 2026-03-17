@@ -1,0 +1,51 @@
+[gd_scene format=4 uid="uid://cbuhou37q1ktd"]
+
+[ext_resource type="Texture2D" uid="uid://g10nkb5gmbu5" path="res://Props/DefaultBattleIsland/foliage/textures/flower1_file2-file2.png" id="1_qrqme"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wpsh4"]
+resource_name = "foliage.013"
+transparency = 4
+cull_mode = 2
+albedo_texture = ExtResource("1_qrqme")
+roughness = 0.5527864
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_bs0q8"]
+_surfaces = [{
+"aabb": AABB(-1, -1.4104364, -0.22165878, 2, 2, 0.22165878),
+"format": 34896613377,
+"index_count": 72,
+"index_data": PackedByteArray("DQAAAAwACgANAAwAAAABAAIAAAAOAAEADQAOAAAAAQAOAA8ADwAOAA0AAQAPAAQADwAFAAQADwANABAADwADAAUABQADAAYABQAGAAcAEQADAA8AEQAPABAABgADABEADQARABAABgARAAgAEQAJAAgADQASABEAEQASAAkACgASAA0ACQASAAoACQAKAAsA"),
+"lods": [0.21214198, PackedByteArray("AAABAAIAAQAAAAMAAQADAAQAAwAFAAQABQADAAYABQAGAAcABgADAAgAAwAJAAgAAAAJAAMACgAJAAAACQAKAAsACgAAAAwA")],
+"name": "foliage.013",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 19,
+"vertex_data": PackedByteArray("AAD/f///AAD/P9ju//8AACYR/7///wAAbLf/nwAAAAD/f/////8AAP+/2O7//wAA////f///AADY7v+///8AANju/z///wAA/78mEf//AAD/PyYR//8AAP9/AAD//wAAJhH/P///AACSSP9fAAAAAJJI/58AAAAA/3//vwAAAAD/f/9/JBgAAGy3/18AAAAA/3//PwAAAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_athqn"]
+resource_name = "flower1_Mesh_014"
+_surfaces = [{
+"aabb": AABB(-1, -1.4104364, -0.22165878, 2, 2, 0.22165878),
+"attribute_data": PackedByteArray("LW4hW894i20HccJlpYxyYHCDZHASjotttJghW9qVwmXalX9QEo63SM94t0hwg95FB3F/UDx60FU8enJgcIPCZXCDIVuljNBVcIN/UA=="),
+"format": 34896613399,
+"index_count": 72,
+"index_data": PackedByteArray("DQAAAAwACgANAAwAAAABAAIAAAAOAAEADQAOAAAAAQAOAA8ADwAOAA0AAQAPAAQADwAFAAQADwANABAADwADAAUABQADAAYABQAGAAcAEQADAA8AEQAPABAABgADABEADQARABAABgARAAgAEQAJAAgADQASABEAEQASAAkACgASAA0ACQASAAoACQAKAAsA"),
+"lods": [0.21214198, PackedByteArray("AAABAAIAAQAAAAMAAQADAAQAAwAFAAQABQADAAYABQAGAAcABgADAAgAAwAJAAgAAAAJAAMACgAJAAAACQAKAAsACgAAAAwA")],
+"material": SubResource("StandardMaterial3D_wpsh4"),
+"name": "foliage.013",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 19,
+"vertex_data": PackedByteArray("AAD/f///kv7/P9ju//9d8yYR/7///0D3bLf/nwAADfv/f//////u8P+/2O7//13z////f///kv7Y7v+///9A99ju/z///734/78mEf//zfH/PyYR///N8f9/AAD///7uJhH/P///vfiSSP9fAAC7+pJI/58AAA37/3//vwAAVvX/f/9/JBj//2y3/18AALv6/3//PwAA8fWh/9VqCv7vcOH9bZWo8veA////f+7w84HU6lyAkOrifQUCvZO4AYCLgQtGfgAA/3++E/p9uQ1Vfwf/qHL///9//v//f6oAuI0AAP9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_bs0q8")
+
+[node name="flower1" type="Node3D" unique_id=1397850149]
+
+[node name="flower_1" type="MeshInstance3D" parent="." unique_id=305020123]
+transform = Transform3D(0.207157, 0, 0, 0, 0, -0.207157, 0, 0.207157, 0, 0, 0, 0.08502477)
+mesh = SubResource("ArrayMesh_athqn")
+skeleton = NodePath("")

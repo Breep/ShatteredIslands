@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://q7gxxkhg5u54"]
 
-[ext_resource type="PackedScene" uid="uid://bxow3cbpwiaom" path="res://Props/DefaultBattleIsland/island.tscn" id="1_cci0s"]
+[ext_resource type="PackedScene" uid="uid://bq1das7mbtc76" path="res://Props/DefaultBattleIsland/island.tscn" id="1_cci0s"]
 
 [node name="ArchIsland" type="Node3D" unique_id=1045725859]
 
