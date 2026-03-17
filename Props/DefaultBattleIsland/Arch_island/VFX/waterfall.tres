@@ -39,7 +39,7 @@ texture = SubResource("NoiseTexture2D_6ynqe")
 output_port_for_preview = 0
 default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0, 0, 0, 0)]
 op_type = 2
-operator = 2
+operator = 7
 
 [sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_jixrj"]
 default_input_values = [1, Vector2(0.1, 0.1), 2, Vector2(0, 0)]
@@ -84,7 +84,7 @@ nodes/fragment/2/position = Vector2(-906.6667, 40)
 nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_uyls5")
 nodes/fragment/3/position = Vector2(-1333.3334, 160)
 nodes/fragment/4/node = SubResource("VisualShaderNodeVectorOp_f81be")
-nodes/fragment/4/position = Vector2(-346.66666, 80)
+nodes/fragment/4/position = Vector2(-266.66666, 53.333332)
 nodes/fragment/5/node = SubResource("VisualShaderNodeUVFunc_jixrj")
 nodes/fragment/5/position = Vector2(-1653.3334, 266.66666)
 nodes/fragment/6/node = SubResource("VisualShaderNodeInput_7noo8")

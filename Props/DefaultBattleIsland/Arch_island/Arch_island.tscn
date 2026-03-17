@@ -31,6 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://dfbtndnc5i7ep" path="res://Props/DefaultBattleIsland/Arch_island/foliage/Models/Trees/tree_02.tscn" id="27_wicrg"]
 [ext_resource type="PackedScene" uid="uid://b03mbxv4f3ndi" path="res://Props/DefaultBattleIsland/Arch_island/props_arena_treeleafage_2.tscn" id="29_artg0"]
 [ext_resource type="PackedScene" uid="uid://chti6qwqd1sq0" path="res://Props/DefaultBattleIsland/Arch_island/VFX/Scenes/VFX_FireDynamic_Stylized.tscn" id="30_jhssq"]
+[ext_resource type="PackedScene" uid="uid://dsid6wbxvgf5v" path="res://Props/DefaultBattleIsland/Arch_island/VFX/waterfall.tscn" id="32_8xm7n"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_kc47p"]
 panorama = ExtResource("1_wicrg")
@@ -763,3 +764,6 @@ transform = Transform3D(2.636326, 0, 0, 0, 2.636326, 0, 0, 0, 2.636326, 21.14001
 
 [node name="rock11" parent="." unique_id=1457846 instance=ExtResource("11_v6pgo")]
 transform = Transform3D(2.2784734, 0, 0, 0, 2.2784734, 0, 0, 0, 2.2784734, 22.221199, -0.8756852, 5.063946)
+
+[node name="Node3D" parent="." unique_id=917324084 instance=ExtResource("32_8xm7n")]
+transform = Transform3D(9.556769, 0, 0, 0, 9.556769, 0, 0, 0, 9.556769, -16.707285, -0.96067667, 3.2424293)
