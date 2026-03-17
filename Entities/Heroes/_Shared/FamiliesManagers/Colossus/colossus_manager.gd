@@ -3,7 +3,7 @@ extends FamilyManager
 
 # --- STATS PASSIVES (Dépendent du Niveau de la famille [0, 1, 2, 3, 4]) ---
 const HP_MAX_INCREASE: Array[float] = [15.0, 20.0, 35.0, 50.0]
-const SCALE_DEFENSE_INCREASE: Array[float] = [10.0, 20.0, 30.0, 40.0]
+const SCALE_INCREASE: Array[float] = [10.0, 20.0, 30.0, 40.0]
 
 
 #region ============================== public API ==============================
@@ -17,6 +17,8 @@ func stop() -> void:
 
 func apply_passive() -> void:
 
+	if level <= 0: return
+	
 	# Register the initial stat modifier (value 0 — updated each tick)
 	var mod := StatModifier.new()
 	mod.id = &"Colossus Passive"
@@ -45,7 +47,7 @@ func apply_passive() -> void:
 	mod4.id = &"Colossus Passive"
 	mod4.stat_type = EntityStats.StatType.SCALE
 	mod4.calc_type = StatModifier.CalcType.ADD
-	mod4.value = SCALE_DEFENSE_INCREASE[level - 1] / 100
+	mod4.value = SCALE_INCREASE[level - 1] / 100
 	_owner.stat_modifiers_registry.register_modifier(mod4)
 	
 #endregion

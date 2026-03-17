@@ -181,10 +181,6 @@ func _apply_all_cards_upgrades() -> void:
 func _on_stunned(is_active: bool) -> void:
 	if is_active:
 		periodic_timer_registry.pause_all()
-		for family_manager: FamilyManager in _family_managers.values():
-			family_manager.pause()
 	else:
 		periodic_timer_registry.resume_all()
-		for family_manager: FamilyManager in _family_managers.values():
-			family_manager.resume()
 #endregion

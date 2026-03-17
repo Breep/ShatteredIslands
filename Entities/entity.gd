@@ -263,9 +263,11 @@ func _ready() -> void:
 	GlobalFightingManager.fighting_phase_state_changed.connect(_on_gfm_fighting_phase_state_changed)
 	
 	stats.health_changed.connect(_on_stats_health_changed)
+	_on_stats_health_changed(stats.health)
 	died.connect(_on_died)
 	
 	stats.scale_changed.connect(_on_stats_scale_changed)
+	_on_stats_scale_changed(stats.scale)
 	
 	# TODO CHECK THIS ??
 	if _initial_fighting_state_from_context != FightingState.UNDEF:

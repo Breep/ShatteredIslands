@@ -2,7 +2,6 @@ class_name ColossusCrushingWeight
 extends HeroUpgrade
 
 @export var _stun_increase_percents: Array[float]
-@export var _rarity: Card.Rarity = Card.Rarity.RARE
 
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:

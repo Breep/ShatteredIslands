@@ -12,7 +12,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	mod.calc_type = StatModifier.CalcType.ADD
 	mod.tags = [StatModifier.TagType.CARD]
 
-	# Count unique Colossus/Life cards in deck
+	# Count unique cards in deck
 	if ctx.hero.deck:
 		var count: int 
 		for family in Family.Type:
