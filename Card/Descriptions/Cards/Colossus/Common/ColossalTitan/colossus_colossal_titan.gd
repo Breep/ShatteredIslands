@@ -23,9 +23,8 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			return
 			
 		var damage_factor: float = _damage_factors[card_lvl - 1]
-		var damage: float = (ctx.hero.scale[1] - 1) * 100 * damage_factor
-		ennemy.take_damage(damage, Utils.ActionType.DAMAGE_PHYSICAL, false, &"Colossal Titan", ctx.hero)
-		
+		var damage: float = (ctx.hero.stats.scale - 1) * 100 * damage_factor
+		ctx.hero.direct_damage(ennemy, damage, Utils.ActionType.DAMAGE_PHYSICAL, &"Colossal Titan")
 	)
 
 func get_description(cardlvl: int) -> String:
