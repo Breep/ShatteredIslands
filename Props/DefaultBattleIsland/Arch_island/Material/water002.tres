@@ -1,0 +1,25 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://c8tvgqwms8ers"]
+
+[ext_resource type="Shader" uid="uid://b2gdy68ya8od8" path="res://Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Shaders/s_master_firewall_ds.tres" id="1_jrfny"]
+[ext_resource type="Texture2D" uid="uid://dce3jblveb1iw" path="res://Props/DefaultBattleIsland/Arch_island/VFX/textures/T_Noise_w03A.png" id="2_gbx58"]
+
+[sub_resource type="Gradient" id="Gradient_g7bkv"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lrln1"]
+gradient = SubResource("Gradient_g7bkv")
+
+[sub_resource type="Gradient" id="Gradient_ki1ka"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lhdae"]
+gradient = SubResource("Gradient_ki1ka")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_jrfny")
+shader_parameter/Base_noise2 = ExtResource("2_gbx58")
+shader_parameter/Speed_XY2 = Vector2(0.485, 0.34)
+shader_parameter/Scale_XY2 = Vector2(1.36, 1.3)
+shader_parameter/Texture_add = SubResource("GradientTexture2D_lrln1")
+shader_parameter/Texture_substract = SubResource("GradientTexture2D_lhdae")
+shader_parameter/Color_Intensity2 = 1.0
+shader_parameter/Fill = 1.0

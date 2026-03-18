@@ -2,26 +2,26 @@
 
 [ext_resource type="Shader" uid="uid://b2gdy68ya8od8" path="res://Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Shaders/s_master_firewall_ds.tres" id="1_77g3u"]
 [ext_resource type="Texture2D" uid="uid://yhjcyu7ajofq" path="res://Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Textures/T_VFX_Noise_j035.png" id="2_vq8pd"]
-[ext_resource type="ArrayMesh" uid="uid://c2xuglijffsu3" path="res://Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Objects/sm_WallBased4929.obj" id="3_4gibi"]
 
 [sub_resource type="Gradient" id="Gradient_xwn7r"]
 offsets = PackedFloat32Array(0, 0.446043, 0.517986, 0.622302, 0.946043, 1)
-colors = PackedColorArray(0.0546, 0.07, 0.0566533, 0, 0.011740943, 0.2078948, 0.30251533, 1, 0.028827144, 0.26636028, 0.3173213, 1, 0.07785659, 0.30857286, 0.5308855, 1, 0.30626944, 0.6682523, 0.90305346, 1, 0.4447407, 0.9263715, 0.98795086, 1)
+colors = PackedColorArray(0.0546, 0.07, 0.0566533, 0, 0.15107393, 0.2992992, 0.34390223, 1, 0.053955063, 0.27192253, 0.26987964, 1, 0.06575471, 0.34244865, 0.37829882, 1, 0.36099386, 0.6973899, 0.68397456, 1, 0.90707046, 0.98156244, 0.9659619, 1)
+metadata/_snap_count = 2
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_qprb2"]
 gradient = SubResource("Gradient_xwn7r")
 
 [sub_resource type="Gradient" id="Gradient_xm4ri"]
-offsets = PackedFloat32Array(0.0935252, 0.593525, 1)
-colors = PackedColorArray(1, 1, 1, 1, 0.634921, 0.634921, 0.634921, 1, 0, 0, 0, 1)
+offsets = PackedFloat32Array(0, 0.46153846, 0.8942308)
+colors = PackedColorArray(0.86036915, 0.8603692, 0.8603692, 1, 0.634921, 0.634921, 0.634921, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_hkds8"]
 gradient = SubResource("Gradient_xm4ri")
 fill_from = Vector2(1, 1)
 
 [sub_resource type="Gradient" id="Gradient_4s5xo"]
-offsets = PackedFloat32Array(0, 0.100719)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+offsets = PackedFloat32Array(0.009615385, 0.17307693, 0.31538463, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.69135684, 0.6913568, 0.69135684, 1, 0, 0, 0, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_yt104"]
 gradient = SubResource("Gradient_4s5xo")
@@ -31,19 +31,21 @@ fill_to = Vector2(0, 1)
 render_priority = 0
 shader = ExtResource("1_77g3u")
 shader_parameter/Base_noise2 = ExtResource("2_vq8pd")
-shader_parameter/Speed_XY2 = Vector2(0.1, 0.5)
+shader_parameter/Speed_XY2 = Vector2(0.1, 1.06)
 shader_parameter/Scale_XY2 = Vector2(2.3, 0.6)
 shader_parameter/Texture_add = SubResource("GradientTexture2D_hkds8")
 shader_parameter/Texture_substract = SubResource("GradientTexture2D_yt104")
 shader_parameter/Gradient_Color_1D2 = SubResource("GradientTexture1D_qprb2")
 shader_parameter/Color_Intensity2 = 2.2
-shader_parameter/Fill = 1.0
+shader_parameter/Fill = 0.690000032775
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_j2mw5"]
 
 [node name="VFX_AcidWall_K1_" type="Node3D" unique_id=1350972226]
 
 [node name="AcidWall_K1_" type="MeshInstance3D" parent="." unique_id=448407575]
-transform = Transform3D(-4.37114e-08, 0, 0.800001, 0, 1, 0, -1, 0, -3.49692e-08, 0, 0, 0)
+transform = Transform3D(-1.8127768e-07, 0, 3.3177235, 0, 4.147149, 0, -4.147149, 0, -1.4502248e-07, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_3gihs")
 cast_shadow = 0
-mesh = ExtResource("3_4gibi")
+mesh = SubResource("PlaneMesh_j2mw5")
 skeleton = NodePath("../..")

@@ -32,8 +32,7 @@
 [ext_resource type="PackedScene" uid="uid://b03mbxv4f3ndi" path="res://Props/DefaultBattleIsland/Arch_island/props_arena_treeleafage_2.tscn" id="29_artg0"]
 [ext_resource type="PackedScene" uid="uid://dsid6wbxvgf5v" path="res://Props/DefaultBattleIsland/Arch_island/VFX/waterfall.tscn" id="32_8xm7n"]
 [ext_resource type="PackedScene" uid="uid://dbfx8x2l5hhr1" path="res://Props/DefaultBattleIsland/Arch_island/VFX/Scenes/VFX_FireDynamic_Anime_A.tscn" id="32_bxwhf"]
-[ext_resource type="PackedScene" uid="uid://cmn88rxmqds1q" path="res://Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Scenes/VFX_LV_Up_style_e.tscn" id="33_bxwhf"]
-[ext_resource type="PackedScene" uid="uid://c06lhwqnnclb0" path="res://Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Scenes/VFX_LV_Up_style_d.tscn" id="34_gqbdl"]
+[ext_resource type="PackedScene" uid="uid://0sdopkp8d0dq" path="res://Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Scenes/VFX_AcidWall_K1_AlphaClipped.tscn" id="35_x8hku"]
 [ext_resource type="PackedScene" uid="uid://iduknphs6acf" path="res://Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Textures/waterdrop.tscn" id="36_iktvg"]
 [ext_resource type="PackedScene" uid="uid://bomsoicetwrmy" path="res://Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Scenes/VFX_AcidWall_K1.tscn" id="36_lvxo2"]
 
@@ -835,14 +834,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.462005, 2.4343317, -12.31
 [node name="VFX_FireDynamic_Anime_A2" parent="." unique_id=567778835 instance=ExtResource("32_bxwhf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.811455, 2.4343317, -12.409866)
 
-[node name="VFX_LV_Up_StyleE" parent="." unique_id=1819217617 instance=ExtResource("33_bxwhf")]
-transform = Transform3D(0.031455357, 0, 0, 0, 0.0318666, 0, 0, 0, 0.031455357, -19.751263, -2.129344, -2.1576688)
-
-[node name="VFX_Lv_Up_StyleD" parent="." unique_id=706167467 instance=ExtResource("34_gqbdl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.445538, 0, -0.9699559)
-
 [node name="Node3D6" parent="." unique_id=66937119 instance=ExtResource("36_iktvg")]
 transform = Transform3D(1.3649145, 0, 0, 0, 0.80430627, 0.34016082, 0, -0.23546992, 1.1619041, 19.218813, 11.586423, -10.503926)
 
 [node name="VFX_AcidWall_K1_" parent="." unique_id=1350972226 instance=ExtResource("36_lvxo2")]
-transform = Transform3D(2.0048506, 0, 0, 0, -1.8947947, -0.36295375, 0, 0.5054412, -1.3606387, -3.0533519, -0.95400906, 17.407001)
+transform = Transform3D(0.008118674, -0.015289716, 1.9686394, 2.16091, 0.27718675, -0.0054740906, -0.2804903, 2.1350145, 0.014808711, -2.6414287, -9.189991, 19.9675)
+
+[node name="VFX_AcidWall_K1_Cheap_AlphaClipped" parent="." unique_id=28649661 instance=ExtResource("35_x8hku")]
+transform = Transform3D(-0.010965034, 0.00061130576, -3.0224729, -0.07200862, 0.99878573, 0.0029622004, 1.4601185, 0.04926167, -0.02255174, -2.611643, -1.8592463, 15.970662)
