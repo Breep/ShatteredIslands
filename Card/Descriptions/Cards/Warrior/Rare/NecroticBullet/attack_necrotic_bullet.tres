@@ -14,10 +14,10 @@ _necrosis_stacks = Array[int]([10, 20, 30, 40, 50])
 script = ExtResource("2_1maqp")
 name = "Necrotic Bullet"
 picture = SubResource("PlaceholderTexture2D_srgdc")
-families = Array[int]([1, 11])
+families = Array[int]([1, 9])
 rarity = 1
 player_upgrade = SubResource("Resource_necrotic")
 points = Dictionary[int, int]({
 1: 1,
-11: 1
+9: 1
 })

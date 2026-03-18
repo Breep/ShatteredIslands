@@ -15,9 +15,10 @@ script = ExtResource("3_5htay")
 name = "Dark Forest"
 picture = ExtResource("1_32p1v")
 families = Array[int]([3])
+rarity = 0
 player_upgrade = SubResource("Resource_omhxh")
 points = Dictionary[int, int]({
-3: 1
+3: 2
 })
 lvl = 5
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

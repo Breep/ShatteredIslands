@@ -14,10 +14,9 @@ _base_shield = Array[float]([50.0, 100.0, 150.0])
 script = ExtResource("1_template")
 name = "Dynamo"
 picture = SubResource("PlaceholderTexture2D_01jkn")
-families = Array[int]([4, 5, 2])
+families = Array[int]([2, 4])
 player_upgrade = SubResource("Resource_upgrade")
 points = Dictionary[int, int]({
 2: 1,
-4: 1,
-5: 1
+4: 1
 })

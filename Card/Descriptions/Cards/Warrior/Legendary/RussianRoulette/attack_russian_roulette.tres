@@ -15,6 +15,9 @@ script = ExtResource("1_template")
 name = "Russian Roulette"
 picture = SubResource("PlaceholderTexture2D_ik5f7")
 families = Array[int]([1])
+points = Dictionary[int, int]({
+1: 5
+})
 rarity = 3
 player_upgrade = SubResource("Resource_upgrade")
 lvl = 1
