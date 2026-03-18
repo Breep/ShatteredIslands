@@ -1,0 +1,50 @@
+[gd_scene format=4 uid="uid://c0xukr0hj4yov"]
+
+[ext_resource type="Texture2D" uid="uid://hf3tgrdwn0l6" path="res://Props/DefaultBattleIsland/foliage/textures/leafage5_file2-file2.png" id="1_lxhtw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iv6xd"]
+resource_name = "foliage.004"
+transparency = 4
+cull_mode = 2
+albedo_texture = ExtResource("1_lxhtw")
+roughness = 0.5527864
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_h1vu4"]
+_surfaces = [{
+"aabb": AABB(-364.93863, -55.880337, -16.955376, 56.256042, 56.256012, 12.698927),
+"format": 34896613377,
+"index_count": 72,
+"index_data": PackedByteArray("DQABAAIAAAANAAIAAQADAAQAAQAOAAMADQAOAAEAAwAOAAUABQAOAA0AAwAFAAYABQAHAAYABQANAA8ABQAQAAcABwAQAAgABwAIAAkAEQAQAAUAEQAFAA8ACAAQABEADQARAA8ACAARAAwAEQAKAAwADQASABEAEQASAAoAAAASAA0ACgASAAAACgAAAAsA"),
+"lods": [10.26167, PackedByteArray("AAABAAIAAQADAAQAAQAFAAMAAAAFAAEAAwAFAAYABQAHAAYABQAIAAcAAAAIAAUABwAIAAkACAAAAAoACgAAAAsACAAKAAwA")],
+"name": "foliage.004",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 19,
+"vertex_data": PackedByteArray("AADzc///AACQNdPo//8AACALkLX//wAAkLXe9P//AADzc/////8AAGm0NqU+XAAA0+huyv//AAD//wuM//8AAG7KKxf//wAA3vRuSv//AABuSiAL//8AACwXkDX//wAAC4wAAP//AACPRceaPlwAAPl5/78+XAAA/3//fwAAAABvujdlPlwAAAWG/z8+XAAAlUvIWj5cAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_4wryr"]
+resource_name = "leafage5_Mesh_004"
+lightmap_size_hint = Vector2i(22, 22)
+_surfaces = [{
+"aabb": AABB(-364.93863, -55.880337, -16.955376, 56.256042, 56.256012, 12.698927),
+"attribute_data": PackedByteArray("6ZjoPZvYmj180IU+IV0QP5n4mD2++L09tzIaPpxwWT+syKs98IBvPYwuujxxuyA/3zDfPYmwCD10TLo8ioK+Pt8w3z2czBs+b7sgP4wuej+syKs9ghgCPiaCvj6MLno/6ZjoPeEY4T0AQd8+Qxc9P5O0Ej6CGAI+XLgsPyG5LD+TtBI+pTQlPqBwWT9Ec1k/ttA1PpzMGz6MLno/574gP5O0Ej6++L097///Pvb//z6xHDE+4RjhPacXPT+sRd8+2exYPr74vT1Kc1k/nT0aPtCETz6CGAI+jC56Px2Jvj6xHDE+m9iaPWVfED9q0YU+0IRPPvCAbz24viA/1026PLbQNT6JsAg9AIm+PowuujyTtBI+8IBvPRGPpj6pjaY+k7QSPsYgxjxAQRo+nTMaPg=="),
+"format": 34359742519,
+"index_count": 72,
+"index_data": PackedByteArray("AAABAAIAAwAAAAIAAQAEAAUAAQAGAAQAAAAGAAEABAAGAAcABwAGAAAABAAHAAgABwAJAAgABwAAAAoABwALAAkACQALAAwACQAMAA0ADgALAAcADgAHAAoADAALAA4AAAAOAAoADAAOAA8ADgAQAA8AAAARAA4ADgARABAAAwARAAAAEAARAAMAEAADABIA"),
+"material": SubResource("StandardMaterial3D_iv6xd"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 19,
+"vertex_data": PackedByteArray("ktOuw57wrsHoEkbBhJWww/DslsDUNIjANz+1w6Szf8HUNIjAJXi2w2gz88HUNIjAE4Wiw+B5BMDUNIjArLqpw4BYwD7UNIjAPhGpw0QEW8HoEkbBfKWiw+6YnMHoEkbBKeOcw+RUNsHUNIjAX1eaw+bXyMHUNIjA0Geow6cF3sGcpIfBDvyhw1iNBsLoEkbBHDqgwwkoS8LUNIjAaZCbw74YHsLUNIjAYr6nw5ZEJ8LoEkbB9BSnw3eFX8LUNIjAjkquwwm+VcLUNIjAJCquwzC5D8LoEkbBW+yzw25wMMLUNIjA7g2U4bvDJ5UeIpHsn8lPkxcQ4tyfx4WUAwjsKDK/+5bB2eHy0cLklQ8tw/vXzU6XyiVy/MHFTpX37DLlJLWRmhfqI+EktZKavf8cLFyrNaEAAP3/JLWRmjjxPiAVqSmiz+JtGZmmzaSY7vglEaGuoH3cVwPkqiOil9bmA9GnPqPbIcwTBq6gnyYUYRwmtZKaphdPISW1kpo=")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_h1vu4")
+
+[node name="leafage5" type="Node3D" unique_id=542523548]
+
+[node name="Leafage5" type="MeshInstance3D" parent="." unique_id=2128743664]
+transform = Transform3D(0.015788456, 0, 0, 0, 0, -0.015788456, 0, 0.015788456, 0, 5.3177195, -0.2676992, 0.43816647)
+mesh = SubResource("ArrayMesh_4wryr")
+skeleton = NodePath("")

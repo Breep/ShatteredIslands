@@ -7,7 +7,7 @@
 [ext_resource type="Resource" uid="uid://vefirtk44fxp" path="res://Card/Descriptions/Cards/ArdentCelestial/Rare/EndOfTheWorld/fire_end_of_the_world.tres" id="4_5t2nw"]
 [ext_resource type="Resource" uid="uid://dc5r8wy0vfksm" path="res://Card/Descriptions/Cards/ArdentCelestial/Common/KuiperBelt/fire_kuiper_belt.tres" id="5_y3vk0"]
 [ext_resource type="Resource" uid="uid://bcxp6eg6bwam0" path="res://Card/Descriptions/Cards/ArdentCelestial/Common/Quasar/fire_titans_protection.tres" id="6_a1wsu"]
-[ext_resource type="Resource" uid="uid://du0o8udb4adn5" path="res://Card/Descriptions/Cards/Engineer/Rare/ShieldThrow/shieldomatic_shield_throw.tres" id="7_4gryv"]
+[ext_resource type="Resource" uid="uid://du0o8udb4adn5" path="res://Card/Descriptions/Cards/Engineer/Rare/ShieldThrow/engineer_shield_throw.tres" id="7_4gryv"]
 [ext_resource type="Resource" uid="uid://d26wrf73bpc87" path="res://Card/Descriptions/Cards/ArdentCelestial/Common/ConsummingTheStar/fire_consuming_the_star.tres" id="8_4gryv"]
 [ext_resource type="Resource" uid="uid://b3ohguwihk7x3" path="res://Card/Descriptions/Cards/ArdentCelestial/Common/ExpanseUniverse/fire_expanse_universe.tres" id="8_4ych6"]
 [ext_resource type="PackedScene" uid="uid://ci5cxqmyimurq" path="res://UI/InGame/FightingArea/DebugEntityStats/ui_debug_entity_stats.tscn" id="9_5t2nw"]

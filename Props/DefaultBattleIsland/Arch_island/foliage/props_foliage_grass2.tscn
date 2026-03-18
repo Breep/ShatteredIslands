@@ -1,0 +1,50 @@
+[gd_scene format=4 uid="uid://csenx8oawwqvj"]
+
+[ext_resource type="Texture2D" uid="uid://b32gp84j681fb" path="res://Props/DefaultBattleIsland/foliage/grass2_file2-file2.png" id="1_5lhjy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p1vqk"]
+resource_name = "foliage.011"
+transparency = 4
+cull_mode = 2
+albedo_texture = ExtResource("1_5lhjy")
+roughness = 0.5527864
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_mfco2"]
+_surfaces = [{
+"aabb": AABB(-0.42732218, -0.389427, 0, 0.85464436, 0.778854, 1e-05),
+"format": 34359742465,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAAADAAEA"),
+"name": "foliage.011",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("+cnavvpixz4AAACA+cnaPvpix74AAACA+cnaPvpixz4AAACA+cnavvpix74AAACA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_iuc4q"]
+resource_name = "grass2_Mesh_012"
+lightmap_size_hint = Vector2i(6, 6)
+_surfaces = [{
+"aabb": AABB(-0.42732218, -0.389427, 0, 0.85464436, 0.778854, 1e-05),
+"attribute_data": PackedByteArray("SJL1PiRPMT6rqmo/q6pqPy/sGD+43IM9q6qqPauqqj2kHBk/dHowPquqaj+rqqo9XjH1PhiGhT2rqqo9q6pqPw=="),
+"format": 34359742519,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAAADAAEA"),
+"material": SubResource("StandardMaterial3D_p1vqk"),
+"name": "foliage.011",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("+cnavvpixz4AAACA+cnaPvpix74AAACA+cnaPvpixz4AAACA+cnavvpix74AAACA/////yD/bsD/////IP9uwP////8g/27A/////yD/bsA=")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_mfco2")
+
+[node name="grass22" type="Node3D" unique_id=1544444400]
+
+[node name="grass2" type="MeshInstance3D" parent="." unique_id=1251380959]
+transform = Transform3D(0.56546104, 0, 0, 0, -0.56546104, 8.538223e-08, 0, -8.538223e-08, -0.56546104, -0.24163404, 0.2202058, 0)
+mesh = SubResource("ArrayMesh_iuc4q")
+skeleton = NodePath("")

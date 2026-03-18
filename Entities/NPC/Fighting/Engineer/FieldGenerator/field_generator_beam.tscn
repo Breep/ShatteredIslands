@@ -15,10 +15,10 @@ top_radius = 0.05
 bottom_radius = 0.05
 height = 1.0
 
-[node name="FieldGeneratorBeam" type="Node3D"]
+[node name="FieldGeneratorBeam" type="Node3D" unique_id=588722102]
 script = ExtResource("1_script")
 
-[node name="Mesh" type="MeshInstance3D" parent="."]
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=491128874]
 unique_name_in_owner = true
 material_override = SubResource("StandardMaterial3D_beam")
 mesh = SubResource("CylinderMesh_beam")
