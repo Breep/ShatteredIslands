@@ -2,6 +2,8 @@ class_name ChickenLordManager
 extends FamilyManager
 
 # ============================== Constants ==============================
+const FAMILY_NAME: StringName = &"ChickenLord"
+const ANCESTRAL_GAUGE_NAME: StringName = &"Ancestral Gauge"
 
 const TICKS_PER_SECOND: int = 60
 
@@ -191,6 +193,11 @@ func _spawn_chicken(chicken_type: Chicken.Type, can_have_twin: bool = true) -> v
 					"crit_chance": crit_chance * GIFTED_STORM_CALLER_CRIT_CHANCE_RATIO[_families_level[Family.Type.STORM_CALLER] - 1],
 					"crit_mult": crit_mult * GIFTED_STORM_CALLER_CRIT_MULT_RATIO[_families_level[Family.Type.STORM_CALLER] - 1]
 			})
+	
+	if chicken_type == Chicken.Type.BASIC:
+		_owner.data_memory.increment_data(FAMILY_NAME, ANCESTRAL_GAUGE_NAME, ANCESTRAL_GAUCHE_FILL_CHICKEN_SPAWN)
+	else:
+		_owner.data_memory.increment_data(FAMILY_NAME, ANCESTRAL_GAUGE_NAME, ANCESTRAL_GAUCHE_FILL_GIFTED_CHICKEN_SPAWN)
 #endregion
 
 

@@ -52,7 +52,8 @@ enum Category {
 	TARGET_MODULE,
 	MOVEMENT_MODULE,
 	PROJECTILE,
-	ACTION_RECEIVER_MODULE
+	ACTION_RECEIVER_MODULE,
+	NESTED_REGISTRY
 }
 
 const CATEGORY_PREFIX_TEMPLATES: Dictionary[Category, String] = {
@@ -93,7 +94,8 @@ const CATEGORY_PREFIX_TEMPLATES: Dictionary[Category, String] = {
 	Category.TARGET_MODULE: "(TARGET_MOD) ",
 	Category.MOVEMENT_MODULE: "(MOVE_MOD  ) ",
 	Category.PROJECTILE: "(PROJECTILE) ",
-	Category.ACTION_RECEIVER_MODULE: "(ACTION_REC)"
+	Category.ACTION_RECEIVER_MODULE: "(ACTION_REC)",
+	Category.NESTED_REGISTRY: "(NESTED_REG)"
 }
 
 const PREFIX_TEMPLATES: Dictionary[GameType, String] = {
@@ -155,7 +157,8 @@ var current_categories_level: Dictionary[Category, Level] = {
 	Category.TARGET_MODULE: Level.WARN,
 	Category.MOVEMENT_MODULE: Level.WARN,
 	Category.PROJECTILE: Level.WARN,
-	Category.ACTION_RECEIVER_MODULE: Level.TRACE
+	Category.ACTION_RECEIVER_MODULE: Level.WARN,
+	Category.NESTED_REGISTRY: Level.WARN
 }
 #endregion
 

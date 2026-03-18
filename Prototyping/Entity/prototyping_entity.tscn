@@ -95,6 +95,11 @@ _custom_deck = SubResource("Resource_38sjp")
 _override_family_levels = Dictionary[int, int]({
 2: 4
 })
+_custom_data_memory = {
+&"ChickenLord": {
+&"Ancestral Gauge": 800.0
+}
+}
 team = 1
 custom_base_stats = SubResource("Resource_ycdli")
 _spawn_manager = NodePath("../../SpawnManager")
@@ -106,6 +111,11 @@ transform = Transform3D(-0.059724454, 0, 0.9982149, 0, 1, 0, -0.9982149, 0, -0.0
 _override_family_levels = Dictionary[int, int]({
 8: 4
 })
+_custom_data_memory = {
+&"ChickenLord": {
+&"Ancestral Gauge": 750.0
+}
+}
 team = 2
 custom_base_stats = SubResource("Resource_ko5bb")
 _spawn_manager = NodePath("../../SpawnManager")

@@ -141,6 +141,7 @@ func setup_components() -> void:
 func _init() -> void:
 	skill_manager = SkillManager.new()
 	skill_manager.init(self)
+	data_memory = NestedRegistry.new()
 
 
 func _apply_all_cards_upgrades() -> void:
