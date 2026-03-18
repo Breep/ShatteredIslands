@@ -4,7 +4,6 @@ extends HeroUpgrade
 @export var _increase_sizes: Array[float]
 @export var _periods: Array[float]
 @export var _stun_durations: Array[float]
-@export var _rarity: Card.Rarity = Card.Rarity.EPIC
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	

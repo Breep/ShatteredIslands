@@ -18,7 +18,6 @@ func stop() -> void:
 func apply_passive() -> void:
 
 	if level <= 0: return
-	
 	# Register the initial stat modifier (value 0 — updated each tick)
 	var mod := StatModifier.new()
 	mod.id = &"Colossus Passive"

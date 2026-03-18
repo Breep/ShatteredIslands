@@ -3,7 +3,6 @@ extends HeroUpgrade
 
 @export var _base_thorn_values: Array[float]
 @export var _bonus_thorn_factors: Array[float]
-@export var _rarity: Card.Rarity = Card.Rarity.RARE
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	
@@ -12,16 +11,23 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		return
 	
 	var base_thorn: float = _base_thorn_values[card_lvl - 1]
-	var bonus_thorn_factor: float = _bonus_thorn_factors[card_lvl - 1]
 	
-	#TODO Il faut rendre le thorn dynamique en fonction du size increase, y'a pas encore de cb sur un action modifier de type size increase
 	var mod := StatModifier.new()
 	mod.id = &"Stone Skin"
 	mod.stat_type = EntityStats.StatType.THORN
 	mod.calc_type = StatModifier.CalcType.ADD
-	var size_increase: float = ctx.hero.scale[1] - 1
-	mod.value = base_thorn + size_increase * bonus_thorn_factor
+	mod.value = base_thorn
 	ctx.hero.stat_modifiers_registry.register_modifier(mod)
+	
+	_apply_thorn_scaling(ctx.hero, card_lvl)
+	var _on_scale_changed: Callable
+	_on_scale_changed = func(scale: float) -> void:
+		_apply_thorn_scaling(ctx.hero, card_lvl)
+		
+	if not ctx.hero.stats.scale_changed.is_connected(_on_scale_changed):
+		ctx.hero.stats.scale_changed.connect(_on_scale_changed)
+		
+
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[Card.Rarity.COMMON]:
@@ -29,3 +35,13 @@ func get_description(cardlvl: int) -> String:
 		return "ERROR"
 
 	return "Increase thorn by " + str(_base_thorn_values[cardlvl - 1]) + " + " + str(_bonus_thorn_factors[cardlvl - 1]) + "* hero's size."
+
+
+func _apply_thorn_scaling(hero: Entity, card_lvl: int) -> void:
+	var bonus_thorn_factor: float = _bonus_thorn_factors[card_lvl - 1]
+	var mod2 := StatModifier.new()
+	mod2.id = &"Stone Skin dynamic"
+	mod2.stat_type = EntityStats.StatType.THORN
+	mod2.calc_type = StatModifier.CalcType.ADD
+	mod2.value = bonus_thorn_factor * (hero.stats.scale - 1) * 100
+	hero.stat_modifiers_registry.register_modifier(mod2)
