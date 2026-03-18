@@ -32,6 +32,10 @@
 [ext_resource type="PackedScene" uid="uid://b03mbxv4f3ndi" path="res://Props/DefaultBattleIsland/Arch_island/props_arena_treeleafage_2.tscn" id="29_artg0"]
 [ext_resource type="PackedScene" uid="uid://dsid6wbxvgf5v" path="res://Props/DefaultBattleIsland/Arch_island/VFX/waterfall.tscn" id="32_8xm7n"]
 [ext_resource type="PackedScene" uid="uid://dbfx8x2l5hhr1" path="res://Props/DefaultBattleIsland/Arch_island/VFX/Scenes/VFX_FireDynamic_Anime_A.tscn" id="32_bxwhf"]
+[ext_resource type="PackedScene" uid="uid://cmn88rxmqds1q" path="res://Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Scenes/VFX_LV_Up_style_e.tscn" id="33_bxwhf"]
+[ext_resource type="PackedScene" uid="uid://c06lhwqnnclb0" path="res://Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Scenes/VFX_LV_Up_style_d.tscn" id="34_gqbdl"]
+[ext_resource type="PackedScene" uid="uid://iduknphs6acf" path="res://Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Textures/waterdrop.tscn" id="36_iktvg"]
+[ext_resource type="PackedScene" uid="uid://bomsoicetwrmy" path="res://Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Scenes/VFX_AcidWall_K1.tscn" id="36_lvxo2"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_kc47p"]
 panorama = ExtResource("1_wicrg")
@@ -42,9 +46,10 @@ sky_material = SubResource("PanoramaSkyMaterial_kc47p")
 
 [sub_resource type="Environment" id="Environment_x7fny"]
 background_mode = 2
-background_energy_multiplier = 0.15
+background_energy_multiplier = 0.25
 sky = SubResource("Sky_qk38t")
-sky_rotation = Vector3(0.42586035, 3.1415927, 0)
+sky_custom_fov = 66.7
+sky_rotation = Vector3(0, 2.0612338, 0)
 ambient_light_sky_contribution = 0.5
 ambient_light_energy = 7.52
 reflected_light_source = 2
@@ -86,13 +91,29 @@ adjustment_contrast = 1.3
 
 [node name="IslandRemake" type="Node3D" unique_id=1888769254]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=31111793]
-environment = SubResource("Environment_x7fny")
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1392094248]
+transform = Transform3D(-0.012513837, 0.99889284, 0.04534816, -0.083374254, -0.046236124, 0.99544513, 0.99643975, 0.008675968, 0.08386055, -0.002231598, 15.777281, 2.5955582)
+light_color = Color(0.9708809, 0.95688325, 0.9396857, 1)
+light_energy = 14.112
+light_indirect_energy = 5.761
+light_volumetric_fog_energy = 7.0
+light_size = 0.9
+distance_fade_enabled = true
+distance_fade_begin = 4016.12
+spot_range = 59.41
+spot_attenuation = 0.77
+spot_angle = 93.29
 
-[node name="L_Base" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=1490122868]
-transform = Transform3D(-0.7448171, 0.09747739, 0.66011035, 0.5889815, 0.5609823, 0.58172154, -0.3136054, 0.8220688, -0.47524142, 0.37235212, -4.6700974, -2.9861012)
+[node name="Arena" parent="SpotLight3D" unique_id=978031092 instance=ExtResource("3_v6pgo")]
+transform = Transform3D(-0.012513837, -0.083374254, 0.99643975, 0.9988929, -0.046236128, 0.008675969, 0.04534816, 0.9954451, 0.08386054, 13.731969, 17.59074, -13.882293)
+
+[node name="VFX_FireStatic_K1" parent="SpotLight3D" unique_id=490239612 instance=ExtResource("3_8xm7n")]
+transform = Transform3D(-0.03082053, -0.2053438, 2.4541476, 2.4601893, -0.1138757, 0.021368185, 0.11168872, 2.4516978, 0.20654148, 11.173523, -13.248482, -14.10121)
+
+[node name="L_Base" type="DirectionalLight3D" parent="SpotLight3D" unique_id=1490122868]
+transform = Transform3D(-0.31868777, -0.9355742, 0.1521154, 0.2895448, -0.24890062, -0.9242361, 0.90255296, -0.25049838, 0.35021225, -3.8616896, 1.2711507, -20.805336)
 light_color = Color(0.9897627, 0.9506181, 0.89660996, 1)
-light_energy = 0.0
+light_energy = 0.617
 light_indirect_energy = 300.0
 light_volumetric_fog_energy = 2.085
 light_angular_distance = 1.39
@@ -104,40 +125,31 @@ shadow_transmittance_bias = -1.05
 shadow_opacity = 0.35
 shadow_blur = 1.272
 
-[node name="L_Rim" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=364474426]
-transform = Transform3D(0.830382, 0, -0.55719453, 0, 1, 0, 0.55719453, 0, 0.830382, -39.630978, 0, 20.031944)
+[node name="L_Rim" type="DirectionalLight3D" parent="SpotLight3D" unique_id=364474426]
+transform = Transform3D(0.5448195, -0.083374254, 0.83439827, 0.8342968, -0.046236128, -0.5493733, 0.08438293, 0.9954451, 0.04436853, 19.185635, -38.704113, -16.040283)
 light_color = Color(0.8446359, 0.7886137, 0.8890768, 1)
 light_energy = 0.401
 
-[node name="L_back" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=1600156000]
-transform = Transform3D(-0.012513846, 0.9988931, 0.045348097, -0.0833742, -0.046236116, 0.99544513, 0.9964397, 0.008676231, 0.083860524, 46.34609, 0, -38.07856)
+[node name="L_back" type="DirectionalLight3D" parent="SpotLight3D" unique_id=1600156000]
+transform = Transform3D(1.0000001, 1.21071935e-08, -4.4703484e-08, -1.1175871e-08, 1, -4.5110937e-08, 4.4703484e-08, 4.5867637e-08, 1, -39.793884, 46.6736, -17.014559)
 light_color = Color(0.97208375, 0.84496623, 0.88674444, 1)
 light_energy = 0.4
-light_volumetric_fog_energy = 16.0
+light_volumetric_fog_energy = 6.0
 light_angular_distance = 17.63
 
-[node name="SpotLight3D" type="SpotLight3D" parent="WorldEnvironment/L_back" unique_id=1392094248]
-transform = Transform3D(1.0000001, -1.1175871e-08, 3.7252903e-08, 1.21071935e-08, 1, 3.4749974e-08, -4.4703484e-08, -4.1385647e-08, 1.0000001, 39.793884, -46.6736, 17.014559)
-light_color = Color(0.9708809, 0.95688325, 0.9396857, 1)
-light_energy = 14.112
-light_indirect_energy = 5.761
-light_volumetric_fog_energy = 6.151
-light_size = 0.9
-distance_fade_enabled = true
-distance_fade_begin = 4016.12
-spot_range = 59.41
-spot_attenuation = 0.77
-spot_angle = 93.29
-
-[node name="Camera3D" type="Camera3D" parent="WorldEnvironment" unique_id=962265795]
-transform = Transform3D(1, 0, 0, 0, 0.64278764, 0.76604444, 0, -0.76604444, 0.64278764, -0.218, 27.764, 24.329)
+[node name="Camera3D" type="Camera3D" parent="SpotLight3D" unique_id=962265795]
+transform = Transform3D(-0.012513837, -0.8169091, 0.5766308, 0.9988929, -0.036366187, -0.029842122, 0.04534816, 0.57561886, 0.8164597, 20.659384, -0.5811903, 13.744914)
 fov = 48.0
 
-[node name="Arena" parent="WorldEnvironment" unique_id=978031092 instance=ExtResource("3_v6pgo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.767658, 0, 15.267077)
+[node name="OmniLight3D" type="OmniLight3D" parent="SpotLight3D" unique_id=582765361]
+transform = Transform3D(1.0000001, -2.0489097e-08, 0, 2.142042e-08, 1, -8.5739885e-08, 0, 8.440111e-08, 1, -2.3444138, 19.697495, -16.180607)
+light_color = Color(0.37158465, 0.56250954, 0.693373, 1)
+light_energy = 13.941
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 8.895
 
-[node name="VFX_FireStatic_K1" parent="WorldEnvironment" unique_id=490239612 instance=ExtResource("3_8xm7n")]
-transform = Transform3D(2.4629161, 0, 0, 0, 2.4629161, 0, 0, 0, 2.4629161, -14.015332, 1.4212751, 12.431822)
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=31111793]
+environment = SubResource("Environment_x7fny")
 
 [node name="Props_Arena_Island" parent="." unique_id=1505016571 instance=ExtResource("1_vk4nd")]
 transform = Transform3D(1.0005836, 0, 0, 0, 1.0005836, 0, 0, 0, 1.0005836, -0.030916214, -0.0055298805, 0.014993191)
@@ -146,7 +158,7 @@ transform = Transform3D(1.0005836, 0, 0, 0, 1.0005836, 0, 0, 0, 1.0005836, -0.03
 visible = false
 
 [node name="sword" parent="." unique_id=1966000435 instance=ExtResource("3_cxbhe")]
-transform = Transform3D(-0.27872533, 0.39018133, 2.8720422, 2.333105, 1.7421422, -0.0102556525, -1.7197323, 2.3002717, -0.47939938, 19.631357, -4.552685, 3.6864839)
+transform = Transform3D(-0.010525227, 0.031236261, 2.911609, 2.3331048, 1.7421421, -0.010255624, -1.742141, 2.3329198, -0.03132525, 18.975769, -3.2546892, 1.9541597)
 
 [node name="water_arch" parent="." unique_id=1005878970 instance=ExtResource("4_uwp35")]
 transform = Transform3D(-0.002668783, 0, 1.4294283, 0, 1.4294307, 0, -1.4294283, 0, -0.002668783, -19.338789, -0.3584199, -5.020741)
@@ -822,3 +834,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.462005, 2.4343317, -12.31
 
 [node name="VFX_FireDynamic_Anime_A2" parent="." unique_id=567778835 instance=ExtResource("32_bxwhf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.811455, 2.4343317, -12.409866)
+
+[node name="VFX_LV_Up_StyleE" parent="." unique_id=1819217617 instance=ExtResource("33_bxwhf")]
+transform = Transform3D(0.031455357, 0, 0, 0, 0.0318666, 0, 0, 0, 0.031455357, -19.751263, -2.129344, -2.1576688)
+
+[node name="VFX_Lv_Up_StyleD" parent="." unique_id=706167467 instance=ExtResource("34_gqbdl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.445538, 0, -0.9699559)
+
+[node name="Node3D6" parent="." unique_id=66937119 instance=ExtResource("36_iktvg")]
+transform = Transform3D(1.3649145, 0, 0, 0, 0.80430627, 0.34016082, 0, -0.23546992, 1.1619041, 19.218813, 11.586423, -10.503926)
+
+[node name="VFX_AcidWall_K1_" parent="." unique_id=1350972226 instance=ExtResource("36_lvxo2")]
+transform = Transform3D(2.0048506, 0, 0, 0, -1.8947947, -0.36295375, 0, 0.5054412, -1.3606387, -3.0533519, -0.95400906, 17.407001)

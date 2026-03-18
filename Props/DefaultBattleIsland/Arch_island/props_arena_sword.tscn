@@ -147,6 +147,7 @@ skeleton = NodePath("")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1599989109]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 6.7447596, -0.28534448, 0)
+visible = false
 mesh = SubResource("SphereMesh_oblid")
 surface_material_override/0 = SubResource("ShaderMaterial_vwv40")
 
