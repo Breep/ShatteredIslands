@@ -17,6 +17,7 @@ var total_win_number: int
 var total_lose_number: int
 var current_damage_win_lose_diff: int # <win>-<lose> but can't go over what the rules indicate (used for damage modifier)
 var battle_history: Array[Battle.BattleResolution]
+var data_memory: NestedRegistry
 
 var is_dead: bool = false # True if the player is dead and signaled it
 var round_of_death: int = -1 # The round when the player died (if dead)
@@ -140,6 +141,7 @@ func setup_components() -> void:
 func _init() -> void:
 	skill_manager = SkillManager.new()
 	skill_manager.init(self)
+	data_memory = NestedRegistry.new()
 
 
 func _apply_all_cards_upgrades() -> void:

@@ -27,11 +27,13 @@ signal fight_is_lost()
 @export var _custom_deck: PlayerDeck
 @export var family_managers_enabled: bool = true
 @export var _override_family_levels: Dictionary[Family.Type, int] = {}
+@export var _custom_data_memory: Dictionary
 
 #region ============================== Public variables ==============================
 var display_mode: DisplayMode = DisplayMode.PREVIEW
 var families_stats: FamiliesStats
 var deck: PlayerDeck
+var data_memory: NestedRegistry
 
 var _card_context: CardContext
 #endregion
@@ -92,15 +94,17 @@ func _enter_tree() -> void:
 		var family_manager: FamilyManager = Shared.FAMILY_MANAGER_SCENES[family_type].instantiate() as FamilyManager
 		_family_managers[family_type] = family_manager.init(self)
 		add_child(_family_managers[family_type])
-
+	
+	if data_memory == null: data_memory = NestedRegistry.new()
 	super._enter_tree()
 
 
 func _ready() -> void:
 	Verbose.debug("Hero [" + entity_name + "] ready", Verbose.Category.HERO)
-	# Custom Deck (must be assigned here, not in _enter_tree, because @export vars aren't loaded yet there)
-	if _custom_deck != null:
-		deck = _custom_deck
+	
+	# CUSTOM CONF
+	if _custom_deck != null: deck = _custom_deck
+	if not _custom_data_memory.is_empty(): data_memory.override(_custom_data_memory)
 
 	# Validate hero configuration
 	if hero_desc == null and custom_base_stats == null:

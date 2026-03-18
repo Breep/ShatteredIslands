@@ -95,6 +95,7 @@ func create_all_heroes(display_mode: Hero.DisplayMode = Hero.DisplayMode.PREVIEW
 		player.hero.entity_name = player.player_name
 		player.hero.battle_id = -1
 		player.hero.deck = player.deck
+		player.hero.data_memory = player.data_memory
 
 		Verbose.debug("Created hero " + player.hero.entity_name + " (id=" + str(player.hero.uid) + ") for player " + player.player_name, Verbose.Category.PLAYER_MANAGER)
 
