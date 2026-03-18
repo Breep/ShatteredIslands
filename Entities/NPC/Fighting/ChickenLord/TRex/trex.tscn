@@ -8,14 +8,15 @@
 
 [sub_resource type="Resource" id="Resource_vpc07"]
 script = ExtResource("2_pdas5")
-health_max = 1000.0
+health_max = 1200.0
 auto_attack_type = 1
 attack_range = 1.0
-attack_damage = 2000.0
-attack_speed = 1.0
+attack_damage = 150.0
+attack_speed = 1.5
 _critical_chances = Dictionary[int, float]({
 0: 50.0
 })
+defence = 15.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_y4jfh"]

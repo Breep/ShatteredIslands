@@ -162,6 +162,10 @@ func _summon_aegis_blade(spawn_position: Vector3, entity_modifier: Dictionary) -
 
 func _summon_trex(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
 	var trex: TRex = TREX_SCENE.instantiate()
+	var gifted_spawn_period: float = entity_modifier.get(TRex.Modifier.GIFTED_SPAWN_PERIOD, 0)
+	var gifted_spawn_number: int = entity_modifier.get(TRex.Modifier.GIFTED_SPAWN_NUMBER, 0)
+	var hp_bonus: float = entity_modifier.get(TRex.Modifier.HP_BONUS, 0)
+	trex.init(gifted_spawn_period, gifted_spawn_number, hp_bonus)
 	_spawn_manager.spawn_entity(trex, spawn_position, _owner.get_context())
 
  

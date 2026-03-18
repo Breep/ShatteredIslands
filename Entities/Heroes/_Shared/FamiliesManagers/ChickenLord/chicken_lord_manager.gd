@@ -3,13 +3,14 @@ extends FamilyManager
 
 # ============================== Constants ==============================
 
+const TICKS_PER_SECOND: int = 60
+
 # --- STATS PASSIVES (Dépendent du Niveau de la famille [0, 1, 2, 3, 4]) ---
 const GIFTED_CHANCES: Array[float] = [0, 25.0, 35.0, 45.0, 55.0]
 
 const P_PERIODIC_SPAWN_PERIODS: Array[float] = [12.0, 6.0, 5.5, 5.0, 4.5]
 const P_PERIODIC_SPAWN_CHICKEN_NUMBERS: Array[int] = [0, 1, 1, 1, 1]
 const P_START_CHICKENS: Array[int] = [0, 2, 3, 4, 6]
-
 
 # Chicken gifted attack stats
 const GIFTED_AD_RATIOS: Array[float] = [0.15, 0.20, 0.25, 0.3]
@@ -40,6 +41,21 @@ const GIFTED_STORM_CALLER_CRIT_MULT_RATIO: Array[float] = [0.30, 0.40, 0.50, 0.6
 
 # To roll the type of Chicken Gifted
 const GIFTED_FAMILY_WEIGHTS: Array[float] = [0, 1, 4, 9, 16]
+
+# TREX
+const ANCESTRAL_GAUCHE_THRESHOLD: float = 400
+const ANCESTRAL_GAUCHE_FILL_CHICKEN_SPAWN: float = 1
+const ANCESTRAL_GAUCHE_FILL_GIFTED_CHICKEN_SPAWN: float = 2
+const ANCESTRAL_GAUCHE_FILL_CHICKEN_DIE: float = 1
+const ANCESTRAL_GAUCHE_FILL_CHICKEN_KILL: float = 3
+const ANCESTRAL_GAUCHE_FILL_CHICKEN_QUEST: float = 50
+const ANCESTRAL_GAUCHE_FILL_CHICKEN_ALIVE_END_OF_FIGHT: float = 0.5
+const ANCESTRAL_GAUCHE_FILL_CHICKEN_LORD_FAMILY_LEVELS: Array[float] = [0, 10, 20, 30, 40]
+
+const TREX_TIMER_BASE: float = 20 # Time in seconds before the TRex spawn
+const TREX_TIMER_REDUCTION: Array[float] = [0, 0.3, 0.5, 0.7, 1.0]
+const TREX_HP_GAIN: int = 500
+const TREX_PRIMAL_SHAKE_PERIOD: Array[float] = [5, 5, 5]
 
 #region ============================== Private variables ==============================
 var _chicken_lord_stats: FamilyChickenLordStats
@@ -101,7 +117,11 @@ func _start_passive() -> void:
 	_owner.periodic_timer_registry.register(&"Chicken passive", spawn_period, _spawn_n_chickens.bind(chicken_number), true)
 	
 	var spawn_loc := SpawnLocationConfig.create_arena_center()
-	_owner.summon_entity(Entity.EntityType.TREX, spawn_loc, {})
+	_owner.summon_entity(Entity.EntityType.TREX, spawn_loc, {
+		TRex.Modifier.GIFTED_SPAWN_PERIOD: 5,
+		TRex.Modifier.GIFTED_SPAWN_NUMBER: 4,
+		TRex.Modifier.HP_BONUS: 1000
+	})
 #endregion
 
 
