@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://do5bslbv5ulo0" path="res://Props/DefaultBattleIsland/Arch_island/props_arena_sword.tscn" id="3_cxbhe"]
 [ext_resource type="PackedScene" uid="uid://cmushgkek5lf8" path="res://Props/DefaultBattleIsland/Arch_island/arena_02.tscn" id="3_v6pgo"]
 [ext_resource type="PackedScene" uid="uid://c1xnh8xyfmxq4" path="res://Props/DefaultBattleIsland/Arch_island/props_arena_water_arch.tscn" id="4_uwp35"]
+[ext_resource type="PackedScene" uid="uid://4wf3lwe2nstn" path="res://Props/DefaultBattleIsland/Arch_island/IslandV2.glb" id="5_lvxo2"]
 [ext_resource type="PackedScene" uid="uid://brl0bijhhqkd4" path="res://Props/DefaultBattleIsland/Arch_island/props_arena_arch.tscn" id="5_yldyc"]
 [ext_resource type="PackedScene" uid="uid://cqt3r3m8tt0jl" path="res://Props/DefaultBattleIsland/Arch_island/props_arena_tree.tscn" id="6_6fals"]
 [ext_resource type="PackedScene" uid="uid://bdakqbydn3ehf" path="res://Props/DefaultBattleIsland/Arch_island/props_arena_brasero.tscn" id="6_wicrg"]
@@ -94,7 +95,7 @@ adjustment_contrast = 1.3
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1392094248]
 transform = Transform3D(-0.012513837, 0.99889284, 0.04534816, -0.083374254, -0.046236124, 0.99544513, 0.99643975, 0.008675968, 0.08386055, -0.002231598, 15.777281, 2.5955582)
 light_color = Color(0.9708809, 0.95688325, 0.9396857, 1)
-light_energy = 14.112
+light_energy = 9.688
 light_indirect_energy = 5.761
 light_volumetric_fog_energy = 7.0
 light_size = 0.9
@@ -103,12 +104,6 @@ distance_fade_begin = 4016.12
 spot_range = 59.41
 spot_attenuation = 0.77
 spot_angle = 93.29
-
-[node name="Arena" parent="SpotLight3D" unique_id=978031092 instance=ExtResource("3_v6pgo")]
-transform = Transform3D(-0.012513837, -0.083374254, 0.99643975, 0.9988929, -0.046236128, 0.008675969, 0.04534816, 0.9954451, 0.08386054, 13.731969, 17.59074, -13.882293)
-
-[node name="VFX_FireStatic_K1" parent="SpotLight3D" unique_id=490239612 instance=ExtResource("3_8xm7n")]
-transform = Transform3D(-0.03082053, -0.2053438, 2.4541476, 2.4601893, -0.1138757, 0.021368185, 0.11168872, 2.4516978, 0.20654148, 11.173523, -13.248482, -14.10121)
 
 [node name="L_Base" type="DirectionalLight3D" parent="SpotLight3D" unique_id=1490122868]
 transform = Transform3D(-0.31868777, -0.9355742, 0.1521154, 0.2895448, -0.24890062, -0.9242361, 0.90255296, -0.25049838, 0.35021225, -3.8616896, 1.2711507, -20.805336)
@@ -138,8 +133,8 @@ light_volumetric_fog_energy = 6.0
 light_angular_distance = 17.63
 
 [node name="Camera3D" type="Camera3D" parent="SpotLight3D" unique_id=962265795]
-transform = Transform3D(-0.012513878, -0.8169091, 0.57663065, 0.99889284, -0.03636623, -0.02984212, 0.045348182, 0.5756188, 0.8164598, 23.264, -1.066, 17.815)
-fov = 43.5
+transform = Transform3D(-0.009820459, -0.7773081, 0.6290434, 0.99888855, -0.03662756, -0.029666245, 0.04610014, 0.6280529, 0.7768039, 50.139, -1.961, 48.315)
+fov = 32.9
 
 [node name="OmniLight3D" type="OmniLight3D" parent="SpotLight3D" unique_id=582765361]
 transform = Transform3D(1.0000001, -2.0489097e-08, 0, 2.142042e-08, 1, -8.5739885e-08, 0, 8.440111e-08, 1, -2.3444138, 19.697495, -16.180607)
@@ -157,12 +152,21 @@ environment = SubResource("Environment_x7fny")
 
 [node name="Props_Arena_Island" parent="." unique_id=1505016571 instance=ExtResource("1_vk4nd")]
 transform = Transform3D(1.0005836, 0, 0, 0, 1.0005836, 0, 0, 0, 1.0005836, -0.030916214, -0.0055298805, 0.014993191)
+visible = false
+
+[node name="Arena2" parent="." unique_id=978031092 instance=ExtResource("3_v6pgo")]
+transform = Transform3D(1, -3.7252903e-09, 4.656613e-10, 0, 1, -7.450581e-09, 6.9849193e-10, 0, 1.0000001, 16.767658, 0, 15.267077)
+
+[node name="VFX_FireStatic_K1" parent="." unique_id=490239612 instance=ExtResource("3_8xm7n")]
+transform = Transform3D(2.4629161, 0, 1.8626451e-09, 1.4901161e-08, 2.4629164, 1.4901161e-08, -9.313226e-10, 2.9802322e-08, 2.4629164, -14.015333, 1.4212742, 12.431822)
+
+[node name="IslandV2" parent="." unique_id=37277224 instance=ExtResource("5_lvxo2")]
 
 [node name="Arena" parent="." unique_id=1700311485 instance=ExtResource("2_cxbhe")]
 visible = false
 
 [node name="sword" parent="." unique_id=1966000435 instance=ExtResource("3_cxbhe")]
-transform = Transform3D(-0.010525227, 0.031236261, 2.911609, 2.3331048, 1.7421421, -0.010255624, -1.742141, 2.3329198, -0.03132525, 18.975769, -3.2546892, 1.9541597)
+transform = Transform3D(0.52489454, -0.7963561, 2.7511551, 2.3827105, 1.6734232, 0.029794602, -1.5892514, 2.2458901, 0.9533155, 18.975769, -3.2546892, 1.9541597)
 
 [node name="water_arch" parent="." unique_id=1005878970 instance=ExtResource("4_uwp35")]
 transform = Transform3D(-0.002668783, 0, 1.4294283, 0, 1.4294307, 0, -1.4294283, 0, -0.002668783, -19.338789, -0.3584199, -5.020741)
@@ -780,9 +784,6 @@ transform = Transform3D(0.6679369, 0, 0.56948483, 0, 0.8777544, 0, -0.56948483, 
 [node name="flower50" parent="." unique_id=1631447664 instance=ExtResource("19_xbni8")]
 transform = Transform3D(1.3373271, 0, 0.31536683, 0, 1.3740089, 0, -0.31536683, 0, 1.3373271, 13.621031, 0.8972287, -6.12592)
 
-[node name="leafage65" parent="." unique_id=1653144246 instance=ExtResource("12_8xm7n")]
-transform = Transform3D(8.512372, 0, 0, 0, 8.512372, 0, 0, 0, 8.512372, 4.2655606, -5.4793186, -23.33173)
-
 [node name="leafage66" parent="." unique_id=850775257 instance=ExtResource("14_gqbdl")]
 transform = Transform3D(2.5968645, 0.5050145, 7.450581e-09, -0.49840203, 2.562862, -0.42670497, -0.08145571, 0.4188581, 2.6108747, 5.103088, 0.03713733, -15.571129)
 
@@ -875,7 +876,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.462005, 2.4343317, -12.31
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.811455, 2.4343317, -12.409866)
 
 [node name="Node3D6" parent="." unique_id=66937119 instance=ExtResource("36_iktvg")]
-transform = Transform3D(1.3649145, 0, 0, 0, 0.80430627, 0.34016082, 0, -0.23546992, 1.1619041, 19.218813, 11.586423, -10.503926)
+transform = Transform3D(1.3649145, 0, 0, 0, 0.80430627, 0.34016082, 0, -0.23546992, 1.1619041, 23.057545, 11.833437, -9.438672)
 
 [node name="VFX_AcidWall_K1_" parent="." unique_id=1350972226 instance=ExtResource("36_lvxo2")]
 transform = Transform3D(0.008118674, -0.015289716, 2.1972272, 2.16091, 0.27718675, -0.0061097126, -0.2804903, 2.1350145, 0.016528219, -2.6415365, -9.029538, 20.041151)
