@@ -1,13 +1,13 @@
-[gd_scene load_steps=22 format=3 uid="uid://brl4b1upuf5nw"]
+[gd_scene format=3 uid="uid://brl4b1upuf5nw"]
 
-[ext_resource type="Shader" uid="uid://drbefe8jw3n21" path="res://VFX/shaders/s_Disolver_Treshold_ds.tres" id="1_p468r"]
-[ext_resource type="Shader" uid="uid://c48mlstaikjgr" path="res://VFX/shaders/s_basic_disolve2_ds.tres" id="2_uh20w"]
-[ext_resource type="Texture2D" uid="uid://p882hvpsbqve" path="res://VFX/textures/T_VFX_spark44.jpg" id="3_1rvxy"]
-[ext_resource type="ArrayMesh" uid="uid://br6ut6eugl76n" path="res://VFX/objects/sm_sparksphere.obj" id="4_5nkn5"]
+[ext_resource type="Shader" uid="uid://drbefe8jw3n21" path="res://Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Shaders/s_Disolver_Treshold_ds.tres" id="1_p468r"]
+[ext_resource type="Shader" uid="uid://c48mlstaikjgr" path="res://Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Shaders/s_basic_disolve2_ds.tres" id="2_uh20w"]
+[ext_resource type="Texture2D" uid="uid://p882hvpsbqve" path="res://Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Textures/T_VFX_spark44.jpg" id="3_1rvxy"]
+[ext_resource type="ArrayMesh" uid="uid://br6ut6eugl76n" path="res://Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Objects/sm_sparksphere.obj" id="4_5nkn5"]
 
 [sub_resource type="Gradient" id="Gradient_ienrf"]
-offsets = PackedFloat32Array(0.712062, 1)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+offsets = PackedFloat32Array(0.8192308, 0.9173077, 0.9269231)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_rm25l"]
 gradient = SubResource("Gradient_ienrf")
@@ -48,7 +48,8 @@ particle_flag_align_y = true
 emission_shape = 1
 emission_sphere_radius = 1.0
 direction = Vector3(0, 1, 0)
-spread = 30.0
+spread = 130.348
+flatness = 0.79
 initial_velocity_min = 1.0
 initial_velocity_max = 3.0
 orbit_velocity_min = 1.0
@@ -60,7 +61,7 @@ gravity = Vector3(0, -5, 0)
 scale_min = 0.12
 scale_max = 0.22
 scale_curve = SubResource("CurveTexture_o26ep")
-color = Color(3.5, 2.5, 0.5, 1)
+color = Color(2.569483, 3.370205, 3.4980013, 1)
 alpha_curve = SubResource("CurveTexture_8fnds")
 
 [sub_resource type="QuadMesh" id="QuadMesh_u56fy"]
@@ -104,9 +105,9 @@ alpha_curve = SubResource("CurveTexture_s81uk")
 anim_speed_min = 2.0
 anim_speed_max = 2.0
 
-[node name="VFX_Sparks_Yk1" type="Node3D"]
+[node name="VFX_Sparks_Yk1" type="Node3D" unique_id=1400346451]
 
-[node name="smallparticles_constant" type="GPUParticles3D" parent="."]
+[node name="smallparticles_constant" type="GPUParticles3D" parent="." unique_id=77554671]
 material_override = SubResource("ShaderMaterial_w3xdy")
 cast_shadow = 0
 amount = 5
@@ -116,7 +117,8 @@ fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_xy7jh")
 draw_pass_1 = SubResource("QuadMesh_u56fy")
 
-[node name="sparks2" type="GPUParticles3D" parent="."]
+[node name="sparks2" type="GPUParticles3D" parent="." unique_id=656660606]
+visible = false
 material_override = SubResource("ShaderMaterial_wssqa")
 cast_shadow = 0
 amount = 6
