@@ -11,3 +11,4 @@ var spawn_manager: SpawnManager
 var arena_zone_manager: ArenaZoneManager
 var life_state: Entity.LifeState = Entity.LifeState.ALIVE  # Summons inherit ALIVE by default
 var fighting_state: Entity.FightingState = Entity.FightingState.UNDEF
+var entity_owner: Entity

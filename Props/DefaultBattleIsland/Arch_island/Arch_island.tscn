@@ -147,6 +147,11 @@ light_energy = 13.941
 light_indirect_energy = 0.0
 light_volumetric_fog_energy = 8.895
 
+[node name="Arena" parent="WorldEnvironment" unique_id=978031092 instance=ExtResource("3_v6pgo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.767658, 0, 15.267077)
+visible = false
+
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=31111793]
 environment = SubResource("Environment_x7fny")
 
@@ -154,7 +159,6 @@ environment = SubResource("Environment_x7fny")
 transform = Transform3D(1.0005836, 0, 0, 0, 1.0005836, 0, 0, 0, 1.0005836, -0.030916214, -0.0055298805, 0.014993191)
 
 [node name="Arena" parent="." unique_id=1700311485 instance=ExtResource("2_cxbhe")]
-visible = false
 
 [node name="sword" parent="." unique_id=1966000435 instance=ExtResource("3_cxbhe")]
 transform = Transform3D(-0.010525227, 0.031236261, 2.911609, 2.3331048, 1.7421421, -0.010255624, -1.742141, 2.3329198, -0.03132525, 18.975769, -3.2546892, 1.9541597)

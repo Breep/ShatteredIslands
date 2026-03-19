@@ -15,6 +15,9 @@ script = ExtResource("1_fxxdn")
 name = "Energy Barrier"
 picture = ExtResource("1_rfirt")
 families = Array[int]([2])
+points = Dictionary[int, int]({
+2: 1
+})
 player_upgrade = SubResource("Resource_w1q6s")
 lvl = 5
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

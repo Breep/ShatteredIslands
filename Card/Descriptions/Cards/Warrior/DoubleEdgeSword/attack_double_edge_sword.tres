@@ -15,6 +15,9 @@ script = ExtResource("1_0n4up")
 name = "Double Edge Sword"
 picture = ExtResource("1_563ec")
 families = Array[int]([1])
-rarity = 1
+points = Dictionary[int, int]({
+1: 1
+})
+rarity = 0
 player_upgrade = SubResource("Resource_bpnc5")
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

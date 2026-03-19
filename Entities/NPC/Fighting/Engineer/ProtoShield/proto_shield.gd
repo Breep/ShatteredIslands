@@ -20,4 +20,5 @@ func _ready() -> void:
 	take_status(Status.Type.TAUNT, -1, "Initial taunt", self)
 	_base_stats.health_max = _on_spawn_hp_max
 	_base_stats.reset_from_self()
+	_movement_module.orbit_entity(summoner, 5.0, 0.5)
 	super._ready()

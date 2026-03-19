@@ -27,14 +27,14 @@ signal fight_is_lost()
 @export var _custom_deck: PlayerDeck
 @export var family_managers_enabled: bool = true
 @export var _override_family_levels: Dictionary[Family.Type, int] = {}
+@export var _custom_data_memory: Dictionary
 
 #region ============================== Public variables ==============================
 var display_mode: DisplayMode = DisplayMode.PREVIEW
 var families_stats: FamiliesStats
 var deck: PlayerDeck
+var data_memory: NestedRegistry
 
-var periodic_timer_registry: PeriodicTimerRegistry
-var battle_callback_registry: BattleCallbackRegistry
 var _card_context: CardContext
 #endregion
 
@@ -85,7 +85,6 @@ func cast_ultimate() -> void:
 
 func process_tick() -> void:
 	super.process_tick()
-	periodic_timer_registry.process_tick()
 
 #region ============================== Node base functions ==============================
 func _enter_tree() -> void:
@@ -95,21 +94,17 @@ func _enter_tree() -> void:
 		var family_manager: FamilyManager = Shared.FAMILY_MANAGER_SCENES[family_type].instantiate() as FamilyManager
 		_family_managers[family_type] = family_manager.init(self)
 		add_child(_family_managers[family_type])
-
-	periodic_timer_registry = PeriodicTimerRegistry.new()
-	periodic_timer_registry.name = "PeriodicTimerRegistry"
-	add_child(periodic_timer_registry)
-
-	battle_callback_registry = BattleCallbackRegistry.new()
-
+	
+	if data_memory == null: data_memory = NestedRegistry.new()
 	super._enter_tree()
 
 
 func _ready() -> void:
 	Verbose.debug("Hero [" + entity_name + "] ready", Verbose.Category.HERO)
-	# Custom Deck (must be assigned here, not in _enter_tree, because @export vars aren't loaded yet there)
-	if _custom_deck != null:
-		deck = _custom_deck
+	
+	# CUSTOM CONF
+	if _custom_deck != null: deck = _custom_deck
+	if not _custom_data_memory.is_empty(): data_memory.override(_custom_data_memory)
 
 	# Validate hero configuration
 	if hero_desc == null and custom_base_stats == null:
@@ -141,19 +136,13 @@ func _on_fighting_state_changed(new_fighting_state: FightingState) -> void:
 	super._on_fighting_state_changed(new_fighting_state)
 	match new_fighting_state:
 		FightingState.IDLE:
-			periodic_timer_registry.stop_all()
-			battle_callback_registry.execute_battle_end()
 			for family_manager: FamilyManager in _family_managers.values():
 				family_manager.stop()
 		FightingState.FIGHTING:
 			if family_managers_enabled:
-				battle_callback_registry.execute_battle_start()
-				periodic_timer_registry.start_all()
 				for family_manager: FamilyManager in _family_managers.values():
 					family_manager.start()
 		FightingState.CELEBRATING:
-			periodic_timer_registry.stop_all()
-			battle_callback_registry.execute_battle_end()
 			for family_manager: FamilyManager in _family_managers.values():
 				family_manager.stop()
 		FightingState.UNDEF: pass

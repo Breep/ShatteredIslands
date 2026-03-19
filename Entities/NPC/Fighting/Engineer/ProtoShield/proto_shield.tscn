@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://crq8jchkld02c" path="res://Entities/NPC/Fighting/Engineer/ProtoShield/proto_shield.gd" id="1_dn3og"]
 [ext_resource type="PackedScene" uid="uid://i6mui4bkx4tx" path="res://Entities/NPC/Fighting/Engineer/ProtoShield/proto_shield_visual.tscn" id="2_16yt5"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="2_vtwb2"]
+[ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://Tool/QuickAnims/anim_rotating_module.tscn" id="4_uto7c"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_16yt5"]
 height = 0.1
@@ -10,17 +11,29 @@ radius = 0.3
 
 [node name="ProtoShield" type="CharacterBody3D" unique_id=528264494 node_paths=PackedStringArray("_visual_3d")]
 script = ExtResource("1_dn3og")
+_auto_loaded_modules = Array[int]([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 0])
 _visual_3d = NodePath("CollisionShape3D")
 metadata/_custom_type_script = "uid://cjfj1jcbiom2x"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=600587217]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 2.041784, 0)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 2.7430773, 0)
 shape = SubResource("CylinderShape3D_16yt5")
 
 [node name="ProtoShieldVisual" parent="." unique_id=1980159794 instance=ExtResource("2_16yt5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7107947, 0)
 
 [node name="AnimHoveringModule" parent="ProtoShieldVisual" unique_id=70936634 node_paths=PackedStringArray("_owner") instance=ExtResource("2_vtwb2")]
 _owner = NodePath("..")
 _hover_power = 0.1
 _hover_period = 5.0
+
+[node name="AnimRotatingModuleX" parent="ProtoShieldVisual" unique_id=117645400 node_paths=PackedStringArray("_owner") instance=ExtResource("4_uto7c")]
+_owner = NodePath("../..")
+_rot_period = 5.0
+_rot_max = 20.0
+
+[node name="AnimRotatingModuleY" parent="ProtoShieldVisual" unique_id=348490320 node_paths=PackedStringArray("_owner") instance=ExtResource("4_uto7c")]
+_owner = NodePath("../..")
+_rot_axis = 1
+_rot_period = 3.0
+_rot_max = 40.0

@@ -14,10 +14,9 @@ metadata/_custom_type_script = "uid://8530gvg7gpl8"
 script = ExtResource("3_xacbn")
 name = "Magnetic Syphon"
 picture = ExtResource("1_d8bbi")
-families = Array[int]([2, 1])
+families = Array[int]([2])
 player_upgrade = SubResource("Resource_w33t8")
 points = Dictionary[int, int]({
-1: 1,
 2: 1
 })
 lvl = 5
