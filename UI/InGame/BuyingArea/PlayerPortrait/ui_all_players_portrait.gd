@@ -11,7 +11,7 @@ var _player_id_player_portrait_map: Dictionary[int, UIPlayerPortrait] # Key=<pla
 
 # ============================== Local nodes ==============================
 
-@onready var vbox_container: VBoxContainer = %VBoxContainer
+@onready var vbox_container: HexGridContainer = %VBoxContainer
 
 # ============================== Node base functions ==============================
 
