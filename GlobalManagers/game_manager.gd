@@ -104,13 +104,13 @@ func clear() -> void:
 func init() -> void:
 	_game_rules = load("res://Game/GameRules/normal_game_rules.tres")
 	_active_families.append(_FAMILIES_REF[Family.Type.ENGINEER])
-	_active_families.append(_FAMILIES_REF[Family.Type.POISON])
+	#_active_families.append(_FAMILIES_REF[Family.Type.POISON])
 	_active_families.append(_FAMILIES_REF[Family.Type.ARDENT_CELESTIAL])
-	_active_families.append(_FAMILIES_REF[Family.Type.WARRIOR])
-	_active_families.append(_FAMILIES_REF[Family.Type.LIGHT])
+	#_active_families.append(_FAMILIES_REF[Family.Type.WARRIOR])
+	#_active_families.append(_FAMILIES_REF[Family.Type.LIGHT])
 	_active_families.append(_FAMILIES_REF[Family.Type.CHICKEN_LORD])
 	_active_families.append(_FAMILIES_REF[Family.Type.COLOSSUS])
-	_active_families.append(_FAMILIES_REF[Family.Type.NECROSIS])
+	#_active_families.append(_FAMILIES_REF[Family.Type.NECROSIS])
 
 
 #TODO Move into round manager ?
