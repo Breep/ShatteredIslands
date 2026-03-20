@@ -41,6 +41,7 @@ func _reorder_portraits() -> void:
 	var players_sorted: Array[Player] = PlayerManager.get_players_ordered()
 	for i in players_sorted.size():
 		var player: Player = players_sorted[i]
+		_player_id_player_portrait_map[player.id].flip_ui = (i % 2 == 1)
 		vbox_container.move_child(_player_id_player_portrait_map[player.id], i)
 
 
