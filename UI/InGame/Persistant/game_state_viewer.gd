@@ -17,21 +17,37 @@ const MAIN_GAME_STATE_TEXT: Dictionary [GameManager.GameState, String] = {
 	GameManager.GameState.UNDEF: "UNDEF",
 }
 
-@export var _timer_progress_bar: FlexibleProgressBar
-@export var _game_state_label: Label
+@onready var _game_state_label: RichTextLabel = %GameStateLabel
+@onready var _timer_progress_bar: TextureProgressBar = %TimeLeftBar
+@onready var _round_label: RichTextLabel = %RoundLabel
+@onready var _timer_label: RichTextLabel = %TimeLeftLabel
+
+const TIMER_BAR_MIN: float = 18
+const TIMER_BAR_MAX: float = 82
 
 var _timer: Timer
 
 func _process(_delta: float) -> void:
 	if _timer == null: return
-	_timer_progress_bar.set_max_value(_timer.wait_time)
-	_timer_progress_bar.set_bar_value(_timer.time_left)
+	_timer_progress_bar.max_value = 100
+	_timer_progress_bar.value = remap(_timer.time_left / _timer.wait_time, 0, 1, TIMER_BAR_MIN, TIMER_BAR_MAX) 
+	_timer_label.text = str(_timer.time_left).pad_decimals(0)
 
 
 func connect_timer(timer: Timer) -> void:
 	_timer = timer
-	_timer_progress_bar.set_max_value(_timer.wait_time)
 
 
-func update_content(game_state: GameManager.GameState) -> void:
+func update_game_state(game_state: GameManager.GameState) -> void:
 	_game_state_label.text = MAIN_GAME_STATE_TEXT[game_state]
+
+
+func update_round_value(round_number: int) -> void:
+	_round_label.text = str(round_number)
+
+
+
+
+
+
+ 
