@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wmnsjqgf20lp"
-path.s3tc="res://.godot/imported/M_island_3.png-28eca1654fd33446046ff343b4ca80b9.s3tc.ctex"
+uid="uid://br16wil4fjnee"
+path.s3tc="res://.godot/imported/M_island_Image_8.png-6e11f2c5979e6793bc0cac67c21b347c.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "d7b2020ef01c5f45bdd1153056695d8a"
+"md5": "18c2d483db47ee3415f601d7988f62d5"
 }
 
 [deps]
 
-source_file="res://Props/DefaultBattleIsland/M_island_3.png"
-dest_files=["res://.godot/imported/M_island_3.png-28eca1654fd33446046ff343b4ca80b9.s3tc.ctex"]
+source_file="res://Props/DefaultBattleIsland/Arch_island/M_island_Image_8.png"
+dest_files=["res://.godot/imported/M_island_Image_8.png-6e11f2c5979e6793bc0cac67c21b347c.s3tc.ctex"]
 
 [params]
 
@@ -25,12 +25,12 @@ compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
-compress/normal_map=0
+compress/normal_map=1
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
+roughness/mode=1
+roughness/src_normal="res://Props/DefaultBattleIsland/Arch_island/M_island_Image_8.png"
 process/channel_remap/red=0
 process/channel_remap/green=1
 process/channel_remap/blue=2

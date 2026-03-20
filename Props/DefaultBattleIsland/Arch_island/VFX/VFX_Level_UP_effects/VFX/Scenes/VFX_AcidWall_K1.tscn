@@ -70,3 +70,51 @@ cast_shadow = 0
 gi_lightmap_texel_scale = 0.01
 mesh = SubResource("PlaneMesh_j2mw5")
 skeleton = NodePath("../..")
+
+[node name="AcidWall_K1_3" type="MeshInstance3D" parent="." unique_id=602997963]
+transform = Transform3D(1.123532, -1.4559536, 0.557395, 0.019547954, 1.1512605, 1.8440003, -0.90265125, -1.7872963, 0.7337244, 5.779237, -1.6912401, -12.159624)
+material_override = SubResource("ShaderMaterial_3gihs")
+cast_shadow = 0
+gi_lightmap_texel_scale = 0.01
+mesh = SubResource("PlaneMesh_j2mw5")
+skeleton = NodePath("../..")
+
+[node name="AcidWall_K1_4" type="MeshInstance3D" parent="." unique_id=684950955]
+transform = Transform3D(-1.1283555, 0, -1.282219, 0, 2.5767493, 0, 0.89682746, 0, -1.613241, 7.5818777, 0.11898208, -9.829818)
+material_override = SubResource("ShaderMaterial_j2mw5")
+cast_shadow = 0
+gi_lightmap_texel_scale = 0.01
+mesh = SubResource("PlaneMesh_j2mw5")
+skeleton = NodePath("../..")
+
+[node name="AcidWall_K1_5" type="MeshInstance3D" parent="." unique_id=1742319967]
+transform = Transform3D(-1.1287616, -1.421077, 0.5922966, 0.019547952, 1.1512604, 1.8440001, -0.8961034, 1.81515, -0.7058509, 5.9230795, -1.6912401, 15.417313)
+material_override = SubResource("ShaderMaterial_3gihs")
+cast_shadow = 0
+gi_lightmap_texel_scale = 0.01
+mesh = SubResource("PlaneMesh_j2mw5")
+skeleton = NodePath("../..")
+
+[node name="AcidWall_K1_6" type="MeshInstance3D" parent="." unique_id=2013382084]
+transform = Transform3D(1.1241482, 0, -1.2897503, 0, 2.5767493, 0, 0.9020952, 0, 1.6072261, 7.796568, 0.11898208, 13.144089)
+material_override = SubResource("ShaderMaterial_j2mw5")
+cast_shadow = 0
+gi_lightmap_texel_scale = 0.01
+mesh = SubResource("PlaneMesh_j2mw5")
+skeleton = NodePath("../..")
+
+[node name="AcidWall_K1_7" type="MeshInstance3D" parent="." unique_id=191658156]
+transform = Transform3D(-0.1445654, -1.590936, 0.73911834, 0.011634547, 0.8070052, 1.4942255, -0.84551364, 0.2831219, -0.105813146, 2.730543, -1.1424772, 6.208427)
+material_override = SubResource("ShaderMaterial_3gihs")
+cast_shadow = 0
+gi_lightmap_texel_scale = 0.01
+mesh = SubResource("PlaneMesh_j2mw5")
+skeleton = NodePath("../..")
+
+[node name="AcidWall_K1_8" type="MeshInstance3D" parent="." unique_id=1979480233]
+transform = Transform3D(0.13936087, 0, -1.2032993, 0, 1.5250958, 0, 0.8416282, 0, 0.19924816, 4.6600494, 0.31628084, 5.905286)
+material_override = SubResource("ShaderMaterial_j2mw5")
+cast_shadow = 0
+gi_lightmap_texel_scale = 0.01
+mesh = SubResource("PlaneMesh_j2mw5")
+skeleton = NodePath("../..")
