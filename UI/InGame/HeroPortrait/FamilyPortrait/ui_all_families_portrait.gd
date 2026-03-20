@@ -27,6 +27,8 @@ var _player: Player
 
 var _tweens: Array[Tween]
 
+var _portrait_to_control_map: Dictionary[UIFamilyPortrait, Control]
+
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
@@ -61,6 +63,7 @@ func init_portait_families(families: Array[Family]) -> void:
 		Verbose.error("UIAllFamiliesPortrait: Too many active families at once")
 		return
 	for i: int in _family_portraits.size():
+		_portrait_to_control_map[_family_portraits[i]] = _family_controls[i]
 		_family_portraits[i].hide()
 	for i: int in families.size():
 		_family_portraits[i].init(families[i])
@@ -108,8 +111,9 @@ func _sort_family_portraits() -> void:
 	var family_portraits_sorted: Array[UIFamilyPortrait] = _family_portraits.duplicate()
 	family_portraits_sorted.sort_custom(_custom_sort_fp)
 	for i: int in family_portraits_sorted.size():
-		var parent_control_node: Control = family_portraits_sorted[i].get_parent()
+		var parent_control_node: Control = _portrait_to_control_map[family_portraits_sorted[i]]
 		_vbox_container.move_child(parent_control_node, i)
+		parent_control_node.layout_direction = LayoutDirection.LAYOUT_DIRECTION_RTL if i % 2 == 0 else LayoutDirection.LAYOUT_DIRECTION_LTR
 
 
 func _custom_sort_fp(fp1: UIFamilyPortrait, fp2: UIFamilyPortrait) -> bool:
