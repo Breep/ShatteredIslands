@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://ck0q08a1qbj5" path="res://Props/DefaultBattleIsland/leafage4_file2-file2.png" id="1_i6th7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vd8ww"]
+render_priority = 4
 transparency = 1
 albedo_texture = ExtResource("1_i6th7")
 

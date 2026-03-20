@@ -51,7 +51,7 @@ shader_parameter/Texture_add = SubResource("GradientTexture2D_hkds8")
 shader_parameter/Texture_substract = SubResource("GradientTexture2D_yt104")
 shader_parameter/Gradient_Color_1D2 = SubResource("GradientTexture1D_qprb2")
 shader_parameter/Color_Intensity2 = 2.2
-shader_parameter/Fill = 0.190000009025
+shader_parameter/Fill = 0.30000001425
 
 [node name="VFX_AcidWall_K1_" type="Node3D" unique_id=1350972226]
 

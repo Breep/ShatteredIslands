@@ -1,0 +1,49 @@
+[gd_scene format=4 uid="uid://be7ehnhyliyxn"]
+
+[ext_resource type="Texture2D" uid="uid://bggsyx5pl3cvi" path="res://Props/DefaultBattleIsland/Arch_island/bush4_file4-file4.png" id="1_acerd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aptwr"]
+resource_name = "foliage3"
+transparency = 4
+cull_mode = 2
+albedo_texture = ExtResource("1_acerd")
+roughness = 0.5527864
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_jhcex"]
+_surfaces = [{
+"aabb": AABB(-0.5, -0.5, 0, 1, 1, 1e-05),
+"format": 34359742465,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAAADAAEA"),
+"name": "foliage3",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAvwAAAD8AAACAAAAAPwAAAL8AAACAAAAAPwAAAD8AAACAAAAAvwAAAL8AAACA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_lae27"]
+resource_name = "bush4_Mesh_001"
+_surfaces = [{
+"aabb": AABB(-0.5, -0.5, 0, 1, 1, 1e-05),
+"attribute_data": PackedByteArray("nR+rPsL2Jz8Iu0c/IOqBPgi7Rz/C9ic/nR+rPiDqgT4="),
+"format": 34359742487,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAAADAAEA"),
+"material": SubResource("StandardMaterial3D_aptwr"),
+"name": "foliage3",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAvwAAAD8AAACAAAAAPwAAAL8AAACAAAAAPwAAAD8AAACAAAAAvwAAAL8AAACA/////////7//////////v/////////+//////////78=")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_jhcex")
+
+[node name="bush4" type="Node3D" unique_id=148583213]
+
+[node name="bush1" type="MeshInstance3D" parent="." unique_id=1670432664]
+transform = Transform3D(1.6279099, 0, 0, 0, 0, -1.6279099, 0, 1.6279099, 0, -0.008559272, 0, 0)
+mesh = SubResource("ArrayMesh_lae27")
+skeleton = NodePath("")
