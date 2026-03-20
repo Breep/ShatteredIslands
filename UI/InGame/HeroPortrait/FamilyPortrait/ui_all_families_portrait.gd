@@ -87,12 +87,15 @@ func _connect_new_player(new_player: Player) -> void:
 
 
 func _update_portrait_families() -> void:
-	_reset_portrait_families()
-	var families_count: Dictionary[Family.Type, int] = _player.deck.families_count
 	for family_portrait: UIFamilyPortrait in _family_portraits:
-		for family_type in families_count.keys():
-			if family_portrait.family_type == family_type:
-				family_portrait.family_xp = families_count[family_type]
+		var family_type: Family.Type = family_portrait.family_type
+		var family_point: int = _player.deck.get_family_points(family_type)
+		var xp: int = GameManager.game_rules.family_point_to_xp(family_point)
+		var xp_max: int = GameManager.game_rules.family_point_to_xp_max(family_point)
+		var lvl: int = _player.deck.get_family_level(family_type)
+		family_portrait.family_xp = xp
+		family_portrait.family_xp_max = xp_max
+		family_portrait.family_lvl = lvl
 	_sort_family_portraits()
 
 
@@ -110,7 +113,12 @@ func _sort_family_portraits() -> void:
 
 
 func _custom_sort_fp(fp1: UIFamilyPortrait, fp2: UIFamilyPortrait) -> bool:
-	return fp1.family_xp > fp2.family_xp
+	if fp1.family_lvl > fp2.family_lvl:
+		return true
+	elif fp1.family_lvl == fp2.family_lvl:
+		return fp1.family_xp > fp2.family_xp
+	else:
+		return false
 
 # ============================== Callbacks ==============================
 
