@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://byj3u6pydvwb2"
-path="res://.godot/imported/family_cercle_silver_main.png-7eadb608324f0a79195eaf6813f0736d.ctex"
+uid="uid://550ir8k3qooc"
+path="res://.godot/imported/family_cercle_silver_level_ticks.png-b8a15804f5c0c8c5ade4e39542e31a2b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/InGame/HeroPortrait/FamilyPortrait/Data/2_Silver/family_cercle_silver_main.png"
-dest_files=["res://.godot/imported/family_cercle_silver_main.png-7eadb608324f0a79195eaf6813f0736d.ctex"]
+source_file="res://UI/InGame/HeroPortrait/FamilyPortrait/Data/2_Silver/family_cercle_silver_level_ticks.png"
+dest_files=["res://.godot/imported/family_cercle_silver_level_ticks.png-b8a15804f5c0c8c5ade4e39542e31a2b.ctex"]
 
 [params]
 

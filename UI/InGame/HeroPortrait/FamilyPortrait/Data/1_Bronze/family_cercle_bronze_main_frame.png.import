@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bm6xrm4t5emdm"
-path="res://.godot/imported/family_cercle_platine_levels.png-77bf9cb06ecc97fd47e27b7cf4e89c23.ctex"
+uid="uid://c3lnk1e54vxb6"
+path="res://.godot/imported/family_cercle_bronze_main_frame.png-bd2c51f87a5581c4f5b236e8aa7d2b2c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/InGame/HeroPortrait/FamilyPortrait/Data/4_Platine/family_cercle_platine_levels.png"
-dest_files=["res://.godot/imported/family_cercle_platine_levels.png-77bf9cb06ecc97fd47e27b7cf4e89c23.ctex"]
+source_file="res://UI/InGame/HeroPortrait/FamilyPortrait/Data/1_Bronze/family_cercle_bronze_main_frame.png"
+dest_files=["res://.godot/imported/family_cercle_bronze_main_frame.png-bd2c51f87a5581c4f5b236e8aa7d2b2c.ctex"]
 
 [params]
 

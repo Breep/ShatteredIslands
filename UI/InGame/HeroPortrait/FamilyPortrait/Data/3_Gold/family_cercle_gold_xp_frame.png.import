@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://badpaah2vk0vd"
-path="res://.godot/imported/family_cercle_gold_levels.png-5be032bf3a44523de51dc089a7b7d59a.ctex"
+uid="uid://qrf8xqedpnhl"
+path="res://.godot/imported/family_cercle_gold_xp_frame.png-26277602c6406838a485368b70669498.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/InGame/HeroPortrait/FamilyPortrait/Data/3_Gold/family_cercle_gold_levels.png"
-dest_files=["res://.godot/imported/family_cercle_gold_levels.png-5be032bf3a44523de51dc089a7b7d59a.ctex"]
+source_file="res://UI/InGame/HeroPortrait/FamilyPortrait/Data/3_Gold/family_cercle_gold_xp_frame.png"
+dest_files=["res://.godot/imported/family_cercle_gold_xp_frame.png-26277602c6406838a485368b70669498.ctex"]
 
 [params]
 

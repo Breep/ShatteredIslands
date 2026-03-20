@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6ievyw4bsd44"
-path="res://.godot/imported/family_cercle_gold_main.png-dfe23b5d09c0b029657f6db767942967.ctex"
+uid="uid://bm6xrm4t5emdm"
+path="res://.godot/imported/family_cercle_platinium_level_ticks.png-506f6edcf252fbe0e9fa4ec4af5eb7b8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/InGame/HeroPortrait/FamilyPortrait/Data/3_Gold/family_cercle_gold_main.png"
-dest_files=["res://.godot/imported/family_cercle_gold_main.png-dfe23b5d09c0b029657f6db767942967.ctex"]
+source_file="res://UI/InGame/HeroPortrait/FamilyPortrait/Data/4_Platinium/family_cercle_platinium_level_ticks.png"
+dest_files=["res://.godot/imported/family_cercle_platinium_level_ticks.png-506f6edcf252fbe0e9fa4ec4af5eb7b8.ctex"]
 
 [params]
 

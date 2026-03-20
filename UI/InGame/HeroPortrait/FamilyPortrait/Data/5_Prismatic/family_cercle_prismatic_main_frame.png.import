@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hyl41rbn6082"
-path="res://.godot/imported/family_cercle_platine_main.png-ae20ec9d97e2822a751a75dd1fa02c51.ctex"
+uid="uid://cdtpggxjwiyp4"
+path="res://.godot/imported/family_cercle_prismatic_main_frame.png-977093600d6c360222652edaffc9af4c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/InGame/HeroPortrait/FamilyPortrait/Data/4_Platine/family_cercle_platine_main.png"
-dest_files=["res://.godot/imported/family_cercle_platine_main.png-ae20ec9d97e2822a751a75dd1fa02c51.ctex"]
+source_file="res://UI/InGame/HeroPortrait/FamilyPortrait/Data/5_Prismatic/family_cercle_prismatic_main_frame.png"
+dest_files=["res://.godot/imported/family_cercle_prismatic_main_frame.png-977093600d6c360222652edaffc9af4c.ctex"]
 
 [params]
 

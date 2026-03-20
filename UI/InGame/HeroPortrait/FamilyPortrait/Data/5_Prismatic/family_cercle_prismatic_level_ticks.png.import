@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cr213a0fw5hfw"
-path="res://.godot/imported/family_cercle_prism_levels.png-167dc9fff6b4591fe67bbce6b6ff3d7f.ctex"
+path="res://.godot/imported/family_cercle_prismatic_level_ticks.png-67ed2907d6d6ebfbe97b47d76900f1c4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/InGame/HeroPortrait/FamilyPortrait/Data/5_Prismatic/family_cercle_prism_levels.png"
-dest_files=["res://.godot/imported/family_cercle_prism_levels.png-167dc9fff6b4591fe67bbce6b6ff3d7f.ctex"]
+source_file="res://UI/InGame/HeroPortrait/FamilyPortrait/Data/5_Prismatic/family_cercle_prismatic_level_ticks.png"
+dest_files=["res://.godot/imported/family_cercle_prismatic_level_ticks.png-67ed2907d6d6ebfbe97b47d76900f1c4.ctex"]
 
 [params]
 
