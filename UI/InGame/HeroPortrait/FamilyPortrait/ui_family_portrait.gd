@@ -58,7 +58,7 @@ const FRAME_TEXTURES: Array[Dictionary] = [
 @onready var _family_lvl_progress_bar: TextureProgressBar = %FamilyLvlProgressBar
 @onready var _current_xp_progress_bar: TextureProgressBar = %XPProgressBar
 @onready var _button: TextureButton = %TextureButton
-@onready var _glow_effet: TextureRect = %GlowEffect
+@onready var _glow_effect: TextureRect = %GlowEffect
 @onready var _family_background: TextureRect = %FamilyBackground
 @onready var _xp_bar_frame: TextureRect = %XPBarFrame
 @onready var _main_frame: TextureRect = %MainFrame
@@ -102,16 +102,17 @@ var _family: Family
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	if _glow_effet.material != null:
-		_glow_effet.material = _glow_effet.material.duplicate()
+	if _glow_effect.material != null:
+		_glow_effect.material = _glow_effect.material.duplicate()
 	_update_frame()
+	_glow_effect.hide()
 
 # ============================== Public functions ==============================
 
 func init(family: Family) -> void:
 	family_type = family.family_type
 	_family_background.modulate = family.color
-	_glow_effet.material.set_shader_parameter("glow_color", family.color)
+	_glow_effect.material.set_shader_parameter("glow_color", family.color)
 	_family_icon.texture = family.icon
 	_family = family
 
@@ -142,8 +143,15 @@ func _update_frame() -> void:
 	
 	if _family_lvl == 4:
 		_xp_bar_frame.hide()
+		_glow_effect.show()
 
 
+func _glow() -> void:
+	_glow_effect.show()
+	#var tween = create_tween()
+	#tween.tween_property(_glow_effect, "rotation:y", _visual_3d.rotation.y + TAU, 0.8) \
+		#.set_trans(Tween.TRANS_QUART) \
+		#.set_ease(Tween.EASE_OUT)
 
 
 
