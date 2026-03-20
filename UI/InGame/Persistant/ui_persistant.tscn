@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://t0ycuxntigox" path="res://UI/InGame/Persistant/ui_persistant.gd" id="1_oypi2"]
 [ext_resource type="PackedScene" uid="uid://d3wws1xrp3rsq" path="res://UI/InGame/Persistant/game_state_viewer.tscn" id="3_oypi2"]
 [ext_resource type="PackedScene" uid="uid://be38goiqxp28o" path="res://UI/InGame/BuyingArea/PlayerPortrait/ui_all_players_portrait.tscn" id="4_4ouwd"]
+[ext_resource type="PackedScene" uid="uid://bvqsnkh0s11q2" path="res://UI/InGame/HeroPortrait/FamilyPortrait/ui_all_families_portrait.tscn" id="5_oypi2"]
 
 [node name="Persistant" type="Control" unique_id=1275150033]
 layout_mode = 3
@@ -180,3 +181,17 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 mouse_filter = 2
+
+[node name="UIAllFamiliesPortrait" parent="." unique_id=758463995 instance=ExtResource("5_oypi2")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 9
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 249.0
+offset_bottom = 0.0
+grow_horizontal = 1
