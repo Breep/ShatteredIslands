@@ -8,25 +8,18 @@ enum LocationType {
 	ARENA_CENTER,    # Center of the arena
 	TEAM_ZONE,       # Random position in a specific team's zone
 	ENTITY,          # Relative to a specific entity/Node3D
-	RANDOM_ARENA     # Random position anywhere in arena
+	RANDOM_ARENA,    # Random position anywhere in arena
+	BETWEEN_CENTER   # Between the entity and the center
 }
 
 # ============================== Export variables ==============================
 
-## Type of spawn location
 var location_type: LocationType = LocationType.EXACT
-
-## Exact global position (used when location_type is EXACT)
 var exact_position: Vector3 = Vector3.ZERO
-
-## Team id for team zone spawning (used when location_type is TEAM_ZONE)
 var team: int = 0
-
-## Target entity for relative positioning (used when location_type is ENTITY)
 var target_entity: Node3D = null
-
-## Randomization radius applied to the final position
 var randomization_radius: float = 0.0
+var distance_from: float = 3.0
 
 # ============================== Public functions ==============================
 
@@ -63,6 +56,13 @@ func resolve(arena_zone_manager: ArenaZoneManager) -> Vector3:
 				Verbose.error("ArenaZoneManager required for RANDOM_ARENA", Verbose.Category.SPAWN_LOCATION_CONFIG)
 				return Vector3.ZERO
 			base_position = arena_zone_manager.get_random_position_in_arena()
+		
+		LocationType.BETWEEN_CENTER:
+			if arena_zone_manager == null:
+				Verbose.error("ArenaZoneManager required for BETWEEN_CENTER", Verbose.Category.SPAWN_LOCATION_CONFIG)
+				return Vector3.ZERO
+			var center: Vector3 = arena_zone_manager.get_center_zone_center()
+			return target_entity.global_position + (center - target_entity.global_position).normalized() * distance_from
 		
 		_:
 			Verbose.error("Unknown location type", Verbose.Category.SPAWN_LOCATION_CONFIG)
@@ -128,6 +128,15 @@ static func create_entity_relative(entity: Node3D, randomization: float = 0.0) -
 static func create_random_arena(randomization: float = 0.0) -> SpawnLocationConfig:
 	var config := SpawnLocationConfig.new()
 	config.location_type = LocationType.RANDOM_ARENA
+	config.randomization_radius = randomization
+	return config
+
+
+static func create_between_center(entity: Entity, distance: float = 3.0, randomization: float = 0.0) -> SpawnLocationConfig:
+	var config := SpawnLocationConfig.new()
+	config.location_type = LocationType.BETWEEN_CENTER
+	config.target_entity = entity
+	config.distance_from = distance
 	config.randomization_radius = randomization
 	return config
 

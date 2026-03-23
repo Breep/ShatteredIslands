@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://caud4asl4y1y5"]
+
+[ext_resource type="Shader" uid="uid://cxvdhkkjpr75e" path="res://Entities/EntityInfoPanel/Shaders/character_health_bar.gdshader" id="1_2hyq6"]
+[ext_resource type="Script" uid="uid://b4yl7aebvyoih" path="res://Entities/EntityInfoPanel/EntitySimpleInfoPanel2D/summon_simple_info_panel_2d.gd" id="1_wiwv7"]
+[ext_resource type="Shader" uid="uid://dncf64el86tmc" path="res://Entities/EntityInfoPanel/Shaders/character_shield_bar.gdshader" id="2_fsx5g"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fsx5g"]
+shader = ExtResource("1_2hyq6")
+shader_parameter/HealthAmount = 0.6
+shader_parameter/MaxHealth = 2500.0
+shader_parameter/HealthColor = Color(0.11, 0.64, 0.08, 1)
+shader_parameter/BackgroundColor = Color(0.15, 0.15, 0.15, 0.8)
+shader_parameter/EnableShimmer = false
+shader_parameter/ShimmerSpeed = 1.5
+shader_parameter/ShimmerStrength = 0.3
+shader_parameter/VolumeStrength = 0.4
+shader_parameter/ShowGrid = false
+shader_parameter/LineColor = Color(0, 0, 0, 1)
+shader_parameter/Step_X_Value = 250.0
+shader_parameter/Step_X_Height = 1.0
+shader_parameter/Step_X_Thickness = 1.0
+shader_parameter/Step_Y_Value = 1000.0
+shader_parameter/Step_Y_Height = 1.0
+shader_parameter/Step_Y_Thickness = 2.5
+shader_parameter/BorderColor = Color(0.05, 0.05, 0.05, 1)
+shader_parameter/BorderThicknessPx = 2.0
+shader_parameter/CornerRadius = 0.05
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wiwv7"]
+shader = ExtResource("2_fsx5g")
+shader_parameter/shield_color = Color(0.6080438, 0.52413857, 3.85046e-07, 1)
+shader_parameter/alpha_intensity = 0.800000038
+shader_parameter/brightness = 0.8390000161025
+shader_parameter/fill_amount = 0.3530000167675
+shader_parameter/fill_smoothness = 0.10000000149012
+shader_parameter/noise_scale = 1.0
+shader_parameter/energy_speed = Vector2(0.2, 0.5)
+shader_parameter/scanline_count = 50.0
+shader_parameter/scanline_speed = -2.0
+shader_parameter/scanline_opacity = 0.3
+shader_parameter/pulse_speed = 2.0
+shader_parameter/pulse_intensity = 0.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nr0wp"]
+shader = ExtResource("1_2hyq6")
+shader_parameter/HealthAmount = 0.6
+shader_parameter/MaxHealth = 2500.0
+shader_parameter/HealthColor = Color(0.10980392, 0.6392157, 0.078431375, 0)
+shader_parameter/BackgroundColor = Color(0.14901961, 0.14901961, 0.14901961, 0)
+shader_parameter/EnableShimmer = false
+shader_parameter/ShimmerSpeed = 1.5
+shader_parameter/ShimmerStrength = 0.3
+shader_parameter/VolumeStrength = 0.4
+shader_parameter/ShowGrid = false
+shader_parameter/LineColor = Color(0, 0, 0, 1)
+shader_parameter/Step_X_Value = 250.0
+shader_parameter/Step_X_Height = 1.0
+shader_parameter/Step_X_Thickness = 1.0
+shader_parameter/Step_Y_Value = 1000.0
+shader_parameter/Step_Y_Height = 1.0
+shader_parameter/Step_Y_Thickness = 2.5
+shader_parameter/BorderColor = Color(0.05, 0.05, 0.05, 1)
+shader_parameter/BorderThicknessPx = 2.0
+shader_parameter/CornerRadius = 0.05
+
+[node name="SumonSimpleInfoPanel2d" type="Control" unique_id=1628734826]
+custom_minimum_size = Vector2(100, 10)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1820.0
+offset_bottom = -1070.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wiwv7")
+
+[node name="HealthBar" type="ColorRect" parent="." unique_id=778638809]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_fsx5g")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ShieldBar" type="ColorRect" parent="HealthBar" unique_id=1147385294]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_wiwv7")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridBar" type="ColorRect" parent="HealthBar" unique_id=205852776]
+material = SubResource("ShaderMaterial_nr0wp")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

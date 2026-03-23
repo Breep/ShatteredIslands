@@ -15,6 +15,7 @@ signal family_selected(family_type: Family.Type)
 
 @export_group("Local Nodes")
 @export var _family_portraits: Array[UIFamilyPortrait]
+@export var _family_controls: Array[Control]
 
 @onready var _vbox_container: VBoxContainer = %VBoxContainer
 
@@ -26,16 +27,13 @@ var _player: Player
 
 var _tweens: Array[Tween]
 
+var _portrait_to_control_map: Dictionary[UIFamilyPortrait, Control]
+
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	hide()
-	for i: int in _family_portraits.size():
-		var portrait_family: UIFamilyPortrait = _family_portraits[_family_portraits.size() - i - 1]
-		portrait_family.modulate.a = 0
-		portrait_family.scale = Vector2(0.9, 0.9)
-		portrait_family.selected.connect(_on_portrait_family_selected)
-		portrait_family.unselected.connect(_on_portrait_family_unselected)
+	init_portait_families(GameManager.active_families)
+	pass
 
 # ============================== Public functions ==============================
 
@@ -61,11 +59,15 @@ func hide_families() -> void:
 
 
 func init_portait_families(families: Array[Family]) -> void:
-	if families.size() != _family_portraits.size():
+	if families.size() > _family_portraits.size():
 		Verbose.error("UIAllFamiliesPortrait: Too many active families at once")
 		return
 	for i: int in _family_portraits.size():
+		_portrait_to_control_map[_family_portraits[i]] = _family_controls[i]
+		_family_portraits[i].hide()
+	for i: int in families.size():
 		_family_portraits[i].init(families[i])
+		_family_portraits[i].show()
 
 
 func update_content(player: Player) -> void:
@@ -88,30 +90,39 @@ func _connect_new_player(new_player: Player) -> void:
 
 
 func _update_portrait_families() -> void:
-	_reset_portrait_families()
-	var families_count: Dictionary[Family.Type, int] = _player.deck.families_count
 	for family_portrait: UIFamilyPortrait in _family_portraits:
-		for family_type in families_count.keys():
-			if family_portrait.family_type == family_type:
-				family_portrait.family_count = families_count[family_type]
+		var family_type: Family.Type = family_portrait.family_type
+		var family_point: int = _player.deck.get_family_points(family_type)
+		var xp: int = GameManager.game_rules.family_point_to_xp(family_point)
+		var xp_max: int = GameManager.game_rules.family_point_to_xp_max(family_point)
+		var lvl: int = _player.deck.get_family_level(family_type)
+		family_portrait.family_xp = xp
+		family_portrait.family_xp_max = xp_max
+		family_portrait.family_lvl = lvl
 	_sort_family_portraits()
 
 
 func _reset_portrait_families() -> void:
 	for family_portrait in _family_portraits:
-		family_portrait.family_count = 0
+		family_portrait.family_xp = 0
 
 
 func _sort_family_portraits() -> void:
 	var family_portraits_sorted: Array[UIFamilyPortrait] = _family_portraits.duplicate()
 	family_portraits_sorted.sort_custom(_custom_sort_fp)
 	for i: int in family_portraits_sorted.size():
-		var parent_control_node: Control = family_portraits_sorted[i].get_parent()
+		var parent_control_node: Control = _portrait_to_control_map[family_portraits_sorted[i]]
 		_vbox_container.move_child(parent_control_node, i)
+		parent_control_node.layout_direction = LayoutDirection.LAYOUT_DIRECTION_RTL if i % 2 == 0 else LayoutDirection.LAYOUT_DIRECTION_LTR
 
 
 func _custom_sort_fp(fp1: UIFamilyPortrait, fp2: UIFamilyPortrait) -> bool:
-	return fp1.family_count > fp2.family_count
+	if fp1.family_lvl > fp2.family_lvl:
+		return true
+	elif fp1.family_lvl == fp2.family_lvl:
+		return fp1.family_xp > fp2.family_xp
+	else:
+		return false
 
 # ============================== Callbacks ==============================
 

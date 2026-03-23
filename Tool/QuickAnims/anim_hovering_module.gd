@@ -7,7 +7,8 @@ enum Axis {
 	Z
 }
 
-@onready var _tween := create_tween()
+var _tween: Tween
+var _origin: float
 
 @export var _owner: Node3D
 
@@ -17,7 +18,7 @@ enum Axis {
 
 @export var _axe: Axis = Axis.Y
 
-func _ready():
+func _ready() -> void:
 	if _owner == null:
 		printerr("AnimHoverModule: Owner isn't set ! [", get_path(), "]")
 		return
@@ -27,21 +28,32 @@ func _ready():
 	
 	start_hover()
 
-func start_hover():
-	_tween.set_loops()
+
+#region ============================== Public API ==============================
+func start_hover() -> void:
+	if is_instance_valid(_tween):
+		_tween.kill()
+
+	match _axe:
+		Axis.X: _origin = _owner.position.x
+		Axis.Y: _origin = _owner.position.y
+		Axis.Z: _origin = _owner.position.z
+
+	_tween = create_tween().set_loops()
 	match _axe:
 		Axis.X:
-			var up = _owner.position.x - _hover_power
-			var down = _owner.position.x + _hover_power
-			_tween.tween_property(_owner, "position:x", up, _hover_period).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-			_tween.tween_property(_owner, "position:x", down, _hover_period).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+			_tween.tween_property(_owner, "position:x", _origin - _hover_power, _hover_period).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+			_tween.tween_property(_owner, "position:x", _origin + _hover_power, _hover_period).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 		Axis.Y:
-			var up = _owner.position.y - _hover_power
-			var down = _owner.position.y + _hover_power
-			_tween.tween_property(_owner, "position:y", up, _hover_period).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-			_tween.tween_property(_owner, "position:y", down, _hover_period).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+			_tween.tween_property(_owner, "position:y", _origin - _hover_power, _hover_period).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+			_tween.tween_property(_owner, "position:y", _origin + _hover_power, _hover_period).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 		Axis.Z:
-			var up = _owner.position.z - _hover_power
-			var down = _owner.position.z + _hover_power
-			_tween.tween_property(_owner, "position:z", up, _hover_period).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-			_tween.tween_property(_owner, "position:z", down, _hover_period).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+			_tween.tween_property(_owner, "position:z", _origin - _hover_power, _hover_period).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+			_tween.tween_property(_owner, "position:z", _origin + _hover_power, _hover_period).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+
+func stop_hover() -> void:
+	if is_instance_valid(_tween):
+		_tween.kill()
+		_tween = null
+#endregion

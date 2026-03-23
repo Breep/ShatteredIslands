@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://k5v6yll4kd20"
-path="res://.godot/imported/engineer_toxic_filtration_layer_.jpg-9a6b52a69cb1ab7c4a16f1d190ec7f62.ctex"
+path="res://.godot/imported/engineer_gas_mask.jpg-86b3b5c7981cb8acc5aa08704f00a854.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Card/Descriptions/Cards/Engineer/Common/ToxicFiltrationLayer/engineer_toxic_filtration_layer_.jpg"
-dest_files=["res://.godot/imported/engineer_toxic_filtration_layer_.jpg-9a6b52a69cb1ab7c4a16f1d190ec7f62.ctex"]
+source_file="res://Card/Descriptions/Cards/Engineer/Common/GasMask/engineer_gas_mask.jpg"
+dest_files=["res://.godot/imported/engineer_gas_mask.jpg-86b3b5c7981cb8acc5aa08704f00a854.ctex"]
 
 [params]
 

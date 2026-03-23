@@ -7,15 +7,16 @@
 [sub_resource type="Resource" id="Resource_epane"]
 script = ExtResource("2_y0wnm")
 _crit_chance = Array[float]([10.0, 20.0, 30.0, 40.0, 50.0])
-_rarity = 0
-_rarity = 0
 metadata/_custom_type_script = "uid://ybpnkcveh61t"
 
 [resource]
 script = ExtResource("1_u5f6w")
 name = "Avengers Assemble"
 picture = ExtResource("1_wb46e")
-families = Array[int]([2, 4])
+families = Array[int]([2])
 player_upgrade = SubResource("Resource_epane")
+points = Dictionary[int, int]({
+2: 1
+})
 lvl = 5
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

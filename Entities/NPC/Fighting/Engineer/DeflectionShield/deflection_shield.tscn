@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://dpjl3inwwq6pt"]
+
+[ext_resource type="Script" uid="uid://fydmei0pi85g" path="res://Entities/NPC/Fighting/Engineer/DeflectionShield/deflection_shield.gd" id="1_l33vt"]
+[ext_resource type="PackedScene" uid="uid://k6w1gjtwhmq" path="res://Entities/NPC/Fighting/Engineer/DeflectionShield/deflection_shield_visual.tscn" id="2_f2upg"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_f2upg"]
+radius = 0.23548791
+
+[node name="DeflectionShield" type="CharacterBody3D" unique_id=534617877]
+script = ExtResource("1_l33vt")
+metadata/_custom_type_script = "uid://cjfj1jcbiom2x"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1765948325]
+shape = SubResource("SphereShape3D_f2upg")
+
+[node name="DeflectionShieldVisual" parent="." unique_id=1149126980 instance=ExtResource("2_f2upg")]

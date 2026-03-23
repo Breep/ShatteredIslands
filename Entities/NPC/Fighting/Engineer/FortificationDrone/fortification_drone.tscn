@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/Stats/EntityStats/entity_stats.gd" id="2_d2dv0"]
 [ext_resource type="PackedScene" uid="uid://b3f15ldbddrlp" path="res://Entities/NPC/Fighting/Engineer/FortificationDrone/Visual/fortification_drone_visual.tscn" id="2_l6jnf"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="4_07yhp"]
+[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://Entities/EntityInfoPanel/EntitySimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="5_7dpcc"]
 
 [sub_resource type="Resource" id="Resource_07yhp"]
 script = ExtResource("2_d2dv0")
@@ -13,6 +14,7 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [node name="FortificationDrone" type="CharacterBody3D" unique_id=1381427842 node_paths=PackedStringArray("_visual_3d")]
 script = ExtResource("1_gc2y3")
+entity_name = "Fortification Drone"
 custom_base_stats = SubResource("Resource_07yhp")
 _auto_loaded_modules = Array[int]([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 0])
 _visual_3d = NodePath("FortificationDroneVisual")
@@ -27,6 +29,14 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7997277, 0)
 
 [node name="AnimHoveringModule" parent="FortificationDroneVisual" unique_id=1140988969 node_paths=PackedStringArray("_owner") instance=ExtResource("4_07yhp")]
+unique_name_in_owner = true
 _owner = NodePath("..")
-_hover_power = 0.2
+_hover_power = 0.5
 _hover_period = 1.1
+
+[node name="Marker3D" type="Marker3D" parent="FortificationDroneVisual" unique_id=648389619]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65092325, 0)
+
+[node name="SumonSimpleInfoPanel2d" parent="." unique_id=1628734826 node_paths=PackedStringArray("_owner_entity", "_info_panel_spawn") instance=ExtResource("5_7dpcc")]
+_owner_entity = NodePath("..")
+_info_panel_spawn = NodePath("../FortificationDroneVisual/Marker3D")

@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://qow2w1sf2wvv"]
+[gd_scene format=3 uid="uid://qow2w1sf2wvv"]
 
 [ext_resource type="Script" uid="uid://cg0tfu3oa4i1m" path="res://Tool/QuickAnims/anim_hovering_module.gd" id="1_ojy34"]
 
-[node name="AnimHoveringModule" type="Node"]
+[node name="AnimHoveringModule" type="Node" unique_id=1525418773]
 script = ExtResource("1_ojy34")

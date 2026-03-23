@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dc124wncshpne" path="res://Entities/NPC/Fighting/Engineer/AegisBlade/aegis_blade_visual.tscn" id="2_wshi8"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="3_1nowg"]
 [ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://Tool/QuickAnims/anim_rotating_module.tscn" id="4_wkl4h"]
+[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://Entities/EntityInfoPanel/EntitySimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="6_j30e3"]
 
 [sub_resource type="Resource" id="Resource_7piut"]
 script = ExtResource("2_7piut")
@@ -39,3 +40,10 @@ _owner = NodePath("..")
 _rot_axis = 1
 _rot_period = 4.0
 _rot_max = 10.0
+
+[node name="Marker3D" type="Marker3D" parent="." unique_id=267396309]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.567051, 0)
+
+[node name="SumonSimpleInfoPanel2d" parent="." unique_id=1628734826 node_paths=PackedStringArray("_owner_entity", "_info_panel_spawn") instance=ExtResource("6_j30e3")]
+_owner_entity = NodePath("..")
+_info_panel_spawn = NodePath("../Marker3D")

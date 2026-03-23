@@ -38,7 +38,7 @@
 [ext_resource type="Script" uid="uid://nhqk1783r4d1" path="res://GlobalManagers/ActionMeter/Viewer/ui_entity_bds_registry.gd" id="25_f2umu"]
 [ext_resource type="Resource" uid="uid://b0vxjhrs71sxg" path="res://Card/Descriptions/Cards/Light/Common/OverflowingLight/serenity_overflowing_light.tres" id="25_o3kpj"]
 [ext_resource type="PackedScene" uid="uid://cs66hky7o30da" path="res://GlobalManagers/ActionMeter/Viewer/ui_entity_bds_registry.tscn" id="26_5jp0x"]
-[ext_resource type="Resource" uid="uid://cwywvggm7tovg" path="res://Card/Descriptions/Cards/Engineer/Common/ToxicFiltrationLayer/engineer_toxic_filtration_layer.tres" id="26_cj02a"]
+[ext_resource type="Resource" uid="uid://cwywvggm7tovg" path="res://Card/Descriptions/Cards/Engineer/Common/GasMask/engineer_gas_mask.tres" id="26_cj02a"]
 [ext_resource type="Resource" uid="uid://clgymh43ug76g" path="res://Card/Descriptions/Cards/Light/Epic/RejuvenativeFaith/serenity_rejuvenative_faith.tres" id="26_qqr46"]
 [ext_resource type="Resource" uid="uid://c5nv7uoog3n3n" path="res://Card/Descriptions/Cards/Light/Legendary/DivineIntervention/serenity_divine_intervention.tres" id="27_7xldn"]
 [ext_resource type="Resource" uid="uid://dn12dex5vaxb1" path="res://Card/Descriptions/Cards/Engineer/Common/AbsorptionMatrix/engineer_absorption_matrix.tres" id="27_cj02a"]

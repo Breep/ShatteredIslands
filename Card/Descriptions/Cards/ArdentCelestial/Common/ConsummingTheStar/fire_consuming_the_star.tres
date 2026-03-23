@@ -13,11 +13,10 @@ metadata/_custom_type_script = "uid://dtlixvuft3m7m"
 script = ExtResource("1_21jm8")
 name = "Consuming The Star"
 picture = ExtResource("1_4gsxf")
-families = Array[int]([3, 8])
+families = Array[int]([3])
 player_upgrade = SubResource("Resource_7sv01")
 points = Dictionary[int, int]({
-3: 1,
-8: 1
+3: 1
 })
 lvl = 5
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

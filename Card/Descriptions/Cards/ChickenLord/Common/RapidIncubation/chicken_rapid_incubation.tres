@@ -17,6 +17,6 @@ picture = SubResource("PlaceholderTexture2D_puywl")
 families = Array[int]([8])
 player_upgrade = SubResource("Resource_hdyv2")
 points = Dictionary[int, int]({
-9: 1
+8: 1
 })
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

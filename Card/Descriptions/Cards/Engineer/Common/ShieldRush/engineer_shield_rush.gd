@@ -12,7 +12,11 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 	ctx.battle_callbacks.register_battle_start(&"Shield Rush", func() -> void:
 		if ctx.hero != null and is_instance_valid(ctx.hero):
-			ctx.hero.inflict_condition_stacks(ctx.hero, amount, Stack.Type.SHIELD, &"Shield Rush")
+			var allies: Array[Entity] = ctx.hero.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES)
+			var shield_distribution: Array[float] = Utils.get_randf_distribution(amount, allies.size(), ctx.hero.battle_id)
+			for i in allies.size():
+				var shield_gain: float = shield_distribution[i]
+				ctx.hero.inflict_condition_stacks(allies[i], shield_gain, Stack.Type.SHIELD, &"Shield Rush")
 	)
 
 
