@@ -196,6 +196,12 @@ func remove_modifier(stat_type: EntityStats.StatType, id: String, action_type: U
 	dummy.action_type = action_type
 	unregister_modifier(dummy)
 
+
+func recompute_all() -> void:
+	for stat_type: EntityStats.StatType in _stats_modifiers_dictionaries.keys():
+		_stats_modifiers_dictionaries[stat_type].setup(stat_type, _entity_stats, _entity_base_stats)
+		_stats_modifiers_dictionaries[stat_type].recompute_stats()
+
 # ============================== Private functions ==============================
 
 func _auto_cleanup_all() -> void:

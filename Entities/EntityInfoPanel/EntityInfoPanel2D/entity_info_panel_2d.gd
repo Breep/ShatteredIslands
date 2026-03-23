@@ -58,6 +58,7 @@ const COLOR_TEAM_ENEMY = Color.DARK_RED
 
 @export_group("External Nodes")
 @export var _owner_entity: Entity
+@export var _info_panel_spawn: Marker3D
 #endregion
 
 @onready var _rank_visualizer: UIRankViewer = %RankViewer
@@ -137,6 +138,9 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	var camera = get_viewport().get_camera_3d()
+	if camera != null and _info_panel_spawn != null:
+		position = camera.unproject_position(_info_panel_spawn.global_position) + Vector2(-size.x/2, 0)
 	_update_stun_info()
 	_update_taunt_info()
 	_update_silence_info()

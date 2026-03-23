@@ -74,7 +74,6 @@ var family_xp: int:
 		var old_xp = _family_xp
 		_family_xp = value
 		_current_xp_progress_bar.value = _family_xp
-		print("Family debug XP : ", _current_xp_progress_bar.value, "/", _current_xp_progress_bar.max_value, " - ", _family_lvl)
 		if old_xp == 0 and _family_lvl == 0:
 			_update_frame()
 
@@ -83,7 +82,6 @@ var family_xp_max: int:
 	get: return _family_xp_max
 	set(value):
 		_family_xp_max = value
-		print("Family debug MAX : ", _current_xp_progress_bar.value, "/", _current_xp_progress_bar.max_value, " - ", _family_lvl)
 		_current_xp_progress_bar.max_value = _family_xp_max
 
 var _family_lvl: int = 0

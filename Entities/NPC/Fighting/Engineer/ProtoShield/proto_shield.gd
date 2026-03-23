@@ -20,4 +20,5 @@ func _ready() -> void:
 	take_status(Status.Type.TAUNT, -1, "Initial taunt", self)
 	_base_stats.health_max = _on_spawn_hp_max
 	_base_stats.reset_from_self()
+	stat_modifiers_registry.recompute_all()
 	super._ready()
