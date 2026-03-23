@@ -126,8 +126,15 @@ func _on_died() -> void:
 	super._on_died()
 	_unlink_from_current_ally()
 	_anim_hovering_module.stop_hover()
+	_play_fall_anim()
 
 
+func _play_fall_anim() -> void:
+	var tween := create_tween().set_parallel()
+	tween.tween_property(_visual_3d, "position:y", 0.0, 0.6) \
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	tween.tween_property(_visual_3d, "rotation:z", deg_to_rad(25.0), 0.6) \
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 
 
 

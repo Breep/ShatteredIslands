@@ -22,10 +22,10 @@ func _ready() -> void:
 	if _owner == null:
 		printerr("AnimHoverModule: Owner isn't set ! [", get_path(), "]")
 		return
-
+	
 	if _random_start:
 		await get_tree().create_timer(Utils.get_randf_range(0.0, 2.0)).timeout
-
+	
 	start_hover()
 
 
