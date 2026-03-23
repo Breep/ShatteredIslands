@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://wxqgvqx6sy8j"
+path="res://.godot/imported/family_cercle_center_mask_2.png-51d4e49524d182fde6ad5b821271b036.res"
+
+[deps]
+
+source_file="res://UI/InGame/HeroPortrait/FamilyPortrait/Data/family_cercle_center_mask_2.png"
+dest_files=["res://.godot/imported/family_cercle_center_mask_2.png-51d4e49524d182fde6ad5b821271b036.res"]
+
+[params]
+
+create_from=0
+threshold=0.5

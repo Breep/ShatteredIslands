@@ -4,6 +4,11 @@ extends HeroUpgrade
 @export var _max_hp_increase: Array[float]
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
+	
+	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
+		printerr("Proteins: Wrong card_lvl: ", card_lvl)
+		return
+	
 	var hp_increase: float = _max_hp_increase[card_lvl - 1]
 
 	var mod := StatModifier.new()
@@ -13,9 +18,6 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	mod.value = hp_increase
 	mod.tags = [StatModifier.TagType.CARD]
 	ctx.stat_modifiers.register_modifier(mod)
-
-	# Also increase current HP to match (same as original ColossusManager logic)
-	ctx.hero.stats.health += hp_increase
 
 
 func get_description(cardlvl: int) -> String:

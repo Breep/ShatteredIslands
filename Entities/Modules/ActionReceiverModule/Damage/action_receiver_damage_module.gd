@@ -10,8 +10,8 @@ func take_damage(damage: float, damage_type: Utils.ActionType, is_critical: bool
 		if _is_dodged(damage_type, source):
 			_owner.action_dodged.emit(source, damage_type)
 			return 0
-		if _is_blocked(): return 0
 		_handle_thorn(source, action_id)
+		if _is_blocked(): return 0
 		damage *= _get_resistance_vulnerability_multiplier(damage_type)
 		if is_critical:
 			damage *= _get_crit_resistance_multiplier(damage_type)

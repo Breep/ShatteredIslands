@@ -17,9 +17,9 @@ const RARITY_COLORS: Dictionary[Rarity, Color] = {
 
 const RARITY_MAX_LEVEL: Dictionary[Rarity, int] = {
 	Rarity.COMMON: 5,
-	Rarity.RARE: 3,
-	Rarity.EPIC: 2,
-	Rarity.LEGENDARY: 1,
+	Rarity.RARE: 5,
+	Rarity.EPIC: 3,
+	Rarity.LEGENDARY: 3,
 }
 
 const RARITY_CARD_VALUE: Dictionary[Rarity, int] = {
@@ -36,7 +36,7 @@ const RARITY_CARD_VALUE: Dictionary[Rarity, int] = {
 @export var player_upgrade: HeroUpgrade
 @export var points: Dictionary[Family.Type, int]
 
-var _lvl: int = 1# Current health
+var _lvl: int = 1 # Current lvl
 @export_range(1, 5) var lvl: int:
 	get: return _lvl
 	set(value):

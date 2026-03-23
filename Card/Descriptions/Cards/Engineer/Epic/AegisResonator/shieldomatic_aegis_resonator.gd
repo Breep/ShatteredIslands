@@ -17,7 +17,6 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		
 		var allies: Array[Entity] = ctx.hero.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES)
 		var shield_distribution: Array[float] = Utils.get_randf_distribution(shield, allies.size(), ctx.hero.battle_id)
-		print("WOLOLO   ", shield_distribution)
 		for i in allies.size():
 			var shield_gain: float = shield_distribution[i]
 			ctx.hero.inflict_condition_stacks(allies[i], shield_gain, Stack.Type.SHIELD, &"Force Field")

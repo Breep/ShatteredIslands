@@ -156,6 +156,7 @@ func _init(base_stats: EntityStats, current_stats: EntityStats) -> void:
 	_stats_modifiers_dictionaries[EntityStats.StatType.DEFENCE] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.BLOCK] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.THORN] = StatModifierDictionary.new()
+	_stats_modifiers_dictionaries[EntityStats.StatType.SCALE] = StatModifierDictionary.new()
 	
 	# Multiple stats
 	_stats_modifiers_dictionaries[EntityStats.StatType.CRIT_CHANCE] = StatModifierDictionary.new()
@@ -195,6 +196,12 @@ func remove_modifier(stat_type: EntityStats.StatType, id: String, action_type: U
 	dummy.id = id
 	dummy.action_type = action_type
 	unregister_modifier(dummy)
+
+
+func recompute_all() -> void:
+	for stat_type: EntityStats.StatType in _stats_modifiers_dictionaries.keys():
+		_stats_modifiers_dictionaries[stat_type].setup(stat_type, _entity_stats, _entity_base_stats)
+		_stats_modifiers_dictionaries[stat_type].recompute_stats()
 
 # ============================== Private functions ==============================
 

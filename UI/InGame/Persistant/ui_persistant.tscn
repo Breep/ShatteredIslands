@@ -1,76 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://cjefxxuvp7cp5"]
+[gd_scene format=3 uid="uid://cjefxxuvp7cp5"]
 
 [ext_resource type="PackedScene" uid="uid://c25ls8pp84qld" path="res://UI/InGame/BuyingArea/PlayerInfo/ui_player_info.tscn" id="1_lw8yd"]
 [ext_resource type="Script" uid="uid://t0ycuxntigox" path="res://UI/InGame/Persistant/ui_persistant.gd" id="1_oypi2"]
-[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="3_kt7rx"]
+[ext_resource type="PackedScene" uid="uid://d3wws1xrp3rsq" path="res://UI/InGame/Persistant/game_state_viewer.tscn" id="3_oypi2"]
 [ext_resource type="PackedScene" uid="uid://be38goiqxp28o" path="res://UI/InGame/BuyingArea/PlayerPortrait/ui_all_players_portrait.tscn" id="4_4ouwd"]
-[ext_resource type="Script" uid="uid://cr8alldednjyy" path="res://UI/InGame/Persistant/game_state_viewer.gd" id="4_16n6v"]
-[ext_resource type="Shader" uid="uid://bngl8v6o10lds" path="res://UI/Tool/Misc/2d_flexible_progress_bar.gdshader" id="4_sm0s7"]
-[ext_resource type="Script" uid="uid://chcmgrh1l6vyn" path="res://UI/Tool/Misc/flexible_progress_bar.gd" id="5_16n6v"]
+[ext_resource type="PackedScene" uid="uid://bvqsnkh0s11q2" path="res://UI/InGame/HeroPortrait/FamilyPortrait/ui_all_families_portrait.tscn" id="5_oypi2"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_httcy"]
-shader = ExtResource("4_sm0s7")
-shader_parameter/bar_mode = 0
-shader_parameter/fill_mode = 2
-shader_parameter/segment_count = 12
-shader_parameter/discrete_fill_amount = 12
-shader_parameter/fade_fill_amount = 1.0
-shader_parameter/pour_fill_amount = 1.0
-shader_parameter/animation_speed = 1.0
-shader_parameter/flash_type = 0
-shader_parameter/flash_segment = 0
-shader_parameter/flash_intensity = 0.0
-shader_parameter/single_segment_previous_fill = 1.0
-shader_parameter/single_segment_current_fill = 1.0
-shader_parameter/single_segment_flash_intensity = 0.8
-shader_parameter/flash_from_segment = 0
-shader_parameter/flash_to_segment = 0
-shader_parameter/single_segment_fade_from = 1.0
-shader_parameter/single_segment_fade_to = 1.0
-shader_parameter/single_segment_fade_progress = 0.0
-shader_parameter/drain_previous_fill = 1.0
-shader_parameter/drain_current_fill = 1.0
-shader_parameter/drain_time_progress = 0.0
-shader_parameter/background_color = Color(0.1, 0.1, 0.1, 1)
-shader_parameter/filled_color = Color(0.6542321, 0.6542321, 0.654232, 1)
-shader_parameter/border_color = Color(0, 0, 0, 1)
-shader_parameter/flash_color = Color(1, 1, 1, 1)
-shader_parameter/drain_flash_color = Color(1, 1, 1, 1)
-shader_parameter/custom_frame = false
-shader_parameter/frame_trim = 0.0
-shader_parameter/alpha_threshold = 0.69
-shader_parameter/scan_steps = 15
-shader_parameter/edge_smoothness = 0.02
-shader_parameter/mask_expansion = 0.0
-shader_parameter/frame_edge_opacity = 0.9
-shader_parameter/fluid_base_color = Color(0.2, 0.6, 1, 1)
-shader_parameter/fluid_highlight_color = Color(0.8, 0.9, 1, 1)
-shader_parameter/fluid_shadow_color = Color(0.1, 0.3, 0.6, 1)
-shader_parameter/fluid_flow_speed = 1.5
-shader_parameter/fluid_turbulence = 1.0
-shader_parameter/fluid_noise_scale = 6.0
-shader_parameter/gas_mode = false
-shader_parameter/gas_intensity = 0.8
-shader_parameter/effect_mode = 0
-shader_parameter/effect_strength = 0.3
-shader_parameter/effect_speed = 1.5
-shader_parameter/wave_thickness = 0.1
-shader_parameter/bubbles_aspect_ratio = 1.0
-shader_parameter/vertical_gradient = true
-shader_parameter/V_gradient_strength = 0.6
-shader_parameter/horizontal_gradient = false
-shader_parameter/H_gradient_strength = 0.75
-shader_parameter/segment_gap = 0.0
-shader_parameter/universal_border_size = 0.1
-shader_parameter/horizontal_border_size = 1.0
-shader_parameter/inner_border_thickness_multiplier = 0.0
-shader_parameter/outer_border_size = 1.0
-shader_parameter/slant_amount = 0.0
-shader_parameter/scale = 0.0
-shader_parameter/x_offset = 0.0
-shader_parameter/slant_clip_margin = 0.0
-
-[node name="Persistant" type="Control"]
+[node name="Persistant" type="Control" unique_id=1275150033]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -80,7 +16,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_oypi2")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=89069168]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -89,17 +25,17 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1999430113]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="TopPanel" type="Control" parent="MarginContainer/VBoxContainer"]
+[node name="TopPanel" type="Control" parent="MarginContainer/VBoxContainer" unique_id=1931174879]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.1
 mouse_filter = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/TopPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/TopPanel" unique_id=1992636588]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -112,16 +48,16 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TopPanel/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TopPanel/MarginContainer" unique_id=320567226]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="LeftPanel" type="Control" parent="MarginContainer/VBoxContainer/TopPanel/MarginContainer/HBoxContainer"]
+[node name="LeftPanel" type="Control" parent="MarginContainer/VBoxContainer/TopPanel/MarginContainer/HBoxContainer" unique_id=1186092724]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="UIPlayerInfo" parent="MarginContainer/VBoxContainer/TopPanel/MarginContainer/HBoxContainer/LeftPanel" instance=ExtResource("1_lw8yd")]
+[node name="UIPlayerInfo" parent="MarginContainer/VBoxContainer/TopPanel/MarginContainer/HBoxContainer/LeftPanel" unique_id=1134887515 instance=ExtResource("1_lw8yd")]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -130,84 +66,43 @@ anchor_bottom = 1.0
 offset_right = 0.0
 offset_bottom = 0.0
 
-[node name="MiddlePanel" type="Control" parent="MarginContainer/VBoxContainer/TopPanel/MarginContainer/HBoxContainer"]
+[node name="MiddlePanel" type="Control" parent="MarginContainer/VBoxContainer/TopPanel/MarginContainer/HBoxContainer" unique_id=1251604337]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/TopPanel/MarginContainer/HBoxContainer/MiddlePanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_right = 100
-
-[node name="GameStateViewer" type="Control" parent="MarginContainer/VBoxContainer/TopPanel/MarginContainer/HBoxContainer/MiddlePanel/MarginContainer" node_paths=PackedStringArray("_timer_progress_bar", "_game_state_label")]
+[node name="GameStateViewer" parent="MarginContainer/VBoxContainer/TopPanel/MarginContainer/HBoxContainer/MiddlePanel" unique_id=662489134 instance=ExtResource("3_oypi2")]
 unique_name_in_owner = true
-layout_mode = 2
-theme = ExtResource("3_kt7rx")
-script = ExtResource("4_16n6v")
-_timer_progress_bar = NodePath("VBoxContainer/TimerProgressBar")
-_game_state_label = NodePath("VBoxContainer/GameStateLabel")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TopPanel/MarginContainer/HBoxContainer/MiddlePanel/MarginContainer/GameStateViewer"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 5
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_left = -256.0
+offset_top = -55.0
+offset_right = 244.0
+offset_bottom = 195.0
+grow_vertical = 1
+pivot_offset_ratio = Vector2(0.5, 0.5)
 
-[node name="TimerProgressBar" type="ColorRect" parent="MarginContainer/VBoxContainer/TopPanel/MarginContainer/HBoxContainer/MiddlePanel/MarginContainer/GameStateViewer/VBoxContainer"]
-material = SubResource("ShaderMaterial_httcy")
-layout_mode = 2
-size_flags_vertical = 3
-script = ExtResource("5_16n6v")
-
-[node name="GameStateLabel" type="Label" parent="MarginContainer/VBoxContainer/TopPanel/MarginContainer/HBoxContainer/MiddlePanel/MarginContainer/GameStateViewer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 6
-text = "UNDEF"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="RightPanel" type="Control" parent="MarginContainer/VBoxContainer/TopPanel/MarginContainer/HBoxContainer"]
+[node name="RightPanel" type="Control" parent="MarginContainer/VBoxContainer/TopPanel/MarginContainer/HBoxContainer" unique_id=2123541872]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="RoundLabel" type="Label" parent="MarginContainer/VBoxContainer/TopPanel/MarginContainer/HBoxContainer/RightPanel"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("3_kt7rx")
-theme_override_constants/outline_size = 25
-theme_override_font_sizes/font_size = 60
-text = "ROUND 0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=251777138]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_right = 20
 
-[node name="MiddlePanel" type="Control" parent="MarginContainer/VBoxContainer/MarginContainer"]
+[node name="MiddlePanel" type="Control" parent="MarginContainer/VBoxContainer/MarginContainer" unique_id=1145698981]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.8
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer/MiddlePanel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer/MiddlePanel" unique_id=1586064297]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -216,43 +111,43 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="LeftPanel" type="Control" parent="MarginContainer/VBoxContainer/MarginContainer/MiddlePanel/HBoxContainer"]
+[node name="LeftPanel" type="Control" parent="MarginContainer/VBoxContainer/MarginContainer/MiddlePanel/HBoxContainer" unique_id=2074974059]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.1
 mouse_filter = 2
 
-[node name="MiddlePanel" type="Control" parent="MarginContainer/VBoxContainer/MarginContainer/MiddlePanel/HBoxContainer"]
+[node name="MiddlePanel" type="Control" parent="MarginContainer/VBoxContainer/MarginContainer/MiddlePanel/HBoxContainer" unique_id=1852072594]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.8
 mouse_filter = 2
 
-[node name="RightPanel" type="Control" parent="MarginContainer/VBoxContainer/MarginContainer/MiddlePanel/HBoxContainer"]
+[node name="RightPanel" type="Control" parent="MarginContainer/VBoxContainer/MarginContainer/MiddlePanel/HBoxContainer" unique_id=1842330811]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.1
 mouse_filter = 2
 
-[node name="AllPlayersPortrait" parent="MarginContainer/VBoxContainer/MarginContainer/MiddlePanel/HBoxContainer/RightPanel" instance=ExtResource("4_4ouwd")]
+[node name="AllPlayersPortrait" parent="MarginContainer/VBoxContainer/MarginContainer/MiddlePanel/HBoxContainer/RightPanel" unique_id=125105004 instance=ExtResource("4_4ouwd")]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 0)
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
-anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -266.0
-offset_right = 0.0
+offset_left = -88.0
+offset_right = -88.0
 grow_horizontal = 0
+mouse_filter = 2
 
-[node name="BottomPanel" type="Control" parent="MarginContainer/VBoxContainer"]
+[node name="BottomPanel" type="Control" parent="MarginContainer/VBoxContainer" unique_id=129028152]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.1
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/BottomPanel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/BottomPanel" unique_id=292402936]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -261,18 +156,18 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="BottomLeftEmpty" type="Control" parent="MarginContainer/VBoxContainer/BottomPanel/HBoxContainer"]
+[node name="BottomLeftEmpty" type="Control" parent="MarginContainer/VBoxContainer/BottomPanel/HBoxContainer" unique_id=1622362772]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 mouse_filter = 2
 
-[node name="BottomMiddle" type="Control" parent="MarginContainer/VBoxContainer/BottomPanel/HBoxContainer"]
+[node name="BottomMiddle" type="Control" parent="MarginContainer/VBoxContainer/BottomPanel/HBoxContainer" unique_id=1605148573]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/BottomPanel/HBoxContainer/BottomMiddle"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/BottomPanel/HBoxContainer/BottomMiddle" unique_id=365449364]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -282,8 +177,22 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/separation = 10
 
-[node name="BottomRightEmpty" type="Control" parent="MarginContainer/VBoxContainer/BottomPanel/HBoxContainer"]
+[node name="BottomRightEmpty" type="Control" parent="MarginContainer/VBoxContainer/BottomPanel/HBoxContainer" unique_id=502223419]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 mouse_filter = 2
+
+[node name="UIAllFamiliesPortrait" parent="." unique_id=758463995 instance=ExtResource("5_oypi2")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 9
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 249.0
+offset_bottom = 0.0
+grow_horizontal = 1

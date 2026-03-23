@@ -17,7 +17,6 @@ var _mirrored: bool
 
 # ============================== Local nodes ==============================
 
-@onready var _ui_all_families_portrait: UIAllFamiliesPortrait = %UIAllFamiliesPortrait
 @onready var _ui_in_game_player_viewer: UIInGamePlayerViewer = %InGamePlayerViewer
 @onready var _minimize_button: TextureButton = %MinimizeButton
 @onready var _hex_portrait_button: HexButton = %HexPortraitButton
@@ -44,8 +43,6 @@ func _ready() -> void:
 	_mirror_ui()
 	if not Engine.is_editor_hint():
 		_minimize_button.hide()
-		_ui_all_families_portrait.init_portait_families(GameManager.active_families)
-		_ui_all_families_portrait.family_selected.connect(_on_ui_all_families_portrait_family_selected)
 
 # ============================== Public functions ==============================
 
@@ -53,7 +50,6 @@ func update_content(player: Player) -> void:
 	var hero_desc: HeroDesc = player.hero_desc
 	_hex_portrait_button.set_texture(hero_desc.portrait)
 	_ui_in_game_player_viewer.update_content(player)
-	_ui_all_families_portrait.update_content(player)
 	_player = player
 	_add_local_player_special_behaviour()
 
@@ -69,7 +65,6 @@ func _mirror_ui() -> void:
 		_ui_in_game_player_viewer.mirrored = false
 
 func _activate() -> void:
-	_ui_all_families_portrait.show_families()
 	_ui_in_game_player_viewer.show_panel()
 	_ui_in_game_player_viewer.update_content(_player)
 	_show_minimize_button()
@@ -78,8 +73,6 @@ func _activate() -> void:
 
 
 func _deactivate() -> void:
-	_ui_all_families_portrait.hide_families()
-	_ui_all_families_portrait.reset_buttons_state()
 	_ui_in_game_player_viewer.hide_panel()
 	_hide_minimize_button()
 	_is_active = false
@@ -89,7 +82,6 @@ func _deactivate() -> void:
 func _minimize_profile() -> void:
 	_ui_in_game_player_viewer.hide_panel()
 	_ui_in_game_player_viewer.update_content(_player)
-	_ui_all_families_portrait.reset_buttons_state()
 	_panel_minimized = true
 
 

@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://yu8vfa6x3r0g"]
+
+[ext_resource type="Script" uid="uid://dt8pvso07y6fi" path="res://Card/Descriptions/Cards/Colossus/Epic/SeismicSlam/colossus_seismic_slam.gd" id="1_f4tqf"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_y2ilx"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_4j630"]
+
+[sub_resource type="Resource" id="Resource_aj4k2"]
+script = ExtResource("1_f4tqf")
+_increase_sizes = Array[float]([5.0, 5.0, 5.0])
+_periods = Array[float]([10.0, 10.0, 10.0])
+_stun_durations = Array[float]([0.7, 1.0, 1.5])
+metadata/_custom_type_script = "uid://dt8pvso07y6fi"
+
+[resource]
+script = ExtResource("1_y2ilx")
+picture = SubResource("PlaceholderTexture2D_4j630")
+families = Array[int]([6])
+rarity = 2
+player_upgrade = SubResource("Resource_aj4k2")
+lvl = 3
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

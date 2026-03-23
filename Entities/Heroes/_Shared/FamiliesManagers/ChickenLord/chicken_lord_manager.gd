@@ -69,6 +69,8 @@ var _twins_chance: float # relative to Chicken Twins card
 
 var _dead_chicken_count: int
 var _alive_chicken_count: int
+
+var _trex_gauge: float
 #endregion
 
 #region ============================== Node base function ==============================
@@ -80,6 +82,7 @@ func _ready() -> void:
 func start() -> void:
 	_families_level = _owner.get_families_level()
 	_init_gifted_types()
+	_trex_gauge = _owner.data_memory.get_data(FAMILY_NAME, ANCESTRAL_GAUGE_NAME, 0)
 	
 	_gifted_chance = GIFTED_CHANCES[level] + _chicken_lord_stats.gifted_chance_increase
 	if level >= 1 :
@@ -118,12 +121,13 @@ func _start_passive() -> void:
 	var chicken_number: int = P_PERIODIC_SPAWN_CHICKEN_NUMBERS[level]
 	_owner.periodic_timer_registry.register(&"Chicken passive", spawn_period, _spawn_n_chickens.bind(chicken_number), true)
 	
-	var spawn_loc := SpawnLocationConfig.create_arena_center()
-	_owner.summon_entity(Entity.EntityType.TREX, spawn_loc, {
-		TRex.Modifier.GIFTED_SPAWN_PERIOD: 5,
-		TRex.Modifier.GIFTED_SPAWN_NUMBER: 4,
-		TRex.Modifier.HP_BONUS: 1000
-	})
+	if _trex_gauge >= ANCESTRAL_GAUCHE_THRESHOLD:
+		var spawn_loc := SpawnLocationConfig.create_arena_center()
+		_owner.summon_entity(Entity.EntityType.TREX, spawn_loc, {
+			TRex.Modifier.GIFTED_SPAWN_PERIOD: 5,
+			TRex.Modifier.GIFTED_SPAWN_NUMBER: 4,
+			TRex.Modifier.HP_BONUS: 1000
+		})
 #endregion
 
 
