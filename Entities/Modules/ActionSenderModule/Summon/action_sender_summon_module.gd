@@ -155,9 +155,10 @@ func _summon_aegis_blade(spawn_position: Vector3, entity_modifier: Dictionary) -
 	var aegis_blade: AegisBlade = AEGIS_BLADE_SCENE.instantiate()
 	var attack_damage: float = entity_modifier.get(AegisBlade.Modifier.AD, 0)
 	var attack_speed: float = entity_modifier.get(AegisBlade.Modifier.AS, 1)
-	var shield_as_ad_ratio: float = entity_modifier.get(AegisBlade.Modifier.SHIELD_AS_AD, 0)
+	var shield_ad_max: float = entity_modifier.get(AegisBlade.Modifier.SHIELD_AD_MAX, 0)
+	var shield_ad_tau: float = entity_modifier.get(AegisBlade.Modifier.SHIELD_AD_TAU, 1)
 	var damage_as_shield_ratio: float = entity_modifier.get(AegisBlade.Modifier.DAMAGE_AS_SHIELD, 0)
-	aegis_blade.init(attack_damage, attack_speed, shield_as_ad_ratio, damage_as_shield_ratio)
+	aegis_blade.init(attack_damage, attack_speed, shield_ad_max, shield_ad_tau, damage_as_shield_ratio)
 	_spawn_manager.spawn_entity(aegis_blade, spawn_position, _owner.get_context())
 
 

@@ -4,7 +4,8 @@ extends Summon
 enum Modifier {
 	AD,
 	AS,
-	SHIELD_AS_AD,
+	SHIELD_AD_MAX,
+	SHIELD_AD_TAU,
 	DAMAGE_AS_SHIELD
 }
 
@@ -12,13 +13,15 @@ const ON_SPAWN_SHIELD: int = 2000
 
 var _spawn_attack_damage: float
 var _spawn_attack_speed: float
-var _shield_as_ad_ratio: float # % of hero shield converted as sword AD
+var _shield_ad_max: float  # Valeur max d'AD apportée par le shield du héro (asymptote)
+var _shield_ad_tau: float  # Montée : shield nécessaire pour atteindre ~63% du max
 var _damage_as_shield_ratio: float # % of sword AD converted as hero shield
 
-func init(attack_damage: float, attack_speed: float, shield_as_ad_ratio: float, damage_as_shield_ratio: float) -> AegisBlade:
+func init(attack_damage: float, attack_speed: float, shield_ad_max: float, shield_ad_tau: float, damage_as_shield_ratio: float) -> AegisBlade:
 	_spawn_attack_damage = attack_damage
 	_spawn_attack_speed = attack_speed
-	_shield_as_ad_ratio = shield_as_ad_ratio
+	_shield_ad_max = shield_ad_max
+	_shield_ad_tau = shield_ad_tau
 	_damage_as_shield_ratio = damage_as_shield_ratio
 	return self
 
@@ -47,7 +50,7 @@ func _ready() -> void:
 
 func _on_summoner_conditions_shield_stacks_changed(shield_stack: float) -> void:
 	var mod := StatModifier.new()
-	mod.value = shield_stack * _shield_as_ad_ratio
+	mod.value = _shield_ad_max * (1.0 - exp(-shield_stack / _shield_ad_tau)) if _shield_ad_tau > 0.0 else _shield_ad_max
 	mod.calc_type = StatModifier.CalcType.ADD
 	mod.id = "Shield Transfert"
 	mod.stat_type = EntityStats.StatType.AD

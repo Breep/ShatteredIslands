@@ -3,7 +3,8 @@ extends HeroUpgrade
 
 @export var _attack_ads: Array[float]
 @export var _attack_speeds: Array[float]
-@export var _shield_as_ad_ratios: Array[float]
+@export var _shield_ad_maxs: Array[float]   # Asymptote : AD max apportée par le shield (a)
+@export var _shield_ad_taus: Array[float]   # Montée : shield pour atteindre ~63% du max (Tau)
 @export var _damage_as_shield_ratios: Array[float]
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
@@ -13,7 +14,8 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	
 	var attack_damage: float = _attack_ads[card_lvl - 1]
 	var attack_speed: float = _attack_speeds[card_lvl - 1]
-	var shield_as_ad_ratio: float = _shield_as_ad_ratios[card_lvl - 1]
+	var shield_ad_max: float = _shield_ad_maxs[card_lvl - 1]
+	var shield_ad_tau: float = _shield_ad_taus[card_lvl - 1]
 	var damage_as_shield_ratio: float = _damage_as_shield_ratios[card_lvl - 1]
 	
 	ctx.battle_callbacks.register_battle_start("Aegis Blade", func() -> void:
@@ -21,7 +23,8 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		ctx.hero.summon_entity(Entity.EntityType.AEGIS_BLADE, spawn_loc, {
 			AegisBlade.Modifier.AD: attack_damage,
 			AegisBlade.Modifier.AS: attack_speed,
-			AegisBlade.Modifier.SHIELD_AS_AD: shield_as_ad_ratio,
+			AegisBlade.Modifier.SHIELD_AD_MAX: shield_ad_max,
+			AegisBlade.Modifier.SHIELD_AD_TAU: shield_ad_tau,
 			AegisBlade.Modifier.DAMAGE_AS_SHIELD: damage_as_shield_ratio
 		})
 	)
