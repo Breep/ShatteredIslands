@@ -103,9 +103,9 @@ func start() -> void:
 
 func stop() -> void:
 	Verbose.debug("TargetModule: Stopping", Verbose.Category.TARGET_MODULE)
+	_clear()
 	if _spawn_manager.entity_spawned.is_connected(_on_spawn_manager_entity_spawned):
 		_spawn_manager.entity_spawned.disconnect(_on_spawn_manager_entity_spawned)
-	_spawn_manager.entity_spawned.connect(_on_spawn_manager_entity_spawned)
 
 
 # Get target of the owned entity from a given strategy

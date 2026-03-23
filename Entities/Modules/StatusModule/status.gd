@@ -15,3 +15,12 @@ enum Type {
 
 static func is_negative_status(type: Type) -> bool:
 	return type in [Type.STUN, Type.TAUNT, Type.SILENCE]
+
+static func to_action(status_type: Type) -> Utils.ActionType:
+	match status_type:
+		Type.STUN: return Utils.ActionType.STATUS_STUN
+		Type.TAUNT: return Utils.ActionType.STATUS_TAUNT
+		Type.SILENCE: return Utils.ActionType.STATUS_SILENCE
+		Type.INVULNERABLE: return Utils.ActionType.STATUS_INVULNERABLE
+		Type.UNTARGETABLE: return Utils.ActionType.STATUS_UNTARGETABLE
+		_: return Utils.ActionType.STACK_POISON

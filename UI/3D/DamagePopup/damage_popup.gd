@@ -8,7 +8,7 @@ extends Node3D
 # ============================== Public functions ============================== 
 
 func set_value(value: float) -> void:
-	label3d.text = str(value as int)
+	label3d.text = str(value).pad_decimals(0)
 
 func modulate(color: Color) -> void:
 	label3d.modulate = color

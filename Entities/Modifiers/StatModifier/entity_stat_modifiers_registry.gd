@@ -156,6 +156,7 @@ func _init(base_stats: EntityStats, current_stats: EntityStats) -> void:
 	_stats_modifiers_dictionaries[EntityStats.StatType.DEFENCE] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.BLOCK] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.THORN] = StatModifierDictionary.new()
+	_stats_modifiers_dictionaries[EntityStats.StatType.SCALE] = StatModifierDictionary.new()
 	
 	# Multiple stats
 	_stats_modifiers_dictionaries[EntityStats.StatType.CRIT_CHANCE] = StatModifierDictionary.new()

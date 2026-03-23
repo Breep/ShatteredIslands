@@ -12,3 +12,9 @@ enum Type {
 	GIFTED_ENGINEER,
 	GIFTED_NECROSIS
 }
+
+func set_basic_stats(chicken_family_level: int) -> void:
+	if chicken_family_level < 0 or chicken_family_level > 4:
+		Verbose.error("Entity [" + entity_name + "] initialized at invalid family level.", Verbose.Category.ENTITY)
+		return 
+	stats.attack_damage 

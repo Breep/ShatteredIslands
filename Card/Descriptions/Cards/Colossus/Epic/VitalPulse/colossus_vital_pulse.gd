@@ -31,4 +31,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Vital Pulse: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Every " + str(_period[cardlvl - 1]) + " sec, deal " + str(_damage_percent[cardlvl - 1]) + "% current HP as physical damage to all enemies."
+	return "Every " + str(_period[cardlvl - 1]) + " sec, deal " + str(_damage_percent[cardlvl - 1]) + "% of HP max as physical damage to all enemies."
