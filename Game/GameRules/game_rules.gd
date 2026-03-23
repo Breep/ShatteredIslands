@@ -131,6 +131,21 @@ func get_family_level(point: int) -> int:
 	else: return 4
 
 
+func family_point_to_xp(point: int) -> int:
+	if point < family_level_points[1]: return point
+	elif point >= family_level_points[1] and point < family_level_points[2]: return point - family_level_points[1]
+	elif point >= family_level_points[2] and point < family_level_points[3]: return point - family_level_points[2]
+	elif point >= family_level_points[3] and point < family_level_points[4]: return point - family_level_points[3]
+	else: return 0
+
+
+func family_point_to_xp_max(point: int) -> int:
+	if point < family_level_points[1]: return family_level_points[1]
+	elif point >= family_level_points[1] and point < family_level_points[2]: return family_level_points[2] - family_level_points[1]
+	elif point >= family_level_points[2] and point < family_level_points[3]: return family_level_points[3] - family_level_points[2]
+	elif point >= family_level_points[3] and point < family_level_points[4]: return family_level_points[4] - family_level_points[3]
+	else: return 0
+
 func get_locked_rarities(family_level: int) -> Array[Card.Rarity]:
 	if family_level < 0 or family_level > card_rarities_locked_by_level.size():
 		return []

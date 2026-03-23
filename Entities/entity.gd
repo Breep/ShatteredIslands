@@ -50,7 +50,8 @@ enum EntityType {
 	CHICKEN,
 	PROTO_SHIELD,
 	FORTIFICATION_DRONE,
-	AEGIS_BLADE
+	AEGIS_BLADE,
+	TREX
 }
 
 enum SnakeBarrelModifier {
