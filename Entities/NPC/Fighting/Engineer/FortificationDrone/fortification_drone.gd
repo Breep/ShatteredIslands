@@ -32,7 +32,7 @@ var _shield_count: int # Number of shield done on the linked_ally
 func _ready() -> void:
 	take_condition_stacks(_on_spawn_shield_amount, Stack.Type.SHIELD, false, "Initial shield")
 	_base_stats.health_max = _on_spawn_hp_max
-	_base_stats.reset_from_self()
+	stat_modifiers_registry.recompute_all()
 	periodic_timer_registry.register("Periodic Shield", 1.0, _periodic_beam_callback)
 	spawn_completed.connect(_on_spawn_completed)
 	super._ready()
@@ -77,6 +77,7 @@ func _unlink_from_current_ally() -> void:
 	if not is_instance_valid(_linked_ally): return
 	if _linked_ally.died.is_connected(_on_linked_ally_died):
 		_linked_ally.died.disconnect(_on_linked_ally_died)
+	_linked_ally = null
 
 
 func _link_to_an_ally(ally: Entity) -> void:
@@ -119,7 +120,9 @@ func _on_linked_ally_died(entity: Entity) -> void:
 	_change_linked_ally()
 
 
-
+func _on_died() -> void:
+	super._on_died()
+	_unlink_from_current_ally()
 
 
 
