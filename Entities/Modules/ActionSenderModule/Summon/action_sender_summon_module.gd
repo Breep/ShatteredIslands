@@ -89,6 +89,7 @@ func _summon_field_generator(spawn_position: Vector3, entity_modifier: Dictionar
 
 func _summon_chicken(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
 	var chicken: Chicken
+	#chicken.set_basic_stats(_owner.)
 	var chicken_type: Chicken.Type = entity_modifier.get("Type", Chicken.Type.BASIC)
 	match chicken_type:
 		Chicken.Type.BASIC: chicken = CHICKEN_BASIC_SCENE.instantiate()

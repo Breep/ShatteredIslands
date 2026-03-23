@@ -25,6 +25,7 @@ signal stack_taken(stack_type: Stack.Type, stack_number: float, is_critical: boo
 @warning_ignore("unused_signal")
 signal auto_attack_completed()
 signal spawn_completed()
+signal resurrected()
 #endregion
 
 #region ============================== Enums ==============================
@@ -98,6 +99,7 @@ var spawn_manager: SpawnManager:
 
 var periodic_timer_registry: PeriodicTimerRegistry
 var battle_callback_registry: BattleCallbackRegistry
+var death_modifiers_registry: DeathModifiersRegistry
 #endregion
 
 #region ============================== Private variables ==============================
@@ -228,6 +230,7 @@ func _init() -> void:
 	# Default Modifier Registries
 	auto_attack_modifier_registry = AutoAttackModifierRegistry.new()
 	action_modifiers_registry = ActionModifiersRegistry.new()
+	death_modifiers_registry = DeathModifiersRegistry.new()
 	Verbose.trace("Entity [" + entity_name + "_" + str(uid) + "] init", Verbose.Category.ENTITY)
 
 
@@ -468,6 +471,21 @@ func has_status(status_type: Status.Type) -> bool:
 	return status_module.has_status(status_type) if status_module != null else false
 #endregion
 
+#region ============================== Context ==============================
+func resurrect(hp_percent: float) -> void:
+	if life_state != LifeState.DEAD:
+		Verbose.error("Entity [" + entity_name + "] try to resurrect while not dead.", Verbose.Category.ENTITY)
+		return
+	
+	stats.health = stats.health_max * (hp_percent / 100)
+	life_state = LifeState.ALIVE
+	if target_module != null: target_module.start()
+	if conditions != null: conditions.start()
+	if _movement_module != null: _movement_module.start()
+	if _auto_attack_periodic_module != null and auto_attack_enabled: _auto_attack_periodic_module.start()
+	if _entity_info_panel_3d != null: _entity_info_panel_3d.show()
+	resurrected.emit()
+#endregion
 
 # ============================== Private functions ==============================
 
@@ -595,6 +613,7 @@ func _on_stats_scale_changed(new_scale: float) -> void:
 
 func _on_died() -> void:
 	Verbose.debug("Entity [" + entity_name + "] died", Verbose.Category.ENTITY)
+	
 	life_state = LifeState.DEAD # Set life state
 	
 	# Visual and module cleanup
@@ -603,6 +622,10 @@ func _on_died() -> void:
 	if _movement_module != null: _movement_module.stop()
 	if _auto_attack_periodic_module != null and auto_attack_enabled: _auto_attack_periodic_module.stop()
 	if _entity_info_panel_3d != null: _entity_info_panel_3d.hide()
+	
+	for action_modifier in death_modifiers_registry.consume_all_modifiers():
+		if action_modifier.after_action_logic_callback.is_valid():
+			action_modifier.after_action_logic_callback.call({})
 
 
 func _on_gfm_fighting_phase_state_changed(fighting_phase_state: GlobalFightingManager.FightingPhaseState) -> void:
