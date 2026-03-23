@@ -25,6 +25,8 @@ var _respawn_timer: float
 var _linked_ally: Entity
 var _beam: FortificationDroneBeam
 var _shield_count: int # Number of shield done on the linked_ally
+
+@onready var _anim_hovering_module: AnimHoveringModule = %AnimHoveringModule
 #endregion
 
 
@@ -123,6 +125,7 @@ func _on_linked_ally_died(entity: Entity) -> void:
 func _on_died() -> void:
 	super._on_died()
 	_unlink_from_current_ally()
+	_anim_hovering_module.stop_hover()
 
 
 
