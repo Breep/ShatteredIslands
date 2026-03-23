@@ -2,6 +2,7 @@ class_name AegisBlade
 extends Summon
 
 enum Modifier {
+	AD,
 	AS,
 	SHIELD_AS_AD,
 	DAMAGE_AS_SHIELD
@@ -9,11 +10,13 @@ enum Modifier {
 
 const ON_SPAWN_SHIELD: int = 2000
 
+var _spawn_attack_damage: float
 var _spawn_attack_speed: float
 var _shield_as_ad_ratio: float # % of hero shield converted as sword AD
 var _damage_as_shield_ratio: float # % of sword AD converted as hero shield
 
-func init(attack_speed: float, shield_as_ad_ratio: float, damage_as_shield_ratio: float) -> AegisBlade:
+func init(attack_damage: float, attack_speed: float, shield_as_ad_ratio: float, damage_as_shield_ratio: float) -> AegisBlade:
+	_spawn_attack_damage = attack_damage
 	_spawn_attack_speed = attack_speed
 	_shield_as_ad_ratio = shield_as_ad_ratio
 	_damage_as_shield_ratio = damage_as_shield_ratio
@@ -34,6 +37,10 @@ func _ready() -> void:
 		var damage_done: float = cb_vars.get(AutoAttackModifier.VarType.DAMAGE, 0)
 		inflict_condition_stacks(summoner, damage_done * _damage_as_shield_ratio, Stack.Type.SHIELD, "Aegis Blade")
 	auto_attack_modifier_registry.register_modifier(aa_mod)
+	
+	_base_stats.attack_damage = _spawn_attack_damage
+	_base_stats.attack_speed = _spawn_attack_speed
+	stat_modifiers_registry.recompute_all()
 	
 	super._ready()
 
