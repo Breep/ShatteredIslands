@@ -89,6 +89,12 @@ unique_name_in_owner = true
 transform = Transform3D(0.9946579, 0, 0.10322651, 0, 1, 0, -0.10322651, 0, 0.9946579, 0.07346773, -4.7683716e-07, 7.8182755)
 _custom_deck = SubResource("Resource_x0odd")
 _override_family_levels = Dictionary[int, int]({
+1: 0,
+3: 0,
+4: 0,
+5: 0,
+6: 4,
+7: 0,
 8: 4
 })
 team = 1

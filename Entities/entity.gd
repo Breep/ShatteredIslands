@@ -608,8 +608,10 @@ func _on_stats_health_changed(new_health: float) -> void:
 
 
 func _on_stats_scale_changed(new_scale: float) -> void:
-	_visual_3d.scale = Vector3(new_scale, new_scale, new_scale)
-	_entity_info_panel_3d.scale = Vector3(new_scale, new_scale, new_scale)
+	if is_instance_valid(_visual_3d):
+		_visual_3d.scale = Vector3(new_scale, new_scale, new_scale)
+	if is_instance_valid(_entity_info_panel_3d):
+		_entity_info_panel_3d.scale = Vector3(new_scale, new_scale, new_scale)
 
 
 func _on_died() -> void:
