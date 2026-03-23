@@ -13,6 +13,7 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [node name="FortificationDrone" type="CharacterBody3D" unique_id=1381427842 node_paths=PackedStringArray("_visual_3d")]
 script = ExtResource("1_gc2y3")
+entity_name = "Fortification Drone"
 custom_base_stats = SubResource("Resource_07yhp")
 _auto_loaded_modules = Array[int]([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 0])
 _visual_3d = NodePath("FortificationDroneVisual")
