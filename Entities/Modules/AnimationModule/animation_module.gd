@@ -64,6 +64,7 @@ func _ready() -> void:
 	_idle_variation_timer.start()
 	
 	_entity_owner.died.connect(_on_entity_owner_died)
+	_entity_owner.resurrected.connect(_on_entity_owner_resurrected)
 	_entity_owner.fighting_state_changed.connect(_on_entity_owner_fighting_state_changed)
 	_entity_owner.is_moving_changed.connect(_on_entity_owner_is_moving_changed)
 	
@@ -93,6 +94,9 @@ func _on_entity_owner_died() -> void:
 	_lock_animation = true # Lock animation when dead
 	_animation_tree.set(PARAM_TRANSITION_FIGHTING, VALUE_TRANSITION_FIGHTING_DIE)
 
+func _on_entity_owner_resurrected() -> void:
+	_lock_animation = false
+	_animation_tree.set(PARAM_TRANSITION_FIGHTING, VALUE_TRANSITION_FIGHTING_IDLE)
 
 func _on_entity_owner_auto_attack_started(lock_seconds: float) -> void:
 	Verbose.debug("Auto attack started (lock_seconds=" + str(lock_seconds).pad_decimals(2) + ")", Verbose.Category.ENTITY_ANIMATION)
