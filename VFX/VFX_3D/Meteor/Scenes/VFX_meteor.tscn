@@ -1,0 +1,229 @@
+[gd_scene format=3 uid="uid://b01bnm24rhgky"]
+
+[ext_resource type="PackedScene" uid="uid://crd40ycge6qp1" path="res://VFX/VFX_3D/Meteor/Scenes/VFX_Fire_ball_standar.tscn" id="1_va17v"]
+[ext_resource type="Shader" uid="uid://ce35481cnedm8" path="res://VFX/VFX_3D/Meteor/meteor_decal.gdshader" id="2_pnqfl"]
+[ext_resource type="Texture2D" uid="uid://d0teeb365dvp" path="res://VFX/VFX_3D/Meteor/Objects/T_impact.png" id="3_fi8r6"]
+[ext_resource type="PackedScene" uid="uid://ovdmp2n8yynd" path="res://VFX/VFX_3D/Meteor/Scenes/vfx_crash.tscn" id="4_pnqfl"]
+[ext_resource type="PackedScene" uid="uid://tdbxidy0fi2u" path="res://VFX/VFX_3D/Meteor/Scenes/VFX_Cube_projectile.tscn" id="5_fi8r6"]
+[ext_resource type="PackedScene" uid="uid://b3oxeny65clqf" path="res://VFX/VFX_3D/Meteor/Scenes/VFX_Fire_ball_type_B.tscn" id="6_bi4rh"]
+
+[sub_resource type="Animation" id="Animation_ohe0j"]
+resource_name = "A_falling"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.03333333, 0.26666686, 0.4, 1.2666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 21.364796, 0), Vector3(0, 13.1468315, 0), Vector3(0, 0.6886482, 0), Vector3(0, -2.5397573, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../impactplane:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-0.033333335, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -7.6838183, 0), Vector3(0, -1.3225899, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../impactplane:mesh:material:shader_parameter/Albedo_Mix")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.42, 1.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.10000002384186, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../VFX_rinfs:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.37999997, 0.40999997, 0.8333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../VFX_SmokeB:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.16666667, 0.39666668, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_xunib"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.73705125, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../impactplane:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -3.0308838, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../impactplane:mesh:material:shader_parameter/Albedo_Mix")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../VFX_rinfs:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../VFX_SmokeB:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cuc0a"]
+_data = {
+&"A_falling": SubResource("Animation_ohe0j"),
+&"RESET": SubResource("Animation_xunib")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yfp5j"]
+albedo_color = Color(0.340339, 0.340339, 0.340339, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_yxpia"]
+size = Vector2(30, 30)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bi4rh"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.5528293, 0.24908975, 0.34492218, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o8pv2"]
+render_priority = 0
+shader = ExtResource("2_pnqfl")
+shader_parameter/Scale = Vector2(1, 1)
+shader_parameter/Albedo = ExtResource("3_fi8r6")
+shader_parameter/Albedo_Mix = 0.0
+shader_parameter/Emission_Energy = 1.0
+shader_parameter/Modulate = Color(1, 1, 1, 1)
+shader_parameter/Modulate_Emission = Color(1, 1, 1, 1)
+shader_parameter/cube_half_size = 0.5
+shader_parameter/enable_y_fade = false
+shader_parameter/fade_start = 0.3
+shader_parameter/fade_end = 0.7
+shader_parameter/fade_power = 2.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_58b82"]
+material = SubResource("ShaderMaterial_o8pv2")
+
+[node name="Node3D" type="Node3D" unique_id=398661071]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1406020208]
+root_node = NodePath("../VFX_FireBall")
+libraries/ = SubResource("AnimationLibrary_cuc0a")
+autoplay = &"A_falling"
+
+[node name="floor" type="MeshInstance3D" parent="AnimationPlayer" unique_id=434287666]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00527167, 0)
+material_override = SubResource("StandardMaterial3D_yfp5j")
+mesh = SubResource("PlaneMesh_yxpia")
+surface_material_override/0 = SubResource("StandardMaterial3D_bi4rh")
+
+[node name="VFX_FireBall" parent="." unique_id=1491287636 instance=ExtResource("1_va17v")]
+transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, 0.99999994, 0, -0.99999994, -4.3711385e-08, 0, 0.73705125, 0)
+
+[node name="impactplane" type="MeshInstance3D" parent="." unique_id=1735872939]
+transform = Transform3D(3.0635762, 0, 0, 0, 3.0635762, 0, 0, 0, 3.0635762, 0, -3.0308838, 0)
+mesh = SubResource("BoxMesh_58b82")
+
+[node name="VFX_rinfs" parent="." unique_id=1121096299 instance=ExtResource("4_pnqfl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2014804, 0)
+visible = false
+
+[node name="torus" parent="VFX_rinfs" index="1" unique_id=199777639]
+transform = Transform3D(0.98756856, -0.0069837226, -0.15703195, -0.041501556, -0.9751467, -0.21763706, -0.15160939, 0.22144887, -0.9633143, 0, 1.2502098, 0)
+
+[node name="VFX_Smoke" parent="." unique_id=1270145014 instance=ExtResource("5_fi8r6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8718092, 0)
+visible = false
+
+[node name="VFX_SmokeB" parent="." unique_id=1153165536 instance=ExtResource("6_bi4rh")]
+transform = Transform3D(0.863, 0, 0, 0, 0.17542756, 0.019940529, 0, -0.061815638, 0.05658953, 0, 0.07288027, 0)
+
+[editable path="VFX_rinfs"]
