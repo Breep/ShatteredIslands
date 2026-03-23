@@ -122,7 +122,13 @@ func _spawn_chicken(chicken_type: Chicken.Type, can_have_twin: bool = true) -> v
 	var spawn_location_config := SpawnLocationConfig.create_random_arena()
 	match chicken_type:
 		Chicken.Type.BASIC:
-			_owner.summon_entity(Entity.EntityType.CHICKEN, spawn_location_config,{})
+			_owner.summon_entity(Entity.EntityType.CHICKEN, spawn_location_config,{
+				Chicken.BaseStatsModifier.HP: _chicken_lord_stats.HP[level - 1],
+				Chicken.BaseStatsModifier.AD: _chicken_lord_stats.AD[level - 1],
+				Chicken.BaseStatsModifier.ARMOR: _chicken_lord_stats.ARMOR[level - 1],
+				Chicken.BaseStatsModifier.CRIT_CHANCE: _chicken_lord_stats.CRIT_CHANCE[level - 1],
+				Chicken.BaseStatsModifier.CRIT_MULTI: _chicken_lord_stats.CRIT_MULTI[level - 1]
+			})
 		Chicken.Type.GIFTED_ATTACK:
 			_owner.summon_entity(Entity.EntityType.CHICKEN, spawn_location_config, {
 				"Type": Chicken.Type.GIFTED_ATTACK,
