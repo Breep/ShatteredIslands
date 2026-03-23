@@ -135,6 +135,9 @@ func _play_fall_anim() -> void:
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 	tween.tween_property(_visual_3d, "rotation:z", deg_to_rad(25.0), 0.6) \
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	periodic_timer_registry.register_oneshot(2.0, func() -> void:
+		_visual_3d.scale = Vector3(5, 5, 5)
+		)
 
 
 

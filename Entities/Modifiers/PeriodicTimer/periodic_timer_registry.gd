@@ -9,10 +9,16 @@ class TickEffect:
 	var callback: Callable
 	var is_running: bool = false
 
+class OneShotEffect:
+	var ticks_left: int
+	var callback: Callable
+
 const TICKS_PER_SECOND: int = 60
 
-# Liste des effets (on préfère une Array pour un tri stable) 
+# Liste des effets (on préfère une Array pour un tri stable)
 var _effects: Array[TickEffect] = []
+# Oneshots : déclenchés une fois après un délai, puis auto-retirés
+var _oneshots: Array[OneShotEffect] = []
 
 # Conversion des secondes en ticks (basé sur 60 FPS physiques)
 func _to_ticks(seconds: float) -> int:
@@ -39,11 +45,18 @@ func unregister(id: StringName) -> void:
 			break
 
 
+func register_oneshot(delay: float, callback: Callable) -> void:
+	var effect := OneShotEffect.new()
+	effect.ticks_left = _to_ticks(delay)
+	effect.callback = callback
+	_oneshots.append(effect)
+
+
 func process_tick() -> void:
 	for effect in _effects:
 		if not effect.is_running:
 			continue
-			
+
 		effect.ticks_left -= 1
 
 		if effect.ticks_left <= 0:
@@ -51,6 +64,15 @@ func process_tick() -> void:
 			effect.callback.call()
 			# On réinitialise avec la période exacte (déterminisme parfait)
 			effect.ticks_left = effect.period_ticks
+
+	var fired: Array[OneShotEffect] = []
+	for effect in _oneshots:
+		effect.ticks_left -= 1
+		if effect.ticks_left <= 0:
+			fired.append(effect)
+	for effect in fired:
+		effect.callback.call()
+		_oneshots.erase(effect)
 
 # --- Méthodes de compatibilité avec ton ancien code ---
 
@@ -68,3 +90,4 @@ func resume_all() -> void:
 
 func clear_all() -> void:
 	_effects.clear()
+	_oneshots.clear()
