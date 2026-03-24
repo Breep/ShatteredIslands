@@ -3,16 +3,17 @@ extends Node3D
 ## Angle d'approche depuis l'horizontale (70° = steep diagonal, style D4)
 const APPROACH_ANGLE: float = 70.0
 ## Hauteur de départ du météore
-const START_HEIGHT: float = 35.0
+const START_HEIGHT: float = 30.0
 ## Hauteur bonus pour le point de contrôle bezier (forme l'arc)
-const ARC_HEIGHT_BONUS: float = 8.0
+const ARC_HEIGHT_BONUS: float = 3.0
 ## Léger spread aléatoire sur la position de départ
 const LATERAL_OFFSET: float = 3.0
 
-@onready var _meteor_3d: Node3D = %MeteorVisual3Dv2
-@onready var hit_marker_scene = preload("res://SpellsAndProjectiles/Spells/Meteor/Visual/VFX_Explosion_B.tscn")
+@onready var _meteor_3d: Node3D = %VFX_FireBall
+@onready var _hit_dark: Node3D = %VFX_Hit_dark
 
-var _deploy_time: float = 2.0
+
+var _deploy_time: float = 1.0
 var _elapsed: float = 0.0
 var _is_falling: bool = false
 
@@ -81,20 +82,12 @@ func _compute_trajectory() -> void:
 
 
 func _on_impact() -> void:
-	# Play VFX_meteor impact effects (rings, smoke, impact plane)
-	var meteor_anim: AnimationPlayer = _meteor_3d.get_node_or_null("AnimationPlayer")
-	if meteor_anim:
-		meteor_anim.play("A_falling")
+	# Hide the fireball mesh
+	_meteor_3d.visible = false
 
-	# Hide the fireball
-	var fireball := _meteor_3d.get_node_or_null("VFX_FireBall")
-	if fireball:
-		fireball.visible = false
+	# Random Y rotation so the hit marker looks different each time
+	_hit_dark.rotation.y = randf() * TAU
 
-	# Spawn explosion hit marker
-	var hit_marker: Node3D = hit_marker_scene.instantiate()
-	get_tree().current_scene.add_child(hit_marker)
-	hit_marker.global_position = global_position
-	var anim_player: AnimationPlayer = hit_marker.get_node("AnimationPlayer")
-	if anim_player:
-		anim_player.play("Init")
+	# Trigger hit VFX (one-shot particles already in the scene)
+	var torus: GPUParticles3D = _hit_dark.get_node("torus")
+	torus.emitting = true

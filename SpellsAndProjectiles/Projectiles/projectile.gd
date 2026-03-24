@@ -60,25 +60,26 @@ func _ready() -> void:
 		Verbose.error("No _stats (null) -> queue_freeing myself", Verbose.Category.PROJECTILE)
 	if _target and _target.died and not _target.died.is_connected(_on_target_died):
 		_target.died.connect(_on_target_died)
-	
+
 	# Convert lifetime to ticks
 	_lifetime_max_ticks = int(lifetime_max * TICKS_PER_SECOND)
-	
+
 	# Execute spawn callbacks
 	for cb: Callable in _stats.on_spawn_callbacks:
 		if cb.is_valid():
 			cb.call({"projectile": self, "_source": _source, "_target": _target})
-	
-	# Initialize trajectory
+
+
+## Called by SpawnManager AFTER the projectile is in the scene tree and positioned.
+## This ensures trajectory captures the correct global_position as start point.
+func init_trajectory() -> void:
+	_logic_pos = global_position
 	if trajectory:
 		trajectory = trajectory.duplicate()
 		trajectory.init(self, _source, _target)
 	else:
 		Verbose.error("No trajectory assigned to projectile [" + name + "]", Verbose.Category.PROJECTILE)
 		queue_free()
-		return
-	
-	_logic_pos = global_position
 
 
 func process_tick() -> void:

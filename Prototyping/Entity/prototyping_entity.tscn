@@ -296,7 +296,7 @@ transform = Transform3D(0.20953494, 0.9711535, -0.11382448, -0.5411095, 0.212126
 unique_name_in_owner = true
 
 [node name="ArchIsland" parent="." unique_id=1045725859 instance=ExtResource("17_ko5bb")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -0.6210389, 0)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.037389755, -0.69335794, -0.050251007)
 
 [connection signal="pressed" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StartFightButton" to="." method="_on_start_fight_button_pressed"]
 [connection signal="pressed" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StopFightButton" to="." method="_on_stop_fight_button_pressed"]
