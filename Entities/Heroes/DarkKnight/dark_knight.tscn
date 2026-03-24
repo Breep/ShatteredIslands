@@ -287,6 +287,8 @@ _entity_owner = NodePath("..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.0925667, 0)
 
 [node name="HeroSimpleInfoPanel2d" parent="." unique_id=358992180 node_paths=PackedStringArray("_hero_entity", "_info_panel_spawn") instance=ExtResource("6_3htvw")]
+anchor_right = 0.042000003
+offset_right = -0.640007
 _hero_entity = NodePath("..")
 _info_panel_spawn = NodePath("../HealthBarSpawnMarker")
 
