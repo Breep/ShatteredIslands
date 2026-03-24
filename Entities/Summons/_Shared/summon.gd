@@ -52,4 +52,10 @@ func _on_died() -> void:
 		_health_bar.hide()
 	if _despawn_timer > 0:
 		periodic_timer_registry.register_oneshot(_despawn_timer, _default_despawn)
+
+
+func _on_resurrected() -> void:
+	super._on_resurrected()
+	if _health_bar != null:
+		_health_bar.show()
 #endregion

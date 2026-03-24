@@ -37,6 +37,7 @@ func _ready() -> void:
 	stat_modifiers_registry.recompute_all()
 	periodic_timer_registry.register("Periodic Shield", 1.0, _periodic_beam_callback)
 	spawn_completed.connect(_on_spawn_completed)
+	_despawn_timer = -1 # No despawn
 	super._ready()
 #endregion
 
@@ -127,6 +128,21 @@ func _on_died() -> void:
 	_unlink_from_current_ally()
 	_anim_hovering_module.stop_hover()
 	_play_fall_anim()
+	periodic_timer_registry.register_oneshot(_respawn_timer, resurrect.bind(100))
+
+
+func _on_resurrected() -> void:
+	super._on_resurrected()
+	take_condition_stacks(_on_spawn_shield_amount, Stack.Type.SHIELD, false, "Initial shield")
+	var tween := create_tween().set_parallel()
+	tween.tween_property(_visual_3d, "position:y", 2.8, 0.8) \
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.tween_property(_visual_3d, "rotation:z", 0.0, 0.8) \
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.chain().tween_callback(func() -> void:
+		_anim_hovering_module.start_hover()
+		_change_linked_ally()
+	)
 
 
 func _play_fall_anim() -> void:
@@ -135,9 +151,6 @@ func _play_fall_anim() -> void:
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 	tween.tween_property(_visual_3d, "rotation:z", deg_to_rad(25.0), 0.6) \
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
-	periodic_timer_registry.register_oneshot(2.0, func() -> void:
-		_visual_3d.scale = Vector3(5, 5, 5)
-		)
 
 
 
