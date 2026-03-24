@@ -7,6 +7,9 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_f2upg"]
 radius = 0.23548791
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_detector"]
+radius = 0.7
+
 [node name="DeflectionShield" type="CharacterBody3D" unique_id=534617877 node_paths=PackedStringArray("_visual_3d")]
 script = ExtResource("1_l33vt")
 entity_name = "Deflection Shield"
@@ -20,6 +23,16 @@ shape = SubResource("SphereShape3D_f2upg")
 
 [node name="DeflectionShieldVisual" parent="." unique_id=1149126980 instance=ExtResource("2_f2upg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0903942, 1.2219338, 0)
+
+[node name="ProjectileDetector" type="Area3D" parent="." unique_id=2098374561]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2071809, 0)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ProjectileDetector" unique_id=474314872]
+shape = SubResource("SphereShape3D_detector")
 
 [node name="HealthBarSpawnMarker" type="Marker3D" parent="." unique_id=876557168]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6879708, 0)
