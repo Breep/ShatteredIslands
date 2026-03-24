@@ -3,6 +3,8 @@ extends Entity
 
 # == VIRTUAL CLASS ==
 
+@export var _health_bar: SummonSimpleInfoPanel2D
+
 var summoner: Entity
 
 #region ============================== Enums ==============================
@@ -36,4 +38,8 @@ func apply_context(context: EntityContext) -> void:
 #endregion
 
 #region ============================== Other callbacks ==============================
+func _on_died() -> void:
+	super._on_died()
+	if _health_bar != null:
+		_health_bar.hide()
 #endregion

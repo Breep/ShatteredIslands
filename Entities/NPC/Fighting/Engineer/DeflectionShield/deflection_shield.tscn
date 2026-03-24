@@ -10,8 +10,9 @@ radius = 0.23548791
 [sub_resource type="SphereShape3D" id="SphereShape3D_detector"]
 radius = 0.7
 
-[node name="DeflectionShield" type="CharacterBody3D" unique_id=534617877 node_paths=PackedStringArray("_visual_3d")]
+[node name="DeflectionShield" type="CharacterBody3D" unique_id=534617877 node_paths=PackedStringArray("_health_bar", "_visual_3d")]
 script = ExtResource("1_l33vt")
+_health_bar = NodePath("HealthBar")
 entity_name = "Deflection Shield"
 _auto_loaded_modules = Array[int]([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 0])
 _visual_3d = NodePath("DeflectionShieldVisual")

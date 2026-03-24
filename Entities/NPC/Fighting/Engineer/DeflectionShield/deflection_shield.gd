@@ -9,7 +9,6 @@ enum Modifier {
 var _blocked_projectiles: int
 var _shield_per_block: float
 
-@onready var _health_bar: SummonSimpleInfoPanel2D = %HealthBar
 @onready var _projectile_detector: Area3D = %ProjectileDetector
 
 func init(blocked_projectiles: int, shield_per_block: float) -> Summon:

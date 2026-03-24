@@ -10,8 +10,9 @@
 height = 0.1
 radius = 0.3
 
-[node name="ProtoShield" type="CharacterBody3D" unique_id=528264494 node_paths=PackedStringArray("_visual_3d")]
+[node name="ProtoShield" type="CharacterBody3D" unique_id=528264494 node_paths=PackedStringArray("_health_bar", "_visual_3d")]
 script = ExtResource("1_dn3og")
+_health_bar = NodePath("HealthBar")
 _auto_loaded_modules = Array[int]([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 0])
 _visual_3d = NodePath("CollisionShape3D")
 metadata/_custom_type_script = "uid://cjfj1jcbiom2x"
@@ -39,9 +40,9 @@ _rot_axis = 1
 _rot_period = 3.0
 _rot_max = 40.0
 
-[node name="HealthBar" type="Marker3D" parent="." unique_id=1180450043]
+[node name="HealthBarSpawnMarker" type="Marker3D" parent="." unique_id=1180450043]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.6133175, 0)
 
-[node name="SumonSimpleInfoPanel2d" parent="." unique_id=1628734826 node_paths=PackedStringArray("_owner_entity", "_info_panel_spawn") instance=ExtResource("5_7j5h1")]
+[node name="HealthBar" parent="." unique_id=1628734826 node_paths=PackedStringArray("_owner_entity", "_info_panel_spawn") instance=ExtResource("5_7j5h1")]
 _owner_entity = NodePath("..")
-_info_panel_spawn = NodePath("../HealthBar")
+_info_panel_spawn = NodePath("../HealthBarSpawnMarker")
