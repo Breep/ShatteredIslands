@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Tool/SpawnPoint/spawn_point.tscn" id="5_1sg7w"]
 [ext_resource type="PackedScene" uid="uid://b3oqyj5b00c" path="res://Entities/NPC/Fighting/ChickenLord/Chicken/Gifted/ChickenArdentCelestial/chicken_ardent_celestial_visual.tscn" id="5_kooec"]
 [ext_resource type="Script" uid="uid://cnwr3o67xobtt" path="res://Entities/Modules/AnimationModule/entity_animation_player.gd" id="7_t5xk3"]
+[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://Entities/EntityInfoPanel/EntitySimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="8_kravp"]
 
 [sub_resource type="Resource" id="Resource_asoqs"]
 script = ExtResource("2_bh56c")
@@ -99,5 +100,12 @@ monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ImpactArea3D" unique_id=905481165]
 shape = SubResource("CylinderShape3D_asoqs")
+
+[node name="SumonSimpleInfoPanel2d" parent="." unique_id=1628734826 node_paths=PackedStringArray("_owner_entity", "_info_panel_spawn") instance=ExtResource("8_kravp")]
+_owner_entity = NodePath("..")
+_info_panel_spawn = NodePath("../HealthBar")
+
+[node name="HealthBar" type="Marker3D" parent="." unique_id=431386149]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [editable path="ChickenArdentCelestialVisual"]

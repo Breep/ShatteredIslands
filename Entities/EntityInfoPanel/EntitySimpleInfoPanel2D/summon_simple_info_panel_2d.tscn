@@ -73,6 +73,7 @@ offset_right = -1820.0
 offset_bottom = -1070.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_wiwv7")
 
 [node name="HealthBar" type="ColorRect" parent="." unique_id=778638809]
@@ -84,6 +85,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="ShieldBar" type="ColorRect" parent="HealthBar" unique_id=1147385294]
 unique_name_in_owner = true
@@ -94,6 +96,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="GridBar" type="ColorRect" parent="HealthBar" unique_id=205852776]
 unique_name_in_owner = true
@@ -104,3 +107,4 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2

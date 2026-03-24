@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Tool/SpawnPoint/spawn_point.tscn" id="5_kkest"]
 [ext_resource type="PackedScene" uid="uid://clpy8dl1u5et0" path="res://Entities/NPC/Fighting/ChickenLord/Chicken/Gifted/ChickenPoison/chicken_poison_visual.tscn" id="6_t4rah"]
 [ext_resource type="Script" uid="uid://cnwr3o67xobtt" path="res://Entities/Modules/AnimationModule/entity_animation_player.gd" id="7_rntv6"]
+[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://Entities/EntityInfoPanel/EntitySimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="8_u623w"]
 
 [sub_resource type="Resource" id="Resource_u623w"]
 script = ExtResource("2_f360a")
@@ -88,5 +89,12 @@ bones/12/rotation = Quaternion(4.817537e-08, -0.60039806, 2.3136849e-07, 0.79970
 
 [node name="AnimationPlayer" parent="ChickenAttackVisual" index="1" unique_id=777400876]
 script = ExtResource("7_rntv6")
+
+[node name="SumonSimpleInfoPanel2d" parent="." unique_id=1628734826 node_paths=PackedStringArray("_owner_entity", "_info_panel_spawn") instance=ExtResource("8_u623w")]
+_owner_entity = NodePath("..")
+_info_panel_spawn = NodePath("../HealthBar")
+
+[node name="HealthBar" type="Marker3D" parent="." unique_id=1118175190]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [editable path="ChickenAttackVisual"]

@@ -145,9 +145,7 @@ var _stats_modifiers_dictionaries: Dictionary[EntityStats.StatType, StatModifier
 func _init(base_stats: EntityStats, current_stats: EntityStats) -> void:
 	# Single stats
 	_stats_modifiers_dictionaries[EntityStats.StatType.HEALTH_MAX] = StatModifierDictionary.new()
-	_stats_modifiers_dictionaries[EntityStats.StatType.HEALTH] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.MANA_MAX] = StatModifierDictionary.new()
-	_stats_modifiers_dictionaries[EntityStats.StatType.MANA] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.MANA_REGEN] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.AD] = StatModifierDictionary.new()
 	_stats_modifiers_dictionaries[EntityStats.StatType.AS] = StatModifierDictionary.new()
@@ -182,11 +180,17 @@ func _init(base_stats: EntityStats, current_stats: EntityStats) -> void:
 
 func register_modifier(stat_modifier: StatModifier) -> void:
 	var stat_type: EntityStats.StatType = stat_modifier.stat_type
+	if not _stats_modifiers_dictionaries.has(stat_type):
+		Verbose.error("Cannot register modifier for stat type " + str(stat_type) + " because it is not managed by the registry", Verbose.Category.STAT_MODIFIER)
+		return
 	_stats_modifiers_dictionaries[stat_type].register_modifier(stat_modifier)
 
 
 func unregister_modifier(stat_modifier: StatModifier) -> void:
 	var stat_type: EntityStats.StatType = stat_modifier.stat_type
+	if not _stats_modifiers_dictionaries.has(stat_type):
+		Verbose.error("Cannot unregister modifier for stat type " + str(stat_type) + " because it is not managed by the registry", Verbose.Category.STAT_MODIFIER)
+		return
 	_stats_modifiers_dictionaries[stat_type].unregister_modifier(stat_modifier)
 
 
