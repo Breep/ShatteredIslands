@@ -2,15 +2,29 @@
 
 [ext_resource type="Script" uid="uid://fydmei0pi85g" path="res://Entities/NPC/Fighting/Engineer/DeflectionShield/deflection_shield.gd" id="1_l33vt"]
 [ext_resource type="PackedScene" uid="uid://k6w1gjtwhmq" path="res://Entities/NPC/Fighting/Engineer/DeflectionShield/deflection_shield_visual.tscn" id="2_f2upg"]
+[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://Entities/EntityInfoPanel/EntitySimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="3_7n1yc"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_f2upg"]
 radius = 0.23548791
 
-[node name="DeflectionShield" type="CharacterBody3D" unique_id=534617877]
+[node name="DeflectionShield" type="CharacterBody3D" unique_id=534617877 node_paths=PackedStringArray("_visual_3d")]
 script = ExtResource("1_l33vt")
+entity_name = "Deflection Shield"
+_auto_loaded_modules = Array[int]([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 0])
+_visual_3d = NodePath("DeflectionShieldVisual")
 metadata/_custom_type_script = "uid://cjfj1jcbiom2x"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1765948325]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2071809, 0)
 shape = SubResource("SphereShape3D_f2upg")
 
 [node name="DeflectionShieldVisual" parent="." unique_id=1149126980 instance=ExtResource("2_f2upg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0903942, 1.2219338, 0)
+
+[node name="HealthBarSpawnMarker" type="Marker3D" parent="." unique_id=876557168]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6879708, 0)
+
+[node name="HealthBar" parent="." unique_id=1628734826 node_paths=PackedStringArray("_owner_entity", "_info_panel_spawn") instance=ExtResource("3_7n1yc")]
+unique_name_in_owner = true
+_owner_entity = NodePath("..")
+_info_panel_spawn = NodePath("../HealthBarSpawnMarker")

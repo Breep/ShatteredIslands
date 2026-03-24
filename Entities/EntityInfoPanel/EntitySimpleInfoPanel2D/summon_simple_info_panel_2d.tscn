@@ -96,6 +96,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="GridBar" type="ColorRect" parent="HealthBar" unique_id=205852776]
+unique_name_in_owner = true
 material = SubResource("ShaderMaterial_nr0wp")
 layout_mode = 1
 anchors_preset = 15

@@ -51,7 +51,8 @@ enum EntityType {
 	PROTO_SHIELD,
 	FORTIFICATION_DRONE,
 	AEGIS_BLADE,
-	TREX
+	TREX,
+	DEFLECTION_SHIELD
 }
 
 enum SnakeBarrelModifier {
@@ -608,6 +609,7 @@ func _on_stats_health_changed(new_health: float) -> void:
 
 
 func _on_stats_scale_changed(new_scale: float) -> void:
+	if _visual_3d == null or _entity_info_panel_3d == null: return
 	_visual_3d.scale = Vector3(new_scale, new_scale, new_scale)
 	_entity_info_panel_3d.scale = Vector3(new_scale, new_scale, new_scale)
 

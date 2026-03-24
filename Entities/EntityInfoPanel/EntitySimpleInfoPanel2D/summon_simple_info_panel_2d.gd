@@ -9,6 +9,7 @@ extends Control
 
 @onready var _health_bar: ColorRect = %HealthBar
 @onready var _shield_bar: ColorRect = %ShieldBar
+@onready var _grid_bar: ColorRect = %GridBar
 
 #region ============================== Node base functions ==============================
 func _ready() -> void:
@@ -17,6 +18,8 @@ func _ready() -> void:
 		_set_health_bar_color_by_team()
 	if _shield_bar and _shield_bar.material:
 		_shield_bar.material = _shield_bar.material.duplicate()
+	if _grid_bar and _grid_bar.material:
+		_grid_bar.material = _grid_bar.material.duplicate()
 
 	var stats = _owner_entity.stats
 	var conditions = _owner_entity.conditions
@@ -38,6 +41,16 @@ func _process(_delta: float) -> void:
 #region ============================== Public API ==============================
 func init(entity: Entity) -> void:
 	_owner_entity = entity
+
+
+func setup_grid_bar(small_block: int, big_block: int) -> void:
+	if _grid_bar == null or _grid_bar.material == null: return
+	_grid_bar.material.set_shader_parameter("ShowGrid", true)
+	if small_block >= 1: _grid_bar.material.set_shader_parameter("Step_X_Value", small_block)
+	else: _grid_bar.material.set_shader_parameter("Step_X_Height", 0)
+	
+	if big_block >= 1: _grid_bar.material.set_shader_parameter("Step_Y_Value", big_block)
+	else: _grid_bar.material.set_shader_parameter("Step_Y_Height", 0)
 #endregion
 
 #region ============================== Private API ==============================

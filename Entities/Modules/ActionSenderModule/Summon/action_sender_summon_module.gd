@@ -20,6 +20,7 @@ const CHICKEN_STORM_CALLER: PackedScene = preload('res://Entities/NPC/Fighting/C
 const PROTO_SHIELD_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Engineer/ProtoShield/proto_shield.tscn")
 const FORTIFICATION_DRONE_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Engineer/FortificationDrone/fortification_drone.tscn")
 const AEGIS_BLADE_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Engineer/AegisBlade/aegis_blade.tscn")
+const DEFLECTION_SHIELD: PackedScene = preload("res://Entities/NPC/Fighting/Engineer/DeflectionShield/deflection_shield.tscn")
 
 const TREX_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/ChickenLord/TRex/trex.tscn")
 
@@ -61,6 +62,7 @@ func summon_entity(entity_type: Entity.EntityType, spawn_config: SpawnLocationCo
 		Entity.EntityType.PROTO_SHIELD: _summon_proto_shield(spawn_position, entity_modifier)
 		Entity.EntityType.FORTIFICATION_DRONE: _summon_fortification_drone(spawn_position, entity_modifier)
 		Entity.EntityType.AEGIS_BLADE: _summon_aegis_blade(spawn_position, entity_modifier)
+		Entity.EntityType.DEFLECTION_SHIELD: _summon_deflection_shield(spawn_position, entity_modifier)
 		Entity.EntityType.TREX: _summon_trex(spawn_position, entity_modifier)
 
 # ============================== Private functions ==============================
@@ -172,7 +174,12 @@ func _summon_trex(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
 	_spawn_manager.spawn_entity(trex, spawn_position, _owner.get_context())
 
  
-	
+func _summon_deflection_shield(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
+	var deflection_shield: DeflectionShield = DEFLECTION_SHIELD.instantiate()
+	var blocked_projectiles: int = entity_modifier.get(DeflectionShield.Modifier.BLOCKED_PROJECTILES, 1)
+	var shield_per_block: float = entity_modifier.get(DeflectionShield.Modifier.SHIELD_PER_BLOCK, 10)
+	deflection_shield.init(blocked_projectiles, shield_per_block)
+	_spawn_manager.spawn_entity(deflection_shield, spawn_position, _owner.get_context())
 	
 	
 	
