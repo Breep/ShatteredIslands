@@ -86,9 +86,9 @@ func _set_health_bar_color_by_team() -> void:
 	var local_player: Player = PlayerManager.get_local_player()
 	var health_color: Color
 	if local_player == null or _hero_entity.team == local_player.team:
-		health_color = Color.WEB_GREEN
+		health_color = Color.LIME_GREEN
 	else:
-		health_color = Color.DARK_RED
+		health_color = Color.INDIAN_RED
 	_health_bar.material.set_shader_parameter("HealthColor", health_color)
 #endregion
 

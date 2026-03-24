@@ -175,25 +175,52 @@ shader_parameter/ShowGrid = true
 shader_parameter/LineColor = Color(0, 0, 0, 1)
 shader_parameter/Step_X_Value = 250.0
 shader_parameter/Step_X_Height = 1.0
-shader_parameter/Step_X_Thickness = 1.0
+shader_parameter/Step_X_Thickness = 0.50000002049012
 shader_parameter/Step_Y_Value = 1000.0
 shader_parameter/Step_Y_Height = 1.0
+shader_parameter/Step_Y_Thickness = 1.25000005611512
+shader_parameter/BorderColor = Color(0.05, 0.05, 0.05, 1)
+shader_parameter/BorderThicknessPx = 2.0
+shader_parameter/CornerRadius = 0.05
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xw8nt"]
+shader = ExtResource("2_er62k")
+shader_parameter/HealthAmount = 0.6
+shader_parameter/MaxHealth = 2500.0
+shader_parameter/HealthColor = Color(4.428029e-06, 0.7022774, 0.9995093, 1)
+shader_parameter/BackgroundColor = Color(0.15, 0.15, 0.15, 0.8)
+shader_parameter/EnableShimmer = false
+shader_parameter/ShimmerSpeed = 1.5
+shader_parameter/ShimmerStrength = 0.3
+shader_parameter/VolumeStrength = 0.4
+shader_parameter/ShowGrid = false
+shader_parameter/LineColor = Color(0, 0, 0, 1)
+shader_parameter/Step_X_Value = 250.0
+shader_parameter/Step_X_Height = 0.25
+shader_parameter/Step_X_Thickness = 1.0
+shader_parameter/Step_Y_Value = 1000.0
+shader_parameter/Step_Y_Height = 0.5
 shader_parameter/Step_Y_Thickness = 2.5
 shader_parameter/BorderColor = Color(0.05, 0.05, 0.05, 1)
 shader_parameter/BorderThicknessPx = 2.0
 shader_parameter/CornerRadius = 0.05
 
 [node name="HeroSimpleInfoPanel2d" type="Control" unique_id=358992180]
-custom_minimum_size = Vector2(150, 15)
 layout_mode = 3
-anchors_preset = 0
-offset_right = 150.0
-offset_bottom = 15.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -2.6400146
+offset_bottom = 2.6400146
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
 script = ExtResource("1_fqydh")
 
-[node name="HealthBar" type="ColorRect" parent="." unique_id=610590936]
-unique_name_in_owner = true
-material = SubResource("ShaderMaterial_u1xh6")
+[node name="HealthAndMana" type="VBoxContainer" parent="." unique_id=756449751]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -201,8 +228,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme_override_constants/separation = -2
 
-[node name="ShieldBar" type="ColorRect" parent="HealthBar" unique_id=1699784184]
+[node name="HealthBar" type="ColorRect" parent="HealthAndMana" unique_id=610590936]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_u1xh6")
+custom_minimum_size = Vector2(80, 10)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ShieldBar" type="ColorRect" parent="HealthAndMana/HealthBar" unique_id=1699784184]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_2mu5s")
 layout_mode = 1
@@ -213,7 +248,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="GridBar" type="ColorRect" parent="HealthBar" unique_id=1715734742]
+[node name="GridBar" type="ColorRect" parent="HealthAndMana/HealthBar" unique_id=1715734742]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_4khpa")
 layout_mode = 1
@@ -223,3 +258,27 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="ManaBar" type="ColorRect" parent="HealthAndMana" unique_id=564324133]
+material = SubResource("ShaderMaterial_xw8nt")
+custom_minimum_size = Vector2(80, 5)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="PlayerNameLabel" type="RichTextLabel" parent="." unique_id=1781608924]
+custom_minimum_size = Vector2(80, 20)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -40.0
+offset_top = -24.359985
+offset_right = 40.0
+offset_bottom = -4.3599854
+grow_horizontal = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "[shake][rainbow]Breep"
+horizontal_alignment = 1
+vertical_alignment = 1
