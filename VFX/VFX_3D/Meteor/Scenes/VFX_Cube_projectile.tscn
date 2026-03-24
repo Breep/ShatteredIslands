@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://tdbxidy0fi2u"]
 
-[ext_resource type="Texture2D" uid="uid://cvgkgewukhruo" path="res://VFX/Objects/smokemask.png" id="5_fn825"]
+[ext_resource type="Texture2D" uid="uid://cvgkgewukhruo" path="res://VFX/VFX_3D/Meteor/Objects/smokemask.png" id="5_fn825"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_brxm4"]
 transparency = 1
@@ -52,6 +52,7 @@ size = Vector2(4, 4)
 [node name="small_boxes" type="GPUParticles3D" parent="." unique_id=1903933802]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.345915)
 material_override = SubResource("StandardMaterial3D_brxm4")
+transparency = 0.91
 cast_shadow = 0
 amount = 45
 amount_ratio = 0.8625

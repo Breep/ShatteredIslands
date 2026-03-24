@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cjlp8phux33fj"]
 
-[ext_resource type="PackedScene" uid="uid://crd40ycge6qp1" path="res://VFX/Scenes/VFX_Fire_ball_standar.tscn" id="1_n51xl"]
-[ext_resource type="Shader" uid="uid://ce35481cnedm8" path="res://VFX/meteor_decal.gdshader" id="2_xunib"]
-[ext_resource type="Texture2D" uid="uid://cn3imncf53nl5" path="res://VFX/Objects/87454763-EB35-4271-B2DC-B0AF201B1023.png" id="3_cuc0a"]
+[ext_resource type="PackedScene" uid="uid://crd40ycge6qp1" path="res://VFX/VFX_3D/Meteor/Scenes/VFX_meteor_Fire_ball.tscn" id="1_n51xl"]
+[ext_resource type="Shader" uid="uid://ce35481cnedm8" path="res://VFX/VFX_3D/Meteor/meteor_decal.gdshader" id="2_xunib"]
+[ext_resource type="Texture2D" path="res://VFX/Objects/87454763-EB35-4271-B2DC-B0AF201B1023.png" id="3_cuc0a"]
 
 [sub_resource type="Animation" id="Animation_ohe0j"]
 resource_name = "A_falling"

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b01bnm24rhgky"]
 
-[ext_resource type="PackedScene" uid="uid://crd40ycge6qp1" path="res://VFX/VFX_3D/Meteor/Scenes/VFX_Fire_ball_standar.tscn" id="1_va17v"]
+[ext_resource type="PackedScene" uid="uid://crd40ycge6qp1" path="res://VFX/VFX_3D/Meteor/Scenes/VFX_meteor_Fire_ball.tscn" id="1_va17v"]
 [ext_resource type="Shader" uid="uid://ce35481cnedm8" path="res://VFX/VFX_3D/Meteor/meteor_decal.gdshader" id="2_pnqfl"]
 [ext_resource type="Texture2D" uid="uid://d0teeb365dvp" path="res://VFX/VFX_3D/Meteor/Objects/T_impact.png" id="3_fi8r6"]
 [ext_resource type="PackedScene" uid="uid://ovdmp2n8yynd" path="res://VFX/VFX_3D/Meteor/Scenes/vfx_crash.tscn" id="4_pnqfl"]
@@ -173,7 +173,6 @@ transform = Transform3D(0.98756856, -0.0069837226, -0.15703195, -0.041501556, -0
 
 [node name="VFX_Smoke" parent="." unique_id=1270145014 instance=ExtResource("5_fi8r6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8718092, 0)
-visible = false
 
 [node name="VFX_SmokeB" parent="." unique_id=1153165536 instance=ExtResource("6_bi4rh")]
 transform = Transform3D(0.863, 0, 0, 0, 0.17542756, 0.019940529, 0, -0.061815638, 0.05658953, 0, 0.07288027, 0)
