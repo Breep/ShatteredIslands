@@ -8,19 +8,19 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		printerr("Aim Assist: Wrong card_lvl: ", card_lvl)
 		return
 
-	var count: int = 0
-	if ctx.hero.deck:
-		count = ctx.hero.deck.get_unique_card_count(Family.Type.WARRIOR)
-	else:
-		push_warning("Aim Assist: deck is null")
-
-	var mod := StatModifier.new()
-	mod.id = &"Aim Assist"
-	mod.stat_type = EntityStats.StatType.AD
-	mod.calc_type = StatModifier.CalcType.ADD
-	mod.value = count * _bonus_ad_per_card[card_lvl - 1]
-	mod.tags = [StatModifier.TagType.CARD]
-	ctx.stat_modifiers.register_modifier(mod)
+	#var count: int = 0
+	#if ctx.hero.deck:
+		#count = ctx.hero.deck.get_unique_card_count(Family.Type.WARRIOR)
+	#else:
+		#push_warning("Aim Assist: deck is null")
+#
+	#var mod := StatModifier.new()
+	#mod.id = &"Aim Assist"
+	#mod.stat_type = EntityStats.StatType.AD
+	#mod.calc_type = StatModifier.CalcType.ADD
+	#mod.value = count * _bonus_ad_per_card[card_lvl - 1]
+	#mod.tags = [StatModifier.TagType.CARD]
+	#ctx.stat_modifiers.register_modifier(mod)
 
 
 func get_description(cardlvl: int) -> String:

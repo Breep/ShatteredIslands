@@ -5,20 +5,14 @@ extends HeroUpgrade
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var amount: float = _amount_per_card[card_lvl - 1]
+	var card_count: int = ctx.hero.deck.get_unique_card_count()
 
 	var mod := StatModifier.new()
 	mod.id = &"The Ancient Collector"
 	mod.stat_type = EntityStats.StatType.HEALTH_MAX
 	mod.calc_type = StatModifier.CalcType.ADD
 	mod.tags = [StatModifier.TagType.CARD]
-
-	# Count unique cards in deck
-	if ctx.hero.deck:
-		var count: int 
-		for family in Family.Type:
-			count += ctx.hero.deck.get_unique_card_count(family)
-			mod.value = count * amount
-
+	mod.value = card_count * amount
 
 	ctx.stat_modifiers.register_modifier(mod)
 

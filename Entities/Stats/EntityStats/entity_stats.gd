@@ -249,7 +249,6 @@ func reset_from_hero_desc(hero: HeroDesc, lvl: int) -> EntityStats:
 	defence = hero.stats[lvl].defence
 	block = hero.stats[lvl].block
 	thorn = hero.stats[lvl].thorn
-	scale = hero.stats[lvl].scale
 	
 	for action_type: Utils.ActionType in Utils.get_all_actions():
 		_critical_chances[action_type] = hero.stats[lvl].critical_chances.get(action_type, 0)
