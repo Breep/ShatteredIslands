@@ -55,19 +55,6 @@ enum EntityType {
 	DEFLECTION_SHIELD
 }
 
-enum SnakeBarrelModifier {
-	SNAKE_NUMBER,
-	SNAKE_POISON_STACKS,
-	MAX_HEALTH
-}
-
-enum FieldGeneratorModifier {
-	MAX_HEALTH,
-	SHIELD_AMOUNT,
-	SHIELD_INTERVAL,
-	INITIAL_SHIELD,
-	TARGET_COUNT
-}
 #endregion
 
 #region ============================== Constants ==============================

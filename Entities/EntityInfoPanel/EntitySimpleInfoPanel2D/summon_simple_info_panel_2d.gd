@@ -45,12 +45,20 @@ func init(entity: Entity) -> void:
 
 func setup_grid_bar(small_block: int, big_block: int) -> void:
 	if _grid_bar == null or _grid_bar.material == null: return
-	_grid_bar.material.set_shader_parameter("ShowGrid", true)
-	if small_block >= 1: _grid_bar.material.set_shader_parameter("Step_X_Value", small_block)
-	else: _grid_bar.material.set_shader_parameter("Step_X_Height", 0)
 	
-	if big_block >= 1: _grid_bar.material.set_shader_parameter("Step_Y_Value", big_block)
-	else: _grid_bar.material.set_shader_parameter("Step_Y_Height", 0)
+	_grid_bar.material.set_shader_parameter("ShowGrid", true)
+	
+	if small_block >= 1:
+		_grid_bar.material.set_shader_parameter("Step_X_Value", small_block)
+		_grid_bar.material.set_shader_parameter("Step_X_Height", 1)
+	else:
+		_grid_bar.material.set_shader_parameter("Step_X_Height", 0)
+	
+	if big_block >= 1:
+		_grid_bar.material.set_shader_parameter("Step_Y_Value", big_block)
+		_grid_bar.material.set_shader_parameter("Step_Y_Height", 1)
+	else:
+		_grid_bar.material.set_shader_parameter("Step_Y_Height", 0)
 #endregion
 
 #region ============================== Private API ==============================
@@ -60,6 +68,7 @@ func _update_health_bar(health: float, health_max: float) -> void:
 	var ratio = clamp(float(health) / float(health_max), 0.0, 1.0)
 	_health_bar.material.set_shader_parameter("HealthAmount", ratio)
 	_health_bar.material.set_shader_parameter("MaxHealth", float(health_max))
+	_grid_bar.material.set_shader_parameter("MaxHealth", float(health_max))
 
 
 func _update_shield_bar(armor_amount: float, max_health: float) -> void:

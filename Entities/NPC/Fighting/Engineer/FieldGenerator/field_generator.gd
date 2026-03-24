@@ -1,6 +1,14 @@
 class_name FieldGenerator
 extends Entity
 
+enum Modifier {
+	MAX_HEALTH,
+	SHIELD_AMOUNT,
+	SHIELD_INTERVAL,
+	INITIAL_SHIELD,
+	TARGET_COUNT
+}
+
 @onready var _visual: Node3D = %Visual
 
 var _max_health: int = 1

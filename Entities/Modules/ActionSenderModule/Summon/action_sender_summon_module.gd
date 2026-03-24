@@ -69,9 +69,9 @@ func summon_entity(entity_type: Entity.EntityType, spawn_config: SpawnLocationCo
 
 func _summon_snake_barrel(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
 	var snake_barrel: SnakeBarrel = SNAKE_BARREL_SCENE.instantiate()
-	var snake_number: int = entity_modifier[Entity.SnakeBarrelModifier.SNAKE_NUMBER]
-	var snake_poison_stacks: int = entity_modifier[Entity.SnakeBarrelModifier.SNAKE_POISON_STACKS]
-	var max_health: int = entity_modifier[Entity.SnakeBarrelModifier.MAX_HEALTH]
+	var snake_number: int = entity_modifier[SnakeBarrel.Modifier.SNAKE_NUMBER]
+	var snake_poison_stacks: int = entity_modifier[SnakeBarrel.Modifier.SNAKE_POISON_STACKS]
+	var max_health: int = entity_modifier[SnakeBarrel.Modifier.MAX_HEALTH]
 	snake_barrel.init(snake_number, snake_poison_stacks, max_health)
 	_spawn_manager.spawn_entity(snake_barrel, spawn_position, _owner.get_context(), Entity.EntityType.SNAKE_BARREL)
 
@@ -83,11 +83,11 @@ func _summon_snake(spawn_position: Vector3, _entity_modifier: Dictionary) -> voi
 
 func _summon_field_generator(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
 	var field_generator: FieldGenerator = FIELD_GENERATOR_SCENE.instantiate()
-	var max_health: int = entity_modifier.get(Entity.FieldGeneratorModifier.MAX_HEALTH, 1)
-	var shield_amount: int = entity_modifier.get(Entity.FieldGeneratorModifier.SHIELD_AMOUNT, 100)
-	var shield_interval: float = entity_modifier.get(Entity.FieldGeneratorModifier.SHIELD_INTERVAL, 1.0)
-	var initial_shield: int = entity_modifier.get(Entity.FieldGeneratorModifier.INITIAL_SHIELD, 150)
-	var target_count: int = entity_modifier.get(Entity.FieldGeneratorModifier.TARGET_COUNT, 2)
+	var max_health: int = entity_modifier.get(FieldGenerator.Modifier.MAX_HEALTH, 1)
+	var shield_amount: int = entity_modifier.get(FieldGenerator.Modifier.SHIELD_AMOUNT, 100)
+	var shield_interval: float = entity_modifier.get(FieldGenerator.Modifier.SHIELD_INTERVAL, 1.0)
+	var initial_shield: int = entity_modifier.get(FieldGenerator.Modifier.INITIAL_SHIELD, 150)
+	var target_count: int = entity_modifier.get(FieldGenerator.Modifier.TARGET_COUNT, 2)
 	field_generator.init(max_health, shield_amount, shield_interval, initial_shield, target_count)
 	_spawn_manager.spawn_entity(field_generator, spawn_position, _owner.get_context(), Entity.EntityType.FIELD_GENERATOR)
 

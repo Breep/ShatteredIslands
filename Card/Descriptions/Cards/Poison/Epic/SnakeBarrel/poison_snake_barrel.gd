@@ -16,9 +16,9 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 	ctx.battle_callbacks.register_battle_start(&"Snake Barrel", func() -> void:
 		var summon_modifier: Dictionary = {
-			Entity.SnakeBarrelModifier.SNAKE_NUMBER: snake_number,
-			Entity.SnakeBarrelModifier.SNAKE_POISON_STACKS: poison_stacks,
-			Entity.SnakeBarrelModifier.MAX_HEALTH: health
+			SnakeBarrel.Modifier.SNAKE_NUMBER: snake_number,
+			SnakeBarrel.Modifier.SNAKE_POISON_STACKS: poison_stacks,
+			SnakeBarrel.Modifier.MAX_HEALTH: health
 		}
 		var spawn_config := SpawnLocationConfig.create_arena_center(10)
 		ctx.hero.summon_entity(Entity.EntityType.SNAKE_BARREL, spawn_config, summon_modifier)

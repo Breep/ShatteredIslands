@@ -24,11 +24,11 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if ctx.hero == null or not is_instance_valid(ctx.hero):
 			return
 		var mods: Dictionary = {
-			Entity.FieldGeneratorModifier.SHIELD_AMOUNT: shield_amt,
-			Entity.FieldGeneratorModifier.SHIELD_INTERVAL: shield_int,
-			Entity.FieldGeneratorModifier.INITIAL_SHIELD: initial_shield,
-			Entity.FieldGeneratorModifier.MAX_HEALTH: max_health,
-			Entity.FieldGeneratorModifier.TARGET_COUNT: target_count,
+			FieldGenerator.Modifier.SHIELD_AMOUNT: shield_amt,
+			FieldGenerator.Modifier.SHIELD_INTERVAL: shield_int,
+			FieldGenerator.Modifier.INITIAL_SHIELD: initial_shield,
+			FieldGenerator.Modifier.MAX_HEALTH: max_health,
+			FieldGenerator.Modifier.TARGET_COUNT: target_count,
 		}
 		var spawn_config := SpawnLocationConfig.create_entity_relative(ctx.hero, 2.0)
 		ctx.hero.summon_entity(Entity.EntityType.FIELD_GENERATOR, spawn_config, mods)

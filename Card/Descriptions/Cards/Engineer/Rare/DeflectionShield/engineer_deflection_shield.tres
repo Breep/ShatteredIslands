@@ -9,14 +9,13 @@
 script = ExtResource("1_1nhgb")
 _shield_numbers = Array[int]([1, 1, 1, 1, 1])
 _blocked_projectiles = Array[int]([1, 2, 3, 4, 5])
-_shield_per_blocks = Array[int]([30, 35, 40, 50, 60])
+_shield_per_blocks = Array[int]([30, 35, 40, 0, 0])
 _periods = Array[float]([8.0, 8.0, 7.0, 7.0, 6.0])
-_rarity = 1
 metadata/_custom_type_script = "uid://73lcxdj4ywdr"
 
 [resource]
 script = ExtResource("1_cex8h")
-name = "Dflection Shield"
+name = "Deflection Shield"
 picture = SubResource("PlaceholderTexture2D_ike5l")
 families = Array[int]([2])
 rarity = 1

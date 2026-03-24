@@ -1,7 +1,11 @@
 class_name MovementModule
 extends Module
 
-enum OrbitFacing { TANGENT, CENTER }
+enum OrbitFacing {
+	TANGENT,
+	CENTER,
+	ANTI_CENTER
+}
 
 var _target_position: Vector3
 var _is_moving: bool = false
@@ -211,6 +215,9 @@ func _update_orbit_circle() -> void:
 	# Face direction based on orbit facing mode
 	if _orbit_facing == OrbitFacing.CENTER:
 		_owner.look_at_target_y_only(_orbit_center_point)
+	elif _orbit_facing == OrbitFacing.ANTI_CENTER:
+		var dir = (_owner.global_position - _orbit_center_point)
+		_owner.look_at_target_y_only(_owner.global_position + dir)
 	else:
 		# Tangent direction: perpendicular to radius, in direction of travel
 		var tangent_sign: float = signf(_orbit_angular_speed)

@@ -23,5 +23,22 @@ func _ready() -> void:
 	take_status(Status.Type.INVULNERABLE, -1, "Invulnerable")
 	take_status(Status.Type.UNTARGETABLE, -1, "Untargetable")
 	stat_modifiers_registry.recompute_all()
-	_movement_module.orbit_entity(summoner, 2, 2)
+	_movement_module.orbit_entity(summoner, 2, 2, MovementModule.OrbitFacing.ANTI_CENTER)
+	periodic_timer_registry.register("test", 1, func() -> void:
+		take_damage(1, Utils.ActionType.DAMAGE_PHYSICAL, false, "test")
+		stats.health -= 1
+		)
 	super._ready()
+
+
+func _on_died() -> void:
+	super._on_died()
+	_play_fall_anim()
+
+
+func _play_fall_anim() -> void:
+	var tween := create_tween().set_parallel()
+	tween.tween_property(_visual_3d, "position:y", 0.0, 0.6) \
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	tween.tween_property(_visual_3d, "rotation:z", deg_to_rad(25.0), 0.6) \
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
