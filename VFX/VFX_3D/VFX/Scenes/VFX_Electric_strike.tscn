@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://d4i83bqlqpy0a"]
 
-[ext_resource type="Material" uid="uid://ceb6m6dh5v0hb" path="res://VFX/Objects/m_lightening_std.tres" id="1_bgg5g"]
-[ext_resource type="ArrayMesh" uid="uid://xv6ycjsmspbm" path="res://VFX/Objects/sm_fireb_blast4_HS.obj" id="2_oguec"]
-[ext_resource type="Shader" uid="uid://bpf8re2if2yu3" path="res://VFX/Shaders/s_FireHeader.tres" id="3_lecde"]
-[ext_resource type="Material" uid="uid://c7tmvatlueuuv" path="res://VFX/Objects/m_Trail_lightening_1.tres" id="4_jbfai"]
-[ext_resource type="Shader" uid="uid://b28qeeghrupsv" path="res://VFX/Shaders/s_basic_disolve_p.tres" id="5_kt8sj"]
-[ext_resource type="Texture2D" uid="uid://p882hvpsbqve" path="res://VFX/Textures/T_VFX_spark44.jpg" id="6_3mogh"]
-[ext_resource type="Shader" uid="uid://bxslcncv0mhh1" path="res://VFX/Shaders/s_Trail_dynamic.tres" id="7_r7x17"]
-[ext_resource type="Script" uid="uid://d02i3nwbx5o1g" path="res://VFX/Misc/Trail3D.gd" id="8_r84ac"]
-[ext_resource type="Texture2D" uid="uid://tj7s34v4h2nk" path="res://VFX/Textures/T_VFX_TrailKuwaharaLight.jpg" id="8_u574u"]
+[ext_resource type="Material" uid="uid://ceb6m6dh5v0hb" path="res://VFX/VFX_3D/VFX/Objects/m_lightening_std.tres" id="1_bgg5g"]
+[ext_resource type="ArrayMesh" uid="uid://xv6ycjsmspbm" path="res://VFX/VFX_3D/Meteor/Objects/sm_fireb_blast4_HS.obj" id="2_oguec"]
+[ext_resource type="Shader" uid="uid://bpf8re2if2yu3" path="res://VFX/VFX_3D/VFX/Shaders/s_FireHeader.tres" id="3_lecde"]
+[ext_resource type="Material" uid="uid://c7tmvatlueuuv" path="res://VFX/VFX_3D/VFX/Objects/m_Trail_lightening_1.tres" id="4_jbfai"]
+[ext_resource type="Shader" uid="uid://b28qeeghrupsv" path="res://VFX/VFX_3D/VFX/Shaders/s_basic_disolve_p.tres" id="5_kt8sj"]
+[ext_resource type="Texture2D" uid="uid://p882hvpsbqve" path="res://VFX/VFX_3D/VFX/Textures/T_VFX_spark44.jpg" id="6_3mogh"]
+[ext_resource type="Script" uid="uid://d1hqcabxmjoyf" path="res://VFX/VFX_3D/Meteor/Misc/Trail3D.gd" id="7_4ty16"]
+[ext_resource type="Shader" uid="uid://bxslcncv0mhh1" path="res://VFX/VFX_3D/VFX/Shaders/s_Trail_dynamic.tres" id="7_r7x17"]
+[ext_resource type="Texture2D" uid="uid://tj7s34v4h2nk" path="res://VFX/VFX_3D/VFX/Textures/T_VFX_TrailKuwaharaLight.jpg" id="8_u574u"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rec5w"]
 render_priority = 0
@@ -93,13 +93,7 @@ material_override = SubResource("ShaderMaterial_qk5ma")
 cast_shadow = 0
 mesh = SubResource("ImmediateMesh_sjvld")
 skeleton = NodePath("../..")
-script = ExtResource("8_r84ac")
-fromWidth = 1.0
-toWidth = 0.3
-lifespan = 0.2
-startColor = Color(0.329, 0.667, 3, 1)
-endColor = Color(0.298039, 0.6, 1, 0.988235)
-colorInterpolationMode = 1
+script = ExtResource("7_4ty16")
 
 [node name="sparks" type="GPUParticles3D" parent="." unique_id=687460945]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.418861)
