@@ -1,6 +1,12 @@
 class_name SnakeBarrel
 extends Summon
 
+enum Modifier {
+	SNAKE_NUMBER,
+	SNAKE_POISON_STACKS,
+	MAX_HEALTH
+}
+
 const CLEANUP_TIME: int = 5
 
 @onready var _snake_barrel_visual: Node3D = %SnakeBarrelVisual

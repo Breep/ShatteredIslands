@@ -52,6 +52,8 @@ extends Node
 @onready var _entity_param6_label: Label = %EntityParam6Label
 @onready var _entity_param6_edit: TextEdit = %EntityParam6TextEdit
 
+@onready var _summon_count_edit: TextEdit = %SummonCountTextEdit
+
 @onready var _random_radius_edit: TextEdit = %RandomRadiusTextEdit
 @onready var _entity_choice: OptionButton = %EntityChoice
 @onready var _team_edit: TextEdit = %TeamTextEdit
@@ -505,34 +507,67 @@ func _on_cast_ultimate_button_pressed() -> void:
 func _update_entity_parameters(entity_type: Entity.EntityType) -> void:
 	"""Updates the parameter labels and visibility based on selected entity type."""
 	var param_configs: Array[Dictionary] = []
-	
+
 	match entity_type:
 		Entity.EntityType.HERO:
-			# Heroes don't have modifiers in the summon context
 			param_configs = []
-		
+
 		Entity.EntityType.SNAKE_BARREL:
 			param_configs = [
-				{"label": "Snake Number", "default": "3"},
-				{"label": "Snake Poison", "default": "5"},
-				{"label": "Max Health", "default": "100"},
-				{"label": "(Unused)", "default": "0"},
-				{"label": "(Unused)", "default": "0"},
-				{"label": "(Unused)", "default": "0"}
+				{"label": "SNAKE_NUMBER", "default": "3"},
+				{"label": "SNAKE_POISON_STACKS", "default": "5"},
+				{"label": "MAX_HEALTH", "default": "100"},
 			]
-		
+
 		Entity.EntityType.SNAKE:
-			# Snakes don't have modifiers
 			param_configs = []
-		
+
 		Entity.EntityType.FIELD_GENERATOR:
 			param_configs = [
-				{"label": "Max Health", "default": "200"},
-				{"label": "Shield Amount", "default": "50"},
-				{"label": "Shield Interval", "default": "3.0"},
-				{"label": "Initial Shield", "default": "1"},
-				{"label": "Target Count", "default": "3"},
-				{"label": "(Unused)", "default": "0"}
+				{"label": "MAX_HEALTH", "default": "200"},
+				{"label": "SHIELD_AMOUNT", "default": "50"},
+				{"label": "SHIELD_INTERVAL", "default": "3.0"},
+				{"label": "INITIAL_SHIELD", "default": "1"},
+				{"label": "TARGET_COUNT", "default": "3"},
+			]
+
+		Entity.EntityType.CHICKEN:
+			param_configs = []
+
+		Entity.EntityType.PROTO_SHIELD:
+			param_configs = [
+				{"label": "SHIELD", "default": "100"},
+				{"label": "HP_MAX", "default": "1"},
+			]
+
+		Entity.EntityType.FORTIFICATION_DRONE:
+			param_configs = [
+				{"label": "SHIELD", "default": "100"},
+				{"label": "HP_MAX", "default": "1"},
+				{"label": "SHIELD_PER_SECOND", "default": "1"},
+				{"label": "RESPAWN_TIMER", "default": "10.0"},
+			]
+
+		Entity.EntityType.AEGIS_BLADE:
+			param_configs = [
+				{"label": "AD", "default": "50"},
+				{"label": "AS", "default": "1"},
+				{"label": "SHIELD_AD_MAX", "default": "100"},
+				{"label": "SHIELD_AD_TAU", "default": "500"},
+				{"label": "DAMAGE_AS_SHIELD", "default": "0.5"},
+			]
+
+		Entity.EntityType.TREX:
+			param_configs = [
+				{"label": "GIFTED_SPAWN_PERIOD", "default": "5.0"},
+				{"label": "GIFTED_SPAWN_NUMBER", "default": "1"},
+				{"label": "HP_BONUS", "default": "0"},
+			]
+
+		Entity.EntityType.DEFLECTION_SHIELD:
+			param_configs = [
+				{"label": "BLOCKED_PROJECTILES", "default": "3"},
+				{"label": "SHIELD_PER_BLOCK", "default": "10"},
 			]
 	
 	# Apply configurations
@@ -646,73 +681,101 @@ func _on_summon_entity_button_pressed() -> void:
 	if entity_owner == null:
 		printerr("EntityController: No entity_owner for summon_entity")
 		return
-	
-	for i in 10:
+
+	var summon_count: int = max(1, _summon_count_edit.text.to_int())
+
+	for i in summon_count:
 		var entity_type: Entity.EntityType = _entity_type_choice.get_selected_id() as Entity.EntityType
 		var spawn_type: SpawnLocationConfig.LocationType = _spawn_type_choice.get_selected_id() as SpawnLocationConfig.LocationType
-		
+
 		# Build SpawnLocationConfig
 		var spawn_config := SpawnLocationConfig.new()
 		spawn_config.location_type = spawn_type
-		
+
 		# Configure spawn parameters based on spawn type
 		var random_radius: float = _random_radius_edit.text.to_float()
 		spawn_config.randomization_radius = random_radius
-		
+
 		match spawn_type:
 			SpawnLocationConfig.LocationType.EXACT:
-				# spawn_summon_localizer is only required for EXACT spawn type
 				if spawn_summon_localizer == null:
 					printerr("EntityController: spawn_summon_localizer is required for EXACT spawn type")
 					return
 				spawn_config.exact_position = spawn_summon_localizer.global_position
-			
+
 			SpawnLocationConfig.LocationType.ARENA_CENTER:
-				# No additional config needed
 				pass
-			
+
 			SpawnLocationConfig.LocationType.TEAM_ZONE:
 				var team: int = _team_edit.text.to_int()
 				spawn_config.team = team
-			
+
 			SpawnLocationConfig.LocationType.ENTITY:
-				# Use the selected entity from dropdown
 				var selected_index: int = _entity_choice.get_selected_id()
 				if selected_index >= 0 and selected_index < _all_entities.size():
 					spawn_config.target_entity = _all_entities[selected_index]
 				else:
 					printerr("EntityController: Invalid entity selection for ENTITY spawn type")
-					# Fallback to spawn_summon_localizer
 					spawn_config.target_entity = spawn_summon_localizer
-			
+
 			SpawnLocationConfig.LocationType.RANDOM_ARENA:
-				# No additional config needed
 				pass
-		
+
 		# Build entity_modifier dictionary based on entity type
 		var entity_modifier: Dictionary = {}
-		
+		var edits: Array[TextEdit] = [
+			_entity_param1_edit, _entity_param2_edit, _entity_param3_edit,
+			_entity_param4_edit, _entity_param5_edit, _entity_param6_edit
+		]
+
 		match entity_type:
 			Entity.EntityType.HERO:
-				# Heroes don't have modifiers in summon context
 				pass
-			
+
 			Entity.EntityType.SNAKE_BARREL:
-				entity_modifier[Entity.SnakeBarrelModifier.SNAKE_NUMBER] = int(_entity_param1_edit.text.to_float())
-				entity_modifier[Entity.SnakeBarrelModifier.SNAKE_POISON_STACKS] = _entity_param2_edit.text.to_float()
-				entity_modifier[Entity.SnakeBarrelModifier.MAX_HEALTH] = _entity_param3_edit.text.to_float()
-			
+				entity_modifier[SnakeBarrel.Modifier.SNAKE_NUMBER] = int(edits[0].text.to_float())
+				entity_modifier[SnakeBarrel.Modifier.SNAKE_POISON_STACKS] = edits[1].text.to_float()
+				entity_modifier[SnakeBarrel.Modifier.MAX_HEALTH] = edits[2].text.to_float()
+
 			Entity.EntityType.SNAKE:
-				# Snakes don't have modifiers
 				pass
-			
+
 			Entity.EntityType.FIELD_GENERATOR:
-				entity_modifier[Entity.FieldGeneratorModifier.MAX_HEALTH] = _entity_param1_edit.text.to_float()
-				entity_modifier[Entity.FieldGeneratorModifier.SHIELD_AMOUNT] = _entity_param2_edit.text.to_float()
-				entity_modifier[Entity.FieldGeneratorModifier.SHIELD_INTERVAL] = _entity_param3_edit.text.to_float()
-				entity_modifier[Entity.FieldGeneratorModifier.INITIAL_SHIELD] = int(_entity_param4_edit.text.to_float())
-				entity_modifier[Entity.FieldGeneratorModifier.TARGET_COUNT] = int(_entity_param5_edit.text.to_float())
-		
+				entity_modifier[FieldGenerator.Modifier.MAX_HEALTH] = edits[0].text.to_float()
+				entity_modifier[FieldGenerator.Modifier.SHIELD_AMOUNT] = edits[1].text.to_float()
+				entity_modifier[FieldGenerator.Modifier.SHIELD_INTERVAL] = edits[2].text.to_float()
+				entity_modifier[FieldGenerator.Modifier.INITIAL_SHIELD] = int(edits[3].text.to_float())
+				entity_modifier[FieldGenerator.Modifier.TARGET_COUNT] = int(edits[4].text.to_float())
+
+			Entity.EntityType.CHICKEN:
+				pass
+
+			Entity.EntityType.PROTO_SHIELD:
+				entity_modifier[ProtoShield.Modifier.SHIELD] = edits[0].text.to_float()
+				entity_modifier[ProtoShield.Modifier.HP_MAX] = int(edits[1].text.to_float())
+
+			Entity.EntityType.FORTIFICATION_DRONE:
+				entity_modifier[FortificationDrone.Modifier.SHIELD] = edits[0].text.to_float()
+				entity_modifier[FortificationDrone.Modifier.HP_MAX] = int(edits[1].text.to_float())
+				entity_modifier[FortificationDrone.Modifier.SHIELD_PER_SECOND] = edits[2].text.to_float()
+				entity_modifier[FortificationDrone.Modifier.RESPAWN_TIMER] = edits[3].text.to_float()
+
+			Entity.EntityType.AEGIS_BLADE:
+				entity_modifier[AegisBlade.Modifier.AD] = edits[0].text.to_float()
+				entity_modifier[AegisBlade.Modifier.AS] = edits[1].text.to_float()
+				entity_modifier[AegisBlade.Modifier.SHIELD_AD_MAX] = edits[2].text.to_float()
+				entity_modifier[AegisBlade.Modifier.SHIELD_AD_TAU] = edits[3].text.to_float()
+				entity_modifier[AegisBlade.Modifier.DAMAGE_AS_SHIELD] = edits[4].text.to_float()
+
+			Entity.EntityType.TREX:
+				entity_modifier[TRex.Modifier.GIFTED_SPAWN_PERIOD] = edits[0].text.to_float()
+				entity_modifier[TRex.Modifier.GIFTED_SPAWN_NUMBER] = int(edits[1].text.to_float())
+				entity_modifier[TRex.Modifier.HP_BONUS] = edits[2].text.to_float()
+
+			Entity.EntityType.DEFLECTION_SHIELD:
+				entity_modifier[DeflectionShield.Modifier.BLOCKED_PROJECTILES] = int(edits[0].text.to_float())
+				entity_modifier[DeflectionShield.Modifier.SHIELD_PER_BLOCK] = edits[1].text.to_float()
+
 		entity_owner.summon_entity(entity_type, spawn_config, entity_modifier)
 		print("DEBUG: summon_entity called - Type: ", Entity.EntityType.keys()[entity_type],
 			" | Spawn: ", SpawnLocationConfig.LocationType.keys()[spawn_type],

@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://c1gpijnrsdj2h"]
+
+[ext_resource type="Script" uid="uid://73lcxdj4ywdr" path="res://Card/Descriptions/Cards/Engineer/Rare/DeflectionShield/engineer_deflection_shield.gd" id="1_1nhgb"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_cex8h"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ike5l"]
+
+[sub_resource type="Resource" id="Resource_fgla3"]
+script = ExtResource("1_1nhgb")
+_shield_numbers = Array[int]([1, 1, 1, 1, 1])
+_blocked_projectiles = Array[int]([1, 2, 3, 4, 5])
+_shield_per_blocks = Array[int]([30, 35, 40, 0, 0])
+_periods = Array[float]([8.0, 8.0, 7.0, 7.0, 6.0])
+metadata/_custom_type_script = "uid://73lcxdj4ywdr"
+
+[resource]
+script = ExtResource("1_cex8h")
+name = "Deflection Shield"
+picture = SubResource("PlaceholderTexture2D_ike5l")
+families = Array[int]([2])
+rarity = 1
+player_upgrade = SubResource("Resource_fgla3")
+points = Dictionary[int, int]({
+2: 2
+})
+lvl = 1
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

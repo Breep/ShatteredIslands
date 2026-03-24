@@ -269,6 +269,7 @@ func _ready() -> void:
 	stats.health_changed.connect(_on_stats_health_changed)
 	_on_stats_health_changed(stats.health)
 	died.connect(_on_died)
+	resurrected.connect(_on_resurrected)
 	
 	stats.scale_changed.connect(_on_stats_scale_changed)
 	_on_stats_scale_changed(stats.scale)
@@ -608,8 +609,10 @@ func _on_stats_health_changed(new_health: float) -> void:
 
 
 func _on_stats_scale_changed(new_scale: float) -> void:
-	_visual_3d.scale = Vector3(new_scale, new_scale, new_scale)
-	_entity_info_panel_3d.scale = Vector3(new_scale, new_scale, new_scale)
+	if is_instance_valid(_visual_3d):
+		_visual_3d.scale = Vector3(new_scale, new_scale, new_scale)
+	if is_instance_valid(_entity_info_panel_3d):
+		_entity_info_panel_3d.scale = Vector3(new_scale, new_scale, new_scale)
 
 
 func _on_died() -> void:
@@ -627,6 +630,10 @@ func _on_died() -> void:
 	for action_modifier in death_modifiers_registry.consume_all_modifiers():
 		if action_modifier.after_action_logic_callback.is_valid():
 			action_modifier.after_action_logic_callback.call({})
+
+
+func _on_resurrected() -> void:
+	pass
 
 
 func _on_gfm_fighting_phase_state_changed(fighting_phase_state: GlobalFightingManager.FightingPhaseState) -> void:

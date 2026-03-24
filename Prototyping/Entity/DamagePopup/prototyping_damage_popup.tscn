@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://dajhejnwne0pk"]
+
+[node name="PrototypingDamagePopup" type="Node3D" unique_id=242809414]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=813242574]
+transform = Transform3D(-1, 6.181724e-08, -6.181724e-08, 0, 0.7071068, 0.7071068, 8.742278e-08, 0.7071068, -0.7071068, 0, 3.072183, -2.7770746)
+
+[node name="DamagePopupModule" type="Control" parent="." unique_id=617809029]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 324.0
+offset_bottom = 59.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="DamagePopupModule" unique_id=109364532]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 33.0
+offset_right = 60.0
+offset_bottom = 73.0
+text = "42"
+
+[node name="Control" type="Control" parent="DamagePopupModule" unique_id=1321043085]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DamagePopupSpawn" type="Marker3D" parent="." unique_id=1439031961]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1800725, 0)

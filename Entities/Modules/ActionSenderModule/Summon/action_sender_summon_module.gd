@@ -20,6 +20,7 @@ const CHICKEN_STORM_CALLER: PackedScene = preload('res://Entities/NPC/Fighting/C
 const PROTO_SHIELD_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Engineer/ProtoShield/proto_shield.tscn")
 const FORTIFICATION_DRONE_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Engineer/FortificationDrone/fortification_drone.tscn")
 const AEGIS_BLADE_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Engineer/AegisBlade/aegis_blade.tscn")
+const DEFLECTION_SHIELD: PackedScene = preload("res://Entities/NPC/Fighting/Engineer/DeflectionShield/deflection_shield.tscn")
 
 const TREX_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/ChickenLord/TRex/trex.tscn")
 
@@ -61,15 +62,16 @@ func summon_entity(entity_type: Entity.EntityType, spawn_config: SpawnLocationCo
 		Entity.EntityType.PROTO_SHIELD: _summon_proto_shield(spawn_position, entity_modifier)
 		Entity.EntityType.FORTIFICATION_DRONE: _summon_fortification_drone(spawn_position, entity_modifier)
 		Entity.EntityType.AEGIS_BLADE: _summon_aegis_blade(spawn_position, entity_modifier)
+		Entity.EntityType.DEFLECTION_SHIELD: _summon_deflection_shield(spawn_position, entity_modifier)
 		Entity.EntityType.TREX: _summon_trex(spawn_position, entity_modifier)
 
 # ============================== Private functions ==============================
 
 func _summon_snake_barrel(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
 	var snake_barrel: SnakeBarrel = SNAKE_BARREL_SCENE.instantiate()
-	var snake_number: int = entity_modifier[Entity.SnakeBarrelModifier.SNAKE_NUMBER]
-	var snake_poison_stacks: int = entity_modifier[Entity.SnakeBarrelModifier.SNAKE_POISON_STACKS]
-	var max_health: int = entity_modifier[Entity.SnakeBarrelModifier.MAX_HEALTH]
+	var snake_number: int = entity_modifier[SnakeBarrel.Modifier.SNAKE_NUMBER]
+	var snake_poison_stacks: int = entity_modifier[SnakeBarrel.Modifier.SNAKE_POISON_STACKS]
+	var max_health: int = entity_modifier[SnakeBarrel.Modifier.MAX_HEALTH]
 	snake_barrel.init(snake_number, snake_poison_stacks, max_health)
 	_spawn_manager.spawn_entity(snake_barrel, spawn_position, _owner.get_context(), Entity.EntityType.SNAKE_BARREL)
 
@@ -81,18 +83,23 @@ func _summon_snake(spawn_position: Vector3, _entity_modifier: Dictionary) -> voi
 
 func _summon_field_generator(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
 	var field_generator: FieldGenerator = FIELD_GENERATOR_SCENE.instantiate()
-	var max_health: int = entity_modifier.get(Entity.FieldGeneratorModifier.MAX_HEALTH, 1)
-	var shield_amount: int = entity_modifier.get(Entity.FieldGeneratorModifier.SHIELD_AMOUNT, 100)
-	var shield_interval: float = entity_modifier.get(Entity.FieldGeneratorModifier.SHIELD_INTERVAL, 1.0)
-	var initial_shield: int = entity_modifier.get(Entity.FieldGeneratorModifier.INITIAL_SHIELD, 150)
-	var target_count: int = entity_modifier.get(Entity.FieldGeneratorModifier.TARGET_COUNT, 2)
+	var max_health: int = entity_modifier.get(FieldGenerator.Modifier.MAX_HEALTH, 1)
+	var shield_amount: int = entity_modifier.get(FieldGenerator.Modifier.SHIELD_AMOUNT, 100)
+	var shield_interval: float = entity_modifier.get(FieldGenerator.Modifier.SHIELD_INTERVAL, 1.0)
+	var initial_shield: int = entity_modifier.get(FieldGenerator.Modifier.INITIAL_SHIELD, 150)
+	var target_count: int = entity_modifier.get(FieldGenerator.Modifier.TARGET_COUNT, 2)
 	field_generator.init(max_health, shield_amount, shield_interval, initial_shield, target_count)
 	_spawn_manager.spawn_entity(field_generator, spawn_position, _owner.get_context(), Entity.EntityType.FIELD_GENERATOR)
 
 
 func _summon_chicken(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
 	var chicken: Chicken
-	#chicken.set_basic_stats(_owner.)
+	var base_hp: float = entity_modifier.get(Chicken.BaseStatsModifier.HP)
+	var base_ad: float = entity_modifier.get(Chicken.BaseStatsModifier.AD)
+	var base_armor: float = entity_modifier.get(Chicken.BaseStatsModifier.ARMOR)
+	var base_crit_chance: float = entity_modifier.get(Chicken.BaseStatsModifier.CRIT_CHANCE)
+	var base_crit_multi: float = entity_modifier.get(Chicken.BaseStatsModifier.CRIT_MULTI)
+	
 	var chicken_type: Chicken.Type = entity_modifier.get("Type", Chicken.Type.BASIC)
 	match chicken_type:
 		Chicken.Type.BASIC: chicken = CHICKEN_BASIC_SCENE.instantiate()
@@ -131,6 +138,7 @@ func _summon_chicken(spawn_position: Vector3, entity_modifier: Dictionary) -> vo
 			var crit_mult: float = entity_modifier.get("crit_mult", 0)
 			(chicken as ChickenStormCaller).init(crit_chance, crit_mult)
 			
+	chicken.set_base_stats(base_hp, base_ad, base_armor, base_crit_chance, base_crit_multi)
 	_spawn_manager.spawn_entity(chicken, spawn_position, _owner.get_context(), Entity.EntityType.CHICKEN)
 
 
@@ -172,7 +180,12 @@ func _summon_trex(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
 	_spawn_manager.spawn_entity(trex, spawn_position, _owner.get_context())
 
  
-	
+func _summon_deflection_shield(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
+	var deflection_shield: DeflectionShield = DEFLECTION_SHIELD.instantiate()
+	var blocked_projectiles: int = entity_modifier.get(DeflectionShield.Modifier.BLOCKED_PROJECTILES, 1)
+	var shield_per_block: float = entity_modifier.get(DeflectionShield.Modifier.SHIELD_PER_BLOCK, 10)
+	deflection_shield.init(blocked_projectiles, shield_per_block)
+	_spawn_manager.spawn_entity(deflection_shield, spawn_position, _owner.get_context())
 	
 	
 	

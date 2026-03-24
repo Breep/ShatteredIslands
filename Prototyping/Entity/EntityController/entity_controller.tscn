@@ -1331,11 +1331,9 @@ script = ExtResource("2_ta2cq")
 
 [node name="SummonEntityFoldableContainer" type="FoldableContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer" unique_id=2063361332]
 layout_mode = 2
-folded = true
 title = "SUMMON ENTITY"
 
 [node name="SummonEntityControl" type="Control" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer" unique_id=193134845]
-visible = false
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 
@@ -1426,6 +1424,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+theme_override_font_sizes/font_size = 10
 expand_icon = true
 
 [node name="ProjectileParamControl" type="Control" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/SummonParamControl/VBoxContainer" unique_id=2078751120]
@@ -1463,7 +1462,7 @@ grow_vertical = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 8
 text = "Param 1"
 
 [node name="EntityParam1TextEdit" type="TextEdit" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/SummonParamControl/VBoxContainer/ProjectileParamControl/ScrollContainer/AllEntityParamVBox/Param1/HBoxContainer" unique_id=884117192]
@@ -1490,7 +1489,7 @@ grow_vertical = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 8
 text = "Param 2"
 vertical_alignment = 1
 
@@ -1518,7 +1517,7 @@ grow_vertical = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 8
 text = "PARAM 3"
 vertical_alignment = 1
 
@@ -1546,7 +1545,7 @@ grow_vertical = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 8
 text = "PARAM 4"
 
 [node name="EntityParam4TextEdit" type="TextEdit" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/SummonParamControl/VBoxContainer/ProjectileParamControl/ScrollContainer/AllEntityParamVBox/Param4/HBoxContainer" unique_id=1166771485]
@@ -1663,6 +1662,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+theme_override_font_sizes/font_size = 10
 expand_icon = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer" unique_id=831355256]
@@ -1724,6 +1724,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+theme_override_font_sizes/font_size = 8
 expand_icon = true
 
 [node name="Param3" type="Control" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllSpawnParamVBox" unique_id=1109840934]
@@ -1741,7 +1742,7 @@ grow_vertical = 2
 [node name="SpawnLocationLabel" type="Label" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllSpawnParamVBox/Param3/HBoxContainer" unique_id=501854584]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 7
 text = "Spawn Location"
 vertical_alignment = 1
 
@@ -1778,13 +1779,34 @@ theme_override_constants/line_spacing = 0
 theme_override_font_sizes/font_size = 12
 text = "0"
 
-[node name="SummonEntityButton" type="Button" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer" unique_id=343183736]
+[node name="SummonCountVBox" type="VBoxContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer" unique_id=790310544]
 layout_mode = 2
 size_flags_horizontal = 3
+alignment = 1
+
+[node name="SummonEntityButton" type="Button" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/SummonCountVBox" unique_id=343183736]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 30
 text = "SUMMON"
 script = ExtResource("2_ta2cq")
+
+[node name="SummonCountLabel" type="Label" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/SummonCountVBox" unique_id=681797131]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Count"
+horizontal_alignment = 1
+
+[node name="SummonCountTextEdit" type="TextEdit" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/SummonCountVBox" unique_id=1679832045]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 12
+text = "1"
 
 [connection signal="item_selected" from="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/TargetModuleFoldableContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect/MarginContainer/DamageTypeVBox/TargetingStratChoice" to="." method="_on_targeting_strat_choice_item_selected"]
 [connection signal="pressed" from="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/DirectAttackFoldableContainer/VBoxContainer/DirectAttackControl/MarginContainer/VBoxContainer/HBoxContainer/AttackButton" to="." method="_on_attack_button_pressed"]
@@ -1803,4 +1825,4 @@ script = ExtResource("2_ta2cq")
 [connection signal="item_selected" from="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/SummonParamControl/VBoxContainer/ColorRect/MarginContainer/EntityTypeVBox/EntityTypeChoice" to="." method="_on_entity_type_choice_item_selected"]
 [connection signal="item_selected" from="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ColorRect/MarginContainer/SpawnTypeVBox/SpawnTypeChoice" to="." method="_on_spawn_type_choice_item_selected"]
 [connection signal="toggled" from="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/ProjectileParamControl/VBoxContainer/ScrollContainer/AllSpawnParamVBox/Param3/HBoxContainer/SpawnLocalizerShowButton" to="." method="_on_spawn_localizer_show_button_toggled"]
-[connection signal="pressed" from="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/SummonEntityButton" to="." method="_on_summon_entity_button_pressed"]
+[connection signal="pressed" from="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer/SummonEntityControl/MarginContainer/VBoxContainer/HBoxContainer/SummonCountVBox/SummonEntityButton" to="." method="_on_summon_entity_button_pressed"]
