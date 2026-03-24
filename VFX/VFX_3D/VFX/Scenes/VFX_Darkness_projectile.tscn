@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://bxqb2r5cdt3gw"]
+
+[ext_resource type="Shader" uid="uid://btx1eos8uuvop" path="res://VFX/VFX_3D/VFX/Shaders/s_FireHead_TypeK.tres" id="1_xfng0"]
+[ext_resource type="Texture2D" uid="uid://dlh8s6fcos21b" path="res://VFX/VFX_3D/VFX/Textures/T_VFX_Z70.png" id="3_jeco4"]
+[ext_resource type="Shader" uid="uid://bpf8re2if2yu3" path="res://VFX/VFX_3D/VFX/Shaders/s_FireHeader.tres" id="5_bfdnn"]
+[ext_resource type="PackedScene" uid="uid://d4i83bqlqpy0a" path="res://VFX/VFX_3D/VFX/Scenes/VFX_Electric_strike.tscn" id="6_suu7n"]
+[ext_resource type="PackedScene" uid="uid://u8lcrufkdkae" path="res://VFX/VFX_3D/VFX/Scenes/vfx_std_fire_ball.tscn" id="7_cdchw"]
+
+[sub_resource type="Gradient" id="Gradient_offnt"]
+offsets = PackedFloat32Array(0.13333334, 0.14920636, 0.34202)
+colors = PackedColorArray(1.0309361, 0.7899948, 1.9817983, 1, 0.1, 0, 3, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_76w13"]
+gradient = SubResource("Gradient_offnt")
+use_hdr = true
+
+[sub_resource type="Gradient" id="Gradient_78t0x"]
+offsets = PackedFloat32Array(0, 0.0586319, 0.130293, 0.436482, 0.517915, 0.579805)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2p5eh"]
+gradient = SubResource("Gradient_78t0x")
+fill_from = Vector2(1, 1)
+
+[sub_resource type="Gradient" id="Gradient_c4qc5"]
+offsets = PackedFloat32Array(0, 0.491857)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vi3ha"]
+gradient = SubResource("Gradient_c4qc5")
+fill_from = Vector2(1, 0)
+fill_to = Vector2(1, 1)
+repeat = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g4jbv"]
+render_priority = 0
+shader = ExtResource("1_xfng0")
+shader_parameter/Fire_Scale = Vector2(1, 1)
+shader_parameter/Fire_Speed = Vector2(0, 2.5)
+shader_parameter/Fire_Texture = SubResource("GradientTexture2D_2p5eh")
+shader_parameter/Gradient_Substract = SubResource("GradientTexture2D_vi3ha")
+shader_parameter/Color_Dissipation = 0.5
+shader_parameter/Color_1D_Gradient = SubResource("GradientTexture1D_76w13")
+shader_parameter/Dissapear_Step = 0.435
+shader_parameter/Proximity_Fade = 0.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xr350"]
+render_priority = -1
+shader = ExtResource("1_xfng0")
+shader_parameter/Fire_Scale = Vector2(1, 1)
+shader_parameter/Fire_Speed = Vector2(0.1, 0.56)
+shader_parameter/Fire_Texture = ExtResource("3_jeco4")
+shader_parameter/Gradient_Substract = SubResource("GradientTexture2D_vi3ha")
+shader_parameter/Color_Dissipation = 1.0
+shader_parameter/Color_1D_Gradient = SubResource("GradientTexture1D_76w13")
+shader_parameter/Dissapear_Step = 0.3
+shader_parameter/Proximity_Fade = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_le01h"]
+render_priority = -1
+shader = ExtResource("5_bfdnn")
+shader_parameter/Color = Color(0.5, 0.3, 3, 1)
+shader_parameter/Fresnel = 10.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_0cmvw"]
+height = 1.2
+
+[node name="VFX_DarknessProjectile" type="Node3D" unique_id=1370579907]
+transform = Transform3D(0.6608101, 0, 0, 0, 0.6608101, 0, 0, 0, 0.87992007, 0, 0, 0)
+
+[node name="FBHead" type="MeshInstance3D" parent="." unique_id=1259793574]
+transform = Transform3D(-0.7, 0, -6.11959e-08, 0, 0.7, 0, 6.11959e-08, 0, -0.7, 0, 0, 0.0107827)
+visible = false
+sorting_offset = 1.0
+material_override = SubResource("ShaderMaterial_g4jbv")
+cast_shadow = 0
+skeleton = NodePath("../../..")
+
+[node name="FBHead2inner" type="MeshInstance3D" parent="." unique_id=187848245]
+transform = Transform3D(-0.33430776, 0, -9.817459e-08, 0, 0.3343079, 0, 2.9226085e-08, 0, -1.1229869, 0, 0, 0.5658655)
+sorting_offset = 1.0
+material_override = SubResource("ShaderMaterial_xr350")
+cast_shadow = 0
+skeleton = NodePath("../../..")
+
+[node name="MBall" type="MeshInstance3D" parent="." unique_id=1771587957]
+transform = Transform3D(0.20962207, 0, 0, 0, -2.9604614e-08, -0.20518392, 0, 0.6772735, -8.968876e-09, 0, 0, 0.30267718)
+material_override = SubResource("ShaderMaterial_le01h")
+cast_shadow = 0
+mesh = SubResource("SphereMesh_0cmvw")
+skeleton = NodePath("../..")
+
+[node name="VFX_ElectricStrike" parent="." unique_id=2047567898 instance=ExtResource("6_suu7n")]
+transform = Transform3D(0.4075264, 0, 0, 0, 0.4075264, 0, 0, 0, 0.2581261, 0, 0, -0.13621573)
+
+[node name="VFX_std_FireBall" parent="." unique_id=1158253114 instance=ExtResource("7_cdchw")]
+transform = Transform3D(-6.581191e-05, 0.004837665, 0.13942628, 0.011996877, 0.036509935, -0.018437026, -0.27199212, 0.0016091894, -0.0008469487, -8.660995e-05, 0.015788255, -0.3579499)

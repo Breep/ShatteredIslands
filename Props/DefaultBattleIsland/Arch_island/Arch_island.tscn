@@ -37,6 +37,7 @@
 [ext_resource type="PackedScene" uid="uid://bomsoicetwrmy" path="res://Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Scenes/VFX_AcidWall_K1.tscn" id="36_lvxo2"]
 [ext_resource type="PackedScene" uid="uid://brl4b1upuf5nw" path="res://Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Scenes/VFX_Sparks_Yk1.tscn" id="36_xbni8"]
 [ext_resource type="PackedScene" uid="uid://be7ehnhyliyxn" path="res://Props/DefaultBattleIsland/Arch_island/foliage/props_foliage_leafage6.tscn" id="37_lvxo2"]
+[ext_resource type="PackedScene" uid="uid://bxqb2r5cdt3gw" path="res://VFX/VFX_3D/VFX/Scenes/VFX_Darkness_projectile.tscn" id="38_fd1in"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_kc47p"]
 panorama = ExtResource("1_wicrg")
@@ -997,3 +998,6 @@ transform = Transform3D(-1.6956886, 0, -0.43619925, 0, 1.750894, 0, 0.43619925, 
 
 [node name="rock15" parent="." unique_id=288923656 instance=ExtResource("22_t1ft8")]
 transform = Transform3D(2.7604606, 0, -3.1316788, 0, 4.1746325, 0, 3.1316788, 0, 2.7604606, -3.0403588, -4.112157, 21.178194)
+
+[node name="VFX_DarknessProjectile" parent="." unique_id=1370579907 instance=ExtResource("38_fd1in")]
+transform = Transform3D(0.6608101, 0, 0, 0, 0.6608101, 0, 0, 0, 0.87992007, -1.8604879, 18.607052, 3.85431)
