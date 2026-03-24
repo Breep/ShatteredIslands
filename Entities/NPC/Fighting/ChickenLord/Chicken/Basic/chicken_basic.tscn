@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://bk603mav6k516" path="res://Entities/NPC/Fighting/ChickenLord/Chicken/chicken_animator.gd" id="5_8qwhc"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://cgr3043y4f2ee" path="res://Entities/NPC/Fighting/default_blendtree.tres" id="6_48gjc"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Tool/SpawnPoint/spawn_point.tscn" id="7_6fmmv"]
-[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://Entities/EntityInfoPanel/EntitySimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="8_5weh6"]
+[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://Entities/EntityInfoPanel/SummonSimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="8_5weh6"]
 
 [sub_resource type="Resource" id="Resource_x7yny"]
 script = ExtResource("2_5weh6")

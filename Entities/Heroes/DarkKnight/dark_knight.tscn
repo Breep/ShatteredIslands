@@ -4,6 +4,7 @@
 [ext_resource type="Resource" uid="uid://bkksjgh6p542o" path="res://Entities/Heroes/DarkKnight/dark_knight.tres" id="2_502n4"]
 [ext_resource type="PackedScene" uid="uid://dv0rauvoaxb0y" path="res://Entities/Heroes/DarkKnight/Skins/Standard/dark_knight_black.tscn" id="3_5c32l"]
 [ext_resource type="PackedScene" uid="uid://jwk6d3k8w3k5" path="res://Entities/EntityInfoPanel/EntityInfoPanel3D/entity_info_panel_3d.tscn" id="3_502n4"]
+[ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://Entities/EntityInfoPanel/HeroSimpleInfoPanel2D/hero_simple_info_panel_2d.tscn" id="6_3htvw"]
 [ext_resource type="PackedScene" uid="uid://cpqtocfge7ott" path="res://Entities/Heroes/_Shared/HeroAnimationModule/hero_animation_module.tscn" id="10_3dwlx"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rxegs"]
@@ -152,7 +153,7 @@ nodes/one_shot_idle/node = SubResource("AnimationNodeOneShot_5c32l")
 nodes/one_shot_idle/position = Vector2(-700, 380)
 node_connections = [&"output", 0, &"transition_global", &"transition_fighting", 0, &"one_shot_idle", &"transition_fighting", 1, &"scale_dance", &"transition_fighting", 2, &"scale_die", &"scale_dance", 0, &"anim_dance", &"scale_die", 0, &"anim_die", &"scale_idle", 0, &"anim_idle", &"one_shot_attack", 0, &"transition_fighting", &"one_shot_attack", 1, &"blend_attack", &"blend_attack", 0, &"scale_attack_left", &"blend_attack", 1, &"scale_attack_right", &"one_shot_ultimate", 0, &"one_shot_attack", &"one_shot_ultimate", 1, &"scale_ultimate", &"scale_attack_left", 0, &"anim_attack_left", &"scale_attack_right", 0, &"anim_attack_right", &"scale_ultimate", 0, &"anim_ultimate", &"scale_idle_var", 0, &"anim_idle_var", &"one_shot_sitting", 0, &"anim_sitting", &"one_shot_sitting", 1, &"anim_sitting_var", &"transition_global", 0, &"anim_TPOSE", &"transition_global", 1, &"one_shot_sitting", &"transition_global", 2, &"one_shot_ultimate", &"one_shot_idle", 0, &"scale_idle", &"one_shot_idle", 1, &"scale_idle_var"]
 
-[node name="DarkKnight" type="CharacterBody3D" unique_id=937625230 node_paths=PackedStringArray("_visual_3d", "_entity_info_panel_3d", "_animation_module")]
+[node name="DarkKnight" type="CharacterBody3D" unique_id=937625230 node_paths=PackedStringArray("_visual_3d", "_animation_module")]
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("1_ufk4g")
@@ -160,7 +161,6 @@ hero_desc = ExtResource("2_502n4")
 entity_name = "Dark Knight"
 _auto_loaded_modules = Array[int]([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 4])
 _visual_3d = NodePath("DarkKnightVisual")
-_entity_info_panel_3d = NodePath("Visual/EntityInfoPanel3d")
 _animation_module = NodePath("HeroAnimationModule")
 metadata/_custom_type_script = "uid://crybfqxtiik6d"
 
@@ -168,6 +168,7 @@ metadata/_custom_type_script = "uid://crybfqxtiik6d"
 
 [node name="EntityInfoPanel3d" parent="Visual" unique_id=376862841 node_paths=PackedStringArray("_owner_entity") instance=ExtResource("3_502n4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.020075, 0)
+visible = false
 _owner_entity = NodePath("../..")
 
 [node name="DarkKnightVisual" parent="." unique_id=2041897312 instance=ExtResource("3_5c32l")]
@@ -281,5 +282,12 @@ _weapons_node = NodePath("../DarkKnightVisual/rig/Skeleton3D/Weapons")
 _animation_tree = NodePath("../AnimationTree")
 _animation_player = NodePath("../DarkKnightVisual/AnimationPlayer")
 _entity_owner = NodePath("..")
+
+[node name="HealthBarSpawnMarker" type="Marker3D" parent="." unique_id=1268526557]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.0925667, 0)
+
+[node name="HeroSimpleInfoPanel2d" parent="." unique_id=358992180 node_paths=PackedStringArray("_hero_entity", "_info_panel_spawn") instance=ExtResource("6_3htvw")]
+_hero_entity = NodePath("..")
+_info_panel_spawn = NodePath("../HealthBarSpawnMarker")
 
 [editable path="DarkKnightVisual"]
