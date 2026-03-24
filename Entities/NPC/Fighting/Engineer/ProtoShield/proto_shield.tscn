@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://i6mui4bkx4tx" path="res://Entities/NPC/Fighting/Engineer/ProtoShield/proto_shield_visual.tscn" id="2_16yt5"]
 [ext_resource type="PackedScene" uid="uid://qow2w1sf2wvv" path="res://Tool/QuickAnims/anim_hovering_module.tscn" id="2_vtwb2"]
 [ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://Tool/QuickAnims/anim_rotating_module.tscn" id="4_uto7c"]
-[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://Entities/EntityInfoPanel/EntitySimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="5_7j5h1"]
+[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://Entities/EntityInfoPanel/SummonSimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="5_7j5h1"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_16yt5"]
 height = 0.1
@@ -44,5 +44,6 @@ _rot_max = 40.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.6133175, 0)
 
 [node name="HealthBar" parent="." unique_id=1628734826 node_paths=PackedStringArray("_owner_entity", "_info_panel_spawn") instance=ExtResource("5_7j5h1")]
+mouse_filter = 0
 _owner_entity = NodePath("..")
 _info_panel_spawn = NodePath("../HealthBarSpawnMarker")

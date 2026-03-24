@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bf367iu0pqq2t" path="res://Entities/NPC/Fighting/ChickenLord/Chicken/Gifted/ChickenStormCaller/chicken_storm_caller_visual.tscn" id="5_11ltj"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Tool/SpawnPoint/spawn_point.tscn" id="5_sfarb"]
 [ext_resource type="Script" uid="uid://cnwr3o67xobtt" path="res://Entities/Modules/AnimationModule/entity_animation_player.gd" id="7_aolgu"]
-[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://Entities/EntityInfoPanel/EntitySimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="8_84gco"]
+[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://Entities/EntityInfoPanel/SummonSimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="8_84gco"]
 
 [sub_resource type="Resource" id="Resource_84gco"]
 script = ExtResource("2_615wm")

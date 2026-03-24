@@ -94,11 +94,11 @@ func _summon_field_generator(spawn_position: Vector3, entity_modifier: Dictionar
 
 func _summon_chicken(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
 	var chicken: Chicken
-	var base_hp: float = entity_modifier.get(Chicken.BaseStatsModifier.HP)
-	var base_ad: float = entity_modifier.get(Chicken.BaseStatsModifier.AD)
-	var base_armor: float = entity_modifier.get(Chicken.BaseStatsModifier.ARMOR)
-	var base_crit_chance: float = entity_modifier.get(Chicken.BaseStatsModifier.CRIT_CHANCE)
-	var base_crit_multi: float = entity_modifier.get(Chicken.BaseStatsModifier.CRIT_MULTI)
+	var base_hp: float = entity_modifier.get(Chicken.BaseStatsModifier.HP, 50)
+	var base_ad: float = entity_modifier.get(Chicken.BaseStatsModifier.AD, 10)
+	var base_armor: float = entity_modifier.get(Chicken.BaseStatsModifier.ARMOR, 0)
+	var base_crit_chance: float = entity_modifier.get(Chicken.BaseStatsModifier.CRIT_CHANCE, 5)
+	var base_crit_multi: float = entity_modifier.get(Chicken.BaseStatsModifier.CRIT_MULTI, 100)
 	
 	var chicken_type: Chicken.Type = entity_modifier.get("Type", Chicken.Type.BASIC)
 	match chicken_type:

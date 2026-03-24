@@ -152,9 +152,9 @@ func _on_fighting_state_changed(new_fighting_state: FightingState) -> void:
 func _apply_display_mode() -> void:
 	match display_mode:
 		DisplayMode.BUYING_PHASE, DisplayMode.PREVIEW:
-			_entity_info_panel_3d.hide()
+			if _entity_info_panel_3d != null: _entity_info_panel_3d.hide()
 		DisplayMode.FIGHTING_PHASE:
-			_entity_info_panel_3d.show()
+			if _entity_info_panel_3d != null: _entity_info_panel_3d.show()
 
 	# Update animator (weapons + animations)
 	if _hero_animation != null:

@@ -72,8 +72,8 @@ func _ready() -> void:
 	super_strike_charges_changed.emit(_super_strike_charges, max_charge)
 	
 	# Connect to visual
-	if visual.has_method("update_resource_points"):
-		super_strike_charges_changed.connect(visual.update_resource_points)
+	#if visual.has_method("update_resource_points"):
+		#super_strike_charges_changed.connect(visual.update_resource_points)
 	
 	super._ready()
 
