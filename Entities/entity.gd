@@ -379,6 +379,7 @@ func connect_to_fighting_area(fighting_area_ref: FightingArea) -> void:
 		Verbose.error("Trying to connect a null fighting area to an Entity", Verbose.Category.ENTITY)
 		return
 	
+	_spawn_manager = fighting_area_ref.spawn_manager
 	if _projectile_sender != null:
 		_projectile_sender.connect_to_spawn_manager(fighting_area_ref.spawn_manager)
 	if _spell_sender != null:
