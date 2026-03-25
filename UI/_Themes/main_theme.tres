@@ -1,5 +1,6 @@
 [gd_resource type="Theme" format=3 uid="uid://deijluejrkd7e"]
 
+[ext_resource type="FontFile" uid="uid://dpqctqw78chgn" path="res://Data/font/Supersonic Rocketship.ttf" id="2_c6cb3"]
 [ext_resource type="FontFile" uid="uid://cxbnk5lhycv08" path="res://Data/font/KAMIKZOM.ttf" id="2_m6wv4"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1psgx"]
@@ -59,7 +60,7 @@ Label/constants/outline_size = 5
 Label/fonts/font = ExtResource("2_m6wv4")
 Panel/styles/panel = SubResource("StyleBoxFlat_c6cb3")
 RichTextLabel/constants/outline_size = 5
-RichTextLabel/fonts/normal_font = null
+RichTextLabel/fonts/normal_font = ExtResource("2_c6cb3")
 VScrollBar/styles/grabber = SubResource("StyleBoxEmpty_nkx1b")
 VScrollBar/styles/grabber_highlight = SubResource("StyleBoxEmpty_8s0gw")
 VScrollBar/styles/grabber_pressed = SubResource("StyleBoxEmpty_yrare")
