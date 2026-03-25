@@ -26,12 +26,12 @@ use_hdr = true
 render_priority = 0
 shader = ExtResource("3_tpkfp")
 shader_parameter/Trail_Scale = Vector2(0.59, 1.08)
-shader_parameter/Trail_Speed = Vector2(-0.185, 0)
+shader_parameter/Trail_Speed = Vector2(-0.305, 0)
 shader_parameter/Trail_Texture = ExtResource("5_mdf77")
 shader_parameter/Overlapping_Gradient = SubResource("GradientTexture1D_klrjt")
 shader_parameter/Gradient__Opacity = SubResource("GradientTexture2D_xj25x")
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_tpkfp"]
+[sub_resource type="QuadMesh" id="QuadMesh_6sfew"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jjp1b"]
 render_priority = 0
@@ -89,10 +89,17 @@ mesh = ExtResource("2_8i1ue")
 skeleton = NodePath("../..")
 
 [node name="MCrossed1" type="MeshInstance3D" parent="." unique_id=1705277642]
-transform = Transform3D(-4.058488, 0, 0.004927406, 0, 0.94598055, 0, -0.018346604, 0, -1.0900137, -3.740231, 0, 0.03521198)
+transform = Transform3D(-4.9492426, -2.3393697e-05, 0.008171604, 0, 1.568813, 0.0059630177, -0.022373306, 0.005174965, -1.8076773, -2.2768989, 0, 0.04182705)
 material_override = SubResource("ShaderMaterial_a4kce")
 cast_shadow = 0
-mesh = SubResource("PlaneMesh_tpkfp")
+mesh = SubResource("QuadMesh_6sfew")
+skeleton = NodePath("../..")
+
+[node name="MCrossed2" type="MeshInstance3D" parent="." unique_id=1081838779]
+transform = Transform3D(-4.9492426, 0.0070829513, -0.00040967963, 0, -0.07863284, -1.8054334, -0.022373304, -1.5668336, 0.0906053, -2.2768989, 0, 0.04182705)
+material_override = SubResource("ShaderMaterial_a4kce")
+cast_shadow = 0
+mesh = SubResource("QuadMesh_6sfew")
 skeleton = NodePath("../..")
 
 [node name="MBall" type="MeshInstance3D" parent="." unique_id=897874788]

@@ -86,23 +86,20 @@ cast_shadow = 0
 skeleton = NodePath("../../..")
 
 [node name="MBall" type="MeshInstance3D" parent="." unique_id=1771587957]
-transform = Transform3D(0.20962207, 0, 0, 0, -2.9604614e-08, -0.20518392, 0, 0.6772735, -8.968876e-09, 0, 0, 0.30267718)
-visible = false
+transform = Transform3D(0.12536861, 0, 0, 0, -1.3115413e-08, -0.12271429, 0, 0.3000452, -5.364013e-09, 0, 1.7177676e-08, -0.090301596)
 material_override = SubResource("ShaderMaterial_le01h")
 cast_shadow = 0
 mesh = SubResource("SphereMesh_0cmvw")
 skeleton = NodePath("../..")
 
 [node name="VFX_ElectricStrike" parent="." unique_id=2047567898 instance=ExtResource("6_suu7n")]
-transform = Transform3D(0.4075264, 0, 0, 0, 0.4075264, 0, 0, 0, 0.2581261, 0, 0, -0.13621573)
-
-[node name="MHeader" parent="VFX_ElectricStrike" index="1" unique_id=720016973]
-visible = false
+transform = Transform3D(0.4075264, 0, 0, 0, 0.4075264, 0, 0, 0, 0.2581261, 0, 0, 0.0370595)
 
 [node name="Trail2_dynamic" parent="VFX_ElectricStrike" index="3" unique_id=1227886102]
+transform = Transform3D(0.99999976, 0, 0, 0, 1, 0, 0, 0, 0.99999976, 0, 0.00146139, 0)
 mesh = SubResource("ImmediateMesh_smhu4")
 
 [node name="VFX_std_FireBall" parent="." unique_id=1158253114 instance=ExtResource("7_cdchw")]
-transform = Transform3D(-6.581191e-05, 0.004837665, 0.13942628, 0.011996877, 0.036509935, -0.018437026, -0.27199212, 0.0016091894, -0.0008469487, -8.660995e-05, 0.015788255, -0.3579499)
+transform = Transform3D(-5.8237114e-05, 0.006156149, 0.17742631, 0.010616064, 0.04646055, -0.023461953, -0.24068649, 0.0020477667, -0.001077781, -0.0071467604, 0.009553168, -0.195261)
 
 [editable path="VFX_ElectricStrike"]

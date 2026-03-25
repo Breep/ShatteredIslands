@@ -289,9 +289,6 @@ visible = false
 [node name="MeshInstance3D" parent="TestingFloorFFA5/CenterNode3D/Center5/Team5Area" parent_id_path=PackedInt32Array(283551194, 2136403487) index="1" unique_id=1937256180]
 visible = false
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=688220262]
-transform = Transform3D(0.20953494, 0.9711535, -0.11382448, -0.5411095, 0.2121261, 0.8137586, 0.8144296, -0.10891936, 0.56994826, -0.7068796, -10.037087, 0)
-
 [node name="FightingManager" parent="." unique_id=1380390082 instance=ExtResource("17_m26y3")]
 unique_name_in_owner = true
 

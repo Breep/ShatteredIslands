@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://8ufa1c3dhbri"]
 
 [ext_resource type="PackedScene" uid="uid://ovdmp2n8yynd" path="res://VFX/VFX_3D/Meteor/Scenes/vfx_crash.tscn" id="1_s0n17"]
-[ext_resource type="PackedScene" uid="uid://tdbxidy0fi2u" path="res://VFX/VFX_3D/Meteor/Scenes/VFX_Cube_projectile.tscn" id="2_6fwfb"]
+[ext_resource type="PackedScene" uid="uid://tdbxidy0fi2u" path="res://VFX/VFX_3D/Meteor/Scenes/VFX_smoke.tscn" id="2_6fwfb"]
 [ext_resource type="PackedScene" uid="uid://b3oxeny65clqf" path="res://VFX/VFX_3D/Meteor/Scenes/VFX_Fire_ball_type_B.tscn" id="3_gl7by"]
 [ext_resource type="Shader" uid="uid://ce35481cnedm8" path="res://VFX/VFX_3D/Meteor/meteor_decal.gdshader" id="4_1hacq"]
 [ext_resource type="Texture2D" uid="uid://dcu6fwselkyia" path="res://VFX/VFX_3D/Meteor/Textures/547FF097-370F-4D79-80A9-7EC93243F4EE.png" id="5_hkvdv"]

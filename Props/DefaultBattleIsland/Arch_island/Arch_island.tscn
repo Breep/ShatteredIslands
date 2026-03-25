@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://b0opqsmhxort7"]
 
 [ext_resource type="Texture2D" uid="uid://cpgjovjpnswwl" path="res://Props/DefaultBattleIsland/Arch_island/textures/citrus_orchard_road_puresky_4k.exr" id="1_wicrg"]
-[ext_resource type="PackedScene" uid="uid://duk3nfkcrkric" path="res://Props/DefaultBattleIsland/Arch_island/Props_Arena_Arena.tscn" id="2_cxbhe"]
 [ext_resource type="PackedScene" uid="uid://cg4hqe65owjkt" path="res://Props/DefaultBattleIsland/Arch_island/VFX/Scenes/VFX_FireStatic_K1.tscn" id="3_8xm7n"]
 [ext_resource type="PackedScene" uid="uid://do5bslbv5ulo0" path="res://Props/DefaultBattleIsland/Arch_island/props_arena_sword.tscn" id="3_cxbhe"]
 [ext_resource type="PackedScene" uid="uid://dreqt60l7aul0" path="res://Props/DefaultBattleIsland/Arch_island/props_arena_island_new.tscn" id="3_iktvg"]
@@ -160,12 +159,9 @@ environment = SubResource("Environment_x7fny")
 
 [node name="Arena2" parent="." unique_id=978031092 instance=ExtResource("3_v6pgo")]
 transform = Transform3D(1, -3.7252903e-09, 4.656613e-10, 0, 1, -7.450581e-09, 6.9849193e-10, 0, 1.0000001, 16.767658, 0, 15.267077)
-visible = false
 
 [node name="VFX_FireStatic_K1" parent="." unique_id=490239612 instance=ExtResource("3_8xm7n")]
 transform = Transform3D(2.4629161, 0, 1.8626451e-09, 1.4901161e-08, 2.4629164, 1.4901161e-08, -9.313226e-10, 2.9802322e-08, 2.4629164, -14.015333, 1.4212742, 12.431822)
-
-[node name="Arena" parent="." unique_id=1700311485 instance=ExtResource("2_cxbhe")]
 
 [node name="sword" parent="." unique_id=1966000435 instance=ExtResource("3_cxbhe")]
 transform = Transform3D(0.7105863, -1.4041106, 2.4499168, 2.4068573, 1.6223127, 0.23169237, -1.4767017, 1.968534, 1.5565279, 18.589323, -4.563635, 2.7572494)
