@@ -84,9 +84,6 @@ var is_targetable: bool:
 			return not status_module.has_status(Status.Type.UNTARGETABLE)
 		return _is_targetable
 
-var visual: EntityInfoPanel3D: # TODO Rename this
-	get: return _entity_info_panel_3d
-
 # Auto loaded extensions
 var stats: EntityStats
 var conditions: ConditionsModule
@@ -131,6 +128,8 @@ var _status_sender: ActionSenderStatusModule
 # Status module
 var status_module: StatusModule
 
+var _label_popup_module: LabelPopupModule
+
 # Spawn system
 var _original_fighting_state: FightingState = FightingState.UNDEF
 var _spawn_tween: Tween = null
@@ -164,11 +163,12 @@ var _spawn_ticks_remaining: int = -1
 	Module.ModuleType.ACTION_RECEIVER_ADD_STACK,
 	Module.ModuleType.ACTION_RECEIVER_REMOVE_STACK,
 	Module.ModuleType.ACTION_RECEIVER_STATUS,
+	Module.ModuleType.LABEL_POPUP_MODULE
 ]
 
 @export_subgroup("Visual")
 @export var _visual_3d: Node3D # Visual node for spawn animation
-@export var _entity_info_panel_3d: EntityInfoPanel3D
+@export var _health_bar_marker: Marker3D
 
 @export_subgroup("Visual/Animation")
 @export var _animation_module: AnimationModule
@@ -486,7 +486,6 @@ func resurrect(hp_percent: float) -> void:
 	if conditions != null: conditions.start()
 	if _movement_module != null: _movement_module.start()
 	if _auto_attack_periodic_module != null and auto_attack_enabled: _auto_attack_periodic_module.start()
-	if _entity_info_panel_3d != null: _entity_info_panel_3d.show()
 	resurrected.emit()
 #endregion
 
@@ -530,7 +529,7 @@ func _complete_spawn() -> void:
 #region ============================== Auto loading ==============================
 func _auto_load_modules() -> void:
 	for module_type in _auto_loaded_modules:
-		var module: Module = Shared.ENTITY_MODULE_SCENES[module_type].instantiate().init(self )
+		var module: Module = Shared.ENTITY_MODULE_SCENES[module_type].instantiate().init(self)
 		match module_type:
 			Module.ModuleType.TARGET:
 				target_module = module
@@ -560,6 +559,7 @@ func _auto_load_modules() -> void:
 			Module.ModuleType.ACTION_SENDER_STATUS: _status_sender = module
 			Module.ModuleType.STATUS: status_module = module
 			Module.ModuleType.AUTO_ATTACK_PERIODIC_MODULE: _auto_attack_periodic_module = module
+			Module.ModuleType.LABEL_POPUP_MODULE: _label_popup_module = module
 		
 		add_child(module)
 
@@ -574,6 +574,9 @@ func _connect_module_dependencies() -> void:
 	
 	if _animation_module != null:
 		_animation_module.connect_modules(_auto_attack_sender)
+	
+	if _label_popup_module != null:
+		_label_popup_module.connect_marker(_health_bar_marker)
 #endregion
 
 #region ============================== Callbacks ==============================
@@ -612,8 +615,6 @@ func _on_stats_health_changed(new_health: float) -> void:
 func _on_stats_scale_changed(new_scale: float) -> void:
 	if is_instance_valid(_visual_3d):
 		_visual_3d.scale = Vector3(new_scale, new_scale, new_scale)
-	if is_instance_valid(_entity_info_panel_3d):
-		_entity_info_panel_3d.scale = Vector3(new_scale, new_scale, new_scale)
 
 
 func _on_died() -> void:
@@ -626,7 +627,6 @@ func _on_died() -> void:
 	if conditions != null: conditions.stop()
 	if _movement_module != null: _movement_module.stop()
 	if _auto_attack_periodic_module != null and auto_attack_enabled: _auto_attack_periodic_module.stop()
-	if _entity_info_panel_3d != null: _entity_info_panel_3d.hide()
 	
 	for action_modifier in death_modifiers_registry.consume_all_modifiers():
 		if action_modifier.after_action_logic_callback.is_valid():

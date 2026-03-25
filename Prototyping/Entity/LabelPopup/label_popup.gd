@@ -38,8 +38,8 @@ var _is_crit: bool = false
 @export_range(0.0, 0.05, 0.001) var effective_display_duration_max: float = 1.0
 
 @export_subgroup("Y Spread (Rise)")
-@export_range(0.0, 300.0, 1.0) var rise_height: float = 40.0
-@export_range(0.0, 0.05, 0.001) var effective_rise_max: float = 100
+@export_range(0.0, 300.0, 1.0) var rise_height: float = 20
+@export_range(0.0, 0.05, 0.001) var effective_rise_max: float = 50
 
 @export_subgroup("X spread (Left|Right)")
 @export_range(0.0, 300.0, 1.0) var x_left: float = -30

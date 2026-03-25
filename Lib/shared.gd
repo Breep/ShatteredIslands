@@ -44,6 +44,8 @@ var ENTITY_MODULE_SCENES: Dictionary[Module.ModuleType, PackedScene] = {
 	Module.ModuleType.ACTION_RECEIVER_ADD_STACK: load("res://Entities/Modules/ActionReceiverModule/AddStack/action_receiver_add_stack_module.tscn"),
 	Module.ModuleType.ACTION_RECEIVER_REMOVE_STACK: load("res://Entities/Modules/ActionReceiverModule/RemoveStack/action_receiver_remove_stack_module.tscn"),
 	Module.ModuleType.ACTION_RECEIVER_STATUS: load("res://Entities/Modules/ActionReceiverModule/Status/action_receiver_status_module.tscn"),
+	
+	Module.ModuleType.LABEL_POPUP_MODULE: load("res://Entities/Modules/PopupModule/label_popup_module.tscn")
 }
 
 var FAMILY_MANAGER_SCENES: Dictionary[Family.Type, PackedScene] = {
