@@ -5,7 +5,7 @@ extends Module
 @export var _popup_marker: Marker3D
 
 @export_group("Optional Configuration")
-@export var _radius: float = 10
+@export var _radius: float = 1
 
 @onready var random:= RandomNumberGenerator.new()
 
@@ -30,7 +30,7 @@ func damage_popup(amount: float, damage_type: Utils.ActionType, is_critic: bool 
 	var x = random.randf_range(-1,1)
 	var y = random.randf_range(0.07,1)
 	var r = random.randf_range(0, _radius)
-	var offset = Vector3(x,y,x).normalized() * 1
+	var offset = Vector3(x,y,x).normalized() * _radius
 	
 	popup.set_value(amount)
 	popup.init(_popup_marker.global_position + offset)
