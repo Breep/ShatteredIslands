@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dv0rauvoaxb0y" path="res://Entities/Heroes/DarkKnight/Skins/Standard/dark_knight_black.tscn" id="3_5c32l"]
 [ext_resource type="PackedScene" uid="uid://jwk6d3k8w3k5" path="res://Entities/EntityInfoPanel/EntityInfoPanel3D/entity_info_panel_3d.tscn" id="3_502n4"]
 [ext_resource type="PackedScene" uid="uid://boxbtk57aorey" path="res://Entities/EntityInfoPanel/HeroSimpleInfoPanel2D/hero_simple_info_panel_2d.tscn" id="6_3htvw"]
-[ext_resource type="PackedScene" uid="uid://c1ncf16eblcti" path="res://Entities/Modules/PopupModule/damage_popup_module.tscn" id="7_whq83"]
+[ext_resource type="PackedScene" uid="uid://c1ncf16eblcti" path="res://Entities/Modules/PopupModule/label_popup_module.tscn" id="7_whq83"]
 [ext_resource type="PackedScene" uid="uid://cpqtocfge7ott" path="res://Entities/Heroes/_Shared/HeroAnimationModule/hero_animation_module.tscn" id="10_3dwlx"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ev6jf"]

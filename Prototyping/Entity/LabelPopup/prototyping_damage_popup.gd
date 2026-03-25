@@ -71,6 +71,13 @@ func _on_btn_pure_pressed() -> void:
 	_apply_damage(Utils.ActionType.DAMAGE_PURE, &"test_pure")
 
 
+# ============================== Soins ==============================
+
+func _on_btn_heal_pressed() -> void:
+	for i in int(_loop_count_spinbox.value):
+		_owner_entity.take_heal(_get_damage_value(), _is_critical(), &"test_heal")
+
+
 # ============================== Stacks ==============================
 
 func _on_btn_stack_poison_pressed() -> void:
@@ -87,3 +94,14 @@ func _on_btn_stack_necrosis_pressed() -> void:
 
 func _on_btn_stack_regen_pressed() -> void:
 	_apply_stacks(Stack.Type.REGEN, &"test_stack_regen")
+
+
+func _on_btn_stack_shield_pressed() -> void:
+	_apply_stacks(Stack.Type.SHIELD, &"test_stack_shield")
+
+
+# ============================== Évènements combat ==============================
+
+func _on_btn_dodge_pressed() -> void:
+	for i in int(_loop_count_spinbox.value):
+		_owner_entity.action_dodged.emit(_owner_entity, Utils.ActionType.DAMAGE_PHYSICAL, _get_damage_value(), _is_critical())

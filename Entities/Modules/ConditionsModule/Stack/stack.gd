@@ -38,7 +38,7 @@ enum ModifierType {
 
 const COLORS: Dictionary[Type, Color] = {
 	Type.POISON: Color.WEB_GREEN,
-	Type.SHIELD: Color.SADDLE_BROWN,
+	Type.SHIELD: Color.YELLOW,
 	Type.IGNITE: Color.DARK_RED,
 	Type.REGEN: Color.AQUAMARINE,
 	Type.NECROSIS: Color.REBECCA_PURPLE

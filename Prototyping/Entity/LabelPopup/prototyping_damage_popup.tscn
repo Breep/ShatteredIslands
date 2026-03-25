@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://xup3guwehhoc" path="res://Entities/NPC/Fighting/ChickenLord/Chicken/Basic/chicken_basic.tscn" id="2_cnl0v"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/Stats/EntityStats/entity_stats.gd" id="3_505v6"]
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="3_myg6t"]
-[ext_resource type="PackedScene" uid="uid://c1ncf16eblcti" path="res://Entities/Modules/PopupModule/damage_popup_module.tscn" id="5_2cic7"]
+[ext_resource type="PackedScene" uid="uid://c1ncf16eblcti" path="res://Entities/Modules/PopupModule/label_popup_module.tscn" id="5_2cic7"]
 [ext_resource type="PackedScene" uid="uid://cmushgkek5lf8" path="res://Props/DefaultBattleIsland/Arch_island/arena_02.tscn" id="6_2cic7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_505v6"]
@@ -145,6 +145,18 @@ text = "Poison"
 layout_mode = 2
 text = "Pur"
 
+[node name="SepHeal" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000044]
+layout_mode = 2
+
+[node name="LabelHeal" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000045]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Soins"
+
+[node name="BtnHeal" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000046]
+layout_mode = 2
+text = "Soin"
+
 [node name="SepStacks" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000019]
 layout_mode = 2
 
@@ -168,6 +180,22 @@ text = "Nécrose"
 [node name="BtnStackRegen" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000024]
 layout_mode = 2
 text = "Régén"
+
+[node name="BtnStackShield" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000040]
+layout_mode = 2
+text = "Bouclier"
+
+[node name="SepEvents" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000041]
+layout_mode = 2
+
+[node name="LabelEvents" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000042]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Évènements"
+
+[node name="BtnDodge" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000043]
+layout_mode = 2
+text = "Dodge"
 
 [node name="SepAnim" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000028]
 layout_mode = 2
@@ -245,7 +273,10 @@ transform = Transform3D(0.813243, -0.56390136, 0.14370519, 0, 0.24694826, 0.9690
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/BtnMagical" to="." method="_on_btn_magical_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/BtnPoisonDmg" to="." method="_on_btn_poison_dmg_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/BtnPure" to="." method="_on_btn_pure_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/BtnHeal" to="." method="_on_btn_heal_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/BtnStackPoison" to="." method="_on_btn_stack_poison_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/BtnStackIgnite" to="." method="_on_btn_stack_ignite_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/BtnStackNecrosis" to="." method="_on_btn_stack_necrosis_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/BtnStackRegen" to="." method="_on_btn_stack_regen_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/BtnStackShield" to="." method="_on_btn_stack_shield_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/BtnDodge" to="." method="_on_btn_dodge_pressed"]

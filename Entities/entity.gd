@@ -10,7 +10,7 @@ signal action_received(source: Entity, action_type: Utils.ActionType, action_id:
 @warning_ignore("unused_signal")
 signal action_done(target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool)
 @warning_ignore("unused_signal")
-signal action_dodged(source: Entity, action_type: Utils.ActionType)
+signal action_dodged(source: Entity, action_type: Utils.ActionType, value: float, is_critical: bool)
 @warning_ignore("unused_signal")
 signal critical_action_done(target: Entity, action_type: Utils.ActionType, value_before_crit: float, value_after_crit: float)
 @warning_ignore("unused_signal")

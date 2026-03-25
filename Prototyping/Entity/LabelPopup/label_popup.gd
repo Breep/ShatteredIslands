@@ -1,10 +1,27 @@
 class_name LabelPopup
 extends Control
 
+const SCENE: PackedScene = preload("res://Prototyping/Entity/LabelPopup/label_popup.tscn")
+
+const COLOR_PHYSICAL: Color = Color(0.934, 0.934, 0.934, 1.0)
+const COLOR_MAGICAL:  Color = Color(0.0, 0.455, 0.952, 1.0)
+const COLOR_POISON:   Color = Color.WEB_GREEN
+const COLOR_PURE:     Color = Color(0.815, 0.656, 0.0, 1.0)
+const COLOR_HEAL:     Color = Color(0.3, 1.0, 0.4)
+const COLOR_DODGE:    Color = Color(0.011, 0.0, 0.821, 1.0)
+const COLOR_BLOCK:    Color = Color(0.353, 0.165, 0.0, 1.0)
+
+const CRIT_SCALE_MULTIPLIER: float = 1.5
+const CRIT_RISE_MULTIPLIER: float = 1.5
+const CRIT_DURATION_MULTIPLIER: float = 1.5
+const CRIT_OUTLINE_COLOR: Color = Color(0.652, 0.083, 0.134, 1.0)
+
 @onready var _damage_label: RichTextLabel = %DamageLabel
 
 var _spawn_position: Vector3
 var _damage_value: float
+var _label_text: String = ""
+var _is_crit: bool = false
 
 @export_group("Animation")
 @export_subgroup("Value Spreading")
@@ -34,8 +51,14 @@ var _damage_value: float
 
 #region ============================== Node base functions ==============================
 func _ready() -> void:
-	_damage_label.text = str(_damage_value).pad_decimals(0)
-	_damage_label.modulate = text_color
+	_damage_label.text = _label_text if not _label_text.is_empty() else str(_damage_value).pad_decimals(0)
+	_damage_label.add_theme_color_override("default_color", text_color)
+	if _is_crit:
+		_damage_label.text = "[center][shake rate=10.0 level=3.0]%s[/shake][/center]" % _damage_label.text
+		_damage_label.rotation = deg_to_rad(randf_range(-15, 15))
+		_damage_label.add_theme_color_override("font_outline_color", CRIT_OUTLINE_COLOR)
+	else:
+		_damage_label.text = "[center]%s[/center]" % _damage_label.text
 	_pop()
 
 
@@ -53,10 +76,99 @@ func init(spawn_position: Vector3) -> void:
 
 func set_value(value: float) -> void:
 	_damage_value = value
+
+
+func set_crit() -> LabelPopup:
+	_is_crit = true
+	return self
+
+
+# --- Damage ---
+static func damage_physical(value: float) -> LabelPopup:
+	return _create(value, COLOR_PHYSICAL)
+
+
+static func damage_magical(value: float) -> LabelPopup:
+	return _create(value, COLOR_MAGICAL)
+
+
+static func damage_poison(value: float) -> LabelPopup:
+	return _create(value, COLOR_POISON)
+
+
+static func damage_pure(value: float) -> LabelPopup:
+	return _create(value, COLOR_PURE)
+
+
+# --- Heal ---
+static func heal(value: float) -> LabelPopup:
+	return _create(value, COLOR_HEAL)
+
+
+# --- Stack ---
+static func stack(value: float, stack_type: Stack.Type) -> LabelPopup:
+	return _create(value, Stack.COLORS[stack_type])
+
+
+static func stack_poison(value: float) -> LabelPopup:
+	return stack(value, Stack.Type.POISON)
+
+
+static func stack_ignite(value: float) -> LabelPopup:
+	return stack(value, Stack.Type.IGNITE)
+
+
+static func stack_necrosis(value: float) -> LabelPopup:
+	return stack(value, Stack.Type.NECROSIS)
+
+
+static func stack_regen(value: float) -> LabelPopup:
+	return stack(value, Stack.Type.REGEN)
+
+
+static func stack_shield(value: float) -> LabelPopup:
+	return stack(value, Stack.Type.SHIELD)
+
+
+# --- Combat events ---
+static func dodge(value: float = 0.0, is_crit: bool = false) -> LabelPopup:
+	var popup := _create_text_with_value("Dodge", value, COLOR_DODGE)
+	if is_crit:
+		popup._is_crit = true
+	return popup
+
+
+static func block(value: float = 0.0, is_crit: bool = false) -> LabelPopup:
+	var popup := _create_text_with_value("Block", value, COLOR_BLOCK)
+	if is_crit:
+		popup._is_crit = true
+	return popup
 #endregion
 
 
 #region ============================== Private API ==============================
+static func _create(value: float, color: Color) -> LabelPopup:
+	var popup := SCENE.instantiate() as LabelPopup
+	popup._damage_value = value
+	popup.text_color = color
+	return popup
+
+
+static func _create_text(text: String, color: Color) -> LabelPopup:
+	var popup := SCENE.instantiate() as LabelPopup
+	popup._label_text = text
+	popup.text_color = color
+	return popup
+
+
+static func _create_text_with_value(text: String, value: float, color: Color) -> LabelPopup:
+	var popup := SCENE.instantiate() as LabelPopup
+	popup._label_text = text
+	popup._damage_value = value
+	popup.text_color = color
+	return popup
+
+
 func _pop() -> void:
 	var scale_bonus: float = remap(_damage_value, param_ratio_value_min, param_ratio_value_max, 0, effective_scale_max)
 	var effective_scale: float = clampf(base_scale + scale_bonus, base_scale, effective_scale_max)
@@ -66,6 +178,11 @@ func _pop() -> void:
 	
 	var display_duration_bonus: float = remap(_damage_value, param_ratio_value_min, param_ratio_value_max, 0, effective_display_duration_max)
 	var effective_display_duration: float = clampf(display_duration + display_duration_bonus, display_duration, effective_display_duration_max)
+	
+	if _is_crit:
+		effective_scale *= CRIT_SCALE_MULTIPLIER
+		effective_rise *= CRIT_RISE_MULTIPLIER
+		effective_display_duration *= CRIT_DURATION_MULTIPLIER
 
 	var tween = create_tween().set_parallel(true)
 

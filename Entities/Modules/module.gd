@@ -21,6 +21,7 @@ enum ModuleType {
 	ACTION_RECEIVER_ADD_STACK,
 	ACTION_RECEIVER_REMOVE_STACK,
 	ACTION_RECEIVER_STATUS,
+	LABEL_POPUP_MODULE,
 }
 
 @export var _owner: Entity # Owner of the module
