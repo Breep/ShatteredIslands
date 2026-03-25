@@ -1,8 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://fnv0ucah4mef"]
+[gd_scene format=3 uid="uid://fnv0ucah4mef"]
 
-[ext_resource type="Shader" uid="uid://c48mlstaikjgr" path="res://VFX/shaders/s_basic_disolve2_ds.tres" id="1_h0tac"]
-[ext_resource type="Texture2D" uid="uid://p882hvpsbqve" path="res://VFX/textures/T_VFX_spark44.jpg" id="2_ptxmn"]
-[ext_resource type="ArrayMesh" uid="uid://br6ut6eugl76n" path="res://VFX/objects/sm_sparksphere.obj" id="3_2r25m"]
+[ext_resource type="Shader" uid="uid://c48mlstaikjgr" path="res://Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Shaders/s_basic_disolve2_ds.tres" id="1_h0tac"]
+[ext_resource type="Texture2D" uid="uid://p882hvpsbqve" path="res://VFX/VFX_3D/VFX/Textures/T_VFX_spark44.jpg" id="2_ptxmn"]
+[ext_resource type="ArrayMesh" uid="uid://br6ut6eugl76n" path="res://Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Objects/sm_sparksphere.obj" id="3_2r25m"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7pc1x"]
 render_priority = 1
@@ -42,13 +42,16 @@ alpha_curve = SubResource("CurveTexture_rgg8w")
 anim_speed_min = 2.0
 anim_speed_max = 2.0
 
-[node name="VFX_Sparks_Bk1" type="Node3D"]
+[node name="VFX_Sparks_Bk1" type="Node3D" unique_id=911994899]
+transform = Transform3D(0.22274423, 0, 0, 0, 0.22274423, 0, 0, 0, 0.22274423, 0, 0, 0)
 
-[node name="sparks3" type="GPUParticles3D" parent="."]
+[node name="sparks3" type="GPUParticles3D" parent="." unique_id=1609137949]
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_7pc1x")
 cast_shadow = 0
 amount = 6
 lifetime = 0.25
+speed_scale = 0.38
 explosiveness = 0.9
 randomness = 0.5
 fixed_fps = 60

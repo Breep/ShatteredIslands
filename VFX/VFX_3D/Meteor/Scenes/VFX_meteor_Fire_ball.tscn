@@ -7,8 +7,7 @@
 [ext_resource type="Script" uid="uid://d1hqcabxmjoyf" path="res://VFX/VFX_3D/Meteor/Misc/Trail3D.gd" id="4_ig45u"]
 [ext_resource type="Shader" uid="uid://duvytfaft2817" path="res://VFX/VFX_3D/VFX/Shaders/s_fireball_shader.tres" id="5_ixu2y"]
 [ext_resource type="ArrayMesh" uid="uid://dwr8m6juolyd8" path="res://VFX/VFX_3D/Meteor/Objects/fireball_mesh_st.obj" id="6_ou60u"]
-[ext_resource type="Shader" uid="uid://dqd6vb4yowvwv" path="res://VFX/VFX_3D/Meteor/Shaders/s_FireHeader_shader.tres" id="7_wi8x6"]
-[ext_resource type="PackedScene" uid="uid://d4i83bqlqpy0a" path="res://VFX/VFX_3D/Meteor/Scenes/VFX_Electric_strike_1.tscn" id="10_0tpmt"]
+[ext_resource type="Shader" uid="uid://dqd6vb4yowvwv" path="res://Props/DefaultBattleIsland/Arch_island/VFX/shaders/s_FireHeader_shader.tres" id="7_wi8x6"]
 [ext_resource type="PackedScene" uid="uid://bwg0s21ipwovx" path="res://VFX/VFX_3D/Meteor/Scenes/VFX_Hadouken.tscn" id="10_j5fcg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0mdtd"]
@@ -55,7 +54,7 @@ shader_parameter/Scale = Vector2(0.2, 1)
 shader_parameter/Trail_Speed = Vector2(3, 0)
 shader_parameter/Texture2DParameter = ExtResource("4_f4e2w")
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_htc3c"]
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_yy0lk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_66jmh"]
 render_priority = 1
@@ -97,7 +96,7 @@ mesh = SubResource("QuadMesh_mdojf")
 transform = Transform3D(0.68293303, 0.7304805, 0, -0.66372097, 0.6205183, -0.4176495, -0.30508482, 0.28522637, 0.90860873, 0, 0.00146139, 0)
 material_override = SubResource("ShaderMaterial_uwnww")
 cast_shadow = 0
-mesh = SubResource("ImmediateMesh_htc3c")
+mesh = SubResource("ImmediateMesh_yy0lk")
 skeleton = NodePath("../..")
 script = ExtResource("4_ig45u")
 fromWidth = 1.3
@@ -127,6 +126,3 @@ light_energy = 1.5
 
 [node name="VFX_Hadouken" parent="." unique_id=681758968 instance=ExtResource("10_j5fcg")]
 transform = Transform3D(0.62265515, 0, 0, 0, 0.62265503, -1.7763568e-15, 0, 1.7763568e-15, 0.62265503, 0, 7.27343e-09, -0.16639668)
-
-[node name="VFX_ElectricStrike" parent="." unique_id=2047567898 instance=ExtResource("10_0tpmt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.274234)

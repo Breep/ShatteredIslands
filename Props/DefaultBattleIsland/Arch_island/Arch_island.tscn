@@ -132,8 +132,12 @@ light_volumetric_fog_energy = 6.0
 light_angular_distance = 17.63
 
 [node name="Camera3D" type="Camera3D" parent="SpotLight3D" unique_id=962265795]
-transform = Transform3D(-0.009659482, -0.77511096, 0.6317511, 0.99888855, -0.036627553, -0.029666245, 0.046134137, 0.6307622, 0.7746034, 60.484, -1.316, 60.375)
-fov = 23.6
+transform = Transform3D(-0.00965948, -0.7751109, 0.6317511, 0.99888855, -0.036627553, -0.029666247, 0.046134137, 0.63076216, 0.7746034, 60.484, 0, 62.17)
+fov = 48.6
+
+[node name="Camera3D" type="Camera3D" parent="SpotLight3D/Camera3D" unique_id=689490499]
+transform = Transform3D(0.9999619, -0.008726535, 0, 0.008726535, 0.9999619, 0, 0, 0, 1, -2.77, -1.735, -52.795)
+fov = 35.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="SpotLight3D" unique_id=582765361]
 transform = Transform3D(1.0000001, -2.0489097e-08, 0, 2.142042e-08, 1, -8.5739885e-08, 0, 8.440111e-08, 1, -2.3444138, 19.697495, -16.180607)

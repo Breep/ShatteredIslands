@@ -10,14 +10,14 @@ colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_kj0nh"]
 gradient = SubResource("Gradient_158c3")
 fill_from = Vector2(1, 1)
-fill_to = Vector2(1, 0.4045584)
+fill_to = Vector2(1, 0.36182335)
 
 [resource]
 render_priority = 1
 shader = ExtResource("1_1ivve")
 shader_parameter/Wave_Speed = 2.74
 shader_parameter/Wave_Intensity = 0.4
-shader_parameter/Color = Color(0.7, 0.8, 2, 1)
+shader_parameter/Color = Color(0.5254934, 0.57759094, 0.9719289, 1)
 shader_parameter/Dissapear_Step = 0.4
 shader_parameter/Fire_Scale = Vector2(1, 1)
 shader_parameter/Fire_Speed = Vector2(0.945, 0.76)
