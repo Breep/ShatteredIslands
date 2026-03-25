@@ -39,9 +39,13 @@ func _on_inflict_condition_ignite(cb_vars: Dictionary) -> void:
 	if stack_type != Stack.Type.IGNITE: return
 	for i in stack_value:
 		if Utils.is_randomize_modifier_active(_ardent_celestial_stats.meteor_chance[level], _owner.battle_id):
+			for cb in _ardent_celestial_stats.meteor_on_cast_callbacks:
+				if cb.is_valid():
+					cb.call({})
+				
 			_owner.cast_spell(target, Spell.Type.METEOR, {
-					Spell.MeteorModifier.DAMAGE_PERCENT: _ardent_celestial_stats.meteor_damage_percent[level],
-					Spell.MeteorModifier.RADIUS: _ardent_celestial_stats.meteor_radius,
-					Spell.MeteorModifier.ON_HIT_CALLBACKS: _ardent_celestial_stats.meteor_modifiers
-					})
+				Spell.MeteorModifier.DAMAGE_PERCENT: _ardent_celestial_stats.meteor_damage_percent[level],
+				Spell.MeteorModifier.RADIUS: _ardent_celestial_stats.meteor_radius,
+				Spell.MeteorModifier.ON_HIT_CALLBACKS: _ardent_celestial_stats.meteor_on_hit_callbacks
+				})
 #endregion

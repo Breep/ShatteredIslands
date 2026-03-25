@@ -2,7 +2,8 @@ class_name FamilyArdentCelestialStats
 extends FamilyStats
 
 # Shared meteor modifier callbacks — cards append, ArdentCelestialManager reads when casting meteors
-var meteor_modifiers: Array[Callable] = []
+var meteor_on_hit_callbacks: Array[Callable] = []
+var meteor_on_cast_callbacks: Array[Callable] = []
 
 # [TITANS PROTECTION] cumulative HP increase tracking (reset by ArdentCelestialManager on stop)
 var titans_protection_accumulated_hp: float = 0.0

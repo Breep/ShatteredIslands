@@ -1,31 +1,42 @@
 class_name FireApocalypse
 extends HeroUpgrade
 
-@export var _damage_ratio: Array[float]
+@export var _meteor_bonus: Array[int]
+@export var _proc_chance: Array[float]
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[Card.Rarity.LEGENDARY]:
-		printerr("FireApocalypse: Wrong card_lvl: ", card_lvl)
+		printerr("Apocalypse: Wrong card_lvl: ", card_lvl)
 		return
+	
+	var meteor_bonus: int = _meteor_bonus[card_lvl -1]
+	var proc_chance: float = _proc_chance[card_lvl - 1]
 
-	var ratio: float = _damage_ratio[card_lvl - 1]
-
-	ctx.hero.families_stats.ardent_celestial.meteor_modifiers.append(func(cb_vars: Dictionary) -> void:
-		var entities_inside: Array = cb_vars.get(Meteor.VarType.ENTITIES_INSIDE, [])
-		for entity: Entity in entities_inside:
-			if entity == null or not is_instance_valid(entity) or entity.is_dead(): continue
-			if entity.team == ctx.hero.team: continue
-			var ignite_stacks: float = entity.conditions.ignite_stacks
-			if ignite_stacks > 0:
-				var bonus_damage: float = ignite_stacks * ratio
-				ctx.hero.direct_damage(entity, bonus_damage, Utils.ActionType.DAMAGE_MAGICAL, &"Apocalypse")
+	ctx.hero.families_stats.ardent_celestial.meteor_on_cast_callbacks.append(func(_cb_vars: Dictionary) -> void:
+		recast(ctx, _meteor_bonus[card_lvl - 1])
 	)
 
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[Card.Rarity.LEGENDARY]:
 		return "ERROR"
+	return "toto"
+	#var ratio = str(_damage_ratio[cardlvl - 1])
+#
+	#return "Meteors deal bonus magic damage equal to +" + ratio + " * target's current Ignite stacks."
 
-	var ratio = str(_damage_ratio[cardlvl - 1])
-
-	return "Meteors deal bonus magic damage equal to +" + ratio + " * target's current Ignite stacks."
+func recast(ctx: CardContext, remaining_meteor: int) -> void:
+	print("remaining meteor: ",str(remaining_meteor))
+	if remaining_meteor <= 0:
+		return
+	var target: Entity = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
+	if not is_instance_valid(target): return
+	var _ardent_celestial_stats: FamilyArdentCelestialStats = ctx.hero.families_stats.ardent_celestial
+	var families_level: Dictionary[Family.Type, int] = ctx.hero.get_families_level()
+	var ardent_celestial_level: int = families_level[Family.Type.ARDENT_CELESTIAL]
+	ctx.hero.cast_spell(target, Spell.Type.METEOR,{ 
+		Spell.MeteorModifier.DAMAGE_PERCENT: _ardent_celestial_stats.meteor_damage_percent[ardent_celestial_level],
+		Spell.MeteorModifier.RADIUS: _ardent_celestial_stats.meteor_radius,
+		Spell.MeteorModifier.ON_HIT_CALLBACKS: _ardent_celestial_stats.meteor_on_hit_callbacks
+		})
+	recast(ctx, remaining_meteor - 1)
