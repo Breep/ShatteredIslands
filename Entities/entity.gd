@@ -52,7 +52,8 @@ enum EntityType {
 	FORTIFICATION_DRONE,
 	AEGIS_BLADE,
 	DEFLECTION_SHIELD,
-	TREX
+	TREX,
+	CHICKEN_EGG
 }
 
 enum SnakeBarrelModifier {

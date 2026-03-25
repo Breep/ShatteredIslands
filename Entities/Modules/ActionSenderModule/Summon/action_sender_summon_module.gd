@@ -23,6 +23,7 @@ const AEGIS_BLADE_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Engi
 const DEFLECTION_SHIELD: PackedScene = preload("res://Entities/NPC/Fighting/Engineer/DeflectionShield/deflection_shield.tscn")
 
 const TREX_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/ChickenLord/TRex/trex.tscn")
+const CHICKEN_EGG_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/ChickenLord/ChickenEgg/chicken_egg.tscn")
 
 # ============================== Public functions ==============================
 
@@ -64,6 +65,7 @@ func summon_entity(entity_type: Entity.EntityType, spawn_config: SpawnLocationCo
 		Entity.EntityType.AEGIS_BLADE: _summon_aegis_blade(spawn_position, entity_modifier)
 		Entity.EntityType.DEFLECTION_SHIELD: _summon_deflection_shield(spawn_position, entity_modifier)
 		Entity.EntityType.TREX: _summon_trex(spawn_position, entity_modifier)
+		Entity.EntityType.CHICKEN_EGG: _summon_chicken_egg(spawn_position, entity_modifier)
 
 # ============================== Private functions ==============================
 
@@ -180,6 +182,16 @@ func _summon_trex(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
 	_spawn_manager.spawn_entity(trex, spawn_position, _owner.get_context())
 
  
+func _summon_chicken_egg(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
+	var egg: ChickenEgg = CHICKEN_EGG_SCENE.instantiate()
+	var hatch_time: float = entity_modifier.get(ChickenEgg.Modifier.HATCH_TIME, 3.0)
+	var chicken_type: Chicken.Type = entity_modifier.get(ChickenEgg.Modifier.CHICKEN_TYPE, Chicken.Type.BASIC)
+	var chicken_modifiers: Dictionary = entity_modifier.get(ChickenEgg.Modifier.CHICKEN_MODIFIERS, {})
+	var hatch_modifiers: Array[HatchModifier] = entity_modifier.get(ChickenEgg.Modifier.HATCH_MODIFIERS, [] as Array[HatchModifier])
+	egg.init(hatch_time, chicken_type, chicken_modifiers, hatch_modifiers)
+	_spawn_manager.spawn_entity(egg, spawn_position, _owner.get_context(), Entity.EntityType.CHICKEN_EGG)
+
+
 func _summon_deflection_shield(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
 	var deflection_shield: DeflectionShield = DEFLECTION_SHIELD.instantiate()
 	var blocked_projectiles: int = entity_modifier.get(DeflectionShield.Modifier.BLOCKED_PROJECTILES, 1)
