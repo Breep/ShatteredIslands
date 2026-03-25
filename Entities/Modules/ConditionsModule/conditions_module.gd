@@ -6,7 +6,7 @@ extends Module
 
 #region ============================== Constants ==============================
 const TICKS_PER_SECOND: int = 60
-const IGNITE_MAXHP_PERCENT: float = 0.05
+const IGNITE_MAXHP_PERCENT: float = 0.01
 
 # Tick intervals for periodic effects (in seconds, converted to ticks)
 const POISON_TICK_INTERVAL: float = 1.0
