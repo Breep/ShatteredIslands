@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://l71exk2kbsqy"]
 
-[ext_resource type="Script" uid="uid://dm825ldmwy4ap" path="res://Prototyping/Entity/DamagePopup/damage_popup_2.gd" id="1_ceye4"]
+[ext_resource type="Script" path="res://Prototyping/Entity/DamagePopup/damage_popup_2.gd" id="1_ceye4"]
 
 [node name="DamagePopup2" type="Control" unique_id=710220277]
 layout_mode = 3
@@ -30,6 +30,8 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 mouse_filter = 2
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 20
 text = "42"
 horizontal_alignment = 1
 vertical_alignment = 1

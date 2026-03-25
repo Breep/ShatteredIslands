@@ -279,6 +279,6 @@ grow_horizontal = 2
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/normal_font_size = 12
 bbcode_enabled = true
-text = "[shake][rainbow]Breep"
+text = "Breep"
 horizontal_alignment = 1
 vertical_alignment = 1

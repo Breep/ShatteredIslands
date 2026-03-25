@@ -13,7 +13,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	var camera = get_viewport().get_camera_3d()
 	if camera != null and _spawn_position != null:
-		position = camera.unproject_position(_spawn_position)
+		global_position = camera.unproject_position(_spawn_position)
 
 #region ============================== Public API ==============================
 func init(spawn_position: Vector3) -> void:
@@ -25,23 +25,18 @@ func set_value(value: float) -> void:
 	
 #region ============================== Private API ==============================
 func _pop() -> void:
-
 	var tween = create_tween().set_parallel(true)
 	
-	# 1. Animation de montée (Move up) avec un peu d'aléatoire horizontal
-	var final_pos = position + Vector2(randf_range(-30, 30), -80)
-	tween.tween_property(_damage_label, "position", final_pos, 0.5).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)
+	var move_offset = Vector2(randf_range(-30, 30), -40)
+	var final_local_pos = _damage_label.position + move_offset
 
-	# 2. Effet d'impact (Scale pop)
-	# On agrandit puis on rétrécit légèrement
-	var impact_tween = create_tween()
-	impact_tween.tween_property(_damage_label, "scale", scale * 1.2, 0.1)
-	impact_tween.tween_property(_damage_label, "scale", scale, 0.1)
+	tween.tween_property(_damage_label, "position", final_local_pos, 0.6).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 
-	# 3. Disparition progressive (Fade out)
-	# On attend 0.3s avant de commencer à disparaître
-	tween.tween_property(_damage_label, "modulate:a", 0.0, 0.4).set_delay(0.3)
+	_damage_label.scale = Vector2.ONE # Reset scale au cas où
+	tween.tween_property(_damage_label, "scale", Vector2(1.2, 1.2), 0.1)
+	tween.tween_property(_damage_label, "scale", Vector2.ONE, 0.1).set_delay(0.1)
+
+	tween.tween_property(_damage_label, "modulate:a", 0.0, 0.3).set_delay(0.4)
 	
-	# 4. Nettoyage automatique
 	tween.finished.connect(queue_free)
 #endregion

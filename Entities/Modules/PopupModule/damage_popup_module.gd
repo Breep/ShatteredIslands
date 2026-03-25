@@ -1,11 +1,11 @@
 class_name DamagePopupModule
 extends Module
 
-@export_group("External Nodes")
 @export var _owner_entity: Entity
-
 @export var _popup_marker: Marker3D
-@export var _radius: float = 1
+
+@export_group("Optional Configuration")
+@export var _radius: float = 10
 
 @onready var random:= RandomNumberGenerator.new()
 
@@ -22,14 +22,15 @@ func _ready() -> void:
 	# Connect entity signals
 	_owner_entity.damage_taken.connect(_on_owner_entity_damage_taken)
 	_owner_entity.heal_taken.connect(_on_owner_entity_heal_taken)
+	_owner_entity.stack_taken.connect(_on_owner_entity_stack_taken)
 
 
-func damage_popup(amount: float, damage_type: Utils.ActionType, is_critic: bool = false):
+func damage_popup(amount: float, damage_type: Utils.ActionType, is_critic: bool = false) -> void:
 	var popup: DamagePopup2 = DAMAGE_POPUP_SCENE.instantiate()
 	var x = random.randf_range(-1,1)
 	var y = random.randf_range(0.07,1)
 	var r = random.randf_range(0, _radius)
-	var offset = Vector3(x,y,x).normalized() * r
+	var offset = Vector3(x,y,x).normalized() * 1
 	
 	popup.set_value(amount)
 	popup.init(_popup_marker.global_position + offset)
@@ -64,3 +65,6 @@ func _on_owner_entity_damage_taken(damage: float, damage_type: Utils.ActionType,
 
 func _on_owner_entity_heal_taken(heal_amount: int, is_critical: bool) -> void:
 	damage_popup(heal_amount, Utils.ActionType.UTILITY_HEAL, is_critical)
+
+func _on_owner_entity_stack_taken(stack_type: Stack.Type, stack_number: float, is_critical: bool) -> void:
+	damage_popup(stack_number, Stack.to_action(stack_type), is_critical)
