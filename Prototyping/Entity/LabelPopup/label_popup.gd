@@ -1,4 +1,4 @@
-class_name DamagePopup2
+class_name LabelPopup
 extends Control
 
 @onready var _damage_label: RichTextLabel = %DamageLabel
@@ -7,20 +7,28 @@ var _spawn_position: Vector3
 var _damage_value: float
 
 @export_group("Animation")
+@export_subgroup("Value Spreading")
 @export var param_ratio_value_min: float = 1
 @export var param_ratio_value_max: float = 5000
 
+@export_subgroup("Scale")
 @export_range(0.1, 5.0, 0.05) var base_scale: float = 1.0
 @export_range(0.0, 0.5, 0.001) var effective_scale_max: float = 3
 
+@export_subgroup("Display duration")
 @export_range(0.0, 2.0, 0.1) var display_duration: float = 0.5 
 @export_range(0.0, 5.0, 0.05) var fade_out_duration: float = 0.3
 @export_range(0.0, 0.05, 0.001) var effective_display_duration_max: float = 1.0
 
+@export_subgroup("Y Spread (Rise)")
 @export_range(0.0, 300.0, 1.0) var rise_height: float = 40.0
 @export_range(0.0, 0.05, 0.001) var effective_rise_max: float = 100
 
-@export_group("Appearance")
+@export_subgroup("X spread (Left|Right)")
+@export_range(0.0, 300.0, 1.0) var x_left: float = -30
+@export_range(0.0, 0.05, 0.001) var x_right: float = 30
+
+@export_group("Color")
 @export var text_color: Color = Color.WHITE
 
 
@@ -62,7 +70,7 @@ func _pop() -> void:
 	var tween = create_tween().set_parallel(true)
 
 	# Montée avec léger aléatoire horizontal
-	var move_offset = Vector2(randf_range(-30, 30), -effective_rise)
+	var move_offset = Vector2(randf_range(x_left, x_right), -effective_rise)
 	tween.tween_property(_damage_label, "position", _damage_label.position + move_offset, 0.6) \
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 

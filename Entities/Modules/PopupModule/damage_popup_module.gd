@@ -9,7 +9,7 @@ extends Module
 
 @onready var random:= RandomNumberGenerator.new()
 
-const DAMAGE_POPUP_SCENE: PackedScene = preload("res://Prototyping/Entity/DamagePopup/damage_popup2.tscn")
+const DAMAGE_POPUP_SCENE: PackedScene = preload("res://Prototyping/Entity/LabelPopup/label_popup.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -26,7 +26,7 @@ func _ready() -> void:
 
 
 func damage_popup(amount: float, damage_type: Utils.ActionType, is_critic: bool = false) -> void:
-	var popup: DamagePopup2 = DAMAGE_POPUP_SCENE.instantiate()
+	var popup: LabelPopup = DAMAGE_POPUP_SCENE.instantiate()
 	var x = random.randf_range(-1,1)
 	var y = random.randf_range(0.07,1)
 	var r = random.randf_range(0, _radius)

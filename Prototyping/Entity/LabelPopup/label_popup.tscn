@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://l71exk2kbsqy"]
 
-[ext_resource type="Script" path="res://Prototyping/Entity/DamagePopup/damage_popup_2.gd" id="1_ceye4"]
+[ext_resource type="Script" uid="uid://dm825ldmwy4ap" path="res://Prototyping/Entity/LabelPopup/label_popup.gd" id="1_n8efn"]
 
 [node name="DamagePopup2" type="Control" unique_id=710220277]
 layout_mode = 3
@@ -12,7 +12,7 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
-script = ExtResource("1_ceye4")
+script = ExtResource("1_n8efn")
 
 [node name="DamageLabel" type="RichTextLabel" parent="." unique_id=494413974]
 unique_name_in_owner = true

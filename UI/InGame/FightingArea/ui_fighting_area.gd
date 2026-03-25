@@ -5,16 +5,10 @@ extends Control
 
 #region Layout 1v1
 @onready var _layout_1v1: Control = %Layout_1v1
-@onready var _ui_entity_stats_left: UIEntityStats = %EntityStatsLeft
-@onready var _ui_entity_stats_right: UIEntityStats = %EntityStatsRight
 #endregion
 
 #region Layout 2v2
 @onready var _layout_2v2: Control = %Layout_2v2
-@onready var _ui_entity_stats_left1: UIEntityStats = %EntityStatsLeft1
-@onready var _ui_entity_stats_left2: UIEntityStats = %EntityStatsLeft2
-@onready var _ui_entity_stats_right1: UIEntityStats = %EntityStatsRight1
-@onready var _ui_entity_stats_right2: UIEntityStats = %EntityStatsRight2
 #endregion
 
 @onready var _ui_countdown: UICountdown = %Countdown
@@ -62,8 +56,6 @@ func _set_layout_1v1(heroes: Array[Hero]) -> void:
 		return
 	_layout_1v1.show()
 	_layout_2v2.hide()
-	_ui_entity_stats_left.connect_entity(heroes[0])
-	_ui_entity_stats_right.connect_entity(heroes[1])
 
 
 func _set_layout_2v2(heroes: Array[Hero]) -> void:
@@ -75,10 +67,6 @@ func _set_layout_2v2(heroes: Array[Hero]) -> void:
 		return
 	_layout_2v2.show()
 	_layout_1v1.hide()
-	_ui_entity_stats_left1.connect_entity(heroes[0])
-	_ui_entity_stats_left2.connect_entity(heroes[1])
-	_ui_entity_stats_right1.connect_entity(heroes[2])
-	_ui_entity_stats_right2.connect_entity(heroes[3])
 
 # ============================== Callbacks ==============================
 
