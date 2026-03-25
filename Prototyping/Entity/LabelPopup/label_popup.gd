@@ -19,8 +19,8 @@ const CRIT_OUTLINE_COLOR: Color = Color(0.652, 0.083, 0.134, 1.0)
 @onready var _damage_label: RichTextLabel = %DamageLabel
 
 var _spawn_position: Vector3
-var _damage_value: float
-var _label_text: String = ""
+var popup_value: float
+var label_text: String = ""
 var _is_crit: bool = false
 
 @export_group("Animation")
@@ -51,7 +51,7 @@ var _is_crit: bool = false
 
 #region ============================== Node base functions ==============================
 func _ready() -> void:
-	_damage_label.text = _label_text if not _label_text.is_empty() else str(_damage_value).pad_decimals(0)
+	_damage_label.text = label_text if not label_text.is_empty() else str(popup_value).pad_decimals(0)
 	_damage_label.add_theme_color_override("default_color", text_color)
 	if _is_crit:
 		_damage_label.text = "[center][shake rate=10.0 level=3.0]%s[/shake][/center]" % _damage_label.text
@@ -75,7 +75,7 @@ func init(spawn_position: Vector3) -> void:
 
 
 func set_value(value: float) -> void:
-	_damage_value = value
+	popup_value = value
 
 
 func set_crit() -> LabelPopup:
@@ -149,34 +149,34 @@ static func block(value: float = 0.0, is_crit: bool = false) -> LabelPopup:
 #region ============================== Private API ==============================
 static func _create(value: float, color: Color) -> LabelPopup:
 	var popup := SCENE.instantiate() as LabelPopup
-	popup._damage_value = value
+	popup.popup_value = value
 	popup.text_color = color
 	return popup
 
 
 static func _create_text(text: String, color: Color) -> LabelPopup:
 	var popup := SCENE.instantiate() as LabelPopup
-	popup._label_text = text
+	popup.label_text = text
 	popup.text_color = color
 	return popup
 
 
 static func _create_text_with_value(text: String, value: float, color: Color) -> LabelPopup:
 	var popup := SCENE.instantiate() as LabelPopup
-	popup._label_text = text
-	popup._damage_value = value
+	popup.label_text = text
+	popup.popup_value = value
 	popup.text_color = color
 	return popup
 
 
 func _pop() -> void:
-	var scale_bonus: float = remap(_damage_value, param_ratio_value_min, param_ratio_value_max, 0, effective_scale_max)
+	var scale_bonus: float = remap(abs(popup_value), param_ratio_value_min, param_ratio_value_max, 0, effective_scale_max)
 	var effective_scale: float = clampf(base_scale + scale_bonus, base_scale, effective_scale_max)
 	
-	var rise_bonus: float = remap(_damage_value, param_ratio_value_min, param_ratio_value_max, 0, effective_rise_max)
+	var rise_bonus: float = remap(abs(popup_value), param_ratio_value_min, param_ratio_value_max, 0, effective_rise_max)
 	var effective_rise: float = clampf(rise_height + rise_bonus, rise_height, effective_rise_max)
 	
-	var display_duration_bonus: float = remap(_damage_value, param_ratio_value_min, param_ratio_value_max, 0, effective_display_duration_max)
+	var display_duration_bonus: float = remap(abs(popup_value), param_ratio_value_min, param_ratio_value_max, 0, effective_display_duration_max)
 	var effective_display_duration: float = clampf(display_duration + display_duration_bonus, display_duration, effective_display_duration_max)
 	
 	if _is_crit:

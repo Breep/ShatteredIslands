@@ -9,7 +9,6 @@ var _hp_to_ad_percent: float
 var _scale_to_ad_percent: float 
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
-	
 	# Reduce attack speed
 	var as_mod := StatModifier.new()
 	as_mod.id = &"Bear Strength"

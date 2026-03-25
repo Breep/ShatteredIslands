@@ -83,6 +83,7 @@ offset_right = 244.0
 offset_bottom = 195.0
 grow_vertical = 1
 pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
 
 [node name="RightPanel" type="Control" parent="MarginContainer/VBoxContainer/TopPanel/MarginContainer/HBoxContainer" unique_id=2123541872]
 layout_mode = 2

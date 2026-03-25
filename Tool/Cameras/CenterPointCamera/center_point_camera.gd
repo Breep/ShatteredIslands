@@ -23,7 +23,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	_handle_center_point_rotation(event)
 	_handle_camera_zoom(event)
 
-
 # ============================== Public functions ==============================
 
 func set_active() -> void:

@@ -8,6 +8,8 @@ extends Module
 
 @onready var random := RandomNumberGenerator.new()
 
+var _last_shield_stacks: float = 0.0
+
 func connect_marker(popup_marker: Marker3D) -> void:
 	_popup_marker = popup_marker
 
@@ -22,6 +24,8 @@ func _ready() -> void:
 	_owner.heal_taken.connect(_on_owner_heal_taken)
 	_owner.stack_taken.connect(_on_owner_stack_taken)
 	_owner.action_dodged.connect(_on_owner_action_dodged)
+	if _owner.conditions:
+		_owner.conditions.shield_stacks_changed.connect(_on_owner_shield_stacks_changed)
 
 
 func _spawn(popup: LabelPopup) -> void:
@@ -31,7 +35,6 @@ func _spawn(popup: LabelPopup) -> void:
 	if _popup_marker != null:
 		popup.init(_popup_marker.global_position + offset)
 	add_child(popup)
-
 
 # ============================== Callbacks ==============================
 
@@ -60,6 +63,14 @@ func _on_owner_stack_taken(stack_type: Stack.Type, stack_number: float, is_criti
 	if is_critical:
 		popup.set_crit()
 	_spawn(popup)
+
+
+func _on_owner_shield_stacks_changed(new_value: float) -> void:
+	var delta := new_value - _last_shield_stacks
+	_last_shield_stacks = new_value
+	if delta >= 0.0:
+		return
+	_spawn(LabelPopup.stack(delta, Stack.Type.SHIELD))
 
 
 func _on_owner_action_dodged(_source: Entity, _action_type: Utils.ActionType, value: float, is_critical: bool) -> void:
