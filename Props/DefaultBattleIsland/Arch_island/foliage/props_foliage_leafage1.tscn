@@ -1,13 +1,6 @@
 [gd_scene format=4 uid="uid://m0surgfgqtvu"]
 
-[ext_resource type="Texture2D" uid="uid://b2ovf42jvcmsk" path="res://Props/DefaultBattleIsland/foliage/leafage1_foliage_2.png" id="1_st7hf"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mvmm5"]
-resource_name = "foliage"
-transparency = 4
-cull_mode = 2
-albedo_texture = ExtResource("1_st7hf")
-roughness = 0.5527864
+[ext_resource type="Material" uid="uid://b8113nhomexb6" path="res://Props/DefaultBattleIsland/Arch_island/foliage/m_foliage.tres" id="1_st7hf"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_s1v1e"]
 _surfaces = [{
@@ -32,7 +25,7 @@ _surfaces = [{
 "format": 34359742519,
 "index_count": 240,
 "index_data": PackedByteArray("AAABAAIAAAADAAEAAwAEAAEAAwAFAAQABQAGAAQAAAACAAcAAgAIAAcACQAAAAcACgALAAwACgANAAsADQAOAAsADQAPAA4ADwAQAA4ACgAMABEADAASABEAEwAKABEAFAAVABYAFAAXABUAFwAYABUAFwAZABgAGQAaABgAFAAWABsAFgAcABsAHQAUABsAHgAfACAAHgAhAB8AIQAiAB8AIQAjACIAIwAkACIAHgAgACUAIAAmACUAJwAeACUAKAApACoAKAArACkAKwAsACkAKwAtACwALQAuACwAKAAqAC8AKgAwAC8AMQAoAC8AMgAzADQAMgA1ADMANQA2ADMANQA3ADYANwA4ADYAMgA0ADkANAA6ADkAOwAyADkAPAA9AD4APAA/AD0APwBAAD0APwBBAEAAQQBCAEAAPAA+AEMAPgBEAEMARQA8AEMARgBHAEgARgBJAEcASQBKAEcASQBLAEoASwBMAEoARgBIAE0ASABOAE0ATwBGAE0AUABRAFIAUABTAFEAUwBUAFEAUwBVAFQAVQBWAFQAUABSAFcAUgBYAFcAWQBQAFcAWgBbAFwAWgBdAFsAXQBeAFsAXQBfAF4AXwBgAF4AWgBcAGEAXABiAGEAYwBaAGEA"),
-"material": SubResource("StandardMaterial3D_mvmm5"),
+"material": ExtResource("1_st7hf"),
 "name": "foliage",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),

@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://dvf1h3rq7ermo"]
-
-[ext_resource type="PackedScene" uid="uid://cr4geiiausxsd" path="res://Props/DefaultBattleIsland/rocks.glb" id="1_uhu8y"]
-
-[node name="rocks" unique_id=673795630 instance=ExtResource("1_uhu8y")]

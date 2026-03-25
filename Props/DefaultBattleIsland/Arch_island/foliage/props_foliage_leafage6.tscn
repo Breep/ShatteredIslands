@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://be7ehnhyliyxn"]
 
-[ext_resource type="Texture2D" uid="uid://bggsyx5pl3cvi" path="res://Props/DefaultBattleIsland/Arch_island/bush4_file4-file4.png" id="1_acerd"]
+[ext_resource type="Texture2D" uid="uid://bggsyx5pl3cvi" path="res://Props/DefaultBattleIsland/Arch_island/textures/bush4_file4-file4.png" id="1_acerd"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aptwr"]
 resource_name = "foliage3"

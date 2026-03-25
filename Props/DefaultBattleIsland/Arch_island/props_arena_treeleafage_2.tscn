@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://b03mbxv4f3ndi"]
 
-[ext_resource type="PackedScene" uid="uid://cdfdnbk2efio3" path="res://Props/DefaultBattleIsland/Arch_island/treeleafage2.glb" id="1_6itc1"]
+[ext_resource type="PackedScene" uid="uid://cdfdnbk2efio3" path="res://Props/DefaultBattleIsland/Arch_island/GLB/treeleafage2.glb" id="1_6itc1"]
 [ext_resource type="Shader" uid="uid://dfw0goyfmq7eo" path="res://Props/DefaultBattleIsland/Arch_island/foliage/Models/Trees/Shaders/tree_leaves_02.gdshader" id="2_d0f50"]
-[ext_resource type="Texture2D" uid="uid://colx8bay1mp1p" path="res://Props/DefaultBattleIsland/Arch_island/foliage/Models/Trees/Shaders/alpha2.png" id="3_wd5n7"]
+[ext_resource type="Texture2D" uid="uid://colx8bay1mp1p" path="res://Props/DefaultBattleIsland/Arch_island/foliage/Models/Trees/Shaders/T_alpha2.png" id="3_wd5n7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t47h3"]
 render_priority = 0

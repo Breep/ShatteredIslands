@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://d253qp00yg3rl"]
-
-[ext_resource type="PackedScene" uid="uid://b2jrwdqt5q7xt" path="res://Props/DefaultBattleIsland/Item_set_1.glb" id="1_tltux"]
-
-[node name="Item_set_1" unique_id=621990597 instance=ExtResource("1_tltux")]

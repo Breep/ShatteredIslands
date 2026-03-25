@@ -1,7 +1,7 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://cf1dcxknt1yfg"]
 
 [ext_resource type="Shader" uid="uid://jecpdwah4gkp" path="res://Props/DefaultBattleIsland/Arch_island/foliage/Models/Trees/Shaders/tree_leaves.gdshader" id="1_nf6j8"]
-[ext_resource type="Texture2D" uid="uid://dylbsuear0h2o" path="res://Props/DefaultBattleIsland/Arch_island/foliage/Models/Trees/Shaders/arbre.png" id="2_imn86"]
+[ext_resource type="Texture2D" uid="uid://dylbsuear0h2o" path="res://Props/DefaultBattleIsland/Arch_island/foliage/Models/Trees/Shaders/T_alpha1.png" id="2_imn86"]
 
 [resource]
 render_priority = 0

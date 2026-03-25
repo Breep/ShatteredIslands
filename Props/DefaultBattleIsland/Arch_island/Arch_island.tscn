@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b0opqsmhxort7"]
 
-[ext_resource type="Texture2D" uid="uid://cpgjovjpnswwl" path="res://Props/DefaultBattleIsland/textures/citrus_orchard_road_puresky_4k.exr" id="1_wicrg"]
+[ext_resource type="Texture2D" uid="uid://cpgjovjpnswwl" path="res://Props/DefaultBattleIsland/Arch_island/textures/citrus_orchard_road_puresky_4k.exr" id="1_wicrg"]
 [ext_resource type="PackedScene" uid="uid://duk3nfkcrkric" path="res://Props/DefaultBattleIsland/Arch_island/Props_Arena_Arena.tscn" id="2_cxbhe"]
 [ext_resource type="PackedScene" uid="uid://cg4hqe65owjkt" path="res://Props/DefaultBattleIsland/Arch_island/VFX/Scenes/VFX_FireStatic_K1.tscn" id="3_8xm7n"]
 [ext_resource type="PackedScene" uid="uid://do5bslbv5ulo0" path="res://Props/DefaultBattleIsland/Arch_island/props_arena_sword.tscn" id="3_cxbhe"]
@@ -37,7 +37,6 @@
 [ext_resource type="PackedScene" uid="uid://bomsoicetwrmy" path="res://Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Scenes/VFX_AcidWall_K1.tscn" id="36_lvxo2"]
 [ext_resource type="PackedScene" uid="uid://brl4b1upuf5nw" path="res://Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Scenes/VFX_Sparks_Yk1.tscn" id="36_xbni8"]
 [ext_resource type="PackedScene" uid="uid://be7ehnhyliyxn" path="res://Props/DefaultBattleIsland/Arch_island/foliage/props_foliage_leafage6.tscn" id="37_lvxo2"]
-[ext_resource type="PackedScene" uid="uid://bxqb2r5cdt3gw" path="res://VFX/VFX_3D/VFX/Scenes/VFX_Darkness_projectile.tscn" id="38_fd1in"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_kc47p"]
 panorama = ExtResource("1_wicrg")
@@ -902,7 +901,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.4913397, 0, 3.9551258)
 [node name="treeleafage2" parent="." unique_id=1565036318 instance=ExtResource("29_artg0")]
 transform = Transform3D(0.26033366, 0, 0.83004016, 0, 0.5949676, 0, -0.67344534, 0, 0.32086846, -27.671251, 3.9554877, 11.413568)
 
-[node name="treeleafage3" parent="." unique_id=470301866 instance=ExtResource("29_artg0")]
+[node name="treeleafage3" parent="." unique_id=869590036 instance=ExtResource("29_artg0")]
 transform = Transform3D(0.57037884, 0, 0.06431089, 0, 0.57399297, 0, -0.06431089, 0, 0.57037884, 12.7216015, 1.3348327, 8.213401)
 
 [node name="rock9" parent="." unique_id=1223159450 instance=ExtResource("8_artg0")]
@@ -998,6 +997,3 @@ transform = Transform3D(-1.6956886, 0, -0.43619925, 0, 1.750894, 0, 0.43619925, 
 
 [node name="rock15" parent="." unique_id=288923656 instance=ExtResource("22_t1ft8")]
 transform = Transform3D(2.7604606, 0, -3.1316788, 0, 4.1746325, 0, 3.1316788, 0, 2.7604606, -3.0403588, -4.112157, 21.178194)
-
-[node name="VFX_DarknessProjectile" parent="." unique_id=1370579907 instance=ExtResource("38_fd1in")]
-transform = Transform3D(0.6608101, 0, 0, 0, 0.6608101, 0, 0, 0, 0.87992007, -1.8604879, 18.607052, 3.85431)
