@@ -1,9 +1,12 @@
 [gd_scene format=4 uid="uid://b3oqyj5b00c"]
 
 [ext_resource type="Texture2D" uid="uid://opwnfxta0ova" path="res://Entities/NPC/Fighting/ChickenLord/Chicken/Data/chicken_diffuse.png" id="1_f5dgv"]
+[ext_resource type="Shader" uid="uid://c2nyd5a7y0ble" path="res://Props/DefaultBattleIsland/Arch_island/VFX/shaders/s_Disolver_Firex_p.tres" id="2_hsi8h"]
+[ext_resource type="Texture2D" uid="uid://d146nw08uassy" path="res://Props/DefaultBattleIsland/Arch_island/VFX/textures/T_smoke_bb1fa_b.png" id="3_x7sjx"]
+[ext_resource type="Texture2D" uid="uid://nyyc5vq2e8a8" path="res://Props/DefaultBattleIsland/Arch_island/VFX/textures/T_VFX_Noise_44xainv.png" id="4_bo1fr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ykqu3"]
-albedo_color = Color(1.6197081, 1.0594488, 0, 1)
+albedo_color = Color(0.88235295, 0, 0.14509805, 1)
 albedo_texture = ExtResource("1_f5dgv")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_banjt"]
@@ -73,6 +76,68 @@ bind/10/pose = Transform3D(-1.8363167e-07, -0.1629481, -0.98406917, 1, -3.942347
 bind/11/name = &"Leg1_R_002"
 bind/11/bone = -1
 bind/11/pose = Transform3D(-9.321342e-08, -0.99291337, -0.1185496, 1, -1.26418e-07, 3.7706783e-07, -2.8145874e-07, -0.11883924, 0.99032605, -0.014912511, 0.081419446, -0.017907072)
+
+[sub_resource type="Gradient" id="Gradient_rsdyx"]
+interpolation_color_space = 1
+offsets = PackedFloat32Array(0, 0.136546, 0.883534)
+colors = PackedColorArray(0.919441, 0.526677, 1.92523e-07, 0.184314, 0.86705, 0.331074, 0.177345, 1, 1, 0.19, 0.1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rkv65"]
+gradient = SubResource("Gradient_rsdyx")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i37id"]
+render_priority = -2
+shader = ExtResource("2_hsi8h")
+shader_parameter/Scale = Vector2(1, 1)
+shader_parameter/Texture = ExtResource("3_x7sjx")
+shader_parameter/Color_1D_Gradient = SubResource("GradientTexture1D_rkv65")
+shader_parameter/Erosion_Scale = Vector2(1, 1)
+shader_parameter/Erosion_Speed = Vector2(0.1, 1)
+shader_parameter/substract_mask = ExtResource("4_bo1fr")
+
+[sub_resource type="Curve" id="Curve_glm2i"]
+_data = [Vector2(0, 0.0670826), 0.0, -0.143374, 0, 0, Vector2(1, 1), 3.63563, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_2vnfy"]
+texture_mode = 1
+curve = SubResource("Curve_glm2i")
+
+[sub_resource type="Gradient" id="Gradient_f6hpv"]
+interpolation_color_space = 1
+offsets = PackedFloat32Array(0.151899, 0.236287, 0.375527, 0.64135, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.54, 0.5076, 0.5076, 1, 0.368514, 0.336018, 0.336274, 1, 0.13, 0.0533, 0.0558567, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_57u76"]
+gradient = SubResource("Gradient_f6hpv")
+
+[sub_resource type="Curve" id="Curve_tjuc7"]
+_data = [Vector2(0, 0.330733), 0.0, 2.30332, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_n7bb3"]
+curve = SubResource("Curve_tjuc7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4u7lp"]
+particle_flag_rotate_y = true
+emission_shape = 1
+emission_sphere_radius = 0.1
+angle_min = -180.0
+angle_max = 180.0
+direction = Vector3(0, 1, 0)
+spread = 10.068
+initial_velocity_min = 0.5
+initial_velocity_max = 2.5
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = 0.499978
+gravity = Vector3(0, 0, 0)
+scale_min = 0.6
+scale_curve = SubResource("CurveTexture_n7bb3")
+color = Color(2.2, 1.8, 0.5, 1)
+color_ramp = SubResource("GradientTexture1D_57u76")
+alpha_curve = SubResource("CurveTexture_2vnfy")
+
+[sub_resource type="QuadMesh" id="QuadMesh_0260b"]
 
 [sub_resource type="Animation" id="Animation_qv4wh"]
 resource_name = "Attack"
@@ -896,6 +961,17 @@ bones/12/scale = Vector3(0.99999994, 1, 0.99999994)
 material_override = SubResource("StandardMaterial3D_ykqu3")
 mesh = SubResource("ArrayMesh_ln18q")
 skin = SubResource("Skin_utmen")
+
+[node name="firex2" type="GPUParticles3D" parent="Skeleton3D/ChickenArdentCelestial" unique_id=132133413]
+transform = Transform3D(1, 0, -7.4505815e-09, 6.6724164e-09, 0.44494796, 0.89555645, 3.3151206e-09, -0.89555645, 0.44494796, 0, 0.36978263, -0.23882598)
+layers = 4
+material_override = SubResource("ShaderMaterial_i37id")
+cast_shadow = 0
+amount = 5
+lifetime = 0.65
+draw_order = 1
+process_material = SubResource("ParticleProcessMaterial_4u7lp")
+draw_pass_1 = SubResource("QuadMesh_0260b")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=777400876]
 libraries/ = SubResource("AnimationLibrary_vqhsl")

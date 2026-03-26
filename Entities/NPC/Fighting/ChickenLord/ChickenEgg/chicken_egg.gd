@@ -37,6 +37,7 @@ func init(hatch_time: float, chicken_type: Chicken.Type, chicken_modifiers: Dict
 func _ready() -> void:
 	super._ready()
 	periodic_timer_registry.register_oneshot(_hatch_time, _hatch)
+	_visual_3d.set_visual(_chicken_type)
 
 # ============================== Hatch ==============================
 

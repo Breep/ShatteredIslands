@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://dddfasjo6xqv6"]
 
+[ext_resource type="Script" uid="uid://d160hb7nabwgw" path="res://Entities/NPC/Fighting/ChickenLord/ChickenEgg/Data/eggfull.gd" id="1_wqhrg"]
 [ext_resource type="Texture2D" uid="uid://cu4bpb7iwo1ed" path="res://Entities/NPC/Fighting/ChickenLord/ChickenEgg/Data/eggfull_0.png" id="1_y0023"]
 [ext_resource type="Texture2D" uid="uid://bbtcmf6p3nai1" path="res://Entities/NPC/Fighting/ChickenLord/ChickenEgg/Data/eggfull_1.png" id="2_o5aec"]
 [ext_resource type="Texture2D" uid="uid://nt1swv7ep7rx" path="res://Entities/NPC/Fighting/ChickenLord/ChickenEgg/Data/eggfull_2.png" id="3_wqhrg"]
@@ -52,8 +53,10 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_m00h3")
 
 [node name="eggfull" type="Node3D" unique_id=558907305]
+script = ExtResource("1_wqhrg")
 
 [node name="egg_mesh" type="MeshInstance3D" parent="." unique_id=1524779970]
+unique_name_in_owner = true
 transform = Transform3D(0.5596818, 0, 0, 0, 0.5596818, 4.2254804e-08, 0, -4.2254804e-08, 0.5596818, 0, 0, 0)
 mesh = SubResource("ArrayMesh_s51d2")
 skeleton = NodePath("")

@@ -1,13 +1,11 @@
 [gd_scene format=3 uid="uid://bmd3xs2ip7kul"]
 
+[ext_resource type="Script" uid="uid://bx4kyuvbqmu2f" path="res://Entities/NPC/Fighting/ChickenLord/ChickenEgg/chicken_egg_visual.gd" id="1_dkwl2"]
 [ext_resource type="PackedScene" uid="uid://dddfasjo6xqv6" path="res://Entities/NPC/Fighting/ChickenLord/ChickenEgg/Data/eggfull.tscn" id="1_xqua2"]
-[ext_resource type="PackedScene" uid="uid://boaogpt5ahp5x" path="res://Entities/NPC/Fighting/ChickenLord/ChickenEgg/Data/eggcell.tscn" id="2_dkwl2"]
 
 [node name="ChickenEggVisual" type="Node3D" unique_id=1301560664]
+script = ExtResource("1_dkwl2")
 
 [node name="eggfull" parent="." unique_id=558907305 instance=ExtResource("1_xqua2")]
+unique_name_in_owner = true
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-
-[node name="eggcell" parent="." unique_id=9649586 instance=ExtResource("2_dkwl2")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-visible = false
