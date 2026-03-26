@@ -143,6 +143,7 @@ var _spawn_ticks_remaining: int = -1
 @export var entity_name: String = "<entity name>"
 
 @export_group("Optional configuration")
+@export var invisible: bool = false
 @export var custom_base_stats: EntityStats
 
 @export_subgroup("Modules")

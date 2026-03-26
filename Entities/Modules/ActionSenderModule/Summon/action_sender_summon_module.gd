@@ -60,7 +60,7 @@ func summon_entity(entity_type: Entity.EntityType, spawn_config: SpawnLocationCo
 		ActionModifier.VarType.ENTITY_MODIFIER: entity_modifier,
 	})
 	entity_modifier = modifiers_data.get(ActionModifier.VarType.ENTITY_MODIFIER, entity_modifier)
-	entity_type = modifiers_data.get(ActionModifier.VarType.ENTITY_MODIFIER, entity_type)
+	entity_type = modifiers_data.get(ActionModifier.VarType.ENTITY_TYPE, entity_type)
 
 	match entity_type:
 		Entity.EntityType.SNAKE_BARREL: _summon_snake_barrel(spawn_position, entity_modifier)

@@ -1,9 +1,17 @@
 class_name ChickenEgg
 extends Summon
 
-## Invincible egg that hatches into one or more chickens after a delay.
-## On hatch the egg spawns chickens via [code]summoner.summon_entity()[/code]
-## so that the chickens' summoner reference points to the hero, not the egg.
+enum Type {
+	BASIC,
+	GIFTED_ATTACK,
+	GIFTED_STORM_CALLER,
+	GIFTED_POISON,
+	GIFTED_ARDENT_CELESTIAL,
+	GIFTED_COLOSSUS,
+	GIFTED_LIGHT,
+	GIFTED_ENGINEER,
+	GIFTED_NECROSIS
+}
 
 enum Modifier {
 	HATCH_TIME,

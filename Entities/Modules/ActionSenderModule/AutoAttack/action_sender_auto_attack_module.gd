@@ -239,12 +239,16 @@ func _execute_attack_impact() -> void:
 func _execute_ranged_impact() -> void:
 	if _active_attack_data.is_empty():
 		return
-	
-	var target: Entity = _active_attack_data.get(ActiveAttackVar.TARGET)
+
+	var target_ref = _active_attack_data.get(ActiveAttackVar.TARGET)
+	if not is_instance_valid(target_ref) or target_ref.is_queued_for_deletion():
+		return
+
+	var target: Entity = target_ref
 	var projectile_type: Projectile.Type = _active_attack_data.get(ActiveAttackVar.PROJECTILE_TYPE)
 	var spawn_node: Node3D = _active_attack_data.get(ActiveAttackVar.SPAWN_NODE)
 	var stats: ProjectileStats = _active_attack_data.get(ActiveAttackVar.STATS)
-	
+
 	_owner.projectile_attack(
 		target,
 		projectile_type,
@@ -257,12 +261,13 @@ func _execute_ranged_impact() -> void:
 func _execute_melee_impact() -> void:
 	if _active_attack_data.is_empty():
 		return
-	
-	var target: Entity = _active_attack_data.get(ActiveAttackVar.TARGET)
-	var stats: ProjectileStats = _active_attack_data.get(ActiveAttackVar.STATS)
-	
-	if not is_instance_valid(target) or target.is_queued_for_deletion():
+
+	var target_ref = _active_attack_data.get(ActiveAttackVar.TARGET)
+	if not is_instance_valid(target_ref) or target_ref.is_queued_for_deletion():
 		return
+
+	var target: Entity = target_ref
+	var stats: ProjectileStats = _active_attack_data.get(ActiveAttackVar.STATS)
 	
 	# Execute all on-hit callbacks
 	for cb: Callable in stats.on_hit_callbacks:

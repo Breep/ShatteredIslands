@@ -493,4 +493,5 @@ func _on_scanning_area_body_exited(body: Node3D) -> void: # TODO à voir comment
 
 
 func _on_spawn_manager_entity_spawned(entity: Entity) -> void:
+	if entity.invisible: return
 	_add_entity(entity)
