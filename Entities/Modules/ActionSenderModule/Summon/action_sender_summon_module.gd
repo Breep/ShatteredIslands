@@ -52,9 +52,16 @@ func summon_entity(entity_type: Entity.EntityType, spawn_config: SpawnLocationCo
 	if _spawn_manager == null:
 		Verbose.error("Can't summon an entity if no SpawnManager is linked", Verbose.Category.ENTITY_MODULE)
 		return
-	
+
 	var spawn_position := spawn_config.resolve(_arena_zone_manager)
-	
+
+	var modifiers_data: Dictionary = _consume_before_action_modifiers(Utils.ActionCategory.SUMMON, {
+		ActionModifier.VarType.ENTITY_TYPE: entity_type,
+		ActionModifier.VarType.ENTITY_MODIFIER: entity_modifier,
+	})
+	entity_modifier = modifiers_data.get(ActionModifier.VarType.ENTITY_MODIFIER, entity_modifier)
+	entity_type = modifiers_data.get(ActionModifier.VarType.ENTITY_MODIFIER, entity_type)
+
 	match entity_type:
 		Entity.EntityType.SNAKE_BARREL: _summon_snake_barrel(spawn_position, entity_modifier)
 		Entity.EntityType.SNAKE: _summon_snake(spawn_position, entity_modifier)
@@ -66,6 +73,11 @@ func summon_entity(entity_type: Entity.EntityType, spawn_config: SpawnLocationCo
 		Entity.EntityType.DEFLECTION_SHIELD: _summon_deflection_shield(spawn_position, entity_modifier)
 		Entity.EntityType.TREX: _summon_trex(spawn_position, entity_modifier)
 		Entity.EntityType.CHICKEN_EGG: _summon_chicken_egg(spawn_position, entity_modifier)
+
+	_consume_after_action_modifiers(Utils.ActionCategory.SUMMON, {
+		ActionModifier.VarType.ENTITY_TYPE: entity_type,
+		ActionModifier.VarType.ENTITY_MODIFIER: entity_modifier,
+	})
 
 # ============================== Private functions ==============================
 
