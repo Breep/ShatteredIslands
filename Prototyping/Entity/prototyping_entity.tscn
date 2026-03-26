@@ -296,14 +296,11 @@ visible = false
 [node name="MeshInstance3D" parent="TestingFloorFFA5/CenterNode3D/Center5/Team5Area" parent_id_path=PackedInt32Array(283551194, 2136403487) index="1" unique_id=1937256180]
 visible = false
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=688220262]
-transform = Transform3D(0.20953494, 0.9711535, -0.11382448, -0.5411095, 0.2121261, 0.8137586, 0.8144296, -0.10891936, 0.56994826, -0.7068796, -10.037087, 0)
-
 [node name="FightingManager" parent="." unique_id=1380390082 instance=ExtResource("17_m26y3")]
 unique_name_in_owner = true
 
 [node name="ArchIsland" parent="." unique_id=1045725859 instance=ExtResource("17_ko5bb")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -0.6210389, 0)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.037389755, -0.69335794, -0.050251007)
 
 [connection signal="pressed" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StartFightButton" to="." method="_on_start_fight_button_pressed"]
 [connection signal="pressed" from="Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StopFightButton" to="." method="_on_stop_fight_button_pressed"]

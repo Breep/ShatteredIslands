@@ -1,0 +1,161 @@
+[gd_scene format=3 uid="uid://8ufa1c3dhbri"]
+
+[ext_resource type="PackedScene" uid="uid://ovdmp2n8yynd" path="res://VFX/VFX_3D/Meteor/Scenes/vfx_crash.tscn" id="1_s0n17"]
+[ext_resource type="PackedScene" uid="uid://tdbxidy0fi2u" path="res://VFX/VFX_3D/Meteor/Scenes/VFX_smoke.tscn" id="2_6fwfb"]
+[ext_resource type="PackedScene" uid="uid://b3oxeny65clqf" path="res://VFX/VFX_3D/Meteor/Scenes/VFX_Fire_ball_type_B.tscn" id="3_gl7by"]
+[ext_resource type="Shader" uid="uid://ce35481cnedm8" path="res://VFX/VFX_3D/Meteor/meteor_decal.gdshader" id="4_1hacq"]
+[ext_resource type="Texture2D" uid="uid://dcu6fwselkyia" path="res://VFX/VFX_3D/Meteor/Textures/547FF097-370F-4D79-80A9-7EC93243F4EE.png" id="5_hkvdv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_putar"]
+render_priority = 0
+shader = ExtResource("4_1hacq")
+shader_parameter/Scale = Vector2(1, 1)
+shader_parameter/Albedo = ExtResource("5_hkvdv")
+shader_parameter/Albedo_Mix = 1.10000002384186
+shader_parameter/Emission_Energy = 1.0
+shader_parameter/Modulate = Color(1, 1, 1, 1)
+shader_parameter/Modulate_Emission = Color(1, 1, 1, 1)
+shader_parameter/cube_half_size = 0.5
+shader_parameter/enable_y_fade = false
+shader_parameter/fade_start = 0.3
+shader_parameter/fade_end = 0.7
+shader_parameter/fade_power = 2.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_nk3no"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_26xd2"]
+
+[sub_resource type="Animation" id="Animation_s0n17"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VFX_Hit_dark:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VFX_CubeProjectile:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VFX_FireBall_TypeB:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Impact:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_6fwfb"]
+resource_name = "meteorcrash"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VFX_Hit_dark:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.76),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VFX_CubeProjectile:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0009999999, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VFX_FireBall_TypeB:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.78),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Impact:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gl7by"]
+_data = {
+&"RESET": SubResource("Animation_s0n17"),
+&"meteorcrash": SubResource("Animation_6fwfb")
+}
+
+[node name="Node3D" type="Node3D" unique_id=112807342]
+
+[node name="VFX_Hit_dark" parent="." unique_id=1121096299 instance=ExtResource("1_s0n17")]
+transform = Transform3D(0.31195885, -0.053210586, -0.056980908, 0.07777124, 0.19593051, 0.24281558, -0.005461175, -0.24935193, 0.20295396, -0.024952412, 0.32356334, 0.008608744)
+
+[node name="VFX_CubeProjectile" parent="." unique_id=1270145014 instance=ExtResource("2_6fwfb")]
+transform = Transform3D(0.33492592, 0, 0, 0, 0.33492592, 0, 0, 0, 0.33492592, 0, 0.5824379, 0)
+
+[node name="VFX_FireBall_TypeB" parent="." unique_id=1153165536 instance=ExtResource("3_gl7by")]
+transform = Transform3D(1, 0, 0, 0, -1, -8.742278e-08, 0, 8.742278e-08, -1, 0.04605043, 0.62366456, -0.85643834)
+
+[node name="Impact" type="MeshInstance3D" parent="." unique_id=873300881]
+transform = Transform3D(1.7985866, 0, 0, 0, 1.7985866, 0, 0, 0, 1.7985866, 0, -0.1286475, 0)
+visible = false
+material_override = SubResource("ShaderMaterial_putar")
+transparency = 1.0
+mesh = SubResource("BoxMesh_nk3no")
+
+[node name="Sol" type="MeshInstance3D" parent="." unique_id=1414585905]
+transform = Transform3D(3.0396614, 0, 0, 0, 3.0396614, 0, 0, 0, 3.0396614, 0, 0, 0)
+visible = false
+mesh = SubResource("PlaneMesh_26xd2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1733160396]
+libraries/ = SubResource("AnimationLibrary_gl7by")

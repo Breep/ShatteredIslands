@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://c2po8q8oho5y6"]
+
+[ext_resource type="Shader" uid="uid://blb7a2rnt06sr" path="res://VFX/VFX_3D/VFX/Shaders/s_Trail_Fire_shader.tres" id="1_otlli"]
+
+[sub_resource type="Gradient" id="Gradient_03bav"]
+offsets = PackedFloat32Array(0, 0.226852, 0.481481, 0.95238096, 1)
+colors = PackedColorArray(0.960784, 0, 0, 0, 0.73182076, 0.42771772, 0.13266325, 0.163462, 0.752278, 0.41268334, 0.10730826, 1, 0.9969321, 0.49478468, 0.17591707, 1, 0.960784, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jqai2"]
+gradient = SubResource("Gradient_03bav")
+use_hdr = true
+
+[resource]
+render_priority = -1
+shader = ExtResource("1_otlli")
+shader_parameter/Color_Texture = SubResource("GradientTexture1D_jqai2")
+shader_parameter/Trail_Speed = Vector2(1.495, 0)

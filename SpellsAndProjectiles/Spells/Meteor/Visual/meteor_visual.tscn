@@ -1,13 +1,15 @@
 [gd_scene format=3 uid="uid://cg1a6wmwlgdh2"]
 
 [ext_resource type="Script" uid="uid://dwdqhjhxq32i0" path="res://SpellsAndProjectiles/Spells/Meteor/Visual/meteor_visual.gd" id="1_ptlvp"]
-[ext_resource type="PackedScene" uid="uid://c77b0act7ye6o" path="res://SpellsAndProjectiles/Spells/Meteor/Visual/3d_meteor_visual.tscn" id="2_rs2tw"]
+[ext_resource type="PackedScene" uid="uid://crd40ycge6qp1" path="res://VFX/VFX_3D/Meteor/Scenes/VFX_meteor_Fire_ball.tscn" id="2_ptlvp"]
+[ext_resource type="PackedScene" uid="uid://ovdmp2n8yynd" path="res://VFX/VFX_3D/Meteor/Scenes/vfx_crash.tscn" id="2_rs2tw"]
 
 [node name="MeteorVisual" type="Node3D" unique_id=2099729954]
 script = ExtResource("1_ptlvp")
 
-[node name="MeteorVisual3D" parent="." unique_id=2068965329 instance=ExtResource("2_rs2tw")]
+[node name="VFX_Hit_dark" parent="." unique_id=1121096299 instance=ExtResource("2_rs2tw")]
 unique_name_in_owner = true
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 30, 0)
 
-[editable path="MeteorVisual3D"]
+[node name="VFX_FireBall" parent="." unique_id=1491287636 instance=ExtResource("2_ptlvp")]
+unique_name_in_owner = true
+transform = Transform3D(1.8, 0, 0, 0, -7.86805e-08, 1.8, 0, -1.8, -7.86805e-08, 0, 0, 0)

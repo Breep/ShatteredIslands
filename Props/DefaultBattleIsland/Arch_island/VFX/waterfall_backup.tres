@@ -68,16 +68,77 @@ default_input_values = [1, Vector2(-0.1, -0.1), 2, Vector2(0, 0)]
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_qchgb"]
 input_name = "time"
 
-[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_qchgb"]
-parameter_name = "ColorParameter"
-default_value_enabled = true
-default_value = Color(0.37254903, 0.69803923, 0.69803923, 1)
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_upm7f"]
+operator = 2
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_7mvqy"]
+expanded_output_ports = [0]
+source = 5
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_4qwhl"]
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_81bhm"]
+function = 1
+
+[sub_resource type="VisualShaderNodeParameterRef" id="VisualShaderNodeParameterRef_xosig"]
+parameter_name = "Scale_XY2"
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_b40yd"]
+input_name = "normal"
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_qiivq"]
+input_name = "vertex"
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_xcjri"]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeParameterRef" id="VisualShaderNodeParameterRef_34rbr"]
+parameter_name = "Speed_XY2"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_1utt8"]
+default_input_values = [0, Vector2(0, 0), 1, Vector2(0, 0)]
+op_type = 0
+operator = 2
+
+[sub_resource type="VisualShaderNodeParameterRef" id="VisualShaderNodeParameterRef_nly06"]
+parameter_name = "Base_noise2"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_dng5s"]
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_sgbqb"]
+default_input_values = [0, 0.0, 1, 0.5]
+operator = 2
 
 [resource]
 nodes/vertex/0/position = Vector2(386.66666, 133.33333)
-nodes/vertex/2/node = SubResource("VisualShaderNodeColorParameter_qchgb")
-nodes/vertex/2/position = Vector2(-146.66667, 226.66667)
-nodes/vertex/connections = PackedInt32Array(2, 0, 0, 6)
+nodes/vertex/2/node = SubResource("VisualShaderNodeInput_b40yd")
+nodes/vertex/2/position = Vector2(-320, 706.6667)
+nodes/vertex/3/node = SubResource("VisualShaderNodeInput_qiivq")
+nodes/vertex/3/position = Vector2(-253.33333, 120)
+nodes/vertex/4/node = SubResource("VisualShaderNodeInput_xcjri")
+nodes/vertex/4/position = Vector2(-1080, 920)
+nodes/vertex/5/node = SubResource("VisualShaderNodeParameterRef_34rbr")
+nodes/vertex/5/position = Vector2(-1253.3334, 560)
+nodes/vertex/6/node = SubResource("VisualShaderNodeVectorOp_1utt8")
+nodes/vertex/6/position = Vector2(-986.6667, 666.6667)
+nodes/vertex/7/node = SubResource("VisualShaderNodeParameterRef_nly06")
+nodes/vertex/7/position = Vector2(-733.3333, 573.3333)
+nodes/vertex/8/node = SubResource("VisualShaderNodeVectorOp_dng5s")
+nodes/vertex/8/position = Vector2(66.666664, 213.33333)
+nodes/vertex/9/node = SubResource("VisualShaderNodeFloatOp_sgbqb")
+nodes/vertex/9/position = Vector2(-306.66666, 346.66666)
+nodes/vertex/10/node = SubResource("VisualShaderNodeVectorOp_upm7f")
+nodes/vertex/10/position = Vector2(-53.333332, 453.33334)
+nodes/vertex/11/node = SubResource("VisualShaderNodeTexture_7mvqy")
+nodes/vertex/11/position = Vector2(-560, 306.66666)
+nodes/vertex/12/node = SubResource("VisualShaderNodeUVFunc_4qwhl")
+nodes/vertex/12/position = Vector2(-853.3333, 320)
+nodes/vertex/13/node = SubResource("VisualShaderNodeUVFunc_81bhm")
+nodes/vertex/13/position = Vector2(-1320, 346.66666)
+nodes/vertex/14/node = SubResource("VisualShaderNodeParameterRef_xosig")
+nodes/vertex/14/position = Vector2(-1640, 400)
+nodes/vertex/connections = PackedInt32Array(11, 1, 9, 0, 4, 0, 6, 1, 6, 0, 12, 2, 13, 0, 12, 0, 5, 0, 6, 0, 14, 0, 13, 1, 12, 0, 11, 0, 9, 0, 10, 0, 2, 0, 10, 1, 3, 0, 8, 0, 10, 0, 8, 1)
 nodes/fragment/0/position = Vector2(573.3333, 160)
 nodes/fragment/2/node = SubResource("VisualShaderNodeColorParameter_vayp8")
 nodes/fragment/2/position = Vector2(-906.6667, 40)

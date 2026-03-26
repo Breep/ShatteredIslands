@@ -73,7 +73,8 @@ func spawn_projectile(source: Entity, target: Entity, type: Projectile.Type, spa
 	
 	proj.init(source, target, stats)
 	_projectiles_node.add_child(proj)
-	proj._logic_pos = spawn_node.global_position # TODO: OULALA C'EST PAS LEGAL, A CHECK SI LOGIC POS EST VRAIMENT UTILE
+	proj.global_position = spawn_node.global_position
+	proj.init_trajectory()
 	_active_projectiles.append(proj)
 	
 	projectile_spawned.emit(proj)

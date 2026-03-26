@@ -1,11 +1,8 @@
 [gd_resource type="VisualShader" format=3 uid="uid://dqlwn6in43tli"]
 
-[ext_resource type="Texture2D" uid="uid://bvybvhyovyl50" path="res://Props/DefaultBattleIsland/Arch_island/foliage/Models/Trees/tree02_low_polyfbx_Tree_Normal.png" id="1_ude12"]
-[ext_resource type="Texture2D" uid="uid://66uqqlgcibax" path="res://Props/DefaultBattleIsland/Arch_island/foliage/Models/Trees/tree02_low_polyfbx_Tree_OcclusionRoughnessMetallic.png" id="2_2itgs"]
 [ext_resource type="Gradient" uid="uid://baqax0h82v53h" path="res://Props/DefaultBattleIsland/Arch_island/foliage/Models/Trees/Shaders/color_gradient.tres" id="3_qhqog"]
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_28dwe"]
-texture = ExtResource("1_ude12")
 
 [sub_resource type="VisualShaderNodeFloatFunc" id="VisualShaderNodeFloatFunc_sv7yu"]
 default_input_values = [0, 1.0]
@@ -13,7 +10,6 @@ default_input_values = [0, 1.0]
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_b050t"]
 output_port_for_preview = 1
 expanded_output_ports = [0]
-texture = ExtResource("2_2itgs")
 texture_type = 1
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_e3h2d"]
