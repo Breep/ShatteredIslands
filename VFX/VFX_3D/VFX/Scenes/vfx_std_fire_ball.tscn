@@ -10,13 +10,13 @@
 [ext_resource type="Texture2D" uid="uid://cqb68vqjl2kdg" path="res://VFX/VFX_3D/VFX/Textures/T_VFX_SparklesF21.jpg" id="8_6m5ca"]
 
 [sub_resource type="Gradient" id="Gradient_gsxkp"]
-offsets = PackedFloat32Array(0, 0.934853, 0.983713)
-colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+offsets = PackedFloat32Array(0, 0.75, 0.92115384, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.8248932, 0.8248932, 0.8248932, 1, 1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_xj25x"]
 gradient = SubResource("Gradient_gsxkp")
-fill_from = Vector2(0.93732196, 0.13960114)
-fill_to = Vector2(0, 0)
+fill_from = Vector2(1, 0.14814815)
+fill_to = Vector2(0.14814815, 0.16239317)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_klrjt"]
 gradient = ExtResource("4_r1qpl")
@@ -25,8 +25,8 @@ use_hdr = true
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a4kce"]
 render_priority = 0
 shader = ExtResource("3_tpkfp")
-shader_parameter/Trail_Scale = Vector2(0.59, 1.08)
-shader_parameter/Trail_Speed = Vector2(-0.305, 0)
+shader_parameter/Trail_Scale = Vector2(0.325, 1.235)
+shader_parameter/Trail_Speed = Vector2(-0.29, 0)
 shader_parameter/Trail_Texture = ExtResource("5_mdf77")
 shader_parameter/Overlapping_Gradient = SubResource("GradientTexture1D_klrjt")
 shader_parameter/Gradient__Opacity = SubResource("GradientTexture2D_xj25x")
@@ -89,7 +89,7 @@ mesh = ExtResource("2_8i1ue")
 skeleton = NodePath("../..")
 
 [node name="MCrossed1" type="MeshInstance3D" parent="." unique_id=1705277642]
-transform = Transform3D(-4.9492426, -2.3393697e-05, 0.008171604, 0, 1.568813, 0.0059630177, -0.022373306, 0.005174965, -1.8076773, -2.2768989, 0, 0.04182705)
+transform = Transform3D(-4.949294, -1.17208856e-07, -6.9079133e-15, 0, -5.8604428e-08, 1.8077055, -4.3268102e-07, 1.340713, 7.901732e-08, -2.483677, -7.6559307e-22, -2.1712994e-07)
 material_override = SubResource("ShaderMaterial_a4kce")
 cast_shadow = 0
 mesh = SubResource("QuadMesh_6sfew")
@@ -97,6 +97,7 @@ skeleton = NodePath("../..")
 
 [node name="MCrossed2" type="MeshInstance3D" parent="." unique_id=1081838779]
 transform = Transform3D(-4.9492426, 0.0070829513, -0.00040967963, 0, -0.07863284, -1.8054334, -0.022373304, -1.5668336, 0.0906053, -2.2768989, 0, 0.04182705)
+visible = false
 material_override = SubResource("ShaderMaterial_a4kce")
 cast_shadow = 0
 mesh = SubResource("QuadMesh_6sfew")

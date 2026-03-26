@@ -6,7 +6,7 @@
 [ext_resource type="ArrayMesh" uid="uid://be7pti8law5sf" path="res://VFX/VFX_3D/Explosion/objects/sm_sphere_rotated45.obj" id="4_y27wu"]
 [ext_resource type="Shader" uid="uid://bpf8re2if2yu3" path="res://VFX/VFX_3D/VFX/Shaders/s_FireHeader.tres" id="5_bfdnn"]
 [ext_resource type="PackedScene" uid="uid://d4i83bqlqpy0a" path="res://VFX/VFX_3D/VFX/Scenes/VFX_Electric_strike.tscn" id="6_suu7n"]
-[ext_resource type="PackedScene" uid="uid://cw2720gv02yqy" path="res://Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Scenes/VFX_MagicCircle_Pk1.tscn" id="7_ipp5g"]
+[ext_resource type="PackedScene" uid="uid://u8lcrufkdkae" path="res://VFX/VFX_3D/VFX/Scenes/vfx_std_fire_ball.tscn" id="8_408rm"]
 [ext_resource type="PackedScene" uid="uid://cyl12uhlgqys0" path="res://Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Scenes/VFX_FireWall_A1_.tscn" id="8_y27wu"]
 
 [sub_resource type="Gradient" id="Gradient_offnt"]
@@ -62,13 +62,11 @@ shader_parameter/Proximity_Fade = 0.2
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_le01h"]
 render_priority = -1
 shader = ExtResource("5_bfdnn")
-shader_parameter/Color = Color(0.46463537, 0.4034471, 0.96652824, 1)
+shader_parameter/Color = Color(0.8867984, 0.17165068, 0.43567452, 1)
 shader_parameter/Fresnel = 8.7
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_y27wu"]
-
 [node name="VFX_DarknessProjectile" type="Node3D" unique_id=1370579907]
-transform = Transform3D(0.6608101, 0, 0, 0, 0.6608101, 0, 0, 0, 1.1924881, 0, 0, 0)
+transform = Transform3D(0.42715994, 0, 0, 0, 0.42715994, 0, 0, 0, 0.7708464, 0, 0, 0)
 
 [node name="FBHead" type="MeshInstance3D" parent="." unique_id=1259793574]
 transform = Transform3D(-0.7, 0, -6.11959e-08, 0, 0.7, 0, 6.11959e-08, 0, -0.7, 0, 0, 0.0107827)
@@ -94,6 +92,7 @@ skeleton = NodePath("../..")
 
 [node name="MBall3" type="MeshInstance3D" parent="." unique_id=883583964]
 transform = Transform3D(0.16810964, 0, 0, 0, 8.569202e-09, -0.16455042, 0, -0.1960403, -7.1927326e-09, -0.0012344909, 1.8445585e-08, -0.11921003)
+visible = false
 material_override = SubResource("ShaderMaterial_le01h")
 cast_shadow = 0
 mesh = ExtResource("4_y27wu")
@@ -101,31 +100,16 @@ skeleton = NodePath("../..")
 
 [node name="MBall2" type="MeshInstance3D" parent="." unique_id=1160059274]
 transform = Transform3D(0.0016920867, 6.249058e-06, 0.00015192627, -1.4551915e-11, -0.0034645628, 3.2829317e-05, 0.00015524268, -6.8112306e-05, -0.0016559392, -0.00024214623, 2.8377762e-08, -0.34652933)
-visible = false
 material_override = SubResource("ShaderMaterial_le01h")
 cast_shadow = 0
 mesh = ExtResource("4_08jkn")
 skeleton = NodePath("../..")
 
-[node name="VFX_ElectricStrike" parent="." unique_id=2047567898 instance=ExtResource("6_suu7n")]
-transform = Transform3D(0.4075264, 0, 0, 0, 0.4075264, 0, 0, 0, 0.2581261, 0, 0, 0.035813954)
-visible = false
-
-[node name="Trail2_dynamic" parent="VFX_ElectricStrike" index="3" unique_id=1227886102]
-transform = Transform3D(0.99999976, 0, 0, 0, 1, 0, 0, 0, 0.99999976, 0, 0.00146139, 0)
-mesh = SubResource("ImmediateMesh_y27wu")
-
-[node name="OmniLight3D" parent="VFX_ElectricStrike" index="5" unique_id=1171638547]
-visible = false
-
-[node name="VFX_MagicCircle_Pk1" parent="." unique_id=2144993907 instance=ExtResource("7_ipp5g")]
-transform = Transform3D(0.022766067, 0, 0, 0, 0.022766067, 0, 0, 0, 0.017097063, 0.0071606785, -0.0054242047, 0.057285577)
-visible = false
-
 [node name="VFX_FireWall_A1_" parent="." unique_id=1991840675 instance=ExtResource("8_y27wu")]
 transform = Transform3D(0.01251344, 0, 0.36732972, 0, 0.36773795, 0, -0.26534703, 0, 0.017322822, -0.0048986133, -0.0047237854, -0.14953354)
 
 [node name="VFX_ElectricStrike2" parent="." unique_id=897485336 instance=ExtResource("6_suu7n")]
-transform = Transform3D(0.47450677, 0, 0, 0, 0.47450677, 0, 0, 0, 0.35040143, 0, 0, 0.20225748)
+transform = Transform3D(0.47450677, 0, 0, 0, 0.47450677, 0, 0, 0, 0.35040143, -0.00036197156, 0, 0.2391561)
 
-[editable path="VFX_ElectricStrike"]
+[node name="VFX_std_FireBall" parent="." unique_id=1158253114 instance=ExtResource("8_408rm")]
+transform = Transform3D(-0.016783897, 0, 0.567513, 0, 0.5677611, 0, -0.56751305, 0, -0.016783899, -0.089404665, 0, -0.6295136)
