@@ -12,13 +12,14 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_d2dv0"]
 
-[node name="FortificationDrone" type="CharacterBody3D" unique_id=1381427842 node_paths=PackedStringArray("_health_bar", "_visual_3d")]
+[node name="FortificationDrone" type="CharacterBody3D" unique_id=1381427842 node_paths=PackedStringArray("_health_bar", "_visual_3d", "_health_bar_marker")]
 script = ExtResource("1_gc2y3")
 _health_bar = NodePath("HealthBar")
 entity_name = "Fortification Drone"
 custom_base_stats = SubResource("Resource_07yhp")
-_auto_loaded_modules = Array[int]([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 0])
+_auto_loaded_modules = Array[int]([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 0])
 _visual_3d = NodePath("FortificationDroneVisual")
+_health_bar_marker = NodePath("FortificationDroneVisual/HealthBarSpawnMarker")
 metadata/_custom_type_script = "uid://cjfj1jcbiom2x"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1130319820]

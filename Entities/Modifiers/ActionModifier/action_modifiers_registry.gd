@@ -45,6 +45,7 @@ func _init() -> void:
 		Utils.ActionCategory.STACK: ActionModifiersDictionary.new(),
 		Utils.ActionCategory.HEAL: ActionModifiersDictionary.new(),
 		Utils.ActionCategory.DODGE: ActionModifiersDictionary.new(),
+		Utils.ActionCategory.SUMMON: ActionModifiersDictionary.new(),
 	}
 	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 

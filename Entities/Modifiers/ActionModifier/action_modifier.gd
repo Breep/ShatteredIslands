@@ -16,7 +16,9 @@ enum VarType { # Variable types of the callbacks dictionary
 	TARGET,
 	DODGE_NUMBER,
 	HEAL_AMOUNT,
-	DURATION
+	DURATION,
+	ENTITY_TYPE,
+	ENTITY_MODIFIER,
 }
 
 

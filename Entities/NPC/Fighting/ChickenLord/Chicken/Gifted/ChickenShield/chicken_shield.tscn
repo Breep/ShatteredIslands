@@ -22,13 +22,17 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 radius = 0.421875
 height = 0.84375
 
-[node name="ChickenShield" type="CharacterBody3D" unique_id=2109615854]
+[node name="ChickenShield" type="CharacterBody3D" unique_id=2109615854 node_paths=PackedStringArray("_health_bar", "_visual_3d", "_health_bar_marker")]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("1_427g7")
+_health_bar = NodePath("HealthBar")
+entity_name = "Chicken Shield"
 custom_base_stats = SubResource("Resource_tce5d")
-_auto_loaded_modules = Array[int]([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 0, 4])
+_auto_loaded_modules = Array[int]([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 0, 4])
+_visual_3d = NodePath("ChickenShieldVisual")
+_health_bar_marker = NodePath("ChickenShieldVisual/HealthBarSpawnMarker")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1928783995]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41943443, 0)
@@ -74,7 +78,10 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.00037944317, 0.382874
 [node name="ChickenShieldVisual" parent="." unique_id=142901617 instance=ExtResource("5_x4yyx")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
-[node name="Skeleton3D" parent="ChickenShieldVisual" index="0" unique_id=416118163]
+[node name="HealthBarSpawnMarker" type="Marker3D" parent="ChickenShieldVisual" unique_id=523855526]
+transform = Transform3D(-0.99999976, 0, 8.742277e-08, 0, 0.99999976, 0, -8.742277e-08, 0, -0.99999976, 0, 1.0718391, 0)
+
+[node name="Skeleton3D" parent="ChickenShieldVisual" index="1" unique_id=416118163]
 bones/1/position = Vector3(0, 0.047381032, -0.004717756)
 bones/2/rotation = Quaternion(0.83199865, 0.04164722, -0.5494833, -0.064124875)
 bones/3/rotation = Quaternion(0.96720886, 9.047426e-08, 0.2539824, -3.064464e-07)
@@ -88,14 +95,11 @@ bones/10/rotation = Quaternion(-7.0842357e-06, -0.9583842, -3.7334617e-06, 0.285
 bones/11/rotation = Quaternion(0.9932081, 1.7259497e-06, -0.11635134, -1.4468616e-05)
 bones/12/rotation = Quaternion(4.817537e-08, -0.60039806, 2.3136849e-07, 0.79970133)
 
-[node name="AnimationPlayer" parent="ChickenShieldVisual" index="1" unique_id=777400876]
+[node name="AnimationPlayer" parent="ChickenShieldVisual" index="2" unique_id=777400876]
 script = ExtResource("7_qe5ys")
 
-[node name="SumonSimpleInfoPanel2d" parent="." unique_id=1628734826 node_paths=PackedStringArray("_owner_entity", "_info_panel_spawn") instance=ExtResource("8_u3s5i")]
+[node name="HealthBar" parent="." unique_id=1628734826 node_paths=PackedStringArray("_owner_entity", "_info_panel_spawn") instance=ExtResource("8_u3s5i")]
 _owner_entity = NodePath("..")
-_info_panel_spawn = NodePath("../HealthBar")
-
-[node name="HealthBar" type="Marker3D" parent="." unique_id=523855526]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+_info_panel_spawn = NodePath("../ChickenShieldVisual/HealthBarSpawnMarker")
 
 [editable path="ChickenShieldVisual"]

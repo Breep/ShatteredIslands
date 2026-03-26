@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b3rf30m650nx6" path="res://Entities/NPC/Fighting/ChickenLord/TRex/trex_visual.tscn" id="2_y4jfh"]
 [ext_resource type="Script" uid="uid://cnwr3o67xobtt" path="res://Entities/Modules/AnimationModule/entity_animation_player.gd" id="4_vpc07"]
 [ext_resource type="Script" uid="uid://dbu0yi2foobod" path="res://Entities/Modules/AnimationModule/animation_module.gd" id="5_jlh56"]
+[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://Entities/EntityInfoPanel/SummonSimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="5_qsrpw"]
 
 [sub_resource type="Resource" id="Resource_vpc07"]
 script = ExtResource("2_pdas5")
@@ -160,12 +161,13 @@ nodes/one_shot_idle/node = SubResource("AnimationNodeOneShot_5c32l")
 nodes/one_shot_idle/position = Vector2(60, 260)
 node_connections = [&"output", 0, &"transition_global", &"transition_fighting", 0, &"one_shot_idle", &"transition_fighting", 1, &"scale_walk", &"transition_fighting", 2, &"scale_run", &"transition_fighting", 3, &"scale_dance", &"transition_fighting", 4, &"scale_die", &"scale_dance", 0, &"anim_dance", &"scale_die", 0, &"anim_die", &"scale_idle", 0, &"anim_idle", &"one_shot_attack", 0, &"transition_fighting", &"one_shot_attack", 1, &"scale_attack", &"scale_run", 0, &"anim_run", &"one_shot_ultimate", 0, &"one_shot_attack", &"one_shot_ultimate", 1, &"scale_ultimate", &"scale_attack", 0, &"anim_attack", &"scale_walk", 0, &"anim_walk", &"scale_ultimate", 0, &"anim_ultimate", &"scale_idle_var", 0, &"anim_idle_var", &"transition_global", 0, &"anim_TPOSE", &"transition_global", 1, &"one_shot_ultimate", &"one_shot_idle", 0, &"scale_idle", &"one_shot_idle", 1, &"scale_idle_var"]
 
-[node name="Trex" type="CharacterBody3D" unique_id=1192000513 node_paths=PackedStringArray("_visual_3d", "_animation_module")]
+[node name="Trex" type="CharacterBody3D" unique_id=1192000513 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_animation_module")]
 script = ExtResource("1_8gq8b")
 entity_name = "TREX"
 custom_base_stats = SubResource("Resource_vpc07")
-_auto_loaded_modules = Array[int]([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 0, 4])
+_auto_loaded_modules = Array[int]([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 0, 4])
 _visual_3d = NodePath("TrexVisual")
+_health_bar_marker = NodePath("TrexVisual/HealthBarSpawnMarker")
 _animation_module = NodePath("AnimationModule")
 spawn_duration = 2.0
 metadata/_custom_type_script = "uid://cjfj1jcbiom2x"
@@ -189,6 +191,13 @@ bones/12/rotation = Quaternion(4.817537e-08, -0.60039806, 2.3136849e-07, 0.79970
 
 [node name="AnimationPlayer" parent="TrexVisual/ChickenVisual" parent_id_path=PackedInt32Array(467940093, 142901617) index="1" unique_id=777400876]
 script = ExtResource("4_vpc07")
+
+[node name="HealthBar" parent="TrexVisual" unique_id=1628734826 node_paths=PackedStringArray("_owner_entity", "_info_panel_spawn") instance=ExtResource("5_qsrpw")]
+_owner_entity = NodePath("../..")
+_info_panel_spawn = NodePath("../HealthBarSpawnMarker")
+
+[node name="HealthBarSpawnMarker" type="Marker3D" parent="TrexVisual" unique_id=428013312]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.8765922, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1022277638]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8818612, 0)

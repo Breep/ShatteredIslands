@@ -22,15 +22,16 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 radius = 0.421875
 height = 0.84375
 
-[node name="Chicken" type="CharacterBody3D" unique_id=2109615854 node_paths=PackedStringArray("_health_bar", "_visual_3d", "_animation_module")]
+[node name="Chicken" type="CharacterBody3D" unique_id=2109615854 node_paths=PackedStringArray("_health_bar", "_visual_3d", "_health_bar_marker", "_animation_module")]
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("1_t2vws")
 _health_bar = NodePath("HealthBar")
 entity_name = "Chicken"
 custom_base_stats = SubResource("Resource_x7yny")
-_auto_loaded_modules = Array[int]([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 0, 4])
+_auto_loaded_modules = Array[int]([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 0, 4])
 _visual_3d = NodePath("ChickenVisual")
+_health_bar_marker = NodePath("ChickenVisual/HealthBarSpawnPoint")
 _animation_module = NodePath("AnimationModule")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1928783995]
@@ -57,6 +58,9 @@ bones/12/rotation = Quaternion(4.817537e-08, -0.60039806, 2.3136849e-07, 0.79970
 
 [node name="AnimationPlayer" parent="ChickenVisual" index="1" unique_id=777400876]
 script = ExtResource("4_xhshf")
+
+[node name="HealthBarSpawnPoint" type="Marker3D" parent="ChickenVisual" unique_id=1542741370]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1.5, 0)
 
 [node name="AnimationModule" type="Node" parent="." unique_id=986746104 node_paths=PackedStringArray("_animation_tree", "_animation_player", "_entity_owner")]
 script = ExtResource("5_8qwhc")
@@ -95,11 +99,8 @@ parameters/one_shot_idle/request = 0
 [node name="AASpawnPoint" parent="." unique_id=1596130037 instance=ExtResource("7_6fmmv")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.00037944317, 0.38287425, -0.5151825)
 
-[node name="HealthBarSpawnPoint" type="Marker3D" parent="." unique_id=1542741370]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-
 [node name="HealthBar" parent="." unique_id=1628734826 node_paths=PackedStringArray("_owner_entity", "_info_panel_spawn") instance=ExtResource("8_5weh6")]
 _owner_entity = NodePath("..")
-_info_panel_spawn = NodePath("../HealthBarSpawnPoint")
+_info_panel_spawn = NodePath("../ChickenVisual/HealthBarSpawnPoint")
 
 [editable path="ChickenVisual"]

@@ -6,6 +6,7 @@
 [ext_resource type="AnimationNodeBlendTree" uid="uid://brnwae0xxk00f" path="res://Entities/NPC/Fighting/Poison/Snake/snake_blendtree.tres" id="5_duvd4"]
 [ext_resource type="Script" uid="uid://cnwr3o67xobtt" path="res://Entities/Modules/AnimationModule/entity_animation_player.gd" id="6_obplm"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Tool/SpawnPoint/spawn_point.tscn" id="7_jendl"]
+[ext_resource type="PackedScene" uid="uid://caud4asl4y1y5" path="res://Entities/EntityInfoPanel/SummonSimpleInfoPanel2D/summon_simple_info_panel_2d.tscn" id="8_nh8ax"]
 [ext_resource type="Script" uid="uid://dbu0yi2foobod" path="res://Entities/Modules/AnimationModule/animation_module.gd" id="9_ptbxe"]
 
 [sub_resource type="Resource" id="Resource_6o6k5"]
@@ -21,14 +22,16 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 radius = 0.2
 height = 1.1748047
 
-[node name="Snake" type="CharacterBody3D" unique_id=21219754 node_paths=PackedStringArray("_visual_3d", "_animation_module")]
+[node name="Snake" type="CharacterBody3D" unique_id=21219754 node_paths=PackedStringArray("_health_bar", "_visual_3d", "_health_bar_marker", "_animation_module")]
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("1_v4viv")
+_health_bar = NodePath("HealthBar")
 entity_name = "Snake"
 custom_base_stats = SubResource("Resource_6o6k5")
-_auto_loaded_modules = Array[int]([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 4, 0])
+_auto_loaded_modules = Array[int]([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 0, 4])
 _visual_3d = NodePath("SnakeVisual")
+_health_bar_marker = NodePath("SnakeVisual/HealthBarSpawnMarker")
 _animation_module = NodePath("AnimationModule")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1208773448]
@@ -80,6 +83,9 @@ bones/37/rotation = Quaternion(-0.011591861, 0.09013758, 0.16512816, 0.9820762)
 [node name="AnimationPlayer" parent="SnakeVisual" index="1" unique_id=269182265]
 script = ExtResource("6_obplm")
 
+[node name="HealthBarSpawnMarker" type="Marker3D" parent="SnakeVisual" unique_id=301491961]
+transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0, 0, 0)
+
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=1999766066]
 root_node = NodePath("../SnakeVisual")
 tree_root = ExtResource("5_duvd4")
@@ -117,5 +123,9 @@ _animation_tree = NodePath("../AnimationTree")
 _animation_player = NodePath("../SnakeVisual/AnimationPlayer")
 _entity_owner = NodePath("..")
 metadata/_custom_type_script = "uid://dbu0yi2foobod"
+
+[node name="HealthBar" parent="." unique_id=1628734826 node_paths=PackedStringArray("_owner_entity", "_info_panel_spawn") instance=ExtResource("8_nh8ax")]
+_owner_entity = NodePath("..")
+_info_panel_spawn = NodePath("../SnakeVisual/HealthBarSpawnMarker")
 
 [editable path="SnakeVisual"]
