@@ -12,6 +12,7 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 [node name="ChickenEgg" type="CharacterBody3D" unique_id=105635652 node_paths=PackedStringArray("_visual_3d")]
 script = ExtResource("1_oif6b")
 entity_name = "Chicken Egg"
+invisible = true
 custom_base_stats = SubResource("Resource_wr8al")
 _visual_3d = NodePath("ChickenEggVisual")
 metadata/_custom_type_script = "uid://cjfj1jcbiom2x"

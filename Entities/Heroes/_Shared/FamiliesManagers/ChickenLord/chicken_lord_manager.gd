@@ -14,6 +14,8 @@ const P_PERIODIC_SPAWN_PERIODS: Array[float] = [12.0, 6.0, 5.5, 5.0, 4.5]
 const P_PERIODIC_SPAWN_CHICKEN_NUMBERS: Array[int] = [0, 1, 1, 1, 1]
 const P_START_CHICKENS: Array[int] = [0, 2, 3, 4, 6]
 
+const EGG_HATCH_TIME: float = 3.0
+
 # Chicken gifted attack stats
 const GIFTED_AD_RATIOS: Array[float] = [0.15, 0.20, 0.25, 0.3]
 const GIFTED_AS_RATIOS: Array[float] = [0.15, 0.20, 0.25, 0.3]
@@ -65,7 +67,6 @@ var _gifted_chance: float
 var _families_level: Dictionary[Family.Type, int]
 var _gifted_types: Array[Chicken.Type]
 var _alive_ally_chickens: Array[Chicken]
-var _twins_chance: float # relative to Chicken Twins card
 
 var _dead_chicken_count: int
 var _alive_chicken_count: int
@@ -83,13 +84,13 @@ func start() -> void:
 	_families_level = _owner.get_families_level()
 	_init_gifted_types()
 	_trex_gauge = _owner.data_memory.get_data(FAMILY_NAME, ANCESTRAL_GAUGE_NAME, 0)
-	
+
 	_gifted_chance = GIFTED_CHANCES[level] + _chicken_lord_stats.gifted_chance_increase
-	if level >= 1 :
+	if level >= 1:
 		_start_passive()
-	
+
 	_owner.target_module.new_entity_detected.connect(_on_owner_target_module_new_entity_detected)
-	
+
 	for entity in _owner.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES):
 		if entity is Chicken and entity.team == _owner.team:
 			_on_chicken_spawned(entity)
@@ -116,11 +117,14 @@ func _init_gifted_types() -> void:
 
 #region ============================== PASSIVE ==============================
 func _start_passive() -> void:
+	_register_gifted_egg_modifier()
+	_register_twins_hatch_modifier()
+
 	_spawn_n_chickens(P_START_CHICKENS[level])
-	var spawn_period: float = P_PERIODIC_SPAWN_PERIODS[level] - _chicken_lord_stats.spawn_period_decrease # Rajouter un check
+	var spawn_period: float = P_PERIODIC_SPAWN_PERIODS[level] - _chicken_lord_stats.spawn_period_decrease
 	var chicken_number: int = P_PERIODIC_SPAWN_CHICKEN_NUMBERS[level]
 	_owner.periodic_timer_registry.register(&"Chicken passive", spawn_period, _spawn_n_chickens.bind(chicken_number), true)
-	
+
 	if _trex_gauge >= ANCESTRAL_GAUCHE_THRESHOLD:
 		var spawn_loc := SpawnLocationConfig.create_arena_center()
 		_owner.summon_entity(Entity.EntityType.TREX, spawn_loc, {
@@ -131,118 +135,92 @@ func _start_passive() -> void:
 #endregion
 
 
-#region ============================== SPAWN ==============================
-func _spawn_n_chickens(chicken_number: int) -> void:
-	for i in chicken_number:
-		_spawn_chicken(_get_random_chicken_type())
+#region ============================== MODIFIERS ==============================
 
-
-func _get_random_chicken_type() -> Chicken.Type:
-	if Utils.is_randomize_modifier_active(_gifted_chance, _owner.battle_id):
+func _register_gifted_egg_modifier() -> void:
+	var modifier := ActionModifier.new()
+	modifier.id = &"ChickenLord Gifted"
+	modifier.action_type = Utils.ActionCategory.SUMMON
+	modifier.is_one_time_effect = false
+	modifier.auto_cleanup = true
+	modifier.before_action_logic_callback = func(cb_vars: Dictionary) -> void:
+		if cb_vars.get(ActionModifier.VarType.ENTITY_TYPE) != Entity.EntityType.CHICKEN_EGG: return
+		if not Utils.is_randomize_modifier_active(_gifted_chance, _owner.battle_id): return
 		var chicken_type = Utils.pick_random(_gifted_types, _owner.battle_id)
-		return chicken_type if chicken_type != null else Chicken.Type.BASIC
-	return Chicken.Type.BASIC
+		if chicken_type == null: return
+		var egg_modifier: Dictionary = cb_vars[ActionModifier.VarType.ENTITY_MODIFIER]
+		egg_modifier[ChickenEgg.Modifier.CHICKEN_TYPE] = chicken_type
+		if not egg_modifier.has(ChickenEgg.Modifier.CHICKEN_MODIFIERS):
+			egg_modifier[ChickenEgg.Modifier.CHICKEN_MODIFIERS] = {}
+		_enrich_chicken_modifiers(egg_modifier[ChickenEgg.Modifier.CHICKEN_MODIFIERS], chicken_type)
+	_owner.action_modifiers_registry.register_modifier(modifier)
 
 
-func _spawn_chicken(chicken_type: Chicken.Type, can_have_twin: bool = true) -> void:
-	if can_have_twin and Utils.is_randomize_modifier_active(_twins_chance, _owner.battle_id):
-			_spawn_chicken(_get_random_chicken_type(), false)
-	
-	var spawn_location_config := SpawnLocationConfig.create_random_arena()
+## Fills gifted-type-specific params into the chicken_modifiers dictionary.
+func _enrich_chicken_modifiers(chicken_modifiers: Dictionary, chicken_type: Chicken.Type) -> void:
 	match chicken_type:
-		Chicken.Type.BASIC:
-			_owner.summon_entity(Entity.EntityType.CHICKEN, spawn_location_config,{
-				Chicken.BaseStatsModifier.HP: _chicken_lord_stats.HP[level],
-				Chicken.BaseStatsModifier.AD: _chicken_lord_stats.AD[level],
-				Chicken.BaseStatsModifier.ARMOR: _chicken_lord_stats.ARMOR[level],
-				Chicken.BaseStatsModifier.CRIT_CHANCE: _chicken_lord_stats.CRIT_CHANCE[level],
-				Chicken.BaseStatsModifier.CRIT_MULTI: _chicken_lord_stats.CRIT_MULTI[level]
-			})
 		Chicken.Type.GIFTED_ATTACK:
-			_owner.summon_entity(Entity.EntityType.CHICKEN, spawn_location_config, {
-				"Type": Chicken.Type.GIFTED_ATTACK,
-				"ad": _owner.stats.attack_damage * GIFTED_AD_RATIOS[_families_level[Family.Type.WARRIOR] - 1],
-				"as": _owner.stats.attack_speed * GIFTED_AS_RATIOS[_families_level[Family.Type.WARRIOR] - 1],
-				Chicken.BaseStatsModifier.HP: _chicken_lord_stats.HP[level],
-				Chicken.BaseStatsModifier.AD: _chicken_lord_stats.AD[level],
-				Chicken.BaseStatsModifier.ARMOR: _chicken_lord_stats.ARMOR[level],
-				Chicken.BaseStatsModifier.CRIT_CHANCE: _chicken_lord_stats.CRIT_CHANCE[level],
-				Chicken.BaseStatsModifier.CRIT_MULTI: _chicken_lord_stats.CRIT_MULTI[level]
-				})
+			chicken_modifiers["ad"] = _owner.stats.attack_damage * GIFTED_AD_RATIOS[_families_level[Family.Type.WARRIOR] - 1]
+			chicken_modifiers["as"] = _owner.stats.attack_speed * GIFTED_AS_RATIOS[_families_level[Family.Type.WARRIOR] - 1]
 		Chicken.Type.GIFTED_POISON:
-			_owner.summon_entity(Entity.EntityType.CHICKEN, spawn_location_config, {
-				"Type": Chicken.Type.GIFTED_POISON,
-				"ratio": GIFTED_POISON_RATIO[_families_level[Family.Type.POISON] - 1],
-				"number": GIFTED_POISON_STACKS[_families_level[Family.Type.POISON] - 1],
-				Chicken.BaseStatsModifier.HP: _chicken_lord_stats.HP[level],
-				Chicken.BaseStatsModifier.AD: _chicken_lord_stats.AD[level],
-				Chicken.BaseStatsModifier.ARMOR: _chicken_lord_stats.ARMOR[level],
-				Chicken.BaseStatsModifier.CRIT_CHANCE: _chicken_lord_stats.CRIT_CHANCE[level],
-				Chicken.BaseStatsModifier.CRIT_MULTI: _chicken_lord_stats.CRIT_MULTI[level]
-				})
+			chicken_modifiers["ratio"] = GIFTED_POISON_RATIO[_families_level[Family.Type.POISON] - 1]
+			chicken_modifiers["number"] = GIFTED_POISON_STACKS[_families_level[Family.Type.POISON] - 1]
 		Chicken.Type.GIFTED_COLOSSUS:
-			_owner.summon_entity(Entity.EntityType.CHICKEN, spawn_location_config, {
-				"Type": Chicken.Type.GIFTED_COLOSSUS,
-				"hpmax": _owner.stats.health_max * GIFTED_COLOSSUS_HPMAX_RATIOS[_families_level[Family.Type.COLOSSUS] - 1],
-				Chicken.BaseStatsModifier.HP: _chicken_lord_stats.HP[level],
-				Chicken.BaseStatsModifier.AD: _chicken_lord_stats.AD[level],
-				Chicken.BaseStatsModifier.ARMOR: _chicken_lord_stats.ARMOR[level],
-				Chicken.BaseStatsModifier.CRIT_CHANCE: _chicken_lord_stats.CRIT_CHANCE[level],
-				Chicken.BaseStatsModifier.CRIT_MULTI: _chicken_lord_stats.CRIT_MULTI[level]
-			})
+			chicken_modifiers["hpmax"] = _owner.stats.health_max * GIFTED_COLOSSUS_HPMAX_RATIOS[_families_level[Family.Type.COLOSSUS] - 1]
 		Chicken.Type.GIFTED_LIGHT:
 			var bonus_heal: float = _owner.stats.get_stat(EntityStats.StatType.STRENGTH, Utils.ActionType.UTILITY_HEAL)
-			_owner.summon_entity(Entity.EntityType.CHICKEN, spawn_location_config, {
-				"Type": Chicken.Type.GIFTED_LIGHT,
-				"ratio_regen": GIFTED_LIGHT_REGEN_RATIOS[_families_level[Family.Type.LIGHT] - 1],
-				"inherited_heal_ratio": bonus_heal * GIFTED_LIGHT_INHERITED_HEAL[_families_level[Family.Type.LIGHT] - 1],
-				Chicken.BaseStatsModifier.HP: _chicken_lord_stats.HP[level],
-				Chicken.BaseStatsModifier.AD: _chicken_lord_stats.AD[level],
-				Chicken.BaseStatsModifier.ARMOR: _chicken_lord_stats.ARMOR[level],
-				Chicken.BaseStatsModifier.CRIT_CHANCE: _chicken_lord_stats.CRIT_CHANCE[level],
-				Chicken.BaseStatsModifier.CRIT_MULTI: _chicken_lord_stats.CRIT_MULTI[level]
-			})
+			chicken_modifiers["ratio_regen"] = GIFTED_LIGHT_REGEN_RATIOS[_families_level[Family.Type.LIGHT] - 1]
+			chicken_modifiers["inherited_heal_ratio"] = bonus_heal * GIFTED_LIGHT_INHERITED_HEAL[_families_level[Family.Type.LIGHT] - 1]
 		Chicken.Type.GIFTED_ENGINEER:
 			var bonus_shield: float = _owner.stats.get_stat(EntityStats.StatType.STRENGTH, Utils.ActionType.STACK_SHIELD)
-			_owner.summon_entity(Entity.EntityType.CHICKEN, spawn_location_config, {
-				"Type": Chicken.Type.GIFTED_ENGINEER,
-				"shield_per_attack": GIFTED_SHIELD_PER_ATTACK[_families_level[Family.Type.ENGINEER] - 1],
-				"bonus_spawn": GIFTED_SHIELD_BONUS_SPAWN[_families_level[Family.Type.ENGINEER] - 1],
-				"shield_strength_inherited": bonus_shield * GIFTED_SHIELD_INHERITED_SHIELD[_families_level[Family.Type.ENGINEER] - 1],
-				Chicken.BaseStatsModifier.HP: _chicken_lord_stats.HP[level],
-				Chicken.BaseStatsModifier.AD: _chicken_lord_stats.AD[level],
-				Chicken.BaseStatsModifier.ARMOR: _chicken_lord_stats.ARMOR[level],
-				Chicken.BaseStatsModifier.CRIT_CHANCE: _chicken_lord_stats.CRIT_CHANCE[level],
-				Chicken.BaseStatsModifier.CRIT_MULTI: _chicken_lord_stats.CRIT_MULTI[level]
-			})
+			chicken_modifiers["shield_per_attack"] = GIFTED_SHIELD_PER_ATTACK[_families_level[Family.Type.ENGINEER] - 1]
+			chicken_modifiers["bonus_spawn"] = GIFTED_SHIELD_BONUS_SPAWN[_families_level[Family.Type.ENGINEER] - 1]
+			chicken_modifiers["shield_strength_inherited"] = bonus_shield * GIFTED_SHIELD_INHERITED_SHIELD[_families_level[Family.Type.ENGINEER] - 1]
 		Chicken.Type.GIFTED_ARDENT_CELESTIAL:
-			_owner.summon_entity(Entity.EntityType.CHICKEN, spawn_location_config, {
-				"Type": Chicken.Type.GIFTED_ARDENT_CELESTIAL,
-				"ignite_stacks": GIFTED_ARDENT_CELESTIAL_IGNITE_STACKS[_families_level[Family.Type.ARDENT_CELESTIAL] - 1],
-				Chicken.BaseStatsModifier.HP: _chicken_lord_stats.HP[level],
-				Chicken.BaseStatsModifier.AD: _chicken_lord_stats.AD[level],
-				Chicken.BaseStatsModifier.ARMOR: _chicken_lord_stats.ARMOR[level],
-				Chicken.BaseStatsModifier.CRIT_CHANCE: _chicken_lord_stats.CRIT_CHANCE[level],
-				Chicken.BaseStatsModifier.CRIT_MULTI: _chicken_lord_stats.CRIT_MULTI[level]
-			})
+			chicken_modifiers["ignite_stacks"] = GIFTED_ARDENT_CELESTIAL_IGNITE_STACKS[_families_level[Family.Type.ARDENT_CELESTIAL] - 1]
 		Chicken.Type.GIFTED_STORM_CALLER:
 			var crit_chance: float = _owner.stats.get_stat(EntityStats.StatType.CRIT_CHANCE, Utils.ActionType.DAMAGE_PHYSICAL)
 			var crit_mult: float = _owner.stats.get_stat(EntityStats.StatType.CRIT_MULT, Utils.ActionType.DAMAGE_PHYSICAL)
-			_owner.summon_entity(Entity.EntityType.CHICKEN, spawn_location_config, {
-				"Type": Chicken.Type.GIFTED_STORM_CALLER,
-				"crit_chance": crit_chance * GIFTED_STORM_CALLER_CRIT_CHANCE_RATIO[_families_level[Family.Type.STORM_CALLER] - 1],
-				"crit_mult": crit_mult * GIFTED_STORM_CALLER_CRIT_MULT_RATIO[_families_level[Family.Type.STORM_CALLER] - 1],
-				Chicken.BaseStatsModifier.HP: _chicken_lord_stats.HP[level],
-				Chicken.BaseStatsModifier.AD: _chicken_lord_stats.AD[level],
-				Chicken.BaseStatsModifier.ARMOR: _chicken_lord_stats.ARMOR[level],
-				Chicken.BaseStatsModifier.CRIT_CHANCE: _chicken_lord_stats.CRIT_CHANCE[level],
-				Chicken.BaseStatsModifier.CRIT_MULTI: _chicken_lord_stats.CRIT_MULTI[level]
-			})
-	
-	if chicken_type == Chicken.Type.BASIC:
-		_owner.data_memory.increment_data(FAMILY_NAME, ANCESTRAL_GAUGE_NAME, ANCESTRAL_GAUCHE_FILL_CHICKEN_SPAWN)
-	else:
-		_owner.data_memory.increment_data(FAMILY_NAME, ANCESTRAL_GAUGE_NAME, ANCESTRAL_GAUCHE_FILL_GIFTED_CHICKEN_SPAWN)
+			chicken_modifiers["crit_chance"] = crit_chance * GIFTED_STORM_CALLER_CRIT_CHANCE_RATIO[_families_level[Family.Type.STORM_CALLER] - 1]
+			chicken_modifiers["crit_mult"] = crit_mult * GIFTED_STORM_CALLER_CRIT_MULT_RATIO[_families_level[Family.Type.STORM_CALLER] - 1]
+
+
+## Registers a HatchModifier that spawns a twin chicken when the twins card is active.
+## Reads twins_chance at hatch time so the card value is always up-to-date.
+func _register_twins_hatch_modifier() -> void:
+	var modifier := HatchModifier.new()
+	modifier.id = &"ChickenLord Twins"
+	modifier.is_one_time_effect = false
+	modifier.before_hatch_callback = func(vars: Dictionary) -> void:
+		if not Utils.is_randomize_modifier_active(_chicken_lord_stats.twins_chance, _owner.battle_id):
+			return
+		vars[HatchModifier.VarType.SPAWN_COUNT] += 1
+	_chicken_lord_stats.hatch_modifiers.append(modifier)
+
+#endregion
+
+
+#region ============================== SPAWN ==============================
+func _spawn_n_chickens(chicken_number: int) -> void:
+	for i in chicken_number:
+		_spawn_chicken()
+
+
+## Spawns a basic egg. The gifted summon modifier will upgrade it if the chance triggers.
+func _spawn_chicken() -> void:
+	var spawn_location_config := SpawnLocationConfig.create_random_arena()
+	_owner.summon_entity(Entity.EntityType.CHICKEN_EGG, spawn_location_config, {
+		ChickenEgg.Modifier.HATCH_TIME: EGG_HATCH_TIME,
+		ChickenEgg.Modifier.CHICKEN_TYPE: Chicken.Type.BASIC,
+		ChickenEgg.Modifier.CHICKEN_MODIFIERS: {
+			Chicken.BaseStatsModifier.HP: _chicken_lord_stats.HP[level],
+			Chicken.BaseStatsModifier.AD: _chicken_lord_stats.AD[level],
+			Chicken.BaseStatsModifier.ARMOR: _chicken_lord_stats.ARMOR[level],
+			Chicken.BaseStatsModifier.CRIT_CHANCE: _chicken_lord_stats.CRIT_CHANCE[level],
+			Chicken.BaseStatsModifier.CRIT_MULTI: _chicken_lord_stats.CRIT_MULTI[level],
+		},
+		ChickenEgg.Modifier.HATCH_MODIFIERS: _chicken_lord_stats.hatch_modifiers.duplicate(),
+	})
 #endregion
 
 
@@ -251,7 +229,7 @@ func _on_owner_target_module_new_entity_detected(entity: Entity) -> void:
 	if not is_instance_valid(entity):
 		Verbose.error("_on_owner_target_module_new_entity_detected() -> Bad entity", Verbose.Category.FAMILY_MANAGER)
 		return
-	
+
 	if entity.team == _owner.team and entity is Chicken:
 		_on_chicken_spawned(entity)
 
@@ -260,7 +238,12 @@ func _on_chicken_spawned(chicken: Chicken) -> void:
 	_alive_chicken_count += 1
 	_alive_ally_chickens.append(chicken)
 	chicken.died.connect(_on_chicken_death.bind(chicken), CONNECT_ONE_SHOT)
-	
+
+	if chicken is ChickenGifted:
+		_owner.data_memory.increment_data(FAMILY_NAME, ANCESTRAL_GAUGE_NAME, ANCESTRAL_GAUCHE_FILL_GIFTED_CHICKEN_SPAWN)
+	else:
+		_owner.data_memory.increment_data(FAMILY_NAME, ANCESTRAL_GAUGE_NAME, ANCESTRAL_GAUCHE_FILL_CHICKEN_SPAWN)
+
 	for cb: Callable in _chicken_lord_stats.on_chicken_spawned_callbacks:
 		if cb.is_valid():
 			cb.call({
@@ -273,7 +256,7 @@ func _on_chicken_death(chicken: Chicken) -> void:
 	_dead_chicken_count -= 1
 	_alive_chicken_count += 1
 	_alive_ally_chickens.erase(chicken)
-	
+
 	for cb: Callable in _chicken_lord_stats.on_chicken_death_callbacks:
 		if cb.is_valid():
 			cb.call({

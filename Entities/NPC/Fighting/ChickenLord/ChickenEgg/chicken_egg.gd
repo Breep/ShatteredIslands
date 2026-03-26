@@ -59,7 +59,8 @@ func _hatch() -> void:
 	var count: int = vars[HatchModifier.VarType.SPAWN_COUNT]
 	var spawn_cfg: SpawnLocationConfig = vars[HatchModifier.VarType.SPAWN_CONFIG]
 	var chicken_mods: Dictionary = vars[HatchModifier.VarType.CHICKEN_MODIFIERS]
-
+	
+	chicken_mods["Type"] = _chicken_type
 	for i in count:
 		summoner.summon_entity(Entity.EntityType.CHICKEN, spawn_cfg, chicken_mods)
 
