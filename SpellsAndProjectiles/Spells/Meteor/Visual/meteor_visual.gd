@@ -10,8 +10,6 @@ const ARC_HEIGHT_BONUS: float = 3.0
 const LATERAL_OFFSET: float = 3.0
 
 @onready var _meteor_3d: Node3D = %VFX_FireBall
-@onready var _hit_dark: Node3D = %VFX_Hit_dark
-
 
 var _deploy_time: float = 1.0
 var _elapsed: float = 0.0
@@ -84,10 +82,3 @@ func _compute_trajectory() -> void:
 func _on_impact() -> void:
 	# Hide the fireball mesh
 	_meteor_3d.visible = false
-
-	# Random Y rotation so the hit marker looks different each time
-	_hit_dark.rotation.y = randf() * TAU
-
-	# Trigger hit VFX (one-shot particles already in the scene)
-	var torus: GPUParticles3D = _hit_dark.get_node("torus")
-	torus.emitting = true
