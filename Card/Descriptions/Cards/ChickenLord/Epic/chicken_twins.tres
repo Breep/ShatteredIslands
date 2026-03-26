@@ -20,5 +20,5 @@ player_upgrade = SubResource("Resource_ogolk")
 points = Dictionary[int, int]({
 8: 3
 })
-lvl = 3
+lvl = 2
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"
