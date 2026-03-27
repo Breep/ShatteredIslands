@@ -28,6 +28,15 @@ func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictiona
 		Verbose.debug("Spell cast blocked by SILENCE on " + _owner.entity_name, Verbose.Category.ENTITY_MODULE)
 		return
 
+	var modifiers_data: Dictionary = _consume_before_action_modifiers(Utils.ActionCategory.SPELL, {
+		ActionModifier.VarType.TARGET: target,
+		ActionModifier.VarType.SPELL_TYPE: spell_type,
+		ActionModifier.VarType.SPELL_MODIFIER: spell_modifier,
+	})
+	target = modifiers_data.get(ActionModifier.VarType.TARGET, target)
+	spell_type = modifiers_data.get(ActionModifier.VarType.SPELL_TYPE, spell_type)
+	spell_modifier = modifiers_data.get(ActionModifier.VarType.SPELL_MODIFIER, spell_modifier)
+
 	match spell_type:
 		Spell.Type.METEOR: _cast_meteor(target, spell_modifier)
 		Spell.Type.DARK_STORM: _cast_dark_storm(target, spell_modifier)
@@ -37,6 +46,12 @@ func cast_spell(target: Entity, spell_type: Spell.Type, spell_modifier: Dictiona
 		Spell.Type.LIGHTNING: _cast_lightning(target, spell_modifier)
 		Spell.Type.CHAIN_LIGHTNING: _cast_chain_lightning(target, spell_modifier)
 		_: Verbose.error("Unknown spell type [" + str(spell_type) + "]", Verbose.Category.ENTITY_MODULE)
+
+	_consume_after_action_modifiers(Utils.ActionCategory.SPELL, {
+		ActionModifier.VarType.TARGET: target,
+		ActionModifier.VarType.SPELL_TYPE: spell_type,
+		ActionModifier.VarType.SPELL_MODIFIER: spell_modifier,
+	})
 
 
 # ============================== Private functions ==============================
