@@ -1,8 +1,8 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://bl8ri2x0dgylc"]
 
-[ext_resource type="Shader" uid="uid://c1660p2rs4lfs" path="res://VFX/VFX_3D/Meteor/Shaders/s_ProjectileSoft_B_Disp.tres" id="1_j6gte"]
-[ext_resource type="Texture2D" uid="uid://8fk5k1sbqvwh" path="res://VFX/VFX_3D/Meteor/Textures/T_VFX_Noise_019.png" id="2_52ln0"]
-[ext_resource type="Gradient" uid="uid://bf1l1noj81h8o" path="res://VFX/VFX_3D/Meteor/Textures/gradients/g_fireTypeC.tres" id="3_10xc7"]
+[ext_resource type="Shader" uid="uid://c1660p2rs4lfs" path="res://VFX/Shaders/s_ProjectileSoft_B_Disp.tres" id="1_j6gte"]
+[ext_resource type="Texture2D" uid="uid://8fk5k1sbqvwh" path="res://VFX/Textures/T_VFX_Noise_019.png" id="2_52ln0"]
+[ext_resource type="Gradient" uid="uid://bf1l1noj81h8o" path="res://VFX/Textures/gradients/g_fireTypeC.tres" id="3_10xc7"]
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_oeum1"]
 gradient = ExtResource("3_10xc7")

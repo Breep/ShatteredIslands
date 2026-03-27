@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" format=3 uid="uid://bv6cnoo8t2iod"]
+[gd_resource type="VisualShader" format=3 uid="uid://bpf8re2if2yu3"]
 
 [sub_resource type="VisualShaderNodeFresnel" id="VisualShaderNodeFresnel_q55pl"]
 default_input_values = [2, true, 3, 8.0]

@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" format=3 uid="uid://c5rt3r7k2b0ry"]
+[gd_resource type="VisualShader" load_steps=7 format=3 uid="uid://c5rt3r7k2b0ry"]
 
 [sub_resource type="VisualShaderNodeFresnel" id="VisualShaderNodeFresnel_g6t8i"]
 

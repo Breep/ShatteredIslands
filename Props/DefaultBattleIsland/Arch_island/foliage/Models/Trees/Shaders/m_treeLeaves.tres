@@ -7,7 +7,7 @@
 render_priority = 0
 shader = ExtResource("1_nf6j8")
 shader_parameter/alphaTexture = ExtResource("2_imn86")
-shader_parameter/leavesColor = Color(0.61533326, 0.4406054, 0.405937, 1)
+shader_parameter/leavesColor = Color(0.9231805, 0.6245662, 0.63188726, 1)
 shader_parameter/alphaThreshold = 0.1
 shader_parameter/offsetScale = 0.11810000560247
 shader_parameter/fresnelStrength = 0.1260001009849998

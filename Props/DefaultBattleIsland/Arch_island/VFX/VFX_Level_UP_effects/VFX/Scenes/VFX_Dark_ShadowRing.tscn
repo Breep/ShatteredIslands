@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://pjhrq8ilhqlg"]
+[gd_scene load_steps=63 format=3 uid="uid://pjhrq8ilhqlg"]
 
 [ext_resource type="Texture2D" uid="uid://c1t3ptjn34muf" path="res://VFX/textures/T_VFX_Trail_211.png" id="1_0ry5j"]
 [ext_resource type="Shader" uid="uid://bhk5cs5wj4u1x" path="res://VFX/shaders/s_master_explosion_X2.tres" id="2_erdss"]

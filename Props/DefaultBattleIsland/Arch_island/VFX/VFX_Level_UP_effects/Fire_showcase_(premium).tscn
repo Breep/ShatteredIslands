@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://8x78qmf06lls"]
+[gd_scene load_steps=144 format=3 uid="uid://8x78qmf06lls"]
 
 [ext_resource type="PackedScene" uid="uid://baq26fbqb5eun" path="res://VFX/Scenes/VFX_FirExplosion.tscn" id="1_03yun"]
 [ext_resource type="PackedScene" uid="uid://cqatuyuofvjfu" path="res://VFX/Scenes/VFX_FireHit_Red.tscn" id="2_opiqw"]
