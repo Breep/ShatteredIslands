@@ -207,8 +207,6 @@ func _enrich_chicken_modifiers(chicken_modifiers: Dictionary, chicken_type: Chic
 			var crit_mult: float = _owner.stats.get_stat(EntityStats.StatType.CRIT_MULT, Utils.ActionType.DAMAGE_PHYSICAL)
 			chicken_modifiers["crit_chance"] = crit_chance * GIFTED_STORM_CALLER_CRIT_CHANCE_RATIO[_families_level[Family.Type.STORM_CALLER] - 1]
 			chicken_modifiers["crit_mult"] = crit_mult * GIFTED_STORM_CALLER_CRIT_MULT_RATIO[_families_level[Family.Type.STORM_CALLER] - 1]
-
-
 #endregion
 
 

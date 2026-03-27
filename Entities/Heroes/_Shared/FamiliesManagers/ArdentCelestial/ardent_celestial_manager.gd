@@ -36,7 +36,6 @@ func _add_stack_modifiers() -> void:
 	stack_modifier.after_action_logic_callback = _on_inflict_condition_ignite
 	stack_modifier.is_one_time_effect = false
 	_owner.action_modifiers_registry.register_modifier(stack_modifier)
-	
 
 
 func _on_inflict_condition_ignite(cb_vars: Dictionary) -> void:
