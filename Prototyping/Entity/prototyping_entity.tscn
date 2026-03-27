@@ -88,10 +88,7 @@ unique_name_in_owner = true
 transform = Transform3D(0.9946579, 0, 0.10322651, 0, 1, 0, -0.10322651, 0, 0.9946579, 0.07346773, -4.7683716e-07, 7.8182755)
 _custom_deck = SubResource("Resource_rw3ih")
 _override_family_levels = Dictionary[int, int]({
-2: 2,
-3: 2,
-6: 2,
-8: 1
+3: 2
 })
 _custom_data_memory = {
 &"ChickenLord": {
