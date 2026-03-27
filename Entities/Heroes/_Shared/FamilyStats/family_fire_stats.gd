@@ -12,3 +12,5 @@ var titans_protection_accumulated_hp: float = 0.0
 var meteor_damage_percent: Array[float] = [0, 0.5, 0.7, 0.9, 1.2]
 var meteor_radius: float = 3.0
 var meteor_chance: Array[float] = [0, 5, 10, 15, 20]
+
+var bonus_meteor_chance: float = 0

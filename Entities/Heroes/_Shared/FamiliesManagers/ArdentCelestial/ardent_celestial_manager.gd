@@ -46,8 +46,9 @@ func _on_inflict_condition_ignite(cb_vars: Dictionary) -> void:
 	if target == null: return
 	if stack_type != Stack.Type.IGNITE: return
 	var count: int = 0
+	var chance: float = _ardent_celestial_stats.meteor_chance[level] + _ardent_celestial_stats.bonus_meteor_chance
 	for i in stack_value:
-		if Utils.is_randomize_modifier_active(_ardent_celestial_stats.meteor_chance[level], _owner.battle_id):
+		if Utils.is_randomize_modifier_active(chance, _owner.battle_id):
 			for cb in _ardent_celestial_stats.meteor_on_cast_callbacks:
 				if cb.is_valid():
 					cb.call({})
