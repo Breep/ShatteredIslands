@@ -13,20 +13,18 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var proc_chance: float = _proc_chance[card_lvl - 1]
 
 	ctx.hero.families_stats.ardent_celestial.meteor_on_cast_callbacks.append(func(_cb_vars: Dictionary) -> void:
-		recast(ctx, _meteor_bonus[card_lvl - 1])
+		if Utils.is_randomize_modifier_active(proc_chance, ctx.hero.battle_id, "Apocalypse"):
+			recast(ctx, _meteor_bonus[card_lvl - 1])
 	)
 
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[Card.Rarity.LEGENDARY]:
 		return "ERROR"
-	return "toto"
-	#var ratio = str(_damage_ratio[cardlvl - 1])
-#
-	#return "Meteors deal bonus magic damage equal to +" + ratio + " * target's current Ignite stacks."
+
+	return "Each meteor has " + str(_proc_chance[cardlvl - 1]) + "% chance to cast " + str(_meteor_bonus[cardlvl - 1]) + "other meteors." 
 
 func recast(ctx: CardContext, remaining_meteor: int) -> void:
-	print("remaining meteor: ",str(remaining_meteor))
 	if remaining_meteor <= 0:
 		return
 	var target: Entity = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
