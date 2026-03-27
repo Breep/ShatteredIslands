@@ -7,7 +7,7 @@
 
 [sub_resource type="Resource" id="Resource_apocalypse"]
 script = ExtResource("2_sub_resource")
-_meteor_bonus = Array[int]([1, 2, 25])
+_meteor_bonus = Array[int]([1, 2, 5])
 _proc_chance = Array[float]([100.0, 100.0, 100.0])
 _rarity = 3
 
@@ -21,4 +21,4 @@ player_upgrade = SubResource("Resource_apocalypse")
 points = Dictionary[int, int]({
 3: 5
 })
-lvl = 1
+lvl = 3

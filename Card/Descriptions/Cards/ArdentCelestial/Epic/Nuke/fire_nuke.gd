@@ -9,8 +9,8 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		return
 
 	var stacks: int = _ignite_stacks[card_lvl - 1]
-
-	ctx.battle_callbacks.register_battle_start(&"Nuke", func() -> void:
+	
+	ctx.hero.periodic_timer_registry.register_oneshot(0.2, func() -> void:
 		var targets: Array[Entity] = ctx.hero.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ENEMIES)
 		for target: Entity in targets:
 			ctx.hero.inflict_condition_stacks(target, stacks, Stack.Type.IGNITE, &"Nuke")
