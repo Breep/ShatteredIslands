@@ -4,7 +4,7 @@ extends SimpleStack
 ## Ignite stack with decay logic
 ## Decays by a percentage each tick
 
-const IGNITE_DECAY_PERCENT: float = 20.0
+const IGNITE_DECAY_PERCENT: float = 15.0
 
 const IGNITE_DECAY_MIN: int = 5
 const IGNITE_DECAY_MAX: int = 10000
