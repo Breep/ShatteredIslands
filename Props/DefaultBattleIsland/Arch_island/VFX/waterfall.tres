@@ -11,7 +11,7 @@ default_input_values = [0, Vector3(1, 1, 1), 1, Vector3(1.25, 1.25, 1.25)]
 operator = 2
 
 [sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_vayp8"]
-constant = 0.3
+constant = 0.6
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_vayp8"]
 output_port_for_preview = 0

@@ -1,13 +1,9 @@
 [gd_scene format=4 uid="uid://b3oqyj5b00c"]
 
-[ext_resource type="Texture2D" uid="uid://opwnfxta0ova" path="res://Entities/NPC/Fighting/ChickenLord/Chicken/Data/chicken_diffuse.png" id="1_f5dgv"]
+[ext_resource type="Material" uid="uid://klaujfumuxbw" path="res://Entities/NPC/Fighting/ChickenLord/Chicken/Data/T_chicken_ardent/chicken_ardent.tres" id="1_hsi8h"]
 [ext_resource type="Shader" uid="uid://c2nyd5a7y0ble" path="res://Props/DefaultBattleIsland/Arch_island/VFX/shaders/s_Disolver_Firex_p.tres" id="2_hsi8h"]
 [ext_resource type="Texture2D" uid="uid://d146nw08uassy" path="res://Props/DefaultBattleIsland/Arch_island/VFX/textures/T_smoke_bb1fa_b.png" id="3_x7sjx"]
-[ext_resource type="Texture2D" uid="uid://nyyc5vq2e8a8" path="res://Props/DefaultBattleIsland/Arch_island/VFX/textures/T_VFX_Noise_44xainv.png" id="4_bo1fr"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ykqu3"]
-albedo_color = Color(0.88235295, 0, 0.14509805, 1)
-albedo_texture = ExtResource("1_f5dgv")
+[ext_resource type="Texture2D" uid="uid://nyyc5vq2e8a8" path="res://Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Textures/T_VFX_Noise_44xainv.png" id="4_bo1fr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_banjt"]
 resource_name = "Chicken"
@@ -91,8 +87,8 @@ shader = ExtResource("2_hsi8h")
 shader_parameter/Scale = Vector2(1, 1)
 shader_parameter/Texture = ExtResource("3_x7sjx")
 shader_parameter/Color_1D_Gradient = SubResource("GradientTexture1D_rkv65")
-shader_parameter/Erosion_Scale = Vector2(1, 1)
-shader_parameter/Erosion_Speed = Vector2(0.1, 1)
+shader_parameter/Erosion_Scale = Vector2(1, -0.01)
+shader_parameter/Erosion_Speed = Vector2(0.1, 0.74)
 shader_parameter/substract_mask = ExtResource("4_bo1fr")
 
 [sub_resource type="Curve" id="Curve_glm2i"]
@@ -958,7 +954,7 @@ bones/12/rotation = Quaternion(1.5295967e-07, -0.4917123, 1.5807893e-07, 0.87075
 bones/12/scale = Vector3(0.99999994, 1, 0.99999994)
 
 [node name="ChickenArdentCelestial" type="MeshInstance3D" parent="Skeleton3D" unique_id=1839562433]
-material_override = SubResource("StandardMaterial3D_ykqu3")
+material_override = ExtResource("1_hsi8h")
 mesh = SubResource("ArrayMesh_ln18q")
 skin = SubResource("Skin_utmen")
 
@@ -975,3 +971,5 @@ draw_pass_1 = SubResource("QuadMesh_0260b")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=777400876]
 libraries/ = SubResource("AnimationLibrary_vqhsl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=377388376]

@@ -33,13 +33,13 @@ shader_type spatial;
 [resource]
 render_priority = 0
 shader = SubResource("Shader_ssrio")
-shader_parameter/global_color = Color(1, 0.99215686, 0.25882354, 1)
-shader_parameter/global_alpha = 1.0
+shader_parameter/global_color = Color(0.94166833, 0.8956115, 0.94476354, 1)
+shader_parameter/global_alpha = 0.3350000159125
 shader_parameter/additive_config = true
 shader_parameter/premultiply_color = false
 shader_parameter/premultiply_alpha = false
 shader_parameter/shape1_main_texture = ExtResource("2_ssrio")
-shader_parameter/shape1_main_texture_scale = Vector2(1, 1)
+shader_parameter/shape1_main_texture_scale = Vector2(-1.01, 1)
 shader_parameter/shape1_main_texture_offset = Vector2(0, 0)
 shader_parameter/shape1_color = Color(1, 1, 1, 1)
 shader_parameter/shape1_red_as_alpha = false
