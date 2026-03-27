@@ -11,6 +11,13 @@ extends Control
 @onready var _shield_bar: ColorRect = %ShieldBar
 @onready var _grid_bar: ColorRect = %GridBar
 
+@onready var _debug_values: Control = %DebugValues
+@onready var _health_label: Label = %HealthLabel
+@onready var _shield_label: Label = %ShieldLabel
+
+static var _debug_values_visible: bool = false
+static var _instances: Array[SummonSimpleInfoPanel2D] = []
+
 #region ============================== Node base functions ==============================
 func _ready() -> void:
 	if _health_bar and _health_bar.material:
@@ -31,11 +38,28 @@ func _ready() -> void:
 	stats.health_max_changed.connect(_on_health_max_changed)
 	conditions.shield_stacks_changed.connect(_on_shield_changed)
 
+	if _debug_values != null:
+		_debug_values.visible = _debug_values_visible
+	_instances.append(self)
+
+
+func _exit_tree() -> void:
+	_instances.erase(self)
+
 
 func _process(_delta: float) -> void:
 	var camera = get_viewport().get_camera_3d()
 	if camera != null and _info_panel_spawn != null:
 		position = camera.unproject_position(_info_panel_spawn.global_position) + Vector2(-size.x / 2, 0)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("trigger_health_bar_value"):
+		_debug_values_visible = not _debug_values_visible
+		for panel: SummonSimpleInfoPanel2D in _instances:
+			if panel._debug_values != null:
+				panel._debug_values.visible = _debug_values_visible
+		get_viewport().set_input_as_handled()
 #endregion
 
 #region ============================== Public API ==============================
@@ -69,15 +93,23 @@ func _update_health_bar(health: float, health_max: float) -> void:
 	_health_bar.material.set_shader_parameter("HealthAmount", ratio)
 	_health_bar.material.set_shader_parameter("MaxHealth", float(health_max))
 	_grid_bar.material.set_shader_parameter("MaxHealth", float(health_max))
+	if _health_label != null:
+		_health_label.text = str(health).pad_decimals(0)
 
 
-func _update_shield_bar(armor_amount: float, max_health: float) -> void:
+func _update_shield_bar(shield: float, max_health: float) -> void:
 	if not _shield_bar or not _shield_bar.material:
 		return
 	var ratio = 0.0
 	if max_health > 0:
-		ratio = clamp(float(armor_amount) / float(max_health), 0.0, 1.0)
+		ratio = clamp(float(shield) / float(max_health), 0.0, 1.0)
 	_shield_bar.material.set_shader_parameter("fill_amount", ratio)
+	if _shield_label != null:
+		if shield >= 1:
+			_shield_label.text = str(shield).pad_decimals(0)
+			_shield_label.show()
+		else:
+			_shield_label.hide()
 
 
 func _set_health_bar_color_by_team() -> void:

@@ -4,7 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://c48aqh8mlb7lc" path="res://Entities/Heroes/DarkKnight/dark_knight.tscn" id="1_icvx6"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="2_083cp"]
 [ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://UI/Tool/Misc/hover_boost_button.gd" id="3_6kn6i"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="3_m26y3"]
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_egh8k"]
+[ext_resource type="Resource" uid="uid://que1ypgbtrlx" path="res://Card/Descriptions/Cards/ChickenLord/Epic/chicken_twins.tres" id="4_m26y3"]
+[ext_resource type="Script" uid="uid://nkraydv4mdse" path="res://Card/Templates/player_deck.gd" id="5_x0odd"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/Stats/EntityStats/entity_stats.gd" id="6_3bpsj"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
 [ext_resource type="PackedScene" uid="uid://dvuq5n41nak3u" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.tscn" id="8_fl2p6"]
@@ -14,6 +17,11 @@
 [ext_resource type="PackedScene" uid="uid://q7gxxkhg5u54" path="res://FloatingIsland/_Maps/arch_island.tscn" id="17_ko5bb"]
 [ext_resource type="PackedScene" uid="uid://c0l0roxttdtlp" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/FightingManager/fighting_manager.tscn" id="17_m26y3"]
 [ext_resource type="PackedScene" uid="uid://dp4x7wkxd6i2q" path="res://Prototyping/Entity/EntityController/entity_controller.tscn" id="19_x0odd"]
+
+[sub_resource type="Resource" id="Resource_rw3ih"]
+script = ExtResource("5_x0odd")
+_active_cards = Array[ExtResource("3_m26y3")]([ExtResource("4_m26y3")])
+metadata/_custom_type_script = "uid://nkraydv4mdse"
 
 [sub_resource type="Resource" id="Resource_ycdli"]
 script = ExtResource("6_3bpsj")
@@ -31,7 +39,6 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 [sub_resource type="Resource" id="Resource_ko5bb"]
 script = ExtResource("6_3bpsj")
 health_max = 1800.0
-attack_range = -1.0
 attack_damage = 10.0
 attack_speed = 1.45
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
@@ -39,7 +46,6 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 [sub_resource type="Resource" id="Resource_xwdjj"]
 script = ExtResource("6_3bpsj")
 health_max = 1742.0
-attack_range = -1.0
 attack_damage = 10.0
 attack_speed = 1.3
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
@@ -47,7 +53,6 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 [sub_resource type="Resource" id="Resource_ywmf2"]
 script = ExtResource("6_3bpsj")
 health_max = 3200.0
-attack_range = -1.0
 attack_damage = 10.0
 attack_speed = 0.8
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
@@ -81,6 +86,13 @@ unique_name_in_owner = true
 
 [node name="DarkKnight1" parent="Entities" unique_id=353718081 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("1_icvx6")]
 transform = Transform3D(0.9946579, 0, 0.10322651, 0, 1, 0, -0.10322651, 0, 0.9946579, 0.07346773, -4.7683716e-07, 7.8182755)
+_custom_deck = SubResource("Resource_rw3ih")
+_override_family_levels = Dictionary[int, int]({
+2: 2,
+3: 2,
+6: 2,
+8: 1
+})
 _custom_data_memory = {
 &"ChickenLord": {
 &"Ancestral Gauge": 200.0

@@ -37,6 +37,7 @@ func init(hatch_time: float, chicken_type: Chicken.Type, chicken_modifiers: Dict
 func _ready() -> void:
 	super._ready()
 	periodic_timer_registry.register_oneshot(_hatch_time, _hatch)
+	_visual_3d.set_visual(_chicken_type)
 
 # ============================== Hatch ==============================
 
@@ -59,7 +60,8 @@ func _hatch() -> void:
 	var count: int = vars[HatchModifier.VarType.SPAWN_COUNT]
 	var spawn_cfg: SpawnLocationConfig = vars[HatchModifier.VarType.SPAWN_CONFIG]
 	var chicken_mods: Dictionary = vars[HatchModifier.VarType.CHICKEN_MODIFIERS]
-
+	
+	chicken_mods["Type"] = _chicken_type
 	for i in count:
 		summoner.summon_entity(Entity.EntityType.CHICKEN, spawn_cfg, chicken_mods)
 
