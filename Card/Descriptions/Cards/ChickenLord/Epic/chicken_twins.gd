@@ -5,7 +5,15 @@ extends HeroUpgrade
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var chance: float = _chance[card_lvl - 1]
-	ctx.hero.families_stats.chicken_lord.twins_chance = chance
+
+	var mod := HatchModifier.new()
+	mod.id = &"Chicken Twins"
+	mod.is_one_time_effect = false
+	mod.before_hatch_callback = func(vars: Dictionary) -> void:
+		if not Utils.is_randomize_modifier_active(chance, ctx.hero.battle_id):
+			return
+		vars[HatchModifier.VarType.SPAWN_COUNT] += 1
+	ctx.hero.families_stats.chicken_lord.hatch_modifiers.append(mod)
 
 
 func get_description(cardlvl: int) -> String:

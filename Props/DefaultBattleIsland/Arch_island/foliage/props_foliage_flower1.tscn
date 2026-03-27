@@ -1,10 +1,6 @@
 [gd_scene format=4 uid="uid://ww1peqjoekke"]
 
-[ext_resource type="Texture2D" uid="uid://ck0q08a1qbj5" path="res://Props/DefaultBattleIsland/leafage4_file2-file2.png" id="1_i6th7"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vd8ww"]
-transparency = 1
-albedo_texture = ExtResource("1_i6th7")
+[ext_resource type="Material" uid="uid://b8113nhomexb6" path="res://Props/DefaultBattleIsland/Arch_island/foliage/m_foliage.tres" id="1_i6th7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wpsh4"]
 resource_name = "foliage.013"
@@ -51,6 +47,6 @@ shadow_mesh = SubResource("ArrayMesh_bs0q8")
 
 [node name="flower_1" type="MeshInstance3D" parent="." unique_id=1843650222]
 transform = Transform3D(0.207157, 0, 0, 0, 0, -0.207157, 0, 0.207157, 0, 0, 0, 0.08502477)
-material_override = SubResource("StandardMaterial3D_vd8ww")
+material_override = ExtResource("1_i6th7")
 mesh = SubResource("ArrayMesh_athqn")
 skeleton = NodePath("")

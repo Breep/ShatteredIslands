@@ -1,13 +1,6 @@
 [gd_scene format=4 uid="uid://dv8jq3f13an2a"]
 
-[ext_resource type="Texture2D" uid="uid://by7reyubn2ray" path="res://Props/DefaultBattleIsland/foliage/lotusleaf_file2-file2.png" id="1_ro2eu"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cism8"]
-resource_name = "foliage.014"
-transparency = 4
-cull_mode = 2
-albedo_texture = ExtResource("1_ro2eu")
-roughness = 0.5527864
+[ext_resource type="Material" uid="uid://b8113nhomexb6" path="res://Props/DefaultBattleIsland/Arch_island/foliage/m_foliage.tres" id="1_ro2eu"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_wdwwb"]
 _surfaces = [{
@@ -34,7 +27,7 @@ _surfaces = [{
 "index_count": 72,
 "index_data": PackedByteArray("DQACAAAACwANAAAAAgADAAQAAgABAAMADQABAAIAAwABAA4ADgABAA0AAwAOAAUADgAGAAUADgANAA8ADgAQAAYABgAQAAcABgAHAAgAEQAQAA4AEQAOAA8ABwAQABEADQARAA8ABwARAAoAEQAJAAoADQASABEAEQASAAkACwASAA0ACQASAAsACQALAAwA"),
 "lods": [0.00014741939, PackedByteArray("AAABAAIAAgADAAQAAgABAAMAAwABAAUAAQAGAAUAAQAHAAYAAAAHAAEABgAHAAgAAAAJAAcABwAJAAoACwAJAAAACQALAAwA")],
-"material": SubResource("StandardMaterial3D_cism8"),
+"material": ExtResource("1_ro2eu"),
 "name": "foliage.014",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),

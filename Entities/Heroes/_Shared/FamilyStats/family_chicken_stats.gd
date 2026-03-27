@@ -22,3 +22,6 @@ var spawn_number_increase: int
 
 var twins_chance: float
 var dodge_inherited: float
+
+## HatchModifiers registered by cards — copied into each egg at spawn time.
+var hatch_modifiers: Array[HatchModifier]

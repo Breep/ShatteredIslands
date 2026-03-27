@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://oimyi4iueoda"]
 
 [ext_resource type="Script" uid="uid://blljr68c4u466" path="res://Game/game.gd" id="1_7r6pw"]
-[ext_resource type="Material" uid="uid://2wlal7g5718r" path="res://VFX/Shaders/Sky/stylized_shader_night.tres" id="2_kul4i"]
 [ext_resource type="PackedScene" uid="uid://crhg471fgyaoj" path="res://Tool/SpawnPoint/spawn_point.tscn" id="3_i1e5p"]
 [ext_resource type="PackedScene" uid="uid://di34xfy5cli15" path="res://Tool/Cameras/FreeFly/free_fly_camera.tscn" id="3_t03ty"]
 [ext_resource type="PackedScene" uid="uid://bbn7yt4y0lu6q" path="res://Game/SceneSwitcher/scene_switcher.tscn" id="3_vifcx"]
@@ -9,24 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://7u3ksm0e4v61" path="res://FloatingIsland/BuyingIsland/buying_island.tscn" id="6_flgk0"]
 [ext_resource type="PackedScene" uid="uid://cbd5jq0bp7fef" path="res://Game/HeroSelector/HeroSelector.tscn" id="8_xfil1"]
 [ext_resource type="PackedScene" uid="uid://dv3kwc5eeyuk2" path="res://UI/InGame/Game/ui_game.tscn" id="9_kul4i"]
-
-[sub_resource type="Sky" id="Sky_7gi1t"]
-sky_material = ExtResource("2_kul4i")
-
-[sub_resource type="Environment" id="Environment_flgk0"]
-background_mode = 2
-sky = SubResource("Sky_7gi1t")
-ambient_light_source = 2
-ambient_light_color = Color(0.45098, 0.333333, 0.309804, 1)
-ambient_light_energy = 0.5
-tonemap_mode = 2
-sdfgi_enabled = true
-glow_enabled = true
-glow_bloom = 0.2
-fog_light_color = Color(0.175414, 0.565791, 0.908127, 1)
-fog_light_energy = 0.05
-volumetric_fog_enabled = true
-volumetric_fog_density = 0.0
 
 [node name="Game" type="Node3D" unique_id=802813438 node_paths=PackedStringArray("_buying_island", "_scene_switcher", "_hero_selector", "_node_fighting_islands", "_islands_spawn_points")]
 script = ExtResource("1_7r6pw")
@@ -38,9 +19,6 @@ _islands_spawn_points = [NodePath("IslandSpawns/CenterPoint1/SpawnPoint1"), Node
 
 [node name="Light" type="Node3D" parent="." unique_id=325090423]
 transform = Transform3D(0.471889, 0, 0.881658, -0.0862491, 0.995204, 0.0461631, -0.877429, -0.0978261, 0.469626, 0, 0, 0)
-
-[node name="WorldEnvironment2" type="WorldEnvironment" parent="Light" unique_id=511096095]
-environment = SubResource("Environment_flgk0")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Light" unique_id=1765917812]
 transform = Transform3D(0.56736183, -0.15311082, -0.8091092, 0.44820377, 0.88168746, 0.14744337, 0.6908067, -0.44629964, 0.56886053, -25.012697, 36.497246, 17.776993)

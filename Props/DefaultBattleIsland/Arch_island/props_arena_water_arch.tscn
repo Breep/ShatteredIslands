@@ -84,10 +84,10 @@ shader_parameter/size = 3.0
 shader_parameter/banding_bias = 0.6
 shader_parameter/wave_height = 0.5
 shader_parameter/texture_height = 0.5
-shader_parameter/color1 = Color(0.59, 0.761, 1, 1)
-shader_parameter/color2 = Color(0.274, 0.474, 0.98, 1)
-shader_parameter/color3 = Color(0.059, 0.389, 0.85, 1)
-shader_parameter/color4 = Color(0, 0.267, 1, 1)
+shader_parameter/color1 = Color(0.836615, 0.9048933, 0.9999996, 1)
+shader_parameter/color2 = Color(0.18582162, 0.74160683, 0.8454095, 1)
+shader_parameter/color3 = Color(0.105042584, 0.6386748, 0.7946259, 1)
+shader_parameter/color4 = Color(0.14181629, 0.50056356, 0.6170306, 1)
 
 [sub_resource type="Curve" id="Curve_472uk"]
 _data = [Vector2(0.0034722239, 0.85206264), 0.0, 0.0, 0, 0, Vector2(0.1423611, 0.91678524), 0.0, 0.0, 0, 0, Vector2(0.5347222, 0.676387), 0.0, 0.0, 0, 0, Vector2(1, 0.3527739), 0.0, 0.0, 0, 0]
@@ -448,17 +448,17 @@ shadow_mesh = SubResource("ArrayMesh_pwe8f")
 [node name="water_arch" type="Node3D" unique_id=1005878970]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1966472817]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.025035, 3.0210469, -0.49398696)
+transform = Transform3D(0.91321033, 0, 0, 0, 0.90787596, 0.09856277, 0, -0.09856277, 0.90787596, -2.000287, 2.1801553, -0.21125007)
 material_override = SubResource("ShaderMaterial_3lgt5")
+transparency = 0.57
 cast_shadow = 0
 amount = 2
-lifetime = 2.6999999999999997
-randomness = 0.6
+lifetime = 4.35
 process_material = SubResource("ParticleProcessMaterial_7l2a5")
 draw_pass_1 = SubResource("SphereMesh_c4g2e")
 
 [node name="drop_001" type="MeshInstance3D" parent="." unique_id=859447980]
-transform = Transform3D(0.45396549, 0, 0, 0, 0.45396549, 0, 0, 0, 0.45396549, -2.2828958, 2.733704, -0.80847)
+transform = Transform3D(0.41456598, 0, 0, 0, 0.4121443, 0.04474408, 0, -0.04474408, 0.4121443, -2.0133514, 2.7077413, -0.25490582)
 mesh = SubResource("ArrayMesh_pdym0")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_4xp2w")

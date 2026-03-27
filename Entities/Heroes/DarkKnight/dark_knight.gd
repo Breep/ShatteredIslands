@@ -56,11 +56,26 @@ var _corruption_charges: int = 0
 const SUPER_STRIKE_ON_ATTACK_SCENE: PackedScene = preload("res://Entities/Heroes/DarkKnight/VFX/super_strike.tscn")
 #endregion
 
+const ON_HIT_EFFECT_SCENE: PackedScene = preload("res://VFX/VFX_3D/VFX/Scenes/VFX_Hit_dark.tscn")
+
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
 	auto_attack_completed.connect(_on_auto_attack_completed)
-	
+
+	var mod:= AutoAttackModifier.new()
+	mod.is_one_time_effect = false
+	mod.additional_effect_callback = func(cb_vars: Dictionary) -> void:
+		var on_hit_vfx := ON_HIT_EFFECT_SCENE.instantiate() as Node3D
+		var target_position: Vector3 = cb_vars.get(AutoAttackModifier.VarType.POSITION, Vector3.ZERO)
+		get_tree().root.add_child(on_hit_vfx) 
+		on_hit_vfx.global_position = target_position
+
+		var tween := create_tween()
+		tween.tween_interval(1.5) 
+		tween.tween_callback(on_hit_vfx.queue_free)
+		
+	auto_attack_modifier_registry.register_modifier(mod)
 	if _cataclysm_activated:
 		_on_cataclysm_activation()
 	

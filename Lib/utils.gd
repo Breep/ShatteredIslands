@@ -29,6 +29,7 @@ enum ActionCategory {
 	STATUS,
 	UTILITY,
 	DODGE,
+	SUMMON,
 }
 
 enum PercentModifier {

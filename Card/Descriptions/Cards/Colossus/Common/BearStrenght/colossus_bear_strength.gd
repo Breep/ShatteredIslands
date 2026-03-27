@@ -9,10 +9,9 @@ var _hp_to_ad_percent: float
 var _scale_to_ad_percent: float 
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
-	
 	# Reduce attack speed
 	var as_mod := StatModifier.new()
-	as_mod.id = &"Bear Strength AS"
+	as_mod.id = &"Bear Strength"
 	as_mod.stat_type = EntityStats.StatType.AS
 	as_mod.calc_type = StatModifier.CalcType.MULT
 	as_mod.value = -(_as_reduction[card_lvl - 1] / 100.0)
@@ -25,15 +24,16 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	
 	_update_ad_modifier(ctx.hero.stats.scale, ctx.hero.stats.health_max, ctx.hero)
 	ctx.hero.stats.scale_changed.connect(func(scale: float) -> void:
+		if not is_instance_valid(ctx.hero): return
 		_update_ad_modifier(scale, ctx.hero.stats.health_max, ctx.hero)
 	)
 	
 	ctx.hero.stats.health_max_changed.connect(func(hp_max: float) -> void:
+		if not is_instance_valid(ctx.hero): return
 		_update_ad_modifier(ctx.hero.stats.scale, hp_max, ctx.hero)
 	)
 
 func _update_ad_modifier(scale: float, hp_max: float, hero: Hero) -> void:
-	
 	var ad_mod := StatModifier.new()
 	ad_mod.id = &"Bear Strength"
 	ad_mod.stat_type = EntityStats.StatType.AD

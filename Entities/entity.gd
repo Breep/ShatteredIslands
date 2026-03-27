@@ -52,7 +52,8 @@ enum EntityType {
 	FORTIFICATION_DRONE,
 	AEGIS_BLADE,
 	DEFLECTION_SHIELD,
-	TREX
+	TREX,
+	CHICKEN_EGG
 }
 
 enum SnakeBarrelModifier {
@@ -142,6 +143,7 @@ var _spawn_ticks_remaining: int = -1
 @export var entity_name: String = "<entity name>"
 
 @export_group("Optional configuration")
+@export var invisible: bool = false
 @export var custom_base_stats: EntityStats
 
 @export_subgroup("Modules")
@@ -379,6 +381,7 @@ func connect_to_fighting_area(fighting_area_ref: FightingArea) -> void:
 		Verbose.error("Trying to connect a null fighting area to an Entity", Verbose.Category.ENTITY)
 		return
 	
+	_spawn_manager = fighting_area_ref.spawn_manager
 	if _projectile_sender != null:
 		_projectile_sender.connect_to_spawn_manager(fighting_area_ref.spawn_manager)
 	if _spell_sender != null:

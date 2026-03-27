@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://xup3guwehhoc" path="res://Entities/NPC/Fighting/ChickenLord/Chicken/Basic/chicken_basic.tscn" id="2_cnl0v"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/Stats/EntityStats/entity_stats.gd" id="3_505v6"]
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="3_myg6t"]
-[ext_resource type="PackedScene" uid="uid://c1ncf16eblcti" path="res://Entities/Modules/PopupModule/label_popup_module.tscn" id="5_2cic7"]
+[ext_resource type="PackedScene" path="res://Entities/Modules/PopupModule/label_popup_module.tscn" id="5_2cic7"]
 [ext_resource type="PackedScene" uid="uid://cmushgkek5lf8" path="res://Props/DefaultBattleIsland/Arch_island/arena_02.tscn" id="6_2cic7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_505v6"]
@@ -20,9 +20,9 @@ script = ExtResource("3_505v6")
 health_max = 500.0
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 
-[node name="PrototypingDamagePopup" type="Node3D" unique_id=242809414 node_paths=PackedStringArray("_owner_entity", "_center_point_camera", "_center_point", "_damage_popup_spawn", "_crit_chance_spinbox", "_min_value_spinbox", "_max_value_spinbox", "_loop_count_spinbox", "_rot_toggle", "_rot_speed_spinbox", "_translate_toggle", "_speed_spinbox", "_amplitude_spinbox")]
+[node name="PrototypingDamagePopup" type="Node3D" unique_id=242809414 node_paths=PackedStringArray("_chicken", "_center_point_camera", "_center_point", "_damage_popup_spawn", "_crit_chance_spinbox", "_min_value_spinbox", "_max_value_spinbox", "_loop_count_spinbox", "_blocked_by_armor_toggle", "_rot_toggle", "_rot_speed_spinbox", "_translate_toggle", "_speed_spinbox", "_amplitude_spinbox")]
 script = ExtResource("1_myg6t")
-_owner_entity = NodePath("Chicken")
+_chicken = NodePath("Chicken")
 _center_point_camera = NodePath("CenterPointCamera")
 _center_point = NodePath("CenterPoint")
 _damage_popup_spawn = NodePath("CenterPoint/DamagePopupSpawn")
@@ -30,6 +30,7 @@ _crit_chance_spinbox = NodePath("PanelContainer/MarginContainer/VBoxContainer/Cr
 _min_value_spinbox = NodePath("PanelContainer/MarginContainer/VBoxContainer/MinHBox/MinValueSpinBox")
 _max_value_spinbox = NodePath("PanelContainer/MarginContainer/VBoxContainer/MaxHBox/MaxValueSpinBox")
 _loop_count_spinbox = NodePath("PanelContainer/MarginContainer/VBoxContainer/LoopHBox/LoopCountSpinBox")
+_blocked_by_armor_toggle = NodePath("PanelContainer/MarginContainer/VBoxContainer/BlockHBox/BlockedByArmorCheckButton")
 _rot_toggle = NodePath("PanelContainer/MarginContainer/VBoxContainer/RotHBox/RotToggle")
 _rot_speed_spinbox = NodePath("PanelContainer/MarginContainer/VBoxContainer/RotHBox/RotSpeedSpinBox")
 _translate_toggle = NodePath("PanelContainer/MarginContainer/VBoxContainer/TranslateHBox/TranslateToggle")
@@ -120,6 +121,17 @@ layout_mode = 2
 size_flags_horizontal = 3
 min_value = 1.0
 value = 1.0
+
+[node name="BlockHBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000047]
+layout_mode = 2
+
+[node name="LabelBlock" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/BlockHBox" unique_id=100000048]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Bloqué armure :"
+
+[node name="BlockedByArmorCheckButton" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer/BlockHBox" unique_id=100000049]
+layout_mode = 2
 
 [node name="SepDamage" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=100000013]
 layout_mode = 2
@@ -255,6 +267,7 @@ step = 0.1
 value = 5.0
 
 [node name="Chicken" parent="." unique_id=2109615854 instance=ExtResource("2_cnl0v")]
+visible = false
 custom_base_stats = SubResource("Resource_poir8")
 
 [node name="CenterPointCamera" parent="." unique_id=823970387 instance=ExtResource("3_myg6t")]

@@ -271,19 +271,21 @@ func _add_entity(entity: Entity) -> void:
 	if not is_instance_valid(entity):
 		Verbose.error("Invalid add entity", Verbose.Category.TARGET_MODULE)
 		return
-	
+
 	_entities.append(entity)
 	if entity.team == _owner.team: _allies.append(entity)
 	else: _enemies.append(entity)
-	
+
 	new_entity_detected.emit(entity)
-	
+
 	if entity is Hero:
 		if entity.team == _owner.team: _ally_heroes.append(entity)
 		else: _enemy_heroes.append(entity)
 		_heroes.append(entity)
-	
-	_sort_all_lists()
+
+	# Clean up all lists when the entity leaves the scene tree (queue_free, etc.)
+	if not entity.tree_exiting.is_connected(_remove_entity):
+		entity.tree_exiting.connect(_remove_entity.bind(entity), CONNECT_ONE_SHOT)
 
 
 func _clear() -> void:
@@ -295,14 +297,13 @@ func _clear() -> void:
 	_ally_heroes.clear()
 
 
-func _sort_all_lists() -> void:
-	var sort_by_uid := func(a: Entity, b: Entity) -> bool: return a.uid < b.uid
-	_entities.sort_custom(sort_by_uid)
-	_enemies.sort_custom(sort_by_uid)
-	_allies.sort_custom(sort_by_uid)
-	_heroes.sort_custom(sort_by_uid)
-	_enemy_heroes.sort_custom(sort_by_uid)
-	_ally_heroes.sort_custom(sort_by_uid)
+func _remove_entity(entity: Entity) -> void:
+	_entities.erase(entity)
+	_enemies.erase(entity)
+	_allies.erase(entity)
+	_heroes.erase(entity)
+	_enemy_heroes.erase(entity)
+	_ally_heroes.erase(entity)
 
 # ============================== Target strategy functions ==============================
 
@@ -492,4 +493,5 @@ func _on_scanning_area_body_exited(body: Node3D) -> void: # TODO à voir comment
 
 
 func _on_spawn_manager_entity_spawned(entity: Entity) -> void:
+	if entity.invisible: return
 	_add_entity(entity)

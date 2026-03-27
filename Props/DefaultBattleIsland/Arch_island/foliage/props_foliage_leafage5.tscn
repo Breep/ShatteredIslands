@@ -1,13 +1,6 @@
 [gd_scene format=4 uid="uid://bb8nvxm3jqqjs"]
 
-[ext_resource type="Texture2D" uid="uid://lewyp4dd3axw" path="res://Props/DefaultBattleIsland/foliage/textures/leafage6_file2-file2.png" id="1_quxax"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oo1xv"]
-resource_name = "foliage.005"
-transparency = 4
-cull_mode = 2
-albedo_texture = ExtResource("1_quxax")
-roughness = 0.5527864
+[ext_resource type="Material" uid="uid://b8113nhomexb6" path="res://Props/DefaultBattleIsland/Arch_island/foliage/m_foliage.tres" id="1_quxax"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_l4845"]
 _surfaces = [{
@@ -33,7 +26,7 @@ _surfaces = [{
 "format": 34359742519,
 "index_count": 72,
 "index_data": PackedByteArray("AAABAAIAAwAAAAIAAQAEAAUAAQAGAAQAAAAGAAEABAAGAAcABwAGAAAABAAHAAgABwAJAAgABwAAAAoABwALAAkACQALAAwACQAMAA0ADgALAAcADgAHAAoADAALAA4AAAAOAAoADAAOAA8ADgAQAA8AAAARAA4ADgARABAAAwARAAAAEAARAAMAEAADABIA"),
-"material": SubResource("StandardMaterial3D_oo1xv"),
+"material": ExtResource("1_quxax"),
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 19,

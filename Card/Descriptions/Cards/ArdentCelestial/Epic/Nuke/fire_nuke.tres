@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_c8dli"]
 script = ExtResource("2_7bypy")
-_ignite_stacks = Array[int]([120, 300])
+_ignite_stacks = Array[int]([20, 40, 80])
 metadata/_custom_type_script = "uid://e8w40nqo25qg"
 
 [resource]

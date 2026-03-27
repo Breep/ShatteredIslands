@@ -1,0 +1,131 @@
+[gd_scene format=3 uid="uid://cjlp8phux33fj"]
+
+[ext_resource type="PackedScene" uid="uid://crd40ycge6qp1" path="res://VFX/VFX_3D/Meteor/Scenes/VFX_meteor_Fire_ball.tscn" id="1_n51xl"]
+[ext_resource type="Shader" uid="uid://ce35481cnedm8" path="res://VFX/VFX_3D/Meteor/meteor_decal.gdshader" id="2_xunib"]
+
+[sub_resource type="Animation" id="Animation_ohe0j"]
+resource_name = "A_falling"
+length = 4.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.100000024, 0.26666686, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 21.364796, 0), Vector3(0, 13.1468315, 0), Vector3(0, 0.6886482, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../MeshInstance3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-0.06666669, 0.41333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -7.6838183, 0), Vector3(0, -3.0308838, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../MeshInstance3D:mesh:material:shader_parameter/Albedo_Mix")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.42, 1.2966666),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.10000002384186, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_xunib"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.73705125, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../MeshInstance3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -3.0308838, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../MeshInstance3D:mesh:material:shader_parameter/Albedo_Mix")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cuc0a"]
+_data = {
+&"A_falling": SubResource("Animation_ohe0j"),
+&"RESET": SubResource("Animation_xunib")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yfp5j"]
+albedo_color = Color(0.340339, 0.340339, 0.340339, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_yxpia"]
+size = Vector2(30, 30)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o8pv2"]
+render_priority = 0
+shader = ExtResource("2_xunib")
+shader_parameter/Scale = Vector2(1, 1)
+shader_parameter/Albedo_Mix = 0.0
+shader_parameter/Emission_Energy = 1.0
+shader_parameter/Modulate = Color(1, 1, 1, 1)
+shader_parameter/Modulate_Emission = Color(1, 1, 1, 1)
+shader_parameter/cube_half_size = 0.5
+shader_parameter/enable_y_fade = false
+shader_parameter/fade_start = 0.3
+shader_parameter/fade_end = 0.7
+shader_parameter/fade_power = 2.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_58b82"]
+material = SubResource("ShaderMaterial_o8pv2")
+
+[node name="Node3D" type="Node3D" unique_id=398661071]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1406020208]
+root_node = NodePath("../VFX_FireBall")
+libraries/ = SubResource("AnimationLibrary_cuc0a")
+autoplay = &"A_falling"
+
+[node name="floor" type="MeshInstance3D" parent="AnimationPlayer" unique_id=434287666]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00527167, 0)
+material_override = SubResource("StandardMaterial3D_yfp5j")
+mesh = SubResource("PlaneMesh_yxpia")
+
+[node name="VFX_FireBall" parent="." unique_id=1491287636 instance=ExtResource("1_n51xl")]
+transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, 0.99999994, 0, -0.99999994, -4.3711385e-08, 0, 0.73705125, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1735872939]
+transform = Transform3D(6.3826056, 0, 0, 0, 6.3826056, 0, 0, 0, 6.3826056, 0, -3.0308838, 0)
+mesh = SubResource("BoxMesh_58b82")

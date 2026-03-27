@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bbx7bhgb3ft71" path="res://Props/DefaultBattleIsland/Arch_island/textures/T_Island_rocks_BC.png" id="1_rgl0e"]
 [ext_resource type="Texture2D" uid="uid://ye05xe5y16p2" path="res://Props/DefaultBattleIsland/Arch_island/textures/T_Island_rocks_R.png" id="2_g4o2w"]
 [ext_resource type="Texture2D" uid="uid://bueftrhx184qk" path="res://Props/DefaultBattleIsland/Arch_island/textures/T_Island_rocks_N.png" id="3_cmdcp"]
-[ext_resource type="Texture2D" uid="uid://cygmc3ruppbx0" path="res://Props/DefaultBattleIsland/Arch_island/textures/T_Island_grass_BC.png" id="4_7vdga"]
+[ext_resource type="Texture2D" uid="uid://btkcp0nij2o4q" path="res://Props/DefaultBattleIsland/Arch_island/textures/grass_baseColor.png" id="4_g4o2w"]
 [ext_resource type="Texture2D" uid="uid://tpg2iusb62eg" path="res://Props/DefaultBattleIsland/Arch_island/textures/T_Island_grass_R.png" id="5_nupgl"]
 [ext_resource type="Texture2D" uid="uid://c05bgta6v7rqo" path="res://Props/DefaultBattleIsland/Arch_island/textures/grass_normal.png" id="6_r5klt"]
 [ext_resource type="Texture2D" uid="uid://dws7i8e7n0co" path="res://Props/DefaultBattleIsland/Arch_island/textures/T_Island_water_BC.png" id="6_vt5im"]
@@ -59,7 +59,7 @@ shadow_mesh = SubResource("ArrayMesh_ksbmi")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_te2o5"]
 resource_name = "grass"
 transparency = 4
-albedo_texture = ExtResource("4_7vdga")
+albedo_texture = ExtResource("4_g4o2w")
 metallic = 1.0
 metallic_texture = ExtResource("5_nupgl")
 metallic_texture_channel = 2
