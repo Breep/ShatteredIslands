@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://dkuhfdmtwdiup"]
+[gd_scene format=3 uid="uid://dkuhfdmtwdiup"]
 
 [ext_resource type="PackedScene" uid="uid://bw84oyjp44jwg" path="res://VFX/Scenes/VFX_MagicCircle_Pi1.tscn" id="3_wkl0x"]
 [ext_resource type="PackedScene" uid="uid://0syfi6mplmd0" path="res://VFX/Scenes/VFX_HitMagic_Pk1.tscn" id="8_2w5y2"]

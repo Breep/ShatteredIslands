@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=9 format=3 uid="uid://1q6lsrjyrqr1"]
+[gd_resource type="VisualShader" format=3 uid="uid://b7niw3rrqjubo"]
 
 [sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_xvv27"]
 parameter_name = "Alpha_Texture"

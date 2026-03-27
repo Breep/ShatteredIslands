@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://bw84oyjp44jwg"]
+[gd_scene format=3 uid="uid://bw84oyjp44jwg"]
 
 [ext_resource type="Shader" uid="uid://dwjgoyusrl4na" path="res://VFX/shaders/s_magic_circle_erosion_threshold.tres" id="1_eafbf"]
 [ext_resource type="Texture2D" uid="uid://bw1j5ak30ptvw" path="res://VFX/textures/T_VFX_CCircle_A3.png" id="2_fknpt"]

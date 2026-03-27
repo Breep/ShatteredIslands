@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://d4i83bqlqpy0a"]
+[gd_scene format=3 uid="uid://bvsiuy2flqurj"]
 
 [ext_resource type="Texture2D" uid="uid://sfqnk8pph4px" path="res://VFX/VFX_3D/Ultimate/Aeron/Textures/T_VFX_Noise_075.png" id="1_s0jui"]
 [ext_resource type="ArrayMesh" uid="uid://xv6ycjsmspbm" path="res://VFX/VFX_3D/Meteor/Objects/sm_fireb_blast4_HS.obj" id="2_oguec"]
