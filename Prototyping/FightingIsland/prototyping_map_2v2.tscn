@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="2_5t2nw"]
 [ext_resource type="PackedScene" uid="uid://drcuyohos0doa" path="res://FloatingIsland/FightingIsland/fighting_island.tscn" id="2_xvkv2"]
 [ext_resource type="Material" uid="uid://2wlal7g5718r" path="res://VFX/Shaders/Sky/stylized_shader_night.tres" id="4_3ldpt"]
-[ext_resource type="Resource" uid="uid://vefirtk44fxp" path="res://Card/Descriptions/Cards/ArdentCelestial/Rare/EndOfTheWorld/ardent_celestial_celestial_culling.tres" id="4_5t2nw"]
+[ext_resource type="Resource" uid="uid://vefirtk44fxp" path="res://Card/Descriptions/Cards/ArdentCelestial/Rare/CelestialCulling/ardent_celestial_celestial_culling.tres" id="4_5t2nw"]
 [ext_resource type="Resource" uid="uid://dc5r8wy0vfksm" path="res://Card/Descriptions/Cards/ArdentCelestial/Common/KuiperBelt/fire_kuiper_belt.tres" id="5_y3vk0"]
 [ext_resource type="Resource" uid="uid://bcxp6eg6bwam0" path="res://Card/Descriptions/Cards/ArdentCelestial/Common/Quasar/fire_titans_protection.tres" id="6_a1wsu"]
 [ext_resource type="Resource" uid="uid://du0o8udb4adn5" path="res://Card/Descriptions/Cards/Engineer/Rare/ShieldThrow/engineer_shield_throw.tres" id="7_4gryv"]
