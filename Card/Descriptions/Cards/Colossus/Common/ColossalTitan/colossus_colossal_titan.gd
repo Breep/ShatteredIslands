@@ -3,7 +3,6 @@ extends HeroUpgrade
 
 @export var _periods: Array[float]
 @export var _damage_factors: Array[float]
-@export var _rarity: Card.Rarity = Card.Rarity.COMMON
 
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
