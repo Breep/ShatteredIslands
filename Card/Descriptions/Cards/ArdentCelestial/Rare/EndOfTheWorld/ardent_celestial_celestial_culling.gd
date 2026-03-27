@@ -1,4 +1,4 @@
-class_name FireEndOfTheWorld
+class_name ArdentCelestialCelestialCulling
 extends HeroUpgrade
 
 @export var _thresholds: Array[float]
@@ -23,7 +23,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("End Of The World: Wrong cardlvl: ", cardlvl)
+		printerr("Celestial Culling: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
 	return "Meteor execute enemies below " + str(_thresholds[cardlvl - 1]) + "% of their max health."
