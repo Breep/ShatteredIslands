@@ -8,14 +8,9 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fcxqv"]
 resource_name = "Material.001"
 albedo_texture = ExtResource("1_y0023")
-metallic = 1.0
-metallic_texture = ExtResource("2_o5aec")
 metallic_texture_channel = 2
-roughness_texture = ExtResource("2_o5aec")
 roughness_texture_channel = 1
-normal_enabled = true
 normal_texture = ExtResource("3_wqhrg")
-ao_enabled = true
 ao_texture = ExtResource("2_o5aec")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_m00h3"]

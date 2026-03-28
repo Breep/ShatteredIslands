@@ -16,6 +16,7 @@ class ActionModifiersDictionary extends Resource:
 		if not _modifiers.has(action_modifier.id):
 			Verbose.error("unregister_modifier() - unknown action modifier | " + str(action_modifier.id), Verbose.Category.ACTION_MODIFIER)
 			return
+		_modifiers.erase(action_modifier.id)
 
 
 	func get_all_modifiers() -> Array[ActionModifier]:

@@ -5,31 +5,11 @@
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xcqcf"]
 load_path = "res://.godot/imported/eggfull_0.png-e9b4a9851da09776d885a32a57c65a11.s3tc.ctex"
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_a6g05"]
-load_path = "res://.godot/imported/eggfull_1.png-d0980e4499cdd47dd718bde5bbe97772.s3tc.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_c1mm7"]
-load_path = "res://.godot/imported/eggfull_1.png-d0980e4499cdd47dd718bde5bbe97772.s3tc.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_n5lmq"]
-load_path = "res://.godot/imported/eggfull_2.png-bfb669426e5a88c5a1ce9442383e6324.s3tc.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_grjvi"]
-load_path = "res://.godot/imported/eggfull_1.png-d0980e4499cdd47dd718bde5bbe97772.s3tc.ctex"
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tpx2r"]
 resource_name = "Material.001"
 next_pass = ExtResource("1_u7mtc")
 albedo_texture = SubResource("CompressedTexture2D_xcqcf")
-metallic = 1.0
-metallic_texture = SubResource("CompressedTexture2D_c1mm7")
-metallic_texture_channel = 2
-roughness_texture = SubResource("CompressedTexture2D_grjvi")
-roughness_texture_channel = 1
-normal_enabled = true
-normal_texture = SubResource("CompressedTexture2D_n5lmq")
 ao_enabled = true
-ao_texture = SubResource("CompressedTexture2D_a6g05")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_a6g05"]
 _surfaces = [{

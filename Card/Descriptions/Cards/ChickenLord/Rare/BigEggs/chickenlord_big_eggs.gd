@@ -15,6 +15,9 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	big_egg_mod.is_one_time_effect = false
 	big_egg_mod.id = &"Big Egg"
 	big_egg_mod.before_action_logic_callback = func(cb_vars: Dictionary) -> void:
+		if cb_vars.get(ActionModifier.VarType.ENTITY_TYPE) != Entity.EntityType.CHICKEN_EGG:
+			return
+		Verbose.warn("WADALUP")
 		var em: Dictionary = cb_vars.get(ActionModifier.VarType.ENTITY_MODIFIER, {})
 		var chicken_type = Utils.pick_random(ctx.hero.families_stats.chicken_lord.gifted_types, ctx.hero.battle_id)
 		em[ChickenEgg.Modifier.CHICKEN_TYPE] = chicken_type
