@@ -4,6 +4,7 @@ extends FamilyStats
 enum CbVars {
 	SELF_CHICKEN,
 	ALIVE_CHICKENS,
+	DEATH_COUNT,
 }
 
 const HP: Array[float] = [30, 70, 110, 140, 200]
