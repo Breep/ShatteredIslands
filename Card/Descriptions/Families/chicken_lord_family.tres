@@ -8,10 +8,20 @@
 [ext_resource type="Resource" uid="uid://qcfmiuxm33bh" path="res://Card/Descriptions/Cards/ChickenLord/Epic/BloodFrenzy/chickenlord_blood_frenzy.tres" id="4_7vmja"]
 [ext_resource type="Resource" uid="uid://dbf44utsd7lc7" path="res://Card/Descriptions/Cards/ChickenLord/Rare/DeathBlock/chicken_death_block.tres" id="5_m5pce"]
 [ext_resource type="Resource" uid="uid://c2l8gq4i7egtd" path="res://Card/Descriptions/Cards/ChickenLord/Rare/ChickenSwarm/chicken_chicken_swarm.tres" id="6_y5x2p"]
+[ext_resource type="Resource" uid="uid://dgo38yq5dde1l" path="res://Card/Descriptions/Cards/ChickenLord/Rare/BigEggs/chickenlord_big_eggs.tres" id="7_3mro7"]
+[ext_resource type="Resource" uid="uid://cpe1ja4a2fgwu" path="res://Card/Descriptions/Cards/ChickenLord/Common/RapidIncubation/chicken_rapid_incubation.tres" id="8_ncmkq"]
+[ext_resource type="Resource" uid="uid://b8kmfncays4gg" path="res://Card/Descriptions/Cards/ChickenLord/Common/GiftedOdds/chicken_gifted_odds.tres" id="9_fns7q"]
+[ext_resource type="Resource" uid="uid://q14ox7lgwfyb" path="res://Card/Descriptions/Cards/ChickenLord/Common/YangChicken/chicken_yang_chicken.tres" id="10_dnk2i"]
+[ext_resource type="Resource" uid="uid://dp1t82hxqyyls" path="res://Card/Descriptions/Cards/ChickenLord/Common/YinChicken/chicken_yin_chicken.tres" id="11_1q3tx"]
+[ext_resource type="Resource" uid="uid://dpww5lvgbuppf" path="res://Card/Descriptions/Cards/ChickenLord/Common/FeatheredDodge/chicken_feathered_dodge.tres" id="12_knas8"]
+[ext_resource type="Resource" uid="uid://b3y0tqtl0w2xd" path="res://Card/Descriptions/Cards/ChickenLord/Common/Shell armor/chicken_shell_armor.tres" id="13_f3sdy"]
+[ext_resource type="Resource" uid="uid://b5ewgep73ryko" path="res://Card/Descriptions/Cards/ChickenLord/Common/IntimidatingCluck/chicken_intimidating_cluck.tres" id="14_splhm"]
+[ext_resource type="Resource" uid="uid://vx4tn6nq5iue" path="res://Card/Descriptions/Cards/ChickenLord/Common/DoctorChicken/chicken_doctor_chicken.tres" id="15_4lg14"]
+[ext_resource type="Resource" uid="uid://c33mqyw8oxsv8" path="res://Card/Descriptions/Cards/ChickenLord/Common/AssistantChicken/chicken_assistant_chicken.tres" id="16_01arj"]
 
 [resource]
 script = ExtResource("2_o6xr1")
-cards = Array[ExtResource("1_t3wnt")]([ExtResource("2_jc7kv"), ExtResource("3_t6q6m"), ExtResource("4_7vmja"), ExtResource("5_m5pce"), ExtResource("6_y5x2p")])
+cards = Array[ExtResource("1_t3wnt")]([ExtResource("2_jc7kv"), ExtResource("3_t6q6m"), ExtResource("4_7vmja"), ExtResource("5_m5pce"), ExtResource("6_y5x2p"), ExtResource("7_3mro7"), ExtResource("8_ncmkq"), ExtResource("9_fns7q"), ExtResource("10_dnk2i"), ExtResource("11_1q3tx"), ExtResource("12_knas8"), ExtResource("13_f3sdy"), ExtResource("14_splhm"), ExtResource("15_4lg14"), ExtResource("16_01arj")])
 icon = ExtResource("2_t8wja")
 family_name = "Chicken Lord"
 family_type = 8
