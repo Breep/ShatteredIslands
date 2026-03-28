@@ -21,16 +21,10 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if cb_vars.get(ActionModifier.VarType.SPELL_TYPE) != Spell.Type.METEOR: return
 		if _is_recasting: return
 		_is_recasting = true
-		var ardent_stats: FamilyArdentCelestialStats = ctx.hero.families_stats.ardent_celestial
-		var ardent_level: int = ctx.hero.get_families_level()[Family.Type.ARDENT_CELESTIAL]
 		for i in meteor_bonus:
 			var target: Entity = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
 			if not is_instance_valid(target): break
-			ctx.hero.cast_spell(target, Spell.Type.METEOR, {
-				Spell.MeteorModifier.DAMAGE_PERCENT: ardent_stats.meteor_damage_percent[ardent_level],
-				Spell.MeteorModifier.RADIUS: ardent_stats.meteor_radius,
-				Spell.MeteorModifier.ON_HIT_CALLBACKS: ardent_stats.meteor_on_hit_callbacks
-			})
+			ctx.hero.cast_spell(target, Spell.Type.METEOR)
 		_is_recasting = false
 	ctx.action_modifiers.register_modifier(spell_modifier)
 

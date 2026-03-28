@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://lr2o8h1yp76s" path="res://Props/DefaultBattleIsland/Arch_island/VFX/shaders/ss_fireTorch_T1.gdshader" id="1_kge2c"]
 [ext_resource type="Texture2D" uid="uid://bw86kohsh5kmy" path="res://Props/DefaultBattleIsland/Arch_island/VFX/textures/T_VFX_Noise_4.PNG" id="2_hocft"]
-[ext_resource type="Texture2D" uid="uid://dkujiwg37cnsk" path="res://Props/DefaultBattleIsland/Arch_island/VFX/textures/T_NHU85.png" id="3_k0wos"]
+[ext_resource type="Texture2D" uid="uid://dkujiwg37cnsk" path="res://Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Textures/T_NHU85.png" id="3_k0wos"]
 
 [sub_resource type="Gradient" id="Gradient_baq7u"]
 interpolation_color_space = 1
