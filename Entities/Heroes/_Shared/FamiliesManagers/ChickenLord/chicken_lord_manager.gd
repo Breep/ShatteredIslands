@@ -149,7 +149,7 @@ func _register_egg_summon_modifier() -> void:
 		if cb_vars.get(ActionModifier.VarType.ENTITY_TYPE) != Entity.EntityType.CHICKEN_EGG:
 			return
 		var em: Dictionary = cb_vars[ActionModifier.VarType.ENTITY_MODIFIER]
-
+		
 		# 1. Inject base chicken stats into CHICKEN_MODIFIERS
 		if not em.has(ChickenEgg.Modifier.CHICKEN_MODIFIERS):
 			em[ChickenEgg.Modifier.CHICKEN_MODIFIERS] = {}
@@ -159,14 +159,14 @@ func _register_egg_summon_modifier() -> void:
 		cm[Chicken.BaseStatsModifier.ARMOR] = _chicken_lord_stats.ARMOR[level]
 		cm[Chicken.BaseStatsModifier.CRIT_CHANCE] = _chicken_lord_stats.CRIT_CHANCE[level]
 		cm[Chicken.BaseStatsModifier.CRIT_MULTI] = _chicken_lord_stats.CRIT_MULTI[level]
-
+		
 		# 2. Inject hatch_modifiers from family stats (twins, etc.)
 		if not em.has(ChickenEgg.Modifier.HATCH_MODIFIERS):
 			em[ChickenEgg.Modifier.HATCH_MODIFIERS] = [] as Array[HatchModifier]
 		var hm: Array = em[ChickenEgg.Modifier.HATCH_MODIFIERS]
 		for hatch_mod in _chicken_lord_stats.hatch_modifiers:
 			hm.append(hatch_mod)
-
+		
 		# 3. Roll gifted (only if type is still BASIC — allows forced gifted from other callers)
 		if em.get(ChickenEgg.Modifier.CHICKEN_TYPE, Chicken.Type.BASIC) != Chicken.Type.BASIC:
 			return
@@ -230,7 +230,7 @@ func _on_owner_target_module_new_entity_detected(entity: Entity) -> void:
 	if not is_instance_valid(entity):
 		Verbose.error("_on_owner_target_module_new_entity_detected() -> Bad entity", Verbose.Category.FAMILY_MANAGER)
 		return
-
+	
 	if entity.team == _owner.team and entity is Chicken:
 		_on_chicken_spawned(entity)
 
@@ -239,12 +239,12 @@ func _on_chicken_spawned(chicken: Chicken) -> void:
 	_alive_chicken_count += 1
 	_alive_ally_chickens.append(chicken)
 	chicken.died.connect(_on_chicken_death.bind(chicken), CONNECT_ONE_SHOT)
-
+	
 	if chicken is ChickenGifted:
 		_owner.data_memory.increment_data(FAMILY_NAME, ANCESTRAL_GAUGE_NAME, ANCESTRAL_GAUCHE_FILL_GIFTED_CHICKEN_SPAWN)
 	else:
 		_owner.data_memory.increment_data(FAMILY_NAME, ANCESTRAL_GAUGE_NAME, ANCESTRAL_GAUCHE_FILL_CHICKEN_SPAWN)
-
+	
 	for cb: Callable in _chicken_lord_stats.on_chicken_spawned_callbacks:
 		if cb.is_valid():
 			cb.call({
@@ -257,7 +257,7 @@ func _on_chicken_death(chicken: Chicken) -> void:
 	_dead_chicken_count -= 1
 	_alive_chicken_count += 1
 	_alive_ally_chickens.erase(chicken)
-
+	
 	for cb: Callable in _chicken_lord_stats.on_chicken_death_callbacks:
 		if cb.is_valid():
 			cb.call({
