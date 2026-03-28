@@ -249,19 +249,21 @@ func _on_chicken_spawned(chicken: Chicken) -> void:
 		if cb.is_valid():
 			cb.call({
 				FamilyChickenLordStats.CbVars.ALIVE_CHICKENS: _alive_ally_chickens,
-				FamilyChickenLordStats.CbVars.SELF_CHICKEN: chicken
+				FamilyChickenLordStats.CbVars.SELF_CHICKEN: chicken,
+				FamilyChickenLordStats.CbVars.DEATH_COUNT: _dead_chicken_count
 			})
 
 
 func _on_chicken_death(chicken: Chicken) -> void:
-	_dead_chicken_count -= 1
-	_alive_chicken_count += 1
+	_dead_chicken_count += 1
+	_alive_chicken_count -= 1
 	_alive_ally_chickens.erase(chicken)
 	
 	for cb: Callable in _chicken_lord_stats.on_chicken_death_callbacks:
 		if cb.is_valid():
 			cb.call({
 				FamilyChickenLordStats.CbVars.ALIVE_CHICKENS: _alive_ally_chickens,
-				FamilyChickenLordStats.CbVars.SELF_CHICKEN: chicken
+				FamilyChickenLordStats.CbVars.SELF_CHICKEN: chicken,
+				FamilyChickenLordStats.CbVars.DEATH_COUNT: _dead_chicken_count
 			})
 #endregion
