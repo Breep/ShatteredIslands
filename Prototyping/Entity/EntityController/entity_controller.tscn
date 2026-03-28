@@ -4,7 +4,6 @@
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_n8l2h"]
 [ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://UI/Tool/Misc/hover_boost_button.gd" id="2_ta2cq"]
 [ext_resource type="Script" uid="uid://bfrk08fr5vuck" path="res://Prototyping/Entity/EntityController/entity_controller_ui.gd" id="2_x177y"]
-[ext_resource type="Texture2D" uid="uid://ck0ou2taonm18" path="res://Prototyping/Entity/AllActionPrototyping/target_icon.png" id="4_j3d5q"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_hsjxk"]
 font_size = 14
@@ -157,16 +156,11 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TextureRect" type="TextureRect" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/TargetModuleFoldableContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect2/MarginContainer/VBoxContainer/HBoxContainer" unique_id=800024469]
-layout_mode = 2
-texture = ExtResource("4_j3d5q")
-expand_mode = 3
-stretch_mode = 5
-
 [node name="TargetLabel" type="RichTextLabel" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/TargetModuleFoldableContainer/TargetModuleControl/MarginContainer/VBoxContainer/HBoxContainer/ColorRect2/MarginContainer/VBoxContainer/HBoxContainer" unique_id=2030781461]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 11
 bbcode_enabled = true
 text = "[color=red]<undefined>[/color]"
 horizontal_alignment = 1
@@ -1131,6 +1125,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+theme_override_font_sizes/font_size = 12
 expand_icon = true
 
 [node name="ProjectileParamControl" type="Control" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/CastSpellFoldableContainer/CastSpellControl/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1925523294]
@@ -1331,9 +1326,11 @@ script = ExtResource("2_ta2cq")
 
 [node name="SummonEntityFoldableContainer" type="FoldableContainer" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer" unique_id=2063361332]
 layout_mode = 2
+folded = true
 title = "SUMMON ENTITY"
 
 [node name="SummonEntityControl" type="Control" parent="EntityControllerUI/MarginContainer/ScrollContainer/VBoxContainer/SummonEntityFoldableContainer" unique_id=193134845]
+visible = false
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 

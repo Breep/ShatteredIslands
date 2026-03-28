@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
 [ext_resource type="PackedScene" uid="uid://dvuq5n41nak3u" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.tscn" id="8_fl2p6"]
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://Modules/PickableClickable/PickableModule/pickable_module.tscn" id="9_614kc"]
+[ext_resource type="PackedScene" uid="uid://cs66hky7o30da" path="res://GlobalManagers/ActionMeter/Viewer/ui_entity_bds_registry.tscn" id="9_ko5bb"]
 [ext_resource type="PackedScene" uid="uid://bg5efhnq0erdv" path="res://Modules/PickableClickable/ClickableModule/clickable_module.tscn" id="10_m73qc"]
 [ext_resource type="PackedScene" uid="uid://blncvfes4f2y7" path="res://Prototyping/Entity/AllActionPrototyping/testing_floorffa5.tscn" id="11_5hdqt"]
 [ext_resource type="PackedScene" uid="uid://q7gxxkhg5u54" path="res://FloatingIsland/_Maps/arch_island.tscn" id="17_ko5bb"]
@@ -219,6 +220,24 @@ text = "Auto Attacks"
 unique_name_in_owner = true
 layout_mode = 2
 text = "Family Managers"
+
+[node name="DPSMeter" parent="Control" unique_id=553646110 node_paths=PackedStringArray("_ui_battle_data_stats_panels") instance=ExtResource("9_ko5bb")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 544.0
+offset_top = 222.0
+offset_right = 944.0
+offset_bottom = 522.0
+_ui_battle_data_stats_panels = {
+0: NodePath("TabContainer/Damage Done"),
+1: NodePath("TabContainer/Damage Taken"),
+2: NodePath("TabContainer/Heal Done"),
+3: NodePath("TabContainer/Heal Received"),
+4: NodePath("TabContainer/Stack Inflicted"),
+5: NodePath("TabContainer/Stack Taken"),
+6: NodePath("TabContainer/Misc Done"),
+7: NodePath("TabContainer/Misc Taken")
+}
 
 [node name="CenterPointCamera" parent="." unique_id=842815466 instance=ExtResource("4_egh8k")]
 unique_name_in_owner = true
