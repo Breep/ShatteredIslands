@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_egh8k"]
 [ext_resource type="Script" uid="uid://nkraydv4mdse" path="res://Card/Templates/player_deck.gd" id="5_x0odd"]
 [ext_resource type="Resource" uid="uid://cqpsc1s0ykjx2" path="res://Card/Descriptions/Cards/ArdentCelestial/Legendary/Apocalypse/fire_apocalypse.tres" id="5_xwdjj"]
+[ext_resource type="Resource" uid="uid://bu2qwhn65ehi" path="res://Card/Descriptions/Cards/ArdentCelestial/Epic/Nuke/fire_nuke.tres" id="5_ywmf2"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/Stats/EntityStats/entity_stats.gd" id="6_3bpsj"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
 [ext_resource type="PackedScene" uid="uid://dvuq5n41nak3u" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.tscn" id="8_fl2p6"]
@@ -21,7 +22,7 @@
 
 [sub_resource type="Resource" id="Resource_rw3ih"]
 script = ExtResource("5_x0odd")
-_active_cards = Array[ExtResource("3_m26y3")]([ExtResource("5_xwdjj")])
+_active_cards = Array[ExtResource("3_m26y3")]([ExtResource("5_xwdjj"), ExtResource("5_ywmf2")])
 metadata/_custom_type_script = "uid://nkraydv4mdse"
 
 [sub_resource type="Resource" id="Resource_ycdli"]
@@ -89,7 +90,7 @@ unique_name_in_owner = true
 transform = Transform3D(0.9946579, 0, 0.10322651, 0, 1, 0, -0.10322651, 0, 0.9946579, 0.07346773, -4.7683716e-07, 7.8182755)
 _custom_deck = SubResource("Resource_rw3ih")
 _override_family_levels = Dictionary[int, int]({
-3: 2
+3: 4
 })
 _custom_data_memory = {
 &"ChickenLord": {
@@ -224,10 +225,17 @@ text = "Family Managers"
 [node name="DPSMeter" parent="Control" unique_id=553646110 node_paths=PackedStringArray("_ui_battle_data_stats_panels") instance=ExtResource("9_ko5bb")]
 unique_name_in_owner = true
 layout_mode = 1
-offset_left = 544.0
-offset_top = 222.0
-offset_right = 944.0
-offset_bottom = 522.0
+anchors_preset = 2
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = -319.0
+offset_right = 417.0
+offset_bottom = -19.0
+grow_horizontal = 1
+grow_vertical = 0
 _ui_battle_data_stats_panels = {
 0: NodePath("TabContainer/Damage Done"),
 1: NodePath("TabContainer/Damage Taken"),

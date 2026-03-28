@@ -72,7 +72,7 @@ func _on_add_damage_done_button_pressed() -> void:
 
 
 func _on_add_damage_received_button_pressed() -> void:
-	_entity_bds_registry.register_interaction("TEST" + str(_bds_number), Utils.ActionType.DAMAGE_PHYSICAL, 10, false)
+	_entity_bds_registry.register_action_received("TEST" + str(_bds_number), Utils.ActionType.DAMAGE_PHYSICAL, 10, false)
 	_bds_number += 1
 
 
@@ -82,7 +82,7 @@ func _on_add_stack_inflicted_button_pressed() -> void:
 
 
 func _on_add_stack_received_button_pressed() -> void:
-	_entity_bds_registry.register_interaction("TEST" + str(_bds_number), Utils.ActionType.STACK_SHIELD, 10, false)
+	_entity_bds_registry.register_action_received("TEST" + str(_bds_number), Utils.ActionType.STACK_SHIELD, 10, false)
 	_bds_number += 1
 
 
@@ -92,7 +92,7 @@ func _on_add_heal_done_pressed() -> void:
 
 
 func _on_add_heal_received_pressed() -> void:
-	_entity_bds_registry.register_interaction("TEST" + str(_bds_number), Utils.ActionType.UTILITY_HEAL, 10, false)
+	_entity_bds_registry.register_action_received("TEST" + str(_bds_number), Utils.ActionType.UTILITY_HEAL, 10, false)
 	_bds_number += 1
 
 
@@ -102,5 +102,5 @@ func _on_add_misc_done_pressed() -> void:
 
 
 func _on_add_misc_received_pressed() -> void:
-	_entity_bds_registry.register_interaction("TEST" + str(_bds_number), Utils.ActionType.STATUS_STUN, 10, false)
+	_entity_bds_registry.register_action_received("TEST" + str(_bds_number), Utils.ActionType.STATUS_STUN, 10, false)
 	_bds_number += 1

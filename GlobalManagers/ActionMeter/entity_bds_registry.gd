@@ -3,7 +3,7 @@ extends Resource
 
 signal new_bds_added(bds: BattleDataStat)
 
-var entity_name: String
+var _entity_owner: Entity
 var data_stat_dictionaries: Dictionary[BattleDataStat.Type, BattleDataStatDictionary]
 
 class BattleDataStatDictionary extends Resource:
@@ -25,10 +25,12 @@ class BattleDataStatDictionary extends Resource:
 
 
 #region ============================== Node base functions ==============================
-func _init(ename: String) -> void:
-	entity_name = ename
+func _init(entity: Entity) -> void:
+	_entity_owner = entity
 	for bds_type: BattleDataStat.Type in BattleDataStat.Type.values():
 		data_stat_dictionaries[bds_type] = BattleDataStatDictionary.new(bds_type, new_bds_added)
+	_entity_owner.action_done.connect(_on_entity_owner_action_done)
+	_entity_owner.action_received.connect(_on_entity_owner_action_received)
 #endregion
 
 
@@ -42,7 +44,17 @@ func register_action(action_id: StringName, action_type: Utils.ActionType, value
 	data_stat_dictionaries[bds_type].register_action(action_id, action_type, value, is_critical)
 
 
-func register_interaction(action_id: StringName, action_type: Utils.ActionType, value: float, is_critical: bool) -> void:
+func register_action_received(action_id: StringName, action_type: Utils.ActionType, value: float, is_critical: bool) -> void:
 	var bds_type: BattleDataStat.Type = BattleDataStat.action_type_to_battle_data_stat_type(action_type, BattleDataStat.Direction.RECEIVED)
 	data_stat_dictionaries[bds_type].register_action(action_id, action_type, value, is_critical)
+#endregion
+
+
+#region ============================== Callbacks ==============================
+func _on_entity_owner_action_done(_target: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
+	register_action(action_id, action_type, value, is_critical)
+
+
+func _on_entity_owner_action_received(_source: Entity, action_type: Utils.ActionType, action_id: StringName, value: float, is_critical: bool) -> void:
+	register_action_received(action_id, action_type, value, is_critical)
 #endregion

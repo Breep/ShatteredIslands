@@ -13,7 +13,22 @@ func connect_entity_bds_registry(entity_bds_registry: EntityBDSRegistry) -> void
 	if _entity_bds_registry != null:
 		_disconnect_signals()
 	_entity_bds_registry = entity_bds_registry
+	_clear_panels()
+	_populate_panels_from_existing_registry()
 	_connect_signals()
+
+
+func _clear_panels() -> void:
+	for panel: UIBattleDataStatsPanel in _ui_battle_data_stats_panels.values():
+		panel.clear()
+
+
+func _populate_panels_from_existing_registry() -> void:
+	for bds_type: BattleDataStat.Type in _entity_bds_registry.data_stat_dictionaries.keys():
+		if not _ui_battle_data_stats_panels.has(bds_type):
+			continue
+		for bds: BattleDataStat in _entity_bds_registry.data_stat_dictionaries[bds_type].battle_data_stats.values():
+			_ui_battle_data_stats_panels[bds_type].add_battle_data_stat(bds)
 
 
 func _ready() -> void:
@@ -56,6 +71,8 @@ func _on_entity_bds_registry_new_bds_added(bds: BattleDataStat) -> void:
 		return
 	_ui_battle_data_stats_panels[bds.type].add_battle_data_stat(bds)
 
+
 func _on_entity_clicked(entity: Entity) -> void:
 	_entity_owner = entity
+	connect_entity_bds_registry(entity.bds_registry)
 	
