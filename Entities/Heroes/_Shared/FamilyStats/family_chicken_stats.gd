@@ -13,7 +13,6 @@ const ARMOR: Array[float] = [12, 12, 12, 12, 12]
 const CRIT_CHANCE: Array[float] = [5, 5, 5, 5, 5]
 const CRIT_MULTI: Array[float] = [100, 100, 100, 100, 100]
 
-
 var on_chicken_spawned_callbacks: Array[Callable]
 var on_chicken_death_callbacks: Array[Callable]
 
@@ -23,6 +22,8 @@ var spawn_number_increase: int
 
 var dodge_inherited: float
 var spawn_trex_on_start: bool
+
+var gifted_types: Array[Chicken.Type]
 
 ## HatchModifiers registered by cards — copied into each egg at spawn time.
 var hatch_modifiers: Array[HatchModifier]

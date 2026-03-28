@@ -13,24 +13,25 @@ enum Type {
 	GIFTED_NECROSIS
 }
 
-enum Modifier {
-	HATCH_TIME,
-	CHICKEN_TYPE,
-	CHICKEN_MODIFIERS,
-	HATCH_MODIFIERS,
-}
+class Modifier extends RefCounted:
+	const HATCH_TIME: StringName = &"Hatch Time"
+	const CHICKEN_TYPE: StringName = &"Chicken Type"
+	const CHICKEN_MODIFIERS: StringName = &"Chicken Modifiers"
+	const HATCH_MODIFIERS: StringName = &"Hatch Modifiers"
+	const SCALE: StringName = &"Scale"
 
 var _hatch_time: float
 var _chicken_type: Chicken.Type
 var _chicken_modifiers: Dictionary
 var _hatch_modifiers: Array[HatchModifier]
+var _scale: float
 
-
-func init(hatch_time: float, chicken_type: Chicken.Type, chicken_modifiers: Dictionary, hatch_modifiers: Array[HatchModifier] = []) -> ChickenEgg:
+func init(hatch_time: float, chicken_type: Chicken.Type, chicken_modifiers: Dictionary, hatch_modifiers: Array[HatchModifier] = [], opt_scale: float = 1) -> ChickenEgg:
 	_hatch_time = hatch_time
 	_chicken_type = chicken_type
 	_chicken_modifiers = chicken_modifiers
 	_hatch_modifiers = hatch_modifiers
+	_scale = opt_scale
 	return self
 
 
@@ -38,6 +39,7 @@ func _ready() -> void:
 	super._ready()
 	periodic_timer_registry.register_oneshot(_hatch_time, _hatch)
 	_visual_3d.set_visual(_chicken_type)
+	scale = Vector3(_scale, _scale, _scale)
 
 # ============================== Hatch ==============================
 
@@ -50,7 +52,7 @@ func _hatch() -> void:
 		HatchModifier.VarType.SPAWN_CONFIG: SpawnLocationConfig.create_entity_relative(self, 1),
 		HatchModifier.VarType.CHICKEN_MODIFIERS: _chicken_modifiers,
 	}
-
+	
 	# --- Before hatch ---
 	for mod in _hatch_modifiers:
 		if mod.before_hatch_callback.is_valid():

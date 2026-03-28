@@ -1,11 +1,17 @@
 [gd_resource type="Resource" script_class="Family" format=3 uid="uid://cqw2clgppw78q"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_t3wnt"]
+[ext_resource type="Resource" uid="uid://hbwmi3ykad2r" path="res://Card/Descriptions/Cards/ChickenLord/Legendary/chickenlord_eggfinity.tres" id="2_jc7kv"]
 [ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://Card/Templates/family.gd" id="2_o6xr1"]
 [ext_resource type="Texture2D" uid="uid://bpnolt2ws0tqn" path="res://Card/Descriptions/Families/Icons/chicken_lord.png" id="2_t8wja"]
+[ext_resource type="Resource" uid="uid://que1ypgbtrlx" path="res://Card/Descriptions/Cards/ChickenLord/Epic/ChickenTwins/chicken_twins.tres" id="3_t6q6m"]
+[ext_resource type="Resource" uid="uid://qcfmiuxm33bh" path="res://Card/Descriptions/Cards/ChickenLord/Epic/BloodFrenzy/chickenlord_blood_frenzy.tres" id="4_7vmja"]
+[ext_resource type="Resource" uid="uid://dbf44utsd7lc7" path="res://Card/Descriptions/Cards/ChickenLord/Rare/DeathBlock/chicken_death_block.tres" id="5_m5pce"]
+[ext_resource type="Resource" uid="uid://c2l8gq4i7egtd" path="res://Card/Descriptions/Cards/ChickenLord/Rare/ChickenSwarm/chicken_chicken_swarm.tres" id="6_y5x2p"]
 
 [resource]
 script = ExtResource("2_o6xr1")
+cards = Array[ExtResource("1_t3wnt")]([ExtResource("2_jc7kv"), ExtResource("3_t6q6m"), ExtResource("4_7vmja"), ExtResource("5_m5pce"), ExtResource("6_y5x2p")])
 icon = ExtResource("2_t8wja")
 family_name = "Chicken Lord"
 family_type = 8
