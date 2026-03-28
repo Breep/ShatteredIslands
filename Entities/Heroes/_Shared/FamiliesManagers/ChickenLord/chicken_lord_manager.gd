@@ -118,8 +118,7 @@ func _init_gifted_types() -> void:
 #region ============================== PASSIVE ==============================
 func _start_passive() -> void:
 	_register_egg_summon_modifier()
-
-	_spawn_n_chickens(P_START_CHICKENS[level])
+	_battle_start_chicken_spawn()
 	var spawn_period: float = P_PERIODIC_SPAWN_PERIODS[level] - _chicken_lord_stats.spawn_period_decrease
 	var chicken_number: int = P_PERIODIC_SPAWN_CHICKEN_NUMBERS[level]
 	_owner.periodic_timer_registry.register(&"Chicken passive", spawn_period, _spawn_n_chickens.bind(chicken_number), true)
@@ -222,6 +221,19 @@ func _spawn_chicken() -> void:
 	_owner.summon_entity(Entity.EntityType.CHICKEN_EGG, spawn_location_config, {
 		ChickenEgg.Modifier.HATCH_TIME: EGG_HATCH_TIME,
 	})
+
+
+func _battle_start_chicken_spawn() -> void:
+	if _chicken_lord_stats.spawn_trex_on_start:
+		for i in P_START_CHICKENS[level]:
+			var spawn_loc := SpawnLocationConfig.create_random_arena()
+			_owner.summon_entity(Entity.EntityType.TREX, spawn_loc, {
+				TRex.Modifier.GIFTED_SPAWN_PERIOD: 5,
+				TRex.Modifier.GIFTED_SPAWN_NUMBER: 4,
+				TRex.Modifier.HP_BONUS: 1000
+		})
+	else:
+		_spawn_n_chickens(P_START_CHICKENS[level])
 #endregion
 
 

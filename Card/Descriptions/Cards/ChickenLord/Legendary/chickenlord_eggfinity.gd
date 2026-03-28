@@ -5,7 +5,10 @@ extends HeroUpgrade
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var chance: float = _egg_spawn_chances[card_lvl - 1]
-
+	
+	if card_lvl == 3:
+		ctx.hero.families_stats.chicken_lord.spawn_trex_on_start = true
+	
 	ctx.hero.families_stats.chicken_lord.on_chicken_death_callbacks.append(func(cb_vars: Dictionary) -> void:
 		var dead_chicken: Chicken = cb_vars.get(FamilyChickenLordStats.CbVars.SELF_CHICKEN)
 		if Utils.is_randomize_modifier_active(chance, ctx.hero.battle_id):
