@@ -18,10 +18,13 @@
 [ext_resource type="Resource" uid="uid://b5ewgep73ryko" path="res://Card/Descriptions/Cards/ChickenLord/Common/IntimidatingCluck/chicken_intimidating_cluck.tres" id="14_splhm"]
 [ext_resource type="Resource" uid="uid://vx4tn6nq5iue" path="res://Card/Descriptions/Cards/ChickenLord/Common/DoctorChicken/chicken_doctor_chicken.tres" id="15_4lg14"]
 [ext_resource type="Resource" uid="uid://c33mqyw8oxsv8" path="res://Card/Descriptions/Cards/ChickenLord/Common/AssistantChicken/chicken_assistant_chicken.tres" id="16_01arj"]
+[ext_resource type="Resource" uid="uid://ce5gvgmt5yk34" path="res://Card/Descriptions/Cards/ChickenLord/Common/CrumbleEggs/chickenlord_crumble_eggs.tres" id="17_dnk2i"]
+[ext_resource type="Resource" uid="uid://gnkgykaxc0us" path="res://Card/Descriptions/Cards/ChickenLord/Common/FeatheredKnife/chickenlord_feathered_knife.tres" id="18_1q3tx"]
+[ext_resource type="Resource" uid="uid://cu1mmwx5wii2s" path="res://Card/Descriptions/Cards/ChickenLord/Common/EggBombardment/chickenlord_egg_bombardment.tres" id="19_knas8"]
 
 [resource]
 script = ExtResource("2_o6xr1")
-cards = Array[ExtResource("1_t3wnt")]([ExtResource("2_jc7kv"), ExtResource("3_t6q6m"), ExtResource("4_7vmja"), ExtResource("5_m5pce"), ExtResource("6_y5x2p"), ExtResource("7_3mro7"), ExtResource("8_ncmkq"), ExtResource("9_fns7q"), ExtResource("10_dnk2i"), ExtResource("11_1q3tx"), ExtResource("12_knas8"), ExtResource("13_f3sdy"), ExtResource("14_splhm"), ExtResource("15_4lg14"), ExtResource("16_01arj")])
+cards = Array[ExtResource("1_t3wnt")]([ExtResource("2_jc7kv"), ExtResource("3_t6q6m"), ExtResource("4_7vmja"), ExtResource("5_m5pce"), ExtResource("6_y5x2p"), ExtResource("7_3mro7"), ExtResource("8_ncmkq"), ExtResource("9_fns7q"), ExtResource("10_dnk2i"), ExtResource("11_1q3tx"), ExtResource("12_knas8"), ExtResource("13_f3sdy"), ExtResource("14_splhm"), ExtResource("15_4lg14"), ExtResource("16_01arj"), ExtResource("17_dnk2i"), ExtResource("18_1q3tx"), ExtResource("19_knas8")])
 icon = ExtResource("2_t8wja")
 family_name = "Chicken Lord"
 family_type = 8
