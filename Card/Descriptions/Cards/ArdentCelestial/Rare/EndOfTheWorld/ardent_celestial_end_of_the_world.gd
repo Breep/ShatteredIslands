@@ -9,7 +9,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		return
 		
 	var bonus_meteor_chance: float = _bonus_meteor_chances[card_lvl - 1]
-	ctx.hero.families_stats.ardent_celestial.bonus_meteor_chance = bonus_meteor_chance
+	ctx.hero.families_stats.ardent_celestial.end_of_the_world_bonus_meteor_chance = bonus_meteor_chance
 
 
 func get_description(cardlvl: int) -> String:

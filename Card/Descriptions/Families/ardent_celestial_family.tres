@@ -8,7 +8,7 @@
 [ext_resource type="Resource" uid="uid://dc5r8wy0vfksm" path="res://Card/Descriptions/Cards/ArdentCelestial/Common/KuiperBelt/fire_kuiper_belt.tres" id="5_qxssq"]
 [ext_resource type="Resource" uid="uid://cj0r7d80wkhg0" path="res://Card/Descriptions/Cards/ArdentCelestial/Common/OrbitalStation/fire_orbital_station.tres" id="6_x25x5"]
 [ext_resource type="Resource" uid="uid://bwrcib7p2yf2x" path="res://Card/Descriptions/Cards/ArdentCelestial/Common/Scorpius/fire_scorpius.tres" id="7_eqrbv"]
-[ext_resource type="Resource" uid="uid://bcxp6eg6bwam0" path="res://Card/Descriptions/Cards/ArdentCelestial/Common/Quasar/fire_titans_protection.tres" id="8_xd70b"]
+[ext_resource type="Resource" uid="uid://bcxp6eg6bwam0" path="res://Card/Descriptions/Cards/ArdentCelestial/Common/Quasar/ardent_celestial_quasar.tres" id="8_xd70b"]
 [ext_resource type="Resource" uid="uid://ifly0ma88lh6" path="res://Card/Descriptions/Cards/ArdentCelestial/Rare/CosmicBolt/fire_cosmic_bolt.tres" id="9_1gprq"]
 [ext_resource type="Resource" uid="uid://vefirtk44fxp" path="res://Card/Descriptions/Cards/ArdentCelestial/Rare/CelestialCulling/ardent_celestial_celestial_culling.tres" id="10_bpcws"]
 [ext_resource type="Resource" uid="uid://cqpsc1s0ykjx2" path="res://Card/Descriptions/Cards/ArdentCelestial/Legendary/Apocalypse/fire_apocalypse.tres" id="11_eqrbv"]

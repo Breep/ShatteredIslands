@@ -9,8 +9,8 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		return
 
 	var burn: float = _mana_burn[card_lvl - 1]
-
-	ctx.hero.families_stats.ardent_celestial.meteor_modifiers.append(func(cb_vars: Dictionary) -> void:
+	
+	ctx.hero.families_stats.ardent_celestial.meteor_on_hit_callbacks.append(func(cb_vars: Dictionary) -> void:
 		var entities_inside: Array = cb_vars.get(Meteor.VarType.ENTITIES_INSIDE, [])
 		for entity: Entity in entities_inside:
 			if entity != null and is_instance_valid(entity) and entity.team != ctx.hero.team:

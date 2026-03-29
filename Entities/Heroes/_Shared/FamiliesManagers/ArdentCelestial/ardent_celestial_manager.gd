@@ -74,7 +74,16 @@ func _on_inflict_condition_ignite(cb_vars: Dictionary) -> void:
 	if target == null: return
 	if stack_type != Stack.Type.IGNITE: return
 	var count: int = 0
-	var chance: float = _ardent_celestial_stats.meteor_chance[level] + _ardent_celestial_stats.bonus_meteor_chance
+	var apocalypse_chance: float = _ardent_celestial_stats.apocalypse_bonus_meteor_chance
+	var end_of_the_world_chance: float = _ardent_celestial_stats.end_of_the_world_bonus_meteor_chance 
+	var chance: float = _ardent_celestial_stats.meteor_chance[level] + end_of_the_world_chance + apocalypse_chance
+	
+	# Si chance > 100 alors +1 meteor et chance-100 d'une deuxième meteor
+	if chance > 100:
+		var meteor_bonus = int(chance/100)
+		count += meteor_bonus
+		chance = chance - int(chance/100)*100
+		
 	for i in stack_value:
 		if Utils.is_randomize_modifier_active(_ardent_celestial_stats.meteor_chance[level], _owner.battle_id):
 			count += 1

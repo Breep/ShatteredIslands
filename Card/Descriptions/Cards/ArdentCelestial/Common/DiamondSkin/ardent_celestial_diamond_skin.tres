@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://c8xlom0vjt6rp"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_qg2ct"]
+[ext_resource type="Script" uid="uid://i240pr1or385" path="res://Card/Descriptions/Cards/ArdentCelestial/Common/DiamondSkin/ardent_celestial_diamond_skin.gd" id="1_rmc20"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_r4pgj"]
+
+[sub_resource type="Resource" id="Resource_4nyf3"]
+script = ExtResource("1_rmc20")
+_magical_resistances = Array[float]([5.0, 8.0, 11.0, 13.0, 18.0])
+metadata/_custom_type_script = "uid://i240pr1or385"
+
+[resource]
+script = ExtResource("1_qg2ct")
+picture = SubResource("PlaceholderTexture2D_r4pgj")
+families = Array[int]([3])
+player_upgrade = SubResource("Resource_4nyf3")
+points = Dictionary[int, int]({
+3: 1
+})
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"
