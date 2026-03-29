@@ -19,6 +19,8 @@ enum VarType { # Variable types of the callbacks dictionary
 	DURATION,
 	ENTITY_TYPE,
 	ENTITY_MODIFIER,
+	SPELL_TYPE,
+	SPELL_MODIFIER,
 }
 
 

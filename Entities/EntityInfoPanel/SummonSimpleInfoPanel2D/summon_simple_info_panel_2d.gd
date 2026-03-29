@@ -15,9 +15,6 @@ extends Control
 @onready var _health_label: Label = %HealthLabel
 @onready var _shield_label: Label = %ShieldLabel
 
-static var _debug_values_visible: bool = false
-static var _instances: Array[SummonSimpleInfoPanel2D] = []
-
 #region ============================== Node base functions ==============================
 func _ready() -> void:
 	if _health_bar and _health_bar.material:
@@ -39,12 +36,12 @@ func _ready() -> void:
 	conditions.shield_stacks_changed.connect(_on_shield_changed)
 
 	if _debug_values != null:
-		_debug_values.visible = _debug_values_visible
-	_instances.append(self)
+		_debug_values.visible = DebugHealthBarOverlay.is_visible()
+	DebugHealthBarOverlay.register(_on_debug_overlay_toggled)
 
 
 func _exit_tree() -> void:
-	_instances.erase(self)
+	DebugHealthBarOverlay.unregister(_on_debug_overlay_toggled)
 
 
 func _process(_delta: float) -> void:
@@ -55,10 +52,7 @@ func _process(_delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("trigger_health_bar_value"):
-		_debug_values_visible = not _debug_values_visible
-		for panel: SummonSimpleInfoPanel2D in _instances:
-			if panel._debug_values != null:
-				panel._debug_values.visible = _debug_values_visible
+		DebugHealthBarOverlay.toggle()
 		get_viewport().set_input_as_handled()
 #endregion
 
@@ -136,4 +130,9 @@ func _on_health_max_changed(new_max: int) -> void:
 
 func _on_shield_changed(new_amount: float) -> void:
 	_update_shield_bar(new_amount, _owner_entity.stats.health_max)
+
+
+func _on_debug_overlay_toggled(is_visible: bool) -> void:
+	if _debug_values != null:
+		_debug_values.visible = is_visible
 #endregion

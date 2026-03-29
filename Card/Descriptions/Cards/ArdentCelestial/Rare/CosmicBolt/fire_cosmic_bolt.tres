@@ -6,9 +6,8 @@
 
 [sub_resource type="Resource" id="Resource_0un7i"]
 script = ExtResource("2_blkha")
-_damage_per_stack = Array[float]([1.0, 1.0, 1.0, 1.0, 1.0])
-_bounce_chance_per_stack = Array[float]([0.1, 0.2, 0.3, 0.4, 0.5])
-_period = Array[float]([4.0, 4.0, 4.0, 4.0, 4.0])
+_stacks = Array[float]([1.0, 2.0, 3.0, 4.0, 6.0])
+_rarity = 1
 metadata/_custom_type_script = "uid://4klad06ppdmg"
 
 [resource]
@@ -21,5 +20,5 @@ player_upgrade = SubResource("Resource_0un7i")
 points = Dictionary[int, int]({
 3: 2
 })
-lvl = 1
+lvl = 3
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"
