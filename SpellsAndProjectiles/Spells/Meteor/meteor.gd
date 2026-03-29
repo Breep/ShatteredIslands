@@ -14,7 +14,8 @@ const DEPLOY_TIME: float = 2.0 # Time for the metor to fall on the ground (in s)
 
 enum VarType { # Variable types of the callbacks dictionary
 	ENTITIES_INSIDE,
-	DAMAGE_PERCENT
+	DAMAGE_PERCENT,
+	POSITION
 }
 
 @onready var _deploy_timer: Timer = %DeployTimer
@@ -66,6 +67,7 @@ func _on_deploy_timer_timeout() -> void:
 		if callback.is_valid():
 			callback.call({
 				VarType.ENTITIES_INSIDE: _entities_inside,
-				VarType.DAMAGE_PERCENT: _damage_percent
+				VarType.DAMAGE_PERCENT: _damage_percent,
+				VarType.POSITION: global_position
 			})
 	queue_free()
