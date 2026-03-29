@@ -16,6 +16,7 @@ func _ready() -> void:
 
 func start() -> void:
 	Verbose.debug("ArdentCelestialManager start", Verbose.Category.FAMILY_MANAGER)
+	_register_meteor_spell_modifier()
 	_add_stack_modifiers()
 	_ardent_celestial_stats.titans_protection_accumulated_hp = 0.0
 
@@ -24,6 +25,33 @@ func stop() -> void:
 	_ardent_celestial_stats.titans_protection_accumulated_hp = 0.0
 	_meteor_queues.clear()
 	_meteor_scheduled.clear()
+
+
+#region ========== MODIFIER: Meteor Spell Modifier ==========
+## Registers a persistent SPELL ActionModifier that intercepts ALL METEOR casts.
+## Automatically injects damage_percent, radius, on_hit_callbacks, on_cast_callbacks
+## from ardent_celestial_stats. Any caller only needs cast_spell(target, METEOR, {}).
+func _register_meteor_spell_modifier() -> void:
+	var modifier := ActionModifier.new()
+	modifier.id = &"ArdentCelestial Meteor"
+	modifier.action_type = Utils.ActionCategory.SPELL
+	modifier.is_one_time_effect = false
+	modifier.auto_cleanup = true
+	modifier.before_action_logic_callback = func(cb_vars: Dictionary) -> void:
+		if cb_vars.get(ActionModifier.VarType.SPELL_TYPE) != Spell.Type.METEOR:
+			return
+		var sm: Dictionary = cb_vars[ActionModifier.VarType.SPELL_MODIFIER]
+		if not sm.has(Spell.MeteorModifier.DAMAGE_PERCENT):
+			sm[Spell.MeteorModifier.DAMAGE_PERCENT] = _ardent_celestial_stats.meteor_damage_percent[level]
+		if not sm.has(Spell.MeteorModifier.RADIUS):
+			sm[Spell.MeteorModifier.RADIUS] = _ardent_celestial_stats.meteor_radius
+		# On_hit et on_cast : on merge les callbacks de la famille avec ceux déjà présents
+		var existing_on_hit: Array = sm.get(Spell.MeteorModifier.ON_HIT_CALLBACKS, [])
+		sm[Spell.MeteorModifier.ON_HIT_CALLBACKS] = existing_on_hit + _ardent_celestial_stats.meteor_on_hit_callbacks
+		var existing_on_cast: Array = sm.get(Spell.MeteorModifier.ON_CAST_CALLBACKS, [])
+		sm[Spell.MeteorModifier.ON_CAST_CALLBACKS] = existing_on_cast + _ardent_celestial_stats.meteor_on_cast_callbacks
+	_owner.action_modifiers_registry.register_modifier(modifier)
+#endregion
 
 
 #region ========== PASSIVE: Celestial Passive ==========
@@ -48,10 +76,7 @@ func _on_inflict_condition_ignite(cb_vars: Dictionary) -> void:
 	var count: int = 0
 	var chance: float = _ardent_celestial_stats.meteor_chance[level] + _ardent_celestial_stats.bonus_meteor_chance
 	for i in stack_value:
-		if Utils.is_randomize_modifier_active(chance, _owner.battle_id):
-			for cb in _ardent_celestial_stats.meteor_on_cast_callbacks:
-				if cb.is_valid():
-					cb.call({})
+		if Utils.is_randomize_modifier_active(_ardent_celestial_stats.meteor_chance[level], _owner.battle_id):
 			count += 1
 	if count == 0: return
 	_meteor_queues[target] = _meteor_queues.get(target, 0) + count
@@ -86,11 +111,7 @@ func _dequeue_meteor(target: Entity) -> void:
 		# Plus de cible dispo : on réinjecte le restant nulle part, on drop
 		_meteor_queues.erase(target)
 		return
-	_owner.cast_spell(target, Spell.Type.METEOR, {
-				Spell.MeteorModifier.DAMAGE_PERCENT: _ardent_celestial_stats.meteor_damage_percent[level],
-				Spell.MeteorModifier.RADIUS: _ardent_celestial_stats.meteor_radius,
-				Spell.MeteorModifier.ON_HIT_CALLBACKS: _ardent_celestial_stats.meteor_on_hit_callbacks
-				})
+	_owner.cast_spell(final_target, Spell.Type.METEOR)
 	# S'il reste des météores pour cette cible, programmer le prochain
 	if _meteor_queues.has(target):
 		_schedule_dequeue_for(target)

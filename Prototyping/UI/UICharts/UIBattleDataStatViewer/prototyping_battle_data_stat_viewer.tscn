@@ -1,11 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2i740j57q2r8"]
+[gd_scene format=3 uid="uid://b2i740j57q2r8"]
 
 [ext_resource type="Script" uid="uid://deyvipbdvwa3n" path="res://Prototyping/UI/UICharts/UIBattleDataStatViewer/prototyping_battle_data_stat_viewer.gd" id="1_ihhbo"]
 [ext_resource type="PackedScene" uid="uid://duf3kswv8x14b" path="res://GlobalManagers/ActionMeter/Viewer/ui_battle_data_stat_viewer.tscn" id="2_igj26"]
 [ext_resource type="PackedScene" uid="uid://dlnt5nfitss0l" path="res://GlobalManagers/ActionMeter/Viewer/ui_battle_data_stats_panel.tscn" id="3_3g7ey"]
 [ext_resource type="PackedScene" uid="uid://cs66hky7o30da" path="res://GlobalManagers/ActionMeter/Viewer/ui_entity_bds_registry.tscn" id="4_om01a"]
 
-[node name="PrototypingBattleDataStatViewer" type="Control" node_paths=PackedStringArray("_bds_viewer", "_battle_data_stat_panel", "_ui_entity_bds_registry")]
+[node name="PrototypingBattleDataStatViewer" type="Control" unique_id=784761322 node_paths=PackedStringArray("_bds_viewer", "_battle_data_stat_panel", "_ui_entity_bds_registry")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,56 +19,56 @@ _bds_viewer = NodePath("ProtoBattleDataStatViewer/BattleDataStatViewer")
 _battle_data_stat_panel = NodePath("ProtoBattleDataStatsPanel/BattleDataStatsPanel")
 _ui_entity_bds_registry = NodePath("EntityBDSRegistry")
 
-[node name="ProtoBattleDataStatViewer" type="VBoxContainer" parent="."]
+[node name="ProtoBattleDataStatViewer" type="VBoxContainer" parent="." unique_id=1573517745]
 layout_mode = 0
 offset_left = 124.0
 offset_top = 39.0
 offset_right = 589.0
 offset_bottom = 249.0
 
-[node name="BattleDataStatViewer" parent="ProtoBattleDataStatViewer" instance=ExtResource("2_igj26")]
+[node name="BattleDataStatViewer" parent="ProtoBattleDataStatViewer" unique_id=468913651 instance=ExtResource("2_igj26")]
 layout_mode = 2
 
-[node name="CreateBDSButton" type="Button" parent="ProtoBattleDataStatViewer"]
+[node name="CreateBDSButton" type="Button" parent="ProtoBattleDataStatViewer" unique_id=756832020]
 layout_mode = 2
 text = "Connect BDS"
 
-[node name="AddPhysicalDamageButton" type="Button" parent="ProtoBattleDataStatViewer"]
+[node name="AddPhysicalDamageButton" type="Button" parent="ProtoBattleDataStatViewer" unique_id=1144111159]
 layout_mode = 2
 text = "ADD Physical damage"
 
-[node name="AddMagicalDamageButton" type="Button" parent="ProtoBattleDataStatViewer"]
+[node name="AddMagicalDamageButton" type="Button" parent="ProtoBattleDataStatViewer" unique_id=1649368570]
 layout_mode = 2
 text = "ADD Magical damage"
 
-[node name="AddPoisonDamageButton" type="Button" parent="ProtoBattleDataStatViewer"]
+[node name="AddPoisonDamageButton" type="Button" parent="ProtoBattleDataStatViewer" unique_id=367680258]
 layout_mode = 2
 text = "ADD poison damage"
 
-[node name="AddPureDamageButton" type="Button" parent="ProtoBattleDataStatViewer"]
+[node name="AddPureDamageButton" type="Button" parent="ProtoBattleDataStatViewer" unique_id=1648585268]
 layout_mode = 2
 text = "ADD pure damage"
 
-[node name="ProtoBattleDataStatsPanel" type="VBoxContainer" parent="."]
+[node name="ProtoBattleDataStatsPanel" type="VBoxContainer" parent="." unique_id=1272671131]
 layout_mode = 0
 offset_left = 698.0
 offset_top = 43.0
 offset_right = 1225.0
 offset_bottom = 449.0
 
-[node name="BattleDataStatsPanel" parent="ProtoBattleDataStatsPanel" instance=ExtResource("3_3g7ey")]
+[node name="BattleDataStatsPanel" parent="ProtoBattleDataStatsPanel" unique_id=2054344052 instance=ExtResource("3_3g7ey")]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="AddBDSButton" type="Button" parent="ProtoBattleDataStatsPanel"]
+[node name="AddBDSButton" type="Button" parent="ProtoBattleDataStatsPanel" unique_id=1593437215]
 layout_mode = 2
 text = "Add BSD"
 
-[node name="AddRandomValue" type="Button" parent="ProtoBattleDataStatsPanel"]
+[node name="AddRandomValue" type="Button" parent="ProtoBattleDataStatsPanel" unique_id=2107708521]
 layout_mode = 2
 text = "Add Random Value"
 
-[node name="EntityBDSRegistry" parent="." node_paths=PackedStringArray("_ui_battle_data_stats_panels") instance=ExtResource("4_om01a")]
+[node name="EntityBDSRegistry" parent="." unique_id=187520544 node_paths=PackedStringArray("_ui_battle_data_stats_panels") instance=ExtResource("4_om01a")]
 layout_mode = 1
 offset_left = -545.0
 offset_top = 9.0
@@ -85,7 +85,7 @@ _ui_battle_data_stats_panels = {
 7: NodePath("TabContainer/Misc Taken")
 }
 
-[node name="AddRandomValuesButton" type="CheckButton" parent="."]
+[node name="AddRandomValuesButton" type="CheckButton" parent="." unique_id=1989105103]
 layout_mode = 0
 offset_left = 76.0
 offset_top = 670.0
@@ -93,42 +93,42 @@ offset_right = 274.0
 offset_bottom = 701.0
 text = "Add random values"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1099791155]
 layout_mode = 0
 offset_left = 51.0
 offset_top = 316.0
 offset_right = 357.0
 offset_bottom = 596.0
 
-[node name="AddDamageDoneButton" type="Button" parent="VBoxContainer"]
+[node name="AddDamageDoneButton" type="Button" parent="VBoxContainer" unique_id=1531186977]
 layout_mode = 2
 text = "Add DAMAGE_DONE BSD"
 
-[node name="AddDamageReceivedButton" type="Button" parent="VBoxContainer"]
+[node name="AddDamageReceivedButton" type="Button" parent="VBoxContainer" unique_id=1875074535]
 layout_mode = 2
 text = "Add DAMAGE_RECEIVED BSD"
 
-[node name="AddStackInflictedButton" type="Button" parent="VBoxContainer"]
+[node name="AddStackInflictedButton" type="Button" parent="VBoxContainer" unique_id=55213731]
 layout_mode = 2
 text = "Add STACK_INFLICTED BSD"
 
-[node name="AddStackReceivedButton" type="Button" parent="VBoxContainer"]
+[node name="AddStackReceivedButton" type="Button" parent="VBoxContainer" unique_id=2104123178]
 layout_mode = 2
 text = "Add STACK_TAKEN BSD"
 
-[node name="AddHealDone" type="Button" parent="VBoxContainer"]
+[node name="AddHealDone" type="Button" parent="VBoxContainer" unique_id=366536228]
 layout_mode = 2
 text = "Add HEAL_DONE BSD"
 
-[node name="AddHealReceived" type="Button" parent="VBoxContainer"]
+[node name="AddHealReceived" type="Button" parent="VBoxContainer" unique_id=1326099769]
 layout_mode = 2
 text = "Add HEAL_RECEIVED BSD"
 
-[node name="AddMiscDone" type="Button" parent="VBoxContainer"]
+[node name="AddMiscDone" type="Button" parent="VBoxContainer" unique_id=651078849]
 layout_mode = 2
 text = "Add MISC_DONE BSD"
 
-[node name="AddMiscReceived" type="Button" parent="VBoxContainer"]
+[node name="AddMiscReceived" type="Button" parent="VBoxContainer" unique_id=987751301]
 layout_mode = 2
 text = "Add MISC_RECEIVED BSD"
 

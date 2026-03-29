@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Card" format=3 uid="uid://que1ypgbtrlx"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_48ode"]
-[ext_resource type="Script" uid="uid://cdk7uavfh53e1" path="res://Card/Descriptions/Cards/ChickenLord/Epic/chicken_twins.gd" id="1_svp2b"]
+[ext_resource type="Script" uid="uid://cdk7uavfh53e1" path="res://Card/Descriptions/Cards/ChickenLord/Epic/ChickenTwins/chicken_twins.gd" id="1_svp2b"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_48ode"]
 

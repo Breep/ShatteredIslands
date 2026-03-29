@@ -4,7 +4,6 @@ extends HeroUpgrade
 @export var _periods: Array[float]
 @export var _damage_factors: Array[float]
 
-
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	
 	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:

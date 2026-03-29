@@ -183,7 +183,7 @@ var _spawn_ticks_remaining: int = -1
 @export var auto_attack_enabled: bool = true
 #endregion
 
-@onready var bds_registry := EntityBDSRegistry.new(entity_name)
+@onready var bds_registry := EntityBDSRegistry.new(self)
 
 #region ============================== Misc State ==============================
 signal life_state_changed(new_life_state: LifeState)

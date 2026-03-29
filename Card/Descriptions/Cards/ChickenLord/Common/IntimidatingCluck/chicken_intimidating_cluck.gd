@@ -3,7 +3,6 @@ extends HeroUpgrade
 
 @export var _stun_durations: Array[float]
 @export var _stun_chances: Array[float]
-@export var _rarity: Card.Rarity = Card.Rarity.COMMON
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var stun_duration: float = _stun_durations[card_lvl - 1]
