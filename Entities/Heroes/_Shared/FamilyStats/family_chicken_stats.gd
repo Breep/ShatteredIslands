@@ -23,6 +23,9 @@ var spawn_number_increase: int
 var dodge_inherited: float
 var spawn_trex_on_start: bool
 
+var dead_chicken_count: int
+var alive_chicken_count: int
+
 var gifted_types: Array[Chicken.Type]
 
 ## HatchModifiers registered by cards — copied into each egg at spawn time.

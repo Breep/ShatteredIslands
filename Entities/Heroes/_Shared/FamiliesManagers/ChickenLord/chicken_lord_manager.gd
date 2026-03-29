@@ -67,9 +67,6 @@ var _gifted_chance: float
 var _families_level: Dictionary[Family.Type, int]
 var _alive_ally_chickens: Array[Chicken]
 
-var _dead_chicken_count: int
-var _alive_chicken_count: int
-
 var _trex_gauge: float
 #endregion
 
@@ -266,7 +263,7 @@ func _on_owner_target_module_new_entity_detected(entity: Entity) -> void:
 
 
 func _on_chicken_spawned(chicken: Chicken) -> void:
-	_alive_chicken_count += 1
+	_chicken_lord_stats.alive_chicken_count += 1
 	_alive_ally_chickens.append(chicken)
 	chicken.died.connect(_on_chicken_death.bind(chicken), CONNECT_ONE_SHOT)
 	
@@ -280,13 +277,13 @@ func _on_chicken_spawned(chicken: Chicken) -> void:
 			cb.call({
 				FamilyChickenLordStats.CbVars.ALIVE_CHICKENS: _alive_ally_chickens,
 				FamilyChickenLordStats.CbVars.SELF_CHICKEN: chicken,
-				FamilyChickenLordStats.CbVars.DEATH_COUNT: _dead_chicken_count
+				FamilyChickenLordStats.CbVars.DEATH_COUNT: _chicken_lord_stats.dead_chicken_count
 			})
 
 
 func _on_chicken_death(chicken: Chicken) -> void:
-	_dead_chicken_count += 1
-	_alive_chicken_count -= 1
+	_chicken_lord_stats.dead_chicken_count += 1
+	_chicken_lord_stats.alive_chicken_count -= 1
 	_alive_ally_chickens.erase(chicken)
 	
 	for cb: Callable in _chicken_lord_stats.on_chicken_death_callbacks:
@@ -294,6 +291,6 @@ func _on_chicken_death(chicken: Chicken) -> void:
 			cb.call({
 				FamilyChickenLordStats.CbVars.ALIVE_CHICKENS: _alive_ally_chickens,
 				FamilyChickenLordStats.CbVars.SELF_CHICKEN: chicken,
-				FamilyChickenLordStats.CbVars.DEATH_COUNT: _dead_chicken_count
+				FamilyChickenLordStats.CbVars.DEATH_COUNT: _chicken_lord_stats.dead_chicken_count
 			})
 #endregion
