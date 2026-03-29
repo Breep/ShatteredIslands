@@ -2,7 +2,6 @@ class_name ChickenDoctorChicken
 extends HeroUpgrade
 
 @export var _heal_amounts: Array[float]
-@export var _rarity: Card.Rarity = Card.Rarity.COMMON
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var heal_amount: float = _heal_amounts[card_lvl - 1]

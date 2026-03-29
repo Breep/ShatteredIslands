@@ -3,7 +3,6 @@ extends HeroUpgrade
 
 @export var _vulnerable_applications: Array[float]
 @export var _chances: Array[float]
-@export var _rarity: Card.Rarity = Card.Rarity.COMMON
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var vulnerable_application: float = _vulnerable_applications[card_lvl - 1]
