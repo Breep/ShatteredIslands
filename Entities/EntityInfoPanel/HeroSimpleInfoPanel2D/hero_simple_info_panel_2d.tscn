@@ -211,6 +211,30 @@ font_color = Color(0.9416784, 0.84232056, 0, 1)
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_u1xh6"]
+font_size = 12
+font_color = Color(0.96561795, 0.35149083, 0, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2mu5s"]
+font_size = 12
+font_color = Color(0.19455406, 0.43347576, 3.85046e-07, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_4khpa"]
+font_size = 12
+font_color = Color(0.76725745, 0.3443281, 1, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xw8nt"]
+font_size = 12
+font_color = Color(0.25493348, 0.67117757, 0.47795177, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
 [node name="HeroSimpleInfoPanel2d" type="Control" unique_id=358992180]
 layout_mode = 3
 anchors_preset = 8
@@ -226,7 +250,32 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 mouse_filter = 2
 script = ExtResource("1_fqydh")
 
-[node name="HealthAndMana" type="VBoxContainer" parent="." unique_id=756449751]
+[node name="MainVBox" type="VBoxContainer" parent="." unique_id=558123959]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="PlayerNameLabel" type="RichTextLabel" parent="MainVBox" unique_id=1781608924]
+custom_minimum_size = Vector2(80, 20)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "Breep"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HealthAndMana" type="Control" parent="MainVBox" unique_id=1222723480]
+custom_minimum_size = Vector2(80, 15)
+layout_mode = 2
+
+[node name="HealthAndMana" type="VBoxContainer" parent="MainVBox/HealthAndMana" unique_id=756449751]
+custom_minimum_size = Vector2(80, 15)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -236,14 +285,14 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/separation = -2
 
-[node name="HealthBar" type="ColorRect" parent="HealthAndMana" unique_id=610590936]
+[node name="HealthBar" type="ColorRect" parent="MainVBox/HealthAndMana/HealthAndMana" unique_id=610590936]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_u1xh6")
 custom_minimum_size = Vector2(80, 10)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="ShieldBar" type="ColorRect" parent="HealthAndMana/HealthBar" unique_id=1699784184]
+[node name="ShieldBar" type="ColorRect" parent="MainVBox/HealthAndMana/HealthAndMana/HealthBar" unique_id=1699784184]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_2mu5s")
 layout_mode = 1
@@ -254,7 +303,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="GridBar" type="ColorRect" parent="HealthAndMana/HealthBar" unique_id=1715734742]
+[node name="GridBar" type="ColorRect" parent="MainVBox/HealthAndMana/HealthAndMana/HealthBar" unique_id=1715734742]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_4khpa")
 layout_mode = 1
@@ -265,50 +314,24 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="ManaBar" type="ColorRect" parent="HealthAndMana" unique_id=564324133]
+[node name="ManaBar" type="ColorRect" parent="MainVBox/HealthAndMana/HealthAndMana" unique_id=564324133]
 material = SubResource("ShaderMaterial_xw8nt")
 custom_minimum_size = Vector2(80, 5)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="PlayerNameLabel" type="RichTextLabel" parent="." unique_id=1781608924]
-custom_minimum_size = Vector2(80, 20)
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -40.0
-offset_top = -24.359985
-offset_right = 40.0
-offset_bottom = -4.3599854
-grow_horizontal = 2
-mouse_filter = 2
-theme_override_constants/outline_size = 5
-theme_override_font_sizes/normal_font_size = 12
-bbcode_enabled = true
-text = "Breep"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="DebugValues" type="HBoxContainer" parent="." unique_id=160983650]
+[node name="DebugValues" type="HBoxContainer" parent="MainVBox/HealthAndMana" unique_id=160983650]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -21.5
-offset_right = 20.0
-offset_bottom = 18.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="HealthLabel" type="Label" parent="DebugValues" unique_id=1275148556]
+[node name="HealthLabel" type="Label" parent="MainVBox/HealthAndMana/DebugValues" unique_id=1275148556]
 unique_name_in_owner = true
 layout_mode = 2
 text = "42"
@@ -316,8 +339,46 @@ label_settings = ExtResource("4_dbglb")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ShieldLabel" type="Label" parent="DebugValues" unique_id=1290683005]
+[node name="ShieldLabel" type="Label" parent="MainVBox/HealthAndMana/DebugValues" unique_id=1290683005]
 unique_name_in_owner = true
 layout_mode = 2
 text = "42"
 label_settings = SubResource("LabelSettings_shld")
+
+[node name="Control" type="Control" parent="MainVBox" unique_id=1726330834]
+layout_mode = 2
+
+[node name="StackValues" type="HBoxContainer" parent="MainVBox/Control" unique_id=1870219169]
+custom_minimum_size = Vector2(80, 15)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -40.0
+offset_right = 40.0
+offset_bottom = 16.0
+grow_horizontal = 2
+
+[node name="IgniteLabel" type="Label" parent="MainVBox/Control/StackValues" unique_id=1339182740]
+unique_name_in_owner = true
+layout_mode = 2
+text = "145"
+label_settings = SubResource("LabelSettings_u1xh6")
+
+[node name="PoisonLabel" type="Label" parent="MainVBox/Control/StackValues" unique_id=478267511]
+unique_name_in_owner = true
+layout_mode = 2
+text = "122"
+label_settings = SubResource("LabelSettings_2mu5s")
+
+[node name="NecrosisLabel" type="Label" parent="MainVBox/Control/StackValues" unique_id=39704027]
+unique_name_in_owner = true
+layout_mode = 2
+text = "44"
+label_settings = SubResource("LabelSettings_4khpa")
+
+[node name="RegenLabel" type="Label" parent="MainVBox/Control/StackValues" unique_id=383329774]
+unique_name_in_owner = true
+layout_mode = 2
+text = "111"
+label_settings = SubResource("LabelSettings_xw8nt")

@@ -59,7 +59,7 @@ const FRAME_TEXTURES: Array[Dictionary] = [
 @onready var _current_xp_progress_bar: TextureProgressBar = %XPProgressBar
 @onready var _button: TextureButton = %TextureButton
 @onready var _glow_effect: TextureRect = %GlowEffect
-@onready var _family_background: TextureRect = %FamilyBackground
+@onready var _family_background: ColorRect = %FamilyBackground
 @onready var _xp_bar_frame: TextureRect = %XPBarFrame
 @onready var _main_frame: TextureRect = %MainFrame
 
@@ -104,6 +104,10 @@ func _ready() -> void:
 		_glow_effect.material = _glow_effect.material.duplicate()
 	_update_frame()
 	_glow_effect.hide()
+	
+	if _family_background.material != null:
+		_family_background.material = _family_background.material.duplicate()
+		_family_background.material.set_shader_parameter("color_count", 1)
 
 # ============================== Public functions ==============================
 
@@ -113,6 +117,7 @@ func init(family: Family) -> void:
 	_glow_effect.material.set_shader_parameter("glow_color", family.color)
 	_family_icon.texture = family.icon
 	_family = family
+	_update_family_background(family)
 
 
 func unselect() -> void:
@@ -152,6 +157,9 @@ func _glow() -> void:
 		#.set_ease(Tween.EASE_OUT)
 
 
-
+func _update_family_background(family: Family) -> void:
+	if _family_background.material == null:
+		return
+	_family_background.material.set_shader_parameter("base_color", family.color)
 
  
