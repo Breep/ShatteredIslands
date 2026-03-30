@@ -17,10 +17,9 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	big_egg_mod.before_action_logic_callback = func(cb_vars: Dictionary) -> void:
 		if cb_vars.get(ActionModifier.VarType.ENTITY_TYPE) != Entity.EntityType.CHICKEN_EGG:
 			return
-		Verbose.warn("WADALUP")
 		var em: Dictionary = cb_vars.get(ActionModifier.VarType.ENTITY_MODIFIER, {})
 		var chicken_type = Utils.pick_random(ctx.hero.families_stats.chicken_lord.gifted_types, ctx.hero.battle_id)
-		em[ChickenEgg.Modifier.CHICKEN_TYPE] = chicken_type
+		em[ChickenEgg.Modifier.CHICKEN_TYPE] = chicken_type if chicken_type != null else Chicken.Type.BASIC
 		em[ChickenEgg.Modifier.SCALE] = 2.0
 		var hm: Array = em.get(ChickenEgg.Modifier.HATCH_MODIFIERS, [])
 		var mod := HatchModifier.new()
