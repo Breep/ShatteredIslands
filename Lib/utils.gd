@@ -30,6 +30,7 @@ enum ActionCategory {
 	UTILITY,
 	DODGE,
 	SUMMON,
+	SPELL,
 }
 
 enum PercentModifier {

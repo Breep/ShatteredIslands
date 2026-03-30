@@ -38,6 +38,13 @@ func add_battle_data_stat(battle_data_stat: BattleDataStat) -> void:
 	bds_viewer.total_value_changed.connect(_on_battle_data_stat_viewer_total_value_changed)
 	_sort_bds_viewers.call_deferred()
 	_scale_bds_viewers.call_deferred()
+
+
+func clear() -> void:
+	for viewer: UIBattleDataStatViewer in _battle_data_stat_viewers:
+		viewer.queue_free()
+	_battle_data_stat_viewers.clear()
+	_total_value = 0.0
 #endregion
 
 

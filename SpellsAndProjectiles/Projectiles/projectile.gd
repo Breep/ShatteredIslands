@@ -15,7 +15,9 @@ enum Type {
 	SNAKE,
 	COSMIC_BOLT,
 	SHIELD_THROW,
-	POISON_FLASK
+	POISON_FLASK,
+	SMALL_EGG,
+	FIRE_BALL,
 }
 
 # === EXPORTS ===
@@ -131,7 +133,7 @@ func _on_hit(hit_target: Entity) -> void:
 			})
 	
 	# Handle bouncing if remaining bounces
-	if _stats.bounces_remaining >= 1.0:
+	if _stats.bounces_remaining >= 0 and Utils.is_randomize_modifier_active(_stats.bounces_remaining * 100, hit_target.battle_id):
 		_handle_bounce(hit_target)
 	else:
 		# No more bounces, destroy projectile

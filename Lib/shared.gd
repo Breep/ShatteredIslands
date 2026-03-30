@@ -66,7 +66,9 @@ var PROJECTILE_SCENES: Dictionary[Projectile.Type, PackedScene] = {
 	Projectile.Type.SNAKE: load("res://SpellsAndProjectiles/Projectiles/Poison/Snake/snake_projectile.tscn"),
 	Projectile.Type.COSMIC_BOLT: load("res://SpellsAndProjectiles/Projectiles/CosmicBolt/cosmic_bolt_projectile.tscn"),
 	Projectile.Type.SHIELD_THROW: load("res://SpellsAndProjectiles/Projectiles/ShieldThrow/shield_throw_projectile.tscn"),
-	Projectile.Type.POISON_FLASK: load("res://SpellsAndProjectiles/Projectiles/Poison/PoisonFlask/poison_flask_projectile.tscn")
+	Projectile.Type.POISON_FLASK: load("res://SpellsAndProjectiles/Projectiles/Poison/PoisonFlask/poison_flask_projectile.tscn"),
+	Projectile.Type.SMALL_EGG: load("res://SpellsAndProjectiles/Projectiles/SmallEgg/small_egg_projectile.tscn"),
+	Projectile.Type.FIRE_BALL: load("res://SpellsAndProjectiles/Projectiles/FireBall/fire_ball_projectile.tscn")
 }
 
 var DAMAGE_POPUP_SCENE: PackedScene = load("res://UI/3D/DamagePopup/damage_popup.tscn")

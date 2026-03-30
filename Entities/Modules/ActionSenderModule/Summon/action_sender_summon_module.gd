@@ -200,7 +200,8 @@ func _summon_chicken_egg(spawn_position: Vector3, entity_modifier: Dictionary) -
 	var chicken_type: Chicken.Type = entity_modifier.get(ChickenEgg.Modifier.CHICKEN_TYPE, Chicken.Type.BASIC)
 	var chicken_modifiers: Dictionary = entity_modifier.get(ChickenEgg.Modifier.CHICKEN_MODIFIERS, {})
 	var hatch_modifiers: Array[HatchModifier] = entity_modifier.get(ChickenEgg.Modifier.HATCH_MODIFIERS, [] as Array[HatchModifier])
-	egg.init(hatch_time, chicken_type, chicken_modifiers, hatch_modifiers)
+	var opt_scale: float = entity_modifier.get(ChickenEgg.Modifier.SCALE, 1)
+	egg.init(hatch_time, chicken_type, chicken_modifiers, hatch_modifiers, opt_scale)
 	_spawn_manager.spawn_entity(egg, spawn_position, _owner.get_context(), Entity.EntityType.CHICKEN_EGG)
 
 

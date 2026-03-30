@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_1nbnc"]
 [ext_resource type="Texture2D" uid="uid://5nrlnrpmgseo" path="res://Card/Descriptions/Cards/ArdentCelestial/Common/Quasar/fire_titans_protection.jpg" id="1_3qpta"]
-[ext_resource type="Script" uid="uid://dywv3qds1kclj" path="res://Card/Descriptions/Cards/ArdentCelestial/Common/Quasar/fire_titans_protection.gd" id="2_hce65"]
+[ext_resource type="Script" uid="uid://dywv3qds1kclj" path="res://Card/Descriptions/Cards/ArdentCelestial/Common/Quasar/ardent_celestial_quasar.gd" id="2_hce65"]
 
 [sub_resource type="Resource" id="Resource_wmyop"]
 script = ExtResource("2_hce65")
-_hp_amount = Array[float]([10.0, 20.0, 30.0, 40.0, 50.0])
+_hp_amount = Array[float]([1.0, 2.0, 3.0, 4.0, 8.0])
 metadata/_custom_type_script = "uid://dywv3qds1kclj"
 
 [resource]

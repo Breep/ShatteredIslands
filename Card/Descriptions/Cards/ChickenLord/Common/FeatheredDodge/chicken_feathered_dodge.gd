@@ -3,7 +3,6 @@ extends HeroUpgrade
 
 @export var _dodge_increases: Array[float]
 @export var _chicken_inheritances: Array[float]
-@export var _rarity: Card.Rarity = Card.Rarity.COMMON
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var dodge_increase: float = _dodge_increases[card_lvl - 1]

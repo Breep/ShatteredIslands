@@ -16,6 +16,7 @@ class ActionModifiersDictionary extends Resource:
 		if not _modifiers.has(action_modifier.id):
 			Verbose.error("unregister_modifier() - unknown action modifier | " + str(action_modifier.id), Verbose.Category.ACTION_MODIFIER)
 			return
+		_modifiers.erase(action_modifier.id)
 
 
 	func get_all_modifiers() -> Array[ActionModifier]:
@@ -46,6 +47,7 @@ func _init() -> void:
 		Utils.ActionCategory.HEAL: ActionModifiersDictionary.new(),
 		Utils.ActionCategory.DODGE: ActionModifiersDictionary.new(),
 		Utils.ActionCategory.SUMMON: ActionModifiersDictionary.new(),
+		Utils.ActionCategory.SPELL: ActionModifiersDictionary.new(),
 	}
 	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
 

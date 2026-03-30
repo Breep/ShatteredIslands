@@ -7,7 +7,8 @@
 
 [sub_resource type="Resource" id="Resource_cosmopolitan"]
 script = ExtResource("2_sub_resource")
-_bonus_damage_ratio = Array[float]([3.0, 5.0, 7.0, 9.0, 12.0])
+_ignite_stacks_multipliers = Array[float]([10.0, 15.0, 20.0, 25.0, 30.0])
+_rarity = 1
 
 [resource]
 script = ExtResource("1_script")
@@ -19,4 +20,4 @@ player_upgrade = SubResource("Resource_cosmopolitan")
 points = Dictionary[int, int]({
 3: 2
 })
-lvl = 3
+lvl = 1

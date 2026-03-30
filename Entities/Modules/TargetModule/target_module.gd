@@ -96,7 +96,9 @@ func connect_to_spawn_manager(spawn_manager: SpawnManager) -> void:
 func start() -> void:
 	Verbose.debug("TargetModule: Starting", Verbose.Category.TARGET_MODULE)
 	_spawn_manager.entity_spawned.connect(_on_spawn_manager_entity_spawned)
-	var entities: Array[Entity] = _spawn_manager.get_entities()
+	var entities: Array[Entity] = _spawn_manager.get_entities().filter(func(e):
+		return not e.invisible
+	)
 	for entity in entities:
 		_add_entity(entity)
 

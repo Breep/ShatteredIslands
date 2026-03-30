@@ -2,7 +2,6 @@ class_name ChickenShellArmor
 extends HeroUpgrade
 
 @export var _block_stacks: Array[int]
-@export var _rarity: Card.Rarity = Card.Rarity.COMMON
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var block_stack: int = _block_stacks[card_lvl - 1]
