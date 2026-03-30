@@ -29,8 +29,6 @@ var _current_rot_x: float
 var _current_rot_y: float
 
 var _is_focused: bool = false
-var _viewport: SubViewport
-var _mipmap_texture: ImageTexture
 
 # ============================== Local scene nodes ==============================
 
@@ -45,7 +43,6 @@ func update_visual(new_card: Card) -> void:
 		printerr("Can't update button visual: card is null")
 		return
 	_card_layout.update_content(new_card)
-	_request_viewport_snapshot()
 
 func remove_shader() -> void:
 	_texture_rect.material = null
@@ -55,9 +52,6 @@ func remove_shader() -> void:
 func _ready() -> void:
 	if _texture_rect.material != null:
 		_texture_rect.material = _texture_rect.material.duplicate() # Make the material unique
-	_viewport = _texture_rect.get_node("SubViewport") as SubViewport
-	if _viewport:
-		_viewport.render_target_update_mode = SubViewport.UPDATE_DISABLED
 
 
 func _process(delta: float) -> void:
@@ -101,23 +95,6 @@ func _animation_reset_3d_rotation() -> void:
 	if _texture_rect.material == null: return
 	_target_rot_x = 0.0
 	_target_rot_y = 0.0
-
-
-func _request_viewport_snapshot() -> void:
-	if _viewport == null:
-		return
-	# Render one frame then capture as ImageTexture with mipmaps
-	_viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
-	# Wait two frames: one for the viewport to render, one to be sure it's ready
-	await get_tree().process_frame
-	await get_tree().process_frame
-	var image: Image = _viewport.get_texture().get_image()
-	image.generate_mipmaps()
-	if _mipmap_texture == null:
-		_mipmap_texture = ImageTexture.create_from_image(image)
-	else:
-		_mipmap_texture.update(image)
-	_texture_rect.texture = _mipmap_texture
 
 
 func _on_gui_input(event: InputEvent) -> void:

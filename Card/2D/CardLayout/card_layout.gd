@@ -7,6 +7,7 @@ extends Control
 
 @export_group("Families")
 @onready var _family_icon: TextureRect = %FamilyIcon
+@export var _family_background: ColorRect
 
 @export_group("Level markers")
 @export var level1_texture: Texture2D
@@ -47,7 +48,8 @@ func _update_card_layout(card: Card) -> void:
 	
 	
 	_family_icon.texture = Shared.FAMILIES[card.families[0]].icon
-	
+	_update_family_background(card)
+
 	for i in 5:
 		_level_icons[i].hide()
 	
@@ -60,3 +62,24 @@ func _update_card_layout(card: Card) -> void:
 			4: _level_icons[i].texture = level4_texture
 			5: _level_icons[i].texture = level5_texture
 			_: _level_icons[i].texture = level1_texture
+
+
+func _update_family_background(card: Card) -> void:
+	if _family_background == null or _family_background.material == null:
+		return
+	var mat: ShaderMaterial = _family_background.material as ShaderMaterial
+	if mat == null:
+		return
+
+	var primary_family: Family = Shared.FAMILIES[card.families[0]]
+	mat.set_shader_parameter("base_color", primary_family.color)
+
+	if card.families.size() >= 3:
+		mat.set_shader_parameter("color_count", 3)
+		mat.set_shader_parameter("override_color2", Shared.FAMILIES[card.families[1]].color)
+		mat.set_shader_parameter("override_color3", Shared.FAMILIES[card.families[2]].color)
+	elif card.families.size() == 2:
+		mat.set_shader_parameter("color_count", 2)
+		mat.set_shader_parameter("override_color2", Shared.FAMILIES[card.families[1]].color)
+	else:
+		mat.set_shader_parameter("color_count", 1)
