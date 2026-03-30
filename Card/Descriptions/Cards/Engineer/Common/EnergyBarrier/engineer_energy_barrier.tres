@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_w1q6s"]
 script = ExtResource("2_rfirt")
-_shield_amount = Array[float]([20.0, 40.0, 60.0, 80.0, 120.0])
+_shield_amount = Array[float]([5.0, 10.0, 15.0, 20.0, 30.0])
 _period = Array[float]([2.0, 2.0, 2.0, 2.0, 2.0])
 metadata/_custom_type_script = "uid://ldmia5mvuk4x"
 

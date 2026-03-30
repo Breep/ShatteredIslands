@@ -12,9 +12,9 @@ _base_chance = Array[float]([7.0, 14.0, 21.0, 28.0, 35.0])
 script = ExtResource("3_sak73")
 name = "Absorption Matrix"
 picture = ExtResource("1_hof0e")
-families = Array[int]([2])
+families = Array[int]([])
 player_upgrade = SubResource("Resource_xwdjj")
 points = Dictionary[int, int]({
-2: 2
+
 })
 lvl = 3

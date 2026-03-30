@@ -12,10 +12,9 @@ _base_max_hp_percent_bonus = Array[float]([7.0, 8.0, 9.0, 10.0, 11.0])
 script = ExtResource("1_template")
 name = "Eye of the Cyclone"
 picture = ExtResource("1_wnj5j")
-families = Array[int]([4, 6])
+families = Array[int]([4])
 player_upgrade = SubResource("Resource_upgrade")
 points = Dictionary[int, int]({
-4: 1,
-6: 1
+4: 1
 })
 lvl = 5
