@@ -559,6 +559,7 @@ _data = {
 }
 
 [node name="VFX_meteorhit" type="Node3D" unique_id=1586733221]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 
 [node name="Wave33" type="GPUParticles3D" parent="." unique_id=2001566122]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 1.33391)
@@ -575,7 +576,7 @@ process_material = SubResource("ParticleProcessMaterial_r2q4s")
 draw_pass_1 = ExtResource("3_yphr5")
 
 [node name="sparks" type="GPUParticles3D" parent="." unique_id=1715412241]
-transform = Transform3D(0.7610743, -0.6480857, -0.027400784, 0, 0.04224183, -0.9991074, 0.6486647, 0.760395, 0.032149173, 0, 0, -0.3327365)
+transform = Transform3D(0.34533224, -0.9135151, 0.21502563, 0.48817807, -0.020826437, -0.87249553, 0.801516, 0.4062716, 0.438766, 0, 0, -0.3327365)
 material_override = SubResource("ShaderMaterial_uqqoy")
 cast_shadow = 0
 emitting = false
@@ -603,6 +604,7 @@ draw_pass_1 = SubResource("QuadMesh_2d0ax")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=976719810]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.263597)
+visible = false
 light_color = Color(0.392157, 0.803922, 1, 1)
 light_energy = 0.0
 
