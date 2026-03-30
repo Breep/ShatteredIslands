@@ -1,7 +1,17 @@
 [gd_scene format=3 uid="uid://cmstx61h3h6ar"]
 
 [ext_resource type="Script" uid="uid://cc7c0q2xebkyp" path="res://UI/InGame/BuyingArea/ui_buying_area.gd" id="1_5o5p6"]
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="3_aa7du"]
 [ext_resource type="PackedScene" uid="uid://d1oxnd1g75rqh" path="res://UI/InGame/BuyingArea/CardShop/ui_card_shop.tscn" id="4_dsp03"]
+[ext_resource type="Script" uid="uid://dqsbil04m2fyg" path="res://UI/Menu/MainMenu/text_button.gd" id="4_rhml4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_umbep"]
+bg_color = Color(0.5211406, 0.52114064, 0.52114046, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.1799694, 0.1500737, 0.18862677, 1)
 
 [node name="UIBuyingArea" type="Control" unique_id=511739105]
 layout_mode = 3
@@ -67,7 +77,6 @@ offset_bottom = 103.0
 grow_vertical = 0
 scale = Vector2(1.5, 1.5)
 pivot_offset = Vector2(350, 500)
-mouse_filter = 0
 
 [node name="RightPanel" type="Control" parent="VBoxContainer/MiddlePanel/HBoxContainer" unique_id=706755013]
 layout_mode = 2
@@ -118,5 +127,26 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
 mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="." unique_id=1919988201]
+layout_mode = 0
+offset_left = 1415.0
+offset_top = 75.0
+offset_right = 1610.0
+offset_bottom = 112.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_umbep")
+
+[node name="EndBuyingPhaseButton" type="Button" parent="Panel" unique_id=896548446]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_aa7du")
+text = "End Buying Phase"
+script = ExtResource("4_rhml4")
+metadata/_custom_type_script = "uid://dqsbil04m2fyg"
+metadata/_edit_lock_ = true
 
 [connection signal="mouse_entered" from="VBoxContainer/MiddlePanel/HBoxContainer/MiddlePanel/CardShop" to="." method="_on_card_shop_mouse_entered"]
