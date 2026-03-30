@@ -284,10 +284,12 @@ func _ready() -> void:
 		_original_fighting_state = fighting_state if fighting_state != FightingState.UNDEF else FightingState.IDLE
 	
 	input_event.connect(_on_input_event)
-	
+	mouse_entered.connect(_on_mouse_entered)
+	mouse_exited.connect(_on_mouse_exited)
+
 	# Connect module interdependencies
 	_connect_module_dependencies()
-	
+
 	_start_spawn()
 
 
@@ -660,9 +662,10 @@ func _on_stunned(_is_active: bool) -> void:
 func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
-			Events.entity_cliked.emit(self )
+			Events.entity_cliked.emit(self)
 			Verbose.debug("L'entité " + entity_name + " a été cliquée !", Verbose.Category.ENTITY)
 			_play_on_click_animation()
+			_play_click_marker_animation()
 
 
 var _click_tween: Tween
@@ -673,3 +676,55 @@ func _play_on_click_animation() -> void:
 	_click_tween.set_trans(Tween.TRANS_BACK)
 	_click_tween.tween_property(_visual_3d, "scale", Vector3(1.2, 1.2, 1.2), 0.1)
 	_click_tween.tween_property(_visual_3d, "scale", Vector3.ONE, 0.1)
+
+
+static var _selection_marker_scene: PackedScene = preload("res://Entities/Misc/selection_marker.tscn")
+var _selection_marker_instance: Node3D = null
+var _is_selected: bool = false
+var _is_hovered: bool = false
+
+
+func _ensure_selection_marker() -> Node3D:
+	if _selection_marker_instance == null:
+		_selection_marker_instance = _selection_marker_scene.instantiate()
+		add_child(_selection_marker_instance)
+	return _selection_marker_instance
+
+
+func _remove_selection_marker() -> void:
+	if _selection_marker_instance != null:
+		_selection_marker_instance.queue_free()
+		_selection_marker_instance = null
+
+
+func _update_selection_marker() -> void:
+	if _is_selected:
+		_ensure_selection_marker().show_selected()
+	elif _is_hovered:
+		_ensure_selection_marker().show_hover()
+	else:
+		_remove_selection_marker()
+
+
+func _play_click_marker_animation() -> void:
+	_ensure_selection_marker().play_click(_update_selection_marker)
+
+
+func select() -> void:
+	_is_selected = true
+	_update_selection_marker()
+
+
+func deselect() -> void:
+	_is_selected = false
+	_update_selection_marker()
+
+
+func _on_mouse_entered() -> void:
+	_is_hovered = true
+	_update_selection_marker()
+
+
+func _on_mouse_exited() -> void:
+	_is_hovered = false
+	_update_selection_marker()

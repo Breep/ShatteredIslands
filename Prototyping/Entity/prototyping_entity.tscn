@@ -254,10 +254,11 @@ entity_owner = NodePath("../Entities/DarkKnight1")
 spawn_summon_localizer = NodePath("../SpawnLocaliser")
 
 [node name="SpawnLocaliser" type="StaticBody3D" parent="." unique_id=2103681594]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.533583, 0, 11.42654)
 collision_layer = 64
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SpawnLocaliser" unique_id=2131096925]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5057838, 0)
 mesh = SubResource("CylinderMesh_m73qc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnLocaliser" unique_id=1026829353]
@@ -274,28 +275,51 @@ _owner = NodePath("..")
 [node name="TestingFloorFFA5" parent="." unique_id=283551194 instance=ExtResource("11_5hdqt")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 
-[node name="MeshInstance3D" parent="TestingFloorFFA5/FloorArea" parent_id_path=PackedInt32Array(283551194, 2121644269) index="1" unique_id=1440029104]
+[node name="FloorArea" parent="TestingFloorFFA5" index="0" unique_id=2121644269]
+input_ray_pickable = false
+
+[node name="MeshInstance3D" parent="TestingFloorFFA5/FloorArea" index="1" unique_id=1440029104]
 visible = false
 
 [node name="MeshInstance3D" parent="TestingFloorFFA5/CenterArea" parent_id_path=PackedInt32Array(283551194, 987179195) index="1" unique_id=409198330]
 visible = false
 
-[node name="MeshInstance3D" parent="TestingFloorFFA5/CenterNode3D/Center1/Team1Area" parent_id_path=PackedInt32Array(283551194, 155190666) index="1" unique_id=1030576179]
+[node name="Team1Area" parent="TestingFloorFFA5/CenterNode3D/Center1" parent_id_path=PackedInt32Array(283551194, 337183783) index="0" unique_id=155190666]
+input_ray_pickable = false
+monitorable = false
+
+[node name="MeshInstance3D" parent="TestingFloorFFA5/CenterNode3D/Center1/Team1Area" index="1" unique_id=1030576179]
 visible = false
 
-[node name="SpawnPoint1" parent="TestingFloorFFA5/CenterNode3D/Center1/Team1Area" parent_id_path=PackedInt32Array(283551194, 155190666) index="2" unique_id=933717393]
+[node name="SpawnPoint1" parent="TestingFloorFFA5/CenterNode3D/Center1/Team1Area" index="2" unique_id=933717393]
 visible = false
 
-[node name="MeshInstance3D" parent="TestingFloorFFA5/CenterNode3D/Center2/Team2Area" parent_id_path=PackedInt32Array(283551194, 1034680613) index="1" unique_id=826441766]
+[node name="Team2Area" parent="TestingFloorFFA5/CenterNode3D/Center2" parent_id_path=PackedInt32Array(283551194, 1639903339) index="0" unique_id=1034680613]
+input_ray_pickable = false
+monitorable = false
+
+[node name="MeshInstance3D" parent="TestingFloorFFA5/CenterNode3D/Center2/Team2Area" index="1" unique_id=826441766]
 visible = false
 
-[node name="MeshInstance3D" parent="TestingFloorFFA5/CenterNode3D/Center3/Team3Area" parent_id_path=PackedInt32Array(283551194, 1349800311) index="1" unique_id=1581609339]
+[node name="Team3Area" parent="TestingFloorFFA5/CenterNode3D/Center3" parent_id_path=PackedInt32Array(283551194, 1191788827) index="0" unique_id=1349800311]
+input_ray_pickable = false
+monitorable = false
+
+[node name="MeshInstance3D" parent="TestingFloorFFA5/CenterNode3D/Center3/Team3Area" index="1" unique_id=1581609339]
 visible = false
 
-[node name="MeshInstance3D" parent="TestingFloorFFA5/CenterNode3D/Center4/Team4Area" parent_id_path=PackedInt32Array(283551194, 2088771533) index="1" unique_id=2064288510]
+[node name="Team4Area" parent="TestingFloorFFA5/CenterNode3D/Center4" parent_id_path=PackedInt32Array(283551194, 1749071442) index="0" unique_id=2088771533]
+input_ray_pickable = false
+monitorable = false
+
+[node name="MeshInstance3D" parent="TestingFloorFFA5/CenterNode3D/Center4/Team4Area" index="1" unique_id=2064288510]
 visible = false
 
-[node name="MeshInstance3D" parent="TestingFloorFFA5/CenterNode3D/Center5/Team5Area" parent_id_path=PackedInt32Array(283551194, 2136403487) index="1" unique_id=1937256180]
+[node name="Team5Area" parent="TestingFloorFFA5/CenterNode3D/Center5" parent_id_path=PackedInt32Array(283551194, 853946546) index="0" unique_id=2136403487]
+input_ray_pickable = false
+monitorable = false
+
+[node name="MeshInstance3D" parent="TestingFloorFFA5/CenterNode3D/Center5/Team5Area" index="1" unique_id=1937256180]
 visible = false
 
 [node name="FightingManager" parent="." unique_id=1380390082 instance=ExtResource("17_m26y3")]

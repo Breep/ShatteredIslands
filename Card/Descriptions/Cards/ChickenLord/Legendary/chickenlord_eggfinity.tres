@@ -15,6 +15,7 @@ metadata/_custom_type_script = "uid://cj6d7anfu5qqr"
 script = ExtResource("1_iosrr")
 name = "Eggfinity"
 picture = SubResource("PlaceholderTexture2D_ftuci")
+families = Array[int]([8])
 rarity = 3
 player_upgrade = SubResource("Resource_mhg1k")
 points = Dictionary[int, int]({

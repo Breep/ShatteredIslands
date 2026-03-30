@@ -88,3 +88,15 @@ func _on_auto_attack_check_button_toggled(toggled_on: bool) -> void:
 
 func _on_family_managers_check_button_toggled(toggled_on: bool) -> void:
 	_family_managers_enabled = toggled_on
+
+
+
+
+
+
+
+
+
+
+
+ 
