@@ -2,7 +2,6 @@ class_name ChickenAssistantChicken
 extends HeroUpgrade
 
 @export var _shield_amounts: Array[float]
-@export var _rarity: Card.Rarity = Card.Rarity.COMMON
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var shield_amount: float = _shield_amounts[card_lvl - 1]

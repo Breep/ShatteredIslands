@@ -91,6 +91,7 @@ script = ExtResource("4_vr4pg")
 metadata/_custom_type_script = "uid://dq0ub1oemlk0p"
 
 [node name="PlayerPortrait" type="Control" unique_id=1543970093 node_paths=PackedStringArray("_player_name_label", "_hero_portrait_button", "_player_illustration_portrait", "_player_health_bar")]
+texture_filter = 4
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 3
 anchors_preset = 0

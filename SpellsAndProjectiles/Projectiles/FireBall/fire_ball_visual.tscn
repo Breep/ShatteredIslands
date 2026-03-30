@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://c4gxspaieuwn6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o6ghg"]
+albedo_color = Color(2.055, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_jbrsk"]
+material = SubResource("StandardMaterial3D_o6ghg")
+
+[node name="FireBallVisual" type="Node3D" unique_id=1240587765]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=626988135]
+mesh = SubResource("SphereMesh_jbrsk")

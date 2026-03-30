@@ -13,6 +13,7 @@ metadata/_custom_type_script = "uid://10q1xen2u8l5"
 
 [resource]
 script = ExtResource("1_bocm1")
+name = "Feathered Dodge"
 picture = SubResource("PlaceholderTexture2D_k2388")
 families = Array[int]([8])
 player_upgrade = SubResource("Resource_rxtne")

@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://2vjkudyu0lpd"]
+
+[ext_resource type="Script" uid="uid://dv8w8kb4xsqp3" path="res://SpellsAndProjectiles/Projectiles/projectile.gd" id="1_bxo7m"]
+[ext_resource type="Script" uid="uid://bfsdl2usla732" path="res://SpellsAndProjectiles/Projectiles/Trajectories/zigzag_trajectory.gd" id="2_3j240"]
+[ext_resource type="PackedScene" uid="uid://c4gxspaieuwn6" path="res://SpellsAndProjectiles/Projectiles/FireBall/fire_ball_visual.tscn" id="2_lg8w6"]
+
+[sub_resource type="Resource" id="Resource_dno64"]
+script = ExtResource("2_3j240")
+metadata/_custom_type_script = "uid://bfsdl2usla732"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2a06m"]
+
+[node name="FireBallProjectile" type="Area3D" unique_id=353982824]
+script = ExtResource("1_bxo7m")
+trajectory = SubResource("Resource_dno64")
+metadata/_custom_type_script = "uid://dv8w8kb4xsqp3"
+
+[node name="FireBallVisual" parent="." unique_id=1240587765 instance=ExtResource("2_lg8w6")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2032784996]
+shape = SubResource("SphereShape3D_2a06m")

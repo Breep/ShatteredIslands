@@ -12,6 +12,7 @@ metadata/_custom_type_script = "uid://bwnfcyhagr03n"
 
 [resource]
 script = ExtResource("1_l3okk")
+name = "Assistant Chicken"
 picture = SubResource("PlaceholderTexture2D_vvwly")
 families = Array[int]([8])
 player_upgrade = SubResource("Resource_eysua")

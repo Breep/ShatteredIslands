@@ -2,8 +2,6 @@ class_name ColossusUnbreakableWall
 extends HeroUpgrade
 
 @export var _base_hp_threshold_percent: Array[float]
-@export var _rarity: Card.Rarity = Card.Rarity.COMMON
-
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	

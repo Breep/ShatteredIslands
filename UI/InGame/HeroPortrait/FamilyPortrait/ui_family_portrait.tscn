@@ -275,6 +275,7 @@ shader_parameter/FixedMask = ExtResource("10_cpxli")
 shader_parameter/MovingMask = ExtResource("14_648om")
 
 [node name="FamilyPortrait" type="Control" unique_id=1557632737]
+texture_filter = 4
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 3
 anchors_preset = 8

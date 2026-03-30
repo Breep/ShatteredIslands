@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://hbwmi3ykad2r"]
+
+[ext_resource type="Script" uid="uid://cj6d7anfu5qqr" path="res://Card/Descriptions/Cards/ChickenLord/Legendary/chickenlord_eggfinity.gd" id="1_3qmqe"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_iosrr"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ftuci"]
+
+[sub_resource type="Resource" id="Resource_mhg1k"]
+script = ExtResource("1_3qmqe")
+_egg_spawn_chances = Array[float]([20.0, 40.0, 100.0])
+_rarity = 3
+metadata/_custom_type_script = "uid://cj6d7anfu5qqr"
+
+[resource]
+script = ExtResource("1_iosrr")
+name = "Eggfinity"
+picture = SubResource("PlaceholderTexture2D_ftuci")
+families = Array[int]([8])
+rarity = 3
+player_upgrade = SubResource("Resource_mhg1k")
+points = Dictionary[int, int]({
+8: 4
+})
+lvl = 3
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

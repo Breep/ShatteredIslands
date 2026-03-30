@@ -23,12 +23,14 @@ anchor_right = 0.403646
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 script = ExtResource("1_l6wd5")
 _card_layout = NodePath("TextureRect/SubViewport/CardLayout")
 _texture_rect = NodePath("TextureRect")
 metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=426674366 node_paths=PackedStringArray("viewport")]
+texture_filter = 4
 material = SubResource("ShaderMaterial_23gh2")
 layout_mode = 1
 anchors_preset = 15
@@ -46,6 +48,8 @@ rotation_strength = -0.1
 
 [node name="SubViewport" type="SubViewport" parent="TextureRect" unique_id=2076503836]
 transparent_bg = true
+msaa_2d = 3
+screen_space_aa = 2
 size = Vector2i(1260, 1760)
 
 [node name="CardLayout" parent="TextureRect/SubViewport" unique_id=1926267675 instance=ExtResource("3_cgxxr")]

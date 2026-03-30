@@ -813,4 +813,7 @@ func _on_inflict_status_button_pressed() -> void:
 
 
 func _on_entity_clicked(entity: Entity) -> void:
+	if is_instance_valid(entity_owner):
+		entity_owner.deselect()
 	entity_owner = entity
+	entity_owner.select()
