@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://odtrh6khih2s" path="res://Card/2D/CardLayout/Data/StandardCard/Stars/ct_level_star_5.png" id="18_7ajba"]
 [ext_resource type="Texture2D" uid="uid://bp08djuu2g0pr" path="res://Card/2D/CardLayout/Data/StandardCard/ct_level_flag.png" id="18_p8v2y"]
 [ext_resource type="Texture2D" uid="uid://ifaj1br6koel" path="res://Card/2D/CardLayout/Data/StandardCard/ct_family_frame.png" id="19_7ajba"]
+[ext_resource type="Shader" uid="uid://bquiydhxqegb5" path="res://Card/2D/CardLayout/Data/Shaders/curve_text.gdshader" id="21_xw5tp"]
 
 [sub_resource type="Shader" id="Shader_78cks"]
 resource_name = "VFEZ2DPreview"
@@ -180,6 +181,12 @@ shader_parameter/use_alpha_flicker = false
 shader_parameter/use_particle_anim = false
 script = ExtResource("5_m3odx")
 metadata/_custom_type_script = "uid://dq0ub1oemlk0p"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n6ysl"]
+shader = ExtResource("21_xw5tp")
+shader_parameter/height = 35.0
+shader_parameter/frequency = 0.006
+shader_parameter/phase_shift = -7.705
 
 [node name="CardLayout" type="Control" unique_id=591018748 node_paths=PackedStringArray("_level_icons")]
 texture_filter = 4
@@ -380,7 +387,8 @@ offset_bottom = 1607.0
 size_flags_vertical = 3
 theme_override_constants/outline_size = 15
 theme_override_fonts/normal_font = ExtResource("13_p31bt")
-theme_override_font_sizes/normal_font_size = 65
+theme_override_font_sizes/normal_font_size = 55
+bbcode_enabled = true
 text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -388,17 +396,20 @@ script = ExtResource("11_pjbj4")
 text_raw = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor [[POISON_STACK]] incididunt ut labore et dolore magna aliqua. "
 metadata/_custom_type_script = "uid://bd3srw4twda5w"
 
-[node name="CardNameLabel" type="Label" parent="." unique_id=1886982934]
+[node name="CardNameLabel" type="RichTextLabel" parent="." unique_id=1772418857]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_n6ysl")
 layout_mode = 0
-offset_left = 382.0
-offset_top = 1039.0
-offset_right = 868.0
+offset_left = 94.0
+offset_top = 1016.0
+offset_right = 1168.0
 offset_bottom = 1255.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
-theme_override_constants/outline_size = 50
-theme_override_font_sizes/font_size = 90
-text = "<Card name>"
+theme_override_colors/font_outline_color = Color(0.16964537, 0.14858335, 0.19024685, 1)
+theme_override_constants/outline_size = 30
+theme_override_font_sizes/normal_font_size = 80
+bbcode_enabled = true
+text = "THIS TITLE IS NOT A TITLE"
 horizontal_alignment = 1
 vertical_alignment = 1
