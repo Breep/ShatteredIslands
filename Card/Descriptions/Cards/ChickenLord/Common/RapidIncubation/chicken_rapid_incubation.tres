@@ -7,7 +7,7 @@
 
 [sub_resource type="Resource" id="Resource_hdyv2"]
 script = ExtResource("1_85tsq")
-_timer_decrease = Array[float]([3.0])
+_timer_decrease = Array[float]([0.2, 0.4, 0.6, 0.8, 1.2])
 metadata/_custom_type_script = "uid://bhg0e2wufqq23"
 
 [resource]
