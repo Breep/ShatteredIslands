@@ -50,6 +50,13 @@ void vertex(){
 void fragment(){
 	if (cull_back && p.z <= 0.0) discard;
 	vec2 uv = (p.xy / p.z).xy - o;
-    COLOR = texture(TEXTURE, uv + 0.5);
+
+	// Compute screen-space derivatives of the projected UVs
+	// so the GPU can pick the correct mip / apply anisotropic filtering.
+	vec2 uv_screen = uv + 0.5;
+	vec2 ddx = dFdx(uv_screen);
+	vec2 ddy = dFdy(uv_screen);
+	COLOR = textureGrad(TEXTURE, uv_screen, ddx, ddy);
+
 	COLOR.a *= step(max(abs(uv.x), abs(uv.y)), 0.5);
 }

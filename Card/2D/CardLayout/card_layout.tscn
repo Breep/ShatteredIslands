@@ -239,12 +239,6 @@ offset_right = 1260.0
 offset_bottom = 1760.0
 texture = ExtResource("16_n6ysl")
 
-[node name="CardTitleBanner" type="TextureRect" parent="." unique_id=1589146951]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("17_ejxcv")
-
 [node name="CardLevelFlag" type="TextureRect" parent="." unique_id=1259894765]
 layout_mode = 0
 offset_right = 40.0
@@ -278,6 +272,16 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("19_7ajba")
 metadata/_edit_lock_ = true
+
+[node name="CardTitleBanner" type="TextureRect" parent="." unique_id=1589146951]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("17_ejxcv")
+expand_mode = 1
 
 [node name="CurrentLevelContainer" type="Control" parent="." unique_id=1699933895]
 unique_name_in_owner = true
