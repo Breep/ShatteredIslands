@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://c177mpfa0ym1f"]
+
+[ext_resource type="PackedScene" uid="uid://c2psjj8133op3" path="res://Card/2D/CardButton/card_button.tscn" id="1_cpxnc"]
+
+[node name="PrototypingCard" type="Control" unique_id=1969856814]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CardButton" parent="." unique_id=1390086147 instance=ExtResource("1_cpxnc")]
+layout_mode = 1
+anchor_left = -0.20364584
+anchor_top = -0.4888889
+anchor_right = 0.20000015
+anchor_bottom = 0.51111114
+offset_left = 962.0
+offset_top = 514.0
+offset_right = 961.99994
+offset_bottom = 514.0
