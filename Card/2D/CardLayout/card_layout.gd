@@ -26,6 +26,15 @@ const LEVEL_COLOR := Color.GOLDENROD
 
 var _card: Card
 
+var _family_background_material: ShaderMaterial
+
+func _ready() -> void:
+	if _family_background == null or _family_background.material == null:
+		Verbose.error("No shader found for family background", Verbose.Category.CARD)
+		return
+	_family_background.material = _family_background.material.duplicate()
+	_family_background_material = _family_background.material as ShaderMaterial
+
 # ============================== Public functions ==============================
 
 func update_content(card: Card) -> void:
@@ -65,21 +74,15 @@ func _update_card_layout(card: Card) -> void:
 
 
 func _update_family_background(card: Card) -> void:
-	if _family_background == null or _family_background.material == null:
-		return
-	var mat: ShaderMaterial = _family_background.material as ShaderMaterial
-	if mat == null:
-		return
-
 	var primary_family: Family = Shared.FAMILIES[card.families[0]]
-	mat.set_shader_parameter("base_color", primary_family.color)
+	_family_background_material.set_shader_parameter("base_color", primary_family.color)
 
 	if card.families.size() >= 3:
-		mat.set_shader_parameter("color_count", 3)
-		mat.set_shader_parameter("override_color2", Shared.FAMILIES[card.families[1]].color)
-		mat.set_shader_parameter("override_color3", Shared.FAMILIES[card.families[2]].color)
+		_family_background_material.set_shader_parameter("color_count", 3)
+		_family_background_material.set_shader_parameter("override_color2", Shared.FAMILIES[card.families[1]].color)
+		_family_background_material.set_shader_parameter("override_color3", Shared.FAMILIES[card.families[2]].color)
 	elif card.families.size() == 2:
-		mat.set_shader_parameter("color_count", 2)
-		mat.set_shader_parameter("override_color2", Shared.FAMILIES[card.families[1]].color)
+		_family_background_material.set_shader_parameter("color_count", 2)
+		_family_background_material.set_shader_parameter("override_color2", Shared.FAMILIES[card.families[1]].color)
 	else:
-		mat.set_shader_parameter("color_count", 1)
+		_family_background_material.set_shader_parameter("color_count", 1)
