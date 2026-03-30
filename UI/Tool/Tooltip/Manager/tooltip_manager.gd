@@ -77,40 +77,42 @@ extends Node
 	"DODGE":             "[color=%s][url=DODGE]dodge[/url][/color]"                         % THEME.color_html("STAT_COLOR"),
 	"DEFENCE":           "[color=%s][url=DEFENCE]defence[/url][/color]"                     % THEME.color_html("DEFENCE_COLOR"),
 	"POISON_RESISTANCE": "[color=%s][url=POISON_RESISTANCE]poison resistance[/url][/color]" % THEME.color_html("POISON_COLOR"),
+	"SCALE":             "[color=%s][url=SCALE]scale[/url][/color]"                         % THEME.color_html("SCALE"),
 
 	# --- STATS OFFENSIVES ---
-	"WARRIOR":          "[color=%s][url=WARRIOR]attack[/url][/color]"                   % THEME.color_html("ATTACK_COLOR"),
+	"WARRIOR":         "[color=%s][url=WARRIOR]attack[/url][/color]"                  % THEME.color_html("ATTACK_COLOR"),
 	"CRIT_CHANCE":     "[color=%s][url=CRIT_CHANCE]crit chance[/url][/color]"         % THEME.color_html("STAT_COLOR"),
 	"CRIT_MULTIPLIER": "[color=%s][url=CRIT_MULTIPLIER]crit multiplier[/url][/color]" % THEME.color_html("STAT_COLOR"),
 
 	# --- STACKS ---
 	"POISON_STACK": "[color=%s][url=POISON_STACK]poison stack[/url][/color]" % THEME.color_html("POISON_COLOR"),
-	"IGNITE": "[color=%s][url=IGNITE]ignite[/url][/color]" % THEME.color_html("FIRE_COLOR"),
+	"IGNITE":       "[color=%s][url=IGNITE]ignite[/url][/color]"             % THEME.color_html("FIRE_COLOR"),
 	"NECROSIS":     "[color=%s][url=NECROSIS]necrosis[/url][/color]"         % THEME.color_html("NECRO_COLOR"),
-	"REGEN":        "[color=%s][url=REGEN]regen[/url][/color]"        % THEME.color_html("REGEN_COLOR"),
-	"SHIELD":            "[color=%s][url=SHIELD]shield[/url][/color]"                       % THEME.color_html("SHIELD_COLOR"),
+	"REGEN":        "[color=%s][url=REGEN]regen[/url][/color]"               % THEME.color_html("REGEN_COLOR"),
+	"SHIELD":       "[color=%s][url=SHIELD]shield[/url][/color]"             % THEME.color_html("SHIELD_COLOR"),
 
 	# --- EFFETS / STATUS ---
 	"STUN":          "[color=%s][url=STUN]stun[/url][/color]"                   % THEME.color_html("STAT_COLOR"),
 	"WEAKNESS":      "[color=%s][url=WEAKNESS]weakness[/url][/color]"           % THEME.color_html("DEBUFF_COLOR"),
-	"STRENGTH":        "[color=%s][url=STRENGTH]strength[/url][/color]"               % THEME.color_html("DEBUFF_COLOR"),
+	"STRENGTH":      "[color=%s][url=STRENGTH]strength[/url][/color]"           % THEME.color_html("DEBUFF_COLOR"),
 	"VULNERABILITY": "[color=%s][url=VULNERABILITY]vulnerability[/url][/color]" % THEME.color_html("DEBUFF_COLOR"),
 	"CLEANSE":       "[color=%s][url=CLEANSE]cleanse[/url][/color]"             % THEME.color_html("SERENITY_COLOR"),
 	"DISPELL":       "[color=%s][url=DISPELL]dispell[/url][/color]"             % THEME.color_html("DISPELL_COLOR"),
-	"EXECUTE": "[color=%s][url=EXECUTE]execute[/url][/color]" % THEME.color_html("FIRE_COLOR"),
+	"EXECUTE":       "[color=%s][url=EXECUTE]execute[/url][/color]"             % THEME.color_html("FIRE_COLOR"),
 
 	# --- FAMILLE / PASSIV ---
 	"METEOR":       "[color=%s][url=METEOR]meteor[/url][/color]"             % THEME.color_html("METEOR_COLOR"),
 	"RANK":         "[color=%s][url=RANK]rank[/url][/color]"                 % THEME.color_html("LIGHTNING_COLOR"),
 	"SUMMON":       "[color=%s][url=SUMMON]summon[/url][/color]"             % THEME.color_html("NECRO_COLOR"),
 	"LIGHTNING":    "[color=%s][url=LIGHTNING]lightning[/url][/color]"       % THEME.color_html("LIGHTNING_COLOR"),
-	"LIGHT":     "[color=%s][url=LIGHT]serenity[/url][/color]"         % THEME.color_html("SERENITY_COLOR"),
+	"LIGHT":        "[color=%s][url=LIGHT]serenity[/url][/color]"            % THEME.color_html("SERENITY_COLOR"),
 	"CHICKEN_LORD": "[color=%s][url=CHICKEN_LORD]chicken-lord[/url][/color]" % THEME.color_html("CHICKEN_COLOR"),
-	"COLOSSUS":         "[color=%s][url=COLOSSUS]life[/url][/color]"                 % THEME.color_html("LIFE_COLOR"),
+	"COLOSSUS":     "[color=%s][url=COLOSSUS]life[/url][/color]"             % THEME.color_html("LIFE_COLOR"),
 	"NECRO":        "[color=%s][url=NECRO]necro[/url][/color]"               % THEME.color_html("NECRO_COLOR"),
 
 	# --- AUTRE ---
-	"COOLDOWN":  "[color=%s][url=COOLDOWN]cooldown[/url][/color]"    % THEME.color_html("STAT_COLOR")
+	"COOLDOWN": "[color=%s][url=COOLDOWN]cooldown[/url][/color]"    % THEME.color_html("STAT_COLOR"),
+	"MANA":     "[color=%s][url=MANA]mana[/url][/color]"            % THEME.color_html("MANA_COLOR")
 }
 
 var _all_scene_tooltips: Array[Tooltip] 
