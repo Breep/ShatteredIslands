@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d1oxnd1g75rqh"]
+[gd_scene format=3 uid="uid://d1oxnd1g75rqh"]
 
 [ext_resource type="Script" uid="uid://8tub4ube48p7" path="res://UI/InGame/BuyingArea/CardShop/ui_card_shop.gd" id="1_xu7re"]
 [ext_resource type="Texture2D" uid="uid://bbcbah5ifbsrw" path="res://UI/_Themes/Data/coin.png" id="3_1gnrk"]
@@ -12,7 +12,7 @@ light_mode = 1
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1gnrk"]
 
-[node name="UICardShop" type="Control" node_paths=PackedStringArray("_card_buttons")]
+[node name="UICardShop" type="Control" unique_id=1062653338 node_paths=PackedStringArray("_card_buttons")]
 custom_minimum_size = Vector2(700, 500)
 layout_mode = 3
 anchors_preset = 8
@@ -31,7 +31,7 @@ theme = ExtResource("5_ahun0")
 script = ExtResource("1_xu7re")
 _card_buttons = [NodePath("MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer/CardButton"), NodePath("MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer2/CardButton"), NodePath("MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer3/CardButton")]
 
-[node name="MainPanel" type="Control" parent="."]
+[node name="MainPanel" type="Control" parent="." unique_id=1644505787]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -41,7 +41,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_type_variation = &"card"
 
-[node name="MarginContainer" type="MarginContainer" parent="MainPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="MainPanel" unique_id=2136260149]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -54,11 +54,11 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/MarginContainer" unique_id=880791962]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="CardContainer" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer"]
+[node name="CardContainer" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer" unique_id=68883933]
 material = SubResource("CanvasItemMaterial_xt3ho")
 layout_mode = 2
 size_flags_vertical = 3
@@ -66,18 +66,18 @@ size_flags_stretch_ratio = 0.8
 mouse_filter = 2
 theme_override_constants/separation = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer" unique_id=1025790872]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="BuyCardControl" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer"]
+[node name="BuyCardControl" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer" unique_id=342300878]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer/BuyCardControl"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer/BuyCardControl" unique_id=346513619]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -92,37 +92,37 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="BuyCardPriceLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer/BuyCardControl/HBoxContainer"]
+[node name="BuyCardPriceLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer/BuyCardControl/HBoxContainer" unique_id=59140420]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "100"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer/BuyCardControl/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer/BuyCardControl/HBoxContainer" unique_id=2063502919]
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("3_1gnrk")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="CardButton" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer" instance=ExtResource("4_37vaa")]
+[node name="CardButton" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer" unique_id=954174150 instance=ExtResource("4_37vaa")]
 custom_minimum_size = Vector2(200, 265)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer" unique_id=1244962155]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="BuyCardControl" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer2"]
+[node name="BuyCardControl" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer2" unique_id=638955420]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer2/BuyCardControl"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer2/BuyCardControl" unique_id=73238733]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -137,38 +137,38 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="BuyCardPriceLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer2/BuyCardControl/HBoxContainer"]
+[node name="BuyCardPriceLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer2/BuyCardControl/HBoxContainer" unique_id=1083963813]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "100"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer2/BuyCardControl/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer2/BuyCardControl/HBoxContainer" unique_id=1923635330]
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("3_1gnrk")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="CardButton" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer2" instance=ExtResource("4_37vaa")]
+[node name="CardButton" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer2" unique_id=502497574 instance=ExtResource("4_37vaa")]
 custom_minimum_size = Vector2(200, 265)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer" unique_id=1405090374]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="BuyCardControl" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer3"]
+[node name="BuyCardControl" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer3" unique_id=1971998630]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer3/BuyCardControl"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer3/BuyCardControl" unique_id=129394533]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -183,27 +183,27 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="BuyCardPriceLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer3/BuyCardControl/HBoxContainer"]
+[node name="BuyCardPriceLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer3/BuyCardControl/HBoxContainer" unique_id=1306474709]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "100"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer3/BuyCardControl/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer3/BuyCardControl/HBoxContainer" unique_id=1293312546]
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("3_1gnrk")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="CardButton" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer3" instance=ExtResource("4_37vaa")]
+[node name="CardButton" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer3" unique_id=1380592542 instance=ExtResource("4_37vaa")]
 custom_minimum_size = Vector2(200, 265)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 
-[node name="BottomRow" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer"]
+[node name="BottomRow" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer" unique_id=1854433724]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
@@ -211,7 +211,7 @@ mouse_filter = 2
 theme_override_constants/separation = 25
 alignment = 2
 
-[node name="BuyXPButton" type="Button" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow"]
+[node name="BuyXPButton" type="Button" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow" unique_id=1947954997]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -219,7 +219,7 @@ theme_override_font_sizes/font_size = 30
 theme_override_styles/focus = SubResource("StyleBoxEmpty_1gnrk")
 script = ExtResource("5_smee4")
 
-[node name="BuyXP" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXPButton"]
+[node name="BuyXP" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXPButton" unique_id=1505371667]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -229,7 +229,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXPButton/BuyXP"]
+[node name="MarginContainer" type="MarginContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXPButton/BuyXP" unique_id=452562118]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -242,11 +242,11 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Refresh" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXPButton/BuyXP/MarginContainer"]
+[node name="Refresh" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXPButton/BuyXP/MarginContainer" unique_id=853506987]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXPButton/BuyXP/MarginContainer/Refresh"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXPButton/BuyXP/MarginContainer/Refresh" unique_id=1260668647]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -256,7 +256,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="XPGainLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXPButton/BuyXP/MarginContainer/Refresh/VBoxContainer"]
+[node name="XPGainLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXPButton/BuyXP/MarginContainer/Refresh/VBoxContainer" unique_id=622797037]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -265,13 +265,13 @@ text = "+4 XP"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Price" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXPButton/BuyXP/MarginContainer/Refresh/VBoxContainer"]
+[node name="Price" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXPButton/BuyXP/MarginContainer/Refresh/VBoxContainer" unique_id=2065282708]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 alignment = 1
 
-[node name="BuyXPPriceLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXPButton/BuyXP/MarginContainer/Refresh/VBoxContainer/Price"]
+[node name="BuyXPPriceLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXPButton/BuyXP/MarginContainer/Refresh/VBoxContainer/Price" unique_id=822818808]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
@@ -279,14 +279,14 @@ text = "40"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXPButton/BuyXP/MarginContainer/Refresh/VBoxContainer/Price"]
+[node name="TextureRect" type="TextureRect" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/BuyXPButton/BuyXP/MarginContainer/Refresh/VBoxContainer/Price" unique_id=504416401]
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("3_1gnrk")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="RandomCardButton" type="Button" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow"]
+[node name="RandomCardButton" type="Button" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow" unique_id=1122589120]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
@@ -295,7 +295,7 @@ theme_override_font_sizes/font_size = 30
 theme_override_styles/focus = SubResource("StyleBoxEmpty_1gnrk")
 script = ExtResource("5_smee4")
 
-[node name="RandomCardPanel" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardButton"]
+[node name="RandomCardPanel" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardButton" unique_id=363092316]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -304,7 +304,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardButton/RandomCardPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardButton/RandomCardPanel" unique_id=2109163227]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -317,11 +317,11 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Refresh" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardButton/RandomCardPanel/MarginContainer"]
+[node name="Refresh" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardButton/RandomCardPanel/MarginContainer" unique_id=1276407886]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardButton/RandomCardPanel/MarginContainer/Refresh"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardButton/RandomCardPanel/MarginContainer/Refresh" unique_id=199035885]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -331,7 +331,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardButton/RandomCardPanel/MarginContainer/Refresh/VBoxContainer"]
+[node name="Label" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardButton/RandomCardPanel/MarginContainer/Refresh/VBoxContainer" unique_id=1067231501]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 20
@@ -339,27 +339,27 @@ text = "RANDOM"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Price" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardButton/RandomCardPanel/MarginContainer/Refresh/VBoxContainer"]
+[node name="Price" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardButton/RandomCardPanel/MarginContainer/Refresh/VBoxContainer" unique_id=101108527]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 alignment = 1
 
-[node name="RandomCardPriceLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardButton/RandomCardPanel/MarginContainer/Refresh/VBoxContainer/Price"]
+[node name="RandomCardPriceLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardButton/RandomCardPanel/MarginContainer/Refresh/VBoxContainer/Price" unique_id=436882003]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "90"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardButton/RandomCardPanel/MarginContainer/Refresh/VBoxContainer/Price"]
+[node name="TextureRect" type="TextureRect" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RandomCardButton/RandomCardPanel/MarginContainer/Refresh/VBoxContainer/Price" unique_id=1469525977]
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("3_1gnrk")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="RefreshButton" type="Button" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow"]
+[node name="RefreshButton" type="Button" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow" unique_id=1835826845]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
@@ -368,7 +368,7 @@ theme_override_font_sizes/font_size = 30
 theme_override_styles/focus = SubResource("StyleBoxEmpty_1gnrk")
 script = ExtResource("5_smee4")
 
-[node name="RefreshShopPanel" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshButton"]
+[node name="RefreshShopPanel" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshButton" unique_id=1827589577]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -377,7 +377,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshButton/RefreshShopPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshButton/RefreshShopPanel" unique_id=1929220968]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -390,11 +390,11 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Control" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshButton/RefreshShopPanel/MarginContainer"]
+[node name="Control" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshButton/RefreshShopPanel/MarginContainer" unique_id=411093190]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshButton/RefreshShopPanel/MarginContainer/Control"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshButton/RefreshShopPanel/MarginContainer/Control" unique_id=37914875]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -404,7 +404,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshButton/RefreshShopPanel/MarginContainer/Control/VBoxContainer"]
+[node name="Label" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshButton/RefreshShopPanel/MarginContainer/Control/VBoxContainer" unique_id=1802524384]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 20
@@ -412,20 +412,20 @@ text = "REFRESH"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Price" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshButton/RefreshShopPanel/MarginContainer/Control/VBoxContainer"]
+[node name="Price" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshButton/RefreshShopPanel/MarginContainer/Control/VBoxContainer" unique_id=771808733]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 alignment = 1
 
-[node name="RefreshShopPriceLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshButton/RefreshShopPanel/MarginContainer/Control/VBoxContainer/Price"]
+[node name="RefreshShopPriceLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshButton/RefreshShopPanel/MarginContainer/Control/VBoxContainer/Price" unique_id=682480065]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "20"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshButton/RefreshShopPanel/MarginContainer/Control/VBoxContainer/Price"]
+[node name="TextureRect" type="TextureRect" parent="MainPanel/MarginContainer/VBoxContainer/BottomRow/RefreshButton/RefreshShopPanel/MarginContainer/Control/VBoxContainer/Price" unique_id=1396915897]
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("3_1gnrk")
