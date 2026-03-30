@@ -15,6 +15,11 @@ extends Control
 @onready var _health_label: Label = %HealthLabel
 @onready var _shield_label: Label = %ShieldLabel
 
+@onready var _ignite_label: Label = %IgniteLabel
+@onready var _poison_label: Label = %PoisonLabel
+@onready var _necrosis_label: Label = %NecrosisLabel
+@onready var _regen_label: Label = %RegenLabel
+
 #region ============================== Node base functions ==============================
 func _ready() -> void:
 	if _health_bar and _health_bar.material:
@@ -30,10 +35,18 @@ func _ready() -> void:
 
 	_update_health_bar(stats.health, stats.health_max)
 	_update_shield_bar(conditions.shield_stacks, stats.health_max)
+	_update_stack_label(conditions.ignite_stacks, _ignite_label)
+	_update_stack_label(conditions.poison_stacks, _poison_label)
+	_update_stack_label(conditions.necrosis_stacks, _necrosis_label)
+	_update_stack_label(conditions.regen_stacks, _regen_label)
 
 	stats.health_changed.connect(_on_health_changed)
 	stats.health_max_changed.connect(_on_health_max_changed)
 	conditions.shield_stacks_changed.connect(_on_shield_changed)
+	conditions.ignite_stacks_changed.connect(_update_stack_label.bind(_ignite_label))
+	conditions.poison_stacks_changed.connect(_update_stack_label.bind(_poison_label))
+	conditions.necrosis_stacks_changed.connect(_update_stack_label.bind(_necrosis_label))
+	conditions.regen_stacks_changed.connect(_update_stack_label.bind(_regen_label))
 
 	if _debug_values != null:
 		_debug_values.visible = DebugHealthBarOverlay.is_visible()
@@ -104,6 +117,15 @@ func _update_shield_bar(armor_amount: float, max_health: float) -> void:
 			_shield_label.show()
 		else:
 			_shield_label.hide()
+
+
+func _update_stack_label(new_value: float, label: Label) -> void:
+	if label == null: return
+	if new_value > 0:
+		label.text = str(new_value).pad_decimals(0)
+		label.show()
+	else:
+		label.hide()
 
 
 func _set_health_bar_color_by_team() -> void:
