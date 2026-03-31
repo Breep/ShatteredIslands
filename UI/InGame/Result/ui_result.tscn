@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://da7u7sme0yrjw"]
+[gd_scene format=3 uid="uid://da7u7sme0yrjw"]
 
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_d6lbr"]
 [ext_resource type="Script" uid="uid://cu3cexueftpj4" path="res://UI/InGame/Result/ui_result.gd" id="2_5fo44"]
@@ -21,7 +21,7 @@ axis_stretch_vertical = 1
 [sub_resource type="Theme" id="Theme_j65bj"]
 Panel/styles/panel = SubResource("StyleBoxTexture_rp0om")
 
-[node name="UIResult" type="Control"]
+[node name="UIResult" type="Control" unique_id=1515114884]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,7 +32,7 @@ mouse_filter = 2
 theme = ExtResource("1_d6lbr")
 script = ExtResource("2_5fo44")
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=13397793]
 custom_minimum_size = Vector2(500, 300)
 layout_mode = 1
 anchors_preset = 8
@@ -46,31 +46,35 @@ offset_right = 250.0
 offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
-[node name="MainPanel" type="Panel" parent="Control"]
+[node name="MainPanel" type="Panel" parent="Control" unique_id=1116643807]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/MainPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/MainPanel" unique_id=1880013067]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/MainPanel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MainPanel/MarginContainer" unique_id=352379327]
 layout_mode = 2
+mouse_filter = 2
 
-[node name="ResultLabel" type="Label" parent="Control/MainPanel/MarginContainer/VBoxContainer"]
+[node name="ResultLabel" type="Label" parent="Control/MainPanel/MarginContainer/VBoxContainer" unique_id=1409653582]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(460, 150)
 layout_mode = 2
@@ -84,16 +88,18 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/MainPanel/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/MainPanel/MarginContainer/VBoxContainer" unique_id=2013839689]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 theme_override_constants/separation = 10
 
-[node name="ContinuePanel" type="Panel" parent="Control/MainPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="ContinuePanel" type="Panel" parent="Control/MainPanel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1069904302]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
-[node name="StayButton" type="Button" parent="Control/MainPanel/MarginContainer/VBoxContainer/HBoxContainer/ContinuePanel"]
+[node name="StayButton" type="Button" parent="Control/MainPanel/MarginContainer/VBoxContainer/HBoxContainer/ContinuePanel" unique_id=1131082843]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -106,11 +112,12 @@ theme_override_font_sizes/font_size = 30
 theme_override_styles/focus = SubResource("StyleBoxEmpty_27kkc")
 text = "STAY"
 
-[node name="LeavePanel" type="Panel" parent="Control/MainPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="LeavePanel" type="Panel" parent="Control/MainPanel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1618166461]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
-[node name="LeaveButton" type="Button" parent="Control/MainPanel/MarginContainer/VBoxContainer/HBoxContainer/LeavePanel"]
+[node name="LeaveButton" type="Button" parent="Control/MainPanel/MarginContainer/VBoxContainer/HBoxContainer/LeavePanel" unique_id=1131279503]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -123,7 +130,7 @@ theme_override_font_sizes/font_size = 30
 theme_override_styles/focus = SubResource("StyleBoxEmpty_27kkc")
 text = "MAIN MENU"
 
-[node name="TitlePanel" type="Panel" parent="Control"]
+[node name="TitlePanel" type="Panel" parent="Control" unique_id=399669026]
 custom_minimum_size = Vector2(300, 70)
 layout_mode = 1
 anchors_preset = 5
@@ -136,7 +143,7 @@ offset_bottom = 35.0
 grow_horizontal = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="Control/TitlePanel"]
+[node name="Label" type="Label" parent="Control/TitlePanel" unique_id=207504108]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -148,7 +155,7 @@ text = "RESULT"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ClosePanel" type="Panel" parent="Control"]
+[node name="ClosePanel" type="Panel" parent="Control" unique_id=1627252534]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 1
 anchors_preset = 1
@@ -161,7 +168,7 @@ offset_bottom = 45.0
 grow_horizontal = 0
 mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="Control/ClosePanel"]
+[node name="TextureRect" type="TextureRect" parent="Control/ClosePanel" unique_id=1501320047]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -179,7 +186,7 @@ texture = ExtResource("4_hguj7")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="CloseButton" type="Button" parent="Control/ClosePanel"]
+[node name="CloseButton" type="Button" parent="Control/ClosePanel" unique_id=385051010]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -189,7 +196,7 @@ grow_vertical = 2
 mouse_default_cursor_shape = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_xymv4")
 
-[node name="ConfirmPanel" type="Panel" parent="Control"]
+[node name="ConfirmPanel" type="Panel" parent="Control" unique_id=1199396325]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(200, 100)
@@ -205,8 +212,9 @@ offset_right = 100.0
 offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
-[node name="PanelBorder" type="Panel" parent="Control/ConfirmPanel"]
+[node name="PanelBorder" type="Panel" parent="Control/ConfirmPanel" unique_id=695161345]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -216,45 +224,48 @@ grow_vertical = 2
 mouse_filter = 2
 theme = SubResource("Theme_j65bj")
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/ConfirmPanel/PanelBorder"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/ConfirmPanel/PanelBorder" unique_id=2011594494]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/ConfirmPanel/PanelBorder/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/ConfirmPanel/PanelBorder/MarginContainer" unique_id=1184101789]
 layout_mode = 2
+mouse_filter = 2
 
-[node name="ConfirmLabel" type="Label" parent="Control/ConfirmPanel/PanelBorder/MarginContainer/VBoxContainer"]
+[node name="ConfirmLabel" type="Label" parent="Control/ConfirmPanel/PanelBorder/MarginContainer/VBoxContainer" unique_id=982029656]
 layout_mode = 2
 size_flags_vertical = 6
 text = "Go back to main menu ?"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/ConfirmPanel/PanelBorder/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/ConfirmPanel/PanelBorder/MarginContainer/VBoxContainer" unique_id=2125935414]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 
-[node name="YesButton" type="Button" parent="Control/ConfirmPanel/PanelBorder/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="YesButton" type="Button" parent="Control/ConfirmPanel/PanelBorder/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1619017514]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "YES"
 
-[node name="NoButton" type="Button" parent="Control/ConfirmPanel/PanelBorder/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="NoButton" type="Button" parent="Control/ConfirmPanel/PanelBorder/MarginContainer/VBoxContainer/HBoxContainer" unique_id=2121079062]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "NO"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=505299927]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -263,24 +274,24 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer" unique_id=307468268]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="PlayerPlaceLabel1" type="Label" parent="HBoxContainer/CenterContainer"]
+[node name="PlayerPlaceLabel1" type="Label" parent="HBoxContainer/CenterContainer" unique_id=71381797]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/outline_size = 40
 theme_override_font_sizes/font_size = 250
 text = "3"
 
-[node name="CenterContainer2" type="CenterContainer" parent="HBoxContainer"]
+[node name="CenterContainer2" type="CenterContainer" parent="HBoxContainer" unique_id=379596703]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="PlayerPlaceLabel2" type="Label" parent="HBoxContainer/CenterContainer2"]
+[node name="PlayerPlaceLabel2" type="Label" parent="HBoxContainer/CenterContainer2" unique_id=1216873221]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/outline_size = 40

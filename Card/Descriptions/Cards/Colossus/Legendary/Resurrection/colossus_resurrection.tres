@@ -17,6 +17,9 @@ metadata/_custom_type_script = "uid://doxm2j6oomuw"
 script = ExtResource("1_xkn16")
 picture = SubResource("PlaceholderTexture2D_kpp3c")
 families = Array[int]([6])
+points = Dictionary[int, int]({
+6: 5
+})
 rarity = 3
 player_upgrade = SubResource("Resource_4356u")
 lvl = 1

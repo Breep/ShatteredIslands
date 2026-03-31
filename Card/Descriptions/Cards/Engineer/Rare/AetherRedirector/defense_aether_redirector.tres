@@ -14,10 +14,10 @@ _base_shield = Array[float]([5.0, 10.0, 15.0, 20.0, 25.0])
 script = ExtResource("1_card_template")
 name = "Aether Redirector"
 picture = SubResource("PlaceholderTexture2D_lek2h")
-families = Array[int]([2])
+families = Array[int]([])
 rarity = 1
 player_upgrade = SubResource("Resource_upgrade")
 points = Dictionary[int, int]({
-2: 2
+
 })
 lvl = 3

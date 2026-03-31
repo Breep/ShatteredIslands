@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_kmq2y"]
 script = ExtResource("1_e60rh")
-_armor_percent = Array[float]([80.0, 8.0, 12.0, 16.0, 20.0])
+_armor_percent = Array[float]([4.0, 8.0, 12.0, 16.0, 20.0])
 metadata/_custom_type_script = "uid://gpbhlq6yi8ty"
 
 [resource]
