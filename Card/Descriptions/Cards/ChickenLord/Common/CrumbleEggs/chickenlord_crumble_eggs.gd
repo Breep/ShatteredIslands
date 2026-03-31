@@ -34,4 +34,4 @@ func get_description(cardlvl: int) -> String:
 	var p: String = str(_periods[cardlvl - 1]).pad_decimals(0)
 	var dpc: String = str(_damage_per_chickens[cardlvl - 1]).pad_decimals(0)
 	var cspd: String = str(_chicken_spawned_per_deaths[cardlvl - 1]).pad_decimals(0)
-	return "Every " + p + "s, throw a small egg on an enemy. It deals " + dpc + " * <alived chicken> physical damage. Summon " + cspd + " chicken egg on kill."
+	return "Every " + p + "s, throw a small egg on an enemy. It deals " + dpc + " * <alived chicken> [[PHYSICAL_DAMAGE]]. Summon " + cspd + " chicken egg on kill."

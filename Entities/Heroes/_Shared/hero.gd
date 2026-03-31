@@ -23,6 +23,8 @@ signal fight_is_lost()
 @export_range(1, 10, 1) var level: int = 1
 
 @export_group("Optional configuration")
+@export var player: Player
+
 @export_subgroup("Prototyping")
 @export var _custom_deck: PlayerDeck
 @export var family_managers_enabled: bool = true

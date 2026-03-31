@@ -66,3 +66,5 @@ layout_mode = 2
 [node name="PlayerPortrait8" parent="VBoxContainer" unique_id=1589424793 instance=ExtResource("1_a7ivo")]
 layout_mode = 2
 flip_ui = true
+
+[editable path="VBoxContainer/PlayerPortrait"]

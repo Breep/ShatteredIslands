@@ -16,7 +16,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			return
 
 		var max_hp: float = ctx.hero.stats.health_max
-		var damage: float = max_hp * (percent / 100.0)
+		var damage: float = max_hp * (percent * ctx.hero.stats.scale / 100.0)
 		if damage <= 0:
 			return
 
@@ -31,4 +31,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Vital Pulse: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Every " + str(_period[cardlvl - 1]) + " sec, deal " + str(_damage_percent[cardlvl - 1]) + "% of HP max as physical damage to all enemies."
+	return "Every " + str(_period[cardlvl - 1]) + " sec, deal [[SCALE]]*" + str(_damage_percent[cardlvl - 1]) + "% of max HP as [[PHYSICAL_DAMAGE]] to all enemies."

@@ -34,5 +34,8 @@ func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
 		printerr("Aegis Blade: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
-
-	return ""
+	var base_dmg: String = str(_attack_ads[cardlvl - 1])
+	var shield_ad: String = str(_shield_ad_maxs[cardlvl - 1])
+	var return_shield: String = str(_damage_as_shield_ratios[cardlvl - 1])
+	
+	return "Summon an Aegis blade with AD: " + base_dmg + " + " + shield_ad + "% of the hero [[SHIELD]]. Gives " + return_shield + "% of the AD as [[SHIELD]]."

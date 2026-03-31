@@ -32,6 +32,12 @@ var player: Player
 
 func connect_to_player(new_player: Player) -> void:
 	player = new_player
+	
+	# Set other players healthbar in red
+	var local_player: Player = PlayerManager.get_local_player()
+	if player.id != local_player.id:
+		_player_health_bar.tint_progress = Color(255,0,0,1)
+	
 	player.hero_changed.connect(_on_player_hero_changed)
 	_setup_local_nodes()
 

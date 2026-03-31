@@ -2,13 +2,11 @@
 
 [ext_resource type="Script" uid="uid://qj7o0ua13hm5" path="res://SpellsAndProjectiles/Projectiles/ShadowBolt/shadow_bolt_projectile.gd" id="1_r7ned"]
 [ext_resource type="PackedScene" uid="uid://bxqb2r5cdt3gw" path="res://VFX/VFX_3D/VFX/Scenes/VFX_Darkness_projectile.tscn" id="2_aw37j"]
-[ext_resource type="Script" uid="uid://ba86frs5xcp14" path="res://SpellsAndProjectiles/Projectiles/Trajectories/bezier_trajectory.gd" id="2_bwhe2"]
+[ext_resource type="Script" uid="uid://xr3esthqo6re" path="res://SpellsAndProjectiles/Projectiles/Trajectories/straight_trajectory.gd" id="2_bwhe2"]
 
 [sub_resource type="Resource" id="Resource_risn7"]
 script = ExtResource("2_bwhe2")
-control_height = 2.0
-speed = 18.0
-metadata/_custom_type_script = "uid://ba86frs5xcp14"
+metadata/_custom_type_script = "uid://xr3esthqo6re"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_r7ned"]
 radius = 0.2

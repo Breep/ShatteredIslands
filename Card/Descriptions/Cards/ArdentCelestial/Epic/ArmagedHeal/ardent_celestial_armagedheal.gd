@@ -23,4 +23,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Armagedheal: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Each meteor has " + str(_proc_chance[cardlvl - 1]) + "% chance to heal a random ally by " + str(_heal[cardlvl - 1])
+	return "Each [[METEOR]] has " + str(_proc_chance[cardlvl - 1]) + "% chance to heal a random ally by " + str(_heal[cardlvl - 1])

@@ -124,8 +124,8 @@ func _start_passive() -> void:
 	if _trex_gauge >= ANCESTRAL_GAUCHE_THRESHOLD:
 		var spawn_loc := SpawnLocationConfig.create_arena_center()
 		_owner.summon_entity(Entity.EntityType.TREX, spawn_loc, {
-			TRex.Modifier.GIFTED_SPAWN_PERIOD: 5,
-			TRex.Modifier.GIFTED_SPAWN_NUMBER: 4,
+			TRex.Modifier.PRIMAL_SHAKE_PERIOD: 5,
+			TRex.Modifier.PRIMAL_SHAKE_NUMBER: 4,
 			TRex.Modifier.HP_BONUS: 1000
 		})
 #endregion
@@ -243,8 +243,8 @@ func _battle_start_chicken_spawn() -> void:
 		for i in P_START_CHICKENS[level]:
 			var spawn_loc := SpawnLocationConfig.create_random_arena()
 			_owner.summon_entity(Entity.EntityType.TREX, spawn_loc, {
-				TRex.Modifier.GIFTED_SPAWN_PERIOD: 5,
-				TRex.Modifier.GIFTED_SPAWN_NUMBER: 4,
+				TRex.Modifier.PRIMAL_SHAKE_PERIOD: 5,
+				TRex.Modifier.PRIMAL_SHAKE_NUMBER: 4,
 				TRex.Modifier.HP_BONUS: 1000
 		})
 	else:

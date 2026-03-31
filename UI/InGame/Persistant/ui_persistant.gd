@@ -34,5 +34,4 @@ func _on_game_manager_game_state_changed(game_state: GameManager.GameState) -> v
 			_ui_all_player_portraits.show()
 			_ui_player_info.show()
 		GameManager.GameState.FIGHTING:
-			_ui_all_player_portraits.hide()
 			_ui_player_info.hide()

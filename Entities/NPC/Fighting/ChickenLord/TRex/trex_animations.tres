@@ -1,0 +1,16 @@
+[gd_resource type="AnimationLibrary" format=3 uid="uid://dtrexanlibr01"]
+
+[ext_resource type="Animation" uid="uid://cyw2dbmbty8is" path="res://TMP_AnimTREX/ATTACK.res" id="1"]
+[ext_resource type="Animation" uid="uid://c8737bhecne17" path="res://TMP_AnimTREX/DIE.res" id="2"]
+[ext_resource type="Animation" uid="uid://coao3g8fovuhs" path="res://TMP_AnimTREX/IDLE.res" id="3"]
+[ext_resource type="Animation" uid="uid://bem0g2iu0ohwg" path="res://TMP_AnimTREX/SHAKE.res" id="4"]
+[ext_resource type="Animation" uid="uid://65ob2wixoscn" path="res://TMP_AnimTREX/WALK.res" id="5"]
+
+[resource]
+_data = {
+&"ATTACK": ExtResource("1"),
+&"DIE": ExtResource("2"),
+&"IDLE": ExtResource("3"),
+&"SHAKE": ExtResource("4"),
+&"WALK": ExtResource("5")
+}

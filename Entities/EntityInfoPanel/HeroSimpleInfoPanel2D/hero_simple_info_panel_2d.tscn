@@ -186,7 +186,7 @@ shader_parameter/CornerRadius = 0.05
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xw8nt"]
 shader = ExtResource("2_er62k")
-shader_parameter/HealthAmount = 0.6
+shader_parameter/HealthAmount = 0.506000024035
 shader_parameter/MaxHealth = 2500.0
 shader_parameter/HealthColor = Color(4.428029e-06, 0.7022774, 0.9995093, 1)
 shader_parameter/BackgroundColor = Color(0.15, 0.15, 0.15, 0.8)
@@ -257,9 +257,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/separation = 0
 
 [node name="PlayerNameLabel" type="RichTextLabel" parent="MainVBox" unique_id=1781608924]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 20)
 layout_mode = 2
 mouse_filter = 2
@@ -273,6 +275,7 @@ vertical_alignment = 1
 [node name="HealthAndMana" type="Control" parent="MainVBox" unique_id=1222723480]
 custom_minimum_size = Vector2(80, 15)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="HealthAndMana" type="VBoxContainer" parent="MainVBox/HealthAndMana" unique_id=756449751]
 custom_minimum_size = Vector2(80, 15)
@@ -315,6 +318,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="ManaBar" type="ColorRect" parent="MainVBox/HealthAndMana/HealthAndMana" unique_id=564324133]
+unique_name_in_owner = true
 material = SubResource("ShaderMaterial_xw8nt")
 custom_minimum_size = Vector2(80, 5)
 layout_mode = 2
@@ -322,6 +326,7 @@ mouse_filter = 2
 
 [node name="DebugValues" type="HBoxContainer" parent="MainVBox/HealthAndMana" unique_id=160983650]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -347,6 +352,7 @@ label_settings = SubResource("LabelSettings_shld")
 
 [node name="Control" type="Control" parent="MainVBox" unique_id=1726330834]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="StackValues" type="HBoxContainer" parent="MainVBox/Control" unique_id=1870219169]
 custom_minimum_size = Vector2(80, 15)
@@ -358,6 +364,7 @@ offset_left = -40.0
 offset_right = 40.0
 offset_bottom = 16.0
 grow_horizontal = 2
+mouse_filter = 2
 
 [node name="IgniteLabel" type="Label" parent="MainVBox/Control/StackValues" unique_id=1339182740]
 unique_name_in_owner = true

@@ -34,5 +34,11 @@ func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
 		printerr("Force Field: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
-
-	return ""
+	
+	var nb: String = str(_drones_numbers[cardlvl - 1])
+	var time: String = str(_shield_per_seconds[cardlvl - 1])
+	var shield: String = str(_drone_shields[cardlvl - 1])
+	
+	#TODO add tooltip for drone?
+	return "Summon " + nb + " drones that follows the lowest HP ally and gives " + shield + " [[SHIELD]] for " + time + "s."
+	

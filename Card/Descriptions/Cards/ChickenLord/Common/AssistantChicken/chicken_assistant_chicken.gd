@@ -24,4 +24,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Assistant Chicken: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	var h: String = str(_shield_amounts[cardlvl - 1]).pad_decimals(0)
-	return "When a friendly chicken is spawned, shield a random ally of " + h + " amount."
+	return "When a friendly chicken is spawned, [[SHIELD]] a random ally of " + h + " amount."

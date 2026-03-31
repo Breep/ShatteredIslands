@@ -70,6 +70,9 @@ extends Resource
 @export var REGEN_COLOR: Color = Color("7fdf4dff")  # Skyblue
 @export var DISPELL_COLOR: Color = Color("af23d4ff")  
 @export var METEOR_COLOR: Color = Color("7c2852")  # Skyblue
+@export var MANA_COLOR: Color = Color(0, 0, 255, 1) #Blue
+@export var SCALE_COLOR: Color = Color("948e7e")
+@export var BLOCK_COLOR: Color = Color("328767")
 @export var DEFAULT_COLOR: Color = Color.WHITE
 
 # ============================== FUNCTIONS ==============================

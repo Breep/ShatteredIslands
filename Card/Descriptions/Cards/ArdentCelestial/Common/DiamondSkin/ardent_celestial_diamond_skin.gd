@@ -24,4 +24,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Kuiper Belt: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Hero gains " + str(_magical_resistances[cardlvl - 1]) + " magical resistance."
+	return "Hero gains " + str(_magical_resistances[cardlvl - 1]) + " [[MAGICAL_DAMAGE]] resistance."

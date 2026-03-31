@@ -41,4 +41,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Titans Protection: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Launch a Fire Ball that deals " + str(_damages[cardlvl - 1]) + " every " + str(_periods[cardlvl - 1]) + "s. The projectile has " + str(_chances_to_bounce[cardlvl - 1]) + "* ignites_stacks to bounce."
+	return "Launch a Fire Ball that deals " + str(_damages[cardlvl - 1]) + " every " + str(_periods[cardlvl - 1]) + "s. The projectile has " + str(_chances_to_bounce[cardlvl - 1]) + " * [[IGNITE]] stacks to bounce."
