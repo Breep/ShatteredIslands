@@ -47,4 +47,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Bear Strength: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Decrease attack speed by " + str(_as_reduction[cardlvl - 1]) + "%. Increase AD by " + str(_hp_to_ad_percents[cardlvl - 1]) + "% max HP and by " + str(_scale_to_ad_percents[cardlvl -1]) + "% scale."
+	return "Decrease attack speed by " + str(_as_reduction[cardlvl - 1]) + "%. Increase AD by " + str(_hp_to_ad_percents[cardlvl - 1]) + "% max HP and by " + str(_scale_to_ad_percents[cardlvl -1]) + "% [[SCALE]]."

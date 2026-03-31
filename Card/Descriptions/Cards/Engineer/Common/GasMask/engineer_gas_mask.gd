@@ -21,4 +21,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Toxic Filtration Layer: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Shield can block poison damage with " + str(_base_efficiency[cardlvl - 1]) + "% value"
+	return "The [[SHIELD]] can block poison damage with " + str(_base_efficiency[cardlvl - 1]) + "% value"

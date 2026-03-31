@@ -29,4 +29,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Force Field: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Every " + str(_period[cardlvl - 1]) + " s, gain shield equal to " + str(_lost_hp_percent[cardlvl - 1]) + "% lost HP."
+	return "Every " + str(_period[cardlvl - 1]) + " s, gain [[SHIELD]] equal to " + str(_lost_hp_percent[cardlvl - 1]) + "% lost HP."

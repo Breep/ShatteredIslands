@@ -13,6 +13,7 @@ metadata/_custom_type_script = "uid://cjreeavu3vxq5"
 
 [resource]
 script = ExtResource("1_0j1g2")
+name = "Stone Skin"
 picture = SubResource("PlaceholderTexture2D_klafx")
 families = Array[int]([6])
 player_upgrade = SubResource("Resource_wvgn0")

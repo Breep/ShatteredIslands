@@ -14,6 +14,7 @@ metadata/_custom_type_script = "uid://dt8pvso07y6fi"
 
 [resource]
 script = ExtResource("1_y2ilx")
+name = "Seismic Slam"
 picture = SubResource("PlaceholderTexture2D_4j630")
 families = Array[int]([6])
 rarity = 2

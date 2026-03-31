@@ -10,7 +10,7 @@ _base_efficiency = Array[float]([20.0, 30.0, 40.0, 50.0, 70.0])
 
 [resource]
 script = ExtResource("3_b1h10")
-name = "Toxic Filtration Layer"
+name = "Gas Mask"
 picture = ExtResource("1_1rk2k")
 families = Array[int]([2, 7])
 player_upgrade = SubResource("Resource_m26y3")

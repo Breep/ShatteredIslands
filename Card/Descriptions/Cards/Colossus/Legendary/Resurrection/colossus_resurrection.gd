@@ -68,5 +68,9 @@ func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
 		printerr("Resurrection: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
-		
-	return "Resurrect"
+	
+	var hp: String = str(_hp_max_revive[cardlvl - 1])
+	var size: String = str(_size_increase[cardlvl - 1])
+	var damage: String = str(_damage_percent[cardlvl - 1])
+	
+	return "On death, resurrects with " + hp + "% HP and [[SCALE]] increases by " + size + "\n" + "Deals " + damage + "% of his max HP to all ennemies."

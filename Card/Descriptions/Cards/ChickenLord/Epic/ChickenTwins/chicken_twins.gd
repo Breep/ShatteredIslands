@@ -21,4 +21,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Twins: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Gives a chance to summon twins chickens by " + str(_chance[cardlvl - 1])
+	return "Gives " + str(_chance[cardlvl - 1]) + "% chance to summon twins chickens." 
