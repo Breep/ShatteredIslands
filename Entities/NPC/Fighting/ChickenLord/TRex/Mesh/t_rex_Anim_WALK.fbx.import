@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://gd5fubbj10yp"
-path="res://.godot/imported/t-rex_Anim_WALK.glb-50e4eb7c039286d0ef149abd35f18b7b.scn"
+uid="uid://7uwofsym4gs7"
+path="res://.godot/imported/t_rex_Anim_WALK.fbx-12be6af36e89dbea2358860f347be7d3.scn"
 
 [deps]
 
-source_file="res://Entities/NPC/Fighting/ChickenLord/TRex/Mesh/t-rex_Anim_WALK.glb"
-dest_files=["res://.godot/imported/t-rex_Anim_WALK.glb-50e4eb7c039286d0ef149abd35f18b7b.scn"]
+source_file="res://Entities/NPC/Fighting/ChickenLord/TRex/Mesh/t_rex_Anim_WALK.fbx"
+dest_files=["res://.godot/imported/t_rex_Anim_WALK.fbx-12be6af36e89dbea2358860f347be7d3.scn"]
 
 [params]
 
@@ -30,7 +30,7 @@ meshes/force_disable_compression=false
 skins/use_named_skins=true
 animation/import=true
 animation/fps=30
-animation/trimming=false
+animation/trimming=true
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
@@ -38,5 +38,7 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={}
-gltf/naming_version=2
-gltf/embedded_image_handling=1
+fbx/importer=0
+fbx/allow_geometry_helper_nodes=false
+fbx/embedded_image_handling=1
+fbx/naming_version=2
