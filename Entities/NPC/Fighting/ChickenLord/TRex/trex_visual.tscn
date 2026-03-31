@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cbsgqx1r8bqf1" path="res://Entities/NPC/Fighting/ChickenLord/TRex/Data/TrexTexture/t-rex_final_UV_feather_neck_BaseColor.png" id="3_sr1lv"]
 [ext_resource type="Texture2D" uid="uid://bs1q1v6d2vpvm" path="res://Entities/NPC/Fighting/ChickenLord/TRex/Data/TrexTexture/t-rex_final_UV_teeth_top_BaseColor.png" id="4_b1egs"]
 [ext_resource type="Texture2D" uid="uid://cjd4fxg26sbp0" path="res://Entities/NPC/Fighting/ChickenLord/TRex/Data/TrexTexture/t-rex_final_UV_tongue_BaseColor.png" id="5_pvlej"]
-[ext_resource type="Texture2D" uid="uid://nohew6jsnhix" path="res://Entities/NPC/Fighting/ChickenLord/TRex/Data/feather_particule_2.png" id="8_b1egs"]
+[ext_resource type="Texture2D" uid="uid://nohew6jsnhix" path="res://Entities/NPC/Fighting/ChickenLord/TRex/Data/feather_particule.png" id="8_b1egs"]
 [ext_resource type="AnimationLibrary" uid="uid://dtrexanlibr01" path="res://Entities/NPC/Fighting/ChickenLord/TRex/trex_animations.tres" id="8_trex"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w476e"]
