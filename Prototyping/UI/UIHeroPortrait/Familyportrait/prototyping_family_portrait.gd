@@ -5,17 +5,12 @@ extends Control
 
 @export var _families: Array[Family]
 
-var _is_families_portrait_hidden: bool = false
-
 @onready var _rng := RandomNumberGenerator.new()
 var _player: Player
 
 func _ready() -> void:
+	GameManager.init()
 	_rng.randomize()
-	if _is_families_portrait_hidden:
-		_ui_all_families_portrait.hide_families()
-	else:
-		_ui_all_families_portrait.show_families()
 	_ui_all_families_portrait.init_portait_families(_families)
 
 	var player_scene: PackedScene = preload("res://Player/player.tscn")
@@ -25,19 +20,6 @@ func _ready() -> void:
 	add_child(_player)
 	for family: Family in _families:
 		_player.deck._families_count[family.family_type] = 0
-	
-	_ui_all_families_portrait.player = _player
-
-func _on_hide_show_button_pressed() -> void:
-	if _is_families_portrait_hidden:
-		_hide_show_button.text = "Hide"
-		_is_families_portrait_hidden = false
-		_ui_all_families_portrait.show_families()
-	else:
-		_hide_show_button.text = "Show"
-		_is_families_portrait_hidden = true
-		_ui_all_families_portrait.hide_families()
-
 
 func _on_add_random_card_button_pressed() -> void:
 	var randi: int = _rng.randi_range(0, _families.size() - 1)

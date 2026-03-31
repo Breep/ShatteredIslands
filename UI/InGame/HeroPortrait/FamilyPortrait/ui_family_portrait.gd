@@ -6,6 +6,8 @@ extends Control
 
 signal selected(self_ref: UIFamilyPortrait)
 signal unselected(self_ref: UIFamilyPortrait)
+signal hovered(self_ref: UIFamilyPortrait)
+signal pressed(self_ref: UIFamilyPortrait)
 
 # ============================== Enums ==============================
 
@@ -104,10 +106,13 @@ func _ready() -> void:
 		_glow_effect.material = _glow_effect.material.duplicate()
 	_update_frame()
 	_glow_effect.hide()
-	
+
 	if _family_background.material != null:
 		_family_background.material = _family_background.material.duplicate()
 		_family_background.material.set_shader_parameter("color_count", 1)
+
+	_button.mouse_entered.connect(func() -> void: hovered.emit(self))
+	_button.pressed.connect(func() -> void: pressed.emit(self))
 
 # ============================== Public functions ==============================
 

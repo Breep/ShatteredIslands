@@ -10,6 +10,8 @@ signal family_selected(family_type: Family.Type)
 @export_group("Animation Configuration")
 @export var _step : float = 0.04
 @export var _effect_duration: float = 0.4
+@export var _select_anim_duration: float = 0.15
+@export var _active_scale_factor: float = 1.4
 
 # ============================== Local Nodes ==============================
 
@@ -26,37 +28,20 @@ var _player: Player
 # ============================== Private variables ==============================
 
 var _tweens: Array[Tween]
+var _select_tween: Tween
 
 var _portrait_to_control_map: Dictionary[UIFamilyPortrait, Control]
+var _base_min_size_y: float
 
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
+	if _family_controls.size() > 0:
+		_base_min_size_y = _family_controls[0].custom_minimum_size.y
 	init_portait_families(GameManager.active_families)
 	Events.entity_clicked.connect(_on_events_entity_clicked)
 
 # ============================== Public functions ==============================
-
-func show_families() -> void:
-	show()
-	_tweens.clear()
-	for i: int in _family_portraits.size():
-		var portrait_family: UIFamilyPortrait = _family_portraits[_family_portraits.size() - i - 1]
-		var tw := create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-		_tweens.append(tw)
-		tw.tween_property(portrait_family, "modulate:a", 1.0, _effect_duration).from(0.0).set_delay(i * _step)
-		tw.parallel().tween_property(portrait_family, "scale", Vector2.ONE, _effect_duration).from(Vector2(0.9, 0.9)).set_delay(i * _step)
-
-
-func hide_families() -> void:
-	hide()
-	for tween: Tween in _tweens:
-		tween.kill()
-	for i: int in _family_portraits.size():
-		var portrait_family: UIFamilyPortrait = _family_portraits[_family_portraits.size() - i - 1]
-		portrait_family.modulate.a = 0
-		portrait_family.scale = Vector2(0.9, 0.9)
-
 
 func init_portait_families(families: Array[Family]) -> void:
 	if families.size() > _family_portraits.size():
@@ -64,6 +49,8 @@ func init_portait_families(families: Array[Family]) -> void:
 		return
 	for i: int in _family_portraits.size():
 		_portrait_to_control_map[_family_portraits[i]] = _family_controls[i]
+		_family_portraits[i].selected.connect(_on_portrait_family_selected)
+		_family_portraits[i].unselected.connect(_on_portrait_family_unselected)
 		_family_portraits[i].hide()
 	for i: int in families.size():
 		_family_portraits[i].init(families[i])
@@ -125,6 +112,19 @@ func _custom_sort_fp(fp1: UIFamilyPortrait, fp2: UIFamilyPortrait) -> bool:
 	else:
 		return false
 
+func _animate_family_controls(active_portrait: UIFamilyPortrait) -> void:
+	if _select_tween and _select_tween.is_running():
+		_select_tween.kill()
+	_select_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK).set_parallel(true)
+	for portrait: UIFamilyPortrait in _family_portraits:
+		var control: Control = _portrait_to_control_map[portrait]
+		var child_index: int = control.get_index()
+		if child_index % 2 != 0:
+			continue
+		var target_y := _base_min_size_y * _active_scale_factor if portrait == active_portrait else _base_min_size_y
+		_select_tween.tween_property(control, "custom_minimum_size:y", target_y, _select_anim_duration)
+
+
 # ============================== Callbacks ==============================
 
 func _on_player_deck_has_changed() -> void:
@@ -136,10 +136,12 @@ func _on_portrait_family_selected(portrait_family: UIFamilyPortrait) -> void:
 	for pf: UIFamilyPortrait in _family_portraits:
 		if pf != portrait_family:
 			pf.unselect()
+	_animate_family_controls(portrait_family)
 
 
 func _on_portrait_family_unselected(_portrait_family: UIFamilyPortrait) -> void:
 	family_selected.emit(Family.Type.UNDEF)
+	_animate_family_controls(null)
 
 
 func _on_events_entity_clicked(entity: Entity) -> void:

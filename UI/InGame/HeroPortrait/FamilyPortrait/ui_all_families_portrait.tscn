@@ -18,7 +18,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_77i2i")
-_family_portraits = [NodePath("VBoxContainer/Family1/HBoxContainer/FamilyPortrait"), NodePath("VBoxContainer/Family2/HBoxContainer/FamilyPortrait"), NodePath("VBoxContainer/Family3/HBoxContainer/FamilyPortrait"), NodePath("VBoxContainer/Family4/HBoxContainer/FamilyPortrait"), NodePath("VBoxContainer/Family5/HBoxContainer/FamilyPortrait"), NodePath("VBoxContainer/Family6/HBoxContainer/FamilyPortrait"), NodePath("VBoxContainer/Family7/HBoxContainer/FamilyPortrait"), NodePath("VBoxContainer/Family8/HBoxContainer/FamilyPortrait")]
+_family_portraits = [NodePath("VBoxContainer/Family1/FixSize/HBoxContainer/FamilyPortrait"), NodePath("VBoxContainer/Family2/FixSize/HBoxContainer/FamilyPortrait"), NodePath("VBoxContainer/Family3/FixSize/HBoxContainer/FamilyPortrait"), NodePath("VBoxContainer/Family4/FixSize/HBoxContainer/FamilyPortrait"), NodePath("VBoxContainer/Family5/FixSize/HBoxContainer/FamilyPortrait"), NodePath("VBoxContainer/Family6/FixSize/HBoxContainer/FamilyPortrait"), NodePath("VBoxContainer/Family7/FixSize/HBoxContainer/FamilyPortrait"), NodePath("VBoxContainer/Family8/FixSize/HBoxContainer/FamilyPortrait")]
 _family_controls = [NodePath("VBoxContainer/Family1"), NodePath("VBoxContainer/Family2"), NodePath("VBoxContainer/Family3"), NodePath("VBoxContainer/Family4"), NodePath("VBoxContainer/Family5"), NodePath("VBoxContainer/Family6"), NodePath("VBoxContainer/Family7"), NodePath("VBoxContainer/Family8")]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=648717305]
@@ -44,7 +44,23 @@ layout_direction = 3
 layout_mode = 2
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Family1" unique_id=68379202]
+[node name="FixSize" type="Control" parent="VBoxContainer/Family1" unique_id=1309960428]
+custom_minimum_size = Vector2(192, 96)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -48.0
+offset_right = 96.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Family1/FixSize" unique_id=68379202]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -53,12 +69,12 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="EmptySpace" type="Control" parent="VBoxContainer/Family1/HBoxContainer" unique_id=1519372363]
+[node name="EmptySpace" type="Control" parent="VBoxContainer/Family1/FixSize/HBoxContainer" unique_id=1519372363]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="FamilyPortrait" parent="VBoxContainer/Family1/HBoxContainer" unique_id=1557632737 instance=ExtResource("2_c78sh")]
+[node name="FamilyPortrait" parent="VBoxContainer/Family1/FixSize/HBoxContainer" unique_id=1557632737 instance=ExtResource("2_c78sh")]
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -68,7 +84,23 @@ layout_direction = 2
 layout_mode = 2
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Family2" unique_id=1773702600]
+[node name="FixSize" type="Control" parent="VBoxContainer/Family2" unique_id=691010184]
+custom_minimum_size = Vector2(192, 96)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -48.0
+offset_right = 96.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Family2/FixSize" unique_id=1773702600]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -77,12 +109,12 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="EmptySpace" type="Control" parent="VBoxContainer/Family2/HBoxContainer" unique_id=474742308]
+[node name="EmptySpace" type="Control" parent="VBoxContainer/Family2/FixSize/HBoxContainer" unique_id=474742308]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="FamilyPortrait" parent="VBoxContainer/Family2/HBoxContainer" unique_id=877052693 instance=ExtResource("2_c78sh")]
+[node name="FamilyPortrait" parent="VBoxContainer/Family2/FixSize/HBoxContainer" unique_id=877052693 instance=ExtResource("2_c78sh")]
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -92,7 +124,23 @@ layout_direction = 3
 layout_mode = 2
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Family3" unique_id=27653536]
+[node name="FixSize" type="Control" parent="VBoxContainer/Family3" unique_id=1397995417]
+custom_minimum_size = Vector2(192, 96)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -48.0
+offset_right = 96.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Family3/FixSize" unique_id=27653536]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -101,12 +149,12 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="EmptySpace" type="Control" parent="VBoxContainer/Family3/HBoxContainer" unique_id=629691589]
+[node name="EmptySpace" type="Control" parent="VBoxContainer/Family3/FixSize/HBoxContainer" unique_id=629691589]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="FamilyPortrait" parent="VBoxContainer/Family3/HBoxContainer" unique_id=53481621 instance=ExtResource("2_c78sh")]
+[node name="FamilyPortrait" parent="VBoxContainer/Family3/FixSize/HBoxContainer" unique_id=53481621 instance=ExtResource("2_c78sh")]
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -116,7 +164,23 @@ layout_direction = 2
 layout_mode = 2
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Family4" unique_id=1694553276]
+[node name="FixSize" type="Control" parent="VBoxContainer/Family4" unique_id=974749213]
+custom_minimum_size = Vector2(192, 96)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -48.0
+offset_right = 96.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Family4/FixSize" unique_id=1694553276]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -125,12 +189,12 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="EmptySpace" type="Control" parent="VBoxContainer/Family4/HBoxContainer" unique_id=173486768]
+[node name="EmptySpace" type="Control" parent="VBoxContainer/Family4/FixSize/HBoxContainer" unique_id=173486768]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="FamilyPortrait" parent="VBoxContainer/Family4/HBoxContainer" unique_id=986007672 instance=ExtResource("2_c78sh")]
+[node name="FamilyPortrait" parent="VBoxContainer/Family4/FixSize/HBoxContainer" unique_id=986007672 instance=ExtResource("2_c78sh")]
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -140,7 +204,23 @@ layout_direction = 3
 layout_mode = 2
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Family5" unique_id=68892966]
+[node name="FixSize" type="Control" parent="VBoxContainer/Family5" unique_id=248523687]
+custom_minimum_size = Vector2(192, 96)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -48.0
+offset_right = 96.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Family5/FixSize" unique_id=68892966]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -149,12 +229,12 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="EmptySpace" type="Control" parent="VBoxContainer/Family5/HBoxContainer" unique_id=715950026]
+[node name="EmptySpace" type="Control" parent="VBoxContainer/Family5/FixSize/HBoxContainer" unique_id=715950026]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="FamilyPortrait" parent="VBoxContainer/Family5/HBoxContainer" unique_id=1354296806 instance=ExtResource("2_c78sh")]
+[node name="FamilyPortrait" parent="VBoxContainer/Family5/FixSize/HBoxContainer" unique_id=1354296806 instance=ExtResource("2_c78sh")]
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -164,7 +244,23 @@ layout_direction = 2
 layout_mode = 2
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Family6" unique_id=501690625]
+[node name="FixSize" type="Control" parent="VBoxContainer/Family6" unique_id=1663272123]
+custom_minimum_size = Vector2(192, 96)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -48.0
+offset_right = 96.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Family6/FixSize" unique_id=501690625]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -173,12 +269,12 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="EmptySpace" type="Control" parent="VBoxContainer/Family6/HBoxContainer" unique_id=1081875220]
+[node name="EmptySpace" type="Control" parent="VBoxContainer/Family6/FixSize/HBoxContainer" unique_id=1081875220]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="FamilyPortrait" parent="VBoxContainer/Family6/HBoxContainer" unique_id=164101460 instance=ExtResource("2_c78sh")]
+[node name="FamilyPortrait" parent="VBoxContainer/Family6/FixSize/HBoxContainer" unique_id=164101460 instance=ExtResource("2_c78sh")]
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -188,7 +284,23 @@ layout_direction = 3
 layout_mode = 2
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Family7" unique_id=922135684]
+[node name="FixSize" type="Control" parent="VBoxContainer/Family7" unique_id=1287888556]
+custom_minimum_size = Vector2(192, 96)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -48.0
+offset_right = 96.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Family7/FixSize" unique_id=922135684]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -197,12 +309,12 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="EmptySpace" type="Control" parent="VBoxContainer/Family7/HBoxContainer" unique_id=1916736659]
+[node name="EmptySpace" type="Control" parent="VBoxContainer/Family7/FixSize/HBoxContainer" unique_id=1916736659]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="FamilyPortrait" parent="VBoxContainer/Family7/HBoxContainer" unique_id=576436771 instance=ExtResource("2_c78sh")]
+[node name="FamilyPortrait" parent="VBoxContainer/Family7/FixSize/HBoxContainer" unique_id=576436771 instance=ExtResource("2_c78sh")]
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -212,7 +324,23 @@ layout_direction = 2
 layout_mode = 2
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Family8" unique_id=732284335]
+[node name="FixSize" type="Control" parent="VBoxContainer/Family8" unique_id=1584216654]
+custom_minimum_size = Vector2(192, 96)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -48.0
+offset_right = 96.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Family8/FixSize" unique_id=732284335]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -221,11 +349,11 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="EmptySpace" type="Control" parent="VBoxContainer/Family8/HBoxContainer" unique_id=915851282]
+[node name="EmptySpace" type="Control" parent="VBoxContainer/Family8/FixSize/HBoxContainer" unique_id=915851282]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="FamilyPortrait" parent="VBoxContainer/Family8/HBoxContainer" unique_id=1793524629 instance=ExtResource("2_c78sh")]
+[node name="FamilyPortrait" parent="VBoxContainer/Family8/FixSize/HBoxContainer" unique_id=1793524629 instance=ExtResource("2_c78sh")]
 layout_mode = 2
 size_flags_horizontal = 3

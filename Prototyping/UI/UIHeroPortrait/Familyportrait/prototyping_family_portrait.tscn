@@ -3,16 +3,15 @@
 [ext_resource type="Script" uid="uid://262wx6bfbig7" path="res://Prototyping/UI/UIHeroPortrait/Familyportrait/prototyping_family_portrait.gd" id="1_th28h"]
 [ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://Card/Templates/family.gd" id="2_ju7j7"]
 [ext_resource type="PackedScene" uid="uid://bvqsnkh0s11q2" path="res://UI/InGame/HeroPortrait/FamilyPortrait/ui_all_families_portrait.tscn" id="2_od8ek"]
-[ext_resource type="Resource" uid="uid://cbmvayb0bb72n" path="res://Card/Descriptions/Families/warrior_family.tres" id="3_h2kn7"]
 [ext_resource type="Resource" uid="uid://cqw2clgppw78q" path="res://Card/Descriptions/Families/chicken_lord_family.tres" id="4_meu6t"]
 [ext_resource type="Resource" uid="uid://dw66lnwee8ruk" path="res://Card/Descriptions/Families/engineer_family.tres" id="5_ihlsc"]
 [ext_resource type="Resource" uid="uid://dsbwlgjbtxhh0" path="res://Card/Descriptions/Families/ardent_celestial_family.tres" id="6_1ctrr"]
 [ext_resource type="Resource" uid="uid://r422raom70t5" path="res://Card/Descriptions/Families/colossus_family.tres" id="7_it8y2"]
+[ext_resource type="Resource" uid="uid://brvmbafl0cv83" path="res://Card/Descriptions/Families/light_family.tres" id="7_pt144"]
 [ext_resource type="Resource" uid="uid://cqqln8j72uq1e" path="res://Card/Descriptions/Families/poison_family.tres" id="8_0a146"]
-[ext_resource type="Resource" path="res://Card/Descriptions/Families/lightning_family.tres" id="9_1w3lo"]
 [ext_resource type="Resource" uid="uid://b3vqgxyoo4150" path="res://Card/Descriptions/Families/necro_family.tres" id="10_x3b2u"]
 
-[node name="PrototypingFamilyPortrait" type="Control" node_paths=PackedStringArray("_ui_all_families_portrait", "_hide_show_button")]
+[node name="PrototypingFamilyPortrait" type="Control" unique_id=1945203330 node_paths=PackedStringArray("_ui_all_families_portrait", "_hide_show_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,15 +21,16 @@ grow_vertical = 2
 script = ExtResource("1_th28h")
 _ui_all_families_portrait = NodePath("UIAllFamiliesPortrait")
 _hide_show_button = NodePath("HideShowButton")
-_families = Array[ExtResource("2_ju7j7")]([ExtResource("3_h2kn7"), ExtResource("4_meu6t"), ExtResource("5_ihlsc"), ExtResource("6_1ctrr"), ExtResource("7_it8y2"), ExtResource("8_0a146"), ExtResource("9_1w3lo"), ExtResource("10_x3b2u")])
+_families = Array[ExtResource("2_ju7j7")]([ExtResource("6_1ctrr"), ExtResource("4_meu6t"), ExtResource("7_it8y2"), ExtResource("5_ihlsc"), ExtResource("7_pt144"), ExtResource("10_x3b2u"), ExtResource("8_0a146")])
 
-[node name="UIAllFamiliesPortrait" parent="." instance=ExtResource("2_od8ek")]
-offset_left = 210.0
-offset_top = 53.0
-offset_right = 410.0
-offset_bottom = 756.0
+[node name="UIAllFamiliesPortrait" parent="." unique_id=120317412 instance=ExtResource("2_od8ek")]
+layout_mode = 1
+offset_left = -108.0
+offset_top = -306.0
+offset_right = 92.0
+offset_bottom = 397.0
 
-[node name="HideShowButton" type="Button" parent="."]
+[node name="HideShowButton" type="Button" parent="." unique_id=330490016]
 layout_mode = 0
 offset_left = 225.0
 offset_top = 770.0
@@ -38,7 +38,7 @@ offset_right = 418.0
 offset_bottom = 824.0
 text = "Show"
 
-[node name="AddRandomCardButton" type="Button" parent="."]
+[node name="AddRandomCardButton" type="Button" parent="." unique_id=930235911]
 layout_mode = 0
 offset_left = 230.0
 offset_top = 841.0
