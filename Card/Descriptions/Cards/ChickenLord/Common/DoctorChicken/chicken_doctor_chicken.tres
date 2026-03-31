@@ -15,9 +15,9 @@ script = ExtResource("1_5bxi0")
 name = "Doctor Chicken"
 picture = SubResource("PlaceholderTexture2D_vpne6")
 families = Array[int]([8])
+player_upgrade = SubResource("Resource_5leoa")
 points = Dictionary[int, int]({
 8: 0
 })
-player_upgrade = SubResource("Resource_5leoa")
 lvl = 5
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

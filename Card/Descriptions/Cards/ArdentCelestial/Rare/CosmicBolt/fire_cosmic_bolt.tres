@@ -15,7 +15,6 @@ script = ExtResource("1_mrle8")
 name = "Cosmic Bolt"
 picture = ExtResource("1_dmfxw")
 families = Array[int]([3])
-rarity = 0
 player_upgrade = SubResource("Resource_0un7i")
 points = Dictionary[int, int]({
 3: 2
