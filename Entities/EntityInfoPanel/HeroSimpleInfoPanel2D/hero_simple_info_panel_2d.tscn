@@ -261,6 +261,7 @@ mouse_filter = 2
 theme_override_constants/separation = 0
 
 [node name="PlayerNameLabel" type="RichTextLabel" parent="MainVBox" unique_id=1781608924]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 20)
 layout_mode = 2
 mouse_filter = 2

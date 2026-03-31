@@ -20,6 +20,8 @@ extends Control
 @onready var _necrosis_label: Label = %NecrosisLabel
 @onready var _regen_label: Label = %RegenLabel
 
+@onready var _player_name_label: RichTextLabel = %PlayerNameLabel
+
 #region ============================== Node base functions ==============================
 func _ready() -> void:
 	if _health_bar and _health_bar.material:
@@ -29,17 +31,17 @@ func _ready() -> void:
 		_shield_bar.material = _shield_bar.material.duplicate()
 	if _grid_bar and _grid_bar.material:
 		_grid_bar.material = _grid_bar.material.duplicate()
-
+	
 	var stats = _hero_entity.stats
 	var conditions = _hero_entity.conditions
-
+	
 	_update_health_bar(stats.health, stats.health_max)
 	_update_shield_bar(conditions.shield_stacks, stats.health_max)
 	_update_stack_label(conditions.ignite_stacks, _ignite_label)
 	_update_stack_label(conditions.poison_stacks, _poison_label)
 	_update_stack_label(conditions.necrosis_stacks, _necrosis_label)
 	_update_stack_label(conditions.regen_stacks, _regen_label)
-
+	
 	stats.health_changed.connect(_on_health_changed)
 	stats.health_max_changed.connect(_on_health_max_changed)
 	conditions.shield_stacks_changed.connect(_on_shield_changed)
@@ -47,7 +49,12 @@ func _ready() -> void:
 	conditions.poison_stacks_changed.connect(_update_stack_label.bind(_poison_label))
 	conditions.necrosis_stacks_changed.connect(_update_stack_label.bind(_necrosis_label))
 	conditions.regen_stacks_changed.connect(_update_stack_label.bind(_regen_label))
-
+	
+	if _hero_entity.player != null:
+		_player_name_label.text = _hero_entity.player.player_name
+	else:
+		_player_name_label.text = _hero_entity.entity_name
+	
 	if _debug_values != null:
 		_debug_values.visible = DebugHealthBarOverlay.is_visible()
 	DebugHealthBarOverlay.register(_on_debug_overlay_toggled)
@@ -154,7 +161,7 @@ func _on_shield_changed(new_amount: float) -> void:
 	_update_shield_bar(new_amount, _hero_entity.stats.health_max)
 
 
-func _on_debug_overlay_toggled(is_visible: bool) -> void:
+func _on_debug_overlay_toggled(debug_is_visible: bool) -> void:
 	if _debug_values != null:
-		_debug_values.visible = is_visible
+		_debug_values.visible = debug_is_visible
 #endregion
