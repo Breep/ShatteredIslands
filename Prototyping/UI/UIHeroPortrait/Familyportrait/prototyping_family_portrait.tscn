@@ -9,9 +9,10 @@
 [ext_resource type="Resource" uid="uid://r422raom70t5" path="res://Card/Descriptions/Families/colossus_family.tres" id="7_it8y2"]
 [ext_resource type="Resource" uid="uid://brvmbafl0cv83" path="res://Card/Descriptions/Families/light_family.tres" id="7_pt144"]
 [ext_resource type="Resource" uid="uid://cqqln8j72uq1e" path="res://Card/Descriptions/Families/poison_family.tres" id="8_0a146"]
+[ext_resource type="Resource" uid="uid://djjcx0kdvmr5f" path="res://Card/Descriptions/Families/storm_caller_family.tres" id="10_nlixk"]
 [ext_resource type="Resource" uid="uid://b3vqgxyoo4150" path="res://Card/Descriptions/Families/necro_family.tres" id="10_x3b2u"]
 
-[node name="PrototypingFamilyPortrait" type="Control" unique_id=1945203330 node_paths=PackedStringArray("_ui_all_families_portrait", "_hide_show_button")]
+[node name="PrototypingFamilyPortrait" type="Control" unique_id=1945203330 node_paths=PackedStringArray("_ui_all_families_portrait")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,8 +21,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_th28h")
 _ui_all_families_portrait = NodePath("UIAllFamiliesPortrait")
-_hide_show_button = NodePath("HideShowButton")
-_families = Array[ExtResource("2_ju7j7")]([ExtResource("6_1ctrr"), ExtResource("4_meu6t"), ExtResource("7_it8y2"), ExtResource("5_ihlsc"), ExtResource("7_pt144"), ExtResource("10_x3b2u"), ExtResource("8_0a146")])
+_families = Array[ExtResource("2_ju7j7")]([ExtResource("6_1ctrr"), ExtResource("4_meu6t"), ExtResource("7_it8y2"), ExtResource("5_ihlsc"), ExtResource("7_pt144"), ExtResource("10_x3b2u"), ExtResource("8_0a146"), ExtResource("10_nlixk")])
 
 [node name="UIAllFamiliesPortrait" parent="." unique_id=120317412 instance=ExtResource("2_od8ek")]
 layout_mode = 1
@@ -30,21 +30,12 @@ offset_top = -306.0
 offset_right = 92.0
 offset_bottom = 397.0
 
-[node name="HideShowButton" type="Button" parent="." unique_id=330490016]
-layout_mode = 0
-offset_left = 225.0
-offset_top = 770.0
-offset_right = 418.0
-offset_bottom = 824.0
-text = "Show"
-
 [node name="AddRandomCardButton" type="Button" parent="." unique_id=930235911]
 layout_mode = 0
 offset_left = 230.0
-offset_top = 841.0
+offset_top = 549.0
 offset_right = 420.0
-offset_bottom = 907.0
+offset_bottom = 615.0
 text = "Add Random Card"
 
-[connection signal="pressed" from="HideShowButton" to="." method="_on_hide_show_button_pressed"]
 [connection signal="pressed" from="AddRandomCardButton" to="." method="_on_add_random_card_button_pressed"]

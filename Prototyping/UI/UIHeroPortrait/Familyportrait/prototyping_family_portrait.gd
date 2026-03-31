@@ -1,7 +1,6 @@
 extends Control
 
 @export var _ui_all_families_portrait: UIAllFamiliesPortrait
-@export var _hide_show_button: Button
 
 @export var _families: Array[Family]
 

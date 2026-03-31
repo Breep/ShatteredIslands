@@ -10,14 +10,11 @@
 [ext_resource type="Resource" uid="uid://brvmbafl0cv83" path="res://Card/Descriptions/Families/light_family.tres" id="8_5htbd"]
 [ext_resource type="Resource" uid="uid://r422raom70t5" path="res://Card/Descriptions/Families/colossus_family.tres" id="9_fbnxy"]
 [ext_resource type="Resource" uid="uid://cqqln8j72uq1e" path="res://Card/Descriptions/Families/poison_family.tres" id="10_ctxi2"]
-[ext_resource type="Resource" path="res://Card/Descriptions/Families/mana_family.tres" id="11_m1v75"]
 [ext_resource type="Resource" uid="uid://cqw2clgppw78q" path="res://Card/Descriptions/Families/chicken_lord_family.tres" id="12_o3hfc"]
-[ext_resource type="Resource" path="res://Card/Descriptions/Families/lightning_family.tres" id="13_o6ybx"]
 [ext_resource type="Resource" uid="uid://b3vqgxyoo4150" path="res://Card/Descriptions/Families/necro_family.tres" id="14_x005m"]
-[ext_resource type="Resource" path="res://Card/Descriptions/Families/shadow_family.tres" id="15_f4jjl"]
 [ext_resource type="PackedScene" uid="uid://dj7bvdysxgxe6" path="res://Card/2D/CardsViewer/ui_cards_viewer.tscn" id="16_4ggcj"]
 
-[node name="PrototypingFamilyViewer" type="Control" node_paths=PackedStringArray("_cards_viewer")]
+[node name="PrototypingFamilyViewer" type="Control" unique_id=1841013941 node_paths=PackedStringArray("_cards_viewer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,15 +31,12 @@ _families = Dictionary[int, ExtResource("3_4wtaq")]({
 5: ExtResource("8_5htbd"),
 6: ExtResource("9_fbnxy"),
 7: ExtResource("10_ctxi2"),
-8: ExtResource("11_m1v75"),
-9: ExtResource("12_o3hfc"),
-10: ExtResource("13_o6ybx"),
-11: ExtResource("14_x005m"),
-12: ExtResource("15_f4jjl")
+8: ExtResource("12_o3hfc"),
+9: ExtResource("14_x005m")
 })
-_cards_viewer = NodePath("MarginContainer/HBoxContainer/UICardsViewer")
+_cards_viewer = NodePath("MarginContainer/HBoxContainer/Control/UICardsViewer")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=109557145]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -54,19 +48,29 @@ theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 25
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1939535238]
 layout_mode = 2
 
-[node name="UICardsViewer" parent="MarginContainer/HBoxContainer" instance=ExtResource("16_4ggcj")]
+[node name="Control" type="Control" parent="MarginContainer/HBoxContainer" unique_id=1877587752]
 layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="UICardsViewer" parent="MarginContainer/HBoxContainer/Control" unique_id=824765676 instance=ExtResource("16_4ggcj")]
+layout_mode = 1
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+scale = Vector2(0.6, 0.6)
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
 
-[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer"]
+[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer" unique_id=292442956]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/Panel" unique_id=2048586603]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -78,77 +82,77 @@ theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 25
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/Panel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/Panel/MarginContainer" unique_id=1067365223]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="AttackFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+[node name="AttackFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer" unique_id=974800872]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 30
 text = "Attack Family"
 
-[node name="ChickenLordFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+[node name="ChickenLordFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer" unique_id=352973499]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 30
 text = "Chicken Lord Family"
 
-[node name="DefenseFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+[node name="DefenseFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer" unique_id=2055902917]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 30
 text = "Defense Family"
 
-[node name="FireFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+[node name="FireFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer" unique_id=317872383]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 30
 text = "Fire Family"
 
-[node name="LifeFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+[node name="LifeFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer" unique_id=1343261811]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 30
 text = "Life Family"
 
-[node name="LightningFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+[node name="LightningFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer" unique_id=59896306]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 30
 text = "Lightning Family"
 
-[node name="ManaFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+[node name="ManaFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer" unique_id=1127151058]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 30
 text = "Mana Family"
 
-[node name="NecroFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+[node name="NecroFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer" unique_id=1165088090]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 30
 text = "Necro Family"
 
-[node name="PoisonFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+[node name="PoisonFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer" unique_id=141775059]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 30
 text = "Poison Family"
 
-[node name="SerenityFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+[node name="SerenityFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer" unique_id=362328183]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 30
 text = "Serenity Family"
 
-[node name="ShadowFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+[node name="ShadowFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer" unique_id=402319907]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 30
 text = "Shadow Family"
 
-[node name="StormFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+[node name="StormFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer" unique_id=692071608]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 30
