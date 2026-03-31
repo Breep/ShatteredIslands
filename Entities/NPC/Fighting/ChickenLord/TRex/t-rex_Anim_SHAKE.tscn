@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bkn8c7xncou7v"]
+
+[ext_resource type="PackedScene" uid="uid://btvyd5m5tl1wm" path="res://Entities/NPC/Fighting/ChickenLord/TRex/Mesh/t-rex_Anim_SHAKE.glb" id="1_itk2a"]
+
+[node name="t-rex_Anim_SHAKE" unique_id=795318135 instance=ExtResource("1_itk2a")]
+
+[node name="Skeleton3D" parent="metarig" parent_id_path=PackedInt32Array(1908392285) index="7" unique_id=833106855]
+bones/0/rotation = Quaternion(0.849023, -0.0026579744, -0.0025643276, 0.5283431)
+bones/1/rotation = Quaternion(0.97827137, 0.019006189, -0.0026284237, 0.20643926)
+bones/2/rotation = Quaternion(0.026202135, -0.0008502094, 0.019168302, 0.99947256)
+bones/3/rotation = Quaternion(0.051709775, -0.0025314107, 0.0069103134, 0.99863505)
+bones/4/rotation = Quaternion(-0.6711665, -0.0044396617, -0.0004177446, 0.7412933)
+bones/5/rotation = Quaternion(0.34038508, 2.243803e-07, 1.6247883e-07, 0.9402861)
+bones/10/rotation = Quaternion(-0.06667988, 0.022383867, 0.0031588734, 0.9975183)
+bones/18/rotation = Quaternion(0.16269054, 0.035676345, -0.42937467, 0.8876353)
+bones/19/rotation = Quaternion(0.16268972, -0.03567808, 0.42937514, 0.8876352)
+bones/25/rotation = Quaternion(0.8140963, -0.11818138, -0.009385985, 0.56850004)
+bones/26/rotation = Quaternion(0.4738083, -0.008618037, -0.029895777, 0.8800783)
+bones/27/rotation = Quaternion(-0.25573957, -0.0337414, -0.09958892, 0.9610104)
+bones/41/rotation = Quaternion(0.8111351, 0.12753612, 0.007062421, 0.5707404)
+bones/42/rotation = Quaternion(0.47856304, 0.0102703795, 0.026820501, 0.8775834)
+bones/43/rotation = Quaternion(-0.2549447, 0.033632588, 0.09878854, 0.9613079)
+bones/44/rotation = Quaternion(-0.039517723, 0.7713117, -0.63411874, -0.03755097)
+bones/57/rotation = Quaternion(0.95646435, 0.18675396, 0.022458192, -0.22314702)
+bones/61/rotation = Quaternion(-0.050440576, 0.9750435, -0.21434158, -0.028349215)
+bones/72/rotation = Quaternion(0.95646435, -0.18675381, -0.022458224, -0.22314708)
