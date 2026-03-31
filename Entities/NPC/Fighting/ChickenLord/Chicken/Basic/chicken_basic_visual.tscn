@@ -1,9 +1,6 @@
 [gd_scene format=4 uid="uid://ctj0phpdgq5iu"]
 
-[ext_resource type="Texture2D" uid="uid://opwnfxta0ova" path="res://Entities/NPC/Fighting/ChickenLord/Chicken/Data/chicken_diffuse.png" id="1_obnro"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ykqu3"]
-albedo_texture = ExtResource("1_obnro")
+[ext_resource type="Material" uid="uid://bktxfllnm05g5" path="res://Entities/NPC/Fighting/ChickenLord/Chicken/Basic/T_chicken_basic/M_chicken_basic.tres" id="1_0dn1a"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_banjt"]
 resource_name = "Chicken"
@@ -892,7 +889,7 @@ bones/12/rotation = Quaternion(1.5295967e-07, -0.4917123, 1.5807893e-07, 0.87075
 bones/12/scale = Vector3(0.99999994, 1, 0.99999994)
 
 [node name="Chicken" type="MeshInstance3D" parent="Skeleton3D" unique_id=1839562433]
-material_override = SubResource("StandardMaterial3D_ykqu3")
+material_override = ExtResource("1_0dn1a")
 mesh = SubResource("ArrayMesh_ln18q")
 skin = SubResource("Skin_utmen")
 
