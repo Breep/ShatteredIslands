@@ -14,6 +14,7 @@ metadata/_custom_type_script = "uid://uputg65q417d"
 
 [resource]
 script = ExtResource("1_vikme")
+name = "Armaged'heal"
 picture = SubResource("PlaceholderTexture2D_c3p31")
 families = Array[int]([3])
 rarity = 2

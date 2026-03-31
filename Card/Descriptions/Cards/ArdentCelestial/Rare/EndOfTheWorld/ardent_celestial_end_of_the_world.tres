@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://dtgm8rrgdq3bj"]
+
+[ext_resource type="Script" uid="uid://b8ekun7kie34s" path="res://Card/Descriptions/Cards/ArdentCelestial/Rare/EndOfTheWorld/ardent_celestial_end_of_the_world.gd" id="1_2tawv"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_lslku"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_m1imo"]
+
+[sub_resource type="Resource" id="Resource_tthom"]
+script = ExtResource("1_2tawv")
+_bonus_meteor_chances = Array[float]([1.0, 2.0, 3.0, 4.0, 5.0])
+_rarity = 1
+metadata/_custom_type_script = "uid://b8ekun7kie34s"
+
+[resource]
+script = ExtResource("1_lslku")
+name = "End of the World"
+picture = SubResource("PlaceholderTexture2D_m1imo")
+families = Array[int]([3])
+rarity = 1
+player_upgrade = SubResource("Resource_tthom")
+points = Dictionary[int, int]({
+3: 2
+})
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

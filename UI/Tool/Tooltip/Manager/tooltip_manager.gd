@@ -37,6 +37,7 @@ extends Node
 	load("res://UI/Tool/Tooltip/Dictionary/magical_damage.tres"),
 	load("res://UI/Tool/Tooltip/Dictionary/meteor.tres"),
 	load("res://UI/Tool/Tooltip/Dictionary/mr.tres"),
+	load("res://UI/Tool/Tooltip/Dictionary/mana.tres"),
 	
 	# --- N ---
 	load("res://UI/Tool/Tooltip/Dictionary/necro_family.tres"),

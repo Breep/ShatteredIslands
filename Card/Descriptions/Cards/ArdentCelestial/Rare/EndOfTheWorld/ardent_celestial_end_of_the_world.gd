@@ -5,7 +5,7 @@ extends HeroUpgrade
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[Card.Rarity.RARE]:
-		printerr("FireCosmopolitan: Wrong card_lvl: ", card_lvl)
+		printerr("End of the world: Wrong card_lvl: ", card_lvl)
 		return
 		
 	var bonus_meteor_chance: float = _bonus_meteor_chances[card_lvl - 1]
@@ -15,5 +15,6 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[Card.Rarity.RARE]:
 		return "ERROR"
-		
-	return "Increase the spawn chance of meteor by " + str(_bonus_meteor_chances[cardlvl - 1 ]) + "%."
+		printerr("End of the world: Wrong card_lvl: ", cardlvl)
+
+	return "Increase the spawn chance of [[METEOR]] by " + str(_bonus_meteor_chances[cardlvl - 1 ]) + "%."

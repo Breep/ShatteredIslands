@@ -5,7 +5,7 @@ extends HeroUpgrade
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("Titans Protection: Wrong card_lvl: ", card_lvl)
+		printerr("Quasar: Wrong card_lvl: ", card_lvl)
 		return
 
 	var hp_amount: int = int(_hp_amount[card_lvl - 1])
@@ -32,7 +32,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("Titans Protection: Wrong cardlvl: ", cardlvl)
+		printerr("Quasar: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
 	return "Increase max HP for this battle by " + str(_hp_amount[cardlvl - 1]) + " per [[METEOR]] spawn."

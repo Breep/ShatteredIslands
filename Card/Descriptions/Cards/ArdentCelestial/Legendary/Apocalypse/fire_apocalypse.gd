@@ -19,5 +19,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[Card.Rarity.LEGENDARY]:
+		printerr("Apocalypse: Wrong card_lvl: ", cardlvl)
 		return "ERROR"
+		
 	return "Every second, increase the spawn chance of [[METEOR]] by " + str(_meteor_bonus_chance[cardlvl - 1]) + "%."

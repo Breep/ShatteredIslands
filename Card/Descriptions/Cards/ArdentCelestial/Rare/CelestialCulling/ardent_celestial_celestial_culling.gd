@@ -5,7 +5,7 @@ extends HeroUpgrade
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("End Of The World: Wrong card_lvl: ", card_lvl)
+		printerr("Celestial Culling: Wrong card_lvl: ", card_lvl)
 		return
 
 	var threshold: float = _thresholds[card_lvl - 1]
@@ -26,4 +26,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Celestial Culling: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Meteor execute enemies below " + str(_thresholds[cardlvl - 1]) + "% of their max health."
+	return "The [[METEOR]] execute enemies below " + str(_thresholds[cardlvl - 1]) + "% of their max health."
