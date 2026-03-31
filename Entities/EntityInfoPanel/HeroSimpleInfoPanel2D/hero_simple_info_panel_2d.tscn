@@ -186,7 +186,7 @@ shader_parameter/CornerRadius = 0.05
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xw8nt"]
 shader = ExtResource("2_er62k")
-shader_parameter/HealthAmount = 0.6
+shader_parameter/HealthAmount = 0.506000024035
 shader_parameter/MaxHealth = 2500.0
 shader_parameter/HealthColor = Color(4.428029e-06, 0.7022774, 0.9995093, 1)
 shader_parameter/BackgroundColor = Color(0.15, 0.15, 0.15, 0.8)
@@ -318,6 +318,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="ManaBar" type="ColorRect" parent="MainVBox/HealthAndMana/HealthAndMana" unique_id=564324133]
+unique_name_in_owner = true
 material = SubResource("ShaderMaterial_xw8nt")
 custom_minimum_size = Vector2(80, 5)
 layout_mode = 2
@@ -325,6 +326,7 @@ mouse_filter = 2
 
 [node name="DebugValues" type="HBoxContainer" parent="MainVBox/HealthAndMana" unique_id=160983650]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -349,6 +351,7 @@ text = "42"
 label_settings = SubResource("LabelSettings_shld")
 
 [node name="Control" type="Control" parent="MainVBox" unique_id=1726330834]
+visible = false
 layout_mode = 2
 mouse_filter = 2
 
