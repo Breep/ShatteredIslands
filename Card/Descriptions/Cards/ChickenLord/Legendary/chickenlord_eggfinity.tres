@@ -19,7 +19,7 @@ families = Array[int]([8])
 rarity = 3
 player_upgrade = SubResource("Resource_mhg1k")
 points = Dictionary[int, int]({
-8: 4
+8: 5
 })
 lvl = 3
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"
