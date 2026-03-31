@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cjd4fxg26sbp0"
-path.s3tc="res://.godot/imported/t-rex_final_UV_tongue_BaseColor.png-4dfcb33287a01c95a934ae7ff2cb8cc6.s3tc.ctex"
+uid="uid://bgeyrpm643ad1"
+path.s3tc="res://.godot/imported/t-rex_final_UV_body_BaseColor.png-433add97fa121509dfb3264f60a8a6af.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Entities/NPC/Fighting/ChickenLord/TRex/TrexTexture/t-rex_final_UV_tongue_BaseColor.png"
-dest_files=["res://.godot/imported/t-rex_final_UV_tongue_BaseColor.png-4dfcb33287a01c95a934ae7ff2cb8cc6.s3tc.ctex"]
+source_file="res://Entities/NPC/Fighting/ChickenLord/TRex/Data/TrexTexture/t-rex_final_UV_body_BaseColor.png"
+dest_files=["res://.godot/imported/t-rex_final_UV_body_BaseColor.png-433add97fa121509dfb3264f60a8a6af.s3tc.ctex"]
 
 [params]
 

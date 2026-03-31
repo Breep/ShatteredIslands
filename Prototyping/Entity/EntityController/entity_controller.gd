@@ -768,8 +768,8 @@ func _on_summon_entity_button_pressed() -> void:
 				entity_modifier[AegisBlade.Modifier.DAMAGE_AS_SHIELD] = edits[4].text.to_float()
 
 			Entity.EntityType.TREX:
-				entity_modifier[TRex.Modifier.GIFTED_SPAWN_PERIOD] = edits[0].text.to_float()
-				entity_modifier[TRex.Modifier.GIFTED_SPAWN_NUMBER] = int(edits[1].text.to_float())
+				entity_modifier[TRex.Modifier.PRIMAL_SHAKE_PERIOD] = edits[0].text.to_float()
+				entity_modifier[TRex.Modifier.PRIMAL_SHAKE_NUMBER] = int(edits[1].text.to_float())
 				entity_modifier[TRex.Modifier.HP_BONUS] = edits[2].text.to_float()
 
 			Entity.EntityType.DEFLECTION_SHIELD:
