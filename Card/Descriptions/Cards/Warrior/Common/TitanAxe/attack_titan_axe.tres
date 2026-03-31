@@ -15,7 +15,7 @@ metadata/_custom_type_script = "uid://bers5cdl5wv3u"
 script = ExtResource("1_fnffb")
 name = "Titan Axe"
 picture = ExtResource("1_j4nvj")
-families = Array[int]([1, 6])
+families = Array[int]([6, 1])
 player_upgrade = SubResource("Resource_4lasq")
 points = Dictionary[int, int]({
 1: 1,
