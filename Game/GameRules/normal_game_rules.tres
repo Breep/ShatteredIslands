@@ -4,7 +4,19 @@
 
 [resource]
 script = ExtResource("1_8i4ne")
-player_starting_health = 10
+family_level_points = Dictionary[int, int]({
+0: 0,
+1: 7,
+2: 15,
+3: 24,
+4: 34
+})
+gold_earned_per_round = 700
+gold_starting_game = 1000
+player_starting_health = 5
+damage_max_diff_win_lose = 2
+xp_per_round = 5
+xp_per_oracle_buy = 5
 xp_per_family_lvl = 0
 xp_per_levels = Dictionary[int, int]({
 1: 6,
@@ -19,3 +31,5 @@ xp_per_levels = Dictionary[int, int]({
 10: 100
 })
 duration_buying_phase = 30.0
+duration_fighting_normal = 30.0
+duration_fighting_special = 25.0
