@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://w3vnhtb1ubh3"
-path.s3tc="res://.godot/imported/t-rex_final_UV_pupil_BaseColor.png-5522039e593d13c08754cf8f1cadec1d.s3tc.ctex"
+uid="uid://bs1q1v6d2vpvm"
+path.s3tc="res://.godot/imported/t-rex_final_UV_teeth_top_BaseColor.png-f74b643656da945b2aa7b5c8d5370507.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Entities/NPC/Fighting/ChickenLord/TRex/TrexTexture/t-rex_final_UV_pupil_BaseColor.png"
-dest_files=["res://.godot/imported/t-rex_final_UV_pupil_BaseColor.png-5522039e593d13c08754cf8f1cadec1d.s3tc.ctex"]
+source_file="res://Entities/NPC/Fighting/ChickenLord/TRex/Data/TrexTexture/t-rex_final_UV_teeth_top_BaseColor.png"
+dest_files=["res://.godot/imported/t-rex_final_UV_teeth_top_BaseColor.png-f74b643656da945b2aa7b5c8d5370507.s3tc.ctex"]
 
 [params]
 

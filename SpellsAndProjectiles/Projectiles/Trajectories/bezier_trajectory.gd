@@ -26,38 +26,16 @@ func _on_init() -> void:
 
 
 func update(logic_pos: Vector3, delta: float) -> Vector3:
-	if not is_instance_valid(_target):
-		# Target gone: continue along last known curve
-		_t = min(1.0, _t + delta / _travel_time)
-		var a := _start_pos.lerp(_control_point, _t)
-		var b := _control_point.lerp(_target_snapshot, _t)
-		var position := a.lerp(b, _t)
-		logic_pos = position
-		var direction := (b - a).normalized()
-		if direction.length_squared() > 0.001:
-			_projectile.look_at(position + direction)
-		return logic_pos
-
-	# Update target position each frame for tracking
-	_target_snapshot = _target.get_collision_center()
-
-	# Recalculate arc: start from current position toward live target
-	_start_pos = logic_pos
-	var midpoint := (_start_pos + _target_snapshot) * 0.5
-	_control_point = midpoint + Vector3.UP * (control_height + _height_variation)
-
-	# Recalculate travel time from remaining distance
-	var remaining_distance := logic_pos.distance_to(_target_snapshot)
-	_travel_time = max(0.001, remaining_distance / max(0.001, speed))
-	_t = min(1.0, delta / _travel_time)
-
+	_t = min(1.0, _t + delta / _travel_time)
+	
 	# Quadratic Bezier: B(t) = (1-t)²P0 + 2(1-t)tP1 + t²P2
+	# Or using double lerp: lerp(lerp(P0, P1, t), lerp(P1, P2, t), t)
 	var a := _start_pos.lerp(_control_point, _t)
 	var b := _control_point.lerp(_target_snapshot, _t)
 	var position := a.lerp(b, _t)
-
+	
 	logic_pos = position
-
+	
 	# Look toward next position for orientation
 	var direction := (b - a).normalized()
 	if direction.length_squared() > 0.001:

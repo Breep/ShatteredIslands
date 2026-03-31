@@ -19,7 +19,7 @@ families = Array[int]([8])
 rarity = 2
 player_upgrade = SubResource("Resource_hux25")
 points = Dictionary[int, int]({
-8: 2
+8: 3
 })
 lvl = 3
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

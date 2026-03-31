@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cbsgqx1r8bqf1"
-path.s3tc="res://.godot/imported/t-rex_final_UV_feather_neck_BaseColor.png-9b690fb711001cfb2090126b7f95acbf.s3tc.ctex"
+uid="uid://dbfegywnoqka6"
+path.s3tc="res://.godot/imported/feather_particule.png-4299b665dae8c03b0bd6125642de8935.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Entities/NPC/Fighting/ChickenLord/TRex/TrexTexture/t-rex_final_UV_feather_neck_BaseColor.png"
-dest_files=["res://.godot/imported/t-rex_final_UV_feather_neck_BaseColor.png-9b690fb711001cfb2090126b7f95acbf.s3tc.ctex"]
+source_file="res://Entities/NPC/Fighting/ChickenLord/TRex/Data/feather_particule.png"
+dest_files=["res://.godot/imported/feather_particule.png-4299b665dae8c03b0bd6125642de8935.s3tc.ctex"]
 
 [params]
 
