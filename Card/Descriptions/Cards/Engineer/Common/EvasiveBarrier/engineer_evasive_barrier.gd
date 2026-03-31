@@ -38,4 +38,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Evasive Barrier: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Increase dodge by " + str(_dodge_increase[cardlvl - 1]) + ". Gain " + str(_shield_gain[cardlvl - 1]) + " shield on dodge."
+	return "Increase [[DODGE]] by " + str(_dodge_increase[cardlvl - 1]) + ". Gain " + str(_shield_gain[cardlvl - 1]) + " [[SHIELD]] on [[DODGE]]."

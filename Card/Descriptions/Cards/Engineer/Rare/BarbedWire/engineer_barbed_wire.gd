@@ -22,4 +22,4 @@ func get_description(cardlvl: int) -> String:
 		return "ERROR"
 	
 	var thorn: String = str(_thorns[cardlvl - 1]).pad_decimals(0)
-	return "Gain " + thorn + " thorn while having shield"
+	return "Gain " + thorn + " thorn while having [[SHIELD]]"

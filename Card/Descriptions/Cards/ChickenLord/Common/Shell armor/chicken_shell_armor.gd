@@ -23,4 +23,4 @@ func get_description(cardlvl: int) -> String:
 		return "ERROR"
 	
 	var c: String = str(_block_stacks[cardlvl - 1]).pad_decimals(0)
-	return "Add " + c + " block stack to chicken on hatch."
+	return "Add " + c + " [[BLOCK]] stacks to chicken on hatch."

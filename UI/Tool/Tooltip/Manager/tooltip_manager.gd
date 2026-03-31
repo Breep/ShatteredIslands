@@ -10,6 +10,9 @@ extends Node
 	load("res://UI/Tool/Tooltip/Dictionary/armor.tres"),
 	load("res://UI/Tool/Tooltip/Dictionary/attack.tres"),
 	
+	# --- B ---
+	load("res://UI/Tool/Tooltip/Dictionary/block.tres"),
+	
 	# --- C ---
 	load("res://UI/Tool/Tooltip/Dictionary/chickenlord_family.tres"),
 	load("res://UI/Tool/Tooltip/Dictionary/cleanse.tres"),
@@ -58,6 +61,7 @@ extends Node
 	load("res://UI/Tool/Tooltip/Dictionary/strength.tres"),
 	load("res://UI/Tool/Tooltip/Dictionary/stun.tres"),
 	load("res://UI/Tool/Tooltip/Dictionary/summon.tres"),
+	load("res://UI/Tool/Tooltip/Dictionary/scale.tres"),
 	
 	# --- T / V / W ---
 	load("res://UI/Tool/Tooltip/Dictionary/true_damage.tres"),
@@ -78,7 +82,7 @@ extends Node
 	"DODGE":             "[color=%s][url=DODGE]dodge[/url][/color]"                         % THEME.color_html("STAT_COLOR"),
 	"DEFENCE":           "[color=%s][url=DEFENCE]defence[/url][/color]"                     % THEME.color_html("DEFENCE_COLOR"),
 	"POISON_RESISTANCE": "[color=%s][url=POISON_RESISTANCE]poison resistance[/url][/color]" % THEME.color_html("POISON_COLOR"),
-	"SCALE":             "[color=%s][url=SCALE]scale[/url][/color]"                         % THEME.color_html("SCALE"),
+	"SCALE":             "[color=%s][url=SCALE]scale[/url][/color]"                         % THEME.color_html("SCALE_COLOR"),
 
 	# --- STATS OFFENSIVES ---
 	"WARRIOR":         "[color=%s][url=WARRIOR]attack[/url][/color]"                  % THEME.color_html("ATTACK_COLOR"),
@@ -91,6 +95,7 @@ extends Node
 	"NECROSIS":     "[color=%s][url=NECROSIS]necrosis[/url][/color]"         % THEME.color_html("NECRO_COLOR"),
 	"REGEN":        "[color=%s][url=REGEN]regen[/url][/color]"               % THEME.color_html("REGEN_COLOR"),
 	"SHIELD":       "[color=%s][url=SHIELD]shield[/url][/color]"             % THEME.color_html("SHIELD_COLOR"),
+	"BLOCK":        "[color=%s][url=BLOCK]block[/url][/color]"               % THEME.color_html("BLOCK_COLOR"),
 
 	# --- EFFETS / STATUS ---
 	"STUN":          "[color=%s][url=STUN]stun[/url][/color]"                   % THEME.color_html("STAT_COLOR"),

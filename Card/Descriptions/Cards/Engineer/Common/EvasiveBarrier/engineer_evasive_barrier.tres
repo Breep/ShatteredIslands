@@ -12,7 +12,7 @@ metadata/_custom_type_script = "uid://dkgdt80bfilx7"
 
 [resource]
 script = ExtResource("1_3rfj7")
-name = "Evading pants"
+name = "Evasive Barrier"
 picture = ExtResource("1_mrx1q")
 families = Array[int]([2])
 player_upgrade = SubResource("Resource_st557")

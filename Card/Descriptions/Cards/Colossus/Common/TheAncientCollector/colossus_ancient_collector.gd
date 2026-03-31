@@ -24,4 +24,4 @@ func get_description(cardlvl: int) -> String:
 
 	var amount_str = str(_amount_per_card[cardlvl - 1]).pad_decimals(0)
 
-	return "Gain " + amount_str + " Max Health for each unique card you have."
+	return "Gain " + amount_str + " max HP for each unique card you have."

@@ -12,10 +12,17 @@
 [ext_resource type="Resource" uid="uid://cno4627vx3nt8" path="res://Card/Descriptions/Cards/Colossus/Epic/VitalPulse/colossus_vital_pulse.tres" id="8_ot8pp"]
 [ext_resource type="Resource" uid="uid://lyy1665stx5d" path="res://Card/Descriptions/Cards/Colossus/Rare/CrystalMountain/colossus_crystal_mountain.tres" id="9_8fnfk"]
 [ext_resource type="Resource" uid="uid://b62a25wa2mjlv" path="res://Card/Descriptions/Cards/Colossus/Rare/Tainted Blood/colossus_tainted_blood.tres" id="10_davh1"]
+[ext_resource type="Resource" uid="uid://c1jb5nmdg2bsh" path="res://Card/Descriptions/Cards/Colossus/Legendary/Resurrection/colossus_resurrection.tres" id="11_7e61f"]
+[ext_resource type="Resource" uid="uid://yu8vfa6x3r0g" path="res://Card/Descriptions/Cards/Colossus/Epic/SeismicSlam/colossus_seismic_slam.tres" id="12_16e3t"]
+[ext_resource type="Resource" uid="uid://dwiblmgcamycs" path="res://Card/Descriptions/Cards/Colossus/Rare/StoneSkin/colossus_stone_skin.tres" id="13_hn4pb"]
+[ext_resource type="Resource" uid="uid://dvdq132b07dqq" path="res://Card/Descriptions/Cards/Colossus/Common/ColossalTitan/colossus_colossal_titan.tres" id="14_ky0l2"]
+[ext_resource type="Resource" uid="uid://boj2sieffvuf3" path="res://Card/Descriptions/Cards/Colossus/Common/CrushingWeight/colossus_crushing_weight.tres" id="15_utu2c"]
+[ext_resource type="Resource" uid="uid://bkh1w5p17fgaf" path="res://Card/Descriptions/Cards/Colossus/Common/UnbreakableWall/colossus_unbreakable_wall.tres" id="16_t6avb"]
+[ext_resource type="Resource" uid="uid://50ga6somnl7u" path="res://Card/Descriptions/Cards/Warrior/Common/TitanAxe/attack_titan_axe.tres" id="17_16e3t"]
 
 [resource]
 script = ExtResource("2_upugm")
-cards = Array[ExtResource("1_f2mb4")]([ExtResource("2_ai50x"), ExtResource("3_hi2cu"), ExtResource("4_lk4sd"), ExtResource("5_ehjyb"), ExtResource("6_c6tfe"), ExtResource("7_15pwq"), ExtResource("8_ot8pp"), ExtResource("9_8fnfk"), ExtResource("10_davh1")])
+cards = Array[ExtResource("1_f2mb4")]([ExtResource("2_ai50x"), ExtResource("3_hi2cu"), ExtResource("4_lk4sd"), ExtResource("5_ehjyb"), ExtResource("6_c6tfe"), ExtResource("7_15pwq"), ExtResource("8_ot8pp"), ExtResource("9_8fnfk"), ExtResource("10_davh1"), ExtResource("11_7e61f"), ExtResource("12_16e3t"), ExtResource("13_hn4pb"), ExtResource("14_ky0l2"), ExtResource("15_utu2c"), ExtResource("16_t6avb"), ExtResource("17_16e3t")])
 icon = ExtResource("2_sor6b")
 family_name = "Colossus"
 family_type = 6

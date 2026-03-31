@@ -13,6 +13,7 @@ metadata/_custom_type_script = "uid://c04gh67exri7q"
 
 [resource]
 script = ExtResource("1_65eac")
+name = "Colossal Titan"
 picture = SubResource("PlaceholderTexture2D_0k8po")
 families = Array[int]([6])
 player_upgrade = SubResource("Resource_3fuju")

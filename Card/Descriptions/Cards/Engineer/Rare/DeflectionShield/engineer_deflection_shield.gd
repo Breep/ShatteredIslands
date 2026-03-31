@@ -31,4 +31,4 @@ func get_description(cardlvl: int) -> String:
 	
 	var bp: String = str(_blocked_projectiles[cardlvl - 1])
 	var sb: String = str(_shield_per_blocks[cardlvl - 1])
-	return "Summon a orbiting shield blocking " + bp + " projectiles. Each block, hero gain " + sb + " shields."
+	return "Summon an orbiting shield blocking " + bp + " projectiles. Each block, hero gain " + sb + " [[SHIELD]]."
