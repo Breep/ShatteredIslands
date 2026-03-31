@@ -33,7 +33,7 @@ var _portrait_to_control_map: Dictionary[UIFamilyPortrait, Control]
 
 func _ready() -> void:
 	init_portait_families(GameManager.active_families)
-	pass
+	Events.entity_clicked.connect(_on_events_entity_clicked)
 
 # ============================== Public functions ==============================
 
@@ -142,7 +142,11 @@ func _on_portrait_family_unselected(_portrait_family: UIFamilyPortrait) -> void:
 	family_selected.emit(Family.Type.UNDEF)
 
 
-
+func _on_events_entity_clicked(entity: Entity) -> void:
+	if not entity is Hero: return
+	var hero: Hero = entity
+	if hero.player != null:
+		update_content(hero.player)
 
 
 

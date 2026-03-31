@@ -4,7 +4,7 @@ extends Control
 @onready var _player_name_label: RichTextLabel = %PlayerNameLabel
 
 func _ready() -> void:
-	Events.entity_cliked.connect(_on_events_entity_clicked)
+	Events.entity_clicked.connect(_on_events_entity_clicked)
 
 
 func _on_events_entity_clicked(entity: Entity) -> void:

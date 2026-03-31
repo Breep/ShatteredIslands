@@ -154,7 +154,7 @@ func _ready() -> void:
 	if entity_owner != null:
 		_entity_name_label.text = entity_owner.entity_name
 	
-	Events.entity_cliked.connect(_on_entity_clicked)
+	Events.entity_clicked.connect(_on_entity_clicked)
 
 
 func _refresh_target() -> void:

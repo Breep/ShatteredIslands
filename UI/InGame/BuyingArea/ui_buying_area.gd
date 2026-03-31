@@ -12,7 +12,7 @@ var _is_active: bool
 # ============================== Local nodes functions ==============================
 
 func _ready() -> void:
-	Events.entity_cliked.connect(_on_events_entity_clicked)
+	Events.entity_clicked.connect(_on_events_entity_clicked)
 	Events.furniture_clicked.connect(_on_events_furniture_clicked)
 	Events.nothing_clicked.connect(_on_events_nothing_clicked)
 
