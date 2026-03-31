@@ -12,6 +12,7 @@ metadata/_custom_type_script = "uid://i240pr1or385"
 
 [resource]
 script = ExtResource("1_qg2ct")
+name = "Diamond Skin"
 picture = SubResource("PlaceholderTexture2D_r4pgj")
 families = Array[int]([3])
 player_upgrade = SubResource("Resource_4nyf3")

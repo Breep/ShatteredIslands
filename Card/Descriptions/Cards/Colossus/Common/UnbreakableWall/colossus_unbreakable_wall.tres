@@ -12,6 +12,7 @@ metadata/_custom_type_script = "uid://wsl4w7ell7ax"
 
 [resource]
 script = ExtResource("1_lfvc3")
+name = "Unbreakable Wall"
 picture = SubResource("PlaceholderTexture2D_d7yvi")
 families = Array[int]([6])
 player_upgrade = SubResource("Resource_0hcne")

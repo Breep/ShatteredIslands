@@ -12,6 +12,7 @@ metadata/_custom_type_script = "uid://b0ymmuqdg7pm1"
 
 [resource]
 script = ExtResource("1_l6nng")
+name = "Crushing Weight"
 picture = SubResource("PlaceholderTexture2D_be7bm")
 families = Array[int]([6])
 player_upgrade = SubResource("Resource_0ena7")

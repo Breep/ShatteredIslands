@@ -15,6 +15,7 @@ metadata/_custom_type_script = "uid://doxm2j6oomuw"
 
 [resource]
 script = ExtResource("1_xkn16")
+name = "Resurrection"
 picture = SubResource("PlaceholderTexture2D_kpp3c")
 families = Array[int]([6])
 points = Dictionary[int, int]({
