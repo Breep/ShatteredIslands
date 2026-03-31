@@ -2,8 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_lfvc3"]
 [ext_resource type="Script" uid="uid://wsl4w7ell7ax" path="res://Card/Descriptions/Cards/Colossus/Common/UnbreakableWall/colossus_unbreakable_wall.gd" id="1_ose3l"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_d7yvi"]
+[ext_resource type="Texture2D" uid="uid://btsavc4kievdf" path="res://Card/Descriptions/Cards/Colossus/Common/ColossalTitan/colosse.png" id="2_colos"]
 
 [sub_resource type="Resource" id="Resource_0hcne"]
 script = ExtResource("1_ose3l")
@@ -13,7 +12,7 @@ metadata/_custom_type_script = "uid://wsl4w7ell7ax"
 [resource]
 script = ExtResource("1_lfvc3")
 name = "Unbreakable Wall"
-picture = SubResource("PlaceholderTexture2D_d7yvi")
+picture = ExtResource("2_colos")
 families = Array[int]([6])
 player_upgrade = SubResource("Resource_0hcne")
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

@@ -2,8 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_script"]
 [ext_resource type="Script" uid="uid://d2tiokyuvpjjr" path="res://Card/Descriptions/Cards/ArdentCelestial/Legendary/Apocalypse/fire_apocalypse.gd" id="2_sub_resource"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_dhrxl"]
+[ext_resource type="Texture2D" uid="uid://tuwewl8ngbqu" path="res://Card/Descriptions/Cards/ArdentCelestial/Common/DarkForest/fire_dark_forest.png" id="2_ardnt"]
 
 [sub_resource type="Resource" id="Resource_apocalypse"]
 script = ExtResource("2_sub_resource")
@@ -13,7 +12,7 @@ _rarity = 3
 [resource]
 script = ExtResource("1_script")
 name = "Apocalypse"
-picture = SubResource("PlaceholderTexture2D_dhrxl")
+picture = ExtResource("2_ardnt")
 families = Array[int]([3])
 rarity = 3
 player_upgrade = SubResource("Resource_apocalypse")

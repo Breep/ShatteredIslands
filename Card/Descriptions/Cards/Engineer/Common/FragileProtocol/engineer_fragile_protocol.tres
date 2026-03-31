@@ -2,8 +2,7 @@
 
 [ext_resource type="Script" uid="uid://demnk3ihj3417" path="res://Card/Descriptions/Cards/Engineer/Rare/FragileProtocol/engineer_fragile_protocol.gd" id="1_1n077"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_in42e"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_k80y1"]
+[ext_resource type="Texture2D" uid="uid://psnthd75twnn" path="res://Card/Descriptions/Cards/Engineer/Common/ForceField/engineer_force_field.png" id="2_engr1"]
 
 [sub_resource type="Resource" id="Resource_rjaxb"]
 script = ExtResource("1_1n077")
@@ -15,7 +14,7 @@ metadata/_custom_type_script = "uid://demnk3ihj3417"
 [resource]
 script = ExtResource("1_in42e")
 name = "Fragile Protocol"
-picture = SubResource("PlaceholderTexture2D_k80y1")
+picture = ExtResource("2_engr1")
 families = Array[int]([2])
 player_upgrade = SubResource("Resource_rjaxb")
 points = Dictionary[int, int]({

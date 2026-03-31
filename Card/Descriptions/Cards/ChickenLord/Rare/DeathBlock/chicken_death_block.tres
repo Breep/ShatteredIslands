@@ -2,8 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ctlfm7gum310p" path="res://Card/Descriptions/Cards/ChickenLord/Rare/DeathBlock/chicken_death_block.gd" id="1_53t7h"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_polcn"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_j84xf"]
+[ext_resource type="Texture2D" uid="uid://cslxv8ffyte5k" path="res://Card/Descriptions/Cards/ChickenLord/Common/AssistantChicken/chicken lord.png" id="2_chkn1"]
 
 [sub_resource type="Resource" id="Resource_xue0l"]
 script = ExtResource("1_53t7h")
@@ -13,7 +12,7 @@ metadata/_custom_type_script = "uid://ctlfm7gum310p"
 [resource]
 script = ExtResource("1_polcn")
 name = "Death Block"
-picture = SubResource("PlaceholderTexture2D_j84xf")
+picture = ExtResource("2_chkn1")
 families = Array[int]([8])
 rarity = 1
 player_upgrade = SubResource("Resource_xue0l")

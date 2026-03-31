@@ -2,8 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b8ekun7kie34s" path="res://Card/Descriptions/Cards/ArdentCelestial/Rare/EndOfTheWorld/ardent_celestial_end_of_the_world.gd" id="1_2tawv"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_lslku"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_m1imo"]
+[ext_resource type="Texture2D" uid="uid://tuwewl8ngbqu" path="res://Card/Descriptions/Cards/ArdentCelestial/Common/DarkForest/fire_dark_forest.png" id="2_ardnt"]
 
 [sub_resource type="Resource" id="Resource_tthom"]
 script = ExtResource("1_2tawv")
@@ -14,7 +13,7 @@ metadata/_custom_type_script = "uid://b8ekun7kie34s"
 [resource]
 script = ExtResource("1_lslku")
 name = "End of the World"
-picture = SubResource("PlaceholderTexture2D_m1imo")
+picture = ExtResource("2_ardnt")
 families = Array[int]([3])
 rarity = 1
 player_upgrade = SubResource("Resource_tthom")

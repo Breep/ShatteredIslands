@@ -2,8 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_l3okk"]
 [ext_resource type="Script" uid="uid://bwnfcyhagr03n" path="res://Card/Descriptions/Cards/ChickenLord/Common/AssistantChicken/chicken_assistant_chicken.gd" id="1_qm6dq"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vvwly"]
+[ext_resource type="Texture2D" uid="uid://cslxv8ffyte5k" path="res://Card/Descriptions/Cards/ChickenLord/Common/AssistantChicken/chicken lord.png" id="2_chkn1"]
 
 [sub_resource type="Resource" id="Resource_eysua"]
 script = ExtResource("1_qm6dq")
@@ -13,7 +12,7 @@ metadata/_custom_type_script = "uid://bwnfcyhagr03n"
 [resource]
 script = ExtResource("1_l3okk")
 name = "Assistant Chicken"
-picture = SubResource("PlaceholderTexture2D_vvwly")
+picture = ExtResource("2_chkn1")
 families = Array[int]([8])
 player_upgrade = SubResource("Resource_eysua")
 points = Dictionary[int, int]({
