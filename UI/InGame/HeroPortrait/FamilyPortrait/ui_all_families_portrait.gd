@@ -71,6 +71,7 @@ func init_portait_families(families: Array[Family]) -> void:
 
 
 func update_content(player: Player) -> void:
+	if player == null: return
 	_connect_new_player(player)
 
 
