@@ -15,6 +15,7 @@ metadata/_custom_type_script = "uid://cfilebgojn6hx"
 
 [resource]
 script = ExtResource("1_n2vhm")
+name = "Fire Ball"
 picture = SubResource("PlaceholderTexture2D_lcaut")
 families = Array[int]([3])
 player_upgrade = SubResource("Resource_iw2ls")

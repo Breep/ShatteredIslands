@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Card" format=3 uid="uid://bpvwmm0qscm0e"]
 
-[ext_resource type="Script" path="res://Card/Descriptions/Cards/ArdentCelestial/Common/Quasar/ardent_celestial_quasar.gd" id="1_8xwin"]
+[ext_resource type="Script" uid="uid://dywv3qds1kclj" path="res://Card/Descriptions/Cards/ArdentCelestial/Common/Quasar/ardent_celestial_quasar.gd" id="1_8xwin"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_au1sn"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_au1sn"]

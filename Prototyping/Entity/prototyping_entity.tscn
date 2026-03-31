@@ -6,29 +6,21 @@
 [ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://UI/Tool/Misc/hover_boost_button.gd" id="3_6kn6i"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="3_m26y3"]
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_egh8k"]
-[ext_resource type="Resource" uid="uid://dmbiujjgd7e48" path="res://Card/Descriptions/Cards/ArdentCelestial/Common/XenoEgg/ardent_celestial_xeno_egg.tres" id="4_m26y3"]
-[ext_resource type="Resource" uid="uid://ckk1rjelx5ht" path="res://Card/Descriptions/Cards/Engineer/Epic/FortificationDrone/engineer_fortification_drone.tres" id="5_2ob0d"]
+[ext_resource type="Resource" uid="uid://cno4627vx3nt8" path="res://Card/Descriptions/Cards/Colossus/Epic/VitalPulse/colossus_vital_pulse.tres" id="4_m26y3"]
 [ext_resource type="Script" uid="uid://nkraydv4mdse" path="res://Card/Templates/player_deck.gd" id="5_x0odd"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/Stats/EntityStats/entity_stats.gd" id="6_3bpsj"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
-[ext_resource type="Resource" uid="uid://c1gpijnrsdj2h" path="res://Card/Descriptions/Cards/Engineer/Rare/DeflectionShield/engineer_deflection_shield.tres" id="6_ycdli"]
-[ext_resource type="Resource" uid="uid://c4ls6c4ycmk0t" path="res://Card/Descriptions/Cards/Colossus/Common/AncientGrowth/colossus_ancient_growth.tres" id="7_plgnl"]
-[ext_resource type="Resource" uid="uid://vx4tn6nq5iue" path="res://Card/Descriptions/Cards/ChickenLord/Common/DoctorChicken/chicken_doctor_chicken.tres" id="8_cy1rm"]
 [ext_resource type="PackedScene" uid="uid://dvuq5n41nak3u" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.tscn" id="8_fl2p6"]
 [ext_resource type="PackedScene" uid="uid://w0bgds2ebwen" path="res://Modules/PickableClickable/PickableModule/pickable_module.tscn" id="9_614kc"]
 [ext_resource type="PackedScene" uid="uid://bg5efhnq0erdv" path="res://Modules/PickableClickable/ClickableModule/clickable_module.tscn" id="10_m73qc"]
-[ext_resource type="Resource" uid="uid://c88cqm481bhcu" path="res://Card/Descriptions/Cards/Engineer/Common/ShieldRush/engineer_shield_rush.tres" id="11_3en4l"]
 [ext_resource type="PackedScene" uid="uid://blncvfes4f2y7" path="res://Prototyping/Entity/AllActionPrototyping/testing_floorffa5.tscn" id="11_5hdqt"]
-[ext_resource type="Resource" uid="uid://yph6mhvbkj0c" path="res://Card/Descriptions/Cards/Engineer/Legendary/AegisBlade/engineer_aegis_blade.tres" id="12_insk2"]
-[ext_resource type="Resource" uid="uid://du0o8udb4adn5" path="res://Card/Descriptions/Cards/Engineer/Rare/ShieldThrow/engineer_shield_throw.tres" id="13_halq3"]
-[ext_resource type="Resource" uid="uid://b3ohguwihk7x3" path="res://Card/Descriptions/Cards/ArdentCelestial/Common/ExpanseUniverse/fire_expanse_universe.tres" id="14_2oasy"]
 [ext_resource type="PackedScene" uid="uid://q7gxxkhg5u54" path="res://FloatingIsland/_Maps/arch_island.tscn" id="17_ko5bb"]
 [ext_resource type="PackedScene" uid="uid://c0l0roxttdtlp" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/FightingManager/fighting_manager.tscn" id="17_m26y3"]
 [ext_resource type="PackedScene" uid="uid://dp4x7wkxd6i2q" path="res://Prototyping/Entity/EntityController/entity_controller.tscn" id="19_x0odd"]
 
 [sub_resource type="Resource" id="Resource_rw3ih"]
 script = ExtResource("5_x0odd")
-_active_cards = Array[ExtResource("3_m26y3")]([ExtResource("4_m26y3"), ExtResource("5_2ob0d"), ExtResource("6_ycdli"), ExtResource("7_plgnl"), ExtResource("8_cy1rm")])
+_active_cards = Array[ExtResource("3_m26y3")]([ExtResource("4_m26y3")])
 metadata/_custom_type_script = "uid://nkraydv4mdse"
 
 [sub_resource type="Resource" id="Resource_ycdli"]
@@ -40,14 +32,9 @@ attack_range = -1.0
 attack_damage = 10.0
 attack_speed = 1.0
 _critical_chances = Dictionary[int, float]({
-0: 90.0
+0: 0.0
 })
 metadata/_custom_type_script = "uid://bf01q5yq3glxi"
-
-[sub_resource type="Resource" id="Resource_rnj4o"]
-script = ExtResource("5_x0odd")
-_active_cards = Array[ExtResource("3_m26y3")]([ExtResource("11_3en4l"), ExtResource("12_insk2"), ExtResource("13_halq3"), ExtResource("14_2oasy")])
-metadata/_custom_type_script = "uid://nkraydv4mdse"
 
 [sub_resource type="Resource" id="Resource_ko5bb"]
 script = ExtResource("6_3bpsj")
@@ -100,10 +87,6 @@ unique_name_in_owner = true
 [node name="DarkKnight1" parent="Entities" unique_id=353718081 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("1_icvx6")]
 transform = Transform3D(0.9946579, 0, 0.10322651, 0, 1, 0, -0.10322651, 0, 0.9946579, 0.07346773, -4.7683716e-07, 7.8182755)
 _custom_deck = SubResource("Resource_rw3ih")
-_override_family_levels = Dictionary[int, int]({
-3: 1,
-8: 4
-})
 _custom_data_memory = {
 &"ChickenLord": {
 &"Ancestral Gauge": 200.0
@@ -117,10 +100,6 @@ metadata/_edit_lock_ = true
 
 [node name="DarkKnight2" parent="Entities" unique_id=1010378661 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("1_icvx6")]
 transform = Transform3D(-0.059724454, 0, 0.9982149, 0, 1, 0, -0.9982149, 0, -0.059724454, 7.5962777, 4.7683716e-07, 2.3270931)
-_custom_deck = SubResource("Resource_rnj4o")
-_override_family_levels = Dictionary[int, int]({
-3: 4
-})
 _custom_data_memory = {
 &"ChickenLord": {
 &"Ancestral Gauge": 360.0

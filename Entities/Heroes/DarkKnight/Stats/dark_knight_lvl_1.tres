@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="HeroStats" load_steps=2 format=3 uid="uid://0kx7gomigbv0"]
+[gd_resource type="Resource" script_class="HeroStats" format=3 uid="uid://0kx7gomigbv0"]
 
 [ext_resource type="Script" uid="uid://2py6kv5aqgem" path="res://Entities/Heroes/_Shared/hero_stats.gd" id="1_5pd1e"]
 

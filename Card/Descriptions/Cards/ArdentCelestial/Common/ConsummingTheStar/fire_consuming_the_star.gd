@@ -26,4 +26,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Consuming the Star: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Every [[METEOR]] burns " + str(_mana_burn[cardlvl - 1]) + " mana to enemies hit."
+	return "Every [[METEOR]] burns " + str(_mana_burn[cardlvl - 1]) + " [[MANA]] to enemies hit."

@@ -22,4 +22,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Nuke: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "At beggining of fight apply " + str(_ignite_stacks[cardlvl - 1]) + " [[IGNITE_STACK]] to all enemies"
+	return "At the beggining of fight apply " + str(_ignite_stacks[cardlvl - 1]) + " [[IGNITE]] stacks to all enemies"

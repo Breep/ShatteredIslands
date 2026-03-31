@@ -11,7 +11,7 @@ metadata/_custom_type_script = "uid://e8w40nqo25qg"
 
 [resource]
 script = ExtResource("1_jbq81")
-name = "Nuke !!!!!"
+name = "Nuke !!!"
 picture = ExtResource("1_an3vv")
 families = Array[int]([3])
 rarity = 2

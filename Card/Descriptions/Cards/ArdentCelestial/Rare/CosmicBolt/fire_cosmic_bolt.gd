@@ -25,4 +25,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Cosmic Bolt: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Each auto-attack applies " + str(_stacks[cardlvl - 1]) + " ignite stacks to the target."
+	return "Each auto-attack applies " + str(_stacks[cardlvl - 1]) + " [[IGNITE]] stacks to the target."
