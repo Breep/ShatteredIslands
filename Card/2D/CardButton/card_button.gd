@@ -50,6 +50,10 @@ func update_visual(new_card: Card) -> void:
 func remove_shader() -> void:
 	_texture_rect.material = null
 
+
+func set_locked(locked: bool) -> void:
+	_card_layout.set_locked(locked)
+
 # ============================== Node base functions ==============================
 
 func _ready() -> void:

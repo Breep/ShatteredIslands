@@ -5,32 +5,32 @@ enum SortMode {
 	NONE,
 	RARITY,
 	LEVEL,
-	UNLOCKED,
 	NAME,
 }
 
-@onready var _grid_container: GridContainer = %GridContainer
-@onready var _scroll_container: ScrollContainer = %ScrollContainer
-@onready var _sort_rarity_button: Button = %SortRarityButton
-@onready var _sort_level_button: Button = %SortLevelButton
-@onready var _sort_unlocked_button: Button = %SortUnlockedButton
-@onready var _sort_name_button: Button = %SortNameButton
+enum DisplayMode {
+	DEFAULT,
+	UNLOCKED_ONLY
+}
 
 const CARD_BUTTON_SCENE: PackedScene = preload("res://Card/2D/CardButton/card_button.tscn")
 
-var _current_cards: Array[Card] = []
+@onready var _grid_container: GridContainer = %GridContainer
+@onready var _scroll_container: ScrollContainer = %ScrollContainer
+
+var _default_cards: Array[Card] = []
+var _unlocked_cards: Array[Card] = []
+var _unlocked_names: Dictionary[String, bool] = {}
 var _current_sort: SortMode = SortMode.NONE
+var _current_display: DisplayMode = DisplayMode.DEFAULT
 
-
-func _ready() -> void:
-	_sort_rarity_button.pressed.connect(_on_sort_pressed.bind(SortMode.RARITY))
-	_sort_level_button.pressed.connect(_on_sort_pressed.bind(SortMode.LEVEL))
-	_sort_unlocked_button.pressed.connect(_on_sort_pressed.bind(SortMode.UNLOCKED))
-	_sort_name_button.pressed.connect(_on_sort_pressed.bind(SortMode.NAME))
-
-
-func update_content(cards: Array[Card]) -> void:
-	_current_cards = cards.duplicate()
+#region ============================== Public API ==============================
+func update_content(default_cards: Array[Card], unlocked_cards: Array[Card]) -> void:
+	_default_cards = default_cards
+	_unlocked_cards = unlocked_cards
+	_unlocked_names.clear()
+	for card: Card in unlocked_cards:
+		_unlocked_names[card.name] = true
 	_current_sort = SortMode.NONE
 	_rebuild_grid()
 
@@ -39,44 +39,60 @@ func reset_scroll() -> void:
 	_scroll_container.scroll_vertical = 0
 
 
+func sort_cards(sort_mode: SortMode) -> void:
+	if _current_sort == sort_mode:
+		_default_cards.reverse()
+		_unlocked_cards.reverse()
+	else:
+		_current_sort = sort_mode
+		_sort_cards(_default_cards, sort_mode)
+		_sort_cards(_unlocked_cards, sort_mode)
+	_rebuild_grid()
+	reset_scroll()
+
+
+func set_display_mode(mode: DisplayMode) -> void:
+	if _current_display == mode:
+		return
+	_current_display = mode
+	_rebuild_grid()
+	reset_scroll()
+#endregion
+
+
+#region ============================== Private functions ==============================
+func _sort_cards(cards: Array[Card], sort_mode: SortMode) -> void:
+	match sort_mode:
+		SortMode.RARITY:
+			cards.sort_custom(func(a: Card, b: Card) -> bool:
+				return a.rarity < b.rarity
+			)
+		SortMode.LEVEL:
+			cards.sort_custom(func(a: Card, b: Card) -> bool:
+				return a.lvl > b.lvl
+			)
+		SortMode.NAME:
+			cards.sort_custom(func(a: Card, b: Card) -> bool:
+				return a.name.naturalnocasecmp_to(b.name) < 0
+			)
+
+
 func _rebuild_grid() -> void:
 	_clear_all()
-	for card: Card in _current_cards:
+	var cards_to_show: Array[Card] = _unlocked_cards if _current_display == DisplayMode.UNLOCKED_ONLY else _default_cards
+	for card: Card in cards_to_show:
 		var card_button: CardButton = CARD_BUTTON_SCENE.instantiate()
 		card_button.remove_shader()
 		card_button.custom_minimum_size = Vector2(630, 880)
 		card_button.update_visual(card)
+		var is_locked: bool = not _unlocked_names.has(card.name)
+		if _current_display == DisplayMode.DEFAULT and is_locked:
+			card_button.set_locked(true)
 		_grid_container.add_child(card_button)
-
-
-func _sort_cards(sort_mode: SortMode) -> void:
-	match sort_mode:
-		SortMode.RARITY:
-			_current_cards.sort_custom(func(a: Card, b: Card) -> bool:
-				return a.rarity < b.rarity
-			)
-		SortMode.LEVEL:
-			_current_cards.sort_custom(func(a: Card, b: Card) -> bool:
-				return a.lvl > b.lvl
-			)
-		SortMode.UNLOCKED:
-			pass
-		SortMode.NAME:
-			_current_cards.sort_custom(func(a: Card, b: Card) -> bool:
-				return a.name.naturalnocasecmp_to(b.name) < 0
-			)
 
 
 func _clear_all() -> void:
 	for child: CardButton in _grid_container.get_children():
 		child.queue_free()
-
-
-func _on_sort_pressed(sort_mode: SortMode) -> void:
-	if _current_sort == sort_mode:
-		_current_cards.reverse()
-	else:
-		_current_sort = sort_mode
-		_sort_cards(sort_mode)
-	_rebuild_grid()
-	reset_scroll()
+#endregion
+ 
