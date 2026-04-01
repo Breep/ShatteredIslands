@@ -2,8 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_bocm1"]
 [ext_resource type="Script" uid="uid://10q1xen2u8l5" path="res://Card/Descriptions/Cards/ChickenLord/Common/FeatheredDodge/chicken_feathered_dodge.gd" id="1_eqk85"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_k2388"]
+[ext_resource type="Texture2D" uid="uid://cslxv8ffyte5k" path="res://Card/Descriptions/Cards/ChickenLord/Common/AssistantChicken/chicken lord.png" id="2_chkn1"]
 
 [sub_resource type="Resource" id="Resource_rxtne"]
 script = ExtResource("1_eqk85")
@@ -14,7 +13,7 @@ metadata/_custom_type_script = "uid://10q1xen2u8l5"
 [resource]
 script = ExtResource("1_bocm1")
 name = "Feathered Dodge"
-picture = SubResource("PlaceholderTexture2D_k2388")
+picture = ExtResource("2_chkn1")
 families = Array[int]([8])
 player_upgrade = SubResource("Resource_rxtne")
 points = Dictionary[int, int]({

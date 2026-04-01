@@ -2,8 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_65eac"]
 [ext_resource type="Script" uid="uid://c04gh67exri7q" path="res://Card/Descriptions/Cards/Colossus/Common/ColossalTitan/colossus_colossal_titan.gd" id="1_e18xb"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_0k8po"]
+[ext_resource type="Texture2D" uid="uid://btsavc4kievdf" path="res://Card/Descriptions/Cards/Colossus/Common/ColossalTitan/colosse.png" id="2_colos"]
 
 [sub_resource type="Resource" id="Resource_3fuju"]
 script = ExtResource("1_e18xb")
@@ -14,7 +13,7 @@ metadata/_custom_type_script = "uid://c04gh67exri7q"
 [resource]
 script = ExtResource("1_65eac")
 name = "Colossal Titan"
-picture = SubResource("PlaceholderTexture2D_0k8po")
+picture = ExtResource("2_colos")
 families = Array[int]([6])
 player_upgrade = SubResource("Resource_3fuju")
 lvl = 5

@@ -2,8 +2,7 @@
 
 [ext_resource type="Script" uid="uid://meie2sprd15l" path="res://Card/Descriptions/Cards/Engineer/Legendary/AegisBlade/engineer_aegies_blade.gd" id="1_8tyqj"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_tt3r5"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_lwcnt"]
+[ext_resource type="Texture2D" uid="uid://psnthd75twnn" path="res://Card/Descriptions/Cards/Engineer/Common/ForceField/engineer_force_field.png" id="2_engr1"]
 
 [sub_resource type="Resource" id="Resource_svp0f"]
 script = ExtResource("1_8tyqj")
@@ -18,7 +17,7 @@ metadata/_custom_type_script = "uid://meie2sprd15l"
 [resource]
 script = ExtResource("1_tt3r5")
 name = "Aegis Blade"
-picture = SubResource("PlaceholderTexture2D_lwcnt")
+picture = ExtResource("2_engr1")
 families = Array[int]([2])
 rarity = 3
 player_upgrade = SubResource("Resource_svp0f")

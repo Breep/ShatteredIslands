@@ -1,4 +1,4 @@
-shader_type spatial;
+ sshader_typepatial;
 render_mode cull_disabled, blend_add, unshaded;
 uniform float time_speed = 1.0;
 //time specifically for the wave noise texture
