@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_pn603"]
 script = ExtResource("1_p3eu4")
-_proc_chances = Array[float]([5.0, 6.0, 7.0, 8.0, 10.0])
+_proc_chances = Array[float]([3.0, 3.5, 4.0, 4.5, 5.0])
 metadata/_custom_type_script = "uid://cqmcfhjaqe78k"
 
 [resource]

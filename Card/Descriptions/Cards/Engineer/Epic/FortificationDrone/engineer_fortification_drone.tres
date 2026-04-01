@@ -7,9 +7,9 @@
 [sub_resource type="Resource" id="Resource_fc0bc"]
 script = ExtResource("1_lqe22")
 _drones_numbers = Array[int]([1, 2, 3])
-_shield_per_seconds = Array[float]([15.0, 20.0, 25.0])
+_shield_per_seconds = Array[float]([7.0, 10.0, 15.0])
 _drone_hps = Array[int]([1, 1, 1])
-_drone_shields = Array[float]([150.0, 250.0, 400.0])
+_drone_shields = Array[float]([50.0, 75.0, 100.0])
 _respawn_timers = Array[float]([9.0, 8.0, 6.0])
 _rarity = 2
 metadata/_custom_type_script = "uid://rdfvr5i8h3qq"

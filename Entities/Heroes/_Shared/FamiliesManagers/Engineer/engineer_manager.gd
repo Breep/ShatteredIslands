@@ -2,10 +2,10 @@ class_name EngineerManager
 extends FamilyManager
 
 #region ============================== Constants ==============================
-const P_PROTO_SHIELD_SHIELD: Array[int] = [0, 250, 600, 1000, 2000]
-const P_PROTO_SHIELD_HP_MAX: Array[int] = [0, 50, 125, 200, 400]
+const P_PROTO_SHIELD_SHIELD: Array[int] = [0, 250, 500, 700, 1000]
+const P_PROTO_SHIELD_HP_MAX: Array[int] = [0, 50, 100, 150, 250]
 
-const P_SHIELD_POWER: Array[int] = [0, 20, 40, 60, 100]
+const P_SHIELD_POWER: Array[int] = [0, 10, 20, 30, 50]
 #endregion
 
 
