@@ -1,5 +1,5 @@
 class_name SpellChainLightning
-extends Node3D
+extends Spell
 
 const VISUAL_SCENE = preload("res://SpellsAndProjectiles/Spells/ChainLightning/Visual/spell_chain_lightning_visual.tscn")
 const HEIGHT_OFFSET: Vector3 = Vector3(0, 1.0, 0)

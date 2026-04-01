@@ -58,6 +58,7 @@ func _start_new_round() -> void:
 func _start_buying_phase() -> void:
 	Verbose.debug("Start BUYING !", Verbose.Category.GAME)
 	_scene_switcher.set_island_active_only(_buying_island)
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	_buying_island.start_buying_phase(_current_round_battles)
 
 

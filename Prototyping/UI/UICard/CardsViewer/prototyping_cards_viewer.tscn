@@ -86,6 +86,61 @@ theme_override_constants/margin_bottom = 25
 unique_name_in_owner = true
 layout_mode = 2
 
+[node name="SortLabel" type="Label" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer" unique_id=2037439422]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Sort by:"
+
+[node name="SortHBox" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer" unique_id=1327188035]
+layout_mode = 2
+
+[node name="SortRarityButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/SortHBox" unique_id=571625583]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "Rarity"
+
+[node name="SortLevelButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/SortHBox" unique_id=82383941]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "Level"
+
+[node name="SortNameButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/SortHBox" unique_id=1667897283]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "Name"
+
+[node name="DisplayLabel" type="Label" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer" unique_id=2087772891]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Display:"
+
+[node name="DisplayHBox" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer" unique_id=34847491]
+layout_mode = 2
+
+[node name="DisplayAllButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/DisplayHBox" unique_id=722872857]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "All"
+
+[node name="DisplayUnlockedButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/DisplayHBox" unique_id=1712950814]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "Unlocked"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer" unique_id=1226441421]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="FamiliesLabel" type="Label" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer" unique_id=1863592429]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Families:"
+
 [node name="AttackFamilyButton" type="Button" parent="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer" unique_id=974800872]
 layout_mode = 2
 size_flags_vertical = 3
@@ -158,6 +213,11 @@ size_flags_vertical = 3
 theme_override_font_sizes/font_size = 30
 text = "Storm Family"
 
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/SortHBox/SortRarityButton" to="." method="_on_sort_rarity_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/SortHBox/SortLevelButton" to="." method="_on_sort_level_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/SortHBox/SortNameButton" to="." method="_on_sort_name_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/DisplayHBox/DisplayAllButton" to="." method="_on_display_all_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/DisplayHBox/DisplayUnlockedButton" to="." method="_on_display_unlocked_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/AttackFamilyButton" to="." method="_on_attack_family_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/ChickenLordFamilyButton" to="." method="_on_chicken_lord_family_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/DefenseFamilyButton" to="." method="_on_defense_family_button_pressed"]

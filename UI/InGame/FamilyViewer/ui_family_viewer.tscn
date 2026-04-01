@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://ci1xegvy2t2jm"]
+
+[ext_resource type="Script" uid="uid://dqsbil04m2fyg" path="res://UI/Menu/MainMenu/text_button.gd" id="1_atdtf"]
+
+[node name="UiFamilyViewer" type="Control" unique_id=452679620]
+custom_minimum_size = Vector2(512, 512)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="." unique_id=1329501171]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=307774511]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=1186319356]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer" unique_id=1357355350]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+text = "FAMILY NAME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer" unique_id=794522544]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=1769135900]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="TextButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=462582810]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("1_atdtf")
+metadata/_custom_type_script = "uid://dqsbil04m2fyg"
+
+[node name="TextButton2" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=304423642]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("1_atdtf")
+metadata/_custom_type_script = "uid://dqsbil04m2fyg"
+
+[node name="TextButton3" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1670258995]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("1_atdtf")
+metadata/_custom_type_script = "uid://dqsbil04m2fyg"
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer" unique_id=1498519503]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Panel/MarginContainer/VBoxContainer" unique_id=1686096509]
+layout_mode = 2
+size_flags_vertical = 3

@@ -3,9 +3,24 @@
 [ext_resource type="Script" uid="uid://dwdqhjhxq32i0" path="res://SpellsAndProjectiles/Spells/Meteor/Visual/meteor_visual.gd" id="1_ptlvp"]
 [ext_resource type="PackedScene" uid="uid://crd40ycge6qp1" path="res://VFX/VFX_3D/VFX/Scenes/VFX_Fire_ball_standar.tscn" id="2_ptlvp"]
 
+[sub_resource type="Curve3D" id="Curve3D_ptlvp"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 2, 15, 0, 10, 40.09597, -40.221977, 5, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"tilts": PackedFloat32Array(0, 0, 0)
+}
+point_count = 3
+
 [node name="MeteorVisual" type="Node3D" unique_id=2099729954]
 script = ExtResource("1_ptlvp")
 
-[node name="VFX_FireBall" parent="." unique_id=1491287636 instance=ExtResource("2_ptlvp")]
+[node name="Path3D" type="Path3D" parent="." unique_id=1543002261]
 unique_name_in_owner = true
-transform = Transform3D(2.2, 0, 0, 0, -9.616505e-08, 2.2, 0, -2.2, -9.616505e-08, 0, 0, 0)
+curve = SubResource("Curve3D_ptlvp")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D" unique_id=1206837566]
+unique_name_in_owner = true
+transform = Transform3D(-4.371129e-08, -0.99121153, -0.13216314, 0, 0.13216141, -0.9912246, 0.99999774, -4.3327233e-08, -5.7770344e-09, 10, 40.09597, -40.221977)
+
+[node name="VFX_FireBall" parent="Path3D/PathFollow3D" unique_id=1491287636 instance=ExtResource("2_ptlvp")]
+unique_name_in_owner = true
+transform = Transform3D(2.2, 0, 0, 0, 2.2, 0, 0, 0, 2.2, 0, 0, 0)

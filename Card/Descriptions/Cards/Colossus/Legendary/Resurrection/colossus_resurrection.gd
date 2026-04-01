@@ -5,7 +5,7 @@ extends HeroUpgrade
 @export var _damage_percent: Array[float]
 @export var _size_increase: Array[float]
 @export var _hp_max_revive: Array[float]
-const EXPLOSION_VFX_SCENE = preload("res://SpellsAndProjectiles/Spells/Meteor/Visual/VFX_Explosion_B.tscn")
+const EXPLOSION_VFX_SCENE = preload("res://VFX/VFX_Explosion_B.tscn")
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	

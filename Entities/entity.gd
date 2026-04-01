@@ -613,7 +613,7 @@ func _on_fighting_state_changed(new_fighting_state: FightingState) -> void:
 
 
 func _on_stats_health_changed(new_health: float) -> void:
-	if new_health <= 0:
+	if new_health < 1:
 		died.emit()
 
 
