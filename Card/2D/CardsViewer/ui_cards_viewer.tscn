@@ -4,6 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://c2psjj8133op3" path="res://Card/2D/CardButton/card_button.tscn" id="1_mu264"]
 [ext_resource type="Script" uid="uid://b05cjd0m0y2ss" path="res://Card/2D/CardsViewer/ui_cards_viewer.gd" id="2_f23eh"]
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_dg0ld"]
+thickness = 2
+vertical = true
+
 [node name="UICardsViewer" type="Control" unique_id=303247800]
 layout_mode = 3
 anchors_preset = 8
@@ -39,17 +43,28 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 75
 text = "Rarity"
 
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/SortBar" unique_id=1427246931]
+layout_mode = 2
+theme_override_constants/separation = 4
+theme_override_styles/separator = SubResource("StyleBoxLine_dg0ld")
+
 [node name="SortLevelButton" type="Button" parent="VBoxContainer/SortBar" unique_id=100000002]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 75
 text = "Level"
 
+[node name="VSeparator2" type="VSeparator" parent="VBoxContainer/SortBar" unique_id=1549649258]
+layout_mode = 2
+
 [node name="SortUnlockedButton" type="Button" parent="VBoxContainer/SortBar" unique_id=100000003]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 75
 text = "Unlocked"
+
+[node name="VSeparator3" type="VSeparator" parent="VBoxContainer/SortBar" unique_id=1061778784]
+layout_mode = 2
 
 [node name="SortNameButton" type="Button" parent="VBoxContainer/SortBar" unique_id=100000004]
 unique_name_in_owner = true

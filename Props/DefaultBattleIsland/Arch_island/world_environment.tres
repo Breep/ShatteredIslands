@@ -1,0 +1,55 @@
+[gd_resource type="Environment" format=3 uid="uid://d1ls51slo0c0a"]
+
+[ext_resource type="Texture2D" uid="uid://cpgjovjpnswwl" path="res://Props/DefaultBattleIsland/Arch_island/textures/citrus_orchard_road_puresky_4k.exr" id="1_8x7a6"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_kc47p"]
+panorama = ExtResource("1_8x7a6")
+energy_multiplier = 5.0
+
+[sub_resource type="Sky" id="Sky_qk38t"]
+sky_material = SubResource("PanoramaSkyMaterial_kc47p")
+
+[resource]
+background_mode = 2
+background_energy_multiplier = 0.25
+sky = SubResource("Sky_qk38t")
+sky_custom_fov = 66.7
+sky_rotation = Vector3(0, 2.0612338, 0)
+ambient_light_sky_contribution = 0.5
+ambient_light_energy = 7.52
+reflected_light_source = 2
+tonemap_exposure = 0.83
+tonemap_white = 1.35
+ssr_fade_in = 0.424264
+ssr_fade_out = 1.1892055
+ssr_depth_tolerance = 75.51
+ssao_enabled = true
+ssao_radius = 4.79
+ssao_intensity = 3.52
+ssao_sharpness = 1.0
+ssil_radius = 8.98
+sdfgi_use_occlusion = true
+sdfgi_bounce_feedback = 0.39
+sdfgi_cascades = 1
+sdfgi_min_cell_size = 0.03125
+glow_enabled = true
+glow_intensity = 2.78
+glow_strength = 0.46
+glow_bloom = 0.13
+glow_hdr_scale = 1.0
+fog_mode = 1
+fog_light_color = Color(0.11147597, 0.18064603, 0.38794202, 1)
+fog_light_energy = 3.19
+fog_density = 0.1995
+fog_aerial_perspective = 0.32
+fog_sky_affect = 0.0
+fog_height = 1024.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.004
+volumetric_fog_albedo = Color(0.8032315, 0.86696446, 0.95621866, 1)
+volumetric_fog_emission_energy = 0.0
+volumetric_fog_anisotropy = 0.56
+volumetric_fog_length = 33.88
+adjustment_enabled = true
+adjustment_brightness = 0.98
+adjustment_contrast = 1.3
