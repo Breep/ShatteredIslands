@@ -6,6 +6,14 @@ extends Node
 
 const MIN_WAIT_TIME: float = 0.8
 const MAX_WAIT_TIME: float = 2.1
+const WASTER_RATIO: float = 1.0 # 0.0 = tous KEEPER, 0.5 = 50/50, 1.0 = tous WASTER
+
+const FOCUS_FAMILIES: Array[Family.Type] = [
+	Family.Type.ENGINEER,
+	Family.Type.ARDENT_CELESTIAL,
+	Family.Type.COLOSSUS,
+	Family.Type.CHICKEN_LORD,
+]
 
 var player: Player # Player Ref this BotAI is linked to
 
@@ -14,6 +22,8 @@ var _card_shop: PlayerCardShop
 
 var _rng: RandomNumberGenerator
 var _economy_strategy: EconomyStrategy
+var _primary_family: Family.Type
+var _secondary_family: Family.Type # Family.Type.UNDEF si pas de secondaire
 
 enum EconomyStrategy {
 	KEEPER, # Stay always above 500gold if possible
@@ -32,15 +42,30 @@ func _ready() -> void:
 		Verbose.error("PlayerBotAI: No CardShop sibling found under parent Player", Verbose.Category.AI)
 		queue_free()
 		return
-	
+
 	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
-	
+
 	_rng = RandomNumberGenerator.new()
 	_rng.randomize()
-	
-	_economy_strategy = EconomyStrategy.KEEPER if _rng.randi() % 2 == 0 else EconomyStrategy.WASTER
-	var tmp_debug_strat_str: String = "KEEPER" if _economy_strategy == EconomyStrategy.KEEPER else "WASTER"
-	Verbose.debug("PlayerBotAI: Starting AI for " + player.player_name + "[" + tmp_debug_strat_str + "]", Verbose.Category.AI)
+
+	_economy_strategy = EconomyStrategy.WASTER if _rng.randf() < WASTER_RATIO else EconomyStrategy.KEEPER
+
+	# Choisir une famille primaire
+	_primary_family = FOCUS_FAMILIES[_rng.randi_range(0, FOCUS_FAMILIES.size() - 1)]
+
+	# 50% de chance d'avoir une famille secondaire
+	if _rng.randi() % 2 == 0:
+		var remaining: Array[Family.Type] = []
+		for f in FOCUS_FAMILIES:
+			if f != _primary_family:
+				remaining.append(f)
+		_secondary_family = remaining[_rng.randi_range(0, remaining.size() - 1)]
+	else:
+		_secondary_family = Family.Type.UNDEF
+
+	var strat_str: String = "KEEPER" if _economy_strategy == EconomyStrategy.KEEPER else "WASTER"
+	var secondary_str: String = str(_secondary_family) if _secondary_family != Family.Type.UNDEF else "NONE"
+	Verbose.debug("PlayerBotAI: Starting AI for " + player.player_name + " [" + strat_str + "] Primary: " + str(_primary_family) + " Secondary: " + secondary_str, Verbose.Category.AI)
 
 
 func _dumb_buying_area() -> void:
@@ -49,12 +74,81 @@ func _dumb_buying_area() -> void:
 	_wake_up_timer.start()
 
 
-func _buy_a_card() -> void:
+# ============================== Card Scoring ==============================
+
+
+func _score_card(card: Card) -> float:
+	var score: float = 0.0
+
+	# 1. Affinité famille (0 / 25 / 50)
+	if _primary_family in card.families:
+		score += 50.0
+	elif _secondary_family != Family.Type.UNDEF and _secondary_family in card.families:
+		score += 25.0
+
+	# 2. Upgrade existant (-100 / +10 / +30)
+	var current_lvl: int = player.deck.get_card_lvl(card)
+	if current_lvl > 0:
+		if card.is_max_level(): # card.lvl est déjà set au niveau post-achat par le shop
+			score -= 100.0
+		else:
+			score += 30.0
+	else:
+		score += 10.0
+
+	# 3. Bonus rareté (0 à 15)
+	match card.rarity:
+		Card.Rarity.LEGENDARY:
+			score += 15.0
+		Card.Rarity.EPIC:
+			score += 10.0
+		Card.Rarity.RARE:
+			score += 5.0
+
+	# 4. Proximité level-up famille (0 / 10 / 20)
+	var best_level_up_score: float = 0.0
+	for family_type: Family.Type in card.points.keys():
+		var current_points: int = player.deck.get_family_points(family_type)
+		var current_family_level: int = GameManager.game_rules.get_family_level(current_points)
+		if current_family_level >= 4:
+			continue
+		var next_threshold: int = GameManager.game_rules.family_level_points[current_family_level + 1]
+		var points_after: int = current_points + card.points[family_type]
+		if points_after >= next_threshold:
+			best_level_up_score = maxf(best_level_up_score, 20.0)
+		elif next_threshold - current_points <= 5:
+			best_level_up_score = maxf(best_level_up_score, 10.0)
+	score += best_level_up_score
+
+	return score
+
+
+# ============================== Buying Logic ==============================
+
+
+func _buy_best_card() -> void:
 	if _card_shop.cards_displayed.is_empty():
 		return
-	
-	var card: Card = _card_shop.cards_displayed[_rng.randi_range(0, _card_shop.cards_displayed.size() - 1)]
-	_card_shop.try_buy_card(card)
+
+	var best_card: Card = null
+	var best_score: float = -INF
+	for card in _card_shop.cards_displayed:
+		var score: float = _score_card(card)
+		if score > best_score:
+			best_score = score
+			best_card = card
+
+	if best_card != null and best_score > -100.0:
+		await _card_shop.try_buy_card(best_card)
+
+
+func _get_best_score() -> float:
+	var best: float = -INF
+	for card in _card_shop.cards_displayed:
+		var score: float = _score_card(card)
+		if score > best:
+			best = score
+	return best
 
 
 func _on_game_manager_game_state_changed(new_game_state: GameManager.GameState) -> void:
@@ -65,11 +159,25 @@ func _on_game_manager_game_state_changed(new_game_state: GameManager.GameState) 
 
 
 func _on_wake_up_timer_timeout() -> void:
-	if _economy_strategy == EconomyStrategy.KEEPER and player.gold >= 600:
-		_buy_a_card()
-	elif _economy_strategy == EconomyStrategy.WASTER and player.gold >= 100:
-		_buy_a_card()
-	
+	var gold_threshold: int = 600 if _economy_strategy == EconomyStrategy.KEEPER else 100
+	if player.gold < gold_threshold:
+		_wake_up_timer.wait_time = _rng.randf_range(MIN_WAIT_TIME, MAX_WAIT_TIME)
+		_wake_up_timer.start()
+		return
+
+	var best_score: float = _get_best_score()
+
+	if best_score < 10.0:
+		# Aucune carte intéressante dans le shop
+		if player.gold >= 120:
+			await _card_shop.try_refresh_shop_cards()
+		elif player.gold >= 90 and _rng.randf() < 0.3:
+			await _card_shop.try_buy_random_card()
+		else:
+			await _buy_best_card()
+	else:
+		await _buy_best_card()
+
 	_wake_up_timer.wait_time = _rng.randf_range(MIN_WAIT_TIME, MAX_WAIT_TIME)
 	_wake_up_timer.start()
 
