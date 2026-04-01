@@ -1,6 +1,8 @@
 class_name ColossusSeismicSlam
 extends HeroUpgrade
 
+const SEISMIC_DECAL_SCENE: PackedScene = preload("res://VFX/VFX_3D/SeismicSlam/vfx_seismic_slam_decal.tscn")
+
 @export var _increase_sizes: Array[float]
 @export var _periods: Array[float]
 @export var _stun_durations: Array[float]
@@ -18,7 +20,12 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	ctx.periodic_timers.register(&"Seismic Slam", period, func() -> void:
 		if ctx.hero == null or not is_instance_valid(ctx.hero):
 			return
-		
+
+		# Spawn ground decal VFX
+		var decal_vfx := SEISMIC_DECAL_SCENE.instantiate() as Node3D
+		ctx.hero.get_tree().current_scene.add_child(decal_vfx)
+		decal_vfx.global_position = ctx.hero.global_position
+
 		# Size increase
 		var ratio_scaling: float = ctx.hero.scale[1] + (size_gain / 100)
 		ctx.hero.scale = Vector3(ratio_scaling, ratio_scaling, ratio_scaling) 
