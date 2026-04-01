@@ -2,10 +2,10 @@ extends Node3D
 
 const HIT_VFX = preload("res://VFX/VFX_3D/VFX/Scenes/VFX_Hit_dark.tscn")
 
-const START_HEIGHT: float = 2.0
+const START_HEIGHT: float = 6.0
 const DEPLOY_TIME: float = 0.3
 
-@onready var _axe_mesh: MeshInstance3D = $AxeMesh
+@onready var _axe_mesh: Node3D = %titan_axe
 
 var _elapsed: float = 0.0
 var _is_falling: bool = false

@@ -9,11 +9,11 @@ const START_HEIGHT: float = 30.0
 ## Hauteur bonus pour le point de contrôle bezier (forme l'arc)
 const ARC_HEIGHT_BONUS: float = 3.0
 ## Léger spread aléatoire sur la position de départ
-const LATERAL_OFFSET: float = 3.0
+const LATERAL_OFFSET: float = -15.0
 
 @onready var _meteor_3d: Node3D = %VFX_FireBall
 
-var _deploy_time: float = 0.9
+var _deploy_time: float = 1.2
 var _elapsed: float = 0.0
 var _is_falling: bool = false
 
