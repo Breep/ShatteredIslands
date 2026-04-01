@@ -1,5 +1,5 @@
 class_name Shroom
-extends Node3D
+extends Spell
 
 var _source: Entity
 var _target: Entity

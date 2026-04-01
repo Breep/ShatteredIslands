@@ -76,7 +76,6 @@ script = ExtResource("1_6kn6i")
 _auto_attack_enabled = true
 
 [node name="Node3D" type="Node3D" parent="." unique_id=1257562586]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -99.944626, -47.71623, 97.6458)
 
 [node name="Entities" type="Node3D" parent="Node3D" unique_id=38016860]
 unique_name_in_owner = true

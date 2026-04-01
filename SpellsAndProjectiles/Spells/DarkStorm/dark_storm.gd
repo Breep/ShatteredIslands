@@ -1,5 +1,5 @@
 class_name DarkStorm
-extends Node3D
+extends Spell
 
 # =====================================================================================
 # === This is the dark storm area from the ultimate [DarkStorm] from The DarkKnight ===

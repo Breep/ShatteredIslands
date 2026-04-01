@@ -1,5 +1,5 @@
 class_name DeathFog
-extends Node3D
+extends Spell
 
 var _grow_speed: float           # world-units per second (applied to BoxShape3D.size.x)
 var _tick_period: float          # seconds between poison ticks

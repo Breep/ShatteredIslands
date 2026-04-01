@@ -1,16 +1,14 @@
 class_name Meteor
-extends Node3D
+extends Spell
 
 var _on_hit_callbacks: Array
-
-var _entities_inside: Array[Entity] # Array of all Entities inside the area
 
 var _owner: Entity # Owner of this healing fire area
 var _target: Entity
 var _damage_percent: float
 var _radius: float
 
-const DEPLOY_TIME: float = 2.0 # Time for the metor to fall on the ground (in s)
+const DEPLOY_TIME: float = 1 # Time for the metor to fall on the ground (in s)
 
 enum VarType { # Variable types of the callbacks dictionary
 	ENTITIES_INSIDE,
@@ -19,6 +17,9 @@ enum VarType { # Variable types of the callbacks dictionary
 }
 
 @onready var _deploy_timer: Timer = %DeployTimer
+@onready var _impact_area: Area3D = %ImpactEffectArea
+
+@onready var _meteor_visual: Node3D = %MeteorVisual
 
 func init(target: Entity, damage_percent: float, radius: float, on_hit_callbacks: Array = [], source: Entity = null) -> void:
 	_owner = source
@@ -37,22 +38,18 @@ func _ready() -> void:
 	_deploy_timer.wait_time = DEPLOY_TIME
 	_deploy_timer.start()
 	global_position = _target.global_position
-	
-
-func _on_impact_effect_area_body_entered(body: Node3D) -> void:
-	if body is Entity:
-		_entities_inside.append(body)
-
-
-func _on_impact_effect_area_body_exited(body: Node3D) -> void:
-	if body is Entity:
-		_entities_inside.erase(body)
+	_meteor_visual.spells_node = spells_node
 
 
 func _on_deploy_timer_timeout() -> void:
 	if _owner == null or _owner.is_queued_for_deletion(): return
 	if not multiplayer.is_server(): return
-	
+
+	var _entities_inside: Array[Entity]
+	for body in _impact_area.get_overlapping_bodies():
+		if body is Entity:
+			_entities_inside.append(body)
+
 	# Deal damage
 	for entity in _entities_inside:
 		if entity == null or entity.is_queued_for_deletion(): pass

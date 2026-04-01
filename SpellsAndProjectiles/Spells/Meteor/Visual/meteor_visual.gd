@@ -13,6 +13,8 @@ const LATERAL_OFFSET: float = 3.0
 
 @onready var _meteor_3d: Node3D = %VFX_FireBall
 
+var spells_node: Node3D
+
 var _deploy_time: float = 0.9
 var _elapsed: float = 0.0
 var _is_falling: bool = false
@@ -82,8 +84,12 @@ func _compute_trajectory() -> void:
 
 
 func _on_impact() -> void:
-	_meteor_3d.visible = false
-	var hit = HIT_VFX.instantiate()
-	add_child(hit)
-	hit.position = _p2
+	_meteor_3d.hide()
+	var hit: Node3D = HIT_VFX.instantiate()
+	if spells_node != null:
+		spells_node.add_child(hit)
+		hit.global_position = global_position
+	else:
+		add_child(hit)
+		hit.position = _p2
 	get_tree().create_timer(2.0).timeout.connect(hit.queue_free)

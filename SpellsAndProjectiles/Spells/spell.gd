@@ -1,5 +1,7 @@
 class_name Spell
-extends Node
+extends Node3D
+
+var spells_node: Node3D
 
 enum Type {
 	METEOR,
