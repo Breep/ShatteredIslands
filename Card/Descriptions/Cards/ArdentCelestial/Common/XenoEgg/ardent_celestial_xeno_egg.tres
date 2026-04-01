@@ -2,8 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_ksd3p"]
 [ext_resource type="Script" uid="uid://cqmcfhjaqe78k" path="res://Card/Descriptions/Cards/ArdentCelestial/Common/XenoEgg/ardent_celestial_xeno_egg.gd" id="1_p3eu4"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_gvvrl"]
+[ext_resource type="Texture2D" uid="uid://tuwewl8ngbqu" path="res://Card/Descriptions/Cards/ArdentCelestial/Common/DarkForest/fire_dark_forest.png" id="2_ardnt"]
 
 [sub_resource type="Resource" id="Resource_pn603"]
 script = ExtResource("1_p3eu4")
@@ -13,11 +12,11 @@ metadata/_custom_type_script = "uid://cqmcfhjaqe78k"
 [resource]
 script = ExtResource("1_ksd3p")
 name = "Xeno Egg"
-picture = SubResource("PlaceholderTexture2D_gvvrl")
+picture = ExtResource("2_ardnt")
 families = Array[int]([3, 8])
-player_upgrade = SubResource("Resource_pn603")
 points = Dictionary[int, int]({
 3: 1,
 8: 1
 })
+player_upgrade = SubResource("Resource_pn603")
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

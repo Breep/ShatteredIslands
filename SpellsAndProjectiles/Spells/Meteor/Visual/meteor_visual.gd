@@ -1,5 +1,7 @@
 extends Node3D
 
+const HIT_VFX = preload("res://Props/DefaultBattleIsland/Arch_island/VFX/Scenes/VFX_meteor_hit.tscn")
+
 ## Angle d'approche depuis l'horizontale (70° = steep diagonal, style D4)
 const APPROACH_ANGLE: float = 70.0
 ## Hauteur de départ du météore
@@ -11,7 +13,7 @@ const LATERAL_OFFSET: float = 3.0
 
 @onready var _meteor_3d: Node3D = %VFX_FireBall
 
-var _deploy_time: float = 1.0
+var _deploy_time: float = 0.9
 var _elapsed: float = 0.0
 var _is_falling: bool = false
 
@@ -80,5 +82,8 @@ func _compute_trajectory() -> void:
 
 
 func _on_impact() -> void:
-	# Hide the fireball mesh
 	_meteor_3d.visible = false
+	var hit = HIT_VFX.instantiate()
+	add_child(hit)
+	hit.position = _p2
+	get_tree().create_timer(2.0).timeout.connect(hit.queue_free)

@@ -2,8 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cfilebgojn6hx" path="res://Card/Descriptions/Cards/ArdentCelestial/Common/FireBall/ardent_celestial_fire_ball.gd" id="1_m64wx"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_n2vhm"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_lcaut"]
+[ext_resource type="Texture2D" uid="uid://tuwewl8ngbqu" path="res://Card/Descriptions/Cards/ArdentCelestial/Common/DarkForest/fire_dark_forest.png" id="2_ardnt"]
 
 [sub_resource type="Resource" id="Resource_iw2ls"]
 script = ExtResource("1_m64wx")
@@ -16,7 +15,7 @@ metadata/_custom_type_script = "uid://cfilebgojn6hx"
 [resource]
 script = ExtResource("1_n2vhm")
 name = "Fire Ball"
-picture = SubResource("PlaceholderTexture2D_lcaut")
+picture = ExtResource("2_ardnt")
 families = Array[int]([3])
 player_upgrade = SubResource("Resource_iw2ls")
 lvl = 5

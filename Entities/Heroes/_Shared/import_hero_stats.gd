@@ -2,7 +2,7 @@
 extends EditorScript
 
 # Vérifie que ce chemin correspond bien à ton dossier racine
-const JSON_PATH = "res://Entities/Heroes/ImportJson/stats.json"
+const JSON_PATH = "res://Entities/Heroes/_Shared/ImportJson/stats.json"
 # Le dossier racine où se trouvent tes dossiers de héros
 const HEROES_ROOT_DIR = "res://Entities/Heroes/"
 

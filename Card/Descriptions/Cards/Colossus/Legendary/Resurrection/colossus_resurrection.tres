@@ -2,8 +2,7 @@
 
 [ext_resource type="Script" uid="uid://doxm2j6oomuw" path="res://Card/Descriptions/Cards/Colossus/Legendary/Resurrection/colossus_resurrection.gd" id="1_hxys7"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_xkn16"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_kpp3c"]
+[ext_resource type="Texture2D" uid="uid://btsavc4kievdf" path="res://Card/Descriptions/Cards/Colossus/Common/ColossalTitan/colosse.png" id="2_colos"]
 
 [sub_resource type="Resource" id="Resource_4356u"]
 script = ExtResource("1_hxys7")
@@ -16,7 +15,7 @@ metadata/_custom_type_script = "uid://doxm2j6oomuw"
 [resource]
 script = ExtResource("1_xkn16")
 name = "Resurrection"
-picture = SubResource("PlaceholderTexture2D_kpp3c")
+picture = ExtResource("2_colos")
 families = Array[int]([6])
 rarity = 3
 player_upgrade = SubResource("Resource_4356u")

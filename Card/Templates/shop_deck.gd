@@ -43,7 +43,7 @@ class PlayerPool extends CardPool:
 					continue
 				if not pool.has(rarity):
 					pool[rarity] = CardsArray.new()
-				pool[rarity].cards.append_array(_shop_deck.get_cards_for_rarity_for_family(family_type, rarity))	
+				pool[rarity].cards.append_array(_shop_deck.get_cards_for_rarity_for_family(family_type, rarity))
 		return self
 		
 	func update(family_type: Family.Type, rarity: Card.Rarity) -> void:
@@ -246,7 +246,4 @@ func _drop_rate_to_threshold(drop_rates: Dictionary) -> Dictionary[Card.Rarity, 
 
 func _init_player_pools(families: Array[Family], game_rules: GameRules) -> void:
 	for player in PlayerManager.get_alive_players().values():
-		_player_available_pools[player] = PlayerPool.new(player, families, game_rules, self).build()
-		
-		
-		
+		_player_available_pools[player] = PlayerPool.new(player, families, game_rules, self ).build()

@@ -2,8 +2,7 @@
 
 [ext_resource type="Script" uid="uid://uputg65q417d" path="res://Card/Descriptions/Cards/ArdentCelestial/Epic/ArmagedHeal/ardent_celestial_armagedheal.gd" id="1_einbf"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_vikme"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_c3p31"]
+[ext_resource type="Texture2D" uid="uid://tuwewl8ngbqu" path="res://Card/Descriptions/Cards/ArdentCelestial/Common/DarkForest/fire_dark_forest.png" id="2_ardnt"]
 
 [sub_resource type="Resource" id="Resource_xd871"]
 script = ExtResource("1_einbf")
@@ -15,7 +14,7 @@ metadata/_custom_type_script = "uid://uputg65q417d"
 [resource]
 script = ExtResource("1_vikme")
 name = "Armaged'heal"
-picture = SubResource("PlaceholderTexture2D_c3p31")
+picture = ExtResource("2_ardnt")
 families = Array[int]([3])
 rarity = 2
 player_upgrade = SubResource("Resource_xd871")

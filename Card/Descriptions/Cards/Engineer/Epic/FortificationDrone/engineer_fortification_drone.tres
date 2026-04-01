@@ -2,8 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_8cwvk"]
 [ext_resource type="Script" uid="uid://rdfvr5i8h3qq" path="res://Card/Descriptions/Cards/Engineer/Epic/FortificationDrone/engineer_fortification_drone.gd" id="1_lqe22"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_4kwcx"]
+[ext_resource type="Texture2D" uid="uid://psnthd75twnn" path="res://Card/Descriptions/Cards/Engineer/Common/ForceField/engineer_force_field.png" id="2_engr1"]
 
 [sub_resource type="Resource" id="Resource_fc0bc"]
 script = ExtResource("1_lqe22")
@@ -18,7 +17,7 @@ metadata/_custom_type_script = "uid://rdfvr5i8h3qq"
 [resource]
 script = ExtResource("1_8cwvk")
 name = "Fortification Drone"
-picture = SubResource("PlaceholderTexture2D_4kwcx")
+picture = ExtResource("2_engr1")
 families = Array[int]([2])
 rarity = 2
 player_upgrade = SubResource("Resource_fc0bc")

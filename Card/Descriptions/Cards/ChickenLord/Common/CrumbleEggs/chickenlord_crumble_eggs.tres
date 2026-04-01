@@ -2,8 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_20ska"]
 [ext_resource type="Script" uid="uid://bw3ilw20mauak" path="res://Card/Descriptions/Cards/ChickenLord/Common/CrumbleEggs/chickenlord_crumble_eggs.gd" id="1_al5bp"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_6brnt"]
+[ext_resource type="Texture2D" uid="uid://cslxv8ffyte5k" path="res://Card/Descriptions/Cards/ChickenLord/Common/AssistantChicken/chicken lord.png" id="2_chkn1"]
 
 [sub_resource type="Resource" id="Resource_4wuyt"]
 script = ExtResource("1_al5bp")
@@ -15,7 +14,7 @@ metadata/_custom_type_script = "uid://bw3ilw20mauak"
 [resource]
 script = ExtResource("1_20ska")
 name = "Crumble Eggs"
-picture = SubResource("PlaceholderTexture2D_6brnt")
+picture = ExtResource("2_chkn1")
 families = Array[int]([8])
 player_upgrade = SubResource("Resource_4wuyt")
 points = Dictionary[int, int]({

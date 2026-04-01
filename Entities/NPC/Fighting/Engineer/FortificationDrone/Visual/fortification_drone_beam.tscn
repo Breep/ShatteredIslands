@@ -29,7 +29,7 @@ shader_type spatial;
 render_priority = 0
 shader = SubResource("Shader_1i4ka")
 shader_parameter/global_color = Color(1.3375521, 1.353256, 0, 1)
-shader_parameter/global_alpha = 0.70000003325
+shader_parameter/global_alpha = 0.250000011875
 shader_parameter/additive_config = false
 shader_parameter/premultiply_color = false
 shader_parameter/premultiply_alpha = false
