@@ -23,4 +23,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Consuming the Star: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Every [[METEOR]] has " + str(_proc_chances[cardlvl - 1]) + " to hatch a [[CHICKEN_LORD]] egg."
+	return "Every [[METEOR]] has " + str(_proc_chances[cardlvl - 1]) + "% chance to hatch a [[CHICKEN_LORD]] egg."

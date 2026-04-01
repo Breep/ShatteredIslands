@@ -40,7 +40,6 @@ func _update_ad_modifier(scale: float, hp_max: float, hero: Hero) -> void:
 	ad_mod.calc_type = StatModifier.CalcType.ADD
 	ad_mod.value = hp_max * (_hp_to_ad_percent / 100.0) + (scale - 1) * (_scale_to_ad_percent)
 	hero.stat_modifiers_registry.register_modifier(ad_mod)
-	print("ad from hp max: " + str(hp_max * (_hp_to_ad_percent / 100.0)) + " ad from scale: ", (scale - 1) * (_scale_to_ad_percent))
 	
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:

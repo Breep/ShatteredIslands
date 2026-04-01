@@ -32,9 +32,9 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		var aa_mod := AutoAttackModifier.new()
 		aa_mod.id = &"Reflecto Belt"
 		aa_mod.tags = [AutoAttackModifier.TagType.CARD]
-		aa_mod.damage_mult = 1.0 + (damage_percent / 100.0)
+		aa_mod.mul = 1.0 + (damage_percent / 100.0)
 		aa_mod.is_one_time_effect = false
-		aa_mod.on_attack_logic_callback = _on_attack_consumption
+		aa_mod.additional_effect_callback = _on_attack_consumption
 		ctx.auto_attack_modifiers.register_modifier(aa_mod)
 
 	var _on_shield_broken := func(shield_stacks_lost: float) -> void:
