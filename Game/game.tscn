@@ -38,7 +38,7 @@ unique_name_in_owner = true
 [node name="CenterPoint1" type="Node3D" parent="IslandSpawns" unique_id=1891677116]
 
 [node name="SpawnPoint1" parent="IslandSpawns/CenterPoint1" unique_id=1450734872 instance=ExtResource("3_i1e5p")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100, 0, 0)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 100, 0, 0)
 
 [node name="FightingIsland" parent="IslandSpawns/CenterPoint1/SpawnPoint1" unique_id=308702408 instance=ExtResource("5_vifcx")]
 
@@ -46,7 +46,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100, 0
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0)
 
 [node name="SpawnPoint2" parent="IslandSpawns/CenterPoint2" unique_id=1818025395 instance=ExtResource("3_i1e5p")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100, 20, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100, 0, 0)
 
 [node name="FightingIsland" parent="IslandSpawns/CenterPoint2/SpawnPoint2" unique_id=1038005912 instance=ExtResource("5_vifcx")]
 
@@ -62,7 +62,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100, 0
 transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 0, 0, 0)
 
 [node name="SpawnPoint4" parent="IslandSpawns/CenterPoint4" unique_id=1656284648 instance=ExtResource("3_i1e5p")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100, -20, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100, 0, 0)
 
 [node name="FightingIsland" parent="IslandSpawns/CenterPoint4/SpawnPoint4" unique_id=650666129 instance=ExtResource("5_vifcx")]
 
@@ -78,7 +78,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100, 0
 transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 0, 0, 0)
 
 [node name="SpawnPoint6" parent="IslandSpawns/CenterPoint6" unique_id=596493243 instance=ExtResource("3_i1e5p")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100, 20, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100, 0, 0)
 
 [node name="FightingIsland" parent="IslandSpawns/CenterPoint6/SpawnPoint6" unique_id=1440838936 instance=ExtResource("5_vifcx")]
 
@@ -94,7 +94,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100, 0
 transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0, 0)
 
 [node name="SpawnPoint8" parent="IslandSpawns/CenterPoint8" unique_id=2016136990 instance=ExtResource("3_i1e5p")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100, -20, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100, 0, 0)
 
 [node name="FightingIsland" parent="IslandSpawns/CenterPoint8/SpawnPoint8" unique_id=1745425678 instance=ExtResource("5_vifcx")]
 
