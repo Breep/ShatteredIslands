@@ -18,21 +18,14 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if not _is_falling:
-		return
-
+	if not _is_falling: return
 	_elapsed += delta
 	var linear_t := clampf(_elapsed / _deploy_time, 0.0, 1.0)
-
 	var eased_t := linear_t * linear_t #* linear_t * linear_t
-
 	_path_follow_3d.progress_ratio = eased_t
-
 	if linear_t >= 1.0:
 		_is_falling = false
 		_on_impact()
-
-
 
 
 func _on_impact() -> void:
