@@ -3,11 +3,11 @@
 [ext_resource type="Script" uid="uid://dbdgpnlir03dy" path="res://Card/2D/CardLayout/card_layout.gd" id="1_2an10"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_ru7cc"]
 [ext_resource type="Texture2D" uid="uid://yekknulevsvb" path="res://Card/Descriptions/Cards/Poison/Common/PoisonFlask/portrait_poison_flask.png" id="3_mt3v6"]
-[ext_resource type="Script" uid="uid://o4m1vk8f267i" path="res://VFX/VFEZ-godot-main/vfez_material_2d.gd" id="5_m3odx"]
+[ext_resource type="Script" uid="uid://dq0ub1oemlk0p" path="res://VFX/VFEZ-godot-main/vfez_material_2d.gd" id="5_m3odx"]
 [ext_resource type="Texture2D" uid="uid://cwqdngpmbcnck" path="res://Card/Descriptions/Families/Icons/poison.png" id="9_mt3v6"]
-[ext_resource type="Texture2D" uid="uid://cdtfqcqcxa4x0" path="res://VFX/Shaders/2D/Card/runes/rune_mask.png" id="9_n6ysl"]
-[ext_resource type="Shader" uid="uid://bfo68wf8rrok4" path="res://VFX/Shaders/2D/Card/runes/rune_glow.gdshader" id="9_p8v2y"]
-[ext_resource type="Script" uid="uid://dp2f1iwp38m0k" path="res://VFX/Shaders/2D/Card/runes/rune_glow tools.gd" id="11_7ajba"]
+[ext_resource type="Shader" uid="uid://bfo68wf8rrok4" path="res://Card/2D/CardLayout/Data/Shaders/runes/rune_glow.gdshader" id="9_p8v2y"]
+[ext_resource type="Texture2D" uid="uid://dr28dlr3rssnu" path="res://Card/2D/CardLayout/Data/StandardCard/ct_rune_mask.png" id="10_p8v2y"]
+[ext_resource type="Script" uid="uid://dp2f1iwp38m0k" path="res://Card/2D/CardLayout/Data/Shaders/runes/rune_glow tools.gd" id="11_7ajba"]
 [ext_resource type="Script" uid="uid://bd3srw4twda5w" path="res://UI/Tool/SmartTextLabel/ui_smart_text_label.gd" id="11_pjbj4"]
 [ext_resource type="Texture2D" uid="uid://hump1edscxip" path="res://Card/2D/CardLayout/Data/StandardCard/ct_frame.png" id="12_k2vus"]
 [ext_resource type="Texture2D" uid="uid://vii43ab2auyg" path="res://Card/2D/CardLayout/Data/StandardCard/ct_bottom.png" id="13_78cks"]
@@ -31,9 +31,11 @@ shader_parameter/glow_color = Color(0.553, 0.282, 0.957, 1)
 shader_parameter/intensity_multiplier = 1.0
 shader_parameter/glow_mode = 1
 shader_parameter/animation_speed = 1.0
+shader_parameter/time_seed = 71.07216715812683
 shader_parameter/hover_blend = 0.0
 shader_parameter/idle_intensity = 0.73
 shader_parameter/hover_intensity = 1.2
+shader_parameter/residual_intensity = 0.5
 shader_parameter/inner_radius = 0.006
 shader_parameter/inner_samples = 10
 shader_parameter/inner_falloff = 0.5
@@ -154,13 +156,14 @@ level3_texture = ExtResource("16_ejxcv")
 level4_texture = ExtResource("17_p8v2y")
 level5_texture = ExtResource("18_7ajba")
 
-[node name="Contour" type="TextureRect" parent="." unique_id=7108817]
+[node name="Frame" type="TextureRect" parent="." unique_id=7108817]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("12_k2vus")
 
-[node name="Rune" type="TextureRect" parent="Contour" unique_id=1532157439]
+[node name="Runes" type="TextureRect" parent="Frame" unique_id=1532157439]
+unique_name_in_owner = true
 material = SubResource("ShaderMaterial_augoc")
 clip_contents = true
 layout_mode = 1
@@ -169,12 +172,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("9_n6ysl")
+texture = ExtResource("10_p8v2y")
 expand_mode = 1
-stretch_mode = 6
 script = ExtResource("11_7ajba")
 current_rarity = 2
 current_mode = 1
+speed_override = 1.0
 
 [node name="CardBottom" type="TextureRect" parent="." unique_id=417994522]
 layout_mode = 0
@@ -242,6 +245,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("17_ejxcv")
 expand_mode = 1
+metadata/_edit_lock_ = true
 
 [node name="CurrentLevelContainer" type="Control" parent="." unique_id=1699933895]
 unique_name_in_owner = true

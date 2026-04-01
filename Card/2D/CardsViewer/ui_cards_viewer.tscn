@@ -3,82 +3,120 @@
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_ekq81"]
 [ext_resource type="PackedScene" uid="uid://c2psjj8133op3" path="res://Card/2D/CardButton/card_button.tscn" id="1_mu264"]
 [ext_resource type="Script" uid="uid://b05cjd0m0y2ss" path="res://Card/2D/CardsViewer/ui_cards_viewer.gd" id="2_f23eh"]
-[ext_resource type="Script" uid="uid://dl8cs3pdc7hvl" path="res://UI/Tool/input_transmiter.gd" id="3_x2cxy"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_f23eh"]
-viewport_path = NodePath("SubViewport")
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_dg0ld"]
+thickness = 2
+vertical = true
 
 [node name="UICardsViewer" type="Control" unique_id=303247800]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 1910.0
-offset_bottom = 1770.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -955.0
+offset_top = -885.0
+offset_right = 955.0
+offset_bottom = 885.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 theme = ExtResource("1_ekq81")
 script = ExtResource("2_f23eh")
 
-[node name="MainTextureRect" type="TextureRect" parent="." unique_id=308796052 node_paths=PackedStringArray("viewport")]
-unique_name_in_owner = true
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=715812912]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("ViewportTexture_f23eh")
-expand_mode = 1
-stretch_mode = 5
-script = ExtResource("3_x2cxy")
-viewport = NodePath("../SubViewport")
 
-[node name="SubViewport" type="SubViewport" parent="." unique_id=445719003]
-transparent_bg = true
-size = Vector2i(1910, 1770)
+[node name="SortBar" type="HBoxContainer" parent="VBoxContainer" unique_id=2137364988]
+layout_mode = 2
+theme_override_constants/separation = 10
 
-[node name="ScrollContainer" type="ScrollContainer" parent="SubViewport" unique_id=804347890]
+[node name="SortRarityButton" type="Button" parent="VBoxContainer/SortBar" unique_id=100000001]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "Rarity"
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/SortBar" unique_id=1427246931]
+layout_mode = 2
+theme_override_constants/separation = 4
+theme_override_styles/separator = SubResource("StyleBoxLine_dg0ld")
+
+[node name="SortLevelButton" type="Button" parent="VBoxContainer/SortBar" unique_id=100000002]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "Level"
+
+[node name="VSeparator2" type="VSeparator" parent="VBoxContainer/SortBar" unique_id=1549649258]
+layout_mode = 2
+
+[node name="SortUnlockedButton" type="Button" parent="VBoxContainer/SortBar" unique_id=100000003]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "Unlocked"
+
+[node name="VSeparator3" type="VSeparator" parent="VBoxContainer/SortBar" unique_id=1061778784]
+layout_mode = 2
+
+[node name="SortNameButton" type="Button" parent="VBoxContainer/SortBar" unique_id=100000004]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "Name"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer" unique_id=804347890]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(1910, 1770)
-offset_right = 1910.0
-offset_bottom = 1770.0
+layout_mode = 2
+size_flags_vertical = 3
 theme = ExtResource("1_ekq81")
 
-[node name="GridContainer" type="GridContainer" parent="SubViewport/ScrollContainer" unique_id=1543889971]
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/ScrollContainer" unique_id=1543889971]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(1910, 1770)
 layout_mode = 2
 columns = 3
 
-[node name="CardButton" parent="SubViewport/ScrollContainer/GridContainer" unique_id=2025567503 instance=ExtResource("1_mu264")]
+[node name="CardButton" parent="VBoxContainer/ScrollContainer/GridContainer" unique_id=2025567503 instance=ExtResource("1_mu264")]
 custom_minimum_size = Vector2(630, 880)
 layout_mode = 2
 
-[node name="CardButton2" parent="SubViewport/ScrollContainer/GridContainer" unique_id=14544120 instance=ExtResource("1_mu264")]
+[node name="CardButton2" parent="VBoxContainer/ScrollContainer/GridContainer" unique_id=14544120 instance=ExtResource("1_mu264")]
 custom_minimum_size = Vector2(630, 880)
 layout_mode = 2
 
-[node name="CardButton3" parent="SubViewport/ScrollContainer/GridContainer" unique_id=1889893421 instance=ExtResource("1_mu264")]
+[node name="CardButton3" parent="VBoxContainer/ScrollContainer/GridContainer" unique_id=1889893421 instance=ExtResource("1_mu264")]
 custom_minimum_size = Vector2(630, 880)
 layout_mode = 2
 
-[node name="CardButton4" parent="SubViewport/ScrollContainer/GridContainer" unique_id=812564584 instance=ExtResource("1_mu264")]
+[node name="CardButton4" parent="VBoxContainer/ScrollContainer/GridContainer" unique_id=812564584 instance=ExtResource("1_mu264")]
 custom_minimum_size = Vector2(630, 880)
 layout_mode = 2
 
-[node name="CardButton5" parent="SubViewport/ScrollContainer/GridContainer" unique_id=449600436 instance=ExtResource("1_mu264")]
+[node name="CardButton5" parent="VBoxContainer/ScrollContainer/GridContainer" unique_id=449600436 instance=ExtResource("1_mu264")]
 custom_minimum_size = Vector2(630, 880)
 layout_mode = 2
 
-[node name="CardButton6" parent="SubViewport/ScrollContainer/GridContainer" unique_id=827113631 instance=ExtResource("1_mu264")]
+[node name="CardButton6" parent="VBoxContainer/ScrollContainer/GridContainer" unique_id=827113631 instance=ExtResource("1_mu264")]
 custom_minimum_size = Vector2(630, 880)
 layout_mode = 2
 
-[node name="CardButton7" parent="SubViewport/ScrollContainer/GridContainer" unique_id=522510570 instance=ExtResource("1_mu264")]
+[node name="CardButton7" parent="VBoxContainer/ScrollContainer/GridContainer" unique_id=522510570 instance=ExtResource("1_mu264")]
 custom_minimum_size = Vector2(630, 880)
 layout_mode = 2
 
-[node name="CardButton8" parent="SubViewport/ScrollContainer/GridContainer" unique_id=1656108919 instance=ExtResource("1_mu264")]
+[node name="CardButton8" parent="VBoxContainer/ScrollContainer/GridContainer" unique_id=1656108919 instance=ExtResource("1_mu264")]
 custom_minimum_size = Vector2(630, 880)
 layout_mode = 2
 
-[node name="CardButton9" parent="SubViewport/ScrollContainer/GridContainer" unique_id=1179758616 instance=ExtResource("1_mu264")]
+[node name="CardButton9" parent="VBoxContainer/ScrollContainer/GridContainer" unique_id=1179758616 instance=ExtResource("1_mu264")]
 custom_minimum_size = Vector2(630, 880)
 layout_mode = 2

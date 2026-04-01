@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://b0opqsmhxort7"]
 
-[ext_resource type="Texture2D" uid="uid://cpgjovjpnswwl" path="res://Props/DefaultBattleIsland/Arch_island/textures/citrus_orchard_road_puresky_4k.exr" id="1_wicrg"]
 [ext_resource type="PackedScene" uid="uid://cg4hqe65owjkt" path="res://Props/DefaultBattleIsland/Arch_island/VFX/Scenes/VFX_FireStatic_K1.tscn" id="3_8xm7n"]
 [ext_resource type="PackedScene" uid="uid://do5bslbv5ulo0" path="res://Props/DefaultBattleIsland/Arch_island/props_arena_sword.tscn" id="3_cxbhe"]
 [ext_resource type="PackedScene" uid="uid://dreqt60l7aul0" path="res://Props/DefaultBattleIsland/Arch_island/props_arena_island_new.tscn" id="3_iktvg"]
@@ -36,58 +35,6 @@
 [ext_resource type="PackedScene" uid="uid://bomsoicetwrmy" path="res://Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Scenes/VFX_AcidWall_K1.tscn" id="36_lvxo2"]
 [ext_resource type="PackedScene" uid="uid://brl4b1upuf5nw" path="res://Props/DefaultBattleIsland/Arch_island/VFX/VFX_Level_UP_effects/VFX/Scenes/VFX_Sparks_Yk1.tscn" id="36_xbni8"]
 [ext_resource type="PackedScene" uid="uid://be7ehnhyliyxn" path="res://Props/DefaultBattleIsland/Arch_island/foliage/props_foliage_leafage6.tscn" id="37_lvxo2"]
-
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_kc47p"]
-panorama = ExtResource("1_wicrg")
-energy_multiplier = 5.0
-
-[sub_resource type="Sky" id="Sky_qk38t"]
-sky_material = SubResource("PanoramaSkyMaterial_kc47p")
-
-[sub_resource type="Environment" id="Environment_x7fny"]
-background_mode = 2
-background_energy_multiplier = 0.25
-sky = SubResource("Sky_qk38t")
-sky_custom_fov = 66.7
-sky_rotation = Vector3(0, 2.0612338, 0)
-ambient_light_sky_contribution = 0.5
-ambient_light_energy = 7.52
-reflected_light_source = 2
-tonemap_exposure = 0.83
-tonemap_white = 1.35
-ssr_fade_in = 0.424264
-ssr_fade_out = 1.1892055
-ssr_depth_tolerance = 75.51
-ssao_enabled = true
-ssao_radius = 4.79
-ssao_intensity = 3.52
-ssao_sharpness = 1.0
-ssil_radius = 8.98
-sdfgi_use_occlusion = true
-sdfgi_bounce_feedback = 0.39
-sdfgi_cascades = 1
-sdfgi_min_cell_size = 0.03125
-glow_enabled = true
-glow_intensity = 2.78
-glow_strength = 0.46
-glow_bloom = 0.13
-glow_hdr_scale = 1.0
-fog_mode = 1
-fog_light_color = Color(0.11147597, 0.18064603, 0.38794202, 1)
-fog_light_energy = 3.19
-fog_density = 0.1995
-fog_aerial_perspective = 0.32
-fog_sky_affect = 0.0
-fog_height = 1024.0
-volumetric_fog_enabled = true
-volumetric_fog_density = 0.004
-volumetric_fog_albedo = Color(0.8032315, 0.86696446, 0.95621866, 1)
-volumetric_fog_emission_energy = 0.0
-volumetric_fog_anisotropy = 0.56
-volumetric_fog_length = 33.88
-adjustment_enabled = true
-adjustment_brightness = 0.98
-adjustment_contrast = 1.3
 
 [node name="IslandRemake" type="Node3D" unique_id=1888769254]
 
@@ -131,14 +78,6 @@ light_energy = 0.4
 light_volumetric_fog_energy = 6.0
 light_angular_distance = 17.63
 
-[node name="Camera3D" type="Camera3D" parent="SpotLight3D" unique_id=962265795]
-transform = Transform3D(-0.00965948, -0.7751109, 0.6317511, 0.99888855, -0.036627553, -0.029666247, 0.046134137, 0.63076216, 0.7746034, 60.484, 0, 62.17)
-fov = 48.6
-
-[node name="Camera3D" type="Camera3D" parent="SpotLight3D/Camera3D" unique_id=689490499]
-transform = Transform3D(0.9999619, -0.008726535, 0, 0.008726535, 0.9999619, 0, 0, 0, 1, -2.77, -1.735, -52.795)
-fov = 35.0
-
 [node name="OmniLight3D" type="OmniLight3D" parent="SpotLight3D" unique_id=582765361]
 transform = Transform3D(1.0000001, -2.0489097e-08, 0, 2.142042e-08, 1, -8.5739885e-08, 0, 8.440111e-08, 1, -2.3444138, 19.697495, -16.180607)
 light_color = Color(0.37158465, 0.56250954, 0.693373, 1)
@@ -151,13 +90,6 @@ transform = Transform3D(-0.06802948, -0.45325062, 5.416986, 5.430322, -0.2513553
 
 [node name="rock4" parent="SpotLight3D" unique_id=339061901 instance=ExtResource("11_v6pgo")]
 transform = Transform3D(0.56185627, -0.007815637, 6.641237, -0.59115964, 6.638443, 0.05782499, -6.6148777, -0.5939295, 0.5589275, 18.063808, -1.638306, -16.835838)
-
-[node name="WorldEnvironment#Arena" parent="." unique_id=558820921 instance=ExtResource("3_v6pgo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.767658, 0, 15.267077)
-visible = false
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=31111793]
-environment = SubResource("Environment_x7fny")
 
 [node name="M_island" parent="." unique_id=1736634077 instance=ExtResource("3_iktvg")]
 

@@ -14,9 +14,9 @@ script = ExtResource("1_ksd3p")
 name = "Xeno Egg"
 picture = ExtResource("2_ardnt")
 families = Array[int]([3, 8])
+player_upgrade = SubResource("Resource_pn603")
 points = Dictionary[int, int]({
 3: 1,
 8: 1
 })
-player_upgrade = SubResource("Resource_pn603")
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

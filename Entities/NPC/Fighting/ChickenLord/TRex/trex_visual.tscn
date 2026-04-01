@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cbsgqx1r8bqf1" path="res://Entities/NPC/Fighting/ChickenLord/TRex/Data/TrexTexture/t-rex_final_UV_feather_neck_BaseColor.png" id="3_sr1lv"]
 [ext_resource type="Texture2D" uid="uid://bs1q1v6d2vpvm" path="res://Entities/NPC/Fighting/ChickenLord/TRex/Data/TrexTexture/t-rex_final_UV_teeth_top_BaseColor.png" id="4_b1egs"]
 [ext_resource type="Texture2D" uid="uid://cjd4fxg26sbp0" path="res://Entities/NPC/Fighting/ChickenLord/TRex/Data/TrexTexture/t-rex_final_UV_tongue_BaseColor.png" id="5_pvlej"]
-[ext_resource type="Texture2D" uid="uid://nohew6jsnhix" path="res://Entities/NPC/Fighting/ChickenLord/TRex/Data/feather_particule_2.png" id="8_b1egs"]
+[ext_resource type="Texture2D" uid="uid://nohew6jsnhix" path="res://Entities/NPC/Fighting/ChickenLord/TRex/Data/feather_particule.png" id="8_b1egs"]
 [ext_resource type="AnimationLibrary" uid="uid://dtrexanlibr01" path="res://Entities/NPC/Fighting/ChickenLord/TRex/trex_animations.tres" id="8_trex"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w476e"]
@@ -461,12 +461,14 @@ _surfaces = [{
 blend_shape_mode = 0
 
 [sub_resource type="Gradient" id="Gradient_b1egs"]
-colors = PackedColorArray(0.59607846, 0.12156863, 0.13333334, 1, 0.21568628, 0.22352941, 0.6745098, 1)
+offsets = PackedFloat32Array(0, 0.54545456, 0.5534759, 1)
+colors = PackedColorArray(0.56078434, 0.11372549, 0.1254902, 1, 0.5647059, 0.11372549, 0.1254902, 1, 0.21176471, 0.22745098, 0.6745098, 1, 0.21176471, 0.22745098, 0.6745098, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_pvlej"]
 gradient = SubResource("Gradient_b1egs")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sr1lv"]
+particle_flag_rotate_y = true
 emission_shape = 1
 emission_sphere_radius = 1.5
 angle_min = -180.0
@@ -480,9 +482,8 @@ angular_velocity_max = 360.0
 gravity = Vector3(0, -3, 0)
 damping_min = 2.0
 damping_max = 5.0
-scale_min = 0.6
-scale_max = 1.4
-color_ramp = SubResource("GradientTexture1D_pvlej")
+scale_min = 0.29999998
+color_initial_ramp = SubResource("GradientTexture1D_pvlej")
 turbulence_enabled = true
 turbulence_noise_strength = 2.0
 turbulence_noise_scale = 4.0

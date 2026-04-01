@@ -45,4 +45,4 @@ func _is_blocked() -> bool:
 func _handle_thorn(source: Entity, action_id: StringName) -> void:
 	if action_id != &"auto_attack": return
 	if _owner.stats.thorn >= 1 and is_instance_valid(source):
-		_owner.direct_damage(source, _owner.stats.thorn, Utils.ActionType.DAMAGE_PHYSICAL, action_id)
+		_owner.direct_damage(source, _owner.stats.thorn, Utils.ActionType.DAMAGE_PHYSICAL, &"Thorn")

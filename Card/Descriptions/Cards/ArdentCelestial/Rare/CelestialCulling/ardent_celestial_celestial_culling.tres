@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Card" format=3 uid="uid://vefirtk44fxp"]
 
-[ext_resource type="Texture2D" uid="uid://b36uqvjogqwoa" path="res://Card/Descriptions/Cards/ArdentCelestial/Rare/CosmicBolt/fire_cosmic_bold.jpg" id="1_gkpij"]
+[ext_resource type="Texture2D" uid="uid://b36uqvjogqwoa" path="res://Card/Descriptions/Cards/ArdentCelestial/Common/CosmicBolt/fire_cosmic_bold.jpg" id="1_gkpij"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_lk7r7"]
 [ext_resource type="Script" uid="uid://dk45y4m1jvl1h" path="res://Card/Descriptions/Cards/ArdentCelestial/Rare/CelestialCulling/ardent_celestial_celestial_culling.gd" id="2_5gsv7"]
 

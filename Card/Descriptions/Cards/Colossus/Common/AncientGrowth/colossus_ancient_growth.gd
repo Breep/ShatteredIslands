@@ -23,4 +23,6 @@ func get_description(cardlvl: int) -> String:
 		printerr("Ancient Growth: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Increase [[SCALE]] by " + str(_size_increase[cardlvl - 1]) + " every " + str(_period[cardlvl - 1]) + " seconds"
+	var s: String = str(_size_increase[cardlvl - 1]).pad_decimals(0)
+	var p: String = str(_period[cardlvl - 1]).pad_decimals(0)
+	return "Increase [[SCALE]] by " + s + "% every " + p + " seconds"

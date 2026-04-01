@@ -68,5 +68,9 @@ func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
 		printerr("Shield Throw: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
-
-	return "Every " + str(_threshold[cardlvl - 1]) + " [[SHIELD]] generated, throw a shield. Deal " + str(_damage[cardlvl - 1]) + " [[MAGICAL_DAMAGE]] and bounce between all enemies. Generate " + str(_shield_return[cardlvl - 1]) + " [[SHIELD]] for each enemy hit."
+	
+	var s: String = str(_threshold[cardlvl - 1]).pad_decimals(0)
+	var d: String = str(_damage[cardlvl - 1]).pad_decimals(0)
+	var b: String = str(_bounces[cardlvl - 1]).pad_decimals(1)
+	var sr: String = str(_shield_return[cardlvl - 1]).pad_decimals(0)
+	return "Every " + s + " [[SHIELD]] lost, throw a shield. Deal " + d + " [[MAGICAL_DAMAGE]], " + b + " bounces. Generate " + sr + " [[SHIELD]] for each enemy hit."

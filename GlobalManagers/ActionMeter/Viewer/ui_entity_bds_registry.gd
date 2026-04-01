@@ -35,7 +35,7 @@ func _ready() -> void:
 	visible = false
 	for bds_type: BattleDataStat.Type in _ui_battle_data_stats_panels.keys():
 		_ui_battle_data_stats_panels[bds_type].battle_data_stat_type = bds_type
-	Events.entity_cliked.connect(_on_entity_clicked)
+	Events.entity_clicked.connect(_on_entity_clicked)
 
 
 func _unhandled_input(event: InputEvent) -> void:

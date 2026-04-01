@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bhxhqex1pbh2p"]
 
 [ext_resource type="Script" uid="uid://cl4rtcia6te0m" path="res://UI/InGame/FightingArea/ui_fighting_area.gd" id="1_xkiby"]
+[ext_resource type="PackedScene" uid="uid://cs66hky7o30da" path="res://GlobalManagers/ActionMeter/Viewer/ui_entity_bds_registry.tscn" id="3_ejw1r"]
 [ext_resource type="PackedScene" uid="uid://dmfkigo1trjd0" path="res://UI/Tool/Countdown/ui_countdown.tscn" id="3_ie0xi"]
 
 [node name="UIFightingArea" type="Control" unique_id=1289468176]
@@ -65,3 +66,20 @@ grow_vertical = 2
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
+
+[node name="EntityBDSRegistry" parent="." unique_id=1651696969 node_paths=PackedStringArray("_ui_battle_data_stats_panels") instance=ExtResource("3_ejw1r")]
+layout_mode = 1
+offset_left = 427.0
+offset_top = 226.0
+offset_right = 827.0
+offset_bottom = 526.0
+_ui_battle_data_stats_panels = {
+0: NodePath("TabContainer/Damage Done"),
+1: NodePath("TabContainer/Damage Taken"),
+2: NodePath("TabContainer/Heal Done"),
+3: NodePath("TabContainer/Heal Received"),
+4: NodePath("TabContainer/Stack Inflicted"),
+5: NodePath("TabContainer/Stack Taken"),
+6: NodePath("TabContainer/Misc Done"),
+7: NodePath("TabContainer/Misc Taken")
+}

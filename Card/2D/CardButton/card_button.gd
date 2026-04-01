@@ -35,6 +35,9 @@ var _is_focused: bool = false
 @export var _card_layout : CardLayout
 @export var _texture_rect: TextureRect
 
+var _sub_viewport: SubViewport
+var _scroll_container: ScrollContainer
+
 # ============================== Public functions ==============================
 
 func update_visual(new_card: Card) -> void:
@@ -51,20 +54,30 @@ func remove_shader() -> void:
 
 func _ready() -> void:
 	if _texture_rect.material != null:
-		_texture_rect.material = _texture_rect.material.duplicate() # Make the material unique
+		_texture_rect.material = _texture_rect.material.duplicate()
+	_sub_viewport = _texture_rect.get_node("SubViewport") as SubViewport
+	var parent := self as Node
+	while parent:
+		if parent is ScrollContainer:
+			_scroll_container = parent
+			break
+		parent = parent.get_parent()
 
 
 func _process(delta: float) -> void:
 	_animation_3d_rotate(delta)
+	_update_viewport_culling()
 
 
 func _on_mouse_entered() -> void:
 	_is_focused = true
+	_card_layout.mouse_entered()
 
 
 func _on_mouse_exited() -> void:
 	_is_focused = false
 	_animation_reset_3d_rotation()
+	_card_layout.mouse_exited()
 
 
 func _input(event: InputEvent) -> void:
@@ -95,6 +108,18 @@ func _animation_reset_3d_rotation() -> void:
 	if _texture_rect.material == null: return
 	_target_rot_x = 0.0
 	_target_rot_y = 0.0
+
+
+func _update_viewport_culling() -> void:
+	if _sub_viewport == null or _scroll_container == null:
+		return
+	var scroll_rect := _scroll_container.get_global_rect()
+	var card_rect := get_global_rect()
+	var is_visible_in_scroll := scroll_rect.intersects(card_rect)
+	if is_visible_in_scroll and _sub_viewport.render_target_update_mode == SubViewport.UPDATE_DISABLED:
+		_sub_viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+	elif not is_visible_in_scroll and _sub_viewport.render_target_update_mode != SubViewport.UPDATE_DISABLED:
+		_sub_viewport.render_target_update_mode = SubViewport.UPDATE_DISABLED
 
 
 func _on_gui_input(event: InputEvent) -> void:
