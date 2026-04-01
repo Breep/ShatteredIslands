@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_ogolk"]
 script = ExtResource("1_svp2b")
-_chance = Array[float]([20.0, 40.0, 70.0])
+_chance = Array[float]([5.0, 10.0, 20.0])
 metadata/_custom_type_script = "uid://cdk7uavfh53e1"
 
 [resource]

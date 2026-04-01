@@ -43,6 +43,8 @@ func _register_meteor_spell_modifier() -> void:
 		var sm: Dictionary = cb_vars[ActionModifier.VarType.SPELL_MODIFIER]
 		if not sm.has(Spell.MeteorModifier.DAMAGE_PERCENT):
 			sm[Spell.MeteorModifier.DAMAGE_PERCENT] = _ardent_celestial_stats.meteor_damage_percent[level]
+		if not sm.has(Spell.MeteorModifier.DAMAGE_FLAT):
+			sm[Spell.MeteorModifier.DAMAGE_FLAT] = _ardent_celestial_stats.meteor_damage_flat[level]
 		if not sm.has(Spell.MeteorModifier.RADIUS):
 			sm[Spell.MeteorModifier.RADIUS] = _ardent_celestial_stats.meteor_radius
 		# On_hit et on_cast : on merge les callbacks de la famille avec ceux déjà présents

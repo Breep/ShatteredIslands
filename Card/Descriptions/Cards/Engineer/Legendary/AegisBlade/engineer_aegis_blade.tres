@@ -8,9 +8,9 @@
 script = ExtResource("1_8tyqj")
 _attack_ads = Array[float]([30.0, 60.0, 90.0])
 _attack_speeds = Array[float]([0.8, 0.8, 0.8])
-_shield_ad_maxs = Array[float]([200.0, 400.0, 800.0])
+_shield_ad_maxs = Array[float]([150.0, 300.0, 800.0])
 _shield_ad_taus = Array[float]([1.0, 2.0, 3.0])
-_damage_as_shield_ratios = Array[float]([0.5, 0.75, 1.0])
+_damage_as_shield_ratios = Array[float]([0.2, 0.5, 1.0])
 _rarity = 3
 metadata/_custom_type_script = "uid://meie2sprd15l"
 
