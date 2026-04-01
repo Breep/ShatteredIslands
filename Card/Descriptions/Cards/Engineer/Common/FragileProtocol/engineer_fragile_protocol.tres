@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Card" format=3 uid="uid://nhheckrvkmd2"]
 
-[ext_resource type="Script" uid="uid://demnk3ihj3417" path="res://Card/Descriptions/Cards/Engineer/Rare/FragileProtocol/engineer_fragile_protocol.gd" id="1_1n077"]
+[ext_resource type="Script" uid="uid://demnk3ihj3417" path="res://Card/Descriptions/Cards/Engineer/Common/FragileProtocol/engineer_fragile_protocol.gd" id="1_1n077"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_in42e"]
 [ext_resource type="Texture2D" uid="uid://psnthd75twnn" path="res://Card/Descriptions/Cards/Engineer/Common/ForceField/engineer_force_field.png" id="2_engr1"]
 

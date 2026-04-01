@@ -30,6 +30,6 @@ xp_per_levels = Dictionary[int, int]({
 9: 50,
 10: 100
 })
-duration_buying_phase = 30.0
+duration_buying_phase = 9999.0
 duration_fighting_normal = 30.0
 duration_fighting_special = 25.0

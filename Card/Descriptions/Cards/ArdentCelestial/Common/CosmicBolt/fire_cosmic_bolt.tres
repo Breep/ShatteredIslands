@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Card" format=3 uid="uid://ifly0ma88lh6"]
 
-[ext_resource type="Texture2D" uid="uid://b36uqvjogqwoa" path="res://Card/Descriptions/Cards/ArdentCelestial/Rare/CosmicBolt/fire_cosmic_bold.jpg" id="1_dmfxw"]
+[ext_resource type="Texture2D" uid="uid://b36uqvjogqwoa" path="res://Card/Descriptions/Cards/ArdentCelestial/Common/CosmicBolt/fire_cosmic_bold.jpg" id="1_dmfxw"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_mrle8"]
-[ext_resource type="Script" uid="uid://4klad06ppdmg" path="res://Card/Descriptions/Cards/ArdentCelestial/Rare/CosmicBolt/fire_cosmic_bolt.gd" id="2_blkha"]
+[ext_resource type="Script" uid="uid://4klad06ppdmg" path="res://Card/Descriptions/Cards/ArdentCelestial/Common/CosmicBolt/fire_cosmic_bolt.gd" id="2_blkha"]
 
 [sub_resource type="Resource" id="Resource_0un7i"]
 script = ExtResource("2_blkha")

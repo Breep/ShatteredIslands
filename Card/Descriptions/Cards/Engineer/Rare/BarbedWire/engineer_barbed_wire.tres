@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Card" format=3 uid="uid://bgx3j85dxco0q"]
 
 [ext_resource type="Script" uid="uid://bl5lh6siyusit" path="res://Card/Descriptions/Cards/Engineer/Rare/BarbedWire/engineer_barbed_wire.gd" id="1_pft7x"]
-[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="2_fws5g"]
 [ext_resource type="Texture2D" uid="uid://psnthd75twnn" path="res://Card/Descriptions/Cards/Engineer/Common/ForceField/engineer_force_field.png" id="2_engr1"]
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="2_fws5g"]
 
 [sub_resource type="Resource" id="Resource_swgwi"]
 script = ExtResource("1_pft7x")

@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Card" format=3 uid="uid://dai3n8w7n58re"]
 
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_script"]
-[ext_resource type="Script" uid="uid://dpjj57ig80qwd" path="res://Card/Descriptions/Cards/ArdentCelestial/Rare/Cosmopolitan/fire_cosmopolitan.gd" id="2_sub_resource"]
 [ext_resource type="Texture2D" uid="uid://tuwewl8ngbqu" path="res://Card/Descriptions/Cards/ArdentCelestial/Common/DarkForest/fire_dark_forest.png" id="2_ardnt"]
+[ext_resource type="Script" uid="uid://dpjj57ig80qwd" path="res://Card/Descriptions/Cards/ArdentCelestial/Rare/Cosmopolitan/fire_cosmopolitan.gd" id="2_sub_resource"]
 
 [sub_resource type="Resource" id="Resource_cosmopolitan"]
 script = ExtResource("2_sub_resource")
