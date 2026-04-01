@@ -1,6 +1,8 @@
 class_name AttackTitanAxe
 extends HeroUpgrade
 
+const AXE_VISUAL = preload("res://SpellsAndProjectiles/Spells/TitanAxe/Visual/titan_axe_visual.tscn")
+
 @export var _attack_number: int # Attack number needed to proc the damage buff
 @export var _hp_percent: Array[float] # Damage buff in % of target hp max
 @export var _scale_bonuses: Array[float] # bonus to the hp_percent depending on the sender size
@@ -8,9 +10,9 @@ extends HeroUpgrade
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var hp_pct: float = _hp_percent[card_lvl - 1]
 	var atk_threshold: int = _attack_number
-	var state := {&"count": 0}
+	var state := {&"count": 0, &"proc_active": false}
 	var scale_bonus: float = _scale_bonuses[card_lvl - 1]
-	
+
 	var aa_mod := AutoAttackModifier.new()
 	aa_mod.id = &"Titan Axe"
 	aa_mod.tags = [AutoAttackModifier.TagType.CARD]
@@ -19,13 +21,23 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		state[&"count"] += 1
 		if state[&"count"] >= atk_threshold:
 			state[&"count"] = 0
+			state[&"proc_active"] = true
 			var target: Entity = cb_vars[AutoAttackModifier.VarType.TARGET]
 			if target and is_instance_valid(target):
 				var bonus: float = target.stats.health_max * (hp_pct + (ctx.hero.stats.scale-1)*scale_bonus/100) / 100.0
 				cb_vars[AutoAttackModifier.VarType.DAMAGE_ADD] += bonus
-	
+	aa_mod.additional_effect_callback = func(cb_vars: Dictionary) -> void:
+		if not state.get(&"proc_active", false): return
+		state[&"proc_active"] = false
+		var target: Entity = cb_vars.get(AutoAttackModifier.VarType.TARGET)
+		if not is_instance_valid(target): return
+		var axe_vfx := AXE_VISUAL.instantiate() as Node3D
+		ctx.hero.get_tree().root.add_child(axe_vfx)
+		axe_vfx.global_position = target.global_position
+
 	ctx.battle_callbacks.register_battle_start(&"Titan Axe", func() -> void:
 		state[&"count"] = 0
+		state[&"proc_active"] = false
 		ctx.auto_attack_modifiers.register_modifier(aa_mod)
 	)
 
