@@ -34,7 +34,7 @@ group_uniforms inner_glow;
 /// Radius of the tight glow hugging the runes
 uniform float inner_radius : hint_range(0.001, 0.02, 0.001) = 0.006;
 /// Samples for inner glow blur
-uniform int inner_samples : hint_range(4, 24, 1) = 10;
+uniform int inner_samples : hint_range(4, 24, 1) = 6;
 /// Falloff sharpness for inner glow (higher = tighter)
 uniform float inner_falloff : hint_range(0.5, 3.0, 0.1) = 1.2;
 /// Brightness of the inner glow
@@ -44,7 +44,7 @@ group_uniforms outer_halo;
 /// Radius of the wide energy field around runes
 uniform float outer_radius : hint_range(0.01, 0.08, 0.001) = 0.035;
 /// Samples for outer halo (higher = smoother, costs more)
-uniform int outer_samples : hint_range(6, 32, 1) = 14;
+uniform int outer_samples : hint_range(6, 32, 1) = 8;
 /// Falloff for outer halo (higher = tighter to rune, lower = wider diffuse)
 uniform float outer_falloff : hint_range(0.3, 3.0, 0.1) = 0.8;
 /// Brightness of the outer energy projection

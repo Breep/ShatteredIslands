@@ -44,8 +44,6 @@ stretch_mode = 5
 
 [node name="SubViewport" type="SubViewport" parent="TextureRect" unique_id=2076503836]
 transparent_bg = true
-msaa_2d = 3
-screen_space_aa = 2
 size = Vector2i(1260, 1760)
 
 [node name="CardLayout" parent="TextureRect/SubViewport" unique_id=1926267675 instance=ExtResource("3_cgxxr")]
