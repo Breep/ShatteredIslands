@@ -4,10 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c48aqh8mlb7lc" path="res://Entities/Heroes/DarkKnight/dark_knight.tscn" id="1_icvx6"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="2_083cp"]
 [ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://UI/Tool/Misc/hover_boost_button.gd" id="3_6kn6i"]
-[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="3_m26y3"]
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_egh8k"]
-[ext_resource type="Resource" uid="uid://cno4627vx3nt8" path="res://Card/Descriptions/Cards/Colossus/Epic/VitalPulse/colossus_vital_pulse.tres" id="4_m26y3"]
-[ext_resource type="Script" uid="uid://nkraydv4mdse" path="res://Card/Templates/player_deck.gd" id="5_x0odd"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/Stats/EntityStats/entity_stats.gd" id="6_3bpsj"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
 [ext_resource type="PackedScene" uid="uid://dvuq5n41nak3u" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.tscn" id="8_fl2p6"]
@@ -18,11 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://c0l0roxttdtlp" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/FightingManager/fighting_manager.tscn" id="17_m26y3"]
 [ext_resource type="Environment" uid="uid://d1ls51slo0c0a" path="res://Props/DefaultBattleIsland/Arch_island/world_environment.tres" id="18_ko5bb"]
 [ext_resource type="PackedScene" uid="uid://dp4x7wkxd6i2q" path="res://Prototyping/Entity/EntityController/entity_controller.tscn" id="19_x0odd"]
-
-[sub_resource type="Resource" id="Resource_rw3ih"]
-script = ExtResource("5_x0odd")
-_active_cards = Array[ExtResource("3_m26y3")]([ExtResource("4_m26y3")])
-metadata/_custom_type_script = "uid://nkraydv4mdse"
+[ext_resource type="PackedScene" uid="uid://cs66hky7o30da" path="res://GlobalManagers/ActionMeter/Viewer/ui_entity_bds_registry.tscn" id="19_xwdjj"]
 
 [sub_resource type="Resource" id="Resource_ycdli"]
 script = ExtResource("6_3bpsj")
@@ -90,7 +83,6 @@ unique_name_in_owner = true
 
 [node name="DarkKnight1" parent="Node3D/Entities" unique_id=353718081 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("1_icvx6")]
 transform = Transform3D(0.9946579, 0, 0.10322651, 0, 1, 0, -0.10322651, 0, 0.9946579, 0.07346773, -4.7683716e-07, 7.8182755)
-_custom_deck = SubResource("Resource_rw3ih")
 _custom_data_memory = {
 &"ChickenLord": {
 &"Ancestral Gauge": 200.0
@@ -331,6 +323,22 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2134323998]
 environment = ExtResource("18_ko5bb")
+
+[node name="EntityBDSRegistry" parent="." unique_id=1312607260 node_paths=PackedStringArray("_ui_battle_data_stats_panels") instance=ExtResource("19_xwdjj")]
+offset_left = 520.0
+offset_top = 187.0
+offset_right = 920.0
+offset_bottom = 487.0
+_ui_battle_data_stats_panels = {
+0: NodePath("TabContainer/Damage Done"),
+1: NodePath("TabContainer/Damage Taken"),
+2: NodePath("TabContainer/Heal Done"),
+3: NodePath("TabContainer/Heal Received"),
+4: NodePath("TabContainer/Stack Inflicted"),
+5: NodePath("TabContainer/Stack Taken"),
+6: NodePath("TabContainer/Misc Done"),
+7: NodePath("TabContainer/Misc Taken")
+}
 
 [connection signal="pressed" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StartFightButton" to="." method="_on_start_fight_button_pressed"]
 [connection signal="pressed" from="Node3D/Control/GlobalCommandsControl/Panel/MarginContainer/VBoxContainer/StopFightButton" to="." method="_on_stop_fight_button_pressed"]
