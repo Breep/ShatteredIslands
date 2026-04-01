@@ -7,9 +7,9 @@ enum CbVars {
 	DEATH_COUNT,
 }
 
-const HP: Array[float] = [30, 70, 110, 140, 200]
-const AD: Array[float] = [12, 14, 16, 20, 25]
-const ARMOR: Array[float] = [12, 12, 12, 12, 12]
+const HP: Array[float] = [16, 32, 48, 64, 80]
+const AD: Array[float] = [8, 9, 10, 11, 12]
+const ARMOR: Array[float] = [0, 0, 0, 0, 0]
 const CRIT_CHANCE: Array[float] = [5, 5, 5, 5, 5]
 const CRIT_MULTI: Array[float] = [100, 100, 100, 100, 100]
 
