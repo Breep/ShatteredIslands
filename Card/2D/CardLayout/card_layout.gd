@@ -20,6 +20,8 @@ extends Control
 @onready var _card_desc_label: SmartTextLabel = %CardDescSmartTextLabel
 @onready var _card_portrait_texture: TextureRect = %CardPortraitTextureRect
 
+@onready var _rune_glow_tools: RuneGlowTools = %Runes
+
 # ============================== Private variables ==============================
 
 const LEVEL_COLOR := Color.GOLDENROD
@@ -27,6 +29,8 @@ const LEVEL_COLOR := Color.GOLDENROD
 var _card: Card
 
 var _family_background_material: ShaderMaterial
+var _base_intensity: float = 1.0
+var _glow_hover_tween: Tween
 
 func _ready() -> void:
 	if _family_background == null or _family_background.material == null:
@@ -34,6 +38,9 @@ func _ready() -> void:
 		return
 	_family_background.material = _family_background.material.duplicate()
 	_family_background_material = _family_background.material as ShaderMaterial
+	if _rune_glow_tools.material != null:
+		_rune_glow_tools.material = _rune_glow_tools.material.duplicate()
+		_rune_glow_tools.refresh_material()
 
 # ============================== Public functions ==============================
 
@@ -43,6 +50,15 @@ func update_content(card: Card) -> void:
 		_update_card_layout(card)
 	else:
 		_update_card_layout.call_deferred(card)
+
+
+func mouse_entered() -> void:
+	_rune_glow_tools.set_hover(true)
+
+
+func mouse_exited() -> void:
+	_rune_glow_tools.set_hover(false)
+
 
 # ============================== Private functions ==============================
 
@@ -54,6 +70,15 @@ func _update_card_layout(card: Card) -> void:
 	_card_name_label.text = card.name
 	_card_desc_label.text_raw = card.player_upgrade.get_description(card.lvl)
 	_card_portrait_texture.texture = card.picture
+	_rune_glow_tools.set_rarity(card.rarity)
+
+	match card.rarity:
+		Card.Rarity.COMMON: _base_intensity = 1.0
+		Card.Rarity.RARE: _base_intensity = 2.0
+		Card.Rarity.EPIC: _base_intensity = 2.0
+		Card.Rarity.LEGENDARY: _base_intensity = 2.0
+	_rune_glow_tools.intensity_override = _base_intensity
+	_rune_glow_tools.flash_residual(1, 1)
 	
 	
 	_family_icon.texture = Shared.FAMILIES[card.families[0]].icon

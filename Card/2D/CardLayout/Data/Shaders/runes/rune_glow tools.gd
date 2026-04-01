@@ -19,20 +19,9 @@ enum GlowMode {
 	RANDOM = 1,        ## Zones illuminate independently
 }
 
-enum Rarity {
-	COMMON = 0,
-	RARE = 1,
-	EPIC = 2,
-	LEGENDARY = 3,
-}
-
-# ── Rarity Configuration ──────────────────────────────────────
-# Each rarity uses the same base settings (tuned in editor),
-# only the glow color changes per rarity tier.
-
 const RARITY_CONFIG: Dictionary = {
-	Rarity.COMMON: {
-		"color": Color(0.878, 0.894, 0.918, 1.0),   # Gris argent doux — #E0E4EA
+	Card.Rarity.COMMON: {
+		"color": Color(0.276, 0.274, 0.336, 1.0),   # Gris argent doux — #E0E4EA
 		"intensity_multiplier": 3.0,
 		"idle_intensity": 0.73,
 		"hover_intensity": 1.2,
@@ -50,7 +39,7 @@ const RARITY_CONFIG: Dictionary = {
 		"random_zones": 13,
 		"zone_softness": 0.5,
 	},
-	Rarity.RARE: {
+	Card.Rarity.RARE: {
 		"color": Color(0.235, 0.471, 0.933, 1.0),    # Bleu vif — #3C78EE
 		"intensity_multiplier": 3.0,
 		"idle_intensity": 0.73,
@@ -69,7 +58,7 @@ const RARITY_CONFIG: Dictionary = {
 		"random_zones": 13,
 		"zone_softness": 0.5,
 	},
-	Rarity.EPIC: {
+	Card.Rarity.EPIC: {
 		"color": Color(0.553, 0.282, 0.957, 1.0),    # Violet profond — #8D48F4
 		"intensity_multiplier": 3.0,
 		"idle_intensity": 0.73,
@@ -88,7 +77,7 @@ const RARITY_CONFIG: Dictionary = {
 		"random_zones": 13,
 		"zone_softness": 0.5,
 	},
-	Rarity.LEGENDARY: {
+	Card.Rarity.LEGENDARY: {
 		"color": Color(1.0, 0.647, 0.0, 1.0),        # Orange doré — #FFA500
 		"intensity_multiplier": 3.0,
 		"idle_intensity": 0.73,
@@ -111,7 +100,7 @@ const RARITY_CONFIG: Dictionary = {
 
 # ── Exported properties ───────────────────────────────────────
 
-@export var current_rarity: Rarity = Rarity.COMMON :
+@export var current_rarity: Card.Rarity = Card.Rarity.COMMON :
 	set(value):
 		current_rarity = value
 		_apply_rarity_config()
@@ -125,7 +114,12 @@ const RARITY_CONFIG: Dictionary = {
 @export var hover_transition_duration: float = 0.3
 
 ## Override animation speed (0 = use rarity default)
-@export var speed_override: float = 0.0
+@export var speed_override: float = 0.0 :
+	set(value):
+		speed_override = value
+		var config: Dictionary = RARITY_CONFIG.get(current_rarity, RARITY_CONFIG[Card.Rarity.COMMON])
+		var spd: float = value if value > 0.0 else config["speed"]
+		_set_shader_param("animation_speed", spd)
 
 ## Override intensity multiplier (useful for special effects, e.g., card played)
 @export var intensity_override: float = 1.0 :
@@ -159,11 +153,22 @@ func _ready() -> void:
 	_set_shader_param("glow_mode", int(current_mode))
 	_set_shader_param("intensity_multiplier", intensity_override)
 	_set_shader_param("hover_blend", 0.0)
+	_set_shader_param("time_seed", randf() * 100.0)
 
 # ── Public API ────────────────────────────────────────────────
 
+## Call after duplicating the material externally to refresh the internal reference
+func refresh_material() -> void:
+	_shader_mat = null
+	if _ensure_shader_mat():
+		_apply_rarity_config()
+		_set_shader_param("glow_mode", int(current_mode))
+		_set_shader_param("intensity_multiplier", intensity_override)
+		_set_shader_param("time_seed", randf() * 100.0)
+
+
 ## Set the rarity and apply all associated glow parameters
-func set_rarity(rarity: Rarity) -> void:
+func set_rarity(rarity: Card.Rarity) -> void:
 	current_rarity = rarity
 
 ## Switch glow animation mode
@@ -178,13 +183,23 @@ func set_hover(hovered: bool) -> void:
 	_animate_hover(1.0 if hovered else 0.0)
 
 ## Instant intensity change (no transition), useful for card spawn effects
-func flash(intensity: float, duration: float = 0.5) -> void:
+func flash(intensity: float, target: float = -1.0, duration: float = 0.5) -> void:
 	if _shader_mat == null:
 		return
-	var original := intensity_override
-	_set_shader_param("intensity_multiplier", intensity)
+	var end_value := target if target >= 0.0 else intensity_override
+	intensity_override = intensity
 	var tween := create_tween()
-	tween.tween_property(self, "intensity_override", original, duration).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(self, "intensity_override", end_value, duration).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+
+## Flash residual: instant constant glow that fades back to 0
+func flash_residual(intensity: float = 2.0, duration: float = 0.5) -> void:
+	if _shader_mat == null:
+		return
+	_set_shader_param("residual_flash", intensity)
+	var tween := create_tween()
+	tween.tween_method(func(v: float) -> void: _set_shader_param("residual_flash", v),
+		intensity, 0.0, duration).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+
 
 ## Smoothly turn glow on/off (e.g., card entering/leaving scene)
 func fade_in(duration: float = 0.6) -> void:
@@ -205,7 +220,7 @@ func fade_out(duration: float = 0.4) -> void:
 func _apply_rarity_config() -> void:
 	if not _ensure_shader_mat():
 		return
-	var config: Dictionary = RARITY_CONFIG.get(current_rarity, RARITY_CONFIG[Rarity.COMMON])
+	var config: Dictionary = RARITY_CONFIG.get(current_rarity, RARITY_CONFIG[Card.Rarity.COMMON])
 	# Color
 	_set_shader_param("glow_color", config["color"])
 	# Intensity & animation

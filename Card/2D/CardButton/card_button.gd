@@ -60,11 +60,13 @@ func _process(delta: float) -> void:
 
 func _on_mouse_entered() -> void:
 	_is_focused = true
+	_card_layout.mouse_entered()
 
 
 func _on_mouse_exited() -> void:
 	_is_focused = false
 	_animation_reset_3d_rotation()
+	_card_layout.mouse_exited()
 
 
 func _input(event: InputEvent) -> void:

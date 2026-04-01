@@ -22,7 +22,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	_apply_thorn_scaling(ctx.hero, card_lvl)
 	var _on_scale_changed: Callable
 	_on_scale_changed = func(scale: float) -> void:
-		if ctx.hero.is_queued_for_deletion() or is_instance_valid(ctx.hero):
+		if is_instance_valid(ctx.hero) or not ctx.hero.is_queued_for_deletion():
 			_apply_thorn_scaling(ctx.hero, card_lvl)
 		
 	if not ctx.hero.stats.scale_changed.is_connected(_on_scale_changed):

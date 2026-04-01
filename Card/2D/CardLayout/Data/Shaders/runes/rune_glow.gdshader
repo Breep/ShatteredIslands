@@ -21,11 +21,14 @@ uniform float intensity_multiplier : hint_range(0.0, 3.0, 0.01) = 1.0;
 group_uniforms animation;
 uniform int glow_mode : hint_range(0, 1, 1) = 0;
 uniform float animation_speed : hint_range(0.1, 5.0, 0.01) = 1.0;
+uniform float time_seed : hint_range(0.0, 100.0, 0.001) = 0.0;
 
 group_uniforms hover;
 uniform float hover_blend : hint_range(0.0, 1.0, 0.01) = 0.0;
 uniform float idle_intensity : hint_range(0.0, 2.0, 0.01) = 0.4;
 uniform float hover_intensity : hint_range(0.0, 3.0, 0.01) = 1.2;
+uniform float residual_intensity : hint_range(0.0, 2.0, 0.01) = 0.5;
+uniform float residual_flash : hint_range(0.0, 10.0, 0.01) = 0.0;
 
 group_uniforms inner_glow;
 /// Radius of the tight glow hugging the runes
@@ -148,7 +151,7 @@ void fragment() {
 	float effective_intensity = mix(idle_intensity, hover_intensity, hover_blend);
 	effective_intensity *= intensity_multiplier;
 
-	float t = TIME * animation_speed;
+	float t = (TIME + time_seed) * animation_speed;
 
 	// Animation factor
 	float anim_factor = 0.0;
@@ -158,7 +161,7 @@ void fragment() {
 		anim_factor = random_zone_value(UV, t);
 	}
 
-	float glow_strength = anim_factor * effective_intensity;
+	float glow_strength = anim_factor * effective_intensity + residual_intensity * hover_blend + residual_flash;
 
 	// ── Layer 1: OUTER HALO (wide energy projection) ─────────
 	// The "backlight" — energy bleeding far around the runes
@@ -189,12 +192,13 @@ void fragment() {
 	vec3 rune_hot = mix(rune_base, vec3(1.0), hotspot);
 
 	vec3 rune_color = rune_hot * rune_mask;
+	float rune_alpha = rune_mask * tint_factor;
 
 	// ── Composite all layers (back to front) ─────────────────
 	vec3 final_color = outer_color + inner_color + rune_color;
 
-	// Alpha: rune is solid, halos add soft alpha around
-	float final_alpha = max(rune_mask, max(outer_alpha, inner_alpha));
+	// Alpha: all layers fade from transparent to opaque with glow strength
+	float final_alpha = max(rune_alpha, max(outer_alpha, inner_alpha));
 	final_alpha = min(final_alpha, 1.0);
 
 	COLOR = vec4(final_color, final_alpha);
