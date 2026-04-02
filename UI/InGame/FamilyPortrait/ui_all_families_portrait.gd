@@ -75,6 +75,7 @@ func _connect_new_player(new_player: Player) -> void:
 	_player = new_player
 	_player.deck.has_changed.connect(_on_player_deck_has_changed)
 	_update_portrait_families()
+	Events.signal_ui_family_portrait_unselected()
 
 
 func _update_portrait_families() -> void:
@@ -137,11 +138,13 @@ func _on_portrait_family_selected(portrait_family: UIFamilyPortrait) -> void:
 		if pf != portrait_family:
 			pf.unselect()
 	_animate_family_controls(portrait_family)
+	Events.signal_ui_family_portrait_requested(_player, portrait_family._family) # TODO: oulala private
 
 
 func _on_portrait_family_unselected(_portrait_family: UIFamilyPortrait) -> void:
 	family_selected.emit(Family.Type.UNDEF)
 	_animate_family_controls(null)
+	Events.signal_ui_family_portrait_unselected()
 
 
 func _on_events_entity_clicked(entity: Entity) -> void:

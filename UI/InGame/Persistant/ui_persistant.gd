@@ -6,7 +6,8 @@ extends Control
 @onready var _game_state_viewer: UIGameStateViewer = %GameStateViewer
 @onready var _ui_player_info: UIPlayerInfo = %UIPlayerInfo
 @onready var _ui_all_player_portraits: UIAllPlayersPortrait = %AllPlayersPortrait
-@onready var _ui_all_families_portraits: UIAllFamiliesPortrait= %UIAllFamiliesPortrait
+@onready var _ui_all_families_portraits: UIAllFamiliesPortrait = %UIAllFamiliesPortrait
+@onready var _ui_family_viewer: UIFamilyViewer = %UiFamilyViewer
 
 @onready var _end_buying_phase_button: Button = %EndBuyingPhaseButton
 
@@ -41,6 +42,10 @@ func _ready() -> void:
 
 	_blink_timer.start()
 	_urgent_timer.start()
+	
+	# TODO: J'aime pas comment c'est fait mais tout droit pour le moment
+	Events.ui_family_portrait_requested.connect(_on_events_ui_family_portrait_requested)
+	Events.ui_family_portrait_unselected.connect(_on_events_ui_family_portrait_unselected)
 
 var _blink_tween: Tween
 var _is_urgent: bool = false
@@ -89,6 +94,7 @@ func _on_round_manager_current_round_changed(round_number: int) -> void:
 
 func _on_game_manager_game_state_changed(game_state: GameManager.GameState) -> void:
 	_game_state_viewer.update_game_state(game_state)
+	_ui_family_viewer.hide()
 	match game_state:
 		GameManager.GameState.BUYING:
 			_end_buying_phase_button.show()
@@ -108,3 +114,28 @@ func _on_urgent_timeout() -> void:
 
 func _on_end_buying_phase_button_pressed() -> void:
 	GameManager.request_state_transition(GameManager.GameState.FIGHTING)
+
+
+func _on_events_ui_family_portrait_requested(player: Player, family: Family) -> void:
+	_ui_family_viewer.display_family(player, family)
+	_ui_family_viewer.show()
+
+
+func _on_events_ui_family_portrait_unselected() -> void:
+	_ui_family_viewer.hide()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

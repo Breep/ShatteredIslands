@@ -16,6 +16,7 @@ func display_family(player: Player, family: Family) -> void:
 	_player = player
 	_family = family
 	_player.deck.has_changed.connect(_on_deck_has_changed)
+	_family_name_label.text = _family.family_name
 	_refresh_cards_viewer()
 #endregion
 

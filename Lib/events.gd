@@ -56,3 +56,15 @@ func signal_ui_skill_picked(skill_id: Skill.SkillID) -> void:
 signal scene_switched(floating_island: FloatingIsland)
 func signal_scene_switched(floating_island: FloatingIsland) -> void:
 	scene_switched.emit(floating_island)
+
+signal ui_family_portrait_selected(family_portrait: UIFamilyPortrait)
+func signal_ui_family_portrait_selected(family_portrait: UIFamilyPortrait) -> void:
+	ui_family_portrait_selected.emit(family_portrait)
+
+signal ui_family_portrait_unselected()
+func signal_ui_family_portrait_unselected() -> void:
+	ui_family_portrait_unselected.emit()
+
+signal ui_family_portrait_requested(player: Player, family: Family)
+func signal_ui_family_portrait_requested(player: Player, family: Family) -> void:
+	ui_family_portrait_requested.emit(player, family)

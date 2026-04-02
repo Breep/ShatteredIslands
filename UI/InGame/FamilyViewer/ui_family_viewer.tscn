@@ -1,8 +1,28 @@
 [gd_scene format=3 uid="uid://ci1xegvy2t2jm"]
 
 [ext_resource type="Script" uid="uid://dqsbil04m2fyg" path="res://UI/Menu/MainMenu/text_button.gd" id="1_atdtf"]
+[ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_mnlqs"]
 [ext_resource type="Script" uid="uid://cha3glq6t5f5u" path="res://UI/InGame/FamilyViewer/ui_family_viewer.gd" id="1_ygf1p"]
 [ext_resource type="PackedScene" uid="uid://dj7bvdysxgxe6" path="res://Card/2D/CardsViewer/ui_cards_viewer.tscn" id="3_mnlqs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mnlqs"]
+bg_color = Color(0.30692264, 0.3069227, 0.30692258, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_26mx0"]
+grow_begin = -10.0
+grow_end = -10.0
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_biljw"]
+grow_begin = -10.0
+grow_end = -10.0
 
 [node name="UiFamilyViewer" type="Control" unique_id=452679620]
 custom_minimum_size = Vector2(600, 700)
@@ -14,6 +34,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_mnlqs")
 script = ExtResource("1_ygf1p")
 
 [node name="Panel" type="Panel" parent="." unique_id=1329501171]
@@ -23,6 +44,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mnlqs")
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=307774511]
 layout_mode = 1
@@ -51,6 +73,7 @@ vertical_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer" unique_id=794522544]
 layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_26mx0")
 
 [node name="CardsViewerController" type="Control" parent="Panel/MarginContainer/VBoxContainer" unique_id=1513914538]
 layout_mode = 2
@@ -109,6 +132,7 @@ metadata/_custom_type_script = "uid://dqsbil04m2fyg"
 
 [node name="HSeparator2" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer" unique_id=1498519503]
 layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_biljw")
 
 [node name="Control" type="Control" parent="Panel/MarginContainer/VBoxContainer" unique_id=1686096509]
 layout_mode = 2
