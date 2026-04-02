@@ -1,5 +1,7 @@
 class_name Spell
-extends Node
+extends Node3D
+
+var spells_node: Node3D
 
 enum Type {
 	METEOR,
@@ -11,7 +13,7 @@ enum Type {
 	CHAIN_LIGHTNING
 }
 
-enum MeteorModifier { DAMAGE_PERCENT, RADIUS, ON_HIT_CALLBACKS, ON_CAST_CALLBACKS }
+enum MeteorModifier { DAMAGE_PERCENT, RADIUS, ON_HIT_CALLBACKS, ON_CAST_CALLBACKS, DAMAGE_FLAT }
 enum DarkStormModifier { DAMAGE, PERIOD, LIFESPAN, PAIN_STACK_PERCENT }
 enum ContagionModifier { RADIUS, SPREAD_PERCENT }
 enum ShroomModifier { RADIUS, DAMAGE, LIFE_TIME }

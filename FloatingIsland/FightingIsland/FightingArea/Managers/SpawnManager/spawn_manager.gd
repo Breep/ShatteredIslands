@@ -58,7 +58,8 @@ func spawn_entity(entity: Entity, global_pos: Vector3, context: EntityContext = 
 		_fighting_area.entity_spawned.emit(entity, type, entity.global_position)
 
 
-func spawn_spell(spell: Node3D) -> void:
+func spawn_spell(spell: Spell) -> void:
+	spell.spells_node = _spells_node
 	_spells_node.add_child(spell)
 
 

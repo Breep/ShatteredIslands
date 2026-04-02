@@ -6,7 +6,7 @@ var _ignite_stacks: int
 var _hp_threshold_ratio: float
 var _rush_target: Entity
 
-const EXPLOSION_VFX_SCENE = preload("res://SpellsAndProjectiles/Spells/Meteor/Visual/VFX_Explosion_B.tscn")
+const EXPLOSION_VFX_SCENE = preload("res://VFX/VFX_Explosion_B.tscn")
 
 @onready var _zone_impact: Area3D = %ImpactArea3D
 

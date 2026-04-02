@@ -21,6 +21,7 @@ extends Control
 @onready var _card_portrait_texture: TextureRect = %CardPortraitTextureRect
 
 @onready var _rune_glow_tools: RuneGlowTools = %Runes
+@onready var _locked_overlay: TextureRect = %LockedCardOverlay
 
 # ============================== Private variables ==============================
 
@@ -50,6 +51,17 @@ func update_content(card: Card) -> void:
 		_update_card_layout(card)
 	else:
 		_update_card_layout.call_deferred(card)
+
+
+func set_locked(locked: bool) -> void:
+	if is_node_ready():
+		_locked_overlay.visible = locked
+	else:
+		_set_locked_deferred.call_deferred(locked)
+
+
+func _set_locked_deferred(locked: bool) -> void:
+	_locked_overlay.visible = locked
 
 
 func mouse_entered() -> void:

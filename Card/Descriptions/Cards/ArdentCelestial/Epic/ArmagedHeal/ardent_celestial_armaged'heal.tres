@@ -6,8 +6,8 @@
 
 [sub_resource type="Resource" id="Resource_xd871"]
 script = ExtResource("1_einbf")
-_heal = Array[int]([25, 30, 40])
-_proc_chance = Array[float]([100.0, 100.0, 100.0])
+_heal = Array[int]([50, 60, 100])
+_proc_chance = Array[float]([33.0, 33.0, 33.0])
 _rarity = 2
 metadata/_custom_type_script = "uid://uputg65q417d"
 
@@ -16,6 +16,9 @@ script = ExtResource("1_vikme")
 name = "Armaged'heal"
 picture = ExtResource("2_ardnt")
 families = Array[int]([3])
+points = Dictionary[int, int]({
+3: 0
+})
 rarity = 2
 player_upgrade = SubResource("Resource_xd871")
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

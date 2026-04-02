@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_yobeh"]
 script = ExtResource("1_rop2d")
-_ignite_stacks = Array[float]([4.0, 8.0, 12.0, 16.0, 20.0])
+_ignite_stacks = Array[float]([6.0, 7.0, 8.0, 9.0, 10.0])
 _period = Array[float]([1.0, 1.0, 1.0, 1.0, 1.0])
 metadata/_custom_type_script = "uid://c1cycap2yrxuj"
 

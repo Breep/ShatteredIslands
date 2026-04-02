@@ -4,9 +4,9 @@
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="2_kngc2"]
 [ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://Entities/Heroes/_Shared/hero_desc.gd" id="2_vksg0"]
 [ext_resource type="Resource" uid="uid://bkksjgh6p542o" path="res://Entities/Heroes/DarkKnight/dark_knight.tres" id="3_dlg3x"]
-[ext_resource type="Resource" uid="uid://bu2qwhn65ehi" path="res://Card/Descriptions/Cards/ArdentCelestial/Epic/Nuke/fire_nuke.tres" id="5_7wmtn"]
+[ext_resource type="Resource" uid="uid://yu8vfa6x3r0g" path="res://Card/Descriptions/Cards/Colossus/Epic/SeismicSlam/colossus_seismic_slam.tres" id="3_kngc2"]
+[ext_resource type="Resource" uid="uid://50ga6somnl7u" path="res://Card/Descriptions/Cards/Warrior/Common/TitanAxe/attack_titan_axe.tres" id="4_dlg3x"]
 [ext_resource type="PackedScene" uid="uid://drcuyohos0doa" path="res://FloatingIsland/FightingIsland/fighting_island.tscn" id="6_sp80o"]
-[ext_resource type="Material" uid="uid://2wlal7g5718r" path="res://VFX/Shaders/Sky/stylized_shader_night.tres" id="8_qw25r"]
 [ext_resource type="PackedScene" uid="uid://cs66hky7o30da" path="res://GlobalManagers/ActionMeter/Viewer/ui_entity_bds_registry.tscn" id="10_kngc2"]
 [ext_resource type="PackedScene" uid="uid://ci5cxqmyimurq" path="res://UI/InGame/FightingArea/DebugEntityStats/ui_debug_entity_stats.tscn" id="11_e0xek"]
 
@@ -19,27 +19,10 @@ height_falloff = 0.678472
 edge_fade = 0.69644
 density_texture = SubResource("NoiseTexture3D_4fa74")
 
-[sub_resource type="Sky" id="Sky_ciybh"]
-sky_material = ExtResource("8_qw25r")
-
-[sub_resource type="Environment" id="Environment_gs0rq"]
-background_mode = 2
-sky = SubResource("Sky_ciybh")
-ambient_light_source = 2
-ambient_light_color = Color(0.45098, 0.333333, 0.309804, 1)
-ambient_light_energy = 0.5
-tonemap_mode = 2
-sdfgi_enabled = true
-glow_enabled = true
-glow_bloom = 0.2
-fog_light_color = Color(0.175414, 0.565791, 0.908127, 1)
-fog_light_energy = 0.05
-volumetric_fog_enabled = true
-volumetric_fog_density = 0.0
-
 [node name="PrototypingMap" type="Node3D" unique_id=831863063 node_paths=PackedStringArray("_floating_island")]
 script = ExtResource("1_vksg0")
-_player1_cards = Array[ExtResource("2_kngc2")]([ExtResource("5_7wmtn")])
+_player1_cards = Array[ExtResource("2_kngc2")]([ExtResource("3_kngc2")])
+_player2_cards = Array[ExtResource("2_kngc2")]([ExtResource("4_dlg3x")])
 _hero_descs = Array[ExtResource("2_vksg0")]([ExtResource("3_dlg3x"), ExtResource("3_dlg3x")])
 _hero_teams = Array[int]([1, 2, 0, 0, 1, 1, 1, 1])
 _floating_island = NodePath("FightingIsland")
@@ -55,9 +38,6 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.26962, 0.223571, 5.01905)
 size = Vector3(4.52728, 4.15, 8.08638)
 material = SubResource("FogMaterial_7w4nr")
-
-[node name="WorldEnvironment2" type="WorldEnvironment" parent="." unique_id=1256254217]
-environment = SubResource("Environment_gs0rq")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=3875107]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0.2, 5.7)

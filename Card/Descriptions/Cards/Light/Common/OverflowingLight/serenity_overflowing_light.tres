@@ -13,10 +13,9 @@ _base_shield_percent = Array[float]([15.0, 20.0, 25.0, 30.0, 35.0])
 script = ExtResource("1_template")
 name = "Overflowing Light"
 picture = SubResource("PlaceholderTexture2D_hsyqo")
-families = Array[int]([5, 2])
+families = Array[int]([5])
 player_upgrade = SubResource("Resource_upgrade")
 points = Dictionary[int, int]({
-2: 1,
 5: 1
 })
 lvl = 5

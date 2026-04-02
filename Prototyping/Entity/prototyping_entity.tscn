@@ -85,7 +85,7 @@ script = ExtResource("1_6kn6i")
 _auto_attack_enabled = true
 
 [node name="Node3D" type="Node3D" parent="." unique_id=1257562586]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -99.944626, -47.71623, 97.6458)
+transform = Transform3D(-0.78566265, 0, 0.6186553, 0, 0.99999994, 0, -0.6186553, 0, -0.78566265, 0, 0, 0)
 
 [node name="Entities" type="Node3D" parent="Node3D" unique_id=38016860]
 unique_name_in_owner = true
@@ -329,7 +329,7 @@ visible = false
 unique_name_in_owner = true
 
 [node name="ArchIsland" parent="Node3D" unique_id=1045725859 instance=ExtResource("17_ko5bb")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.037389755, -0.69335794, -0.050251007)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -0.5614715, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2134323998]
 environment = ExtResource("18_ko5bb")

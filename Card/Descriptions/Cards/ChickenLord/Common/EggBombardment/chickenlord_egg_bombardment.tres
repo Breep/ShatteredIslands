@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_0wrdt"]
 script = ExtResource("1_i5xq3")
-_spawn_chances = Array[float]([2.0, 4.0, 6.0, 8.0, 12.0])
+_spawn_chances = Array[float]([1.0, 1.5, 2.0, 2.5, 4.0])
 metadata/_custom_type_script = "uid://cjbmdgtvkeh84"
 
 [resource]

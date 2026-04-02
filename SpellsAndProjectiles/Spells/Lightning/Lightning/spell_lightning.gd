@@ -1,5 +1,5 @@
 class_name SpellLightning
-extends Node3D
+extends Spell
 
 const LIFETIME: float = 1.0
 

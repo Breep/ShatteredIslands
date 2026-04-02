@@ -29,9 +29,9 @@ func _input(event):
 		if Input.is_action_pressed("scene_switch_3"): _set_island_active_only(fighting_islands[2])
 		if Input.is_action_pressed("scene_switch_4"): _set_island_active_only(fighting_islands[3])
 		if Input.is_action_pressed("scene_switch_5"): _set_island_active_only(fighting_islands[4])
-		if Input.is_action_pressed("scene_switch_6"): _set_island_active_only(fighting_islands[5])
-		if Input.is_action_pressed("scene_switch_7"): _set_island_active_only(fighting_islands[6])
-		if Input.is_action_pressed("scene_switch_8"): _set_island_active_only(fighting_islands[7])
+		#if Input.is_action_pressed("scene_switch_6"): _set_island_active_only(fighting_islands[5])
+		#if Input.is_action_pressed("scene_switch_7"): _set_island_active_only(fighting_islands[6])
+		#if Input.is_action_pressed("scene_switch_8"): _set_island_active_only(fighting_islands[7])
 		if Input.is_action_pressed("change_camera_free_fly"): printerr("Removed for now")
 
 # ============================== Private functions ==============================

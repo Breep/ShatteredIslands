@@ -1,5 +1,5 @@
 class_name ContagionSpellArea
-extends Node3D
+extends Spell
 
 var _entity_owner: Entity
 
