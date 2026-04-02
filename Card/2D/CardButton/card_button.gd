@@ -10,6 +10,7 @@ signal card_selected(self_ref: CardButton, card: Card)
 const LAYER_FRONT = 1
 const LAYER_BACK = 0
 const ROT_SPEED: float = 4
+const CARD_PREVIEW_SCENE: PackedScene = preload("res://Card/2D/CardPreview/ui_card_preview.tscn")
 
 # ============================== Public variables ==============================
 
@@ -127,5 +128,10 @@ func _update_viewport_culling() -> void:
 
 
 func _on_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		card_selected.emit(self, card)
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			card_selected.emit(self, card)
+		elif event.button_index == MOUSE_BUTTON_RIGHT and _card != null:
+			var preview: UICardPreview = CARD_PREVIEW_SCENE.instantiate()
+			get_tree().root.add_child(preview)
+			preview.update_visual(_card)

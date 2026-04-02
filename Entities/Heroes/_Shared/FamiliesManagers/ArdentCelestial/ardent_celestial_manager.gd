@@ -41,17 +41,17 @@ func _register_meteor_spell_modifier() -> void:
 		if cb_vars.get(ActionModifier.VarType.SPELL_TYPE) != Spell.Type.METEOR:
 			return
 		var sm: Dictionary = cb_vars[ActionModifier.VarType.SPELL_MODIFIER]
-		if not sm.has(Spell.MeteorModifier.DAMAGE_PERCENT):
-			sm[Spell.MeteorModifier.DAMAGE_PERCENT] = _ardent_celestial_stats.meteor_damage_percent[level]
-		if not sm.has(Spell.MeteorModifier.DAMAGE_FLAT):
-			sm[Spell.MeteorModifier.DAMAGE_FLAT] = _ardent_celestial_stats.meteor_damage_flat[level]
-		if not sm.has(Spell.MeteorModifier.RADIUS):
-			sm[Spell.MeteorModifier.RADIUS] = _ardent_celestial_stats.meteor_radius
+		if not sm.has(Meteor.Modifier.DAMAGE_PERCENT):
+			sm[Meteor.Modifier.DAMAGE_PERCENT] = _ardent_celestial_stats.meteor_damage_percent[level]
+		if not sm.has(Meteor.Modifier.DAMAGE_FLAT):
+			sm[Meteor.Modifier.DAMAGE_FLAT] = _ardent_celestial_stats.meteor_damage_flat[level]
+		if not sm.has(Meteor.Modifier.RADIUS):
+			sm[Meteor.Modifier.RADIUS] = _ardent_celestial_stats.meteor_radius
 		# On_hit et on_cast : on merge les callbacks de la famille avec ceux déjà présents
-		var existing_on_hit: Array = sm.get(Spell.MeteorModifier.ON_HIT_CALLBACKS, [])
-		sm[Spell.MeteorModifier.ON_HIT_CALLBACKS] = existing_on_hit + _ardent_celestial_stats.meteor_on_hit_callbacks
-		var existing_on_cast: Array = sm.get(Spell.MeteorModifier.ON_CAST_CALLBACKS, [])
-		sm[Spell.MeteorModifier.ON_CAST_CALLBACKS] = existing_on_cast + _ardent_celestial_stats.meteor_on_cast_callbacks
+		var existing_on_hit: Array = sm.get(Meteor.Modifier.ON_HIT_CALLBACKS, [])
+		sm[Meteor.Modifier.ON_HIT_CALLBACKS] = existing_on_hit + _ardent_celestial_stats.meteor_on_hit_callbacks
+		var existing_on_cast: Array = sm.get(Meteor.Modifier.ON_CAST_CALLBACKS, [])
+		sm[Meteor.Modifier.ON_CAST_CALLBACKS] = existing_on_cast + _ardent_celestial_stats.meteor_on_cast_callbacks
 	_owner.action_modifiers_registry.register_modifier(modifier)
 #endregion
 

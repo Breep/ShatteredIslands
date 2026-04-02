@@ -1,14 +1,23 @@
 class_name Meteor
 extends Spell
 
+enum Modifier {
+	DAMAGE_PERCENT,
+	RADIUS,
+	ON_HIT_CALLBACKS,
+	ON_CAST_CALLBACKS,
+	DAMAGE_FLAT
+}
+
 var _on_hit_callbacks: Array
 
 var _owner: Entity # Owner of this healing fire area
 var _target: Entity
 var _damage_percent: float
+var _damage_flat: float
 var _radius: float
 
-const DEPLOY_TIME: float = 1 # Time for the metor to fall on the ground (in s)
+const DEPLOY_TIME: float = 1.3 # Time for the metor to fall on the ground (in s)
 
 enum VarType { # Variable types of the callbacks dictionary
 	ENTITIES_INSIDE,
@@ -21,9 +30,10 @@ enum VarType { # Variable types of the callbacks dictionary
 
 @onready var _meteor_visual: Node3D = %MeteorVisual
 
-func init(target: Entity, damage_percent: float, radius: float, on_hit_callbacks: Array = [], source: Entity = null) -> void:
+func init(target: Entity, damage_flat: float, damage_percent: float, radius: float, on_hit_callbacks: Array = [], source: Entity = null) -> void:
 	_owner = source
 	_target = target
+	_damage_flat = damage_flat
 	_damage_percent = damage_percent
 	_radius = radius
 	_on_hit_callbacks = on_hit_callbacks
@@ -54,10 +64,12 @@ func _on_deploy_timer_timeout() -> void:
 	for entity in _entities_inside:
 		if entity == null or entity.is_queued_for_deletion(): pass
 		elif entity.team != _owner.team:
+			var meteor_damage: float = _damage_flat #TODO: Add a direct_damage that can have flat and % ?
+			meteor_damage += (entity.stats.health_max * _damage_percent) / 100
 			if _owner != null:
-				_owner.direct_damage_percent(entity, _damage_percent, Utils.ActionType.DAMAGE_MAGICAL, Utils.PercentModifier.MAX_HP, "Meteor")
+				_owner.direct_damage(entity, meteor_damage, Utils.ActionType.DAMAGE_MAGICAL, "Meteor")
 			else:
-				entity.take_damage_percent(_damage_percent, Utils.PercentModifier.MAX_HP, Utils.ActionType.DAMAGE_MAGICAL, false, "Meteor")
+				entity.take_damage(meteor_damage, Utils.ActionType.DAMAGE_MAGICAL, false, "Meteor")
 	
 	# Do optional stuffs
 	for callback in _on_hit_callbacks:

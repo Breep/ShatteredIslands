@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cxlyl8wdndq08" path="res://UI/InGame/HeroPortrait/ui_hero_portrait.tscn" id="6_kt7rx"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="7_sm0s7"]
 [ext_resource type="Script" uid="uid://dqsbil04m2fyg" path="res://UI/Menu/MainMenu/text_button.gd" id="8_16n6v"]
+[ext_resource type="PackedScene" uid="uid://ci1xegvy2t2jm" path="res://UI/InGame/FamilyViewer/ui_family_viewer.tscn" id="9_16n6v"]
 
 [node name="Persistant" type="Control" unique_id=1275150033]
 layout_mode = 3
@@ -233,5 +234,13 @@ theme_override_font_sizes/font_size = 25
 text = "End Buying Phase"
 script = ExtResource("8_16n6v")
 metadata/_custom_type_script = "uid://dqsbil04m2fyg"
+
+[node name="UiFamilyViewer" parent="." unique_id=452679620 instance=ExtResource("9_16n6v")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = -668.0
+offset_top = -360.0
+offset_right = -68.0
+offset_bottom = 340.0
 
 [connection signal="pressed" from="EndBuyingPhaseButton" to="." method="_on_end_buying_phase_button_pressed"]

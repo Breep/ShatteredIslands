@@ -60,15 +60,16 @@ func _cast_meteor(target: Entity, spell_modifier: Dictionary) -> void:
 	if target == null:
 		Verbose.error("_cast_meteor() -> No target", Verbose.Category.ENTITY_MODULE)
 		return
-	var on_cast_callbacks: Array = spell_modifier.get(Spell.MeteorModifier.ON_CAST_CALLBACKS, [])
+	var on_cast_callbacks: Array = spell_modifier.get(Meteor.Modifier.ON_CAST_CALLBACKS, [])
 	for cb: Callable in on_cast_callbacks:
 		if cb.is_valid():
 			cb.call(spell_modifier)
 	var meteor: Meteor = METEOR_SCENE.instantiate()
-	var damage_percent: float = spell_modifier.get(Spell.MeteorModifier.DAMAGE_PERCENT, 0)
-	var radius: float = spell_modifier.get(Spell.MeteorModifier.RADIUS, 1)
-	var on_hit_callbacks: Array = spell_modifier.get(Spell.MeteorModifier.ON_HIT_CALLBACKS, [])
-	meteor.init(target, damage_percent, radius, on_hit_callbacks, _owner)
+	var damage_percent: float = spell_modifier.get(Meteor.Modifier.DAMAGE_PERCENT, 0)
+	var damage_flat: float = spell_modifier.get(Meteor.Modifier.DAMAGE_FLAT, 0)
+	var radius: float = spell_modifier.get(Meteor.Modifier.RADIUS, 1)
+	var on_hit_callbacks: Array = spell_modifier.get(Meteor.Modifier.ON_HIT_CALLBACKS, [])
+	meteor.init(target, damage_flat, damage_percent, radius, on_hit_callbacks, _owner)
 	_spawn_manager.spawn_spell(meteor)
 
 

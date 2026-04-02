@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://crd40ycge6qp1"]
+[gd_scene format=3 uid="uid://02hr2u3ltypd"]
 
 [ext_resource type="Texture2D" uid="uid://b7sqddmatavpl" path="res://VFX/VFX_3D/Meteor/Textures/T_basic1_vfx.PNG" id="1_vjvyl"]
 [ext_resource type="Material" uid="uid://c2po8q8oho5y6" path="res://VFX/VFX_3D/VFX/Objects/m_fireTrail1.tres" id="2_ljk52"]

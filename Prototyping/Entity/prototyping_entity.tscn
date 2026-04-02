@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://UI/Tool/Misc/hover_boost_button.gd" id="3_6kn6i"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="3_x0odd"]
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_egh8k"]
-[ext_resource type="Resource" uid="uid://5d3si44q6tkg" path="res://Card/Descriptions/Cards/Engineer/Common/GammaTurret/engineer_gamma_turret.tres" id="4_x0odd"]
+[ext_resource type="Resource" uid="uid://c88cqm481bhcu" path="res://Card/Descriptions/Cards/Engineer/Common/ShieldRush/engineer_shield_rush.tres" id="4_xwdjj"]
 [ext_resource type="Script" uid="uid://nkraydv4mdse" path="res://Card/Templates/player_deck.gd" id="5_ywmf2"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/Stats/EntityStats/entity_stats.gd" id="6_3bpsj"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
@@ -16,13 +16,13 @@
 [ext_resource type="PackedScene" uid="uid://blncvfes4f2y7" path="res://Prototyping/Entity/AllActionPrototyping/testing_floorffa5.tscn" id="11_5hdqt"]
 [ext_resource type="PackedScene" uid="uid://q7gxxkhg5u54" path="res://FloatingIsland/_Maps/arch_island.tscn" id="17_ko5bb"]
 [ext_resource type="PackedScene" uid="uid://c0l0roxttdtlp" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/FightingManager/fighting_manager.tscn" id="17_m26y3"]
-[ext_resource type="Environment" uid="uid://d1ls51slo0c0a" path="res://Props/DefaultBattleIsland/Arch_island/world_environment.tres" id="18_ko5bb"]
+[ext_resource type="Environment" uid="uid://cghu0yr6lj5i2" path="res://Props/DefaultBattleIsland/Arch_island/world_environment.tres" id="18_ko5bb"]
 [ext_resource type="PackedScene" uid="uid://dp4x7wkxd6i2q" path="res://Prototyping/Entity/EntityController/entity_controller.tscn" id="19_x0odd"]
 [ext_resource type="PackedScene" uid="uid://cs66hky7o30da" path="res://GlobalManagers/ActionMeter/Viewer/ui_entity_bds_registry.tscn" id="19_xwdjj"]
 
 [sub_resource type="Resource" id="Resource_rw3ih"]
 script = ExtResource("5_ywmf2")
-_active_cards = Array[ExtResource("3_x0odd")]([ExtResource("4_x0odd")])
+_active_cards = Array[ExtResource("3_x0odd")]([ExtResource("4_xwdjj")])
 metadata/_custom_type_script = "uid://nkraydv4mdse"
 
 [sub_resource type="Resource" id="Resource_ycdli"]
@@ -84,7 +84,7 @@ script = ExtResource("1_6kn6i")
 _auto_attack_enabled = true
 
 [node name="Node3D" type="Node3D" parent="." unique_id=1257562586]
-transform = Transform3D(-0.78566265, 0, 0.6186553, 0, 0.99999994, 0, -0.6186553, 0, -0.78566265, 0, 0, 0)
+transform = Transform3D(1.0000001, 0, 0, 0, 0.99999994, 0, 0, 0, 1.0000001, 0, 0, 0)
 
 [node name="Entities" type="Node3D" parent="Node3D" unique_id=38016860]
 unique_name_in_owner = true
@@ -92,6 +92,9 @@ unique_name_in_owner = true
 [node name="DarkKnight1" parent="Node3D/Entities" unique_id=353718081 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("1_icvx6")]
 transform = Transform3D(0.9946579, 0, 0.10322651, 0, 1, 0, -0.10322651, 0, 0.9946579, 0.07346773, -4.7683716e-07, 7.8182755)
 _custom_deck = SubResource("Resource_rw3ih")
+_override_family_levels = Dictionary[int, int]({
+3: 2
+})
 _custom_data_memory = {
 &"ChickenLord": {
 &"Ancestral Gauge": 200.0

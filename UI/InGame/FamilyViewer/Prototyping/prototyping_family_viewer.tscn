@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://g07qq0en1h5o"]
+
+[ext_resource type="Script" uid="uid://cro1uvqa8bt5e" path="res://UI/InGame/FamilyViewer/Prototyping/prototyping_family_viewer.gd" id="1_2u1xt"]
+[ext_resource type="PackedScene" uid="uid://ci1xegvy2t2jm" path="res://UI/InGame/FamilyViewer/ui_family_viewer.tscn" id="2_l8edu"]
+[ext_resource type="Resource" uid="uid://dsbwlgjbtxhh0" path="res://Card/Descriptions/Families/ardent_celestial_family.tres" id="2_owofe"]
+
+[node name="PrototypingFamilyViewer" type="Control" unique_id=1656203624]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2u1xt")
+_family = ExtResource("2_owofe")
+
+[node name="UiFamilyViewer" parent="." unique_id=452679620 instance=ExtResource("2_l8edu")]
+layout_mode = 1
+offset_left = -439.0
+offset_top = -356.0
+offset_right = 73.0
+offset_bottom = 156.0
+
+[node name="Button" type="Button" parent="." unique_id=455364519]
+layout_mode = 0
+offset_left = 175.0
+offset_top = 324.0
+offset_right = 389.0
+offset_bottom = 372.0
+text = "Add random card"

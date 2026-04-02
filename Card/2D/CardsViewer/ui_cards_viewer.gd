@@ -31,7 +31,9 @@ func update_content(default_cards: Array[Card], unlocked_cards: Array[Card]) -> 
 	_unlocked_names.clear()
 	for card: Card in unlocked_cards:
 		_unlocked_names[card.name] = true
-	_current_sort = SortMode.NONE
+	_sort_cards(_default_cards, SortMode.RARITY)
+	_sort_cards(_unlocked_cards, SortMode.RARITY)
+	_current_sort = SortMode.RARITY
 	_rebuild_grid()
 
 
@@ -65,7 +67,7 @@ func _sort_cards(cards: Array[Card], sort_mode: SortMode) -> void:
 	match sort_mode:
 		SortMode.RARITY:
 			cards.sort_custom(func(a: Card, b: Card) -> bool:
-				return a.rarity < b.rarity
+				return a.rarity > b.rarity
 			)
 		SortMode.LEVEL:
 			cards.sort_custom(func(a: Card, b: Card) -> bool:

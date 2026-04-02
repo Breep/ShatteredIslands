@@ -19,7 +19,7 @@ curve = SubResource("Curve3D_ptlvp")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D" unique_id=1206837566]
 unique_name_in_owner = true
-transform = Transform3D(-4.371129e-08, -0.99121153, -0.13216314, 0, 0.13216141, -0.9912246, 0.99999774, -4.3327233e-08, -5.7770344e-09, 10, 40.09597, -40.221977)
+transform = Transform3D(-4.3711097e-08, -0.99120134, -0.13216224, 0, 0.13216004, -0.99121785, 0.9999933, -4.3326786e-08, -5.776995e-09, 10, 40.09597, -40.221977)
 
 [node name="VFX_FireBall" parent="Path3D/PathFollow3D" unique_id=1491287636 instance=ExtResource("2_ptlvp")]
 unique_name_in_owner = true
