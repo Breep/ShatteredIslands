@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" script_class="VFEZMaterial3D" format=3 uid="uid://mvavlgrfomef"]
 
-[ext_resource type="Script" uid="uid://dyaf84dw23d0c" path="res://VFX/VFEZ-godot-main/vfez_material_3d.gd" id="1_q7rdv"]
+[ext_resource type="Script" uid="uid://btgqth8h0f3fa" path="res://VFX/VFEZ-godot-main/vfez_material_3d.gd" id="1_q7rdv"]
 [ext_resource type="Texture2D" uid="uid://dknfkykqwklf7" path="res://Data/Texture/2D/T_VFX_Noise_465.png" id="2_4ovv6"]
 [ext_resource type="Texture2D" uid="uid://du4v5nuwrratk" path="res://Data/Texture/2D/T_VFX_PerlinNoise_Tiled.png" id="2_ssrio"]
 

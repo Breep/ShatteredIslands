@@ -10,6 +10,7 @@ var titans_protection_accumulated_hp: float = 0.0
 
 # [METEOR] Family passive configuration — set by the Meteor card, defaults used by passive
 var meteor_damage_percent: Array[float] = [0, 0.5, 0.7, 0.9, 1.2]
+var meteor_damage_flat: Array[float] = [0, 16, 32, 48, 64]
 var meteor_radius: float = 3.0
 var meteor_chance: Array[float] = [0, 2, 4.5, 7, 10]
 

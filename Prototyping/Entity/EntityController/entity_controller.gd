@@ -458,8 +458,8 @@ func _on_cast_spell_button_pressed() -> void:
 	# Build spell_modifier dictionary based on spell type
 	match spell_type:
 		Spell.Type.METEOR:
-			spell_modifier[Spell.MeteorModifier.DAMAGE_PERCENT] = _spell_param1_edit.text.to_float()
-			spell_modifier[Spell.MeteorModifier.RADIUS] = _spell_param2_edit.text.to_float()
+			spell_modifier[Meteor.Modifier.DAMAGE_PERCENT] = _spell_param1_edit.text.to_float()
+			spell_modifier[Meteor.Modifier.RADIUS] = _spell_param2_edit.text.to_float()
 			# ON_HIT_CALLBACKS would be handled separately if needed
 		
 		Spell.Type.DARK_STORM:

@@ -17,7 +17,7 @@
 [ext_resource type="Resource" uid="uid://ckk1rjelx5ht" path="res://Card/Descriptions/Cards/Engineer/Epic/FortificationDrone/engineer_fortification_drone.tres" id="14_tdd4c"]
 [ext_resource type="Resource" uid="uid://bgx3j85dxco0q" path="res://Card/Descriptions/Cards/Engineer/Rare/BarbedWire/engineer_barbed_wire.tres" id="15_fk40c"]
 [ext_resource type="Resource" uid="uid://du0o8udb4adn5" path="res://Card/Descriptions/Cards/Engineer/Rare/ShieldThrow/engineer_shield_throw.tres" id="15_lhiy4"]
-[ext_resource type="Resource" uid="uid://nhheckrvkmd2" path="res://Card/Descriptions/Cards/Engineer/Rare/FragileProtocol/engineer_fragile_protocol.tres" id="16_nc3bn"]
+[ext_resource type="Resource" uid="uid://nhheckrvkmd2" path="res://Card/Descriptions/Cards/Engineer/Common/FragileProtocol/engineer_fragile_protocol.tres" id="16_nc3bn"]
 
 [resource]
 script = ExtResource("3_p2pe3")
