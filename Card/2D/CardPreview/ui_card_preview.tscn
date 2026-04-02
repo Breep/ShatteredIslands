@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://eeu547jjdd05"]
+
+[ext_resource type="Script" uid="uid://djkqs2n43w1pr" path="res://Card/2D/CardPreview/ui_card_preview.gd" id="1_g86nx"]
+[ext_resource type="Shader" uid="uid://h1sabcy25vtt" path="res://Card/2D/CardButton/3dcard.gdshader" id="1_k7dov"]
+[ext_resource type="PackedScene" uid="uid://l4hi6dgs8lvg" path="res://Card/2D/CardLayout/card_layout.tscn" id="2_g86nx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b26im"]
+shader = ExtResource("1_k7dov")
+shader_parameter/fov = 60.0000028025
+shader_parameter/cull_back = false
+shader_parameter/y_rot = 0.0
+shader_parameter/x_rot = 0.0
+shader_parameter/inset = 0.800000038
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_xk7ho"]
+viewport_path = NodePath("TextureRect/SubViewport")
+
+[node name="UiCardPreview" type="Control" unique_id=1116092666]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g86nx")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=588175552]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(0.5, 0.5)
+color = Color(0.1764706, 0.1764706, 0.1764706, 0.47843137)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1495496180]
+texture_filter = 4
+material = SubResource("ShaderMaterial_b26im")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(6, 6)
+texture = SubResource("ViewportTexture_xk7ho")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SubViewport" type="SubViewport" parent="TextureRect" unique_id=136589637]
+transparent_bg = true
+size = Vector2i(1260, 1760)
+
+[node name="CardLayout" parent="TextureRect/SubViewport" unique_id=591018748 instance=ExtResource("2_g86nx")]
+unique_name_in_owner = true
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 1260.0
+offset_bottom = 1760.0
+grow_horizontal = 1
+grow_vertical = 1
