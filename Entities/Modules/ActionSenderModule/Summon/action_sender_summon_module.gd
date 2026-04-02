@@ -21,6 +21,7 @@ const PROTO_SHIELD_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Eng
 const FORTIFICATION_DRONE_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Engineer/FortificationDrone/fortification_drone.tscn")
 const AEGIS_BLADE_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/Engineer/AegisBlade/aegis_blade.tscn")
 const DEFLECTION_SHIELD: PackedScene = preload("res://Entities/NPC/Fighting/Engineer/DeflectionShield/deflection_shield.tscn")
+const GAMMA_TURRET: PackedScene = preload("res://Entities/NPC/Fighting/Engineer/GammaTurret/gamma_turret.tscn")
 
 const TREX_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/ChickenLord/TRex/trex.tscn")
 const CHICKEN_EGG_SCENE: PackedScene = preload("res://Entities/NPC/Fighting/ChickenLord/ChickenEgg/chicken_egg.tscn")
@@ -73,6 +74,7 @@ func summon_entity(entity_type: Entity.EntityType, spawn_config: SpawnLocationCo
 		Entity.EntityType.DEFLECTION_SHIELD: _summon_deflection_shield(spawn_position, entity_modifier)
 		Entity.EntityType.TREX: _summon_trex(spawn_position, entity_modifier)
 		Entity.EntityType.CHICKEN_EGG: _summon_chicken_egg(spawn_position, entity_modifier)
+		Entity.EntityType.GAMMA_TURRET: _summon_gamma_turret(spawn_position, entity_modifier)
 
 	_consume_after_action_modifiers(Utils.ActionCategory.SUMMON, {
 		ActionModifier.VarType.ENTITY_TYPE: entity_type,
@@ -213,4 +215,10 @@ func _summon_deflection_shield(spawn_position: Vector3, entity_modifier: Diction
 	_spawn_manager.spawn_entity(deflection_shield, spawn_position, _owner.get_context())
 	
 	
-	
+func _summon_gamma_turret(spawn_position: Vector3, entity_modifier: Dictionary) -> void:
+	var gamma_turret: GammaTurret = GAMMA_TURRET.instantiate()
+	var shield: float = entity_modifier.get(GammaTurret.Modifier.TURRET_SHIELD, 30)
+	var ad: float = entity_modifier.get(GammaTurret.Modifier.TURRET_AD, 5)
+	var master: Entity = entity_modifier.get(GammaTurret.Modifier.MASTER)
+	gamma_turret.init(shield, ad, master)
+	_spawn_manager.spawn_entity(gamma_turret, spawn_position, _owner.get_context())

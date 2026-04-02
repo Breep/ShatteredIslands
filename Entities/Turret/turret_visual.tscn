@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://bfodru53fpiv5"]
-
-[ext_resource type="Script" uid="uid://ww44my82nboj" path="res://Entities/Turret/turret_visual.gd" id="1_6i5tp"]
-[ext_resource type="PackedScene" uid="uid://dmj4876piqnme" path="res://Data/Blender/Turret/turret_v2.blend" id="2_3s6x0"]
-
-[node name="TurretVisual" type="Node3D"]
-script = ExtResource("1_6i5tp")
-
-[node name="turret_v2" parent="." instance=ExtResource("2_3s6x0")]

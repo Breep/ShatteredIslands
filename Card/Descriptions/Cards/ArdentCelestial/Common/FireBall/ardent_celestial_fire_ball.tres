@@ -17,9 +17,9 @@ script = ExtResource("1_n2vhm")
 name = "Fire Ball"
 picture = ExtResource("2_ardnt")
 families = Array[int]([3])
+player_upgrade = SubResource("Resource_iw2ls")
 points = Dictionary[int, int]({
 3: 0
 })
-player_upgrade = SubResource("Resource_iw2ls")
 lvl = 5
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

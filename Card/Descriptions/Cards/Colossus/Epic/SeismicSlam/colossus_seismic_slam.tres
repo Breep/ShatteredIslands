@@ -16,10 +16,10 @@ script = ExtResource("1_y2ilx")
 name = "Seismic Slam"
 picture = ExtResource("2_colos")
 families = Array[int]([6])
+rarity = 2
+player_upgrade = SubResource("Resource_aj4k2")
 points = Dictionary[int, int]({
 6: 0
 })
-rarity = 2
-player_upgrade = SubResource("Resource_aj4k2")
 lvl = 3
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

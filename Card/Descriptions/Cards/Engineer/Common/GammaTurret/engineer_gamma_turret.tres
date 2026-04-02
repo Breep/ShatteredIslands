@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://5d3si44q6tkg"]
+
+[ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_w2x3h"]
+[ext_resource type="Script" uid="uid://dl0a2boil7u75" path="res://Card/Descriptions/Cards/Engineer/Common/GammaTurret/engineer_gamma_turret.gd" id="1_xpqqd"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_h5ghf"]
+
+[sub_resource type="Resource" id="Resource_83ml5"]
+script = ExtResource("1_xpqqd")
+_ad = Array[float]([5.0, 10.0, 15.0, 20.0, 25.0])
+_shield = Array[int]([30, 40, 50, 60, 70])
+_nb_turret = Array[int]([1, 1, 1, 1, 1])
+_periods = Array[float]([5.0, 5.0, 5.0, 5.0, 5.0])
+metadata/_custom_type_script = "uid://dl0a2boil7u75"
+
+[resource]
+script = ExtResource("1_w2x3h")
+name = "Gamma Turret"
+picture = SubResource("PlaceholderTexture2D_h5ghf")
+families = Array[int]([2])
+player_upgrade = SubResource("Resource_83ml5")
+points = Dictionary[int, int]({
+2: 1
+})
+metadata/_custom_type_script = "uid://dc86gt0exdo1a"

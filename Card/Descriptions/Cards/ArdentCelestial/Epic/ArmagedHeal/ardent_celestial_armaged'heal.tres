@@ -16,9 +16,9 @@ script = ExtResource("1_vikme")
 name = "Armaged'heal"
 picture = ExtResource("2_ardnt")
 families = Array[int]([3])
+rarity = 2
+player_upgrade = SubResource("Resource_xd871")
 points = Dictionary[int, int]({
 3: 0
 })
-rarity = 2
-player_upgrade = SubResource("Resource_xd871")
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"

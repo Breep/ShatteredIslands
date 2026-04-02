@@ -54,6 +54,8 @@ var _impact_applied: bool = false
 # Active attack data (replaces _pending_attacks / _pending_melee_attacks)
 var _active_attack_data: Dictionary = {}
 
+var _projectile_type: Projectile.Type = Projectile.Type.SHADOW_BOLT
+
 # ============================== Public functions ==============================
 
 func connect_modules(movement_module: MovementModule, animation_module: AnimationModule) -> void:
@@ -64,6 +66,13 @@ func connect_modules(movement_module: MovementModule, animation_module: Animatio
 	if _owner.status_module != null:
 		_owner.status_module.stunned_changed.connect(_on_owner_stunned_changed)
 
+
+func set_auto_attack_spawn(projectile_spawn: Marker3D) -> void:
+	_projectile_spawn = projectile_spawn
+	
+
+func set_projectile_type(projectile_type: Projectile.Type) -> void:
+	_projectile_type = projectile_type
 
 ## Called every tick by AutoAttackPeriodicModule.process_tick() — advances attack counters.
 func process_tick() -> void:
@@ -191,7 +200,7 @@ func _start_ranged_attack(target: Entity) -> void:
 	
 	var attack_cmd = AttackCommand.new().setup(
 		target,
-		Projectile.Type.SHADOW_BOLT,
+		_projectile_type,
 		projectile_spawn,
 		projectile_stats
 	)
@@ -295,8 +304,8 @@ func _prepare_projectile_stats() -> ProjectileStats:
 	var additional_callbacks: Array[Callable]
 	_consume_modifiers(damage_modifiers_callbacks, additional_callbacks)
 	projectile_stats.on_hit_callbacks.append(func(data: Dictionary):
-		var hit_target: Entity = data[ProjectileStats.VarType.TARGET]
-		var hit_source: Entity = data[ProjectileStats.VarType.SOURCE]
+		var hit_target = data[ProjectileStats.VarType.TARGET]
+		var hit_source = data[ProjectileStats.VarType.SOURCE]
 		
 		var mod = {
 			AutoAttackModifier.VarType.SOURCE: hit_source,
