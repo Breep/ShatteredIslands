@@ -122,7 +122,7 @@ func is_end_of_game() -> bool:
 
 func start_solo_game() -> void:
 	_game_type = GameType.SOLO
-	for i in 4: # TODO Avoir un nombre max de joueur qui dépend du mode ?
+	for i in 7: # TODO Avoir un nombre max de joueur qui dépend du mode ?
 		PlayerManager.add_bot()
 	PlayerManager.join_game(1, "Breepsolo")
 	start_game()
