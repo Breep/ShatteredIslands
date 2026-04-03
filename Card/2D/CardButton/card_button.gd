@@ -20,8 +20,8 @@ var card: Card:
 
 # ============================== Private variables ==============================
 
-var _angle_x_max: float = 15.0
-var _angle_y_max: float = 15.0
+var _angle_x_max: float = 30.0
+var _angle_y_max: float = 30.0
 var _card: Card
 
 var _target_rot_x: float
@@ -34,9 +34,8 @@ var _is_focused: bool = false
 # ============================== Local scene nodes ==============================
 
 @export var _card_layout : CardLayout
-@export var _texture_rect: TextureRect
+@export var _canvas_group: CanvasGroup
 
-var _sub_viewport: SubViewport
 var _scroll_container: ScrollContainer
 
 # ============================== Public functions ==============================
@@ -49,18 +48,18 @@ func update_visual(new_card: Card) -> void:
 	_card_layout.update_content(new_card)
 
 func remove_shader() -> void:
-	_texture_rect.material = null
+	_canvas_group.material = null
 
 
 func set_locked(locked: bool) -> void:
-	_card_layout.set_locked(locked)
+	_canvas_group.self_modulate = Color(0.333, 0.333, 0.333, 1.0)
+	#_card_layout.set_locked(locked)
 
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
-	if _texture_rect.material != null:
-		_texture_rect.material = _texture_rect.material.duplicate()
-	_sub_viewport = _texture_rect.get_node("SubViewport") as SubViewport
+	if _canvas_group.material != null:
+		_canvas_group.material = _canvas_group.material.duplicate()
 	var parent := self as Node
 	while parent:
 		if parent is ScrollContainer:
@@ -71,19 +70,6 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	_animation_3d_rotate(delta)
-	_update_viewport_culling()
-
-
-func _on_mouse_entered() -> void:
-	_is_focused = true
-	_card_layout.mouse_entered()
-
-
-func _on_mouse_exited() -> void:
-	_is_focused = false
-	_animation_reset_3d_rotation()
-	_card_layout.mouse_exited()
-
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and _is_focused:
@@ -92,42 +78,43 @@ func _input(event: InputEvent) -> void:
 # ============================== Private functions ==============================
 
 func _update_rotation_target() -> void:
-	if _texture_rect.material == null: return
+	if _canvas_group.material == null: return
 	var mouse_pos: Vector2 = get_local_mouse_position()
-	var lerp_val_x: float = remap(mouse_pos.x, 0.0, size.x, 0, 1)
-	var lerp_val_y: float = remap(mouse_pos.y, 0.0, size.y, 0, 1)
+	var size_x: float = _canvas_group.scale.x * _card_layout.size.x
+	var size_y: float = _canvas_group.scale.y * _card_layout.size.y
+	var lerp_val_x: float = remap(mouse_pos.x + size_x / 2, 0.0, size_x, 0, 1)
+	var lerp_val_y: float = remap(mouse_pos.y + size_y / 2, 0.0, size_y, 0, 1)
 	_target_rot_x = lerpf(-_angle_x_max, _angle_x_max, lerp_val_x)
 	_target_rot_y = lerpf(_angle_y_max, -_angle_y_max, lerp_val_y)
 
 
 func _animation_3d_rotate(delta: float) -> void:
-	if _texture_rect.material == null: return
+	if _canvas_group.material == null: return
 	if _current_rot_x == _target_rot_x and _target_rot_y == _current_rot_y: return
 	_current_rot_x = lerp(_current_rot_x, _target_rot_x, delta * ROT_SPEED)
 	_current_rot_y = lerp(_current_rot_y, _target_rot_y, delta * ROT_SPEED)
-	_texture_rect.material.set_shader_parameter("x_rot", _current_rot_y)
-	_texture_rect.material.set_shader_parameter("y_rot", _current_rot_x)
+	_canvas_group.material.set_shader_parameter("x_rot", _current_rot_y)
+	_canvas_group.material.set_shader_parameter("y_rot", _current_rot_x)
 
 
 func _animation_reset_3d_rotation() -> void:
-	if _texture_rect.material == null: return
+	if _canvas_group.material == null: return
 	_target_rot_x = 0.0
 	_target_rot_y = 0.0
 
 
-func _update_viewport_culling() -> void:
-	if _sub_viewport == null or _scroll_container == null:
-		return
-	var scroll_rect := _scroll_container.get_global_rect()
-	var card_rect := get_global_rect()
-	var is_visible_in_scroll := scroll_rect.intersects(card_rect)
-	if is_visible_in_scroll and _sub_viewport.render_target_update_mode == SubViewport.UPDATE_DISABLED:
-		_sub_viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
-	elif not is_visible_in_scroll and _sub_viewport.render_target_update_mode != SubViewport.UPDATE_DISABLED:
-		_sub_viewport.render_target_update_mode = SubViewport.UPDATE_DISABLED
+func _on_control_mouse_entered() -> void:
+	_is_focused = true
+	_card_layout.mouse_entered()
 
 
-func _on_gui_input(event: InputEvent) -> void:
+func _on_control_mouse_exited() -> void:
+	_is_focused = false
+	_animation_reset_3d_rotation()
+	_card_layout.mouse_exited()
+
+
+func _on_control_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			card_selected.emit(self, card)

@@ -29,7 +29,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("5_ahun0")
 script = ExtResource("1_xu7re")
-_card_buttons = [NodePath("MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer/CardButton"), NodePath("MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer2/CardButton"), NodePath("MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer3/CardButton")]
+_card_buttons = [NodePath("MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer/Control/CardButton"), NodePath("MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer2/Control/CardButton"), NodePath("MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer3/Control/CardButton")]
 
 [node name="MainPanel" type="Control" parent="." unique_id=1644505787]
 layout_mode = 1
@@ -106,9 +106,14 @@ texture = ExtResource("3_1gnrk")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="CardButton" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer" unique_id=954174150 instance=ExtResource("4_37vaa")]
+[node name="Control" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer" unique_id=1194007703]
 custom_minimum_size = Vector2(200, 265)
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CardButton" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer/Control" unique_id=954174150 instance=ExtResource("4_37vaa")]
+layout_mode = 1
+scale = Vector2(0.5, 0.5)
 size_flags_horizontal = 4
 size_flags_vertical = 6
 
@@ -151,9 +156,14 @@ texture = ExtResource("3_1gnrk")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="CardButton" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer2" unique_id=502497574 instance=ExtResource("4_37vaa")]
+[node name="Control" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer2" unique_id=303478001]
 custom_minimum_size = Vector2(200, 265)
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CardButton" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer2/Control" unique_id=502497574 instance=ExtResource("4_37vaa")]
+layout_mode = 1
+scale = Vector2(0.5, 0.5)
 size_flags_horizontal = 4
 size_flags_vertical = 6
 
@@ -197,9 +207,14 @@ texture = ExtResource("3_1gnrk")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="CardButton" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer3" unique_id=1380592542 instance=ExtResource("4_37vaa")]
+[node name="Control" type="Control" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer3" unique_id=1000777937]
 custom_minimum_size = Vector2(200, 265)
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CardButton" parent="MainPanel/MarginContainer/VBoxContainer/CardContainer/VBoxContainer3/Control" unique_id=1380592542 instance=ExtResource("4_37vaa")]
+layout_mode = 1
+scale = Vector2(0.5, 0.5)
 size_flags_horizontal = 4
 size_flags_vertical = 6
 

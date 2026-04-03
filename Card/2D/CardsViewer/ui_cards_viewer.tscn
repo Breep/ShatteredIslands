@@ -23,11 +23,14 @@ script = ExtResource("2_f23eh")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=804347890]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(1910, 1770)
+custom_minimum_size = Vector2(2550, 1770)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = -1
+anchor_left = -0.16800001
+anchor_right = 1.1680001
 anchor_bottom = 1.0
+offset_left = 320.88004
+offset_right = -320.88013
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
@@ -35,42 +38,55 @@ theme = ExtResource("1_ekq81")
 
 [node name="GridContainer" type="GridContainer" parent="ScrollContainer" unique_id=1543889971]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(1910, 1770)
+custom_minimum_size = Vector2(2550, 1770)
 layout_mode = 2
-columns = 3
+columns = 4
 
-[node name="CardButton" parent="ScrollContainer/GridContainer" unique_id=2025567503 instance=ExtResource("1_mu264")]
+[node name="CardGridTemplate" type="Control" parent="ScrollContainer/GridContainer" unique_id=1652077436]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(630, 880)
 layout_mode = 2
 
-[node name="CardButton2" parent="ScrollContainer/GridContainer" unique_id=14544120 instance=ExtResource("1_mu264")]
+[node name="CardButton" parent="ScrollContainer/GridContainer/CardGridTemplate" unique_id=2025567503 instance=ExtResource("1_mu264")]
+layout_mode = 1
+scale = Vector2(1.28, 1.28)
+
+[node name="Control2" type="Control" parent="ScrollContainer/GridContainer" unique_id=2046935174]
 custom_minimum_size = Vector2(630, 880)
 layout_mode = 2
 
-[node name="CardButton3" parent="ScrollContainer/GridContainer" unique_id=1889893421 instance=ExtResource("1_mu264")]
+[node name="CardButton" parent="ScrollContainer/GridContainer/Control2" unique_id=1390086147 instance=ExtResource("1_mu264")]
+layout_mode = 1
+scale = Vector2(1.28, 1.28)
+
+[node name="Control3" type="Control" parent="ScrollContainer/GridContainer" unique_id=794146435]
 custom_minimum_size = Vector2(630, 880)
 layout_mode = 2
 
-[node name="CardButton4" parent="ScrollContainer/GridContainer" unique_id=812564584 instance=ExtResource("1_mu264")]
+[node name="CardButton" parent="ScrollContainer/GridContainer/Control3" unique_id=1898859272 instance=ExtResource("1_mu264")]
+layout_mode = 1
+scale = Vector2(1.28, 1.28)
+
+[node name="Control4" type="Control" parent="ScrollContainer/GridContainer" unique_id=2002888927]
 custom_minimum_size = Vector2(630, 880)
 layout_mode = 2
 
-[node name="CardButton5" parent="ScrollContainer/GridContainer" unique_id=449600436 instance=ExtResource("1_mu264")]
+[node name="CardButton" parent="ScrollContainer/GridContainer/Control4" unique_id=2078039302 instance=ExtResource("1_mu264")]
+layout_mode = 1
+scale = Vector2(1.28, 1.28)
+
+[node name="Control5" type="Control" parent="ScrollContainer/GridContainer" unique_id=422880275]
 custom_minimum_size = Vector2(630, 880)
 layout_mode = 2
 
-[node name="CardButton6" parent="ScrollContainer/GridContainer" unique_id=827113631 instance=ExtResource("1_mu264")]
+[node name="CardButton" parent="ScrollContainer/GridContainer/Control5" unique_id=389611951 instance=ExtResource("1_mu264")]
+layout_mode = 1
+scale = Vector2(1.28, 1.28)
+
+[node name="Control6" type="Control" parent="ScrollContainer/GridContainer" unique_id=1349233876]
 custom_minimum_size = Vector2(630, 880)
 layout_mode = 2
 
-[node name="CardButton7" parent="ScrollContainer/GridContainer" unique_id=522510570 instance=ExtResource("1_mu264")]
-custom_minimum_size = Vector2(630, 880)
-layout_mode = 2
-
-[node name="CardButton8" parent="ScrollContainer/GridContainer" unique_id=1656108919 instance=ExtResource("1_mu264")]
-custom_minimum_size = Vector2(630, 880)
-layout_mode = 2
-
-[node name="CardButton9" parent="ScrollContainer/GridContainer" unique_id=1179758616 instance=ExtResource("1_mu264")]
-custom_minimum_size = Vector2(630, 880)
-layout_mode = 2
+[node name="CardButton" parent="ScrollContainer/GridContainer/Control6" unique_id=281059665 instance=ExtResource("1_mu264")]
+layout_mode = 1
+scale = Vector2(1.28, 1.28)
