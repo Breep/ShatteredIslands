@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://UI/Tool/Misc/hover_boost_button.gd" id="3_6kn6i"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="3_x0odd"]
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_egh8k"]
-[ext_resource type="Resource" uid="uid://c2fbdsokd2ayt" path="res://Card/Descriptions/Cards/Engineer/Epic/AegisResonator/shieldomatic_aegis_resonator.tres" id="4_x0odd"]
+[ext_resource type="Resource" uid="uid://5d3si44q6tkg" path="res://Card/Descriptions/Cards/Engineer/Common/GammaTurret/engineer_gamma_turret.tres" id="4_x0odd"]
 [ext_resource type="Script" uid="uid://nkraydv4mdse" path="res://Card/Templates/player_deck.gd" id="5_ywmf2"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/Stats/EntityStats/entity_stats.gd" id="6_3bpsj"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]

@@ -2,12 +2,14 @@
 
 [ext_resource type="PackedScene" uid="uid://c1goibqlf12t3" path="res://SpellsAndProjectiles/Projectiles/ShieldThrow/shield_throw_visual.tscn" id="1_827r1"]
 [ext_resource type="Script" uid="uid://dky1clxj0r0wo" path="res://SpellsAndProjectiles/Projectiles/ShieldThrow/shield_throw_projectile.gd" id="1_x5v4l"]
-[ext_resource type="Script" uid="uid://xr3esthqo6re" path="res://SpellsAndProjectiles/Projectiles/Trajectories/straight_trajectory.gd" id="2_h42ot"]
+[ext_resource type="Script" uid="uid://ba86frs5xcp14" path="res://SpellsAndProjectiles/Projectiles/Trajectories/bezier_trajectory.gd" id="2_h42ot"]
 
 [sub_resource type="Resource" id="Resource_632w7"]
 script = ExtResource("2_h42ot")
 speed = 8.0
-metadata/_custom_type_script = "uid://xr3esthqo6re"
+control_height = 1.5
+randomize_by = 0.3
+metadata/_custom_type_script = "uid://ba86frs5xcp14"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_x5v4l"]
 radius = 0.2

@@ -74,7 +74,7 @@ extends Resource
 @export var gold_starting_game: int = 300
 
 @export_group("Player health")
-@export var player_starting_health: int = 50
+@export var player_starting_health: int = 20
 
 @export_group("Player damage")
 # Minimum damage = <round_modifier> + <lvl_mod (1 2 3 5 8)>

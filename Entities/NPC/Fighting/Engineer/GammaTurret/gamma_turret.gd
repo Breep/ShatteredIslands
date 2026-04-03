@@ -25,7 +25,7 @@ func _ready() -> void:
 	base_stats.attack_damage = _ad
 	stat_modifiers_registry.recompute_all()
 	if not is_instance_valid(_master): _master = summoner
-	_movement_module.orbit_entity(_master, 2, 2, MovementModule.OrbitFacing.NONE)
+	_movement_module.orbit_entity(_master, 2, 1, MovementModule.OrbitFacing.NONE)
 	_master.died.connect(func() -> void:
 		_on_died()
 		)

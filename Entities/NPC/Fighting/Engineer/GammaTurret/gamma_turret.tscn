@@ -25,7 +25,7 @@ _auto_loaded_modules = Array[int]([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 1
 _visual_3d = NodePath("TurretVisual")
 _health_bar_marker = NodePath("TurretVisual/Marker3D")
 _attack_spawn_marker = NodePath("TurretVisual/AutoAttackSpawn")
-_projectile_type = 8
+_projectile_type = 7
 metadata/_custom_type_script = "uid://cjfj1jcbiom2x"
 
 [node name="TurretVisual" parent="." unique_id=1429185406 instance=ExtResource("2_jkt3l")]
