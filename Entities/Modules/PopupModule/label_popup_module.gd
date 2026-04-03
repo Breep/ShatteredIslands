@@ -25,6 +25,7 @@ func _ready() -> void:
 	_owner.stack_taken.connect(_on_owner_stack_taken)
 	_owner.action_dodged.connect(_on_owner_action_dodged)
 	_owner.action_blocked.connect(_on_owner_action_blocked)
+
 	if _owner.conditions:
 		_owner.conditions.shield_stacks_changed.connect(_on_owner_shield_stacks_changed)
 

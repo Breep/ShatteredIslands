@@ -90,9 +90,6 @@ unique_name_in_owner = true
 [node name="DarkKnight1" parent="Node3D/Entities" unique_id=353718081 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("1_icvx6")]
 transform = Transform3D(0.9946579, 0, 0.10322651, 0, 1, 0, -0.10322651, 0, 0.9946579, 0.07346773, -4.7683716e-07, 7.8182755)
 _custom_deck = SubResource("Resource_rw3ih")
-_override_family_levels = Dictionary[int, int]({
-8: 1
-})
 _custom_data_memory = {
 &"ChickenLord": {
 &"Ancestral Gauge": 200.0

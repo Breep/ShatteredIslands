@@ -24,6 +24,9 @@ extends Control
 
 @onready var _block_texture: TextureRect = %BlockTextureRect
 
+const TAUNT_VISUAL_SCENE: PackedScene = preload("res://Entities/EntityInfoPanel/_Shared/taunt_status_visual.tscn")
+var _taunt_visual: Node3D
+
 #region ============================== Node base functions ==============================
 func _ready() -> void:
 	if _health_bar and _health_bar.material:
@@ -53,6 +56,8 @@ func _ready() -> void:
 	conditions.necrosis_stacks_changed.connect(_update_stack_label.bind(_necrosis_label))
 	conditions.regen_stacks_changed.connect(_update_stack_label.bind(_regen_label))
 	stats.block_changed.connect(_update_block_label)
+	
+	_owner_entity.status_module.taunted_changed.connect(_update_taunt_visual)
 	
 	if _debug_values != null:
 		_debug_values.visible = DebugHealthBarOverlay.is_visible()
@@ -158,6 +163,14 @@ func _set_health_bar_color_by_team() -> void:
 		health_color = Color.INDIAN_RED
 	_health_bar.material.set_shader_parameter("HealthColor", health_color)
 #endregion
+
+func _update_taunt_visual(is_active: bool, duration: float, infinite: bool) -> void:
+	if is_active and is_instance_valid(_info_panel_spawn):
+		_taunt_visual = TAUNT_VISUAL_SCENE.instantiate()
+		_info_panel_spawn.add_child(_taunt_visual)
+		
+	elif not is_active and is_instance_valid(_taunt_visual):
+		_taunt_visual.queue_free()
 
 #region ============================== Callbacks ==============================
 func _on_health_changed(new_health: int) -> void:

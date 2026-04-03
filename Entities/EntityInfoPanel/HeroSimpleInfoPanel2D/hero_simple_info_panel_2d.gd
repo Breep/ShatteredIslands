@@ -28,6 +28,9 @@ extends Control
 
 @onready var _player_name_label: RichTextLabel = %PlayerNameLabel
 
+var _taunt_visual: Node3D
+const TAUNT_VISUAL_SCENE: PackedScene = preload("res://Entities/EntityInfoPanel/_Shared/taunt_status_visual.tscn")
+
 #region ============================== Node base functions ==============================
 func _ready() -> void:
 	if _health_bar and _health_bar.material:
@@ -62,6 +65,8 @@ func _ready() -> void:
 	conditions.necrosis_stacks_changed.connect(_update_stack_label.bind(_necrosis_label))
 	conditions.regen_stacks_changed.connect(_update_stack_label.bind(_regen_label))
 	stats.block_changed.connect(_update_block_label)
+	
+	_hero_entity.status_module.taunted_changed.connect(_update_taunt_visual)
 	
 	if _hero_entity.player != null:
 		_player_name_label.text = _hero_entity.player.player_name
@@ -167,6 +172,14 @@ func _update_block_label(new_value: float) -> void:
 		_block_label.hide()
 		_block_texture.hide()
 		_block_bar.hide()
+
+func _update_taunt_visual(is_active: bool, duration: float, infinite: bool) -> void:
+	if is_active and is_instance_valid(_info_panel_spawn):
+		_taunt_visual = TAUNT_VISUAL_SCENE.instantiate()
+		_info_panel_spawn.add_child(_taunt_visual)
+		
+	elif not is_active and is_instance_valid(_taunt_visual):
+		_taunt_visual.queue_free()
 
 
 func _set_health_bar_color_by_team() -> void:
