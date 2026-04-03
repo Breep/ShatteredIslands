@@ -34,6 +34,7 @@ func _ready() -> void:
 	base_stats.update_stat(EntityStats.StatType.CRIT_CHANCE, _base_crit_chance, Utils.ActionType.DAMAGE_PHYSICAL)
 	base_stats.update_stat(EntityStats.StatType.CRIT_MULT, _base_crit_multi, Utils.ActionType.DAMAGE_PHYSICAL)
 	stat_modifiers_registry.recompute_all()
+	
 	super._ready()
 	
 	

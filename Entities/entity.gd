@@ -298,6 +298,7 @@ func _ready() -> void:
 	_start_spawn()
 
 
+
 func _exit_tree() -> void:
 	if stats != null and stats.health_changed.is_connected(_on_stats_health_changed):
 		stats.health_changed.disconnect(_on_stats_health_changed)
