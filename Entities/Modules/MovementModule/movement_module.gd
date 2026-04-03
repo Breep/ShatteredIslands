@@ -4,7 +4,8 @@ extends Module
 enum OrbitFacing {
 	TANGENT,
 	CENTER,
-	ANTI_CENTER
+	ANTI_CENTER,
+	NONE
 }
 
 var _target_position: Vector3
@@ -218,6 +219,8 @@ func _update_orbit_circle() -> void:
 	elif _orbit_facing == OrbitFacing.ANTI_CENTER:
 		var dir = (_owner.global_position - _orbit_center_point)
 		_owner.look_at_target_y_only(_owner.global_position + dir)
+	elif _orbit_facing == OrbitFacing.NONE:
+		pass
 	else:
 		# Tangent direction: perpendicular to radius, in direction of travel
 		var tangent_sign: float = signf(_orbit_angular_speed)

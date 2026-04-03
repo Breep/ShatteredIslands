@@ -39,4 +39,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("BloodFrenzy: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "On chicken death, increase all chickens AD by " + str(_ad_per_deaths[cardlvl - 1]).pad_decimals(0)
+	return "On chicken death, increase all chickens AD by " + str(_ad_per_deaths[cardlvl - 1])

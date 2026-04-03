@@ -19,7 +19,8 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		var shield_distribution: Array[float] = Utils.get_randf_distribution(shield, allies.size(), ctx.hero.battle_id)
 		for i in allies.size():
 			var shield_gain: float = shield_distribution[i]
-			ctx.hero.inflict_condition_stacks(allies[i], shield_gain, Stack.Type.SHIELD, &"Force Field")
+			ctx.hero.inflict_condition_stacks(allies[i], shield_gain, Stack.Type.SHIELD, &"Aegis Resonator")
+			ShieldVfxSpawner.spawn_on(allies[i])
 	)
 
 

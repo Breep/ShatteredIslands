@@ -18,6 +18,7 @@ enum Type {
 	POISON_FLASK,
 	SMALL_EGG,
 	FIRE_BALL,
+	BULLET,
 }
 
 # === EXPORTS ===

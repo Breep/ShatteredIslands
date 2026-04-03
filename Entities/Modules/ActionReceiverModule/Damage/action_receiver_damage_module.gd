@@ -15,7 +15,9 @@ func take_damage(damage: float, damage_type: Utils.ActionType, is_critical: bool
 			_owner.action_dodged.emit(source, damage_type, damage, is_critical)
 			return 0
 		_handle_thorn(source, action_id)
-		if _is_blocked(): return 0
+		if _is_blocked(): 
+			_owner.action_blocked.emit(source, damage_type, damage)
+			return 0
 	_owner.stats.health -= damage
 	_owner.damage_taken.emit(damage, damage_type, is_critical, false)
 	_owner.action_received.emit(source, damage_type, action_id, damage, is_critical)

@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_mhg1k"]
 script = ExtResource("1_3qmqe")
-_egg_spawn_chances = Array[float]([20.0, 40.0, 100.0])
+_egg_spawn_chances = Array[float]([20.0, 33.0, 50.0])
 _rarity = 3
 metadata/_custom_type_script = "uid://cj6d7anfu5qqr"
 

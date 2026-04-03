@@ -33,4 +33,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Protecto'Spear: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return str(_base_chance[cardlvl - 1]) + "% chance to gain " + str(_base_shield_amount[cardlvl - 1]) + " shield on auto-attack"
+	return str(_base_chance[cardlvl - 1]) + "% chance to gain " + str(_base_shield_amount[cardlvl - 1]) + " [[SHIELD]] on auto-attack"

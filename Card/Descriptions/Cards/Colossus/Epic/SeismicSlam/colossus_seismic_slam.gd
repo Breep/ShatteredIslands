@@ -17,6 +17,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var size_gain: float = _increase_sizes[card_lvl - 1]
 	var stun_duration: float = _stun_durations[card_lvl - 1]
 	
+	var state := {&"iteration": 1}
 	ctx.periodic_timers.register(&"Seismic Slam", period, func() -> void:
 		if ctx.hero == null or not is_instance_valid(ctx.hero):
 			return
@@ -27,14 +28,20 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		decal_vfx.global_position = ctx.hero.global_position
 
 		# Size increase
-		var ratio_scaling: float = ctx.hero.scale[1] + (size_gain / 100)
-		ctx.hero.scale = Vector3(ratio_scaling, ratio_scaling, ratio_scaling) 
+		var mod3 := StatModifier.new()
+		mod3.id = &"Seismic Slam"
+		mod3.stat_type = EntityStats.StatType.SCALE
+		mod3.calc_type = StatModifier.CalcType.ADD
+		mod3.value = (_increase_sizes[card_lvl - 1]/100) * state[&"iteration"]
+		ctx.stat_modifiers.register_modifier(mod3)
 		
 		# Apply stuns
 		var ennemies: Array[Entity] = ctx.hero.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ENEMIES)
 		for a: Entity in ennemies:
 			if a != null and is_instance_valid(a):
 				ctx.hero.inflict_status(a, Status.Type.STUN, stun_duration, &"Seismic Slam")
+				
+		state[&"iteration"] += 1
 	)
 
 func get_description(cardlvl: int) -> String:

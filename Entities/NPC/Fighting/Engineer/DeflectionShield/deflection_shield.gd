@@ -53,13 +53,3 @@ func _scan_and_destroy_projectiles() -> void:
 		if projectile.get_source() != null and projectile.get_source().team == summoner.team: continue
 		projectile.queue_free()
 		stats.health -= 1
-
-
-
-
-
-
-
-
-
- 

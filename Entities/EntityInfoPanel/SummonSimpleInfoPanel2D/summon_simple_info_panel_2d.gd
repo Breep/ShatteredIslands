@@ -10,6 +10,7 @@ extends Control
 @onready var _health_bar: ColorRect = %HealthBar
 @onready var _shield_bar: ColorRect = %ShieldBar
 @onready var _grid_bar: ColorRect = %GridBar
+@onready var _block_bar: ColorRect = %BlockBar
 
 @onready var _debug_values: Control = %DebugValues
 @onready var _health_label: Label = %HealthLabel
@@ -19,6 +20,12 @@ extends Control
 @onready var _poison_label: Label = %PoisonLabel
 @onready var _necrosis_label: Label = %NecrosisLabel
 @onready var _regen_label: Label = %RegenLabel
+@onready var _block_label: Label = %BlockLabel
+
+@onready var _block_texture: TextureRect = %BlockTextureRect
+
+const TAUNT_VISUAL_SCENE: PackedScene = preload("res://Entities/EntityInfoPanel/_Shared/taunt_status_visual.tscn")
+var _taunt_visual: Node3D
 
 #region ============================== Node base functions ==============================
 func _ready() -> void:
@@ -39,6 +46,7 @@ func _ready() -> void:
 	_update_stack_label(conditions.poison_stacks, _poison_label)
 	_update_stack_label(conditions.necrosis_stacks, _necrosis_label)
 	_update_stack_label(conditions.regen_stacks, _regen_label)
+	_update_block_label(stats.block)
 
 	stats.health_changed.connect(_on_health_changed)
 	stats.health_max_changed.connect(_on_health_max_changed)
@@ -47,7 +55,10 @@ func _ready() -> void:
 	conditions.poison_stacks_changed.connect(_update_stack_label.bind(_poison_label))
 	conditions.necrosis_stacks_changed.connect(_update_stack_label.bind(_necrosis_label))
 	conditions.regen_stacks_changed.connect(_update_stack_label.bind(_regen_label))
-
+	stats.block_changed.connect(_update_block_label)
+	
+	_owner_entity.status_module.taunted_changed.connect(_update_taunt_visual)
+	
 	if _debug_values != null:
 		_debug_values.visible = DebugHealthBarOverlay.is_visible()
 	DebugHealthBarOverlay.register(_on_debug_overlay_toggled)
@@ -128,6 +139,19 @@ func _update_stack_label(new_value: float, label: Label) -> void:
 		label.hide()
 
 
+func _update_block_label(new_value: float) -> void:
+	if _block_label == null: return
+	if new_value > 0:
+		_block_label.text = str(new_value).pad_decimals(0)
+		_block_label.show()
+		_block_texture.show()
+		_block_bar.show()
+	else:
+		_block_label.hide()
+		_block_texture.hide()
+		_block_bar.hide()
+
+
 func _set_health_bar_color_by_team() -> void:
 	if not _health_bar or not _health_bar.material or not _owner_entity:
 		return
@@ -139,6 +163,14 @@ func _set_health_bar_color_by_team() -> void:
 		health_color = Color.INDIAN_RED
 	_health_bar.material.set_shader_parameter("HealthColor", health_color)
 #endregion
+
+func _update_taunt_visual(is_active: bool, duration: float, infinite: bool) -> void:
+	if is_active and is_instance_valid(_info_panel_spawn):
+		_taunt_visual = TAUNT_VISUAL_SCENE.instantiate()
+		_info_panel_spawn.add_child(_taunt_visual)
+		
+	elif not is_active and is_instance_valid(_taunt_visual):
+		_taunt_visual.queue_free()
 
 #region ============================== Callbacks ==============================
 func _on_health_changed(new_health: int) -> void:

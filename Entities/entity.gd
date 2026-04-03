@@ -12,6 +12,8 @@ signal action_done(target: Entity, action_type: Utils.ActionType, action_id: Str
 @warning_ignore("unused_signal")
 signal action_dodged(source: Entity, action_type: Utils.ActionType, value: float, is_critical: bool)
 @warning_ignore("unused_signal")
+signal action_blocked(source: Entity, action_type: Utils.ActionType, value: float)
+@warning_ignore("unused_signal")
 signal critical_action_done(target: Entity, action_type: Utils.ActionType, value_before_crit: float, value_after_crit: float)
 @warning_ignore("unused_signal")
 signal action_overhealed(target: Entity, amount: float)
@@ -52,6 +54,7 @@ enum EntityType {
 	FORTIFICATION_DRONE,
 	AEGIS_BLADE,
 	DEFLECTION_SHIELD,
+	GAMMA_TURRET,
 	TREX,
 	CHICKEN_EGG
 }
@@ -171,6 +174,8 @@ var _spawn_ticks_remaining: int = -1
 @export_subgroup("Visual")
 @export var _visual_3d: Node3D # Visual node for spawn animation
 @export var _health_bar_marker: Marker3D
+@export var _attack_spawn_marker: Marker3D
+@export var _projectile_type: Projectile.Type
 
 @export_subgroup("Visual/Animation")
 @export var _animation_module: AnimationModule
@@ -291,6 +296,7 @@ func _ready() -> void:
 	_connect_module_dependencies()
 
 	_start_spawn()
+
 
 
 func _exit_tree() -> void:
@@ -572,6 +578,8 @@ func _auto_load_modules() -> void:
 func _connect_module_dependencies() -> void:
 	if _auto_attack_sender != null:
 		_auto_attack_sender.connect_modules(_movement_module, _animation_module)
+		_auto_attack_sender.set_auto_attack_spawn(_attack_spawn_marker)
+		_auto_attack_sender.set_projectile_type(_projectile_type)
 	
 	# Connect periodic module with auto attack sender
 	if _auto_attack_periodic_module != null and _auto_attack_sender != null:

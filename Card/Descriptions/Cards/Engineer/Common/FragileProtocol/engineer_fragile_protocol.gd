@@ -19,7 +19,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	
 	var mod_shield := StatModifier.new()
 	mod_shield.value = _shield_power[card_lvl - 1]
-	mod_shield.calc_type = StatModifier.CalcType.MULT
+	mod_shield.calc_type = StatModifier.CalcType.ADD
 	mod_shield.stat_type = EntityStats.StatType.STRENGTH
 	mod_shield.action_type = Utils.ActionType.STACK_SHIELD
 	mod_shield.id = "Fragile Protocol"

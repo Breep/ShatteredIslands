@@ -9,6 +9,7 @@ script = ExtResource("1_al5bp")
 _periods = Array[float]([2.0, 2.0, 2.0, 2.0, 2.0])
 _damage_per_chickens = Array[float]([5.0, 10.0, 15.0, 20.0, 30.0])
 _chicken_spawned_per_deaths = Array[int]([1, 1, 1, 1, 1])
+_base_damages = Array[float]([20.0, 20.0, 20.0, 20.0, 20.0])
 metadata/_custom_type_script = "uid://bw3ilw20mauak"
 
 [resource]
