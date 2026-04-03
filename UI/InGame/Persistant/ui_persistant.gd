@@ -20,12 +20,14 @@ extends Control
 @onready var _blink_timer := Timer.new()
 @onready var _urgent_timer := Timer.new()
 
+@onready var _main_timer: Timer = %Timer
+
 # ============================== Node base functions ==============================
 
 func _ready() -> void:
 	RoundManager.current_round_changed.connect(_on_round_manager_current_round_changed)
 	GameManager.game_state_changed.connect(_on_game_manager_game_state_changed)
-	_game_state_viewer.connect_timer(GameManager.game_state_timer)
+	_game_state_viewer.connect_timer(_main_timer)
 	_ui_player_info.connect_to_player(PlayerManager.get_local_player())
 	_ui_all_families_portraits.update_content(PlayerManager.get_local_player())
 	_original_scale = _end_buying_phase_button.scale
@@ -102,10 +104,14 @@ func _on_game_manager_game_state_changed(game_state: GameManager.GameState) -> v
 			_ui_player_info.show()
 			_blink_timer.start()
 			_urgent_timer.start()
+			_main_timer.wait_time = GameManager.game_rules.duration_buying_phase
 		GameManager.GameState.FIGHTING:
 			_end_buying_phase_button.hide()
 			_ui_player_info.hide()
 			_exit_urgent_mode()
+			_main_timer.wait_time = GameManager.game_rules.duration_fighting_countdown + GameManager.game_rules.duration_fighting_normal \
+				+ GameManager.game_rules.duration_fighting_special
+	_main_timer.start()
 
 
 func _on_urgent_timeout() -> void:
