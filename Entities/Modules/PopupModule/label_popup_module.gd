@@ -24,6 +24,7 @@ func _ready() -> void:
 	_owner.heal_taken.connect(_on_owner_heal_taken)
 	_owner.stack_taken.connect(_on_owner_stack_taken)
 	_owner.action_dodged.connect(_on_owner_action_dodged)
+	_owner.action_blocked.connect(_on_owner_action_blocked)
 	if _owner.conditions:
 		_owner.conditions.shield_stacks_changed.connect(_on_owner_shield_stacks_changed)
 
@@ -75,4 +76,8 @@ func _on_owner_shield_stacks_changed(new_value: float) -> void:
 
 func _on_owner_action_dodged(_source: Entity, _action_type: Utils.ActionType, value: float, is_critical: bool) -> void:
 	var popup := LabelPopup.dodge(value, is_critical)
+	_spawn(popup)
+	
+func _on_owner_action_blocked(_source: Entity, _action_type: Utils.ActionType, value: float) -> void:
+	var popup := LabelPopup.block(value)
 	_spawn(popup)

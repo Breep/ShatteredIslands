@@ -90,6 +90,11 @@ func _ready() -> void:
 	#if visual.has_method("update_resource_points"):
 		#super_strike_charges_changed.connect(visual.update_resource_points)
 	
+	# TEST
+	periodic_timer_registry.register("test", 3, func() -> void:
+		stats.block += 1
+	)
+	
 	super._ready()
 
 # ============================== Public function ==============================
