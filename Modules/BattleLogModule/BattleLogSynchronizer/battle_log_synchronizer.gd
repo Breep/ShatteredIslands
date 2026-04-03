@@ -39,7 +39,7 @@ func _on_gfm_fighting_phase_state_changed(state: GlobalFightingManager.FightingP
 		GlobalFightingManager.FightingPhaseState.NORMAL:
 			if multiplayer.is_server():
 				_synchronizer_timer.start()
-		GlobalFightingManager.FightingPhaseState.FINISHED:
+		GlobalFightingManager.FightingPhaseState.CELEBRATION:
 			if multiplayer.is_server():
 				_synchronizer_timer.stop()
 				var new_logs: Array[Dictionary] = _battle_writer.get_current_logs()

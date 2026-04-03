@@ -50,7 +50,7 @@ func _on_gfm_fighting_phase_state_changed(state: GlobalFightingManager.FightingP
 	match state:
 		GlobalFightingManager.FightingPhaseState.NORMAL:
 			_start_playback()
-		GlobalFightingManager.FightingPhaseState.FINISHED:
+		GlobalFightingManager.FightingPhaseState.CELEBRATION:
 			_stop_playback()
 
 
