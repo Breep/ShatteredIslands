@@ -23,14 +23,12 @@ const BATTLES_COMBINATION_DIC = {
 	5: [[Battle.BattleCategory.C2_PLAYERS_BATTLE, 
 			Battle.BattleCategory.C3_PLAYERS_BATTLE]],
 	6: [[Battle.BattleCategory.C2_PLAYERS_BATTLE, Battle.BattleCategory.C2_PLAYERS_BATTLE, Battle.BattleCategory.C2_PLAYERS_BATTLE],
-		[Battle.BattleCategory.C2_PLAYERS_BATTLE, Battle.BattleCategory.C4_PLAYERS_BATTLE],
-		[Battle.BattleCategory.C6_PLAYERS_BATTLE]],
+		[Battle.BattleCategory.C2_PLAYERS_BATTLE, Battle.BattleCategory.C4_PLAYERS_BATTLE]],
 	7: [[Battle.BattleCategory.C2_PLAYERS_BATTLE, Battle.BattleCategory.C2_PLAYERS_BATTLE, Battle.BattleCategory.C3_PLAYERS_BATTLE],
 		[Battle.BattleCategory.C4_PLAYERS_BATTLE, Battle.BattleCategory.C3_PLAYERS_BATTLE]],
-	8: [[Battle.BattleCategory.C8_PLAYERS_BATTLE]]
-	#8: [[Battle.BattleCategory.C2_PLAYERS_BATTLE, Battle.BattleCategory.C2_PLAYERS_BATTLE, Battle.BattleCategory.C2_PLAYERS_BATTLE, Battle.BattleCategory.C2_PLAYERS_BATTLE],
-		#[Battle.BattleCategory.C4_PLAYERS_BATTLE, Battle.BattleCategory.C4_PLAYERS_BATTLE],
-		#[Battle.BattleCategory.C8_PLAYERS_BATTLE]],
+	8: [[Battle.BattleCategory.C2_PLAYERS_BATTLE, Battle.BattleCategory.C2_PLAYERS_BATTLE, Battle.BattleCategory.C2_PLAYERS_BATTLE, Battle.BattleCategory.C2_PLAYERS_BATTLE],
+		[Battle.BattleCategory.C4_PLAYERS_BATTLE, Battle.BattleCategory.C4_PLAYERS_BATTLE],
+		[Battle.BattleCategory.C8_PLAYERS_BATTLE]],
 }
 
 # ============================== Private variables ==============================
