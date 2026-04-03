@@ -20,4 +20,4 @@ metadata/_custom_type_script = "uid://dv8w8kb4xsqp3"
 shape = SubResource("SphereShape3D_2a06m")
 
 [node name="MeteorVisual3D" parent="." unique_id=985001319 instance=ExtResource("3_3j240")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02045536, -1.1920929e-07, -0.4676051)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.02045536, -1.1920929e-07, -0.4676051)

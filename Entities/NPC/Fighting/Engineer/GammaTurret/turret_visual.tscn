@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bfodru53fpiv5"]
 
 [ext_resource type="Script" uid="uid://ww44my82nboj" path="res://Entities/NPC/Fighting/Engineer/GammaTurret/turret_visual.gd" id="1_6i5tp"]
-[ext_resource type="PackedScene" uid="uid://dmj4876piqnme" path="res://Data/Blender/Turret/turret_v2.blend" id="2_3s6x0"]
+[ext_resource type="PackedScene" uid="uid://bvctl4n1cv7if" path="res://Data/Blender/Turret/turret_v_2.tscn" id="2_3s6x0"]
 
 [node name="TurretVisual" type="Node3D" unique_id=592762260]
 script = ExtResource("1_6i5tp")

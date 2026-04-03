@@ -31,6 +31,10 @@ func _ready() -> void:
 		)
 	super._ready()
 	conditions.add_stack(Stack.Type.SHIELD, _shield, _master, &"Gamma Turret")
+	if _auto_attack_sender != null:
+		_auto_attack_sender.attack_started.connect(func(_lock_seconds: float) -> void:
+			(_visual_3d as TurretVisual).play_shoot_animation()
+		)
 
 func _on_died() -> void:
 	animation_hovering_module.stop_hover()
