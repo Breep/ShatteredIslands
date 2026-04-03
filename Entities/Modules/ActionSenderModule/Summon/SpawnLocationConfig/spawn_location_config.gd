@@ -61,6 +61,9 @@ func resolve(arena_zone_manager: ArenaZoneManager) -> Vector3:
 			if arena_zone_manager == null:
 				Verbose.error("ArenaZoneManager required for BETWEEN_CENTER", Verbose.Category.SPAWN_LOCATION_CONFIG)
 				return Vector3.ZERO
+			if not is_instance_valid(target_entity):
+				Verbose.error("target is <null>", Verbose.Category.SPAWN_LOCATION_CONFIG)
+				return Vector3.ZERO
 			var center: Vector3 = arena_zone_manager.get_center_zone_center()
 			return target_entity.global_position + (center - target_entity.global_position).normalized() * distance_from
 		

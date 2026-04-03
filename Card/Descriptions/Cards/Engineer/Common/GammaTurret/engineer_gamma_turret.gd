@@ -21,7 +21,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			var targets: Array[Entity] = ctx.hero.target_module.get_targets(TargetModule.MultipleTargettingStrategy.ALLIES)
 			var target: Entity = targets.filter(func(e:Entity) -> bool: return not e is GammaTurret).pick_random() #TODO rendre déterministe
 			
-			ctx.hero.summon_entity(Entity.EntityType.GAMMA_TURRET, SpawnLocationConfig.create_between_center(target, 2), {
+			ctx.hero.summon_entity(Entity.EntityType.GAMMA_TURRET, SpawnLocationConfig.create_entity_relative(target, 2), {
 				GammaTurret.Modifier.TURRET_AD: ad,
 				GammaTurret.Modifier.TURRET_SHIELD: shield,
 				GammaTurret.Modifier.MASTER: target

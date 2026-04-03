@@ -24,14 +24,22 @@ func _ready() -> void:
 func _input(event):
 	if event is InputEventKey and event.is_pressed():
 		if Input.is_action_pressed("scene_switch_0"): _set_island_active_only(buying_island)
-		if Input.is_action_pressed("scene_switch_1"): _set_island_active_only(fighting_islands[0])
-		if Input.is_action_pressed("scene_switch_2"): _set_island_active_only(fighting_islands[1])
-		if Input.is_action_pressed("scene_switch_3"): _set_island_active_only(fighting_islands[2])
-		if Input.is_action_pressed("scene_switch_4"): _set_island_active_only(fighting_islands[3])
-		if Input.is_action_pressed("scene_switch_5"): _set_island_active_only(fighting_islands[4])
-		#if Input.is_action_pressed("scene_switch_6"): _set_island_active_only(fighting_islands[5])
-		#if Input.is_action_pressed("scene_switch_7"): _set_island_active_only(fighting_islands[6])
-		#if Input.is_action_pressed("scene_switch_8"): _set_island_active_only(fighting_islands[7])
+		if Input.is_action_pressed("scene_switch_1"): 
+			if fighting_islands.size() > 0: _set_island_active_only(fighting_islands[0])
+		if Input.is_action_pressed("scene_switch_2"):
+			if fighting_islands.size() > 1: _set_island_active_only(fighting_islands[1])
+		if Input.is_action_pressed("scene_switch_3"):
+			if fighting_islands.size() > 2: _set_island_active_only(fighting_islands[2])
+		if Input.is_action_pressed("scene_switch_4"):
+			if fighting_islands.size() > 3: _set_island_active_only(fighting_islands[3])
+		if Input.is_action_pressed("scene_switch_5"):
+			if fighting_islands.size() > 4: _set_island_active_only(fighting_islands[4])
+		if Input.is_action_pressed("scene_switch_6"):
+			if fighting_islands.size() > 5: _set_island_active_only(fighting_islands[5])
+		if Input.is_action_pressed("scene_switch_7"):
+			if fighting_islands.size() > 6: _set_island_active_only(fighting_islands[6])
+		if Input.is_action_pressed("scene_switch_8"):
+			if fighting_islands.size() > 7: _set_island_active_only(fighting_islands[7])
 		if Input.is_action_pressed("change_camera_free_fly"): printerr("Removed for now")
 
 # ============================== Private functions ==============================

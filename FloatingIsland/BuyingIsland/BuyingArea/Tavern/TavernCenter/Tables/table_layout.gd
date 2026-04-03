@@ -19,6 +19,8 @@ func set_active(battles: Array[Battle]) -> void:
 				table.connect_to_players(battle.players)
 				battles_duplicate.erase(battle)
 				break
+			else:
+				Verbose.error("Battle type mismatch " + str(Battle.BattleType.keys()[battle.battle_type]), Verbose.Category.TABLE)
 
 
 func set_inactive() -> void:

@@ -8,9 +8,9 @@
 
 [node name="Table_4v4" type="Node3D" unique_id=198760588 node_paths=PackedStringArray("_coin_piles", "_hero_spawns")]
 script = ExtResource("1_sfkiq")
-_coin_piles = [NodePath("Player1/CoinPile1"), NodePath("Player2/CoinPile2"), NodePath("Player3/CoinPile3"), NodePath("Player4/CoinPile4"), NodePath("Player5/CoinPile5"), NodePath("Player6/CoinPile6")]
-_hero_spawns = [NodePath("Player1/SpawnPoint1"), NodePath("Player2/SpawnPoint2"), NodePath("Player3/SpawnPoint3"), NodePath("Player4/SpawnPoint4"), NodePath("Player5/SpawnPoint5"), NodePath("Player6/SpawnPoint6")]
-battle_type = 2
+_coin_piles = [NodePath("Player1/CoinPile1"), NodePath("Player2/CoinPile2"), NodePath("Player3/CoinPile3"), NodePath("Player4/CoinPile4"), NodePath("Player5/CoinPile5"), NodePath("Player6/CoinPile6"), NodePath("Player7/CoinPile7"), NodePath("Player8/CoinPile8")]
+_hero_spawns = [NodePath("Player1/SpawnPoint1"), NodePath("Player2/SpawnPoint2"), NodePath("Player3/SpawnPoint3"), NodePath("Player4/SpawnPoint4"), NodePath("Player5/SpawnPoint5"), NodePath("Player6/SpawnPoint6"), NodePath("Player7/SpawnPoint7"), NodePath("Player8/SpawnPoint8")]
+battle_type = 3
 
 [node name="Player1" type="Node3D" parent="." unique_id=603083057]
 transform = Transform3D(0.34516686, 0, 0.9385412, 0, 1, 0, -0.9385412, 0, 0.34516686, -0.41199464, 0, 1.8617489)
@@ -20,7 +20,7 @@ transform = Transform3D(-0.191134, 0, -0.35138, 0, 0.4, 0, 0.35138, 0, -0.191134
 
 [node name="SpawnPoint1" parent="Player1" unique_id=1352013638 instance=ExtResource("3_mc8ga")]
 transform = Transform3D(-0.909353, 0, -0.416027, 0, 1, 0, 0.416027, 0, -0.909353, -1.18796, 0, -0.670704)
-team = 2
+team = 1
 
 [node name="Player2" type="Node3D" parent="." unique_id=1218576618]
 transform = Transform3D(0.570886, 0, 0.82103, 0, 1, 0, -0.82103, 0, 0.570886, -0.95591164, 0, 1.5346483)
@@ -30,7 +30,7 @@ transform = Transform3D(-0.191134, 0, -0.35138, 0, 0.4, 0, 0.35138, 0, -0.191134
 
 [node name="SpawnPoint2" parent="Player2" unique_id=35056566 instance=ExtResource("3_mc8ga")]
 transform = Transform3D(-0.79833, 0, -0.60222, 0, 1, 0, 0.60222, 0, -0.79833, -0.225115, 0, -1.17767)
-team = 2
+team = 1
 
 [node name="Player3" type="Node3D" parent="." unique_id=1529182350]
 transform = Transform3D(-0.47965655, 0, -0.87745607, 0, 1, 0, 0.87745607, 0, -0.47965655, -0.9357474, 0, -1.1191096)
@@ -60,7 +60,7 @@ transform = Transform3D(0.256875, 0, 0.306619, 0, 0.4, 0, -0.306619, 0, 0.256875
 
 [node name="SpawnPoint5" parent="Player5" unique_id=859854180 instance=ExtResource("3_mc8ga")]
 transform = Transform3D(0.967846, 0, 0.251546, 0, 1, 0, -0.251546, 0, 0.967846, -0.139768, 0, 1.20612)
-team = 1
+team = 2
 
 [node name="Player6" type="Node3D" parent="." unique_id=150915375]
 transform = Transform3D(0.546204, 0, 0.83765197, 0, 1, 0, -0.83765197, 0, 0.546204, 1.0219738, 0, 0.065826416)
@@ -70,27 +70,27 @@ transform = Transform3D(0.256875, 0, 0.306619, 0, 0.4, 0, -0.306619, 0, 0.256875
 
 [node name="SpawnPoint6" parent="Player6" unique_id=1639639416 instance=ExtResource("3_mc8ga")]
 transform = Transform3D(0.967846, 0, 0.251546, 0, 1, 0, -0.251546, 0, 0.967846, -0.139768, 0, 1.20612)
-team = 1
+team = 2
 
 [node name="Player7" type="Node3D" parent="." unique_id=406088046]
 transform = Transform3D(0.29702458, 0, 0.9548696, 0, 1, 0, -0.9548696, 0, 0.29702458, 0.78898406, 0, -1.4779049)
 
-[node name="CoinPile5" parent="Player7" unique_id=1511293416 instance=ExtResource("2_8hv5r")]
+[node name="CoinPile7" parent="Player7" unique_id=1511293416 instance=ExtResource("2_8hv5r")]
 transform = Transform3D(0.256875, 0, 0.306619, 0, 0.4, 0, -0.306619, 0, 0.256875, -0.621477, 0.910745, 0.601646)
 
-[node name="SpawnPoint5" parent="Player7" unique_id=1195596023 instance=ExtResource("3_mc8ga")]
+[node name="SpawnPoint7" parent="Player7" unique_id=1195596023 instance=ExtResource("3_mc8ga")]
 transform = Transform3D(0.967846, 0, 0.251546, 0, 1, 0, -0.251546, 0, 0.967846, -0.139768, 0, 1.20612)
-team = 1
+team = 2
 
 [node name="Player8" type="Node3D" parent="." unique_id=2076569632]
 transform = Transform3D(-0.051028937, 0, 0.9986971, 0, 1, 0, -0.9986971, 0, -0.051028937, 0.01828885, 0, -2.9097838)
 
-[node name="CoinPile6" parent="Player8" unique_id=689351043 instance=ExtResource("2_8hv5r")]
+[node name="CoinPile8" parent="Player8" unique_id=689351043 instance=ExtResource("2_8hv5r")]
 transform = Transform3D(0.256875, 0, 0.306619, 0, 0.4, 0, -0.306619, 0, 0.256875, -0.621477, 0.910745, 0.601646)
 
-[node name="SpawnPoint6" parent="Player8" unique_id=892275207 instance=ExtResource("3_mc8ga")]
+[node name="SpawnPoint8" parent="Player8" unique_id=892275207 instance=ExtResource("3_mc8ga")]
 transform = Transform3D(0.967846, 0, 0.251546, 0, 1, 0, -0.251546, 0, 0.967846, -0.139768, 0, 1.20612)
-team = 1
+team = 2
 
 [node name="Entities" type="Node3D" parent="." unique_id=198612863]
 unique_name_in_owner = true

@@ -20,7 +20,7 @@ transform = Transform3D(-0.191134, 0, -0.35138, 0, 0.4, 0, 0.35138, 0, -0.191134
 
 [node name="SpawnPoint1" parent="Player1" unique_id=1352013638 instance=ExtResource("3_gurup")]
 transform = Transform3D(-0.909353, 0, -0.416027, 0, 1, 0, 0.416027, 0, -0.909353, -1.18796, 0, -0.670704)
-team = 2
+team = 1
 
 [node name="Player2" type="Node3D" parent="." unique_id=1218576618]
 transform = Transform3D(0.570886, 0, 0.82103, 0, 1, 0, -0.82103, 0, 0.570886, 0, 0, 0.5348848)
@@ -30,7 +30,7 @@ transform = Transform3D(-0.191134, 0, -0.35138, 0, 0.4, 0, 0.35138, 0, -0.191134
 
 [node name="SpawnPoint2" parent="Player2" unique_id=35056566 instance=ExtResource("3_gurup")]
 transform = Transform3D(-0.79833, 0, -0.60222, 0, 1, 0, 0.60222, 0, -0.79833, -0.225115, 0, -1.17767)
-team = 2
+team = 1
 
 [node name="Player3" type="Node3D" parent="." unique_id=1529182350]
 transform = Transform3D(-0.47965655, 0, -0.87745607, 0, 1, 0, 0.87745607, 0, -0.47965655, -0.0132603645, 0, -1.7344403)
@@ -50,7 +50,7 @@ transform = Transform3D(0.256875, 0, 0.306619, 0, 0.4, 0, -0.306619, 0, 0.256875
 
 [node name="SpawnPoint4" parent="Player4" unique_id=1394984420 instance=ExtResource("3_gurup")]
 transform = Transform3D(0.967846, 0, 0.251546, 0, 1, 0, -0.251546, 0, 0.967846, -0.139768, 0, 1.20612)
-team = 1
+team = 2
 
 [node name="Entities" type="Node3D" parent="." unique_id=198612863]
 unique_name_in_owner = true
@@ -63,7 +63,7 @@ transform = Transform3D(0.256875, 0, 0.306619, 0, 0.4, 0, -0.306619, 0, 0.256875
 
 [node name="SpawnPoint5" parent="Player5" unique_id=859854180 instance=ExtResource("3_gurup")]
 transform = Transform3D(0.967846, 0, 0.251546, 0, 1, 0, -0.251546, 0, 0.967846, -0.139768, 0, 1.20612)
-team = 1
+team = 2
 
 [node name="Player6" type="Node3D" parent="." unique_id=150915375]
 transform = Transform3D(0.546204, 0, 0.83765197, 0, 1, 0, -0.83765197, 0, 0.546204, 0.13923931, 0, -2.022221)
@@ -73,7 +73,7 @@ transform = Transform3D(0.256875, 0, 0.306619, 0, 0.4, 0, -0.306619, 0, 0.256875
 
 [node name="SpawnPoint6" parent="Player6" unique_id=1639639416 instance=ExtResource("3_gurup")]
 transform = Transform3D(0.967846, 0, 0.251546, 0, 1, 0, -0.251546, 0, 0.967846, -0.139768, 0, 1.20612)
-team = 1
+team = 2
 
 [node name="Table" parent="." unique_id=1760235908 instance=ExtResource("4_xyqci")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.67, 0, 0, 0)

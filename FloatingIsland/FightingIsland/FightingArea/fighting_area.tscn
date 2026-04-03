@@ -27,7 +27,9 @@ _arena_zone_manager = NodePath("ArenaZoneManager")
 _fighting_floors = {
 0: NodePath("FightingFloorTemplates/FightingFloor_1v1"),
 1: NodePath("FightingFloorTemplates/FightingFloor_2v2"),
-2: NodePath("FightingFloorTemplates/FightingFloor_ffa13")
+2: NodePath("FightingFloorTemplates/FightingFloor_3v3"),
+3: NodePath("FightingFloorTemplates/FightingFloor_4v4"),
+4: NodePath("FightingFloorTemplates/FightingFloor_ffa13")
 }
 
 [node name="EntityManager" parent="." unique_id=1828737280 node_paths=PackedStringArray("_fighting_area", "_scanner_area") instance=ExtResource("2_wtb7j")]
