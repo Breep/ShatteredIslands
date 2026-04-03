@@ -8,7 +8,7 @@
 script = ExtResource("1_u73hx")
 _shield_threshold = Array[float]([100.0, 100.0, 100.0, 100.0, 100.0])
 _attacks_count = Array[float]([1.0, 1.0, 1.0, 1.0, 1.0])
-_damage_percent = Array[float]([120.0, 150.0, 180.0, 210.0, 250.0])
+_damage_percent = Array[float]([100.0, 150.0, 200.0, 250.0, 300.0])
 metadata/_custom_type_script = "uid://bmb03fcdh2kgs"
 
 [resource]

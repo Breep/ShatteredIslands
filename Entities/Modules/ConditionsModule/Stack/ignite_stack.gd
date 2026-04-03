@@ -6,7 +6,7 @@ extends SimpleStack
 
 const IGNITE_DECAY_PERCENT: float = 15.0
 
-const IGNITE_DECAY_MIN: int = 5
+const IGNITE_DECAY_MIN: int = 1
 const IGNITE_DECAY_MAX: int = 10000
 
 func tick() -> float:
