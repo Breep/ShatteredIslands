@@ -248,7 +248,9 @@ func _battle_start_chicken_spawn() -> void:
 				TRex.Modifier.HP_BONUS: 1000
 		})
 	else:
-		_spawn_n_chickens(P_START_CHICKENS[level])
+		_spawn_n_chickens(P_START_CHICKENS[level] + _chicken_lord_stats.spawn_number_increase)
+		
+		
 #endregion
 
 

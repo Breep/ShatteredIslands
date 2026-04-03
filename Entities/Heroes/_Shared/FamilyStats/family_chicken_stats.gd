@@ -18,7 +18,7 @@ var on_chicken_death_callbacks: Array[Callable]
 
 var spawn_period_decrease: float
 var gifted_chance_increase: float
-var spawn_number_increase: int
+var spawn_number_increase: int = 0
 
 var dodge_inherited: float
 var spawn_trex_on_start: bool
