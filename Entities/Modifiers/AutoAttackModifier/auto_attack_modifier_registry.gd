@@ -6,14 +6,6 @@ var _auto_attack_modifiers: Dictionary[StringName, AutoAttackModifier]
 # ============================== Public functions ==============================
 
 func register_modifier(modifier: AutoAttackModifier) -> void:
-	if _auto_attack_modifiers.has(modifier.id):
-		printerr("StatModifierDictionary: register_modifier() - already known stat modifier \"", modifier.id, "\" [", get_path(), "]")
-		return
-	
-	_auto_attack_modifiers[modifier.id] = modifier
-
-
-func update_modifier(modifier: AutoAttackModifier) -> void:
 	_auto_attack_modifiers[modifier.id] = modifier
 
 
