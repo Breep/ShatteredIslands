@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://dbg5i1sglgh5g" path="res://UI/Tool/Misc/hover_boost_button.gd" id="3_6kn6i"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="3_x0odd"]
 [ext_resource type="PackedScene" uid="uid://35y1xxq6dqc5" path="res://Tool/Cameras/CenterPointCamera/center_point_camera.tscn" id="4_egh8k"]
-[ext_resource type="Resource" uid="uid://c88cqm481bhcu" path="res://Card/Descriptions/Cards/Engineer/Common/ShieldRush/engineer_shield_rush.tres" id="4_xwdjj"]
 [ext_resource type="Script" uid="uid://nkraydv4mdse" path="res://Card/Templates/player_deck.gd" id="5_ywmf2"]
 [ext_resource type="Script" uid="uid://bf01q5yq3glxi" path="res://Entities/Stats/EntityStats/entity_stats.gd" id="6_3bpsj"]
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="6_egh8k"]
@@ -22,7 +21,6 @@
 
 [sub_resource type="Resource" id="Resource_rw3ih"]
 script = ExtResource("5_ywmf2")
-_active_cards = Array[ExtResource("3_x0odd")]([ExtResource("4_xwdjj")])
 metadata/_custom_type_script = "uid://nkraydv4mdse"
 
 [sub_resource type="Resource" id="Resource_ycdli"]
@@ -92,9 +90,6 @@ unique_name_in_owner = true
 [node name="DarkKnight1" parent="Node3D/Entities" unique_id=353718081 node_paths=PackedStringArray("_spawn_manager", "_arena_zone_manager") instance=ExtResource("1_icvx6")]
 transform = Transform3D(0.9946579, 0, 0.10322651, 0, 1, 0, -0.10322651, 0, 0.9946579, 0.07346773, -4.7683716e-07, 7.8182755)
 _custom_deck = SubResource("Resource_rw3ih")
-_override_family_levels = Dictionary[int, int]({
-3: 2
-})
 _custom_data_memory = {
 &"ChickenLord": {
 &"Ancestral Gauge": 200.0
