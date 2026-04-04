@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://i6mui4bkx4tx"]
 
-[ext_resource type="PackedScene" uid="uid://b5qwqiwgoqcdp" path="res://Entities/NPC/Fighting/Engineer/ProtoShield/_shield_16.tscn" id="1_vh1xw"]
+[ext_resource type="PackedScene" uid="uid://bclst33x1segi" path="res://Entities/NPC/Fighting/Engineer/ProtoShield/shield_proto_animated.tscn" id="1_vh1xw"]
 
 [node name="ProtoShieldVisual" type="Node3D" unique_id=1980159794]
 
-[node name="_shield_16" parent="." unique_id=18036579 instance=ExtResource("1_vh1xw")]
-transform = Transform3D(2.4941964, 0, 0, 0, 3.42841, 0, 0, 0, 1, -0.0064508915, -1.6941402, 0.044584394)
+[node name="shield_proto" parent="." unique_id=1848716056 instance=ExtResource("1_vh1xw")]

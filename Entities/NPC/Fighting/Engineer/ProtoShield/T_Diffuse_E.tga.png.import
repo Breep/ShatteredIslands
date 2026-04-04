@@ -2,20 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ehrlmf4n04vi"
-path.s3tc="res://.godot/imported/titan_axe_Dungeons_2_Texture_04_C.png-a42fcf997fe6b97987c96b3b57a03a12.s3tc.ctex"
+uid="uid://dpbsdn5boh65l"
+path.s3tc="res://.godot/imported/T_Diffuse_E.tga.png-0ec63bb32fd74f8ec0990716dab66dd1.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
-generator_parameters={
-"md5": "5c0685d9497973b386c50d9ecc45dcb8"
-}
 
 [deps]
 
-source_file="res://SpellsAndProjectiles/Spells/TitanAxe/Visual/titan_axe_Dungeons_2_Texture_04_C.png"
-dest_files=["res://.godot/imported/titan_axe_Dungeons_2_Texture_04_C.png-a42fcf997fe6b97987c96b3b57a03a12.s3tc.ctex"]
+source_file="res://Entities/NPC/Fighting/Engineer/ProtoShield/T_Diffuse_E.tga.png"
+dest_files=["res://.godot/imported/T_Diffuse_E.tga.png-0ec63bb32fd74f8ec0990716dab66dd1.s3tc.ctex"]
 
 [params]
 

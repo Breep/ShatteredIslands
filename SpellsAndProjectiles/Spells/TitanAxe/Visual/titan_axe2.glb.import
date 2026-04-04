@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cmqtj4iuywqtt"
-path="res://.godot/imported/titan_axe.glb-1e03ee8aebe74484c0b6cdb2a91dcfe4.scn"
+uid="uid://df73hfbv74ny6"
+path="res://.godot/imported/titan_axe2.glb-d588edc7b66596380b2d2b970af83520.scn"
 
 [deps]
 
-source_file="res://SpellsAndProjectiles/Spells/TitanAxe/Visual/titan_axe.glb"
-dest_files=["res://.godot/imported/titan_axe.glb-1e03ee8aebe74484c0b6cdb2a91dcfe4.scn"]
+source_file="res://SpellsAndProjectiles/Spells/TitanAxe/Visual/titan_axe2.glb"
+dest_files=["res://.godot/imported/titan_axe2.glb-d588edc7b66596380b2d2b970af83520.scn"]
 
 [params]
 

@@ -18,8 +18,8 @@ func update_beam(from_pos: Vector3, to_pos: Vector3) -> void:
 
 func blink() -> void:
 	if _material == null: return
-	var original_color: Color = _material.get_shader_parameter("global_color")
-	var flash_color: Color = original_color * 4.0 
+	var original_intensity: float = _material.get_shader_parameter("core_intensity")
+	var flash_intensity: float = original_intensity * 3.0
 	var tween = create_tween()
-	tween.tween_property(_material, "shader_parameter/global_color", flash_color, 0.1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	tween.tween_property(_material, "shader_parameter/global_color", original_color, 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(_material, "shader_parameter/core_intensity", flash_intensity, 0.1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tween.tween_property(_material, "shader_parameter/core_intensity", original_intensity, 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)

@@ -6,6 +6,5 @@
 [node name="TitanAxeVisual" type="Node3D" unique_id=816461962]
 script = ExtResource("1_script")
 
-[node name="titan_axe" parent="." unique_id=860745303 instance=ExtResource("2_aa5hm")]
-unique_name_in_owner = true
-transform = Transform3D(-1, -8.742278e-08, 0, 8.511297e-08, -0.97357893, -0.22835086, 1.9963066e-08, -0.22835086, 0.97357893, 0, 2.027271, 0.287292)
+[node name="titan_axe" parent="." unique_id=1752327160 instance=ExtResource("2_aa5hm")]
+transform = Transform3D(-1.5, 1.3113416e-07, 0, -1.3113416e-07, -1.5, 0, 0, 0, 1.5, 0, 2.4499261, 0)
