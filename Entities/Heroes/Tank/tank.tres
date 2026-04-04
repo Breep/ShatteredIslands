@@ -1,0 +1,54 @@
+[gd_resource type="Resource" script_class="HeroDesc" format=3 uid="uid://bnf0l5gnqf0y4"]
+
+[ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://Entities/Heroes/_Shared/hero_desc.gd" id="1_desc"]
+[ext_resource type="Texture2D" uid="uid://difeq0pm3hgjs" path="res://Entities/Heroes/DarkKnight/Data/darkknight_portrait.png" id="1_port"]
+[ext_resource type="Script" uid="uid://2py6kv5aqgem" path="res://Entities/Heroes/_Shared/hero_stats.gd" id="2_stats"]
+[ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://Entities/Heroes/_Shared/skill.gd" id="3_m7p0l"]
+[ext_resource type="Resource" uid="uid://bulji3na650gb" path="res://Entities/Heroes/DarkKnight/Skills/b1_spark_of_light.tres" id="20_sk1"]
+[ext_resource type="Resource" uid="uid://bts22443uo7i3" path="res://Entities/Heroes/DarkKnight/Skills/b2_corruption.tres" id="21_sk2"]
+[ext_resource type="Resource" uid="uid://tws8irvjtsk8" path="res://Entities/Heroes/DarkKnight/Skills/s1_pain.tres" id="22_sk3"]
+[ext_resource type="Resource" uid="uid://budjocpe7prm0" path="res://Entities/Heroes/DarkKnight/Skills/s2_cataclysm.tres" id="23_sk4"]
+[ext_resource type="Resource" uid="uid://b0xsyfnk0uofn" path="res://Entities/Heroes/DarkKnight/Skills/g1_mana_strike.tres" id="24_sk5"]
+[ext_resource type="Resource" uid="uid://vkyl862t2h5d" path="res://Entities/Heroes/DarkKnight/Skills/g2_mega_strike.tres" id="25_sk6"]
+[ext_resource type="Resource" uid="uid://dwgxfevvu8dti" path="res://Entities/Heroes/DarkKnight/Skills/p_super_strike.tres" id="26_sk7"]
+[ext_resource type="Resource" uid="uid://dbsddpfwj0xba" path="res://Entities/Heroes/DarkKnight/Skills/u_dark_storm.tres" id="27_sk8"]
+[ext_resource type="Resource" uid="uid://djrb1hkxbhhwv" path="res://Entities/Heroes/Tank/Stats/tank_lvl_1.tres" id="5_diotd"]
+[ext_resource type="Resource" uid="uid://d3tchescknl4p" path="res://Entities/Heroes/Tank/Stats/tank_lvl_2.tres" id="6_mvxex"]
+[ext_resource type="Resource" uid="uid://bnvmtii6ep4au" path="res://Entities/Heroes/Tank/Stats/tank_lvl_3.tres" id="7_e15y4"]
+[ext_resource type="Resource" uid="uid://jgedfxc8dpid" path="res://Entities/Heroes/Tank/Stats/tank_lvl_4.tres" id="8_m0uxl"]
+[ext_resource type="Resource" uid="uid://cwnbmpbo13jkb" path="res://Entities/Heroes/Tank/Stats/tank_lvl_5.tres" id="9_24woa"]
+[ext_resource type="Resource" uid="uid://c8ghr5c223p3" path="res://Entities/Heroes/Tank/Stats/tank_lvl_6.tres" id="10_1vgoy"]
+[ext_resource type="Resource" uid="uid://bj0rt5bmqi8nx" path="res://Entities/Heroes/Tank/Stats/tank_lvl_7.tres" id="11_iux3w"]
+[ext_resource type="Resource" uid="uid://bjc5le3fetv4s" path="res://Entities/Heroes/Tank/Stats/tank_lvl_8.tres" id="12_lienp"]
+[ext_resource type="Resource" uid="uid://dtdskkmdxckfp" path="res://Entities/Heroes/Tank/Stats/tank_lvl_9.tres" id="13_x33rx"]
+[ext_resource type="Resource" uid="uid://bpxiyosvaju2v" path="res://Entities/Heroes/Tank/Stats/tank_lvl_10.tres" id="14_jiu6c"]
+
+[resource]
+script = ExtResource("1_desc")
+name = "Tank"
+id = 2
+portrait = ExtResource("1_port")
+description = "Un guerrier massif avec une defense impenetrable."
+stats = Dictionary[int, ExtResource("2_stats")]({
+1: ExtResource("5_diotd"),
+2: ExtResource("6_mvxex"),
+3: ExtResource("7_e15y4"),
+4: ExtResource("8_m0uxl"),
+5: ExtResource("9_24woa"),
+6: ExtResource("10_1vgoy"),
+7: ExtResource("11_iux3w"),
+8: ExtResource("12_lienp"),
+9: ExtResource("13_x33rx"),
+10: ExtResource("14_jiu6c")
+})
+skills = Dictionary[int, ExtResource("3_m7p0l")]({
+0: ExtResource("20_sk1"),
+1: ExtResource("21_sk2"),
+2: ExtResource("22_sk3"),
+3: ExtResource("23_sk4"),
+4: ExtResource("24_sk5"),
+5: ExtResource("25_sk6"),
+6: ExtResource("26_sk7"),
+7: ExtResource("27_sk8")
+})
+metadata/_custom_type_script = "uid://dtcjta70luxvr"
