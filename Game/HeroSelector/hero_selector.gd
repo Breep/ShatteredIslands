@@ -78,6 +78,9 @@ func _init_current_game_heroes() -> void:
 		#heroes_ref.remove_at(random_index)
 
 	_random_heroes_ref.append(HeroDesc.HeroId.DARK_KNIGHT)
+	_random_heroes_ref.append(HeroDesc.HeroId.TANK)
+	_random_heroes_ref.append(HeroDesc.HeroId.ASSASSIN)
+	_random_heroes_ref.append(HeroDesc.HeroId.MAGE)
 	_heroes_choosen.emit()
 	_game_heroes_ready = true
 

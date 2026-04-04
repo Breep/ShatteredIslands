@@ -6,6 +6,9 @@ extends Resource
 enum HeroId {
 	UNDEF,
 	DARK_KNIGHT,
+	TANK,
+	ASSASSIN,
+	MAGE,
 }
 
 # ============================== Export ==============================
