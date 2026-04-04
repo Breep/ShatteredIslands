@@ -30,16 +30,16 @@ id = 1
 portrait = ExtResource("1_aqqbn")
 description = "bla bla bla"
 stats = Dictionary[int, ExtResource("3_hluaq")]({
-0: ExtResource("13_ec2v6"),
-1: ExtResource("14_4eec3"),
-2: ExtResource("15_bdgmw"),
-3: ExtResource("16_gdfuu"),
-4: ExtResource("17_g8upe"),
-5: ExtResource("18_mgv6c"),
-6: ExtResource("19_x2tno"),
-7: ExtResource("20_kuyv4"),
-8: ExtResource("21_glle3"),
-9: ExtResource("22_4dncs")
+1: ExtResource("13_ec2v6"),
+2: ExtResource("14_4eec3"),
+3: ExtResource("15_bdgmw"),
+4: ExtResource("16_gdfuu"),
+5: ExtResource("17_g8upe"),
+6: ExtResource("18_mgv6c"),
+7: ExtResource("19_x2tno"),
+8: ExtResource("20_kuyv4"),
+9: ExtResource("21_glle3"),
+10: ExtResource("22_4dncs")
 })
 skills = Dictionary[int, ExtResource("4_f1ben")]({
 0: ExtResource("4_ec2v6"),
