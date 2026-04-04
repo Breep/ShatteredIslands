@@ -87,7 +87,7 @@ func _process_single_hero(hero_id: String, entries: Array) -> void:
 	# Injection dans ton fichier HeroDesc (Livre complet)
 		# Note : on utilise .stats (minuscule) comme dans ton code source
 		var loaded_stats = ResourceLoader.load(final_stats_path)
-		main_hero_res.stats[level - 1] = loaded_stats
+		main_hero_res.stats[level] = loaded_stats
 		
 	# Sauvegarde finale du HeroDesc
 	ResourceSaver.save(main_hero_res, main_res_path)
