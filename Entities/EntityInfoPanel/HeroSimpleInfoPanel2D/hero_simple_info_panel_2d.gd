@@ -171,7 +171,8 @@ func _update_stack_label(new_value: float, label: Label) -> void:
 		label.show()
 	else:
 		label.hide()
-		
+
+
 func _update_block_label(new_value: float) -> void:
 	if _block_label == null: return
 	if new_value > 0:
@@ -183,6 +184,7 @@ func _update_block_label(new_value: float) -> void:
 		_block_label.hide()
 		_block_texture.hide()
 		_block_bar.hide()
+
 
 func _update_taunt_visual(is_active: bool, duration: float, infinite: bool) -> void:
 	if is_active and is_instance_valid(_info_panel_spawn):
