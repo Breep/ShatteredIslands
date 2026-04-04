@@ -174,6 +174,7 @@ var _spawn_ticks_remaining: int = -1
 @export_subgroup("Visual")
 @export var _visual_3d: Node3D # Visual node for spawn animation
 @export var _health_bar_marker: Marker3D
+@export var _health_bar: SimpleInfoPanel2D
 @export var _attack_spawn_marker: Marker3D
 @export var _projectile_type: Projectile.Type
 
@@ -672,7 +673,7 @@ func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, n
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			Events.entity_clicked.emit(self)
 			Verbose.debug("L'entité " + entity_name + " a été cliquée !", Verbose.Category.ENTITY)
-			_play_on_click_animation()
+			#_play_on_click_animation()
 			_play_click_marker_animation()
 
 
@@ -731,8 +732,10 @@ func deselect() -> void:
 func _on_mouse_entered() -> void:
 	_is_hovered = true
 	_update_selection_marker()
+	Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
 
 
 func _on_mouse_exited() -> void:
 	_is_hovered = false
 	_update_selection_marker()
+	Input.set_default_cursor_shape(Input.CURSOR_ARROW)

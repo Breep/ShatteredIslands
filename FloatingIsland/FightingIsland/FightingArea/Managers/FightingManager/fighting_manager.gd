@@ -102,14 +102,15 @@ func _is_only_one_team_alive() -> bool:
 	return teams_alived_counter == 1
 
 
-# return Dictionary[team_id, total_hp]
+# return Dictionary[team_id, total_hp_percent]
 func _get_teams_total_hp() -> Dictionary[int, float]:
 	var teams_total_hp: Dictionary[int, float]
 	for team_id in _heroes_dictionary.keys():
 		teams_total_hp[team_id] = 0
 		for member in _heroes_dictionary[team_id]:
 			var hero: Hero = member
-			teams_total_hp[team_id] += hero.stats.health
+			if hero.stats.health_max > 0:
+				teams_total_hp[team_id] += hero.stats.health / hero.stats.health_max
 	return teams_total_hp
 
 

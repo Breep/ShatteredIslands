@@ -158,6 +158,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0.3180198, 0.31801978, 0.31801975, 1)
 
 [node name="GridBar" type="ColorRect" parent="MainVBox/HealthAndShield/HealthBar" unique_id=205852776]
@@ -207,6 +208,7 @@ offset_top = -13.0
 offset_right = 5.0
 offset_bottom = 7.0
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="BlockTextureRect" type="TextureRect" parent="MainVBox/HealthAndShield/Control" unique_id=1271905889]
 unique_name_in_owner = true
@@ -216,6 +218,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("4_j1x4h")
 expand_mode = 1
 

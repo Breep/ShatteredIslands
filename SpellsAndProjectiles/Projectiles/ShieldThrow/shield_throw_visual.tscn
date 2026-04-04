@@ -49,7 +49,7 @@ size = Vector2(0.08, 0.08)
 [node name="ShieldThrowVisual" type="Node3D" unique_id=663055214]
 
 [node name="_shield_2" parent="." unique_id=501651574 instance=ExtResource("1_78y8l")]
-transform = Transform3D(1.5, 0, 0, 0, -6.556708e-08, 1.5, 0, -1.5, -6.556708e-08, 0.00023810565, 0, 0.3184192)
+transform = Transform3D(1, 0, 0, 0, 2.9802322e-08, 1, 0, -1, 2.9802322e-08, 0, 0, 0)
 
 [node name="AnimRotatingModule" parent="_shield_2" unique_id=1728177371 node_paths=PackedStringArray("_owner") instance=ExtResource("2_w0q37")]
 _owner = NodePath("..")
