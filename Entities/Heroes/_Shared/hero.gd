@@ -156,15 +156,10 @@ func _on_fighting_state_changed(new_fighting_state: FightingState) -> void:
 
 #region ============================== Private ==============================
 func _apply_display_mode() -> void:
-	match display_mode:
-		DisplayMode.BUYING_PHASE, DisplayMode.PREVIEW:
-			pass # TODO name only
-		DisplayMode.FIGHTING_PHASE:
-			pass # TODO all health bar
-
-	# Update animator (weapons + animations)
 	if _hero_animation != null:
 		_hero_animation.apply_display_mode(display_mode)
+	if _health_bar != null:
+		_health_bar.apply_display_mode(display_mode)
 
 
 func _compute_family_levels() -> void:

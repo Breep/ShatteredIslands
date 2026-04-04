@@ -1,10 +1,11 @@
 class_name HeroSimpleInfoPanel2D
-extends Control
+extends SimpleInfoPanel2D
 
 #region ============================== Export ==============================
 @export_group("External Nodes")
 @export var _hero_entity: Hero
 @export var _info_panel_spawn: Marker3D
+@export var _info_panel_spawn_tavern: Marker3D
 #endregion
 
 @onready var _health_bar: ColorRect = %HealthBar
@@ -29,6 +30,7 @@ extends Control
 @onready var _player_name_label: RichTextLabel = %PlayerNameLabel
 
 var _taunt_visual: Node3D
+var _current_spawn: Marker3D
 const TAUNT_VISUAL_SCENE: PackedScene = preload("res://Entities/EntityInfoPanel/_Shared/taunt_status_visual.tscn")
 
 #region ============================== Node base functions ==============================
@@ -84,8 +86,8 @@ func _exit_tree() -> void:
 
 func _process(_delta: float) -> void:
 	var camera = get_viewport().get_camera_3d()
-	if camera != null and _info_panel_spawn != null:
-		position = camera.unproject_position(_info_panel_spawn.global_position) + Vector2(-size.x / 2, 0)
+	if camera != null and _current_spawn != null:
+		position = camera.unproject_position(_current_spawn.global_position) + Vector2(-size.x / 2, 0)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -115,6 +117,15 @@ func setup_grid_bar(small_block: int, big_block: int) -> void:
 		_grid_bar.material.set_shader_parameter("Step_Y_Height", 1)
 	else:
 		_grid_bar.material.set_shader_parameter("Step_Y_Height", 0)
+
+
+func apply_display_mode(display_mode: Hero.DisplayMode) -> void:
+	match display_mode:
+		Hero.DisplayMode.BUYING_PHASE:
+			_current_spawn = _info_panel_spawn_tavern
+			_mana_bar.hide()
+		Hero.DisplayMode.FIGHTING_PHASE:
+			_current_spawn = _info_panel_spawn
 #endregion
 
 #region ============================== Private API ==============================
