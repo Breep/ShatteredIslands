@@ -50,6 +50,9 @@ unique_name_in_owner = true
 [node name="SM_Prop_Table_Barrel_01_004" parent="Table" index="1" unique_id=799908746]
 visible = true
 
+[node name="SM_Prop_Table_Wood_04_012" parent="Table" index="3" unique_id=1676315498]
+visible = false
+
 [node name="Torch" parent="Table" unique_id=414244761 instance=ExtResource("6_det8y")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.959944, 0)
 

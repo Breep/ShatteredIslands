@@ -70,7 +70,7 @@ shape = SubResource("BoxShape3D_2v0uu")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SpawnArea" unique_id=1184824251]
 mesh = SubResource("BoxMesh_dhmms")
 
-[node name="SpawnPoint" parent="SpawnArea" unique_id=819229068 instance=ExtResource("3_g3ro2")]
+[node name="SpawnPoint1" parent="SpawnArea" unique_id=819229068 instance=ExtResource("3_g3ro2")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -6.25)
 team = 1
 
@@ -97,15 +97,15 @@ shape = SubResource("BoxShape3D_57pjl")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SpawnArea2" unique_id=1510108301]
 mesh = SubResource("BoxMesh_qkrr5")
 
-[node name="SpawnPoint" parent="SpawnArea2" unique_id=1316291176 instance=ExtResource("3_g3ro2")]
+[node name="SpawnPoint4" parent="SpawnArea2" unique_id=1316291176 instance=ExtResource("3_g3ro2")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 6.25)
 team = 2
 
-[node name="SpawnPoint2" parent="SpawnArea2" unique_id=288750422 instance=ExtResource("3_g3ro2")]
+[node name="SpawnPoint5" parent="SpawnArea2" unique_id=288750422 instance=ExtResource("3_g3ro2")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 team = 2
 
-[node name="SpawnPoint3" parent="SpawnArea2" unique_id=1594193534 instance=ExtResource("3_g3ro2")]
+[node name="SpawnPoint6" parent="SpawnArea2" unique_id=1594193534 instance=ExtResource("3_g3ro2")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -6.25)
 team = 2
 
@@ -121,7 +121,7 @@ skeleton = NodePath("../..")
 shape = SubResource("BoxShape3D_g25ar")
 
 [node name="HeroSpawner" parent="." unique_id=1039631944 node_paths=PackedStringArray("_spawn_points") instance=ExtResource("4_ooq7s")]
-_spawn_points = [NodePath("../SpawnArea/SpawnPoint"), NodePath("../SpawnArea/SpawnPoint2"), NodePath("../SpawnArea2/SpawnPoint"), NodePath("../SpawnArea2/SpawnPoint2")]
+_spawn_points = [NodePath("../SpawnArea/SpawnPoint1"), NodePath("../SpawnArea/SpawnPoint2"), NodePath("../SpawnArea/SpawnPoint3"), NodePath("../SpawnArea2/SpawnPoint4"), NodePath("../SpawnArea2/SpawnPoint5"), NodePath("../SpawnArea2/SpawnPoint6")]
 
 [node name="CenterArea" type="Area3D" parent="." unique_id=1850311486]
 

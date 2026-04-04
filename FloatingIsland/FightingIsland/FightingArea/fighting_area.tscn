@@ -9,11 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://yfeatddmkx4c" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/SpawnManager/spawn_manager.tscn" id="5_xgsbs"]
 [ext_resource type="PackedScene" uid="uid://c6wua1qduvyhp" path="res://Modules/BattleLogModule/BattleReader/battle_reader.tscn" id="6_w72k1"]
 [ext_resource type="PackedScene" uid="uid://c6oxeboe353od" path="res://FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor_2v2.tscn" id="6_yyfcp"]
-[ext_resource type="PackedScene" uid="uid://dbbpa637es0uf" path="res://FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor_ffa13.tscn" id="7_hqxx4"]
 [ext_resource type="PackedScene" uid="uid://1h20y2oaj3fm" path="res://Modules/BattleLogModule/BattleWriter/battle_writer.tscn" id="8_7oplh"]
 [ext_resource type="PackedScene" uid="uid://dvuq5n41nak3u" path="res://FloatingIsland/FightingIsland/FightingArea/Managers/ArenaZoneManager/arena_zone_manager.tscn" id="9_8iy5v"]
 [ext_resource type="PackedScene" uid="uid://b1wyuwomtucwk" path="res://FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor_3v3.tscn" id="12_dt6cg"]
 [ext_resource type="PackedScene" uid="uid://hk435wu0ry72" path="res://FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor_4v4.tscn" id="13_vv2qv"]
+[ext_resource type="PackedScene" uid="uid://dbbpa637es0uf" path="res://FloatingIsland/FightingIsland/FightingArea/FightingFloorTemplates/fighting_floor_ffa13.tscn" id="14_dt6cg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8iy5v"]
 size = Vector3(20, 5, 10)
@@ -76,7 +76,6 @@ team_zones = {
 }
 
 [node name="FightingFloor_3v3" parent="FightingFloorTemplates" unique_id=1798905686 node_paths=PackedStringArray("team_zones") instance=ExtResource("12_dt6cg")]
-visible = false
 team_zones = {
 1: NodePath("SpawnArea"),
 2: NodePath("SpawnArea2")
@@ -89,11 +88,11 @@ team_zones = {
 2: NodePath("SpawnArea2")
 }
 
-[node name="FightingFloor_ffa13" parent="FightingFloorTemplates" unique_id=273186181 node_paths=PackedStringArray("team_zones") instance=ExtResource("7_hqxx4")]
+[node name="FightingFloor_ffa13" parent="FightingFloorTemplates" unique_id=512388701 node_paths=PackedStringArray("team_zones") instance=ExtResource("14_dt6cg")]
 team_zones = {
-1: null,
-2: null,
-3: null
+1: NodePath("CenterPointMain/CenterPoint1/SpawnArea1"),
+2: NodePath("CenterPointMain/CenterPoint2/SpawnArea2"),
+3: NodePath("CenterPointMain/CenterPoint3/SpawnArea3")
 }
 
 [node name="Entities" type="Node3D" parent="." unique_id=118314100]

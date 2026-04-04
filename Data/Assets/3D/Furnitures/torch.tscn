@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=4 uid="uid://dntunh7ry24ql"]
+[gd_scene format=4 uid="uid://dntunh7ry24ql"]
 
 [ext_resource type="Texture2D" uid="uid://wbrwetv4d7je" path="res://Data/Blender/Map/Map/Tavern/tavern_spec.png" id="1_4fmlh"]
+[ext_resource type="PackedScene" uid="uid://ce3p3v6y8hed1" path="res://VFX/VFX_3D/Fire/vfx_candle_fire_3d.tscn" id="2_mn0kl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vhqui"]
 resource_name = "Wood Floor"
@@ -46,9 +47,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_frsg7")
 
-[node name="Torch" type="Node3D"]
+[node name="Torch" type="Node3D" unique_id=1511718253]
 
-[node name="SM_Item_Candlestick_02" type="MeshInstance3D" parent="."]
+[node name="SM_Item_Candlestick_02" type="MeshInstance3D" parent="." unique_id=1659160387]
 transform = Transform3D(0.01, 0, 0, 0, -4.37114e-10, -0.01, 0, 0.01, -4.37114e-10, 0, 0, 0)
 mesh = SubResource("ArrayMesh_mn0kl")
 skeleton = NodePath("")
@@ -61,7 +62,5 @@ metadata/extras = {
 }
 }
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.511596, 0)
-light_color = Color(0.871725, 0.690394, 0.432234, 1)
-omni_range = 10.0
+[node name="VFXCandleFire3D" parent="." unique_id=1207351239 instance=ExtResource("2_mn0kl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.51503503, 0)
