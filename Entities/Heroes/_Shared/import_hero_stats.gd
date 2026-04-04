@@ -13,7 +13,7 @@ func _run() -> void:
 
 	var file = FileAccess.open(JSON_PATH, FileAccess.READ)
 	var json_data = JSON.parse_string(file.get_as_text())
-	
+
 	if json_data == null:
 		push_error("Erreur de lecture du JSON.")
 		return
@@ -31,14 +31,14 @@ func _run() -> void:
 	# Traitement de chaque héros
 	for hero_id in data_per_hero:
 		_process_single_hero(hero_id, data_per_hero[hero_id])
-		
+
 	# Rafraîchissement
 	get_editor_interface().get_resource_filesystem().scan()
 	print("--- Terminé ---")
 
 func _process_single_hero(hero_id: String, entries: Array) -> void:
 	var snake_name = hero_id.to_snake_case() # Ex: DarkKnight -> dark_knight
-	
+
 	# Chemins
 	var hero_folder = HEROES_ROOT_DIR + hero_id + "/"
 	var stats_folder = hero_folder + "Stats/"
@@ -57,38 +57,41 @@ func _process_single_hero(hero_id: String, entries: Array) -> void:
 		print("⚠️ Ressource HeroDesc introuvable : ", main_res_path)
 		return
 
-	# Chargement de la ressource "HeroDesc"
-	var main_hero_res = ResourceLoader.load(main_res_path)
-	
+	# Chargement de la ressource "HeroDesc" SANS cache pour éviter les problèmes
+	var main_hero_res = ResourceLoader.load(main_res_path, "", ResourceLoader.CACHE_MODE_IGNORE)
+
 	# Vérification que la variable 'stats' existe bien dans ton script HeroDesc
 	if not "stats" in main_hero_res:
 		print("ERREUR : La variable 'stats' est introuvable dans ", main_res_path)
 		print("Vérifie que ton script HeroDesc a bien '@export var stats: Dictionary'")
 		return
-		
+
 	print("🔄 Mise à jour de : ", hero_id)
-	
-	# On vide le dictionnaire existant pour ne garder que les specs du JSON
-	main_hero_res.stats.clear()
-	
+
+	# Créer un nouveau dictionnaire de stats
+	var new_stats_dict: Dictionary[int, HeroStats] = {}
+
 	# Génération des fichiers de stats pour chaque niveau
 	for entry in entries:
 		var level = int(entry["level"])
-		
-		# Création des données (Livre page X)
+
+		# Création des données
 		var new_stats = HeroStats.new()
 		new_stats.apply_json_data(entry)
-		
+
 		# Sauvegarde du fichier individuel
 		var stats_filename = snake_name + "_lvl_" + str(level) + ".tres"
 		var final_stats_path = stats_folder + stats_filename
 		ResourceSaver.save(new_stats, final_stats_path)
-		
-	# Injection dans ton fichier HeroDesc (Livre complet)
-		# Note : on utilise .stats (minuscule) comme dans ton code source
-		var loaded_stats = ResourceLoader.load(final_stats_path)
-		main_hero_res.stats[level] = loaded_stats
-		
+
+		# Rechargement sans cache
+		var loaded_stats = ResourceLoader.load(final_stats_path, "", ResourceLoader.CACHE_MODE_IGNORE)
+		new_stats_dict[level] = loaded_stats
+		print("  ✅ Niveau ", level, " -> ", final_stats_path)
+
+	# Remplacer le dictionnaire stats en entier
+	main_hero_res.stats = new_stats_dict
+
 	# Sauvegarde finale du HeroDesc
 	ResourceSaver.save(main_hero_res, main_res_path)
-	print("✅ HeroDesc mis à jour : ", main_res_path)
+	print("✅ HeroDesc mis à jour : ", main_res_path, " (", new_stats_dict.size(), " niveaux)")

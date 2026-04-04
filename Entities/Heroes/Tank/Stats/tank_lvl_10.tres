@@ -4,27 +4,26 @@
 
 [resource]
 script = ExtResource("1_sncel")
-health_max = 3000
-mana_max = 80
-mana_regen = 4.0
-attack_damage = 35
-attack_speed = 1.1
+health_max = 5370
+mana_regen = 3.4
+attack_damage = 22
+attack_speed = 1.8060392747896343
 critical_chances = Dictionary[int, float]({
-0: 18.0,
-1: 18.0,
-2: 18.0,
-4: 18.0,
-5: 18.0,
-6: 18.0,
-7: 18.0,
-8: 18.0,
-9: 18.0,
-10: 18.0,
-11: 18.0,
-12: 18.0
+0: 27.0,
+1: 27.0,
+2: 27.0,
+4: 27.0,
+5: 0.0,
+6: 0.0,
+7: 9.5,
+8: 32.3,
+9: 0.0,
+10: 0.0,
+11: 0.0,
+12: 0.0
 })
 critical_multipliers = Dictionary[int, float]({
-0: 100.0,
+0: 190.0,
 1: 100.0,
 2: 100.0,
 4: 100.0,
@@ -38,9 +37,9 @@ critical_multipliers = Dictionary[int, float]({
 12: 100.0
 })
 resistances = Dictionary[int, float]({
-0: 60.0,
-1: 40.0,
-2: 0.0,
+0: 38.42068074395237,
+1: 30.11809565095832,
+2: 14.0,
 4: 0.0,
 5: 0.0,
 6: 0.0,
@@ -66,7 +65,7 @@ vulnerabilities = Dictionary[int, float]({
 12: 0.0
 })
 dodges = Dictionary[int, float]({
-0: 8.0,
+0: 5.0,
 1: 0.0,
 2: 0.0,
 4: 0.0,
@@ -86,7 +85,7 @@ strength = Dictionary[int, float]({
 4: 0.0,
 5: 0.0,
 6: 0.0,
-7: 0.0,
+7: 10.0,
 8: 0.0,
 9: 0.0,
 10: 0.0,
@@ -108,7 +107,7 @@ weakness = Dictionary[int, float]({
 12: 0.0
 })
 crit_resistances = Dictionary[int, float]({
-0: 30.0,
+0: 0.0,
 1: 0.0,
 2: 0.0,
 4: 0.0,
