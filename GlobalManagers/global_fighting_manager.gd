@@ -16,8 +16,7 @@ enum FightingPhaseState {
 	COUNTDOWN,
 	NORMAL,
 	SPECIAL,
-	CELEBRATION,
-	FINISHED,
+	CELEBRATION
 }
 #endregion
 
@@ -124,8 +123,7 @@ func _advance_phase() -> void:
 		FightingPhaseState.SPECIAL:
 			Verbose.debug("Fights are taking too long => Forcing CELEBRATION phase", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
 			_fighting_phase_state = FightingPhaseState.CELEBRATION
-		FightingPhaseState.CELEBRATION: _fighting_phase_state = FightingPhaseState.FINISHED
-		FightingPhaseState.FINISHED: _fighting_phase_state = FightingPhaseState.UNDEF
+		FightingPhaseState.CELEBRATION: _fighting_phase_state = FightingPhaseState.UNDEF
 		_: pass
 
 
@@ -149,10 +147,6 @@ func _on_fighting_phase_state_changed(new_fighting_phase_state: FightingPhaseSta
 		FightingPhaseState.CELEBRATION:
 			duration = GameManager.game_rules.duration_fighting_celebration
 			Verbose.debug("[State=CELEBRATION] (" + str(duration) + "s)", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
-
-		FightingPhaseState.FINISHED:
-			duration = GameManager.game_rules.duration_fighting_finished
-			Verbose.debug("[State=FINISHED] (" + str(duration) + "s)", Verbose.Category.GLOBAL_FIGHTING_MANAGER)
 			if multiplayer.is_server(): _wait_for_all_players_to_finish_playback()
 			else: _notice_playback_is_over.rpc_id(1)
 

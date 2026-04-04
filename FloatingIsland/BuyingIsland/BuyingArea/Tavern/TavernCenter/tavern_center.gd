@@ -29,17 +29,21 @@ func put_tables_according_to_battles(battles: Array[Battle]) -> void:
 	var battle_types_number = {
 		Battle.BattleType.VS_1: 0,
 		Battle.BattleType.VS_2: 0,
+		Battle.BattleType.VS_3: 0,
+		Battle.BattleType.VS_4: 0,
 		Battle.BattleType.FFA_SOLO_3: 0,
 	}
-	
+
 	var battles_number = battles.size()
-	
+
 	for battle in battles:
 		match battle.battle_type:
 			Battle.BattleType.VS_1: battle_types_number[Battle.BattleType.VS_1] += 1
 			Battle.BattleType.VS_2: battle_types_number[Battle.BattleType.VS_2] += 1
+			Battle.BattleType.VS_3: battle_types_number[Battle.BattleType.VS_3] += 1
+			Battle.BattleType.VS_4: battle_types_number[Battle.BattleType.VS_4] += 1
 			Battle.BattleType.FFA_SOLO_3: battle_types_number[Battle.BattleType.FFA_SOLO_3] += 1
-	
+
 	var table_layout: TableLayout
 	var player_left_node: Node3D
 	match battles_number:
@@ -50,6 +54,12 @@ func put_tables_according_to_battles(battles: Array[Battle]) -> void:
 			elif battle_types_number[Battle.BattleType.VS_2] == 1:
 				player_left_node = %"PlayersLeft_4"
 				table_layout = %"1_2v2"
+			elif battle_types_number[Battle.BattleType.VS_3] == 1:
+				player_left_node = %"PlayersLeft_6"
+				table_layout = %"1_3v3"
+			elif battle_types_number[Battle.BattleType.VS_4] == 1:
+				player_left_node = %"PlayersLeft_8"
+				table_layout = %"1_4v4"
 			elif battle_types_number[Battle.BattleType.FFA_SOLO_3] == 1:
 				player_left_node = %"PlayersLeft_3"
 				table_layout = %"1_ffa3"
@@ -63,6 +73,9 @@ func put_tables_according_to_battles(battles: Array[Battle]) -> void:
 			elif battle_types_number[Battle.BattleType.VS_1] == 1 and battle_types_number[Battle.BattleType.VS_2] == 1:
 				player_left_node = %"PlayersLeft_6"
 				table_layout = %"1_2v2_1_1v1"
+			elif battle_types_number[Battle.BattleType.VS_3] == 1 and battle_types_number[Battle.BattleType.VS_1] == 1:
+				player_left_node = %"PlayersLeft_8"
+				table_layout = %"1_3v3_1_1v1"
 			elif battle_types_number[Battle.BattleType.VS_2] == 1 and battle_types_number[Battle.BattleType.FFA_SOLO_3] == 1:
 				player_left_node = %"PlayersLeft_7"
 				table_layout = %"1_2v2_1_ffa3"

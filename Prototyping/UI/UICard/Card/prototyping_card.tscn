@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://cqw2clgppw78q" path="res://Card/Descriptions/Families/chicken_lord_family.tres" id="4_etvcx"]
 [ext_resource type="Resource" uid="uid://r422raom70t5" path="res://Card/Descriptions/Families/colossus_family.tres" id="5_i36ej"]
 [ext_resource type="Resource" uid="uid://dw66lnwee8ruk" path="res://Card/Descriptions/Families/engineer_family.tres" id="6_7lhnd"]
+[ext_resource type="Environment" uid="uid://cghu0yr6lj5i2" path="res://Props/DefaultBattleIsland/Arch_island/world_environment.tres" id="8_7e1et"]
 
 [node name="PrototypingCard" type="Control" unique_id=1969856814]
 layout_mode = 3
@@ -120,5 +121,7 @@ size_flags_vertical = 3
 
 [node name="CardButton" parent="MarginContainer/HBoxContainer/RightPanel/CardPreview" unique_id=1390086147 instance=ExtResource("1_cpxnc")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(400, 560)
 layout_mode = 2
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=779898722]
+environment = ExtResource("8_7e1et")

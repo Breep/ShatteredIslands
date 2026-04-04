@@ -2,6 +2,7 @@
 // License: MIT
 
 shader_type canvas_item;
+render_mode unshaded;
 
 // Camera FOV
 uniform float fov : hint_range(1, 179) = 90;
@@ -12,12 +13,10 @@ uniform float x_rot : hint_range(-180, 180) = 0.0;
 // At 1, the image is resized so that it can do a full
 // rotation without clipping inside its rect.
 uniform float inset : hint_range(0, 1) = 0.0;
-// Consider changing this to a uniform and changing it from code
 
 varying flat vec2 o;
 varying vec3 p;
 
-// Creates rotation matrix
 void vertex(){
 	float sin_b = sin(y_rot / 180.0 * PI);
 	float cos_b = cos(y_rot / 180.0 * PI);
@@ -37,7 +36,6 @@ void vertex(){
 	inv_rot_mat[2][1] = -sin_c;
 	inv_rot_mat[2][2] = cos_b * cos_c;
 
-
 	float t = tan(fov / 360.0 * PI);
 	p = inv_rot_mat * vec3((UV - 0.5), 0.5 / t);
 	float v = (0.5 / t) + 0.5;
@@ -47,12 +45,10 @@ void vertex(){
 	VERTEX += (UV - 0.5) / TEXTURE_PIXEL_SIZE * t * (1.0 - inset);
 }
 
-void fragment(){
+void fragment() {
 	if (cull_back && p.z <= 0.0) discard;
 	vec2 uv = (p.xy / p.z).xy - o;
 
-	// Compute screen-space derivatives of the projected UVs
-	// so the GPU can pick the correct mip / apply anisotropic filtering.
 	vec2 uv_screen = uv + 0.5;
 	vec2 ddx = dFdx(uv_screen);
 	vec2 ddy = dFdy(uv_screen);

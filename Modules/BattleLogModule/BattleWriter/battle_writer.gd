@@ -177,7 +177,7 @@ func _on_gfm_fighting_phase_state_changed(state: GlobalFightingManager.FightingP
 	match state:
 		GlobalFightingManager.FightingPhaseState.NORMAL:
 			_is_recording = true
-		GlobalFightingManager.FightingPhaseState.FINISHED:
+		GlobalFightingManager.FightingPhaseState.CELEBRATION:
 			_is_recording = false
 			_battle_logs.clear()
 

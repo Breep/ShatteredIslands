@@ -3,7 +3,7 @@ extends Control
 
 const ROT_SPEED: float = 4
 
-@onready var _texture_rect: TextureRect = $TextureRect
+@onready var _canvas_group: CanvasGroup = %CanvasGroup
 @onready var _card_layout: CardLayout = %CardLayout
 
 var _card: Card
@@ -25,10 +25,11 @@ func update_visual(new_card: Card) -> void:
 
 
 func _ready() -> void:
-	_texture_rect.material = _texture_rect.material.duplicate()
+	_canvas_group.material = _canvas_group.material.duplicate()
+	var target_scale: Vector2 = _canvas_group.scale
 	var tween: Tween = create_tween()
-	tween.tween_property(_texture_rect, "scale", Vector2(7, 7), 0.2) \
-		.from(Vector2(6, 6)) \
+	tween.tween_property(_canvas_group, "scale", target_scale, 0.2) \
+		.from(target_scale * 0.85) \
 		.set_trans(Tween.TRANS_SINE) \
 		.set_ease(Tween.EASE_OUT)
 
@@ -57,5 +58,5 @@ func _animation_3d_rotate(delta: float) -> void:
 		return
 	_current_rot_x = lerp(_current_rot_x, _target_rot_x, delta * ROT_SPEED)
 	_current_rot_y = lerp(_current_rot_y, _target_rot_y, delta * ROT_SPEED)
-	_texture_rect.material.set_shader_parameter("x_rot", _current_rot_y)
-	_texture_rect.material.set_shader_parameter("y_rot", _current_rot_x)
+	_canvas_group.material.set_shader_parameter("x_rot", _current_rot_y)
+	_canvas_group.material.set_shader_parameter("y_rot", _current_rot_x)

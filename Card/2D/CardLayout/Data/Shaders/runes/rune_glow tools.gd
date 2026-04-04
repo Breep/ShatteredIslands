@@ -1,4 +1,3 @@
-@tool
 ## RuneGlow — Controller for rune illumination shader
 ##
 ## Attach this script to the TextureRect node that holds the runes texture.

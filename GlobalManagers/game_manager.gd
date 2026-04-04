@@ -122,7 +122,7 @@ func is_end_of_game() -> bool:
 
 func start_solo_game() -> void:
 	_game_type = GameType.SOLO
-	for i in 4: # TODO Avoir un nombre max de joueur qui dépend du mode ?
+	for i in 7: # TODO Avoir un nombre max de joueur qui dépend du mode ?
 		PlayerManager.add_bot()
 	PlayerManager.join_game(1, "Breepsolo")
 	start_game()
@@ -154,6 +154,8 @@ func _on_game_state_timer_timeout() -> void:
 		GameState.FIGHTING:
 			Verbose.warn("Fighting phase watchdog triggered", Verbose.Category.GLOBAL_MANAGER)
 			_game_state = GameState.ENDING_ROUND
+		GameState.ENDING_ROUND:
+			_game_state = GameState.INIT_ROUND
 
 
 func _on_game_state_changed(new_state) -> void:
@@ -172,7 +174,7 @@ func _on_game_state_changed(new_state) -> void:
 		GameState.FIGHTING:
 			Verbose.debug("[State=FIGHTING]", Verbose.Category.GLOBAL_MANAGER)
 			var watchdog_time: float = _game_rules.duration_fighting_countdown + _game_rules.duration_fighting_normal
-			watchdog_time += _game_rules.duration_fighting_special + _game_rules.duration_fighting_celebration + _game_rules.duration_fighting_finished
+			watchdog_time += _game_rules.duration_fighting_special + _game_rules.duration_fighting_celebration
 			watchdog_time += 10 # MAGIC NUMBER => TODO define it ?
 			_game_state_timer.wait_time = watchdog_time
 			_game_state_timer.start()
@@ -181,7 +183,8 @@ func _on_game_state_changed(new_state) -> void:
 			await get_tree().create_timer(0.1).timeout # Quick fix to avoid recursive signals
 			await PlayerManager.sync_point(PlayerManager.SyncID.FIGHTING_PHASE)
 			await RoundManager.ending_round_player_changes()
-			_game_state = GameState.INIT_ROUND
+			_game_state_timer.wait_time = _game_rules.duration_fighting_finished
+			_game_state_timer.start()
 		GameState.FINISHED:
 			Verbose.debug("[State=FINISHED]", Verbose.Category.GLOBAL_MANAGER)
 

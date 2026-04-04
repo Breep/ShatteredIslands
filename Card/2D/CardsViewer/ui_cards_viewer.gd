@@ -24,6 +24,15 @@ var _unlocked_names: Dictionary[String, bool] = {}
 var _current_sort: SortMode = SortMode.NONE
 var _current_display: DisplayMode = DisplayMode.DEFAULT
 
+var _card_tile_template: Control
+
+
+#region ============================== Node base functions ==============================
+func _ready() -> void:
+	_card_tile_template = _grid_container.get_children()[0].duplicate()
+#endregion
+
+
 #region ============================== Public API ==============================
 func update_content(default_cards: Array[Card], unlocked_cards: Array[Card]) -> void:
 	_default_cards = default_cards
@@ -83,18 +92,17 @@ func _rebuild_grid() -> void:
 	_clear_all()
 	var cards_to_show: Array[Card] = _unlocked_cards if _current_display == DisplayMode.UNLOCKED_ONLY else _default_cards
 	for card: Card in cards_to_show:
-		var card_button: CardButton = CARD_BUTTON_SCENE.instantiate()
-		card_button.remove_shader()
-		card_button.custom_minimum_size = Vector2(630, 880)
+		var tile: Control = _card_tile_template.duplicate()
+		var card_button: CardButton = tile.get_node("CardButton")
 		card_button.update_visual(card)
 		var is_locked: bool = not _unlocked_names.has(card.name)
 		if _current_display == DisplayMode.DEFAULT and is_locked:
 			card_button.set_locked(true)
-		_grid_container.add_child(card_button)
+		_grid_container.add_child(tile)
 
 
 func _clear_all() -> void:
-	for child: CardButton in _grid_container.get_children():
+	for child in _grid_container.get_children():
 		child.queue_free()
 #endregion
  

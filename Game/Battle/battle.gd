@@ -6,8 +6,8 @@ extends Resource
 enum BattleType {
 	VS_1, # 1v1
 	VS_2, # 2v2
-	#VS_3, # 3v3
-	#VS_4, # 4v4
+	VS_3, # 3v3
+	VS_4, # 4v4
 	FFA_SOLO_3, # 1v1v1
 	#FFA_SOLO_4, # 1v1v1v1
 	#FFA_SOLO_5, # 1v1v1v1v1
@@ -22,6 +22,8 @@ enum BattleCategory {
 	C2_PLAYERS_BATTLE = 2, # 2 players battle
 	C3_PLAYERS_BATTLE = 3, # 3 players battle
 	C4_PLAYERS_BATTLE = 4, # 4 players battle
+	C6_PLAYERS_BATTLE = 6, # 6 players battle
+	C8_PLAYERS_BATTLE = 8, # 8 players battle
 }
 
 enum BattleResolution {
@@ -42,16 +44,16 @@ const BATTLES_INFO_DIC = {
 		"players_number": 4,
 		"teams_number": 2,
 	},
-	#BattleType.VS_3: {
-		#"name": "3v3",
-		#"players_number": 6,
-		#"teams_number": 2,
-	#},
-	#BattleType.VS_4: {
-		#"name": "4v4",
-		#"players_number": 8,
-		#"teams_number": 2,
-	#},
+	BattleType.VS_3: {
+		"name": "3v3",
+		"players_number": 6,
+		"teams_number": 2,
+	},
+	BattleType.VS_4: {
+		"name": "4v4",
+		"players_number": 8,
+		"teams_number": 2,
+	},
 	BattleType.FFA_SOLO_3: {
 		"name": "1v1v1",
 		"players_number": 3,
@@ -101,9 +103,9 @@ const BATTLES_TYPE_DIC = {
 	BattleCategory.C3_PLAYERS_BATTLE: [Battle.BattleType.FFA_SOLO_3],
 	BattleCategory.C4_PLAYERS_BATTLE: [Battle.BattleType.VS_2], #, Battle.BattleType.FFA_SOLO_4], # A fight with 4 players can be done either with a 2v2 or a 1v1v1v1
 	#5: [Battle.BattleType.FFA_SOLO_5],
-	#6: [Battle.BattleType.VS_3, Battle.BattleType.FFA_SOLO_6, Battle.BattleType.FFA_DUO_6],
+	BattleCategory.C6_PLAYERS_BATTLE: [Battle.BattleType.VS_3], #, Battle.BattleType.FFA_SOLO_6, Battle.BattleType.FFA_DUO_6],
 	#7: [Battle.BattleType.FFA_SOLO_7],
-	#8: [Battle.BattleType.VS_4, Battle.BattleType.FFA_SOLO_8, Battle.BattleType.FFA_DUO_8],
+	BattleCategory.C8_PLAYERS_BATTLE: [Battle.BattleType.VS_4], #, Battle.BattleType.FFA_SOLO_8, Battle.BattleType.FFA_DUO_8],
 }
 
 # ============================== Public variables ==============================
