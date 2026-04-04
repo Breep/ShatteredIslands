@@ -131,6 +131,10 @@ func _ready() -> void:
 		family_manager.apply_passive()
 
 	super._ready()
+	
+	# Automatically select play hero on spawn
+	if player == PlayerManager.get_local_player():
+		Events.entity_clicked.emit(self)
 #endregion
 
 #region ============================== Private functions ==============================

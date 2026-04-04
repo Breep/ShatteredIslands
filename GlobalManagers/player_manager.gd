@@ -83,11 +83,11 @@ func create_all_heroes(display_mode: Hero.DisplayMode = Hero.DisplayMode.PREVIEW
 		if player.hero_desc == null:
 			Verbose.error("Player " + player.player_name + " has no hero_desc", Verbose.Category.PLAYER_MANAGER)
 			continue
-
+		
 		# Si le hero existe déjà, le détruire d'abord
 		if player.hero != null and is_instance_valid(player.hero):
 			player.hero.queue_free()
-
+		
 		# Créer nouveau hero avec le display_mode spécifié
 		player.hero = Shared.HERO_SCENES[player.hero_desc.id].instantiate().init(display_mode)
 		player.hero.level = player.lvl
@@ -97,7 +97,7 @@ func create_all_heroes(display_mode: Hero.DisplayMode = Hero.DisplayMode.PREVIEW
 		player.hero.deck = player.deck
 		player.hero.data_memory = player.data_memory
 		player.hero.player = player
-
+	
 		Verbose.debug("Created hero " + player.hero.entity_name + " (id=" + str(player.hero.uid) + ") for player " + player.player_name, Verbose.Category.PLAYER_MANAGER)
 
 
