@@ -28,13 +28,12 @@ enum BaseStatsModifier {
 }
 
 func _ready() -> void:
-	base_stats.health_max = _base_health_max
-	base_stats.attack_damage = _base_ad
-	base_stats.update_stat(EntityStats.StatType.RESISTANCE, _base_armor, Utils.ActionType.DAMAGE_PHYSICAL)
-	base_stats.update_stat(EntityStats.StatType.CRIT_CHANCE, _base_crit_chance, Utils.ActionType.DAMAGE_PHYSICAL)
-	base_stats.update_stat(EntityStats.StatType.CRIT_MULT, _base_crit_multi, Utils.ActionType.DAMAGE_PHYSICAL)
-	stat_modifiers_registry.recompute_all()
-	
+	_register_base_stat_modifier(&"Chicken_base_hp", EntityStats.StatType.HEALTH_MAX, _base_health_max)
+	_register_base_stat_modifier(&"Chicken_base_ad", EntityStats.StatType.AD, _base_ad)
+	_register_base_stat_modifier(&"Chicken_base_armor", EntityStats.StatType.RESISTANCE, _base_armor, Utils.ActionType.DAMAGE_PHYSICAL)
+	_register_base_stat_modifier(&"Chicken_base_crit_chance", EntityStats.StatType.CRIT_CHANCE, _base_crit_chance, Utils.ActionType.DAMAGE_PHYSICAL)
+	_register_base_stat_modifier(&"Chicken_base_crit_multi", EntityStats.StatType.CRIT_MULT, _base_crit_multi, Utils.ActionType.DAMAGE_PHYSICAL)
+
 	super._ready()
 	
 	
@@ -44,3 +43,15 @@ func set_base_stats(hp: float, ad: float, armor: float, crit_chance: float, crit
 	_base_armor = armor
 	_base_crit_chance = crit_chance
 	_base_crit_multi = crit_multi
+
+
+func _register_base_stat_modifier(mod_id: StringName, stat_type: EntityStats.StatType, mod_value: float, action_type: int = -1) -> void:
+	var mod := StatModifier.new()
+	mod.id = mod_id
+	mod.stat_type = stat_type
+	mod.calc_type = StatModifier.CalcType.ADD
+	mod.value = mod_value
+	mod.tags = []
+	if action_type != -1:
+		mod.action_type = action_type as Utils.ActionType
+	stat_modifiers_registry.register_modifier(mod)

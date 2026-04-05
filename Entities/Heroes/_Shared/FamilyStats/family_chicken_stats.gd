@@ -7,11 +7,11 @@ enum CbVars {
 	DEATH_COUNT,
 }
 
-const HP: Array[float] = [16, 32, 48, 64, 80]
-const AD: Array[float] = [16, 18, 20, 22, 24]
+const HP: Array[float] = [0, 16, 32, 48, 64]
+const AD: Array[float] = [0, 2, 4, 6, 8]
 const ARMOR: Array[float] = [0, 0, 0, 0, 0]
-const CRIT_CHANCE: Array[float] = [5, 5, 5, 5, 5]
-const CRIT_MULTI: Array[float] = [100, 100, 100, 100, 100]
+const CRIT_CHANCE: Array[float] = [0, 3, 5, 7, 11]
+const CRIT_MULTI: Array[float] = [0, 0, 0, 0, 0]
 
 var on_chicken_spawned_callbacks: Array[Callable]
 var on_chicken_death_callbacks: Array[Callable]
