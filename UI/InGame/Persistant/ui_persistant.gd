@@ -131,6 +131,15 @@ func _on_events_ui_family_portrait_unselected() -> void:
 	_ui_family_viewer.hide()
 
 
+func _unhandled_input(event: InputEvent) -> void:
+	if not _ui_family_viewer.visible:
+		return
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		_ui_family_viewer.hide()
+		_ui_all_families_portraits.reset_buttons_state()
+		get_viewport().set_input_as_handled()
+
+
 
 
 

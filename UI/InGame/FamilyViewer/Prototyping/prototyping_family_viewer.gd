@@ -11,7 +11,7 @@ var _next_uid: int = 0
 
 func _ready() -> void:
 	GameManager.init()
-	
+
 	_player = Player.new()
 	_player.name = "PrototypingPlayer"
 	add_child(_player)

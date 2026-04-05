@@ -65,6 +65,7 @@ func update_content(player: Player) -> void:
 func reset_buttons_state() -> void:
 	for pf: UIFamilyPortrait in _family_portraits:
 		pf.unselect()
+	_animate_family_controls(null)
 
 # ============================== Private functions ==============================
 

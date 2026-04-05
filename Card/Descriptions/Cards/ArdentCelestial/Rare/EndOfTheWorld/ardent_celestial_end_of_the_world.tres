@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Card" format=3 uid="uid://dtgm8rrgdq3bj"]
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://88u3ygp8ljh8"]
 
 [ext_resource type="Script" uid="uid://b8ekun7kie34s" path="res://Card/Descriptions/Cards/ArdentCelestial/Rare/EndOfTheWorld/ardent_celestial_end_of_the_world.gd" id="1_2tawv"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_lslku"]
