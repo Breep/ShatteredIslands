@@ -8,7 +8,7 @@ enum CbVars {
 }
 
 const HP: Array[float] = [16, 32, 48, 64, 80]
-const AD: Array[float] = [8, 9, 10, 11, 12]
+const AD: Array[float] = [16, 18, 20, 22, 24]
 const ARMOR: Array[float] = [0, 0, 0, 0, 0]
 const CRIT_CHANCE: Array[float] = [5, 5, 5, 5, 5]
 const CRIT_MULTI: Array[float] = [100, 100, 100, 100, 100]

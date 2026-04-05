@@ -25,7 +25,7 @@ const GIFTED_POISON_RATIO: Array[float] = [0.10, 0.15, 0.20, 0.25]
 const GIFTED_POISON_STACKS: Array[int] = [1, 1, 2, 2]
 
 # Chicken gifted colossus stats
-const GIFTED_COLOSSUS_HPMAX_RATIOS: Array[float] = [0.10, 0.15, 0.20, 0.25]
+const GIFTED_COLOSSUS_HPMAX_RATIOS: Array[float] = [0.20, 0.30, 0.40, 0.50]
 
 # Chicken gifted light stats
 const GIFTED_LIGHT_REGEN_RATIOS: Array[float] = [0.04, 0.06, 0.08, 0.10]
