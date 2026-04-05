@@ -3,11 +3,17 @@ extends Node
 var HEROES: Dictionary[HeroDesc.HeroId, HeroDesc] = {
 	HeroDesc.HeroId.UNDEF: load("res://Entities/Heroes/Undef/undef.tres"),
 	HeroDesc.HeroId.DARK_KNIGHT: load("res://Entities/Heroes/DarkKnight/dark_knight.tres"),
+	HeroDesc.HeroId.TANK: load("res://Entities/Heroes/Tank/tank.tres"),
+	HeroDesc.HeroId.ASSASSIN: load("res://Entities/Heroes/Assassin/assassin.tres"),
+	HeroDesc.HeroId.MAGE: load("res://Entities/Heroes/Mage/mage.tres"),
 }
 
 var HERO_SCENES: Dictionary[HeroDesc.HeroId, PackedScene] = {
 	HeroDesc.HeroId.UNDEF: load("res://Entities/Heroes/Undef/undef.tscn"),
 	HeroDesc.HeroId.DARK_KNIGHT: load("res://Entities/Heroes/DarkKnight/dark_knight.tscn"),
+	HeroDesc.HeroId.TANK: load("res://Entities/Heroes/Tank/tank.tscn"),
+	HeroDesc.HeroId.ASSASSIN: load("res://Entities/Heroes/Assassin/assassin.tscn"),
+	HeroDesc.HeroId.MAGE: load("res://Entities/Heroes/Mage/mage.tscn"),
 }
 
 var FAMILIES: Dictionary[Family.Type, Family] = {

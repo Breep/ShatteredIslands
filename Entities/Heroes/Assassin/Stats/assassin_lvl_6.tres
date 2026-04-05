@@ -1,0 +1,136 @@
+[gd_resource type="Resource" script_class="HeroStats" format=3 uid="uid://dahmwr8w58vmw"]
+
+[ext_resource type="Script" uid="uid://2py6kv5aqgem" path="res://Entities/Heroes/_Shared/hero_stats.gd" id="1_ewfod"]
+
+[resource]
+script = ExtResource("1_ewfod")
+health_max = 1400
+mana_regen = 3.2
+attack_damage = 25
+attack_speed = 2.1081976621622465
+critical_chances = Dictionary[int, float]({
+0: 28.0,
+1: 28.0,
+2: 28.0,
+4: 28.0,
+5: 0.0,
+6: 0.0,
+7: 0.0,
+8: 0.0,
+9: 0.0,
+10: 0.0,
+11: 0.0,
+12: 0.0
+})
+critical_multipliers = Dictionary[int, float]({
+0: 120.0,
+1: 120.0,
+2: 120.0,
+4: 120.0,
+5: 120.0,
+6: 120.0,
+7: 120.0,
+8: 120.0,
+9: 120.0,
+10: 120.0,
+11: 120.0,
+12: 120.0
+})
+resistances = Dictionary[int, float]({
+0: 12.016926513838554,
+1: 13.271158142298193,
+2: 0.0,
+4: 0.0,
+5: 0.0,
+6: 0.0,
+7: 0.0,
+8: 0.0,
+9: 0.0,
+10: 0.0,
+11: 0.0,
+12: 0.0
+})
+vulnerabilities = Dictionary[int, float]({
+0: 0.0,
+1: 0.0,
+2: 0.0,
+4: 0.0,
+5: 0.0,
+6: 0.0,
+7: 0.0,
+8: 0.0,
+9: 0.0,
+10: 0.0,
+11: 0.0,
+12: 0.0
+})
+dodges = Dictionary[int, float]({
+0: 15.0,
+1: 0.0,
+2: 0.0,
+4: 0.0,
+5: 0.0,
+6: 0.0,
+7: 0.0,
+8: 0.0,
+9: 0.0,
+10: 0.0,
+11: 0.0,
+12: 0.0
+})
+strength = Dictionary[int, float]({
+0: 0.0,
+1: 0.0,
+2: 0.0,
+4: 0.0,
+5: 0.0,
+6: 0.0,
+7: 0.0,
+8: 0.0,
+9: 0.0,
+10: 0.0,
+11: 0.0,
+12: 0.0
+})
+weakness = Dictionary[int, float]({
+0: 0.0,
+1: 0.0,
+2: 0.0,
+4: 0.0,
+5: 0.0,
+6: 0.0,
+7: 0.0,
+8: 0.0,
+9: 0.0,
+10: 0.0,
+11: 0.0,
+12: 0.0
+})
+crit_resistances = Dictionary[int, float]({
+0: 0.0,
+1: 25.0,
+2: 0.0,
+4: 0.0,
+5: 0.0,
+6: 0.0,
+7: 0.0,
+8: 0.0,
+9: 0.0,
+10: 0.0,
+11: 0.0,
+12: 0.0
+})
+life_steals = Dictionary[int, float]({
+0: 0.0,
+1: 0.0,
+2: 0.0,
+4: 0.0,
+5: 0.0,
+6: 0.0,
+7: 0.0,
+8: 0.0,
+9: 0.0,
+10: 0.0,
+11: 0.0,
+12: 0.0
+})

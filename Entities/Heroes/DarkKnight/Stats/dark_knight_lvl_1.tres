@@ -7,20 +7,20 @@ script = ExtResource("1_5pd1e")
 health_max = 450
 mana_regen = 2.9
 attack_damage = 17
-attack_speed = 1.5
+attack_speed = 1.2
 critical_chances = Dictionary[int, float]({
 0: 17.0,
 1: 17.0,
 2: 17.0,
 4: 17.0,
-5: 17.0,
-6: 17.0,
+5: 0.0,
+6: 0.0,
 7: 0.0,
 8: 17.0,
-9: 17.0,
-10: 17.0,
-11: 17.0,
-12: 17.0
+9: 0.0,
+10: 0.0,
+11: 0.0,
+12: 0.0
 })
 critical_multipliers = Dictionary[int, float]({
 0: 100.0,
@@ -39,7 +39,7 @@ critical_multipliers = Dictionary[int, float]({
 resistances = Dictionary[int, float]({
 0: 10.0,
 1: 7.0,
-2: 15.0,
+2: 0.0,
 4: 0.0,
 5: 0.0,
 6: 0.0,
@@ -93,6 +93,34 @@ strength = Dictionary[int, float]({
 12: 0.0
 })
 weakness = Dictionary[int, float]({
+0: 0.0,
+1: 0.0,
+2: 0.0,
+4: 0.0,
+5: 0.0,
+6: 0.0,
+7: 0.0,
+8: 0.0,
+9: 0.0,
+10: 0.0,
+11: 0.0,
+12: 0.0
+})
+crit_resistances = Dictionary[int, float]({
+0: 0.0,
+1: 25.0,
+2: 0.0,
+4: 0.0,
+5: 0.0,
+6: 0.0,
+7: 0.0,
+8: 0.0,
+9: 0.0,
+10: 0.0,
+11: 0.0,
+12: 0.0
+})
+life_steals = Dictionary[int, float]({
 0: 0.0,
 1: 0.0,
 2: 0.0,
