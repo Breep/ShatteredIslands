@@ -35,4 +35,4 @@ func get_description(cardlvl: int) -> String:
 	#
 	var c: String = str(_dodge_increases[cardlvl - 1]).pad_decimals(0)
 	var s: String = str(_chicken_inheritances[cardlvl - 1]).pad_decimals(0)
-	return "Add " + c + " dodge chance to the hero." + " Chicken inherits " + s + "% of the summoner dodge."
+	return "Add " + c + " [[DODGE]] chance to the hero." + " Chicken inherits " + s + "% of the summoner dodge."

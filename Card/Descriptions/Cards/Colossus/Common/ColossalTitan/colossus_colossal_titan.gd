@@ -12,7 +12,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		
 	var period: float = _periods[card_lvl - 1]
 	
-	ctx.periodic_timers.register(&"Titan's Protection", period, func() -> void:
+	ctx.periodic_timers.register(&"Colossal Titan", period, func() -> void:
 		if ctx.hero == null or not is_instance_valid(ctx.hero):
 			return
 			
