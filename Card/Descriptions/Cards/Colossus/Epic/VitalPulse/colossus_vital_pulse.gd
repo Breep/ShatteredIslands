@@ -2,10 +2,10 @@ class_name ColossusVitalPulse
 extends HeroUpgrade
 
 @export var _period: Array[float]
-@export var _damage_percent: Array[float]
+@export var _hp_percent: Array[float]
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
-	var percent: float = _damage_percent[card_lvl - 1]
+	var hp_pct: float = _hp_percent[card_lvl - 1]
 	var period: float = _period[card_lvl - 1]
 
 	ctx.periodic_timers.register(&"Vital Pulse", period, func() -> void:
@@ -16,7 +16,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			return
 
 		var max_hp: float = ctx.hero.stats.health_max
-		var damage: float = max_hp * (percent * ctx.hero.stats.scale / 100.0)
+		var damage: float = max_hp * hp_pct / 100.0
 		if damage <= 0:
 			return
 
@@ -31,4 +31,5 @@ func get_description(cardlvl: int) -> String:
 		printerr("Vital Pulse: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Every " + str(_period[cardlvl - 1]) + " sec, deal [[SCALE]]*" + str(_damage_percent[cardlvl - 1]) + "% of max HP as [[PHYSICAL_DAMAGE]] to all enemies."
+	var hp = str(_hp_percent[cardlvl - 1]).pad_decimals(1)
+	return "Every " + str(_period[cardlvl - 1]) + " sec, deal " + hp + "% of max HP as [[PHYSICAL_DAMAGE]] to all enemies."

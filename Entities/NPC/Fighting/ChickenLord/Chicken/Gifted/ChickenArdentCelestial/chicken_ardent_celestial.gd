@@ -18,14 +18,6 @@ func init(ignite_stacks: int) -> Summon:
 
 
 func _ready() -> void:
-	var mod := StatModifier.new()
-	mod.id = &"Chicken_ArdentCelestial_HPMAX"
-	mod.stat_type = EntityStats.StatType.HEALTH_MAX
-	mod.calc_type = StatModifier.CalcType.ADD
-	mod.value = 30
-	mod.tags = []
-	stat_modifiers_registry.register_modifier(mod)
-
 	stats.health_changed.connect(_on_health_changed)
 	super._ready()
 

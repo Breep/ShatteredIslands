@@ -11,7 +11,7 @@
 
 [sub_resource type="Resource" id="Resource_i6opk"]
 script = ExtResource("2_3q8ci")
-health_max = 10.0
+health_max = 80.0
 auto_attack_type = 1
 attack_range = 1.0
 attack_damage = 10.0
@@ -22,16 +22,16 @@ metadata/_custom_type_script = "uid://bf01q5yq3glxi"
 radius = 0.421875
 height = 0.84375
 
-[node name="ChickenColossus" type="CharacterBody3D" unique_id=2109615854 node_paths=PackedStringArray("_health_bar", "_visual_3d", "_health_bar_marker")]
+[node name="ChickenColossus" type="CharacterBody3D" unique_id=2109615854 node_paths=PackedStringArray("_visual_3d", "_health_bar_marker", "_health_bar")]
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("1_kf5j7")
-_health_bar = NodePath("HealthBar")
 entity_name = "Chicken Colossus"
 custom_base_stats = SubResource("Resource_i6opk")
 _auto_loaded_modules = Array[int]([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 0, 4])
 _visual_3d = NodePath("ChickenColossusVisual")
 _health_bar_marker = NodePath("ChickenColossusVisual/HealthBarSpawnMarker")
+_health_bar = NodePath("HealthBar")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1928783995]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41943443, 0)
@@ -77,10 +77,7 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.00037944317, 0.382874
 [node name="ChickenColossusVisual" parent="." unique_id=142901617 instance=ExtResource("5_5tkf2")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
-[node name="HealthBarSpawnMarker" type="Marker3D" parent="ChickenColossusVisual" unique_id=449366956]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1.8, 0)
-
-[node name="Skeleton3D" parent="ChickenColossusVisual" index="1" unique_id=416118163]
+[node name="Skeleton3D" parent="ChickenColossusVisual" index="0" unique_id=416118163]
 bones/1/position = Vector3(0, 0.047381032, -0.004717756)
 bones/2/rotation = Quaternion(0.83199865, 0.04164722, -0.5494833, -0.064124875)
 bones/3/rotation = Quaternion(0.96720886, 9.047426e-08, 0.2539824, -3.064464e-07)
@@ -97,8 +94,11 @@ bones/12/rotation = Quaternion(4.817537e-08, -0.60039806, 2.3136849e-07, 0.79970
 [node name="ChickenColossus" parent="ChickenColossusVisual/Skeleton3D" index="0" unique_id=1839562433]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 
-[node name="AnimationPlayer" parent="ChickenColossusVisual" index="2" unique_id=777400876]
+[node name="AnimationPlayer" parent="ChickenColossusVisual" index="1" unique_id=777400876]
 script = ExtResource("7_uq3l3")
+
+[node name="HealthBarSpawnMarker" type="Marker3D" parent="ChickenColossusVisual" unique_id=449366956]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1.8, 0)
 
 [node name="HealthBar" parent="." unique_id=1628734826 node_paths=PackedStringArray("_owner_entity", "_info_panel_spawn") instance=ExtResource("8_ea2ri")]
 _owner_entity = NodePath("..")

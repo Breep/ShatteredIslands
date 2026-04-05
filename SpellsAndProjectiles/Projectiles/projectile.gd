@@ -19,6 +19,7 @@ enum Type {
 	SMALL_EGG,
 	FIRE_BALL,
 	BULLET,
+	GAMMA_TURRET,
 }
 
 # === EXPORTS ===

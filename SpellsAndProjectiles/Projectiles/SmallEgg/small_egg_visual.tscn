@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://brngyuus4jals"]
 
-[ext_resource type="PackedScene" uid="uid://dddfasjo6xqv6" path="res://Entities/NPC/Fighting/ChickenLord/ChickenEgg/Data/eggfull.tscn" id="1_p0gjf"]
+[ext_resource type="PackedScene" uid="uid://dkgiwc2fcyp3y" path="res://SpellsAndProjectiles/Projectiles/SmallEgg/crumble_projectile.tscn" id="1_oomrc"]
 [ext_resource type="PackedScene" uid="uid://dgt36qu64oomj" path="res://Tool/QuickAnims/anim_rotating_module.tscn" id="2_oomrc"]
 
 [node name="SmallEggVisual" type="Node3D" unique_id=148101033]
 
-[node name="eggfull" parent="." unique_id=558907305 instance=ExtResource("1_p0gjf")]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.045768976, -0.19645286, 0.038320065)
+[node name="eggfull2" parent="." unique_id=558907305 instance=ExtResource("1_oomrc")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, -0.21802354, 0)
 
 [node name="AnimRotatingModuleX" parent="." unique_id=1513130225 node_paths=PackedStringArray("_owner") instance=ExtResource("2_oomrc")]
 _owner = NodePath("..")
