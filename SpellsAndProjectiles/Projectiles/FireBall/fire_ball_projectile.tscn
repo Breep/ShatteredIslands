@@ -1,23 +1,23 @@
-[gd_scene format=3 uid="uid://2vjkudyu0lpd"]
+[gd_scene format=3 uid="uid://cp85p7tbeob1g"]
 
-[ext_resource type="Script" uid="uid://dv8w8kb4xsqp3" path="res://SpellsAndProjectiles/Projectiles/projectile.gd" id="1_bxo7m"]
-[ext_resource type="Script" uid="uid://xr3esthqo6re" path="res://SpellsAndProjectiles/Projectiles/Trajectories/straight_trajectory.gd" id="2_lg8w6"]
-[ext_resource type="PackedScene" uid="uid://c77b0act7ye6o" path="res://SpellsAndProjectiles/Projectiles/FireBall/Visual/fire_ball_visual.tscn" id="3_3j240"]
+[ext_resource type="Script" uid="uid://dv8w8kb4xsqp3" path="res://SpellsAndProjectiles/Projectiles/projectile.gd" id="1_wbga5"]
+[ext_resource type="Script" uid="uid://xr3esthqo6re" path="res://SpellsAndProjectiles/Projectiles/Trajectories/straight_trajectory.gd" id="2_nltp6"]
+[ext_resource type="PackedScene" uid="uid://c77b0act7ye6o" path="res://SpellsAndProjectiles/Projectiles/FireBall/Visual/fire_ball_visual.tscn" id="3_o1kwr"]
 
 [sub_resource type="Resource" id="Resource_3j240"]
-script = ExtResource("2_lg8w6")
+script = ExtResource("2_nltp6")
 speed = 25.0
 metadata/_custom_type_script = "uid://xr3esthqo6re"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_2a06m"]
 
 [node name="FireBallProjectile" type="Area3D" unique_id=353982824]
-script = ExtResource("1_bxo7m")
+script = ExtResource("1_wbga5")
 trajectory = SubResource("Resource_3j240")
 metadata/_custom_type_script = "uid://dv8w8kb4xsqp3"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2032784996]
 shape = SubResource("SphereShape3D_2a06m")
 
-[node name="MeteorVisual3D" parent="." unique_id=985001319 instance=ExtResource("3_3j240")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.02045536, -1.1920929e-07, -0.4676051)
+[node name="MeteorVisual3D" parent="." unique_id=985001319 instance=ExtResource("3_o1kwr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02045536, -1.1920929e-07, -0.4676051)
