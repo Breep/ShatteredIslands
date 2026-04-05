@@ -31,5 +31,5 @@ func get_description(cardlvl: int) -> String:
 		return "ERROR"
 	
 	var c: String = str(_stun_chances[cardlvl -1]).pad_decimals(0)
-	var s: String = str(_stun_durations[cardlvl - 1]).pad_decimals(0)
+	var s: String = str(_stun_durations[cardlvl - 1]).pad_decimals(1)
 	return "Chickens have " + c + "% chance to [[STUN]] target on auto attack for " + s + " seconds"
