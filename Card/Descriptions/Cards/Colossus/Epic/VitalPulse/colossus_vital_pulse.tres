@@ -7,7 +7,7 @@
 [sub_resource type="Resource" id="Resource_6fqrn"]
 script = ExtResource("2_lbecd")
 _period = Array[float]([1.0, 1.0, 1.0])
-_damage_percent = Array[float]([0.5, 1.0, 2.0])
+_hp_percent = Array[float]([0.5, 1.0, 2.0])
 metadata/_custom_type_script = "uid://wi6p7asrxwbi"
 
 [resource]
