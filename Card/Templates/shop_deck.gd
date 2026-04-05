@@ -53,16 +53,25 @@ class PlayerPool extends CardPool:
 		return
 	
 	
+	func can_add_card(card: Card) -> bool:
+		var family_type: Family.Type = card.families[0]
+		var family_points: int = _player.deck.get_family_points(family_type)
+		var family_level: int = _game_rules.get_family_level(family_points)
+		var locked_rarities: Array[Card.Rarity] = _game_rules.get_locked_rarities(family_level)
+		return card.rarity not in locked_rarities
+
 	func add_card(card: Card) -> void:
-		if not pool.has(card.rarity): return
+		if not can_add_card(card): return
+		if not pool.has(card.rarity):
+			pool[card.rarity] = CardsArray.new()
 		pool[card.rarity].cards.append(card)
-	
-	
+
+
 	func remove_card(card: Card) -> void:
 		if not pool.has(card.rarity): return
 		pool[card.rarity].cards.erase(card)
-	
-	
+
+
 	func _on_card_maxed(card: Card) -> void:
 		Verbose.debug("%s is maxed" % [card.name], Verbose.Category.CARD_SHOP)
 		var i: int = pool[card.rarity].cards.size() - 1

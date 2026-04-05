@@ -7,7 +7,7 @@
 [sub_resource type="Resource" id="Resource_wvgn0"]
 script = ExtResource("1_8d206")
 _base_thorn_values = Array[float]([4.0, 8.0, 12.0, 16.0, 25.0])
-_bonus_thorn_factors = Array[float]([0.375, 0.44, 0.5, 0.56, 0.625])
+_bonus_thorn_factors = Array[float]([0.25, 0.3, 0.35, 0.4, 0.45])
 metadata/_custom_type_script = "uid://cjreeavu3vxq5"
 
 [resource]
