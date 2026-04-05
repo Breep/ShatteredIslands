@@ -10,10 +10,39 @@ rarity_card_numbers = Dictionary[int, int]({
 2: 5,
 3: 3
 })
-rare_price = 200
-epic_price = 300
-legendary_price = 400
-gold_earned_per_round = 400
+drop_rates_by_family_level = Dictionary[int, Dictionary]({
+0: {
+0: 100,
+1: 0,
+2: 0,
+3: 0
+},
+1: {
+0: 90,
+1: 10,
+2: 0,
+3: 0
+},
+2: {
+0: 88,
+1: 9,
+2: 3,
+3: 0
+},
+3: {
+0: 84,
+1: 8,
+2: 5,
+3: 3
+},
+4: {
+0: 79,
+1: 9,
+2: 7,
+3: 5
+}
+})
+gold_earned_per_round = 500
 gold_starting_game = 400
 player_starting_health = 12
 damage_max_diff_win_lose = 2
@@ -32,13 +61,6 @@ xp_per_levels = Dictionary[int, int]({
 9: 10,
 10: 100
 })
-drop_rates_by_family_level = {
-0: {0: 100, 1: 0, 2: 0, 3: 0},
-1: {0: 90, 1: 10, 2: 0, 3: 0},
-2: {0: 88, 1: 9, 2: 3, 3: 0},
-3: {0: 86, 1: 8, 2: 4, 3: 2},
-4: {0: 82, 1: 9, 2: 6, 3: 3}
-}
 duration_buying_phase = 9999.0
 duration_fighting_normal = 30.0
 duration_fighting_special = 25.0

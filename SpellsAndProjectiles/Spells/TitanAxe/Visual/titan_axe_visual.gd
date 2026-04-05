@@ -37,6 +37,10 @@ func _process(delta: float) -> void:
 	if not _is_falling:
 		return
 
+	var camera = get_viewport().get_camera_3d()
+	if camera != null:
+		look_at_target_y_only(camera.global_position)
+
 	_elapsed += delta
 	var t := clampf(_elapsed / DEPLOY_TIME, 0.0, 1.0)
 
@@ -58,7 +62,12 @@ func _process(delta: float) -> void:
 		_axe_mesh.basis = _initial_basis
 		_on_impact()
 
-
+func look_at_target_y_only(target_position: Vector3):
+	var direction = target_position - global_position
+	direction.y = 0
+	if direction.length() > 0.1:
+		look_at(global_position + direction, Vector3.UP)
+		
 func _on_impact() -> void:
 	# Spawn du VFX d'impact
 	var hit := HIT_VFX.instantiate() as Node3D

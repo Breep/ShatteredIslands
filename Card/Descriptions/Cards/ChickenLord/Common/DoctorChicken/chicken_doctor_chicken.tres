@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_5leoa"]
 script = ExtResource("1_t5o6l")
-_heal_amounts = Array[float]([10.0, 12.0, 14.0, 16.0, 20.0])
+_heal_amounts = Array[float]([15.0, 20.0, 25.0, 30.0, 40.0])
 metadata/_custom_type_script = "uid://dwllfj6yx0hxc"
 
 [resource]

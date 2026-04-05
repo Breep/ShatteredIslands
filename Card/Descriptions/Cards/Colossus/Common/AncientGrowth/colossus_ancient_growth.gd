@@ -8,12 +8,16 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var size_increase: float = _size_increase[card_lvl - 1]
 	var period: float = _period[card_lvl - 1]
 	
+	var state := {&"stacks": 0}
+	var mod3 := StatModifier.new()
+	mod3.id = &"Ancient Growth"
+	mod3.stat_type = EntityStats.StatType.SCALE
+	mod3.calc_type = StatModifier.CalcType.ADD
+	mod3.value = 0.0
+
 	ctx.periodic_timers.register(&"Ancient Growth", period, func() -> void:
-		var mod3 := StatModifier.new()
-		mod3.id = &"Ancient Growth"
-		mod3.stat_type = EntityStats.StatType.SCALE
-		mod3.calc_type = StatModifier.CalcType.ADD
-		mod3.value += (size_increase/100) 
+		state[&"stacks"] += 1
+		mod3.value = state[&"stacks"] * (size_increase / 100)
 		ctx.stat_modifiers.register_modifier(mod3)
 	)
 

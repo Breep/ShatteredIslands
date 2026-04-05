@@ -2,6 +2,7 @@ class_name AttackTitanAxe
 extends HeroUpgrade
 
 const AXE_VISUAL = preload("res://SpellsAndProjectiles/Spells/TitanAxe/Visual/titan_axe_visual.tscn")
+const DEPLOY_TIME: float = 0.7
 
 @export var _attack_number: int # Attack number needed to proc the damage buff
 @export var _hp_percent: Array[float] # Damage buff in % of target hp max
@@ -22,10 +23,6 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if state[&"count"] >= atk_threshold:
 			state[&"count"] = 0
 			state[&"proc_active"] = true
-			var target: Entity = cb_vars[AutoAttackModifier.VarType.TARGET]
-			if target and is_instance_valid(target):
-				var bonus: float = target.stats.health_max * (hp_pct + (ctx.hero.stats.scale-1)*scale_bonus/100) / 100.0
-				cb_vars[AutoAttackModifier.VarType.DAMAGE_ADD] += bonus
 	aa_mod.additional_effect_callback = func(cb_vars: Dictionary) -> void:
 		if not state.get(&"proc_active", false): return
 		state[&"proc_active"] = false
@@ -34,6 +31,11 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		var axe_vfx := AXE_VISUAL.instantiate() as Node3D
 		ctx.hero.get_tree().root.add_child(axe_vfx)
 		axe_vfx.global_position = target.global_position
+		ctx.periodic_timers.register_oneshot(DEPLOY_TIME, func() -> void:
+			if not is_instance_valid(target): return
+			var bonus: float = target.stats.health_max * (hp_pct + (ctx.hero.stats.scale - 1) * scale_bonus / 100) / 100.0
+			ctx.hero.direct_damage(target, bonus, Utils.ActionType.DAMAGE_PHYSICAL, &"Titan Axe")
+		)
 
 	ctx.battle_callbacks.register_battle_start(&"Titan Axe", func() -> void:
 		state[&"count"] = 0

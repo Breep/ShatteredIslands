@@ -16,6 +16,8 @@
 resource_name = "Material.001"
 cull_mode = 2
 albedo_color = Color(0.52548885, 0.30588254, 0.2117648, 1)
+metallic = 0.5
+roughness = 0.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ijevd"]
 resource_name = "Material.006"

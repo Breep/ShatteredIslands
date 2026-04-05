@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="HeroDesc" format=3 uid="uid://bnf0l5gnqf0y4"]
 
 [ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://Entities/Heroes/_Shared/hero_desc.gd" id="1_desc"]
-[ext_resource type="Texture2D" uid="uid://difeq0pm3hgjs" path="res://Entities/Heroes/DarkKnight/Data/darkknight_portrait.png" id="1_port"]
+[ext_resource type="Texture2D" uid="uid://b70pve4l6kb0j" path="res://Entities/Heroes/Tank/tank.png" id="1_lienp"]
 [ext_resource type="Script" uid="uid://2py6kv5aqgem" path="res://Entities/Heroes/_Shared/hero_stats.gd" id="2_stats"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://Entities/Heroes/_Shared/skill.gd" id="3_m7p0l"]
 [ext_resource type="Resource" uid="uid://djrb1hkxbhhwv" path="res://Entities/Heroes/Tank/Stats/tank_lvl_1.tres" id="5_diotd"]
@@ -27,7 +27,7 @@
 script = ExtResource("1_desc")
 name = "Tank"
 id = 2
-portrait = ExtResource("1_port")
+portrait = ExtResource("1_lienp")
 description = "Un guerrier massif avec une defense impenetrable."
 stats = Dictionary[int, ExtResource("2_stats")]({
 1: ExtResource("5_diotd"),
