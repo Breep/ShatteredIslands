@@ -7,7 +7,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var chance: float = _spawn_chances[card_lvl - 1]
 	var mod := ActionModifier.new()
 	mod.action_type = Utils.ActionCategory.STACK
-	mod.id = "Feathered Knife"
+	mod.id = &"Egg Bombardment"
 	mod.is_one_time_effect = false
 	mod.tags = [ActionModifier.TagType.CARD]
 	mod.after_action_logic_callback = func(cb_vars: Dictionary) -> void:
@@ -25,7 +25,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("Gifted Odds: Wrong cardlvl: ", cardlvl)
+		printerr("Egg Bombardment: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
 	var c: String = str(_spawn_chances[cardlvl - 1]).pad_decimals(0)

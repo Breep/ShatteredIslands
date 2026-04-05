@@ -18,7 +18,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var shield_ad_tau: float = _shield_ad_taus[card_lvl - 1]
 	var damage_as_shield_ratio: float = _damage_as_shield_ratios[card_lvl - 1]
 	
-	ctx.battle_callbacks.register_battle_start("Aegis Blade", func() -> void:
+	ctx.battle_callbacks.register_battle_start(&"Aegis Blade", func() -> void:
 		var spawn_loc := SpawnLocationConfig.create_arena_center(5)
 		ctx.hero.summon_entity(Entity.EntityType.AEGIS_BLADE, spawn_loc, {
 			AegisBlade.Modifier.AD: attack_damage,

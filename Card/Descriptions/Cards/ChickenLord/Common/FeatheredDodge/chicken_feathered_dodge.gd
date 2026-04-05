@@ -21,7 +21,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if not is_instance_valid(chicken): return
 		var mod2 := StatModifier.new()
 		mod2.calc_type = StatModifier.CalcType.ADD
-		mod2.id = "ChickenFeatheredDoddge_" + str(chicken.uid)
+		mod2.id = "ChickenFeatheredDodge_" + str(chicken.uid)
 		mod2.stat_type = EntityStats.StatType.DODGE
 		mod2.value = ctx.hero.stats.get_stat(EntityStats.StatType.DODGE) * chicken_inheritance/100
 		chicken.stat_modifiers_registry.register_modifier(mod2)

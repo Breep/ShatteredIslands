@@ -11,7 +11,7 @@ metadata/_custom_type_script = "uid://gpbhlq6yi8ty"
 
 [resource]
 script = ExtResource("1_m4356")
-name = "Protective dome"
+name = "Protective Dome"
 picture = ExtResource("1_kmq2y")
 families = Array[int]([2])
 player_upgrade = SubResource("Resource_kmq2y")

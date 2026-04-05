@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Card" format=3 uid="uid://yph6mhvbkj0c"]
 
-[ext_resource type="Script" uid="uid://meie2sprd15l" path="res://Card/Descriptions/Cards/Engineer/Legendary/AegisBlade/engineer_aegies_blade.gd" id="1_8tyqj"]
+[ext_resource type="Script" uid="uid://meie2sprd15l" path="res://Card/Descriptions/Cards/Engineer/Legendary/AegisBlade/engineer_aegis_blade.gd" id="1_8tyqj"]
 [ext_resource type="Script" uid="uid://dc86gt0exdo1a" path="res://Card/Templates/card.gd" id="1_tt3r5"]
 [ext_resource type="Texture2D" uid="uid://psnthd75twnn" path="res://Card/Descriptions/Cards/Engineer/Common/ForceField/engineer_force_field.png" id="2_engr1"]
 

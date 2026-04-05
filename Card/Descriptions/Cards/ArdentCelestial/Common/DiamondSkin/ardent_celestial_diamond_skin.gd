@@ -5,7 +5,7 @@ extends HeroUpgrade
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("Kuiper Belt: Wrong card_lvl: ", card_lvl)
+		printerr("Diamond Skin: Wrong card_lvl: ", card_lvl)
 		return
 
 	var magical_resistance: float = _magical_resistances[card_lvl - 1]
@@ -21,7 +21,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("Kuiper Belt: Wrong cardlvl: ", cardlvl)
+		printerr("Diamond Skin: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
 	return "Hero gains " + str(_magical_resistances[cardlvl - 1]) + " [[MAGICAL_DAMAGE]] resistance."

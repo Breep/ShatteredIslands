@@ -25,7 +25,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("Rapid Incubation: Wrong cardlvl: ", cardlvl)
+		printerr("Yin Chicken: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
 	var c: String = str(_chances[cardlvl - 1]).pad_decimals(0)

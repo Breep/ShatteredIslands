@@ -5,7 +5,7 @@ extends HeroUpgrade
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("Consuming the Star: Wrong card_lvl: ", card_lvl)
+		printerr("Xeno Egg: Wrong card_lvl: ", card_lvl)
 		return
 
 	var proc_chance: float = _proc_chances[card_lvl - 1]
@@ -20,7 +20,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("Consuming the Star: Wrong cardlvl: ", cardlvl)
+		printerr("Xeno Egg: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
 	return "Every [[METEOR]] has " + str(_proc_chances[cardlvl - 1]) + "% chance to hatch a [[CHICKEN_LORD]] egg."

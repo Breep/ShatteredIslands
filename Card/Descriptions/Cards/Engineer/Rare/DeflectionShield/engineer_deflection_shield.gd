@@ -8,7 +8,7 @@ extends HeroUpgrade
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("Toxic Filtration Layer: Wrong card_lvl: ", card_lvl)
+		printerr("Deflection Shield: Wrong card_lvl: ", card_lvl)
 		return
 
 	var shield_number: int = _shield_numbers[card_lvl - 1]
@@ -16,7 +16,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var shield_per_block: int = _shield_per_blocks[card_lvl - 1]
 	var period: float = _periods[card_lvl - 1]
 
-	ctx.periodic_timers.register(&"Toxic Filtration Layer", period, func() -> void:
+	ctx.periodic_timers.register(&"Deflection Shield", period, func() -> void:
 		ctx.hero.summon_entity(Entity.EntityType.DEFLECTION_SHIELD, SpawnLocationConfig.create_between_center(ctx.hero, 2), {
 			DeflectionShield.Modifier.BLOCKED_PROJECTILES: blocked_projectiles,
 			DeflectionShield.Modifier.SHIELD_PER_BLOCK: shield_per_block
@@ -26,7 +26,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("Toxic Filtration Layer: Wrong cardlvl: ", cardlvl)
+		printerr("Deflection Shield: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
 	var bp: String = str(_blocked_projectiles[cardlvl - 1])

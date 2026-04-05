@@ -14,7 +14,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	mod_heal.calc_type = StatModifier.CalcType.ADD
 	mod_heal.stat_type = EntityStats.StatType.WEAKNESS
 	mod_heal.action_type = Utils.ActionType.UTILITY_HEAL
-	mod_heal.id = "Fragile Protocol"
+	mod_heal.id = &"Fragile Protocol"
 	ctx.hero.stat_modifiers_registry.register_modifier(mod_heal)
 	
 	var mod_shield := StatModifier.new()
@@ -22,7 +22,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	mod_shield.calc_type = StatModifier.CalcType.ADD
 	mod_shield.stat_type = EntityStats.StatType.STRENGTH
 	mod_shield.action_type = Utils.ActionType.STACK_SHIELD
-	mod_shield.id = "Fragile Protocol"
+	mod_shield.id = &"Fragile Protocol"
 	ctx.hero.stat_modifiers_registry.register_modifier(mod_shield)
 
 

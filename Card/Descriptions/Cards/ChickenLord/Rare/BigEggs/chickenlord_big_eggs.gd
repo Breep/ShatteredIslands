@@ -23,7 +23,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		em[ChickenEgg.Modifier.SCALE] = 2.0
 		var hm: Array = em.get(ChickenEgg.Modifier.HATCH_MODIFIERS, [])
 		var mod := HatchModifier.new()
-		mod.id = &"Chicken Twins"
+		mod.id = &"Big Eggs"
 		mod.is_one_time_effect = false
 		mod.before_hatch_callback = func(vars: Dictionary) -> void:
 			vars[HatchModifier.VarType.SPAWN_COUNT] += chicken_per_egg
@@ -39,7 +39,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("BloodFrenzy: Wrong cardlvl: ", cardlvl)
+		printerr("Big Eggs: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
 	var ben: String = str(_big_egg_numbers[cardlvl - 1]).pad_decimals(0)

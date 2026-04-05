@@ -12,7 +12,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	mod_thorn.value = _thorns[card_lvl - 1]
 	mod_thorn.calc_type = StatModifier.CalcType.ADD
 	mod_thorn.stat_type = EntityStats.StatType.THORN
-	mod_thorn.id = "Barbed Wire"
+	mod_thorn.id = &"Barbed Wire"
 	ctx.hero.stat_modifiers_registry.register_modifier(mod_thorn)
 
 

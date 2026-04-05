@@ -9,7 +9,7 @@ extends HeroUpgrade
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("Force Field: Wrong card_lvl: ", card_lvl)
+		printerr("Fortification Drone: Wrong card_lvl: ", card_lvl)
 		return
 	
 	var drones_number: int = _drones_numbers[card_lvl -1]
@@ -18,7 +18,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var drone_shield: float = _drone_shields[card_lvl - 1]
 	var respawn_timer: float = _respawn_timers[card_lvl - 1]
 	
-	ctx.battle_callbacks.register_battle_start("Fortification Drone", func() -> void:
+	ctx.battle_callbacks.register_battle_start(&"Fortification Drone", func() -> void:
 		for i in drones_number:
 			var spawn_loc := SpawnLocationConfig.create_entity_relative(ctx.hero, 8.0)
 			ctx.hero.summon_entity(Entity.EntityType.FORTIFICATION_DRONE, spawn_loc, {
@@ -32,7 +32,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("Force Field: Wrong cardlvl: ", cardlvl)
+		printerr("Fortification Drone: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
 	var nb: String = str(_drones_numbers[cardlvl - 1])

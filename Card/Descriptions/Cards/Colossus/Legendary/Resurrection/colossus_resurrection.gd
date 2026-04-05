@@ -52,7 +52,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 		for target in targets:
 			if target != null and is_instance_valid(target):
-				ctx.hero.direct_damage(target, damage, Utils.ActionType.DAMAGE_PHYSICAL, &"Ressurection")
+				ctx.hero.direct_damage(target, damage, Utils.ActionType.DAMAGE_PHYSICAL, &"Resurrection")
 				
 		var mod3 := StatModifier.new()
 		mod3.id = &"Resurrection"
@@ -73,4 +73,4 @@ func get_description(cardlvl: int) -> String:
 	var size: String = str(_size_increase[cardlvl - 1])
 	var damage: String = str(_damage_percent[cardlvl - 1])
 	
-	return "On death, resurrects with " + hp + "% HP and [[SCALE]] increases by " + size + "\n" + "Deals " + damage + "% of his max HP to all ennemies."
+	return "On death, resurrects with " + hp + "% HP and [[SCALE]] increases by " + size + "\n" + "Deals " + damage + "% of his max HP to all enemies."

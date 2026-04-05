@@ -6,7 +6,7 @@ extends HeroUpgrade
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("Force Field: Aegis Resonator: ", card_lvl)
+		printerr("Aegis Resonator: Wrong card_lvl: ", card_lvl)
 		return
 	
 	var period: float = _period[card_lvl - 1]
@@ -26,7 +26,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("Force Field: Wrong cardlvl: ", cardlvl)
+		printerr("Aegis Resonator: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
 	var p: String = str(_period[cardlvl - 1]).pad_decimals(1)

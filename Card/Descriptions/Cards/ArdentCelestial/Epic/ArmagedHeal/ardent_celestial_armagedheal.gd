@@ -6,7 +6,7 @@ extends HeroUpgrade
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[Card.Rarity.EPIC]:
-		printerr("Nuke: Wrong card_lvl: ", card_lvl)
+		printerr("Armagedheal: Wrong card_lvl: ", card_lvl)
 		return
 
 	var heal: int = _heal[card_lvl - 1]

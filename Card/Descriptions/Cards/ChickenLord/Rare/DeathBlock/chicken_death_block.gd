@@ -27,7 +27,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("Chicken Swarm: Wrong cardlvl: ", cardlvl)
+		printerr("Death Block: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
 	return "On chicken death, gives " + str(_block_amounts[cardlvl - 1]) + " [[BLOCK]] stacks to the closest ally chicken."

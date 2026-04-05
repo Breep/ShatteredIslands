@@ -8,7 +8,7 @@ extends HeroUpgrade
 
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("Titans Protection: Wrong card_lvl: ", card_lvl)
+		printerr("Fire Ball: Wrong card_lvl: ", card_lvl)
 		return
 
 	var damage: float = _damages[card_lvl - 1]
@@ -38,7 +38,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("Titans Protection: Wrong cardlvl: ", cardlvl)
+		printerr("Fire Ball: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
 	return "Launch a Fire Ball that deals " + str(_damages[cardlvl - 1]) + " every " + str(_periods[cardlvl - 1]) + "s. The projectile has " + str(_chances_to_bounce[cardlvl - 1]) + " * [[IGNITE]] stacks to bounce."

@@ -7,7 +7,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 	var defense_val: float = _defense_increase[card_lvl - 1]
 
 	var mod3 := StatModifier.new()
-	mod3.id = &"Crystal Moutain"
+	mod3.id = &"Crystal Mountain"
 	mod3.stat_type = EntityStats.StatType.DEFENCE
 	mod3.calc_type = StatModifier.CalcType.ADD
 	mod3.value = defense_val

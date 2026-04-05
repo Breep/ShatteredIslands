@@ -18,7 +18,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 func get_description(cardlvl: int) -> String:
 	if cardlvl < 1 or cardlvl > Card.RARITY_MAX_LEVEL[_rarity]:
-		printerr("BloodFrenzy: Wrong cardlvl: ", cardlvl)
+		printerr("Eggfinity: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	
 	var c: String = str(_egg_spawn_chances[cardlvl - 1]).pad_decimals(0)
