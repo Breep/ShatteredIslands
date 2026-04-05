@@ -4,7 +4,6 @@ extends Entity
 # == VIRTUAL CLASS ==
 
 @export var _despawn_timer: float = 5.0
-@export var _health_bar: SummonSimpleInfoPanel2D
 
 var summoner: Entity
 

@@ -1,5 +1,5 @@
 class_name SummonSimpleInfoPanel2D
-extends Control
+extends SimpleInfoPanel2D
 
 #region ============================== Export ==============================
 @export_group("External Nodes")

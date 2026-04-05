@@ -1,0 +1,2 @@
+class_name SimpleInfoPanel2D
+extends Control

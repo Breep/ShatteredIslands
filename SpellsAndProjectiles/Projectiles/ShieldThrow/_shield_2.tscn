@@ -47,7 +47,7 @@ shadow_mesh = SubResource("ArrayMesh_3qw6i")
 [node name="_shield_2" type="Node3D" unique_id=501651574]
 
 [node name="shield_2" type="MeshInstance3D" parent="." unique_id=367238506]
-transform = Transform3D(0.01, 0, 0, 0, -1.1920929e-09, -0.009999999, 0, 0.009999999, -1.1920929e-09, 0.0017837399, 1.091028e-06, 1.4681973e-08)
+transform = Transform3D(0.01, 0, 0, 0, -4.3711385e-10, -0.009999999, 0, 0.009999999, -4.3711385e-10, 0.0017837399, -0.31993452, 1.4681973e-08)
 material_override = SubResource("StandardMaterial3D_vfbxw")
 mesh = SubResource("ArrayMesh_4jxmg")
 skeleton = NodePath("")

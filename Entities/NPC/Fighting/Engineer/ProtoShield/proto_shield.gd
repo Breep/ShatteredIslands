@@ -6,6 +6,10 @@ enum Modifier {
 	HP_MAX
 }
 
+@onready var _anim_hovering_module: AnimHoveringModule = %AnimHoveringModule
+@onready var _anim_rotating_mode_x: AnimRotatingModule = %AnimRotatingModuleX
+@onready var _anim_rotating_mode_y: AnimRotatingModule = %AnimRotatingModuleY
+
 var _on_spawn_shield_amount: float
 var _on_spawn_hp_max: float
 
@@ -21,3 +25,19 @@ func _ready() -> void:
 	_base_stats.health_max = _on_spawn_hp_max
 	stat_modifiers_registry.recompute_all()
 	super._ready()
+
+
+func _on_died() -> void:
+	super._on_died()
+	_anim_hovering_module.stop_hover()
+	_anim_rotating_mode_x.stop_rotating()
+	_anim_rotating_mode_y.stop_rotating()
+	_play_fall_anim()
+
+
+func _play_fall_anim() -> void:
+	var tween := create_tween().set_parallel()
+	tween.tween_property(_visual_3d, "position:y", 0.0, 0.6) \
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	tween.tween_property(_visual_3d, "rotation:z", deg_to_rad(25.0), 0.6) \
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
