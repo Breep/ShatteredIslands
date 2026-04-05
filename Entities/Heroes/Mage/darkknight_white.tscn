@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://b672jaxh77fw"]
+[gd_scene format=4 uid="uid://b672jaxh77fw"]
 
 [ext_resource type="Animation" uid="uid://bkjf2t6rrahy4" path="res://Data/Anim/Anim darkknight/set up anim darkknight/attack.res" id="1_moja6"]
 [ext_resource type="Animation" uid="uid://vpgc54gujnc7" path="res://Data/Anim/Anim darkknight/set up anim darkknight/dance.res" id="2_hssua"]
@@ -3232,11 +3232,12 @@ _data = {
 &"ultimate": ExtResource("11_8stw3")
 }
 
-[node name="darkknight_white" type="Node3D"]
+[node name="darkknight_white" type="Node3D" unique_id=1843986187]
 
-[node name="rig" type="Node3D" parent="."]
+[node name="rig" type="Node3D" parent="." unique_id=388773210]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
-[node name="Skeleton3D" type="Skeleton3D" parent="rig"]
+[node name="Skeleton3D" type="Skeleton3D" parent="rig" unique_id=1322882237]
 bones/0/name = "c_pos"
 bones/0/parent = -1
 bones/0/rest = Transform3D(-1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0)
@@ -5058,51 +5059,49 @@ bones/259/position = Vector3(1.2050542, 1.0009966, -0.056615114)
 bones/259/rotation = Quaternion(0.457757, 0.27438977, 0.8350704, 0.13351515)
 bones/259/scale = Vector3(0.9999996, 0.99999994, 0.9999995)
 
-[node name="Cube_008" type="MeshInstance3D" parent="rig/Skeleton3D"]
+[node name="Cube_008" type="MeshInstance3D" parent="rig/Skeleton3D" unique_id=1162388007]
 mesh = SubResource("ArrayMesh_odu85")
 skin = SubResource("Skin_42n4r")
 
-[node name="Cube_009" type="MeshInstance3D" parent="rig/Skeleton3D"]
+[node name="Cube_009" type="MeshInstance3D" parent="rig/Skeleton3D" unique_id=817143408]
 mesh = SubResource("ArrayMesh_tbcwu")
 skin = SubResource("Skin_42n4r")
 
-[node name="Cube_011" type="MeshInstance3D" parent="rig/Skeleton3D"]
+[node name="Cube_011" type="MeshInstance3D" parent="rig/Skeleton3D" unique_id=738217529]
 mesh = SubResource("ArrayMesh_yof6i")
 skin = SubResource("Skin_42n4r")
 
-[node name="Cube_013" type="MeshInstance3D" parent="rig/Skeleton3D"]
+[node name="Cube_013" type="MeshInstance3D" parent="rig/Skeleton3D" unique_id=563492922]
 mesh = SubResource("ArrayMesh_mdo45")
 skin = SubResource("Skin_42n4r")
 
-[node name="Cube_015" type="MeshInstance3D" parent="rig/Skeleton3D"]
+[node name="Cube_015" type="MeshInstance3D" parent="rig/Skeleton3D" unique_id=1167024488]
 mesh = SubResource("ArrayMesh_uqf2r")
 skin = SubResource("Skin_42n4r")
 
-[node name="Cube_018" type="MeshInstance3D" parent="rig/Skeleton3D"]
+[node name="Cube_018" type="MeshInstance3D" parent="rig/Skeleton3D" unique_id=1611639622]
 mesh = SubResource("ArrayMesh_g4fwa")
 skin = SubResource("Skin_42n4r")
 
-[node name="Cube_020" type="MeshInstance3D" parent="rig/Skeleton3D"]
+[node name="Cube_020" type="MeshInstance3D" parent="rig/Skeleton3D" unique_id=1425089859]
 mesh = SubResource("ArrayMesh_3bwi6")
 skin = SubResource("Skin_42n4r")
 
-[node name="Cube_038" type="MeshInstance3D" parent="rig/Skeleton3D"]
+[node name="Cube_038" type="MeshInstance3D" parent="rig/Skeleton3D" unique_id=1276473229]
 mesh = SubResource("ArrayMesh_snm0g")
 skin = SubResource("Skin_42n4r")
 
-[node name="Cube_039" type="MeshInstance3D" parent="rig/Skeleton3D"]
+[node name="Cube_039" type="MeshInstance3D" parent="rig/Skeleton3D" unique_id=520459445]
 mesh = SubResource("ArrayMesh_ri2le")
 skin = SubResource("Skin_42n4r")
 
-[node name="Cube_041" type="MeshInstance3D" parent="rig/Skeleton3D"]
+[node name="Cube_041" type="MeshInstance3D" parent="rig/Skeleton3D" unique_id=903001489]
 mesh = SubResource("ArrayMesh_y8hpy")
 skin = SubResource("Skin_42n4r")
 
-[node name="Weapons" type="MeshInstance3D" parent="rig/Skeleton3D"]
+[node name="Weapons" type="MeshInstance3D" parent="rig/Skeleton3D" unique_id=609614211]
 mesh = SubResource("ArrayMesh_tfppa")
 skin = SubResource("Skin_42n4r")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_hkf2v")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1744879485]
+libraries/ = SubResource("AnimationLibrary_hkf2v")
