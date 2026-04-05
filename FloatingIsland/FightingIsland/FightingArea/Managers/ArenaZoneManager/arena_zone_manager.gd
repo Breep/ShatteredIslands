@@ -101,6 +101,36 @@ func get_center_zone_center() -> Vector3:
 	return _center_zone.global_position
 
 
+## Clamp a position to the full arena zone bounds.
+## If the position is outside, returns the closest point inside the arena.
+func clamp_to_arena(position: Vector3) -> Vector3:
+	if _full_arena_zone == null:
+		Verbose.warn("ArenaZoneManager: No full arena zone defined, cannot clamp", Verbose.Category.FIGHTING_AREA)
+		return position
+
+	var collision_shape: CollisionShape3D = null
+	for child in _full_arena_zone.get_children():
+		if child is CollisionShape3D:
+			collision_shape = child
+			break
+
+	if collision_shape == null:
+		Verbose.warn("ArenaZoneManager: No CollisionShape3D in full arena zone, cannot clamp", Verbose.Category.FIGHTING_AREA)
+		return position
+
+	var shape := collision_shape.shape
+	if shape is BoxShape3D:
+		var half_size: Vector3 = shape.size / 2.0
+		var center := collision_shape.global_position
+		var clamped := position
+		clamped.x = clampf(position.x, center.x - half_size.x, center.x + half_size.x)
+		clamped.z = clampf(position.z, center.z - half_size.z, center.z + half_size.z)
+		return clamped
+
+	Verbose.warn("ArenaZoneManager: Unsupported shape type for clamp, returning original position", Verbose.Category.FIGHTING_AREA)
+	return position
+
+
 ## Apply randomization offset to a position
 func apply_randomization(position: Vector3, radius: float) -> Vector3:
 	if radius <= 0.0:

@@ -38,7 +38,7 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if anim_player:
 			anim_player.play("Init")
 		ctx.hero.resurrect(_hp_max_revive[card_lvl - 1])
-		
+
 		var targets: Array[Entity] = ctx.hero.target_module.get_targets(
 			TargetModule.MultipleTargettingStrategy.ENEMIES
 		)

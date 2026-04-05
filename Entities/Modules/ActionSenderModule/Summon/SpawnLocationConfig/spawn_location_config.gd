@@ -71,13 +71,17 @@ func resolve(arena_zone_manager: ArenaZoneManager) -> Vector3:
 			Verbose.error("Unknown location type", Verbose.Category.SPAWN_LOCATION_CONFIG)
 			return Vector3.ZERO
 	
-	# Apply randomization if specified
-	if randomization_radius > 0.0:
+	# Apply randomization if specified (skip for RANDOM_ARENA since it's already random)
+	if randomization_radius > 0.0 and location_type != LocationType.RANDOM_ARENA:
 		if arena_zone_manager != null:
-			return arena_zone_manager.apply_randomization(base_position, randomization_radius)
+			base_position = arena_zone_manager.apply_randomization(base_position, randomization_radius)
 		else:
-			return _apply_randomization(base_position, randomization_radius)
-	
+			base_position = _apply_randomization(base_position, randomization_radius)
+
+	# Clamp to arena bounds to prevent spawning outside the fighting zone
+	if arena_zone_manager != null:
+		base_position = arena_zone_manager.clamp_to_arena(base_position)
+
 	return base_position
 
 
