@@ -8,9 +8,13 @@ signal silenced_changed(is_active: bool, duration: float, infinite: bool)
 signal invulnerable_changed(is_active: bool, duration: float, infinite: bool)
 signal untargetable_changed(is_active: bool, duration: float, infinite: bool)
 
+# ============================== Constants ==============================
+const TAUNT_DEFENCE_BONUS: float = 30.0
+
 # ============================== Public variables ==============================
 
 # ============================== Private variables ==============================
+var _taunt_defence_mod: StatModifier
 
 @onready var _timers: Dictionary[Status.Type, Timer] = {
 	Status.Type.STUN: %StunTimer,
@@ -32,7 +36,16 @@ signal untargetable_changed(is_active: bool, duration: float, infinite: bool)
 
 func init(entity_owner: Entity) -> StatusModule:
 	super.init(entity_owner)
-	
+
+	_taunt_defence_mod = StatModifier.new()
+	_taunt_defence_mod.id = &"Taunt Defence Bonus"
+	_taunt_defence_mod.stat_type = EntityStats.StatType.DEFENCE
+	_taunt_defence_mod.calc_type = StatModifier.CalcType.ADD
+	_taunt_defence_mod.value = TAUNT_DEFENCE_BONUS
+	_taunt_defence_mod.tags = []
+
+	taunted_changed.connect(_on_taunt_defence_update)
+
 	return self
 
 
@@ -83,6 +96,13 @@ func _emit_status_changed(status_type: Status.Type, is_active: bool, duration: f
 		Status.Type.SILENCE: silenced_changed.emit(is_active, duration, infinite)
 		Status.Type.INVULNERABLE: invulnerable_changed.emit(is_active, duration, infinite)
 		Status.Type.UNTARGETABLE: untargetable_changed.emit(is_active, duration, infinite)
+
+
+func _on_taunt_defence_update(is_active: bool, _duration: float, _infinite: bool) -> void:
+	if is_active:
+		_owner.stat_modifiers_registry.register_modifier(_taunt_defence_mod)
+	else:
+		_owner.stat_modifiers_registry.unregister_modifier(_taunt_defence_mod)
 
 
 func _on_stun_timer_timeout() -> void:
