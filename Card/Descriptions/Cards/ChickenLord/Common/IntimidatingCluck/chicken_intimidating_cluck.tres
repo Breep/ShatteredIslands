@@ -7,7 +7,7 @@
 [sub_resource type="Resource" id="Resource_w6jw7"]
 script = ExtResource("1_vmywv")
 _stun_durations = Array[float]([0.4, 0.6, 0.8, 1.0, 1.4])
-_stun_chances = Array[float]([10.0, 10.0, 10.0, 10.0, 10.0])
+_stun_chances = Array[float]([15.0, 15.0, 15.0, 15.0, 15.0])
 metadata/_custom_type_script = "uid://cra3vkcejd6qo"
 
 [resource]

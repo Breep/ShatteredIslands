@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="HeroDesc" format=3 uid="uid://cp742lkmm0ywr"]
 
 [ext_resource type="Script" uid="uid://dtcjta70luxvr" path="res://Entities/Heroes/_Shared/hero_desc.gd" id="1_desc"]
-[ext_resource type="Texture2D" uid="uid://difeq0pm3hgjs" path="res://Entities/Heroes/DarkKnight/Data/darkknight_portrait.png" id="1_port"]
+[ext_resource type="Texture2D" uid="uid://byaig4p8hmgb4" path="res://Entities/Heroes/Assassin/Stats/assassin.png" id="1_k4umn"]
 [ext_resource type="Script" uid="uid://2py6kv5aqgem" path="res://Entities/Heroes/_Shared/hero_stats.gd" id="2_stats"]
 [ext_resource type="Script" uid="uid://dfby4merlgkep" path="res://Entities/Heroes/_Shared/skill.gd" id="3_aoxwe"]
 [ext_resource type="Resource" uid="uid://dwduenwewgh1m" path="res://Entities/Heroes/Assassin/Stats/assassin_lvl_1.tres" id="5_dfljr"]
@@ -27,7 +27,7 @@
 script = ExtResource("1_desc")
 name = "Assassin"
 id = 3
-portrait = ExtResource("1_port")
+portrait = ExtResource("1_k4umn")
 description = "Un tueur rapide et mortel qui frappe dans l'ombre."
 stats = Dictionary[int, ExtResource("2_stats")]({
 1: ExtResource("5_dfljr"),
