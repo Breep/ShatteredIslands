@@ -6,7 +6,7 @@
 [ext_resource type="Resource" uid="uid://cqw2clgppw78q" path="res://Card/Descriptions/Families/ChickenLord/chicken_lord_family.tres" id="4_meu6t"]
 [ext_resource type="Resource" uid="uid://dw66lnwee8ruk" path="res://Card/Descriptions/Families/Engineer/engineer_family.tres" id="5_ihlsc"]
 [ext_resource type="Resource" uid="uid://dsbwlgjbtxhh0" path="res://Card/Descriptions/Families/ArdentCelestial/ardent_celestial_family.tres" id="6_1ctrr"]
-[ext_resource type="Resource" uid="uid://r422raom70t5" path="res://Card/Descriptions/Families/colossus_family.tres" id="7_it8y2"]
+[ext_resource type="Resource" uid="uid://r422raom70t5" path="res://Card/Descriptions/Families/Colossus/colossus_family.tres" id="7_it8y2"]
 [ext_resource type="Resource" uid="uid://brvmbafl0cv83" path="res://Card/Descriptions/Families/light_family.tres" id="7_pt144"]
 [ext_resource type="Resource" uid="uid://cqqln8j72uq1e" path="res://Card/Descriptions/Families/poison_family.tres" id="8_0a146"]
 [ext_resource type="Resource" uid="uid://djjcx0kdvmr5f" path="res://Card/Descriptions/Families/storm_caller_family.tres" id="10_nlixk"]
