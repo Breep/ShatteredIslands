@@ -36,13 +36,13 @@ drop_rates_by_family_level = Dictionary[int, Dictionary]({
 3: 3
 },
 4: {
-0: 79,
-1: 9,
+0: 81,
+1: 8,
 2: 7,
-3: 5
+3: 4
 }
 })
-gold_earned_per_round = 500
+gold_earned_per_round = 450
 gold_starting_game = 400
 player_starting_health = 12
 damage_max_diff_win_lose = 2

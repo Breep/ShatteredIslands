@@ -108,7 +108,7 @@ metadata/_custom_type_script = "uid://dq0ub1oemlk0p"
 shader = ExtResource("6_tfbfs")
 shader_parameter/custom_texture = ExtResource("5_larnv")
 shader_parameter/modulate_color = Color(0.09384686, 0.09384686, 0.09384686, 1)
-shader_parameter/radius = 0.5
+shader_parameter/radius = 0.35
 
 [sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_1t4e2"]
 default_input_values = [0, Vector2(0, 0), 1, Vector2(0, 0)]

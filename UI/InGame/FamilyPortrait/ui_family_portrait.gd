@@ -61,7 +61,7 @@ const FRAME_TEXTURES: Array[Dictionary] = [
 @onready var _current_xp_progress_bar: TextureProgressBar = %XPProgressBar
 @onready var _button: TextureButton = %TextureButton
 @onready var _glow_effect: TextureRect = %GlowEffect
-@onready var _family_background: ColorRect = %FamilyBackground
+#@onready var _family_background: ColorRect = %FamilyBackground
 @onready var _xp_bar_frame: TextureRect = %XPBarFrame
 @onready var _main_frame: TextureRect = %MainFrame
 
@@ -107,9 +107,9 @@ func _ready() -> void:
 	_update_frame()
 	_glow_effect.hide()
 
-	if _family_background.material != null:
-		_family_background.material = _family_background.material.duplicate()
-		_family_background.material.set_shader_parameter("color_count", 1)
+	#if _family_background.material != null:
+		#_family_background.material = _family_background.material.duplicate()
+		#_family_background.material.set_shader_parameter("color_count", 1)
 
 	_button.mouse_entered.connect(func() -> void: hovered.emit(self))
 	_button.pressed.connect(func() -> void: pressed.emit(self))
@@ -118,11 +118,11 @@ func _ready() -> void:
 
 func init(family: Family) -> void:
 	family_type = family.family_type
-	_family_background.modulate = family.color
+	#_family_background.modulate = family.color
 	_glow_effect.material.set_shader_parameter("glow_color", family.color)
 	_family_icon.texture = family.icon
 	_family = family
-	_update_family_background(family)
+	#_update_family_background(family)
 
 
 func unselect() -> void:
@@ -162,9 +162,9 @@ func _glow() -> void:
 		#.set_ease(Tween.EASE_OUT)
 
 
-func _update_family_background(family: Family) -> void:
-	if _family_background.material == null:
-		return
-	_family_background.material.set_shader_parameter("base_color", family.color)
+#func _update_family_background(family: Family) -> void:
+	#if _family_background.material == null:
+		#return
+	#_family_background.material.set_shader_parameter("base_color", family.color)
 
  
