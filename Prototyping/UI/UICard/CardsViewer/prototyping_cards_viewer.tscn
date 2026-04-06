@@ -10,7 +10,7 @@
 [ext_resource type="Resource" uid="uid://brvmbafl0cv83" path="res://Card/Descriptions/Families/light_family.tres" id="8_5htbd"]
 [ext_resource type="Resource" uid="uid://r422raom70t5" path="res://Card/Descriptions/Families/colossus_family.tres" id="9_fbnxy"]
 [ext_resource type="Resource" uid="uid://cqqln8j72uq1e" path="res://Card/Descriptions/Families/poison_family.tres" id="10_ctxi2"]
-[ext_resource type="Resource" uid="uid://cqw2clgppw78q" path="res://Card/Descriptions/Families/chicken_lord_family.tres" id="12_o3hfc"]
+[ext_resource type="Resource" uid="uid://cqw2clgppw78q" path="res://Card/Descriptions/Families/ChickenLord/chicken_lord_family.tres" id="12_o3hfc"]
 [ext_resource type="Resource" uid="uid://b3vqgxyoo4150" path="res://Card/Descriptions/Families/necro_family.tres" id="14_x005m"]
 [ext_resource type="PackedScene" uid="uid://dj7bvdysxgxe6" path="res://Card/2D/CardsViewer/ui_cards_viewer.tscn" id="16_4ggcj"]
 
