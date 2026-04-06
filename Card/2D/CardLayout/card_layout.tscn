@@ -31,9 +31,9 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aura"]
 shader = ExtResource("30_aura")
 shader_parameter/aura_texture = ExtResource("9_6hlmk")
-shader_parameter/aura_color = Color(0.83137256, 0.6862745, 0.07058824, 1)
+shader_parameter/aura_color = Color(1, 0.85, 0.2, 1)
 shader_parameter/intensity = 1.686000080085
-shader_parameter/base_scale = 0.5500000228651201
+shader_parameter/base_scale = 1.41000006371512
 shader_parameter/pulse_speed = 1.2
 shader_parameter/pulse_amount = 0.08
 shader_parameter/rotation_speed = 0.1510000071725
@@ -174,16 +174,15 @@ level5_texture = ExtResource("18_7ajba")
 
 [node name="Aura" type="TextureRect" parent="." unique_id=1301764167]
 unique_name_in_owner = true
-visible = false
 material = SubResource("ShaderMaterial_aura")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -536.0
-offset_top = -581.0
-offset_right = 536.0
-offset_bottom = 696.0
+offset_left = -53.0
+offset_top = -19.0
+offset_right = 47.0
+offset_bottom = 95.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
