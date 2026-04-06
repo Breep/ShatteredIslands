@@ -641,6 +641,7 @@ func _on_died() -> void:
 	if conditions != null: conditions.stop()
 	if _movement_module != null: _movement_module.stop()
 	if _auto_attack_periodic_module != null and auto_attack_enabled: _auto_attack_periodic_module.stop()
+	if periodic_timer_registry != null: periodic_timer_registry.stop_all()
 	
 	for action_modifier in death_modifiers_registry.consume_all_modifiers():
 		if action_modifier.after_action_logic_callback.is_valid():
