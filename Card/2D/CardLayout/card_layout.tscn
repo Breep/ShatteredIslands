@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dbdgpnlir03dy" path="res://Card/2D/CardLayout/card_layout.gd" id="1_2an10"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_ru7cc"]
 [ext_resource type="Texture2D" uid="uid://yekknulevsvb" path="res://Card/Descriptions/Cards/Poison/Common/PoisonFlask/portrait_poison_flask.png" id="3_mt3v6"]
-[ext_resource type="Script" uid="uid://o4m1vk8f267i" path="res://VFX/VFEZ-godot-main/vfez_material_2d.gd" id="5_m3odx"]
+[ext_resource type="Script" uid="uid://dq0ub1oemlk0p" path="res://VFX/VFEZ-godot-main/vfez_material_2d.gd" id="5_m3odx"]
 [ext_resource type="Texture2D" uid="uid://0djydjl344rv" path="res://SpellsAndProjectiles/Spells/Lightning/Lightning/Visual/Textures/floor_mark_texture.png" id="8_augoc"]
 [ext_resource type="Texture2D" uid="uid://caed4hfn4vvxm" path="res://Data/Texture/Kenney2/light_02.png" id="9_6hlmk"]
 [ext_resource type="Texture2D" uid="uid://cwqdngpmbcnck" path="res://Card/Descriptions/Families/Icons/poison.png" id="9_mt3v6"]
@@ -26,7 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://ifaj1br6koel" path="res://Card/2D/CardLayout/Data/StandardCard/ct_family_frame.png" id="19_7ajba"]
 [ext_resource type="Shader" uid="uid://bquiydhxqegb5" path="res://Card/2D/CardLayout/Data/Shaders/curve_text.gdshader" id="21_xw5tp"]
 [ext_resource type="Texture2D" uid="uid://bxktk2p3m3g2" path="res://Card/2D/CardLayout/Data/StandardCard/card_full_mask.png" id="25_7ajba"]
-[ext_resource type="Shader" uid="uid://ces5qqkirl131" path="res://Card/2D/CardLayout/Data/Shaders/card_aura.gdshader" id="30_aura"]
+[ext_resource type="Shader" path="res://Card/2D/CardLayout/Data/Shaders/card_aura.gdshader" id="30_aura"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aura"]
 shader = ExtResource("30_aura")
@@ -174,6 +174,7 @@ level5_texture = ExtResource("18_7ajba")
 
 [node name="Aura" type="TextureRect" parent="." unique_id=1301764167]
 unique_name_in_owner = true
+visible = false
 material = SubResource("ShaderMaterial_aura")
 layout_mode = 1
 anchors_preset = 15
@@ -390,7 +391,6 @@ offset_top = 1260.0
 offset_right = 1070.0
 offset_bottom = 1607.0
 size_flags_vertical = 3
-theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
 theme_override_fonts/normal_font = ExtResource("13_p31bt")

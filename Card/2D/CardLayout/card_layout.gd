@@ -34,11 +34,10 @@ var _base_intensity: float = 1.0
 var _glow_hover_tween: Tween
 
 func _ready() -> void:
-	if _family_background == null or _family_background.material == null:
-		Verbose.error("No shader found for family background", Verbose.Category.CARD)
-		return
-	_family_background.material = _family_background.material.duplicate()
-	_family_background_material = _family_background.material as ShaderMaterial
+	#if _family_background == null or _family_background.material == null:
+		#Verbose.error("No shader found for family background", Verbose.Category.CARD)
+		#return
+
 	if _rune_glow_tools.material != null:
 		_rune_glow_tools.material = _rune_glow_tools.material.duplicate()
 		_rune_glow_tools.refresh_material()

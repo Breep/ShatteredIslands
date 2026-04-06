@@ -10,7 +10,7 @@ const DESC_PANELS: Dictionary = {
 
 @onready var _family_name_label: RichTextLabel = %FamilyNameLabel
 @onready var _ui_cards_viewer: UICardsViewer = %UICardsViewer
-@onready var _hbox: HBoxContainer = $HBoxContainer
+@onready var _hbox: HBoxContainer = %HBoxContainer
 
 var _current_display_mode: UICardsViewer.DisplayMode = UICardsViewer.DisplayMode.UNLOCKED_ONLY
 var _player: Player
@@ -25,14 +25,10 @@ func display_family(player: Player, family: Family) -> void:
 
 	_player = player
 	_family = family
+	_hero = _player.hero
 	_player.deck.has_changed.connect(_on_deck_has_changed)
 	_family_name_label.text = _family.family_name
 	_refresh_cards_viewer()
-	_refresh_desc_panel()
-
-
-func set_hero(hero: Hero) -> void:
-	_hero = hero
 	_refresh_desc_panel()
 #endregion
 
