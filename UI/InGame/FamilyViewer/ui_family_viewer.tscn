@@ -3,19 +3,9 @@
 [ext_resource type="Script" uid="uid://dqsbil04m2fyg" path="res://UI/Menu/MainMenu/text_button.gd" id="1_atdtf"]
 [ext_resource type="Theme" uid="uid://deijluejrkd7e" path="res://UI/_Themes/main_theme.tres" id="1_mnlqs"]
 [ext_resource type="Script" uid="uid://cha3glq6t5f5u" path="res://UI/InGame/FamilyViewer/ui_family_viewer.gd" id="1_ygf1p"]
+[ext_resource type="StyleBox" uid="uid://c847d75y4mjq6" path="res://UI/InGame/FamilyViewer/new_style_box_flat.tres" id="3_26mx0"]
 [ext_resource type="PackedScene" uid="uid://dj7bvdysxgxe6" path="res://Card/2D/CardsViewer/ui_cards_viewer.tscn" id="3_mnlqs"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mnlqs"]
-bg_color = Color(0.45490196, 0.3882353, 0.4745098, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0.9529412, 0.9607843, 0.972549, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+[ext_resource type="Script" uid="uid://bd3srw4twda5w" path="res://UI/Tool/SmartTextLabel/ui_smart_text_label.gd" id="6_biljw"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_26mx0"]
 grow_begin = -10.0
@@ -38,16 +28,17 @@ grow_vertical = 2
 theme = ExtResource("1_mnlqs")
 script = ExtResource("1_ygf1p")
 
-[node name="Panel" type="Panel" parent="." unique_id=1329501171]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_mnlqs")
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=948595882]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=307774511]
+[node name="Panel" type="Panel" parent="HBoxContainer" unique_id=1329501171]
+custom_minimum_size = Vector2(1000, 800)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3_26mx0")
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Panel" unique_id=307774511]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -59,10 +50,10 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=1186319356]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Panel/MarginContainer" unique_id=1186319356]
 layout_mode = 2
 
-[node name="FamilyNameLabel" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer" unique_id=1357355350]
+[node name="FamilyNameLabel" type="RichTextLabel" parent="HBoxContainer/Panel/MarginContainer/VBoxContainer" unique_id=1357355350]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -75,16 +66,16 @@ text = "FAMILY NAME"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer" unique_id=794522544]
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/Panel/MarginContainer/VBoxContainer" unique_id=794522544]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxLine_26mx0")
 
-[node name="CardsViewerController" type="Control" parent="Panel/MarginContainer/VBoxContainer" unique_id=1513914538]
+[node name="CardsViewerController" type="Control" parent="HBoxContainer/Panel/MarginContainer/VBoxContainer" unique_id=1513914538]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/CardsViewerController" unique_id=1923180708]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Panel/MarginContainer/VBoxContainer/CardsViewerController" unique_id=1923180708]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -92,64 +83,103 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SortController" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/CardsViewerController/HBoxContainer" unique_id=1769135900]
+[node name="SortController" type="HBoxContainer" parent="HBoxContainer/Panel/MarginContainer/VBoxContainer/CardsViewerController/HBoxContainer" unique_id=1769135900]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="SortRarityButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/CardsViewerController/HBoxContainer/SortController" unique_id=462582810]
+[node name="SortRarityButton" type="Button" parent="HBoxContainer/Panel/MarginContainer/VBoxContainer/CardsViewerController/HBoxContainer/SortController" unique_id=462582810]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Rarity"
 script = ExtResource("1_atdtf")
 metadata/_custom_type_script = "uid://dqsbil04m2fyg"
 
-[node name="SortLevelButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/CardsViewerController/HBoxContainer/SortController" unique_id=304423642]
+[node name="SortLevelButton" type="Button" parent="HBoxContainer/Panel/MarginContainer/VBoxContainer/CardsViewerController/HBoxContainer/SortController" unique_id=304423642]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Level"
 script = ExtResource("1_atdtf")
 metadata/_custom_type_script = "uid://dqsbil04m2fyg"
 
-[node name="SortNameButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/CardsViewerController/HBoxContainer/SortController" unique_id=1670258995]
+[node name="SortNameButton" type="Button" parent="HBoxContainer/Panel/MarginContainer/VBoxContainer/CardsViewerController/HBoxContainer/SortController" unique_id=1670258995]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Name"
 script = ExtResource("1_atdtf")
 metadata/_custom_type_script = "uid://dqsbil04m2fyg"
 
-[node name="DisplayController" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/CardsViewerController/HBoxContainer" unique_id=1498874498]
+[node name="DisplayController" type="HBoxContainer" parent="HBoxContainer/Panel/MarginContainer/VBoxContainer/CardsViewerController/HBoxContainer" unique_id=1498874498]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="Panel/MarginContainer/VBoxContainer/CardsViewerController/HBoxContainer/DisplayController" unique_id=241489237]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="HBoxContainer/Panel/MarginContainer/VBoxContainer/CardsViewerController/HBoxContainer/DisplayController" unique_id=241489237]
 layout_mode = 2
 stretch_mode = 1
 alignment_horizontal = 2
 
-[node name="ShowAllButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/CardsViewerController/HBoxContainer/DisplayController/AspectRatioContainer" unique_id=1498931170]
+[node name="ShowAllButton" type="Button" parent="HBoxContainer/Panel/MarginContainer/VBoxContainer/CardsViewerController/HBoxContainer/DisplayController/AspectRatioContainer" unique_id=1498931170]
 layout_mode = 2
 text = "All"
 script = ExtResource("1_atdtf")
 metadata/_custom_type_script = "uid://dqsbil04m2fyg"
 
-[node name="HSeparator2" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer" unique_id=1498519503]
+[node name="HSeparator2" type="HSeparator" parent="HBoxContainer/Panel/MarginContainer/VBoxContainer" unique_id=1498519503]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxLine_biljw")
 
-[node name="Control" type="Control" parent="Panel/MarginContainer/VBoxContainer" unique_id=1686096509]
+[node name="Control" type="Control" parent="HBoxContainer/Panel/MarginContainer/VBoxContainer" unique_id=1686096509]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="UICardsViewer" parent="Panel/MarginContainer/VBoxContainer/Control" unique_id=303247800 instance=ExtResource("3_mnlqs")]
+[node name="UICardsViewer" parent="HBoxContainer/Panel/MarginContainer/VBoxContainer/Control" unique_id=303247800 instance=ExtResource("3_mnlqs")]
 unique_name_in_owner = true
 layout_mode = 1
 offset_top = -890.0
 offset_bottom = 880.0
 scale = Vector2(0.385, 0.385)
 
-[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/CardsViewerController/HBoxContainer/SortController/SortRarityButton" to="." method="_on_sort_rarity_button_pressed"]
-[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/CardsViewerController/HBoxContainer/SortController/SortLevelButton" to="." method="_on_sort_level_button_pressed"]
-[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/CardsViewerController/HBoxContainer/SortController/SortNameButton" to="." method="_on_sort_name_button_pressed"]
-[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/CardsViewerController/HBoxContainer/DisplayController/AspectRatioContainer/ShowAllButton" to="." method="_on_show_all_button_pressed"]
+[node name="Panel2" type="Panel" parent="HBoxContainer" unique_id=1690328930]
+custom_minimum_size = Vector2(400, 800)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3_26mx0")
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Panel2" unique_id=767490690]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Panel2/MarginContainer" unique_id=1694257701]
+layout_mode = 2
+
+[node name="SmartTextLabel" type="RichTextLabel" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer" unique_id=1327473835]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.13
+bbcode_enabled = true
+text = "Increase your magical abilities by casting [[METEOR]].
+Burn your enemies with [[IGNITE]]."
+script = ExtResource("6_biljw")
+text_raw = "Increase your magical abilities by casting [[METEOR]].
+Burn your enemies with [[IGNITE]]."
+metadata/_custom_type_script = "uid://bd3srw4twda5w"
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer" unique_id=1650002425]
+layout_mode = 2
+
+[node name="Passive" type="Control" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer" unique_id=278970172]
+layout_mode = 2
+size_flags_vertical = 3
+
+[connection signal="pressed" from="HBoxContainer/Panel/MarginContainer/VBoxContainer/CardsViewerController/HBoxContainer/SortController/SortRarityButton" to="." method="_on_sort_rarity_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/Panel/MarginContainer/VBoxContainer/CardsViewerController/HBoxContainer/SortController/SortLevelButton" to="." method="_on_sort_level_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/Panel/MarginContainer/VBoxContainer/CardsViewerController/HBoxContainer/SortController/SortNameButton" to="." method="_on_sort_name_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/Panel/MarginContainer/VBoxContainer/CardsViewerController/HBoxContainer/DisplayController/AspectRatioContainer/ShowAllButton" to="." method="_on_show_all_button_pressed"]

@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bvqsnkh0s11q2" path="res://UI/InGame/FamilyPortrait/ui_all_families_portrait.tscn" id="2_od8ek"]
 [ext_resource type="Resource" uid="uid://cqw2clgppw78q" path="res://Card/Descriptions/Families/chicken_lord_family.tres" id="4_meu6t"]
 [ext_resource type="Resource" uid="uid://dw66lnwee8ruk" path="res://Card/Descriptions/Families/engineer_family.tres" id="5_ihlsc"]
-[ext_resource type="Resource" uid="uid://dsbwlgjbtxhh0" path="res://Card/Descriptions/Families/ardent_celestial_family.tres" id="6_1ctrr"]
+[ext_resource type="Resource" uid="uid://dsbwlgjbtxhh0" path="res://Card/Descriptions/Families/ArdentCelestial/ardent_celestial_family.tres" id="6_1ctrr"]
 [ext_resource type="Resource" uid="uid://r422raom70t5" path="res://Card/Descriptions/Families/colossus_family.tres" id="7_it8y2"]
 [ext_resource type="Resource" uid="uid://brvmbafl0cv83" path="res://Card/Descriptions/Families/light_family.tres" id="7_pt144"]
 [ext_resource type="Resource" uid="uid://cqqln8j72uq1e" path="res://Card/Descriptions/Families/poison_family.tres" id="8_0a146"]

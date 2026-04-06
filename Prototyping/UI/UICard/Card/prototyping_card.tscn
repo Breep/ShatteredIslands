@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c2psjj8133op3" path="res://Card/2D/CardButton/card_button.tscn" id="1_cpxnc"]
 [ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://Card/Templates/family.gd" id="2_jjnsp"]
 [ext_resource type="Script" uid="uid://cs1mp6knp8v0p" path="res://Prototyping/UI/UICard/Card/prototyping_card.gd" id="2_script"]
-[ext_resource type="Resource" uid="uid://dsbwlgjbtxhh0" path="res://Card/Descriptions/Families/ardent_celestial_family.tres" id="3_7e1et"]
+[ext_resource type="Resource" uid="uid://dsbwlgjbtxhh0" path="res://Card/Descriptions/Families/ArdentCelestial/ardent_celestial_family.tres" id="3_7e1et"]
 [ext_resource type="Resource" uid="uid://cqw2clgppw78q" path="res://Card/Descriptions/Families/chicken_lord_family.tres" id="4_etvcx"]
 [ext_resource type="Resource" uid="uid://r422raom70t5" path="res://Card/Descriptions/Families/colossus_family.tres" id="5_i36ej"]
 [ext_resource type="Resource" uid="uid://dw66lnwee8ruk" path="res://Card/Descriptions/Families/engineer_family.tres" id="6_7lhnd"]
