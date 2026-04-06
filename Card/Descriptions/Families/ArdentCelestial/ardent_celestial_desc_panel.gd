@@ -33,8 +33,6 @@ func set_hero(hero: Hero) -> void:
 	var families_level := hero.get_families_level()
 	var level: int = families_level.get(Family.Type.ARDENT_CELESTIAL, 0)
 	var stats: FamilyArdentCelestialStats = hero.families_stats.ardent_celestial
-	print("SET HERO: ", level)
-
 	_update_passive(level)
 	_update_meteor_stats(hero, level, stats)
 #endregion
