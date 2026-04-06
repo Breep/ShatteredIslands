@@ -102,7 +102,10 @@ func _schedule_dequeue_for(target: Entity) -> void:
 	_meteor_scheduled[target] = true
 
 
-func _dequeue_meteor(target: Entity) -> void:
+func _dequeue_meteor(target: Variant) -> void:
+	if not is_instance_valid(target):
+		# La cible a été freed avant le déclenchement du oneshot — on drop la queue
+		return
 	_meteor_scheduled.erase(target)
 	var remaining: int = _meteor_queues.get(target, 0)
 	if remaining <= 0:
@@ -114,12 +117,11 @@ func _dequeue_meteor(target: Entity) -> void:
 		_meteor_queues.erase(target)
 	else:
 		_meteor_queues[target] = remaining
-	# Vérifier que la cible est encore valide, sinon retarget
+	# Retarget si nécessaire
 	var final_target: Entity = target
-	if not is_instance_valid(target):
+	if final_target == null:
 		final_target = _owner.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
 	if final_target == null:
-		# Plus de cible dispo : on réinjecte le restant nulle part, on drop
 		_meteor_queues.erase(target)
 		return
 	_owner.cast_spell(final_target, Spell.Type.METEOR)

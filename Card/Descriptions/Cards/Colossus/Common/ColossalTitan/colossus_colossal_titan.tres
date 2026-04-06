@@ -15,9 +15,9 @@ script = ExtResource("1_65eac")
 name = "Colossal Titan"
 picture = ExtResource("2_colos")
 families = Array[int]([6])
+player_upgrade = SubResource("Resource_3fuju")
 points = Dictionary[int, int]({
 6: 0
 })
-player_upgrade = SubResource("Resource_3fuju")
 lvl = 5
 metadata/_custom_type_script = "uid://dc86gt0exdo1a"
