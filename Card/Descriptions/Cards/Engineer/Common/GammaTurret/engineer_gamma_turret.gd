@@ -3,6 +3,8 @@ extends HeroUpgrade
 
 @export var _ad: Array[float]
 @export var _shield: Array[int]
+@export var _as: Array[float]
+@export var _hp: Array[int]
 @export var _nb_turret: Array[int]
 @export var _periods: Array[float]
 
@@ -13,6 +15,8 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 
 	var ad: float = _ad[card_lvl - 1]
 	var shield: int = _shield[card_lvl - 1]
+	var attack_speed: float = _as[card_lvl - 1]
+	var hp: int = _hp[card_lvl - 1]
 	var nb_turret: int = _nb_turret[card_lvl - 1]
 	var period: float = _periods[card_lvl - 1]
 
@@ -24,6 +28,8 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 			ctx.hero.summon_entity(Entity.EntityType.GAMMA_TURRET, SpawnLocationConfig.create_entity_relative(target, 2), {
 				GammaTurret.Modifier.TURRET_AD: ad,
 				GammaTurret.Modifier.TURRET_SHIELD: shield,
+				GammaTurret.Modifier.TURRET_AS: attack_speed,
+				GammaTurret.Modifier.TURRET_HP: hp,
 				GammaTurret.Modifier.MASTER: target
 			})
 	)

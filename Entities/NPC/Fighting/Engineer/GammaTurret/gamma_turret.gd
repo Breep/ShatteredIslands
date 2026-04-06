@@ -4,6 +4,8 @@ extends Summon
 enum Modifier {
 	TURRET_AD,
 	TURRET_SHIELD,
+	TURRET_AS,
+	TURRET_HP,
 	MASTER
 }
 
@@ -11,18 +13,23 @@ enum Modifier {
 
 var _ad: float
 var _shield: int
+var _as: float
+var _hp: int
 var _master: Entity
 
-func init(shield: int, ad: float, master: Entity) -> Summon:
+func init(shield: int, ad: float, attack_speed: float, hp: int, master: Entity) -> Summon:
 	_shield = shield
 	_ad = ad
+	_as = attack_speed
+	_hp = hp
 	_master = master
 	return self
 
 
 func _ready() -> void:
-	base_stats.health_max = 1
+	base_stats.health_max = _hp
 	base_stats.attack_damage = _ad
+	base_stats.attack_speed = _as
 	stat_modifiers_registry.recompute_all()
 	if not is_instance_valid(_master): _master = summoner
 	_movement_module.orbit_entity(_master, 2, 1, MovementModule.OrbitFacing.NONE)

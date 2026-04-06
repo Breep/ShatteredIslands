@@ -30,9 +30,9 @@ const BOT_INFOS: Dictionary[int, String] = {
 	-40: "gooby",
 	-50: "Meumeux",
 	-60: "TheAFKKnight",
-	-70: "CritsMcGee",
+	-70: "Twiins",
 	-80: "Xx_Slayer_xX",
-	-90: "GoldHoarder",
+	-90: "Josette",
 	-100: "Zorro",
 	-110: "Latika"
 }
