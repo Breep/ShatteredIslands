@@ -2,6 +2,7 @@
 
 [ext_resource type="StyleBox" uid="uid://c847d75y4mjq6" path="res://UI/InGame/FamilyViewer/new_style_box_flat.tres" id="1_difri"]
 [ext_resource type="Script" uid="uid://bd3srw4twda5w" path="res://UI/Tool/SmartTextLabel/ui_smart_text_label.gd" id="2_dkron"]
+[ext_resource type="Script" uid="uid://bii5w3bkghpu5" path="res://Card/Descriptions/Families/ChickenLord/chicken_lord_desc_panel.gd" id="3_desc"]
 
 [node name="ChickenLordDescPanel" type="Control" unique_id=741653594]
 layout_mode = 3
@@ -10,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("3_desc")
 
 [node name="MainPanel" type="Panel" parent="." unique_id=1313035986]
 custom_minimum_size = Vector2(400, 800)
