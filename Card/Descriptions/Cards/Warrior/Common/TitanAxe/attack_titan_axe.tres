@@ -8,7 +8,7 @@
 script = ExtResource("2_dlsa4")
 _attack_number = 3
 _hp_percent = Array[float]([5.0, 6.0, 7.0, 8.0, 10.0])
-_scale_bonuses = Array[float]([100.0, 200.0, 300.0, 400.0, 500.0])
+_scale_bonuses = Array[float]([100.0, 125.0, 150.0, 175.0, 200.0])
 metadata/_custom_type_script = "uid://bers5cdl5wv3u"
 
 [resource]

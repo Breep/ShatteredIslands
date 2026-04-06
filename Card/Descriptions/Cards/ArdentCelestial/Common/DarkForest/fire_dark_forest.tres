@@ -7,7 +7,7 @@
 [sub_resource type="Resource" id="Resource_omhxh"]
 script = ExtResource("2_m1x01")
 _increase_dodge = Array[float]([1.0, 2.0, 3.0, 4.0, 6.0])
-_ignite_stacks = Array[float]([12.0, 15.0, 18.0, 21.0, 25.0])
+_ignite_stacks = Array[float]([10.0, 12.0, 14.0, 16.0, 18.0])
 metadata/_custom_type_script = "uid://codt4sirjnqh7"
 
 [resource]

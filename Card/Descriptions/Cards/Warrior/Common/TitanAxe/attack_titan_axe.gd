@@ -51,4 +51,4 @@ func get_description(cardlvl: int) -> String:
 	var pct = str(_hp_percent[cardlvl - 1]).pad_decimals(1)
 	var scale_bonus = str(_scale_bonuses[cardlvl - 1]).pad_decimals(1)
 	
-	return "Every " + str(_attack_number) + " attacks, increase damage by " + pct + " + " + scale_bonus + "*[[SCALE]]" + "% of target max HP."
+	return "Toutes les " + str(_attack_number) + " attaques, inflige " + pct + " + " + scale_bonus + "*[[SCALE]]" + "% des HP max de la cible."

@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_4wuyt"]
 script = ExtResource("1_al5bp")
-_periods = Array[float]([2.0, 2.0, 2.0, 2.0, 2.0])
+_periods = Array[float]([2.5, 2.5, 2.5, 2.5, 2.5])
 _damage_per_chickens = Array[float]([5.0, 7.0, 9.0, 11.0, 13.0])
 _chicken_spawned_per_deaths = Array[int]([1, 1, 1, 1, 1])
 _base_damages = Array[float]([16.0, 16.0, 16.0, 16.0, 16.0])
