@@ -73,4 +73,4 @@ func get_description(cardlvl: int) -> String:
 	var size: String = str(_size_increase[cardlvl - 1])
 	var damage: String = str(_damage_percent[cardlvl - 1])
 	
-	return "On death, resurrects with " + hp + "% HP and [[SCALE]] increases by " + size + "\n" + "Deals " + damage + "% of his max HP to all enemies."
+	return "À la mort, ressuscite avec " + hp + "% PV et le [[SCALE]] augmente de " + size + ".\n" + "Inflige " + damage + "% des PV max à tous les ennemis."

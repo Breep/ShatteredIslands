@@ -35,4 +35,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Quasar: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Increase max HP for this battle by " + str(_hp_amount[cardlvl - 1]) + " per [[METEOR]] spawn."
+	return "Augmente les PV max de " + str(_hp_amount[cardlvl - 1]) + " par [[METEOR]] invoqué."

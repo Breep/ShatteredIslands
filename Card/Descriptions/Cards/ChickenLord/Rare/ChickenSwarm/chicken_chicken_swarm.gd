@@ -13,4 +13,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Chicken Swarm: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Increase the number of chicken spawn at the start of the battle by " + str(_spawn_numbers_increase[cardlvl - 1])
+	return "Augmente le nombre de poulets au début du combat de " + str(_spawn_numbers_increase[cardlvl - 1]) + "."

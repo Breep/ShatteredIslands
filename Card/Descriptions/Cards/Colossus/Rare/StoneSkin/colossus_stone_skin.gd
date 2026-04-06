@@ -35,7 +35,7 @@ func get_description(cardlvl: int) -> String:
 		printerr("Stone Skin: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Increase thorn by " + str(_base_thorn_values[cardlvl - 1]) + " + " + str(_bonus_thorn_factors[cardlvl - 1]) + "* hero's [[SCALE]]."
+	return "Augmente les épines de " + str(_base_thorn_values[cardlvl - 1]) + " + " + str(_bonus_thorn_factors[cardlvl - 1]) + " * [[SCALE]] du héros."
 
 
 func _apply_thorn_scaling(hero: Entity, card_lvl: int) -> void:

@@ -28,4 +28,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Crushing Weight: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Increase the duration of the [[STUN]] by " + str(_stun_increase_percents[cardlvl - 1]) + "%."
+	return "Augmente la durée du [[STUN]] de " + str(_stun_increase_percents[cardlvl - 1]) + "%."

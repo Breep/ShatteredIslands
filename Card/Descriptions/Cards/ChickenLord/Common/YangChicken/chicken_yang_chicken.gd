@@ -30,4 +30,4 @@ func get_description(cardlvl: int) -> String:
 	
 	var c: String = str(_chances[cardlvl - 1]).pad_decimals(0)
 	var s: String = str(_strength_increases[cardlvl - 1]).pad_decimals(0)
-	return "When a friendly chicken is spawned, " + c + "% chance to increase allies strength by " + s + "."
+	return "Quand un poulet allié apparaît, " + c + "% de chance d'augmenter la force des alliés de " + s + "."

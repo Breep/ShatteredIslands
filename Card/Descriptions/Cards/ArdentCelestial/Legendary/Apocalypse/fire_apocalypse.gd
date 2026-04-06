@@ -22,4 +22,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Apocalypse: Wrong card_lvl: ", cardlvl)
 		return "ERROR"
 		
-	return "Every second, increase the spawn chance of [[METEOR]] by " + str(_meteor_bonus_chance[cardlvl - 1]) + "%."
+	return "Chaque seconde, augmente la chance d'apparition de [[METEOR]] de " + str(_meteor_bonus_chance[cardlvl - 1]) + "%."

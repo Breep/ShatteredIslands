@@ -41,4 +41,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Fire Ball: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Launch a Fire Ball that deals " + str(_damages[cardlvl - 1]) + " every " + str(_periods[cardlvl - 1]) + "s. The projectile has " + str(_chances_to_bounce[cardlvl - 1]) + " * [[IGNITE]] stacks to bounce."
+	return "Lance une boule de feu infligeant " + str(_damages[cardlvl - 1]) + " toutes les " + str(_periods[cardlvl - 1]) + "s. Le projectile a " + str(_chances_to_bounce[cardlvl - 1]) + " * stacks d'[[IGNITE]] chances de rebondir."

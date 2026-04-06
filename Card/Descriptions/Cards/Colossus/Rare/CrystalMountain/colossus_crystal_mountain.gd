@@ -19,4 +19,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Crystal Mountain: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Increase [[DEFENCE]] by " + str(_defense_increase[cardlvl - 1])
+	return "Augmente la [[DEFENCE]] de " + str(_defense_increase[cardlvl - 1]) + "."

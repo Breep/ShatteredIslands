@@ -23,4 +23,4 @@ func get_description(cardlvl: int) -> String:
 		return "ERROR"
 	
 	var c: String = str(_spawn_chances[cardlvl - 1]).pad_decimals(0)
-	return "On auto-attack, " + c + "% chance to spawn an egg."
+	return "En auto-attaque, " + c + "% de chance de pondre un oeuf."

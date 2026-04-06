@@ -29,4 +29,4 @@ func get_description(cardlvl: int) -> String:
 		return "ERROR"
 	
 	var c: String = str(_spawn_chances[cardlvl - 1]).pad_decimals(0)
-	return "On inflicted stacks, " + c + "% chance to spawn an egg."
+	return "En infligeant des stacks, " + c + "% de chance de pondre un oeuf."

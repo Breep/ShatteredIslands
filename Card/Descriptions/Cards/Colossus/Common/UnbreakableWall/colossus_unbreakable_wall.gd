@@ -37,4 +37,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Unbreakable Wall: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "While hero has more than " + str(_base_hp_threshold_percent[cardlvl - 1]) + "% HP, hero has taunt."
+	return "Tant que le héros a plus de " + str(_base_hp_threshold_percent[cardlvl - 1]) + "% de PV, il provoque les ennemis."

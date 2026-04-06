@@ -25,4 +25,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Proteins: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Increase max HP by " + str(_max_hp_increase[cardlvl - 1])
+	return "Augmente les PV max de " + str(_max_hp_increase[cardlvl - 1]) + "."

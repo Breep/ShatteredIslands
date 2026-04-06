@@ -25,4 +25,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Kuiper Belt: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Gain " + str(_shield_amount[cardlvl - 1]) + " [[SHIELD]] per [[METEOR]] spawn"
+	return "Gagne " + str(_shield_amount[cardlvl - 1]) + " [[SHIELD]] par [[METEOR]] invoqué."

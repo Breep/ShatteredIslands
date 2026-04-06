@@ -32,4 +32,4 @@ func get_description(cardlvl: int) -> String:
 	
 	var c: String = str(_stun_chances[cardlvl -1]).pad_decimals(0)
 	var s: String = str(_stun_durations[cardlvl - 1]).pad_decimals(1)
-	return "Chickens have " + c + "% chance to [[STUN]] target on auto attack for " + s + " seconds"
+	return "Les poulets ont " + c + "% de chance de [[STUN]] la cible en auto-attaque pendant " + s + "s."

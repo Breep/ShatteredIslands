@@ -26,4 +26,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Celestial Culling: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "The [[METEOR]] execute enemies below " + str(_thresholds[cardlvl - 1]) + "% of their max health."
+	return "Le [[METEOR]] exécute les ennemis en dessous de " + str(_thresholds[cardlvl - 1]) + "% de leurs PV max."

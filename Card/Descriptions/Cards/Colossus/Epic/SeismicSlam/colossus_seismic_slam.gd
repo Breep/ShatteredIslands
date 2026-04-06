@@ -49,5 +49,5 @@ func get_description(cardlvl: int) -> String:
 		printerr("Seismic Slam: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Every " + str(_periods[cardlvl - 1]) + " seconds, [[STUN]] all enemies for " + str(_stun_durations[cardlvl - 1]) + " and increase hero [[SCALE]] by " + str(_increase_sizes[cardlvl - 1]) + "%"
+	return "Toutes les " + str(_periods[cardlvl - 1]) + "s, [[STUN]] tous les ennemis pendant " + str(_stun_durations[cardlvl - 1]) + " et augmente le [[SCALE]] du héros de " + str(_increase_sizes[cardlvl - 1]) + "%."
  

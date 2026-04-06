@@ -44,4 +44,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Tainted Blood: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Every " + str(_period[cardlvl - 1]) + "s, inflict " + str(_lost_hp_percent[cardlvl - 1]) + "% of your lost HP as [[POISON_STACK]] or [[IGNITE]] stacks to your target."
+	return "Toutes les " + str(_period[cardlvl - 1]) + "s, inflige " + str(_lost_hp_percent[cardlvl - 1]) + "% des PV perdus en [[POISON_STACK]] ou [[IGNITE]] à la cible."

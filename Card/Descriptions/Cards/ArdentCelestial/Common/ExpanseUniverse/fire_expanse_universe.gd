@@ -24,4 +24,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Expanse Universe: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Inflict " + str(_ignite_stacks[cardlvl - 1]) + " [[IGNITE]] stacks every " + str(_period[cardlvl - 1]) + "s to the highest HP ennemy."
+	return "Inflige " + str(_ignite_stacks[cardlvl - 1]) + " stacks d'[[IGNITE]] toutes les " + str(_period[cardlvl - 1]) + "s à l'ennemi avec le plus de PV."

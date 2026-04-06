@@ -50,4 +50,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Evasive Growth: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Increase [[DODGE]] by " + str(_increase_dodge[cardlvl - 1]) + ". Dodging an attack increase [[SCALE]] by " + str(_increase_sizes[cardlvl - 1]) + "%."
+	return "Augmente l'[[DODGE]] de " + str(_increase_dodge[cardlvl - 1]) + ". Esquiver augmente le [[SCALE]] de " + str(_increase_sizes[cardlvl - 1]) + "%."

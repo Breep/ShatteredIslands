@@ -30,4 +30,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Colossal Titan: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Every " + str(_periods[cardlvl - 1]) + "s, a random ennemy takes " + str(_damage_factors[cardlvl - 1]) + " * bonus [[SCALE]] of the hero."
+	return "Toutes les " + str(_periods[cardlvl - 1]) + "s, un ennemi aléatoire subit " + str(_damage_factors[cardlvl - 1]) + " * bonus [[SCALE]] du héros."

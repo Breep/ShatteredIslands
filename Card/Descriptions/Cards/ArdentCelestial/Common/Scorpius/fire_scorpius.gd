@@ -24,4 +24,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Scorpius: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Every [[METEOR]] apply " + str(_poison_stacks[cardlvl - 1]) + " [[POISON_STACK]]"
+	return "Chaque [[METEOR]] applique " + str(_poison_stacks[cardlvl - 1]) + " [[POISON_STACK]]."

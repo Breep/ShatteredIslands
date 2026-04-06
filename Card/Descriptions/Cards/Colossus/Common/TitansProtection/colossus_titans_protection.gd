@@ -30,4 +30,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Titan's Protection: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Every " + str(_period[cardlvl - 1]) + "s, heal " + str(_lost_hp_percent[cardlvl - 1]) + "% of your lost HP."
+	return "Toutes les " + str(_period[cardlvl - 1]) + "s, soigne " + str(_lost_hp_percent[cardlvl - 1]) + "% des PV perdus."

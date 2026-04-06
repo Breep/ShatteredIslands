@@ -13,4 +13,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Rapid Incubation: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Decreased the spawn timer of the chickens by " + str(_timer_decrease[cardlvl - 1]) + " seconds"
+	return "Réduit le temps d'apparition des poulets de " + str(_timer_decrease[cardlvl - 1]) + "s."

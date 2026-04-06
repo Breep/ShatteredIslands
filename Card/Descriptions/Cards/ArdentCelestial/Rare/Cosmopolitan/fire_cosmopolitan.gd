@@ -27,4 +27,4 @@ func get_description(cardlvl: int) -> String:
 		return "ERROR"
 
 
-	return "Increase [[IGNITE]] stacks applied by " + str(_ignite_stacks_multipliers[cardlvl - 1]) + "%."
+	return "Augmente les stacks d'[[IGNITE]] appliquées de " + str(_ignite_stacks_multipliers[cardlvl - 1]) + "%."

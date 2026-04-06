@@ -30,4 +30,4 @@ func get_description(cardlvl: int) -> String:
 	
 	var c: String = str(_chances[cardlvl - 1]).pad_decimals(0)
 	var s: String = str(_vulnerable_applications[cardlvl - 1]).pad_decimals(0)
-	return "When a friendly chicken is spawned, " + c + "% chance to apply weakness to ennemies by " + s + "."
+	return "Quand un poulet allié apparaît, " + c + "% de chance d'appliquer " + s + " faiblesse aux ennemis."

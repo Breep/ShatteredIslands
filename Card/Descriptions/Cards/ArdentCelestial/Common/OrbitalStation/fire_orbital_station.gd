@@ -23,4 +23,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Orbital Station: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Your [[IGNITE]] applications have " + str(_crit_chance[cardlvl - 1]) + "% chance to crit"
+	return "Les applications d'[[IGNITE]] ont " + str(_crit_chance[cardlvl - 1]) + "% de chance de crit."

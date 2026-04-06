@@ -32,4 +32,4 @@ func get_description(cardlvl: int) -> String:
 		return "ERROR"
 
 	var hp = str(_hp_percent[cardlvl - 1]).pad_decimals(1)
-	return "Every " + str(_period[cardlvl - 1]) + " sec, deal " + hp + "% of max HP as [[PHYSICAL_DAMAGE]] to all enemies."
+	return "Toutes les " + str(_period[cardlvl - 1]) + "s, inflige " + hp + "% des PV max en [[PHYSICAL_DAMAGE]] à tous les ennemis."

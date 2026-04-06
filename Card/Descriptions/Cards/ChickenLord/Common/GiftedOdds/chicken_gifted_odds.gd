@@ -13,4 +13,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Gifted Odds: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Increase the gifted spawn chance by " + str(_gifted_chances_increase[cardlvl - 1]) + "%."
+	return "Augmente la chance d'apparition de poulet doué de " + str(_gifted_chances_increase[cardlvl - 1]) + "%."

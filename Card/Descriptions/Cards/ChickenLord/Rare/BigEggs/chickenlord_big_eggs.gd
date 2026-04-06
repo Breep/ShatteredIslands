@@ -45,4 +45,4 @@ func get_description(cardlvl: int) -> String:
 	var ben: String = str(_big_egg_numbers[cardlvl - 1]).pad_decimals(0)
 	var cpe: String = str(_chicken_per_eggs[cardlvl - 1]).pad_decimals(0)
 	var tbs: String = str(_time_before_spawns[cardlvl - 1]).pad_decimals(0)
-	return "After " + tbs + "s, spawn " + ben + " big eggs. Each hatch " + cpe + " gifted chickens."
+	return "Après " + tbs + "s, pond " + ben + " gros oeufs. Chacun éclot " + cpe + " poulets doués."

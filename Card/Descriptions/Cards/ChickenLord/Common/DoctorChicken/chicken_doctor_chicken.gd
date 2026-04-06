@@ -23,4 +23,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Doctor Chicken: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 	var h: String = str(_heal_amounts[cardlvl - 1]).pad_decimals(0)
-	return "When a friendly chicken is spawned, heal a random ally of " + h + " amount."
+	return "Quand un poulet allié apparaît, soigne un allié aléatoire de " + h + "."

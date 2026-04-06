@@ -24,4 +24,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Diamond Skin: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Hero gains " + str(_magical_resistances[cardlvl - 1]) + " [[MAGICAL_DAMAGE]] resistance."
+	return "Le héros gagne " + str(_magical_resistances[cardlvl - 1]) + " de résistance aux [[MAGICAL_DAMAGE]]."

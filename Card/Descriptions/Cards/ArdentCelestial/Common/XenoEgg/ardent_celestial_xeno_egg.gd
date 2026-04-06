@@ -23,4 +23,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Xeno Egg: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Every [[METEOR]] has " + str(_proc_chances[cardlvl - 1]) + "% chance to hatch a [[CHICKEN_LORD]] egg."
+	return "Chaque [[METEOR]] a " + str(_proc_chances[cardlvl - 1]) + "% de chance de faire éclore un oeuf [[CHICKEN_LORD]]."

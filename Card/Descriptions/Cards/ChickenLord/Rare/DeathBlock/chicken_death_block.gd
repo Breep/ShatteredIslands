@@ -30,4 +30,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Death Block: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "On chicken death, gives " + str(_block_amounts[cardlvl - 1]) + " [[BLOCK]] stacks to the closest ally chicken."
+	return "À la mort d'un poulet, donne " + str(_block_amounts[cardlvl - 1]) + " stacks de [[BLOCK]] au poulet allié le plus proche."
