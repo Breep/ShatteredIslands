@@ -265,10 +265,10 @@ custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-text = "The bigger you get, the more [[DEFENSE]] you have."
+text = "The bigger you get, the more defense you have."
 vertical_alignment = 1
 script = ExtResource("2_uu0j1")
-text_raw = "The bigger you get, the more [[DEFENSE]] you have."
+text_raw = "The bigger you get, the more defense you have."
 metadata/_custom_type_script = "uid://bd3srw4twda5w"
 
 [node name="Level5" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/Passive" unique_id=1146785138]
