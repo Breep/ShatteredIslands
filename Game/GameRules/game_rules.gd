@@ -89,15 +89,15 @@ extends Resource
 @export var xp_per_family_lvl: int = 10 # XP gained each time a card family lvl up
 @export var xp_max_player_level: int = 10
 @export var xp_per_levels: Dictionary[int, int] = {
-	1: 6,
-	2: 10,
-	3: 14,
-	4: 18,
-	5: 22,
-	6: 28,
-	7: 34,
-	8: 40,
-	9: 50,
+	1: 4,
+	2: 4,
+	3: 4,
+	4: 4,
+	5: 4,
+	6: 4,
+	7: 4,
+	8: 4,
+	9: 4,
 }
 
 @export_group("Skills")

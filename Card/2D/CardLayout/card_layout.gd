@@ -94,7 +94,7 @@ func _update_card_layout(card: Card) -> void:
 	
 	
 	_family_icon.texture = Shared.FAMILIES[card.families[0]].icon
-	_update_family_background(card)
+	#_update_family_background(card)
 
 	for i in 5:
 		_level_icons[i].hide()
@@ -110,16 +110,16 @@ func _update_card_layout(card: Card) -> void:
 			_: _level_icons[i].texture = level1_texture
 
 
-func _update_family_background(card: Card) -> void:
-	var primary_family: Family = Shared.FAMILIES[card.families[0]]
-	_family_background_material.set_shader_parameter("base_color", primary_family.color)
-
-	if card.families.size() >= 3:
-		_family_background_material.set_shader_parameter("color_count", 3)
-		_family_background_material.set_shader_parameter("override_color2", Shared.FAMILIES[card.families[1]].color)
-		_family_background_material.set_shader_parameter("override_color3", Shared.FAMILIES[card.families[2]].color)
-	elif card.families.size() == 2:
-		_family_background_material.set_shader_parameter("color_count", 2)
-		_family_background_material.set_shader_parameter("override_color2", Shared.FAMILIES[card.families[1]].color)
-	else:
-		_family_background_material.set_shader_parameter("color_count", 1)
+#func _update_family_background(card: Card) -> void:
+	#var primary_family: Family = Shared.FAMILIES[card.families[0]]
+	#_family_background_material.set_shader_parameter("base_color", primary_family.color)
+#
+	#if card.families.size() >= 3:
+		#_family_background_material.set_shader_parameter("color_count", 3)
+		#_family_background_material.set_shader_parameter("override_color2", Shared.FAMILIES[card.families[1]].color)
+		#_family_background_material.set_shader_parameter("override_color3", Shared.FAMILIES[card.families[2]].color)
+	#elif card.families.size() == 2:
+		#_family_background_material.set_shader_parameter("color_count", 2)
+		#_family_background_material.set_shader_parameter("override_color2", Shared.FAMILIES[card.families[1]].color)
+	#else:
+		#_family_background_material.set_shader_parameter("color_count", 1)
