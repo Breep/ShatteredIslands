@@ -35,4 +35,4 @@ func get_description(cardlvl: int) -> String:
 	#
 	var c: String = str(_dodge_increases[cardlvl - 1]).pad_decimals(0)
 	var s: String = str(_chicken_inheritances[cardlvl - 1]).pad_decimals(0)
-	return "Ajoute " + c + " d'[[DODGE]] au héros." + " Les poulets héritent de " + s + "% de l'esquive de l'invocateur."
+	return "Ajoute " + c + " de [[DODGE]] au héros." + " Les poulets héritent de " + s + "% de l'esquive de l'invocateur."

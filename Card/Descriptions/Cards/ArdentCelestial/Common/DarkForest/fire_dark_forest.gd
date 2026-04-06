@@ -36,4 +36,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Dark Forest: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Augmente l'[[DODGE]] de " + str(_increase_dodge[cardlvl - 1]) + ". En cas d'[[DODGE]], inflige " + str(_ignite_stacks[cardlvl - 1]) + " stack d'[[IGNITE]] à l'attaquant."
+	return "Augmente le [[DODGE]] de " + str(_increase_dodge[cardlvl - 1]) + ". En cas de [[DODGE]], inflige " + str(_ignite_stacks[cardlvl - 1]) + " stack d'[[IGNITE]] à l'attaquant."
