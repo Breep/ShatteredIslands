@@ -19,7 +19,7 @@ var HERO_SCENES: Dictionary[HeroDesc.HeroId, PackedScene] = {
 var FAMILIES: Dictionary[Family.Type, Family] = {
 	Family.Type.WARRIOR: load("res://Card/Descriptions/Families/warrior_family.tres"),
 	Family.Type.ENGINEER: load("res://Card/Descriptions/Families/engineer_family.tres"),
-	Family.Type.ARDENT_CELESTIAL: load("res://Card/Descriptions/Families/ardent_celestial_family.tres"),
+	Family.Type.ARDENT_CELESTIAL: load("res://Card/Descriptions/Families/ArdentCelestial/ardent_celestial_family.tres"),
 	Family.Type.STORM_CALLER: load("res://Card/Descriptions/Families/storm_caller_family.tres"),
 	Family.Type.LIGHT: load("res://Card/Descriptions/Families/light_family.tres"),
 	Family.Type.COLOSSUS: load("res://Card/Descriptions/Families/colossus_family.tres"),

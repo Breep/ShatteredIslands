@@ -125,6 +125,7 @@ func _ready() -> void:
 
 	if deck != null:
 		_apply_all_cards_upgrades()
+		deck.has_changed.connect(_on_deck_has_changed)
 
 	_apply_display_mode()
 	for family_manager: FamilyManager in _family_managers.values():
@@ -188,4 +189,8 @@ func _on_stunned(is_active: bool) -> void:
 		periodic_timer_registry.pause_all()
 	else:
 		periodic_timer_registry.resume_all()
+
+
+func _on_deck_has_changed() -> void:
+	_compute_family_levels()
 #endregion

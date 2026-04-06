@@ -2,14 +2,12 @@
 
 [ext_resource type="StyleBox" uid="uid://c847d75y4mjq6" path="res://UI/InGame/FamilyViewer/new_style_box_flat.tres" id="1_wu843"]
 [ext_resource type="Script" uid="uid://bd3srw4twda5w" path="res://UI/Tool/SmartTextLabel/ui_smart_text_label.gd" id="2_w0e4n"]
+[ext_resource type="Script" uid="uid://co4qwqn0uq24r" path="res://Card/Descriptions/Families/ArdentCelestial/ardent_celestial_desc_panel.gd" id="3_desc"]
 
 [node name="ArdentCelestialDescPanel" type="Control" unique_id=2092295896]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+script = ExtResource("3_desc")
 
 [node name="MainPanel" type="Panel" parent="." unique_id=1689546173]
 custom_minimum_size = Vector2(400, 800)
@@ -96,6 +94,7 @@ custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/Passive/Level0" unique_id=1142738363]
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 text = "0"
 
@@ -128,6 +127,7 @@ custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/Passive/Level1" unique_id=1431440889]
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 text = "1"
 
@@ -160,6 +160,7 @@ custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/Passive/Level2" unique_id=1308485783]
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 text = "2"
 
@@ -192,6 +193,7 @@ custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/Passive/Level3" unique_id=1891557510]
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 text = "3"
 
@@ -224,6 +226,7 @@ custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/Passive/Level4" unique_id=970628321]
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 text = "4"
 
@@ -302,42 +305,22 @@ bbcode_enabled = true
 text = "[color=light_blue]16[/color] + [color=light_blue]0.5%[/color]  MAX HP"
 vertical_alignment = 1
 
-[node name="SpawnChance3" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/MeteorStats" unique_id=320227178]
+[node name="Radius" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/MeteorStats" unique_id=320227178]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
-[node name="SpawnChanceLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/MeteorStats/SpawnChance3" unique_id=2120782824]
+[node name="SpawnChanceLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/MeteorStats/Radius" unique_id=2120782824]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Radius"
 vertical_alignment = 1
 
-[node name="VSeparator" type="VSeparator" parent="MainPanel/MarginContainer/VBoxContainer/MeteorStats/SpawnChance3" unique_id=1651138217]
+[node name="VSeparator" type="VSeparator" parent="MainPanel/MarginContainer/VBoxContainer/MeteorStats/Radius" unique_id=1651138217]
 layout_mode = 2
 
-[node name="RadiusValueLabel" type="RichTextLabel" parent="MainPanel/MarginContainer/VBoxContainer/MeteorStats/SpawnChance3" unique_id=740679649]
+[node name="RadiusValueLabel" type="RichTextLabel" parent="MainPanel/MarginContainer/VBoxContainer/MeteorStats/Radius" unique_id=740679649]
 layout_mode = 2
 size_flags_horizontal = 3
 bbcode_enabled = true
 text = "[color=light_blue]3m[/color]"
-vertical_alignment = 1
-
-[node name="SpawnChance4" type="HBoxContainer" parent="MainPanel/MarginContainer/VBoxContainer/MeteorStats" unique_id=588334068]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-
-[node name="SpawnChanceLabel" type="Label" parent="MainPanel/MarginContainer/VBoxContainer/MeteorStats/SpawnChance4" unique_id=528933281]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Spawn chance"
-vertical_alignment = 1
-
-[node name="VSeparator" type="VSeparator" parent="MainPanel/MarginContainer/VBoxContainer/MeteorStats/SpawnChance4" unique_id=2046073908]
-layout_mode = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="MainPanel/MarginContainer/VBoxContainer/MeteorStats/SpawnChance4" unique_id=1877710598]
-layout_mode = 2
-size_flags_horizontal = 3
-bbcode_enabled = true
-text = "[color=light_blue]0%[/color]"
 vertical_alignment = 1

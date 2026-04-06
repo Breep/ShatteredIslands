@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://cha3glq6t5f5u" path="res://UI/InGame/FamilyViewer/ui_family_viewer.gd" id="1_ygf1p"]
 [ext_resource type="StyleBox" uid="uid://c847d75y4mjq6" path="res://UI/InGame/FamilyViewer/new_style_box_flat.tres" id="3_26mx0"]
 [ext_resource type="PackedScene" uid="uid://dj7bvdysxgxe6" path="res://Card/2D/CardsViewer/ui_cards_viewer.tscn" id="3_mnlqs"]
-[ext_resource type="Script" uid="uid://bd3srw4twda5w" path="res://UI/Tool/SmartTextLabel/ui_smart_text_label.gd" id="6_biljw"]
+[ext_resource type="PackedScene" uid="uid://d0y3w6vobf4iy" path="res://Card/Descriptions/Families/ArdentCelestial/ardent_celestial_desc_panel.tscn" id="6_biljw"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_26mx0"]
 grow_begin = -10.0
@@ -140,44 +140,8 @@ offset_top = -890.0
 offset_bottom = 880.0
 scale = Vector2(0.385, 0.385)
 
-[node name="Panel2" type="Panel" parent="HBoxContainer" unique_id=1690328930]
-custom_minimum_size = Vector2(400, 800)
+[node name="ArdentCelestialDescPanel" parent="HBoxContainer" unique_id=2092295896 instance=ExtResource("6_biljw")]
 layout_mode = 2
-theme_override_styles/panel = ExtResource("3_26mx0")
-
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Panel2" unique_id=767490690]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Panel2/MarginContainer" unique_id=1694257701]
-layout_mode = 2
-
-[node name="SmartTextLabel" type="RichTextLabel" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer" unique_id=1327473835]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.13
-bbcode_enabled = true
-text = "Increase your magical abilities by casting [[METEOR]].
-Burn your enemies with [[IGNITE]]."
-script = ExtResource("6_biljw")
-text_raw = "Increase your magical abilities by casting [[METEOR]].
-Burn your enemies with [[IGNITE]]."
-metadata/_custom_type_script = "uid://bd3srw4twda5w"
-
-[node name="HSeparator" type="HSeparator" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer" unique_id=1650002425]
-layout_mode = 2
-
-[node name="Passive" type="Control" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer" unique_id=278970172]
-layout_mode = 2
-size_flags_vertical = 3
 
 [connection signal="pressed" from="HBoxContainer/Panel/MarginContainer/VBoxContainer/CardsViewerController/HBoxContainer/SortController/SortRarityButton" to="." method="_on_sort_rarity_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/Panel/MarginContainer/VBoxContainer/CardsViewerController/HBoxContainer/SortController/SortLevelButton" to="." method="_on_sort_level_button_pressed"]
