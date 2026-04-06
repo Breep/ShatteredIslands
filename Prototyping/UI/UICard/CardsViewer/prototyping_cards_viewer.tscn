@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://cxd0fu3ysb6ea" path="res://Prototyping/UI/UICard/CardsViewer/prototyping_cards_viewer.gd" id="2_r08fy"]
 [ext_resource type="Script" uid="uid://d3wk3nm7f672j" path="res://Card/Templates/family.gd" id="3_4wtaq"]
 [ext_resource type="Resource" uid="uid://cbmvayb0bb72n" path="res://Card/Descriptions/Families/warrior_family.tres" id="4_d2ccr"]
-[ext_resource type="Resource" uid="uid://dw66lnwee8ruk" path="res://Card/Descriptions/Families/engineer_family.tres" id="5_s30lr"]
+[ext_resource type="Resource" uid="uid://dw66lnwee8ruk" path="res://Card/Descriptions/Families/Engineer/engineer_family.tres" id="5_s30lr"]
 [ext_resource type="Resource" uid="uid://dsbwlgjbtxhh0" path="res://Card/Descriptions/Families/ArdentCelestial/ardent_celestial_family.tres" id="6_xga5g"]
 [ext_resource type="Resource" uid="uid://djjcx0kdvmr5f" path="res://Card/Descriptions/Families/storm_caller_family.tres" id="7_2uunh"]
 [ext_resource type="Resource" uid="uid://brvmbafl0cv83" path="res://Card/Descriptions/Families/light_family.tres" id="8_5htbd"]
