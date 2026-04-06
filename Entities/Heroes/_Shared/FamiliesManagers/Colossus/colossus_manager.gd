@@ -32,7 +32,7 @@ func apply_passive() -> void:
 		mod3.id = &"Colossus Passive"
 		mod3.stat_type = EntityStats.StatType.DEFENCE
 		mod3.calc_type = StatModifier.CalcType.ADD
-		mod3.value = (scale - 1) * 100
+		mod3.value = (scale - 1) * 40
 		_owner.stat_modifiers_registry.register_modifier(mod3)
 		
 	_owner.battle_callback_registry.register_battle_start(&"Colossus Passive", func() -> void:

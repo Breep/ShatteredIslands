@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_xd871"]
 script = ExtResource("1_einbf")
-_heal = Array[int]([50, 60, 100])
+_heal = Array[int]([35, 50, 70])
 _proc_chance = Array[float]([33.0, 33.0, 33.0])
 _rarity = 2
 metadata/_custom_type_script = "uid://uputg65q417d"
