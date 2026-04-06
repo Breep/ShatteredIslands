@@ -5,7 +5,6 @@
 [ext_resource type="Script" uid="uid://cha3glq6t5f5u" path="res://UI/InGame/FamilyViewer/ui_family_viewer.gd" id="1_ygf1p"]
 [ext_resource type="StyleBox" uid="uid://c847d75y4mjq6" path="res://UI/InGame/FamilyViewer/new_style_box_flat.tres" id="3_26mx0"]
 [ext_resource type="PackedScene" uid="uid://dj7bvdysxgxe6" path="res://Card/2D/CardsViewer/ui_cards_viewer.tscn" id="3_mnlqs"]
-[ext_resource type="PackedScene" uid="uid://d0y3w6vobf4iy" path="res://Card/Descriptions/Families/ArdentCelestial/ardent_celestial_desc_panel.tscn" id="6_biljw"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_26mx0"]
 grow_begin = -10.0
@@ -139,9 +138,6 @@ layout_mode = 1
 offset_top = -890.0
 offset_bottom = 880.0
 scale = Vector2(0.385, 0.385)
-
-[node name="ArdentCelestialDescPanel" parent="HBoxContainer" unique_id=2092295896 instance=ExtResource("6_biljw")]
-layout_mode = 2
 
 [connection signal="pressed" from="HBoxContainer/Panel/MarginContainer/VBoxContainer/CardsViewerController/HBoxContainer/SortController/SortRarityButton" to="." method="_on_sort_rarity_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/Panel/MarginContainer/VBoxContainer/CardsViewerController/HBoxContainer/SortController/SortLevelButton" to="." method="_on_sort_level_button_pressed"]
