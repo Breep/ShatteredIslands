@@ -33,4 +33,4 @@ func get_description(cardlvl: int) -> String:
 	
 	var heal_reduction: String = str(_heal_resistance[cardlvl - 1]).pad_decimals(0)
 	var shield_power: String = str(_shield_power[cardlvl - 1]).pad_decimals(0)
-	return "Reduce heal power by " + heal_reduction + ". Gain " + shield_power + " [[SHIELD]] power."
+	return "Réduit le soin de " + heal_reduction + ". Gagne " + shield_power + " de puissance de [[SHIELD]]."

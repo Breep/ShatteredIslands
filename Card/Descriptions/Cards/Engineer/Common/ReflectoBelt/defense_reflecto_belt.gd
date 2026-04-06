@@ -66,4 +66,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Reflecto Belt: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Every " + str(_shield_threshold[cardlvl - 1]) + " [[SHIELD]] broken, your next " + str(_attacks_count[cardlvl - 1]) + " attacks deal +" + str(_damage_percent[cardlvl - 1]) + "% [[PHYSICAL_DAMAGE]]."
+	return "Tous les " + str(_shield_threshold[cardlvl - 1]) + " [[SHIELD]] brisés, les " + str(_attacks_count[cardlvl - 1]) + " prochaines attaques infligent +" + str(_damage_percent[cardlvl - 1]) + "% [[PHYSICAL_DAMAGE]]."

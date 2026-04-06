@@ -44,4 +44,4 @@ func get_description(cardlvl: int) -> String:
 	var shield: String = str(_shield[cardlvl - 1])
 	var ad: String = str(_ad[cardlvl - 1])
 	
-	return "Summon " + nb_turret + " turret with " + ad + " AD and " + shield + " [[SHIELD]] that follows a random ally."
+	return "Invoque " + nb_turret + " tourelle avec " + ad + " AD et " + shield + " [[SHIELD]] qui suit un allié aléatoire."

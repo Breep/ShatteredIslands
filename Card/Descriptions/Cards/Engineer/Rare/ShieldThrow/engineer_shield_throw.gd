@@ -73,4 +73,4 @@ func get_description(cardlvl: int) -> String:
 	var d: String = str(_damage[cardlvl - 1]).pad_decimals(0)
 	var b: String = str(_bounces[cardlvl - 1]).pad_decimals(1)
 	var sr: String = str(_shield_return[cardlvl - 1]).pad_decimals(0)
-	return "Every " + s + " [[SHIELD]] lost, throw a shield. Deal " + d + " [[MAGICAL_DAMAGE]], " + b + " bounces. Generate " + sr + " [[SHIELD]] for each enemy hit."
+	return "Tous les " + s + " [[SHIELD]] perdus, lance un bouclier. Inflige " + d + " [[MAGICAL_DAMAGE]], " + b + " rebonds. Génère " + sr + " [[SHIELD]] par ennemi touché."

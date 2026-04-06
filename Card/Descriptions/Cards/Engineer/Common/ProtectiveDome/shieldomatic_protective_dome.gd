@@ -58,4 +58,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Protective Dome: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Increase [[ARMOR]] by " + str(_armor_percent[cardlvl - 1]) + "% as long as you have at least 1 point of [[SHIELD]]."
+	return "Augmente l'[[ARMOR]] de " + str(_armor_percent[cardlvl - 1]) + "% tant que vous avez du [[SHIELD]]."

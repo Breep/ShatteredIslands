@@ -23,4 +23,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Avengers Assemble: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "[[SHIELD]] gains have " + str(_crit_chance[cardlvl - 1]) + "% chance to crit"
+	return "Les gains de [[SHIELD]] ont " + str(_crit_chance[cardlvl - 1]) + "% de chance de crit."

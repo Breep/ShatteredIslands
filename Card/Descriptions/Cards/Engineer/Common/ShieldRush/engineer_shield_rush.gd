@@ -26,4 +26,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Shield Rush: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "When battle start, [[SHIELD]] for " + str(_shield_amount[cardlvl - 1])
+	return "Au début du combat, [[SHIELD]] de " + str(_shield_amount[cardlvl - 1]) + "."

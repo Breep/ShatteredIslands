@@ -31,4 +31,4 @@ func get_description(cardlvl: int) -> String:
 	
 	var p: String = str(_period[cardlvl - 1]).pad_decimals(1)
 	var shield: String = str(_shared_shields[cardlvl - 1]).pad_decimals(0)
-	return "Every " + p + "s, gain " + shield + " [[SHIELD]] shared with all allies."
+	return "Toutes les " + p + "s, gagne " + shield + " [[SHIELD]] partagé avec tous les alliés."

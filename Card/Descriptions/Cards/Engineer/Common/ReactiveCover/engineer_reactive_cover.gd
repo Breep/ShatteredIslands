@@ -29,4 +29,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Reactive Cover: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "When you take damage, " + str(_base_chance[cardlvl - 1]) + "% chance to gain " + str(_base_shield_amount[cardlvl - 1]) + " [[SHIELD]]"
+	return "En recevant des dégâts, " + str(_base_chance[cardlvl - 1]) + "% de chance de gagner " + str(_base_shield_amount[cardlvl - 1]) + " [[SHIELD]]."

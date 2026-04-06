@@ -40,5 +40,5 @@ func get_description(cardlvl: int) -> String:
 	var shield: String = str(_drone_shields[cardlvl - 1])
 	
 	#TODO add tooltip for drone?
-	return "Summon " + nb + " drones that follows the lowest HP ally and gives " + shield + " [[SHIELD]] for " + time + "s."
+	return "Invoque " + nb + " drones qui suivent l'allié le plus faible et donnent " + shield + " [[SHIELD]] pendant " + time + "s."
 	

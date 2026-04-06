@@ -24,4 +24,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Energy Barrier: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Generate " + str(_shield_amount[cardlvl - 1]) + " [[SHIELD]] every " + str(_period[cardlvl - 1]) + " s."
+	return "Génère " + str(_shield_amount[cardlvl - 1]) + " [[SHIELD]] toutes les " + str(_period[cardlvl - 1]) + "s."

@@ -21,4 +21,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Gas Mask: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "The [[SHIELD]] can block poison damage with " + str(_base_efficiency[cardlvl - 1]) + "% value"
+	return "Le [[SHIELD]] bloque les dégâts de poison à " + str(_base_efficiency[cardlvl - 1]) + "% de sa valeur."

@@ -41,6 +41,6 @@ func get_description(cardlvl: int) -> String:
 		printerr("Aether Redirector: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Every " + str(_base_period[cardlvl - 1]) \
-		+ "s, redirect the next single-target attack taken by an ally " \
-		+ "to yourself and gain " + str(_base_shield[cardlvl - 1]) + " shield"
+	return "Toutes les " + str(_base_period[cardlvl - 1]) \
+		+ "s, redirige la prochaine attaque mono-cible d'un allié " \
+		+ "vers vous et gagne " + str(_base_shield[cardlvl - 1]) + " [[SHIELD]]."

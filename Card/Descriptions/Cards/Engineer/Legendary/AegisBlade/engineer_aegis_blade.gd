@@ -38,4 +38,4 @@ func get_description(cardlvl: int) -> String:
 	var shield_ad: String = str(_shield_ad_maxs[cardlvl - 1])
 	var return_shield: String = str(_damage_as_shield_ratios[cardlvl - 1])
 	
-	return "Summon an Aegis blade with AD: " + base_dmg + " + " + shield_ad + "% of the hero [[SHIELD]]. Gives " + return_shield + "% of the AD as [[SHIELD]]."
+	return "Invoque une Aegis Blade avec " + base_dmg + " AD + " + shield_ad + "% du [[SHIELD]] du héros. Donne " + return_shield + "% de l'AD en [[SHIELD]]."

@@ -21,4 +21,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Absorption Matrix: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return str(_base_chance[cardlvl - 1]) + "% chance for shield to not be consumed when received damage"
+	return str(_base_chance[cardlvl - 1]) + "% de chance que le [[SHIELD]] ne soit pas consommé en recevant des dégâts."

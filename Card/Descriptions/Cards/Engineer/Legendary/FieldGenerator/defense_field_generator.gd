@@ -53,4 +53,4 @@ func get_description(cardlvl: int) -> String:
 	var hp := str(_max_health[cardlvl - 1])
 	var init_shield := str(_initial_shield[cardlvl - 1])
 
-	return "At the start and every " + summon_int + " sec summon a Field Generator that shields " + targets + " closest allies for " + shield_amt + " every " + shield_int + " sec. Field shield have " + hp + " HP and " + init_shield + " shield."
+	return "Au début et toutes les " + summon_int + "s, invoque un Générateur qui donne " + shield_amt + " [[SHIELD]] aux " + targets + " alliés proches toutes les " + shield_int + "s. " + hp + " PV et " + init_shield + " [[SHIELD]]."

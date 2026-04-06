@@ -30,4 +30,4 @@ func get_description(cardlvl: int) -> String:
 		printerr("Magnetic Siphon: Wrong cardlvl: ", cardlvl)
 		return "ERROR"
 
-	return "Every " + str(_period[cardlvl - 1]) + "s, steal " + str(_steal_percent[cardlvl - 1]) + "% of the highest enemy [[SHIELD]] and convert it into your own."
+	return "Toutes les " + str(_period[cardlvl - 1]) + "s, vole " + str(_steal_percent[cardlvl - 1]) + "% du plus gros [[SHIELD]] ennemi."
