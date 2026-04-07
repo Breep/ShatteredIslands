@@ -1,17 +1,31 @@
 class_name ColossusTaintedBlood
 extends HeroUpgrade
 
+const ORB_VISUAL = preload("res://SpellsAndProjectiles/Spells/TaintedBlood/Visual/tainted_blood_orb_visual.tscn")
+
 @export var _lost_hp_percent: Array[float]
 @export var _period: Array[float]
 
+var _orb_visual: TaintedBloodOrbVisual
+
 func apply_card(ctx: CardContext, card_lvl: int) -> void:
-	
+
 	if card_lvl < 1 or card_lvl > Card.RARITY_MAX_LEVEL[_rarity]:
 		printerr("Tainted Blood: Wrong card_lvl: ", card_lvl)
 		return
-	
+
 	var percent: float = _lost_hp_percent[card_lvl - 1]
 	var period: float = _period[card_lvl - 1]
+
+	# Spawn orb visual on battle start
+	ctx.battle_callbacks.register_battle_start(&"Tainted Blood", func() -> void:
+		if not is_instance_valid(ctx.hero): return
+		if is_instance_valid(_orb_visual):
+			_orb_visual.queue_free()
+		_orb_visual = ORB_VISUAL.instantiate() as TaintedBloodOrbVisual
+		_orb_visual.setup(ctx.hero)
+		ctx.hero.get_tree().root.add_child(_orb_visual)
+	)
 
 	ctx.periodic_timers.register(&"Tainted Blood", period, func() -> void:
 		var target = ctx.hero.target_module.get_target(TargetModule.TargettingStrategy.RANDOM_ENEMY)
@@ -28,12 +42,19 @@ func apply_card(ctx: CardContext, card_lvl: int) -> void:
 		if stacks <= 0:
 			return
 
+		var is_poison: bool
 		var stack_type: Stack.Type
 		if Utils.get_randi_range(1, 2, ctx.hero.battle_id) % 2 == 0:
 			stack_type = Stack.Type.POISON
+			is_poison = true
 		else:
 			stack_type = Stack.Type.IGNITE
-			stacks *= 3 # TODO Magic number spotted !
+			stacks *= 3
+			is_poison = false
+
+		# Launch projectile from the correct orb
+		if is_instance_valid(_orb_visual):
+			_orb_visual.launch_projectile(target, is_poison)
 
 		ctx.hero.inflict_condition_stacks(target, stacks, stack_type, &"Tainted Blood")
 	)
