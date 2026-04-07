@@ -1,0 +1,21 @@
+[gd_resource type="Theme" format=3 uid="uid://cdxqsjqjpv6q7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_todsl"]
+bg_color = Color(0.21960784, 0.21960784, 0.21960784, 0.47843137)
+border_width_bottom = 5
+border_color = Color(0.21950099, 0.21950105, 0.21950087, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_660yy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fd7gp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fd7gp"]
+bg_color = Color(0.21960784, 0.21960784, 0.21960784, 0.47843137)
+
+[resource]
+TabContainer/constants/icon_max_width = 32
+TabContainer/constants/side_margin = 0
+TabContainer/styles/panel = SubResource("StyleBoxFlat_todsl")
+TabContainer/styles/tab_focus = SubResource("StyleBoxFlat_660yy")
+TabContainer/styles/tab_unselected = SubResource("StyleBoxEmpty_fd7gp")
+TabContainer/styles/tabbar_background = SubResource("StyleBoxFlat_fd7gp")
